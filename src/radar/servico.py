@@ -2,7 +2,7 @@
 import logging
 from dataclasses import dataclass
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from radar.collectors.base import Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import ConcursosNoBrasil
@@ -100,6 +100,13 @@ def coletar_tudo() -> list[ResultadoColeta]:
         resultados.append(resultado)
 
     return resultados
+
+
+def contar() -> int:
+    """Quantos concursos existem no banco, sem filtro nenhum."""
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(select(func.count()).select_from(Concurso)) or 0
 
 
 def listar(

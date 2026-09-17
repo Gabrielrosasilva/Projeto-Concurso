@@ -91,11 +91,35 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
 
 
 @app.command()
-def web(porta: int = 8000) -> None:
+def web(
+    porta: int = typer.Option(8000, help="Porta do servidor"),
+    host: str = typer.Option(
+        "127.0.0.1",
+        help="Use 0.0.0.0 para abrir tambem no celular, na mesma rede wi-fi",
+    ),
+    recarregar: bool = typer.Option(
+        False, help="Reinicia sozinho ao salvar arquivo (so para desenvolver)"
+    ),
+) -> None:
     """Sobe a interface web em http://localhost:8000"""
     import uvicorn
 
-    uvicorn.run("radar.web.app:app", host="127.0.0.1", port=porta, reload=True)
+    console.print(f"\nRadar no ar em [bold cyan]http://localhost:{porta}[/]")
+    if host == "0.0.0.0":  # noqa: S104 - escolha explicita do usuario
+        console.print("Aberto na rede local: use o IP desta maquina no celular.")
+    console.print("Ctrl+C para parar.\n")
+
+    # O modo recarregar fica DESLIGADO por padrao de proposito. Ele faz o
+    # uvicorn subir um segundo processo que reimporta tudo, e isso quebra no
+    # Windows quando o caminho da pasta tem espaco no nome - que e exatamente
+    # o caso aqui ("C:\Projeto concurso claude\..."). Sem ele, o servidor e
+    # um processo so e simplesmente funciona.
+    if recarregar:
+        uvicorn.run("radar.web.app:app", host=host, port=porta, reload=True)
+    else:
+        from radar.web.app import app as aplicacao_web
+
+        uvicorn.run(aplicacao_web, host=host, port=porta)
 
 
 if __name__ == "__main__":

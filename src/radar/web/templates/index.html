@@ -5,48 +5,155 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Radar de Concursos</title>
   <style>
-    :root { color-scheme: light dark; }
-    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto;
-           padding: 0 1rem; line-height: 1.5; }
-    form { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    input { padding: .5rem; border: 1px solid #8884; border-radius: 6px; }
-    button { padding: .5rem 1rem; border-radius: 6px; border: 0;
-             background: #2563eb; color: #fff; cursor: pointer; }
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 1.25rem; }
-    .meta { font-size: .85rem; opacity: .7; }
-    .situacao { display: inline-block; font-size: .75rem; padding: .1rem .5rem;
-                border-radius: 999px; background: #2563eb22; }
-    a { color: inherit; }
+    /* Tema em variaveis: trocar uma cor aqui muda a pagina inteira. */
+    :root {
+      color-scheme: light dark;
+      --fundo: #f6f7f9;
+      --cartao: #ffffff;
+      --texto: #14171f;
+      --suave: #5b6472;
+      --borda: #e2e5ea;
+      --destaque: #1d4ed8;
+      --destaque-fraco: #e8eeff;
+      --sc: #047857;
+      --sc-fraco: #d6f2e6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fundo: #0f1115;
+        --cartao: #171a21;
+        --texto: #e8eaee;
+        --suave: #99a1af;
+        --borda: #262b35;
+        --destaque: #7aa2ff;
+        --destaque-fraco: #1c2740;
+        --sc: #4ade80;
+        --sc-fraco: #10291d;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 2rem 1rem 4rem;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--fundo); color: var(--texto); line-height: 1.5;
+    }
+    .pagina { max-width: 840px; margin: 0 auto; }
+
+    header { margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 .25rem; font-size: 1.6rem; letter-spacing: -.02em; }
+    .subtitulo { margin: 0; color: var(--suave); font-size: .9rem; }
+
+    /* Filtros */
+    form {
+      display: grid; gap: .5rem; margin: 1.25rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    input {
+      padding: .55rem .7rem; border: 1px solid var(--borda); border-radius: 8px;
+      background: var(--cartao); color: var(--texto); font-size: .9rem;
+      min-width: 0;   /* sem isto o input estoura a coluna do grid */
+    }
+    input:focus { outline: 2px solid var(--destaque); outline-offset: -1px; }
+    .acoes { display: flex; gap: .5rem; }
+    button, .limpar {
+      padding: .55rem 1rem; border-radius: 8px; border: 1px solid transparent;
+      font-size: .9rem; cursor: pointer; white-space: nowrap;
+      background: var(--destaque); color: #fff; text-decoration: none;
+      display: inline-flex; align-items: center;
+    }
+    .limpar { background: transparent; color: var(--suave); border-color: var(--borda); }
+
+    .contagem { color: var(--suave); font-size: .85rem; margin: 0 0 .75rem; }
+
+    /* Lista */
+    ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+    li {
+      background: var(--cartao); border: 1px solid var(--borda);
+      border-radius: 10px; padding: .9rem 1rem;
+    }
+    li:hover { border-color: var(--destaque); }
+    .titulo {
+      color: var(--texto); text-decoration: none; font-weight: 600;
+      display: block; margin-bottom: .5rem;
+    }
+    .titulo:hover { color: var(--destaque); }
+
+    .selos { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+    .selo {
+      font-size: .72rem; padding: .15rem .5rem; border-radius: 999px;
+      background: var(--destaque-fraco); color: var(--destaque); font-weight: 600;
+    }
+    /* SC em destaque: e o estado que interessa. Ainda NAO e o filtro dos tres
+       aneis (isso e a fase 1.5) - por enquanto e so a UF. */
+    .selo.sc { background: var(--sc-fraco); color: var(--sc); }
+    .selo.neutro {
+      background: transparent; color: var(--suave); font-weight: 400;
+      border: 1px solid var(--borda);
+    }
+    .meta { color: var(--suave); font-size: .8rem; }
+
+    .vazio {
+      text-align: center; padding: 3rem 1rem; color: var(--suave);
+      background: var(--cartao); border: 1px dashed var(--borda); border-radius: 10px;
+    }
+    code {
+      background: var(--destaque-fraco); color: var(--destaque);
+      padding: .1rem .4rem; border-radius: 4px; font-size: .85em;
+    }
+    .aviso {
+      margin-top: 2rem; padding: .75rem 1rem; border-radius: 8px;
+      background: var(--cartao); border: 1px solid var(--borda);
+      color: var(--suave); font-size: .82rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Radar de Concursos</h1>
+<div class="pagina">
+
+  <header>
+    <h1>Radar de Concursos</h1>
+    <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
+  </header>
 
   <form method="get">
-    <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" size="6">
+    <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" maxlength="2">
     <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
     <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
     <input name="situacao" placeholder="Situacao" value="{{ situacao }}">
-    <button type="submit">Filtrar</button>
+    <div class="acoes">
+      <button type="submit">Filtrar</button>
+      <a class="limpar" href="/">Limpar</a>
+    </div>
   </form>
 
-  <p class="meta">{{ itens|length }} resultado(s)</p>
+  <p class="contagem">
+    {{ itens|length }} concurso(s){% if total_geral != itens|length %} de {{ total_geral }} no banco{% endif %}
+  </p>
 
   <ul>
     {% for c in itens %}
       <li>
-        <a href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
-        <span class="situacao">{{ c.situacao }}</span>
-        <div class="meta">
-          {{ c.uf or '--' }} ·
-          {{ c.publicado_em | data('sem data') }} ·
-          {{ c.fonte }}
+        <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
+        <div class="selos">
+          <span class="selo {% if c.uf == 'SC' %}sc{% endif %}">{{ c.uf or 'sem UF' }}</span>
+          <span class="selo neutro">{{ c.situacao|replace('_', ' ') }}</span>
+          {% if c.banca %}<span class="selo neutro">{{ c.banca }}</span>{% endif %}
+          <span class="meta">{{ c.publicado_em | data('sem data') }} &middot; {{ c.fonte }}</span>
         </div>
       </li>
     {% else %}
-      <li class="meta">Nada aqui ainda. Rode <code>radar coletar</code>.</li>
+      <li class="vazio">
+        Nada aqui ainda.<br>Rode <code>radar coletar</code> no terminal.
+      </li>
     {% endfor %}
   </ul>
+
+  <p class="aviso">
+    O filtro por distancia (nucleo / proximo / remoto) ainda nao existe: ele e a
+    fase 1.5. Por enquanto da para filtrar so por UF.
+  </p>
+
+</div>
 </body>
 </html>

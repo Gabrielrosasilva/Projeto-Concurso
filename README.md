@@ -37,6 +37,19 @@ radar listar --uf SC
 radar web                          # http://localhost:8000
 ```
 
+### A interface web
+
+```bash
+radar web                       # so nesta maquina
+radar web --porta 9000          # outra porta
+radar web --host 0.0.0.0        # abre tambem no celular, na mesma wi-fi
+radar web --recarregar          # reinicia ao salvar arquivo (para desenvolver)
+```
+
+O modo `--recarregar` vem **desligado**. Ligado, o uvicorn sobe um segundo
+processo que reimporta o projeto, e isso quebra no Windows quando o caminho
+da pasta tem espaco no nome. Desligado, o servidor e um processo so.
+
 O `pip install -e` instala o projeto em modo editavel: o comando `radar` passa
 a existir no PATH do venv e o Python acha o pacote sozinho. E por isso que nao
 existe mais `PYTHONPATH=src` espalhado pelos comandos.

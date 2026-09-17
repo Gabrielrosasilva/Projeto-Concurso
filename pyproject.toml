@@ -28,7 +28,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==8.3.4"]
+dev = [
+    "pytest==8.3.4",
+    # necessario para o TestClient do FastAPI: permite testar a pagina web
+    # sem subir servidor nenhum.
+    "httpx==0.28.1",
+]
 
 [project.scripts]
 radar = "radar.cli:app"

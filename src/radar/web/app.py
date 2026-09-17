@@ -38,6 +38,7 @@ def index(
         name="index.html",
         context={
             "itens": itens,
+            "total_geral": servico.contar(),
             "uf": uf or "",
             "banca": banca or "",
             "termo": termo or "",
