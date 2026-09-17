@@ -1,0 +1,56 @@
+# Aneis de distancia a partir de Florianopolis.
+#
+# AINDA NAO E LIDO POR CODIGO NENHUM: o classificador que usa este arquivo e a
+# fase 1.5. Ele ja esta aqui para voce revisar e corrigir as listas antes de a
+# gente escrever o codigo em cima delas.
+#
+# Regra: um concurso de SC e classificado pelo municipio do orgao. Concurso
+# federal ou de outro estado fica `indefinida` ate alguem ler o edital e achar
+# as cidades de aplicacao de prova. Nunca chutar.
+
+nucleo:
+  # Regiao Metropolitana da Grande Florianopolis.
+  - Florianopolis
+  - Sao Jose
+  - Palhoca
+  - Biguacu
+  - Santo Amaro da Imperatriz
+  - Aguas Mornas
+  - Antonio Carlos
+  - Governador Celso Ramos
+  - Sao Pedro de Alcantara
+  - Angelina
+  - Rancho Queimado
+  - Sao Bonifacio
+  - Anitapolis
+  - Tijucas
+  - Canelinha
+  - Nova Trento
+  - Sao Joao Batista
+  - Major Gercino
+  - Leoberto Leal
+  - Garopaba
+  - Paulo Lopes
+  - Alfredo Wagner
+
+proximo:
+  # Fora da regiao metropolitana, mas voce confirmou que vale a viagem.
+  # Blumenau fica a ~2h e Lages a ~3h: estao aqui por escolha sua, nao por
+  # tempo de estrada.
+  - Itajai
+  - Balneario Camboriu
+  - Camboriu
+  - Itapema
+  - Porto Belo
+  - Bombinhas
+  - Navegantes
+  - Brusque
+  - Tubarao
+  - Laguna
+  - Imbituba
+  - Blumenau
+  - Lages
+
+# Qualquer municipio fora das listas acima cai em `remoto`, e so interessa se
+# o edital disser que ha aplicacao de prova em Florianopolis - caso comum em
+# concurso federal.

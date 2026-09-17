@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+*.egg-info/
+
+# O banco e reconstruivel a partir do export em data/concursos.json
+data/*.db
+
+# Acervo pesado: os PDFs NAO vao para o git. O que vai e o manifesto
+# (data/provas.json), e o comando `radar baixar-provas` reconstroi tudo.
+data/provas/
+data/editais/

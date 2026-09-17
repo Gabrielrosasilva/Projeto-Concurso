@@ -1,0 +1,38 @@
+[project]
+name = "radar-concursos"
+version = "0.1.0"
+description = "Radar pessoal de concursos publicos na Grande Florianopolis"
+requires-python = ">=3.11"
+
+dependencies = [
+    "requests==2.32.3",
+    "feedparser==6.0.11",       # le RSS/Atom e ja resolve data e feed quebrado
+    "beautifulsoup4==4.12.3",   # usado a partir da fase 1.7 (diario oficial)
+    "lxml==5.3.0",
+    "SQLAlchemy==2.0.36",
+    "typer==0.27.2",
+    "click==8.5.0",       # preso de proposito: o typer quebra com click
+                          # fora da faixa que ele espera (ja aconteceu aqui)
+    "rich==13.9.4",
+    "fastapi==0.115.6",
+    "uvicorn==0.34.0",
+    "jinja2==3.1.5",
+    "python-dotenv==1.0.1",
+    "PyYAML==6.0.2",            # config/perfil.yml e config/regioes.yml
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.4"]
+
+[project.scripts]
+radar = "radar.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radar de Concursos</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto;
+           padding: 0 1rem; line-height: 1.5; }
+    form { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    input { padding: .5rem; border: 1px solid #8884; border-radius: 6px; }
+    button { padding: .5rem 1rem; border-radius: 6px; border: 0;
+             background: #2563eb; color: #fff; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 1.25rem; }
+    .meta { font-size: .85rem; opacity: .7; }
+    .situacao { display: inline-block; font-size: .75rem; padding: .1rem .5rem;
+                border-radius: 999px; background: #2563eb22; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <h1>Radar de Concursos</h1>
+
+  <form method="get">
+    <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" size="6">
+    <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
+    <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
+    <input name="situacao" placeholder="Situacao" value="{{ situacao }}">
+    <button type="submit">Filtrar</button>
+  </form>
+
+  <p class="meta">{{ itens|length }} resultado(s)</p>
+
+  <ul>
+    {% for c in itens %}
+      <li>
+        <a href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
+        <span class="situacao">{{ c.situacao }}</span>
+        <div class="meta">
+          {{ c.uf or '--' }} ·
+          {{ c.publicado_em | data('sem data') }} ·
+          {{ c.fonte }}
+        </div>
+      </li>
+    {% else %}
+      <li class="meta">Nada aqui ainda. Rode <code>radar coletar</code>.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

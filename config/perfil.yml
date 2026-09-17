@@ -1,0 +1,27 @@
+# Seu perfil, usado para decidir se um concurso e elegivel para voce.
+#
+# AINDA NAO E LIDO POR CODIGO NENHUM: o filtro de elegibilidade e a fase 2.5,
+# porque depende de ler o PDF do edital. Esta aqui para voce ja preencher e
+# revisar o formato.
+#
+# Este arquivo VAI para o git (o repositorio e privado e so seu). Se algum dia
+# deixar de ser, mova para .env.
+
+nascimento: 1900-01-01        # TROCAR. Usado para checar idade maxima.
+escolaridade: superior        # fundamental | medio | superior
+formacao: Sistemas de Informacao
+cnh: B                        # deixe vazio se nao tiver
+
+salario_desejado: 5000        # nao e filtro: concurso abaixo disso aparece,
+                              # so ranqueado mais embaixo
+
+# Ordem de preferencia. Quanto mais em cima, maior o destaque no radar.
+# Nenhum concurso e descartado por nao estar nesta lista.
+cargos_prioritarios:
+  - Policia Penal
+  - Guarda Municipal
+  - Policia Civil
+  - Policia Penal Federal
+  - Bombeiro Militar
+  - Oficial de Bombeiros
+  - Policia Cientifica
