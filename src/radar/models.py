@@ -65,6 +65,8 @@ SITUACOES = (
 
 RELEVANCIAS = ("nucleo", "proximo", "remoto", "indefinida")
 
+TIPOS = ("concurso", "seletivo", "desconhecido", "noticia")
+
 ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 
 
@@ -88,6 +90,11 @@ class Concurso(Base):
 
     # --- ciclo de vida ------------------------------------------------------
     situacao: Mapped[str] = mapped_column(String(25), default="desconhecida", index=True)
+
+    # concurso | seletivo | desconhecido | noticia
+    # `noticia` e o que veio junto no feed sem ser concurso; fica guardado em
+    # vez de apagado, para eu conferir se o filtro nao esta comendo coisa boa.
+    tipo: Mapped[str] = mapped_column(String(15), default="desconhecido", index=True)
 
     # --- prazos (fase 2.5: extraidos do PDF do edital) ----------------------
     inscricoes_de: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)

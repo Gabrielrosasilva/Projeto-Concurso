@@ -33,9 +33,37 @@ Dai em diante os comandos sao iguais nos tres:
 
 ```bash
 radar coletar
-radar listar --uf SC
+radar listar                       # so o que esta perto de voce
+radar listar --todos               # tudo, inclusive o que e longe
 radar web                          # http://localhost:8000
 ```
+
+### Filtro por distancia
+
+Todo concurso coletado e classificado em um anel:
+
+| anel | o que e |
+|---|---|
+| `nucleo` | Grande Florianopolis |
+| `proximo` | Itajai, Blumenau, Tubarao, Lages e vizinhos |
+| `remoto` | outro lugar, inclusive o resto de SC |
+| `indefinida` | nao da para saber sem ler o edital |
+
+A lista padrao mostra so `nucleo` e `proximo`. **Nada e apagado**: o resto
+continua no banco e sai com `--todos` ou pelos atalhos da pagina web.
+
+Todo registro guarda *por que* foi classificado assim, em `motivo_relevancia`,
+e o motivo aparece na tela. Se a decisao estiver errada, da para ver onde.
+
+```bash
+radar listar --relevancia remoto    # so o que ficou de fora
+radar listar --noticias             # o que o filtro achou que nao era concurso
+radar reclassificar                 # depois de editar config/regioes.yml
+```
+
+`radar reclassificar` roda a regra de novo no banco inteiro, sem ir a
+internet. Incluiu um municipio novo no YAML? Rode isso e os registros antigos
+se corrigem na hora.
 
 ### A interface web
 

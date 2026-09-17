@@ -92,14 +92,17 @@ do edital**. Da tempo de comecar a estudar o padrao da banca.
 
 ## Estado atual
 
-**Fase 1 pronta:** esqueleto + feed RSS do Concursos no Brasil funcionando.
+**Fases 1 e 1.5 prontas:** feed RSS coletando, e classificador de relevancia
+funcionando sobre dado real.
 
 ```
 src/radar/
 ├── config.py       le ambiente. Nenhum efeito colateral no import.
 ├── models.py       tabela `concursos` (SQLAlchemy 2.0, estilo Mapped)
 ├── db.py           engine preguicoso + context manager de sessao
-├── servico.py      roda coletores, grava com upsert, consulta
+├── servico.py      roda coletores, grava com upsert, classifica, consulta
+├── regioes.py      le config/regioes.yml: em que anel um municipio esta
+├── classificador.py  tipo, municipio, salario e relevancia, a partir do titulo
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer: coletar, listar, web
 ├── collectors/
@@ -123,6 +126,11 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - o schema ja tem colunas de fases futuras, vazias. E de proposito: sem
   Alembic, coluna nova depois significa recriar o banco;
 - PDF nao vai para o git. Vai o manifesto; o comando rebaixa tudo;
+- concurso municipal de outro estado e `remoto`, nao `indefinida`: prova de
+  municipio de SP e aplicada em SP. `indefinida` fica para quem pode mesmo
+  aplicar em Florianopolis (federal, nacional, ou sem UF);
+- a lista padrao esconde `remoto`, `indefinida` e `noticia`. Nada e apagado:
+  a pagina e a CLI mostram tudo com --todos;
 - avisos sao por **Telegram**. WhatsApp foi avaliado e descartado: o oficial
   exige conta Meta Business, numero separado e template aprovado para mensagem
   proativa; o nao oficial arrisca banir meu numero pessoal.
@@ -130,8 +138,7 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 ## Roadmap
 
 ```
-1.5  relevancia geografica (3 aneis) + perfil/elegibilidade
-     + interesse/notas na CLI e na web
+1.55 perfil/elegibilidade + interesse/notas na CLI e na web
 1.6  carga inicial: varrer as paginas de arquivo e trazer o ano inteiro
      (o RSS so entrega o que e recente)
 1.7  Diario Oficial dos Municipios de SC + DOE-SC + DOU

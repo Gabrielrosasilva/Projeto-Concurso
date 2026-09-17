@@ -41,34 +41,82 @@ def coletar() -> None:
         )
 
 
+CORES_DO_ANEL = {
+    "nucleo": "bold green",
+    "proximo": "yellow",
+    "remoto": "dim",
+    "indefinida": "magenta",
+}
+
+
 @app.command()
 def listar(
     uf: str = typer.Option(None, help="Sigla do estado, ex: SC"),
     banca: str = typer.Option(None, help="Nome da banca, ex: FEPESE"),
     termo: str = typer.Option(None, help="Palavra no titulo ou no resumo"),
     situacao: str = typer.Option(None, help="Ex: edital_publicado, autorizado"),
+    relevancia: str = typer.Option(
+        None, help="nucleo, proximo, remoto ou indefinida"
+    ),
+    todos: bool = typer.Option(
+        False, "--todos", help="Mostra todos os aneis, nao so o que e perto"
+    ),
+    noticias: bool = typer.Option(
+        False, "--noticias", help="Inclui o que o filtro marcou como noticia"
+    ),
     limite: int = typer.Option(30, help="Quantidade maxima de linhas"),
 ) -> None:
-    """Mostra o que ja esta no banco."""
+    """Mostra o que ja esta no banco.
+
+    Por padrao so aparece o que esta perto (nucleo e proximo). Use --todos
+    para ver o resto.
+    """
     itens = servico.listar(
-        uf=uf, banca=banca, termo=termo, situacao=situacao, limite=limite
+        uf=uf, banca=banca, termo=termo, situacao=situacao,
+        relevancia=relevancia, todas_relevancias=todos,
+        incluir_noticias=noticias, limite=limite,
     )
 
     tabela = Table(title=f"{len(itens)} concurso(s)")
     tabela.add_column("Data", style="dim", no_wrap=True)
+    tabela.add_column("Onde", no_wrap=True)
     tabela.add_column("UF", width=3)
-    tabela.add_column("Situacao", style="cyan", no_wrap=True)
+    tabela.add_column("Salario", justify="right", no_wrap=True)
     tabela.add_column("Titulo")
 
     for c in itens:
+        cor = CORES_DO_ANEL.get(c.relevancia, "")
+        salario = f"{c.salario:,.0f}".replace(",", ".") if c.salario else "--"
         tabela.add_row(
             formatar_data(c.publicado_em),
+            f"[{cor}]{c.relevancia}[/]" if cor else c.relevancia,
             c.uf or "--",
-            c.situacao,
+            salario,
             c.titulo,
         )
 
     console.print(tabela)
+
+    if not itens and not todos:
+        contagem = servico.contar_por_relevancia()
+        fora = contagem["remoto"] + contagem["indefinida"]
+        if fora:
+            console.print(
+                f"\n[yellow]Nada perto de voce por enquanto.[/] Ha {fora} "
+                f"concurso(s) em outras regioes: use [bold]radar listar --todos[/]"
+            )
+
+
+@app.command()
+def reclassificar() -> None:
+    """Roda o classificador de novo no banco todo, sem ir a internet.
+
+    Use depois de editar config/regioes.yml.
+    """
+    contagem = servico.reclassificar()
+    for anel, quantos in sorted(contagem.items()):
+        cor = CORES_DO_ANEL.get(anel, "")
+        console.print(f"[{cor}]{anel}[/]: {quantos}" if cor else f"{anel}: {quantos}")
 
 
 @app.command()

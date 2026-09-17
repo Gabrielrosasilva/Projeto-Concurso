@@ -1,0 +1,184 @@
+"""Le o titulo de um concurso e decide se ele interessa.
+
+Tres perguntas, nesta ordem:
+  1. isso e concurso mesmo, ou e noticia que veio junto no feed?
+  2. de que municipio e?
+  3. esse municipio esta em qual anel de distancia?
+
+A regra de ouro, que vale mais que acertar muito: **nunca chutar**. Quando
+nao da para saber, o registro fica `indefinida` e espera a leitura do edital.
+Um palpite errado me faria perder um concurso bom achando que era longe.
+"""
+import re
+from dataclasses import dataclass
+
+from radar import regioes
+from radar.collectors.base import ItemColetado
+
+# --- tipo -------------------------------------------------------------------
+
+TIPO_CONCURSO, TIPO_SELETIVO = "concurso", "seletivo"
+TIPO_DESCONHECIDO, TIPO_NOTICIA = "desconhecido", "noticia"
+
+# Processo seletivo e contratacao temporaria; concurso e efetivo. Como sao
+# coisas diferentes, o tipo fica guardado e voce filtra como preferir.
+# Os termos sao comparados contra o texto ja normalizado (sem acento, em
+# minusculas), entao escreva-os sem acento aqui. Plural conta: "editais" nao
+# contem "edital", diferente de "vagas", que contem "vaga".
+TERMOS_SELETIVO = ("processo seletivo", "seletivo", "selecao", "selecoes")
+TERMOS_CONCURSO = ("concurso", "edital", "editais")
+# Sinais de que ha vaga aberta, mesmo sem dizer de que tipo.
+TERMOS_VAGA = ("vaga", "inscric", "cargo", "contrata", "oportunidade",
+               "chamamento")
+
+
+def detectar_tipo(titulo: str, resumo: str | None = None) -> str:
+    """concurso, seletivo, desconhecido ou noticia."""
+    texto = regioes.normalizar(f"{titulo} {resumo or ''}")
+
+    if any(termo in texto for termo in TERMOS_SELETIVO):
+        return TIPO_SELETIVO
+    if any(termo in texto for termo in TERMOS_CONCURSO):
+        return TIPO_CONCURSO
+    if any(termo in texto for termo in TERMOS_VAGA):
+        # ha vaga, mas o titulo nao diz se e concurso ou seletivo
+        return TIPO_DESCONHECIDO
+    return TIPO_NOTICIA
+
+
+# --- municipio --------------------------------------------------------------
+
+# O feed escreve o municipio antes da sigla entre parenteses:
+#   "Concurso Prefeitura de Tunapolis (SC) tem salario de R$ 5.832"
+PADRAO_ANTES_DA_UF = re.compile(r"([^()]{3,70}?)\s*\(([A-Z]{2})\)")
+
+# Palavras que abrem o titulo e nao fazem parte do nome do orgao.
+RUIDO_INICIAL = re.compile(
+    r"^(concurso|edital|seletivo|processo seletivo|novo concurso|vagas?|"
+    r"inscricoes|inscrições)\s+",
+    re.IGNORECASE,
+)
+
+# "Prefeitura de X", "Camara Municipal de X", "EMDURB de X" -> X.
+# O `.*?` e preguicoso para casar o PRIMEIRO "de/da/do": sem isso,
+# "Prefeitura de Sao Lourenco do Oeste" viraria so "Oeste".
+SEPARADOR_ORGAO = re.compile(r"^.*?\s+(?:de|da|do)\s+(.+)$", re.IGNORECASE)
+
+
+def extrair_municipio(titulo: str) -> str | None:
+    """O municipio escrito no titulo, ou None se nao der para ter certeza."""
+    achado = PADRAO_ANTES_DA_UF.search(titulo or "")
+    if not achado:
+        return None
+
+    trecho = achado.group(1).strip()
+    trecho = RUIDO_INICIAL.sub("", trecho).strip()
+
+    partes = SEPARADOR_ORGAO.match(trecho)
+    if not partes:
+        # Sobrou so o nome do orgao, sem "de": FUNCAMP, AgSUS e afins.
+        # Nao ha municipio a extrair, e inventar um seria pior que nao ter.
+        return None
+
+    municipio = partes.group(1).strip(" -–—,")
+    return municipio or None
+
+
+# --- salario ----------------------------------------------------------------
+
+PADRAO_SALARIO = re.compile(r"R\$\s*(\d[\d.,]*)\s*(mil)?", re.IGNORECASE)
+
+
+def _para_numero(bruto: str, tem_mil: bool) -> float | None:
+    texto = bruto.strip().rstrip(".,")
+    try:
+        if tem_mil:
+            # "4,5 mil" -> 4.5 * 1000
+            return float(texto.replace(".", "").replace(",", ".")) * 1000
+        if "," in texto:
+            # "1.234,56" -> ponto e milhar, virgula e decimal
+            return float(texto.replace(".", "").replace(",", "."))
+        if re.fullmatch(r"\d{1,3}(\.\d{3})+", texto):
+            # "5.832" -> ponto e separador de milhar
+            return float(texto.replace(".", ""))
+        return float(texto)
+    except ValueError:
+        return None
+
+
+def extrair_salario(titulo: str) -> float | None:
+    """O maior valor em R$ citado no titulo.
+
+    E so uma estimativa para ordenar a lista: o titulo costuma trazer o teto
+    ("ate R$ 6,2 mil"). O valor que vale e o do edital, lido na fase 2.5.
+    """
+    valores = [
+        valor
+        for bruto, mil in PADRAO_SALARIO.findall(titulo or "")
+        if (valor := _para_numero(bruto, bool(mil))) is not None
+    ]
+    return max(valores) if valores else None
+
+
+# --- a decisao --------------------------------------------------------------
+
+@dataclass
+class Classificacao:
+    relevancia: str
+    motivo: str
+    municipio: str | None = None
+    salario: float | None = None
+    tipo: str = TIPO_DESCONHECIDO
+
+
+def classificar(item: ItemColetado) -> Classificacao:
+    tipo = detectar_tipo(item.titulo, item.resumo)
+    municipio = item.municipio or extrair_municipio(item.titulo)
+    salario = extrair_salario(item.titulo)
+    uf = (item.uf or "").upper()
+
+    comum = dict(municipio=municipio, salario=salario, tipo=tipo)
+
+    if tipo == TIPO_NOTICIA:
+        return Classificacao(
+            regioes.INDEFINIDA,
+            "Nao parece concurso: o titulo nao fala em vaga, edital nem inscricao.",
+            **comum,
+        )
+
+    if uf == "SC":
+        anel = regioes.anel_de(municipio)
+        if anel:
+            return Classificacao(
+                anel, f"{municipio} (SC) esta no anel {anel}.", **comum
+            )
+        if municipio:
+            return Classificacao(
+                regioes.REMOTO,
+                f"{municipio} fica em SC mas fora dos aneis de config/regioes.yml.",
+                **comum,
+            )
+        return Classificacao(
+            regioes.INDEFINIDA,
+            "Concurso de SC, mas nao identifiquei o municipio no titulo.",
+            **comum,
+        )
+
+    if uf:
+        if municipio:
+            return Classificacao(
+                regioes.REMOTO,
+                f"Orgao de {municipio} ({uf}): prova aplicada fora de SC.",
+                **comum,
+            )
+        return Classificacao(
+            regioes.INDEFINIDA,
+            f"Concurso de {uf} sem municipio no titulo; depende de ler o edital.",
+            **comum,
+        )
+
+    return Classificacao(
+        regioes.INDEFINIDA,
+        "Sem UF: pode ser federal com prova em Florianopolis. Depende do edital.",
+        **comum,
+    )

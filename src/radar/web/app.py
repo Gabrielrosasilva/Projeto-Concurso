@@ -29,20 +29,28 @@ def index(
     banca: str | None = None,
     termo: str | None = None,
     situacao: str | None = None,
+    relevancia: str | None = None,
+    todos: bool = False,
 ):
     itens = servico.listar(
-        uf=uf, banca=banca, termo=termo, situacao=situacao, limite=100
+        uf=uf, banca=banca, termo=termo, situacao=situacao,
+        relevancia=relevancia, todas_relevancias=todos, limite=200,
     )
+    contagem = servico.contar_por_relevancia()
     return templates.TemplateResponse(
         request=request,
         name="index.html",
         context={
             "itens": itens,
-            "total_geral": servico.contar(),
+            "contagem": contagem,
+            "perto": contagem["nucleo"] + contagem["proximo"],
+            "total_geral": sum(contagem.values()),
             "uf": uf or "",
             "banca": banca or "",
             "termo": termo or "",
             "situacao": situacao or "",
+            "relevancia": relevancia or "",
+            "todos": todos,
         },
     )
 

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from sqlalchemy import func, select
 
+from radar.classificador import classificar
 from radar.collectors.base import Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import ConcursosNoBrasil
 from radar.db import criar_tabelas, sessao
@@ -20,6 +21,24 @@ CAMPOS_DA_FONTE = (
     "titulo", "resumo", "orgao", "municipio", "uf", "banca", "situacao",
     "publicado_em",
 )
+
+# Campos que o classificador calcula. Sao derivados do titulo, entao podem ser
+# recalculados a qualquer momento - e por isso que existe `reclassificar()`:
+# se eu editar config/regioes.yml, o banco inteiro se corrige sem recoletar.
+CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia", "motivo_relevancia")
+
+
+def _aplicar_classificacao(destino, item: ItemColetado) -> None:
+    resultado = classificar(item)
+    destino.municipio = resultado.municipio
+    destino.salario = resultado.salario
+    destino.tipo = resultado.tipo
+    destino.relevancia = resultado.relevancia
+    destino.motivo_relevancia = resultado.motivo
+    # O coletor marca tudo como edital_publicado porque nao sabe distinguir.
+    # Se nem concurso e, nao da para afirmar que ha edital.
+    if resultado.tipo == "noticia":
+        destino.situacao = "desconhecida"
 
 
 @dataclass
@@ -48,6 +67,7 @@ def _gravar(s, item: ItemColetado, fonte: str) -> str:
         novo = Concurso(url=item.url, fonte=fonte, extra=item.extra or {})
         for campo in CAMPOS_DA_FONTE:
             setattr(novo, campo, getattr(item, campo))
+        _aplicar_classificacao(novo, item)
         s.add(novo)
         return "novo"
 
@@ -64,6 +84,8 @@ def _gravar(s, item: ItemColetado, fonte: str) -> str:
     if item.extra and item.extra != (existente.extra or {}):
         existente.extra = {**(existente.extra or {}), **item.extra}
         mudou = True
+
+    _aplicar_classificacao(existente, item)
 
     if mudou:
         existente.atualizado_em = agora()
@@ -102,6 +124,21 @@ def coletar_tudo() -> list[ResultadoColeta]:
     return resultados
 
 
+def contar_por_relevancia(incluir_noticias: bool = False) -> dict[str, int]:
+    """Quantos concursos em cada anel. Alimenta os atalhos da pagina web."""
+    criar_tabelas()
+    consulta = select(Concurso.relevancia, func.count()).group_by(Concurso.relevancia)
+    if not incluir_noticias:
+        consulta = consulta.where(Concurso.tipo != "noticia")
+
+    with sessao() as s:
+        contagem = dict(s.execute(consulta).all())
+
+    # garante as quatro chaves, mesmo zeradas, para a pagina nao ter que checar
+    return {anel: contagem.get(anel, 0)
+            for anel in ("nucleo", "proximo", "remoto", "indefinida")}
+
+
 def contar() -> int:
     """Quantos concursos existem no banco, sem filtro nenhum."""
     criar_tabelas()
@@ -109,16 +146,33 @@ def contar() -> int:
         return s.scalar(select(func.count()).select_from(Concurso)) or 0
 
 
+# O que aparece quando voce nao pede nada: o que esta perto. O resto continua
+# no banco e sai com --relevancia ou --todos.
+RELEVANCIA_PADRAO = ("nucleo", "proximo")
+
+
 def listar(
     uf: str | None = None,
     banca: str | None = None,
     termo: str | None = None,
     situacao: str | None = None,
+    relevancia: str | None = None,
+    incluir_noticias: bool = False,
+    todas_relevancias: bool = False,
     limite: int = 30,
 ) -> list[Concurso]:
     """Consulta o que ja foi coletado, com filtros opcionais."""
     criar_tabelas()
     consulta = select(Concurso).order_by(Concurso.publicado_em.desc().nullslast())
+
+    # Noticia que veio junto no feed nao e concurso: fica de fora por padrao.
+    if not incluir_noticias:
+        consulta = consulta.where(Concurso.tipo != "noticia")
+
+    if relevancia:
+        consulta = consulta.where(Concurso.relevancia == relevancia)
+    elif not todas_relevancias:
+        consulta = consulta.where(Concurso.relevancia.in_(RELEVANCIA_PADRAO))
 
     if uf:
         consulta = consulta.where(Concurso.uf == uf.upper())
@@ -134,3 +188,26 @@ def listar(
 
     with sessao() as s:
         return list(s.scalars(consulta.limit(limite)))
+
+
+def reclassificar() -> dict[str, int]:
+    """Roda o classificador de novo em todo o banco, sem ir a internet.
+
+    Use depois de editar config/regioes.yml: os registros antigos passam a
+    respeitar a regra nova na hora.
+    """
+    criar_tabelas()
+    contagem: dict[str, int] = {}
+
+    with sessao() as s:
+        for concurso in s.scalars(select(Concurso)):
+            item = ItemColetado(
+                titulo=concurso.titulo,
+                url=concurso.url,
+                resumo=concurso.resumo,
+                uf=concurso.uf,
+            )
+            _aplicar_classificacao(concurso, item)
+            contagem[concurso.relevancia] = contagem.get(concurso.relevancia, 0) + 1
+
+    return contagem

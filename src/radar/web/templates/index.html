@@ -5,154 +5,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Radar de Concursos</title>
   <style>
-    /* Tema em variaveis: trocar uma cor aqui muda a pagina inteira. */
     :root {
       color-scheme: light dark;
-      --fundo: #f6f7f9;
-      --cartao: #ffffff;
-      --texto: #14171f;
-      --suave: #5b6472;
-      --borda: #e2e5ea;
-      --destaque: #1d4ed8;
-      --destaque-fraco: #e8eeff;
-      --sc: #047857;
-      --sc-fraco: #d6f2e6;
+      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
+      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
+      --nucleo:#047857; --nucleo-fraco:#d3f2e4;
+      --proximo:#b45309; --proximo-fraco:#fdeed3;
+      --remoto:#64748b; --remoto-fraco:#eef1f5;
+      --indef:#7c3aed; --indef-fraco:#efe6fe;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --fundo: #0f1115;
-        --cartao: #171a21;
-        --texto: #e8eaee;
-        --suave: #99a1af;
-        --borda: #262b35;
-        --destaque: #7aa2ff;
-        --destaque-fraco: #1c2740;
-        --sc: #4ade80;
-        --sc-fraco: #10291d;
+        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
+        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
+        --nucleo:#4ade80; --nucleo-fraco:#10291d;
+        --proximo:#fbbf24; --proximo-fraco:#2e2310;
+        --remoto:#94a3b8; --remoto-fraco:#1c2027;
+        --indef:#c4b5fd; --indef-fraco:#241b3a;
       }
     }
+    *{box-sizing:border-box}
+    body{margin:0;padding:2rem 1rem 4rem;background:var(--fundo);color:var(--texto);
+         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+    .pagina{max-width:880px;margin:0 auto}
+    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
+    .subtitulo{margin:0 0 1.25rem;color:var(--suave);font-size:.9rem}
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 2rem 1rem 4rem;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: var(--fundo); color: var(--texto); line-height: 1.5;
+    /* Atalhos por anel: o jeito rapido de trocar o que a pagina mostra */
+    nav{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
+    nav a{
+      display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;
+      padding:.45rem .8rem;border-radius:999px;font-size:.85rem;font-weight:600;
+      border:1px solid var(--borda);background:var(--cartao);color:var(--suave);
     }
-    .pagina { max-width: 840px; margin: 0 auto; }
+    nav a:hover{border-color:var(--azul)}
+    nav a .n{font-weight:700;font-variant-numeric:tabular-nums;opacity:.75}
+    nav a.ativo{border-color:transparent}
+    nav a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
+    nav a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
+    nav a.ativo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
+    nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
 
-    header { margin-bottom: 1.5rem; }
-    h1 { margin: 0 0 .25rem; font-size: 1.6rem; letter-spacing: -.02em; }
-    .subtitulo { margin: 0; color: var(--suave); font-size: .9rem; }
+    form{display:grid;gap:.5rem;margin-bottom:1rem;
+         grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
+    input{padding:.55rem .7rem;border:1px solid var(--borda);border-radius:8px;
+          background:var(--cartao);color:var(--texto);font-size:.9rem;min-width:0}
+    input:focus{outline:2px solid var(--azul);outline-offset:-1px}
+    .acoes{display:flex;gap:.5rem}
+    button,.limpar{padding:.55rem 1rem;border-radius:8px;font-size:.9rem;
+      cursor:pointer;border:1px solid transparent;background:var(--azul);color:#fff;
+      text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap}
+    .limpar{background:transparent;color:var(--suave);border-color:var(--borda)}
 
-    /* Filtros */
-    form {
-      display: grid; gap: .5rem; margin: 1.25rem 0;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
-    input {
-      padding: .55rem .7rem; border: 1px solid var(--borda); border-radius: 8px;
-      background: var(--cartao); color: var(--texto); font-size: .9rem;
-      min-width: 0;   /* sem isto o input estoura a coluna do grid */
-    }
-    input:focus { outline: 2px solid var(--destaque); outline-offset: -1px; }
-    .acoes { display: flex; gap: .5rem; }
-    button, .limpar {
-      padding: .55rem 1rem; border-radius: 8px; border: 1px solid transparent;
-      font-size: .9rem; cursor: pointer; white-space: nowrap;
-      background: var(--destaque); color: #fff; text-decoration: none;
-      display: inline-flex; align-items: center;
-    }
-    .limpar { background: transparent; color: var(--suave); border-color: var(--borda); }
+    .contagem{color:var(--suave);font-size:.85rem;margin:0 0 .7rem}
 
-    .contagem { color: var(--suave); font-size: .85rem; margin: 0 0 .75rem; }
+    ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+    li{background:var(--cartao);border:1px solid var(--borda);border-radius:10px;
+       padding:.85rem 1rem;border-left:3px solid var(--borda)}
+    li.nucleo{border-left-color:var(--nucleo)}
+    li.proximo{border-left-color:var(--proximo)}
+    li.indefinida{border-left-color:var(--indef)}
+    li:hover{border-color:var(--azul)}
+    li:hover.nucleo{border-left-color:var(--nucleo)}
 
-    /* Lista */
-    ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
-    li {
-      background: var(--cartao); border: 1px solid var(--borda);
-      border-radius: 10px; padding: .9rem 1rem;
-    }
-    li:hover { border-color: var(--destaque); }
-    .titulo {
-      color: var(--texto); text-decoration: none; font-weight: 600;
-      display: block; margin-bottom: .5rem;
-    }
-    .titulo:hover { color: var(--destaque); }
+    .topo{display:flex;gap:.75rem;align-items:flex-start;justify-content:space-between}
+    .titulo{color:var(--texto);text-decoration:none;font-weight:600;display:block}
+    .titulo:hover{color:var(--azul)}
+    .salario{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;
+             font-size:.95rem}
+    .salario.bom{color:var(--nucleo)}
 
-    .selos { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
-    .selo {
-      font-size: .72rem; padding: .15rem .5rem; border-radius: 999px;
-      background: var(--destaque-fraco); color: var(--destaque); font-weight: 600;
-    }
-    /* SC em destaque: e o estado que interessa. Ainda NAO e o filtro dos tres
-       aneis (isso e a fase 1.5) - por enquanto e so a UF. */
-    .selo.sc { background: var(--sc-fraco); color: var(--sc); }
-    .selo.neutro {
-      background: transparent; color: var(--suave); font-weight: 400;
-      border: 1px solid var(--borda);
-    }
-    .meta { color: var(--suave); font-size: .8rem; }
+    .selos{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin-top:.5rem}
+    .selo{font-size:.72rem;padding:.12rem .5rem;border-radius:999px;font-weight:600}
+    .selo.nucleo{background:var(--nucleo-fraco);color:var(--nucleo)}
+    .selo.proximo{background:var(--proximo-fraco);color:var(--proximo)}
+    .selo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
+    .selo.indefinida{background:var(--indef-fraco);color:var(--indef)}
+    .selo.neutro{background:transparent;color:var(--suave);font-weight:400;
+                 border:1px solid var(--borda)}
+    .meta{color:var(--suave);font-size:.79rem}
+    .motivo{color:var(--suave);font-size:.78rem;margin-top:.4rem;font-style:italic}
 
-    .vazio {
-      text-align: center; padding: 3rem 1rem; color: var(--suave);
-      background: var(--cartao); border: 1px dashed var(--borda); border-radius: 10px;
-    }
-    code {
-      background: var(--destaque-fraco); color: var(--destaque);
-      padding: .1rem .4rem; border-radius: 4px; font-size: .85em;
-    }
-    .aviso {
-      margin-top: 2rem; padding: .75rem 1rem; border-radius: 8px;
-      background: var(--cartao); border: 1px solid var(--borda);
-      color: var(--suave); font-size: .82rem;
-    }
+    .vazio{text-align:center;padding:2.5rem 1.25rem;background:var(--cartao);
+           border:1px dashed var(--borda);border-radius:10px}
+    .vazio p{margin:.4rem 0;color:var(--suave);font-size:.9rem}
+    .vazio .grande{font-size:1.05rem;color:var(--texto);font-weight:600}
+    .vazio a{color:var(--azul)}
+    code{background:var(--azul-fraco);color:var(--azul);padding:.1rem .4rem;
+         border-radius:4px;font-size:.85em}
   </style>
 </head>
 <body>
 <div class="pagina">
 
-  <header>
-    <h1>Radar de Concursos</h1>
-    <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
-  </header>
+  <h1>Radar de Concursos</h1>
+  <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
+
+  {# Os atalhos levam a mesma pagina com outro filtro: nada de JavaScript. #}
+  <nav>
+    <a class="perto {{ 'ativo' if not relevancia and not todos }}" href="/">
+      Perto de mim <span class="n">{{ perto }}</span>
+    </a>
+    <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
+      Longe <span class="n">{{ contagem.remoto }}</span>
+    </a>
+    <a class="indefinida {{ 'ativo' if relevancia == 'indefinida' }}" href="/?relevancia=indefinida">
+      A confirmar <span class="n">{{ contagem.indefinida }}</span>
+    </a>
+    <a class="tudo {{ 'ativo' if todos }}" href="/?todos=true">
+      Todos <span class="n">{{ total_geral }}</span>
+    </a>
+  </nav>
 
   <form method="get">
+    {% if relevancia %}<input type="hidden" name="relevancia" value="{{ relevancia }}">{% endif %}
+    {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
     <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" maxlength="2">
     <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
     <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
-    <input name="situacao" placeholder="Situacao" value="{{ situacao }}">
     <div class="acoes">
       <button type="submit">Filtrar</button>
       <a class="limpar" href="/">Limpar</a>
     </div>
   </form>
 
-  <p class="contagem">
-    {{ itens|length }} concurso(s){% if total_geral != itens|length %} de {{ total_geral }} no banco{% endif %}
-  </p>
+  <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
 
   <ul>
     {% for c in itens %}
-      <li>
-        <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
-        <div class="selos">
-          <span class="selo {% if c.uf == 'SC' %}sc{% endif %}">{{ c.uf or 'sem UF' }}</span>
-          <span class="selo neutro">{{ c.situacao|replace('_', ' ') }}</span>
-          {% if c.banca %}<span class="selo neutro">{{ c.banca }}</span>{% endif %}
-          <span class="meta">{{ c.publicado_em | data('sem data') }} &middot; {{ c.fonte }}</span>
+      <li class="{{ c.relevancia }}">
+        <div class="topo">
+          <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
+          {% if c.salario %}
+            <span class="salario {{ 'bom' if c.salario >= 5000 }}">
+              R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}
+            </span>
+          {% endif %}
         </div>
+        <div class="selos">
+          <span class="selo {{ c.relevancia }}">{{ c.relevancia }}</span>
+          {% if c.municipio %}<span class="selo neutro">{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}</span>
+          {% elif c.uf %}<span class="selo neutro">{{ c.uf }}</span>{% endif %}
+          <span class="selo neutro">{{ c.tipo }}</span>
+          {% if c.situacao != 'desconhecida' %}<span class="selo neutro">{{ c.situacao|replace('_', ' ') }}</span>{% endif %}
+          {% if c.banca %}<span class="selo neutro">{{ c.banca }}</span>{% endif %}
+          <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
+        </div>
+        {% if c.motivo_relevancia %}<div class="motivo">{{ c.motivo_relevancia }}</div>{% endif %}
       </li>
     {% else %}
       <li class="vazio">
-        Nada aqui ainda.<br>Rode <code>radar coletar</code> no terminal.
+        {% if total_geral == 0 %}
+          <p class="grande">Nada coletado ainda.</p>
+          <p>Rode <code>radar coletar</code> no terminal.</p>
+        {% elif not relevancia and not todos %}
+          <p class="grande">Nenhum concurso perto de voce agora.</p>
+          <p>
+            Ha {{ contagem.remoto }} longe e {{ contagem.indefinida }} a confirmar.
+            <a href="/?todos=true">Ver todos os {{ total_geral }}</a>.
+          </p>
+          <p>Isso e normal: o radar so avisa quando abrir algo na sua regiao.</p>
+        {% else %}
+          <p class="grande">Nenhum resultado com esses filtros.</p>
+          <p><a href="/">Limpar e voltar</a></p>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>
-
-  <p class="aviso">
-    O filtro por distancia (nucleo / proximo / remoto) ainda nao existe: ele e a
-    fase 1.5. Por enquanto da para filtrar so por UF.
-  </p>
 
 </div>
 </body>
