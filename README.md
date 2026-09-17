@@ -38,6 +38,21 @@ radar listar --todos               # tudo, inclusive o que e longe
 radar web                          # http://localhost:8000
 ```
 
+### Depois de cada atualizacao
+
+Sempre os mesmos tres comandos, nesta ordem:
+
+```bash
+git pull
+pip install -e ".[dev]"     # rapido quando nada mudou; nao custa rodar sempre
+radar reclassificar         # so se o classificador ou o regioes.yml mudaram
+```
+
+**Voce nunca precisa apagar `data/radar.db`.** Quando o modelo ganha uma
+coluna, o proprio programa cria essa coluna no banco ao iniciar, preenchendo
+o valor padrao nas linhas que ja existiam. O que ele nao faz e renomear,
+trocar tipo ou remover coluna - se um dia precisarmos disso, eu aviso antes.
+
 ### Filtro por distancia
 
 Todo concurso coletado e classificado em um anel:
