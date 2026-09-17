@@ -10,12 +10,28 @@ O roadmap completo esta no `CLAUDE.md`.
 
 ## Rodando pela primeira vez
 
+No Linux ou no Mac:
+
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install -e ".[dev]"
 cp .env.example .env
+```
 
+No Windows (prompt de comando), onde o executavel se chama `python` e nao
+`python3`, e nao se usa `source`:
+
+```bat
+python -m venv .venv
+.venv\Scripts\activate
+pip install -e ".[dev]"
+copy .env.example .env
+```
+
+Dai em diante os comandos sao iguais nos tres:
+
+```bash
 radar coletar
 radar listar --uf SC
 radar web                          # http://localhost:8000

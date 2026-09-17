@@ -6,7 +6,7 @@ requires-python = ">=3.11"
 
 dependencies = [
     "requests==2.32.3",
-    "feedparser==6.0.11",       # le RSS/Atom e ja resolve data e feed quebrado
+    "feedparser==6.0.14",       # le RSS/Atom e ja resolve data e feed quebrado
     "beautifulsoup4==4.12.3",   # usado a partir da fase 1.7 (diario oficial)
     "lxml==5.3.0",
     "SQLAlchemy==2.0.36",
@@ -19,6 +19,12 @@ dependencies = [
     "jinja2==3.1.5",
     "python-dotenv==1.0.1",
     "PyYAML==6.0.2",            # config/perfil.yml e config/regioes.yml
+    # Base de fusos horarios. O Linux tem a dele em /usr/share/zoneinfo;
+    # o Windows nao tem nenhuma, e sem isto o ZoneInfo quebra la.
+    # E o UNICO nao preso em versao exata, de proposito: e tabela de dados,
+    # nao codigo. Se o Brasil voltar a ter horario de verao, a regra nova
+    # chega numa versao nova - travar aqui seria congelar o fuso errado.
+    "tzdata>=2025.2",
 ]
 
 [project.optional-dependencies]
