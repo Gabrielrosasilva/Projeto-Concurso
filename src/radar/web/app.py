@@ -431,11 +431,19 @@ def macetes(
         if analise.retrato else []
     )
 
+    # Quando eu digito um cargo, a pergunta seguinte e "o acervo tem prova
+    # disso?". Para Guarda Municipal e Policia Penal a resposta e nao, e a
+    # tela precisa dizer isso em vez de mostrar recorte vazio.
+    parecidas = servico.provas_parecidas(cargo, banca=banca) if cargo else []
+    recado = servico.recado_sobre_o_cargo(cargo, parecidas) if cargo else ""
+
     return templates.TemplateResponse(
         request=request,
         name="macetes.html",
         context={
             "analise": analise,
+            "parecidas": parecidas,
+            "recado_do_cargo": recado,
             "composicao": composicao,
             "fatias_do_caderno": fatias_do_caderno,
             "fatias_de_assunto": fatias_de_assunto,

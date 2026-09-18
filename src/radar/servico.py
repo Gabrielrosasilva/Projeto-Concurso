@@ -21,6 +21,7 @@ from radar import (
     questoes as leitor_de_questoes,
     questoes_ieses,
     regioes,
+    substituta,
 )
 from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
@@ -2048,3 +2049,56 @@ def eventos_do_calendario() -> list[calendario.Evento]:
 def calendario_ics() -> str:
     """O arquivo .ics pronto, com os prazos que valem a minha agenda."""
     return calendario.montar(eventos_do_calendario())
+
+
+# --- prova substituta (fase 3) ----------------------------------------------
+
+def provas_parecidas(
+    cargo: str,
+    banca: str | None = None,
+    municipio: str | None = None,
+    quantas: int = 8,
+) -> list[substituta.Parecida]:
+    """As provas do acervo mais parecidas com o cargo que eu quero.
+
+    Existe porque os cargos que eu mais quero - Guarda Municipal, Policia
+    Penal - nao tem prova nenhuma no acervo. Em vez de tela vazia, a lista
+    mostra o que existe e EM CIMA DE QUE a semelhanca foi medida.
+    """
+    criar_tabelas()
+    if not (cargo or "").strip():
+        return []
+
+    consulta = (
+        select(
+            QuestaoDeProva.cargo,
+            QuestaoDeProva.banca,
+            QuestaoDeProva.municipio,
+            QuestaoDeProva.ano,
+            func.count(),
+        )
+        .where(QuestaoDeProva.cargo.is_not(None))
+        .group_by(
+            QuestaoDeProva.cargo,
+            QuestaoDeProva.banca,
+            QuestaoDeProva.municipio,
+            QuestaoDeProva.ano,
+        )
+    )
+    with sessao() as s:
+        candidatas = [
+            substituta.Parecida(cargo=c, banca=b, municipio=m, ano=a, questoes=n)
+            for c, b, m, a, n in s.execute(consulta)
+        ]
+
+    ano_recente = agora().year - 2
+    return substituta.ordenar(
+        candidatas, cargo, banca, municipio, ano_recente
+    )[:quantas]
+
+
+def recado_sobre_o_cargo(cargo: str, parecidas: list) -> str:
+    """O que dizer quando nao ha prova parecida o bastante."""
+    if parecidas:
+        return ""
+    return substituta.explicar_ausencia(cargo, materias_universais())

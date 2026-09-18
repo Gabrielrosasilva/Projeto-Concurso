@@ -115,6 +115,7 @@ src/radar/
 ├── questoes.py     separa o caderno da FEPESE em questoes
 ├── questoes_ieses.py  o mesmo para a IESES: 4 alternativas, gabarito a parte
 ├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
+├── substituta.py   qual prova do acervo mais se parece com o cargo que quero
 ├── macetes.py      conta o costume da banca: forma de perguntar, questao
 │                repetida, palavra frequente, letra do gabarito
 ├── calendario.py   monta o .ics dos prazos (iCalendar, sem dependencia)
@@ -331,6 +332,11 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   terminando no dia seguinte;
 - o UID do evento vem do endereco do concurso, sempre igual: e assim que o
   calendario atualiza o compromisso em vez de duplicar quando o prazo muda;
+- na prova substituta, so entra quem divide ao menos uma PALAVRA com o cargo
+  pedido. Banca e municipio sao desempate, nunca motivo de entrada: sem isso,
+  "Policia Penal" devolvia Merendeira por ser da mesma banca;
+- a lista de parecidas carrega sempre o motivo ("1 palavra em comum no cargo"),
+  e nunca afirma equivalencia: Guarda Patrimonial nao e Guarda Municipal;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -358,9 +364,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 2.5  PARCIAL: `radar elegibilidade` le o edital e grava escolaridade,
      idade, CNH e TAF, inclusive de concurso ABERTO (`radar provas
      --abertos`). Falta: deteccao de retificacao por hash
-3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
-     Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
-     parecida - mesma banca e mesmo cargo em outro lugar)
+3    PRONTA: acervo de FEPESE e IESES com manifesto versionado, e prova
+     substituta (`radar parecidas`, e na aba Macetes)
 4    PARCIAL: 5.928 questoes de DUAS bancas, com materia, gabarito e
      lacuna marcada. Falta: o ASSUNTO
      fino dentro de Conhecimentos Especificos (Direito Penal, Primeiros

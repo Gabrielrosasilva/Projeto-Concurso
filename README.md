@@ -886,6 +886,48 @@ vem do endereco do concurso, sempre igual. E assim que o calendario
 **atualiza** o compromisso quando o prazo e retificado, em vez de criar um
 duplicado.
 
+## Prova substituta: e quando nao ha prova do meu cargo?
+
+```bash
+radar parecidas "Guarda Municipal" --banca FEPESE
+```
+
+Tambem aparece na aba **Macetes**, assim que eu digito um cargo.
+
+O problema e concreto e nao tem jeito bonito: **Guarda Municipal e Policia
+Penal, que sao os cargos que eu mais quero, nao tem uma prova sequer no
+acervo**. Sao 134 cargos catalogados e nenhum deles e esse. Esperar a prova
+aparecer nao e plano.
+
+O que o radar faz e ordenar o que existe pela semelhanca, e dizer **em cima de
+que** a semelhanca foi medida:
+
+```
+~ Guarda Patrimonial   FEPESE / Palhoca / 2024 / 40 questoes
+    1 palavra(s) em comum no cargo: guarda; mesma banca (FEPESE); prova recente
+```
+
+O que ele nao faz e fingir equivalencia. Guarda Patrimonial divide uma palavra
+com Guarda Municipal e e outra profissao - por isso o motivo diz "1 palavra em
+comum", e nao "cargo equivalente". Quem julga sou eu.
+
+**So entra quem divide ao menos uma palavra com o cargo.** Banca e municipio
+sao desempate, e nunca motivo de entrada: sem essa regra, procurar "Policia
+Penal" devolvia Merendeira e Professor de Ensino Religioso, so por serem da
+mesma banca. Oito linhas de ruido sao piores que uma tela que admite nao ter
+nada.
+
+E quando nao ha nada, a tela diz a coisa mais util - que e a que menos parece
+resposta:
+
+> Nenhuma prova de Policia Penal no acervo, e nenhuma parecida o bastante para
+> valer a indicacao. O que serve para esse cargo sao as materias que caem em
+> qualquer concurso (Atualidades, Conhecimentos Gerais, Informatica, Lingua
+> Portuguesa), com as provas da mesma banca.
+
+Isso nao e consolo: essas materias valem **20 das 30 questoes** de uma prova da
+IESES, e e assim que o simulado ja as trata.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

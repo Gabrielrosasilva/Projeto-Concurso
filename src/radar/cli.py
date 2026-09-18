@@ -352,6 +352,34 @@ def calendario(
 
 
 @app.command()
+def parecidas(
+    cargo: str = typer.Argument(..., help="O cargo que eu quero prestar"),
+    banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),
+) -> None:
+    """Qual prova do acervo mais se parece com o cargo que eu quero.
+
+    Existe porque Guarda Municipal e Policia Penal nao tem prova nenhuma no
+    acervo. A lista mostra o que existe e em cima de que a semelhanca foi
+    medida - dividir uma palavra no nome nao faz duas profissoes serem a
+    mesma coisa.
+    """
+    achadas = servico.provas_parecidas(cargo, banca=banca)
+
+    if not achadas:
+        console.print(f"[yellow]{servico.recado_sobre_o_cargo(cargo, achadas)}[/]")
+        return
+
+    for parecida in achadas:
+        marca = "[green]=[/]" if parecida.exata else "[dim]~[/]"
+        console.print(
+            f"{marca} [bold]{parecida.cargo}[/] "
+            f"[dim]{parecida.banca or '-'} / {parecida.municipio or '-'} / "
+            f"{parecida.ano or '-'} / {parecida.questoes} questoes[/]"
+        )
+        console.print(f"    [dim]{parecida.motivo}[/]")
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

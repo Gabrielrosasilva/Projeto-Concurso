@@ -126,6 +126,17 @@
     .veredito.tendencia{background:var(--alerta-fraco);color:var(--alerta)}
     .veredito.amostra_pequena{background:var(--borda);color:var(--suave)}
 
+    /* Prova substituta: o que existe no acervo parecido com o cargo pedido. */
+    .parecida{display:grid;grid-template-columns:1fr auto;gap:.3rem 1rem;
+      padding:.6rem 0;border-bottom:1px solid var(--borda)}
+    .parecida:last-child{border-bottom:0}
+    .parecida .cargo{font-weight:600;font-size:.92rem}
+    .parecida .onde{font-size:.8rem;color:var(--suave);text-align:right;
+      white-space:nowrap}
+    .parecida .porque{grid-column:1/-1;font-size:.8rem;color:var(--suave)}
+    .recado{background:var(--azul-fraco);color:var(--azul);border-radius:8px;
+      padding:.8rem 1rem;font-size:.86rem}
+
     .vazio{text-align:center;color:var(--suave);padding:1.5rem 1rem}
     .vazio p{margin:.4rem 0}
     .futuro{font-size:.83rem;color:var(--suave);margin:0}
@@ -170,6 +181,32 @@
       acento.
     </p>
   </div>
+
+  {# ------------------------------------------- prova substituta ------- #}
+  {% if cargo %}
+    <div class="caixa">
+      <h2>Provas de "{{ cargo }}" no acervo</h2>
+      {% if parecidas %}
+        <p class="legenda">
+          Da mais parecida para a menos, com o motivo ao lado. Dividir uma
+          palavra no nome nao faz duas profissoes serem a mesma coisa - o
+          motivo esta ai para eu julgar.
+        </p>
+        {% for p in parecidas %}
+          <div class="parecida">
+            <span class="cargo">{{ p.cargo }}</span>
+            <span class="onde">
+              {{ p.banca }}{% if p.municipio %} &middot; {{ p.municipio }}{% endif %}
+              {%- if p.ano %} &middot; {{ p.ano }}{% endif %}
+              &middot; {{ p.questoes }} questoes</span>
+            <span class="porque">{{ p.motivo }}</span>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="recado">{{ recado_do_cargo }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
 
   {# ------------------------------------------------ sem banca escolhida - #}
   {% if not banca %}
