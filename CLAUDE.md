@@ -218,6 +218,11 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   para reaplicar a regra do ANEL, nao para reextrair o que a fonte ja deu;
 - o formulario da web usa autocomplete="off": o navegador restaurava o valor
   digitado antes e o campo aparecia preenchido sozinho;
+- o DOU (in.gov.br) tambem esta FORA: robots.txt com Disallow: / para todos,
+  igual ao DOM/SC. O Sigepe Oportunidades foi testado e nao serve - sao vagas
+  de movimentacao para quem JA e servidor federal, e nao concurso aberto;
+- o Querido Diario voltou do ar e sabe de Florianopolis, mas o robots.txt dele
+  proibe /api. Fica fora ate haver decisao explicita em contrario;
 - o DOM/SC esta FORA de raspagem: robots.txt com "Disallow: /" para todos.
   Nao insista; o caminho legitimo e o alerta por e-mail do proprio site;
 - fonte que sabe o que publica declara `tipo` no ItemColetado, e o
@@ -360,10 +365,11 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 ```
 1.55 PRONTA: campo de notas na tela e perfil em config/perfil.yml,
      cruzado com o que o edital exige
-1.7  PARCIAL: FEPESE (fonte 2) e IESES (fonte 3). O DOM/SC ficou de fora
-     porque o robots.txt dele proibe robo; ver README. Falta: DOU
-     (federal), o Querido Diario quando a API voltar, e o sinal
-     "contrataram a banca"
+1.7  PARCIAL: FEPESE (fonte 2) e IESES (fonte 3). As tres fontes
+     federais foram testadas e nenhuma serve: DOM/SC e DOU proibem robo
+     no robots.txt, o Sigepe Oportunidades so tem movimentacao de
+     servidor, e o Querido Diario voltou mas tem Disallow: /api. Falta:
+     decidir sobre o Querido Diario, e o sinal "contrataram a banca"
 2.2  PRONTA: `radar calendario` e o link Calendario na web
 2.5  PRONTA: `radar elegibilidade` le o edital (inclusive de concurso
      aberto) e `radar retificacoes` acusa edital que mudou, pelo sha256

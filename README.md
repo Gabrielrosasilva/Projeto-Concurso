@@ -957,6 +957,36 @@ Tres cuidados, e os tres tem teste:
 A mensagem nao diz *o que* mudou, porque o sha256 nao sabe - ela diz que mudou,
 qual arquivo, e manda o link para reler.
 
+## Fontes federais: o que foi avaliado e por que ficou de fora
+
+A fase 1.7 previa o DOU. As tres fontes candidatas foram testadas de verdade, e
+nenhuma entrou. O motivo de cada uma vale registro, para nao serem testadas de
+novo daqui a seis meses:
+
+**Diario Oficial da Uniao (in.gov.br)** - `robots.txt` com `User-agent: *` e
+`Disallow: /`. Proibe robo no site inteiro, exatamente como o DOM/SC. Fora.
+
+**Portal de Editais de Oportunidades (Sigepe)** - tem 2.953 editais federais
+numa pagina so, sem robots.txt restringindo. Mas os editais **nao sao concurso
+publico**: sao movimentacao interna de quem ja e servidor federal - "Funcao
+Comissionada Executiva", "Chefe de Divisao", "selecionando 1 pessoa para
+atuar". Nao serve para quem esta de fora.
+
+**Querido Diario** - a API **voltou** (estava em 503 quando a fase 1.7 foi
+escrita), e ela sabe de Florianopolis: `territory_id` 4205407, diarios desde
+30/10/2020. Seria a melhor fonte para o sinal "contratou a banca". Mas o
+`robots.txt` de la diz:
+
+```
+User-agent: *
+Disallow: /api
+```
+
+Isso e uma decisao de politica, e nao tecnica: e a interface de maquina de um
+projeto de dados abertos, o que torna a regra estranha - mas ela esta escrita.
+O radar respeita `robots.txt`, e por isso a fonte segue fora ate eu decidir o
+contrario de forma explicita.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da
