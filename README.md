@@ -859,8 +859,12 @@ ou nenhuma vaga no nivel que eu tenho.
 radar calendario                 # grava radar.ics
 ```
 
-Na web, o link **Calendario** baixa o mesmo arquivo. Ele abre no Google
-Agenda, no calendario do iPhone e no Outlook.
+Na web, o link **Calendario** abre uma pagina que mostra o que vai entrar na
+agenda, explica para que serve e so entao oferece o arquivo - com o passo a
+passo de como importar no celular, no Google Agenda e no Outlook.
+
+A primeira versao baixava o `.ics` direto do menu, e um arquivo que aparece do
+nada nao diz o que e nem o que fazer com ele.
 
 Por que isto existe: o prazo de inscricao e a unica coisa do radar que nao pode
 ser vista tarde demais. O aviso do Telegram chega uma vez; o calendario lembra

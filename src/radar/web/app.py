@@ -493,6 +493,20 @@ def pagina_nao_encontrada(request: Request, excecao: HTTPException):
 
 # --- calendario (fase 2.2) --------------------------------------------------
 
+@app.get("/calendario", response_class=HTMLResponse)
+def calendario(request: Request):
+    """Explica para que serve o arquivo, e mostra o que vai entrar na agenda.
+
+    Antes o link da barra baixava o .ics direto, e um arquivo que aparece do
+    nada nao diz o que e nem o que fazer com ele.
+    """
+    return templates.TemplateResponse(
+        request=request,
+        name="calendario.html",
+        context={"eventos": servico.eventos_do_calendario()},
+    )
+
+
 @app.get("/calendario.ics")
 def calendario_ics():
     """Os prazos em formato de calendario, para assinar no celular.

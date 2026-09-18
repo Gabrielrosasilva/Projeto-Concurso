@@ -235,3 +235,48 @@ def test_a_rota_traz_os_compromissos(cliente):
     _semear(_concurso("https://x.test/rota"))
 
     assert "Ultimo dia de inscricao" in cliente.get("/calendario.ics").text
+
+
+# --- a pagina que explica ---------------------------------------------------
+
+def test_a_pagina_explica_para_que_serve(cliente):
+    """Antes, o link da barra baixava o arquivo direto - e um .ics que aparece
+    do nada nao diz o que e nem o que fazer com ele."""
+    _semear(_concurso("https://x.test/pagina"))
+
+    texto = cliente.get("/calendario").text
+
+    assert "Para que serve" in texto
+    assert "dois dias antes" in texto
+
+
+def test_a_pagina_mostra_o_que_vai_entrar_na_agenda(cliente):
+    _semear(_concurso("https://x.test/pagina"))
+
+    texto = cliente.get("/calendario").text
+
+    assert "Prefeitura de Palhoca" in texto
+
+
+def test_a_pagina_ensina_a_importar(cliente):
+    _semear(_concurso("https://x.test/pagina"))
+
+    texto = cliente.get("/calendario").text
+
+    assert "Google Agenda" in texto and "Outlook" in texto
+
+
+def test_sem_prazo_nenhum_a_pagina_explica_o_que_entra(cliente):
+    assert "Nenhum prazo em pe" in cliente.get("/calendario").text
+
+
+def test_a_pagina_leva_ao_arquivo(cliente):
+    _semear(_concurso("https://x.test/pagina"))
+
+    assert 'href="/calendario.ics"' in cliente.get("/calendario").text
+
+
+def test_o_link_da_barra_abre_a_pagina_e_nao_o_arquivo(cliente):
+    _semear(_concurso("https://x.test/pagina"))
+
+    assert 'href="/calendario"' in cliente.get("/").text
