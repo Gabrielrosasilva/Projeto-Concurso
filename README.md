@@ -39,6 +39,31 @@ radar listar --todos               # tudo, inclusive o que e longe
 radar web                          # http://localhost:8000
 ```
 
+### Se o comando `radar` nao for reconhecido
+
+```
+'radar' nao e reconhecido como um comando interno ou externo...
+```
+
+O comando so existe no PATH quando o ambiente virtual esta **ativado**. Repare
+no inicio do prompt: com o venv ligado aparece `(.venv)` na frente.
+
+```
+(.venv) C:\Projeto concurso claude\Projeto-Concurso>   <- funciona
+        C:\Projeto concurso claude\Projeto-Concurso>   <- nao funciona
+```
+
+Duas saidas, as duas validas:
+
+```bat
+.venv\Scriptsctivate      :: liga o venv nesta janela
+.adar.bat web             :: ou chame pelo atalho, sem ativar nada
+```
+
+O `radar.bat` fica na raiz do projeto e repassa tudo para o executavel do
+venv, entao `.adar.bat listar --abertas` e qualquer outro comando funcionam
+de dentro da pasta do projeto, com ou sem o venv ligado.
+
 ### Depois de cada atualizacao
 
 Sempre os mesmos tres comandos, nesta ordem:
