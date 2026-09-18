@@ -480,3 +480,74 @@ def composicao_do_caderno(questoes: list) -> list[FatiaDoCaderno]:
 
     fatias.sort(key=lambda f: -f.por_caderno)
     return fatias
+
+
+# --- grafico de pizza -------------------------------------------------------
+
+# Cores das fatias, na ordem. Sao oito porque acima disso a legenda fica
+# ilegivel - e por isso o resto vira uma fatia so, "outros".
+CORES_DA_PIZZA = (
+    "#1d4ed8", "#0891b2", "#059669", "#ca8a04",
+    "#dc2626", "#7c3aed", "#db2777", "#475569",
+)
+
+MAXIMO_DE_FATIAS = 8
+ROTULO_DO_RESTO = "outros"
+
+
+@dataclass
+class Fatia:
+    rotulo: str
+    valor: float
+    porcentagem: float
+    inicio: float       # onde a fatia comeca, em % do circulo
+    fim: float
+    cor: str
+    # Numero que acompanha a fatia na legenda, quando ele diz outra coisa que
+    # a porcentagem nao diz - "9,0 questoes por prova", por exemplo.
+    por_caderno: float | None = None
+
+
+def fatias(
+    itens: list[tuple[str, float]],
+    extras: dict[str, float] | None = None,
+) -> list[Fatia]:
+    """Transforma [(rotulo, valor)] nas fatias de um grafico de pizza.
+
+    O calculo fica aqui, e nao no template, por dois motivos: o angulo
+    acumulado e conta, e assim da para testar. A pizza em si e desenhada com
+    `conic-gradient` no CSS - sem JavaScript, como o resto da tela.
+
+    Acima de oito categorias a legenda vira uma parede de texto, entao o que
+    sobra e somado numa fatia "outros". Ela e sempre a ultima.
+    """
+    limpos = [(rotulo, float(valor)) for rotulo, valor in itens if valor > 0]
+    if not limpos:
+        return []
+
+    limpos.sort(key=lambda item: -item[1])
+    if len(limpos) > MAXIMO_DE_FATIAS:
+        resto = sum(valor for _, valor in limpos[MAXIMO_DE_FATIAS - 1:])
+        limpos = limpos[: MAXIMO_DE_FATIAS - 1] + [(ROTULO_DO_RESTO, resto)]
+
+    total = sum(valor for _, valor in limpos)
+    montadas: list[Fatia] = []
+    acumulado = 0.0
+
+    for indice, (rotulo, valor) in enumerate(limpos):
+        porcentagem = valor / total * 100
+        # A ultima fecha em 100 na unha: somar porcentagens arredondadas deixa
+        # uma frestinha branca no fim do circulo.
+        fim = 100.0 if indice == len(limpos) - 1 else acumulado + porcentagem
+        montadas.append(Fatia(
+            rotulo=rotulo,
+            valor=valor,
+            porcentagem=porcentagem,
+            inicio=acumulado,
+            fim=fim,
+            cor=CORES_DA_PIZZA[indice % len(CORES_DA_PIZZA)],
+            por_caderno=(extras or {}).get(rotulo),
+        ))
+        acumulado = fim
+
+    return montadas

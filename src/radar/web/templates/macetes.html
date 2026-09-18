@@ -54,6 +54,33 @@
     .recorte{font-size:.86rem;color:var(--suave);margin:0 0 1rem}
     .recorte b{color:var(--texto)}
 
+    /* ------------------------------------------------------ pizza ------- */
+    /* Desenhada com conic-gradient: sem JavaScript, como o resto da tela.
+       O furo no meio e um circulo da cor do cartao por cima - fica mais leve
+       que a pizza cheia e sobra lugar para o total. */
+    .pizza-caixa{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
+    .pizza{position:relative;width:190px;height:190px;border-radius:50%;
+      flex:0 0 auto}
+    .pizza .furo{position:absolute;inset:26%;background:var(--cartao);
+      border-radius:50%;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;text-align:center;line-height:1.15}
+    .pizza .furo .n{font-size:1.35rem;font-weight:700;
+      font-variant-numeric:tabular-nums}
+    .pizza .furo .rot{font-size:.66rem;color:var(--suave)}
+
+    .legenda-pizza{display:grid;gap:.35rem;flex:1 1 260px;min-width:230px;
+      font-size:.85rem}
+    .legenda-pizza li{display:grid;grid-template-columns:auto 1fr auto;
+      gap:.5rem;align-items:baseline;list-style:none}
+    .legenda-pizza{margin:0;padding:0}
+    .legenda-pizza .cor{width:.7rem;height:.7rem;border-radius:3px;
+      align-self:center}
+    .legenda-pizza .nome{overflow:hidden;text-overflow:ellipsis;
+      white-space:nowrap}
+    .legenda-pizza .valor{color:var(--suave);font-size:.8rem;
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+    .legenda-pizza li.alvo .nome{font-weight:700}
+
     /* ---------------------------------------------------- grafico ------- */
     .grafico{display:grid;gap:.45rem}
     .linha{display:grid;grid-template-columns:minmax(120px,32%) 1fr auto;
@@ -225,19 +252,29 @@
       <div class="caixa">
         <h2>Quantas questoes caem numa prova</h2>
         <p class="legenda">
-          Media por caderno em que a materia aparece, nas provas da {{ banca }}.
-          Nem toda materia cai em todo cargo.
+          A fatia e a participacao da materia no total de questoes da
+          {{ banca }}; o numero ao lado e quanto ela cai por prova. Os dois
+          nao andam juntos porque nem toda materia cai em todo cargo - Temas
+          de Educacao sao 10 questoes, mas so em prova de professor.
         </p>
-        <div class="grafico">
-          {% set teto = composicao[0].por_caderno %}
-          {% for f in composicao %}
-            <div class="linha {% if f.materia == analise.materia_dominante %}alvo{% endif %}">
-              <span class="nome" title="{{ f.materia }}">{{ f.materia }}</span>
-              <span class="barra"><span
-                style="width:{{ (f.por_caderno / teto * 100)|round }}%"></span></span>
-              <span class="valor">{{ "%.1f"|format(f.por_caderno) }} por prova</span>
+        <div class="pizza-caixa">
+          <div class="pizza" style="background:conic-gradient({% for f in fatias_do_caderno %}{{ f.cor }} {{ '%.2f'|format(f.inicio) }}% {{ '%.2f'|format(f.fim) }}%{{ ', ' if not loop.last }}{% endfor %})">
+            <div class="furo">
+              <span class="n">{{ composicao | sum(attribute='total') }}</span>
+              <span class="rot">questoes<br>da banca</span>
             </div>
-          {% endfor %}
+          </div>
+          <ul class="legenda-pizza">
+            {% for f in fatias_do_caderno %}
+              <li class="{{ 'alvo' if f.rotulo == analise.materia_dominante }}">
+                <span class="cor" style="background:{{ f.cor }}"></span>
+                <span class="nome" title="{{ f.rotulo }}">{{ f.rotulo }}</span>
+                <span class="valor">
+                  {{ "%.0f"|format(f.porcentagem) }}%{% if f.por_caderno %} &middot;
+                  {{ "%.1f"|format(f.por_caderno) }}/prova{% endif %}</span>
+              </li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
     {% endif %}
@@ -251,16 +288,22 @@
           materia. Uma questao pode entrar em mais de um assunto, entao a soma
           nao fecha com o total.
         </p>
-        <div class="grafico">
-          {% set teto = analise.retrato.assuntos[0].questoes %}
-          {% for s in analise.retrato.assuntos %}
-            <div class="linha {% if analise.assunto_procurado and s.nome == analise.assunto_procurado.nome %}alvo{% endif %}">
-              <span class="nome" title="{{ s.nome }}">{{ s.nome }}</span>
-              <span class="barra"><span
-                style="width:{{ (s.questoes / teto * 100)|round }}%"></span></span>
-              <span class="valor">{{ s.questoes }} questoes</span>
+        <div class="pizza-caixa">
+          <div class="pizza" style="background:conic-gradient({% for f in fatias_de_assunto %}{{ f.cor }} {{ '%.2f'|format(f.inicio) }}% {{ '%.2f'|format(f.fim) }}%{{ ', ' if not loop.last }}{% endfor %})">
+            <div class="furo">
+              <span class="n">{{ analise.retrato.questoes }}</span>
+              <span class="rot">questoes<br>da materia</span>
             </div>
-          {% endfor %}
+          </div>
+          <ul class="legenda-pizza">
+            {% for f in fatias_de_assunto %}
+              <li class="{{ 'alvo' if analise.assunto_procurado and f.rotulo == analise.assunto_procurado.nome }}">
+                <span class="cor" style="background:{{ f.cor }}"></span>
+                <span class="nome" title="{{ f.rotulo }}">{{ f.rotulo }}</span>
+                <span class="valor">{{ "%.0f"|format(f.valor) }} questoes</span>
+              </li>
+            {% endfor %}
+          </ul>
         </div>
         {% if analise.retrato.sem_assunto %}
           <p class="dica">

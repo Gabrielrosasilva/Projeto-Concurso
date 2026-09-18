@@ -416,12 +416,29 @@ def macetes(
     )
     composicao = servico.composicao_do_caderno(banca) if banca else []
 
+    # A pizza precisa de um TODO real: somar "questoes por caderno" de
+    # materias que caem em provas diferentes daria 81 numa prova de 40. Entao
+    # a fatia e a participacao no total de questoes, e o numero por prova vai
+    # na legenda, que e onde ele ajuda.
+    fatias_do_caderno = servico.macetes.fatias(
+        [(f.materia, f.total) for f in composicao],
+        extras={f.materia: f.por_caderno for f in composicao},
+    )
+    fatias_de_assunto = (
+        servico.macetes.fatias(
+            [(a.nome, a.questoes) for a in analise.retrato.assuntos]
+        )
+        if analise.retrato else []
+    )
+
     return templates.TemplateResponse(
         request=request,
         name="macetes.html",
         context={
             "analise": analise,
             "composicao": composicao,
+            "fatias_do_caderno": fatias_do_caderno,
+            "fatias_de_assunto": fatias_de_assunto,
             "bancas": servico.bancas_com_questao(),
             "bancas_sem_acervo": servico.bancas_sem_acervo(),
             "banca": banca,

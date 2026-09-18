@@ -263,6 +263,12 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - questoes por caderno divide pelos cadernos em que AQUELA materia apareceu.
   Temas de Educacao so cai em prova de professor: dividir pelo total faria
   parecer que cai pouco quando cai muito onde cai;
+- os graficos da aba Macetes sao pizza, feitos com conic-gradient no CSS: sem
+  JavaScript, como o resto da tela. Acima de 8 categorias o resto vira uma
+  fatia "outros";
+- na pizza, a fatia e a participacao no TOTAL de questoes, nunca a media por
+  prova: somar media de materias que caem em provas diferentes daria 81 numa
+  prova de 40. O numero por prova fica na legenda;
 - na aba Macetes, gabarito e palavras contam UMA VEZ POR ENUNCIADO, e
   materia e forma de perguntar contam todas. Buscando "crase" saem 59 questoes
   e so 7 enunciados: a mesma aparece em 38 cadernos e a resposta e "d", o que

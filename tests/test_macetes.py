@@ -503,3 +503,87 @@ def test_questao_sem_materia_fica_fora_do_caderno_tipico():
     materias = {f.materia for f in macetes.composicao_do_caderno(questoes)}
 
     assert materias == {"Lingua Portuguesa"}
+
+
+# --- grafico de pizza -------------------------------------------------------
+
+def test_as_fatias_fecham_o_circulo():
+    """Fresta branca no fim do circulo e o defeito classico de somar
+    porcentagens arredondadas."""
+    fatias = macetes.fatias([("a", 1), ("b", 1), ("c", 1)])
+
+    assert fatias[0].inicio == 0
+    assert fatias[-1].fim == 100
+
+
+def test_cada_fatia_comeca_onde_a_anterior_terminou():
+    fatias = macetes.fatias([("a", 3), ("b", 1)])
+
+    assert fatias[0].fim == fatias[1].inicio
+
+
+def test_a_maior_fatia_vem_primeiro():
+    fatias = macetes.fatias([("pequena", 1), ("grande", 9)])
+
+    assert fatias[0].rotulo == "grande"
+
+
+def test_a_porcentagem_e_a_participacao_no_total():
+    fatias = macetes.fatias([("a", 3), ("b", 1)])
+
+    assert fatias[0].porcentagem == 75
+
+
+def test_acima_de_oito_categorias_o_resto_vira_uma_fatia_so():
+    """Legenda com vinte linhas vira parede de texto."""
+    fatias = macetes.fatias([(f"m{n}", 10 - n) for n in range(12)])
+
+    assert len(fatias) == macetes.MAXIMO_DE_FATIAS
+    assert fatias[-1].rotulo == macetes.ROTULO_DO_RESTO
+
+
+def test_o_resto_soma_o_que_ficou_de_fora():
+    fatias = macetes.fatias([("a", 10)] * 1 + [("b", 1)] * 10)
+    resto = fatias[-1]
+
+    assert resto.rotulo == macetes.ROTULO_DO_RESTO
+    assert resto.valor == 4, "as quatro menores somadas"
+
+
+def test_cada_fatia_tem_cor_propria():
+    fatias = macetes.fatias([(f"m{n}", 1) for n in range(5)])
+
+    assert len({f.cor for f in fatias}) == 5
+
+
+def test_valor_zerado_nao_vira_fatia():
+    """Fatia de 0% nao aparece no desenho e so ocupa linha na legenda."""
+    fatias = macetes.fatias([("tem", 5), ("nao tem", 0)])
+
+    assert [f.rotulo for f in fatias] == ["tem"]
+
+
+def test_lista_vazia_nao_quebra():
+    assert macetes.fatias([]) == []
+
+
+def test_o_numero_por_prova_acompanha_a_fatia():
+    """A fatia e a participacao no total; o numero ao lado e quanto a materia
+    cai por prova. Os dois nao andam juntos porque nem toda materia cai em
+    todo cargo."""
+    fatias = macetes.fatias([("Portugues", 1000)], extras={"Portugues": 9.0})
+
+    assert fatias[0].por_caderno == 9.0
+
+
+def test_a_tela_desenha_a_pizza(cliente):
+    _semear(*[
+        _questao(i, enunciado=f"Sobre a crase na frase {i}.", impressao=f"i{i}",
+                 prova_url=f"https://x.test/p{i}.pdf")
+        for i in range(3)
+    ])
+
+    texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
+
+    assert "conic-gradient" in texto
+    assert "legenda-pizza" in texto

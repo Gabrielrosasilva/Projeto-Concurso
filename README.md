@@ -547,6 +547,16 @@ inteiro misturava bancas e nao respondia pergunta nenhuma.
 Quando o tema aponta para uma materia so - "crase" e Lingua Portuguesa em 56
 das 59 questoes -, a pagina responde a pergunta seguinte com dois graficos:
 
+Os dois sao **graficos de pizza**, desenhados com `conic-gradient` no CSS -
+sem JavaScript, como o resto da tela. Acima de oito categorias a legenda vira
+uma parede de texto, entao o que sobra e somado numa fatia "outros".
+
+Um cuidado que mudou o grafico: a fatia e a **participacao no total de
+questoes**, e nao a media por prova. Somar "questoes por caderno" de materias
+que caem em provas diferentes daria 81 numa prova de 40 - Temas de Educacao
+sao 10 questoes, mas so em prova de professor. O numero por prova continua na
+legenda, ao lado da porcentagem, que e onde ele ajuda.
+
 1. **quantas questoes caem numa prova**, materia por materia. Na FEPESE:
    Conhecimentos Especificos 19,2 por caderno, Lingua Portuguesa 9,0,
    Conhecimentos Gerais 6,4, Informatica 5,2, Raciocinio Logico 5,0. A divisao
