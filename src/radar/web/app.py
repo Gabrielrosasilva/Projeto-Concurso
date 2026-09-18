@@ -345,3 +345,35 @@ def previsao(request: Request):
         name="previsao.html",
         context={"previsoes": servico.previsao_de_abertura()},
     )
+
+
+# --- macetes: o costume da banca --------------------------------------------
+
+@app.get("/macetes", response_class=HTMLResponse)
+def macetes(
+    request: Request,
+    banca: str | None = None,
+    cargo: str | None = None,
+    tema: str | None = None,
+):
+    """O que a banca costuma cobrar no recorte pedido.
+
+    Os tres campos chegam como texto, e vazio vira None: formulario HTML manda
+    todo campo, inclusive o que ficou em branco.
+    """
+    banca = (banca or "").strip() or None
+    cargo = (cargo or "").strip() or None
+    tema = (tema or "").strip() or None
+
+    return templates.TemplateResponse(
+        request=request,
+        name="macetes.html",
+        context={
+            "analise": servico.analisar_banca(banca=banca, cargo=cargo, tema=tema),
+            "bancas": servico.bancas_com_questao(),
+            "banca": banca,
+            "cargo": cargo,
+            "tema": tema,
+            "procurou": bool(banca or cargo or tema),
+        },
+    )

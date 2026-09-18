@@ -531,6 +531,51 @@ gravado - inclusive o municipio confirmado pela pagina do edital, porque
 trocar a grafia nao e reclassificar. Municipio de fora de SC volta como veio:
 o YAML so tem municipio catarinense, e inventar grafia seria pior.
 
+## Macetes: o costume da banca
+
+Na web, no link **Macetes**. Voce escolhe a banca, escreve o cargo e o tema, e
+a pagina varre as provas do acervo.
+
+O tema e **texto livre** de proposito: escreva `crase` ou `primeiros socorros`,
+e nao o nome exato da materia. A busca olha a materia E o enunciado, e ignora
+acento, porque o nome que a banca usa ("Lingua Portuguesa") raramente e a
+palavra que voce pensa ("crase").
+
+O que a pagina mostra, tudo por contagem:
+
+- **o que mais cai** no recorte, materia por materia;
+- **como a banca pergunta**, com o conselho pratico de cada forma. Pedir a
+  INCORRETA (4,0% das questoes) e o jeito classico de fazer quem le rapido
+  marcar a alternativa verdadeira e errar;
+- **as questoes que ela repete**, com em quantos cadernos cada uma apareceu.
+  Sao as que mais valem estudar;
+- **as palavras que mais aparecem**, que e o mais perto de "assunto" que da
+  para chegar so contando;
+- **sobre o chute**: a distribuicao da letra correta.
+
+### Duas coisas que os dados corrigiram
+
+**O "chute na C" nao existe nesta banca.** No acervo inteiro as cinco letras
+ficam entre 19,5% e 20,5%. Nao ha letra mais provavel.
+
+**A repeticao mentia nas contas.** Buscando "crase" saem 59 questoes, mas so
+**7 enunciados diferentes** - a mesma questao aparece em 38 cadernos, e a
+resposta dela e "d". Contando todas, o gabarito dizia "letra d em 64%", e a
+conclusao seria chutar d. Agora gabarito e palavras contam **uma vez por
+enunciado**; materia e forma de perguntar contam todas, porque questao
+repetida pesa mesmo mais na prova que voce vai fazer.
+
+Junto veio um minimo de amostra: **abaixo de 50 enunciados diferentes a pagina
+nao afirma nada** sobre a letra. Com 7 questoes, o que parece tendencia e
+sorteio.
+
+### O que ainda nao esta la
+
+Pegadinha especifica e macete de memorizacao **nao saem de contagem**: alguem
+precisa ler as questoes e perceber o padrao. Isso fica para quando a leitura
+por IA entrar. Ate la a pagina nao inventa: tudo o que ela mostra da para
+conferir abrindo as provas do acervo.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

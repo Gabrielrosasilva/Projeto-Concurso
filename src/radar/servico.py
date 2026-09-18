@@ -8,7 +8,13 @@ from statistics import median
 from sqlalchemy import case, func, select
 
 from radar import avisos
-from radar import detalhes, provas, questoes as leitor_de_questoes, regioes
+from radar import (
+    detalhes,
+    macetes,
+    provas,
+    questoes as leitor_de_questoes,
+    regioes,
+)
 from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
@@ -1593,3 +1599,48 @@ def previsao_de_abertura(
     ordem = {"atrasado": 0, "esperado": 1, "em_dia": 2}
     previsoes.sort(key=lambda p: (ordem[p.situacao], -p.anos_parado))
     return previsoes
+
+
+# --- macetes: o costume da banca (fase 7) -----------------------------------
+
+def bancas_com_questao() -> list[tuple[str, int]]:
+    """[(banca, quantas questoes)]. Hoje so a FEPESE, mas a tela ja pergunta."""
+    criar_tabelas()
+    consulta = (
+        select(QuestaoDeProva.banca, func.count())
+        .where(QuestaoDeProva.banca.is_not(None))
+        .group_by(QuestaoDeProva.banca)
+        .order_by(func.count().desc())
+    )
+    with sessao() as s:
+        return list(s.execute(consulta))
+
+
+def analisar_banca(
+    banca: str | None = None,
+    cargo: str | None = None,
+    tema: str | None = None,
+) -> macetes.Analise:
+    """O que a banca costuma cobrar no recorte pedido.
+
+    O `tema` e texto livre de proposito: eu escrevo "crase" ou "primeiros
+    socorros", e nao o nome exato da materia. A busca olha a materia E o
+    enunciado, sem acento, porque o nome que a banca usa ("Lingua Portuguesa")
+    raramente e a palavra que eu penso ("crase").
+    """
+    criar_tabelas()
+    consulta = select(QuestaoDeProva)
+
+    if banca:
+        consulta = consulta.where(QuestaoDeProva.banca.ilike(f"%{banca}%"))
+    if cargo:
+        consulta = consulta.where(QuestaoDeProva.cargo.ilike(f"%{cargo}%"))
+    if tema:
+        procurado = f"%{_sem_acento(tema)}%"
+        consulta = consulta.where(
+            func.sem_acento(func.coalesce(QuestaoDeProva.materia, "")).ilike(procurado)
+            | func.sem_acento(QuestaoDeProva.enunciado).ilike(procurado)
+        )
+
+    with sessao() as s:
+        return macetes.analisar(list(s.scalars(consulta)))

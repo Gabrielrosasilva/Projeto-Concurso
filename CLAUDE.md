@@ -110,6 +110,8 @@ src/radar/
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
 ├── questoes.py     separa o caderno em questoes, com materia e gabarito
+├── macetes.py      conta o costume da banca: forma de perguntar, questao
+│                repetida, palavra frequente, letra do gabarito
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer: coletar, listar, favoritar, avisar, web
 ├── collectors/
@@ -242,6 +244,16 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   virava absurdo: Tubarao, com 2011 e 2026 conhecidos, dava "proximo em 2041";
 - a previsao carrega sempre o motivo e os anos que a embasam, e a tela avisa o
   que o historico NAO cobre (outra banca entre 2021 e 2025);
+- na aba Macetes, gabarito e palavras contam UMA VEZ POR ENUNCIADO, e
+  materia e forma de perguntar contam todas. Buscando "crase" saem 59 questoes
+  e so 7 enunciados: a mesma aparece em 38 cadernos e a resposta e "d", o que
+  dava "letra d em 64%" e levaria a chutar d;
+- abaixo de 50 enunciados diferentes a pagina NAO afirma nada sobre a letra do
+  gabarito. Com 7 questoes o que parece tendencia e sorteio;
+- no acervo inteiro as cinco letras ficam entre 19,5% e 20,5%: o "chute na C"
+  nao existe na FEPESE, e a tela diz isso;
+- a aba Macetes nao inventa: pegadinha especifica e macete de memorizacao nao
+  saem de contagem, e ficam de fora ate a leitura por IA entrar;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -278,6 +290,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 5    PRONTA: modo simulado na web, com acerto por MATERIA. Por assunto
      fino depende da fase 4 terminar
 6    PRONTA: previsao de abertura por municipio, na web e na CLI
+7    PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
+     parte que so a IA faz: pegadinha especifica e macete de memorizacao
 ```
 
 ## Fontes de dados
