@@ -30,39 +30,51 @@
     }
 
     *{box-sizing:border-box}
-    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
+    body{margin:0;padding:0;background:var(--fundo);color:var(--texto);
          font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
-    .subtitulo{margin:0 0 1.25rem;color:var(--suave);font-size:.9rem}
 
-    /* Mural a esquerda, lista a direita. No celular vira uma coluna so, com o
-       mural em cima: os favoritos sao o que eu quero ver primeiro. */
-    .quadro{max-width:1240px;margin:0 auto;display:grid;gap:1.5rem;
-            grid-template-columns:300px minmax(0,1fr);align-items:start}
-    /* minmax(0,1fr) e nao 1fr: `1fr` sozinho nao encolhe abaixo do conteudo
+    /* O mural e uma faixa colada na borda esquerda da janela; a lista fica no
+       resto e se centraliza sozinha. No celular vira uma coluna so, com o
+       mural em cima - os favoritos sao o que eu quero ver primeiro.
+       minmax(0,1fr) e nao 1fr: `1fr` sozinho nao encolhe abaixo do conteudo
        minimo da coluna, e um titulo longo poderia furar a largura da tela. */
-    @media (max-width:860px){ .quadro{grid-template-columns:minmax(0,1fr)} }
+    .quadro{display:grid;grid-template-columns:340px minmax(0,1fr);
+            align-items:start}
+    @media (max-width:900px){ .quadro{grid-template-columns:minmax(0,1fr)} }
     .mural,main{min-width:0}
+
+    main{padding:1.75rem 1.25rem 4rem;max-width:920px;margin:0 auto;width:100%}
+    /* O titulo fica sobre a lista, nao sobre o mural. */
+    .cabecalho{text-align:center;margin-bottom:1.5rem}
+    h1{margin:0 0 .2rem;font-size:1.7rem;letter-spacing:-.02em}
+    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
+
     /* titulo longo sem espaco (URL, nome comprido) nao pode furar a coluna */
     .titulo,.fixado a{overflow-wrap:anywhere}
 
     /* ----------------------------------------------------------- mural --- */
-    .mural{position:sticky;top:1rem}
-    .mural h2{font-size:.95rem;margin:0 0 .6rem;display:flex;align-items:center;
+    .mural{position:sticky;top:0;align-self:stretch;min-height:100vh;
+      padding:1.75rem 1.1rem 2rem;background:var(--cartao);
+      border-right:1px solid var(--borda)}
+    @media (max-width:900px){
+      .mural{position:static;min-height:0;border-right:0;
+        border-bottom:1px solid var(--borda)}
+    }
+    .mural h2{font-size:1rem;margin:0 0 .75rem;display:flex;align-items:center;
       gap:.4rem}
     .mural h2 .n{background:var(--estrela-fraca);color:var(--estrela);
       font-size:.75rem;padding:.05rem .45rem;border-radius:999px}
     .mural ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem;
       grid-template-columns:minmax(0,1fr)}
     .fixado{background:var(--cartao);border:1px solid var(--borda);
-      border-left:4px solid var(--remoto);border-radius:10px;padding:.6rem .7rem}
+      border-left:4px solid var(--remoto);border-radius:10px;padding:.75rem .85rem}
     .fixado.nucleo{border-left-color:var(--nucleo);background:var(--nucleo-fraco)}
     .fixado.proximo{border-left-color:var(--proximo);background:var(--proximo-fraco)}
     .fixado.indefinida{border-left-color:var(--indef);background:var(--indef-fraco)}
     .fixado a{color:var(--texto);text-decoration:none;font-weight:600;
-      font-size:.84rem;display:block;margin-bottom:.35rem}
+      font-size:.9rem;display:block;margin-bottom:.4rem}
     .fixado a:hover{text-decoration:underline}
-    .fixado .linha{font-size:.75rem;color:var(--suave);display:block}
+    .fixado .linha{font-size:.8rem;color:var(--suave);display:block}
     .fixado .valor{font-weight:700;color:var(--texto)}
     .fixado .fecha{color:var(--prazo);font-weight:700}
     .fixado .topo-fixado{display:flex;gap:.4rem;align-items:flex-start}
@@ -258,9 +270,6 @@
   </li>
 {% endmacro %}
 
-<h1>Radar de Concursos</h1>
-<p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
-
 <div class="quadro">
 
   {# ------------------------------------------------------ mural ---------- #}
@@ -315,6 +324,11 @@
 
   {# ------------------------------------------------------ lista ---------- #}
   <main>
+    <header class="cabecalho">
+      <h1>Radar de Concursos</h1>
+      <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
+    </header>
+
     <nav>
       <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/">
         Perto de mim <span class="n">{{ perto }}</span>
