@@ -13,7 +13,12 @@ from rich.table import Table
 
 from radar import acervo, avisos, config, servico
 from radar import provas as _provas
-from radar.util import dias_ate, formatar_data
+from radar.util import (
+    dias_ate,
+    formatar_data,
+    porta_ocupada,
+    primeira_porta_livre,
+)
 
 
 def _prazo(quando) -> str:
@@ -513,6 +518,22 @@ def web(
 ) -> None:
     """Sobe a interface web em http://localhost:8000"""
     import uvicorn
+
+    if porta_ocupada(host, porta):
+        # O erro cru do uvicorn (winerror 10048) nao diz o que fazer. Quase
+        # sempre e um servidor que ficou aberto noutra janela.
+        livre = primeira_porta_livre(host, porta + 1)
+        console.print(
+            f"[red]A porta {porta} ja esta em uso.[/]\n"
+            f"Costuma ser um [bold]radar web[/] aberto em outra janela - "
+            f"procure a janela e feche com Ctrl+C."
+        )
+        if livre:
+            console.print(
+                f"\nSe preferir subir outro agora, use uma porta livre:\n"
+                f"  [bold]radar web --porta {livre}[/]"
+            )
+        raise typer.Exit(code=1)
 
     console.print(f"\nRadar no ar em [bold cyan]http://localhost:{porta}[/]")
     if host == "0.0.0.0":  # noqa: S104 - escolha explicita do usuario

@@ -39,6 +39,23 @@ radar listar --todos               # tudo, inclusive o que e longe
 radar web                          # http://localhost:8000
 ```
 
+### Se a porta ja estiver em uso
+
+```
+A porta 8000 ja esta em uso.
+Costuma ser um radar web aberto em outra janela - procure a janela e feche
+com Ctrl+C.
+```
+
+E quase sempre um servidor que ficou aberto numa janela esquecida. Duas
+saidas: feche a outra janela com Ctrl+C, ou suba noutra porta.
+
+```bat
+radar web --porta 8001
+```
+
+O proprio comando sugere uma porta livre quando isso acontece.
+
 ### Se o comando `radar` nao for reconhecido
 
 ```

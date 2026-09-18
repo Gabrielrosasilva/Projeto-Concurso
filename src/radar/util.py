@@ -78,3 +78,28 @@ def converter_valor(texto: str | None) -> float | None:
     except ValueError:
         return None
     return valor if valor >= 0 else None
+
+
+def porta_ocupada(host: str, porta: int) -> bool:
+    """Alguem ja esta escutando nesse endereco?
+
+    Perguntar antes de subir o servidor permite explicar o problema em uma
+    linha, em vez de deixar o uvicorn estourar com o erro 10048 do Windows,
+    que nao diz o que fazer.
+    """
+    import socket
+
+    # host 0.0.0.0 significa "todas as interfaces"; para TESTAR, vale o local
+    alvo = "127.0.0.1" if host in ("0.0.0.0", "") else host
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as tomada:
+        tomada.settimeout(0.4)
+        return tomada.connect_ex((alvo, porta)) == 0
+
+
+def primeira_porta_livre(host: str, inicio: int, tentativas: int = 20) -> int | None:
+    """A primeira porta livre a partir de `inicio`."""
+    for porta in range(inicio, inicio + tentativas):
+        if not porta_ocupada(host, porta):
+            return porta
+    return None

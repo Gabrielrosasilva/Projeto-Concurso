@@ -64,3 +64,44 @@ def test_valor_invalido_vira_none(digitado):
     """Quem digitou errado nao pode derrubar a pagina."""
     from radar.util import converter_valor
     assert converter_valor(digitado) is None
+
+
+# --- porta ocupada ----------------------------------------------------------
+
+def test_porta_livre_e_porta_ocupada():
+    """O uvicorn estoura com "[winerror 10048] normalmente e permitida apenas
+    uma utilizacao de cada endereco", que nao diz o que fazer. Perguntar antes
+    permite explicar em uma linha."""
+    import socket
+
+    from radar.util import porta_ocupada
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
+        servidor.bind(("127.0.0.1", 0))      # o sistema escolhe uma livre
+        servidor.listen(1)
+        porta = servidor.getsockname()[1]
+
+        assert porta_ocupada("127.0.0.1", porta) is True
+
+    # fora do bloco a tomada ja fechou
+    assert porta_ocupada("127.0.0.1", porta) is False
+
+
+def test_primeira_porta_livre_pula_a_ocupada():
+    import socket
+
+    from radar.util import primeira_porta_livre
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
+        servidor.bind(("127.0.0.1", 0))
+        servidor.listen(1)
+        porta = servidor.getsockname()[1]
+
+        assert primeira_porta_livre("127.0.0.1", porta) != porta
+
+
+def test_host_aberto_e_testado_no_local():
+    """0.0.0.0 significa "todas as interfaces"; para TESTAR vale o 127.0.0.1."""
+    from radar.util import porta_ocupada
+
+    assert porta_ocupada("0.0.0.0", 1) is False
