@@ -22,7 +22,8 @@ dependencies = [
     # ao pre-carregar links)
     "python-multipart==0.0.20",
     "python-dotenv==1.0.1",
-    "PyYAML==6.0.2",            # config/perfil.yml e config/regioes.yml
+    "PyYAML==6.0.2",
+    "pypdf==6.19.0",           # le o texto do PDF da prova            # config/perfil.yml e config/regioes.yml
     # Base de fusos horarios. O Linux tem a dele em /usr/share/zoneinfo;
     # o Windows nao tem nenhuma, e sem isto o ZoneInfo quebra la.
     # E o UNICO nao preso em versao exata, de proposito: e tabela de dados,

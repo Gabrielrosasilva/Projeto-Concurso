@@ -16,6 +16,7 @@ from sqlalchemy import (
     String,
     Text,
     TypeDecorator,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -156,3 +157,48 @@ class Concurso(Base):
 
     def __repr__(self) -> str:
         return f"<Concurso {self.uf or '--'} {self.titulo[:50]!r}>"
+
+
+class QuestaoDeProva(Base):
+    """Uma questao objetiva tirada de um caderno de prova.
+
+    Tabela separada dos concursos de proposito: uma prova rende 40 questoes, e
+    misturar as duas coisas na mesma tabela nao ajudaria ninguem.
+    """
+
+    __tablename__ = "questoes"
+    __table_args__ = (
+        # A mesma questao do mesmo caderno nao entra duas vezes, e isso
+        # permite rodar a extracao de novo sem duplicar nada.
+        UniqueConstraint("prova_url", "numero", name="uq_questao_prova_numero"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    # De onde veio
+    prova_url: Mapped[str] = mapped_column(String(800), index=True)
+    concurso_url: Mapped[str | None] = mapped_column(String(800), nullable=True)
+    banca: Mapped[str | None] = mapped_column(String(120), index=True, nullable=True)
+    ano: Mapped[int | None] = mapped_column(Integer, index=True, nullable=True)
+    municipio: Mapped[str | None] = mapped_column(String(150), nullable=True)
+    cargo: Mapped[str | None] = mapped_column(String(300), index=True, nullable=True)
+
+    # A questao
+    numero: Mapped[int] = mapped_column(Integer)
+    materia: Mapped[str | None] = mapped_column(String(160), index=True, nullable=True)
+    enunciado: Mapped[str] = mapped_column(Text)
+    alternativas: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    resposta: Mapped[str | None] = mapped_column(String(1), nullable=True)
+
+    # Hash do enunciado. Questao repetida entre provas e o padrao mais forte
+    # que existe, e e por aqui que se acha.
+    impressao: Mapped[str] = mapped_column(String(32), index=True)
+
+    # Assunto fino dentro da materia ("Direito Penal", "Primeiros Socorros").
+    # Vazio por enquanto: e o passo seguinte da fase 4.
+    assunto: Mapped[str | None] = mapped_column(String(120), index=True, nullable=True)
+
+    extraida_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<Questao {self.numero} {self.materia} {self.enunciado[:40]!r}>"

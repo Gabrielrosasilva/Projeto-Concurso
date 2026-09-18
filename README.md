@@ -253,6 +253,60 @@ Uma limitacao que a tela avisa: o salario e lido do **titulo** do post, e
 filtro. A pagina mostra quantos sao e oferece o link para ver sem o filtro -
 entre eles esta, por exemplo, o concurso de 300 vagas de Sao Jose.
 
+## O padrao da banca
+
+```bash
+radar questoes              # separa os cadernos do acervo em questoes
+radar padrao                # o que a banca mais cobra, por materia
+radar padrao --cargo Guarda # so nos cargos que me interessam
+radar repetidas             # questoes que a banca reaproveitou
+```
+
+`radar questoes` nao vai a internet: trabalha nos PDFs que `radar provas` ja
+baixou.
+
+O caderno da FEPESE tem estrutura regular, e dois detalhes dela pouparam muito
+trabalho:
+
+1. **a materia vem da propria banca**, em cabecalho de secao ("Lingua
+   Portuguesa 10 questoes"). Nao precisa adivinhar o assunto de cada questao;
+2. **a alternativa correta esta marcada no texto**. O caderno usa um simbolo
+   de caixa marcada que o extrator le como `Check-square`, contra `SQUARE` nas
+   demais. Prova e gabarito no mesmo arquivo.
+
+### O que saiu do acervo
+
+125 cadernos renderam **5.021 questoes**, todas com materia e gabarito:
+
+| materia | questoes | peso |
+|---|---|---|
+| Conhecimentos Especificos | 2.396 | 47,7% |
+| Lingua Portuguesa | 1.048 | 20,9% |
+| Conhecimentos Gerais | 754 | 15,0% |
+| Nocoes de Informatica | 309 | 6,2% |
+| Raciocinio Logico | 200 | 4,0% |
+| Temas de Educacao | 180 | 3,6% |
+
+E o achado que mais vale: dos 5.021, so **1.815 enunciados sao diferentes**.
+A FEPESE reaproveita questao entre provas, e muito - uma delas aparece em **44
+cadernos**. `radar repetidas` lista as campeas, que sao as que mais valem
+estudar.
+
+### Tres coisas que o PDF real ensinou
+
+**A ordem do texto nao e a ordem das questoes.** O caderno e impresso em duas
+colunas, e o extrator leu 1 a 15, depois 21 e 22, e so entao 16 a 20. A
+primeira versao exigia ordem e parava na questao 20.
+
+**O enunciado pode ter lista numerada dentro** ("1. ... 2. ... 3."). Partir dos
+numeros quebrava a questao no meio e perdia as alternativas dela. A leitura
+agora parte das ALTERNATIVAS: cada rodada de a ate e fecha uma questao.
+
+**Cabecalho e rodape grudavam na ultima alternativa.** Alem dos padroes obvios
+("Pagina 7"), o caderno repete um codigo em toda pagina ("AM2 Educador
+Social"). Em vez de adivinhar padrao por padrao, o que se repete em toda
+pagina e tratado como mobilia. A sujeira caiu de 5,1% para 1,1% das questoes.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

@@ -246,6 +246,85 @@ def baixar_provas(
 
 
 @app.command()
+def questoes(
+    limite: int = typer.Option(30, help="Quantas provas ler nesta rodada"),
+) -> None:
+    """Separa os cadernos do acervo em questoes, com materia e gabarito.
+
+    Nao vai a internet: trabalha nos PDFs que `radar provas` ja baixou.
+    """
+    with console.status("Lendo os cadernos..."):
+        resultado = servico.extrair_questoes(limite=limite)
+
+    console.print(f"[green]{resultado}[/]")
+    total = servico.contar_questoes()
+    if total:
+        console.print(f"\nBanco de questoes: [bold]{total}[/] questao(oes)")
+
+
+@app.command()
+def padrao(
+    cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
+    banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),
+    ano: int = typer.Option(None, help="Filtra por ano"),
+) -> None:
+    """O que a banca mais cobra: incidencia por materia.
+
+    E a resposta que motivou montar o acervo.
+    """
+    linhas = servico.incidencia_por_materia(cargo=cargo, banca=banca, ano=ano)
+
+    if not linhas:
+        console.print(
+            "[yellow]Sem questao no banco com esses filtros.[/] "
+            "Rode [bold]radar provas[/] e depois [bold]radar questoes[/]."
+        )
+        return
+
+    total = sum(n for _, n in linhas)
+    titulo = "Incidencia por materia"
+    if cargo:
+        titulo += f" - cargo contendo \"{cargo}\""
+
+    tabela = Table(title=f"{titulo} ({total} questoes)")
+    tabela.add_column("Materia")
+    tabela.add_column("Questoes", justify="right")
+    tabela.add_column("Peso", justify="right")
+    tabela.add_column("", width=22)
+
+    for materia, quantas in linhas:
+        fatia = quantas / total
+        tabela.add_row(
+            materia,
+            str(quantas),
+            f"{fatia*100:.1f}%",
+            "#" * max(1, round(fatia * 20)),
+        )
+
+    console.print(tabela)
+
+
+@app.command()
+def repetidas(
+    minimo: int = typer.Option(2, help="Aparecer em pelo menos N provas"),
+    limite: int = typer.Option(15, help="Quantas mostrar"),
+) -> None:
+    """Questoes que a banca reaproveitou em mais de uma prova.
+
+    Banca que repete entrega o padrao de graca: sao as que mais valem estudar.
+    """
+    achadas = servico.questoes_repetidas(minimo=minimo)
+
+    if not achadas:
+        console.print("Nenhuma questao repetida ate agora.")
+        return
+
+    console.print(f"[bold]{len(achadas)}[/] questao(oes) apareceram em {minimo}+ provas:\n")
+    for _, vezes, enunciado in achadas[:limite]:
+        console.print(f"[bold green]{vezes}x[/] {enunciado[:100]}")
+
+
+@app.command()
 def favoritar(
     concurso_id: int = typer.Argument(..., help="O id que aparece em `radar listar`"),
     remover: bool = typer.Option(False, "--remover", help="Tira dos favoritos"),

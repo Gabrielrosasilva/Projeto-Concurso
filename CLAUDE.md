@@ -107,6 +107,7 @@ src/radar/
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
+├── questoes.py     separa o caderno em questoes, com materia e gabarito
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer: coletar, listar, favoritar, avisar, web
 ├── collectors/
@@ -138,6 +139,13 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   maquina nao acha o arquivo;
 - o acervo comeca pelo concurso ENCERRADO e perto de casa: encerrado e o
   que tem prova publicada, e perto e o padrao de banca que me serve;
+- a materia de cada questao vem do cabecalho de secao do proprio caderno,
+  e o gabarito vem marcado no texto (Check-square). Nada disso e adivinhado;
+- a leitura do caderno parte das ALTERNATIVAS, nunca dos numeros: a ordem
+  do texto e embaralhada pelas duas colunas, e o enunciado pode ter lista
+  numerada dentro;
+- linha que se repete em toda pagina e mobilia e sai do texto. Foi assim
+  que a sujeira na ultima alternativa caiu de 5,1% para 1,1%;
 - concurso municipal de outro estado e `remoto`, nao `indefinida`: prova de
   municipio de SP e aplicada em SP. `indefinida` fica para quem pode mesmo
   aplicar em Florianopolis (federal, nacional, ou sem UF);
@@ -210,7 +218,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
      Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
      parecida - mesma banca e mesmo cargo em outro lugar)
-4    padrao da banca: questao a questao, incidencia por assunto
+4    PARCIAL: 5.021 questoes extraidas, com materia e gabarito, e
+     incidencia por materia funcionando. Falta: classificar o ASSUNTO
+     fino dentro de Conhecimentos Especificos (Direito Penal, Primeiros
+     Socorros...), que e onde entra a API da Claude
 5    modo simulado com acerto por assunto
 6    concurso atrasado + validade vencendo (previsao de abertura)
 ```

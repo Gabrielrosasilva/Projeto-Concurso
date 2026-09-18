@@ -7,14 +7,14 @@ from datetime import timedelta
 from sqlalchemy import func, select
 
 from radar import avisos
-from radar import detalhes, provas, regioes
+from radar import detalhes, provas, questoes as leitor_de_questoes, regioes
 from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
 from radar.collectors.fepese import Fepese
 from radar import config
 from radar.db import criar_tabelas, sessao
-from radar.models import Concurso, agora
+from radar.models import Concurso, QuestaoDeProva, agora
 
 log = logging.getLogger(__name__)
 
@@ -885,3 +885,139 @@ def baixar_do_manifesto(forcar: bool = False) -> dict[str, int]:
             contagem["falhas"] += 1
 
     return contagem
+
+
+# --- padrao da banca (fase 4) -----------------------------------------------
+
+@dataclass
+class ResultadoExtracao:
+    provas: int = 0
+    questoes: int = 0
+    repetidas: int = 0
+    vazias: int = 0
+
+    def __str__(self) -> str:
+        if not self.provas:
+            return "Nenhuma prova nova para ler."
+        texto = f"{self.provas} prova(s) lida(s), {self.questoes} questao(oes)"
+        if self.repetidas:
+            texto += f", {self.repetidas} ja vista(s) em outra prova"
+        if self.vazias:
+            texto += f", {self.vazias} sem questao"
+        return texto
+
+
+def _provas_por_ler(limite: int) -> list[dict]:
+    """Provas do manifesto que ainda nao viraram questao no banco."""
+    with sessao() as s:
+        ja_lidas = set(s.scalars(select(QuestaoDeProva.prova_url).distinct()))
+
+    pendentes = [
+        registro for registro in provas.carregar_manifesto()
+        if registro.get("tipo") == provas.PROVA
+        and registro.get("caminho")
+        and registro["url"] not in ja_lidas
+    ]
+    return pendentes[:limite]
+
+
+def extrair_questoes(limite: int = 30) -> ResultadoExtracao:
+    """Le os cadernos do acervo e guarda as questoes.
+
+    Nao vai a internet: trabalha em cima dos PDFs que `radar provas` ja baixou.
+    """
+    criar_tabelas()
+    resultado = ResultadoExtracao()
+
+    pendentes = _provas_por_ler(limite)
+    if not pendentes:
+        return resultado
+
+    for registro in pendentes:
+        caminho = config.diretorio_dados() / registro["caminho"]
+        if not caminho.exists():
+            continue
+
+        lidas = leitor_de_questoes.ler_prova(caminho)
+        resultado.provas += 1
+        if not lidas:
+            resultado.vazias += 1
+            continue
+
+        with sessao() as s:
+            conhecidas = set(s.scalars(select(QuestaoDeProva.impressao)))
+
+            for questao in lidas:
+                if questao.impressao in conhecidas:
+                    resultado.repetidas += 1
+                conhecidas.add(questao.impressao)
+
+                s.add(QuestaoDeProva(
+                    prova_url=registro["url"],
+                    concurso_url=registro.get("concurso_url"),
+                    banca=registro.get("banca"),
+                    ano=registro.get("ano"),
+                    municipio=registro.get("municipio"),
+                    cargo=registro.get("cargo"),
+                    numero=questao.numero,
+                    materia=questao.materia,
+                    enunciado=questao.enunciado,
+                    alternativas=questao.alternativas,
+                    resposta=questao.resposta,
+                    impressao=questao.impressao,
+                ))
+                resultado.questoes += 1
+
+    return resultado
+
+
+def incidencia_por_materia(
+    cargo: str | None = None, banca: str | None = None, ano: int | None = None
+) -> list[tuple[str, int]]:
+    """Quantas questoes de cada materia, da mais cobrada para a menos.
+
+    E a resposta para "o que a banca mais cobra", que e o motivo de o acervo
+    existir.
+    """
+    criar_tabelas()
+    consulta = (
+        select(QuestaoDeProva.materia, func.count())
+        .group_by(QuestaoDeProva.materia)
+        .order_by(func.count().desc())
+    )
+    if cargo:
+        consulta = consulta.where(QuestaoDeProva.cargo.ilike(f"%{cargo}%"))
+    if banca:
+        consulta = consulta.where(QuestaoDeProva.banca.ilike(f"%{banca}%"))
+    if ano:
+        consulta = consulta.where(QuestaoDeProva.ano == ano)
+
+    with sessao() as s:
+        return [(materia or "sem materia", n) for materia, n in s.execute(consulta)]
+
+
+def questoes_repetidas(minimo: int = 2) -> list[tuple[str, int, str]]:
+    """Enunciados que aparecem em mais de uma prova.
+
+    Banca que reaproveita questao entrega o padrao de graca: essas sao as que
+    mais valem estudar.
+    """
+    criar_tabelas()
+    consulta = (
+        select(
+            QuestaoDeProva.impressao,
+            func.count().label("vezes"),
+            func.min(QuestaoDeProva.enunciado),
+        )
+        .group_by(QuestaoDeProva.impressao)
+        .having(func.count() >= minimo)
+        .order_by(func.count().desc())
+    )
+    with sessao() as s:
+        return [(imp, vezes, enunciado) for imp, vezes, enunciado in s.execute(consulta)]
+
+
+def contar_questoes() -> int:
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(select(func.count()).select_from(QuestaoDeProva)) or 0
