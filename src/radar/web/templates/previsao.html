@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Previsao de abertura &middot; Radar de Concursos</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
+      --borda:#e3e6eb; --azul:#1d4ed8;
+      --atrasado:#be123c; --atrasado-fraco:#ffe4e9;
+      --esperado:#b45309; --esperado-fraco:#fdeed3;
+      --em-dia:#047857; --em-dia-fraco:#d3f2e4;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
+        --borda:#262b35; --azul:#7aa2ff;
+        --atrasado:#fb7185; --atrasado-fraco:#2c1219;
+        --esperado:#fbbf24; --esperado-fraco:#2e2310;
+        --em-dia:#4ade80; --em-dia-fraco:#10291d;
+      }
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
+         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+    .pagina{max-width:820px;margin:0 auto}
+
+    header{text-align:center;margin-bottom:1.25rem}
+    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
+    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
+    .voltar{display:inline-block;margin-bottom:1rem;color:var(--azul);
+      text-decoration:none;font-size:.85rem}
+
+    .aviso{background:var(--cartao);border:1px solid var(--borda);border-radius:12px;
+      padding:.9rem 1.1rem;font-size:.85rem;color:var(--suave);margin-bottom:1.25rem}
+    .aviso b{color:var(--texto)}
+
+    h2{font-size:1rem;margin:1.5rem 0 .6rem;display:flex;align-items:center;gap:.5rem}
+    h2 .quantos{font-size:.78rem;font-weight:600;padding:.1rem .5rem;border-radius:999px}
+    h2.atrasado .quantos{background:var(--atrasado-fraco);color:var(--atrasado)}
+    h2.esperado .quantos{background:var(--esperado-fraco);color:var(--esperado)}
+    h2.em_dia .quantos{background:var(--em-dia-fraco);color:var(--em-dia)}
+
+    .lista{display:grid;gap:.6rem}
+    .item{background:var(--cartao);border:1px solid var(--borda);border-radius:10px;
+      padding:.85rem 1rem;border-left:3px solid var(--borda)}
+    .item.atrasado{border-left-color:var(--atrasado)}
+    .item.esperado{border-left-color:var(--esperado)}
+    .item.em_dia{border-left-color:var(--em-dia)}
+
+    .topo{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+      flex-wrap:wrap}
+    .municipio{font-weight:600}
+    .quando{font-size:.85rem;color:var(--suave);white-space:nowrap}
+    .motivo{font-size:.83rem;color:var(--suave);margin:.35rem 0 0}
+    .anos{font-size:.76rem;color:var(--suave);margin:.3rem 0 0;
+      font-variant-numeric:tabular-nums}
+
+    .vazio{text-align:center;color:var(--suave);padding:2rem 1rem}
+  </style>
+</head>
+<body>
+<div class="pagina">
+
+  <a class="voltar" href="/">&larr; voltar ao radar</a>
+
+  <header>
+    <h1>Previsao de abertura</h1>
+    <p class="subtitulo">Onde vale ficar de olho agora, perto de casa</p>
+  </header>
+
+  <div class="aviso">
+    A conta: cada concurso vale por <b>ate 2 anos</b>, prorrogaveis por mais 2.
+    Dentro dessa faixa, quem manda e o ritmo do proprio municipio.
+    <br><br>
+    O que isto <b>nao sabe</b>: o historico vem da FEPESE (2006 a 2026) e do
+    feed de noticias (so 2026). Municipio que contratou outra banca entre 2021
+    e 2025 tem concurso que nao esta aqui, e aparece mais atrasado do que e.
+  </div>
+
+  {% if not previsoes %}
+    <div class="vazio">
+      <p>Nenhum municipio com historico ainda.</p>
+      <p>Rode <code>radar coletar</code>.</p>
+    </div>
+  {% endif %}
+
+  {% for grupo, titulo in [
+      ('atrasado', 'Atrasados'),
+      ('esperado', 'Na janela de agora'),
+      ('em_dia', 'Em dia')] %}
+    {% set doGrupo = previsoes | selectattr('situacao', 'equalto', grupo) | list %}
+    {% if doGrupo %}
+      <h2 class="{{ grupo }}">
+        {{ titulo }} <span class="quantos">{{ doGrupo | length }}</span>
+      </h2>
+      <div class="lista">
+        {% for p in doGrupo %}
+          <div class="item {{ grupo }}">
+            <div class="topo">
+              <span class="municipio">{{ p.municipio }}</span>
+              <span class="quando">
+                {% if grupo == 'em_dia' %}Proximo por volta de {{ p.proximo_previsto }}
+                {% else %}Previsto para {{ p.proximo_previsto }}{% endif %}
+              </span>
+            </div>
+            <p class="motivo">{{ p.motivo }}</p>
+            <p class="anos">Concursos conhecidos: {{ p.anos | join(', ') }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+
+</div>
+</body>
+</html>

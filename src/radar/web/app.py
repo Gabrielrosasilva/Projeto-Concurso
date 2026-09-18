@@ -333,3 +333,15 @@ def simulado_responder(
     """
     servico.responder(simulado_id, questao_id, letra)
     return RedirectResponse(f"/simulado/{simulado_id}", status_code=303)
+
+
+# --- previsao de abertura (fase 6) ------------------------------------------
+
+@app.get("/previsao", response_class=HTMLResponse)
+def previsao(request: Request):
+    """Onde vale ficar de olho: municipio parado ha tempo demais."""
+    return templates.TemplateResponse(
+        request=request,
+        name="previsao.html",
+        context={"previsoes": servico.previsao_de_abertura()},
+    )

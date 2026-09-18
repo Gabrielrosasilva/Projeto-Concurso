@@ -2,7 +2,8 @@
 import logging
 import re
 from dataclasses import dataclass
-from datetime import timedelta
+from datetime import date, timedelta
+from statistics import median
 
 from sqlalchemy import case, func, select
 
@@ -311,6 +312,12 @@ def reclassificar() -> dict[str, int]:
                 tipo=concurso.tipo if concurso.tipo != "desconhecido" else None,
             )
             _aplicar_classificacao(concurso, item)
+
+            # Grafia canonica mesmo no municipio confirmado pela pagina do
+            # edital: trocar "Palhoca" por "Palhoca" com cedilha nao e
+            # reclassificar, e escrever o mesmo municipio de um jeito so.
+            concurso.municipio = regioes.nome_canonico(concurso.municipio)
+
             contagem[concurso.relevancia] = contagem.get(concurso.relevancia, 0) + 1
 
     return contagem
@@ -623,7 +630,7 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
             # indefinida para nucleo.
             if achado.municipio and not concurso.municipio:
                 anel_antes = concurso.relevancia
-                concurso.municipio = achado.municipio
+                concurso.municipio = regioes.nome_canonico(achado.municipio)
                 # veio da pagina, que e fonte melhor que o titulo
                 concurso.municipio_confirmado = True
                 anel = regioes.anel_de(achado.municipio)
@@ -1460,3 +1467,129 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)
     return itens
+
+
+# --- previsao de abertura (fase 6) ------------------------------------------
+
+# A Constituicao da ao concurso validade de ate 2 anos, prorrogavel uma vez por
+# igual periodo. Isso da o chao e o teto da previsao: antes de 2 anos o orgao
+# ainda tem candidato aprovado na fila, e passados 4 quem precisa de gente tem
+# de abrir outro. O historico so escolhe DENTRO dessa faixa.
+#
+# Sem a faixa, buraco de cobertura virava previsao absurda: de Tubarao eu so
+# conheco 2011 e 2026, e a conta crua dizia "um a cada 15 anos, proximo em
+# 2041". O buraco e o que eu nao coletei, nao concurso que deixou de existir.
+VALIDADE_MINIMA = 2
+VALIDADE_MAXIMA = 4
+
+# Anos de folga aceitos antes de chamar de atrasado. Concurso escorrega:
+# licitacao da banca, orcamento, ano eleitoral.
+FOLGA = 1
+
+
+def _ano_do_concurso(concurso: Concurso) -> int | None:
+    """O ano do concurso, do titulo quando ele diz, senao da publicacao.
+
+    O titulo da FEPESE comeca com o ano ("2020 - Prefeitura Municipal de ..."),
+    e isso vale mais que a data do post: na migracao do site dela 345 concursos
+    antigos ficaram todos com data de dezembro de 2020.
+    """
+    achado = re.match(r"\s*((?:19|20)\d{2})\s*[-\u2013\u2014]", concurso.titulo)
+    if achado:
+        return int(achado.group(1))
+
+    # "Edital 003/2018" tambem diz o ano, e cobre o resto dos titulos antigos.
+    achado = re.search(r"[Ee]dital[^/]{0,30}/\s*((?:19|20)\d{2})", concurso.titulo)
+    if achado:
+        return int(achado.group(1))
+
+    return concurso.publicado_em.year if concurso.publicado_em else None
+
+
+@dataclass
+class PrevisaoDeAbertura:
+    municipio: str
+    anos: list[int]
+    ultimo_ano: int
+    proximo_previsto: int
+    situacao: str            # atrasado | esperado | em_dia
+    motivo: str
+
+    @property
+    def anos_parado(self) -> int:
+        return date.today().year - self.ultimo_ano
+
+
+def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
+    """Quando o proximo concurso deste municipio deve sair.
+
+    Com dois ou mais concursos no historico, vale o RITMO do proprio orgao: se
+    ele abre a cada tres anos, a conta e essa. Com um so, vale a validade legal
+    de 4 anos - nao da para tirar ritmo de um ponto.
+    """
+    ordenados = sorted(anos)
+    ultimo = ordenados[-1]
+    este_ano = date.today().year
+
+    if len(ordenados) >= 2:
+        vaos = [b - a for a, b in zip(ordenados, ordenados[1:]) if b > a]
+        # Mediana, e nao media: um unico buraco de cobertura no meio do
+        # historico puxa a media inteira e nao mexe na mediana.
+        bruto = round(median(vaos)) if vaos else VALIDADE_MAXIMA
+        intervalo = min(VALIDADE_MAXIMA, max(VALIDADE_MINIMA, bruto))
+        base = (f"{len(ordenados)} concursos conhecidos ({ordenados[0]} a "
+                f"{ultimo}), um a cada {intervalo} ano(s)")
+    else:
+        intervalo = VALIDADE_MAXIMA
+        base = f"um unico concurso conhecido ({ultimo}), sem ritmo para medir"
+
+    previsto = ultimo + intervalo
+    if este_ano > previsto + FOLGA:
+        situacao = "atrasado"
+        conclusao = f"passou {este_ano - previsto} ano(s) do previsto"
+    elif este_ano >= previsto - FOLGA:
+        situacao = "esperado"
+        conclusao = "e a janela de agora"
+    else:
+        situacao = "em_dia"
+        conclusao = f"so em {previsto}"
+
+    return PrevisaoDeAbertura(
+        municipio=municipio,
+        anos=ordenados,
+        ultimo_ano=ultimo,
+        proximo_previsto=previsto,
+        situacao=situacao,
+        motivo=f"{base}. O ultimo foi ha {este_ano - ultimo} ano(s), {conclusao}.",
+    )
+
+
+def previsao_de_abertura(
+    aneis: tuple[str, ...] = ("nucleo", "proximo"),
+) -> list[PrevisaoDeAbertura]:
+    """Municipios perto de casa, do mais atrasado para o menos.
+
+    Cuidado com o que isto NAO sabe: o historico vem da FEPESE (2006 a 2026) e
+    do feed (so 2026). Municipio que contratou outra banca entre 2021 e 2025
+    tem concurso que nao esta aqui, e vai aparecer mais atrasado do que e.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        concursos = list(s.scalars(
+            select(Concurso)
+            .where(Concurso.relevancia.in_(aneis))
+            .where(Concurso.tipo != "noticia")
+            .where(Concurso.municipio.is_not(None))
+        ))
+
+    anos_por_municipio: dict[str, set[int]] = {}
+    for concurso in concursos:
+        ano = _ano_do_concurso(concurso)
+        if ano:
+            anos_por_municipio.setdefault(concurso.municipio, set()).add(ano)
+
+    previsoes = [_prever(m, anos) for m, anos in anos_por_municipio.items()]
+    # Atrasado primeiro, e dentro dele o que esta parado ha mais tempo.
+    ordem = {"atrasado": 0, "esperado": 1, "em_dia": 2}
+    previsoes.sort(key=lambda p: (ordem[p.situacao], -p.anos_parado))
+    return previsoes

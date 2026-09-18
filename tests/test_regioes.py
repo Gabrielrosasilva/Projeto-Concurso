@@ -34,3 +34,31 @@ def test_sao_jose_do_cerrito_nao_e_sao_jose():
 def test_sem_municipio():
     assert regioes.anel_de(None) is None
     assert regioes.anel_de("") is None
+
+
+# --- uma grafia so para cada municipio ---------------------------------------
+
+def test_grafia_canonica_vem_do_yaml():
+    """Cada fonte escreve de um jeito, e o banco acabava com o mesmo municipio
+    como se fossem cidades diferentes."""
+    for escrito in ("Florianopolis", "FLORIANOPOLIS", "florianopolis",
+                    "Florian\u00f3polis", " Florianopolis "):
+        assert regioes.nome_canonico(escrito) == "Florianopolis"
+
+
+def test_acento_e_cedilha_no_mesmo_municipio():
+    """O caso real: a FEPESE gravava Palhoca e o feed gravava Palhoca com
+    cedilha, e o historico do municipio ficava partido em dois."""
+    assert regioes.nome_canonico("Palho" + chr(0xE7) + "a") == "Palhoca"
+    assert regioes.nome_canonico("S\u00e3o Jos\u00e9") == "Sao Jose"
+
+
+def test_municipio_de_fora_volta_como_veio():
+    """Inventar grafia para cidade de fora de SC seria pior que manter a da
+    fonte: o YAML so tem municipio catarinense."""
+    assert regioes.nome_canonico("Ribeirao Preto") == "Ribeirao Preto"
+
+
+def test_sem_municipio_continua_sem():
+    assert regioes.nome_canonico(None) is None
+    assert regioes.nome_canonico("") is None

@@ -212,7 +212,11 @@ def classificar(item: ItemColetado) -> Classificacao:
     # Fonte que sabe manda: a FEPESE publica concurso num tipo de post
     # proprio, entao nao ha o que adivinhar pelo titulo.
     tipo = item.tipo or detectar_tipo(item.titulo, item.resumo, item.url)
-    municipio = item.municipio or extrair_municipio(item.titulo)
+    # Sempre na grafia do YAML: fonte diferente escreve o mesmo municipio de
+    # jeito diferente, e agrupar por municipio depois nao fecharia.
+    municipio = regioes.nome_canonico(
+        item.municipio or extrair_municipio(item.titulo)
+    )
     salario = extrair_salario(item.titulo)
     uf = (item.uf or "").upper()
 

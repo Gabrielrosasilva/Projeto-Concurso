@@ -103,7 +103,8 @@ src/radar/
 │                `respostas_de_simulado` (SQLAlchemy 2.0, estilo Mapped)
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico.py      roda coletores, grava com upsert, classifica, consulta
-├── regioes.py      le config/regioes.yml: em que anel um municipio esta
+├── regioes.py      le config/regioes.yml: em que anel um municipio esta,
+│                e qual e a grafia canonica dele
 ├── classificador.py  tipo, municipio, salario e relevancia, a partir do titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
@@ -232,6 +233,15 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   de itens da resposta;
 - `radar questoes --refazer` atualiza a questao no lugar, pela chave (prova,
   numero). Nao apaga para regravar: o simulado guarda o id da questao;
+- municipio e gravado SEMPRE na grafia de config/regioes.yml. Cada fonte
+  escreve de um jeito ("Palhoca" e "Palhoca" com cedilha, Florianopolis em 4
+  grafias), e qualquer conta por municipio saia errada. Municipio de fora de SC
+  volta como veio: o YAML so tem catarinense;
+- a previsao de abertura usa o ritmo do proprio municipio, mas LIMITADO pela
+  validade legal (2 a 4 anos), e por MEDIANA. Sem isso, buraco de cobertura
+  virava absurdo: Tubarao, com 2011 e 2026 conhecidos, dava "proximo em 2041";
+- a previsao carrega sempre o motivo e os anos que a embasam, e a tela avisa o
+  que o historico NAO cobre (outra banca entre 2021 e 2025);
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -267,7 +277,7 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      Socorros...), que e onde entra a API da Claude
 5    PRONTA: modo simulado na web, com acerto por MATERIA. Por assunto
      fino depende da fase 4 terminar
-6    concurso atrasado + validade vencendo (previsao de abertura)
+6    PRONTA: previsao de abertura por municipio, na web e na CLI
 ```
 
 ## Fontes de dados

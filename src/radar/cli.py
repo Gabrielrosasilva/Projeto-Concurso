@@ -274,6 +274,37 @@ def questoes(
 
 
 @app.command()
+def previsao() -> None:
+    """Onde vale ficar de olho: municipio parado ha tempo demais.
+
+    A conta usa o ritmo do proprio municipio, limitado pela validade legal do
+    concurso: ate 2 anos, prorrogaveis por mais 2.
+    """
+    previsoes = servico.previsao_de_abertura()
+    if not previsoes:
+        console.print("[yellow]Nenhum municipio com historico ainda.[/]")
+        return
+
+    cores = {"atrasado": "red", "esperado": "yellow", "em_dia": "green"}
+    rotulos = {"atrasado": "ATRASADO", "esperado": "JANELA  ", "em_dia": "em dia  "}
+
+    for p in previsoes:
+        cor = cores[p.situacao]
+        console.print(
+            f"[{cor}]{rotulos[p.situacao]}[/] [bold]{p.municipio}[/] "
+            f"[dim]-> {p.proximo_previsto}[/]"
+        )
+        console.print(f"          [dim]{p.motivo}[/]")
+
+    console.print()
+    console.print(
+        "[dim]O historico vem da FEPESE (2006-2026) e do feed (so 2026). "
+        "Municipio que usou outra banca entre 2021 e 2025 aparece mais "
+        "atrasado do que e.[/]"
+    )
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

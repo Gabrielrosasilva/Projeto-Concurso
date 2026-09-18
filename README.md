@@ -482,6 +482,55 @@ radar questoes --refazer   # passa o parser novo por cima do acervo inteiro
 e grava de novo porque o simulado guarda o id da questao: o historico ficaria
 apontando para o nada.
 
+## Previsao de abertura
+
+```bash
+radar previsao
+```
+
+Tambem na web, no link **Previsao de abertura**. Responde a pergunta "onde
+vale ficar de olho agora", municipio por municipio, perto de casa.
+
+A conta tem chao e teto vindos da lei: o concurso vale por ate 2 anos,
+prorrogaveis por mais 2. Antes de 2 anos o orgao ainda tem aprovado na fila;
+passados 4, quem precisa de gente tem de abrir outro. **Dentro dessa faixa**,
+quem manda e o ritmo do proprio municipio.
+
+Duas escolhas que os dados reais forcaram:
+
+1. **mediana, e nao media.** De Tubarao eu so conheco 2011 e 2026, e a media
+   dizia "um a cada 15 anos, proximo em 2041". O buraco e o que eu nao
+   coletei, nao concurso que deixou de existir;
+2. **teto de 4 anos.** Biguacu tem 2021 e 2022 no historico - dois editais do
+   mesmo momento, nao um concurso por ano.
+
+Toda previsao vem com o motivo e com os anos que a embasam, porque eu preciso
+poder conferir a conta:
+
+```
+ATRASADO Biguacu -> 2024
+         2 concursos conhecidos (2021 a 2022), um a cada 2 ano(s).
+         O ultimo foi ha 4 ano(s), passou 2 ano(s) do previsto.
+```
+
+**O que isto nao sabe, e a tela avisa:** o historico vem da FEPESE (2006 a
+2026) e do feed de noticias (so 2026). Municipio que contratou outra banca
+entre 2021 e 2025 tem concurso que nao esta aqui, e aparece mais atrasado do
+que e.
+
+### Uma grafia so para cada municipio
+
+Isto quebrava a previsao antes de ela existir: o mesmo municipio estava no
+banco em ate quatro grafias. A FEPESE grava `Palhoca` e o feed grava `Palhoça`;
+`Florianopolis`, `Florianópolis` e `FLORIANOPOLIS` eram tres cidades para
+qualquer conta por municipio.
+
+Agora o municipio e gravado sempre na grafia de `config/regioes.yml`, que ja
+era a fonte de verdade dos aneis. `radar reclassificar` conserta o que ja esta
+gravado - inclusive o municipio confirmado pela pagina do edital, porque
+trocar a grafia nao e reclassificar. Municipio de fora de SC volta como veio:
+o YAML so tem municipio catarinense, e inventar grafia seria pior.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

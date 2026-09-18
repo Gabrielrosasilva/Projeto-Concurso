@@ -73,5 +73,21 @@ def nomes_originais() -> dict[str, str]:
     return dict(sorted(mapa.items(), key=lambda kv: -len(kv[0])))
 
 
+def nome_canonico(municipio: str | None) -> str | None:
+    """A grafia de config/regioes.yml para um municipio conhecido.
+
+    Cada fonte escreve de um jeito: a FEPESE manda "Palhoca" e o feed manda
+    "Palhoca" com cedilha, e o banco acabava com os dois como se fossem cidades
+    diferentes. Qualquer conta por municipio saia errada - e a previsao de
+    abertura e toda por municipio.
+
+    Municipio que nao esta no YAML volta como veio: e de fora de SC, e inventar
+    grafia para ele seria pior que manter a da fonte.
+    """
+    if not municipio:
+        return None
+    return nomes_originais().get(normalizar(municipio), municipio)
+
+
 def municipios(anel: str) -> list[str]:
     return sorted(m for m, a in _mapa().items() if a == anel)
