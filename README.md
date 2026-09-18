@@ -267,6 +267,38 @@ radar listar --favoritos
 radar situacoes                 # recalcula os status (o tempo passa sozinho)
 ```
 
+### Aba de noticias e andamento
+
+```
+Noticias e andamento  ->  procure "PM", "policia cientifica", "bombeiro"...
+```
+
+As outras abas filtram para nao afogar o que importa. Esta faz o contrario:
+procura em **tudo** - qualquer regiao, qualquer fase, inclusive o que ja
+encerrou. Concurso que ja passou e justamente o que diz se aquele orgao
+costuma abrir.
+
+O resultado nao vem por data, e sim por **andamento**: primeiro o que esta com
+inscricao aberta, depois o que ja tem banca contratada, depois o autorizado, e
+o encerrado por ultimo. No topo, um resumo de quantos ha em cada fase.
+
+#### As fases antes do edital
+
+O ciclo de vida do concurso comeca bem antes do edital, e isso sai no titulo
+da noticia:
+
+| fase | como aparece no titulo |
+|---|---|
+| `previsto` | "edital previsto", "deve sair", "expectativa de" |
+| `autorizado` | "tem concurso autorizado", "recebe autorizacao" |
+| `banca contratada` | "define FCC como banca", "vai contratar banca" |
+
+`banca contratada` e o sinal mais valioso: costuma vir 2 a 4 meses antes do
+edital, que e tempo de comecar a estudar o padrao daquela banca.
+
+Se o concurso ja tem prazo de inscricao conhecido, o prazo manda - data e
+fato, titulo e interpretacao.
+
 ### Filtrando
 
 Todo filtro da pagina combina com a aba em que voce esta e com os demais.

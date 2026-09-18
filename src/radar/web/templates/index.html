@@ -94,6 +94,7 @@
     nav a.ativo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
     nav a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
+    nav a.ativo.noticias{background:var(--indef-fraco);color:var(--indef)}
 
     form.filtros{display:grid;gap:.5rem;margin-bottom:1rem;
       grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
@@ -141,6 +142,20 @@
       font-weight:700}
     .menu-faixa .opcoes a.limpar-faixa{color:var(--suave);border-top:1px solid
       var(--borda);border-radius:0;margin-top:.2rem;padding-top:.5rem}
+
+    /* A busca da aba de noticias e o filtro principal dela, entao ganha mais
+       peso visual que os campos das outras abas. */
+    form.busca-noticia{display:flex;gap:.5rem;margin:0 0 .9rem}
+    form.busca-noticia input{flex:1;min-width:0;font-size:1rem;padding:.7rem .9rem}
+
+    .resumo-fases{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
+    .fase-conta{font-size:.76rem;padding:.25rem .6rem;border-radius:999px;
+      background:var(--remoto-fraco);color:var(--remoto)}
+    .fase-conta b{font-variant-numeric:tabular-nums}
+    .fase-conta.fase-inscricoes_abertas{background:var(--nucleo-fraco);color:var(--nucleo)}
+    .fase-conta.fase-banca_definida{background:var(--proximo-fraco);color:var(--proximo)}
+    .fase-conta.fase-autorizado{background:var(--indef-fraco);color:var(--indef)}
+    .fase-conta.fase-prevista{background:var(--azul-fraco);color:var(--azul)}
 
     .contagem{color:var(--suave);font-size:.85rem;margin:0 0 .7rem}
     .aviso-filtro{background:var(--proximo-fraco);color:var(--proximo);
@@ -235,6 +250,11 @@
     </div>
 
     <div class="selos">
+      {% if noticias %}
+        {# Nesta aba o que importa e a FASE, nao a distancia. #}
+        <span class="selo fase-conta fase-{{ c.situacao }}">
+          {{ rotulo_situacao.get(c.situacao, c.situacao) }}</span>
+      {% endif %}
       <span class="selo {{ c.relevancia }}">{{ rotulo_anel.get(c.relevancia, c.relevancia) }}</span>
 
       <span class="selo neutro"><span class="rot">Cidade:</span>
@@ -381,9 +401,13 @@
       <a class="tudo {{ 'ativo' if todos }}" href="/?todos=true">
         Todos <span class="n">{{ total_geral }}</span>
       </a>
+      <a class="noticias {{ 'ativo' if noticias }}" href="/?noticias=true">
+        Noticias e andamento
+      </a>
     </nav>
 
-    <form class="filtros" method="get">
+    {% if not noticias %}
+    <form class="filtros" method="get" autocomplete="off">
       {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
       {% if abertas %}<input type="hidden" name="abertas" value="true">{% endif %}
       {% if favoritos %}<input type="hidden" name="favoritos" value="true">{% endif %}
@@ -396,7 +420,8 @@
          pela caixinha ao lado, que e mais rapida que digitar dois numeros. #}
       <div class="salario">
         <input name="salario_min" type="number" step="100" min="0"
-               placeholder="Salario min" value="{{ salario_min }}">
+               placeholder="Salario min" value="{{ salario_min }}"
+               autocomplete="off">
         <details class="menu-faixa">
           <summary title="Escolher uma faixa">
             {{ faixa_ativa if faixa_ativa else 'Remuneracao' }}
@@ -420,8 +445,40 @@
         <a class="limpar" href="/">Limpar</a>
       </div>
     </form>
+    {% endif %}
 
-    <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
+    {% if noticias %}
+      {# Aqui a busca e o filtro principal - nao ha aneis nem prazos, so o
+         nome do que voce procura. #}
+      <form class="busca-noticia" method="get" autocomplete="off">
+        <input type="hidden" name="noticias" value="true">
+        <input name="termo" value="{{ termo }}" autofocus
+               placeholder="PM, policia cientifica, bombeiro, Guarda Municipal...">
+        <button type="submit">Procurar</button>
+        {% if termo %}<a class="limpar" href="/?noticias=true">Limpar</a>{% endif %}
+      </form>
+
+      {% if fases %}
+        <div class="resumo-fases">
+          {% for chave in ordem_das_fases %}
+            {% if fases.get(chave) %}
+              <span class="fase-conta fase-{{ chave }}">
+                {{ rotulo_situacao.get(chave, chave) }}
+                <b>{{ fases[chave] }}</b>
+              </span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <p class="contagem">
+      {% if noticias %}
+        {{ itens|length }} resultado(s){% if termo %} para "{{ termo }}"{% endif %}
+      {% else %}
+        {{ itens|length }} de {{ total_geral }} concurso(s) no banco
+      {% endif %}
+    </p>
 
     {% if n_sem_salario %}
       <p class="aviso-filtro">
@@ -447,6 +504,20 @@
             <p class="grande">Nenhuma inscricao aberta agora.</p>
             <p>O prazo so e conhecido depois de ler a pagina de cada edital.
                Rode <code>radar detalhar</code> no terminal.</p>
+          {% elif noticias %}
+            <p class="grande">
+              {% if termo %}Nada encontrado para "{{ termo }}".{% else %}Procure um concurso acima.{% endif %}
+            </p>
+            <p>
+              {% if termo %}
+                Tente um termo mais curto - "PM" em vez de "Policia Militar de
+                Santa Catarina".
+              {% else %}
+                Esta aba procura em <strong>tudo</strong>: qualquer regiao,
+                qualquer fase, inclusive o que ja encerrou. E o que mostra se
+                um orgao costuma abrir concurso.
+              {% endif %}
+            </p>
           {% elif filtro_ativo %}
             <p class="grande">Nenhum resultado com esses filtros.</p>
             <p><a href="{{ url_sem_salario.rstrip('?&') }}">Tirar o filtro de remuneracao</a>

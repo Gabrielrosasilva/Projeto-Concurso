@@ -8,6 +8,7 @@ FastAPI tentava converter "" para float e devolvia 422.
 """
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import select
 
 from radar import servico
 from radar.db import sessao
@@ -224,3 +225,162 @@ def test_busca_sem_resultado_devolve_pagina_vazia_e_nao_erro(cliente):
     resposta = cliente.get("/?termo=coisaquenaoexiste")
     assert resposta.status_code == 200
     assert "Nenhum resultado" in resposta.text
+
+
+def test_o_formulario_nao_deixa_o_navegador_preencher_sozinho(cliente):
+    """O navegador restaura o que foi digitado antes ao recarregar, e o campo
+    aparecia com um valor que ninguem pediu - o servidor manda vazio."""
+    _semear(_concurso("https://a.test/1"))
+
+    texto = cliente.get("/").text
+    assert 'autocomplete="off"' in texto
+    assert 'name="salario_min" type="number" step="100" min="0"\n               placeholder="Salario min" value=""' in texto
+
+
+# --- aba de noticias e andamento --------------------------------------------
+
+def _mundo_variado():
+    """Um concurso em cada fase, e um deles longe de casa."""
+    from radar.models import agora
+
+    return (
+        _concurso("https://a.test/pm-sp", titulo="Concurso PM SP autorizado",
+                  situacao="autorizado", relevancia="remoto", uf="SP",
+                  municipio="Sao Paulo", publicado_em=agora()),
+        _concurso("https://a.test/pm-mg", titulo="Concurso PM MG abre vagas",
+                  situacao="edital_publicado", relevancia="remoto", uf="MG"),
+        _concurso("https://a.test/pm-velho", titulo="Concurso PM RS encerrado",
+                  situacao="encerrado", relevancia="remoto", uf="RS"),
+        _concurso("https://a.test/banca", titulo="Concurso PM BA define banca",
+                  situacao="banca_definida", relevancia="indefinida"),
+        _concurso("https://a.test/outro", titulo="Concurso de Enfermeiro",
+                  situacao="edital_publicado"),
+    )
+
+
+def test_a_busca_de_noticias_nao_filtra_por_distancia(banco_temporario):
+    """As outras abas escondem o que e longe. Aqui e o contrario: quem procura
+    "PM" quer saber de qualquer policia militar, esteja onde estiver."""
+    _semear(*_mundo_variado())
+
+    achados = servico.buscar_noticias(termo="PM")
+    assert len(achados) == 4
+    assert {c.relevancia for c in achados} == {"remoto", "indefinida"}
+
+
+def test_a_busca_de_noticias_traz_o_que_ja_encerrou(banco_temporario):
+    """Concurso que ja passou e o que diz se o orgao costuma abrir."""
+    _semear(*_mundo_variado())
+
+    titulos = [c.titulo for c in servico.buscar_noticias(termo="PM")]
+    assert "Concurso PM RS encerrado" in titulos
+
+
+def test_ordena_pelo_andamento_e_nao_pela_data(banco_temporario):
+    """O que esta mais perto de acontecer vem primeiro; o encerrado por ultimo."""
+    _semear(*_mundo_variado())
+
+    situacoes = [c.situacao for c in servico.buscar_noticias(termo="PM")]
+    assert situacoes.index("banca_definida") < situacoes.index("autorizado")
+    assert situacoes[-1] == "encerrado"
+
+
+def test_busca_de_noticias_sem_termo_traz_tudo(banco_temporario):
+    _semear(*_mundo_variado())
+    assert len(servico.buscar_noticias()) == 5
+
+
+def test_a_aba_aparece_na_navegacao(cliente):
+    _semear(_concurso("https://a.test/1"))
+    assert 'href="/?noticias=true"' in cliente.get("/").text
+
+
+def test_a_aba_tem_campo_de_busca_proprio(cliente):
+    _semear(*_mundo_variado())
+
+    texto = cliente.get("/?noticias=true").text
+    assert "busca-noticia" in texto
+    assert "policia cientifica" in texto      # o exemplo do campo
+
+
+def test_a_aba_resume_quantos_em_cada_fase(cliente):
+    _semear(*_mundo_variado())
+
+    texto = cliente.get("/?noticias=true&termo=PM").text
+    assert "banca contratada" in texto
+    assert "autorizado" in texto
+
+
+def test_sem_termo_a_aba_explica_para_que_serve(cliente):
+    _semear(_concurso("https://a.test/1", titulo="Qualquer coisa"))
+
+    texto = cliente.get("/?noticias=true&termo=naoexistenada").text
+    assert "Nada encontrado" in texto
+
+
+# --- deteccao da fase pelo titulo -------------------------------------------
+
+@pytest.mark.parametrize("titulo,esperado", [
+    ("Policia Militar de Sao Paulo tem novo concurso autorizado", "autorizado"),
+    ("Concurso DPE SP define FCC como banca para proximo edital", "banca_definida"),
+    ("PGE BA vai contratar banca para novo concurso", "banca_definida"),
+    ("Concurso Coren SP tem edital previsto para 76 vagas", "prevista"),
+    ("Concurso PM SC deve sair em 2027", "prevista"),
+])
+def test_fase_lida_no_titulo(titulo, esperado):
+    """Antes disto, tudo virava "edital publicado" e as fases anteriores - que
+    sao as que dao tempo de estudar - se perdiam."""
+    from radar.classificador import detectar_fase
+
+    assert detectar_fase(titulo) == esperado
+
+
+def test_edital_publicado_vence_a_pista_de_fase_anterior():
+    """Se o edital saiu, nao interessa que a noticia lembre da autorizacao."""
+    from radar.classificador import detectar_fase
+
+    assert detectar_fase("Prefeitura publica edital do concurso autorizado") is None
+
+
+def test_titulo_sem_pista_nao_inventa_fase():
+    from radar.classificador import detectar_fase
+
+    assert detectar_fase("Camara de Capinzal oferece ate R$ 4,5 mil") is None
+
+
+def test_a_fase_do_titulo_so_vale_sem_prazo_conhecido(banco_temporario):
+    """Data de inscricao e fato; titulo e interpretacao."""
+    from datetime import timedelta
+
+    from radar.collectors.base import ItemColetado
+    from radar.models import agora
+
+    _semear(_concurso(
+        "https://a.test/1",
+        titulo="Concurso PM SC autorizado",
+        inscricoes_ate=agora() + timedelta(days=10),
+        situacao="inscricoes_abertas",
+    ))
+
+    with sessao() as s:
+        servico._gravar(s, ItemColetado(
+            titulo="Concurso PM SC autorizado",
+            url="https://a.test/1", uf="SC",
+        ), fonte="teste")
+
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).situacao == "inscricoes_abertas"
+
+
+def test_a_aba_de_noticias_nao_mostra_o_filtro_das_outras(cliente):
+    """Dois campos de busca na mesma tela confunde. E UF/banca/salario nao
+    fazem sentido quando o objetivo e achar o andamento de um concurso em
+    qualquer lugar do pais."""
+    _semear(_concurso("https://a.test/1"))
+
+    noticias = cliente.get("/?noticias=true").text
+    assert 'class="filtros"' not in noticias
+    assert "busca-noticia" in noticias
+
+    normal = cliente.get("/").text
+    assert 'class="filtros"' in normal

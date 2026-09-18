@@ -260,3 +260,26 @@ def test_a_coleta_tambem_respeita_o_municipio_da_pagina(banco_temporario):
         concurso = s.scalar(select(Concurso))
     assert concurso.municipio == "Florianopolis"
     assert concurso.relevancia == "nucleo"
+
+
+def test_reclassificar_nao_perde_o_municipio_que_a_fonte_extraiu(banco_temporario):
+    """A FEPESE entrega o municipio pronto, mas o titulo dela nao tem "(SC)" -
+    o extrator do classificador precisa da UF entre parenteses. Sem passar o
+    municipio ja conhecido, cada reclassificar zerava os 107 concursos da
+    FEPESE que estavam perto: "Perto de mim" caia de 176 para 69."""
+    _semear(_concurso(
+        "https://fepese.org.br/concurso/x",
+        titulo="2026 - Prefeitura Municipal de Sao Jose",
+        fonte="fepese",
+        uf=None,
+        municipio="Sao Jose",
+        municipio_confirmado=False,
+        relevancia="nucleo",
+    ))
+
+    servico.reclassificar()
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.municipio == "Sao Jose"
+    assert concurso.relevancia == "nucleo"

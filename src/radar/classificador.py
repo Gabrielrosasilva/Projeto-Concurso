@@ -67,6 +67,59 @@ def detectar_tipo(
     return TIPO_NOTICIA
 
 
+# --- em que fase o concurso esta --------------------------------------------
+#
+# O ciclo de vida do CLAUDE.md so era preenchido depois do edital, pelas datas
+# de inscricao. Mas boa parte do que interessa acontece ANTES: o governo
+# autoriza, a comissao e formada, a banca e contratada. Tudo isso sai no
+# titulo da noticia, e ficava se perdendo como "edital_publicado".
+#
+# Exemplos reais colhidos no banco:
+#   "Policia Militar de Sao Paulo tem novo concurso autorizado com 4 mil vagas"
+#   "Concurso DPE SP define FCC como banca para proximo edital"
+#   "PGE BA vai contratar banca para novo concurso com 135 vagas"
+#   "Concurso Coren SP tem edital previsto para 76 vagas"
+#
+# A ordem importa: o estado mais adiantado vence. Um titulo que fala de banca
+# E de autorizacao esta na fase da banca, que vem depois.
+FASES_PELO_TITULO = (
+    ("banca_definida", (
+        "define banca", "definiu banca", "define a banca", "banca definida",
+        "banca sera", "banca e a", "escolhe banca", "escolheu banca",
+        "contrata banca", "contratar banca", "banca organizadora",
+        "banca contratada", "como banca", "banca do concurso e",
+    )),
+    ("autorizado", (
+        "autorizado", "autorizada", "autoriza concurso", "autoriza novo",
+        "tem autorizacao", "recebe autorizacao", "aprovado pelo governo",
+    )),
+    ("prevista", (
+        "previsto", "prevista", "previsao de", "deve sair", "pode sair",
+        "expectativa de", "e esperado", "solicita concurso", "pede concurso",
+        "estuda concurso", "em estudo", "sem data definida",
+    )),
+)
+
+
+def detectar_fase(titulo: str, resumo: str | None = None) -> str | None:
+    """A fase que o titulo permite afirmar, ou None se ele nao disser.
+
+    So devolve fase ANTERIOR ao edital. Depois que o edital sai, quem manda
+    sao as datas de inscricao, que sao fato e nao interpretacao.
+    """
+    texto = regioes.normalizar(f"{titulo} {resumo or ''}")
+
+    # "edital publicado" vence qualquer pista de fase anterior: se o edital
+    # saiu, nao interessa que a noticia tambem lembre da autorizacao.
+    if "edital publicado" in texto or "publica edital" in texto:
+        return None
+
+    for fase, marcas in FASES_PELO_TITULO:
+        if any(marca in texto for marca in marcas):
+            return fase
+    return None
+
+
 # --- municipio --------------------------------------------------------------
 
 # O feed escreve o municipio antes da sigla entre parenteses:
@@ -150,6 +203,9 @@ class Classificacao:
     municipio: str | None = None
     salario: float | None = None
     tipo: str = TIPO_DESCONHECIDO
+    # Fase anterior ao edital, quando o titulo deixa claro. Nulo quer dizer
+    # "o titulo nao disse", e ai o que valia antes continua valendo.
+    fase: str | None = None
 
 
 def classificar(item: ItemColetado) -> Classificacao:
@@ -160,7 +216,12 @@ def classificar(item: ItemColetado) -> Classificacao:
     salario = extrair_salario(item.titulo)
     uf = (item.uf or "").upper()
 
-    comum = dict(municipio=municipio, salario=salario, tipo=tipo)
+    comum = dict(
+        municipio=municipio,
+        salario=salario,
+        tipo=tipo,
+        fase=detectar_fase(item.titulo, item.resumo),
+    )
 
     if tipo == TIPO_NOTICIA:
         return Classificacao(

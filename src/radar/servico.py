@@ -28,6 +28,12 @@ CAMPOS_DA_FONTE = (
     "escolaridade", "publicado_em",
 )
 
+# O que a fonte manda quando NAO sabe. Tratado como se fosse nulo: nao
+# sobrescreve o que ja descobrimos por outro caminho.
+VALORES_SEM_INFORMACAO = {
+    "situacao": ("desconhecida",),
+}
+
 # Campos que o classificador calcula. Sao derivados do titulo, entao podem ser
 # recalculados a qualquer momento - e por isso que existe `reclassificar()`:
 # se eu editar config/regioes.yml, o banco inteiro se corrige sem recoletar.
@@ -57,6 +63,10 @@ def _aplicar_classificacao(destino, item: ItemColetado) -> None:
     # Se nem concurso e, nao da para afirmar que ha edital.
     if resultado.tipo == "noticia":
         destino.situacao = "desconhecida"
+    elif resultado.fase and destino.inscricoes_ate is None:
+        # Fase anterior ao edital, dita pelo titulo. So vale enquanto nao ha
+        # prazo conhecido: data de inscricao e fato, titulo e interpretacao.
+        destino.situacao = resultado.fase
 
 
 @dataclass
@@ -93,8 +103,12 @@ def _gravar(s, item: ItemColetado, fonte: str) -> str:
     for campo in CAMPOS_DA_FONTE:
         valor = getattr(item, campo)
         # None da fonte nao apaga dado que ja temos: uma coleta incompleta nao
-        # pode piorar o registro.
-        if valor is None or valor == getattr(existente, campo):
+        # pode piorar o registro. "desconhecida" na situacao e a mesma coisa -
+        # e o valor padrao de quem NAO sabe, e nao pode rebaixar um status que
+        # ja tinhamos descoberto por outro caminho.
+        if valor is None or valor in VALORES_SEM_INFORMACAO.get(campo, ()):
+            continue
+        if valor == getattr(existente, campo):
             continue
         setattr(existente, campo, valor)
         mudou = True
@@ -279,6 +293,16 @@ def reclassificar() -> dict[str, int]:
                 url=concurso.url,
                 resumo=concurso.resumo,
                 uf=concurso.uf,
+                # O municipio e o tipo ja conhecidos vao junto. Sem eles, os
+                # concursos da FEPESE perdiam o municipio a cada reclassificar:
+                # o titulo dela e "2026 - Prefeitura Municipal de Sao Jose",
+                # sem "(SC)", e o extrator do classificador precisa da UF entre
+                # parenteses. "Perto de mim" caia de 176 para 69.
+                #
+                # Reclassificar existe para reaplicar a regra do ANEL, e nao
+                # para reextrair o que outra fonte ja extraiu melhor.
+                municipio=concurso.municipio,
+                tipo=concurso.tipo if concurso.tipo != "desconhecido" else None,
             )
             _aplicar_classificacao(concurso, item)
             contagem[concurso.relevancia] = contagem.get(concurso.relevancia, 0) + 1
@@ -1066,3 +1090,62 @@ def contar_questoes() -> int:
     criar_tabelas()
     with sessao() as s:
         return s.scalar(select(func.count()).select_from(QuestaoDeProva)) or 0
+
+
+# --- aba de noticias --------------------------------------------------------
+
+# Quanto mais adiantado, maior o numero. Serve para ordenar do que esta mais
+# proximo de acontecer para o que ja passou.
+ORDEM_DAS_FASES = {
+    "inscricoes_abertas": 0,
+    "banca_definida": 1,
+    "autorizado": 2,
+    "prevista": 3,
+    "edital_publicado": 4,
+    "desconhecida": 5,
+    "encerrado": 6,
+}
+
+
+def buscar_noticias(termo: str | None = None, limite: int = 60) -> list[Concurso]:
+    """Busca em TUDO: qualquer anel, qualquer fase, inclusive o que virou
+    noticia.
+
+    As outras abas filtram para nao afogar o que importa. Aqui e o contrario:
+    quem procura "PM" quer saber de qualquer concurso de policia militar, esteja
+    ele onde estiver e na fase que estiver - inclusive os que ja passaram, que
+    e o que diz se o orgao costuma abrir.
+
+    A ordem nao e por data: e pelo ANDAMENTO. O que esta com inscricao aberta
+    vem primeiro, depois o que tem banca contratada, depois o autorizado, e o
+    encerrado por ultimo.
+    """
+    criar_tabelas()
+    consulta = select(Concurso)
+
+    if termo:
+        procurado = f"%{_sem_acento(termo)}%"
+        consulta = consulta.where(
+            func.sem_acento(Concurso.titulo).ilike(procurado)
+            | func.sem_acento(func.coalesce(Concurso.resumo, "")).ilike(procurado)
+            | func.sem_acento(func.coalesce(Concurso.municipio, "")).ilike(procurado)
+            | func.sem_acento(func.coalesce(Concurso.orgao, "")).ilike(procurado)
+        )
+
+    with sessao() as s:
+        achados = list(s.scalars(consulta.limit(limite * 4)))
+
+    achados.sort(key=lambda c: (
+        ORDEM_DAS_FASES.get(c.situacao, 9),
+        -(c.publicado_em.timestamp() if c.publicado_em else 0),
+    ))
+    return achados[:limite]
+
+
+def contar_por_fase(termo: str | None = None) -> dict[str, int]:
+    """Quantos concursos em cada fase, para o resumo da aba de noticias."""
+    criar_tabelas()
+    contagem: dict[str, int] = {}
+    for concurso in buscar_noticias(termo=termo, limite=10000):
+        contagem[concurso.situacao] = contagem.get(concurso.situacao, 0) + 1
+    return contagem

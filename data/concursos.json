@@ -1,6 +1,6 @@
 [
   {
-    "atualizado_em": "2026-09-18T03:04:50.285325+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.781056+00:00",
     "avisado_em": "2026-09-18T03:04:50.258106+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.713261+00:00",
@@ -21,7 +21,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_elegibilidade": null,
-    "motivo_relevancia": "Nao parece concurso: o titulo nao fala em vaga, edital nem inscricao.",
+    "motivo_relevancia": "Sem UF: pode ser federal com prova em Florianopolis. Depende do edital.",
     "municipio": null,
     "municipio_confirmado": false,
     "notas": null,
@@ -32,7 +32,7 @@
     "salario": null,
     "salario_manual": false,
     "situacao": "desconhecida",
-    "tipo": "noticia",
+    "tipo": "desconhecido",
     "titulo": "7 carreiras perfeitas para quem prefere trabalhar sozinho",
     "uf": null,
     "url": "https://concursosnobrasil.com/7-carreiras-perfeitas-para_quem-prefere-trabalhar-sozinho/"
@@ -611,7 +611,7 @@
     "url": "https://concursosnobrasil.com/beneficios-sociais/2026/09/17/bolsa-familia-passa-a-ter-novo-valor-em-outubro-com-reajuste-de-1504/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285597+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.784921+00:00",
     "avisado_em": "2026-09-18T03:04:50.258956+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:52.182480+00:00",
@@ -668,7 +668,7 @@
     "resumo": "Portaria MGI autoriza Concurso CGU com 60 vagas para Auditor Federal de Finanças e Controle e prevê que o edital saia em até seis meses.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "autorizado",
     "tipo": "concurso",
     "titulo": "Concurso CGU é autorizado com 60 vagas para Auditor Federal de Finanças e Controle",
     "uf": "AC",
@@ -910,7 +910,7 @@
     "url": "https://concursosnobrasil.com/concursos/2026/08/03/exercito-nacional-publica-seletivo-com-355-vagas-para-ingresso-no-colegio-militar/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284955+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776275+00:00",
     "avisado_em": "2026-09-18T03:04:50.256915+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.179826+00:00",
@@ -967,14 +967,14 @@
     "resumo": "Processo seletivo Transpetro (PETROBRAS Transporte S.A) divulga documento com a distribuição das vagas dos próximos editais.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "prevista",
     "tipo": "seletivo",
     "titulo": "Transpetro confirma 4.171 oportunidades em quatro seletivos previstos",
     "uf": "AC",
     "url": "https://concursosnobrasil.com/concursos/2026/08/03/transpetro-confirma-4-171-oportunidades-em-quatro-seletivos-previstos/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284918+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776275+00:00",
     "avisado_em": "2026-09-18T03:04:50.256802+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.134454+00:00",
@@ -1032,7 +1032,7 @@
     "resumo": "Processo seletivo do Ministério da Saúde tem previsão de ofertar 300 vagas e define o Instituto Avalia como banca organizadora.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "seletivo",
     "titulo": "Ministério da Saúde define banca organizadora de próximo seletivo",
     "uf": "AC",
@@ -1158,7 +1158,7 @@
     "url": "https://concursosnobrasil.com/concursos/2026/08/21/associacao-das-pioneiras-sociais-aps-divulgou-editais-com-cargos-de-ate-r-36-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284320+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776269+00:00",
     "avisado_em": "2026-09-18T03:04:50.254736+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T02:59:51.817654+00:00",
@@ -1215,7 +1215,7 @@
     "resumo": "O processo seletivo FUNAI está previsto com 800 vagas de níveis médio e superior, salários de até R$ 7.647 e etapas on-line.",
     "salario": 7600.0,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "prevista",
     "tipo": "seletivo",
     "titulo": "Seletivo FUNAI terá novo edital com 800 vagas e iniciais de até R$ 7,6 mil",
     "uf": "AC",
@@ -4411,7 +4411,7 @@
     "url": "https://concursosnobrasil.com/concursos/ba/2026/09/02/cibarc-ba-anuncia-vagas-de-niveis-medio-e-superior-em-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284409+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776272+00:00",
     "avisado_em": "2026-09-18T03:04:50.255008+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:50.535093+00:00",
@@ -4441,7 +4441,7 @@
     "resumo": "Concurso PGE BA deu mais um passo rumo à publicação do edital, que deve oferecer oportunidades de níveis médio e superior.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "PGE BA vai contratar banca para novo concurso com 135 vagas",
     "uf": "BA",
@@ -7511,7 +7511,7 @@
     "url": "https://concursosnobrasil.com/concursos/df/2026/09/14/igesdf-anuncia-novo-seletivo-para-a-area-de-assistencia-social/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284281+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776267+00:00",
     "avisado_em": "2026-09-18T03:04:50.254610+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T02:59:51.770009+00:00",
@@ -7541,11 +7541,47 @@
     "resumo": "Concurso Metrô DF publica a Portaria n.º 690, de 14 de setembro de 2026, com a autorização de 224 oportunidades em novo edital.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "autorizado",
     "tipo": "concurso",
     "titulo": "Concurso Metrô DF tem novo edital autorizado com 224 vagas",
     "uf": "DF",
     "url": "https://concursosnobrasil.com/concursos/df/2026/09/15/concurso-metro-df-tem-novo-edital-autorizado-com-224-vagas/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.864307+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.864298+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Distrito Federal"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de DF sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T13:07:30+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Processo seletivo IGESDF (Instituto de Gestão Estratégica de Saúde do Distrito Federal) está promovendo a formação de cadastro reserva.",
+    "salario": 4800.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "IGESDF abre nova oportunidade para Enfermeiro com inicial de R$ 4,8 mil",
+    "uf": "DF",
+    "url": "https://concursosnobrasil.com/concursos/df/2026/09/18/igesdf-abre-nova-oportunidade-para-enfermeiro-com-inicial-de-r-48-mil/"
   },
   {
     "atualizado_em": "2026-09-18T03:04:50.285635+00:00",
@@ -12912,7 +12948,7 @@
     "url": "https://concursosnobrasil.com/concursos/go/2026/08/26/prefeitura-de-palmelo-go-oferece-vagas-de-nivel-fundamental/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284551+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776272+00:00",
     "avisado_em": "2026-09-18T03:04:50.255365+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:50.661486+00:00",
@@ -12942,7 +12978,7 @@
     "resumo": "Concurso da Prefeitura de Aparecida de Goiânia, em Goiás, confirma avanço de trâmites para a contratação da banca organizadora.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Prefeitura de Aparecida de Goiânia (GO) ofertará 17,6 mil vagas em novo concurso",
     "uf": "GO",
@@ -14030,7 +14066,7 @@
     "url": "https://concursosnobrasil.com/concursos/ma/2026/08/03/seap-ma-abre-editais-de-seletivo-para-auxiliar-penitenciario/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284897+00:00",
+    "atualizado_em": "2026-09-18T13:48:15.013599+00:00",
     "avisado_em": "2026-09-18T03:04:50.256734+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.107047+00:00",
@@ -14047,7 +14083,7 @@
     "idade_maxima": null,
     "inscricoes_ate": null,
     "inscricoes_de": null,
-    "interesse": null,
+    "interesse": "favorito",
     "motivo_elegibilidade": null,
     "motivo_relevancia": "Orgao de São Luís (MA): prova aplicada fora de SC.",
     "municipio": "São Luís",
@@ -15110,7 +15146,7 @@
     "url": "https://concursosnobrasil.com/concursos/mg/2026/06/25/prefeitura-de-perdoes-mg-oferece-vaga-imediata-para-o-nivel-fundamental/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285540+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.783392+00:00",
     "avisado_em": "2026-09-18T03:04:50.258775+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:52.037880+00:00",
@@ -15139,7 +15175,7 @@
     "resumo": "Câmara mineira de Itacarambi abre edital de concurso público com provas previstas para dezembro de 2026 pela FADENOR.",
     "salario": 3700.0,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "prevista",
     "tipo": "concurso",
     "titulo": "Concurso de Itacarambi (MG) abre vagas com salário de até R$ 3,7 mil",
     "uf": "MG",
@@ -25298,6 +25334,78 @@
     "url": "https://concursosnobrasil.com/concursos/mg/2026/09/17/seletivo-prefeitura-de-ponte-nova-mg-abre-vagas-com-iniciais-de-ate-r-47-mil/"
   },
   {
+    "atualizado_em": "2026-09-18T15:48:53.857929+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.857926+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de MG sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T13:24:51+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Câmara de São Lourenço, no estado de Minas Gerais, abriu processo seletivo para vagas de estágio de nível superior. As inscrições são gratuitas.",
+    "salario": 1000.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Câmara de São Lourenço MG oferece bolsa de estágio de R$ 1 mil",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/09/18/camara-de-sao-lourenco-mg-oferece-bolsa-de-estagio-de-r-1-mil/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.854150+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.854147+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de São João del-Rei (MG): prova aplicada fora de SC.",
+    "municipio": "São João del-Rei",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T14:00:13+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de São João del-Rei, em Minas Gerais, tem oportunidades de níveis fundamental, médio, médio/técnico e superior.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de São João del-Rei (MG) anuncia vagas em seletivo",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/09/18/prefeitura-de-sao-joao-del-rei-mg-anuncia-vagas-em-seletivo/"
+  },
+  {
     "atualizado_em": "2026-09-18T03:04:50.285606+00:00",
     "avisado_em": "2026-09-18T03:04:50.258981+00:00",
     "banca": null,
@@ -30626,6 +30734,42 @@
     "url": "https://concursosnobrasil.com/concursos/pa/2026/09/17/concurso-fhcgv-pa-tem-edital-publicado-para-215-vagas-de-ate-r-39-mil/"
   },
   {
+    "atualizado_em": "2026-09-18T15:48:53.866669+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.866667+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Pará"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de Novo Progresso (PA): prova aplicada fora de SC.",
+    "municipio": "Novo Progresso",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T12:33:52+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Novo Progresso, no estado do Pará, receberá inscrições de maneira online.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Novo Progresso (PA) anuncia edital de seletivo",
+    "uf": "PA",
+    "url": "https://concursosnobrasil.com/concursos/pa/2026/09/18/prefeitura-de-novo-progresso-pa-anuncia-edital-de-seletivo/"
+  },
+  {
     "atualizado_em": "2026-09-18T03:04:50.285547+00:00",
     "avisado_em": "2026-09-18T03:04:50.258795+00:00",
     "banca": null,
@@ -31238,6 +31382,42 @@
     "url": "https://concursosnobrasil.com/concursos/pb/2026/09/09/prefeitura-de-pirpirituba-pb-abre-concurso-com-vaga-para-procurador-juridico/"
   },
   {
+    "atualizado_em": "2026-09-18T15:48:53.853050+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.853048+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Paraíba"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de PB sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T14:16:11+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Concurso DPE PB (Defensoria Pública do Estado da Paraíba) lança novas oportunidades para os cargos de Técnico e Analista de Defensoria.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso DPE PB publica edital com 20 vagas para o nível médio e superior",
+    "uf": "PB",
+    "url": "https://concursosnobrasil.com/concursos/pb/2026/09/18/concurso-dpe-pb-publica-edital-com-20-vagas-para-o-nivel-medio-e-superior/"
+  },
+  {
     "atualizado_em": "2026-09-18T03:04:50.285626+00:00",
     "avisado_em": "2026-09-18T03:04:50.259047+00:00",
     "banca": null,
@@ -31346,7 +31526,7 @@
     "url": "https://concursosnobrasil.com/concursos/pe/2026/07/03/prefeitura-de-terra-nova-pe-lanca-edital-com-95-vagas-de-ate-r-13-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285372+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.781551+00:00",
     "avisado_em": "2026-09-18T03:04:50.258254+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.780393+00:00",
@@ -31376,7 +31556,7 @@
     "resumo": "Novo concurso PC PE é anunciado com 1.315 vagas previstas para Agente, Escrivão e Delegado. As informações foram divulgadas pela governadora Raquel Lyra.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "prevista",
     "tipo": "concurso",
     "titulo": "Concurso PC PE terá novo edital em breve com 1.315 vagas previstas",
     "uf": "PE",
@@ -32536,7 +32716,7 @@
     "url": "https://concursosnobrasil.com/concursos/pe/2026/09/09/concurso-camara-de-trindade-pe-abre-mais-de-10-vagas-em-edital/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284275+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776263+00:00",
     "avisado_em": "2026-09-18T03:04:50.254592+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T02:59:51.763102+00:00",
@@ -32566,7 +32746,7 @@
     "resumo": "Concurso público da Prefeitura do Recife será para o provimento de 400 vagas na carreira de Guarda Civil Municipal.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "autorizado",
     "tipo": "concurso",
     "titulo": "Concurso GCM do Recife (PE) tem edital autorizado para 400 vagas",
     "uf": "PE",
@@ -33291,6 +33471,42 @@
     "titulo": "Câmara de Dom Expedito Lopes (PI) abre 5 vagas em novo concurso",
     "uf": "PI",
     "url": "https://concursosnobrasil.com/concursos/pi/2026/09/14/camara-de-dom-expedito-lopes-pi-abre-5-vagas-em-novo-concurso/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.856856+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.856841+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Piauí"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de Currais (PI): prova aplicada fora de SC.",
+    "municipio": "Currais",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T13:26:11+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Prefeitura de Currais contará com prova objetiva para todos os candidatos e prova de títulos para cargos específicos.",
+    "salario": 9700.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Prefeitura de Currais (PI) abre mais de 50 vagas e paga até R$ 9,7 mil",
+    "uf": "PI",
+    "url": "https://concursosnobrasil.com/concursos/pi/2026/09/18/concurso-prefeitura-de-currais-pi-abre-mais-de-50-vagas-e-paga-ate-r-97-mil/"
   },
   {
     "atualizado_em": "2026-09-18T03:04:50.285652+00:00",
@@ -39342,7 +39558,7 @@
     "url": "https://concursosnobrasil.com/concursos/rj/2026/08/13/concurso-ses-rj-e-iaserj-anuncia-287-vagas-com-salarios-de-ate-r-7-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284778+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776274+00:00",
     "avisado_em": "2026-09-18T03:04:50.256366+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:50.955974+00:00",
@@ -39372,7 +39588,7 @@
     "resumo": "Processo seletivo FAETEC RJ (Fundação de Apoio à Escola Técnica do Estado do Rio de Janeiro) contará com oportunidades para três segmentos de atuação.",
     "salario": 4000.0,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "autorizado",
     "tipo": "seletivo",
     "titulo": "FAETEC RJ recebe autorização para novo seletivo com 1.536 vagas de até R$ 4 mil",
     "uf": "RJ",
@@ -40025,6 +40241,78 @@
     "titulo": "UFRRJ anuncia abertura de 13 vagas imediatas em concurso público",
     "uf": "RJ",
     "url": "https://concursosnobrasil.com/concursos/rj/2026/09/14/ufrrj-anuncia-abertura-de-13-vagas-imediatas-em-concurso-publico/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.868953+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.868950+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio de Janeiro"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de RJ sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T12:01:58+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Concurso CREMERJ prevê vencimentos de até R$ 18 mil, dependendo do cargo. A classificação conta com provas escritas e de títulos.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso CREMERJ anuncia mais de 370 vagas em seu novo edital",
+    "uf": "RJ",
+    "url": "https://concursosnobrasil.com/concursos/rj/2026/09/18/concurso-cremerj-anuncia-mais-de-370-vagas-em-seu-novo-edital/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.852036+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.852034+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio de Janeiro"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de RJ sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T14:21:00+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Processo seletivo da RioSaúde busca contratar profissionais da área da Saúde e oferta remuneração de até R$ 3.077,89.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "RioSaúde (RJ) anuncia edital de processo seletivo com 65 vagas",
+    "uf": "RJ",
+    "url": "https://concursosnobrasil.com/concursos/rj/2026/09/18/riosaude-rj-anuncia-edital-de-processo-seletivo-com-65-vagas/"
   },
   {
     "atualizado_em": "2026-09-18T03:04:50.285517+00:00",
@@ -40783,7 +41071,7 @@
     "url": "https://concursosnobrasil.com/concursos/rn/2026/09/04/concurso-prefeitura-de-cruzeta-rn-abre-mais-de-400-vagas-em-tres-editais/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284356+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776270+00:00",
     "avisado_em": "2026-09-18T03:04:50.254848+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:50.466800+00:00",
@@ -40812,7 +41100,7 @@
     "resumo": "Câmara Municipal de Pau dos Ferros, no Rio Grande do Norte, está com 5 vagas para cargos permanentes do seu quadro de servidores. Banca é a CPCon.",
     "salario": 4700.0,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Concurso Câmara de Pau dos Ferros (RN) tem salários de até R$ 4,7 mil",
     "uf": "RN",
@@ -40891,7 +41179,7 @@
     "url": "https://concursosnobrasil.com/concursos/rn/2026/09/11/concurso-prefeitura-e-camara-de-nisia-floresta-rn-oferta-161-vagas-de-ate-r-32-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284288+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776269+00:00",
     "avisado_em": "2026-09-18T03:04:50.254635+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T02:59:51.779331+00:00",
@@ -40921,7 +41209,7 @@
     "resumo": "Câmara Municipal de Mossoró, no estado do Rio Grande do Norte, oferecerá 24 vagas para cargos de níveis médio e superior, além da formação de cadastro de reserva.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Concurso Câmara de Mossoró (RN) terá 24 vagas e banca será UFRN",
     "uf": "RN",
@@ -42078,6 +42366,42 @@
     "titulo": "RO: Câmara de Candeias do Jamari abre 17 vagas em edital de concurso",
     "uf": "RO",
     "url": "https://concursosnobrasil.com/concursos/ro/2026/09/15/ro-camara-de-candeias-do-jamari-abre-17-vagas-em-edital-de-concurso/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.855742+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.855739+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rondônia"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de Novo Horizonte do Oeste (RO): prova aplicada fora de SC.",
+    "municipio": "Novo Horizonte do Oeste",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T13:28:59+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Novo Horizonte do Oeste , no estado de Rondônia, oferta salários de até R$ 7,9 mil.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Novo Horizonte do Oeste (RO) abre edital com 39 vagas na saúde",
+    "uf": "RO",
+    "url": "https://concursosnobrasil.com/concursos/ro/2026/09/18/prefeitura-de-novo-horizonte-do-oeste-ro-abre-edital-com-39-vagas-na-saude/"
   },
   {
     "atualizado_em": "2026-09-18T03:04:50.285528+00:00",
@@ -44168,7 +44492,7 @@
     "url": "https://concursosnobrasil.com/concursos/rs/2026/07/03/prefeitura-de-tres-coroas-rs-lanca-editais-de-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285438+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.783387+00:00",
     "avisado_em": "2026-09-18T03:04:50.258463+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.868475+00:00",
@@ -44197,7 +44521,7 @@
     "resumo": "Prefeitura de Santo Ângelo, Rio Grande do Sul, abre 85 postos de trabalho em todos os níveis de escolaridade. Objetiva é a banca organizadora.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Concurso Prefeitura de Santo Ângelo (RS) abre mais de 80 vagas",
     "uf": "RS",
@@ -52950,6 +53274,78 @@
     "titulo": "Prefeitura de Torres (RS) paga até R$ 7,8 mil em novo seletivo",
     "uf": "RS",
     "url": "https://concursosnobrasil.com/concursos/rs/2026/09/17/prefeitura-de-torres-rs-paga-ate-r-78-mil-em-novo-seletivo/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.850859+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.850856+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de Jacutinga (RS): prova aplicada fora de SC.",
+    "municipio": "Jacutinga",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T14:24:21+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso de Prefeitura de Jacutinga recebe inscrições de maneira exclusivamente online e visa provimento de cargos efetivos.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso de Prefeitura de Jacutinga (RS) divulga vagas em dois editais",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/09/18/concurso-de-prefeitura-de-jacutinga-rs-divulga-vagas-em-dois-editais/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.865720+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.865717+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de RS sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T12:44:40+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Processo seletivo Prefeitura de Igrejinha visa contratação de docente por tempo determinado e conta com etapa de análise documental.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "RS: Prefeitura de Igrejinha promove mais um seletivo na área da Educação",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/09/18/rs-prefeitura-de-igrejinha-promove-mais-um-seletivo-na-area-da-educacao/"
   },
   {
     "atualizado_em": "2026-09-18T03:04:50.285646+00:00",
@@ -63320,7 +63716,7 @@
     "url": "https://concursosnobrasil.com/concursos/sc/2026/09/02/ses-sc-promove-novo-edital-com-vagas-de-r-105-mil-mes-em-tres-municipios/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284396+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776271+00:00",
     "avisado_em": "2026-09-18T03:04:50.254969+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:50.516402+00:00",
@@ -63349,7 +63745,7 @@
     "resumo": "Concurso Prefeitura de São Joaquim, em Santa Catarina, abre oportunidades para diversos níveis de escolaridade, com provas previstas para outubro.",
     "salario": 10300.0,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "prevista",
     "tipo": "concurso",
     "titulo": "Concurso da Prefeitura de São Joaquim (SC) abre vagas com iniciais de até R$ 10,3 mil",
     "uf": "SC",
@@ -64724,7 +65120,7 @@
     "url": "https://concursosnobrasil.com/concursos/sc/2026/09/17/concurso-prefeitura-de-ipumirim-sc-conta-com-salarios-de-ate-r-69-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T04:20:06.482670+00:00",
+    "atualizado_em": "2026-09-18T15:48:37.542468+00:00",
     "avisado_em": "2026-09-18T03:04:50.254499+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T02:59:51.729378+00:00",
@@ -64741,7 +65137,7 @@
     "idade_maxima": null,
     "inscricoes_ate": "2026-10-17T02:59:59+00:00",
     "inscricoes_de": "2026-09-16T03:00:00+00:00",
-    "interesse": "favorito",
+    "interesse": null,
     "motivo_elegibilidade": null,
     "motivo_relevancia": "São José (SC) esta no anel nucleo.",
     "municipio": "São José",
@@ -64751,8 +65147,8 @@
     "publicado_em": "2026-09-17T11:54:51+00:00",
     "relevancia": "nucleo",
     "resumo": "Concurso Prefeitura de São José, no estado de Santa Catarina, tem oportunidades na área da educação.",
-    "salario": null,
-    "salario_manual": false,
+    "salario": 4500.0,
+    "salario_manual": true,
     "situacao": "inscricoes_abertas",
     "tipo": "concurso",
     "titulo": "Concurso Prefeitura de São José (SC) abre 300 vagas em edital",
@@ -65048,6 +65444,42 @@
     "url": "https://concursosnobrasil.com/concursos/sc/2026/09/17/prefeitura-de-tunapolis-sc-promove-novo-seletivo-com-cargos-de-ate-r-54-mil/"
   },
   {
+    "atualizado_em": "2026-09-18T15:48:53.862452+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.862449+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Santa Catarina"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Nova Trento (SC) esta no anel nucleo.",
+    "municipio": "Nova Trento",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T13:11:33+00:00",
+    "relevancia": "nucleo",
+    "resumo": "Processo seletivo Prefeitura de Nova Trento, no estado de Santa Catarina, tem oportunidades de níveis fundamental e superior.",
+    "salario": 5100.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Nova Trento (SC) oferta iniciais de até R$ 5,1 mil em seletivo",
+    "uf": "SC",
+    "url": "https://concursosnobrasil.com/concursos/sc/2026/09/18/prefeitura-de-nova-trento-sc-oferta-iniciais-de-ate-r-51-mil-em-seletivo/"
+  },
+  {
     "atualizado_em": "2026-09-18T03:04:50.285108+00:00",
     "avisado_em": "2026-09-18T03:04:50.257467+00:00",
     "banca": null,
@@ -65154,6 +65586,42 @@
     "titulo": "SE: Concurso Câmara de Nossa Senhora das Dores abre vagas em edital",
     "uf": "SE",
     "url": "https://concursosnobrasil.com/concursos/se/2026/08/20/se-concurso-camara-de-nossa-senhora-das-dores-abre-vagas-em-edital/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.867904+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.867901+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Sergipe"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de SE sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T12:07:58+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Concurso CRO SE (Conselho Regional de Odontologia de Sergipe), abre inscrições online com salários de até R$ 4.504,61.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso CRO SE oferece 83 vagas para níveis médio e superior",
+    "uf": "SE",
+    "url": "https://concursosnobrasil.com/concursos/se/2026/09/18/concurso-cro-se-oferece-83-vagas-para-niveis-medio-e-superior/"
   },
   {
     "atualizado_em": "2026-09-18T03:04:50.285648+00:00",
@@ -66272,7 +66740,7 @@
     "url": "https://concursosnobrasil.com/concursos/sp/2026/06/29/funcamp-sp-esta-com-seletivo-aberto-para-a-area-administrativa/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285525+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.783391+00:00",
     "avisado_em": "2026-09-18T03:04:50.258728+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:52.015680+00:00",
@@ -66302,7 +66770,7 @@
     "resumo": "Concurso Polícia Militar de São Paulo (PM SP) é autorizado com vagas para o cargo de aluno-soldado.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "autorizado",
     "tipo": "concurso",
     "titulo": "Polícia Militar de São Paulo tem novo concurso autorizado com 4 mil vagas",
     "uf": "SP",
@@ -67353,7 +67821,7 @@
     "url": "https://concursosnobrasil.com/concursos/sp/2026/07/06/prefeitura-de-orindiuva-sp-divulga-edital-para-nutricionista-e-professor-de-arte/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285404+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.782198+00:00",
     "avisado_em": "2026-09-18T03:04:50.258352+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.819537+00:00",
@@ -67383,7 +67851,7 @@
     "resumo": "Concurso DPE SP (Defensoria Pública do Estado de São Paulo) publica extrato de contrato com a Fundação Carlos Chagas.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Concurso DPE SP define FCC como banca para próximo edital com 70 vagas",
     "uf": "SP",
@@ -69766,7 +70234,7 @@
     "url": "https://concursosnobrasil.com/concursos/sp/2026/07/21/concurso-prefeitura-de-ibira-sp-abre-41-vagas-e-paga-ate-r-5-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285166+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776276+00:00",
     "avisado_em": "2026-09-18T03:04:50.257642+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.464541+00:00",
@@ -69796,7 +70264,7 @@
     "resumo": "Concurso SME SP 2026 pode contar com dois editais e diferentes etapas de classificação. A comissão e a banca organizadora ainda serão definidas.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Concurso SME SP tem 4,5 mil vagas autorizadas pela Prefeitura",
     "uf": "SP",
@@ -74123,7 +74591,7 @@
     "url": "https://concursosnobrasil.com/concursos/sp/2026/08/17/ure-de-sao-joao-da-boa-vista-sp-publica-edital-de-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.284717+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.776273+00:00",
     "avisado_em": "2026-09-18T03:04:50.256048+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:50.865994+00:00",
@@ -74153,7 +74621,7 @@
     "resumo": "Concurso Coren (Conselho Regional de Enfermagem de São Paulo) terá oportunidades para profissionais de diferentes áreas.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "prevista",
     "tipo": "concurso",
     "titulo": "Concurso Coren SP tem edital previsto para 76 vagas de níveis médio e superior",
     "uf": "SP",
@@ -79128,7 +79596,79 @@
     "url": "https://concursosnobrasil.com/concursos/sp/2026/09/17/funcamp-sp-tem-quatro-editais-abertos-com-salarios-de-ate-r-6-mil/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285506+00:00",
+    "atualizado_em": "2026-09-18T15:48:53.869906+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.869904+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de SP sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T12:01:25+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Câmara de Paulistânia, no estado de São Paulo, divulga edital de concurso público e oferece vagas imediatas para diferentes níveis de escolaridade.",
+    "salario": 5700.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de Paulistânia SP abre vagas com salário de até R$ 5,7 mil",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/09/18/concurso-camara-de-paulistania-sp-abre-vagas-com-salario-de-ate-r-57-mil/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:53.846191+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-18T15:48:53.846187+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de SP sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-18T15:45:15+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Processo seletivo FAMESP disponibiliza oportunidades de níveis técnico e superior, contemplando diferentes áreas de atuação.",
+    "salario": 6000.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "FAMESP divulga vagas de até R$ 6 mil no município de Botucatu",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/09/18/famesp-divulga-vagas-de-ate-r-6-mil-no-municipio-de-botucatu/"
+  },
+  {
+    "atualizado_em": "2026-09-18T15:48:10.783390+00:00",
     "avisado_em": "2026-09-18T03:04:50.258666+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.979663+00:00",
@@ -79158,7 +79698,7 @@
     "resumo": "A Fundação Getulio Vargas (FGV) foi contratada como a banca organizadora do próximo concurso público da Secretaria de Saúde do Tocantins.",
     "salario": null,
     "salario_manual": false,
-    "situacao": "edital_publicado",
+    "situacao": "banca_definida",
     "tipo": "concurso",
     "titulo": "Concurso SES (TO) será organizado pela FGV com oferta de 5.124 vagas",
     "uf": "TO",
@@ -79381,7 +79921,7 @@
     "url": "https://concursosnobrasil.com/concursos/to/2026/08/19/seduc-to-divulga-edital-de-processo-seletivo-para-bolsistas/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285551+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.784420+00:00",
     "avisado_em": "2026-09-18T03:04:50.258806+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:52.052994+00:00",
@@ -79401,7 +79941,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_elegibilidade": null,
-    "motivo_relevancia": "Nao parece concurso: o titulo nao fala em vaga, edital nem inscricao.",
+    "motivo_relevancia": "Sem UF: pode ser federal com prova em Florianopolis. Depende do edital.",
     "municipio": null,
     "municipio_confirmado": false,
     "notas": null,
@@ -79412,7 +79952,7 @@
     "salario": 200.0,
     "salario_manual": false,
     "situacao": "desconhecida",
-    "tipo": "noticia",
+    "tipo": "desconhecido",
     "titulo": "Pé-de-meia: estudantes recebem parcela de R$ 200 em julho?",
     "uf": null,
     "url": "https://concursosnobrasil.com/educacao/2026/06/26/pe-de-meia-estudantes-recebem-parcela-de-r-200-em-julho/"
@@ -79455,7 +79995,7 @@
     "url": "https://concursosnobrasil.com/noticia/2026/06/25/9-profissoes-que-tem-vagas-sobrando-por-falta-de-mao-de-obra-no-pais/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285427+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.782383+00:00",
     "avisado_em": "2026-09-18T03:04:50.258428+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.853937+00:00",
@@ -79474,7 +80014,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_elegibilidade": null,
-    "motivo_relevancia": "Nao parece concurso: o titulo nao fala em vaga, edital nem inscricao.",
+    "motivo_relevancia": "Sem UF: pode ser federal com prova em Florianopolis. Depende do edital.",
     "municipio": null,
     "municipio_confirmado": false,
     "notas": null,
@@ -79485,13 +80025,13 @@
     "salario": null,
     "salario_manual": false,
     "situacao": "desconhecida",
-    "tipo": "noticia",
+    "tipo": "desconhecido",
     "titulo": "3º lote da restituição do IRPF 2026: veja quando abre a consulta",
     "uf": null,
     "url": "https://concursosnobrasil.com/noticia/2026/07/06/3o-lote-da-restituicao-do-irpf-2026-veja-quando-abre-a-consulta/"
   },
   {
-    "atualizado_em": "2026-09-18T03:04:50.285381+00:00",
+    "atualizado_em": "2026-09-18T15:48:10.781871+00:00",
     "avisado_em": "2026-09-18T03:04:50.258281+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.790952+00:00",
@@ -79510,7 +80050,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_elegibilidade": null,
-    "motivo_relevancia": "Nao parece concurso: o titulo nao fala em vaga, edital nem inscricao.",
+    "motivo_relevancia": "Sem UF: pode ser federal com prova em Florianopolis. Depende do edital.",
     "municipio": null,
     "municipio_confirmado": false,
     "notas": null,
@@ -79521,7 +80061,7 @@
     "salario": null,
     "salario_manual": false,
     "situacao": "desconhecida",
-    "tipo": "noticia",
+    "tipo": "desconhecido",
     "titulo": "Próximo feriado nacional cai em julho? Veja calendário atualizado",
     "uf": null,
     "url": "https://concursosnobrasil.com/noticia/2026/07/08/proximo-feriado-nacional-cai-em-julho-veja-calendario-atualizado/"
@@ -79599,7 +80139,7 @@
     "url": "https://concursosnobrasil.com/noticia/2026/09/02/ploa-2027-preve-mais-de-53-mil-vagas-e-r-44-bilhoes-para-pessoal/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.271456+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.807471+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.271454+00:00",
@@ -79637,7 +80177,7 @@
     "url": "https://fepese.org.br/concurso/2006-casan/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.270059+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.806204+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.270056+00:00",
@@ -79675,7 +80215,7 @@
     "url": "https://fepese.org.br/concurso/2006-celesc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.272832+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.808939+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.272830+00:00",
@@ -79751,7 +80291,7 @@
     "url": "https://fepese.org.br/concurso/2006-concurso-secretaria-de-estado-da-saude-ses/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.272103+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.808209+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.272101+00:00",
@@ -79789,7 +80329,7 @@
     "url": "https://fepese.org.br/concurso/2006-epagri/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.270822+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.806850+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.270820+00:00",
@@ -79865,7 +80405,7 @@
     "url": "https://fepese.org.br/concurso/2006-processo-seletivo-medico-residente/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.273773+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.809764+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.273770+00:00",
@@ -79903,7 +80443,7 @@
     "url": "https://fepese.org.br/concurso/2006-secretaria-municipal-de-educacao-florianopolis/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.269073+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.805444+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.269070+00:00",
@@ -79941,7 +80481,7 @@
     "url": "https://fepese.org.br/concurso/2006-tribunal-de-contas-do-estado-de-santa-catarina/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.265844+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.802817+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.265842+00:00",
@@ -80397,7 +80937,7 @@
     "url": "https://fepese.org.br/concurso/2007-processo-seletivo-para-medico-residente-do-hu-edital-01-2007/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.255135+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.791459+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.255133+00:00",
@@ -80473,7 +81013,7 @@
     "url": "https://fepese.org.br/concurso/2008-concurso-publico-da-secretaria-municipal-de-saude-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.251958+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.787750+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.251956+00:00",
@@ -80511,7 +81051,7 @@
     "url": "https://fepese.org.br/concurso/2008-conselho-regional-de-psicologia-12o-regiao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.255862+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.792272+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.255860+00:00",
@@ -80549,7 +81089,7 @@
     "url": "https://fepese.org.br/concurso/2008-fundacao-educacional-de-sao-jose-usj/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.254451+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.790621+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.254449+00:00",
@@ -80587,7 +81127,7 @@
     "url": "https://fepese.org.br/concurso/2008-guarda-municipal-de-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.253832+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.789656+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.253830+00:00",
@@ -80625,7 +81165,7 @@
     "url": "https://fepese.org.br/concurso/2008-prefeitura-municipal-de-criciuma-editais-01-02-e-03-2008/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.253200+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.789004+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.253198+00:00",
@@ -80663,7 +81203,7 @@
     "url": "https://fepese.org.br/concurso/2008-prefeitura-municipal-de-criciuma-edital-04-2008/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.251243+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.786686+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.251241+00:00",
@@ -80701,7 +81241,7 @@
     "url": "https://fepese.org.br/concurso/2008-prefeitura-municipal-de-florianopolis-edital-003-2008/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.252592+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.788255+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.252590+00:00",
@@ -80891,7 +81431,7 @@
     "url": "https://fepese.org.br/concurso/2008-processo-seletivo-pmf-auxiliar-de-sala-edital-007-2008/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.248550+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.784484+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.248549+00:00",
@@ -80929,7 +81469,7 @@
     "url": "https://fepese.org.br/concurso/2008-residencia-medica-hospital-municipal-sao-jose-01-2008/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.247139+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.781434+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.247138+00:00",
@@ -80967,7 +81507,7 @@
     "url": "https://fepese.org.br/concurso/2008-vestibular-usj-2009/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.236443+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.765485+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.236413+00:00",
@@ -81347,7 +81887,7 @@
     "url": "https://fepese.org.br/concurso/2009-pge-concurso-publico-de-provas-e-titulos-para-ingresso-na-carreira-de-procurador-do-estado/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.234071+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.763715+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.234068+00:00",
@@ -81385,7 +81925,7 @@
     "url": "https://fepese.org.br/concurso/2009-prefeitura-municipal-de-brusque-editais-01-2009-02-2009-03-2009-04-2009/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.245072+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.778537+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.245070+00:00",
@@ -81423,7 +81963,7 @@
     "url": "https://fepese.org.br/concurso/2009-prefeitura-municipal-de-florianopolis-concurso-publico-do-magisterio-edital-no-001-2009/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.234880+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.764426+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.234877+00:00",
@@ -81461,7 +82001,7 @@
     "url": "https://fepese.org.br/concurso/2009-prefeitura-municipal-de-palhoca-edital-002-2009/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.244420+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.777024+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.244418+00:00",
@@ -81499,7 +82039,7 @@
     "url": "https://fepese.org.br/concurso/2009-prefeitura-municipal-de-palhoca-saude-edital-no-001-2009/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.232354+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.762271+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.232352+00:00",
@@ -83741,7 +84281,7 @@
     "url": "https://fepese.org.br/concurso/2011-pmf-processo-seletivo-de-substitutos-edital-no-002-2011/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.174907+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.712969+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.174903+00:00",
@@ -83779,7 +84319,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-de-tijucas-magisterio-obras-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.180504+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.716915+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.180502+00:00",
@@ -83817,7 +84357,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-balneario-camboriu-proceso-seletivo-edital-02-2011/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.179730+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.715945+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.179727+00:00",
@@ -83855,7 +84395,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-balneario-camboriu-proceso-seletivo-edital-04-2011/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.195947+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.728475+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.195945+00:00",
@@ -83893,7 +84433,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-florianopolis-procuradoria-geral/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.187803+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.723495+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.187801+00:00",
@@ -83931,7 +84471,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-palhoca-concurso-publico-editais-01-02-e-03-2011/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.195077+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.727816+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.195072+00:00",
@@ -83969,7 +84509,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-palhoca-secretaria-de-educacao-processo-seletivo-edital-009-201/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.192265+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.726152+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.192263+00:00",
@@ -84007,7 +84547,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-tijucas-editais-001-2011-002-2011-003-2011-e-004-2011/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.176224+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.713661+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.176220+00:00",
@@ -84045,7 +84585,7 @@
     "url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-tubarao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.178866+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.715485+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.178864+00:00",
@@ -84349,7 +84889,7 @@
     "url": "https://fepese.org.br/concurso/2012-concurso-publico-floram/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.165785+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.707807+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.165783+00:00",
@@ -84387,7 +84927,7 @@
     "url": "https://fepese.org.br/concurso/2012-fatma-advogados/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.166518+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.708549+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.166516+00:00",
@@ -84425,7 +84965,7 @@
     "url": "https://fepese.org.br/concurso/2012-fcee-fundacao-catarinense-de-educacao-especial/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.168898+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.710328+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.168896+00:00",
@@ -84463,7 +85003,7 @@
     "url": "https://fepese.org.br/concurso/2012-projeto-forca-tur/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.167245+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.709187+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.167243+00:00",
@@ -85413,7 +85953,7 @@
     "url": "https://fepese.org.br/concurso/2013-sea-edital-01-2013tecnico-em-atividades-administrativasanalista-de-informaticaanalista-tecnico-administrativo-iiassistente-socialenfermeiropsicologomedico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.061135+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.626774+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.061132+00:00",
@@ -86401,7 +86941,7 @@
     "url": "https://fepese.org.br/concurso/2014-processo-seletivo-publico-simplificado-prefeitura-municipal-de-tijucas-edital-001-2014/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.119106+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.673724+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.119103+00:00",
@@ -86477,7 +87017,7 @@
     "url": "https://fepese.org.br/concurso/2014-sao-jose-concurso-publico-editais-001-002-003-e-004-2013/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.078471+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.642503+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.078467+00:00",
@@ -87047,7 +87587,7 @@
     "url": "https://fepese.org.br/concurso/2015-pmsj-secretaria-municipal-de-saude-concurso-publicoedital-03-prefeitura-municipal-de-sao-jose-saudeedital-04-tecnico-em-radiologia-e-imagem/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.087600+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.649463+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.087598+00:00",
@@ -87085,7 +87625,7 @@
     "url": "https://fepese.org.br/concurso/2015-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-edital-004-2015/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.074133+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.638029+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.074130+00:00",
@@ -87123,7 +87663,7 @@
     "url": "https://fepese.org.br/concurso/2015-prefeitura-municipal-de-brusque-concurso-publico-edital-001-2015/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.080457+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.644257+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.080455+00:00",
@@ -87161,7 +87701,7 @@
     "url": "https://fepese.org.br/concurso/2015-prefeitura-municipal-de-palhoca-secretaria-municipal-da-educacao-processo-seletivoedital-003-sme-2015-prefeitura-municipal-de-palhoca-magisterioedital-004-sme-2015-age/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.079510+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.643349+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.079508+00:00",
@@ -87579,7 +88119,7 @@
     "url": "https://fepese.org.br/concurso/2016-governo-do-estado-de-santa-catarina-secretaria-de-estado-da-justica-e-cidadania-concurso-publico-edital-001-2016-sjc-sc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.055516+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.620843+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.055514+00:00",
@@ -87617,7 +88157,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-florianopolis-secretaria-municipal-de-administracao-concurso-publico-edital-012-2016/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.059089+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.623927+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.059087+00:00",
@@ -87655,7 +88195,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-florianopolis-secretaria-municipal-de-educacao-processo-seletivo-de-substitutos-edital-011-2016/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.053029+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.618103+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.053027+00:00",
@@ -87693,7 +88233,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-fraiburgo-processo-seletivo-edital-028-2016-professor-auxiliar-educacional-agente-de-servicos-gerais-auxiliar-de-alimentacao-e-nutricaoprocesso-seletivo-edital/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.058349+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.623232+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.058347+00:00",
@@ -87731,7 +88271,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-lages-concurso-publico-edital-001-2016-municipio-de-lages-geralconcurso-publico-edital-002-2016-magisterio-publico-educacaoconcurso-publico-edital-003-2016-ag/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.053653+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.618926+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.053652+00:00",
@@ -87769,7 +88309,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-lages-processo-seletivo-edital-001-2016-educacao-professorprocesso-seletivo-edital-002-2016-agente-comunitario-de-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.061893+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.627320+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.061891+00:00",
@@ -87807,7 +88347,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-sao-jose-assistencia-socialconcurso-publico-edital-001-2016-gab/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.054903+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.620145+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.054901+00:00",
@@ -87845,7 +88385,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-sao-jose-secretaria-municipal-de-educacao-processo-seletivo-edital-003-2016-sme/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.067205+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.631108+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.067204+00:00",
@@ -87883,7 +88423,7 @@
     "url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-tijucas-monitor-de-creche-edital-001-2016/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.050770+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.615015+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.050754+00:00",
@@ -88111,7 +88651,7 @@
     "url": "https://fepese.org.br/concurso/2017-concurso-publico-da-prefeitura-municipal-de-criciuma-edital-001-2017/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.033536+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.596015+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.033534+00:00",
@@ -88149,7 +88689,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-balneario-camboriu-seletivo-professores/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.032172+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.594366+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.032170+00:00",
@@ -88187,7 +88727,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-chapeco-concurso-publico-edital-001-2017/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.036056+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.598608+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.036054+00:00",
@@ -88225,7 +88765,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-chapeco-processo-seletivo-edital-004-2017/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.030121+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.591964+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.030119+00:00",
@@ -88263,7 +88803,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-concordia-concurso-publico-concurso-publico-edital-001-2018-quadro-geral-e-fmecconcurso-publico-edital-002-2018-educacaoconcurso-publico-edital-003-2018-clt-conc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.038320+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.601978+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.038318+00:00",
@@ -88301,7 +88841,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-florianopolissecretaria-municipal-de-educacaoprocesso-seletivo-de-substitutos-edital-002-2017/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.036965+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.599458+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.036963+00:00",
@@ -88339,7 +88879,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-fraiburgo-concurso-publico-concurso-publico-edital-001-2017-fme-fundacao-municipal-de-esportesconcurso-publico-edital-002-2017-pmf-magisterio-publico-processo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.045848+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.608972+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.045846+00:00",
@@ -88377,7 +88917,7 @@
     "url": "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-sao-jose-secretaria-municipal-de-educacao-processo-seletivo-edital-004-2017-sme/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.029485+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.591239+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.029483+00:00",
@@ -88985,7 +89525,7 @@
     "url": "https://fepese.org.br/concurso/2018-plano-de-assistencia-a-saude-dos-servidores-municipais-de-mafra-concurso-publico-concurso-publico-edital-001-2018/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.024247+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.585491+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.024245+00:00",
@@ -89023,7 +89563,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico-concurso-publico-edital-001-2018-quadro-funcionalconcurso-publico-edital-002-2018-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.024914+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.586464+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.024912+00:00",
@@ -89061,7 +89601,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo-processo-seletivo-edital-001-2018-geralprocesso-seletivo-edital-002-2018-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.007796+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.565111+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.007794+00:00",
@@ -89099,7 +89639,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-campos-novos-concurso-publico-concurso-publico-edital-001-2018-executivo-concurso-publico-edital-002-2018-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.008417+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.565914+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.008415+00:00",
@@ -89137,7 +89677,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-campos-novos-processo-seletivo-processo-seletivo-edital-001-2018-executivo-processo-seletivo-edital-002-2018-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.012140+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.571572+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.012137+00:00",
@@ -89175,7 +89715,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-chapeco-processo-seletivo-processo-seletivo-edital-001-2018-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.021851+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.582022+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.021849+00:00",
@@ -89213,7 +89753,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-florianopolis-processo-seletivo-processo-seletivo-edital-004-2018-contratacao-de-substitutos/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.011265+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.570767+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.011263+00:00",
@@ -89251,7 +89791,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-fraiburgo-processo-seletivo-processo-seletivo-publico-simplificado-edital-006-2018-executivoprocesso-seletivo-publico-simplificado-edital-007-2018-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.013059+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.572453+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.013057+00:00",
@@ -89289,7 +89829,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-mafra-concurso-publico-concurso-publico-edital-001-2018/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.017815+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.576774+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.017812+00:00",
@@ -89327,7 +89867,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-pinhalzinho-concurso-publico-concurso-publico-edital-001-2018/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.018490+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.577572+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.018488+00:00",
@@ -89365,7 +89905,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-pinhalzinho-processo-seletivo-processo-seletivo-edital-001-2018-agente-educativo-e-professor/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.022579+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.582760+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.022577+00:00",
@@ -89403,7 +89943,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-rio-das-antas-concurso-publico-concurso-publico-edital-001-2018-quadro-de-servidoresconcurso-publico-edital-002-2018-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.023519+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.584356+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.023516+00:00",
@@ -89441,7 +89981,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-rio-das-antas-concurso-publico-concurso-publico-edital-003-2018-medico-clinico-geral/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.027319+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.589162+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.027317+00:00",
@@ -89479,7 +90019,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-sao-jose-concurso-publico-concurso-de-relotacao-e-alteracao-da-carga-horaria-edital-012-2018/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.009839+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.568781+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.009837+00:00",
@@ -89517,7 +90057,7 @@
     "url": "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-sao-jose-concurso-publico-concurso-publico-edital-010-2018-sme/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.021231+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.581202+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.021229+00:00",
@@ -89783,7 +90323,7 @@
     "url": "https://fepese.org.br/concurso/2018-visan-concurso-publico-concurso-publico-001-2018/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.274432+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.810224+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.274430+00:00",
@@ -90125,7 +90665,7 @@
     "url": "https://fepese.org.br/concurso/2019-fundacao-catarinense-de-educacao-especial-fcee-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.288248+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.823504+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.288246+00:00",
@@ -90163,7 +90703,7 @@
     "url": "https://fepese.org.br/concurso/2019-municipio-de-florianopolis-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.286530+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.822211+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.286528+00:00",
@@ -90201,7 +90741,7 @@
     "url": "https://fepese.org.br/concurso/2019-municipio-de-florianopolis-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.275048+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.810854+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.275046+00:00",
@@ -90239,7 +90779,7 @@
     "url": "https://fepese.org.br/concurso/2019-municipio-de-itajai-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.287512+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.822846+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.287509+00:00",
@@ -90277,7 +90817,7 @@
     "url": "https://fepese.org.br/concurso/2019-municipio-de-sao-jose-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.279233+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.815884+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.279231+00:00",
@@ -90391,7 +90931,7 @@
     "url": "https://fepese.org.br/concurso/2019-poder-legislativo-do-municipio-de-icara/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.295555+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.827300+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.295552+00:00",
@@ -90429,7 +90969,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.296392+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.828052+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.296390+00:00",
@@ -90467,7 +91007,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.293768+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.826051+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.293765+00:00",
@@ -90505,7 +91045,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-ararangua-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.280861+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.817442+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.280859+00:00",
@@ -90543,7 +91083,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-balneario-camboriu-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.291244+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.824785+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.291240+00:00",
@@ -90581,7 +91121,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-bombinhas-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.277909+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.814396+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.277907+00:00",
@@ -90619,7 +91159,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-chapeco-processo-seletivo-processo-seletivo-edital-002-2019-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.285217+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.820868+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.285215+00:00",
@@ -90657,7 +91197,7 @@
     "url": "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-fraiburgo-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.277292+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.813280+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.277290+00:00",
@@ -90771,7 +91311,7 @@
     "url": "https://fepese.org.br/concurso/2019-secretaria-de-estado-da-saude-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.005931+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.563758+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.005929+00:00",
@@ -90847,7 +91387,7 @@
     "url": "https://fepese.org.br/concurso/2019-teste-abepro-edicao-de-outubro-de-2019-edital-001-2019/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.000348+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.558055+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.000346+00:00",
@@ -90961,7 +91501,7 @@
     "url": "https://fepese.org.br/concurso/2020-icaraprev-concurso-publico-concurso-publico-edital-no-001-2020/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.993954+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.548685+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.993952+00:00",
@@ -90999,7 +91539,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo-simplificado-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.993332+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.547974+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.993331+00:00",
@@ -91037,7 +91577,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo-simplificado-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.980509+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.535505+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.980507+00:00",
@@ -91075,7 +91615,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-aguas-de-chapeco/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.000975+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.558699+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.000973+00:00",
@@ -91113,7 +91653,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-ararangua-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.992734+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.547281+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.992732+00:00",
@@ -91151,7 +91691,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-ararangua-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.995178+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.551121+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.995176+00:00",
@@ -91189,7 +91729,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-simplificado-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.996551+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.553752+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.996549+00:00",
@@ -91227,7 +91767,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-simplificado-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.994568+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.549302+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.994566+00:00",
@@ -91265,7 +91805,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-simplificado-esporte/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.995914+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.552545+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.995912+00:00",
@@ -91303,7 +91843,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-simplificado-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.976605+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.528415+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.976603+00:00",
@@ -91341,7 +91881,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-campos-novos-concurso-publico-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.968325+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.514143+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.968324+00:00",
@@ -91379,7 +91919,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-concordia/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.999736+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.557373+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.999734+00:00",
@@ -91417,7 +91957,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-coronel-freitas-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.003934+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.561736+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.003932+00:00",
@@ -91455,7 +91995,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-florianopolis-autarquia-comcap-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.998482+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.555964+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.998480+00:00",
@@ -91493,7 +92033,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.997176+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.554465+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.997174+00:00",
@@ -91531,7 +92071,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-fraiburgo-processo-seletivo-simplificado/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.002270+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.560206+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.002268+00:00",
@@ -91569,7 +92109,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-icara-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.975987+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.527028+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.975985+00:00",
@@ -91607,7 +92147,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-icara-educacao-ciencia-e-tecnologia-concurso-publico-2020/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.999107+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.556612+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.999106+00:00",
@@ -91645,7 +92185,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-icara-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.981788+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.536832+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.981786+00:00",
@@ -91683,7 +92223,7 @@
     "url": "https://fepese.org.br/concurso/2020-prefeitura-municipal-de-mafra/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.978479+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.531274+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.978478+00:00",
@@ -91759,7 +92299,7 @@
     "url": "https://fepese.org.br/concurso/2020-teste-abepro-edicao-de-abril-de-2020-edital-001-2020/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.992095+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.546577+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.992094+00:00",
@@ -91987,7 +92527,7 @@
     "url": "https://fepese.org.br/concurso/2021-instituto-geral-de-pericias-de-santa-catarina-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.979791+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.534720+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.979789+00:00",
@@ -92025,7 +92565,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.988529+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.543008+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.988527+00:00",
@@ -92063,7 +92603,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.974644+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.524139+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.974642+00:00",
@@ -92101,7 +92641,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-balneario-camboriu-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.975288+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.525936+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.975286+00:00",
@@ -92139,7 +92679,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-balneario-camboriu-educacao-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.973871+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.520613+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.973868+00:00",
@@ -92177,7 +92717,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-balneario-camboriu-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.977250+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.529287+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.977248+00:00",
@@ -92215,7 +92755,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-biguacu-educacao-2021/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.983975+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.538926+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.983973+00:00",
@@ -92253,7 +92793,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-caxambu-do-sul-concurso-publico-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.984561+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.539620+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.984560+00:00",
@@ -92291,7 +92831,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-caxambu-do-sul-processo-seletivo-administracao-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.985427+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.540287+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.985425+00:00",
@@ -92329,7 +92869,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-caxambu-do-sul-processo_seletivo-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.977869+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.530149+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.977867+00:00",
@@ -92367,7 +92907,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-chapeco/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.986051+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.540929+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.986049+00:00",
@@ -92405,7 +92945,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-criciuma-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.989569+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.543670+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.989566+00:00",
@@ -92443,7 +92983,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.987572+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.542274+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.987570+00:00",
@@ -92481,7 +93021,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-florianopolis-processo-seletivo-contratacao-de-substitutos/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.981135+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.536156+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.981133+00:00",
@@ -92519,7 +93059,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-florianopolis-procurador-municipal-classe-inicial/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.969540+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.515588+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.969538+00:00",
@@ -92557,7 +93097,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-guatambu-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.970187+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.516247+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.970185+00:00",
@@ -92595,7 +93135,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-pinhalzinho-concurso-publico-2021/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.991485+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.545201+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.991483+00:00",
@@ -92633,7 +93173,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-sao-carlos/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.979098+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.532354+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.979096+00:00",
@@ -92671,7 +93211,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-sao-jose-concurso-publico-relotacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.986623+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.541579+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.986621+00:00",
@@ -92709,7 +93249,7 @@
     "url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-sao-jose-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.971543+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.518682+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.971541+00:00",
@@ -93051,7 +93591,7 @@
     "url": "https://fepese.org.br/concurso/2022-policia-cientifica-estado-de-santa-catarina-concurso-publico-edital-001-2022/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.941849+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.481641+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.941847+00:00",
@@ -93089,7 +93629,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.943839+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.484310+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.943836+00:00",
@@ -93127,7 +93667,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo-simplificado/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.940808+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.480873+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.940805+00:00",
@@ -93165,7 +93705,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-autarquia-municipal-de-transito/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.940154+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.479928+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.940152+00:00",
@@ -93203,7 +93743,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-bcprevi/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.949248+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.491579+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.949246+00:00",
@@ -93241,7 +93781,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-cp-adm/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.950201+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.492335+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.950197+00:00",
@@ -93279,7 +93819,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-cp-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.956659+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.498154+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.956627+00:00",
@@ -93317,7 +93857,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-educabc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.939179+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.479112+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.939177+00:00",
@@ -93355,7 +93895,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-fundacao-cultural/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.938510+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.478323+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.938508+00:00",
@@ -93393,7 +93933,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-procurador/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.953006+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.494521+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.953004+00:00",
@@ -93431,7 +93971,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-biguacu-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.962343+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.507712+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.962341+00:00",
@@ -93469,7 +94009,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-chapeco-concursos/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.967097+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.512710+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.967095+00:00",
@@ -93507,7 +94047,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-concordia-concurso-publico-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.967719+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.513400+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.967717+00:00",
@@ -93545,7 +94085,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-concordia-concurso-publico-executivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.961694+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.507022+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.961692+00:00",
@@ -93583,7 +94123,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-criciuma/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.961046+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.506255+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.961044+00:00",
@@ -93621,7 +94161,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.959788+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.503642+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.959785+00:00",
@@ -93659,7 +94199,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-florianopolis-processo-seletivo-simplificado/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.954997+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.496809+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.954995+00:00",
@@ -93697,7 +94237,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-florianopolis-substitutos-ano-letivo-2023/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.963842+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.509113+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.963840+00:00",
@@ -93735,7 +94275,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-pinhalzinho-fmec/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.945954+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.487869+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.945952+00:00",
@@ -93773,7 +94313,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-pinhalzinho-processo-seletivo-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.964474+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.510016+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.964473+00:00",
@@ -93811,7 +94351,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-pinhalzinho/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.945340+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.486818+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.945338+00:00",
@@ -93849,7 +94389,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-carlos-executivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.944670+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.485705+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.944668+00:00",
@@ -93887,7 +94427,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-carlos-fcsc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.954379+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.496140+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.954377+00:00",
@@ -93925,7 +94465,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose-2-relotacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.957796+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.499137+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.957793+00:00",
@@ -93963,7 +94503,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose-processo-seletivo-ano-letivo-2023/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.960432+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.505314+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.960430+00:00",
@@ -94001,7 +94541,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose-processo-seletivo-sme/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.966489+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.511980+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.966487+00:00",
@@ -94039,7 +94579,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.942801+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.482284+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.942799+00:00",
@@ -94077,7 +94617,7 @@
     "url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-videira-edital-026/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.947422+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.489899+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.947420+00:00",
@@ -94153,7 +94693,7 @@
     "url": "https://fepese.org.br/concurso/2022-universidade-do-estado-de-santa-catarina-udesc-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.923880+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.457554+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.923877+00:00",
@@ -94191,7 +94731,7 @@
     "url": "https://fepese.org.br/concurso/2023-camara-municipal-de-sao-carlos/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.936065+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.475384+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.936063+00:00",
@@ -94305,7 +94845,7 @@
     "url": "https://fepese.org.br/concurso/2023-concurso-publico-companhia-aguas-de-joinville/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.934846+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.473599+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.934844+00:00",
@@ -94381,7 +94921,7 @@
     "url": "https://fepese.org.br/concurso/2023-conselho-regional-de-enfermagem-de-santa-catarina-coren-sc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.922648+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.456779+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.922645+00:00",
@@ -94419,7 +94959,7 @@
     "url": "https://fepese.org.br/concurso/2023-fundacao-catarinense-de-educacao-especial/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.921822+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.455589+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.921820+00:00",
@@ -94457,7 +94997,7 @@
     "url": "https://fepese.org.br/concurso/2023-guarda-municipal-de-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.931341+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.466704+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.931339+00:00",
@@ -94495,7 +95035,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-balneario-camboriu-emasa/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.930069+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.464545+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.930067+00:00",
@@ -94533,7 +95073,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-adm/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.930694+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.465579+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.930692+00:00",
@@ -94571,7 +95111,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-educa/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.921199+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.454033+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.921197+00:00",
@@ -94609,7 +95149,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-brusque/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.927410+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.461616+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.927408+00:00",
@@ -94647,7 +95187,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-caxambu-do-sul-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.926789+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.460982+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.926787+00:00",
@@ -94685,7 +95225,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-caxambu-do-sul-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.925505+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.459216+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.925503+00:00",
@@ -94723,7 +95263,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-concordia/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.929432+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.463913+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.929430+00:00",
@@ -94761,7 +95301,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-cunha-pora-concurso-edital-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.937312+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.476703+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.937310+00:00",
@@ -94799,7 +95339,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-cunha-pora/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.932738+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.470493+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.932736+00:00",
@@ -94837,7 +95377,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.936697+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.476062+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.936696+00:00",
@@ -94875,7 +95415,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-monitor-escolar/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.928817+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.463254+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.928815+00:00",
@@ -94913,7 +95453,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-processo-seletivo-edital-023/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.924861+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.458505+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.924859+00:00",
@@ -94951,7 +95491,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.937894+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.477499+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.937893+00:00",
@@ -94989,7 +95529,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.935462+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.474454+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.935460+00:00",
@@ -95027,7 +95567,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-paraiso-do-tocantins/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.926159+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.460083+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.926157+00:00",
@@ -95065,7 +95605,7 @@
     "url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-pinhalzinho/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.931953+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.468471+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.931951+00:00",
@@ -95179,7 +95719,7 @@
     "url": "https://fepese.org.br/concurso/2024-consorcio-interfederativo-santa-catarina-cincatarina/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.908116+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.436214+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.908094+00:00",
@@ -95217,7 +95757,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-balneario-camboriu-adm/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.907021+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.435241+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.907017+00:00",
@@ -95255,7 +95795,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-balneario-camboriu-educa/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.920447+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.453332+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.920445+00:00",
@@ -95293,7 +95833,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-brusque-adm/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.919817+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.452590+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.919815+00:00",
@@ -95331,7 +95871,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-brusque-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.919209+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.451855+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.919207+00:00",
@@ -95369,7 +95909,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-cacador/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.908956+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.436902+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.908954+00:00",
@@ -95407,7 +95947,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-chapeco/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.904647+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.432429+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.904646+00:00",
@@ -95445,7 +95985,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-concordia-ps-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.904028+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.431818+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.904027+00:00",
@@ -95483,7 +96023,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-concordia-ps-saude-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.918592+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.450178+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.918590+00:00",
@@ -95521,7 +96061,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-concordia-ps-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.911425+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.439998+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.911423+00:00",
@@ -95559,7 +96099,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.913886+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.443707+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.913884+00:00",
@@ -95597,7 +96137,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-florianopolis-processo-seletivo-emergencial/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.911996+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.440922+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.911995+00:00",
@@ -95635,7 +96175,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-mafra/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.905259+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.433406+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.905257+00:00",
@@ -95673,7 +96213,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-cp-educa/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.909558+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.437557+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.909556+00:00",
@@ -95711,7 +96251,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-guarda-municipal/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.912575+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.442154+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.912573+00:00",
@@ -95749,7 +96289,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-processo-seletivo-12/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.915738+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.446324+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.915736+00:00",
@@ -95787,7 +96327,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.916368+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.446986+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.916367+00:00",
@@ -95825,7 +96365,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.910138+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.438281+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.910136+00:00",
@@ -95863,7 +96403,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-pinhalzinho/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.914507+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.444893+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.914505+00:00",
@@ -95901,7 +96441,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-sao-jose-emergencial/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.915126+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.445592+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.915124+00:00",
@@ -95939,7 +96479,7 @@
     "url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.910798+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.439367+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.910796+00:00",
@@ -95977,7 +96517,7 @@
     "url": "https://fepese.org.br/concurso/2024-secretaria-de-estado-da-administracao-prisional-e-socioeducativa-concurso-publicoconcurso-publico-edital-001-2019-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.891831+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.418042+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.891829+00:00",
@@ -96015,7 +96555,7 @@
     "url": "https://fepese.org.br/concurso/2025-adm-joacaba/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.900702+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.427895+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.900700+00:00",
@@ -96053,7 +96593,7 @@
     "url": "https://fepese.org.br/concurso/2025-aguas-de-chapeco-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.901502+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.428784+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.901500+00:00",
@@ -96091,7 +96631,7 @@
     "url": "https://fepese.org.br/concurso/2025-aguas-de-chapeco-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.893730+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.419598+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.893728+00:00",
@@ -96129,7 +96669,7 @@
     "url": "https://fepese.org.br/concurso/2025-brusque/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.900090+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.427085+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.900088+00:00",
@@ -96167,7 +96707,7 @@
     "url": "https://fepese.org.br/concurso/2025-chapeco-agente-de-apoio-educacional/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.899469+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.425852+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.899467+00:00",
@@ -96205,7 +96745,7 @@
     "url": "https://fepese.org.br/concurso/2025-chapeco-especialistas-assuntos-educacionais/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.898855+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.424938+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.898853+00:00",
@@ -96243,7 +96783,7 @@
     "url": "https://fepese.org.br/concurso/2025-chapeco-licenciatura/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.894891+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.420636+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.894888+00:00",
@@ -96281,7 +96821,7 @@
     "url": "https://fepese.org.br/concurso/2025-cisamosc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.885015+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.406580+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.885013+00:00",
@@ -96319,7 +96859,7 @@
     "url": "https://fepese.org.br/concurso/2025-companhia-integrada-de-desenvolvimento-agricola-de-santa-catarina-cidasc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.896394+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.421958+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.896392+00:00",
@@ -96357,7 +96897,7 @@
     "url": "https://fepese.org.br/concurso/2025-concurso-publico-cunha-pora/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.903420+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.431332+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.903418+00:00",
@@ -96395,7 +96935,7 @@
     "url": "https://fepese.org.br/concurso/2025-consorcio-interfederativo-santa-catarina-cincatarina-concurso-publico-edital-001-2025/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.892882+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.418832+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.892880+00:00",
@@ -96433,7 +96973,7 @@
     "url": "https://fepese.org.br/concurso/2025-educacao-joacaba/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.890490+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.415657+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.890488+00:00",
@@ -96471,7 +97011,7 @@
     "url": "https://fepese.org.br/concurso/2025-fundacao-catarinense-de-educacao-especial-processo-seletivo-fcee/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.885848+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.407932+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.885846+00:00",
@@ -96509,7 +97049,7 @@
     "url": "https://fepese.org.br/concurso/2025-policia-cientifica-do-estado-de-santa-catarina-pcisc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.897619+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.423406+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.897617+00:00",
@@ -96547,7 +97087,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-de-sao-jose-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.888325+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.412881+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.888323+00:00",
@@ -96585,7 +97125,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-campos-novos-2/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.887712+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.411640+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.887710+00:00",
@@ -96623,7 +97163,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-campos-novos-3/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.888899+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.413775+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.888897+00:00",
@@ -96661,7 +97201,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-campos-novos/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.902128+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.429465+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.902126+00:00",
@@ -96699,7 +97239,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-chapeco-policial-municipal/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.886470+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.408797+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.886468+00:00",
@@ -96737,7 +97277,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-concordia-cp-educacao-administracao-iprecon/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.889695+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.414516+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.889693+00:00",
@@ -96775,7 +97315,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-concordia/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.902740+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.430174+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.902738+00:00",
@@ -96813,7 +97353,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-florianopolis-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.882279+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.401272+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.882277+00:00",
@@ -96851,7 +97391,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-florianopolis-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.882887+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.402344+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.882885+00:00",
@@ -96889,7 +97429,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-florianopolis-processo-seletivo/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.883688+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.403268+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.883686+00:00",
@@ -96927,7 +97467,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-urubici-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.884342+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.403902+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.884340+00:00",
@@ -96965,7 +97505,7 @@
     "url": "https://fepese.org.br/concurso/2025-prefeitura-municipal-de-urubici/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.895615+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.421160+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.895613+00:00",
@@ -97003,7 +97543,7 @@
     "url": "https://fepese.org.br/concurso/2025-processo-seletivo-pinhalzinho/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.887100+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.410528+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.887098+00:00",
@@ -97041,7 +97581,7 @@
     "url": "https://fepese.org.br/concurso/2025-processo-seletivo-prefeitura-municipal-de-caxambu-do-sul/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.891241+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.416166+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.891239+00:00",
@@ -97079,7 +97619,7 @@
     "url": "https://fepese.org.br/concurso/2025-ps-cunha-pora/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.897005+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.422649+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.897003+00:00",
@@ -97117,7 +97657,7 @@
     "url": "https://fepese.org.br/concurso/2025-relotacao-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.898248+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.424155+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.898247+00:00",
@@ -97155,7 +97695,7 @@
     "url": "https://fepese.org.br/concurso/2025-sao-jose-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:14:39.004169+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.382514+00:00",
     "avisado_em": "2026-09-18T04:14:39.002318+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.868043+00:00",
@@ -97194,7 +97734,7 @@
     "url": "https://fepese.org.br/concurso/2026-celesc-distribuicao-s-a-concurso-publico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.873165+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.388782+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.873163+00:00",
@@ -97232,7 +97772,7 @@
     "url": "https://fepese.org.br/concurso/2026-concordia-saude/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.871579+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.387266+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.871577+00:00",
@@ -97270,7 +97810,7 @@
     "url": "https://fepese.org.br/concurso/2026-concurso-municipio-de-brusque/"
   },
   {
-    "atualizado_em": "2026-09-18T04:13:57.911669+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.378261+00:00",
     "avisado_em": "2026-09-18T04:13:57.909849+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.865394+00:00",
@@ -97309,7 +97849,7 @@
     "url": "https://fepese.org.br/concurso/2026-concurso-publico-auxiliar-educaocao-especial-sao-jose/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.870243+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.385769+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.870241+00:00",
@@ -97347,7 +97887,7 @@
     "url": "https://fepese.org.br/concurso/2026-concurso-publico-cunhapora/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.872317+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.388321+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.872315+00:00",
@@ -97385,7 +97925,7 @@
     "url": "https://fepese.org.br/concurso/2026-consorcio-publico-interfederativo-de-saude-da-regiao-da-grande-florianopolis/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.877035+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.395880+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.877034+00:00",
@@ -97423,7 +97963,7 @@
     "url": "https://fepese.org.br/concurso/2026-invest-santa-catarina-parcerias-e-negocios-estrategicos-investsc/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.876268+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.393589+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.876266+00:00",
@@ -97461,7 +98001,7 @@
     "url": "https://fepese.org.br/concurso/2026-medico-urubici/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.881012+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.399081+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.881010+00:00",
@@ -97499,7 +98039,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-caxambu-do-sul-cp-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.881625+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.399779+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.881623+00:00",
@@ -97537,7 +98077,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-caxambu-do-sul-cp-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.880395+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.398393+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.880393+00:00",
@@ -97575,7 +98115,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-caxambu-do-sul-ps-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.868851+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.383382+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.868849+00:00",
@@ -97613,7 +98153,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-chapeco-ps-professor/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.877928+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.396417+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.877926+00:00",
@@ -97651,7 +98191,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-chapeco/"
   },
   {
-    "atualizado_em": "2026-09-18T04:13:57.911663+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.374816+00:00",
     "avisado_em": "2026-09-18T04:13:57.909878+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.861815+00:00",
@@ -97689,7 +98229,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-concordia-ps-educacao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.879680+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.397785+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.879677+00:00",
@@ -97727,7 +98267,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-florianopolis-ps1-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.878798+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.397163+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.878796+00:00",
@@ -97765,7 +98305,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-florianopolis-ps2-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.875649+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.392491+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.875647+00:00",
@@ -97803,7 +98343,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-itajai-administracao/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.874923+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.391107+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.874921+00:00",
@@ -97841,7 +98381,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-itajai-guarda-municipal/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.874211+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.389402+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.874208+00:00",
@@ -97879,7 +98419,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-itajai-juridico/"
   },
   {
-    "atualizado_em": "2026-09-18T04:13:57.911670+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.380248+00:00",
     "avisado_em": "2026-09-18T04:13:57.909886+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.866602+00:00",
@@ -97918,7 +98458,7 @@
     "url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-sao-jose-processo-seletivo-magisterio/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.867277+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.381210+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.867275+00:00",
@@ -97956,7 +98496,7 @@
     "url": "https://fepese.org.br/concurso/2026-processo-seletivo-comcap/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.869618+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.385043+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.869616+00:00",
@@ -97994,7 +98534,7 @@
     "url": "https://fepese.org.br/concurso/2026-processo-seletivo-cunhapora/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.870960+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.386855+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.870958+00:00",
@@ -98222,7 +98762,7 @@
     "url": "https://fepese.org.br/concurso/concurso-de-relotacao-e-alteracao-de-sj/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.968936+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.514890+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.968934+00:00",
@@ -98336,7 +98876,7 @@
     "url": "https://fepese.org.br/concurso/concursos-publicos-pmp-editais-001-2012-e-02-2012/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.916977+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.447999+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.916975+00:00",
@@ -98374,7 +98914,7 @@
     "url": "https://fepese.org.br/concurso/cp-2024-prefeitura-municipal-de-concordia/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.161895+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.704651+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.161893+00:00",
@@ -98678,7 +99218,7 @@
     "url": "https://fepese.org.br/concurso/pmf-processo-seletivo-no-004-2012-e-concurso-publico-no-005-2012/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.292821+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.825416+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.292799+00:00",
@@ -98716,7 +99256,7 @@
     "url": "https://fepese.org.br/concurso/prefeitura-municipal-de-caxambu-do-sul/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.042104+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.604865+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.042102+00:00",
@@ -98754,7 +99294,7 @@
     "url": "https://fepese.org.br/concurso/prefeitura-municipal-de-fraiburgo-processo-seletivo-edital-021-2017/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.028863+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.590531+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.028861+00:00",
@@ -98792,7 +99332,7 @@
     "url": "https://fepese.org.br/concurso/prefeitura-municipal-de-fraiburgo-processo-seletivo-simplificado-edital-003-2018/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:06.048532+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.613469+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.048530+00:00",
@@ -98830,7 +99370,7 @@
     "url": "https://fepese.org.br/concurso/prefeitura-municipal-de-fraiburgo-processo-seletivo-simplificado-edital-009-2017/"
   },
   {
-    "atualizado_em": "2026-09-18T04:12:05.951401+00:00",
+    "atualizado_em": "2026-09-18T15:49:05.493032+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.951398+00:00",

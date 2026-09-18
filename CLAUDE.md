@@ -191,8 +191,21 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   quantos ficaram de fora. A primeira versao incluia os nulos para nao
   esconder concurso bom, e o resultado foi um filtro que nao filtrava: 1.115
   dos 2.185 nao trazem salario no titulo;
-- `situacao` e derivada das datas de inscricao, nunca chutada. Sem prazo
-  conhecido, o status fica como estava;
+- `situacao` vem das datas de inscricao quando ha prazo conhecido, e do
+  TITULO quando nao ha: "tem concurso autorizado" vira `autorizado`, "define
+  banca" vira `banca_definida`, "deve sair" vira `prevista`. Data e fato,
+  titulo e interpretacao - por isso a data manda;
+- a aba de noticias NAO filtra nada: nem anel, nem fase, nem tipo. Quem
+  procura "PM" quer saber de qualquer policia militar, onde estiver e na fase
+  em que estiver. Ela ordena por ANDAMENTO, e nao por data;
+- valor neutro da fonte nao rebaixa o que ja se sabe: "desconhecida" na
+  situacao e tratado como nulo em `VALORES_SEM_INFORMACAO`;
+- `reclassificar` passa o municipio e o tipo ja conhecidos para o
+  classificador. Sem isso ele reextraia do titulo e os 107 concursos da FEPESE
+  perdiam o municipio - o titulo dela nao tem "(SC)". Reclassificar existe
+  para reaplicar a regra do ANEL, nao para reextrair o que a fonte ja deu;
+- o formulario da web usa autocomplete="off": o navegador restaurava o valor
+  digitado antes e o campo aparecia preenchido sozinho;
 - o DOM/SC esta FORA de raspagem: robots.txt com "Disallow: /" para todos.
   Nao insista; o caminho legitimo e o alerta por e-mail do proprio site;
 - fonte que sabe o que publica declara `tipo` no ItemColetado, e o

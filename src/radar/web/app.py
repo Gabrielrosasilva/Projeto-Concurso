@@ -21,6 +21,17 @@ app = FastAPI(title="Radar de Concursos")
 # tudo antes da etapa atual ja aconteceu, por definicao da sequencia.
 # "nucleo" e jargao do codigo; na tela vale o que a pessoa entende.
 # As cores continuam as mesmas: quem le "Perto" ve o mesmo verde de antes.
+# O nome do campo e cru (vai para o banco); na tela vira gente.
+SITUACAO_LEGIVEL = {
+    "prevista": "previsto",
+    "autorizado": "autorizado",
+    "banca_definida": "banca contratada",
+    "edital_publicado": "edital publicado",
+    "inscricoes_abertas": "inscricoes abertas",
+    "encerrado": "encerrado",
+    "desconhecida": "sem informacao",
+}
+
 ROTULO_DO_ANEL = {
     "nucleo": "Perto",
     "proximo": "Proximo",
@@ -110,6 +121,7 @@ def index(
     todos: bool = False,
     abertas: bool = False,
     favoritos: bool = False,
+    noticias: bool = False,
     salario_min: str | None = None,
     salario_max: str | None = None,
     editar: str | None = None,
@@ -126,12 +138,18 @@ def index(
     maximo = converter_valor(salario_max)
     cartao_em_edicao = int(editar) if (editar or "").strip().isdigit() else None
 
-    itens = servico.listar(
-        uf=uf, banca=banca, termo=termo, situacao=situacao,
-        relevancia=relevancia, todas_relevancias=todos, abertas=abertas,
-        favoritos=favoritos, salario_min=minimo, salario_max=maximo,
-        limite=200,
-    )
+    if noticias:
+        # A aba de noticias nao filtra nada: quem procura "PM" quer saber de
+        # qualquer concurso de policia militar, onde quer que seja e na fase
+        # em que estiver.
+        itens = servico.buscar_noticias(termo=termo, limite=80)
+    else:
+        itens = servico.listar(
+            uf=uf, banca=banca, termo=termo, situacao=situacao,
+            relevancia=relevancia, todas_relevancias=todos, abertas=abertas,
+            favoritos=favoritos, salario_min=minimo, salario_max=maximo,
+            limite=200,
+        )
     contagem = servico.contar_por_relevancia()
     return templates.TemplateResponse(
         request=request,
@@ -158,6 +176,9 @@ def index(
             # Com filtro ligado e zero resultado, a tela precisa dizer que foi
             # o FILTRO que nao achou nada - e nao que nao ha concurso perto,
             # que e outra coisa e leva a conclusao errada.
+            "noticias": noticias,
+            "fases": servico.contar_por_fase(termo) if noticias else {},
+            "ordem_das_fases": list(servico.ORDEM_DAS_FASES),
             "filtro_ativo": any([uf, banca, termo, situacao,
                                  minimo is not None, maximo is not None]),
             "url_sem_salario": _url_base_sem(request, "salario_min", "salario_max"),
@@ -181,6 +202,7 @@ def index(
                 "?" + str(request.url.query) if request.url.query else ""
             ),
             "rotulo_anel": ROTULO_DO_ANEL,
+            "rotulo_situacao": SITUACAO_LEGIVEL,
         },
     )
 

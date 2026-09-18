@@ -99,3 +99,21 @@ def test_fonte_que_falha_nao_derruba_as_outras(banco_temporario, monkeypatch):
 
     assert resultados["quebrado"].erro is not None
     assert resultados["bom"].novos == 1          # a boa foi gravada mesmo assim
+
+
+def test_fonte_que_nao_sabe_a_situacao_nao_rebaixa_a_conhecida(banco_temporario):
+    """"desconhecida" e o valor padrao de quem NAO sabe. Antes disto, uma
+    coleta de fonte que nao informa status derrubava para "desconhecida" um
+    concurso que ja sabiamos estar com inscricao aberta."""
+    _gravar(_item(situacao="inscricoes_abertas"))
+    _gravar(_item(situacao="desconhecida"))
+
+    assert _buscar().situacao == "inscricoes_abertas"
+
+
+def test_situacao_conhecida_continua_atualizando(banco_temporario):
+    """A trava vale so para o valor neutro; mudanca de verdade tem que passar."""
+    _gravar(_item(situacao="inscricoes_abertas"))
+    _gravar(_item(situacao="encerrado"))
+
+    assert _buscar().situacao == "encerrado"
