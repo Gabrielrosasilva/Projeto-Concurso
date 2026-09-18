@@ -92,8 +92,9 @@ do edital**. Da tempo de comecar a estudar o padrao da banca.
 
 ## Estado atual
 
-**Fases 1, 1.5, 1.6 e 2 prontas:** feed RSS coletando, classificador de
-relevancia sobre dado real, carga inicial do historico, e avisos no Telegram.
+**Fases 1, 1.5, 1.6, 2 e parte da 2.5 prontas:** feed RSS coletando,
+classificador de relevancia, carga inicial do historico, avisos no Telegram, e
+leitura da pagina do post para prazo de inscricao, banca e lotacao.
 
 ```
 src/radar/
@@ -104,6 +105,7 @@ src/radar/
 ├── regioes.py      le config/regioes.yml: em que anel um municipio esta
 ├── classificador.py  tipo, municipio, salario e relevancia, a partir do titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
+├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer: coletar, listar, avisar, web
 ├── collectors/
@@ -149,6 +151,12 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   raspagem de HTML nem pelo sitemap. Conferido no site real: o sitemap existe
   mas para em junho/2026, e nao traz titulo - so URL. O feed paginado traz
   tudo e usa o mesmo parser;
+- prazo de inscricao, banca e lotacao vem da PAGINA DO POST, nao do PDF do
+  edital. Sai mais barato e cobre a maioria dos casos;
+- `radar detalhar` nao le a pagina de todos: segue a prioridade nucleo/proximo,
+  depois SC indefinida, depois federal. Outro estado nunca;
+- pagina que cita varios municipios nao define municipio nenhum. Edital de
+  secretaria estadual lista o estado inteiro, e escolher um seria chute;
 - o tipo `noticia` e decidido primeiro pelo CAMINHO da URL: /concursos/ e
   concurso, /beneficios-sociais/ e noticia. Isso pega o que a palavra no
   titulo nao pega ("INSS paga hoje com vagas para todos").
@@ -160,8 +168,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 1.7  Diario Oficial dos Municipios de SC + DOE-SC + DOU
      inclui o sinal "contrataram a banca"
 2.2  export .ics para o calendario
-2.5  leitura do edital em PDF: local de prova, prazos, salario, escolaridade,
-     idade maxima, CNH, TAF + deteccao de retificacao por hash
+2.5  FALTA: ler o PDF do edital para escolaridade, idade maxima, CNH e TAF
+     + deteccao de retificacao por hash. Prazo, banca e lotacao ja saem da
+     pagina do post, sem abrir PDF nenhum
 3    acervo de provas (FEPESE primeiro) + manifesto no git + prova substituta
 4    padrao da banca: questao a questao, incidencia por assunto
 5    modo simulado com acerto por assunto

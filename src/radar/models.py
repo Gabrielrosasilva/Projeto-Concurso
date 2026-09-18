@@ -117,6 +117,11 @@ class Concurso(Base):
     interesse: Mapped[str | None] = mapped_column(String(15), nullable=True)
     notas: Mapped[str | None] = mapped_column(Text, nullable=True)
 
+    # Quando li a pagina do post atras de prazo, banca e lotacao. Preenchido
+    # mesmo quando nao achei nada: serve para nao ficar buscando a mesma
+    # pagina toda vez.
+    detalhado_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
+
     # --- avisos (fase 2) ----------------------------------------------------
     # Quando o Telegram foi avisado sobre este concurso. Nulo = ainda nao
     # avisei. E o que impede a coleta de amanha de reavisar o de hoje.

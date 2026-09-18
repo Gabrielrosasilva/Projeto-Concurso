@@ -107,3 +107,17 @@ class Coletor(ABC):
     def coletar(self) -> list[ItemColetado]:
         """Busca na fonte e devolve os itens encontrados."""
         raise NotImplementedError
+
+
+class Buscador(Coletor):
+    """Busca uma pagina avulsa, herdando robots.txt, User-Agent e o atraso.
+
+    Existe porque ler a pagina de um post nao e "coletar uma fonte": e ir
+    atras de detalhe de algo que ja esta no banco. Mas as boas maneiras sao
+    as mesmas, e elas moram no Coletor.
+    """
+
+    nome = "buscador"
+
+    def coletar(self) -> list[ItemColetado]:
+        return []

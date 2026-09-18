@@ -40,6 +40,7 @@ def _mapa() -> dict[str, str]:
 def recarregar() -> None:
     """Esquece o que foi lido. Usado pelos testes e se voce editar o YAML."""
     _mapa.cache_clear()
+    nomes_originais.cache_clear()
 
 
 def anel_de(municipio: str | None) -> str | None:
@@ -52,6 +53,24 @@ def anel_de(municipio: str | None) -> str | None:
     if not municipio:
         return None
     return _mapa().get(normalizar(municipio))
+
+
+@cache
+def nomes_originais() -> dict[str, str]:
+    """{normalizado: como esta escrito no YAML}, do mais longo para o mais curto.
+
+    A ordem importa: procurando "sao jose" antes de "sao jose do cerrito" num
+    texto, o nome curto casaria dentro do longo e mandaria a serra para a
+    Grande Florianopolis.
+    """
+    arquivo = config.diretorio_config() / "regioes.yml"
+    dados = yaml.safe_load(arquivo.read_text(encoding="utf-8")) or {}
+
+    mapa: dict[str, str] = {}
+    for anel in (NUCLEO, PROXIMO):
+        for municipio in dados.get(anel) or []:
+            mapa[normalizar(municipio)] = municipio
+    return dict(sorted(mapa.items(), key=lambda kv: -len(kv[0])))
 
 
 def municipios(anel: str) -> list[str]:

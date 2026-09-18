@@ -12,7 +12,20 @@ from rich.console import Console
 from rich.table import Table
 
 from radar import acervo, avisos, config, servico
-from radar.util import formatar_data
+from radar.util import dias_ate, formatar_data
+
+
+def _prazo(quando) -> str:
+    """Data de fechamento com o aviso de urgencia junto."""
+    if quando is None:
+        return "--"
+    faltam = dias_ate(quando)
+    texto = formatar_data(quando)
+    if faltam < 0:
+        return f"[dim]{texto}[/]"
+    if faltam <= 7:
+        return f"[bold red]{texto} ({faltam}d)[/]"
+    return f"{texto} ({faltam}d)"
 
 app = typer.Typer(help="Radar de concursos publicos (uso pessoal)", no_args_is_help=True)
 console = Console()
@@ -64,6 +77,9 @@ def listar(
     noticias: bool = typer.Option(
         False, "--noticias", help="Inclui o que o filtro marcou como noticia"
     ),
+    abertas: bool = typer.Option(
+        False, "--abertas", help="So o que da para se inscrever hoje"
+    ),
     limite: int = typer.Option(30, help="Quantidade maxima de linhas"),
 ) -> None:
     """Mostra o que ja esta no banco.
@@ -74,7 +90,7 @@ def listar(
     itens = servico.listar(
         uf=uf, banca=banca, termo=termo, situacao=situacao,
         relevancia=relevancia, todas_relevancias=todos,
-        incluir_noticias=noticias, limite=limite,
+        incluir_noticias=noticias, abertas=abertas, limite=limite,
     )
 
     tabela = Table(title=f"{len(itens)} concurso(s)")
@@ -82,6 +98,7 @@ def listar(
     tabela.add_column("Onde", no_wrap=True)
     tabela.add_column("UF", width=3)
     tabela.add_column("Salario", justify="right", no_wrap=True)
+    tabela.add_column("Inscricao ate", no_wrap=True)
     tabela.add_column("Titulo")
 
     for c in itens:
@@ -92,6 +109,7 @@ def listar(
             f"[{cor}]{c.relevancia}[/]" if cor else c.relevancia,
             c.uf or "--",
             salario,
+            _prazo(c.inscricoes_ate),
             c.titulo,
         )
 
@@ -143,6 +161,38 @@ def carga_inicial(
         f"[bold yellow]{contagem['proximo']}[/] proximo, "
         f"{contagem['remoto']} remoto, {contagem['indefinida']} a confirmar."
     )
+
+
+@app.command()
+def detalhar(
+    limite: int = typer.Option(150, help="Quantas paginas ler nesta rodada"),
+) -> None:
+    """Le a pagina de cada concurso que interessa e completa o registro.
+
+    Traz o prazo de inscricao (que e o que permite saber o que esta ABERTO
+    hoje, e nao so o que foi publicado hoje), a banca, e o municipio de
+    lotacao quando a pagina deixa claro.
+
+    Nao le a pagina de todos: comeca pelo que ja esta perto, depois os
+    concursos de SC que ficaram indefinidos, depois os federais. O que e de
+    outro estado fica de fora.
+    """
+    console.print(
+        f"Vou ler ate [bold]{limite}[/] pagina(s), com pausa de 1,5s entre "
+        f"elas. Tempo estimado: [bold]{limite * 1.5 / 60:.0f} minuto(s)[/]."
+    )
+
+    with console.status("Lendo as paginas..."):
+        resultado = servico.detalhar_pendentes(limite=limite)
+
+    console.print(f"[green]{resultado}[/]")
+
+    abertas = servico.contar_abertas()
+    if abertas:
+        console.print(
+            f"\n[bold green]{abertas}[/] concurso(s) com inscricao aberta agora: "
+            f"[bold]radar listar --abertas[/]"
+        )
 
 
 @app.command()

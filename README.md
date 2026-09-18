@@ -34,6 +34,7 @@ Dai em diante os comandos sao iguais nos tres:
 ```bash
 radar coletar
 radar listar                       # so o que esta perto de voce
+radar listar --abertas             # so o que da para se inscrever hoje
 radar listar --todos               # tudo, inclusive o que e longe
 radar web                          # http://localhost:8000
 ```
@@ -105,6 +106,42 @@ fica mais antiga que o periodo pedido.
 
 Medido no site em 17/09/2026: cerca de 1,5 pagina por dia de historico, 15
 itens por pagina. Noventa dias saem em uns 3 minutos.
+
+### O que esta com inscricao ABERTA
+
+Data de publicacao nao e prazo. Um edital publicado ha um mes pode estar com
+inscricao aberta ate semana que vem, e um de ontem pode ja ter fechado. Para
+saber o que da para fazer HOJE, o radar le a pagina de cada post:
+
+```bash
+radar detalhar                  # le ate 150 paginas
+radar listar --abertas          # so o que da para se inscrever agora
+```
+
+`radar detalhar` traz tres coisas que o RSS nao da:
+
+| o que | para que serve |
+|---|---|
+| prazo de inscricao | responder "o que esta aberto agora" |
+| banca | saber que padrao de prova estudar |
+| municipio de lotacao | resolver o concurso estadual (ver abaixo) |
+
+Ele **nao le a pagina de todos**. Seriam 2.200 requisicoes por quase uma hora,
+e 1.400 delas de outro estado. A ordem e: primeiro o que ja esta perto, depois
+os concursos de SC que ficaram `indefinida`, depois os federais.
+
+**O caso que motivou isto:** "Concurso SEFAZ (SC)" nao tem "Prefeitura de X"
+no titulo, entao o classificador nao acha municipio nenhum e marca
+`indefinida` - o concurso existe, esta no banco, mas nao aparece em "Perto de
+mim". A pagina do post diz "lotacao em Florianopolis", e com isso ele vai para
+o nucleo, onde deveria estar.
+
+Quando a pagina cita varios municipios - comum em edital de secretaria
+estadual, que lista vagas pelo estado inteiro - o radar **nao escolhe nenhum**
+e o registro segue `indefinida`. Chutar seria pior.
+
+Na pagina web ha a aba **Inscricoes abertas**, ordenada pelo prazo, e cada
+cartao mostra quantos dias faltam. Sete dias ou menos aparece em vermelho.
 
 ### Avisos no Telegram
 

@@ -9,7 +9,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 
 from radar import servico
-from radar.util import formatar_data
+from radar.util import dias_ate, formatar_data
 try:                                    # fastapi>=0.115 traz o Jinja2Templates
     from fastapi.templating import Jinja2Templates
 except ImportError:                     # pragma: no cover
@@ -20,6 +20,7 @@ templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 # Deixa formatar_data disponivel dentro do HTML, para o template nao precisar
 # saber nada de fuso horario.
 templates.env.filters["data"] = formatar_data
+templates.env.filters["dias"] = dias_ate
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -31,10 +32,12 @@ def index(
     situacao: str | None = None,
     relevancia: str | None = None,
     todos: bool = False,
+    abertas: bool = False,
 ):
     itens = servico.listar(
         uf=uf, banca=banca, termo=termo, situacao=situacao,
-        relevancia=relevancia, todas_relevancias=todos, limite=200,
+        relevancia=relevancia, todas_relevancias=todos, abertas=abertas,
+        limite=200,
     )
     contagem = servico.contar_por_relevancia()
     return templates.TemplateResponse(
@@ -51,6 +54,8 @@ def index(
             "situacao": situacao or "",
             "relevancia": relevancia or "",
             "todos": todos,
+            "abertas": abertas,
+            "n_abertas": servico.contar_abertas(),
         },
     )
 

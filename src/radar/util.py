@@ -36,3 +36,12 @@ def para_local(quando: datetime | None) -> datetime | None:
 def formatar_data(quando: datetime | None, vazio: str = "--") -> str:
     local = para_local(quando)
     return local.strftime("%d/%m/%Y") if local else vazio
+
+
+def dias_ate(quando: datetime | None) -> int | None:
+    """Quantos dias faltam para essa data. Negativo quer dizer que ja passou."""
+    if quando is None:
+        return None
+    if quando.tzinfo is None:
+        quando = quando.replace(tzinfo=timezone.utc)
+    return (quando - datetime.now(timezone.utc)).days

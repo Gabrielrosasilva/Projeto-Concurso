@@ -13,6 +13,7 @@
       --proximo:#b45309; --proximo-fraco:#fdeed3;
       --remoto:#64748b; --remoto-fraco:#eef1f5;
       --indef:#7c3aed; --indef-fraco:#efe6fe;
+      --prazo:#be123c; --prazo-fraco:#ffe4e9;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -22,6 +23,7 @@
         --proximo:#fbbf24; --proximo-fraco:#2e2310;
         --remoto:#94a3b8; --remoto-fraco:#1c2027;
         --indef:#c4b5fd; --indef-fraco:#241b3a;
+        --prazo:#fb7185; --prazo-fraco:#2c1219;
       }
     }
     *{box-sizing:border-box}
@@ -42,6 +44,7 @@
     nav a .n{font-weight:700;font-variant-numeric:tabular-nums;opacity:.75}
     nav a.ativo{border-color:transparent}
     nav a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
+    nav a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
     nav a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
     nav a.ativo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
@@ -83,6 +86,8 @@
     .selo.indefinida{background:var(--indef-fraco);color:var(--indef)}
     .selo.neutro{background:transparent;color:var(--suave);font-weight:400;
                  border:1px solid var(--borda)}
+    .selo.prazo{background:var(--prazo-fraco);color:var(--prazo)}
+    .selo.prazo.urgente{font-weight:700}
     .meta{color:var(--suave);font-size:.79rem}
     .motivo{color:var(--suave);font-size:.78rem;margin-top:.4rem;font-style:italic}
 
@@ -103,7 +108,10 @@
 
   {# Os atalhos levam a mesma pagina com outro filtro: nada de JavaScript. #}
   <nav>
-    <a class="perto {{ 'ativo' if not relevancia and not todos }}" href="/">
+    <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
+      Inscricoes abertas <span class="n">{{ n_abertas }}</span>
+    </a>
+    <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas }}" href="/">
       Perto de mim <span class="n">{{ perto }}</span>
     </a>
     <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
@@ -149,6 +157,12 @@
           <span class="selo neutro">{{ c.tipo }}</span>
           {% if c.situacao != 'desconhecida' %}<span class="selo neutro">{{ c.situacao|replace('_', ' ') }}</span>{% endif %}
           {% if c.banca %}<span class="selo neutro">{{ c.banca }}</span>{% endif %}
+          {% set faltam = c.inscricoes_ate | dias %}
+          {% if faltam is not none and faltam >= 0 %}
+            <span class="selo prazo{{ ' urgente' if faltam <= 7 }}">
+              inscricao ate {{ c.inscricoes_ate | data }}{% if faltam <= 30 %} - faltam {{ faltam }}d{% endif %}
+            </span>
+          {% endif %}
           <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
         </div>
         {% if c.motivo_relevancia %}<div class="motivo">{{ c.motivo_relevancia }}</div>{% endif %}
@@ -158,6 +172,12 @@
         {% if total_geral == 0 %}
           <p class="grande">Nada coletado ainda.</p>
           <p>Rode <code>radar coletar</code> no terminal.</p>
+        {% elif abertas %}
+          <p class="grande">Nenhuma inscricao aberta agora.</p>
+          <p>
+            O prazo so e conhecido depois de ler a pagina de cada edital.
+            Rode <code>radar detalhar</code> no terminal.
+          </p>
         {% elif not relevancia and not todos %}
           <p class="grande">Nenhum concurso perto de voce agora.</p>
           <p>

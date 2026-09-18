@@ -6,8 +6,9 @@ from datetime import timedelta
 from sqlalchemy import func, select
 
 from radar import avisos
+from radar import detalhes, regioes
 from radar.classificador import classificar
-from radar.collectors.base import Coletor, ItemColetado
+from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
 from radar import config
 from radar.db import criar_tabelas, sessao
@@ -162,11 +163,20 @@ def listar(
     relevancia: str | None = None,
     incluir_noticias: bool = False,
     todas_relevancias: bool = False,
+    abertas: bool = False,
     limite: int = 30,
 ) -> list[Concurso]:
     """Consulta o que ja foi coletado, com filtros opcionais."""
     criar_tabelas()
-    consulta = select(Concurso).order_by(Concurso.publicado_em.desc().nullslast())
+
+    if abertas:
+        # Ordena pelo prazo, nao pela data de publicacao: aqui o que importa
+        # e o que fecha primeiro.
+        consulta = select(Concurso).where(_inscricao_aberta()).order_by(
+            Concurso.inscricoes_ate.asc()
+        )
+    else:
+        consulta = select(Concurso).order_by(Concurso.publicado_em.desc().nullslast())
 
     # Noticia que veio junto no feed nao e concurso: fica de fora por padrao.
     if not incluir_noticias:
@@ -356,5 +366,153 @@ def carga_inicial(dias: int = 90) -> ResultadoColeta:
         log.warning("carga inicial falhou: %s", erro)
         log.debug("detalhe da falha na carga inicial", exc_info=True)
         resultado.erro = f"{type(erro).__name__}: {erro}"
+
+    return resultado
+
+
+# --- inscricoes abertas (fase 2.5) ------------------------------------------
+
+def _inscricao_aberta():
+    """Condicao SQL de "da para se inscrever hoje".
+
+    Exige `inscricoes_ate` preenchido: sem prazo conhecido nao da para afirmar
+    que esta aberto. O comeco e opcional - se eu sei que fecha dia 30 mas nao
+    sei quando abriu, ainda assim vale mostrar.
+    """
+    hoje = agora()
+    return (
+        Concurso.inscricoes_ate.is_not(None)
+        & (Concurso.inscricoes_ate >= hoje)
+        & (Concurso.inscricoes_de.is_(None) | (Concurso.inscricoes_de <= hoje))
+        & (Concurso.tipo != "noticia")
+    )
+
+
+def contar_abertas() -> int:
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(
+            select(func.count()).select_from(Concurso).where(_inscricao_aberta())
+        ) or 0
+
+
+# --- leitura da pagina de detalhe -------------------------------------------
+
+# Ordem de prioridade para gastar requisicao. Ler a pagina de todos os 2.200
+# levaria quase uma hora e nao serviria para nada: 1.400 sao de outro estado.
+PRIORIDADE_DETALHE = (
+    # 1. o que ja sei que esta perto
+    lambda: Concurso.relevancia.in_(("nucleo", "proximo")),
+    # 2. concurso de SC que ficou indefinido - e aqui que mora o caso da
+    #    SEFAZ SC: orgao estadual nao tem "Prefeitura de X" no titulo, entao
+    #    o classificador nao acha municipio e marca indefinida
+    lambda: (Concurso.relevancia == "indefinida") & (Concurso.uf == "SC"),
+    # 3. federal ou nacional: pode aplicar prova em Florianopolis
+    lambda: (Concurso.relevancia == "indefinida") & Concurso.uf.is_(None),
+)
+
+
+@dataclass
+class ResultadoDetalhe:
+    lidos: int = 0
+    com_prazo: int = 0
+    com_banca: int = 0
+    reclassificados: int = 0
+    erros: int = 0
+
+    def __str__(self) -> str:
+        if not self.lidos:
+            return "Nada novo para detalhar."
+        texto = (
+            f"{self.lidos} pagina(s) lida(s): {self.com_prazo} com prazo de "
+            f"inscricao, {self.com_banca} com banca"
+        )
+        if self.reclassificados:
+            texto += f", {self.reclassificados} mudaram de anel"
+        if self.erros:
+            texto += f", {self.erros} falharam"
+        return texto
+
+
+def _pendentes_de_detalhe(limite: int) -> list[Concurso]:
+    """Quem ainda nao teve a pagina lida, na ordem de prioridade."""
+    escolhidos: list[Concurso] = []
+    vistos: set[int] = set()
+
+    with sessao() as s:
+        for condicao in PRIORIDADE_DETALHE:
+            if len(escolhidos) >= limite:
+                break
+            consulta = (
+                select(Concurso)
+                .where(Concurso.detalhado_em.is_(None))
+                .where(Concurso.tipo != "noticia")
+                .where(condicao())
+                .order_by(Concurso.publicado_em.desc().nullslast())
+                .limit(limite - len(escolhidos))
+            )
+            for concurso in s.scalars(consulta):
+                if concurso.id not in vistos:
+                    vistos.add(concurso.id)
+                    escolhidos.append(concurso)
+
+    return escolhidos
+
+
+def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
+    """Le a pagina de cada concurso que interessa e completa o registro.
+
+    Traz prazo de inscricao, banca e - quando a pagina deixa claro - o
+    municipio de lotacao. O municipio novo faz o registro ser reclassificado,
+    que e como um concurso estadual sai de `indefinida` para `nucleo`.
+    """
+    criar_tabelas()
+    resultado = ResultadoDetalhe()
+
+    pendentes = _pendentes_de_detalhe(limite)
+    if not pendentes:
+        return resultado
+
+    municipios = regioes.nomes_originais()
+    buscador = Buscador()
+
+    for pendente in pendentes:
+        try:
+            html = buscador.get(pendente.url).text
+        except Exception as erro:  # noqa: BLE001 - pagina fora do ar e rotina
+            log.warning("nao consegui ler %s: %s", pendente.url, type(erro).__name__)
+            resultado.erros += 1
+            continue
+
+        ano = pendente.publicado_em.year if pendente.publicado_em else agora().year
+        achado = detalhes.extrair(html, ano, municipios)
+        resultado.lidos += 1
+
+        with sessao() as s:
+            concurso = s.get(Concurso, pendente.id)
+            concurso.detalhado_em = agora()
+
+            if achado.inscricoes_ate:
+                concurso.inscricoes_de = achado.inscricoes_de
+                concurso.inscricoes_ate = achado.inscricoes_ate
+                resultado.com_prazo += 1
+            if achado.banca and not concurso.banca:
+                concurso.banca = achado.banca
+                resultado.com_banca += 1
+
+            # Municipio novo muda o anel: e o caminho da SEFAZ SC sair de
+            # indefinida para nucleo.
+            if achado.municipio and not concurso.municipio:
+                anel_antes = concurso.relevancia
+                concurso.municipio = achado.municipio
+                anel = regioes.anel_de(achado.municipio)
+                if anel:
+                    concurso.relevancia = anel
+                    concurso.motivo_relevancia = (
+                        f"{achado.municipio} aparece como lotacao na pagina do "
+                        f"edital, e esta no anel {anel}."
+                    )
+                if concurso.relevancia != anel_antes:
+                    resultado.reclassificados += 1
 
     return resultado
