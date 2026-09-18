@@ -181,6 +181,7 @@ def listar(
     abertas: bool = False,
     favoritos: bool = False,
     salario_min: float | None = None,
+    salario_max: float | None = None,
     limite: int = 30,
 ) -> list[Concurso]:
     """Consulta o que ja foi coletado, com filtros opcionais."""
@@ -209,7 +210,7 @@ def listar(
         with sessao() as s:
             return list(s.scalars(consulta.limit(limite)))
 
-    if salario_min is not None:
+    if salario_min is not None or salario_max is not None:
         # Filtro filtra: quem nao tem salario conhecido fica de fora.
         #
         # A primeira versao deixava os sem valor passarem, para nao esconder
@@ -217,9 +218,12 @@ def listar(
         # resultado era um filtro que nao filtrava nada. Quem usa precisa
         # saber do ponto cego, e nao adivinhar: a tela avisa quantos ficaram
         # de fora por falta de valor, e `contar_sem_salario` da esse numero.
-        consulta = consulta.where(Concurso.salario >= salario_min).order_by(
-            None
-        ).order_by(Concurso.salario.desc())
+        consulta = consulta.where(Concurso.salario.is_not(None))
+        if salario_min is not None:
+            consulta = consulta.where(Concurso.salario >= salario_min)
+        if salario_max is not None:
+            consulta = consulta.where(Concurso.salario <= salario_max)
+        consulta = consulta.order_by(None).order_by(Concurso.salario.desc())
 
     # Noticia que veio junto no feed nao e concurso: fica de fora por padrao.
     if not incluir_noticias:
@@ -233,13 +237,26 @@ def listar(
     if uf:
         consulta = consulta.where(Concurso.uf == uf.upper())
     if banca:
-        consulta = consulta.where(Concurso.banca.ilike(f"%{banca}%"))
+        # Aceita o nome curto e o por extenso: quem digita "Fundacao Carlos
+        # Chagas" quer os mesmos concursos de quem digita "FCC".
+        nomes = expandir_banca(banca)
+        if nomes:
+            consulta = consulta.where(
+                Concurso.banca.in_(nomes) | Concurso.banca.ilike(f"%{banca}%")
+            )
+        else:
+            consulta = consulta.where(Concurso.banca.ilike(f"%{banca}%"))
     if situacao:
         consulta = consulta.where(Concurso.situacao == situacao)
     if termo:
-        like = f"%{termo}%"
+        # Busca ignorando acento: quem digita no campo raramente poe cedilha,
+        # e "Palhoca" precisa achar "Palhoca" acentuada.
+        procurado = f"%{_sem_acento(termo)}%"
+        sem_acento_sql = func.sem_acento
         consulta = consulta.where(
-            Concurso.titulo.ilike(like) | Concurso.resumo.ilike(like)
+            sem_acento_sql(Concurso.titulo).ilike(procurado)
+            | sem_acento_sql(func.coalesce(Concurso.resumo, "")).ilike(procurado)
+            | sem_acento_sql(func.coalesce(Concurso.municipio, "")).ilike(procurado)
         )
 
     with sessao() as s:
@@ -591,6 +608,34 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
 
     atualizar_situacoes()
     return resultado
+
+
+def expandir_banca(termo: str) -> list[str]:
+    """Os nomes de banca que casam com o que foi digitado.
+
+    Banca tem nome curto e nome por extenso, e quem busca usa qualquer um dos
+    dois: "FCC" e "Fundacao Carlos Chagas" sao a mesma coisa. A tabela de
+    apelidos ja existia em `detalhes.BANCAS`, usada para reconhecer a banca na
+    pagina do edital; aqui ela serve ao contrario.
+    """
+    procurado = _sem_acento(termo).strip().lower()
+    if not procurado:
+        return []
+
+    achados = [
+        nome for nome, apelidos in detalhes.BANCAS.items()
+        if procurado in _sem_acento(nome).lower()
+        or any(procurado in apelido or apelido.strip() in procurado
+               for apelido in apelidos)
+    ]
+    return achados
+
+
+def _sem_acento(texto: str) -> str:
+    import unicodedata
+
+    normal = unicodedata.normalize("NFKD", texto or "")
+    return "".join(c for c in normal if not unicodedata.combining(c))
 
 
 # --- favoritos (fase 1.55) --------------------------------------------------

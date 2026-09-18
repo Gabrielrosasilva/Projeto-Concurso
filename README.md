@@ -223,6 +223,24 @@ radar listar --favoritos
 radar situacoes                 # recalcula os status (o tempo passa sozinho)
 ```
 
+### Filtrando
+
+Todo filtro da pagina combina com a aba em que voce esta e com os demais.
+
+**Remuneracao** tem atalho: quatro faixas clicaveis (ate R$ 2.000, R$ 2.100 a
+R$ 5.000, R$ 5.000 a R$ 10.000, acima de R$ 10.000), alem dos campos de minimo
+e maximo para quem quiser um valor exato.
+
+**Banca** aceita o nome curto e o por extenso: "FCC" e "Fundacao Carlos
+Chagas" trazem os mesmos concursos. A tabela de apelidos e a mesma que o radar
+usa para reconhecer a banca na pagina do edital.
+
+**Palavra-chave** ignora acento e maiuscula, e procura tambem no municipio:
+"palhoca" acha "Palhoca" com cedilha.
+
+Nada disso quebra a pagina quando o campo fica vazio ou recebe texto que nao e
+numero - o valor invalido e simplesmente ignorado.
+
 ### A remuneracao que o titulo nao traz
 
 Mais da metade dos concursos nao informa salario no titulo. Nesses, o cartao

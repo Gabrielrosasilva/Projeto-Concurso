@@ -106,6 +106,17 @@
       text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap}
     .limpar{background:transparent;color:var(--suave);border-color:var(--borda)}
 
+    .faixas{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;
+      margin:0 0 .8rem}
+    .faixas-rotulo{font-size:.78rem;color:var(--suave);margin-right:.15rem}
+    .faixa{font-size:.78rem;padding:.3rem .65rem;border-radius:999px;
+      border:1px solid var(--borda);background:var(--cartao);color:var(--suave);
+      text-decoration:none;white-space:nowrap}
+    .faixa:hover{border-color:var(--azul);color:var(--azul)}
+    .faixa.ativa{background:var(--nucleo-fraco);color:var(--nucleo);
+      border-color:transparent;font-weight:700}
+    .faixa.limpar-faixa{border-style:dashed}
+
     .contagem{color:var(--suave);font-size:.85rem;margin:0 0 .7rem}
     .aviso-filtro{background:var(--proximo-fraco);color:var(--proximo);
       font-size:.82rem;padding:.6rem .8rem;border-radius:8px;margin:0 0 .8rem}
@@ -357,17 +368,33 @@
       <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
       <input name="salario_min" type="number" step="100" min="0"
              placeholder="Salario min" value="{{ salario_min }}">
+      <input name="salario_max" type="number" step="100" min="0"
+             placeholder="Salario max" value="{{ salario_max }}">
       <div class="acoes">
         <button type="submit">Filtrar</button>
         <a class="limpar" href="/">Limpar</a>
       </div>
     </form>
 
+    {# Clicar e mais rapido que digitar, e tira a duvida de qual valor usar.
+       Cada faixa e um link comum que preserva a aba e os demais filtros. #}
+    <div class="faixas">
+      <span class="faixas-rotulo">Remuneracao:</span>
+      {% for rotulo, faixa_min, faixa_max in faixas %}
+        <a class="faixa {{ 'ativa' if faixa_ativa == rotulo }}"
+           href="{{ url_sem_salario }}salario_min={{ faixa_min or '' }}&salario_max={{ faixa_max or '' }}"
+        >{{ rotulo }}</a>
+      {% endfor %}
+      {% if faixa_ativa or salario_min or salario_max %}
+        <a class="faixa limpar-faixa" href="{{ url_sem_salario.rstrip('?&') }}">limpar</a>
+      {% endif %}
+    </div>
+
     <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
 
     {% if n_sem_salario %}
       <p class="aviso-filtro">
-        Filtrando por remuneracao acima de R$ {{ '{:,.0f}'.format(salario_min|float)|replace(',', '.') }}.
+        Filtrando por remuneracao.
         <strong>{{ n_sem_salario }}</strong> concurso(s) nao informam salario no titulo
         e ficaram de fora - da para preencher o valor na mao pelo lapis de cada um.
         <a href="?{{ 'favoritos=true&' if favoritos }}{{ 'abertas=true&' if abertas }}{{ 'todos=true' if todos }}">Ver sem esse filtro</a>
@@ -389,6 +416,10 @@
             <p class="grande">Nenhuma inscricao aberta agora.</p>
             <p>O prazo so e conhecido depois de ler a pagina de cada edital.
                Rode <code>radar detalhar</code> no terminal.</p>
+          {% elif filtro_ativo %}
+            <p class="grande">Nenhum resultado com esses filtros.</p>
+            <p><a href="{{ url_sem_salario.rstrip('?&') }}">Tirar o filtro de remuneracao</a>
+               &middot; <a href="/">Limpar tudo</a></p>
           {% elif not relevancia and not todos %}
             <p class="grande">Nenhum concurso perto de voce agora.</p>
             <p>Ha {{ contagem.remoto }} longe e {{ contagem.indefinida }} a confirmar.

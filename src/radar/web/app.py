@@ -28,6 +28,31 @@ ROTULO_DO_ANEL = {
     "indefinida": "A confirmar",
 }
 
+# Faixas de remuneracao como atalho: e mais rapido clicar do que digitar, e
+# tira a duvida de qual valor usar. (rotulo, minimo, maximo)
+FAIXAS_DE_SALARIO = [
+    ("ate R$ 2.000", None, 2000),
+    ("R$ 2.100 a R$ 5.000", 2100, 5000),
+    ("R$ 5.000 a R$ 10.000", 5000, 10000),
+    ("acima de R$ 10.000", 10000, None),
+]
+
+
+def _para_campo(valor: float | None) -> str:
+    """O numero como ele deve aparecer no campo do formulario."""
+    if valor is None:
+        return ""
+    return str(int(valor)) if valor == int(valor) else str(valor)
+
+
+def _faixa_ativa(minimo: float | None, maximo: float | None) -> str | None:
+    """Qual faixa esta selecionada agora, para destacar o botao."""
+    for rotulo, faixa_min, faixa_max in FAIXAS_DE_SALARIO:
+        if minimo == faixa_min and maximo == faixa_max:
+            return rotulo
+    return None
+
+
 ETAPAS = [
     ("prevista", "previsto"),
     ("autorizado", "autorizado"),
@@ -41,6 +66,21 @@ templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 # saber nada de fuso horario.
 templates.env.filters["data"] = formatar_data
 templates.env.filters["dias"] = dias_ate
+
+
+def _url_base_sem(request: Request, *parametros: str) -> str:
+    """A URL atual sem certos parametros, pronta para receber outros.
+
+    Termina em "?" ou "&" de proposito: quem monta o link so acrescenta o que
+    quer, sem precisar saber se ja havia pergunta na URL.
+    """
+    restante = [
+        f"{chave}={valor}"
+        for chave, valor in request.query_params.multi_items()
+        if chave not in parametros
+    ]
+    base = request.url.path
+    return base + "?" + ("&".join(restante) + "&" if restante else "")
 
 
 def _url_sem(request: Request, parametro: str) -> str:
@@ -70,13 +110,27 @@ def index(
     todos: bool = False,
     abertas: bool = False,
     favoritos: bool = False,
-    salario_min: float | None = None,
-    editar: int | None = None,
+    salario_min: str | None = None,
+    salario_max: str | None = None,
+    editar: str | None = None,
 ):
+    """Os campos numericos chegam como TEXTO de proposito.
+
+    Formulario HTML manda todo campo, inclusive o vazio: filtrar so pela banca
+    enviava `salario_min=`, e o FastAPI tentava converter "" para float e
+    devolvia 422 - o que quebrava a pagina inteira, nao so o campo. Chegando
+    como texto, a conversao fica com `converter_valor`, que ja sabe devolver
+    None para vazio e para o que nao e numero.
+    """
+    minimo = converter_valor(salario_min)
+    maximo = converter_valor(salario_max)
+    cartao_em_edicao = int(editar) if (editar or "").strip().isdigit() else None
+
     itens = servico.listar(
         uf=uf, banca=banca, termo=termo, situacao=situacao,
         relevancia=relevancia, todas_relevancias=todos, abertas=abertas,
-        favoritos=favoritos, salario_min=salario_min, limite=200,
+        favoritos=favoritos, salario_min=minimo, salario_max=maximo,
+        limite=200,
     )
     contagem = servico.contar_por_relevancia()
     return templates.TemplateResponse(
@@ -97,10 +151,20 @@ def index(
             "n_abertas": servico.contar_abertas(),
             "favoritos": favoritos,
             "n_favoritos": servico.contar_favoritos(),
-            "salario_min": ("" if salario_min is None
-                             else int(salario_min) if salario_min == int(salario_min)
-                             else salario_min),
-            "n_sem_salario": servico.contar_sem_salario() if salario_min else 0,
+            "salario_min": _para_campo(minimo),
+            "salario_max": _para_campo(maximo),
+            "faixas": FAIXAS_DE_SALARIO,
+            "faixa_ativa": _faixa_ativa(minimo, maximo),
+            # Com filtro ligado e zero resultado, a tela precisa dizer que foi
+            # o FILTRO que nao achou nada - e nao que nao ha concurso perto,
+            # que e outra coisa e leva a conclusao errada.
+            "filtro_ativo": any([uf, banca, termo, situacao,
+                                 minimo is not None, maximo is not None]),
+            "url_sem_salario": _url_base_sem(request, "salario_min", "salario_max"),
+            "n_sem_salario": (
+                servico.contar_sem_salario()
+                if (minimo is not None or maximo is not None) else 0
+            ),
             "favorito": servico.FAVORITO,
             "etapas": ETAPAS,
             # O mural fica visivel em qualquer aba: sao os concursos que eu
@@ -108,7 +172,7 @@ def index(
             # proposito.
             "mural": servico.listar(favoritos=True, limite=20),
             # Qual cartao esta com o campo de salario aberto.
-            "editar": editar,
+            "editar": cartao_em_edicao,
             # A URL de agora, com e sem o parametro `editar`: uma abre o campo
             # no cartao certo, a outra fecha e volta para a lista limpa.
             "url_com_editar": _url_com_editar(request),

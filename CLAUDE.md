@@ -176,6 +176,17 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   digitei (`salario_manual`) e o municipio que veio da pagina do edital
   (`municipio_confirmado`). Sem a segunda trava, um `reclassificar` desfazia o
   trabalho do `detalhar` e a SEFAZ SC voltava de `nucleo` para `indefinida`;
+- os campos numericos da rota web chegam como TEXTO e sao convertidos por
+  `util.converter_valor`. Formulario HTML manda todo campo, inclusive o vazio:
+  declarar `salario_min` como numero fazia `salario_min=` virar erro 422 e
+  derrubar a pagina inteira, nao so aquele filtro;
+- o filtro de banca aceita nome curto e nome por extenso (FCC = Fundacao
+  Carlos Chagas), pela mesma tabela de apelidos de `detalhes.BANCAS`;
+- a busca por palavra ignora acento, via funcao `sem_acento` registrada no
+  SQLite, e procura tambem no municipio;
+- com filtro ligado e zero resultado, a tela diz que foi o FILTRO que nao
+  achou nada - dizer "nenhum concurso perto de voce" levaria a conclusao
+  errada;
 - o filtro de salario exclui quem nao tem valor conhecido, e a tela avisa
   quantos ficaram de fora. A primeira versao incluia os nulos para nao
   esconder concurso bom, e o resultado foi um filtro que nao filtrava: 1.115

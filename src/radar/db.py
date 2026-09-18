@@ -21,10 +21,39 @@ _engine: Engine | None = None
 _Sessao: sessionmaker[Session] | None = None
 
 
+def _registrar_sem_acento(engine: Engine) -> None:
+    """Ensina o SQLite a comparar texto ignorando acento.
+
+    Sem isto, procurar "Palhoca" no filtro nao acha "Palhoca" com cedilha - e
+    quem digita no campo de busca raramente poe acento. O LIKE do SQLite ja
+    ignora maiuscula/minuscula, mas nao acento.
+
+    So vale para SQLite. Em Postgres a busca cai no LIKE comum, que continua
+    funcionando - so exige o acento certo.
+    """
+    if not engine.url.get_backend_name().startswith("sqlite"):
+        return
+
+    import unicodedata
+
+    from sqlalchemy import event
+
+    def sem_acento(texto):
+        if texto is None:
+            return None
+        normal = unicodedata.normalize("NFKD", str(texto))
+        return "".join(c for c in normal if not unicodedata.combining(c))
+
+    @event.listens_for(engine, "connect")
+    def ao_conectar(conexao, _registro):  # noqa: ANN001
+        conexao.create_function("sem_acento", 1, sem_acento)
+
+
 def get_engine() -> Engine:
     global _engine, _Sessao
     if _engine is None:
         _engine = create_engine(config.url_do_banco(), future=True)
+        _registrar_sem_acento(_engine)
         # expire_on_commit=False: sem isso, usar um objeto depois que a sessao
         # fechou dispara um SELECT novo e estoura. Como o servico devolve
         # objetos para a CLI e para a web, precisamos deles vivos.
