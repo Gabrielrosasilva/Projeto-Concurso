@@ -32,8 +32,25 @@ TERMOS_VAGA = ("vaga", "inscric", "cargo", "contrata", "oportunidade",
                "chamamento")
 
 
-def detectar_tipo(titulo: str, resumo: str | None = None) -> str:
+# A propria URL ja diz muito. Conferido no site real: post de concurso mora em
+# /concursos/UF/ANO/..., enquanto noticia sobre auxilio mora em outro caminho,
+# tipo /beneficios-sociais/. Isso e sinal muito mais firme que palavra no
+# titulo, e vale ainda mais na carga inicial, que traz milhares de posts.
+CAMINHO_DE_CONCURSO = "/concursos/"
+CAMINHOS_DE_NOTICIA = ("/beneficios-sociais/", "/artigo/", "/escola/", "/dicas/")
+
+
+def detectar_tipo(
+    titulo: str, resumo: str | None = None, url: str | None = None
+) -> str:
     """concurso, seletivo, desconhecido ou noticia."""
+    endereco = (url or "").lower()
+
+    # Caminho de noticia manda mais que qualquer palavra do titulo: uma
+    # materia sobre Bolsa Familia pode citar "vagas" e enganar o filtro.
+    if any(caminho in endereco for caminho in CAMINHOS_DE_NOTICIA):
+        return TIPO_NOTICIA
+
     texto = regioes.normalizar(f"{titulo} {resumo or ''}")
 
     if any(termo in texto for termo in TERMOS_SELETIVO):
@@ -42,6 +59,10 @@ def detectar_tipo(titulo: str, resumo: str | None = None) -> str:
         return TIPO_CONCURSO
     if any(termo in texto for termo in TERMOS_VAGA):
         # ha vaga, mas o titulo nao diz se e concurso ou seletivo
+        return TIPO_DESCONHECIDO
+    if CAMINHO_DE_CONCURSO in endereco:
+        # o titulo nao deu pista nenhuma, mas o post esta na secao de
+        # concursos do site. E melhor tratar como candidato do que descartar.
         return TIPO_DESCONHECIDO
     return TIPO_NOTICIA
 
@@ -132,7 +153,7 @@ class Classificacao:
 
 
 def classificar(item: ItemColetado) -> Classificacao:
-    tipo = detectar_tipo(item.titulo, item.resumo)
+    tipo = detectar_tipo(item.titulo, item.resumo, item.url)
     municipio = item.municipio or extrair_municipio(item.titulo)
     salario = extrair_salario(item.titulo)
     uf = (item.uf or "").upper()

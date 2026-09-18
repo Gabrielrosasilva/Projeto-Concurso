@@ -92,8 +92,8 @@ do edital**. Da tempo de comecar a estudar o padrao da banca.
 
 ## Estado atual
 
-**Fases 1, 1.5 e 2 prontas:** feed RSS coletando, classificador de relevancia
-funcionando sobre dado real, e avisos no Telegram.
+**Fases 1, 1.5, 1.6 e 2 prontas:** feed RSS coletando, classificador de
+relevancia sobre dado real, carga inicial do historico, e avisos no Telegram.
 
 ```
 src/radar/
@@ -109,7 +109,8 @@ src/radar/
 ├── collectors/
 │   ├── base.py                  Coletor + ItemColetado; cuida de robots.txt,
 │   │                            User-Agent e atraso entre requisicoes
-│   └── concursos_no_brasil.py   fonte 1: feed RSS
+│   └── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao (?paged=N)
+│                                 para a carga inicial do historico
 └── web/app.py      FastAPI + Jinja2, uma pagina com filtros
 ```
 
@@ -143,14 +144,19 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   mensagens por coleta. O teto e protecao contra regra quebrada virar 200
   notificacoes de madrugada;
 - token e chat_id SO em variavel de ambiente: `.env` na maquina, Secrets no
-  Actions. O log nunca imprime a URL da API, porque ela carrega o token.
+  Actions. O log nunca imprime a URL da API, porque ela carrega o token;
+- a carga inicial anda para tras pelo `?paged=N` do proprio feed, e nao por
+  raspagem de HTML nem pelo sitemap. Conferido no site real: o sitemap existe
+  mas para em junho/2026, e nao traz titulo - so URL. O feed paginado traz
+  tudo e usa o mesmo parser;
+- o tipo `noticia` e decidido primeiro pelo CAMINHO da URL: /concursos/ e
+  concurso, /beneficios-sociais/ e noticia. Isso pega o que a palavra no
+  titulo nao pega ("INSS paga hoje com vagas para todos").
 
 ## Roadmap
 
 ```
 1.55 perfil/elegibilidade + interesse/notas na CLI e na web
-1.6  carga inicial: varrer as paginas de arquivo e trazer o ano inteiro
-     (o RSS so entrega o que e recente)
 1.7  Diario Oficial dos Municipios de SC + DOE-SC + DOU
      inclui o sinal "contrataram a banca"
 2.2  export .ics para o calendario

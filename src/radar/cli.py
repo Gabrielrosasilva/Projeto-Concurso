@@ -108,6 +108,44 @@ def listar(
 
 
 @app.command()
+def carga_inicial(
+    dias: int = typer.Option(90, help="Quantos dias de historico buscar"),
+    sim: bool = typer.Option(False, "--sim", help="Nao perguntar antes de comecar"),
+) -> None:
+    """Traz o historico que a coleta diaria nao pegou.
+
+    O RSS e um fluxo: mostra so o que e recente. Quem liga o radar hoje ve os
+    concursos de hoje e nada de antes. Este comando anda para tras no feed,
+    pagina por pagina, e preenche esse buraco.
+
+    Roda uma vez so, na mao. Demora alguns minutos: ha uma pausa entre as
+    requisicoes para nao sobrecarregar o site.
+    """
+    paginas = min(dias * servico.PAGINAS_POR_DIA, 400)
+    minutos = paginas * 1.5 / 60
+
+    console.print(
+        f"Vou buscar [bold]{dias} dias[/] de historico: ate {paginas} paginas "
+        f"do feed, com pausa de 1,5s entre elas.\n"
+        f"Tempo estimado: [bold]{minutos:.0f} minuto(s)[/]. Ctrl+C para parar."
+    )
+    if not sim and not typer.confirm("Comecar?", default=True):
+        raise typer.Abort()
+
+    with console.status("Lendo o feed para tras..."):
+        resultado = servico.carga_inicial(dias=dias)
+
+    console.print(f"[red]{resultado}[/]" if resultado.erro else f"[green]{resultado}[/]")
+
+    contagem = servico.contar_por_relevancia()
+    console.print(
+        f"\nNo banco agora: [bold green]{contagem['nucleo']}[/] no nucleo, "
+        f"[bold yellow]{contagem['proximo']}[/] proximo, "
+        f"{contagem['remoto']} remoto, {contagem['indefinida']} a confirmar."
+    )
+
+
+@app.command()
 def avisar(
     limite: int = typer.Option(
         servico.LIMITE_DE_AVISOS, help="Maximo de mensagens nesta rodada"

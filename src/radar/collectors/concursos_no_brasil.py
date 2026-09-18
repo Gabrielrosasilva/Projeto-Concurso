@@ -2,13 +2,18 @@
 
 Comecamos por um RSS de proposito. RSS e um formato publico, estavel e feito
 para ser lido por programa; raspar HTML quebra toda vez que o site mexe no
-layout. A troco disso, o feed so entrega os itens mais recentes - trazer o ano
-inteiro e assunto da fase 1.6, com uma carga inicial pelas paginas de arquivo.
+layout.
 
-ATENCAO, ainda nao verificado contra o site real: o padrao de URL abaixo veio
-do esboco do projeto e nao foi conferido numa coleta de verdade. Se ele nao
-bater, a UF sai vazia e o filtro geografico nao funciona. Por isso existe o
-segundo caminho, pela categoria do post ("Santa Catarina" -> SC).
+O feed aceita ?paged=N e devolve os itens mais antigos, com exatamente a mesma
+estrutura da primeira pagina. E isso que permite a carga inicial: em vez de
+raspar pagina de arquivo em HTML, andamos para tras no proprio RSS, com o
+mesmo parser e os mesmos campos - titulo completo, data e categoria. Medido
+no site real: 15 itens por pagina, e paged=60 chega a uns 38 dias atras.
+
+O padrao de URL foi conferido contra o site real em 17/09/2026:
+    https://concursosnobrasil.com/concursos/sc/2026/09/17/nome-do-post/
+Ainda assim existe o segundo caminho, pela categoria ("Santa Catarina" -> SC),
+porque nem todo post segue o padrao.
 """
 import re
 from calendar import timegm
@@ -19,6 +24,10 @@ import feedparser
 from radar.collectors.base import Coletor, ItemColetado
 
 FEED_URL = "https://www.concursosnobrasil.com.br/feed/"
+
+# Teto de seguranca para a carga inicial. Cada pagina e uma requisicao ao site
+# de alguem: 400 paginas ja passam de um ano de historico.
+MAXIMO_DE_PAGINAS = 400
 
 # Links no formato /concursos/sc/2026/09/17/titulo-do-post/
 PADRAO_UF_NA_URL = re.compile(r"/concursos/([a-z]{2})/\d{4}/", re.IGNORECASE)
@@ -91,8 +100,43 @@ def _resumo(entrada) -> str | None:
 class ConcursosNoBrasil(Coletor):
     nome = "concursosnobrasil"
 
+    def __init__(self, paginas: int = 1, desde: datetime | None = None) -> None:
+        """paginas=1 e a coleta do dia a dia; mais que isso e carga inicial.
+
+        `desde` faz a leitura parar assim que a pagina inteira ficar mais
+        antiga que essa data - assim a carga inicial nao varre o site todo
+        so para descobrir que ja passou do periodo pedido.
+        """
+        super().__init__()
+        self.paginas = max(1, min(paginas, MAXIMO_DE_PAGINAS))
+        self.desde = desde
+
+    def _url_da_pagina(self, numero: int) -> str:
+        return FEED_URL if numero == 1 else f"{FEED_URL}?paged={numero}"
+
     def coletar(self) -> list[ItemColetado]:
-        xml = self.get(FEED_URL).text
+        itens: list[ItemColetado] = []
+
+        for numero in range(1, self.paginas + 1):
+            da_pagina = self._ler_pagina(self._url_da_pagina(numero))
+            if not da_pagina:
+                break                      # acabou o feed
+            itens.extend(da_pagina)
+
+            if self._passou_do_periodo(da_pagina):
+                break
+
+        return itens
+
+    def _passou_do_periodo(self, itens: list[ItemColetado]) -> bool:
+        """Para quando a pagina INTEIRA ja e mais antiga que o periodo pedido."""
+        if not self.desde:
+            return False
+        datas = [i.publicado_em for i in itens if i.publicado_em]
+        return bool(datas) and all(d < self.desde for d in datas)
+
+    def _ler_pagina(self, url: str) -> list[ItemColetado]:
+        xml = self.get(url).text
         feed = feedparser.parse(xml)
 
         itens: list[ItemColetado] = []

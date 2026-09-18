@@ -1,13 +1,14 @@
 """Regras do sistema: rodar os coletores, gravar sem duplicar, consultar."""
 import logging
 from dataclasses import dataclass
+from datetime import timedelta
 
 from sqlalchemy import func, select
 
 from radar import avisos
 from radar.classificador import classificar
 from radar.collectors.base import Coletor, ItemColetado
-from radar.collectors.concursos_no_brasil import ConcursosNoBrasil
+from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
 from radar import config
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso, agora
@@ -294,3 +295,66 @@ def avisar(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
         )
 
     return ResultadoAviso(enviados=enviados, pendentes=sobraram)
+
+
+# --- carga inicial (fase 1.6) -----------------------------------------------
+
+# Medido no site real em 17/09/2026: 15 itens por pagina, e paged=60 chegou a
+# 37 dias atras - cerca de 1,6 pagina por dia. Usamos 3 por dia, que da o
+# dobro de folga caso o site publique mais num periodo movimentado. Quem manda
+# de verdade na parada e a data; isto aqui e so o teto.
+PAGINAS_POR_DIA = 3
+
+
+def _marcar_historico_como_avisado() -> int:
+    """Encerra a fila de avisos depois da carga inicial.
+
+    Sem isto, trazer 90 dias de historico enche a fila com centenas de
+    concursos antigos, e o `radar avisar` seguinte manda 10 mensagens sobre
+    editais de junho - a maioria com inscricao ja encerrada - mais o alerta de
+    excesso, que soaria como erro de regra sem ser.
+
+    Carga inicial e historico, nao novidade: quem chega por ela se ve na
+    pagina e na lista. A partir daqui, so a coleta diaria gera aviso.
+    """
+    consulta = select(Concurso).where(Concurso.avisado_em.is_(None))
+    marcados = 0
+    with sessao() as s:
+        for concurso in s.scalars(consulta):
+            concurso.avisado_em = agora()
+            marcados += 1
+    return marcados
+
+
+def carga_inicial(dias: int = 90) -> ResultadoColeta:
+    """Anda para tras no feed e traz o historico que a coleta diaria perdeu.
+
+    O RSS e um fluxo: ele so mostra o que e recente. Quem liga o radar hoje ve
+    os concursos de hoje, e nada do que foi publicado antes. Esta funcao
+    resolve isso uma vez, lendo o feed pagina por pagina.
+
+    Roda uma vez so, na mao. Nao entra na coleta diaria.
+    """
+    criar_tabelas()
+
+    desde = agora() - timedelta(days=dias)
+    paginas = min(dias * PAGINAS_POR_DIA, MAXIMO_DE_PAGINAS)
+
+    resultado = ResultadoColeta(fonte=ConcursosNoBrasil.nome)
+    try:
+        itens = ConcursosNoBrasil(paginas=paginas, desde=desde).coletar()
+        with sessao() as s:
+            for item in itens:
+                situacao = _gravar(s, item, ConcursosNoBrasil.nome)
+                if situacao == "novo":
+                    resultado.novos += 1
+                elif situacao == "atualizado":
+                    resultado.atualizados += 1
+
+        _marcar_historico_como_avisado()
+    except Exception as erro:  # noqa: BLE001 - de proposito: loga e segue
+        log.warning("carga inicial falhou: %s", erro)
+        log.debug("detalhe da falha na carga inicial", exc_info=True)
+        resultado.erro = f"{type(erro).__name__}: {erro}"
+
+    return resultado

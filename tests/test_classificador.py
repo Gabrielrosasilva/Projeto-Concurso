@@ -134,3 +134,51 @@ def test_todo_resultado_tem_motivo():
         ("Concurso TRF-1 abre vagas", None),
     ]:
         assert classificar(item(titulo, uf=uf)).motivo.strip()
+
+
+# --- a URL como sinal (fase 1.6) --------------------------------------------
+# Conferido no site real: post de concurso mora em /concursos/UF/ANO/..., e
+# noticia sobre auxilio mora em /beneficios-sociais/. Isso importa mais na
+# carga inicial, que traz milhares de posts de uma vez.
+
+def test_caminho_de_noticia_vence_a_palavra_do_titulo():
+    """Este titulo tem "vagas" e enganaria o filtro por palavra-chave."""
+    tipo = detectar_tipo(
+        "INSS paga hoje com vagas para todos os beneficiarios",
+        url="https://concursosnobrasil.com/beneficios-sociais/2026/09/inss-paga/",
+    )
+    assert tipo == "noticia"
+
+
+def test_bolsa_familia_pelo_caminho_da_url():
+    tipo = detectar_tipo(
+        "Bolsa Familia passa a ter novo valor em outubro",
+        url="https://concursosnobrasil.com/beneficios-sociais/2026/06/calendario/",
+    )
+    assert tipo == "noticia"
+
+
+def test_caminho_de_concurso_salva_titulo_sem_palavra_chave():
+    """Titulo vago, mas o post esta na secao de concursos: vale investigar."""
+    tipo = detectar_tipo(
+        "Prefeitura de Garuva (SC) oferta 29 oportunidades",
+        url="https://concursosnobrasil.com/concursos/sc/2026/09/garuva/",
+    )
+    assert tipo != "noticia"
+
+
+def test_sem_url_continua_funcionando():
+    """A URL e um sinal a mais, nao um requisito."""
+    assert detectar_tipo("Concurso Prefeitura de Palhoca abre vagas") == "concurso"
+    assert detectar_tipo("Bolsa Familia tem novo valor") == "noticia"
+
+
+def test_classificar_usa_a_url_do_item():
+    resultado = classificar(
+        ItemColetado(
+            titulo="INSS paga hoje com vagas para todos",
+            url="https://concursosnobrasil.com/beneficios-sociais/2026/09/inss/",
+            uf="SC",
+        )
+    )
+    assert resultado.tipo == "noticia"

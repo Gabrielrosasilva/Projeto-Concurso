@@ -80,6 +80,32 @@ radar reclassificar                 # depois de editar config/regioes.yml
 internet. Incluiu um municipio novo no YAML? Rode isso e os registros antigos
 se corrigem na hora.
 
+### Trazendo o historico (carga inicial)
+
+O RSS e um **fluxo, nao um arquivo**. Ele entrega so os 15 itens mais
+recentes, entao quem liga o radar hoje ve os concursos de hoje e nada do que
+foi publicado antes. Foi a primeira duvida depois que o Telegram ficou pronto:
+"por que so aparecem 14 concursos?".
+
+A resposta e este comando, que anda para tras no feed:
+
+```bash
+radar carga-inicial --dias 90      # tres meses de historico
+radar carga-inicial --dias 7       # so a ultima semana
+radar carga-inicial --dias 90 --sim   # sem perguntar antes
+```
+
+Ele usa `?paged=N` do proprio feed, que devolve as paginas mais antigas com a
+mesma estrutura da primeira. Por isso a carga inicial usa o mesmo parser e traz
+os mesmos campos - titulo completo, data e categoria -, em vez de raspar HTML.
+
+Roda **uma vez so**, na mao. Nao entra na coleta diaria. Duas protecoes:
+pausa de 1,5s entre paginas, e parada automatica assim que uma pagina inteira
+fica mais antiga que o periodo pedido.
+
+Medido no site em 17/09/2026: cerca de 1,5 pagina por dia de historico, 15
+itens por pagina. Noventa dias saem em uns 3 minutos.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da
