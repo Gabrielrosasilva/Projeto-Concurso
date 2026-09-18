@@ -152,7 +152,14 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   mas para em junho/2026, e nao traz titulo - so URL. O feed paginado traz
   tudo e usa o mesmo parser;
 - favorito e escolha minha: a coleta nao mexe, e NENHUM filtro o esconde -
-  nem distancia, nem salario, nem prazo vencido;
+  nem distancia, nem salario, nem prazo vencido. Os favoritos ficam num mural
+  fixo a esquerda, visivel em qualquer aba;
+- na tela, TODA informacao vem com rotulo ("Banca: FEPESE", nao "FEPESE"), e
+  `nucleo` aparece como "Perto";
+- dois campos tem dono e o classificador nao encosta neles: o salario que eu
+  digitei (`salario_manual`) e o municipio que veio da pagina do edital
+  (`municipio_confirmado`). Sem a segunda trava, um `reclassificar` desfazia o
+  trabalho do `detalhar` e a SEFAZ SC voltava de `nucleo` para `indefinida`;
 - o filtro de salario exclui quem nao tem valor conhecido, e a tela avisa
   quantos ficaram de fora. A primeira versao incluia os nulos para nao
   esconder concurso bom, e o resultado foi um filtro que nao filtrava: 1.115

@@ -33,12 +33,24 @@ CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia", "motivo_relev
 
 
 def _aplicar_classificacao(destino, item: ItemColetado) -> None:
+    """Aplica o que da para saber pelo TITULO, sem pisar em fonte melhor.
+
+    Duas coisas o classificador nao encosta, porque vieram de onde se sabe
+    mais: o salario que eu digitei, e o municipio que saiu da pagina do
+    edital. Sem essa trava, um `radar reclassificar` desfazia o trabalho do
+    `radar detalhar` - a SEFAZ SC voltava de `nucleo` para `indefinida`,
+    porque "Concurso SEFAZ (SC)" nao tem municipio no titulo.
+    """
     resultado = classificar(item)
-    destino.municipio = resultado.municipio
-    destino.salario = resultado.salario
     destino.tipo = resultado.tipo
-    destino.relevancia = resultado.relevancia
-    destino.motivo_relevancia = resultado.motivo
+
+    if not destino.salario_manual:
+        destino.salario = resultado.salario
+
+    if not destino.municipio_confirmado:
+        destino.municipio = resultado.municipio
+        destino.relevancia = resultado.relevancia
+        destino.motivo_relevancia = resultado.motivo
     # O coletor marca tudo como edital_publicado porque nao sabe distinguir.
     # Se nem concurso e, nao da para afirmar que ha edital.
     if resultado.tipo == "noticia":
@@ -534,6 +546,8 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
             if achado.municipio and not concurso.municipio:
                 anel_antes = concurso.relevancia
                 concurso.municipio = achado.municipio
+                # veio da pagina, que e fonte melhor que o titulo
+                concurso.municipio_confirmado = True
                 anel = regioes.anel_de(achado.municipio)
                 if anel:
                     concurso.relevancia = anel
@@ -639,3 +653,22 @@ def atualizar_situacoes() -> dict[str, int]:
                 contagem[nova] = contagem.get(nova, 0) + 1
 
     return contagem
+
+
+def definir_salario(concurso_id: int, valor: float | None) -> Concurso | None:
+    """Grava o salario que eu digitei, e trava contra a proxima coleta.
+
+    Existe porque 1.115 dos 2.185 concursos nao trazem valor no titulo. Sem
+    isto, eles ficariam para sempre sem remuneracao conhecida e fora do filtro
+    - inclusive os bons, como o de 300 vagas de Sao Jose.
+
+    Passar None limpa o valor e devolve o campo ao classificador.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        concurso = s.get(Concurso, concurso_id)
+        if concurso is None:
+            return None
+        concurso.salario = valor
+        concurso.salario_manual = valor is not None
+        return concurso

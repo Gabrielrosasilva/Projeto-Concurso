@@ -7,6 +7,8 @@ porque nenhum deles encostava neste arquivo.
 """
 from datetime import datetime, timedelta, timezone
 
+import pytest
+
 from radar.util import formatar_data, fuso_local, para_local
 
 
@@ -37,3 +39,28 @@ def test_sem_data():
     assert para_local(None) is None
     assert formatar_data(None) == "--"
     assert formatar_data(None, vazio="sem data") == "sem data"
+
+
+# --- valor em reais do jeito que a pessoa digita -----------------------------
+
+@pytest.mark.parametrize("digitado,esperado", [
+    ("5200", 5200.0),
+    ("R$ 5200", 5200.0),
+    ("R$5200", 5200.0),
+    (" 5200 ", 5200.0),
+    ("5.200", 5200.0),          # ponto de milhar, o jeito brasileiro
+    ("1.234.567", 1234567.0),
+    ("5.200,50", 5200.5),       # virgula decide: ela e o decimal
+    ("5200.50", 5200.5),        # ponto decimal tambem vale
+    ("0", 0.0),
+])
+def test_converter_valor(digitado, esperado):
+    from radar.util import converter_valor
+    assert converter_valor(digitado) == esperado
+
+
+@pytest.mark.parametrize("digitado", ["", "   ", None, "nao sei", "abc", "-100"])
+def test_valor_invalido_vira_none(digitado):
+    """Quem digitou errado nao pode derrubar a pagina."""
+    from radar.util import converter_valor
+    assert converter_valor(digitado) is None

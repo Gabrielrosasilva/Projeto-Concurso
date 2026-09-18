@@ -1,4 +1,5 @@
 """Funcoes pequenas usadas em mais de um lugar."""
+import re
 from datetime import datetime, timezone
 from functools import cache
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -45,3 +46,35 @@ def dias_ate(quando: datetime | None) -> int | None:
     if quando.tzinfo is None:
         quando = quando.replace(tzinfo=timezone.utc)
     return (quando - datetime.now(timezone.utc)).days
+
+
+# Uso "5.200" para cinco mil e duzentos, mas tambem posso digitar "5200.50"
+# com o ponto decimal. O ponto e ambiguo, entao a regra e olhar o formato:
+# ponto seguido de exatamente tres digitos, sem virgula na frase, e milhar.
+SO_MILHAR = re.compile(r"^\d{1,3}(\.\d{3})+$")
+
+
+def converter_valor(texto: str | None) -> float | None:
+    """Le um valor em reais do jeito que a pessoa digitou.
+
+    Aceita "5200", "R$ 5.200", "5.200,50" e "5200.50". Texto que nao vira
+    numero devolve None, em vez de estourar - quem esta digitando errou, e
+    isso nao pode derrubar a pagina.
+    """
+    if not texto:
+        return None
+
+    limpo = texto.strip().replace("R$", "").replace(" ", "").replace(" ", "")
+    if not limpo:
+        return None
+
+    if "," in limpo:                       # virgula decidiu: ela e o decimal
+        limpo = limpo.replace(".", "").replace(",", ".")
+    elif SO_MILHAR.match(limpo):           # "5.200" e "1.234.567"
+        limpo = limpo.replace(".", "")
+
+    try:
+        valor = float(limpo)
+    except ValueError:
+        return None
+    return valor if valor >= 0 else None

@@ -143,6 +143,14 @@ e o registro segue `indefinida`. Chutar seria pior.
 Na pagina web ha a aba **Inscricoes abertas**, ordenada pelo prazo, e cada
 cartao mostra quantos dias faltam. Sete dias ou menos aparece em vermelho.
 
+### O mural
+
+A estrela de cada concurso o fixa no **mural**, a coluna da esquerda que
+aparece em qualquer aba. No celular ele vai para o topo.
+
+Cada cartao do mural tem cor do anel, cidade, remuneracao, banca e o prazo em
+vermelho com os dias que faltam.
+
 ### Meus favoritos
 
 Clique na estrela de qualquer concurso para guardar na aba **Meus favoritos**.
@@ -156,8 +164,8 @@ Favorito e escolha sua, e por isso:
 - os favoritos aparecem ordenados por **quem fecha primeiro**, e o que nao tem
   prazo conhecido vai para o fim da lista em vez de sumir.
 
-Cada favorito mostra o **caminho completo** do concurso, com a etapa atual em
-destaque:
+Em "Ver com o status completo", cada favorito mostra o **caminho completo** do
+concurso, com a etapa atual em destaque:
 
 ```
 previsto -> autorizado -> banca contratada -> edital publicado
@@ -176,6 +184,23 @@ radar favoritar 324             # guarda
 radar favoritar 324 --remover   # tira
 radar listar --favoritos
 radar situacoes                 # recalcula os status (o tempo passa sozinho)
+```
+
+### A remuneracao que o titulo nao traz
+
+Mais da metade dos concursos nao informa salario no titulo. Nesses, o cartao
+mostra **R$ ??** e um lapis: clicar abre um campo, e o valor que voce digitar
+fica gravado.
+
+Valor digitado **nao e sobrescrito** pela coleta nem pelo `reclassificar` - o
+que voce leu no edital vale mais que o que da para adivinhar pelo titulo. E
+ele entra no filtro de remuneracao como qualquer outro.
+
+Aceita do jeito que se digita: `5200`, `R$ 5.200`, `5.200,50`, `5200.50`.
+
+```bash
+radar salario 324 5200     # grava
+radar salario 324          # limpa
 ```
 
 ### Filtro de remuneracao

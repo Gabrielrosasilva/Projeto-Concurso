@@ -40,7 +40,11 @@ def test_pagina_mostra_concurso(cliente):
     texto = cliente.get("/").text
     assert "Ascurra" in texto
     assert "https://exemplo.test/ascurra" in texto   # o link original aparece
-    assert "edital publicado" in texto               # situacao legivel, sem _
+    # cada informacao vem com rotulo: "FEPESE" sozinho nao diz nada
+    assert "Cidade:" in texto
+    assert "Salario:" in texto
+    assert "Banca:" in texto
+    assert "Status:" in texto
 
 
 def test_filtro_por_uf(cliente):
@@ -109,3 +113,15 @@ def test_motivo_da_classificacao_aparece_na_tela(cliente):
                        motivo_relevancia="Palhoca (SC) esta no anel nucleo."))
 
     assert "esta no anel nucleo" in cliente.get("/").text
+
+
+def test_os_grids_declaram_coluna_que_encolhe(cliente):
+    """Grid sem coluna declarada usa uma implicita de tamanho `auto`, que pode
+    chegar a max-content e furar a largura da tela com um titulo longo.
+
+    Isto e prevencao, nao conserto: o corte que eu achei ter visto no celular
+    era artefato do print (o Chrome no Windows tem largura minima de janela de
+    500px, entao um screenshot pedido com 400px e so um recorte). Declarar
+    minmax(0,1fr) continua sendo o certo e custa nada."""
+    texto = cliente.get("/").text
+    assert texto.count("grid-template-columns:minmax(0,1fr)") >= 3

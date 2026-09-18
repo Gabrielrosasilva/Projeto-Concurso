@@ -65,6 +65,13 @@ SITUACAO_LEGIVEL = {
     "desconhecida": "-",
 }
 
+ROTULO_DO_ANEL = {
+    "nucleo": "Perto",
+    "proximo": "Proximo",
+    "remoto": "Longe",
+    "indefinida": "A confirmar",
+}
+
 CORES_DO_ANEL = {
     "nucleo": "bold green",
     "proximo": "yellow",
@@ -126,7 +133,7 @@ def listar(
         estrela = "*" if c.interesse == servico.FAVORITO else " "
         tabela.add_row(
             f"{estrela}{c.id}",
-            f"[{cor}]{c.relevancia}[/]" if cor else c.relevancia,
+            f"[{cor}]{ROTULO_DO_ANEL.get(c.relevancia, c.relevancia)}[/]",
             salario,
             _prazo(c.inscricoes_ate),
             SITUACAO_LEGIVEL.get(c.situacao, c.situacao),
@@ -177,9 +184,9 @@ def carga_inicial(
 
     contagem = servico.contar_por_relevancia()
     console.print(
-        f"\nNo banco agora: [bold green]{contagem['nucleo']}[/] no nucleo, "
+        f"\nNo banco agora: [bold green]{contagem['nucleo']}[/] perto, "
         f"[bold yellow]{contagem['proximo']}[/] proximo, "
-        f"{contagem['remoto']} remoto, {contagem['indefinida']} a confirmar."
+        f"{contagem['remoto']} longe, {contagem['indefinida']} a confirmar."
     )
 
 
@@ -202,6 +209,28 @@ def favoritar(
     verbo = "removido dos" if remover else "adicionado aos"
     console.print(f"[green]{verbo} favoritos:[/] {concurso.titulo}")
     console.print(f"Agora sao {servico.contar_favoritos()} favorito(s).")
+
+
+@app.command()
+def salario(
+    concurso_id: int = typer.Argument(..., help="O id que aparece em `radar listar`"),
+    valor: float = typer.Argument(None, help="Deixe vazio para limpar"),
+) -> None:
+    """Anota a remuneracao de um concurso, quando o titulo nao traz.
+
+    O valor digitado fica travado: a proxima coleta nao o sobrescreve.
+    """
+    concurso = servico.definir_salario(concurso_id, valor)
+
+    if concurso is None:
+        console.print(f"[red]Nao achei concurso com id {concurso_id}.[/]")
+        raise typer.Exit(code=1)
+
+    if valor is None:
+        console.print(f"[green]Salario limpo:[/] {concurso.titulo[:60]}")
+    else:
+        formatado = f"{valor:,.0f}".replace(",", ".")
+        console.print(f"[green]R$ {formatado}[/] gravado em: {concurso.titulo[:60]}")
 
 
 @app.command()
@@ -314,7 +343,8 @@ def reclassificar() -> None:
     contagem = servico.reclassificar()
     for anel, quantos in sorted(contagem.items()):
         cor = CORES_DO_ANEL.get(anel, "")
-        console.print(f"[{cor}]{anel}[/]: {quantos}" if cor else f"{anel}: {quantos}")
+        rotulo = ROTULO_DO_ANEL.get(anel, anel)
+        console.print(f"[{cor}]{rotulo}[/]: {quantos}" if cor else f"{rotulo}: {quantos}")
 
 
 @app.command()

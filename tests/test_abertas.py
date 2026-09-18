@@ -191,3 +191,72 @@ def test_respeita_o_limite(banco_temporario):
     _semear(*[_concurso(f"https://a.test/{i}") for i in range(20)])
 
     assert len(servico._pendentes_de_detalhe(limite=5)) == 5
+
+
+# --- o detalhar nao pode ser desfeito pelo reclassificar ---------------------
+
+def test_municipio_da_pagina_sobrevive_ao_reclassificar(banco_temporario):
+    """Bug real: rodar `radar reclassificar` devolvia a SEFAZ SC de `nucleo`
+    para `indefinida`, porque "Concurso SEFAZ (SC)" nao tem municipio no
+    titulo. A pagina do edital diz "lotacao em Florianopolis", e essa fonte
+    vale mais que o titulo."""
+    _semear(_concurso(
+        "https://a.test/sefaz",
+        titulo="Concurso SEFAZ (SC) abre 50 vagas",
+        uf="SC",
+        municipio="Florianopolis",
+        municipio_confirmado=True,
+        relevancia="nucleo",
+        motivo_relevancia="Florianopolis aparece como lotacao na pagina.",
+    ))
+
+    servico.reclassificar()
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.municipio == "Florianopolis"
+    assert concurso.relevancia == "nucleo"
+    assert "lotacao na pagina" in concurso.motivo_relevancia
+
+
+def test_municipio_do_titulo_continua_sendo_recalculado(banco_temporario):
+    """A trava vale so para o que veio da pagina. O resto tem que continuar
+    obedecendo ao regioes.yml quando eu editar o arquivo."""
+    _semear(_concurso(
+        "https://a.test/1",
+        titulo="Concurso Prefeitura de Palhoca (SC) abre vagas",
+        uf="SC",
+        municipio=None,
+        municipio_confirmado=False,
+        relevancia="indefinida",
+    ))
+
+    servico.reclassificar()
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.municipio == "Palhoca"
+    assert concurso.relevancia == "nucleo"
+
+
+def test_a_coleta_tambem_respeita_o_municipio_da_pagina(banco_temporario):
+    from radar.collectors.base import ItemColetado
+
+    _semear(_concurso(
+        "https://a.test/sefaz",
+        titulo="Concurso SEFAZ (SC) abre 50 vagas",
+        uf="SC", municipio="Florianopolis", municipio_confirmado=True,
+        relevancia="nucleo",
+    ))
+
+    with sessao() as s:
+        servico._gravar(s, ItemColetado(
+            titulo="Concurso SEFAZ (SC) abre 50 vagas - atualizado",
+            url="https://a.test/sefaz",
+            uf="SC",
+        ), fonte="teste")
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.municipio == "Florianopolis"
+    assert concurso.relevancia == "nucleo"

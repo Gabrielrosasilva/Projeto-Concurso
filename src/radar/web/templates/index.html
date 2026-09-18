@@ -28,34 +28,65 @@
         --estrela:#fbbf24; --estrela-fraca:#2e2310;
       }
     }
+
     *{box-sizing:border-box}
-    body{margin:0;padding:2rem 1rem 4rem;background:var(--fundo);color:var(--texto);
+    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
          font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-    .pagina{max-width:880px;margin:0 auto}
     h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
     .subtitulo{margin:0 0 1.25rem;color:var(--suave);font-size:.9rem}
 
-    /* Atalhos por anel: o jeito rapido de trocar o que a pagina mostra */
+    /* Mural a esquerda, lista a direita. No celular vira uma coluna so, com o
+       mural em cima: os favoritos sao o que eu quero ver primeiro. */
+    .quadro{max-width:1240px;margin:0 auto;display:grid;gap:1.5rem;
+            grid-template-columns:300px minmax(0,1fr);align-items:start}
+    /* minmax(0,1fr) e nao 1fr: `1fr` sozinho nao encolhe abaixo do conteudo
+       minimo da coluna, e um titulo longo poderia furar a largura da tela. */
+    @media (max-width:860px){ .quadro{grid-template-columns:minmax(0,1fr)} }
+    .mural,main{min-width:0}
+    /* titulo longo sem espaco (URL, nome comprido) nao pode furar a coluna */
+    .titulo,.fixado a{overflow-wrap:anywhere}
+
+    /* ----------------------------------------------------------- mural --- */
+    .mural{position:sticky;top:1rem}
+    .mural h2{font-size:.95rem;margin:0 0 .6rem;display:flex;align-items:center;
+      gap:.4rem}
+    .mural h2 .n{background:var(--estrela-fraca);color:var(--estrela);
+      font-size:.75rem;padding:.05rem .45rem;border-radius:999px}
+    .mural ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem;
+      grid-template-columns:minmax(0,1fr)}
+    .fixado{background:var(--cartao);border:1px solid var(--borda);
+      border-left:4px solid var(--remoto);border-radius:10px;padding:.6rem .7rem}
+    .fixado.nucleo{border-left-color:var(--nucleo);background:var(--nucleo-fraco)}
+    .fixado.proximo{border-left-color:var(--proximo);background:var(--proximo-fraco)}
+    .fixado.indefinida{border-left-color:var(--indef);background:var(--indef-fraco)}
+    .fixado a{color:var(--texto);text-decoration:none;font-weight:600;
+      font-size:.84rem;display:block;margin-bottom:.35rem}
+    .fixado a:hover{text-decoration:underline}
+    .fixado .linha{font-size:.75rem;color:var(--suave);display:block}
+    .fixado .valor{font-weight:700;color:var(--texto)}
+    .fixado .fecha{color:var(--prazo);font-weight:700}
+    .fixado .topo-fixado{display:flex;gap:.4rem;align-items:flex-start}
+    .mural .vazio-mural{background:var(--cartao);border:1px dashed var(--borda);
+      border-radius:10px;padding:1rem;color:var(--suave);font-size:.8rem}
+
+    /* ------------------------------------------------------------ abas --- */
     nav{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
-    nav a{
-      display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;
+    nav a{display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;
       padding:.45rem .8rem;border-radius:999px;font-size:.85rem;font-weight:600;
-      border:1px solid var(--borda);background:var(--cartao);color:var(--suave);
-    }
+      border:1px solid var(--borda);background:var(--cartao);color:var(--suave)}
     nav a:hover{border-color:var(--azul)}
     nav a .n{font-weight:700;font-variant-numeric:tabular-nums;opacity:.75}
     nav a.ativo{border-color:transparent}
     nav a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
-    nav a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
-    nav a.ativo.favoritos{background:var(--estrela-fraca);color:var(--estrela)}
     nav a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
     nav a.ativo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
+    nav a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
 
-    form{display:grid;gap:.5rem;margin-bottom:1rem;
-         grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
+    form.filtros{display:grid;gap:.5rem;margin-bottom:1rem;
+      grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
     input{padding:.55rem .7rem;border:1px solid var(--borda);border-radius:8px;
-          background:var(--cartao);color:var(--texto);font-size:.9rem;min-width:0}
+      background:var(--cartao);color:var(--texto);font-size:.9rem;min-width:0}
     input:focus{outline:2px solid var(--azul);outline-offset:-1px}
     .acoes{display:flex;gap:.5rem}
     button,.limpar{padding:.55rem 1rem;border-radius:8px;font-size:.9rem;
@@ -68,42 +99,60 @@
       font-size:.82rem;padding:.6rem .8rem;border-radius:8px;margin:0 0 .8rem}
     .aviso-filtro a{color:inherit}
 
-    ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
-    li{background:var(--cartao);border:1px solid var(--borda);border-radius:10px;
-       padding:.85rem 1rem;border-left:3px solid var(--borda)}
-    li.nucleo{border-left-color:var(--nucleo)}
-    li.proximo{border-left-color:var(--proximo)}
-    li.indefinida{border-left-color:var(--indef)}
-    li:hover{border-color:var(--azul)}
-    li:hover.nucleo{border-left-color:var(--nucleo)}
+    /* --------------------------------------------------------- cartoes --- */
+    ul.lista{list-style:none;padding:0;margin:0;display:grid;gap:.55rem;
+      grid-template-columns:minmax(0,1fr)}
+    ul.lista>li{background:var(--cartao);border:1px solid var(--borda);
+      border-radius:10px;padding:.85rem 1rem;border-left:3px solid var(--borda)}
+    ul.lista>li.nucleo{border-left-color:var(--nucleo)}
+    ul.lista>li.proximo{border-left-color:var(--proximo)}
+    ul.lista>li.indefinida{border-left-color:var(--indef)}
 
     .topo{display:flex;gap:.6rem;align-items:flex-start}
     .topo .titulo{flex:1}
+    .titulo{color:var(--texto);text-decoration:none;font-weight:600;display:block}
+    .titulo:hover{color:var(--azul)}
     .fav{display:block;margin:0;padding:0}
     .fav button{background:transparent;border:0;padding:0 .1rem;cursor:pointer;
       font-size:1.25rem;line-height:1.2;color:var(--suave)}
     .fav button:hover{color:var(--estrela)}
     .fav button.marcada{color:var(--estrela)}
-    .titulo{color:var(--texto);text-decoration:none;font-weight:600;display:block}
-    .titulo:hover{color:var(--azul)}
-    .salario{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;
-             font-size:.95rem}
-    .salario.bom{color:var(--nucleo)}
 
-    .selos{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin-top:.5rem}
-    .selo{font-size:.72rem;padding:.12rem .5rem;border-radius:999px;font-weight:600}
+    .selos{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin-top:.55rem}
+    .selo{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;font-weight:600;
+      display:inline-flex;gap:.28rem;align-items:baseline}
+    /* O rotulo diz o que o valor e; sem ele "FEPESE" nao quer dizer nada. */
+    .selo .rot{font-weight:400;opacity:.7}
     .selo.nucleo{background:var(--nucleo-fraco);color:var(--nucleo)}
     .selo.proximo{background:var(--proximo-fraco);color:var(--proximo)}
     .selo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     .selo.indefinida{background:var(--indef-fraco);color:var(--indef)}
     .selo.neutro{background:transparent;color:var(--suave);font-weight:400;
-                 border:1px solid var(--borda)}
+      border:1px solid var(--borda)}
+    .selo.aberta{background:var(--nucleo-fraco);color:var(--nucleo)}
+    .selo.fechada{background:var(--remoto-fraco);color:var(--remoto)}
     .selo.prazo{background:var(--prazo-fraco);color:var(--prazo)}
     .selo.prazo.urgente{font-weight:700}
+    .selo.dinheiro{background:var(--nucleo-fraco);color:var(--nucleo)}
+    .selo.dinheiro.sem-valor{background:transparent;color:var(--suave);
+      border:1px dashed var(--borda);font-weight:400}
     .meta{color:var(--suave);font-size:.79rem}
     .motivo{color:var(--suave);font-size:.78rem;margin-top:.4rem;font-style:italic}
+
+    /* Editar salario: um link recarrega a pagina com ?editar=<id>, e o cartao
+       correspondente troca o valor por um campo. Tentei <details> antes; ele
+       crescia para uns 90px dentro do selo e deixava uma caixa vazia na tela.
+       Link e previsivel, funciona sem JavaScript e da para testar. */
+    .lapis{opacity:.6;font-size:.85em;text-decoration:none;color:inherit}
+    .lapis:hover{opacity:1}
+    form.salario{display:inline-flex;gap:.3rem;align-items:center}
+    form.salario input{padding:.15rem .4rem;font-size:.72rem;width:6.5rem;
+      border-radius:6px}
+    form.salario button{padding:.15rem .5rem;font-size:.72rem;border-radius:6px}
+    form.salario a{font-size:.72rem;color:var(--suave);text-decoration:none}
+
     .etapas{display:flex;flex-wrap:wrap;gap:.3rem;list-style:none;padding:0;
-      margin:.6rem 0 .2rem;counter-reset:etapa}
+      margin:.6rem 0 .2rem}
     .etapas li{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;
       border:1px dashed var(--borda);color:var(--suave)}
     .etapas li.feita{border-style:solid;border-color:transparent;
@@ -112,153 +161,233 @@
       background:var(--nucleo-fraco);color:var(--nucleo)}
 
     .vazio{text-align:center;padding:2.5rem 1.25rem;background:var(--cartao);
-           border:1px dashed var(--borda);border-radius:10px}
+      border:1px dashed var(--borda);border-radius:10px}
     .vazio p{margin:.4rem 0;color:var(--suave);font-size:.9rem}
     .vazio .grande{font-size:1.05rem;color:var(--texto);font-weight:600}
     .vazio a{color:var(--azul)}
     code{background:var(--azul-fraco);color:var(--azul);padding:.1rem .4rem;
-         border-radius:4px;font-size:.85em}
+      border-radius:4px;font-size:.85em}
   </style>
 </head>
 <body>
-<div class="pagina">
 
-  <h1>Radar de Concursos</h1>
-  <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
-
-  {# Os atalhos levam a mesma pagina com outro filtro: nada de JavaScript. #}
-  <nav>
-    <a class="favoritos {{ 'ativo' if favoritos }}" href="/?favoritos=true">
-      Meus favoritos <span class="n">{{ n_favoritos }}</span>
-    </a>
-    <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
-      Inscricoes abertas <span class="n">{{ n_abertas }}</span>
-    </a>
-    <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/">
-      Perto de mim <span class="n">{{ perto }}</span>
-    </a>
-    <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
-      Longe <span class="n">{{ contagem.remoto }}</span>
-    </a>
-    <a class="indefinida {{ 'ativo' if relevancia == 'indefinida' }}" href="/?relevancia=indefinida">
-      A confirmar <span class="n">{{ contagem.indefinida }}</span>
-    </a>
-    <a class="tudo {{ 'ativo' if todos }}" href="/?todos=true">
-      Todos <span class="n">{{ total_geral }}</span>
-    </a>
-  </nav>
-
-  <form method="get">
-    {% if relevancia %}<input type="hidden" name="relevancia" value="{{ relevancia }}">{% endif %}
-    {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
-    {% if abertas %}<input type="hidden" name="abertas" value="true">{% endif %}
-    {% if favoritos %}<input type="hidden" name="favoritos" value="true">{% endif %}
-    <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" maxlength="2">
-    <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
-    <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
-    <input name="salario_min" type="number" step="100" min="0"
-           placeholder="Salario min (ex: 5000)" value="{{ salario_min }}">
-    <div class="acoes">
-      <button type="submit">Filtrar</button>
-      <a class="limpar" href="/">Limpar</a>
+{# Um cartao da lista principal, com rotulo em cada informacao. #}
+{% macro cartao(c) %}
+  <li class="{{ c.relevancia }}">
+    <div class="topo">
+      <form class="fav" method="post" action="/favoritar">
+        <input type="hidden" name="concurso_id" value="{{ c.id }}">
+        <input type="hidden" name="voltar" value="{{ url_atual }}">
+        <button type="submit" class="{{ 'marcada' if c.interesse == favorito }}"
+                title="{{ 'Tirar do mural' if c.interesse == favorito else 'Fixar no mural' }}"
+                aria-label="{{ 'Tirar do mural' if c.interesse == favorito else 'Fixar no mural' }}"
+        >{{ '★' if c.interesse == favorito else '☆' }}</button>
+      </form>
+      <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
     </div>
-  </form>
 
-  <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
+    <div class="selos">
+      <span class="selo {{ c.relevancia }}">{{ rotulo_anel.get(c.relevancia, c.relevancia) }}</span>
 
-  {% if n_sem_salario %}
-    <p class="aviso-filtro">
-      Filtrando por remuneracao acima de R$ {{ '{:,.0f}'.format(salario_min|float)|replace(',', '.') }}.
-      <strong>{{ n_sem_salario }}</strong> concurso(s) nao informam salario no titulo
-      e ficaram de fora - entre eles pode haver coisa boa.
-      <a href="?{{ 'favoritos=true&' if favoritos }}{{ 'abertas=true&' if abertas }}{{ 'todos=true' if todos }}">Ver sem esse filtro</a>
-    </p>
-  {% endif %}
+      <span class="selo neutro"><span class="rot">Cidade:</span>
+        {%- if c.municipio %} {{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
+        {%- elif c.uf %} {{ c.uf }}
+        {%- else %} nao identificada{% endif %}</span>
 
-  <ul>
-    {% for c in itens %}
-      <li class="{{ c.relevancia }}">
-        <div class="topo">
-          <form class="fav" method="post" action="/favoritar">
+      {# Salario sempre presente. Sem valor vira "R$ ??", e o lapis abre o campo. #}
+      {% if editar == c.id %}
+        <span class="selo dinheiro sem-valor">
+          <span class="rot">Salario:</span>
+          <form class="salario" method="post" action="/salario">
             <input type="hidden" name="concurso_id" value="{{ c.id }}">
-            <input type="hidden" name="voltar" value="{{ request.url.path }}?{{ request.url.query }}">
-            <button type="submit"
-                    class="{{ 'marcada' if c.interesse == favorito }}"
-                    title="{{ 'Tirar dos favoritos' if c.interesse == favorito else 'Guardar nos favoritos' }}"
-                    aria-label="{{ 'Tirar dos favoritos' if c.interesse == favorito else 'Guardar nos favoritos' }}"
-            >{{ '★' if c.interesse == favorito else '☆' }}</button>
+            <input type="hidden" name="voltar" value="{{ url_sem_editar }}">
+            <input name="salario" inputmode="decimal" placeholder="ex: 5200"
+                   value="{{ '{:.0f}'.format(c.salario) if c.salario else '' }}"
+                   aria-label="Remuneracao em reais" autofocus>
+            <button type="submit">Salvar</button>
+            <a href="{{ url_sem_editar }}">cancelar</a>
           </form>
-          <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
-        </div>
-        <div class="selos">
-          {% if c.salario %}
-            <span class="salario {{ 'bom' if c.salario >= 5000 }}">R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}</span>
-          {% endif %}
-          <span class="selo {{ c.relevancia }}">{{ c.relevancia }}</span>
-          {% if c.municipio %}<span class="selo neutro">{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}</span>
-          {% elif c.uf %}<span class="selo neutro">{{ c.uf }}</span>{% endif %}
-          <span class="selo neutro">{{ c.tipo }}</span>
-          {% if c.situacao != 'desconhecida' %}<span class="selo neutro">{{ c.situacao|replace('_', ' ') }}</span>{% endif %}
-          {% if c.banca %}<span class="selo neutro">{{ c.banca }}</span>{% endif %}
-          {% set faltam = c.inscricoes_ate | dias %}
-          {% if faltam is not none and faltam >= 0 %}
-            <span class="selo prazo{{ ' urgente' if faltam <= 7 }}">
-              inscricao ate {{ c.inscricoes_ate | data }}{% if faltam <= 30 %} - faltam {{ faltam }}d{% endif %}
-            </span>
-          {% endif %}
-          <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
-        </div>
-        {% if favoritos %}
-          {# Nos favoritos vale mostrar o caminho inteiro: e o que eu acompanho
-             de perto. Toda etapa antes da atual ja aconteceu, por definicao
-             da sequencia - nao e chute. #}
-          {% set atual = c.situacao %}
-          {% set indice = etapas|map(attribute=0)|list %}
-          {% if atual in indice %}
-            <ol class="etapas">
-              {% for chave, rotulo in etapas %}
-                {% set posicao = loop.index0 %}
-                {% set onde = indice.index(atual) %}
-                <li class="{{ 'feita' if posicao < onde }}{{ ' atual' if posicao == onde }}">{{ rotulo }}</li>
-              {% endfor %}
-            </ol>
-          {% else %}
-            <p class="motivo">Status ainda nao confirmado. Rode <code>radar detalhar</code>.</p>
-          {% endif %}
-        {% endif %}
-        {% if c.motivo_relevancia %}<div class="motivo">{{ c.motivo_relevancia }}</div>{% endif %}
-      </li>
-    {% else %}
-      <li class="vazio">
-        {% if total_geral == 0 %}
-          <p class="grande">Nada coletado ainda.</p>
-          <p>Rode <code>radar coletar</code> no terminal.</p>
-        {% elif favoritos %}
-          <p class="grande">Voce ainda nao favoritou nenhum concurso.</p>
-          <p>
-            Clique na estrela de qualquer concurso para guardar aqui e
-            acompanhar o status dele de perto.
-          </p>
-        {% elif abertas %}
-          <p class="grande">Nenhuma inscricao aberta agora.</p>
-          <p>
-            O prazo so e conhecido depois de ler a pagina de cada edital.
-            Rode <code>radar detalhar</code> no terminal.
-          </p>
-        {% elif not relevancia and not todos %}
-          <p class="grande">Nenhum concurso perto de voce agora.</p>
-          <p>
-            Ha {{ contagem.remoto }} longe e {{ contagem.indefinida }} a confirmar.
-            <a href="/?todos=true">Ver todos os {{ total_geral }}</a>.
-          </p>
-          <p>Isso e normal: o radar so avisa quando abrir algo na sua regiao.</p>
+        </span>
+      {% else %}
+        <span class="selo dinheiro {{ '' if c.salario else 'sem-valor' }}">
+          <span class="rot">Salario:</span>
+          {% if c.salario %}R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}{% else %}R$ ??{% endif %}
+          <a class="lapis" href="{{ url_com_editar }}{{ c.id }}"
+             title="Anotar a remuneracao" aria-label="Anotar a remuneracao">&#9998;</a>
+        </span>
+      {% endif %}
+
+      <span class="selo neutro"><span class="rot">Banca:</span>
+        {{ c.banca if c.banca else 'a confirmar' }}</span>
+
+      {% set faltam = c.inscricoes_ate | dias %}
+      {% if c.inscricoes_ate %}
+        <span class="selo {{ 'aberta' if faltam >= 0 else 'fechada' }}">
+          <span class="rot">Status:</span>
+          inscricao {{ 'aberta' if faltam >= 0 else 'fechada' }}</span>
+        {% if faltam >= 0 %}
+          <span class="selo prazo{{ ' urgente' if faltam <= 7 }}">
+            <span class="rot">Inscricao ate:</span>
+            {{ c.inscricoes_ate | data }} &middot; faltam {{ faltam }}d</span>
         {% else %}
-          <p class="grande">Nenhum resultado com esses filtros.</p>
-          <p><a href="/">Limpar e voltar</a></p>
+          <span class="selo neutro"><span class="rot">Encerrou em:</span>
+            {{ c.inscricoes_ate | data }}</span>
         {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+      {% else %}
+        <span class="selo neutro"><span class="rot">Status:</span> prazo nao confirmado</span>
+      {% endif %}
+
+      <span class="selo neutro"><span class="rot">Tipo:</span> {{ c.tipo }}</span>
+      <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
+    </div>
+
+    {% if favoritos %}
+      {# No mural detalhado vale o caminho inteiro. Toda etapa antes da atual
+         ja aconteceu, por definicao da sequencia - nao e chute. #}
+      {% set indice = etapas|map(attribute=0)|list %}
+      {% if c.situacao in indice %}
+        <ol class="etapas">
+          {% for chave, rotulo in etapas %}
+            <li class="{{ 'feita' if loop.index0 < indice.index(c.situacao) }}{{ ' atual' if loop.index0 == indice.index(c.situacao) }}">{{ rotulo }}</li>
+          {% endfor %}
+        </ol>
+      {% endif %}
+    {% endif %}
+
+    {% if c.motivo_relevancia %}<div class="motivo">{{ c.motivo_relevancia }}</div>{% endif %}
+  </li>
+{% endmacro %}
+
+<h1>Radar de Concursos</h1>
+<p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
+
+<div class="quadro">
+
+  {# ------------------------------------------------------ mural ---------- #}
+  <aside class="mural">
+    <h2>Meu mural <span class="n">{{ n_favoritos }}</span></h2>
+
+    {% if mural %}
+      <ul>
+        {% for c in mural %}
+          {% set faltam = c.inscricoes_ate | dias %}
+          <li class="fixado {{ c.relevancia }}">
+            <div class="topo-fixado">
+              <form class="fav" method="post" action="/favoritar">
+                <input type="hidden" name="concurso_id" value="{{ c.id }}">
+                <input type="hidden" name="voltar" value="{{ url_atual }}">
+                <button type="submit" class="marcada" title="Tirar do mural"
+                        aria-label="Tirar do mural">★</button>
+              </form>
+              <a href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
+            </div>
+            <span class="linha">
+              {%- if c.municipio %}{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
+              {%- elif c.uf %}{{ c.uf }}{% else %}cidade nao identificada{% endif %}
+              &middot; {{ rotulo_anel.get(c.relevancia, c.relevancia) }}
+            </span>
+            <span class="linha">
+              <span class="valor">{% if c.salario %}R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}{% else %}R$ ??{% endif %}</span>
+              &middot; {{ c.banca if c.banca else 'banca a confirmar' }}
+            </span>
+            <span class="linha">
+              {% if c.inscricoes_ate and faltam >= 0 %}
+                <span class="fecha">ate {{ c.inscricoes_ate | data }} &middot; faltam {{ faltam }}d</span>
+              {% elif c.inscricoes_ate %}
+                inscricao fechada em {{ c.inscricoes_ate | data }}
+              {% else %}
+                prazo nao confirmado
+              {% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="meta" style="margin-top:.6rem">
+        <a href="/?favoritos=true" style="color:var(--azul)">Ver com o status completo</a>
+      </p>
+    {% else %}
+      <div class="vazio-mural">
+        Clique na estrela &#9734; de um concurso para fixar aqui e acompanhar
+        de perto.
+      </div>
+    {% endif %}
+  </aside>
+
+  {# ------------------------------------------------------ lista ---------- #}
+  <main>
+    <nav>
+      <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/">
+        Perto de mim <span class="n">{{ perto }}</span>
+      </a>
+      <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
+        Inscricoes abertas <span class="n">{{ n_abertas }}</span>
+      </a>
+      <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
+        Longe <span class="n">{{ contagem.remoto }}</span>
+      </a>
+      <a class="indefinida {{ 'ativo' if relevancia == 'indefinida' }}" href="/?relevancia=indefinida">
+        A confirmar <span class="n">{{ contagem.indefinida }}</span>
+      </a>
+      <a class="tudo {{ 'ativo' if todos }}" href="/?todos=true">
+        Todos <span class="n">{{ total_geral }}</span>
+      </a>
+    </nav>
+
+    <form class="filtros" method="get">
+      {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
+      {% if abertas %}<input type="hidden" name="abertas" value="true">{% endif %}
+      {% if favoritos %}<input type="hidden" name="favoritos" value="true">{% endif %}
+      {% if relevancia %}<input type="hidden" name="relevancia" value="{{ relevancia }}">{% endif %}
+      <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" maxlength="2">
+      <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
+      <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
+      <input name="salario_min" type="number" step="100" min="0"
+             placeholder="Salario min" value="{{ salario_min }}">
+      <div class="acoes">
+        <button type="submit">Filtrar</button>
+        <a class="limpar" href="/">Limpar</a>
+      </div>
+    </form>
+
+    <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
+
+    {% if n_sem_salario %}
+      <p class="aviso-filtro">
+        Filtrando por remuneracao acima de R$ {{ '{:,.0f}'.format(salario_min|float)|replace(',', '.') }}.
+        <strong>{{ n_sem_salario }}</strong> concurso(s) nao informam salario no titulo
+        e ficaram de fora - da para preencher o valor na mao pelo lapis de cada um.
+        <a href="?{{ 'favoritos=true&' if favoritos }}{{ 'abertas=true&' if abertas }}{{ 'todos=true' if todos }}">Ver sem esse filtro</a>
+      </p>
+    {% endif %}
+
+    <ul class="lista">
+      {% for c in itens %}
+        {{ cartao(c) }}
+      {% else %}
+        <li class="vazio">
+          {% if total_geral == 0 %}
+            <p class="grande">Nada coletado ainda.</p>
+            <p>Rode <code>radar coletar</code> no terminal.</p>
+          {% elif favoritos %}
+            <p class="grande">Seu mural esta vazio.</p>
+            <p>Clique na estrela &#9734; de qualquer concurso para fixar aqui.</p>
+          {% elif abertas %}
+            <p class="grande">Nenhuma inscricao aberta agora.</p>
+            <p>O prazo so e conhecido depois de ler a pagina de cada edital.
+               Rode <code>radar detalhar</code> no terminal.</p>
+          {% elif not relevancia and not todos %}
+            <p class="grande">Nenhum concurso perto de voce agora.</p>
+            <p>Ha {{ contagem.remoto }} longe e {{ contagem.indefinida }} a confirmar.
+               <a href="/?todos=true">Ver todos os {{ total_geral }}</a>.</p>
+            <p>Isso e normal: o radar so avisa quando abrir algo na sua regiao.</p>
+          {% else %}
+            <p class="grande">Nenhum resultado com esses filtros.</p>
+            <p><a href="/">Limpar e voltar</a></p>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
 
 </div>
 </body>

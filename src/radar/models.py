@@ -8,7 +8,15 @@ coluna vazia agora custa zero e evita esse incomodo.
 from datetime import datetime, timezone
 from typing import Any
 
-from sqlalchemy import DateTime, Integer, JSON, String, Text, TypeDecorator
+from sqlalchemy import (
+    Boolean,
+    DateTime,
+    Integer,
+    JSON,
+    String,
+    Text,
+    TypeDecorator,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -111,6 +119,16 @@ class Concurso(Base):
     idade_maxima: Mapped[int | None] = mapped_column(Integer, nullable=True)
     elegibilidade: Mapped[str] = mapped_column(String(15), default="a_confirmar", index=True)
     motivo_elegibilidade: Mapped[str | None] = mapped_column(String(300), nullable=True)
+
+    # Liga quando EU digito o salario na tela. A partir dai o classificador
+    # nao encosta mais no campo: o valor que eu li no edital vale mais que o
+    # que da para adivinhar pelo titulo.
+    salario_manual: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    # Liga quando o municipio veio da PAGINA do edital ("lotacao em
+    # Florianopolis"), e nao do titulo. A pagina e fonte melhor, entao o
+    # classificador - que so ve o titulo - para de mexer no campo.
+    municipio_confirmado: Mapped[bool] = mapped_column(Boolean, default=False)
 
     # --- suas anotacoes (fase 1.5) -----------------------------------------
     # Isto e SEU, nao da fonte: a coleta nunca sobrescreve estes dois campos.
