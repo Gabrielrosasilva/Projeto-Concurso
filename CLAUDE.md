@@ -110,7 +110,9 @@ src/radar/
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
 ├── provas_ieses.py como achar os documentos no hotsite da IESES
-├── questoes.py     separa o caderno em questoes, com materia e gabarito
+├── questoes.py     separa o caderno da FEPESE em questoes
+├── questoes_ieses.py  o mesmo para a IESES: 4 alternativas, gabarito a parte
+├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
 ├── macetes.py      conta o costume da banca: forma de perguntar, questao
 │                repetida, palavra frequente, letra do gabarito
 ├── util.py         fuso e formatacao de data
@@ -283,6 +285,15 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - na IESES o gabarito e um PDF separado do caderno, e casa com a prova pelo
   codigo do cargo no nome do arquivo. Prova e gabarito se chamam igual na
   origem, entao o tipo entra no nome em disco;
+- a materia da questao da IESES vem do EDITAL, nao do caderno: o Anexo II liga
+  cargo a nivel, e o Anexo IV diz de que o nivel e feito, na ordem da prova. O
+  caderno dela nao tem cabecalho de secao nenhum;
+- os Conhecimentos Especificos da IESES sao "o resto" depois das materias
+  listadas. O mesmo edital escreve o numero deles de tres jeitos, e a ordem
+  (gerais primeiro) e a unica coisa que nunca muda;
+- o que conta como materia UNIVERSAL sai do catalogo de apelidos de
+  `macetes`, e nao de uma lista fixa de nomes: cada banca escreve a mesma
+  materia de um jeito ("Nocoes de Informatica" e "Informatica");
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -313,8 +324,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
      Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
      parecida - mesma banca e mesmo cargo em outro lugar)
-4    PARCIAL: 5.021 questoes extraidas, com materia, gabarito e lacuna
-     marcada, e incidencia por materia funcionando. Falta: o ASSUNTO
+4    PARCIAL: 5.928 questoes de DUAS bancas, com materia, gabarito e
+     lacuna marcada. Falta: o ASSUNTO
      fino dentro de Conhecimentos Especificos (Direito Penal, Primeiros
      Socorros...), que e onde entra a API da Claude
 5    PRONTA: modo simulado na web, com acerto por MATERIA. Por assunto

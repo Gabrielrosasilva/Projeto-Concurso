@@ -685,6 +685,56 @@ quer dizer que nao ha robots.txt**, e o site pode ser acessado. So o conteudo
 que o coletor conseguiu LER de fato vira restricao. Site que proibe de verdade
 continua proibido - o DOM/SC, que responde 200 com `Disallow: /`, segue fora.
 
+### Questoes da IESES: a materia que estava no edital
+
+O caderno da IESES tem tres diferencas em relacao ao da FEPESE, e cada uma
+mudou o codigo:
+
+1. **quatro alternativas**, de a) a d), e nao cinco;
+2. **o gabarito e um PDF a parte** ("1 A", "2B", "3C"...), e nao uma marca
+   dentro do proprio caderno;
+3. **a materia nao aparece no caderno**. Sao 30 questoes numeradas de 1 a 30,
+   sem cabecalho de secao nenhum.
+
+O terceiro item era o que podia inviabilizar tudo: sem materia, a questao nao
+entra no simulado nem nos macetes. Mas a informacao existe - esta no **edital**,
+declarada pela propria banca:
+
+* o **Anexo II** liga o codigo do cargo ao nivel (1016 Assistente Social esta
+  sob "NIVEL SUPERIOR");
+* o **Anexo IV** diz de que o nivel e feito, **na ordem em que cai na prova**:
+  Lingua Portuguesa 8, Matematica e Raciocinio Logico 4, Informatica 3,
+  Atualidades 2, Etica no Servico Publico 3, e o resto de Especificos.
+
+Com os dois, a questao 13 e de Informatica porque o edital diz isso - e nao
+porque alguem leu o enunciado e achou. Conferido no caderno real: 1 a 8 sao o
+poema e a gramatica, 9 a 12 sao juros e sequencia, 13 a 15 sao Word e Excel, 16
+e 17 sao economia verde e inteligencia artificial, 18 a 20 sao etica do
+servidor, e 21 a 30 sao servico social.
+
+**Os especificos sao "o resto", de proposito.** O mesmo edital escreve o numero
+deles de tres jeitos: `ESPECIFICOS - COM 10 (DEZ) QUESTOES`, "contera 10 (dez)
+questoes especificas" e "tera 10 (dez questoes)" - com a palavra *dentro* do
+parentese. Perseguir a redacao era briga perdida; a ordem, essa sim, nunca
+muda: gerais primeiro.
+
+Resultado: **907 questoes**, todas com gabarito e 877 com materia. As 30 que
+faltam sao de um cargo que o edital nao declara no Anexo II nem na retificacao
+- fica sem materia mesmo, que e melhor que chutar.
+
+### Uma lista fixa de materias nao serve para duas bancas
+
+O simulado sem materia escolhida usa as que caem em qualquer concurso. Isso era
+uma lista de quatro nomes exatos, e com a IESES no acervo ela passou a mentir:
+a FEPESE escreve "Raciocinio Logico" e "Nocoes de Informatica", a IESES escreve
+"Matematica e Raciocinio Logico" e "Informatica". O simulado so trazia
+Portugues das provas da IESES.
+
+Agora quem decide e o **catalogo de apelidos** dos macetes, que ja sabia que as
+duas coisas sao a mesma materia. De quebra, ele aprendeu a recusar materia de
+uma area so: "Conhecimentos Gerais sobre Educacao" comeca igual a
+"Conhecimentos Gerais", mas so cai em prova de professor.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

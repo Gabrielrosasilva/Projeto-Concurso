@@ -320,12 +320,23 @@ APELIDOS_DE_MATERIA: dict[str, tuple[str, ...]] = {
     "raciocinio": ("raciocinio", "logic", "matemat"),
     "informatica": ("informatica", "computac"),
     "gerais": ("gerais", "atualidade"),
+    # Cai em concurso publico de qualquer cargo, e o catalogo de assuntos dela
+    # ainda nao existe - por isso a tupla vazia em CATALOGO_DE_ASSUNTOS.
+    "etica": ("etica",),
 }
+
+
+# Palavra que denuncia materia de uma area so, ainda que o nome comece igual.
+# "Conhecimentos Gerais sobre Educacao" so cai em prova de professor, e sem
+# isto ela entrava no simulado como se caisse em qualquer concurso.
+MARCAS_DE_AREA = ("educacao", "saude", "pedagog", "docente", "ensino")
 
 
 def chave_da_materia(materia: str | None) -> str | None:
     """Qual grupo do catalogo cobre essa materia, se algum."""
     limpo = _sem_acento(materia or "").lower()
+    if any(marca in limpo for marca in MARCAS_DE_AREA):
+        return None
     for chave, marcas in APELIDOS_DE_MATERIA.items():
         if any(marca in limpo for marca in marcas):
             return chave
@@ -449,9 +460,14 @@ def composicao_do_caderno(questoes: list) -> list[FatiaDoCaderno]:
     Educacao, guarda nao tem -, entao a divisao usa os cadernos em que AQUELA
     materia apareceu, e nao o total de cadernos.
     """
+    # Questao sem materia conhecida fica de fora: a pergunta aqui e "quantas
+    # questoes de cada MATERIA caem", e "sem materia" nao e uma delas. Num
+    # caderno em que o edital nao declara o nivel do cargo, ela apareceria em
+    # primeiro lugar no grafico.
     por_materia: dict[str, list] = {}
     for questao in questoes:
-        por_materia.setdefault(questao.materia or "sem materia", []).append(questao)
+        if questao.materia:
+            por_materia.setdefault(questao.materia, []).append(questao)
 
     fatias = []
     for materia, doGrupo in por_materia.items():

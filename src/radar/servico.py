@@ -3,6 +3,7 @@ import logging
 import re
 from dataclasses import dataclass
 from datetime import date, timedelta
+from pathlib import Path
 from statistics import median
 
 from sqlalchemy import case, func, select
@@ -10,10 +11,12 @@ from sqlalchemy import case, func, select
 from radar import avisos
 from radar import (
     detalhes,
+    edital_ieses,
     macetes,
     provas,
     provas_ieses,
     questoes as leitor_de_questoes,
+    questoes_ieses,
     regioes,
 )
 from radar.classificador import classificar
@@ -1062,6 +1065,67 @@ def _provas_por_ler(limite: int, refazer: bool = False) -> list[dict]:
     return pendentes[:limite]
 
 
+def _companheiros(registro: dict) -> tuple[dict | None, dict | None]:
+    """O gabarito e o edital do mesmo concurso que este caderno.
+
+    So a IESES precisa dos dois: la o gabarito e um PDF a parte, e a materia de
+    cada questao vem do edital. O caderno da FEPESE traz as duas coisas dentro.
+    """
+    do_concurso = [
+        r for r in provas.carregar_manifesto()
+        if r.get("concurso_url") == registro.get("concurso_url")
+    ]
+    # O codigo do cargo e o mesmo nos dois arquivos: prova-1016, gabarito-1016.
+    codigo = Path(registro.get("arquivo", "")).stem.split("_")[-1]
+
+    gabarito = next(
+        (r for r in do_concurso
+         if r.get("tipo") == provas.GABARITO
+         and Path(r.get("arquivo", "")).stem.split("_")[-1] == codigo),
+        None,
+    )
+    edital = next((r for r in do_concurso if r.get("tipo") == provas.EDITAL), None)
+    return gabarito, edital
+
+
+def _caminho(registro: dict | None) -> Path | None:
+    if not registro or not registro.get("caminho"):
+        return None
+    caminho = config.diretorio_dados() / registro["caminho"]
+    return caminho if caminho.exists() else None
+
+
+def _ler_caderno(registro: dict, caminho: Path) -> list:
+    """As questoes de um caderno. Cada banca imprime o dela de um jeito."""
+    if (registro.get("banca") or "").upper() != "IESES":
+        return leitor_de_questoes.ler_prova(caminho)
+
+    gabarito_registro, edital_registro = _companheiros(registro)
+
+    gabarito = {}
+    caminho_gabarito = _caminho(gabarito_registro)
+    if caminho_gabarito:
+        gabarito = questoes_ieses.ler_gabarito(caminho_gabarito)
+
+    texto_do_caderno = leitor_de_questoes.extrair_texto(caminho)
+    lidas = questoes_ieses.dividir_em_questoes(texto_do_caderno, gabarito=gabarito)
+
+    caminho_edital = _caminho(edital_registro)
+    codigo, _ = questoes_ieses.codigo_e_cargo(texto_do_caderno)
+    if caminho_edital and codigo and lidas:
+        # Quantas questoes o caderno tem importa: o que passa das materias
+        # listadas no edital e Conhecimentos Especificos.
+        materias = edital_ieses.materias_do_cargo(
+            leitor_de_questoes.extrair_texto(caminho_edital),
+            codigo,
+            max(q.numero for q in lidas),
+        )
+        for questao in lidas:
+            questao.materia = materias.get(questao.numero)
+
+    return lidas
+
+
 def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtracao:
     """Le os cadernos do acervo e guarda as questoes.
 
@@ -1084,7 +1148,7 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
         if not caminho.exists():
             continue
 
-        lidas = leitor_de_questoes.ler_prova(caminho)
+        lidas = _ler_caderno(registro, caminho)
         resultado.provas += 1
         if not lidas:
             resultado.vazias += 1
@@ -1245,12 +1309,23 @@ def contar_por_fase(termo: str | None = None) -> dict[str, int]:
 
 # Materias que caem em QUALQUER concurso, independente do cargo. Sao as que
 # valem treinar mesmo sem haver prova do cargo que eu quero no acervo.
-MATERIAS_UNIVERSAIS = (
-    "Língua Portuguesa",
-    "Raciocínio Lógico",
-    "Noções de Informática",
-    "Conhecimentos Gerais",
-)
+def materias_universais() -> list[str]:
+    """As materias que caem em QUALQUER concurso, do jeito que cada banca as
+    escreve.
+
+    Nao vale uma lista fixa de nomes: a FEPESE escreve "Raciocinio Logico" e
+    "Nocoes de Informatica", a IESES escreve "Matematica e Raciocinio Logico" e
+    "Informatica". Com a lista fixa, o simulado sem materia escolhida so trazia
+    Portugues das provas da IESES. Quem decide e o catalogo de apelidos, que ja
+    sabe que as duas coisas sao a mesma materia.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        nomes = s.scalars(
+            select(QuestaoDeProva.materia).where(QuestaoDeProva.materia.is_not(None))
+            .group_by(QuestaoDeProva.materia)
+        )
+        return [nome for nome in nomes if macetes.chave_da_materia(nome)]
 
 QUANTIDADE_PADRAO = 10
 
@@ -1285,7 +1360,7 @@ def _sortear_questoes(
     if materia:
         consulta = consulta.where(QuestaoDeProva.materia == materia)
     elif universais:
-        consulta = consulta.where(QuestaoDeProva.materia.in_(MATERIAS_UNIVERSAIS))
+        consulta = consulta.where(QuestaoDeProva.materia.in_(materias_universais()))
     if cargo:
         consulta = consulta.where(QuestaoDeProva.cargo.ilike(f"%{cargo}%"))
     if banca:

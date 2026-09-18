@@ -472,3 +472,34 @@ def test_banca_citada_sem_prova_aparece_a_parte(banco_temporario):
                        banca="IESES"))
 
     assert servico.bancas_sem_acervo() == ["IESES"]
+
+
+# --- o que conta como materia universal -------------------------------------
+
+def test_o_mesmo_grupo_reconhece_o_nome_de_cada_banca():
+    """A FEPESE escreve "Nocoes de Informatica" e a IESES escreve so
+    "Informatica". Sao a mesma materia."""
+    assert macetes.chave_da_materia("Nocoes de Informatica") == "informatica"
+    assert macetes.chave_da_materia("Informatica") == "informatica"
+    assert macetes.chave_da_materia("Matematica e Raciocinio Logico") == "raciocinio"
+
+
+def test_materia_de_uma_area_so_nao_e_universal():
+    """"Conhecimentos Gerais sobre Educacao" so cai em prova de professor, e o
+    apelido "gerais" a puxava para o simulado de qualquer concurso."""
+    assert macetes.chave_da_materia("Conhecimentos Gerais sobre Educacao") is None
+    assert macetes.chave_da_materia("Legislacao e Conhecimentos Gerais sobre Educacao") is None
+
+
+def test_questao_sem_materia_fica_fora_do_caderno_tipico():
+    """Ela apareceria em primeiro lugar no grafico de "quantas questoes caem
+    numa prova", que e sobre materia."""
+    questoes = [
+        _questao(1, materia=None, prova_url="https://x.test/a.pdf"),
+        _questao(2, materia="Lingua Portuguesa", prova_url="https://x.test/b.pdf",
+                 impressao="b"),
+    ]
+
+    materias = {f.materia for f in macetes.composicao_do_caderno(questoes)}
+
+    assert materias == {"Lingua Portuguesa"}
