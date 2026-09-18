@@ -319,3 +319,60 @@ def test_rodape_no_fim_da_ultima_alternativa_saiu(prova):
     """Medido no acervo real: a sujeira caiu de 5,1% para 1,1% das questoes."""
     for questao in prova:
         assert "Página" not in questao.alternativas["e"]
+
+
+# --- a lacuna do "complete as frases" ---------------------------------------
+
+def test_lacuna_no_meio_da_linha_vira_marca():
+    """No caderno a lacuna e so espaco em branco: a FEPESE desenha o tracinho
+    como grafico, e o extrator nao traz desenho."""
+    assert questoes.marcar_lacunas("chegava    hora") == "chegava ____ hora"
+
+
+def test_lacuna_no_comeco_e_no_fim_da_linha():
+    """Sao as duas que se perdiam: juntar as linhas primeiro apagaria ambas."""
+    marcado = questoes.marcar_lacunas("   medalha entregue    atleta\ncontar    \nverdade")
+
+    assert marcado.startswith(" ____ medalha")
+    assert "contar ____" in marcado
+
+
+def test_lacuna_partida_entre_duas_linhas_conta_uma_vez():
+    marcado = questoes.marcar_lacunas("contar    \n    verdade")
+
+    assert marcado.count("____") == 1
+
+
+def test_dois_espacos_nao_sao_lacuna():
+    """Dois espacos sao acerto de espacejamento do caderno, nao lacuna."""
+    assert "____" not in questoes.marcar_lacunas("palavra  outra")
+
+
+def test_questao_de_lacuna_sai_legivel(prova):
+    """O caso real que mostrou o problema: 'A medida que chegava a hora' virava
+    'medida que chegava hora' e a questao perdia o sentido."""
+    de_lacuna = [q for q in prova if "____" in q.enunciado]
+
+    assert de_lacuna, "a prova de exemplo precisa ter questao de lacuna"
+
+
+def test_simbolo_que_nenhuma_fonte_desenha_vira_espaco():
+    """0x84 aparecia 178 vezes no acervo e virava quadradinho na tela."""
+    limpo = questoes._tirar_simbolo_sem_desenho("frase.\u0084 Outra\uf8ec frase")
+
+    assert "\u0084" not in limpo and "\uf8ec" not in limpo
+    # espaco, e nao nada: senao "frase.Outra" cola
+    assert limpo == "frase. Outra frase"
+
+
+def test_simbolo_entre_espacos_nao_vira_lacuna_falsa():
+    """Tres espacos viram lacuna. Se o simbolo virasse espaco sem juntar os
+    vizinhos, " simbolo " daria exatamente tres."""
+    limpo = questoes._tirar_simbolo_sem_desenho("oracao. \u0084 Finalmente")
+
+    assert "____" not in questoes.marcar_lacunas(limpo)
+
+
+def test_quebra_de_linha_e_tabulacao_sobrevivem():
+    """A leitura do caderno depende da quebra de linha para achar as secoes."""
+    assert questoes._tirar_simbolo_sem_desenho("a\nb\tc") == "a\nb\tc"

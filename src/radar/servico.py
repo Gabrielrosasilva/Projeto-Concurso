@@ -968,6 +968,7 @@ def baixar_do_manifesto(forcar: bool = False) -> dict[str, int]:
 class ResultadoExtracao:
     provas: int = 0
     questoes: int = 0
+    atualizadas: int = 0
     repetidas: int = 0
     vazias: int = 0
 
@@ -975,6 +976,8 @@ class ResultadoExtracao:
         if not self.provas:
             return "Nenhuma prova nova para ler."
         texto = f"{self.provas} prova(s) lida(s), {self.questoes} questao(oes)"
+        if self.atualizadas:
+            texto += f", {self.atualizadas} atualizada(s)"
         if self.repetidas:
             texto += f", {self.repetidas} ja vista(s) em outra prova"
         if self.vazias:
@@ -982,10 +985,17 @@ class ResultadoExtracao:
         return texto
 
 
-def _provas_por_ler(limite: int) -> list[dict]:
-    """Provas do manifesto que ainda nao viraram questao no banco."""
+def _provas_por_ler(limite: int, refazer: bool = False) -> list[dict]:
+    """Provas do manifesto que ainda nao viraram questao no banco.
+
+    Com `refazer`, devolve todas de novo: e o que permite passar um parser
+    melhorado por cima do acervo inteiro.
+    """
     with sessao() as s:
-        ja_lidas = set(s.scalars(select(QuestaoDeProva.prova_url).distinct()))
+        ja_lidas = (
+            set() if refazer
+            else set(s.scalars(select(QuestaoDeProva.prova_url).distinct()))
+        )
 
     pendentes = [
         registro for registro in provas.carregar_manifesto()
@@ -996,7 +1006,7 @@ def _provas_por_ler(limite: int) -> list[dict]:
     return pendentes[:limite]
 
 
-def extrair_questoes(limite: int = 30) -> ResultadoExtracao:
+def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtracao:
     """Le os cadernos do acervo e guarda as questoes.
 
     Nao vai a internet: trabalha em cima dos PDFs que `radar provas` ja baixou.
@@ -1004,9 +1014,14 @@ def extrair_questoes(limite: int = 30) -> ResultadoExtracao:
     criar_tabelas()
     resultado = ResultadoExtracao()
 
-    pendentes = _provas_por_ler(limite)
+    pendentes = _provas_por_ler(limite, refazer)
     if not pendentes:
         return resultado
+
+    # "Repetida" e a questao que a banca reaproveitou de outra prova. Refazendo
+    # o acervo inteiro, o banco ja tem todas: comparar com ele acusaria as 5021
+    # como repetidas de si mesmas. Ai a conta e so entre as provas da rodada.
+    conhecidas: set[str] | None = set() if refazer else None
 
     for registro in pendentes:
         caminho = config.diretorio_dados() / registro["caminho"]
@@ -1020,28 +1035,41 @@ def extrair_questoes(limite: int = 30) -> ResultadoExtracao:
             continue
 
         with sessao() as s:
-            conhecidas = set(s.scalars(select(QuestaoDeProva.impressao)))
+            if conhecidas is None:
+                conhecidas = set(s.scalars(select(QuestaoDeProva.impressao)))
 
             for questao in lidas:
                 if questao.impressao in conhecidas:
                     resultado.repetidas += 1
                 conhecidas.add(questao.impressao)
 
-                s.add(QuestaoDeProva(
-                    prova_url=registro["url"],
-                    concurso_url=registro.get("concurso_url"),
-                    banca=registro.get("banca"),
-                    ano=registro.get("ano"),
-                    municipio=registro.get("municipio"),
-                    cargo=registro.get("cargo"),
-                    numero=questao.numero,
-                    materia=questao.materia,
-                    enunciado=questao.enunciado,
-                    alternativas=questao.alternativas,
-                    resposta=questao.resposta,
-                    impressao=questao.impressao,
-                ))
-                resultado.questoes += 1
+                # Upsert pela chave natural (prova_url, numero). Apagar e
+                # gravar de novo seria mais simples, mas o simulado guarda o id
+                # da questao: o historico ficaria apontando para o nada.
+                existente = s.scalar(
+                    select(QuestaoDeProva)
+                    .where(QuestaoDeProva.prova_url == registro["url"])
+                    .where(QuestaoDeProva.numero == questao.numero)
+                )
+                destino = existente or QuestaoDeProva(
+                    prova_url=registro["url"], numero=questao.numero
+                )
+                destino.concurso_url = registro.get("concurso_url")
+                destino.banca = registro.get("banca")
+                destino.ano = registro.get("ano")
+                destino.municipio = registro.get("municipio")
+                destino.cargo = registro.get("cargo")
+                destino.materia = questao.materia
+                destino.enunciado = questao.enunciado
+                destino.alternativas = questao.alternativas
+                destino.resposta = questao.resposta
+                destino.impressao = questao.impressao
+
+                if existente is None:
+                    s.add(destino)
+                    resultado.questoes += 1
+                else:
+                    resultado.atualizadas += 1
 
     return resultado
 

@@ -437,6 +437,51 @@ SQL **nao funciona**. O SQLAlchemy devolve a soma com o tipo da coluna, entao
 2 acertos voltam como `True` e viram 1 - todo mundo ficava com 50%. A conta
 passa por `case(...)` para virar inteiro antes de somar.
 
+### A lacuna que nao estava escrita
+
+Respondendo as questoes no simulado, apareceu isto:
+
+> Analise o periodo abaixo: medida que chegava hora de contar verdade...
+
+Faltavam as lacunas, e sem elas a questao nao quer dizer nada. Dos 5.021
+enunciados, **so 1 tinha underscore**.
+
+Abrindo o PDF, o motivo: **a lacuna nunca esteve no texto**. A FEPESE desenha o
+tracinho como grafico, e o extrator devolve so espaco em branco:
+
+```
+   medida que chegava    hora de contar
+verdade, ficava ainda mais nervoso.
+```
+
+O vestigio existe - e a corrida de espacos - e a normalizacao de espaco em
+branco o apagava. Agora `marcar_lacunas` roda ANTES de juntar as linhas,
+porque a lacuna aparece em tres posicoes e duas delas some ao juntar: no meio
+(`chegava    hora`), no comeco da linha (`   medida`) e no fim (`contar    `
+com a frase seguindo abaixo).
+
+Medido em 8 cadernos antes de mexer: 68 corridas de 3 espacos ou mais, e a
+unica que nao era lacuna foi `CADERNO   `, que a limpeza de mobilia ja tira.
+
+Resultado no acervo: **258 enunciados** (5,1%) ganharam lacuna. A conferencia
+que vale: nas 193 questoes cuja resposta vem em itens (`a • a • as`), o numero
+de lacunas bate com o numero de itens em **188** delas. Os 5 restantes sao
+alternativas que ja vem numeradas na origem.
+
+Junto saiu outra sujeira: 178 caracteres que nenhuma fonte sabe desenhar - o
+caderno usa simbolos de fonte propria - e que viravam quadradinho no meio do
+enunciado. Viram espaco, e nao nada, senao a palavra de antes cola na de
+depois. E o simbolo mais o espaco ao redor viram UM espaco, senao " simbolo "
+daria tres espacos e seria lido como lacuna que nao existe.
+
+```bash
+radar questoes --refazer   # passa o parser novo por cima do acervo inteiro
+```
+
+`--refazer` atualiza a questao no lugar, pela chave (prova, numero). Nao apaga
+e grava de novo porque o simulado guarda o id da questao: o historico ficaria
+apontando para o nada.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

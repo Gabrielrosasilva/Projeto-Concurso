@@ -224,6 +224,14 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   depois SC indefinida, depois federal. Outro estado nunca;
 - pagina que cita varios municipios nao define municipio nenhum. Edital de
   secretaria estadual lista o estado inteiro, e escolher um seria chute;
+- a lacuna do "complete as frases" nao esta escrita no caderno: a FEPESE
+  desenha o tracinho como grafico e sobra so espaco em branco. `marcar_lacunas`
+  troca corrida de 3+ espacos por ____, e roda ANTES de juntar as linhas -
+  lacuna no comeco e no fim da linha some se juntar primeiro. 258 enunciados
+  (5,1%) ganharam lacuna, e em 188 de 193 o numero de lacunas bate com o numero
+  de itens da resposta;
+- `radar questoes --refazer` atualiza a questao no lugar, pela chave (prova,
+  numero). Nao apaga para regravar: o simulado guarda o id da questao;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -253,8 +261,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
      Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
      parecida - mesma banca e mesmo cargo em outro lugar)
-4    PARCIAL: 5.021 questoes extraidas, com materia e gabarito, e
-     incidencia por materia funcionando. Falta: classificar o ASSUNTO
+4    PARCIAL: 5.021 questoes extraidas, com materia, gabarito e lacuna
+     marcada, e incidencia por materia funcionando. Falta: o ASSUNTO
      fino dentro de Conhecimentos Especificos (Direito Penal, Primeiros
      Socorros...), que e onde entra a API da Claude
 5    PRONTA: modo simulado na web, com acerto por MATERIA. Por assunto

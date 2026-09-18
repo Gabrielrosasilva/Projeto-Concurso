@@ -253,13 +253,19 @@ def baixar_provas(
 @app.command()
 def questoes(
     limite: int = typer.Option(30, help="Quantas provas ler nesta rodada"),
+    refazer: bool = typer.Option(
+        False, "--refazer", help="Le de novo os cadernos que ja viraram questao"
+    ),
 ) -> None:
     """Separa os cadernos do acervo em questoes, com materia e gabarito.
 
     Nao vai a internet: trabalha nos PDFs que `radar provas` ja baixou.
+
+    Use --refazer depois de melhorar a leitura do caderno: as questoes sao
+    atualizadas no lugar, sem perder o id que o simulado guarda.
     """
     with console.status("Lendo os cadernos..."):
-        resultado = servico.extrair_questoes(limite=limite)
+        resultado = servico.extrair_questoes(limite=limite, refazer=refazer)
 
     console.print(f"[green]{resultado}[/]")
     total = servico.contar_questoes()

@@ -99,7 +99,52 @@ def extrair_texto(caminho: Path) -> str:
         logging.getLogger(ruidoso).setLevel(logging.ERROR)
 
     leitor = PdfReader(str(caminho))
-    return "\n".join(pagina.extract_text() or "" for pagina in leitor.pages)
+    return _tirar_simbolo_sem_desenho(
+        "\n".join(pagina.extract_text() or "" for pagina in leitor.pages)
+    )
+
+
+def _tirar_simbolo_sem_desenho(texto: str) -> str:
+    """Troca por espaco o caractere que nenhuma fonte sabe desenhar.
+
+    O caderno usa simbolos de uma fonte propria, e o extrator devolve alguns
+    deles como caractere de controle (0x84, 178 vezes no acervo) ou da area de
+    uso privado. Na tela isso vira quadradinho no meio do enunciado. Vira
+    espaco, e nao nada, para nao colar a palavra de antes na de depois.
+    """
+    marcado = "".join(
+        caractere
+        if caractere in "\n\t"
+        or unicodedata.category(caractere) not in ("Cc", "Cf", "Co")
+        else "\x00"
+        for caractere in texto
+    )
+    # O simbolo e o espaco ao redor dele viram UM espaco so. Trocar por espaco
+    # sem juntar criaria uma corrida de tres espacos onde o caderno tinha
+    # " simbolo ", e marcar_lacunas leria ali uma lacuna que nao existe.
+    return re.sub(r"[ \t]*\x00[ \t]*", " ", marcado)
+
+
+# A lacuna do "complete as frases" nao vem escrita no caderno: a FEPESE
+# desenha o tracinho como grafico, e o extrator devolve so espaco em branco.
+# Sem marcar, "A medida que chegava a hora" vira "medida que chegava hora" e a
+# questao perde o sentido. Conferido em 8 cadernos: 68 corridas de 3 espacos
+# ou mais, e a unica que nao era lacuna foi "CADERNO   ", que a limpeza de
+# mobilia ja tira antes daqui.
+LACUNA = "____"
+
+
+def marcar_lacunas(texto: str) -> str:
+    """Troca por ____ a corrida de 3 espacos ou mais.
+
+    Roda ANTES de juntar as linhas: a lacuna aparece tanto no meio da linha
+    ("chegava    hora") quanto no comeco ("   medalha") e no fim ("contar    "
+    com a frase seguindo na linha de baixo), e juntar as linhas primeiro
+    apagaria as duas ultimas.
+    """
+    texto = re.sub(r"[ \t]{3,}", f" {LACUNA} ", texto)
+    # Lacuna no fim de uma linha e comeco da seguinte e a MESMA lacuna.
+    return re.sub(rf"(?:{LACUNA}\s*){{2,}}", f"{LACUNA} ", texto)
 
 
 def _limpar(texto: str) -> str:
@@ -349,9 +394,9 @@ def dividir_em_questoes(texto: str) -> list[Questao]:
             continue
 
         numero = int(marcador.group(1))
-        enunciado = _limpar(
+        enunciado = _limpar(marcar_lacunas(
             re.sub(r"^[ \t]*\d{1,2}\.[ \t]*", "", regiao[marcador.start():])
-        )
+        ))
         alternativas, resposta = _ler_alternativas(rodada, texto, fim_rodada)
 
         questoes.append(Questao(
