@@ -1015,6 +1015,56 @@ leitura, com atraso entre requisicoes e User-Agent identificado. Por isso
 `diario.py` nao usa a classe `Coletor` - ele fala com a API direto, e so com
 este host. Todo o resto do radar continua respeitando `robots.txt`.
 
+## Assunto fino da questao (a unica parte que custa dinheiro)
+
+```bash
+radar assuntos              # SIMULA: mostra o custo, nao gasta nada
+radar assuntos --valendo    # roda de verdade
+```
+
+O passo a passo para ligar esta em **COMO_LIGAR_A_IA.txt**, na raiz do projeto.
+
+As materias universais foram resolvidas de graca, com um catalogo de
+palavras-chave escrito a mao - ele cobre 76% dos enunciados de Portugues. Isso
+funciona porque Portugues e sempre Portugues. Ja "Conhecimentos Especificos"
+muda com o cargo, e o acervo tem 134 cargos: Servico Social, Psicologia,
+Contabilidade, Enfermagem, cada area de professor. Um catalogo teria que cobrir
+todas, e ai nao e mais catalogo, e adivinhacao.
+
+**Custo medido no acervo: 1.813 questoes, US$ 0,26 (~R$ 1,43), uma vez so.**
+Quatro coisas mantem esse numero baixo:
+
+1. **uma questao por enunciado** - das 2.673 de Conhecimentos Especificos, so
+   1.813 tem enunciado diferente. E o assunto pago se espalha para as copias:
+   1.813 classificacoes atualizam 2.673 linhas;
+2. **em lote**, com a instrucao enviada uma vez em vez de uma por questao;
+3. **so o enunciado, cortado em 400 caracteres**, sem as alternativas - elas
+   sao a maior parte do texto e nao dizem o assunto;
+4. **Haiku**, que e o modelo barato. Dizer o assunto e rotulagem, nao
+   raciocinio.
+
+Tres travas contra susto na conta:
+
+- **simular e o padrao.** Sem `--valendo`, o comando so mostra o custo. Nao da
+  para gastar sem querer;
+- **teto de gasto**, conferido antes de cada lote com o custo REAL que a API
+  informou - e nao com a estimativa. Chegou no teto, para e avisa;
+- **a chave so em variavel de ambiente** (`RADAR_ANTHROPIC_KEY` no `.env`),
+  como o token do Telegram. Chave em codigo vira chave no GitHub.
+
+Nao entrou biblioteca nova: a API e REST e `requests` ja era dependencia.
+
+### Uma ressalva honesta sobre o valor disto
+
+As questoes de Conhecimentos Especificos do acervo sao de Psicologo, Assistente
+Social, Professor e Contador. **Nenhuma e de Guarda Municipal ou Policia
+Penal**, que sao os cargos que eu quero. Classificar esses assuntos organiza
+provas de areas que nao sao a minha.
+
+Isso passa a valer no dia em que entrar no acervo uma prova de cargo da minha
+area. Ate la, o que me serve - Portugues, Raciocinio, Informatica, Gerais - ja
+esta classificado de graca, com assunto detalhado.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

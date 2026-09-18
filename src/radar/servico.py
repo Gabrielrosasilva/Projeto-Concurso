@@ -23,6 +23,7 @@ from radar import (
     regioes,
     substituta,
 )
+from radar import assuntos as classificador_de_assunto
 from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
@@ -2217,3 +2218,93 @@ def conferir_retificacoes(limite: int = 20) -> ResultadoRetificacao:
         provas.gravar_manifesto(todos)
 
     return resultado
+
+
+# --- assunto fino da questao (fase 4) ---------------------------------------
+
+def questoes_sem_assunto(limite: int | None = None) -> list[QuestaoDeProva]:
+    """As questoes de Conhecimentos Especificos que ainda nao tem assunto.
+
+    Uma por ENUNCIADO: das 2.673 questoes, so 1.763 tem enunciado diferente, e
+    classificar a mesma pergunta duas vezes seria pagar duas vezes pelo mesmo
+    rotulo.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        candidatas = list(s.scalars(
+            select(QuestaoDeProva)
+            .where(QuestaoDeProva.assunto.is_(None))
+            .where(QuestaoDeProva.materia.is_not(None))
+        ))
+
+    # So o que o catalogo de materias NAO cobre: o resto ja tem assunto de
+    # graca, pelas palavras-chave.
+    especificas = [
+        q for q in candidatas if macetes.chave_da_materia(q.materia) is None
+    ]
+
+    por_enunciado: dict[str, QuestaoDeProva] = {}
+    for questao in especificas:
+        por_enunciado.setdefault(questao.impressao, questao)
+
+    escolhidas = list(por_enunciado.values())
+    return escolhidas[:limite] if limite else escolhidas
+
+
+def gravar_assuntos(por_id: dict[int, str]) -> int:
+    """Grava o assunto e propaga para as questoes de enunciado igual.
+
+    Propagar e o que faz o gasto valer mais: uma classificacao paga rotula
+    todas as copias daquela pergunta no acervo.
+    """
+    if not por_id:
+        return 0
+
+    criar_tabelas()
+    gravados = 0
+    with sessao() as s:
+        for ident, assunto in por_id.items():
+            questao = s.get(QuestaoDeProva, ident)
+            if questao is None:
+                continue
+            iguais = list(s.scalars(
+                select(QuestaoDeProva).where(
+                    QuestaoDeProva.impressao == questao.impressao
+                )
+            ))
+            for copia in iguais:
+                copia.assunto = assunto
+                gravados += 1
+    return gravados
+
+
+def classificar_assuntos(
+    limite: int | None = None, teto_em_dolar: float = 1.0
+) -> dict:
+    """Classifica o assunto das questoes de Conhecimentos Especificos.
+
+    Custa dinheiro: e a unica parte do radar que fala com uma API paga. O teto
+    e conferido antes de cada lote, com o custo real que a API informou.
+    """
+    chave = config.chave_da_anthropic()
+    if not chave:
+        return {"erro": "sem chave", "classificados": 0}
+
+    pendentes = questoes_sem_assunto(limite)
+    if not pendentes:
+        return {"classificados": 0, "pendentes": 0}
+
+    resultado = classificador_de_assunto.classificar(
+        pendentes, chave, teto_em_dolar=teto_em_dolar
+    )
+    gravados = gravar_assuntos(resultado.classificados)
+
+    return {
+        "pendentes": len(pendentes),
+        "classificados": len(resultado.classificados),
+        "gravados": gravados,
+        "custo": resultado.uso.custo,
+        "chamadas": resultado.uso.chamadas,
+        "parou_no_teto": resultado.parou_no_teto,
+        "falhas": resultado.falhas,
+    }

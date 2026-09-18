@@ -115,6 +115,8 @@ src/radar/
 ├── questoes.py     separa o caderno da FEPESE em questoes
 ├── questoes_ieses.py  o mesmo para a IESES: 4 alternativas, gabarito a parte
 ├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
+├── assuntos.py     classifica o assunto fino pela API da Claude (unica
+│                parte paga; simula por padrao)
 ├── substituta.py   qual prova do acervo mais se parece com o cargo que quero
 ├── macetes.py      conta o costume da banca: forma de perguntar, questao
 │                repetida, palavra frequente, letra do gabarito
@@ -355,6 +357,13 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   Depois de acusar, o manifesto E o arquivo em disco passam a valer a versao
   nova - senao toda conferencia repetiria o alarme, e o acervo ficaria com o
   edital velho;
+- `radar assuntos` e a UNICA parte paga do radar, e SIMULA por padrao: sem
+  --valendo nao gasta nada. O teto e conferido antes de cada lote com o custo
+  real que a API informou, e nao com a estimativa;
+- a chave da Anthropic so em RADAR_ANTHROPIC_KEY, no .env, como o token do
+  Telegram. Nunca no codigo;
+- o assunto pago se espalha para as copias do mesmo enunciado: 1.813
+  classificacoes atualizam 2.673 linhas;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -383,8 +392,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      aberto) e `radar retificacoes` acusa edital que mudou, pelo sha256
 3    PRONTA: acervo de FEPESE e IESES com manifesto versionado, e prova
      substituta (`radar parecidas`, e na aba Macetes)
-4    PARCIAL: 5.928 questoes de DUAS bancas, com materia, gabarito e
-     lacuna marcada. Falta: o ASSUNTO
+4    PRONTA: 5.928 questoes de duas bancas, com materia, gabarito e
+     lacuna marcada. `radar assuntos` classifica o assunto fino pela API
+     da Claude - custa US$ 0,26 uma vez, e simula por padrao
      fino dentro de Conhecimentos Especificos (Direito Penal, Primeiros
      Socorros...), que e onde entra a API da Claude
 5    PRONTA: modo simulado na web, com acerto por MATERIA. Por assunto

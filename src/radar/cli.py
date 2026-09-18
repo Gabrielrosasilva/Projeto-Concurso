@@ -463,6 +463,81 @@ def diario(
 
 
 @app.command()
+def assuntos(
+    limite: int = typer.Option(
+        None, help="Quantas questoes classificar. Sem isso, todas as pendentes"
+    ),
+    teto: float = typer.Option(
+        0.50, help="Teto de gasto em dolar. O comando para ao chegar nele"
+    ),
+    simular: bool = typer.Option(
+        True, "--simular/--valendo",
+        help="Simular NAO gasta nada: so mostra o custo. Use --valendo para rodar",
+    ),
+) -> None:
+    """Classifica o assunto fino das questoes de Conhecimentos Especificos.
+
+    Esta e a UNICA parte do radar que custa dinheiro. Por padrao ela so simula:
+    para gastar de verdade e preciso passar --valendo.
+
+    A chave vai em RADAR_ANTHROPIC_KEY, no .env - nunca no codigo.
+    """
+    from radar import assuntos as classificador, config as configuracao
+
+    pendentes = servico.questoes_sem_assunto(limite)
+    if not pendentes:
+        console.print("[green]Nenhuma questao pendente de assunto.[/]")
+        return
+
+    entrada, saida, custo = classificador.estimar(pendentes)
+    console.print(f"Questoes a classificar: [bold]{len(pendentes)}[/]")
+    console.print(
+        f"[dim]{entrada:,} tokens de entrada, {saida:,} de saida[/]".replace(",", ".")
+    )
+    console.print(
+        f"Custo estimado: [bold]US$ {custo:.2f}[/] "
+        f"[dim](~R$ {custo * 5.5:.2f}, a 5,50)[/]"
+    )
+    console.print(f"[dim]Modelo: {classificador.MODELO}[/]")
+
+    if simular:
+        console.print()
+        console.print("[yellow]Isto foi so uma simulacao: nada foi gasto.[/]")
+        console.print("Para valer, rode: [bold]radar assuntos --valendo[/]")
+        return
+
+    if not configuracao.chave_da_anthropic():
+        console.print()
+        console.print(
+            "[red]Falta a chave.[/] Ponha RADAR_ANTHROPIC_KEY no .env "
+            "e rode de novo."
+        )
+        console.print("[dim]Veja COMO_LIGAR_A_IA.txt para o passo a passo.[/]")
+        raise typer.Exit(code=1)
+
+    console.print()
+    console.print(f"[dim]Teto de gasto: US$ {teto:.2f}[/]")
+    with console.status("Classificando..."):
+        resultado = servico.classificar_assuntos(limite=limite, teto_em_dolar=teto)
+
+    console.print(
+        f"[green]{resultado['classificados']} questao(oes) classificada(s)[/], "
+        f"{resultado['gravados']} linha(s) do banco atualizada(s)"
+    )
+    console.print(
+        f"Gasto real: [bold]US$ {resultado['custo']:.4f}[/] "
+        f"[dim](~R$ {resultado['custo'] * 5.5:.2f}) em "
+        f"{resultado['chamadas']} chamada(s)[/]"
+    )
+    if resultado.get("parou_no_teto"):
+        console.print(
+            "[yellow]Parei no teto de gasto.[/] Rode de novo para continuar."
+        )
+    if resultado.get("falhas"):
+        console.print(f"[dim]{resultado['falhas']} lote(s) falharam.[/]")
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

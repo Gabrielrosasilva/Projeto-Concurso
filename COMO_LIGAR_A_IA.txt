@@ -1,0 +1,186 @@
+===============================================================================
+COMO LIGAR A IA NO RADAR - E GASTAR SO UNS 3 REAIS
+===============================================================================
+
+Isto e para uma coisa so: classificar o ASSUNTO das questoes de Conhecimentos
+Especificos. Hoje elas estao todas com esse rotulo generico; depois disso cada
+uma ganha um assunto proprio ("Etica profissional", "Politicas sociais").
+
+Custo medido no seu acervo: 1.813 questoes, US$ 0,26 - uns R$ 1,43.
+E uma vez so. Nao tem mensalidade, nao tem assinatura.
+
+
+-------------------------------------------------------------------------------
+ANTES DE COMECAR: vale a pena para voce?
+-------------------------------------------------------------------------------
+
+Leia isto antes de gastar, porque eu acho que a resposta pode ser "ainda nao".
+
+As questoes de Conhecimentos Especificos do seu acervo sao de Psicologo,
+Assistente Social, Professor, Contador. Nenhuma e de Guarda Municipal nem de
+Policia Penal, que sao os cargos que voce quer.
+
+Entao classificar esses assuntos organiza provas de areas que nao sao a sua.
+
+O que JA te serve - Portugues, Raciocinio Logico, Informatica, Conhecimentos
+Gerais - ja esta classificado, de graca, com assunto detalhado (crase,
+concordancia, verbos). Isso nao muda com a IA ligada.
+
+Onde isso passa a valer: no dia em que entrar no acervo uma prova de cargo da
+sua area. Ai os Conhecimentos Especificos serao os SEUS.
+
+Se mesmo assim quiser fazer agora - sao R$ 1,43, e o passo a passo esta abaixo.
+
+
+-------------------------------------------------------------------------------
+PASSO 1 - Criar a conta
+-------------------------------------------------------------------------------
+
+1. Abra:  https://console.anthropic.com
+2. Clique em "Sign up" e crie a conta com o seu e-mail.
+3. Confirme o e-mail.
+
+E uma conta de desenvolvedor, separada do app do Claude. Se voce ja paga
+alguma assinatura do Claude, ela NAO vale aqui: e outro tipo de conta.
+
+
+-------------------------------------------------------------------------------
+PASSO 2 - Colocar credito (aqui voce controla o gasto)
+-------------------------------------------------------------------------------
+
+1. No menu da esquerda, clique em "Billing" (ou "Plans & Billing").
+2. Clique em "Add credits" / "Adicionar creditos".
+3. O minimo costuma ser US$ 5. Coloque esse minimo.
+4. Pague com cartao.
+
+IMPORTANTE, e e o que te protege:
+
+  - o sistema e PRE-PAGO. Ele so gasta o credito que voce colocou;
+  - quando o credito acaba, a chave para de funcionar. Nao vira divida, nao
+    cobra do cartao sozinho;
+  - procure a opcao "Auto-reload" ou "Recarga automatica" e deixe
+    DESLIGADA. Assim ele nunca compra credito sozinho.
+
+Dos US$ 5 voce vai usar uns US$ 0,26. O resto fica de saldo para quando
+precisar de novo.
+
+
+-------------------------------------------------------------------------------
+PASSO 3 - Gerar a chave
+-------------------------------------------------------------------------------
+
+1. No menu da esquerda, clique em "API Keys".
+2. Clique em "Create Key".
+3. De um nome qualquer, por exemplo: radar-de-concursos
+4. Copie a chave que aparecer. Ela comeca com  sk-ant-
+
+ATENCAO: a chave so aparece UMA VEZ. Se fechar a janela sem copiar, apague
+essa e crie outra.
+
+E trate ela como senha:
+  - nao cole em conversa, nem em print, nem em issue do GitHub;
+  - se vazar, volte nessa tela e clique em "Delete" para revogar.
+
+
+-------------------------------------------------------------------------------
+PASSO 4 - Guardar a chave na sua maquina
+-------------------------------------------------------------------------------
+
+1. Abra a pasta do projeto:
+       C:\Projeto concurso claude\Projeto-Concurso
+
+2. Abra o arquivo chamado  .env  (o mesmo onde estao o token do Telegram).
+   Se nao existir, crie um arquivo com esse nome exato - com o ponto na frente.
+
+3. Acrescente uma linha, trocando pela sua chave:
+
+       RADAR_ANTHROPIC_KEY=sk-ant-cole-a-sua-chave-aqui
+
+4. Salve e feche.
+
+O arquivo .env NAO vai para o GitHub - ele esta no .gitignore desde o comeco
+do projeto. A chave fica so na sua maquina.
+
+
+-------------------------------------------------------------------------------
+PASSO 5 - Simular (nao gasta nada)
+-------------------------------------------------------------------------------
+
+Abra o terminal na pasta do projeto e rode:
+
+       radar assuntos
+
+Este comando NAO gasta. Ele so mostra:
+
+       Questoes a classificar: 1813
+       151.583 tokens de entrada. 21.756 de saida
+       Custo estimado: US$ 0.26 (~R$ 1.43, a 5,50)
+       Isto foi so uma simulacao: nada foi gasto.
+
+Simular e o comportamento PADRAO, de proposito. Nao da para gastar sem querer.
+
+
+-------------------------------------------------------------------------------
+PASSO 6 - Rodar valendo, com teto
+-------------------------------------------------------------------------------
+
+Comece pequeno, para ver o resultado antes de rodar tudo:
+
+       radar assuntos --valendo --limite 50
+
+Isso classifica 50 questoes e custa menos de 1 centavo de dolar. Confira o
+resultado na aba Macetes ou com:
+
+       radar padrao
+
+Gostou? Rode o resto:
+
+       radar assuntos --valendo
+
+O teto padrao e US$ 0,50. Se por qualquer motivo a conta chegar nele, o
+comando PARA sozinho e avisa - ele confere antes de cada lote, usando o gasto
+real que a API informou, e nao a estimativa.
+
+Para mudar o teto:
+
+       radar assuntos --valendo --teto 0.30
+
+No fim ele diz quanto gastou de verdade:
+
+       1813 questao(oes) classificada(s), 2673 linha(s) atualizada(s)
+       Gasto real: US$ 0.2612 (~R$ 1.44) em 73 chamada(s)
+
+Repare que 1.813 classificacoes atualizam 2.673 linhas: a banca repete
+questao, e um assunto pago vale para todas as copias dela.
+
+
+-------------------------------------------------------------------------------
+SE ALGO DER ERRADO
+-------------------------------------------------------------------------------
+
+"Falta a chave"
+    A linha RADAR_ANTHROPIC_KEY nao esta no .env, ou o terminal foi aberto
+    antes de voce salvar o arquivo. Feche e abra o terminal de novo.
+
+"authentication_error" ou 401
+    A chave foi copiada errada ou foi revogada. Gere outra no PASSO 3.
+
+"credit balance is too low"
+    O credito acabou. Volte no PASSO 2.
+
+O comando parou no meio
+    Rode de novo. Ele continua de onde parou: questao que ja tem assunto nao
+    e classificada duas vezes, entao nao ha risco de pagar em dobro.
+
+
+-------------------------------------------------------------------------------
+COMO DESLIGAR
+-------------------------------------------------------------------------------
+
+Apague a linha RADAR_ANTHROPIC_KEY do .env. Nada mais no radar usa a API - o
+resto do sistema funciona igual, sem gastar nada, como sempre funcionou.
+
+Para nao deixar credito parado, voce pode revogar a chave em "API Keys" e
+pedir reembolso do saldo no "Billing", se a Anthropic permitir na sua conta.
+
+===============================================================================

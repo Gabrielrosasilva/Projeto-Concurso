@@ -57,3 +57,12 @@ def telegram_chat_id() -> str | None:
 
 def telegram_configurado() -> bool:
     return bool(telegram_token() and telegram_chat_id())
+
+
+def chave_da_anthropic() -> str | None:
+    """A chave da API da Claude, para classificar assunto de questao.
+
+    So em variavel de ambiente, como o token do Telegram: `.env` na maquina,
+    Secrets no Actions. Chave em codigo vira chave no GitHub.
+    """
+    return os.getenv("RADAR_ANTHROPIC_KEY") or None
