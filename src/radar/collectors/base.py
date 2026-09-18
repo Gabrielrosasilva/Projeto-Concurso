@@ -80,20 +80,43 @@ class Coletor(ABC):
         host = partes.netloc
 
         if host not in self._robots:
-            leitor = RobotFileParser()
-            leitor.set_url(f"{partes.scheme}://{host}/robots.txt")
-            try:
-                leitor.read()
-            except Exception as erro:
-                # Sem robots.txt legivel o padrao da web e "pode acessar".
-                log.debug("robots.txt de %s indisponivel (%s)", host, erro)
-                leitor = None
-            self._robots[host] = leitor
+            self._robots[host] = self._ler_robots(f"{partes.scheme}://{host}")
 
         leitor = self._robots[host]
         if leitor is None:
             return True
         return leitor.can_fetch(config.USER_AGENT, url)
+
+    def _ler_robots(self, origem: str) -> RobotFileParser | None:
+        """O robots.txt do site, ou None quando nao ha regra que valha.
+
+        A busca e feita aqui, e nao pelo RobotFileParser.read(), por causa de
+        um detalhe que custou uma tarde: o leitor do Python trata resposta 403
+        como "proibido tudo". So que o 403 costuma significar o contrario -
+        que o arquivo nao existe. O CDN da IESES e um balde de arquivos que
+        responde 403 a qualquer caminho inexistente, inclusive /robots.txt, e
+        com isso o acervo inteiro dela ficava bloqueado por um arquivo que
+        nunca existiu.
+
+        A regra do padrao atual (RFC 9309) e a que vale aqui: resposta 4xx
+        quer dizer que nao ha robots.txt, e o site pode ser acessado. So o
+        conteudo que eu consegui LER de fato vira restricao.
+        """
+        endereco = f"{origem}/robots.txt"
+        try:
+            resposta = self.http.get(endereco, timeout=config.TIMEOUT_REQUISICAO)
+        except Exception as erro:  # noqa: BLE001 - site fora do ar e rotina
+            log.debug("robots.txt de %s indisponivel (%s)", origem, erro)
+            return None
+
+        if resposta.status_code != 200 or not resposta.text.strip():
+            log.debug("sem robots.txt em %s (HTTP %s)", origem, resposta.status_code)
+            return None
+
+        leitor = RobotFileParser()
+        leitor.set_url(endereco)
+        leitor.parse(resposta.text.splitlines())
+        return leitor
 
     def get(self, url: str) -> requests.Response:
         """Busca uma URL respeitando robots.txt e o atraso entre requisicoes."""

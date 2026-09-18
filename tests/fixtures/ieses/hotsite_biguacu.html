@@ -1,0 +1,983 @@
+<html><body><div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-3 text-muted">Carregando conteúdo...</p>
+                      </div>
+                    </div>
+
+                    
+                    <div class="bg-light rounded p-4" id="area-candidato-card">
+                      
+                      
+                      <div id="identificacao-container">
+                        <h2 class="h5 fw-bold mb-4">
+                          <i class="fas fa-id-card" aria-hidden="true"></i>
+                          Identificação
+                        </h2>
+                        <p class="text-muted mb-4">
+                          Para acessar a Área do Candidato, informe seus
+                          dados:
+                        </p>
+
+                        <form id="identificacao-form" class="identificacao-form" action="#">
+                          <input type="hidden" name="_csrf" value="0cwSuspN2_tZmIZGwQwZGIzgW-2zXR_8A_rT-SUn3KDjkCteb_10U1DrHIsFlTuT49-lcslTsMPA9ua78Kvalw==">
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                              <label for="cpf_identificacao" class="form-label">
+                                CPF <span class="text-danger">*</span>
+                              </label>
+                              <input type="text" class="form-control" id="cpf_identificacao" name="cpf"
+                                placeholder="000.000.000-00" required autocomplete="off" />
+                              <div class="invalid-feedback" id="cpf-feedback">
+                                CPF inválido
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="dn_identificacao" class="form-label">
+                                Data de Nascimento
+                                <span class="text-danger">*</span>
+                              </label>
+                              <input type="text" class="form-control" id="dn_identificacao" name="dn"
+                                placeholder="00/00/0000" required autocomplete="off" />
+                            </div>
+                          </div>
+
+                          
+                          <div class="row mb-3" id="senha-container" style="display: none">
+                            <div class="col-md-6">
+                              <label for="senha_identificacao" class="form-label">
+                                Senha <span class="text-danger">*</span>
+                              </label>
+                              <input type="password" class="form-control" id="senha_identificacao" name="password"
+                                placeholder="Digite sua senha" autocomplete="current-password" />
+                            </div>
+                            <div class="col-md-6 d-flex align-items-end">
+                              <a href="#" id="esqueci-senha" class="text-primary">
+                                <i class="fas fa-key me-1"></i> Esqueceu a
+                                senha?
+                              </a>
+                            </div>
+                          </div>
+
+                          
+                          <div class="alert alert-danger mb-3" id="identificacao-erro" style="display: none"
+                            role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <span id="identificacao-erro-msg"></span>
+                          </div>
+
+                          
+                          <div class="d-grid gap-2 col-md-6">
+                            <button type="submit" class="btn btn-primary" id="btn-identificar">
+                              <i class="fas fa-arrow-right me-2"></i>
+                              Continuar
+                            </button>
+                          </div>
+                        </form>
+
+                        
+                        <div id="cadastro-inline-container" style="display: none">
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            
+            <section id="passo03" class="passo03" role="tabpanel" aria-labelledby="tab-documentos" tabindex="0">
+              <div class="weblink-section-collapsible bg-light rounded mb-4" data-expanded="true">
+                <button type="button" class="weblink-section-toggle" aria-expanded="true">
+                  <h2 class="h5 fw-bold mb-0">Edital</h2>
+                  <svg class="weblink-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="weblink-section-content p-4 pt-3">
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/edital_ret001.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="03/10/2024">03/10/2024</time>
+                      - Edital 018 2024 - Retificação 001
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/edital.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="03/10/2024">03/10/2024</time>
+                      - Edital 018/2024 (após Retificação 001)
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+
+              
+              <div class="weblink-section-collapsible bg-light rounded mb-4" data-expanded="true">
+                <button type="button" class="weblink-section-toggle" aria-expanded="true">
+                  <h2 class="h5 fw-bold mb-0">Portarias</h2>
+                  <svg class="weblink-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="weblink-section-content p-4 pt-3">
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/portaria006.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="18/12/2024">18/12/2024</time>
+                      - Portaria 006 - Prova Objetiva - Resposta aos Pedidos de Revisão
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/portaria005.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="10/12/2024">10/12/2024</time>
+                      - Portaria 005 - Prova Prática - Convocação
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/portaria002.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="30/10/2024">30/10/2024</time>
+                      - Portaria 002 - Inscrições - Deferimento e Indeferimento
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/portaria003rev002.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="30/10/2024">30/10/2024</time>
+                      - Portaria 003 - Vagas Reservadas - Deferimento (Rev 002)
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/portaria004rev002.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="30/10/2024">30/10/2024</time>
+                      - Portaria 004 - Condições Especiais de Prova - Deferimento e Indeferimento (Rev 002)
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/portaria001rev001.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="02/10/2024">02/10/2024</time>
+                      - Portaria 001 - Isenção da Taxa - Deferimento e Indeferimento (Rev 001)
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+               
+              <div class="weblink-section-collapsible bg-light rounded mb-4" data-expanded="true">
+                <button type="button" class="weblink-section-toggle" aria-expanded="true">
+                  <h2 class="h5 fw-bold mb-0">Outros Documentos</h2>
+                  <svg class="weblink-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="weblink-section-content p-4 pt-3">
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/pp_aviso.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="10/12/2024">10/12/2024</time>
+                      - Prova Prática - Aviso
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              
+            </section>
+
+            
+            <section id="passo04" class="passo04" role="tabpanel" aria-labelledby="tab-provas" tabindex="0">
+              <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                  <div class="weblink-section-collapsible bg-light rounded h-100" data-expanded="true">
+                    <button type="button" class="weblink-section-toggle" aria-expanded="true">
+                      <h2 class="h5 fw-bold mb-0">Provas</h2>
+                      <svg class="weblink-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    <div class="weblink-section-content p-4 pt-3">
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1016.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1016 - Assistente Social
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1020.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1020/1033 - Auxiliar de Ensino 
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1047.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1047 - Bibliotecário
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1050.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1050 - Especialista em Assuntos Educacionais
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1064.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1064 - Nutricionista II
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1078.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1078 - Segundo Professor
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1081.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1081 - Professor II - Educação de Jovens e Adultos (EJA)
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1095.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1095 - Professor II - Educação Infantil
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1107.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1107 - Professor II - Ensino Fundamental – Anos Iniciais
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1119.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1119 - Professor III – Artes
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1122.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1122 - Professor III – Ciências
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1136.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1136 - Professor III – Educação Especial
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1140.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1140 - Professor III – Educação Física
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1153.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1153 - Professor III – Ensino Religioso
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1167.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1167 - Professor III – Espanhol
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1173.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1173 - Professor III – Filosofia
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1184.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1184 - Professor III – Geografia
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1198.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1198 - Professor III – História
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1208.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1208 - Professor III – Inglês
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1211.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1211 - Professor III – LIBRAS
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1225.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1225 - Professor III – Língua Portuguesa
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1239.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1239 - Professor III – Matemática
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1242.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1242 - Psicólogo
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1253.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1253 - Técnico em Educação
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/1260.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1260 - Tradutor e Intérprete de Libras
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/2018.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 2018 - Monitor de Transporte Escolar
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/2027.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 2027 - Professor Auxiliar de Sala
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/2035.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 2035 - Técnico em Nutrição e Dietética 
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/3010.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 3010 - Motorista III
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/4011.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 4011 - Auxiliar de Serviços Gerais – Merendeira
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/4025.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 4025 - Auxiliar de Serviços Gerais – Servente
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="weblink-section-collapsible bg-light rounded h-100" data-expanded="true">
+                    <button type="button" class="weblink-section-toggle" aria-expanded="true">
+                      <h2 class="h5 fw-bold mb-0">Gabaritos</h2>
+                      <svg class="weblink-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    <div class="weblink-section-content p-4 pt-3">
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1016.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1016 - Assistente Social
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1020.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1020/1033 - Auxiliar de Ensino 
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1047.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1047 - Bibliotecário
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1050.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1050 - Especialista em Assuntos Educacionais
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1064.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1064 - Nutricionista II
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1078.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1078 - Segundo Professor
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1081.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1081 - Professor II - Educação de Jovens e Adultos (EJA)
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1095.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1095 - Professor II - Educação Infantil
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1107.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1107 - Professor II - Ensino Fundamental – Anos Iniciais
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1119.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1119 - Professor III – Artes
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1122.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1122 - Professor III – Ciências
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1136.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1136 - Professor III – Educação Especial
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1140.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1140 - Professor III – Educação Física
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1153.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1153 - Professor III – Ensino Religioso
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1167.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1167 - Professor III – Espanhol
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1173.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1173 - Professor III – Filosofia
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1184.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1184 - Professor III – Geografia
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1198.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1198 - Professor III – História
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1208.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1208 - Professor III – Inglês
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1211.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1211 - Professor III – LIBRAS
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1225.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1225 - Professor III – Língua Portuguesa
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1239.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1239 - Professor III – Matemática
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1242.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1242 - Psicólogo
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1253.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1253 - Técnico em Educação
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/1260.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 1260 - Tradutor e Intérprete de Libras
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/2018.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 2018 - Monitor de Transporte Escolar
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/2027.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 2027 - Professor Auxiliar de Sala
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/2035.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 2035 - Técnico em Nutrição e Dietética 
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/3010.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 3010 - Motorista III
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/4011.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 4011 - Auxiliar de Serviços Gerais – Merendeira
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                      <div class="d-flex align-items-start mb-1">
+                        
+                        <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/gabaritos/4025.pdf" target="_blank" rel="noopener noreferrer"
+                          class="cursor-pointer text-start ms-2">
+                          <time datetime="18/11/2024">18/11/2024</time>
+                          - 4025 - Auxiliar de Serviços Gerais – Servente
+                          <span class="visually-hidden">(abre em nova janela)</span>
+                        </a>
+                        
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            
+            <section id="passo06" class="passo06" role="tabpanel" aria-labelledby="tab-resultados" tabindex="0">
+              
+              <div class="weblink-section-collapsible bg-light rounded mb-4" data-expanded="true">
+                <button type="button" class="weblink-section-toggle" aria-expanded="true">
+                  <h2 class="h5 fw-bold mb-0">Resultados</h2>
+                  <svg class="weblink-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="weblink-section-content p-4 pt-3">
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/resultados/class_fn.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="17/01/2025">17/01/2025</time>
+                      - Classificação Final - Geral
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+                  
+                  <div class="d-flex align-items-start mb-1">
+                    
+                    <a href="https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/resultados/class_vr_fn.pdf" target="_blank" rel="noopener noreferrer"
+                      class="cursor-pointer text-start ms-2">
+                      <time datetime="17/01/2025">17/01/2025</time>
+                      -  Classificação Final - Vagas Reservadas - PcD
+                      <span class="visually-hidden">(abre em nova janela)</span>
+                    </a>
+                    
+                  </div>
+</body></html>

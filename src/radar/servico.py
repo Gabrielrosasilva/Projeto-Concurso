@@ -12,6 +12,7 @@ from radar import (
     detalhes,
     macetes,
     provas,
+    provas_ieses,
     questoes as leitor_de_questoes,
     regioes,
 )
@@ -831,7 +832,19 @@ def _ano_do_concurso(concurso: Concurso) -> int | None:
 
 
 def _hotsite(concurso: Concurso) -> str | None:
+    """Onde a banca publica os documentos daquele concurso.
+
+    A FEPESE guarda o endereco num campo a parte; na IESES a propria url do
+    concurso JA e o hotsite.
+    """
+    if concurso.fonte == "ieses":
+        return concurso.url
     return (concurso.extra or {}).get("hotsite")
+
+
+# De que fontes da para montar acervo hoje. Cada uma publica os PDFs de um
+# jeito, e por isso a leitura da pagina e por banca.
+FONTES_COM_ACERVO = ("fepese", "ieses")
 
 
 # Ordem de prioridade para gastar requisicao. Prova de concurso encerrado perto
@@ -857,9 +870,15 @@ def _concursos_com_prova(limite: int) -> list[Concurso]:
                 break
             consulta = (
                 select(Concurso)
-                .where(Concurso.fonte == "fepese")
-                # so concurso ja realizado tem prova publicada
-                .where(Concurso.situacao == "encerrado")
+                .where(Concurso.fonte.in_(FONTES_COM_ACERVO))
+                # So concurso ja realizado tem prova publicada. A IESES nao
+                # informa status nenhum, entao para ela vale a data: o hotsite
+                # de quem ja fez a prova traz os cadernos, e o de quem nao fez
+                # ainda simplesmente nao rende documento.
+                .where(
+                    (Concurso.situacao == "encerrado")
+                    | (Concurso.fonte == "ieses")
+                )
                 .where(condicao())
                 .order_by(Concurso.publicado_em.desc().nullslast())
             )
@@ -871,6 +890,43 @@ def _concursos_com_prova(limite: int) -> list[Concurso]:
                 escolhidos.append(concurso)
 
     return escolhidos
+
+
+def _documentos_do_hotsite(
+    concurso: Concurso, hotsite: str, buscador, resultado
+) -> list[provas.Documento]:
+    """Os PDFs que o hotsite oferece. Cada banca publica de um jeito.
+
+    A FEPESE tem uma pagina por assunto (`?go=provas`, `?go=edital`); a IESES
+    poe tudo numa pagina so, com os arquivos num CDN.
+    """
+    encontrados: list[provas.Documento] = []
+
+    if concurso.fonte == "ieses":
+        try:
+            html = buscador.get(hotsite + "/").text
+        except Exception as erro:  # noqa: BLE001 - hotsite fora do ar e rotina
+            # Medido: 10 dos 26 hotsites da IESES ja sairam do ar, quase todos
+            # de 2023 para tras. Falhar um nao pode parar os outros.
+            log.warning("hotsite %s: %s", hotsite, type(erro).__name__)
+            resultado.falhas += 1
+            return []
+        return provas_ieses.ler_hotsite(html, hotsite + "/")
+
+    for pagina in PAGINAS_DO_HOTSITE:
+        try:
+            html = buscador.get(f"{hotsite}/?go={pagina}&edital=1").text
+        except Exception as erro:  # noqa: BLE001 - hotsite fora do ar e rotina
+            log.warning("hotsite %s, pagina %s: %s", hotsite, pagina,
+                        type(erro).__name__)
+            resultado.falhas += 1
+            continue
+
+        leitor = (provas.ler_pagina_de_provas if pagina == "provas"
+                  else provas.ler_pagina_de_edital)
+        encontrados.extend(leitor(html, hotsite + "/"))
+
+    return encontrados
 
 
 def montar_acervo(limite: int = 20) -> ResultadoAcervo:
@@ -893,21 +949,7 @@ def montar_acervo(limite: int = 20) -> ResultadoAcervo:
 
     for concurso in escolhidos:
         hotsite = _hotsite(concurso).rstrip("/")
-        encontrados: list[provas.Documento] = []
-
-        for pagina in PAGINAS_DO_HOTSITE:
-            try:
-                html = buscador.get(f"{hotsite}/?go={pagina}&edital=1").text
-            except Exception as erro:  # noqa: BLE001 - hotsite fora do ar e rotina
-                log.warning("hotsite %s, pagina %s: %s", hotsite, pagina,
-                            type(erro).__name__)
-                resultado.falhas += 1
-                continue
-
-            leitor = (provas.ler_pagina_de_provas if pagina == "provas"
-                      else provas.ler_pagina_de_edital)
-            encontrados.extend(leitor(html, hotsite + "/"))
-
+        encontrados = _documentos_do_hotsite(concurso, hotsite, buscador, resultado)
         resultado.concursos += 1
 
         for documento in encontrados:

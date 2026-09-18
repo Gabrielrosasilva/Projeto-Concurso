@@ -109,6 +109,7 @@ src/radar/
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
+├── provas_ieses.py como achar os documentos no hotsite da IESES
 ├── questoes.py     separa o caderno em questoes, com materia e gabarito
 ├── macetes.py      conta o costume da banca: forma de perguntar, questao
 │                repetida, palavra frequente, letra do gabarito
@@ -274,6 +275,14 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - a IESES entrou como fonte 3, pela API que a propria listagem usa
   (/projetos/api), achada lendo o JS da pagina. Ela NAO afirma uf=SC: a banca e
   catarinense mas faz concurso no Amazonas e no Mato Grosso do Sul;
+- resposta 4xx ao pedir robots.txt significa que NAO HA robots.txt, e o site
+  pode ser acessado (RFC 9309). O leitor do Python trata 403 como "proibido
+  tudo", e isso bloqueou o acervo inteiro da IESES: o CDN dela responde 403 a
+  qualquer caminho inexistente, inclusive /robots.txt. So o que se consegue
+  LER vira restricao - o DOM/SC, que responde 200 com Disallow: /, segue fora;
+- na IESES o gabarito e um PDF separado do caderno, e casa com a prova pelo
+  codigo do cargo no nome do arquivo. Prova e gabarito se chamam igual na
+  origem, entao o tipo entra no nome em disco;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so

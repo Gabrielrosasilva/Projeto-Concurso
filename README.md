@@ -653,6 +653,38 @@ Uma coisa que o coletor **nao** faz: afirmar `uf=SC`. A IESES e catarinense mas
 faz concurso fora (tribunal do Amazonas, gas do Mato Grosso do Sul), e afirmar
 SC mandaria esses para o anel errado.
 
+### Acervo da IESES, e um robots.txt que nao existia
+
+O hotsite da IESES poe tudo numa pagina so, com os PDFs num CDN e o endereco
+num formato regular:
+
+```
+.../{ano}/{pasta}/edital.pdf
+.../{ano}/{pasta}/provas/{codigo}.pdf
+.../{ano}/{pasta}/gabaritos/{codigo}.pdf
+```
+
+O codigo e o do cargo e e o mesmo nas duas pastas: e por ele que a prova casa
+com o gabarito. O nome do cargo nao esta no endereco, e sim no texto ao lado do
+link ("- 1016 - Assistente Social"). Como os dois arquivos se chamam
+`1016.pdf`, o tipo entra no nome em disco, senao um sobrescreve o outro.
+
+**Uma diferenca que muda o trabalho:** na IESES o gabarito e um PDF a parte. Na
+FEPESE ele vem marcado dentro do proprio caderno.
+
+Na primeira tentativa, **nada baixou**: 65 falhas seguidas com
+`ColetorBloqueadoPeloRobots`. O motivo levou um tempo para aparecer e vale
+registrar. O CDN da IESES e um balde de arquivos que responde **403** a
+qualquer caminho que nao exista, inclusive `/robots.txt`. E o leitor de
+robots.txt do Python trata 403 como **"proibido tudo"**.
+
+Ou seja: o acervo inteiro estava bloqueado por um arquivo que nunca existiu.
+
+A regra do padrao atual (RFC 9309) e a que passou a valer aqui: **resposta 4xx
+quer dizer que nao ha robots.txt**, e o site pode ser acessado. So o conteudo
+que o coletor conseguiu LER de fato vira restricao. Site que proibe de verdade
+continua proibido - o DOM/SC, que responde 200 com `Disallow: /`, segue fora.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da
