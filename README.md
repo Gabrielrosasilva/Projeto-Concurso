@@ -541,7 +541,29 @@ e nao o nome exato da materia. A busca olha a materia E o enunciado, e ignora
 acento, porque o nome que a banca usa ("Lingua Portuguesa") raramente e a
 palavra que voce pensa ("crase").
 
-O que a pagina mostra, tudo por contagem:
+**Nada e calculado antes de voce escolher a banca.** O retrato do acervo
+inteiro misturava bancas e nao respondia pergunta nenhuma.
+
+Quando o tema aponta para uma materia so - "crase" e Lingua Portuguesa em 56
+das 59 questoes -, a pagina responde a pergunta seguinte com dois graficos:
+
+1. **quantas questoes caem numa prova**, materia por materia. Na FEPESE:
+   Conhecimentos Especificos 19,2 por caderno, Lingua Portuguesa 9,0,
+   Conhecimentos Gerais 6,4, Informatica 5,2, Raciocinio Logico 5,0. A divisao
+   usa os cadernos em que AQUELA materia apareceu, e nao o total: Temas de
+   Educacao so cai em prova de professor, e dividir por tudo faria parecer que
+   cai pouco quando cai muito onde cai;
+2. **o que mais cai dentro daquela materia**, assunto por assunto, com o
+   assunto procurado destacado. Em Lingua Portuguesa: interpretacao de texto
+   289 questoes, verbos 141, classes de palavras 104, concordancia 98, crase 56.
+
+O assunto sai de um **catalogo de palavras-chave escrito a mao**, e nao de
+adivinhacao: da para conferir cada padrao abrindo as provas. Cobertura medida
+em enunciados distintos - portugues 76%, informatica 61%, conhecimentos gerais
+59%, raciocinio 53% - e o que sobra a tela conta como "sem assunto detectado",
+em vez de empurrar para um assunto qualquer.
+
+O que a pagina mostra, alem disso, tudo por contagem:
 
 - **o que mais cai** no recorte, materia por materia;
 - **como a banca pergunta**, com o conselho pratico de cada forma. Pedir a
@@ -568,6 +590,17 @@ repetida pesa mesmo mais na prova que voce vai fazer.
 Junto veio um minimo de amostra: **abaixo de 50 enunciados diferentes a pagina
 nao afirma nada** sobre a letra. Com 7 questoes, o que parece tendencia e
 sorteio.
+
+### Por que so aparece a FEPESE
+
+O menu de bancas vem das **provas baixadas**, e nao dos concursos coletados.
+AMEOSC, Cebraspe, FURB, FCC, FGV e IESES ja aparecem nos concursos, mas sem
+prova no acervo - e a tela diz isso, em vez de parecer que o radar so conhece
+uma banca.
+
+Cada banca publica as provas de um jeito diferente, entao incluir uma delas
+quer dizer escrever um coletor para o site dela. Da para fazer, uma de cada
+vez. A FEPESE veio primeiro por ser a que mais aplica prova perto de casa.
 
 ### O que ainda nao esta la
 

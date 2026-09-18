@@ -123,6 +123,11 @@ class Analise:
     gabarito: list[tuple[str, int, float]] = field(default_factory=list)
     gabarito_veredito: str = "amostra_pequena"
 
+    # Preenchidos so quando o tema procurado aponta para uma materia so.
+    materia_dominante: str | None = None
+    retrato: "RetratoDaMateria | None" = None
+    assunto_procurado: "Assunto | None" = None
+
 
 def contar_comandos(questoes: list) -> list[Comando]:
     """Quantas questoes usam cada forma de perguntar, da mais comum a menos."""
@@ -244,3 +249,218 @@ def analisar(questoes: list) -> Analise:
         gabarito=gabarito,
         gabarito_veredito=veredito,
     )
+
+
+# --- assuntos dentro da materia ---------------------------------------------
+
+# A banca diz a MATERIA no cabecalho da secao ("Lingua Portuguesa"), mas nunca
+# o assunto da questao. Este catalogo e um dicionario de palavras-chave escrito
+# a mao: nao adivinha nada, e da para conferir cada padrao abrindo as provas.
+#
+# Cobertura medida no acervo, em enunciados distintos: portugues 76%,
+# informatica 61%, conhecimentos gerais 59%, raciocinio 53%. O que sobra a tela
+# conta como "sem assunto detectado", e nao empurra para um assunto qualquer.
+CATALOGO_DE_ASSUNTOS: dict[str, tuple[tuple[str, str], ...]] = {
+    "portugues": (
+        ("Interpretacao de texto", r"\btexto \d|de acordo com o texto|segundo o texto|com base no texto|conforme o texto|no texto acima|do texto\b|tipologia|genero textual"),
+        ("Verbos", r"\bverb(?:o|os|al|ais)\b|tempo verbal|modo verbal|conjugac|particip|infinitiv"),
+        ("Classes de palavras", r"substantiv|adjetiv|adverbi|\bpronom|numeral|preposic|conjunc|interjeic|artigo definido"),
+        ("Concordancia", r"concordanc"),
+        ("Crase", r"\bcrase|sinal indicativo de crase"),
+        ("Ortografia", r"ortograf|grafia correta|corretamente (?:escrit|grafad)|escrita correta"),
+        ("Emprego de palavras", r"vocabul|corretamente empregad|empregad[ao] corretamente|\bonde\b.*\baonde\b|\bmau\b.*\bmal\b|por que|porqu[e]"),
+        ("Pontuacao", r"pontuac|\bvirgula|ponto e virgula|dois pontos"),
+        ("Sintaxe da oracao", r"sujeito|predicad|objeto diret|objeto indiret|adjunto|aposto|vocativ|complemento nominal|agente da passiva"),
+        ("Figuras de linguagem", r"figura de linguagem|metafor|metonim|hiperbol|eufemism|personificac|conotativ|denotativ|sentido figurado"),
+        ("Periodo composto", r"oracao (?:coordenada|subordinada)|periodo composto|subordinad|coordenad"),
+        ("Formacao de palavras", r"derivac|composic|sufixo|prefixo|radical|formad[ao]s? por"),
+        ("Semantica", r"sinonim|antonim|homonim|paronim|significado d[ao]|sentido d[ao] (?:palavra|termo)"),
+        ("Regencia", r"regenc"),
+        ("Acentuacao", r"acentuac|acento (?:grafico|agudo|circunflexo)|proparoxiton|oxiton|paroxiton"),
+        ("Coesao e coerencia", r"coesao|coerenc|conectiv|elemento coesivo"),
+        ("Colocacao pronominal", r"colocacao pronominal|proclise|enclise|mesoclise"),
+        ("Vozes verbais", r"voz (?:ativa|passiva|reflexiva)|voz verbal"),
+    ),
+    "raciocinio": (
+        ("Logica proposicional", r"proposic|negac|conjuncao|disjuncao|condicional|equivalen|tautolog|valor logico|se .{0,25} entao"),
+        ("Probabilidade", r"probabilidad|chance de|ao acaso|sortead"),
+        ("Problemas com valores e idades", r"idade de|quantos anos|reais|quantia|salario de"),
+        ("Porcentagem", r"porcent|por cento|%|desconto de|aumento de"),
+        ("Conjuntos", r"conjunto|diagrama|uniao|intersec|pertence a"),
+        ("Analise combinatoria", r"combinac|permutac|arranjo|quantas maneiras|de quantos modos|anagrama"),
+        ("Sequencias e padroes", r"sequenc|proxim[oa] (?:numero|termo|figura)|padrao numerico|termo seguinte"),
+        ("Regra de tres e proporcao", r"regra de tres|proporc|razao entre|diretamente proporcional|inversamente proporcional"),
+    ),
+    "informatica": (
+        ("Planilha (Excel/Calc)", r"excel|planilha|calc\b|celula [a-z]\d|formula|soma\(|tabela dinamica"),
+        ("Sistema operacional", r"windows|sistema operacional|explorador de arquivos|painel de controle|area de trabalho|linux"),
+        ("Internet e navegador", r"navegador|browser|chrome|firefox|edge\b|\burl\b|site\b|internet\b|hiperlink"),
+        ("Editor de texto (Word/Writer)", r"\bword\b|writer|editor de texto|documento .{0,20}texto"),
+        ("Seguranca da informacao", r"antivirus|malware|phishing|backup|criptograf|firewall|senha segura|virus"),
+        ("Correio eletronico", r"e-?mail|correio eletronico|outlook|caixa de entrada"),
+        ("Redes e hardware", r"\brede[s]? de computador|\bwi-?fi|roteador|hardware|memoria ram|processador|perifer"),
+        ("Nuvem e armazenamento", r"nuvem|cloud|google drive|onedrive|dropbox|armazenamento"),
+        ("Atalhos de teclado", r"ctrl ?\+|atalho de teclado|tecla de atalho|\bf\d\b"),
+    ),
+    "gerais": (
+        ("Santa Catarina", r"santa catarina|catarinens|florianopolis|\bsc\b|colonizac|imigrac"),
+        ("Historia", r"histori|seculo|guerra|revoluc|independenc|republica"),
+        ("Geografia", r"geograf|relevo|clima|populac|territori|fronteira|bacia|regiao"),
+        ("Politica e governo", r"presidente|governador|prefeit|congresso|ministr|constituic|poder (?:executivo|legislativo|judiciario)"),
+        ("Atualidades", r"em 202\d|recentement|atualment|noticia|eleic|pandemia"),
+        ("Meio ambiente", r"meio ambiente|sustentabil|poluic|reciclag|desmatament"),
+        ("Esporte e cultura", r"olimpiad|copa do mundo|futebol|atleta|festival|patrimonio cultural"),
+    ),
+}
+
+# Como o nome que a banca usa vira a chave do catalogo. "Lingua Portuguesa",
+# "Portugues" e "Lingua Portuguesa e Interpretacao" caem todos em portugues.
+APELIDOS_DE_MATERIA: dict[str, tuple[str, ...]] = {
+    "portugues": ("portug",),
+    "raciocinio": ("raciocinio", "logic", "matemat"),
+    "informatica": ("informatica", "computac"),
+    "gerais": ("gerais", "atualidade"),
+}
+
+
+def chave_da_materia(materia: str | None) -> str | None:
+    """Qual grupo do catalogo cobre essa materia, se algum."""
+    limpo = _sem_acento(materia or "").lower()
+    for chave, marcas in APELIDOS_DE_MATERIA.items():
+        if any(marca in limpo for marca in marcas):
+            return chave
+    return None
+
+
+@dataclass
+class Assunto:
+    nome: str
+    questoes: int
+    distintas: int
+    cadernos: int
+
+
+@dataclass
+class RetratoDaMateria:
+    """Como essa materia se comporta nas provas desta banca."""
+
+    materia: str
+    cadernos: int
+    questoes: int
+    por_caderno: float
+    assuntos: list[Assunto] = field(default_factory=list)
+    sem_assunto: int = 0
+
+
+def assuntos_de(questoes: list, chave: str) -> tuple[list[Assunto], int]:
+    """[(assunto, quanto caiu)] e quantas ficaram sem assunto detectado.
+
+    Uma questao pode cair em mais de um assunto - "crase" e "regencia" andam
+    juntas - e isso e proposital: a soma nao fecha com o total, e esconder a
+    segunda marca seria pior que a soma nao fechar.
+    """
+    catalogo = CATALOGO_DE_ASSUNTOS.get(chave, ())
+    achados: list[Assunto] = []
+    classificadas: set[str] = set()
+
+    for nome, padrao in catalogo:
+        casaram = [q for q in questoes if re.search(padrao, _sem_acento(q.enunciado).lower())]
+        if not casaram:
+            continue
+        classificadas.update(q.impressao for q in casaram)
+        achados.append(Assunto(
+            nome=nome,
+            questoes=len(casaram),
+            distintas=len({q.impressao for q in casaram}),
+            cadernos=len({q.prova_url for q in casaram}),
+        ))
+
+    achados.sort(key=lambda a: -a.questoes)
+    sem_assunto = len({q.impressao for q in questoes} - classificadas)
+    return achados, sem_assunto
+
+
+def retratar_materia(questoes_da_materia: list, materia: str) -> RetratoDaMateria:
+    """Quanto essa materia cai por caderno, e de que assuntos ela e feita."""
+    cadernos = len({q.prova_url for q in questoes_da_materia})
+    chave = chave_da_materia(materia)
+    assuntos, sem_assunto = assuntos_de(questoes_da_materia, chave) if chave else ([], 0)
+
+    return RetratoDaMateria(
+        materia=materia,
+        cadernos=cadernos,
+        questoes=len(questoes_da_materia),
+        por_caderno=len(questoes_da_materia) / cadernos if cadernos else 0.0,
+        assuntos=assuntos,
+        sem_assunto=sem_assunto,
+    )
+
+
+def materia_dominante(questoes: list) -> str | None:
+    """A materia da maioria das questoes, quando ha maioria clara.
+
+    Procurar "crase" traz 56 questoes de Lingua Portuguesa e 3 de
+    Conhecimentos Especificos: a materia e Portugues, e nao "as duas". Sem
+    maioria de pelo menos 60%, o recorte mistura materias demais e afirmar uma
+    seria escolher por escolher.
+    """
+    if not questoes:
+        return None
+
+    contagem = Counter(q.materia for q in questoes if q.materia)
+    if not contagem:
+        return None
+
+    materia, quantas = contagem.most_common(1)[0]
+    return materia if quantas / len(questoes) >= 0.6 else None
+
+
+def assunto_do_tema(tema: str, retrato: "RetratoDaMateria") -> "Assunto | None":
+    """O assunto do catalogo que corresponde ao que eu escrevi, se houver.
+
+    Escrevendo "crase" eu quero ver a linha "Crase" em destaque; escrevendo
+    "primeiros socorros" nao ha assunto no catalogo, e a tela mostra so o
+    retrato da materia.
+    """
+    procurado = _sem_acento(tema).lower().strip()
+    if not procurado:
+        return None
+
+    for assunto in retrato.assuntos:
+        nome = _sem_acento(assunto.nome).lower()
+        if procurado in nome or nome in procurado:
+            return assunto
+    return None
+
+
+@dataclass
+class FatiaDoCaderno:
+    materia: str
+    por_caderno: float
+    total: int
+
+
+def composicao_do_caderno(questoes: list) -> list[FatiaDoCaderno]:
+    """Quantas questoes de cada materia caem num caderno tipico desta banca.
+
+    Responde "quantas questoes de portugues caem na prova": divide o total de
+    cada materia pelo numero de cadernos em que a banca aplicou alguma coisa.
+    Nem toda materia cai em todo caderno - cargo de professor tem Temas de
+    Educacao, guarda nao tem -, entao a divisao usa os cadernos em que AQUELA
+    materia apareceu, e nao o total de cadernos.
+    """
+    por_materia: dict[str, list] = {}
+    for questao in questoes:
+        por_materia.setdefault(questao.materia or "sem materia", []).append(questao)
+
+    fatias = []
+    for materia, doGrupo in por_materia.items():
+        cadernos = len({q.prova_url for q in doGrupo})
+        fatias.append(FatiaDoCaderno(
+            materia=materia,
+            por_caderno=len(doGrupo) / cadernos if cadernos else 0.0,
+            total=len(doGrupo),
+        ))
+
+    fatias.sort(key=lambda f: -f.por_caderno)
+    return fatias

@@ -367,16 +367,25 @@ def macetes(
     cargo = (cargo or "").strip() or None
     tema = (tema or "").strip() or None
 
+    # Sem banca escolhida a pagina nao calcula nada: o retrato do acervo
+    # inteiro misturava bancas e nao respondia pergunta nenhuma.
+    analise = (
+        servico.analisar_banca(banca=banca, cargo=cargo, tema=tema)
+        if banca else servico.macetes.Analise()
+    )
+    composicao = servico.composicao_do_caderno(banca) if banca else []
+
     return templates.TemplateResponse(
         request=request,
         name="macetes.html",
         context={
-            "analise": servico.analisar_banca(banca=banca, cargo=cargo, tema=tema),
+            "analise": analise,
+            "composicao": composicao,
             "bancas": servico.bancas_com_questao(),
+            "bancas_sem_acervo": servico.bancas_sem_acervo(),
             "banca": banca,
             "cargo": cargo,
             "tema": tema,
-            "procurou": bool(banca or cargo or tema),
         },
     )
 

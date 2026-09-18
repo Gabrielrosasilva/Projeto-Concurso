@@ -264,13 +264,31 @@ def test_a_tela_abre_sem_filtro_nenhum(cliente):
     assert "Macetes" in resposta.text
 
 
+def test_sem_banca_escolhida_nao_mostra_analise(cliente):
+    """O retrato do acervo inteiro misturava bancas e nao respondia pergunta
+    nenhuma. A pagina so calcula depois que eu escolho a banca."""
+    _semear(_questao(1))
+
+    texto = cliente.get("/macetes").text
+
+    assert "Escolha uma banca acima" in texto
+    assert "questoes no recorte" not in texto
+
+
+def test_o_menu_de_banca_nao_mostra_numero(cliente):
+    """O numero de questoes ao lado do nome parecia um codigo interno."""
+    _semear(_questao(1))
+
+    assert ">FEPESE</option>" in cliente.get("/macetes").text
+
+
 def test_a_tela_mostra_o_recorte_pedido(cliente):
     _semear(*[
         _questao(i, enunciado=f"Sobre a crase na frase {i}.", impressao=f"i{i}")
         for i in range(3)
     ])
 
-    texto = cliente.get("/macetes?tema=crase").text
+    texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
 
     assert "3</b> questoes no recorte" in texto
 
@@ -280,7 +298,7 @@ def test_a_tela_explica_quando_nao_acha_nada(cliente):
     isso e melhor que uma tela vazia."""
     _semear(_questao(1))
 
-    texto = cliente.get("/macetes?tema=seguranca+da+informacao").text
+    texto = cliente.get("/macetes?banca=FEPESE&tema=seguranca+da+informacao").text
 
     assert "Nenhuma questao no acervo" in texto
 
@@ -288,7 +306,34 @@ def test_a_tela_explica_quando_nao_acha_nada(cliente):
 def test_a_tela_diz_o_que_ainda_nao_esta_la(cliente):
     """Pegadinha e macete de memorizacao nao saem de contagem, e a pagina nao
     pode dar a entender que saem."""
-    assert "nao inventa nada" in cliente.get("/macetes").text
+    _semear(_questao(1))
+
+    assert "nao inventa nada" in cliente.get("/macetes?banca=FEPESE").text
+
+
+def test_a_tela_destaca_o_assunto_procurado(cliente):
+    _semear(*[
+        _questao(i, enunciado=f"Sobre o uso da crase na frase {i}.",
+                 impressao=f"i{i}", prova_url=f"https://x.test/p{i}.pdf")
+        for i in range(3)
+    ])
+
+    texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
+
+    assert "Crase nas provas da FEPESE" in texto
+
+
+def test_a_tela_mostra_os_dois_graficos(cliente):
+    _semear(*[
+        _questao(i, enunciado=f"Sobre a crase na frase {i}.", impressao=f"i{i}",
+                 prova_url=f"https://x.test/p{i}.pdf")
+        for i in range(3)
+    ])
+
+    texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
+
+    assert "Quantas questoes caem numa prova" in texto
+    assert "O que mais cai em" in texto
 
 
 def test_campo_vazio_no_formulario_nao_vira_filtro(cliente):
@@ -302,3 +347,128 @@ def test_o_radar_tem_link_para_os_macetes(cliente):
     _semear(_questao(1))
 
     assert 'href="/macetes"' in cliente.get("/").text
+
+
+
+# --- assuntos dentro da materia ---------------------------------------------
+
+def test_a_materia_do_catalogo_e_reconhecida_pelo_apelido():
+    """A banca escreve "Lingua Portuguesa"; o catalogo e organizado por
+    "portugues"."""
+    assert macetes.chave_da_materia("L\u00edngua Portuguesa") == "portugues"
+    assert macetes.chave_da_materia("Nocoes de Inform\u00e1tica") == "informatica"
+
+
+def test_materia_fora_do_catalogo_nao_e_forcada():
+    """Conhecimentos Especificos muda com o cargo: nao ha catalogo que sirva."""
+    assert macetes.chave_da_materia("Conhecimentos Espec\u00edficos") is None
+
+
+def test_detecta_o_assunto_da_questao():
+    achados, _ = macetes.assuntos_de([
+        _questao(1, enunciado="Sobre o uso da crase antes de palavra feminina."),
+        _questao(2, enunciado="Sobre concordancia verbal.", impressao="b"),
+    ], "portugues")
+    nomes = {a.nome for a in achados}
+
+    assert "Crase" in nomes and "Concordancia" in nomes
+
+
+def test_questao_sem_assunto_conhecido_e_contada_a_parte():
+    """Melhor deixar de fora do que empurrar para um assunto qualquer."""
+    _, sem_assunto = macetes.assuntos_de([
+        _questao(1, enunciado="Uma pergunta que o catalogo nao cobre.")
+    ], "portugues")
+
+    assert sem_assunto == 1
+
+
+def test_o_assunto_conta_em_quantos_cadernos_caiu():
+    achados, _ = macetes.assuntos_de([
+        _questao(1, enunciado="Sobre a crase.", prova_url="https://x.test/1.pdf"),
+        _questao(2, enunciado="Sobre a crase.", prova_url="https://x.test/2.pdf",
+                 impressao="b"),
+    ], "portugues")
+
+    assert achados[0].cadernos == 2
+
+
+# --- a materia dominante ----------------------------------------------------
+
+def test_a_materia_da_maioria_e_a_dominante():
+    """Procurar "crase" traz 56 questoes de Portugues e 3 de Especificos: a
+    materia e Portugues, e nao "as duas"."""
+    questoes = (
+        [_questao(i, materia="Lingua Portuguesa", impressao=f"p{i}") for i in range(9)]
+        + [_questao(50, materia="Conhecimentos Especificos", impressao="e1")]
+    )
+
+    assert macetes.materia_dominante(questoes) == "Lingua Portuguesa"
+
+
+def test_sem_maioria_clara_nao_escolhe_materia():
+    """Recorte que mistura materias nao tem materia: afirmar uma seria escolher
+    por escolher."""
+    questoes = (
+        [_questao(i, materia="Lingua Portuguesa", impressao=f"p{i}") for i in range(5)]
+        + [_questao(50 + i, materia="Conhecimentos Gerais", impressao=f"g{i}")
+           for i in range(5)]
+    )
+
+    assert macetes.materia_dominante(questoes) is None
+
+
+# --- o caderno tipico -------------------------------------------------------
+
+def test_quantas_questoes_de_cada_materia_caem_por_caderno():
+    """Duas provas, com 3 questoes de portugues cada: 3 por caderno."""
+    questoes = []
+    for prova in range(2):
+        for n in range(3):
+            questoes.append(_questao(
+                prova * 10 + n, prova_url=f"https://x.test/p{prova}.pdf",
+                impressao=f"i{prova}-{n}",
+            ))
+
+    fatia = macetes.composicao_do_caderno(questoes)[0]
+
+    assert fatia.materia == "Lingua Portuguesa"
+    assert fatia.por_caderno == 3
+
+
+def test_materia_que_nao_cai_em_todo_caderno_nao_e_diluida():
+    """Temas de Educacao so cai em prova de professor. Dividir pelo total de
+    cadernos faria parecer que cai pouco, quando cai muito onde cai."""
+    questoes = [
+        _questao(1, prova_url="https://x.test/a.pdf"),
+        _questao(2, prova_url="https://x.test/b.pdf", impressao="b"),
+        _questao(3, prova_url="https://x.test/a.pdf", materia="Temas de Educacao",
+                 impressao="c"),
+        _questao(4, prova_url="https://x.test/a.pdf", materia="Temas de Educacao",
+                 impressao="d"),
+    ]
+
+    por_materia = {f.materia: f for f in macetes.composicao_do_caderno(questoes)}
+
+    assert por_materia["Temas de Educacao"].por_caderno == 2
+
+
+# --- bancas -----------------------------------------------------------------
+
+def test_so_lista_banca_que_tem_prova(banco_temporario):
+    _semear(_questao(1, banca="FEPESE"))
+
+    assert servico.bancas_com_questao() == ["FEPESE"]
+
+
+def test_banca_citada_sem_prova_aparece_a_parte(banco_temporario):
+    """Para a tela poder explicar por que o menu e curto, em vez de parecer que
+    o radar so conhece uma banca."""
+    from radar.models import Concurso
+
+    _semear(_questao(1, banca="FEPESE"))
+    with sessao() as s:
+        s.add(Concurso(url="https://x.test/c", fonte="teste", titulo="Concurso",
+                       banca="IESES"))
+
+    assert servico.bancas_sem_acervo() == ["IESES"]

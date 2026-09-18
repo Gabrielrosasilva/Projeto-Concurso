@@ -1603,32 +1603,57 @@ def previsao_de_abertura(
 
 # --- macetes: o costume da banca (fase 7) -----------------------------------
 
-def bancas_com_questao() -> list[tuple[str, int]]:
-    """[(banca, quantas questoes)]. Hoje so a FEPESE, mas a tela ja pergunta."""
+def bancas_com_questao() -> list[str]:
+    """As bancas que tem prova no acervo, da que tem mais questoes para a que
+    tem menos. Hoje so a FEPESE: o coletor de provas e por banca."""
     criar_tabelas()
     consulta = (
-        select(QuestaoDeProva.banca, func.count())
+        select(QuestaoDeProva.banca)
         .where(QuestaoDeProva.banca.is_not(None))
         .group_by(QuestaoDeProva.banca)
         .order_by(func.count().desc())
     )
     with sessao() as s:
-        return list(s.execute(consulta))
+        return list(s.scalars(consulta))
 
 
-def analisar_banca(
+def bancas_sem_acervo() -> list[str]:
+    """Bancas que aparecem nos meus concursos mas ainda nao tem prova aqui.
+
+    Serve para a tela explicar por que o menu e curto, em vez de parecer que o
+    radar so conhece uma banca.
+    """
+    criar_tabelas()
+    com_prova = {b.lower() for b in bancas_com_questao()}
+    consulta = (
+        select(Concurso.banca)
+        .where(Concurso.banca.is_not(None))
+        .group_by(Concurso.banca)
+        .order_by(func.count().desc())
+    )
+    with sessao() as s:
+        citadas = list(s.scalars(consulta))
+    return [b for b in citadas if b.lower() not in com_prova]
+
+
+def composicao_do_caderno(banca: str | None = None) -> list[macetes.FatiaDoCaderno]:
+    """Quantas questoes de cada materia caem num caderno tipico da banca."""
+    criar_tabelas()
+    return macetes.composicao_do_caderno(_questoes_filtradas(banca=banca))
+
+
+def _questoes_filtradas(
     banca: str | None = None,
     cargo: str | None = None,
     tema: str | None = None,
-) -> macetes.Analise:
-    """O que a banca costuma cobrar no recorte pedido.
+) -> list[QuestaoDeProva]:
+    """As questoes do recorte pedido.
 
     O `tema` e texto livre de proposito: eu escrevo "crase" ou "primeiros
     socorros", e nao o nome exato da materia. A busca olha a materia E o
     enunciado, sem acento, porque o nome que a banca usa ("Lingua Portuguesa")
     raramente e a palavra que eu penso ("crase").
     """
-    criar_tabelas()
     consulta = select(QuestaoDeProva)
 
     if banca:
@@ -1643,4 +1668,39 @@ def analisar_banca(
         )
 
     with sessao() as s:
-        return macetes.analisar(list(s.scalars(consulta)))
+        return list(s.scalars(consulta))
+
+
+def analisar_banca(
+    banca: str | None = None,
+    cargo: str | None = None,
+    tema: str | None = None,
+) -> macetes.Analise:
+    """O que a banca costuma cobrar no recorte pedido.
+
+    Quando o tema aponta para uma materia so - "crase" e Lingua Portuguesa em
+    56 de 59 questoes -, a analise traz junto o retrato daquela materia inteira
+    na banca: quanto ela cai por caderno e de que assuntos e feita. E a
+    pergunta seguinte natural de quem procurou por um assunto.
+    """
+    criar_tabelas()
+    questoes = _questoes_filtradas(banca, cargo, tema)
+    analise = macetes.analisar(questoes)
+
+    if not questoes:
+        return analise
+
+    dominante = macetes.materia_dominante(questoes)
+    analise.materia_dominante = dominante
+    if dominante and tema:
+        # O retrato e da materia INTEIRA na banca, e nao do recorte: a pergunta
+        # e "quanto isso cai nas provas", e nao "quanto isso cai no que eu
+        # acabei de filtrar".
+        da_materia = [
+            q for q in _questoes_filtradas(banca, cargo)
+            if q.materia == dominante
+        ]
+        analise.retrato = macetes.retratar_materia(da_materia, dominante)
+        analise.assunto_procurado = macetes.assunto_do_tema(tema, analise.retrato)
+
+    return analise

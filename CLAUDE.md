@@ -244,6 +244,18 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   virava absurdo: Tubarao, com 2011 e 2026 conhecidos, dava "proximo em 2041";
 - a previsao carrega sempre o motivo e os anos que a embasam, e a tela avisa o
   que o historico NAO cobre (outra banca entre 2021 e 2025);
+- a aba Macetes nao calcula nada antes de a banca ser escolhida, e o menu de
+  bancas vem das PROVAS baixadas, nao dos concursos. As citadas sem acervo
+  aparecem numa nota explicando que falta um coletor por banca;
+- o assunto dentro da materia sai de um catalogo de palavras-chave escrito a
+  mao em `macetes.CATALOGO_DE_ASSUNTOS`. Cobertura em enunciados distintos:
+  portugues 76%, informatica 61%, gerais 59%, raciocinio 53%. O que sobra e
+  contado como "sem assunto detectado" - nunca empurrado para um assunto;
+- a materia dominante do recorte so e afirmada com 60% ou mais das questoes.
+  "Crase" da 56 de 59 em Portugues; recorte que mistura nao tem materia;
+- questoes por caderno divide pelos cadernos em que AQUELA materia apareceu.
+  Temas de Educacao so cai em prova de professor: dividir pelo total faria
+  parecer que cai pouco quando cai muito onde cai;
 - na aba Macetes, gabarito e palavras contam UMA VEZ POR ENUNCIADO, e
   materia e forma de perguntar contam todas. Buscando "crase" saem 59 questoes
   e so 7 enunciados: a mesma aparece em 38 cadernos e a resposta e "d", o que
