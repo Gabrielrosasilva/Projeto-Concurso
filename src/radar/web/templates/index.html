@@ -106,16 +106,41 @@
       text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap}
     .limpar{background:transparent;color:var(--suave);border-color:var(--borda)}
 
-    .faixas{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;
-      margin:0 0 .8rem}
-    .faixas-rotulo{font-size:.78rem;color:var(--suave);margin-right:.15rem}
-    .faixa{font-size:.78rem;padding:.3rem .65rem;border-radius:999px;
-      border:1px solid var(--borda);background:var(--cartao);color:var(--suave);
-      text-decoration:none;white-space:nowrap}
-    .faixa:hover{border-color:var(--azul);color:var(--azul)}
-    .faixa.ativa{background:var(--nucleo-fraco);color:var(--nucleo);
-      border-color:transparent;font-weight:700}
-    .faixa.limpar-faixa{border-style:dashed}
+    /* Campo de minimo e a caixinha de faixas, lado a lado numa celula so
+       da grade de filtros. */
+    /* O par ocupa duas colunas da grade: o campo sozinho ficava espremido a
+       quase nada quando o nome da faixa escolhida e longo. */
+    .salario{display:flex;gap:.35rem;min-width:0;grid-column:span 2}
+    .salario input{flex:1 1 6rem;min-width:5rem}
+    @media (max-width:520px){ .salario{grid-column:span 1} }
+
+    /* A caixinha usa <details>, entao abre e fecha sem JavaScript. O painel
+       e posicionado por cima da pagina para nao empurrar o resto do layout
+       quando abre. */
+    .menu-faixa{position:relative}
+    .menu-faixa>summary{list-style:none;cursor:pointer;white-space:nowrap;
+      display:flex;align-items:center;gap:.3rem;height:100%;max-width:12rem;
+      overflow:hidden;text-overflow:ellipsis;
+      padding:.55rem .7rem;border:1px solid var(--borda);border-radius:8px;
+      background:var(--cartao);color:var(--suave);font-size:.85rem}
+    .menu-faixa[open]>summary,.menu-faixa>summary:has(+ .opcoes a.ativa){
+      font-weight:600}
+    .menu-faixa>summary::-webkit-details-marker{display:none}
+    .menu-faixa>summary:hover{border-color:var(--azul);color:var(--azul)}
+    .menu-faixa[open]>summary{border-color:var(--azul);color:var(--azul)}
+    .menu-faixa .seta{font-size:.7em;opacity:.7}
+
+    .menu-faixa .opcoes{position:absolute;z-index:10;top:calc(100% + .3rem);
+      right:0;min-width:15rem;display:flex;flex-direction:column;gap:.15rem;
+      padding:.35rem;border:1px solid var(--borda);border-radius:10px;
+      background:var(--cartao);box-shadow:0 8px 24px #0002}
+    .menu-faixa .opcoes a{font-size:.82rem;padding:.45rem .6rem;border-radius:6px;
+      color:var(--texto);text-decoration:none;white-space:nowrap}
+    .menu-faixa .opcoes a:hover{background:var(--azul-fraco);color:var(--azul)}
+    .menu-faixa .opcoes a.ativa{background:var(--nucleo-fraco);color:var(--nucleo);
+      font-weight:700}
+    .menu-faixa .opcoes a.limpar-faixa{color:var(--suave);border-top:1px solid
+      var(--borda);border-radius:0;margin-top:.2rem;padding-top:.5rem}
 
     .contagem{color:var(--suave);font-size:.85rem;margin:0 0 .7rem}
     .aviso-filtro{background:var(--proximo-fraco);color:var(--proximo);
@@ -366,29 +391,35 @@
       <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" maxlength="2">
       <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
       <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
-      <input name="salario_min" type="number" step="100" min="0"
-             placeholder="Salario min" value="{{ salario_min }}">
-      <input name="salario_max" type="number" step="100" min="0"
-             placeholder="Salario max" value="{{ salario_max }}">
+      {# O campo de MAXIMO saiu do formulario de proposito: quem digita quer
+         dizer "a partir de X". As faixas fechadas continuam existindo, mas
+         pela caixinha ao lado, que e mais rapida que digitar dois numeros. #}
+      <div class="salario">
+        <input name="salario_min" type="number" step="100" min="0"
+               placeholder="Salario min" value="{{ salario_min }}">
+        <details class="menu-faixa">
+          <summary title="Escolher uma faixa">
+            {{ faixa_ativa if faixa_ativa else 'Remuneracao' }}
+            <span class="seta">&#9662;</span>
+          </summary>
+          <div class="opcoes">
+            {% for rotulo, faixa_min, faixa_max in faixas %}
+              <a class="{{ 'ativa' if faixa_ativa == rotulo }}"
+                 href="{{ url_sem_salario }}salario_min={{ faixa_min or '' }}&salario_max={{ faixa_max or '' }}"
+              >{{ rotulo }}</a>
+            {% endfor %}
+            {% if faixa_ativa or salario_min or salario_max %}
+              <a class="limpar-faixa"
+                 href="{{ url_sem_salario.rstrip('?&') }}">limpar remuneracao</a>
+            {% endif %}
+          </div>
+        </details>
+      </div>
       <div class="acoes">
         <button type="submit">Filtrar</button>
         <a class="limpar" href="/">Limpar</a>
       </div>
     </form>
-
-    {# Clicar e mais rapido que digitar, e tira a duvida de qual valor usar.
-       Cada faixa e um link comum que preserva a aba e os demais filtros. #}
-    <div class="faixas">
-      <span class="faixas-rotulo">Remuneracao:</span>
-      {% for rotulo, faixa_min, faixa_max in faixas %}
-        <a class="faixa {{ 'ativa' if faixa_ativa == rotulo }}"
-           href="{{ url_sem_salario }}salario_min={{ faixa_min or '' }}&salario_max={{ faixa_max or '' }}"
-        >{{ rotulo }}</a>
-      {% endfor %}
-      {% if faixa_ativa or salario_min or salario_max %}
-        <a class="faixa limpar-faixa" href="{{ url_sem_salario.rstrip('?&') }}">limpar</a>
-      {% endif %}
-    </div>
 
     <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
 

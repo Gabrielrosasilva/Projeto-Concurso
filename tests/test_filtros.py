@@ -132,7 +132,38 @@ def test_a_faixa_escolhida_fica_destacada(cliente):
     _semear(*_tres_faixas())
 
     texto = cliente.get("/?salario_min=5000&salario_max=10000").text
-    assert 'class="faixa ativa"' in texto
+    assert 'class="ativa"' in texto
+
+
+def test_o_botao_mostra_a_faixa_escolhida(cliente):
+    """Fechada, a caixinha diz qual faixa esta valendo - senao nao da para
+    saber sem abrir."""
+    _semear(*_tres_faixas())
+
+    aberto = cliente.get("/").text
+    assert "Remuneracao" in aberto
+
+    escolhido = cliente.get("/?salario_min=5000&salario_max=10000").text
+    assert "R$ 5.000 a R$ 10.000" in escolhido.split("<summary")[1][:200]
+
+
+def test_o_campo_de_salario_maximo_saiu_do_formulario(cliente):
+    """Quem digita quer dizer "a partir de X". As faixas fechadas continuam
+    existindo, mas pela caixinha."""
+    _semear(_concurso("https://a.test/1"))
+
+    texto = cliente.get("/").text
+    assert 'name="salario_min"' in texto
+    assert 'name="salario_max"' not in texto
+
+
+def test_digitar_um_minimo_desfaz_a_faixa_fechada(banco_temporario):
+    """O formulario nao manda mais o maximo, entao filtrar por 6000 depois de
+    ter escolhido "2.100 a 5.000" passa a valer "de 6000 para cima"."""
+    _semear(*_tres_faixas())
+
+    titulos = [c.titulo for c in servico.listar(salario_min=6000)]
+    assert titulos == ["Ganha muito", "Ganha bem"]
 
 
 # --- banca por abreviacao ---------------------------------------------------

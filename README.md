@@ -57,11 +57,13 @@ Duas saidas, as duas validas:
 
 ```bat
 .venv\Scriptsctivate      :: liga o venv nesta janela
-.adar.bat web             :: ou chame pelo atalho, sem ativar nada
+.
+adar.bat web             :: ou chame pelo atalho, sem ativar nada
 ```
 
 O `radar.bat` fica na raiz do projeto e repassa tudo para o executavel do
-venv, entao `.adar.bat listar --abertas` e qualquer outro comando funcionam
+venv, entao `.
+adar.bat listar --abertas` e qualquer outro comando funcionam
 de dentro da pasta do projeto, com ou sem o venv ligado.
 
 ### Depois de cada atualizacao
@@ -252,9 +254,14 @@ radar situacoes                 # recalcula os status (o tempo passa sozinho)
 
 Todo filtro da pagina combina com a aba em que voce esta e com os demais.
 
-**Remuneracao** tem atalho: quatro faixas clicaveis (ate R$ 2.000, R$ 2.100 a
-R$ 5.000, R$ 5.000 a R$ 10.000, acima de R$ 10.000), alem dos campos de minimo
-e maximo para quem quiser um valor exato.
+**Remuneracao** tem o campo de minimo e, ao lado dele, uma caixinha que abre
+com quatro faixas prontas: ate R$ 2.000, R$ 2.100 a R$ 5.000, R$ 5.000 a
+R$ 10.000, e acima de R$ 10.000. Escolhida uma, o proprio botao passa a
+mostrar qual esta valendo.
+
+Nao ha campo de maximo: quem digita um valor quer dizer "a partir de X". As
+faixas fechadas existem pela caixinha, que e mais rapida que digitar dois
+numeros.
 
 **Banca** aceita o nome curto e o por extenso: "FCC" e "Fundacao Carlos
 Chagas" trazem os mesmos concursos. A tabela de apelidos e a mesma que o radar
