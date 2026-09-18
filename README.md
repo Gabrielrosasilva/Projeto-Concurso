@@ -414,19 +414,45 @@ Regras da casa para as proximas fontes:
 - identificar-se no `User-Agent`;
 - guardar sempre o link original — o sistema e um indice, nao um substituto.
 
-## Por que os PDFs nao ficam no git
+## O acervo de provas
 
-A partir da fase 3 o radar baixa provas e editais. Eles vao para `data/provas/`
-e `data/editais/`, que estao no `.gitignore`.
+```bash
+radar provas --limite 20     # le os hotsites e baixa o que achar
+radar baixar-provas          # reconstroi o acervo a partir do manifesto
+```
 
-O que vai para o git e o **manifesto** (`data/provas.json`): link original,
-banca, orgao, cargo, ano e o `sha256` de cada arquivo. Com ele, `radar
-baixar-provas` reconstroi o acervo inteiro em qualquer maquina, e o hash prova
-que o arquivo e o mesmo.
+Cada concurso da FEPESE tem um hotsite proprio, e e nele que ficam os PDFs:
 
-Motivo: git guarda uma copia inteira de cada arquivo binario a cada commit.
-Algumas centenas de PDFs deixariam o repositorio grande e lento. Versionar a
-receita em vez do artefato e a mesma logica de Dockerfile e imagem.
+| pagina do hotsite | o que tem |
+|---|---|
+| `?go=edital` | o edital de abertura |
+| `?go=provas` | o caderno de prova de cada cargo, e os gabaritos |
+
+O caderno vem com o **cargo no rotulo do link** ("Monitor de Transporte
+Escolar", "Supervisor Escolar"). E isso que importa: o que vale estudar e o
+padrao da banca no *seu* cargo, nao a media de todos.
+
+`radar provas` nao le os 520 hotsites de uma vez - seriam horas de requisicao
+e a maior parte nao interessa. A ordem e: concurso **ja encerrado** (que e o
+que tem prova publicada) e **perto de casa** primeiro, depois os indefinidos.
+
+### Por que os PDFs nao ficam no git
+
+Os PDFs vao para `data/provas/`, que esta no `.gitignore`.
+
+O que e versionado e o **manifesto** (`data/provas.json`): link de origem,
+banca, orgao, municipio, cargo, ano, tipo e o `sha256` de cada arquivo. Com
+ele, `radar baixar-provas` reconstroi o acervo inteiro em qualquer maquina, e
+o hash prova que o arquivo e o mesmo.
+
+A conta que motiva isso: os primeiros 29 documentos deram **37 MB em disco** e
+**18 KB de manifesto**. Git guarda uma copia inteira de cada arquivo binario a
+cada commit, entao o acervo no repositorio o deixaria grande e lento em pouco
+tempo. Versionar a receita em vez do artefato e a mesma logica de Dockerfile e
+imagem.
+
+Os caminhos no manifesto usam barra normal mesmo no Windows, senao a outra
+maquina nao acharia os arquivos.
 
 ## Nota sobre dependencias
 

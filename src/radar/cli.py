@@ -12,6 +12,7 @@ from rich.console import Console
 from rich.table import Table
 
 from radar import acervo, avisos, config, servico
+from radar import provas as _provas
 from radar.util import dias_ate, formatar_data
 
 
@@ -187,6 +188,60 @@ def carga_inicial(
         f"\nNo banco agora: [bold green]{contagem['nucleo']}[/] perto, "
         f"[bold yellow]{contagem['proximo']}[/] proximo, "
         f"{contagem['remoto']} longe, {contagem['indefinida']} a confirmar."
+    )
+
+
+@app.command()
+def provas(
+    limite: int = typer.Option(20, help="Quantos concursos ler nesta rodada"),
+) -> None:
+    """Monta o acervo: le os hotsites e baixa edital, prova e gabarito.
+
+    Comeca pelos concursos ja encerrados perto de casa - sao os que tem prova
+    publicada e mostram o padrao da banca na minha regiao.
+
+    Os PDFs ficam em data/provas/ e NAO vao para o git. O que e versionado e o
+    manifesto data/provas.json, com o sha256 de cada arquivo.
+    """
+    console.print(
+        f"Vou ler ate [bold]{limite}[/] concurso(s). Cada um custa 2 paginas "
+        f"mais os PDFs, com pausa de 1,5s entre as requisicoes."
+    )
+
+    with console.status("Montando o acervo..."):
+        resultado = servico.montar_acervo(limite=limite)
+
+    console.print(f"[green]{resultado}[/]")
+
+    if resultado.documentos:
+        total = len(_provas.carregar_manifesto())
+        console.print(
+            f"\nAcervo agora: [bold]{total}[/] documento(s) em "
+            f"[bold]{_provas.diretorio_provas()}[/]"
+        )
+
+
+@app.command()
+def baixar_provas(
+    forcar: bool = typer.Option(False, "--forcar", help="Rebaixa o que ja existe"),
+) -> None:
+    """Reconstroi o acervo em disco a partir do manifesto.
+
+    E o que torna os PDFs descartaveis: eles nao vao para o git, mas qualquer
+    maquina refaz a pasta inteira a partir de data/provas.json.
+    """
+    contagem = servico.baixar_do_manifesto(forcar=forcar)
+
+    if not contagem["total"]:
+        console.print(
+            "[yellow]Manifesto vazio.[/] Rode [bold]radar provas[/] primeiro."
+        )
+        return
+
+    console.print(
+        f"[green]{contagem['baixados']}[/] baixado(s), "
+        f"{contagem['ja_tinha']} ja estava(m) no disco"
+        + (f", [red]{contagem['falhas']}[/] falhou/falharam" if contagem["falhas"] else "")
     )
 
 

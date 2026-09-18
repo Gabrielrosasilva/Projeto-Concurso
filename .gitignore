@@ -9,6 +9,7 @@ __pycache__/
 data/*.db
 
 # Acervo pesado: os PDFs NAO vao para o git. O que vai e o manifesto
-# (data/provas.json), e o comando `radar baixar-provas` reconstroi tudo.
+# data/provas.json, com o sha256 de cada arquivo, e `radar baixar-provas`
+# reconstroi a pasta inteira a partir dele.
 data/provas/
 data/editais/

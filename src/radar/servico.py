@@ -1,12 +1,13 @@
 """Regras do sistema: rodar os coletores, gravar sem duplicar, consultar."""
 import logging
+import re
 from dataclasses import dataclass
 from datetime import timedelta
 
 from sqlalchemy import func, select
 
 from radar import avisos
-from radar import detalhes, regioes
+from radar import detalhes, provas, regioes
 from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
@@ -702,3 +703,185 @@ def definir_salario(concurso_id: int, valor: float | None) -> Concurso | None:
         concurso.salario = valor
         concurso.salario_manual = valor is not None
         return concurso
+
+
+# --- acervo de provas (fase 3) ----------------------------------------------
+
+# Cada hotsite da FEPESE tem estas duas paginas, e e so o que precisamos ler.
+PAGINAS_DO_HOTSITE = ("provas", "edital")
+
+
+@dataclass
+class ResultadoAcervo:
+    concursos: int = 0
+    provas: int = 0
+    gabaritos: int = 0
+    editais: int = 0
+    falhas: int = 0
+
+    @property
+    def documentos(self) -> int:
+        return self.provas + self.gabaritos + self.editais
+
+    def __str__(self) -> str:
+        if not self.concursos:
+            return "Nada novo para o acervo."
+        return (
+            f"{self.concursos} concurso(s) lido(s): {self.provas} prova(s), "
+            f"{self.gabaritos} gabarito(s), {self.editais} edital(is)"
+            + (f", {self.falhas} falha(s)" if self.falhas else "")
+        )
+
+
+def _ano_do_concurso(concurso: Concurso) -> int | None:
+    # o titulo da FEPESE comeca com o ano: "2024 - Prefeitura Municipal de..."
+    achado = re.match(r"\s*(\d{4})", concurso.titulo or "")
+    if achado:
+        return int(achado.group(1))
+    return concurso.publicado_em.year if concurso.publicado_em else None
+
+
+def _hotsite(concurso: Concurso) -> str | None:
+    return (concurso.extra or {}).get("hotsite")
+
+
+# Ordem de prioridade para gastar requisicao. Prova de concurso encerrado perto
+# de casa vale mais que qualquer outra: e o padrao da banca na minha regiao.
+PRIORIDADE_ACERVO = (
+    lambda: Concurso.relevancia.in_(("nucleo", "proximo")),
+    lambda: Concurso.relevancia == "indefinida",
+)
+
+
+def _concursos_com_prova(limite: int) -> list[Concurso]:
+    """Quem ainda nao esta no acervo, na ordem de prioridade.
+
+    O manifesto e a memoria: concurso cuja url ja aparece la nao e lido de
+    novo. Assim nao precisa de coluna no banco so para marcar isso.
+    """
+    ja_no_acervo = {r.get("concurso_url") for r in provas.carregar_manifesto()}
+
+    escolhidos: list[Concurso] = []
+    with sessao() as s:
+        for condicao in PRIORIDADE_ACERVO:
+            if len(escolhidos) >= limite:
+                break
+            consulta = (
+                select(Concurso)
+                .where(Concurso.fonte == "fepese")
+                # so concurso ja realizado tem prova publicada
+                .where(Concurso.situacao == "encerrado")
+                .where(condicao())
+                .order_by(Concurso.publicado_em.desc().nullslast())
+            )
+            for concurso in s.scalars(consulta):
+                if len(escolhidos) >= limite:
+                    break
+                if concurso.url in ja_no_acervo or not _hotsite(concurso):
+                    continue
+                escolhidos.append(concurso)
+
+    return escolhidos
+
+
+def montar_acervo(limite: int = 20) -> ResultadoAcervo:
+    """Le os hotsites e baixa edital, prova e gabarito.
+
+    Uma requisicao por pagina do hotsite e uma por PDF, todas com a pausa da
+    classe Coletor. Por isso o limite: ler os 520 concursos de uma vez levaria
+    horas e a maior parte nao interessa.
+    """
+    criar_tabelas()
+    resultado = ResultadoAcervo()
+
+    escolhidos = _concursos_com_prova(limite)
+    if not escolhidos:
+        return resultado
+
+    registros = provas.carregar_manifesto()
+    conhecidos = {r.get("url") for r in registros}
+    buscador = Buscador()
+
+    for concurso in escolhidos:
+        hotsite = _hotsite(concurso).rstrip("/")
+        encontrados: list[provas.Documento] = []
+
+        for pagina in PAGINAS_DO_HOTSITE:
+            try:
+                html = buscador.get(f"{hotsite}/?go={pagina}&edital=1").text
+            except Exception as erro:  # noqa: BLE001 - hotsite fora do ar e rotina
+                log.warning("hotsite %s, pagina %s: %s", hotsite, pagina,
+                            type(erro).__name__)
+                resultado.falhas += 1
+                continue
+
+            leitor = (provas.ler_pagina_de_provas if pagina == "provas"
+                      else provas.ler_pagina_de_edital)
+            encontrados.extend(leitor(html, hotsite + "/"))
+
+        resultado.concursos += 1
+
+        for documento in encontrados:
+            if documento.url in conhecidos:
+                continue
+
+            documento.concurso_url = concurso.url
+            documento.banca = concurso.banca or "FEPESE"
+            documento.orgao = concurso.orgao or concurso.titulo
+            documento.municipio = concurso.municipio
+            documento.ano = _ano_do_concurso(concurso)
+
+            baixado = provas.baixar(documento, buscador)
+            if baixado is None:
+                resultado.falhas += 1
+                continue
+
+            registros.append(provas.para_registro(baixado))
+            conhecidos.add(baixado.url)
+
+            if baixado.tipo == provas.PROVA:
+                resultado.provas += 1
+            elif baixado.tipo == provas.GABARITO:
+                resultado.gabaritos += 1
+            else:
+                resultado.editais += 1
+
+        # Grava a cada concurso, e nao so no fim. O comando leva minutos: se
+        # ele for interrompido no meio - Ctrl+C, queda de rede, maquina
+        # desligando - o que ja foi baixado fica catalogado, e a proxima
+        # rodada continua de onde parou em vez de recomecar.
+        provas.gravar_manifesto(registros)
+
+    return resultado
+
+
+def baixar_do_manifesto(forcar: bool = False) -> dict[str, int]:
+    """Reconstroi o acervo em disco a partir do manifesto versionado.
+
+    E o que torna os PDFs descartaveis: eles nao vao para o git, mas qualquer
+    maquina refaz a pasta inteira a partir do JSON.
+    """
+    registros = provas.carregar_manifesto()
+    if not registros:
+        return {"total": 0, "baixados": 0, "ja_tinha": 0, "falhas": 0}
+
+    buscador = Buscador()
+    contagem = {"total": len(registros), "baixados": 0, "ja_tinha": 0, "falhas": 0}
+
+    for registro in registros:
+        documento = provas.Documento(**{
+            campo: registro.get(campo)
+            for campo in ("tipo", "url", "arquivo", "cargo", "concurso_url",
+                          "banca", "orgao", "municipio", "ano")
+        })
+        caminho = provas.destino(documento)
+        if caminho.exists() and not forcar:
+            contagem["ja_tinha"] += 1
+            continue
+
+        if provas.baixar(documento, buscador, forcar=forcar):
+            contagem["baixados"] += 1
+        else:
+            contagem["falhas"] += 1
+
+    return contagem

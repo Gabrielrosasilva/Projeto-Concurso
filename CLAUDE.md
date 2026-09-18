@@ -106,6 +106,7 @@ src/radar/
 ├── classificador.py  tipo, municipio, salario e relevancia, a partir do titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
+├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer: coletar, listar, favoritar, avisar, web
 ├── collectors/
@@ -130,7 +131,13 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - fonte que falha e registrada e a coleta segue com as outras;
 - o schema ja tem colunas de fases futuras, vazias. E de proposito: sem
   Alembic, coluna nova depois significa recriar o banco;
-- PDF nao vai para o git. Vai o manifesto; o comando rebaixa tudo;
+- PDF nao vai para o git. Vai o manifesto `data/provas.json`, com sha256, e
+  `radar baixar-provas` reconstroi a pasta. Medido: 29 documentos deram
+  37 MB em disco contra 18 KB de manifesto;
+- caminho no manifesto usa barra normal mesmo no Windows, senao a outra
+  maquina nao acha o arquivo;
+- o acervo comeca pelo concurso ENCERRADO e perto de casa: encerrado e o
+  que tem prova publicada, e perto e o padrao de banca que me serve;
 - concurso municipal de outro estado e `remoto`, nao `indefinida`: prova de
   municipio de SP e aplicada em SP. `indefinida` fica para quem pode mesmo
   aplicar em Florianopolis (federal, nacional, ou sem UF);
@@ -200,7 +207,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 2.5  FALTA: ler o PDF do edital para escolaridade, idade maxima, CNH e TAF
      + deteccao de retificacao por hash. Prazo, banca e lotacao ja saem da
      pagina do post, sem abrir PDF nenhum
-3    acervo de provas (FEPESE primeiro) + manifesto no git + prova substituta
+3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
+     Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
+     parecida - mesma banca e mesmo cargo em outro lugar)
 4    padrao da banca: questao a questao, incidencia por assunto
 5    modo simulado com acerto por assunto
 6    concurso atrasado + validade vencendo (previsao de abertura)
