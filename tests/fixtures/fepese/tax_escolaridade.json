@@ -1,0 +1,50 @@
+[
+  {
+    "id": 424,
+    "name": "Doutorado"
+  },
+  {
+    "id": 241,
+    "name": "Ensino Médio"
+  },
+  {
+    "id": 403,
+    "name": "Ensino Superior"
+  },
+  {
+    "id": 460,
+    "name": "Formação para Trabalhadores do Sistema de Garantia de Direitos da Criança e do Adolescente SGDCA"
+  },
+  {
+    "id": 443,
+    "name": "Fundamental"
+  },
+  {
+    "id": 100021,
+    "name": "Graduação"
+  },
+  {
+    "id": 147,
+    "name": "Mestrado"
+  },
+  {
+    "id": 100022,
+    "name": "Pós-doutorado"
+  },
+  {
+    "id": 234,
+    "name": "Pós-graduação"
+  },
+  {
+    "id": 235,
+    "name": "Pós-graduação Cursando"
+  },
+  {
+    "id": 236,
+    "name": "Pós-graduação Incompleto"
+  },
+  {
+    "id": 327,
+    "name": "Técnico"
+  }
+]

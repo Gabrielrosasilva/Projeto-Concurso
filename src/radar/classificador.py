@@ -36,7 +36,7 @@ TERMOS_VAGA = ("vaga", "inscric", "cargo", "contrata", "oportunidade",
 # /concursos/UF/ANO/..., enquanto noticia sobre auxilio mora em outro caminho,
 # tipo /beneficios-sociais/. Isso e sinal muito mais firme que palavra no
 # titulo, e vale ainda mais na carga inicial, que traz milhares de posts.
-CAMINHO_DE_CONCURSO = "/concursos/"
+CAMINHO_DE_CONCURSO = "/concurso"
 CAMINHOS_DE_NOTICIA = ("/beneficios-sociais/", "/artigo/", "/escola/", "/dicas/")
 
 
@@ -153,7 +153,9 @@ class Classificacao:
 
 
 def classificar(item: ItemColetado) -> Classificacao:
-    tipo = detectar_tipo(item.titulo, item.resumo, item.url)
+    # Fonte que sabe manda: a FEPESE publica concurso num tipo de post
+    # proprio, entao nao ha o que adivinhar pelo titulo.
+    tipo = item.tipo or detectar_tipo(item.titulo, item.resumo, item.url)
     municipio = item.municipio or extrair_municipio(item.titulo)
     salario = extrair_salario(item.titulo)
     uf = (item.uf or "").upper()
@@ -167,12 +169,19 @@ def classificar(item: ItemColetado) -> Classificacao:
             **comum,
         )
 
-    if uf == "SC":
+    # O anel decide antes da UF quando o municipio e conhecido. A lista de
+    # config/regioes.yml so tem municipio catarinense, entao achar um nome ali
+    # ja prova que e SC - mesmo que a fonte nao tenha dito a UF, como acontece
+    # com a API da FEPESE. So nao vale se a fonte afirmar OUTRO estado: "Sao
+    # Jose" e nome de municipio em varios lugares do Brasil.
+    if uf in ("", "SC"):
         anel = regioes.anel_de(municipio)
         if anel:
             return Classificacao(
                 anel, f"{municipio} (SC) esta no anel {anel}.", **comum
             )
+
+    if uf == "SC":
         if municipio:
             return Classificacao(
                 regioes.REMOTO,

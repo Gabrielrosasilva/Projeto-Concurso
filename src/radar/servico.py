@@ -10,6 +10,7 @@ from radar import detalhes, regioes
 from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
+from radar.collectors.fepese import Fepese
 from radar import config
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso, agora
@@ -17,13 +18,13 @@ from radar.models import Concurso, agora
 log = logging.getLogger(__name__)
 
 # Registre aqui cada coletor novo. E o unico lugar que precisa saber a lista.
-COLETORES: list[type[Coletor]] = [ConcursosNoBrasil]
+COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese]
 
 # Campos que a coleta manda. O que NAO esta aqui e seu e nunca e sobrescrito:
 # interesse, notas, e o que voce corrigir a mao no banco.
 CAMPOS_DA_FONTE = (
     "titulo", "resumo", "orgao", "municipio", "uf", "banca", "situacao",
-    "publicado_em",
+    "escolaridade", "publicado_em",
 )
 
 # Campos que o classificador calcula. Sao derivados do titulo, entao podem ser
@@ -297,6 +298,34 @@ class ResultadoAviso:
         return texto
 
 
+# Aviso e sobre NOVIDADE. Sem esta janela, ligar uma fonte nova enche a fila
+# com o historico inteiro dela: a FEPESE entrou com 520 concursos, 464 deles ja
+# encerrados, e o `radar avisar` seguinte mandaria mensagem sobre edital de
+# anos atras mais o alerta de excesso, que soaria como erro de regra sem ser.
+JANELA_DE_NOVIDADE_EM_DIAS = 30
+
+
+def _e_novidade():
+    """Condicao SQL de "isto merece uma mensagem no celular agora".
+
+    Vale se foi publicado ha pouco, ou se a inscricao continua aberta - um
+    edital de 40 dias atras com prazo em pe ainda e util. Nunca vale se ja
+    encerrou. Sem data de publicacao entra, porque ai nao da para afirmar que
+    e velho, e o teto de 10 mensagens segura o estrago.
+    """
+    recente = agora() - timedelta(days=JANELA_DE_NOVIDADE_EM_DIAS)
+    return (Concurso.situacao != "encerrado") & (
+        # a banca diz que da para se inscrever agora: isso basta, e a data de
+        # publicacao nao importa. Foi assim que o concurso da Celesc quase
+        # passou batido - aberto, mas publicado ha mais de 30 dias, e a FEPESE
+        # nao informa prazo.
+        (Concurso.situacao == "inscricoes_abertas")
+        | Concurso.publicado_em.is_(None)
+        | (Concurso.publicado_em >= recente)
+        | (Concurso.inscricoes_ate >= agora())
+    )
+
+
 def _nao_avisados() -> list[Concurso]:
     """Concursos que interessam e que ainda nao viraram mensagem."""
     consulta = (
@@ -304,6 +333,7 @@ def _nao_avisados() -> list[Concurso]:
         .where(Concurso.avisado_em.is_(None))
         .where(Concurso.tipo != "noticia")
         .where(Concurso.relevancia.in_(RELEVANCIA_AVISO))
+        .where(_e_novidade())
         .order_by(Concurso.publicado_em.desc().nullslast())
     )
     with sessao() as s:

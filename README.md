@@ -81,6 +81,43 @@ radar reclassificar                 # depois de editar config/regioes.yml
 internet. Incluiu um municipio novo no YAML? Rode isso e os registros antigos
 se corrigem na hora.
 
+### As fontes
+
+| fonte | o que traz | como |
+|---|---|---|
+| Concursos no Brasil | concurso de todo o pais, inclusive municipal de SC | feed RSS |
+| FEPESE | os concursos da banca que mais atua em SC | API REST do WordPress |
+
+A FEPESE entrega coisa que o agregador nao tem: a **banca ja vem preenchida**
+(e o site dela), o **status vem da propria banca** numa lista fechada
+("Inscricoes abertas", "Em andamento", "Encerrados") em vez de ser deduzido de
+data escrita em texto corrido, e a **escolaridade exigida** vem junto. Cada
+concurso ainda traz o endereco do hotsite, onde ficam edital, prova e gabarito
+- e de la que a fase 3 vai montar o acervo.
+
+#### Por que nao o Diario Oficial
+
+O plano desta fase era o **Diario Oficial dos Municipios de SC**, que seria a
+fonte primaria. Nao da: o `robots.txt` dele proibe robo.
+
+```
+User-agent: *
+Disallow: /
+Crawl-delay: 10
+```
+
+So o Bingbot tem permissao. Como a regra da casa e respeitar `robots.txt`, o
+DOM/SC esta fora de raspagem. O caminho legitimo que o proprio site oferece e
+o **alerta por e-mail** dele; ler essa caixa por IMAP fica como ideia futura.
+
+Duas outras portas foram testadas no mesmo dia:
+
+- **Querido Diario** (projeto de dados abertos que padroniza diarios
+  municipais) seria o ideal, mas a API respondeu `503 no available server`.
+  Vale tentar de novo mais para frente;
+- **DOE-SC** (diario do estado) e uma aplicacao que so monta a pagina com
+  JavaScript, sem HTML para ler. Precisaria de outra abordagem.
+
 ### Trazendo o historico (carga inicial)
 
 O RSS e um **fluxo, nao um arquivo**. Ele entrega so os 15 itens mais

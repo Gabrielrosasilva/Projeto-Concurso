@@ -111,8 +111,9 @@ src/radar/
 ├── collectors/
 │   ├── base.py                  Coletor + ItemColetado; cuida de robots.txt,
 │   │                            User-Agent e atraso entre requisicoes
-│   └── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao (?paged=N)
-│                                 para a carga inicial do historico
+│   ├── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao (?paged=N)
+│   │                             para a carga inicial do historico
+│   └── fepese.py                fonte 2: API REST do WordPress da FEPESE
 └── web/app.py      FastAPI + Jinja2, uma pagina com filtros
 ```
 
@@ -166,6 +167,17 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   dos 2.185 nao trazem salario no titulo;
 - `situacao` e derivada das datas de inscricao, nunca chutada. Sem prazo
   conhecido, o status fica como estava;
+- o DOM/SC esta FORA de raspagem: robots.txt com "Disallow: /" para todos.
+  Nao insista; o caminho legitimo e o alerta por e-mail do proprio site;
+- fonte que sabe o que publica declara `tipo` no ItemColetado, e o
+  classificador respeita. A FEPESE publica num tipo de post `concurso`, entao
+  nao ha o que adivinhar pelo titulo - sem isso, "2026 - Prefeitura Municipal
+  de Sao Jose" virava `noticia`, porque nao tem a palavra concurso no titulo;
+- municipio conhecido decide o anel mesmo sem UF declarada: config/regioes.yml
+  so tem municipio catarinense. So nao vale se a fonte afirmar outro estado;
+- aviso e sobre NOVIDADE: nao avisa o que ja encerrou nem o publicado ha mais
+  de 30 dias, a menos que a inscricao esteja aberta. Sem isso, ligar uma fonte
+  nova despejava o historico dela no celular;
 - prazo de inscricao, banca e lotacao vem da PAGINA DO POST, nao do PDF do
   edital. Sai mais barato e cobre a maioria dos casos;
 - `radar detalhar` nao le a pagina de todos: segue a prioridade nucleo/proximo,
@@ -181,8 +193,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 ```
 1.55 FALTA: perfil/elegibilidade (idade, CNH, escolaridade) e campo de
      notas. Favoritos e filtro de remuneracao ja estao prontos
-1.7  Diario Oficial dos Municipios de SC + DOE-SC + DOU
-     inclui o sinal "contrataram a banca"
+1.7  PARCIAL: a FEPESE entrou como fonte 2. O DOM/SC ficou de fora porque
+     o robots.txt dele proibe robo; ver README. Falta: DOU (federal), o
+     Querido Diario quando a API voltar, e o sinal "contrataram a banca"
 2.2  export .ics para o calendario
 2.5  FALTA: ler o PDF do edital para escolaridade, idade maxima, CNH e TAF
      + deteccao de retificacao por hash. Prazo, banca e lotacao ja saem da

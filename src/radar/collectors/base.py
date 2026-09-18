@@ -39,6 +39,10 @@ class ItemColetado:
     uf: str | None = None
     banca: str | None = None
     situacao: str = "desconhecida"
+    # Preenchido so pela fonte que tem certeza (a FEPESE publica os concursos
+    # num tipo de post proprio). Nulo deixa o classificador decidir pelo texto.
+    tipo: str | None = None
+    escolaridade: str | None = None
     publicado_em: datetime | None = None
     extra: dict = field(default_factory=dict)
 

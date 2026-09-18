@@ -1,0 +1,161 @@
+[
+  {
+    "id": 25383,
+    "date": "2026-09-16T17:04:45",
+    "link": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-concordia-ps-educacao/",
+    "slug": "2026-prefeitura-municipal-de-concordia-ps-educacao",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de Concórdia"
+    },
+    "acf": {
+      "link_hotsite": "https://2026psconcordia.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2024/05/logo_concordia-e1715119009863.jpg"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": [
+      241,
+      403
+    ]
+  },
+  {
+    "id": 25375,
+    "date": "2026-09-16T16:02:34",
+    "link": "https://fepese.org.br/concurso/2026-concurso-publico-auxiliar-educaocao-especial-sao-jose/",
+    "slug": "2026-concurso-publico-auxiliar-educaocao-especial-sao-jose",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de São José"
+    },
+    "acf": {
+      "link_hotsite": "https://2026cpeducaeesj.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2026/08/sao_jose_verde.png"
+    },
+    "tax_concurso_status": [
+      86,
+      66
+    ],
+    "tax_escolaridade": []
+  },
+  {
+    "id": 25336,
+    "date": "2026-08-24T16:00:42",
+    "link": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-sao-jose-processo-seletivo-magisterio/",
+    "slug": "2026-prefeitura-municipal-de-sao-jose-processo-seletivo-magisterio",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de São José"
+    },
+    "acf": {
+      "link_hotsite": "https://2026pseducasj.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2026/08/sao_jose_verde.png"
+    },
+    "tax_concurso_status": [
+      86,
+      66
+    ],
+    "tax_escolaridade": [
+      241,
+      100021
+    ]
+  },
+  {
+    "id": 25303,
+    "date": "2026-08-12T16:00:16",
+    "link": "https://fepese.org.br/concurso/2026-processo-seletivo-comcap/",
+    "slug": "2026-processo-seletivo-comcap",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de Florianópolis &#8211; Autarquia de Melhoramentos da Capital (COMCAP)"
+    },
+    "acf": {
+      "link_hotsite": "https://2026seletivocomcap.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2018/07/332.png"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": []
+  },
+  {
+    "id": 25270,
+    "date": "2026-08-07T18:02:47",
+    "link": "https://fepese.org.br/concurso/2026-celesc-distribuicao-s-a-concurso-publico/",
+    "slug": "2026-celesc-distribuicao-s-a-concurso-publico",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Celesc Distribuição S.A"
+    },
+    "acf": {
+      "link_hotsite": "https://2026cpcelesc.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2022/04/2022_CP_CELESC_80x80-Icone.png"
+    },
+    "tax_concurso_status": [
+      86,
+      66
+    ],
+    "tax_escolaridade": [
+      403,
+      241,
+      327
+    ]
+  },
+  {
+    "id": 25246,
+    "date": "2026-07-28T16:03:32",
+    "link": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-chapeco-ps-professor/",
+    "slug": "2026-prefeitura-municipal-de-chapeco-ps-professor",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de Chapecó"
+    },
+    "acf": {
+      "link_hotsite": "https://2026pschapecoprof.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2023/06/2023-CP-Chapeco-80x80-Icone.png"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": [
+      403
+    ]
+  },
+  {
+    "id": 25216,
+    "date": "2026-07-15T16:00:51",
+    "link": "https://fepese.org.br/concurso/2026-processo-seletivo-cunhapora/",
+    "slug": "2026-processo-seletivo-cunhapora",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de Cunha Porã"
+    },
+    "acf": {
+      "link_hotsite": "https://2026pscunhapora.fepese.org.br/",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2023/05/municipio_cunha_pora-e1683226114213.jpeg"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": []
+  },
+  {
+    "id": 25215,
+    "date": "2026-07-15T16:00:41",
+    "link": "https://fepese.org.br/concurso/2026-concurso-publico-cunhapora/",
+    "slug": "2026-concurso-publico-cunhapora",
+    "status": "publish",
+    "title": {
+      "rendered": "2026 &#8211; Prefeitura Municipal de Cunha Porã"
+    },
+    "acf": {
+      "link_hotsite": "https://2026cpcunhapora.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2023/05/municipio_cunha_pora-e1683226114213.jpeg"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": []
+  }
+]

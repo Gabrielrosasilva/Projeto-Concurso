@@ -227,3 +227,85 @@ def test_o_token_nunca_aparece_no_log(banco_temporario, monkeypatch, caplog):
         avisos.enviar("teste")
 
     assert "token-secreto-123" not in caplog.text
+
+
+# --- so novidade vira mensagem ----------------------------------------------
+# Ligar uma fonte nova traz o historico dela junto. A FEPESE entrou com 520
+# concursos, 464 ja encerrados - sem esta regra, o aviso seguinte falaria de
+# edital de anos atras.
+
+def test_concurso_antigo_nao_vira_mensagem(banco_temporario, telegram):
+    from datetime import timedelta
+
+    from radar.models import agora
+
+    _semear(_concurso(
+        url="https://exemplo.test/velho",
+        publicado_em=agora() - timedelta(days=400),
+        situacao="edital_publicado",
+    ))
+
+    assert servico.avisar().enviados == 0
+
+
+def test_concurso_encerrado_nunca_vira_mensagem(banco_temporario, telegram):
+    from radar.models import agora
+
+    _semear(_concurso(
+        url="https://exemplo.test/fechado",
+        publicado_em=agora(),          # publicado hoje, mas ja encerrado
+        situacao="encerrado",
+    ))
+
+    assert servico.avisar().enviados == 0
+
+
+def test_antigo_com_inscricao_aberta_vira_mensagem(banco_temporario, telegram):
+    """Edital de 40 dias atras com prazo em pe ainda e util para mim."""
+    from datetime import timedelta
+
+    from radar.models import agora
+
+    _semear(_concurso(
+        url="https://exemplo.test/aberto",
+        publicado_em=agora() - timedelta(days=40),
+        inscricoes_ate=agora() + timedelta(days=10),
+        situacao="inscricoes_abertas",
+    ))
+
+    assert servico.avisar().enviados == 1
+
+
+def test_recem_publicado_vira_mensagem(banco_temporario, telegram):
+    from radar.models import agora
+
+    _semear(_concurso(url="https://exemplo.test/novo", publicado_em=agora()))
+    assert servico.avisar().enviados == 1
+
+
+def test_sem_data_de_publicacao_ainda_avisa(banco_temporario, telegram):
+    """Sem data nao da para afirmar que e velho; o teto de 10 segura o resto."""
+    _semear(_concurso(url="https://exemplo.test/sem-data", publicado_em=None))
+    assert servico.avisar().enviados == 1
+
+
+def test_inscricao_aberta_vale_mesmo_sem_prazo_e_sem_ser_recente(banco_temporario, telegram):
+    """O caso da Celesc: a FEPESE marcou "Inscricoes abertas" mas nao informa
+    data-limite, e o post e de mais de 30 dias atras. Se a banca diz que da
+    para se inscrever, isso basta."""
+    from datetime import timedelta
+
+    from radar.models import agora
+
+    _semear(_concurso(
+        url="https://exemplo.test/celesc",
+        titulo="2026 - Celesc Distribuicao S.A",
+        municipio=None,
+        uf=None,
+        relevancia="indefinida",
+        situacao="inscricoes_abertas",
+        inscricoes_ate=None,
+        publicado_em=agora() - timedelta(days=60),
+    ))
+
+    assert servico.avisar().enviados == 1
