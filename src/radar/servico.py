@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass
 from datetime import timedelta
 
-from sqlalchemy import func, select
+from sqlalchemy import case, func, select
 
 from radar import avisos
 from radar import detalhes, provas, questoes as leitor_de_questoes, regioes
@@ -14,7 +14,13 @@ from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoB
 from radar.collectors.fepese import Fepese
 from radar import config
 from radar.db import criar_tabelas, sessao
-from radar.models import Concurso, QuestaoDeProva, agora
+from radar.models import (
+    Concurso,
+    QuestaoDeProva,
+    RespostaDeSimulado,
+    Simulado,
+    agora,
+)
 
 log = logging.getLogger(__name__)
 
@@ -1149,3 +1155,280 @@ def contar_por_fase(termo: str | None = None) -> dict[str, int]:
     for concurso in buscar_noticias(termo=termo, limite=10000):
         contagem[concurso.situacao] = contagem.get(concurso.situacao, 0) + 1
     return contagem
+
+
+# --- modo simulado (fase 5) -------------------------------------------------
+
+# Materias que caem em QUALQUER concurso, independente do cargo. Sao as que
+# valem treinar mesmo sem haver prova do cargo que eu quero no acervo.
+MATERIAS_UNIVERSAIS = (
+    "Língua Portuguesa",
+    "Raciocínio Lógico",
+    "Noções de Informática",
+    "Conhecimentos Gerais",
+)
+
+QUANTIDADE_PADRAO = 10
+
+
+def materias_disponiveis() -> list[tuple[str, int]]:
+    """[(materia, quantas questoes distintas)], da maior para a menor."""
+    criar_tabelas()
+    consulta = (
+        select(QuestaoDeProva.materia, func.count(func.distinct(QuestaoDeProva.impressao)))
+        .group_by(QuestaoDeProva.materia)
+        .order_by(func.count(func.distinct(QuestaoDeProva.impressao)).desc())
+    )
+    with sessao() as s:
+        return [(m or "sem materia", n) for m, n in s.execute(consulta)]
+
+
+def _sortear_questoes(
+    quantidade: int,
+    materia: str | None = None,
+    cargo: str | None = None,
+    banca: str | None = None,
+    universais: bool = False,
+) -> list[int]:
+    """Ids de questoes sorteadas, SEM repetir enunciado.
+
+    A banca reaproveita muito: das 5.021 questoes, so 1.815 tem enunciado
+    diferente, e uma delas aparece em 44 cadernos. Sortear sem cuidado daria um
+    simulado com a mesma pergunta varias vezes.
+    """
+    consulta = select(QuestaoDeProva).where(QuestaoDeProva.resposta.is_not(None))
+
+    if materia:
+        consulta = consulta.where(QuestaoDeProva.materia == materia)
+    elif universais:
+        consulta = consulta.where(QuestaoDeProva.materia.in_(MATERIAS_UNIVERSAIS))
+    if cargo:
+        consulta = consulta.where(QuestaoDeProva.cargo.ilike(f"%{cargo}%"))
+    if banca:
+        consulta = consulta.where(QuestaoDeProva.banca.ilike(f"%{banca}%"))
+
+    with sessao() as s:
+        candidatas = list(s.scalars(consulta))
+
+    # uma questao por enunciado
+    por_enunciado: dict[str, QuestaoDeProva] = {}
+    for questao in candidatas:
+        por_enunciado.setdefault(questao.impressao, questao)
+
+    import random
+
+    escolhidas = list(por_enunciado.values())
+    random.shuffle(escolhidas)
+    return [q.id for q in escolhidas[:quantidade]]
+
+
+def criar_simulado(
+    quantidade: int = QUANTIDADE_PADRAO,
+    materia: str | None = None,
+    cargo: str | None = None,
+    banca: str | None = None,
+    universais: bool = False,
+) -> Simulado | None:
+    """Monta uma rodada. Devolve None se nao houver questao que sirva."""
+    criar_tabelas()
+
+    ids = _sortear_questoes(quantidade, materia, cargo, banca, universais)
+    if not ids:
+        return None
+
+    with sessao() as s:
+        simulado = Simulado(filtros={
+            "quantidade": quantidade, "materia": materia, "cargo": cargo,
+            "banca": banca, "universais": universais,
+        })
+        s.add(simulado)
+        s.flush()                      # precisa do id antes de ligar as questoes
+
+        for ordem, questao_id in enumerate(ids, start=1):
+            s.add(RespostaDeSimulado(
+                simulado_id=simulado.id, questao_id=questao_id, ordem=ordem
+            ))
+        return simulado
+
+
+def _respostas(simulado_id: int) -> list[RespostaDeSimulado]:
+    with sessao() as s:
+        return list(s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .order_by(RespostaDeSimulado.ordem)
+        ))
+
+
+def questao_atual(simulado_id: int) -> tuple[RespostaDeSimulado, QuestaoDeProva] | None:
+    """A proxima questao sem resposta, ou None quando acabou.
+
+    E isso que permite fechar a pagina no meio e voltar depois: o lugar onde
+    eu parei esta no banco, nao na sessao do navegador.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        resposta = s.scalar(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.escolhida.is_(None))
+            .order_by(RespostaDeSimulado.ordem)
+            .limit(1)
+        )
+        if resposta is None:
+            return None
+        return resposta, s.get(QuestaoDeProva, resposta.questao_id)
+
+
+def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
+    """Grava a resposta e devolve se acertou. None se a questao nao e desta
+    rodada, ou se ja foi respondida - recarregar a pagina nao pode contar
+    duas vezes."""
+    criar_tabelas()
+    letra = (letra or "").strip().lower()[:1]
+
+    with sessao() as s:
+        resposta = s.scalar(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.questao_id == questao_id)
+        )
+        if resposta is None or resposta.escolhida is not None:
+            return None
+
+        questao = s.get(QuestaoDeProva, questao_id)
+        if questao is None or letra not in (questao.alternativas or {}):
+            return None
+
+        resposta.escolhida = letra
+        resposta.acertou = letra == questao.resposta
+        resposta.respondida_em = agora()
+
+        # acabou? marca o fim da rodada
+        faltam = s.scalar(
+            select(func.count()).select_from(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.escolhida.is_(None))
+        )
+        if not faltam:
+            simulado = s.get(Simulado, simulado_id)
+            if simulado:
+                simulado.finalizado_em = agora()
+
+        return resposta.acertou
+
+
+@dataclass
+class DesempenhoDaMateria:
+    materia: str
+    respondidas: int = 0
+    acertos: int = 0
+
+    @property
+    def porcentagem(self) -> float:
+        return (self.acertos / self.respondidas * 100) if self.respondidas else 0.0
+
+
+def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
+    """Acerto por materia. Sem id, soma TODOS os simulados ja feitos.
+
+    O acumulado e o que responde a pergunta que importa: em que materia eu
+    estou pior e preciso estudar.
+    """
+    criar_tabelas()
+    consulta = (
+        select(
+            QuestaoDeProva.materia,
+            func.count(),
+            # Somar a coluna booleana direto NAO funciona: o SQLAlchemy
+            # devolve a soma com o tipo da coluna, entao 2 acertos voltam
+            # como True e viram 1. O case transforma em inteiro antes.
+            func.sum(case((RespostaDeSimulado.acertou.is_(True), 1), else_=0)),
+        )
+        .join(QuestaoDeProva, QuestaoDeProva.id == RespostaDeSimulado.questao_id)
+        .where(RespostaDeSimulado.escolhida.is_not(None))
+        .group_by(QuestaoDeProva.materia)
+    )
+    if simulado_id is not None:
+        consulta = consulta.where(RespostaDeSimulado.simulado_id == simulado_id)
+
+    with sessao() as s:
+        linhas = s.execute(consulta).all()
+
+    resultado = [
+        DesempenhoDaMateria(m or "sem materia", int(total), int(acertos or 0))
+        for m, total, acertos in linhas
+    ]
+    # pior primeiro: e onde vale gastar tempo de estudo
+    resultado.sort(key=lambda d: d.porcentagem)
+    return resultado
+
+
+def simulados_recentes(limite: int = 10) -> list[Simulado]:
+    criar_tabelas()
+    with sessao() as s:
+        return list(s.scalars(
+            select(Simulado).order_by(Simulado.criado_em.desc()).limit(limite)
+        ))
+
+
+def resumo_do_simulado(simulado_id: int) -> dict:
+    """Quantas questoes, quantas respondidas e quantos acertos."""
+    respostas = _respostas(simulado_id)
+    respondidas = [r for r in respostas if r.escolhida]
+    return {
+        "total": len(respostas),
+        "respondidas": len(respondidas),
+        "acertos": sum(1 for r in respondidas if r.acertou),
+        "terminou": bool(respostas) and len(respondidas) == len(respostas),
+    }
+
+
+def buscar_simulado(simulado_id: int) -> Simulado | None:
+    criar_tabelas()
+    with sessao() as s:
+        return s.get(Simulado, simulado_id)
+
+
+@dataclass
+class ItemDeRevisao:
+    enunciado: str
+    escolhida: str | None
+    correta: str | None
+    texto_escolhido: str
+    texto_correto: str
+    acertou: bool
+    materia: str | None = None
+
+
+def revisao(simulado_id: int) -> list[ItemDeRevisao]:
+    """O que eu marquei e qual era a correta, questao a questao.
+
+    Errar sem ver a correta nao ensina nada; e a revisao que faz o simulado
+    valer mais que um numero no fim.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        linhas = s.execute(
+            select(RespostaDeSimulado, QuestaoDeProva)
+            .join(QuestaoDeProva, QuestaoDeProva.id == RespostaDeSimulado.questao_id)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .order_by(RespostaDeSimulado.ordem)
+        ).all()
+
+    itens = []
+    for resposta, questao in linhas:
+        alternativas = questao.alternativas or {}
+        itens.append(ItemDeRevisao(
+            enunciado=questao.enunciado,
+            escolhida=resposta.escolhida,
+            correta=questao.resposta,
+            texto_escolhido=alternativas.get(resposta.escolhida, ""),
+            texto_correto=alternativas.get(questao.resposta, ""),
+            acertou=bool(resposta.acertou),
+            materia=questao.materia,
+        ))
+    # errado primeiro: e o que eu preciso rever
+    itens.sort(key=lambda i: i.acertou)
+    return itens

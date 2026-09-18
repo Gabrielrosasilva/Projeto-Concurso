@@ -406,6 +406,37 @@ agora parte das ALTERNATIVAS: cada rodada de a ate e fecha uma questao.
 Social"). Em vez de adivinhar padrao por padrao, o que se repete em toda
 pagina e tratado como mobilia. A sujeira caiu de 5,1% para 1,1% das questoes.
 
+## Treinar: modo simulado
+
+A ponta que fecha o ciclo. O radar acha o concurso, o acervo baixa as provas,
+`radar questoes` separa as questoes - e aqui eu respondo elas.
+
+Abre em `radar web`, no link **Simulado**. Nao tem comando de terminal: e uma
+coisa de clicar, uma questao por tela.
+
+Como funciona:
+
+- **sem escolher materia**, o simulado usa as que caem em QUALQUER concurso -
+  Lingua Portuguesa, Raciocinio Logico, Nocoes de Informatica e Conhecimentos
+  Gerais. Isso importa aqui: o acervo nao tem prova de Guarda Municipal nem de
+  Policia Penal, e essas quatro materias treinam mesmo assim;
+- **a mesma questao nao aparece duas vezes na mesma rodada.** O sorteio e por
+  enunciado, nao por linha: dos 5.021 registros so 1.815 sao perguntas
+  diferentes, e sortear sem cuidado repetiria a mesma pergunta;
+- **da para fechar a pagina no meio e voltar depois.** O lugar onde parei fica
+  no banco, nao na sessao do navegador;
+- **F5 nao responde de novo.** A questao ja respondida e ignorada, e o POST
+  responde com redirecionamento;
+- no fim vem a **revisao**, com o que eu marquei e qual era a correta, erros
+  primeiro. Errar sem ver a correta nao ensina nada;
+- a tela de comecar mostra o **acumulado de todas as rodadas**, com a materia
+  de menor acerto em cima: e onde vale gastar tempo de estudo.
+
+Uma armadilha que custou tempo: somar a coluna booleana `acertou` direto no
+SQL **nao funciona**. O SQLAlchemy devolve a soma com o tipo da coluna, entao
+2 acertos voltam como `True` e viram 1 - todo mundo ficava com 50%. A conta
+passa por `case(...)` para virar inteiro antes de somar.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

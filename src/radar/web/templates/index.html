@@ -95,6 +95,7 @@
     nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
     nav a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
     nav a.ativo.noticias{background:var(--indef-fraco);color:var(--indef)}
+    nav a.simulado{border-style:dashed}
 
     form.filtros{display:grid;gap:.5rem;margin-bottom:1rem;
       grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
@@ -404,6 +405,7 @@
       <a class="noticias {{ 'ativo' if noticias }}" href="/?noticias=true">
         Noticias e andamento
       </a>
+      <a class="simulado" href="/simulado">Simulado</a>
     </nav>
 
     {% if not noticias %}

@@ -202,3 +202,49 @@ class QuestaoDeProva(Base):
 
     def __repr__(self) -> str:
         return f"<Questao {self.numero} {self.materia} {self.enunciado[:40]!r}>"
+
+
+class Simulado(Base):
+    """Uma rodada de questoes respondidas.
+
+    O estado fica no banco, e nao numa sessao do navegador: assim da para
+    fechar a pagina no meio e voltar depois, e o historico serve para medir se
+    eu estou melhorando.
+    """
+
+    __tablename__ = "simulados"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    criado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+    finalizado_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
+
+    # Com que filtros ele foi montado. Guardado para eu saber depois o que
+    # aquele resultado significava.
+    filtros: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+
+    def __repr__(self) -> str:
+        return f"<Simulado {self.id} de {self.criado_em:%d/%m/%Y}>"
+
+
+class RespostaDeSimulado(Base):
+    """Uma questao dentro de um simulado, e o que eu marquei nela."""
+
+    __tablename__ = "respostas_de_simulado"
+    __table_args__ = (
+        UniqueConstraint("simulado_id", "questao_id", name="uq_resposta_questao"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    simulado_id: Mapped[int] = mapped_column(Integer, index=True)
+    questao_id: Mapped[int] = mapped_column(Integer, index=True)
+
+    # A ordem em que a questao aparece nesta rodada.
+    ordem: Mapped[int] = mapped_column(Integer)
+
+    # Nulo enquanto nao respondi. E isso que diz onde eu parei.
+    escolhida: Mapped[str | None] = mapped_column(String(1), nullable=True)
+    acertou: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    respondida_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
+
+    def __repr__(self) -> str:
+        return f"<Resposta q{self.questao_id} = {self.escolhida}>"

@@ -249,3 +249,87 @@ def coletar():
         }
         for r in servico.coletar_tudo()
     ]
+
+
+# --- simulado (fase 5) ------------------------------------------------------
+
+def _pagina_do_simulado(request: Request, simulado=None, **extra):
+    """Monta o contexto da tela de simulado, seja qual for o estado dela."""
+    contexto = {
+        "simulado": simulado,
+        "materias": servico.materias_disponiveis(),
+        "total_de_questoes": servico.contar_questoes(),
+        "desempenho_geral": servico.desempenho(),
+    }
+    contexto.update(extra)
+    return templates.TemplateResponse(
+        request=request, name="simulado.html", context=contexto
+    )
+
+
+@app.get("/simulado", response_class=HTMLResponse)
+def simulado_inicio(request: Request):
+    """A tela de comecar, com o acumulado de acertos por materia."""
+    return _pagina_do_simulado(request)
+
+
+@app.post("/simulado/novo")
+def simulado_novo(
+    materia: str = Form(""),
+    quantidade: str = Form("10"),
+):
+    """Monta a rodada e manda para a primeira questao."""
+    quantas = converter_valor(quantidade)
+    quantas = int(quantas) if quantas and 1 <= quantas <= 50 else 10
+
+    novo = servico.criar_simulado(
+        quantidade=quantas,
+        materia=materia.strip() or None,
+        # Sem materia escolhida, vale o que cai em qualquer concurso - e o que
+        # serve independente do cargo que eu for prestar.
+        universais=not materia.strip(),
+    )
+    if novo is None:
+        return RedirectResponse("/simulado", status_code=303)
+    return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
+
+
+@app.get("/simulado/{simulado_id}", response_class=HTMLResponse)
+def simulado_questao(request: Request, simulado_id: int):
+    """A proxima questao sem resposta, ou o resultado quando acabou."""
+    simulado = servico.buscar_simulado(simulado_id)
+    if simulado is None:
+        return RedirectResponse("/simulado", status_code=303)
+
+    resumo = servico.resumo_do_simulado(simulado_id)
+    atual = servico.questao_atual(simulado_id)
+
+    if atual is None:
+        return _pagina_do_simulado(
+            request,
+            simulado=simulado,
+            questao=None,
+            resumo=resumo,
+            desempenho_da_rodada=servico.desempenho(simulado_id),
+            revisao=servico.revisao(simulado_id),
+        )
+
+    resposta, questao = atual
+    return _pagina_do_simulado(
+        request, simulado=simulado, resposta=resposta, questao=questao, resumo=resumo
+    )
+
+
+@app.post("/simulado/{simulado_id}/responder")
+def simulado_responder(
+    simulado_id: int,
+    questao_id: int = Form(...),
+    letra: str = Form(...),
+):
+    """Grava a resposta e volta para a mesma URL.
+
+    O redirecionamento 303 e o que impede o F5 de responder de novo - alem da
+    trava no servico, que ignora questao ja respondida.
+    """
+    servico.responder(simulado_id, questao_id, letra)
+    return RedirectResponse(f"/simulado/{simulado_id}", status_code=303)

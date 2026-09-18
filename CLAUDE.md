@@ -99,7 +99,8 @@ leitura da pagina do post para prazo de inscricao, banca e lotacao.
 ```
 src/radar/
 ├── config.py       le ambiente. Nenhum efeito colateral no import.
-├── models.py       tabela `concursos` (SQLAlchemy 2.0, estilo Mapped)
+├── models.py       tabelas `concursos`, `questoes`, `simulados` e
+│                `respostas_de_simulado` (SQLAlchemy 2.0, estilo Mapped)
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico.py      roda coletores, grava com upsert, classifica, consulta
 ├── regioes.py      le config/regioes.yml: em que anel um municipio esta
@@ -223,6 +224,16 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   depois SC indefinida, depois federal. Outro estado nunca;
 - pagina que cita varios municipios nao define municipio nenhum. Edital de
   secretaria estadual lista o estado inteiro, e escolher um seria chute;
+- o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
+  fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
+- o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
+  1.815 sao perguntas diferentes, e uma aparece em 44 cadernos;
+- simulado sem materia escolhida usa as materias que caem em qualquer concurso
+  (Portugues, Raciocinio, Informatica, Conhecimentos Gerais). O acervo nao tem
+  prova de Guarda Municipal nem de Policia Penal, e essas quatro treinam
+  mesmo assim;
+- nao somar coluna booleana no SQL: o SQLAlchemy devolve a soma com o tipo da
+  coluna, entao 2 acertos voltam como True e viram 1. Use `case(...)`;
 - o tipo `noticia` e decidido primeiro pelo CAMINHO da URL: /concursos/ e
   concurso, /beneficios-sociais/ e noticia. Isso pega o que a palavra no
   titulo nao pega ("INSS paga hoje com vagas para todos").
@@ -246,7 +257,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      incidencia por materia funcionando. Falta: classificar o ASSUNTO
      fino dentro de Conhecimentos Especificos (Direito Penal, Primeiros
      Socorros...), que e onde entra a API da Claude
-5    modo simulado com acerto por assunto
+5    PRONTA: modo simulado na web, com acerto por MATERIA. Por assunto
+     fino depende da fase 4 terminar
 6    concurso atrasado + validade vencendo (previsao de abertura)
 ```
 
