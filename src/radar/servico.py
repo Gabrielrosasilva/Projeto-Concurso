@@ -19,6 +19,7 @@ from radar.classificador import classificar
 from radar.collectors.base import Buscador, Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
 from radar.collectors.fepese import Fepese
+from radar.collectors.ieses import Ieses
 from radar import config
 from radar.db import criar_tabelas, sessao
 from radar.models import (
@@ -32,7 +33,7 @@ from radar.models import (
 log = logging.getLogger(__name__)
 
 # Registre aqui cada coletor novo. E o unico lugar que precisa saber a lista.
-COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese]
+COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese, Ieses]
 
 # Campos que a coleta manda. O que NAO esta aqui e seu e nunca e sobrescrito:
 # interesse, notas, e o que voce corrigir a mao no banco.

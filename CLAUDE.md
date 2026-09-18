@@ -119,7 +119,8 @@ src/radar/
 │   │                            User-Agent e atraso entre requisicoes
 │   ├── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao (?paged=N)
 │   │                             para a carga inicial do historico
-│   └── fepese.py                fonte 2: API REST do WordPress da FEPESE
+│   ├── fepese.py                fonte 2: API REST do WordPress da FEPESE
+│   └── ieses.py                 fonte 3: API JSON da listagem de projetos
 └── web/app.py      FastAPI + Jinja2, uma pagina com filtros
 ```
 
@@ -270,6 +271,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   antigo", comparando a data dos .py com a hora em que subiu. E o sintoma mais
   confuso que aparece aqui: o link esta na tela (template e lido do disco a
   cada visita) e a rota nao existe (codigo e lido so na partida);
+- a IESES entrou como fonte 3, pela API que a propria listagem usa
+  (/projetos/api), achada lendo o JS da pagina. Ela NAO afirma uf=SC: a banca e
+  catarinense mas faz concurso no Amazonas e no Mato Grosso do Sul;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -289,9 +293,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 ```
 1.55 FALTA: perfil/elegibilidade (idade, CNH, escolaridade) e campo de
      notas. Favoritos e filtro de remuneracao ja estao prontos
-1.7  PARCIAL: a FEPESE entrou como fonte 2. O DOM/SC ficou de fora porque
-     o robots.txt dele proibe robo; ver README. Falta: DOU (federal), o
-     Querido Diario quando a API voltar, e o sinal "contrataram a banca"
+1.7  PARCIAL: FEPESE (fonte 2) e IESES (fonte 3). O DOM/SC ficou de fora
+     porque o robots.txt dele proibe robo; ver README. Falta: DOU
+     (federal), o Querido Diario quando a API voltar, e o sinal
+     "contrataram a banca"
 2.2  export .ics para o calendario
 2.5  FALTA: ler o PDF do edital para escolaridade, idade maxima, CNH e TAF
      + deteccao de retificacao por hash. Prazo, banca e lotacao ja saem da

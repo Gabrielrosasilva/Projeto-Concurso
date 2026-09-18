@@ -1,0 +1,70 @@
+{
+ "projetos": [
+  {
+   "projectTokenKey": "0026",
+   "logo": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2026/scgas0012026/logo.png",
+   "entidade": "SCGÁS - Companhia de Gás de Santa Catarina",
+   "orgao": "",
+   "evento": "Concurso Público - Edital 001/2026",
+   "subdominios": [
+    "scgas2026"
+   ],
+   "dataInicial": "10/08/2026 09:00:00",
+   "pasta": "scgas0012026",
+   "url": "https://www.scgas2026.ieses.org/"
+  },
+  {
+   "projectTokenKey": "0023",
+   "logo": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2025/scgas_001_2025/scgas.png",
+   "entidade": "SCGAS - COMPANHIA DE GÁS DE SANTA CATARINA",
+   "orgao": "",
+   "evento": "CONCURSO PÚBLICO – EDITAL 004/2025",
+   "subdominios": [
+    "engenheiro.scgas",
+    "superior.scgas"
+   ],
+   "dataInicial": "13/10/2025 08:00:00",
+   "pasta": "scgas_004_2025",
+   "url": "https://www.engenheiro.scgas.ieses.org/"
+  },
+  {
+   "projectTokenKey": "0022",
+   "logo": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2025/msgas_001_2025/msgas.PNG",
+   "entidade": "COMPANHIA DE GÁS DO ESTADO DE MATO GROSSO DO SUL – MSGÁS",
+   "orgao": " ",
+   "evento": "CONCURSO PÚBLICO – EDITAL 001/2025",
+   "subdominios": [
+    "msgas2025"
+   ],
+   "dataInicial": "15/09/2025 11:00:00",
+   "pasta": "msgas_001_2025",
+   "url": "https://www.msgas2025.ieses.org/"
+  },
+  {
+   "projectTokenKey": "0002",
+   "logo": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/biguacu.png",
+   "entidade": "PREFEITURA MUNICIPAL DE BIGUAÇU",
+   "orgao": "SECRETARIA MUNICIPAL DE EDUCACAO",
+   "evento": "PROCESSO SELETIVO PÚBLICO – EDITAL 018/2024",
+   "subdominios": [
+    "act2025.bigua"
+   ],
+   "dataInicial": "18/11/2024 08:00:00",
+   "pasta": "biguacu_018_2024",
+   "url": "https://www.act2025.bigua.ieses.org/"
+  },
+  {
+   "projectTokenKey": "0009",
+   "logo": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2023/tjam_001_2023/icon.png",
+   "entidade": "TRIBUNAL DE JUSTIÇA DO ESTADO DO AMAZONAS",
+   "orgao": " ",
+   "evento": "CONCURSO PÚBLICO - EDITAL 001/2023",
+   "subdominios": [
+    "cartorio.tjam2023"
+   ],
+   "dataInicial": "08/05/2023 00:00:00",
+   "pasta": "tjam_001_2023",
+   "url": "https://www.cartorio.tjam2023.ieses.org/"
+  }
+ ]
+}

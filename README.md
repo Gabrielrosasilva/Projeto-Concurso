@@ -629,6 +629,30 @@ ele fica **desligado por padrao**: sobe um segundo processo que reimporta
 tudo, e isso quebra no Windows quando o caminho da pasta tem espaco no nome -
 que e o caso aqui (`C:\Projeto concurso claude\...`).
 
+## Fonte 3: IESES
+
+Segunda banca catarinense do radar. Ela fica em Florianopolis e faz concurso de
+prefeitura da regiao - Biguacu e Gaspar estao na lista dela.
+
+Como foi achada: `ieses.org/projetos` e uma tela que carrega a lista por
+JavaScript, com botao "carregar mais". O arquivo `/projetos-static/projetos.js`
+mostra de onde vem o dado, `/projetos/api?offset=&limit=`, e essa API devolve
+JSON limpo. Melhor que raspar a tela - nao quebra quando mudam o CSS.
+
+Nao ha `robots.txt` no dominio (404), entao nada esta declarado como proibido.
+O coletor continua se identificando no User-Agent e respeitando o atraso.
+
+Dois limites, medidos:
+
+1. **sao 26 projetos**, de 2021 a 2026. A API nao devolve o historico inteiro
+   da banca, so o que esta publicado no site;
+2. **10 dos 26 hotsites ja sairam do ar** - erro de SSL ou de Cloudflare, quase
+   todos de 2023 para tras. O que sobra ainda traz Biguacu 2024 e Gaspar 2024.
+
+Uma coisa que o coletor **nao** faz: afirmar `uf=SC`. A IESES e catarinense mas
+faz concurso fora (tribunal do Amazonas, gas do Mato Grosso do Sul), e afirmar
+SC mandaria esses para o anel errado.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da
