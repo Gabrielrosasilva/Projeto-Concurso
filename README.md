@@ -143,6 +143,54 @@ e o registro segue `indefinida`. Chutar seria pior.
 Na pagina web ha a aba **Inscricoes abertas**, ordenada pelo prazo, e cada
 cartao mostra quantos dias faltam. Sete dias ou menos aparece em vermelho.
 
+### Meus favoritos
+
+Clique na estrela de qualquer concurso para guardar na aba **Meus favoritos**.
+
+Favorito e escolha sua, e por isso:
+
+- **a coleta nunca mexe nele.** O titulo pode ser corrigido pela fonte, mas a
+  estrela fica;
+- **nenhum filtro esconde um favorito.** Nem distancia, nem salario, nem
+  prazo vencido. Se voce marcou, voce ve;
+- os favoritos aparecem ordenados por **quem fecha primeiro**, e o que nao tem
+  prazo conhecido vai para o fim da lista em vez de sumir.
+
+Cada favorito mostra o **caminho completo** do concurso, com a etapa atual em
+destaque:
+
+```
+previsto -> autorizado -> banca contratada -> edital publicado
+-> inscricoes abertas -> encerrado
+```
+
+A etapa sai das datas, nao de palpite: com o prazo em maos da para afirmar se
+esta aberto, se ainda vai abrir ou se ja encerrou. Sem prazo conhecido, o
+status nao e inventado - a tela diz para rodar `radar detalhar`.
+
+Pelo terminal:
+
+```bash
+radar listar                    # o id aparece na primeira coluna
+radar favoritar 324             # guarda
+radar favoritar 324 --remover   # tira
+radar listar --favoritos
+radar situacoes                 # recalcula os status (o tempo passa sozinho)
+```
+
+### Filtro de remuneracao
+
+```bash
+radar listar --salario-min 5000
+```
+
+Na web ha o campo **Salario min**, que combina com a aba em que voce esta.
+
+Uma limitacao que a tela avisa: o salario e lido do **titulo** do post, e
+1.115 dos 2.185 concursos nao trazem valor nenhum ali. Esses ficam de fora do
+filtro. A pagina mostra quantos sao e oferece o link para ver sem o filtro -
+entre eles esta, por exemplo, o concurso de 300 vagas de Sao Jose.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

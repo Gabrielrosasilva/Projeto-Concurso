@@ -107,7 +107,7 @@ src/radar/
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── util.py         fuso e formatacao de data
-├── cli.py          comandos typer: coletar, listar, avisar, web
+├── cli.py          comandos typer: coletar, listar, favoritar, avisar, web
 ├── collectors/
 │   ├── base.py                  Coletor + ItemColetado; cuida de robots.txt,
 │   │                            User-Agent e atraso entre requisicoes
@@ -151,6 +151,14 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   raspagem de HTML nem pelo sitemap. Conferido no site real: o sitemap existe
   mas para em junho/2026, e nao traz titulo - so URL. O feed paginado traz
   tudo e usa o mesmo parser;
+- favorito e escolha minha: a coleta nao mexe, e NENHUM filtro o esconde -
+  nem distancia, nem salario, nem prazo vencido;
+- o filtro de salario exclui quem nao tem valor conhecido, e a tela avisa
+  quantos ficaram de fora. A primeira versao incluia os nulos para nao
+  esconder concurso bom, e o resultado foi um filtro que nao filtrava: 1.115
+  dos 2.185 nao trazem salario no titulo;
+- `situacao` e derivada das datas de inscricao, nunca chutada. Sem prazo
+  conhecido, o status fica como estava;
 - prazo de inscricao, banca e lotacao vem da PAGINA DO POST, nao do PDF do
   edital. Sai mais barato e cobre a maioria dos casos;
 - `radar detalhar` nao le a pagina de todos: segue a prioridade nucleo/proximo,
@@ -164,7 +172,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 ## Roadmap
 
 ```
-1.55 perfil/elegibilidade + interesse/notas na CLI e na web
+1.55 FALTA: perfil/elegibilidade (idade, CNH, escolaridade) e campo de
+     notas. Favoritos e filtro de remuneracao ja estao prontos
 1.7  Diario Oficial dos Municipios de SC + DOE-SC + DOU
      inclui o sinal "contrataram a banca"
 2.2  export .ics para o calendario

@@ -54,6 +54,17 @@ def coletar() -> None:
         )
 
 
+# O nome do campo e cru de proposito (vai para o banco); na tela vira gente.
+SITUACAO_LEGIVEL = {
+    "prevista": "previsto",
+    "autorizado": "autorizado",
+    "banca_definida": "banca contratada",
+    "edital_publicado": "edital publicado",
+    "inscricoes_abertas": "inscricoes abertas",
+    "encerrado": "encerrado",
+    "desconhecida": "-",
+}
+
 CORES_DO_ANEL = {
     "nucleo": "bold green",
     "proximo": "yellow",
@@ -80,6 +91,12 @@ def listar(
     abertas: bool = typer.Option(
         False, "--abertas", help="So o que da para se inscrever hoje"
     ),
+    favoritos: bool = typer.Option(
+        False, "--favoritos", help="So os que eu marquei como favoritos"
+    ),
+    salario_min: float = typer.Option(
+        None, "--salario-min", help="Remuneracao minima, ex: 5000"
+    ),
     limite: int = typer.Option(30, help="Quantidade maxima de linhas"),
 ) -> None:
     """Mostra o que ja esta no banco.
@@ -90,26 +107,29 @@ def listar(
     itens = servico.listar(
         uf=uf, banca=banca, termo=termo, situacao=situacao,
         relevancia=relevancia, todas_relevancias=todos,
-        incluir_noticias=noticias, abertas=abertas, limite=limite,
+        incluir_noticias=noticias, abertas=abertas, favoritos=favoritos,
+        salario_min=salario_min, limite=limite,
     )
 
     tabela = Table(title=f"{len(itens)} concurso(s)")
-    tabela.add_column("Data", style="dim", no_wrap=True)
+    # O id aparece para dar para favoritar pelo terminal: radar favoritar <id>
+    tabela.add_column("id", style="dim", no_wrap=True)
     tabela.add_column("Onde", no_wrap=True)
-    tabela.add_column("UF", width=3)
     tabela.add_column("Salario", justify="right", no_wrap=True)
     tabela.add_column("Inscricao ate", no_wrap=True)
+    tabela.add_column("Status", no_wrap=True)
     tabela.add_column("Titulo")
 
     for c in itens:
         cor = CORES_DO_ANEL.get(c.relevancia, "")
         salario = f"{c.salario:,.0f}".replace(",", ".") if c.salario else "--"
+        estrela = "*" if c.interesse == servico.FAVORITO else " "
         tabela.add_row(
-            formatar_data(c.publicado_em),
+            f"{estrela}{c.id}",
             f"[{cor}]{c.relevancia}[/]" if cor else c.relevancia,
-            c.uf or "--",
             salario,
             _prazo(c.inscricoes_ate),
+            SITUACAO_LEGIVEL.get(c.situacao, c.situacao),
             c.titulo,
         )
 
@@ -161,6 +181,42 @@ def carga_inicial(
         f"[bold yellow]{contagem['proximo']}[/] proximo, "
         f"{contagem['remoto']} remoto, {contagem['indefinida']} a confirmar."
     )
+
+
+@app.command()
+def favoritar(
+    concurso_id: int = typer.Argument(..., help="O id que aparece em `radar listar`"),
+    remover: bool = typer.Option(False, "--remover", help="Tira dos favoritos"),
+) -> None:
+    """Marca um concurso como favorito, para acompanhar de perto.
+
+    Favorito e escolha sua: a coleta nunca mexe nele, e nenhum filtro o
+    esconde - nem distancia, nem salario.
+    """
+    concurso = servico.favoritar(concurso_id, favorito=not remover)
+
+    if concurso is None:
+        console.print(f"[red]Nao achei concurso com id {concurso_id}.[/]")
+        raise typer.Exit(code=1)
+
+    verbo = "removido dos" if remover else "adicionado aos"
+    console.print(f"[green]{verbo} favoritos:[/] {concurso.titulo}")
+    console.print(f"Agora sao {servico.contar_favoritos()} favorito(s).")
+
+
+@app.command()
+def situacoes() -> None:
+    """Recalcula o status de quem tem prazo conhecido.
+
+    O tempo passa e "inscricoes abertas" vira "encerrado" sozinho. Roda
+    automatico depois de coletar e de detalhar; este comando e para forcar.
+    """
+    contagem = servico.atualizar_situacoes()
+    if not contagem:
+        console.print("Nenhum status mudou.")
+        return
+    for situacao, quantos in sorted(contagem.items()):
+        console.print(f"{SITUACAO_LEGIVEL.get(situacao, situacao)}: {quantos}")
 
 
 @app.command()

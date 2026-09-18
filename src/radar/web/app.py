@@ -5,8 +5,8 @@ outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 """
 from pathlib import Path
 
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from radar import servico
 from radar.util import dias_ate, formatar_data
@@ -16,6 +16,17 @@ except ImportError:                     # pragma: no cover
     from starlette.templating import Jinja2Templates
 
 app = FastAPI(title="Radar de Concursos")
+
+# O ciclo de vida do concurso, na ordem. A tela mostra ate onde ele chegou:
+# tudo antes da etapa atual ja aconteceu, por definicao da sequencia.
+ETAPAS = [
+    ("prevista", "previsto"),
+    ("autorizado", "autorizado"),
+    ("banca_definida", "banca contratada"),
+    ("edital_publicado", "edital publicado"),
+    ("inscricoes_abertas", "inscricoes abertas"),
+    ("encerrado", "encerrado"),
+]
 templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 # Deixa formatar_data disponivel dentro do HTML, para o template nao precisar
 # saber nada de fuso horario.
@@ -33,11 +44,13 @@ def index(
     relevancia: str | None = None,
     todos: bool = False,
     abertas: bool = False,
+    favoritos: bool = False,
+    salario_min: float | None = None,
 ):
     itens = servico.listar(
         uf=uf, banca=banca, termo=termo, situacao=situacao,
         relevancia=relevancia, todas_relevancias=todos, abertas=abertas,
-        limite=200,
+        favoritos=favoritos, salario_min=salario_min, limite=200,
     )
     contagem = servico.contar_por_relevancia()
     return templates.TemplateResponse(
@@ -56,8 +69,30 @@ def index(
             "todos": todos,
             "abertas": abertas,
             "n_abertas": servico.contar_abertas(),
+            "favoritos": favoritos,
+            "n_favoritos": servico.contar_favoritos(),
+            "salario_min": ("" if salario_min is None
+                             else int(salario_min) if salario_min == int(salario_min)
+                             else salario_min),
+            "n_sem_salario": servico.contar_sem_salario() if salario_min else 0,
+            "favorito": servico.FAVORITO,
+            "etapas": ETAPAS,
         },
     )
+
+
+@app.post("/favoritar")
+def favoritar(concurso_id: int = Form(...), voltar: str = Form("/")):
+    """Liga ou desliga o favorito e devolve para a pagina de onde veio.
+
+    E POST, e nao um link: o navegador pre-carrega link ao passar o mouse, e
+    isso favoritaria concurso sozinho. Depois vem um redirecionamento 303,
+    que e o que impede o F5 de repetir a acao.
+    """
+    servico.alternar_favorito(concurso_id)
+    # so aceita caminho interno: nao vira redirecionador para fora
+    destino = voltar if voltar.startswith("/") else "/"
+    return RedirectResponse(destino, status_code=303)
 
 
 @app.post("/coletar")

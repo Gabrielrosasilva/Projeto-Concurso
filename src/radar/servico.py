@@ -125,6 +125,7 @@ def coletar_tudo() -> list[ResultadoColeta]:
 
         resultados.append(resultado)
 
+    atualizar_situacoes()
     return resultados
 
 
@@ -164,6 +165,8 @@ def listar(
     incluir_noticias: bool = False,
     todas_relevancias: bool = False,
     abertas: bool = False,
+    favoritos: bool = False,
+    salario_min: float | None = None,
     limite: int = 30,
 ) -> list[Concurso]:
     """Consulta o que ja foi coletado, com filtros opcionais."""
@@ -175,8 +178,34 @@ def listar(
         consulta = select(Concurso).where(_inscricao_aberta()).order_by(
             Concurso.inscricoes_ate.asc()
         )
+    elif favoritos:
+        # Meus favoritos primeiro pelo que fecha antes; o que nao tem prazo
+        # conhecido vai para o fim da lista, nao some.
+        consulta = select(Concurso).order_by(
+            Concurso.inscricoes_ate.asc().nullslast(),
+            Concurso.publicado_em.desc().nullslast(),
+        )
     else:
         consulta = select(Concurso).order_by(Concurso.publicado_em.desc().nullslast())
+
+    if favoritos:
+        # Favorito e escolha minha: nenhum outro filtro pode esconder um.
+        # Quem eu marquei, eu vejo, mesmo que seja longe ou ganhe pouco.
+        consulta = consulta.where(Concurso.interesse == FAVORITO)
+        with sessao() as s:
+            return list(s.scalars(consulta.limit(limite)))
+
+    if salario_min is not None:
+        # Filtro filtra: quem nao tem salario conhecido fica de fora.
+        #
+        # A primeira versao deixava os sem valor passarem, para nao esconder
+        # concurso bom - mas 1.115 dos 2.185 nao trazem salario no titulo, e o
+        # resultado era um filtro que nao filtrava nada. Quem usa precisa
+        # saber do ponto cego, e nao adivinhar: a tela avisa quantos ficaram
+        # de fora por falta de valor, e `contar_sem_salario` da esse numero.
+        consulta = consulta.where(Concurso.salario >= salario_min).order_by(
+            None
+        ).order_by(Concurso.salario.desc())
 
     # Noticia que veio junto no feed nao e concurso: fica de fora por padrao.
     if not incluir_noticias:
@@ -515,4 +544,98 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
                 if concurso.relevancia != anel_antes:
                     resultado.reclassificados += 1
 
+    atualizar_situacoes()
     return resultado
+
+
+# --- favoritos (fase 1.55) --------------------------------------------------
+
+# A coluna `interesse` e minha, nao da fonte: a coleta nunca a sobrescreve.
+FAVORITO = "favorito"
+
+
+def favoritar(concurso_id: int, favorito: bool = True) -> Concurso | None:
+    """Marca ou desmarca um concurso como favorito."""
+    criar_tabelas()
+    with sessao() as s:
+        concurso = s.get(Concurso, concurso_id)
+        if concurso is None:
+            return None
+        concurso.interesse = FAVORITO if favorito else None
+        return concurso
+
+
+def alternar_favorito(concurso_id: int) -> Concurso | None:
+    """Favorita se nao for, desfavorita se for. E o que o botao da tela faz."""
+    criar_tabelas()
+    with sessao() as s:
+        concurso = s.get(Concurso, concurso_id)
+        if concurso is None:
+            return None
+        concurso.interesse = None if concurso.interesse == FAVORITO else FAVORITO
+        return concurso
+
+
+def contar_sem_salario() -> int:
+    """Quantos concursos nao trazem salario no titulo.
+
+    E o ponto cego do filtro de remuneracao, e a tela mostra este numero para
+    eu saber o tamanho do que estou deixando de ver.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(
+            select(func.count()).select_from(Concurso)
+            .where(Concurso.salario.is_(None))
+            .where(Concurso.tipo != "noticia")
+        ) or 0
+
+
+def contar_favoritos() -> int:
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(
+            select(func.count()).select_from(Concurso)
+            .where(Concurso.interesse == FAVORITO)
+        ) or 0
+
+
+# --- status derivado das datas ----------------------------------------------
+
+def _situacao_pelas_datas(concurso: Concurso, momento) -> str | None:
+    """A situacao que as datas de inscricao permitem afirmar.
+
+    Antes disto, TODO registro ficava como `edital_publicado`, porque e o
+    unico palpite que o titulo permite - ou seja, o campo nao dizia nada. Com
+    o prazo em maos da para ser preciso, e sem chutar: so mexe em quem tem
+    data, e so entre os tres estados que a data comprova.
+    """
+    if concurso.tipo == "noticia" or concurso.inscricoes_ate is None:
+        return None
+    if momento > concurso.inscricoes_ate:
+        return "encerrado"
+    if concurso.inscricoes_de is None or momento >= concurso.inscricoes_de:
+        return "inscricoes_abertas"
+    return "edital_publicado"          # edital saiu, inscricao ainda vai abrir
+
+
+def atualizar_situacoes() -> dict[str, int]:
+    """Recalcula a situacao de quem tem prazo conhecido.
+
+    Roda sozinho ao fim da coleta e do `detalhar`, e de novo quando eu chamo
+    na mao - porque o tempo passa e "aberto" vira "encerrado" sem ninguem
+    tocar em nada.
+    """
+    criar_tabelas()
+    momento = agora()
+    contagem: dict[str, int] = {}
+
+    with sessao() as s:
+        consulta = select(Concurso).where(Concurso.inscricoes_ate.is_not(None))
+        for concurso in s.scalars(consulta):
+            nova = _situacao_pelas_datas(concurso, momento)
+            if nova and nova != concurso.situacao:
+                concurso.situacao = nova
+                contagem[nova] = contagem.get(nova, 0) + 1
+
+    return contagem

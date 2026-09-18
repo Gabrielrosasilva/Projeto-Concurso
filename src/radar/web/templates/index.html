@@ -14,6 +14,7 @@
       --remoto:#64748b; --remoto-fraco:#eef1f5;
       --indef:#7c3aed; --indef-fraco:#efe6fe;
       --prazo:#be123c; --prazo-fraco:#ffe4e9;
+      --estrela:#b45309; --estrela-fraca:#fef3c7;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -24,6 +25,7 @@
         --remoto:#94a3b8; --remoto-fraco:#1c2027;
         --indef:#c4b5fd; --indef-fraco:#241b3a;
         --prazo:#fb7185; --prazo-fraco:#2c1219;
+        --estrela:#fbbf24; --estrela-fraca:#2e2310;
       }
     }
     *{box-sizing:border-box}
@@ -45,6 +47,7 @@
     nav a.ativo{border-color:transparent}
     nav a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
     nav a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
+    nav a.ativo.favoritos{background:var(--estrela-fraca);color:var(--estrela)}
     nav a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
     nav a.ativo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
@@ -61,6 +64,9 @@
     .limpar{background:transparent;color:var(--suave);border-color:var(--borda)}
 
     .contagem{color:var(--suave);font-size:.85rem;margin:0 0 .7rem}
+    .aviso-filtro{background:var(--proximo-fraco);color:var(--proximo);
+      font-size:.82rem;padding:.6rem .8rem;border-radius:8px;margin:0 0 .8rem}
+    .aviso-filtro a{color:inherit}
 
     ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
     li{background:var(--cartao);border:1px solid var(--borda);border-radius:10px;
@@ -71,7 +77,13 @@
     li:hover{border-color:var(--azul)}
     li:hover.nucleo{border-left-color:var(--nucleo)}
 
-    .topo{display:flex;gap:.75rem;align-items:flex-start;justify-content:space-between}
+    .topo{display:flex;gap:.6rem;align-items:flex-start}
+    .topo .titulo{flex:1}
+    .fav{display:block;margin:0;padding:0}
+    .fav button{background:transparent;border:0;padding:0 .1rem;cursor:pointer;
+      font-size:1.25rem;line-height:1.2;color:var(--suave)}
+    .fav button:hover{color:var(--estrela)}
+    .fav button.marcada{color:var(--estrela)}
     .titulo{color:var(--texto);text-decoration:none;font-weight:600;display:block}
     .titulo:hover{color:var(--azul)}
     .salario{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;
@@ -90,6 +102,14 @@
     .selo.prazo.urgente{font-weight:700}
     .meta{color:var(--suave);font-size:.79rem}
     .motivo{color:var(--suave);font-size:.78rem;margin-top:.4rem;font-style:italic}
+    .etapas{display:flex;flex-wrap:wrap;gap:.3rem;list-style:none;padding:0;
+      margin:.6rem 0 .2rem;counter-reset:etapa}
+    .etapas li{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;
+      border:1px dashed var(--borda);color:var(--suave)}
+    .etapas li.feita{border-style:solid;border-color:transparent;
+      background:var(--remoto-fraco);color:var(--remoto)}
+    .etapas li.atual{border-style:solid;border-color:transparent;font-weight:700;
+      background:var(--nucleo-fraco);color:var(--nucleo)}
 
     .vazio{text-align:center;padding:2.5rem 1.25rem;background:var(--cartao);
            border:1px dashed var(--borda);border-radius:10px}
@@ -108,10 +128,13 @@
 
   {# Os atalhos levam a mesma pagina com outro filtro: nada de JavaScript. #}
   <nav>
+    <a class="favoritos {{ 'ativo' if favoritos }}" href="/?favoritos=true">
+      Meus favoritos <span class="n">{{ n_favoritos }}</span>
+    </a>
     <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
       Inscricoes abertas <span class="n">{{ n_abertas }}</span>
     </a>
-    <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas }}" href="/">
+    <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/">
       Perto de mim <span class="n">{{ perto }}</span>
     </a>
     <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
@@ -128,9 +151,13 @@
   <form method="get">
     {% if relevancia %}<input type="hidden" name="relevancia" value="{{ relevancia }}">{% endif %}
     {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
+    {% if abertas %}<input type="hidden" name="abertas" value="true">{% endif %}
+    {% if favoritos %}<input type="hidden" name="favoritos" value="true">{% endif %}
     <input name="uf" placeholder="UF (ex: SC)" value="{{ uf }}" maxlength="2">
     <input name="banca" placeholder="Banca (ex: FEPESE)" value="{{ banca }}">
     <input name="termo" placeholder="Palavra-chave" value="{{ termo }}">
+    <input name="salario_min" type="number" step="100" min="0"
+           placeholder="Salario min (ex: 5000)" value="{{ salario_min }}">
     <div class="acoes">
       <button type="submit">Filtrar</button>
       <a class="limpar" href="/">Limpar</a>
@@ -139,18 +166,34 @@
 
   <p class="contagem">{{ itens|length }} de {{ total_geral }} concurso(s) no banco</p>
 
+  {% if n_sem_salario %}
+    <p class="aviso-filtro">
+      Filtrando por remuneracao acima de R$ {{ '{:,.0f}'.format(salario_min|float)|replace(',', '.') }}.
+      <strong>{{ n_sem_salario }}</strong> concurso(s) nao informam salario no titulo
+      e ficaram de fora - entre eles pode haver coisa boa.
+      <a href="?{{ 'favoritos=true&' if favoritos }}{{ 'abertas=true&' if abertas }}{{ 'todos=true' if todos }}">Ver sem esse filtro</a>
+    </p>
+  {% endif %}
+
   <ul>
     {% for c in itens %}
       <li class="{{ c.relevancia }}">
         <div class="topo">
+          <form class="fav" method="post" action="/favoritar">
+            <input type="hidden" name="concurso_id" value="{{ c.id }}">
+            <input type="hidden" name="voltar" value="{{ request.url.path }}?{{ request.url.query }}">
+            <button type="submit"
+                    class="{{ 'marcada' if c.interesse == favorito }}"
+                    title="{{ 'Tirar dos favoritos' if c.interesse == favorito else 'Guardar nos favoritos' }}"
+                    aria-label="{{ 'Tirar dos favoritos' if c.interesse == favorito else 'Guardar nos favoritos' }}"
+            >{{ '★' if c.interesse == favorito else '☆' }}</button>
+          </form>
           <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
-          {% if c.salario %}
-            <span class="salario {{ 'bom' if c.salario >= 5000 }}">
-              R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}
-            </span>
-          {% endif %}
         </div>
         <div class="selos">
+          {% if c.salario %}
+            <span class="salario {{ 'bom' if c.salario >= 5000 }}">R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}</span>
+          {% endif %}
           <span class="selo {{ c.relevancia }}">{{ c.relevancia }}</span>
           {% if c.municipio %}<span class="selo neutro">{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}</span>
           {% elif c.uf %}<span class="selo neutro">{{ c.uf }}</span>{% endif %}
@@ -165,6 +208,24 @@
           {% endif %}
           <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
         </div>
+        {% if favoritos %}
+          {# Nos favoritos vale mostrar o caminho inteiro: e o que eu acompanho
+             de perto. Toda etapa antes da atual ja aconteceu, por definicao
+             da sequencia - nao e chute. #}
+          {% set atual = c.situacao %}
+          {% set indice = etapas|map(attribute=0)|list %}
+          {% if atual in indice %}
+            <ol class="etapas">
+              {% for chave, rotulo in etapas %}
+                {% set posicao = loop.index0 %}
+                {% set onde = indice.index(atual) %}
+                <li class="{{ 'feita' if posicao < onde }}{{ ' atual' if posicao == onde }}">{{ rotulo }}</li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p class="motivo">Status ainda nao confirmado. Rode <code>radar detalhar</code>.</p>
+          {% endif %}
+        {% endif %}
         {% if c.motivo_relevancia %}<div class="motivo">{{ c.motivo_relevancia }}</div>{% endif %}
       </li>
     {% else %}
@@ -172,6 +233,12 @@
         {% if total_geral == 0 %}
           <p class="grande">Nada coletado ainda.</p>
           <p>Rode <code>radar coletar</code> no terminal.</p>
+        {% elif favoritos %}
+          <p class="grande">Voce ainda nao favoritou nenhum concurso.</p>
+          <p>
+            Clique na estrela de qualquer concurso para guardar aqui e
+            acompanhar o status dele de perto.
+          </p>
         {% elif abertas %}
           <p class="grande">Nenhuma inscricao aberta agora.</p>
           <p>

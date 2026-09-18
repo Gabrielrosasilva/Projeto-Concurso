@@ -17,6 +17,10 @@ dependencies = [
     "fastapi==0.115.6",
     "uvicorn==0.34.0",
     "jinja2==3.1.5",
+    # necessario para o FastAPI ler formulario HTML (o botao de favoritar
+    # manda POST; mutar dado por GET deixaria o navegador favoritar sozinho
+    # ao pre-carregar links)
+    "python-multipart==0.0.20",
     "python-dotenv==1.0.1",
     "PyYAML==6.0.2",            # config/perfil.yml e config/regioes.yml
     # Base de fusos horarios. O Linux tem a dele em /usr/share/zoneinfo;
