@@ -843,6 +843,39 @@ Tres regras, e as tres sao a mesma ideia:
 So dois fatos tornam um concurso `inelegivel`: idade acima do teto declarado,
 ou nenhuma vaga no nivel que eu tenho.
 
+## Calendario: os prazos no celular
+
+```bash
+radar calendario                 # grava radar.ics
+```
+
+Na web, o link **Calendario** baixa o mesmo arquivo. Ele abre no Google
+Agenda, no calendario do iPhone e no Outlook.
+
+Por que isto existe: o prazo de inscricao e a unica coisa do radar que nao pode
+ser vista tarde demais. O aviso do Telegram chega uma vez; o calendario lembra
+de novo **dois dias antes** - um dia antes ja e tarde para juntar documento e
+pagar boleto.
+
+Entra o que e favorito e o que esta perto de casa, com prazo conhecido e ainda
+em pe. Quando ha data de prova, ela vira um segundo compromisso.
+
+O formato iCalendar e texto puro, entao **nao entrou biblioteca nova**. Da
+especificacao (RFC 5545), tres detalhes decidem se o arquivo e aceito:
+
+1. **toda linha termina em CRLF.** Com LF sozinho o Outlook recusa;
+2. **linha acima de 75 bytes e dobrada**, e a continuacao comeca com um
+   espaco. Titulo longo de concurso e a regra aqui, nao a excecao - sem dobrar,
+   o Google Agenda recusa o arquivo inteiro. A dobra conta BYTES, senao uma
+   letra acentuada seria partida no meio;
+3. **evento de dia inteiro termina no dia seguinte.** Com o mesmo dia nos dois
+   campos, o compromisso some da agenda.
+
+E um quarto detalhe, que nao e do formato mas do uso: o identificador do evento
+vem do endereco do concurso, sempre igual. E assim que o calendario
+**atualiza** o compromisso quando o prazo e retificado, em vez de criar um
+duplicado.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

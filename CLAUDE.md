@@ -117,6 +117,7 @@ src/radar/
 ├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
 ├── macetes.py      conta o costume da banca: forma de perguntar, questao
 │                repetida, palavra frequente, letra do gabarito
+├── calendario.py   monta o .ics dos prazos (iCalendar, sem dependencia)
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer: coletar, listar, favoritar, avisar, web
 ├── collectors/
@@ -318,6 +319,12 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - CNH avisa mas nunca barra: o edital pede CNH em algumas vagas e nao em
   outras, e o radar guarda um registro por concurso;
 - notas sao minhas, como o favorito: a coleta nunca sobrescreve;
+- o .ics e montado a mao: o formato e texto puro e nao justifica dependencia.
+  Tres detalhes decidem se o arquivo e aceito - CRLF em toda linha, dobra em
+  75 BYTES com continuacao comecando por espaco, e evento de dia inteiro
+  terminando no dia seguinte;
+- o UID do evento vem do endereco do concurso, sempre igual: e assim que o
+  calendario atualiza o compromisso em vez de duplicar quando o prazo muda;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -341,7 +348,7 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      porque o robots.txt dele proibe robo; ver README. Falta: DOU
      (federal), o Querido Diario quando a API voltar, e o sinal
      "contrataram a banca"
-2.2  export .ics para o calendario
+2.2  PRONTA: `radar calendario` e o link Calendario na web
 2.5  PARCIAL: `radar elegibilidade` le o edital e grava escolaridade,
      idade, CNH e TAF, inclusive de concurso ABERTO (`radar provas
      --abertos`). Falta: deteccao de retificacao por hash

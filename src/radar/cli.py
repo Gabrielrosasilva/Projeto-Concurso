@@ -327,6 +327,31 @@ def elegibilidade(
 
 
 @app.command()
+def calendario(
+    arquivo: str = typer.Option("radar.ics", help="Onde gravar o arquivo"),
+) -> None:
+    """Exporta os prazos para o calendario, em .ics.
+
+    Entra o que e favorito e o que esta perto de casa, com prazo conhecido e
+    ainda em pe. O arquivo abre no Google Agenda, no calendario do iPhone e no
+    Outlook.
+    """
+    from pathlib import Path as _Caminho
+
+    eventos = servico.eventos_do_calendario()
+    if not eventos:
+        console.print("[yellow]Nenhum prazo em pe para exportar.[/]")
+        return
+
+    destino = _Caminho(arquivo)
+    destino.write_text(servico.calendario_ics(), encoding="utf-8", newline="")
+    console.print(
+        f"[green]{len(eventos)} compromisso(s)[/] em [bold]{destino}[/]"
+    )
+    console.print("[dim]Abra o arquivo para importar no seu calendario.[/]")
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

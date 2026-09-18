@@ -10,6 +10,7 @@ from sqlalchemy import case, func, select
 
 from radar import avisos
 from radar import (
+    calendario,
     detalhes,
     edital_ieses,
     elegibilidade as leitor_de_elegibilidade,
@@ -27,6 +28,7 @@ from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoB
 from radar.collectors.fepese import Fepese
 from radar.collectors.ieses import Ieses
 from radar import config
+from radar.util import fuso_local
 from radar.db import criar_tabelas, sessao
 from radar.models import (
     Concurso,
@@ -1973,3 +1975,76 @@ def _gravar_exigencias(concurso: Concurso, exigencias) -> None:
         "trechos": exigencias.trechos,
     }
     concurso.extra = extra
+
+
+# --- calendario (fase 2.2) --------------------------------------------------
+
+def eventos_do_calendario() -> list[calendario.Evento]:
+    """Os prazos que valem entrar na minha agenda.
+
+    Entra o que e meu interesse declarado (favorito) e o que esta perto de
+    casa. Fica de fora o que ja venceu: compromisso no passado so atrapalha
+    quem abre a agenda.
+
+    O prazo de inscricao e o unico dado do radar que nao pode ser visto tarde
+    demais - por isso ele vai para o celular, e nao so para a tela.
+    """
+    criar_tabelas()
+    hoje = agora().astimezone(fuso_local()).date()
+
+    consulta = (
+        select(Concurso)
+        .where(Concurso.tipo != "noticia")
+        .where(Concurso.inscricoes_ate.is_not(None))
+        .where(
+            (Concurso.interesse == FAVORITO)
+            | Concurso.relevancia.in_(("nucleo", "proximo"))
+        )
+        .order_by(Concurso.inscricoes_ate)
+    )
+
+    eventos: list[calendario.Evento] = []
+    with sessao() as s:
+        for concurso in s.scalars(consulta):
+            fim = concurso.inscricoes_ate.astimezone(fuso_local()).date()
+            if fim < hoje:
+                continue
+
+            onde = concurso.municipio or concurso.uf or "local a confirmar"
+            detalhe = [f"{onde}."]
+            if concurso.banca:
+                detalhe.append(f"Banca: {concurso.banca}.")
+            if concurso.salario:
+                detalhe.append(f"Salario: R$ {concurso.salario:,.0f}."
+                               .replace(",", "."))
+            if concurso.motivo_elegibilidade:
+                detalhe.append(concurso.motivo_elegibilidade)
+
+            eventos.append(calendario.Evento(
+                # A url e a chave natural do concurso: o mesmo concurso gera
+                # sempre o mesmo evento, e o calendario atualiza em vez de
+                # duplicar quando o prazo muda.
+                identificador=f"inscricao:{concurso.url}",
+                titulo=f"Ultimo dia de inscricao: {concurso.titulo}",
+                quando=fim,
+                descricao=" ".join(detalhe),
+                url=concurso.url,
+            ))
+
+            if concurso.data_prova:
+                prova = concurso.data_prova.astimezone(fuso_local()).date()
+                if prova >= hoje:
+                    eventos.append(calendario.Evento(
+                        identificador=f"prova:{concurso.url}",
+                        titulo=f"Prova: {concurso.titulo}",
+                        quando=prova,
+                        descricao=" ".join(detalhe),
+                        url=concurso.url,
+                    ))
+
+    return eventos
+
+
+def calendario_ics() -> str:
+    """O arquivo .ics pronto, com os prazos que valem a minha agenda."""
+    return calendario.montar(eventos_do_calendario())

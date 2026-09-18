@@ -464,3 +464,22 @@ def pagina_nao_encontrada(request: Request, excecao: HTTPException):
             "servidor_velho": _codigo_mudou_depois_de_subir(),
         },
     )
+
+
+# --- calendario (fase 2.2) --------------------------------------------------
+
+@app.get("/calendario.ics")
+def calendario_ics():
+    """Os prazos em formato de calendario, para assinar no celular.
+
+    Servido como arquivo, e nao como pagina: o celular reconhece o tipo e
+    oferece importar. O nome termina em .ics porque e por ele que o Android
+    decide qual aplicativo abre.
+    """
+    from fastapi.responses import Response
+
+    return Response(
+        content=servico.calendario_ics(),
+        media_type="text/calendar; charset=utf-8",
+        headers={"Content-Disposition": 'attachment; filename="radar.ics"'},
+    )
