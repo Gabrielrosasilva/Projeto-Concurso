@@ -380,6 +380,39 @@ def parecidas(
 
 
 @app.command()
+def retificacoes(
+    limite: int = typer.Option(20, help="Quantos editais conferir nesta rodada"),
+    avisar: bool = typer.Option(
+        False, "--avisar", help="Manda o que mudou para o Telegram"
+    ),
+) -> None:
+    """Confere se algum edital em pe mudou desde que eu baixei.
+
+    Retificacao muda prazo, vaga e requisito. O manifesto ja guarda o sha256 de
+    cada arquivo: se o mesmo endereco devolve bytes diferentes, o edital foi
+    retificado.
+    """
+    with console.status("Reconferindo os editais..."):
+        resultado = servico.conferir_retificacoes(limite=limite)
+
+    console.print(f"[green]{resultado}[/]")
+    for mudou in resultado.mudaram:
+        console.print()
+        console.print(f"[bold red]RETIFICADO[/] {mudou.titulo}")
+        console.print(f"  [dim]{mudou.arquivo}[/]")
+        console.print(f"  [dim]{mudou.url}[/]")
+
+    if avisar and resultado.mudaram:
+        from radar import avisos
+
+        enviadas = avisos.enviar_varios(
+            [avisos.formatar_retificacao(m) for m in resultado.mudaram]
+        )
+        console.print()
+        console.print(f"[green]{enviadas} aviso(s) enviado(s).[/]")
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

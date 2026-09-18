@@ -337,6 +337,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   "Policia Penal" devolvia Merendeira por ser da mesma banca;
 - a lista de parecidas carrega sempre o motivo ("1 palavra em comum no cargo"),
   e nunca afirma equivalencia: Guarda Patrimonial nao e Guarda Municipal;
+- retificacao de edital e detectada pelo sha256 que o manifesto ja guardava.
+  Depois de acusar, o manifesto E o arquivo em disco passam a valer a versao
+  nova - senao toda conferencia repetiria o alarme, e o acervo ficaria com o
+  edital velho;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -361,9 +365,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      (federal), o Querido Diario quando a API voltar, e o sinal
      "contrataram a banca"
 2.2  PRONTA: `radar calendario` e o link Calendario na web
-2.5  PARCIAL: `radar elegibilidade` le o edital e grava escolaridade,
-     idade, CNH e TAF, inclusive de concurso ABERTO (`radar provas
-     --abertos`). Falta: deteccao de retificacao por hash
+2.5  PRONTA: `radar elegibilidade` le o edital (inclusive de concurso
+     aberto) e `radar retificacoes` acusa edital que mudou, pelo sha256
 3    PRONTA: acervo de FEPESE e IESES com manifesto versionado, e prova
      substituta (`radar parecidas`, e na aba Macetes)
 4    PARCIAL: 5.928 questoes de DUAS bancas, com materia, gabarito e

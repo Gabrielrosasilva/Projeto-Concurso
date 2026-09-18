@@ -1,7 +1,7 @@
 """Regras do sistema: rodar os coletores, gravar sem duplicar, consultar."""
 import logging
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
 from statistics import median
@@ -2102,3 +2102,118 @@ def recado_sobre_o_cargo(cargo: str, parecidas: list) -> str:
     if parecidas:
         return ""
     return substituta.explicar_ausencia(cargo, materias_universais())
+
+
+# --- retificacao de edital (fase 2.5) ---------------------------------------
+
+@dataclass
+class Retificacao:
+    """Um edital que mudou depois de eu ter baixado."""
+
+    concurso_url: str
+    titulo: str
+    arquivo: str
+    url: str
+    sha_antigo: str
+    sha_novo: str
+
+
+@dataclass
+class ResultadoRetificacao:
+    conferidos: int = 0
+    mudaram: list[Retificacao] = field(default_factory=list)
+    falhas: int = 0
+
+    def __str__(self) -> str:
+        if not self.conferidos:
+            return "Nenhum edital em pe para conferir."
+        texto = f"{self.conferidos} edital(is) conferido(s)"
+        if self.mudaram:
+            texto += f", [bold red]{len(self.mudaram)} mudou(ram)[/]"
+        else:
+            texto += ", nenhum mudou"
+        if self.falhas:
+            texto += f", {self.falhas} fora do ar"
+        return texto
+
+
+def _editais_em_pe() -> list[tuple[dict, Concurso]]:
+    """Editais de concurso cuja inscricao ainda nao encerrou.
+
+    So esses valem reconferir: edital de concurso encerrado nao vai mais ser
+    retificado, e cada conferencia custa uma requisicao e um download.
+    """
+    por_concurso = _editais_por_concurso()
+    if not por_concurso:
+        return []
+
+    agora_ = agora()
+    pares: list[tuple[dict, Concurso]] = []
+    with sessao() as s:
+        for concurso in s.scalars(
+            select(Concurso).where(Concurso.url.in_(list(por_concurso)))
+        ):
+            if concurso.inscricoes_ate and concurso.inscricoes_ate < agora_:
+                continue
+            if concurso.situacao == "encerrado":
+                continue
+            for registro in por_concurso[concurso.url]:
+                if registro.get("sha256"):
+                    pares.append((registro, concurso))
+    return pares
+
+
+def conferir_retificacoes(limite: int = 20) -> ResultadoRetificacao:
+    """Baixa de novo os editais em pe e ve se o conteudo mudou.
+
+    O manifesto ja guarda o sha256 de cada arquivo desde a fase 3 - ele existia
+    para reconstruir o acervo noutra maquina. Serve tambem para isto: se o
+    mesmo endereco passa a devolver bytes diferentes, o edital foi retificado.
+
+    Retificacao muda prazo, vaga e requisito. Descobrir isso tarde e o tipo de
+    erro que nao da para corrigir depois.
+    """
+    criar_tabelas()
+    resultado = ResultadoRetificacao()
+    buscador = Buscador()
+
+    for registro, concurso in _editais_em_pe()[:limite]:
+        documento = provas.Documento(
+            tipo=provas.EDITAL,
+            url=registro["url"],
+            arquivo=registro.get("arquivo", ""),
+            banca=registro.get("banca"),
+            municipio=registro.get("municipio"),
+            ano=registro.get("ano"),
+            concurso_url=registro.get("concurso_url"),
+        )
+
+        # `forcar` porque o arquivo ja esta em disco: sem isso, `baixar`
+        # devolveria o sha do que eu tenho e nunca acusaria mudanca.
+        baixado = provas.baixar(documento, buscador, forcar=True)
+        if baixado is None:
+            resultado.falhas += 1
+            continue
+
+        resultado.conferidos += 1
+        if baixado.sha256 == registro["sha256"]:
+            continue
+
+        resultado.mudaram.append(Retificacao(
+            concurso_url=concurso.url,
+            titulo=concurso.titulo,
+            arquivo=registro.get("arquivo", ""),
+            url=registro["url"],
+            sha_antigo=registro["sha256"],
+            sha_novo=baixado.sha256,
+        ))
+
+        # O manifesto passa a valer o arquivo novo, senao a proxima conferencia
+        # acusaria a mesma retificacao de novo.
+        todos = provas.carregar_manifesto()
+        for linha in todos:
+            if linha.get("url") == registro["url"]:
+                linha.update(provas.para_registro(baixado))
+        provas.gravar_manifesto(todos)
+
+    return resultado

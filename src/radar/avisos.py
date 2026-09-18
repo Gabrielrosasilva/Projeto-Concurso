@@ -111,3 +111,18 @@ def enviar_varios(textos: list[str]) -> int:
         if enviar(texto):
             enviadas += 1
     return enviadas
+
+
+def formatar_retificacao(retificacao) -> str:
+    """A mensagem de um edital que mudou.
+
+    Curta de proposito: o que importa e eu abrir o edital e ver o que mudou.
+    Dizer QUANTO mudou seria mentira - o sha256 so diz que mudou.
+    """
+    return (
+        "<b>Edital retificado</b>\n"
+        f"{retificacao.titulo}\n\n"
+        f"Arquivo: {retificacao.arquivo}\n"
+        "Retificacao muda prazo, vaga e requisito. Vale reler.\n\n"
+        f"{retificacao.url}"
+    )

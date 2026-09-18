@@ -928,6 +928,35 @@ resposta:
 Isso nao e consolo: essas materias valem **20 das 30 questoes** de uma prova da
 IESES, e e assim que o simulado ja as trata.
 
+## Edital retificado
+
+```bash
+radar retificacoes            # confere
+radar retificacoes --avisar   # confere e manda o que mudou para o Telegram
+```
+
+Roda tambem no GitHub Actions, junto da coleta diaria.
+
+Retificacao muda prazo, vaga e requisito - e descobrir tarde e o tipo de erro
+que nao da para corrigir depois. O manifesto ja guardava o **sha256** de cada
+arquivo desde a fase 3, para reconstruir o acervo noutra maquina; serve tambem
+para isto: se o mesmo endereco passa a devolver bytes diferentes, o edital foi
+retificado.
+
+Tres cuidados, e os tres tem teste:
+
+1. **so confere edital em pe.** Concurso encerrado nao vai mais ser retificado,
+   e cada conferencia custa uma requisicao e um download;
+2. **o manifesto passa a valer o arquivo novo**, senao toda conferencia
+   seguinte repetiria o mesmo alarme. E o PDF em disco tambem e trocado: nao
+   adianta avisar e deixar o acervo com a versao velha;
+3. **pagina de erro nao vira retificacao.** Erro devolvido com HTTP 200 e
+   comum; sem a checagem de que o arquivo e PDF, o acervo trocaria o edital por
+   HTML e ainda acusaria mudanca.
+
+A mensagem nao diz *o que* mudou, porque o sha256 nao sabe - ela diz que mudou,
+qual arquivo, e manda o link para reler.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

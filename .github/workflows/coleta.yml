@@ -54,6 +54,14 @@ jobs:
           RADAR_TELEGRAM_CHAT_ID: ${{ secrets.RADAR_TELEGRAM_CHAT_ID }}
         run: radar avisar
 
+      # Edital retificado muda prazo, vaga e requisito. O manifesto guarda o
+      # sha256 de cada arquivo, entao da para saber que mudou sem ler o PDF.
+      - name: Conferir retificacao de edital
+        env:
+          RADAR_TELEGRAM_TOKEN: ${{ secrets.RADAR_TELEGRAM_TOKEN }}
+          RADAR_TELEGRAM_CHAT_ID: ${{ secrets.RADAR_TELEGRAM_CHAT_ID }}
+        run: radar retificacoes --avisar
+
       - name: Exportar
         run: radar exportar
 
