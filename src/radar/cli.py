@@ -11,7 +11,7 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
-from radar import acervo, servico
+from radar import acervo, avisos, config, servico
 from radar.util import formatar_data
 
 app = typer.Typer(help="Radar de concursos publicos (uso pessoal)", no_args_is_help=True)
@@ -105,6 +105,60 @@ def listar(
                 f"\n[yellow]Nada perto de voce por enquanto.[/] Ha {fora} "
                 f"concurso(s) em outras regioes: use [bold]radar listar --todos[/]"
             )
+
+
+@app.command()
+def avisar(
+    limite: int = typer.Option(
+        servico.LIMITE_DE_AVISOS, help="Maximo de mensagens nesta rodada"
+    ),
+) -> None:
+    """Manda no Telegram os concursos novos que interessam.
+
+    Avisa nucleo, proximo e indefinida. Cada concurso vira uma mensagem, com o
+    link da fonte junto, e e marcado como avisado para nao repetir amanha.
+
+    Precisa de RADAR_TELEGRAM_TOKEN e RADAR_TELEGRAM_CHAT_ID no .env.
+    """
+    resultado = servico.avisar(limite=limite)
+
+    if not resultado.configurado:
+        console.print(
+            "[yellow]Telegram nao configurado.[/] Preencha no arquivo .env:\n"
+            "  RADAR_TELEGRAM_TOKEN=...   (pegue com o @BotFather)\n"
+            "  RADAR_TELEGRAM_CHAT_ID=... (pegue com o @userinfobot)"
+        )
+        return
+
+    console.print(f"[green]{resultado}[/]")
+
+
+@app.command()
+def testar_telegram() -> None:
+    """Manda uma mensagem de teste, para conferir token e chat_id.
+
+    Nao mexe no banco e nao marca nada como avisado.
+    """
+    if not config.telegram_configurado():
+        console.print(
+            "[red]Falta configurar.[/] No arquivo .env:\n"
+            "  RADAR_TELEGRAM_TOKEN=...   (pegue com o @BotFather)\n"
+            "  RADAR_TELEGRAM_CHAT_ID=... (pegue com o @userinfobot)"
+        )
+        raise typer.Exit(code=1)
+
+    ok = avisos.enviar(
+        "✅ <b>Radar de Concursos</b>\n"
+        "Telegram configurado certo. Os avisos vao chegar aqui."
+    )
+    if ok:
+        console.print("[green]Mensagem enviada.[/] Confira o Telegram.")
+    else:
+        console.print(
+            "[red]Nao consegui enviar.[/] Confira se o token esta certo e se "
+            "voce ja mandou /start para o seu bot."
+        )
+        raise typer.Exit(code=1)
 
 
 @app.command()

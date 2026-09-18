@@ -41,3 +41,19 @@ def url_do_banco() -> str:
     if definida:
         return definida
     return f"sqlite:///{diretorio_dados() / 'radar.db'}"
+
+
+# --- Telegram (fase 2) ------------------------------------------------------
+# Token e chat_id NUNCA ficam no codigo nem no repositorio. Na sua maquina
+# eles moram no .env; no GitHub Actions, em Secrets do repositorio.
+
+def telegram_token() -> str | None:
+    return os.getenv("RADAR_TELEGRAM_TOKEN") or None
+
+
+def telegram_chat_id() -> str | None:
+    return os.getenv("RADAR_TELEGRAM_CHAT_ID") or None
+
+
+def telegram_configurado() -> bool:
+    return bool(telegram_token() and telegram_chat_id())

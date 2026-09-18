@@ -80,6 +80,55 @@ radar reclassificar                 # depois de editar config/regioes.yml
 internet. Incluiu um municipio novo no YAML? Rode isso e os registros antigos
 se corrigem na hora.
 
+### Avisos no Telegram
+
+O radar manda uma mensagem por concurso novo que interessa, com o link da
+fonte junto - a ideia e nao precisar abrir o computador para saber do que se
+trata.
+
+**Configurar, uma vez:**
+
+1. No Telegram, fale com o **@BotFather**, mande `/newbot` e escolha um nome.
+   Ele responde com um **token**.
+2. Fale com o **@userinfobot**. Ele responde com o seu **chat_id** numerico.
+3. Coloque os dois no arquivo `.env`:
+
+   ```
+   RADAR_TELEGRAM_TOKEN=...
+   RADAR_TELEGRAM_CHAT_ID=...
+   ```
+
+4. Mande `/start` para o **seu** bot. O Telegram nao deixa um bot puxar
+   conversa: enquanto voce nao falar com ele, ele nao pode te responder.
+5. Confira:
+
+   ```bash
+   radar testar-telegram
+   ```
+
+**No GitHub Actions**, os mesmos dois valores vao em
+*Settings > Secrets and variables > Actions*, com os mesmos nomes. O `.env`
+esta no `.gitignore` e nunca sobe para o repositorio.
+
+**Quem vira mensagem:** `nucleo`, `proximo` e `indefinida`. Os indefinidos
+entram de proposito - sao os federais e os sem UF, que ainda podem aplicar
+prova em Florianopolis. Melhor dois avisos a toa do que perder o unico que
+interessava. `remoto` e `noticia` nunca viram mensagem.
+
+Cada concurso e avisado **uma vez so**: a data fica em `avisado_em` e a coleta
+de amanha nao repete a de hoje.
+
+**Teto de 10 mensagens por coleta.** Nao e economia, e protecao: se uma regra
+de classificacao quebrar, o estrago fica em 10 mensagens mais um alerta, em
+vez de 200 notificacoes as 6h da manha. O que sobrar continua pendente e sai
+na proxima rodada.
+
+```bash
+radar avisar                # manda o que esta pendente
+radar avisar --limite 3     # teto menor nesta rodada
+radar testar-telegram       # so uma mensagem de teste, nao mexe no banco
+```
+
 ### A interface web
 
 ```bash

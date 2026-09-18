@@ -92,8 +92,8 @@ do edital**. Da tempo de comecar a estudar o padrao da banca.
 
 ## Estado atual
 
-**Fases 1 e 1.5 prontas:** feed RSS coletando, e classificador de relevancia
-funcionando sobre dado real.
+**Fases 1, 1.5 e 2 prontas:** feed RSS coletando, classificador de relevancia
+funcionando sobre dado real, e avisos no Telegram.
 
 ```
 src/radar/
@@ -103,8 +103,9 @@ src/radar/
 ├── servico.py      roda coletores, grava com upsert, classifica, consulta
 ├── regioes.py      le config/regioes.yml: em que anel um municipio esta
 ├── classificador.py  tipo, municipio, salario e relevancia, a partir do titulo
+├── avisos.py       monta e manda a mensagem no Telegram
 ├── util.py         fuso e formatacao de data
-├── cli.py          comandos typer: coletar, listar, web
+├── cli.py          comandos typer: coletar, listar, avisar, web
 ├── collectors/
 │   ├── base.py                  Coletor + ItemColetado; cuida de robots.txt,
 │   │                            User-Agent e atraso entre requisicoes
@@ -133,7 +134,16 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   a pagina e a CLI mostram tudo com --todos;
 - avisos sao por **Telegram**. WhatsApp foi avaliado e descartado: o oficial
   exige conta Meta Business, numero separado e template aprovado para mensagem
-  proativa; o nao oficial arrisca banir meu numero pessoal.
+  proativa; o nao oficial arrisca banir meu numero pessoal;
+- o aviso leva SEMPRE o link da fonte junto;
+- viram mensagem: `nucleo`, `proximo` e `indefinida`. O indefinido entra de
+  proposito - federal sem UF pode aplicar prova em Floripa, e perder um
+  concurso bom e pior que receber dois avisos a toa;
+- cada concurso e avisado uma vez so (coluna `avisado_em`), e o teto e de 10
+  mensagens por coleta. O teto e protecao contra regra quebrada virar 200
+  notificacoes de madrugada;
+- token e chat_id SO em variavel de ambiente: `.env` na maquina, Secrets no
+  Actions. O log nunca imprime a URL da API, porque ela carrega o token.
 
 ## Roadmap
 
@@ -143,7 +153,7 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      (o RSS so entrega o que e recente)
 1.7  Diario Oficial dos Municipios de SC + DOE-SC + DOU
      inclui o sinal "contrataram a banca"
-2    avisos no Telegram + export .ics para o calendario
+2.2  export .ics para o calendario
 2.5  leitura do edital em PDF: local de prova, prazos, salario, escolaridade,
      idade maxima, CNH, TAF + deteccao de retificacao por hash
 3    acervo de provas (FEPESE primeiro) + manifesto no git + prova substituta

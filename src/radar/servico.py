@@ -4,9 +4,11 @@ from dataclasses import dataclass
 
 from sqlalchemy import func, select
 
+from radar import avisos
 from radar.classificador import classificar
 from radar.collectors.base import Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import ConcursosNoBrasil
+from radar import config
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso, agora
 
@@ -211,3 +213,84 @@ def reclassificar() -> dict[str, int]:
             contagem[concurso.relevancia] = contagem.get(concurso.relevancia, 0) + 1
 
     return contagem
+
+
+# --- avisos (fase 2) --------------------------------------------------------
+
+# O que merece uma mensagem no celular. `indefinida` entra de proposito: e o
+# concurso federal ou sem UF, que PODE aplicar prova em Florianopolis. Melhor
+# receber dois avisos a toa do que perder o unico que interessava.
+RELEVANCIA_AVISO = ("nucleo", "proximo", "indefinida")
+
+# Teto de mensagens por coleta. Nao e economia: e protecao. Se uma regra de
+# classificacao quebrar, o estrago fica em 10 mensagens e um alerta, em vez de
+# 200 notificacoes as 6h da manha.
+LIMITE_DE_AVISOS = 10
+
+
+@dataclass
+class ResultadoAviso:
+    enviados: int = 0
+    pendentes: int = 0     # passaram no filtro mas ficaram fora do limite
+    configurado: bool = True
+
+    def __str__(self) -> str:
+        if not self.configurado:
+            return "Telegram nao configurado: nenhum aviso enviado."
+        if not self.enviados and not self.pendentes:
+            return "Nada novo para avisar."
+        texto = f"{self.enviados} aviso(s) enviado(s)"
+        if self.pendentes:
+            texto += f", {self.pendentes} acima do limite"
+        return texto
+
+
+def _nao_avisados() -> list[Concurso]:
+    """Concursos que interessam e que ainda nao viraram mensagem."""
+    consulta = (
+        select(Concurso)
+        .where(Concurso.avisado_em.is_(None))
+        .where(Concurso.tipo != "noticia")
+        .where(Concurso.relevancia.in_(RELEVANCIA_AVISO))
+        .order_by(Concurso.publicado_em.desc().nullslast())
+    )
+    with sessao() as s:
+        return list(s.scalars(consulta))
+
+
+def avisar(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
+    """Manda no Telegram os concursos novos que interessam.
+
+    Cada concurso vira uma mensagem e e marcado como avisado, para a coleta de
+    amanha nao repetir o aviso de hoje.
+    """
+    criar_tabelas()
+
+    if not config.telegram_configurado():
+        return ResultadoAviso(configurado=False)
+
+    candidatos = _nao_avisados()
+    if not candidatos:
+        return ResultadoAviso()
+
+    escolhidos = candidatos[:limite]
+    sobraram = len(candidatos) - len(escolhidos)
+
+    enviados = avisos.enviar_varios([avisos.formatar(c) for c in escolhidos])
+
+    # So marca como avisado o que realmente saiu. Se o Telegram estava fora do
+    # ar, o concurso continua pendente e a proxima coleta tenta de novo.
+    if enviados:
+        urls = [c.url for c in escolhidos[:enviados]]
+        with sessao() as s:
+            for concurso in s.scalars(select(Concurso).where(Concurso.url.in_(urls))):
+                concurso.avisado_em = agora()
+
+    if sobraram:
+        avisos.enviar(
+            f"⚠️ Mais {sobraram} concurso(s) passaram no filtro nesta "
+            f"coleta.\n\nIsso costuma indicar erro de regra de "
+            f"classificacao. Veja todos com <code>radar listar --todos</code>."
+        )
+
+    return ResultadoAviso(enviados=enviados, pendentes=sobraram)
