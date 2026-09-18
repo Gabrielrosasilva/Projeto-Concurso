@@ -199,6 +199,10 @@ def carga_inicial(
 @app.command()
 def provas(
     limite: int = typer.Option(20, help="Quantos concursos ler nesta rodada"),
+    abertos: bool = typer.Option(
+        False, "--abertos",
+        help="Inclui concurso ainda em andamento, para pegar o edital dele",
+    ),
 ) -> None:
     """Monta o acervo: le os hotsites e baixa edital, prova e gabarito.
 
@@ -214,7 +218,7 @@ def provas(
     )
 
     with console.status("Montando o acervo..."):
-        resultado = servico.montar_acervo(limite=limite)
+        resultado = servico.montar_acervo(limite=limite, abertos=abertos)
 
     console.print(f"[green]{resultado}[/]")
 

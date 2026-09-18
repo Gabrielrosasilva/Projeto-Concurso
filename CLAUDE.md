@@ -304,6 +304,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   So conta "Teste de Aptidao Fisica de carater eliminatorio";
 - edital que nao rende texto e apontado como digitalizado em imagem, nunca
   tratado como "nao exige nada". Sao 3 dos 32 editais do acervo;
+- o hotsite da banca e extraido da PAGINA DO AGREGADOR: e a ponte que leva
+  concurso vindo do feed ate o acervo. Cada banca identifica o concurso num
+  lugar do endereco - a FEPESE no subdominio, a FCC no caminho -, e entre
+  varias telas do mesmo hotsite vale a de caminho mais curto;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -328,10 +332,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      (federal), o Querido Diario quando a API voltar, e o sinal
      "contrataram a banca"
 2.2  export .ics para o calendario
-2.5  PARCIAL: `radar elegibilidade` le o edital do acervo e grava
-     escolaridade, idade, CNH e TAF. Falta: baixar o edital de concurso
-     ABERTO (hoje o acervo so tem de encerrado) e deteccao de
-     retificacao por hash
+2.5  PARCIAL: `radar elegibilidade` le o edital e grava escolaridade,
+     idade, CNH e TAF, inclusive de concurso ABERTO (`radar provas
+     --abertos`). Falta: deteccao de retificacao por hash
 3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
      Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
      parecida - mesma banca e mesmo cargo em outro lugar)

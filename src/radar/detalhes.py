@@ -19,11 +19,13 @@ Regra da casa aqui tambem vale: na duvida, deixa nulo. Data de inscricao
 errada e pior que data faltando - uma some do radar, a outra faz voce achar
 que tem prazo quando nao tem.
 """
+import html as html_lib
 import logging
 import re
 import unicodedata
 from dataclasses import dataclass
 from datetime import datetime
+from urllib.parse import urlsplit
 
 from bs4 import BeautifulSoup
 
@@ -83,6 +85,7 @@ class Detalhes:
     inscricoes_ate: datetime | None = None
     banca: str | None = None
     municipio: str | None = None
+    hotsite: str | None = None
 
 
 def _sem_acento(texto: str) -> str:
@@ -263,6 +266,67 @@ def achar_municipio(texto: str, municipios_conhecidos: dict[str, str]) -> str | 
     return None
 
 
+# Caminho que e lista institucional da banca, e nao hotsite de um concurso. A
+# pagina /concursos/ da FEPESE traz os 520 concursos dela; o edital de um so
+# nao esta ali.
+CAMINHOS_GENERICOS = ("", "/", "/concursos", "/concursos/", "/index.php", "/home")
+
+# Arquivo no fim do endereco: e pagina dentro do hotsite, e nao o hotsite.
+# href="..." com aspas simples ou duplas.
+PADRAO_HREF = re.compile(r"""href=["']([^"']+)["']""")
+
+PADRAO_ARQUIVO = re.compile(r"/[^/]+\.(?:html?|php|aspx?)$", re.IGNORECASE)
+
+
+def achar_hotsite(html: str) -> str | None:
+    """O endereco onde a banca publica os documentos deste concurso.
+
+    A pagina do agregador linka o hotsite da banca - e dali que o acervo tira
+    edital, prova e gabarito. Sem isto, concurso vindo do feed de noticias
+    nunca chega ao acervo: so FEPESE e IESES trazem o hotsite no proprio dado.
+
+    Cada banca identifica o concurso num lugar diferente do endereco, e os dois
+    casos sao reais:
+
+      * no SUBDOMINIO, e a FEPESE faz assim -
+        "https://2026cpeducaeesj.fepese.org.br/?go=edital&mn=..." vira
+        "https://2026cpeducaeesj.fepese.org.br";
+      * no CAMINHO, e a FCC faz assim -
+        "https://www.concursosfcc.com.br/concursos/sefsc126/index.html" vira
+        "https://www.concursosfcc.com.br/concursos/sefsc126".
+
+    Devolver so o dominio no segundo caso perderia justamente o pedaco que diz
+    de que concurso se trata.
+    """
+    marcas = {marca.strip() for marcas in BANCAS.values() for marca in marcas}
+    candidatos: list[str] = []
+
+    for endereco in PADRAO_HREF.findall(html or ""):
+        limpo = html_lib.unescape(endereco).strip()
+        if not limpo.lower().startswith(("http://", "https://")):
+            continue
+
+        partes = urlsplit(limpo)
+        dominio = _sem_acento(partes.netloc).lower()
+        if not any(marca and marca in dominio for marca in marcas):
+            continue
+
+        caminho = PADRAO_ARQUIVO.sub("", partes.path).rstrip("/")
+        if caminho.lower() in CAMINHOS_GENERICOS:
+            # Sem caminho proprio, o concurso so pode estar no subdominio.
+            if partes.path.rstrip("/").lower() in ("/concursos", "/index.php", "/home"):
+                continue
+            candidatos.append(f"{partes.scheme}://{partes.netloc}")
+        else:
+            candidatos.append(f"{partes.scheme}://{partes.netloc}{caminho}")
+
+    # O mais curto vence. A mesma pagina costuma linkar varias telas do
+    # mesmo hotsite - edital, inscricao, provas - e o acervo precisa da
+    # RAIZ. De Sao Jose 2026 saiu ".../inscricao" na primeira versao,
+    # so porque foi o primeiro link que apareceu no HTML.
+    return min(candidatos, key=len) if candidatos else None
+
+
 def extrair(html: str, ano_padrao: int, municipios: dict[str, str]) -> Detalhes:
     texto = texto_da_pagina(html)
     inicio, fim = achar_periodo_de_inscricao(texto, ano_padrao)
@@ -271,4 +335,5 @@ def extrair(html: str, ano_padrao: int, municipios: dict[str, str]) -> Detalhes:
         inscricoes_ate=fim,
         banca=achar_banca(texto),
         municipio=achar_municipio(texto, municipios),
+        hotsite=achar_hotsite(html),
     )

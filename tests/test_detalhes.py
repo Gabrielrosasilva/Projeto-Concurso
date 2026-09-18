@@ -171,3 +171,50 @@ def test_nome_seguido_de_outra_palavra_ainda_e_reconhecido():
 
 def test_municipio_que_nao_interessa_e_ignorado():
     assert detalhes.achar_municipio("concurso em tunapolis sc", MUNICIPIOS) is None
+
+
+# --- o hotsite da banca, que liga o concurso ao acervo ----------------------
+
+def test_acha_o_hotsite_no_subdominio():
+    """A FEPESE poe um subdominio por concurso. Foi assim que o concurso de
+    Sao Jose 2026, vindo do feed de noticias, chegou ao acervo."""
+    html = ('<a href="https://2026cpeducaeesj.fepese.org.br/?go=edital&amp;'
+            'mn=abc&amp;edital=1">Edital</a>')
+
+    assert detalhes.achar_hotsite(html) == "https://2026cpeducaeesj.fepese.org.br"
+
+
+def test_acha_o_hotsite_no_caminho():
+    """A FCC identifica o concurso no caminho. Devolver so o dominio perderia
+    justamente o pedaco que diz de que concurso se trata."""
+    html = '<a href="https://www.concursosfcc.com.br/concursos/sefsc126/index.html">FCC</a>'
+
+    assert detalhes.achar_hotsite(html) == "https://www.concursosfcc.com.br/concursos/sefsc126"
+
+
+def test_pagina_institucional_da_banca_nao_e_hotsite():
+    """fepese.org.br/concursos/ lista os 520 concursos dela: o edital de um so
+    nao esta ali."""
+    assert detalhes.achar_hotsite('<a href="https://fepese.org.br/concursos/">lista</a>') is None
+
+
+def test_link_que_nao_e_de_banca_e_ignorado():
+    html = ('<a href="https://gmpg.org/xfn/11">perfil</a>'
+            '<a href="https://static.dom.sc.gov.br/?r=site/atoView">diario</a>')
+
+    assert detalhes.achar_hotsite(html) is None
+
+
+def test_pagina_sem_link_nenhum():
+    assert detalhes.achar_hotsite("<p>nada</p>") is None
+    assert detalhes.achar_hotsite("") is None
+
+
+def test_entre_varias_telas_do_hotsite_vale_a_raiz():
+    """A mesma pagina linka edital, inscricao e provas do mesmo hotsite. O
+    acervo precisa da raiz: de Sao Jose 2026 saiu ".../inscricao" na primeira
+    versao, so porque foi o primeiro link do HTML."""
+    html = ('<a href="https://2026cpeducaeesj.fepese.org.br/inscricao/#!/edital/abc">Inscrever</a>'
+            '<a href="https://2026cpeducaeesj.fepese.org.br/?go=edital&amp;edital=1">Edital</a>')
+
+    assert detalhes.achar_hotsite(html) == "https://2026cpeducaeesj.fepese.org.br"

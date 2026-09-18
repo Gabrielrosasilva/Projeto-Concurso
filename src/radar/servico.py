@@ -637,6 +637,12 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
             if achado.banca and not concurso.banca:
                 concurso.banca = achado.banca
                 resultado.com_banca += 1
+            if achado.hotsite and not _hotsite(concurso):
+                # E o que liga o concurso ao acervo: sem hotsite, quem vem do
+                # feed de noticias nunca rende edital nem prova.
+                extra = dict(concurso.extra or {})
+                extra["hotsite"] = achado.hotsite
+                concurso.extra = extra
 
             # Municipio novo muda o anel: e o caminho da SEFAZ SC sair de
             # indefinida para nucleo.
@@ -859,7 +865,7 @@ PRIORIDADE_ACERVO = (
 )
 
 
-def _concursos_com_prova(limite: int) -> list[Concurso]:
+def _concursos_com_prova(limite: int, abertos: bool = False) -> list[Concurso]:
     """Quem ainda nao esta no acervo, na ordem de prioridade.
 
     O manifesto e a memoria: concurso cuja url ja aparece la nao e lido de
@@ -882,6 +888,9 @@ def _concursos_com_prova(limite: int) -> list[Concurso]:
                 .where(
                     (Concurso.situacao == "encerrado")
                     | (Concurso.fonte == "ieses")
+                    # Concurso que ainda nao aconteceu nao tem prova, mas TEM
+                    # edital - e o edital e o que diz se eu posso prestar.
+                    | (abertos and Concurso.situacao != "encerrado")
                 )
                 .where(condicao())
                 .order_by(Concurso.publicado_em.desc().nullslast())
@@ -933,7 +942,7 @@ def _documentos_do_hotsite(
     return encontrados
 
 
-def montar_acervo(limite: int = 20) -> ResultadoAcervo:
+def montar_acervo(limite: int = 20, abertos: bool = False) -> ResultadoAcervo:
     """Le os hotsites e baixa edital, prova e gabarito.
 
     Uma requisicao por pagina do hotsite e uma por PDF, todas com a pausa da
@@ -943,7 +952,7 @@ def montar_acervo(limite: int = 20) -> ResultadoAcervo:
     criar_tabelas()
     resultado = ResultadoAcervo()
 
-    escolhidos = _concursos_com_prova(limite)
+    escolhidos = _concursos_com_prova(limite, abertos)
     if not escolhidos:
         return resultado
 

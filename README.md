@@ -770,8 +770,36 @@ mental, verificada por junta medica oficial" - isso e exame admissional. O TAF,
 que e o que elimina em concurso policial, aparece como "Teste de Aptidao Fisica
 de carater eliminatorio". So o segundo conta.
 
-Nos 32 editais do acervo: 23 com vaga de superior, 15 exigindo CNH, 13 com
-idade minima declarada, 2 com idade maxima, 1 com teste fisico.
+### Como o edital de concurso ABERTO chega aqui
+
+O acervo comeca pelo concurso encerrado, que e quem tem prova publicada. Mas a
+elegibilidade interessa justamente no que esta aberto - e ai faltava uma ponte.
+
+A ponte estava na pagina do agregador: ela **linka o hotsite da banca**. Dali
+sai o edital. `radar detalhar` passou a guardar esse endereco, e
+`radar provas --abertos` baixa o edital de quem ainda esta em andamento.
+
+Cada banca identifica o concurso num lugar diferente do endereco, e os dois
+casos sao reais:
+
+* no **subdominio**, como a FEPESE faz -
+  `https://2026cpeducaeesj.fepese.org.br/?go=edital` vira
+  `https://2026cpeducaeesj.fepese.org.br`;
+* no **caminho**, como a FCC faz -
+  `https://www.concursosfcc.com.br/concursos/sefsc126/index.html` vira
+  `https://www.concursosfcc.com.br/concursos/sefsc126`.
+
+Devolver so o dominio no segundo caso perderia justamente o pedaco que diz de
+que concurso se trata. E quando a mesma pagina linka varias telas do mesmo
+hotsite - edital, inscricao, provas -, vale a mais curta: de Sao Jose 2026 saiu
+`.../inscricao` na primeira versao, so porque foi o primeiro link do HTML.
+
+Com isso, os concursos abertos perto de casa passaram a ter exigencias lidas.
+Um achado da primeira rodada: **Brusque 2026 tem prova de aptidao fisica e
+exige CNH categoria A** - perfil de guarda municipal, que esta na minha lista.
+
+Nos editais do acervo: 23 com vaga de superior, 15 exigindo CNH, 13 com idade
+minima declarada, 2 com idade maxima, 3 com teste fisico.
 
 ### Avisos no Telegram
 
