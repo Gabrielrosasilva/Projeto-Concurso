@@ -801,6 +801,48 @@ exige CNH categoria A** - perfil de guarda municipal, que esta na minha lista.
 Nos editais do acervo: 23 com vaga de superior, 15 exigindo CNH, 13 com idade
 minima declarada, 2 com idade maxima, 3 com teste fisico.
 
+## Meu perfil, e o que eu anoto
+
+### O campo de notas
+
+Cada concurso tem um "+ anotar" que abre uma caixa de texto. E onde fica o que
+nenhuma fonte sabe: "conversei com quem fez em 2022", "prova cai no mesmo dia
+da outra", "conferir se aceita Sistemas de Informacao".
+
+Como o favorito, **este campo e meu**: a coleta nunca o sobrescreve.
+
+### O perfil, em config/perfil.yml
+
+```yaml
+ano_de_nascimento:
+escolaridade: superior
+formacao: Sistemas de Informacao
+cnh: []
+```
+
+Com ele, o radar deixa de so mostrar o que o edital pede e passa a responder
+**se eu sirvo para a vaga**. Na tela, o motivo vem junto:
+
+```
+Vagas de nivel superior, medio, fundamental; exige CNH categoria A;
+tem teste fisico | tenho superior, que atende as vagas de superior,
+medio, fundamental
+```
+
+Tres regras, e as tres sao a mesma ideia:
+
+1. **campo em branco quer dizer "nao sei", e nao "nao tenho".** Sem o ano de
+   nascimento, um edital com idade maxima nao vira "inelegivel": vira
+   "elegivel" com o aviso de que ha um teto e eu nao informei minha idade;
+2. **escolaridade e piso, e nao teto.** Quem tem superior atende vaga de medio
+   e de fundamental. O contrario nao vale;
+3. **CNH avisa, mas nunca barra.** Um edital pede CNH em algumas vagas e nao
+   em outras, e o radar guarda um registro por concurso: barrar o concurso
+   inteiro por causa de uma vaga seria errado.
+
+So dois fatos tornam um concurso `inelegivel`: idade acima do teto declarado,
+ou nenhuma vaga no nivel que eu tenho.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

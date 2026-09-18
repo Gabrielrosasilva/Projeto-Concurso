@@ -554,3 +554,67 @@ def test_o_selo_de_salario_nao_usa_a_classe_do_estado_vazio(cliente):
     texto = cliente.get("/").text
     assert "selo dinheiro sem-valor" in texto
     assert "selo dinheiro vazio" not in texto
+
+
+# --- minha anotacao sobre o concurso ----------------------------------------
+
+def test_gravar_e_ler_a_anotacao(banco_temporario):
+    (ident,) = _semear(_concurso("https://a.test/nota"))
+
+    servico.definir_notas(ident, "conferir se aceita Sistemas de Informacao")
+
+    with sessao() as s:
+        assert "Sistemas" in s.get(Concurso, ident).notas
+
+
+def test_anotacao_vazia_apaga(banco_temporario):
+    (ident,) = _semear(_concurso("https://a.test/nota"))
+    servico.definir_notas(ident, "alguma coisa")
+
+    servico.definir_notas(ident, "   ")
+
+    with sessao() as s:
+        assert s.get(Concurso, ident).notas is None
+
+
+def test_anotar_concurso_que_nao_existe_nao_quebra(banco_temporario):
+    assert servico.definir_notas(99999, "oi") is None
+
+
+def test_a_coleta_nao_sobrescreve_a_minha_anotacao(banco_temporario):
+    """Este campo e meu, como o favorito."""
+    from radar.collectors.base import ItemColetado
+
+    (ident,) = _semear(_concurso("https://a.test/nota"))
+    servico.definir_notas(ident, "minha nota")
+
+    with sessao() as s:
+        servico._gravar(s, ItemColetado(
+            titulo="Titulo corrigido pela fonte", url="https://a.test/nota", uf="SC",
+        ), fonte="teste")
+
+    with sessao() as s:
+        concurso = s.get(Concurso, ident)
+        assert concurso.titulo == "Titulo corrigido pela fonte"
+        assert concurso.notas == "minha nota"
+
+
+def test_a_caixa_de_anotacao_abre_na_tela(cliente):
+    (ident,) = _semear(_concurso("https://a.test/nota"))
+
+    assert "+ anotar" in cliente.get("/").text
+    assert 'name="notas"' in cliente.get(f"/?anotar={ident}").text
+
+
+def test_gravar_a_anotacao_pela_tela(cliente):
+    (ident,) = _semear(_concurso("https://a.test/nota"))
+
+    resposta = cliente.post(
+        "/notas",
+        data={"concurso_id": ident, "notas": "prova no mesmo dia da outra",
+              "voltar": "/"},
+        follow_redirects=False,
+    )
+
+    assert resposta.status_code == 303
+    assert "prova no mesmo dia da outra" in cliente.get("/").text

@@ -13,6 +13,7 @@ from radar import (
     detalhes,
     edital_ieses,
     elegibilidade as leitor_de_elegibilidade,
+    perfil as meu_perfil,
     macetes,
     provas,
     provas_ieses,
@@ -784,6 +785,24 @@ def atualizar_situacoes() -> dict[str, int]:
                 contagem[nova] = contagem.get(nova, 0) + 1
 
     return contagem
+
+
+def definir_notas(concurso_id: int, texto: str | None) -> Concurso | None:
+    """Grava a minha anotacao sobre o concurso.
+
+    Este campo e MEU: a coleta nunca o sobrescreve, como acontece com
+    `interesse`. E onde fica o que nenhuma fonte sabe - "conversei com quem
+    fez em 2022", "prova cai no mesmo dia da outra", "conferir se aceita
+    Sistemas de Informacao".
+    """
+    criar_tabelas()
+    limpo = (texto or "").strip()
+    with sessao() as s:
+        concurso = s.get(Concurso, concurso_id)
+        if concurso is None:
+            return None
+        concurso.notas = limpo or None
+        return concurso
 
 
 def definir_salario(concurso_id: int, valor: float | None) -> Concurso | None:
@@ -1933,10 +1952,16 @@ def _gravar_exigencias(concurso: Concurso, exigencias) -> None:
     if exigencias.niveis:
         concurso.escolaridade = ", ".join(exigencias.niveis)
     concurso.idade_maxima = exigencias.idade_maxima
-    concurso.elegibilidade = (
-        "elegivel" if exigencias.tem_superior else "a_confirmar"
-    )
-    concurso.motivo_elegibilidade = leitor_de_elegibilidade.resumir(exigencias)[:300]
+
+    # O veredito cruza o edital com config/perfil.yml. Sem perfil preenchido
+    # ele fica em "a confirmar", que e o certo: campo em branco quer dizer
+    # "nao sei", e nao "nao tenho".
+    veredito = meu_perfil.avaliar(exigencias)
+    concurso.elegibilidade = veredito.situacao
+    resumo = leitor_de_elegibilidade.resumir(exigencias)
+    if veredito.motivo:
+        resumo = f"{resumo} | {veredito.motivo}"
+    concurso.motivo_elegibilidade = resumo[:300]
 
     # CNH e teste fisico nao tem coluna propria, e nao vale criar uma agora: o
     # que interessa e ver na tela, e o `extra` ja guarda o que a fonte manda.

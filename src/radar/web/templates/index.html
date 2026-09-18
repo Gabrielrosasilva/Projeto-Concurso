@@ -213,6 +213,22 @@
     form.salario input{padding:.15rem .4rem;font-size:.72rem;width:6.5rem;
       border-radius:6px}
     form.salario button{padding:.15rem .5rem;font-size:.72rem;border-radius:6px}
+
+    /* Minha anotacao sobre o concurso. Fica abaixo dos selos, ocupando a
+       largura do cartao: o texto costuma ser uma frase inteira, e nao um
+       valor curto como o salario. */
+    .nota{margin-top:.5rem;font-size:.84rem;background:var(--fundo);
+      border-left:3px solid var(--borda);border-radius:0 6px 6px 0;
+      padding:.45rem .7rem;white-space:pre-wrap}
+    .nota .rot{color:var(--suave);font-size:.72rem;display:block}
+    form.nota-edicao{margin-top:.5rem;display:grid;gap:.35rem}
+    form.nota-edicao textarea{font:inherit;font-size:.84rem;padding:.45rem .6rem;
+      border:1px solid var(--borda);border-radius:8px;background:var(--cartao);
+      color:var(--texto);resize:vertical;min-height:3.6rem;width:100%}
+    form.nota-edicao .acoes{display:flex;gap:.5rem;align-items:center}
+    form.nota-edicao button{padding:.25rem .8rem;font-size:.78rem;border-radius:6px}
+    .anotar{font-size:.76rem;color:var(--azul);text-decoration:none;
+      margin-top:.4rem;display:inline-block}
     form.salario a{font-size:.72rem;color:var(--suave);text-decoration:none}
 
     .etapas{display:flex;flex-wrap:wrap;gap:.3rem;list-style:none;padding:0;
@@ -329,6 +345,28 @@
 
       <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
     </div>
+
+    {# Minha anotacao. Este campo e meu: a coleta nunca o sobrescreve. #}
+    {% if anotar == c.id %}
+      <form class="nota-edicao" method="post" action="/notas">
+        <input type="hidden" name="concurso_id" value="{{ c.id }}">
+        <input type="hidden" name="voltar" value="{{ url_sem_editar }}">
+        <textarea name="notas" placeholder="O que eu preciso lembrar deste concurso"
+                  aria-label="Minha anotacao" autofocus>{{ c.notas or '' }}</textarea>
+        <div class="acoes">
+          <button type="submit">Salvar</button>
+          <a href="{{ url_sem_editar }}">cancelar</a>
+        </div>
+      </form>
+    {% elif c.notas %}
+      <div class="nota">
+        <span class="rot">Minha anotacao</span>{{ c.notas }}
+        <a class="lapis" href="{{ url_com_anotar }}{{ c.id }}"
+           title="Editar a anotacao" aria-label="Editar a anotacao">&#9998;</a>
+      </div>
+    {% else %}
+      <a class="anotar" href="{{ url_com_anotar }}{{ c.id }}">+ anotar</a>
+    {% endif %}
 
     {% if favoritos %}
       {# No mural detalhado vale o caminho inteiro. Toda etapa antes da atual

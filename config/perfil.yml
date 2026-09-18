@@ -1,27 +1,22 @@
-# Seu perfil, usado para decidir se um concurso e elegivel para voce.
+# Quem eu sou, para o radar cruzar com o que o edital exige.
 #
-# AINDA NAO E LIDO POR CODIGO NENHUM: o filtro de elegibilidade e a fase 2.5,
-# porque depende de ler o PDF do edital. Esta aqui para voce ja preencher e
-# revisar o formato.
+# O radar ja sabe ONDE a prova e aplicada. Com este arquivo ele passa a saber
+# se EU sirvo para a vaga, em vez de so mostrar o que o edital pede.
 #
-# Este arquivo VAI para o git (o repositorio e privado e so seu). Se algum dia
-# deixar de ser, mova para .env.
+# Campo em branco quer dizer "nao sei" - e nao "nao tenho". O radar nunca
+# conclui nada a partir de campo vazio: ele diz "a confirmar" e deixa comigo.
 
-nascimento: 1900-01-01        # TROCAR. Usado para checar idade maxima.
-escolaridade: superior        # fundamental | medio | superior
+# Ano em que eu nasci. Serve para a idade maxima que alguns editais poem -
+# concurso de carreira policial costuma ter.
+ano_de_nascimento:
+
+# O maior nivel que eu concluí: superior, medio ou fundamental.
+escolaridade: superior
+
+# Em que eu me formei. Importa porque muito cargo pede area especifica, e o
+# que me serve e o que aceita "superior em qualquer area".
 formacao: Sistemas de Informacao
-cnh: B                        # deixe vazio se nao tiver
 
-salario_desejado: 5000        # nao e filtro: concurso abaixo disso aparece,
-                              # so ranqueado mais embaixo
-
-# Ordem de preferencia. Quanto mais em cima, maior o destaque no radar.
-# Nenhum concurso e descartado por nao estar nesta lista.
-cargos_prioritarios:
-  - Policia Penal
-  - Guarda Municipal
-  - Policia Civil
-  - Policia Penal Federal
-  - Bombeiro Militar
-  - Oficial de Bombeiros
-  - Policia Cientifica
+# As categorias de CNH que eu tenho, em lista. Exemplo: [B]
+# Vazio = nao tenho, ou nao informei.
+cnh: []

@@ -109,6 +109,7 @@ src/radar/
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── elegibilidade.py  le o edital: escolaridade, idade, CNH e teste fisico
+├── perfil.py       le config/perfil.yml e cruza com o que o edital exige
 ├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
 ├── provas_ieses.py como achar os documentos no hotsite da IESES
 ├── questoes.py     separa o caderno da FEPESE em questoes
@@ -308,6 +309,15 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   concurso vindo do feed ate o acervo. Cada banca identifica o concurso num
   lugar do endereco - a FEPESE no subdominio, a FCC no caminho -, e entre
   varias telas do mesmo hotsite vale a de caminho mais curto;
+- no perfil, campo em branco quer dizer "NAO SEI", e nunca "nao tenho". Sem o
+  ano de nascimento, edital com idade maxima nao vira inelegivel: vira
+  elegivel com aviso. So barram dois fatos - idade acima do teto declarado e
+  nenhuma vaga no nivel que eu tenho;
+- escolaridade e piso, nao teto: quem tem superior atende vaga de medio e de
+  fundamental;
+- CNH avisa mas nunca barra: o edital pede CNH em algumas vagas e nao em
+  outras, e o radar guarda um registro por concurso;
+- notas sao minhas, como o favorito: a coleta nunca sobrescreve;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -325,8 +335,8 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 ## Roadmap
 
 ```
-1.55 FALTA: perfil/elegibilidade (idade, CNH, escolaridade) e campo de
-     notas. Favoritos e filtro de remuneracao ja estao prontos
+1.55 PRONTA: campo de notas na tela e perfil em config/perfil.yml,
+     cruzado com o que o edital exige
 1.7  PARCIAL: FEPESE (fonte 2) e IESES (fonte 3). O DOM/SC ficou de fora
      porque o robots.txt dele proibe robo; ver README. Falta: DOU
      (federal), o Querido Diario quando a API voltar, e o sinal

@@ -96,8 +96,17 @@ def _url_base_sem(request: Request, *parametros: str) -> str:
     return base + "?" + ("&".join(restante) + "&" if restante else "")
 
 
-def _url_sem(request: Request, parametro: str) -> str:
+def _url_sem(request, parametro: str) -> str:
     """A URL atual sem um parametro. Usado para fechar o campo de edicao."""
+    if isinstance(request, str):
+        # Ja e uma URL montada: tira o parametro dela do jeito mais simples.
+        caminho, _, consulta = request.partition("?")
+        restante = [
+            pedaco for pedaco in consulta.split("&")
+            if pedaco and not pedaco.startswith(parametro + "=")
+        ]
+        return caminho + ("?" + "&".join(restante) if restante else "")
+
     restante = [
         f"{chave}={valor}"
         for chave, valor in request.query_params.multi_items()
@@ -106,10 +115,26 @@ def _url_sem(request: Request, parametro: str) -> str:
     return request.url.path + ("?" + "&".join(restante) if restante else "")
 
 
-def _url_com_editar(request: Request) -> str:
-    """Prefixo pronto para receber o id: .../?...&editar="""
-    base = _url_sem(request, "editar")
-    return base + ("&" if "?" in base else "?") + "editar="
+def _url_com(request: Request, parametro: str) -> str:
+    """Prefixo pronto para receber o id: .../?...&editar=
+
+    O parametro que ja estiver na URL sai antes, senao clicar em "anotar" com
+    um campo de salario aberto deixaria os dois abertos ao mesmo tempo.
+    """
+    base = _url_sem(_url_sem_pedido(request, "editar", "anotar"), parametro)
+    return base + ("&" if "?" in base else "?") + parametro + "="
+
+
+def _url_sem_pedido(request: Request, *parametros: str):
+    """A URL de agora sem nenhum dos parametros dados, como objeto de consulta."""
+    restante = [
+        (chave, valor)
+        for chave, valor in request.query_params.multi_items()
+        if chave not in parametros
+    ]
+    return request.url.path + (
+        "?" + "&".join(f"{c}={v}" for c, v in restante) if restante else ""
+    )
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -127,6 +152,7 @@ def index(
     salario_min: str | None = None,
     salario_max: str | None = None,
     editar: str | None = None,
+    anotar: str | None = None,
 ):
     """Os campos numericos chegam como TEXTO de proposito.
 
@@ -139,6 +165,7 @@ def index(
     minimo = converter_valor(salario_min)
     maximo = converter_valor(salario_max)
     cartao_em_edicao = int(editar) if (editar or "").strip().isdigit() else None
+    cartao_anotando = int(anotar) if (anotar or "").strip().isdigit() else None
 
     if noticias:
         # A aba de noticias nao filtra nada: quem procura "PM" quer saber de
@@ -198,8 +225,10 @@ def index(
             "editar": cartao_em_edicao,
             # A URL de agora, com e sem o parametro `editar`: uma abre o campo
             # no cartao certo, a outra fecha e volta para a lista limpa.
-            "url_com_editar": _url_com_editar(request),
-            "url_sem_editar": _url_sem(request, "editar"),
+            "url_com_editar": _url_com(request, "editar"),
+            "url_sem_editar": _url_sem_pedido(request, "editar", "anotar"),
+            "anotar": cartao_anotando,
+            "url_com_anotar": _url_com(request, "anotar"),
             "url_atual": str(request.url.path) + (
                 "?" + str(request.url.query) if request.url.query else ""
             ),
@@ -235,6 +264,18 @@ def salario(
     campo ao classificador.
     """
     servico.definir_salario(concurso_id, converter_valor(salario))
+    destino = voltar if voltar.startswith("/") else "/"
+    return RedirectResponse(destino, status_code=303)
+
+
+@app.post("/notas")
+def notas(
+    concurso_id: int = Form(...),
+    notas: str = Form(""),
+    voltar: str = Form("/"),
+):
+    """Grava a minha anotacao. Campo vazio apaga a nota."""
+    servico.definir_notas(concurso_id, notas)
     destino = voltar if voltar.startswith("/") else "/"
     return RedirectResponse(destino, status_code=303)
 
