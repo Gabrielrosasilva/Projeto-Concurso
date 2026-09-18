@@ -307,6 +307,26 @@
       {% endif %}
 
       <span class="selo neutro"><span class="rot">Tipo:</span> {{ c.tipo }}</span>
+
+      {# O que o edital exige. So aparece quando alguem leu o PDF: sem leitura,
+         um selo "sem CNH" seria mentira, e nao ausencia de informacao. #}
+      {% if c.escolaridade %}
+        <span class="selo {{ 'aberta' if 'superior' in c.escolaridade else 'neutro' }}">
+          <span class="rot">Vagas de nivel:</span> {{ c.escolaridade }}</span>
+      {% endif %}
+      {% set exig = (c.extra or {}).get('exigencias') or {} %}
+      {% if exig.cnh %}
+        <span class="selo neutro"><span class="rot">Exige CNH:</span>
+          {{ 'sim' if exig.cnh == 'sim' else 'categoria ' ~ exig.cnh }}</span>
+      {% endif %}
+      {% if exig.taf %}
+        <span class="selo urgente"><span class="rot">Teste fisico:</span> sim</span>
+      {% endif %}
+      {% if c.idade_maxima %}
+        <span class="selo neutro"><span class="rot">Idade maxima:</span>
+          {{ c.idade_maxima }}</span>
+      {% endif %}
+
       <span class="meta">{{ c.publicado_em | data('sem data') }}</span>
     </div>
 

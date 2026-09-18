@@ -735,6 +735,44 @@ duas coisas sao a mesma materia. De quebra, ele aprendeu a recusar materia de
 uma area so: "Conhecimentos Gerais sobre Educacao" comeca igual a
 "Conhecimentos Gerais", mas so cai em prova de professor.
 
+## O que o edital exige de mim
+
+```bash
+radar elegibilidade
+```
+
+Le os editais que `radar provas` ja baixou e grava, em cada concurso, o que ele
+pede: **escolaridade, idade, CNH e teste fisico**. Isso responde ao segundo dos
+meus criterios - "se eu posso prestar" - sem eu precisar abrir um PDF de 200
+paginas.
+
+Na tela, vira selo no cartao do concurso. "Vagas de nivel: superior, medio,
+fundamental" aparece em verde, porque superior e o que eu tenho.
+
+Tres decisoes:
+
+**E por CONCURSO, e nao por cargo.** Um edital de prefeitura traz dezenas de
+cargos com requisitos diferentes, e o radar guarda um registro por concurso.
+Entao "elegivel" quer dizer uma coisa so: **este concurso tem vaga de nivel
+superior**. Nao e promessa de que eu sirvo para todas as vagas dele.
+
+**Cada achado guarda o trecho que o embasa.** O veredito sozinho nao da para
+conferir, e as vezes ele engana: num edital de Florianopolis aparece "idade
+maxima de 75 anos", que e a aposentadoria compulsoria da Lei Complementar
+152/2015, e nao uma barreira de carreira. O trecho mostra isso.
+
+**Edital digitalizado como imagem e apontado, e nao tratado como "nao exige
+nada".** Medido no acervo: 3 dos 32 editais nao rendem texto alguma - um deles
+tem 2,5 MB e 34 caracteres.
+
+Uma distincao que custou um teste: quase todo edital diz "aptidao fisica e
+mental, verificada por junta medica oficial" - isso e exame admissional. O TAF,
+que e o que elimina em concurso policial, aparece como "Teste de Aptidao Fisica
+de carater eliminatorio". So o segundo conta.
+
+Nos 32 editais do acervo: 23 com vaga de superior, 15 exigindo CNH, 13 com
+idade minima declarada, 2 com idade maxima, 1 com teste fisico.
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

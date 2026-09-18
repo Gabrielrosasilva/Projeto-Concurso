@@ -305,6 +305,24 @@ def previsao() -> None:
 
 
 @app.command()
+def elegibilidade(
+    limite: int = typer.Option(50, help="Quantos concursos ler nesta rodada"),
+    refazer: bool = typer.Option(
+        False, "--refazer", help="Le de novo os que ja tem exigencias gravadas"
+    ),
+) -> None:
+    """Le os editais do acervo e grava o que cada concurso exige.
+
+    Escolaridade, idade, CNH e teste fisico. Nao vai a internet: trabalha nos
+    PDFs que `radar provas` ja baixou.
+    """
+    with console.status("Lendo os editais..."):
+        resultado = servico.ler_elegibilidade(limite=limite, refazer=refazer)
+
+    console.print(f"[green]{resultado}[/]")
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

@@ -12,6 +12,7 @@ from radar import avisos
 from radar import (
     detalhes,
     edital_ieses,
+    elegibilidade as leitor_de_elegibilidade,
     macetes,
     provas,
     provas_ieses,
@@ -1822,3 +1823,119 @@ def analisar_banca(
         analise.assunto_procurado = macetes.assunto_do_tema(tema, analise.retrato)
 
     return analise
+
+
+# --- elegibilidade: o que o edital exige de mim (fase 2.5) ------------------
+
+@dataclass
+class ResultadoElegibilidade:
+    concursos: int = 0
+    lidos: int = 0
+    ilegiveis: int = 0
+    sem_edital: int = 0
+
+    def __str__(self) -> str:
+        if not self.concursos:
+            return "Nenhum concurso com edital no acervo para ler."
+        texto = f"{self.concursos} concurso(s), {self.lidos} com exigencias lidas"
+        if self.ilegiveis:
+            texto += f", {self.ilegiveis} com edital so em imagem"
+        if self.sem_edital:
+            texto += f", {self.sem_edital} sem edital no acervo"
+        return texto
+
+
+def _editais_por_concurso() -> dict[str, list[dict]]:
+    """{url do concurso: [registros de edital]}, do manifesto.
+
+    O edital principal vem primeiro: e o maior arquivo. Termo aditivo e
+    retificacao sao curtos e costumam mudar so um item, entao servem de
+    segunda tentativa quando o principal nao rende nada.
+    """
+    por_concurso: dict[str, list[dict]] = {}
+    for registro in provas.carregar_manifesto():
+        if registro.get("tipo") != provas.EDITAL or not registro.get("concurso_url"):
+            continue
+        por_concurso.setdefault(registro["concurso_url"], []).append(registro)
+
+    for registros in por_concurso.values():
+        registros.sort(key=lambda r: -(r.get("tamanho") or 0))
+    return por_concurso
+
+
+def _exigencias_do_concurso(registros: list[dict]) -> leitor_de_elegibilidade.Exigencias:
+    """Le os editais daquele concurso ate um deles dizer alguma coisa."""
+    melhor = leitor_de_elegibilidade.Exigencias(legivel=False)
+
+    for registro in registros:
+        caminho = _caminho(registro)
+        if caminho is None:
+            continue
+        achado = leitor_de_elegibilidade.ler(
+            leitor_de_questoes.extrair_texto(caminho)
+        )
+        if achado.niveis:
+            return achado
+        if achado.legivel:
+            melhor = achado
+
+    return melhor
+
+
+def ler_elegibilidade(limite: int = 50, refazer: bool = False) -> ResultadoElegibilidade:
+    """Le os editais do acervo e grava o que cada concurso exige.
+
+    Nao vai a internet: trabalha nos PDFs que `radar provas` ja baixou.
+    """
+    criar_tabelas()
+    resultado = ResultadoElegibilidade()
+    por_concurso = _editais_por_concurso()
+    if not por_concurso:
+        return resultado
+
+    with sessao() as s:
+        consulta = select(Concurso).where(Concurso.url.in_(list(por_concurso)))
+        if not refazer:
+            consulta = consulta.where(Concurso.elegibilidade == "a_confirmar")
+
+        for concurso in s.scalars(consulta.limit(limite)):
+            resultado.concursos += 1
+            exigencias = _exigencias_do_concurso(por_concurso[concurso.url])
+
+            if not exigencias.legivel:
+                resultado.ilegiveis += 1
+                concurso.motivo_elegibilidade = leitor_de_elegibilidade.resumir(exigencias)
+                continue
+
+            _gravar_exigencias(concurso, exigencias)
+            resultado.lidos += 1
+
+    return resultado
+
+
+def _gravar_exigencias(concurso: Concurso, exigencias) -> None:
+    """Passa o que o edital diz para as colunas do concurso.
+
+    `elegivel` aqui quer dizer uma coisa so: o concurso TEM vaga de nivel
+    superior, que e o que eu posso prestar. Nao e promessa de que eu sirvo para
+    todas as vagas dele - isso muda de cargo para cargo, e o radar guarda um
+    registro por concurso.
+    """
+    if exigencias.niveis:
+        concurso.escolaridade = ", ".join(exigencias.niveis)
+    concurso.idade_maxima = exigencias.idade_maxima
+    concurso.elegibilidade = (
+        "elegivel" if exigencias.tem_superior else "a_confirmar"
+    )
+    concurso.motivo_elegibilidade = leitor_de_elegibilidade.resumir(exigencias)[:300]
+
+    # CNH e teste fisico nao tem coluna propria, e nao vale criar uma agora: o
+    # que interessa e ver na tela, e o `extra` ja guarda o que a fonte manda.
+    extra = dict(concurso.extra or {})
+    extra["exigencias"] = {
+        "cnh": exigencias.cnh,
+        "taf": exigencias.taf,
+        "idade_minima": exigencias.idade_minima,
+        "trechos": exigencias.trechos,
+    }
+    concurso.extra = extra

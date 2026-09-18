@@ -108,6 +108,7 @@ src/radar/
 ├── classificador.py  tipo, municipio, salario e relevancia, a partir do titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
+├── elegibilidade.py  le o edital: escolaridade, idade, CNH e teste fisico
 ├── provas.py       acervo: acha, baixa e cataloga edital, prova e gabarito
 ├── provas_ieses.py como achar os documentos no hotsite da IESES
 ├── questoes.py     separa o caderno da FEPESE em questoes
@@ -294,6 +295,15 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
 - o que conta como materia UNIVERSAL sai do catalogo de apelidos de
   `macetes`, e nao de uma lista fixa de nomes: cada banca escreve a mesma
   materia de um jeito ("Nocoes de Informatica" e "Informatica");
+- elegibilidade e por CONCURSO, nao por cargo: o edital traz dezenas de cargos
+  e o radar guarda um registro por concurso. "elegivel" quer dizer que HA vaga
+  de nivel superior, e nao que eu sirvo para todas as vagas;
+- cada exigencia lida do edital guarda o TRECHO que a embasa. "Idade maxima 75"
+  e aposentadoria compulsoria (LC 152/2015), e so o trecho mostra isso;
+- "aptidao fisica e mental por junta medica" NAO e TAF: e exame admissional.
+  So conta "Teste de Aptidao Fisica de carater eliminatorio";
+- edital que nao rende texto e apontado como digitalizado em imagem, nunca
+  tratado como "nao exige nada". Sao 3 dos 32 editais do acervo;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
@@ -318,9 +328,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
      (federal), o Querido Diario quando a API voltar, e o sinal
      "contrataram a banca"
 2.2  export .ics para o calendario
-2.5  FALTA: ler o PDF do edital para escolaridade, idade maxima, CNH e TAF
-     + deteccao de retificacao por hash. Prazo, banca e lotacao ja saem da
-     pagina do post, sem abrir PDF nenhum
+2.5  PARCIAL: `radar elegibilidade` le o edital do acervo e grava
+     escolaridade, idade, CNH e TAF. Falta: baixar o edital de concurso
+     ABERTO (hoje o acervo so tem de encerrado) e deteccao de
+     retificacao por hash
 3    PARCIAL: acervo da FEPESE funcionando, com manifesto versionado.
      Falta: prova substituta (quando nao ha prova do orgao, trazer a mais
      parecida - mesma banca e mesmo cargo em outro lugar)
