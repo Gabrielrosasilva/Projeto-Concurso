@@ -576,6 +576,26 @@ precisa ler as questoes e perceber o padrao. Isso fica para quando a leitura
 por IA entrar. Ate la a pagina nao inventa: tudo o que ela mostra da para
 conferir abrindo as provas do acervo.
 
+### Quando o link aparece mas da erro
+
+Sintoma confuso, e vale saber de cor: voce clica numa aba que esta ali na tela
+e recebe erro de pagina inexistente.
+
+O motivo e que **a tela e o codigo sao lidos em momentos diferentes**. O
+template e lido do disco a cada visita, entao o link novo aparece assim que
+voce atualiza o repositorio. O codigo Python e lido uma vez so, na partida,
+entao a rota nova nao existe no servidor que ja estava rodando.
+
+A solucao e parar o `radar web` com `Ctrl+C` e subir de novo. A pagina de erro
+agora detecta esse caso sozinha - ela compara a data dos arquivos `.py` com a
+hora em que o servidor subiu - e diz isso, em vez do
+`{"detail":"Not Found"}` cru do FastAPI.
+
+Existe `radar web --recarregar`, que reinicia sozinho ao salvar arquivo, mas
+ele fica **desligado por padrao**: sobe um segundo processo que reimporta
+tudo, e isso quebra no Windows quando o caminho da pasta tem espaco no nome -
+que e o caso aqui (`C:\Projeto concurso claude\...`).
+
 ### Avisos no Telegram
 
 O radar manda uma mensagem por concurso novo que interessa, com o link da

@@ -254,6 +254,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   nao existe na FEPESE, e a tela diz isso;
 - a aba Macetes nao inventa: pegadinha especifica e macete de memorizacao nao
   saem de contagem, e ficam de fora ate a leitura por IA entrar;
+- a pagina de erro 404 detecta sozinha o caso "servidor rodando codigo
+  antigo", comparando a data dos .py com a hora em que subiu. E o sintoma mais
+  confuso que aparece aqui: o link esta na tela (template e lido do disco a
+  cada visita) e a rota nao existe (codigo e lido so na partida);
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so

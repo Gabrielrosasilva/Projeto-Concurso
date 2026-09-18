@@ -3,9 +3,11 @@
 Roda so em 127.0.0.1 de proposito (veja cli.web). Nao ha login porque nao ha
 outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 """
+import time
 from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
+from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from radar import servico
@@ -375,5 +377,40 @@ def macetes(
             "cargo": cargo,
             "tema": tema,
             "procurou": bool(banca or cargo or tema),
+        },
+    )
+
+
+# --- pagina que nao existe --------------------------------------------------
+
+# Quando este processo comecou. Serve para uma pergunta so, mas importante:
+# o codigo em disco mudou depois que o servidor subiu?
+SUBIU_EM = time.time()
+
+
+def _codigo_mudou_depois_de_subir() -> bool:
+    """Ha arquivo .py mais novo que o processo em execucao?
+
+    O sintoma que isto explica e confuso: o link aparece na pagina mas da 404.
+    O template e lido do disco a cada visita, entao o link NOVO aparece; o
+    codigo Python foi carregado uma vez, na partida, entao a rota NOVA nao
+    existe. Quem ve so o {"detail":"Not Found"} nao tem como adivinhar isso.
+    """
+    raiz = Path(__file__).resolve().parent.parent
+    return any(
+        arquivo.stat().st_mtime > SUBIU_EM for arquivo in raiz.rglob("*.py")
+    )
+
+
+@app.exception_handler(404)
+def pagina_nao_encontrada(request: Request, excecao: HTTPException):
+    """Explica o 404 em portugues, e diz o que fazer quando da para saber."""
+    return templates.TemplateResponse(
+        request=request,
+        name="404.html",
+        status_code=404,
+        context={
+            "caminho": request.url.path,
+            "servidor_velho": _codigo_mudou_depois_de_subir(),
         },
     )

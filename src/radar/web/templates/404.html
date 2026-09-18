@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pagina nao encontrada &middot; Radar de Concursos</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
+      --borda:#e3e6eb; --azul:#1d4ed8;
+      --alerta:#b45309; --alerta-fraco:#fdeed3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
+        --borda:#262b35; --azul:#7aa2ff;
+        --alerta:#fbbf24; --alerta-fraco:#2e2310;
+      }
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;padding:3rem 1rem;background:var(--fundo);color:var(--texto);
+         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+    .pagina{max-width:600px;margin:0 auto}
+
+    h1{margin:0 0 .3rem;font-size:1.5rem;letter-spacing:-.02em}
+    .caminho{font-family:ui-monospace,Consolas,monospace;font-size:.9rem;
+      color:var(--suave);margin:0 0 1.5rem}
+
+    .caixa{background:var(--cartao);border:1px solid var(--borda);
+      border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+    .caixa.motivo{background:var(--alerta-fraco);border-color:transparent}
+    .caixa.motivo h2{color:var(--alerta)}
+    h2{font-size:1rem;margin:0 0 .6rem}
+    p{margin:0 0 .7rem;font-size:.92rem}
+    p:last-child{margin-bottom:0}
+    code{font-family:ui-monospace,Consolas,monospace;font-size:.88rem;
+      background:var(--borda);padding:.1rem .4rem;border-radius:5px}
+
+    .links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+    .links a{padding:.6rem 1rem;border-radius:8px;text-decoration:none;
+      font-size:.9rem;border:1px solid var(--borda);color:var(--texto)}
+    .links a.principal{background:var(--azul);color:#fff;border-color:transparent}
+  </style>
+</head>
+<body>
+<div class="pagina">
+
+  <h1>Essa pagina nao existe aqui</h1>
+  <p class="caminho">{{ caminho }}</p>
+
+  {% if servidor_velho %}
+    <div class="caixa motivo">
+      <h2>O motivo mais provavel: o servidor esta rodando codigo antigo</h2>
+      <p>
+        Ha arquivo de codigo no disco mais novo que este servidor. O endereco
+        que voce clicou provavelmente ja existe no codigo, mas nao neste
+        processo, que subiu antes.
+      </p>
+      <p>
+        Por isso o link aparece na tela e mesmo assim da erro: a tela e lida do
+        disco a cada visita, e o codigo so e lido uma vez, na partida.
+      </p>
+      <p>
+        <b>Como resolver:</b> volte na janela onde o <code>radar web</code>
+        esta rodando, pare com <code>Ctrl+C</code> e suba de novo.
+      </p>
+    </div>
+  {% else %}
+    <div class="caixa">
+      <h2>Endereco errado</h2>
+      <p>
+        Nao ha nada nesse endereco. Se voce digitou na mao, confira; se chegou
+        por um link daqui de dentro, me avise.
+      </p>
+    </div>
+  {% endif %}
+
+  <div class="links">
+    <a class="principal" href="/">Radar</a>
+    <a href="/previsao">Previsao de abertura</a>
+    <a href="/macetes">Macetes</a>
+    <a href="/simulado">Simulado</a>
+  </div>
+
+</div>
+</body>
+</html>
