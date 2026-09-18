@@ -413,6 +413,56 @@ def retificacoes(
 
 
 @app.command()
+def diario(
+    municipio: str = typer.Option(
+        None, help="Um municipio so. Sem isso, todos os do meu recorte"
+    ),
+    dias: int = typer.Option(180, help="Quanto tempo para tras procurar"),
+) -> None:
+    """O que saiu no diario oficial sobre concurso.
+
+    A fonte e o Querido Diario. Cuidado com o alcance dela: dos 35 municipios
+    de config/regioes.yml, so Florianopolis tem diario coletado.
+    """
+    from datetime import date, timedelta
+
+    from radar import diario as leitor, regioes
+
+    nomes = [municipio] if municipio else (
+        regioes.municipios("nucleo") + regioes.municipios("proximo")
+    )
+    with console.status("Procurando nos diarios..."):
+        cobertos = leitor.com_diario(nomes)
+
+    if not cobertos:
+        console.print(
+            "[yellow]Nenhum dos municipios pedidos tem diario coletado "
+            "no Querido Diario.[/]"
+        )
+        return
+
+    console.print(
+        f"[dim]{len(cobertos)} de {len(nomes)} municipio(s) com diario: "
+        + ", ".join(c.nome for c in cobertos) + "[/]"
+    )
+
+    desde = date.today() - timedelta(days=dias)
+    total = 0
+    for cidade in cobertos:
+        achados = leitor.buscar(cidade.territorio, cidade.nome, desde=desde)
+        total += len(achados)
+        for achado in achados:
+            console.print()
+            console.print(f"[bold]{achado.data}[/] {achado.municipio} "
+                          f"[dim]({achado.termo})[/]")
+            console.print(f"  {achado.trecho[:220]}")
+            console.print(f"  [dim]{achado.url}[/]")
+
+    console.print()
+    console.print(f"[green]{total} edicao(oes) encontrada(s).[/]")
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),

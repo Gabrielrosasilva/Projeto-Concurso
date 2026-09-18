@@ -972,20 +972,44 @@ publico**: sao movimentacao interna de quem ja e servidor federal - "Funcao
 Comissionada Executiva", "Chefe de Divisao", "selecionando 1 pessoa para
 atuar". Nao serve para quem esta de fora.
 
-**Querido Diario** - a API **voltou** (estava em 503 quando a fase 1.7 foi
-escrita), e ela sabe de Florianopolis: `territory_id` 4205407, diarios desde
-30/10/2020. Seria a melhor fonte para o sinal "contratou a banca". Mas o
-`robots.txt` de la diz:
+**Querido Diario** - entrou, e o resultado decepcionou. O detalhe esta abaixo.
 
-```
-User-agent: *
-Disallow: /api
+## Diario oficial: o que a fonte entrega de verdade
+
+```bash
+radar diario                      # os municipios do meu recorte
+radar diario --municipio Florianopolis --dias 90
 ```
 
-Isso e uma decisao de politica, e nao tecnica: e a interface de maquina de um
-projeto de dados abertos, o que torna a regra estranha - mas ela esta escrita.
-O radar respeita `robots.txt`, e por isso a fonte segue fora ate eu decidir o
-contrario de forma explicita.
+A promessa da fase 1.7 era o sinal **"contratou a banca"**: quando a prefeitura
+contrata quem vai fazer a prova, sai licitacao ou dispensa no diario, 2 a 4
+meses antes de o edital existir. Isso daria tempo de comecar a estudar o padrao
+da banca.
+
+A API do Querido Diario voltou do ar e o coletor esta pronto e testado. Mas
+**a fonte nao entrega isso**, e os numeros sao estes:
+
+| o que eu esperava | o que tem |
+|---|---|
+| os 35 municipios de `config/regioes.yml` | **1**: so Florianopolis tem diario coletado |
+| ato de contratacao de banca | **0** achados para "inexigibilidade", "dispensa de licitacao banca", "contratacao de instituicao" |
+| sinal antes do edital | 5 edicoes em 180 dias, e os trechos sao de editais **ja publicados** |
+
+Ou seja: o que ela devolve para o meu recorte eu ja pego direto das bancas, e
+mais cedo. Sao Jose, Palhoca, Biguacu, Brusque, Blumenau e os outros 30 dao
+zero - a API conhece os municipios, mas nao tem edicao deles.
+
+O comando fica, porque funciona e porque a cobertura pode crescer: o Querido
+Diario e um projeto ativo. Mas nao e ele que vai me avisar de concurso.
+
+### Sobre o robots.txt de la
+
+O `robots.txt` do Querido Diario tem `Disallow: /api`. A decisao de usar mesmo
+assim foi minha, explicita, e esta registrada aqui: e a interface de maquina de
+um projeto de dados abertos, o endereco e publico e documentado, e o uso e de
+leitura, com atraso entre requisicoes e User-Agent identificado. Por isso
+`diario.py` nao usa a classe `Coletor` - ele fala com a API direto, e so com
+este host. Todo o resto do radar continua respeitando `robots.txt`.
 
 ### Avisos no Telegram
 
