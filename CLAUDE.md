@@ -123,7 +123,8 @@ src/radar/
 ├── diario.py       diario oficial pela API do Querido Diario
 ├── calendario.py   monta o .ics dos prazos (iCalendar, sem dependencia)
 ├── util.py         fuso e formatacao de data
-├── cli.py          comandos typer: coletar, listar, favoritar, avisar, web
+├── cli.py          comandos typer. `atualizar` roda a rotina inteira na
+│                ordem certa; os outros fazem uma etapa cada
 ├── collectors/
 │   ├── base.py                  Coletor + ItemColetado; cuida de robots.txt,
 │   │                            User-Agent e atraso entre requisicoes
@@ -364,6 +365,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
   Telegram. Nunca no codigo;
 - o assunto pago se espalha para as copias do mesmo enunciado: 1.813
   classificacoes atualizam 2.673 linhas;
+- `radar atualizar` e o comando do dia a dia: roda coletar, detalhar, baixar
+  edital, elegibilidade, retificacao e aviso, nessa ordem - que nao e opcional,
+  cada etapa depende da anterior. Etapa que falha nao para a rotina;
 - o simulado guarda o estado no BANCO, nao na sessao do navegador: da para
   fechar a pagina no meio e voltar depois, e o F5 nao responde de novo;
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so

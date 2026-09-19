@@ -639,6 +639,44 @@ ele fica **desligado por padrao**: sobe um segundo processo que reimporta
 tudo, e isso quebra no Windows quando o caminho da pasta tem espaco no nome -
 que e o caso aqui (`C:\Projeto concurso claude\...`).
 
+## O comando do dia a dia
+
+```bash
+radar atualizar
+```
+
+Roda a rotina inteira, na ordem certa, e diz o que deu certo e o que nao:
+
+```
+1/6 Coletando das fontes
+   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s)
+2/6 Lendo a pagina dos concursos novos
+   15 pagina(s) lida(s): 1 com prazo de inscricao, 0 com banca
+3/6 Baixando edital de concurso aberto
+   5 concurso(s) lido(s): 18 edital(is)
+4/6 Lendo o que o edital exige
+   5 concurso(s), 5 com exigencias lidas
+5/6 Conferindo retificacao de edital
+   10 edital(is) conferido(s), nenhum mudou
+6/6 Avisando no Telegram
+
+Tudo em dia.
+19 concurso(s) com inscricao aberta agora.
+```
+
+Existe porque manter o radar em dia exigia seis comandos numa sequencia que so
+fazia sentido para quem a escreveu: **coletar** antes de **detalhar**,
+detalhar antes de baixar **edital**, edital antes de ler a **elegibilidade**.
+
+Etapa que falha e registrada e a rotina segue - a mesma regra que vale para
+fonte fora do ar desde a primeira fase.
+
+Duas opcoes:
+
+- `--sem-avisar` nao manda nada no Telegram;
+- `--completo` tambem baixa provas novas e le as questoes delas. Fica de fora
+  do dia a dia porque demora.
+
 ## Fonte 3: IESES
 
 Segunda banca catarinense do radar. Ela fica em Florianopolis e faz concurso de

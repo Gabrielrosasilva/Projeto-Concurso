@@ -35,6 +35,7 @@ def _prazo(quando) -> str:
 
 app = typer.Typer(help="Radar de concursos publicos (uso pessoal)", no_args_is_help=True)
 console = Console()
+log = logging.getLogger(__name__)
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
@@ -84,6 +85,80 @@ CORES_DO_ANEL = {
     "remoto": "dim",
     "indefinida": "magenta",
 }
+
+
+@app.command()
+def atualizar(
+    completo: bool = typer.Option(
+        False, "--completo",
+        help="Tambem baixa provas novas e le as questoes delas (demora)",
+    ),
+    avisar_telegram: bool = typer.Option(
+        True, "--avisar/--sem-avisar", help="Manda os concursos novos no Telegram"
+    ),
+) -> None:
+    """Roda a rotina inteira, na ordem certa.
+
+    Existe porque manter o radar em dia exigia seis comandos numa sequencia que
+    so fazia sentido para quem a escreveu: coletar antes de detalhar, detalhar
+    antes de baixar edital, edital antes de elegibilidade.
+
+    Cada etapa que falha e registrada e a rotina segue - a mesma regra que vale
+    para fonte fora do ar desde a primeira fase. O resumo no fim diz o que deu
+    certo e o que nao.
+    """
+    etapas = [
+        ("Coletando das fontes", lambda: str(_resumo_da_coleta())),
+        ("Lendo a pagina dos concursos novos",
+         lambda: str(servico.detalhar_pendentes(limite=15))),
+        ("Baixando edital de concurso aberto",
+         lambda: str(servico.montar_acervo(limite=5, abertos=True))),
+        ("Lendo o que o edital exige",
+         lambda: str(servico.ler_elegibilidade(limite=30))),
+        ("Conferindo retificacao de edital",
+         lambda: str(servico.conferir_retificacoes(limite=10))),
+    ]
+
+    if avisar_telegram:
+        etapas.append(("Avisando no Telegram", lambda: str(servico.avisar())))
+
+    if completo:
+        etapas.append(
+            ("Montando o acervo de provas", lambda: str(servico.montar_acervo(limite=10)))
+        )
+        etapas.append(
+            ("Extraindo questoes dos cadernos",
+             lambda: str(servico.extrair_questoes(limite=20)))
+        )
+
+    falhas = 0
+    for numero, (titulo, acao) in enumerate(etapas, start=1):
+        console.print(f"\n[bold cyan]{numero}/{len(etapas)}[/] {titulo}")
+        try:
+            with console.status(titulo + "..."):
+                resumo = acao()
+            console.print(f"   [green]{resumo}[/]")
+        except Exception as erro:  # noqa: BLE001 - etapa quebrada nao para a rotina
+            falhas += 1
+            console.print(f"   [red]falhou: {type(erro).__name__}[/]")
+            log.warning("etapa %r falhou", titulo, exc_info=True)
+
+    console.print()
+    if falhas:
+        console.print(f"[yellow]Terminei com {falhas} etapa(s) com problema.[/]")
+    else:
+        console.print("[green]Tudo em dia.[/]")
+
+    abertas = len(servico.listar(abertas=True, todas_relevancias=True))
+    console.print(f"[bold]{abertas}[/] concurso(s) com inscricao aberta agora.")
+    console.print("[dim]Veja na tela: radar web[/]")
+
+
+def _resumo_da_coleta() -> str:
+    """Uma linha com o que cada fonte trouxe."""
+    return " | ".join(
+        f"{r.fonte}: {r.novos} novo(s)" for r in servico.coletar_tudo()
+    )
 
 
 @app.command()
