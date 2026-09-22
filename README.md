@@ -60,7 +60,8 @@ Sempre os mesmos tres comandos, nesta ordem:
 ```bash
 git pull
 pip install -e ".[dev]"     # rapido quando nada mudou; nao custa rodar sempre
-radar reclassificar         # so se o classificador ou o regioes.yml mudaram
+radar reclassificar         # so se o classificador, o regioes.yml ou o
+                            # alvo.yml mudaram
 ```
 
 **Voce nunca precisa apagar `data/radar.db`.** Quando o modelo ganha uma
@@ -292,6 +293,34 @@ Os tres aneis de distancia, e a grafia canonica de cada municipio. O municipio
 e sempre gravado na grafia deste arquivo — cada fonte escreve de um jeito, e
 sem isso qualquer conta por municipio sai errada.
 
+### Os cargos que eu quero, em `config/alvo.yml`
+
+Duas marcas, e elas nao valem a mesma coisa:
+
+- **`principal`** e a Policia Penal SC. Para ela o cargo manda, entao a marca
+  **fura o filtro de distancia e o teto de 10 avisos**, e vale ate para
+  `noticia` - que normalmente nunca vira mensagem. No Telegram o aviso abre
+  com 🚨. Sao os tres nomes que a secretaria ja teve (SJC em 2013, SAP em
+  2019, SEJURI hoje), os termos do cargo ("policia penal", "policial penal",
+  "agente penitenciario") e a banca historica, a FEPESE.
+- **`secundario`** e o resto da lista: Guarda Municipal, Policia Civil,
+  Oficial de Bombeiros, Policia Penal Federal, Bombeiro Militar e Policia
+  Cientifica, nessa ordem. Ganha a marca e mais nada: as regras de aviso
+  continuam as de sempre.
+
+Tres cuidados que o arquivo toma, e que valem a leitura antes de mexer nele:
+
+- a comparacao e por **palavra inteira**. Sem isso a sigla "SAP" casa dentro
+  de Sapezal, Sapiranga, Massape e SAPE/SC, que estao todos na coleta;
+- o alvo principal exige **prova de que o item e de SC**. Sem UF, so uma
+  palavra exclusiva serve ("santa catarina", "sejuri", "sap/sc") - Sao Paulo
+  tambem tem uma secretaria SAP;
+- a **banca nunca marca sozinha**. A FEPESE faz dezenas de concursos de
+  prefeitura por ano; ela so entra no motivo da marca.
+
+Mexeu no arquivo? `radar reclassificar` recalcula o banco inteiro e lista o
+que bateu, sem ir a internet.
+
 ### O perfil, em `config/perfil.yml`
 
 ```yaml
@@ -393,7 +422,8 @@ src/radar/
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico.py      roda coletores, grava com upsert, classifica, consulta
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
-├── classificador.py  tipo, municipio, salario e relevancia, pelo titulo
+├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
+├── classificador.py  tipo, municipio, salario, relevancia e alvo, pelo titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
 ├── elegibilidade.py  le o edital: escolaridade, idade, CNH e teste fisico
@@ -421,6 +451,7 @@ src/radar/
 
 config/
 ├── regioes.yml     os tres aneis de distancia
+├── alvo.yml        os cargos que eu quero, em ordem
 └── perfil.yml      meus dados, para a elegibilidade
 ```
 

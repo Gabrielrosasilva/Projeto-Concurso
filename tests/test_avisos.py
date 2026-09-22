@@ -187,6 +187,105 @@ def test_o_que_passou_do_limite_fica_para_a_proxima(banco_temporario, telegram):
     assert servico.avisar(limite=10).enviados == 2
 
 
+# --- o alvo principal fura a fila -------------------------------------------
+# Policia Penal SC e o concurso que eu espero. Para ele o cargo manda: nem a
+# distancia, nem o teto de mensagens, nem o filtro de noticia podem segurar o
+# aviso.
+
+def _alvo_principal(**mudancas) -> Concurso:
+    base = dict(
+        url="https://exemplo.test/policia-penal",
+        titulo="Concurso Policia Penal SC e autorizado com 600 vagas",
+        municipio=None,
+        relevancia="estadual",
+        motivo_relevancia="Orgao estadual de SC; polos a confirmar no edital.",
+        alvo="principal",
+        motivo_alvo=(
+            'Alvo principal (Policia Penal SC): o texto fala em "policia penal".'
+        ),
+    )
+    base.update(mudancas)
+    return _concurso(**base)
+
+
+def test_alvo_principal_leva_sirene_na_frente(banco_temporario):
+    texto = avisos.formatar(_alvo_principal())
+    assert texto.startswith(avisos.SIRENE)
+    assert "Alvo principal" in texto
+
+
+def test_aviso_comum_nao_leva_sirene(banco_temporario):
+    assert not avisos.formatar(_concurso()).startswith(avisos.SIRENE)
+
+
+def test_alvo_principal_avisa_mesmo_longe(banco_temporario, telegram):
+    """Concurso estadual: eu presto onde a prova for. A distancia nao segura."""
+    _semear(_alvo_principal(relevancia="remoto", municipio="Chapeco"))
+    assert servico.avisar().enviados == 1
+
+
+def test_alvo_principal_avisa_mesmo_sendo_noticia(banco_temporario, telegram):
+    """"Governo autoriza concurso da Policia Penal" nao e edital, e e
+    exatamente o aviso que eu quero receber primeiro."""
+    _semear(_alvo_principal(tipo="noticia", situacao="desconhecida"))
+    assert servico.avisar().enviados == 1
+
+
+def test_alvo_principal_passa_por_fora_do_teto(banco_temporario, telegram):
+    """O teto existe para segurar regra quebrada, nao para segurar o meu
+    concurso: se sairem 12 avisos da Policia Penal no mesmo dia, eu quero os
+    12, e os outros continuam limitados a 10."""
+    _semear(*[
+        _alvo_principal(url=f"https://exemplo.test/pp-{i}", titulo=f"Policia Penal SC {i}")
+        for i in range(12)
+    ])
+    _semear(*[
+        _concurso(url=f"https://exemplo.test/outro-{i}", titulo=f"Concurso {i}")
+        for i in range(25)
+    ])
+
+    resultado = servico.avisar(limite=10)
+
+    assert resultado.enviados == 22      # 12 do alvo + 10 do teto
+    assert resultado.pendentes == 15     # so o resto entra na conta do teto
+
+
+def test_noticia_sem_alvo_continua_fora(banco_temporario, telegram):
+    """A regra nova nao pode abrir a porta para o "Bolsa Familia" do feed."""
+    _semear(_concurso(tipo="noticia", titulo="Bolsa Familia tem novo valor"))
+    assert servico.avisar().enviados == 0
+
+
+def test_alvo_secundario_segue_as_regras_normais(banco_temporario, telegram):
+    """Secundario ganha a marca, e so. Longe continua sendo longe."""
+    _semear(_concurso(
+        url="https://exemplo.test/guarda-guarulhos",
+        titulo="Concurso Prefeitura de Guarulhos (SP) abre 200 vagas para Guarda Municipal",
+        uf="SP",
+        municipio="Guarulhos",
+        relevancia="remoto",
+        alvo="secundario",
+        motivo_alvo='Alvo secundario (Guarda Municipal): o texto fala em "guarda municipal".',
+    ))
+    assert servico.avisar().enviados == 0
+
+
+def test_alvo_principal_encerrado_nao_vira_mensagem(banco_temporario, telegram):
+    """Furar o teto nao e furar a janela de novidade: ligar uma fonte nova
+    traz o historico dela, e o concurso de 2013 nao pode tocar o celular."""
+    from datetime import timedelta
+
+    from radar.models import agora
+
+    _semear(_alvo_principal(
+        url="https://exemplo.test/pp-2013",
+        titulo="2013 - Secretaria de Estado da Justica e Cidadania",
+        situacao="encerrado",
+        publicado_em=agora() - timedelta(days=4000),
+    ))
+    assert servico.avisar().enviados == 0
+
+
 # --- quando da errado -------------------------------------------------------
 
 def test_sem_configuracao_nao_quebra(banco_temporario, monkeypatch):

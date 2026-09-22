@@ -14,6 +14,7 @@ import time
 
 import requests
 
+from radar import alvo as alvos
 from radar import config
 from radar.models import Concurso
 from radar.util import formatar_data
@@ -32,6 +33,10 @@ EMOJI_DO_ANEL = {
     "indefinida": "\U0001F535",  # azul: ainda nao sei, depende do edital
 }
 
+# O alvo principal abre a mensagem com sirene. E o unico aviso que eu nao
+# posso deixar passar batido na tela cheia de notificacao do celular.
+SIRENE = "\U0001F6A8"
+
 
 def _url(metodo: str) -> str:
     """Monta a URL da API. NUNCA logue o retorno: ele contem o token."""
@@ -45,6 +50,11 @@ def formatar(concurso: Concurso) -> str:
     a abrir o computador para descobrir do que se trata.
     """
     emoji = EMOJI_DO_ANEL.get(concurso.relevancia, "\U000026AA")
+    if concurso.alvo == alvos.PRINCIPAL:
+        # A sirene vem na frente do emoji do anel, e nao no lugar dele: o
+        # anel continua sendo informacao util mesmo quando nao decide nada.
+        emoji = f"{SIRENE} {emoji}"
+
     # escape: titulo vem de site de terceiro e pode ter <, > ou &, que
     # quebrariam o HTML da mensagem
     linhas = [f"{emoji} <b>{html.escape(concurso.titulo)}</b>"]
@@ -64,8 +74,11 @@ def formatar(concurso: Concurso) -> str:
     if concurso.publicado_em:
         linhas.append(f"Publicado em {formatar_data(concurso.publicado_em)}")
 
-    if concurso.motivo_relevancia:
-        linhas.append(f"\n<i>{html.escape(concurso.motivo_relevancia)}</i>")
+    # O motivo do alvo vem antes do motivo do anel: quando os dois existem, e
+    # o cargo que explica por que a mensagem chegou.
+    motivos = [m for m in (concurso.motivo_alvo, concurso.motivo_relevancia) if m]
+    if motivos:
+        linhas.append(f"\n<i>{html.escape(' '.join(motivos))}</i>")
 
     # O link fica fora de tag: o Telegram ja o torna clicavel sozinho.
     linhas.append(f"\n{concurso.url}")

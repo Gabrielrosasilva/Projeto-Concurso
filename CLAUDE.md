@@ -39,7 +39,9 @@ nao importa: e concurso estadual, e eu presto onde for.
 Depois dele, nesta ordem: Guarda Municipal · Policia Civil · Oficial de
 Bombeiros · e as demais carreiras de seguranca publica (Policia Penal Federal,
 Bombeiro Militar, Policia Cientifica). **A lista ordena, nao descarta** —
-nenhum concurso sai do radar por nao estar nela.
+nenhum concurso sai do radar por nao estar nela. Ela mora em
+`config/alvo.yml`, nunca no codigo; bater no alvo principal fura o filtro de
+distancia e o teto de avisos, e vale ate para noticia.
 
 Para todo o resto continuam valendo os criterios de sempre, nesta ordem:
 

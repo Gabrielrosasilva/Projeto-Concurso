@@ -8,6 +8,7 @@ from statistics import median
 
 from sqlalchemy import case, func, select
 
+from radar import alvo as alvos
 from radar import avisos
 from radar import (
     calendario,
@@ -62,7 +63,8 @@ VALORES_SEM_INFORMACAO = {
 # Campos que o classificador calcula. Sao derivados do titulo, entao podem ser
 # recalculados a qualquer momento - e por isso que existe `reclassificar()`:
 # se eu editar config/regioes.yml, o banco inteiro se corrige sem recoletar.
-CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia", "motivo_relevancia")
+CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia",
+                     "motivo_relevancia", "alvo", "motivo_alvo")
 
 
 def _aplicar_classificacao(destino, item: ItemColetado) -> None:
@@ -76,6 +78,12 @@ def _aplicar_classificacao(destino, item: ItemColetado) -> None:
     """
     resultado = classificar(item)
     destino.tipo = resultado.tipo
+
+    # A marca de alvo sai so do texto, e nao existe fonte melhor para ela:
+    # nenhum edital diz se o cargo e o que eu quero. Por isso ela e sempre
+    # reescrita, sem a trava de municipio_confirmado.
+    destino.alvo = resultado.alvo
+    destino.motivo_alvo = resultado.motivo_alvo
 
     if not destino.salario_manual:
         destino.salario = resultado.salario
@@ -194,6 +202,35 @@ def contar_por_relevancia(incluir_noticias: bool = False) -> dict[str, int]:
 
     # garante todas as chaves, mesmo zeradas, para a pagina nao ter que checar
     return {anel: contagem.get(anel, 0) for anel in RELEVANCIAS}
+
+
+def contar_por_alvo() -> dict[str, int]:
+    """Quantos itens em cada marca de alvo. Noticia entra na conta.
+
+    Noticia entra de proposito, ao contrario da contagem por anel: noticia
+    sobre a Policia Penal SC e sinal, nao ruido - e o que avisa que o
+    concurso vem antes de existir edital.
+    """
+    criar_tabelas()
+    consulta = (
+        select(Concurso.alvo, func.count())
+        .where(Concurso.alvo.is_not(None))
+        .group_by(Concurso.alvo)
+    )
+    with sessao() as s:
+        return dict(s.execute(consulta).all())
+
+
+def concursos_do_alvo(marca: str) -> list[Concurso]:
+    """O que esta marcado com esse alvo, do mais novo para o mais velho."""
+    criar_tabelas()
+    consulta = (
+        select(Concurso)
+        .where(Concurso.alvo == marca)
+        .order_by(Concurso.publicado_em.desc().nullslast())
+    )
+    with sessao() as s:
+        return list(s.scalars(consulta))
 
 
 def contar() -> int:
@@ -327,6 +364,9 @@ def reclassificar() -> dict[str, int]:
                 # para reextrair o que outra fonte ja extraiu melhor.
                 municipio=concurso.municipio,
                 tipo=concurso.tipo if concurso.tipo != "desconhecido" else None,
+                # A banca vai junto so para o motivo do alvo poder dizer que
+                # e a mesma das edicoes anteriores. Ela nao marca nada.
+                banca=concurso.banca,
             )
             _aplicar_classificacao(concurso, item)
 
@@ -401,12 +441,24 @@ def _e_novidade():
 
 
 def _nao_avisados() -> list[Concurso]:
-    """Concursos que interessam e que ainda nao viraram mensagem."""
+    """Concursos que interessam e que ainda nao viraram mensagem.
+
+    Duas portas de entrada, e a segunda e a que importa. A primeira e a de
+    sempre: concurso perto o bastante. A segunda e o alvo principal, que
+    entra por fora - sem filtro de distancia, e valendo tambem para noticia.
+    "Governo autoriza concurso da Policia Penal" nao e edital, nao tem
+    municipio nenhum no titulo, e e exatamente o aviso que eu quero receber
+    primeiro.
+
+    A janela de novidade continua valendo para os dois: ela e o que impede
+    que ligar uma fonte nova despeje o historico dela no meu celular.
+    """
+    perto = (Concurso.tipo != "noticia") & Concurso.relevancia.in_(RELEVANCIA_AVISO)
+
     consulta = (
         select(Concurso)
         .where(Concurso.avisado_em.is_(None))
-        .where(Concurso.tipo != "noticia")
-        .where(Concurso.relevancia.in_(RELEVANCIA_AVISO))
+        .where(perto | (Concurso.alvo == alvos.PRINCIPAL))
         .where(_e_novidade())
         .order_by(Concurso.publicado_em.desc().nullslast())
     )
@@ -429,8 +481,15 @@ def avisar(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
     if not candidatos:
         return ResultadoAviso()
 
-    escolhidos = candidatos[:limite]
-    sobraram = len(candidatos) - len(escolhidos)
+    # O alvo principal nao disputa vaga com o resto. O teto existe para
+    # segurar regra de classificacao quebrada, e o alvo principal e a unica
+    # regra que eu nao quero que ele segure: se sairem 30 avisos da Policia
+    # Penal SC no mesmo dia, eu quero os 30.
+    principais = [c for c in candidatos if c.alvo == alvos.PRINCIPAL]
+    demais = [c for c in candidatos if c.alvo != alvos.PRINCIPAL]
+
+    escolhidos = principais + demais[:limite]
+    sobraram = len(demais) - min(len(demais), limite)
 
     enviados = avisos.enviar_varios([avisos.formatar(c) for c in escolhidos])
 

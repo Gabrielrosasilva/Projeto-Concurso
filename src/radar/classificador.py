@@ -12,6 +12,7 @@ Um palpite errado me faria perder um concurso bom achando que era longe.
 import re
 from dataclasses import dataclass
 
+from radar import alvo as alvos
 from radar import regioes
 from radar.collectors.base import ItemColetado
 
@@ -238,6 +239,9 @@ class Classificacao:
     # Fase anterior ao edital, quando o titulo deixa claro. Nulo quer dizer
     # "o titulo nao disse", e ai o que valia antes continua valendo.
     fase: str | None = None
+    # O cargo e meu alvo? Sai de config/alvo.yml. Nulo = nao e cargo meu.
+    alvo: str | None = None
+    motivo_alvo: str | None = None
 
 
 def classificar(item: ItemColetado) -> Classificacao:
@@ -252,11 +256,20 @@ def classificar(item: ItemColetado) -> Classificacao:
     salario = extrair_salario(item.titulo)
     uf = (item.uf or "").upper()
 
+    # A marca de alvo e independente do anel: ela responde "e o cargo que eu
+    # quero?", e o anel responde "da para chegar la?". Por isso ela e
+    # calculada aqui em cima e vale para todas as saidas, inclusive a de
+    # noticia - noticia sobre a Policia Penal SC e justamente o que eu quero
+    # saber antes de todo mundo.
+    marca = alvos.marcar(item.titulo, item.resumo, uf=item.uf, banca=item.banca)
+
     comum = dict(
         municipio=municipio,
         salario=salario,
         tipo=tipo,
         fase=detectar_fase(item.titulo, item.resumo),
+        alvo=marca.alvo if marca else None,
+        motivo_alvo=marca.motivo if marca else None,
     )
 
     if tipo == TIPO_NOTICIA:

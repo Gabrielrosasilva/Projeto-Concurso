@@ -11,7 +11,7 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
-from radar import acervo, avisos, config, servico
+from radar import acervo, alvo as alvos, avisos, config, servico
 from radar import provas as _provas
 from radar.util import (
     dias_ate,
@@ -781,6 +781,42 @@ def reclassificar() -> None:
         cor = CORES_DO_ANEL.get(anel, "")
         rotulo = ROTULO_DO_ANEL.get(anel, anel)
         console.print(f"[{cor}]{rotulo}[/]: {quantos}" if cor else f"{rotulo}: {quantos}")
+
+    _mostrar_alvos()
+
+
+# Quantos alvos principais listar depois de reclassificar. Sao poucos por
+# natureza - se um dia forem muitos, e sinal de regra frouxa em
+# config/alvo.yml, e ai eu quero justamente ver o corte.
+ALVOS_A_LISTAR = 15
+
+
+def _mostrar_alvos() -> None:
+    """O que bateu em config/alvo.yml, para eu auditar a regra.
+
+    O principal sai item por item porque e a lista que eu preciso conferir
+    com o olho; o secundario sai so contado, porque sao dezenas.
+    """
+    contagem = servico.contar_por_alvo()
+    if not contagem:
+        return
+
+    console.print()
+    secundarios = contagem.get(alvos.SECUNDARIO, 0)
+    if secundarios:
+        console.print(f"[cyan]Alvo secundario[/]: {secundarios}")
+
+    principais = servico.concursos_do_alvo(alvos.PRINCIPAL)
+    if not principais:
+        return
+
+    console.print(f"[bold red]Alvo principal[/]: {len(principais)}")
+    for c in principais[:ALVOS_A_LISTAR]:
+        rotulo = ROTULO_DO_ANEL.get(c.relevancia, c.relevancia)
+        console.print(f"  [bold red]*[/] {c.titulo}")
+        console.print(f"    [dim]{rotulo} · {c.motivo_alvo}[/]")
+    if len(principais) > ALVOS_A_LISTAR:
+        console.print(f"  [dim]... e mais {len(principais) - ALVOS_A_LISTAR}[/]")
 
 
 @app.command()

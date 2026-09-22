@@ -254,3 +254,32 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - o tipo `noticia` e decidido primeiro pelo CAMINHO da URL: /concursos/ e
   concurso, /beneficios-sociais/ e noticia. Isso pega o que a palavra no
   titulo nao pega ("INSS paga hoje com vagas para todos").
+- o cargo que eu quero fica em `config/alvo.yml`, com a mesma regra de
+  `regioes.yml`: nome de cargo nenhum e escrito no codigo. Duas marcas, e elas
+  NAO valem a mesma coisa. `principal` e a Policia Penal SC, e ela fura duas
+  regras de aviso - o filtro de distancia e o teto de 10 mensagens - e vale
+  ate para `noticia`, que normalmente nunca vira aviso: "governo autoriza
+  concurso da Policia Penal" e o que eu quero saber antes de todo mundo.
+  `secundario` e o resto da lista do CLAUDE.md e so ganha a marca, seguindo as
+  regras normais. Nada e descartado por nao ter marca;
+- o alvo principal exige PROVA de que o item e de SC, pelo mesmo motivo que o
+  anel nao se chuta. Sem a UF na mao, so uma palavra exclusiva vale ("santa
+  catarina", "sejuri", "sap/sc"). A sigla solta nao serve: Sao Paulo tem uma
+  secretaria SAP, e ela esta no feed;
+- a comparacao de termo do alvo e por PALAVRA INTEIRA. Sem isso a sigla "SAP"
+  casa dentro de Sapezal, Sapiranga, Massape e SAPE/SC - os quatro estao na
+  coleta de verdade, e nenhum tem a ver com o concurso que eu espero;
+- a banca do alvo (FEPESE, que fez as duas edicoes: edital 01/2013-SJC/SC e
+  001/SAP/2019) NUNCA marca alvo sozinha. Ela faz dezenas de concursos de
+  prefeitura por ano; se marcasse, metade de SC viraria alvo principal. Ela so
+  entra no motivo, para o aviso lembrar que o padrao de prova ja e conhecido;
+- o alvo principal fura o teto de avisos, mas NAO fura a janela de novidade:
+  furar as duas faria a primeira coleta despejar o concurso de 2013 no
+  celular;
+- os tres nomes da secretaria entram juntos no YAML porque o orgao e o mesmo e
+  so o nome mudou: SJC em 2013, SAP em 2019 e SEJURI (Secretaria de Estado de
+  Justica e Reintegracao Social) hoje - conferido no site oficial em
+  22/09/2026, e o dominio antigo sap.sc.gov.br ja serve o conteudo da SEJURI.
+  O concurso antigo continua indexado pelo nome da epoca;
+- "Policia Penal Federal" e excluida do alvo principal a mao: ela casa com
+  "policia penal" e e outro concurso, que tem bloco proprio nos secundarios.

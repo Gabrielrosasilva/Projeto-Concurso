@@ -1,0 +1,109 @@
+# Os cargos que eu quero de verdade, e como reconhece-los no texto do feed.
+#
+# Este arquivo manda no codigo, como config/regioes.yml: para passar a
+# acompanhar um cargo novo, some um bloco aqui e rode `radar reclassificar`.
+# Nenhum nome de cargo fica escrito no programa.
+#
+# Acento e caixa nao importam: o radar normaliza os dois lados antes de
+# comparar. A comparacao e por PALAVRA INTEIRA, e isso e proposital - sem
+# isso a sigla "SAP" casaria dentro de "Sapezal", "Sapiranga", "Massape" e
+# "SAPE/SC", que sao quatro coisas que ja apareceram na coleta de verdade.
+
+# --- o alvo principal -------------------------------------------------------
+#
+# Bater aqui vale mais que qualquer outra regra: o aviso sai mesmo que o
+# concurso esteja longe, mesmo que o texto seja noticia e nao edital, e mesmo
+# que o teto de mensagens do dia ja tenha estourado.
+principal:
+  nome: Policia Penal SC
+
+  # So vale para Santa Catarina. Sem prova de que o item e de SC, nao marca -
+  # a mesma regra de nunca chutar que vale para o anel de distancia.
+  uf: SC
+
+  # Como a secretaria ja se chamou. O orgao e o mesmo dos tres jeitos; o nome
+  # mudou duas vezes, e o concurso antigo continua indexado pelo nome da
+  # epoca. Conferido no site oficial em 22/09/2026.
+  orgaos:
+    - SEJURI                                            # o nome de hoje
+    - Secretaria de Estado de Justica e Reintegracao Social
+    - SAP                                               # o nome em 2019
+    - Secretaria de Estado da Administracao Prisional e Socioeducativa
+    - SJC                                               # o nome em 2013
+    - Secretaria de Estado da Justica e Cidadania
+    - DEAP        # Departamento de Administracao Prisional
+    - DPP         # Departamento de Policia Penal, onde o cargo mora hoje
+
+  # Como o cargo aparece escrito. "Agente penitenciario" e o nome antigo: foi
+  # com ele que as duas edicoes do concurso sairam.
+  termos:
+    - policia penal
+    - policial penal
+    - agente penitenciario
+
+  # A sigla sozinha nao prova estado nenhum: Sao Paulo tambem tem uma
+  # secretaria SAP. Quando a fonte nao informa a UF - a FEPESE e a IESES nao
+  # informam - e uma destas palavras que decide se o item e de SC.
+  prova_de_sc:
+    - santa catarina
+    - sejuri
+    - sap/sc
+    - sjc/sc
+
+  # "Policia Penal Federal" casa com "policia penal" e e outro concurso: ele
+  # esta na lista de secundarios, no lugar dele.
+  exclui:
+    - penal federal
+
+  # Quem organizou as duas vezes que o concurso saiu: FEPESE em 2013 (edital
+  # 01/2013 - SJC/SC) e em 2019 (edital 001/SAP/2019). NAO marca alvo
+  # sozinha - a FEPESE faz dezenas de concursos de prefeitura por ano. Serve
+  # para o aviso lembrar que o padrao de prova ja e conhecido.
+  bancas:
+    - FEPESE
+
+# --- os alvos secundarios ---------------------------------------------------
+#
+# A ordem aqui e a ordem do CLAUDE.md, e ela conta: o primeiro bloco que casar
+# e o que fica. Bater aqui NAO muda regra nenhuma de aviso - o concurso
+# continua sujeito a distancia e ao teto de mensagens. A marca serve para eu
+# reconhecer o cargo na lista.
+secundarios:
+  - nome: Guarda Municipal
+    termos:
+      - guarda municipal
+      - guarda civil municipal
+
+  - nome: Policia Civil
+    termos:
+      - policia civil
+      - delegado de policia
+      - escrivao de policia
+      - investigador de policia
+      - agente de policia
+
+  # Antes de "Bombeiro Militar" de proposito: um titulo que cite os dois e
+  # sobre o curso de oficial, que e o que eu quero.
+  - nome: Oficial de Bombeiros
+    termos:
+      - oficial de bombeiros
+      - oficial bombeiro militar
+      - oficial do corpo de bombeiros
+
+  - nome: Policia Penal Federal
+    termos:
+      - policia penal federal
+      - policial penal federal
+
+  - nome: Bombeiro Militar
+    termos:
+      - bombeiro militar
+      - corpo de bombeiros
+
+  - nome: Policia Cientifica
+    termos:
+      - policia cientifica
+      - perito criminal
+      - perito oficial
+      - papiloscopista
+      - medico legista

@@ -78,6 +78,12 @@ RELEVANCIAS = ("nucleo", "proximo", "estadual", "remoto", "indefinida")
 
 TIPOS = ("concurso", "seletivo", "desconhecido", "noticia")
 
+# O cargo e meu alvo? `principal` e a Policia Penal SC, que passa por cima do
+# filtro de distancia e do teto de avisos. `secundario` e o resto da lista do
+# CLAUDE.md, que so ganha a marca. Nulo = nao e cargo meu. Quem decide e
+# config/alvo.yml, nunca o codigo.
+ALVOS = ("principal", "secundario")
+
 ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 
 
@@ -115,6 +121,12 @@ class Concurso(Base):
     # --- filtro geografico (fase 1.5) --------------------------------------
     relevancia: Mapped[str] = mapped_column(String(15), default="indefinida", index=True)
     motivo_relevancia: Mapped[str | None] = mapped_column(String(300), nullable=True)
+
+    # --- filtro de cargo ----------------------------------------------------
+    # principal | secundario | nulo. Sai de config/alvo.yml, e como a
+    # relevancia e recalculado a cada `radar reclassificar`.
+    alvo: Mapped[str | None] = mapped_column(String(15), index=True, nullable=True)
+    motivo_alvo: Mapped[str | None] = mapped_column(String(300), nullable=True)
 
     # --- filtro de elegibilidade (fase 2.5) --------------------------------
     salario: Mapped[float | None] = mapped_column(nullable=True)
