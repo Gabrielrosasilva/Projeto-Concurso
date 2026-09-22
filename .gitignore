@@ -13,3 +13,7 @@ data/*.db
 # reconstroi a pasta inteira a partir dele.
 data/provas/
 data/editais/
+
+# Relatorio gerado por ferramentas_gerar_relatorio.py: e artefato, nao fonte.
+# Quem quiser o PDF roda o script de novo.
+RELATORIO_DO_PROJETO.pdf

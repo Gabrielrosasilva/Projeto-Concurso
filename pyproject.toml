@@ -7,7 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "requests==2.32.3",
     "feedparser==6.0.14",       # le RSS/Atom e ja resolve data e feed quebrado
-    "beautifulsoup4==4.12.3",   # usado a partir da fase 1.7 (diario oficial)
+    "beautifulsoup4==4.12.3",   # le a pagina do post e o hotsite da banca
     "lxml==5.3.0",
     "SQLAlchemy==2.0.36",
     "typer==0.27.2",
