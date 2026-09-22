@@ -8,7 +8,7 @@
 
 # Ano em que eu nasci. Serve para a idade maxima que alguns editais poem -
 # concurso de carreira policial costuma ter.
-ano_de_nascimento:
+ano_de_nascimento: 2000
 
 # O maior nivel que eu concluí: superior, medio ou fundamental.
 escolaridade: superior
@@ -19,4 +19,4 @@ formacao: Sistemas de Informacao
 
 # As categorias de CNH que eu tenho, em lista. Exemplo: [B]
 # Vazio = nao tenho, ou nao informei.
-cnh: []
+cnh: [B]
