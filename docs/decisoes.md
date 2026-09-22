@@ -18,7 +18,9 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - caminho no manifesto usa barra normal mesmo no Windows, senao a outra
   maquina nao acha o arquivo;
 - o acervo comeca pelo concurso ENCERRADO e perto de casa: encerrado e o
-  que tem prova publicada, e perto e o padrao de banca que me serve;
+  que tem prova publicada, e perto e o padrao de banca que me serve. O alvo
+  principal passou na frente disso - veja a decisao sobre `config/alvo.yml`
+  mais abaixo;
 - a materia de cada questao vem do cabecalho de secao do proprio caderno,
   e o gabarito vem marcado no texto (Check-square). Nada disso e adivinhado;
 - a leitura do caderno parte das ALTERNATIVAS, nunca dos numeros: a ordem
@@ -232,9 +234,11 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - o sorteio do simulado e por ENUNCIADO, nao por linha: dos 5.021 registros so
   1.815 sao perguntas diferentes, e uma aparece em 44 cadernos;
 - simulado sem materia escolhida usa as materias que caem em qualquer concurso
-  (Portugues, Raciocinio, Informatica, Conhecimentos Gerais). O acervo nao tem
-  prova de Guarda Municipal nem de Policia Penal, e essas quatro treinam
-  mesmo assim;
+  (Portugues, Raciocinio, Informatica, Conhecimentos Gerais). Elas treinam
+  mesmo quando nao ha prova do cargo. **Isso mudou para a Policia Penal**: o
+  acervo passou a ter os dois cadernos de Agente Penitenciario de SC, o de
+  2013 (70 questoes) e o de 2019 (100), mais o de Agente de Seguranca
+  Socioeducativo de 2013 e 2016. Guarda Municipal continua sem prova nenhuma;
 - nao somar coluna booleana no SQL: o SQLAlchemy devolve a soma com o tipo da
   coluna, entao 2 acertos voltam como True e viram 1. Use `case(...)`;
 - orgao estadual de SC tem relevancia propria, `estadual`, e nunca vira
@@ -283,3 +287,41 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   O concurso antigo continua indexado pelo nome da epoca;
 - "Policia Penal Federal" e excluida do alvo principal a mao: ela casa com
   "policia penal" e e outro concurso, que tem bloco proprio nos secundarios.
+- o acervo deixou de ser so geografico: concurso que bate no alvo principal de
+  `config/alvo.yml` entra esteja onde estiver, e entra PRIMEIRO na fila de
+  requisicoes. A regra antiga so aceitava `nucleo`, `proximo` e `indefinida`,
+  e com isso as duas unicas provas de Agente Penitenciario de SC ficavam de
+  fora por serem `estadual`. O acervo existe para mostrar o padrao da banca no
+  cargo que eu vou prestar; deixar justamente esse cargo de fora era o acervo
+  contrariando o proprio motivo de existir;
+- na pagina `?go=provas`, o que nao e gabarito **e** prova. Era o contrario: o
+  caderno precisava provar que era caderno, por palavra no rotulo ("caderno",
+  "prova") ou por nome de arquivo com nivel e numero ("M1.pdf", "S12.pdf").
+  Em 2013 e 2019 o link do caderno se chama so "AP.pdf" e o rotulo e o nome do
+  cargo, sem palavra-chave nenhuma - as duas provas eram descartadas na
+  leitura da pagina. Quem precisa se identificar agora e a excecao, numa lista
+  curta (edital, termo aditivo, cronograma, convocacao...) que nao inclui
+  "recurso", porque "Analista de Recursos Humanos" e nome de cargo;
+- cada pedaco do caminho do acervo tem teto de 60 caracteres. O titulo do
+  concurso de 2013 na FEPESE gruda os quatro cargos num campo so, o que dava
+  160 caracteres de nome de pasta e derrubava o download com FileNotFoundError
+  no meio da rodada. O Windows para em 260 caracteres no caminho inteiro;
+- o caderno da FEPESE tem DOIS desenhos de alternativa, e os dois precisam ser
+  lidos: ate 2016 a caixa vinha escrita, "( X )" na certa e "( )" nas outras;
+  de 2019 em diante virou simbolo de fonte, que o extrator devolve como
+  "Check-square" e "SQUARE". As duas provas de Agente Penitenciario estao uma
+  em cada formato;
+- quem decide se uma linha repetida e mobilia de pagina e o proprio
+  PADRAO_ALTERNATIVA, e nao o nome do simbolo. A protecao antiga procurava
+  "SQUARE" e "Check-square", que so existem no caderno novo: no de 2013, a
+  alternativa "a. ( ) Sao corretas apenas as afirmativas 1 e 3." se repete
+  entre questoes e era apagada como se fosse rodape - a questao chegava ao
+  banco com tres alternativas e sem gabarito;
+- o numero da questao aceita tres digitos. A prova de 2019 tem 100 questoes, e
+  com o teto em dois a de numero 100 era jogada fora;
+- o hotsite de 2016 da FEPESE declara `charset=iso-8859-1` e serve os dois
+  encodings no mesmo arquivo: "PROVISORIO" em latin-1 e "Seguranca" em UTF-8.
+  Nao existe decodificacao unica certa para essa pagina, entao o texto fica
+  como o site entrega e o cargo dela aparece com acento quebrado no manifesto.
+  Adivinhar byte a byte seria o mesmo chute que a regra do anel existe para
+  impedir. Os dois cadernos que importam, 2013 e 2019, vem corretos.

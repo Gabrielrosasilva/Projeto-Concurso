@@ -283,7 +283,8 @@ def provas(
 ) -> None:
     """Monta o acervo: le os hotsites e baixa edital, prova e gabarito.
 
-    Comeca pelos concursos ja encerrados perto de casa - sao os que tem prova
+    Comeca pelo alvo principal de config/alvo.yml, esteja ele onde estiver.
+    Depois vem o concurso ja encerrado perto de casa - os que tem prova
     publicada e mostram o padrao da banca na minha regiao.
 
     Os PDFs ficam em data/provas/ e NAO vao para o git. O que e versionado e o
@@ -435,10 +436,11 @@ def parecidas(
 ) -> None:
     """Qual prova do acervo mais se parece com o cargo que eu quero.
 
-    Existe porque Guarda Municipal e Policia Penal nao tem prova nenhuma no
-    acervo. A lista mostra o que existe e em cima de que a semelhanca foi
-    medida - dividir uma palavra no nome nao faz duas profissoes serem a
-    mesma coisa.
+    Existe porque cargo que eu quero costuma nao ter prova no acervo -
+    Guarda Municipal ainda nao tem nenhuma. A Policia Penal saiu dessa lista
+    quando o alvo principal passou a entrar no acervo mesmo estando longe. A
+    lista mostra o que existe e em cima de que a semelhanca foi medida -
+    dividir uma palavra no nome nao faz duas profissoes serem a mesma coisa.
     """
     achadas = servico.provas_parecidas(cargo, banca=banca)
 

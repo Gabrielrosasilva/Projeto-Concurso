@@ -255,6 +255,7 @@ radar salario 324 5200          # grava; sem o valor, limpa
 
 ```bash
 radar provas --limite 20    # le os hotsites e baixa edital, prova e gabarito
+                            # comeca pelo alvo principal, onde quer que ele esteja
 radar provas --abertos      # o edital de quem ainda esta em andamento
 radar baixar-provas         # reconstroi o acervo a partir do manifesto
 radar elegibilidade         # le o edital: escolaridade, idade, CNH, teste fisico
@@ -488,6 +489,22 @@ Depois inclua em `COLETORES`, dentro de `servico.py`.
 O `self.get()` herdado ja cuida de tres coisas: checa o `robots.txt` do site,
 manda o `User-Agent` do projeto e espera o intervalo configurado entre uma
 requisicao e outra ao mesmo host.
+
+### Quem entra no acervo
+
+Nesta ordem:
+
+1. **o alvo principal de `config/alvo.yml`**, esteja ele onde estiver. Ele
+   nao passa pelo filtro de distancia: e concurso estadual, e eu presto onde
+   a prova for. Foi o que trouxe para o acervo as duas unicas provas de Agente
+   Penitenciario que SC ja teve - 2013 (70 questoes) e 2019 (100);
+2. concurso **encerrado** perto de casa (`nucleo` e `proximo`), que e o padrao
+   da banca na minha regiao;
+3. o que ainda depende de ler o edital (`indefinida`).
+
+A ordem importa porque o limite de requisicoes e curto: se so couber um
+concurso na rodada, tem que ser o que eu vou prestar. Use `--abertos` para
+pegar tambem o edital de quem ainda esta em andamento.
 
 ### Os PDFs nao ficam no git
 

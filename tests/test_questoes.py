@@ -376,3 +376,73 @@ def test_simbolo_entre_espacos_nao_vira_lacuna_falsa():
 def test_quebra_de_linha_e_tabulacao_sobrevivem():
     """A leitura do caderno depende da quebra de linha para achar as secoes."""
     assert questoes._tirar_simbolo_sem_desenho("a\nb\tc") == "a\nb\tc"
+
+
+# --- o caderno antigo, de caixa escrita -------------------------------------
+#
+# A fixture agente_penitenciario_sjc_2013.txt e o texto REAL do caderno de
+# Agente Penitenciario do concurso 01/2013 - SJC/SC, o primeiro dos dois
+# concursos de Policia Penal que SC ja teve. Ele usa o desenho antigo da
+# FEPESE: a caixa da alternativa vem escrita, "( X )" na certa e "( )" nas
+# outras, em vez do simbolo de fonte que o caderno de 2019 em diante usa.
+#
+# Enquanto so o simbolo era lido, esta prova dava ZERO questao - e era
+# justamente a prova do cargo que eu quero.
+
+FIXTURE_2013 = (
+    Path(__file__).parent / "fixtures" / "provas"
+    / "agente_penitenciario_sjc_2013.txt"
+)
+
+
+@pytest.fixture(scope="module")
+def prova_2013() -> list[questoes.Questao]:
+    return questoes.dividir_em_questoes(
+        FIXTURE_2013.read_text(encoding="utf-8")
+    )
+
+
+def test_le_as_setenta_questoes_do_caderno_de_2013(prova_2013):
+    assert len(prova_2013) == 70
+    assert [q.numero for q in prova_2013] == list(range(1, 71))
+
+
+def test_a_caixa_escrita_com_x_e_o_gabarito(prova_2013):
+    """O "( X )" marca a certa, como o Check-square marca no caderno novo."""
+    assert all(q.resposta for q in prova_2013)
+    assert all(q.resposta in questoes.LETRAS for q in prova_2013)
+
+
+def test_o_x_nao_sobra_dentro_do_texto_da_alternativa(prova_2013):
+    """A marca e consumida pelo padrao: ela nao pode virar parte da resposta."""
+    primeira = prova_2013[0]
+    assert not primeira.alternativas[primeira.resposta].startswith(")")
+    assert "( X )" not in " ".join(primeira.alternativas.values())
+
+
+def test_as_materias_sao_as_de_carreira_policial(prova_2013):
+    materias = {q.materia for q in prova_2013}
+    assert "Direito Penal" in materias
+    assert "Direitos Humanos" in materias
+    assert "Direito Constitucional" in materias
+
+
+def test_o_v_e_o_f_do_enunciado_nao_viram_alternativa(prova_2013):
+    """O caderno usa "( V )" e "( F )" dentro do enunciado de verdadeiro ou
+    falso. Eles nao tem letra e ponto na frente, entao nao podem ser lidos
+    como alternativa - senao a questao ganharia alternativa fantasma."""
+    assert all(len(q.alternativas) == 5 for q in prova_2013)
+
+
+def test_caderno_de_cem_questoes_nao_perde_a_ultima():
+    """A prova de Agente Penitenciario de 2019 tem 100 questoes. Com o numero
+    limitado a dois digitos, a de numero 100 era jogada fora e o caderno
+    parava em 99."""
+    texto = "\n".join(
+        f"{n}. Pergunta numero {n}?\n"
+        + "\n".join(f"{letra}. ( ) alternativa {letra} da {n}."
+                    for letra in questoes.LETRAS)
+        for n in (98, 99, 100)
+    )
+    lidas = questoes.dividir_em_questoes(texto)
+    assert [q.numero for q in lidas] == [98, 99, 100]

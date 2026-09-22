@@ -44,8 +44,15 @@ ROTULOS_DE_DOCUMENTO = (
     "download", "clique aqui", "pdf",
 )
 
-# Nome de arquivo tipo "M1.pdf" ou "S12.pdf": e caderno de prova, por nivel.
-PADRAO_CADERNO = re.compile(r"^[a-z]{1,2}\d+\.pdf$", re.IGNORECASE)
+# Documento que aparece na pagina de provas sem ser prova nem gabarito. A
+# lista e curta e literal de proposito: ela existe so como defesa, porque nas
+# tres paginas de hotsite guardadas como fixture nenhum PDF caiu aqui.
+# "Recurso" ficou de fora por ser ambiguo - "Analista de Recursos Humanos" e
+# nome de cargo, e seria descartado como se fosse papelada.
+ROTULOS_QUE_NAO_SAO_PROVA = (
+    "edital", "retificac", "termo aditivo", "comunicado", "cronograma",
+    "convocac", "homologac", "errata", "resultado", "classificac",
+)
 
 
 def _sem_acento(texto: str) -> str:
@@ -80,13 +87,24 @@ class Documento:
 
 
 def _tipo_do_documento(arquivo: str, rotulos: list[str]) -> str | None:
+    """Na pagina de provas, o que nao e gabarito nem papelada e caderno.
+
+    Isto ja foi o contrario: o caderno precisava PROVAR que era caderno, por
+    palavra no rotulo ("caderno", "prova") ou por nome de arquivo com nivel e
+    numero ("M1.pdf", "S12.pdf"). A regra deixava de fora justamente as duas
+    provas de Agente Penitenciario de SC: em 2013 e em 2019 o link se chama so
+    "AP.pdf", e o rotulo e o nome do cargo, sem palavra-chave nenhuma.
+
+    Exigir prova de que e caderno era o filtro errado - a pagina `?go=provas`
+    ja diz o que ela e. Agora quem precisa se identificar e a excecao.
+    """
     texto = _normalizar(" ".join([arquivo, *rotulos]))
 
     if "gabarito" in texto:
         return GABARITO
-    if "caderno" in texto or "prova" in texto or PADRAO_CADERNO.match(arquivo):
-        return PROVA
-    return None
+    if any(marca in texto for marca in ROTULOS_QUE_NAO_SAO_PROVA):
+        return None
+    return PROVA
 
 
 def _cargo(rotulos: list[str]) -> str | None:
@@ -166,10 +184,26 @@ def caminho_do_manifesto() -> Path:
     return config.diretorio_dados() / "provas.json"
 
 
+# Teto de tamanho de cada pedaco do caminho. O Windows para em 260 caracteres
+# no caminho inteiro, e a raiz do acervo ja come uns 70 - ninguem tem pasta de
+# projeto na raiz do disco. Sessenta deixa o nome legivel e sobra folga.
+#
+# Isto nao e teoria: o titulo do concurso de 2013 na FEPESE gruda os quatro
+# cargos num campo so ("...CidadaniaAgente Penitenciario (masculino)Agente
+# Penitenciario (feminino)Agente de Seguranca..."), o que dava 160 caracteres
+# de nome de pasta e um FileNotFoundError no meio do download.
+TAMANHO_MAXIMO_DO_NOME = 60
+
+
 def _nome_seguro(texto: str) -> str:
     """Nome de pasta que funciona no Windows e no Linux."""
     limpo = re.sub(r"[^a-z0-9]+", "-", _normalizar(texto or "sem-nome"))
-    return limpo.strip("-") or "sem-nome"
+    limpo = limpo.strip("-") or "sem-nome"
+
+    if len(limpo) > TAMANHO_MAXIMO_DO_NOME:
+        # corta no hifen anterior ao teto, para nao partir palavra no meio
+        limpo = limpo[:TAMANHO_MAXIMO_DO_NOME].rsplit("-", 1)[0].strip("-")
+    return limpo or "sem-nome"
 
 
 def destino(documento: Documento) -> Path:

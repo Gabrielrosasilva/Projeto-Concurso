@@ -288,3 +288,159 @@ def test_manifesto_sobrevive_a_interrupcao(banco_temporario, monkeypatch):
     registros = provas.carregar_manifesto()
     assert registros
     assert any(r.get("cargo") == "Agente de Portaria" for r in registros)
+
+
+# --- o alvo principal entra no acervo esteja onde estiver -------------------
+#
+# As fixtures policia_penal_2013_provas.html e policia_penal_2019_provas.html
+# sao as paginas REAIS de secjustica.fepese.org.br e sap.fepese.org.br,
+# baixadas em 22/09/2026. Sao as duas unicas provas de Agente Penitenciario de
+# SC que existem, e ate aqui elas ficavam de fora do acervo por serem
+# `estadual` - nem `nucleo`, nem `indefinida`.
+
+BASE_2019 = "https://sap.fepese.org.br/"
+BASE_2013 = "http://secjustica.fepese.org.br/"
+
+
+def test_acha_o_caderno_de_agente_penitenciario_de_2019():
+    documentos = provas.ler_pagina_de_provas(pagina("policia_penal_2019_provas"),
+                                             BASE_2019)
+    cadernos = [d for d in documentos if d.tipo == provas.PROVA]
+
+    assert {d.arquivo for d in cadernos} == {"AP.pdf"}
+    assert "Agente Penitenci" in cadernos[0].cargo
+
+
+def test_masculino_e_feminino_sao_o_mesmo_caderno():
+    """A pagina de 2019 lista dois cargos, mas os dois links apontam para o
+    mesmo AP.pdf: e um caderno so. Agrupar por URL evita baixar duas vezes."""
+    cadernos = [
+        d for d in provas.ler_pagina_de_provas(pagina("policia_penal_2019_provas"),
+                                               BASE_2019)
+        if d.tipo == provas.PROVA
+    ]
+    assert len(cadernos) == 1
+
+
+def test_acha_os_dois_cargos_de_2013():
+    """Em 2013 os cargos tem caderno proprio: AP e AS sao arquivos diferentes."""
+    cadernos = {
+        d.arquivo: d.cargo
+        for d in provas.ler_pagina_de_provas(pagina("policia_penal_2013_provas"),
+                                             BASE_2013)
+        if d.tipo == provas.PROVA
+    }
+
+    assert set(cadernos) == {"AP.pdf", "AS.pdf"}
+    assert "Agente Penitenci" in cadernos["AP.pdf"]
+    assert "Socioeducativo" in cadernos["AS.pdf"]
+
+
+def test_o_gabarito_dos_dois_anos_e_um_arquivo_so():
+    for fixture, base in ((("policia_penal_2013_provas"), BASE_2013),
+                          (("policia_penal_2019_provas"), BASE_2019)):
+        gabaritos = [
+            d for d in provas.ler_pagina_de_provas(pagina(fixture), base)
+            if d.tipo == provas.GABARITO
+        ]
+        assert len(gabaritos) == 1, fixture
+        assert "gabarito" in gabaritos[0].arquivo
+
+
+def _concurso_alvo(**mudancas):
+    from radar.models import Concurso
+
+    base = dict(
+        url="https://fepese.org.br/concurso/2013-sjc",
+        fonte="fepese",
+        titulo="2013 - Secretaria de Estado da Justica e Cidadania",
+        uf="SC",
+        tipo="concurso",
+        situacao="encerrado",
+        relevancia="estadual",
+        alvo="principal",
+        motivo_alvo="Alvo principal (Policia Penal SC).",
+        extra={"hotsite": "http://secjustica.fepese.org.br/"},
+    )
+    base.update(mudancas)
+    return Concurso(**base)
+
+
+def test_alvo_principal_entra_no_acervo_mesmo_sendo_estadual(banco_temporario):
+    """A regra antiga so olhava distancia, e `estadual` nao passava por ela.
+    As duas provas que eu mais preciso ficavam de fora."""
+    from radar import servico
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_concurso_alvo())
+
+    escolhidos = servico._concursos_com_prova(limite=10)
+    assert [c.url for c in escolhidos] == ["https://fepese.org.br/concurso/2013-sjc"]
+
+
+def test_alvo_principal_entra_no_acervo_mesmo_sendo_remoto(banco_temporario):
+    """Concurso estadual e prestado onde a prova for: a distancia nao decide
+    o que vale estudar."""
+    from radar import servico
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_concurso_alvo(relevancia="remoto", municipio="Chapeco"))
+
+    assert len(servico._concursos_com_prova(limite=10)) == 1
+
+
+def test_alvo_principal_vem_antes_do_que_esta_perto(banco_temporario):
+    """A ordem importa porque o limite de requisicoes e curto: se so couber
+    um concurso na rodada, tem que ser o meu."""
+    from radar import servico
+    from radar.db import sessao
+    from radar.models import Concurso
+
+    with sessao() as s:
+        s.add(Concurso(
+            url="https://fepese.org.br/concurso/palhoca",
+            fonte="fepese", titulo="2024 - Prefeitura Municipal de Palhoca",
+            municipio="Palhoca", relevancia="nucleo", situacao="encerrado",
+            tipo="concurso", extra={"hotsite": "https://palhoca.test"},
+        ))
+        s.add(_concurso_alvo())
+
+    escolhidos = servico._concursos_com_prova(limite=1)
+    assert [c.url for c in escolhidos] == ["https://fepese.org.br/concurso/2013-sjc"]
+
+
+def test_concurso_longe_sem_alvo_continua_fora(banco_temporario):
+    """A regra nova abre a porta para o alvo principal, e so para ele."""
+    from radar import servico
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_concurso_alvo(
+            url="https://fepese.org.br/concurso/outro",
+            titulo="2020 - Prefeitura de Chapeco",
+            relevancia="remoto", municipio="Chapeco",
+            alvo=None, motivo_alvo=None,
+        ))
+
+    assert servico._concursos_com_prova(limite=10) == []
+
+
+def test_nome_de_pasta_nao_estoura_o_limite_do_windows():
+    """Bug real: o titulo de 2013 na FEPESE gruda os quatro cargos num campo
+    so, dava 160 caracteres de pasta e derrubava o download no meio."""
+    titulo = (
+        "2013 - Secretaria de Estado da Justica e CidadaniaAgente Penitenciario "
+        "(masculino)Agente Penitenciario (feminino)Agente de Seguranca "
+        "Socioeducativo (masculino)Agente de Seguranca Socioeducativo (feminino)"
+    )
+    nome = provas._nome_seguro(titulo)
+
+    assert len(nome) <= provas.TAMANHO_MAXIMO_DO_NOME
+    assert not nome.endswith("-")       # nao corta deixando hifen solto
+    assert nome.startswith("2013-secretaria")
+
+
+def test_nome_curto_fica_intacto():
+    assert provas._nome_seguro("Palhoca") == "palhoca"

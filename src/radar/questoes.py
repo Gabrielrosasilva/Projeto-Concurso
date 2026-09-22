@@ -31,8 +31,18 @@ from pathlib import Path
 log = logging.getLogger(__name__)
 
 # Como o extrator de PDF representa a caixa marcada e a vazia.
+#
+# Sao DOIS formatos, porque o caderno da FEPESE mudou de desenho. Ate 2016 a
+# caixa vinha escrita com parenteses - "( X )" na certa, "( )" nas outras. De
+# 2019 em diante virou simbolo de uma fonte propria, que o extrator devolve
+# como "Check-square" e "SQUARE".
+#
+# Os dois precisam funcionar: as duas provas de Agente Penitenciario de SC que
+# existem estao uma em cada formato, a de 2013 na escrita e a de 2019 na de
+# simbolo. Enquanto so o formato novo era lido, a de 2013 dava zero questao.
 MARCA_CERTA = "Check-square"
 MARCA_ERRADA = "SQUARE"
+CAIXA_ESCRITA = r"\([ \t]*[Xx]?[ \t]*\)"
 
 # "Lingua Portuguesa 10 questoes". O nome nao pode ter digito: isso descarta
 # a linha da capa ("8 as 11h 40 questoes"), que nao e secao de materia.
@@ -42,13 +52,28 @@ PADRAO_SECAO = re.compile(
 )
 
 # "12. Qual o nome da capital catarinense?"
-PADRAO_QUESTAO = re.compile(r"^[ \t]*(\d{1,2})\.[ \t]+(?=\S)", re.MULTILINE)
+#
+# Tres digitos, e nao dois: a prova de Agente Penitenciario de 2019 tem 100
+# questoes, e com o teto em dois digitos a de numero 100 era lida como
+# alternativa solta e jogada fora. O caderno so ficou com 99.
+PADRAO_QUESTAO = re.compile(r"^[ \t]*(\d{1,3})\.[ \t]+(?=\S)", re.MULTILINE)
 
-# "a. SQUARE texto" ou "b. Check-square texto"
+# "a. SQUARE texto", "b. Check-square texto" ou, no caderno antigo,
+# "a. ( ) texto" e "b. ( X ) texto".
 PADRAO_ALTERNATIVA = re.compile(
-    rf"^[ \t]*([a-e])\.[ \t]+({MARCA_CERTA}|{MARCA_ERRADA})[ \t]*",
+    rf"^[ \t]*([a-e])\.[ \t]+({MARCA_CERTA}|{MARCA_ERRADA}|{CAIXA_ESCRITA})[ \t]*",
     re.MULTILINE,
 )
+
+
+def _e_a_marcada(marca: str) -> bool:
+    """Esta e a alternativa que o caderno aponta como certa?
+
+    O "( V )" e o "( F )" do enunciado de verdadeiro/falso nao chegam aqui: o
+    padrao exige a letra e o ponto na frente ("a. "), e a lista de V/F vem
+    solta no meio do texto.
+    """
+    return marca == MARCA_CERTA or marca.strip("() \t").lower() == "x"
 
 LETRAS = ("a", "b", "c", "d", "e")
 
@@ -250,9 +275,15 @@ def _linhas_repetidas(texto: str, minimo: int = 3) -> set[str]:
     return {
         linha for linha, vezes in contagem.items()
         if vezes >= minimo
-        # nao pode tirar alternativa nem enunciado, por mais que se repitam
-        and MARCA_ERRADA not in linha
-        and MARCA_CERTA not in linha
+        # Nao pode tirar alternativa nem enunciado, por mais que se repitam.
+        #
+        # Quem decide isso e o proprio PADRAO_ALTERNATIVA, e nao o nome do
+        # simbolo: ja foi uma busca por "SQUARE" e "Check-square", que so
+        # existem no caderno novo. No caderno de 2013, cuja alternativa e
+        # "a. ( ) Sao corretas apenas as afirmativas 1 e 3.", a frase se
+        # repete em varias questoes e era apagada como se fosse rodape - a
+        # questao chegava ao banco com tres alternativas e sem o gabarito.
+        and not PADRAO_ALTERNATIVA.match(linha)
         and not PADRAO_QUESTAO.match(linha)
     }
 
@@ -348,7 +379,7 @@ def _ler_alternativas(
                 limite = proxima.start()
 
         alternativas[letra] = cortar_mobilia(_limpar(texto[achado.end():limite]))
-        if achado.group(2) == MARCA_CERTA:
+        if _e_a_marcada(achado.group(2)):
             resposta = letra
 
     return alternativas, resposta

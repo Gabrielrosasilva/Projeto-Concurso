@@ -944,9 +944,20 @@ def _hotsite(concurso: Concurso) -> str | None:
 FONTES_COM_ACERVO = ("fepese", "ieses")
 
 
-# Ordem de prioridade para gastar requisicao. Prova de concurso encerrado perto
-# de casa vale mais que qualquer outra: e o padrao da banca na minha regiao.
+# Ordem de prioridade para gastar requisicao.
+#
+# O alvo principal vem na frente e NAO olha distancia. O acervo existe para me
+# mostrar o padrao da banca no cargo que eu vou prestar, e o cargo que eu vou
+# prestar e a Policia Penal SC - concurso estadual, onde a prova for. Enquanto
+# a regra era so geografica, as duas unicas provas de Agente Penitenciario que
+# existem (2013 e 2019) ficavam de fora do acervo por serem `estadual`, que
+# nao e nem `nucleo` nem `indefinida`. Era o acervo contrariando o motivo de
+# ele existir.
+#
+# Depois dele continua valendo o de sempre: prova de concurso encerrado perto
+# de casa, que e o padrao da banca na minha regiao.
 PRIORIDADE_ACERVO = (
+    lambda: Concurso.alvo == alvos.PRINCIPAL,
     lambda: Concurso.relevancia.in_(("nucleo", "proximo")),
     lambda: Concurso.relevancia == "indefinida",
 )
@@ -2126,9 +2137,11 @@ def provas_parecidas(
 ) -> list[substituta.Parecida]:
     """As provas do acervo mais parecidas com o cargo que eu quero.
 
-    Existe porque os cargos que eu mais quero - Guarda Municipal, Policia
-    Penal - nao tem prova nenhuma no acervo. Em vez de tela vazia, a lista
-    mostra o que existe e EM CIMA DE QUE a semelhanca foi medida.
+    Existe porque o cargo que eu quero costuma nao ter prova no acervo:
+    Guarda Municipal ainda nao tem nenhuma. A Policia Penal tinha o mesmo
+    problema ate o alvo principal passar a entrar no acervo esteja onde
+    estiver. Em vez de tela vazia, a lista mostra o que existe e EM CIMA DE
+    QUE a semelhanca foi medida.
     """
     criar_tabelas()
     if not (cargo or "").strip():
