@@ -33,6 +33,7 @@ from radar import config
 from radar.util import fuso_local
 from radar.db import criar_tabelas, sessao
 from radar.models import (
+    RELEVANCIAS,
     Concurso,
     QuestaoDeProva,
     RespostaDeSimulado,
@@ -191,9 +192,8 @@ def contar_por_relevancia(incluir_noticias: bool = False) -> dict[str, int]:
     with sessao() as s:
         contagem = dict(s.execute(consulta).all())
 
-    # garante as quatro chaves, mesmo zeradas, para a pagina nao ter que checar
-    return {anel: contagem.get(anel, 0)
-            for anel in ("nucleo", "proximo", "remoto", "indefinida")}
+    # garante todas as chaves, mesmo zeradas, para a pagina nao ter que checar
+    return {anel: contagem.get(anel, 0) for anel in RELEVANCIAS}
 
 
 def contar() -> int:
@@ -344,8 +344,10 @@ def reclassificar() -> dict[str, int]:
 
 # O que merece uma mensagem no celular. `indefinida` entra de proposito: e o
 # concurso federal ou sem UF, que PODE aplicar prova em Florianopolis. Melhor
-# receber dois avisos a toa do que perder o unico que interessava.
-RELEVANCIA_AVISO = ("nucleo", "proximo", "indefinida")
+# receber dois avisos a toa do que perder o unico que interessava. `estadual`
+# entra pelo motivo oposto - e concurso do estado, onde mora a Policia Penal
+# SC, e para esse eu vou onde a prova for.
+RELEVANCIA_AVISO = ("nucleo", "proximo", "estadual", "indefinida")
 
 # Teto de mensagens por coleta. Nao e economia: e protecao. Se uma regra de
 # classificacao quebrar, o estrago fica em 10 mensagens e um alerta, em vez de
@@ -546,11 +548,14 @@ def contar_abertas() -> int:
 PRIORIDADE_DETALHE = (
     # 1. o que ja sei que esta perto
     lambda: Concurso.relevancia.in_(("nucleo", "proximo")),
-    # 2. concurso de SC que ficou indefinido - e aqui que mora o caso da
+    # 2. orgao estadual de SC: a pagina e que diz os polos de prova, e e onde
+    #    mora a carreira que eu mais quero
+    lambda: Concurso.relevancia == "estadual",
+    # 3. concurso de SC que ficou indefinido - e aqui que mora o caso da
     #    SEFAZ SC: orgao estadual nao tem "Prefeitura de X" no titulo, entao
     #    o classificador nao acha municipio e marca indefinida
     lambda: (Concurso.relevancia == "indefinida") & (Concurso.uf == "SC"),
-    # 3. federal ou nacional: pode aplicar prova em Florianopolis
+    # 4. federal ou nacional: pode aplicar prova em Florianopolis
     lambda: (Concurso.relevancia == "indefinida") & Concurso.uf.is_(None),
 )
 

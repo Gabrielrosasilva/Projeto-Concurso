@@ -604,6 +604,36 @@ resposta: que o que serve para esse cargo sao as materias que caem em qualquer
 concurso, com as provas da mesma banca. Isso nao e consolo: essas materias
 valem **20 das 30 questoes** de uma prova da IESES.
 
+## O concurso estadual que parecia federal
+
+"2019 – Secretaria de Estado da Administracao Prisional e Socioeducativa" — o
+concurso da Policia Penal SC, o alvo principal — aparecia com o motivo "Sem UF:
+pode ser federal com prova em Florianopolis". Dois buracos se somavam: a API da
+FEPESE nao manda UF nenhuma, e o titulo de orgao estadual nao tem municipio
+para o classificador achar. Sem UF e sem municipio, so restava `indefinida`.
+
+O conserto tem duas metades, uma em cada camada:
+
+- **a UF vem da fonte.** A FEPESE e a fundacao da UFSC e so organiza concurso
+  estadual em SC, entao o coletor dela preenche `uf=SC` quando o titulo nomeia
+  um orgao do estado. Antes de escrever a regra, os 520 concursos do historico
+  dela foram conferidos: os 16 de orgao estadual sao todos de SC, e o unico
+  concurso fora do estado e municipal (Paraiso do Tocantins, 2023);
+- **o anel vem do classificador.** Com `uf=SC` e sem municipio, um orgao
+  estadual cai numa relevancia propria, `estadual`, com o motivo "Orgao
+  estadual de SC; polos de prova a confirmar no edital". Ela nunca vira
+  `nucleo`: a sede e em Florianopolis, mas onde a prova e aplicada quem diz e
+  o edital.
+
+Na tela ela aparece como "Estadual SC", em aba propria — concurso do estado
+nao e "perto" nem "longe". Entra nos avisos do Telegram, e na fila do
+`radar detalhar` vem logo depois de `nucleo` e `proximo`.
+
+Uma consequencia que vale saber: como a UF nasce no coletor, `radar
+reclassificar` sozinho nao conserta registro antigo da FEPESE — ele so reaplica
+a regra sobre o que ja esta no banco. Foi preciso um `radar coletar` antes. Na
+primeira vez, 17 registros sairam de `indefinida` para `estadual`.
+
 ## Dois sintomas confusos que vale saber de cor
 
 **O link aparece na tela mas da erro 404.** A tela e o codigo sao lidos em

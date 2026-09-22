@@ -182,8 +182,16 @@ Todo concurso coletado e classificado em um anel:
 |---|---|
 | `nucleo` | Grande Florianopolis (na tela aparece como "Perto") |
 | `proximo` | Itajai, Blumenau, Tubarao, Lages e vizinhos |
+| `estadual` | orgao estadual de SC, sem municipio (na tela, "Estadual SC") |
 | `remoto` | outro lugar, inclusive o resto de SC |
 | `indefinida` | nao da para saber sem ler o edital |
+
+`estadual` e o unico que nao sai de `config/regioes.yml`: e a Secretaria de
+Estado, a Policia Civil, Militar, Penal e Cientifica, o Corpo de Bombeiros — o
+orgao que serve o estado inteiro e nao tem municipio no titulo. Os polos de
+prova so saem no edital, entao ele **nunca vira `nucleo` por palpite**; mas
+tambem nao pode ficar enterrado em `indefinida`, porque e onde mora a Policia
+Penal SC.
 
 A lista padrao mostra so `nucleo` e `proximo`. **Nada e apagado**: o resto
 continua no banco e sai com `--todos` ou pelos atalhos da pagina web. Todo
@@ -338,7 +346,7 @@ fonte junto**. Configurar, uma vez:
 variables > Actions*, com os mesmos nomes. O `.env` esta no `.gitignore` e
 nunca sobe para o repositorio.
 
-**Quem vira mensagem:** `nucleo`, `proximo` e `indefinida`. Os indefinidos
+**Quem vira mensagem:** `nucleo`, `proximo`, `estadual` e `indefinida`. Os indefinidos
 entram de proposito — sao os federais e os sem UF, que ainda podem aplicar
 prova em Florianopolis. Melhor dois avisos a toa do que perder o unico que
 interessava. `remoto` e `noticia` nunca viram mensagem.

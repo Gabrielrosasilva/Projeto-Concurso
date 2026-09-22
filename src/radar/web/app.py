@@ -37,6 +37,7 @@ SITUACAO_LEGIVEL = {
 ROTULO_DO_ANEL = {
     "nucleo": "Perto",
     "proximo": "Proximo",
+    "estadual": "Estadual SC",
     "remoto": "Longe",
     "indefinida": "A confirmar",
 }

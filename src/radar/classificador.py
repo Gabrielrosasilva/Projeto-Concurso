@@ -120,6 +120,38 @@ def detectar_fase(titulo: str, resumo: str | None = None) -> str | None:
     return None
 
 
+# --- orgao estadual ---------------------------------------------------------
+
+# Orgao que serve o estado inteiro: nao tem municipio no titulo, e a prova
+# costuma ser aplicada em varios polos - nenhum deles garantido. Reconhece-lo
+# evita dois erros opostos: chutar `nucleo` porque a sede e em Florianopolis,
+# e enterrar em `indefinida` justamente as carreiras que eu mais quero.
+#
+# A lista e curta de proposito, so o que eu sei nomear com certeza. Autarquia
+# (Celesc, Casan, Udesc, TJSC) continua em `indefinida` ate eu ler o edital:
+# incluir por semelhanca seria o mesmo chute que a regra existe para impedir.
+# Os termos sao comparados contra o texto normalizado, entao va sem acento.
+ORGAOS_ESTADUAIS = (
+    "secretaria de estado",
+    "governo do estado",
+    "policia civil",
+    "policia militar",
+    "policia penal",
+    "policia cientifica",
+    "corpo de bombeiros",
+)
+
+
+def e_orgao_estadual(titulo: str) -> bool:
+    """O titulo nomeia um orgao de governo estadual?
+
+    Diz so isso - NAO diz de qual estado. Quem sabe a UF e a fonte: a FEPESE
+    so organiza concurso estadual em SC, e o feed nacional escreve "(SC)".
+    """
+    texto = regioes.normalizar(titulo)
+    return any(termo in texto for termo in ORGAOS_ESTADUAIS)
+
+
 # --- municipio --------------------------------------------------------------
 
 # O feed escreve o municipio antes da sigla entre parenteses:
@@ -245,6 +277,16 @@ def classificar(item: ItemColetado) -> Classificacao:
             return Classificacao(
                 anel, f"{municipio} (SC) esta no anel {anel}.", **comum
             )
+
+    # Orgao estadual de SC: nao tem municipio, e o edital e que dira onde sao
+    # os polos de prova. Fica num anel proprio em vez de `indefinida` - eu
+    # presto concurso estadual onde for, entao ele nao pode sumir da lista.
+    if uf == "SC" and e_orgao_estadual(item.titulo):
+        return Classificacao(
+            regioes.ESTADUAL,
+            "Orgao estadual de SC; polos de prova a confirmar no edital.",
+            **comum,
+        )
 
     if uf == "SC":
         if municipio:

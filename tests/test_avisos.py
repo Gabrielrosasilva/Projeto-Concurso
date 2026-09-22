@@ -105,6 +105,21 @@ def test_avisa_indefinida(banco_temporario, telegram):
     assert servico.avisar().enviados == 1
 
 
+def test_avisa_orgao_estadual_de_sc(banco_temporario, telegram):
+    """Policia Penal SC e o alvo principal: nao pode ficar sem notificacao so
+    porque o edital ainda nao disse onde sao os polos de prova."""
+    _semear(_concurso(
+        relevancia="estadual",
+        municipio=None,
+        titulo="2019 - Secretaria de Estado da Administracao Prisional",
+        motivo_relevancia=(
+            "Orgao estadual de SC; polos de prova a confirmar no edital."
+        ),
+    ))
+    assert servico.avisar().enviados == 1
+    assert "Prisional" in telegram[0]
+
+
 def test_nao_avisa_o_que_e_longe(banco_temporario, telegram):
     _semear(_concurso(relevancia="remoto", municipio="Capinzal"))
     assert servico.avisar().enviados == 0

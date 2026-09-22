@@ -182,3 +182,98 @@ def test_classificar_usa_a_url_do_item():
         )
     )
     assert resultado.tipo == "noticia"
+
+
+# --- orgao estadual de SC ----------------------------------------------------
+#
+# Bug real: "2019 - Secretaria de Estado da Administracao Prisional e
+# Socioeducativa" (o concurso da Policia Penal SC, o meu alvo principal) caia
+# em `indefinida` com o motivo "pode ser federal". Orgao estadual nao tem
+# municipio no titulo, entao nao havia o que o classificador achasse.
+
+@pytest.mark.parametrize("titulo", [
+    "2013 – Secretaria de Estado da Justiça e CidadaniaAgente Penitenciário "
+    "(masculino)Agente Penitenciário (feminino)Agente de Segurança "
+    "Socioeducativo (masculino)Agente de Segurança Socioeducativo (feminino)",
+    "2019 – Secretaria de Estado da Administração Prisional e Socioeducativa",
+    "2016 – Governo do Estado de Santa Catarina Secretaria de Estado da "
+    "Justiça e Cidadania Concurso Público Edital 001/2016-SJC/SC",
+    "2025 – Polícia Científica do Estado de Santa Catarina – PCISC",
+    "Concurso Polícia Penal SC abre inscricoes",
+    "Corpo de Bombeiros Militar de Santa Catarina abre concurso",
+])
+def test_orgao_estadual_de_sc_vira_relevancia_estadual(titulo):
+    # tipo vem preenchido porque e assim que a FEPESE manda: o titulo dela e
+    # so o nome do orgao, sem a palavra "concurso" para o detector achar.
+    resultado = classificar(
+        ItemColetado(titulo=titulo, url=f"https://exemplo.test/{hash(titulo)}",
+                     uf="SC", tipo="concurso")
+    )
+    assert resultado.relevancia == "estadual"
+    assert resultado.motivo == (
+        "Orgao estadual de SC; polos de prova a confirmar no edital."
+    )
+
+
+def test_estadual_nunca_vira_nucleo_por_palpite():
+    """A sede fica em Florianopolis, mas a prova pode ser em qualquer polo.
+    Chutar `nucleo` aqui e exatamente o erro que a regra existe para evitar."""
+    resultado = classificar(
+        ItemColetado(
+            titulo="2019 – Secretaria de Estado da Administração Prisional "
+                   "e Socioeducativa",
+            url="https://exemplo.test/sap",
+            uf="SC",
+            tipo="concurso",
+        )
+    )
+    assert resultado.relevancia != "nucleo"
+    assert resultado.municipio is None
+
+
+def test_orgao_estadual_de_outro_estado_nao_e_estadual():
+    """"Estadual" aqui quer dizer "do MEU estado". A PM de Sao Paulo e
+    estadual tambem, e continua sendo longe."""
+    resultado = classificar(
+        ItemColetado(
+            titulo="Policia Militar de Sao Paulo (SP) tem concurso autorizado",
+            url="https://exemplo.test/pmsp",
+            uf="SP",
+        )
+    )
+    assert resultado.relevancia != "estadual"
+
+
+def test_municipio_conhecido_ainda_manda_no_orgao_estadual():
+    """Se a pagina do edital ja disse a lotacao, isso e fato e vence a regra
+    do orgao - que e so a ausencia de municipio."""
+    resultado = classificar(
+        ItemColetado(
+            titulo="Secretaria de Estado da Saude abre vagas",
+            url="https://exemplo.test/ses",
+            uf="SC",
+            municipio="Florianopolis",
+        )
+    )
+    assert resultado.relevancia == "nucleo"
+
+
+def test_autarquia_de_sc_continua_indefinida():
+    """A lista de orgaos e curta de proposito: Celesc e estatal, nao
+    secretaria. Incluir por semelhanca seria o chute de sempre."""
+    resultado = classificar(
+        ItemColetado(titulo="2026 – Celesc Distribuição S.A",
+                     url="https://exemplo.test/celesc", uf="SC",
+                     tipo="concurso")
+    )
+    assert resultado.relevancia == "indefinida"
+
+
+def test_orgao_estadual_sem_uf_nenhuma_continua_indefinida():
+    """Sem a UF nao da para saber de que estado e a secretaria. Quem sabe e a
+    fonte, e e la que a UF e preenchida."""
+    resultado = classificar(
+        ItemColetado(titulo="Secretaria de Estado da Fazenda abre concurso",
+                     url="https://exemplo.test/sef")
+    )
+    assert resultado.relevancia == "indefinida"

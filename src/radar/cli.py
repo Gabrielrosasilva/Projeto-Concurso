@@ -75,6 +75,7 @@ SITUACAO_LEGIVEL = {
 ROTULO_DO_ANEL = {
     "nucleo": "Perto",
     "proximo": "Proximo",
+    "estadual": "Estadual SC",
     "remoto": "Longe",
     "indefinida": "A confirmar",
 }
@@ -82,6 +83,7 @@ ROTULO_DO_ANEL = {
 CORES_DO_ANEL = {
     "nucleo": "bold green",
     "proximo": "yellow",
+    "estadual": "bold magenta",
     "remoto": "dim",
     "indefinida": "magenta",
 }
@@ -168,7 +170,7 @@ def listar(
     termo: str = typer.Option(None, help="Palavra no titulo ou no resumo"),
     situacao: str = typer.Option(None, help="Ex: edital_publicado, autorizado"),
     relevancia: str = typer.Option(
-        None, help="nucleo, proximo, remoto ou indefinida"
+        None, help="nucleo, proximo, estadual, remoto ou indefinida"
     ),
     todos: bool = typer.Option(
         False, "--todos", help="Mostra todos os aneis, nao so o que e perto"
@@ -692,9 +694,9 @@ def detalhar(
     hoje, e nao so o que foi publicado hoje), a banca, e o municipio de
     lotacao quando a pagina deixa claro.
 
-    Nao le a pagina de todos: comeca pelo que ja esta perto, depois os
-    concursos de SC que ficaram indefinidos, depois os federais. O que e de
-    outro estado fica de fora.
+    Nao le a pagina de todos: comeca pelo que ja esta perto, depois o orgao
+    estadual de SC, depois os concursos de SC que ficaram indefinidos, e por
+    fim os federais. O que e de outro estado fica de fora.
     """
     console.print(
         f"Vou ler ate [bold]{limite}[/] pagina(s), com pausa de 1,5s entre "

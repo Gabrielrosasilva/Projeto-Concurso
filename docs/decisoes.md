@@ -237,6 +237,20 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   mesmo assim;
 - nao somar coluna booleana no SQL: o SQLAlchemy devolve a soma com o tipo da
   coluna, entao 2 acertos voltam como True e viram 1. Use `case(...)`;
+- orgao estadual de SC tem relevancia propria, `estadual`, e nunca vira
+  `nucleo`: a sede e em Florianopolis, mas os polos de prova so saem no
+  edital. Ele existe porque `indefinida` enterrava justamente a Policia Penal
+  SC, que e o alvo principal. A lista de orgaos e curta e literal (Secretaria
+  de Estado, Governo do Estado, Policia Civil/Militar/Penal/Cientifica, Corpo
+  de Bombeiros): autarquia e estatal (Celesc, Casan, TJSC) continuam
+  `indefinida`, porque incluir por semelhanca seria o chute que a regra existe
+  para impedir;
+- quem diz que o orgao estadual e de SC e a FONTE, nao o titulo: a FEPESE so
+  organiza concurso estadual em SC, entao o coletor dela preenche `uf=SC`
+  nesses casos. Conferido nos 520 concursos do historico dela - os 16 de orgao
+  estadual sao todos de SC, e o unico fora do estado e municipal. Como a UF
+  nasce no coletor, `radar reclassificar` sozinho nao conserta registro
+  antigo: precisa de uma coleta antes;
 - o tipo `noticia` e decidido primeiro pelo CAMINHO da URL: /concursos/ e
   concurso, /beneficios-sociais/ e noticia. Isso pega o que a palavra no
   titulo nao pega ("INSS paga hoje com vagas para todos").

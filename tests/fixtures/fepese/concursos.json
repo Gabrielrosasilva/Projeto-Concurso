@@ -157,5 +157,61 @@
       66
     ],
     "tax_escolaridade": []
+  },
+  {
+    "id": 16012,
+    "date": "2020-07-28T13:20:16",
+    "link": "https://fepese.org.br/concurso/2013-secretaria-de-estado-da-justica-e-cidadaniaagente-penitenciario-masculinoagente-penitenciario-femininoagente-de-seguranca-socioeducativo-masculinoagente-de-seguranca-socioeducativo-femin/",
+    "slug": "2013-secretaria-de-estado-da-justica-e-cidadaniaagente-penitenciario-masculinoagente-penitenciario-femininoagente-de-seguranca-socioeducativo-masculinoagente-de-seguranca-socioeducativo-femin",
+    "status": "publish",
+    "title": {
+      "rendered": "2013 &#8211; Secretaria de Estado da Justiça e CidadaniaAgente Penitenciário (masculino)Agente Penitenciário (feminino)Agente de Segurança Socioeducativo (masculino)Agente de Segurança Socioeducativo (feminino)"
+    },
+    "acf": {
+      "img_url": "http://novosite.fepese.org.br/imagens/concursos/238.gif",
+      "link_hotsite": "http://secjustica.fepese.org.br/"
+    },
+    "tax_concurso_status": [
+      68
+    ],
+    "tax_escolaridade": []
+  },
+  {
+    "id": 22508,
+    "date": "2024-09-03T17:15:16",
+    "link": "https://fepese.org.br/concurso/2024-secretaria-de-estado-da-administracao-prisional-e-socioeducativa-concurso-publicoconcurso-publico-edital-001-2019-2/",
+    "slug": "2024-secretaria-de-estado-da-administracao-prisional-e-socioeducativa-concurso-publicoconcurso-publico-edital-001-2019-2",
+    "status": "publish",
+    "title": {
+      "rendered": "2019 &#8211; Secretaria de Estado da Administração Prisional e Socioeducativa"
+    },
+    "acf": {
+      "link_hotsite": "https://sap.fepese.org.br",
+      "img_url": "https://fepese.org.br/imagens/concursos/190.png"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": []
+  },
+  {
+    "id": 24627,
+    "date": "2025-12-19T16:00:26",
+    "link": "https://fepese.org.br/concurso/2025-policia-cientifica-do-estado-de-santa-catarina-pcisc/",
+    "slug": "2025-policia-cientifica-do-estado-de-santa-catarina-pcisc",
+    "status": "publish",
+    "title": {
+      "rendered": "2025 &#8211; Polícia Científica do Estado de Santa Catarina &#8211; PCISC"
+    },
+    "acf": {
+      "link_hotsite": "https://2025pciperito.fepese.org.br",
+      "img_url": "https://fepese.org.br/wp-content/uploads/2022/03/logo_igp-e1647543726472.png"
+    },
+    "tax_concurso_status": [
+      66
+    ],
+    "tax_escolaridade": [
+      241
+    ]
   }
 ]

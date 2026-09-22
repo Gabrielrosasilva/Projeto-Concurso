@@ -13,6 +13,11 @@ from radar import config
 
 NUCLEO, PROXIMO, REMOTO, INDEFINIDA = "nucleo", "proximo", "remoto", "indefinida"
 
+# Fora dos aneis de proposito: orgao estadual de SC nao tem municipio, e a
+# prova pode ser aplicada em varios polos. Vale mais que `remoto` - e concurso
+# estadual, eu presto onde for - mas nunca vira `nucleo` por palpite.
+ESTADUAL = "estadual"
+
 
 def normalizar(nome: str) -> str:
     """Tira acento, caixa e espaco sobrando, para comparar nome de municipio.

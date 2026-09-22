@@ -72,7 +72,9 @@ SITUACOES = (
     "desconhecida",
 )
 
-RELEVANCIAS = ("nucleo", "proximo", "remoto", "indefinida")
+# Na ordem do que interessa: perto, perto o bastante, estadual de SC (eu
+# presto onde for), longe, e o que ainda depende de ler o edital.
+RELEVANCIAS = ("nucleo", "proximo", "estadual", "remoto", "indefinida")
 
 TIPOS = ("concurso", "seletivo", "desconhecido", "noticia")
 

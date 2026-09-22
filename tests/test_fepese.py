@@ -184,3 +184,48 @@ def test_uf_de_outro_estado_impede_o_atalho():
         uf="SP",
     )
     assert classificar(item).relevancia != "nucleo"
+
+
+# --- orgao estadual ----------------------------------------------------------
+#
+# Bug real: a API da FEPESE nao manda UF, e o titulo de orgao estadual nao tem
+# municipio. "2019 - Secretaria de Estado da Administracao Prisional e
+# Socioeducativa" - o concurso da Policia Penal SC - chegava sem UF e com o
+# motivo "pode ser federal". Os tres titulos abaixo sao reais, e estao na
+# fixture exatamente como a API os devolve.
+
+TITULO_2013 = (
+    "2013 – Secretaria de Estado da Justiça e CidadaniaAgente Penitenciário "
+    "(masculino)Agente Penitenciário (feminino)Agente de Segurança "
+    "Socioeducativo (masculino)Agente de Segurança Socioeducativo (feminino)"
+)
+TITULO_2019 = "2019 – Secretaria de Estado da Administração Prisional e Socioeducativa"
+TITULO_2025 = "2025 – Polícia Científica do Estado de Santa Catarina – PCISC"
+
+
+@pytest.mark.parametrize("titulo", [TITULO_2013, TITULO_2019, TITULO_2025])
+def test_orgao_estadual_recebe_uf_sc(coletor, titulo):
+    """A UF e dedutivel da fonte: a FEPESE so faz concurso estadual em SC."""
+    item = next(i for i in coletor.coletar() if i.titulo == titulo)
+    assert item.uf == "SC"
+    assert item.municipio is None
+
+
+@pytest.mark.parametrize("titulo", [TITULO_2013, TITULO_2019, TITULO_2025])
+def test_orgao_estadual_vira_relevancia_estadual(coletor, titulo):
+    """O que o bug pedia: sair de "pode ser federal" para "estadual de SC"."""
+    item = next(i for i in coletor.coletar() if i.titulo == titulo)
+    resultado = classificar(item)
+
+    assert resultado.relevancia == "estadual"
+    assert resultado.motivo == (
+        "Orgao estadual de SC; polos de prova a confirmar no edital."
+    )
+
+
+def test_prefeitura_continua_sem_uf(coletor):
+    """A UF so e preenchida onde ela e dedutivel. No concurso municipal quem
+    decide o anel e o nome do municipio, e o atalho ja funcionava."""
+    item = next(i for i in coletor.coletar() if i.municipio == "Sao Jose")
+    assert item.uf is None
+    assert classificar(item).relevancia == "nucleo"

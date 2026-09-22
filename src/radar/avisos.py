@@ -28,6 +28,7 @@ PAUSA_ENTRE_MENSAGENS = 1.0
 EMOJI_DO_ANEL = {
     "nucleo": "\U0001F7E2",      # verde: e aqui do lado
     "proximo": "\U0001F7E1",     # amarelo: da para ir de carro
+    "estadual": "\U0001F7E3",    # roxo: concurso do estado, e eu presto onde for
     "indefinida": "\U0001F535",  # azul: ainda nao sei, depende do edital
 }
 

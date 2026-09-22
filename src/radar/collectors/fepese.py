@@ -24,6 +24,7 @@ import logging
 import re
 from datetime import datetime
 
+from radar.classificador import e_orgao_estadual
 from radar.collectors.base import Coletor, ItemColetado
 
 log = logging.getLogger(__name__)
@@ -169,6 +170,17 @@ class Fepese(Coletor):
         texto = _sem_acento(f"{titulo} {registro.get('slug', '')}").lower()
         tipo = "seletivo" if "seletivo" in texto or "selecao" in texto else "concurso"
 
+        # A API nao manda UF nenhuma, e o titulo de orgao estadual nao tem
+        # municipio para o classificador achar - "2019 - Secretaria de Estado
+        # da Administracao Prisional e Socioeducativa" ficava como "pode ser
+        # federal". Aqui a UF e dedutivel da fonte: a FEPESE e a fundacao da
+        # UFSC e so organiza concurso estadual em SC. Conferido nos 520
+        # concursos do historico dela: os 16 de orgao estadual sao todos de
+        # SC, e o unico concurso fora do estado e municipal (Paraiso do
+        # Tocantins, 2023). Prefeitura continua sem UF de proposito - o nome
+        # do municipio e que decide o anel.
+        uf = "SC" if e_orgao_estadual(titulo) else None
+
         return ItemColetado(
             titulo=titulo,
             url=url,
@@ -176,6 +188,7 @@ class Fepese(Coletor):
             # A banca vem de graca: e o site dela.
             banca="FEPESE",
             municipio=extrair_municipio(titulo),
+            uf=uf,
             situacao=situacao,
             escolaridade=escolaridade,
             publicado_em=_data(registro.get("date")),

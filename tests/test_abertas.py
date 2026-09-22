@@ -161,6 +161,24 @@ def test_concurso_estadual_de_sc_entra_na_fila(banco_temporario):
     assert len(servico._pendentes_de_detalhe(limite=10)) == 1
 
 
+def test_orgao_estadual_vem_logo_depois_do_que_esta_perto(banco_temporario):
+    """Concurso estadual e onde mora a Policia Penal SC: a pagina dele vale
+    mais requisicao que a do federal que talvez nem tenha prova aqui."""
+    _semear(
+        _concurso("https://a.test/federal", relevancia="indefinida",
+                  uf=None, municipio=None),
+        _concurso("https://a.test/estadual", relevancia="estadual",
+                  titulo="2019 - Secretaria de Estado da Administracao Prisional",
+                  uf="SC", municipio=None),
+        _concurso("https://a.test/perto", relevancia="nucleo"),
+    )
+
+    escolhidos = servico._pendentes_de_detalhe(limite=10)
+    assert [c.url for c in escolhidos] == [
+        "https://a.test/perto", "https://a.test/estadual", "https://a.test/federal"
+    ]
+
+
 def test_indefinida_de_outro_estado_fica_de_fora(banco_temporario):
     """Concurso de SP que ficou indefinido nao merece uma requisicao."""
     _semear(_concurso(

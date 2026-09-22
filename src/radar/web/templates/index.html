@@ -13,6 +13,7 @@
       --proximo:#b45309; --proximo-fraco:#fdeed3;
       --remoto:#64748b; --remoto-fraco:#eef1f5;
       --indef:#7c3aed; --indef-fraco:#efe6fe;
+      --estadual:#9333ea; --estadual-fraco:#f3e4ff;
       --prazo:#be123c; --prazo-fraco:#ffe4e9;
       --estrela:#b45309; --estrela-fraca:#fef3c7;
     }
@@ -24,6 +25,7 @@
         --proximo:#fbbf24; --proximo-fraco:#2e2310;
         --remoto:#94a3b8; --remoto-fraco:#1c2027;
         --indef:#c4b5fd; --indef-fraco:#241b3a;
+        --estadual:#d8b4fe; --estadual-fraco:#2a1436;
         --prazo:#fb7185; --prazo-fraco:#2c1219;
         --estrela:#fbbf24; --estrela-fraca:#2e2310;
       }
@@ -70,6 +72,7 @@
       border-left:4px solid var(--remoto);border-radius:10px;padding:.75rem .85rem}
     .fixado.nucleo{border-left-color:var(--nucleo);background:var(--nucleo-fraco)}
     .fixado.proximo{border-left-color:var(--proximo);background:var(--proximo-fraco)}
+    .fixado.estadual{border-left-color:var(--estadual);background:var(--estadual-fraco)}
     .fixado.indefinida{border-left-color:var(--indef);background:var(--indef-fraco)}
     .fixado a{color:var(--texto);text-decoration:none;font-weight:600;
       font-size:.9rem;display:block;margin-bottom:.4rem}
@@ -90,6 +93,7 @@
     nav a .n{font-weight:700;font-variant-numeric:tabular-nums;opacity:.75}
     nav a.ativo{border-color:transparent}
     nav a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
+    nav a.ativo.estadual{background:var(--estadual-fraco);color:var(--estadual)}
     nav a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
     nav a.ativo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     nav a.ativo.indefinida{background:var(--indef-fraco);color:var(--indef)}
@@ -170,6 +174,7 @@
       border-radius:10px;padding:.85rem 1rem;border-left:3px solid var(--borda)}
     ul.lista>li.nucleo{border-left-color:var(--nucleo)}
     ul.lista>li.proximo{border-left-color:var(--proximo)}
+    ul.lista>li.estadual{border-left-color:var(--estadual)}
     ul.lista>li.indefinida{border-left-color:var(--indef)}
 
     .topo{display:flex;gap:.6rem;align-items:flex-start}
@@ -189,6 +194,7 @@
     .selo .rot{font-weight:400;opacity:.7}
     .selo.nucleo{background:var(--nucleo-fraco);color:var(--nucleo)}
     .selo.proximo{background:var(--proximo-fraco);color:var(--proximo)}
+    .selo.estadual{background:var(--estadual-fraco);color:var(--estadual)}
     .selo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
     .selo.indefinida{background:var(--indef-fraco);color:var(--indef)}
     .selo.neutro{background:transparent;color:var(--suave);font-weight:400;
@@ -450,6 +456,11 @@
       </a>
       <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
         Inscricoes abertas <span class="n">{{ n_abertas }}</span>
+      </a>
+      <a class="estadual {{ 'ativo' if relevancia == 'estadual' }}"
+         href="/?relevancia=estadual"
+         title="Orgao estadual de SC: os polos de prova saem no edital">
+        Estadual SC <span class="n">{{ contagem.estadual }}</span>
       </a>
       <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
         Longe <span class="n">{{ contagem.remoto }}</span>

@@ -47,6 +47,32 @@ def test_pagina_mostra_concurso(cliente):
     assert "Status:" in texto
 
 
+def test_aba_estadual_sc(cliente):
+    """"estadual" e jargao do banco; na tela vale o que eu entendo. A aba e
+    propria porque concurso do estado nao e "perto" nem "longe"."""
+    with sessao() as s:
+        s.add(
+            Concurso(
+                url="https://exemplo.test/sap",
+                fonte="fepese",
+                titulo="2019 - Secretaria de Estado da Administracao Prisional",
+                uf="SC",
+                tipo="concurso",
+                relevancia="estadual",
+                motivo_relevancia=(
+                    "Orgao estadual de SC; polos de prova a confirmar no edital."
+                ),
+            )
+        )
+
+    inicio = cliente.get("/").text
+    assert "Estadual SC" in inicio          # a aba, com a contagem
+
+    texto = cliente.get("/?relevancia=estadual").text
+    assert "Administracao Prisional" in texto
+    assert "polos de prova a confirmar no edital" in texto
+
+
 def test_filtro_por_uf(cliente):
     with sessao() as s:
         s.add(Concurso(url="https://a.test/1", fonte="f", titulo="De SC",
