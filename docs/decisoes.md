@@ -325,3 +325,19 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   como o site entrega e o cargo dela aparece com acento quebrado no manifesto.
   Adivinhar byte a byte seria o mesmo chute que a regra do anel existe para
   impedir. Os dois cadernos que importam, 2013 e 2019, vem corretos.
+- pagina que declara latin-1 e lida POR BYTE: o que forma UTF-8 valido e
+  UTF-8, o byte que sobra e latin-1. Isso corrige o hotsite de 2016 da FEPESE,
+  que mistura os dois no mesmo arquivo, sem tocar nos de 2013 e 2019, que sao
+  latin-1 honestos e saem identicos. Vale so quando o cabecalho declarou
+  latin-1 ou parente - que e onde ha ambiguidade, porque latin-1 aceita
+  qualquer byte e nunca reclama nem quando esta errado. Quem declara UTF-8
+  fica como esta. **Isto substitui a decisao anterior** de deixar o acento
+  quebrado: la a conclusao foi que nao havia UMA codificacao certa para o
+  arquivo, o que continua verdade - o que existe e uma leitura certa por byte;
+- orgao estadual e reconhecido por duas listas, porque cada fonte titula de um
+  jeito. A do codigo pega o nome por extenso ("Secretaria de Estado da..."),
+  que e como a FEPESE escreve. A de `config/alvo.yml` pega a SIGLA, que e como
+  o agregador escreve ("SEJURI SC divulga novo edital") - e sigla nenhuma casa
+  com "secretaria de estado", entao os dois concursos da SEJURI ficavam em
+  `indefinida` mesmo com uf=SC. A comparacao por sigla e por palavra inteira,
+  senao "SAP" casaria dentro de "SAPE/SC", que e a Secretaria da Agricultura.

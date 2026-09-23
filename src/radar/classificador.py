@@ -148,9 +148,18 @@ def e_orgao_estadual(titulo: str) -> bool:
 
     Diz so isso - NAO diz de qual estado. Quem sabe a UF e a fonte: a FEPESE
     so organiza concurso estadual em SC, e o feed nacional escreve "(SC)".
+
+    Sao duas listas, porque cada fonte escreve de um jeito. A de cima pega o
+    nome por extenso, que e como a FEPESE titula ("Secretaria de Estado da
+    Administracao Prisional"). A de config/alvo.yml pega a SIGLA, que e como o
+    agregador titula ("SEJURI SC divulga novo edital") - e sigla nenhuma casa
+    com "secretaria de estado", entao os dois concursos da SEJURI ficavam em
+    `indefinida` mesmo tendo uf=SC.
     """
     texto = regioes.normalizar(titulo)
-    return any(termo in texto for termo in ORGAOS_ESTADUAIS)
+    if any(termo in texto for termo in ORGAOS_ESTADUAIS):
+        return True
+    return alvos.nomeia_orgao_do_principal(titulo)
 
 
 # --- municipio --------------------------------------------------------------

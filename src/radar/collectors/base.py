@@ -8,6 +8,7 @@ A classe base cuida sozinha das tres boas maneiras de quem raspa site alheio:
 identificar-se no User-Agent, respeitar o robots.txt e esperar entre uma
 requisicao e outra.
 """
+import codecs
 import logging
 import time
 from abc import ABC, abstractmethod
@@ -25,6 +26,58 @@ log = logging.getLogger(__name__)
 
 class ColetorBloqueadoPeloRobots(RuntimeError):
     """O robots.txt do site proibe buscar esta URL. Nao insista."""
+
+
+# --- codificacao da pagina ---------------------------------------------------
+#
+# Codificacao que aceita qualquer byte e por isso nunca da erro de leitura. E
+# o palpite preguicoso de servidor mal configurado: ele declara isto no
+# cabecalho e manda outra coisa, porque nada estoura.
+CODIFICACOES_QUE_NUNCA_FALHAM = (
+    "iso88591", "latin1", "latin_1", "cp1252", "windows1252",
+)
+
+
+def _byte_solto_como_latin1(erro: UnicodeDecodeError) -> tuple[str, int]:
+    """O byte que nao forma UTF-8 valido e lido como latin-1, sozinho."""
+    return erro.object[erro.start:erro.end].decode("latin-1"), erro.end
+
+
+codecs.register_error("radar_latin1", _byte_solto_como_latin1)
+
+
+def corrigir_codificacao(resposta: requests.Response) -> None:
+    """Escolhe a codificacao olhando os BYTES, e nao so o cabecalho.
+
+    O hotsite de 2016 da FEPESE declara `charset=iso-8859-1` e serve os dois
+    no mesmo arquivo: "PROVISORIO" com O acentuado em latin-1 e "Seguranca"
+    com C cedilha em UTF-8. Lido so como latin-1, o cargo virava "Agente de
+    SeguranAga Socioeducativo" - e isso ia para o manifesto versionado e para
+    o banco de questoes, nao so para a tela.
+
+    Nao existe UMA codificacao certa para um arquivo assim, mas existe uma
+    leitura certa POR BYTE: o que forma UTF-8 valido e UTF-8, e o byte que
+    sobra e latin-1. Isso e determinado, e nao chute.
+
+    So vale quando o cabecalho declarou latin-1 ou parente, que e onde ha
+    ambiguidade para resolver: latin-1 aceita qualquer byte, entao ele nunca
+    reclama nem quando esta errado. Servidor que diz UTF-8 fica como esta.
+
+    Conferido nos tres hotsites de Policia Penal: o de 2013 e o de 2019 sao
+    latin-1 honestos e saem IDENTICOS ao que saiam antes. So o de 2016 muda.
+    """
+    declarado = (resposta.encoding or "").lower().replace("-", "")
+    if declarado not in CODIFICACOES_QUE_NUNCA_FALHAM:
+        return
+
+    texto = resposta.content.decode("utf-8", errors="radar_latin1")
+
+    # Reescreve o corpo ja em UTF-8 e diz isso ao requests. E o unico jeito de
+    # o `.text` - que todo coletor usa - enxergar o texto certo: ele decodifica
+    # `.content` usando `.encoding`, e nao aceita tratador de erro proprio.
+    # `_content` e atributo interno do requests, e esta e a razao de mexer nele.
+    resposta._content = texto.encode("utf-8")
+    resposta.encoding = "utf-8"
 
 
 @dataclass
@@ -126,6 +179,7 @@ class Coletor(ABC):
         self._esperar_a_vez(urlsplit(url).netloc)
         resposta = self.http.get(url, timeout=config.TIMEOUT_REQUISICAO)
         resposta.raise_for_status()
+        corrigir_codificacao(resposta)
         return resposta
 
     # --- o que cada fonte precisa implementar -------------------------------

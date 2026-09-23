@@ -277,3 +277,39 @@ def test_orgao_estadual_sem_uf_nenhuma_continua_indefinida():
                      url="https://exemplo.test/sef")
     )
     assert resultado.relevancia == "indefinida"
+
+
+# --- orgao estadual reconhecido pela SIGLA ----------------------------------
+# Cada fonte titula de um jeito: a FEPESE escreve o nome por extenso
+# ("Secretaria de Estado da Administracao Prisional"), e o agregador escreve a
+# sigla ("SEJURI SC divulga novo edital"). Sigla nenhuma casa com "secretaria
+# de estado", entao os dois concursos da SEJURI ficavam em `indefinida` mesmo
+# tendo uf=SC - justamente o orgao do meu alvo principal.
+
+def test_sigla_da_secretaria_do_alvo_e_orgao_estadual():
+    """Os titulos sao REAIS, do agregador."""
+    for titulo in (
+        "SEJURI SC divulga novo edital com vaga para Medico e inicial de R$ 15 mil",
+        "SEJURI (SC) publica edital de selecao com salario de R$ 8,7 mil",
+    ):
+        assert classificar(item(titulo, uf="SC")).relevancia == "estadual", titulo
+
+
+def test_o_nome_por_extenso_continua_valendo():
+    """A lista do codigo nao foi trocada pela do YAML: as duas somam."""
+    titulo = ("2019 - Secretaria de Estado da Administracao Prisional - "
+              "Concurso Publico - Edital 001/2019")
+    assert classificar(item(titulo, uf="SC")).relevancia == "estadual"
+
+
+def test_sigla_de_secretaria_parecida_nao_vira_estadual():
+    """SAPE/SC e a Secretaria da Agricultura, e "SAP" esta no alvo.yml. A
+    comparacao e por palavra inteira justamente para nao confundir as duas."""
+    titulo = "Concurso SAPE SC tem edital publicado para 20 vagas"
+    assert classificar(item(titulo, uf="SC")).relevancia != "estadual"
+
+
+def test_a_sigla_do_alvo_fora_de_sc_nao_vira_estadual_de_sc():
+    """Sao Paulo tem uma secretaria SAP. Sem uf=SC, a regra nao se aplica."""
+    titulo = "Concurso SAP SP abre vagas para Agente de Seguranca"
+    assert classificar(item(titulo, uf="SP")).relevancia != "estadual"

@@ -132,6 +132,29 @@ def _marcar_principal(
     return Marca(PRINCIPAL, nome, motivo)
 
 
+def orgaos_do_principal() -> list[str]:
+    """Os nomes e siglas do orgao do alvo principal, como o YAML os escreve.
+
+    Existe para o classificador de anel nao ter que repetir a mesma lista: a
+    secretaria do sistema prisional de SC e orgao estadual por natureza, nos
+    tres nomes que ela ja teve, e quem sabe escrever esses nomes e este
+    arquivo.
+    """
+    return [str(o) for o in (_carregar().get("principal") or {}).get("orgaos") or []]
+
+
+def nomeia_orgao_do_principal(titulo: str, resumo: str | None = None) -> bool:
+    """O texto nomeia o orgao do alvo principal?
+
+    Por PALAVRA INTEIRA, como todo o resto deste arquivo - sem isso a sigla
+    "SAP" casaria dentro de "SAPE/SC", que e a Secretaria da Agricultura.
+    """
+    texto = normalizar(
+        GRUDADAS.sub(r"\1 \2", f"{titulo or ''} {resumo or ''}")
+    )
+    return bool(_primeiro(orgaos_do_principal(), texto))
+
+
 def marcar(
     titulo: str,
     resumo: str | None = None,
