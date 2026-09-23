@@ -2295,7 +2295,16 @@ def provas_parecidas(
 
     ano_recente = agora().year - 2
     return substituta.ordenar(
-        candidatas, cargo, banca, municipio, ano_recente
+        candidatas,
+        cargo,
+        banca,
+        municipio,
+        ano_recente,
+        # Os outros nomes do mesmo cargo, quando `config/alvo.yml` conhece
+        # algum. Sem isso, procurar "Policial Penal" nao achava as duas provas
+        # de "Agente Penitenciario" que existem no acervo - o cargo mudou de
+        # nome e os dois nomes nao dividem palavra nenhuma.
+        sinonimos=alvos.sinonimos_do_cargo(cargo),
     )[:quantas]
 
 

@@ -263,3 +263,31 @@ def test_a_contagem_por_alvo_inclui_noticia(banco_temporario):
 
     assert servico.contar_por_alvo().get("principal") == 1
     assert len(servico.concursos_do_alvo("principal")) == 1
+
+
+# --- os outros nomes do mesmo cargo (etapa 9) -------------------------------
+
+def test_sinonimos_do_principal_saem_do_yaml():
+    """O cargo mudou de nome: "Policial Penal" hoje, "Agente Penitenciario"
+    nas duas provas que existem. A lista de termos ja sabia disso."""
+    sinonimos = alvo.sinonimos_do_cargo("Policial Penal")
+
+    assert "agente penitenciario" in sinonimos
+    assert "policia penal" in sinonimos
+
+
+def test_o_nome_como_o_hotsite_escreve_tambem_acha():
+    """"Agente Penitenciario - Feminino (AP)" e o rotulo real do hotsite de
+    2019: ele CONTEM o termo, em vez de ser igual a ele."""
+    assert alvo.sinonimos_do_cargo("Agente Penitenciario - Feminino (AP)")
+
+
+def test_secundario_tambem_tem_sinonimo():
+    """Metade dos editais escreve "Guarda Civil Municipal"."""
+    assert "guarda civil municipal" in alvo.sinonimos_do_cargo("Guarda Municipal")
+
+
+def test_cargo_fora_do_yaml_nao_tem_sinonimo():
+    """Sem invencao: o que nao esta anotado nao ganha parente."""
+    assert alvo.sinonimos_do_cargo("Merendeira") == []
+    assert alvo.sinonimos_do_cargo("") == []

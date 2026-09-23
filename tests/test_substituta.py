@@ -227,3 +227,104 @@ def test_sem_cargo_pedido_a_secao_nao_aparece(cliente):
     _semear(_questao(1))
 
     assert "no acervo</h2>" not in cliente.get("/macetes?banca=FEPESE").text
+
+
+# --- os outros nomes do mesmo cargo (etapa 9) -------------------------------
+
+def test_o_cargo_que_mudou_de_nome_e_achado_pelo_sinonimo():
+    """O caso que obrigou a regra: as duas provas que eu tenho estao
+    catalogadas como "Agente Penitenciario", o nome de 2013 e 2019, e o cargo
+    hoje se chama "Policial Penal". Os dois nomes nao dividem UMA palavra."""
+    achadas = substituta.ordenar(
+        [_parecida("Agente Penitenciario")],
+        cargo="Policial Penal",
+        sinonimos=["policia penal", "policial penal", "agente penitenciario"],
+    )
+
+    assert len(achadas) == 1
+    assert "mesmo cargo com outro nome" in achadas[0].motivo
+
+
+def test_sem_sinonimo_o_cargo_renomeado_nao_e_achado():
+    """A prova de que e o sinonimo que faz o trabalho, e nao semelhanca de
+    texto: sem a lista, nao ha nada em comum entre os dois nomes."""
+    assert substituta.ordenar(
+        [_parecida("Agente Penitenciario")], cargo="Policial Penal"
+    ) == []
+
+
+def test_o_sinonimo_tem_que_caber_INTEIRO():
+    """Senao "agente penitenciario" arrastaria todo "Agente" do acervo - e sao
+    muitos: Agente Administrativo, Agente de Servicos, Agente Comunitario."""
+    achadas = substituta.ordenar(
+        [_parecida("Agente Administrativo")],
+        cargo="Policial Penal",
+        sinonimos=["agente penitenciario"],
+    )
+
+    assert achadas == []
+
+
+def test_o_cargo_com_sobrenome_ainda_casa_o_sinonimo():
+    """O rotulo do hotsite de 2019 e "Agente Penitenciario - Feminino (AP)":
+    tem as duas palavras do sinonimo, e mais duas."""
+    achadas = substituta.ordenar(
+        [_parecida("Agente Penitenciario - Feminino (AP)")],
+        cargo="Policial Penal",
+        sinonimos=["agente penitenciario"],
+    )
+
+    assert len(achadas) == 1
+    assert not achadas[0].exata      # nao e o cargo identico, e o parente
+
+
+def test_nome_identico_ao_sinonimo_e_marcado_como_exato():
+    achadas = substituta.ordenar(
+        [_parecida("Agente Penitenciario")],
+        cargo="Policial Penal",
+        sinonimos=["agente penitenciario"],
+    )
+
+    assert achadas[0].exata
+
+
+def test_sinonimo_nao_conta_a_mesma_palavra_duas_vezes():
+    """"Policia Penal" e "policial penal" dividem "penal": somar os dois daria
+    tres palavras de semelhanca onde ha duas."""
+    (achada,) = substituta.ordenar(
+        [_parecida("Policial Penal")],
+        cargo="Policia Penal",
+        sinonimos=["policial penal"],
+    )
+
+    assert achada.pontos == 2 * substituta.PESO_DA_PALAVRA
+
+
+def test_o_sinonimo_pesa_mais_que_a_palavra_solta():
+    """Entre a prova do meu cargo com outro nome e uma que so divide "agente",
+    a primeira tem que vir antes."""
+    achadas = substituta.ordenar(
+        [_parecida("Agente Administrativo"), _parecida("Agente Penitenciario")],
+        cargo="Agente de Policia",
+        sinonimos=["agente penitenciario"],
+    )
+
+    assert achadas[0].cargo == "Agente Penitenciario"
+
+
+def test_o_servico_pega_os_sinonimos_do_alvo_yml(banco_temporario):
+    """De ponta a ponta, com o YAML de verdade: `radar parecidas "policial
+    penal"` acha a prova catalogada com o nome antigo."""
+    _semear(_questao(1, cargo="Agente Penitenciario"))
+
+    achadas = servico.provas_parecidas("Policial Penal")
+
+    assert [p.cargo for p in achadas] == ["Agente Penitenciario"]
+
+
+def test_cargo_fora_do_alvo_yml_continua_como_sempre(banco_temporario):
+    """Sinonimo so existe para cargo que eu anotei. Para o resto, a regra
+    continua sendo palavra em comum - e "Merendeira" nao tem nenhuma."""
+    _semear(_questao(1, cargo="Agente Penitenciario"))
+
+    assert servico.provas_parecidas("Merendeira") == []

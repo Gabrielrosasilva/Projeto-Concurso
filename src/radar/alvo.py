@@ -151,6 +151,40 @@ def termos_do_principal() -> list[str]:
     return [str(x) for x in principal().get("termos") or []]
 
 
+def sinonimos_do_cargo(cargo: str) -> list[str]:
+    """Os outros nomes do mesmo cargo, segundo `config/alvo.yml`.
+
+    O caso que obrigou isto: as duas provas do meu concurso estao catalogadas
+    como "Agente Penitenciario", o nome que o cargo tinha em 2013 e 2019, e
+    hoje ele se chama "Policial Penal". Os dois nomes nao dividem uma palavra
+    sequer - procurar pelo nome de hoje nao achava prova nenhuma. Quem sabe
+    que sao a mesma coisa sou eu, e ja estava escrito no YAML: e a lista de
+    `termos`, que existe para reconhecer o cargo no texto do feed.
+
+    Vale para o alvo principal e para os secundarios, pela mesma razao: a
+    Guarda Municipal tambem e "Guarda Civil Municipal" em metade dos editais.
+    Cargo que nao esta no YAML devolve lista vazia, e ai a busca fica como
+    sempre foi - por palavra em comum.
+    """
+    texto = normalizar(cargo or "")
+    if not texto:
+        return []
+
+    dados = _carregar()
+    blocos = [dados.get("principal") or {}] + list(dados.get("secundarios") or [])
+    for bloco in blocos:
+        termos = [str(t) for t in bloco.get("termos") or []]
+        # Nos dois sentidos: eu posso digitar o nome curto ("policia penal",
+        # que e um termo inteiro) ou o nome como o hotsite escreve ("Agente
+        # Penitenciario (masculino)", que CONTEM o termo).
+        if any(
+            _padrao(termo).search(texto) or normalizar(termo) in texto
+            for termo in termos
+        ):
+            return termos
+    return []
+
+
 def bancas_do_principal() -> list[str]:
     """As bancas que ja fizeram o concurso do alvo, na ordem do YAML.
 
