@@ -98,18 +98,25 @@ def exportar(caminho: Path | None = None) -> int:
     return len(linhas)
 
 
-# Os campos que sao MEUS. A coleta nunca os sobrescreve, e o importar passa a
-# seguir a mesma regra: valor vazio no JSON nao apaga o que ja esta no banco.
+# Estes dois campos tem DONO, e o dono e esta maquina. So eu mexo neles, pela
+# web ou pela CLI; o robo do GitHub nunca escreve um favorito nem uma nota -
+# ele so carrega os meus de um lado para o outro.
 #
-# O caso que obrigou isto: eu marco um favorito na web, o robo do GitHub
-# exporta o banco dele - que nao sabe do meu favorito - e o meu `radar
-# importar` seguinte devolvia `interesse: null` por cima da minha estrela. O
-# mesmo valia para a anotacao que eu tinha acabado de escrever.
+# Por isso o importar nao os atualiza: em concurso que ja existe aqui, o que
+# esta no banco e a verdade, e o JSON e uma copia possivelmente velha. A
+# primeira versao desta regra era mais fraca - "valor vazio nao apaga" - e
+# tornava IMPOSSIVEL desmarcar: eu tirava a estrela, o sincronizar importava o
+# JSON que ainda a tinha, e ela voltava.
 #
-# Consequencia conhecida e aceita: DESMARCAR nao se propaga. Para tirar uma
-# estrela nas duas pontas, tire nas duas - o contrario seria abrir mao da
-# protecao que existe justamente porque o outro lado nao sabe o que e meu.
-CAMPOS_MEUS = ("interesse", "notas", "salario_manual", "municipio_confirmado")
+# Eles sao escritos numa unica situacao: quando o concurso nao existe no banco
+# local. E o computador novo, ou a reinstalacao - ali o JSON e tudo que existe,
+# e e dele que os meus favoritos voltam.
+CAMPOS_SO_MEUS = ("interesse", "notas")
+
+# Estes dois tambem sao meus, mas eles acompanham um campo que a coleta
+# escreve - o salario e o municipio. Para eles continua valendo a regra mais
+# fraca: valor vazio no JSON nao apaga a marca que esta no banco.
+CAMPOS_MEUS = ("salario_manual", "municipio_confirmado")
 
 #: O que conta como "o JSON nao trouxe nada aqui".
 VAZIOS = (None, "", False)
@@ -119,8 +126,11 @@ def importar(caminho: Path | None = None) -> int:
     """Recria o banco a partir do JSON. Devolve quantos registros leu.
 
     Nao apaga o que ja existe: casa pela url e atualiza. Rodar duas vezes da
-    no mesmo resultado. Os campos meus (veja `CAMPOS_MEUS`) so sao escritos
-    quando o JSON traz valor - nunca para apagar.
+    no mesmo resultado.
+
+    O favorito e a nota (`CAMPOS_SO_MEUS`) so entram em concurso que AINDA NAO
+    existe aqui - computador novo, ou reinstalacao. Em concurso que ja existe,
+    o banco local manda e o JSON nao encosta: e isso que permite desmarcar.
     """
     origem = caminho or caminho_padrao()
     if not origem.exists():
@@ -132,13 +142,21 @@ def importar(caminho: Path | None = None) -> int:
     with sessao() as s:
         for linha in linhas:
             concurso = s.scalar(select(Concurso).where(Concurso.url == linha["url"]))
+            ja_existia = concurso is not None
             if concurso is None:
                 concurso = Concurso(url=linha["url"])
                 s.add(concurso)
+
             for coluna in COLUNAS:
                 if coluna == "url" or coluna not in linha:
                     continue
+
+                # Favorito e nota de concurso que ja esta aqui: o banco manda.
+                if coluna in CAMPOS_SO_MEUS and ja_existia:
+                    continue
+
                 valor = _desserializar(coluna, linha[coluna])
+
                 # Campo meu com o JSON vazio: o que esta no banco fica.
                 if (
                     coluna in CAMPOS_MEUS

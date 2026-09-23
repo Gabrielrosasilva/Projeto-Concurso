@@ -632,3 +632,24 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - a CLI passou a chamar `git` por subprocess, o que ate aqui so acontecia no
   workflow em bash. E o preco de ter um comando so, e fica contido numa funcao
   de quatro linhas.
+
+## Quem e dono do favorito e da nota
+
+- **`interesse` e `notas` tem dono, e o dono e a minha maquina.** So eu mexo
+  neles, pela web ou pela CLI; o robo do GitHub nunca escreve um favorito nem
+  uma nota - ele so carrega os meus de um lado para o outro. Por isso o
+  `radar importar` nao atualiza esses dois campos em concurso que ja existe
+  aqui: o banco local e a verdade, e o JSON e uma copia possivelmente velha;
+- a regra anterior era mais fraca - "valor vazio nao apaga" - e tornava
+  **impossivel desmarcar**. O `radar sincronizar` faz pull, importar,
+  exportar: eu tirava a estrela, o importar encontrava o JSON que ainda a
+  tinha, e ela voltava. Toda sincronizacao ressuscitava o que eu tinha acabado
+  de desmarcar;
+- **eles sao escritos numa situacao so: quando o concurso nao existe no banco
+  local.** E o computador novo, ou a reinstalacao - ali o JSON e tudo que
+  existe, e e dele que os meus favoritos voltam. E tambem o caso do robo, que
+  comeca sem banco todo dia: e assim que ele fica sabendo quais sao os meus
+  favoritos para poder avisar sobre eles;
+- `salario_manual` e `municipio_confirmado` continuam na regra mais fraca:
+  eles acompanham campos que a coleta escreve (o salario e o municipio), e
+  para eles "valor vazio nao apaga" basta.

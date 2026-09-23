@@ -192,21 +192,97 @@ def test_o_salario_que_eu_digitei_sobrevive(banco_temporario, tmp_path):
     assert concurso.municipio_confirmado is True
 
 
-def test_o_JSON_que_TEM_favorito_manda(banco_temporario, tmp_path):
-    """A protecao e contra apagar, e nao contra receber: e assim que a estrela
-    marcada aqui chega na outra maquina."""
-    with sessao() as s:
-        s.add(Concurso(url="https://exemplo.test/palhoca", fonte="teste",
-                       titulo="Guarda"))
-
+def test_no_computador_novo_o_favorito_volta_do_JSON(banco_temporario, tmp_path):
+    """A unica situacao em que o JSON escreve favorito e nota: o concurso nao
+    existe aqui. E a reinstalacao, ou a maquina nova - ali o JSON e tudo que
+    existe, e e dele que os meus favoritos voltam."""
     arquivo = tmp_path / "concursos.json"
     _json_do_robo(arquivo, interesse="favorito", notas="anotei la")
+
     acervo.importar(arquivo)
 
     with sessao() as s:
         concurso = s.scalar(select(Concurso))
     assert concurso.interesse == "favorito"
     assert concurso.notas == "anotei la"
+
+
+def test_da_para_DESMARCAR_um_favorito(banco_temporario, tmp_path):
+    """O caminho completo, que antes voltava atras sozinho: marcar, exportar,
+    desmarcar, importar. O `radar sincronizar` faz exatamente esta sequencia,
+    e com a regra antiga a estrela ressuscitava a cada sincronizacao."""
+    from radar import servico
+
+    with sessao() as s:
+        s.add(Concurso(url="https://exemplo.test/palhoca", fonte="teste",
+                       titulo="Guarda Municipal de Palhoca"))
+    with sessao() as s:
+        ident = s.scalar(select(Concurso)).id
+
+    servico.favoritar(ident)
+    arquivo = tmp_path / "concursos.json"
+    acervo.exportar(arquivo)                    # o JSON leva a estrela
+
+    servico.favoritar(ident, favorito=False)    # eu desmarco aqui
+    acervo.importar(arquivo)                    # e o sincronizar importa
+
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).interesse is None
+
+
+def test_da_para_APAGAR_uma_nota(banco_temporario, tmp_path):
+    from radar import servico
+
+    with sessao() as s:
+        s.add(Concurso(url="https://exemplo.test/palhoca", fonte="teste",
+                       titulo="Guarda Municipal de Palhoca"))
+    with sessao() as s:
+        ident = s.scalar(select(Concurso)).id
+
+    servico.definir_notas(ident, "conversei com quem fez em 2022")
+    arquivo = tmp_path / "concursos.json"
+    acervo.exportar(arquivo)
+
+    servico.definir_notas(ident, "")            # campo vazio apaga
+    acervo.importar(arquivo)
+
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).notas is None
+
+
+def test_a_nota_trocada_nao_volta_a_antiga(banco_temporario, tmp_path):
+    """Nao e so o apagar: o JSON nao pode desfazer edicao nenhuma minha."""
+    from radar import servico
+
+    with sessao() as s:
+        s.add(Concurso(url="https://exemplo.test/palhoca", fonte="teste",
+                       titulo="Guarda Municipal de Palhoca"))
+    with sessao() as s:
+        ident = s.scalar(select(Concurso)).id
+
+    servico.definir_notas(ident, "nota velha")
+    arquivo = tmp_path / "concursos.json"
+    acervo.exportar(arquivo)
+
+    servico.definir_notas(ident, "nota nova")
+    acervo.importar(arquivo)
+
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).notas == "nota nova"
+
+
+def test_o_que_e_da_coleta_continua_chegando(banco_temporario, tmp_path):
+    """A trava e so nos dois campos meus: o resto do JSON manda, como sempre."""
+    with sessao() as s:
+        s.add(Concurso(url="https://exemplo.test/palhoca", fonte="teste",
+                       titulo="Guarda", situacao="prevista"))
+
+    arquivo = tmp_path / "concursos.json"
+    _json_do_robo(arquivo)                      # situacao=inscricoes_abertas
+    acervo.importar(arquivo)
+
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).situacao == "inscricoes_abertas"
 
 
 # --- a linha do tempo tambem viaja (etapa 11) -------------------------------
