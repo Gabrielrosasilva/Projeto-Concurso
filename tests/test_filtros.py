@@ -7,12 +7,14 @@ o formulario HTML manda TODO campo, inclusive o vazio, e a rota declarava
 FastAPI tentava converter "" para float e devolvia 422.
 """
 import pytest
+from datetime import timedelta
+
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
 from radar import servico
 from radar.db import sessao
-from radar.models import Concurso
+from radar.models import Concurso, agora
 from radar.web.app import app
 
 
@@ -30,6 +32,11 @@ def _concurso(url: str, **mudancas) -> Concurso:
     )
     base.update(mudancas)
     return Concurso(**base)
+
+
+def _dias(n: int):
+    """Uma data daqui a n dias; negativo e no passado."""
+    return agora() + timedelta(days=n)
 
 
 def _semear(*concursos):
@@ -387,3 +394,56 @@ def test_a_aba_de_noticias_nao_mostra_o_filtro_das_outras(cliente):
 
     normal = cliente.get("/concursos").text
     assert 'class="filtros"' in normal
+
+
+# --- a ordem da lista (etapa 12) --------------------------------------------
+
+def test_inscricao_aberta_vem_primeiro_e_encerrado_por_ultimo(banco_temporario):
+    """A lista responde "o que eu ainda posso fazer?". Antes disto o primeiro
+    cartao da tela era, em geral, um concurso vencido: ordenar so por data de
+    publicacao poe o mais novo na frente, e o mais novo muitas vezes e o que
+    acabou de fechar."""
+    _semear(
+        _concurso("https://a.test/1", titulo="Ja encerrou",
+                  inscricoes_de=_dias(-40), inscricoes_ate=_dias(-1),
+                  publicado_em=agora()),
+        _concurso("https://a.test/2", titulo="Sem prazo conhecido",
+                  inscricoes_ate=None, publicado_em=agora() - timedelta(days=5)),
+        _concurso("https://a.test/3", titulo="Esta aberta",
+                  inscricoes_de=_dias(-2), inscricoes_ate=_dias(10),
+                  publicado_em=agora() - timedelta(days=10)),
+    )
+
+    assert [c.titulo for c in servico.listar()] == [
+        "Esta aberta", "Sem prazo conhecido", "Ja encerrou",
+    ]
+
+
+def test_dentro_do_grupo_o_mais_recente_vem_antes(banco_temporario):
+    _semear(
+        _concurso("https://a.test/1", titulo="Aberta, publicada ontem",
+                  inscricoes_de=_dias(-1), inscricoes_ate=_dias(10),
+                  publicado_em=agora() - timedelta(days=1)),
+        _concurso("https://a.test/2", titulo="Aberta, publicada mes passado",
+                  inscricoes_de=_dias(-30), inscricoes_ate=_dias(20),
+                  publicado_em=agora() - timedelta(days=30)),
+    )
+
+    assert [c.titulo for c in servico.listar()][0] == "Aberta, publicada ontem"
+
+
+def test_a_ordem_vem_da_data_e_nao_do_campo_situacao(banco_temporario):
+    """Data e fato; `situacao` pode estar velha - e justamente por isso ela
+    nao decide onde o cartao aparece."""
+    _semear(
+        _concurso("https://a.test/1", titulo="Diz aberta, prazo vencido",
+                  situacao="inscricoes_abertas",
+                  inscricoes_de=_dias(-40), inscricoes_ate=_dias(-2)),
+        _concurso("https://a.test/2", titulo="Diz encerrado, prazo correndo",
+                  situacao="encerrado",
+                  inscricoes_de=_dias(-2), inscricoes_ate=_dias(10)),
+    )
+
+    assert [c.titulo for c in servico.listar()] == [
+        "Diz encerrado, prazo correndo", "Diz aberta, prazo vencido",
+    ]

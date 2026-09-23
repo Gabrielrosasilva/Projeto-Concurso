@@ -8,7 +8,7 @@ igual para a CLI, para a web e para os testes.
 import logging
 from dataclasses import dataclass, field
 
-from sqlalchemy import func, select
+from sqlalchemy import case, func, select
 
 from radar import eventos as linha_do_tempo
 from radar import (
@@ -206,7 +206,23 @@ def listar(
             Concurso.publicado_em.desc().nullslast(),
         )
     else:
-        consulta = select(Concurso).order_by(Concurso.publicado_em.desc().nullslast())
+        # A ordem da lista responde "o que eu ainda posso fazer?": inscricao
+        # aberta primeiro, depois quem nao tem prazo conhecido - que pode
+        # abrir a qualquer momento - e por ultimo o que ja encerrou. Antes
+        # disto o primeiro cartao da tela era, em geral, um concurso vencido:
+        # ordenar so por data de publicacao poe o mais novo na frente, e o
+        # mais novo muitas vezes e o que acabou de fechar.
+        #
+        # Quem decide o grupo e a DATA, e nao o campo `situacao`: data e fato.
+        # Dentro do grupo continua valendo o mais recente primeiro.
+        consulta = select(Concurso).order_by(
+            case(
+                (_inscricao_aberta(), 0),
+                (Concurso.inscricoes_ate.is_(None), 1),
+                else_=2,
+            ),
+            Concurso.publicado_em.desc().nullslast(),
+        )
 
     if favoritos:
         # Favorito e escolha minha: nenhum outro filtro pode esconder um.
