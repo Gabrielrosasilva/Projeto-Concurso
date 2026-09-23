@@ -956,6 +956,12 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_eventos.exists():
         console.print(f"[green]{novos}[/] evento(s) novo(s) de {origem_eventos}")
 
+    # Uma linha por execucao, principalmente para o log do robo: e ela que
+    # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
+    # `radar sincronizar`, e numero menor do que o esperado quer dizer que
+    # faltou sincronizar - nao e erro.
+    console.print(f"Conhece [bold]{servico.contar_favoritos()}[/] favorito(s).")
+
 
 @app.command()
 def web(

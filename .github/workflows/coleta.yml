@@ -35,9 +35,15 @@ jobs:
       - name: Rodar testes
         run: pytest -q
 
-      # O banco nao vive no repositorio: o que vive e o JSON. Aqui ele vira
-      # SQLite de novo para a coleta ter contra o que comparar e saber o que
-      # e novo de verdade.
+      # O banco nao vive no repositorio: o que vivem sao os JSON. Aqui eles
+      # viram SQLite de novo para a coleta ter contra o que comparar e saber
+      # o que e novo de verdade. O `importar` le os dois: os concursos e a
+      # linha do tempo.
+      #
+      # Ele imprime, a cada execucao, quantos favoritos o robo passou a
+      # conhecer. Os favoritos chegam aqui pelo `radar sincronizar` que eu
+      # rodo na minha maquina: numero menor do que eu esperava e sinal de que
+      # faltou sincronizar - nao e erro, e o job segue.
       - name: Reconstruir o banco a partir do JSON
         run: radar importar
 
@@ -48,6 +54,10 @@ jobs:
 
       # Os segredos vem de Settings > Secrets and variables > Actions.
       # Se nao estiverem cadastrados, o comando avisa e sai em paz.
+      #
+      # Um comando, dois avisos: primeiro o que mudou nos concursos que eu
+      # sigo, depois os concursos novos. Este e o UNICO lugar que manda
+      # mensagem - na minha maquina o `radar atualizar` roda calado.
       - name: Avisar no Telegram
         env:
           RADAR_TELEGRAM_TOKEN: ${{ secrets.RADAR_TELEGRAM_TOKEN }}
@@ -69,7 +79,7 @@ jobs:
         run: |
           git config user.name "radar-bot"
           git config user.email "radar-bot@users.noreply.github.com"
-          git add data/concursos.json
+          git add data/concursos.json data/eventos.json
 
           if git diff --staged --quiet; then
             echo "Nenhum concurso novo hoje."
