@@ -93,7 +93,10 @@ class ColetorBom(Coletor):
 
 
 def test_fonte_que_falha_nao_derruba_as_outras(banco_temporario, monkeypatch):
-    monkeypatch.setattr(servico, "COLETORES", [ColetorQuebrado, ColetorBom])
+    # A lista de coletores mora em `servico.coleta` desde a etapa 10, e e la
+    # que `coletar_tudo` a le. Trocar a copia reexportada em `servico` nao
+    # mudaria nada - o teste passaria a nao testar o que diz testar.
+    monkeypatch.setattr(servico.coleta, "COLETORES", [ColetorQuebrado, ColetorBom])
 
     resultados = {r.fonte: r for r in servico.coletar_tudo()}
 

@@ -1,6 +1,11 @@
-"""Regras do sistema: rodar os coletores, gravar sem duplicar, consultar."""
+"""Regras do sistema: consultar o que foi coletado, e reunir os assuntos.
+
+Os cinco assuntos que tinham tamanho proprio moram em arquivos ao lado -
+`coleta`, `avisos`, `provas`, `simulado` e `previsao` - e sao reexportados
+aqui. Isto e de proposito: `servico.coletar_tudo(...)` continua existindo
+igual para a CLI, para a web e para os testes.
+"""
 import logging
-import re
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
@@ -27,14 +32,26 @@ from radar import (
     substituta,
 )
 from radar import assuntos as classificador_de_assunto
-from radar.classificador import classificar
-from radar.collectors.base import Buscador, Coletor, ItemColetado
-from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
-from radar.collectors.fepese import Fepese
-from radar.collectors.ieses import Ieses
+from radar.collectors.base import Buscador
 from radar import config
 from radar.util import fuso_local
 from radar.db import criar_tabelas, sessao
+from radar.servico.coleta import (      # noqa: F401 - a fachada
+    CAMPOS_CALCULADOS,
+    CAMPOS_DA_FONTE,
+    COLETORES,
+    PAGINAS_POR_DIA,
+    VALORES_SEM_INFORMACAO,
+    ResultadoColeta,
+    _aplicar_classificacao,
+    _gravar,
+    _marcar_historico_como_avisado,
+    _situacao_pelas_datas,
+    atualizar_situacoes,
+    carga_inicial,
+    coletar_tudo,
+    reclassificar,
+)
 from radar.servico.comum import (
     ano_do_concurso as _ano_do_concurso,
     cargo_parecido as _cargo_parecido,
@@ -50,176 +67,6 @@ from radar.models import (
 )
 
 log = logging.getLogger(__name__)
-
-# Registre aqui cada coletor novo. E o unico lugar que precisa saber a lista.
-COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese, Ieses]
-
-# Campos que a coleta manda. O que NAO esta aqui e seu e nunca e sobrescrito:
-# interesse, notas, e o que voce corrigir a mao no banco.
-CAMPOS_DA_FONTE = (
-    "titulo", "resumo", "orgao", "municipio", "uf", "banca", "situacao",
-    "escolaridade", "publicado_em",
-)
-
-# O que a fonte manda quando NAO sabe. Tratado como se fosse nulo: nao
-# sobrescreve o que ja descobrimos por outro caminho.
-VALORES_SEM_INFORMACAO = {
-    "situacao": ("desconhecida",),
-}
-
-# Campos que o classificador calcula. Sao derivados do titulo, entao podem ser
-# recalculados a qualquer momento - e por isso que existe `reclassificar()`:
-# se eu editar config/regioes.yml, o banco inteiro se corrige sem recoletar.
-CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia",
-                     "motivo_relevancia", "alvo", "motivo_alvo")
-
-
-def _aplicar_classificacao(destino, item: ItemColetado) -> None:
-    """Aplica o que da para saber pelo TITULO, sem pisar em fonte melhor.
-
-    Duas coisas o classificador nao encosta, porque vieram de onde se sabe
-    mais: o salario que eu digitei, e o municipio que saiu da pagina do
-    edital. Sem essa trava, um `radar reclassificar` desfazia o trabalho do
-    `radar detalhar` - a SEFAZ SC voltava de `nucleo` para `indefinida`,
-    porque "Concurso SEFAZ (SC)" nao tem municipio no titulo.
-    """
-    resultado = classificar(item)
-    destino.tipo = resultado.tipo
-
-    # A marca de alvo sai so do texto, e nao existe fonte melhor para ela:
-    # nenhum edital diz se o cargo e o que eu quero. Por isso ela e sempre
-    # reescrita, sem a trava de municipio_confirmado.
-    destino.alvo = resultado.alvo
-    destino.motivo_alvo = resultado.motivo_alvo
-
-    if not destino.salario_manual:
-        destino.salario = resultado.salario
-
-    if not destino.municipio_confirmado:
-        destino.municipio = resultado.municipio
-        destino.relevancia = resultado.relevancia
-        destino.motivo_relevancia = resultado.motivo
-    # O coletor marca tudo como edital_publicado porque nao sabe distinguir.
-    # Se nem concurso e, nao da para afirmar que ha edital.
-    if resultado.tipo == "noticia":
-        destino.situacao = "desconhecida"
-    elif resultado.fase and destino.inscricoes_ate is None:
-        # Fase anterior ao edital, dita pelo titulo. So vale enquanto nao ha
-        # prazo conhecido: data de inscricao e fato, titulo e interpretacao.
-        destino.situacao = resultado.fase
-
-
-@dataclass
-class ResultadoColeta:
-    fonte: str
-    novos: int = 0
-    atualizados: int = 0
-    erro: str | None = None
-
-    def __str__(self) -> str:
-        if self.erro:
-            return f"{self.fonte}: FALHOU ({self.erro})"
-        return f"{self.fonte}: {self.novos} novo(s), {self.atualizados} atualizado(s)"
-
-
-def _gravar(s, item: ItemColetado, fonte: str) -> str:
-    """Insere ou atualiza um item. Devolve 'novo' ou 'atualizado'.
-
-    A url e a chave: se ela ja existe, e o mesmo concurso e o registro e
-    atualizado. O esboco antigo so pulava - e ai um concurso que mudasse de
-    'inscricoes_abertas' para 'encerrado' ficava errado no banco para sempre.
-    """
-    existente = s.scalar(select(Concurso).where(Concurso.url == item.url))
-
-    if existente is None:
-        novo = Concurso(url=item.url, fonte=fonte, extra=item.extra or {})
-        for campo in CAMPOS_DA_FONTE:
-            setattr(novo, campo, getattr(item, campo))
-        _aplicar_classificacao(novo, item)
-        s.add(novo)
-        # A situacao vai junto porque o concurso raramente aparece no
-        # comeco da vida: quando o radar liga, muita coisa ja esta com a
-        # inscricao aberta. Sem isso a linha do tempo comecaria dizendo so
-        # "apareceu", sem dizer em que pe.
-        linha_do_tempo.registrar(
-            s, novo.url, linha_do_tempo.APARECEU,
-            f"Entrou no radar pela fonte {fonte}, como {novo.situacao}",
-            novo.url,
-        )
-        return "novo"
-
-    # Guardado ANTES de qualquer escrita: a situacao pode mudar por dois
-    # caminhos daqui para baixo - o valor que a fonte manda, e a fase que o
-    # classificador le no titulo. Comparar no fim pega os dois de uma vez,
-    # sem espalhar registro de evento pelo meio da funcao.
-    situacao_antes = existente.situacao
-    prova_antes = existente.data_prova
-
-    mudou = False
-    for campo in CAMPOS_DA_FONTE:
-        valor = getattr(item, campo)
-        # None da fonte nao apaga dado que ja temos: uma coleta incompleta nao
-        # pode piorar o registro. "desconhecida" na situacao e a mesma coisa -
-        # e o valor padrao de quem NAO sabe, e nao pode rebaixar um status que
-        # ja tinhamos descoberto por outro caminho.
-        if valor is None or valor in VALORES_SEM_INFORMACAO.get(campo, ()):
-            continue
-        if valor == getattr(existente, campo):
-            continue
-        setattr(existente, campo, valor)
-        mudou = True
-
-    if item.extra and item.extra != (existente.extra or {}):
-        existente.extra = {**(existente.extra or {}), **item.extra}
-        mudou = True
-
-    _aplicar_classificacao(existente, item)
-
-    linha_do_tempo.registrar_mudanca_de_situacao(
-        s, existente.url, situacao_antes, existente.situacao, existente.url
-    )
-    if existente.data_prova and existente.data_prova != prova_antes:
-        linha_do_tempo.registrar_prova_marcada(
-            s, existente.url, existente.data_prova, existente.url
-        )
-
-    if mudou:
-        existente.atualizado_em = agora()
-    return "atualizado" if mudou else "sem_mudanca"
-
-
-def coletar_tudo() -> list[ResultadoColeta]:
-    """Roda todos os coletores.
-
-    Se uma fonte cair ou mudar de formato, ela e registrada como erro e as
-    outras seguem. Uma fonte fora do ar nunca derruba a coleta inteira.
-    """
-    criar_tabelas()
-    resultados: list[ResultadoColeta] = []
-
-    for classe in COLETORES:
-        resultado = ResultadoColeta(fonte=classe.nome)
-        try:
-            itens = classe().coletar()
-            with sessao() as s:
-                for item in itens:
-                    situacao = _gravar(s, item, classe.nome)
-                    if situacao == "novo":
-                        resultado.novos += 1
-                    elif situacao == "atualizado":
-                        resultado.atualizados += 1
-        except Exception as erro:  # noqa: BLE001 - de proposito: loga e segue
-            # Uma linha no log normal; o traceback inteiro so em modo debug.
-            # Fonte fora do ar e rotina, nao merece 40 linhas todo dia.
-            log.warning("coletor %s falhou: %s", classe.nome, erro)
-            log.debug("detalhe da falha em %s", classe.nome, exc_info=True)
-            resultado.erro = f"{type(erro).__name__}: {erro}"
-
-        resultados.append(resultado)
-
-    atualizar_situacoes()
-    return resultados
-
 
 def contar_por_relevancia(incluir_noticias: bool = False) -> dict[str, int]:
     """Quantos concursos em cada anel. Alimenta os atalhos da pagina web."""
@@ -387,48 +234,6 @@ def listar(
 
     with sessao() as s:
         return list(s.scalars(consulta.limit(limite)))
-
-
-def reclassificar() -> dict[str, int]:
-    """Roda o classificador de novo em todo o banco, sem ir a internet.
-
-    Use depois de editar config/regioes.yml: os registros antigos passam a
-    respeitar a regra nova na hora.
-    """
-    criar_tabelas()
-    contagem: dict[str, int] = {}
-
-    with sessao() as s:
-        for concurso in s.scalars(select(Concurso)):
-            item = ItemColetado(
-                titulo=concurso.titulo,
-                url=concurso.url,
-                resumo=concurso.resumo,
-                uf=concurso.uf,
-                # O municipio e o tipo ja conhecidos vao junto. Sem eles, os
-                # concursos da FEPESE perdiam o municipio a cada reclassificar:
-                # o titulo dela e "2026 - Prefeitura Municipal de Sao Jose",
-                # sem "(SC)", e o extrator do classificador precisa da UF entre
-                # parenteses. "Perto de mim" caia de 176 para 69.
-                #
-                # Reclassificar existe para reaplicar a regra do ANEL, e nao
-                # para reextrair o que outra fonte ja extraiu melhor.
-                municipio=concurso.municipio,
-                tipo=concurso.tipo if concurso.tipo != "desconhecido" else None,
-                # A banca vai junto so para o motivo do alvo poder dizer que
-                # e a mesma das edicoes anteriores. Ela nao marca nada.
-                banca=concurso.banca,
-            )
-            _aplicar_classificacao(concurso, item)
-
-            # Grafia canonica mesmo no municipio confirmado pela pagina do
-            # edital: trocar "Palhoca" por "Palhoca" com cedilha nao e
-            # reclassificar, e escrever o mesmo municipio de um jeito so.
-            concurso.municipio = regioes.nome_canonico(concurso.municipio)
-
-            contagem[concurso.relevancia] = contagem.get(concurso.relevancia, 0) + 1
-
-    return contagem
 
 
 # --- avisos (fase 2) --------------------------------------------------------
@@ -599,69 +404,6 @@ def avisar_favoritos(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
         )
 
     return ResultadoAviso(enviados=enviados, pendentes=sobraram)
-
-
-# --- carga inicial (fase 1.6) -----------------------------------------------
-
-# Medido no site real em 17/09/2026: 15 itens por pagina, e paged=60 chegou a
-# 37 dias atras - cerca de 1,6 pagina por dia. Usamos 3 por dia, que da o
-# dobro de folga caso o site publique mais num periodo movimentado. Quem manda
-# de verdade na parada e a data; isto aqui e so o teto.
-PAGINAS_POR_DIA = 3
-
-
-def _marcar_historico_como_avisado() -> int:
-    """Encerra a fila de avisos depois da carga inicial.
-
-    Sem isto, trazer 90 dias de historico enche a fila com centenas de
-    concursos antigos, e o `radar avisar` seguinte manda 10 mensagens sobre
-    editais de junho - a maioria com inscricao ja encerrada - mais o alerta de
-    excesso, que soaria como erro de regra sem ser.
-
-    Carga inicial e historico, nao novidade: quem chega por ela se ve na
-    pagina e na lista. A partir daqui, so a coleta diaria gera aviso.
-    """
-    consulta = select(Concurso).where(Concurso.avisado_em.is_(None))
-    marcados = 0
-    with sessao() as s:
-        for concurso in s.scalars(consulta):
-            concurso.avisado_em = agora()
-            marcados += 1
-    return marcados
-
-
-def carga_inicial(dias: int = 90) -> ResultadoColeta:
-    """Anda para tras no feed e traz o historico que a coleta diaria perdeu.
-
-    O RSS e um fluxo: ele so mostra o que e recente. Quem liga o radar hoje ve
-    os concursos de hoje, e nada do que foi publicado antes. Esta funcao
-    resolve isso uma vez, lendo o feed pagina por pagina.
-
-    Roda uma vez so, na mao. Nao entra na coleta diaria.
-    """
-    criar_tabelas()
-
-    desde = agora() - timedelta(days=dias)
-    paginas = min(dias * PAGINAS_POR_DIA, MAXIMO_DE_PAGINAS)
-
-    resultado = ResultadoColeta(fonte=ConcursosNoBrasil.nome)
-    try:
-        itens = ConcursosNoBrasil(paginas=paginas, desde=desde).coletar()
-        with sessao() as s:
-            for item in itens:
-                situacao = _gravar(s, item, ConcursosNoBrasil.nome)
-                if situacao == "novo":
-                    resultado.novos += 1
-                elif situacao == "atualizado":
-                    resultado.atualizados += 1
-
-        _marcar_historico_como_avisado()
-    except Exception as erro:  # noqa: BLE001 - de proposito: loga e segue
-        log.warning("carga inicial falhou: %s", erro)
-        log.debug("detalhe da falha na carga inicial", exc_info=True)
-        resultado.erro = f"{type(erro).__name__}: {erro}"
-
-    return resultado
 
 
 # --- inscricoes abertas (fase 2.5) ------------------------------------------
@@ -905,50 +647,6 @@ def contar_favoritos() -> int:
 
 
 # --- status derivado das datas ----------------------------------------------
-
-def _situacao_pelas_datas(concurso: Concurso, momento) -> str | None:
-    """A situacao que as datas de inscricao permitem afirmar.
-
-    Antes disto, TODO registro ficava como `edital_publicado`, porque e o
-    unico palpite que o titulo permite - ou seja, o campo nao dizia nada. Com
-    o prazo em maos da para ser preciso, e sem chutar: so mexe em quem tem
-    data, e so entre os tres estados que a data comprova.
-    """
-    if concurso.tipo == "noticia" or concurso.inscricoes_ate is None:
-        return None
-    if momento > concurso.inscricoes_ate:
-        return "encerrado"
-    if concurso.inscricoes_de is None or momento >= concurso.inscricoes_de:
-        return "inscricoes_abertas"
-    return "edital_publicado"          # edital saiu, inscricao ainda vai abrir
-
-
-def atualizar_situacoes() -> dict[str, int]:
-    """Recalcula a situacao de quem tem prazo conhecido.
-
-    Roda sozinho ao fim da coleta e do `detalhar`, e de novo quando eu chamo
-    na mao - porque o tempo passa e "aberto" vira "encerrado" sem ninguem
-    tocar em nada.
-    """
-    criar_tabelas()
-    momento = agora()
-    contagem: dict[str, int] = {}
-
-    with sessao() as s:
-        consulta = select(Concurso).where(Concurso.inscricoes_ate.is_not(None))
-        for concurso in s.scalars(consulta):
-            nova = _situacao_pelas_datas(concurso, momento)
-            if nova and nova != concurso.situacao:
-                # Aqui mora o unico evento que acontece sem ninguem tocar em
-                # nada: o prazo vence e a inscricao fecha sozinha.
-                linha_do_tempo.registrar_mudanca_de_situacao(
-                    s, concurso.url, concurso.situacao, nova, concurso.url
-                )
-                concurso.situacao = nova
-                contagem[nova] = contagem.get(nova, 0) + 1
-
-    return contagem
-
 
 def eventos_do_concurso(concurso_id: int) -> tuple[Concurso, list] | None:
     """A linha do tempo de um concurso, e o concurso junto.
