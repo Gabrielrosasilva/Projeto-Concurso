@@ -94,10 +94,9 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 ## Estado atual: so a 7 esta parcial (detalhe no [historico](docs/historico.md))
 
 ```
-1 a 6  PRONTAS: tres fontes coletando, classificador de anel, avisos no
-       Telegram, leitura da pagina e do edital, calendario .ics, acervo de
-       provas, 5.928 questoes, simulado com acerto por materia e previsao de
-       abertura. So `radar assuntos` custa: usa a API, e simula por padrao
+1 a 6  PRONTAS: tres fontes, classificador de anel, avisos, leitura da
+       pagina e do edital, calendario .ics, acervo, 5.928 questoes, simulado
+       e previsao. So `radar assuntos` custa: usa a API, e simula por padrao
 7      PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
        parte que so a IA faz: pegadinha especifica e macete de memorizacao
 8      PRONTA: tabela `eventos`, a aba Acompanhando (um bloco por favorito,
@@ -106,7 +105,8 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 9      PRONTA: estudar pelo alvo - o treino sorteia as provas do cargo
        primeiro, e a tabela de materias mostra o acerto ao lado do peso
 10     PRONTA: `servico.py` virou pacote, um arquivo por assunto
-11     EM CURSO: consertos da auditoria de 23/09
+11     PRONTA: consertos da auditoria de 23/09. So o robo manda mensagem;
+       `radar sincronizar` leva favorito e linha do tempo ate ele
 ```
 
 A arvore de `src/radar/` esta no
