@@ -58,7 +58,7 @@ def cliente(banco_temporario):
 def test_campo_vazio_no_formulario_nao_derruba_a_pagina(cliente, consulta):
     """Formulario HTML manda todo campo, inclusive o vazio."""
     _semear(_concurso("https://a.test/1"))
-    assert cliente.get("/" + consulta).status_code == 200
+    assert cliente.get("/concursos" + consulta).status_code == 200
 
 
 @pytest.mark.parametrize("entrada", ["abc", "R$", "-", "1,2,3", "   "])
@@ -66,14 +66,14 @@ def test_texto_invalido_no_campo_de_salario_e_ignorado(cliente, entrada):
     """Quem digita errado ve a lista sem filtro, nao uma pagina de erro."""
     _semear(_concurso("https://a.test/1"))
 
-    resposta = cliente.get(f"/?salario_min={entrada}")
+    resposta = cliente.get(f"/concursos?salario_min={entrada}")
     assert resposta.status_code == 200
     assert "Guarda Municipal" in resposta.text
 
 
 def test_editar_vazio_nao_derruba(cliente):
     _semear(_concurso("https://a.test/1"))
-    assert cliente.get("/?editar=").status_code == 200
+    assert cliente.get("/concursos?editar=").status_code == 200
 
 
 # --- faixa de remuneracao ---------------------------------------------------
@@ -116,7 +116,7 @@ def test_sem_salario_fica_de_fora_de_qualquer_faixa(banco_temporario):
 def test_os_atalhos_de_faixa_aparecem_na_tela(cliente):
     _semear(_concurso("https://a.test/1"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     for rotulo in ("ate R$ 2.000", "R$ 2.100 a R$ 5.000",
                    "R$ 5.000 a R$ 10.000", "acima de R$ 10.000"):
         assert rotulo in texto
@@ -125,14 +125,14 @@ def test_os_atalhos_de_faixa_aparecem_na_tela(cliente):
 def test_o_atalho_preserva_a_aba(cliente):
     _semear(_concurso("https://a.test/1"))
 
-    texto = cliente.get("/?todos=true").text
+    texto = cliente.get("/concursos?todos=true").text
     assert "todos=true&amp;salario_min=" in texto
 
 
 def test_a_faixa_escolhida_fica_destacada(cliente):
     _semear(*_tres_faixas())
 
-    texto = cliente.get("/?salario_min=5000&salario_max=10000").text
+    texto = cliente.get("/concursos?salario_min=5000&salario_max=10000").text
     assert 'class="ativa"' in texto
 
 
@@ -141,10 +141,10 @@ def test_o_botao_mostra_a_faixa_escolhida(cliente):
     saber sem abrir."""
     _semear(*_tres_faixas())
 
-    aberto = cliente.get("/").text
+    aberto = cliente.get("/concursos").text
     assert "Remuneracao" in aberto
 
-    escolhido = cliente.get("/?salario_min=5000&salario_max=10000").text
+    escolhido = cliente.get("/concursos?salario_min=5000&salario_max=10000").text
     # A caixinha de faixas e procurada pela classe dela: desde a barra do topo,
     # o primeiro <summary> da pagina e o menu "Mais", e nao este.
     caixinha = escolhido[escolhido.index('<details class="menu-faixa">'):]
@@ -156,7 +156,7 @@ def test_o_campo_de_salario_maximo_saiu_do_formulario(cliente):
     existindo, mas pela caixinha."""
     _semear(_concurso("https://a.test/1"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert 'name="salario_min"' in texto
     assert 'name="salario_max"' not in texto
 
@@ -225,7 +225,7 @@ def test_busca_tambem_olha_o_municipio(banco_temporario):
 def test_busca_sem_resultado_devolve_pagina_vazia_e_nao_erro(cliente):
     _semear(_concurso("https://a.test/1"))
 
-    resposta = cliente.get("/?termo=coisaquenaoexiste")
+    resposta = cliente.get("/concursos?termo=coisaquenaoexiste")
     assert resposta.status_code == 200
     assert "Nenhum resultado" in resposta.text
 
@@ -235,7 +235,7 @@ def test_o_formulario_nao_deixa_o_navegador_preencher_sozinho(cliente):
     aparecia com um valor que ninguem pediu - o servidor manda vazio."""
     _semear(_concurso("https://a.test/1"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert 'autocomplete="off"' in texto
     assert 'name="salario_min" type="number" step="100" min="0"\n               placeholder="Salario min" value=""' in texto
 
@@ -295,13 +295,13 @@ def test_busca_de_noticias_sem_termo_traz_tudo(banco_temporario):
 
 def test_a_aba_aparece_na_navegacao(cliente):
     _semear(_concurso("https://a.test/1"))
-    assert 'href="/?noticias=true"' in cliente.get("/").text
+    assert 'href="/concursos?noticias=true"' in cliente.get("/concursos").text
 
 
 def test_a_aba_tem_campo_de_busca_proprio(cliente):
     _semear(*_mundo_variado())
 
-    texto = cliente.get("/?noticias=true").text
+    texto = cliente.get("/concursos?noticias=true").text
     assert "busca-noticia" in texto
     assert "policia cientifica" in texto      # o exemplo do campo
 
@@ -309,7 +309,7 @@ def test_a_aba_tem_campo_de_busca_proprio(cliente):
 def test_a_aba_resume_quantos_em_cada_fase(cliente):
     _semear(*_mundo_variado())
 
-    texto = cliente.get("/?noticias=true&termo=PM").text
+    texto = cliente.get("/concursos?noticias=true&termo=PM").text
     assert "banca contratada" in texto
     assert "autorizado" in texto
 
@@ -317,7 +317,7 @@ def test_a_aba_resume_quantos_em_cada_fase(cliente):
 def test_sem_termo_a_aba_explica_para_que_serve(cliente):
     _semear(_concurso("https://a.test/1", titulo="Qualquer coisa"))
 
-    texto = cliente.get("/?noticias=true&termo=naoexistenada").text
+    texto = cliente.get("/concursos?noticias=true&termo=naoexistenada").text
     assert "Nada encontrado" in texto
 
 
@@ -381,9 +381,9 @@ def test_a_aba_de_noticias_nao_mostra_o_filtro_das_outras(cliente):
     qualquer lugar do pais."""
     _semear(_concurso("https://a.test/1"))
 
-    noticias = cliente.get("/?noticias=true").text
+    noticias = cliente.get("/concursos?noticias=true").text
     assert 'class="filtros"' not in noticias
     assert "busca-noticia" in noticias
 
-    normal = cliente.get("/").text
+    normal = cliente.get("/concursos").text
     assert 'class="filtros"' in normal

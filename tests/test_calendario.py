@@ -279,4 +279,4 @@ def test_a_pagina_leva_ao_arquivo(cliente):
 def test_o_link_da_barra_abre_a_pagina_e_nao_o_arquivo(cliente):
     _semear(_concurso("https://x.test/pagina"))
 
-    assert 'href="/calendario"' in cliente.get("/").text
+    assert 'href="/calendario"' in cliente.get("/concursos").text

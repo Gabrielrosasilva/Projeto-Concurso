@@ -787,6 +787,18 @@ def expandir_banca(termo: str) -> list[str]:
     return achados
 
 
+def _cargo_parecido(cargo: str):
+    """Condicao SQL de "o cargo da questao parece com este texto".
+
+    Ignora acento pelo mesmo motivo que a busca por titulo ignora: o cargo vem
+    acentuado do rotulo do hotsite ("Agente Penitenciario"), e o termo com que
+    eu procuro - o de config/alvo.yml, ou o que eu digito na CLI - vem sem.
+    Com ilike puro, `--cargo "agente penitenciario"` devolvia zero questao das
+    170 que existem.
+    """
+    return func.sem_acento(QuestaoDeProva.cargo).ilike(f"%{_sem_acento(cargo)}%")
+
+
 def _sem_acento(texto: str) -> str:
     import unicodedata
 
@@ -1369,7 +1381,7 @@ def incidencia_por_materia(
         .order_by(func.count().desc())
     )
     if cargo:
-        consulta = consulta.where(QuestaoDeProva.cargo.ilike(f"%{cargo}%"))
+        consulta = consulta.where(_cargo_parecido(cargo))
     if banca:
         consulta = consulta.where(QuestaoDeProva.banca.ilike(f"%{banca}%"))
     if ano:
@@ -1522,7 +1534,7 @@ def _sortear_questoes(
     elif universais:
         consulta = consulta.where(QuestaoDeProva.materia.in_(materias_universais()))
     if cargo:
-        consulta = consulta.where(QuestaoDeProva.cargo.ilike(f"%{cargo}%"))
+        consulta = consulta.where(_cargo_parecido(cargo))
     if banca:
         consulta = consulta.where(QuestaoDeProva.banca.ilike(f"%{banca}%"))
 

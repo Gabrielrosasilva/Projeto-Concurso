@@ -412,3 +412,48 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   e ignorado, senao URL editada a mao deixaria a pagina com um cartao so;
 - o mural lateral fica como esta por enquanto. Ele e o embriao de
   "Acompanhando", e move-lo antes de a secao existir seria refazer duas vezes.
+- **Meu foco e a home.** A lista de concursos foi para `/concursos`. A lista
+  responde "o que existe?"; o foco responde "o que esta acontecendo com o
+  concurso que eu espero?", e essa e a pergunta que eu faco todo dia. O
+  endereco antigo `/foco` continua levando para la;
+- a tela de foco nunca afirma o que nao sabe. Toda funcao de `foco.py` devolve
+  None, lista vazia ou campo nulo quando o dado nao existe, e a tela escreve
+  "nao sei ainda" com cara propria - marca amarela, para nunca parecer um
+  dado. Dado errado sobre o meu proprio concurso e pior que tela vazia: eu
+  estudaria a materia errada, ou deixaria de estudar achando que ha tempo;
+- a banca e **hipotese** enquanto nao ha edital aberto DO CARGO. A frase sai
+  pronta de `Banca.como_hipotese` - "hipotese: FEPESE, que fez 2013 e 2019" -
+  e os anos vem do acervo, nao do YAML: e prova de que aquela banca fez aquele
+  ano, e nao anotacao minha que pode ter envelhecido;
+- **bater no alvo pelo nome do ORGAO nao e o mesmo que bater pelo CARGO.**
+  "SEJURI SC divulga novo edital com vaga para Medico" bate no alvo, e e certo
+  que bata - e a secretaria que eu acompanho. Mas anunciar "edital aberto" por
+  causa disso seria dizer o que nao e. A tela separa os dois: edital aberto do
+  cargo, e um aviso a parte para o que e da casa mas de outro cargo. Pelo
+  mesmo motivo, so edital do cargo confirma banca;
+- o quadro de materias sai do PDF do edital, e nao das provas. Sao coisas
+  diferentes e a tela mostra as duas lado a lado: o edital diz o que PROMETE
+  cobrar, a prova diz o que CAIU. Onde batem, o peso e regra; onde discordam,
+  e sinal de que a prova mudou de uma edicao para a outra;
+- o quadro so vale se fechar a conta. `edital_materias.ler_quadro` confere a
+  soma das materias contra o total declarado pelo proprio edital e devolve
+  lista vazia se nao bater - ler metade do quadro e pior que nao ler, porque
+  eu estudaria com pesos errados sem nunca desconfiar;
+- as materias que cairam na prova mas nao estao no quadro do edital aparecem
+  numa linha a parte, e nao somem. Sumir seria esconder que a prova mudou: em
+  2013 caiu Nocoes de Informatica e Direito Administrativo, que o edital de
+  2019 nao lista;
+- o filtro de CARGO passou a ignorar acento, como o de titulo ja fazia. O
+  cargo vem acentuado do rotulo do hotsite ("Agente Penitenciario") e o termo
+  com que eu procuro vem sem: com ilike puro, `--cargo "agente penitenciario"`
+  devolvia ZERO das 170 questoes que existem. Isso valia para o sorteio do
+  simulado e para `radar padrao`, nao so para a tela nova;
+- o botao "treinar 20 questoes" sorteia pelo primeiro termo do alvo que de
+  fato acha prova no acervo - hoje "agente penitenciario", o nome ANTIGO do
+  cargo. "policia penal" nao casa caderno nenhum, porque as duas provas que
+  existem sao anteriores a mudanca de nome;
+- a validade aparece como o edital escreve, e nao resumida: "2 anos a contar
+  da homologacao do resultado, prorrogaveis por mais 2". Saber o PRAZO nao e
+  saber ate quando - a homologacao sai no Diario Oficial do Estado, que este
+  projeto nao le por causa do robots.txt. Por isso a tela diz, junto, "quando
+  comeca a contar: nao sei ainda".

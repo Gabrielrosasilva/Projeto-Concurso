@@ -18,7 +18,7 @@ def cliente(banco_temporario):
 
 
 def test_pagina_abre_vazia(cliente):
-    resposta = cliente.get("/")
+    resposta = cliente.get("/concursos")
     assert resposta.status_code == 200
     assert "Radar de Concursos" in resposta.text
     assert "Nada coletado ainda" in resposta.text
@@ -37,7 +37,7 @@ def test_pagina_mostra_concurso(cliente):
             )
         )
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert "Ascurra" in texto
     assert "https://exemplo.test/ascurra" in texto   # o link original aparece
     # A linha do cartao responde onde, quanto e ate quando. A cidade perdeu o
@@ -69,10 +69,10 @@ def test_aba_estadual_sc(cliente):
             )
         )
 
-    inicio = cliente.get("/").text
+    inicio = cliente.get("/concursos").text
     assert "Estadual SC" in inicio          # a aba, com a contagem
 
-    texto = cliente.get("/?relevancia=estadual").text
+    texto = cliente.get("/concursos?relevancia=estadual").text
     assert "Administracao Prisional" in texto
     assert "polos de prova a confirmar no edital" in texto
 
@@ -84,7 +84,7 @@ def test_filtro_por_uf(cliente):
         s.add(Concurso(url="https://a.test/2", fonte="f", titulo="De Sao Paulo",
                        uf="SP", relevancia="nucleo"))
 
-    texto = cliente.get("/?uf=SC").text
+    texto = cliente.get("/concursos?uf=SC").text
     assert "De SC" in texto
     assert "De Sao Paulo" not in texto
 
@@ -96,7 +96,7 @@ def test_contagem_mostra_o_total_quando_filtra(cliente):
         s.add(Concurso(url="https://a.test/2", fonte="f", titulo="De SP",
                        uf="SP", relevancia="nucleo"))
 
-    assert "1 de 2 concurso(s)" in cliente.get("/?uf=SC").text
+    assert "1 de 2 concurso(s)" in cliente.get("/concursos?uf=SC").text
 
 
 def test_atalhos_mostram_a_contagem_de_cada_anel(cliente):
@@ -108,11 +108,11 @@ def test_atalhos_mostram_a_contagem_de_cada_anel(cliente):
         s.add(Concurso(url="https://a.test/3", fonte="f", titulo="Longe 2",
                        uf="SP", relevancia="remoto"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     # "Perto" e atalho de primeira linha; "Longe" desceu para "mais filtros",
     # mas continua a um clique - nada de anel sumiu da navegacao.
     assert "Perto" in texto and "Longe" in texto
-    assert 'href="/?relevancia=remoto"' in texto
+    assert 'href="/concursos?relevancia=remoto"' in texto
 
 
 def test_pagina_vazia_explica_em_vez_de_parecer_quebrada(cliente):
@@ -121,7 +121,7 @@ def test_pagina_vazia_explica_em_vez_de_parecer_quebrada(cliente):
         s.add(Concurso(url="https://a.test/1", fonte="f", titulo="Capinzal",
                        uf="SC", relevancia="remoto"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert "Nenhum concurso perto de voce agora" in texto
     assert "Ver todos" in texto          # oferece a saida
     assert "Nada coletado ainda" not in texto   # nao confunde com banco vazio
@@ -134,7 +134,7 @@ def test_noticia_nao_aparece(cliente):
                        titulo="Bolsa Familia passa a ter novo valor",
                        relevancia="nucleo"))
 
-    assert "Bolsa Familia" not in cliente.get("/?todos=true").text
+    assert "Bolsa Familia" not in cliente.get("/concursos?todos=true").text
 
 
 def test_motivo_da_classificacao_aparece_na_tela(cliente):
@@ -144,7 +144,7 @@ def test_motivo_da_classificacao_aparece_na_tela(cliente):
                        uf="SC", relevancia="nucleo",
                        motivo_relevancia="Palhoca (SC) esta no anel nucleo."))
 
-    assert "esta no anel nucleo" in cliente.get("/").text
+    assert "esta no anel nucleo" in cliente.get("/concursos").text
 
 
 def test_os_grids_declaram_coluna_que_encolhe(cliente):
@@ -155,7 +155,7 @@ def test_os_grids_declaram_coluna_que_encolhe(cliente):
     era artefato do print (o Chrome no Windows tem largura minima de janela de
     500px, entao um screenshot pedido com 400px e so um recorte). Declarar
     minmax(0,1fr) continua sendo o certo e custa nada."""
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert texto.count("grid-template-columns:minmax(0,1fr)") >= 3
 
 
@@ -165,14 +165,14 @@ def test_os_grids_declaram_coluna_que_encolhe(cliente):
 # Macetes para Calendario sem passar pela home.
 
 def test_a_barra_do_topo_tem_os_quatro_destinos(cliente):
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     for rotulo in ("Meu foco", "Concursos", "Acompanhando", "Estudar"):
         assert rotulo in texto, rotulo
 
 
 def test_previsao_e_calendario_ficam_no_menu_mais(cliente):
     """Consulta ocasional nao ocupa lugar na barra."""
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert 'href="/previsao"' in texto
     assert 'href="/calendario"' in texto
     assert "topo-mais" in texto          # os dois estao dentro do <details>
@@ -186,11 +186,23 @@ def test_a_barra_aparece_em_toda_pagina(cliente, caminho):
     assert "topo-barra" in cliente.get(caminho).text
 
 
-def test_meu_foco_e_acompanhando_dizem_que_estao_em_construcao(cliente):
-    for caminho in ("/foco", "/acompanhando"):
-        resposta = cliente.get(caminho)
-        assert resposta.status_code == 200
-        assert "Em construcao" in resposta.text
+def test_acompanhando_ainda_esta_em_construcao(cliente):
+    resposta = cliente.get("/acompanhando")
+    assert resposta.status_code == 200
+    assert "Em construcao" in resposta.text
+
+
+def test_meu_foco_deixou_de_ser_em_construcao(cliente):
+    """Ele virou a home de verdade na etapa 7."""
+    resposta = cliente.get("/")
+    assert resposta.status_code == 200
+    assert "Em construcao" not in resposta.text
+
+
+def test_o_endereco_antigo_do_foco_leva_para_a_home(cliente):
+    resposta = cliente.get("/foco", follow_redirects=False)
+    assert resposta.status_code == 303
+    assert resposta.headers["location"] == "/"
 
 
 def test_estudar_abre_nos_macetes(cliente):
@@ -213,7 +225,7 @@ def test_a_barra_de_atalhos_tem_quatro(cliente):
     """Perto, Estadual SC, Abertos e Todos. Os outros aneis desceram para
     "mais filtros" - continuam a um clique, mas nao competem por espaco com
     os que eu abro todo dia."""
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     inicio = texto.index('<div class="atalhos">')
     fim = texto.index("</div>", inicio)
     atalhos = texto[inicio:fim]
@@ -226,21 +238,21 @@ def test_a_barra_de_atalhos_tem_quatro(cliente):
 def test_mais_filtros_nasce_fechado(cliente):
     """Sao seis campos que eu uso de vez em quando; abertos, empurravam a
     lista para baixo da dobra."""
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert '<details class="mais-filtros" >' in texto
 
 
 def test_mais_filtros_abre_sozinho_quando_ha_filtro_ligado(cliente):
     """Filtro escondido e ligado seria a pior combinacao: a lista viria curta
     e a tela nao diria por que."""
-    texto = cliente.get("/?banca=FEPESE").text
+    texto = cliente.get("/concursos?banca=FEPESE").text
     assert '<details class="mais-filtros" open>' in texto
     assert "ligado" in texto
 
 
 def test_a_busca_fica_antes_dos_atalhos(cliente):
     """E o que resolve o caso que nenhum atalho resolve."""
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert texto.index('class="busca"') < texto.index('class="atalhos"')
 
 
@@ -258,7 +270,7 @@ def _semear_muitos(quantos: int) -> None:
 
 def test_mostra_trinta_cartoes_por_vez(cliente):
     _semear_muitos(45)
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
 
     assert texto.count('<li class="nucleo">') == 30
     assert "Ver mais" in texto
@@ -266,7 +278,7 @@ def test_mostra_trinta_cartoes_por_vez(cliente):
 
 def test_ver_mais_cresce_de_trinta_em_trinta(cliente):
     _semear_muitos(45)
-    texto = cliente.get("/?mostrar=60").text
+    texto = cliente.get("/concursos?mostrar=60").text
 
     assert texto.count('<li class="nucleo">') == 45
     assert "Ver mais" not in texto       # acabou a lista, o botao some
@@ -274,13 +286,13 @@ def test_ver_mais_cresce_de_trinta_em_trinta(cliente):
 
 def test_lista_curta_nao_mostra_o_ver_mais(cliente):
     _semear_muitos(5)
-    assert "Ver mais" not in cliente.get("/").text
+    assert "Ver mais" not in cliente.get("/concursos").text
 
 
 def test_mostrar_menor_que_o_minimo_nao_encolhe_a_lista(cliente):
     """URL editada a mao nao pode deixar a pagina com um cartao so."""
     _semear_muitos(45)
-    assert cliente.get("/?mostrar=1").text.count('<li class="nucleo">') == 30
+    assert cliente.get("/concursos?mostrar=1").text.count('<li class="nucleo">') == 30
 
 
 # --- o cartao enxuto --------------------------------------------------------
@@ -292,7 +304,7 @@ def test_o_cartao_mostra_titulo_e_a_linha_de_sempre(cliente):
                        uf="SC", municipio="Palhoca", relevancia="nucleo",
                        tipo="concurso", banca="FEPESE", salario=5200.0))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert "linha-chave" in texto
     assert "Palhoca" in texto            # onde
     assert "R$ 5.200" in texto           # salario
@@ -306,7 +318,7 @@ def test_banca_tipo_e_motivo_ficam_dentro_de_detalhes(cliente):
                        banca="FEPESE",
                        motivo_relevancia="Palhoca (SC) esta no anel nucleo."))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     abre = texto.index('<details class="detalhes">')
     fecha = texto.index("</details>", abre)
     dentro = texto[abre:fecha]

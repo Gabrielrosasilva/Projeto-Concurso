@@ -348,7 +348,7 @@ def test_o_radar_tem_link_para_os_macetes(cliente):
     cobra e o passo que decide o que treinar depois."""
     _semear(_questao(1))
 
-    assert 'href="/estudar"' in cliente.get("/").text
+    assert 'href="/estudar"' in cliente.get("/concursos").text
     assert cliente.get("/estudar", follow_redirects=False).headers["location"] == (
         "/macetes"
     )

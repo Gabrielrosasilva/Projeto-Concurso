@@ -132,6 +132,34 @@ def _marcar_principal(
     return Marca(PRINCIPAL, nome, motivo)
 
 
+def principal() -> dict:
+    """O bloco inteiro do alvo principal, como esta no YAML.
+
+    Devolve {} quando nao ha alvo configurado - e ai quem chama diz que a tela
+    depende de `config/alvo.yml` estar preenchido, em vez de mostrar vazio sem
+    explicar por que.
+    """
+    return _carregar().get("principal") or {}
+
+
+def termos_do_principal() -> list[str]:
+    """Como o cargo do alvo aparece escrito ("policial penal", e afins).
+
+    Serve para achar as provas dele no acervo: o cargo gravado na questao vem
+    do rotulo do hotsite, e cada ano escreveu de um jeito.
+    """
+    return [str(x) for x in principal().get("termos") or []]
+
+
+def bancas_do_principal() -> list[str]:
+    """As bancas que ja fizeram o concurso do alvo, na ordem do YAML.
+
+    Isto e HISTORIA, e nao previsao. Quem chama tem que tratar como hipotese
+    enquanto nao houver edital novo dizendo quem e.
+    """
+    return [str(x) for x in principal().get("bancas") or []]
+
+
 def orgaos_do_principal() -> list[str]:
     """Os nomes e siglas do orgao do alvo principal, como o YAML os escreve.
 
@@ -140,7 +168,22 @@ def orgaos_do_principal() -> list[str]:
     tres nomes que ela ja teve, e quem sabe escrever esses nomes e este
     arquivo.
     """
-    return [str(o) for o in (_carregar().get("principal") or {}).get("orgaos") or []]
+    return [str(o) for o in principal().get("orgaos") or []]
+
+
+def nomeia_cargo_do_principal(titulo: str, resumo: str | None = None) -> bool:
+    """O texto fala do CARGO do alvo, e nao so da casa que o abre?
+
+    A diferenca decide o que a tela de foco pode afirmar. "SEJURI SC divulga
+    novo edital com vaga para Medico" bate no alvo pelo nome do orgao - e e
+    certo que bata, porque e a secretaria que eu acompanho. Mas nao e o meu
+    concurso, e tratar os dois como a mesma coisa faria a tela anunciar
+    "edital aberto" quando o que abriu foi vaga de medico.
+    """
+    texto = normalizar(
+        GRUDADAS.sub(r"\1 \2", f"{titulo or ''} {resumo or ''}")
+    )
+    return bool(_primeiro(termos_do_principal(), texto))
 
 
 def nomeia_orgao_do_principal(titulo: str, resumo: str | None = None) -> bool:

@@ -215,4 +215,4 @@ def test_sem_historico_a_tela_explica_o_que_fazer(cliente):
 
 
 def test_o_radar_tem_link_para_a_previsao(cliente):
-    assert 'href="/previsao"' in cliente.get("/").text
+    assert 'href="/previsao"' in cliente.get("/concursos").text

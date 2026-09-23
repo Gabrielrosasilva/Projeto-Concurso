@@ -529,7 +529,7 @@
         {% endfor %}
       </ul>
       <p class="meta" style="margin-top:.6rem">
-        <a href="/?favoritos=true" style="color:var(--azul)">Ver com o status completo</a>
+        <a href="/concursos?favoritos=true" style="color:var(--azul)">Ver com o status completo</a>
       </p>
     {% else %}
       <div class="vazio-mural">
@@ -565,18 +565,18 @@
        abro `remoto` e `a confirmar` uma vez por semana, e eles ocupavam o
        mesmo tamanho dos que eu abro todo dia. #}
     <div class="atalhos">
-      <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/">
+      <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/concursos">
         Perto <span class="n">{{ perto }}</span>
       </a>
       <a class="estadual {{ 'ativo' if relevancia == 'estadual' }}"
-         href="/?relevancia=estadual"
+         href="/concursos?relevancia=estadual"
          title="Orgao estadual de SC: os polos de prova saem no edital">
         Estadual SC <span class="n">{{ contagem.estadual }}</span>
       </a>
-      <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
+      <a class="abertas {{ 'ativo' if abertas }}" href="/concursos?abertas=true">
         Abertos <span class="n">{{ n_abertas }}</span>
       </a>
-      <a class="tudo {{ 'ativo' if todos }}" href="/?todos=true">
+      <a class="tudo {{ 'ativo' if todos }}" href="/concursos?todos=true">
         Todos <span class="n">{{ total_geral }}</span>
       </a>
     </div>
@@ -625,20 +625,20 @@
       </div>
       <div class="acoes">
         <button type="submit">Filtrar</button>
-        <a class="limpar" href="/">Limpar</a>
+        <a class="limpar" href="/concursos">Limpar</a>
       </div>
     </form>
 
     {# Os aneis que sairam da barra de atalhos, e as duas visoes que nao sao
        anel: o mural e a busca em tudo. #}
     <div class="outros-aneis">
-      <a class="{{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
+      <a class="{{ 'ativo' if relevancia == 'remoto' }}" href="/concursos?relevancia=remoto">
         Longe ({{ contagem.remoto }})</a>
-      <a class="{{ 'ativo' if relevancia == 'indefinida' }}" href="/?relevancia=indefinida">
+      <a class="{{ 'ativo' if relevancia == 'indefinida' }}" href="/concursos?relevancia=indefinida">
         A confirmar ({{ contagem.indefinida }})</a>
-      <a class="{{ 'ativo' if favoritos }}" href="/?favoritos=true">
+      <a class="{{ 'ativo' if favoritos }}" href="/concursos?favoritos=true">
         Meu mural ({{ n_favoritos }})</a>
-      <a href="/?noticias=true">Noticias e andamento</a>
+      <a href="/concursos?noticias=true">Noticias e andamento</a>
     </div>
       </div>
     </details>
@@ -652,8 +652,8 @@
         <input name="termo" value="{{ termo }}" autofocus
                placeholder="PM, policia cientifica, bombeiro, Guarda Municipal...">
         <button type="submit">Procurar</button>
-        {% if termo %}<a class="limpar" href="/?noticias=true">Limpar</a>{% endif %}
-        <a class="limpar" href="/">Voltar aos concursos</a>
+        {% if termo %}<a class="limpar" href="/concursos?noticias=true">Limpar</a>{% endif %}
+        <a class="limpar" href="/concursos">Voltar aos concursos</a>
       </form>
 
       {% if fases %}
@@ -719,15 +719,15 @@
           {% elif filtro_ativo %}
             <p class="grande">Nenhum resultado com esses filtros.</p>
             <p><a href="{{ url_sem_salario.rstrip('?&') }}">Tirar o filtro de remuneracao</a>
-               &middot; <a href="/">Limpar tudo</a></p>
+               &middot; <a href="/concursos">Limpar tudo</a></p>
           {% elif not relevancia and not todos %}
             <p class="grande">Nenhum concurso perto de voce agora.</p>
             <p>Ha {{ contagem.remoto }} longe e {{ contagem.indefinida }} a confirmar.
-               <a href="/?todos=true">Ver todos os {{ total_geral }}</a>.</p>
+               <a href="/concursos?todos=true">Ver todos os {{ total_geral }}</a>.</p>
             <p>Isso e normal: o radar so avisa quando abrir algo na sua regiao.</p>
           {% else %}
             <p class="grande">Nenhum resultado com esses filtros.</p>
-            <p><a href="/">Limpar e voltar</a></p>
+            <p><a href="/concursos">Limpar e voltar</a></p>
           {% endif %}
         </li>
       {% endfor %}

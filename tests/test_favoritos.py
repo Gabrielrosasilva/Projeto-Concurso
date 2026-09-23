@@ -233,7 +233,8 @@ def test_o_mural_aparece_em_qualquer_aba(cliente):
     ))
     servico.favoritar(id_)
 
-    for pagina in ("/", "/?abertas=true", "/?todos=true", "/?relevancia=remoto"):
+    for pagina in ("/concursos", "/concursos?abertas=true",
+                   "/concursos?todos=true", "/concursos?relevancia=remoto"):
         texto = cliente.get(pagina).text
         assert "Meu mural" in texto
         assert "Guarda Municipal de Palhoca" in texto
@@ -242,7 +243,7 @@ def test_o_mural_aparece_em_qualquer_aba(cliente):
 def test_mural_vazio_explica_como_usar(cliente):
     _semear(_concurso("https://a.test/1"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert "Clique na estrela" in texto
 
 
@@ -251,13 +252,13 @@ def test_botao_favoritar_liga_e_desliga(cliente):
 
     resposta = cliente.post(
         "/favoritar",
-        data={"concurso_id": id_, "voltar": "/"},
+        data={"concurso_id": id_, "voltar": "/concursos"},
         follow_redirects=False,
     )
     assert resposta.status_code == 303
     assert servico.contar_favoritos() == 1
 
-    cliente.post("/favoritar", data={"concurso_id": id_, "voltar": "/"},
+    cliente.post("/favoritar", data={"concurso_id": id_, "voltar": "/concursos"},
                  follow_redirects=False)
     assert servico.contar_favoritos() == 0
 
@@ -292,7 +293,7 @@ def test_linha_do_tempo_do_status_aparece_nos_favoritos(cliente):
     servico.favoritar(id_)
     servico.atualizar_situacoes()
 
-    texto = cliente.get("/?favoritos=true").text
+    texto = cliente.get("/concursos?favoritos=true").text
     for etapa in ("previsto", "autorizado", "banca contratada",
                   "edital publicado", "inscricoes abertas", "encerrado"):
         assert etapa in texto
@@ -304,7 +305,7 @@ def test_filtro_de_salario_na_tela(cliente):
         _concurso("https://a.test/2", titulo="Ganha pouco", salario=2500),
     )
 
-    texto = cliente.get("/?salario_min=5000").text
+    texto = cliente.get("/concursos?salario_min=5000").text
     assert "Ganha bem" in texto
     assert "Ganha pouco" not in texto
 
@@ -316,7 +317,7 @@ def test_a_tela_avisa_quantos_ficaram_de_fora_por_falta_de_salario(cliente):
         _concurso("https://a.test/2", titulo="Sem valor", salario=None),
     )
 
-    texto = cliente.get("/?salario_min=5000").text
+    texto = cliente.get("/concursos?salario_min=5000").text
     assert "nao informam salario no titulo" in texto
     assert "Ver sem esse filtro" in texto
 
@@ -325,19 +326,19 @@ def test_a_estrela_aparece_como_simbolo_e_nao_como_texto(cliente):
     """Entidade HTML no template vira texto: o Jinja escapa por padrao."""
     (id_,) = _semear(_concurso("https://a.test/1"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert "&amp;#9733;" not in texto and "&amp;#9734;" not in texto
     assert "☆" in texto                      # estrela vazia
 
     servico.favoritar(id_)
-    assert "★" in cliente.get("/").text      # estrela cheia
+    assert "★" in cliente.get("/concursos").text      # estrela cheia
 
 
 def test_o_campo_de_salario_nao_mostra_casa_decimal_a_toa(cliente):
     """20000.0 no campo fica feio; o valor volta inteiro."""
     _semear(_concurso("https://a.test/1", salario=8000))
 
-    texto = cliente.get("/?salario_min=5000").text
+    texto = cliente.get("/concursos?salario_min=5000").text
     assert 'value="5000"' in texto
     assert 'value="5000.0"' not in texto
 
@@ -405,7 +406,7 @@ def test_salario_digitado_entra_no_filtro(banco_temporario):
 
 def test_sem_salario_a_tela_mostra_interrogacao(cliente):
     _semear(_concurso("https://a.test/1", salario=None))
-    assert "R$ ??" in cliente.get("/").text
+    assert "R$ ??" in cliente.get("/concursos").text
 
 
 def test_salvar_salario_pela_tela(cliente):
@@ -413,7 +414,7 @@ def test_salvar_salario_pela_tela(cliente):
 
     resposta = cliente.post(
         "/salario",
-        data={"concurso_id": id_, "salario": "5200", "voltar": "/"},
+        data={"concurso_id": id_, "salario": "5200", "voltar": "/concursos"},
         follow_redirects=False,
     )
     assert resposta.status_code == 303
@@ -435,7 +436,7 @@ def test_aceita_o_jeito_que_a_pessoa_digita(cliente, digitado, esperado):
     (id_,) = _semear(_concurso("https://a.test/1", salario=None))
 
     cliente.post("/salario",
-                 data={"concurso_id": id_, "salario": digitado, "voltar": "/"},
+                 data={"concurso_id": id_, "salario": digitado, "voltar": "/concursos"},
                  follow_redirects=False)
 
     with sessao() as s:
@@ -445,7 +446,7 @@ def test_aceita_o_jeito_que_a_pessoa_digita(cliente, digitado, esperado):
 def test_campo_vazio_limpa(cliente):
     (id_,) = _semear(_concurso("https://a.test/1", salario=8000))
 
-    cliente.post("/salario", data={"concurso_id": id_, "salario": "", "voltar": "/"},
+    cliente.post("/salario", data={"concurso_id": id_, "salario": "", "voltar": "/concursos"},
                  follow_redirects=False)
 
     with sessao() as s:
@@ -457,7 +458,7 @@ def test_texto_invalido_nao_quebra(cliente):
 
     resposta = cliente.post(
         "/salario",
-        data={"concurso_id": id_, "salario": "nao sei", "voltar": "/"},
+        data={"concurso_id": id_, "salario": "nao sei", "voltar": "/concursos"},
         follow_redirects=False,
     )
     assert resposta.status_code == 303
@@ -474,7 +475,7 @@ def test_cada_informacao_vem_com_rotulo(cliente):
     """
     _semear(_concurso("https://a.test/1", banca="FEPESE", salario=5200))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     for rotulo in ("Salario:", "Banca:", "Status:", "Tipo:"):
         assert rotulo in texto
 
@@ -483,18 +484,18 @@ def test_nucleo_aparece_como_perto(cliente):
     """"nucleo" e jargao do codigo; na tela vale o que se entende."""
     _semear(_concurso("https://a.test/1", relevancia="nucleo"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     assert ">Perto<" in texto
 
 
 def test_cidade_e_estado_aparecem(cliente):
     _semear(_concurso("https://a.test/1", municipio="Palhoca", uf="SC"))
-    assert "Palhoca/SC" in cliente.get("/").text
+    assert "Palhoca/SC" in cliente.get("/concursos").text
 
 
 def test_sem_cidade_a_tela_diz_isso_em_vez_de_ficar_em_branco(cliente):
     _semear(_concurso("https://a.test/1", municipio=None, uf=None))
-    assert "nao identificada" in cliente.get("/").text
+    assert "nao identificada" in cliente.get("/concursos").text
 
 
 def test_status_aberta_e_fechada(cliente):
@@ -503,7 +504,7 @@ def test_status_aberta_e_fechada(cliente):
         _concurso("https://a.test/2", titulo="Fechado", inscricoes_ate=dias(-10)),
     )
 
-    texto = cliente.get("/?todos=true").text
+    texto = cliente.get("/concursos?todos=true").text
     # O par virou "Inscricao: aberta" dentro de "detalhes". Quem esta aberto
     # continua dizendo o prazo na linha principal, que e o que decide.
     assert "Inscricao:" in texto
@@ -513,7 +514,7 @@ def test_status_aberta_e_fechada(cliente):
 
 def test_sem_prazo_o_status_diz_que_nao_sabe(cliente):
     _semear(_concurso("https://a.test/1", inscricoes_ate=None))
-    assert "prazo nao confirmado" in cliente.get("/").text
+    assert "prazo nao confirmado" in cliente.get("/concursos").text
 
 
 def test_o_campo_de_salario_so_aparece_no_cartao_que_eu_pedi(cliente):
@@ -526,9 +527,9 @@ def test_o_campo_de_salario_so_aparece_no_cartao_que_eu_pedi(cliente):
     )
 
     # sem o parametro, nenhum campo aberto
-    assert 'name="salario"' not in cliente.get("/").text
+    assert 'name="salario"' not in cliente.get("/concursos").text
 
-    texto = cliente.get(f"/?editar={ids[0]}").text
+    texto = cliente.get(f"/concursos?editar={ids[0]}").text
     assert texto.count('name="salario"') == 1      # so um cartao abriu
     assert "cancelar" in texto
 
@@ -539,7 +540,7 @@ def test_o_lapis_leva_para_o_proprio_cartao(cliente):
         "https://a.test/1", salario=None, inscricoes_ate=dias(10)
     ))
 
-    texto = cliente.get("/?abertas=true").text
+    texto = cliente.get("/concursos?abertas=true").text
     # mantem a aba em que estou e acrescenta o id.
     # O & sai como &amp; porque e HTML - e assim que deve ser.
     assert f"abertas=true&amp;editar={id_}" in texto
@@ -548,8 +549,8 @@ def test_o_lapis_leva_para_o_proprio_cartao(cliente):
 def test_cancelar_volta_sem_o_parametro(cliente):
     (id_,) = _semear(_concurso("https://a.test/1", salario=None))
 
-    texto = cliente.get(f"/?todos=true&editar={id_}").text
-    assert 'href="/?todos=true"' in texto
+    texto = cliente.get(f"/concursos?todos=true&editar={id_}").text
+    assert 'href="/concursos?todos=true"' in texto
     assert f"editar={id_}" not in texto.split("cancelar")[0][-200:]
 
 
@@ -559,7 +560,7 @@ def test_o_selo_de_salario_nao_usa_a_classe_do_estado_vazio(cliente):
     90px de altura no meio da linha de selos."""
     _semear(_concurso("https://a.test/1", salario=None))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/concursos").text
     # Na linha-chave o salario nao e mais um selo, mas o nome da classe de
     # "sem valor" continua sendo o que importa aqui: ele nao pode ser `vazio`.
     assert "dinheiro sem-valor" in texto
@@ -612,8 +613,8 @@ def test_a_coleta_nao_sobrescreve_a_minha_anotacao(banco_temporario):
 def test_a_caixa_de_anotacao_abre_na_tela(cliente):
     (ident,) = _semear(_concurso("https://a.test/nota"))
 
-    assert "+ anotar" in cliente.get("/").text
-    assert 'name="notas"' in cliente.get(f"/?anotar={ident}").text
+    assert "+ anotar" in cliente.get("/concursos").text
+    assert 'name="notas"' in cliente.get(f"/concursos?anotar={ident}").text
 
 
 def test_gravar_a_anotacao_pela_tela(cliente):
@@ -622,9 +623,9 @@ def test_gravar_a_anotacao_pela_tela(cliente):
     resposta = cliente.post(
         "/notas",
         data={"concurso_id": ident, "notas": "prova no mesmo dia da outra",
-              "voltar": "/"},
+              "voltar": "/concursos"},
         follow_redirects=False,
     )
 
     assert resposta.status_code == 303
-    assert "prova no mesmo dia da outra" in cliente.get("/").text
+    assert "prova no mesmo dia da outra" in cliente.get("/concursos").text

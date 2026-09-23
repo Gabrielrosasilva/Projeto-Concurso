@@ -181,11 +181,22 @@ No topo, quatro destinos e um menu:
 
 | item | o que tem la |
 |---|---|
-| **Meu foco** | em construcao |
+| **Meu foco** | a home: a situacao do alvo principal |
 | **Concursos** | a lista, com busca, atalhos e filtros |
 | **Acompanhando** | em construcao |
 | **Estudar** | Macetes e Simulado, nesta ordem |
 | **Mais** | Previsao e Calendario |
+
+**Meu foco** e a pagina inicial, e responde "o que esta acontecendo com o
+concurso que eu espero?". Ela mostra se ha edital aberto, qual foi o ultimo
+concurso, a banca e a validade; os sinais recentes (eventos e noticias do
+alvo); as materias do edital com o peso de cada uma, ao lado do que caiu de
+verdade nas provas; e um botao para treinar 20 questoes do proprio cargo.
+
+Quem e o alvo sai de `config/alvo.yml`. **Onde o dado nao existe, a tela diz
+"nao sei ainda"** - ela nunca preenche por conta propria. A banca aparece como
+`hipotese: FEPESE, que fez 2013 e 2019` enquanto nao houver edital novo
+dizendo quem e.
 
 A regra de quem fica na barra e quem fica no "Mais": o que eu abro todo dia
 fica a vista, o que eu abro de vez em quando fica no menu.
@@ -463,6 +474,8 @@ src/radar/
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
 ├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
+├── foco.py         a situacao do alvo principal, para a pagina inicial
+├── edital_materias.py  o quadro de distribuicao de questoes do edital
 ├── classificador.py  tipo, municipio, salario, relevancia e alvo, pelo titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao

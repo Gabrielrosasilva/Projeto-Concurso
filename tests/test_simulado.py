@@ -330,7 +330,7 @@ def test_o_radar_tem_link_para_o_simulado(cliente):
     Macetes e Simulado sao a mesma tarefa em dois passos."""
     _semear(_questao(1))
 
-    assert 'href="/estudar"' in cliente.get("/").text
+    assert 'href="/estudar"' in cliente.get("/concursos").text
     assert cliente.get("/estudar", follow_redirects=False).headers["location"] == (
         "/macetes"
     )

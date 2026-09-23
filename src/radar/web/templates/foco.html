@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meu foco &middot; Radar de Concursos</title>
+  <style>
+    :root{
+      color-scheme: light dark;
+      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
+      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
+      --verde:#047857; --verde-fraco:#d3f2e4;
+      --prazo:#be123c; --prazo-fraco:#ffe4e9;
+      --estadual:#9333ea; --estadual-fraco:#f3e4ff;
+      --duvida:#b45309; --duvida-fraco:#fdeed3;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
+        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
+        --verde:#4ade80; --verde-fraco:#10291d;
+        --prazo:#fb7185; --prazo-fraco:#2c1219;
+        --estadual:#d8b4fe; --estadual-fraco:#2a1436;
+        --duvida:#fbbf24; --duvida-fraco:#2e2310;
+      }
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--fundo);color:var(--texto);
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+    main{max-width:880px;margin:0 auto;padding:1.75rem 1.25rem 4rem}
+    h1{margin:0 0 .15rem;font-size:1.6rem;letter-spacing:-.02em}
+    .sub{margin:0 0 1.5rem;color:var(--suave);font-size:.9rem}
+
+    section{background:var(--cartao);border:1px solid var(--borda);
+      border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.1rem}
+    section h2{font-size:.78rem;margin:0 0 .85rem;text-transform:uppercase;
+      letter-spacing:.07em;color:var(--suave)}
+
+    /* ------------------------------------------------- situacao do alvo -- */
+    .veredito{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;
+      margin-bottom:.9rem}
+    .veredito .marca{font-size:.72rem;font-weight:800;text-transform:uppercase;
+      letter-spacing:.06em;padding:.2rem .6rem;border-radius:999px}
+    .marca.aberto{background:var(--verde-fraco);color:var(--verde)}
+    .marca.fechado{background:var(--azul-fraco);color:var(--azul)}
+    .veredito .frase{font-size:1.05rem;font-weight:700}
+
+    dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.45rem .9rem;
+      margin:0;font-size:.9rem}
+    dt{color:var(--suave);white-space:nowrap}
+    dd{margin:0;overflow-wrap:anywhere}
+    dd a{color:var(--azul)}
+
+    /* "nao sei ainda" tem cara propria: nao pode parecer um dado. */
+    .nao-sei{color:var(--duvida);background:var(--duvida-fraco);
+      padding:.05rem .45rem;border-radius:6px;font-size:.85em;font-weight:600}
+    .hipotese{color:var(--duvida);font-weight:600}
+
+    .aviso-orgao{margin-top:.9rem;padding:.7rem .85rem;border-radius:8px;
+      background:var(--estadual-fraco);color:var(--estadual);font-size:.85rem}
+    .aviso-orgao a{color:inherit;font-weight:700}
+
+    /* --------------------------------------------------------- sinais --- */
+    .sinais{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+    .sinais li{display:grid;grid-template-columns:auto minmax(0,1fr);
+      gap:.7rem;align-items:baseline;font-size:.88rem}
+    .sinais .quando{color:var(--suave);font-variant-numeric:tabular-nums;
+      white-space:nowrap;font-size:.82rem}
+    .sinais .tipo{font-size:.7rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.05em;color:var(--azul);background:var(--azul-fraco);
+      padding:.05rem .4rem;border-radius:5px;margin-right:.4rem}
+    .sinais a{color:var(--texto);text-decoration:none}
+    .sinais a:hover{text-decoration:underline;color:var(--azul)}
+
+    /* -------------------------------------------------------- materias --- */
+    table{width:100%;border-collapse:collapse;font-size:.88rem}
+    th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--borda)}
+    th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+      color:var(--suave);font-weight:700}
+    td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+    tbody tr:last-child td{border-bottom:0}
+    .barra{display:block;height:6px;border-radius:999px;background:var(--azul);
+      min-width:2px}
+    .barra-caixa{background:var(--azul-fraco);border-radius:999px;width:100%;
+      min-width:60px}
+    td.zero{color:var(--suave)}
+    .legenda{margin:.85rem 0 0;font-size:.8rem;color:var(--suave)}
+
+    /* -------------------------------------------------------- treinar --- */
+    .treinar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .treinar button{padding:.7rem 1.4rem;border-radius:10px;border:0;
+      background:var(--azul);color:#fff;font-size:.95rem;font-weight:700;
+      cursor:pointer}
+    .treinar button:hover{opacity:.92}
+    .treinar .conta{color:var(--suave);font-size:.85rem}
+
+    .vazio{color:var(--suave);font-size:.9rem;margin:0}
+    code{background:var(--azul-fraco);color:var(--azul);padding:.1rem .4rem;
+      border-radius:4px;font-size:.85em}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body>
+
+{% from "_topo.html" import barra %}
+{{ barra('foco') }}
+
+<main>
+  <h1>{{ p.nome_do_alvo }}</h1>
+  <p class="sub">O que esta acontecendo com o concurso que eu espero.</p>
+
+  {% if not p.configurado %}
+    <section>
+      <p class="vazio">Nenhum alvo principal em <code>config/alvo.yml</code>.
+        Esta tela inteira sai de la.</p>
+    </section>
+  {% else %}
+
+  {# ------------------------------------------------ situacao do alvo ---- #}
+  <section>
+    <h2>Situacao</h2>
+
+    <div class="veredito">
+      {% if p.aberto %}
+        <span class="marca aberto">Edital aberto</span>
+        <span class="frase">Ha inscricao aberta agora.</span>
+      {% else %}
+        <span class="marca fechado">Sem edital aberto</span>
+        <span class="frase">Nenhuma inscricao aberta para o cargo.</span>
+      {% endif %}
+    </div>
+
+    <dl>
+      {% if p.aberto %}
+        <dt>Inscricao ate</dt>
+        <dd>
+          {% if p.aberto.inscricoes_ate %}{{ p.aberto.inscricoes_ate | data }}
+          {% else %}<span class="nao-sei">nao sei ainda</span>{% endif %}
+        </dd>
+        <dt>Edital</dt>
+        <dd><a href="{{ p.aberto.url }}" target="_blank" rel="noopener">{{ p.aberto.titulo }}</a></dd>
+      {% endif %}
+
+      <dt>Ultimo concurso</dt>
+      <dd>
+        {% if p.ultima %}
+          {% if p.ultima.ano %}<strong>{{ p.ultima.ano }}</strong> &middot; {% endif %}
+          <a href="{{ p.ultima.url }}" target="_blank" rel="noopener">{{ p.ultima.titulo }}</a>
+        {% else %}
+          <span class="nao-sei">nao sei ainda</span>
+        {% endif %}
+      </dd>
+
+      <dt>Banca</dt>
+      <dd>
+        {% if p.banca.nome and not p.banca.confirmada %}
+          <span class="hipotese">{{ p.banca.como_hipotese }}</span>
+        {% elif p.banca.nome %}
+          {{ p.banca.como_hipotese }}
+        {% else %}
+          <span class="nao-sei">nao sei ainda</span>
+        {% endif %}
+      </dd>
+
+      <dt>Validade</dt>
+      <dd>
+        {% if p.validade %}
+          {{ p.validade }}
+          {# O prazo esta no edital; a data em que ele comeca a contar sai na
+             homologacao, publicada no Diario Oficial - que este projeto nao
+             le, por causa do robots.txt. Dizer "vence em X" seria inventar. #}
+          <br><span class="nao-sei">quando comeca a contar: nao sei ainda</span>
+        {% else %}
+          <span class="nao-sei">nao sei ainda</span>
+        {% endif %}
+      </dd>
+    </dl>
+
+    {% if p.aberto_no_orgao %}
+      <p class="aviso-orgao">
+        A secretaria esta com outra inscricao aberta, que <strong>nao e</strong>
+        do meu cargo:
+        <a href="{{ p.aberto_no_orgao.url }}" target="_blank" rel="noopener">{{ p.aberto_no_orgao.titulo }}</a>
+      </p>
+    {% endif %}
+  </section>
+
+  {# ----------------------------------------------------- sinais -------- #}
+  <section>
+    <h2>Sinais recentes</h2>
+    {% if p.sinais %}
+      <ul class="sinais">
+        {% for s in p.sinais %}
+          <li>
+            <span class="quando">{{ s.quando | data }}</span>
+            <span>
+              <span class="tipo">{{ s.tipo | replace('_', ' ') }}</span>
+              {% if s.link %}
+                <a href="{{ s.link }}" target="_blank" rel="noopener">{{ s.texto }}</a>
+              {% else %}{{ s.texto }}{% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="vazio">
+        Nada recente. A linha do tempo comeca a ser gravada na primeira coleta
+        depois que o concurso entra no radar, entao concurso antigo aparece
+        aqui sem historico - <span class="nao-sei">nao sei ainda</span> o que
+        aconteceu antes disso.
+      </p>
+    {% endif %}
+  </section>
+
+  {# ---------------------------------------------------- materias ------- #}
+  <section>
+    <h2>
+      Materias
+      {%- if p.ano_do_edital %}: edital de {{ p.ano_do_edital }} contra as provas{% endif %}
+    </h2>
+
+    {% if p.materias_do_edital %}
+      <table>
+        <thead>
+          <tr>
+            <th>Materia</th>
+            <th class="n">Edital {{ p.ano_do_edital }}</th>
+            <th class="n">Peso</th>
+            {% for ano in p.anos_das_provas %}<th class="n">Prova {{ ano }}</th>{% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in p.materias_do_edital %}
+            {% set peso = m.peso(p.total_do_edital) %}
+            <tr>
+              <td>{{ m.nome }}</td>
+              <td class="n">{{ m.questoes }}</td>
+              <td class="n" style="width:22%">
+                <span class="barra-caixa">
+                  <span class="barra" style="width:{{ '%.0f'|format(peso * 4) }}%"></span>
+                </span>
+                {{ '%.0f'|format(peso) }}%
+              </td>
+              {% for ano in p.anos_das_provas %}
+                {% set caiu = p.incidencia.get(m.nome, {}).get(ano, 0) %}
+                <td class="n {{ 'zero' if not caiu }}">{{ caiu if caiu else '--' }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if fora_do_edital %}
+        <p class="legenda">
+          Caiu na prova mas <strong>nao esta</strong> no quadro do edital de
+          {{ p.ano_do_edital }}:
+          {% for nome in fora_do_edital %}
+            {{ nome }}{% if not loop.last %} &middot; {% endif %}
+          {% endfor %}.
+          Materia muda de uma edicao para a outra - e por isso que as duas
+          colunas ficam lado a lado.
+        </p>
+      {% endif %}
+
+      <p class="legenda">
+        A coluna do edital e o que ele <strong>promete</strong> cobrar; as de
+        prova sao o que <strong>caiu</strong>. Onde elas batem, o peso e regra.
+        &quot;--&quot; quer dizer que a materia nao apareceu naquele caderno.
+      </p>
+    {% else %}
+      <p class="vazio">
+        <span class="nao-sei">nao sei ainda</span> &mdash; o quadro de
+        distribuicao de questoes sai do PDF do edital, e ele ainda nao esta no
+        acervo. Rode <code>radar provas</code>.
+      </p>
+    {% endif %}
+  </section>
+
+  {# ----------------------------------------------------- treinar ------- #}
+  <section>
+    <h2>Treinar</h2>
+    {% if p.questoes_para_treinar %}
+      <form class="treinar" method="post" action="/foco/treinar">
+        <button type="submit">Treinar {{ questoes_do_treino }} questoes</button>
+        <span class="conta">
+          sorteadas entre as {{ p.questoes_para_treinar }} questoes das provas
+          do cargo, sem repetir enunciado
+        </span>
+      </form>
+    {% else %}
+      <p class="vazio">
+        Nenhuma questao do cargo no acervo ainda. Rode
+        <code>radar provas</code> e depois <code>radar questoes</code>.
+      </p>
+    {% endif %}
+  </section>
+
+  {% endif %}
+</main>
+
+</body>
+</html>

@@ -10,6 +10,7 @@ from fastapi import FastAPI, Form, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from radar import foco as foco_do_alvo
 from radar import servico
 from radar.util import converter_valor, dias_ate, formatar_data
 try:                                    # fastapi>=0.115 traz o Jinja2Templates
@@ -144,8 +145,8 @@ def _url_sem_pedido(request: Request, *parametros: str):
 CARTOES_POR_VEZ = 30
 
 
-@app.get("/", response_class=HTMLResponse)
-def index(
+@app.get("/concursos", response_class=HTMLResponse)
+def concursos(
     request: Request,
     uf: str | None = None,
     banca: str | None = None,
@@ -266,7 +267,7 @@ def index(
 
 
 @app.post("/favoritar")
-def favoritar(concurso_id: int = Form(...), voltar: str = Form("/")):
+def favoritar(concurso_id: int = Form(...), voltar: str = Form("/concursos")):
     """Liga ou desliga o favorito e devolve para a pagina de onde veio.
 
     E POST, e nao um link: o navegador pre-carrega link ao passar o mouse, e
@@ -283,7 +284,7 @@ def favoritar(concurso_id: int = Form(...), voltar: str = Form("/")):
 def salario(
     concurso_id: int = Form(...),
     salario: str = Form(""),
-    voltar: str = Form("/"),
+    voltar: str = Form("/concursos"),
 ):
     """Grava a remuneracao que eu digitei.
 
@@ -299,7 +300,7 @@ def salario(
 def notas(
     concurso_id: int = Form(...),
     notas: str = Form(""),
-    voltar: str = Form("/"),
+    voltar: str = Form("/concursos"),
 ):
     """Grava a minha anotacao. Campo vazio apaga a nota."""
     servico.definir_notas(concurso_id, notas)
@@ -411,11 +412,6 @@ def simulado_responder(
 # Elas existem aqui para o menu do topo ser o menu de verdade desde ja - mudar
 # a navegacao depois custa mais do que deixar a porta aberta agora.
 EM_CONSTRUCAO = {
-    "foco": (
-        "Meu foco",
-        "Aqui vai ficar o que importa hoje: o alvo principal, o que fecha "
-        "esta semana e o que estudar em seguida.",
-    ),
     "acompanhando": (
         "Acompanhando",
         "Aqui vao ficar os concursos que eu escolhi seguir, com a linha do "
@@ -424,9 +420,52 @@ EM_CONSTRUCAO = {
 }
 
 
-@app.get("/foco", response_class=HTMLResponse)
-def foco(request: Request):
-    return _em_construcao(request, "foco")
+@app.get("/", response_class=HTMLResponse)
+def meu_foco(request: Request):
+    """A tela que responde "o que esta acontecendo com o meu concurso?".
+
+    E a home porque e a pergunta que eu faco todo dia. A lista de concursos
+    responde "o que existe?", que e outra coisa e vem depois.
+    """
+    painel = foco_do_alvo.montar()
+    return templates.TemplateResponse(
+        request=request,
+        name="foco.html",
+        context={
+            "p": painel,
+            "questoes_do_treino": foco_do_alvo.QUESTOES_DO_TREINO,
+            # As materias que cairam na prova mas nao estao no quadro do
+            # edital lido. Elas nao podem sumir da tela so porque a tabela e
+            # montada a partir do edital: sumir seria esconder que a prova
+            # mudou de um ano para o outro.
+            "fora_do_edital": sorted(
+                m for m in painel.incidencia
+                if m not in {x.nome for x in painel.materias_do_edital}
+            ),
+        },
+    )
+
+
+@app.get("/foco")
+def foco_endereco_antigo():
+    """Meu foco virou a home. O endereco antigo continua levando la."""
+    return RedirectResponse("/", status_code=303)
+
+
+@app.post("/foco/treinar")
+def treinar_do_foco():
+    """Sorteia uma rodada com as questoes das provas do proprio alvo.
+
+    Sem escolher materia: o ponto do botao e comecar a estudar em um clique,
+    e a distribuicao do acervo do cargo ja e a da prova real.
+    """
+    novo = servico.criar_simulado(
+        quantidade=foco_do_alvo.QUESTOES_DO_TREINO,
+        cargo=foco_do_alvo.cargo_para_treinar(),
+    )
+    if novo is None:
+        return RedirectResponse("/simulado", status_code=303)
+    return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
 
 
 @app.get("/acompanhando", response_class=HTMLResponse)
