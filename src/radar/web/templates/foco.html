@@ -320,7 +320,11 @@
   {# ----------------------------------------------------- treinar ------- #}
   <section>
     <h2>Treinar</h2>
-    {% if p.questoes_para_treinar %}
+    {# O botao aparece pela conta do SORTEIO, e nao pela do painel: o painel
+       conta toda questao do cargo, e o sorteio so usa as que tem gabarito.
+       Quando as duas discordam - caderno no acervo sem o gabarito ao lado - o
+       botao prometia rodada e entregava redirecionamento. #}
+    {% if fontes_do_treino.proprias %}
       <form class="treinar" method="post" action="/foco/treinar">
         <button type="submit">Treinar {{ questoes_do_treino }} questoes</button>
         <span class="conta">

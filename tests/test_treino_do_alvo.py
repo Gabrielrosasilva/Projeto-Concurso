@@ -303,3 +303,19 @@ def test_o_simulado_comum_nao_ganha_o_rotulo_do_alvo(cliente):
 
     assert "Treino de" not in texto
     assert "Questoes reais" in texto
+
+
+def test_caderno_sem_gabarito_nao_promete_rodada(cliente):
+    """O painel conta toda questao do cargo; o sorteio so usa as que tem
+    gabarito. Quando as duas discordavam - caderno no acervo sem o gabarito ao
+    lado - o botao aparecia dizendo "ja respondi todas" e o clique caia no
+    simulado comum."""
+    _semear(_questao(1, resposta=None))
+
+    texto = cliente.get("/").text
+    assert "Treinar 20 questoes" not in texto      # o botao, nao o titulo
+    assert "ja respondi todas" not in texto
+    assert "Nenhuma questao do cargo no acervo ainda" in texto
+
+    resposta = cliente.post("/foco/treinar", follow_redirects=False)
+    assert resposta.headers["location"] == "/simulado"
