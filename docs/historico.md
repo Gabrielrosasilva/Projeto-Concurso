@@ -722,3 +722,84 @@ recortes que eu **nao** pedi — o anel padrao da tela e a faixa de remuneracao.
 Nao escapa do que eu digitei: busca por palavra, anel escolhido a dedo e a aba
 "Abertos" continuam sendo perguntas, e resposta com favorito de outro lugar no
 meio e filtro que deixou de responder.
+
+## Etapa 9: estudar pelo alvo
+
+Tres coisas que pareciam separadas e sao a mesma: o radar sabia o que eu quero
+prestar, sabia que provas existem e sabia como eu vou no simulado — e nao
+cruzava nada disso. O botao de treino sorteava sempre do mesmo balde de 160
+questoes, a busca por prova parecida nao achava as provas do meu proprio
+cargo, e o quadro de materias do edital nao sabia que eu vou mal em Direitos
+Humanos.
+
+### O cargo que mudou de nome
+
+`radar parecidas "policial penal"` devolvia nada, com duas provas do cargo
+catalogadas no acervo. O motivo e que elas estao gravadas com o nome da epoca,
+"Agente Penitenciario", e o cargo hoje se chama Policial Penal.
+
+Isto nao e problema de busca: os dois nomes **nao dividem uma palavra sequer**.
+Nenhum ajuste de semelhanca de texto ia resolver — quem sabe que sao o mesmo
+cargo sou eu, e ja estava escrito em `config/alvo.yml`, na lista de `termos`
+que o radar usa para reconhecer o cargo no feed. Ela passou a valer tambem
+como lista de sinonimos.
+
+A parte que exigiu cuidado foi a regra de entrada. Aceitar "uma palavra em
+comum com algum sinonimo" encheria a lista: "agente penitenciario" arrastaria
+Agente Administrativo, Agente de Servicos e Agente Comunitario. Por isso o
+sinonimo tem que caber **inteiro** no cargo do acervo — "Agente Penitenciario
+- Feminino (AP)" tem as duas palavras e entra; "Agente Administrativo" tem uma
+e fica fora.
+
+### O balde que acabava
+
+O botao "Treinar 20 questoes" passava um filtro de cargo para o sorteio comum,
+e `criar_simulado` aceita um filtro so. Por isso existia `cargo_para_treinar`,
+que escolhia na mao **um** termo do YAML — o primeiro que achasse prova. Com
+160 enunciados distintos no acervo do cargo, oito rodadas de 20 acabam com
+eles, e dali em diante o botao so repetia.
+
+A regra nova tem tres degraus, nesta ordem:
+
+1. as questoes das provas do proprio cargo (2013 e 2019). Sao a prova de
+   verdade, e nenhuma outra chega perto;
+2. as da mesma banca **nas mesmas materias**, em outros concursos. Sao 356
+   enunciados distintos, e e a segunda melhor coisa: a FEPESE cobra Portugues
+   do mesmo jeito em qualquer caderno que faca;
+3. so entao repete o que eu ja respondi — e a rodada registra que repetiu.
+
+"Acabar" e por **enunciado ja respondido**, em qualquer simulado, e nao por id
+de questao: a mesma pergunta aparece em varios cadernos, e reve-la com outro
+numero nao seria questao nova.
+
+O filtro de materia e o que impede o degrau 2 de virar "qualquer coisa". Das
+7.046 questoes que a FEPESE deixou em outros cargos, entram 2.129:
+
+    Lingua Portuguesa      1.425      Direito Constitucional    20
+    Nocoes de Informatica    329      Legislacao Estadual       20
+    Raciocinio Logico        295      Direito Administrativo    12
+    Direitos Humanos          20      Direito Penal              4
+
+As 3.265 de "Conhecimentos Especificos" ficam de fora inteiras, que e o ponto:
+Conhecimentos Especificos de Merendeira e da mesma banca e nao me serve de
+nada.
+
+### Por onde comecar hoje
+
+O quadro do edital dizia o que vale mais e o simulado dizia como eu vou, cada
+um na sua tela. Juntos eles respondem a pergunta que nenhum dos dois responde
+sozinho: **por onde eu comeco a estudar hoje**.
+
+A tabela de materias ganhou a coluna "Meu acerto", e duas marcas:
+
+- as materias **acima da media da propria prova** ficam em negrito. O corte
+  nao e um numero escolhido a mao — e o total de questoes dividido pelo numero
+  de materias, e se ajusta sozinho quando o edital muda. No de 2019 sao sete,
+  e elas valem 80 das 100 questoes;
+- a **pior entre essas sete** ganha cor e o rotulo "comece por aqui". A pior
+  entre as pesadas, e nao a pior de todas: errar numa materia de 5 questoes
+  custa 5 questoes; errar numa de 15 decide a prova.
+
+Materia que eu nunca treinei aparece como "nao treinei" e nao concorre ao
+destaque. Zero por cento diria que eu errei tudo, quando o que houve foi eu
+nao ter feito — a mesma regra de nunca inventar que vale para o resto da tela.

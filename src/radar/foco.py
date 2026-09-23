@@ -107,6 +107,14 @@ class Painel:
     anos_das_provas: list[int] = field(default_factory=list)
     questoes_para_treinar: int = 0
 
+    #: Como eu vou em cada materia, pelo nome que o EDITAL usa. Materia que eu
+    #: nunca treinei nao aparece aqui - ela nao tem acerto, e nao tem zero.
+    acerto_por_materia: dict = field(default_factory=dict)
+    #: As materias que puxam mais nota. Ver `materias_de_maior_peso`.
+    materias_pesadas: set = field(default_factory=set)
+    #: A pior das pesadas. None quando nenhuma delas foi treinada ainda.
+    pior_materia: str | None = None
+
 
 def _concursos_do_alvo(s) -> list[Concurso]:
     """Todo concurso marcado como alvo principal, do mais novo para o velho."""
@@ -346,6 +354,71 @@ def _incidencia_do_cargo() -> tuple[dict, list[int]]:
     return por_materia, sorted(anos)
 
 
+def materias_de_maior_peso(materias: list, total: int) -> set[str]:
+    """As materias que puxam mais nota que a media, pelo quadro do edital.
+
+    O corte e a media da propria prova (total dividido pelo numero de
+    materias), e nao um numero que eu escolhi. Ele se ajusta sozinho quando o
+    edital muda, e e o que separa "materia que decide a prova" de "materia que
+    tem duas questoes".
+
+    No edital de 2019 sao sete: as duas de 15 questoes e as cinco de 10, que
+    juntas valem 80 das 100 questoes. As quatro de 5 questoes ficam de fora.
+    """
+    if not materias or not total:
+        return set()
+
+    media = total / len(materias)
+    return {m.nome for m in materias if m.questoes >= media}
+
+
+def _acerto_por_materia(materias: list) -> dict:
+    """Quanto eu acerto em cada materia do edital, pelo nome que ele usa.
+
+    Vem do simulado - de TODOS os simulados, nao so do ultimo: uma rodada de
+    20 questoes nao diz se eu sei a materia, e o acumulado diz.
+
+    A chave e o nome do edital porque e ele que manda na tela, e os dois lados
+    escrevem diferente: o edital diz "Lingua Portuguesa" e o cabecalho do
+    caderno pode dizer "Língua Portuguesa". Comparar normalizado resolve isso
+    sem precisar de tabela de apelidos.
+
+    Materia que eu nunca respondi simplesmente nao esta no dicionario. Ela nao
+    vale zero por cento: zero seria dizer que eu errei tudo, quando o que
+    aconteceu foi eu nao ter treinado.
+    """
+    from radar import servico
+
+    medido = {
+        normalizar(d.materia): d for d in servico.desempenho() if d.respondidas
+    }
+    return {
+        m.nome: medido[normalizar(m.nome)]
+        for m in materias
+        if normalizar(m.nome) in medido
+    }
+
+
+def _pior_das_pesadas(pesadas: set[str], acerto: dict) -> str | None:
+    """A materia de maior peso em que eu vou pior. None se nenhuma foi feita.
+
+    E a resposta para "por onde eu comeco a estudar hoje": errar muito numa
+    materia de 2 questoes custa 2 questoes; errar numa de 15 decide a prova.
+
+    So entra materia que eu ja treinei. Apontar a pior entre as que eu nunca
+    fiz seria inventar um numero - e a materia pesada que ainda nao tem acerto
+    aparece na tela do jeito dela, dizendo que falta treinar.
+    """
+    medidas = [(nome, acerto[nome]) for nome in pesadas if nome in acerto]
+    if not medidas:
+        return None
+
+    # Empate de porcentagem desempata pela materia mais feita: entre 50% em
+    # duas questoes e 50% em trinta, a segunda e a que eu sei que e verdade.
+    pior = min(medidas, key=lambda par: (par[1].porcentagem, -par[1].respondidas))
+    return pior[0]
+
+
 def _contar_questoes_do_alvo() -> int:
     """Quantas questoes do cargo existem para treinar."""
     with sessao() as s:
@@ -397,6 +470,15 @@ def montar() -> Painel:
 
     painel.incidencia, painel.anos_das_provas = _incidencia_do_cargo()
     painel.questoes_para_treinar = _contar_questoes_do_alvo()
+
+    # O quadro do edital diz o que vale mais; o simulado diz como eu vou. Os
+    # dois juntos respondem a pergunta que o quadro sozinho nao responde: por
+    # onde comecar hoje.
+    painel.acerto_por_materia = _acerto_por_materia(materias)
+    painel.materias_pesadas = materias_de_maior_peso(materias, total)
+    painel.pior_materia = _pior_das_pesadas(
+        painel.materias_pesadas, painel.acerto_por_materia
+    )
     return painel
 
 

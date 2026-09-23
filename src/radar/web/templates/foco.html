@@ -86,6 +86,19 @@
     td.zero{color:var(--suave)}
     .legenda{margin:.85rem 0 0;font-size:.8rem;color:var(--suave)}
 
+    /* A materia que mais pesa fica em negrito; a pior delas ganha cor. Sao
+       dois niveis de destaque porque sao duas informacoes: o que vale mais,
+       e onde eu estou pior. */
+    tr.pesada td:first-child{font-weight:700}
+    tr.pior td{background:var(--prazo-fraco)}
+    tr.pior td:first-child{color:var(--prazo)}
+    .marca{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;
+      color:var(--prazo);background:var(--cartao);border:1px solid var(--prazo);
+      padding:.05rem .35rem;border-radius:5px;margin-left:.4rem;
+      white-space:nowrap;font-weight:700}
+    .feitas{color:var(--suave);font-size:.78rem;font-weight:400}
+    .legenda.destaque{color:var(--texto)}
+
     /* -------------------------------------------------------- treinar --- */
     .treinar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
     .treinar button{padding:.7rem 1.4rem;border-radius:10px;border:0;
@@ -226,20 +239,38 @@
             <th>Materia</th>
             <th class="n">Edital {{ p.ano_do_edital }}</th>
             <th class="n">Peso</th>
+            <th class="n">Meu acerto</th>
             {% for ano in p.anos_das_provas %}<th class="n">Prova {{ ano }}</th>{% endfor %}
           </tr>
         </thead>
         <tbody>
           {% for m in p.materias_do_edital %}
             {% set peso = m.peso(p.total_do_edital) %}
-            <tr>
-              <td>{{ m.nome }}</td>
+            {% set acerto = p.acerto_por_materia.get(m.nome) %}
+            {% set pesada = m.nome in p.materias_pesadas %}
+            <tr class="{{ 'pesada' if pesada }} {{ 'pior' if m.nome == p.pior_materia }}">
+              <td>
+                {{ m.nome }}
+                {%- if m.nome == p.pior_materia %}
+                  <span class="marca">comece por aqui</span>
+                {%- endif %}
+              </td>
               <td class="n">{{ m.questoes }}</td>
               <td class="n" style="width:22%">
                 <span class="barra-caixa">
                   <span class="barra" style="width:{{ '%.0f'|format(peso * 4) }}%"></span>
                 </span>
                 {{ '%.0f'|format(peso) }}%
+              </td>
+              {# Materia nunca treinada nao vale zero: zero diria que eu errei
+                 tudo, quando o que houve foi eu nao ter feito. #}
+              <td class="n {{ 'zero' if not acerto }}">
+                {%- if acerto -%}
+                  {{ '%.0f'|format(acerto.porcentagem) }}%
+                  <span class="feitas">de {{ acerto.respondidas }}</span>
+                {%- else -%}
+                  nao treinei
+                {%- endif -%}
               </td>
               {% for ano in p.anos_das_provas %}
                 {% set caiu = p.incidencia.get(m.nome, {}).get(ano, 0) %}
@@ -249,6 +280,16 @@
           {% endfor %}
         </tbody>
       </table>
+
+      {% if p.pior_materia %}
+        <p class="legenda destaque">
+          <strong>{{ p.pior_materia }}</strong> e onde eu vou pior entre as
+          materias que mais pesam &mdash; e por ela que vale comecar hoje.
+          Errar numa materia de 5 questoes custa 5 questoes; errar numa de
+          {{ p.materias_do_edital|selectattr('nome', 'equalto', p.pior_materia)
+             |map(attribute='questoes')|first }} decide a prova.
+        </p>
+      {% endif %}
 
       {% if fora_do_edital %}
         <p class="legenda">

@@ -116,6 +116,10 @@ meses antes do edital**, e da tempo de estudar o padrao dela.
        treino de 20 questoes) e a aba Acompanhando no lugar do mural - um
        bloco por favorito, com linha do tempo, proxima acao, contagem de
        dias, e aviso no Telegram das cinco mudancas que importam
+9      PRONTA: estudar pelo alvo. O treino sorteia primeiro as provas do
+       cargo e depois a mesma banca nas mesmas materias; os `termos` do
+       alvo.yml valem como sinonimos do cargo; e a tabela de materias mostra
+       o meu acerto ao lado do peso, apontando a pior entre as de maior peso
 ```
 
 A arvore de `src/radar/`, arquivo por arquivo, esta no

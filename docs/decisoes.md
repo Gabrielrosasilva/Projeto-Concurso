@@ -501,3 +501,51 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   existe pelo mesmo motivo que `concursos.avisado_em` - a coleta de amanha nao
   pode repetir o aviso de hoje. E so marca o que realmente saiu, para Telegram
   fora do ar deixar a fila em pe em vez de sumir com a mudanca.
+
+## Etapa 9: estudar pelo alvo
+
+- **os `termos` do `config/alvo.yml` sao sinonimos do cargo**, e nao so
+  padroes para reconhecer o feed. Eles resolvem um caso que nenhuma regra de
+  semelhanca de texto resolveria: as duas provas que eu tenho estao
+  catalogadas como "Agente Penitenciario", o nome de 2013 e 2019, e o cargo
+  hoje se chama "Policial Penal" - os dois nomes nao dividem uma palavra
+  sequer. Vale para o alvo principal e para os secundarios;
+- **o sinonimo tem que caber INTEIRO no cargo do acervo.** "Agente
+  Penitenciario - Feminino (AP)" tem as duas palavras de "agente
+  penitenciario" e e a mesma profissao; "Agente Administrativo" tem so
+  "agente" e nao e. Sem a exigencia do sinonimo completo, todo "Agente" do
+  acervo entraria na lista de provas parecidas;
+- **o treino do alvo tem ordem de preferencia, e ela e o conteudo da etapa:**
+  primeiro as questoes das provas do proprio cargo, que sao a prova de
+  verdade; quando elas acabam, as da mesma banca NAS MESMAS MATERIAS, em
+  outros concursos; so entao repete o que eu ja respondi, avisando que
+  repetiu. Sao 160 enunciados distintos do cargo contra 356 da banca: oito
+  rodadas de 20 acabam com os primeiros;
+- **"acabar" e por enunciado ja respondido**, em qualquer simulado, e nao por
+  id de questao. A mesma pergunta aparece em varios cadernos, e reve-la com
+  outro numero nao seria questao nova;
+- **a materia e o que limita a segunda fonte.** Das 7.046 questoes da FEPESE
+  em outros cargos, entram as 2.129 das materias que cairam na minha prova.
+  "Conhecimentos Especificos" de Merendeira e da mesma banca e nao me serve de
+  nada;
+- as materias da segunda fonte saem das PROVAS do cargo, e nao do quadro do
+  edital. E de proposito: o quadro depende do PDF estar no acervo e legivel, e
+  o sorteio nao pode depender disso. A consequencia conhecida e que Nocoes de
+  Informatica entra - ela caiu em 2013 e saiu do edital de 2019 - e a propria
+  tela mostra esse desencontro, na linha "caiu na prova mas nao esta no
+  edital";
+- **a rodada registra de onde cada questao veio** (`Simulado.filtros`), e a
+  tela diz. Acertar 70% nas questoes da minha prova nao e a mesma coisa que
+  acertar 70% em prova de outro cargo da mesma banca;
+- **materia de maior peso e a que esta acima da media da propria prova**
+  (total de questoes dividido pelo numero de materias). O corte nao e um
+  numero que eu escolhi: ele se ajusta sozinho quando o edital muda. No de
+  2019 sao sete materias, que valem 80 das 100 questoes;
+- **o destaque aponta a pior entre essas**, e nao a pior de todas: errar numa
+  materia de 5 questoes custa 5 questoes; errar numa de 15 decide a prova.
+  Empate de porcentagem desempata pela materia mais feita - entre 50% em duas
+  questoes e 50% em trinta, a segunda e a que eu sei que e verdade;
+- **materia nunca treinada nao vale zero por cento.** Ela aparece como "nao
+  treinei" e NAO concorre ao destaque: zero diria que eu errei tudo, quando o
+  que houve foi eu nao ter feito. E a mesma regra de nunca inventar que vale
+  para o resto da tela de foco.

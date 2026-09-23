@@ -8,7 +8,7 @@ O alvo principal e **Policia Penal SC**, e depois dele as outras carreiras de
 seguranca publica. Para o resto, o filtro que importa e **onde a prova e
 aplicada** — Grande Florianopolis e arredores.
 
-**Estado: fases 1 a 6 e 8 prontas**, fase 7 parcial. Tres fontes coletando,
+**Estado: fases 1 a 6, 8 e 9 prontas**, fase 7 parcial. Tres fontes coletando,
 elegibilidade lida do edital, 5.928 questoes catalogadas, simulado, previsao de
 abertura, a aba Macetes, a home "Meu foco" e a aba Acompanhando.
 
@@ -194,7 +194,20 @@ No topo, quatro destinos e um menu:
 concurso que eu espero?". Ela mostra se ha edital aberto, qual foi o ultimo
 concurso, a banca e a validade; os sinais recentes (eventos e noticias do
 alvo); as materias do edital com o peso de cada uma, ao lado do que caiu de
-verdade nas provas; e um botao para treinar 20 questoes do proprio cargo.
+verdade nas provas **e do meu acerto em cada uma**; e um botao para treinar 20
+questoes do proprio cargo.
+
+Na tabela de materias, as que estao **acima da media da prova** ficam em
+negrito — no edital de 2019 sao sete, e valem 80 das 100 questoes. A pior
+delas ganha o rotulo **"comece por aqui"**: errar numa materia de 5 questoes
+custa 5 questoes, errar numa de 15 decide a prova. Materia que voce nunca
+treinou aparece como "nao treinei" e nao concorre ao destaque — zero por cento
+diria que voce errou tudo.
+
+O botao de treino monta a rodada nesta ordem: primeiro as questoes das
+**provas do proprio cargo**; quando elas acabam, as da **mesma banca nas
+mesmas materias** em outros concursos; e so entao repete o que voce ja
+respondeu, dizendo que repetiu. Materia que nao caiu na sua prova nao entra.
 
 Quem e o alvo sai de `config/alvo.yml`. **Onde o dado nao existe, a tela diz
 "nao sei ainda"** - ela nunca preenche por conta propria. A banca aparece como
@@ -341,6 +354,7 @@ radar padrao                # o que a banca mais cobra, por materia
 radar padrao --cargo Guarda
 radar repetidas             # as questoes que a banca mais reaproveita
 radar parecidas "Guarda Municipal" --banca FEPESE
+radar parecidas "Policial Penal"   # acha o cargo pelo nome antigo tambem
 radar assuntos              # SIMULA o assunto fino; --valendo gasta de verdade
 ```
 

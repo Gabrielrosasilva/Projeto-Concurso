@@ -331,3 +331,166 @@ def test_sem_sinal_a_tela_diz_que_nao_sabe(cliente):
 
     texto = cliente.get("/").text
     assert "Nada recente" in texto
+
+
+# --- o peso do edital contra o meu acerto (etapa 9) -------------------------
+
+def _desempenho(materia: str, respondidas: int, acertos: int):
+    from radar.servico import DesempenhoDaMateria
+
+    return DesempenhoDaMateria(materia, respondidas, acertos)
+
+
+def test_as_materias_de_maior_peso_sao_as_acima_da_media():
+    """No edital de 2019 sao sete: as duas de 15 questoes e as cinco de 10,
+    que juntas valem 80 das 100. As quatro de 5 ficam de fora."""
+    materias = edital_materias.ler_quadro(QUADRO_2019)
+    pesadas = foco.materias_de_maior_peso(materias, 100)
+
+    assert len(pesadas) == 7
+    assert "Língua Portuguesa" in pesadas          # 15 questoes
+    assert "Lei de Execução Penal" in pesadas      # 10 questoes
+    assert "Direito Penal" not in pesadas          # 5 questoes
+
+
+def test_o_corte_e_a_media_da_propria_prova():
+    """Nao e um numero que eu escolhi: com o edital mudando, o corte muda
+    junto. Quatro materias iguais nao tem nenhuma "de maior peso"."""
+    materias = edital_materias.ler_quadro(QUADRO_2019)
+
+    assert foco.materias_de_maior_peso([], 100) == set()
+    assert foco.materias_de_maior_peso(materias, 0) == set()
+
+
+def test_a_pior_e_a_de_menor_acerto_entre_as_pesadas():
+    pior = foco._pior_das_pesadas(
+        {"Direitos Humanos", "Língua Portuguesa"},
+        {
+            "Direitos Humanos": _desempenho("Direitos Humanos", 20, 8),   # 40%
+            "Língua Portuguesa": _desempenho("Língua Portuguesa", 20, 16),  # 80%
+        },
+    )
+
+    assert pior == "Direitos Humanos"
+
+
+def test_ir_mal_numa_materia_leve_nao_muda_por_onde_comecar():
+    """Errar numa materia de 5 questoes custa 5 questoes; errar numa de 15
+    decide a prova. O destaque segue o peso, e nao so o acerto."""
+    pior = foco._pior_das_pesadas(
+        {"Direitos Humanos"},
+        {
+            "Direitos Humanos": _desempenho("Direitos Humanos", 20, 12),  # 60%
+            "Direito Penal": _desempenho("Direito Penal", 10, 1),         # 10%
+        },
+    )
+
+    assert pior == "Direitos Humanos"
+
+
+def test_materia_que_eu_nunca_treinei_nao_vira_a_pior():
+    """Apontar a pior entre as que eu nunca fiz seria inventar um numero."""
+    pior = foco._pior_das_pesadas(
+        {"Direitos Humanos", "Sociologia Aplicada"},
+        {"Direitos Humanos": _desempenho("Direitos Humanos", 20, 12)},
+    )
+
+    assert pior == "Direitos Humanos"
+
+
+def test_sem_nenhuma_pesada_treinada_nao_ha_destaque():
+    assert foco._pior_das_pesadas({"Direitos Humanos"}, {}) is None
+    assert foco._pior_das_pesadas(set(), {}) is None
+
+
+def test_empate_de_acerto_desempata_pela_mais_feita():
+    """Entre 50% em duas questoes e 50% em trinta, a segunda e a que eu sei
+    que e verdade."""
+    pior = foco._pior_das_pesadas(
+        {"Direitos Humanos", "Língua Portuguesa"},
+        {
+            "Direitos Humanos": _desempenho("Direitos Humanos", 2, 1),
+            "Língua Portuguesa": _desempenho("Língua Portuguesa", 30, 15),
+        },
+    )
+
+    assert pior == "Língua Portuguesa"
+
+
+# --- na tela ----------------------------------------------------------------
+
+@pytest.fixture
+def com_quadro_do_edital(monkeypatch):
+    """A tela com o quadro real de 2019, sem depender do PDF estar no disco."""
+    materias = edital_materias.ler_quadro(QUADRO_2019)
+    monkeypatch.setattr(
+        foco, "_materias_do_ultimo_edital", lambda concurso: (materias, 100, 2019)
+    )
+    # O quadro so existe quando existe uma edicao que virou prova: em
+    # producao, os dois andam juntos porque saem do mesmo PDF.
+    monkeypatch.setattr(
+        foco, "_edital_com_prova", lambda concursos: concursos[0] if concursos else None
+    )
+    return materias
+
+
+def _treinar(materia: str, acertos: int, erros: int) -> None:
+    """Responde questoes de uma materia, para haver acerto medido."""
+    from radar import servico
+
+    with sessao() as s:
+        for n in range(acertos + erros):
+            # A prova e uma por materia: duas questoes numero 1 no mesmo
+            # caderno violam a unicidade, como na vida real.
+            s.add(QuestaoDeProva(
+                prova_url=f"https://fepese.test/{materia}.pdf", banca="FEPESE",
+                ano=2019,
+                cargo="Agente Penitenciário", numero=n + 1, materia=materia,
+                enunciado=f"{materia} {n}?", alternativas={"a": "x", "b": "y"},
+                resposta="a", impressao=f"{materia}-{n}",
+            ))
+
+    simulado = servico.criar_simulado(quantidade=acertos + erros, materia=materia)
+    for n in range(acertos + erros):
+        atual = servico.questao_atual(simulado.id)
+        _resposta, questao = atual
+        servico.responder(simulado.id, questao.id, "a" if n < acertos else "b")
+
+
+def test_a_tabela_mostra_o_acerto_ao_lado_do_peso(cliente, com_quadro_do_edital):
+    with sessao() as s:
+        s.add(_concurso())
+    _treinar("Direitos Humanos", acertos=2, erros=8)      # 20%
+
+    texto = cliente.get("/").text
+
+    assert "Meu acerto" in texto
+    assert "20%" in texto
+    assert "de 10" in texto
+
+
+def test_a_materia_sem_treino_nao_aparece_como_zero(cliente, com_quadro_do_edital):
+    """Zero diria que eu errei tudo; o que houve foi eu nao ter treinado."""
+    with sessao() as s:
+        s.add(_concurso())
+
+    assert "nao treinei" in cliente.get("/").text
+
+
+def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
+    with sessao() as s:
+        s.add(_concurso())
+    _treinar("Direitos Humanos", acertos=2, erros=8)      # 20%, 15 questoes
+    _treinar("Língua Portuguesa", acertos=9, erros=1)     # 90%, 15 questoes
+
+    texto = cliente.get("/").text
+
+    assert "comece por aqui" in texto
+    assert "<strong>Direitos Humanos</strong> e onde eu vou pior" in texto
+
+
+def test_sem_treino_nenhum_a_tela_nao_aponta_materia(cliente, com_quadro_do_edital):
+    with sessao() as s:
+        s.add(_concurso())
+
+    assert "comece por aqui" not in cliente.get("/").text
