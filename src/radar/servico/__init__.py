@@ -35,6 +35,11 @@ from radar.collectors.ieses import Ieses
 from radar import config
 from radar.util import fuso_local
 from radar.db import criar_tabelas, sessao
+from radar.servico.comum import (
+    ano_do_concurso as _ano_do_concurso,
+    cargo_parecido as _cargo_parecido,
+    sem_acento as _sem_acento,
+)
 from radar.models import (
     RELEVANCIAS,
     Concurso,
@@ -847,25 +852,6 @@ def expandir_banca(termo: str) -> list[str]:
     return achados
 
 
-def _cargo_parecido(cargo: str):
-    """Condicao SQL de "o cargo da questao parece com este texto".
-
-    Ignora acento pelo mesmo motivo que a busca por titulo ignora: o cargo vem
-    acentuado do rotulo do hotsite ("Agente Penitenciario"), e o termo com que
-    eu procuro - o de config/alvo.yml, ou o que eu digito na CLI - vem sem.
-    Com ilike puro, `--cargo "agente penitenciario"` devolvia zero questao das
-    170 que existem.
-    """
-    return func.sem_acento(QuestaoDeProva.cargo).ilike(f"%{_sem_acento(cargo)}%")
-
-
-def _sem_acento(texto: str) -> str:
-    import unicodedata
-
-    normal = unicodedata.normalize("NFKD", texto or "")
-    return "".join(c for c in normal if not unicodedata.combining(c))
-
-
 # --- favoritos (fase 1.55) --------------------------------------------------
 
 # A coluna `interesse` e minha, nao da fonte: a coleta nunca a sobrescreve.
@@ -1042,14 +1028,6 @@ class ResultadoAcervo:
             f"{self.gabaritos} gabarito(s), {self.editais} edital(is)"
             + (f", {self.falhas} falha(s)" if self.falhas else "")
         )
-
-
-def _ano_do_concurso(concurso: Concurso) -> int | None:
-    # o titulo da FEPESE comeca com o ano: "2024 - Prefeitura Municipal de..."
-    achado = re.match(r"\s*(\d{4})", concurso.titulo or "")
-    if achado:
-        return int(achado.group(1))
-    return concurso.publicado_em.year if concurso.publicado_em else None
 
 
 def _hotsite(concurso: Concurso) -> str | None:
@@ -2017,25 +1995,6 @@ VALIDADE_MAXIMA = 4
 # Anos de folga aceitos antes de chamar de atrasado. Concurso escorrega:
 # licitacao da banca, orcamento, ano eleitoral.
 FOLGA = 1
-
-
-def _ano_do_concurso(concurso: Concurso) -> int | None:
-    """O ano do concurso, do titulo quando ele diz, senao da publicacao.
-
-    O titulo da FEPESE comeca com o ano ("2020 - Prefeitura Municipal de ..."),
-    e isso vale mais que a data do post: na migracao do site dela 345 concursos
-    antigos ficaram todos com data de dezembro de 2020.
-    """
-    achado = re.match(r"\s*((?:19|20)\d{2})\s*[-\u2013\u2014]", concurso.titulo)
-    if achado:
-        return int(achado.group(1))
-
-    # "Edital 003/2018" tambem diz o ano, e cobre o resto dos titulos antigos.
-    achado = re.search(r"[Ee]dital[^/]{0,30}/\s*((?:19|20)\d{2})", concurso.titulo)
-    if achado:
-        return int(achado.group(1))
-
-    return concurso.publicado_em.year if concurso.publicado_em else None
 
 
 @dataclass
