@@ -131,3 +131,79 @@ def test_data_volta_como_datetime_e_nao_como_texto(banco_temporario, tmp_path):
     valor = acervo._desserializar("avisado_em", "2026-09-17T12:00:00+00:00")
 
     assert isinstance(valor, datetime)
+
+
+# --- o que e meu nao volta apagado (etapa 11) -------------------------------
+
+def _json_do_robo(arquivo, **campos) -> None:
+    """O JSON como o robo do GitHub exporta: ele nao sabe dos meus campos."""
+    linha = {
+        "url": "https://exemplo.test/palhoca",
+        "fonte": "teste",
+        "titulo": "Guarda Municipal de Palhoca",
+        "uf": "SC",
+        "situacao": "inscricoes_abertas",
+        "interesse": None,
+        "notas": None,
+        "salario_manual": False,
+        "municipio_confirmado": False,
+    }
+    linha.update(campos)
+    arquivo.write_text(json.dumps([linha]), encoding="utf-8")
+
+
+def test_importar_nao_apaga_o_favorito_que_eu_marquei(banco_temporario, tmp_path):
+    """O caso real: eu marco a estrela na web, o robo exporta o banco dele -
+    que nao sabe do meu favorito - e o meu `radar importar` seguinte devolvia
+    `interesse: null` por cima da minha marca."""
+    with sessao() as s:
+        s.add(Concurso(
+            url="https://exemplo.test/palhoca", fonte="teste",
+            titulo="Guarda Municipal de Palhoca",
+            interesse="favorito", notas="conversei com quem fez em 2022",
+        ))
+
+    arquivo = tmp_path / "concursos.json"
+    _json_do_robo(arquivo)
+    acervo.importar(arquivo)
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.interesse == "favorito"
+    assert concurso.notas == "conversei com quem fez em 2022"
+    # e o que e da coleta continua chegando
+    assert concurso.situacao == "inscricoes_abertas"
+
+
+def test_o_salario_que_eu_digitei_sobrevive(banco_temporario, tmp_path):
+    with sessao() as s:
+        s.add(Concurso(
+            url="https://exemplo.test/palhoca", fonte="teste", titulo="Guarda",
+            salario=7000.0, salario_manual=True, municipio_confirmado=True,
+        ))
+
+    arquivo = tmp_path / "concursos.json"
+    _json_do_robo(arquivo)
+    acervo.importar(arquivo)
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.salario_manual is True
+    assert concurso.municipio_confirmado is True
+
+
+def test_o_JSON_que_TEM_favorito_manda(banco_temporario, tmp_path):
+    """A protecao e contra apagar, e nao contra receber: e assim que a estrela
+    marcada aqui chega na outra maquina."""
+    with sessao() as s:
+        s.add(Concurso(url="https://exemplo.test/palhoca", fonte="teste",
+                       titulo="Guarda"))
+
+    arquivo = tmp_path / "concursos.json"
+    _json_do_robo(arquivo, interesse="favorito", notas="anotei la")
+    acervo.importar(arquivo)
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.interesse == "favorito"
+    assert concurso.notas == "anotei la"

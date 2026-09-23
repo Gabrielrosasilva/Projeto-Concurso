@@ -76,11 +76,29 @@ def exportar(caminho: Path | None = None) -> int:
     return len(linhas)
 
 
+# Os campos que sao MEUS. A coleta nunca os sobrescreve, e o importar passa a
+# seguir a mesma regra: valor vazio no JSON nao apaga o que ja esta no banco.
+#
+# O caso que obrigou isto: eu marco um favorito na web, o robo do GitHub
+# exporta o banco dele - que nao sabe do meu favorito - e o meu `radar
+# importar` seguinte devolvia `interesse: null` por cima da minha estrela. O
+# mesmo valia para a anotacao que eu tinha acabado de escrever.
+#
+# Consequencia conhecida e aceita: DESMARCAR nao se propaga. Para tirar uma
+# estrela nas duas pontas, tire nas duas - o contrario seria abrir mao da
+# protecao que existe justamente porque o outro lado nao sabe o que e meu.
+CAMPOS_MEUS = ("interesse", "notas", "salario_manual", "municipio_confirmado")
+
+#: O que conta como "o JSON nao trouxe nada aqui".
+VAZIOS = (None, "", False)
+
+
 def importar(caminho: Path | None = None) -> int:
     """Recria o banco a partir do JSON. Devolve quantos registros leu.
 
     Nao apaga o que ja existe: casa pela url e atualiza. Rodar duas vezes da
-    no mesmo resultado.
+    no mesmo resultado. Os campos meus (veja `CAMPOS_MEUS`) so sao escritos
+    quando o JSON traz valor - nunca para apagar.
     """
     origem = caminho or caminho_padrao()
     if not origem.exists():
@@ -98,6 +116,14 @@ def importar(caminho: Path | None = None) -> int:
             for coluna in COLUNAS:
                 if coluna == "url" or coluna not in linha:
                     continue
-                setattr(concurso, coluna, _desserializar(coluna, linha[coluna]))
+                valor = _desserializar(coluna, linha[coluna])
+                # Campo meu com o JSON vazio: o que esta no banco fica.
+                if (
+                    coluna in CAMPOS_MEUS
+                    and valor in VAZIOS
+                    and getattr(concurso, coluna) not in VAZIOS
+                ):
+                    continue
+                setattr(concurso, coluna, valor)
 
     return len(linhas)
