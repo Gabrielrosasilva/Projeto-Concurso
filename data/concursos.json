@@ -646,7 +646,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:17.309193+00:00",
+    "atualizado_em": "2026-09-23T00:34:33.203708+00:00",
     "avisado_em": null,
     "banca": null,
     "coletado_em": "2026-09-22T20:01:49.102054+00:00",
@@ -26807,8 +26807,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:48:53.857929+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400568+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399688+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T15:48:53.857926+00:00",
     "data_prova": null,
@@ -31823,6 +31823,82 @@
   },
   {
     "alvo": null,
+    "atualizado_em": "2026-09-23T00:34:33.167637+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-23T00:34:33.167634+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Mato Grosso"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de Comodoro (MT): prova aplicada fora de SC.",
+    "municipio": "Comodoro",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-22T23:35:57+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Prefeitura de Comodoro (MT) está com editais lançados (02 e 03/2026) para a reposição de vagas e formação de cadastro.",
+    "salario": 23600.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Prefeitura de Comodoro (MT) tem salarios até R$ 23,6 mil",
+    "uf": "MT",
+    "url": "https://concursosnobrasil.com/concursos/mt/2026/09/22/concurso-prefeitura-de-comodoro-mt-abre-novas-vagas-e-tem-mensais-ate-r/"
+  },
+  {
+    "alvo": null,
+    "atualizado_em": "2026-09-23T00:36:58.400572+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399740+00:00",
+    "banca": null,
+    "coletado_em": "2026-09-23T00:34:33.175204+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Mato Grosso"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de MT sem municipio no titulo; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-22T22:49:16+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Prefeitura e Câmara de Comodoro, no estado de Mato Grosso, precisam repor seu quadro de Procurador.",
+    "salario": 14400.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso público em Comodoro (MT) oferece mensais de até R$ 14,4 mil",
+    "uf": "MT",
+    "url": "https://concursosnobrasil.com/concursos/mt/2026/09/22/concurso-publico-em-comodoro-mt-oferece-mensais-de-ate-r-144-mil/"
+  },
+  {
+    "alvo": null,
     "atualizado_em": "2026-09-22T20:01:49.099357+00:00",
     "avisado_em": null,
     "banca": null,
@@ -33381,8 +33457,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:48:53.853050+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400567+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399744+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T15:48:53.853048+00:00",
     "data_prova": null,
@@ -41213,8 +41289,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:01:49.111013+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400571+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399747+00:00",
     "banca": null,
     "coletado_em": "2026-09-22T20:01:49.110995+00:00",
     "data_prova": null,
@@ -42848,8 +42924,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:48:53.852036+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400566+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399749+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T15:48:53.852034+00:00",
     "data_prova": null,
@@ -62799,7 +62875,7 @@
   },
   {
     "alvo": "principal",
-    "atualizado_em": "2026-09-22T21:12:19.834485+00:00",
+    "atualizado_em": "2026-09-23T00:24:30.079148+00:00",
     "avisado_em": "2026-09-18T03:04:50.256905+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T03:03:51.176372+00:00",
@@ -62819,13 +62895,13 @@
     "interesse": null,
     "motivo_alvo": "Alvo principal (Policia Penal SC): o texto fala em \"SEJURI\".",
     "motivo_elegibilidade": null,
-    "motivo_relevancia": "Concurso de SC, mas nao identifiquei o municipio no titulo.",
+    "motivo_relevancia": "Orgao estadual de SC; polos de prova a confirmar no edital.",
     "municipio": null,
     "municipio_confirmado": false,
     "notas": null,
     "orgao": null,
     "publicado_em": "2026-08-03T23:29:02+00:00",
-    "relevancia": "indefinida",
+    "relevancia": "estadual",
     "resumo": "Processo seletivo da Secretaria de Estado de Justiça e Reintegração Social oferece vaga para CASE Regional de Joinville.",
     "salario": 8700.0,
     "salario_manual": false,
@@ -68881,7 +68957,7 @@
   },
   {
     "alvo": "principal",
-    "atualizado_em": "2026-09-22T21:12:19.834478+00:00",
+    "atualizado_em": "2026-09-23T00:24:30.079144+00:00",
     "avisado_em": "2026-09-18T03:04:50.254626+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T02:59:51.775999+00:00",
@@ -68901,13 +68977,13 @@
     "interesse": null,
     "motivo_alvo": "Alvo principal (Policia Penal SC): o texto fala em \"SEJURI\".",
     "motivo_elegibilidade": null,
-    "motivo_relevancia": "Concurso de SC, mas nao identifiquei o municipio no titulo.",
+    "motivo_relevancia": "Orgao estadual de SC; polos de prova a confirmar no edital.",
     "municipio": null,
     "municipio_confirmado": false,
     "notas": null,
     "orgao": null,
     "publicado_em": "2026-09-15T00:24:45+00:00",
-    "relevancia": "indefinida",
+    "relevancia": "estadual",
     "resumo": "Processo seletivo SEJURI SC (Secretaria de Estado de Justiça e Reintegração Social) oferece uma vaga imediata e formação de cadastro reserva.",
     "salario": 15000.0,
     "salario_manual": false,
@@ -69566,8 +69642,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:02:02.929611+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400569+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399752+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T15:48:53.862449+00:00",
     "data_prova": null,
@@ -69604,8 +69680,46 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:17.293369+00:00",
+    "atualizado_em": "2026-09-23T00:34:33.189811+00:00",
     "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-23T00:34:33.189807+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Santa Catarina"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Maravilha fica em SC mas fora dos aneis de config/regioes.yml.",
+    "municipio": "Maravilha",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-22T21:54:36+00:00",
+    "relevancia": "remoto",
+    "resumo": "Prefeitura Municipal de Maravilha, Santa Catarina, abre 11 vagas e cadastros de reserva para carreiras de níveis diversos.",
+    "salario": 15700.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Prefeitura de Maravilha (SC) oferece até R$ 15,7 mil",
+    "uf": "SC",
+    "url": "https://concursosnobrasil.com/concursos/sc/2026/09/22/concurso-prefeitura-de-maravilha-sc-oferece-ate-r-157-mil/"
+  },
+  {
+    "alvo": null,
+    "atualizado_em": "2026-09-23T00:36:58.400569+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399770+00:00",
     "banca": null,
     "coletado_em": "2026-09-22T20:01:49.054419+00:00",
     "data_prova": null,
@@ -69680,8 +69794,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:01:49.118383+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400571+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399772+00:00",
     "banca": null,
     "coletado_em": "2026-09-22T20:01:49.118379+00:00",
     "data_prova": null,
@@ -84732,8 +84846,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:48:53.846191+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400563+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399774+00:00",
     "banca": null,
     "coletado_em": "2026-09-18T15:48:53.846187+00:00",
     "data_prova": null,
@@ -84922,6 +85036,44 @@
   },
   {
     "alvo": null,
+    "atualizado_em": "2026-09-23T00:34:33.178194+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-09-23T00:34:33.178188+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Orgao de Jaú (SP): prova aplicada fora de SC.",
+    "municipio": "Jaú",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-09-22T22:32:05+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Etec de Jaú, no estado de São Paulo, tem funções destinadas às áreas de Química, Construção Civil e Informática.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Etec de Jaú (SP) publica edital de seletivo para Auxiliar de Docente",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/09/22/etec-de-jau-sp-publica-edital-de-seletivo-para-auxiliar-de-docente/"
+  },
+  {
+    "alvo": null,
     "atualizado_em": "2026-09-22T20:01:49.122136+00:00",
     "avisado_em": null,
     "banca": null,
@@ -84960,8 +85112,8 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:01:49.085858+00:00",
-    "avisado_em": null,
+    "atualizado_em": "2026-09-23T00:36:58.400570+00:00",
+    "avisado_em": "2026-09-23T00:36:58.399776+00:00",
     "banca": null,
     "coletado_em": "2026-09-22T20:01:49.085853+00:00",
     "data_prova": null,
@@ -87495,7 +87647,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:29.150505+00:00",
+    "atualizado_em": "2026-09-23T00:34:45.056670+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.232352+00:00",
@@ -89975,7 +90127,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:29.118649+00:00",
+    "atualizado_em": "2026-09-23T00:34:45.024294+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.195945+00:00",
@@ -91615,16 +91767,26 @@
   },
   {
     "alvo": "principal",
-    "atualizado_em": "2026-09-22T21:12:19.834498+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.756612+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.061132+00:00",
     "data_prova": null,
     "detalhado_em": null,
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "B",
+        "idade_minima": null,
+        "taf": true,
+        "trechos": {
+          "cnh": "pretendido; h) aptidão física plena; i) possuir carteira nacional de habilitação categoria B; e j) certificado/diploma de conclusão de ensino superior ou equivalente. 2.1.1. O Concurso Público d",
+          "superior": "oria B; e j) certificado/diploma de conclusão de ensino superior ou equivalente. 2.1.1. O Concurso Público destina -se ao provimento das vagas da Carreira de Agente Penitenciário e Agente de Segu",
+          "taf": "a, de caráter eliminatório e classificatório. b) Prova de capacidade física, de caráter eliminatório. c) Prova de aptidão psicológica vocacionada, de caráter eliminatório. d) Exame toxicológico, de"
+        }
+      },
       "hotsite": "http://secjustica.fepese.org.br/",
       "status_fepese": [
         "encerrados"
@@ -91636,7 +91798,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": "Alvo principal (Policia Penal SC): o texto fala em \"agente penitenciario\". Banca FEPESE, a mesma das edicoes anteriores.",
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior; exige CNH categoria B; tem teste fisico | tenho superior, que atende as vagas de superior",
     "motivo_relevancia": "Orgao estadual de SC; polos de prova a confirmar no edital.",
     "municipio": null,
     "municipio_confirmado": false,
@@ -93855,16 +94017,27 @@
   },
   {
     "alvo": "principal",
-    "atualizado_em": "2026-09-22T21:12:19.834498+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.756611+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.051696+00:00",
     "data_prova": null,
     "detalhado_em": null,
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior, medio",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "B",
+        "idade_minima": null,
+        "taf": true,
+        "trechos": {
+          "cnh": "Agente de Segurança Socioeducativo; h) possuir carteira nacional de habilitação categoria B, sem restrições; e i) possuir diploma de conclusão de curso de ensino superior reconhecido pelo MEC.",
+          "medio": "______. Assinatura do(a) Candidato(a) ENSINO MÉDIO - ESTABELECIMENTO CIDADE ESTADO PERÍODO ENSINO SUPERIOR - ESTABELECIMENTO CIDADE ESTADO PERÍODO",
+          "superior": "ança Socioeducativo Masculino 235 Conclusão de curso superior reconhecido pelo MEC. Feminino 20 2.3 Distribuição das vagas Cidades Vagas AGENTE DE SEGURANÇA SOCIOEDUCATIVO MASCULINO AG",
+          "taf": "a organização e realização da prova objetiva, da prova de capacidade física e da avaliação de aptidão psicológica vocacionada, ficando as demais etapas do concurso público sob a responsabilidade d"
+        }
+      },
       "hotsite": "http://2016secjustica.fepese.org.br/",
       "status_fepese": [
         "encerrados"
@@ -93876,7 +94049,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": "Alvo principal (Policia Penal SC): o texto fala em \"SJC\". Banca FEPESE, a mesma das edicoes anteriores.",
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior, medio; exige CNH categoria B; tem teste fisico | tenho superior, que atende as vagas de superior, medio",
     "motivo_relevancia": "Orgao estadual de SC; polos de prova a confirmar no edital.",
     "municipio": null,
     "municipio_confirmado": false,
@@ -97175,16 +97348,26 @@
   },
   {
     "alvo": "principal",
-    "atualizado_em": "2026-09-22T21:12:19.834496+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.756610+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.005149+00:00",
     "data_prova": null,
     "detalhado_em": null,
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "B",
+        "idade_minima": null,
+        "taf": true,
+        "trechos": {
+          "cnh": "io do cargo de Agente Penitenciário; 8. possuir Carteira Nacional de Habilitação categoria B, sem restrições; e 9. possuir diploma de conclusão de Curso de Ensino Superior reconhecido pelo ME C. 2",
+          "superior": "s; e 9. possuir diploma de conclusão de Curso de Ensino Superior reconhecido pelo ME C. 2.9 Descrição e atribuições do cargo de Agente Penitenciário (Conforme o Anexo II da Lei Complementar nº 675",
+          "taf": "la organização e realização da Prova Escrita, da Prova de Capacidade Física, da Avaliação De Aptidão Psicológica Vocacionada e Exame Toxicológico, ficando as demais etapas do concurso público sob a"
+        }
+      },
       "hotsite": "https://sap.fepese.org.br/",
       "status_fepese": [
         "encerrados"
@@ -97196,7 +97379,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": "Alvo principal (Policia Penal SC): o texto fala em \"Secretaria de Estado da Administracao Prisional e Socioeducativa\". Banca FEPESE, a mesma das edicoes anteriores.",
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior; exige CNH categoria B; tem teste fisico | tenho superior, que atende as vagas de superior",
     "motivo_relevancia": "Orgao estadual de SC; polos de prova a confirmar no edital.",
     "municipio": null,
     "municipio_confirmado": false,
@@ -99775,12 +99958,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.479928+00:00",
+    "atualizado_em": "2026-09-23T00:35:04.786949+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.940152+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:35:04.786775+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -99935,12 +100118,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.479112+00:00",
+    "atualizado_em": "2026-09-23T00:35:03.118430+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.939177+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:35:03.118236+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -99975,12 +100158,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.478323+00:00",
+    "atualizado_em": "2026-09-23T00:35:01.636253+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.938508+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:35:01.635941+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101135,12 +101318,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.466704+00:00",
+    "atualizado_em": "2026-09-23T00:34:54.102357+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.931339+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:34:54.102064+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101175,16 +101358,26 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.464545+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.756608+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.930067+00:00",
     "data_prova": null,
-    "detalhado_em": null,
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "detalhado_em": "2026-09-23T00:34:50.682478+00:00",
+    "elegibilidade": "elegivel",
+    "escolaridade": "medio",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "sim",
+        "idade_minima": 18,
+        "taf": false,
+        "trechos": {
+          "cnh": "como identidade; 5. carteira de trabalho; e 6. carteira nacional de habilitação (com foto). 11.19 Caso o candidato apresente o documento em formato digital, só serão aceito s o RG, a carteira naci",
+          "idade_minima": "tar (para os candidatos do sexo masculino); 4. A idade mínima de 18 anos; 5. Aptidão física e mental; 6. O nível de escolaridade exigido para o exercício do cargo. 6 INSCRIÇÕES 6.1 A inscrição no",
+          "medio": "guir: Tabela 4.1 Cargo com exigência de curso de ensino médio Cargo Requisitos Vagas Carga Horária Vencimento Base (R$) Fiscal de Posturas Ensino Médio Completo CR 40 h/s 3.675,65 4.2 A"
+        }
+      },
       "hotsite": "https://2023bcseletivoadm.fepese.org.br",
       "status_fepese": [
         "encerrados"
@@ -101196,7 +101389,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": null,
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel medio; exige CNH | tenho superior, que atende as vagas de medio",
     "motivo_relevancia": "Balneario Camboriu (SC) esta no anel proximo.",
     "municipio": "Balneario Camboriu",
     "municipio_confirmado": false,
@@ -101215,12 +101408,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.465579+00:00",
+    "atualizado_em": "2026-09-23T00:34:52.199436+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.930692+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:34:52.199261+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101255,7 +101448,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.843406+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.760931+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.921197+00:00",
@@ -101507,12 +101700,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.470493+00:00",
+    "atualizado_em": "2026-09-23T00:34:57.132870+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.932736+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:34:57.132695+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101547,12 +101740,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.476062+00:00",
+    "atualizado_em": "2026-09-23T00:34:58.613961+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.936696+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:34:58.613790+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101587,28 +101780,40 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.463254+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.756197+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.928815+00:00",
     "data_prova": null,
-    "detalhado_em": null,
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "detalhado_em": "2026-09-23T00:34:49.195265+00:00",
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior, medio, fundamental",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": null,
+        "idade_minima": 18,
+        "taf": false,
+        "trechos": {
+          "fundamental": "Licenciatura em Pedagogia Professor Auxiliar de Ensino Fundamental Anteriores à Resolução CNE/CP nº 1, de 15 de maio de 2006: Graduação no curso de Licenciatura em Pedagogia, com habilitação em S",
+          "idade_maxima": "exo masculino); 3. Ter idade mínima de 18 anos e idade máxima de 75 anos (Lei complementar nº 152/2015); 4. Gozar de boa saúde, condição que será comprovada, quando do processo de admissão; 5. Não",
+          "idade_minima": "r (para os candidatos do sexo masculino); 3. Ter idade mínima de 18 anos e idade máxima de 75 anos (Lei complementar nº 152/2015); 4. Gozar de boa saúde, condição que será comprovada, quando do proc",
+          "medio": "a; Formação no Normal Superior; ou Formação no Ensino Médio em Magistério. Professor Auxiliar de Educação Infantil Anteriores à Resolução CNE/CP nº 1, de 15 de maio de 2006: Graduação no curso",
+          "superior": "o mínima Auxiliar de Sala Graduação no curso de Licenciatura em Pedagogia; Formação no Normal Superior; ou Formação no Ensino Médio em Magistério. Professor Auxiliar de Educação Infantil Anteri"
+        }
+      },
       "hotsite": "https://2023emergencialpmf.fepese.org.br",
       "status_fepese": [
         "encerrados"
       ]
     },
     "fonte": "fepese",
-    "idade_maxima": null,
+    "idade_maxima": 75,
     "inscricoes_ate": null,
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": null,
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior, medio, fundamental; idade maxima 75 | idade 26 dentro do teto; tenho superior, que atende as vagas de superior, medio, fundamental",
     "motivo_relevancia": "Florianopolis (SC) esta no anel nucleo.",
     "municipio": "Florianopolis",
     "municipio_confirmado": false,
@@ -101627,28 +101832,41 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:02:22.371459+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.756194+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.924859+00:00",
     "data_prova": null,
     "detalhado_em": "2026-09-22T20:02:22.371262+00:00",
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior, medio, fundamental",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "sim",
+        "idade_minima": 18,
+        "taf": false,
+        "trechos": {
+          "cnh": "como identidade; 5. carteira de trabalho; e 6. carteira nacional de habilitação (com foto). 12.18 Caso o candidato apresente o documento em formato digital, só serão aceitos o RG, a carteira nacio",
+          "fundamental": "Licenciatura em Pedagogia. Professor Auxiliar de Ensino Fundamental Anteriores à Resolução CNE/CP nº 1, de 15 de maio de 2006: Graduação no curso de Licenciatura em Pedagogia, com habilitação em Sé",
+          "idade_maxima": "exo masculino); 3. Ter idade mínima de 18 anos e idade máxima de 75 anos (Lei complementar nº 152/2015); 4. Gozar de boa saúde, condição que será comprovada, quando do processo de admissão; 5. Não",
+          "idade_minima": "r (para os candidatos do sexo masculino); 3. Ter idade mínima de 18 anos e idade máxima de 75 anos (Lei complementar nº 152/2015); 4. Gozar de boa saúde, condição que será comprovada, quando do proc",
+          "medio": "nção Formação mínima Monitor Escolar Formação no Ensino Médio. Auxiliar de Sala Graduação no curso de Licenciatura em Pedagogia; Formação no Normal Superior (Resolução CP n.º 1, de 30 de setembro",
+          "superior": "o Médio. Auxiliar de Sala Graduação no curso de Licenciatura em Pedagogia; Formação no Normal Superior (Resolução CP n.º 1, de 30 de setembro de 1999); ou Formação no Ensino Médio em Magistério; o"
+        }
+      },
       "hotsite": "https://substitutos2024.fepese.org.br",
       "status_fepese": [
         "encerrados"
       ]
     },
     "fonte": "fepese",
-    "idade_maxima": null,
+    "idade_maxima": 75,
     "inscricoes_ate": null,
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": null,
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior, medio, fundamental; idade maxima 75; exige CNH | idade 26 dentro do teto; tenho superior, que atende as vagas de superior, medio, fundamental",
     "motivo_relevancia": "Florianopolis (SC) esta no anel nucleo.",
     "municipio": "Florianopolis",
     "municipio_confirmado": false,
@@ -101667,12 +101885,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.477499+00:00",
+    "atualizado_em": "2026-09-23T00:35:00.132883+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.937893+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:35:00.132679+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101787,12 +102005,12 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-18T15:49:05.468471+00:00",
+    "atualizado_em": "2026-09-23T00:34:55.598575+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.931951+00:00",
     "data_prova": null,
-    "detalhado_em": null,
+    "detalhado_em": "2026-09-23T00:34:55.598393+00:00",
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
@@ -101907,7 +102125,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.827141+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.745079+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.908094+00:00",
@@ -101957,7 +102175,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.826438+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.744381+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.907017+00:00",
@@ -102009,7 +102227,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.842681+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.760165+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.920445+00:00",
@@ -102060,7 +102278,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.841868+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.759367+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.919815+00:00",
@@ -102312,7 +102530,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.830260+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.748351+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.911423+00:00",
@@ -102365,7 +102583,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.833264+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.751295+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.913884+00:00",
@@ -102457,7 +102675,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.825730+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.743575+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.905257+00:00",
@@ -102509,16 +102727,27 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:02:05.497059+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.753642+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.909556+00:00",
     "data_prova": null,
     "detalhado_em": "2026-09-22T20:02:05.496769+00:00",
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "elegibilidade": "elegivel",
+    "escolaridade": "fundamental",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "A",
+        "idade_minima": 18,
+        "taf": true,
+        "trechos": {
+          "cnh": "data do término da inscrição do concurso; f. ter carteira nacional de habilitação (CNH) no mínimo na categoria AB; g. Prova teórica de questões subjetivas, TAF de caráter eliminatório e classificató",
+          "fundamental": "de julho de 2009 – alunos de estabelecimentos de ensino fundamental, médio e superior terá direito a um desconto de 50% na taxa de inscrição. 7.2 Para fazer jus aos benefícios informados no subitem",
+          "idade_minima": "e reconhecido pelo Ministério da Educação; e. A idade mínima de 18 anos até a data do término da inscrição do concurso; f. ter carteira nacional de habilitação (CNH) no mínimo na categoria AB; g.",
+          "taf": "áter eliminatório e classificatório (pág. 11); ◼ Teste de Aptidão Física de caráter eliminatório e classificatório; (pág. 14); ◼ Avaliação Psicológica de caráter eliminatório (pág. 22); ◼ Exame de"
+        }
+      },
       "hotsite": "https://2024gmpalhoca.fepese.org.br",
       "status_fepese": [
         "em andamento"
@@ -102530,7 +102759,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": null,
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel fundamental; exige CNH categoria A; tem teste fisico | tenho superior, que atende as vagas de fundamental; alguma vaga pede CNH A, que eu nao tenho",
     "motivo_relevancia": "Palhoca (SC) esta no anel nucleo.",
     "municipio": "Palhoca",
     "municipio_confirmado": false,
@@ -102549,7 +102778,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.831482+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.749661+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.912573+00:00",
@@ -102601,7 +102830,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.836276+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.754440+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.915736+00:00",
@@ -102653,7 +102882,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.837026+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.755298+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.916367+00:00",
@@ -102745,7 +102974,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.834401+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.752111+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.914505+00:00",
@@ -102797,7 +103026,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.835505+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.753395+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.915124+00:00",
@@ -103008,7 +103237,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.815101+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.732036+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.893728+00:00",
@@ -103458,7 +103687,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.818283+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.735815+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.897617+00:00",
@@ -103750,16 +103979,28 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-19T02:00:21.482011+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.753641+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.902738+00:00",
     "data_prova": null,
     "detalhado_em": "2026-09-19T02:00:21.481832+00:00",
-    "elegibilidade": "a_confirmar",
-    "escolaridade": "Fundamental",
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior, fundamental",
     "extra": {
       "escolaridade": "Fundamental",
+      "exigencias": {
+        "cnh": "sim",
+        "idade_minima": 18,
+        "taf": true,
+        "trechos": {
+          "cnh": "l completo; Experiência profissional de 5 anos ; Carteira Nacional de Habilitação tipo “D”. 25 + CR 40 h/s 3.472,11 CR = Cadastro Reserva 4.2 As atribuições dos cargos objeto do Processo Seletivo e",
+          "fundamental": "4.1 Funções temporárias com exigência de curso de ensino fundamental e fundamental incompleto Cargo Requisitos Vagas Carga Horária Vencimento Base (R$) Gari de Coleta Ensino fundamental (incomple",
+          "idade_minima": "rviço militar (quando do sexo masculino); 4. Ter idade mínima de 18 anos; 5. Possuir aptidão física e mental; 6. Possuir o nível de escolaridade exigido para o exercício do cargo. 6 INSCRIÇÕES 6.",
+          "superior": "filhos entre 21 e 24 anos se estiverem cursando nível superior, deverá apresentar comprovante de matrícula; 9. Comprovante de escolaridade exigida para a FUNÇÃO TEMPORÁRIA (frente e verso); 10. C",
+          "taf": "ter eliminatório e classificatório (pág. 12); 2. Teste de Aptidão Física, de caráter eliminatório (pág. 15) 2.2 As provas do presente Processo Seletivo serão realizadas no Município de Florianópo"
+        }
+      },
       "hotsite": "https://2025seletivocomcap.fepese.org.br/",
       "status_fepese": [
         "em andamento"
@@ -103771,7 +104012,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": null,
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior, fundamental; exige CNH; tem teste fisico | tenho superior, que atende as vagas de superior, fundamental",
     "motivo_relevancia": "Florianopolis (SC) esta no anel nucleo.",
     "municipio": "Florianopolis",
     "municipio_confirmado": false,
@@ -103790,7 +104031,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.803450+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.719616+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.882277+00:00",
@@ -103842,7 +104083,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.804607+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.720337+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.882885+00:00",
@@ -104094,7 +104335,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.817533+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.735059+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.897003+00:00",
@@ -104145,16 +104386,28 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-19T02:00:19.980112+00:00",
+    "atualizado_em": "2026-09-23T00:36:07.753637+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.898247+00:00",
     "data_prova": null,
     "detalhado_em": "2026-09-19T02:00:19.979928+00:00",
-    "elegibilidade": "a_confirmar",
-    "escolaridade": null,
+    "elegibilidade": "elegivel",
+    "escolaridade": "superior, medio, fundamental",
     "extra": {
       "escolaridade": null,
+      "exigencias": {
+        "cnh": "sim",
+        "idade_minima": 18,
+        "taf": false,
+        "trechos": {
+          "cnh": "como identidade; 5. carteira de trabalho; e 6. carteira nacional de habilitação (com foto). 12.20 Caso o candidato apresente o documento em formato digital, só serão aceitos o RG, a carteira nacio",
+          "fundamental": "a Educação Básica, nos níveis de Ensino Infantil, Ensino Fundamental, na modalidade de Educação de Jovens e Adultos – Ensino Fundamental e em Esc olas Profissionais, em contratação de caráter temporá",
+          "idade_minima": "ileiro ou gozar das prerrogativas legais; 2. ter idade mínima de 18 anos; 3. cumprir os requisitos e a escolaridade para o exercício da função; 4. estar quite com a justiça eleitoral; 5. estar qui",
+          "medio": "tura em Pedagogia; b) Certificado de conclusão de ensino médio em Magistério, com habilitação em Educação Infantil ou com adicional em Educação Infantil. Não habilitado: Histórico Escolar e/ou Cer",
+          "superior": ", de 15 de maio de 2004: Diploma de conclusão de curso superior de licenciatura plena em Pedagogia com habilitação em Educação Infantil ou de licenciatura Plena em Curso Normal Superior com habilita"
+        }
+      },
       "hotsite": "https://2025pseducasj.fepese.org.br",
       "status_fepese": [
         "em andamento"
@@ -104166,7 +104419,7 @@
     "inscricoes_de": null,
     "interesse": null,
     "motivo_alvo": null,
-    "motivo_elegibilidade": null,
+    "motivo_elegibilidade": "Vagas de nivel superior, medio, fundamental; exige CNH | tenho superior, que atende as vagas de superior, medio, fundamental",
     "motivo_relevancia": "Sao Jose (SC) esta no anel nucleo.",
     "municipio": "Sao Jose",
     "municipio_confirmado": false,
@@ -104266,7 +104519,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.794012+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.710308+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.871577+00:00",
@@ -104318,7 +104571,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.784257+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.701365+00:00",
     "avisado_em": "2026-09-18T04:13:57.909849+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.865394+00:00",
@@ -104770,7 +105023,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.801096+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.717277+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.879677+00:00",
@@ -104820,7 +105073,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.800216+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.716527+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.878796+00:00",
@@ -104871,7 +105124,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.797407+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.713907+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.875647+00:00",
@@ -104922,7 +105175,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.796754+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.713143+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.874921+00:00",
@@ -104973,7 +105226,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.795974+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.712351+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.874208+00:00",
@@ -105024,7 +105277,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.787340+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.703455+00:00",
     "avisado_em": "2026-09-18T04:13:57.909886+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.866602+00:00",
@@ -105077,7 +105330,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:28.788408+00:00",
+    "atualizado_em": "2026-09-23T00:34:44.704901+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.867275+00:00",
@@ -106609,7 +106862,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:30.479235+00:00",
+    "atualizado_em": "2026-09-23T00:34:46.587748+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.328658+00:00",
@@ -106683,7 +106936,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:30.469396+00:00",
+    "atualizado_em": "2026-09-23T00:34:46.577156+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.318618+00:00",
@@ -106879,7 +107132,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:30.479979+00:00",
+    "atualizado_em": "2026-09-23T00:34:46.588516+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.330411+00:00",
@@ -107286,7 +107539,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:30.474330+00:00",
+    "atualizado_em": "2026-09-23T00:34:46.582228+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.323277+00:00",
@@ -107471,7 +107724,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:30.481465+00:00",
+    "atualizado_em": "2026-09-23T00:34:46.590326+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.332889+00:00",
@@ -107508,7 +107761,7 @@
   },
   {
     "alvo": null,
-    "atualizado_em": "2026-09-22T20:49:30.475186+00:00",
+    "atualizado_em": "2026-09-23T00:34:46.583361+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.324151+00:00",

@@ -10,6 +10,7 @@ from sqlalchemy import case, func, select
 
 from radar import alvo as alvos
 from radar import avisos
+from radar import eventos as linha_do_tempo
 from radar import (
     calendario,
     detalhes,
@@ -130,7 +131,23 @@ def _gravar(s, item: ItemColetado, fonte: str) -> str:
             setattr(novo, campo, getattr(item, campo))
         _aplicar_classificacao(novo, item)
         s.add(novo)
+        # A situacao vai junto porque o concurso raramente aparece no
+        # comeco da vida: quando o radar liga, muita coisa ja esta com a
+        # inscricao aberta. Sem isso a linha do tempo comecaria dizendo so
+        # "apareceu", sem dizer em que pe.
+        linha_do_tempo.registrar(
+            s, novo.url, linha_do_tempo.APARECEU,
+            f"Entrou no radar pela fonte {fonte}, como {novo.situacao}",
+            novo.url,
+        )
         return "novo"
+
+    # Guardado ANTES de qualquer escrita: a situacao pode mudar por dois
+    # caminhos daqui para baixo - o valor que a fonte manda, e a fase que o
+    # classificador le no titulo. Comparar no fim pega os dois de uma vez,
+    # sem espalhar registro de evento pelo meio da funcao.
+    situacao_antes = existente.situacao
+    prova_antes = existente.data_prova
 
     mudou = False
     for campo in CAMPOS_DA_FONTE:
@@ -151,6 +168,14 @@ def _gravar(s, item: ItemColetado, fonte: str) -> str:
         mudou = True
 
     _aplicar_classificacao(existente, item)
+
+    linha_do_tempo.registrar_mudanca_de_situacao(
+        s, existente.url, situacao_antes, existente.situacao, existente.url
+    )
+    if existente.data_prova and existente.data_prova != prova_antes:
+        linha_do_tempo.registrar_prova_marcada(
+            s, existente.url, existente.data_prova, existente.url
+        )
 
     if mudou:
         existente.atualizado_em = agora()
@@ -700,6 +725,13 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
             concurso.detalhado_em = agora()
 
             if achado.inscricoes_ate:
+                # So vira evento quando o prazo MUDA: `detalhar` pode passar de
+                # novo pela mesma pagina, e reler nao e acontecimento.
+                if achado.inscricoes_ate != concurso.inscricoes_ate:
+                    linha_do_tempo.registrar_prazo(
+                        s, concurso.url, achado.inscricoes_de,
+                        achado.inscricoes_ate, concurso.url,
+                    )
                 concurso.inscricoes_de = achado.inscricoes_de
                 concurso.inscricoes_ate = achado.inscricoes_ate
                 resultado.com_prazo += 1
@@ -849,10 +881,30 @@ def atualizar_situacoes() -> dict[str, int]:
         for concurso in s.scalars(consulta):
             nova = _situacao_pelas_datas(concurso, momento)
             if nova and nova != concurso.situacao:
+                # Aqui mora o unico evento que acontece sem ninguem tocar em
+                # nada: o prazo vence e a inscricao fecha sozinha.
+                linha_do_tempo.registrar_mudanca_de_situacao(
+                    s, concurso.url, concurso.situacao, nova, concurso.url
+                )
                 concurso.situacao = nova
                 contagem[nova] = contagem.get(nova, 0) + 1
 
     return contagem
+
+
+def eventos_do_concurso(concurso_id: int) -> tuple[Concurso, list] | None:
+    """A linha do tempo de um concurso, e o concurso junto.
+
+    Devolve os dois porque quem mostra precisa do titulo: uma lista de datas
+    sem dizer de que concurso e nao serve para nada. None quando o id nao
+    existe.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        concurso = s.get(Concurso, concurso_id)
+        if concurso is None:
+            return None
+        return concurso, linha_do_tempo.do_concurso(s, concurso.url)
 
 
 def definir_notas(concurso_id: int, texto: str | None) -> Concurso | None:
@@ -2285,6 +2337,14 @@ def conferir_retificacoes(limite: int = 20) -> ResultadoRetificacao:
             sha_antigo=registro["sha256"],
             sha_novo=baixado.sha256,
         ))
+
+        # A linha do tempo guarda o que o aviso do Telegram nao guarda: daqui
+        # a seis meses eu ainda vou poder ver que este edital ja foi retificado
+        # duas vezes, e quando.
+        with sessao() as s:
+            linha_do_tempo.registrar_retificacao(
+                s, concurso.url, registro.get("arquivo", ""), registro["url"]
+            )
 
         # O manifesto passa a valer o arquivo novo, senao a proxima conferencia
         # acusaria a mesma retificacao de novo.

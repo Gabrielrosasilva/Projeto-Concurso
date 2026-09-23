@@ -341,3 +341,34 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   com "secretaria de estado", entao os dois concursos da SEJURI ficavam em
   `indefinida` mesmo com uf=SC. A comparacao por sigla e por palavra inteira,
   senao "SAP" casaria dentro de "SAPE/SC", que e a Secretaria da Agricultura.
+- a tabela `eventos` guarda a linha do tempo, porque o resto do banco guarda so
+  o AGORA: quando a situacao muda, o valor antigo e sobrescrito e ninguem
+  lembra que ele existiu. Sem isso nao da para responder "quando foi que essa
+  inscricao abriu?" nem "esse edital ja tinha sido retificado antes?" - e o
+  caminho e o que ensina, mais que o estado de hoje;
+- o evento aponta o concurso pela URL, e nao pelo id: a url e a chave natural
+  do projeto, e o id muda quando o banco e reconstruido a partir de
+  `data/concursos.json`. Evento amarrado a id nao sobreviveria a um
+  `radar importar`;
+- quem grava o evento sao os pontos do servico onde o campo MUDA de valor, e
+  nao um gatilho generico. Em `_gravar` a situacao anterior e guardada antes de
+  qualquer escrita e comparada no fim: ela pode mudar por dois caminhos - o
+  valor que a fonte manda e a fase que o classificador le no titulo - e
+  comparar no fim pega os dois sem espalhar registro pelo meio da funcao;
+- abrir e fechar inscricao tem tipo proprio (`inscricoes_abertas` e
+  `inscricoes_encerradas`) em vez do generico `mudou_situacao`: sao os dois
+  momentos que eu de fato preciso achar depois, e o resto do ciclo e tramite;
+- o evento de "apareceu" diz tambem em que situacao o concurso chegou.
+  Concurso raramente entra no radar no comeco da vida: quando o radar ligou,
+  muita coisa ja estava com inscricao aberta, e a linha do tempo comecaria
+  dizendo so "apareceu", sem dizer em que pe;
+- `registrar()` recebe a sessao de quem chama, em vez de abrir a propria: o
+  evento tem que entrar no mesmo commit da mudanca que o gerou. Se a coleta
+  falhar no meio, nao pode sobrar evento de uma mudanca que nao foi gravada;
+- a linha do tempo NAO foi preenchida retroativamente para os 2.790 concursos
+  que ja estavam no banco. Nenhum deles tem data de quando apareceu, e inventar
+  uma seria o mesmo chute que a regra do anel existe para impedir. A tabela
+  comeca a valer da primeira coleta em diante;
+- o evento `prova_marcada` esta pronto e ligado no upsert, mas nao dispara
+  hoje: nenhuma fonte do projeto preenche `data_prova`. A coluna existe e o
+  calendario a le, mas so seria preenchida por uma fonte que ainda nao temos.

@@ -86,6 +86,18 @@ ALVOS = ("principal", "secundario")
 
 ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 
+# O que pode acontecer com um concurso e virar linha do tempo. O vocabulario e
+# fechado pelo mesmo motivo dos outros: string solta pelo codigo vira erro de
+# digitacao silencioso.
+TIPOS_DE_EVENTO = (
+    "apareceu",               # entrou no radar pela primeira vez
+    "mudou_situacao",         # qualquer passo do ciclo de vida
+    "inscricoes_abertas",     # o prazo abriu
+    "inscricoes_encerradas",  # o prazo fechou
+    "edital_retificado",      # o PDF do edital mudou de conteudo
+    "prova_marcada",          # a data da prova ficou conhecida
+)
+
 
 class Concurso(Base):
     __tablename__ = "concursos"
@@ -171,6 +183,39 @@ class Concurso(Base):
 
     def __repr__(self) -> str:
         return f"<Concurso {self.uf or '--'} {self.titulo[:50]!r}>"
+
+
+class Evento(Base):
+    """Uma coisa que aconteceu com um concurso, na ordem em que aconteceu.
+
+    Existe porque o resto do banco guarda so o AGORA. Quando a situacao muda, o
+    valor antigo e sobrescrito e ninguem lembra que ele existiu: nao da para
+    responder "quando foi que essa inscricao abriu?" nem "esse edital ja tinha
+    sido retificado antes?". Aqui a mudanca vira linha, e a linha fica.
+
+    O concurso e apontado pela URL, e nao pelo id, de proposito: a url e a
+    chave natural do projeto, e o id muda quando o banco e reconstruido a
+    partir de data/concursos.json. Evento amarrado a id nao sobreviveria a um
+    `radar importar`.
+    """
+
+    __tablename__ = "eventos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    concurso_url: Mapped[str] = mapped_column(String(800), index=True)
+
+    # Quando aconteceu - ou, quando nao da para saber o momento exato, quando
+    # o radar percebeu. Nunca fica vazio.
+    data: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora, index=True)
+
+    tipo: Mapped[str] = mapped_column(String(30), index=True)
+    descricao: Mapped[str] = mapped_column(String(300))
+
+    # Para onde ir para conferir: a pagina do concurso, ou o PDF que mudou.
+    link: Mapped[str | None] = mapped_column(String(800), nullable=True)
+
+    def __repr__(self) -> str:
+        return f"<Evento {self.tipo} {self.data:%d/%m/%Y}>"
 
 
 class QuestaoDeProva(Base):

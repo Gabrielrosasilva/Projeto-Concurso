@@ -821,6 +821,68 @@ def _mostrar_alvos() -> None:
         console.print(f"  [dim]... e mais {len(principais) - ALVOS_A_LISTAR}[/]")
 
 
+ROTULO_DO_EVENTO = {
+    "apareceu": "apareceu",
+    "mudou_situacao": "situacao",
+    "inscricoes_abertas": "inscricao",
+    "inscricoes_encerradas": "encerrou",
+    "edital_retificado": "retificado",
+    "prova_marcada": "prova",
+}
+
+CORES_DO_EVENTO = {
+    "apareceu": "dim",
+    "mudou_situacao": "cyan",
+    "inscricoes_abertas": "bold green",
+    "inscricoes_encerradas": "yellow",
+    "edital_retificado": "bold red",
+    "prova_marcada": "bold magenta",
+}
+
+
+@app.command()
+def eventos(
+    concurso_id: int = typer.Argument(..., help="O id do concurso, como na lista"),
+) -> None:
+    """A linha do tempo do concurso: o que aconteceu com ele, e quando.
+
+    O resto do radar mostra so como o concurso esta hoje. Aqui esta o caminho
+    ate aqui - quando ele apareceu, quando a inscricao abriu, quantas vezes o
+    edital foi retificado.
+    """
+    achado = servico.eventos_do_concurso(concurso_id)
+    if achado is None:
+        console.print(f"[red]Nao achei concurso com id {concurso_id}.[/]")
+        raise typer.Exit(code=1)
+
+    concurso, linha = achado
+    console.print(f"[bold]{concurso.titulo}[/]")
+    console.print(f"[dim]{concurso.url}[/]\n")
+
+    if not linha:
+        console.print(
+            "[yellow]Sem evento registrado.[/] A linha do tempo comeca a ser "
+            "gravada na primeira coleta depois que o concurso entra no radar."
+        )
+        return
+
+    tabela = Table(box=None, pad_edge=False)
+    tabela.add_column("Quando", style="dim", no_wrap=True)
+    tabela.add_column("O que")
+    tabela.add_column("Detalhe")
+
+    for evento in linha:
+        cor = CORES_DO_EVENTO.get(evento.tipo, "")
+        rotulo = ROTULO_DO_EVENTO.get(evento.tipo, evento.tipo)
+        tabela.add_row(
+            formatar_data(evento.data),
+            f"[{cor}]{rotulo}[/]" if cor else rotulo,
+            evento.descricao,
+        )
+
+    console.print(tabela)
+
+
 @app.command()
 def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
     """Grava o banco inteiro em data/concursos.json (o que vai para o git)."""

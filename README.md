@@ -249,7 +249,17 @@ radar previsao                  # onde vale ficar de olho agora
 radar favoritar 324             # o id aparece na primeira coluna do listar
 radar favoritar 324 --remover
 radar salario 324 5200          # grava; sem o valor, limpa
+radar eventos 324               # a linha do tempo daquele concurso
 ```
+
+A **linha do tempo** responde o que o resto do radar nao responde: o resto
+mostra como o concurso esta hoje, e `radar eventos` mostra o caminho ate aqui.
+Fica gravado quando ele apareceu, cada passo do ciclo de vida, quando a
+inscricao abriu e fechou, e cada vez que o edital foi retificado.
+
+Ela vale da primeira coleta em diante. Os concursos que ja estavam no banco
+antes da tabela existir aparecem sem evento nenhum - nao ha como saber quando
+eles apareceram, e inventar a data seria pior que nao ter.
 
 **Edital e provas**
 
@@ -419,11 +429,12 @@ voce abre a web ou pede para baixar prova.
 ```
 src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
-├── models.py       tabelas concursos, questoes, simulados e respostas
+├── models.py       tabelas concursos, eventos, questoes, simulados e respostas
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico.py      roda coletores, grava com upsert, classifica, consulta
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
+├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
 ├── classificador.py  tipo, municipio, salario, relevancia e alvo, pelo titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao
