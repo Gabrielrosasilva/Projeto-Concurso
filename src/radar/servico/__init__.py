@@ -649,6 +649,10 @@ class ResultadoElegibilidade:
     lidos: int = 0
     ilegiveis: int = 0
     sem_edital: int = 0
+    #: Os arquivos que nem abriram - PDF cortado no meio, quase sempre
+    #: download interrompido. Guardo o NOME porque e o que permite apagar o
+    #: arquivo e baixar de novo; o numero sozinho nao diz qual.
+    quebrados: list[str] = field(default_factory=list)
 
     def __str__(self) -> str:
         if not self.concursos:
@@ -658,6 +662,14 @@ class ResultadoElegibilidade:
             texto += f", {self.ilegiveis} com edital so em imagem"
         if self.sem_edital:
             texto += f", {self.sem_edital} sem edital no acervo"
+        if self.quebrados:
+            texto += (
+                f", [yellow]{len(self.quebrados)} arquivo(s) corrompido(s)"
+                f": {', '.join(self.quebrados[:3])}"
+            )
+            if len(self.quebrados) > 3:
+                texto += f" e mais {len(self.quebrados) - 3}"
+            texto += "[/]"
         return texto
 
 
@@ -681,17 +693,39 @@ def _editais_por_concurso() -> dict[str, list[dict]]:
     return por_concurso
 
 
-def _exigencias_do_concurso(registros: list[dict]) -> leitor_de_elegibilidade.Exigencias:
-    """Le os editais daquele concurso ate um deles dizer alguma coisa."""
+def _exigencias_do_concurso(
+    registros: list[dict], quebrados: list[str] | None = None
+) -> leitor_de_elegibilidade.Exigencias:
+    """Le os editais daquele concurso ate um deles dizer alguma coisa.
+
+    PDF que nem abre nao derruba a rodada. Acontece de verdade: download
+    interrompido deixa no disco meio arquivo, e o leitor estoura
+    `PdfStreamError` na primeira pagina. Antes disso parar aqui, o `radar
+    elegibilidade` inteiro morria no primeiro arquivo cortado - e os outros 36
+    concursos da fila ficavam sem ser lidos por causa de um.
+
+    O arquivo que falhou vai para `quebrados` pelo NOME, e nao so contado: e o
+    nome que permite apaga-lo e baixar de novo.
+    """
     melhor = leitor_de_elegibilidade.Exigencias(legivel=False)
 
     for registro in registros:
         caminho = _caminho(registro)
         if caminho is None:
             continue
-        achado = leitor_de_elegibilidade.ler(
-            leitor_de_questoes.extrair_texto(caminho)
-        )
+
+        try:
+            texto = leitor_de_questoes.extrair_texto(caminho)
+        except Exception as erro:  # noqa: BLE001 - de proposito: loga e segue
+            nome = registro.get("arquivo") or caminho.name
+            log.warning(
+                "nao consegui ler o edital %s (%s)", nome, type(erro).__name__
+            )
+            if quebrados is not None:
+                quebrados.append(nome)
+            continue
+
+        achado = leitor_de_elegibilidade.ler(texto)
         if achado.niveis:
             return achado
         if achado.legivel:
@@ -718,7 +752,11 @@ def ler_elegibilidade(limite: int = 50, refazer: bool = False) -> ResultadoElegi
 
         for concurso in s.scalars(consulta.limit(limite)):
             resultado.concursos += 1
-            exigencias = _exigencias_do_concurso(por_concurso[concurso.url])
+            quebrados: list[str] = []
+            exigencias = _exigencias_do_concurso(
+                por_concurso[concurso.url], quebrados
+            )
+            resultado.quebrados.extend(quebrados)
 
             if not exigencias.legivel:
                 resultado.ilegiveis += 1

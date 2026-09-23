@@ -653,3 +653,17 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - `salario_manual` e `municipio_confirmado` continuam na regra mais fraca:
   eles acompanham campos que a coleta escreve (o salario e o municipio), e
   para eles "valor vazio nao apaga" basta.
+
+## PDF que nem abre
+
+- **arquivo corrompido nao derruba a rodada.** Download interrompido deixa no
+  disco meio PDF, e o leitor estoura `PdfStreamError` na primeira pagina.
+  Antes, o primeiro arquivo cortado matava o `radar elegibilidade` inteiro, e
+  os outros 36 concursos da fila ficavam sem ser lidos por causa de um. Agora
+  a leitura de cada edital e isolada: o que falhar e contado e a rodada segue;
+- **o arquivo quebrado e registrado pelo NOME**, no log e no resumo, e nao so
+  contado. O numero sozinho nao diz qual apagar para baixar de novo;
+- "corrompido" e "so em imagem" ficam em contagens separadas, porque pedem
+  coisas diferentes: o primeiro se resolve apagando o arquivo e rodando
+  `radar provas` de novo, e o segundo nao se resolve - edital publicado como
+  imagem nao vira texto.

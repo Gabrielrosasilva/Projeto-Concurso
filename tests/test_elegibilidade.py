@@ -216,3 +216,75 @@ def test_edital_que_nao_esta_no_disco_e_pulado(banco_temporario):
 
 def test_sem_edital_nenhum_nao_quebra(banco_temporario):
     assert not servico._exigencias_do_concurso([]).legivel
+
+
+# --- PDF corrompido nao derruba a rodada (etapa 12) -------------------------
+#
+# A fixture edital_truncado.pdf sao os primeiros 40 KB do mesmo edital de 2013:
+# e o que fica no disco quando o download e interrompido no meio. O pypdf
+# estoura PdfStreamError logo na primeira pagina.
+
+EDITAL_TRUNCADO = (
+    Path(__file__).parent / "fixtures" / "provas" / "edital_truncado.pdf"
+)
+
+
+def _registro_truncado(nome: str = "edital-cortado.pdf") -> dict:
+    destino = config.diretorio_dados() / "provas" / nome
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(EDITAL_TRUNCADO, destino)
+    return {"tipo": "edital", "caminho": f"provas/{nome}", "arquivo": nome}
+
+
+def test_pdf_cortado_no_meio_nao_estoura(banco_temporario):
+    """Antes disto, o primeiro arquivo corrompido derrubava o `radar
+    elegibilidade` inteiro - e os outros 36 concursos da fila ficavam sem ser
+    lidos por causa de um."""
+    quebrados = []
+
+    exigencias = servico._exigencias_do_concurso([_registro_truncado()], quebrados)
+
+    assert not exigencias.legivel
+    assert quebrados == ["edital-cortado.pdf"]   # pelo NOME, nao so contado
+
+
+def test_o_edital_bom_do_mesmo_concurso_ainda_e_lido(banco_temporario):
+    """Um arquivo quebrado nao pode esconder o que esta ao lado dele."""
+    quebrados = []
+
+    exigencias = servico._exigencias_do_concurso(
+        [_registro_truncado(), _registro_de_edital(banco_temporario)], quebrados
+    )
+
+    assert exigencias.niveis == ["superior"]
+    assert quebrados == ["edital-cortado.pdf"]
+
+
+def test_a_rodada_inteira_segue_e_conta_o_quebrado(banco_temporario,
+                                                   monkeypatch, tmp_path):
+    """De ponta a ponta: dois concursos, o primeiro com o PDF cortado."""
+    from radar.db import sessao
+    from radar.models import Concurso
+
+    manifesto = [
+        {**_registro_truncado(), "concurso_url": "https://x.test/quebrado"},
+        {
+            **_registro_de_edital(banco_temporario),
+            "concurso_url": "https://x.test/bom",
+        },
+    ]
+    monkeypatch.setattr(
+        servico, "_editais_por_concurso",
+        lambda: {r["concurso_url"]: [r] for r in manifesto},
+    )
+    with sessao() as s:
+        s.add(Concurso(url="https://x.test/quebrado", fonte="teste", titulo="A"))
+        s.add(Concurso(url="https://x.test/bom", fonte="teste", titulo="B"))
+
+    resultado = servico.ler_elegibilidade()
+
+    assert resultado.concursos == 2
+    assert resultado.lidos == 1                  # o bom foi lido
+    assert resultado.quebrados == ["edital-cortado.pdf"]
+    assert "arquivo(s) corrompido(s)" in str(resultado)
+    assert "edital-cortado.pdf" in str(resultado)
