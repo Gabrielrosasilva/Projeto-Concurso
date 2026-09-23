@@ -493,9 +493,9 @@ def retificacoes(
     if avisar and resultado.mudaram:
         from radar import avisos
 
-        enviadas = avisos.enviar_varios(
+        enviadas = sum(avisos.enviar_varios(
             [avisos.formatar_retificacao(m) for m in resultado.mudaram]
-        )
+        ))
         console.print()
         console.print(f"[green]{enviadas} aviso(s) enviado(s).[/]")
 

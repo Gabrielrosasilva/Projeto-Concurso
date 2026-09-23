@@ -588,3 +588,15 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   a de Agente seria a equivalencia falsa que a prova substituta existe para
   nao fingir. E a lista `exclui` vale aqui como vale no resto: "Policia Penal
   Federal" contem "policia penal" e e outro concurso.
+- **o evento de prazo tem o tipo que a DATA manda.** `registrar_prazo` sempre
+  gravou `inscricoes_abertas`, mesmo lendo um edital cujo prazo ja tinha
+  vencido - a propria docstring dizia que isso acontece. Virava um
+  "inscricoes abertas" verde no Telegram para concurso fechado, que e o tipo
+  de aviso que faz eu parar de confiar nos avisos;
+- **aviso de evento tambem tem janela de novidade** (30 dias, a mesma do
+  aviso de concurso). Marcar a estrela hoje num concurso cujo edital saiu ha
+  tres semanas nao pode despejar a historia dele no celular;
+- **`enviar_varios` devolve uma resposta por mensagem, e nao a contagem.**
+  Com a contagem, quem chamava marcava como avisadas as N primeiras: falhando
+  a do meio, ela ficava marcada como enviada - sumia para sempre - e a que
+  saiu voltava no dia seguinte.

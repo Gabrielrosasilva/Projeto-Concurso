@@ -116,15 +116,20 @@ def enviar(texto: str) -> bool:
         return False
 
 
-def enviar_varios(textos: list[str]) -> int:
-    """Manda uma mensagem por vez, respeitando o limite do Telegram."""
-    enviadas = 0
+def enviar_varios(textos: list[str]) -> list[bool]:
+    """Manda uma mensagem por vez, respeitando o limite do Telegram.
+
+    Devolve UMA resposta por texto, na ordem, e nao a contagem de quantas
+    sairam. A diferenca aparece quando falha uma do meio: com a contagem, quem
+    chama marcava como avisadas as N primeiras: a que falhou ficava marcada
+    como enviada, e a ultima - que saiu - voltava amanha.
+    """
+    saiu = []
     for indice, texto in enumerate(textos):
         if indice:
             time.sleep(PAUSA_ENTRE_MENSAGENS)
-        if enviar(texto):
-            enviadas += 1
-    return enviadas
+        saiu.append(enviar(texto))
+    return saiu
 
 
 # Como cada mudanca de favorito abre a mensagem. O emoji e o rotulo dizem, na

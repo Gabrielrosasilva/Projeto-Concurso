@@ -133,12 +133,14 @@ def avisar(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
     escolhidos = principais + demais[:limite]
     sobraram = len(demais) - min(len(demais), limite)
 
-    enviados = mensagens.enviar_varios([mensagens.formatar(c) for c in escolhidos])
+    saiu = mensagens.enviar_varios([mensagens.formatar(c) for c in escolhidos])
+    enviados = sum(saiu)
 
-    # So marca como avisado o que realmente saiu. Se o Telegram estava fora do
-    # ar, o concurso continua pendente e a proxima coleta tenta de novo.
-    if enviados:
-        urls = [c.url for c in escolhidos[:enviados]]
+    # So marca como avisado o que realmente saiu - uma a uma, e nao as N
+    # primeiras: com o Telegram falhando no meio, a que falhou ficava marcada
+    # como enviada e a seguinte voltava amanha.
+    urls = [c.url for c, ok in zip(escolhidos, saiu) if ok]
+    if urls:
         with sessao() as s:
             for concurso in s.scalars(select(Concurso).where(Concurso.url.in_(urls))):
                 concurso.avisado_em = agora()
@@ -171,22 +173,25 @@ def avisar_favoritos(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
     if not config.telegram_configurado():
         return ResultadoAviso(configurado=False)
 
-    pendentes = meus_favoritos.eventos_a_avisar(limite=limite + 1)
+    # A fila inteira, e nao `limite + 1`: com o teto de seguranca cortando, eu
+    # quero saber QUANTOS ficaram de fora - um numero que so existe se eu
+    # tiver contado todos. Sao poucos favoritos; a lista nao cresce.
+    pendentes = meus_favoritos.eventos_a_avisar()
     if not pendentes:
         return ResultadoAviso()
 
     escolhidos = pendentes[:limite]
     sobraram = len(pendentes) - len(escolhidos)
 
-    enviados = mensagens.enviar_varios(
+    saiu = mensagens.enviar_varios(
         [mensagens.formatar_evento(evento, concurso) for evento, concurso in escolhidos]
     )
+    enviados = sum(saiu)
 
     # So marca o que realmente saiu: Telegram fora do ar deixa a fila em pe
     # para a proxima coleta, como ja acontece com o aviso de concurso novo.
-    if enviados:
-        meus_favoritos.marcar_avisados(
-            [evento.id for evento, _ in escolhidos[:enviados]]
-        )
+    meus_favoritos.marcar_avisados(
+        [evento.id for (evento, _), ok in zip(escolhidos, saiu) if ok]
+    )
 
     return ResultadoAviso(enviados=enviados, pendentes=sobraram)

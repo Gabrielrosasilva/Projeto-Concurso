@@ -368,3 +368,70 @@ def test_sem_telegram_configurado_nao_quebra(banco_temporario, monkeypatch):
     resultado = servico.avisar_favoritos()
     assert not resultado.configurado
     assert resultado.enviados == 0
+
+
+# --- a fila: o que ela nao pode fazer (revisao das etapas 8 a 10) -----------
+
+def test_evento_velho_nao_vira_mensagem(banco_temporario, telegram):
+    """Marcar a estrela hoje num concurso cujo edital saiu ha tres semanas nao
+    pode despejar a historia dele no celular. Ela fica na linha do tempo, que
+    e onde eu leio historia."""
+    (id_,) = _semear(_concurso("https://a.test/1"))
+    servico.favoritar(id_)
+    _evento("https://a.test/1", "edital_publicado", "Saiu o edital",
+            data=dias(-40))
+
+    assert servico.avisar_favoritos().enviados == 0
+    assert telegram == []
+
+
+def test_evento_dentro_da_janela_avisa(banco_temporario, telegram):
+    (id_,) = _semear(_concurso("https://a.test/1"))
+    servico.favoritar(id_)
+    _evento("https://a.test/1", "edital_publicado", "Saiu o edital",
+            data=dias(-3))
+
+    assert servico.avisar_favoritos().enviados == 1
+
+
+def test_falha_no_meio_marca_so_o_que_saiu(banco_temporario, telegram,
+                                           monkeypatch):
+    """O erro que isto impede: marcando as N primeiras, a mensagem que falhou
+    ficava marcada como enviada - some para sempre - e a que saiu voltava
+    amanha."""
+    (id_,) = _semear(_concurso("https://a.test/1"))
+    servico.favoritar(id_)
+    for n, tipo in enumerate(("edital_publicado", "edital_retificado",
+                              "prova_marcada")):
+        _evento("https://a.test/1", tipo, f"Mudanca {n}", data=dias(-n))
+
+    saiu = []
+
+    def falha_na_segunda(texto: str) -> bool:
+        saiu.append(texto)
+        return len(saiu) != 2
+
+    monkeypatch.setattr(avisos, "enviar", falha_na_segunda)
+    assert servico.avisar_favoritos().enviados == 2
+
+    with sessao() as s:
+        pendentes = [
+            e.tipo for e in s.scalars(
+                select(Evento).where(Evento.avisado_em.is_(None))
+            )
+        ]
+    assert pendentes == ["edital_retificado"]   # a que falhou, e so ela
+
+
+def test_o_que_sobrou_do_teto_e_contado_de_verdade(banco_temporario, telegram):
+    """O numero existe para eu desconfiar de regra quebrada; contar so ate o
+    teto mais um o deixaria sempre em 1."""
+    (id_,) = _semear(_concurso("https://a.test/1"))
+    servico.favoritar(id_)
+    for n in range(8):
+        _evento("https://a.test/1", "prova_marcada", f"Prova {n}", data=dias(-n))
+
+    resultado = servico.avisar_favoritos(limite=3)
+
+    assert resultado.enviados == 3
+    assert resultado.pendentes == 5

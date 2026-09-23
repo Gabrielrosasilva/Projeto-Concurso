@@ -245,6 +245,27 @@ def test_prazo_so_com_fim(banco_temporario):
     assert "ate 31/10/2026" in descricao
 
 
+def test_prazo_que_ja_venceu_nao_vira_inscricao_abrindo(banco_temporario):
+    """O radar le o edital de um concurso cuja inscricao ja fechou - a
+    docstring de `registrar_prazo` sempre soube disso. O que faltava era o
+    tipo do evento seguir a data: desde a etapa 8 um "inscricoes abertas"
+    verde vira mensagem no celular, e para concurso fechado isso e o tipo de
+    aviso que faz eu parar de confiar nos avisos."""
+    with sessao() as s:
+        eventos.registrar_prazo(s, URL, None, agora() - timedelta(days=3))
+
+    evento = _eventos()[0]
+    assert evento.tipo == eventos.INSCRICOES_ENCERRADAS
+    assert "ja encerrado" in evento.descricao
+
+
+def test_prazo_que_ainda_corre_vira_inscricao_abrindo(banco_temporario):
+    with sessao() as s:
+        eventos.registrar_prazo(s, URL, None, agora() + timedelta(days=10))
+
+    assert _eventos()[0].tipo == eventos.INSCRICOES_ABERTAS
+
+
 def test_sem_prazo_nao_registra(banco_temporario):
     with sessao() as s:
         assert eventos.registrar_prazo(s, URL, None, None) is None

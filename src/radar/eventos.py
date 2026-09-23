@@ -123,6 +123,17 @@ def registrar_prazo(
     else:
         quando = f"ate {formatar_data(inscricoes_ate)}"
 
+    # O tipo segue a DATA, e nao a ordem em que eu fiquei sabendo. Descobrir
+    # hoje um prazo que venceu semana passada e a leitura de um edital
+    # atrasado, e nao uma inscricao abrindo - desde a etapa 8 isso vira
+    # mensagem no Telegram, e um "inscricoes abertas" verde para concurso
+    # fechado e o tipo de aviso que faz eu parar de confiar nos avisos.
+    if inscricoes_ate < agora():
+        return registrar(
+            s, concurso_url, INSCRICOES_ENCERRADAS,
+            f"Prazo de inscricao, ja encerrado: {quando}", link,
+        )
+
     return registrar(
         s, concurso_url, INSCRICOES_ABERTAS, f"Prazo de inscricao: {quando}", link
     )

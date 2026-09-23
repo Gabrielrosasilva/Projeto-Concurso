@@ -14,7 +14,7 @@ escolha minha, e uma tela que chuta sobre ele e pior do que uma tela vazia.
 """
 import logging
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from sqlalchemy import select
 
@@ -157,28 +157,46 @@ def blocos(limite: int = 50) -> list[Bloco]:
 
 # --- o que vira mensagem no Telegram ----------------------------------------
 
-def eventos_a_avisar(limite: int = 20) -> list[tuple[Evento, Concurso]]:
+#: Evento mais velho que isto nao vira mensagem. E a mesma janela que vale
+#: para o aviso de concurso novo, e existe pelo mesmo motivo: marcar a estrela
+#: hoje num concurso que tem edital publicado ha tres semanas nao pode
+#: despejar a historia inteira dele no meu celular. Ela fica na linha do
+#: tempo, que e onde eu leio historia.
+JANELA_DE_NOVIDADE_EM_DIAS = 30
+
+
+def eventos_a_avisar(limite: int | None = None) -> list[tuple[Evento, Concurso]]:
     """Eventos importantes de concurso FAVORITO que ainda nao viraram mensagem.
 
-    Duas condicoes, e as duas importam. Favorito, porque aviso sobre concurso
+    Tres condicoes, e as tres importam. Favorito, porque aviso sobre concurso
     que eu nao escolhi seguir e ruido. Importante, porque nem toda mudanca
     muda o que eu tenho que fazer - "apareceu" e "de prevista para autorizado"
-    ficam na linha do tempo, sem tocar o celular.
+    ficam na linha do tempo, sem tocar o celular. E recente, porque aviso e
+    sobre o que mudou AGORA.
+
+    Sem limite por padrao: quem chama precisa saber o tamanho real da fila
+    para dizer quantos ficaram de fora. Sao poucos favoritos, e poucos eventos
+    por favorito.
     """
     criar_tabelas()
 
     from radar.servico import FAVORITO
 
+    desde = agora() - timedelta(days=JANELA_DE_NOVIDADE_EM_DIAS)
+    consulta = (
+        select(Evento, Concurso)
+        .join(Concurso, Concurso.url == Evento.concurso_url)
+        .where(Evento.avisado_em.is_(None))
+        .where(Evento.tipo.in_(linha_do_tempo.EVENTOS_IMPORTANTES))
+        .where(Concurso.interesse == FAVORITO)
+        .where(Evento.data >= desde)
+        .order_by(Evento.data.asc(), Evento.id.asc())
+    )
+    if limite is not None:
+        consulta = consulta.limit(limite)
+
     with sessao() as s:
-        linhas = s.execute(
-            select(Evento, Concurso)
-            .join(Concurso, Concurso.url == Evento.concurso_url)
-            .where(Evento.avisado_em.is_(None))
-            .where(Evento.tipo.in_(linha_do_tempo.EVENTOS_IMPORTANTES))
-            .where(Concurso.interesse == FAVORITO)
-            .order_by(Evento.data.asc(), Evento.id.asc())
-            .limit(limite)
-        ).all()
+        linhas = s.execute(consulta).all()
 
     return [(evento, concurso) for evento, concurso in linhas]
 
