@@ -17,6 +17,7 @@ from radar import (
     detalhes,
     elegibilidade as leitor_de_elegibilidade,
     perfil as meu_perfil,
+    questoes as leitor_de_questoes,
     regioes,
 )
 from radar import provas as arquivos_de_prova

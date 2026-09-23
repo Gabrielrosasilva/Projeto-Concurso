@@ -164,3 +164,55 @@ def test_o_resumo_junta_tudo_numa_linha():
 
 def test_edital_que_nao_diz_nada_admite_isso():
     assert "Nada identificado" in elegibilidade.resumir(elegibilidade.ler(ENCHIMENTO))
+
+
+# --- do PDF no disco ate a exigencia (etapa 11) -----------------------------
+#
+# Ate aqui todo teste deste arquivo entregava TEXTO ao leitor. O caminho que
+# comeca no PDF do acervo nao tinha teste nenhum, e por isso passou despercebido
+# que `_exigencias_do_concurso` chamava um modulo que a divisao do servico
+# (commit e69f6d9) tinha deixado de importar: `radar elegibilidade` e o passo 4
+# do `radar atualizar` quebravam com NameError sempre que havia edital no disco.
+#
+# A fixture e real: duas paginas do edital 01/2013 - SJC/SC, o primeiro
+# concurso de Agente Penitenciario de SC, recortadas do PDF que `radar provas`
+# baixa. Sao as paginas dos requisitos de investidura.
+
+import shutil
+from pathlib import Path
+
+from radar import config, servico
+
+EDITAL_PDF = (
+    Path(__file__).parent / "fixtures" / "provas" / "edital_sjc_2013_requisitos.pdf"
+)
+
+
+def _registro_de_edital(banco_temporario) -> dict:
+    """Copia a fixture para o acervo temporario e devolve o registro dela."""
+    destino = config.diretorio_dados() / "provas" / "edital.pdf"
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(EDITAL_PDF, destino)
+    return {"tipo": "edital", "caminho": "provas/edital.pdf", "tamanho": 255816}
+
+
+def test_le_as_exigencias_do_pdf_que_esta_no_disco(banco_temporario):
+    exigencias = servico._exigencias_do_concurso([_registro_de_edital(banco_temporario)])
+
+    assert exigencias.legivel
+    assert exigencias.niveis == ["superior"]       # "conclusao de ensino superior"
+    assert exigencias.cnh == "B"                   # "carteira nacional... categoria B"
+
+
+def test_edital_que_nao_esta_no_disco_e_pulado(banco_temporario):
+    """O manifesto pode citar arquivo que esta so na outra maquina: quem nao
+    baixou o PDF nao pode ver o comando quebrar."""
+    exigencias = servico._exigencias_do_concurso([
+        {"tipo": "edital", "caminho": "provas/nao-baixei-esse.pdf"}
+    ])
+
+    assert not exigencias.legivel
+
+
+def test_sem_edital_nenhum_nao_quebra(banco_temporario):
+    assert not servico._exigencias_do_concurso([]).legivel
