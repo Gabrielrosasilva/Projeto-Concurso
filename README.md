@@ -505,7 +505,15 @@ src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
 ├── models.py       tabelas concursos, eventos, questoes, simulados e respostas
 ├── db.py           engine preguicoso + context manager de sessao
-├── servico.py      roda coletores, grava com upsert, classifica, consulta
+├── servico/        as regras, um arquivo por assunto:
+│   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
+│   │                 retificacao e calendario - e a fachada dos demais
+│   ├── coleta.py     roda as fontes, grava com upsert, classifica
+│   ├── avisos.py     quem vira mensagem no Telegram, e quando
+│   ├── provas.py     acervo, leitura dos cadernos, padrao da banca
+│   ├── simulado.py   monta a rodada, responde, mede o acerto
+│   ├── previsao.py   quando o municipio costuma abrir de novo
+│   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
 ├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
@@ -574,7 +582,7 @@ class MinhaFonte(Coletor):
         return [ItemColetado(titulo="...", url="...", uf="SC")]
 ```
 
-Depois inclua em `COLETORES`, dentro de `servico.py`.
+Depois inclua em `COLETORES`, dentro de `servico/coleta.py`.
 
 O `self.get()` herdado ja cuida de tres coisas: checa o `robots.txt` do site,
 manda o `User-Agent` do projeto e espera o intervalo configurado entre uma

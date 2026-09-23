@@ -96,7 +96,7 @@ prevista → autorizado → banca_definida → edital_publicado
 `banca_definida` e o sinal mais valioso: a contratacao da banca sai **2 a 4
 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual: fases 1 a 6 PRONTAS, fase 7 parcial
+## Estado atual: 1 a 6, 8, 9 e 10 PRONTAS; 7 parcial
 
 ```
 1 a 3  PRONTAS: tres fontes coletando (Concursos no Brasil, FEPESE, IESES),
@@ -119,7 +119,8 @@ meses antes do edital**, e da tempo de estudar o padrao dela.
 9      PRONTA: estudar pelo alvo. O treino sorteia primeiro as provas do
        cargo e depois a mesma banca nas mesmas materias; os `termos` do
        alvo.yml valem como sinonimos do cargo; e a tabela de materias mostra
-       o meu acerto ao lado do peso, apontando a pior entre as de maior peso
+       o acerto ao lado do peso, apontando a pior das de maior peso
+10     PRONTA: `servico.py` virou pacote, um arquivo por assunto
 ```
 
 A arvore de `src/radar/`, arquivo por arquivo, esta no
@@ -129,7 +130,10 @@ A arvore de `src/radar/`, arquivo por arquivo, esta no
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
-`servico.COLETORES`. Nada fora de `collectors/` sabe de onde vem o dado.
+`servico/coleta.py`, em `COLETORES`. Nada fora de `collectors/` sabe de onde
+vem o dado. O `servico` e um pacote com um arquivo por assunto (coleta,
+avisos, provas, simulado, previsao) e o `__init__` reexporta todos: escreva
+sempre `servico.funcao(...)`.
 
 ## Fontes de dados
 

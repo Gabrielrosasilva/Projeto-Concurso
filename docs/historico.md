@@ -803,3 +803,51 @@ A tabela de materias ganhou a coluna "Meu acerto", e duas marcas:
 Materia que eu nunca treinei aparece como "nao treinei" e nao concorre ao
 destaque. Zero por cento diria que eu errei tudo, quando o que houve foi eu
 nao ter feito — a mesma regra de nunca inventar que vale para o resto da tela.
+
+## Etapa 10: dividir o servico sem mudar nada
+
+`servico.py` tinha 2.704 linhas e cinco assuntos dentro. O objetivo era um so:
+separar por assunto **sem mudar comportamento nenhum**. Por isso o arquivo
+virou pacote em vez de virar cinco modulos soltos - `servico/__init__.py`
+reexporta tudo, e nenhum chamador precisou mudar.
+
+A divisao saiu em seis commits, um arquivo por commit, com `pytest -q` passando
+em cada um:
+
+    comum.py      54 linhas   o que mais de um assunto usa
+    coleta.py    348 linhas   rodar as fontes, gravar, classificar
+    avisos.py    192 linhas   quem vira mensagem, e quando
+    simulado.py  490 linhas   montar a rodada, responder, medir
+    provas.py    757 linhas   acervo, cadernos, padrao da banca, substituta
+    previsao.py  125 linhas   quando o municipio costuma abrir de novo
+    __init__.py  969 linhas   consulta, favoritos, detalhe, elegibilidade,
+                              retificacao, calendario - e a fachada
+
+### Tres coisas que so aparecem quando se divide
+
+**Uma funcao que nunca rodava.** Havia DUAS `_ano_do_concurso` no arquivo, uma
+na secao do acervo e outra na da previsao, e a segunda apagava a primeira em
+silencio - nos dois lugares rodava a segunda. Dividir sem notar isso teria
+devolvido a primeira ao acervo e mudado comportamento sem ninguem ver: a morta
+aceitava quatro digitos quaisquer no inicio do titulo, a viva exige "2020 -" e
+ainda le "Edital 003/2018". A morta foi apagada.
+
+**Um nome que some sozinho.** Com `servico/provas.py` existindo, o atributo
+`servico.provas` passa a ser o submodulo - e isso apaga o `from radar import
+provas` que o `__init__` fazia. A retificacao foi chamar `carregar_manifesto`
+no lugar errado e quebrou na hora. O apelido `arquivos_de_prova` resolve dos
+dois lados, e o teste vermelho foi o que avisou.
+
+**Dois testes que testavam a copia.** `servico.COLETORES` e `servico.Buscador`
+viraram nomes reexportados; quem os LE sao `servico.coleta` e `servico.provas`.
+Trocar a copia deixaria os dois testes verdes sem testar coisa alguma, e foi
+exatamente o que aconteceu ate eles serem apontados para o modulo certo.
+Trocar atributo de CLASSE - como os testes de retificacao fazem com
+`servico.Buscador.get` - continua funcionando de qualquer lado, porque a classe
+e a mesma.
+
+### A ordem importou uma vez
+
+`recado_sobre_o_cargo`, do assunto provas, chama `materias_universais`, do
+simulado. Movendo o simulado primeiro, a dependencia aponta numa direcao so e
+nao ha import circular para contornar.

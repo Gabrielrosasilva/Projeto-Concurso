@@ -549,3 +549,25 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   treinei" e NAO concorre ao destaque: zero diria que eu errei tudo, quando o
   que houve foi eu nao ter feito. E a mesma regra de nunca inventar que vale
   para o resto da tela de foco.
+
+## Etapa 10: o servico virou pacote
+
+- **`servico` e um pacote, e a fachada continua sendo o `servico`.** Cada
+  assunto tem arquivo proprio - `coleta`, `avisos`, `provas`, `simulado`,
+  `previsao` - e o `__init__` reexporta todos. Quem chama escreve
+  `servico.coletar_tudo(...)` como sempre escreveu: a CLI, a web e os testes
+  nao mudaram uma linha por causa da divisao;
+- **o `comum.py` so recebe o que JA era compartilhado** por mais de um
+  assunto. Ele nao e o quarto de despejo do que nao tem casa - a unica coisa
+  pior que um arquivo de 2.700 linhas sao dois arquivos com a mesma funcao
+  copiada dentro;
+- **modulo do radar que tem o mesmo nome de um submodulo entra apelidado.**
+  Dentro de `servico/provas.py`, `provas.baixar(...)` nao se le - virou
+  `arquivos_de_prova.baixar(...)`. O mesmo no `__init__`, e ali nao e so
+  estetica: com `servico/provas.py` existindo, o atributo `servico.provas`
+  passa a ser o submodulo e apaga o `from radar import provas`;
+- **teste que troca um global tem que trocar onde ele e LIDO.**
+  `servico.COLETORES` e `servico.Buscador` viraram copias reexportadas;
+  quem le e `servico.coleta` e `servico.provas`. Trocar a copia deixaria o
+  teste verde sem testar nada. Trocar atributo de CLASSE (como
+  `servico.Buscador.get`) continua valendo de qualquer lado.
