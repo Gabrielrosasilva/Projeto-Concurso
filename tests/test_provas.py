@@ -281,7 +281,9 @@ def test_manifesto_sobrevive_a_interrupcao(banco_temporario, monkeypatch):
 
             return Resposta()
 
-    monkeypatch.setattr(servico, "Buscador", BuscadorTeimoso)
+    # Quem usa o Buscador e `servico.provas` desde a etapa 10; trocar a
+    # copia reexportada em `servico` nao chegaria ate montar_acervo.
+    monkeypatch.setattr(servico.provas, "Buscador", BuscadorTeimoso)
     servico.montar_acervo(limite=2)
 
     # o primeiro concurso ficou catalogado, apesar de o segundo ter falhado
