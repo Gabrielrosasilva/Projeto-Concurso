@@ -423,3 +423,69 @@ def test_inscricao_aberta_vale_mesmo_sem_prazo_e_sem_ser_recente(banco_temporari
     ))
 
     assert servico.avisar().enviados == 1
+
+
+# --- um comando so manda mensagem (etapa 11) --------------------------------
+
+def _runner():
+    from typer.testing import CliRunner
+
+    return CliRunner()
+
+
+def test_o_comando_avisar_manda_favorito_e_concurso_novo(banco_temporario,
+                                                         telegram):
+    """Um lugar so manda mensagem, e e este: o robo do GitHub chama `radar
+    avisar` e com isso cobre as duas coisas."""
+    from radar import eventos, servico
+    from radar.cli import app
+
+    _semear(_concurso())
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+        concurso.interesse = servico.FAVORITO
+        eventos.registrar(
+            s, concurso.url, eventos.EDITAL_PUBLICADO, "Saiu o edital",
+            concurso.url,
+        )
+
+    resultado = _runner().invoke(app, ["avisar"])
+
+    assert resultado.exit_code == 0
+    assert "Favoritos" in resultado.output
+    assert "Concursos novos" in resultado.output
+    # a mudanca do favorito vai na frente do concurso novo
+    assert "Edital publicado" in telegram[0]
+    assert len(telegram) == 2
+
+
+def test_da_para_pedir_so_os_concursos_novos(banco_temporario, telegram):
+    from radar import eventos, servico
+    from radar.cli import app
+
+    _semear(_concurso())
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+        concurso.interesse = servico.FAVORITO
+        eventos.registrar(
+            s, concurso.url, eventos.EDITAL_PUBLICADO, "Saiu o edital",
+            concurso.url,
+        )
+
+    resultado = _runner().invoke(app, ["avisar", "--sem-favoritos"])
+
+    assert "Favoritos" not in resultado.output
+    assert len(telegram) == 1
+
+
+def test_sem_telegram_configurado_o_comando_explica(banco_temporario,
+                                                    monkeypatch):
+    from radar.cli import app
+
+    monkeypatch.delenv("RADAR_TELEGRAM_TOKEN", raising=False)
+    monkeypatch.delenv("RADAR_TELEGRAM_CHAT_ID", raising=False)
+
+    resultado = _runner().invoke(app, ["avisar"])
+
+    assert resultado.exit_code == 0
+    assert "Telegram nao configurado" in resultado.output

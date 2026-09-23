@@ -732,25 +732,44 @@ def avisar(
     limite: int = typer.Option(
         servico.LIMITE_DE_AVISOS, help="Maximo de mensagens nesta rodada"
     ),
+    favoritos: bool = typer.Option(
+        True, "--favoritos/--sem-favoritos",
+        help="Tambem manda o que mudou nos concursos que eu sigo",
+    ),
 ) -> None:
-    """Manda no Telegram os concursos novos que interessam.
+    """Manda no Telegram o que mudou nos favoritos e os concursos novos.
 
-    Avisa nucleo, proximo e indefinida. Cada concurso vira uma mensagem, com o
-    link da fonte junto, e e marcado como avisado para nao repetir amanha.
+    Nesta ordem, e a ordem importa: se o teto do dia cortar alguma coisa, que
+    corte a descoberta, e nao a mudanca no concurso que eu ja escolhi seguir.
+
+    O aviso de favorito nao passa por filtro de distancia - eu marquei a
+    estrela, eu quero saber. O de concurso novo avisa nucleo, proximo e
+    indefinida. Os dois marcam o que saiu, para nao repetir amanha.
 
     Precisa de RADAR_TELEGRAM_TOKEN e RADAR_TELEGRAM_CHAT_ID no .env.
     """
+    if favoritos:
+        mudancas = servico.avisar_favoritos(limite=limite)
+        if not mudancas.configurado:
+            _falta_configurar_o_telegram()
+            return
+        console.print(f"[green]Favoritos:[/] {mudancas}")
+
     resultado = servico.avisar(limite=limite)
 
     if not resultado.configurado:
-        console.print(
-            "[yellow]Telegram nao configurado.[/] Preencha no arquivo .env:\n"
-            "  RADAR_TELEGRAM_TOKEN=...   (pegue com o @BotFather)\n"
-            "  RADAR_TELEGRAM_CHAT_ID=... (pegue com o @userinfobot)"
-        )
+        _falta_configurar_o_telegram()
         return
 
-    console.print(f"[green]{resultado}[/]")
+    console.print(f"[green]Concursos novos:[/] {resultado}")
+
+
+def _falta_configurar_o_telegram() -> None:
+    console.print(
+        "[yellow]Telegram nao configurado.[/] Preencha no arquivo .env:\n"
+        "  RADAR_TELEGRAM_TOKEN=...   (pegue com o @BotFather)\n"
+        "  RADAR_TELEGRAM_CHAT_ID=... (pegue com o @userinfobot)"
+    )
 
 
 @app.command()
