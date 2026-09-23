@@ -98,16 +98,22 @@ def atualizar(
         help="Tambem baixa provas novas e le as questoes delas (demora)",
     ),
     avisar_telegram: bool = typer.Option(
-        True,
+        False,
         "--avisar/--sem-avisar",
-        help="Manda no Telegram o que mudou nos favoritos e os concursos novos",
+        help="Manda no Telegram (por padrao NAO manda: quem avisa e o robo)",
     ),
 ) -> None:
-    """Roda a rotina inteira, na ordem certa.
+    """Roda a rotina inteira, na ordem certa. Sem mandar mensagem.
 
     Existe porque manter o radar em dia exigia seis comandos numa sequencia que
     so fazia sentido para quem a escreveu: coletar antes de detalhar, detalhar
     antes de baixar edital, edital antes de elegibilidade.
+
+    **Nao avisa no Telegram por padrao.** Quem manda mensagem e o robo do
+    GitHub, uma vez por dia, e ele e o unico - com os dois avisando, o mesmo
+    concurso chegava duas vezes no celular, porque cada um guardava a sua
+    propria lista do que ja tinha avisado. Para mandar daqui assim mesmo, use
+    `--avisar`.
 
     Cada etapa que falha e registrada e a rotina segue - a mesma regra que vale
     para fonte fora do ar desde a primeira fase. O resumo no fim diz o que deu

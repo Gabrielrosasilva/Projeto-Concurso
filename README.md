@@ -100,30 +100,50 @@ radar atualizar
 ```
 
 Um comando so, que roda a rotina inteira na ordem em que ela faz sentido —
-coletar, ler a pagina dos novos, baixar edital, ler o que o edital exige,
-conferir retificacao e avisar no Telegram:
+coletar, ler a pagina dos novos, baixar edital, ler o que o edital exige e
+conferir retificacao. **Ele nao manda mensagem**: quem avisa e o robo do
+GitHub, uma vez por dia, e ele e o unico (`--avisar` manda daqui assim mesmo):
 
 ```
-1/6 Coletando das fontes
+1/5 Coletando das fontes
    concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s)
-2/6 Lendo a pagina dos concursos novos
+2/5 Lendo a pagina dos concursos novos
    15 pagina(s) lida(s): 1 com prazo de inscricao, 0 com banca
-3/6 Baixando edital de concurso aberto
+3/5 Baixando edital de concurso aberto
    5 concurso(s) lido(s): 18 edital(is)
-4/6 Lendo o que o edital exige
+4/5 Lendo o que o edital exige
    5 concurso(s), 5 com exigencias lidas
-5/6 Conferindo retificacao de edital
+5/5 Conferindo retificacao de edital
    10 edital(is) conferido(s), nenhum mudou
-6/6 Avisando no Telegram
 
 Tudo em dia.
 19 concurso(s) com inscricao aberta agora.
 ```
 
 A ordem **nao e opcional**: cada etapa depende da anterior. Etapa que falha e
-registrada e a rotina segue. Duas opcoes: `--sem-avisar` nao manda nada no
-Telegram, e `--completo` tambem baixa provas novas e le as questoes delas (fica
-de fora do dia a dia porque demora).
+registrada e a rotina segue. Duas opcoes: `--avisar` manda no Telegram daqui
+(por padrao nao manda), e `--completo` tambem baixa provas novas e le as
+questoes delas (fica de fora do dia a dia porque demora).
+
+### Trocando com o GitHub
+
+```bash
+radar sincronizar
+```
+
+O robo sabe o que apareceu na coleta e o que ele ja avisou; voce sabe quais
+concursos marcou com a estrela e o que anotou neles. Este comando junta os
+dois: `git pull` → `radar importar` → `radar exportar` → commit → push.
+
+A ordem importa. Importar **antes** de exportar e o que traz as marcas de
+aviso do robo para o seu banco antes de voce escrever o JSON de volta — na
+ordem inversa, ele mandaria tudo de novo no dia seguinte. Ele so encosta em
+`data/concursos.json` e `data/eventos.json`; o resto da pasta fica como esta,
+e conflito de rebase ele nao tenta resolver: para e mostra o erro.
+
+Rode depois de marcar favorito ou anotar alguma coisa. E assim que o robo
+passa a conhecer a sua estrela — sem isso, ele nunca avisa mudanca de
+favorito.
 
 Depois disso, o lugar de olhar e a web:
 
@@ -361,11 +381,17 @@ radar assuntos              # SIMULA o assunto fino; --valendo gasta de verdade
 **Avisos e calendario**
 
 ```bash
-radar avisar                # manda o que esta pendente
-radar avisar --limite 3
+radar avisar                # favoritos que mudaram, e depois concursos novos
+radar avisar --sem-favoritos   # so os concursos novos
 radar testar-telegram       # uma mensagem de teste, nao mexe no banco
 radar calendario            # grava radar.ics
+radar sincronizar           # troca com o GitHub: pull, importar, exportar, push
 ```
+
+`radar avisar` e o **unico** lugar que manda mensagem, e quem o chama todo dia
+e o robo do GitHub. Ele avisa nesta ordem: primeiro o que mudou nos concursos
+que voce segue, depois os que apareceram — se o teto do dia cortar alguma
+coisa, que corte a descoberta.
 
 `radar questoes`, `radar padrao`, `radar repetidas` e `radar parecidas` nao vao
 a internet: trabalham nos PDFs que `radar provas` ja baixou.

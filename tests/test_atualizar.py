@@ -55,16 +55,19 @@ def test_roda_as_etapas_na_ordem(etapas_falsas):
     ]
 
 
-def test_avisa_no_telegram_por_padrao(etapas_falsas):
+def test_nao_avisa_no_telegram_por_padrao(etapas_falsas):
+    """Quem manda mensagem e o robo do GitHub, e ele e o unico. Com os dois
+    avisando, o mesmo concurso chegava duas vezes no celular: cada um guardava
+    a sua propria lista do que ja tinha avisado."""
     executor.invoke(app, ["atualizar"])
 
-    assert "avisar" in etapas_falsas
-
-
-def test_da_para_rodar_sem_avisar(etapas_falsas):
-    executor.invoke(app, ["atualizar", "--sem-avisar"])
-
     assert "avisar" not in etapas_falsas
+
+
+def test_da_para_avisar_daqui_quando_eu_pedir(etapas_falsas):
+    executor.invoke(app, ["atualizar", "--avisar"])
+
+    assert "avisar" in etapas_falsas
 
 
 def test_o_completo_inclui_provas_e_questoes(etapas_falsas):

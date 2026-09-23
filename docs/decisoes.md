@@ -607,3 +607,28 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   plural ("600 policiais penais"), e noticia e justamente o que chega antes do
   edital. O plural de "penal federal" entrou junto na exclusao, senao o
   concurso federal no plural viraria o meu alvo.
+
+## Etapa 11: um lugar so manda mensagem
+
+- **quem avisa e o robo do GitHub, e ele e o unico.** `radar atualizar` roda
+  calado por padrao (`--avisar` manda daqui assim mesmo). Com os dois
+  avisando, o mesmo concurso chegava duas vezes no celular: cada ponta
+  guardava a sua propria lista do que ja tinha avisado, e elas so se
+  encontravam quando eu lembrava de exportar e importar na mao;
+- **a linha do tempo viaja em arquivo proprio**, `data/eventos.json`, ao lado
+  do `concursos.json`. Sao coisas diferentes - um e o AGORA de cada concurso,
+  o outro e o caminho que ele percorreu - e juntos, cada evento novo
+  reescreveria a linha inteira do concurso no diff;
+- **a identidade do evento sao quatro campos**: concurso, tipo, data e
+  descricao. O `id` nao serve, porque e autoincremental e cada maquina numera
+  do seu jeito - o meu evento 7 e o do robo sao coisas diferentes. Sem isso,
+  cada importacao dobraria a linha do tempo;
+- **`radar sincronizar` faz pull, importar, exportar, commit e push, nesta
+  ordem**, e a ordem e o conteudo da decisao: importar ANTES de exportar e o
+  que traz o `avisado_em` do robo para o meu banco antes de eu escrever o JSON
+  de volta. Na ordem inversa eu apagaria as marcas dele, e ele mandaria tudo
+  de novo no dia seguinte. Ele nao resolve conflito de rebase e nao encosta em
+  arquivo que nao seja os dois JSON;
+- a CLI passou a chamar `git` por subprocess, o que ate aqui so acontecia no
+  workflow em bash. E o preco de ter um comando so, e fica contido numa funcao
+  de quatro linhas.
