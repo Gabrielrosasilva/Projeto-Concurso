@@ -20,7 +20,7 @@ from sqlalchemy import select
 
 from radar import config
 from radar.db import criar_tabelas, sessao
-from radar.models import Concurso, DataHoraUTC
+from radar.models import Concurso, DataHoraUTC, Evento
 
 # Colunas exportadas, em ordem fixa. Ordem fixa e chave ordenada deixam o
 # arquivo estavel: mudou o diff, mudou o dado de verdade.
@@ -39,18 +39,40 @@ COLUNAS_DE_DATA = frozenset(
 )
 
 
+# O mesmo para a linha do tempo. Ela vive em arquivo proprio porque e outra
+# coisa: `concursos.json` e o AGORA de cada concurso, e este aqui e o caminho
+# que ele percorreu. Juntar os dois num arquivo so faria cada evento novo
+# reescrever a linha do concurso inteira no diff.
+COLUNAS_DE_EVENTO = [c.name for c in Evento.__table__.columns if c.name != "id"]
+
+DATAS_DE_EVENTO = frozenset(
+    c.name for c in Evento.__table__.columns if isinstance(c.type, DataHoraUTC)
+)
+
+# Como se reconhece que dois eventos sao o mesmo. O `id` nao serve: ele e
+# autoincremental e cada maquina numera do seu jeito, entao o meu evento 7 e o
+# do robo sao coisas diferentes. Estes quatro campos juntos sao o que descreve
+# o acontecimento - e eventos gerados pela mesma coleta em maquinas diferentes
+# coincidem nos quatro.
+CHAVE_DO_EVENTO = ("concurso_url", "tipo", "data", "descricao")
+
+
 def caminho_padrao() -> Path:
     return config.diretorio_dados() / "concursos.json"
+
+
+def caminho_dos_eventos() -> Path:
+    return config.diretorio_dados() / "eventos.json"
 
 
 def _serializar(valor: Any) -> Any:
     return valor.isoformat() if isinstance(valor, datetime) else valor
 
 
-def _desserializar(coluna: str, valor: Any) -> Any:
+def _desserializar(coluna: str, valor: Any, datas=None) -> Any:
     if valor is None:
         return None
-    if coluna in COLUNAS_DE_DATA:
+    if coluna in (COLUNAS_DE_DATA if datas is None else datas):
         return datetime.fromisoformat(valor)
     return valor
 
@@ -127,3 +149,87 @@ def importar(caminho: Path | None = None) -> int:
                 setattr(concurso, coluna, valor)
 
     return len(linhas)
+
+
+def exportar_eventos(caminho: Path | None = None) -> int:
+    """Escreve a linha do tempo inteira no JSON. Devolve quantos gravou.
+
+    Existe porque o robo do GitHub reconstroi o banco a partir do JSON a cada
+    execucao: sem este arquivo ele nasce sem linha do tempo nenhuma, e nao tem
+    como saber o que ja mudou - nem o que ja avisou.
+    """
+    criar_tabelas()
+    destino = caminho or caminho_dos_eventos()
+
+    with sessao() as s:
+        # A ordem e a da leitura: por concurso, e dentro dele do mais antigo
+        # para o mais novo. Ordem fixa faz o diff do commit diario mostrar so
+        # as linhas que entraram.
+        eventos = list(s.scalars(
+            select(Evento).order_by(Evento.concurso_url, Evento.data, Evento.id)
+        ))
+        linhas = [
+            {coluna: _serializar(getattr(e, coluna)) for coluna in COLUNAS_DE_EVENTO}
+            for e in eventos
+        ]
+
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(
+        json.dumps(linhas, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return len(linhas)
+
+
+def _chave(linha: dict) -> tuple:
+    """A identidade do evento, para saber se ele ja esta no banco."""
+    return tuple(
+        _desserializar(coluna, linha.get(coluna), DATAS_DE_EVENTO)
+        for coluna in CHAVE_DO_EVENTO
+    )
+
+
+def importar_eventos(caminho: Path | None = None) -> int:
+    """Traz a linha do tempo do JSON. Devolve quantos eventos ENTRARAM.
+
+    Evento que ja existe nao entra de novo - a comparacao e pelos quatro
+    campos de `CHAVE_DO_EVENTO`, e nao pelo id, que cada maquina numera do
+    seu jeito. Rodar duas vezes da no mesmo resultado.
+
+    Do que ja existe, uma coisa e aproveitada: o `avisado_em`. Se o outro lado
+    ja mandou aquele evento no Telegram e eu ainda nao, a marca dele vale -
+    e assim que a fila de avisos passa a ser uma so em vez de duas.
+    """
+    origem = caminho or caminho_dos_eventos()
+    if not origem.exists():
+        return 0
+
+    criar_tabelas()
+    linhas = json.loads(origem.read_text(encoding="utf-8"))
+    novos = 0
+
+    with sessao() as s:
+        existentes = {
+            tuple(getattr(e, coluna) for coluna in CHAVE_DO_EVENTO): e
+            for e in s.scalars(select(Evento))
+        }
+
+        for linha in linhas:
+            ja_tenho = existentes.get(_chave(linha))
+            if ja_tenho is not None:
+                avisado = _desserializar(
+                    "avisado_em", linha.get("avisado_em"), DATAS_DE_EVENTO
+                )
+                if avisado and ja_tenho.avisado_em is None:
+                    ja_tenho.avisado_em = avisado
+                continue
+
+            evento = Evento(**{
+                coluna: _desserializar(coluna, linha.get(coluna), DATAS_DE_EVENTO)
+                for coluna in COLUNAS_DE_EVENTO
+            })
+            s.add(evento)
+            existentes[_chave(linha)] = evento
+            novos += 1
+
+    return novos

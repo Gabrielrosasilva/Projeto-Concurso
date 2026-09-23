@@ -2,7 +2,7 @@
 import json
 from datetime import datetime, timezone
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from radar import acervo
 from radar.db import sessao
@@ -207,3 +207,122 @@ def test_o_JSON_que_TEM_favorito_manda(banco_temporario, tmp_path):
         concurso = s.scalar(select(Concurso))
     assert concurso.interesse == "favorito"
     assert concurso.notas == "anotei la"
+
+
+# --- a linha do tempo tambem viaja (etapa 11) -------------------------------
+#
+# Sem isto o robo do GitHub reconstroi o banco todo dia sem historico nenhum:
+# ele nao tem como saber o que ja mudou, nem o que ja avisou.
+
+from radar.models import Evento
+
+
+def _evento(**mudancas) -> Evento:
+    base = dict(
+        concurso_url="https://exemplo.test/palhoca",
+        tipo="edital_publicado",
+        descricao="Situacao: prevista -> edital_publicado",
+        data=datetime(2026, 9, 20, 12, 0, tzinfo=timezone.utc),
+        link="https://exemplo.test/palhoca",
+    )
+    base.update(mudancas)
+    return Evento(**base)
+
+
+def test_exporta_e_importa_a_linha_do_tempo(banco_temporario, tmp_path):
+    with sessao() as s:
+        s.add(_evento())
+        s.add(_evento(tipo="inscricoes_abertas", descricao="Prazo: ate 30/10"))
+
+    arquivo = tmp_path / "eventos.json"
+    assert acervo.exportar_eventos(arquivo) == 2
+
+    with sessao() as s:
+        for evento in s.scalars(select(Evento)):
+            s.delete(evento)
+
+    assert acervo.importar_eventos(arquivo) == 2
+    with sessao() as s:
+        assert {e.tipo for e in s.scalars(select(Evento))} == {
+            "edital_publicado", "inscricoes_abertas"
+        }
+
+
+def test_importar_duas_vezes_nao_duplica_evento(banco_temporario, tmp_path):
+    """O robo importa a cada execucao: sem esta trava, a linha do tempo
+    dobraria de tamanho todo dia."""
+    with sessao() as s:
+        s.add(_evento())
+
+    arquivo = tmp_path / "eventos.json"
+    acervo.exportar_eventos(arquivo)
+
+    assert acervo.importar_eventos(arquivo) == 0   # ja esta no banco
+    assert acervo.importar_eventos(arquivo) == 0
+
+    with sessao() as s:
+        assert s.scalar(select(func.count()).select_from(Evento)) == 1
+
+
+def test_o_id_nao_e_a_identidade_do_evento(banco_temporario, tmp_path):
+    """Cada maquina numera do seu jeito: o meu evento 7 e o do robo sao coisas
+    diferentes. Quem diz que sao o mesmo sao os quatro campos da chave."""
+    arquivo = tmp_path / "eventos.json"
+    arquivo.write_text(json.dumps([{
+        "concurso_url": "https://exemplo.test/palhoca",
+        "tipo": "edital_publicado",
+        "descricao": "Situacao: prevista -> edital_publicado",
+        "data": "2026-09-20T12:00:00+00:00",
+        "link": None,
+        "avisado_em": None,
+    }]), encoding="utf-8")
+
+    with sessao() as s:
+        s.add(_evento(link="https://outro-link.test"))   # mesmo fato, outro id
+
+    assert acervo.importar_eventos(arquivo) == 0
+
+
+def test_o_aviso_ja_dado_do_outro_lado_vale_aqui(banco_temporario, tmp_path):
+    """E isto que faz a fila de avisos ser uma so: se o robo ja mandou aquele
+    evento no Telegram, eu nao mando de novo."""
+    with sessao() as s:
+        s.add(_evento())
+
+    arquivo = tmp_path / "eventos.json"
+    acervo.exportar_eventos(arquivo)
+    linhas = json.loads(arquivo.read_text(encoding="utf-8"))
+    linhas[0]["avisado_em"] = "2026-09-21T09:00:00+00:00"
+    arquivo.write_text(json.dumps(linhas), encoding="utf-8")
+
+    acervo.importar_eventos(arquivo)
+
+    with sessao() as s:
+        assert s.scalar(select(Evento)).avisado_em is not None
+
+
+def test_o_meu_aviso_nao_e_apagado_pelo_JSON(banco_temporario, tmp_path):
+    """O contrario tambem vale: eu ja avisei, o robo nao sabe disso ainda, e o
+    import dele nao pode reabrir a fila."""
+    with sessao() as s:
+        s.add(_evento(avisado_em=datetime(2026, 9, 21, 9, 0, tzinfo=timezone.utc)))
+
+    arquivo = tmp_path / "eventos.json"
+    arquivo.write_text(json.dumps([{
+        "concurso_url": "https://exemplo.test/palhoca",
+        "tipo": "edital_publicado",
+        "descricao": "Situacao: prevista -> edital_publicado",
+        "data": "2026-09-20T12:00:00+00:00",
+        "link": None,
+        "avisado_em": None,
+    }]), encoding="utf-8")
+
+    acervo.importar_eventos(arquivo)
+
+    with sessao() as s:
+        assert s.scalar(select(Evento)).avisado_em is not None
+
+
+def test_sem_arquivo_de_eventos_nao_quebra(banco_temporario, tmp_path):
+    """Quem atualiza de uma versao sem eventos.json roda o importar normal."""
+    assert acervo.importar_eventos(tmp_path / "nao-existe.json") == 0

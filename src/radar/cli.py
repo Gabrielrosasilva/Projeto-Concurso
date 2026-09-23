@@ -894,21 +894,46 @@ def eventos(
 
 @app.command()
 def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
-    """Grava o banco inteiro em data/concursos.json (o que vai para o git)."""
+    """Grava o banco em data/concursos.json e data/eventos.json.
+
+    Os dois arquivos sao o que vai para o git. O segundo e a linha do tempo:
+    sem ele, o robo do GitHub reconstroi o banco todo dia sem historico
+    nenhum, e nao tem como avisar mudanca de favorito.
+    """
     destino = Path(caminho) if caminho else acervo.caminho_padrao()
     total = acervo.exportar(destino)
     console.print(f"[green]{total}[/] concurso(s) exportado(s) para {destino}")
 
+    # O caminho dos eventos acompanha o do concurso quando alguem escolhe
+    # onde salvar: os dois sao o mesmo par, e separa-los so confundiria.
+    destino_eventos = (
+        destino.with_name("eventos.json") if caminho else acervo.caminho_dos_eventos()
+    )
+    eventos = acervo.exportar_eventos(destino_eventos)
+    console.print(f"[green]{eventos}[/] evento(s) exportado(s) para {destino_eventos}")
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
-    """Reconstroi o banco a partir do JSON. Seguro rodar quantas vezes quiser."""
+    """Reconstroi o banco a partir do JSON. Seguro rodar quantas vezes quiser.
+
+    Le os dois arquivos: os concursos e a linha do tempo. O que e meu -
+    favorito, anotacao, salario digitado - nunca e apagado por valor vazio do
+    JSON, e evento que eu ja tenho nao entra duas vezes.
+    """
     origem = Path(caminho) if caminho else acervo.caminho_padrao()
     total = acervo.importar(origem)
     if total == 0:
         console.print(f"[yellow]Nada a importar[/] (nao achei {origem})")
     else:
         console.print(f"[green]{total}[/] concurso(s) importado(s) de {origem}")
+
+    origem_eventos = (
+        origem.with_name("eventos.json") if caminho else acervo.caminho_dos_eventos()
+    )
+    novos = acervo.importar_eventos(origem_eventos)
+    if origem_eventos.exists():
+        console.print(f"[green]{novos}[/] evento(s) novo(s) de {origem_eventos}")
 
 
 @app.command()
