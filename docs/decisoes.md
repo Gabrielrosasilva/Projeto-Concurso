@@ -581,3 +581,10 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   "edital_publicado" em todo item, a coleta gravava isso por cima de um
   concurso encerrado e o `atualizar_situacoes` da mesma rodada desfazia - dois
   eventos por coleta, todo dia, e desde a etapa 8 duas mensagens no Telegram.
+- **sinonimo de cargo vale so para o alvo PRINCIPAL.** Nos blocos secundarios
+  os `termos` nomeiam a carreira, e nao um cargo: a Policia Civil lista
+  delegado, escrivao, investigador e agente, que sao quatro provas
+  diferentes. Chamar a prova de Delegado de "o mesmo cargo com outro nome" que
+  a de Agente seria a equivalencia falsa que a prova substituta existe para
+  nao fingir. E a lista `exclui` vale aqui como vale no resto: "Policia Penal
+  Federal" contem "policia penal" e e outro concurso.

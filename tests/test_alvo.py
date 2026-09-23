@@ -282,9 +282,22 @@ def test_o_nome_como_o_hotsite_escreve_tambem_acha():
     assert alvo.sinonimos_do_cargo("Agente Penitenciario - Feminino (AP)")
 
 
-def test_secundario_tambem_tem_sinonimo():
-    """Metade dos editais escreve "Guarda Civil Municipal"."""
-    assert "guarda civil municipal" in alvo.sinonimos_do_cargo("Guarda Municipal")
+def test_o_alvo_secundario_nao_tem_sinonimo():
+    """Nos blocos secundarios os termos nomeiam a CARREIRA, nao um cargo: a
+    Policia Civil lista delegado, escrivao, investigador e agente, que sao
+    quatro cargos com quatro provas diferentes. Trata-los como o mesmo cargo
+    seria a equivalencia falsa que a prova substituta evita."""
+    assert alvo.sinonimos_do_cargo("Agente de Policia") == []
+    assert alvo.sinonimos_do_cargo("Guarda Municipal") == []
+
+
+def test_o_que_o_yaml_exclui_nao_ganha_sinonimo():
+    """"Policia Penal Federal" contem "policia penal" e e outro concurso -
+    tem bloco proprio nos secundarios. Sem esta trava, procurar prova dele
+    devolvia os cadernos de Agente Penitenciario de SC como se fossem o
+    mesmo cargo."""
+    assert alvo.sinonimos_do_cargo("Policia Penal Federal") == []
+    assert alvo.sinonimos_do_cargo("Policial Penal Federal") == []
 
 
 def test_cargo_fora_do_yaml_nao_tem_sinonimo():

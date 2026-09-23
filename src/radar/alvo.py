@@ -161,27 +161,37 @@ def sinonimos_do_cargo(cargo: str) -> list[str]:
     que sao a mesma coisa sou eu, e ja estava escrito no YAML: e a lista de
     `termos`, que existe para reconhecer o cargo no texto do feed.
 
-    Vale para o alvo principal e para os secundarios, pela mesma razao: a
-    Guarda Municipal tambem e "Guarda Civil Municipal" em metade dos editais.
-    Cargo que nao esta no YAML devolve lista vazia, e ai a busca fica como
-    sempre foi - por palavra em comum.
+    Vale SO para o alvo principal, e isso e uma limitacao consciente. Nos
+    blocos secundarios os `termos` nomeiam a CARREIRA, e nao um cargo: a
+    Policia Civil lista delegado, escrivao, investigador e agente, que sao
+    quatro cargos diferentes com quatro provas diferentes. Dizer que a prova
+    de Delegado e "o mesmo cargo com outro nome" que a de Agente seria
+    exatamente a equivalencia falsa que a prova substituta existe para nao
+    fingir. No bloco principal eu escrevi os tres nomes do MEU cargo, e por
+    isso ali eles sao sinonimos de verdade.
+
+    A lista `exclui` vale aqui como vale no resto do arquivo: "Policia Penal
+    Federal" contem "policia penal" e e outro concurso, com bloco proprio nos
+    secundarios.
+
+    Cargo fora disso devolve lista vazia, e a busca fica como sempre foi - por
+    palavra em comum.
     """
     texto = normalizar(cargo or "")
     if not texto:
         return []
 
-    dados = _carregar()
-    blocos = [dados.get("principal") or {}] + list(dados.get("secundarios") or [])
-    for bloco in blocos:
-        termos = [str(t) for t in bloco.get("termos") or []]
-        # Nos dois sentidos: eu posso digitar o nome curto ("policia penal",
-        # que e um termo inteiro) ou o nome como o hotsite escreve ("Agente
-        # Penitenciario (masculino)", que CONTEM o termo).
-        if any(
-            _padrao(termo).search(texto) or normalizar(termo) in texto
-            for termo in termos
-        ):
-            return termos
+    bloco = principal()
+    if _primeiro(bloco.get("exclui"), texto):
+        return []
+
+    termos = [str(t) for t in bloco.get("termos") or []]
+    # Por palavra inteira, como todo o resto deste arquivo. Cobre os dois
+    # jeitos de escrever: o nome curto que eu digito ("policial penal") e o
+    # rotulo como o hotsite publica ("Agente Penitenciario - Feminino (AP)"),
+    # que CONTEM o termo.
+    if any(_padrao(termo).search(texto) for termo in termos):
+        return termos
     return []
 
 
