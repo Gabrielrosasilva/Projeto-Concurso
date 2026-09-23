@@ -24,7 +24,7 @@ from radar import alvo as alvos
 from radar import edital_materias, provas
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
-from radar.models import Concurso, QuestaoDeProva, agora
+from radar.models import Concurso, QuestaoDeProva
 from radar.questoes import extrair_texto
 from radar.regioes import normalizar
 

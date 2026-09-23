@@ -7,7 +7,6 @@ igual para a CLI, para a web e para os testes.
 """
 import logging
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from sqlalchemy import func, select
 
@@ -115,19 +114,11 @@ from radar.servico.coleta import (      # noqa: F401 - a fachada
     coletar_tudo,
     reclassificar,
 )
-from radar.servico.comum import (
-    ano_do_concurso as _ano_do_concurso,
-    cargo_parecido as _cargo_parecido,
-    sem_acento as _sem_acento,
-)
-from radar.models import (
-    RELEVANCIAS,
-    Concurso,
-    QuestaoDeProva,
-    agora,
-)
+from radar.servico.comum import sem_acento as _sem_acento
+from radar.models import RELEVANCIAS, Concurso, agora
 
 log = logging.getLogger(__name__)
+
 
 def contar_por_relevancia(incluir_noticias: bool = False) -> dict[str, int]:
     """Quantos concursos em cada anel. Alimenta os atalhos da pagina web."""
@@ -868,16 +859,26 @@ class ResultadoRetificacao:
     falhas: int = 0
 
     def __str__(self) -> str:
-        if not self.conferidos:
+        # Falha de download tem que aparecer na frase, e com estas palavras.
+        # Antes, edital nenhum baixado dava "Nenhum edital em pe para
+        # conferir" - que e outra coisa, e a unica que eu nao precisaria
+        # fazer nada a respeito. Nao conferir porque o site nao respondeu e
+        # justamente o caso de rodar de novo mais tarde.
+        if not self.conferidos and not self.falhas:
             return "Nenhum edital em pe para conferir."
-        texto = f"{self.conferidos} edital(is) conferido(s)"
-        if self.mudaram:
-            texto += f", [bold red]{len(self.mudaram)} mudou(ram)[/]"
-        else:
-            texto += ", nenhum mudou"
+
+        partes = []
+        if self.conferidos:
+            partes.append(f"{self.conferidos} edital(is) conferido(s)")
+            partes.append(
+                f"[bold red]{len(self.mudaram)} mudou(ram)[/]"
+                if self.mudaram else "nenhum mudou"
+            )
         if self.falhas:
-            texto += f", {self.falhas} fora do ar"
-        return texto
+            partes.append(
+                f"[yellow]nao consegui baixar {self.falhas} edital(is)[/]"
+            )
+        return ", ".join(partes)
 
 
 def _editais_em_pe() -> list[tuple[dict, Concurso]]:

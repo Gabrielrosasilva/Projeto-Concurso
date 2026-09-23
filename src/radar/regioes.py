@@ -5,7 +5,6 @@ lido uma vez e guardado em memoria.
 """
 import unicodedata
 from functools import cache
-from pathlib import Path
 
 import yaml
 

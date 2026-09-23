@@ -9,6 +9,7 @@ from datetime import date, datetime, timezone
 import pytest
 
 from radar import servico
+from radar.servico import comum
 from radar.db import sessao
 from radar.models import Concurso
 
@@ -38,13 +39,16 @@ def _por_municipio(previsoes):
 
 
 # --- de onde sai o ano ------------------------------------------------------
+#
+# A funcao e de `servico.comum`: o acervo e a previsao usam a mesma, e ela
+# deixou de ter apelido na fachada na faxina da etapa 11.
 
 def test_ano_vem_do_titulo_e_nao_da_data_do_post():
     """Na migracao do site da FEPESE, 345 concursos antigos ficaram todos com
     data de dezembro de 2020. O titulo dela diz o ano de verdade."""
     c = _concurso("2014 - Prefeitura Municipal de Tijucas", "Tijucas", ano=2020)
 
-    assert servico._ano_do_concurso(c) == 2014
+    assert comum.ano_do_concurso(c) == 2014
 
 
 def test_ano_do_numero_do_edital():
@@ -52,20 +56,20 @@ def test_ano_do_numero_do_edital():
     c = _concurso("Prefeitura Municipal de Fraiburgo - Edital 003/2018",
                   "Fraiburgo", ano=2020)
 
-    assert servico._ano_do_concurso(c) == 2018
+    assert comum.ano_do_concurso(c) == 2018
 
 
 def test_sem_ano_no_titulo_vale_a_publicacao():
     c = _concurso("Concurso Publico CASAN", "Florianopolis", ano=2023)
 
-    assert servico._ano_do_concurso(c) == 2023
+    assert comum.ano_do_concurso(c) == 2023
 
 
 def test_sem_ano_nenhum_fica_de_fora():
     c = _concurso("Concurso Publico CASAN", "Florianopolis")
     c.publicado_em = None
 
-    assert servico._ano_do_concurso(c) is None
+    assert comum.ano_do_concurso(c) is None
 
 
 # --- a previsao -------------------------------------------------------------

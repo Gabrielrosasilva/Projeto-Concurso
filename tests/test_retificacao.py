@@ -200,3 +200,37 @@ def test_a_mensagem_diz_o_que_mudou_e_leva_o_link():
     assert "retificado" in mensagem.lower()
     assert "Palhoca" in mensagem
     assert "https://x.test/edital.pdf" in mensagem
+
+
+# --- o resumo tem que contar a falha (etapa 11) -----------------------------
+
+def test_o_resumo_diz_quando_nao_consegui_baixar():
+    """Antes, edital nenhum conferido dava "Nenhum edital em pe para
+    conferir" - que e outra coisa, e a unica que eu nao precisaria fazer nada
+    a respeito. Site fora do ar e justamente o caso de rodar de novo."""
+    resultado = servico.ResultadoRetificacao(conferidos=0, falhas=3)
+
+    assert "nao consegui baixar 3" in str(resultado)
+    assert "Nenhum edital em pe" not in str(resultado)
+
+
+def test_o_resumo_soma_o_que_deu_certo_e_o_que_falhou():
+    resultado = servico.ResultadoRetificacao(conferidos=5, falhas=2)
+
+    texto = str(resultado)
+    assert "5 edital(is) conferido(s)" in texto
+    assert "nenhum mudou" in texto
+    assert "nao consegui baixar 2" in texto
+
+
+def test_sem_edital_em_pe_continua_dizendo_isso():
+    """Sem nada para conferir nao ha o que consertar - e outra frase."""
+    assert str(servico.ResultadoRetificacao()) == "Nenhum edital em pe para conferir."
+
+
+def test_edital_fora_do_ar_aparece_no_resumo(banco_temporario, tmp_path,
+                                             monkeypatch, acervo):
+    """De ponta a ponta: o download falha e o resumo conta."""
+    _servir(monkeypatch, b"<html>erro 500</html>")
+
+    assert "nao consegui baixar 1" in str(servico.conferir_retificacoes())

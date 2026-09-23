@@ -86,54 +86,39 @@ Concurso irrelevante **nao e apagado**: fica marcado, para eu corrigir a regra.
 
 ## Ciclo de vida do concurso
 
-O radar acompanha o concurso desde antes do edital. Campo `situacao`:
+O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
+`autorizado` → `banca_definida` → `edital_publicado` → `inscricoes_abertas` →
+`encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
+sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
+
+## Estado atual: so a 7 esta parcial (detalhe no [historico](docs/historico.md))
 
 ```
-prevista → autorizado → banca_definida → edital_publicado
-→ inscricoes_abertas → encerrado
-```
-
-`banca_definida` e o sinal mais valioso: a contratacao da banca sai **2 a 4
-meses antes do edital**, e da tempo de estudar o padrao dela.
-
-## Estado atual: 1 a 6, 8, 9 e 10 PRONTAS; 7 parcial
-
-```
-1 a 3  PRONTAS: tres fontes coletando (Concursos no Brasil, FEPESE, IESES),
-       classificador de anel, avisos no Telegram, leitura da pagina do post
-       e do edital (elegibilidade e retificacao), calendario .ics, e acervo
-       de provas com manifesto versionado e prova substituta
-4      PRONTA: 5.928 questoes de duas bancas, com materia, gabarito e lacuna
-       marcada. `radar assuntos` classifica o assunto fino dentro de
-       Conhecimentos Especificos pela API da Claude - custa US$ 0,26 uma
-       vez, e simula por padrao
-5      PRONTA: modo simulado na web, com acerto por MATERIA
-6      PRONTA: previsao de abertura por municipio, na web e na CLI
+1 a 6  PRONTAS: tres fontes coletando, classificador de anel, avisos no
+       Telegram, leitura da pagina e do edital, calendario .ics, acervo de
+       provas, 5.928 questoes, simulado com acerto por materia e previsao de
+       abertura. So `radar assuntos` custa: usa a API, e simula por padrao
 7      PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
        parte que so a IA faz: pegadinha especifica e macete de memorizacao
-8      PRONTA: tabela `eventos`, navegacao redesenhada, a home "Meu foco"
-       (situacao do alvo, sinais, materias do edital contra o que caiu,
-       treino de 20 questoes) e a aba Acompanhando no lugar do mural - um
-       bloco por favorito, com linha do tempo, proxima acao, contagem de
-       dias, e aviso no Telegram das cinco mudancas que importam
-9      PRONTA: estudar pelo alvo. O treino sorteia primeiro as provas do
-       cargo e depois a mesma banca nas mesmas materias; os `termos` do
-       alvo.yml valem como sinonimos do cargo; e a tabela de materias mostra
-       o acerto ao lado do peso, apontando a pior das de maior peso
+8      PRONTA: tabela `eventos`, a aba Acompanhando (um bloco por favorito,
+       com linha do tempo, proxima acao e aviso das cinco mudancas que
+       importam), navegacao nova, e "Meu foco" como home
+9      PRONTA: estudar pelo alvo - o treino sorteia as provas do cargo
+       primeiro, e a tabela de materias mostra o acerto ao lado do peso
 10     PRONTA: `servico.py` virou pacote, um arquivo por assunto
+11     EM CURSO: consertos da auditoria de 23/09
 ```
 
-A arvore de `src/radar/`, arquivo por arquivo, esta no
+A arvore de `src/radar/` esta no
 [README](README.md#como-o-projeto-esta-organizado). Banco: SQLite em
-`data/radar.db`, Postgres opcional via `RADAR_DATABASE_URL`. Testes em
-`tests/`, todos com dado fixo, nenhum vai a internet.
+`data/radar.db` (Postgres opcional via `RADAR_DATABASE_URL`); testes em
+`tests/`, todos com dado fixo.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
-herda de `Coletor`, devolve `list[ItemColetado]` e esta registrada em
-`servico/coleta.py`, em `COLETORES`. Nada fora de `collectors/` sabe de onde
-vem o dado. O `servico` e um pacote com um arquivo por assunto (coleta,
-avisos, provas, simulado, previsao) e o `__init__` reexporta todos: escreva
-sempre `servico.funcao(...)`.
+herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
+(`servico/coleta.py`) - nada fora de `collectors/` sabe de onde vem o dado. O
+`servico` e um pacote, um arquivo por assunto, e o `__init__` reexporta todos:
+escreva sempre `servico.funcao(...)`.
 
 ## Fontes de dados
 

@@ -26,7 +26,7 @@ import json
 import logging
 import re
 import unicodedata
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from urllib.parse import urljoin
 
