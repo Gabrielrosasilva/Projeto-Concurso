@@ -283,10 +283,26 @@
       <form class="treinar" method="post" action="/foco/treinar">
         <button type="submit">Treinar {{ questoes_do_treino }} questoes</button>
         <span class="conta">
-          sorteadas entre as {{ p.questoes_para_treinar }} questoes das provas
-          do cargo, sem repetir enunciado
+          {% if fontes_do_treino.proprias_novas %}
+            das provas do cargo: {{ fontes_do_treino.proprias_novas }} de
+            {{ fontes_do_treino.proprias }} que eu ainda nao respondi
+          {% elif fontes_do_treino.da_banca_novas %}
+            as provas do cargo acabaram &mdash; agora vem das
+            {{ fontes_do_treino.da_banca_novas }} da mesma banca nas mesmas
+            materias
+          {% else %}
+            ja respondi todas: a rodada vai repetir questao
+          {% endif %}
         </span>
       </form>
+      <p class="legenda">
+        A ordem e sempre esta: primeiro as questoes das provas do proprio
+        cargo{% if p.anos_das_provas %} ({{ p.anos_das_provas|join(' e ') }}){% endif %},
+        que sao a prova de verdade; quando elas acabam, as
+        {{ fontes_do_treino.da_banca }} da mesma banca nas mesmas materias, em
+        outros concursos. Materia que nao caiu na minha prova nao entra &mdash;
+        Conhecimentos Especificos de outro cargo nao me serve de nada.
+      </p>
     {% else %}
       <p class="vazio">
         Nenhuma questao do cargo no acervo ainda. Rode

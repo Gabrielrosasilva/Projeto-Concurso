@@ -245,17 +245,10 @@ def test_prova_de_outro_cargo_nao_entra_na_conta(banco_temporario):
     assert painel.anos_das_provas == [2019]
 
 
-def test_o_cargo_de_treino_e_o_que_acha_prova_no_acervo(banco_temporario):
-    """"policia penal" nao casa caderno nenhum: as duas provas que existem sao
-    anteriores a mudanca de nome do cargo."""
-    with sessao() as s:
-        s.add(_questao(1, "Agente Penitenciário", 2019, "Direito Penal"))
-
-    assert foco.cargo_para_treinar() == "agente penitenciario"
-
-
-def test_sem_prova_no_acervo_nao_ha_cargo_para_treinar(banco_temporario):
-    assert foco.cargo_para_treinar() is None
+# O treino deixou de escolher UM termo de cargo para filtrar o sorteio: quem
+# monta a rodada agora e `servico.criar_simulado_do_alvo`, que trata os termos
+# do YAML como nomes do mesmo cargo. Os testes disso estao em
+# tests/test_treino_do_alvo.py.
 
 
 # --- a tela -----------------------------------------------------------------

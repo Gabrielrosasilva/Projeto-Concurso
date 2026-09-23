@@ -120,7 +120,30 @@
 
   <header>
     <h1>Simulado</h1>
-    <p class="subtitulo">Questoes reais, tiradas das provas do acervo</p>
+    {# A rodada montada pelo botao "Treinar" da home diz de onde ela saiu: a
+       mistura muda o que o resultado significa. Acertar 70% nas questoes da
+       minha prova nao e a mesma coisa que acertar 70% em prova de outro
+       cargo da mesma banca. #}
+    {% if simulado and simulado.filtros.get('alvo') %}
+      {% set f = simulado.filtros %}
+      {% set partes = [] %}
+      {% if f.get('proprias') %}
+        {% set _ = partes.append(f.get('proprias') ~ ' das provas do cargo') %}
+      {% endif %}
+      {% if f.get('da_banca') %}
+        {% set _ = partes.append(
+             f.get('da_banca') ~ ' da mesma banca, mesmas materias') %}
+      {% endif %}
+      {% if f.get('repetidas') %}
+        {% set _ = partes.append(
+             f.get('repetidas') ~ ' que eu ja tinha respondido') %}
+      {% endif %}
+      <p class="subtitulo">
+        Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
+      </p>
+    {% else %}
+      <p class="subtitulo">Questoes reais, tiradas das provas do acervo</p>
+    {% endif %}
   </header>
 
   {# ------------------------------------------------------ comecar ------ #}

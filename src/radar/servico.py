@@ -1642,6 +1642,182 @@ def criar_simulado(
         return simulado
 
 
+# --- o simulado do alvo (etapa 9) -------------------------------------------
+#
+# A diferenca para o simulado comum e de ONDE vem a questao, e ela importa.
+# O simulado comum responde "quero treinar Portugues"; este responde "quero
+# treinar para a MINHA prova", e por isso ele tem ordem de preferencia:
+#
+#   1. as questoes das provas do proprio cargo - 2013 e 2019, as unicas que
+#      existem. Elas sao a prova de verdade, e nenhuma outra chega perto;
+#   2. quando elas acabam, as da mesma banca NAS MESMAS MATERIAS, de outros
+#      concursos. E a segunda melhor coisa: a FEPESE cobra Portugues do mesmo
+#      jeito em qualquer caderno que faca;
+#   3. so entao repete o que eu ja respondi, avisando que esta repetindo.
+#
+# Fora das materias do meu edital nao entra NADA: "Conhecimentos Especificos"
+# da prova de Merendeira e da mesma banca e nao me serve de nada.
+
+
+@dataclass
+class OrigemDasQuestoes:
+    """De onde saiu cada questao da rodada. Vai para `Simulado.filtros`."""
+
+    proprias: int = 0
+    da_banca: int = 0
+    repetidas: int = 0
+
+    def como_dicionario(self) -> dict:
+        return {
+            "proprias": self.proprias,
+            "da_banca": self.da_banca,
+            "repetidas": self.repetidas,
+        }
+
+
+def _impressoes_ja_respondidas(s) -> set[str]:
+    """O enunciado que eu ja respondi alguma vez, em qualquer simulado.
+
+    Por IMPRESSAO e nao por id: a mesma pergunta aparece em varios cadernos, e
+    reve-la com outro numero nao seria questao nova - seria a mesma questao.
+    """
+    linhas = s.execute(
+        select(QuestaoDeProva.impressao)
+        .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
+        .where(RespostaDeSimulado.escolhida.is_not(None))
+        .distinct()
+    ).all()
+    return {impressao for (impressao,) in linhas if impressao}
+
+
+def _questoes_para_o_alvo(s) -> tuple[list, list]:
+    """(questoes das provas do cargo, questoes da banca nas mesmas materias).
+
+    A segunda lista sai das materias da PRIMEIRA: o que define o que me serve
+    e o que caiu na minha prova, e nao o catalogo de materias da banca.
+    """
+    candidatas = list(s.scalars(
+        select(QuestaoDeProva).where(QuestaoDeProva.resposta.is_not(None))
+    ))
+
+    proprias = [
+        q for q in candidatas if alvos.nomeia_cargo_do_principal(q.cargo or "")
+    ]
+    if not proprias:
+        return [], []
+
+    materias = {regioes.normalizar(q.materia) for q in proprias if q.materia}
+    bancas = [regioes.normalizar(b) for b in alvos.bancas_do_principal()]
+    proprias_ids = {q.id for q in proprias}
+
+    da_banca = [
+        q for q in candidatas
+        if q.id not in proprias_ids
+        and q.materia and regioes.normalizar(q.materia) in materias
+        and any(banca in regioes.normalizar(q.banca or "") for banca in bancas)
+    ]
+    return proprias, da_banca
+
+
+def _sortear_para_o_alvo(quantidade: int) -> tuple[list[int], OrigemDasQuestoes]:
+    """Os ids da rodada, na ordem de preferencia, e de onde cada um veio."""
+    import random
+
+    with sessao() as s:
+        proprias, da_banca = _questoes_para_o_alvo(s)
+        respondidas = _impressoes_ja_respondidas(s)
+
+        # Uma questao por enunciado, aqui pelo mesmo motivo de sempre: a banca
+        # reaproveita muito, e um simulado com a mesma pergunta duas vezes e
+        # um simulado menor do que parece.
+        vistas: set[str] = set()
+        origem = OrigemDasQuestoes()
+        escolhidos: list[int] = []
+
+        def separar(questoes: list) -> tuple[list, list]:
+            """(as que eu nunca respondi, as que eu ja respondi)."""
+            novas = [q for q in questoes if q.impressao not in respondidas]
+            velhas = [q for q in questoes if q.impressao in respondidas]
+            random.shuffle(novas)
+            random.shuffle(velhas)
+            return novas, velhas
+
+        proprias_novas, proprias_velhas = separar(proprias)
+        banca_novas, banca_velhas = separar(da_banca)
+
+        # A ordem desta lista E a regra da etapa 9, escrita uma vez so.
+        for questoes, campo in (
+            (proprias_novas, "proprias"),
+            (banca_novas, "da_banca"),
+            (proprias_velhas, "repetidas"),
+            (banca_velhas, "repetidas"),
+        ):
+            for questao in questoes:
+                if len(escolhidos) >= quantidade:
+                    break
+                if questao.impressao in vistas:
+                    continue
+                vistas.add(questao.impressao)
+                escolhidos.append(questao.id)
+                setattr(origem, campo, getattr(origem, campo) + 1)
+
+    return escolhidos, origem
+
+
+def criar_simulado_do_alvo(quantidade: int = QUANTIDADE_PADRAO) -> Simulado | None:
+    """Uma rodada para a minha prova. None quando nao ha questao do cargo.
+
+    None e nao "sorteia qualquer coisa": sem prova do cargo no acervo, isto
+    aqui nao teria como ser um simulado DO ALVO, e chamar de alvo o que nao e
+    seria a mesma mentira que a tela de foco evita.
+    """
+    criar_tabelas()
+
+    ids, origem = _sortear_para_o_alvo(quantidade)
+    if not ids:
+        return None
+
+    with sessao() as s:
+        simulado = Simulado(filtros={
+            "quantidade": quantidade,
+            "alvo": (alvos.principal().get("nome") or "alvo principal"),
+            **origem.como_dicionario(),
+        })
+        s.add(simulado)
+        s.flush()
+
+        for ordem, questao_id in enumerate(ids, start=1):
+            s.add(RespostaDeSimulado(
+                simulado_id=simulado.id, questao_id=questao_id, ordem=ordem
+            ))
+        return simulado
+
+
+def contar_questoes_do_alvo() -> dict[str, int]:
+    """Quantas questoes existem de cada fonte, e quantas eu ainda nao respondi.
+
+    E o que a tela usa para dizer de onde a proxima rodada vai sair - antes de
+    eu clicar, e nao depois.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        proprias, da_banca = _questoes_para_o_alvo(s)
+        respondidas = _impressoes_ja_respondidas(s)
+
+    def contar(questoes: list) -> tuple[int, int]:
+        impressoes = {q.impressao for q in questoes if q.impressao}
+        return len(impressoes), len(impressoes - respondidas)
+
+    total_proprias, novas_proprias = contar(proprias)
+    total_banca, novas_banca = contar(da_banca)
+    return {
+        "proprias": total_proprias,
+        "proprias_novas": novas_proprias,
+        "da_banca": total_banca,
+        "da_banca_novas": novas_banca,
+    }
+
+
 def _respostas(simulado_id: int) -> list[RespostaDeSimulado]:
     with sessao() as s:
         return list(s.scalars(

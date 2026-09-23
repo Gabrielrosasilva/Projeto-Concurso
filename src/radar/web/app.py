@@ -420,6 +420,10 @@ def meu_foco(request: Request):
         context={
             "p": painel,
             "questoes_do_treino": foco_do_alvo.QUESTOES_DO_TREINO,
+            # De onde a proxima rodada vai sair, antes de eu clicar: quantas
+            # questoes da prova do cargo ainda nao respondi, e quantas da
+            # mesma banca nas mesmas materias esperam depois delas.
+            "fontes_do_treino": servico.contar_questoes_do_alvo(),
             # As materias que cairam na prova mas nao estao no quadro do
             # edital lido. Elas nao podem sumir da tela so porque a tabela e
             # montada a partir do edital: sumir seria esconder que a prova
@@ -440,14 +444,15 @@ def foco_endereco_antigo():
 
 @app.post("/foco/treinar")
 def treinar_do_foco():
-    """Sorteia uma rodada com as questoes das provas do proprio alvo.
+    """Sorteia uma rodada para a MINHA prova.
 
     Sem escolher materia: o ponto do botao e comecar a estudar em um clique,
-    e a distribuicao do acervo do cargo ja e a da prova real.
+    e a distribuicao do acervo do cargo ja e a da prova real. Primeiro as
+    questoes das provas do proprio cargo; quando elas acabam, as da mesma
+    banca nas mesmas materias.
     """
-    novo = servico.criar_simulado(
-        quantidade=foco_do_alvo.QUESTOES_DO_TREINO,
-        cargo=foco_do_alvo.cargo_para_treinar(),
+    novo = servico.criar_simulado_do_alvo(
+        quantidade=foco_do_alvo.QUESTOES_DO_TREINO
     )
     if novo is None:
         return RedirectResponse("/simulado", status_code=303)

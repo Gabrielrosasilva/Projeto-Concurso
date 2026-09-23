@@ -440,21 +440,6 @@ def _validade_do_edital(concurso: Concurso) -> str | None:
     return frase
 
 
-def cargo_para_treinar() -> str | None:
-    """O filtro de cargo que o botao de treino passa para o sorteio.
-
-    Um termo so, porque `criar_simulado` aceita um filtro so: vale o primeiro
-    do YAML que de fato acha prova no acervo. Hoje e "agente penitenciario",
-    o nome antigo do cargo - "policia penal" nao casa nenhum caderno, porque
-    as duas provas que existem sao anteriores a mudanca de nome.
-    """
-    with sessao() as s:
-        cargos = [
-            c for (c,) in s.execute(select(QuestaoDeProva.cargo).distinct()) if c
-        ]
-
-    for termo in alvos.termos_do_principal():
-        procurado = normalizar(termo)
-        if any(procurado in normalizar(cargo) for cargo in cargos):
-            return termo
-    return None
+# O botao de treino nao escolhe mais um termo de cargo para filtrar: quem
+# monta a rodada e `servico.criar_simulado_do_alvo`, que trata os termos do
+# YAML como a lista de nomes do mesmo cargo - e nao como filtros concorrentes.
