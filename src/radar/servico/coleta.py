@@ -140,6 +140,17 @@ def _gravar(s, item: ItemColetado, fonte: str) -> str:
         # ja tinhamos descoberto por outro caminho.
         if valor is None or valor in VALORES_SEM_INFORMACAO.get(campo, ()):
             continue
+        # A situacao que a fonte manda nao desmente o PRAZO, pela mesma regra
+        # que ja vale para a fase lida do titulo: data de inscricao e fato.
+        #
+        # Sem isto o radar entrava em looping: o coletor do Concursos no
+        # Brasil marca "edital_publicado" em TODO item, porque o feed dele nao
+        # distingue fase; a coleta gravava isso por cima de um concurso ja
+        # encerrado, e o `atualizar_situacoes` do fim da mesma rodada
+        # desfazia. Dois eventos por coleta, todo dia, para sempre - e desde a
+        # etapa 8 os dois viram mensagem no Telegram.
+        if campo == "situacao" and existente.inscricoes_ate is not None:
+            continue
         if valor == getattr(existente, campo):
             continue
         setattr(existente, campo, valor)

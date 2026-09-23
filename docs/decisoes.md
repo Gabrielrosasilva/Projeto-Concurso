@@ -571,3 +571,13 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   quem le e `servico.coleta` e `servico.provas`. Trocar a copia deixaria o
   teste verde sem testar nada. Trocar atributo de CLASSE (como
   `servico.Buscador.get`) continua valendo de qualquer lado.
+
+## Consertos achados na revisao das etapas 8 a 10
+
+- **a situacao que a FONTE manda nao desmente o prazo.** A regra ja existia
+  para a fase lida do titulo ("data de inscricao e fato, titulo e
+  interpretacao") e agora vale tambem para o campo que o coletor envia. Sem
+  ela o radar entrava em looping: o Concursos no Brasil marca
+  "edital_publicado" em todo item, a coleta gravava isso por cima de um
+  concurso encerrado e o `atualizar_situacoes` da mesma rodada desfazia - dois
+  eventos por coleta, todo dia, e desde a etapa 8 duas mensagens no Telegram.

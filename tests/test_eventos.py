@@ -304,3 +304,41 @@ def test_a_descricao_nao_estoura_a_coluna(banco_temporario):
         eventos.registrar(s, URL, eventos.APARECEU, "x" * 500)
 
     assert len(_eventos()[0].descricao) == 300
+
+
+# --- a coleta nao pode desmentir o prazo (conserto da etapa 8) --------------
+
+def test_coleta_repetida_nao_faz_a_situacao_piscar(banco_temporario):
+    """O bug que isto impede: o coletor do Concursos no Brasil marca
+    "edital_publicado" em TODO item, porque o feed dele nao distingue fase.
+    Gravando isso por cima de um concurso encerrado, o `atualizar_situacoes`
+    do fim da mesma rodada desfazia - e sobravam dois eventos por coleta, dia
+    apos dia. Desde a etapa 8 os dois sao dos tipos que avisam no Telegram.
+    """
+    with sessao() as s:
+        s.add(Concurso(
+            url=URL, fonte="concursosnobrasil",
+            titulo="Concurso Policia Penal SC abre 600 vagas",
+            uf="SC", tipo="concurso", situacao="encerrado",
+            inscricoes_de=agora() - timedelta(days=40),
+            inscricoes_ate=agora() - timedelta(days=5),
+        ))
+
+    for _ in range(3):
+        _coletar(_item(), fonte="concursosnobrasil")
+        servico.atualizar_situacoes()
+
+    assert _tipos() == []
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).situacao == "encerrado"
+
+
+def test_sem_prazo_conhecido_a_fonte_continua_mandando(banco_temporario):
+    """A trava vale so onde a data prova alguma coisa. Sem prazo no banco, o
+    que a fonte diz e o melhor que existe."""
+    _coletar(_item(situacao="prevista"))
+    _coletar(_item(situacao="inscricoes_abertas"))
+
+    with sessao() as s:
+        assert s.scalar(select(Concurso)).situacao == "inscricoes_abertas"
+    assert eventos.INSCRICOES_ABERTAS in _tipos()
