@@ -253,9 +253,89 @@
     .vazio a{color:var(--azul)}
     code{background:var(--azul-fraco);color:var(--azul);padding:.1rem .4rem;
       border-radius:4px;font-size:.85em}
+
+    /* ------------------------------------------------- busca e atalhos --- */
+    /* A busca vem antes dos atalhos porque e o que eu uso mais: procurar pelo
+       nome do orgao resolve o caso que nenhum atalho resolve. */
+    form.busca{display:flex;gap:.5rem;margin-bottom:.9rem}
+    form.busca input{flex:1 1 auto}
+
+    .atalhos{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.75rem}
+    .atalhos a{display:inline-flex;align-items:center;gap:.4rem;
+      text-decoration:none;padding:.45rem .85rem;border-radius:999px;
+      font-size:.85rem;font-weight:600;border:1px solid var(--borda);
+      background:var(--cartao);color:var(--suave)}
+    .atalhos a:hover{border-color:var(--azul)}
+    .atalhos a .n{font-weight:700;font-variant-numeric:tabular-nums;opacity:.75}
+    .atalhos a.ativo{border-color:transparent}
+    .atalhos a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
+    .atalhos a.ativo.estadual{background:var(--estadual-fraco);color:var(--estadual)}
+    .atalhos a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
+    .atalhos a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
+
+    /* "mais filtros" nasce fechado: sao seis campos que eu uso de vez em
+       quando, e abertos eles empurravam a lista para baixo da dobra. */
+    .mais-filtros{margin-bottom:1rem;border:1px solid var(--borda);
+      border-radius:10px;background:var(--cartao)}
+    .mais-filtros>summary{list-style:none;cursor:pointer;padding:.55rem .85rem;
+      font-size:.85rem;font-weight:600;color:var(--suave);
+      display:flex;align-items:center;gap:.4rem}
+    .mais-filtros>summary::-webkit-details-marker{display:none}
+    .mais-filtros>summary:hover{color:var(--azul)}
+    .mais-filtros[open]>summary{border-bottom:1px solid var(--borda);
+      color:var(--azul)}
+    .mais-filtros .seta{font-size:.7em;opacity:.7}
+    .mais-filtros .corpo{padding:.85rem}
+    .mais-filtros .aceso{background:var(--azul-fraco);color:var(--azul);
+      font-size:.7rem;padding:.05rem .45rem;border-radius:999px;font-weight:700}
+    .outros-aneis{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem;
+      padding-top:.75rem;border-top:1px dashed var(--borda)}
+    .outros-aneis a{text-decoration:none;font-size:.8rem;font-weight:600;
+      padding:.3rem .7rem;border-radius:999px;border:1px solid var(--borda);
+      color:var(--suave);background:var(--cartao)}
+    .outros-aneis a:hover{border-color:var(--azul);color:var(--azul)}
+    .outros-aneis a.ativo{border-color:transparent;background:var(--azul-fraco);
+      color:var(--azul)}
+
+    /* --------------------------------------------- cartao enxuto ------ */
+    /* A linha que responde as tres perguntas de sempre: onde, quanto, ate
+       quando. Tudo numa linha so, separada por pontos - a versao anterior
+       usava um selo por informacao e o cartao virava um paragrafo de selos. */
+    .linha-chave{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;
+      margin-top:.5rem;font-size:.85rem;color:var(--suave)}
+    .linha-chave .sep{opacity:.45}
+    .linha-chave .onde{color:var(--texto);font-weight:600}
+    .linha-chave .dinheiro{color:var(--texto);font-weight:700;
+      font-variant-numeric:tabular-nums}
+    .linha-chave .dinheiro.sem-valor{color:var(--suave);font-weight:600}
+    .linha-chave .prazo-frio{color:var(--suave)}
+    .linha-chave .lapis{margin-left:.15rem}
+
+    /* "detalhes" nasce fechado. O conteudo continua no HTML, entao o Ctrl+F
+       do navegador continua achando banca e motivo mesmo com ele fechado. */
+    .detalhes{margin-top:.55rem}
+    .detalhes>summary{list-style:none;cursor:pointer;display:inline-flex;
+      align-items:center;gap:.3rem;font-size:.78rem;font-weight:600;
+      color:var(--suave);padding:.15rem 0}
+    .detalhes>summary::-webkit-details-marker{display:none}
+    .detalhes>summary:hover{color:var(--azul)}
+    .detalhes[open]>summary{color:var(--azul)}
+    .detalhes .seta{font-size:.75em;opacity:.7}
+    .detalhes .selos{margin-top:.5rem}
+
+    /* ------------------------------------------------------- ver mais --- */
+    .ver-mais{margin:1.25rem 0 0;text-align:center}
+    .ver-mais a{display:inline-block;padding:.6rem 1.4rem;border-radius:999px;
+      border:1px solid var(--borda);background:var(--cartao);color:var(--azul);
+      text-decoration:none;font-weight:600;font-size:.9rem}
+    .ver-mais a:hover{border-color:var(--azul)}
   </style>
+  {% include "_topo_estilo.html" %}
 </head>
 <body>
+
+{% from "_topo.html" import barra %}
+{{ barra('concursos') }}
 
 {# Um cartao da lista principal, com rotulo em cada informacao. #}
 {% macro cartao(c) %}
@@ -272,7 +352,9 @@
       <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
     </div>
 
-    <div class="selos">
+    {# A LINHA: onde, quanto e ate quando. Sao as tres perguntas que eu faco
+       antes de decidir se abro o concurso; o resto ficou em "detalhes". #}
+    <div class="linha-chave">
       {% if noticias %}
         {# Nesta aba o que importa e a FASE, nao a distancia. #}
         <span class="selo fase-conta fase-{{ c.situacao }}">
@@ -280,10 +362,12 @@
       {% endif %}
       <span class="selo {{ c.relevancia }}">{{ rotulo_anel.get(c.relevancia, c.relevancia) }}</span>
 
-      <span class="selo neutro"><span class="rot">Cidade:</span>
-        {%- if c.municipio %} {{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
-        {%- elif c.uf %} {{ c.uf }}
-        {%- else %} nao identificada{% endif %}</span>
+      <span class="onde">
+        {%- if c.municipio %}{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
+        {%- elif c.uf %}{{ c.uf }}
+        {%- else %}cidade nao identificada{% endif %}</span>
+
+      <span class="sep">&middot;</span>
 
       {# Salario sempre presente. Sem valor vira "R$ ??", e o lapis abre o campo. #}
       {% if editar == c.id %}
@@ -300,7 +384,7 @@
           </form>
         </span>
       {% else %}
-        <span class="selo dinheiro {{ '' if c.salario else 'sem-valor' }}">
+        <span class="dinheiro {{ 'sem-valor' if not c.salario }}">
           <span class="rot">Salario:</span>
           {% if c.salario %}R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}{% else %}R$ ??{% endif %}
           <a class="lapis" href="{{ url_com_editar }}{{ c.id }}"
@@ -308,27 +392,38 @@
         </span>
       {% endif %}
 
+      <span class="sep">&middot;</span>
+
+      {% set faltam = c.inscricoes_ate | dias %}
+      {% if c.inscricoes_ate and faltam >= 0 %}
+        <span class="selo prazo{{ ' urgente' if faltam <= 7 }}">
+          <span class="rot">Inscricao ate:</span>
+          {{ c.inscricoes_ate | data }} &middot; faltam {{ faltam }}d</span>
+      {% elif c.inscricoes_ate %}
+        <span class="prazo-frio"><span class="rot">Status:</span>
+          encerrou em {{ c.inscricoes_ate | data }}</span>
+      {% else %}
+        <span class="prazo-frio"><span class="rot">Status:</span>
+          prazo nao confirmado</span>
+      {% endif %}
+    </div>
+
+    {# DETALHES: o que eu consulto depois de decidir que o concurso interessa.
+       Nasce fechado. O conteudo continua no HTML mesmo fechado, entao a busca
+       do navegador (Ctrl+F) continua achando banca e motivo. #}
+    <details class="detalhes">
+      <summary>detalhes <span class="seta">&#9662;</span></summary>
+      <div class="selos">
       <span class="selo neutro"><span class="rot">Banca:</span>
         {{ c.banca if c.banca else 'a confirmar' }}</span>
 
-      {% set faltam = c.inscricoes_ate | dias %}
+      <span class="selo neutro"><span class="rot">Tipo:</span> {{ c.tipo }}</span>
+
       {% if c.inscricoes_ate %}
         <span class="selo {{ 'aberta' if faltam >= 0 else 'fechada' }}">
-          <span class="rot">Status:</span>
-          inscricao {{ 'aberta' if faltam >= 0 else 'fechada' }}</span>
-        {% if faltam >= 0 %}
-          <span class="selo prazo{{ ' urgente' if faltam <= 7 }}">
-            <span class="rot">Inscricao ate:</span>
-            {{ c.inscricoes_ate | data }} &middot; faltam {{ faltam }}d</span>
-        {% else %}
-          <span class="selo neutro"><span class="rot">Encerrou em:</span>
-            {{ c.inscricoes_ate | data }}</span>
-        {% endif %}
-      {% else %}
-        <span class="selo neutro"><span class="rot">Status:</span> prazo nao confirmado</span>
+          <span class="rot">Inscricao:</span>
+          {{ 'aberta' if faltam >= 0 else 'fechada' }}</span>
       {% endif %}
-
-      <span class="selo neutro"><span class="rot">Tipo:</span> {{ c.tipo }}</span>
 
       {# O que o edital exige. So aparece quando alguem leu o PDF: sem leitura,
          um selo "sem CNH" seria mentira, e nao ausencia de informacao. #}
@@ -388,6 +483,7 @@
     {% endif %}
 
     {% if c.motivo_relevancia %}<div class="motivo">{{ c.motivo_relevancia }}</div>{% endif %}
+    </details>
   </li>
 {% endmacro %}
 
@@ -450,38 +546,50 @@
       <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianopolis e regiao</p>
     </header>
 
-    <nav>
+    {% if not noticias %}
+    {# A busca vem primeiro: e o que resolve o caso que nenhum atalho resolve.
+       Ela manda so `termo`, entao clicar num atalho depois nao carrega filtro
+       escondido junto. #}
+    <form class="busca" method="get" autocomplete="off">
+      {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
+      {% if abertas %}<input type="hidden" name="abertas" value="true">{% endif %}
+      {% if favoritos %}<input type="hidden" name="favoritos" value="true">{% endif %}
+      {% if relevancia %}<input type="hidden" name="relevancia" value="{{ relevancia }}">{% endif %}
+      <input name="termo" value="{{ termo }}"
+             placeholder="Buscar por orgao, cargo ou cidade">
+      <button type="submit">Buscar</button>
+      {% if termo %}<a class="limpar" href="{{ url_sem_termo }}">Limpar</a>{% endif %}
+    </form>
+
+    {# Quatro atalhos, e so. Os outros aneis foram para "mais filtros": eu
+       abro `remoto` e `a confirmar` uma vez por semana, e eles ocupavam o
+       mesmo tamanho dos que eu abro todo dia. #}
+    <div class="atalhos">
       <a class="perto {{ 'ativo' if not relevancia and not todos and not abertas and not favoritos }}" href="/">
-        Perto de mim <span class="n">{{ perto }}</span>
-      </a>
-      <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
-        Inscricoes abertas <span class="n">{{ n_abertas }}</span>
+        Perto <span class="n">{{ perto }}</span>
       </a>
       <a class="estadual {{ 'ativo' if relevancia == 'estadual' }}"
          href="/?relevancia=estadual"
          title="Orgao estadual de SC: os polos de prova saem no edital">
         Estadual SC <span class="n">{{ contagem.estadual }}</span>
       </a>
-      <a class="remoto {{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
-        Longe <span class="n">{{ contagem.remoto }}</span>
-      </a>
-      <a class="indefinida {{ 'ativo' if relevancia == 'indefinida' }}" href="/?relevancia=indefinida">
-        A confirmar <span class="n">{{ contagem.indefinida }}</span>
+      <a class="abertas {{ 'ativo' if abertas }}" href="/?abertas=true">
+        Abertos <span class="n">{{ n_abertas }}</span>
       </a>
       <a class="tudo {{ 'ativo' if todos }}" href="/?todos=true">
         Todos <span class="n">{{ total_geral }}</span>
       </a>
-      <a class="noticias {{ 'ativo' if noticias }}" href="/?noticias=true">
-        Noticias e andamento
-      </a>
-      <a class="simulado" href="/previsao">Previsao de abertura</a>
-      <a class="simulado" href="/macetes">Macetes</a>
-      <a class="simulado" href="/calendario"
-         title="Os prazos de inscricao na agenda do celular">Calendario</a>
-      <a class="simulado" href="/simulado">Simulado</a>
-    </nav>
+    </div>
+    {% endif %}
 
     {% if not noticias %}
+    <details class="mais-filtros" {{ 'open' if filtros_avancados_ativos }}>
+      <summary>
+        Mais filtros
+        {% if filtros_avancados_ativos %}<span class="aceso">ligado</span>{% endif %}
+        <span class="seta">&#9662;</span>
+      </summary>
+      <div class="corpo">
     <form class="filtros" method="get" autocomplete="off">
       {% if todos %}<input type="hidden" name="todos" value="true">{% endif %}
       {% if abertas %}<input type="hidden" name="abertas" value="true">{% endif %}
@@ -520,6 +628,20 @@
         <a class="limpar" href="/">Limpar</a>
       </div>
     </form>
+
+    {# Os aneis que sairam da barra de atalhos, e as duas visoes que nao sao
+       anel: o mural e a busca em tudo. #}
+    <div class="outros-aneis">
+      <a class="{{ 'ativo' if relevancia == 'remoto' }}" href="/?relevancia=remoto">
+        Longe ({{ contagem.remoto }})</a>
+      <a class="{{ 'ativo' if relevancia == 'indefinida' }}" href="/?relevancia=indefinida">
+        A confirmar ({{ contagem.indefinida }})</a>
+      <a class="{{ 'ativo' if favoritos }}" href="/?favoritos=true">
+        Meu mural ({{ n_favoritos }})</a>
+      <a href="/?noticias=true">Noticias e andamento</a>
+    </div>
+      </div>
+    </details>
     {% endif %}
 
     {% if noticias %}
@@ -531,6 +653,7 @@
                placeholder="PM, policia cientifica, bombeiro, Guarda Municipal...">
         <button type="submit">Procurar</button>
         {% if termo %}<a class="limpar" href="/?noticias=true">Limpar</a>{% endif %}
+        <a class="limpar" href="/">Voltar aos concursos</a>
       </form>
 
       {% if fases %}
@@ -609,6 +732,12 @@
         </li>
       {% endfor %}
     </ul>
+
+    {% if tem_mais %}
+      <p class="ver-mais">
+        <a href="{{ url_ver_mais }}">Ver mais {{ por_vez }}</a>
+      </p>
+    {% endif %}
   </main>
 
 </div>

@@ -175,6 +175,34 @@ Campo vazio ou com texto que nao e numero nao quebra a pagina: o valor invalido
 e ignorado. E com filtro ligado e zero resultado, a tela diz que foi **o
 filtro** que nao achou nada.
 
+### Como a tela e organizada
+
+No topo, quatro destinos e um menu:
+
+| item | o que tem la |
+|---|---|
+| **Meu foco** | em construcao |
+| **Concursos** | a lista, com busca, atalhos e filtros |
+| **Acompanhando** | em construcao |
+| **Estudar** | Macetes e Simulado, nesta ordem |
+| **Mais** | Previsao e Calendario |
+
+A regra de quem fica na barra e quem fica no "Mais": o que eu abro todo dia
+fica a vista, o que eu abro de vez em quando fica no menu.
+
+Em **Concursos**, a busca vem primeiro - e o que resolve o caso que atalho
+nenhum resolve. Depois vem quatro atalhos: **Perto**, **Estadual SC**,
+**Abertos** e **Todos**. Longe, A confirmar, o mural e a busca em tudo ficam em
+**mais filtros**, que nasce fechado e abre sozinho quando ha filtro ligado.
+
+Cada cartao mostra o titulo e uma linha so: **onde &middot; salario &middot;
+prazo**. Sao as tres perguntas que se faz antes de decidir abrir o concurso.
+Banca, tipo, exigencias do edital, motivo da classificacao e a anotacao ficam
+em **detalhes**, fechado - mas o conteudo continua no HTML, entao o Ctrl+F do
+navegador continua achando.
+
+A lista mostra **30 cartoes por vez**, com "ver mais" de 30 em 30.
+
 ### O filtro por distancia
 
 Todo concurso coletado e classificado em um anel:
@@ -459,7 +487,9 @@ src/radar/
 │   ├── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao
 │   ├── fepese.py                fonte 2: API REST do WordPress da FEPESE
 │   └── ieses.py                 fonte 3: API JSON da listagem de projetos
-└── web/app.py      FastAPI + Jinja2, uma pagina com filtros
+└── web/          FastAPI + Jinja2
+    ├── app.py                    rotas e o contexto de cada tela
+    └── templates/_topo.html      a barra de navegacao, igual em toda pagina
 
 config/
 ├── regioes.yml     os tres aneis de distancia

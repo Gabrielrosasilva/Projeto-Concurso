@@ -56,11 +56,16 @@
 
     .vazio{text-align:center;color:var(--suave);padding:1.5rem 1rem}
   </style>
+  {% include "_topo_estilo.html" %}
 </head>
 <body>
+
+{% from "_topo.html" import barra %}
+{{ barra('') }}
+
 <div class="pagina">
 
-  <a class="voltar" href="/">&larr; voltar ao radar</a>
+
 
   <header>
     <h1>Calendario</h1>

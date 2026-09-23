@@ -138,6 +138,12 @@ def _url_sem_pedido(request: Request, *parametros: str):
     )
 
 
+# Quantos cartoes a lista mostra de uma vez, e de quanto em quanto ela
+# cresce no "ver mais". A lista inteira de uma vez chegava a 200 cartoes numa
+# rolagem so, e o que interessa esta sempre nos primeiros.
+CARTOES_POR_VEZ = 30
+
+
 @app.get("/", response_class=HTMLResponse)
 def index(
     request: Request,
@@ -154,6 +160,7 @@ def index(
     salario_max: str | None = None,
     editar: str | None = None,
     anotar: str | None = None,
+    mostrar: int = CARTOES_POR_VEZ,
 ):
     """Os campos numericos chegam como TEXTO de proposito.
 
@@ -168,18 +175,24 @@ def index(
     cartao_em_edicao = int(editar) if (editar or "").strip().isdigit() else None
     cartao_anotando = int(anotar) if (anotar or "").strip().isdigit() else None
 
+    # Um a mais do que vai para a tela: e assim que se sabe se ha proxima
+    # pagina sem fazer uma segunda consulta so para contar.
+    mostrar = max(CARTOES_POR_VEZ, mostrar)
     if noticias:
         # A aba de noticias nao filtra nada: quem procura "PM" quer saber de
         # qualquer concurso de policia militar, onde quer que seja e na fase
         # em que estiver.
-        itens = servico.buscar_noticias(termo=termo, limite=80)
+        itens = servico.buscar_noticias(termo=termo, limite=mostrar + 1)
     else:
         itens = servico.listar(
             uf=uf, banca=banca, termo=termo, situacao=situacao,
             relevancia=relevancia, todas_relevancias=todos, abertas=abertas,
             favoritos=favoritos, salario_min=minimo, salario_max=maximo,
-            limite=200,
+            limite=mostrar + 1,
         )
+
+    tem_mais = len(itens) > mostrar
+    itens = itens[:mostrar]
     contagem = servico.contar_por_relevancia()
     return templates.TemplateResponse(
         request=request,
@@ -212,6 +225,7 @@ def index(
             "filtro_ativo": any([uf, banca, termo, situacao,
                                  minimo is not None, maximo is not None]),
             "url_sem_salario": _url_base_sem(request, "salario_min", "salario_max"),
+            "url_sem_termo": _url_base_sem(request, "termo").rstrip("?&") or "/",
             "n_sem_salario": (
                 servico.contar_sem_salario()
                 if (minimo is not None or maximo is not None) else 0
@@ -235,6 +249,18 @@ def index(
             ),
             "rotulo_anel": ROTULO_DO_ANEL,
             "rotulo_situacao": SITUACAO_LEGIVEL,
+            # Paginacao: quantos cabem agora, e para onde vai o "ver mais".
+            "tem_mais": tem_mais,
+            "por_vez": CARTOES_POR_VEZ,
+            "url_ver_mais": (
+                _url_base_sem(request, "mostrar")
+                + f"mostrar={mostrar + CARTOES_POR_VEZ}"
+            ),
+            # Um filtro escondido continua valendo, e a tela precisa dizer
+            # isso: senao a lista parece curta sem motivo.
+            "filtros_avancados_ativos": any(
+                [uf, banca, minimo is not None, maximo is not None, situacao]
+            ),
         },
     )
 
@@ -380,6 +406,52 @@ def simulado_responder(
 
 
 # --- previsao de abertura (fase 6) ------------------------------------------
+
+# As duas secoes que ja tem lugar na navegacao mas ainda nao tem conteudo.
+# Elas existem aqui para o menu do topo ser o menu de verdade desde ja - mudar
+# a navegacao depois custa mais do que deixar a porta aberta agora.
+EM_CONSTRUCAO = {
+    "foco": (
+        "Meu foco",
+        "Aqui vai ficar o que importa hoje: o alvo principal, o que fecha "
+        "esta semana e o que estudar em seguida.",
+    ),
+    "acompanhando": (
+        "Acompanhando",
+        "Aqui vao ficar os concursos que eu escolhi seguir, com a linha do "
+        "tempo de cada um - o que `radar eventos` ja grava.",
+    ),
+}
+
+
+@app.get("/foco", response_class=HTMLResponse)
+def foco(request: Request):
+    return _em_construcao(request, "foco")
+
+
+@app.get("/acompanhando", response_class=HTMLResponse)
+def acompanhando(request: Request):
+    return _em_construcao(request, "acompanhando")
+
+
+def _em_construcao(request: Request, aba: str):
+    titulo, promessa = EM_CONSTRUCAO[aba]
+    return templates.TemplateResponse(
+        request=request,
+        name="em_construcao.html",
+        context={"aba": aba, "titulo": titulo, "promessa": promessa},
+    )
+
+
+@app.get("/estudar")
+def estudar():
+    """Estudar e uma secao com duas paginas; esta abre na primeira.
+
+    Macetes vem antes do Simulado de proposito: ver o que a banca cobra e o
+    passo que decide o que treinar depois.
+    """
+    return RedirectResponse("/macetes", status_code=303)
+
 
 @app.get("/previsao", response_class=HTMLResponse)
 def previsao(request: Request):

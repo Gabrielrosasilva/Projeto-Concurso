@@ -145,7 +145,10 @@ def test_o_botao_mostra_a_faixa_escolhida(cliente):
     assert "Remuneracao" in aberto
 
     escolhido = cliente.get("/?salario_min=5000&salario_max=10000").text
-    assert "R$ 5.000 a R$ 10.000" in escolhido.split("<summary")[1][:200]
+    # A caixinha de faixas e procurada pela classe dela: desde a barra do topo,
+    # o primeiro <summary> da pagina e o menu "Mais", e nao este.
+    caixinha = escolhido[escolhido.index('<details class="menu-faixa">'):]
+    assert "R$ 5.000 a R$ 10.000" in caixinha.split("<summary")[1][:200]
 
 
 def test_o_campo_de_salario_maximo_saiu_do_formulario(cliente):

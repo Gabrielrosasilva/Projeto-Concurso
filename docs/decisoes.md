@@ -372,3 +372,43 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - o evento `prova_marcada` esta pronto e ligado no upsert, mas nao dispara
   hoje: nenhuma fonte do projeto preenche `data_prova`. A coluna existe e o
   calendario a le, mas so seria preenchida por uma fonte que ainda nao temos.
+- a navegacao tem quatro destinos fixos no topo - Meu foco, Concursos,
+  Acompanhando, Estudar - e um menu "Mais" com Previsao e Calendario. A regra
+  para decidir onde cada coisa fica: o que eu abro todo dia fica na barra, o
+  que eu abro de vez em quando fica no "Mais". Antes eram onze links na mesma
+  linha, misturando filtro de anel com pagina inteira, e nada tinha hierarquia;
+- a barra e a mesma em TODA pagina. Antes cada uma tinha so um "voltar ao
+  radar": ir de Macetes para o Calendario custava dois cliques e uma parada na
+  home. O estilo dela vive em `_topo_estilo.html` e o markup em `_topo.html`,
+  separados porque um vai no <head> e o outro no <body>;
+- Macetes e Simulado viraram as duas faces de **Estudar**, e `/estudar` abre
+  em Macetes: ver o que a banca cobra e o passo que decide o que treinar
+  depois. As duas paginas continuam existindo nas mesmas URLs;
+- Meu foco e Acompanhando entram em construcao, com pagina propria. Elas ja
+  ocupam lugar no menu porque a posicao delas na navegacao esta decidida -
+  mudar navegacao depois custa mais do que deixar a porta aberta agora;
+- em Concursos a busca vem ANTES dos atalhos: e o que resolve o caso que
+  atalho nenhum resolve. Os atalhos sao quatro - Perto, Estadual SC, Abertos,
+  Todos. Longe, A confirmar, o mural e a busca em tudo desceram para "mais
+  filtros": continuam a um clique, mas nao competem por espaco com o que eu
+  abro todo dia;
+- "mais filtros" nasce fechado, e abre sozinho quando ha filtro ligado. Filtro
+  escondido E ligado seria a pior combinacao: a lista viria curta e a tela nao
+  diria por que. Quando abre sozinho, mostra a marca "ligado";
+- o cartao mostra titulo e uma linha so: **onde, salario, prazo**. Sao as tres
+  perguntas que eu faco antes de decidir se abro o concurso. Banca, tipo,
+  exigencias do edital, motivo da classificacao e a minha anotacao ficam em
+  "detalhes", fechado. A versao anterior usava um selo por informacao, e o
+  cartao virava um paragrafo de selos onde nada se destacava;
+- "detalhes" fechado continua com o conteudo no HTML, entao o Ctrl+F do
+  navegador continua achando banca e motivo. Isso e proposital: esconder da
+  vista nao pode virar esconder da busca;
+- a cidade e o unico item da linha sem rotulo. Ela abre a linha, e ali e o
+  unico item que pode ser nome de lugar - rotular seria repetir o obvio numa
+  linha que precisa caber inteira;
+- a lista mostra 30 cartoes por vez, com "ver mais" de 30 em 30. A consulta
+  pede um a mais do que vai para a tela: e assim que se sabe se ha proxima
+  pagina sem fazer uma segunda consulta so para contar. `mostrar` menor que 30
+  e ignorado, senao URL editada a mao deixaria a pagina com um cartao so;
+- o mural lateral fica como esta por enquanto. Ele e o embriao de
+  "Acompanhando", e move-lo antes de a secao existir seria refazer duas vezes.

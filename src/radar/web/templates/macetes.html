@@ -141,11 +141,17 @@
     .vazio p{margin:.4rem 0}
     .futuro{font-size:.83rem;color:var(--suave);margin:0}
   </style>
+  {% include "_topo_estilo.html" %}
 </head>
 <body>
+
+{% from "_topo.html" import barra %}
+{{ barra('estudar') }}
+
 <div class="pagina">
 
-  <a class="voltar" href="/">&larr; voltar ao radar</a>
+{% from "_topo.html" import abas_de_estudar %}
+  {{ abas_de_estudar('macetes') }}
 
   <header>
     <h1>Macetes</h1>

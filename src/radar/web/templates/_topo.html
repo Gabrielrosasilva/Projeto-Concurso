@@ -1,0 +1,44 @@
+{# A barra de navegacao do topo, igual em todas as paginas.
+
+   Quatro destinos e um menu "Mais". A regra para decidir o que fica visivel:
+   o que eu abro todo dia fica na barra, e o que eu abro de vez em quando fica
+   no "Mais". Previsao e Calendario sao consulta ocasional.
+
+   Use assim, no topo do <body>:
+
+       {% from "_topo.html" import barra %}
+       {{ barra('concursos') }}
+
+   O parametro e qual item fica aceso: foco, concursos, acompanhando, estudar.
+   Pagina que nao e nenhum dos quatro passa string vazia. #}
+
+{% macro barra(ativo='') %}
+<nav class="topo-barra" aria-label="Navegacao principal">
+  <a class="marca" href="/">Radar</a>
+
+  <a class="item {{ 'ativo' if ativo == 'foco' }}" href="/foco">Meu foco</a>
+  <a class="item {{ 'ativo' if ativo == 'concursos' }}" href="/">Concursos</a>
+  <a class="item {{ 'ativo' if ativo == 'acompanhando' }}"
+     href="/acompanhando">Acompanhando</a>
+  <a class="item {{ 'ativo' if ativo == 'estudar' }}" href="/estudar">Estudar</a>
+
+  <details class="topo-mais">
+    <summary>Mais <span class="seta">&#9662;</span></summary>
+    <div class="opcoes">
+      <a href="/previsao">Previsao</a>
+      <a href="/calendario">Calendario</a>
+    </div>
+  </details>
+</nav>
+{% endmacro %}
+
+
+{# As sub-abas de dentro de Estudar. Macetes e Simulado continuam sendo duas
+   paginas: o que mudou e que agora elas sao duas faces da mesma secao, em vez
+   de dois links soltos no meio dos filtros de concurso. #}
+{% macro abas_de_estudar(ativa='') %}
+<div class="subabas">
+  <a class="{{ 'ativo' if ativa == 'macetes' }}" href="/macetes">Macetes</a>
+  <a class="{{ 'ativo' if ativa == 'simulado' }}" href="/simulado">Simulado</a>
+</div>
+{% endmacro %}

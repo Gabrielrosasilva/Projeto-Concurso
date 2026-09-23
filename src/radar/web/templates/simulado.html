@@ -106,11 +106,17 @@
 
     .vazio{text-align:center;color:var(--suave);padding:2rem 1rem}
   </style>
+  {% include "_topo_estilo.html" %}
 </head>
 <body>
+
+{% from "_topo.html" import barra %}
+{{ barra('estudar') }}
+
 <div class="pagina">
 
-  <a class="voltar" href="/">&larr; voltar ao radar</a>
+{% from "_topo.html" import abas_de_estudar %}
+  {{ abas_de_estudar('simulado') }}
 
   <header>
     <h1>Simulado</h1>

@@ -344,9 +344,14 @@ def test_campo_vazio_no_formulario_nao_vira_filtro(cliente):
 
 
 def test_o_radar_tem_link_para_os_macetes(cliente):
+    """Macetes e a primeira das duas paginas de Estudar: ver o que a banca
+    cobra e o passo que decide o que treinar depois."""
     _semear(_questao(1))
 
-    assert 'href="/macetes"' in cliente.get("/").text
+    assert 'href="/estudar"' in cliente.get("/").text
+    assert cliente.get("/estudar", follow_redirects=False).headers["location"] == (
+        "/macetes"
+    )
 
 
 

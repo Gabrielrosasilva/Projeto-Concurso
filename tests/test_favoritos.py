@@ -466,11 +466,16 @@ def test_texto_invalido_nao_quebra(cliente):
 # --- rotulos e nomes --------------------------------------------------------
 
 def test_cada_informacao_vem_com_rotulo(cliente):
-    """"FEPESE" sozinho nao diz nada; "Banca: FEPESE" diz."""
+    """"FEPESE" sozinho nao diz nada; "Banca: FEPESE" diz.
+
+    A cidade e a excecao, e de proposito: ela abre a linha do cartao, onde e
+    o unico item que pode ser um nome de lugar. Rotular ali seria repetir o
+    obvio numa linha que precisa caber inteira.
+    """
     _semear(_concurso("https://a.test/1", banca="FEPESE", salario=5200))
 
     texto = cliente.get("/").text
-    for rotulo in ("Cidade:", "Salario:", "Banca:", "Status:", "Tipo:"):
+    for rotulo in ("Salario:", "Banca:", "Status:", "Tipo:"):
         assert rotulo in texto
 
 
@@ -499,8 +504,11 @@ def test_status_aberta_e_fechada(cliente):
     )
 
     texto = cliente.get("/?todos=true").text
-    assert "inscricao aberta" in texto
-    assert "inscricao fechada" in texto
+    # O par virou "Inscricao: aberta" dentro de "detalhes". Quem esta aberto
+    # continua dizendo o prazo na linha principal, que e o que decide.
+    assert "Inscricao:" in texto
+    assert "aberta" in texto
+    assert "fechada" in texto
 
 
 def test_sem_prazo_o_status_diz_que_nao_sabe(cliente):
@@ -552,8 +560,10 @@ def test_o_selo_de_salario_nao_usa_a_classe_do_estado_vazio(cliente):
     _semear(_concurso("https://a.test/1", salario=None))
 
     texto = cliente.get("/").text
-    assert "selo dinheiro sem-valor" in texto
-    assert "selo dinheiro vazio" not in texto
+    # Na linha-chave o salario nao e mais um selo, mas o nome da classe de
+    # "sem valor" continua sendo o que importa aqui: ele nao pode ser `vazio`.
+    assert "dinheiro sem-valor" in texto
+    assert "dinheiro vazio" not in texto
 
 
 # --- minha anotacao sobre o concurso ----------------------------------------
