@@ -304,3 +304,45 @@ def test_cargo_fora_do_yaml_nao_tem_sinonimo():
     """Sem invencao: o que nao esta anotado nao ganha parente."""
     assert alvo.sinonimos_do_cargo("Merendeira") == []
     assert alvo.sinonimos_do_cargo("") == []
+
+
+# --- o plural, que a comparacao por palavra inteira nao da de graca ---------
+#
+# Titulos reais da coleta: noticia sobre concurso quase sempre fala no plural
+# ("600 policiais penais"), e era justamente a noticia que eu nao podia
+# perder - ela chega antes de existir edital.
+
+@pytest.mark.parametrize("titulo", [
+    "Concurso PP SC: governo autoriza contratacao de 600 policiais penais",
+    "Concurso para agentes penitenciarios em Santa Catarina",
+    "Santa Catarina abre concurso para agente prisional",
+    "SC vai convocar agentes prisionais aprovados",
+])
+def test_o_cargo_no_plural_bate_no_alvo_principal(titulo):
+    marca = alvo.marcar(titulo, uf="SC")
+
+    assert marca is not None
+    assert marca.alvo == alvo.PRINCIPAL
+
+
+def test_o_plural_tambem_vale_para_a_tela_de_foco():
+    """`nomeia_cargo_do_principal` decide o que a home pode AFIRMAR: e ela que
+    separa "edital aberto do meu cargo" de "edital aberto na mesma casa"."""
+    assert alvo.nomeia_cargo_do_principal("policiais penais tomam posse")
+    assert alvo.nomeia_cargo_do_principal("agentes penitenciarios convocados")
+
+
+def test_o_plural_do_federal_continua_excluido():
+    """"Policia Penal Federal" e outro concurso, e no plural tambem: sem
+    "penais federais" na exclusao, o titulo federal virava o meu alvo."""
+    titulo = "Concurso reune policiais penais federais em Santa Catarina"
+    marca = alvo.marcar(titulo, uf="SC")
+
+    assert marca.alvo == alvo.SECUNDARIO
+    assert marca.nome == "Policia Penal Federal"
+
+
+def test_o_plural_nao_fura_a_trava_de_estado():
+    """A regra de sempre: sem prova de que e de SC, nao marca."""
+    assert alvo.marcar("Governo do PR contrata policiais penais", uf="PR") is None
+    assert alvo.marcar("Parana contrata policiais penais") is None

@@ -36,10 +36,20 @@ principal:
 
   # Como o cargo aparece escrito. "Agente penitenciario" e o nome antigo: foi
   # com ele que as duas edicoes do concurso sairam.
+  # O plural entra escrito, e nao por regra: a comparacao e por palavra
+  # inteira, entao "policial penal" nao acha "policiais penais". Os tres
+  # plurais abaixo sairam de titulos reais da coleta - noticia sobre concurso
+  # quase sempre fala no plural ("600 policiais penais"), e era justamente a
+  # noticia que eu nao podia perder.
   termos:
     - policia penal
     - policial penal
+    - policiais penais
     - agente penitenciario
+    - agentes penitenciarios
+    # Como o cargo aparece em edital de outros estados e em texto de jornal.
+    - agente prisional
+    - agentes prisionais
 
   # A sigla sozinha nao prova estado nenhum: Sao Paulo tambem tem uma
   # secretaria SAP. Quando a fonte nao informa a UF - a FEPESE e a IESES nao
@@ -54,6 +64,7 @@ principal:
   # esta na lista de secundarios, no lugar dele.
   exclui:
     - penal federal
+    - penais federais
 
   # Quem organizou as duas vezes que o concurso saiu: FEPESE em 2013 (edital
   # 01/2013 - SJC/SC) e em 2019 (edital 001/SAP/2019). NAO marca alvo
@@ -94,6 +105,10 @@ secundarios:
     termos:
       - policia penal federal
       - policial penal federal
+      # O plural pela mesma razao do bloco principal: sem ele, o titulo que
+      # so fala em "policiais penais federais" ficava sem marca nenhuma -
+      # excluido do principal, como tem que ser, e sem casar aqui.
+      - policiais penais federais
 
   - nome: Bombeiro Militar
     termos:

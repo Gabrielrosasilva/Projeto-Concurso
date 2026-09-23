@@ -600,3 +600,10 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   Com a contagem, quem chamava marcava como avisadas as N primeiras: falhando
   a do meio, ela ficava marcada como enviada - sumia para sempre - e a que
   saiu voltava no dia seguinte.
+- **plural de cargo entra escrito no `alvo.yml`**, e nao por regra de
+  linguagem. A comparacao e por palavra inteira - de proposito, porque e ela
+  que impede "SAP" de casar dentro de "Sapezal" - e por isso "policial penal"
+  nao acha "policiais penais". Noticia sobre concurso quase sempre fala no
+  plural ("600 policiais penais"), e noticia e justamente o que chega antes do
+  edital. O plural de "penal federal" entrou junto na exclusao, senao o
+  concurso federal no plural viraria o meu alvo.
