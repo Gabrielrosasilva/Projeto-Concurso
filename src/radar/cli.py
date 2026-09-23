@@ -5,6 +5,7 @@
     radar web
 """
 import logging
+import subprocess
 from pathlib import Path
 
 import typer
@@ -13,6 +14,7 @@ from rich.table import Table
 
 from radar import acervo, alvo as alvos, avisos, config, servico
 from radar import provas as _provas
+from radar.models import agora
 from radar.util import (
     dias_ate,
     formatar_data,
@@ -1002,6 +1004,105 @@ def web(
 
         uvicorn.run(aplicacao_web, host=host, port=porta)
 
+
+
+# --- sincronizar com o GitHub (etapa 11) ------------------------------------
+#
+# Um comando para o que antes eram cinco passos na ordem certa. A ordem e o
+# que protege o dado, e por isso ela esta escrita aqui e nao na minha cabeca:
+#
+#   pull   - traz a coleta do robo e o que ele ja avisou
+#   importar - o JSON entra no banco. ANTES de exportar, senao eu escreveria
+#              por cima das marcas de aviso do robo e ele mandaria tudo de novo
+#   exportar - o meu banco volta para o JSON, agora com os meus favoritos
+#   commit + push - o robo passa a conhece-los na proxima execucao
+
+
+def _git(*argumentos: str) -> subprocess.CompletedProcess:
+    """Roda um comando git na pasta do projeto e devolve o resultado."""
+    return subprocess.run(
+        ["git", *argumentos],
+        capture_output=True,
+        text=True,
+        cwd=Path(__file__).resolve().parent.parent.parent,
+    )
+
+
+ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json")
+
+
+@app.command()
+def sincronizar(
+    empurrar: bool = typer.Option(
+        True, "--empurrar/--sem-empurrar",
+        help="Faz o push no fim. Desligado, para antes e so mostra o que mudou",
+    ),
+) -> None:
+    """Troca com o GitHub o que cada lado sabe: pull, importar, exportar, push.
+
+    Existe porque as duas pontas sabem coisas diferentes. O robo sabe o que
+    apareceu na coleta e o que ele ja avisou; eu sei quais concursos marquei
+    com a estrela e o que anotei neles. Sem este comando, nenhum dos dois
+    ficava sabendo do outro - e o mesmo concurso chegava duas vezes no
+    celular, enquanto o favorito que eu marquei aqui nunca virava aviso la.
+
+    So mexe em `data/concursos.json` e `data/eventos.json`. O que mais estiver
+    mudado na pasta fica como esta.
+    """
+    console.print("[bold]1/5[/] Trazendo o que o robo coletou")
+    pull = _git("pull", "--rebase", "origin", "main")
+    if pull.returncode != 0:
+        console.print("[red]O pull falhou.[/] Resolva a mao e rode de novo:\n")
+        console.print(f"[dim]{(pull.stderr or pull.stdout).strip()}[/]")
+        raise typer.Exit(code=1)
+
+    console.print("[bold]2/5[/] Lendo o JSON para dentro do banco")
+    concursos = acervo.importar()
+    eventos_novos = acervo.importar_eventos()
+    console.print(
+        f"   {concursos} concurso(s) lido(s), {eventos_novos} evento(s) novo(s)"
+    )
+
+    console.print("[bold]3/5[/] Escrevendo o meu banco de volta no JSON")
+    total = acervo.exportar()
+    total_eventos = acervo.exportar_eventos()
+    favoritos = servico.contar_favoritos()
+    console.print(
+        f"   {total} concurso(s) e {total_eventos} evento(s), "
+        f"com [bold]{favoritos}[/] favorito(s)"
+    )
+
+    console.print("[bold]4/5[/] Commitando")
+    _git("add", *ARQUIVOS_DO_RADAR)
+    mudou = _git("diff", "--staged", "--quiet").returncode != 0
+    if not mudou:
+        console.print("   [dim]Nada mudou: nao ha o que commitar.[/]")
+        console.print("\n[green]Em dia com o GitHub.[/]")
+        return
+
+    data = agora().strftime("%Y-%m-%d")
+    commit = _git("commit", "-m", f"sincronizar: {data}")
+    if commit.returncode != 0:
+        console.print("[red]O commit falhou.[/]")
+        console.print(f"[dim]{(commit.stderr or commit.stdout).strip()}[/]")
+        raise typer.Exit(code=1)
+
+    if not empurrar:
+        console.print("[bold]5/5[/] [yellow]Sem empurrar, a pedido.[/]")
+        console.print("   O commit esta feito; falta `git push`.")
+        return
+
+    console.print("[bold]5/5[/] Empurrando")
+    push = _git("push", "origin", "HEAD:main")
+    if push.returncode != 0:
+        console.print("[red]O push falhou.[/] O commit esta feito aqui:\n")
+        console.print(f"[dim]{(push.stderr or push.stdout).strip()}[/]")
+        raise typer.Exit(code=1)
+
+    console.print(
+        f"\n[green]Sincronizado.[/] O robo passa a conhecer {favoritos} "
+        f"favorito(s) na proxima coleta."
+    )
 
 if __name__ == "__main__":
     app()
