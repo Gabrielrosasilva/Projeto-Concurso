@@ -647,3 +647,78 @@ servidor subiu.
 **O `--recarregar` quebra no Windows.** Ele sobe um segundo processo que
 reimporta o projeto, e isso falha quando o caminho da pasta tem espaco no nome —
 que e o caso aqui. Por isso vem desligado por padrao.
+
+## Etapa 8: Acompanhando, e o que o mural nao resolvia
+
+O mural lateral mostrava os favoritos em qualquer aba, e resolvia bem o
+problema para o qual nasceu: "nao me deixe perder isso de vista". Ele nao
+resolvia o seguinte, que e o que eu de fato pergunto ao abrir a tela — "e
+agora, o que eu faco?". Num cartao de seis linhas cabiam titulo, cidade,
+salario e prazo, e nao cabia mais nada: nem o historico do concurso, nem o
+proximo passo.
+
+A aba Acompanhando desfaz esse aperto. Um bloco por favorito, com espaco para
+as tres coisas que o mural nao tinha como mostrar:
+
+- a **contagem de dias**, que responde "da tempo?";
+- a **proxima acao**, que responde "o que eu faco?";
+- a **linha do tempo inteira**, com data e link, que responde "como chegamos
+  aqui?".
+
+### A proxima acao e derivada, nunca adivinhada
+
+E o unico campo interpretado da tela, e por isso o de maior risco. Ela sai de
+dois fatos gravados — a `situacao` e o prazo lido do edital — e de mais nada.
+A ordem das perguntas e a ordem em que elas mandam: prazo correndo vence
+qualquer outra coisa, porque e a unica que tem hora para acabar.
+
+Dois casos mereceram tratamento proprio:
+
+- **situacao aberta, prazo desconhecido.** Isso e urgente e ao mesmo tempo
+  impossivel de quantificar. A tela diz as duas coisas: "inscrever-se; o prazo
+  esta aberto, mas a data-limite eu nao sei — confira na pagina do concurso";
+- **situacao aberta, prazo vencido.** Aqui os dois registros se contradizem, e
+  quem manda e a data: "conferir na fonte: o prazo que eu tenho ja venceu, mas
+  o registro ainda diz aberto". A alternativa seria a tela escrever "faltam -3
+  dias", que e pior do que nao dizer nada.
+
+Situacao que nao diz nada vira "nao sei ainda", com a mesma marca amarela de
+`foco.py`. Dado errado sobre o meu proprio concurso e pior que tela vazia.
+
+### O corte do que toca o celular
+
+A tabela `eventos` grava seis acontecimentos, e avisar os seis no Telegram
+seria transformar em notificacao coisa que e so tramite. O corte ficou em
+cinco, e por consequencia, nao por raridade: **edital publicado, edital
+retificado, inscricao abrindo, inscricao fechando e prova marcada** — os cinco
+que mudam o que eu tenho que FAZER. "Apareceu" e "mudou de prevista para
+autorizado" ficam na linha do tempo, para eu ler quando quiser.
+
+Isso obrigou uma mudanca em `eventos.py`: `edital_publicado` caia no generico
+`mudou_situacao` junto com o resto do ciclo, e nao dava para avisar so ele sem
+avisar tudo. Ganhou tipo proprio.
+
+O aviso de favorito e outro aviso, e nao um caso do que ja existia. O
+`avisar()` responde "apareceu algo que pode me interessar?", e por isso filtra
+por distancia; `avisar_favoritos()` responde "mudou algo no que eu JA escolhi
+seguir?", e para essa pergunta filtro nenhum faz sentido — um favorito de
+Capinzal avisa igual. No `radar atualizar` ele roda primeiro: se o teto do dia
+cortar alguma coisa, que corte a descoberta, e nao a mudanca no meu favorito.
+
+A fila e por evento, com a coluna nova `eventos.avisado_em`, e so marca o que
+realmente saiu. Telegram fora do ar deixa a fila em pe para a proxima coleta,
+como ja acontecia com o aviso de concurso novo.
+
+### A promessa que o mural cumpria sozinho
+
+"NENHUM filtro esconde um favorito" era uma decisao da fase 2, e quem a
+cumpria era o mural: ele aparecia em toda aba, entao o favorito de Itajai
+nunca sumia. Tirar o mural sem mais nada teria reduzido a promessa a "nenhum
+filtro esconde um favorito **dentro da aba Acompanhando**", que nao e a mesma
+coisa.
+
+Ela desceu para a consulta. Em `servico.listar`, o favorito escapa dos
+recortes que eu **nao** pedi — o anel padrao da tela e a faixa de remuneracao.
+Nao escapa do que eu digitei: busca por palavra, anel escolhido a dedo e a aba
+"Abertos" continuam sendo perguntas, e resposta com favorito de outro lugar no
+meio e filtro que deixou de responder.

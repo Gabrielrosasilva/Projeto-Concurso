@@ -24,18 +24,35 @@ log = logging.getLogger(__name__)
 
 APARECEU = "apareceu"
 MUDOU_SITUACAO = "mudou_situacao"
+EDITAL_PUBLICADO = "edital_publicado"
 INSCRICOES_ABERTAS = "inscricoes_abertas"
 INSCRICOES_ENCERRADAS = "inscricoes_encerradas"
 EDITAL_RETIFICADO = "edital_retificado"
 PROVA_MARCADA = "prova_marcada"
 
 # Situacao nova que tem evento proprio, em vez do generico `mudou_situacao`.
-# Abrir e fechar inscricao sao os dois momentos que eu de fato preciso achar
-# depois na linha do tempo; o resto do ciclo de vida e passo de tramite.
+# Sair o edital, abrir e fechar inscricao sao os momentos que eu de fato
+# preciso achar depois na linha do tempo; o resto do ciclo e passo de tramite.
 EVENTO_DA_SITUACAO = {
+    "edital_publicado": EDITAL_PUBLICADO,
     "inscricoes_abertas": INSCRICOES_ABERTAS,
     "encerrado": INSCRICOES_ENCERRADAS,
 }
+
+# O que merece tocar o celular, e so quando o concurso e FAVORITO.
+#
+# O corte e por consequencia, nao por raridade: estes cinco mudam o que eu
+# tenho que FAZER. Saiu edital, eu leio; retificou, eu releio; abriu, eu me
+# inscrevo; fechou, eu paro de contar com ele; marcou prova, eu marco na
+# agenda. "Apareceu" e "mudou de prevista para autorizado" nao mudam nada hoje
+# - eles ficam na linha do tempo, para eu ler quando quiser.
+EVENTOS_IMPORTANTES = (
+    EDITAL_PUBLICADO,
+    EDITAL_RETIFICADO,
+    INSCRICOES_ABERTAS,
+    INSCRICOES_ENCERRADAS,
+    PROVA_MARCADA,
+)
 
 
 def registrar(

@@ -96,7 +96,9 @@ def atualizar(
         help="Tambem baixa provas novas e le as questoes delas (demora)",
     ),
     avisar_telegram: bool = typer.Option(
-        True, "--avisar/--sem-avisar", help="Manda os concursos novos no Telegram"
+        True,
+        "--avisar/--sem-avisar",
+        help="Manda no Telegram o que mudou nos favoritos e os concursos novos",
     ),
 ) -> None:
     """Roda a rotina inteira, na ordem certa.
@@ -122,6 +124,13 @@ def atualizar(
     ]
 
     if avisar_telegram:
+        # Dois avisos, e nesta ordem: primeiro o que mudou no que eu JA sigo,
+        # depois o que apareceu de novo. Se o teto do dia cortar alguma coisa,
+        # que corte a descoberta, e nao a mudanca no meu favorito.
+        etapas.append(
+            ("Avisando mudanca nos favoritos",
+             lambda: str(servico.avisar_favoritos()))
+        )
         etapas.append(("Avisando no Telegram", lambda: str(servico.avisar())))
 
     if completo:

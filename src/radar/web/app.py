@@ -10,6 +10,8 @@ from fastapi import FastAPI, Form, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from radar import acompanhando as meus_favoritos
+from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
 from radar import servico
 from radar.util import converter_valor, dias_ate, formatar_data
@@ -233,10 +235,6 @@ def concursos(
             ),
             "favorito": servico.FAVORITO,
             "etapas": ETAPAS,
-            # O mural fica visivel em qualquer aba: sao os concursos que eu
-            # escolhi acompanhar, e some-los atras de uma aba derrotaria o
-            # proposito.
-            "mural": servico.listar(favoritos=True, limite=20),
             # Qual cartao esta com o campo de salario aberto.
             "editar": cartao_em_edicao,
             # A URL de agora, com e sem o parametro `editar`: uma abre o campo
@@ -408,18 +406,6 @@ def simulado_responder(
 
 # --- previsao de abertura (fase 6) ------------------------------------------
 
-# As duas secoes que ja tem lugar na navegacao mas ainda nao tem conteudo.
-# Elas existem aqui para o menu do topo ser o menu de verdade desde ja - mudar
-# a navegacao depois custa mais do que deixar a porta aberta agora.
-EM_CONSTRUCAO = {
-    "acompanhando": (
-        "Acompanhando",
-        "Aqui vao ficar os concursos que eu escolhi seguir, com a linha do "
-        "tempo de cada um - o que `radar eventos` ja grava.",
-    ),
-}
-
-
 @app.get("/", response_class=HTMLResponse)
 def meu_foco(request: Request):
     """A tela que responde "o que esta acontecendo com o meu concurso?".
@@ -470,15 +456,21 @@ def treinar_do_foco():
 
 @app.get("/acompanhando", response_class=HTMLResponse)
 def acompanhando(request: Request):
-    return _em_construcao(request, "acompanhando")
+    """Um bloco por favorito: o que aconteceu, e o que fazer agora.
 
-
-def _em_construcao(request: Request, aba: str):
-    titulo, promessa = EM_CONSTRUCAO[aba]
+    Esta tela substituiu o mural lateral. O mural cabia em qualquer aba mas
+    nao cabia nada dentro dele; aqui cada favorito tem espaco para a linha do
+    tempo inteira e para a proxima acao.
+    """
     return templates.TemplateResponse(
         request=request,
-        name="em_construcao.html",
-        context={"aba": aba, "titulo": titulo, "promessa": promessa},
+        name="acompanhando.html",
+        context={
+            "blocos": meus_favoritos.blocos(),
+            "importantes": linha_do_tempo.EVENTOS_IMPORTANTES,
+            "rotulo_anel": ROTULO_DO_ANEL,
+            "rotulo_situacao": SITUACAO_LEGIVEL,
+        },
     )
 
 

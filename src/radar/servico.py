@@ -8,6 +8,7 @@ from statistics import median
 
 from sqlalchemy import case, func, select
 
+from radar import acompanhando as meus_favoritos
 from radar import alvo as alvos
 from radar import avisos
 from radar import eventos as linha_do_tempo
@@ -310,6 +311,19 @@ def listar(
         with sessao() as s:
             return list(s.scalars(consulta.limit(limite)))
 
+    # A partir daqui os filtros excluem - e o favorito escapa de todos eles.
+    #
+    # Isto era papel do mural lateral, que mostrava os favoritos em qualquer
+    # aba. O mural saiu na etapa 8, e sem esta linha a promessa antiga -
+    # "NENHUM filtro esconde um favorito, nem distancia, nem salario, nem
+    # prazo vencido" - passaria a valer so dentro da aba Acompanhando.
+    #
+    # Busca explicita continua sendo busca: quem digita "Palhoca" ou escolhe
+    # uma banca esta fazendo uma pergunta, e a resposta nao pode vir com um
+    # favorito de Itajai no meio. Por isso o escape cobre os filtros que eu
+    # nao pedi (o anel padrao, o salario), e nao os que eu digitei.
+    escapa = Concurso.interesse == FAVORITO
+
     if salario_min is not None or salario_max is not None:
         # Filtro filtra: quem nao tem salario conhecido fica de fora.
         #
@@ -318,11 +332,12 @@ def listar(
         # resultado era um filtro que nao filtrava nada. Quem usa precisa
         # saber do ponto cego, e nao adivinhar: a tela avisa quantos ficaram
         # de fora por falta de valor, e `contar_sem_salario` da esse numero.
-        consulta = consulta.where(Concurso.salario.is_not(None))
+        faixa = Concurso.salario.is_not(None)
         if salario_min is not None:
-            consulta = consulta.where(Concurso.salario >= salario_min)
+            faixa = faixa & (Concurso.salario >= salario_min)
         if salario_max is not None:
-            consulta = consulta.where(Concurso.salario <= salario_max)
+            faixa = faixa & (Concurso.salario <= salario_max)
+        consulta = consulta.where(faixa | escapa)
         consulta = consulta.order_by(None).order_by(Concurso.salario.desc())
 
     # Noticia que veio junto no feed nao e concurso: fica de fora por padrao.
@@ -330,9 +345,15 @@ def listar(
         consulta = consulta.where(Concurso.tipo != "noticia")
 
     if relevancia:
+        # Anel escolhido a dedo e pergunta explicita, como a busca: aqui o
+        # favorito nao escapa, senao "Longe" viria com um favorito de Palhoca.
         consulta = consulta.where(Concurso.relevancia == relevancia)
     elif not todas_relevancias:
-        consulta = consulta.where(Concurso.relevancia.in_(RELEVANCIA_PADRAO))
+        # Este e o recorte que eu NAO pedi - ele e o padrao da tela. Favorito
+        # passa por cima dele: foi para isso que eu marquei a estrela.
+        consulta = consulta.where(
+            Concurso.relevancia.in_(RELEVANCIA_PADRAO) | escapa
+        )
 
     if uf:
         consulta = consulta.where(Concurso.uf == uf.upper())
@@ -531,6 +552,45 @@ def avisar(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
             f"⚠️ Mais {sobraram} concurso(s) passaram no filtro nesta "
             f"coleta.\n\nIsso costuma indicar erro de regra de "
             f"classificacao. Veja todos com <code>radar listar --todos</code>."
+        )
+
+    return ResultadoAviso(enviados=enviados, pendentes=sobraram)
+
+
+def avisar_favoritos(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
+    """Manda no Telegram as mudancas importantes dos concursos que eu sigo.
+
+    E um aviso diferente do outro, e por isso vive numa funcao propria. O
+    `avisar()` responde "apareceu algo que pode me interessar?" e por isso
+    passa por filtro de distancia e por teto. Este aqui responde "mudou algo
+    no que eu JA escolhi seguir?" - e para essa pergunta filtro nenhum faz
+    sentido: eu marquei a estrela, eu quero saber.
+
+    O teto continua valendo, pelo mesmo motivo de sempre: protecao contra
+    regra quebrada virar 200 notificacoes. Mas ele nunca deveria ser
+    alcancado aqui - sao poucos favoritos, e poucos eventos por favorito.
+    """
+    criar_tabelas()
+
+    if not config.telegram_configurado():
+        return ResultadoAviso(configurado=False)
+
+    pendentes = meus_favoritos.eventos_a_avisar(limite=limite + 1)
+    if not pendentes:
+        return ResultadoAviso()
+
+    escolhidos = pendentes[:limite]
+    sobraram = len(pendentes) - len(escolhidos)
+
+    enviados = avisos.enviar_varios(
+        [avisos.formatar_evento(evento, concurso) for evento, concurso in escolhidos]
+    )
+
+    # So marca o que realmente saiu: Telegram fora do ar deixa a fila em pe
+    # para a proxima coleta, como ja acontece com o aviso de concurso novo.
+    if enviados:
+        meus_favoritos.marcar_avisados(
+            [evento.id for evento, _ in escolhidos[:enviados]]
         )
 
     return ResultadoAviso(enviados=enviados, pendentes=sobraram)

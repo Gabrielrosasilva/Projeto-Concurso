@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acompanhando &middot; Radar de Concursos</title>
+  <style>
+    :root{
+      color-scheme: light dark;
+      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
+      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
+      --verde:#047857; --verde-fraco:#d3f2e4;
+      --prazo:#be123c; --prazo-fraco:#ffe4e9;
+      --estrela:#b45309; --estrela-fraca:#fef3c7;
+      --duvida:#b45309; --duvida-fraco:#fdeed3;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
+        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
+        --verde:#4ade80; --verde-fraco:#10291d;
+        --prazo:#fb7185; --prazo-fraco:#2c1219;
+        --estrela:#fbbf24; --estrela-fraca:#2e2310;
+        --duvida:#fbbf24; --duvida-fraco:#2e2310;
+      }
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--fundo);color:var(--texto);
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+    main{max-width:820px;margin:0 auto;padding:1.75rem 1.25rem 4rem}
+    h1{margin:0 0 .15rem;font-size:1.6rem;letter-spacing:-.02em}
+    .sub{margin:0 0 1.5rem;color:var(--suave);font-size:.9rem}
+
+    /* ---------------------------------------------------------- bloco --- */
+    .bloco{background:var(--cartao);border:1px solid var(--borda);
+      border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.1rem}
+    .bloco.urgente{border-color:var(--prazo)}
+
+    .topo{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.5rem}
+    .topo form{margin:0}
+    .estrela{background:none;border:0;cursor:pointer;font-size:1.15rem;
+      color:var(--estrela);padding:0;line-height:1.3}
+    .titulo{font-weight:700;color:var(--texto);text-decoration:none;
+      overflow-wrap:anywhere}
+    .titulo:hover{text-decoration:underline}
+
+    .onde{font-size:.85rem;color:var(--suave);margin:0 0 .75rem 1.9rem}
+
+    /* --------------------------------------------------- contagem ------- */
+    .contagem{display:inline-flex;align-items:baseline;gap:.4rem;
+      padding:.35rem .8rem;border-radius:999px;font-size:.88rem;font-weight:600;
+      background:var(--azul-fraco);color:var(--azul);margin-bottom:.75rem}
+    .contagem.urgente{background:var(--prazo-fraco);color:var(--prazo)}
+    .contagem.fechou{background:var(--fundo);color:var(--suave)}
+    .contagem .n{font-size:1.15rem;font-weight:800}
+
+    /* ------------------------------------------------- proxima acao ----- */
+    .acao{display:flex;gap:.6rem;align-items:baseline;padding:.7rem .85rem;
+      border-radius:8px;background:var(--verde-fraco);color:var(--verde);
+      font-size:.9rem;margin-bottom:.9rem}
+    .acao.urgente{background:var(--prazo-fraco);color:var(--prazo)}
+    .acao.nao-sei{background:var(--duvida-fraco);color:var(--duvida)}
+    .acao .rot{font-size:.7rem;font-weight:800;text-transform:uppercase;
+      letter-spacing:.06em;white-space:nowrap;opacity:.8}
+
+    /* --------------------------------------------------- linha do tempo -- */
+    .tempo{list-style:none;padding:0;margin:0;border-left:2px solid var(--borda);
+      padding-left:.9rem;margin-left:.3rem}
+    .tempo li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.7rem;
+      align-items:baseline;font-size:.85rem;padding:.25rem 0;position:relative}
+    .tempo li::before{content:"";position:absolute;left:-1.2rem;top:.65rem;
+      width:7px;height:7px;border-radius:50%;background:var(--borda)}
+    .tempo li.importante::before{background:var(--azul)}
+    .tempo .quando{color:var(--suave);font-variant-numeric:tabular-nums;
+      white-space:nowrap;font-size:.8rem}
+    .tempo .tipo{font-size:.68rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.05em;color:var(--suave);margin-right:.4rem}
+    .tempo li.importante .tipo{color:var(--azul)}
+    .tempo a{color:var(--texto);text-decoration:none}
+    .tempo a:hover{text-decoration:underline;color:var(--azul)}
+    .sem-tempo{font-size:.85rem;color:var(--suave);margin:0}
+
+    h2.rotulo{font-size:.7rem;margin:0 0 .5rem;text-transform:uppercase;
+      letter-spacing:.07em;color:var(--suave)}
+
+    /* ---------------------------------------------------------- vazio --- */
+    .vazio{background:var(--cartao);border:1px dashed var(--borda);
+      border-radius:12px;padding:2.5rem 2rem;text-align:center}
+    .vazio .grande{font-size:1.05rem;font-weight:600;margin:0 0 .5rem}
+    .vazio p{color:var(--suave);font-size:.9rem;margin:.4rem 0}
+    .vazio a{color:var(--azul);font-weight:600}
+    .nota{font-size:.82rem;color:var(--suave);margin:1.5rem 0 0}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body>
+
+{% from "_topo.html" import barra %}
+{{ barra('acompanhando') }}
+
+<main>
+  <h1>Acompanhando</h1>
+  <p class="sub">
+    Os concursos que eu marquei com a estrela, e o que mudou em cada um.
+  </p>
+
+  {% if blocos %}
+    {% for b in blocos %}
+      <article class="bloco {{ 'urgente' if b.acao.urgente }}">
+        <div class="topo">
+          <form method="post" action="/favoritar">
+            <input type="hidden" name="concurso_id" value="{{ b.concurso.id }}">
+            <input type="hidden" name="voltar" value="/acompanhando">
+            <button type="submit" class="estrela" title="Parar de acompanhar"
+                    aria-label="Parar de acompanhar">&#9733;</button>
+          </form>
+          <a class="titulo" href="{{ b.concurso.url }}" target="_blank"
+             rel="noopener">{{ b.concurso.titulo }}</a>
+        </div>
+
+        <p class="onde">
+          {%- if b.concurso.municipio %}{{ b.concurso.municipio }}
+            {%- if b.concurso.uf %}/{{ b.concurso.uf }}{% endif %}
+          {%- elif b.concurso.uf %}{{ b.concurso.uf }}
+          {%- else %}cidade nao identificada{% endif %}
+          &middot; {{ rotulo_anel.get(b.concurso.relevancia, b.concurso.relevancia) }}
+          &middot; {{ rotulo_situacao.get(b.concurso.situacao, b.concurso.situacao) }}
+        </p>
+
+        {# A contagem de dias, que e o que responde "da tempo?". #}
+        {% if b.dias_ate_fechar is not none %}
+          {% if b.fechou %}
+            <div class="contagem fechou">
+              inscricao fechou ha <span class="n">{{ -b.dias_ate_fechar }}</span> dia(s)
+            </div>
+          {% elif b.dias_ate_fechar == 0 %}
+            <div class="contagem urgente">inscricao fecha <span class="n">hoje</span></div>
+          {% else %}
+            <div class="contagem {{ 'urgente' if b.acao.urgente }}">
+              inscricao fecha em <span class="n">{{ b.dias_ate_fechar }}</span> dia(s)
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="contagem fechou">prazo de inscricao: nao sei ainda</div>
+        {% endif %}
+
+        {# A proxima acao. E o unico campo interpretado da tela, e ela sai
+           sempre da situacao gravada e do prazo lido - nunca de palpite. #}
+        <div class="acao {{ 'urgente' if b.acao.urgente }}{{ ' nao-sei' if not b.acao.sei }}">
+          <span class="rot">Proxima acao</span>
+          <span>{{ b.acao.texto }}</span>
+        </div>
+
+        <h2 class="rotulo">Linha do tempo</h2>
+        {% if b.eventos %}
+          <ul class="tempo">
+            {% for e in b.eventos %}
+              <li class="{{ 'importante' if e.tipo in importantes }}">
+                <span class="quando">{{ e.data | data }}</span>
+                <span>
+                  <span class="tipo">{{ e.tipo | replace('_', ' ') }}</span>
+                  {% if e.link %}
+                    <a href="{{ e.link }}" target="_blank" rel="noopener">{{ e.descricao }}</a>
+                  {% else %}{{ e.descricao }}{% endif %}
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="sem-tempo">
+            Nada registrado ainda. A linha do tempo comeca na primeira coleta
+            depois que o concurso entra no radar - concurso que ja estava no
+            banco antes disso aparece sem historico.
+          </p>
+        {% endif %}
+      </article>
+    {% endfor %}
+
+    <p class="nota">
+      O Telegram avisa sozinho quando um destes muda de verdade: edital
+      publicado, edital retificado, inscricao abrindo ou fechando, e prova
+      marcada. O resto fica aqui, sem tocar o celular.
+    </p>
+  {% else %}
+    <div class="vazio">
+      <p class="grande">Voce ainda nao acompanha nenhum concurso.</p>
+      <p>Clique na estrela &#9734; de qualquer concurso para segui-lo aqui.</p>
+      <p>A partir dai ele nunca mais e escondido por filtro nenhum, e o
+        Telegram avisa quando algo importante mudar nele.</p>
+      <p><a href="/concursos">Ir para Concursos</a></p>
+    </div>
+  {% endif %}
+</main>
+
+</body>
+</html>

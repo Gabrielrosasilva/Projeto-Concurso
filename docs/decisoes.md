@@ -50,8 +50,9 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   mas para em junho/2026, e nao traz titulo - so URL. O feed paginado traz
   tudo e usa o mesmo parser;
 - favorito e escolha minha: a coleta nao mexe, e NENHUM filtro o esconde -
-  nem distancia, nem salario, nem prazo vencido. Os favoritos ficam num mural
-  fixo a esquerda, visivel em qualquer aba;
+  nem distancia, nem salario, nem prazo vencido. Os favoritos tinham um mural
+  fixo a esquerda; na etapa 8 eles ganharam a aba Acompanhando, e a promessa
+  passou para a consulta (veja o fim deste arquivo);
 - na tela, TODA informacao vem com rotulo ("Banca: FEPESE", nao "FEPESE"), e
   `nucleo` aparece como "Perto";
 - dois campos tem dono e o classificador nao encosta neles: o salario que eu
@@ -457,3 +458,46 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   saber ate quando - a homologacao sai no Diario Oficial do Estado, que este
   projeto nao le por causa do robots.txt. Por isso a tela diz, junto, "quando
   comeca a contar: nao sei ainda".
+
+## Etapa 8: a aba Acompanhando
+
+- **o mural lateral saiu.** Ele resolvia "nao me deixe perder isso de vista",
+  mas nao resolvia "e agora, o que eu faco?": cabia em qualquer aba e nao
+  cabia nada dentro dele. Os favoritos foram para a aba Acompanhando, onde
+  cada um tem espaco para a linha do tempo inteira e para a proxima acao;
+- **a promessa "nenhum filtro esconde favorito" virou consulta, nao tela.**
+  Era o mural que a cumpria; sem isso, ela passaria a valer so dentro de
+  Acompanhando. Agora `listar()` deixa o favorito escapar dos recortes que eu
+  NAO pedi - o anel padrao da tela e a faixa de remuneracao;
+- **o escape nao cobre pergunta explicita.** Quem digita "Palhoca", escolhe um
+  anel a dedo ou abre "Abertos" esta perguntando, e a resposta nao pode vir
+  com um favorito de Itajai no meio - senao o filtro deixa de responder. A
+  linha que separa os dois e simples: recorte padrao escapa, filtro digitado
+  nao;
+- **a proxima acao e derivada, nunca adivinhada.** E o unico campo
+  interpretado da tela, e sai sempre de dois fatos gravados: a situacao e o
+  prazo. Prazo correndo vence qualquer outra coisa, porque e o unico que tem
+  hora para acabar. Situacao que nao diz nada vira "nao sei ainda", pela mesma
+  regra de `foco.py`: dado errado sobre o meu proprio concurso e pior que tela
+  vazia;
+- **quando a situacao e a data se contradizem, manda a data.** "Inscricoes
+  abertas" com prazo vencido nao vira "faltam -3 dias": vira "conferir na
+  fonte: o prazo que eu tenho ja venceu, mas o registro ainda diz aberto". Eu
+  prefiro saber que o registro esta velho;
+- **so cinco tipos de evento tocam o celular**, e so de favorito:
+  `edital_publicado`, `edital_retificado`, `inscricoes_abertas`,
+  `inscricoes_encerradas` e `prova_marcada`. O corte e por consequencia, nao
+  por raridade - estes cinco mudam o que eu tenho que FAZER. "Apareceu" e "de
+  prevista para autorizado" ficam na linha do tempo, para eu ler quando
+  quiser. Por causa disso, `edital_publicado` deixou de cair no generico
+  `mudou_situacao` e ganhou tipo proprio;
+- **o aviso de favorito e outro aviso**, em funcao separada
+  (`servico.avisar_favoritos`). O `avisar()` responde "apareceu algo que pode
+  me interessar?" e por isso filtra por distancia; este responde "mudou algo
+  no que eu JA seguo?", e para essa pergunta filtro nenhum faz sentido. Ele
+  roda ANTES do outro no `radar atualizar`: se o teto do dia cortar alguma
+  coisa, que corte a descoberta, e nao a mudanca no meu favorito;
+- a fila de aviso e por EVENTO, nao por concurso: a coluna `eventos.avisado_em`
+  existe pelo mesmo motivo que `concursos.avisado_em` - a coleta de amanha nao
+  pode repetir o aviso de hoje. E so marca o que realmente saiu, para Telegram
+  fora do ar deixar a fila em pe em vez de sumir com a mudanca.

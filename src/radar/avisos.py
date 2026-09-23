@@ -16,7 +16,7 @@ import requests
 
 from radar import alvo as alvos
 from radar import config
-from radar.models import Concurso
+from radar.models import Concurso, agora
 from radar.util import formatar_data
 
 log = logging.getLogger(__name__)
@@ -125,6 +125,46 @@ def enviar_varios(textos: list[str]) -> int:
         if enviar(texto):
             enviadas += 1
     return enviadas
+
+
+# Como cada mudanca de favorito abre a mensagem. O emoji e o rotulo dizem, na
+# primeira linha, o que mudou - e o que decide se vale abrir o celular agora.
+AVISO_DO_EVENTO = {
+    "edital_publicado": ("\U0001F4C4", "Edital publicado"),
+    "edital_retificado": ("\U0000270F", "Edital retificado"),
+    "inscricoes_abertas": ("\U0001F7E2", "Inscricoes abertas"),
+    "inscricoes_encerradas": ("\U0001F534", "Inscricoes encerradas"),
+    "prova_marcada": ("\U0001F4C5", "Prova marcada"),
+}
+
+
+def formatar_evento(evento, concurso) -> str:
+    """A mensagem de uma mudanca num concurso que eu acompanho.
+
+    A estrela vem sempre: ela e o que separa este aviso do aviso de concurso
+    novo. Este aqui e sobre algo que EU escolhi seguir, e por isso ele passa
+    por filtro nenhum.
+    """
+    emoji, rotulo = AVISO_DO_EVENTO.get(evento.tipo, ("\U000026AA", evento.tipo))
+
+    linhas = [
+        f"{emoji} <b>{rotulo}</b> \u2605",
+        html.escape(concurso.titulo),
+        f"\n<i>{html.escape(evento.descricao)}</i>",
+    ]
+
+    if concurso.inscricoes_ate:
+        faltam = (concurso.inscricoes_ate - agora()).days
+        if faltam >= 0:
+            linhas.append(
+                f"Inscricao ate {formatar_data(concurso.inscricoes_ate)}"
+                f" \u00b7 faltam {faltam}d"
+            )
+
+    # O link do evento aponta para o que mudou - o PDF retificado, por exemplo.
+    # Sem ele, vale a pagina do concurso.
+    linhas.append(f"\n{evento.link or concurso.url}")
+    return "\n".join(linhas)
 
 
 def formatar_retificacao(retificacao) -> str:

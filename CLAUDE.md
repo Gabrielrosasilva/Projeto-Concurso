@@ -111,9 +111,11 @@ meses antes do edital**, e da tempo de estudar o padrao dela.
 6      PRONTA: previsao de abertura por municipio, na web e na CLI
 7      PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
        parte que so a IA faz: pegadinha especifica e macete de memorizacao
-8      PRONTA: tabela `eventos` (linha do tempo por concurso), navegacao
-       redesenhada, e a home "Meu foco" - situacao do alvo, sinais, quadro
-       de materias do edital contra o que caiu, e treino de 20 questoes
+8      PRONTA: tabela `eventos`, navegacao redesenhada, a home "Meu foco"
+       (situacao do alvo, sinais, materias do edital contra o que caiu,
+       treino de 20 questoes) e a aba Acompanhando no lugar do mural - um
+       bloco por favorito, com linha do tempo, proxima acao, contagem de
+       dias, e aviso no Telegram das cinco mudancas que importam
 ```
 
 A arvore de `src/radar/`, arquivo por arquivo, esta no

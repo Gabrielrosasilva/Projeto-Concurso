@@ -226,25 +226,51 @@ def test_sem_prazo_o_status_nao_e_inventado(banco_temporario):
 
 # --- a tela -----------------------------------------------------------------
 
-def test_o_mural_aparece_em_qualquer_aba(cliente):
-    """Favorito escondido atras de uma aba derrota o proposito do mural."""
+def test_o_recorte_padrao_nao_esconde_favorito(cliente):
+    """A promessa que era do mural lateral, agora feita pela consulta.
+
+    O mural mostrava os favoritos em qualquer aba, e era isso que garantia que
+    um favorito de Itajai nao sumisse na tela de Concursos. Ele saiu na etapa
+    8; sem este escape, a promessa passaria a valer so dentro de Acompanhando.
+    """
     (id_,) = _semear(_concurso(
-        "https://a.test/1", titulo="Guarda Municipal de Palhoca"
+        "https://a.test/1", titulo="Guarda Municipal de Capinzal",
+        municipio="Capinzal", relevancia="remoto",
     ))
     servico.favoritar(id_)
 
-    for pagina in ("/concursos", "/concursos?abertas=true",
-                   "/concursos?todos=true", "/concursos?relevancia=remoto"):
-        texto = cliente.get(pagina).text
-        assert "Meu mural" in texto
-        assert "Guarda Municipal de Palhoca" in texto
+    # O anel padrao da tela e nucleo+proximo: sem a estrela, "remoto" nao entra.
+    titulos = [c.titulo for c in servico.listar()]
+    assert "Guarda Municipal de Capinzal" in titulos
+    assert "Guarda Municipal de Capinzal" in cliente.get("/concursos").text
 
 
-def test_mural_vazio_explica_como_usar(cliente):
-    _semear(_concurso("https://a.test/1"))
+def test_filtro_de_salario_nao_esconde_favorito(cliente):
+    """Nem o salario baixo, nem o salario desconhecido."""
+    ids = _semear(
+        _concurso("https://a.test/1", titulo="Favorito que ganha pouco",
+                  salario=2500.0),
+        _concurso("https://a.test/2", titulo="Favorito sem salario conhecido",
+                  salario=None),
+        _concurso("https://a.test/3", titulo="Concurso qualquer", salario=2400.0),
+    )
+    servico.favoritar(ids[0])
+    servico.favoritar(ids[1])
 
-    texto = cliente.get("/concursos").text
-    assert "Clique na estrela" in texto
+    titulos = [c.titulo for c in servico.listar(salario_min=5000)]
+    assert "Favorito que ganha pouco" in titulos
+    assert "Favorito sem salario conhecido" in titulos
+    assert "Concurso qualquer" not in titulos
+
+
+def test_pergunta_explicita_continua_sendo_pergunta(cliente):
+    """Escolher um anel a dedo e uma pergunta, e a resposta nao pode vir com
+    um favorito de outro anel no meio - senao o filtro deixa de responder."""
+    (id_,) = _semear(_concurso("https://a.test/1", titulo="Favorito do nucleo"))
+    servico.favoritar(id_)
+
+    titulos = [c.titulo for c in servico.listar(relevancia="remoto")]
+    assert titulos == []
 
 
 def test_botao_favoritar_liga_e_desliga(cliente):

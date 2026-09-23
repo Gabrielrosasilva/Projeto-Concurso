@@ -35,54 +35,14 @@
     body{margin:0;padding:0;background:var(--fundo);color:var(--texto);
          font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
 
-    /* O mural e uma faixa colada na borda esquerda da janela; a lista fica no
-       resto e se centraliza sozinha. No celular vira uma coluna so, com o
-       mural em cima - os favoritos sao o que eu quero ver primeiro.
-       minmax(0,1fr) e nao 1fr: `1fr` sozinho nao encolhe abaixo do conteudo
-       minimo da coluna, e um titulo longo poderia furar a largura da tela. */
-    .quadro{display:grid;grid-template-columns:340px minmax(0,1fr);
-            align-items:start}
-    @media (max-width:900px){ .quadro{grid-template-columns:minmax(0,1fr)} }
-    .mural,main{min-width:0}
-
     main{padding:1.75rem 1.25rem 4rem;max-width:920px;margin:0 auto;width:100%}
-    /* O titulo fica sobre a lista, nao sobre o mural. */
+    /* O titulo fica sobre a lista. */
     .cabecalho{text-align:center;margin-bottom:1.5rem}
     h1{margin:0 0 .2rem;font-size:1.7rem;letter-spacing:-.02em}
     .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
 
     /* titulo longo sem espaco (URL, nome comprido) nao pode furar a coluna */
-    .titulo,.fixado a{overflow-wrap:anywhere}
-
-    /* ----------------------------------------------------------- mural --- */
-    .mural{position:sticky;top:0;align-self:stretch;min-height:100vh;
-      padding:1.75rem 1.1rem 2rem;background:var(--cartao);
-      border-right:1px solid var(--borda)}
-    @media (max-width:900px){
-      .mural{position:static;min-height:0;border-right:0;
-        border-bottom:1px solid var(--borda)}
-    }
-    .mural h2{font-size:1rem;margin:0 0 .75rem;display:flex;align-items:center;
-      gap:.4rem}
-    .mural h2 .n{background:var(--estrela-fraca);color:var(--estrela);
-      font-size:.75rem;padding:.05rem .45rem;border-radius:999px}
-    .mural ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem;
-      grid-template-columns:minmax(0,1fr)}
-    .fixado{background:var(--cartao);border:1px solid var(--borda);
-      border-left:4px solid var(--remoto);border-radius:10px;padding:.75rem .85rem}
-    .fixado.nucleo{border-left-color:var(--nucleo);background:var(--nucleo-fraco)}
-    .fixado.proximo{border-left-color:var(--proximo);background:var(--proximo-fraco)}
-    .fixado.estadual{border-left-color:var(--estadual);background:var(--estadual-fraco)}
-    .fixado.indefinida{border-left-color:var(--indef);background:var(--indef-fraco)}
-    .fixado a{color:var(--texto);text-decoration:none;font-weight:600;
-      font-size:.9rem;display:block;margin-bottom:.4rem}
-    .fixado a:hover{text-decoration:underline}
-    .fixado .linha{font-size:.8rem;color:var(--suave);display:block}
-    .fixado .valor{font-weight:700;color:var(--texto)}
-    .fixado .fecha{color:var(--prazo);font-weight:700}
-    .fixado .topo-fixado{display:flex;gap:.4rem;align-items:flex-start}
-    .mural .vazio-mural{background:var(--cartao);border:1px dashed var(--borda);
-      border-radius:10px;padding:1rem;color:var(--suave);font-size:.8rem}
+    .titulo{overflow-wrap:anywhere}
 
     /* ------------------------------------------------------------ abas --- */
     nav{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
@@ -487,59 +447,6 @@
   </li>
 {% endmacro %}
 
-<div class="quadro">
-
-  {# ------------------------------------------------------ mural ---------- #}
-  <aside class="mural">
-    <h2>Meu mural <span class="n">{{ n_favoritos }}</span></h2>
-
-    {% if mural %}
-      <ul>
-        {% for c in mural %}
-          {% set faltam = c.inscricoes_ate | dias %}
-          <li class="fixado {{ c.relevancia }}">
-            <div class="topo-fixado">
-              <form class="fav" method="post" action="/favoritar">
-                <input type="hidden" name="concurso_id" value="{{ c.id }}">
-                <input type="hidden" name="voltar" value="{{ url_atual }}">
-                <button type="submit" class="marcada" title="Tirar do mural"
-                        aria-label="Tirar do mural">★</button>
-              </form>
-              <a href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
-            </div>
-            <span class="linha">
-              {%- if c.municipio %}{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
-              {%- elif c.uf %}{{ c.uf }}{% else %}cidade nao identificada{% endif %}
-              &middot; {{ rotulo_anel.get(c.relevancia, c.relevancia) }}
-            </span>
-            <span class="linha">
-              <span class="valor">{% if c.salario %}R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}{% else %}R$ ??{% endif %}</span>
-              &middot; {{ c.banca if c.banca else 'banca a confirmar' }}
-            </span>
-            <span class="linha">
-              {% if c.inscricoes_ate and faltam >= 0 %}
-                <span class="fecha">ate {{ c.inscricoes_ate | data }} &middot; faltam {{ faltam }}d</span>
-              {% elif c.inscricoes_ate %}
-                inscricao fechada em {{ c.inscricoes_ate | data }}
-              {% else %}
-                prazo nao confirmado
-              {% endif %}
-            </span>
-          </li>
-        {% endfor %}
-      </ul>
-      <p class="meta" style="margin-top:.6rem">
-        <a href="/concursos?favoritos=true" style="color:var(--azul)">Ver com o status completo</a>
-      </p>
-    {% else %}
-      <div class="vazio-mural">
-        Clique na estrela &#9734; de um concurso para fixar aqui e acompanhar
-        de perto.
-      </div>
-    {% endif %}
-  </aside>
-
-  {# ------------------------------------------------------ lista ---------- #}
   <main>
     <header class="cabecalho">
       <h1>Radar de Concursos</h1>
@@ -740,6 +647,5 @@
     {% endif %}
   </main>
 
-</div>
 </body>
 </html>

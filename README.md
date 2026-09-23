@@ -8,9 +8,9 @@ O alvo principal e **Policia Penal SC**, e depois dele as outras carreiras de
 seguranca publica. Para o resto, o filtro que importa e **onde a prova e
 aplicada** — Grande Florianopolis e arredores.
 
-**Estado: fases 1 a 6 prontas**, fase 7 parcial. Tres fontes coletando,
+**Estado: fases 1 a 6 e 8 prontas**, fase 7 parcial. Tres fontes coletando,
 elegibilidade lida do edital, 5.928 questoes catalogadas, simulado, previsao de
-abertura e a aba Macetes.
+abertura, a aba Macetes, a home "Meu foco" e a aba Acompanhando.
 
 Os outros documentos do projeto:
 
@@ -146,12 +146,15 @@ radar web --host 0.0.0.0        # abre tambem no celular, na mesma wi-fi
 | **Previsao de abertura** | onde vale ficar de olho agora, municipio por municipio |
 | **Calendario** | explica e entrega o `.ics` dos prazos |
 
-O **mural** e a coluna da esquerda, visivel em qualquer aba (no celular vai
-para o topo): sao os favoritos, com cor do anel, cidade, remuneracao, banca e o
-prazo em vermelho com os dias que faltam.
+Os favoritos tem aba propria, **[Acompanhando](#como-a-tela-e-organizada)**.
+Ela substituiu o mural lateral, que mostrava os mesmos concursos num cartao
+apertado em toda pagina.
 
 **Favorito e escolha sua:** a coleta nunca mexe nele, e **nenhum filtro o
-esconde** — nem distancia, nem salario, nem prazo vencido.
+esconde** — nem distancia, nem salario, nem prazo vencido. Isso vale para os
+recortes que voce nao pediu (o anel padrao da tela, a faixa de remuneracao);
+uma busca por palavra ou um anel escolhido a dedo continuam sendo perguntas, e
+a resposta nao vem com um favorito de outro lugar no meio.
 
 A aba **Noticias e andamento** faz o contrario das outras: nao filtra nada.
 Quem procura "PM" quer saber de qualquer policia militar, onde estiver e na
@@ -183,7 +186,7 @@ No topo, quatro destinos e um menu:
 |---|---|
 | **Meu foco** | a home: a situacao do alvo principal |
 | **Concursos** | a lista, com busca, atalhos e filtros |
-| **Acompanhando** | em construcao |
+| **Acompanhando** | um bloco por favorito: o que mudou e o que fazer agora |
 | **Estudar** | Macetes e Simulado, nesta ordem |
 | **Mais** | Previsao e Calendario |
 
@@ -198,13 +201,30 @@ Quem e o alvo sai de `config/alvo.yml`. **Onde o dado nao existe, a tela diz
 `hipotese: FEPESE, que fez 2013 e 2019` enquanto nao houver edital novo
 dizendo quem e.
 
+**Acompanhando** e a aba dos favoritos, um bloco por concurso marcado. Cada
+bloco traz:
+
+- a **contagem de dias** — "inscricao fecha em 5 dia(s)", em vermelho quando
+  falta uma semana ou menos, e "nao sei ainda" quando nao ha prazo conhecido;
+- a **proxima acao** — inscrever-se, ler o edital, estudar o padrao da banca,
+  so acompanhar. Ela sai da situacao gravada e do prazo lido, nunca de
+  palpite: sem dado, ela diz que nao sabe;
+- a **linha do tempo** inteira, do mais novo para o mais velho, com data e com
+  o link do que mudou (o PDF retificado, por exemplo).
+
+O **Telegram avisa sozinho** quando um favorito muda de verdade: edital
+publicado, edital retificado, inscricao abrindo, inscricao fechando e prova
+marcada. Os outros acontecimentos ("apareceu", "de prevista para autorizado")
+ficam na linha do tempo sem tocar o celular. Esse aviso nao passa por filtro de
+distancia nem disputa o teto com o aviso de concurso novo — ele sai primeiro.
+
 A regra de quem fica na barra e quem fica no "Mais": o que eu abro todo dia
 fica a vista, o que eu abro de vez em quando fica no menu.
 
 Em **Concursos**, a busca vem primeiro - e o que resolve o caso que atalho
 nenhum resolve. Depois vem quatro atalhos: **Perto**, **Estadual SC**,
-**Abertos** e **Todos**. Longe, A confirmar, o mural e a busca em tudo ficam em
-**mais filtros**, que nasce fechado e abre sozinho quando ha filtro ligado.
+**Abertos** e **Todos**. Longe, A confirmar e a busca em tudo ficam em **mais
+filtros**, que nasce fechado e abre sozinho quando ha filtro ligado.
 
 Cada cartao mostra o titulo e uma linha so: **onde &middot; salario &middot;
 prazo**. Sao as tres perguntas que se faz antes de decidir abrir o concurso.
@@ -246,7 +266,8 @@ internet.
 
 Tres campos sao **meus**, e a coleta nunca os sobrescreve:
 
-- a **estrela**, que fixa o concurso no mural;
+- a **estrela**, que leva o concurso para a aba Acompanhando e liga o aviso no
+  Telegram quando algo importante mudar nele;
 - o **"+ anotar"**, uma caixa de texto para o que nenhuma fonte sabe
   ("conversei com quem fez em 2022", "prova cai no mesmo dia da outra");
 - a **remuneracao digitada**. Mais da metade dos concursos nao informa salario
@@ -475,6 +496,7 @@ src/radar/
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
 ├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
 ├── foco.py         a situacao do alvo principal, para a pagina inicial
+├── acompanhando.py os favoritos: linha do tempo, proxima acao, fila de aviso
 ├── edital_materias.py  o quadro de distribuicao de questoes do edital
 ├── classificador.py  tipo, municipio, salario, relevancia e alvo, pelo titulo
 ├── avisos.py       monta e manda a mensagem no Telegram

@@ -154,9 +154,12 @@ def test_os_grids_declaram_coluna_que_encolhe(cliente):
     Isto e prevencao, nao conserto: o corte que eu achei ter visto no celular
     era artefato do print (o Chrome no Windows tem largura minima de janela de
     500px, entao um screenshot pedido com 400px e so um recorte). Declarar
-    minmax(0,1fr) continua sendo o certo e custa nada."""
+    minmax(0,1fr) continua sendo o certo e custa nada.
+
+    Eram tres grids quando o mural lateral existia. Ele saiu na etapa 8 e
+    levou dois junto; o que sobrou e o da grade de filtros."""
     texto = cliente.get("/concursos").text
-    assert texto.count("grid-template-columns:minmax(0,1fr)") >= 3
+    assert texto.count("grid-template-columns:minmax(0,1fr)") >= 1
 
 
 # --- a navegacao do topo (etapa 6) ------------------------------------------
@@ -186,17 +189,12 @@ def test_a_barra_aparece_em_toda_pagina(cliente, caminho):
     assert "topo-barra" in cliente.get(caminho).text
 
 
-def test_acompanhando_ainda_esta_em_construcao(cliente):
-    resposta = cliente.get("/acompanhando")
-    assert resposta.status_code == 200
-    assert "Em construcao" in resposta.text
-
-
-def test_meu_foco_deixou_de_ser_em_construcao(cliente):
-    """Ele virou a home de verdade na etapa 7."""
-    resposta = cliente.get("/")
-    assert resposta.status_code == 200
-    assert "Em construcao" not in resposta.text
+def test_nenhuma_aba_esta_mais_em_construcao(cliente):
+    """Meu foco virou a home na etapa 7; Acompanhando ganhou conteudo na 8."""
+    for caminho in ("/", "/acompanhando"):
+        resposta = cliente.get(caminho)
+        assert resposta.status_code == 200
+        assert "Em construcao" not in resposta.text
 
 
 def test_o_endereco_antigo_do_foco_leva_para_a_home(cliente):

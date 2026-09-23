@@ -91,7 +91,8 @@ ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 # digitacao silencioso.
 TIPOS_DE_EVENTO = (
     "apareceu",               # entrou no radar pela primeira vez
-    "mudou_situacao",         # qualquer passo do ciclo de vida
+    "mudou_situacao",         # qualquer outro passo do ciclo de vida
+    "edital_publicado",       # saiu o edital
     "inscricoes_abertas",     # o prazo abriu
     "inscricoes_encerradas",  # o prazo fechou
     "edital_retificado",      # o PDF do edital mudou de conteudo
@@ -213,6 +214,12 @@ class Evento(Base):
 
     # Para onde ir para conferir: a pagina do concurso, ou o PDF que mudou.
     link: Mapped[str | None] = mapped_column(String(800), nullable=True)
+
+    # Quando este evento virou mensagem no Telegram. Nulo = ainda nao avisei.
+    # So evento de concurso FAVORITO vira aviso, e so os tipos que mudam o que
+    # eu tenho que fazer - o resto fica na linha do tempo, para eu ler quando
+    # quiser, sem tocar o celular.
+    avisado_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
 
     def __repr__(self) -> str:
         return f"<Evento {self.tipo} {self.data:%d/%m/%Y}>"
