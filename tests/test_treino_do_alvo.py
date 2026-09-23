@@ -272,7 +272,7 @@ def test_a_home_diz_de_onde_a_proxima_rodada_sai(cliente):
     texto = cliente.get("/").text
 
     assert "das provas do cargo" in texto
-    assert "1 da mesma banca nas mesmas materias" in texto
+    assert "1 da mesma banca nas mesmas matérias" in texto
 
 
 def test_a_home_avisa_quando_as_provas_do_cargo_acabaram(cliente):
@@ -302,7 +302,7 @@ def test_o_simulado_comum_nao_ganha_o_rotulo_do_alvo(cliente):
     texto = cliente.get(f"/simulado/{simulado.id}").text
 
     assert "Treino de" not in texto
-    assert "Questoes reais" in texto
+    assert "Questões reais" in texto
 
 
 def test_caderno_sem_gabarito_nao_promete_rodada(cliente):
@@ -313,9 +313,9 @@ def test_caderno_sem_gabarito_nao_promete_rodada(cliente):
     _semear(_questao(1, resposta=None))
 
     texto = cliente.get("/").text
-    assert "Treinar 20 questoes" not in texto      # o botao, nao o titulo
+    assert "Treinar 20 questões" not in texto      # o botao, nao o titulo
     assert "ja respondi todas" not in texto
-    assert "Nenhuma questao do cargo no acervo ainda" in texto
+    assert "Nenhuma questão do cargo no acervo ainda" in texto
 
     resposta = cliente.post("/foco/treinar", follow_redirects=False)
     assert resposta.headers["location"] == "/simulado"

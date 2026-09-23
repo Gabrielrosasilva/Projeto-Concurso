@@ -2,7 +2,7 @@
 
 O erro cru do FastAPI e {"detail":"Not Found"}, que nao ajuda ninguem - e
 menos ainda no caso mais comum aqui: o link aparece na tela e mesmo assim da
-erro, porque o servidor esta rodando codigo antigo.
+erro, porque o servidor esta rodando código antigo.
 """
 import time
 
@@ -34,7 +34,7 @@ def test_com_o_codigo_parado_a_explicacao_e_endereco_errado(cliente, monkeypatch
     """Nada mudou no disco desde que o servidor subiu: entao foi engano mesmo."""
     monkeypatch.setattr(modulo_web, "SUBIU_EM", time.time() + 3600)
 
-    assert "Endereco errado" in cliente.get("/isso-nao-existe").text
+    assert "Endereço errado" in cliente.get("/isso-nao-existe").text
 
 
 def test_codigo_mais_novo_que_o_servidor_e_apontado(cliente, monkeypatch):
@@ -45,7 +45,7 @@ def test_codigo_mais_novo_que_o_servidor_e_apontado(cliente, monkeypatch):
 
     texto = cliente.get("/isso-nao-existe").text
 
-    assert "codigo antigo" in texto
+    assert "código antigo" in texto
     assert "Ctrl+C" in texto
 
 

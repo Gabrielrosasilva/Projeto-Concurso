@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Previsao de abertura &middot; Radar de Concursos</title>
+  <title>Previsão de abertura &middot; Radar de Concursos</title>
   <style>
     :root {
       color-scheme: light dark;
@@ -73,22 +73,22 @@
 
 
   <header>
-    <h1>Previsao de abertura</h1>
+    <h1>Previsão de abertura</h1>
     <p class="subtitulo">Onde vale ficar de olho agora, perto de casa</p>
   </header>
 
   <div class="aviso">
-    A conta: cada concurso vale por <b>ate 2 anos</b>, prorrogaveis por mais 2.
-    Dentro dessa faixa, quem manda e o ritmo do proprio municipio.
+    A conta: cada concurso vale por <b>até 2 anos</b>, prorrogáveis por mais 2.
+    Dentro dessa faixa, quem manda é o ritmo do próprio município.
     <br><br>
-    O que isto <b>nao sabe</b>: o historico vem da FEPESE (2006 a 2026) e do
-    feed de noticias (so 2026). Municipio que contratou outra banca entre 2021
-    e 2025 tem concurso que nao esta aqui, e aparece mais atrasado do que e.
+    O que isto <b>não sabe</b>: o histórico vem da FEPESE (2006 a 2026) e do
+    feed de notícias (só 2026). Município que contratou outra banca entre 2021
+    e 2025 tem concurso que não está aqui, e aparece mais atrasado do que é.
   </div>
 
   {% if not previsoes %}
     <div class="vazio">
-      <p>Nenhum municipio com historico ainda.</p>
+      <p>Nenhum município com histórico ainda.</p>
       <p>Rode <code>radar coletar</code>.</p>
     </div>
   {% endif %}
@@ -108,7 +108,7 @@
             <div class="topo">
               <span class="municipio">{{ p.municipio }}</span>
               <span class="quando">
-                {% if grupo == 'em_dia' %}Proximo por volta de {{ p.proximo_previsto }}
+                {% if grupo == 'em_dia' %}Próximo por volta de {{ p.proximo_previsto }}
                 {% else %}Previsto para {{ p.proximo_previsto }}{% endif %}
               </span>
             </div>

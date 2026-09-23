@@ -122,7 +122,7 @@
           {%- if b.concurso.municipio %}{{ b.concurso.municipio }}
             {%- if b.concurso.uf %}/{{ b.concurso.uf }}{% endif %}
           {%- elif b.concurso.uf %}{{ b.concurso.uf }}
-          {%- else %}cidade nao identificada{% endif %}
+          {%- else %}cidade não identificada{% endif %}
           &middot; {{ rotulo_anel.get(b.concurso.relevancia, b.concurso.relevancia) }}
           &middot; {{ rotulo_situacao.get(b.concurso.situacao, b.concurso.situacao) }}
         </p>
@@ -131,23 +131,23 @@
         {% if b.dias_ate_fechar is not none %}
           {% if b.fechou %}
             <div class="contagem fechou">
-              inscricao fechou ha <span class="n">{{ -b.dias_ate_fechar }}</span> dia(s)
+              inscrição fechou há <span class="n">{{ -b.dias_ate_fechar }}</span> dia(s)
             </div>
           {% elif b.dias_ate_fechar == 0 %}
-            <div class="contagem urgente">inscricao fecha <span class="n">hoje</span></div>
+            <div class="contagem urgente">inscrição fecha <span class="n">hoje</span></div>
           {% else %}
             <div class="contagem {{ 'urgente' if b.acao.urgente }}">
-              inscricao fecha em <span class="n">{{ b.dias_ate_fechar }}</span> dia(s)
+              inscrição fecha em <span class="n">{{ b.dias_ate_fechar }}</span> dia(s)
             </div>
           {% endif %}
         {% else %}
-          <div class="contagem fechou">prazo de inscricao: nao sei ainda</div>
+          <div class="contagem fechou">prazo de inscrição: não sei ainda</div>
         {% endif %}
 
         {# A proxima acao. E o unico campo interpretado da tela, e ela sai
            sempre da situacao gravada e do prazo lido - nunca de palpite. #}
         <div class="acao {{ 'urgente' if b.acao.urgente }}{{ ' nao-sei' if not b.acao.sei }}">
-          <span class="rot">Proxima acao</span>
+          <span class="rot">Próxima ação</span>
           <span>{{ b.acao.texto }}</span>
         </div>
 
@@ -168,9 +168,9 @@
           </ul>
         {% else %}
           <p class="sem-tempo">
-            Nada registrado ainda. A linha do tempo comeca na primeira coleta
-            depois que o concurso entra no radar - concurso que ja estava no
-            banco antes disso aparece sem historico.
+            Nada registrado ainda. A linha do tempo começa na primeira coleta
+            depois que o concurso entra no radar - concurso que já estava no
+            banco antes disso aparece sem histórico.
           </p>
         {% endif %}
       </article>
@@ -178,14 +178,14 @@
 
     <p class="nota">
       O Telegram avisa sozinho quando um destes muda de verdade: edital
-      publicado, edital retificado, inscricao abrindo ou fechando, e prova
+      publicado, edital retificado, inscrição abrindo ou fechando, e prova
       marcada. O resto fica aqui, sem tocar o celular.
     </p>
   {% else %}
     <div class="vazio">
-      <p class="grande">Voce ainda nao acompanha nenhum concurso.</p>
+      <p class="grande">Você ainda não acompanha nenhum concurso.</p>
       <p>Clique na estrela &#9734; de qualquer concurso para segui-lo aqui.</p>
-      <p>A partir dai ele nunca mais e escondido por filtro nenhum, e o
+      <p>A partir daí ele nunca mais é escondido por filtro nenhum, e o
         Telegram avisa quando algo importante mudar nele.</p>
       <p><a href="/concursos">Ir para Concursos</a></p>
     </div>

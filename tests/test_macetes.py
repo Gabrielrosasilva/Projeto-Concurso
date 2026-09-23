@@ -290,7 +290,7 @@ def test_a_tela_mostra_o_recorte_pedido(cliente):
 
     texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
 
-    assert "3</b> questoes no recorte" in texto
+    assert "3</b> questões no recorte" in texto
 
 
 def test_a_tela_explica_quando_nao_acha_nada(cliente):
@@ -300,7 +300,7 @@ def test_a_tela_explica_quando_nao_acha_nada(cliente):
 
     texto = cliente.get("/macetes?banca=FEPESE&tema=seguranca+da+informacao").text
 
-    assert "Nenhuma questao no acervo" in texto
+    assert "Nenhuma questão no acervo" in texto
 
 
 def test_a_tela_diz_o_que_ainda_nao_esta_la(cliente):
@@ -308,7 +308,7 @@ def test_a_tela_diz_o_que_ainda_nao_esta_la(cliente):
     pode dar a entender que saem."""
     _semear(_questao(1))
 
-    assert "nao inventa nada" in cliente.get("/macetes?banca=FEPESE").text
+    assert "não inventa nada" in cliente.get("/macetes?banca=FEPESE").text
 
 
 def test_a_tela_destaca_o_assunto_procurado(cliente):
@@ -332,7 +332,7 @@ def test_a_tela_mostra_os_dois_graficos(cliente):
 
     texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
 
-    assert "Quantas questoes caem numa prova" in texto
+    assert "Quantas questões caem numa prova" in texto
     assert "O que mais cai em" in texto
 
 

@@ -235,8 +235,8 @@ def test_a_aba_mostra_o_bloco_inteiro(cliente):
     texto = cliente.get("/acompanhando").text
 
     assert "Guarda Municipal de Palhoca" in texto      # o concurso
-    assert "inscricao fecha em" in texto               # a contagem de dias
-    assert "Proxima acao" in texto                     # o que fazer
+    assert "inscrição fecha em" in texto               # a contagem de dias
+    assert "Próxima ação" in texto                     # o que fazer
     assert "Inscrever-se" in texto
     assert "edital retificado" in texto                # a linha do tempo
     assert "https://a.test/edital.pdf" in texto        # com o link do evento

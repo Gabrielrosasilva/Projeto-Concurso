@@ -120,47 +120,47 @@
 
 <main>
   <h1>{{ p.nome_do_alvo }}</h1>
-  <p class="sub">O que esta acontecendo com o concurso que eu espero.</p>
+  <p class="sub">O que está acontecendo com o concurso que eu espero.</p>
 
   {% if not p.configurado %}
     <section>
       <p class="vazio">Nenhum alvo principal em <code>config/alvo.yml</code>.
-        Esta tela inteira sai de la.</p>
+        Esta tela inteira sai de lá.</p>
     </section>
   {% else %}
 
   {# ------------------------------------------------ situacao do alvo ---- #}
   <section>
-    <h2>Situacao</h2>
+    <h2>Situação</h2>
 
     <div class="veredito">
       {% if p.aberto %}
         <span class="marca aberto">Edital aberto</span>
-        <span class="frase">Ha inscricao aberta agora.</span>
+        <span class="frase">Há inscrição aberta agora.</span>
       {% else %}
         <span class="marca fechado">Sem edital aberto</span>
-        <span class="frase">Nenhuma inscricao aberta para o cargo.</span>
+        <span class="frase">Nenhuma inscrição aberta para o cargo.</span>
       {% endif %}
     </div>
 
     <dl>
       {% if p.aberto %}
-        <dt>Inscricao ate</dt>
+        <dt>Inscrição até</dt>
         <dd>
           {% if p.aberto.inscricoes_ate %}{{ p.aberto.inscricoes_ate | data }}
-          {% else %}<span class="nao-sei">nao sei ainda</span>{% endif %}
+          {% else %}<span class="nao-sei">não sei ainda</span>{% endif %}
         </dd>
         <dt>Edital</dt>
         <dd><a href="{{ p.aberto.url }}" target="_blank" rel="noopener">{{ p.aberto.titulo }}</a></dd>
       {% endif %}
 
-      <dt>Ultimo concurso</dt>
+      <dt>Último concurso</dt>
       <dd>
         {% if p.ultima %}
           {% if p.ultima.ano %}<strong>{{ p.ultima.ano }}</strong> &middot; {% endif %}
           <a href="{{ p.ultima.url }}" target="_blank" rel="noopener">{{ p.ultima.titulo }}</a>
         {% else %}
-          <span class="nao-sei">nao sei ainda</span>
+          <span class="nao-sei">não sei ainda</span>
         {% endif %}
       </dd>
 
@@ -171,7 +171,7 @@
         {% elif p.banca.nome %}
           {{ p.banca.como_hipotese }}
         {% else %}
-          <span class="nao-sei">nao sei ainda</span>
+          <span class="nao-sei">não sei ainda</span>
         {% endif %}
       </dd>
 
@@ -182,16 +182,16 @@
           {# O prazo esta no edital; a data em que ele comeca a contar sai na
              homologacao, publicada no Diario Oficial - que este projeto nao
              le, por causa do robots.txt. Dizer "vence em X" seria inventar. #}
-          <br><span class="nao-sei">quando comeca a contar: nao sei ainda</span>
+          <br><span class="nao-sei">quando começa a contar: não sei ainda</span>
         {% else %}
-          <span class="nao-sei">nao sei ainda</span>
+          <span class="nao-sei">não sei ainda</span>
         {% endif %}
       </dd>
     </dl>
 
     {% if p.aberto_no_orgao %}
       <p class="aviso-orgao">
-        A secretaria esta com outra inscricao aberta, que <strong>nao e</strong>
+        A secretaria está com outra inscrição aberta, que <strong>não é</strong>
         do meu cargo:
         <a href="{{ p.aberto_no_orgao.url }}" target="_blank" rel="noopener">{{ p.aberto_no_orgao.titulo }}</a>
       </p>
@@ -217,9 +217,9 @@
       </ul>
     {% else %}
       <p class="vazio">
-        Nada recente. A linha do tempo comeca a ser gravada na primeira coleta
-        depois que o concurso entra no radar, entao concurso antigo aparece
-        aqui sem historico - <span class="nao-sei">nao sei ainda</span> o que
+        Nada recente. A linha do tempo começa a ser gravada na primeira coleta
+        depois que o concurso entra no radar, então concurso antigo aparece
+        aqui sem histórico - <span class="nao-sei">não sei ainda</span> o que
         aconteceu antes disso.
       </p>
     {% endif %}
@@ -228,7 +228,7 @@
   {# ---------------------------------------------------- materias ------- #}
   <section>
     <h2>
-      Materias
+      Matérias
       {%- if p.ano_do_edital %}: edital de {{ p.ano_do_edital }} contra as provas{% endif %}
     </h2>
 
@@ -236,7 +236,7 @@
       <table>
         <thead>
           <tr>
-            <th>Materia</th>
+            <th>Matéria</th>
             <th class="n">Edital {{ p.ano_do_edital }}</th>
             <th class="n">Peso</th>
             <th class="n">Meu acerto</th>
@@ -269,7 +269,7 @@
                   {{ '%.0f'|format(acerto.porcentagem) }}%
                   <span class="feitas">de {{ acerto.respondidas }}</span>
                 {%- else -%}
-                  nao treinei
+                  não treinei
                 {%- endif -%}
               </td>
               {% for ano in p.anos_das_provas %}
@@ -283,9 +283,9 @@
 
       {% if p.pior_materia %}
         <p class="legenda destaque">
-          <strong>{{ p.pior_materia }}</strong> e onde eu vou pior entre as
-          materias que mais pesam &mdash; e por ela que vale comecar hoje.
-          Errar numa materia de 5 questoes custa 5 questoes; errar numa de
+          <strong>{{ p.pior_materia }}</strong> é onde eu vou pior entre as
+          matérias que mais pesam &mdash; é por ela que vale começar hoje.
+          Errar numa matéria de 5 questões custa 5 questões; errar numa de
           {{ p.materias_do_edital|selectattr('nome', 'equalto', p.pior_materia)
              |map(attribute='questoes')|first }} decide a prova.
         </p>
@@ -293,25 +293,25 @@
 
       {% if fora_do_edital %}
         <p class="legenda">
-          Caiu na prova mas <strong>nao esta</strong> no quadro do edital de
+          Caiu na prova mas <strong>não está</strong> no quadro do edital de
           {{ p.ano_do_edital }}:
           {% for nome in fora_do_edital %}
             {{ nome }}{% if not loop.last %} &middot; {% endif %}
           {% endfor %}.
-          Materia muda de uma edicao para a outra - e por isso que as duas
+          Matéria muda de uma edição para a outra - é por isso que as duas
           colunas ficam lado a lado.
         </p>
       {% endif %}
 
       <p class="legenda">
-        A coluna do edital e o que ele <strong>promete</strong> cobrar; as de
-        prova sao o que <strong>caiu</strong>. Onde elas batem, o peso e regra.
-        &quot;--&quot; quer dizer que a materia nao apareceu naquele caderno.
+        A coluna do edital é o que ele <strong>promete</strong> cobrar; as de
+        prova são o que <strong>caiu</strong>. Onde elas batem, o peso é regra.
+        &quot;--&quot; quer dizer que a matéria não apareceu naquele caderno.
       </p>
     {% else %}
       <p class="vazio">
-        <span class="nao-sei">nao sei ainda</span> &mdash; o quadro de
-        distribuicao de questoes sai do PDF do edital, e ele ainda nao esta no
+        <span class="nao-sei">não sei ainda</span> &mdash; o quadro de
+        distribuição de questões sai do PDF do edital, e ele ainda não está no
         acervo. Rode <code>radar provas</code>.
       </p>
     {% endif %}
@@ -326,31 +326,31 @@
        botao prometia rodada e entregava redirecionamento. #}
     {% if fontes_do_treino.proprias %}
       <form class="treinar" method="post" action="/foco/treinar">
-        <button type="submit">Treinar {{ questoes_do_treino }} questoes</button>
+        <button type="submit">Treinar {{ questoes_do_treino }} questões</button>
         <span class="conta">
           {% if fontes_do_treino.proprias_novas %}
             das provas do cargo: {{ fontes_do_treino.proprias_novas }} de
-            {{ fontes_do_treino.proprias }} que eu ainda nao respondi
+            {{ fontes_do_treino.proprias }} que eu ainda não respondi
           {% elif fontes_do_treino.da_banca_novas %}
             as provas do cargo acabaram &mdash; agora vem das
             {{ fontes_do_treino.da_banca_novas }} da mesma banca nas mesmas
-            materias
+            matérias
           {% else %}
-            ja respondi todas: a rodada vai repetir questao
+            já respondi todas: a rodada vai repetir questão
           {% endif %}
         </span>
       </form>
       <p class="legenda">
-        A ordem e sempre esta: primeiro as questoes das provas do proprio
+        A ordem e sempre esta: primeiro as questões das provas do próprio
         cargo{% if p.anos_das_provas %} ({{ p.anos_das_provas|join(' e ') }}){% endif %},
-        que sao a prova de verdade; quando elas acabam, as
-        {{ fontes_do_treino.da_banca }} da mesma banca nas mesmas materias, em
-        outros concursos. Materia que nao caiu na minha prova nao entra &mdash;
-        Conhecimentos Especificos de outro cargo nao me serve de nada.
+        que são a prova de verdade; quando elas acabam, as
+        {{ fontes_do_treino.da_banca }} da mesma banca nas mesmas matérias, em
+        outros concursos. Matéria que não caiu na minha prova não entra &mdash;
+        Conhecimentos Específicos de outro cargo não me serve de nada.
       </p>
     {% else %}
       <p class="vazio">
-        Nenhuma questao do cargo no acervo ainda. Rode
+        Nenhuma questão do cargo no acervo ainda. Rode
         <code>radar provas</code> e depois <code>radar questoes</code>.
       </p>
     {% endif %}

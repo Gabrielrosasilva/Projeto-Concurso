@@ -103,7 +103,7 @@ def test_faixas_de_remuneracao(banco_temporario, minimo, maximo, esperados):
 
 
 def test_so_o_teto_tambem_filtra(banco_temporario):
-    """A faixa "ate R$ 2.000" nao tem minimo."""
+    """A faixa "até R$ 2.000" nao tem minimo."""
     _semear(*_tres_faixas())
     assert len(servico.listar(salario_max=2000)) == 1
 
@@ -117,7 +117,7 @@ def test_os_atalhos_de_faixa_aparecem_na_tela(cliente):
     _semear(_concurso("https://a.test/1"))
 
     texto = cliente.get("/concursos").text
-    for rotulo in ("ate R$ 2.000", "R$ 2.100 a R$ 5.000",
+    for rotulo in ("até R$ 2.000", "R$ 2.100 a R$ 5.000",
                    "R$ 5.000 a R$ 10.000", "acima de R$ 10.000"):
         assert rotulo in texto
 
@@ -237,7 +237,7 @@ def test_o_formulario_nao_deixa_o_navegador_preencher_sozinho(cliente):
 
     texto = cliente.get("/concursos").text
     assert 'autocomplete="off"' in texto
-    assert 'name="salario_min" type="number" step="100" min="0"\n               placeholder="Salario min" value=""' in texto
+    assert 'name="salario_min" type="number" step="100" min="0"\n               placeholder="Salário min" value=""' in texto
 
 
 # --- aba de noticias e andamento --------------------------------------------
@@ -303,7 +303,7 @@ def test_a_aba_tem_campo_de_busca_proprio(cliente):
 
     texto = cliente.get("/concursos?noticias=true").text
     assert "busca-noticia" in texto
-    assert "policia cientifica" in texto      # o exemplo do campo
+    assert "polícia científica" in texto      # o exemplo do campo
 
 
 def test_a_aba_resume_quantos_em_cada_fase(cliente):

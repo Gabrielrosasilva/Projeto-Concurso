@@ -274,13 +274,13 @@ def test_o_botao_de_treino_aparece_quando_ha_questao(cliente):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
     texto = cliente.get("/").text
-    assert f"Treinar {foco.QUESTOES_DO_TREINO} questoes" in texto
+    assert f"Treinar {foco.QUESTOES_DO_TREINO} questões" in texto
     assert 'action="/foco/treinar"' in texto
 
 
 def test_sem_questao_o_botao_da_lugar_a_explicacao(cliente):
     texto = cliente.get("/").text
-    assert "Nenhuma questao do cargo no acervo" in texto
+    assert "Nenhuma questão do cargo no acervo" in texto
     assert 'action="/foco/treinar"' not in texto
 
 
@@ -474,7 +474,7 @@ def test_a_materia_sem_treino_nao_aparece_como_zero(cliente, com_quadro_do_edita
     with sessao() as s:
         s.add(_concurso())
 
-    assert "nao treinei" in cliente.get("/").text
+    assert "não treinei" in cliente.get("/").text
 
 
 def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
@@ -486,7 +486,7 @@ def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
     texto = cliente.get("/").text
 
     assert "comece por aqui" in texto
-    assert "<strong>Direitos Humanos</strong> e onde eu vou pior" in texto
+    assert "<strong>Direitos Humanos</strong> é onde eu vou pior" in texto
 
 
 def test_sem_treino_nenhum_a_tela_nao_aponta_materia(cliente, com_quadro_do_edital):

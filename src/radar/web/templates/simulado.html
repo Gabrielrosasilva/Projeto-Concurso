@@ -142,7 +142,7 @@
         Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
       </p>
     {% else %}
-      <p class="subtitulo">Questoes reais, tiradas das provas do acervo</p>
+      <p class="subtitulo">Questões reais, tiradas das provas do acervo</p>
     {% endif %}
   </header>
 
@@ -151,29 +151,29 @@
     <div class="caixa">
       {% if total_de_questoes == 0 %}
         <div class="vazio">
-          <p>Nao ha questao no banco ainda.</p>
+          <p>Não há questão no banco ainda.</p>
           <p>Rode <code>radar provas</code> e depois <code>radar questoes</code>.</p>
         </div>
       {% else %}
         <form class="comecar" method="post" action="/simulado/novo">
           <label>
-            Materia
+            Matéria
             <select name="materia">
-              <option value="">Materias que caem em qualquer concurso</option>
+              <option value="">Matérias que caem em qualquer concurso</option>
               {% for nome, quantas in materias %}
                 <option value="{{ nome }}">{{ nome }} ({{ quantas }})</option>
               {% endfor %}
             </select>
           </label>
           <label>
-            Quantas questoes
+            Quantas questões
             <input type="number" name="quantidade" value="10" min="1" max="50">
           </label>
-          <button type="submit">Comecar</button>
+          <button type="submit">Começar</button>
         </form>
         <p class="dica">
-          Sao {{ "{:,}".format(total_de_questoes)|replace(",", ".") }} questoes no acervo, de provas de verdade,
-          com o gabarito que a propria banca publicou. A mesma questao nunca
+          São {{ "{:,}".format(total_de_questoes)|replace(",", ".") }} questões no acervo, de provas de verdade,
+          com o gabarito que a própria banca publicou. A mesma questão nunca
           aparece duas vezes na mesma rodada.
         </p>
       {% endif %}
@@ -181,9 +181,9 @@
 
     {% if desempenho_geral %}
       <div class="caixa" style="margin-top:1rem">
-        <h2 style="font-size:1rem;margin:0 0 .8rem">Como voce vai ate agora</h2>
+        <h2 style="font-size:1rem;margin:0 0 .8rem">Como você vai até agora</h2>
         <table>
-          <tr><th>Materia</th><th class="n">Acerto</th><th class="n">Feitas</th><th></th></tr>
+          <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Feitas</th><th></th></tr>
           {% for d in desempenho_geral %}
             <tr class="{{ 'pior' if d.porcentagem < 60 }}">
               <td>{{ d.materia }}</td>
@@ -193,7 +193,7 @@
             </tr>
           {% endfor %}
         </table>
-        <p class="dica">A materia com menor acerto aparece primeiro: e onde
+        <p class="dica">A matéria com menor acerto aparece primeiro: é onde
           vale gastar tempo de estudo.</p>
       </div>
     {% endif %}
@@ -201,8 +201,8 @@
   {# ------------------------------------------------------ questao ------ #}
   {% elif questao %}
     <div class="andamento">
-      <span>Questao {{ resposta.ordem }} de {{ resumo.total }}</span>
-      <span>{{ resumo.acertos }} acerto(s) ate aqui</span>
+      <span>Questão {{ resposta.ordem }} de {{ resumo.total }}</span>
+      <span>{{ resumo.acertos }} acerto(s) até aqui</span>
     </div>
     <div class="barra">
       <div style="width:{{ (resumo.respondidas / resumo.total * 100)|round }}%"></div>
@@ -237,11 +237,11 @@
     <div class="caixa">
       <div class="nota {{ 'bom' if porcento >= 60 else 'ruim' }}">
         <div class="valor">{{ '%.0f'|format(porcento) }}%</div>
-        <div class="de">{{ resumo.acertos }} de {{ resumo.total }} questoes</div>
+        <div class="de">{{ resumo.acertos }} de {{ resumo.total }} questões</div>
       </div>
 
       <table>
-        <tr><th>Materia</th><th class="n">Acerto</th><th class="n">Feitas</th><th></th></tr>
+        <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Feitas</th><th></th></tr>
         {% for d in desempenho_da_rodada %}
           <tr class="{{ 'pior' if d.porcentagem < 60 }}">
             <td>{{ d.materia }}</td>
@@ -259,7 +259,7 @@
           <p class="pergunta">{{ item.enunciado }}</p>
           {% if not item.acertou %}
             <p class="linha marquei">
-              Voce marcou <b>{{ item.escolhida }})</b> {{ item.texto_escolhido }}
+              Você marcou <b>{{ item.escolhida }})</b> {{ item.texto_escolhido }}
             </p>
           {% endif %}
           <p class="linha correta">

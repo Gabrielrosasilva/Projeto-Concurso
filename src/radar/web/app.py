@@ -32,14 +32,14 @@ SITUACAO_LEGIVEL = {
     "autorizado": "autorizado",
     "banca_definida": "banca contratada",
     "edital_publicado": "edital publicado",
-    "inscricoes_abertas": "inscricoes abertas",
+    "inscricoes_abertas": "inscrições abertas",
     "encerrado": "encerrado",
-    "desconhecida": "sem informacao",
+    "desconhecida": "sem informação",
 }
 
 ROTULO_DO_ANEL = {
     "nucleo": "Perto",
-    "proximo": "Proximo",
+    "proximo": "Próximo",
     "estadual": "Estadual SC",
     "remoto": "Longe",
     "indefinida": "A confirmar",
@@ -48,7 +48,7 @@ ROTULO_DO_ANEL = {
 # Faixas de remuneracao como atalho: e mais rapido clicar do que digitar, e
 # tira a duvida de qual valor usar. (rotulo, minimo, maximo)
 FAIXAS_DE_SALARIO = [
-    ("ate R$ 2.000", None, 2000),
+    ("até R$ 2.000", None, 2000),
     ("R$ 2.100 a R$ 5.000", 2100, 5000),
     ("R$ 5.000 a R$ 10.000", 5000, 10000),
     ("acima de R$ 10.000", 10000, None),
@@ -75,7 +75,7 @@ ETAPAS = [
     ("autorizado", "autorizado"),
     ("banca_definida", "banca contratada"),
     ("edital_publicado", "edital publicado"),
-    ("inscricoes_abertas", "inscricoes abertas"),
+    ("inscricoes_abertas", "inscrições abertas"),
     ("encerrado", "encerrado"),
 ]
 templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))

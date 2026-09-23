@@ -321,7 +321,7 @@ def test_linha_do_tempo_do_status_aparece_nos_favoritos(cliente):
 
     texto = cliente.get("/concursos?favoritos=true").text
     for etapa in ("previsto", "autorizado", "banca contratada",
-                  "edital publicado", "inscricoes abertas", "encerrado"):
+                  "edital publicado", "inscrições abertas", "encerrado"):
         assert etapa in texto
 
 
@@ -344,7 +344,7 @@ def test_a_tela_avisa_quantos_ficaram_de_fora_por_falta_de_salario(cliente):
     )
 
     texto = cliente.get("/concursos?salario_min=5000").text
-    assert "nao informam salario no titulo" in texto
+    assert "não informam salário no título" in texto
     assert "Ver sem esse filtro" in texto
 
 
@@ -502,7 +502,7 @@ def test_cada_informacao_vem_com_rotulo(cliente):
     _semear(_concurso("https://a.test/1", banca="FEPESE", salario=5200))
 
     texto = cliente.get("/concursos").text
-    for rotulo in ("Salario:", "Banca:", "Status:", "Tipo:"):
+    for rotulo in ("Salário:", "Banca:", "Status:", "Tipo:"):
         assert rotulo in texto
 
 
@@ -521,7 +521,7 @@ def test_cidade_e_estado_aparecem(cliente):
 
 def test_sem_cidade_a_tela_diz_isso_em_vez_de_ficar_em_branco(cliente):
     _semear(_concurso("https://a.test/1", municipio=None, uf=None))
-    assert "nao identificada" in cliente.get("/concursos").text
+    assert "não identificada" in cliente.get("/concursos").text
 
 
 def test_status_aberta_e_fechada(cliente):
@@ -531,16 +531,16 @@ def test_status_aberta_e_fechada(cliente):
     )
 
     texto = cliente.get("/concursos?todos=true").text
-    # O par virou "Inscricao: aberta" dentro de "detalhes". Quem esta aberto
+    # O par virou "Inscrição: aberta" dentro de "detalhes". Quem esta aberto
     # continua dizendo o prazo na linha principal, que e o que decide.
-    assert "Inscricao:" in texto
+    assert "Inscrição:" in texto
     assert "aberta" in texto
     assert "fechada" in texto
 
 
 def test_sem_prazo_o_status_diz_que_nao_sabe(cliente):
     _semear(_concurso("https://a.test/1", inscricoes_ate=None))
-    assert "prazo nao confirmado" in cliente.get("/concursos").text
+    assert "prazo não confirmado" in cliente.get("/concursos").text
 
 
 def test_o_campo_de_salario_so_aparece_no_cartao_que_eu_pedi(cliente):

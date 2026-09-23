@@ -281,7 +281,7 @@ def test_a_tela_de_comecar_abre(cliente):
     resposta = cliente.get("/simulado")
 
     assert resposta.status_code == 200
-    assert "Comecar" in resposta.text
+    assert "Começar" in resposta.text
 
 
 def test_sem_questao_a_tela_explica_o_que_fazer(cliente):

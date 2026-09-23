@@ -170,20 +170,20 @@
         </select>
       </label>
       <label>
-        Cargo ou area
+        Cargo ou área
         <input type="text" name="cargo" value="{{ cargo or '' }}"
                placeholder="Guarda, Professor, Tecnico...">
       </label>
       <label>
-        Materia ou tema
+        Matéria ou tema
         <input type="text" name="tema" value="{{ tema or '' }}"
                placeholder="crase, informatica, probabilidade...">
       </label>
       <button type="submit">Ver</button>
     </form>
     <p class="dica">
-      O tema e texto livre: escreva <b>crase</b> ou <b>probabilidade</b>, e nao
-      o nome exato da materia. A busca olha a materia e o enunciado, e ignora
+      O tema é texto livre: escreva <b>crase</b> ou <b>probabilidade</b>, e não
+      o nome exato da matéria. A busca olha a matéria e o enunciado, e ignora
       acento.
     </p>
   </div>
@@ -195,8 +195,8 @@
       {% if parecidas %}
         <p class="legenda">
           Da mais parecida para a menos, com o motivo ao lado. Dividir uma
-          palavra no nome nao faz duas profissoes serem a mesma coisa - o
-          motivo esta ai para eu julgar.
+          palavra no nome não faz duas profissões serem a mesma coisa - o
+          motivo está aí para eu julgar.
         </p>
         {% for p in parecidas %}
           <div class="parecida">
@@ -204,7 +204,7 @@
             <span class="onde">
               {{ p.banca }}{% if p.municipio %} &middot; {{ p.municipio }}{% endif %}
               {%- if p.ano %} &middot; {{ p.ano }}{% endif %}
-              &middot; {{ p.questoes }} questoes</span>
+              &middot; {{ p.questoes }} questões</span>
             <span class="porque">{{ p.motivo }}</span>
           </div>
         {% endfor %}
@@ -218,24 +218,24 @@
   {% if not banca %}
     <div class="caixa">
       <div class="vazio">
-        <p><b>Escolha uma banca acima para comecar.</b></p>
-        <p>Depois disso da para afunilar por cargo e por tema.</p>
+        <p><b>Escolha uma banca acima para começar.</b></p>
+        <p>Depois disso dá para afunilar por cargo e por tema.</p>
       </div>
     </div>
 
     {% if bancas_sem_acervo %}
       <div class="caixa">
-        <h2>Por que so aparece {{ bancas | join(', ') }}</h2>
+        <h2>Por que só aparece {{ bancas | join(', ') }}</h2>
         <p class="legenda" style="margin-bottom:.6rem">
-          A lista vem das provas que estao baixadas aqui, e nao dos concursos.
+          A lista vem das provas que estão baixadas aqui, e não dos concursos.
         </p>
         <p style="font-size:.88rem;margin:0 0 .6rem">
-          Estas bancas ja aparecem nos seus concursos, mas ainda nao tem prova
+          Estas bancas já aparecem nos seus concursos, mas ainda não têm prova
           no acervo: <b>{{ bancas_sem_acervo | join(', ') }}</b>.
         </p>
         <p style="font-size:.88rem;margin:0">
-          Cada banca publica as provas de um jeito diferente, entao incluir uma
-          delas quer dizer escrever um coletor para o site dela. Da para fazer,
+          Cada banca publica as provas de um jeito diferente, então incluir uma
+          delas quer dizer escrever um coletor para o site dela. Dá para fazer,
           uma de cada vez - e a FEPESE veio primeiro por ser a que mais aplica
           prova perto de casa.
         </p>
@@ -246,19 +246,19 @@
   {% elif analise.total == 0 %}
     <div class="caixa">
       <div class="vazio">
-        <p>Nenhuma questao no acervo para esse recorte.</p>
+        <p>Nenhuma questão no acervo para esse recorte.</p>
         <p>O acervo tem prova de cargo municipal de SC. Tema de TI, por
-           exemplo, nao aparece porque essas provas nao cobram TI.</p>
+           exemplo, não aparece porque essas provas não cobram TI.</p>
       </div>
     </div>
 
   {% else %}
 
     <p class="recorte">
-      <b>{{ analise.total }}</b> questoes no recorte,
+      <b>{{ analise.total }}</b> questões no recorte,
       <b>{{ analise.distintas }}</b> com enunciado diferente.
       {% if analise.total > analise.distintas %}
-        A banca reaproveita: e por isso que as contas de gabarito e de assunto
+        A banca reaproveita: é por isso que as contas de gabarito e de assunto
         contam uma vez por enunciado.
       {% endif %}
     </p>
@@ -272,7 +272,7 @@
         <div class="numeros">
           <div class="numero">
             <div class="n">{{ a.questoes }}</div>
-            <div class="rotulo">questoes</div>
+            <div class="rotulo">questões</div>
           </div>
           <div class="numero">
             <div class="n">{{ a.cadernos }}</div>
@@ -280,7 +280,7 @@
           </div>
           <div class="numero">
             <div class="n">{{ "%.0f"|format(a.cadernos / analise.retrato.cadernos * 100) }}%</div>
-            <div class="rotulo">das provas com essa materia</div>
+            <div class="rotulo">das provas com essa matéria</div>
           </div>
           <div class="numero">
             <div class="n">{{ a.distintas }}</div>
@@ -293,18 +293,18 @@
     {# ------------------------------------- grafico 1: caderno tipico ---- #}
     {% if composicao %}
       <div class="caixa">
-        <h2>Quantas questoes caem numa prova</h2>
+        <h2>Quantas questões caem numa prova</h2>
         <p class="legenda">
-          A fatia e a participacao da materia no total de questoes da
-          {{ banca }}; o numero ao lado e quanto ela cai por prova. Os dois
-          nao andam juntos porque nem toda materia cai em todo cargo - Temas
-          de Educacao sao 10 questoes, mas so em prova de professor.
+          A fatia é a participação da matéria no total de questões da
+          {{ banca }}; o número ao lado é quanto ela cai por prova. Os dois
+          não andam juntos porque nem toda matéria cai em todo cargo - Temas
+          de Educação são 10 questões, mas só em prova de professor.
         </p>
         <div class="pizza-caixa">
           <div class="pizza" style="background:conic-gradient({% for f in fatias_do_caderno %}{{ f.cor }} {{ '%.2f'|format(f.inicio) }}% {{ '%.2f'|format(f.fim) }}%{{ ', ' if not loop.last }}{% endfor %})">
             <div class="furo">
               <span class="n">{{ composicao | sum(attribute='total') }}</span>
-              <span class="rot">questoes<br>da banca</span>
+              <span class="rot">questões<br>da banca</span>
             </div>
           </div>
           <ul class="legenda-pizza">
@@ -327,15 +327,15 @@
       <div class="caixa">
         <h2>O que mais cai em {{ analise.retrato.materia }}</h2>
         <p class="legenda">
-          Assunto por assunto, nas {{ analise.retrato.questoes }} questoes dessa
-          materia. Uma questao pode entrar em mais de um assunto, entao a soma
-          nao fecha com o total.
+          Assunto por assunto, nas {{ analise.retrato.questoes }} questões dessa
+          matéria. Uma questão pode entrar em mais de um assunto, então a soma
+          não fecha com o total.
         </p>
         <div class="pizza-caixa">
           <div class="pizza" style="background:conic-gradient({% for f in fatias_de_assunto %}{{ f.cor }} {{ '%.2f'|format(f.inicio) }}% {{ '%.2f'|format(f.fim) }}%{{ ', ' if not loop.last }}{% endfor %})">
             <div class="furo">
               <span class="n">{{ analise.retrato.questoes }}</span>
-              <span class="rot">questoes<br>da materia</span>
+              <span class="rot">questões<br>da matéria</span>
             </div>
           </div>
           <ul class="legenda-pizza">
@@ -343,7 +343,7 @@
               <li class="{{ 'alvo' if analise.assunto_procurado and f.rotulo == analise.assunto_procurado.nome }}">
                 <span class="cor" style="background:{{ f.cor }}"></span>
                 <span class="nome" title="{{ f.rotulo }}">{{ f.rotulo }}</span>
-                <span class="valor">{{ "%.0f"|format(f.valor) }} questoes</span>
+                <span class="valor">{{ "%.0f"|format(f.valor) }} questões</span>
               </li>
             {% endfor %}
           </ul>
@@ -352,7 +352,7 @@
           <p class="dica">
             {{ analise.retrato.sem_assunto }} enunciados diferentes ficaram sem
             assunto detectado. O assunto sai de uma lista de palavras-chave
-            escrita a mao, e ela nao cobre tudo - melhor deixar de fora do que
+            escrita a mão, e ela não cobre tudo - melhor deixar de fora do que
             empurrar para um assunto qualquer.
           </p>
         {% endif %}
@@ -362,12 +362,12 @@
     {% if analise.comandos %}
       <div class="caixa">
         <h2>Como a banca pergunta</h2>
-        <p class="legenda">No recorte que voce pediu</p>
+        <p class="legenda">No recorte que você pediu</p>
         {% for c in analise.comandos %}
           <div class="comando">
             <div class="titulo">{{ c.nome }}</div>
             <div class="quanto">
-              {{ c.quantas }} questoes &middot; {{ "%.0f"|format(c.porcentagem) }}% do recorte
+              {{ c.quantas }} questões &middot; {{ "%.0f"|format(c.porcentagem) }}% do recorte
             </div>
             <p class="conselho">{{ c.conselho }}</p>
           </div>
@@ -377,8 +377,8 @@
 
     {% if analise.repetidas %}
       <div class="caixa">
-        <h2>Questoes que ela repete</h2>
-        <p class="legenda">Ja cairam varias vezes e devem cair de novo</p>
+        <h2>Questões que ela repete</h2>
+        <p class="legenda">Já caíram várias vezes e devem cair de novo</p>
         {% for r in analise.repetidas %}
           <div class="repetida">
             <div class="cadernos">
@@ -409,26 +409,26 @@
         </table>
         <div class="veredito {{ analise.gabarito_veredito }}">
           {% if analise.gabarito_veredito == "equilibrado" %}
-            As letras estao equilibradas: <b>nao existe letra mais provavel</b>
-            nesta banca. O "chute na C" nao vale aqui.
+            As letras estão equilibradas: <b>não existe letra mais provavel</b>
+            nesta banca. O "chute na C" não vale aqui.
           {% elif analise.gabarito_veredito == "tendencia" %}
-            Ha desequilibrio entre as letras neste recorte. Vale conferir se
-            nao e efeito de poucas questoes diferentes.
+            Há desequilíbrio entre as letras neste recorte. Vale conferir se
+            não é efeito de poucas questões diferentes.
           {% else %}
             Poucos enunciados diferentes para afirmar qualquer coisa sobre a
-            letra. Abaixo de 50, o que parece tendencia e sorteio.
+            letra. Abaixo de 50, o que parece tendência é sorteio.
           {% endif %}
         </div>
       </div>
     {% endif %}
 
     <div class="caixa">
-      <h2>O que ainda nao esta aqui</h2>
+      <h2>O que ainda não está aqui</h2>
       <p class="futuro">
-        Pegadinha especifica e macete de memorizacao nao saem de contagem:
-        alguem precisa ler as questoes e perceber o padrao. Isso fica para
-        quando a leitura por IA entrar - e ate la esta pagina nao inventa nada.
-        Tudo o que esta acima da para conferir abrindo as provas do acervo.
+        Pegadinha específica e macete de memorização não saem de contagem:
+        alguém precisa ler as questões e perceber o padrão. Isso fica para
+        quando a leitura por IA entrar - e até lá esta página não inventa nada.
+        Tudo o que está acima dá para conferir abrindo as provas do acervo.
       </p>
     </div>
 

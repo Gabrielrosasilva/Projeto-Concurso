@@ -43,7 +43,7 @@ def test_pagina_mostra_concurso(cliente):
     # A linha do cartao responde onde, quanto e ate quando. A cidade perdeu o
     # rotulo "Cidade:" porque na linha ela e o primeiro item e se explica
     # sozinha; o resto continua rotulado - "FEPESE" solto nao diz nada.
-    assert "Salario:" in texto
+    assert "Salário:" in texto
     assert "Status:" in texto
     # banca e tipo vivem dentro de "detalhes", que nasce fechado. O conteudo
     # continua no HTML, entao o Ctrl+F do navegador continua achando.
@@ -122,7 +122,7 @@ def test_pagina_vazia_explica_em_vez_de_parecer_quebrada(cliente):
                        uf="SC", relevancia="remoto"))
 
     texto = cliente.get("/concursos").text
-    assert "Nenhum concurso perto de voce agora" in texto
+    assert "Nenhum concurso perto de você agora" in texto
     assert "Ver todos" in texto          # oferece a saida
     assert "Nada coletado ainda" not in texto   # nao confunde com banco vazio
 
@@ -306,7 +306,7 @@ def test_o_cartao_mostra_titulo_e_a_linha_de_sempre(cliente):
     assert "linha-chave" in texto
     assert "Palhoca" in texto            # onde
     assert "R$ 5.200" in texto           # salario
-    assert "prazo nao confirmado" in texto   # prazo
+    assert "prazo não confirmado" in texto   # prazo
 
 
 def test_banca_tipo_e_motivo_ficam_dentro_de_detalhes(cliente):
