@@ -324,3 +324,16 @@ def test_banca_tipo_e_motivo_ficam_dentro_de_detalhes(cliente):
     assert "FEPESE" in dentro
     assert "esta no anel nucleo" in dentro
     assert "+ anotar" in dentro
+
+
+def test_a_barra_do_topo_nao_e_estilizada_por_pagina(cliente):
+    """A barra e a mesma em todo lugar, e o estilo dela vem de
+    _topo_estilo.html. Em Concursos havia um bloco `nav {...}` de uma
+    navegacao antiga: o seletor pegava a barra compartilhada - que e um <nav> -
+    e so ali os quatro destinos apareciam com borda e fundo de botao."""
+    import re
+
+    for caminho in ("/", "/concursos", "/acompanhando", "/simulado"):
+        html = cliente.get(caminho).text
+        estilos = "\n".join(re.findall(r"<style>(.*?)</style>", html, re.DOTALL))
+        assert not re.search(r"^\s*nav\s*[{,]", estilos, re.MULTILINE), caminho
