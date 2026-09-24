@@ -461,8 +461,9 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
                 if anel:
                     concurso.relevancia = anel
                     concurso.motivo_relevancia = (
-                        f"{achado.municipio} aparece como lotacao na pagina do "
-                        f"edital, e esta no anel {anel}."
+                        f"{regioes.nome_canonico(achado.municipio)} aparece "
+                        f"como lotação na página do edital, e está no anel "
+                        f"{regioes.NOME_DO_ANEL.get(anel, anel)}."
                     )
                 if concurso.relevancia != anel_antes:
                     resultado.reclassificados += 1

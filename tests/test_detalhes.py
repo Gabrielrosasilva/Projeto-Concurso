@@ -218,3 +218,45 @@ def test_entre_varias_telas_do_hotsite_vale_a_raiz():
             '<a href="https://2026cpeducaeesj.fepese.org.br/?go=edital&amp;edital=1">Edital</a>')
 
     assert detalhes.achar_hotsite(html) == "https://2026cpeducaeesj.fepese.org.br"
+
+
+def test_o_motivo_da_lotacao_tambem_e_texto_de_tela(banco_temporario,
+                                                    monkeypatch):
+    """Este motivo nao sai do classificador: ele e escrito pelo `detalhar`,
+    quando a pagina do edital diz a lotacao. Por isso ele escapou do acento na
+    primeira passada - e ele aparece no cartao como qualquer outro."""
+    from sqlalchemy import select
+
+    from radar import servico
+    from radar.db import sessao
+    from radar.models import Concurso
+
+    with sessao() as s:
+        s.add(Concurso(
+            url="https://a.test/sefaz", fonte="teste",
+            titulo="Concurso SEFAZ (SC) abre 50 vagas",
+            uf="SC", tipo="concurso", relevancia="indefinida",
+        ))
+
+    monkeypatch.setattr(
+        servico, "_pendentes_de_detalhe",
+        lambda limite: list(sessao().__enter__().scalars(select(Concurso))),
+    )
+    monkeypatch.setattr(
+        detalhes, "extrair",
+        lambda *a, **k: detalhes.Detalhes(municipio="Florianopolis"),
+    )
+    monkeypatch.setattr(servico.Buscador, "get", lambda self, url: _RespostaHTML())
+
+    servico.detalhar_pendentes(limite=1)
+
+    with sessao() as s:
+        motivo = s.scalar(select(Concurso)).motivo_relevancia
+    assert "lotação na página" in motivo
+    assert "está no anel núcleo" in motivo
+    assert "Florianópolis" in motivo
+
+
+class _RespostaHTML:
+    text = "<html><body>pagina</body></html>"
+    status_code = 200
