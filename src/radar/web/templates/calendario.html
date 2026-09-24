@@ -93,7 +93,7 @@
       {% for e in eventos %}
         <div class="compromisso">
           <span class="quando">{{ e.quando.strftime('%d/%m') }}</span>
-          <span class="oque">{{ e.titulo }}</span>
+          <span class="oque">{{ e.titulo | titulo }}</span>
           <span class="onde">{{ e.descricao }}</span>
         </div>
       {% endfor %}

@@ -299,7 +299,7 @@
                 aria-label="{{ 'Tirar do mural' if c.interesse == favorito else 'Fixar no mural' }}"
         >{{ '★' if c.interesse == favorito else '☆' }}</button>
       </form>
-      <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo }}</a>
+      <a class="titulo" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.titulo | titulo }}</a>
     </div>
 
     {# A LINHA: onde, quanto e ate quando. Sao as tres perguntas que eu faco

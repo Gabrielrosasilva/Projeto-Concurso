@@ -151,14 +151,14 @@
           {% else %}<span class="nao-sei">não sei ainda</span>{% endif %}
         </dd>
         <dt>Edital</dt>
-        <dd><a href="{{ p.aberto.url }}" target="_blank" rel="noopener">{{ p.aberto.titulo }}</a></dd>
+        <dd><a href="{{ p.aberto.url }}" target="_blank" rel="noopener">{{ p.aberto.titulo | titulo }}</a></dd>
       {% endif %}
 
       <dt>Último concurso</dt>
       <dd>
         {% if p.ultima %}
           {% if p.ultima.ano %}<strong>{{ p.ultima.ano }}</strong> &middot; {% endif %}
-          <a href="{{ p.ultima.url }}" target="_blank" rel="noopener">{{ p.ultima.titulo }}</a>
+          <a href="{{ p.ultima.url }}" target="_blank" rel="noopener">{{ p.ultima.titulo | titulo }}</a>
         {% else %}
           <span class="nao-sei">não sei ainda</span>
         {% endif %}
@@ -193,7 +193,7 @@
       <p class="aviso-orgao">
         A secretaria está com outra inscrição aberta, que <strong>não é</strong>
         do meu cargo:
-        <a href="{{ p.aberto_no_orgao.url }}" target="_blank" rel="noopener">{{ p.aberto_no_orgao.titulo }}</a>
+        <a href="{{ p.aberto_no_orgao.url }}" target="_blank" rel="noopener">{{ p.aberto_no_orgao.titulo | titulo }}</a>
       </p>
     {% endif %}
   </section>

@@ -9,7 +9,12 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from radar.util import formatar_data, fuso_local, para_local
+from radar.util import (
+    formatar_data,
+    fuso_local,
+    para_local,
+    separar_campos_grudados,
+)
 
 
 def test_o_fuso_carrega():
@@ -105,3 +110,41 @@ def test_host_aberto_e_testado_no_local():
     from radar.util import porta_ocupada
 
     assert porta_ocupada("0.0.0.0", 1) is False
+
+
+# --- titulo com os campos colados (etapa 12) --------------------------------
+#
+# A FEPESE monta o titulo juntando campos do sistema dela, as vezes sem
+# separador nenhum. Os exemplos abaixo sao titulos REAIS do banco.
+
+def test_separa_dois_campos_colados():
+    titulo = ("2019 – Secretaria de Estado da Administração Prisional – "
+              "Concurso PúblicoConcurso Público – Edital 001/2019")
+
+    assert "PúblicoConcurso" not in separar_campos_grudados(titulo)
+    assert "Público – Concurso" in separar_campos_grudados(titulo)
+
+
+def test_separa_orgao_colado_na_secretaria():
+    titulo = "2017 – Prefeitura Municipal de FlorianópolisSecretaria Municipal"
+
+    assert ("Florianópolis – Secretaria"
+            in separar_campos_grudados(titulo))
+
+
+@pytest.mark.parametrize("titulo", [
+    "2020 – IçaraPrev – Concurso Público – Edital nº 001/2020",
+    "RioSaúde (RJ) abre edital com 23 vagas para Médicos",
+    "AM: Concurso ManausPrev anuncia remunerações de até R$ 9,1 mil",
+    "AgSUS anuncia novo edital de seletivo",
+    "Concurso CaraguaPrev (SP) abre vagas",
+])
+def test_nome_proprio_em_CamelCase_nao_e_separado(titulo):
+    """Os cinco sao reais e nenhum pode ser cortado: e assim que a instituicao
+    se chama. E por isso que a regra exige palavra longa dos DOIS lados."""
+    assert separar_campos_grudados(titulo) == titulo
+
+
+def test_titulo_vazio_nao_quebra():
+    assert separar_campos_grudados(None) == ""
+    assert separar_campos_grudados("") == ""

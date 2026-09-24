@@ -14,7 +14,12 @@ from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
 from radar import servico
-from radar.util import converter_valor, dias_ate, formatar_data
+from radar.util import (
+    converter_valor,
+    dias_ate,
+    formatar_data,
+    separar_campos_grudados,
+)
 try:                                    # fastapi>=0.115 traz o Jinja2Templates
     from fastapi.templating import Jinja2Templates
 except ImportError:                     # pragma: no cover
@@ -83,6 +88,9 @@ templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 # saber nada de fuso horario.
 templates.env.filters["data"] = formatar_data
 templates.env.filters["dias"] = dias_ate
+# A FEPESE as vezes cola os campos do titulo sem separador. Isto e so
+# exibicao: o titulo gravado continua o que a fonte mandou.
+templates.env.filters["titulo"] = separar_campos_grudados
 
 
 def _url_base_sem(request: Request, *parametros: str) -> str:

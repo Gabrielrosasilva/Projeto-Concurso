@@ -103,3 +103,26 @@ def primeira_porta_livre(host: str, inicio: int, tentativas: int = 20) -> int | 
         if not porta_ocupada(host, porta):
             return porta
     return None
+
+
+# A FEPESE monta o titulo colando campos do sistema dela, e as vezes sem
+# separador nenhum: "... - Concurso PublicoConcurso Publico - Edital 001/2019",
+# "Prefeitura Municipal de FlorianopolisSecretaria Municipal de Educacao".
+#
+# So duas palavras LONGAS coladas contam. A exigencia de tamanho dos dois lados
+# e o que protege nome proprio escrito em CamelCase - IcaraPrev, ManausPrev,
+# RioSaude, AgSUS sao 4 casos reais do feed, e nenhum deles pode ser separado.
+CAMPOS_GRUDADOS = re.compile(r"([a-zà-ÿ]{4,})([A-ZÀ-Þ][a-zà-ÿ]{4,})")
+
+# O mesmo travessao que o proprio titulo ja usa entre os campos.
+SEPARADOR = " \u2013 "
+
+
+def separar_campos_grudados(titulo: str | None) -> str:
+    """O titulo como ele se le, com separador onde a fonte esqueceu.
+
+    So para EXIBIR: o titulo gravado no banco continua o que a fonte mandou -
+    e ele que casa com o que ja foi coletado, e mexer nele mudaria a
+    classificacao e a marca de alvo sem eu pedir.
+    """
+    return CAMPOS_GRUDADOS.sub(rf"\1{SEPARADOR}\2", titulo or "")
