@@ -24,10 +24,10 @@ from pathlib import Path
 from sqlalchemy import func, select
 
 from radar import alvo as alvos
-from radar import config, edital_materias, edital_programa, provas
+from radar import config, edital_materias, edital_programa, macetes, onde_estudar, provas
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
-from radar.models import Concurso, QuestaoDeProva
+from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado
 from radar.questoes import extrair_texto
 from radar.regioes import normalizar
 
@@ -142,6 +142,17 @@ class Painel:
     #: As vagas da lista `de_olho`, uma linha por cidade. Vazia quando o
     #: config/alvo.yml nao pede nenhuma.
     de_olho: list = field(default_factory=list)
+
+    #: Por qual ASSUNTO comecar, ordenado por quanto ha para ganhar em cada
+    #: um. Vazia quando nenhuma questao do acervo tem assunto ainda.
+    onde_comecar: list = field(default_factory=list)
+    #: A frase montada dos numeros da primeira linha acima. None = sem linha.
+    conclusao_do_estudo: str | None = None
+    #: Quantos assuntos ficaram fora da tela por nao caberem no grafico.
+    assuntos_fora_da_tela: int = 0
+    #: Quantas questoes do cargo ainda nao tem assunto nenhum. E o que separa
+    #: "este assunto nao cai" de "eu ainda nao classifiquei esta questao".
+    questoes_sem_assunto: int = 0
 
 
 def _concursos_do_alvo(s) -> list[Concurso]:
@@ -721,6 +732,202 @@ def _contar_questoes_do_alvo(s, provas_do_alvo: set[str]) -> int:
     ) or 0
 
 
+# --- onde estudar primeiro --------------------------------------------------
+#
+# A tabela de materias diz qual materia pesa mais. Esta parte desce um andar:
+# dentro da materia, QUAL ASSUNTO. "Estudar Direitos Humanos" nao e um plano de
+# tarde; "estudar as Regras de Mandela" e.
+#
+# O assunto vem de dois lugares, e a tela diz qual e qual porque um custou
+# dinheiro e o outro nao:
+#
+#   * CATALOGO - Portugues e Raciocinio Logico saem do catalogo de
+#     palavras-chave do `macetes`, de graca, e ja funcionam hoje;
+#   * EDITAL - as outras nove materias saem da coluna `assunto`, escolhida
+#     dentro do conteudo programatico pelo `radar assuntos --so-alvo`. Sem
+#     rodar esse comando elas nao aparecem aqui, e a tela diz isso.
+#
+# Sao so DUAS provas do cargo, e duas provas nao sustentam uma fatia. Por isso
+# entra o reforco: a mesma banca, nas MESMAS materias, em outros concursos - a
+# FEPESE cobra crase do mesmo jeito em qualquer caderno que faca. A tela separa
+# os dois numeros sempre, porque eles nao valem a mesma coisa.
+
+
+def _materias_do_acervo_no_edital(s, materias_do_edital: list) -> dict[str, str]:
+    """{nome como a prova escreve: nome como o EDITAL escreve}.
+
+    Os dois lados escrevem diferente - o edital diz "Lei de Execucao Penal" e o
+    cabecalho do caderno pode dizer "LEI DE EXECUCAO PENAL" - e a conta so
+    fecha quando os dois viram a mesma chave. O nome que vale e o do edital,
+    porque e dele que sai o peso.
+
+    Materia que o edital de hoje nao lista fica de fora de proposito: 2013
+    cobrou Nocoes de Informatica e 2019 nao cobra, e questao dela nao tem peso
+    nenhum para multiplicar.
+    """
+    do_edital = {normalizar(m.nome): m.nome for m in materias_do_edital}
+    if not do_edital:
+        return {}
+
+    nomes = s.scalars(
+        select(QuestaoDeProva.materia)
+        .where(QuestaoDeProva.materia.is_not(None))
+        .distinct()
+    )
+    return {
+        nome: do_edital[normalizar(nome)]
+        for nome in nomes
+        if normalizar(nome) in do_edital
+    }
+
+
+def _questoes_para_a_fatia(s, minhas_provas: set[str], nomes: list[str]) -> list:
+    """As questoes que sustentam a fatia de cada assunto: as minhas e o reforco.
+
+    O reforco e a mesma banca nas mesmas materias, em outros concursos. Nao e a
+    mesma coisa que a minha prova, e a tela nunca finge que e - mas centenas de
+    enunciados dizem do costume da banca o que 170 nao dizem.
+    """
+    if not nomes:
+        return []
+
+    bancas = [normalizar(b) for b in alvos.bancas_do_principal()]
+    questoes = s.scalars(
+        select(QuestaoDeProva)
+        .where(QuestaoDeProva.materia.in_(nomes))
+        # Anulada nao entra em conta nenhuma: a banca disse que ela nao existe.
+        .where(QuestaoDeProva.anulada.is_not(True))
+    )
+    return [
+        q for q in questoes
+        if q.prova_url in minhas_provas
+        or any(banca in normalizar(q.banca or "") for banca in bancas)
+    ]
+
+
+def _marcas_de_assunto(
+    questoes: list, chave: str | None
+) -> tuple[list[tuple[str, int]], int]:
+    """([(assunto, em quantos enunciados distintos ele cai)], quantos sem assunto).
+
+    Em enunciado distinto, e nao em questao, dos dois lados da conta. O reforco
+    vem de duzias de cadernos, e la a banca reaproveita muito: uma questao que
+    aparece em 38 provas decidiria o grafico sozinha. E o mesmo motivo que fez
+    o `macetes.uma_por_enunciado` existir.
+
+    A conta dos "sem assunto" sai junto, e nao numa segunda passada, porque ela
+    custa o mesmo trabalho: sao 18 expressoes regulares sobre cada enunciado, e
+    rodar tudo duas vezes botava meio segundo na abertura da home.
+    """
+    unicas = macetes.uma_por_enunciado(questoes)
+    if chave:
+        achados, fora = macetes.assuntos_de(unicas, chave)
+        return [(a.nome, a.distintas) for a in achados], fora
+
+    marcas: dict[str, int] = {}
+    fora = 0
+    for questao in unicas:
+        if questao.assunto:
+            marcas[questao.assunto] = marcas.get(questao.assunto, 0) + 1
+        else:
+            fora += 1
+    return list(marcas.items()), fora
+
+
+def _contagens_de_assunto(
+    questoes: list, para_o_edital: dict[str, str], minhas_provas: set[str]
+) -> tuple[dict, dict, int]:
+    """({(materia, assunto): (proprias, reforco)}, {materia: origem}, sem assunto)."""
+    por_materia: dict[str, list] = {}
+    for questao in questoes:
+        por_materia.setdefault(para_o_edital[questao.materia], []).append(questao)
+
+    contagens: dict[tuple[str, str], list[int]] = {}
+    origens: dict[str, str] = {}
+    sem_assunto = 0
+
+    for materia, lista in por_materia.items():
+        chave = macetes.chave_da_materia(materia)
+        origens[materia] = onde_estudar.CATALOGO if chave else onde_estudar.EDITAL
+
+        minhas = [q for q in lista if q.prova_url in minhas_provas]
+        reforco = [q for q in lista if q.prova_url not in minhas_provas]
+
+        for coluna, grupo in ((0, minhas), (1, reforco)):
+            marcas, fora = _marcas_de_assunto(grupo, chave)
+            for nome, quantas in marcas:
+                contagens.setdefault((materia, nome), [0, 0])[coluna] += quantas
+            # So as MINHAS contam como "falta classificar": o reforco esta la
+            # para sustentar a fatia, e nao para eu estudar por ele.
+            if coluna == 0:
+                sem_assunto += fora
+
+    return (
+        {par: (proprias, reforco) for par, (proprias, reforco) in contagens.items()},
+        origens,
+        sem_assunto,
+    )
+
+
+def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> dict:
+    """{(materia, assunto): (respondidas, acertos)}, de TODOS os simulados.
+
+    Do acumulado e nao do ultimo, pelo mesmo motivo do acerto por materia: uma
+    rodada de 20 questoes nao diz se eu sei o assunto, e o somado diz.
+
+    Assunto nunca respondido simplesmente nao esta no dicionario. Ele nao vale
+    zero por cento - zero diria que eu errei tudo.
+    """
+    if not para_o_edital:
+        return {}
+
+    linhas = s.execute(
+        select(QuestaoDeProva, RespostaDeSimulado.acertou)
+        .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
+        .where(RespostaDeSimulado.escolhida.is_not(None))
+        .where(QuestaoDeProva.materia.in_(list(para_o_edital)))
+    ).all()
+
+    medido: dict[tuple[str, str], list[int]] = {}
+    for questao, acertou in linhas:
+        materia = para_o_edital[questao.materia]
+        chave = macetes.chave_da_materia(materia)
+        if chave:
+            nomes = macetes.assuntos_do_enunciado(questao.enunciado, chave)
+        else:
+            nomes = [questao.assunto] if questao.assunto else []
+
+        for nome in nomes:
+            conta = medido.setdefault((materia, nome), [0, 0])
+            conta[0] += 1
+            conta[1] += 1 if acertou else 0
+
+    return {par: (feitas, certas) for par, (feitas, certas) in medido.items()}
+
+
+def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
+    """(as linhas do grafico, quantas questoes minhas ficaram sem assunto).
+
+    Lista vazia quando nenhum assunto foi detectado: a tela diz que falta
+    classificar, e nao inventa uma ordem de estudo em cima de nada.
+    """
+    para_o_edital = _materias_do_acervo_no_edital(s, materias_do_edital)
+    questoes = _questoes_para_a_fatia(s, minhas_provas, list(para_o_edital))
+    if not questoes:
+        return [], 0
+
+    contagens, origens, sem_assunto = _contagens_de_assunto(
+        questoes, para_o_edital, minhas_provas
+    )
+    linhas = onde_estudar.montar(
+        materias_do_edital,
+        contagens,
+        _acerto_por_assunto(s, para_o_edital),
+        origens,
+    )
+    return linhas, sem_assunto
+
+
 def montar() -> Painel:
     """O painel inteiro. Campo vazio quer dizer "nao sei ainda"."""
     criar_tabelas()
@@ -780,6 +987,19 @@ def montar() -> Painel:
     painel.pior_materia = _pior_das_pesadas(
         painel.materias_pesadas, painel.acerto_por_materia
     )
+
+    # Sessao nova, e nao a de cima, porque esta parte so existe depois do
+    # edital lido: e o peso de cada materia que transforma "fatia do assunto"
+    # em "questoes esperadas", e o edital sai de um PDF, nao do banco. O que
+    # ela reaproveita e o `minhas_provas`, que ja e so um punhado de enderecos.
+    if materias:
+        with sessao() as s:
+            linhas, sem_assunto = _onde_comecar(s, minhas_provas, materias)
+        painel.onde_comecar = linhas[:onde_estudar.NA_TELA]
+        painel.assuntos_fora_da_tela = max(0, len(linhas) - onde_estudar.NA_TELA)
+        painel.conclusao_do_estudo = onde_estudar.conclusao(linhas)
+        painel.questoes_sem_assunto = sem_assunto
+
     return painel
 
 

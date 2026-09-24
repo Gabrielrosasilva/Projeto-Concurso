@@ -13,10 +13,11 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import select
 
 from radar import edital_materias, foco
 from radar.db import sessao
-from radar.models import Concurso, QuestaoDeProva, agora
+from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado, agora
 from radar.web.app import app
 
 QUADRO_2019 = (
@@ -854,3 +855,192 @@ def test_sem_treino_nenhum_a_tela_nao_aponta_materia(cliente, com_quadro_do_edit
         s.add(_concurso())
 
     assert "comece por aqui" not in cliente.get("/").text
+
+
+# --- onde estudar primeiro --------------------------------------------------
+#
+# A secao desce um andar em relacao a tabela acima: nao "que materia pesa
+# mais", e sim "dentro dela, qual assunto". O assunto de Direito sai da coluna
+# `assunto`, que o `radar assuntos --so-alvo` escolhe dentro do conteudo
+# programatico do edital; o de Portugues sai do catalogo de palavras-chave.
+
+
+def _com_assunto(
+    numero: int,
+    materia: str,
+    assunto: str | None,
+    ano: int = 2019,
+    cargo: str = "Agente Penitenciário",
+    prova: str | None = None,
+    banca: str = "FEPESE",
+) -> QuestaoDeProva:
+    """Uma questao ja classificada. `prova` fora do padrao a torna reforco."""
+    return QuestaoDeProva(
+        prova_url=prova or f"https://fepese.test/{ano}/{cargo}.pdf",
+        concurso_url=CONCURSO_DE_2019,
+        banca=banca, ano=ano, cargo=cargo, numero=numero, materia=materia,
+        assunto=assunto,
+        enunciado=f"Sobre {assunto or materia}, questão {numero}?",
+        alternativas={"a": "x", "b": "y"}, resposta="a",
+        impressao=f"{materia}-{assunto}-{numero}",
+    )
+
+
+def test_a_secao_mostra_o_assunto_e_quantas_questoes_ele_deve_valer(
+    cliente, com_quadro_do_edital
+):
+    """A LEP vale 10 no edital. Com 6 das 10 marcas da materia num assunto,
+    ele deve valer 6 questoes da prova."""
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 7):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+        for n in range(7, 11):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Faltas disciplinares"))
+
+    texto = cliente.get("/").text
+
+    assert "Onde estudar primeiro" in texto
+    assert "Progressão de regime" in texto
+    assert "6 questões esperadas" in texto
+
+
+def test_o_assunto_pequeno_em_que_eu_erro_passa_na_frente_do_grande(
+    cliente, com_quadro_do_edital
+):
+    """E a razao de a secao existir - e a ordem tem que aparecer na tela, e
+    nao so no objeto."""
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 11):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Assunto grande"))
+        for n in range(11, 15):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Assunto pequeno"))
+
+    _treinar_assunto("Lei de Execução Penal", "Assunto grande", acertos=9, erros=1)
+    _treinar_assunto("Lei de Execução Penal", "Assunto pequeno", acertos=0, erros=4)
+
+    texto = cliente.get("/").text
+
+    assert texto.index("Assunto pequeno") < texto.index("Assunto grande")
+    assert "pontos a ganhar" in texto
+
+
+def test_o_assunto_nunca_treinado_nao_aparece_como_zero_por_cento(
+    cliente, com_quadro_do_edital
+):
+    """Zero diria que eu errei tudo; o que houve foi eu nao ter treinado."""
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 11):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+
+    texto = cliente.get("/").text
+
+    assert "ainda não respondi nenhuma no simulado" in texto
+    assert "0% em 0" not in texto
+
+
+def test_a_tela_separa_o_que_e_meu_do_que_e_reforco(cliente, com_quadro_do_edital):
+    """Os dois numeros nunca aparecem somados: uma questao da minha prova nao
+    vale o mesmo que uma de outro concurso da mesma banca."""
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 3):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+        for n in range(3, 11):
+            s.add(_com_assunto(
+                n, "Lei de Execução Penal", "Progressão de regime",
+                cargo="Merendeira", prova="https://fepese.test/outro-concurso.pdf",
+            ))
+
+    texto = cliente.get("/").text
+
+    assert "2 do meu cargo" in texto
+    assert "8 de reforço" in texto
+
+
+def test_o_assunto_de_direito_ganha_o_link_para_a_lei(cliente, com_quadro_do_edital):
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 11):
+            s.add(_com_assunto(
+                n, "Legislação Estadual",
+                "Lei n.º 6.745, de 28 de dezembro de 1985 "
+                "(Estatuto do Servidor do Estado de Santa Catarina)",
+            ))
+
+    texto = cliente.get("/").text
+
+    assert "ler a lei" in texto
+    assert "leis.alesc.sc.gov.br" in texto
+
+
+def test_sem_assunto_nenhum_a_tela_diz_o_que_falta_rodar(
+    cliente, com_quadro_do_edital
+):
+    """Nunca inventar: sem assunto nao ha fatia, e a tela diz isso em vez de
+    montar uma ordem de estudo em cima de nada."""
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 11):
+            s.add(_com_assunto(n, "Lei de Execução Penal", None))
+
+    texto = cliente.get("/").text
+
+    assert "radar assuntos --so-alvo" in texto
+    assert "pontos a ganhar" not in texto
+
+
+def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital):
+    """Montada dos numeros, e nunca inventada: o que a frase diz tem que estar
+    nas barras logo abaixo dela."""
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(1, 11):
+            s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+
+    _treinar_assunto(
+        "Lei de Execução Penal", "Progressão de regime", acertos=4, erros=6
+    )
+
+    texto = cliente.get("/").text
+
+    assert "deve valer 10 questões e eu acerto 40%" in texto
+    assert "6 pontos a ganhar" in texto
+
+
+def _treinar_assunto(materia: str, assunto: str, acertos: int, erros: int) -> None:
+    """Marca como respondidas as questoes JA gravadas daquele assunto.
+
+    As respostas sao escritas direto, e nao por `servico.criar_simulado`: o
+    sorteio filtra por MATERIA, e estes testes precisam de dois assuntos da
+    mesma materia com acertos diferentes - pelo sorteio, o treino de um
+    respondia as questoes do outro.
+    """
+    from radar.models import Simulado
+
+    with sessao() as s:
+        simulado = Simulado(filtros={"materia": materia})
+        s.add(simulado)
+        s.flush()
+
+        questoes = list(s.scalars(
+            select(QuestaoDeProva)
+            .where(QuestaoDeProva.materia == materia)
+            .where(QuestaoDeProva.assunto == assunto)
+            .order_by(QuestaoDeProva.id)
+            .limit(acertos + erros)
+        ))
+        assert len(questoes) == acertos + erros, "faltou questao para treinar"
+
+        for ordem, questao in enumerate(questoes, start=1):
+            certa = ordem <= acertos
+            s.add(RespostaDeSimulado(
+                simulado_id=simulado.id,
+                questao_id=questao.id,
+                ordem=ordem,
+                escolhida=questao.resposta if certa else "b",
+                acertou=certa,
+                respondida_em=agora(),
+            ))

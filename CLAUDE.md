@@ -103,12 +103,12 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 7      PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
        parte que so a IA faz: pegadinha especifica e macete de memorizacao
 8      PRONTA: tabela `eventos`, aba Acompanhando, "Meu foco" como home
-9      PRONTA: estudar pelo alvo - o treino sorteia as provas do cargo
-       primeiro, e a tabela de materias mostra o acerto ao lado do peso
-10     PRONTA: `servico.py` virou pacote, um arquivo por assunto
+9 e 10 PRONTAS: treino pelas provas do cargo e acerto ao lado do peso; e
+       `servico.py` virou pacote, um arquivo por assunto
 11     PRONTA: auditoria de 23/09. So o robo manda mensagem
-14-E   PRONTA: aviso e estudo separados, e a lista `de_olho`
-14-C   PRONTA: gabarito definitivo, e `--so-alvo` pela lista do edital
+14     PRONTAS E, C, D, F: aviso e estudo separados e a lista `de_olho`;
+       gabarito definitivo e `--so-alvo` pela lista do edital; "Onde estudar
+       primeiro", com os pontos a ganhar por ASSUNTO e o link para a lei
 ```
 
 A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em

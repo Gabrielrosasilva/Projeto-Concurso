@@ -224,6 +224,34 @@ custa 5 questoes, errar numa de 15 decide a prova. Materia que voce nunca
 treinou aparece como "nao treinei" e nao concorre ao destaque — zero por cento
 diria que voce errou tudo.
 
+Logo abaixo vem **Onde estudar primeiro**, que desce um andar: dentro da
+materia, **qual assunto**. "Estudar Direitos Humanos" nao e uma tarefa de
+tarde; "estudar as Regras de Mandela" e. A conta e esta, e nao ha nada alem
+dela:
+
+    questoes esperadas = o peso da materia no edital
+                         x a fatia que aquele assunto ocupa nas provas
+    pontos a ganhar    = questoes esperadas x (1 - seu acerto no simulado)
+
+Sao duas colunas porque nenhuma decide sozinha: um assunto de 10 questoes em
+que voce acerta 90% vale 1 ponto a recuperar, e um de 4 questoes em que voce
+acerta 25% vale 3. O grafico e de barras deitadas, CSS puro, do maior para o
+menor, e uma frase curta em cima dele repete em portugues o que a primeira
+barra diz em pixel.
+
+Cada linha mostra **em quantas questoes ela se apoia**, e separa o que e seu do
+que nao e: "13 do meu cargo · 57 de reforco". Sao so duas provas do cargo no
+acervo, e duas provas nao sustentam uma fatia - o **reforco** e a mesma banca
+nas mesmas materias, em outros concursos. Os dois numeros nunca aparecem
+somados.
+
+Assunto que voce nunca treinou fica com barra **amarela** e entra na ordem so
+pelas questoes esperadas, dizendo isso na tela: sem acerto medido nao ha pontos
+a ganhar para calcular, e zero por cento seria mentira. Cada assunto de Direito
+ganha um link **"ler a lei"**, que vai para o Planalto (lei federal e
+Constituicao) ou para a ALESC (lei estadual de SC) e sai de `config/leis.yml`.
+E so link: o radar nao baixa nem guarda o texto de lei nenhuma.
+
 O botao de treino monta a rodada nesta ordem: primeiro as questoes das
 **provas do proprio cargo**; quando elas acabam, as da **mesma banca nas
 mesmas materias** em outros concursos; e so entao repete o que voce ja
@@ -452,6 +480,45 @@ Tres cuidados que o arquivo toma, e que valem a leitura antes de mexer nele:
 Mexeu no arquivo? `radar reclassificar` recalcula o banco inteiro e lista o
 que bateu, sem ir a internet.
 
+### O link para a lei, em `config/leis.yml`
+
+Liga cada materia e assunto de Direito do edital ao **texto oficial**, e e de
+onde sai o "ler a lei" do Onde estudar primeiro.
+
+```yaml
+materias:
+  - materia: Direito Penal              # como o quadro do edital escreve
+    lei: Codigo Penal (Decreto-Lei 2.848/1940)
+    url: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+
+  - materia: Legislacao Estadual        # sem url: nao ha um texto que cubra
+    assuntos:
+      - quando: "6.745"                 # marca procurada no nome do assunto
+        lei: Lei 6.745/1985 - Estatuto do Servidor Publico do Estado de SC
+        url: https://leis.alesc.sc.gov.br/ato-normativo/7963
+```
+
+Quatro regras:
+
+1. **duas fontes, e so elas.** Planalto para lei federal e Constituicao, ALESC
+   para lei estadual de SC. Ha teste guardando isso: um link para site de
+   resumo de lei entraria sem ninguem perceber, e resumo de lei nao e lei;
+2. **`quando` e procurado DENTRO do nome do assunto**, e nao comparado com ele.
+   O assunto do edital e comprido - um deles tem 126 caracteres - e a proxima
+   edicao reescreve a frase;
+3. **assunto sem marca cai no link da materia.** "Crimes contra a Administracao
+   Publica" nao e uma lei: e um titulo do Codigo Penal;
+4. **o que nao tem lei fica sem link.** As Regras de Mandela sao documento da
+   ONU, nao lei brasileira; teoria geral dos direitos humanos e doutrina. Link
+   errado e pior que link nenhum.
+
+Um campo `nota` opcional aparece na tela junto do link, para o que eu preciso
+saber antes de abrir - a Lei 4.898/1965 que o edital de 2019 cobra, por
+exemplo, foi revogada pela Lei 13.869/2019.
+
+**O radar nao baixa nem guarda o texto de lei nenhuma.** Lei muda, e o unico
+lugar em que a versao vigente esta certa e a fonte.
+
 ### O perfil, em `config/perfil.yml`
 
 ```yaml
@@ -612,6 +679,8 @@ src/radar/
 ├── gabarito.py     o gabarito definitivo, e as questoes anuladas
 ├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
 ├── foco.py         a situacao do alvo principal, para a pagina inicial
+├── onde_estudar.py por qual assunto comecar: quanto ele vale, quanto eu erro
+├── leis.py         le config/leis.yml: onde ler o texto oficial da lei
 ├── acompanhando.py os favoritos: linha do tempo, proxima acao, fila de aviso
 ├── edital_materias.py  o quadro de distribuicao de questoes do edital
 ├── edital_programa.py  o conteudo programatico: o que cai em cada materia
@@ -646,6 +715,7 @@ src/radar/
 config/
 ├── regioes.yml     os tres aneis de distancia
 ├── alvo.yml        os cargos que eu quero, em ordem
+├── leis.yml        onde ler a lei de cada materia e assunto de Direito
 └── perfil.yml      meus dados, para a elegibilidade
 ```
 

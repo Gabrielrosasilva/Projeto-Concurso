@@ -13,6 +13,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
+from radar import onde_estudar
 from radar import regioes
 from radar import servico
 from radar.util import (
@@ -96,6 +97,10 @@ templates.env.filters["titulo"] = separar_campos_grudados
 # acento. A grafia certa e a de config/regioes.yml, e e ela que a tela
 # mostra - sem precisar reescrever o que ja esta gravado.
 templates.env.filters["municipio"] = regioes.nome_canonico
+# Numero com virgula, como se escreve em portugues. A mesma funcao que monta a
+# frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
+# lado dele nunca arredondarem diferente.
+templates.env.filters["numero"] = onde_estudar.numero
 
 
 def _url_base_sem(request: Request, *parametros: str) -> str:

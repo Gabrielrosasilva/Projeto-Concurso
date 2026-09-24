@@ -115,6 +115,35 @@
     .feitas{color:var(--suave);font-size:.78rem;font-weight:400}
     .legenda.destaque{color:var(--texto)}
 
+    /* ------------------------------------------- onde estudar primeiro --- */
+    /* Barras deitadas, so com CSS - como as da aba Macetes. Sem JavaScript
+       nenhum: a largura sai pronta do servidor, ja calculada. */
+    .estudo{display:grid;gap:.9rem}
+    .assunto-linha{display:grid;gap:.25rem}
+    .assunto-topo{display:flex;justify-content:space-between;gap:.9rem;
+      align-items:baseline;flex-wrap:wrap}
+    .assunto-nome{font-weight:600;font-size:.92rem;overflow-wrap:anywhere}
+    .assunto-nome .materia{font-weight:400;color:var(--suave);font-size:.78rem;
+      margin-left:.45rem;white-space:nowrap}
+    .assunto-valor{white-space:nowrap;font-variant-numeric:tabular-nums;
+      font-size:.85rem;color:var(--azul);font-weight:700}
+    .barra-estudo{height:14px;border-radius:5px;background:var(--azul-fraco)}
+    .barra-estudo span{display:block;height:100%;border-radius:5px;
+      background:var(--azul);min-width:3px}
+    /* Amarelo de "nao sei ainda": esta barra e so o tamanho esperado do
+       assunto, porque nao ha simulado dele para descontar o meu acerto. Ela
+       nao mede a mesma coisa que as azuis, e nao pode ter a mesma cor. */
+    .assunto-linha.sem-medida .assunto-valor{color:var(--duvida)}
+    .assunto-linha.sem-medida .barra-estudo{background:var(--duvida-fraco)}
+    .assunto-linha.sem-medida .barra-estudo span{background:var(--duvida)}
+    .apoio{font-size:.78rem;color:var(--suave);display:flex;gap:.5rem;
+      flex-wrap:wrap;align-items:baseline}
+    .apoio .lei{color:var(--azul);text-decoration:none;font-weight:600}
+    .apoio .lei:hover{text-decoration:underline}
+    .apoio .ressalva{color:var(--duvida)}
+    .conclusao{margin:0 0 1.1rem;padding:.75rem .9rem;border-radius:8px;
+      background:var(--azul-fraco);color:var(--texto);font-size:.92rem}
+
     /* -------------------------------------------------------- treinar --- */
     .treinar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
     .treinar button{padding:.7rem 1.4rem;border-radius:10px;border:0;
@@ -358,6 +387,125 @@
       </p>
     {% endif %}
   </section>
+
+  {# --------------------------------------------- onde estudar primeiro - #}
+  {% if p.materias_do_edital %}
+  <section>
+    <h2>Onde estudar primeiro</h2>
+
+    {% if p.onde_comecar %}
+      {# A maior barra e a primeira: a lista ja vem ordenada do servidor. #}
+      {% set maior = p.onde_comecar[0].ordem %}
+
+      <p class="conclusao">{{ p.conclusao_do_estudo }}</p>
+
+      <div class="estudo">
+        {% for a in p.onde_comecar %}
+          <div class="assunto-linha {{ 'sem-medida' if a.pontos is none }}">
+            <div class="assunto-topo">
+              <span class="assunto-nome">{{ a.assunto }}{%
+                if not a.repete_a_materia %}<span class="materia">{{ a.materia }}</span>{%
+                endif %}</span>
+              <span class="assunto-valor">
+                {%- if a.pontos is not none -%}
+                  {{ a.pontos | numero }} pontos a ganhar
+                {%- else -%}
+                  {{ a.esperadas | numero }} questões esperadas
+                {%- endif -%}
+              </span>
+            </div>
+
+            <div class="barra-estudo">
+              <span style="width:{{ '%.1f'|format(a.ordem / maior * 100) }}%"></span>
+            </div>
+
+            <div class="apoio">
+              <span>
+                {# Os dois numeros nunca aparecem somados: uma questao da minha
+                   prova vale mais que uma de outro concurso da mesma banca. #}
+                {{ a.proprias }} do meu cargo
+                {%- if a.reforco %} &middot; {{ a.reforco }} de reforço{% endif -%}
+                , de {{ a.base_da_materia }} marcadas em {{ a.materia }}
+              </span>
+              <span>&middot;</span>
+              <span>
+                {%- if a.pontos is not none -%}
+                  {{ a.esperadas | numero }} questões esperadas, e eu acerto
+                  {{ a.acerto | numero(0) }}% em {{ a.respondidas }}
+                {%- else -%}
+                  ainda não respondi nenhuma no simulado
+                {%- endif -%}
+              </span>
+              {% if a.lei %}
+                <a class="lei" href="{{ a.lei.url }}" target="_blank" rel="noopener"
+                   title="{{ a.lei.titulo }}">ler a lei</a>
+                {% if a.lei.nota %}<span class="ressalva">({{ a.lei.nota }})</span>{% endif %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <p class="legenda">
+        <strong>Questões esperadas</strong> é o peso da matéria no edital de
+        {{ p.ano_do_edital }} vezes a fatia que o assunto ocupa nas provas.
+        <strong>Pontos a ganhar</strong> é isso vezes o que eu ainda erro:
+        é o que está em jogo hoje, e não o tamanho do assunto.
+      </p>
+
+      {% if p.onde_comecar | selectattr('pontos', 'none') | first %}
+        <p class="legenda">
+          As barras <span class="nao-sei">amarelas</span> são assuntos que eu
+          nunca treinei. Não dá para calcular pontos a ganhar sem acerto
+          medido, então elas entram pelas <strong>questões esperadas</strong> -
+          que é o máximo que elas poderiam valer. Treinar o assunto é o que
+          troca essa barra por uma azul, e o número por um de verdade.
+        </p>
+      {% endif %}
+
+      <p class="legenda">
+        São só <strong>duas provas</strong> do cargo no acervo, e duas provas
+        não sustentam uma fatia. Por isso entra o <strong>reforço</strong>: a
+        mesma banca, nas mesmas matérias, em outros concursos. Os dois números
+        ficam sempre separados acima - a questão da minha prova é a que conta
+        de verdade, e a de reforço só diz do costume da banca.
+      </p>
+
+      {% if p.assuntos_fora_da_tela %}
+        <p class="legenda">
+          Outros {{ p.assuntos_fora_da_tela }} assuntos ficaram abaixo destes e
+          não entraram no gráfico.
+        </p>
+      {% endif %}
+
+      {% if p.questoes_sem_assunto %}
+        <p class="legenda">
+          {{ p.questoes_sem_assunto }} questões das minhas provas ainda estão
+          <strong>sem assunto</strong> e não entram em nenhuma barra - o que
+          falta não é elas não caírem, é eu não as ter classificado. As de
+          Direito saem do conteúdo programático do edital, com
+          <code>radar assuntos --so-alvo</code>; as de Português e Raciocínio
+          Lógico saem do catálogo de palavras-chave, de graça, e o que sobra
+          ali é enunciado que o catálogo não cobre.
+        </p>
+      {% endif %}
+
+      <p class="legenda">
+        O link <strong>ler a lei</strong> vai para o Planalto (lei federal e
+        Constituição) ou para a ALESC (lei estadual de SC), e sai de
+        <code>config/leis.yml</code>. É só link: o radar não baixa nem guarda o
+        texto de lei nenhuma - a versão vigente só está certa na fonte.
+      </p>
+    {% else %}
+      <p class="vazio">
+        <span class="nao-sei">não sei ainda</span> &mdash; nenhuma questão das
+        minhas provas tem assunto detectado, e sem assunto não há fatia para
+        multiplicar pelo peso do edital. As matérias de Direito saem do
+        conteúdo programático, com <code>radar assuntos --so-alvo</code>.
+      </p>
+    {% endif %}
+  </section>
+  {% endif %}
 
   {# ----------------------------------------------------- treinar ------- #}
   <section>

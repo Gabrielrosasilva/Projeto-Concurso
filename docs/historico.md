@@ -851,3 +851,124 @@ e a mesma.
 `recado_sobre_o_cargo`, do assunto provas, chama `materias_universais`, do
 simulado. Movendo o simulado primeiro, a dependencia aponta numa direcao so e
 nao ha import circular para contornar.
+
+## Etapa 14-D: onde estudar primeiro
+
+A tabela de materias respondia "que materia pesa mais" e "onde eu vou pior".
+Nenhuma das duas e um plano de tarde: **Direitos Humanos vale 15 questoes, mas
+"estudar Direitos Humanos" nao e uma tarefa** - estudar as Regras de Mandela e.
+A secao nova desce esse andar.
+
+A conta cabe em duas linhas, e nao ha nada alem dela:
+
+    questoes esperadas = quantas questoes o edital reserva para a materia
+                         x a fatia que aquele assunto ocupa nas provas
+    pontos a ganhar    = questoes esperadas x (1 - meu acerto no simulado)
+
+"Pontos a ganhar" e o numero que decide, e ele nao esta em nenhum dos dois
+lados sozinho: um assunto de 10 questoes em que eu acerto 90% vale 1 ponto a
+recuperar, e um de 4 questoes em que eu acerto 25% vale 3. O segundo e onde a
+tarde rende mais.
+
+### Duas origens de assunto, e a tela diz qual e qual
+
+O projeto ja tinha duas: Portugues e Raciocinio Logico saem do catalogo de
+palavras-chave do `macetes`, de graca; as outras nove materias saem da coluna
+`assunto`, que a IA escolhe dentro do conteudo programatico do edital e que
+custou dinheiro uma vez. A secao usa as duas com a mesma formula - a fatia e
+sempre "marcas deste assunto sobre marcas de todos os assuntos daquela
+materia" - e mostra a procedencia em cada linha.
+
+### O assunto que eu nunca treinei nao vale zero
+
+Ele fica com `acerto=None` e `pontos=None`, barra amarela, e entra na ordem
+pelas **questoes esperadas** - que e o teto dos pontos a ganhar, ja que
+`pontos <= esperadas` sempre. Zero por cento diria que eu errei tudo, quando o
+que houve foi eu nao ter feito: a mesma regra do resto da tela.
+
+### Duas provas nao sustentam uma fatia
+
+Existem duas provas do cargo, 170 questoes. Dividir 8 marcas por 8 e dizer
+"100% da materia" e uma conta que uma prova a mais desmonta. Por isso entra o
+**reforco**: a mesma banca, nas MESMAS materias, em outros concursos - a FEPESE
+cobra crase do mesmo jeito em qualquer caderno que faca. Os dois numeros somam
+na fatia e **nunca aparecem somados na tela**: "13 do meu cargo · 57 de
+reforco" e uma informacao diferente de "70 questoes".
+
+A contagem e em **enunciado distinto** dos dois lados. No reforco a banca
+reaproveita muito, e uma questao que aparece em 38 cadernos decidiria o grafico
+sozinha - o mesmo motivo que fez o `macetes.uma_por_enunciado` existir.
+
+### O que a secao custou em tempo de tela
+
+Meu foco abria em 0,06s. A primeira versao da secao levou para 0,94s, e duas
+coisas explicavam quase tudo:
+
+- `macetes.assuntos_de` tirava o acento do enunciado **uma vez por padrao**, e
+  sao ate 18 padroes por materia. Normalizar uma vez por questao levou a
+  abertura para 0,27s, e deixou a aba Macetes mais rapida de brinde;
+- a contagem de "quantos ficaram sem assunto" rodava o catalogo inteiro de
+  novo. Ela passou a sair junto da contagem principal.
+
+Ficou em 0,16s. A secao varre ~2.000 questoes a cada abertura, entao os 0,1s
+de diferenca sao o preco dela, e nao desperdicio.
+
+### As 93 escolhas, e as 6 que ficaram indefinidas
+
+As 99 questoes do cargo foram classificadas escolhendo DENTRO do programa do
+edital, e o nome gravado e copiado do programa letra por letra. Seis ficaram
+sem assunto de proposito:
+
+- tres de Direito Penal falam de **lei penal no espaco** (crime cometido no
+  estrangeiro, cumprimento de pena fora do pais), que o programa de 2019 nao
+  lista. Rotular seria inventar um assunto que a prova de hoje nao cobra;
+- duas tem o **enunciado cortado no PDF** ("De acordo com o Codigo de Processo
+  Penal, e") - nao ha o que classificar;
+- uma e generica demais ("Assinale a alternativa correta em materia de
+  Direitos Humanos").
+
+O caderno de 2013 cita a LC 472/2009, que a LC 675/2016 substituiu. O ASSUNTO
+e o mesmo - plano de carreira e vencimentos - e e ele que o programa de hoje
+lista, entao a questao de 2013 conta para a LC 675. E o que faz o acervo antigo
+servir para a prova nova.
+
+## Etapa 14-F: config/leis.yml
+
+Cada materia e assunto de Direito ganhou o endereco do texto oficial, e a secao
+mostra um link "ler a lei". **E so link.** O radar nao baixa e nao guarda o
+texto de lei nenhuma: lei muda, e o unico lugar em que a versao vigente esta
+certa e a fonte.
+
+Duas fontes, e ha teste guardando que nao entre uma terceira: **Planalto** para
+lei federal e Constituicao, **ALESC** para lei estadual de SC. Um link para
+site de resumo de lei entraria sem ninguem perceber, e resumo de lei nao e lei.
+
+Os 15 enderecos foram abertos de verdade antes de gravar - todos responderam
+200 e o titulo da pagina confere com a lei. Os da ALESC redirecionam para o
+endereco canonico `/ato-normativo/<numero>`, e e ele que esta gravado.
+
+O casamento nao e por texto exato: o `quando` do YAML e uma marca procurada
+DENTRO do nome do assunto, como os `termos` do `config/alvo.yml`. O assunto do
+edital tem 126 caracteres em um dos casos, e copiar a frase inteira seria
+copiar um texto que a proxima edicao reescreve.
+
+### Tres coisas que ficaram sem link, e por que
+
+- **Regras minimas da ONU para o tratamento de pessoas presas** (Regras de
+  Mandela). Nao e lei brasileira: nao esta no Planalto nem na ALESC. Tem
+  traducao oficial publicada pelo CNJ, que nao e nenhuma das duas fontes - e
+  apontar para outro lugar seria inventar a fonte.
+- **Assunto de doutrina** (Teoria geral dos direitos humanos, Afirmacao
+  historica, Modelos de gestao) nao tem texto oficial para abrir.
+- **Lingua Portuguesa, Raciocinio Logico e Sociologia Aplicada** nao sao
+  Direito.
+
+### Duas divergencias que o YAML registra em vez de esconder
+
+- A **Lei 4.898/1965** (abuso de autoridade), que o edital de 2019 cobra, foi
+  revogada pela Lei 13.869/2019 em setembro daquele ano. O link e o que o
+  edital pede, e uma `nota` aparece na tela junto dele: eu nao posso estudar
+  uma lei revogada sem saber que ela esta revogada.
+- O edital escreve a **LC 529** como de "17 de dezembro de 2011"; a ALESC
+  publica a mesma LC 529 como de 17 de janeiro. O numero, o ano e o texto do
+  Regimento Interno conferem - um dos dois errou o mes, e a nota diz isso.

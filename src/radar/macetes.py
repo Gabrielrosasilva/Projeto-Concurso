@@ -374,8 +374,13 @@ def assuntos_de(questoes: list, chave: str) -> tuple[list[Assunto], int]:
     achados: list[Assunto] = []
     classificadas: set[str] = set()
 
+    # Tirar o acento uma vez por questao, e nao uma vez por padrao: sao ate 18
+    # padroes por materia, e o "Onde estudar primeiro" chama isto para milhares
+    # de enunciados a cada abertura da home.
+    limpos = [(q, _sem_acento(q.enunciado).lower()) for q in questoes]
+
     for nome, padrao in catalogo:
-        casaram = [q for q in questoes if re.search(padrao, _sem_acento(q.enunciado).lower())]
+        casaram = [q for q, texto in limpos if re.search(padrao, texto)]
         if not casaram:
             continue
         classificadas.update(q.impressao for q in casaram)
@@ -551,3 +556,22 @@ def fatias(
         acumulado = fim
 
     return montadas
+
+
+def assuntos_do_enunciado(enunciado: str, chave: str) -> list[str]:
+    """Que assuntos do catalogo este enunciado casa. Vazio = nenhum.
+
+    E o `assuntos_de` visto pelo outro lado: la a pergunta e "quantas questoes
+    tem este assunto", aqui e "que assuntos tem esta questao". O segundo e o
+    que o "Onde estudar primeiro" precisa para dizer quanto eu acerto POR
+    ASSUNTO - ele tem uma resposta de simulado na mao, e nao um monte de
+    questoes.
+
+    Uma questao pode casar mais de um assunto, como la: crase e regencia andam
+    juntas, e esconder a segunda marca seria pior que a soma nao fechar.
+    """
+    limpo = _sem_acento(enunciado or "").lower()
+    return [
+        nome for nome, padrao in CATALOGO_DE_ASSUNTOS.get(chave, ())
+        if re.search(padrao, limpo)
+    ]

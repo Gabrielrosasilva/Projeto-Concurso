@@ -891,3 +891,73 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - **a coluna `assunto` passou de 120 para 200 caracteres.** O nome agora e a
   linha do edital, e a LC 529/2011 do programa de 2019 tem 126. No SQLite o
   tamanho nao e cobrado; em Postgres a coluna precisa ser recriada a mao.
+
+## Onde estudar primeiro: a conta, e o que ela se recusa a fazer
+
+- **a formula e uma so, e nao ha nada alem dela.** `questoes esperadas = peso
+  da materia no edital x fatia do assunto nas provas`, e `pontos a ganhar =
+  questoes esperadas x (1 - meu acerto)`. Os dois numeros aparecem juntos na
+  tela porque nenhum decide sozinho: 10 questoes com 90% de acerto valem 1
+  ponto a recuperar, e 4 questoes com 25% valem 3;
+- **a fatia e dentro da materia**, e nao sobre o acervo: "quanto DESTA materia e
+  este assunto". Sobre o acervo, o assunto que domina uma materia pequena
+  passaria na frente por causa do tamanho do acervo, e nao do peso no edital;
+- **materia fora do quadro do edital nao entra.** Sem peso nao ha o que
+  multiplicar, e peso inventado faria eu estudar a materia errada por meses. E
+  o caso de Direito Administrativo e Nocoes de Informatica, que 2013 cobrou e
+  2019 nao cobra;
+- **assunto sem simulado fica com `pontos = None`, e nao com zero.** Zero diria
+  que eu errei tudo, quando o que houve foi eu nao ter treinado. Na ordem ele
+  entra pelas **questoes esperadas**, que e o teto dos pontos a ganhar, ja que
+  `pontos <= esperadas` sempre - e a barra fica amarela, a cor de "nao sei
+  ainda" no resto da tela, para nunca ser lida como se medisse o mesmo que as
+  azuis;
+- **o reforco soma na fatia e nunca aparece somado na tela.** Sao duas provas do
+  cargo, e duas provas nao sustentam uma fatia: entra a mesma banca nas MESMAS
+  materias, em outros concursos. "13 do meu cargo · 57 de reforco" e uma
+  informacao diferente de "70 questoes", e a questao da minha prova e a unica
+  que conta de verdade;
+- **a contagem e em enunciado distinto**, dos dois lados. O reforco vem de
+  duzias de cadernos e la a banca reaproveita muito: uma questao que aparece em
+  38 provas decidiria o grafico sozinha;
+- **a conclusao e montada dos numeros da primeira linha, e nunca de mais nada.**
+  Sem linha nenhuma nao ha conclusao - escrever uma mesmo assim seria inventar.
+  Ela e construida em Python, e nao no template, para poder ser testada;
+- **o grafico e CSS puro**, como os da aba Macetes. A largura de cada barra sai
+  pronta do servidor: nenhum JavaScript, e a tela funciona com ele desligado;
+- **cabem 12 linhas.** O programa do edital de 2019 tem 85 assuntos, e 85 barras
+  nao sao um grafico. O que sobra vira uma linha dizendo quantos ficaram fora;
+- **as questoes sem assunto tem numero proprio na tela.** Elas nao entram em
+  barra nenhuma, e a tela diz que o que falta nao e elas nao cairem: e eu nao
+  as ter classificado. Sem isso a secao pareceria afirmar que aquele assunto
+  nao cai.
+
+## O link para a lei: duas fontes, e so link
+
+- **duas fontes, e ha teste guardando isso.** Planalto para lei federal e
+  Constituicao, ALESC para lei estadual de SC. Um link para site de resumo de
+  lei entraria sem ninguem perceber, e resumo de lei nao e lei;
+- **e so link: o radar nao baixa nem guarda o texto de lei nenhuma.** Lei muda,
+  e o unico lugar em que a versao vigente esta certa e a fonte. Uma copia aqui
+  seria a lei de hoje sendo lida daqui a dois anos;
+- **cada endereco foi aberto de verdade antes de gravar** (24/09/2026): 200, e
+  o titulo da pagina conferindo com a lei. Os da ALESC ficaram gravados no
+  endereco canonico `/ato-normativo/<numero>`, que e onde o `/html/...`
+  redireciona;
+- **o casamento e por marca, e nao por texto exato.** O `quando` do YAML e
+  procurado DENTRO do nome do assunto do edital, como os `termos` do
+  `config/alvo.yml`. O assunto mais comprido do programa tem 126 caracteres, e
+  copiar a frase inteira para o YAML seria copiar um texto que a proxima edicao
+  reescreve;
+- **assunto sem marca cai no link da materia.** "Crimes contra a Administracao
+  Publica" nao e uma lei: e um titulo do Codigo Penal, que e o link da materia
+  inteira. Materia sem `url` - Legislacao Especial, que sao cinco leis avulsas -
+  so tem link no assunto;
+- **o que nao tem lei fica sem link, e isso e a resposta certa.** As Regras de
+  Mandela nao sao lei brasileira e nao estao em nenhuma das duas fontes; teoria
+  geral dos direitos humanos e doutrina, e nao tem texto oficial. Link errado e
+  pior que link nenhum: eu estudaria a lei errada achando que era a certa;
+- **divergencia entre o edital e a fonte fica registrada, e nao escondida.** A
+  Lei 4.898/1965 que o edital de 2019 cobra foi revogada pela Lei 13.869/2019
+  naquele mesmo ano; a LC 529 e "de dezembro" no edital e "de janeiro" na
+  ALESC. Nos dois casos ha uma `nota` que aparece na tela junto do link.

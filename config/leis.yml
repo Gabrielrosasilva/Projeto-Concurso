@@ -1,0 +1,165 @@
+# Onde ler o texto OFICIAL de cada materia e assunto de Direito do edital.
+#
+# Isto e uma lista de enderecos, e so isso. O radar nao baixa, nao copia e nao
+# guarda o texto de lei nenhuma: ele abre o link no site de quem publica. Lei
+# muda - e o unico lugar em que a versao vigente esta certa e a fonte oficial.
+#
+# Duas fontes, e nao mais:
+#
+#   * Planalto (planalto.gov.br) para lei federal e para a Constituicao;
+#   * ALESC (leis.alesc.sc.gov.br) para lei estadual de Santa Catarina.
+#
+# Cada endereco daqui foi aberto de verdade antes de ser gravado (24/09/2026):
+# todos responderam 200, e o titulo da pagina confere com a lei. Os da ALESC
+# redirecionam para o endereco canonico /ato-normativo/<numero>, e e ele que
+# esta gravado, porque e o que serve a pagina no fim.
+#
+# COMO O CASAMENTO E FEITO
+#
+# `materia` casa com o nome da materia no quadro do edital. `quando` e uma
+# marca procurada DENTRO do nome do assunto que o edital usa - o mesmo jeito
+# do config/alvo.yml, e pelo mesmo motivo: o assunto do edital e comprido
+# ("Lei Complementar n.o 529 de 17 de dezembro de 2011 (Regimento Interno dos
+# estabelecimentos penais do Estado de Santa Catarina)") e copiar a frase
+# inteira aqui seria copiar um texto que a proxima edicao reescreve. Acento e
+# caixa nao importam: os dois lados sao normalizados antes de comparar.
+#
+# O assunto sem `quando` que sirva cai no link da propria materia. Materia sem
+# `url` e assunto sem marca ficam SEM LINK - e a tela nao mostra o "ler a lei"
+# para eles. Assunto de doutrina (Teoria geral dos direitos humanos) nao tem
+# texto oficial, e inventar um link seria pior que nao ter.
+
+materias:
+
+  # --- Direito Constitucional ------------------------------------------------
+  #
+  # A materia inteira e um texto so, entao o link fica na materia e todo
+  # assunto dela herda: nacionalidade, direitos sociais, seguranca publica e
+  # ordem social sao todos capitulos da mesma Constituicao.
+  - materia: Direito Constitucional
+    lei: Constituição Federal de 1988
+    url: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+
+  # --- Direito Penal ---------------------------------------------------------
+  - materia: Direito Penal
+    lei: Código Penal (Decreto-Lei 2.848/1940)
+    url: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+
+  # --- Direito Processual Penal ----------------------------------------------
+  - materia: Direito Processual Penal
+    lei: Código de Processo Penal (Decreto-Lei 3.689/1941)
+    url: https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm
+
+  # --- Lei de Execucao Penal -------------------------------------------------
+  #
+  # Materia de 10 questoes com um assunto so, que e a propria lei.
+  - materia: Lei de Execucao Penal
+    lei: Lei 7.210/1984 - Lei de Execução Penal
+    url: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+
+  # --- Direitos Humanos ------------------------------------------------------
+  #
+  # A materia NAO tem link proprio de proposito: metade dela e doutrina
+  # (teoria geral, afirmacao historica, conceito), e doutrina nao tem texto
+  # oficial. So os assuntos que apontam para um documento e que ganham link.
+  - materia: Direitos Humanos
+    assuntos:
+      - quando: na constituicao federal
+        lei: Constituição Federal de 1988
+        url: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+
+      - quando: tratados internacionais
+        lei: Constituição Federal de 1988
+        url: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+
+      # "Politica Nacional" e "Programa Nacional (PNDH-3)" apontam para o
+      # mesmo decreto: o PNDH-3 E o instrumento da politica nacional.
+      - quando: politica nacional de direitos humanos
+        lei: Decreto 7.037/2009 - PNDH-3
+        url: https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/decreto/d7037.htm
+
+      - quando: programa nacional de direitos humanos
+        lei: Decreto 7.037/2009 - PNDH-3
+        url: https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/decreto/d7037.htm
+
+      # "Regras minimas da ONU para o tratamento de pessoas presas" (Regras de
+      # Mandela) fica SEM LINK: e documento da ONU, nao lei brasileira, e por
+      # isso nao esta nem no Planalto nem na ALESC. Tem traducao oficial
+      # publicada pelo CNJ, que nao e nenhuma das duas fontes deste arquivo -
+      # entao a escolha aqui e nao linkar em vez de linkar de qualquer jeito.
+
+  # --- Administracao Publica -------------------------------------------------
+  - materia: Administracao Publica
+    assuntos:
+      - quando: improbidade
+        lei: Lei 8.429/1992 - Improbidade Administrativa
+        url: https://www.planalto.gov.br/ccivil_03/leis/l8429.htm
+
+      # Os principios da administracao publica estao no art. 37 da
+      # Constituicao; e de la que o edital os cobra.
+      - quando: principios administrativos
+        lei: Constituição Federal de 1988 (art. 37)
+        url: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+
+      - quando: administracao direta e indireta
+        lei: Decreto-Lei 200/1967 - organização da Administração Federal
+        url: https://www.planalto.gov.br/ccivil_03/decreto-lei/del0200.htm
+
+      # "Nocoes de Administracao Publica", "Modelos de gestao" e "Ciclos de
+      # transformacao" sao doutrina de gestao publica: ficam sem link.
+
+  # --- Legislacao Especial ---------------------------------------------------
+  #
+  # Cinco leis avulsas, uma por assunto. A materia nao tem link porque nao ha
+  # um texto que a cubra.
+  - materia: Legislacao Especial
+    assuntos:
+      - quando: abuso de autoridade
+        lei: Lei 4.898/1965 - Abuso de Autoridade
+        url: https://www.planalto.gov.br/ccivil_03/leis/l4898.htm
+        # O edital de 2019 cobra a 4.898, que era a lei da epoca. Ela foi
+        # revogada pela Lei 13.869/2019, publicada em setembro daquele ano -
+        # o link acima e o que o edital pede, e esta nota existe para eu nao
+        # estudar uma lei revogada sem saber: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/L13869.htm
+        nota: >-
+          revogada pela Lei 13.869/2019 - o edital de 2019 ainda cobrava esta;
+          confira qual das duas o edital novo pede
+
+      - quando: desarmamento
+        lei: Lei 10.826/2003 - Estatuto do Desarmamento
+        url: https://www.planalto.gov.br/ccivil_03/leis/2003/l10.826.htm
+
+      - quando: tortura
+        lei: Lei 9.455/1997 - Crimes de Tortura
+        url: https://www.planalto.gov.br/ccivil_03/leis/l9455.htm
+
+      - quando: "11.343"
+        lei: Lei 11.343/2006 - SISNAD (drogas)
+        url: https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm
+
+      - quando: maria da penha
+        lei: Lei 11.340/2006 - Lei Maria da Penha
+        url: https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm
+
+  # --- Legislacao Estadual ---------------------------------------------------
+  #
+  # As tres leis de SC, na ALESC. Sao elas que fazem esta materia ser so de
+  # quem presta em Santa Catarina - e o motivo de prova de outro estado nao
+  # entrar no estudo.
+  - materia: Legislacao Estadual
+    assuntos:
+      - quando: "6.745"
+        lei: Lei 6.745/1985 - Estatuto do Servidor Público do Estado de SC
+        url: https://leis.alesc.sc.gov.br/ato-normativo/7963
+
+      - quando: "675"
+        lei: Lei Complementar 675/2016 - plano de cargos e salários
+        url: https://leis.alesc.sc.gov.br/ato-normativo/19505
+
+      - quando: "529"
+        lei: Lei Complementar 529/2011 - Regimento Interno dos estabelecimentos penais de SC
+        url: https://leis.alesc.sc.gov.br/ato-normativo/17506
+        # O edital escreve "17 de dezembro de 2011"; a ALESC publica a mesma
+        # LC 529 como "17 de janeiro de 2011". O numero e o ano conferem, e o
+        # texto e o do Regimento Interno - um dos dois errou o mes.
+        nota: a ALESC publica esta LC como de 17 de janeiro, e não de dezembro
