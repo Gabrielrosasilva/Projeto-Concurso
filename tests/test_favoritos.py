@@ -430,9 +430,30 @@ def test_salario_digitado_entra_no_filtro(banco_temporario):
 
 # --- a tela do salario ------------------------------------------------------
 
-def test_sem_salario_a_tela_mostra_interrogacao(cliente):
+def test_sem_salario_a_linha_principal_nao_mostra_nada(cliente):
+    """"R$ ??" ocupava o mesmo espaco de um dado e nao dizia nada - e mais da
+    metade dos concursos nao informa valor no titulo, entao a linha vinha
+    cheia de interrogacao."""
     _semear(_concurso("https://a.test/1", salario=None))
-    assert "R$ ??" in cliente.get("/concursos").text
+
+    assert "R$ ??" not in cliente.get("/concursos").text
+
+
+def test_sem_salario_o_lapis_continua_em_detalhes(cliente):
+    """Esconder o valor desconhecido nao pode esconder o jeito de preenche-lo."""
+    (id_,) = _semear(_concurso("https://a.test/1", salario=None))
+
+    texto = cliente.get("/concursos").text
+    assert "não informado" in texto
+    assert f"editar={id_}" in texto          # o link do lapis
+
+
+def test_com_salario_a_linha_principal_mostra(cliente):
+    _semear(_concurso("https://a.test/1", salario=5200.0))
+
+    texto = cliente.get("/concursos").text
+    assert "R$ 5.200" in texto
+    assert "não informado" not in texto
 
 
 def test_salvar_salario_pela_tela(cliente):
@@ -586,11 +607,17 @@ def test_o_selo_de_salario_nao_usa_a_classe_do_estado_vazio(cliente):
     90px de altura no meio da linha de selos."""
     _semear(_concurso("https://a.test/1", salario=None))
 
-    texto = cliente.get("/concursos").text
-    # Na linha-chave o salario nao e mais um selo, mas o nome da classe de
-    # "sem valor" continua sendo o que importa aqui: ele nao pode ser `vazio`.
+    # Sem valor, o salario saiu da linha principal na etapa 12 - o que esta
+    # protegido aqui e o nome da classe: onde ele aparecer, nao pode ser
+    # `vazio`. Com o campo de edicao aberto ele reaparece na linha.
+    texto = cliente.get("/concursos?editar=" + str(_id_do_unico())).text
     assert "dinheiro sem-valor" in texto
     assert "dinheiro vazio" not in texto
+
+
+def _id_do_unico() -> int:
+    with sessao() as s:
+        return s.scalar(select(Concurso)).id
 
 
 # --- minha anotacao sobre o concurso ----------------------------------------

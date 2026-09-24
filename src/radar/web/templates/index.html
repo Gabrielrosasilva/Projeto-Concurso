@@ -327,9 +327,12 @@
         {%- elif c.uf %}{{ c.uf }}
         {%- else %}cidade não identificada{% endif %}</span>
 
-      <span class="sep">&middot;</span>
+      {# Salario so aparece quando ele existe. "R$ ??" ocupava o mesmo espaco
+         de um dado e nao dizia nada: mais da metade dos concursos nao informa
+         valor no titulo, entao a linha vinha cheia de interrogacao. O lapis
+         para anotar continua a um clique, dentro de "detalhes". #}
+      {% if c.salario or editar == c.id %}<span class="sep">&middot;</span>{% endif %}
 
-      {# Salario sempre presente. Sem valor vira "R$ ??", e o lapis abre o campo. #}
       {% if editar == c.id %}
         <span class="selo dinheiro sem-valor">
           <span class="rot">Salário:</span>
@@ -343,10 +346,10 @@
             <a href="{{ url_sem_editar }}">cancelar</a>
           </form>
         </span>
-      {% else %}
-        <span class="dinheiro {{ 'sem-valor' if not c.salario }}">
+      {% elif c.salario %}
+        <span class="dinheiro">
           <span class="rot">Salário:</span>
-          {% if c.salario %}R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}{% else %}R$ ??{% endif %}
+          R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}
           <a class="lapis" href="{{ url_com_editar }}{{ c.id }}"
              title="Anotar a remuneração" aria-label="Anotar a remuneração">&#9998;</a>
         </span>
@@ -378,6 +381,16 @@
         {{ c.banca if c.banca else 'a confirmar' }}</span>
 
       <span class="selo neutro"><span class="rot">Tipo:</span> {{ c.tipo }}</span>
+
+      {# Sem valor conhecido o salario sai da linha principal, mas o lapis
+         continua aqui: e o mesmo campo, no lugar onde eu procuro detalhe. #}
+      {% if not c.salario %}
+        <span class="selo neutro"><span class="rot">Salário:</span>
+          não informado
+          <a class="lapis" href="{{ url_com_editar }}{{ c.id }}"
+             title="Anotar a remuneração" aria-label="Anotar a remuneração">&#9998;</a>
+        </span>
+      {% endif %}
 
       {% if c.inscricoes_ate %}
         <span class="selo {{ 'aberta' if faltam >= 0 else 'fechada' }}">
