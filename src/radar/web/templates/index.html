@@ -314,7 +314,7 @@
       <span class="selo {{ c.relevancia }}">{{ rotulo_anel.get(c.relevancia, c.relevancia) }}</span>
 
       <span class="onde">
-        {%- if c.municipio %}{{ c.municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
+        {%- if c.municipio %}{{ c.municipio | municipio }}{% if c.uf %}/{{ c.uf }}{% endif %}
         {%- elif c.uf %}{{ c.uf }}
         {%- else %}cidade não identificada{% endif %}</span>
 
@@ -518,7 +518,7 @@
                autocomplete="off">
         <details class="menu-faixa">
           <summary title="Escolher uma faixa">
-            {{ faixa_ativa if faixa_ativa else 'Remuneracao' }}
+            {{ faixa_ativa if faixa_ativa else 'Remuneração' }}
             <span class="seta">&#9662;</span>
           </summary>
           <div class="opcoes">

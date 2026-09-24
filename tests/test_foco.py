@@ -1,7 +1,7 @@
 """A tela de Meu foco, e o leitor do quadro de materias do edital.
 
 A regra que estes testes existem para proteger: **a tela nunca inventa**. Onde
-o dado nao existe ela diz "nao sei ainda", e a banca e hipotese enquanto nao
+o dado nao existe ela diz "não sei ainda", e a banca e hipotese enquanto nao
 houver edital novo dizendo quem e.
 
 A fixture edital_sap_2019_quadro.txt e o texto REAL do edital 001/SAP/2019 -
@@ -89,7 +89,7 @@ def test_quadro_que_nao_fecha_e_recusado():
 
 def test_a_banca_aparece_como_hipotese_com_os_anos():
     banca = foco.Banca(nome="FEPESE", confirmada=False, anos=[2013, 2019])
-    assert banca.como_hipotese == "hipotese: FEPESE, que fez 2013 e 2019"
+    assert banca.como_hipotese == "hipótese: FEPESE, que fez 2013 e 2019"
 
 
 def test_banca_confirmada_perde_o_hipotese():
@@ -98,12 +98,12 @@ def test_banca_confirmada_perde_o_hipotese():
 
 
 def test_sem_banca_a_frase_e_nao_sei_ainda():
-    assert foco.Banca().como_hipotese == "nao sei ainda"
+    assert foco.Banca().como_hipotese == "não sei ainda"
 
 
 def test_hipotese_sem_anos_nao_inventa_ano():
     banca = foco.Banca(nome="FEPESE", confirmada=False)
-    assert banca.como_hipotese == "hipotese: FEPESE"
+    assert banca.como_hipotese == "hipótese: FEPESE"
 
 
 # --- o painel ---------------------------------------------------------------
@@ -129,7 +129,7 @@ def test_banco_vazio_nao_quebra_a_tela(cliente):
     """Sem nenhum concurso do alvo, a tela abre e diz o que nao sabe."""
     resposta = cliente.get("/")
     assert resposta.status_code == 200
-    assert "nao sei ainda" in resposta.text
+    assert "não sei ainda" in resposta.text
 
 
 def test_sem_edital_aberto_a_tela_diz_isso(banco_temporario):
@@ -183,7 +183,7 @@ def test_vaga_de_outro_cargo_nao_confirma_a_banca(banco_temporario):
 
     painel = foco.montar()
     assert painel.banca.confirmada is False
-    assert "hipotese" in painel.banca.como_hipotese
+    assert "hipótese" in painel.banca.como_hipotese
 
 
 def test_edital_aberto_do_cargo_confirma_a_banca(banco_temporario):
@@ -265,7 +265,7 @@ def test_a_tela_mostra_a_banca_como_hipotese(cliente):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
     texto = cliente.get("/").text
-    assert "hipotese: FEPESE" in texto
+    assert "hipótese: FEPESE" in texto
 
 
 def test_o_botao_de_treino_aparece_quando_ha_questao(cliente):

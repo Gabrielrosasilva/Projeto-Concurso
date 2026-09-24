@@ -88,7 +88,7 @@ def test_pega_o_maior_valor_quando_ha_faixa():
 def test_nucleo():
     r = classificar(item("Prefeitura de Palhoca (SC) abre concurso", uf="SC"))
     assert r.relevancia == "nucleo"
-    assert "Palhoca" in r.motivo
+    assert "Palhoça" in r.motivo
 
 
 def test_proximo():

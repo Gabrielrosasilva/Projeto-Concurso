@@ -18,11 +18,11 @@ PAGINAS = Path(__file__).parent / "fixtures" / "paginas"
 
 # Os municipios que me interessam, como o regioes.yml entrega.
 MUNICIPIOS = {
-    "florianopolis": "Florianopolis",
-    "sao jose": "Sao Jose",
-    "sao jose do cerrito": "Sao Jose do Cerrito",
-    "sao pedro de alcantara": "Sao Pedro de Alcantara",
-    "palhoca": "Palhoca",
+    "florianopolis": "Florianópolis",
+    "sao jose": "São José",
+    "sao jose do cerrito": "São José do Cerrito",
+    "sao pedro de alcantara": "São Pedro de Alcântara",
+    "palhoca": "Palhoça",
     "lages": "Lages",
 }
 
@@ -137,7 +137,7 @@ def test_orgao_estadual_ganha_municipio_pela_lotacao():
     classificador nao acha municipio e marca `indefinida`. A pagina diz
     "lotacao em Florianopolis", e ai o concurso vai para o nucleo.
     """
-    assert detalhes.extrair(pagina("sefaz_sc"), 2026, MUNICIPIOS).municipio == "Florianopolis"
+    assert detalhes.extrair(pagina("sefaz_sc"), 2026, MUNICIPIOS).municipio == "Florianópolis"
 
 
 def test_pagina_que_cita_varios_municipios_nao_escolhe_nenhum():
@@ -152,21 +152,21 @@ def test_pagina_que_cita_varios_municipios_nao_escolhe_nenhum():
 
 def test_municipio_colado_na_pista_de_local_vence():
     texto = "vagas para todo o estado, com lotacao em palhoca conforme o edital"
-    assert detalhes.achar_municipio(texto, MUNICIPIOS) == "Palhoca"
+    assert detalhes.achar_municipio(texto, MUNICIPIOS) == "Palhoça"
 
 
 def test_a_pegadinha_sao_jose_do_cerrito():
     """Nome que comeca igual nao pode virar o municipio vizinho."""
     assert detalhes.achar_municipio(
         "concurso da prefeitura de sao jose do cerrito", MUNICIPIOS
-    ) == "Sao Jose do Cerrito"
+    ) == "São José do Cerrito"
 
 
 def test_nome_seguido_de_outra_palavra_ainda_e_reconhecido():
     """"sao jose abre vagas do edital" nao pode ser recusado pelo "do"."""
     assert detalhes.achar_municipio(
         "prefeitura de sao jose abre 300 vagas do edital novo", MUNICIPIOS
-    ) == "Sao Jose"
+    ) == "São José"
 
 
 def test_municipio_que_nao_interessa_e_ignorado():

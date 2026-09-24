@@ -10,23 +10,23 @@
 
 nucleo:
   # Regiao Metropolitana da Grande Florianopolis.
-  - Florianopolis
-  - Sao Jose
-  - Palhoca
-  - Biguacu
+  - Florianópolis
+  - São José
+  - Palhoça
+  - Biguaçu
   - Santo Amaro da Imperatriz
-  - Aguas Mornas
-  - Antonio Carlos
+  - Águas Mornas
+  - Antônio Carlos
   - Governador Celso Ramos
-  - Sao Pedro de Alcantara
+  - São Pedro de Alcântara
   - Angelina
   - Rancho Queimado
-  - Sao Bonifacio
-  - Anitapolis
+  - São Bonifácio
+  - Anitápolis
   - Tijucas
   - Canelinha
   - Nova Trento
-  - Sao Joao Batista
+  - São João Batista
   - Major Gercino
   - Leoberto Leal
   - Garopaba
@@ -37,15 +37,15 @@ proximo:
   # Fora da regiao metropolitana, mas voce confirmou que vale a viagem.
   # Blumenau fica a ~2h e Lages a ~3h: estao aqui por escolha sua, nao por
   # tempo de estrada.
-  - Itajai
-  - Balneario Camboriu
-  - Camboriu
+  - Itajaí
+  - Balneário Camboriú
+  - Camboriú
   - Itapema
   - Porto Belo
   - Bombinhas
   - Navegantes
   - Brusque
-  - Tubarao
+  - Tubarão
   - Laguna
   - Imbituba
   - Blumenau

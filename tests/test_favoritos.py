@@ -537,7 +537,7 @@ def test_nucleo_aparece_como_perto(cliente):
 
 def test_cidade_e_estado_aparecem(cliente):
     _semear(_concurso("https://a.test/1", municipio="Palhoca", uf="SC"))
-    assert "Palhoca/SC" in cliente.get("/concursos").text
+    assert "Palhoça/SC" in cliente.get("/concursos").text
 
 
 def test_sem_cidade_a_tela_diz_isso_em_vez_de_ficar_em_branco(cliente):

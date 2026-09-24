@@ -203,7 +203,7 @@
           <div class="parecida">
             <span class="cargo">{{ p.cargo }}</span>
             <span class="onde">
-              {{ p.banca }}{% if p.municipio %} &middot; {{ p.municipio }}{% endif %}
+              {{ p.banca }}{% if p.municipio %} &middot; {{ p.municipio | municipio }}{% endif %}
               {%- if p.ano %} &middot; {{ p.ano }}{% endif %}
               &middot; {{ p.questoes }} questões</span>
             <span class="porque">{{ p.motivo }}</span>

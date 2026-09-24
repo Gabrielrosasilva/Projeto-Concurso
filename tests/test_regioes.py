@@ -43,14 +43,14 @@ def test_grafia_canonica_vem_do_yaml():
     como se fossem cidades diferentes."""
     for escrito in ("Florianopolis", "FLORIANOPOLIS", "florianopolis",
                     "Florian\u00f3polis", " Florianopolis "):
-        assert regioes.nome_canonico(escrito) == "Florianopolis"
+        assert regioes.nome_canonico(escrito) == "Florianópolis"
 
 
 def test_acento_e_cedilha_no_mesmo_municipio():
     """O caso real: a FEPESE gravava Palhoca e o feed gravava Palhoca com
     cedilha, e o historico do municipio ficava partido em dois."""
-    assert regioes.nome_canonico("Palho" + chr(0xE7) + "a") == "Palhoca"
-    assert regioes.nome_canonico("S\u00e3o Jos\u00e9") == "Sao Jose"
+    assert regioes.nome_canonico("Palho" + chr(0xE7) + "a") == "Palhoça"
+    assert regioes.nome_canonico("S\u00e3o Jos\u00e9") == "São José"
 
 
 def test_municipio_de_fora_volta_como_veio():

@@ -55,13 +55,13 @@ class Banca:
     def como_hipotese(self) -> str:
         """A frase que a tela usa. Ela NUNCA afirma o que nao esta confirmado."""
         if not self.nome:
-            return "nao sei ainda"
+            return "não sei ainda"
         if self.confirmada:
             return self.nome
         if self.anos:
             anos = " e ".join(str(a) for a in self.anos)
-            return f"hipotese: {self.nome}, que fez {anos}"
-        return f"hipotese: {self.nome}"
+            return f"hipótese: {self.nome}, que fez {anos}"
+        return f"hipótese: {self.nome}"
 
 
 @dataclass
@@ -516,9 +516,9 @@ def _validade_do_edital(concurso: Concurso) -> str | None:
 
     anos = int(achado.group(1))
     prorroga = "prorrogad" in achado.group(0).lower()
-    frase = f"{anos} anos a contar da homologacao do resultado"
+    frase = f"{anos} anos a contar da homologação do resultado"
     if prorroga:
-        frase += f", prorrogaveis por mais {anos}"
+        frase += f", prorrogáveis por mais {anos}"
     return frase
 
 

@@ -90,5 +90,5 @@ def test_reclassificar_conserta_o_registro_antigo(banco_temporario):
         concurso = s.query(Concurso).one()
 
     assert concurso.relevancia == "nucleo"        # Palhoca e Grande Floripa
-    assert concurso.municipio == "Palhoca"
-    assert "Palhoca" in concurso.motivo_relevancia
+    assert concurso.municipio == "Palhoça"
+    assert "Palhoça" in concurso.motivo_relevancia

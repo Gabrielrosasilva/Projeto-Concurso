@@ -77,14 +77,14 @@ def proxima_acao(concurso: Concurso, dias: int | None) -> ProximaAcao:
     if situacao == "inscricoes_abertas":
         if dias is None:
             return ProximaAcao(
-                "Inscrever-se. O prazo esta aberto, mas a data-limite eu nao sei"
-                " - confira na pagina do concurso.",
+                "Inscrever-se. O prazo está aberto, mas a data-limite eu não sei"
+                " - confira na página do concurso.",
                 urgente=True,
             )
         if dias < 0:
             # A situacao diz aberta e a data ja passou: quem manda e a data.
             return ProximaAcao(
-                "Conferir na fonte: o prazo que eu tenho ja venceu, mas o "
+                "Conferir na fonte: o prazo que eu tenho já venceu, mas o "
                 "registro ainda diz aberto."
             )
         if dias == 0:
@@ -95,26 +95,26 @@ def proxima_acao(concurso: Concurso, dias: int | None) -> ProximaAcao:
 
     if situacao == "edital_publicado":
         return ProximaAcao(
-            "Ler o edital: conferir requisito, taxa e data de inscricao."
+            "Ler o edital: conferir requisito, taxa e data de inscrição."
         )
 
     if situacao == "banca_definida":
         return ProximaAcao(
-            "Estudar o padrao da banca. O edital costuma sair 2 a 4 meses "
+            "Estudar o padrão da banca. O edital costuma sair 2 a 4 meses "
             "depois de a banca ser contratada."
         )
 
     if situacao in ("prevista", "autorizado"):
         return ProximaAcao(
-            "So acompanhar por enquanto: ainda nao ha edital nem banca."
+            "Só acompanhar por enquanto: ainda não há edital nem banca."
         )
 
     if situacao == "encerrado":
         return ProximaAcao(
-            "Inscricao encerrada. Acompanhar convocacao e prazo de validade."
+            "Inscrição encerrada. Acompanhar convocação e prazo de validade."
         )
 
-    return ProximaAcao("nao sei ainda", sei=False)
+    return ProximaAcao("não sei ainda", sei=False)
 
 
 def blocos(limite: int = 50) -> list[Bloco]:

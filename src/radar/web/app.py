@@ -13,6 +13,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
+from radar import regioes
 from radar import servico
 from radar.util import (
     converter_valor,
@@ -91,6 +92,10 @@ templates.env.filters["dias"] = dias_ate
 # A FEPESE as vezes cola os campos do titulo sem separador. Isto e so
 # exibicao: o titulo gravado continua o que a fonte mandou.
 templates.env.filters["titulo"] = separar_campos_grudados
+# O municipio sai do banco com a grafia da fonte, que quase sempre vem sem
+# acento. A grafia certa e a de config/regioes.yml, e e ela que a tela
+# mostra - sem precisar reescrever o que ja esta gravado.
+templates.env.filters["municipio"] = regioes.nome_canonico
 
 
 def _url_base_sem(request: Request, *parametros: str) -> str:

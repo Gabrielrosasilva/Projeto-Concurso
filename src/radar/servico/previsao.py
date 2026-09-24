@@ -71,7 +71,7 @@ def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
                 f"{ultimo}), um a cada {intervalo} ano(s)")
     else:
         intervalo = VALIDADE_MAXIMA
-        base = f"um unico concurso conhecido ({ultimo}), sem ritmo para medir"
+        base = f"um único concurso conhecido ({ultimo}), sem ritmo para medir"
 
     previsto = ultimo + intervalo
     if este_ano > previsto + FOLGA:
@@ -90,7 +90,7 @@ def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
         ultimo_ano=ultimo,
         proximo_previsto=previsto,
         situacao=situacao,
-        motivo=f"{base}. O ultimo foi ha {este_ano - ultimo} ano(s), {conclusao}.",
+        motivo=f"{base}. O último foi há {este_ano - ultimo} ano(s), {conclusao}.",
     )
 
 

@@ -304,7 +304,7 @@ def test_o_cartao_mostra_titulo_e_a_linha_de_sempre(cliente):
 
     texto = cliente.get("/concursos").text
     assert "linha-chave" in texto
-    assert "Palhoca" in texto            # onde
+    assert "Palhoça" in texto            # onde
     assert "R$ 5.200" in texto           # salario
     assert "prazo não confirmado" in texto   # prazo
 

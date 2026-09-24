@@ -109,7 +109,7 @@ def test_aberta_sem_data_limite_manda_conferir_na_fonte():
         _concurso("https://a.test/1", situacao="inscricoes_abertas"), dias=None
     )
     assert acao.urgente
-    assert "nao sei" in acao.texto
+    assert "não sei" in acao.texto
 
 
 def test_registro_que_se_contradiz_manda_conferir():
@@ -125,13 +125,13 @@ def test_banca_definida_manda_estudar_o_padrao():
     acao = acompanhando.proxima_acao(
         _concurso("https://a.test/1", situacao="banca_definida"), dias=None
     )
-    assert "padrao da banca" in acao.texto
+    assert "padrão da banca" in acao.texto
 
 
 @pytest.mark.parametrize("situacao,pedaco", [
     ("edital_publicado", "Ler o edital"),
-    ("prevista", "So acompanhar"),
-    ("autorizado", "So acompanhar"),
+    ("prevista", "Só acompanhar"),
+    ("autorizado", "Só acompanhar"),
     ("encerrado", "encerrada"),
 ])
 def test_cada_situacao_tem_a_sua_acao(situacao, pedaco):

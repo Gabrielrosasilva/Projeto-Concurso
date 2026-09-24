@@ -149,7 +149,7 @@ def test_o_botao_mostra_a_faixa_escolhida(cliente):
     _semear(*_tres_faixas())
 
     aberto = cliente.get("/concursos").text
-    assert "Remuneracao" in aberto
+    assert "Remuneração" in aberto
 
     escolhido = cliente.get("/concursos?salario_min=5000&salario_max=10000").text
     # A caixinha de faixas e procurada pela classe dela: desde a barra do topo,

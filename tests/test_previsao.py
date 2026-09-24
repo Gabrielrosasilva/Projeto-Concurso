@@ -191,7 +191,7 @@ def test_a_tela_abre_e_agrupa_por_situacao(cliente):
     texto = cliente.get("/previsao").text
 
     assert "Atrasados" in texto and "Em dia" in texto
-    assert "Tijucas" in texto and "Palhoca" in texto
+    assert "Tijucas" in texto and "Palhoça" in texto
 
 
 def test_a_tela_avisa_o_que_o_historico_nao_cobre(cliente):

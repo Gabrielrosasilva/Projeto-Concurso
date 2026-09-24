@@ -200,4 +200,4 @@ def test_depois_da_carga_a_coleta_diaria_volta_a_avisar(banco_temporario, monkey
         ), fonte="teste")
 
     assert servico.avisar().enviados == 1
-    assert "Palhoca" in enviadas[0]
+    assert "Palhoça" in enviadas[0]

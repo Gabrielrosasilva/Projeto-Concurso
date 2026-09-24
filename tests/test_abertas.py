@@ -232,7 +232,7 @@ def test_municipio_da_pagina_sobrevive_ao_reclassificar(banco_temporario):
 
     with sessao() as s:
         concurso = s.scalar(select(Concurso))
-    assert concurso.municipio == "Florianopolis"
+    assert concurso.municipio == "Florianópolis"
     assert concurso.relevancia == "nucleo"
     assert "lotacao na pagina" in concurso.motivo_relevancia
 
@@ -253,7 +253,7 @@ def test_municipio_do_titulo_continua_sendo_recalculado(banco_temporario):
 
     with sessao() as s:
         concurso = s.scalar(select(Concurso))
-    assert concurso.municipio == "Palhoca"
+    assert concurso.municipio == "Palhoça"
     assert concurso.relevancia == "nucleo"
 
 
@@ -299,5 +299,5 @@ def test_reclassificar_nao_perde_o_municipio_que_a_fonte_extraiu(banco_temporari
 
     with sessao() as s:
         concurso = s.scalar(select(Concurso))
-    assert concurso.municipio == "Sao Jose"
+    assert concurso.municipio == "São José"
     assert concurso.relevancia == "nucleo"

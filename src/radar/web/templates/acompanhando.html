@@ -120,7 +120,7 @@
         </div>
 
         <p class="onde">
-          {%- if b.concurso.municipio %}{{ b.concurso.municipio }}
+          {%- if b.concurso.municipio %}{{ b.concurso.municipio | municipio }}
             {%- if b.concurso.uf %}/{{ b.concurso.uf }}{% endif %}
           {%- elif b.concurso.uf %}{{ b.concurso.uf }}
           {%- else %}cidade não identificada{% endif %}

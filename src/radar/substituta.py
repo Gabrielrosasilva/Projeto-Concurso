@@ -118,7 +118,7 @@ def _pontuar(
         candidata.exata = palavras == palavras_pedidas
 
     if sinonimo:
-        candidata.motivos.append(f'"{sinonimo}" e o mesmo cargo com outro nome')
+        candidata.motivos.append(f'"{sinonimo}" é o mesmo cargo com outro nome')
         candidata.exata = candidata.exata or palavras == grupo
 
     # O maior dos dois, e nao a soma: quando o cargo pedido e o sinonimo

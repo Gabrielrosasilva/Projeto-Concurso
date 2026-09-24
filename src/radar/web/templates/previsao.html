@@ -107,7 +107,7 @@
         {% for p in doGrupo %}
           <div class="item {{ grupo }}">
             <div class="topo">
-              <span class="municipio">{{ p.municipio }}</span>
+              <span class="municipio">{{ p.municipio | municipio }}</span>
               <span class="quando">
                 {% if grupo == 'em_dia' %}Próximo por volta de {{ p.proximo_previsto }}
                 {% else %}Previsto para {{ p.proximo_previsto }}{% endif %}
