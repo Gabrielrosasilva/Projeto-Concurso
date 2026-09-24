@@ -844,6 +844,16 @@ def _mostrar_alvos() -> None:
     if secundarios:
         console.print(f"[cyan]Alvo secundario[/]: {secundarios}")
 
+    # O mesmo cargo em outro estado sai contado e separado: ele avisa como o
+    # principal e nao entra em nada que seja estudo, e eu preciso ver essa
+    # diferenca aqui para conferir se a regra continua fazendo sentido.
+    fora = contagem.get(alvos.PRINCIPAL_FORA, 0)
+    if fora:
+        console.print(
+            f"[yellow]Mesmo cargo, fora de SC[/]: {fora} "
+            f"[dim](avisa; nao entra no estudo)[/]"
+        )
+
     principais = servico.concursos_do_alvo(alvos.PRINCIPAL)
     if not principais:
         return

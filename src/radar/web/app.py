@@ -465,6 +465,7 @@ def meu_foco(request: Request):
         name="foco.html",
         context={
             "p": painel,
+            "rotulo_situacao": SITUACAO_LEGIVEL,
             "questoes_do_treino": foco_do_alvo.QUESTOES_DO_TREINO,
             # De onde a proxima rodada vai sair, antes de eu clicar: quantas
             # questoes da prova do cargo ainda nao respondi, e quantas da

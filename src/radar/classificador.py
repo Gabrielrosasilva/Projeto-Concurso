@@ -251,6 +251,8 @@ class Classificacao:
     # O cargo e meu alvo? Sai de config/alvo.yml. Nulo = nao e cargo meu.
     alvo: str | None = None
     motivo_alvo: str | None = None
+    # Fura o teto de avisos por si so. Hoje so a lista `de_olho` liga isto.
+    alvo_prioritario: bool = False
 
 
 def classificar(item: ItemColetado) -> Classificacao:
@@ -270,7 +272,17 @@ def classificar(item: ItemColetado) -> Classificacao:
     # calculada aqui em cima e vale para todas as saidas, inclusive a de
     # noticia - noticia sobre a Policia Penal SC e justamente o que eu quero
     # saber antes de todo mundo.
-    marca = alvos.marcar(item.titulo, item.resumo, uf=item.uf, banca=item.banca)
+    # O municipio ja canonizado vai junto por causa da lista `de_olho`: e o
+    # unico lugar em que a CIDADE decide alguma coisa na marca de alvo, e o
+    # titulo nem sempre a repete ("Prefeitura de Florianopolis abre concurso
+    # para Guarda Municipal" traz a cidade so aqui).
+    marca = alvos.marcar(
+        item.titulo,
+        item.resumo,
+        uf=item.uf,
+        banca=item.banca,
+        municipio=municipio,
+    )
 
     comum = dict(
         municipio=municipio,
@@ -279,6 +291,7 @@ def classificar(item: ItemColetado) -> Classificacao:
         fase=detectar_fase(item.titulo, item.resumo),
         alvo=marca.alvo if marca else None,
         motivo_alvo=marca.motivo if marca else None,
+        alvo_prioritario=bool(marca and marca.prioritario),
     )
 
     if tipo == TIPO_NOTICIA:

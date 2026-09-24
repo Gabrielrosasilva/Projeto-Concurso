@@ -3,20 +3,29 @@
 O radar ja sabia ONDE a prova e aplicada e se eu sirvo para a vaga. Faltava a
 pergunta mais simples de todas: **e o cargo que eu quero?**
 
-Duas marcas, e elas nao valem a mesma coisa:
+Tres marcas, e elas nao valem a mesma coisa:
 
 - `principal` e a Policia Penal SC. Para ela o cargo manda e a distancia nao
   importa, entao a marca passa por cima do filtro de anel e do teto de
   mensagens do Telegram. Vale ate para noticia, que normalmente nunca vira
   aviso: "governo autoriza concurso da Policia Penal" e exatamente o que eu
   nao posso perder.
+- `principal_fora` e o MESMO cargo em outro estado - ou sem prova de qual.
+  Ela existe porque as duas perguntas que eu faco sobre esse cargo tem
+  respostas diferentes. **"Quero saber?"** - sim, sempre: um concurso de
+  Policia Penal em qualquer estado e noticia que eu quero na hora, e por isso
+  esta marca avisa com sirene, sem distancia e sem teto, como a de cima.
+  **"Quero estudar por ela?"** - nao: prova de outro estado e outra banca,
+  outro programa e outra lei estadual. Por isso o estudo (Meu foco, acervo,
+  treino) le so `principal`.
 - `secundario` e o resto da minha lista. Marca so para eu reconhecer o cargo;
-  as regras de aviso continuam as mesmas.
+  as regras de aviso continuam as mesmas - com uma excecao, `de_olho`, que
+  fura o teto para as cidades que eu escolhi no YAML.
 
-A regra de ouro do projeto continua valendo aqui: **nunca chutar**. O alvo
-principal e de Santa Catarina, entao sem prova de que o item e de SC a marca
-nao sai - "SAP SP abre estagio" e "Policia Penal do Parana" estao no feed de
-verdade, e nenhum dos dois e o meu concurso.
+A regra de ouro do projeto continua valendo aqui: **nunca chutar**. O que
+relaxou foi so o ESTADO do cargo, e so para os `termos`. Os `orgaos`
+continuam exigindo prova de SC: "SAP SP abre estagio" esta no feed de verdade
+e a sigla solta nao prova estado nenhum.
 """
 import re
 from dataclasses import dataclass
@@ -29,6 +38,15 @@ from radar.regioes import normalizar
 
 PRINCIPAL, SECUNDARIO = "principal", "secundario"
 
+# O cargo do alvo principal em outro estado, ou sem prova de qual. Avisa como
+# o principal; nao entra em nada que seja estudo.
+PRINCIPAL_FORA = "principal_fora"
+
+# As marcas que furam o filtro de distancia e o teto de avisos. Quem pergunta
+# "isso vira mensagem de qualquer jeito?" usa esta tupla; quem pergunta "isso
+# e o MEU concurso?" compara com `PRINCIPAL` sozinho.
+PRINCIPAIS = (PRINCIPAL, PRINCIPAL_FORA)
+
 
 @dataclass(frozen=True)
 class Marca:
@@ -38,6 +56,9 @@ class Marca:
     alvo: str
     nome: str
     motivo: str
+    #: Fura o teto de avisos sozinho, sem ser alvo principal. Hoje so liga
+    #: pela lista `de_olho` de um bloco secundario.
+    prioritario: bool = False
 
 
 @cache
@@ -114,13 +135,29 @@ def _marcar_principal(
     if _primeiro(principal.get("exclui"), texto):
         return None
 
-    achado = _primeiro(principal.get("termos"), texto) or _primeiro(
-        principal.get("orgaos"), texto
-    )
-    if not achado or not _e_do_estado(principal, texto, uf):
+    nome = principal.get("nome") or PRINCIPAL
+    cargo = _primeiro(principal.get("termos"), texto)
+    do_estado = _e_do_estado(principal, texto, uf)
+
+    # O cargo e o meu e o estado nao e - ou nao da para provar que e. Isso
+    # avisa, e so avisa. A separacao existe porque as duas perguntas tem
+    # respostas diferentes: "Policia Penal do Parana abre 400 vagas" e
+    # noticia que eu quero na hora, e e prova que eu nao posso estudar.
+    if cargo and not do_estado:
+        return Marca(
+            PRINCIPAL_FORA,
+            nome,
+            f'Mesmo cargo do alvo ({nome}), fora do estado: o texto fala em '
+            f'"{cargo}" sem provar que é de SC. Vale o aviso, não o estudo.',
+        )
+
+    # Sem o cargo no texto, quem pode marcar e o nome do orgao - e ai a prova
+    # de estado continua obrigatoria. A sigla "SAP" e o nome de uma secretaria
+    # de Sao Paulo tambem, e "SAP SP abre estagio" esta no feed de verdade.
+    achado = cargo or _primeiro(principal.get("orgaos"), texto)
+    if not achado or not do_estado:
         return None
 
-    nome = principal.get("nome") or PRINCIPAL
     motivo = f'Alvo principal ({nome}): o texto fala em "{achado}".'
 
     # A banca nunca marca alvo sozinha - a FEPESE faz dezenas de concursos de
@@ -263,29 +300,98 @@ def nomeia_orgao_do_principal(titulo: str, resumo: str | None = None) -> bool:
     return bool(_primeiro(orgaos_do_principal(), texto))
 
 
+def _texto_e_lugar(
+    titulo: str | None, resumo: str | None, municipio: str | None
+) -> tuple[str, str]:
+    """O texto normalizado, e o mesmo texto com o municipio colado no fim.
+
+    Sao duas strings porque sao duas perguntas. O CARGO se procura so no que a
+    fonte escreveu; a CIDADE da lista `de_olho` vale tambem quando ela so
+    aparece no campo `municipio`, que o classificador ja extraiu do titulo.
+    """
+    texto = normalizar(GRUDADAS.sub(r"\1 \2", f"{titulo or ''} {resumo or ''}"))
+    return texto, f"{texto} {normalizar(municipio or '')}"
+
+
+def _casar_secundario(texto: str, lugar: str) -> tuple[dict, str, str | None] | None:
+    """O primeiro bloco secundario que casa: (bloco, termo, cidade de olho).
+
+    A ordem do YAML e a ordem do CLAUDE.md: o primeiro que casar e o que fica.
+    Por isso "Oficial de Bombeiros" vem antes de "Bombeiro Militar". A cidade
+    vem None quando o bloco nao tem `de_olho`, ou quando a que ele tem nao
+    aparece neste item.
+    """
+    for bloco in _carregar().get("secundarios") or []:
+        achado = _primeiro(bloco.get("termos"), texto)
+        if achado:
+            return bloco, achado, _primeiro(bloco.get("de_olho"), lugar)
+    return None
+
+
+def de_olho() -> list[dict]:
+    """Os pares cargo+cidade que eu mandei acompanhar de perto, na ordem do
+    YAML.
+
+    "De olho" fica entre as duas marcas: o cargo continua secundario - ele nao
+    vira o meu concurso por ser em Florianopolis - mas nessas cidades o aviso
+    fura o teto do dia e a situacao ganha um cartao no Meu foco. Lista vazia
+    quer dizer que eu nao pedi isso para cargo nenhum.
+    """
+    pares = []
+    for bloco in _carregar().get("secundarios") or []:
+        nome = bloco.get("nome") or SECUNDARIO
+        for cidade in bloco.get("de_olho") or []:
+            pares.append({"cargo": nome, "cidade": str(cidade)})
+    return pares
+
+
+def par_de_olho(
+    titulo: str, resumo: str | None = None, municipio: str | None = None
+) -> tuple[str, str] | None:
+    """Em que par (cargo, cidade) da lista `de_olho` este item cai, ou None.
+
+    Existe para o Meu foco poder dizer QUAL cartao cada concurso preenche. A
+    conta e a mesma que o `marcar` faz - as duas passam pelo
+    `_casar_secundario` - e nao um segundo criterio que pudesse discordar.
+    """
+    casou = _casar_secundario(*_texto_e_lugar(titulo, resumo, municipio))
+    if not casou:
+        return None
+    bloco, _, cidade = casou
+    if not cidade:
+        return None
+    return (bloco.get("nome") or SECUNDARIO), cidade
+
+
 def marcar(
     titulo: str,
     resumo: str | None = None,
     uf: str | None = None,
     banca: str | None = None,
+    municipio: str | None = None,
 ) -> Marca | None:
     """A marca de alvo deste texto, ou None se ele nao for cargo meu."""
-    bruto = GRUDADAS.sub(r"\1 \2", f"{titulo or ''} {resumo or ''}")
-    texto = normalizar(bruto)
+    texto, lugar = _texto_e_lugar(titulo, resumo, municipio)
 
     marca = _marcar_principal(_carregar().get("principal") or {}, texto, uf, banca)
     if marca:
         return marca
 
-    # A ordem do YAML e a ordem do CLAUDE.md: o primeiro que casar e o que
-    # fica. Por isso "Oficial de Bombeiros" vem antes de "Bombeiro Militar".
-    for cargo in _carregar().get("secundarios") or []:
-        achado = _primeiro(cargo.get("termos"), texto)
-        if achado:
-            nome = cargo.get("nome") or SECUNDARIO
-            return Marca(
-                SECUNDARIO,
-                nome,
-                f'Alvo secundário ({nome}): o texto fala em "{achado}".',
-            )
-    return None
+    casou = _casar_secundario(texto, lugar)
+    if not casou:
+        return None
+
+    bloco, achado, cidade = casou
+    nome = bloco.get("nome") or SECUNDARIO
+    motivo = f'Alvo secundário ({nome}): o texto fala em "{achado}".'
+    if not cidade:
+        return Marca(SECUNDARIO, nome, motivo)
+
+    # De olho: mesmo cargo, cidade escolhida a dedo. Nao vira alvo principal -
+    # o que muda e o teto de avisos, que este item deixa de respeitar.
+    return Marca(
+        SECUNDARIO,
+        nome,
+        f"{motivo} De olho em {cidade}: o aviso sai mesmo com o teto cheio.",
+        prioritario=True,
+    )

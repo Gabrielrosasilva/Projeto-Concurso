@@ -234,6 +234,12 @@ Quem e o alvo sai de `config/alvo.yml`. **Onde o dado nao existe, a tela diz
 `hipotese: FEPESE, que fez 2013 e 2019` enquanto nao houver edital novo
 dizendo quem e.
 
+Um cartao pequeno, **De olho**, fecha a parte de cima: uma linha por cidade da
+lista `de_olho` do `config/alvo.yml` - hoje a Guarda Municipal de Florianopolis
+e a de Balneario Camboriu - com a situacao de cada uma. A cidade que ainda nao
+tem nada no radar continua na lista, dizendo "nada no radar ainda": sumir com
+ela responderia "nao ha concurso", que e outra coisa de nao saber.
+
 **Acompanhando** e a aba dos favoritos, um bloco por concurso marcado. Cada
 bloco traz:
 
@@ -406,7 +412,7 @@ sem isso qualquer conta por municipio sai errada.
 
 ### Os cargos que eu quero, em `config/alvo.yml`
 
-Duas marcas, e elas nao valem a mesma coisa:
+Tres marcas, e elas nao valem a mesma coisa:
 
 - **`principal`** e a Policia Penal SC. Para ela o cargo manda, entao a marca
   **fura o filtro de distancia e o teto de 10 avisos**, e vale ate para
@@ -414,18 +420,30 @@ Duas marcas, e elas nao valem a mesma coisa:
   com 🚨. Sao os tres nomes que a secretaria ja teve (SJC em 2013, SAP em
   2019, SEJURI hoje), os termos do cargo ("policia penal", "policial penal",
   "agente penitenciario") e a banca historica, a FEPESE.
+- **`principal_fora`** e o mesmo cargo em outro estado, ou sem prova de qual.
+  **Avisa igual** - sirene, sem distancia, sem teto - porque outra banca
+  abrindo Policia Penal e noticia que eu quero na hora. E **so avisa**: o
+  estudo (Meu foco, incidencia, treino, acervo) le `principal` sozinho,
+  porque fora de SC e outra banca, outro conteudo e outra lei estadual.
 - **`secundario`** e o resto da lista: Guarda Municipal, Policia Civil,
   Oficial de Bombeiros, Policia Penal Federal, Bombeiro Militar e Policia
   Cientifica, nessa ordem. Ganha a marca e mais nada: as regras de aviso
   continuam as de sempre.
 
+Um bloco secundario pode ainda trazer uma lista **`de_olho`** de cidades. Hoje
+so a Guarda Municipal tem, com Florianopolis e Balneario Camboriu: nessas duas
+o aviso **fura o teto** (abre com 👀) e a cidade ganha um cartao "De olho" no
+Meu foco, com a situacao de cada uma. O cargo continua secundario - isso nao
+entra no estudo, que e do cargo que eu vou prestar.
+
 Tres cuidados que o arquivo toma, e que valem a leitura antes de mexer nele:
 
 - a comparacao e por **palavra inteira**. Sem isso a sigla "SAP" casa dentro
   de Sapezal, Sapiranga, Massape e SAPE/SC, que estao todos na coleta;
-- o alvo principal exige **prova de que o item e de SC**. Sem UF, so uma
+- os **`orgaos`** exigem **prova de que o item e de SC**. Sem UF, so uma
   palavra exclusiva serve ("santa catarina", "sejuri", "sap/sc") - Sao Paulo
-  tambem tem uma secretaria SAP;
+  tambem tem uma secretaria SAP. Quem relaxou essa trava foram so os
+  `termos`, e o que eles ganham e a marca `principal_fora`, nao a `principal`;
 - a **banca nunca marca sozinha**. A FEPESE faz dezenas de concursos de
   prefeitura por ano; ela so entra no motivo da marca.
 

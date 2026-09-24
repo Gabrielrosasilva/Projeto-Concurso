@@ -1,9 +1,7 @@
 # CLAUDE.md
 
-Contexto permanente deste projeto. O Claude Code le este arquivo em toda
-sessao aberta nesta pasta.
-
-Curto de proposito (teto de 150 linhas). O que nao cabe aqui:
+Contexto permanente deste projeto, lido pelo Claude Code em toda sessao aberta
+nesta pasta. Curto de proposito (teto de 150 linhas). O que nao cabe aqui:
 
 - **[docs/decisoes.md](docs/decisoes.md)** — decisoes ja tomadas, com o motivo.
   Nao precisam ser rediscutidas. **Decisao que mudar, atualize la.**
@@ -34,14 +32,19 @@ variaveis, funcoes e arquivos tambem — o codigo ja segue isso.
 ## O que eu procuro num concurso
 
 **O alvo principal e Policia Penal SC.** Para ele o cargo manda e a distancia
-nao importa: e concurso estadual, e eu presto onde for.
+nao importa: e concurso estadual, e eu presto onde for. **A de outro estado
+tambem avisa, e so avisa** (marca `principal_fora`): o **estudo** — Meu foco,
+incidencia, treino, acervo — le so as provas de SC, porque fora daqui e outra
+banca e outra lei estadual.
 
 Depois dele, nesta ordem: Guarda Municipal · Policia Civil · Oficial de
 Bombeiros · e as demais carreiras de seguranca publica (Policia Penal Federal,
 Bombeiro Militar, Policia Cientifica). **A lista ordena, nao descarta** —
 nenhum concurso sai do radar por nao estar nela. Ela mora em
 `config/alvo.yml`, nunca no codigo; bater no alvo principal fura o filtro de
-distancia e o teto de avisos, e vale ate para noticia.
+distancia e o teto de avisos, e vale ate para noticia. A lista `de_olho` do
+mesmo arquivo fura o teto e ganha cartao na home para a **Guarda Municipal de
+Florianopolis e de Balneario Camboriu**, sem virar alvo nem entrar no estudo.
 
 Para todo o resto continuam valendo os criterios de sempre, nesta ordem:
 
@@ -58,10 +61,10 @@ Processo Penal, Administrativo, Legislacao Especial, Direitos Humanos,
 Portugues, Raciocinio Logico, Atualidades. **Nao** e TI.
 
 E as bancas que importam nao sao as nacionais de sempre. Em SC o peso esta em
-**FEPESE**, ACAFE, IESES, FURB, Instituto o Barriga Verde, e nas que costumam
-fazer seguranca publica (IBFC, Instituto AOCP, FUNDATEC, Consulplan, e o
-Cebraspe nas federais). Qual banca fez qual concurso e coisa para **confirmar
-lendo o edital**, nunca para afirmar de memoria.
+**FEPESE**, ACAFE, IESES, FURB, Instituto o Barriga Verde, e nas de seguranca
+publica (IBFC, Instituto AOCP, FUNDATEC, Consulplan, e o Cebraspe nas
+federais). Qual banca fez qual concurso e coisa para **confirmar lendo o
+edital**, nunca para afirmar de memoria.
 
 ## Regra de relevancia geografica
 
@@ -94,31 +97,27 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 ## Estado atual: so a 7 esta parcial (detalhe no [historico](docs/historico.md))
 
 ```
-1 a 6  PRONTAS: tres fontes, classificador de anel, avisos, leitura da
-       pagina e do edital, calendario .ics, acervo, 5.928 questoes, simulado
-       e previsao. So `radar assuntos` custa: usa a API, e simula por padrao
+1 a 6  PRONTAS: tres fontes, classificador de anel, avisos, leitura da pagina
+       e do edital, calendario .ics, acervo, 5.928 questoes, simulado e
+       previsao. So `radar assuntos` custa: usa a API, e simula por padrao
 7      PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
        parte que so a IA faz: pegadinha especifica e macete de memorizacao
-8      PRONTA: tabela `eventos`, a aba Acompanhando (um bloco por favorito,
-       com linha do tempo, proxima acao e aviso das cinco mudancas que
-       importam), navegacao nova, e "Meu foco" como home
+8      PRONTA: tabela `eventos`, aba Acompanhando, "Meu foco" como home
 9      PRONTA: estudar pelo alvo - o treino sorteia as provas do cargo
        primeiro, e a tabela de materias mostra o acerto ao lado do peso
 10     PRONTA: `servico.py` virou pacote, um arquivo por assunto
-11     PRONTA: consertos da auditoria de 23/09. So o robo manda mensagem;
-       `radar sincronizar` leva favorito e linha do tempo ate ele
+11     PRONTA: auditoria de 23/09. So o robo manda mensagem
+14-E   PRONTA: aviso e estudo separados, e a lista `de_olho`
 ```
 
-A arvore de `src/radar/` esta no
-[README](README.md#como-o-projeto-esta-organizado). Banco: SQLite em
+A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em
 `data/radar.db` (Postgres opcional via `RADAR_DATABASE_URL`); testes em
 `tests/`, todos com dado fixo.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 (`servico/coleta.py`) - nada fora de `collectors/` sabe de onde vem o dado. O
-`servico` e um pacote, um arquivo por assunto, e o `__init__` reexporta todos:
-escreva sempre `servico.funcao(...)`.
+`servico` e um pacote, um arquivo por assunto; escreva `servico.funcao(...)`.
 
 ## Fontes de dados
 

@@ -80,6 +80,27 @@ class Edicao:
 
 
 @dataclass
+class DeOlho:
+    """Uma vaga da lista `de_olho` do config/alvo.yml, e como ela esta hoje.
+
+    Nao e o alvo principal e nao finge ser: e um cargo secundario numa cidade
+    que eu escolhi a dedo. Campo vazio quer dizer que nada dela apareceu no
+    radar ainda - e nao que nao ha concurso.
+    """
+
+    cargo: str
+    cidade: str
+    situacao: str | None = None
+    titulo: str | None = None
+    url: str | None = None
+    inscricoes_ate: datetime | None = None
+
+    @property
+    def nome(self) -> str:
+        return f"{self.cargo} de {self.cidade}"
+
+
+@dataclass
 class Painel:
     """Tudo que a tela de foco mostra. Campo vazio = nao sei ainda."""
 
@@ -117,6 +138,10 @@ class Painel:
     materias_pesadas: set = field(default_factory=set)
     #: A pior das pesadas. None quando nenhuma delas foi treinada ainda.
     pior_materia: str | None = None
+
+    #: As vagas da lista `de_olho`, uma linha por cidade. Vazia quando o
+    #: config/alvo.yml nao pede nenhuma.
+    de_olho: list = field(default_factory=list)
 
 
 def _concursos_do_alvo(s) -> list[Concurso]:
@@ -237,6 +262,52 @@ def _anos_com_prova(s, provas_do_alvo: set[str], banca: str) -> list[int]:
         ano for ano, banca_da_prova in linhas
         if ano and alvo_banca in normalizar(banca_da_prova or "")
     })
+
+
+def _de_olho(s) -> list[DeOlho]:
+    """Como esta cada vaga da lista `de_olho` do config/alvo.yml.
+
+    Uma linha por cidade pedida, SEMPRE - mesmo a que nao tem nada no radar.
+    Sumir com a linha vazia seria responder "nao ha concurso" a uma pergunta
+    que ninguem fez: o que eu sei e que nada apareceu, que e outra coisa.
+
+    A consulta so alcanca quem ja esta marcado como prioritario, que e um
+    punhado de linhas: a conta de qual cartao cada concurso preenche e feita
+    em Python, com o mesmo `alvo.par_de_olho` que decidiu a marca.
+    """
+    pedidas = alvos.de_olho()
+    if not pedidas:
+        return []
+
+    marcados = list(s.scalars(
+        select(Concurso)
+        .where(Concurso.alvo_prioritario.is_(True))
+        .order_by(Concurso.publicado_em.desc().nullslast())
+    ))
+
+    cartoes = []
+    for pedida in pedidas:
+        par = (pedida["cargo"], pedida["cidade"])
+        dessa = [
+            c for c in marcados
+            if alvos.par_de_olho(c.titulo, c.resumo, c.municipio) == par
+        ]
+        # Concurso em pe vale mais que o ultimo publicado: uma noticia de
+        # ontem sobre a edicao encerrada nao pode esconder a inscricao aberta.
+        # Dentro de cada grupo continua valendo a ordem da consulta.
+        atual = next(
+            (c for c in dessa if c.situacao != "encerrado"),
+            dessa[0] if dessa else None,
+        )
+        cartoes.append(DeOlho(
+            cargo=pedida["cargo"],
+            cidade=pedida["cidade"],
+            situacao=atual.situacao if atual else None,
+            titulo=atual.titulo if atual else None,
+            url=atual.url if atual else None,
+            inscricoes_ate=atual.inscricoes_ate if atual else None,
+        ))
+    return cartoes
 
 
 def _sinais(s, concursos: list[Concurso], limite: int) -> list[dict]:
@@ -623,6 +694,7 @@ def montar() -> Painel:
     with sessao() as s:
         concursos = _concursos_do_alvo(s)
         painel.sinais = _sinais(s, concursos, SINAIS_NA_TELA)
+        painel.de_olho = _de_olho(s)
 
         # As provas do cargo sao a base de tres contas da tela. Perguntar uma
         # vez, e na mesma sessao, e o que faz a tela abrir rapido.

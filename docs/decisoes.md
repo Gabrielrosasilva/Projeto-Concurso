@@ -765,3 +765,54 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   `servico/simulado.py` usa `nomeia_cargo_do_principal`, que so olha os
   `termos`. No acervo de hoje da no mesmo - as duas unicas provas do cargo
   sao de SC - mas a falha existe e esta anotada aqui para nao se perder.
+
+## Policia Penal de qualquer estado avisa; so a de SC entra no estudo
+
+- **as duas perguntas que eu faco sobre esse cargo tem respostas diferentes, e
+  por isso agora sao duas marcas.** "Quero saber?" e sim em qualquer estado:
+  outra banca abrindo Policia Penal e noticia que eu quero na hora. "Quero
+  estudar por essa prova?" e nao fora de SC: e outra banca, outro conteudo
+  programatico e outra lei estadual - estudar por ela e estudar a materia
+  errada;
+- a marca nova e **`principal_fora`**. Ela avisa igual ao `principal`: sirene,
+  sem filtro de distancia, sem teto, valendo ate para noticia. E ela nao
+  aparece em nada que seja estudo - Meu foco, incidencia, treino e acervo
+  continuam lendo `principal` sozinho, que e o que ja significava "o meu
+  concurso";
+- **o que relaxou foi so o cargo, e so ele.** Os `orgaos` do YAML continuam
+  exigindo prova de SC, porque sigla nao prova estado: "SAP" tambem e o nome
+  de uma secretaria de Sao Paulo, e "SAP SP abre estagio" esta no feed de
+  verdade. Sem essa trava, cada post da SAP paulista viraria sirene;
+- **sem prova de estado tambem cai em `principal_fora`**, e nao em nada. Antes
+  a duvida apagava a marca inteira; hoje ela apaga so a metade que exige
+  prova. Nao saber de onde e nunca foi motivo para perder a noticia - e
+  continua nao sendo motivo para chamar a prova de minha;
+- Policia Penal Federal segue no lugar dela, como alvo secundario: `exclui`
+  roda antes de tudo, e ela tem bloco proprio. Policia Civil segue como
+  estava, no radar e sem destaque.
+
+## "De olho": duas Guardas que furam o teto sem virar alvo
+
+- **Guarda Municipal de Florianopolis e de Balneario Camboriu sao as unicas
+  que eu prestaria de fato**, e elas estavam se perdendo no meio das dezenas
+  de Guardas que aparecem por ano. Agora o bloco secundario aceita uma lista
+  `de_olho` com cidades, e quem bate nela **fura o teto de mensagens do dia** e
+  ganha um cartao na home;
+- **isso nao promove o cargo a alvo principal, de proposito.** Guarda Municipal
+  em Florianopolis continua sendo Guarda Municipal: nao entra no estudo, que e
+  do cargo que eu vou prestar. O que muda e o teto, e mais nada - nem o filtro
+  de distancia precisou mudar, porque as duas cidades ja estao nos aneis;
+- o aviso leva 👀 no lugar da sirene. **Sao dois niveis porque sao duas
+  coisas**: o concurso que eu espero ha anos, e um cargo secundario numa cidade
+  que me serve. Um emoji so acabaria com a diferenca que a sirene existe para
+  marcar;
+- **a cidade vale tambem quando so o campo `municipio` a traz.** O titulo da
+  FEPESE e "2026 - Prefeitura Municipal de Florianopolis", e o cargo vem colado
+  depois; quem extraiu a cidade foi o classificador, uma linha antes. Por isso
+  o `marcar` passou a receber o municipio - e e o unico lugar em que a cidade
+  decide alguma coisa na marca de alvo;
+- **o cartao mostra as duas cidades sempre**, inclusive a que nao tem nada no
+  radar. Sumir com a linha vazia responderia "nao ha concurso" a uma pergunta
+  que ninguem fez: o que eu sei e que nada apareceu. Entre dois concursos da
+  mesma cidade, ganha o que nao esta encerrado - uma noticia de ontem sobre a
+  edicao velha nao pode esconder a inscricao que esta aberta.

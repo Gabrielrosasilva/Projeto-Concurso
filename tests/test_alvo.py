@@ -101,25 +101,46 @@ def test_sap_de_sao_paulo_nao_e_o_meu_alvo():
     assert marca is None
 
 
-def test_policia_penal_de_outro_estado_nao_e_o_meu_alvo():
-    """O alvo principal e estadual de SC. Parana e outro concurso."""
-    assert alvo.marcar("Concurso Policia Penal do Parana autorizado", uf="PR") is None
+def test_policia_penal_de_outro_estado_avisa_mas_nao_e_o_meu_concurso():
+    """Parana e o mesmo cargo e outro concurso. As duas coisas sao verdade ao
+    mesmo tempo, e por isso ele tem marca propria: eu quero o aviso na hora
+    (outra banca abrindo o cargo e noticia), e nao quero a prova dele no meu
+    estudo (outra banca, outro programa, outra lei estadual)."""
+    marca = alvo.marcar("Concurso Policia Penal do Parana autorizado", uf="PR")
+
+    assert marca.alvo == alvo.PRINCIPAL_FORA
+    assert marca.alvo in alvo.PRINCIPAIS       # avisa como o principal
+    assert marca.alvo != alvo.PRINCIPAL        # e nao entra no estudo
+    assert "fora do estado" in marca.motivo
 
 
-def test_penitenciario_de_outro_estado_nao_marca():
+def test_cargo_parecido_com_o_meu_nao_marca():
     """O caso real do feed: o Maranhao publica seletivo de Auxiliar
-    Penitenciario toda semana."""
+    Penitenciario toda semana. Quem barra aqui nao e o estado - e o cargo:
+    "Auxiliar Penitenciario" nao e nenhum dos nomes que eu anotei."""
     assert alvo.marcar(
         "SEAP MA divulga seletivos para Auxiliar e Especialista Penitenciario",
         uf="MA",
     ) is None
 
 
-def test_sem_uf_so_marca_com_prova_de_sc():
-    """A FEPESE e a IESES nao informam UF. Sem prova no texto, nao se chuta."""
-    assert alvo.marcar("Concurso para Agente Penitenciario") is None
+def test_sem_uf_o_cargo_avisa_mas_nao_vira_o_alvo_de_sc():
+    """A FEPESE e a IESES nao informam UF. Sem prova no texto o cargo continua
+    valendo aviso - nao saber de onde e nao e motivo para perder a noticia -
+    mas nao vira o meu concurso, que essa e a parte que exige prova."""
+    assert alvo.marcar("Concurso para Agente Penitenciario").alvo == (
+        alvo.PRINCIPAL_FORA
+    )
     marca = alvo.marcar("Agente Penitenciario em Santa Catarina")
     assert marca is not None and marca.alvo == alvo.PRINCIPAL
+
+
+def test_o_orgao_sozinho_continua_exigindo_prova_de_sc():
+    """O que relaxou foi o CARGO, e so ele. A sigla "SAP" e o nome de uma
+    secretaria de Sao Paulo tambem, e "SAP SP abre estagio" esta no feed: sem
+    prova de estado, nome de orgao nao marca nada."""
+    assert alvo.marcar("SAP divulga calendario de 2027") is None
+    assert alvo.marcar("SAP SP abre estagio com bolsa mensal", uf="SP") is None
 
 
 def test_policia_penal_federal_cai_no_secundario():
@@ -342,10 +363,15 @@ def test_o_plural_do_federal_continua_excluido():
     assert marca.nome == "Policia Penal Federal"
 
 
-def test_o_plural_nao_fura_a_trava_de_estado():
-    """A regra de sempre: sem prova de que e de SC, nao marca."""
-    assert alvo.marcar("Governo do PR contrata policiais penais", uf="PR") is None
-    assert alvo.marcar("Parana contrata policiais penais") is None
+def test_o_plural_tambem_cai_na_marca_de_fora_do_estado():
+    """O plural e justamente como a noticia escreve ("600 policiais penais"),
+    e a noticia de outro estado e a que chega primeiro de todas."""
+    for titulo, uf in [
+        ("Governo do PR contrata policiais penais", "PR"),
+        ("Parana contrata policiais penais", None),
+    ]:
+        marca = alvo.marcar(titulo, uf=uf)
+        assert marca.alvo == alvo.PRINCIPAL_FORA, titulo
 
 
 # --- a mesma trava de estado, para quem ja tem o item no banco --------------
@@ -371,3 +397,120 @@ def test_sem_uf_e_sem_palavra_a_resposta_e_nao():
     """Nunca chutar: a duvida nao vira sim, nem para o acervo de provas."""
     assert not alvo.e_do_estado_do_principal(None, "")
     assert not alvo.e_do_estado_do_principal(None, "Concurso Policia Penal")
+
+
+# --- de olho: a cidade que muda o aviso sem mudar o alvo (etapa 14) --------
+#
+# Guarda Municipal continua sendo alvo secundario em qualquer lugar. Em duas
+# cidades - as unicas em que eu prestaria - ela passa a furar o teto de
+# mensagens do dia, e ganha um cartao no Meu foco. Quem escolhe as cidades e
+# o `de_olho` do config/alvo.yml, nunca o codigo.
+
+def test_a_cidade_de_olho_liga_a_prioridade():
+    for titulo in (
+        "Concurso Guarda Municipal de Florianopolis abre 40 vagas",
+        "Prefeitura de Balneario Camboriu abre concurso para Guarda Municipal",
+    ):
+        marca = alvo.marcar(titulo)
+        assert marca.alvo == alvo.SECUNDARIO, titulo
+        assert marca.prioritario is True, titulo
+        assert "De olho" in marca.motivo
+
+
+def test_de_olho_nao_promove_o_cargo_a_alvo_principal():
+    """Guarda Municipal em Florianopolis continua sendo Guarda Municipal. O
+    que muda e o teto do aviso, e nada mais: ela nao entra no estudo, que e
+    do cargo que eu vou prestar."""
+    marca = alvo.marcar("Guarda Municipal de Florianopolis: edital publicado")
+    assert marca.nome == "Guarda Municipal"
+    assert marca.alvo not in alvo.PRINCIPAIS
+
+
+def test_guarda_de_outra_cidade_segue_como_sempre():
+    marca = alvo.marcar(
+        "Concurso Prefeitura de Guarulhos (SP) abre 200 vagas para Guarda "
+        "Municipal"
+    )
+    assert marca.alvo == alvo.SECUNDARIO
+    assert marca.prioritario is False
+
+
+def test_a_cidade_vale_mesmo_quando_so_o_campo_municipio_a_traz():
+    """O titulo da FEPESE costuma ser "2026 - Prefeitura Municipal de X". A
+    cidade chega no campo `municipio`, que o classificador ja extraiu, e sem
+    ele o cartao de Florianopolis ficaria vazio com o concurso na tela."""
+    marca = alvo.marcar(
+        "2026 - Prefeitura Municipal: Guarda Municipal",
+        municipio="Florianópolis",
+    )
+    assert marca.prioritario is True
+
+
+def test_a_cidade_sozinha_nao_liga_nada():
+    """Sem o cargo, a cidade nao diz nada: Florianopolis abre concurso de
+    professor toda semana."""
+    assert alvo.marcar(
+        "Concurso Prefeitura de Florianopolis abre vagas para Professor"
+    ) is None
+
+
+def test_o_par_de_olho_diz_qual_cartao_o_concurso_preenche():
+    """E o que o Meu foco usa para nao trocar uma cidade pela outra."""
+    assert alvo.par_de_olho(
+        "Guarda Municipal de Balneario Camboriu tem edital"
+    ) == ("Guarda Municipal", "Balneario Camboriu")
+    assert alvo.par_de_olho("Guarda Municipal de Guarulhos") is None
+
+
+def test_a_lista_de_olho_sai_do_yaml():
+    pedidas = alvo.de_olho()
+    assert {p["cidade"] for p in pedidas} == {
+        "Balneario Camboriu", "Florianopolis"
+    }
+    assert {p["cargo"] for p in pedidas} == {"Guarda Municipal"}
+
+
+def test_sem_de_olho_no_yaml_ninguem_e_prioritario(tmp_path, monkeypatch):
+    """A regra mora no arquivo: tirando a lista de la, a prioridade some."""
+    (tmp_path / "alvo.yml").write_text(
+        "secundarios:\n"
+        "  - nome: Guarda Municipal\n"
+        "    termos: [guarda municipal]\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("RADAR_CONFIG_DIR", str(tmp_path))
+    alvo.recarregar()
+
+    assert alvo.de_olho() == []
+    marca = alvo.marcar("Guarda Municipal de Florianopolis abre vagas")
+    assert marca.alvo == alvo.SECUNDARIO and marca.prioritario is False
+
+
+def test_a_prioridade_chega_ao_banco(banco_temporario):
+    """A marca so vale se for gravada: e a coluna que o aviso consulta."""
+    from radar import servico
+
+    _semear(
+        url="https://exemplo.test/gm-fpolis",
+        titulo="Concurso Guarda Municipal de Florianopolis abre 40 vagas",
+    )
+    servico.reclassificar()
+
+    concurso = _do_banco()
+    assert concurso.alvo == alvo.SECUNDARIO
+    assert concurso.alvo_prioritario is True
+
+
+def test_o_cargo_fora_do_estado_chega_ao_banco(banco_temporario):
+    from radar import servico
+
+    _semear(
+        url="https://exemplo.test/pp-pr",
+        titulo="Governo do Parana autoriza concurso da Policia Penal",
+        uf="PR",
+    )
+    servico.reclassificar()
+
+    concurso = _do_banco()
+    assert concurso.alvo == alvo.PRINCIPAL_FORA
+    assert concurso.alvo_prioritario is False

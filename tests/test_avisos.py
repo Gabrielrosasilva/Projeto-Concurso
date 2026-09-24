@@ -286,6 +286,127 @@ def test_alvo_principal_encerrado_nao_vira_mensagem(banco_temporario, telegram):
     assert servico.avisar().enviados == 0
 
 
+# --- o mesmo cargo em outro estado (etapa 14) -------------------------------
+# Ele avisa exatamente como o principal - eu quero saber na hora que outra
+# banca abriu o cargo. O que ele NAO faz e entrar no estudo, e isso se testa
+# do outro lado: em test_foco.py.
+
+def _fora_do_estado(**mudancas) -> Concurso:
+    base = dict(
+        url="https://exemplo.test/pp-pr",
+        titulo="Governo do Parana autoriza concurso da Policia Penal",
+        uf="PR",
+        municipio="Curitiba",
+        relevancia="remoto",
+        alvo="principal_fora",
+        motivo_alvo=(
+            "Mesmo cargo do alvo (Policia Penal SC), fora do estado: o texto "
+            'fala em "policia penal" sem provar que é de SC.'
+        ),
+    )
+    base.update(mudancas)
+    return _concurso(**base)
+
+
+def test_o_cargo_fora_do_estado_tambem_leva_sirene(banco_temporario):
+    """A pressa de saber e a mesma. O que muda e o estudo, nao o aviso."""
+    assert avisos.formatar(_fora_do_estado()).startswith(avisos.SIRENE)
+
+
+def test_o_cargo_fora_do_estado_avisa_mesmo_longe(banco_temporario, telegram):
+    _semear(_fora_do_estado())
+    assert servico.avisar().enviados == 1
+
+
+def test_o_cargo_fora_do_estado_avisa_mesmo_sendo_noticia(banco_temporario,
+                                                          telegram):
+    _semear(_fora_do_estado(tipo="noticia", situacao="desconhecida"))
+    assert servico.avisar().enviados == 1
+
+
+def test_o_cargo_fora_do_estado_passa_por_fora_do_teto(banco_temporario,
+                                                       telegram):
+    _semear(*[
+        _fora_do_estado(url=f"https://exemplo.test/pp-fora-{i}",
+                        titulo=f"Policia Penal do Parana {i}")
+        for i in range(12)
+    ])
+    _semear(*[
+        _concurso(url=f"https://exemplo.test/outro-{i}", titulo=f"Concurso {i}")
+        for i in range(25)
+    ])
+
+    resultado = servico.avisar(limite=10)
+
+    assert resultado.enviados == 22
+    assert resultado.pendentes == 15
+
+
+# --- de olho: a Guarda das duas cidades fura o teto -------------------------
+# Ela continua sendo alvo secundario, e continua sujeita ao filtro de
+# distancia - as duas cidades estao nos aneis, entao ele nunca a barra. O que
+# muda e so o teto de mensagens do dia.
+
+def _de_olho(**mudancas) -> Concurso:
+    base = dict(
+        url="https://exemplo.test/gm-bc",
+        titulo="Concurso Guarda Municipal de Balneario Camboriu abre 40 vagas",
+        municipio="Balneario Camboriu",
+        relevancia="proximo",
+        alvo="secundario",
+        alvo_prioritario=True,
+        motivo_alvo=(
+            'Alvo secundário (Guarda Municipal): o texto fala em "guarda '
+            'municipal". De olho em Balneario Camboriu.'
+        ),
+    )
+    base.update(mudancas)
+    return _concurso(**base)
+
+
+def test_de_olho_leva_a_marca_de_olho_e_nao_a_sirene(banco_temporario):
+    """Dois niveis de destaque porque sao duas coisas: o concurso que eu
+    espero ha anos, e o cargo secundario numa cidade que me serve."""
+    texto = avisos.formatar(_de_olho())
+    assert texto.startswith(avisos.DE_OLHO)
+    assert not texto.startswith(avisos.SIRENE)
+
+
+def test_de_olho_passa_por_fora_do_teto(banco_temporario, telegram):
+    _semear(*[
+        _de_olho(url=f"https://exemplo.test/gm-{i}", titulo=f"Guarda BC {i}")
+        for i in range(12)
+    ])
+    _semear(*[
+        _concurso(url=f"https://exemplo.test/outro-{i}", titulo=f"Concurso {i}")
+        for i in range(25)
+    ])
+
+    resultado = servico.avisar(limite=10)
+
+    assert resultado.enviados == 22
+    assert resultado.pendentes == 15
+
+
+def test_guarda_de_outra_cidade_continua_no_teto(banco_temporario, telegram):
+    """A prioridade e das duas cidades, e nao do cargo."""
+    _semear(*[
+        _de_olho(url=f"https://exemplo.test/gm-outra-{i}",
+                 titulo=f"Guarda Municipal de Palhoca {i}",
+                 municipio="Palhoca",
+                 relevancia="nucleo",
+                 alvo_prioritario=False,
+                 motivo_alvo='Alvo secundário (Guarda Municipal): o texto '
+                             'fala em "guarda municipal".')
+        for i in range(12)
+    ])
+
+    resultado = servico.avisar(limite=10)
+
+    assert resultado.enviados == 10      # o teto de sempre
+    assert resultado.pendentes == 2
+
+
 # --- quando da errado -------------------------------------------------------
 
 def test_sem_configuracao_nao_quebra(banco_temporario, monkeypatch):

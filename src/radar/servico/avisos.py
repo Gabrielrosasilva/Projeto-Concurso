@@ -92,6 +92,11 @@ def _nao_avisados() -> list[Concurso]:
     municipio nenhum no titulo, e e exatamente o aviso que eu quero receber
     primeiro.
 
+    A segunda porta e a mais larga das duas: ela vale para o cargo em
+    QUALQUER estado (`principal_fora`), e nao so em SC. Um concurso de Policia
+    Penal no Parana e prova que eu nao vou estudar - e continua sendo a
+    noticia que eu quero na hora.
+
     A janela de novidade continua valendo para os dois: ela e o que impede
     que ligar uma fonte nova despeje o historico dela no meu celular.
     """
@@ -100,7 +105,7 @@ def _nao_avisados() -> list[Concurso]:
     consulta = (
         select(Concurso)
         .where(Concurso.avisado_em.is_(None))
-        .where(perto | (Concurso.alvo == alvos.PRINCIPAL))
+        .where(perto | Concurso.alvo.in_(alvos.PRINCIPAIS))
         .where(_e_novidade())
         .order_by(Concurso.publicado_em.desc().nullslast())
     )
@@ -123,12 +128,19 @@ def avisar(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
     if not candidatos:
         return ResultadoAviso()
 
-    # O alvo principal nao disputa vaga com o resto. O teto existe para
-    # segurar regra de classificacao quebrada, e o alvo principal e a unica
-    # regra que eu nao quero que ele segure: se sairem 30 avisos da Policia
-    # Penal SC no mesmo dia, eu quero os 30.
-    principais = [c for c in candidatos if c.alvo == alvos.PRINCIPAL]
-    demais = [c for c in candidatos if c.alvo != alvos.PRINCIPAL]
+    # Quem eu escolhi a dedo nao disputa vaga com o resto. O teto existe para
+    # segurar regra de classificacao quebrada, e estes sao os casos que eu nao
+    # quero que ele segure: se sairem 30 avisos da Policia Penal no mesmo dia,
+    # eu quero os 30.
+    #
+    # Sao dois furos, e eles vem de lugares diferentes do config/alvo.yml: o
+    # cargo do alvo principal, em qualquer estado, e a lista `de_olho` - hoje
+    # a Guarda Municipal de Florianopolis e a de Balneario Camboriu.
+    def _fura_o_teto(c: Concurso) -> bool:
+        return c.alvo in alvos.PRINCIPAIS or bool(c.alvo_prioritario)
+
+    principais = [c for c in candidatos if _fura_o_teto(c)]
+    demais = [c for c in candidatos if not _fura_o_teto(c)]
 
     escolhidos = principais + demais[:limite]
     sobraram = len(demais) - min(len(demais), limite)

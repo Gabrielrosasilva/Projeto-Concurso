@@ -79,10 +79,12 @@ RELEVANCIAS = ("nucleo", "proximo", "estadual", "remoto", "indefinida")
 TIPOS = ("concurso", "seletivo", "desconhecido", "noticia")
 
 # O cargo e meu alvo? `principal` e a Policia Penal SC, que passa por cima do
-# filtro de distancia e do teto de avisos. `secundario` e o resto da lista do
-# CLAUDE.md, que so ganha a marca. Nulo = nao e cargo meu. Quem decide e
-# config/alvo.yml, nunca o codigo.
-ALVOS = ("principal", "secundario")
+# filtro de distancia e do teto de avisos. `principal_fora` e o mesmo cargo em
+# outro estado - ou sem prova de qual: avisa igual, mas nao entra em nada que
+# seja estudo, porque e outra banca e outra lei estadual. `secundario` e o
+# resto da lista do CLAUDE.md, que so ganha a marca. Nulo = nao e cargo meu.
+# Quem decide e config/alvo.yml, nunca o codigo.
+ALVOS = ("principal", "principal_fora", "secundario")
 
 ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 
@@ -140,6 +142,13 @@ class Concurso(Base):
     # relevancia e recalculado a cada `radar reclassificar`.
     alvo: Mapped[str | None] = mapped_column(String(15), index=True, nullable=True)
     motivo_alvo: Mapped[str | None] = mapped_column(String(300), nullable=True)
+
+    # Fura o teto de avisos do dia sozinho, sem ser alvo principal. Hoje so
+    # liga pela lista `de_olho` do config/alvo.yml - a Guarda Municipal de
+    # Florianopolis e a de Balneario Camboriu.
+    alvo_prioritario: Mapped[bool] = mapped_column(
+        Boolean, default=False, index=True
+    )
 
     # --- filtro de elegibilidade (fase 2.5) --------------------------------
     salario: Mapped[float | None] = mapped_column(nullable=True)

@@ -361,6 +361,131 @@ def test_a_banca_so_conta_o_ano_da_prova_que_e_minha(banco_temporario):
     assert foco.montar().banca.anos == [2019]
 
 
+# --- o aviso vai ate o Parana; o estudo para em SC (etapa 14) --------------
+#
+# `principal_fora` e o mesmo cargo em outro estado. Ele toca o celular como o
+# alvo principal, e nao pode aparecer em lugar nenhum desta tela - ela e sobre
+# o concurso que EU vou prestar, e responder com a edicao do Parana seria
+# dizer que ha edital quando nao ha.
+
+def test_o_cargo_de_outro_estado_nao_entra_na_tela(banco_temporario):
+    with sessao() as s:
+        s.add(_concurso(
+            url=CONCURSO_DO_PARANA,
+            titulo="Governo do Parana autoriza concurso da Policia Penal",
+            uf="PR",
+            tipo="noticia",
+            situacao="autorizado",
+            relevancia="remoto",
+            alvo="principal_fora",
+            motivo_alvo="Mesmo cargo do alvo, fora do estado.",
+            publicado_em=agora() - timedelta(days=1),
+        ))
+
+    painel = foco.montar()
+
+    assert painel.sinais == []
+    assert painel.ultima is None
+    assert painel.aberto is None
+
+
+def test_o_cargo_de_outro_estado_nao_conta_como_inscricao_aberta(banco_temporario):
+    """O pior erro possivel desta tela: anunciar inscricao aberta por causa de
+    um concurso que eu nao vou prestar."""
+    with sessao() as s:
+        s.add(_concurso(
+            url=CONCURSO_DO_PARANA,
+            titulo="Policia Penal do Parana: inscricoes abertas",
+            uf="PR",
+            situacao="inscricoes_abertas",
+            alvo="principal_fora",
+        ))
+
+    painel = foco.montar()
+    assert painel.aberto is None and painel.aberto_no_orgao is None
+
+
+# --- o cartao "De olho" (etapa 14) -----------------------------------------
+#
+# Guarda Municipal de Florianopolis e de Balneario Camboriu. Nao e o alvo -
+# o cartao e pequeno de proposito - mas e a unica coisa fora do alvo que eu
+# quero ver na home.
+
+def _guarda(**mudancas) -> Concurso:
+    base = dict(
+        url="https://exemplo.test/gm-fpolis",
+        fonte="fepese",
+        titulo="2026 - Prefeitura Municipal de Florianopolis: Guarda Municipal",
+        municipio="Florianópolis",
+        uf="SC",
+        tipo="concurso",
+        situacao="inscricoes_abertas",
+        relevancia="nucleo",
+        alvo="secundario",
+        alvo_prioritario=True,
+        motivo_alvo="Alvo secundário (Guarda Municipal). De olho em Florianopolis.",
+        publicado_em=agora() - timedelta(days=2),
+    )
+    base.update(mudancas)
+    return Concurso(**base)
+
+
+def test_o_cartao_traz_uma_linha_por_cidade_pedida(banco_temporario):
+    """As duas cidades sempre aparecem. A que nao tem nada no radar diz isso,
+    em vez de sumir - sumir responderia "nao ha concurso", que e outra coisa
+    de nao saber."""
+    with sessao() as s:
+        s.add(_guarda())
+
+    cartoes = {c.cidade: c for c in foco.montar().de_olho}
+
+    assert set(cartoes) == {"Florianopolis", "Balneario Camboriu"}
+    assert cartoes["Florianopolis"].situacao == "inscricoes_abertas"
+    assert cartoes["Balneario Camboriu"].situacao is None
+
+
+def test_o_cartao_prefere_o_concurso_em_pe_ao_mais_recente(banco_temporario):
+    """Uma noticia de ontem sobre a edicao encerrada nao pode esconder a
+    inscricao que esta aberta agora."""
+    with sessao() as s:
+        s.add(_guarda(
+            url="https://exemplo.test/gm-fpolis-2024",
+            titulo="2024 - Prefeitura de Florianopolis: Guarda Municipal",
+            situacao="encerrado",
+            publicado_em=agora(),
+        ))
+        s.add(_guarda(publicado_em=agora() - timedelta(days=30)))
+
+    cartoes = {c.cidade: c for c in foco.montar().de_olho}
+    assert cartoes["Florianopolis"].situacao == "inscricoes_abertas"
+
+
+def test_guarda_de_outra_cidade_nao_preenche_cartao_nenhum(banco_temporario):
+    with sessao() as s:
+        s.add(_guarda(
+            url="https://exemplo.test/gm-palhoca",
+            titulo="2026 - Prefeitura de Palhoca: Guarda Municipal",
+            municipio="Palhoca",
+            alvo_prioritario=False,
+        ))
+
+    assert all(c.situacao is None for c in foco.montar().de_olho)
+
+
+def test_o_cartao_aparece_na_home(cliente):
+    with sessao() as s:
+        s.add(_guarda())
+
+    texto = cliente.get("/").text
+
+    assert "De olho" in texto
+    assert "Guarda Municipal de Florianopolis" in texto
+    assert "inscrições abertas" in texto
+    # A outra cidade nao some nem inventa situacao.
+    assert "Guarda Municipal de Balneario Camboriu" in texto
+    assert "nada no radar ainda" in texto
+
+
 # --- o edital e lido uma vez so (etapa 14) ---------------------------------
 #
 # A tela abria em quatro segundos e meio porque relia o PDF do edital inteiro

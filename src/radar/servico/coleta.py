@@ -47,7 +47,8 @@ VALORES_SEM_INFORMACAO = {
 # recalculados a qualquer momento - e por isso que existe `reclassificar()`:
 # se eu editar config/regioes.yml, o banco inteiro se corrige sem recoletar.
 CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia",
-                     "motivo_relevancia", "alvo", "motivo_alvo")
+                     "motivo_relevancia", "alvo", "motivo_alvo",
+                     "alvo_prioritario")
 
 
 def _anel_da_lotacao(municipio: str | None) -> tuple[str, str]:
@@ -96,6 +97,7 @@ def _aplicar_classificacao(destino, item: ItemColetado) -> None:
     # reescrita, sem a trava de municipio_confirmado.
     destino.alvo = resultado.alvo
     destino.motivo_alvo = resultado.motivo_alvo
+    destino.alvo_prioritario = resultado.alvo_prioritario
 
     if not destino.salario_manual:
         destino.salario = resultado.salario

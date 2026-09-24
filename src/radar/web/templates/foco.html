@@ -61,6 +61,21 @@
       background:var(--estadual-fraco);color:var(--estadual);font-size:.85rem}
     .aviso-orgao a{color:inherit;font-weight:700}
 
+    /* -------------------------------------------------------- de olho --- */
+    /* Cartao pequeno de proposito: e o cargo secundario numa cidade que me
+       serve, e nao o concurso que esta no titulo da pagina. */
+    .de-olho{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+    .de-olho li{display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;
+      font-size:.88rem}
+    .de-olho .onde{font-weight:700}
+    .de-olho .estado{font-size:.72rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:.05em;padding:.05rem .45rem;border-radius:999px;
+      background:var(--azul-fraco);color:var(--azul);white-space:nowrap}
+    .de-olho .estado.aberta{background:var(--verde-fraco);color:var(--verde)}
+    .de-olho a{color:var(--suave);text-decoration:none;font-size:.85rem}
+    .de-olho a:hover{text-decoration:underline;color:var(--azul)}
+    .de-olho .prazo{color:var(--prazo);font-size:.82rem;font-weight:600}
+
     /* --------------------------------------------------------- sinais --- */
     .sinais{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
     .sinais li{display:grid;grid-template-columns:auto minmax(0,1fr);
@@ -198,6 +213,32 @@
       </p>
     {% endif %}
   </section>
+
+  {# ----------------------------------------------------- de olho ------- #}
+  {% if p.de_olho %}
+  <section>
+    <h2>De olho</h2>
+    <ul class="de-olho">
+      {% for v in p.de_olho %}
+        <li>
+          <span class="onde">{{ v.nome }}</span>
+          {% if v.situacao %}
+            <span class="estado {{ 'aberta' if v.situacao == 'inscricoes_abertas' }}">
+              {{ rotulo_situacao.get(v.situacao, v.situacao) }}</span>
+            {% if v.inscricoes_ate %}
+              <span class="prazo">até {{ v.inscricoes_ate | data }}</span>
+            {% endif %}
+            <a href="{{ v.url }}" target="_blank" rel="noopener">{{ v.titulo | titulo }}</a>
+          {% else %}
+            <span class="nao-sei">nada no radar ainda</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    <p class="legenda">Não é o meu alvo: é o cargo que eu prestaria nessas duas
+      cidades. Sai de <code>de_olho</code>, no <code>config/alvo.yml</code>.</p>
+  </section>
+  {% endif %}
 
   {# ----------------------------------------------------- sinais -------- #}
   <section>

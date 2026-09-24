@@ -33,9 +33,16 @@ EMOJI_DO_ANEL = {
     "indefinida": "\U0001F535",  # azul: ainda nao sei, depende do edital
 }
 
-# O alvo principal abre a mensagem com sirene. E o unico aviso que eu nao
-# posso deixar passar batido na tela cheia de notificacao do celular.
+# O alvo principal abre a mensagem com sirene. E o aviso que eu nao posso
+# deixar passar batido na tela cheia de notificacao do celular - e ele sai com
+# sirene tambem quando o concurso e de outro estado (`principal_fora`): o que
+# muda la e o estudo, nao a pressa de saber.
 SIRENE = "\U0001F6A8"
+
+# A cidade que eu pedi para acompanhar de perto, na lista `de_olho`. Menos que
+# sirene de proposito: e o cargo secundario numa cidade que me serve, e nao o
+# concurso que eu espero ha anos.
+DE_OLHO = "\U0001F440"
 
 
 def _url(metodo: str) -> str:
@@ -50,10 +57,12 @@ def formatar(concurso: Concurso) -> str:
     a abrir o computador para descobrir do que se trata.
     """
     emoji = EMOJI_DO_ANEL.get(concurso.relevancia, "\U000026AA")
-    if concurso.alvo == alvos.PRINCIPAL:
+    if concurso.alvo in alvos.PRINCIPAIS:
         # A sirene vem na frente do emoji do anel, e nao no lugar dele: o
         # anel continua sendo informacao util mesmo quando nao decide nada.
         emoji = f"{SIRENE} {emoji}"
+    elif concurso.alvo_prioritario:
+        emoji = f"{DE_OLHO} {emoji}"
 
     # escape: titulo vem de site de terceiro e pode ter <, > ou &, que
     # quebrariam o HTML da mensagem

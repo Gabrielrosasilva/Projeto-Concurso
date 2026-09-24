@@ -14,6 +14,20 @@
 # Bater aqui vale mais que qualquer outra regra: o aviso sai mesmo que o
 # concurso esteja longe, mesmo que o texto seja noticia e nao edital, e mesmo
 # que o teto de mensagens do dia ja tenha estourado.
+#
+# O AVISO e o ESTUDO leem este bloco de jeitos diferentes, e essa e a unica
+# diferenca que importa aqui:
+#
+# - para o AVISO, o cargo basta. Policia Penal de qualquer estado me interessa
+#   saber: sai com sirene, sem filtro de distancia e sem teto. A marca fica
+#   `principal_fora` quando nao ha prova de que o item e de SC;
+# - para o ESTUDO - materias, incidencia, treino, acervo - so vale SC. Prova
+#   de outro estado e outra banca, outro programa e outra lei estadual:
+#   estudar por ela e estudar a materia errada.
+#
+# Isso vale so para os `termos` (o nome do cargo). Os `orgaos` continuam
+# exigindo prova de SC: "SAP" tambem e o nome de uma secretaria de Sao Paulo,
+# e sigla solta nao prova estado nenhum.
 principal:
   nome: Policia Penal SC
 
@@ -84,6 +98,14 @@ secundarios:
     termos:
       - guarda municipal
       - guarda civil municipal
+
+    # As duas Guardas que eu prestaria de verdade. Bater aqui nao promove o
+    # bloco a alvo principal: o que muda e que o aviso fura o teto de
+    # mensagens do dia, e que a cidade ganha um cartao "De olho" no Meu foco.
+    # Guarda Municipal de qualquer outro lugar segue a regra comum.
+    de_olho:
+      - Balneario Camboriu
+      - Florianopolis
 
   - nome: Policia Civil
     termos:
