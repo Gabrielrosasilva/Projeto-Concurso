@@ -248,6 +248,49 @@ def coletar_tudo() -> list[ResultadoColeta]:
     return resultados
 
 
+def _tem_acento(nome: str) -> bool:
+    return regioes.normalizar(nome) != nome.lower()
+
+
+def _nota_da_grafia(nome: str, vezes: int) -> tuple:
+    """Quanto essa grafia merece ser a escolhida. Maior ganha.
+
+    A ordem das notas e a regra, escrita uma vez: acento vale mais que tudo,
+    porque ele e informacao - "Caçador" sem cedilha e a mesma cidade escrita
+    pior. Depois vem a caixa normal, que descarta o "GASPAR" que a fonte
+    manda em maiuscula. So entao o desempate pelo que aparece mais vezes, e
+    por fim a ordem alfabetica, para duas execucoes darem o mesmo resultado.
+    """
+    return (_tem_acento(nome), not nome.isupper() and not nome.islower(),
+            vezes, nome)
+
+
+def melhor_grafia(nomes) -> dict[str, str]:
+    """{normalizado: a grafia que vale} para os municipios que aparecem aqui.
+
+    A mesma cidade chega escrita de varios jeitos - "Caçador" e "Cacador",
+    "GASPAR" e "Gaspar", "Araranguá" e "Ararangua" - porque cada fonte digita
+    de um jeito. Para quem esta nos aneis, `config/regioes.yml` resolve; para
+    o resto nao ha lista, entao quem decide e o proprio banco: entre as
+    grafias que existem, vale a melhor.
+
+    E so cosmetico. Duas grafias do mesmo lugar nunca confundiram a
+    classificacao, porque toda comparacao passa por `normalizar`.
+    """
+    from collections import Counter
+
+    vezes = Counter(n for n in nomes if n)
+    escolhidas: dict[str, str] = {}
+    for nome, quantas in vezes.items():
+        chave = regioes.normalizar(nome)
+        atual = escolhidas.get(chave)
+        if atual is None or _nota_da_grafia(nome, quantas) > _nota_da_grafia(
+            atual, vezes[atual]
+        ):
+            escolhidas[chave] = nome
+    return escolhidas
+
+
 def reclassificar() -> dict[str, int]:
     """Roda o classificador de novo em todo o banco, sem ir a internet.
 
@@ -258,6 +301,14 @@ def reclassificar() -> dict[str, int]:
     contagem: dict[str, int] = {}
 
     with sessao() as s:
+        # A melhor grafia sai do banco inteiro, e por isso e decidida ANTES do
+        # laco: dentro dele eu so veria os municipios ja visitados.
+        grafias = melhor_grafia(
+            regioes.nome_canonico(m)
+            for (m,) in s.execute(select(Concurso.municipio).distinct())
+            if m
+        )
+
         for concurso in s.scalars(select(Concurso)):
             item = ItemColetado(
                 titulo=concurso.titulo,
@@ -283,7 +334,16 @@ def reclassificar() -> dict[str, int]:
             # Grafia canonica mesmo no municipio confirmado pela pagina do
             # edital: trocar "Palhoca" por "Palhoca" com cedilha nao e
             # reclassificar, e escrever o mesmo municipio de um jeito so.
-            concurso.municipio = regioes.nome_canonico(concurso.municipio)
+            #
+            # Para quem esta nos aneis, quem manda e o regioes.yml. Para o
+            # resto nao ha lista, e ai vale a melhor grafia que o proprio
+            # banco tem: e o que faz "Cacador" e "Caçador" pararem de ser
+            # duas cidades na tela.
+            canonico = regioes.nome_canonico(concurso.municipio)
+            if concurso.municipio:
+                concurso.municipio = grafias.get(
+                    regioes.normalizar(concurso.municipio), canonico
+                )
 
             contagem[concurso.relevancia] = contagem.get(concurso.relevancia, 0) + 1
 

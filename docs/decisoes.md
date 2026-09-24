@@ -702,3 +702,20 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - a frase mora numa funcao so (`_anel_da_lotacao`), usada pelo `detalhar` e
   pelo `reclassificar`. Duas copias da mesma frase divergem: foi assim que 34
   registros ficaram sem acento enquanto 2.768 tinham sido corrigidos.
+
+## Uma grafia so para cada cidade, inclusive fora dos aneis
+
+- **para quem esta nos aneis manda o `config/regioes.yml`; para o resto,
+  manda o proprio banco.** Cada fonte digita de um jeito, e o banco tinha
+  "Caçador" e "Cacador", "GASPAR" e "Gaspar", "Araranguá" e "Ararangua" - dez
+  cidades escritas de dois jeitos, todas fora dos aneis, onde nao ha lista
+  para consultar;
+- a escolha e por nota, nesta ordem: **acento vence tudo**, porque ele e
+  informacao ("Caçador" sem cedilha e a mesma cidade escrita pior); depois
+  **caixa normal**, que descarta o "GASPAR" que a fonte manda em maiuscula;
+  depois a mais frequente; e por fim a ordem alfabetica, para duas execucoes
+  darem o mesmo resultado. O acento vence mesmo sendo minoria - "Chapeco"
+  aparecia 15 vezes e "Chapecó" uma so;
+- isto e **cosmetico**. Duas grafias do mesmo lugar nunca confundiram a
+  classificacao, porque toda comparacao passa por `normalizar`. O que elas
+  estragavam era a leitura: a mesma cidade aparecia duas vezes na tela.
