@@ -219,7 +219,7 @@ def test_orgao_estadual_vira_relevancia_estadual(coletor, titulo):
 
     assert resultado.relevancia == "estadual"
     assert resultado.motivo == (
-        "Orgao estadual de SC; polos de prova a confirmar no edital."
+        "Órgão estadual de SC; polos de prova a confirmar no edital."
     )
 
 

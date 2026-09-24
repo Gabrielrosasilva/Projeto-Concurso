@@ -284,7 +284,7 @@ def classificar(item: ItemColetado) -> Classificacao:
     if tipo == TIPO_NOTICIA:
         return Classificacao(
             regioes.INDEFINIDA,
-            "Nao parece concurso: o titulo nao fala em vaga, edital nem inscricao.",
+            "Não parece concurso: o título não fala em vaga, edital nem inscrição.",
             **comum,
         )
 
@@ -297,7 +297,10 @@ def classificar(item: ItemColetado) -> Classificacao:
         anel = regioes.anel_de(municipio)
         if anel:
             return Classificacao(
-                anel, f"{municipio} (SC) esta no anel {anel}.", **comum
+                anel,
+                f"{municipio} (SC) está no anel "
+                f"{regioes.NOME_DO_ANEL.get(anel, anel)}.",
+                **comum,
             )
 
     # Orgao estadual de SC: nao tem municipio, e o edital e que dira onde sao
@@ -306,7 +309,7 @@ def classificar(item: ItemColetado) -> Classificacao:
     if uf == "SC" and e_orgao_estadual(item.titulo):
         return Classificacao(
             regioes.ESTADUAL,
-            "Orgao estadual de SC; polos de prova a confirmar no edital.",
+            "Órgão estadual de SC; polos de prova a confirmar no edital.",
             **comum,
         )
 
@@ -314,12 +317,12 @@ def classificar(item: ItemColetado) -> Classificacao:
         if municipio:
             return Classificacao(
                 regioes.REMOTO,
-                f"{municipio} fica em SC mas fora dos aneis de config/regioes.yml.",
+                f"{municipio} fica em SC mas fora dos anéis de config/regioes.yml.",
                 **comum,
             )
         return Classificacao(
             regioes.INDEFINIDA,
-            "Concurso de SC, mas nao identifiquei o municipio no titulo.",
+            "Concurso de SC, mas não identifiquei o município no título.",
             **comum,
         )
 
@@ -327,17 +330,17 @@ def classificar(item: ItemColetado) -> Classificacao:
         if municipio:
             return Classificacao(
                 regioes.REMOTO,
-                f"Orgao de {municipio} ({uf}): prova aplicada fora de SC.",
+                f"Órgão de {municipio} ({uf}): prova aplicada fora de SC.",
                 **comum,
             )
         return Classificacao(
             regioes.INDEFINIDA,
-            f"Concurso de {uf} sem municipio no titulo; depende de ler o edital.",
+            f"Concurso de {uf} sem município no título; depende de ler o edital.",
             **comum,
         )
 
     return Classificacao(
         regioes.INDEFINIDA,
-        "Sem UF: pode ser federal com prova em Florianopolis. Depende do edital.",
+        "Sem UF: pode ser federal com prova em Florianópolis. Depende do edital.",
         **comum,
     )

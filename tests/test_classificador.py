@@ -211,7 +211,7 @@ def test_orgao_estadual_de_sc_vira_relevancia_estadual(titulo):
     )
     assert resultado.relevancia == "estadual"
     assert resultado.motivo == (
-        "Orgao estadual de SC; polos de prova a confirmar no edital."
+        "Órgão estadual de SC; polos de prova a confirmar no edital."
     )
 
 
@@ -313,3 +313,25 @@ def test_a_sigla_do_alvo_fora_de_sc_nao_vira_estadual_de_sc():
     """Sao Paulo tem uma secretaria SAP. Sem uf=SC, a regra nao se aplica."""
     titulo = "Concurso SAP SP abre vagas para Agente de Seguranca"
     assert classificar(item(titulo, uf="SP")).relevancia != "estadual"
+
+
+# --- o motivo e texto de tela; a relevancia e identificador (etapa 13) ------
+
+def test_o_motivo_leva_acento_e_a_relevancia_nao():
+    """As duas coisas viajam juntas e tem naturezas diferentes: o motivo eu
+    LEIO na tela, e a relevancia e chave - vai para o banco, para a URL e
+    para a comparacao."""
+    c = classificar(item("Concurso Prefeitura de Sao Jose (SC) abre 300 vagas", uf="SC"))
+
+    assert c.relevancia == "nucleo"                      # identificador, cru
+    assert c.motivo == "São José (SC) está no anel núcleo."   # texto, com acento
+
+
+@pytest.mark.parametrize("titulo,uf,pedaco", [
+    ("Bolsa Familia tem novo valor", "", "Não parece concurso"),
+    ("Concurso Prefeitura de Capinzal (SC) abre vagas", "SC", "fora dos anéis"),
+    ("Concurso Prefeitura de Campinas (SP) abre vagas", "SP", "Órgão de Campinas"),
+    ("Concurso do Ministerio Publico abre vagas", "", "Florianópolis"),
+])
+def test_cada_motivo_do_classificador_esta_acentuado(titulo, uf, pedaco):
+    assert pedaco in classificar(item(titulo, uf=uf)).motivo

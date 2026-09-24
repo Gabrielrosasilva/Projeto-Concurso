@@ -127,7 +127,7 @@ def _marcar_principal(
     # prefeitura por ano. Aqui ela so entra para o aviso lembrar que o padrao
     # de prova dessa banca eu ja conheco.
     if banca and _primeiro(principal.get("bancas"), normalizar(banca)):
-        motivo += f" Banca {banca}, a mesma das edicoes anteriores."
+        motivo += f" Banca {banca}, a mesma das edições anteriores."
 
     return Marca(PRINCIPAL, nome, motivo)
 
@@ -265,6 +265,6 @@ def marcar(
             return Marca(
                 SECUNDARIO,
                 nome,
-                f'Alvo secundario ({nome}): o texto fala em "{achado}".',
+                f'Alvo secundário ({nome}): o texto fala em "{achado}".',
             )
     return None

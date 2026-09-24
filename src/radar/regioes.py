@@ -17,6 +17,17 @@ NUCLEO, PROXIMO, REMOTO, INDEFINIDA = "nucleo", "proximo", "remoto", "indefinida
 # estadual, eu presto onde for - mas nunca vira `nucleo` por palpite.
 ESTADUAL = "estadual"
 
+# Como o anel se escreve numa FRASE. O valor acima e identificador - ele vai
+# para o banco, para a URL e para a comparacao, e por isso continua sem
+# acento. Aqui e texto que eu leio, e texto leva acento.
+NOME_DO_ANEL = {
+    NUCLEO: "núcleo",
+    PROXIMO: "próximo",
+    ESTADUAL: "estadual",
+    REMOTO: "remoto",
+    INDEFINIDA: "indefinida",
+}
+
 
 def normalizar(nome: str) -> str:
     """Tira acento, caixa e espaco sobrando, para comparar nome de municipio.
