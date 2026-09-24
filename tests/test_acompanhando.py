@@ -18,6 +18,7 @@ from radar import acompanhando, avisos, servico
 from radar import eventos as linha_do_tempo
 from radar.db import sessao
 from radar.models import Concurso, Evento, agora
+from radar.util import formatar_data
 from radar.web.app import app
 
 
@@ -247,7 +248,10 @@ def test_a_data_do_evento_aparece_na_tela(cliente):
     servico.favoritar(id_)
     _evento("https://a.test/1", "apareceu", "Entrou no radar", data=dias(-3))
 
-    esperada = dias(-3).strftime("%d/%m/%Y")
+    # Pela MESMA funcao que a tela usa. Comparar com um strftime aqui passava
+    # o dia inteiro e falhava entre 21h e meia-noite: o teste monta a data em
+    # UTC e a tela mostra em horario local, que nessa faixa ja e outro dia.
+    esperada = formatar_data(dias(-3))
     assert esperada in cliente.get("/acompanhando").text
 
 
