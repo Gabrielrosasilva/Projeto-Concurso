@@ -337,3 +337,26 @@ def test_a_barra_do_topo_nao_e_estilizada_por_pagina(cliente):
         html = cliente.get(caminho).text
         estilos = "\n".join(re.findall(r"<style>(.*?)</style>", html, re.DOTALL))
         assert not re.search(r"^\s*nav\s*[{,]", estilos, re.MULTILINE), caminho
+
+
+# --- o icone da aba (etapa 12) ----------------------------------------------
+
+def test_o_icone_da_aba_existe(cliente):
+    resposta = cliente.get("/favicon.svg")
+
+    assert resposta.status_code == 200
+    assert resposta.headers["content-type"].startswith("image/svg+xml")
+    assert "<svg" in resposta.text
+
+
+def test_favicon_ico_nao_devolve_404(cliente):
+    """O navegador pede este endereco por conta propria, mesmo com o <link>
+    do SVG na pagina. Sem resposta, era um 404 no console a cada visita."""
+    assert cliente.get("/favicon.ico").status_code == 204
+
+
+@pytest.mark.parametrize("caminho", ["/", "/concursos", "/acompanhando",
+                                     "/simulado", "/macetes", "/previsao",
+                                     "/calendario"])
+def test_toda_pagina_declara_o_icone(cliente, caminho):
+    assert 'rel="icon" href="/favicon.svg"' in cliente.get(caminho).text

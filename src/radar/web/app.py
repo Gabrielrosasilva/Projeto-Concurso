@@ -8,7 +8,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
 from fastapi.exceptions import HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
@@ -326,6 +326,39 @@ def coletar():
         }
         for r in servico.coletar_tudo()
     ]
+
+
+# --- o icone da aba (etapa 12) ----------------------------------------------
+#
+# Um radar: o circulo, o anel de dentro, a varredura e o ponto que ela achou.
+# Vai inline, como texto, para nao precisar de pasta de estatico nem de
+# dependencia nova - sao 500 bytes.
+#
+# O fundo e solido de proposito: aba clara e aba escura mostram o mesmo
+# desenho, e um SVG so com traco azul some no tema escuro.
+FAVICON = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#1d4ed8"/>
+  <g fill="none" stroke="#ffffff" stroke-width="3.5" opacity=".85">
+    <circle cx="32" cy="32" r="19"/>
+    <circle cx="32" cy="32" r="9.5"/>
+  </g>
+  <path d="M32 32 L32 11 A21 21 0 0 1 50 22 Z" fill="#ffffff" opacity=".55"/>
+  <circle cx="44" cy="22" r="5" fill="#4ade80"/>
+</svg>"""
+
+
+@app.get("/favicon.svg", include_in_schema=False)
+def favicon_svg():
+    """O icone da aba. SVG porque escala sozinho e cabe no proprio arquivo."""
+    return Response(FAVICON, media_type="image/svg+xml")
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon_ico():
+    """O navegador pede este endereco por conta propria, mesmo com o <link>
+    do SVG na pagina - e sem resposta ele registrava 404 no console a cada
+    visita. 204 quer dizer "nao tenho, e esta tudo bem"."""
+    return Response(status_code=204)
 
 
 # --- simulado (fase 5) ------------------------------------------------------
