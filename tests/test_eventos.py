@@ -15,8 +15,17 @@ from radar import eventos, servico
 from radar.collectors.base import ItemColetado
 from radar.db import sessao
 from radar.models import Concurso, Evento, agora
+from radar.util import formatar_data
 
 URL = "https://exemplo.test/policia-penal"
+
+# Datas fixas, e a data esperada sai sempre de `formatar_data` - a mesma
+# funcao que monta a frase. Escrever "31/10/2026" a mao aqui seria supor
+# que UTC e o fuso da tela caem no mesmo dia, que e a suposicao que ja
+# derrubou um teste desta pasta.
+ABRE = datetime(2026, 10, 1, 12, 0, tzinfo=timezone.utc)
+FECHA = datetime(2026, 10, 31, 12, 0, tzinfo=timezone.utc)
+PROVA = datetime(2027, 3, 14, 13, 0, tzinfo=timezone.utc)
 
 
 def _item(**mudancas) -> ItemColetado:
@@ -183,12 +192,12 @@ def test_data_de_prova_conhecida_vira_evento(banco_temporario):
 def test_registrar_prova_marcada_monta_a_frase(banco_temporario):
     with sessao() as s:
         eventos.registrar_prova_marcada(
-            s, URL, datetime(2027, 3, 14, 13, 0, tzinfo=timezone.utc), URL
+            s, URL, PROVA, URL
         )
 
     linha = _eventos()
     assert linha[0].tipo == eventos.PROVA_MARCADA
-    assert "14/03/2027" in linha[0].descricao
+    assert formatar_data(PROVA) in linha[0].descricao
 
 
 def test_sem_data_nao_registra_prova(banco_temporario):
@@ -226,23 +235,22 @@ def test_prazo_com_inicio_e_fim_na_descricao(banco_temporario):
     with sessao() as s:
         eventos.registrar_prazo(
             s, URL,
-            datetime(2026, 10, 1, 12, 0, tzinfo=timezone.utc),
-            datetime(2026, 10, 31, 12, 0, tzinfo=timezone.utc),
+            ABRE, FECHA,
         )
 
-    assert "01/10/2026" in _eventos()[0].descricao
-    assert "31/10/2026" in _eventos()[0].descricao
+    assert formatar_data(ABRE) in _eventos()[0].descricao
+    assert formatar_data(FECHA) in _eventos()[0].descricao
 
 
 def test_prazo_so_com_fim(banco_temporario):
     """A FEPESE nem sempre informa quando a inscricao comecou."""
     with sessao() as s:
         eventos.registrar_prazo(
-            s, URL, None, datetime(2026, 10, 31, 12, 0, tzinfo=timezone.utc)
+            s, URL, None, FECHA
         )
 
     descricao = _eventos()[0].descricao
-    assert "ate 31/10/2026" in descricao
+    assert f"ate {formatar_data(FECHA)}" in descricao
 
 
 def test_prazo_que_ja_venceu_nao_vira_inscricao_abrindo(banco_temporario):
