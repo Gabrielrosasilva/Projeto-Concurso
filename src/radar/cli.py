@@ -1050,7 +1050,7 @@ def sincronizar(
         help="Faz o push no fim. Desligado, para antes e so mostra o que mudou",
     ),
 ) -> None:
-    """Troca com o GitHub o que cada lado sabe: pull, importar, exportar, push.
+    """Troca com o GitHub o que cada lado sabe, e aplica a regra de hoje.
 
     Existe porque as duas pontas sabem coisas diferentes. O robo sabe o que
     apareceu na coleta e o que ele ja avisou; eu sei quais concursos marquei
@@ -1058,24 +1058,45 @@ def sincronizar(
     ficava sabendo do outro - e o mesmo concurso chegava duas vezes no
     celular, enquanto o favorito que eu marquei aqui nunca virava aviso la.
 
+    Os cinco passos, e a ordem e o que protege o dado:
+
+        pull -> importar -> RECLASSIFICAR -> exportar -> commit e push
+
+    O reclassificar no meio nao e enfeite. Sem ele, mudar `config/regioes.yml`
+    ou `config/alvo.yml` nao adianta nada: eu reclassifico, sincronizo, e o
+    importar do passo 2 traz de volta o JSON com a classificacao velha -
+    desfazendo na hora o que eu tinha acabado de corrigir. Com ele dentro,
+    todo sincronizar aplica a regra ATUAL e leva o resultado ate o robo.
+
     So mexe em `data/concursos.json` e `data/eventos.json`. O que mais estiver
     mudado na pasta fica como esta.
     """
-    console.print("[bold]1/5[/] Trazendo o que o robo coletou")
+    console.print("[bold]1/6[/] Trazendo o que o robo coletou")
     pull = _git("pull", "--rebase", "origin", "main")
     if pull.returncode != 0:
         console.print("[red]O pull falhou.[/] Resolva a mao e rode de novo:\n")
         console.print(f"[dim]{(pull.stderr or pull.stdout).strip()}[/]")
         raise typer.Exit(code=1)
 
-    console.print("[bold]2/5[/] Lendo o JSON para dentro do banco")
+    console.print("[bold]2/6[/] Lendo o JSON para dentro do banco")
     concursos = acervo.importar()
     eventos_novos = acervo.importar_eventos()
     console.print(
         f"   {concursos} concurso(s) lido(s), {eventos_novos} evento(s) novo(s)"
     )
 
-    console.print("[bold]3/5[/] Escrevendo o meu banco de volta no JSON")
+    # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
+    # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
+    # arquivo ja teria ido com a regra antiga.
+    console.print("[bold]3/6[/] Aplicando a regra de hoje (reclassificar)")
+    contagem = servico.reclassificar()
+    console.print(
+        "   " + ", ".join(
+            f"{quantos} {anel}" for anel, quantos in sorted(contagem.items())
+        )
+    )
+
+    console.print("[bold]4/6[/] Escrevendo o meu banco de volta no JSON")
     total = acervo.exportar()
     total_eventos = acervo.exportar_eventos()
     favoritos = servico.contar_favoritos()
@@ -1084,7 +1105,7 @@ def sincronizar(
         f"com [bold]{favoritos}[/] favorito(s)"
     )
 
-    console.print("[bold]4/5[/] Commitando")
+    console.print("[bold]5/6[/] Commitando")
     _git("add", *ARQUIVOS_DO_RADAR)
     mudou = _git("diff", "--staged", "--quiet").returncode != 0
     if not mudou:
@@ -1100,11 +1121,11 @@ def sincronizar(
         raise typer.Exit(code=1)
 
     if not empurrar:
-        console.print("[bold]5/5[/] [yellow]Sem empurrar, a pedido.[/]")
+        console.print("[bold]6/6[/] [yellow]Sem empurrar, a pedido.[/]")
         console.print("   O commit esta feito; falta `git push`.")
         return
 
-    console.print("[bold]5/5[/] Empurrando")
+    console.print("[bold]6/6[/] Empurrando")
     push = _git("push", "origin", "HEAD:main")
     if push.returncode != 0:
         console.print("[red]O push falhou.[/] O commit esta feito aqui:\n")

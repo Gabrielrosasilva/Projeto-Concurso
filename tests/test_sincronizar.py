@@ -4,7 +4,7 @@ Nenhum teste aqui chama o git de verdade: o `_git` e trocado por um falso que
 so anota o que teria sido rodado. O que importa testar nao e o git - e a
 ORDEM, porque e ela que protege o dado:
 
-    pull -> importar -> exportar -> commit -> push
+    pull -> importar -> reclassificar -> exportar -> commit -> push
 
 Importar antes de exportar nao e detalhe. Na ordem inversa, eu escreveria o
 meu banco por cima do JSON antes de ler o que o robo ja avisou, e ele mandaria
@@ -15,7 +15,9 @@ import subprocess
 import pytest
 from typer.testing import CliRunner
 
-from radar import acervo, cli
+from sqlalchemy import select
+
+from radar import acervo, cli, servico
 from radar.db import sessao
 from radar.models import Concurso
 
@@ -171,3 +173,69 @@ def test_o_json_sai_com_o_meu_favorito_dentro(banco_temporario, git, tmp_path):
     linhas = json.loads(acervo.caminho_padrao().read_text(encoding="utf-8"))
     assert [l["interesse"] for l in linhas] == ["favorito"]
     assert acervo.caminho_dos_eventos().exists()
+
+
+# --- o reclassificar no meio (etapa 13) -------------------------------------
+
+def test_a_grafia_velha_do_JSON_nao_volta(banco_temporario, git):
+    """O caso que motivou o passo: eu reclassifico, sincronizo, e o importar
+    traz de volta o JSON com a classificacao velha - desfazendo na hora o que
+    eu tinha acabado de corrigir. Vale para qualquer mudanca no regioes.yml ou
+    no alvo.yml, e nao so para o acento."""
+    import json
+
+    # o JSON como o robo deixou: grafia e motivo da regra ANTIGA
+    acervo.caminho_padrao().parent.mkdir(parents=True, exist_ok=True)
+    acervo.caminho_padrao().write_text(json.dumps([{
+        "url": "https://exemplo.test/sao-jose",
+        "fonte": "teste",
+        "titulo": "Concurso Prefeitura de Sao Jose (SC) abre 300 vagas",
+        "uf": "SC",
+        "tipo": "concurso",
+        "municipio": "Sao Jose",
+        "relevancia": "nucleo",
+        "motivo_relevancia": "Sao Jose (SC) esta no anel nucleo.",
+    }]), encoding="utf-8")
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+    assert resultado.exit_code == 0
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.municipio == "São José"
+    assert concurso.motivo_relevancia == "São José (SC) está no anel núcleo."
+
+    # e o que vai para o robo ja leva a grafia nova
+    linhas = json.loads(acervo.caminho_padrao().read_text(encoding="utf-8"))
+    assert linhas[0]["municipio"] == "São José"
+
+
+def test_o_reclassificar_roda_entre_importar_e_exportar(banco_temporario, git,
+                                                        monkeypatch):
+    """A posicao e a regra: antes do importar, o JSON velho passaria por cima;
+    depois do exportar, o arquivo ja teria ido com a classificacao antiga."""
+    passos = []
+    monkeypatch.setattr(acervo, "importar", lambda: passos.append("importar") or 0)
+    monkeypatch.setattr(
+        acervo, "importar_eventos", lambda: passos.append("importar_eventos") or 0
+    )
+    monkeypatch.setattr(
+        servico, "reclassificar", lambda: passos.append("reclassificar") or {}
+    )
+    monkeypatch.setattr(acervo, "exportar", lambda: passos.append("exportar") or 0)
+    monkeypatch.setattr(
+        acervo, "exportar_eventos", lambda: passos.append("exportar_eventos") or 0
+    )
+
+    runner.invoke(cli.app, ["sincronizar"])
+
+    assert passos.index("importar") < passos.index("reclassificar")
+    assert passos.index("reclassificar") < passos.index("exportar")
+
+
+def test_a_contagem_por_anel_aparece_na_saida(banco_temporario, git):
+    _favorito()
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert "reclassificar" in resultado.output

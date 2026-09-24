@@ -623,12 +623,12 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   descricao. O `id` nao serve, porque e autoincremental e cada maquina numera
   do seu jeito - o meu evento 7 e o do robo sao coisas diferentes. Sem isso,
   cada importacao dobraria a linha do tempo;
-- **`radar sincronizar` faz pull, importar, exportar, commit e push, nesta
-  ordem**, e a ordem e o conteudo da decisao: importar ANTES de exportar e o
-  que traz o `avisado_em` do robo para o meu banco antes de eu escrever o JSON
-  de volta. Na ordem inversa eu apagaria as marcas dele, e ele mandaria tudo
-  de novo no dia seguinte. Ele nao resolve conflito de rebase e nao encosta em
-  arquivo que nao seja os dois JSON;
+- **`radar sincronizar` faz pull, importar, RECLASSIFICAR, exportar, commit e
+  push, nesta ordem**, e a ordem e o conteudo da decisao. Importar antes de
+  exportar e o que traz o `avisado_em` do robo para o meu banco antes de eu
+  escrever o JSON de volta; na ordem inversa eu apagaria as marcas dele, e ele
+  mandaria tudo de novo no dia seguinte. Ele nao resolve conflito de rebase e
+  nao encosta em arquivo que nao seja os dois JSON;
 - a CLI passou a chamar `git` por subprocess, o que ate aqui so acontecia no
   workflow em bash. E o preco de ter um comando so, e fica contido numa funcao
   de quatro linhas.
@@ -667,3 +667,20 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   coisas diferentes: o primeiro se resolve apagando o arquivo e rodando
   `radar provas` de novo, e o segundo nao se resolve - edital publicado como
   imagem nao vira texto.
+
+## O sincronizar reclassifica
+
+- **o `reclassificar` roda DENTRO do `radar sincronizar`**, entre o importar e
+  o exportar. Sem isso, mudar `config/regioes.yml` ou `config/alvo.yml` nao
+  adiantava nada: eu reclassificava, sincronizava, e o importar trazia de
+  volta o JSON com a classificacao velha - desfazendo na hora o que eu tinha
+  acabado de corrigir. Nao era so o caso do acento: vale para municipio novo
+  num anel, cargo novo no alvo, qualquer regra;
+- **a posicao e a unica que funciona.** Antes do importar, o JSON velho
+  passaria por cima do que acabou de ser calculado; depois do exportar, o
+  arquivo ja teria saido com a regra antiga. Tem teste so para a posicao, alem
+  do que reproduz o caso inteiro: grafia velha no JSON, sincronizar, grafia
+  nova sobrevive - no banco e no arquivo que vai para o robo;
+- reclassificar nao vai a internet e so reescreve campo derivado (relevancia,
+  motivo, municipio canonico, marca de alvo). Os campos meus e o que a coleta
+  trouxe nao sao tocados, entao rodar sempre sai barato e nao tem risco.
