@@ -108,9 +108,12 @@ def test_hipotese_sem_anos_nao_inventa_ano():
 
 # --- o painel ---------------------------------------------------------------
 
+CONCURSO_DE_2019 = "https://fepese.org.br/concurso/sap-2019"
+
+
 def _concurso(**mudancas) -> Concurso:
     base = dict(
-        url="https://fepese.org.br/concurso/sap-2019",
+        url=CONCURSO_DE_2019,
         fonte="fepese",
         titulo="2019 - Secretaria de Estado da Administracao Prisional",
         uf="SC",
@@ -202,9 +205,21 @@ def test_edital_aberto_do_cargo_confirma_a_banca(banco_temporario):
 
 # --- as questoes do cargo ---------------------------------------------------
 
-def _questao(numero: int, cargo: str, ano: int, materia: str) -> QuestaoDeProva:
+def _questao(
+    numero: int,
+    cargo: str,
+    ano: int,
+    materia: str,
+    concurso_url: str = CONCURSO_DE_2019,
+) -> QuestaoDeProva:
+    """Uma questao do acervo, ligada ao concurso que a originou.
+
+    O concurso vem junto porque e dele que sai a UF, e desde a etapa 14 prova
+    sem estado provado nao conta como minha.
+    """
     return QuestaoDeProva(
         prova_url=f"https://fepese.test/{ano}/{cargo}.pdf",
+        concurso_url=concurso_url,
         banca="FEPESE", ano=ano, cargo=cargo, numero=numero, materia=materia,
         enunciado=f"Pergunta {numero} de {ano}?",
         alternativas={"a": "x", "b": "y"}, resposta="a",
@@ -216,6 +231,7 @@ def test_o_acento_do_cargo_nao_esconde_as_questoes(banco_temporario):
     """O cargo vem acentuado do hotsite ("Agente Penitenciario") e o termo do
     YAML vem sem. Com ilike puro, as questoes do cargo davam ZERO."""
     with sessao() as s:
+        s.add(_concurso())
         for n in range(1, 6):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
@@ -226,6 +242,7 @@ def test_o_acento_do_cargo_nao_esconde_as_questoes(banco_temporario):
 
 def test_a_incidencia_separa_por_ano(banco_temporario):
     with sessao() as s:
+        s.add(_concurso())
         s.add(_questao(1, "Agente Penitenciário", 2013, "Direito Penal"))
         s.add(_questao(2, "Agente Penitenciário", 2019, "Direito Penal"))
         s.add(_questao(3, "Agente Penitenciário", 2019, "Direito Penal"))
@@ -237,6 +254,7 @@ def test_a_incidencia_separa_por_ano(banco_temporario):
 
 def test_prova_de_outro_cargo_nao_entra_na_conta(banco_temporario):
     with sessao() as s:
+        s.add(_concurso())
         s.add(_questao(1, "Agente Penitenciário", 2019, "Direito Penal"))
         s.add(_questao(2, "Monitor de Transporte Escolar", 2024, "Portugues"))
 
@@ -245,14 +263,109 @@ def test_prova_de_outro_cargo_nao_entra_na_conta(banco_temporario):
     assert painel.anos_das_provas == [2019]
 
 
+# --- so a MINHA prova conta: o cargo certo, no estado certo (etapa 14) ------
+#
+# O cargo sozinho nunca bastou, e a tela contava como se bastasse. "Policial
+# Penal Federal" contem "policial penal" e e outro concurso; "Policia Penal do
+# Parana" e o mesmo cargo em outro estado, com outra banca e outro programa.
+# Estudar pelo peso de uma prova que nao e a minha e estudar a materia errada.
+
+CONCURSO_FEDERAL = "https://concursosnobrasil.com/policia-penal-federal-2026"
+CONCURSO_DO_PARANA = "https://concursosnobrasil.com/policia-penal-pr-2026"
+
+
+def test_prova_de_policia_penal_federal_nao_e_minha(banco_temporario):
+    """A lista `exclui` do alvo.yml vale aqui como vale no resto do projeto."""
+    with sessao() as s:
+        s.add(_concurso())
+        s.add(_concurso(
+            url=CONCURSO_FEDERAL,
+            titulo="Concurso Policia Penal Federal",
+            uf="DF",
+        ))
+        s.add(_questao(1, "Agente Penitenciário", 2019, "Direito Penal"))
+        s.add(_questao(
+            2, "Policial Penal Federal", 2026, "Direito Penal",
+            concurso_url=CONCURSO_FEDERAL,
+        ))
+
+    painel = foco.montar()
+    assert painel.questoes_para_treinar == 1
+    assert painel.anos_das_provas == [2019]
+
+
+def test_o_mesmo_cargo_em_outro_estado_nao_e_minha(banco_temporario):
+    """O alvo principal e de Santa Catarina. Policia Penal do Parana e o mesmo
+    cargo e outro concurso - outra banca, outro programa, outra prova."""
+    with sessao() as s:
+        s.add(_concurso())
+        s.add(_concurso(
+            url=CONCURSO_DO_PARANA,
+            titulo="Concurso Policia Penal do Parana",
+            uf="PR",
+        ))
+        s.add(_questao(1, "Agente Penitenciário", 2019, "Direito Penal"))
+        s.add(_questao(
+            2, "Policial Penal", 2026, "Direito Penal",
+            concurso_url=CONCURSO_DO_PARANA,
+        ))
+
+    painel = foco.montar()
+    assert painel.questoes_para_treinar == 1
+    assert painel.anos_das_provas == [2019]
+
+
+def test_sem_uf_a_palavra_de_sc_ainda_decide(banco_temporario):
+    """A FEPESE nao informa a UF. Quando ela falta, quem decide e uma palavra
+    que so existe aqui - a mesma regra que marca o alvo na coleta."""
+    with sessao() as s:
+        s.add(_concurso(uf=None, titulo="Policia Penal de Santa Catarina"))
+        for n in range(1, 4):
+            s.add(_questao(n, "Agente Penitenciário", 2019, "Direito Penal"))
+
+    assert foco.montar().questoes_para_treinar == 3
+
+
+def test_prova_sem_concurso_conhecido_nao_conta(banco_temporario):
+    """Nunca chutar: sem o concurso nao da para provar o estado, e contar
+    assim mesmo seria inventar que a prova e minha."""
+    with sessao() as s:
+        for n in range(1, 4):
+            s.add(_questao(
+                n, "Agente Penitenciário", 2019, "Direito Penal",
+                concurso_url=None,
+            ))
+
+    painel = foco.montar()
+    assert painel.questoes_para_treinar == 0
+    assert painel.anos_das_provas == []
+
+
+def test_a_banca_so_conta_o_ano_da_prova_que_e_minha(banco_temporario):
+    """A hipotese de banca diz "a FEPESE fez 2013 e 2019". Se uma prova de
+    outro estado entrasse na conta, ela passaria a citar um ano que nao e do
+    meu concurso."""
+    with sessao() as s:
+        s.add(_concurso())
+        s.add(_concurso(
+            url=CONCURSO_DO_PARANA,
+            titulo="Concurso Policia Penal do Parana",
+            uf="PR",
+        ))
+        s.add(_questao(1, "Agente Penitenciário", 2019, "Direito Penal"))
+        s.add(_questao(
+            2, "Policial Penal", 2026, "Direito Penal",
+            concurso_url=CONCURSO_DO_PARANA,
+        ))
+
+    assert foco.montar().banca.anos == [2019]
+
+
 # --- o edital e lido uma vez so (etapa 14) ---------------------------------
 #
 # A tela abria em quatro segundos e meio porque relia o PDF do edital inteiro
 # a cada vez, duas vezes por abertura. O que foi lido agora fica guardado, e o
 # sha256 do manifesto e quem diz quando vale a pena ler de novo.
-
-CONCURSO_DE_2019 = "https://fepese.org.br/concurso/sap-2019"
-
 
 class _PdfFalso:
     """Um edital que conta quantas vezes foi aberto."""
@@ -566,7 +679,7 @@ def _treinar(materia: str, acertos: int, erros: int) -> None:
             # caderno violam a unicidade, como na vida real.
             s.add(QuestaoDeProva(
                 prova_url=f"https://fepese.test/{materia}.pdf", banca="FEPESE",
-                ano=2019,
+                concurso_url=CONCURSO_DE_2019, ano=2019,
                 cargo="Agente Penitenciário", numero=n + 1, materia=materia,
                 enunciado=f"{materia} {n}?", alternativas={"a": "x", "b": "y"},
                 resposta="a", impressao=f"{materia}-{n}",

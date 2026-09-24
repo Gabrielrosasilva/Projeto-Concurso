@@ -719,3 +719,49 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - isto e **cosmetico**. Duas grafias do mesmo lugar nunca confundiram a
   classificacao, porque toda comparacao passa por `normalizar`. O que elas
   estragavam era a leitura: a mesma cidade aparecia duas vezes na tela.
+
+## Meu foco guarda o que leu do edital, em vez de reler o PDF
+
+- **o edital e lido uma vez e o resultado fica em `data/edital_do_alvo.json`.**
+  A aba relia o PDF de 2019 inteiro a cada abertura, e duas vezes: uma para o
+  quadro de materias, outra para a validade. Sao dois segundos por leitura, e
+  a aba abria em 4,4 segundos. Depois, 0,06;
+- **quem decide se vale reler e o sha256 que o manifesto ja guardava**, e nao
+  a data nem o nome do arquivo. Edital publicado nao se reescreve: mesmo
+  arquivo, mesma resposta. Se uma retificacao trocar o PDF, o hash muda e a
+  leitura acontece de novo - que e exatamente o caso em que reler importa;
+- o arquivo e **cache, e por isso nao vai para o git**: apagar nao perde nada,
+  o radar le o PDF outra vez. O que e versionado continua sendo o manifesto,
+  que e a receita. Arquivo corrompido tambem nao quebra a tela - vale como
+  "nao tenho";
+- **o total de questoes e somado na hora, e nao guardado.** Um total que
+  discordasse das materias seria numero orfao, e o quadro so vale quando
+  fecha a conta;
+- as tres contas do cargo tambem pararam de varrer o acervo. Elas carregavam
+  as 8 mil questoes para filtrar em Python as 170 minhas, tres vezes por
+  abertura. Agora **"que provas sao minhas?" e perguntado uma vez**, sobre as
+  ~200 provas distintas, e o resto consulta o banco so por elas.
+
+## Prova so conta como minha se for o meu cargo E o meu estado
+
+- **`exclui` e `uf` do `config/alvo.yml` passaram a valer tambem no acervo.**
+  A tela de foco comparava so os `termos`, e por isso uma prova de "Policial
+  Penal Federal" - que contem "policial penal" - entrava nas contas como se
+  fosse minha, e uma prova de Policia Penal do Parana tambem. Sao o mesmo
+  cargo e outro concurso: outra banca, outro programa, outra prova. Estudar
+  pelo peso delas e estudar a materia errada;
+- **quem sabe a UF da prova e o concurso que a originou**, e e por isso que a
+  consulta alcanca a tabela de concursos. A regra de estado e a mesma da
+  coleta, e mora em `alvo.e_do_estado_do_principal`: com UF ela manda; sem
+  UF - a FEPESE e a IESES nao informam - decide uma palavra da lista
+  `prova_de_sc`, nunca a sigla solta;
+- **prova que nao chega a um concurso conhecido fica de fora.** Sem ele nao ha
+  como provar o estado, e contar assim mesmo seria chutar - a mesma regra do
+  anel de distancia;
+- quem responde "e o meu cargo?" passou a ser `alvo.sinonimos_do_cargo`, que
+  ja tratava os `termos` como nomes do mesmo cargo e ja aplicava o `exclui`.
+  Uma regra, um dono: o arquivo que le o `alvo.yml`;
+- **o sorteio do treino ainda nao aplica as duas regras.**
+  `servico/simulado.py` usa `nomeia_cargo_do_principal`, que so olha os
+  `termos`. No acervo de hoje da no mesmo - as duas unicas provas do cargo
+  sao de SC - mas a falha existe e esta anotada aqui para nao se perder.

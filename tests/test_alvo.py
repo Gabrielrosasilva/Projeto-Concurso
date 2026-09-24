@@ -346,3 +346,28 @@ def test_o_plural_nao_fura_a_trava_de_estado():
     """A regra de sempre: sem prova de que e de SC, nao marca."""
     assert alvo.marcar("Governo do PR contrata policiais penais", uf="PR") is None
     assert alvo.marcar("Parana contrata policiais penais") is None
+
+
+# --- a mesma trava de estado, para quem ja tem o item no banco --------------
+
+def test_a_uf_decide_quando_existe():
+    """Com UF na mao ela manda, e o texto nao tem voto."""
+    assert alvo.e_do_estado_do_principal("SC", "Concurso qualquer")
+    assert alvo.e_do_estado_do_principal("sc", "Concurso qualquer")
+    assert not alvo.e_do_estado_do_principal(
+        "PR", "Policia Penal de Santa Catarina"
+    )
+
+
+def test_sem_uf_quem_decide_e_a_palavra_que_so_existe_aqui():
+    """A FEPESE e a IESES nao informam a UF. Ai vale a mesma lista de sempre,
+    `prova_de_sc`, nunca a sigla solta."""
+    assert alvo.e_do_estado_do_principal(None, "Policia Penal de Santa Catarina")
+    assert alvo.e_do_estado_do_principal(None, "SEJURI abre concurso")
+    assert not alvo.e_do_estado_do_principal(None, "Policia Penal do Parana")
+
+
+def test_sem_uf_e_sem_palavra_a_resposta_e_nao():
+    """Nunca chutar: a duvida nao vira sim, nem para o acervo de provas."""
+    assert not alvo.e_do_estado_do_principal(None, "")
+    assert not alvo.e_do_estado_do_principal(None, "Concurso Policia Penal")

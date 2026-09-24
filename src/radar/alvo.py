@@ -215,6 +215,27 @@ def orgaos_do_principal() -> list[str]:
     return [str(o) for o in principal().get("orgaos") or []]
 
 
+def e_do_estado_do_principal(
+    uf: str | None, titulo: str | None = None, resumo: str | None = None
+) -> bool:
+    """Este item e mesmo do estado do alvo principal?
+
+    A mesma regra que o `marcar` usa, exposta para quem ja tem o item no banco
+    e precisa confirmar o estado depois - o acervo de provas, por exemplo: uma
+    prova de Policia Penal do Parana e do cargo que eu quero e NAO e o meu
+    concurso, e sem esta pergunta ela entraria nas contas como se fosse.
+
+    Com UF na mao, ela decide e ponto. Sem UF - a FEPESE e a IESES nao mandam
+    - quem decide e uma palavra que so existe aqui, nunca a sigla solta. Sem
+    nenhum dos dois a resposta e nao: nunca chutar vale aqui como vale no anel
+    de distancia.
+    """
+    texto = normalizar(
+        GRUDADAS.sub(r"\1 \2", f"{titulo or ''} {resumo or ''}")
+    )
+    return _e_do_estado(_carregar().get("principal") or {}, texto, uf)
+
+
 def nomeia_cargo_do_principal(titulo: str, resumo: str | None = None) -> bool:
     """O texto fala do CARGO do alvo, e nao so da casa que o abre?
 
