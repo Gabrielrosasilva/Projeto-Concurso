@@ -245,6 +245,127 @@ def test_prova_de_outro_cargo_nao_entra_na_conta(banco_temporario):
     assert painel.anos_das_provas == [2019]
 
 
+# --- o edital e lido uma vez so (etapa 14) ---------------------------------
+#
+# A tela abria em quatro segundos e meio porque relia o PDF do edital inteiro
+# a cada vez, duas vezes por abertura. O que foi lido agora fica guardado, e o
+# sha256 do manifesto e quem diz quando vale a pena ler de novo.
+
+CONCURSO_DE_2019 = "https://fepese.org.br/concurso/sap-2019"
+
+
+class _PdfFalso:
+    """Um edital que conta quantas vezes foi aberto."""
+
+    def __init__(self, caminho: Path, sha: str = "sha-do-edital"):
+        self.caminho = caminho
+        self.sha = sha
+        self.leituras = 0
+
+    def manifesto(self) -> list[dict]:
+        """O edital, e a prova que faz aquela edicao contar como edicao."""
+        return [
+            {
+                "tipo": "edital",
+                "concurso_url": CONCURSO_DE_2019,
+                "arquivo": "2019_SAP_Edital_1.pdf",
+                "caminho": self.caminho.name,
+                "sha256": self.sha,
+            },
+            {
+                "tipo": "prova",
+                "concurso_url": CONCURSO_DE_2019,
+                "arquivo": "AP.pdf",
+                "caminho": "AP.pdf",
+                "sha256": "sha-da-prova",
+            },
+        ]
+
+    def extrair_texto(self, caminho):
+        self.leituras += 1
+        return QUADRO_2019 + "\nO concurso tera validade de 2 (dois) anos"
+
+
+@pytest.fixture
+def edital_no_disco(banco_temporario, tmp_path, monkeypatch):
+    """Um edital de mentira no acervo, com manifesto e PDF no disco."""
+    pdf = tmp_path / "edital.pdf"
+    pdf.write_bytes(b"%PDF-1.4 nao e lido de verdade")
+    falso = _PdfFalso(pdf)
+
+    monkeypatch.setattr(foco.provas, "carregar_manifesto", falso.manifesto)
+    monkeypatch.setattr(foco, "extrair_texto", falso.extrair_texto)
+    with sessao() as s:
+        s.add(_concurso())
+    return falso
+
+
+def _edicao_de_2019():
+    return Concurso(
+        url=CONCURSO_DE_2019,
+        titulo="2019 - Secretaria de Estado da Administracao Prisional",
+        fonte="fepese", tipo="concurso", situacao="encerrado",
+    )
+
+
+def test_o_edital_e_lido_uma_vez_por_abertura(edital_no_disco):
+    """Antes eram duas leituras do mesmo PDF: uma para o quadro de materias e
+    outra para a validade."""
+    painel = foco.montar()
+
+    assert edital_no_disco.leituras == 1
+    assert len(painel.materias_do_edital) == 11
+    assert painel.total_do_edital == 100
+    assert painel.validade.startswith("2 anos a contar")
+
+
+def test_a_segunda_abertura_nao_abre_mais_o_pdf(edital_no_disco):
+    foco.montar()
+    painel = foco.montar()
+
+    assert edital_no_disco.leituras == 1
+    assert len(painel.materias_do_edital) == 11
+    assert painel.ano_do_edital == 2019
+
+
+def test_pdf_trocado_e_lido_de_novo(edital_no_disco):
+    """O sha256 e quem manda: arquivo novo, leitura nova. Sem isso, uma
+    retificacao do edital ficaria invisivel para sempre."""
+    foco.montar()
+    edital_no_disco.sha = "sha-depois-da-retificacao"
+
+    foco.montar()
+    assert edital_no_disco.leituras == 2
+
+
+def test_guardado_corrompido_nao_quebra_a_tela(edital_no_disco):
+    foco.montar()
+    foco._caminho_do_edital_lido().write_text("isto nao e json", encoding="utf-8")
+
+    painel = foco.montar()
+    assert edital_no_disco.leituras == 2
+    assert len(painel.materias_do_edital) == 11
+
+
+def test_sem_sha256_no_manifesto_nada_e_guardado(edital_no_disco):
+    """Guardar o que nao da para conferir depois e o mesmo que chutar."""
+    edital_no_disco.sha = None
+
+    foco.montar()
+    foco.montar()
+    assert edital_no_disco.leituras == 2
+    assert not foco._caminho_do_edital_lido().exists()
+
+
+def test_edital_fora_do_acervo_nao_inventa_quadro(banco_temporario, monkeypatch):
+    monkeypatch.setattr(foco.provas, "carregar_manifesto", lambda: [])
+
+    lido = foco._ler_edital(_edicao_de_2019())
+    assert lido.materias == []
+    assert lido.total == 0
+    assert lido.validade is None
+
+
 # O treino deixou de escolher UM termo de cargo para filtrar o sorteio: quem
 # monta a rodada agora e `servico.criar_simulado_do_alvo`, que trata os termos
 # do YAML como nomes do mesmo cargo. Os testes disso estao em
@@ -424,7 +545,8 @@ def com_quadro_do_edital(monkeypatch):
     """A tela com o quadro real de 2019, sem depender do PDF estar no disco."""
     materias = edital_materias.ler_quadro(QUADRO_2019)
     monkeypatch.setattr(
-        foco, "_materias_do_ultimo_edital", lambda concurso: (materias, 100, 2019)
+        foco, "_ler_edital",
+        lambda concurso: foco.EditalLido(materias, 100, 2019, None),
     )
     # O quadro so existe quando existe uma edicao que virou prova: em
     # producao, os dois andam juntos porque saem do mesmo PDF.

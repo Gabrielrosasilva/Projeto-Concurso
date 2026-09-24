@@ -14,6 +14,11 @@ data/*.db
 data/provas/
 data/editais/
 
+# O que foi lido do PDF do edital do alvo, guardado para a tela de Meu foco
+# nao reabrir o arquivo a cada vez. E cache: some o arquivo e o radar le o
+# PDF de novo. Quem tem o sha256 de verdade e o manifesto.
+data/edital_do_alvo.json
+
 # Relatorio gerado por ferramentas_gerar_relatorio.py: e artefato, nao fonte.
 # Quem quiser o PDF roda o script de novo.
 RELATORIO_DO_PROJETO.pdf

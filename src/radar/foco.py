@@ -14,14 +14,17 @@ A banca e o exemplo disso. Ate sair edital novo, ela e HIPOTESE - a FEPESE fez
 2013 e 2019, e isso e historia, nao promessa. O campo carrega essa diferenca
 para que a tela nunca escreva "banca: FEPESE" como se fosse fato.
 """
+import json
 import logging
+import re
 from dataclasses import dataclass, field
 from datetime import datetime
+from pathlib import Path
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from radar import alvo as alvos
-from radar import edital_materias, provas
+from radar import config, edital_materias, provas
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
 from radar.models import Concurso, QuestaoDeProva
@@ -131,8 +134,6 @@ def _ano(concurso: Concurso) -> int | None:
     Sem ano no titulo, cai para o ano da publicacao. Sem nenhum dos dois,
     devolve None - e a tela mostra o concurso sem ano em vez de inventar um.
     """
-    import re
-
     achado = re.match(r"\s*(\d{4})", concurso.titulo or "")
     if achado:
         return int(achado.group(1))
@@ -168,7 +169,7 @@ def _edital_com_prova(concursos: list[Concurso]) -> Concurso | None:
     return None
 
 
-def _banca_do_alvo(concursos: list[Concurso]) -> Banca:
+def _banca_do_alvo(s, concursos: list[Concurso], provas_do_alvo: set[str]) -> Banca:
     """Quem faz o concurso, ou quem fez - a diferenca fica registrada.
 
     Enquanto nao ha edital aberto, o nome vem de `config/alvo.yml`, onde eu
@@ -194,7 +195,7 @@ def _banca_do_alvo(concursos: list[Concurso]) -> Banca:
 
     # Os anos vem do acervo, e nao do YAML: e prova que aquela banca fez aquele
     # ano, e nao anotacao minha que pode ter envelhecido.
-    anos = _anos_com_prova(nomes[0])
+    anos = _anos_com_prova(s, provas_do_alvo, nomes[0])
     return Banca(nome=nomes[0], confirmada=False, anos=anos)
 
 
@@ -215,23 +216,25 @@ def _e_do_cargo(cargo: str | None) -> bool:
     )
 
 
-def _anos_com_prova(banca: str) -> list[int]:
+def _anos_com_prova(s, provas_do_alvo: set[str], banca: str) -> list[int]:
     """Em que anos essa banca deixou prova do CARGO no acervo.
 
     Do cargo, e nao da banca: a FEPESE deixou prova de dezenas de concursos,
     e so as do meu cargo contam como "ja fez este aqui".
     """
-    with sessao() as s:
-        linhas = s.execute(
-            select(QuestaoDeProva.cargo, QuestaoDeProva.ano, QuestaoDeProva.banca)
-            .distinct()
-        ).all()
+    if not provas_do_alvo:
+        return []
+
+    linhas = s.execute(
+        select(QuestaoDeProva.ano, QuestaoDeProva.banca)
+        .where(QuestaoDeProva.prova_url.in_(provas_do_alvo))
+        .distinct()
+    ).all()
 
     alvo_banca = normalizar(banca)
     return sorted({
-        ano for cargo, ano, banca_da_prova in linhas
-        if ano and _e_do_cargo(cargo)
-        and alvo_banca in normalizar(banca_da_prova or "")
+        ano for ano, banca_da_prova in linhas
+        if ano and alvo_banca in normalizar(banca_da_prova or "")
     })
 
 
@@ -279,39 +282,38 @@ def _sinais(s, concursos: list[Concurso], limite: int) -> list[dict]:
     return sinais[:limite]
 
 
-def _materias_do_ultimo_edital(concurso: Concurso | None) -> tuple[list, int, int | None]:
-    """O quadro de distribuicao de questoes do edital daquela edicao.
-
-    Le o PDF que `radar provas` ja baixou - nao vai a internet. Devolve lista
-    vazia quando o edital nao esta no acervo ou nao tem quadro legivel.
-    """
-    if concurso is None:
-        return [], 0, None
-
-    caminho = _caminho_do_edital(concurso.url)
-    if caminho is None:
-        return [], 0, None
-
-    try:
-        texto = extrair_texto(caminho)
-    except Exception as erro:  # noqa: BLE001 - PDF ilegivel e possivel
-        log.warning("nao li o edital %s (%s)", caminho, type(erro).__name__)
-        return [], 0, None
-
-    materias = edital_materias.ler_quadro(texto)
-    return materias, edital_materias.total_de_questoes(materias), _ano(concurso)
+# --- o edital ---------------------------------------------------------------
+#
+# O PDF do edital de 2019 tem 30 paginas e leva dois segundos para ser lido -
+# e a tela precisava dele DUAS vezes, uma para o quadro de materias e outra
+# para a validade. Agora ele e lido uma vez so, e o que saiu de la fica
+# guardado em disco: edital publicado nao se reescreve, entao mesmo arquivo e
+# mesma resposta. Quem diz se o arquivo continua o mesmo e o sha256 que o
+# manifesto ja guarda - trocou o PDF, muda o hash, e a leitura acontece de
+# novo.
 
 
-def _caminho_do_edital(concurso_url: str):
-    """O PDF de edital daquele concurso que esta no disco.
+@dataclass
+class EditalLido:
+    """O que o PDF do edital respondeu. Campo vazio = o edital nao diz."""
+
+    materias: list = field(default_factory=list)
+    total: int = 0
+    ano: int | None = None
+    validade: str | None = None
+
+
+ARQUIVO_DO_EDITAL_LIDO = "edital_do_alvo.json"
+
+
+def _registro_do_edital(concurso_url: str) -> dict | None:
+    """O edital de abertura daquele concurso, como o manifesto o registra.
 
     Quando ha varios - o de abertura mais os termos aditivos - vale o de
     abertura, que e o unico que traz o quadro de materias. Ele e o de nome
     mais curto: "2019_SAP_Edital_1.pdf" contra "TA_5_ed_1.pdf"... nao serve.
     Vale o que NAO tem marca de retificacao no nome.
     """
-    from radar import config
-
     candidatos = [
         r for r in provas.carregar_manifesto()
         if r.get("tipo") == provas.EDITAL
@@ -326,30 +328,183 @@ def _caminho_do_edital(concurso_url: str):
         return any(m in nome for m in ("ta_", "aditivo", "retifica", "errata"))
 
     abertura = [r for r in candidatos if not e_aditivo(r)] or candidatos
-    caminho = config.diretorio_dados() / abertura[0]["caminho"]
-    return caminho if caminho.exists() else None
+    return abertura[0]
 
 
-def _incidencia_do_cargo() -> tuple[dict, list[int]]:
+def _ler_edital(concurso: Concurso | None) -> EditalLido:
+    """O quadro de materias e a validade do edital daquela edicao.
+
+    Le o PDF que `radar provas` ja baixou - nao vai a internet - e so abre o
+    arquivo quando o que esta guardado nao serve mais. Devolve campos vazios
+    quando o edital nao esta no acervo ou nao tem quadro legivel: a tela diz
+    "nao sei ainda", e nunca um peso inventado.
+    """
+    if concurso is None:
+        return EditalLido()
+
+    registro = _registro_do_edital(concurso.url)
+    if registro is None:
+        return EditalLido()
+
+    ano = _ano(concurso)
+    guardado = _edital_guardado(registro.get("sha256"))
+    if guardado is not None:
+        guardado.ano = ano
+        return guardado
+
+    caminho = config.diretorio_dados() / registro["caminho"]
+    if not caminho.exists():
+        return EditalLido(ano=ano)
+
+    try:
+        texto = extrair_texto(caminho)
+    except Exception as erro:  # noqa: BLE001 - PDF ilegivel e possivel
+        log.warning("nao li o edital %s (%s)", caminho, type(erro).__name__)
+        return EditalLido(ano=ano)
+
+    materias = edital_materias.ler_quadro(texto)
+    lido = EditalLido(
+        materias=materias,
+        total=edital_materias.total_de_questoes(materias),
+        ano=ano,
+        validade=_validade_no_texto(texto),
+    )
+    _guardar_edital(registro, lido)
+    return lido
+
+
+def _caminho_do_edital_lido() -> Path:
+    return config.diretorio_dados() / ARQUIVO_DO_EDITAL_LIDO
+
+
+def _edital_guardado(sha256: str | None) -> EditalLido | None:
+    """O que ja foi lido deste MESMO arquivo, ou None quando nao serve.
+
+    A chave e o sha256 do PDF, e nao o nome nem a data da leitura: uma
+    retificacao que troque o arquivo tem hash novo, e ai o que esta guardado
+    fala de um edital que nao existe mais.
+
+    Arquivo corrompido, ou escrito por uma versao antiga do programa, nao
+    quebra a tela: vale como "nao tenho", e o PDF e lido de novo.
+    """
+    arquivo = _caminho_do_edital_lido()
+    if not sha256 or not arquivo.exists():
+        return None
+
+    try:
+        guardado = json.loads(arquivo.read_text(encoding="utf-8"))
+        if guardado.get("sha256") != sha256:
+            return None
+        materias = [
+            edital_materias.MateriaDoEdital(nome=m["nome"], questoes=m["questoes"])
+            for m in guardado.get("materias") or []
+        ]
+    except (OSError, ValueError, TypeError, KeyError, AttributeError) as erro:
+        log.warning("nao aproveitei %s (%s)", arquivo.name, type(erro).__name__)
+        return None
+
+    return EditalLido(
+        materias=materias,
+        # Somado agora, e nao guardado: um total que discordasse das materias
+        # seria numero orfao, e o quadro so vale quando fecha a conta.
+        total=edital_materias.total_de_questoes(materias),
+        validade=guardado.get("validade"),
+    )
+
+
+def _guardar_edital(registro: dict, lido: EditalLido) -> None:
+    """Escreve o que foi lido, para a proxima abertura nao reabrir o PDF.
+
+    Sem sha256 no manifesto nao ha como conferir depois se o arquivo continua
+    o mesmo - e guardar o que nao da para conferir e o mesmo que chutar.
+    """
+    if not registro.get("sha256"):
+        return
+
+    conteudo = {
+        "sha256": registro["sha256"],
+        # So para eu abrir este arquivo e saber de que edital ele fala.
+        "arquivo": registro.get("arquivo"),
+        "materias": [
+            {"nome": m.nome, "questoes": m.questoes} for m in lido.materias
+        ],
+        "validade": lido.validade,
+    }
+    try:
+        _caminho_do_edital_lido().write_text(
+            json.dumps(conteudo, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    except OSError as erro:  # noqa: BLE001 - disco cheio nao pode apagar a tela
+        log.warning("nao guardei o edital lido (%s)", type(erro).__name__)
+
+
+# O texto da validade e copiado do edital, e nao resumido: "2 anos" sem o "a
+# contar da homologacao" seria meia verdade, e a homologacao e justamente a
+# data que eu nao tenho.
+VALIDADE_NO_EDITAL = re.compile(
+    r"(?i)valida?de\s+de\s+(\d+)\s*\(\s*\w+\s*\)\s*anos?"
+    r"(?:[^.]{0,200}?prorrogad[ao]\s+por\s+igual\s+per[ií]odo)?",
+    re.DOTALL,
+)
+
+
+def _validade_no_texto(texto: str) -> str | None:
+    """O prazo de validade, como o edital escreve.
+
+    Devolve None quando o edital nao diz. Note que saber o PRAZO nao e saber
+    ate quando: ele conta da homologacao do resultado, publicada no Diario
+    Oficial do Estado - que este projeto nao le, por causa do robots.txt.
+    """
+    achado = VALIDADE_NO_EDITAL.search(texto or "")
+    if not achado:
+        return None
+
+    anos = int(achado.group(1))
+    prorroga = "prorrogad" in achado.group(0).lower()
+    frase = f"{anos} anos a contar da homologação do resultado"
+    if prorroga:
+        frase += f", prorrogáveis por mais {anos}"
+    return frase
+
+
+def _provas_do_alvo(s) -> set[str]:
+    """O endereco dos cadernos do acervo que sao do MEU cargo.
+
+    Existe por causa do tempo de abertura da tela: cada conta daqui varria as
+    8 mil questoes do acervo inteiro, em Python, para ficar com as 170 que sao
+    minhas - e eram tres varreduras por abertura. Aqui a pergunta "que provas
+    sao minhas?" e feita UMA vez, sobre as ~200 provas distintas, e o resto do
+    arquivo consulta o banco so por elas.
+    """
+    linhas = s.execute(
+        select(QuestaoDeProva.prova_url, QuestaoDeProva.cargo).distinct()
+    ).all()
+    return {url for url, cargo in linhas if _e_do_cargo(cargo)}
+
+
+def _incidencia_do_cargo(s, provas_do_alvo: set[str]) -> tuple[dict, list[int]]:
     """Quantas questoes de cada materia, por ano, nas provas do alvo.
 
     E o contraponto do quadro do edital: o edital diz o que promete cobrar, e
     isto diz o que caiu de verdade.
     """
+    if not provas_do_alvo:
+        return {}, []
+
+    linhas = s.execute(
+        select(QuestaoDeProva.materia, QuestaoDeProva.ano, func.count())
+        .where(QuestaoDeProva.prova_url.in_(provas_do_alvo))
+        .where(QuestaoDeProva.materia.is_not(None))
+        .where(QuestaoDeProva.ano.is_not(None))
+        .group_by(QuestaoDeProva.materia, QuestaoDeProva.ano)
+    ).all()
+
     por_materia: dict[str, dict[int, int]] = {}
     anos: set[int] = set()
-
-    with sessao() as s:
-        linhas = s.execute(
-            select(QuestaoDeProva.cargo, QuestaoDeProva.materia, QuestaoDeProva.ano)
-        ).all()
-
-    for cargo, materia, ano in linhas:
-        if not materia or not ano or not _e_do_cargo(cargo):
-            continue
+    for materia, ano, quantas in linhas:
         anos.add(ano)
-        por_materia.setdefault(materia, {}).setdefault(ano, 0)
-        por_materia[materia][ano] += 1
+        por_materia.setdefault(materia, {})[ano] = quantas
 
     return por_materia, sorted(anos)
 
@@ -419,13 +574,16 @@ def _pior_das_pesadas(pesadas: set[str], acerto: dict) -> str | None:
     return pior[0]
 
 
-def _contar_questoes_do_alvo() -> int:
+def _contar_questoes_do_alvo(s, provas_do_alvo: set[str]) -> int:
     """Quantas questoes do cargo existem para treinar."""
-    with sessao() as s:
-        linhas = s.execute(
-            select(QuestaoDeProva.id, QuestaoDeProva.cargo)
-        ).all()
-    return sum(1 for _ident, cargo in linhas if _e_do_cargo(cargo))
+    if not provas_do_alvo:
+        return 0
+
+    return s.scalar(
+        select(func.count())
+        .select_from(QuestaoDeProva)
+        .where(QuestaoDeProva.prova_url.in_(provas_do_alvo))
+    ) or 0
 
 
 def montar() -> Painel:
@@ -441,6 +599,15 @@ def montar() -> Painel:
     with sessao() as s:
         concursos = _concursos_do_alvo(s)
         painel.sinais = _sinais(s, concursos, SINAIS_NA_TELA)
+
+        # As provas do cargo sao a base de tres contas da tela. Perguntar uma
+        # vez, e na mesma sessao, e o que faz a tela abrir rapido.
+        minhas_provas = _provas_do_alvo(s)
+        painel.banca = _banca_do_alvo(s, concursos, minhas_provas)
+        painel.incidencia, painel.anos_das_provas = _incidencia_do_cargo(
+            s, minhas_provas
+        )
+        painel.questoes_para_treinar = _contar_questoes_do_alvo(s, minhas_provas)
 
     abertos = [c for c in concursos if c.situacao in SITUACOES_ABERTAS]
     do_cargo = [
@@ -458,68 +625,26 @@ def montar() -> Painel:
     if ultimo:
         painel.ultima = _como_edicao(ultimo)
 
-    painel.banca = _banca_do_alvo(concursos)
-
-    materias, total, ano = _materias_do_ultimo_edital(ultimo)
+    edital = _ler_edital(ultimo)
+    materias = edital.materias
     painel.materias_do_edital = materias
-    painel.total_do_edital = total
-    painel.ano_do_edital = ano
+    painel.total_do_edital = edital.total
+    painel.ano_do_edital = edital.ano
 
+    # A validade so e afirmada junto com o quadro: quadro ilegivel quer dizer
+    # que o PDF nao foi lido direito, e ai o prazo tambem nao vale.
     if materias:
-        painel.validade = _validade_do_edital(ultimo)
-
-    painel.incidencia, painel.anos_das_provas = _incidencia_do_cargo()
-    painel.questoes_para_treinar = _contar_questoes_do_alvo()
+        painel.validade = edital.validade
 
     # O quadro do edital diz o que vale mais; o simulado diz como eu vou. Os
     # dois juntos respondem a pergunta que o quadro sozinho nao responde: por
     # onde comecar hoje.
     painel.acerto_por_materia = _acerto_por_materia(materias)
-    painel.materias_pesadas = materias_de_maior_peso(materias, total)
+    painel.materias_pesadas = materias_de_maior_peso(materias, edital.total)
     painel.pior_materia = _pior_das_pesadas(
         painel.materias_pesadas, painel.acerto_por_materia
     )
     return painel
-
-
-# O texto da validade e copiado do edital, e nao resumido: "2 anos" sem o "a
-# contar da homologacao" seria meia verdade, e a homologacao e justamente a
-# data que eu nao tenho.
-import re as _re  # noqa: E402 - usado so pela funcao abaixo
-
-VALIDADE_NO_EDITAL = _re.compile(
-    r"(?i)valida?de\s+de\s+(\d+)\s*\(\s*\w+\s*\)\s*anos?"
-    r"(?:[^.]{0,200}?prorrogad[ao]\s+por\s+igual\s+per[ií]odo)?",
-    _re.DOTALL,
-)
-
-
-def _validade_do_edital(concurso: Concurso) -> str | None:
-    """O prazo de validade, como o edital escreve.
-
-    Devolve None quando o edital nao diz. Note que saber o PRAZO nao e saber
-    ate quando: ele conta da homologacao do resultado, publicada no Diario
-    Oficial do Estado - que este projeto nao le, por causa do robots.txt.
-    """
-    caminho = _caminho_do_edital(concurso.url)
-    if caminho is None:
-        return None
-
-    try:
-        texto = extrair_texto(caminho)
-    except Exception:  # noqa: BLE001
-        return None
-
-    achado = VALIDADE_NO_EDITAL.search(texto)
-    if not achado:
-        return None
-
-    anos = int(achado.group(1))
-    prorroga = "prorrogad" in achado.group(0).lower()
-    frase = f"{anos} anos a contar da homologação do resultado"
-    if prorroga:
-        frase += f", prorrogáveis por mais {anos}"
-    return frase
 
 
 # O botao de treino nao escolhe mais um termo de cargo para filtrar: quem
