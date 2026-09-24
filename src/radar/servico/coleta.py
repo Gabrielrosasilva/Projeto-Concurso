@@ -50,14 +50,43 @@ CAMPOS_CALCULADOS = ("municipio", "salario", "tipo", "relevancia",
                      "motivo_relevancia", "alvo", "motivo_alvo")
 
 
+def _anel_da_lotacao(municipio: str | None) -> tuple[str, str]:
+    """(anel, motivo) para o municipio que a pagina do edital confirmou.
+
+    O motivo diz de onde veio o municipio - e a informacao que me permite
+    auditar a classificacao depois, e a pagina do edital e fonte melhor que o
+    titulo. O anel sai da regra de hoje, e nao de quando a pagina foi lida.
+    """
+    nome = regioes.nome_canonico(municipio) or municipio
+    anel = regioes.anel_de(municipio)
+
+    if anel:
+        return anel, (
+            f"{nome} aparece como lotação na página do edital, "
+            f"e está no anel {regioes.NOME_DO_ANEL.get(anel, anel)}."
+        )
+
+    # Municipio conhecido e fora dos aneis: a pagina disse onde e, e o lugar
+    # simplesmente nao me serve. Isso e `remoto`, e nao `indefinida` - nao ha
+    # duvida nenhuma sobre onde fica.
+    return regioes.REMOTO, (
+        f"{nome} aparece como lotação na página do edital, "
+        f"e fica fora dos anéis de config/regioes.yml."
+    )
+
+
 def _aplicar_classificacao(destino, item: ItemColetado) -> None:
     """Aplica o que da para saber pelo TITULO, sem pisar em fonte melhor.
 
     Duas coisas o classificador nao encosta, porque vieram de onde se sabe
-    mais: o salario que eu digitei, e o municipio que saiu da pagina do
+    mais: o salario que eu digitei, e o MUNICIPIO que saiu da pagina do
     edital. Sem essa trava, um `radar reclassificar` desfazia o trabalho do
     `radar detalhar` - a SEFAZ SC voltava de `nucleo` para `indefinida`,
     porque "Concurso SEFAZ (SC)" nao tem municipio no titulo.
+
+    A trava para no municipio. O anel e o motivo sao CONTA feita em cima dele,
+    e conta se refaz: eles saem do `config/regioes.yml` de hoje, mesmo quando
+    o municipio veio da pagina.
     """
     resultado = classificar(item)
     destino.tipo = resultado.tipo
@@ -71,7 +100,18 @@ def _aplicar_classificacao(destino, item: ItemColetado) -> None:
     if not destino.salario_manual:
         destino.salario = resultado.salario
 
-    if not destino.municipio_confirmado:
+    if destino.municipio_confirmado:
+        # A trava protege o MUNICIPIO, e so ele: ele veio da pagina do edital,
+        # que sabe mais que o titulo. O anel e o motivo sao conta, e conta se
+        # refaz - com o `config/regioes.yml` de hoje.
+        #
+        # Protege-los junto era demais: tirar Blumenau do anel `proximo` nao
+        # mexia nos concursos cuja lotacao a pagina tinha confirmado, e eles
+        # ficavam `proximo` para sempre, com o motivo da regra antiga.
+        destino.relevancia, destino.motivo_relevancia = _anel_da_lotacao(
+            destino.municipio
+        )
+    else:
         destino.municipio = resultado.municipio
         destino.relevancia = resultado.relevancia
         destino.motivo_relevancia = resultado.motivo

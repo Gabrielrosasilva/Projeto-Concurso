@@ -234,7 +234,9 @@ def test_municipio_da_pagina_sobrevive_ao_reclassificar(banco_temporario):
         concurso = s.scalar(select(Concurso))
     assert concurso.municipio == "Florianópolis"
     assert concurso.relevancia == "nucleo"
-    assert "lotacao na pagina" in concurso.motivo_relevancia
+    # O motivo e recalculado, e continua dizendo de onde veio o municipio -
+    # e essa a informacao que me deixa auditar a classificacao depois.
+    assert "lotação na página do edital" in concurso.motivo_relevancia
 
 
 def test_municipio_do_titulo_continua_sendo_recalculado(banco_temporario):
@@ -301,3 +303,80 @@ def test_reclassificar_nao_perde_o_municipio_que_a_fonte_extraiu(banco_temporari
         concurso = s.scalar(select(Concurso))
     assert concurso.municipio == "São José"
     assert concurso.relevancia == "nucleo"
+
+
+def test_o_anel_do_municipio_confirmado_segue_o_regioes_yml(banco_temporario,
+                                                            monkeypatch):
+    """O caso Blumenau: tirar a cidade do anel `proximo` tem que mexer TAMBEM
+    nos concursos cuja lotacao a pagina do edital confirmou.
+
+    Antes disto a trava protegia municipio, anel e motivo juntos - e o
+    concurso confirmado ficava `proximo` para sempre, com o motivo da regra
+    antiga. A trava protege o municipio; o anel e conta, e conta se refaz.
+    """
+    from radar import regioes
+
+    _semear(_concurso(
+        "https://a.test/furb",
+        titulo="FURB SC divulga editais de seletivo",
+        uf="SC",
+        municipio="Blumenau",
+        municipio_confirmado=True,
+        relevancia="proximo",
+        motivo_relevancia="Blumenau aparece como lotacao na pagina.",
+    ))
+
+    # o regioes.yml de amanha, sem Blumenau em anel nenhum
+    monkeypatch.setattr(regioes, "anel_de", lambda m: None)
+
+    servico.reclassificar()
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.municipio == "Blumenau"          # a trava, intacta
+    assert concurso.relevancia == "remoto"           # a conta, refeita
+    assert "lotação na página do edital" in concurso.motivo_relevancia
+    assert "fora dos anéis" in concurso.motivo_relevancia
+
+
+def test_o_municipio_confirmado_volta_ao_anel_quando_eu_o_readmito(
+        banco_temporario):
+    """O contrario tambem: readmitir a cidade no YAML devolve o concurso ao
+    anel, sem precisar reler a pagina."""
+    _semear(_concurso(
+        "https://a.test/furb",
+        titulo="FURB SC divulga editais de seletivo",
+        uf="SC",
+        municipio="Blumenau",
+        municipio_confirmado=True,
+        relevancia="remoto",
+        motivo_relevancia="Blumenau ... fica fora dos anéis.",
+    ))
+
+    servico.reclassificar()
+
+    with sessao() as s:
+        concurso = s.scalar(select(Concurso))
+    assert concurso.relevancia == "proximo"
+    assert "está no anel próximo" in concurso.motivo_relevancia
+
+
+def test_o_motivo_do_confirmado_nunca_fica_sem_acento(banco_temporario):
+    """Os 34 concursos presos carregavam o motivo da regra antiga: eles so se
+    corrigem porque o motivo passou a ser recalculado."""
+    _semear(_concurso(
+        "https://a.test/sefaz",
+        titulo="Concurso SEFAZ (SC) abre 50 vagas",
+        uf="SC", municipio="Florianopolis", municipio_confirmado=True,
+        relevancia="nucleo",
+        motivo_relevancia="Florianopolis aparece como lotacao na pagina do "
+                          "edital, e esta no anel nucleo.",
+    ))
+
+    servico.reclassificar()
+
+    with sessao() as s:
+        motivo = s.scalar(select(Concurso)).motivo_relevancia
+    assert "esta no anel" not in motivo
+    assert motivo == ("Florianópolis aparece como lotação na página do "
+                      "edital, e está no anel núcleo.")

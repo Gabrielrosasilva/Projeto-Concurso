@@ -684,3 +684,21 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - reclassificar nao vai a internet e so reescreve campo derivado (relevancia,
   motivo, municipio canonico, marca de alvo). Os campos meus e o que a coleta
   trouxe nao sao tocados, entao rodar sempre sai barato e nao tem risco.
+
+## A trava do municipio confirmado protege o municipio, e so ele
+
+- **`municipio_confirmado` trava o MUNICIPIO; o anel e o motivo sao conta.**
+  A pagina do edital sabe mais que o titulo sobre ONDE o concurso e - essa e
+  a razao da trava, e ela continua. Mas em qual anel aquele municipio cai, e
+  por que, e conta feita em cima do `config/regioes.yml`, e conta se refaz;
+- protege-los junto era demais, e o caso que mostrou isso: tirando Blumenau
+  do anel `proximo`, os concursos cuja lotacao a pagina tinha confirmado
+  continuavam `proximo` - para sempre, porque nada os revisita. Ficavam 34
+  concursos presos na regra do dia em que a pagina foi lida;
+- **o motivo continua dizendo de onde veio o municipio** ("aparece como
+  lotação na página do edital"), porque e essa informacao que me deixa
+  auditar a classificacao depois. O que mudou e que ele passa a ser reescrito
+  com a regra de hoje, em vez de congelado;
+- a frase mora numa funcao so (`_anel_da_lotacao`), usada pelo `detalhar` e
+  pelo `reclassificar`. Duas copias da mesma frase divergem: foi assim que 34
+  registros ficaram sem acento enquanto 2.768 tinham sido corrigidos.

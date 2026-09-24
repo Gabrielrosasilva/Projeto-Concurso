@@ -100,6 +100,7 @@ from radar.servico.avisos import (      # noqa: F401 - a fachada
 )
 from radar.servico.coleta import (      # noqa: F401 - a fachada
     CAMPOS_CALCULADOS,
+    _anel_da_lotacao,
     CAMPOS_DA_FONTE,
     COLETORES,
     PAGINAS_POR_DIA,
@@ -457,14 +458,11 @@ def detalhar_pendentes(limite: int = 150) -> ResultadoDetalhe:
                 concurso.municipio = regioes.nome_canonico(achado.municipio)
                 # veio da pagina, que e fonte melhor que o titulo
                 concurso.municipio_confirmado = True
-                anel = regioes.anel_de(achado.municipio)
-                if anel:
-                    concurso.relevancia = anel
-                    concurso.motivo_relevancia = (
-                        f"{regioes.nome_canonico(achado.municipio)} aparece "
-                        f"como lotação na página do edital, e está no anel "
-                        f"{regioes.NOME_DO_ANEL.get(anel, anel)}."
-                    )
+                # A frase e a conta sao as mesmas do reclassificar: uma
+                # funcao so, para as duas nunca divergirem.
+                concurso.relevancia, concurso.motivo_relevancia = (
+                    _anel_da_lotacao(achado.municipio)
+                )
                 if concurso.relevancia != anel_antes:
                     resultado.reclassificados += 1
 
