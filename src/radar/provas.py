@@ -38,6 +38,12 @@ log = logging.getLogger(__name__)
 
 EDITAL, PROVA, GABARITO = "edital", "prova", "gabarito"
 
+# O gabarito que vale. O `?go=provas` publica o PROVISORIO - o que sai no dia
+# seguinte a prova, antes dos recursos - e e ele que o caderno traz embutido.
+# O definitivo, com as questoes anuladas e as letras trocadas, e anunciado na
+# lista de avisos da pagina inicial do hotsite, e so la.
+GABARITO_DEFINITIVO = "gabarito_definitivo"
+
 # Rotulos que descrevem o documento, e portanto NAO sao nome de cargo.
 ROTULOS_DE_DOCUMENTO = (
     "caderno de prova", "caderno", "gabarito", "prova escrita", "edital",
@@ -80,6 +86,10 @@ class Documento:
     sha256: str | None = None
     caminho: str | None = None      # onde ficou no disco
     tamanho: int | None = None
+    # Quando o hotsite anunciou o documento, no formato do manifesto
+    # (AAAA-MM-DD). So o gabarito definitivo precisa: uma retificacao dele
+    # substitui a versao anterior, e sem data nao ha como saber qual e qual.
+    publicado_em: str | None = None
 
     def chave(self) -> str:
         """O que identifica o documento. Usado para nao catalogar duas vezes."""
@@ -160,6 +170,72 @@ def ler_pagina_de_provas(html: str, base: str) -> list[Documento]:
             arquivo=dados["arquivo"],
             cargo=_cargo(dados["rotulos"]) if tipo == PROVA else None,
         ))
+
+    return documentos
+
+
+# Como o hotsite chama o gabarito que vale. O rotulo vem da propria pagina, e
+# cobre tambem "Anexo 01 - Retificacao do gabarito definitivo", que e o
+# formato em que a anulacao tardia de uma questao e publicada.
+ROTULO_DO_DEFINITIVO = "gabarito definitivo"
+
+# Prova de outra FASE do mesmo concurso, que tem gabarito definitivo proprio e
+# nao e a prova escrita: curso de formacao, prova de recuperacao, capacidade
+# fisica. O hotsite lista as tres junto com a que me interessa.
+OUTRAS_FASES = ("curso de formacao", "recuperacao", "prova teorica",
+                "capacidade fisica")
+
+# "13/12/2019 às 12:30" - a data do aviso, que fica na celula ao lado do link.
+DATA_DO_AVISO = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
+
+
+def ler_pagina_inicial(html: str, base: str) -> list[Documento]:
+    """Os gabaritos DEFINITIVOS anunciados na pagina inicial do hotsite.
+
+    Le por LINHA da tabela de avisos, e nao por link solto, porque a data fica
+    numa celula separada - o link e o dia em que ele foi publicado sao duas
+    colunas da mesma linha. E a data e o que decide qual gabarito vale quando
+    ha mais de um: em 2019 saiu o definitivo em 13/12, e em 23/01 do ano
+    seguinte uma retificacao dele, anulando mais uma questao.
+    """
+    sopa = BeautifulSoup(html, "lxml")
+    documentos: list[Documento] = []
+    vistos: set[str] = set()
+
+    for linha in sopa.find_all("tr"):
+        # So a linha de dentro. A pagina da FEPESE monta o layout inteiro com
+        # tabela dentro de tabela, e a linha de fora contem TODOS os avisos -
+        # a data que ela devolve e a do primeiro deles, nunca a do link certo.
+        if linha.find("tr") is not None:
+            continue
+
+        data = DATA_DO_AVISO.search(linha.get_text(" ", strip=True))
+        dia, mes, ano = data.groups() if data else (None, None, None)
+
+        for ancora in linha.find_all("a", href=True):
+            rotulo = _normalizar(ancora.get_text(" ", strip=True))
+            if ROTULO_DO_DEFINITIVO not in rotulo:
+                continue
+            # A prova escrita e a que me interessa; o curso de formacao e a
+            # recuperacao sao outras provas, com outro gabarito.
+            if any(fase in rotulo for fase in OUTRAS_FASES):
+                continue
+            if ".pdf" not in ancora["href"].lower():
+                continue
+
+            url = urljoin(base, ancora["href"])
+            if url in vistos:
+                continue
+            vistos.add(url)
+
+            nome = re.search(r"arquivo=([^&]+\.pdf)", ancora["href"], re.IGNORECASE)
+            documentos.append(Documento(
+                tipo=GABARITO_DEFINITIVO,
+                url=url,
+                arquivo=(nome.group(1) if nome
+                         else ancora["href"].rsplit("/", 1)[-1].split("?")[0]),
+                publicado_em=f"{ano}-{mes}-{dia}" if data else None,
+            ))
 
     return documentos
 

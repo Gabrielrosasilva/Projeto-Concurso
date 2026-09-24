@@ -25,6 +25,7 @@ dependencia do projeto desde a primeira fase.
 import json
 import logging
 import re
+import unicodedata
 from dataclasses import dataclass, field
 
 import requests
@@ -68,6 +69,25 @@ Responda SOMENTE um JSON, no formato:
 {"1": "Etica profissional", "2": "Politicas sociais"}"""
 
 
+# A instrucao muda inteira quando ha lista: de "invente um nome curto" para
+# "escolha um destes". E a diferenca entre um rotulo que so existe aqui dentro
+# e um que bate com o que o edital promete cobrar - e so o segundo serve para
+# eu comparar o que caiu com o que vai cair.
+INSTRUCAO_COM_LISTA = """Voce recebe questoes de concurso publico brasileiro, cada uma com um numero e a materia dela.
+
+Para cada questao, ESCOLHA o assunto dela na lista da materia daquela questao.
+
+Regras:
+- so vale assunto que esteja na lista da materia da propria questao;
+- copie o texto do assunto exatamente como esta escrito na lista: nao abrevie,
+  nao corrija, nao reescreva;
+- se nenhum assunto da lista servir para a questao, responda "indefinido";
+- nao explique, nao comente, nao repita a questao.
+
+Responda SOMENTE um JSON, no formato:
+{"1": "Ortografia oficial", "2": "indefinido"}"""
+
+
 @dataclass
 class Uso:
     """Quanto foi gasto de verdade, pelo que a propria API informou."""
@@ -95,31 +115,96 @@ class Resultado:
     falhas: int = 0
 
 
-def estimar(questoes: list) -> tuple[int, int, float]:
-    """(tokens de entrada, tokens de saida, custo em dolar) antes de gastar.
+def _sem_acento(texto: str) -> str:
+    normal = unicodedata.normalize("NFKD", texto or "")
+    return "".join(c for c in normal if not unicodedata.combining(c))
 
-    A conta de tokens usa a regra pratica de ~3,5 caracteres por token em
-    portugues. Serve para decidir se vale rodar, e nao para fechar conta.
+
+def _chave(texto: str) -> str:
+    """Como dois nomes de assunto (ou de materia) sao comparados.
+
+    Sem acento, sem caixa e sem espaco duplo: o modelo devolve o texto que a
+    lista mandou, mas nem sempre com a mesma pontuacao no fim.
     """
-    if not questoes:
-        return 0, 0, 0.0
-
-    lotes = max(1, -(-len(questoes) // POR_LOTE))
-    caracteres = sum(
-        len(q.enunciado[:LIMITE_DO_ENUNCIADO]) + 8 for q in questoes
-    )
-    entrada = int((caracteres + len(INSTRUCAO) * lotes) / 3.5)
-    saida = len(questoes) * 12
-    custo = entrada / 1e6 * PRECO_ENTRADA + saida / 1e6 * PRECO_SAIDA
-    return entrada, saida, custo
+    return re.sub(r"[^a-z0-9 ]", " ", _sem_acento(texto).lower()).strip()
 
 
-def _montar_pedido(questoes: list) -> str:
+def _lista_da_materia(permitidos: dict, materia: str | None) -> list[str]:
+    """Os assuntos que valem para essa materia, comparando sem acento."""
+    if not permitidos or not materia:
+        return []
+    procurado = _chave(materia)
+    for nome, itens in permitidos.items():
+        if _chave(nome) == procurado:
+            return list(itens)
+    return []
+
+
+def _catalogo(questoes: list, permitidos: dict) -> str:
+    """O trecho do pedido que lista os assuntos validos de cada materia.
+
+    So entram as materias das questoes DESTE lote: mandar o programa inteiro a
+    cada chamada seria pagar por 85 linhas para classificar 25 questoes de
+    duas materias.
+    """
+    materias: list[str] = []
+    for questao in questoes:
+        nome = questao.materia or ""
+        if nome and nome not in materias:
+            materias.append(nome)
+
+    blocos = []
+    for nome in materias:
+        itens = _lista_da_materia(permitidos, nome)
+        if itens:
+            blocos.append(f"{nome}:\n" + "\n".join(f"- {i}" for i in itens))
+    return "ASSUNTOS PERMITIDOS\n\n" + "\n\n".join(blocos) if blocos else ""
+
+
+def _montar_pedido(questoes: list, permitidos: dict | None = None) -> str:
+    if permitidos:
+        linhas = [
+            f"{numero}. [{q.materia or 'sem materia'}] "
+            f"{' '.join(q.enunciado[:LIMITE_DO_ENUNCIADO].split())}"
+            for numero, q in enumerate(questoes, start=1)
+        ]
+        catalogo = _catalogo(questoes, permitidos)
+        return f"{catalogo}\n\nQUESTOES\n\n" + "\n\n".join(linhas)
+
     linhas = [
         f"{numero}. {' '.join(q.enunciado[:LIMITE_DO_ENUNCIADO].split())}"
         for numero, q in enumerate(questoes, start=1)
     ]
     return "\n\n".join(linhas)
+
+
+def estimar(questoes: list, permitidos: dict | None = None) -> tuple[int, int, float]:
+    """(tokens de entrada, tokens de saida, custo em dolar) antes de gastar.
+
+    A conta de tokens usa a regra pratica de ~3,5 caracteres por token em
+    portugues. Serve para decidir se vale rodar, e nao para fechar conta.
+
+    Com lista de assuntos o pedido cresce: alem da instrucao, cada lote leva a
+    lista das materias que aparecem nele. A conta soma lote por lote porque e
+    assim que o gasto acontece - um lote so de Portugues nao paga pela lista
+    de Direito Penal.
+    """
+    if not questoes:
+        return 0, 0, 0.0
+
+    instrucao = INSTRUCAO_COM_LISTA if permitidos else INSTRUCAO
+    caracteres = len(instrucao) * max(1, -(-len(questoes) // POR_LOTE))
+    for inicio in range(0, len(questoes), POR_LOTE):
+        lote = questoes[inicio:inicio + POR_LOTE]
+        caracteres += len(_montar_pedido(lote, permitidos))
+
+    entrada = int(caracteres / 3.5)
+    # A resposta com lista e mais comprida: o modelo copia o texto do edital
+    # inteiro ("Regras minimas da ONU para o tratamento de pessoas presas"),
+    # em vez de escrever duas palavras.
+    saida = len(questoes) * (40 if permitidos else 12)
+    custo = entrada / 1e6 * PRECO_ENTRADA + saida / 1e6 * PRECO_SAIDA
+    return entrada, saida, custo
 
 
 def _ler_resposta(texto: str, quantas: int) -> dict[int, str]:
@@ -143,13 +228,46 @@ def _ler_resposta(texto: str, quantas: int) -> dict[int, str]:
             numero = int(str(chave).strip())
         except ValueError:
             continue
-        rotulo = " ".join(str(valor).split())[:120]
+        # 200 porque o assunto agora pode ser a linha do edital inteira - a
+        # LC 529/2011 do programa de 2019 tem 126 caracteres.
+        rotulo = " ".join(str(valor).split())[:200]
         if 1 <= numero <= quantas and rotulo:
             lido[numero] = rotulo
     return lido
 
 
-def classificar_lote(questoes: list, chave: str, sessao=None) -> tuple[dict, int, int]:
+def _so_o_que_esta_na_lista(
+    questoes: list, lido: dict[int, str], permitidos: dict
+) -> dict[int, str]:
+    """Descarta o que o modelo respondeu fora da lista da materia.
+
+    A instrucao ja manda escolher dentro da lista, e este e o lugar onde isso
+    para de ser pedido e vira garantia. Com o texto conferido aqui, o assunto
+    que chega ao banco e sempre o do edital - palavra por palavra, inclusive
+    a caixa e o acento que a lista usa.
+
+    Resposta fora da lista vira "nao sei", e nao um assunto novo: um rotulo
+    inventado no meio dos do edital seria pior do que a questao ficar sem
+    assunto nenhum, porque eu nao teria como distinguir os dois na tela.
+    """
+    escolhidos: dict[int, str] = {}
+    for numero, resposta in lido.items():
+        questao = questoes[numero - 1]
+        oficiais = {
+            _chave(item): item
+            for item in _lista_da_materia(permitidos, questao.materia)
+        }
+        certo = oficiais.get(_chave(resposta))
+        if certo:
+            escolhidos[numero] = certo
+        else:
+            log.info("assunto fora da lista descartado: %r", resposta)
+    return escolhidos
+
+
+def classificar_lote(
+    questoes: list, chave: str, sessao=None, permitidos: dict | None = None
+) -> tuple[dict, int, int]:
     """Manda um lote e devolve ({id da questao: assunto}, entrada, saida)."""
     sessao = sessao or requests.Session()
     resposta = sessao.post(
@@ -161,9 +279,12 @@ def classificar_lote(questoes: list, chave: str, sessao=None) -> tuple[dict, int
         },
         json={
             "model": MODELO,
-            "max_tokens": 40 * len(questoes) + 200,
-            "system": INSTRUCAO,
-            "messages": [{"role": "user", "content": _montar_pedido(questoes)}],
+            # Com lista, a resposta copia o texto do edital e ocupa mais.
+            "max_tokens": (60 if permitidos else 40) * len(questoes) + 300,
+            "system": INSTRUCAO_COM_LISTA if permitidos else INSTRUCAO,
+            "messages": [
+                {"role": "user", "content": _montar_pedido(questoes, permitidos)}
+            ],
         },
         timeout=config.TIMEOUT_REQUISICAO * 3,
     )
@@ -175,13 +296,15 @@ def classificar_lote(questoes: list, chave: str, sessao=None) -> tuple[dict, int
     )
     uso = corpo.get("usage") or {}
     lido = _ler_resposta(texto, len(questoes))
-
-    # O numero do pedido volta para o id da questao no banco.
-    por_id = {
-        questoes[numero - 1].id: assunto
-        for numero, assunto in lido.items()
+    lido = {
+        numero: assunto for numero, assunto in lido.items()
         if assunto.lower() != "indefinido"
     }
+    if permitidos:
+        lido = _so_o_que_esta_na_lista(questoes, lido, permitidos)
+
+    # O numero do pedido volta para o id da questao no banco.
+    por_id = {questoes[numero - 1].id: assunto for numero, assunto in lido.items()}
     return por_id, uso.get("input_tokens", 0), uso.get("output_tokens", 0)
 
 
@@ -190,6 +313,7 @@ def classificar(
     chave: str,
     teto_em_dolar: float = 1.0,
     sessao=None,
+    permitidos: dict | None = None,
 ) -> Resultado:
     """Classifica as questoes em lotes, parando ao chegar no teto de gasto.
 
@@ -207,7 +331,9 @@ def classificar(
 
         lote = questoes[inicio:inicio + POR_LOTE]
         try:
-            classificados, entrada, saida = classificar_lote(lote, chave, sessao)
+            classificados, entrada, saida = classificar_lote(
+                lote, chave, sessao, permitidos
+            )
         except Exception as erro:  # noqa: BLE001 - API fora do ar e rotina
             log.warning("lote falhou (%s)", type(erro).__name__)
             resultado.falhas += 1

@@ -816,3 +816,78 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   que ninguem fez: o que eu sei e que nada apareceu. Entre dois concursos da
   mesma cidade, ganha o que nao esta encerrado - uma noticia de ontem sobre a
   edicao velha nao pode esconder a inscricao que esta aberta.
+
+## O caderno da FEPESE traz o gabarito PROVISORIO
+
+- **o caderno de prova marca a alternativa certa dentro do proprio PDF**, e
+  era de la que o acervo tirava o gabarito. So que esse arquivo e publicado no
+  dia seguinte a prova, **antes dos recursos**. No concurso de 2019 o
+  definitivo **anulou 5 questoes e trocou a letra de outras 4**, em 100 -
+  treinar pelo caderno era marcar como erro 4 respostas certas minhas e
+  perseguir 5 questoes que nao tem resposta;
+- **o definitivo nao esta em `?go=provas`**, que e a pagina que o acervo lia.
+  Ele e anunciado na lista de avisos da **capa** do hotsite, e por isso a capa
+  virou a terceira pagina lida por concurso. O que entra dali e so o link cujo
+  rotulo diz "gabarito definitivo", fora os de outra fase (curso de formacao,
+  recuperacao, capacidade fisica), que sao outra prova;
+- **a data do aviso vem da celula ao lado do link, e ela decide qual vale**: em
+  2019 saiu o definitivo em 13/12 e, em 23/01 do ano seguinte, a retificacao
+  que anulou a questao 33. Aplicando na ordem da data, o ultimo e o que fica -
+  e a retificacao tambem DESmarca anulacao, para uma questao que voltasse nao
+  ficar anulada para sempre;
+- **um PDF traz varios cargos.** O de 2013 tem "AP - Agente Penitenciario" e
+  "AS - Agente de Seguranca Socioeducativo", cada um numerado de 1 a 70: lidos
+  juntos viravam uma grade de 73 questoes que nao era de cargo nenhum. O que
+  separa as duas e a numeracao voltar ao 1;
+- **grade que nao passa nas tres conferencias e ignorada em silencio**: mesmo
+  numero de questoes, e a sigla batendo com o nome do caderno (AP -> AP.pdf)
+  ou o cargo aparecendo no cargo do caderno. Aplicar a grade do cargo errado
+  trocaria as 100 respostas de uma vez, e ficar com o provisorio e menos pior;
+- **a correcao e aplicada na LEITURA do caderno, e nao no banco.** Assim ela
+  vale tambem quando eu refaco a extracao do zero, em vez de ser um conserto
+  que se perde na proxima vez;
+- **questao anulada nao conta em lugar nenhum**: nem no treino (ela ficou sem
+  resposta), nem na incidencia, nem na cobertura, nem na fila da classificacao
+  paga. A banca desfez a pergunta;
+- **`radar provas --revisitar`** existe por causa disto. A regra antiga era
+  "concurso que ja esta no acervo nao e lido de novo", e ela parte de que o
+  hotsite nao muda depois da prova - o que e falso: o gabarito definitivo saiu
+  dias depois do caderno, e a retificacao um mes depois disso.
+
+## O assunto do meu cargo sai do conteudo programatico do edital
+
+- **a IA escolhe dentro de uma lista, em vez de inventar um nome.** A lista sai
+  do ANEXO 1 do edital de 2019 - 85 assuntos em 11 materias - e o que vem fora
+  dela e descartado no proprio codigo, e nao so pedido na instrucao. Rotulo
+  inventado no meio dos do edital seria pior do que a questao ficar sem
+  assunto: eu nao distinguiria os dois na tela;
+- **o texto e o do edital, defeitos inclusive.** Ele escreveu "Acao penal;
+  especies", e por isso "especies" aparece sozinho na lista; escreveu "Decreto
+  º 7.037/2009" sem o "n", e assim fica. Consertar na mao seria eu decidindo o
+  que a banca quis dizer - e o nome so serve se for o mesmo que o edital usa;
+- **o anexo exige o outro modo de extracao do pypdf.** No modo normal o texto
+  justificado volta com espaco no meio das palavras ("cidad ania", "envol
+  vendo", "desp orto"), e assunto com palavra partida nao serve para nada. Por
+  isso `extrair_texto` ganhou `layout=True`, usado so aqui;
+- **onde um assunto acaba**: no ponto-e-virgula sempre, e no ponto so quando o
+  proximo comeca com maiuscula ou numero. As duas excecoes sao do proprio
+  edital - "Lei n.º 7.210" tem tres pontos dentro e e um assunto so, e
+  "Processos. dos crimes de responsabilidade" tem um ponto que e engano dele;
+- **`--so-alvo` classifica so as questoes das minhas provas**: 99 em vez de
+  2.802, US$ 0,03 em vez de US$ 0,40. Nao e economia pela economia - assunto
+  fino de prova de Merendeira e da mesma banca e nao me serve de nada. Materia
+  que saiu do programa entre uma edicao e outra tambem fica de fora: 2013
+  cobrou Direito Administrativo e Nocoes de Informatica, e sem lista em que
+  escolher pagar seria pagar por "indefinido";
+- **Portugues e Raciocinio Logico continuam de graca**, pelo catalogo de
+  palavras-chave. Eles cobrem 83% e 44% das minhas questoes sem gastar nada;
+- **o assunto pago vira `data/assuntos.json`, versionado**, chaveado pela
+  impressao do enunciado. Era o unico dado do projeto que custou dinheiro e
+  morava so no banco local: refazer o banco, ou trocar de computador, e eu
+  pagaria de novo pela mesma questao. A chave e a impressao, e nao o id -
+  o id muda quando o banco e reconstruido, e a mesma pergunta aparece em
+  varios cadernos. Ele entra no `exportar`, no `importar` e no `sincronizar`,
+  como os outros dois;
+- **a coluna `assunto` passou de 120 para 200 caracteres.** O nome agora e a
+  linha do edital, e a LC 529/2011 do programa de 2019 tem 126. No SQLite o
+  tamanho nao e cobrado; em Postgres a coluna precisa ser recriada a mao.

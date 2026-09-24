@@ -265,13 +265,21 @@ class QuestaoDeProva(Base):
     alternativas: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     resposta: Mapped[str | None] = mapped_column(String(1), nullable=True)
 
+    # A banca anulou a questao depois dos recursos: ela nao tem resposta certa
+    # e nao entra em conta nenhuma. Sai do gabarito DEFINITIVO, que o caderno
+    # nao conhece - o PDF do caderno traz o provisorio embutido.
+    anulada: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+
     # Hash do enunciado. Questao repetida entre provas e o padrao mais forte
     # que existe, e e por aqui que se acha.
     impressao: Mapped[str] = mapped_column(String(32), index=True)
 
-    # Assunto fino dentro da materia ("Direito Penal", "Primeiros Socorros").
-    # Vazio por enquanto: e o passo seguinte da fase 4.
-    assunto: Mapped[str | None] = mapped_column(String(120), index=True, nullable=True)
+    # Assunto fino dentro da materia. Quando a prova e a do meu cargo, o nome
+    # vem do CONTEUDO PROGRAMATICO do edital, e por isso ele e comprido: "Lei
+    # Complementar n.o 529 de 17 de dezembro de 2011 (Regimento Interno dos
+    # estabelecimentos penais do Estado de Santa Catarina)" tem 126 caracteres,
+    # e encurtar seria eu reescrevendo o edital.
+    assunto: Mapped[str | None] = mapped_column(String(200), index=True, nullable=True)
 
     extraida_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
 

@@ -382,6 +382,8 @@ radar repetidas             # as questoes que a banca mais reaproveita
 radar parecidas "Guarda Municipal" --banca FEPESE
 radar parecidas "Policial Penal"   # acha o cargo pelo nome antigo tambem
 radar assuntos              # SIMULA o assunto fino; --valendo gasta de verdade
+radar assuntos --so-alvo    # so as minhas provas, escolhendo na lista do edital
+radar cobertura             # quantas questoes ja tem assunto, por materia
 ```
 
 **Avisos e calendario**
@@ -521,6 +523,53 @@ padrao**: sem `--valendo` nao gasta nada. A chave vai em `RADAR_ANTHROPIC_KEY`,
 no `.env`, como o token do Telegram — nunca no codigo. O passo a passo esta em
 **COMO_LIGAR_A_IA.txt**.
 
+Com `--so-alvo` sao duas mudancas, e as duas importam:
+
+- entram so as questoes das provas do **meu cargo no meu estado** — 99 em vez
+  de 2.802, US$ 0,03 em vez de US$ 0,40. Assunto fino de prova de Merendeira e
+  da mesma banca e nao me serve de nada;
+- a IA **escolhe** o assunto dentro do **conteudo programatico do edital** (85
+  assuntos em 11 materias, lidos do ANEXO 1 de 2019) em vez de inventar um
+  nome. O que vier fora da lista e descartado, e nao gravado como assunto novo.
+
+Portugues e Raciocinio Logico **nao entram na conta paga**: eles continuam
+saindo do catalogo de palavras-chave, de graca, e ja cobrem 83% e 44% das
+minhas questoes.
+
+O que foi pago vai para **`data/assuntos.json`**, que e versionado e entra no
+`exportar`, no `importar` e no `sincronizar` como os outros dois. A chave e a
+impressao do enunciado: refazer o banco, ou trocar de computador, nao faz eu
+pagar de novo pela mesma questao.
+
+`radar cobertura` mostra quanto de cada materia ja tem assunto, com a coluna
+dizendo de onde ele veio — catalogo (de graca), edital (pago), ou "fora do
+programa de hoje", que e a materia que a edicao de 2013 cobrava e a de 2019
+nao cobra mais.
+
+### O gabarito que vale e o definitivo
+
+O caderno de prova da FEPESE marca a alternativa certa dentro do proprio PDF, e
+e de la que o acervo tira o gabarito. Mas esse arquivo e publicado no dia
+seguinte a prova, **antes dos recursos**: ele carrega o gabarito **provisorio**.
+
+No concurso de 2019 da Policia Penal SC o definitivo **anulou 5 questoes**
+(11, 22, 33, 63 e 100) e **trocou a letra de outras 4** (66, 68, 82 e 87).
+Treinar pelo caderno era marcar como erro quatro respostas certas e perseguir
+cinco questoes que nao tem resposta.
+
+O definitivo nao esta na pagina de provas do hotsite — ele e anunciado na lista
+de avisos da **capa**, e por isso `radar provas` le tres paginas por concurso
+em vez de duas. Como ele sai depois do caderno, existe o **`--revisitar`**:
+
+```bash
+radar provas --revisitar    # le de novo hotsite que ja esta no acervo
+radar questoes --refazer    # aplica o gabarito definitivo por cima
+```
+
+A questao anulada fica **marcada e fora de tudo**: nao entra no treino (ficou
+sem resposta certa), nem na incidencia, nem na cobertura, nem na fila da
+classificacao paga.
+
 ### O calendario no celular
 
 `radar calendario` grava o `radar.ics`; na web, o link **Calendario** abre a
@@ -560,10 +609,12 @@ src/radar/
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
+├── gabarito.py     o gabarito definitivo, e as questoes anuladas
 ├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
 ├── foco.py         a situacao do alvo principal, para a pagina inicial
 ├── acompanhando.py os favoritos: linha do tempo, proxima acao, fila de aviso
 ├── edital_materias.py  o quadro de distribuicao de questoes do edital
+├── edital_programa.py  o conteudo programatico: o que cai em cada materia
 ├── classificador.py  tipo, municipio, salario, relevancia e alvo, pelo titulo
 ├── avisos.py       monta e manda a mensagem no Telegram
 ├── detalhes.py     le a pagina do post: prazo, banca e municipio de lotacao

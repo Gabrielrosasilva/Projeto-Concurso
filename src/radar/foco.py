@@ -24,7 +24,7 @@ from pathlib import Path
 from sqlalchemy import func, select
 
 from radar import alvo as alvos
-from radar import config, edital_materias, provas
+from radar import config, edital_materias, edital_programa, provas
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
 from radar.models import Concurso, QuestaoDeProva
@@ -373,6 +373,10 @@ class EditalLido:
     total: int = 0
     ano: int | None = None
     validade: str | None = None
+    #: {materia: [assunto que o edital promete cobrar, ...]}. E o que o
+    #: `radar assuntos --so-alvo` deixa a IA escolher, para ela nunca
+    #: inventar nome de assunto.
+    programa: dict = field(default_factory=dict)
 
 
 ARQUIVO_DO_EDITAL_LIDO = "edital_do_alvo.json"
@@ -440,9 +444,31 @@ def _ler_edital(concurso: Concurso | None) -> EditalLido:
         total=edital_materias.total_de_questoes(materias),
         ano=ano,
         validade=_validade_no_texto(texto),
+        # O anexo de programas e lido do MESMO arquivo, e por isso entra
+        # aqui: e mais uma pergunta respondida pela unica abertura do PDF.
+        # Ele exige o outro modo de extracao, entao vai pelo caminho proprio.
+        programa=edital_programa.ler_programa_do_pdf(caminho),
     )
     _guardar_edital(registro, lido)
     return lido
+
+
+def programa_do_alvo() -> dict[str, list[str]]:
+    """{materia: [assunto que o edital promete cobrar]} da ultima edicao.
+
+    E a lista que o `radar assuntos --so-alvo` entrega para a IA escolher.
+    Sem ela a classificacao paga inventava o nome do assunto, e o nome
+    inventado nao se encontra com nada: o edital diz "Regras minimas da ONU
+    para o tratamento de pessoas presas", e nenhum modelo chega nessa
+    formulacao sozinho.
+
+    Devolve {} quando nao ha edital no acervo - e quem chama nao classifica,
+    em vez de deixar a IA escolher por conta propria.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        concursos = _concursos_do_alvo(s)
+    return _ler_edital(_edital_com_prova(concursos)).programa
 
 
 def _caminho_do_edital_lido() -> Path:
@@ -467,6 +493,12 @@ def _edital_guardado(sha256: str | None) -> EditalLido | None:
         guardado = json.loads(arquivo.read_text(encoding="utf-8"))
         if guardado.get("sha256") != sha256:
             return None
+        # Guardado por uma versao que ainda nao lia o anexo de programas: o
+        # PDF e o mesmo, mas a resposta que eu preciso nao esta ali. Edital
+        # sem programa nenhum grava `{}`, entao a chave existir ja diz que a
+        # leitura foi feita.
+        if "programa" not in guardado:
+            return None
         materias = [
             edital_materias.MateriaDoEdital(nome=m["nome"], questoes=m["questoes"])
             for m in guardado.get("materias") or []
@@ -481,6 +513,7 @@ def _edital_guardado(sha256: str | None) -> EditalLido | None:
         # seria numero orfao, e o quadro so vale quando fecha a conta.
         total=edital_materias.total_de_questoes(materias),
         validade=guardado.get("validade"),
+        programa=guardado.get("programa") or {},
     )
 
 
@@ -501,6 +534,7 @@ def _guardar_edital(registro: dict, lido: EditalLido) -> None:
             {"nome": m.nome, "questoes": m.questoes} for m in lido.materias
         ],
         "validade": lido.validade,
+        "programa": lido.programa,
     }
     try:
         _caminho_do_edital_lido().write_text(
@@ -592,6 +626,10 @@ def _incidencia_do_cargo(s, provas_do_alvo: set[str]) -> tuple[dict, list[int]]:
         .where(QuestaoDeProva.prova_url.in_(provas_do_alvo))
         .where(QuestaoDeProva.materia.is_not(None))
         .where(QuestaoDeProva.ano.is_not(None))
+        # Questao anulada nao conta: a banca disse que ela nao existe. O
+        # `is_not(True)` e por causa das linhas antigas, que ficaram com nulo
+        # ate a coluna nova ser preenchida.
+        .where(QuestaoDeProva.anulada.is_not(True))
         .group_by(QuestaoDeProva.materia, QuestaoDeProva.ano)
     ).all()
 
@@ -678,6 +716,8 @@ def _contar_questoes_do_alvo(s, provas_do_alvo: set[str]) -> int:
         select(func.count())
         .select_from(QuestaoDeProva)
         .where(QuestaoDeProva.prova_url.in_(provas_do_alvo))
+        # Anulada nao da para treinar: ela ficou sem resposta certa.
+        .where(QuestaoDeProva.anulada.is_not(True))
     ) or 0
 
 

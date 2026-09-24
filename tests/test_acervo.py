@@ -402,3 +402,119 @@ def test_o_meu_aviso_nao_e_apagado_pelo_JSON(banco_temporario, tmp_path):
 def test_sem_arquivo_de_eventos_nao_quebra(banco_temporario, tmp_path):
     """Quem atualiza de uma versao sem eventos.json roda o importar normal."""
     assert acervo.importar_eventos(tmp_path / "nao-existe.json") == 0
+
+
+# --- o assunto pago tambem e versionado (etapa 14) -------------------------
+#
+# Este e o unico dado do projeto que custou dinheiro. Ate a etapa 14 ele
+# morava so no banco local: refazer o banco, ou trocar de computador, e eu
+# pagaria de novo pela mesma questao.
+
+def _questao_com_assunto(numero: int, **mudancas):
+    from radar.models import QuestaoDeProva
+
+    base = dict(
+        prova_url="https://x.test/ap.pdf",
+        banca="FEPESE",
+        ano=2019,
+        cargo="Agente Penitenciário",
+        numero=numero,
+        materia="Direitos Humanos",
+        enunciado=f"Questao {numero}?",
+        alternativas={"a": "um"},
+        resposta="a",
+        impressao=f"imp{numero}",
+        assunto="Teoria geral dos direitos humanos",
+    )
+    base.update(mudancas)
+    return QuestaoDeProva(**base)
+
+
+def test_exporta_o_assunto_por_impressao(banco_temporario, tmp_path):
+    """A chave e a impressao do enunciado, e nao o id: o id muda quando o
+    banco e reconstruido, e a mesma pergunta aparece em varios cadernos."""
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_questao_com_assunto(1))
+        s.add(_questao_com_assunto(2, assunto=None))
+
+    destino = tmp_path / "assuntos.json"
+    assert acervo.exportar_assuntos(destino) == 1
+
+    linhas = json.loads(destino.read_text(encoding="utf-8"))
+    assert linhas[0]["impressao"] == "imp1"
+    assert linhas[0]["assunto"] == "Teoria geral dos direitos humanos"
+
+
+def test_importar_devolve_o_assunto_ao_banco_refeito(banco_temporario, tmp_path):
+    """O caso que o arquivo existe para resolver: o banco foi refeito do zero
+    e as questoes voltaram sem assunto nenhum."""
+    from sqlalchemy import select
+
+    from radar.db import sessao
+    from radar.models import QuestaoDeProva
+
+    destino = tmp_path / "assuntos.json"
+    destino.write_text(
+        json.dumps([{
+            "impressao": "imp1",
+            "assunto": "Teoria geral dos direitos humanos",
+            "materia": "Direitos Humanos",
+        }]),
+        encoding="utf-8",
+    )
+    with sessao() as s:
+        s.add(_questao_com_assunto(1, assunto=None))
+
+    assert acervo.importar_assuntos(destino) == 1
+
+    with sessao() as s:
+        questao = s.scalar(select(QuestaoDeProva))
+    assert questao.assunto == "Teoria geral dos direitos humanos"
+
+
+def test_o_assunto_pago_vale_para_todas_as_copias(banco_temporario, tmp_path):
+    """Uma classificacao paga rotula todas as copias daquela pergunta, como ja
+    acontece na hora de gravar."""
+    from sqlalchemy import select
+
+    from radar.db import sessao
+    from radar.models import QuestaoDeProva
+
+    destino = tmp_path / "assuntos.json"
+    destino.write_text(
+        json.dumps([{"impressao": "igual", "assunto": "Tortura"}]),
+        encoding="utf-8",
+    )
+    with sessao() as s:
+        s.add(_questao_com_assunto(1, impressao="igual", assunto=None))
+        s.add(_questao_com_assunto(2, impressao="igual", assunto=None,
+                                   prova_url="https://x.test/outra.pdf"))
+
+    assert acervo.importar_assuntos(destino) == 2
+
+    with sessao() as s:
+        assuntos = {q.assunto for q in s.scalars(select(QuestaoDeProva))}
+    assert assuntos == {"Tortura"}
+
+
+def test_sem_arquivo_nao_quebra(banco_temporario, tmp_path):
+    assert acervo.importar_assuntos(tmp_path / "nao-existe.json") == 0
+
+
+def test_exportar_e_importar_da_no_mesmo(banco_temporario, tmp_path):
+    """Rodar duas vezes tem que dar o mesmo resultado, como nos outros dois."""
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_questao_com_assunto(1))
+
+    destino = tmp_path / "assuntos.json"
+    acervo.exportar_assuntos(destino)
+    primeiro = destino.read_text(encoding="utf-8")
+
+    acervo.importar_assuntos(destino)
+    acervo.exportar_assuntos(destino)
+
+    assert destino.read_text(encoding="utf-8") == primeiro

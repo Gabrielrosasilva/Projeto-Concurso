@@ -24,6 +24,7 @@ from radar import alvo as alvos
 from radar import assuntos as classificador_de_assunto
 from radar import config
 from radar import edital_ieses, macetes, substituta
+from radar import gabarito as gabarito_oficial
 from radar import provas as arquivos_de_prova
 from radar import provas_ieses
 from radar import questoes as leitor_de_questoes
@@ -102,15 +103,24 @@ PRIORIDADE_ACERVO = (
 )
 
 
-def _concursos_com_prova(limite: int, abertos: bool = False) -> list[Concurso]:
+def _concursos_com_prova(
+    limite: int, abertos: bool = False, revisitar: bool = False
+) -> list[Concurso]:
     """Quem ainda nao esta no acervo, na ordem de prioridade.
 
     O manifesto e a memoria: concurso cuja url ja aparece la nao e lido de
     novo. Assim nao precisa de coluna no banco so para marcar isso.
+
+    Com `revisitar`, a memoria e ignorada de proposito. Ela parte de que o
+    hotsite nao muda depois da prova, e isso e falso: o gabarito DEFINITIVO do
+    concurso de 2019 foi publicado dias depois do caderno, e a retificacao
+    dele um mes depois disso. Documento novo em concurso velho so aparece
+    passando por cima de novo.
     """
-    ja_no_acervo = {
-        r.get("concurso_url") for r in arquivos_de_prova.carregar_manifesto()
-    }
+    ja_no_acervo = (
+        set() if revisitar
+        else {r.get("concurso_url") for r in arquivos_de_prova.carregar_manifesto()}
+    )
 
     escolhidos: list[Concurso] = []
     with sessao() as s:
@@ -178,10 +188,24 @@ def _documentos_do_hotsite(
                   else arquivos_de_prova.ler_pagina_de_edital)
         encontrados.extend(leitor(html, hotsite + "/"))
 
+    # A pagina inicial e a terceira, e ela existe por um motivo so: o gabarito
+    # DEFINITIVO nao esta em `?go=provas`. La fica o provisorio, publicado no
+    # dia seguinte a prova; o definitivo, com as questoes anuladas e as letras
+    # trocadas, e anunciado na lista de avisos da capa.
+    try:
+        capa = buscador.get(hotsite + "/").text
+    except Exception as erro:  # noqa: BLE001 - hotsite fora do ar e rotina
+        log.warning("hotsite %s, capa: %s", hotsite, type(erro).__name__)
+        resultado.falhas += 1
+    else:
+        encontrados.extend(arquivos_de_prova.ler_pagina_inicial(capa, hotsite + "/"))
+
     return encontrados
 
 
-def montar_acervo(limite: int = 20, abertos: bool = False) -> ResultadoAcervo:
+def montar_acervo(
+    limite: int = 20, abertos: bool = False, revisitar: bool = False
+) -> ResultadoAcervo:
     """Le os hotsites e baixa edital, prova e gabarito.
 
     Uma requisicao por pagina do hotsite e uma por PDF, todas com a pausa da
@@ -191,7 +215,7 @@ def montar_acervo(limite: int = 20, abertos: bool = False) -> ResultadoAcervo:
     criar_tabelas()
     resultado = ResultadoAcervo()
 
-    escolhidos = _concursos_com_prova(limite, abertos)
+    escolhidos = _concursos_com_prova(limite, abertos, revisitar)
     if not escolhidos:
         return resultado
 
@@ -224,7 +248,8 @@ def montar_acervo(limite: int = 20, abertos: bool = False) -> ResultadoAcervo:
 
             if baixado.tipo == arquivos_de_prova.PROVA:
                 resultado.provas += 1
-            elif baixado.tipo == arquivos_de_prova.GABARITO:
+            elif baixado.tipo in (arquivos_de_prova.GABARITO,
+                                  arquivos_de_prova.GABARITO_DEFINITIVO):
                 resultado.gabaritos += 1
             else:
                 resultado.editais += 1
@@ -347,10 +372,72 @@ def _caminho(registro: dict | None) -> Path | None:
     return caminho if caminho.exists() else None
 
 
+def _definitivos_do_concurso(registro: dict) -> list[dict]:
+    """Os gabaritos definitivos do mesmo concurso, do mais velho ao mais novo.
+
+    A ordem e a data de publicacao porque cada um substitui o anterior: em
+    2019 saiu o definitivo em 13/12 e, em 23/01 do ano seguinte, a retificacao
+    que anulou mais uma questao. Aplicando na ordem, o ultimo e o que fica.
+    """
+    return sorted(
+        (
+            r for r in arquivos_de_prova.carregar_manifesto()
+            if r.get("concurso_url") == registro.get("concurso_url")
+            and r.get("tipo") == arquivos_de_prova.GABARITO_DEFINITIVO
+            and r.get("caminho")
+        ),
+        key=lambda r: r.get("publicado_em") or "",
+    )
+
+
+def _aplicar_gabarito_definitivo(registro: dict, lidas: list) -> None:
+    """Poe o gabarito que VALE por cima do que veio no caderno.
+
+    O caderno da FEPESE traz a resposta marcada dentro do PDF, e e comodo -
+    mas ele e publicado no dia seguinte a prova, antes dos recursos. E o
+    gabarito PROVISORIO. No concurso de 2019 o definitivo anulou 5 questoes e
+    trocou a letra de outras 4, em 100: treinar pelo caderno significava
+    marcar como erro 4 respostas certas minhas e perseguir 5 questoes que nao
+    tem resposta.
+
+    Grade que nao passa em `e_deste_caderno` e ignorada em silencio, e isso e
+    de proposito: aplicar a grade do cargo errado trocaria as 100 respostas de
+    uma vez, e ficar com o provisorio e menos pior do que isso.
+    """
+    for gabarito in _definitivos_do_concurso(registro):
+        caminho = _caminho(gabarito)
+        if not caminho:
+            continue
+
+        # Um PDF traz a grade de varios cargos; a minha e a que passa nas tres
+        # conferencias de `e_deste_caderno`.
+        minha = next(
+            (
+                grade for grade in gabarito_oficial.ler_grades_do_pdf(caminho)
+                if gabarito_oficial.e_deste_caderno(
+                    grade, registro.get("cargo"),
+                    registro.get("arquivo") or "", len(lidas),
+                )
+            ),
+            None,
+        )
+        if minha is None:
+            continue
+
+        trocadas, anuladas = gabarito_oficial.aplicar(lidas, minha)
+        log.info(
+            "gabarito definitivo %s: %d resposta(s) trocada(s), %d anulada(s)",
+            gabarito.get("arquivo"), trocadas, anuladas,
+        )
+
+
 def _ler_caderno(registro: dict, caminho: Path) -> list:
     """As questoes de um caderno. Cada banca imprime o dela de um jeito."""
     if (registro.get("banca") or "").upper() != "IESES":
-        return leitor_de_questoes.ler_prova(caminho)
+        lidas = leitor_de_questoes.ler_prova(caminho)
+        if lidas:
+            _aplicar_gabarito_definitivo(registro, lidas)
+        return lidas
 
     gabarito_registro, edital_registro = _companheiros(registro)
 
@@ -435,6 +522,7 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
                 destino.enunciado = questao.enunciado
                 destino.alternativas = questao.alternativas
                 destino.resposta = questao.resposta
+                destino.anulada = questao.anulada
                 destino.impressao = questao.impressao
 
                 if existente is None:
@@ -457,6 +545,9 @@ def incidencia_por_materia(
     criar_tabelas()
     consulta = (
         select(QuestaoDeProva.materia, func.count())
+        # Questao anulada nao conta como questao cobrada: a propria banca
+        # desfez a pergunta depois dos recursos.
+        .where(QuestaoDeProva.anulada.is_not(True))
         .group_by(QuestaoDeProva.materia)
         .order_by(func.count().desc())
     )
@@ -669,32 +760,64 @@ def recado_sobre_o_cargo(cargo: str, parecidas: list) -> str:
 
 # --- assunto fino da questao (fase 4) ---------------------------------------
 
-def questoes_sem_assunto(limite: int | None = None) -> list[QuestaoDeProva]:
+def questoes_sem_assunto(
+    limite: int | None = None, so_alvo: bool = False
+) -> list[QuestaoDeProva]:
     """As questoes de Conhecimentos Especificos que ainda nao tem assunto.
 
     Uma por ENUNCIADO: das 2.673 questoes, so 1.763 tem enunciado diferente, e
     classificar a mesma pergunta duas vezes seria pagar duas vezes pelo mesmo
     rotulo.
+
+    Com `so_alvo`, entram apenas as questoes das provas do MEU cargo no MEU
+    estado - as mesmas que o Meu foco conta. E o recorte que faz a conta
+    caber, e e tambem o unico em que o assunto fino muda alguma coisa para
+    mim: assunto de prova de Merendeira e da mesma banca e nao me serve.
     """
     criar_tabelas()
     with sessao() as s:
-        candidatas = list(s.scalars(
+        consulta = (
             select(QuestaoDeProva)
             .where(QuestaoDeProva.assunto.is_(None))
             .where(QuestaoDeProva.materia.is_not(None))
-        ))
+            # Nao se paga para classificar questao que a banca anulou.
+            .where(QuestaoDeProva.anulada.is_not(True))
+        )
+        if so_alvo:
+            # Import aqui dentro, e nao no topo: o `foco` e uma tela, e monta
+            # a resposta dela em cima deste pacote. Importar la de cima
+            # fecharia o circulo.
+            from radar import foco
+
+            consulta = consulta.where(
+                QuestaoDeProva.prova_url.in_(foco._provas_do_alvo(s))
+            )
+        candidatas = list(s.scalars(consulta))
 
     # So o que o catalogo de materias NAO cobre: o resto ja tem assunto de
-    # graca, pelas palavras-chave.
+    # graca, pelas palavras-chave. E o que mantem Portugues e Raciocinio
+    # Logico fora da conta paga, inclusive na prova do alvo.
     especificas = [
         q for q in candidatas if macetes.chave_da_materia(q.materia) is None
     ]
+
+    if so_alvo:
+        # Materia que o edital de hoje nao lista nao tem em que escolher, e
+        # pagar por ela seria pagar por "indefinido". E o caso das materias
+        # que sairam do programa entre uma edicao e outra: 2013 cobrou
+        # Direito Administrativo e Nocoes de Informatica, e 2019 nao cobra.
+        permitidas = {_chave_de_materia(m) for m in assuntos_permitidos(True)}
+        especificas = [
+            q for q in especificas if _chave_de_materia(q.materia) in permitidas
+        ]
 
     por_enunciado: dict[str, QuestaoDeProva] = {}
     for questao in especificas:
         por_enunciado.setdefault(questao.impressao, questao)
 
-    escolhidas = list(por_enunciado.values())
+    escolhidas = sorted(
+        por_enunciado.values(), key=lambda q: (q.materia or "", q.numero)
+    )
     return escolhidas[:limite] if limite else escolhidas
 
 
@@ -725,33 +848,153 @@ def gravar_assuntos(por_id: dict[int, str]) -> int:
     return gravados
 
 
+def _chave_de_materia(nome: str | None) -> str:
+    """Como dois nomes de materia sao comparados: sem acento e sem caixa.
+
+    O edital escreve "LEI DE EXECUÇÃO PENAL" no anexo e o caderno escreve "Lei
+    de Execução Penal" no cabecalho da secao. Sao a mesma materia.
+    """
+    return classificador_de_assunto._chave(nome or "")
+
+
+def assuntos_permitidos(so_alvo: bool) -> dict:
+    """A lista de assuntos que a IA pode escolher, ou {} quando nao ha lista.
+
+    So existe para o recorte do alvo, e isso e proposital: a lista sai do
+    CONTEUDO PROGRAMATICO do edital do MEU concurso, e ele nao diz nada sobre
+    a prova de Merendeira de outra prefeitura.
+    """
+    if not so_alvo:
+        return {}
+
+    from radar import foco
+
+    return foco.programa_do_alvo()
+
+
 def classificar_assuntos(
-    limite: int | None = None, teto_em_dolar: float = 1.0
+    limite: int | None = None,
+    teto_em_dolar: float = 1.0,
+    so_alvo: bool = False,
 ) -> dict:
     """Classifica o assunto das questoes de Conhecimentos Especificos.
 
     Custa dinheiro: e a unica parte do radar que fala com uma API paga. O teto
     e conferido antes de cada lote, com o custo real que a API informou.
+
+    O que foi pago sai do banco na mesma hora e vai para `data/assuntos.json`,
+    que e versionado. Sem isso, refazer o banco - ou trocar de computador -
+    faria eu pagar de novo pela mesma questao.
     """
     chave = config.chave_da_anthropic()
     if not chave:
         return {"erro": "sem chave", "classificados": 0}
 
-    pendentes = questoes_sem_assunto(limite)
+    # A lista vem antes da fila, e nao depois: sem o programa do edital nao ha
+    # em que escolher, e sem isso a IA voltaria a inventar nome de assunto.
+    # Nao gastar e a resposta certa, e dizer por que e melhor do que devolver
+    # fila vazia sem explicacao.
+    permitidos = assuntos_permitidos(so_alvo)
+    if so_alvo and not permitidos:
+        return {"erro": "sem programa do edital", "classificados": 0,
+                "pendentes": 0}
+
+    pendentes = questoes_sem_assunto(limite, so_alvo=so_alvo)
     if not pendentes:
         return {"classificados": 0, "pendentes": 0}
 
     resultado = classificador_de_assunto.classificar(
-        pendentes, chave, teto_em_dolar=teto_em_dolar
+        pendentes, chave, teto_em_dolar=teto_em_dolar, permitidos=permitidos
     )
     gravados = gravar_assuntos(resultado.classificados)
+
+    guardados = 0
+    if gravados:
+        from radar import acervo
+
+        guardados = acervo.exportar_assuntos()
 
     return {
         "pendentes": len(pendentes),
         "classificados": len(resultado.classificados),
         "gravados": gravados,
+        "guardados": guardados,
         "custo": resultado.uso.custo,
         "chamadas": resultado.uso.chamadas,
         "parou_no_teto": resultado.parou_no_teto,
         "falhas": resultado.falhas,
     }
+
+
+@dataclass
+class CoberturaDaMateria:
+    """Quantas questoes de uma materia ja tem assunto, e por qual caminho."""
+
+    materia: str
+    questoes: int
+    com_assunto: int
+    #: "catalogo" (de graca, por palavra-chave), "edital" (pago, escolhendo
+    #: dentro do programa) ou "fora" (materia que o edital de hoje nao cobra
+    #: mais, e por isso nao tem lista em que escolher).
+    origem: str
+
+    @property
+    def porcentagem(self) -> float:
+        return (self.com_assunto / self.questoes * 100) if self.questoes else 0.0
+
+
+def cobertura_de_assunto(so_alvo: bool = True) -> list[CoberturaDaMateria]:
+    """Quanto de cada materia ja tem assunto, da pior para a melhor.
+
+    As duas origens entram na mesma tabela porque a pergunta e uma so - "esta
+    questao tem assunto?" - mas elas nao sao a mesma coisa, e a coluna diz
+    qual e qual. Portugues e Raciocinio Logico saem do catalogo de
+    palavras-chave, de graca; as outras nove saem do programa do edital, e
+    cada uma delas foi paga uma vez.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        consulta = (
+            select(QuestaoDeProva)
+            .where(QuestaoDeProva.materia.is_not(None))
+            .where(QuestaoDeProva.anulada.is_not(True))
+        )
+        if so_alvo:
+            from radar import foco
+
+            consulta = consulta.where(
+                QuestaoDeProva.prova_url.in_(foco._provas_do_alvo(s))
+            )
+        questoes = list(s.scalars(consulta))
+
+    por_materia: dict[str, list] = {}
+    for questao in questoes:
+        por_materia.setdefault(questao.materia, []).append(questao)
+
+    no_programa = {_chave_de_materia(m) for m in assuntos_permitidos(so_alvo)}
+
+    cobertura = []
+    for materia, lista in por_materia.items():
+        chave = macetes.chave_da_materia(materia)
+        if chave:
+            # De graca: quem responde e o catalogo de palavras-chave, que
+            # trabalha por ENUNCIADO distinto. A proporcao volta para numero
+            # de questoes porque e isso que a prova tem.
+            _, sem = macetes.assuntos_de(lista, chave)
+            distintos = len({q.impressao for q in lista})
+            com = (round((distintos - sem) / distintos * len(lista))
+                   if distintos else 0)
+            origem = "catalogo"
+        else:
+            com = sum(1 for q in lista if q.assunto)
+            # Materia que saiu do programa entre uma edicao e outra nao tem em
+            # que escolher, e nunca vai ser classificada: 2013 cobrou Direito
+            # Administrativo e Nocoes de Informatica, e 2019 nao cobra.
+            origem = ("edital" if not so_alvo or _chave_de_materia(materia)
+                      in no_programa else "fora")
+
+        cobertura.append(CoberturaDaMateria(
+            materia=materia, questoes=len(lista), com_assunto=com, origem=origem
+        ))
+
+    return sorted(cobertura, key=lambda c: (c.porcentagem, c.materia))

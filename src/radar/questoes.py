@@ -97,6 +97,9 @@ class Questao:
     alternativas: dict[str, str] = field(default_factory=dict)
     resposta: str | None = None
     materia: str | None = None
+    #: A banca anulou esta questao depois dos recursos. Quem liga e o
+    #: `radar.gabarito`, lendo o gabarito definitivo - o caderno nunca sabe.
+    anulada: bool = False
 
     @property
     def impressao(self) -> str:
@@ -113,8 +116,16 @@ class Questao:
         return hashlib.sha256(texto.encode()).hexdigest()[:32]
 
 
-def extrair_texto(caminho: Path) -> str:
-    """Texto do PDF inteiro, pagina por pagina."""
+def extrair_texto(caminho: Path, layout: bool = False) -> str:
+    """Texto do PDF inteiro, pagina por pagina.
+
+    `layout` troca o modo do pypdf. O modo normal e o que o caderno de prova
+    precisa: ele junta as colunas na ordem de leitura. O modo `layout`
+    preserva a posicao na pagina, e com isso resolve o defeito que atrapalha o
+    ANEXO de programas do edital - texto justificado voltava com espaco no
+    meio da palavra ("cidad ania", "envol vendo", "desp orto"), e assunto de
+    edital com palavra partida no meio nao serve para nada.
+    """
     from pypdf import PdfReader
 
     # O pypdf reclama de fonte e de cabecalho fora do padrao em quase todo
@@ -123,9 +134,10 @@ def extrair_texto(caminho: Path) -> str:
     for ruidoso in ("pypdf", "pypdf._cmap", "pypdf._reader", "pypdf.generic"):
         logging.getLogger(ruidoso).setLevel(logging.ERROR)
 
+    modo = {"extraction_mode": "layout"} if layout else {}
     leitor = PdfReader(str(caminho))
     return _tirar_simbolo_sem_desenho(
-        "\n".join(pagina.extract_text() or "" for pagina in leitor.pages)
+        "\n".join(pagina.extract_text(**modo) or "" for pagina in leitor.pages)
     )
 
 

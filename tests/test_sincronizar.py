@@ -94,12 +94,19 @@ def test_a_sequencia_do_git(banco_temporario, git):
     assert git.verbos == ["pull", "add", "diff", "commit", "push"]
 
 
-def test_so_os_dois_json_entram_no_commit(banco_temporario, git):
-    """O resto do meu working tree fica como esta."""
+def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
+    """O resto do meu working tree fica como esta.
+
+    Sao tres desde a etapa 14: os concursos, a linha do tempo, e o assunto -
+    este ultimo porque e o unico dado do projeto que custou dinheiro, e
+    perder o arquivo e pagar de novo pela mesma questao.
+    """
     runner.invoke(cli.app, ["sincronizar"])
 
     (add,) = [c for c in git.comandos if c[0] == "add"]
-    assert set(add[1:]) == {"data/concursos.json", "data/eventos.json"}
+    assert set(add[1:]) == {
+        "data/concursos.json", "data/eventos.json", "data/assuntos.json"
+    }
 
 
 # --- quando da errado -------------------------------------------------------

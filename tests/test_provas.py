@@ -446,3 +446,54 @@ def test_nome_de_pasta_nao_estoura_o_limite_do_windows():
 
 def test_nome_curto_fica_intacto():
     assert provas._nome_seguro("Palhoca") == "palhoca"
+
+
+# --- o gabarito definitivo esta na CAPA do hotsite (etapa 14) ---------------
+#
+# A fixture sap_capa.html sao quatro linhas reais da lista de avisos do
+# hotsite do concurso de 2019 da Policia Penal SC. O `?go=provas` publica o
+# gabarito PROVISORIO, que e o que o caderno ja traz dentro; o definitivo -
+# com as questoes anuladas e as letras trocadas - so aparece aqui.
+
+SAP = "https://sap.fepese.org.br/"
+
+
+def capa() -> str:
+    return (FIXTURES / "sap_capa.html").read_text(encoding="utf-8")
+
+
+def test_acha_o_gabarito_definitivo_na_capa():
+    achados = provas.ler_pagina_inicial(capa(), SAP)
+    nomes = {d.arquivo for d in achados}
+
+    assert "_Gabarito_SAP_definitivo.pdf" in nomes
+    assert "Anexo_1_2019_Gabarito_SAP_definitivo_retificacao.pdf" in nomes
+
+
+def test_o_definitivo_tem_tipo_proprio():
+    """Ele nao pode entrar como `gabarito` comum: o comum e o provisorio, e
+    quem le o caderno precisa saber a diferenca."""
+    achados = provas.ler_pagina_inicial(capa(), SAP)
+    assert all(d.tipo == provas.GABARITO_DEFINITIVO for d in achados)
+
+
+def test_a_data_do_aviso_vem_da_celula_ao_lado():
+    """A data e o que decide qual gabarito vale: saiu o definitivo em 13/12,
+    e um mes depois a retificacao que anulou mais uma questao."""
+    por_arquivo = {d.arquivo: d for d in provas.ler_pagina_inicial(capa(), SAP)}
+
+    assert por_arquivo["_Gabarito_SAP_definitivo.pdf"].publicado_em == "2019-12-13"
+    assert por_arquivo[
+        "Anexo_1_2019_Gabarito_SAP_definitivo_retificacao.pdf"
+    ].publicado_em == "2020-01-23"
+
+
+def test_o_gabarito_de_outra_fase_fica_de_fora():
+    """O curso de formacao profissional e outra prova, com outro gabarito. O
+    hotsite lista os dois na mesma pagina."""
+    nomes = {d.arquivo for d in provas.ler_pagina_inicial(capa(), SAP)}
+    assert not any("CFP" in nome for nome in nomes)
+
+
+def test_capa_sem_gabarito_definitivo_nao_inventa():
+    assert provas.ler_pagina_inicial("<html><body>nada aqui</body></html>", SAP) == []

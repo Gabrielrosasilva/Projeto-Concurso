@@ -1,6 +1,19 @@
 [
   {
     "ano": 2016,
+    "arquivo": "2016_SECJUSTICA_Gabarito_Definitivo.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2016/2016-governo-do-estado-de-santa-catarina-secretaria-de/2016-secjustica-gabarito-definitivo.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2016-governo-do-estado-de-santa-catarina-secretaria-de-estado-da-justica-e-cidadania-concurso-publico-edital-001-2016-sjc-sc/",
+    "orgao": "2016 – Governo do Estado de Santa Catarina Secretaria de Estado da Justiça e Cidadania Concurso Público Edital 001/2016-SJC/SC",
+    "publicado_em": "2016-09-23",
+    "sha256": "7e783f846f878d3c400a21458e4c07f45c8477dcf50ca02e19b8e8934f0055c5",
+    "tamanho": 122417,
+    "tipo": "gabarito_definitivo",
+    "url": "http://2016secjustica.fepese.org.br/?go=download&arquivo=2016_SECJUSTICA_Gabarito_Definitivo.pdf"
+  },
+  {
+    "ano": 2016,
     "arquivo": "2016_SECJUSTICA_TA_003.pdf",
     "banca": "FEPESE",
     "caminho": "provas/fepese/2016/2016-governo-do-estado-de-santa-catarina-secretaria-de/2016-secjustica-ta-003.pdf",
@@ -84,6 +97,32 @@
     "url": "http://2016secjustica.fepese.org.br/?go=download&arquivo=2017_SECJUSTICA_TA_006.pdf"
   },
   {
+    "ano": 2016,
+    "arquivo": "Anexo1_Gabarito_Definitivo_Retificado.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2016/2016-governo-do-estado-de-santa-catarina-secretaria-de/anexo1-gabarito-definitivo-retificado.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2016-governo-do-estado-de-santa-catarina-secretaria-de-estado-da-justica-e-cidadania-concurso-publico-edital-001-2016-sjc-sc/",
+    "orgao": "2016 – Governo do Estado de Santa Catarina Secretaria de Estado da Justiça e Cidadania Concurso Público Edital 001/2016-SJC/SC",
+    "publicado_em": "2017-07-20",
+    "sha256": "765001face5134364533d925c16369979d9a64ffbfcc7d9d323ba7800ac79bce",
+    "tamanho": 513193,
+    "tipo": "gabarito_definitivo",
+    "url": "http://2016secjustica.fepese.org.br/?go=download&arquivo=Anexo1_Gabarito_Definitivo_Retificado.pdf"
+  },
+  {
+    "ano": 2016,
+    "arquivo": "gabarito_definitivo_ar.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2016/2016-governo-do-estado-de-santa-catarina-secretaria-de/gabarito-definitivo-ar.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2016-governo-do-estado-de-santa-catarina-secretaria-de-estado-da-justica-e-cidadania-concurso-publico-edital-001-2016-sjc-sc/",
+    "orgao": "2016 – Governo do Estado de Santa Catarina Secretaria de Estado da Justiça e Cidadania Concurso Público Edital 001/2016-SJC/SC",
+    "publicado_em": "2016-10-03",
+    "sha256": "68c36c9af2f7d644f1eabab1d2a972f907c340ece7e4eb1d1563b59a97d6ef8b",
+    "tamanho": 29507,
+    "tipo": "gabarito_definitivo",
+    "url": "http://2016secjustica.fepese.org.br/?go=download&arquivo=gabarito_definitivo_ar.pdf"
+  },
+  {
     "ano": 2025,
     "arquivo": "gabarito_provisorio_ps_comcap_2025.pdf",
     "banca": "FEPESE",
@@ -136,6 +175,19 @@
     "url": "http://2025seletivocomcap.fepese.org.br/?go=download&path=9&inline=1&arquivo=prova_motorista.pdf"
   },
   {
+    "ano": 2019,
+    "arquivo": "Anexo_1_2019_Gabarito_SAP_definitivo_retificacao.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2019/2019-secretaria-de-estado-da-administracao-prisional-e/anexo-1-2019-gabarito-sap-definitivo-retificacao.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2019-secretaria-de-estado-da-administracao-prisional-e-socioeducativa-concurso-publicoconcurso-publico-edital-001-2019/",
+    "orgao": "2019 – Secretaria de Estado da Administração Prisional e Socioeducativa – Concurso PúblicoConcurso Público – Edital 001/2019",
+    "publicado_em": "2020-01-23",
+    "sha256": "fc3773e9f61812668cf1cf611209b8c9d12063f0d4c4f8db17ad32bb12433b71",
+    "tamanho": 177981,
+    "tipo": "gabarito_definitivo",
+    "url": "http://sap.fepese.org.br/?go=download&inline=1&arquivo=Anexo_1_2019_Gabarito_SAP_definitivo_retificacao.pdf"
+  },
+  {
     "ano": 2013,
     "arquivo": "Edital_SJC_2013_09_20_Final.pdf",
     "banca": "FEPESE",
@@ -146,6 +198,32 @@
     "tamanho": 673598,
     "tipo": "edital",
     "url": "http://secjustica.fepese.org.br/?go=download&arquivo=Edital_SJC_2013_09_20_Final.pdf"
+  },
+  {
+    "ano": 2013,
+    "arquivo": "GabaritoDefinitivo_Retificado.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2013/2013-secretaria-de-estado-da-justica-e-cidadaniaagente/gabaritodefinitivo-retificado.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2013-secretaria-de-estado-da-justica-e-cidadaniaagente-penitenciario-masculinoagente-penitenciario-femininoagente-de-seguranca-socioeducativo-masculinoagente-de-seguranca-socioeducativo-femin/",
+    "orgao": "2013 – Secretaria de Estado da Justiça e CidadaniaAgente Penitenciário (masculino)Agente Penitenciário (feminino)Agente de Segurança Socioeducativo (masculino)Agente de Segurança Socioeducativo (feminino)",
+    "publicado_em": "2013-11-28",
+    "sha256": "d165693f6d39e60745f381477ec67283624e156fb82969f3cec8c3dd320f2925",
+    "tamanho": 80560,
+    "tipo": "gabarito_definitivo",
+    "url": "http://secjustica.fepese.org.br/?go=download&arquivo=GabaritoDefinitivo_Retificado.pdf"
+  },
+  {
+    "ano": 2013,
+    "arquivo": "gabarito_definitivo.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2013/2013-secretaria-de-estado-da-justica-e-cidadaniaagente/gabarito-definitivo.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2013-secretaria-de-estado-da-justica-e-cidadaniaagente-penitenciario-masculinoagente-penitenciario-femininoagente-de-seguranca-socioeducativo-masculinoagente-de-seguranca-socioeducativo-femin/",
+    "orgao": "2013 – Secretaria de Estado da Justiça e CidadaniaAgente Penitenciário (masculino)Agente Penitenciário (feminino)Agente de Segurança Socioeducativo (masculino)Agente de Segurança Socioeducativo (feminino)",
+    "publicado_em": "2013-11-27",
+    "sha256": "18f311a3246595f0c1e6e4f1798171bc3c421c51ee8638f396263327518f50a4",
+    "tamanho": 275407,
+    "tipo": "gabarito_definitivo",
+    "url": "http://secjustica.fepese.org.br/?go=download&arquivo=gabarito_definitivo.pdf"
   },
   {
     "ano": 2013,
@@ -1083,6 +1161,20 @@
   },
   {
     "ano": 2024,
+    "arquivo": "2024_BC_Educa_gabarito_definitivo.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2024/balneario-camboriu/2024-bc-educa-gabarito-definitivo.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-balneario-camboriu-educa/",
+    "municipio": "Balneário Camboriú",
+    "orgao": "2024 – Prefeitura Municipal de Balneário Camboriú",
+    "publicado_em": "2024-12-04",
+    "sha256": "c3a978d6282079cf0095e327f99620d3553ef9fafa60585f4ff4f9f12bf1b004",
+    "tamanho": 1353777,
+    "tipo": "gabarito_definitivo",
+    "url": "https://2024bcseletivoeduca.fepese.org.br/?go=download&inline=1&arquivo=2024_BC_Educa_gabarito_definitivo.pdf"
+  },
+  {
+    "ano": 2024,
     "arquivo": "EE1.pdf",
     "banca": "FEPESE",
     "caminho": "provas/fepese/2024/balneario-camboriu/ee1.pdf",
@@ -1358,6 +1450,20 @@
     "tamanho": 735657,
     "tipo": "edital",
     "url": "https://2024cpeducapalhoca.fepese.org.br/?go=download&arquivo=CP_Palhoca_Educa_013_PMP_2024.pdf&inline=1"
+  },
+  {
+    "ano": 2024,
+    "arquivo": "2024_CP_Palhoca_gabarito_definitivo.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2024/palhoca/2024-cp-palhoca-gabarito-definitivo.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-cp-educa/",
+    "municipio": "Palhoça",
+    "orgao": "2024 – Prefeitura Municipal de Palhoça",
+    "publicado_em": "2024-12-18",
+    "sha256": "d48daea0b004e7b71e7bfa5402e6788490e75110c369a0bd87720c33aaf133e4",
+    "tamanho": 1006660,
+    "tipo": "gabarito_definitivo",
+    "url": "https://2024cpeducapalhoca.fepese.org.br/?go=download&inline=1&arquivo=2024_CP_Palhoca_gabarito_definitivo.pdf"
   },
   {
     "ano": 2024,
@@ -4925,6 +5031,19 @@
     "tamanho": 252891,
     "tipo": "edital",
     "url": "https://sap.fepese.org.br/?go=download&arquivo=TA_5_ed_1.pdf&inline=1"
+  },
+  {
+    "ano": 2019,
+    "arquivo": "_Gabarito_SAP_definitivo.pdf",
+    "banca": "FEPESE",
+    "caminho": "provas/fepese/2019/2019-secretaria-de-estado-da-administracao-prisional-e/gabarito-sap-definitivo.pdf",
+    "concurso_url": "https://fepese.org.br/concurso/2019-secretaria-de-estado-da-administracao-prisional-e-socioeducativa-concurso-publicoconcurso-publico-edital-001-2019/",
+    "orgao": "2019 – Secretaria de Estado da Administração Prisional e Socioeducativa – Concurso PúblicoConcurso Público – Edital 001/2019",
+    "publicado_em": "2019-12-13",
+    "sha256": "8daae918f6ad9efa96442e938c4838aeb50efe01d8e53f2c5acb292dd678c18e",
+    "tamanho": 423760,
+    "tipo": "gabarito_definitivo",
+    "url": "https://sap.fepese.org.br/?go=download&inline=1&arquivo=_Gabarito_SAP_definitivo.pdf"
   },
   {
     "ano": 2019,

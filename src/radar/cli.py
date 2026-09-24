@@ -297,6 +297,10 @@ def provas(
         False, "--abertos",
         help="Inclui concurso ainda em andamento, para pegar o edital dele",
     ),
+    revisitar: bool = typer.Option(
+        False, "--revisitar",
+        help="Le de novo hotsite que ja esta no acervo, atras de documento novo",
+    ),
 ) -> None:
     """Monta o acervo: le os hotsites e baixa edital, prova e gabarito.
 
@@ -308,12 +312,19 @@ def provas(
     manifesto data/provas.json, com o sha256 de cada arquivo.
     """
     console.print(
-        f"Vou ler ate [bold]{limite}[/] concurso(s). Cada um custa 2 paginas "
+        f"Vou ler ate [bold]{limite}[/] concurso(s). Cada um custa 3 paginas "
         f"mais os PDFs, com pausa de 1,5s entre as requisicoes."
     )
+    if revisitar:
+        console.print(
+            "[dim]Revisitando: hotsite ja lido entra de novo. E assim que "
+            "gabarito definitivo publicado depois da prova aparece.[/]"
+        )
 
     with console.status("Montando o acervo..."):
-        resultado = servico.montar_acervo(limite=limite, abertos=abertos)
+        resultado = servico.montar_acervo(
+            limite=limite, abertos=abertos, revisitar=revisitar
+        )
 
     console.print(f"[green]{resultado}[/]")
 
@@ -520,23 +531,48 @@ def assuntos(
         True, "--simular/--valendo",
         help="Simular NAO gasta nada: so mostra o custo. Use --valendo para rodar",
     ),
+    so_alvo: bool = typer.Option(
+        False, "--so-alvo",
+        help="So as questoes das provas do meu cargo, no meu estado",
+    ),
 ) -> None:
     """Classifica o assunto fino das questoes de Conhecimentos Especificos.
 
     Esta e a UNICA parte do radar que custa dinheiro. Por padrao ela so simula:
     para gastar de verdade e preciso passar --valendo.
 
+    Com `--so-alvo` sao duas mudancas, e as duas importam. Entram so as
+    questoes das provas do MEU cargo no MEU estado - 99 em vez de 2.802 - e a
+    IA passa a ESCOLHER o assunto dentro do conteudo programatico do edital,
+    em vez de inventar um nome. Assunto que nao esta na lista e descartado.
+
     A chave vai em RADAR_ANTHROPIC_KEY, no .env - nunca no codigo.
     """
     from radar import assuntos as classificador, config as configuracao
 
-    pendentes = servico.questoes_sem_assunto(limite)
+    pendentes = servico.questoes_sem_assunto(limite, so_alvo=so_alvo)
+    permitidos = servico.assuntos_permitidos(so_alvo)
+
+    if so_alvo and not permitidos:
+        console.print(
+            "[red]Nao li o conteudo programatico do edital do alvo.[/] "
+            "Sem a lista, a IA voltaria a inventar nome de assunto - entao "
+            "nao gasto."
+        )
+        raise typer.Exit(code=1)
+
     if not pendentes:
         console.print("[green]Nenhuma questao pendente de assunto.[/]")
         return
 
-    entrada, saida, custo = classificador.estimar(pendentes)
+    entrada, saida, custo = classificador.estimar(pendentes, permitidos)
     console.print(f"Questoes a classificar: [bold]{len(pendentes)}[/]")
+    if permitidos:
+        quantos = sum(len(v) for v in permitidos.values())
+        console.print(
+            f"[dim]Escolhendo dentro de {quantos} assunto(s) do edital, "
+            f"em {len(permitidos)} materia(s)[/]"
+        )
     console.print(
         f"[dim]{entrada:,} tokens de entrada, {saida:,} de saida[/]".replace(",", ".")
     )
@@ -549,7 +585,10 @@ def assuntos(
     if simular:
         console.print()
         console.print("[yellow]Isto foi so uma simulacao: nada foi gasto.[/]")
-        console.print("Para valer, rode: [bold]radar assuntos --valendo[/]")
+        comando = "radar assuntos --valendo"
+        if so_alvo:
+            comando += " --so-alvo"
+        console.print(f"Para valer, rode: [bold]{comando}[/]")
         return
 
     if not configuracao.chave_da_anthropic():
@@ -564,7 +603,9 @@ def assuntos(
     console.print()
     console.print(f"[dim]Teto de gasto: US$ {teto:.2f}[/]")
     with console.status("Classificando..."):
-        resultado = servico.classificar_assuntos(limite=limite, teto_em_dolar=teto)
+        resultado = servico.classificar_assuntos(
+            limite=limite, teto_em_dolar=teto, so_alvo=so_alvo
+        )
 
     console.print(
         f"[green]{resultado['classificados']} questao(oes) classificada(s)[/], "
@@ -579,8 +620,76 @@ def assuntos(
         console.print(
             "[yellow]Parei no teto de gasto.[/] Rode de novo para continuar."
         )
+    if resultado.get("guardados"):
+        console.print(
+            f"[dim]{resultado['guardados']} assunto(s) guardados em "
+            f"data/assuntos.json - este arquivo e versionado, e e o que "
+            f"impede eu pagar de novo pela mesma questao.[/]"
+        )
     if resultado.get("falhas"):
         console.print(f"[dim]{resultado['falhas']} lote(s) falharam.[/]")
+
+    _mostrar_cobertura(so_alvo)
+
+
+# De onde sai o assunto de cada materia, na tela.
+ROTULO_DA_ORIGEM = {
+    "catalogo": "catalogo (de graca)",
+    "edital": "edital (pago)",
+    "fora": "fora do programa de hoje",
+}
+
+
+def _mostrar_cobertura(so_alvo: bool = True) -> None:
+    """Quanto de cada materia ja tem assunto, da pior para a melhor."""
+    cobertura = servico.cobertura_de_assunto(so_alvo=so_alvo)
+    if not cobertura:
+        return
+
+    tabela = Table(
+        title=("Cobertura de assunto nas provas do meu cargo" if so_alvo
+               else "Cobertura de assunto no acervo inteiro"),
+        box=None,
+    )
+    tabela.add_column("Materia")
+    tabela.add_column("Com assunto", justify="right")
+    tabela.add_column("Questoes", justify="right")
+    tabela.add_column("%", justify="right")
+    tabela.add_column("De onde")
+
+    for linha in cobertura:
+        tabela.add_row(
+            linha.materia,
+            str(linha.com_assunto),
+            str(linha.questoes),
+            f"{linha.porcentagem:.0f}%",
+            ROTULO_DA_ORIGEM.get(linha.origem, linha.origem),
+        )
+
+    total = sum(c.questoes for c in cobertura)
+    com = sum(c.com_assunto for c in cobertura)
+    console.print()
+    console.print(tabela)
+    console.print(
+        f"[bold]{com}[/] de [bold]{total}[/] questao(oes) com assunto "
+        f"([bold]{(com / total * 100) if total else 0:.0f}%[/])"
+    )
+
+
+@app.command()
+def cobertura(
+    so_alvo: bool = typer.Option(
+        True, "--so-alvo/--tudo",
+        help="So as provas do meu cargo (padrao), ou o acervo inteiro",
+    ),
+) -> None:
+    """Quantas questoes ja tem assunto, por materia.
+
+    Duas origens na mesma tabela, com a coluna dizendo qual e qual: Portugues
+    e Raciocinio Logico saem do catalogo de palavras-chave, de graca; as
+    outras saem do conteudo programatico do edital, e foram pagas.
+    """
+    _mostrar_cobertura(so_alvo)
 
 
 @app.command()
@@ -949,6 +1058,18 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
     eventos = acervo.exportar_eventos(destino_eventos)
     console.print(f"[green]{eventos}[/] evento(s) exportado(s) para {destino_eventos}")
 
+    # O terceiro arquivo e o unico que custou dinheiro: o assunto que a IA
+    # classificou. Perder ele e pagar de novo pela mesma questao.
+    destino_assuntos = (
+        destino.with_name("assuntos.json") if caminho
+        else acervo.caminho_dos_assuntos()
+    )
+    assuntos_gravados = acervo.exportar_assuntos(destino_assuntos)
+    console.print(
+        f"[green]{assuntos_gravados}[/] assunto(s) exportado(s) para "
+        f"{destino_assuntos}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -971,6 +1092,17 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     novos = acervo.importar_eventos(origem_eventos)
     if origem_eventos.exists():
         console.print(f"[green]{novos}[/] evento(s) novo(s) de {origem_eventos}")
+
+    origem_assuntos = (
+        origem.with_name("assuntos.json") if caminho
+        else acervo.caminho_dos_assuntos()
+    )
+    if origem_assuntos.exists():
+        mudadas = acervo.importar_assuntos(origem_assuntos)
+        console.print(
+            f"[green]{mudadas}[/] questao(oes) reganharam o assunto ja pago, "
+            f"de {origem_assuntos}"
+        )
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -1050,7 +1182,8 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
     )
 
 
-ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json")
+ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
+                     "data/assuntos.json")
 
 
 @app.command()

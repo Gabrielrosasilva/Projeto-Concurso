@@ -20,7 +20,7 @@ from sqlalchemy import select
 
 from radar import config
 from radar.db import criar_tabelas, sessao
-from radar.models import Concurso, DataHoraUTC, Evento
+from radar.models import Concurso, DataHoraUTC, Evento, QuestaoDeProva
 
 # Colunas exportadas, em ordem fixa. Ordem fixa e chave ordenada deixam o
 # arquivo estavel: mudou o diff, mudou o dado de verdade.
@@ -251,3 +251,88 @@ def importar_eventos(caminho: Path | None = None) -> int:
             novos += 1
 
     return novos
+
+
+# --- o assunto pago (etapa 14) ----------------------------------------------
+#
+# Este e o unico dado do projeto que custou dinheiro para existir. Ate aqui ele
+# morava so no banco local: refazer o banco, ou trocar de computador, e eu
+# pagaria de novo pela mesma questao. O arquivo existe para isso nao acontecer
+# nunca - pago uma vez na vida por enunciado.
+#
+# A chave e a IMPRESSAO do enunciado, e nao o id nem a url da prova. O id muda
+# quando o banco e reconstruido, e a mesma pergunta aparece em varios cadernos:
+# a impressao e o que diz que duas questoes sao a mesma pergunta, e e por ela
+# que uma classificacao paga rotula todas as copias.
+
+def caminho_dos_assuntos() -> Path:
+    return config.diretorio_dados() / "assuntos.json"
+
+
+def exportar_assuntos(caminho: Path | None = None) -> int:
+    """Grava o assunto pago de cada enunciado. Devolve quantos gravou."""
+    criar_tabelas()
+    destino = caminho or caminho_dos_assuntos()
+
+    with sessao() as s:
+        achados = s.execute(
+            select(
+                QuestaoDeProva.impressao,
+                QuestaoDeProva.assunto,
+                QuestaoDeProva.materia,
+            )
+            .where(QuestaoDeProva.assunto.is_not(None))
+            .distinct()
+        ).all()
+
+    # Um enunciado, um assunto. Ordenado para o diff do commit ficar estavel, e
+    # com o primeiro vencendo se o banco discordar de si mesmo - duas execucoes
+    # tem que escrever o mesmo arquivo.
+    por_enunciado: dict[str, dict] = {}
+    for impressao, assunto, materia in sorted(achados):
+        por_enunciado.setdefault(
+            impressao,
+            {"impressao": impressao, "assunto": assunto, "materia": materia},
+        )
+
+    linhas = list(por_enunciado.values())
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(
+        json.dumps(linhas, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return len(linhas)
+
+
+def importar_assuntos(caminho: Path | None = None) -> int:
+    """Devolve ao banco o assunto que ja foi pago. Quantas linhas mudaram.
+
+    Vale para TODAS as questoes de mesmo enunciado, como na hora de gravar: o
+    que foi pago uma vez rotula todas as copias daquela pergunta no acervo.
+
+    O arquivo manda: ele e o registro do que foi comprado, e o banco local
+    pode ter sido refeito do zero minutos atras.
+    """
+    origem = caminho or caminho_dos_assuntos()
+    if not origem.exists():
+        return 0
+
+    criar_tabelas()
+    linhas = json.loads(origem.read_text(encoding="utf-8"))
+    if not linhas:
+        return 0
+
+    mudadas = 0
+    with sessao() as s:
+        for linha in linhas:
+            impressao, assunto = linha.get("impressao"), linha.get("assunto")
+            if not impressao or not assunto:
+                continue
+            for questao in s.scalars(
+                select(QuestaoDeProva).where(QuestaoDeProva.impressao == impressao)
+            ):
+                if questao.assunto != assunto:
+                    questao.assunto = assunto
+                    mudadas += 1
+
+    return mudadas

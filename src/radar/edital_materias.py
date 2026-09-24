@@ -64,8 +64,13 @@ class MateriaDoEdital:
         return (self.questoes / total * 100) if total else 0.0
 
 
-def _arrumar_nome(bruto: str) -> str:
+def arrumar_nome(bruto: str) -> str:
     """Tira espaco sobrando e arruma a caixa.
+
+    Publica porque o `edital_programa` precisa da MESMA regra: o nome da
+    materia tem que sair igual dos dois lados do edital - o quadro diz o peso
+    dela e o anexo de programas diz o conteudo, e eles so se encontram se
+    "LEI DE EXECUCAO PENAL" e "Lei de Execucao Penal" virarem o mesmo texto.
 
     O edital escreve "Direito constitucional" e "Direito penal" em caixa baixa
     no meio do quadro, e "Lingua Portuguesa" em caixa alta. Padronizar aqui
@@ -76,7 +81,7 @@ def _arrumar_nome(bruto: str) -> str:
     # jeito como o proprio edital escreve as materias que ele escreve direito.
     pequenas = {"de", "da", "do", "das", "dos", "e"}
     palavras = [
-        p if p.lower() in pequenas and i else p[:1].upper() + p[1:].lower()
+        p.lower() if p.lower() in pequenas and i else p[:1].upper() + p[1:].lower()
         for i, p in enumerate(nome.split())
     ]
     return " ".join(palavras)
@@ -95,7 +100,7 @@ def ler_quadro(texto: str) -> list[MateriaDoEdital]:
     trecho = texto[achado.end():achado.end() + JANELA_DO_QUADRO]
 
     materias = [
-        MateriaDoEdital(nome=_arrumar_nome(nome), questoes=int(quantas))
+        MateriaDoEdital(nome=arrumar_nome(nome), questoes=int(quantas))
         for nome, quantas, _valor, _total in LINHA_DO_QUADRO.findall(trecho)
     ]
     # "TOTAL 100 10,00" nao e materia; ele e a conferencia, logo abaixo.
