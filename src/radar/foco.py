@@ -30,6 +30,7 @@ from radar.eventos import Evento
 from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado
 from radar.questoes import extrair_texto
 from radar.regioes import normalizar
+from radar.util import para_local
 
 log = logging.getLogger(__name__)
 
@@ -899,8 +900,9 @@ def _contagens_de_assunto(
     )
 
 
-def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> dict:
-    """{(materia, assunto): (respondidas, acertos)}, de TODOS os simulados.
+def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
+    """({(materia, assunto): (respondidas, acertos)}, {(materia, assunto):
+    data da ultima resposta}), de TODOS os simulados, so questao REAL.
 
     Do acumulado e nao do ultimo, pelo mesmo motivo do acerto por materia: uma
     rodada de 20 questoes nao diz se eu sei o assunto, e o somado diz.
@@ -909,17 +911,22 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> dict:
     zero por cento - zero diria que eu errei tudo.
     """
     if not para_o_edital:
-        return {}
+        return {}, {}
 
     linhas = s.execute(
-        select(QuestaoDeProva, RespostaDeSimulado.acertou)
+        select(QuestaoDeProva, RespostaDeSimulado.acertou,
+               RespostaDeSimulado.respondida_em)
         .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
         .where(RespostaDeSimulado.escolhida.is_not(None))
+        # Sem isto, a resposta a uma questao GERADA contava no assunto da
+        # questao real de mesmo id - as duas tabelas numeram a partir do 1.
+        .where(RespostaDeSimulado.gerada.is_(False))
         .where(QuestaoDeProva.materia.in_(list(para_o_edital)))
     ).all()
 
     medido: dict[tuple[str, str], list[int]] = {}
-    for questao, acertou in linhas:
+    ultimas: dict[tuple[str, str], object] = {}
+    for questao, acertou, quando in linhas:
         materia = para_o_edital[questao.materia]
         chave = macetes.chave_da_materia(materia)
         if chave:
@@ -927,12 +934,18 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> dict:
         else:
             nomes = [questao.assunto] if questao.assunto else []
 
+        dia = para_local(quando).date() if quando else None
         for nome in nomes:
             conta = medido.setdefault((materia, nome), [0, 0])
             conta[0] += 1
             conta[1] += 1 if acertou else 0
+            if dia and (ultimas.get((materia, nome)) is None or dia > ultimas[(materia, nome)]):
+                ultimas[(materia, nome)] = dia
 
-    return {par: (feitas, certas) for par, (feitas, certas) in medido.items()}
+    return (
+        {par: (feitas, certas) for par, (feitas, certas) in medido.items()},
+        ultimas,
+    )
 
 
 def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
@@ -949,11 +962,9 @@ def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
     contagens, origens, sem_assunto = _contagens_de_assunto(
         questoes, para_o_edital, minhas_provas
     )
+    acertos, ultimas = _acerto_por_assunto(s, para_o_edital)
     linhas = onde_estudar.montar(
-        materias_do_edital,
-        contagens,
-        _acerto_por_assunto(s, para_o_edital),
-        origens,
+        materias_do_edital, contagens, acertos, origens, ultimas,
     )
 
     # A materia que nao rendeu nenhum assunto nao pode so sumir do grafico.

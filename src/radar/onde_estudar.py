@@ -24,6 +24,7 @@ REGRA DE SEMPRE: nunca inventar. Assunto sem simulado fica com `acerto=None` e
 que houve foi eu nao ter treinado. A tela diz isso com todas as letras.
 """
 from dataclasses import dataclass
+from datetime import date
 
 from radar.leis import Lei, do_assunto
 from radar.regioes import normalizar
@@ -32,6 +33,30 @@ from radar.regioes import normalizar
 # setenta barras nao sao um grafico - sao uma lista telefonica. O que sobra vira
 # uma linha de rodape dizendo quantos ficaram de fora.
 NA_TELA = 12
+
+# O FATOR DE TEMPO da formula da especificacao:
+#
+#     prioridade = incidencia x (1 - meu acerto) x fator de tempo
+#
+# Ele cresce com os dias desde a ultima vez que eu respondi o assunto: 1 no
+# dia, 2 depois de `DIAS_PARA_DOBRAR` dias, e para ai. Esquecer e o que o tempo
+# faz, e o assunto que eu nao vejo ha um mes precisa subir na fila mesmo que
+# meu acerto nele fosse bom.
+#
+# **Sem treino, o fator e neutro (1)**: nao ha "ultima revisao" para contar
+# dias, e inventar uma seria dar peso a um assunto por um motivo que nao
+# existe. O assunto entra pelo peso e pelo "ainda nao treinado".
+DIAS_PARA_DOBRAR = 30
+FATOR_MAXIMO = 2.0
+
+
+def fator_de_tempo(ultima: date | None, hoje: date | None = None) -> float:
+    """1 sem treino; de 1 a 2 conforme os dias desde a ultima resposta."""
+    if ultima is None:
+        return 1.0
+    dias = max(0, ((hoje or date.today()) - ultima).days)
+    return min(FATOR_MAXIMO, 1 + dias / DIAS_PARA_DOBRAR)
+
 
 # De onde saiu o nome do assunto. Nao e detalhe de implementacao: uma origem
 # custou dinheiro e a outra nao, e a tela mostra qual e qual.
@@ -69,6 +94,14 @@ class LinhaDeEstudo:
 
     origem: str
     lei: Lei | None = None
+    #: A data da ultima resposta minha no assunto. None = nunca treinei.
+    ultima: date | None = None
+    #: O fator de tempo, ja calculado para hoje. 1 sem treino.
+    fator: float = 1.0
+
+    @property
+    def dias_sem_revisar(self) -> int | None:
+        return None if self.ultima is None else (date.today() - self.ultima).days
 
     @property
     def apoio(self) -> int:
@@ -95,8 +128,13 @@ class LinhaDeEstudo:
         `pontos <= esperadas` sempre. Um assunto que eu nunca treinei entra,
         entao, pelo maximo que ele PODERIA valer: e o unico palpite que nao
         precisa de dado que eu nao tenho.
+
+        Com acerto medido entra tambem o fator de tempo: pontos a ganhar x
+        fator. Sem acerto, o fator e 1 - neutro - e a ordem e so o tamanho.
         """
-        return self.esperadas if self.pontos is None else self.pontos
+        if self.pontos is None:
+            return self.esperadas
+        return self.pontos * self.fator
 
 
 def _fatia(marcas: int, base: int) -> float:
@@ -108,6 +146,8 @@ def montar(
     contagens: dict[tuple[str, str], tuple[int, int]],
     acertos: dict[tuple[str, str], tuple[int, int]],
     origens: dict[str, str],
+    ultimas: dict[tuple[str, str], date] | None = None,
+    hoje: date | None = None,
 ) -> list[LinhaDeEstudo]:
     """As linhas ordenadas por quanto ha para ganhar em cada assunto.
 
@@ -143,6 +183,8 @@ def montar(
         respondidas, certas = acertos.get((materia, assunto), (0, 0))
         acerto = (certas / respondidas * 100) if respondidas else None
         pontos = None if acerto is None else esperadas * (1 - acerto / 100)
+        # Sem acerto medido nao ha ultima revisao: o fator fica neutro.
+        ultima = (ultimas or {}).get((materia, assunto)) if acerto is not None else None
 
         linhas.append(LinhaDeEstudo(
             materia=materia,
@@ -157,6 +199,8 @@ def montar(
             pontos=pontos,
             origem=origens.get(materia, EDITAL),
             lei=do_assunto(materia, assunto),
+            ultima=ultima,
+            fator=fator_de_tempo(ultima, hoje),
         ))
 
     # Empate desempata pelo assunto mais medido, e depois pelo nome: duas

@@ -4,6 +4,7 @@ Roda so em 127.0.0.1 de proposito (veja cli.web). Nao ha login porque nao ha
 outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 """
 import time
+from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
@@ -692,9 +693,19 @@ def meu_foco(request: Request):
         name="home.html",
         context={
             "h": servico.inicio.montar(),
+            "hoje": date.today(),
             "questoes_do_treino": foco_do_alvo.QUESTOES_DO_TREINO,
         },
     )
+
+
+@app.post("/revisao/hoje")
+def revisao_de_hoje():
+    """As revisoes espacadas que venceram, numa rodada so."""
+    novo = servico.espacada.criar_simulado_de_revisao()
+    if novo is None:
+        return RedirectResponse("/", status_code=303)
+    return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
 
 
 @app.post("/revisar")

@@ -128,8 +128,9 @@
         </ol>
         <p class="miudo">
           {{ selo('oficial', 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
-          {{ selo('calculado', 'meu acerto') }}. Com menos de 5 respostas, a
-          matéria conta como não treinada e vale o peso inteiro.
+          {{ selo('calculado', 'meu acerto') }} × tempo sem revisar. Com menos de
+          5 respostas, a matéria conta como não treinada: vale o peso inteiro, e
+          o fator de tempo é neutro.
         </p>
       {% else %}
         <p class="convite">Ainda não li o quadro do edital, e sem ele não há
@@ -147,6 +148,23 @@
     {# ----------------------------------------------- 3. revisar -------- #}
     <section class="ds-cartao bloco-home">
       <h2>🧠 Revisar</h2>
+      {# A revisao espacada vem primeiro: e o que venceu HOJE. #}
+      {% if h.revisoes_de_hoje %}
+        <div>
+          <span class="numero-grande">{{ h.revisoes_de_hoje | length }}</span>
+          <span class="ds-pequeno">revisão(ões) para hoje (1, 7 e 30 dias)</span>
+        </div>
+        <ul class="fracas">
+          {% for r in h.revisoes_de_hoje[:3] %}
+            <li>{{ r.nome }} · revisão de {{ r.intervalo }} dia(s){% if r.atraso(hoje) %} · atrasada {{ r.atraso(hoje) }} dia(s){% endif %}</li>
+          {% endfor %}
+        </ul>
+        <form method="post" action="/revisao/hoje">
+          <button class="ds-botao" type="submit" style="width:100%">Fazer as revisões de hoje</button>
+        </form>
+      {% elif h.proxima_revisao %}
+        <p class="miudo">Próxima revisão: <b>{{ h.proxima_revisao.nome }}</b> em {{ h.proxima_revisao.vence_em.strftime('%d/%m') }}.</p>
+      {% endif %}
       {% if h.revisar.erradas %}
         <div>
           <span class="numero-grande">{{ h.revisar.erradas }}</span>

@@ -1461,3 +1461,32 @@ valer apenas com `<body class="ds">`.
   de questao real, e dizem isso no selo; a rodada de IA continua saindo so
   de "Gerar questoes", com o aviso no topo. Um teste garante que o compilado
   nunca alcanca a tabela das geradas.
+
+## Revisao espacada 1-7-30 e o fator de tempo (fase 6 da especificacao, 25/09/2026)
+
+- **assunto errado volta em 1, 7 e 30 dias, sem IA.** Errei -> revisao em 1
+  dia. Acertei um questao do assunto NA DATA da revisao ou depois -> proxima
+  em 7 dias, depois 30, depois sai da agenda. Errei de novo -> volta para 1.
+  Acertar antes do vencimento e treino, nao revisao: o espacamento existe
+  para testar o que ficou depois de um tempo;
+- **a agenda e calculada do historico de respostas, sem tabela nova.** Nao ha
+  estado para dessincronizar, e descartar um simulado apaga sozinho o que
+  ele tinha agendado - um teste garante;
+- o "assunto" e o mesmo do Onde estudar primeiro (catalogo para Portugues e
+  Raciocinio, edital para o resto). **Questao sem assunto - toda a de
+  Direito, hoje - agenda a materia inteira**, e a tela escreve "Direito
+  Penal (sem assunto)". Revisar a materia e melhor que nao revisar nada;
+- so questao real e nao anulada agenda revisao;
+- a rodada de revisao comeca pelas questoes que eu errei no assunto, e
+  completa com outras do mesmo assunto que eu ainda nao respondi (3 por
+  assunto): a mesma pergunta de novo testaria a letra, nao o assunto;
+- **o fator de tempo entrou na formula**: prioridade = peso x (1 - acerto) x
+  fator. O fator e 1 + dias sem revisar / 30, ate 2. **Sem treino ele e
+  neutro (1)** e o cartao diz "ainda nao treinada" - nao ha ultima revisao
+  para contar dias. Vale na home (por materia) e na ordem do Onde estudar
+  primeiro (por assunto); os "pontos a ganhar" continuam sendo so pontos;
+- **conserto achado no caminho**: o acerto por assunto do Onde estudar
+  primeiro nao filtrava as questoes geradas. As duas tabelas numeram do 1,
+  entao a resposta a uma gerada contava no assunto da questao real de mesmo
+  id. Agora so conta questao real;
+- **o cronograma por IA fica para depois**, como a especificacao manda.

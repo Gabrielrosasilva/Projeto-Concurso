@@ -481,6 +481,7 @@
                 {%- if a.pontos is not none -%}
                   {{ a.esperadas | numero }} questões esperadas, e eu acerto
                   {{ a.acerto | numero(0) }}% em {{ a.respondidas }}
+                  {%- if a.dias_sem_revisar %}; {{ a.dias_sem_revisar }} dia(s) sem revisar (×{{ a.fator | numero }}){% endif -%}
                 {%- else -%}
                   ainda não respondi nenhuma no simulado
                 {%- endif -%}
@@ -499,7 +500,9 @@
         <strong>Questões esperadas</strong> é o peso da matéria no edital de
         {{ p.ano_do_edital }} vezes a fatia que o assunto ocupa nas provas.
         <strong>Pontos a ganhar</strong> é isso vezes o que eu ainda erro:
-        é o que está em jogo hoje, e não o tamanho do assunto.
+        é o que está em jogo hoje, e não o tamanho do assunto. A ordem ainda
+        multiplica pelo <strong>tempo sem revisar</strong>: ×1 no dia, até ×2
+        depois de um mês. Assunto nunca treinado tem esse fator neutro.
       </p>
 
       {% if p.onde_comecar | selectattr('pontos', 'none') | first %}
