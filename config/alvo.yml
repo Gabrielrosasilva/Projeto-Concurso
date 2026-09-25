@@ -87,6 +87,15 @@ principal:
   bancas:
     - FEPESE
 
+  # Prova de OUTRO cargo que entra no estudo como reforco: mesma banca, mesmo
+  # estado, programa parecido. Ela aparece sempre marcada e NUNCA e somada as
+  # provas do cargo - nenhuma conta de "o que a banca cobra de mim" le daqui.
+  # O cargo casa por palavra inteira dentro do cargo gravado na questao, e o
+  # ano tem que bater: o Socioeducativo de 2013 NAO entra (docs/decisoes.md).
+  reforco:
+    - cargo: agente de seguranca socioeducativo
+      ano: 2016
+
 # --- os alvos secundarios ---------------------------------------------------
 #
 # A ordem aqui e a ordem do CLAUDE.md, e ela conta: o primeiro bloco que casar

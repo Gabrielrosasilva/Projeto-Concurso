@@ -241,6 +241,20 @@ def bancas_do_principal() -> list[str]:
     return [str(x) for x in principal().get("bancas") or []]
 
 
+def e_reforco(cargo: str | None, ano: int | None) -> bool:
+    """Esta prova e de reforco - outro cargo, que treina mas nao mede?
+
+    A lista e `principal.reforco` do YAML. Cargo por palavra inteira, como o
+    resto deste arquivo, e o ano tem que bater: o mesmo cargo em outro ano e
+    outra decisao, e nao entra por semelhanca.
+    """
+    texto = normalizar(cargo or "")
+    return any(
+        item.get("ano") == ano and _padrao(str(item.get("cargo") or "")).search(texto)
+        for item in principal().get("reforco") or []
+    )
+
+
 def orgaos_do_principal() -> list[str]:
     """Os nomes e siglas do orgao do alvo principal, como o YAML os escreve.
 

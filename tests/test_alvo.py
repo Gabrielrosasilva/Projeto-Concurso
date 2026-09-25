@@ -514,3 +514,17 @@ def test_o_cargo_fora_do_estado_chega_ao_banco(banco_temporario):
     concurso = _do_banco()
     assert concurso.alvo == alvo.PRINCIPAL_FORA
     assert concurso.alvo_prioritario is False
+
+
+# --- a prova de reforco (25/09/2026) ----------------------------------------
+
+@pytest.mark.parametrize("cargo, ano, esperado", [
+    ("Agente de Segurança Socioeducativo (AS)", 2016, True),
+    # O mesmo cargo em 2013 e outra decisao, e nao entra por semelhanca.
+    ("Agente de Segurança Socioeducativo", 2013, False),
+    # A minha prova nao e reforco: ela e a prova.
+    ("Agente Penitenciário - Feminino (AP)", 2019, False),
+    (None, 2016, False),
+])
+def test_reforco_e_cargo_e_ano(cargo, ano, esperado):
+    assert alvo.e_reforco(cargo, ano) is esperado

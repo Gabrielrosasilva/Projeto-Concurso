@@ -1147,3 +1147,72 @@ secao lista cada uma com o peso que ela tem no edital, sob a marca **"nao sei
 ainda"**. Lista, e nao barra: barra e uma medida, e a medida e justamente o que
 falta. Ordenada pelo peso, porque se so uma for classificada, que seja a que
 mais vale na prova.
+
+## O historico de treino ganhou copia (25/09/2026)
+
+- **`simulados` e `respostas_de_simulado` eram as duas tabelas sem backup.**
+  As outras quatro ja iam para JSON versionado; estas viviam so no `radar.db`,
+  que esta no `.gitignore`. E justamente o unico dado que nao se reconstroi de
+  lugar nenhum: concurso vem da coleta, questao vem do PDF, e o que eu marquei
+  numa questao so existia ali;
+- o arquivo e **`data/simulados.json`**, e entra no `exportar`, no `importar` e
+  no `sincronizar` como os outros. O robo do GitHub exporta mas nao commita
+  este arquivo - ele nunca faz simulado, e o `git add` dele continua listando
+  so concursos e eventos;
+- **a questao vai pelo que nao muda**: caderno + numero na questao de prova,
+  impressao na gerada. O `id` muda quando o banco e refeito, e um backup que
+  guardasse `questao_id` voltaria apontando para as questoes erradas - sem
+  erro nenhum, so com acerto contado na materia errada;
+- o simulado se reconhece pelo `criado_em`, pelo mesmo motivo;
+- **o arquivo so cresce.** Simulado cujas questoes ainda nao existem no banco
+  (computador novo, antes do `radar questoes`) fica de fora do importar, e e
+  contado em voz alta - mas continua no arquivo, porque o exportar junta o que
+  o banco tem com o que so o arquivo tem. Sem isso, o primeiro `sincronizar`
+  num computador novo apagaria o historico inteiro;
+- **simulado entra inteiro ou nao entra.** Meia rodada mediria um acerto que eu
+  nao tive. Simulado que ja existe e so completado: a resposta que o banco nao
+  tem entra, e nada que ele tem e apagado.
+
+## A prova de 2016 (Agente Socioeducativo) entra como reforco (25/09/2026)
+
+- **entra, e sempre marcada como reforco.** E FEPESE, e SC, e a mesma
+  secretaria, e metade do programa e o mesmo do Agente Penitenciario
+  (Portugues, Direitos Humanos, Constitucional, Administrativo, Penal,
+  Processo Penal, Legislacao Estadual). Deixar 70 questoes da mesma banca de
+  fora do treino seria desperdicio;
+- **nunca e somada as de 2013 e 2019.** Ela e de OUTRO cargo: a incidencia, o
+  "Onde estudar primeiro", a previsao de questoes e qualquer numero que diga
+  "o que a banca cobra do meu cargo" continuam lendo so 2013 e 2019. Somar
+  seria dizer que a FEPESE cobra Direito Penal com 2 questoes e Lei do Sinase
+  com 10 no MEU concurso, e ela nao cobra;
+- onde ela aparecer - treino, auditoria, qualquer tela - aparece com a marca
+  de reforco, separada. Quem diz qual prova e reforco e o `config/alvo.yml`
+  (`principal.reforco`), e nao o codigo;
+- o **Agente Socioeducativo de 2013** (70 questoes, mesmo caderno do AP 2013)
+  NAO foi incluido nesta decisao: a decisao pedida foi so a de 2016. Continua
+  como estava.
+
+## Auditoria automatica dos dados de estudo (25/09/2026)
+
+- **`radar auditar` escreve `docs/auditoria.md`**, e o arquivo nao e editado a
+  mao. A especificacao pedia 20 questoes por prova conferidas a mao; a troca
+  foi por conferencia automatica de tudo que da para conferir sem ler
+  enunciado: contagem por materia contra o quadro do edital, cada letra do
+  banco contra o ultimo gabarito definitivo, e as anuladas;
+- **o que ela nao prova esta escrito no proprio relatorio**: ela usa o mesmo
+  leitor de PDF que montou o banco, e erro do leitor que se repete nas duas
+  pontas passa;
+- **o quadro do edital tem leitor proprio**, e nao o do Meu foco: o de 2013
+  escreve o valor sem os dois decimais, quebra o nome da materia em duas
+  linhas e traz um quadro por cargo; o de 2016 nao escreve o TOTAL. Mexer no
+  `edital_materias` para isso seria arriscar a tela que funciona. A
+  conferencia do leitor e a soma: as linhas depois do cabecalho tem que dar
+  exatamente o numero de questoes do caderno (e o TOTAL, quando existe);
+- **edital e caderno se encontram pelo NOME da materia**, com tolerancia
+  ("Processo" x "Processual"), e nao pela posicao. "Estadual" x "Especial"
+  nao casam - o limite de parecenca foi escolhido para isso;
+- **materia fora da ordem do edital e achado**, mesmo com a contagem certa. Foi
+  assim que apareceu o primeiro erro real: em 2016 o banco rotula as questoes
+  49-58 como Legislacao Estadual e 59-60 como Processual Penal, mas a 49 e de
+  prisao em flagrante e a 59 e da Constituicao de SC. A contagem bate por
+  coincidencia (2 + 10 dos dois lados). Nao foi corrigido nesta etapa.

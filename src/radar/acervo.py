@@ -27,6 +27,8 @@ from radar.models import (
     Evento,
     QuestaoDeProva,
     QuestaoGerada,
+    RespostaDeSimulado,
+    Simulado,
 )
 
 log = logging.getLogger(__name__)
@@ -493,3 +495,181 @@ def importar_geradas(caminho: Path | None = None) -> int:
             novas += 1
 
     return novas
+
+
+# --- o meu historico de treino ----------------------------------------------
+#
+# Das seis tabelas, estas duas eram as unicas que viviam SO no radar.db local:
+# todo simulado que eu fiz, e cada resposta que dei, sem copia nenhuma. O
+# banco e reconstruivel para tudo o mais - concurso vem da coleta, questao vem
+# do PDF - mas o que eu marquei numa questao nao vem de lugar nenhum. Perder o
+# arquivo .db era perder a unica medida de se eu estou melhorando.
+#
+# O `id` nao serve de chave, nem do simulado nem da questao: ele muda quando o
+# banco e refeito. O simulado se reconhece pelo `criado_em`, e a questao pelo
+# que a identifica de verdade - o caderno e o numero, na questao de prova; a
+# impressao, na gerada (que nao tem caderno).
+
+def caminho_dos_simulados() -> Path:
+    return config.diretorio_dados() / "simulados.json"
+
+
+def _resposta_como_linha(resposta: RespostaDeSimulado, s) -> dict:
+    """Uma resposta com a questao nomeada pelo que nao muda entre bancos."""
+    linha = {
+        "ordem": resposta.ordem,
+        "gerada": bool(resposta.gerada),
+        "escolhida": resposta.escolhida,
+        "acertou": resposta.acertou,
+        "respondida_em": _serializar(resposta.respondida_em),
+    }
+    if resposta.gerada:
+        linha["impressao"] = s.scalar(
+            select(QuestaoGerada.impressao)
+            .where(QuestaoGerada.id == resposta.questao_id)
+        )
+    else:
+        questao = s.get(QuestaoDeProva, resposta.questao_id)
+        linha["prova_url"] = questao.prova_url if questao else None
+        linha["numero"] = questao.numero if questao else None
+    return linha
+
+
+def exportar_simulados(caminho: Path | None = None) -> int:
+    """Grava os simulados e as respostas no JSON. Devolve quantos simulados.
+
+    O arquivo so cresce. Simulado que esta no arquivo e nao esta no banco
+    FICA no arquivo: e o caso do computador novo, em que o importar ainda nao
+    conseguiu trazer a rodada porque as questoes dela nao foram extraidas.
+    Exportar ali por cima apagaria o unico lugar em que ela existe.
+    """
+    criar_tabelas()
+    destino = caminho or caminho_dos_simulados()
+
+    with sessao() as s:
+        do_banco = {}
+        for simulado in s.scalars(select(Simulado)):
+            respostas = s.scalars(
+                select(RespostaDeSimulado)
+                .where(RespostaDeSimulado.simulado_id == simulado.id)
+                .order_by(RespostaDeSimulado.ordem)
+            )
+            criado = _serializar(simulado.criado_em)
+            do_banco[criado] = {
+                "criado_em": criado,
+                "finalizado_em": _serializar(simulado.finalizado_em),
+                "filtros": simulado.filtros or {},
+                "respostas": [_resposta_como_linha(r, s) for r in respostas],
+            }
+
+    ja_no_arquivo = {}
+    if destino.exists():
+        for linha in json.loads(destino.read_text(encoding="utf-8")) or []:
+            ja_no_arquivo[linha["criado_em"]] = linha
+
+    # O banco manda no que ele tem; o arquivo guarda o que o banco nao tem.
+    juntos = {**ja_no_arquivo, **do_banco}
+    linhas = [juntos[chave] for chave in sorted(juntos)]
+
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(
+        json.dumps(linhas, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return len(linhas)
+
+
+def _id_da_questao(s, linha: dict) -> int | None:
+    """O id que a questao da resposta tem NESTE banco, ou None."""
+    if linha.get("gerada"):
+        return s.scalar(
+            select(QuestaoGerada.id)
+            .where(QuestaoGerada.impressao == linha.get("impressao"))
+        )
+    return s.scalar(
+        select(QuestaoDeProva.id)
+        .where(QuestaoDeProva.prova_url == linha.get("prova_url"))
+        .where(QuestaoDeProva.numero == linha.get("numero"))
+    )
+
+
+def importar_simulados(caminho: Path | None = None) -> tuple[int, int]:
+    """Devolve ao banco o historico de treino. (entraram, ficaram de fora).
+
+    Simulado novo so entra INTEIRO. Se uma questao dele nao existe neste banco
+    - computador novo, antes do `radar questoes` - ele fica de fora e e
+    contado, em vez de entrar pela metade: meia rodada mediria um acerto que
+    eu nao tive. Ele continua no arquivo e entra no proximo importar.
+
+    Simulado que ja existe aqui nao e reescrito, so completado: a resposta
+    que o banco nao tem e o arquivo tem entra, e nada que o banco ja tem e
+    apagado. Rodar duas vezes da no mesmo resultado.
+    """
+    origem = caminho or caminho_dos_simulados()
+    if not origem.exists():
+        return 0, 0
+
+    criar_tabelas()
+    linhas = json.loads(origem.read_text(encoding="utf-8")) or []
+    datas = {"criado_em", "finalizado_em", "respondida_em"}
+
+    novos = de_fora = 0
+    with sessao() as s:
+        existentes = {
+            _serializar(sim.criado_em): sim for sim in s.scalars(select(Simulado))
+        }
+        for linha in linhas:
+            respostas = [
+                (_id_da_questao(s, r), r) for r in linha.get("respostas") or []
+            ]
+            simulado = existentes.get(linha["criado_em"])
+
+            if simulado is None:
+                if any(questao_id is None for questao_id, _ in respostas):
+                    de_fora += 1
+                    continue
+                simulado = Simulado(
+                    criado_em=_desserializar("criado_em", linha["criado_em"], datas),
+                    finalizado_em=_desserializar(
+                        "finalizado_em", linha.get("finalizado_em"), datas
+                    ),
+                    filtros=linha.get("filtros") or {},
+                )
+                s.add(simulado)
+                s.flush()          # precisa do id para as respostas
+                existentes[linha["criado_em"]] = simulado
+                novos += 1
+            elif simulado.finalizado_em is None and linha.get("finalizado_em"):
+                simulado.finalizado_em = _desserializar(
+                    "finalizado_em", linha["finalizado_em"], datas
+                )
+
+            for questao_id, r in respostas:
+                if questao_id is None:
+                    continue
+                gerada = bool(r.get("gerada"))
+                minha = s.scalar(
+                    select(RespostaDeSimulado)
+                    .where(RespostaDeSimulado.simulado_id == simulado.id)
+                    .where(RespostaDeSimulado.questao_id == questao_id)
+                    .where(RespostaDeSimulado.gerada == gerada)
+                )
+                if minha is None:
+                    minha = RespostaDeSimulado(
+                        simulado_id=simulado.id, questao_id=questao_id,
+                        gerada=gerada, ordem=r.get("ordem"),
+                    )
+                    s.add(minha)
+                if minha.escolhida is None and r.get("escolhida"):
+                    minha.escolhida = r["escolhida"]
+                    minha.acertou = r.get("acertou")
+                    minha.respondida_em = _desserializar(
+                        "respondida_em", r.get("respondida_em"), datas
+                    )
+
+    if de_fora:
+        log.warning(
+            "%d simulado(s) ficaram de fora: questao que este banco nao tem",
+            de_fora,
+        )
+    return novos, de_fora

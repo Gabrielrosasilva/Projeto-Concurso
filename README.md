@@ -137,9 +137,16 @@ dois: `git pull` → `radar importar` → `radar exportar` → commit → push.
 
 A ordem importa. Importar **antes** de exportar e o que traz as marcas de
 aviso do robo para o seu banco antes de voce escrever o JSON de volta — na
-ordem inversa, ele mandaria tudo de novo no dia seguinte. Ele so encosta em
-`data/concursos.json` e `data/eventos.json`; o resto da pasta fica como esta,
-e conflito de rebase ele nao tenta resolver: para e mostra o erro.
+ordem inversa, ele mandaria tudo de novo no dia seguinte. Ele so encosta nos
+JSON do radar em `data/`; o resto da pasta fica como esta, e conflito de
+rebase ele nao tenta resolver: para e mostra o erro.
+
+Um deles e **`data/simulados.json`**: cada simulado e cada resposta que voce
+deu. E o unico dado que nao se reconstroi de lugar nenhum, e ate 25/09/2026
+ele vivia so no `radar.db`. A questao vai nomeada pelo caderno e pelo numero
+(a gerada, pela impressao), porque o id muda quando o banco e refeito. O
+arquivo so cresce: simulado cujas questoes ainda nao foram extraidas neste
+banco fica de fora do importar, e contado, mas nao sai do arquivo.
 
 Rode depois de marcar favorito ou anotar alguma coisa. E assim que o robo
 passa a conhecer a sua estrela — sem isso, ele nunca avisa mudanca de
@@ -422,6 +429,7 @@ radar avisar --sem-favoritos   # so os concursos novos
 radar testar-telegram       # uma mensagem de teste, nao mexe no banco
 radar calendario            # grava radar.ics
 radar sincronizar           # troca com o GitHub: pull, importar, exportar, push
+radar auditar               # confere banco x PDFs e escreve docs/auditoria.md
 ```
 
 `radar avisar` e o **unico** lugar que manda mensagem, e quem o chama todo dia
@@ -806,7 +814,8 @@ src/radar/
 ├── macetes.py      o costume da banca: forma de perguntar, questao repetida,
 │                   palavra frequente, letra do gabarito
 ├── calendario.py   monta o .ics dos prazos (iCalendar, sem dependencia)
-├── acervo.py       manifesto versionado das provas
+├── acervo.py       exporta e importa o banco em JSON (inclusive os simulados)
+├── auditoria.py    confere o banco contra edital e gabarito definitivo
 ├── util.py         fuso e formatacao de data
 ├── cli.py          comandos typer. `atualizar` roda a rotina inteira
 ├── collectors/

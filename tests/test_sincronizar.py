@@ -97,16 +97,16 @@ def test_a_sequencia_do_git(banco_temporario, git):
 def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     """O resto do meu working tree fica como esta.
 
-    Sao quatro desde a etapa 15: os concursos, a linha do tempo, o assunto e
-    as questoes que a IA escreveu. Os dois ultimos porque custaram dinheiro, e
-    perder o arquivo e pagar de novo pela mesma questao.
+    Sao cinco: os concursos, a linha do tempo, o assunto e as questoes que a
+    IA escreveu - esses dois porque custaram dinheiro - e, desde 25/09/2026,
+    os simulados: o meu historico de treino, que nao tinha copia nenhuma.
     """
     runner.invoke(cli.app, ["sincronizar"])
 
     (add,) = [c for c in git.comandos if c[0] == "add"]
     assert set(add[1:]) == {
         "data/concursos.json", "data/eventos.json", "data/assuntos.json",
-        "data/questoes_geradas.json",
+        "data/questoes_geradas.json", "data/simulados.json",
     }
 
 
@@ -247,3 +247,18 @@ def test_a_contagem_por_anel_aparece_na_saida(banco_temporario, git):
     resultado = runner.invoke(cli.app, ["sincronizar"])
 
     assert "reclassificar" in resultado.output
+
+
+def test_o_historico_de_treino_vai_junto(banco_temporario, git):
+    """O simulado feito aqui sai no arquivo que vai para o git."""
+    import json
+
+    from radar.models import Simulado
+
+    with sessao() as s:
+        s.add(Simulado(filtros={}))
+
+    runner.invoke(cli.app, ["sincronizar"])
+
+    linhas = json.loads(acervo.caminho_dos_simulados().read_text(encoding="utf-8"))
+    assert len(linhas) == 1

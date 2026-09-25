@@ -696,6 +696,43 @@ def cobertura(
 
 
 @app.command()
+def auditar(
+    caminho: str = typer.Option(None, help="Onde gravar (padrao: docs/auditoria.md)"),
+) -> None:
+    """Confere o banco contra os PDFs: contagem por materia, gabarito, anuladas.
+
+    Le de novo o quadro do edital e o ultimo gabarito definitivo de cada prova
+    do alvo (e das de reforco), compara com o banco e escreve o resultado em
+    docs/auditoria.md. Nada e conferido a mao nem digitado.
+    """
+    from radar import auditoria
+
+    destino = Path(caminho) if caminho else auditoria.caminho_padrao()
+    provas = auditoria.escrever(destino)
+    problemas = sum(len(p.problemas) for p in provas)
+    for p in provas:
+        papel = "reforco" if p.reforco else "alvo"
+        cor = "red" if p.problemas else "green"
+        console.print(
+            f"[{cor}]{p.ano} {p.cargo}[/] ({papel}): {p.questoes} questoes, "
+            f"{len(p.anuladas_no_banco)} anuladas, "
+            f"{len(p.divergencias)} divergencia(s) de gabarito"
+        )
+    # Materia fora da ordem do edital nao muda numero nenhum, mas e o sinal de
+    # que a separacao do caderno pode ter trocado o rotulo de dois blocos.
+    fora_de_ordem = sum(len(p.fora_de_ordem) for p in provas)
+    if problemas:
+        console.print(f"[red]{problemas} numero(s) nao batem[/] - veja {destino}")
+    elif fora_de_ordem:
+        console.print(
+            f"[yellow]Os numeros batem, mas {fora_de_ordem} materia(s) estao "
+            f"fora da ordem do edital[/] - veja {destino}"
+        )
+    else:
+        console.print(f"[green]Tudo bate.[/] Relatorio em {destino}")
+
+
+@app.command()
 def gerar(
     materia: str = typer.Option(
         None, help="So desta materia. Sem isso, de qualquer materia do cargo"
@@ -1256,6 +1293,19 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"para {destino_geradas}"
     )
 
+    # O quinto e o unico que nao se reconstroi de lugar nenhum: o que eu
+    # respondi em cada simulado. Sem ele, o historico de treino morria junto
+    # com o radar.db.
+    destino_simulados = (
+        destino.with_name("simulados.json") if caminho
+        else acervo.caminho_dos_simulados()
+    )
+    simulados_gravados = acervo.exportar_simulados(destino_simulados)
+    console.print(
+        f"[green]{simulados_gravados}[/] simulado(s) exportado(s) para "
+        f"{destino_simulados}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1310,11 +1360,32 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
             f"de {origem_geradas}"
         )
 
+    origem_simulados = (
+        origem.with_name("simulados.json") if caminho
+        else acervo.caminho_dos_simulados()
+    )
+    if origem_simulados.exists():
+        _importar_simulados(origem_simulados)
+
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
     # `radar sincronizar`, e numero menor do que o esperado quer dizer que
     # faltou sincronizar - nao e erro.
     console.print(f"Conhece [bold]{servico.contar_favoritos()}[/] favorito(s).")
+
+
+def _importar_simulados(origem: Path | None = None) -> None:
+    """Traz o historico de treino e diz em voz alta o que ficou de fora."""
+    novos, de_fora = acervo.importar_simulados(origem)
+    console.print(f"   {novos} simulado(s) de volta ao banco")
+    if de_fora:
+        # Fica de fora quando a questao ainda nao foi extraida neste banco.
+        # Ele continua no arquivo; o remedio e extrair e importar de novo.
+        console.print(
+            f"   [yellow]{de_fora} simulado(s) ficaram de fora:[/] as questoes "
+            f"deles ainda nao estao neste banco. Rode `radar questoes` e "
+            f"importe de novo - o arquivo nao perde nada enquanto isso."
+        )
 
 
 @app.command()
@@ -1389,7 +1460,8 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
 
 
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
-                     "data/assuntos.json", "data/questoes_geradas.json")
+                     "data/assuntos.json", "data/questoes_geradas.json",
+                     "data/simulados.json")
 
 
 @app.command()
@@ -1417,8 +1489,9 @@ def sincronizar(
     desfazendo na hora o que eu tinha acabado de corrigir. Com ele dentro,
     todo sincronizar aplica a regra ATUAL e leva o resultado ate o robo.
 
-    So mexe em `data/concursos.json` e `data/eventos.json`. O que mais estiver
-    mudado na pasta fica como esta.
+    So mexe nos arquivos de `ARQUIVOS_DO_RADAR` - entre eles o
+    `data/simulados.json`, a unica copia do meu historico de treino fora do
+    radar.db. O que mais estiver mudado na pasta fica como esta.
     """
     console.print("[bold]1/6[/] Trazendo o que o robo coletou")
     pull = _git("pull", "--rebase", "origin", "main")
@@ -1433,6 +1506,7 @@ def sincronizar(
     console.print(
         f"   {concursos} concurso(s) lido(s), {eventos_novos} evento(s) novo(s)"
     )
+    _importar_simulados()
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -1448,10 +1522,13 @@ def sincronizar(
     console.print("[bold]4/6[/] Escrevendo o meu banco de volta no JSON")
     total = acervo.exportar()
     total_eventos = acervo.exportar_eventos()
+    # O historico de treino vive so nesta maquina - o robo nunca faz
+    # simulado. E aqui que ele ganha a copia que o radar.db nao tem.
+    total_simulados = acervo.exportar_simulados()
     favoritos = servico.contar_favoritos()
     console.print(
-        f"   {total} concurso(s) e {total_eventos} evento(s), "
-        f"com [bold]{favoritos}[/] favorito(s)"
+        f"   {total} concurso(s), {total_eventos} evento(s) e "
+        f"{total_simulados} simulado(s), com [bold]{favoritos}[/] favorito(s)"
     )
 
     console.print("[bold]5/6[/] Commitando")
