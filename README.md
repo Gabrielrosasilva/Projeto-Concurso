@@ -430,6 +430,9 @@ radar testar-telegram       # uma mensagem de teste, nao mexe no banco
 radar calendario            # grava radar.ics
 radar sincronizar           # troca com o GitHub: pull, importar, exportar, push
 radar auditar               # confere banco x PDFs e escreve docs/auditoria.md
+radar simulados             # lista as rodadas: id, data, acerto, materias
+radar descartar 3           # apaga a rodada 3 e as respostas dela (sem volta)
+radar descartar --todos     # apaga todas, perguntando antes
 ```
 
 `radar avisar` e o **unico** lugar que manda mensagem, e quem o chama todo dia

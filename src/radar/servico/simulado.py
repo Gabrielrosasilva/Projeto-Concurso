@@ -688,3 +688,111 @@ def evolucao() -> Evolucao:
     resultado.recente = taxa(recentes)
     resultado.anterior = taxa(antigas)
     return resultado
+
+
+# --- listar e descartar rodadas ---------------------------------------------
+#
+# Rodada de teste - chutada sem ler, so para ver se a tela funcionava - estraga
+# tudo que mede: a taxa de acerto, a prioridade da home, o "Onde estudar
+# primeiro" e a revisao. Descartar APAGA de verdade, simulado e respostas: dado
+# de teste nao tem valor historico, e marcar como "ignorado" obrigaria cada
+# conta do radar a lembrar do filtro.
+
+
+@dataclass
+class ResumoDaRodada:
+    id: int
+    criado_em: object
+    questoes: int
+    respondidas: int
+    acertos: int
+    materias: list[str]
+    gerada: bool
+
+    @property
+    def porcentagem(self) -> float | None:
+        return (self.acertos / self.respondidas * 100) if self.respondidas else None
+
+
+def listar_simulados() -> list[ResumoDaRodada]:
+    """Todas as rodadas, da mais nova para a mais velha."""
+    criar_tabelas()
+    with sessao() as s:
+        rodadas = list(s.scalars(select(Simulado).order_by(Simulado.criado_em.desc())))
+        resumo = []
+        for sim in rodadas:
+            respostas = list(s.scalars(
+                select(RespostaDeSimulado)
+                .where(RespostaDeSimulado.simulado_id == sim.id)
+            ))
+            reais = [r.questao_id for r in respostas if not r.gerada]
+            geradas = [r.questao_id for r in respostas if r.gerada]
+            materias = set()
+            if reais:
+                materias |= set(s.scalars(
+                    select(QuestaoDeProva.materia).where(QuestaoDeProva.id.in_(reais))
+                ))
+            if geradas:
+                materias |= set(s.scalars(
+                    select(QuestaoGerada.materia).where(QuestaoGerada.id.in_(geradas))
+                ))
+            respondidas = [r for r in respostas if r.escolhida is not None]
+            resumo.append(ResumoDaRodada(
+                id=sim.id, criado_em=sim.criado_em, questoes=len(respostas),
+                respondidas=len(respondidas),
+                acertos=sum(1 for r in respondidas if r.acertou),
+                materias=sorted(m for m in materias if m),
+                gerada=bool((sim.filtros or {}).get("geradas")),
+            ))
+    return resumo
+
+
+def _apagar(s, simulados: list) -> tuple[int, int]:
+    """Apaga as rodadas e todas as linhas delas. (rodadas, respostas DADAS).
+
+    Conta so a resposta que eu dei: a rodada abandonada tem 20 linhas e
+    nenhuma resposta, e "apaguei 108 respostas" quando eu respondi 8 seria
+    um numero que nao diz nada.
+    """
+    respondidas = 0
+    for sim in simulados:
+        for r in s.scalars(
+            select(RespostaDeSimulado).where(RespostaDeSimulado.simulado_id == sim.id)
+        ):
+            respondidas += r.escolhida is not None
+            s.delete(r)
+        s.delete(sim)
+    return len(simulados), respondidas
+
+
+def descartar_simulado(simulado_id: int) -> int | None:
+    """Apaga uma rodada e as respostas dela. Quantas respostas DADAS saíram;
+    None quando a rodada nao existe.
+
+    Sai do banco E do data/simulados.json - so do banco, o proximo importar
+    a traria de volta.
+    """
+    from radar import acervo
+
+    criar_tabelas()
+    with sessao() as s:
+        sim = s.get(Simulado, simulado_id)
+        if sim is None:
+            return None
+        criado = sim.criado_em
+        _, respostas = _apagar(s, [sim])
+    acervo.esquecer_simulados([criado])
+    return respostas
+
+
+def descartar_todos() -> tuple[int, int]:
+    """Apaga TODAS as rodadas e respostas. (rodadas, respostas)."""
+    from radar import acervo
+
+    criar_tabelas()
+    with sessao() as s:
+        simulados = list(s.scalars(select(Simulado)))
+        criados = [sim.criado_em for sim in simulados]
+        resultado = _apagar(s, simulados)
+    acervo.esquecer_simulados(criados)
+    return resultado

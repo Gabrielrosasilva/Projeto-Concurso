@@ -394,6 +394,8 @@ def _pagina_do_simulado(request: Request, simulado=None, **extra):
         "desempenho_geral": servico.desempenho(),
         # O segundo numero, sempre do lado e nunca somado ao primeiro.
         "desempenho_das_geradas": servico.desempenho_das_geradas(),
+        # As rodadas, cada uma com o botao de descartar.
+        "rodadas": servico.listar_simulados(),
     }
     contexto.update(extra)
     return templates.TemplateResponse(
@@ -405,6 +407,17 @@ def _pagina_do_simulado(request: Request, simulado=None, **extra):
 def simulado_inicio(request: Request):
     """A tela de comecar, com o acumulado de acertos por materia."""
     return _pagina_do_simulado(request)
+
+
+@app.post("/simulado/{simulado_id}/descartar")
+def simulado_descartar(simulado_id: int):
+    """Apaga a rodada e as respostas dela, do banco e do backup.
+
+    So chega aqui pelo segundo botao - o de confirmar, dentro do <details> da
+    tela. Rodada que nao existe mais (F5 depois de apagar) volta sem erro.
+    """
+    servico.descartar_simulado(simulado_id)
+    return RedirectResponse("/simulado?descartado=1", status_code=303)
 
 
 @app.post("/simulado/novo")

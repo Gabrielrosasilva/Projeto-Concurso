@@ -1384,3 +1384,23 @@ valer apenas com `<body class="ds">`.
   ela nao levaria a lugar nenhum;
 - a home cabe em 1366x680 (notebook com a barra do navegador), medido em
   captura do Edge.
+
+## Descartar simulado (25/09/2026)
+
+- **descartar APAGA, nao marca como ignorado.** Rodada de teste, chutada so
+  para ver a tela, nao tem valor historico. Marcar como "ignorada" obrigaria
+  cada conta do radar - acerto, prioridade da home, onde estudar, revisao - a
+  lembrar do filtro, e a primeira que esquecesse estragaria a medida de novo;
+- `radar simulados` lista (id, data, questoes, respondidas, acerto,
+  materias); `radar descartar <id>` apaga uma; `radar descartar --todos`
+  apaga todas e **pergunta antes** (`--sim` pula a pergunta). A pergunta
+  aceita "s": o `typer.confirm` so entendia "y";
+- na tela do Simulado, "Suas rodadas" lista cada uma com um "descartar" em
+  dois passos: o `<details>` abre a pergunta, e so o segundo botao apaga.
+  Sem JavaScript;
+- **sai do banco e do `data/simulados.json`.** O backup da parte 4 so deixa
+  o arquivo crescer, de proposito - e por isso, sem limpar o arquivo, o
+  proximo `importar` ressuscitaria a rodada apagada. A copia no GitHub
+  esquece no proximo `radar sincronizar`;
+- o numero que o descartar diz e o de respostas DADAS, e nao o de linhas da
+  tabela: rodada abandonada tem 20 linhas e nenhuma resposta.

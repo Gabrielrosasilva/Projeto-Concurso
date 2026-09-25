@@ -9,6 +9,16 @@
      design system, e o body sem class="ds" nao muda de cara. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
+    /* Descartar em dois passos, sem JavaScript: o <details> mostra a
+       pergunta, e so o segundo botao apaga. */
+    details.descartar summary{cursor:pointer;color:var(--suave);font-size:.8rem;
+      list-style:none}
+    details.descartar summary::-webkit-details-marker{display:none}
+    details.descartar summary:hover{color:#be123c}
+    details.descartar form{display:flex;flex-direction:column;align-items:flex-end;
+      gap:.3rem;margin-top:.3rem;font-size:.78rem}
+    details.descartar button{background:#be123c;color:#fff;border:0;border-radius:6px;
+      padding:.3rem .6rem;font-size:.78rem;cursor:pointer}
     :root {
       color-scheme: light dark;
       --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
@@ -249,6 +259,41 @@
               <td>{{ d.materia }}</td>
               <td class="n">{{ '%.0f'|format(d.porcentagem) }}%</td>
               <td class="n">{{ d.respondidas }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    {% endif %}
+
+    {# -------------------------------------------- as rodadas ------------ #}
+    {% if rodadas %}
+      <div class="caixa" style="margin-top:1rem">
+        <h2 style="font-size:1rem;margin:0 0 .2rem">Suas rodadas</h2>
+        <p class="dica" style="margin:0 0 .8rem">
+          Rodada de teste - chutada só para ver a tela - estraga o acerto, a
+          prioridade da home e a revisão. Descartar apaga de verdade, e não
+          tem volta.
+        </p>
+        {% if request.query_params.get('descartado') %}
+          <p class="dica" style="margin:0 0 .8rem"><b>Rodada descartada.</b></p>
+        {% endif %}
+        <table>
+          <tr><th>Data</th><th class="n">Questões</th><th class="n">Acerto</th><th>Matérias</th><th></th></tr>
+          {% for r in rodadas %}
+            <tr>
+              <td><a href="/simulado/{{ r.id }}">{{ r.criado_em | data }}</a>{% if r.gerada %} {{ selo('ia', 'IA') }}{% endif %}</td>
+              <td class="n">{{ r.respondidas }}/{{ r.questoes }}</td>
+              <td class="n">{% if r.porcentagem is not none %}{{ '%.0f'|format(r.porcentagem) }}%{% else %}&mdash;{% endif %}</td>
+              <td class="dica" style="margin:0">{{ r.materias[:2] | join(', ') }}{% if r.materias | length > 2 %} +{{ r.materias | length - 2 }}{% endif %}</td>
+              <td class="n">
+                <details class="descartar">
+                  <summary>descartar</summary>
+                  <form method="post" action="/simulado/{{ r.id }}/descartar">
+                    <span>Apagar esta rodada e {{ r.respondidas }} resposta(s)?</span>
+                    <button type="submit">Sim, apagar</button>
+                  </form>
+                </details>
+              </td>
             </tr>
           {% endfor %}
         </table>

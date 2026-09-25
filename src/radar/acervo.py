@@ -678,3 +678,25 @@ def importar_simulados(caminho: Path | None = None) -> tuple[int, int]:
             de_fora,
         )
     return novos, de_fora
+
+
+def esquecer_simulados(criados_em: list, caminho: Path | None = None) -> int:
+    """Tira do arquivo os simulados descartados. Devolve quantos saíram.
+
+    O `exportar_simulados` so deixa o arquivo crescer - e de proposito, para
+    um computador novo nao apagar o historico. Por isso descartar precisa
+    passar aqui: sem isso, a rodada apagada do banco continuaria no arquivo e
+    o proximo `importar` a traria de volta.
+    """
+    origem = caminho or caminho_dos_simulados()
+    if not origem.exists():
+        return 0
+    chaves = {_serializar(c) for c in criados_em}
+    linhas = json.loads(origem.read_text(encoding="utf-8")) or []
+    ficam = [linha for linha in linhas if linha.get("criado_em") not in chaves]
+    if len(ficam) != len(linhas):
+        origem.write_text(
+            json.dumps(ficam, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    return len(linhas) - len(ficam)

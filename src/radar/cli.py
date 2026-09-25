@@ -695,6 +695,89 @@ def cobertura(
     _mostrar_cobertura(so_alvo)
 
 
+def _materias_curtas(materias: list[str], quantas: int = 3) -> str:
+    """As tres primeiras materias e "+N": a lista inteira nao cabe na linha."""
+    if not materias:
+        return "-"
+    texto = ", ".join(materias[:quantas])
+    return texto + (f" +{len(materias) - quantas}" if len(materias) > quantas else "")
+
+
+@app.command()
+def simulados() -> None:
+    """Lista as rodadas que existem: id, data, questoes, acerto e materias.
+
+    E o que eu olho antes de `radar descartar`, para saber qual id apagar.
+    """
+    rodadas = servico.listar_simulados()
+    if not rodadas:
+        console.print("[yellow]Nenhum simulado.[/]")
+        return
+
+    tabela = Table(title=f"{len(rodadas)} simulado(s)")
+    tabela.add_column("id", justify="right")
+    tabela.add_column("Data")
+    tabela.add_column("Questoes", justify="right")
+    tabela.add_column("Respondidas", justify="right")
+    tabela.add_column("Acerto", justify="right")
+    tabela.add_column("Materias")
+    for r in rodadas:
+        acerto = f"{r.porcentagem:.0f}%" if r.porcentagem is not None else "-"
+        materias = _materias_curtas(r.materias)
+        if r.gerada:
+            materias = "[red]IA[/] " + materias
+        tabela.add_row(
+            str(r.id), formatar_data(r.criado_em), str(r.questoes),
+            str(r.respondidas), acerto, materias,
+        )
+    console.print(tabela)
+
+
+@app.command()
+def descartar(
+    simulado_id: int = typer.Argument(None, help="O id, de `radar simulados`"),
+    todos: bool = typer.Option(False, "--todos", help="Apaga TODAS as rodadas"),
+    sim: bool = typer.Option(False, "--sim", help="Nao pergunta antes de apagar"),
+) -> None:
+    """Apaga um simulado e as respostas dele - de verdade, e sem volta.
+
+    Para rodada de teste, chutada so para ver a tela: ela estraga a taxa de
+    acerto, a prioridade da home e a revisao. Sai do banco e tambem do
+    data/simulados.json, senao o proximo `importar` a traria de volta.
+    """
+    if todos == (simulado_id is not None):
+        console.print("[red]Diga um id, ou --todos.[/] Veja os ids em `radar simulados`.")
+        raise typer.Exit(code=1)
+
+    if todos:
+        rodadas = servico.listar_simulados()
+        if not rodadas:
+            console.print("[yellow]Nenhum simulado para descartar.[/]")
+            return
+        respondidas = sum(r.respondidas for r in rodadas)
+        # "s" de sim: o typer.confirm so entende "y", e eu respondo em portugues.
+        resposta = "s" if sim else typer.prompt(
+            f"Apagar {len(rodadas)} simulado(s) e {respondidas} resposta(s)? "
+            f"Nao tem volta [s/N]", default="n", show_default=False,
+        )
+        if resposta.strip().lower() not in ("s", "sim", "y", "yes"):
+            console.print("Nada apagado.")
+            raise typer.Exit(code=1)
+        quantos, respostas = servico.descartar_todos()
+        console.print(f"[green]{quantos} simulado(s) e {respostas} resposta(s) apagados.[/]")
+    else:
+        respostas = servico.descartar_simulado(simulado_id)
+        if respostas is None:
+            console.print(f"[red]Nao existe simulado {simulado_id}.[/]")
+            raise typer.Exit(code=1)
+        console.print(f"[green]Simulado {simulado_id} apagado[/], com {respostas} resposta(s).")
+
+    console.print(
+        "[dim]Saiu do banco e do data/simulados.json. Rode `radar sincronizar` "
+        "para a copia do GitHub esquecer tambem.[/]"
+    )
+
+
 @app.command()
 def auditar(
     caminho: str = typer.Option(None, help="Onde gravar (padrao: docs/auditoria.md)"),
