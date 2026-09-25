@@ -87,6 +87,16 @@ ETAPAS = [
     ("encerrado", "encerrado"),
 ]
 templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
+
+# O design system (design.css) e servido como arquivo, e nao colado em cada
+# pagina: um lugar so para a cor e o espaco, e o navegador guarda em cache.
+from fastapi.staticfiles import StaticFiles  # noqa: E402 - junto de quem usa
+
+app.mount(
+    "/estatico",
+    StaticFiles(directory=str(Path(__file__).parent / "static")),
+    name="estatico",
+)
 # Deixa formatar_data disponivel dentro do HTML, para o template nao precisar
 # saber nada de fuso horario.
 templates.env.filters["data"] = formatar_data

@@ -1,0 +1,351 @@
+/* ==========================================================================
+   Design system do Radar - o unico lugar em que cor, espaco e letra moram.
+
+   Regra de uso: tela nova (ou tela migrada) nao escreve cor nem tamanho a
+   mao. Ela usa as variaveis daqui e os componentes daqui; o <style> da
+   propria tela so guarda o que e so dela (a pizza, um grafico).
+
+   Tres camadas, nesta ordem:
+     1. as VARIAVEIS (tokens): cor, espaco, tipografia, raio, sombra;
+     2. o MODO ESCURO: as mesmas variaveis com outros valores. Segue o
+        sistema operacional, e `?tema=escuro` / `?tema=claro` na URL forca um
+        dos dois - serve para eu comparar sem mexer no Windows;
+     3. os COMPONENTES: pagina, cartao, bloco, selo, aviso, botao, campo.
+
+   Sem JavaScript: tudo aqui e CSS puro, como manda o CLAUDE.md.
+   ========================================================================== */
+
+
+/* --- 1. variaveis --------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Superficies e texto. */
+  --cor-fundo:        #f4f5f7;
+  --cor-superficie:   #ffffff;
+  --cor-superficie-2: #f8f9fb;   /* dentro de um cartao: lista, campo */
+  --cor-texto:        #14171f;
+  --cor-texto-suave:  #5b6472;
+  --cor-borda:        #e2e5ea;
+
+  /* A cor da acao: link, botao, aba ativa. Uma so, para eu saber onde clicar. */
+  --cor-acao:         #1d4ed8;
+  --cor-acao-fundo:   #e8eeff;
+  --cor-acao-texto:   #ffffff;
+
+  /* Os selos de confianca. Quatro familias, porque os seis selos da
+     especificacao sao quatro origens: o que a banca publicou (azul), o que o
+     sistema contou (verde), o que o sistema adivinhou (amarelo) e o que a IA
+     escreveu (vermelho). A cor diz a origem antes de eu ler a palavra. */
+  --selo-oficial:          #1d4ed8;
+  --selo-oficial-fundo:    #e6edff;
+  --selo-calculado:        #047857;
+  --selo-calculado-fundo:  #dff5eb;
+  --selo-automatico:       #92400e;
+  --selo-automatico-fundo: #fdf1d8;
+  --selo-ia:               #b91c1c;
+  --selo-ia-fundo:         #fdeaea;
+
+  /* O aviso "a lei mudou": nao e selo de origem, e alerta de validade. */
+  --cor-aviso:        #9a3412;
+  --cor-aviso-fundo:  #ffedd5;
+
+  /* Espaco: uma escala so, de 4 em 4 px. Margem e recuo saem daqui. */
+  --esp-1: .25rem;   /*  4px */
+  --esp-2: .5rem;    /*  8px */
+  --esp-3: .75rem;   /* 12px */
+  --esp-4: 1rem;     /* 16px */
+  --esp-5: 1.5rem;   /* 24px */
+  --esp-6: 2rem;     /* 32px */
+  --esp-7: 3rem;     /* 48px */
+
+  /* Tipografia: a letra do sistema, que ja esta no computador - nada para
+     baixar, e a tela abre igual sem internet. */
+  --fonte:        system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte-numero: ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace;
+  --tam-xs:   .75rem;
+  --tam-sm:   .85rem;
+  --tam-base: .95rem;
+  --tam-md:   1.05rem;
+  --tam-lg:   1.3rem;
+  --tam-xl:   1.7rem;
+  --peso-normal: 400;
+  --peso-medio:  600;
+  --peso-forte:  750;
+  --linha:        1.55;
+  --linha-titulo: 1.2;
+
+  /* Forma. */
+  --raio-sm:   6px;
+  --raio:      12px;
+  --raio-pill: 999px;
+  --sombra:    0 1px 2px rgba(16, 24, 40, .05);
+  --sombra-alta: 0 8px 24px rgba(16, 24, 40, .12);
+
+  /* Largura da coluna de leitura. */
+  --largura-pagina: 860px;
+}
+
+
+/* --- 2. modo escuro ------------------------------------------------------- */
+/* Os mesmos nomes, outros valores. Escrito duas vezes de proposito: uma para
+   quem segue o sistema, outra para o `?tema=escuro` forcar - e o `?tema=claro`
+   desliga a primeira. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    color-scheme: dark;
+    --cor-fundo:        #0e1014;
+    --cor-superficie:   #171a21;
+    --cor-superficie-2: #1d2129;
+    --cor-texto:        #e7e9ee;
+    --cor-texto-suave:  #9aa2b0;
+    --cor-borda:        #2a303b;
+    --cor-acao:         #86a8ff;
+    --cor-acao-fundo:   #1b2740;
+    --cor-acao-texto:   #0e1014;
+    --selo-oficial:          #93b4ff;
+    --selo-oficial-fundo:    #17233d;
+    --selo-calculado:        #5ee0a0;
+    --selo-calculado-fundo:  #0f2a1e;
+    --selo-automatico:       #fcd34d;
+    --selo-automatico-fundo: #2b2210;
+    --selo-ia:               #fca5a5;
+    --selo-ia-fundo:         #2e1515;
+    --cor-aviso:        #fdba74;
+    --cor-aviso-fundo:  #2f1c0c;
+    --sombra:    0 1px 2px rgba(0, 0, 0, .4);
+    --sombra-alta: 0 8px 24px rgba(0, 0, 0, .5);
+  }
+}
+
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+  --cor-fundo:        #0e1014;
+  --cor-superficie:   #171a21;
+  --cor-superficie-2: #1d2129;
+  --cor-texto:        #e7e9ee;
+  --cor-texto-suave:  #9aa2b0;
+  --cor-borda:        #2a303b;
+  --cor-acao:         #86a8ff;
+  --cor-acao-fundo:   #1b2740;
+  --cor-acao-texto:   #0e1014;
+  --selo-oficial:          #93b4ff;
+  --selo-oficial-fundo:    #17233d;
+  --selo-calculado:        #5ee0a0;
+  --selo-calculado-fundo:  #0f2a1e;
+  --selo-automatico:       #fcd34d;
+  --selo-automatico-fundo: #2b2210;
+  --selo-ia:               #fca5a5;
+  --selo-ia-fundo:         #2e1515;
+  --cor-aviso:        #fdba74;
+  --cor-aviso-fundo:  #2f1c0c;
+  --sombra:    0 1px 2px rgba(0, 0, 0, .4);
+  --sombra-alta: 0 8px 24px rgba(0, 0, 0, .5);
+}
+
+
+/* --- ponte com as telas antigas ------------------------------------------ */
+/* A barra do topo e as telas ainda nao migradas usam os nomes velhos
+   (--cartao, --azul...). Enquanto houver tela antiga, eles apontam para os
+   novos - assim a barra fica igual em toda pagina. Sai quando a ultima tela
+   migrar. */
+:root {
+  --fundo:       var(--cor-fundo);
+  --cartao:      var(--cor-superficie);
+  --texto:       var(--cor-texto);
+  --suave:       var(--cor-texto-suave);
+  --borda:       var(--cor-borda);
+  --azul:        var(--cor-acao);
+  --azul-fraco:  var(--cor-acao-fundo);
+}
+
+
+/* --- 3. componentes ------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte);
+  font-size: var(--tam-base);
+  line-height: var(--linha);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--cor-acao); }
+/* Comando longo ("radar gerar --importar data/...") quebra onde precisar,
+   em vez de empurrar a pagina para o lado no celular. */
+code { font-family: var(--fonte-numero); font-size: .9em; overflow-wrap: anywhere; }
+p, li { overflow-wrap: break-word; }
+
+/* A coluna de leitura. No celular, 16px de cada lado e nada de rolar de lado. */
+.ds-pagina {
+  max-width: var(--largura-pagina);
+  margin: 0 auto;
+  padding: var(--esp-5) var(--esp-4) var(--esp-7);
+}
+
+.ds-cabeca { margin-bottom: var(--esp-5); }
+.ds-cabeca h1 {
+  margin: 0 0 var(--esp-1);
+  font-size: var(--tam-xl);
+  line-height: var(--linha-titulo);
+  letter-spacing: -.02em;
+}
+.ds-cabeca p { margin: 0; color: var(--cor-texto-suave); }
+
+.ds-secao { margin: var(--esp-6) 0 var(--esp-3); }
+.ds-secao h2 {
+  margin: 0 0 var(--esp-1);
+  font-size: var(--tam-lg);
+  line-height: var(--linha-titulo);
+  letter-spacing: -.01em;
+}
+.ds-secao p { margin: 0; color: var(--cor-texto-suave); font-size: var(--tam-sm); }
+
+.ds-suave  { color: var(--cor-texto-suave); }
+.ds-pequeno { font-size: var(--tam-sm); }
+.ds-numero { font-variant-numeric: tabular-nums; }
+
+/* Grade de cartoes: uma coluna no celular, duas quando cabe. */
+.ds-grade {
+  display: grid;
+  gap: var(--esp-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+}
+
+/* --- o cartao --- */
+/* Cabeca (titulo + selo), meta (de onde vem o numero) e corpo (blocos). */
+.ds-cartao {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: var(--esp-4) var(--esp-5);
+  min-width: 0;
+}
+.ds-cartao__cabeca {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--esp-2);
+  flex-wrap: wrap;
+}
+.ds-cartao__titulo {
+  margin: 0;
+  font-size: var(--tam-md);
+  font-weight: var(--peso-forte);
+  line-height: var(--linha-titulo);
+}
+.ds-cartao__meta {
+  margin: var(--esp-1) 0 var(--esp-3);
+  font-size: var(--tam-sm);
+  color: var(--cor-texto-suave);
+}
+.ds-cartao > :last-child { margin-bottom: 0; }
+
+/* --- o bloco: uma parte do cartao, com a cor da sua origem --- */
+/* O conteudo de um selo fica dentro do bloco daquele selo, e so ele. E isso
+   que impede o texto de IA de encostar no dado oficial sem aviso. */
+.ds-bloco {
+  border-radius: var(--raio-sm);
+  padding: var(--esp-3) var(--esp-4);
+  margin-top: var(--esp-3);
+  font-size: var(--tam-sm);
+  border-left: 3px solid transparent;
+}
+.ds-bloco__titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0 0 var(--esp-2);
+  font-size: var(--tam-sm);
+  font-weight: var(--peso-medio);
+}
+.ds-bloco p { margin: var(--esp-1) 0; }
+.ds-bloco ul { margin: var(--esp-1) 0; padding-left: var(--esp-4); }
+.ds-bloco--oficial    { background: var(--selo-oficial-fundo);    border-left-color: var(--selo-oficial); }
+.ds-bloco--calculado  { background: var(--selo-calculado-fundo);  border-left-color: var(--selo-calculado); }
+.ds-bloco--automatico { background: var(--selo-automatico-fundo); border-left-color: var(--selo-automatico); }
+.ds-bloco--ia         { background: var(--selo-ia-fundo);         border-left-color: var(--selo-ia); }
+
+/* --- o selo --- */
+.ds-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: .3em;
+  padding: .12rem .55rem;
+  border-radius: var(--raio-pill);
+  font-size: var(--tam-xs);
+  font-weight: var(--peso-medio);
+  line-height: 1.4;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+.ds-selo--oficial    { color: var(--selo-oficial);    background: var(--selo-oficial-fundo); }
+.ds-selo--calculado  { color: var(--selo-calculado);  background: var(--selo-calculado-fundo); }
+.ds-selo--automatico { color: var(--selo-automatico); background: var(--selo-automatico-fundo); }
+.ds-selo--ia         { color: var(--selo-ia);         background: var(--selo-ia-fundo); }
+.ds-legenda-selos { display: flex; flex-wrap: wrap; gap: var(--esp-2); margin: var(--esp-3) 0; }
+
+/* --- avisos --- */
+.ds-aviso-lei {
+  display: block;
+  margin: var(--esp-2) 0;
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--raio-sm);
+  background: var(--cor-aviso-fundo);
+  color: var(--cor-aviso);
+  font-size: var(--tam-sm);
+  font-weight: var(--peso-medio);
+}
+.ds-nota {
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--raio-sm);
+  background: var(--cor-superficie-2);
+  border: 1px dashed var(--cor-borda);
+  color: var(--cor-texto-suave);
+  font-size: var(--tam-sm);
+}
+.ds-vazio { text-align: center; color: var(--cor-texto-suave); padding: var(--esp-5) var(--esp-4); }
+
+/* --- acao --- */
+.ds-botao {
+  display: inline-block;
+  padding: var(--esp-2) var(--esp-4);
+  border: 0;
+  border-radius: var(--raio-sm);
+  background: var(--cor-acao);
+  color: var(--cor-acao-texto);
+  font: inherit;
+  font-size: var(--tam-sm);
+  font-weight: var(--peso-medio);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ds-botao:hover { filter: brightness(1.08); }
+.ds-link-acao { font-size: var(--tam-sm); font-weight: var(--peso-medio); text-decoration: none; }
+.ds-link-acao:hover { text-decoration: underline; }
+
+/* --- formulario --- */
+.ds-campo { display: grid; gap: var(--esp-1); font-size: var(--tam-sm); color: var(--cor-texto-suave); }
+.ds-campo select,
+.ds-campo input {
+  width: 100%;
+  padding: var(--esp-2) var(--esp-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: var(--tam-base);
+}
+.ds-campo select:focus,
+.ds-campo input:focus,
+.ds-botao:focus-visible,
+a:focus-visible { outline: 2px solid var(--cor-acao); outline-offset: 2px; }

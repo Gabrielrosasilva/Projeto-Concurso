@@ -1,301 +1,193 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" data-tema="{{ request.query_params.get('tema', '') }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Macetes &middot; Radar de Concursos</title>
+  {# A primeira tela no design system. Cor, espaco e letra vem de la; o que
+     fica aqui embaixo e so desta pagina: a pizza, as barras, as listas. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
-      --alerta:#be123c; --alerta-fraco:#ffe4e9;
-      --bom:#047857; --bom-fraco:#d3f2e4;
-      --destaque:#7c3aed; --destaque-fraco:#efe8ff;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
-        --alerta:#fb7185; --alerta-fraco:#2c1219;
-        --bom:#4ade80; --bom-fraco:#10291d;
-        --destaque:#c4b5fd; --destaque-fraco:#241a3d;
-      }
-    }
-
-    *{box-sizing:border-box}
-    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    .pagina{max-width:840px;margin:0 auto}
-
-    header{text-align:center;margin-bottom:1.25rem}
-    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
-    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
-    .voltar{display:inline-block;margin-bottom:1rem;color:var(--azul);
-      text-decoration:none;font-size:.85rem}
-
-    .caixa{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1rem}
-
-    form.busca{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.6rem;
+    /* ---------------------------------------------------- filtro ------- */
+    .filtro{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:var(--esp-3);
       align-items:end}
-    @media (max-width:660px){form.busca{grid-template-columns:1fr}}
-    label{font-size:.82rem;color:var(--suave);display:grid;gap:.3rem}
-    select,input[type=text]{padding:.55rem .65rem;border:1px solid var(--borda);
-      border-radius:8px;background:var(--cartao);color:var(--texto);font-size:.92rem;
-      width:100%}
-    button{padding:.6rem 1.2rem;border:0;border-radius:8px;background:var(--azul);
-      color:#fff;font-size:.92rem;cursor:pointer;white-space:nowrap}
-    button:hover{filter:brightness(1.08)}
-    .dica{font-size:.8rem;color:var(--suave);margin:.6rem 0 0}
-
-    h2{font-size:1rem;margin:0 0 .2rem}
-    .legenda{font-size:.8rem;color:var(--suave);margin:0 0 .9rem}
-    .recorte{font-size:.86rem;color:var(--suave);margin:0 0 1rem}
-    .recorte b{color:var(--texto)}
+    @media (max-width:660px){.filtro{grid-template-columns:1fr}}
 
     /* ------------------------------------------------------ pizza ------- */
     /* Desenhada com conic-gradient: sem JavaScript, como o resto da tela.
-       O furo no meio e um circulo da cor do cartao por cima - fica mais leve
-       que a pizza cheia e sobra lugar para o total. */
-    .pizza-caixa{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
-    .pizza{position:relative;width:190px;height:190px;border-radius:50%;
-      flex:0 0 auto}
-    .pizza .furo{position:absolute;inset:26%;background:var(--cartao);
-      border-radius:50%;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;text-align:center;line-height:1.15}
-    .pizza .furo .n{font-size:1.35rem;font-weight:700;
+       O furo no meio e um circulo da cor do cartao por cima. */
+    .pizza-caixa{display:flex;gap:var(--esp-5);align-items:center;flex-wrap:wrap}
+    .pizza{position:relative;width:180px;height:180px;border-radius:50%;flex:0 0 auto}
+    .pizza .furo{position:absolute;inset:26%;background:var(--cor-superficie);
+      border-radius:50%;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;text-align:center;line-height:1.15}
+    .pizza .furo .n{font-size:var(--tam-lg);font-weight:var(--peso-forte);
       font-variant-numeric:tabular-nums}
-    .pizza .furo .rot{font-size:.66rem;color:var(--suave)}
-
-    .legenda-pizza{display:grid;gap:.35rem;flex:1 1 260px;min-width:230px;
-      font-size:.85rem}
+    .pizza .furo .rot{font-size:.66rem;color:var(--cor-texto-suave)}
+    .legenda-pizza{display:grid;gap:var(--esp-1);flex:1 1 260px;min-width:0;
+      margin:0;padding:0;font-size:var(--tam-sm)}
     .legenda-pizza li{display:grid;grid-template-columns:auto 1fr auto;
-      gap:.5rem;align-items:baseline;list-style:none}
-    .legenda-pizza{margin:0;padding:0}
-    .legenda-pizza .cor{width:.7rem;height:.7rem;border-radius:3px;
-      align-self:center}
-    .legenda-pizza .nome{overflow:hidden;text-overflow:ellipsis;
-      white-space:nowrap}
-    .legenda-pizza .valor{color:var(--suave);font-size:.8rem;
+      gap:var(--esp-2);align-items:baseline;list-style:none}
+    .legenda-pizza .cor{width:.7rem;height:.7rem;border-radius:3px;align-self:center}
+    .legenda-pizza .nome{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .legenda-pizza .valor{color:var(--cor-texto-suave);font-size:var(--tam-xs);
       font-variant-numeric:tabular-nums;white-space:nowrap}
-    .legenda-pizza li.alvo .nome{font-weight:700}
+    .legenda-pizza li.alvo .nome{font-weight:var(--peso-forte)}
 
-    /* ---------------------------------------------------- grafico ------- */
-    .grafico{display:grid;gap:.45rem}
-    .linha{display:grid;grid-template-columns:minmax(120px,32%) 1fr auto;
-      gap:.6rem;align-items:center;font-size:.87rem}
-    @media (max-width:520px){.linha{grid-template-columns:1fr;gap:.15rem}}
-    .linha .nome{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .barra{height:18px;border-radius:5px;background:var(--borda);overflow:hidden}
-    .barra span{display:block;height:100%;background:var(--azul);border-radius:5px}
-    .linha .valor{font-variant-numeric:tabular-nums;color:var(--suave);
-      white-space:nowrap;font-size:.83rem}
-    .linha.alvo .nome{font-weight:700;color:var(--destaque)}
-    .linha.alvo .barra span{background:var(--destaque)}
-    .linha.alvo .valor{color:var(--destaque);font-weight:600}
+    /* --------------------------------------------- numeros em destaque -- */
+    .numeros{display:flex;flex-wrap:wrap;gap:var(--esp-5);margin-top:var(--esp-2)}
+    .numero .n{font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1.1;
+      font-variant-numeric:tabular-nums}
+    .numero .rotulo{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
 
-    /* ---------------------------------------------------- destaque ------ */
-    .destaque{background:var(--destaque-fraco);border-radius:12px;
-      padding:1.1rem 1.25rem;margin-bottom:1rem}
-    .destaque h2{color:var(--destaque)}
-    .numeros{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:.6rem}
-    .numero .n{font-size:1.7rem;font-weight:700;line-height:1.1;
-      color:var(--destaque);font-variant-numeric:tabular-nums}
-    .numero .rotulo{font-size:.8rem;color:var(--suave)}
+    /* ---------------------------------------------------- listas -------- */
+    .item-lista{padding:var(--esp-2) 0;border-bottom:1px solid var(--cor-borda)}
+    .item-lista:last-child{border-bottom:0}
+    .item-lista .topo{font-weight:var(--peso-medio)}
+    .item-lista .sub{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .item-lista p{margin:var(--esp-1) 0 0;font-size:var(--tam-sm)}
 
-    .comando{border-left:3px solid var(--alerta);padding:.15rem 0 .15rem .8rem;
-      margin-bottom:.9rem}
-    .comando .titulo{font-weight:600;font-size:.92rem}
-    .comando .quanto{font-size:.8rem;color:var(--suave)}
-    .comando .conselho{font-size:.85rem;margin:.25rem 0 0}
+    .parecida{display:grid;grid-template-columns:1fr auto;gap:var(--esp-1) var(--esp-4)}
+    .parecida .onde{font-size:var(--tam-xs);color:var(--cor-texto-suave);
+      text-align:right;white-space:nowrap}
+    .parecida .porque{grid-column:1/-1}
 
-    .repetida{border-left:3px solid var(--bom);padding:.1rem 0 .1rem .8rem;
-      margin-bottom:.8rem}
-    .repetida .cadernos{font-size:.78rem;color:var(--bom);font-weight:600}
-    .repetida .texto{font-size:.86rem;margin:.2rem 0 0}
-
-    table{width:100%;border-collapse:collapse;font-size:.89rem}
-    th,td{text-align:left;padding:.45rem .4rem;border-bottom:1px solid var(--borda)}
-    th{font-size:.76rem;color:var(--suave);font-weight:600}
+    table{width:100%;border-collapse:collapse;font-size:var(--tam-sm)}
+    th,td{text-align:left;padding:var(--esp-2);border-bottom:1px solid var(--cor-borda)}
+    th{font-size:var(--tam-xs);color:var(--cor-texto-suave);font-weight:var(--peso-medio)}
     td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     tr:last-child td{border-bottom:0}
+    .barrinha{display:inline-block;width:90px;height:8px;border-radius:4px;
+      background:var(--cor-borda);vertical-align:middle;overflow:hidden}
+    .barrinha span{display:block;height:100%;background:var(--selo-calculado)}
 
-    .veredito{border-radius:8px;padding:.6rem .8rem;font-size:.85rem;margin-top:.8rem}
-    .veredito.equilibrado{background:var(--bom-fraco);color:var(--bom)}
-    .veredito.tendencia{background:var(--alerta-fraco);color:var(--alerta)}
-    .veredito.amostra_pequena{background:var(--borda);color:var(--suave)}
-
-    /* Prova substituta: o que existe no acervo parecido com o cargo pedido. */
-    .parecida{display:grid;grid-template-columns:1fr auto;gap:.3rem 1rem;
-      padding:.6rem 0;border-bottom:1px solid var(--borda)}
-    .parecida:last-child{border-bottom:0}
-    .parecida .cargo{font-weight:600;font-size:.92rem}
-    .parecida .onde{font-size:.8rem;color:var(--suave);text-align:right;
-      white-space:nowrap}
-    .parecida .porque{grid-column:1/-1;font-size:.8rem;color:var(--suave)}
-    .recado{background:var(--azul-fraco);color:var(--azul);border-radius:8px;
-      padding:.8rem 1rem;font-size:.86rem}
-
-    .vazio{text-align:center;color:var(--suave);padding:1.5rem 1rem}
-    .vazio p{margin:.4rem 0}
-    .futuro{font-size:.83rem;color:var(--suave);margin:0}
-
-    /* ------------------------------------------- central de macetes ----- */
-    /* Um cartao por materia. Cada parte tem a cor do seu selo, e as cores
-       nunca se misturam: o verde e contagem, o vermelho e IA. */
-    :root{--verde:#047857;--verde-fraco:#e3f6ed;--vermelho:#b91c1c;
-      --vermelho-fraco:#fdecec;--amarelo:#92400e;--amarelo-fraco:#fdf3dc;
-      --azul-selo:#1d4ed8;--azul-selo-fraco:#e8eeff}
-    @media (prefers-color-scheme: dark){:root{--verde:#4ade80;--verde-fraco:#10291d;
-      --vermelho:#fca5a5;--vermelho-fraco:#2c1414;--amarelo:#fcd34d;
-      --amarelo-fraco:#2b2110;--azul-selo:#93b4ff;--azul-selo-fraco:#1b2740}}
-    .selo{display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;
-      padding:.1rem .55rem;white-space:nowrap}
-    .selo.verde{background:var(--verde-fraco);color:var(--verde)}
-    .selo.vermelho{background:var(--vermelho-fraco);color:var(--vermelho)}
-    .selo.azul{background:var(--azul-selo-fraco);color:var(--azul-selo)}
-    .selo.amarelo{background:var(--amarelo-fraco);color:var(--amarelo)}
-    .legenda-selos{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 1rem}
-    .cartoes{display:grid;gap:1rem;margin-bottom:1.5rem}
-    .cartao-macete{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:12px;padding:1rem 1.2rem}
-    .cartao-macete .cab{display:flex;justify-content:space-between;gap:.6rem;
-      align-items:baseline;flex-wrap:wrap}
-    .cartao-macete h3{margin:0;font-size:1.05rem}
-    .cartao-macete .base{font-size:.82rem;color:var(--suave);margin:.2rem 0 .8rem}
-    .parte{border-radius:8px;padding:.7rem .85rem;margin-top:.6rem;font-size:.88rem}
-    .parte h4{margin:0 0 .35rem;font-size:.82rem}
-    .parte p{margin:.3rem 0}
-    .parte ul{margin:.2rem 0;padding-left:1.1rem}
-    .parte.verde{background:var(--verde-fraco)}
-    .parte.verde h4{color:var(--verde)}
-    .parte.vermelha{background:var(--vermelho-fraco)}
-    .parte.vermelha h4{color:var(--vermelho)}
-    .parte .fonte-ia{font-size:.8rem;color:var(--suave)}
-    .parte .procedencia{font-size:.74rem;color:var(--suave)}
-    .pegadinha{border-left:3px solid var(--vermelho);padding-left:.6rem}
-    .aviso-lei{background:var(--amarelo-fraco);color:var(--amarelo);
-      border-radius:6px;padding:.4rem .6rem;font-size:.82rem}
-    .parte a,.cartao-macete a{color:var(--azul)}
-    .sem-macete{font-size:.82rem;color:var(--suave);margin:.6rem 0 0}
-    .sem-macete code{font-size:.78rem}
+    /* --------------------------------------- central: detalhe do macete */
+    .regra{font-size:var(--tam-base);margin:0 0 var(--esp-2)}
+    .pegadinha{border-left:3px solid var(--selo-ia);padding-left:var(--esp-3);
+      margin:var(--esp-2) 0}
+    .procedencia{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .termos b{font-weight:var(--peso-medio)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
 <body>
 
-{% from "_topo.html" import barra %}
+{% from "_topo.html" import barra, abas_de_estudar %}
+{% from "_componentes.html" import selo, bloco, legenda_dos_selos, aviso_lei %}
 {{ barra('estudar') }}
 
-<div class="pagina">
-
-{% from "_topo.html" import abas_de_estudar %}
+<main class="ds-pagina">
   {{ abas_de_estudar('macetes') }}
 
-  <header>
+  <header class="ds-cabeca">
     <h1>Macetes</h1>
-    <p class="subtitulo">O que a banca tem costume de cobrar, tirado das provas</p>
+    <p>O que a banca tem costume de cobrar, tirado das provas</p>
   </header>
 
-  {# -------------------------------------------- central de macetes ---- #}
-  <h2>Central de macetes · Polícia Penal SC</h2>
-  <p class="legenda">
-    Um cartão por matéria das minhas provas (FEPESE 2013 e 2019), sem as
-    anuladas. Cada parte leva o selo de onde veio:
-  </p>
-  <div class="legenda-selos">
-    <span class="selo azul">🟦 Extraída da prova</span>
-    <span class="selo verde">🟩 Calculado pelo sistema</span>
-    <span class="selo vermelho">🟥 Gerado por IA · material auxiliar</span>
-  </div>
+  {# ============================================ central de macetes ===== #}
+  <section class="ds-secao">
+    <h2>Central de macetes · Polícia Penal SC</h2>
+    <p>
+      Um cartão por matéria das minhas provas (FEPESE 2013 e 2019), sem as
+      anuladas. Cada parte do cartão fica na cor da sua origem:
+    </p>
+  </section>
+  {{ legenda_dos_selos(('prova', 'calculado', 'ia')) }}
+
   {% if not leis_conferidas %}
-    <p class="dica">
-      O aviso <b>⚠ A lei mudou depois desta prova</b> depende da lista de
-      leis alteradas em <code>config/leis.yml</code>, que ainda não foi
-      conferida. Até lá, nenhuma questão ganha o aviso - o que não quer dizer
-      que a lei não tenha mudado.
+    <p class="ds-nota">
+      O aviso <b>⚠ A lei mudou depois desta prova</b> depende da lista de leis
+      alteradas em <code>config/leis.yml</code>, que ainda não foi conferida.
+      Até lá, nenhuma questão ganha o aviso - o que não quer dizer que a lei
+      não tenha mudado.
+    </p>
+  {% endif %}
+
+  {# Sem nenhum macete importado, o "como trazer" aparece UMA vez aqui, e
+     nao repetido em cada cartao - 14 notas iguais eram so barulho. #}
+  {% set algum_macete = cartoes | selectattr('macetes') | list %}
+  {% if cartoes and not algum_macete %}
+    <p class="ds-nota" style="margin-top:var(--esp-3)">
+      {{ selo('ia', 'Macete (IA)') }} nenhum importado ainda. Eles vêm sem
+      API: <code>radar gerar --pedido --macetes</code>, respondido no Claude
+      Code, e <code>radar gerar --importar data/resposta_ia.json</code>.
     </p>
   {% endif %}
 
   {% if cartoes %}
-  <div class="cartoes">
+  <div class="ds-grade" style="margin-top:var(--esp-4)">
     {% for c in cartoes %}
-      <section class="cartao-macete" id="materia-{{ loop.index }}">
-        <div class="cab">
-          <h3>{{ c.materia }}</h3>
-          <span class="selo verde">🟩 {{ c.questoes }} questões analisadas</span>
+      <article class="ds-cartao" id="materia-{{ loop.index }}">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">{{ c.materia }}</h3>
+          {{ selo('calculado', c.questoes ~ ' questões analisadas') }}
         </div>
-        <p class="base">
-          {{ c.questoes }} questões de {{ c.de_onde }}, sem as anuladas.
-          {% if c.base_pequena %}<b>Base pequena:</b> tendência tirada de
-          {{ c.anos | length }} prova{{ 's' if c.anos | length > 1 }}.{% endif %}
-          {% if c.com_lei_mudada %}
-            <span class="selo amarelo">⚠ {{ c.com_lei_mudada }} com lei alterada depois da prova</span>
-          {% endif %}
+        <p class="ds-cartao__meta">
+          {{ c.de_onde | capitalize }}, sem as anuladas{% if c.base_pequena %}
+          · <b>base pequena</b>{% endif %}
         </p>
+        {% if c.com_lei_mudada %}
+          <p class="ds-aviso-lei">⚠ {{ c.com_lei_mudada }} questão(ões) com lei alterada depois da prova</p>
+        {% endif %}
 
-        <div class="parte verde">
-          <h4>🟩 Padrão da banca</h4>
+        {% call bloco('calculado', 'Padrão da banca') %}
           {% if c.comandos %}
             <ul>
               {% for k in c.comandos %}
-                <li>{{ k.quantas }} de {{ c.questoes }} questões: {{ k.nome }}</li>
+                <li><span class="ds-numero">{{ k.quantas }} de {{ c.questoes }}</span> questões: {{ k.nome }}</li>
               {% endfor %}
             </ul>
           {% else %}
             <p>Nenhuma forma de perguntar se repete nestas {{ c.questoes }} questões.</p>
           {% endif %}
           {% if c.termos %}
-            <p>Palavras que mais aparecem:
+            <p class="termos">Palavras que mais aparecem:
               {% for t in c.termos %}<b>{{ t.palavra }}</b> ({{ t.quantas }}){{ ', ' if not loop.last }}{% endfor %}
             </p>
           {% endif %}
-        </div>
+        {% endcall %}
 
         {% for m in c.macetes %}
-          <div class="parte vermelha">
-            <h4>🟥 Macete (IA){% if m.assunto %} · {{ m.assunto }}{% endif %}</h4>
-            <p>{{ m.regra }}</p>
-            <p class="fonte-ia">
+          {% call bloco('ia', 'Macete (IA)' ~ (' · ' ~ m.assunto if m.assunto else '')) %}
+            <p class="regra">{{ m.regra }}</p>
+            <p class="ds-suave">
               Fonte citada: {{ m.fonte }}
               {% if c.lei %} · <a href="{{ c.lei.url }}" target="_blank" rel="noopener">ler {{ c.lei.titulo }}</a>{% endif %}
             </p>
             {% if m.pegadinha %}
               <p class="pegadinha"><b>⚠ Pegadinha recorrente:</b> {{ m.pegadinha }}</p>
             {% endif %}
-            {% for mud in m.mudancas %}
-              <p class="aviso-lei">⚠ A lei mudou depois desta prova: {{ mud.tema }} ({{ mud.lei }}){% if mud.o_que_mudou %} - {{ mud.o_que_mudou }}{% endif %}</p>
-            {% endfor %}
+            {% for mud in m.mudancas %}{{ aviso_lei(mud) }}{% endfor %}
             <p>
-              <a href="/macetes/{{ m.impressao }}/questoes">Ver questões reais relacionadas ({{ m.questoes }})</a>
+              <a class="ds-link-acao" href="/macetes/{{ m.impressao }}/questoes">Ver questões reais relacionadas ({{ m.questoes }}) &rarr;</a>
             </p>
             <p class="procedencia">{{ m.procedencia }} · confira na fonte antes de confiar</p>
-          </div>
+          {% endcall %}
         {% else %}
-          <p class="sem-macete">
-            🟥 Nenhum macete importado para esta matéria. Eles vêm sem API:
-            <code>radar gerar --pedido --macetes</code>, respondido no Claude
-            Code, e <code>radar gerar --importar data/resposta_ia.json</code>.
+          <p class="ds-suave ds-pequeno" style="margin:var(--esp-3) 0 0">
+            {{ selo('ia', 'Macete (IA)') }} nenhum ainda para esta matéria.
           </p>
         {% endfor %}
-      </section>
+      </article>
     {% endfor %}
   </div>
   {% else %}
-    <div class="caixa vazio">
+    <div class="ds-cartao ds-vazio">
       <p>Ainda não há questão da minha prova no acervo.</p>
       <p>Rode <b>radar provas</b> e <b>radar questoes</b>.</p>
     </div>
   {% endif %}
 
-  <h2>O costume de qualquer banca</h2>
-  <p class="legenda">Contagem sobre o acervo inteiro, no recorte que eu escolher.</p>
+  {# ====================================== o costume de qualquer banca === #}
+  <section class="ds-secao">
+    <h2>O costume de qualquer banca</h2>
+    <p>Contagem sobre o acervo inteiro, no recorte que eu escolher.</p>
+  </section>
 
-  <div class="caixa">
-    <form class="busca" method="get">
-      <label>
+  <div class="ds-cartao">
+    <form class="filtro" method="get">
+      <label class="ds-campo">
         Banca
         <select name="banca">
           <option value="">Escolha a banca</option>
@@ -304,19 +196,19 @@
           {% endfor %}
         </select>
       </label>
-      <label>
+      <label class="ds-campo">
         Cargo ou área
         <input type="text" name="cargo" value="{{ cargo or '' }}"
                placeholder="Guarda, Professor, Tecnico...">
       </label>
-      <label>
+      <label class="ds-campo">
         Matéria ou tema
         <input type="text" name="tema" value="{{ tema or '' }}"
                placeholder="crase, informatica, probabilidade...">
       </label>
-      <button type="submit">Ver</button>
+      <button class="ds-botao" type="submit">Ver</button>
     </form>
-    <p class="dica">
+    <p class="ds-suave ds-pequeno" style="margin:var(--esp-3) 0 0">
       O tema é texto livre: escreva <b>crase</b> ou <b>probabilidade</b>, e não
       o nome exato da matéria. A busca olha a matéria e o enunciado, e ignora
       acento.
@@ -325,50 +217,48 @@
 
   {# ------------------------------------------- prova substituta ------- #}
   {% if cargo %}
-    <div class="caixa">
-      <h2>Provas de "{{ cargo }}" no acervo</h2>
+    <div class="ds-cartao" style="margin-top:var(--esp-4)">
+      <h3 class="ds-cartao__titulo">Provas de "{{ cargo }}" no acervo</h3>
       {% if parecidas %}
-        <p class="legenda">
+        <p class="ds-cartao__meta">
           Da mais parecida para a menos, com o motivo ao lado. Dividir uma
           palavra no nome não faz duas profissões serem a mesma coisa - o
           motivo está aí para eu julgar.
         </p>
         {% for p in parecidas %}
-          <div class="parecida">
-            <span class="cargo">{{ p.cargo }}</span>
+          <div class="item-lista parecida">
+            <span class="topo">{{ p.cargo }}</span>
             <span class="onde">
               {{ p.banca }}{% if p.municipio %} &middot; {{ p.municipio | municipio }}{% endif %}
               {%- if p.ano %} &middot; {{ p.ano }}{% endif %}
               &middot; {{ p.questoes }} questões</span>
-            <span class="porque">{{ p.motivo }}</span>
+            <span class="porque sub">{{ p.motivo }}</span>
           </div>
         {% endfor %}
       {% else %}
-        <p class="recado">{{ recado_do_cargo }}</p>
+        <p class="ds-nota" style="margin-top:var(--esp-2)">{{ recado_do_cargo }}</p>
       {% endif %}
     </div>
   {% endif %}
 
   {# ------------------------------------------------ sem banca escolhida - #}
   {% if not banca %}
-    <div class="caixa">
-      <div class="vazio">
-        <p><b>Escolha uma banca acima para começar.</b></p>
-        <p>Depois disso dá para afunilar por cargo e por tema.</p>
-      </div>
+    <div class="ds-cartao ds-vazio" style="margin-top:var(--esp-4)">
+      <p><b>Escolha uma banca acima para começar.</b></p>
+      <p>Depois disso dá para afunilar por cargo e por tema.</p>
     </div>
 
     {% if bancas_sem_acervo %}
-      <div class="caixa">
-        <h2>Por que só aparece {{ bancas | join(', ') }}</h2>
-        <p class="legenda" style="margin-bottom:.6rem">
+      <div class="ds-cartao" style="margin-top:var(--esp-4)">
+        <h3 class="ds-cartao__titulo">Por que só aparece {{ bancas | join(', ') }}</h3>
+        <p class="ds-cartao__meta">
           A lista vem das provas que estão baixadas aqui, e não dos concursos.
         </p>
-        <p style="font-size:.88rem;margin:0 0 .6rem">
+        <p class="ds-pequeno">
           Estas bancas já aparecem nos seus concursos, mas ainda não têm prova
           no acervo: <b>{{ bancas_sem_acervo | join(', ') }}</b>.
         </p>
-        <p style="font-size:.88rem;margin:0">
+        <p class="ds-pequeno" style="margin-bottom:0">
           Cada banca publica as provas de um jeito diferente, então incluir uma
           delas quer dizer escrever um coletor para o site dela. Dá para fazer,
           uma de cada vez - e a FEPESE veio primeiro por ser a que mais aplica
@@ -379,17 +269,16 @@
 
   {# ------------------------------------------------ nada encontrado ----- #}
   {% elif analise.total == 0 %}
-    <div class="caixa">
-      <div class="vazio">
-        <p>Nenhuma questão no acervo para esse recorte.</p>
-        <p>O acervo tem prova de cargo municipal de SC. Tema de TI, por
-           exemplo, não aparece porque essas provas não cobram TI.</p>
-      </div>
+    <div class="ds-cartao ds-vazio" style="margin-top:var(--esp-4)">
+      <p>Nenhuma questão no acervo para esse recorte.</p>
+      <p>O acervo tem prova de cargo municipal de SC. Tema de TI, por
+         exemplo, não aparece porque essas provas não cobram TI.</p>
     </div>
 
   {% else %}
 
-    <p class="recorte">
+    <p class="ds-suave ds-pequeno" style="margin:var(--esp-4) 0">
+      {{ selo('calculado') }}
       <b>{{ analise.total }}</b> questões no recorte,
       <b>{{ analise.distintas }}</b> com enunciado diferente.
       {% if analise.total > analise.distintas %}
@@ -398,38 +287,34 @@
       {% endif %}
     </p>
 
+    <div class="ds-grade">
+
     {# ------------------------------------------- o assunto procurado ---- #}
     {% if analise.assunto_procurado %}
       {% set a = analise.assunto_procurado %}
-      <div class="destaque">
-        <h2>{{ a.nome }} nas provas da {{ banca }}</h2>
-        <p class="legenda">Quanto esse assunto caiu, dentro de {{ analise.retrato.materia }}</p>
-        <div class="numeros">
-          <div class="numero">
-            <div class="n">{{ a.questoes }}</div>
-            <div class="rotulo">questões</div>
-          </div>
-          <div class="numero">
-            <div class="n">{{ a.cadernos }}</div>
-            <div class="rotulo">de {{ analise.retrato.cadernos }} cadernos</div>
-          </div>
-          <div class="numero">
-            <div class="n">{{ "%.0f"|format(a.cadernos / analise.retrato.cadernos * 100) }}%</div>
-            <div class="rotulo">das provas com essa matéria</div>
-          </div>
-          <div class="numero">
-            <div class="n">{{ a.distintas }}</div>
-            <div class="rotulo">perguntas diferentes</div>
-          </div>
+      <article class="ds-cartao" style="grid-column:1/-1">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">{{ a.nome }} nas provas da {{ banca }}</h3>
+          {{ selo('classificacao') }}
         </div>
-      </div>
+        <p class="ds-cartao__meta">Quanto esse assunto caiu, dentro de {{ analise.retrato.materia }}</p>
+        <div class="numeros">
+          <div class="numero"><div class="n">{{ a.questoes }}</div><div class="rotulo">questões</div></div>
+          <div class="numero"><div class="n">{{ a.cadernos }}</div><div class="rotulo">de {{ analise.retrato.cadernos }} cadernos</div></div>
+          <div class="numero"><div class="n">{{ "%.0f"|format(a.cadernos / analise.retrato.cadernos * 100) }}%</div><div class="rotulo">das provas com essa matéria</div></div>
+          <div class="numero"><div class="n">{{ a.distintas }}</div><div class="rotulo">perguntas diferentes</div></div>
+        </div>
+      </article>
     {% endif %}
 
     {# ------------------------------------- grafico 1: caderno tipico ---- #}
     {% if composicao %}
-      <div class="caixa">
-        <h2>Quantas questões caem numa prova</h2>
-        <p class="legenda">
+      <article class="ds-cartao" style="grid-column:1/-1">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">Quantas questões caem numa prova</h3>
+          {{ selo('calculado') }}
+        </div>
+        <p class="ds-cartao__meta">
           A fatia é a participação da matéria no total de questões da
           {{ banca }}; o número ao lado é quanto ela cai por prova. Os dois
           não andam juntos porque nem toda matéria cai em todo cargo - Temas
@@ -454,14 +339,17 @@
             {% endfor %}
           </ul>
         </div>
-      </div>
+      </article>
     {% endif %}
 
     {# ------------------------------------- grafico 2: assuntos ---------- #}
     {% if analise.retrato and analise.retrato.assuntos %}
-      <div class="caixa">
-        <h2>O que mais cai em {{ analise.retrato.materia }}</h2>
-        <p class="legenda">
+      <article class="ds-cartao" style="grid-column:1/-1">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">O que mais cai em {{ analise.retrato.materia }}</h3>
+          {{ selo('classificacao') }}
+        </div>
+        <p class="ds-cartao__meta">
           Assunto por assunto, nas {{ analise.retrato.questoes }} questões dessa
           matéria. Uma questão pode entrar em mais de um assunto, então a soma
           não fecha com o total.
@@ -484,51 +372,58 @@
           </ul>
         </div>
         {% if analise.retrato.sem_assunto %}
-          <p class="dica">
+          <p class="ds-suave ds-pequeno" style="margin-bottom:0">
             {{ analise.retrato.sem_assunto }} enunciados diferentes ficaram sem
             assunto detectado. O assunto sai de uma lista de palavras-chave
             escrita a mão, e ela não cobre tudo - melhor deixar de fora do que
             empurrar para um assunto qualquer.
           </p>
         {% endif %}
-      </div>
+      </article>
     {% endif %}
 
     {% if analise.comandos %}
-      <div class="caixa">
-        <h2>Como a banca pergunta</h2>
-        <p class="legenda">No recorte que você pediu</p>
+      <article class="ds-cartao">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">Como a banca pergunta</h3>
+          {{ selo('calculado') }}
+        </div>
+        <p class="ds-cartao__meta">No recorte que você pediu</p>
         {% for c in analise.comandos %}
-          <div class="comando">
-            <div class="titulo">{{ c.nome }}</div>
-            <div class="quanto">
-              {{ c.quantas }} questões &middot; {{ "%.0f"|format(c.porcentagem) }}% do recorte
-            </div>
-            <p class="conselho">{{ c.conselho }}</p>
+          <div class="item-lista">
+            <div class="topo">{{ c.nome }}</div>
+            <div class="sub ds-numero">{{ c.quantas }} questões &middot; {{ "%.0f"|format(c.porcentagem) }}% do recorte</div>
+            {# O conselho foi escrito a mao no macetes.py: nao e contagem, e
+               por isso nao pode passar por 🟩 sem dizer isso. #}
+            <p><span class="ds-suave">Dica fixa do radar, não é contagem:</span> {{ c.conselho }}</p>
           </div>
         {% endfor %}
-      </div>
+      </article>
     {% endif %}
 
     {% if analise.repetidas %}
-      <div class="caixa">
-        <h2>Questões que ela repete</h2>
-        <p class="legenda">Já caíram várias vezes e devem cair de novo</p>
+      <article class="ds-cartao">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">Questões que ela repete</h3>
+          {{ selo('calculado') }}
+        </div>
+        <p class="ds-cartao__meta">Já caíram várias vezes e devem cair de novo</p>
         {% for r in analise.repetidas %}
-          <div class="repetida">
-            <div class="cadernos">
-              aparece em {{ r.cadernos }} cadernos{% if r.materia %} &middot; {{ r.materia }}{% endif %}
-            </div>
-            <p class="texto">{{ r.enunciado[:220] }}{% if r.enunciado|length > 220 %}...{% endif %}</p>
+          <div class="item-lista">
+            <div class="sub">aparece em {{ r.cadernos }} cadernos{% if r.materia %} &middot; {{ r.materia }}{% endif %}</div>
+            <p>{{ r.enunciado[:220] }}{% if r.enunciado|length > 220 %}...{% endif %}</p>
           </div>
         {% endfor %}
-      </div>
+      </article>
     {% endif %}
 
     {% if analise.gabarito %}
-      <div class="caixa">
-        <h2>Sobre o chute</h2>
-        <p class="legenda">Contando uma vez por enunciado diferente</p>
+      <article class="ds-cartao">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">Sobre o chute</h3>
+          {{ selo('tendencia') }}
+        </div>
+        <p class="ds-cartao__meta">Contando uma vez por enunciado diferente</p>
         <table>
           <tr><th>Letra</th><th class="n">Vezes</th><th class="n">Fatia</th><th></th></tr>
           {% for letra, n, pct in analise.gabarito %}
@@ -536,15 +431,13 @@
               <td>{{ letra }})</td>
               <td class="n">{{ n }}</td>
               <td class="n">{{ "%.0f"|format(pct) }}%</td>
-              <td class="n"><span class="barra" style="width:90px;display:inline-block;
-                 height:8px;vertical-align:middle"><span
-                 style="width:{{ (pct * 3)|round }}%"></span></span></td>
+              <td class="n"><span class="barrinha"><span style="width:{{ (pct * 3)|round }}%"></span></span></td>
             </tr>
           {% endfor %}
         </table>
-        <div class="veredito {{ analise.gabarito_veredito }}">
+        <p class="ds-nota" style="margin:var(--esp-3) 0 0">
           {% if analise.gabarito_veredito == "equilibrado" %}
-            As letras estão equilibradas: <b>não existe letra mais provavel</b>
+            As letras estão equilibradas: <b>não existe letra mais provável</b>
             nesta banca. O "chute na C" não vale aqui.
           {% elif analise.gabarito_veredito == "tendencia" %}
             Há desequilíbrio entre as letras neste recorte. Vale conferir se
@@ -553,22 +446,20 @@
             Poucos enunciados diferentes para afirmar qualquer coisa sobre a
             letra. Abaixo de 50, o que parece tendência é sorteio.
           {% endif %}
-        </div>
-      </div>
+        </p>
+      </article>
     {% endif %}
 
-    <div class="caixa">
-      <h2>O que ainda não está aqui</h2>
-      <p class="futuro">
-        Pegadinha específica e macete de memorização não saem de contagem:
-        alguém precisa ler as questões e perceber o padrão. Isso fica para
-        quando a leitura por IA entrar - e até lá esta página não inventa nada.
-        Tudo o que está acima dá para conferir abrindo as provas do acervo.
-      </p>
     </div>
+
+    <p class="ds-nota" style="margin-top:var(--esp-4)">
+      Esta parte é só contagem, e não inventa nada: tudo acima dá para conferir
+      abrindo as provas do acervo. Macete e pegadinha escritos por IA ficam na
+      Central de macetes, no topo da página, sempre com o selo {{ selo('ia') }}.
+    </p>
 
   {% endif %}
 
-</div>
+</main>
 </body>
 </html>

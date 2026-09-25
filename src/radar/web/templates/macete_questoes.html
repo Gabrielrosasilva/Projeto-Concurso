@@ -1,81 +1,51 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" data-tema="{{ request.query_params.get('tema', '') }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Questões do macete &middot; Radar de Concursos</title>
+  {# Parte da tela de Macetes, e por isso ja no design system com ela. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8;
-      --verde:#047857; --verde-fraco:#e3f6ed;
-      --vermelho:#b91c1c; --vermelho-fraco:#fdecec;
-      --amarelo:#92400e; --amarelo-fraco:#fdf3dc;
-      --azul-selo:#1d4ed8; --azul-selo-fraco:#e8eeff;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff;
-        --verde:#4ade80; --verde-fraco:#10291d;
-        --vermelho:#fca5a5; --vermelho-fraco:#2c1414;
-        --amarelo:#fcd34d; --amarelo-fraco:#2b2110;
-        --azul-selo:#93b4ff; --azul-selo-fraco:#1b2740;
-      }
-    }
-    *{box-sizing:border-box}
-    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    .pagina{max-width:840px;margin:0 auto}
-    .voltar{display:inline-block;margin-bottom:1rem;color:var(--azul);
-      text-decoration:none;font-size:.85rem}
-    h1{margin:0 0 .6rem;font-size:1.35rem;letter-spacing:-.01em}
-    .selo{display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;
-      padding:.1rem .55rem;white-space:nowrap}
-    .selo.vermelho{background:var(--vermelho-fraco);color:var(--vermelho)}
-    .selo.azul{background:var(--azul-selo-fraco);color:var(--azul-selo)}
-    .macete{background:var(--vermelho-fraco);border-radius:12px;padding:1rem 1.2rem;
-      margin-bottom:1.2rem;font-size:.92rem}
-    .macete h2{margin:0 0 .4rem;font-size:.9rem;color:var(--vermelho)}
-    .macete p{margin:.35rem 0}
-    .suave{font-size:.8rem;color:var(--suave)}
-    .questao{background:var(--cartao);border:1px solid var(--borda);border-radius:12px;
-      padding:1rem 1.2rem;margin-bottom:1rem;font-size:.9rem}
-    .questao .cab{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;
-      align-items:baseline;margin-bottom:.4rem}
-    .questao ol{list-style:none;padding:0;margin:.5rem 0 0}
-    .questao li{padding:.25rem .4rem;border-radius:6px}
-    .questao li.certa{background:var(--verde-fraco);color:var(--verde);font-weight:600}
-    .aviso-lei{background:var(--amarelo-fraco);color:var(--amarelo);border-radius:6px;
-      padding:.45rem .65rem;font-size:.84rem;margin:.5rem 0 0}
-    a{color:var(--azul)}
+    .alternativas{list-style:none;padding:0;margin:var(--esp-3) 0 0;display:grid;gap:var(--esp-1)}
+    .alternativas li{padding:var(--esp-2) var(--esp-3);border-radius:var(--raio-sm);
+      background:var(--cor-superficie-2);font-size:var(--tam-sm)}
+    .alternativas li.certa{background:var(--selo-calculado-fundo);color:var(--selo-calculado);
+      font-weight:var(--peso-medio)}
+    .enunciado{margin:var(--esp-2) 0 0}
+    .regra{font-size:var(--tam-base);margin:0 0 var(--esp-2)}
+    .pegadinha{border-left:3px solid var(--selo-ia);padding-left:var(--esp-3)}
+    .voltar{display:inline-block;margin-bottom:var(--esp-4);font-size:var(--tam-sm);
+      text-decoration:none}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
 <body>
 
 {% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo, bloco, aviso_lei %}
 {{ barra('estudar') }}
 
-<div class="pagina">
+<main class="ds-pagina">
   <a class="voltar" href="/macetes">&larr; Central de macetes</a>
-  <h1>Questões reais de {{ macete.materia }}</h1>
+  <header class="ds-cabeca">
+    <h1>Questões reais de {{ macete.materia }}</h1>
+    <p>O macete de IA ao lado da prova de verdade, para conferir um contra o outro.</p>
+  </header>
 
-  <div class="macete">
-    <h2>🟥 Macete (IA){% if macete.assunto %} · {{ macete.assunto }}{% endif %}</h2>
-    <p>{{ macete.regra }}</p>
-    <p class="suave">
+  {% call bloco('ia', 'Macete (IA)' ~ (' · ' ~ macete.assunto if macete.assunto else '')) %}
+    <p class="regra">{{ macete.regra }}</p>
+    <p class="ds-suave">
       Fonte citada: {{ macete.fonte }}
       {% if lei %} · <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a>{% endif %}
     </p>
-    {% if macete.pegadinha %}<p><b>⚠ Pegadinha recorrente:</b> {{ macete.pegadinha }}</p>{% endif %}
-    <p class="suave">{{ macete.modelo }} · material auxiliar: as questões abaixo são a prova de verdade.</p>
-  </div>
+    {% if macete.pegadinha %}<p class="pegadinha"><b>⚠ Pegadinha recorrente:</b> {{ macete.pegadinha }}</p>{% endif %}
+    <p class="ds-suave ds-pequeno">{{ macete.modelo }} · material auxiliar: as questões abaixo são a prova de verdade.</p>
+  {% endcall %}
 
   {% if not leis_conferidas %}
-    <p class="suave">
+    <p class="ds-nota" style="margin-top:var(--esp-4)">
       O aviso de lei alterada depende da lista em <code>config/leis.yml</code>,
       que ainda não foi conferida: nenhuma questão o recebe por enquanto.
     </p>
@@ -83,28 +53,26 @@
 
   {% for r in relacionadas %}
     {% set q = r.questao %}
-    <div class="questao">
-      <div class="cab">
-        <b>Questão {{ q.numero }} · FEPESE {{ q.ano }}{% if q.cargo %} · {{ q.cargo }}{% endif %}</b>
-        <span class="selo azul">🟦 Extraída da prova</span>
+    <article class="ds-cartao" style="margin-top:var(--esp-4)">
+      <div class="ds-cartao__cabeca">
+        <h2 class="ds-cartao__titulo">Questão {{ q.numero }} · FEPESE {{ q.ano }}{% if q.cargo %} · {{ q.cargo }}{% endif %}</h2>
+        {{ selo('prova') }}
       </div>
-      <div>{{ q.enunciado }}</div>
-      <ol>
+      {% for mud in r.mudancas %}{{ aviso_lei(mud) }}{% endfor %}
+      <p class="enunciado">{{ q.enunciado }}</p>
+      <ol class="alternativas">
         {% for letra, texto in (q.alternativas or {}).items() %}
           <li class="{{ 'certa' if letra == q.resposta }}">{{ letra }}) {{ texto }}</li>
         {% endfor %}
       </ol>
-      <p class="suave">
-        Gabarito definitivo: <b>{{ q.resposta or '-' }}</b> ·
+      <p class="ds-suave ds-pequeno" style="margin-bottom:0">
+        {{ selo('oficial', 'Gabarito definitivo') }} <b>{{ q.resposta or '-' }}</b> ·
         <a href="{{ q.prova_url }}" target="_blank" rel="noopener">caderno original</a>
       </p>
-      {% for mud in r.mudancas %}
-        <p class="aviso-lei">⚠ A lei mudou depois desta prova: {{ mud.tema }} ({{ mud.lei }}){% if mud.o_que_mudou %} - {{ mud.o_que_mudou }}{% endif %}</p>
-      {% endfor %}
-    </div>
+    </article>
   {% else %}
-    <p class="suave">As questões citadas por este macete não estão no acervo deste computador. Rode <b>radar questoes</b>.</p>
+    <p class="ds-nota">As questões citadas por este macete não estão no acervo deste computador. Rode <b>radar questoes</b>.</p>
   {% endfor %}
-</div>
+</main>
 </body>
 </html>

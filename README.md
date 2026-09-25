@@ -696,6 +696,14 @@ que nao seja de navegador** (testado alternando: o UA honesto do projeto e
 radar se disfarcar, e o CLAUDE.md manda identificar-se no User-Agent. Entao nao
 se baixa — e o radar continua so apontando o link da lei.
 
+#### O design system
+
+As cores, o espaco e a letra moram em **`src/radar/web/static/design.css`**, e
+os componentes (selo, bloco, aviso de lei) em **`templates/_componentes.html`**.
+A tela de Macetes e a primeira a usar os dois; as outras migram depois de eu
+aprovar o visual. Modo escuro segue o sistema, e `?tema=escuro` ou
+`?tema=claro` na URL forca um dos dois para comparar.
+
 #### A Central de Macetes
 
 O topo de `/macetes` e um **cartao por materia** das minhas provas (2013 e

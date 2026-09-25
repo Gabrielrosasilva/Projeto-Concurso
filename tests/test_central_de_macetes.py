@@ -6,6 +6,7 @@ de contagem, a parte de IA com fonte e procedencia, o link para as questoes
 reais, e o aviso de lei alterada so quando o YAML diz.
 """
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -143,8 +144,9 @@ def test_o_cartao_mostra_os_selos_separados(cliente):
     pagina = cliente.get("/macetes").text
 
     assert "Central de macetes" in pagina
-    assert "🟩 Padrão da banca" in pagina
-    assert "🟥 Macete (IA)" in pagina
+    # Cada parte dentro do bloco da sua origem, e nunca no do outro.
+    assert 'ds-bloco--calculado' in pagina and "Padrão da banca" in pagina
+    assert 'ds-bloco--ia' in pagina and "Macete (IA)" in pagina
     assert "Fonte citada: art. 112 da Lei 7.210/1984" in pagina
     assert "Pegadinha recorrente" in pagina
     assert "importado manualmente" in pagina
@@ -166,9 +168,9 @@ def test_ver_questoes_reais_mostra_a_prova_com_o_gabarito(cliente, config_propri
 
     pagina = cliente.get("/macetes/" + "a" * 32 + "/questoes").text
 
-    assert "🟦 Extraída da prova" in pagina
+    assert 'ds-selo--oficial' in pagina and "Extraída da prova" in pagina
     assert "progressao de regime" in pagina.lower()
-    assert "Gabarito definitivo: <b>a</b>" in pagina
+    assert re.search(r"Gabarito definitivo</span>\s*<b>a</b>", pagina)
     assert "⚠ A lei mudou depois desta prova" in pagina
 
 

@@ -1279,3 +1279,35 @@ mais vale na prova.
   a lista falta, em vez de sugerir que nenhuma lei mudou;
 - 2013 e 2019 escrevem Processual Penal de dois jeitos, e por isso sao dois
   cartoes. E a divergencia de nome que a auditoria mostra.
+
+## Design system (fase 1 da especificacao, 25/09/2026)
+
+- **sem prototipo estatico**: o design system foi aplicado direto num template
+  real, a tela de Macetes (e a pagina das questoes do macete, que e parte
+  dela), para eu aprovar o visual antes de espalhar pelas outras telas;
+- **um arquivo so, `src/radar/web/static/design.css`**, servido em
+  `/estatico/`. Antes cada template colava as proprias cores no `<style>`;
+  agora cor, espaco (escala de 4 em 4 px), tipografia (a letra do sistema,
+  nada para baixar), raio e sombra sao variaveis, e o `<style>` da tela so
+  guarda o que e so dela (a pizza, as barras);
+- **os componentes em macro Jinja, `_componentes.html`**: `selo()`, `bloco()`,
+  `legenda_dos_selos()` e `aviso_lei()`. O selo e sempre escrito pela macro,
+  com o emoji e o texto da tabela da especificacao;
+- **seis selos, quatro cores**: a cor diz a ORIGEM - azul para o que a banca
+  publicou (fonte oficial, extraida da prova), verde para o que o sistema
+  contou, amarelo para o que o sistema adivinhou (classificacao automatica,
+  tendencia), vermelho para o que a IA escreveu. O aviso de lei alterada e
+  laranja: nao e origem, e validade;
+- **o conteudo de um selo fica dentro do bloco da cor dele** (`ds-bloco--ia`,
+  `ds-bloco--calculado`). O "conselho" de cada forma de perguntar, escrito a
+  mao no `macetes.py`, ganhou a ressalva "dica fixa do radar, nao e
+  contagem" - sob o selo verde sem ela, seria texto passando por contagem;
+- **modo escuro pelo sistema operacional, e `?tema=escuro` / `?tema=claro`
+  na URL forca um dos dois**, sem JavaScript: o atributo `data-tema` sai do
+  proprio template;
+- **ponte com as telas antigas**: os nomes velhos de variavel (`--cartao`,
+  `--azul`...) apontam para os novos dentro do design.css, e e isso que deixa
+  a barra do topo igual em toda pagina durante a migracao. Sai quando a
+  ultima tela migrar;
+- a nota "como trazer macete sem API" aparece uma vez so, no topo da
+  Central, e nao em cada um dos 14 cartoes.
