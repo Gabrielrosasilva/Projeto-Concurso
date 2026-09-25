@@ -67,6 +67,11 @@
       Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra
     {% elif f.get('erros') %}
       Revisão: só as questões que eu errei
+    {% elif f.get('compilado') %}
+      {% set faltaram = (f.get('distribuicao') or []) | sum(attribute='pedidas') - (f.get('distribuicao') or []) | sum(attribute='entregues') %}
+      Compilado de {{ f.get('compilado') }} pelo quadro do edital {{ f.get('ano_do_edital') or '' }}
+      ({{ f.get('edital') or 'edital' }}){% if faltaram %} - faltaram {{ faltaram }}: o acervo não tinha o bastante{% endif %}.
+      Só questões reais.
     {% else %}
       Questões reais, tiradas das provas do acervo
     {% endif %}

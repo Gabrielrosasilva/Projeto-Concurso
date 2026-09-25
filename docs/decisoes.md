@@ -1433,3 +1433,31 @@ valer apenas com `<body class="ds">`.
   linha com hifen - a questao de Direito Penal que diz "e cor-" terminava em
   "correto afirmar". E defeito do leitor de PDF, e fica para uma etapa
   propria.
+
+## Meus erros e o simulado compilado (fase 4 da especificacao, 25/09/2026)
+
+- **"So meus erros"** ganhou lugar em Estudar: e o mesmo caderno do
+  [Revisar agora] da home - a questao real cuja ULTIMA resposta foi errada,
+  sem anulada (a banca desfez a pergunta) e sem gerada;
+- **o compilado de 40/50/100 le os pesos do quadro do edital de 2019**, pelo
+  mesmo leitor do Meu foco (`foco.quadro_do_edital`), e nao de uma lista no
+  codigo. Os tamanhos 40/50/100 sao opcao de tela; o peso e dado. Um teste
+  troca o quadro e ve a distribuicao trocar junto;
+- **divisao pelo maior resto**, restrita as materias marcadas: desmarcar uma
+  redistribui o peso entre as outras. Empate de resto vai para a de maior
+  peso, depois a ordem alfabetica - e por isso, em 50, Administracao Publica
+  leva 3 e Direito Constitucional 2;
+- **de onde vem**: prova do cargo, depois a mesma banca nas mesmas materias,
+  e so entao o que ja respondi - a ordem do "Treinar" da home. A rodada sai
+  na ordem do edital, materia por materia, como a prova real;
+- **faltou questao, falta mesmo.** Em 100 questoes, Legislacao Especial, LEP
+  e Sociologia pedem 10 e o acervo tem 9, 8 e 9. O compilado entrega o que ha
+  e diz quanto faltou - na tabela antes de montar, e na propria rodada.
+  Completar com outra materia desfiguraria o peso, que e o motivo dele;
+- o nome da materia casa com tolerancia ("Direito Processo Penal" de 2013 e
+  "Direito Processual Penal" do edital sao a mesma), com o mesmo limite da
+  auditoria, que ja separa "Estadual" de "Especial";
+- **prova oficial e questao gerada nao se misturam**: os dois cadernos sao so
+  de questao real, e dizem isso no selo; a rodada de IA continua saindo so
+  de "Gerar questoes", com o aviso no topo. Um teste garante que o compilado
+  nunca alcanca a tabela das geradas.

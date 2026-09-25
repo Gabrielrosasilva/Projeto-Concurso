@@ -1052,3 +1052,19 @@ def montar() -> Painel:
 # O botao de treino nao escolhe mais um termo de cargo para filtrar: quem
 # monta a rodada e `servico.criar_simulado_do_alvo`, que trata os termos do
 # YAML como a lista de nomes do mesmo cargo - e nao como filtros concorrentes.
+
+
+def quadro_do_edital() -> tuple["EditalLido", str | None]:
+    """(o que o edital da ultima edicao diz, o nome do PDF dele).
+
+    E o que o simulado compilado usa para distribuir as questoes: os pesos
+    saem do quadro de distribuicao LIDO do PDF, e nunca de uma lista escrita
+    no codigo. Sem edital no acervo, o EditalLido volta vazio - e quem chama
+    diz que nao ha como compilar, em vez de inventar peso.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        concursos = _concursos_do_alvo(s)
+    ultimo = _edital_com_prova(concursos)
+    arquivo = (_registro_do_edital(ultimo.url) or {}).get("arquivo") if ultimo else None
+    return _ler_edital(ultimo), arquivo

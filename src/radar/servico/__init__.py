@@ -109,6 +109,8 @@ from radar.servico import manual        # noqa: F401 - usado pela CLI
 from radar.servico import cartoes       # noqa: F401 - usado pela web
 # A home: tres blocos cheios e duas faixas. `servico.inicio.montar()`.
 from radar.servico import inicio        # noqa: F401 - usado pela web
+# O simulado compilado pelos pesos do edital. `servico.compilado.planejar()`.
+from radar.servico import compilado     # noqa: F401 - usado pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

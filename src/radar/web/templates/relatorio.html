@@ -59,6 +59,7 @@
     <p>
       {% if de_ia %}Questões <b>escritas por IA</b>: treino, e não medida do que a banca cobra.
       {% elif (simulado.filtros or {}).get('erros') %}Revisão dos meus erros.
+      {% elif (simulado.filtros or {}).get('compilado') %}Compilado de {{ simulado.filtros.get('compilado') }} pelo quadro do edital {{ simulado.filtros.get('ano_do_edital') or '' }} - só questões reais.
       {% else %}Questões reais das provas do acervo.{% endif %}
     </p>
   </header>

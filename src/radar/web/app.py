@@ -396,6 +396,15 @@ def _pagina_do_simulado(request: Request, simulado=None, **extra):
         "desempenho_das_geradas": servico.desempenho_das_geradas(),
         # As rodadas, cada uma com o botao de descartar.
         "rodadas": servico.listar_simulados(),
+        # Os dois cadernos da fase 4: os meus erros, e o compilado pelos
+        # pesos do edital - um plano por tamanho, para a tabela mostrar o
+        # que cada um vai pedir antes de eu clicar.
+        "erradas": len(servico.questoes_erradas()),
+        "planos_compilados": [
+            p for p in (servico.compilado.planejar(n)
+                        for n in servico.compilado.TAMANHOS) if p
+        ],
+        "tamanhos": servico.compilado.TAMANHOS,
     }
     contexto.update(extra)
     return templates.TemplateResponse(
@@ -418,6 +427,24 @@ def simulado_descartar(simulado_id: int):
     """
     servico.descartar_simulado(simulado_id)
     return RedirectResponse("/simulado?descartado=1", status_code=303)
+
+
+@app.post("/simulado/compilado")
+def simulado_compilado(
+    tamanho: int = Form(40),
+    materias: list[str] = Form([]),
+):
+    """Monta o compilado pelos pesos do edital e vai para a primeira questao.
+
+    Sem materia marcada, valem todas as do quadro - e o que "a prova" quer
+    dizer. Tamanho fora da lista cai no primeiro dela.
+    """
+    if tamanho not in servico.compilado.TAMANHOS:
+        tamanho = servico.compilado.TAMANHOS[0]
+    montado = servico.compilado.criar_simulado_compilado(tamanho, materias or None)
+    if montado is None:
+        return RedirectResponse("/simulado", status_code=303)
+    return RedirectResponse(f"/simulado/{montado[0].id}", status_code=303)
 
 
 @app.post("/simulado/novo")

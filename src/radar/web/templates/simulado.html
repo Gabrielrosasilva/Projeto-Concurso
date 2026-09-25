@@ -9,6 +9,11 @@
      design system, e o body sem class="ds" nao muda de cara. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
+    td.falta{color:#be123c;font-weight:600}
+    /* A caixinha nao divide a largura com o nome da materia. */
+    table.compilado{table-layout:auto}
+    table.compilado td:first-child,table.compilado th:first-child{width:1.8rem;padding-right:0}
+    table.compilado td:nth-child(2){width:100%}
     /* Descartar em dois passos, sem JavaScript: o <details> mostra a
        pergunta, e so o segundo botao apaga. */
     details.descartar summary{cursor:pointer;color:var(--suave);font-size:.8rem;
@@ -186,6 +191,78 @@
 
   {# ------------------------------------------------------ comecar ------ #}
   {% if not simulado %}
+
+    {# ------------------------------------------- os dois cadernos ------ #}
+    {# Os dois so tem questao REAL. A tela diz isso no selo, porque a outra
+       aba (Gerar questoes) monta rodada de IA - e as duas nunca se misturam. #}
+    <div class="caixa" style="margin-bottom:1rem">
+      <h2 style="font-size:1rem;margin:0 0 .2rem">Só meus erros {{ selo('prova', 'só questões reais') }}</h2>
+      {% if erradas %}
+        <p class="dica" style="margin:0 0 .6rem">
+          {{ erradas }} questão(ões) que errei na última vez que respondi, sem as
+          anuladas. Acertou depois, sai daqui.
+        </p>
+        <form method="post" action="/revisar">
+          <button type="submit">Refazer os {{ erradas }} erro(s)</button>
+        </form>
+      {% else %}
+        <p class="dica" style="margin:0">Nenhum erro em aberto. Cada questão
+          real que eu errar entra aqui, até eu acertá-la.</p>
+      {% endif %}
+    </div>
+
+    {% if planos_compilados %}
+    {% set base = planos_compilados[0] %}
+    <div class="caixa" style="margin-bottom:1rem">
+      <h2 style="font-size:1rem;margin:0 0 .2rem">Simulado compilado {{ selo('prova', 'só questões reais') }}</h2>
+      <p class="dica" style="margin:0 0 .6rem">
+        {{ selo('oficial', 'Quadro do edital ' ~ (base.ano_do_edital or '')) }}
+        a distribuição segue o quadro de questões lido de
+        <code>{{ base.arquivo_do_edital or 'edital' }}</code>. Primeiro as provas do
+        cargo, depois a mesma banca nas mesmas matérias. Desmarque uma matéria e
+        o peso se redistribui entre as outras.
+      </p>
+      <form method="post" action="/simulado/compilado">
+        <table class="compilado">
+          <tr>
+            <th></th><th>Matéria</th><th class="n">Edital</th>
+            {% for p in planos_compilados %}<th class="n">{{ p.tamanho }}</th>{% endfor %}
+            <th class="n">No acervo</th>
+          </tr>
+          {% for linha in base.linhas %}
+            <tr>
+              <td><input type="checkbox" name="materias" value="{{ linha.materia }}" checked aria-label="{{ linha.materia }}"></td>
+              <td>{{ linha.materia }}</td>
+              <td class="n">{{ linha.peso_no_edital }}</td>
+              {% for p in planos_compilados %}
+                {% set l = p.linhas | selectattr('materia', 'equalto', linha.materia) | first %}
+                <td class="n {{ 'falta' if l.pedidas > l.disponiveis }}"
+                    title="{% if l.pedidas > l.disponiveis %}o acervo tem {{ l.disponiveis }}: faltarão {{ l.pedidas - l.disponiveis }}{% endif %}">
+                  {{ l.pedidas }}{% if l.pedidas > l.disponiveis %}*{% endif %}</td>
+              {% endfor %}
+              <td class="n">{{ linha.disponiveis }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+        {% set curtas = [] %}
+        {% for p in planos_compilados %}{% for l in p.linhas %}{% if l.pedidas > l.disponiveis %}{% set _ = curtas.append(1) %}{% endif %}{% endfor %}{% endfor %}
+        {% if curtas %}
+          <p class="dica">* O acervo não tem questão suficiente nessa matéria: o
+            compilado entrega o que há e diz quanto faltou - completar com outra
+            matéria desfiguraria o peso.</p>
+        {% endif %}
+        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.6rem">
+          {% for n in tamanhos %}
+            <label style="display:inline-flex;gap:.3rem;align-items:center;font-size:.9rem">
+              <input type="radio" name="tamanho" value="{{ n }}" {{ 'checked' if loop.first }}> {{ n }} questões
+            </label>
+          {% endfor %}
+          <button type="submit">Montar o compilado</button>
+        </div>
+      </form>
+    </div>
+    {% endif %}
+
     <div class="caixa">
       {% if total_de_questoes == 0 %}
         <div class="vazio">
