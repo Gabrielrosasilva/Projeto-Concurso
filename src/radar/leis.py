@@ -117,3 +117,67 @@ def do_assunto(materia: str | None, assunto: str | None) -> Lei | None:
                 return _como_lei(item)
 
     return _como_lei(bloco)
+
+
+# --- a lei que mudou depois da prova ----------------------------------------
+#
+# A especificacao pede o aviso "A lei mudou depois desta prova" na questao
+# antiga cujo tema foi alterado por lei posterior. A lista de temas mora em
+# `mudancas:` do config/leis.yml, e so vale depois de eu conferir: e ela que
+# diz qual lei, quais provas ficaram velhas e como reconhecer a questao.
+#
+# Cada item:
+#
+#   - tema: Progressao de regime
+#     lei: Lei 13.964/2019 (Pacote Anticrime)
+#     o_que_mudou: fracoes de 16% a 70% (LEP art. 112)
+#     anos: [2013, 2019]          # QUAIS provas ficaram velhas - escrito, e
+#                                 # nao deduzido da data: o radar nao sabe o
+#                                 # dia da prova, so o ano
+#     marcas: [progressao]        # procuradas no enunciado e nas alternativas
+#     materias: [Lei de Execucao Penal]   # opcional: so nestas materias
+
+
+@dataclass(frozen=True)
+class Mudanca:
+    """Uma lei posterior que deixou velha a questao de uma prova."""
+
+    tema: str
+    lei: str
+    o_que_mudou: str | None = None
+
+
+def mudancas_conferidas() -> bool:
+    """A lista de leis alteradas existe no YAML? Sem ela, nao ha aviso - e a
+    tela precisa dizer que a falta e da lista, e nao da lei."""
+    return "mudancas" in _arquivo()
+
+
+def mudancas_da_questao(
+    ano: int | None, materia: str | None, texto: str | None
+) -> list[Mudanca]:
+    """As leis posteriores que afetam esta questao, pela lista do YAML.
+
+    Tres condicoes, e as tres por escrito no YAML: o ano da prova esta em
+    `anos`, a materia esta em `materias` (quando o item restringe), e alguma
+    `marca` aparece no texto. Nada e deduzido: sem o item conferido, nenhuma
+    questao ganha aviso - aviso inventado seria pior que aviso nenhum.
+    """
+    procurado = normalizar(texto or "")
+    da_materia = normalizar(materia or "")
+    achadas = []
+    for item in _arquivo().get("mudancas") or []:
+        if ano not in (item.get("anos") or []):
+            continue
+        materias = [normalizar(str(m)) for m in item.get("materias") or []]
+        if materias and da_materia not in materias:
+            continue
+        marcas = [normalizar(str(m)) for m in item.get("marcas") or []]
+        if not any(marca and marca in procurado for marca in marcas):
+            continue
+        achadas.append(Mudanca(
+            tema=str(item.get("tema") or ""),
+            lei=str(item.get("lei") or ""),
+            o_que_mudou=item.get("o_que_mudou") or None,
+        ))
+    return achadas

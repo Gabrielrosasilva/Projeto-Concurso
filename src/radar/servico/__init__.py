@@ -99,6 +99,8 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
 from radar.servico import geradas       # noqa: F401 - usado pela CLI e pela web
 # O caminho sem API: pedido em arquivo, resposta importada. `servico.manual`.
 from radar.servico import manual        # noqa: F401 - usado pela CLI
+# A Central de Macetes: um cartao por materia. `servico.cartoes.cartoes()`.
+from radar.servico import cartoes       # noqa: F401 - usado pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

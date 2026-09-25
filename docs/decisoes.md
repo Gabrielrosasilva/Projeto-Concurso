@@ -1253,3 +1253,29 @@ mais vale na prova.
   "Direito Processo Penal" (2013) e "Direito Processual Penal" (2019) sao dois
   pedidos. E a divergencia de nome que a auditoria ja mostra; nao foi
   unificada aqui.
+
+## A Central de Macetes (fase 5 da especificacao, 25/09/2026)
+
+- **um cartao por materia, e nao por assunto.** Nenhuma questao de Direito tem
+  assunto hoje, e o pedido de macete da parte 8 ja e por materia. Quando os
+  assuntos existirem, o cartao pode descer um nivel;
+- **a base e so a MINHA prova** (2013 e 2019), pela mesma pergunta do Meu
+  foco, sem anuladas. O reforco de 2016 fica de fora: o cartao diz o que a
+  banca cobra de mim. Com duas provas, todo cartao leva "base pequena";
+- **🟩 e 🟥 em blocos separados, cada um com o seu selo.** O verde mostra so
+  contagem: o `conselho` escrito a mao em `PADROES_DE_COMANDO` NAO entra no
+  cartao, porque nao e contagem nem IA, e nenhum dos selos o descreveria;
+- **macete sem fonte ou sem procedencia nao aparece** - nem no cartao, nem na
+  pagina das questoes relacionadas (404). O importar ja recusa, mas o arquivo
+  e editavel a mao, e a tela nao confia nele;
+- **o link "ler a lei" do macete e o da MATERIA em config/leis.yml**, e nao um
+  link montado a partir da fonte que a IA escreveu: o texto da fonte e 🟥, o
+  endereco e 🟦, e os dois ficam lado a lado para eu conferir;
+- **o aviso de lei alterada so sai do `mudancas:` do config/leis.yml**, com os
+  ANOS de prova escritos em cada item - o radar sabe o ano da prova, nao o
+  dia, e deduzir "prova anterior a lei" de um ano seria chutar no caso da EC
+  104 (dezembro de 2019) contra a prova de 2019. **A lista ainda nao foi
+  gravada**: ela espera a minha conferencia (parte 1). Sem ela a tela diz que
+  a lista falta, em vez de sugerir que nenhuma lei mudou;
+- 2013 e 2019 escrevem Processual Penal de dois jeitos, e por isso sao dois
+  cartoes. E a divergencia de nome que a auditoria mostra.

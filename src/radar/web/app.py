@@ -743,6 +743,10 @@ def macetes(
         request=request,
         name="macetes.html",
         context={
+            # A Central de Macetes vem primeiro: e ela que fala da MINHA
+            # prova. O recorte por banca, embaixo, e para explorar.
+            "cartoes": servico.cartoes.cartoes(),
+            "leis_conferidas": leis.mudancas_conferidas(),
             "analise": analise,
             "parecidas": parecidas,
             "recado_do_cargo": recado,
@@ -754,6 +758,30 @@ def macetes(
             "banca": banca,
             "cargo": cargo,
             "tema": tema,
+        },
+    )
+
+
+@app.get("/macetes/{impressao}/questoes", response_class=HTMLResponse)
+def questoes_do_macete(request: Request, impressao: str):
+    """[Ver questoes reais relacionadas]: o macete de IA ao lado da prova.
+
+    E aqui que eu confiro o 🟥 contra o 🟦 - a questao como a banca escreveu,
+    com o gabarito definitivo. Macete que nao existe, ou que perdeu a fonte ou
+    a procedencia no arquivo, da 404: ele tambem nao aparece nos cartoes.
+    """
+    achado = servico.cartoes.questoes_do_macete(impressao)
+    if achado is None:
+        raise HTTPException(status_code=404)
+    macete, relacionadas = achado
+    return templates.TemplateResponse(
+        request=request,
+        name="macete_questoes.html",
+        context={
+            "macete": macete,
+            "relacionadas": relacionadas,
+            "lei": leis.da_materia(macete.get("materia")),
+            "leis_conferidas": leis.mudancas_conferidas(),
         },
     )
 

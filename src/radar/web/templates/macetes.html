@@ -141,6 +141,46 @@
     .vazio{text-align:center;color:var(--suave);padding:1.5rem 1rem}
     .vazio p{margin:.4rem 0}
     .futuro{font-size:.83rem;color:var(--suave);margin:0}
+
+    /* ------------------------------------------- central de macetes ----- */
+    /* Um cartao por materia. Cada parte tem a cor do seu selo, e as cores
+       nunca se misturam: o verde e contagem, o vermelho e IA. */
+    :root{--verde:#047857;--verde-fraco:#e3f6ed;--vermelho:#b91c1c;
+      --vermelho-fraco:#fdecec;--amarelo:#92400e;--amarelo-fraco:#fdf3dc;
+      --azul-selo:#1d4ed8;--azul-selo-fraco:#e8eeff}
+    @media (prefers-color-scheme: dark){:root{--verde:#4ade80;--verde-fraco:#10291d;
+      --vermelho:#fca5a5;--vermelho-fraco:#2c1414;--amarelo:#fcd34d;
+      --amarelo-fraco:#2b2110;--azul-selo:#93b4ff;--azul-selo-fraco:#1b2740}}
+    .selo{display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;
+      padding:.1rem .55rem;white-space:nowrap}
+    .selo.verde{background:var(--verde-fraco);color:var(--verde)}
+    .selo.vermelho{background:var(--vermelho-fraco);color:var(--vermelho)}
+    .selo.azul{background:var(--azul-selo-fraco);color:var(--azul-selo)}
+    .selo.amarelo{background:var(--amarelo-fraco);color:var(--amarelo)}
+    .legenda-selos{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 1rem}
+    .cartoes{display:grid;gap:1rem;margin-bottom:1.5rem}
+    .cartao-macete{background:var(--cartao);border:1px solid var(--borda);
+      border-radius:12px;padding:1rem 1.2rem}
+    .cartao-macete .cab{display:flex;justify-content:space-between;gap:.6rem;
+      align-items:baseline;flex-wrap:wrap}
+    .cartao-macete h3{margin:0;font-size:1.05rem}
+    .cartao-macete .base{font-size:.82rem;color:var(--suave);margin:.2rem 0 .8rem}
+    .parte{border-radius:8px;padding:.7rem .85rem;margin-top:.6rem;font-size:.88rem}
+    .parte h4{margin:0 0 .35rem;font-size:.82rem}
+    .parte p{margin:.3rem 0}
+    .parte ul{margin:.2rem 0;padding-left:1.1rem}
+    .parte.verde{background:var(--verde-fraco)}
+    .parte.verde h4{color:var(--verde)}
+    .parte.vermelha{background:var(--vermelho-fraco)}
+    .parte.vermelha h4{color:var(--vermelho)}
+    .parte .fonte-ia{font-size:.8rem;color:var(--suave)}
+    .parte .procedencia{font-size:.74rem;color:var(--suave)}
+    .pegadinha{border-left:3px solid var(--vermelho);padding-left:.6rem}
+    .aviso-lei{background:var(--amarelo-fraco);color:var(--amarelo);
+      border-radius:6px;padding:.4rem .6rem;font-size:.82rem}
+    .parte a,.cartao-macete a{color:var(--azul)}
+    .sem-macete{font-size:.82rem;color:var(--suave);margin:.6rem 0 0}
+    .sem-macete code{font-size:.78rem}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -158,6 +198,100 @@
     <h1>Macetes</h1>
     <p class="subtitulo">O que a banca tem costume de cobrar, tirado das provas</p>
   </header>
+
+  {# -------------------------------------------- central de macetes ---- #}
+  <h2>Central de macetes · Polícia Penal SC</h2>
+  <p class="legenda">
+    Um cartão por matéria das minhas provas (FEPESE 2013 e 2019), sem as
+    anuladas. Cada parte leva o selo de onde veio:
+  </p>
+  <div class="legenda-selos">
+    <span class="selo azul">🟦 Extraída da prova</span>
+    <span class="selo verde">🟩 Calculado pelo sistema</span>
+    <span class="selo vermelho">🟥 Gerado por IA · material auxiliar</span>
+  </div>
+  {% if not leis_conferidas %}
+    <p class="dica">
+      O aviso <b>⚠ A lei mudou depois desta prova</b> depende da lista de
+      leis alteradas em <code>config/leis.yml</code>, que ainda não foi
+      conferida. Até lá, nenhuma questão ganha o aviso - o que não quer dizer
+      que a lei não tenha mudado.
+    </p>
+  {% endif %}
+
+  {% if cartoes %}
+  <div class="cartoes">
+    {% for c in cartoes %}
+      <section class="cartao-macete" id="materia-{{ loop.index }}">
+        <div class="cab">
+          <h3>{{ c.materia }}</h3>
+          <span class="selo verde">🟩 {{ c.questoes }} questões analisadas</span>
+        </div>
+        <p class="base">
+          {{ c.questoes }} questões de {{ c.de_onde }}, sem as anuladas.
+          {% if c.base_pequena %}<b>Base pequena:</b> tendência tirada de
+          {{ c.anos | length }} prova{{ 's' if c.anos | length > 1 }}.{% endif %}
+          {% if c.com_lei_mudada %}
+            <span class="selo amarelo">⚠ {{ c.com_lei_mudada }} com lei alterada depois da prova</span>
+          {% endif %}
+        </p>
+
+        <div class="parte verde">
+          <h4>🟩 Padrão da banca</h4>
+          {% if c.comandos %}
+            <ul>
+              {% for k in c.comandos %}
+                <li>{{ k.quantas }} de {{ c.questoes }} questões: {{ k.nome }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Nenhuma forma de perguntar se repete nestas {{ c.questoes }} questões.</p>
+          {% endif %}
+          {% if c.termos %}
+            <p>Palavras que mais aparecem:
+              {% for t in c.termos %}<b>{{ t.palavra }}</b> ({{ t.quantas }}){{ ', ' if not loop.last }}{% endfor %}
+            </p>
+          {% endif %}
+        </div>
+
+        {% for m in c.macetes %}
+          <div class="parte vermelha">
+            <h4>🟥 Macete (IA){% if m.assunto %} · {{ m.assunto }}{% endif %}</h4>
+            <p>{{ m.regra }}</p>
+            <p class="fonte-ia">
+              Fonte citada: {{ m.fonte }}
+              {% if c.lei %} · <a href="{{ c.lei.url }}" target="_blank" rel="noopener">ler {{ c.lei.titulo }}</a>{% endif %}
+            </p>
+            {% if m.pegadinha %}
+              <p class="pegadinha"><b>⚠ Pegadinha recorrente:</b> {{ m.pegadinha }}</p>
+            {% endif %}
+            {% for mud in m.mudancas %}
+              <p class="aviso-lei">⚠ A lei mudou depois desta prova: {{ mud.tema }} ({{ mud.lei }}){% if mud.o_que_mudou %} - {{ mud.o_que_mudou }}{% endif %}</p>
+            {% endfor %}
+            <p>
+              <a href="/macetes/{{ m.impressao }}/questoes">Ver questões reais relacionadas ({{ m.questoes }})</a>
+            </p>
+            <p class="procedencia">{{ m.procedencia }} · confira na fonte antes de confiar</p>
+          </div>
+        {% else %}
+          <p class="sem-macete">
+            🟥 Nenhum macete importado para esta matéria. Eles vêm sem API:
+            <code>radar gerar --pedido --macetes</code>, respondido no Claude
+            Code, e <code>radar gerar --importar data/resposta_ia.json</code>.
+          </p>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="caixa vazio">
+      <p>Ainda não há questão da minha prova no acervo.</p>
+      <p>Rode <b>radar provas</b> e <b>radar questoes</b>.</p>
+    </div>
+  {% endif %}
+
+  <h2>O costume de qualquer banca</h2>
+  <p class="legenda">Contagem sobre o acervo inteiro, no recorte que eu escolher.</p>
 
   <div class="caixa">
     <form class="busca" method="get">

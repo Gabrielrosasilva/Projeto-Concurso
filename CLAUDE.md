@@ -101,8 +101,8 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 **Prontas 1 a 6, 8 a 11, 14 e 15:** tres fontes, anel, avisos, leitura da
 pagina e do edital, calendario, acervo de 8.433 questoes, simulado, previsao,
 linha do tempo, Acompanhando, "Meu foco" como home, treino pelo cargo, "Onde
-estudar primeiro", e o `radar gerar`. **Parcial so a 7:** Macetes tem o costume
-da banca por contagem, e falta a pegadinha, que so a IA faz. `assuntos` e
+estudar primeiro", e o `radar gerar`. **Parcial so a 7:** a Central de Macetes
+tem o cartao pronto, mas nenhum macete de IA foi importado ainda. `assuntos` e
 `gerar` custam dinheiro e **simulam por padrao** (o `gerar --pedido` vai sem
 API, pelo Claude Code); nenhum rodou valendo, e Direito nao tem assunto.
 

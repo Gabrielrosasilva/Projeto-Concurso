@@ -696,6 +696,31 @@ que nao seja de navegador** (testado alternando: o UA honesto do projeto e
 radar se disfarcar, e o CLAUDE.md manda identificar-se no User-Agent. Entao nao
 se baixa — e o radar continua so apontando o link da lei.
 
+#### A Central de Macetes
+
+O topo de `/macetes` e um **cartao por materia** das minhas provas (2013 e
+2019, sem as anuladas), no formato da especificacao. Cada parte leva o selo
+de onde veio, e as partes nao se misturam:
+
+- **base**: "24 questoes analisadas — provas 2013 e 2019", com o aviso
+  **base pequena** — sao so duas provas do cargo;
+- **🟩 Padrao da banca**: a contagem do `macetes.py` sobre essas questoes —
+  como ela pergunta ("3 de 24 pedem a INCORRETA") e as palavras que mais
+  aparecem;
+- **🟥 Macete (IA)**: a regra, a **fonte citada** (com o link oficial da lei
+  da materia) e a **pegadinha recorrente**, com a procedencia embaixo. Vem de
+  `data/macetes.json`, pelo caminho sem API (`--pedido --macetes` /
+  `--importar`). Macete sem fonte ou sem procedencia **nao aparece**, mesmo
+  que alguem o escreva a mao no arquivo;
+- **[Ver questoes reais relacionadas]** abre as questoes em que o macete se
+  apoia, com o selo 🟦, o gabarito definitivo e o link do caderno — e ali que
+  eu confiro o 🟥 contra a prova.
+
+O aviso **⚠ A lei mudou depois desta prova** sai da lista `mudancas:` do
+`config/leis.yml`: tema, lei, quais anos de prova ficaram velhos e as palavras
+que reconhecem a questao. **Enquanto a lista nao existir, nenhuma questao
+ganha o aviso**, e a tela diz isso em vez de ficar calada.
+
 #### Sem pagar: o pedido em arquivo, respondido pelo Claude Code
 
 ```bash
@@ -822,6 +847,8 @@ src/radar/
 │   ├── provas.py     acervo, leitura dos cadernos, padrao da banca
 │   ├── simulado.py   monta a rodada, responde, mede o acerto
 │   ├── geradas.py    as questoes que a IA escreveu: plano, guarda, sorteio
+│   ├── manual.py     IA sem API: pedido em arquivo, resposta importada
+│   ├── cartoes.py    a Central de Macetes: um cartao por materia
 │   ├── previsao.py   quando o municipio costuma abrir de novo
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
