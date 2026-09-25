@@ -5,8 +5,10 @@ nesta pasta. Curto de proposito (teto de 150 linhas). O que nao cabe aqui:
 
 - **[docs/decisoes.md](docs/decisoes.md)** — decisoes ja tomadas, com o motivo.
   Nao precisam ser rediscutidas. **Decisao que mudar, atualize la.**
+- **[docs/especificacao.md](docs/especificacao.md)** — o redesign em andamento;
+  leia antes de mexer em tela ou em dado de estudo.
 - **[docs/historico.md](docs/historico.md)** — como cada fase foi feita;
-- **[README.md](README.md)** — o que e, como instalar e usar no dia a dia.
+  **[README.md](README.md)** — o que e, como instalar e usar no dia a dia.
 
 ## O que e
 
@@ -102,9 +104,7 @@ linha do tempo, Acompanhando, "Meu foco" como home, treino pelo cargo, "Onde
 estudar primeiro", e o `radar gerar`. **Parcial so a 7:** Macetes tem o costume
 da banca por contagem, e falta a pegadinha, que so a IA faz. `assuntos` e
 `gerar` custam dinheiro e **simulam por padrao**; **nenhum jamais rodou
-valendo** - nao ha chave, e nenhuma questao de Direito tem assunto hoje. Em
-25/09 zeramos 93 rotulos do `data/assuntos.json` que nunca passaram pela API
-([decisoes](docs/decisoes.md)).
+valendo** - nao ha chave, e nenhuma questao de Direito tem assunto hoje.
 
 A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em
 `data/radar.db` (Postgres via `RADAR_DATABASE_URL`); testes com dado fixo.
