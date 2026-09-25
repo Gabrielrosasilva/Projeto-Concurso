@@ -961,3 +961,82 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   Lei 4.898/1965 que o edital de 2019 cobra foi revogada pela Lei 13.869/2019
   naquele mesmo ano; a LC 529 e "de dezembro" no edital e "de janeiro" na
   ALESC. Nos dois casos ha uma `nota` que aparece na tela junto do link.
+
+## Questao gerada pela IA: treina, nao mede (etapa 15)
+
+- **a regra que manda em tudo: questao gerada serve para TREINAR, nunca para
+  MEDIR o que a banca cobra.** Ela nao entra na incidencia, no peso das
+  materias, na aba Macetes nem nas questoes esperadas do "Onde estudar
+  primeiro". Sem essa separacao eu passaria a estudar pelo que a IA inventou
+  em vez do que a FEPESE cobra, e nao perceberia;
+- **quem garante isso e uma TABELA separada, e nao um filtro.** `questoes_geradas`
+  existe ao lado de `questoes`. Uma coluna `gerada` dentro de `questoes` daria
+  no mesmo e dependeria de eu lembrar do filtro em cada uma das dez consultas
+  que contam questao - e de lembrar tambem na proxima fase, quando a decima
+  primeira for escrita. Um `select(QuestaoDeProva)` nao alcanca a outra tabela
+  nem por engano;
+- **`RespostaDeSimulado` ganhou a coluna `gerada`**, dizendo em qual das duas
+  tabelas o `questao_id` daquela linha existe. As duas numeram a partir do 1:
+  sem a coluna, responder a questao gerada 5 tiraria a questao real 5 do
+  sorteio - um erro silencioso, que so apareceria como uma pergunta que nunca
+  mais aparece;
+- **variacao e o padrao; do zero e a excecao.** Variar parte de uma questao
+  real da FEPESE com o gabarito definitivo ja conferido, e pede para mudar
+  cenario e numeros mantendo a regra juridica: o estilo e o da banca de
+  verdade e a resposta esta ancorada num gabarito que a banca publicou. O modo
+  do zero so entra quando nao existe questao real na materia, e ai as reais
+  entram so como exemplo de estilo - sem gabarito junto, para nao convidar a
+  copia da resposta;
+- **a base e so a prova do MEU cargo, no MEU estado**, as mesmas que o Meu foco
+  conta. Variar uma questao de Merendeira da mesma banca daria uma questao de
+  Merendeira. Questao anulada tambem fica fora: a banca desfez a pergunta, e
+  variar o que nao tem gabarito seria multiplicar o problema;
+- **`claude-sonnet-5`, e nao o mais barato.** No `radar assuntos` o modelo
+  barato basta porque o erro dele e um rotulo torto; aqui o erro e um gabarito
+  errado que eu estudaria como se fosse certo. US$ 2,00 por milhao de tokens
+  de entrada e US$ 10,00 de saida, com raciocinio adaptativo e esforco medio;
+- **teto de gasto padrao de US$ 0,90** - uns R$ 5. E por execucao, e nao por
+  mes: o radar nao conta o mes. Conferido ANTES de cada chamada, contra o
+  gasto real que a API informou, como no `radar assuntos`. Medido na
+  simulacao: 5 questoes custam US$ 0,06 (~R$ 0,31);
+- **simula por padrao, e a simulacao mostra o PEDIDO, nao questao inventada.**
+  Sem `--valendo` nada e gasto. E como a questao so existe depois da chamada,
+  o que a simulacao mostra e o texto exato que iria para a IA - instrucao e
+  pedido, palavra por palavra. Mostrar "exemplos" de questao gerada numa
+  simulacao seria apresentar texto inventado como se fosse saida do modelo;
+- **cada questao guarda de onde veio**: o modo, a impressao da questao real de
+  origem, a materia, o assunto, o artigo da lei e **qual modelo a escreveu**.
+  A procedencia fica no dado, e nao so na mensagem do commit;
+- **conferimos a FORMA, nunca o conteudo.** Cinco alternativas de "a" a "e",
+  nenhuma vazia, e uma resposta que aponta para uma delas - questao torta e
+  descartada inteira, porque alternativa faltando quer dizer que o modelo se
+  perdeu no meio. Se o Direito esta certo, nenhum programa confere: quem
+  responde isso e o botao "essa questao esta errada" na tela;
+- **`data/questoes_geradas.json` e versionado**, chaveado pela impressao do
+  enunciado, pelo mesmo motivo do `assuntos.json`: custou dinheiro e morava so
+  no banco local, que e reconstruivel e descartavel. O campo `rejeitada` vai
+  junto porque ele e MEU, e nao da IA - sem ele no arquivo, um banco refeito
+  me devolveria ao sorteio tudo que eu ja tinha descartado;
+- **a questao rejeitada e marcada, nunca apagada.** O erro guardado e o que me
+  diz depois se um assunto da errado toda vez - e ai o problema nao e a
+  questao, e o pedido que eu mandei.
+
+### Por que o texto da lei NAO vai junto no pedido
+
+O plano da etapa era baixar o artigo do Planalto e mandar junto, para reduzir
+o risco de gabarito errado. Conferido em 24/09/2026, e a resposta e nao:
+
+- **`planalto.gov.br/robots.txt` responde 404.** Pela convencao isso quer dizer
+  que nada esta proibido - o robots nao e o impedimento;
+- **o impedimento e o User-Agent.** O servidor derruba a conexao para qualquer
+  UA que nao seja de navegador. Testado alternando, varias vezes seguidas: com
+  o UA honesto do projeto ("radar-concursos/0.1 ...") e com "curl/8.4.0", a
+  conexao e resetada; com um UA de Chrome, responde 200.
+
+Baixar exigiria o radar se disfarcar de navegador, e o CLAUDE.md manda
+identificar-se no User-Agent - sem excecao. Entao nao se baixa, e isso
+**confirma** a decisao anterior de que o radar so guarda o link da lei. O que
+substitui: no modo variacao a ancora e o gabarito oficial da questao de
+origem, e em todo caso a IA diz em que ARTIGO se apoiou. A tela mostra o
+artigo junto do link de `config/leis.yml`, e a conferencia e minha, em 10
+segundos. Artigo que a IA nao souber vem vazio - vazio e melhor que inventado.

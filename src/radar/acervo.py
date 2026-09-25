@@ -20,7 +20,13 @@ from sqlalchemy import select
 
 from radar import config
 from radar.db import criar_tabelas, sessao
-from radar.models import Concurso, DataHoraUTC, Evento, QuestaoDeProva
+from radar.models import (
+    Concurso,
+    DataHoraUTC,
+    Evento,
+    QuestaoDeProva,
+    QuestaoGerada,
+)
 
 # Colunas exportadas, em ordem fixa. Ordem fixa e chave ordenada deixam o
 # arquivo estavel: mudou o diff, mudou o dado de verdade.
@@ -336,3 +342,95 @@ def importar_assuntos(caminho: Path | None = None) -> int:
                     mudadas += 1
 
     return mudadas
+
+
+# --- as questoes que a IA escreveu ------------------------------------------
+#
+# Arquivo proprio, versionado, pelo mesmo motivo do assunto pago: elas
+# custaram dinheiro e moravam so no banco local, que e reconstruivel e
+# descartavel. Perder o arquivo e pagar de novo pela mesma questao.
+#
+# A chave e a IMPRESSAO do enunciado, e nao o id: o id muda quando o banco e
+# refeito, e a impressao e o que diz que duas perguntas sao a mesma pergunta.
+#
+# O `rejeitada` vai junto de proposito. Ele e meu, nao da IA: e o registro de
+# que eu li aquela questao e disse que estava errada. Sem ele no arquivo, um
+# banco refeito me devolveria ao sorteio tudo que eu ja tinha descartado.
+
+COLUNAS_DE_GERADA = [
+    c.name for c in QuestaoGerada.__table__.columns if c.name != "id"
+]
+
+DATAS_DE_GERADA = frozenset(
+    c.name for c in QuestaoGerada.__table__.columns
+    if isinstance(c.type, DataHoraUTC)
+)
+
+
+def caminho_das_geradas() -> Path:
+    return config.diretorio_dados() / "questoes_geradas.json"
+
+
+def exportar_geradas(caminho: Path | None = None) -> int:
+    """Grava as questoes geradas no JSON. Devolve quantas gravou."""
+    criar_tabelas()
+    destino = caminho or caminho_das_geradas()
+
+    with sessao() as s:
+        questoes = list(s.scalars(
+            select(QuestaoGerada).order_by(QuestaoGerada.impressao)
+        ))
+        linhas = [
+            {coluna: _serializar(getattr(q, coluna)) for coluna in COLUNAS_DE_GERADA}
+            for q in questoes
+        ]
+
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(
+        json.dumps(linhas, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return len(linhas)
+
+
+def importar_geradas(caminho: Path | None = None) -> int:
+    """Devolve ao banco as questoes que ja foram geradas. Quantas entraram.
+
+    O arquivo manda: ele e o registro do que foi comprado, e o banco local
+    pode ter sido refeito do zero minutos atras. Questao que ja existe aqui
+    tem so o `rejeitada` atualizado - o resto do texto nao muda mais depois de
+    escrito, e reescrever seria arriscar perder o que esta na tela.
+    """
+    origem = caminho or caminho_das_geradas()
+    if not origem.exists():
+        return 0
+
+    criar_tabelas()
+    linhas = json.loads(origem.read_text(encoding="utf-8"))
+    if not linhas:
+        return 0
+
+    novas = 0
+    with sessao() as s:
+        existentes = {
+            q.impressao: q for q in s.scalars(select(QuestaoGerada))
+        }
+        for linha in linhas:
+            impressao = linha.get("impressao")
+            if not impressao or not linha.get("enunciado"):
+                continue
+
+            ja = existentes.get(impressao)
+            if ja is not None:
+                if linha.get("rejeitada") and not ja.rejeitada:
+                    ja.rejeitada = True
+                continue
+
+            valores = {
+                coluna: _desserializar(coluna, linha.get(coluna), DATAS_DE_GERADA)
+                for coluna in COLUNAS_DE_GERADA
+            }
+            s.add(QuestaoGerada(**valores))
+            novas += 1
+
+    return novas

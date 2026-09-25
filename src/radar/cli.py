@@ -10,6 +10,7 @@ from pathlib import Path
 
 import typer
 from rich.console import Console
+from rich.panel import Panel
 from rich.table import Table
 
 from radar import acervo, alvo as alvos, avisos, config, servico
@@ -693,6 +694,177 @@ def cobertura(
 
 
 @app.command()
+def gerar(
+    materia: str = typer.Option(
+        None, help="So desta materia. Sem isso, de qualquer materia do cargo"
+    ),
+    quantas: int = typer.Option(5, help="Quantas questoes gerar"),
+    teto: float = typer.Option(
+        None, help="Teto de gasto em dolar. O comando para ao chegar nele"
+    ),
+    simular: bool = typer.Option(
+        True, "--simular/--valendo",
+        help="Simular NAO gasta nada: so mostra o custo. Use --valendo para rodar",
+    ),
+    ver_pedido: bool = typer.Option(
+        True, "--ver-pedido/--sem-pedido",
+        help="Na simulacao, mostra o texto exato que iria para a IA",
+    ),
+) -> None:
+    """Escreve questoes novas com a IA, para TREINAR.
+
+    Questao gerada nunca mede o que a banca cobra: ela nao entra na
+    incidencia, no peso das materias, na aba Macetes nem nas questoes
+    esperadas do "Onde estudar primeiro". Fica em tabela separada, e o acerto
+    nelas aparece sempre como um segundo numero, do lado do das reais.
+
+    O padrao e VARIAR uma questao real da FEPESE com gabarito conferido -
+    muda o cenario e os numeros, mantem a regra juridica. O modo do zero so
+    entra quando nao existe questao real na materia.
+
+    Esta e a segunda parte do radar que custa dinheiro, e como a outra ela so
+    SIMULA por padrao: para gastar de verdade e preciso passar --valendo.
+    A chave vai em RADAR_ANTHROPIC_KEY, no .env - nunca no codigo.
+    """
+    from radar import config as configuracao, gerador
+
+    limite = gerador.TETO_PADRAO if teto is None else teto
+    plano = servico.geradas.preparar(materia, quantas)
+
+    if not plano["pedidos"]:
+        console.print(
+            "[red]Nao ha questao real do meu cargo para variar.[/] "
+            "Rode [bold]radar provas[/] e [bold]radar questoes[/] primeiro."
+        )
+        raise typer.Exit(code=1)
+
+    console.print(f"Questoes a gerar: [bold]{plano['quantas']}[/]")
+    console.print(
+        f"[dim]{len(plano['pedidos'])} chamada(s) a API, "
+        f"ate {gerador.VARIACOES_POR_QUESTAO} questoes por chamada[/]"
+    )
+    if plano["sem_base"]:
+        console.print(
+            "[yellow]Modo do zero:[/] nao ha questao real desta materia no "
+            "acervo, entao as reais entram so como exemplo de estilo."
+        )
+    else:
+        console.print(
+            f"[dim]Modo variacao, a partir de {plano['base_disponivel']} "
+            f"questao(oes) real(is) do cargo com gabarito conferido[/]"
+        )
+    # Os numeros sao formatados um a um: trocar a virgula na frase inteira
+    # comeria tambem a virgula do portugues.
+    entrada = f"{plano['entrada']:,}".replace(",", ".")
+    saida = f"{plano['saida']:,}".replace(",", ".")
+    console.print(
+        f"[dim]{entrada} tokens de entrada, {saida} de saida (estimados)[/]"
+    )
+    console.print(
+        f"Custo estimado: [bold]US$ {plano['custo']:.2f}[/] "
+        f"[dim](~R$ {plano['custo'] * 5.5:.2f}, a 5,50)[/]"
+    )
+    console.print(f"[dim]Modelo: {gerador.MODELO}[/]")
+
+    if simular:
+        if ver_pedido:
+            _mostrar_pedido(plano["pedidos"][0])
+        console.print()
+        console.print("[yellow]Isto foi so uma simulacao: nada foi gasto.[/]")
+        console.print(
+            "[dim]O texto das questoes nao aparece aqui porque ele ainda nao "
+            "existe: quem escreve e a API, e sem chamada nao ha questao. O que "
+            "da para ver antes de pagar e o pedido acima.[/]"
+        )
+        comando = "radar gerar --valendo"
+        if materia:
+            comando += f' --materia "{materia}"'
+        if quantas != 5:
+            comando += f" --quantas {quantas}"
+        console.print(f"Para valer, rode: [bold]{comando}[/]")
+        return
+
+    if not configuracao.chave_da_anthropic():
+        console.print()
+        console.print(
+            "[red]Falta a chave.[/] Ponha RADAR_ANTHROPIC_KEY no .env "
+            "e rode de novo."
+        )
+        console.print("[dim]Veja COMO_LIGAR_A_IA.txt para o passo a passo.[/]")
+        raise typer.Exit(code=1)
+
+    console.print()
+    console.print(f"[dim]Teto de gasto: US$ {limite:.2f}[/]")
+    with console.status("Escrevendo..."):
+        resultado = servico.geradas.gerar(
+            materia=materia, quantas=quantas, teto_em_dolar=limite
+        )
+
+    if resultado.get("erro"):
+        console.print(f"[red]Nao gerei nada:[/] {resultado['erro']}")
+        raise typer.Exit(code=1)
+
+    console.print(
+        f"[green]{resultado['geradas']} questao(oes) gerada(s)[/] em "
+        f"{resultado['chamadas']} chamada(s)"
+    )
+    console.print(
+        f"Gasto real: [bold]US$ {resultado['custo']:.4f}[/] "
+        f"[dim](~R$ {resultado['custo'] * 5.5:.2f})[/]"
+    )
+    if resultado.get("descartadas"):
+        console.print(
+            f"[dim]{resultado['descartadas']} descartada(s): vieram tortas ou "
+            f"repetidas.[/]"
+        )
+    if resultado.get("parou_no_teto"):
+        console.print(
+            "[yellow]Parei no teto de gasto.[/] Rode de novo para continuar."
+        )
+    if resultado.get("guardadas"):
+        console.print(
+            f"[dim]{resultado['guardadas']} questao(oes) em "
+            f"data/questoes_geradas.json - este arquivo e versionado, e e o "
+            f"que impede eu pagar de novo pela mesma questao.[/]"
+        )
+    if resultado.get("falhas"):
+        console.print(f"[dim]{resultado['falhas']} chamada(s) falharam.[/]")
+
+    console.print()
+    console.print(
+        "Responda em [bold]radar web[/], na aba Estudar. O acerto nas geradas "
+        "aparece separado do acerto nas reais."
+    )
+
+
+def _mostrar_pedido(pedido: dict) -> None:
+    """O texto exato que iria para a IA, na simulacao.
+
+    Existe porque "simular" nao pode significar "mostrar questao inventada":
+    a questao so existe depois da chamada. O que da para conferir antes de
+    gastar e isto - a instrucao e o pedido, palavra por palavra.
+    """
+    from radar import gerador
+
+    if pedido.get("modo") == "do_zero":
+        instrucao = gerador.INSTRUCAO_DO_ZERO
+        corpo = gerador._montar_pedido_do_zero(
+            pedido["materia"], pedido.get("assunto"),
+            pedido.get("exemplos") or [], pedido["quantas"],
+        )
+    else:
+        instrucao = gerador.INSTRUCAO_VARIACAO
+        corpo = gerador._montar_pedido_variacao(
+            pedido["questao"], pedido["quantas"]
+        )
+
+    console.print()
+    console.print("[bold]O primeiro pedido, como ele sai daqui:[/]")
+    console.print(Panel(instrucao, title="instrucao", border_style="dim"))
+    console.print(Panel(corpo, title="pedido", border_style="dim"))
+
+
+@app.command()
 def padrao(
     cargo: str = typer.Option(None, help="Filtra por cargo, ex: Guarda"),
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),
@@ -1070,6 +1242,18 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"{destino_assuntos}"
     )
 
+    # O quarto tambem custou dinheiro: as questoes que a IA escreveu. Elas
+    # sao treino, e nao acervo - mas perde-las e paga-las de novo.
+    destino_geradas = (
+        destino.with_name("questoes_geradas.json") if caminho
+        else acervo.caminho_das_geradas()
+    )
+    geradas_gravadas = acervo.exportar_geradas(destino_geradas)
+    console.print(
+        f"[green]{geradas_gravadas}[/] questao(oes) gerada(s) exportada(s) "
+        f"para {destino_geradas}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1102,6 +1286,17 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
         console.print(
             f"[green]{mudadas}[/] questao(oes) reganharam o assunto ja pago, "
             f"de {origem_assuntos}"
+        )
+
+    origem_geradas = (
+        origem.with_name("questoes_geradas.json") if caminho
+        else acervo.caminho_das_geradas()
+    )
+    if origem_geradas.exists():
+        voltaram = acervo.importar_geradas(origem_geradas)
+        console.print(
+            f"[green]{voltaram}[/] questao(oes) gerada(s) de volta, "
+            f"de {origem_geradas}"
         )
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
@@ -1183,7 +1378,7 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
 
 
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
-                     "data/assuntos.json")
+                     "data/assuntos.json", "data/questoes_geradas.json")
 
 
 @app.command()

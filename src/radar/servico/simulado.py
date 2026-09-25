@@ -21,6 +21,7 @@ from radar import macetes, regioes
 from radar.db import criar_tabelas, sessao
 from radar.models import (
     QuestaoDeProva,
+    QuestaoGerada,
     RespostaDeSimulado,
     Simulado,
     agora,
@@ -174,6 +175,10 @@ def _impressoes_ja_respondidas(s) -> set[str]:
         select(QuestaoDeProva.impressao)
         .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
         .where(RespostaDeSimulado.escolhida.is_not(None))
+        # Sem isto o `questao_id` de uma rodada gerada casaria com a questao
+        # real de mesmo numero, e uma pergunta que eu nunca vi sairia do
+        # sorteio. As duas tabelas numeram a partir do 1.
+        .where(RespostaDeSimulado.gerada.is_(False))
         .distinct()
     ).all()
     return {impressao for (impressao,) in linhas if impressao}
@@ -316,11 +321,24 @@ def _respostas(simulado_id: int) -> list[RespostaDeSimulado]:
         ))
 
 
-def questao_atual(simulado_id: int) -> tuple[RespostaDeSimulado, QuestaoDeProva] | None:
+def _tabela_da_resposta(resposta: RespostaDeSimulado):
+    """Em que tabela o `questao_id` desta linha existe.
+
+    Uma linha so, para nao espalhar o `if resposta.gerada` por cinco funcoes.
+    """
+    return QuestaoGerada if resposta.gerada else QuestaoDeProva
+
+
+def questao_atual(
+    simulado_id: int,
+) -> tuple[RespostaDeSimulado, QuestaoDeProva | QuestaoGerada] | None:
     """A proxima questao sem resposta, ou None quando acabou.
 
     E isso que permite fechar a pagina no meio e voltar depois: o lugar onde
     eu parei esta no banco, nao na sessao do navegador.
+
+    A questao pode vir das duas tabelas, e a tela e a mesma. Quem diz de qual
+    e a coluna `gerada` da propria linha da resposta.
     """
     criar_tabelas()
     with sessao() as s:
@@ -333,7 +351,7 @@ def questao_atual(simulado_id: int) -> tuple[RespostaDeSimulado, QuestaoDeProva]
         )
         if resposta is None:
             return None
-        return resposta, s.get(QuestaoDeProva, resposta.questao_id)
+        return resposta, s.get(_tabela_da_resposta(resposta), resposta.questao_id)
 
 
 def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
@@ -352,7 +370,7 @@ def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
         if resposta is None or resposta.escolhida is not None:
             return None
 
-        questao = s.get(QuestaoDeProva, questao_id)
+        questao = s.get(_tabela_da_resposta(resposta), questao_id)
         if questao is None or letra not in (questao.alternativas or {}):
             return None
 
@@ -386,10 +404,14 @@ class DesempenhoDaMateria:
 
 
 def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
-    """Acerto por materia. Sem id, soma TODOS os simulados ja feitos.
+    """Acerto por materia nas questoes REAIS. Sem id, soma todos os simulados.
 
     O acumulado e o que responde a pergunta que importa: em que materia eu
     estou pior e preciso estudar.
+
+    Questao gerada nao entra aqui, e nunca vai entrar somada: acertar uma
+    variacao que a IA escreveu nao e a mesma coisa que acertar o que a FEPESE
+    cobrou. O numero delas sai em `desempenho_das_geradas`, do lado.
     """
     criar_tabelas()
     consulta = (
@@ -403,8 +425,39 @@ def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
         )
         .join(QuestaoDeProva, QuestaoDeProva.id == RespostaDeSimulado.questao_id)
         .where(RespostaDeSimulado.escolhida.is_not(None))
+        .where(RespostaDeSimulado.gerada.is_(False))
         .group_by(QuestaoDeProva.materia)
     )
+    return _somar_desempenho(consulta, simulado_id)
+
+
+def desempenho_das_geradas(
+    simulado_id: int | None = None,
+) -> list[DesempenhoDaMateria]:
+    """O mesmo, para as questoes escritas pela IA. Sempre um numero a parte.
+
+    Existe como funcao propria, e nao como parametro de `desempenho`, porque
+    o parametro convidaria alguem a somar os dois um dia. Sao duas perguntas
+    diferentes: "quanto eu acerto do que a banca cobrou" e "quanto eu acerto
+    no treino que eu mandei escrever".
+    """
+    criar_tabelas()
+    consulta = (
+        select(
+            QuestaoGerada.materia,
+            func.count(),
+            func.sum(case((RespostaDeSimulado.acertou.is_(True), 1), else_=0)),
+        )
+        .join(QuestaoGerada, QuestaoGerada.id == RespostaDeSimulado.questao_id)
+        .where(RespostaDeSimulado.escolhida.is_not(None))
+        .where(RespostaDeSimulado.gerada.is_(True))
+        .group_by(QuestaoGerada.materia)
+    )
+    return _somar_desempenho(consulta, simulado_id)
+
+
+def _somar_desempenho(consulta, simulado_id: int | None) -> list[DesempenhoDaMateria]:
+    """Roda a consulta de acerto por materia e ordena pior primeiro."""
     if simulado_id is not None:
         consulta = consulta.where(RespostaDeSimulado.simulado_id == simulado_id)
 
@@ -455,6 +508,11 @@ class ItemDeRevisao:
     texto_correto: str
     acertou: bool
     materia: str | None = None
+    #: Escrita pela IA. A revisao precisa dizer isso: rever uma questao
+    #: gerada achando que e da banca e o erro que esta etapa inteira evita.
+    gerada: bool = False
+    #: O artigo em que a questao gerada se apoia, para eu conferir na lei.
+    artigo: str | None = None
 
 
 def revisao(simulado_id: int) -> list[ItemDeRevisao]:
@@ -465,16 +523,23 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
     """
     criar_tabelas()
     with sessao() as s:
-        linhas = s.execute(
-            select(RespostaDeSimulado, QuestaoDeProva)
-            .join(QuestaoDeProva, QuestaoDeProva.id == RespostaDeSimulado.questao_id)
+        respostas = list(s.scalars(
+            select(RespostaDeSimulado)
             .where(RespostaDeSimulado.simulado_id == simulado_id)
             .where(RespostaDeSimulado.escolhida.is_not(None))
             .order_by(RespostaDeSimulado.ordem)
-        ).all()
+        ))
+        # Uma busca por linha, em vez do join de antes: a rodada tem no
+        # maximo 50 questoes, e elas podem estar em duas tabelas diferentes.
+        linhas = [
+            (resposta, s.get(_tabela_da_resposta(resposta), resposta.questao_id))
+            for resposta in respostas
+        ]
 
     itens = []
     for resposta, questao in linhas:
+        if questao is None:
+            continue
         alternativas = questao.alternativas or {}
         itens.append(ItemDeRevisao(
             enunciado=questao.enunciado,
@@ -484,6 +549,8 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             texto_correto=alternativas.get(questao.resposta, ""),
             acertou=bool(resposta.acertou),
             materia=questao.materia,
+            gerada=bool(resposta.gerada),
+            artigo=getattr(questao, "artigo", None),
         ))
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)

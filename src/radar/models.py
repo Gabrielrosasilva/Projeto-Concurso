@@ -88,6 +88,12 @@ ALVOS = ("principal", "principal_fora", "secundario")
 
 ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 
+# De onde saiu uma questao escrita pela IA. `variacao` parte de uma questao
+# real com gabarito conferido e so troca o cenario; `do_zero` nao tem questao
+# real embaixo, e por isso e o modo de excecao - so para assunto que nao tem
+# nenhuma questao no acervo.
+MODOS_DE_GERACAO = ("variacao", "do_zero")
+
 # O que pode acontecer com um concurso e virar linha do tempo. O vocabulario e
 # fechado pelo mesmo motivo dos outros: string solta pelo codigo vira erro de
 # digitacao silencioso.
@@ -321,6 +327,12 @@ class RespostaDeSimulado(Base):
     simulado_id: Mapped[int] = mapped_column(Integer, index=True)
     questao_id: Mapped[int] = mapped_column(Integer, index=True)
 
+    # Em QUAL tabela o `questao_id` acima existe: `questoes` quando falso,
+    # `questoes_geradas` quando verdadeiro. Sem esta coluna as duas tabelas
+    # numeram do 1 e a questao gerada 5 se juntaria a questao real 5 - um erro
+    # silencioso, que so apareceria como acerto contado na materia errada.
+    gerada: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+
     # A ordem em que a questao aparece nesta rodada.
     ordem: Mapped[int] = mapped_column(Integer)
 
@@ -331,3 +343,67 @@ class RespostaDeSimulado(Base):
 
     def __repr__(self) -> str:
         return f"<Resposta q{self.questao_id} = {self.escolhida}>"
+
+
+class QuestaoGerada(Base):
+    """Uma questao que a IA escreveu para eu treinar. Nao mede nada.
+
+    Tabela separada das questoes reais, e esta e a decisao que sustenta a
+    etapa inteira: questao gerada serve para TREINAR, nunca para MEDIR o que a
+    banca cobra. Ela nao entra na incidencia, no peso das materias, na aba
+    Macetes nem nas questoes esperadas do "Onde estudar primeiro".
+
+    Uma coluna `gerada` dentro de `questoes` daria no mesmo, e dependeria de
+    eu lembrar do filtro em cada consulta que conta questao - e sao dez.
+    Tabela separada nao depende de eu lembrar: um `select(QuestaoDeProva)` nao
+    alcanca esta tabela nem por engano, hoje nem na proxima fase.
+    """
+
+    __tablename__ = "questoes_geradas"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    # --- de onde veio ------------------------------------------------------
+    #: "variacao" ou "do_zero", de MODOS_DE_GERACAO.
+    modo: Mapped[str] = mapped_column(String(20), index=True)
+
+    #: A impressao da questao REAL que serviu de base, no modo variacao. E por
+    #: ela que a tela mostra "baseada nesta questao", e e o que me deixa
+    #: conferir a variacao contra um gabarito que a banca publicou. Nula no
+    #: modo do_zero, que nao tem questao real embaixo.
+    origem_impressao: Mapped[str | None] = mapped_column(
+        String(32), index=True, nullable=True
+    )
+
+    #: Qual modelo escreveu. A procedencia fica gravada no dado, e nao so no
+    #: commit: sem isto nao ha como saber depois o que produziu cada questao.
+    modelo: Mapped[str | None] = mapped_column(String(60), nullable=True)
+
+    # --- a questao ---------------------------------------------------------
+    materia: Mapped[str | None] = mapped_column(String(160), index=True, nullable=True)
+    assunto: Mapped[str | None] = mapped_column(String(200), index=True, nullable=True)
+
+    #: O artigo da lei em que ela se apoia, do jeito que a IA respondeu
+    #: ("art. 41, XV, da Lei 7.210/1984"). Vazio quando a IA nao soube dizer -
+    #: e melhor sem artigo do que com artigo inventado. A tela junta este
+    #: texto com o link de config/leis.yml, para eu conferir em 10 segundos.
+    artigo: Mapped[str | None] = mapped_column(String(200), nullable=True)
+
+    enunciado: Mapped[str] = mapped_column(Text)
+    alternativas: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    resposta: Mapped[str | None] = mapped_column(String(1), nullable=True)
+
+    #: Hash do enunciado, igual ao das questoes reais. E a chave do arquivo
+    #: versionado, e e o que impede pagar duas vezes pela mesma questao e
+    #: gerar a mesma pergunta de novo.
+    impressao: Mapped[str] = mapped_column(String(32), index=True, unique=True)
+
+    #: Eu cliquei em "essa questao esta errada". Ela sai do sorteio para
+    #: sempre e nao e apagada - o erro guardado e o que me diz se um assunto
+    #: da errado toda vez, e ai o problema nao e a questao, e o pedido.
+    rejeitada: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+
+    criada_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<QuestaoGerada {self.modo} {self.enunciado[:40]!r}>"

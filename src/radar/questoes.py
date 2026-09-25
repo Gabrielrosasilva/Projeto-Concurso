@@ -90,6 +90,24 @@ def _sem_acento(texto: str) -> str:
     return "".join(c for c in normal if not unicodedata.combining(c))
 
 
+def impressao_de(enunciado: str) -> str:
+    """Hash do enunciado, para achar questao repetida entre provas.
+
+    Banca reaproveita questao, e saber disso vale ouro: e o padrao mais forte
+    que existe. Compara sem acento, sem caixa e sem espaco duplo, porque o
+    mesmo enunciado sai formatado de um jeito em cada caderno.
+
+    E funcao solta, e nao so um metodo, porque a questao escrita pela IA
+    precisa da MESMA impressao: e por ela que se ve que a variacao saiu igual
+    a uma pergunta que ja existe.
+    """
+    texto = unicodedata.normalize("NFKD", enunciado or "")
+    texto = "".join(c for c in texto if not unicodedata.combining(c))
+    texto = re.sub(r"[^a-z0-9 ]", " ", texto.lower())
+    texto = re.sub(r"\s+", " ", texto).strip()
+    return hashlib.sha256(texto.encode()).hexdigest()[:32]
+
+
 @dataclass
 class Questao:
     numero: int
@@ -103,17 +121,7 @@ class Questao:
 
     @property
     def impressao(self) -> str:
-        """Hash do enunciado, para achar questao repetida entre provas.
-
-        Banca reaproveita questao, e saber disso vale ouro: e o padrao mais
-        forte que existe. Compara sem acento, sem caixa e sem espaco duplo,
-        porque o mesmo enunciado sai formatado de um jeito em cada caderno.
-        """
-        texto = unicodedata.normalize("NFKD", self.enunciado)
-        texto = "".join(c for c in texto if not unicodedata.combining(c))
-        texto = re.sub(r"[^a-z0-9 ]", " ", texto.lower())
-        texto = re.sub(r"\s+", " ", texto).strip()
-        return hashlib.sha256(texto.encode()).hexdigest()[:32]
+        return impressao_de(self.enunciado)
 
 
 def extrair_texto(caminho: Path, layout: bool = False) -> str:

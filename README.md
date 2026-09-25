@@ -613,6 +613,65 @@ dizendo de onde ele veio — catalogo (de graca), edital (pago), ou "fora do
 programa de hoje", que e a materia que a edicao de 2013 cobrava e a de 2019
 nao cobra mais.
 
+### Questoes geradas: treinar com o que a IA escreve
+
+`radar gerar` e a **segunda parte que custa dinheiro**, e como a outra **simula
+por padrao**: sem `--valendo` nao gasta nada.
+
+```bash
+radar gerar --quantas 5                      # simula: mostra o custo e o pedido
+radar gerar --quantas 5 --materia "Direito Penal"
+radar gerar --quantas 5 --valendo            # so aqui gasta
+```
+
+**A regra que vale para tudo nesta parte: questao gerada serve para TREINAR,
+nunca para MEDIR o que a banca cobra.** Ela nao entra na incidencia, no peso
+das materias, na aba Macetes nem nas questoes esperadas do "Onde estudar
+primeiro". Quem garante isso nao e um filtro que alguem precise lembrar: e a
+tabela `questoes_geradas`, separada da `questoes`. O meu acerto aparece sempre
+em **dois numeros**, o das reais e o das geradas, e nunca somado.
+
+**Dois modos, e o padrao nao e criar do zero:**
+
+- **variacao** (padrao) parte de uma questao **real** da FEPESE com o gabarito
+  definitivo conferido e pede 3 variacoes — muda cenario e numeros, mantem a
+  regra juridica. O estilo e o da banca de verdade e a resposta esta ancorada
+  num gabarito que a propria banca publicou;
+- **do zero** so entra quando nao existe questao real na materia. Ai as
+  questoes reais entram so como exemplo de **estilo**, sem gabarito junto.
+
+A base e so a prova do **meu cargo, no meu estado**, e questao anulada fica de
+fora. Cada questao gerada guarda o modo, a questao real de origem, a materia, o
+assunto, **o artigo da lei** em que se apoia e qual modelo a escreveu — e o
+artigo aparece na tela com o link do `config/leis.yml`, para eu conferir em 10
+segundos.
+
+**O modelo e `claude-sonnet-5`**, e nao o mais barato: no `radar assuntos` o
+erro do modelo fraco e um rotulo torto, aqui seria um gabarito errado que eu
+estudaria como certo. US$ 2,00 por milhao de tokens de entrada e US$ 10,00 de
+saida. Medido na simulacao: **5 questoes custam US$ 0,06** (~R$ 0,31). O teto
+padrao e **US$ 0,90** (uns R$ 5), conferido antes de cada chamada contra o
+gasto real que a API informou — e por execucao, nao por mes.
+
+O que foi gerado vai para **`data/questoes_geradas.json`**, versionado e
+chaveado pela impressao do enunciado, como o `assuntos.json`: refazer o banco
+nao faz eu pagar de novo pela mesma questao. O `rejeitada` vai junto porque ele
+e meu, e nao da IA.
+
+**A simulacao mostra o pedido, e nao questao inventada.** O texto da questao so
+existe depois da chamada — entao o que `--simular` imprime e a instrucao e o
+pedido exatos que iriam para a API. Mostrar "exemplos" de questao gerada sem
+ter chamado nada seria apresentar texto inventado como saida do modelo.
+
+**O texto da lei nao vai junto no pedido, e ha um motivo.** A ideia era baixar
+o artigo do Planalto para reduzir o risco de gabarito errado. O
+`planalto.gov.br/robots.txt` responde 404 — ou seja, o robots nao proibe nada.
+O impedimento e outro: o servidor **derruba a conexao para qualquer User-Agent
+que nao seja de navegador** (testado alternando: o UA honesto do projeto e
+`curl/8.4.0` sao recusados; um UA de Chrome responde 200). Baixar exigiria o
+radar se disfarcar, e o CLAUDE.md manda identificar-se no User-Agent. Entao nao
+se baixa — e o radar continua so apontando o link da lei.
+
 ### O gabarito que vale e o definitivo
 
 O caderno de prova da FEPESE marca a alternativa certa dentro do proprio PDF, e
@@ -663,7 +722,8 @@ voce abre a web ou pede para baixar prova.
 ```
 src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
-├── models.py       tabelas concursos, eventos, questoes, simulados e respostas
+├── models.py       tabelas concursos, eventos, questoes, questoes_geradas,
+│                   simulados e respostas
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
@@ -672,6 +732,7 @@ src/radar/
 │   ├── avisos.py     quem vira mensagem no Telegram, e quando
 │   ├── provas.py     acervo, leitura dos cadernos, padrao da banca
 │   ├── simulado.py   monta a rodada, responde, mede o acerto
+│   ├── geradas.py    as questoes que a IA escreveu: plano, guarda, sorteio
 │   ├── previsao.py   quando o municipio costuma abrir de novo
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
@@ -694,7 +755,8 @@ src/radar/
 ├── questoes.py     separa o caderno da FEPESE em questoes
 ├── questoes_ieses.py  o mesmo para a IESES: 4 alternativas, gabarito a parte
 ├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
-├── assuntos.py     assunto fino pela API da Claude (a unica parte paga)
+├── assuntos.py     assunto fino pela API da Claude (a primeira parte paga)
+├── gerador.py      escreve questao nova pela API, para treinar (a segunda)
 ├── substituta.py   qual prova do acervo mais se parece com o cargo que quero
 ├── macetes.py      o costume da banca: forma de perguntar, questao repetida,
 │                   palavra frequente, letra do gabarito

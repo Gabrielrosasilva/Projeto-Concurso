@@ -83,6 +83,7 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     criar_simulado,
     criar_simulado_do_alvo,
     desempenho,
+    desempenho_das_geradas,
     materias_disponiveis,
     materias_universais,
     questao_atual,
@@ -91,6 +92,11 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     revisao,
     simulados_recentes,
 )
+# As questoes escritas pela IA entram como MODULO, e nao funcao a funcao:
+# `criar_simulado`, `gerar` e `contar` ja existem nesta fachada querendo dizer
+# outra coisa. Escreva `servico.geradas.criar_simulado(...)`, e fica dito na
+# chamada que aquilo nao e questao de prova.
+from radar.servico import geradas       # noqa: F401 - usado pela CLI e pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,
