@@ -94,31 +94,20 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual: so a 7 esta parcial (detalhe no [historico](docs/historico.md))
+## Estado atual (o detalhe de cada fase esta no [historico](docs/historico.md))
 
-```
-1 a 6   PRONTAS: tres fontes, anel, avisos, leitura da pagina e do edital,
-e 8 a   calendario .ics, acervo, 8.433 questoes, simulado, previsao, linha do
-11      tempo, Acompanhando, "Meu foco" como home, treino pelas provas do
-        cargo, `servico` como pacote, robo avisando
-7       PARCIAL: Macetes tem o costume da banca por contagem. Falta o que so
-        a IA faz: pegadinha especifica e macete de memorizacao
-14      PRONTAS E, C, D, F: aviso e estudo separados e a `de_olho`; gabarito
-        definitivo e `--so-alvo` pela lista do edital; "Onde estudar primeiro"
-15      PRONTAS 2 e 3: `radar gerar` varia questao real da FEPESE para
-        TREINAR, e "Gerar questoes" responde no simulado de sempre
-```
-
-Duas partes custam dinheiro e **simulam por padrao**: `assuntos` e `gerar`.
-**Pendencia aberta (etapa 15, parte 0):** as 93 classificacoes de
-`data/assuntos.json` **nao vieram de chamada a API** - nao ha chave no `.env`
-nem no ambiente. Foram escritas na sessao, escolhendo na lista do edital: os
-rotulos conferem, mas commits e docs as apresentam como saida paga. Decidir
-antes de construir mais em cima: declarar a origem, zerar, ou reverter.
+**Prontas 1 a 6, 8 a 11, 14 e 15:** tres fontes, anel, avisos, leitura da
+pagina e do edital, calendario, acervo de 8.433 questoes, simulado, previsao,
+linha do tempo, Acompanhando, "Meu foco" como home, treino pelo cargo, "Onde
+estudar primeiro", e o `radar gerar`. **Parcial so a 7:** Macetes tem o costume
+da banca por contagem, e falta a pegadinha, que so a IA faz. `assuntos` e
+`gerar` custam dinheiro e **simulam por padrao**; **nenhum jamais rodou
+valendo** - nao ha chave, e nenhuma questao de Direito tem assunto hoje. Em
+25/09 zeramos 93 rotulos do `data/assuntos.json` que nunca passaram pela API
+([decisoes](docs/decisoes.md)).
 
 A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em
-`data/radar.db` (Postgres opcional via `RADAR_DATABASE_URL`); testes com dado
-fixo em `tests/`.
+`data/radar.db` (Postgres via `RADAR_DATABASE_URL`); testes com dado fixo.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
@@ -132,10 +121,9 @@ Nao existe API oficial unica de concursos no Brasil.
 - prefira **RSS e dados abertos** a raspagem de HTML, sempre;
 - **nao** raspe site cujos termos proibem (Qconcursos, por exemplo) nem
   conteudo atras de login ou paywall;
-- respeite `robots.txt` **sem excecao**, mantenha o atraso entre requisicoes e
-  identifique-se no User-Agent - a classe `Coletor` ja faz os tres. O DOM/SC, o
-  DOU e o Querido Diario estao fora por isso, e o Planalto tambem: ele so
-  responde a quem se disfarca de navegador;
+- respeite `robots.txt` **sem excecao**, mantenha o atraso e identifique-se no
+  User-Agent - a classe `Coletor` faz os tres. O DOM/SC, o DOU e o Querido
+  Diario estao fora por isso; o Planalto tambem, que so responde a navegador;
 - guarde sempre o link original: isto e um indice pessoal, nao uma copia do
   conteudo de ninguem.
 
@@ -146,11 +134,12 @@ Nao existe API oficial unica de concursos no Brasil.
 - **se uma decisao mudar, atualize `docs/decisoes.md`** na mesma etapa;
 - **uma coisa por vez.** Uma mudanca, testada, e so entao a proxima. Nao
   refatore o que nao faz parte do pedido;
-- **questao gerada por IA TREINA, nunca MEDE.** Vive em `questoes_geradas`,
+- **questao gerada por IA TREINA, nunca MEDE**: vive em `questoes_geradas`,
   fora de tudo que conta o que a banca cobra, e o acerto nela e um segundo
   numero - nunca somado ao das reais;
-- **nunca apresente como saida da IA um texto que ela nao escreveu.** Simulacao
-  mostra o PEDIDO, e nao um exemplo de resposta;
+- **dado vindo de IA so entra com procedencia** (modelo e data), e **nunca
+  apresente como saida dela um texto que ela nao escreveu**: simulacao mostra
+  o PEDIDO, nao um exemplo de resposta;
 - todo coletor e todo classificador precisa de **teste com dado fixo**
   (fixture em arquivo), nunca teste que va a internet;
 - antes de dizer que terminou: `pytest -q` passando **e** o comando afetado

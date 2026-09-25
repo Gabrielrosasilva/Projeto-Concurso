@@ -409,6 +409,16 @@ def test_sem_arquivo_de_eventos_nao_quebra(banco_temporario, tmp_path):
 # Este e o unico dado do projeto que custou dinheiro. Ate a etapa 14 ele
 # morava so no banco local: refazer o banco, ou trocar de computador, e eu
 # pagaria de novo pela mesma questao.
+#
+# Desde 25/09/2026 ele carrega tambem a PROCEDENCIA - qual modelo classificou
+# e quando. Assunto sem isso nao entra no banco, e o motivo esta em
+# docs/decisoes.md: 93 rotulos foram gravados sem nunca terem passado pela
+# API, e o formato antigo nao tinha como mostrar isso.
+
+from datetime import datetime, timezone
+
+CLASSIFICADO_EM = datetime(2026, 9, 25, 12, 0, tzinfo=timezone.utc)
+
 
 def _questao_com_assunto(numero: int, **mudancas):
     from radar.models import QuestaoDeProva
@@ -425,9 +435,24 @@ def _questao_com_assunto(numero: int, **mudancas):
         resposta="a",
         impressao=f"imp{numero}",
         assunto="Teoria geral dos direitos humanos",
+        assunto_modelo="claude-haiku-4-5-20251001",
+        assunto_em=CLASSIFICADO_EM,
     )
     base.update(mudancas)
     return QuestaoDeProva(**base)
+
+
+def _linha_do_arquivo(**mudancas) -> dict:
+    """Uma linha do assuntos.json com procedencia, como o export escreve."""
+    base = {
+        "impressao": "imp1",
+        "assunto": "Teoria geral dos direitos humanos",
+        "materia": "Direitos Humanos",
+        "modelo": "claude-haiku-4-5-20251001",
+        "classificado_em": CLASSIFICADO_EM.isoformat(),
+    }
+    base.update(mudancas)
+    return base
 
 
 def test_exporta_o_assunto_por_impressao(banco_temporario, tmp_path):
@@ -447,6 +472,34 @@ def test_exporta_o_assunto_por_impressao(banco_temporario, tmp_path):
     assert linhas[0]["assunto"] == "Teoria geral dos direitos humanos"
 
 
+def test_o_arquivo_diz_de_onde_o_assunto_veio(banco_temporario, tmp_path):
+    """Sem isto, rotulo escrito a mao e rotulo pago sao indistinguiveis - que
+    e exatamente o que aconteceu em 24/09/2026."""
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_questao_com_assunto(1))
+
+    destino = tmp_path / "assuntos.json"
+    acervo.exportar_assuntos(destino)
+
+    linha = json.loads(destino.read_text(encoding="utf-8"))[0]
+    assert linha["modelo"] == "claude-haiku-4-5-20251001"
+    assert linha["classificado_em"].startswith("2026-09-25")
+
+
+def test_assunto_sem_procedencia_nao_e_exportado(banco_temporario, tmp_path):
+    """Se ele escapou para o banco de algum jeito, nao escapa para o arquivo."""
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_questao_com_assunto(1, assunto_modelo=None, assunto_em=None))
+
+    destino = tmp_path / "assuntos.json"
+
+    assert acervo.exportar_assuntos(destino) == 0
+
+
 def test_importar_devolve_o_assunto_ao_banco_refeito(banco_temporario, tmp_path):
     """O caso que o arquivo existe para resolver: o banco foi refeito do zero
     e as questoes voltaram sem assunto nenhum."""
@@ -456,22 +509,64 @@ def test_importar_devolve_o_assunto_ao_banco_refeito(banco_temporario, tmp_path)
     from radar.models import QuestaoDeProva
 
     destino = tmp_path / "assuntos.json"
-    destino.write_text(
-        json.dumps([{
-            "impressao": "imp1",
-            "assunto": "Teoria geral dos direitos humanos",
-            "materia": "Direitos Humanos",
-        }]),
-        encoding="utf-8",
-    )
+    destino.write_text(json.dumps([_linha_do_arquivo()]), encoding="utf-8")
     with sessao() as s:
-        s.add(_questao_com_assunto(1, assunto=None))
+        s.add(_questao_com_assunto(1, assunto=None, assunto_modelo=None,
+                                   assunto_em=None))
 
     assert acervo.importar_assuntos(destino) == 1
 
     with sessao() as s:
         questao = s.scalar(select(QuestaoDeProva))
     assert questao.assunto == "Teoria geral dos direitos humanos"
+    # A procedencia volta junto: sem ela o proximo export perderia o rotulo.
+    assert questao.assunto_modelo == "claude-haiku-4-5-20251001"
+
+
+def test_assunto_sem_procedencia_e_recusado_na_importacao(
+    banco_temporario, tmp_path
+):
+    """A porta que faltava em 24/09. Nem escrito a mao e commitado ele entra.
+
+    Nao basta recusar na hora de gravar pela API: o arquivo versionado e
+    editavel, e foi por ele que os 93 rotulos entraram no banco daquela vez.
+    """
+    from sqlalchemy import select
+
+    from radar.db import sessao
+    from radar.models import QuestaoDeProva
+
+    destino = tmp_path / "assuntos.json"
+    destino.write_text(
+        json.dumps([
+            _linha_do_arquivo(impressao="imp1", modelo=None),
+            _linha_do_arquivo(impressao="imp2", classificado_em=None),
+        ]),
+        encoding="utf-8",
+    )
+    with sessao() as s:
+        s.add(_questao_com_assunto(1, assunto=None, assunto_modelo=None))
+        s.add(_questao_com_assunto(2, assunto=None, assunto_modelo=None))
+
+    assert acervo.importar_assuntos(destino) == 0
+
+    with sessao() as s:
+        assert {q.assunto for q in s.scalars(select(QuestaoDeProva))} == {None}
+
+
+def test_o_recusado_e_contado_em_voz_alta(banco_temporario, tmp_path):
+    """Recusar em silencio seria o mesmo erro: o arquivo importaria menos do
+    que tem e ninguem perguntaria por que."""
+    destino = tmp_path / "assuntos.json"
+    destino.write_text(
+        json.dumps([
+            _linha_do_arquivo(impressao="boa"),
+            _linha_do_arquivo(impressao="ruim", modelo=None),
+        ]),
+        encoding="utf-8",
+    )
+
+    assert acervo.assuntos_sem_origem(destino) == ["ruim"]
 
 
 def test_o_assunto_pago_vale_para_todas_as_copias(banco_temporario, tmp_path):
@@ -484,7 +579,7 @@ def test_o_assunto_pago_vale_para_todas_as_copias(banco_temporario, tmp_path):
 
     destino = tmp_path / "assuntos.json"
     destino.write_text(
-        json.dumps([{"impressao": "igual", "assunto": "Tortura"}]),
+        json.dumps([_linha_do_arquivo(impressao="igual", assunto="Tortura")]),
         encoding="utf-8",
     )
     with sessao() as s:

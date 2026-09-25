@@ -992,6 +992,51 @@ def test_sem_assunto_nenhum_a_tela_diz_o_que_falta_rodar(
     assert "pontos a ganhar" not in texto
 
 
+def test_materia_sem_assunto_nao_some_do_grafico_calada(
+    cliente, com_quadro_do_edital
+):
+    """Ela cai no edital valendo questao. Sumir diria "nao cai", quando o que
+    houve foi eu nao ter classificado nada dela.
+
+    Este teste nasceu quando zeramos os 93 assuntos de 24/09/2026: nove
+    materias de Direito desapareceram da secao sem uma palavra, e a tela
+    passou a esconder justamente o que eu mais precisava classificar.
+    """
+    with sessao() as s:
+        s.add(_concurso())
+        # Portugues sai do catalogo de palavras-chave, de graca: o assunto
+        # dele vem do ENUNCIADO, e nao da coluna, entao ele continua rendendo
+        # barra mesmo sem nada classificado.
+        for n in range(1, 4):
+            s.add(_com_assunto(n, "Língua Portuguesa", "crase"))
+        # A LEP depende do assunto pago, e agora nao tem nenhum.
+        for n in range(10, 20):
+            s.add(_com_assunto(n, "Lei de Execução Penal", None))
+
+    painel = foco.montar()
+    mudas = {m.nome for m in painel.materias_sem_assunto}
+
+    assert "Lei de Execução Penal" in mudas
+    assert "Língua Portuguesa" not in mudas
+
+    texto = cliente.get("/").text
+    assert "Estas matérias caem na prova" in texto
+    assert "não sei ainda" in texto
+
+
+def test_a_materia_muda_aparece_com_o_peso_dela(cliente, com_quadro_do_edital):
+    """Se so uma vai ser classificada, que seja a que mais vale na prova - e
+    para isso a lista precisa dizer quanto cada uma vale, e vir ordenada."""
+    with sessao() as s:
+        s.add(_concurso())
+        s.add(_com_assunto(1, "Lei de Execução Penal", None))
+
+    pesos = [m.questoes for m in foco.montar().materias_sem_assunto]
+
+    assert pesos == sorted(pesos, reverse=True)
+    assert "questões no edital" in cliente.get("/").text
+
+
 def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital):
     """Montada dos numeros, e nunca inventada: o que a frase diz tem que estar
     nas barras logo abaixo dela."""

@@ -16,6 +16,7 @@ confundir com o proprio modulo.
 """
 import logging
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 from sqlalchemy import func, select
@@ -821,16 +822,29 @@ def questoes_sem_assunto(
     return escolhidas[:limite] if limite else escolhidas
 
 
-def gravar_assuntos(por_id: dict[int, str]) -> int:
+def gravar_assuntos(
+    por_id: dict[int, str], modelo: str, quando: datetime | None = None
+) -> int:
     """Grava o assunto e propaga para as questoes de enunciado igual.
 
     Propagar e o que faz o gasto valer mais: uma classificacao paga rotula
     todas as copias daquela pergunta no acervo.
+
+    `modelo` e OBRIGATORIO, e sem ele nao se grava nada. Em 24/09/2026
+    descobrimos 93 assuntos no banco que nunca passaram pela API - escritos a
+    mao na sessao e exportados como se fossem pagos. Nao havia campo que
+    mostrasse isso, e por isso nao havia como auditar. Agora ha, e a porta de
+    entrada e esta: assunto sem procedencia nao entra.
     """
+    if not modelo or not str(modelo).strip():
+        raise ValueError(
+            "assunto sem modelo nao e gravado: diga qual modelo classificou"
+        )
     if not por_id:
         return 0
 
     criar_tabelas()
+    agora_mesmo = quando or agora()
     gravados = 0
     with sessao() as s:
         for ident, assunto in por_id.items():
@@ -844,6 +858,8 @@ def gravar_assuntos(por_id: dict[int, str]) -> int:
             ))
             for copia in iguais:
                 copia.assunto = assunto
+                copia.assunto_modelo = modelo
+                copia.assunto_em = agora_mesmo
                 gravados += 1
     return gravados
 
@@ -906,7 +922,11 @@ def classificar_assuntos(
     resultado = classificador_de_assunto.classificar(
         pendentes, chave, teto_em_dolar=teto_em_dolar, permitidos=permitidos
     )
-    gravados = gravar_assuntos(resultado.classificados)
+    # O modelo que respondeu vai junto do rotulo, e nao so no log: e ele que
+    # diz, meses depois, que aquele assunto saiu de uma chamada de verdade.
+    gravados = gravar_assuntos(
+        resultado.classificados, classificador_de_assunto.MODELO
+    )
 
     guardados = 0
     if gravados:

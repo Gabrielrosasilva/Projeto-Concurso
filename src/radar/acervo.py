@@ -12,6 +12,7 @@ concursos entraram naquele dia.
 Fluxo no Actions:  importar -> coletar -> exportar -> commit do JSON
 """
 import json
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -27,6 +28,8 @@ from radar.models import (
     QuestaoDeProva,
     QuestaoGerada,
 )
+
+log = logging.getLogger(__name__)
 
 # Colunas exportadas, em ordem fixa. Ordem fixa e chave ordenada deixam o
 # arquivo estavel: mudou o diff, mudou o dado de verdade.
@@ -276,7 +279,7 @@ def caminho_dos_assuntos() -> Path:
 
 
 def exportar_assuntos(caminho: Path | None = None) -> int:
-    """Grava o assunto pago de cada enunciado. Devolve quantos gravou."""
+    """Grava o assunto pago de cada enunciado, com a procedencia. Quantos."""
     criar_tabelas()
     destino = caminho or caminho_dos_assuntos()
 
@@ -286,8 +289,11 @@ def exportar_assuntos(caminho: Path | None = None) -> int:
                 QuestaoDeProva.impressao,
                 QuestaoDeProva.assunto,
                 QuestaoDeProva.materia,
+                QuestaoDeProva.assunto_modelo,
+                QuestaoDeProva.assunto_em,
             )
             .where(QuestaoDeProva.assunto.is_not(None))
+            .where(QuestaoDeProva.assunto_modelo.is_not(None))
             .distinct()
         ).all()
 
@@ -295,11 +301,16 @@ def exportar_assuntos(caminho: Path | None = None) -> int:
     # com o primeiro vencendo se o banco discordar de si mesmo - duas execucoes
     # tem que escrever o mesmo arquivo.
     por_enunciado: dict[str, dict] = {}
-    for impressao, assunto, materia in sorted(achados):
-        por_enunciado.setdefault(
-            impressao,
-            {"impressao": impressao, "assunto": assunto, "materia": materia},
-        )
+    for impressao, assunto, materia, modelo, quando in sorted(
+        achados, key=lambda linha: linha[0]
+    ):
+        por_enunciado.setdefault(impressao, {
+            "impressao": impressao,
+            "assunto": assunto,
+            "materia": materia,
+            "modelo": modelo,
+            "classificado_em": _serializar(quando),
+        })
 
     linhas = list(por_enunciado.values())
     destino.parent.mkdir(parents=True, exist_ok=True)
@@ -310,14 +321,47 @@ def exportar_assuntos(caminho: Path | None = None) -> int:
     return len(linhas)
 
 
+def _tem_origem(linha: dict) -> bool:
+    """A linha do arquivo diz de onde o assunto veio?
+
+    Precisa das duas coisas: QUAL modelo classificou e QUANDO. Uma so nao
+    serve - "claude-haiku" sem data nao diz se foi uma chamada ou uma
+    lembranca, e uma data sem modelo nao diz nada.
+    """
+    return bool(linha.get("modelo")) and bool(linha.get("classificado_em"))
+
+
+def assuntos_sem_origem(caminho: Path | None = None) -> list[str]:
+    """As impressoes do arquivo que nao dizem de onde vieram.
+
+    Existe para a CLI poder contar em voz alta quantas foram recusadas, em vez
+    de importar menos do que o arquivo tem e ficar quieta.
+    """
+    origem = caminho or caminho_dos_assuntos()
+    if not origem.exists():
+        return []
+
+    linhas = json.loads(origem.read_text(encoding="utf-8")) or []
+    return [
+        linha.get("impressao") or "?"
+        for linha in linhas
+        if linha.get("assunto") and not _tem_origem(linha)
+    ]
+
+
 def importar_assuntos(caminho: Path | None = None) -> int:
-    """Devolve ao banco o assunto que ja foi pago. Quantas linhas mudaram.
+    """Devolve ao banco o assunto ja pago. Quantas linhas do banco mudaram.
 
     Vale para TODAS as questoes de mesmo enunciado, como na hora de gravar: o
     que foi pago uma vez rotula todas as copias daquela pergunta no acervo.
 
     O arquivo manda: ele e o registro do que foi comprado, e o banco local
     pode ter sido refeito do zero minutos atras.
+
+    **Linha sem procedencia e RECUSADA.** Em 24/09/2026 este arquivo carregava
+    93 assuntos que nunca passaram pela API, e nada no formato deixava isso
+    aparecer. Agora deixa: sem `modelo` e `classificado_em`, a linha nao entra
+    no banco - nem que alguem a escreva a mao e faca commit.
     """
     origem = caminho or caminho_dos_assuntos()
     if not origem.exists():
@@ -329,18 +373,33 @@ def importar_assuntos(caminho: Path | None = None) -> int:
         return 0
 
     mudadas = 0
+    recusadas = 0
     with sessao() as s:
         for linha in linhas:
             impressao, assunto = linha.get("impressao"), linha.get("assunto")
             if not impressao or not assunto:
                 continue
+            if not _tem_origem(linha):
+                recusadas += 1
+                continue
+
+            quando = _desserializar(
+                "classificado_em", linha.get("classificado_em"),
+                {"classificado_em"},
+            )
             for questao in s.scalars(
                 select(QuestaoDeProva).where(QuestaoDeProva.impressao == impressao)
             ):
                 if questao.assunto != assunto:
                     questao.assunto = assunto
+                    questao.assunto_modelo = linha.get("modelo")
+                    questao.assunto_em = quando
                     mudadas += 1
 
+    if recusadas:
+        log.warning(
+            "%d assunto(s) recusados: o arquivo nao diz de onde vieram", recusadas
+        )
     return mudadas
 
 

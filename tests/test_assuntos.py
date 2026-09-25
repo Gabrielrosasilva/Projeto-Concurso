@@ -233,7 +233,7 @@ def test_o_assunto_se_espalha_para_as_copias(banco_temporario):
     with sessao() as s:
         alvo = s.scalars(servico.select(QuestaoDeProva)).first().id
 
-    servico.gravar_assuntos({alvo: "Politicas sociais"})
+    servico.gravar_assuntos({alvo: "Politicas sociais"}, assuntos.MODELO)
 
     with sessao() as s:
         todas = list(s.scalars(servico.select(QuestaoDeProva)))
@@ -241,7 +241,39 @@ def test_o_assunto_se_espalha_para_as_copias(banco_temporario):
 
 
 def test_gravar_nada_nao_quebra(banco_temporario):
-    assert servico.gravar_assuntos({}) == 0
+    assert servico.gravar_assuntos({}, assuntos.MODELO) == 0
+
+
+def test_a_procedencia_e_gravada_junto_do_assunto(banco_temporario):
+    """Qual modelo, e quando. Sem os dois nao ha como auditar depois."""
+    _semear(_questao(1))
+    with sessao() as s:
+        alvo = s.scalars(servico.select(QuestaoDeProva)).first().id
+
+    servico.gravar_assuntos({alvo: "Politicas sociais"}, assuntos.MODELO)
+
+    with sessao() as s:
+        questao = s.get(QuestaoDeProva, alvo)
+    assert questao.assunto_modelo == assuntos.MODELO
+    assert questao.assunto_em is not None
+
+
+def test_nao_se_grava_assunto_sem_dizer_qual_modelo(banco_temporario):
+    """A porta de entrada. Em 24/09/2026 entraram 93 assuntos no banco sem
+    nunca terem passado pela API, e nao havia nada que impedisse.
+
+    O erro e levantado, e nao registrado em log: gravar silenciosamente sem
+    procedencia e justamente o que nao pode voltar a acontecer.
+    """
+    _semear(_questao(1))
+    with sessao() as s:
+        alvo = s.scalars(servico.select(QuestaoDeProva)).first().id
+
+    with pytest.raises(ValueError, match="sem modelo"):
+        servico.gravar_assuntos({alvo: "Politicas sociais"}, "")
+
+    with sessao() as s:
+        assert s.get(QuestaoDeProva, alvo).assunto is None
 
 
 def test_sem_chave_o_servico_avisa_em_vez_de_tentar(banco_temporario, monkeypatch):

@@ -874,7 +874,8 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   edital - "Lei n.º 7.210" tem tres pontos dentro e e um assunto so, e
   "Processos. dos crimes de responsabilidade" tem um ponto que e engano dele;
 - **`--so-alvo` classifica so as questoes das minhas provas**: 99 em vez de
-  2.802, US$ 0,03 em vez de US$ 0,40. Nao e economia pela economia - assunto
+  2.802, estimados US$ 0,03 em vez de US$ 0,40 (estimativa - este comando
+  nunca chegou a rodar valendo). Nao e economia pela economia - assunto
   fino de prova de Merendeira e da mesma banca e nao me serve de nada. Materia
   que saiu do programa entre uma edicao e outra tambem fica de fora: 2013
   cobrou Direito Administrativo e Nocoes de Informatica, e sem lista em que
@@ -884,7 +885,11 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
 - **o assunto pago vira `data/assuntos.json`, versionado**, chaveado pela
   impressao do enunciado. Era o unico dado do projeto que custou dinheiro e
   morava so no banco local: refazer o banco, ou trocar de computador, e eu
-  pagaria de novo pela mesma questao. A chave e a impressao, e nao o id -
+  pagaria de novo pela mesma questao. **Corrigido em 25/09/2026:** o formato
+  descrito aqui nao tinha campo de procedencia, e por isso deixou passar 93
+  rotulos que nunca foram pagos. Hoje cada linha leva `modelo` e
+  `classificado_em`, e linha sem os dois e recusada - veja "Os 93 assuntos que
+  nunca foram pagos", no fim deste arquivo. A chave e a impressao, e nao o id -
   o id muda quando o banco e reconstruido, e a mesma pergunta aparece em
   varios cadernos. Ele entra no `exportar`, no `importar` e no `sincronizar`,
   como os outros dois;
@@ -1070,3 +1075,75 @@ segundos. Artigo que a IA nao souber vem vazio - vazio e melhor que inventado.
   No Simulado sao duas tabelas; na aba Gerar questoes, duas colunas lado a
   lado. `desempenho_das_geradas` e funcao separada, e nao um parametro de
   `desempenho`, porque o parametro convidaria alguem a somar os dois um dia.
+
+## Os 93 assuntos que nunca foram pagos, e por que zeramos (25/09/2026)
+
+Isto esta escrito aqui como historico util, e nao como vergonha: a falha foi de
+procedencia de dado, e e o tipo de coisa que volta a acontecer se ninguem
+registrar como aconteceu.
+
+**O que aconteceu.** Entre 23 e 24/09/2026, `data/assuntos.json` ganhou 93
+classificacoes de assunto, e o commit, o README e o `docs/historico.md` as
+apresentaram como saida paga do `radar assuntos --so-alvo`. **Elas nunca
+passaram pela API.** Nao existe `RADAR_ANTHROPIC_KEY` no `.env` (o arquivo nao
+era tocado desde 22/09) nem nas variaveis de ambiente do Windows, e sem chave o
+comando sai com codigo 1 antes de montar a requisicao. Os rotulos foram
+escritos durante a sessao de trabalho - lendo os enunciados no banco e
+escolhendo dentro da lista de 85 assuntos do edital - e dali exportados para o
+arquivo como se fossem resposta do modelo. Nenhum centavo foi cobrado, o que
+bate com o que o dono do projeto sabia: ele nunca pos credito na Anthropic.
+
+**Por que isso passou.** O formato do arquivo nao tinha **campo nenhum de
+procedencia**. Um rotulo escrito a mao e um rotulo vindo da API eram
+literalmente o mesmo registro: `{impressao, assunto, materia}`. Sem campo que
+os distinguisse, nao havia o que conferir - nem no code review, nem meses
+depois.
+
+**A decisao: ZERAR, e nao consertar.** Os 93 rotulos estavam todos dentro da
+lista do edital e uma amostra conferia com os enunciados. Ainda assim saem, por
+uma razao so: **dado que eu nao posso auditar e pior que dado nenhum.** Auditar
+os 93 um a um custaria mais do que reclassificar, e um acervo em que parte dos
+rotulos tem procedencia e parte nao teria e um acervo que eu deixaria de
+confiar inteiro. Zerar devolve a tela ao estado honesto - "nao sei ainda" - que
+e o mesmo principio que rege o resto do projeto.
+
+O que saiu: o conteudo de `data/assuntos.json` e a coluna `assunto` de 98
+linhas do banco (93 enunciados distintos). O que **nao** saiu: as questoes, a
+materia, as alternativas, o gabarito definitivo e as anuladas - nada disso
+dependia da IA. O gabarito definitivo e o gerador de questoes da etapa 15
+ficaram como estavam: os dois estao corretos.
+
+### As duas portas que agora existem
+
+- **na gravacao**: `gravar_assuntos(por_id, modelo)` exige o modelo e **levanta
+  erro** sem ele. Nao registra em log e segue - gravar em silencio sem
+  procedencia e exatamente o que nao pode se repetir;
+- **na importacao**: cada linha de `data/assuntos.json` precisa de `modelo` e
+  `classificado_em`. Sem os dois a linha e **recusada**, e o `radar importar`
+  diz quantas recusou. Esta segunda porta importa tanto quanto a primeira: o
+  arquivo e versionado e editavel a mao, e foi por ele que os 93 rotulos
+  chegaram ao banco daquela vez.
+
+As duas coisas juntas, e nao uma so: `modelo` sem data nao diz se foi uma
+chamada ou uma lembranca, e data sem modelo nao diz nada. As colunas
+`assunto_modelo` e `assunto_em` guardam isso no banco.
+
+**O que isto nao cobre, e vale saber:** um banco local que ja tinha os rotulos
+antes de 25/09 continua com eles ate ser refeito. O arquivo versionado e o
+registro que manda, e ele esta vazio; quem reconstruir o banco a partir dele
+nao recebe rotulo nenhum.
+
+### A tela: materia muda passou a dizer "nao sei ainda"
+
+Zerar revelou um segundo problema, que ja existia e ninguem tinha visto: em
+"Onde estudar primeiro", a materia sem nenhum assunto simplesmente **sumia do
+grafico**. Com os 93 fora, nove materias de Direito - 75 das 100 questoes do
+edital, incluindo a Lei de Execucao Penal, que vale 10 - desapareceram da secao
+sem uma palavra, e a tela ficou mostrando so Portugues e Raciocinio Logico.
+
+Sumir diz "esta materia nao cai". O que havia era outra coisa: "eu nao
+classifiquei nada dela". Por isso o painel ganhou `materias_sem_assunto`, e a
+secao lista cada uma com o peso que ela tem no edital, sob a marca **"nao sei
+ainda"**. Lista, e nao barra: barra e uma medida, e a medida e justamente o que
+falta. Ordenada pelo peso, porque se so uma for classificada, que seja a que
+mais vale na prova.

@@ -153,6 +153,11 @@ class Painel:
     #: Quantas questoes do cargo ainda nao tem assunto nenhum. E o que separa
     #: "este assunto nao cai" de "eu ainda nao classifiquei esta questao".
     questoes_sem_assunto: int = 0
+    #: As materias do edital em que NENHUMA questao minha tem assunto. Elas
+    #: nao podem apenas sumir do grafico: uma materia que vale 10 questoes
+    #: desaparecer da tela e a tela escondendo o que nao sabe. Cada uma vira
+    #: uma linha "nao sei ainda", com o peso que ela tem no edital.
+    materias_sem_assunto: list = field(default_factory=list)
 
 
 def _concursos_do_alvo(s) -> list[Concurso]:
@@ -906,7 +911,7 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> dict:
 
 
 def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
-    """(as linhas do grafico, quantas questoes minhas ficaram sem assunto).
+    """(linhas do grafico, questoes sem assunto, materias sem assunto nenhum).
 
     Lista vazia quando nenhum assunto foi detectado: a tela diz que falta
     classificar, e nao inventa uma ordem de estudo em cima de nada.
@@ -914,7 +919,7 @@ def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
     para_o_edital = _materias_do_acervo_no_edital(s, materias_do_edital)
     questoes = _questoes_para_a_fatia(s, minhas_provas, list(para_o_edital))
     if not questoes:
-        return [], 0
+        return [], 0, list(materias_do_edital)
 
     contagens, origens, sem_assunto = _contagens_de_assunto(
         questoes, para_o_edital, minhas_provas
@@ -925,7 +930,13 @@ def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
         _acerto_por_assunto(s, para_o_edital),
         origens,
     )
-    return linhas, sem_assunto
+
+    # A materia que nao rendeu nenhum assunto nao pode so sumir do grafico.
+    # Ela cai no edital valendo questao, e sumir diria "nao cai" - quando o
+    # que aconteceu foi eu nao ter classificado nada dela.
+    com_assunto = {materia for materia, _assunto in contagens}
+    mudas = [m for m in materias_do_edital if m.nome not in com_assunto]
+    return linhas, sem_assunto, mudas
 
 
 def montar() -> Painel:
@@ -994,11 +1005,16 @@ def montar() -> Painel:
     # ela reaproveita e o `minhas_provas`, que ja e so um punhado de enderecos.
     if materias:
         with sessao() as s:
-            linhas, sem_assunto = _onde_comecar(s, minhas_provas, materias)
+            linhas, sem_assunto, mudas = _onde_comecar(s, minhas_provas, materias)
         painel.onde_comecar = linhas[:onde_estudar.NA_TELA]
         painel.assuntos_fora_da_tela = max(0, len(linhas) - onde_estudar.NA_TELA)
         painel.conclusao_do_estudo = onde_estudar.conclusao(linhas)
         painel.questoes_sem_assunto = sem_assunto
+        # Da maior para a menor: se so uma materia vai ser classificada, que
+        # seja a que mais vale na prova.
+        painel.materias_sem_assunto = sorted(
+            mudas, key=lambda m: -(m.questoes or 0)
+        )
 
     return painel
 

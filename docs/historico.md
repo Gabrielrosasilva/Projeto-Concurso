@@ -915,6 +915,13 @@ de diferenca sao o preco dela, e nao desperdicio.
 
 ### As 93 escolhas, e as 6 que ficaram indefinidas
 
+> **Desfeito em 25/09/2026.** Estas 93 classificacoes **nunca passaram pela
+> API**: foram escritas durante a sessao de trabalho e exportadas como se
+> fossem saida do modelo. O arquivo foi zerado e a coluna `assunto` limpa. O
+> que segue abaixo fica como registro do que foi feito - nao como descricao do
+> estado atual. O relato completo esta em "Os 93 assuntos que nunca foram
+> pagos", em [decisoes.md](decisoes.md), e na Etapa 15-0 no fim deste arquivo.
+
 As 99 questoes do cargo foram classificadas escolhendo DENTRO do programa do
 edital, e o nome gravado e copiado do programa letra por letra. Seis ficaram
 sem assunto de proposito:
@@ -1084,3 +1091,74 @@ declarei errada nao pode continuar pesando no meu acerto, para nenhum lado.
 E o acerto aparece em dois numeros em toda tela que o mostra, sem nenhum lugar
 que os some. `desempenho_das_geradas` e funcao separada, e nao um parametro de
 `desempenho`: o parametro convidaria alguem a somar os dois um dia.
+
+## Etapa 15-0: zerar os 93 assuntos sem procedencia
+
+A etapa 15 comecou com uma apuracao, e nao com codigo: "o `data/assuntos.json`
+tem 93 questoes classificadas, mas eu nunca pus credito na Anthropic".
+
+Estava certo. Nao existe `RADAR_ANTHROPIC_KEY` no `.env` - arquivo nao tocado
+desde 22/09, dois dias antes de o JSON ser escrito - nem nas variaveis de
+ambiente do Windows (User, Machine, processo). Sem chave, `radar assuntos
+--valendo` sai com codigo 1 antes de montar a requisicao, e `classificar_assuntos`
+devolve `{"erro": "sem chave"}`. Nao havia como aquelas linhas terem vindo da
+API.
+
+Havia dois caminhos no codigo que escrevem `assunto` no banco: `gravar_assuntos`
+(resultado da API) e `importar_assuntos` (a partir do proprio arquivo). O
+arquivo nasceu vazio (`[]`) num commit e ganhou as 93 entradas quatro horas
+depois, ja identico byte a byte ao que `exportar_assuntos()` produz - ou seja, o
+banco foi preenchido primeiro e depois exportado.
+
+A prova mais direta estava no proprio historico: a secao "As 93 escolhas"
+explicava **por que** seis ficaram indefinidas ("enunciado cortado no PDF",
+"generica demais"). O caminho da API nao produz isso - `classificar_lote`
+descarta "indefinido" e resposta fora da lista em silencio, so com `log.info`.
+Aquele texto so sai de alguem que leu os 99 enunciados.
+
+### Por que zerar, tendo os rotulos conferido
+
+Uma amostra batia com os enunciados, e os 93 estavam todos dentro da lista de 85
+assuntos do edital. Mesmo assim saem, e a razao e a regra do projeto inteiro:
+**dado que eu nao posso auditar e pior que dado nenhum.** Auditar 93 um a um
+custaria mais do que reclassificar, e um acervo em que parte dos rotulos tem
+procedencia e parte nao teria e um acervo inteiro em que eu deixaria de
+confiar.
+
+Saiu o conteudo de `data/assuntos.json` e a coluna `assunto` de 98 linhas do
+banco - 93 enunciados distintos. Ficaram as 8.433 questoes, com materia,
+alternativas, gabarito definitivo e anuladas: nada disso passou pela IA. O
+gabarito definitivo e o gerador da etapa 15 nao foram tocados.
+
+### As duas portas, e por que sao duas
+
+O formato antigo nao tinha campo de procedencia nenhum: `{impressao, assunto,
+materia}`. Rotulo escrito a mao e rotulo pago eram o mesmo registro, e por isso
+nao havia o que conferir.
+
+Agora o banco tem `assunto_modelo` e `assunto_em`, e o arquivo carrega `modelo`
+e `classificado_em` por linha. `gravar_assuntos` **exige** o modelo e levanta
+erro sem ele - nao registra em log e segue, porque gravar em silencio sem
+procedencia e exatamente o que nao pode se repetir. E `importar_assuntos`
+**recusa** linha sem os dois campos, com o `radar importar` dizendo quantas
+recusou.
+
+A segunda porta e tao necessaria quanto a primeira: o arquivo e versionado e
+editavel a mao, e foi por ele que os 93 rotulos chegaram ao banco daquela vez.
+
+### O que zerar revelou na tela
+
+Com os 93 fora, nove materias de Direito - 75 das 100 questoes do edital,
+incluindo a Lei de Execucao Penal, que vale 10 - **sumiram** de "Onde estudar
+primeiro", e a secao passou a mostrar so Portugues e Raciocinio Logico, que
+saem do catalogo de palavras-chave e nao custam nada.
+
+Sumir e a tela dizendo "esta materia nao cai", quando o que houve foi "eu nao
+classifiquei nada dela". O bug ja existia; zerar foi o que o tornou visivel. O
+painel ganhou `materias_sem_assunto` e a secao passou a listar cada uma com o
+peso dela no edital, sob a marca "nao sei ainda" - em lista, e nao em barra,
+porque barra e uma medida e a medida e justamente o que falta.
+
+Numeros depois de zerar: 0 questoes com assunto de Direito, 108 questoes das
+minhas provas sem assunto (eram 15), e 12 barras no grafico, todas de Portugues
+e Raciocinio Logico.

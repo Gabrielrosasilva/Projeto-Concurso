@@ -102,6 +102,17 @@
     td.zero{color:var(--suave)}
     .legenda{margin:.85rem 0 0;font-size:.8rem;color:var(--suave)}
 
+    /* As materias que caem na prova e nao tem assunto classificado. Lista, e
+       nao barra: barra seria uma medida, e aqui a medida e justamente o que
+       falta. */
+    .mudas{margin-top:1rem}
+    .mudas ul{list-style:none;margin:.5rem 0 0;padding:0;display:grid;gap:.3rem}
+    .mudas li{display:flex;justify-content:space-between;gap:.75rem;
+      font-size:.85rem;padding:.35rem .6rem;border-radius:8px;
+      background:var(--duvida-fraco)}
+    .muda-nome{font-weight:600}
+    .muda-peso{color:var(--suave);white-space:nowrap}
+
     /* A materia que mais pesa fica em negrito; a pior delas ganha cor. Sao
        dois niveis de destaque porque sao duas informacoes: o que vale mais,
        e onde eu estou pior. */
@@ -478,6 +489,27 @@
         </p>
       {% endif %}
 
+      {# A materia que nao rendeu assunto nenhum NAO some daqui. Ela cai no
+         edital valendo questao, e sumir do grafico diria "nao cai" - quando o
+         que houve foi eu nao ter classificado nada dela. #}
+      {% if p.materias_sem_assunto %}
+        <div class="mudas">
+          <p class="legenda">
+            Estas matérias caem na prova e eu
+            <span class="nao-sei">não sei ainda</span> por qual assunto começar
+            nelas - nenhuma questão minha está classificada:
+          </p>
+          <ul>
+            {% for m in p.materias_sem_assunto %}
+              <li>
+                <span class="muda-nome">{{ m.nome }}</span>
+                <span class="muda-peso">{{ m.questoes }} questões no edital</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
       {% if p.questoes_sem_assunto %}
         <p class="legenda">
           {{ p.questoes_sem_assunto }} questões das minhas provas ainda estão
@@ -503,6 +535,18 @@
         multiplicar pelo peso do edital. As matérias de Direito saem do
         conteúdo programático, com <code>radar assuntos --so-alvo</code>.
       </p>
+      {% if p.materias_sem_assunto %}
+        <div class="mudas">
+          <ul>
+            {% for m in p.materias_sem_assunto %}
+              <li>
+                <span class="muda-nome">{{ m.nome }}</span>
+                <span class="muda-peso">{{ m.questoes }} questões no edital</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     {% endif %}
   </section>
   {% endif %}

@@ -636,7 +636,9 @@ def assuntos(
 # De onde sai o assunto de cada materia, na tela.
 ROTULO_DA_ORIGEM = {
     "catalogo": "catalogo (de graca)",
-    "edital": "edital (pago)",
+    # "custa", e nao "pago": a coluna diz por qual caminho o assunto sai,
+    # e nao que ele ja foi comprado. A diferenca ficou cara em 24/09.
+    "edital": "edital (custa)",
     "fora": "fora do programa de hoje",
 }
 
@@ -1287,6 +1289,15 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
             f"[green]{mudadas}[/] questao(oes) reganharam o assunto ja pago, "
             f"de {origem_assuntos}"
         )
+        # Recusa em silencio seria o mesmo erro de novo: o arquivo importaria
+        # menos do que tem e ninguem perguntaria por que.
+        recusados = acervo.assuntos_sem_origem(origem_assuntos)
+        if recusados:
+            console.print(
+                f"[red]{len(recusados)} assunto(s) recusados:[/] o arquivo nao "
+                f"diz de que modelo e de quando eles vieram. Assunto sem "
+                f"procedencia nao entra no banco."
+            )
 
     origem_geradas = (
         origem.with_name("questoes_geradas.json") if caminho

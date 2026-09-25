@@ -287,6 +287,16 @@ class QuestaoDeProva(Base):
     # e encurtar seria eu reescrevendo o edital.
     assunto: Mapped[str | None] = mapped_column(String(200), index=True, nullable=True)
 
+    # DE ONDE veio o assunto acima, e QUANDO. Existem por causa de 24/09/2026:
+    # 93 classificacoes foram gravadas sem nunca terem passado pela API, e o
+    # arquivo versionado nao tinha como mostrar isso. Sem estes dois campos um
+    # rotulo escrito a mao e um rotulo pago sao indistinguiveis depois - e o
+    # que nao da para auditar nao serve. Nulos nas questoes que nao tem
+    # assunto, e nas que tiram o assunto do catalogo de palavras-chave, que
+    # nao passa por aqui nem custa nada.
+    assunto_modelo: Mapped[str | None] = mapped_column(String(60), nullable=True)
+    assunto_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
+
     extraida_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
 
     def __repr__(self) -> str:

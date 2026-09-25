@@ -590,11 +590,20 @@ padrao**: sem `--valendo` nao gasta nada. A chave vai em `RADAR_ANTHROPIC_KEY`,
 no `.env`, como o token do Telegram — nunca no codigo. O passo a passo esta em
 **COMO_LIGAR_A_IA.txt**.
 
+> **Correcao de 25/09/2026.** Ate esta data o README, os commits e os docs
+> falavam de 93 assuntos "pagos" em `data/assuntos.json`. **Eles nunca foram
+> pagos, e nunca houve chamada a API** - a chave nao existe no `.env` nem no
+> ambiente. Os rotulos tinham sido escritos durante uma sessao de trabalho e
+> exportados como se fossem saida do modelo. O arquivo foi **zerado** e a
+> coluna `assunto` das 98 linhas do banco foi limpa. O motivo esta em
+> [docs/decisoes.md](docs/decisoes.md). Hoje **nenhuma** questao de Direito
+> tem assunto, e nada aqui foi cobrado ate agora.
+
 Com `--so-alvo` sao duas mudancas, e as duas importam:
 
 - entram so as questoes das provas do **meu cargo no meu estado** — 99 em vez
-  de 2.802, US$ 0,03 em vez de US$ 0,40. Assunto fino de prova de Merendeira e
-  da mesma banca e nao me serve de nada;
+  de 2.802, estimados US$ 0,03 em vez de US$ 0,40. Assunto fino de prova de
+  Merendeira e da mesma banca e nao me serve de nada;
 - a IA **escolhe** o assunto dentro do **conteudo programatico do edital** (85
   assuntos em 11 materias, lidos do ANEXO 1 de 2019) em vez de inventar um
   nome. O que vier fora da lista e descartado, e nao gravado como assunto novo.
@@ -603,13 +612,20 @@ Portugues e Raciocinio Logico **nao entram na conta paga**: eles continuam
 saindo do catalogo de palavras-chave, de graca, e ja cobrem 83% e 44% das
 minhas questoes.
 
-O que foi pago vai para **`data/assuntos.json`**, que e versionado e entra no
+O que for pago vai para **`data/assuntos.json`**, que e versionado e entra no
 `exportar`, no `importar` e no `sincronizar` como os outros dois. A chave e a
 impressao do enunciado: refazer o banco, ou trocar de computador, nao faz eu
 pagar de novo pela mesma questao.
 
+**Cada linha desse arquivo diz de onde veio**: `modelo` e `classificado_em`.
+Linha sem os dois e **recusada** na importacao, e o `radar importar` conta
+quantas recusou em voz alta. O `gravar_assuntos` tambem exige o modelo e
+levanta erro sem ele. As duas portas existem por causa de 24/09: a primeira
+versao nao tinha campo nenhum de procedencia, e por isso rotulo escrito a mao
+e rotulo pago eram indistinguiveis depois.
+
 `radar cobertura` mostra quanto de cada materia ja tem assunto, com a coluna
-dizendo de onde ele veio — catalogo (de graca), edital (pago), ou "fora do
+dizendo de onde ele veio — catalogo (de graca), edital (custa), ou "fora do
 programa de hoje", que e a materia que a edicao de 2013 cobrava e a de 2019
 nao cobra mais.
 
