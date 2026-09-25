@@ -460,29 +460,58 @@ def simulado_questao(request: Request, simulado_id: int):
             servico.desempenho_das_geradas(simulado_id) if de_ia
             else servico.desempenho(simulado_id)
         )
-        return _pagina_do_simulado(
-            request,
-            simulado=simulado,
-            questao=None,
-            resumo=resumo,
-            de_ia=de_ia,
-            desempenho_da_rodada=da_rodada,
-            revisao=servico.revisao(simulado_id),
+        revisao = servico.revisao(simulado_id)
+        return templates.TemplateResponse(
+            request=request,
+            name="relatorio.html",
+            context={
+                "simulado": simulado,
+                "resumo": resumo,
+                "de_ia": de_ia,
+                "desempenho_da_rodada": da_rodada,
+                "revisao": revisao,
+                # O 🟥 de cada erro: a explicacao importada pelo caminho sem
+                # API, e o macete que cita aquela questao.
+                "explicacoes": servico.manual.carregar_explicacoes(),
+                "macetes_da_questao": _macetes_por_questao(),
+                "leis_das_materias": {
+                    item.materia: leis.da_materia(item.materia) for item in revisao
+                },
+            },
         )
 
     resposta, questao = atual
-    return _pagina_do_simulado(
-        request,
-        simulado=simulado,
-        resposta=resposta,
-        questao=questao,
-        resumo=resumo,
-        de_ia=de_ia,
-        # O selo precisa dos dois: em que questao real ela se baseia, e onde
-        # eu leio o artigo que ela diz estar cobrando.
-        origem=servico.geradas.origem_de(questao) if de_ia else None,
-        lei=(leis.do_assunto(questao.materia, questao.assunto) if de_ia else None),
+    return templates.TemplateResponse(
+        request=request,
+        name="questao.html",
+        context={
+            "simulado": simulado,
+            "resposta": resposta,
+            "questao": questao,
+            "resumo": resumo,
+            "de_ia": de_ia,
+            # O selo precisa dos dois: em que questao real ela se baseia, e
+            # onde eu leio o artigo que ela diz estar cobrando.
+            "origem": servico.geradas.origem_de(questao) if de_ia else None,
+            "lei": (leis.do_assunto(questao.materia, questao.assunto)
+                    if de_ia else None),
+        },
     )
+
+
+def _macetes_por_questao() -> dict[str, list]:
+    """{"<caderno>#<numero>": [macete, ...]} dos macetes que podem aparecer.
+
+    A mesma regra dos cartoes: macete sem fonte ou sem procedencia nao sai.
+    """
+    por_questao: dict[str, list] = {}
+    for m in servico.manual.carregar_macetes():
+        if not servico.cartoes._macete_aparece(m):
+            continue
+        for q in m.get("questoes") or []:
+            chave = f"{q.get('prova_url')}#{q.get('numero')}"
+            por_questao.setdefault(chave, []).append(m)
+    return por_questao
 
 
 @app.post("/simulado/{simulado_id}/responder")

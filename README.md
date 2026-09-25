@@ -750,6 +750,7 @@ ganha o aviso**, e a tela diz isso em vez de ficar calada.
 ```bash
 radar gerar --pedido --quantas 20            # TODOS os pedidos em data/pedido_ia.json
 radar gerar --pedido --macetes               # um pedido de macete por materia
+radar gerar --pedido --explicacoes           # explicacao de cada questao que errei
 radar gerar --importar data/resposta_ia.json # le a resposta, confere e grava
 ```
 

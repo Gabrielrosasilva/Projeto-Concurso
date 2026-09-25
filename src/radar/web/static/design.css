@@ -332,6 +332,9 @@ body.ds {
   white-space: nowrap;
 }
 .ds-botao:hover { filter: brightness(1.08); }
+/* Botao feito de link: sem isto o ".ds a" pinta o texto da mesma cor do
+   fundo, e o botao aparece vazio. */
+.ds a.ds-botao { color: var(--cor-acao-texto); }
 .ds-link-acao { font-size: var(--tam-sm); font-weight: var(--peso-medio); text-decoration: none; }
 .ds-link-acao:hover { text-decoration: underline; }
 

@@ -513,6 +513,14 @@ class ItemDeRevisao:
     gerada: bool = False
     #: O artigo em que a questao gerada se apoia, para eu conferir na lei.
     artigo: str | None = None
+    #: O que identifica a questao fora deste banco: e por aqui que o
+    #: relatorio acha a explicacao importada (pela impressao) e o macete que
+    #: cita esta questao (pelo caderno e numero).
+    impressao: str | None = None
+    prova_url: str | None = None
+    numero: int | None = None
+    ano: int | None = None
+    banca: str | None = None
 
 
 def revisao(simulado_id: int) -> list[ItemDeRevisao]:
@@ -551,6 +559,11 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             materia=questao.materia,
             gerada=bool(resposta.gerada),
             artigo=getattr(questao, "artigo", None),
+            impressao=questao.impressao,
+            prova_url=getattr(questao, "prova_url", None),
+            numero=getattr(questao, "numero", None),
+            ano=getattr(questao, "ano", None),
+            banca=getattr(questao, "banca", None),
         ))
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)

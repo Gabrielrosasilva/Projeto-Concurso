@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ request.query_params.get('tema', '') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Resultado &middot; Radar de Concursos</title>
+  {# O relatorio pos-simulado da especificacao: resultado geral, desempenho
+     por materia, e cada erro com a alternativa marcada, a correta, a
+     explicacao e o macete - cada um com o seu selo. Sem nota de corte: nao
+     ha resultado oficial publicado que a sustente. #}
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .nota{display:flex;align-items:baseline;gap:var(--esp-3);flex-wrap:wrap}
+    .nota .valor{font-size:2.6rem;font-weight:var(--peso-forte);line-height:1;
+      font-variant-numeric:tabular-nums}
+    .nota .valor.bom{color:var(--selo-calculado)}
+    .nota .valor.ruim{color:var(--selo-ia)}
+    table{width:100%;border-collapse:collapse;font-size:var(--tam-sm)}
+    th,td{text-align:left;padding:var(--esp-2);border-bottom:1px solid var(--cor-borda)}
+    th{font-size:var(--tam-xs);color:var(--cor-texto-suave);font-weight:var(--peso-medio)}
+    td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+    tr:last-child td{border-bottom:0}
+    tr.abaixo td{color:var(--selo-ia)}
+    tr.abaixo td:first-child{font-weight:var(--peso-medio)}
+    .trilha{display:inline-block;width:90px;height:8px;border-radius:4px;
+      background:var(--cor-borda);overflow:hidden;vertical-align:middle}
+    .trilha span{display:block;height:100%;background:var(--selo-calculado)}
+    tr.abaixo .trilha span{background:var(--selo-ia)}
+
+    .erro .enunciado{margin:var(--esp-2) 0 var(--esp-3);font-size:var(--tam-sm);
+      white-space:pre-line}
+    .par{display:grid;gap:var(--esp-2)}
+    .linha-resp{display:grid;grid-template-columns:auto 1fr;gap:var(--esp-2);
+      align-items:start;font-size:var(--tam-sm)}
+    .linha-resp.marquei .texto{text-decoration:line-through;text-decoration-color:var(--selo-ia)}
+    .convite{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .acoes{display:flex;gap:var(--esp-2);flex-wrap:wrap;margin-top:var(--esp-5)}
+    .acoes a.secundario{padding:var(--esp-2) var(--esp-4);border:1px solid var(--cor-borda);
+      border-radius:var(--raio-sm);text-decoration:none;font-size:var(--tam-sm);
+      color:var(--cor-texto)}
+    details.acertos summary{cursor:pointer;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    details.acertos li{font-size:var(--tam-xs);margin:var(--esp-1) 0}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+{% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo, bloco %}
+{{ barra('estudar') }}
+
+{% set porcento = (resumo.acertos / resumo.total * 100) if resumo.total else 0 %}
+{% set erros = revisao | rejectattr('acertou') | list %}
+{% set acertos = revisao | selectattr('acertou') | list %}
+
+<main class="ds-pagina">
+  <header class="ds-cabeca">
+    <h1>Resultado da rodada</h1>
+    <p>
+      {% if de_ia %}Questões <b>escritas por IA</b>: treino, e não medida do que a banca cobra.
+      {% elif (simulado.filtros or {}).get('erros') %}Revisão dos meus erros.
+      {% else %}Questões reais das provas do acervo.{% endif %}
+    </p>
+  </header>
+
+  {# ------------------------------------------------- resultado geral --- #}
+  <section class="ds-cartao">
+    <div class="ds-cartao__cabeca">
+      <h2 class="ds-cartao__titulo">Resultado geral</h2>
+      {% if de_ia %}{{ selo('ia', 'Treino com IA') }}{% else %}{{ selo('calculado') }}{% endif %}
+    </div>
+    <div class="nota">
+      <span class="valor {{ 'bom' if porcento >= 60 else 'ruim' }}">{{ '%.0f'|format(porcento) }}%</span>
+      <span>{{ resumo.acertos }} de {{ resumo.total }} questões desta rodada</span>
+    </div>
+    <p class="ds-suave ds-pequeno" style="margin-bottom:0">
+      Sem nota de corte: ela só aparece quando houver resultado oficial
+      publicado para servir de fonte, e o acervo não tem nenhum.
+      {% if resumo.total < 20 %}Rodada de {{ resumo.total }} questões diz pouco sozinha - o acumulado está na home.{% endif %}
+    </p>
+  </section>
+
+  {# ------------------------------------------ desempenho por materia --- #}
+  {% if desempenho_da_rodada %}
+  <section class="ds-cartao" style="margin-top:var(--esp-4)">
+    <div class="ds-cartao__cabeca">
+      <h2 class="ds-cartao__titulo">Por matéria</h2>
+      {{ selo('calculado') }}
+    </div>
+    <p class="ds-cartao__meta">Em vermelho, as que ficaram abaixo da média desta rodada ({{ '%.0f'|format(porcento) }}%).</p>
+    <table>
+      <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Questões</th><th></th></tr>
+      {% for d in desempenho_da_rodada %}
+        <tr class="{{ 'abaixo' if d.porcentagem < porcento }}">
+          <td>{{ d.materia }}</td>
+          <td class="n">{{ '%.0f'|format(d.porcentagem) }}%</td>
+          <td class="n">{{ d.acertos }}/{{ d.respondidas }}</td>
+          <td class="n"><span class="trilha"><span style="width:{{ d.porcentagem }}%"></span></span></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+  {# ------------------------------------------------------ os erros ----- #}
+  <section class="ds-secao">
+    <h2>{{ erros | length }} erro(s) para entender</h2>
+    <p>Cada parte com o seu selo: a alternativa sai da prova, a correta do gabarito, a explicação e o macete da IA.</p>
+  </section>
+  {# O "como pedir explicacao" aparece uma vez, e nao repetido em cada erro. #}
+  {% set sem_explicacao = erros | rejectattr('gerada') | selectattr('impressao', 'in', explicacoes.keys()) | list %}
+  {% if erros | rejectattr('gerada') | list | length > sem_explicacao | length %}
+    <p class="ds-nota">
+      {{ selo('ia', 'Explicação') }} a dos erros sem explicação vem sem API:
+      <code>radar gerar --pedido --explicacoes</code>, responda no Claude Code e
+      <code>radar gerar --importar data/resposta_ia.json</code>.
+    </p>
+  {% endif %}
+
+  {% for item in erros %}
+    {% set explicacao = explicacoes.get(item.impressao) if not item.gerada else none %}
+    {% set relacionados = macetes_da_questao.get((item.prova_url ~ '#' ~ item.numero)) or [] %}
+    {% set lei = leis_das_materias.get(item.materia) %}
+    <article class="ds-cartao erro" style="margin-top:var(--esp-3)">
+      <div class="ds-cartao__cabeca">
+        <span class="ds-pequeno ds-suave">
+          {{ item.materia or 'sem matéria' }}{% if not item.gerada and item.numero %} · questão {{ item.numero }}, {{ item.banca }} {{ item.ano }}{% endif %}
+        </span>
+        {% if item.gerada %}{{ selo('ia', 'criada por IA') }}{% else %}{{ selo('prova') }}{% endif %}
+      </div>
+      <p class="enunciado">{{ item.enunciado }}</p>
+
+      <div class="par">
+        <div class="linha-resp marquei">
+          <span class="ds-selo" style="color:var(--selo-ia);background:var(--selo-ia-fundo)">Você marcou {{ item.escolhida }})</span>
+          <span class="texto">{{ item.texto_escolhido }}</span>
+        </div>
+        <div class="linha-resp">
+          {% if item.gerada %}{{ selo('ia', 'Resposta da IA ' ~ item.correta ~ ')') }}
+          {% else %}{{ selo('oficial', 'Gabarito definitivo ' ~ item.correta ~ ')') }}{% endif %}
+          <span>{{ item.texto_correto }}</span>
+        </div>
+      </div>
+
+      {% if item.gerada %}
+        {% if item.artigo %}<p class="ds-suave ds-pequeno">A IA disse se apoiar em {{ item.artigo }}.</p>{% endif %}
+      {% elif explicacao %}
+        {% call bloco('ia', 'Explicação (IA)') %}
+          <p>{{ explicacao.explicacao }}</p>
+          <p class="ds-suave">Fonte citada: {{ explicacao.fonte }}{% if lei %} · <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a>{% endif %}</p>
+          <p class="convite">{{ explicacao.modelo }} · confira na fonte antes de confiar</p>
+        {% endcall %}
+      {% else %}
+        <p class="convite" style="margin-top:var(--esp-3)">
+          Explicação ainda não pedida.
+          {% if lei %}Enquanto isso: <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a> {{ selo('oficial') }}{% endif %}
+        </p>
+      {% endif %}
+
+      {% for m in relacionados %}
+        {% call bloco('ia', 'Macete relacionado') %}
+          <p>{{ m.regra }}</p>
+          {% if m.pegadinha %}<p><b>⚠ Pegadinha:</b> {{ m.pegadinha }}</p>{% endif %}
+          <p class="convite">Fonte citada: {{ m.fonte }} · <a href="/macetes/{{ m.impressao }}/questoes">ver as questões reais</a></p>
+        {% endcall %}
+      {% endfor %}
+    </article>
+  {% else %}
+    <p class="ds-nota">Nenhum erro nesta rodada.</p>
+  {% endfor %}
+
+  {% if acertos %}
+    <details class="acertos ds-cartao" style="margin-top:var(--esp-4)">
+      <summary>{{ acertos | length }} acerto(s)</summary>
+      <ul>
+        {% for item in acertos %}
+          <li>{% if item.gerada %}{{ selo('ia', 'criada por IA') }} {% endif %}{{ item.materia }} - {{ item.enunciado[:120] }}{% if item.enunciado | length > 120 %}...{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+
+  <div class="acoes">
+    {% if de_ia %}
+      <a class="ds-botao" href="/geradas">Gerar mais</a>
+      <a class="secundario" href="/simulado">Simulado com questões reais</a>
+    {% else %}
+      <a class="ds-botao" href="/simulado">Fazer outro</a>
+      {% if erros %}
+        <form method="post" action="/revisar" style="margin:0">
+          <button class="ds-botao" type="submit" style="background:var(--cor-superficie);color:var(--cor-texto);border:1px solid var(--cor-borda)">Revisar meus erros</button>
+        </form>
+      {% endif %}
+    {% endif %}
+    <a class="secundario" href="/">Voltar ao meu foco</a>
+  </div>
+</main>
+</body>
+</html>

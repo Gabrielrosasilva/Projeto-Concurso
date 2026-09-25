@@ -841,6 +841,10 @@ def gerar(
         False, "--macetes",
         help="Com --pedido: pede macetes por materia em vez de questoes",
     ),
+    explicacoes: bool = typer.Option(
+        False, "--explicacoes",
+        help="Com --pedido: pede a explicacao das questoes que eu errei",
+    ),
     importar: str = typer.Option(
         None, "--importar",
         help="Le a resposta de um --pedido, confere e grava o que presta",
@@ -867,7 +871,7 @@ def gerar(
         _importar_resposta_da_ia(Path(importar))
         return
     if pedido:
-        _salvar_pedido_da_ia(materia, quantas, macetes)
+        _salvar_pedido_da_ia(materia, quantas, macetes, explicacoes)
         return
 
     limite = gerador.TETO_PADRAO if teto is None else teto
@@ -979,9 +983,18 @@ def gerar(
     )
 
 
-def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool) -> None:
+def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
+                         explicacoes: bool = False) -> None:
     """O `--pedido`: todos os pedidos num arquivo, sem chamar a API."""
-    if macetes:
+    if explicacoes:
+        lote = servico.manual.pedido_de_explicacoes()
+        if not lote["pedidos"]:
+            console.print(
+                "[yellow]Nenhuma questao errada sem explicacao.[/] Elas saem "
+                "das questoes reais que eu errei na ultima vez que respondi."
+            )
+            return
+    elif macetes:
         lote = servico.manual.pedido_de_macetes(materia)
     else:
         lote = servico.manual.pedido_de_questoes(materia, quantas)
@@ -994,7 +1007,8 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool) -> No
         raise typer.Exit(code=1)
 
     destino = servico.manual.salvar_pedido(lote)
-    o_que = "macetes, um por materia" if macetes else "questoes"
+    o_que = ("explicacoes, uma por questao errada" if explicacoes
+             else "macetes, um por materia" if macetes else "questoes")
     console.print(
         f"[green]{len(lote['pedidos'])} pedido(s) de {o_que}[/] em {destino}"
     )
@@ -1021,7 +1035,8 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"[red]Nada importado:[/] {erro}")
         raise typer.Exit(code=1) from erro
 
-    o_que = "macete(s)" if resultado["tipo"] == "macetes" else "questao(oes)"
+    o_que = {"macetes": "macete(s)", "explicacoes": "explicacao(oes)"}.get(
+        resultado["tipo"], "questao(oes)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
     console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
     if resultado["repetidas"]:
@@ -1032,6 +1047,9 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
             console.print(f"  - {motivo}")
     if resultado["tipo"] == "macetes":
         console.print("[dim]Em data/macetes.json (versionado).[/]")
+    elif resultado["tipo"] == "explicacoes":
+        console.print("[dim]Em data/explicacoes.json (versionado). Aparecem no "
+                      "relatorio do simulado, ao lado de cada erro.[/]")
     elif resultado["gravadas"]:
         console.print(
             "Responda em [bold]radar web[/], na aba Estudar - com o selo de "
@@ -1624,7 +1642,8 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
 
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/assuntos.json", "data/questoes_geradas.json",
-                     "data/simulados.json", "data/macetes.json")
+                     "data/simulados.json", "data/macetes.json",
+                     "data/explicacoes.json")
 
 
 @app.command()

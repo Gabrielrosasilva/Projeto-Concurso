@@ -1404,3 +1404,32 @@ valer apenas com `<body class="ds">`.
   esquece no proximo `radar sincronizar`;
 - o numero que o descartar diz e o de respostas DADAS, e nao o de linhas da
   tabela: rodada abandonada tem 20 linhas e nenhuma resposta.
+
+## Tela de questao focada e relatorio pos-simulado (fase 3 da especificacao, 25/09/2026)
+
+- **a questao vem sozinha** (`questao.html`): sem a barra de navegacao, sem
+  tabela, sem numero de acerto. So "sair da rodada", o progresso, a origem
+  da rodada numa linha, e a questao com o selo (🟦 da prova ou 🟥 da IA). A
+  rodada fica guardada: sair e voltar depois continua de onde parou;
+- **o relatorio** (`relatorio.html`): resultado geral, desempenho por materia
+  com as abaixo da media da rodada em vermelho, e para cada erro a
+  alternativa que marquei, a correta (🟦 gabarito definitivo, ou 🟥 resposta
+  da IA na questao gerada), a explicacao e o macete - cada um com o selo. Os
+  acertos ficam recolhidos;
+- **sem nota de corte**, e a tela diz por que: nao ha resultado oficial
+  publicado no acervo para servir de fonte;
+- **a explicacao nao existia em lugar nenhum.** A banca nao publica
+  justificativa no acervo, entao explicacao e 🟥, e vem pelo caminho sem API
+  da parte 8: `radar gerar --pedido --explicacoes` pede uma por questao real
+  que eu errei na ultima vez (a mesma lista do [Revisar agora]), e o
+  `--importar` **recusa explicacao que defende outra letra que nao a do
+  gabarito oficial** - ela ensinaria o erro com cara de certeza. Tambem
+  recusa sem fonte. Moram em `data/explicacoes.json`, versionado e levado
+  pelo `sincronizar`;
+- o macete relacionado ao erro e o macete que cita aquela questao (caderno +
+  numero), com a mesma regra dos cartoes: sem fonte ou sem procedencia, nao
+  aparece;
+- achado e nao corrigido: a extracao do caderno perde texto em quebra de
+  linha com hifen - a questao de Direito Penal que diz "e cor-" terminava em
+  "correto afirmar". E defeito do leitor de PDF, e fica para uma etapa
+  propria.
