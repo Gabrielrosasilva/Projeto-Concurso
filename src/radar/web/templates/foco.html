@@ -376,8 +376,13 @@
               </td>
               {# Materia nunca treinada nao vale zero: zero diria que eu errei
                  tudo, quando o que houve foi eu nao ter feito. #}
-              <td class="n {{ 'zero' if not acerto }}">
-                {%- if acerto -%}
+              <td class="n {{ 'zero' if not acerto or acerto.respondidas < MINIMO_NA_MATERIA }}">
+                {%- if acerto and acerto.respondidas < MINIMO_NA_MATERIA -%}
+                  {# Mostra, mas apagado: abaixo do minimo e sorte, e nao
+                     entra no "comece por aqui". #}
+                  {{ '%.0f'|format(acerto.porcentagem) }}%
+                  <span class="feitas">· {{ acerto.respondidas }} de {{ MINIMO_NA_MATERIA }} · amostra pequena</span>
+                {%- elif acerto -%}
                   {{ '%.0f'|format(acerto.porcentagem) }}%
                   <span class="feitas">de {{ acerto.respondidas }}</span>
                 {%- else -%}
@@ -483,6 +488,8 @@
                   {{ a.esperadas | numero }} questões esperadas, e eu acerto
                   {{ a.acerto | numero(0) }}% em {{ a.respondidas }} questão(ões) diferente(s)
                   {%- if a.dias_sem_revisar %}; {{ a.dias_sem_revisar }} dia(s) sem revisar (×{{ a.fator | numero }}){% endif -%}
+                {%- elif a.respondidas -%}
+                  acertei {{ a.acertos }} de {{ a.respondidas }}, amostra pequena
                 {%- else -%}
                   ainda não respondi nenhuma no simulado
                 {%- endif -%}
@@ -509,8 +516,9 @@
       {% if p.onde_comecar | selectattr('pontos', 'none') | first %}
         <p class="legenda">
           As barras <span class="nao-sei">amarelas</span> são assuntos que eu
-          nunca treinei. Não dá para calcular pontos a ganhar sem acerto
-          medido, então elas entram pelas <strong>questões esperadas</strong> -
+          nunca treinei, ou treinei menos de {{ MINIMO_NO_ASSUNTO }} questões -
+          abaixo disso a porcentagem é sorte. Não dá para calcular pontos a
+          ganhar sem acerto medido, então elas entram pelas <strong>questões esperadas</strong> -
           que é o máximo que elas poderiam valer. Treinar o assunto é o que
           troca essa barra por uma azul, e o número por um de verdade.
         </p>

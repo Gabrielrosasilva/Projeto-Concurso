@@ -227,15 +227,28 @@ def test_a_materia_com_pior_acerto_vem_primeiro(banco_temporario):
 
 
 def test_desempenho_geral_soma_todas_as_rodadas(banco_temporario):
-    _semear(_questao(1), _questao(2, impressao="b"))
+    """Uma questao em cada rodada, de materias diferentes para o sorteio nao
+    repetir a mesma - repetida, ela contaria uma vez so (ultima resposta)."""
+    _semear(_questao(1), _questao(2, impressao="b", materia="Matemática"))
+
+    for materia in ("Língua Portuguesa", "Matemática"):
+        simulado = servico.criar_simulado(quantidade=1, materia=materia)
+        _, questao = servico.questao_atual(simulado.id)
+        servico.responder(simulado.id, questao.id, "c")
+
+    geral = servico.desempenho()
+    assert sum(d.respondidas for d in geral) == 2
+
+
+def test_a_mesma_questao_em_duas_rodadas_conta_uma_vez(banco_temporario):
+    _semear(_questao(1))
 
     for _ in range(2):
         simulado = servico.criar_simulado(quantidade=1)
         _, questao = servico.questao_atual(simulado.id)
         servico.responder(simulado.id, questao.id, "c")
 
-    geral = servico.desempenho()
-    assert sum(d.respondidas for d in geral) == 2
+    assert sum(d.respondidas for d in servico.desempenho()) == 1
 
 
 def test_questao_nao_respondida_nao_entra_na_conta(banco_temporario):

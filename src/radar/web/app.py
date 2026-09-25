@@ -114,6 +114,10 @@ templates.env.filters["municipio"] = regioes.nome_canonico
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.
 templates.env.filters["numero"] = onde_estudar.numero
+# Os minimos de resposta, para a tela dizer "2 de 5" com o mesmo numero que
+# faz a conta - e nao com um 5 escrito no template.
+templates.env.globals["MINIMO_NA_MATERIA"] = onde_estudar.MINIMO_NA_MATERIA
+templates.env.globals["MINIMO_NO_ASSUNTO"] = onde_estudar.MINIMO_NO_ASSUNTO
 
 
 def _url_base_sem(request: Request, *parametros: str) -> str:

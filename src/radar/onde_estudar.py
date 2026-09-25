@@ -34,6 +34,26 @@ from radar.regioes import normalizar
 # uma linha de rodape dizendo quantos ficaram de fora.
 NA_TELA = 12
 
+# Quantas respostas precisa ter para o acerto virar MEDIDA. Com menos que
+# isso, a porcentagem e sorte: acertar a unica questao que fiz diz "100%", e
+# errar diz "0%" - e nenhum dos dois diz o que eu sei. Abaixo do minimo a
+# regra e a mesma em toda tela: o numero aparece com o rotulo "amostra
+# pequena", e NAO entra em conta nem ordenacao nenhuma. O item e tratado como
+# "ainda nao treinado": entra pelo peso (ou pelas questoes esperadas), e o
+# fator de tempo fica neutro.
+#
+# O assunto pede menos que a materia porque ha assunto com so 3 questoes no
+# acervo inteiro: ele nunca chegaria a 5 sem repetir questao - e questao
+# repetida conta uma vez so, pela ultima resposta.
+MINIMO_NA_MATERIA = 5
+MINIMO_NO_ASSUNTO = 3
+
+
+def e_amostra_pequena(respondidas: int, minimo: int) -> bool:
+    """Tem resposta, mas pouca: o numero aparece, e nao conta."""
+    return 0 < respondidas < minimo
+
+
 # O FATOR DE TEMPO da formula da especificacao:
 #
 #     prioridade = incidencia x (1 - meu acerto) x fator de tempo
@@ -98,6 +118,15 @@ class LinhaDeEstudo:
     ultima: date | None = None
     #: O fator de tempo, ja calculado para hoje. 1 sem treino.
     fator: float = 1.0
+
+    @property
+    def acertos(self) -> int:
+        """Quantas eu acertei, de volta da porcentagem - para "acertei 1 de 2"."""
+        return round((self.acerto or 0) * self.respondidas / 100)
+
+    @property
+    def amostra_pequena(self) -> bool:
+        return e_amostra_pequena(self.respondidas, MINIMO_NO_ASSUNTO)
 
     @property
     def dias_sem_revisar(self) -> int | None:
@@ -182,9 +211,13 @@ def montar(
 
         respondidas, certas = acertos.get((materia, assunto), (0, 0))
         acerto = (certas / respondidas * 100) if respondidas else None
-        pontos = None if acerto is None else esperadas * (1 - acerto / 100)
-        # Sem acerto medido nao ha ultima revisao: o fator fica neutro.
-        ultima = (ultimas or {}).get((materia, assunto)) if acerto is not None else None
+        # Abaixo do minimo, o acerto fica na linha para a tela mostrar - mas
+        # nao vira pontos, e sem pontos o fator de tempo fica neutro. Senao 1
+        # erro jogava o assunto para o topo por "0%", e 1 acerto o jogava
+        # para o fim como se eu dominasse.
+        medido = respondidas >= MINIMO_NO_ASSUNTO
+        pontos = esperadas * (1 - acerto / 100) if medido else None
+        ultima = (ultimas or {}).get((materia, assunto)) if medido else None
 
         linhas.append(LinhaDeEstudo(
             materia=materia,
@@ -238,13 +271,20 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
     primeira = linhas[0]
     onde = _como_chamar(primeira)
 
-    if primeira.acerto is None:
+    # Sem pontos, a frase NAO cita porcentagem: com amostra pequena ela seria
+    # sorte dita em voz alta, justamente o que o minimo existe para evitar.
+    if primeira.pontos is None:
+        if primeira.respondidas:
+            medida = (f"Respondi so {primeira.respondidas} questão(ões) dele "
+                      f"- amostra pequena, abaixo das {MINIMO_NO_ASSUNTO} que "
+                      f"fazem o acerto valer")
+        else:
+            medida = "Eu ainda não respondi nenhuma questão dele no simulado"
         return (
             f"{onde} é o maior bloco esperado da prova: "
             f"{numero(primeira.esperadas)} questões. "
-            f"Eu ainda não respondi nenhuma questão dele no simulado, então "
-            f"não dá para dizer quanto há a ganhar - vale medir antes de "
-            f"escolher por onde começar."
+            f"{medida}, então não dá para dizer quanto há a ganhar - vale "
+            f"medir antes de escolher por onde começar."
         )
 
     return (

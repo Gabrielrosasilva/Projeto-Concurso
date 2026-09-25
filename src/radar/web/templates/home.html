@@ -129,8 +129,8 @@
         <p class="miudo">
           {{ selo('oficial', 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
           {{ selo('calculado', 'meu acerto') }} × tempo sem revisar. Com menos de
-          5 respostas, a matéria conta como não treinada: vale o peso inteiro, e
-          o fator de tempo é neutro.
+          {{ MINIMO_NA_MATERIA }} questões, a matéria conta como não treinada:
+          vale o peso inteiro, e o fator de tempo é neutro.
         </p>
       {% else %}
         <p class="convite">Ainda não li o quadro do edital, e sem ele não há

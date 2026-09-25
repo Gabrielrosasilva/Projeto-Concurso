@@ -1512,3 +1512,24 @@ valer apenas com `<body class="ds">`.
 - a regra "a ultima de cada questao" mora num lugar so,
   `simulado._ultimas_respostas_reais`, que ja servia o "So meus erros" e
   ganhou o desempate pelo id.
+
+## Um minimo de respostas so, nas tres telas (26/09/2026)
+
+- **`onde_estudar.MINIMO_NA_MATERIA = 5` e `MINIMO_NO_ASSUNTO = 3`**, e mais
+  nenhum. A home tinha o seu 5; o Meu foco, o "comece por aqui" e o Onde
+  estudar primeiro aceitavam 1 resposta. Com 1, errar a unica questao jogava
+  o assunto para o topo por "0%", e acertar o jogava para o fim como se eu
+  dominasse - e a home e o Meu foco podiam apontar materias diferentes;
+- o assunto usa 3 porque ha assunto com so 3 questoes no acervo inteiro: ele
+  nunca chegaria a 5 sem repetir questao, e questao repetida conta uma vez;
+- **abaixo do minimo, a regra e a mesma em todo lugar**: o numero aparece com
+  "amostra pequena" (em estilo apagado), e nao entra em conta nem ordenacao.
+  O item e "ainda nao treinado": entra pelo peso ou pelas questoes
+  esperadas, com fator de tempo neutro;
+- home: "amostra pequena (2 de 5)"; Meu foco: "58% · 2 de 5 · amostra
+  pequena", e o "comece por aqui" so considera materia com o minimo - sem
+  nenhuma, ele e a frase de destaque somem; Onde estudar primeiro: "acertei
+  1 de 2, amostra pequena", barra amarela, e a frase de conclusao nao cita
+  porcentagem de amostra pequena;
+- os minimos vao para os templates como globais do Jinja: a tela diz "2 de
+  5" com o mesmo numero que faz a conta.

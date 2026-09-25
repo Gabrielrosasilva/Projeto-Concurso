@@ -735,11 +735,16 @@ def _pior_das_pesadas(pesadas: set[str], acerto: dict) -> str | None:
     E a resposta para "por onde eu comeco a estudar hoje": errar muito numa
     materia de 2 questoes custa 2 questoes; errar numa de 15 decide a prova.
 
-    So entra materia que eu ja treinei. Apontar a pior entre as que eu nunca
-    fiz seria inventar um numero - e a materia pesada que ainda nao tem acerto
-    aparece na tela do jeito dela, dizendo que falta treinar.
+    So entra materia com acerto MEDIDO - pelo menos
+    `onde_estudar.MINIMO_NA_MATERIA` questoes. Abaixo disso a porcentagem e
+    sorte, e apontar "comece por aqui" em cima dela seria inventar. A home usa
+    o mesmo minimo, e por isso as duas telas apontam a mesma materia.
     """
-    medidas = [(nome, acerto[nome]) for nome in pesadas if nome in acerto]
+    medidas = [
+        (nome, acerto[nome]) for nome in pesadas
+        if nome in acerto
+        and acerto[nome].respondidas >= onde_estudar.MINIMO_NA_MATERIA
+    ]
     if not medidas:
         return None
 

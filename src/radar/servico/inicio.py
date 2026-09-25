@@ -15,7 +15,7 @@ IA e explicavel na tela:
 
   * o PESO e o do quadro do edital, e nao o do acervo: e o que a proxima prova
     promete cobrar;
-  * com menos de `MINIMO_DE_RESPOSTAS` na materia, o acerto e "desconhecido"
+  * com menos de `onde_estudar.MINIMO_NA_MATERIA` na materia, o acerto e "desconhecido"
     e a materia entra como "ainda nao treinada", valendo o peso inteiro - o
     maximo que ela poderia valer, a mesma regra do "Onde estudar primeiro";
   * o FATOR DE TEMPO e o de `onde_estudar.fator_de_tempo`: 1 no dia da
@@ -37,8 +37,8 @@ from radar.servico import espacada
 from radar.servico import simulado as treino
 from radar.util import para_local
 
-# A regra 5 da especificacao: abaixo disto, a taxa de acerto e desconhecida.
-MINIMO_DE_RESPOSTAS = 5
+# O minimo de respostas e o de `onde_estudar.MINIMO_NA_MATERIA`: um so, para
+# a home, o Meu foco e o Onde estudar primeiro nunca discordarem.
 
 # Quantas materias o bloco mostra. Tres, como a especificacao pede.
 QUANTAS_PRIORIDADES = 3
@@ -67,9 +67,10 @@ class Prioridade:
         """A frase do cartao, montada dos numeros."""
         base = f"{self.questoes_no_edital} questões no edital"
         if not self.treinada:
-            quanto = (f", {self.respondidas} respondida(s)" if self.respondidas
-                      else "")
-            return f"{base} · ainda não treinada{quanto}"
+            if self.respondidas:
+                return (f"{base} · amostra pequena ({self.respondidas} de "
+                        f"{onde_estudar.MINIMO_NA_MATERIA})")
+            return f"{base} · ainda não treinada"
         texto = (f"{base} · {self.acerto:.0f}% de acerto em "
                  f"{self.respondidas} questões")
         if self.dias_sem_revisar:
@@ -82,7 +83,7 @@ class Prioridade:
 class Revisar:
     erradas: int = 0
     #: [(materia, acerto %, respondidas)] com acerto abaixo de ACERTO_FRACO
-    #: e base de pelo menos MINIMO_DE_RESPOSTAS.
+    #: e base de pelo menos onde_estudar.MINIMO_NA_MATERIA.
     materias_fracas: list = field(default_factory=list)
     respondidas: int = 0
 
@@ -141,7 +142,7 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
         peso = m.questoes / total * 100
         d = medido.get(normalizar(m.nome))
         respondidas = d.respondidas if d else 0
-        if respondidas >= MINIMO_DE_RESPOSTAS:
+        if respondidas >= onde_estudar.MINIMO_NA_MATERIA:
             acerto = d.porcentagem
             ultima = ultimas.get(normalizar(m.nome))
             fator = onde_estudar.fator_de_tempo(ultima, hoje)
@@ -169,7 +170,8 @@ def _revisar() -> Revisar:
         erradas=len(treino.questoes_erradas()),
         materias_fracas=[
             (d.materia, d.porcentagem, d.respondidas) for d in desempenho
-            if d.respondidas >= MINIMO_DE_RESPOSTAS and d.porcentagem < ACERTO_FRACO
+            if d.respondidas >= onde_estudar.MINIMO_NA_MATERIA
+            and d.porcentagem < ACERTO_FRACO
         ],
         respondidas=sum(d.respondidas for d in desempenho),
     )
