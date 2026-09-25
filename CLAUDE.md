@@ -96,18 +96,18 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (o detalhe de cada fase esta no [historico](docs/historico.md))
+## Estado atual (detalhe no [historico](docs/historico.md) e nas [decisoes](docs/decisoes.md))
 
-**Prontas 1 a 6, 8 a 11, 14 e 15:** tres fontes, anel, avisos, leitura da
-pagina e do edital, calendario, acervo de 8.433 questoes, simulado, previsao,
-linha do tempo, Acompanhando, "Meu foco" como home, treino pelo cargo, "Onde
-estudar primeiro", e o `radar gerar`. **Parcial so a 7:** a Central de Macetes
-tem o cartao pronto, mas nenhum macete de IA foi importado ainda. `assuntos` e
-`gerar` custam dinheiro e **simulam por padrao** (o `gerar --pedido` vai sem
-API, pelo Claude Code); nenhum rodou valendo, e Direito nao tem assunto.
-
-A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em
-`data/radar.db` (Postgres via `RADAR_DATABASE_URL`); testes com dado fixo.
+**Pronto:** o radar (fases 1-15 do historico) e, da especificacao, a auditoria
+(`radar auditar`, lida na tela Mais), o design system com os 6 selos, a navegacao
+de 6 destinos e a home de 3 blocos, tela de questao e relatorio, so meus erros,
+compilado 40/50/100 pelos pesos do edital, revisao espacada 1-7-30, descartar
+simulado, backup dos simulados, IA sem pagar (`gerar --pedido`) e Macetes.
+**Falta:** conferir a lista de leis alteradas (`config/leis.yml`), migrar as
+outras telas ao design system (espera aprovacao), importar macete e explicacao,
+dar assunto ao Direito e o cronograma por IA. Acervo: 8.433 questoes (3.372
+enunciados, 10 anuladas), nenhuma com assunto gravado, nenhuma resposta dada.
+Arvore de `src/radar/` no [README](README.md); banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`

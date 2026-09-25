@@ -1548,3 +1548,20 @@ valer apenas com `<body class="ds">`.
 - sem arquivo, o cartao e a pagina dizem "ainda nao gerado, rode `radar
   auditar`", e a pagina responde 200: nao ter rodado a auditoria e estado
   normal, nao erro.
+
+## Questao gerada nao tem status "nao revisada"; Macetes mantem o nome (26/09/2026)
+
+- **questao gerada NAO ganha status "nao revisada".** O que protege quem
+  treina com ela ja esta na tela: o selo 🟥, a questao real de origem (com
+  gabarito oficial), o artigo em que ela diz se apoiar com o link da lei, e o
+  botao "essa questao esta errada", que a tira do sorteio para sempre. Um
+  status que so muda quando eu marco questao por questao ficaria "nao
+  revisada" para sempre - e um aviso que nunca apaga vira paisagem;
+- **"Macetes" mantem o nome.** E o nome que eu uso e que o sitemap da
+  especificacao usa (Revisao -> Macetes); trocar agora seria renomear rota,
+  tela, teste e memoria sem ganho nenhum;
+- as duas regras de acerto desta rodada ja estao registradas acima, com o
+  porque: "O acerto acumulado conta questao, pela ultima resposta" (o
+  historico fica inteiro para a revisao espacada) e "Um minimo de respostas
+  so, nas tres telas" (5 na materia, 3 no assunto; abaixo disso e amostra
+  pequena e nao entra em conta).
