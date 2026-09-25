@@ -483,3 +483,176 @@ def test_a_revisao_diz_que_a_questao_e_gerada(banco_temporario):
 
     assert item.gerada is True
     assert item.artigo == "art. 41 da Lei 7.210/1984"
+
+
+# --- a tela -----------------------------------------------------------------
+#
+# A tela tem duas obrigacoes, e as duas sao testadas: dizer em cada questao
+# que ela foi criada por IA e em que questao real se baseia, e nunca mostrar
+# o meu acerto num numero so.
+
+
+@pytest.fixture
+def cliente(banco_temporario):
+    from fastapi.testclient import TestClient
+    from radar.web.app import app
+
+    return TestClient(app)
+
+
+def test_a_aba_gerar_questoes_fica_ao_lado_do_simulado(cliente):
+    pagina = cliente.get("/simulado").text
+
+    assert 'href="/geradas"' in pagina
+
+
+def test_a_tela_avisa_que_isto_treina_e_nao_mede(cliente):
+    """O aviso e a razao de ser da etapa, e fica no topo da tela."""
+    _semear(_concurso(), _real(1))
+
+    pagina = cliente.get("/geradas").text
+
+    assert "treina, não mede" in pagina
+    assert "nunca somado" in pagina
+
+
+def test_o_botao_que_gasta_traz_o_preco_nele_mesmo(cliente):
+    """Nenhum botao que gasta sem o numero do gasto escrito nele.
+
+    O preco e o custo daquela escolha, renderizado junto do botao: escolher a
+    materia recarrega a pagina antes, entao nao existe botao com preco velho.
+    """
+    _semear(_concurso(), _real(1))
+
+    pagina = cliente.get("/geradas?quantas=3").text
+
+    assert "Ver o custo disto" in pagina
+    assert "Gerar e treinar — gasta US$" in pagina
+
+
+def test_gerar_sem_chave_volta_dizendo_o_que_falta(cliente, monkeypatch):
+    monkeypatch.delenv("RADAR_ANTHROPIC_KEY", raising=False)
+    _semear(_concurso(), _real(1))
+
+    resposta = cliente.post(
+        "/geradas/gerar", data={"materia": "", "quantas": "3"},
+        follow_redirects=False,
+    )
+
+    assert resposta.status_code == 303
+    assert "recado=sem_chave" in resposta.headers["location"]
+    assert "RADAR_ANTHROPIC_KEY" in cliente.get("/geradas?recado=sem_chave").text
+
+
+def test_treinar_com_as_de_casa_cai_no_simulado_de_sempre(cliente):
+    """Nao ha segunda tela de responder questao."""
+    _gravar_uma()
+
+    resposta = cliente.post(
+        "/geradas/treinar", data={"materia": "", "quantidade": "1"},
+        follow_redirects=False,
+    )
+
+    assert resposta.status_code == 303
+    assert resposta.headers["location"].startswith("/simulado/")
+
+
+def test_a_questao_gerada_chega_com_selo_e_com_a_origem(cliente):
+    """Selo visivel, dizendo que foi criada por IA e em que questao real ela
+    se baseia - antes do enunciado, e nao depois de responder."""
+    _semear(_concurso(), _real(1))
+    _gravar_uma()
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "Questão criada por IA" in pagina
+    assert "Variação da questão 1" in pagina
+    assert "FEPESE 2019" in pagina
+
+
+def test_o_artigo_aparece_com_o_link_da_lei(cliente):
+    """E o que me deixa conferir em 10 segundos."""
+    _semear(_concurso(), _real(1))
+    _gravar_uma()
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "art. 41 da Lei 7.210/1984" in pagina
+    assert "planalto.gov.br/ccivil_03/leis/l7210.htm" in pagina
+    assert "ler a lei" in pagina
+
+
+def test_sem_artigo_a_tela_diz_que_nao_sabe(cliente):
+    """Vazio e melhor que inventado, e a tela precisa dizer qual dos dois e."""
+    _gravar_uma(artigo=None)
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "não soube dizer em que artigo" in pagina
+
+
+def test_um_clique_marca_a_questao_como_errada_e_a_rodada_anda(cliente):
+    """Ela sai do sorteio para sempre, e a rodada nao trava na questao que eu
+    acabei de recusar."""
+    _gravar_uma()
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+    _resposta, questao = servico.questao_atual(rodada.id)
+
+    resposta = cliente.post(
+        f"/geradas/{questao.id}/errada",
+        data={"voltar": f"/simulado/{rodada.id}"},
+        follow_redirects=False,
+    )
+
+    assert resposta.status_code == 303
+    assert servico.geradas.contar()["valem"] == 0
+    assert servico.questao_atual(rodada.id) is None
+
+
+def test_a_questao_recusada_nao_deixa_resto_no_meu_acerto(cliente):
+    """Se ela nao vale como questao, nao vale como acerto nem como erro."""
+    _gravar_uma()
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+    _resposta, questao = servico.questao_atual(rodada.id)
+    servico.responder(rodada.id, questao.id, "a")
+    assert servico.desempenho_das_geradas() != []
+
+    cliente.post(f"/geradas/{questao.id}/errada", data={"voltar": "/geradas"})
+
+    assert servico.desempenho_das_geradas() == []
+
+
+def test_a_tela_do_simulado_mostra_os_dois_numeros_separados(cliente):
+    """Nunca um numero so."""
+    _semear(_concurso(), _real(1))
+    _gravar_uma()
+
+    real = servico.criar_simulado(quantidade=1, materia="Lei de Execução Penal")
+    _resposta, questao = servico.questao_atual(real.id)
+    servico.responder(real.id, questao.id, "a")
+
+    gerada = servico.geradas.criar_simulado(quantidade=1)
+    _resposta, questao = servico.questao_atual(gerada.id)
+    servico.responder(gerada.id, questao.id, "a")
+
+    pagina = cliente.get("/simulado").text
+
+    assert "Como você vai até agora" in pagina
+    assert "Nas questões geradas" in pagina
+
+
+def test_o_resultado_da_rodada_gerada_nao_vem_vazio(cliente):
+    """O `desempenho` comum nao enxerga a tabela das geradas: sem o desvio, o
+    fim da rodada mostraria uma tabela em branco."""
+    _gravar_uma()
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+    _resposta, questao = servico.questao_atual(rodada.id)
+    servico.responder(rodada.id, questao.id, "c")
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "Lei de Execução Penal" in pagina
+    assert "criada por IA" in pagina

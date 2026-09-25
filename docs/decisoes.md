@@ -1040,3 +1040,33 @@ substitui: no modo variacao a ancora e o gabarito oficial da questao de
 origem, e em todo caso a IA diz em que ARTIGO se apoiou. A tela mostra o
 artigo junto do link de `config/leis.yml`, e a conferencia e minha, em 10
 segundos. Artigo que a IA nao souber vem vazio - vazio e melhor que inventado.
+
+### A tela das geradas
+
+- **aba propria para GERAR, a tela de sempre para RESPONDER.** "Gerar questoes"
+  entra ao lado de Macetes e Simulado; a rodada cai no `/simulado/<id>` que ja
+  existe. Uma segunda tela de responder questao seria uma copia pior da
+  primeira, e as duas envelheceriam em ritmos diferentes;
+- **dois passos antes de gastar, e sem JavaScript.** Escolher a materia manda
+  um GET e a pagina volta com o custo daquela escolha; so entao aparece o botao
+  que gasta, com o preco escrito nele. Um formulario so teria o botao de gastar
+  com o preco da escolha anterior - e o preco errado num botao que gasta e pior
+  que preco nenhum;
+- **a rodada recem-gerada leva so o que acabou de nascer.** Eu cliquei para
+  treinar estas, e nao para rever as de ontem. Por isso `gerar` devolve as
+  impressoes do que nasceu, e a rodada e montada por elas;
+- **o selo fica ACIMA do enunciado.** Eu preciso saber que a questao e de IA
+  antes de ler, e nao depois de responder. Ele diz de qual questao real ela e
+  variacao - com banca, ano e cargo - e deixa claro que *aquela* tem gabarito
+  oficial e esta nao;
+- **o artigo aparece junto do link da lei**, do `config/leis.yml`. Artigo que a
+  IA nao soube dizer vira uma frase dizendo isso, e nao um espaco em branco:
+  calar aqui pareceria que a questao nao precisa de conferencia;
+- **"essa questao esta errada" tira as RESPOSTAS dela de todas as rodadas.** A
+  questao fica guardada, marcada; as respostas saem. Se ela nao vale como
+  questao, nao vale como acerto nem como erro - e e isso que tambem destrava a
+  rodada em andamento, sem contar a recusa como se fosse um erro meu;
+- **dois numeros em toda tela que mostra acerto**, e nenhum lugar que os some.
+  No Simulado sao duas tabelas; na aba Gerar questoes, duas colunas lado a
+  lado. `desempenho_das_geradas` e funcao separada, e nao um parametro de
+  `desempenho`, porque o parametro convidaria alguem a somar os dois um dia.

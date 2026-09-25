@@ -265,6 +265,10 @@ def gerar(
     return {
         "pedidos": len(plano["pedidos"]),
         "geradas": gravadas,
+        # A impressao do que acabou de nascer. E com ela que a tela monta uma
+        # rodada SO com as questoes desta geracao, em vez de misturar com o
+        # que ja estava guardado de antes.
+        "impressoes": [q.impressao for q in resultado.questoes],
         "descartadas": resultado.descartadas,
         "guardadas": guardadas,
         "custo": resultado.uso.custo,
@@ -315,9 +319,14 @@ def origem_de(questao: QuestaoGerada | None) -> QuestaoDeProva | None:
 def rejeitar(questao_id: int) -> bool:
     """Marca "essa questao esta errada". Ela sai do sorteio para sempre.
 
-    Nao apaga: a questao errada guardada e o que me diz, depois, se um assunto
-    da errado toda vez - e ai o problema nao e a questao, e o pedido que eu
-    mandei. Apagar jogaria fora essa informacao.
+    A QUESTAO nao e apagada: o erro guardado e o que me diz, depois, se um
+    assunto da errado toda vez - e ai o problema nao e a questao, e o pedido
+    que eu mandei. Apagar jogaria fora essa informacao.
+
+    O que sai sao as RESPOSTAS dela, em todas as rodadas. Uma questao que eu
+    declarei errada nao pode continuar pesando no meu acerto: se ela nao vale
+    como questao, nao vale como acerto nem como erro. E e isso tambem que
+    destrava a rodada em andamento, quando eu rejeito no meio dela.
     """
     criar_tabelas()
     with sessao() as s:
@@ -325,11 +334,23 @@ def rejeitar(questao_id: int) -> bool:
         if questao is None:
             return False
         questao.rejeitada = True
+
+        respostas = s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.questao_id == questao_id)
+            .where(RespostaDeSimulado.gerada.is_(True))
+        )
+        for resposta in respostas:
+            s.delete(resposta)
         return True
 
 
-def _sortear(quantidade: int, materia: str | None = None) -> list[int]:
-    """Ids de questoes geradas que valem, sem repetir enunciado."""
+def _sortear(
+    quantidade: int,
+    materia: str | None = None,
+    impressoes: list[str] | None = None,
+) -> list[int]:
+    """Ids de questoes geradas que valem para o sorteio."""
     consulta = (
         select(QuestaoGerada)
         .where(QuestaoGerada.rejeitada.is_(False))
@@ -337,6 +358,8 @@ def _sortear(quantidade: int, materia: str | None = None) -> list[int]:
     )
     if materia:
         consulta = consulta.where(QuestaoGerada.materia == materia)
+    if impressoes is not None:
+        consulta = consulta.where(QuestaoGerada.impressao.in_(impressoes))
 
     with sessao() as s:
         candidatas = list(s.scalars(consulta))
@@ -346,7 +369,9 @@ def _sortear(quantidade: int, materia: str | None = None) -> list[int]:
 
 
 def criar_simulado(
-    quantidade: int = QUANTIDADE_PADRAO, materia: str | None = None
+    quantidade: int = QUANTIDADE_PADRAO,
+    materia: str | None = None,
+    impressoes: list[str] | None = None,
 ) -> Simulado | None:
     """Uma rodada SO de questoes geradas, na mesma tela do simulado de sempre.
 
@@ -356,7 +381,7 @@ def criar_simulado(
     """
     criar_tabelas()
 
-    ids = _sortear(quantidade, materia)
+    ids = _sortear(quantidade, materia, impressoes)
     if not ids:
         return None
 

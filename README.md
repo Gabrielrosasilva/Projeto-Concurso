@@ -672,6 +672,35 @@ que nao seja de navegador** (testado alternando: o UA honesto do projeto e
 radar se disfarcar, e o CLAUDE.md manda identificar-se no User-Agent. Entao nao
 se baixa — e o radar continua so apontando o link da lei.
 
+#### Na tela
+
+Em **Estudar** há uma terceira aba, ao lado de Macetes e Simulado: **Gerar
+questões**. Escolho a matéria e quantas quero, e ela responde em dois passos —
+**"Ver o custo disto"** recarrega a página com o preço daquela escolha, e só
+então aparece o botão que gasta, com o valor escrito nele. São dois passos de
+propósito: não existe botão de gastar com preço de uma escolha anterior.
+
+Ao gerar, caio direto no **mesmo simulado de sempre** — não há uma segunda tela
+de responder questão. A rodada leva só o que acabou de nascer.
+
+Cada questão gerada chega com **selo, acima do enunciado**: que foi criada por
+IA, de qual questão real ela é variação (com banca, ano e cargo, e dizendo que
+*aquela* tem gabarito oficial e esta não), e em que **artigo** ela diz se
+apoiar — com o link "ler a lei" do `config/leis.yml` ao lado. Quando a IA não
+soube dizer o artigo, a tela diz isso, em vez de calar.
+
+No selo fica também **"Essa questão está errada"**. Um clique e ela sai do
+sorteio para sempre; as respostas dela saem junto da conta do meu acerto, e a
+rodada em andamento anda para a próxima. A questão em si não é apagada: o erro
+guardado é o que me diz depois se um assunto dá errado toda vez — e aí o
+problema não é a questão, é o pedido.
+
+**O acerto aparece em dois números, nunca somado.** Na tela do Simulado são
+duas tabelas separadas, "Como você vai até agora" (reais) e "Nas questões
+geradas"; na aba Gerar questões, uma tabela com as duas colunas lado a lado. Na
+revisão do fim da rodada, cada questão gerada leva a marca "criada por IA" e o
+artigo que ela alega.
+
 ### O gabarito que vale e o definitivo
 
 O caderno de prova da FEPESE marca a alternativa certa dentro do proprio PDF, e

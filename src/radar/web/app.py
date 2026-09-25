@@ -13,6 +13,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
+from radar import leis
 from radar import onde_estudar
 from radar import regioes
 from radar import servico
@@ -380,6 +381,8 @@ def _pagina_do_simulado(request: Request, simulado=None, **extra):
         "materias": servico.materias_disponiveis(),
         "total_de_questoes": servico.contar_questoes(),
         "desempenho_geral": servico.desempenho(),
+        # O segundo numero, sempre do lado e nunca somado ao primeiro.
+        "desempenho_das_geradas": servico.desempenho_das_geradas(),
     }
     contexto.update(extra)
     return templates.TemplateResponse(
@@ -423,20 +426,38 @@ def simulado_questao(request: Request, simulado_id: int):
 
     resumo = servico.resumo_do_simulado(simulado_id)
     atual = servico.questao_atual(simulado_id)
+    de_ia = bool((simulado.filtros or {}).get("geradas"))
 
     if atual is None:
+        # Rodada de questao gerada tem o acerto medido pelo outro lado: o
+        # `desempenho` comum nao enxerga a tabela das geradas, e devolveria
+        # uma tabela vazia no lugar do resultado.
+        da_rodada = (
+            servico.desempenho_das_geradas(simulado_id) if de_ia
+            else servico.desempenho(simulado_id)
+        )
         return _pagina_do_simulado(
             request,
             simulado=simulado,
             questao=None,
             resumo=resumo,
-            desempenho_da_rodada=servico.desempenho(simulado_id),
+            de_ia=de_ia,
+            desempenho_da_rodada=da_rodada,
             revisao=servico.revisao(simulado_id),
         )
 
     resposta, questao = atual
     return _pagina_do_simulado(
-        request, simulado=simulado, resposta=resposta, questao=questao, resumo=resumo
+        request,
+        simulado=simulado,
+        resposta=resposta,
+        questao=questao,
+        resumo=resumo,
+        de_ia=de_ia,
+        # O selo precisa dos dois: em que questao real ela se baseia, e onde
+        # eu leio o artigo que ela diz estar cobrando.
+        origem=servico.geradas.origem_de(questao) if de_ia else None,
+        lei=(leis.do_assunto(questao.materia, questao.assunto) if de_ia else None),
     )
 
 
@@ -453,6 +474,126 @@ def simulado_responder(
     """
     servico.responder(simulado_id, questao_id, letra)
     return RedirectResponse(f"/simulado/{simulado_id}", status_code=303)
+
+
+# --- questoes geradas pela IA (etapa 15) ------------------------------------
+#
+# Tela propria para GERAR, e a mesma tela de sempre para RESPONDER. Duas
+# coisas diferentes: escrever questao de treino nao e o mesmo que treinar, mas
+# uma segunda tela de responder questao seria so uma copia pior da primeira.
+
+# O que cada recado de volta quer dizer. Vem pela URL porque o caminho passa
+# por um redirecionamento - e sem isso o F5 mandaria gerar de novo.
+RECADOS_DAS_GERADAS = {
+    "sem_chave": (
+        "Falta a chave da Anthropic. Ponha RADAR_ANTHROPIC_KEY no .env e "
+        "recarregue - o passo a passo esta em COMO_LIGAR_A_IA.txt."
+    ),
+    "sem_base": (
+        "Nao ha questao real do meu cargo para variar nesta materia."
+    ),
+    "nada": (
+        "A IA nao devolveu nenhuma questao aproveitavel desta vez. Nada foi "
+        "guardado; se houve chamada, ela foi cobrada do mesmo jeito."
+    ),
+    "errada": (
+        "Marcada como errada. Ela saiu do sorteio para sempre, e as respostas "
+        "dela sairam da conta do meu acerto."
+    ),
+}
+
+
+@app.get("/geradas", response_class=HTMLResponse)
+def geradas(
+    request: Request,
+    materia: str = "",
+    quantas: int = 5,
+    recado: str = "",
+):
+    """A tela de gerar questao, com o custo antes do botao."""
+    from radar import gerador
+
+    escolhida = materia.strip() or None
+    quantas = quantas if 1 <= quantas <= 30 else 5
+
+    real = {d.materia: d for d in servico.desempenho()}
+    gerado = {d.materia: d for d in servico.desempenho_das_geradas()}
+
+    return templates.TemplateResponse(
+        request=request,
+        name="geradas.html",
+        context={
+            "plano": servico.geradas.preparar(escolhida, quantas),
+            "materias": servico.geradas.materias_para_gerar(),
+            "resumo": servico.geradas.contar(),
+            "materia": escolhida,
+            "quantas": quantas,
+            "modelo": gerador.MODELO,
+            "recado": RECADOS_DAS_GERADAS.get(recado),
+            "desempenho_real": real,
+            "desempenho_gerado": gerado,
+            # A uniao das duas, para a tabela ter uma linha por materia mesmo
+            # quando so um dos lados tem numero.
+            "materias_com_acerto": sorted(set(real) | set(gerado)),
+        },
+    )
+
+
+@app.post("/geradas/gerar")
+def geradas_gerar(materia: str = Form(""), quantas: str = Form("5")):
+    """Gera de verdade - isto GASTA - e cai direto na rodada com as novas.
+
+    A rodada leva so o que acabou de nascer, e nao o acervo de geradas
+    inteiro: eu cliquei para treinar estas, e nao para rever as de ontem.
+    """
+    pedidas = converter_valor(quantas)
+    pedidas = int(pedidas) if pedidas and 1 <= pedidas <= 30 else 5
+    escolhida = materia.strip() or None
+
+    resultado = servico.geradas.gerar(materia=escolhida, quantas=pedidas)
+
+    if resultado.get("erro"):
+        return RedirectResponse(
+            f"/geradas?recado={resultado['erro'].replace(' ', '_')}",
+            status_code=303,
+        )
+
+    novas = resultado.get("impressoes") or []
+    rodada = servico.geradas.criar_simulado(
+        quantidade=len(novas), impressoes=novas
+    ) if novas else None
+
+    if rodada is None:
+        return RedirectResponse("/geradas?recado=nada", status_code=303)
+    return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
+
+
+@app.post("/geradas/treinar")
+def geradas_treinar(materia: str = Form(""), quantidade: str = Form("5")):
+    """Uma rodada com o que ja foi gerado antes. Nao gasta nada."""
+    quantas = converter_valor(quantidade)
+    quantas = int(quantas) if quantas and 1 <= quantas <= 30 else 5
+
+    rodada = servico.geradas.criar_simulado(
+        quantidade=quantas, materia=materia.strip() or None
+    )
+    if rodada is None:
+        return RedirectResponse("/geradas", status_code=303)
+    return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
+
+
+@app.post("/geradas/{questao_id}/errada")
+def geradas_errada(questao_id: int, voltar: str = Form("/geradas")):
+    """Um clique: a questao sai do sorteio para sempre.
+
+    Volta para onde eu estava. No meio de uma rodada isso e a proxima questao,
+    porque as respostas da rejeitada saem junto - e a rodada anda.
+    """
+    servico.geradas.rejeitar(questao_id)
+    destino = voltar if voltar.startswith("/") else "/geradas"
+    if destino == "/geradas":
+        destino = "/geradas?recado=errada"
+    return RedirectResponse(destino, status_code=303)
 
 
 # --- previsao de abertura (fase 6) ------------------------------------------

@@ -33,12 +33,16 @@
 {% endmacro %}
 
 
-{# As sub-abas de dentro de Estudar. Macetes e Simulado continuam sendo duas
-   paginas: o que mudou e que agora elas sao duas faces da mesma secao, em vez
-   de dois links soltos no meio dos filtros de concurso. #}
+{# As sub-abas de dentro de Estudar. Tres paginas da mesma secao, em vez de
+   links soltos no meio dos filtros de concurso.
+
+   "Gerar questoes" fica ao lado de Simulado, e nao dentro dele, porque as duas
+   coisas nao sao a mesma: o Simulado responde questao que a banca cobrou, e o
+   Gerar escreve questao para treinar. A rodada, essa sim, e a mesma tela. #}
 {% macro abas_de_estudar(ativa='') %}
 <div class="subabas">
   <a class="{{ 'ativo' if ativa == 'macetes' }}" href="/macetes">Macetes</a>
   <a class="{{ 'ativo' if ativa == 'simulado' }}" href="/simulado">Simulado</a>
+  <a class="{{ 'ativo' if ativa == 'geradas' }}" href="/geradas">Gerar questões</a>
 </div>
 {% endmacro %}

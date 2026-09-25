@@ -13,6 +13,7 @@
       --certo:#047857; --certo-fraco:#d3f2e4;
       --errado:#be123c; --errado-fraco:#ffe4e9;
       --aviso:#b45309; --aviso-fraco:#fdeed3;
+      --ia:#7c3aed; --ia-fraco:#efe8ff;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -21,6 +22,7 @@
         --certo:#4ade80; --certo-fraco:#10291d;
         --errado:#fb7185; --errado-fraco:#2c1219;
         --aviso:#fbbf24; --aviso-fraco:#2e2310;
+        --ia:#c4b5fd; --ia-fraco:#241a3d;
       }
     }
 
@@ -106,6 +108,23 @@
     .acoes a.principal{background:var(--azul);color:#fff;border-color:transparent}
 
     .vazio{text-align:center;color:var(--suave);padding:2rem 1rem}
+
+    /* ----------------------------------------------- questao gerada ---- */
+    /* O selo fica ACIMA do enunciado, e nao no rodape: eu preciso saber que
+       a questao e de IA antes de ler, e nao depois de responder. */
+    .selo-ia{border-left:3px solid var(--ia);background:var(--ia-fraco);
+      border-radius:10px;padding:.7rem .9rem;margin-bottom:.9rem;font-size:.84rem}
+    .selo-ia .titulo{font-weight:700;color:var(--ia);display:block}
+    .selo-ia .linha{margin:.25rem 0 0;color:var(--suave)}
+    .selo-ia a{color:var(--azul)}
+    .selo-ia form{display:inline;margin-top:.5rem}
+    .selo-ia button.errada{background:transparent;color:var(--errado);
+      border:1px solid var(--errado);padding:.3rem .7rem;font-size:.8rem;
+      border-radius:999px;margin-top:.5rem}
+    .revisao .item.de-ia{border-left-color:var(--ia)}
+    .marca-ia{display:inline-block;font-size:.72rem;padding:.1rem .5rem;
+      border-radius:999px;background:var(--ia-fraco);color:var(--ia);
+      font-weight:700;margin-bottom:.35rem}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -141,6 +160,10 @@
       {% endif %}
       <p class="subtitulo">
         Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
+      </p>
+    {% elif simulado and simulado.filtros.get('geradas') %}
+      <p class="subtitulo">
+        Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra
       </p>
     {% else %}
       <p class="subtitulo">Questões reais, tiradas das provas do acervo</p>
@@ -199,6 +222,30 @@
       </div>
     {% endif %}
 
+    {# O segundo numero, e nunca somado ao primeiro: acertar uma variacao que
+       a IA escreveu nao e a mesma coisa que acertar o que a banca cobrou. #}
+    {% if desempenho_das_geradas %}
+      <div class="caixa" style="margin-top:1rem">
+        <h2 style="font-size:1rem;margin:0 0 .2rem">
+          <span class="marca-ia">IA</span> Nas questões geradas
+        </h2>
+        <p class="dica" style="margin:0 0 .8rem">
+          Número à parte, de propósito. Isto é treino, e não medida do que a
+          FEPESE cobra.
+        </p>
+        <table>
+          <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Feitas</th></tr>
+          {% for d in desempenho_das_geradas %}
+            <tr>
+              <td>{{ d.materia }}</td>
+              <td class="n">{{ '%.0f'|format(d.porcentagem) }}%</td>
+              <td class="n">{{ d.respondidas }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    {% endif %}
+
   {# ------------------------------------------------------ questao ------ #}
   {% elif questao %}
     <div class="andamento">
@@ -210,6 +257,35 @@
     </div>
 
     <div class="caixa">
+      {% if de_ia %}
+        <div class="selo-ia">
+          <span class="titulo">Questão criada por IA</span>
+          {% if origem %}
+            <p class="linha">
+              Variação da questão {{ origem.numero }} de
+              {{ origem.banca }} {{ origem.ano }}{% if origem.cargo %},
+              {{ origem.cargo }}{% endif %} — aquela tem gabarito oficial
+              conferido; esta não.
+            </p>
+          {% else %}
+            <p class="linha">
+              Escrita do zero, sem questão real embaixo. Confira com cuidado.
+            </p>
+          {% endif %}
+          {% if questao.artigo %}
+            <p class="linha">
+              Diz se apoiar em <b>{{ questao.artigo }}</b>{% if lei %} —
+              <a href="{{ lei.url }}" target="_blank" rel="noopener">ler a lei</a>{% endif %}
+            </p>
+          {% else %}
+            <p class="linha">A IA não soube dizer em que artigo se apoia.</p>
+          {% endif %}
+          <form method="post" action="/geradas/{{ questao.id }}/errada">
+            <input type="hidden" name="voltar" value="/simulado/{{ simulado.id }}">
+            <button class="errada" type="submit">Essa questão está errada</button>
+          </form>
+        </div>
+      {% endif %}
       <span class="materia">{{ questao.materia or 'sem materia' }}</span>
       <p class="enunciado">{{ questao.enunciado }}</p>
 
@@ -226,10 +302,17 @@
         {% endfor %}
       </div>
 
-      <p class="fonte">
-        {{ questao.banca }} &middot; {{ questao.municipio or questao.orgao }}
-        {{ questao.ano }}{% if questao.cargo %} &middot; {{ questao.cargo }}{% endif %}
-      </p>
+      {% if de_ia %}
+        <p class="fonte">
+          Modelo {{ questao.modelo or 'não registrado' }} &middot; esta questão
+          não vale como prova de nada: se estiver errada, marque acima.
+        </p>
+      {% else %}
+        <p class="fonte">
+          {{ questao.banca }} &middot; {{ questao.municipio or questao.orgao }}
+          {{ questao.ano }}{% if questao.cargo %} &middot; {{ questao.cargo }}{% endif %}
+        </p>
+      {% endif %}
     </div>
 
   {# ----------------------------------------------------- resultado ----- #}
@@ -256,7 +339,15 @@
 
     <div class="revisao">
       {% for item in revisao %}
-        <div class="item {{ 'acertei' if item.acertou }}">
+        <div class="item {{ 'acertei' if item.acertou }} {{ 'de-ia' if item.gerada }}">
+          {% if item.gerada %}
+            <span class="marca-ia">criada por IA</span>
+            {% if item.artigo %}
+              <p class="linha" style="font-size:.78rem;color:var(--suave);margin:0 0 .35rem">
+                diz se apoiar em {{ item.artigo }}
+              </p>
+            {% endif %}
+          {% endif %}
           <p class="pergunta">{{ item.enunciado }}</p>
           {% if not item.acertou %}
             <p class="linha marquei">
@@ -271,7 +362,12 @@
     </div>
 
     <div class="acoes">
-      <a class="principal" href="/simulado">Fazer outro</a>
+      {% if de_ia %}
+        <a class="principal" href="/geradas">Gerar mais</a>
+        <a href="/simulado">Simulado com questões reais</a>
+      {% else %}
+        <a class="principal" href="/simulado">Fazer outro</a>
+      {% endif %}
       <a href="/">Voltar ao meu foco</a>
     </div>
   {% endif %}

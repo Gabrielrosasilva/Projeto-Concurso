@@ -972,3 +972,115 @@ copiar um texto que a proxima edicao reescreve.
 - O edital escreve a **LC 529** como de "17 de dezembro de 2011"; a ALESC
   publica a mesma LC 529 como de 17 de janeiro. O numero, o ano e o texto do
   Regimento Interno conferem - um dos dois errou o mes, e a nota diz isso.
+
+## Etapa 15: questao gerada pela IA, para treinar
+
+O acervo tem 8.433 questoes reais, e as do meu cargo sao 152 com gabarito
+conferido. Uma prova tem 100. Treinar duas vezes nas mesmas 152 e reconhecer a
+pergunta de cor em vez de saber a regra - e foi dai que veio o pedido de gerar
+questao nova.
+
+A etapa inteira gira em volta de uma frase: **questao gerada serve para
+TREINAR, nunca para MEDIR o que a banca cobra.** O risco nao e a IA escrever
+uma questao ruim; e a questao gerada entrar na incidencia e eu passar a estudar
+pelo que ela inventou achando que e o que a FEPESE cobra.
+
+### A separacao nao e um filtro, e uma tabela
+
+A escolha estrutural da etapa foi `questoes_geradas` ao lado de `questoes`, e
+nao uma coluna `gerada` dentro das reais. As duas dariam no mesmo hoje. A
+diferenca aparece depois:
+
+- com a coluna, dez consultas precisam do filtro - incidencia, peso das
+  materias, macetes, "Onde estudar primeiro", cobertura, sorteio do simulado,
+  contagem do acervo, e mais. Todas passam a depender de alguem lembrar;
+- com a tabela separada, `select(QuestaoDeProva)` simplesmente nao alcanca a
+  outra. A decima primeira consulta, que ainda nao foi escrita, ja nasce certa.
+
+O preco disso foi uma coluna nova em `respostas_de_simulado`: `gerada`, dizendo
+em qual tabela o `questao_id` daquela linha existe. Ela nao e enfeite - as duas
+tabelas numeram a partir do 1, e sem ela responder a questao gerada 5 marcaria
+a questao real 5 como ja respondida. Seria um erro mudo: uma pergunta real que
+nunca mais aparece no sorteio, e ninguem descobre por que.
+
+Ha um teste chamado `test_questao_gerada_nao_entra_em_nada_que_meca`. E o mais
+importante do arquivo, e existe para estourar no dia em que alguem juntar as
+duas coisas.
+
+### O Planalto disse nao, e nao pelo motivo esperado
+
+O plano era baixar o texto do artigo e mandar junto no pedido, para reduzir o
+risco de gabarito errado. Conferido em 24/09/2026:
+
+- **`planalto.gov.br/robots.txt` responde 404.** Pela convencao, isso quer dizer
+  que nada esta proibido. O robots nao era o problema;
+- **o problema e o User-Agent.** Alternando as requisicoes varias vezes: com o
+  UA honesto do projeto ("radar-concursos/0.1 ...") a conexao e derrubada; com
+  "curl/8.4.0", derrubada; com um UA de Chrome, HTTP 200 e 307 KB de HTML.
+
+Ou seja: para baixar a lei o radar teria que se disfarcar de navegador. O
+CLAUDE.md manda identificar-se no User-Agent, sem excecao, entao a resposta e
+nao - e a decisao antiga de que o radar so aponta o link da lei sai
+confirmada, e nao contrariada.
+
+O que ficou no lugar e mais honesto do que parece. No modo variacao a ancora e
+o gabarito oficial da questao de origem, que a banca publicou; e em todo caso
+a IA declara em que ARTIGO se apoiou, e a tela mostra o artigo junto do link do
+`config/leis.yml`. A conferencia e minha, e leva 10 segundos - o que e bem
+diferente de confiar que o modelo acertou.
+
+### Variacao e o padrao; do zero e a excecao
+
+Variar parte de uma questao real com gabarito definitivo conferido e pede para
+mudar cenario e numeros mantendo a regra juridica. O estilo ja e o da banca de
+verdade, e a resposta esta presa a uma pergunta cujo gabarito existe.
+
+O modo do zero so entra quando nao ha questao real na materia. Ali as reais
+viram exemplo de ESTILO - e vao **sem gabarito**, de proposito: mandar a
+resposta junto convidaria o modelo a copiar o conteudo em vez do formato.
+
+A base e so a prova do meu cargo no meu estado, a mesma regra do Meu foco.
+Questao anulada fica fora: a banca desfez a pergunta depois dos recursos, e
+variar o que nao tem gabarito seria multiplicar o problema.
+
+### O gasto
+
+`claude-sonnet-5`, e nao o modelo barato do `radar assuntos`. La o erro do
+modelo fraco e um rotulo torto que eu vejo na tabela; aqui seria um gabarito
+errado que eu estudaria como certo. US$ 2,00 por milhao de tokens de entrada e
+US$ 10,00 de saida, com raciocinio adaptativo em esforco medio.
+
+Medido na simulacao, no acervo de verdade: **5 questoes custam US$ 0,06**
+(~R$ 0,31), em 2 chamadas. O teto padrao e US$ 0,90 - uns R$ 5 - conferido
+antes de cada chamada contra o gasto real que a API informou, como no
+`radar assuntos`. E por execucao, e nao por mes: o radar nao conta o mes, e
+fingir que conta seria pior que nao ter teto.
+
+### A simulacao mostra o pedido, e nao questao inventada
+
+`radar gerar` simula por padrao, e a simulacao imprime a **instrucao e o pedido
+exatos** que iriam para a API - nao um exemplo de questao gerada. A questao so
+existe depois da chamada; mostrar um "exemplo" seria apresentar texto inventado
+como se fosse saida do modelo. Foi a mesma linha que a apuracao da parte 0
+desta etapa cobrou, e ela vale para o codigo tambem.
+
+### A tela
+
+Terceira aba em Estudar, ao lado de Macetes e Simulado. Escolher a materia
+recarrega a pagina com o custo daquela escolha; so entao aparece o botao que
+gasta, com o preco escrito nele. Dois passos, sem JavaScript, porque um
+formulario so deixaria o botao de gastar com o preco de uma escolha anterior.
+
+Ao gerar, cai no `/simulado/<id>` de sempre - nao ha segunda tela de responder
+questao. O selo fica acima do enunciado, e nao no rodape: eu preciso saber que
+a questao e de IA antes de ler, e nao depois de responder.
+
+"Essa questao esta errada" marca a questao e apaga as **respostas** dela em
+todas as rodadas. A questao fica guardada de proposito - o erro acumulado e o
+que me diz depois se um assunto da errado toda vez, e ai o problema nao e a
+questao, e o pedido que eu mandei. As respostas saem porque uma questao que eu
+declarei errada nao pode continuar pesando no meu acerto, para nenhum lado.
+
+E o acerto aparece em dois numeros em toda tela que o mostra, sem nenhum lugar
+que os some. `desempenho_das_geradas` e funcao separada, e nao um parametro de
+`desempenho`: o parametro convidaria alguem a somar os dois um dia.

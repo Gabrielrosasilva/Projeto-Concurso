@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Gerar questões &middot; Radar de Concursos</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
+      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
+      --certo:#047857; --certo-fraco:#d3f2e4;
+      --errado:#be123c; --errado-fraco:#ffe4e9;
+      --aviso:#b45309; --aviso-fraco:#fdeed3;
+      --ia:#7c3aed; --ia-fraco:#efe8ff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
+        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
+        --certo:#4ade80; --certo-fraco:#10291d;
+        --errado:#fb7185; --errado-fraco:#2c1219;
+        --aviso:#fbbf24; --aviso-fraco:#2e2310;
+        --ia:#c4b5fd; --ia-fraco:#241a3d;
+      }
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
+         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+    .pagina{max-width:760px;margin:0 auto}
+
+    header{text-align:center;margin-bottom:1.5rem}
+    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
+    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
+
+    .caixa{background:var(--cartao);border:1px solid var(--borda);
+      border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+    h2{font-size:1rem;margin:0 0 .2rem}
+    .legenda{font-size:.82rem;color:var(--suave);margin:0 0 .9rem}
+
+    form.comecar{display:grid;gap:.75rem}
+    label{font-size:.85rem;color:var(--suave);display:grid;gap:.3rem}
+    select,input[type=number]{padding:.6rem .7rem;border:1px solid var(--borda);
+      border-radius:8px;background:var(--cartao);color:var(--texto);font-size:.95rem}
+    button{padding:.7rem 1.1rem;border:0;border-radius:8px;background:var(--azul);
+      color:#fff;font-size:.95rem;cursor:pointer}
+    button:hover{filter:brightness(1.08)}
+    button.gastar{background:var(--ia)}
+    button.calmo{background:transparent;color:var(--texto);
+      border:1px solid var(--borda)}
+    .dica{font-size:.82rem;color:var(--suave);margin:.2rem 0 0}
+    .acoes{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+
+    /* O aviso que a etapa inteira existe para sustentar. Ele fica no topo, e
+       nao no rodape, porque e a primeira coisa que eu preciso lembrar ao
+       abrir esta tela. */
+    .aviso-ia{border-left:3px solid var(--ia);background:var(--ia-fraco);
+      border-radius:10px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.88rem}
+    .aviso-ia b{color:var(--ia)}
+
+    .recado{border-left:3px solid var(--aviso);background:var(--aviso-fraco);
+      border-radius:10px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.88rem}
+    .recado code{background:transparent;font-weight:600}
+
+    .custo{font-size:.9rem;margin:.6rem 0 0}
+    .custo b{font-size:1.05rem}
+
+    table{width:100%;border-collapse:collapse;font-size:.9rem}
+    th,td{text-align:left;padding:.45rem .4rem;border-bottom:1px solid var(--borda)}
+    th{font-size:.78rem;color:var(--suave);font-weight:600}
+    td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+    .vazio{text-align:center;color:var(--suave);padding:2rem 1rem}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body>
+
+{% from "_topo.html" import barra %}
+{{ barra('estudar') }}
+
+<div class="pagina">
+
+{% from "_topo.html" import abas_de_estudar %}
+  {{ abas_de_estudar('geradas') }}
+
+  <header>
+    <h1>Gerar questões</h1>
+    <p class="subtitulo">Questões escritas por IA, para treinar</p>
+  </header>
+
+  <div class="aviso-ia">
+    <b>Isto treina, não mede.</b> Questão gerada nunca entra na incidência, no
+    peso das matérias, nos Macetes nem no “Onde estudar primeiro” — o que a
+    FEPESE cobra continua saindo só das provas de verdade. O seu acerto nelas
+    aparece como um número separado, nunca somado ao das reais.
+  </div>
+
+  {% if recado %}
+    <div class="recado">{{ recado }}</div>
+  {% endif %}
+
+  {# ---------------------------------------------------- gerar novas --- #}
+  <div class="caixa">
+    <h2>Gerar novas</h2>
+    <p class="legenda">
+      O padrão é <b>variar</b> uma questão real da FEPESE com gabarito
+      conferido: muda o cenário e os números, mantém a regra jurídica.
+    </p>
+
+    {% if not plano.pedidos %}
+      <div class="vazio">
+        <p>Não há questão real do meu cargo para variar.</p>
+        <p>Rode <code>radar provas</code> e depois <code>radar questoes</code>.</p>
+      </div>
+    {% else %}
+      {# Dois passos, e de proposito. O primeiro formulario so RECALCULA:
+         escolher a materia manda um GET e a pagina volta com o custo daquela
+         escolha. So entao aparece o botao que gasta, com o preco que eu
+         acabei de ler - e nao um preco que ficou de uma escolha anterior.
+         Sem JavaScript, como o resto do radar. #}
+      <form class="comecar" method="get" action="/geradas">
+        <label>
+          Matéria
+          <select name="materia">
+            <option value="">Qualquer matéria do meu cargo</option>
+            {% for nome, reais, ja in materias %}
+              <option value="{{ nome }}" {{ 'selected' if nome == materia }}>
+                {{ nome }} — {{ reais }} real(is){% if ja %}, {{ ja }} gerada(s){% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          Quantas questões
+          <input type="number" name="quantas" value="{{ quantas }}" min="1" max="30">
+        </label>
+        <div class="acoes">
+          <button class="calmo" type="submit">Ver o custo disto</button>
+        </div>
+      </form>
+
+      <p class="custo">
+        {{ plano.quantas }} questão(ões)
+        {%- if materia %} de {{ materia }}{% endif %}, por
+        <b>US$ {{ '%.2f'|format(plano.custo) }}</b>
+        <span class="dica">(~R$ {{ '%.2f'|format(plano.custo * 5.5) }}, a 5,50)
+          em {{ plano.pedidos|length }} chamada(s), modelo {{ modelo }}</span>
+      </p>
+
+      {% if plano.sem_base %}
+        <p class="dica">
+          <b>Modo do zero:</b> não há questão real desta matéria no acervo,
+          então as reais entram só como exemplo de estilo. Confira com mais
+          cuidado que o normal.
+        </p>
+      {% endif %}
+
+      <form method="post" action="/geradas/gerar">
+        <input type="hidden" name="materia" value="{{ materia or '' }}">
+        <input type="hidden" name="quantas" value="{{ quantas }}">
+        <button class="gastar" type="submit">
+          Gerar e treinar — gasta US$ {{ '%.2f'|format(plano.custo) }}
+        </button>
+      </form>
+
+      <p class="dica">
+        Para ver o pedido exato que vai para a IA antes de gastar, rode
+        <code>radar gerar --quantas {{ quantas }}</code> no terminal: ele simula
+        e imprime a instrução palavra por palavra.
+      </p>
+    {% endif %}
+  </div>
+
+  {# -------------------------------------------- treinar com as de casa - #}
+  <div class="caixa">
+    <h2>Treinar com as que já tenho</h2>
+    <p class="legenda">Não gasta nada: usa o que já foi gerado antes.</p>
+
+    {% if resumo.valem %}
+      <form class="comecar" method="post" action="/geradas/treinar">
+        <label>
+          Matéria
+          <select name="materia">
+            <option value="">Qualquer uma</option>
+            {% for nome, reais, ja in materias %}
+              {% if ja %}
+                <option value="{{ nome }}">{{ nome }} ({{ ja }})</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          Quantas questões
+          <input type="number" name="quantidade" value="5" min="1" max="30">
+        </label>
+        <div class="acoes">
+          <button class="calmo" type="submit">Treinar</button>
+        </div>
+      </form>
+      <p class="dica">
+        {{ resumo.valem }} questão(ões) gerada(s) valendo
+        {%- if resumo.rejeitadas %}, e {{ resumo.rejeitadas }} que eu marquei
+        como errada(s) e saíram do sorteio{% endif %}.
+      </p>
+    {% else %}
+      <div class="vazio">
+        <p>Ainda não há questão gerada.</p>
+      </div>
+    {% endif %}
+  </div>
+
+  {# ------------------------------------------------- os dois numeros --- #}
+  {% if desempenho_real or desempenho_gerado %}
+    <div class="caixa">
+      <h2>Como você vai, nos dois</h2>
+      <p class="legenda">
+        Dois números, sempre. Acertar uma variação que a IA escreveu não é a
+        mesma coisa que acertar o que a banca cobrou.
+      </p>
+      <table>
+        <tr>
+          <th>Matéria</th>
+          <th class="n">Nas reais</th>
+          <th class="n">Nas geradas</th>
+        </tr>
+        {% for materia in materias_com_acerto %}
+          <tr>
+            <td>{{ materia }}</td>
+            <td class="n">
+              {% set r = desempenho_real.get(materia) %}
+              {% if r %}{{ '%.0f'|format(r.porcentagem) }}%
+                <span class="dica">({{ r.respondidas }})</span>
+              {% else %}&mdash;{% endif %}
+            </td>
+            <td class="n">
+              {% set g = desempenho_gerado.get(materia) %}
+              {% if g %}{{ '%.0f'|format(g.porcentagem) }}%
+                <span class="dica">({{ g.respondidas }})</span>
+              {% else %}&mdash;{% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+
+</div>
+</body>
+</html>

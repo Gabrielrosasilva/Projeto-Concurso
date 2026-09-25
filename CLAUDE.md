@@ -97,23 +97,28 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 ## Estado atual: so a 7 esta parcial (detalhe no [historico](docs/historico.md))
 
 ```
-1 a 6  PRONTAS: tres fontes, anel, avisos, leitura da pagina e do edital,
-       calendario .ics, acervo, 8.433 questoes, simulado e previsao. So
-       `radar assuntos` custa: usa a API, e simula por padrao
-7      PARCIAL: aba Macetes com o costume da banca por contagem. Falta a
-       parte que so a IA faz: pegadinha especifica e macete de memorizacao
-8      PRONTA: tabela `eventos`, aba Acompanhando, "Meu foco" como home
-9 e 10 PRONTAS: treino pelas provas do cargo e acerto ao lado do peso; e
-       `servico.py` virou pacote, um arquivo por assunto
-11     PRONTA: auditoria de 23/09. So o robo manda mensagem
-14     PRONTAS E, C, D, F: aviso e estudo separados e a lista `de_olho`;
-       gabarito definitivo e `--so-alvo` pela lista do edital; "Onde estudar
-       primeiro", com os pontos a ganhar por ASSUNTO e o link para a lei
+1 a 6   PRONTAS: tres fontes, anel, avisos, leitura da pagina e do edital,
+e 8 a   calendario .ics, acervo, 8.433 questoes, simulado, previsao, linha do
+11      tempo, Acompanhando, "Meu foco" como home, treino pelas provas do
+        cargo, `servico` como pacote, robo avisando
+7       PARCIAL: Macetes tem o costume da banca por contagem. Falta o que so
+        a IA faz: pegadinha especifica e macete de memorizacao
+14      PRONTAS E, C, D, F: aviso e estudo separados e a `de_olho`; gabarito
+        definitivo e `--so-alvo` pela lista do edital; "Onde estudar primeiro"
+15      PRONTAS 2 e 3: `radar gerar` varia questao real da FEPESE para
+        TREINAR, e "Gerar questoes" responde no simulado de sempre
 ```
 
+Duas partes custam dinheiro e **simulam por padrao**: `assuntos` e `gerar`.
+**Pendencia aberta (etapa 15, parte 0):** as 93 classificacoes de
+`data/assuntos.json` **nao vieram de chamada a API** - nao ha chave no `.env`
+nem no ambiente. Foram escritas na sessao, escolhendo na lista do edital: os
+rotulos conferem, mas commits e docs as apresentam como saida paga. Decidir
+antes de construir mais em cima: declarar a origem, zerar, ou reverter.
+
 A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em
-`data/radar.db` (Postgres opcional via `RADAR_DATABASE_URL`); testes em
-`tests/`, todos com dado fixo.
+`data/radar.db` (Postgres opcional via `RADAR_DATABASE_URL`); testes com dado
+fixo em `tests/`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
@@ -128,8 +133,9 @@ Nao existe API oficial unica de concursos no Brasil.
 - **nao** raspe site cujos termos proibem (Qconcursos, por exemplo) nem
   conteudo atras de login ou paywall;
 - respeite `robots.txt` **sem excecao**, mantenha o atraso entre requisicoes e
-  identifique-se no User-Agent. A classe `Coletor` ja faz os tres. O DOM/SC, o
-  DOU e o Querido Diario estao fora por causa disso;
+  identifique-se no User-Agent - a classe `Coletor` ja faz os tres. O DOM/SC, o
+  DOU e o Querido Diario estao fora por isso, e o Planalto tambem: ele so
+  responde a quem se disfarca de navegador;
 - guarde sempre o link original: isto e um indice pessoal, nao uma copia do
   conteudo de ninguem.
 
@@ -140,6 +146,11 @@ Nao existe API oficial unica de concursos no Brasil.
 - **se uma decisao mudar, atualize `docs/decisoes.md`** na mesma etapa;
 - **uma coisa por vez.** Uma mudanca, testada, e so entao a proxima. Nao
   refatore o que nao faz parte do pedido;
+- **questao gerada por IA TREINA, nunca MEDE.** Vive em `questoes_geradas`,
+  fora de tudo que conta o que a banca cobra, e o acerto nela e um segundo
+  numero - nunca somado ao das reais;
+- **nunca apresente como saida da IA um texto que ela nao escreveu.** Simulacao
+  mostra o PEDIDO, e nao um exemplo de resposta;
 - todo coletor e todo classificador precisa de **teste com dado fixo**
   (fixture em arquivo), nunca teste que va a internet;
 - antes de dizer que terminou: `pytest -q` passando **e** o comando afetado
