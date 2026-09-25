@@ -325,13 +325,11 @@ def test_simulado_que_nao_existe_volta_para_o_inicio(cliente):
 
 
 def test_o_radar_tem_link_para_o_simulado(cliente):
-    """O simulado saiu da barra de filtros de concurso e virou uma das duas
-    faces de Estudar. O caminho ficou mais longo por um clique, e mais claro:
-    Macetes e Simulado sao a mesma tarefa em dois passos."""
+    """Estudar abre direto no Simulado: e treinar. Os Macetes foram para a
+    Revisao, e a barra leva a eles de qualquer pagina."""
     _semear(_questao(1))
 
     assert 'href="/estudar"' in cliente.get("/concursos").text
     assert cliente.get("/estudar", follow_redirects=False).headers["location"] == (
-        "/macetes"
+        "/simulado"
     )
-    assert 'href="/simulado"' in cliente.get("/macetes").text

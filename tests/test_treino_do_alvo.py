@@ -269,7 +269,7 @@ def test_sem_questao_do_cargo_o_botao_leva_para_o_simulado_comum(cliente):
 def test_a_home_diz_de_onde_a_proxima_rodada_sai(cliente):
     _semear(_questao(1), _questao(50, cargo="Merendeira"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "das provas do cargo" in texto
     assert "1 da mesma banca nas mesmas matérias" in texto
@@ -279,7 +279,7 @@ def test_a_home_avisa_quando_as_provas_do_cargo_acabaram(cliente):
     _semear(_questao(1), _questao(50, cargo="Merendeira"))
     _responder_tudo(servico.criar_simulado_do_alvo(quantidade=1).id)
 
-    assert "as provas do cargo acabaram" in cliente.get("/").text
+    assert "as provas do cargo acabaram" in cliente.get("/analises").text
 
 
 def test_a_rodada_diz_de_onde_as_questoes_vieram(cliente):
@@ -312,7 +312,7 @@ def test_caderno_sem_gabarito_nao_promete_rodada(cliente):
     simulado comum."""
     _semear(_questao(1, resposta=None))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
     assert "Treinar 20 questões" not in texto      # o botao, nao o titulo
     assert "ja respondi todas" not in texto
     assert "Nenhuma questão do cargo no acervo ainda" in texto

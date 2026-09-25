@@ -97,9 +97,11 @@
 <body>
 
 {% from "_topo.html" import barra %}
-{{ barra('acompanhando') }}
+{{ barra('concursos') }}
 
 <main>
+  {% from "_topo.html" import abas_de_concursos %}
+  {{ abas_de_concursos('acompanhando') }}
   <h1>Acompanhando</h1>
   <p class="sub">
     Os concursos que eu marquei com a estrela, e o que mudou em cada um.

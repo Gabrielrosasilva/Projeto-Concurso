@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ request.query_params.get('tema', '') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Meu foco &middot; Radar de Concursos</title>
+  {# A home. Criterio de aceite da especificacao: cabe numa tela de notebook
+     sem rolar, e do abrir ao responder a primeira questao sao 2 cliques. Por
+     isso tudo aqui e compacto - o detalhe mora em Analises. #}
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .home{max-width:1180px;margin:0 auto;padding:var(--esp-4) var(--esp-4) var(--esp-5)}
+    .home h1{margin:0;font-size:var(--tam-lg);letter-spacing:-.01em}
+    .home .sub{margin:0 0 var(--esp-3);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+
+    .blocos{display:grid;gap:var(--esp-3);grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.blocos{grid-template-columns:1fr}}
+    .bloco-home{display:flex;flex-direction:column;gap:var(--esp-2);padding:var(--esp-4)}
+    .bloco-home h2{margin:0;font-size:var(--tam-md);display:flex;align-items:center;gap:var(--esp-2)}
+    .bloco-home .rodape{margin-top:auto;display:flex;flex-direction:column;gap:var(--esp-2)}
+    .bloco-home .rodape .ds-botao{text-align:center}
+    .miudo{font-size:var(--tam-xs);color:var(--cor-texto-suave);margin:0}
+
+    .status{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
+    .etiqueta{font-size:var(--tam-xs);font-weight:var(--peso-forte);text-transform:uppercase;
+      letter-spacing:.04em;padding:.15rem .55rem;border-radius:var(--raio-pill)}
+    .etiqueta.aberto{background:var(--selo-calculado-fundo);color:var(--selo-calculado)}
+    .etiqueta.fechado{background:var(--cor-superficie-2);color:var(--cor-texto-suave);
+      border:1px solid var(--cor-borda)}
+    .linhas{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--esp-1) var(--esp-3);
+      font-size:var(--tam-sm)}
+    .linhas dt{color:var(--cor-texto-suave)}
+    .linhas dd{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+    .prioridades{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-2)}
+    .prioridades li{display:grid;gap:2px}
+    .prioridades .nome{font-weight:var(--peso-medio);font-size:var(--tam-sm)}
+    .prioridades .porque{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .trilha{height:6px;border-radius:3px;background:var(--cor-borda);overflow:hidden}
+    .trilha span{display:block;height:100%;background:var(--cor-acao)}
+    .trilha.nao-treinada span{background:var(--selo-automatico)}
+
+    .numero-grande{font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1;
+      font-variant-numeric:tabular-nums}
+    .fracas{margin:0;padding-left:var(--esp-4);font-size:var(--tam-sm)}
+    .convite{font-size:var(--tam-sm);margin:0}
+
+    .faixas{display:grid;gap:var(--esp-2);margin-top:var(--esp-3)}
+    .faixa{display:flex;align-items:center;gap:var(--esp-3);flex-wrap:wrap;
+      padding:var(--esp-2) var(--esp-4);font-size:var(--tam-sm)}
+    .faixa .rotulo{font-weight:var(--peso-medio);white-space:nowrap}
+    .faixa .texto{min-width:0;flex:1 1 300px;color:var(--cor-texto-suave)}
+    .faixa .texto b{color:var(--cor-texto)}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo %}
+{{ barra('foco') }}
+
+{% set p = h.painel %}
+<main class="home">
+  <h1>Meu foco</h1>
+  <p class="sub">O que estudar hoje, e por quê.</p>
+
+  {% if not p.configurado %}
+    <p class="ds-nota">Nenhum alvo principal em <code>config/alvo.yml</code>: a home inteira sai de lá.</p>
+  {% else %}
+
+  <div class="blocos">
+
+    {# ---------------------------------------------- 1. o alvo ---------- #}
+    <section class="ds-cartao bloco-home">
+      <h2>🎯 {{ p.nome_do_alvo }}</h2>
+      <div class="status">
+        {% if p.aberto %}
+          <span class="etiqueta aberto">Edital aberto</span>
+          <span class="ds-pequeno">
+            {% if p.aberto.inscricoes_ate %}inscrição até <b>{{ p.aberto.inscricoes_ate | data }}</b>
+            {% else %}prazo: não sei ainda{% endif %}
+          </span>
+        {% else %}
+          <span class="etiqueta fechado">Sem edital aberto</span>
+        {% endif %}
+      </div>
+      <dl class="linhas">
+        <dt>Último</dt>
+        <dd>
+          {% if p.ultima %}
+            <a href="{{ p.ultima.url }}" target="_blank" rel="noopener" title="{{ p.ultima.titulo }}">{{ p.ultima.ano or 'concurso' }}{% if p.arquivo_do_edital %} · edital{% endif %}</a>
+          {% else %}não sei ainda{% endif %}
+        </dd>
+        <dt>Banca</dt>
+        <dd>{% if p.banca.nome %}{{ p.banca.como_hipotese }}{% else %}não sei ainda{% endif %}</dd>
+        <dt>Provas</dt>
+        <dd>
+          {% if p.anos_das_provas %}{{ p.anos_das_provas | join(' e ') }} ·
+            {{ h.questoes_para_treinar }} questões
+            {% if p.anos_das_provas | length < 3 %}· <b>base pequena</b>{% endif %}
+          {% else %}nenhuma no acervo{% endif %}
+        </dd>
+      </dl>
+      {% if p.aberto_no_orgao %}
+        <p class="miudo">A secretaria tem inscrição aberta de <b>outro</b> cargo:
+          <a href="{{ p.aberto_no_orgao.url }}" target="_blank" rel="noopener">ver</a>.</p>
+      {% endif %}
+      <div class="rodape">
+        <a class="ds-link-acao" href="/analises">Edital contra as provas &rarr;</a>
+      </div>
+    </section>
+
+    {# --------------------------------------- 2. o que estudar agora ---- #}
+    <section class="ds-cartao bloco-home">
+      <h2>📚 O que estudar agora</h2>
+      {% if h.prioridades %}
+        <ol class="prioridades">
+          {% set maior = h.prioridades[0].valor or 1 %}
+          {% for x in h.prioridades %}
+            <li>
+              <span class="nome">{{ loop.index }}. {{ x.materia }}</span>
+              <span class="trilha {{ 'nao-treinada' if not x.treinada }}"><span style="width:{{ '%.0f'|format(x.valor / maior * 100) }}%"></span></span>
+              <span class="porque">{{ x.porque }}</span>
+            </li>
+          {% endfor %}
+        </ol>
+        <p class="miudo">
+          {{ selo('oficial', 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
+          {{ selo('calculado', 'meu acerto') }}. Com menos de 5 respostas, a
+          matéria conta como não treinada e vale o peso inteiro.
+        </p>
+      {% else %}
+        <p class="convite">Ainda não li o quadro do edital, e sem ele não há
+          peso para ordenar. Rode <code>radar provas</code>.</p>
+      {% endif %}
+      <div class="rodape">
+        {% if h.questoes_para_treinar %}
+          <form method="post" action="/foco/treinar">
+            <button class="ds-botao" type="submit" style="width:100%">Começar treino · {{ questoes_do_treino }} questões</button>
+          </form>
+        {% endif %}
+      </div>
+    </section>
+
+    {# ----------------------------------------------- 3. revisar -------- #}
+    <section class="ds-cartao bloco-home">
+      <h2>🧠 Revisar</h2>
+      {% if h.revisar.erradas %}
+        <div>
+          <span class="numero-grande">{{ h.revisar.erradas }}</span>
+          <span class="ds-pequeno">questão(ões) que errei na última vez</span>
+        </div>
+        {% if h.revisar.materias_fracas %}
+          <p class="miudo">Matérias fracas (abaixo de 60%):</p>
+          <ul class="fracas">
+            {% for nome, pct, n in h.revisar.materias_fracas[:3] %}
+              <li>{{ nome }} · {{ '%.0f'|format(pct) }}% em {{ n }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <p class="miudo">{{ selo('calculado') }} das minhas {{ h.revisar.respondidas }} respostas em questão real, sem anuladas.</p>
+        <div class="rodape">
+          <form method="post" action="/revisar">
+            <button class="ds-botao" type="submit" style="width:100%">Revisar agora</button>
+          </form>
+        </div>
+      {% else %}
+        {# Sem erro para revisar, o bloco convida - e diz o que vai aparecer. #}
+        <p class="convite">
+          {% if h.revisar.respondidas %}
+            Nenhum erro em aberto nas {{ h.revisar.respondidas }} questões que respondi.
+          {% else %}
+            Eu ainda não respondi nenhuma questão.
+          {% endif %}
+          Treine: cada questão que eu errar aparece aqui para revisar, e as
+          matérias abaixo de 60% viram alerta.
+        </p>
+        <div class="rodape">
+          <a class="ds-link-acao" href="/revisao">Enquanto isso, os macetes da banca &rarr;</a>
+        </div>
+      {% endif %}
+    </section>
+  </div>
+
+  {# ------------------------------------------------------- faixas ------ #}
+  <div class="faixas">
+    <div class="ds-cartao faixa">
+      <span class="rotulo">📊 Sua evolução</span>
+      <span class="texto">
+        {% set e = h.evolucao %}
+        {% if e.mensuravel %}
+          {{ selo('calculado') }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} questões reais.
+          {% if e.variacao is not none %}
+            Últimos 30 dias: <b>{{ '%+.0f'|format(e.variacao) }} pontos</b> em relação a antes.
+          {% else %}
+            Ainda não há 20 respostas de cada lado dos últimos 30 dias para comparar.
+          {% endif %}
+        {% else %}
+          {% if e.respondidas %}Respondi {{ e.respondidas }} questão(ões).{% endif %}
+          Responda mais <b>{{ e.faltam }}</b> para eu medir sua evolução.
+        {% endif %}
+      </span>
+    </div>
+    <div class="ds-cartao faixa">
+      <span class="rotulo">📋 Concurso</span>
+      <span class="texto">
+        {% if h.novidade %}
+          <b>{{ h.novidade.quando | data }}</b> · {{ h.novidade.tipo | replace('_', ' ') }}:
+          {% if h.novidade.link %}<a href="{{ h.novidade.link }}" target="_blank" rel="noopener">{{ h.novidade.texto }}</a>
+          {% else %}{{ h.novidade.texto }}{% endif %}
+        {% else %}
+          Nada novo sobre o concurso. A linha do tempo passa a registrar a
+          partir da próxima coleta - <code>radar atualizar</code>.
+        {% endif %}
+      </span>
+    </div>
+  </div>
+
+  {% endif %}
+</main>
+</body>
+</html>

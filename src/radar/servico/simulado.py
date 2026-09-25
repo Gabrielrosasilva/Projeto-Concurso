@@ -555,3 +555,136 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)
     return itens
+
+
+# --- os meus erros, e a minha evolucao (home, 25/09/2026) -------------------
+#
+# A home precisa de duas respostas: "o que eu tenho para revisar?" e "estou
+# melhorando?". As duas sao so sobre questao REAL - acertar o que a IA escreveu
+# nao entra, pela mesma regra do `desempenho`.
+
+# Abaixo disto de respostas, nao ha evolucao para medir: a tela convida a
+# responder, em vez de mostrar uma porcentagem de meia duzia de questoes.
+MINIMO_PARA_EVOLUCAO = 20
+
+# A janela da variacao. E a da especificacao: "a variacao nos ultimos 30 dias".
+DIAS_DA_EVOLUCAO = 30
+
+
+def _ultimas_respostas_reais(s) -> dict[int, RespostaDeSimulado]:
+    """{questao_id: a resposta mais recente que eu dei a ela}."""
+    respostas = s.scalars(
+        select(RespostaDeSimulado)
+        .where(RespostaDeSimulado.escolhida.is_not(None))
+        .where(RespostaDeSimulado.gerada.is_(False))
+        .order_by(RespostaDeSimulado.respondida_em)
+    )
+    return {r.questao_id: r for r in respostas}
+
+
+def questoes_erradas() -> list[int]:
+    """As questoes reais que eu errei na ULTIMA vez que respondi.
+
+    A ultima vez, e nao "alguma vez": questao que eu errei e depois acertei
+    ja foi revisada. E anulada fica de fora - a banca desfez a pergunta, e
+    revisar uma questao sem resposta certa nao ensina nada.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        ultimas = _ultimas_respostas_reais(s)
+        erradas = [qid for qid, r in ultimas.items() if r.acertou is False]
+        if not erradas:
+            return []
+        validas = set(s.scalars(
+            select(QuestaoDeProva.id)
+            .where(QuestaoDeProva.id.in_(erradas))
+            .where(QuestaoDeProva.anulada.is_not(True))
+        ))
+    return [qid for qid in erradas if qid in validas]
+
+
+def criar_simulado_de_erros(quantidade: int = QUANTIDADE_PADRAO) -> Simulado | None:
+    """Uma rodada so com o que eu errei. None quando nao ha erro para revisar."""
+    import random
+
+    ids = questoes_erradas()
+    if not ids:
+        return None
+    random.shuffle(ids)
+    ids = ids[:quantidade]
+
+    with sessao() as s:
+        simulado = Simulado(filtros={"quantidade": len(ids), "erros": True})
+        s.add(simulado)
+        s.flush()
+        for ordem, questao_id in enumerate(ids, start=1):
+            s.add(RespostaDeSimulado(
+                simulado_id=simulado.id, questao_id=questao_id, ordem=ordem
+            ))
+        return simulado
+
+
+@dataclass
+class Evolucao:
+    """Quanto eu acerto, e se isso mudou nos ultimos 30 dias."""
+
+    respondidas: int = 0
+    acertos: int = 0
+    #: Acerto nos ultimos 30 dias e antes deles. None quando a janela nao
+    #: tem resposta suficiente para dizer alguma coisa.
+    recente: float | None = None
+    anterior: float | None = None
+
+    @property
+    def porcentagem(self) -> float:
+        return (self.acertos / self.respondidas * 100) if self.respondidas else 0.0
+
+    @property
+    def mensuravel(self) -> bool:
+        return self.respondidas >= MINIMO_PARA_EVOLUCAO
+
+    @property
+    def faltam(self) -> int:
+        return max(0, MINIMO_PARA_EVOLUCAO - self.respondidas)
+
+    @property
+    def variacao(self) -> float | None:
+        if self.recente is None or self.anterior is None:
+            return None
+        return self.recente - self.anterior
+
+
+def evolucao() -> Evolucao:
+    """Acerto geral em questao real, e a variacao dos ultimos 30 dias.
+
+    Conta TODAS as respostas, e nao so a ultima de cada questao: a evolucao e
+    o meu historico, e errar e depois acertar a mesma questao e justamente o
+    que ela tem que mostrar. Cada metade da comparacao precisa do minimo de
+    respostas, senao a variacao e sorteio.
+    """
+    from datetime import timedelta
+
+    criar_tabelas()
+    with sessao() as s:
+        respostas = list(s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .where(RespostaDeSimulado.gerada.is_(False))
+        ))
+
+    resultado = Evolucao(
+        respondidas=len(respostas),
+        acertos=sum(1 for r in respostas if r.acertou),
+    )
+    corte = agora() - timedelta(days=DIAS_DA_EVOLUCAO)
+    recentes = [r for r in respostas if r.respondida_em and r.respondida_em >= corte]
+    antigas = [r for r in respostas if r.respondida_em and r.respondida_em < corte]
+
+    def taxa(lista):
+        if len(lista) < MINIMO_PARA_EVOLUCAO:
+            return None
+        return sum(1 for r in lista if r.acertou) / len(lista) * 100
+
+    resultado.recente = taxa(recentes)
+    resultado.anterior = taxa(antigas)
+    return resultado

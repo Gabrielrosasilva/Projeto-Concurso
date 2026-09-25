@@ -82,11 +82,14 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     contar_questoes_do_alvo,
     criar_simulado,
     criar_simulado_do_alvo,
+    criar_simulado_de_erros,
     desempenho,
     desempenho_das_geradas,
     materias_disponiveis,
     materias_universais,
     questao_atual,
+    questoes_erradas,
+    evolucao,
     responder,
     resumo_do_simulado,
     revisao,
@@ -101,6 +104,8 @@ from radar.servico import geradas       # noqa: F401 - usado pela CLI e pela web
 from radar.servico import manual        # noqa: F401 - usado pela CLI
 # A Central de Macetes: um cartao por materia. `servico.cartoes.cartoes()`.
 from radar.servico import cartoes       # noqa: F401 - usado pela web
+# A home: tres blocos cheios e duas faixas. `servico.inicio.montar()`.
+from radar.servico import inicio        # noqa: F401 - usado pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

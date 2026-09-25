@@ -1,48 +1,54 @@
 {# A barra de navegacao do topo, igual em todas as paginas.
 
-   Quatro destinos e um menu "Mais". A regra para decidir o que fica visivel:
-   o que eu abro todo dia fica na barra, e o que eu abro de vez em quando fica
-   no "Mais". Previsao e Calendario sao consulta ocasional.
+   Os seis destinos do sitemap da especificacao (docs/especificacao.md):
+
+     Meu foco  - a home: o alvo, o que estudar agora, o que revisar
+     Estudar   - treinar: Simulado e Gerar questoes
+     Revisao   - Macetes (e, quando existirem, pegadinhas e assuntos)
+     Analises  - o quadro do edital contra as provas, onde estudar primeiro
+     Concursos - a lista, Acompanhando, Calendario, Previsao
+     Mais      - fontes e evidencias, configuracoes
 
    Use assim, no topo do <body>:
 
        {% from "_topo.html" import barra %}
        {{ barra('concursos') }}
 
-   O parametro e qual item fica aceso: foco, concursos, acompanhando, estudar.
-   Pagina que nao e nenhum dos quatro passa string vazia. #}
+   O parametro e qual destino fica aceso: foco, estudar, revisao, analises,
+   concursos, mais. #}
 
 {% macro barra(ativo='') %}
 <nav class="topo-barra" aria-label="Navegacao principal">
   <a class="marca" href="/">Radar</a>
 
-  <a class="item {{ 'ativo' if ativo == 'foco' }}" href="/">Meu foco</a>
-  <a class="item {{ 'ativo' if ativo == 'concursos' }}" href="/concursos">Concursos</a>
-  <a class="item {{ 'ativo' if ativo == 'acompanhando' }}"
-     href="/acompanhando">Acompanhando</a>
-  <a class="item {{ 'ativo' if ativo == 'estudar' }}" href="/estudar">Estudar</a>
-
-  <details class="topo-mais">
-    <summary>Mais <span class="seta">&#9662;</span></summary>
-    <div class="opcoes">
-      <a href="/previsao">Previsão</a>
-      <a href="/calendario">Calendário</a>
-    </div>
-  </details>
+  <a class="item {{ 'ativo' if ativo == 'foco' }}" href="/">🎯 Meu foco</a>
+  <a class="item {{ 'ativo' if ativo == 'estudar' }}" href="/estudar">📚 Estudar</a>
+  <a class="item {{ 'ativo' if ativo == 'revisao' }}" href="/revisao">🧠 Revisão</a>
+  <a class="item {{ 'ativo' if ativo == 'analises' }}" href="/analises">📊 Análises</a>
+  <a class="item {{ 'ativo' if ativo == 'concursos' }}" href="/concursos">🏛 Concursos</a>
+  <a class="item {{ 'ativo' if ativo == 'mais' }}" href="/mais">⚙ Mais</a>
 </nav>
 {% endmacro %}
 
 
-{# As sub-abas de dentro de Estudar. Tres paginas da mesma secao, em vez de
-   links soltos no meio dos filtros de concurso.
-
-   "Gerar questoes" fica ao lado de Simulado, e nao dentro dele, porque as duas
-   coisas nao sao a mesma: o Simulado responde questao que a banca cobrou, e o
-   Gerar escreve questao para treinar. A rodada, essa sim, e a mesma tela. #}
+{# As sub-abas de Estudar. "Gerar questoes" fica ao lado de Simulado, e nao
+   dentro dele: o Simulado responde questao que a banca cobrou, e o Gerar
+   escreve questao para treinar. A rodada, essa sim, e a mesma tela. #}
 {% macro abas_de_estudar(ativa='') %}
 <div class="subabas">
-  <a class="{{ 'ativo' if ativa == 'macetes' }}" href="/macetes">Macetes</a>
   <a class="{{ 'ativo' if ativa == 'simulado' }}" href="/simulado">Simulado</a>
   <a class="{{ 'ativo' if ativa == 'geradas' }}" href="/geradas">Gerar questões</a>
+</div>
+{% endmacro %}
+
+
+{# As sub-abas de Concursos: a lista, os favoritos e as duas consultas que
+   antes moravam no menu "Mais". #}
+{% macro abas_de_concursos(ativa='') %}
+<div class="subabas">
+  <a class="{{ 'ativo' if ativa == 'concursos' }}" href="/concursos">Todos</a>
+  <a class="{{ 'ativo' if ativa == 'acompanhando' }}" href="/acompanhando">Acompanhando</a>
+  <a class="{{ 'ativo' if ativa == 'calendario' }}" href="/calendario">Calendário</a>
+  <a class="{{ 'ativo' if ativa == 'previsao' }}" href="/previsao">Previsão</a>
 </div>
 {% endmacro %}

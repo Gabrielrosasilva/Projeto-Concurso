@@ -612,11 +612,35 @@ def geradas_errada(questao_id: int, voltar: str = Form("/geradas")):
 
 @app.get("/", response_class=HTMLResponse)
 def meu_foco(request: Request):
-    """A tela que responde "o que esta acontecendo com o meu concurso?".
+    """A home: o alvo, o que estudar agora, o que revisar - e duas faixas.
 
-    E a home porque e a pergunta que eu faco todo dia. A lista de concursos
-    responde "o que existe?", que e outra coisa e vem depois.
+    Tres blocos cheios em vez dos cinco da especificacao: com pouco treino, a
+    evolucao e as novidades nasceriam vazias, e bloco vazio do tamanho de um
+    cheio e ruido. O detalhe do edital contra as provas foi para Analises.
     """
+    return templates.TemplateResponse(
+        request=request,
+        name="home.html",
+        context={
+            "h": servico.inicio.montar(),
+            "questoes_do_treino": foco_do_alvo.QUESTOES_DO_TREINO,
+        },
+    )
+
+
+@app.post("/revisar")
+def revisar_agora():
+    """[Revisar agora]: uma rodada so com o que eu errei na ultima vez."""
+    novo = servico.criar_simulado_de_erros()
+    if novo is None:
+        return RedirectResponse("/", status_code=303)
+    return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
+
+
+@app.get("/analises", response_class=HTMLResponse)
+def analises(request: Request):
+    """O que era a home ate a navegacao nova: o edital contra as provas, o
+    meu acerto por materia e onde estudar primeiro, com o detalhe inteiro."""
     painel = foco_do_alvo.montar()
     return templates.TemplateResponse(
         request=request,
@@ -686,12 +710,27 @@ def acompanhando(request: Request):
 
 @app.get("/estudar")
 def estudar():
-    """Estudar e uma secao com duas paginas; esta abre na primeira.
+    """Estudar e treinar: abre no Simulado. Macetes foi para a Revisao."""
+    return RedirectResponse("/simulado", status_code=303)
 
-    Macetes vem antes do Simulado de proposito: ver o que a banca cobra e o
-    passo que decide o que treinar depois.
-    """
+
+@app.get("/revisao")
+def revisao_secao():
+    """Revisao abre nos Macetes, a unica pagina dela por enquanto."""
     return RedirectResponse("/macetes", status_code=303)
+
+
+@app.get("/mais", response_class=HTMLResponse)
+def mais(request: Request):
+    """Fontes e evidencias: de onde vem cada dado, e onde mudar as regras."""
+    return templates.TemplateResponse(
+        request=request,
+        name="mais.html",
+        context={
+            "cobertura": servico.previsao.cobertura_do_historico(),
+            "leis_conferidas": leis.mudancas_conferidas(),
+        },
+    )
 
 
 @app.get("/previsao", response_class=HTMLResponse)

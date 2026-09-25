@@ -696,6 +696,19 @@ que nao seja de navegador** (testado alternando: o UA honesto do projeto e
 radar se disfarcar, e o CLAUDE.md manda identificar-se no User-Agent. Entao nao
 se baixa — e o radar continua so apontando o link da lei.
 
+#### A navegacao e a home
+
+A barra tem os seis destinos da especificacao: **Meu foco** (a home),
+**Estudar** (Simulado, Gerar questões), **Revisão** (Macetes), **Análises**
+(o edital contra as provas, onde estudar primeiro), **Concursos** (a lista,
+Acompanhando, Calendário, Previsão) e **Mais** (fontes e evidências).
+
+A home tem três blocos — o alvo, **o que estudar agora** com [Começar
+treino], e **o que revisar** com [Revisar agora] — e duas faixas finas,
+evolução e concurso. Bloco sem dado convida: abaixo de 20 respostas, a
+evolução diz quantas faltam. A prioridade é peso no edital × (1 − meu
+acerto), e matéria com menos de 5 respostas conta como não treinada.
+
 #### O design system
 
 As cores, o espaco e a letra moram em **`src/radar/web/static/design.css`**, e

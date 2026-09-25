@@ -131,7 +131,7 @@ def _concurso(**mudancas) -> Concurso:
 
 def test_banco_vazio_nao_quebra_a_tela(cliente):
     """Sem nenhum concurso do alvo, a tela abre e diz o que nao sabe."""
-    resposta = cliente.get("/")
+    resposta = cliente.get("/analises")
     assert resposta.status_code == 200
     assert "não sei ainda" in resposta.text
 
@@ -477,7 +477,7 @@ def test_o_cartao_aparece_na_home(cliente):
     with sessao() as s:
         s.add(_guarda())
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "De olho" in texto
     assert "Guarda Municipal de Florianopolis" in texto
@@ -614,8 +614,8 @@ def test_edital_fora_do_acervo_nao_inventa_quadro(banco_temporario, monkeypatch)
 # --- a tela -----------------------------------------------------------------
 
 def test_meu_foco_e_a_home(cliente):
-    assert cliente.get("/").status_code == 200
-    assert "Meu foco" in cliente.get("/").text
+    assert cliente.get("/analises").status_code == 200
+    assert "Meu foco" in cliente.get("/analises").text
 
 
 def test_a_tela_mostra_a_banca_como_hipotese(cliente):
@@ -624,7 +624,7 @@ def test_a_tela_mostra_a_banca_como_hipotese(cliente):
         for n in range(1, 4):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
     assert "hipótese: FEPESE" in texto
 
 
@@ -633,13 +633,13 @@ def test_o_botao_de_treino_aparece_quando_ha_questao(cliente):
         for n in range(1, 25):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
     assert f"Treinar {foco.QUESTOES_DO_TREINO} questões" in texto
     assert 'action="/foco/treinar"' in texto
 
 
 def test_sem_questao_o_botao_da_lugar_a_explicacao(cliente):
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
     assert "Nenhuma questão do cargo no acervo" in texto
     assert 'action="/foco/treinar"' not in texto
 
@@ -689,7 +689,7 @@ def test_sem_sinal_a_tela_diz_que_nao_sabe(cliente):
     with sessao() as s:
         s.add(_concurso())
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
     assert "Nada recente" in texto
 
 
@@ -823,7 +823,7 @@ def test_a_tabela_mostra_o_acerto_ao_lado_do_peso(cliente, com_quadro_do_edital)
         s.add(_concurso())
     _treinar("Direitos Humanos", acertos=2, erros=8)      # 20%
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "Meu acerto" in texto
     assert "20%" in texto
@@ -835,7 +835,7 @@ def test_a_materia_sem_treino_nao_aparece_como_zero(cliente, com_quadro_do_edita
     with sessao() as s:
         s.add(_concurso())
 
-    assert "não treinei" in cliente.get("/").text
+    assert "não treinei" in cliente.get("/analises").text
 
 
 def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
@@ -844,7 +844,7 @@ def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
     _treinar("Direitos Humanos", acertos=2, erros=8)      # 20%, 15 questoes
     _treinar("Língua Portuguesa", acertos=9, erros=1)     # 90%, 15 questoes
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "comece por aqui" in texto
     assert "<strong>Direitos Humanos</strong> é onde eu vou pior" in texto
@@ -854,7 +854,7 @@ def test_sem_treino_nenhum_a_tela_nao_aponta_materia(cliente, com_quadro_do_edit
     with sessao() as s:
         s.add(_concurso())
 
-    assert "comece por aqui" not in cliente.get("/").text
+    assert "comece por aqui" not in cliente.get("/analises").text
 
 
 # --- onde estudar primeiro --------------------------------------------------
@@ -898,7 +898,7 @@ def test_a_secao_mostra_o_assunto_e_quantas_questoes_ele_deve_valer(
         for n in range(7, 11):
             s.add(_com_assunto(n, "Lei de Execução Penal", "Faltas disciplinares"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "Onde estudar primeiro" in texto
     assert "Progressão de regime" in texto
@@ -920,7 +920,7 @@ def test_o_assunto_pequeno_em_que_eu_erro_passa_na_frente_do_grande(
     _treinar_assunto("Lei de Execução Penal", "Assunto grande", acertos=9, erros=1)
     _treinar_assunto("Lei de Execução Penal", "Assunto pequeno", acertos=0, erros=4)
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert texto.index("Assunto pequeno") < texto.index("Assunto grande")
     assert "pontos a ganhar" in texto
@@ -935,7 +935,7 @@ def test_o_assunto_nunca_treinado_nao_aparece_como_zero_por_cento(
         for n in range(1, 11):
             s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "ainda não respondi nenhuma no simulado" in texto
     assert "0% em 0" not in texto
@@ -954,7 +954,7 @@ def test_a_tela_separa_o_que_e_meu_do_que_e_reforco(cliente, com_quadro_do_edita
                 cargo="Merendeira", prova="https://fepese.test/outro-concurso.pdf",
             ))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "2 do meu cargo" in texto
     assert "8 de reforço" in texto
@@ -970,7 +970,7 @@ def test_o_assunto_de_direito_ganha_o_link_para_a_lei(cliente, com_quadro_do_edi
                 "(Estatuto do Servidor do Estado de Santa Catarina)",
             ))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "ler a lei" in texto
     assert "leis.alesc.sc.gov.br" in texto
@@ -986,7 +986,7 @@ def test_sem_assunto_nenhum_a_tela_diz_o_que_falta_rodar(
         for n in range(1, 11):
             s.add(_com_assunto(n, "Lei de Execução Penal", None))
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "radar assuntos --so-alvo" in texto
     assert "pontos a ganhar" not in texto
@@ -1019,7 +1019,7 @@ def test_materia_sem_assunto_nao_some_do_grafico_calada(
     assert "Lei de Execução Penal" in mudas
     assert "Língua Portuguesa" not in mudas
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
     assert "Estas matérias caem na prova" in texto
     assert "não sei ainda" in texto
 
@@ -1034,7 +1034,7 @@ def test_a_materia_muda_aparece_com_o_peso_dela(cliente, com_quadro_do_edital):
     pesos = [m.questoes for m in foco.montar().materias_sem_assunto]
 
     assert pesos == sorted(pesos, reverse=True)
-    assert "questões no edital" in cliente.get("/").text
+    assert "questões no edital" in cliente.get("/analises").text
 
 
 def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital):
@@ -1049,7 +1049,7 @@ def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital)
         "Lei de Execução Penal", "Progressão de regime", acertos=4, erros=6
     )
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "deve valer 10 questões e eu acerto 40%" in texto
     assert "6 pontos a ganhar" in texto
@@ -1118,7 +1118,7 @@ def test_as_anuladas_vem_do_banco(banco_temporario, com_quadro_do_edital):
 def test_a_tabela_diz_de_onde_vem_cada_coluna(cliente, com_quadro_do_edital):
     _prova_com_anuladas(anuladas=2, validas=3)
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "ds-selo--oficial" in texto          # edital
     assert "ds-selo--calculado" in texto        # provas e meu acerto
@@ -1131,7 +1131,7 @@ def test_nada_de_numero_escrito_a_mao(cliente, com_quadro_do_edital):
     so no banco, a tela tem que dizer uma."""
     _prova_com_anuladas(anuladas=0, validas=3)
 
-    texto = cliente.get("/").text
+    texto = cliente.get("/analises").text
 
     assert "duas provas" not in texto
     assert "Prova 2019:" in texto               # uma prova, e a tela diz qual

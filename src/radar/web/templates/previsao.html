@@ -71,9 +71,11 @@
 
 {% from "_topo.html" import barra %}
 {% from "_componentes.html" import selo %}
-{{ barra('') }}
+{{ barra('concursos') }}
 
 <div class="pagina">
+  {% from "_topo.html" import abas_de_concursos %}
+  {{ abas_de_concursos('previsao') }}
 
 
 

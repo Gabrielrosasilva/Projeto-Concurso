@@ -1353,3 +1353,34 @@ ja levam o link do concurso). O que estava sem fonte, e o que virou:
 Como as telas antigas ainda nao migraram para o design system, elas incluem
 o `design.css` so pelo selo: as regras que mudam a pagina inteira passaram a
 valer apenas com `<body class="ds">`.
+
+## Navegacao nova e a home de 3 blocos (fase 2 da especificacao, 25/09/2026)
+
+- **os seis destinos do sitemap na barra**: Meu foco (`/`), Estudar
+  (`/estudar` -> Simulado e Gerar questoes), Revisao (`/revisao` ->
+  Macetes), Analises (`/analises`), Concursos (a lista, Acompanhando,
+  Calendario e Previsao em sub-abas) e Mais (`/mais`: fontes e evidencias, e
+  onde moram as regras). O menu "Mais" antigo, com Previsao e Calendario,
+  acabou: os dois estao em Concursos, como a especificacao manda;
+- **o antigo Meu foco virou Analises**, inteiro: quadro do edital contra as
+  provas, acerto por materia, onde estudar primeiro. A home ficou com o
+  resumo;
+- **3 blocos cheios e 2 faixas, e nao 5 blocos.** Com pouco treino, evolucao
+  e novidades nasciam vazias, e bloco vazio do tamanho de um cheio e ruido.
+  Blocos: o alvo, o que estudar agora (com [Comecar treino]) e o que revisar.
+  Faixas: evolucao e concurso;
+- **bloco sem dado convida a acao, nunca mostra zero**: abaixo de 20
+  respostas a evolucao diz "responda mais N"; sem erro, o Revisar diz o que
+  vai aparecer ali e aponta os macetes;
+- **a prioridade e a formula da especificacao**: peso da materia no edital x
+  (1 - meu acerto). Com menos de 5 respostas o acerto e desconhecido e a
+  materia vale o peso inteiro (o maximo que poderia valer). O **fator de
+  tempo e 1**: ele depende de revisao espacada, que e a ultima fase, e a
+  tela nao finge que ele existe. Empate: a de mais questoes, depois a ordem
+  alfabetica;
+- **[Revisar agora] monta uma rodada so com os erros** - a questao real cuja
+  ULTIMA resposta foi errada, sem anulada. Errou e depois acertou, sai. E a
+  versao minima do "Meus erros" da especificacao, feita porque o botao sem
+  ela nao levaria a lugar nenhum;
+- a home cabe em 1366x680 (notebook com a barra do navegador), medido em
+  captura do Edge.

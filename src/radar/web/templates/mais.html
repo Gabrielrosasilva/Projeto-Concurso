@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ request.query_params.get('tema', '') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Mais &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    table{width:100%;border-collapse:collapse;font-size:var(--tam-sm)}
+    th,td{text-align:left;padding:var(--esp-2);border-bottom:1px solid var(--cor-borda)}
+    th{font-size:var(--tam-xs);color:var(--cor-texto-suave);font-weight:var(--peso-medio)}
+    td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+    tr:last-child td{border-bottom:0}
+    .lista{margin:0;padding-left:var(--esp-4);font-size:var(--tam-sm);display:grid;gap:var(--esp-1)}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo, legenda_dos_selos %}
+{{ barra('mais') }}
+
+<main class="ds-pagina">
+  <header class="ds-cabeca">
+    <h1>Mais</h1>
+    <p>Fontes e evidências, e onde mudar as regras do radar.</p>
+  </header>
+
+  <section class="ds-secao">
+    <h2>Fontes e evidências</h2>
+    <p>De onde vem cada dado. Os selos que aparecem nas telas querem dizer:</p>
+  </section>
+  {{ legenda_dos_selos() }}
+
+  <div class="ds-grade">
+    <article class="ds-cartao">
+      <div class="ds-cartao__cabeca">
+        <h3 class="ds-cartao__titulo">Concursos coletados</h3>
+        {{ selo('calculado') }}
+      </div>
+      <p class="ds-cartao__meta">Contado no banco, por fonte.</p>
+      {% if cobertura %}
+        <table>
+          <tr><th>Fonte</th><th class="n">Anos</th><th class="n">Concursos</th></tr>
+          {% for c in cobertura %}
+            <tr>
+              <td>{{ c.fonte }}</td>
+              <td class="n">{{ c.primeiro_ano }}{% if c.ultimo_ano != c.primeiro_ano %}–{{ c.ultimo_ano }}{% endif %}</td>
+              <td class="n">{{ c.concursos }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p class="ds-nota">Nada coletado ainda. Rode <code>radar coletar</code>.</p>
+      {% endif %}
+    </article>
+
+    <article class="ds-cartao">
+      <div class="ds-cartao__cabeca">
+        <h3 class="ds-cartao__titulo">Provas conferidas</h3>
+        {{ selo('oficial') }}
+      </div>
+      <p class="ds-cartao__meta">
+        A contagem por matéria, o gabarito definitivo e as anuladas de cada
+        prova do alvo são conferidos contra os PDFs oficiais por
+        <code>radar auditar</code>, que escreve <code>docs/auditoria.md</code>.
+      </p>
+      <p class="ds-nota" style="margin:0">
+        A lista de leis alteradas depois das provas
+        {% if leis_conferidas %}está em <code>config/leis.yml</code>.
+        {% else %}<b>ainda não foi conferida</b>: sem ela, nenhuma questão ganha o
+        aviso "⚠ A lei mudou depois desta prova".{% endif %}
+      </p>
+    </article>
+  </div>
+
+  <section class="ds-secao">
+    <h2>Configurações</h2>
+    <p>O radar não tem tela de configuração: as regras moram em arquivo, e mudar o arquivo muda o radar.</p>
+  </section>
+  <div class="ds-cartao">
+    <ul class="lista">
+      <li><code>config/alvo.yml</code> - o alvo principal, os secundários, o reforço e o "de olho".</li>
+      <li><code>config/regioes.yml</code> - os três anéis de distância.</li>
+      <li><code>config/leis.yml</code> - o link oficial de cada lei, as matérias sem lei e as leis alteradas.</li>
+      <li><code>config/perfil.yml</code> - a minha formação, para a elegibilidade.</li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>

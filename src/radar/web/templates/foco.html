@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <title>Meu foco &middot; Radar de Concursos</title>
+  <title>Análises &middot; Radar de Concursos</title>
   {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
      design system, e o body sem class="ds" nao muda de cara. #}
   <link rel="stylesheet" href="/estatico/design.css">
@@ -182,11 +182,12 @@
 
 {% from "_topo.html" import barra %}
 {% from "_componentes.html" import selo %}
-{{ barra('foco') }}
+{{ barra('analises') }}
 
 <main>
-  <h1>{{ p.nome_do_alvo }}</h1>
-  <p class="sub">O que está acontecendo com o concurso que eu espero.</p>
+  <h1>Análises · {{ p.nome_do_alvo }}</h1>
+  <p class="sub">O edital contra as provas, e por onde estudar. O resumo do
+    dia está no <a href="/">Meu foco</a>.</p>
 
   {% if not p.configurado %}
     <section>

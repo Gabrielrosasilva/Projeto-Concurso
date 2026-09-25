@@ -162,36 +162,37 @@ def test_os_grids_declaram_coluna_que_encolhe(cliente):
     assert texto.count("grid-template-columns:minmax(0,1fr)") >= 1
 
 
-# --- a navegacao do topo (etapa 6) ------------------------------------------
-# Quatro destinos fixos e um menu "Mais". A barra e a mesma em toda pagina:
-# antes cada uma tinha so um "voltar ao radar", e nao dava para pular de
-# Macetes para Calendario sem passar pela home.
+# --- a navegacao do topo ---------------------------------------------------
+# Os seis destinos do sitemap da especificacao. A barra e a mesma em toda
+# pagina: antes cada uma tinha so um "voltar ao radar", e nao dava para pular
+# de Macetes para Calendario sem passar pela home.
 
-def test_a_barra_do_topo_tem_os_quatro_destinos(cliente):
+def test_a_barra_do_topo_tem_os_seis_destinos(cliente):
     texto = cliente.get("/concursos").text
-    for rotulo in ("Meu foco", "Concursos", "Acompanhando", "Estudar"):
+    for rotulo, destino in (("Meu foco", "/"), ("Estudar", "/estudar"),
+                            ("Revisão", "/revisao"), ("Análises", "/analises"),
+                            ("Concursos", "/concursos"), ("Mais", "/mais")):
         assert rotulo in texto, rotulo
+        assert f'href="{destino}"' in texto, destino
 
 
-def test_previsao_e_calendario_ficam_no_menu_mais(cliente):
-    """Consulta ocasional nao ocupa lugar na barra."""
-    texto = cliente.get("/concursos").text
-    assert 'href="/previsao"' in texto
-    assert 'href="/calendario"' in texto
-    assert "topo-mais" in texto          # os dois estao dentro do <details>
+def test_previsao_e_calendario_ficam_dentro_de_concursos(cliente):
+    """Como a especificacao manda: Concursos junta a lista, Acompanhando,
+    Calendario e Previsao, em sub-abas."""
+    texto = cliente.get("/previsao").text
+    for destino in ("/concursos", "/acompanhando", "/calendario", "/previsao"):
+        assert f'href="{destino}"' in texto
 
 
-@pytest.mark.parametrize("caminho", ["/", "/macetes", "/simulado", "/previsao",
-                                     "/calendario", "/foco", "/acompanhando"])
+@pytest.mark.parametrize("caminho", ["/", "/analises", "/macetes", "/simulado",
+                                     "/previsao", "/calendario", "/foco",
+                                     "/acompanhando", "/mais"])
 def test_a_barra_aparece_em_toda_pagina(cliente, caminho):
-    """Antes cada pagina tinha so "voltar ao radar": ir de Macetes para o
-    Calendario custava dois cliques e uma parada na home."""
     assert "topo-barra" in cliente.get(caminho).text
 
 
 def test_nenhuma_aba_esta_mais_em_construcao(cliente):
-    """Meu foco virou a home na etapa 7; Acompanhando ganhou conteudo na 8."""
-    for caminho in ("/", "/acompanhando"):
+    for caminho in ("/", "/acompanhando", "/analises", "/mais"):
         resposta = cliente.get(caminho)
         assert resposta.status_code == 200
         assert "Em construcao" not in resposta.text
@@ -203,18 +204,16 @@ def test_o_endereco_antigo_do_foco_leva_para_a_home(cliente):
     assert resposta.headers["location"] == "/"
 
 
-def test_estudar_abre_nos_macetes(cliente):
-    """Macetes vem antes do Simulado: ver o que a banca cobra e o passo que
-    decide o que treinar depois."""
-    resposta = cliente.get("/estudar", follow_redirects=False)
-    assert resposta.status_code == 303
-    assert resposta.headers["location"] == "/macetes"
+def test_estudar_abre_no_simulado_e_revisao_nos_macetes(cliente):
+    """Estudar e treinar; Macetes e revisao, como no sitemap."""
+    assert cliente.get("/estudar", follow_redirects=False).headers["location"] == "/simulado"
+    assert cliente.get("/revisao", follow_redirects=False).headers["location"] == "/macetes"
 
 
-def test_estudar_junta_as_duas_paginas(cliente):
+def test_estudar_junta_simulado_e_gerar(cliente):
     """De dentro de uma da para ir na outra, sem voltar para a home."""
-    assert 'href="/simulado"' in cliente.get("/macetes").text
-    assert 'href="/macetes"' in cliente.get("/simulado").text
+    assert 'href="/geradas"' in cliente.get("/simulado").text
+    assert 'href="/simulado"' in cliente.get("/geradas").text
 
 
 # --- os atalhos e o "mais filtros" ------------------------------------------

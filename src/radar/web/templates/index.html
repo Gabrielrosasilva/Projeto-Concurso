@@ -460,6 +460,8 @@
 {% endmacro %}
 
   <main>
+    {% from "_topo.html" import abas_de_concursos %}
+    {{ abas_de_concursos('concursos') }}
     <header class="cabecalho">
       <h1>Radar de Concursos</h1>
       <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianópolis e região</p>
