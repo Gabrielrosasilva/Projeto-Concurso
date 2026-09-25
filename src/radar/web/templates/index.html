@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Radar de Concursos</title>
+  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
+     design system, e o body sem class="ds" nao muda de cara. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
     :root {
       color-scheme: light dark;
@@ -287,6 +290,7 @@
 
 {% from "_topo.html" import barra %}
 {{ barra('concursos') }}
+{% from "_componentes.html" import selo %}
 
 {# Um cartao da lista principal, com rotulo em cada informacao. #}
 {% macro cartao(c) %}
@@ -341,6 +345,10 @@
         <span class="dinheiro">
           <span class="rot">Salário:</span>
           R$ {{ '{:,.0f}'.format(c.salario)|replace(',', '.') }}
+          {# De onde veio o valor: eu digitei, ou o radar leu do texto do
+             anuncio - e a leitura por regra de texto pode errar. #}
+          {% if c.salario_manual %}<span class="rot">(anotado por mim)</span>
+          {% else %}{{ selo('classificacao', 'lido do anúncio') }}{% endif %}
           <a class="lapis" href="{{ url_com_editar }}{{ c.id }}"
              title="Anotar a remuneração" aria-label="Anotar a remuneração">&#9998;</a>
         </span>

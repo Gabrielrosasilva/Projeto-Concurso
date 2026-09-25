@@ -195,11 +195,25 @@ def test_a_tela_abre_e_agrupa_por_situacao(cliente):
 
 
 def test_a_tela_avisa_o_que_o_historico_nao_cobre(cliente):
-    """Municipio que usou outra banca entre 2021 e 2025 aparece mais atrasado
-    do que e, e eu preciso saber disso ao olhar a lista."""
+    """Municipio que usou banca fora das fontes aparece mais atrasado do que
+    e, e eu preciso saber disso ao olhar a lista."""
     texto = cliente.get("/previsao").text
 
-    assert "outra banca" in texto
+    assert "banca fora delas" in texto
+
+
+def test_os_anos_de_cobertura_vem_do_banco(cliente):
+    """A tela dizia "FEPESE (2006 a 2026)" escrito a mao. Agora o intervalo e
+    o que o banco tem - e a fonte que o texto esquecia aparece sozinha."""
+    from radar import servico
+
+    texto = cliente.get("/previsao").text
+
+    for c in servico.previsao.cobertura_do_historico():
+        assert f"{c.fonte} ({c.primeiro_ano}" in texto
+    assert "2006 a 2026" not in texto or any(
+        c.primeiro_ano == 2006 for c in servico.previsao.cobertura_do_historico()
+    )
 
 
 def test_a_tela_mostra_os_anos_que_embasam_a_conta(cliente):

@@ -13,6 +13,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
+from radar import config
 from radar import leis
 from radar import onde_estudar
 from radar import regioes
@@ -538,6 +539,7 @@ def geradas(
             "resumo": servico.geradas.contar(),
             "materia": escolhida,
             "quantas": quantas,
+            "cambio": config.CAMBIO_DE_REFERENCIA,
             "modelo": gerador.MODELO,
             "recado": RECADOS_DAS_GERADAS.get(recado),
             "desempenho_real": real,
@@ -698,7 +700,14 @@ def previsao(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="previsao.html",
-        context={"previsoes": servico.previsao_de_abertura()},
+        context={
+            "previsoes": servico.previsao_de_abertura(),
+            # De onde vem o historico, e a faixa legal: os dois eram texto
+            # escrito a mao na tela.
+            "cobertura": servico.previsao.cobertura_do_historico(),
+            "validade_minima": servico.previsao.VALIDADE_MINIMA,
+            "validade_maxima": servico.previsao.VALIDADE_MAXIMA,
+        },
     )
 
 

@@ -18,6 +18,11 @@ RAIZ = Path(__file__).resolve().parents[2]
 ATRASO_ENTRE_REQUISICOES = float(os.getenv("RADAR_REQUEST_DELAY", "1.5"))
 TIMEOUT_REQUISICAO = int(os.getenv("RADAR_REQUEST_TIMEOUT", "30"))
 
+# Para mostrar o custo da IA tambem em reais. NAO e a cotacao do dia - o
+# radar nao consulta cambio - e por isso a tela sempre diz "a 5,50, cambio
+# fixo". Estava escrito como 5.5 solto em cinco lugares; mora aqui agora.
+CAMBIO_DE_REFERENCIA = float(os.getenv("RADAR_CAMBIO", "5.50"))
+
 USER_AGENT = os.getenv(
     "RADAR_USER_AGENT",
     "radar-concursos/0.1 (projeto pessoal de estudo; contato via GitHub)",

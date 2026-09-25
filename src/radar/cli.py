@@ -579,7 +579,7 @@ def assuntos(
     )
     console.print(
         f"Custo estimado: [bold]US$ {custo:.2f}[/] "
-        f"[dim](~R$ {custo * 5.5:.2f}, a 5,50)[/]"
+        f"[dim](~R$ {custo * config.CAMBIO_DE_REFERENCIA:.2f}, cambio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
     )
     console.print(f"[dim]Modelo: {classificador.MODELO}[/]")
 
@@ -614,7 +614,7 @@ def assuntos(
     )
     console.print(
         f"Gasto real: [bold]US$ {resultado['custo']:.4f}[/] "
-        f"[dim](~R$ {resultado['custo'] * 5.5:.2f}) em "
+        f"[dim](~R$ {resultado['custo'] * config.CAMBIO_DE_REFERENCIA:.2f}) em "
         f"{resultado['chamadas']} chamada(s)[/]"
     )
     if resultado.get("parou_no_teto"):
@@ -821,7 +821,7 @@ def gerar(
     )
     console.print(
         f"Custo estimado: [bold]US$ {plano['custo']:.2f}[/] "
-        f"[dim](~R$ {plano['custo'] * 5.5:.2f}, a 5,50)[/]"
+        f"[dim](~R$ {plano['custo'] * config.CAMBIO_DE_REFERENCIA:.2f}, cambio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
     )
     console.print(f"[dim]Modelo: {gerador.MODELO}[/]")
 
@@ -869,7 +869,7 @@ def gerar(
     )
     console.print(
         f"Gasto real: [bold]US$ {resultado['custo']:.4f}[/] "
-        f"[dim](~R$ {resultado['custo'] * 5.5:.2f})[/]"
+        f"[dim](~R$ {resultado['custo'] * config.CAMBIO_DE_REFERENCIA:.2f})[/]"
     )
     if resultado.get("descartadas"):
         console.print(

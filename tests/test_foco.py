@@ -1089,3 +1089,49 @@ def _treinar_assunto(materia: str, assunto: str, acertos: int, erros: int) -> No
                 acertou=certa,
                 respondida_em=agora(),
             ))
+
+
+# --- nenhum numero sem fonte (25/09/2026) -----------------------------------
+
+def _prova_com_anuladas(anuladas: int, validas: int) -> None:
+    with sessao() as s:
+        s.add(_concurso())
+        for n in range(anuladas + validas):
+            s.add(QuestaoDeProva(
+                prova_url="https://fepese.test/ap2019.pdf", banca="FEPESE",
+                concurso_url=CONCURSO_DE_2019, ano=2019,
+                cargo="Agente Penitenciário", numero=n + 1,
+                materia="Direito Penal", enunciado=f"questao {n}?",
+                alternativas={"a": "x", "b": "y"},
+                resposta=None if n < anuladas else "a",
+                anulada=n < anuladas, impressao=f"q{n}",
+            ))
+
+
+def test_as_anuladas_vem_do_banco(banco_temporario, com_quadro_do_edital):
+    """O "5 anuladas em 2019" nao e escrito na tela: sai do banco, e muda
+    sozinho se o banco mudar."""
+    _prova_com_anuladas(anuladas=2, validas=3)
+    assert foco.montar().anuladas_por_ano == {2019: 2}
+
+
+def test_a_tabela_diz_de_onde_vem_cada_coluna(cliente, com_quadro_do_edital):
+    _prova_com_anuladas(anuladas=2, validas=3)
+
+    texto = cliente.get("/").text
+
+    assert "ds-selo--oficial" in texto          # edital
+    assert "ds-selo--calculado" in texto        # provas e meu acerto
+    assert "2019, 2." in texto                  # as anuladas daquele ano
+    assert "Base pequena" in texto
+
+
+def test_nada_de_numero_escrito_a_mao(cliente, com_quadro_do_edital):
+    """"duas provas" e "materia de 5 questoes" eram texto fixo. Com uma prova
+    so no banco, a tela tem que dizer uma."""
+    _prova_com_anuladas(anuladas=0, validas=3)
+
+    texto = cliente.get("/").text
+
+    assert "duas provas" not in texto
+    assert "Prova 2019:" in texto               # uma prova, e a tela diz qual

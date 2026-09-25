@@ -1311,3 +1311,45 @@ mais vale na prova.
   ultima tela migrar;
 - a nota "como trazer macete sem API" aparece uma vez so, no topo da
   Central, e nao em cada um dos 14 cartoes.
+
+## Nenhum numero sem fonte (25/09/2026)
+
+Percorridas as telas: Meu foco, Concursos, Simulado, Gerar questoes,
+Previsao, Macetes (Acompanhando e Calendario so mostram datas e prazos que
+ja levam o link do concurso). O que estava sem fonte, e o que virou:
+
+- **Meu foco, tabela de materias**: edital, peso, provas e meu acerto lado a
+  lado sem dizer de onde vinha cada um. Agora cada coluna tem linha de fonte
+  com selo: 🟦 o quadro do edital, com o nome do PDF; 🟩 as provas, com as
+  **anuladas de cada ano lidas do banco** (2013: 3; 2019: 5) - antes a
+  "Lingua Portuguesa 14" de 2019 contra os 15 do edital parecia erro; 🟩 o
+  meu acerto, de todas as respostas em questao real;
+- **Meu foco, texto fixo**: "errar numa materia de **5** questoes" era
+  numero escrito a mao - virou a menor materia do proprio edital. "Sao so
+  **duas** provas" virou a contagem de provas do banco, com o selo de base
+  pequena;
+- **Onde estudar primeiro**: questoes esperadas e pontos a ganhar sao conta
+  sobre assunto adivinhado por palavra-chave. Ganharam 🟨 classificacao
+  automatica e 🟨 tendencia;
+- **Simulado**: a questao real nao dizia que era da prova (🟦 agora), a
+  correta da revisao nao dizia se era gabarito definitivo ou resposta da IA
+  (agora diz, com o selo de cada um), e as tabelas de acerto ganharam 🟩 com
+  a base ("Feitas");
+- **Gerar questoes**: o custo em reais usava **5,50** escrito em cinco
+  lugares, sem dizer que e fixo. Mora em `config.CAMBIO_DE_REFERENCIA`
+  (`RADAR_CAMBIO` no .env muda), e a tela diz "cambio fixo, nao e a cotacao
+  do dia". O custo e 🟨 estimativa, e diz que o preco por token esta no
+  codigo e pode ter mudado;
+- **Previsao**: "FEPESE (**2006 a 2026**)", "feed (**so 2026**)" e "outra
+  banca entre **2021 e 2025**" eram texto fixo - e ja estavam errados: nao
+  citavam a IESES, que o banco tem de 2021 a 2026. Agora a cobertura de cada
+  fonte e contada do banco (`cobertura_do_historico`). O "ate 2 anos,
+  prorrogaveis" cita a fonte (CF, art. 37, III) e usa as constantes do
+  proprio calculo. Cada previsao diz a base e marca "base pequena" com menos
+  de 3 concursos; a tela inteira leva 🟨 tendencia;
+- **Concursos**: o salario nao dizia de onde veio. Agora diz "anotado por
+  mim" ou 🟨 "lido do anuncio" (regra de texto, que pode errar).
+
+Como as telas antigas ainda nao migraram para o design system, elas incluem
+o `design.css` so pelo selo: as regras que mudam a pagina inteira passaram a
+valer apenas com `<body class="ds">`.

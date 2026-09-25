@@ -166,7 +166,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-body {
+/* O que muda a pagina INTEIRA (fundo, letra, links) so vale em quem marca
+   <body class="ds"> - as telas ja migradas. As outras podem incluir este
+   arquivo so para usar o selo e o bloco, sem mudar de cara antes da hora. */
+body.ds {
   margin: 0;
   background: var(--cor-fundo);
   color: var(--cor-texto);
@@ -176,11 +179,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--cor-acao); }
+.ds a { color: var(--cor-acao); }
 /* Comando longo ("radar gerar --importar data/...") quebra onde precisar,
    em vez de empurrar a pagina para o lado no celular. */
-code { font-family: var(--fonte-numero); font-size: .9em; overflow-wrap: anywhere; }
-p, li { overflow-wrap: break-word; }
+.ds code { font-family: var(--fonte-numero); font-size: .9em; overflow-wrap: anywhere; }
+.ds p, .ds li { overflow-wrap: break-word; }
 
 /* A coluna de leitura. No celular, 16px de cada lado e nada de rolar de lado. */
 .ds-pagina {

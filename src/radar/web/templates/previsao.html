@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Previsão de abertura &middot; Radar de Concursos</title>
+  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
+     design system, e o body sem class="ds" nao muda de cara. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
     :root {
       color-scheme: light dark;
@@ -67,6 +70,7 @@
 <body>
 
 {% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo %}
 {{ barra('') }}
 
 <div class="pagina">
@@ -79,12 +83,22 @@
   </header>
 
   <div class="aviso">
-    A conta: cada concurso vale por <b>até 2 anos</b>, prorrogáveis por mais 2.
-    Dentro dessa faixa, quem manda é o ritmo do próprio município.
+    {{ selo('tendencia') }} Toda data desta tela é previsão, e não fato.
     <br><br>
-    O que isto <b>não sabe</b>: o histórico vem da FEPESE (2006 a 2026) e do
-    feed de notícias (só 2026). Município que contratou outra banca entre 2021
-    e 2025 tem concurso que não está aqui, e aparece mais atrasado do que é.
+    A conta: cada concurso vale por <b>até {{ validade_minima }} anos</b>,
+    prorrogáveis uma vez por igual período (Constituição Federal, art. 37,
+    III) - por isso o próximo sai entre {{ validade_minima }} e
+    {{ validade_maxima }} anos depois do último. Dentro dessa faixa, quem
+    manda é o ritmo do próprio município.
+    <br><br>
+    {{ selo('calculado') }} O que isto <b>não sabe</b>: o histórico é só o
+    que as fontes coletadas publicaram -
+    {% for c in cobertura -%}
+      {{ c.fonte }} ({{ c.primeiro_ano }}{% if c.ultimo_ano != c.primeiro_ano %} a {{ c.ultimo_ano }}{% endif %},
+      {{ c.concursos }} concursos){{ '; ' if not loop.last else '.' }}
+    {%- else %}nenhuma ainda.{% endfor %}
+    Município que contratou banca fora delas tem concurso que não está aqui,
+    e aparece mais atrasado do que é.
   </div>
 
   {% if not previsoes %}
@@ -114,7 +128,11 @@
               </span>
             </div>
             <p class="motivo">{{ p.motivo }}</p>
-            <p class="anos">Concursos conhecidos: {{ p.anos | join(', ') }}</p>
+            <p class="anos">
+              Base: {{ p.anos | length }} concurso{{ 's' if p.anos | length != 1 }}
+              conhecido{{ 's' if p.anos | length != 1 }} ({{ p.anos | join(', ') }}){% if p.anos | length < 3 %} ·
+              <b>base pequena</b>{% endif %}
+            </p>
           </div>
         {% endfor %}
       </div>

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Gerar questões &middot; Radar de Concursos</title>
+  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
+     design system, e o body sem class="ds" nao muda de cara. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
     :root {
       color-scheme: light dark;
@@ -80,6 +83,7 @@
 
 {% from "_topo.html" import barra %}
 {{ barra('estudar') }}
+{% from "_componentes.html" import selo %}
 
 <div class="pagina">
 
@@ -143,11 +147,15 @@
       </form>
 
       <p class="custo">
+        {{ selo('tendencia', 'Estimativa') }}
         {{ plano.quantas }} questão(ões)
         {%- if materia %} de {{ materia }}{% endif %}, por
         <b>US$ {{ '%.2f'|format(plano.custo) }}</b>
-        <span class="dica">(~R$ {{ '%.2f'|format(plano.custo * 5.5) }}, a 5,50)
-          em {{ plano.pedidos|length }} chamada(s), modelo {{ modelo }}</span>
+        <span class="dica">(~R$ {{ '%.2f'|format(plano.custo * cambio) }},
+          câmbio fixo de {{ '%.2f'|format(cambio)|replace('.', ',') }}, não é a cotação do dia)
+          em {{ plano.pedidos|length }} chamada(s), modelo {{ modelo }}.
+          Tokens estimados pelo tamanho do pedido; o preço por token está no
+          código (<code>gerador.py</code>) e pode ter mudado.</span>
       </p>
 
       {% if plano.sem_base %}
@@ -219,12 +227,14 @@
       <p class="legenda">
         Dois números, sempre. Acertar uma variação que a IA escreveu não é a
         mesma coisa que acertar o que a banca cobrou.
+        {{ selo('calculado') }} de todas as minhas respostas; entre parênteses,
+        quantas.
       </p>
       <table>
         <tr>
           <th>Matéria</th>
-          <th class="n">Nas reais</th>
-          <th class="n">Nas geradas</th>
+          <th class="n">{{ selo('prova', 'Nas reais') }}</th>
+          <th class="n">{{ selo('ia', 'Nas geradas') }}</th>
         </tr>
         {% for materia in materias_com_acerto %}
           <tr>

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Meu foco &middot; Radar de Concursos</title>
+  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
+     design system, e o body sem class="ds" nao muda de cara. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
     :root{
       color-scheme: light dark;
@@ -167,11 +170,18 @@
     code{background:var(--azul-fraco);color:var(--azul);padding:.1rem .4rem;
       border-radius:4px;font-size:.85em}
   </style>
+  <style>
+    /* De onde vem cada numero da tela: uma linha por fonte, com o selo. */
+    .fontes{display:grid;gap:.3rem;margin:.2rem 0 .9rem;font-size:.8rem;
+      color:var(--suave)}
+    .fontes .ds-selo{margin-right:.35rem}
+  </style>
   {% include "_topo_estilo.html" %}
 </head>
 <body>
 
 {% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo %}
 {{ barra('foco') }}
 
 <main>
@@ -315,6 +325,24 @@
     </h2>
 
     {% if p.materias_do_edital %}
+      <div class="fontes">
+        <span>{{ selo('oficial') }}<b>Edital {{ p.ano_do_edital }} e peso:</b>
+          quadro de distribuição de questões lido do PDF
+          {% if p.arquivo_do_edital %}<code>{{ p.arquivo_do_edital }}</code>{% else %}do edital{% endif %}
+          ({{ p.total_do_edital }} questões).</span>
+        {% if p.anos_das_provas %}
+        <span>{{ selo('calculado') }}<b>Prova {{ p.anos_das_provas | join(' e ') }}:</b>
+          questões válidas no banco, contadas pela matéria do caderno. Ficam de
+          fora as anuladas no gabarito definitivo:
+          {% for ano in p.anos_das_provas -%}
+            {{ ano }}, {{ p.anuladas_por_ano.get(ano, 0) }}{{ '; ' if not loop.last else '.' }}
+          {%- endfor %}
+          {% if p.anos_das_provas | length < 3 %}<b>Base pequena:</b>
+          {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length > 1 }} do cargo.{% endif %}</span>
+        {% endif %}
+        <span>{{ selo('calculado') }}<b>Meu acerto:</b> todas as minhas
+          respostas no simulado, em questão real; o número pequeno é quantas.</span>
+      </div>
       <table>
         <thead>
           <tr>
@@ -367,7 +395,8 @@
         <p class="legenda destaque">
           <strong>{{ p.pior_materia }}</strong> é onde eu vou pior entre as
           matérias que mais pesam &mdash; é por ela que vale começar hoje.
-          Errar numa matéria de 5 questões custa 5 questões; errar numa de
+          {% set menor = p.materias_do_edital | map(attribute='questoes') | min %}
+          Errar numa matéria de {{ menor }} questões custa {{ menor }} questões; errar numa de
           {{ p.materias_do_edital|selectattr('nome', 'equalto', p.pior_materia)
              |map(attribute='questoes')|first }} decide a prova.
         </p>
@@ -408,6 +437,14 @@
       {# A maior barra e a primeira: a lista ja vem ordenada do servidor. #}
       {% set maior = p.onde_comecar[0].ordem %}
 
+      <div class="fontes">
+        <span>{{ selo('classificacao') }}o <b>assunto</b> de cada questão saiu
+          do catálogo de palavras-chave ou do conteúdo programático.</span>
+        <span>{{ selo('tendencia') }}<b>questões esperadas</b> e <b>pontos a
+          ganhar</b> são conta sobre esses assuntos e sobre
+          {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length != 1 }}
+          - leitura, e não fato.</span>
+      </div>
       <p class="conclusao">{{ p.conclusao_do_estudo }}</p>
 
       <div class="estudo">
@@ -475,8 +512,11 @@
       {% endif %}
 
       <p class="legenda">
-        São só <strong>duas provas</strong> do cargo no acervo, e duas provas
-        não sustentam uma fatia. Por isso entra o <strong>reforço</strong>: a
+        {% set n_provas = p.anos_das_provas | length %}
+        {{ selo('tendencia', 'Base pequena') }}
+        São só <strong>{{ n_provas }} prova{{ 's' if n_provas != 1 }}</strong>
+        do cargo no acervo ({{ p.anos_das_provas | join(' e ') }}), e isso não
+        sustenta uma fatia. Por isso entra o <strong>reforço</strong>: a
         mesma banca, nas mesmas matérias, em outros concursos. Os dois números
         ficam sempre separados acima - a questão da minha prova é a que conta
         de verdade, e a de reforço só diz do costume da banca.

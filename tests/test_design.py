@@ -74,3 +74,29 @@ def test_tema_escuro_pela_url(cliente):
 def test_sem_javascript(cliente):
     """O CLAUDE.md pede sem JavaScript pesado; esta tela nao tem nenhum."""
     assert "<script" not in cliente.get("/macetes").text.lower()
+
+
+# --- nenhum numero sem fonte, nas outras telas ------------------------------
+
+def test_a_questao_real_do_simulado_leva_o_selo_da_prova(cliente):
+    from radar import servico
+    from radar.db import sessao
+    from radar.models import QuestaoDeProva
+
+    with sessao() as s:
+        s.add(QuestaoDeProva(
+            prova_url="https://fepese.test/x.pdf", banca="FEPESE", ano=2019,
+            numero=1, materia="Direito Penal", enunciado="Questao real?",
+            alternativas={"a": "x", "b": "y"}, resposta="a", impressao="r1",
+        ))
+    simulado = servico.criar_simulado(quantidade=1, materia="Direito Penal")
+
+    texto = cliente.get(f"/simulado/{simulado.id}").text
+
+    assert "ds-selo--oficial" in texto and "Extraída da prova" in texto
+
+
+def test_o_custo_em_reais_diz_que_o_cambio_e_fixo(cliente):
+    texto = cliente.get("/geradas").text
+    if "US$" in texto:                       # so aparece com base para gerar
+        assert "câmbio fixo" in texto

@@ -99,9 +99,10 @@ def previsao_de_abertura(
 ) -> list[PrevisaoDeAbertura]:
     """Municipios perto de casa, do mais atrasado para o menos.
 
-    Cuidado com o que isto NAO sabe: o historico vem da FEPESE (2006 a 2026) e
-    do feed (so 2026). Municipio que contratou outra banca entre 2021 e 2025
-    tem concurso que nao esta aqui, e vai aparecer mais atrasado do que e.
+    Cuidado com o que isto NAO sabe: o historico so tem o que as fontes
+    coletadas publicaram - `cobertura_do_historico` diz quais anos cada uma
+    cobre. Municipio que contratou banca fora delas tem concurso que nao esta
+    aqui, e vai aparecer mais atrasado do que e.
     """
     criar_tabelas()
     with sessao() as s:
@@ -123,3 +124,39 @@ def previsao_de_abertura(
     ordem = {"atrasado": 0, "esperado": 1, "em_dia": 2}
     previsoes.sort(key=lambda p: (ordem[p.situacao], -p.anos_parado))
     return previsoes
+
+
+@dataclass
+class Cobertura:
+    """De que anos uma fonte tem concurso no banco."""
+
+    fonte: str
+    primeiro_ano: int
+    ultimo_ano: int
+    concursos: int
+
+
+def cobertura_do_historico() -> list[Cobertura]:
+    """Quais anos cada fonte cobre, contado do banco.
+
+    Existe porque a tela de previsao dizia "FEPESE (2006 a 2026)" e "feed (so
+    2026)" escrito a mao, e texto assim envelhece calado na primeira coleta.
+    Aqui o intervalo e o que o banco tem hoje.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        concursos = list(s.scalars(
+            select(Concurso).where(Concurso.tipo != "noticia")
+        ))
+
+    anos_por_fonte: dict[str, list[int]] = {}
+    for concurso in concursos:
+        ano = _ano_do_concurso(concurso)
+        if ano:
+            anos_por_fonte.setdefault(concurso.fonte or "?", []).append(ano)
+
+    return sorted(
+        (Cobertura(fonte, min(anos), max(anos), len(anos))
+         for fonte, anos in anos_por_fonte.items()),
+        key=lambda c: -c.concursos,
+    )

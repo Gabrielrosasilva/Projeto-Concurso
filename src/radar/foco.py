@@ -131,6 +131,14 @@ class Painel:
     anos_das_provas: list[int] = field(default_factory=list)
     questoes_para_treinar: int = 0
 
+    #: {ano: quantas questoes o gabarito definitivo anulou}, do banco. As
+    #: colunas de prova da tela contam so as validas, e sem este numero ao
+    #: lado a "Lingua Portuguesa 14" de 2019 contra os 15 do edital parecia
+    #: erro - era a questao 11, anulada.
+    anuladas_por_ano: dict = field(default_factory=dict)
+    #: O PDF de onde o quadro de materias foi lido, para a tela dizer a fonte.
+    arquivo_do_edital: str | None = None
+
     #: Como eu vou em cada materia, pelo nome que o EDITAL usa. Materia que eu
     #: nunca treinei nao aparece aqui - ela nao tem acerto, e nao tem zero.
     acerto_por_materia: dict = field(default_factory=dict)
@@ -658,6 +666,23 @@ def _incidencia_do_cargo(s, provas_do_alvo: set[str]) -> tuple[dict, list[int]]:
     return por_materia, sorted(anos)
 
 
+def _anuladas_por_ano(s, provas_do_alvo: set[str]) -> dict[int, int]:
+    """Quantas questoes de cada prova do alvo o gabarito definitivo anulou.
+
+    Do banco, e nao de um texto: "5 anuladas em 2019" escrito na tela
+    envelheceria na primeira retificacao.
+    """
+    if not provas_do_alvo:
+        return {}
+    linhas = s.execute(
+        select(QuestaoDeProva.ano, func.count())
+        .where(QuestaoDeProva.prova_url.in_(provas_do_alvo))
+        .where(QuestaoDeProva.anulada.is_(True))
+        .group_by(QuestaoDeProva.ano)
+    ).all()
+    return {ano: int(quantas) for ano, quantas in linhas if ano}
+
+
 def materias_de_maior_peso(materias: list, total: int) -> set[str]:
     """As materias que puxam mais nota que a media, pelo quadro do edital.
 
@@ -962,6 +987,7 @@ def montar() -> Painel:
             s, minhas_provas
         )
         painel.questoes_para_treinar = _contar_questoes_do_alvo(s, minhas_provas)
+        painel.anuladas_por_ano = _anuladas_por_ano(s, minhas_provas)
 
     abertos = [c for c in concursos if c.situacao in SITUACOES_ABERTAS]
     do_cargo = [
@@ -980,6 +1006,10 @@ def montar() -> Painel:
         painel.ultima = _como_edicao(ultimo)
 
     edital = _ler_edital(ultimo)
+    if ultimo is not None:
+        painel.arquivo_do_edital = (
+            _registro_do_edital(ultimo.url) or {}
+        ).get("arquivo")
     materias = edital.materias
     painel.materias_do_edital = materias
     painel.total_do_edital = edital.total
