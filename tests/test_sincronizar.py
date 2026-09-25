@@ -99,7 +99,8 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
 
     Sao cinco: os concursos, a linha do tempo, o assunto e as questoes que a
     IA escreveu - esses dois porque custaram dinheiro - e, desde 25/09/2026,
-    os simulados: o meu historico de treino, que nao tinha copia nenhuma.
+    os simulados: o meu historico de treino, que nao tinha copia nenhuma. E
+    os macetes importados do Claude Code, que nao moram em tabela nenhuma.
     """
     runner.invoke(cli.app, ["sincronizar"])
 
@@ -107,6 +108,7 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     assert set(add[1:]) == {
         "data/concursos.json", "data/eventos.json", "data/assuntos.json",
         "data/questoes_geradas.json", "data/simulados.json",
+        "data/macetes.json",
     }
 
 

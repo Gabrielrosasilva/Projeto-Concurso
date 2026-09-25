@@ -696,6 +696,42 @@ que nao seja de navegador** (testado alternando: o UA honesto do projeto e
 radar se disfarcar, e o CLAUDE.md manda identificar-se no User-Agent. Entao nao
 se baixa — e o radar continua so apontando o link da lei.
 
+#### Sem pagar: o pedido em arquivo, respondido pelo Claude Code
+
+```bash
+radar gerar --pedido --quantas 20            # TODOS os pedidos em data/pedido_ia.json
+radar gerar --pedido --macetes               # um pedido de macete por materia
+radar gerar --importar data/resposta_ia.json # le a resposta, confere e grava
+```
+
+O `--pedido` nao chama a API. Ele escreve os mesmos pedidos que o `--valendo`
+mandaria, com a instrucao, o campo `como_responder` e o `formato_da_resposta`
+dentro do arquivo. Eu abro o Claude Code no VS Code, peco para ele ler
+`data/pedido_ia.json` e seguir o `como_responder`, e ele escreve
+`data/resposta_ia.json`. Os dois arquivos ficam fora do git: sao de passagem.
+
+O `--importar` confere antes de gravar, e **conta em voz alta o que recusou**:
+
+- a resposta tem que ser do **mesmo lote** do pedido. Pedido novo substitui o
+  velho, e resposta de lote velho e recusada inteira;
+- questao: as cinco alternativas, um gabarito que aponta para uma delas, e **o
+  artigo da lei** — aqui artigo vazio e recusado. Fora de Direito (as materias
+  em `sem_lei` do `config/leis.yml`), vale a regra gramatical ou logica;
+- macete: regra, fonte (com artigo, nas materias de lei) e os codigos das
+  **questoes reais** em que ele se apoia — codigo que nao estava no pedido e
+  recusado, porque viraria link para questao que nao existe.
+
+**A procedencia e o caminho, e nao um modelo:** o que entra por aqui e gravado
+como `Claude Code, importado manualmente, em 25/09/2026`. O radar nao sabe qual
+modelo o Claude Code usou, e dizer `claude-sonnet-5` seria inventar. Questao
+sem modelo nao e gravada por nenhum caminho, e linha do
+`questoes_geradas.json` sem `modelo` e `criada_em` e recusada no importar.
+
+A questao importada vai para a mesma tabela e o mesmo arquivo das geradas: o
+selo e a separacao das reais sao os de sempre. O macete ainda nao tem tela: ele
+vai para **`data/macetes.json`**, versionado e levado pelo `sincronizar`, e a
+Central de Macetes le de la quando existir.
+
 #### Na tela
 
 Em **Estudar** há uma terceira aba, ao lado de Macetes e Simulado: **Gerar

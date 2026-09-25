@@ -161,7 +161,10 @@ class QuestaoNova:
     materia: str | None = None
     assunto: str | None = None
     origem_impressao: str | None = None
-    modelo: str = MODELO
+    #: Quem escreveu. SEM padrao de proposito: um padrao aqui carimbaria como
+    #: saida da API uma questao que chegou por outro caminho - a importada a
+    #: mao, por exemplo. Quem cria a questao diz de onde ela veio.
+    modelo: str | None = None
 
     @property
     def impressao(self) -> str:
@@ -384,6 +387,7 @@ def variar(
             materia=questao.materia,
             assunto=getattr(questao, "assunto", None),
             origem_impressao=questao.impressao,
+            modelo=MODELO,
             **conferida,
         ))
     return novas, entrada, saida
@@ -416,6 +420,7 @@ def do_zero(
             materia=materia,
             assunto=assunto,
             origem_impressao=None,
+            modelo=MODELO,
             **conferida,
         ))
     return novas, entrada, saida

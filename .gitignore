@@ -22,3 +22,9 @@ data/edital_do_alvo.json
 # Relatorio gerado por ferramentas_gerar_relatorio.py: e artefato, nao fonte.
 # Quem quiser o PDF roda o script de novo.
 RELATORIO_DO_PROJETO.pdf
+
+# O pedido para a IA e a resposta dela, no caminho sem API (`radar gerar
+# --pedido` / `--importar`). Sao de passagem: o que presta vai para
+# data/questoes_geradas.json ou data/macetes.json, que sao versionados.
+data/pedido_ia.json
+data/resposta_ia*.json

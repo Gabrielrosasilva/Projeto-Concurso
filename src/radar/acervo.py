@@ -480,6 +480,11 @@ def importar_geradas(caminho: Path | None = None) -> int:
             impressao = linha.get("impressao")
             if not impressao or not linha.get("enunciado"):
                 continue
+            # A mesma porta do assunto pago: sem dizer quem escreveu e
+            # quando, a linha nao entra - nem escrita a mao no arquivo.
+            if not linha.get("modelo") or not linha.get("criada_em"):
+                log.warning("questao gerada sem procedencia recusada: %s", impressao)
+                continue
 
             ja = existentes.get(impressao)
             if ja is not None:

@@ -1216,3 +1216,40 @@ mais vale na prova.
   49-58 como Legislacao Estadual e 59-60 como Processual Penal, mas a 49 e de
   prisao em flagrante e a 59 e da Constituicao de SC. A contagem bate por
   coincidencia (2 + 10 dos dois lados). Nao foi corrigido nesta etapa.
+
+## IA sem API: o pedido em arquivo, e a resposta importada (25/09/2026)
+
+- **`radar gerar --pedido` grava todos os pedidos em `data/pedido_ia.json`**,
+  com instrucao, `como_responder` e `formato_da_resposta` embutidos, e nao
+  chama a API. O `--ver-pedido` mostrava um so, na tela, e nao salvava: nao
+  dava para responder 7 pedidos por ele. Eu respondo pelo Claude Code, na
+  minha assinatura, e `--importar` le a resposta de volta;
+- **a procedencia e o CAMINHO**: "Claude Code, importado manualmente, em
+  <data>". O radar nao sabe qual modelo o Claude Code usou, e gravar
+  `claude-sonnet-5` seria apresentar como saida da API um texto que nao veio
+  dela;
+- **a trava ficou no `gravar`, e nao no importador.** `QuestaoNova` perdeu o
+  modelo padrao - ele carimbava de API qualquer questao criada sem dizer de
+  onde veio -, e `geradas.gravar` recusa o lote inteiro se uma questao vier
+  sem modelo. No arquivo versionado, linha sem `modelo` e `criada_em` e
+  recusada, como no `assuntos.json`;
+- **no importar, artigo vazio e RECUSADO.** Na API ele vira nulo ("melhor
+  vazio que inventado"); aqui a regra e mais dura porque a especificacao exige
+  que conteudo de IA cite o artigo, e quem responde pode simplesmente nao
+  escrever a questao. A API nao mudou nesta etapa;
+- **quem nao precisa de artigo e a excecao, escrita em `config/leis.yml`
+  (`sem_lei`)**, e nao o contrario. Uma lista do que exige deixaria escapar a
+  materia de Direito escrita de outro jeito - "Direito Processo Penal", como o
+  caderno de 2013 escreve, nao casa com "Direito Processual Penal";
+- **a resposta tem que ser do mesmo lote do pedido.** Pedido novo substitui o
+  arquivo; aplicar a resposta velha poria a variacao de uma questao em cima da
+  origem de outra;
+- **o macete mora em `data/macetes.json`, e nao em tabela.** Ainda nao ha tela
+  que o leia, e um arquivo versionado e o suficiente ate a Central de Macetes
+  (fase 5). Cada macete cita os codigos das questoes REAIS em que se apoia
+  (`2019-q66`), e codigo que nao estava no pedido e recusado. O pedido de
+  macete e so das provas do alvo, sem o reforco e sem anulada;
+- os pedidos de macete saem por nome de materia do banco, e por isso
+  "Direito Processo Penal" (2013) e "Direito Processual Penal" (2019) sao dois
+  pedidos. E a divergencia de nome que a auditoria ja mostra; nao foi
+  unificada aqui.

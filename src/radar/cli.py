@@ -749,6 +749,19 @@ def gerar(
         True, "--ver-pedido/--sem-pedido",
         help="Na simulacao, mostra o texto exato que iria para a IA",
     ),
+    pedido: bool = typer.Option(
+        False, "--pedido",
+        help="Salva TODOS os pedidos em data/pedido_ia.json, para responder "
+        "fora da API (no Claude Code). Nao gasta nada",
+    ),
+    macetes: bool = typer.Option(
+        False, "--macetes",
+        help="Com --pedido: pede macetes por materia em vez de questoes",
+    ),
+    importar: str = typer.Option(
+        None, "--importar",
+        help="Le a resposta de um --pedido, confere e grava o que presta",
+    ),
 ) -> None:
     """Escreve questoes novas com a IA, para TREINAR.
 
@@ -766,6 +779,13 @@ def gerar(
     A chave vai em RADAR_ANTHROPIC_KEY, no .env - nunca no codigo.
     """
     from radar import config as configuracao, gerador
+
+    if importar:
+        _importar_resposta_da_ia(Path(importar))
+        return
+    if pedido:
+        _salvar_pedido_da_ia(materia, quantas, macetes)
+        return
 
     limite = gerador.TETO_PADRAO if teto is None else teto
     plano = servico.geradas.preparar(materia, quantas)
@@ -874,6 +894,66 @@ def gerar(
         "Responda em [bold]radar web[/], na aba Estudar. O acerto nas geradas "
         "aparece separado do acerto nas reais."
     )
+
+
+def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool) -> None:
+    """O `--pedido`: todos os pedidos num arquivo, sem chamar a API."""
+    if macetes:
+        lote = servico.manual.pedido_de_macetes(materia)
+    else:
+        lote = servico.manual.pedido_de_questoes(materia, quantas)
+
+    if not lote["pedidos"]:
+        console.print(
+            "[red]Nao ha questao real do meu cargo para montar o pedido.[/] "
+            "Rode [bold]radar provas[/] e [bold]radar questoes[/] primeiro."
+        )
+        raise typer.Exit(code=1)
+
+    destino = servico.manual.salvar_pedido(lote)
+    o_que = "macetes, um por materia" if macetes else "questoes"
+    console.print(
+        f"[green]{len(lote['pedidos'])} pedido(s) de {o_que}[/] em {destino}"
+    )
+    console.print(f"[dim]Lote {lote['lote']}. Nada foi gasto.[/]")
+    console.print(
+        "Responda pelo Claude Code: peca para ele ler o arquivo e seguir o "
+        "campo [bold]como_responder[/]. Depois:\n"
+        "  [bold]radar gerar --importar data/resposta_ia.json[/]"
+    )
+    console.print(
+        "[dim]Um pedido novo substitui o anterior: resposta de lote velho e "
+        "recusada no importar.[/]"
+    )
+
+
+def _importar_resposta_da_ia(arquivo: Path) -> None:
+    """O `--importar`: confere a resposta e diz em voz alta o que recusou."""
+    if not arquivo.exists():
+        console.print(f"[red]Nao achei {arquivo}.[/]")
+        raise typer.Exit(code=1)
+    try:
+        resultado = servico.manual.importar(arquivo)
+    except ValueError as erro:
+        console.print(f"[red]Nada importado:[/] {erro}")
+        raise typer.Exit(code=1) from erro
+
+    o_que = "macete(s)" if resultado["tipo"] == "macetes" else "questao(oes)"
+    console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
+    console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
+    if resultado["repetidas"]:
+        console.print(f"[dim]{resultado['repetidas']} repetida(s), ignorada(s).[/]")
+    if resultado["recusas"]:
+        console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
+        for motivo in resultado["recusas"]:
+            console.print(f"  - {motivo}")
+    if resultado["tipo"] == "macetes":
+        console.print("[dim]Em data/macetes.json (versionado).[/]")
+    elif resultado["gravadas"]:
+        console.print(
+            "Responda em [bold]radar web[/], na aba Estudar - com o selo de "
+            "gerada por IA, e o acerto separado do das reais."
+        )
 
 
 def _mostrar_pedido(pedido: dict) -> None:
@@ -1461,7 +1541,7 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
 
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/assuntos.json", "data/questoes_geradas.json",
-                     "data/simulados.json")
+                     "data/simulados.json", "data/macetes.json")
 
 
 @app.command()

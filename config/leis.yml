@@ -29,6 +29,17 @@
 # para eles. Assunto de doutrina (Teoria geral dos direitos humanos) nao tem
 # texto oficial, e inventar um link seria pior que nao ter.
 
+# As materias que NAO se apoiam em lei. Texto que a IA escreve para elas -
+# questao gerada, macete - cita a regra (gramatical, logica), e nao artigo.
+# Em TODA outra materia, o artigo e obrigatorio: e mais seguro exigir por
+# padrao do que deixar escapar uma materia de Direito com nome diferente
+# ("Direito Processo Penal", como o caderno de 2013 escreve).
+sem_lei:
+  - Lingua Portuguesa
+  - Raciocinio Logico
+  - Nocoes de Informatica
+  - Sociologia Aplicada
+
 materias:
 
   # --- Direito Constitucional ------------------------------------------------

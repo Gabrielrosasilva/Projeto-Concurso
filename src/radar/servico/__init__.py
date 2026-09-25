@@ -97,6 +97,8 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
 # outra coisa. Escreva `servico.geradas.criar_simulado(...)`, e fica dito na
 # chamada que aquilo nao e questao de prova.
 from radar.servico import geradas       # noqa: F401 - usado pela CLI e pela web
+# O caminho sem API: pedido em arquivo, resposta importada. `servico.manual`.
+from radar.servico import manual        # noqa: F401 - usado pela CLI
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

@@ -103,8 +103,8 @@ pagina e do edital, calendario, acervo de 8.433 questoes, simulado, previsao,
 linha do tempo, Acompanhando, "Meu foco" como home, treino pelo cargo, "Onde
 estudar primeiro", e o `radar gerar`. **Parcial so a 7:** Macetes tem o costume
 da banca por contagem, e falta a pegadinha, que so a IA faz. `assuntos` e
-`gerar` custam dinheiro e **simulam por padrao**; **nenhum jamais rodou
-valendo** - nao ha chave, e nenhuma questao de Direito tem assunto hoje.
+`gerar` custam dinheiro e **simulam por padrao** (o `gerar --pedido` vai sem
+API, pelo Claude Code); nenhum rodou valendo, e Direito nao tem assunto.
 
 A arvore de `src/radar/` esta no [README](README.md). Banco: SQLite em
 `data/radar.db` (Postgres via `RADAR_DATABASE_URL`); testes com dado fixo.

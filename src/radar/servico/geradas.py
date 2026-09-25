@@ -203,9 +203,17 @@ def gravar(questoes: list) -> int:
 
     Enunciado repetido nao entra duas vezes: a impressao e unica na tabela, e
     e ela que diz que duas perguntas sao a mesma pergunta.
+
+    **Questao sem `modelo` nao e gravada**, e o lote inteiro para: e a mesma
+    trava do `gravar_assuntos`. Texto de IA sem procedencia e o que nao pode
+    se repetir depois dos 93 assuntos de 24/09/2026.
     """
     if not questoes:
         return 0
+    if any(not (nova.modelo or "").strip() for nova in questoes):
+        raise ValueError(
+            "questao gerada sem modelo nao e gravada: diga de onde ela veio"
+        )
 
     criar_tabelas()
     gravadas = 0

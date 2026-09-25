@@ -31,18 +31,34 @@ class Lei:
 
 
 @cache
-def _carregar() -> list[dict]:
-    """Le config/leis.yml. Arquivo ausente vira lista vazia, e nao erro."""
+def _arquivo() -> dict:
+    """Le config/leis.yml inteiro. Arquivo ausente vira {}, e nao erro."""
     arquivo = config.diretorio_config() / "leis.yml"
     if not arquivo.exists():
-        return []
-    conteudo = yaml.safe_load(arquivo.read_text(encoding="utf-8")) or {}
-    return conteudo.get("materias") or []
+        return {}
+    return yaml.safe_load(arquivo.read_text(encoding="utf-8")) or {}
+
+
+def _carregar() -> list[dict]:
+    return _arquivo().get("materias") or []
 
 
 def recarregar() -> None:
     """Esquece o que foi lido. Usado pelos testes e se voce editar o YAML."""
-    _carregar.cache_clear()
+    _arquivo.cache_clear()
+
+
+def exige_artigo(materia: str | None) -> bool:
+    """Texto de IA desta materia tem que citar artigo de lei?
+
+    Sim, a menos que a materia esteja em `sem_lei`. O padrao e exigir: uma
+    materia de Direito escrita de outro jeito escaparia de uma lista do que
+    exige, e nao escapa de uma lista do que nao exige.
+    """
+    procurada = normalizar(materia or "")
+    return procurada not in {
+        normalizar(str(nome)) for nome in _arquivo().get("sem_lei") or []
+    }
 
 
 def _bloco_da_materia(materia: str | None) -> dict | None:
