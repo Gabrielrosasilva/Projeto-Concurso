@@ -14,6 +14,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
+from radar import auditoria
 from radar import config
 from radar import leis
 from radar import onde_estudar
@@ -813,6 +814,27 @@ def mais(request: Request):
         context={
             "cobertura": servico.previsao.cobertura_do_historico(),
             "leis_conferidas": leis.mudancas_conferidas(),
+            "auditoria_existe": auditoria.caminho_padrao().exists(),
+            "auditoria_gerada_em": auditoria.data_do_relatorio(),
+        },
+    )
+
+
+@app.get("/auditoria", response_class=HTMLResponse)
+def relatorio_de_auditoria(request: Request):
+    """O docs/auditoria.md como esta, num <pre>: sem renderizar Markdown.
+
+    Sem arquivo, a pagina diz como gerar - e responde 200, porque "ainda nao
+    rodei a auditoria" e um estado normal, e nao um erro.
+    """
+    caminho = auditoria.caminho_padrao()
+    texto = caminho.read_text(encoding="utf-8") if caminho.exists() else None
+    return templates.TemplateResponse(
+        request=request,
+        name="auditoria.html",
+        context={
+            "texto": texto,
+            "gerada_em": auditoria.data_do_relatorio(caminho),
         },
     )
 

@@ -34,6 +34,27 @@ def caminho_padrao() -> Path:
     return Path(__file__).resolve().parent.parent.parent / "docs" / "auditoria.md"
 
 
+# A linha que o `relatorio` escreve no topo: "> Gerado por `radar auditar` em
+# 25/09/2026. ...". E dela que a tela Mais tira a data.
+DATA_DO_RELATORIO = re.compile(r"Gerado por .*? em (\d{2}/\d{2}/\d{4})")
+
+
+def data_do_relatorio(caminho: Path | None = None) -> str | None:
+    """"DD/MM/AAAA" de quando o relatorio foi gerado, ou None.
+
+    Lida do cabecalho do proprio arquivo, e nao da data de modificacao: um
+    `git pull` muda a data do arquivo sem ninguem ter auditado nada.
+    """
+    origem = caminho or caminho_padrao()
+    if not origem.exists():
+        return None
+    for linha in origem.read_text(encoding="utf-8").splitlines()[:5]:
+        achado = DATA_DO_RELATORIO.search(linha)
+        if achado:
+            return achado.group(1)
+    return None
+
+
 def _normalizar(texto: str | None) -> str:
     normal = unicodedata.normalize("NFKD", texto or "")
     sem_acento = "".join(c for c in normal if not unicodedata.combining(c))

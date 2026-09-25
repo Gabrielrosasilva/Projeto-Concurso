@@ -1533,3 +1533,18 @@ valer apenas com `<body class="ds">`.
   porcentagem de amostra pequena;
 - os minimos vao para os templates como globais do Jinja: a tela diz "2 de
   5" com o mesmo numero que faz a conta.
+
+## O relatorio de auditoria na tela Mais (26/09/2026)
+
+- `GET /auditoria` mostra o `docs/auditoria.md` como esta, num `<pre>` com
+  `white-space: pre-wrap`, dentro do design system. **Sem renderizar
+  Markdown**: nao vale uma dependencia nova para um arquivo que se le bem em
+  texto puro;
+- o cartao "Provas conferidas" do Mais diz "gerado em DD/MM/AAAA" e tem o
+  link "ver o relatorio". A data sai da linha "Gerado por `radar auditar` em
+  ..." do cabecalho do proprio arquivo (a terceira, nao a primeira: a
+  primeira e o titulo), e nao da data de modificacao do arquivo - um
+  `git pull` muda essa data sem ninguem ter auditado nada;
+- sem arquivo, o cartao e a pagina dizem "ainda nao gerado, rode `radar
+  auditar`", e a pagina responde 200: nao ter rodado a auditoria e estado
+  normal, nao erro.

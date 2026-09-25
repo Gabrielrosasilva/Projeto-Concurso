@@ -67,6 +67,14 @@
         prova do alvo são conferidos contra os PDFs oficiais por
         <code>radar auditar</code>, que escreve <code>docs/auditoria.md</code>.
       </p>
+      <p class="ds-pequeno">
+        {% if auditoria_existe %}
+          Gerado em {{ auditoria_gerada_em or 'data não informada no arquivo' }} ·
+          <a class="ds-link-acao" href="/auditoria">ver o relatório &rarr;</a>
+        {% else %}
+          Ainda não gerado: rode <code>radar auditar</code>.
+        {% endif %}
+      </p>
       <p class="ds-nota" style="margin:0">
         A lista de leis alteradas depois das provas
         {% if leis_conferidas %}está em <code>config/leis.yml</code>.

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ request.query_params.get('tema', '') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Auditoria &middot; Radar de Concursos</title>
+  {# O docs/auditoria.md como esta, sem renderizar Markdown: nao vale uma
+     dependencia nova para um arquivo que se le bem em texto puro. #}
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .relatorio{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;
+      font-family:var(--fonte-numero);font-size:var(--tam-sm);line-height:1.6}
+    .voltar{display:inline-block;margin-bottom:var(--esp-4);font-size:var(--tam-sm);
+      text-decoration:none}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+{% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo %}
+{{ barra('mais') }}
+
+<main class="ds-pagina">
+  <a class="voltar" href="/mais">&larr; Mais</a>
+  <header class="ds-cabeca">
+    <h1>Auditoria dos dados de estudo</h1>
+    <p>
+      {% if texto %}{{ selo('oficial') }} conferida contra os PDFs oficiais
+        {% if gerada_em %}· gerada em {{ gerada_em }}{% endif %} ·
+        <code>docs/auditoria.md</code>
+      {% else %}O relatório ainda não foi gerado.{% endif %}
+    </p>
+  </header>
+
+  {% if texto %}
+    <article class="ds-cartao"><pre class="relatorio">{{ texto }}</pre></article>
+  {% else %}
+    <p class="ds-nota">Ainda não gerado: rode <code>radar auditar</code>, que
+      confere o banco contra os PDFs e escreve <code>docs/auditoria.md</code>.</p>
+  {% endif %}
+</main>
+</body>
+</html>
