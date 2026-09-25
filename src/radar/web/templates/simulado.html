@@ -299,11 +299,12 @@
       <div class="caixa" style="margin-top:1rem">
         <h2 style="font-size:1rem;margin:0 0 .3rem">Como você vai até agora</h2>
         <p class="dica" style="margin:0 0 .8rem">
-          {{ selo('calculado') }} Todas as minhas respostas em questão real, em
-          todos os simulados. "Feitas" é a base de cada porcentagem.
+          {{ selo('calculado') }} Em questão real, somando todos os simulados:
+          cada questão conta uma vez, pela última resposta que dei a ela.
+          "Questões" é a base de cada porcentagem.
         </p>
         <table>
-          <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Feitas</th><th></th></tr>
+          <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Questões</th><th></th></tr>
           {% for d in desempenho_geral %}
             <tr class="{{ 'pior' if d.porcentagem < 60 }}">
               <td>{{ d.materia }}</td>

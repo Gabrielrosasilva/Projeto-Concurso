@@ -341,8 +341,9 @@
           {% if p.anos_das_provas | length < 3 %}<b>Base pequena:</b>
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length > 1 }} do cargo.{% endif %}</span>
         {% endif %}
-        <span>{{ selo('calculado') }}<b>Meu acerto:</b> todas as minhas
-          respostas no simulado, em questão real; o número pequeno é quantas.</span>
+        <span>{{ selo('calculado') }}<b>Meu acerto:</b> em questão real,
+          vale a última resposta de cada questão; o número pequeno é quantas
+          questões diferentes eu respondi.</span>
       </div>
       <table>
         <thead>
@@ -480,7 +481,7 @@
               <span>
                 {%- if a.pontos is not none -%}
                   {{ a.esperadas | numero }} questões esperadas, e eu acerto
-                  {{ a.acerto | numero(0) }}% em {{ a.respondidas }}
+                  {{ a.acerto | numero(0) }}% em {{ a.respondidas }} questão(ões) diferente(s)
                   {%- if a.dias_sem_revisar %}; {{ a.dias_sem_revisar }} dia(s) sem revisar (×{{ a.fator | numero }}){% endif -%}
                 {%- else -%}
                   ainda não respondi nenhuma no simulado

@@ -1490,3 +1490,25 @@ valer apenas com `<body class="ds">`.
   entao a resposta a uma gerada contava no assunto da questao real de mesmo
   id. Agora so conta questao real;
 - **o cronograma por IA fica para depois**, como a especificacao manda.
+
+## O acerto acumulado conta questao, pela ultima resposta (26/09/2026)
+
+- **no acerto ACUMULADO, cada questao real conta uma vez, pela minha resposta
+  mais recente a ela** (maior `respondida_em`; empate, maior id da
+  resposta). "Respondidas" passou a querer dizer questoes diferentes. Antes
+  contava tentativa: refazer a mesma questao 4 vezes valia 4, e refazer
+  questao ja decorada inflava o acerto sem eu ter aprendido nada;
+- **nada e apagado**: toda tentativa continua em `respostas_de_simulado`;
+- mudou: `desempenho()` sem id (o acumulado) e `foco._acerto_por_assunto`
+  (a ultima resposta de cada questao e distribuida pelos assuntos; a DATA da
+  ultima tentativa continua alimentando o fator de tempo). Por consequencia,
+  tudo que le o acumulado: a tabela do Meu foco (Analises) e o "comece por
+  aqui", a prioridade e o bloco Revisar da home, "Como voce vai ate agora" no
+  Simulado e a coluna das reais em Gerar questoes;
+- NAO mudou, porque precisa do historico inteiro: `desempenho(simulado_id)`
+  (o relatorio de uma rodada), a revisao espacada (e o erro antigo que agenda
+  a revisao), a evolucao, o "So meus erros" e o sorteio. O acerto das
+  questoes geradas continua contando tentativa, e continua separado;
+- a regra "a ultima de cada questao" mora num lugar so,
+  `simulado._ultimas_respostas_reais`, que ja servia o "So meus erros" e
+  ganhou o desempate pelo id.

@@ -907,6 +907,11 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
     Do acumulado e nao do ultimo, pelo mesmo motivo do acerto por materia: uma
     rodada de 20 questoes nao diz se eu sei o assunto, e o somado diz.
 
+    E conta QUESTAO, nao tentativa, pela mesma regra do `desempenho`: primeiro
+    fica a ultima resposta de cada questao, e so ela e distribuida pelos
+    assuntos. A DATA, essa sim, olha todas as tentativas: e a da ultima vez
+    que eu mexi no assunto, e e ela que alimenta o fator de tempo.
+
     Assunto nunca respondido simplesmente nao esta no dicionario. Ele nao vale
     zero por cento - zero diria que eu errei tudo.
     """
@@ -914,32 +919,46 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
         return {}, {}
 
     linhas = s.execute(
-        select(QuestaoDeProva, RespostaDeSimulado.acertou,
-               RespostaDeSimulado.respondida_em)
+        select(QuestaoDeProva, RespostaDeSimulado)
         .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
         .where(RespostaDeSimulado.escolhida.is_not(None))
         # Sem isto, a resposta a uma questao GERADA contava no assunto da
         # questao real de mesmo id - as duas tabelas numeram a partir do 1.
         .where(RespostaDeSimulado.gerada.is_(False))
         .where(QuestaoDeProva.materia.in_(list(para_o_edital)))
+        .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
     ).all()
 
-    medido: dict[tuple[str, str], list[int]] = {}
-    ultimas: dict[tuple[str, str], object] = {}
-    for questao, acertou, quando in linhas:
+    # A ultima resposta de cada questao: a lista vem em ordem, e a mais
+    # recente sobrescreve as anteriores.
+    ultima_de: dict[int, tuple] = {}
+    for questao, resposta in linhas:
+        ultima_de[questao.id] = (questao, resposta)
+
+    def assuntos(questao) -> tuple[str, list[str]]:
         materia = para_o_edital[questao.materia]
         chave = macetes.chave_da_materia(materia)
         if chave:
-            nomes = macetes.assuntos_do_enunciado(questao.enunciado, chave)
-        else:
-            nomes = [questao.assunto] if questao.assunto else []
+            return materia, macetes.assuntos_do_enunciado(questao.enunciado, chave)
+        return materia, [questao.assunto] if questao.assunto else []
 
-        dia = para_local(quando).date() if quando else None
+    medido: dict[tuple[str, str], list[int]] = {}
+    for questao, resposta in ultima_de.values():
+        materia, nomes = assuntos(questao)
         for nome in nomes:
             conta = medido.setdefault((materia, nome), [0, 0])
             conta[0] += 1
-            conta[1] += 1 if acertou else 0
-            if dia and (ultimas.get((materia, nome)) is None or dia > ultimas[(materia, nome)]):
+            conta[1] += 1 if resposta.acertou else 0
+
+    # A data olha TODAS as tentativas: e a ultima vez que eu mexi no assunto.
+    ultimas: dict[tuple[str, str], object] = {}
+    for questao, resposta in linhas:
+        if not resposta.respondida_em:
+            continue
+        dia = para_local(resposta.respondida_em).date()
+        materia, nomes = assuntos(questao)
+        for nome in nomes:
+            if ultimas.get((materia, nome)) is None or dia > ultimas[(materia, nome)]:
                 ultimas[(materia, nome)] = dia
 
     return (

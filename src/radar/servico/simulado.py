@@ -404,16 +404,25 @@ class DesempenhoDaMateria:
 
 
 def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
-    """Acerto por materia nas questoes REAIS. Sem id, soma todos os simulados.
+    """Acerto por materia nas questoes REAIS.
 
-    O acumulado e o que responde a pergunta que importa: em que materia eu
-    estou pior e preciso estudar.
+    **Sem id, e o acumulado, e ele conta QUESTAO, e nao tentativa**: cada
+    questao entra uma vez, pela minha resposta mais recente a ela.
+    "Respondidas" quer dizer questoes diferentes. Contar tentativas fazia a
+    mesma questao refeita 4 vezes valer 4 - e refazer questao ja decorada
+    inflava o acerto sem eu ter aprendido nada. Nenhuma tentativa e apagada:
+    elas continuam no banco, para a revisao espacada e a evolucao.
+
+    **Com id, e o relatorio daquela rodada**, e conta as respostas dela.
 
     Questao gerada nao entra aqui, e nunca vai entrar somada: acertar uma
     variacao que a IA escreveu nao e a mesma coisa que acertar o que a FEPESE
     cobrou. O numero delas sai em `desempenho_das_geradas`, do lado.
     """
     criar_tabelas()
+    if simulado_id is None:
+        return _desempenho_pela_ultima_resposta()
+
     consulta = (
         select(
             QuestaoDeProva.materia,
@@ -429,6 +438,31 @@ def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
         .group_by(QuestaoDeProva.materia)
     )
     return _somar_desempenho(consulta, simulado_id)
+
+
+def _desempenho_pela_ultima_resposta() -> list[DesempenhoDaMateria]:
+    """O acumulado: uma linha por questao, a da ultima resposta."""
+    with sessao() as s:
+        ultimas = _ultimas_respostas_reais(s)
+        if not ultimas:
+            return []
+        materia_de = dict(s.execute(
+            select(QuestaoDeProva.id, QuestaoDeProva.materia)
+            .where(QuestaoDeProva.id.in_(list(ultimas)))
+        ).all())
+
+    por_materia: dict[str, DesempenhoDaMateria] = {}
+    for questao_id, resposta in ultimas.items():
+        if questao_id not in materia_de:
+            continue                    # questao que saiu do acervo
+        nome = materia_de[questao_id] or "sem materia"
+        linha = por_materia.setdefault(nome, DesempenhoDaMateria(nome))
+        linha.respondidas += 1
+        linha.acertos += 1 if resposta.acertou else 0
+
+    resultado = list(por_materia.values())
+    resultado.sort(key=lambda d: d.porcentagem)      # pior primeiro
+    return resultado
 
 
 def desempenho_das_geradas(
@@ -585,12 +619,17 @@ DIAS_DA_EVOLUCAO = 30
 
 
 def _ultimas_respostas_reais(s) -> dict[int, RespostaDeSimulado]:
-    """{questao_id: a resposta mais recente que eu dei a ela}."""
+    """{questao_id: a resposta mais recente que eu dei a ela}, so questao real.
+
+    A mais recente e a de maior `respondida_em`; empate, a de maior id. A
+    lista vem em ordem e o dict deixa a ultima sobrescrever - o volume e
+    pequeno, e isto se le melhor que uma subconsulta.
+    """
     respostas = s.scalars(
         select(RespostaDeSimulado)
         .where(RespostaDeSimulado.escolhida.is_not(None))
         .where(RespostaDeSimulado.gerada.is_(False))
-        .order_by(RespostaDeSimulado.respondida_em)
+        .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
     )
     return {r.questao_id: r for r in respostas}
 
