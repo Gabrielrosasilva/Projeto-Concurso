@@ -145,8 +145,13 @@
         window.focus();
         notificacao.close();
       };
+      notificacao.onerror = function () {
+        diagnostico("o navegador recusou mostrar a notificação");
+      };
     } catch (e) {
-      // Navegador que so notifica por service worker: fica o aviso e o som.
+      // Nao engole: o erro vai para a linha de diagnostico do cartao. O aviso
+      // em tela cheia e o som continuam.
+      diagnostico(e && e.message ? e.message : String(e));
     }
   }
 
@@ -373,46 +378,120 @@
     }
   }
 
-  function aoTestar() {
-    garantirAudio();
+  // A permissao como o cartao entende: as tres do navegador, e mais
+  // "indisponivel" (fora do localhost, sem contexto seguro) e "sem-api".
+  function permissaoAtual() {
     if (!window.isSecureContext) {
-      dispararTeste(false, "Notificação do Windows só funciona no PC do radar " +
-        "(localhost). Aqui, só o aviso na tela e o som.");
-      return;
+      return "indisponivel";
     }
     if (!("Notification" in window)) {
-      dispararTeste(false, "Este navegador não tem notificação. Aqui, só o aviso na tela e o som.");
+      return "sem-api";
+    }
+    return Notification.permission;
+  }
+
+  // A linha de diagnostico do cartao, sempre visivel. Com `erro`, mostra o
+  // erro que a notificacao deu, em vez de esconder.
+  function diagnostico(erro) {
+    var linha = parte("diag");
+    linha.textContent = "";
+    if (erro) {
+      linha.textContent = "Notificação do Windows: deu erro - " + erro;
       return;
     }
-    function depoisDaPermissao(permissao) {
-      if (permissao === "granted") {
-        dispararTeste(true, "Notificação liberada. Se ela não aparecer, confira o " +
-          "\"Não perturbe\" (Assistente de Foco) do Windows.");
-      } else if (permissao === "denied") {
-        dispararTeste(false, COMO_LIBERAR);
-      } else {
-        dispararTeste(false, "Sem resposta do pedido de permissão. Clique em " +
-          "Testar de novo e escolha Permitir.");
-      }
+    var permissao = permissaoAtual();
+    var textos = {
+      granted: "permitida",
+      "default": "ainda não pedida - clique em Testar",
+      indisponivel: "indisponível aqui (fora do PC do radar)",
+      "sem-api": "indisponível neste navegador"
+    };
+    if (permissao === "denied") {
+      linha.appendChild(document.createTextNode("Notificação do Windows: bloqueada - "));
+      var como = document.createElement("button");
+      como.type = "button";
+      como.textContent = "veja como liberar";
+      como.addEventListener("click", function () {
+        parte("msg").textContent = COMO_LIBERAR;
+      });
+      linha.appendChild(como);
+      return;
     }
-    if (Notification.permission === "default") {
-      // Na primeira vez: pede a permissao, e so entao dispara. Navegador
-      // novo responde pela promessa, antigo pelo callback - e alguns pelos
-      // dois, dai o "so uma vez".
-      var respondido = false;
-      var umaVez = function (permissao) {
-        if (!respondido) {
-          respondido = true;
-          depoisDaPermissao(permissao);
-        }
-      };
-      var pedido = Notification.requestPermission(umaVez);
-      if (pedido && pedido.then) {
-        pedido.then(umaVez);
+    linha.textContent = "Notificação do Windows: " + (textos[permissao] || permissao);
+  }
+
+  // Na primeira vez pede a permissao - tem de ser no clique, regra dos
+  // navegadores - e so entao segue. Navegador novo responde pela promessa,
+  // antigo pelo callback, e alguns pelos dois: dai o "so uma vez".
+  function comPermissao(seguir) {
+    if (permissaoAtual() !== "default") {
+      seguir();
+      return;
+    }
+    var respondido = false;
+    var umaVez = function () {
+      if (!respondido) {
+        respondido = true;
+        diagnostico();
+        seguir();
       }
+    };
+    var pedido = Notification.requestPermission(umaVez);
+    if (pedido && pedido.then) {
+      pedido.then(umaVez);
+    }
+  }
+
+  // O teste de hoje: aviso em tela cheia, som e, se puder, a notificacao.
+  function testarAgora() {
+    var permissao = permissaoAtual();
+    diagnostico();
+    if (permissao === "indisponivel") {
+      dispararTeste(false, "Notificação do Windows só funciona no PC do radar " +
+        "(localhost). Aqui, só o aviso na tela e o som.");
+    } else if (permissao === "sem-api") {
+      dispararTeste(false, "Este navegador não tem notificação. Aqui, só o aviso na tela e o som.");
+    } else if (permissao === "granted") {
+      dispararTeste(true, "Notificação liberada. Se ela não aparecer, confira o " +
+        "\"Não perturbe\" (Assistente de Foco) do Windows.");
+    } else if (permissao === "denied") {
+      dispararTeste(false, COMO_LIBERAR);
     } else {
-      depoisDaPermissao(Notification.permission);
+      dispararTeste(false, "Sem resposta do pedido de permissão. Clique em " +
+        "Testar de novo e escolha Permitir.");
     }
+  }
+
+  function aoTestar() {
+    garantirAudio();
+    comPermissao(testarAgora);
+  }
+
+  // "Testar em 10 s": o mesmo teste, 10 segundos depois - da tempo de
+  // minimizar o navegador e ver se o balao aparece por cima de tudo. O
+  // disparo e UM setTimeout, como o do cronometro; a contagem na tela e so
+  // para eu ver.
+  var testeAgendado = null;
+  var contagemDoTeste = null;
+
+  function aoTestarEm10() {
+    garantirAudio();
+    comPermissao(function () {
+      window.clearTimeout(testeAgendado);
+      window.clearInterval(contagemDoTeste);
+      var disparaEm = Date.now() + 10000;
+      var mostrar = function () {
+        var faltam = Math.max(0, Math.ceil((disparaEm - Date.now()) / 1000));
+        parte("msg").textContent = "⏳ Aviso de teste em " + faltam +
+          " s - pode minimizar o navegador.";
+      };
+      mostrar();
+      contagemDoTeste = window.setInterval(mostrar, 1000);
+      testeAgendado = window.setTimeout(function () {
+        window.clearInterval(contagemDoTeste);
+        testarAgora();
+      }, 10000);
+    });
   }
 
   // --- ligar tudo -------------------------------------------------------------
@@ -425,6 +504,7 @@
   parte("pausar").addEventListener("click", aoPausar);
   parte("parar").addEventListener("click", aoParar);
   parte("testar").addEventListener("click", aoTestar);
+  parte("testar10").addEventListener("click", aoTestarEm10);
   doAviso("ok").addEventListener("click", aoClicarOk);
   // Recarreguei com o cronometro rodando: o primeiro clique na pagina religa
   // o som (o navegador nao deixa sem clique).
@@ -437,6 +517,11 @@
   // Voltei para a aba: refaz a conta (o setTimeout pode ter atrasado).
   document.addEventListener("visibilitychange", function () {
     if (!document.hidden) {
+      // A permissao pode ter mudado pelo cadeado enquanto eu estava fora. Um
+      // erro que esta na linha fica ate o proximo teste: e ele que eu preciso ler.
+      if (parte("diag").textContent.indexOf("deu erro") === -1) {
+        diagnostico();
+      }
       estado = ler();
       conferir();
       desenhar();
@@ -457,6 +542,7 @@
     desenhar();
   });
 
+  diagnostico();
   estado = ler();
   if (estado && estado.tocando) {
     // Recarreguei com o aviso aberto: ele volta (o som, so depois de um clique).

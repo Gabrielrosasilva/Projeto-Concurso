@@ -68,11 +68,15 @@
     .botao-secundario{padding:var(--esp-2) var(--esp-4);border-radius:var(--raio-sm);border:1px solid var(--cor-borda);
       background:transparent;color:var(--cor-texto);font:inherit;font-size:var(--tam-sm);font-weight:var(--peso-medio);cursor:pointer}
     .botao-secundario:hover{border-color:var(--cor-acao)}
-    .crono-testar{margin-top:var(--esp-3);padding:var(--esp-1) var(--esp-3);border-radius:var(--raio-sm);border:1px dashed var(--cor-borda);
+    .crono-testes{display:flex;gap:var(--esp-2);flex-wrap:wrap;margin-top:var(--esp-3)}
+    .crono-testar{padding:var(--esp-1) var(--esp-3);border-radius:var(--raio-sm);border:1px dashed var(--cor-borda);
       background:transparent;color:var(--cor-texto-suave);font:inherit;font-size:var(--tam-xs);cursor:pointer}
     .crono-testar:hover{color:var(--cor-texto);border-color:var(--cor-texto-suave)}
     .crono-msg{margin:var(--esp-2) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .crono-msg:empty{display:none}
+    /* O diagnostico da notificacao: sempre visivel, pequeno. */
+    .crono-diag{margin:var(--esp-2) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .crono-diag button{padding:0;border:0;background:none;font:inherit;color:var(--cor-acao);text-decoration:underline;cursor:pointer}
     /* O ▶ pequeno ao lado do horario de cada faixa. */
     .play-faixa{width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--cor-borda);background:var(--cor-superficie);
       color:var(--cor-acao);font-size:var(--tam-xs);line-height:1;cursor:pointer;padding:0;display:grid;place-items:center}
@@ -367,8 +371,13 @@
           <button type="button" class="ds-botao" data-crono="pausar" hidden>Pausar</button>
           <button type="button" class="botao-secundario" data-crono="parar" hidden>Parar</button>
         </div>
-        <button type="button" class="crono-testar" data-crono="testar">🔔 Testar aviso</button>
+        <div class="crono-testes">
+          <button type="button" class="crono-testar" data-crono="testar">🔔 Testar aviso</button>
+          {# Da tempo de minimizar o navegador e ver o balao por cima de tudo. #}
+          <button type="button" class="crono-testar" data-crono="testar10">⏳ Testar em 10 s</button>
+        </div>
         <p class="crono-msg" data-crono="msg" role="status"></p>
+        <p class="crono-diag" data-crono="diag"></p>
       </section>
     </div>
 

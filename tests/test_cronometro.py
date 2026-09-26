@@ -90,6 +90,10 @@ def test_o_cartao_e_o_aviso_tem_o_texto_certo(cliente):
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert "⏱ Cronômetro" in texto
     assert "🔔 Testar aviso" in texto
+    # O teste com tempo para minimizar o navegador, e a linha de diagnostico
+    # que o cronometro.js preenche.
+    assert 'data-crono="testar10">⏳ Testar em 10 s</button>' in texto
+    assert '<p class="crono-diag" data-crono="diag"></p>' in texto
     assert 'role="alertdialog"' in texto
 
 
