@@ -1565,3 +1565,21 @@ valer apenas com `<body class="ds">`.
   historico fica inteiro para a revisao espacada) e "Um minimo de respostas
   so, nas tres telas" (5 na materia, 3 no assunto; abaixo disso e amostra
   pequena e nao entra em conta).
+
+## O cronograma de estudo: arquivo de dado, horario calculado (26/09/2026)
+
+O Ciclo 1 (28/09 a 07/11) mora em `config/cronograma.yml`, que e DADO e se
+edita a mao; `src/radar/cronograma.py` so le, confere e faz a conta. `radar
+hoje` mostra o dia no terminal.
+
+- os horarios NAO sao gravados: saem da soma das duracoes a partir do inicio
+  do bloco. Faixa de questoes dura questoes x minutos por questao (2,5, ou o
+  `min_por_questao` da faixa - o simulado usa 3), arredondado PARA CIMA de 5
+  em 5. Assim a rampa muda o numero e o horario acompanha sozinho;
+- o arquivo e conferido ao carregar, e o erro diz a data do dia com problema:
+  data repetida, domingo, faixa sem duracao nem questoes, tipo fora da lista,
+  rampa inexistente, horario de bloco invalido. Erro de digitacao no dado
+  para o comando, em vez de virar faixa sumida na tela;
+- domingo e descanso: nao pode estar no arquivo, e `montar_dia` devolve None;
+- faixa `opcional` (o bonus) aparece mas nao entra no total do dia - senao o
+  dia em que o trabalho aperta viraria dia "abaixo" sem motivo.

@@ -6,19 +6,22 @@
 """
 import logging
 import subprocess
+from datetime import date, datetime
 from pathlib import Path
 
 import typer
 from rich.console import Console
+from rich.markup import escape
 from rich.panel import Panel
 from rich.table import Table
 
-from radar import acervo, alvo as alvos, avisos, config, servico
+from radar import acervo, alvo as alvos, avisos, config, cronograma, servico
 from radar import provas as _provas
 from radar.models import agora
 from radar.util import (
     dias_ate,
     formatar_data,
+    fuso_local,
     porta_ocupada,
     primeira_porta_livre,
 )
@@ -1744,6 +1747,99 @@ def sincronizar(
         f"\n[green]Sincronizado.[/] O robo passa a conhecer {favoritos} "
         f"favorito(s) na proxima coleta."
     )
+
+
+# O nome do tipo na tela. O cru (lei_seca) e para o arquivo.
+TIPO_LEGIVEL = {
+    "teoria": "Teoria", "lei_seca": "Lei seca", "portugues": "Português",
+    "raciocinio": "Raciocínio", "pausa": "Pausa", "questoes": "Questões",
+    "revisao": "Revisão", "revisao_semanal": "Revisão semanal",
+    "correcao": "Correção", "simulado": "Simulado",
+    "diagnostico": "Diagnóstico", "anki": "Anki", "bonus": "Bônus",
+}
+
+
+@app.command()
+def hoje(
+    data: str = typer.Option(None, help="Outro dia, em AAAA-MM-DD (padrao: hoje)"),
+) -> None:
+    """O que estudar no dia, com horario, materia e questoes."""
+    try:
+        quando = (date.fromisoformat(data) if data
+                  else datetime.now(fuso_local()).date())
+    except ValueError:
+        console.print(f"[red]Data invalida: {data!r}.[/] Use AAAA-MM-DD.")
+        raise typer.Exit(code=1)
+
+    try:
+        plano = cronograma.carregar()
+    except cronograma.ErroNoCronograma as erro:
+        console.print(f"[red]Problema no config/cronograma.yml:[/] {erro}")
+        raise typer.Exit(code=1)
+
+    console.print(f"[bold]{cronograma.data_por_extenso(quando).capitalize()}[/]")
+
+    if quando.weekday() == cronograma.DOMINGO:
+        console.print("Domingo é descanso total.")
+        return
+    if quando < plano.inicio:
+        faltam = (plano.inicio - quando).days
+        console.print(
+            f"O {plano.titulo} começa em {plano.inicio.strftime('%d/%m/%Y')} "
+            f"(daqui a {faltam} dia(s))."
+        )
+        return
+    if quando > plano.fim:
+        console.print(
+            f"O {plano.titulo} terminou em {plano.fim.strftime('%d/%m/%Y')}."
+        )
+        return
+
+    dia = cronograma.montar_dia(plano, quando)
+    if dia is None:
+        console.print("[yellow]Esse dia esta dentro do ciclo, mas nao esta no "
+                      "cronograma.[/]")
+        return
+
+    cabecalho = f"Semana {dia.semana}"
+    if dia.semana in plano.semanas:
+        cabecalho += f" — {plano.semanas[dia.semana]}"
+    console.print(escape(cabecalho))
+    if dia.feriado:
+        console.print(f"[bold dark_orange]{escape(dia.feriado)}[/]")
+
+    for chave in cronograma.BLOCOS:
+        faixas = getattr(dia, chave)
+        if not faixas:
+            continue
+        console.print(f"\n[bold cyan]{escape(plano.blocos[chave].nome)}[/]")
+        for faixa in faixas:
+            partes = [TIPO_LEGIVEL[faixa.tipo]]
+            if faixa.rotulo:
+                partes[0] = faixa.rotulo
+            if faixa.materia:
+                partes.append(faixa.materia)
+            if faixa.titulo != partes[0]:     # evita "Pausa · Pausa"
+                partes.append(faixa.titulo)
+            linha = (f"{faixa.inicio:%H:%M}-{faixa.fim:%H:%M}  "
+                     + escape(" · ".join(partes)))
+            if faixa.questoes:
+                linha += f"  [bold]{faixa.questoes} questões[/]"
+            if faixa.cronometrado:
+                linha += "  [magenta]⏱ cronometrado[/]"
+            if faixa.opcional:
+                linha += "  [dim](bônus, fora do total)[/]"
+            if faixa.tipo == "pausa":
+                linha = f"[dim]{linha}[/]"
+            console.print(linha)
+
+    console.print(f"\nTotal do dia: [bold]{dia.total_questoes} questões[/] "
+                  f"e {dia.minutos_de_estudo} min de estudo de manhã")
+    if dia.reduzida:
+        console.print(f"[yellow]Reduzida:[/] {escape(dia.reduzida)}")
+    if dia.minima:
+        console.print(f"[yellow]Mínima:[/] {escape(dia.minima)}")
+
 
 if __name__ == "__main__":
     app()

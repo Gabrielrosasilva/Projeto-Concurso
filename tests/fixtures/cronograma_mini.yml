@@ -1,0 +1,92 @@
+# Cronograma pequeno para os testes: 3 dias, todos os casos da conta.
+ciclo: 9
+titulo: Ciclo de teste
+inicio: '2026-09-28'
+fim: '2026-10-03'
+blocos:
+  manha:
+    nome: Manhã
+    inicio: '10:15'
+  noite:
+    nome: Noite
+    inicio: '18:00'
+  pos22:
+    nome: Depois das 22h
+    inicio: '22:00'
+minutos_por_questao: 2.5
+rampa:
+  1:
+    direito: 15
+    portugues: 10
+  2:
+    direito: 20
+    portugues: 10
+semanas:
+  1: Semana de teste.
+dias:
+- data: '2026-09-28'
+  semana: 1
+  reduzida: Só a manhã.
+  minima: Só o Anki.
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Aplicação da lei penal
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Substantivo
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Direito Penal
+    titulo: 'Aprendizagem: aplicação da lei penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Substantivo
+  - tipo: correcao
+    duracao: 20
+    titulo: Correção
+  pos22:
+  - tipo: anki
+    duracao: 30
+    titulo: Anki
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    titulo: 'Bônus: lógica'
+- data: '2026-09-29'
+  semana: 1
+  feriado: Feriado de teste
+  manha:
+  - tipo: lei_seca
+    duracao: 40
+    titulo: Lei seca
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    origem: '2026-09-22'
+    titulo: 'R+7: revisão'
+  pos22: []
+- data: '2026-10-03'
+  semana: 1
+  manha: []
+  noite:
+  - tipo: simulado
+    questoes: 30
+    min_por_questao: 3
+    cronometrado: true
+    titulo: Simulado da semana
+  pos22: []

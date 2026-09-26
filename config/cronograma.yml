@@ -20,6 +20,16 @@
 #   opcional    - faixa bonus: aparece, mas nao conta no total do dia.
 #   onde        - qconcursos | radar | videoaula (so para o icone da tela).
 #   origem      - nas revisoes (R+7, R+30), a data do estudo que esta voltando.
+#   rotulo      - nas faixas de tipo revisao, o nome curto ("R+7" ou "R+30").
+#                 E a etiqueta que a tela mostra.
+#   cronometrado - true = a faixa e feita com cronometro. Vira o chip
+#                 "⏱ cronometrado" na tela; nao muda horario nem conta.
+#   baralho     - o baralho do Anki ligado a teoria do dia (ex.: "[3] LEP").
+#                 So exibicao.
+#   feriado     - no nivel do DIA, o nome do feriado (ex.: "Feriado
+#                 (Finados)"). Vira um chip laranja no cabecalho. Para o
+#                 gatilho, feriado feito como minima ou melhor conta como
+#                 dia "na Ideal".
 
 ciclo: 1
 titulo: Ciclo 1 — a base
