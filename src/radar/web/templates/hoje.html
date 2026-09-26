@@ -105,6 +105,10 @@
     .ds a.pilula.nao_fiz {background:var(--selo-ia-fundo);         color:var(--selo-ia)}
     .ds a.pilula.futuro  {background:transparent;border:2px dashed var(--cor-borda)}
     .pilula.aberta{box-shadow:0 0 0 2px var(--cor-superficie),0 0 0 4px var(--cor-acao)}
+    .sequencia{margin:var(--esp-3) 0 0;font-size:var(--tam-sm)}
+    .sequencia b{font-size:var(--tam-lg);font-variant-numeric:tabular-nums}
+    .frase{margin:var(--esp-2) 0 0;padding:var(--esp-2) var(--esp-3);border-radius:var(--raio-sm);background:var(--cor-acao-fundo);
+      color:var(--cor-texto);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
     .motivo{margin:var(--esp-3) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave);display:flex;gap:var(--esp-2);align-items:baseline;flex-wrap:wrap}
 
     /* --- resumo em 3 numeros --- */
@@ -312,6 +316,10 @@
 
 {%- macro hm(h) -%}{{ h.strftime('%H:%M') }}{%- endmacro -%}
 
+{%- macro texto_da_sequencia(n) -%}
+{% if not n %}Comece hoje a sua sequência{% elif n == 1 %}🔥 1 dia seguido{% else %}🔥 {{ n }} dias seguidos{% endif %}
+{%- endmacro -%}
+
 {% set nome_do_ciclo = t.plano.titulo.split(' —')[0] if t.plano else '' %}
 {% set meta_acertos = t.plano.meta_da_prova.acertos if t.plano else none %}
 
@@ -329,7 +337,7 @@
         <div class="heroi__selos">
           {% if t.dia %}
             <span class="heroi-selo">⚡ Nível {{ t.nivel.efetivo }}</span>
-            <span class="heroi-selo" title="Dias seguidos cumprindo a meta">🔥 {{ t.sequencia if t.sequencia is not none else '–' }} dias seguidos</span>
+            <span class="heroi-selo" title="Dias do plano seguidos sem zerar (Ideal, Reduzida ou Mínima)">{{ texto_da_sequencia(t.sequencia) }}</span>
           {% endif %}
           {% if meta_acertos %}<span class="heroi-selo">🎯 Meta: {{ meta_acertos }} acertos</span>{% endif %}
         </div>
@@ -405,6 +413,11 @@
             </a>
           {% endfor %}
         </nav>
+        <p class="sequencia">
+          {% if t.sequencia %}<b>🔥 {{ t.sequencia }}</b> · {{ 'dia seguido' if t.sequencia == 1 else 'dias seguidos' }} sem zerar
+          {% else %}Comece hoje a sua sequência{% endif %}
+        </p>
+        {% if t.frase %}<p class="frase">{{ t.frase }}</p>{% endif %}
         <p class="motivo">{{ selo('calculado') }} <span>{{ t.nivel.motivo }}</span></p>
       </section>
     {% endif %}

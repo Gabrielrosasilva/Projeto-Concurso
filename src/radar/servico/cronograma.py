@@ -369,9 +369,10 @@ class TelaDoDia:
     outro_dia: object = None
     # O cartao "Objetivo": o nome do alvo sai do config/alvo.yml, nunca daqui.
     nome_do_alvo: str | None = None
-    # Dias seguidos cumprindo a meta. Vazio ate a conta existir: a tela mostra
-    # "–" e nao um numero inventado.
+    # Dias seguidos sem zerar (ideal, reduzida ou minima), contados de hoje.
     sequencia: int | None = None
+    # A frase animadora do cartao "Esta semana". None: a frase some.
+    frase: str | None = None
     # Os checks: as posicoes (bloco, indice) feitas, e o que elas sugerem.
     feitas: set = field(default_factory=set)
     sugestao: object = None
@@ -423,6 +424,95 @@ class TelaDoDia:
     @property
     def proximo(self) -> date:
         return self.data + timedelta(days=1)
+
+
+# --- a sequencia e a frase da semana -------------------------------------------
+
+# As metas que nao zeram o dia: qualquer uma delas mantem a sequencia.
+METAS_QUE_MANTEM = {"ideal", "reduzida", "minima"}
+
+
+def sequencia(plano, metas: dict[date, str], hoje: date) -> int:
+    """Quantos dias do plano seguidos, de ontem para tras, nao zeraram.
+
+    Hoje entra so se ja estiver marcado - o dia ainda nao acabou, e nao
+    marcar ate agora nao e zerar. Domingo nao esta no plano, entao nao quebra
+    nada; dia sem marcacao ou "nao fiz" quebra.
+    """
+    ultimo = hoje if hoje in metas else hoje - timedelta(days=1)
+    contados = 0
+    for dia in sorted(plano.dias, key=lambda d: d.data, reverse=True):
+        if dia.data > ultimo:
+            continue
+        if metas.get(dia.data) not in METAS_QUE_MANTEM:
+            break
+        contados += 1
+    return contados
+
+
+def _o_que_sobe(plano, atual: int, proximo: int) -> str:
+    """'20 questões de Direito': o que muda na noite do nivel de cima."""
+    mudou = [(chave, questoes) for chave, questoes in plano.rampa[proximo].items()
+             if plano.rampa[atual].get(chave) != questoes]
+    if not mudou:
+        return f"o nível {proximo}"
+    partes = [f"{questoes} de {plano_de_estudo.NOME_DA_RAMPA.get(chave, chave)}"
+              for chave, questoes in mudou]
+    partes[0] = partes[0].replace(" de ", " questões de ", 1)
+    return " e ".join(partes)
+
+
+def frase_da_semana(plano, metas: dict[date, str], data: date, hoje: date,
+                    nivel) -> str | None:
+    """A frase animadora do cartao "Esta semana", para a semana de `data`.
+
+    A MESMA regra do gatilho (cronograma.niveis), com os numeros do YAML: a
+    semana sobe com `sobe_com_dias_na_ideal` dias completos e nenhum zerado,
+    e feriado feito como Minima ou melhor conta como completo. "Dia completo"
+    e o nome na tela do que o codigo chama de "ideal".
+
+    Dia que ja passou sem marcacao conta como perdido: "restantes" sao os
+    dias ainda sem marcacao de hoje em diante. Semana futura, fora do ciclo
+    ou a ultima do ciclo abaixo do teto (nao ha "semana que vem" para subir):
+    None, e a frase some.
+    """
+    gravado = plano.dia(data)
+    if gravado is None or nivel is None:
+        return None
+    dias = [d for d in plano.dias if d.semana == gravado.semana]
+    if min(d.data for d in dias) > hoje:
+        return None
+
+    teto = max(plano.rampa)
+    if nivel.efetivo >= teto:
+        return "💪 Você está na carga máxima do ciclo. Mantenha!"
+    if gravado.semana >= max(d.semana for d in plano.dias):
+        return None
+
+    sobe = plano.gatilho["sobe_com_dias_na_ideal"]
+    completos = zerados = restantes = 0
+    for dia in dias:
+        meta = metas.get(dia.data)
+        if meta == "ideal" or (dia.feriado and meta in plano_de_estudo.METAS_QUE_SALVAM_O_FERIADO):
+            completos += 1
+        elif meta == "nao_fiz":
+            zerados += 1
+        elif meta is None and dia.data >= hoje:
+            restantes += 1
+
+    proximo = nivel.efetivo + 1
+    faltam = sobe - completos
+    if faltam <= 0 and not zerados:
+        return f"✅ Semana garantida! A próxima sobe para o nível {proximo}."
+    if zerados or faltam > restantes:
+        return ("Essa semana não sobe mais, mas cada dia feito mantém a sua "
+                "sequência. Bora!")
+    carga_de_cima = _o_que_sobe(plano, nivel.efetivo, proximo)
+    if not completos:
+        # Segunda de manha, nada marcado: "0 dias completos!" nao anima ninguem.
+        return f"🔥 Faça {sobe} dias completos e a semana que vem sobe para {carga_de_cima}."
+    dias_completos = f"{completos} dia completo" if completos == 1 else f"{completos} dias completos"
+    return f"🔥 {dias_completos}! Mais {faltam} e a semana que vem sobe para {carga_de_cima}."
 
 
 def _metas(plano) -> dict[date, str]:
@@ -489,6 +579,8 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
                      total_semanas=max((d.semana for d in plano.dias), default=0),
                      nome_do_alvo=alvo.principal().get("nome"))
     metas = _metas(plano)
+    # De HOJE, e nao do dia na tela: e a sequencia de verdade.
+    tela.sequencia = sequencia(plano, metas, hoje)
 
     if data < plano.inicio:
         tela.estado = "antes"
@@ -507,6 +599,7 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
         tela.estado = "fora"
         return tela
     tela.dia, tela.nivel = dia, nivel
+    tela.frase = frase_da_semana(plano, metas, data, hoje, nivel)
 
     segunda = data - timedelta(days=data.weekday())
     for i in range(6):

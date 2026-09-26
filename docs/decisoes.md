@@ -1816,3 +1816,29 @@ Os detalhes:
 - o comportamento do JS e testado na mao; o pytest segura o contrato (o
   script, os data-*, pausa sem ▶, tudo `hidden` sem JS).
 
+### A sequencia 🔥 e a frase da semana (etapa A6, 26/09/2026)
+
+- **a sequencia conta dias do PLANO seguidos sem zerar**: ideal, reduzida ou
+  minima mantem; dia sem marcacao ou "nao fiz" quebra. Domingo nao esta no
+  plano, entao nao quebra. Conta de ontem para tras; HOJE entra so se ja
+  estiver marcado (o dia ainda nao acabou, e nao marcar ate agora nao e
+  zerar - mas marcado como "nao fiz", zera). E contada a partir do hoje de
+  verdade, e nao do dia aberto na tela, como o "fim do ciclo em N dias";
+- **a frase usa a MESMA regra do gatilho** e os numeros do YAML: sobe com
+  `sobe_com_dias_na_ideal` dias completos e nenhum "nao fiz"; feriado feito
+  como Minima ou melhor conta como completo. "Dia completo" e o nome na tela
+  do que o codigo chama de "ideal";
+- **dia que ja passou sem marcacao conta como perdido** na frase: "restam"
+  so os dias sem marcacao de hoje em diante. Da para marcar um dia passado
+  depois, e ai a frase muda - mas prometer com um dia que eu nao marquei
+  seria contar com o que nao aconteceu;
+- **a frase some** em semana futura, fora do ciclo, e na ULTIMA semana do
+  ciclo abaixo do teto: la nao existe "semana que vem" para subir. No teto
+  (nivel 6), a frase e a da carga maxima;
+- "o que sobe" diz so a materia que muda de um nivel para o outro ("20
+  questoes de Direito"), lida da rampa, nunca escrita a mao;
+- na segunda sem nada marcado, a frase e "Faca 5 dias completos...", e nao
+  "0 dias completos!";
+- tudo em `servico.cronograma` (`sequencia` e `frase_da_semana`), contas
+  puras com teste de data fingida; o template so escreve.
+

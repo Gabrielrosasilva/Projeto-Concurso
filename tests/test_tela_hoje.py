@@ -285,9 +285,8 @@ def test_a_faixa_do_topo_tem_nivel_e_meta(cliente):
     assert 'class="heroi"' in texto
     assert "⚡ Nível" in texto
     assert "🎯 Meta: 79 acertos" in texto
-    assert "dias seguidos" in texto
-    # Sem a conta da sequencia (A6), o lugar fica com "–", nunca um numero.
-    assert "🔥 – dias seguidos" in texto
+    # Sem nenhum dia marcado, a sequencia e zero e o selo convida a comecar.
+    assert "Comece hoje a sua sequência" in texto
 
 
 def test_a_coluna_lateral_tem_os_tres_cartoes(cliente):
