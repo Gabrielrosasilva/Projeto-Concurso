@@ -9,27 +9,62 @@
   {# A tela do cronograma: o que estudar no dia, a que horas, e onde eu marco
      como foi. Toda conta (horario, nivel, faixa atual) vem pronta do
      servico.cronograma.tela_do_dia; aqui so se desenha. Cor e espaco saem do
-     design.css - as cores por tipo de faixa sao as --faixa-*. #}
+     design.css - as cores por tipo de faixa sao as --faixa-*, e as da faixa
+     do topo e dos blocos da noite sao as --heroi-*, --fundo-noite e
+     --sobreaviso-*. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    /* --- cabecalho --- */
-    .dia-cabeca{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--esp-3);flex-wrap:wrap;margin-bottom:var(--esp-4)}
-    .dia-cabeca h1{margin:0;font-size:var(--tam-xl);line-height:var(--linha-titulo);letter-spacing:-.02em}
-    .dia-cabeca .sub{margin:var(--esp-1) 0 0;color:var(--cor-texto-suave);font-size:var(--tam-sm);display:flex;gap:var(--esp-2);align-items:center;flex-wrap:wrap}
+    /* --- fundo: pontinhos discretos, so nesta tela --- */
+    body.hoje-pagina{background-image:radial-gradient(var(--pontinho) 1px,transparent 1.3px);background-size:18px 18px}
+
+    /* --- a faixa azul do topo, de ponta a ponta --- */
+    .heroi{background:linear-gradient(135deg,var(--heroi-1),var(--heroi-2));color:var(--heroi-texto)}
+    .heroi__dentro{max-width:1200px;margin:0 auto;padding:var(--esp-6) var(--esp-4) var(--esp-5);
+      display:flex;justify-content:space-between;align-items:flex-end;gap:var(--esp-4);flex-wrap:wrap}
+    .heroi h1{margin:0;font-size:var(--tam-2xl);line-height:var(--linha-titulo);letter-spacing:-.02em;color:var(--heroi-texto)}
+    .heroi .sub{margin:var(--esp-1) 0 0;color:var(--heroi-texto-suave);font-size:var(--tam-base);display:flex;gap:var(--esp-2);align-items:center;flex-wrap:wrap}
+    .heroi__selos{display:flex;gap:var(--esp-2);flex-wrap:wrap;margin-top:var(--esp-3)}
+    .heroi-selo{display:inline-flex;align-items:center;gap:var(--esp-1);padding:.2rem .75rem;border-radius:var(--raio-pill);
+      background:var(--heroi-vidro);border:1px solid var(--heroi-vidro-borda);font-size:var(--tam-sm);font-weight:var(--peso-medio);
+      font-variant-numeric:tabular-nums}
     .navega{display:flex;gap:var(--esp-1);flex-wrap:wrap}
-    .navega a{text-decoration:none;font-size:var(--tam-sm);font-weight:var(--peso-medio);padding:var(--esp-1) var(--esp-3);
-      border:1px solid var(--cor-borda);border-radius:var(--raio-pill);background:var(--cor-superficie);color:var(--cor-texto-suave)}
-    .navega a:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
-    .navega a.hoje{background:var(--cor-acao-fundo);color:var(--cor-acao);border-color:transparent}
+    .ds .heroi .navega a{text-decoration:none;font-size:var(--tam-sm);font-weight:var(--peso-medio);padding:var(--esp-1) var(--esp-3);
+      border:1px solid var(--heroi-vidro-borda);border-radius:var(--raio-pill);background:var(--heroi-vidro);color:var(--heroi-texto)}
+    .ds .heroi .navega a:hover{border-color:var(--heroi-texto)}
+    .ds .heroi .navega a.hoje{background:var(--heroi-texto);color:var(--heroi-1);border-color:transparent}
     .chip-feriado{display:inline-block;padding:.1rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);
       font-weight:var(--peso-forte);background:var(--cor-aviso-fundo);color:var(--cor-aviso);border:1px solid currentColor}
 
-    /* --- faixa da semana --- */
-    .semana{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--esp-2)}
+    /* --- a grade: uma coluna; duas a partir de 1100px --- */
+    .hoje-grade{max-width:1200px;margin:0 auto;padding:var(--esp-5) var(--esp-4) var(--esp-7);display:grid;gap:var(--esp-4)}
+    .hoje-grade > *{min-width:0}
+    .lateral{display:grid;gap:var(--esp-4);align-content:start}
+    @media (min-width:1100px){
+      .hoje-grade.com-lateral{grid-template-columns:minmax(0,1fr) 300px;gap:var(--esp-5)}
+      /* A lateral vem antes no HTML (no celular ela fica logo abaixo do
+         topo); na tela larga ela vai para a direita e acompanha a rolagem. */
+      .com-lateral .lateral{grid-column:2;grid-row:1;position:sticky;top:4.5rem;align-self:start}
+      .com-lateral .principal{grid-column:1;grid-row:1}
+    }
+    .principal > :first-child{margin-top:0}
+
+    /* --- os cartoes da lateral --- */
+    .lateral .ds-cartao{padding:var(--esp-4)}
+    .lateral-titulo{margin:0 0 var(--esp-2);font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;
+      text-transform:uppercase;color:var(--cor-texto-suave)}
+    .lateral-cronometro:empty{display:none}
+    .agora .rotulo{display:block;font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.06em;color:var(--selo-calculado)}
+    .agora .principal-agora{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte);line-height:var(--linha-titulo)}
+    .agora .depois{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .objetivo p{margin:0 0 var(--esp-1);font-size:var(--tam-sm)}
+    .objetivo .alvo{font-size:var(--tam-md);font-weight:var(--peso-forte);margin-bottom:var(--esp-2)}
+
+    /* --- faixa da semana (as pilulas, na lateral) --- */
+    .semana{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--esp-1)}
     .pilula{display:flex;flex-direction:column;align-items:center;gap:2px;padding:var(--esp-2) 0;text-decoration:none;
-      border-radius:var(--raio);border:2px solid transparent;font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      border-radius:var(--raio-sm);border:2px solid transparent;font-size:var(--tam-xs);font-weight:var(--peso-medio);
       background:var(--cor-superficie-2);color:var(--cor-texto-suave)}
-    .pilula b{font-size:var(--tam-lg);font-variant-numeric:tabular-nums;line-height:1.1}
+    .pilula b{font-size:var(--tam-md);font-variant-numeric:tabular-nums;line-height:1.1}
     .ds a.pilula{color:var(--cor-texto-suave)}
     .ds a.pilula.ideal   {background:var(--selo-calculado-fundo);  color:var(--selo-calculado)}
     .ds a.pilula.reduzida{background:var(--selo-oficial-fundo);    color:var(--selo-oficial)}
@@ -40,25 +75,20 @@
     .motivo{margin:var(--esp-3) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave);display:flex;gap:var(--esp-2);align-items:baseline;flex-wrap:wrap}
 
     /* --- resumo em 3 numeros --- */
-    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--esp-3);margin-top:var(--esp-4)}
+    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--esp-3)}
     .resumo .ds-cartao{padding:var(--esp-3) var(--esp-4)}
     .grande{display:block;font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1.1;font-variant-numeric:tabular-nums}
     .resumo small{color:var(--cor-texto-suave);font-size:var(--tam-sm)}
-    .meta-prova{margin:var(--esp-2) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
-
-    /* --- agora --- */
-    .agora{margin-top:var(--esp-4);background:var(--cor-acao-fundo);border-color:transparent}
-    .agora .rotulo{font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;color:var(--cor-acao)}
-    .agora .principal{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte)}
-    .agora .depois{margin:var(--esp-1) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
 
     /* --- os blocos e a linha do tempo --- */
     .bloco-dia{margin-top:var(--esp-4);padding:var(--esp-4)}
     .bloco-dia .ds-cartao__cabeca{margin-bottom:var(--esp-3)}
+    .bloco-dia .nome-do-bloco{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
     .bloco-dia .horas{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
     .linha-tempo{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-2)}
     .faixa{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:var(--esp-3);align-items:start}
-    .faixa .quando{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave);padding-top:var(--esp-3);white-space:nowrap}
+    .faixa .quando{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave);padding-top:var(--esp-3);white-space:nowrap;
+      display:flex;flex-direction:column;align-items:flex-start;gap:var(--esp-1)}
     .faixa .corpo{--cor-tipo:var(--faixa-questoes);border-left:4px solid var(--cor-tipo);background:var(--cor-superficie-2);
       border-radius:var(--raio-sm);padding:var(--esp-3) var(--esp-4);min-width:0}
     .faixa .topo{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap;font-size:var(--tam-sm)}
@@ -74,7 +104,12 @@
     .faixa details{margin-top:var(--esp-2);font-size:var(--tam-sm)}
     .faixa summary{cursor:pointer;color:var(--cor-acao);font-weight:var(--peso-medio)}
     .faixa .filtro{margin:var(--esp-2) 0 0;font-family:var(--fonte-numero);font-size:var(--tam-xs);color:var(--cor-texto-suave);overflow-wrap:anywhere}
-    .faixa .links{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);display:flex;gap:var(--esp-3);flex-wrap:wrap}
+    .faixa .links{margin:var(--esp-3) 0 0;display:flex;gap:var(--esp-3);flex-wrap:wrap}
+    /* O link da lei e botao: e a acao da faixa, nao uma nota de rodape. */
+    .ds a.botao-lei{display:inline-flex;align-items:center;gap:var(--esp-1);padding:var(--esp-1) var(--esp-3);border-radius:var(--raio-sm);
+      border:1px solid var(--cor-acao);background:var(--cor-acao-fundo);color:var(--cor-acao);font-size:var(--tam-sm);
+      font-weight:var(--peso-medio);text-decoration:none}
+    .ds a.botao-lei:hover{background:var(--cor-acao);color:var(--cor-acao-texto)}
 
     .faixa.t-teoria .corpo{--cor-tipo:var(--faixa-teoria)}
     .faixa.t-lei_seca .corpo{--cor-tipo:var(--faixa-lei-seca)}
@@ -91,11 +126,29 @@
     .faixa.t-pausa .corpo{background:transparent;border-left:2px solid var(--faixa-pausa);border-radius:0;padding:0 var(--esp-3);
       font-size:var(--tam-xs);color:var(--cor-texto-suave)}
 
-    /* No dia de hoje: a faixa atual acesa, as que passaram apagadas. */
-    .faixa.atual .corpo{background:var(--cor-acao-fundo)}
-    .faixa .selo-agora{font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;padding:.05rem .5rem;
-      border-radius:var(--raio-pill);background:var(--cor-acao);color:var(--cor-acao-texto)}
+    /* No dia de hoje: a faixa atual com borda verde e a etiqueta AGORA
+       embaixo do horario; as que passaram, apagadas. */
+    .faixa.atual .corpo{box-shadow:0 0 0 2px var(--selo-calculado)}
+    .etiqueta-agora{font-family:var(--fonte);font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;padding:.05rem .5rem;
+      border-radius:var(--raio-pill);background:var(--selo-calculado);color:var(--cor-superficie)}
     .faixa.passou{opacity:.55}
+
+    /* --- o bloco das 18h: azul leve --- */
+    .bloco-dia.bloco-noite{background:var(--fundo-noite)}
+
+    /* --- o bloco das 22h: sobreaviso, azul-noite com texto claro. Tudo aqui
+       dentro troca de cor: nada cinza sobre o azul. --- */
+    .bloco-dia.bloco-pos22{background:var(--fundo-sobreaviso);border-color:var(--sobreaviso-borda);color:var(--sobreaviso-texto)}
+    .bloco-pos22 .ds-cartao__titulo,.bloco-pos22 .faixa .titulo,.bloco-pos22 .faixa .detalhe{color:var(--sobreaviso-texto)}
+    .bloco-pos22 .horas,.bloco-pos22 .faixa .quando,.bloco-pos22 .faixa .filtro,.bloco-pos22 .ds-suave,
+    .bloco-pos22 .faixa.t-pausa .corpo{color:var(--sobreaviso-suave)}
+    .bloco-pos22 .faixa .corpo{--cor-tipo:var(--sobreaviso-destaque);background:var(--sobreaviso-superficie)}
+    .bloco-pos22 .faixa.t-bonus .corpo{background:transparent;border-color:var(--sobreaviso-borda);border-left-color:var(--cor-tipo)}
+    .bloco-pos22 .faixa .materia,.bloco-pos22 .chip{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda);color:var(--sobreaviso-texto)}
+    .ds .bloco-pos22 a,.bloco-pos22 .faixa summary{color:var(--sobreaviso-destaque)}
+    .ds .bloco-pos22 a.botao-lei{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda)}
+    .etiqueta-sobreaviso{padding:.1rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      background:var(--sobreaviso-superficie);border:1px solid var(--sobreaviso-borda);color:var(--sobreaviso-texto);white-space:nowrap}
 
     /* --- se o dia apertar --- */
     .apertar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-3)}
@@ -134,27 +187,28 @@
 
     /* --- celular: uma coluna, horario em cima --- */
     @media (max-width:640px){
+      .heroi__dentro{padding:var(--esp-5) var(--esp-4) var(--esp-4)}
+      .heroi h1{font-size:var(--tam-xl)}
       .faixa{grid-template-columns:1fr;gap:var(--esp-1)}
-      .faixa .quando{padding-top:0}
+      .faixa .quando{padding-top:0;flex-direction:row;align-items:center}
       .resumo{gap:var(--esp-2)}
       .resumo .ds-cartao{padding:var(--esp-2) var(--esp-3)}
       .grande{font-size:var(--tam-lg)}
       .apertar,.campos{grid-template-columns:1fr}
       .metas{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .semana{gap:var(--esp-1)}
-      .pilula b{font-size:var(--tam-md)}
     }
 
     /* --- impressao: so o plano do dia --- */
     @media print{
-      .topo-barra,.navega,.como-foi,.agora{display:none !important}
+      .topo-barra,.navega,.como-foi,.lateral{display:none !important}
+      .hoje-grade.com-lateral{grid-template-columns:1fr}
       .faixa.passou{opacity:1}
       .ds-cartao{box-shadow:none}
     }
   </style>
   {% include "_topo_estilo.html" %}
 </head>
-<body class="ds">
+<body class="ds hoje-pagina">
 
 {% from "_topo.html" import barra with context %}
 {% from "_componentes.html" import selo %}
@@ -172,24 +226,105 @@
 {{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}{% if f.materia %} · {{ f.materia }}{% endif %}{% if f.questoes %}, {{ f.questoes }} questões{% endif %}
 {%- endmacro -%}
 
-<main class="ds-pagina">
+{%- macro hm(h) -%}{{ h.strftime('%H:%M') }}{%- endmacro -%}
 
-  {# ============================ cabecalho ============================ #}
-  <header class="dia-cabeca">
+{% set nome_do_ciclo = t.plano.titulo.split(' —')[0] if t.plano else '' %}
+{% set meta_acertos = t.plano.meta_da_prova.acertos if t.plano else none %}
+
+{# ============================ a faixa azul do topo ======================= #}
+<header class="heroi">
+  <div class="heroi__dentro">
     <div>
       <h1>{{ dia_legivel(t.data) }}</h1>
       <p class="sub">
         {% if t.plano %}{{ t.plano.titulo }}{% endif %}
-        {% if t.dia %} · Semana {{ t.dia.semana }} de {{ t.total_semanas }} · Nível {{ t.nivel.efetivo }}{% endif %}
+        {% if t.dia %} · Semana {{ t.dia.semana }} de {{ t.total_semanas }}{% endif %}
         {% if t.dia and t.dia.feriado %}<span class="chip-feriado">{{ t.dia.feriado }}</span>{% endif %}
       </p>
+      {% if t.dia or meta_acertos %}
+        <div class="heroi__selos">
+          {% if t.dia %}
+            <span class="heroi-selo">⚡ Nível {{ t.nivel.efetivo }}</span>
+            <span class="heroi-selo" title="Dias seguidos cumprindo a meta">🔥 {{ t.sequencia if t.sequencia is not none else '–' }} dias seguidos</span>
+          {% endif %}
+          {% if meta_acertos %}<span class="heroi-selo">🎯 Meta: {{ meta_acertos }} acertos</span>{% endif %}
+        </div>
+      {% endif %}
     </div>
     <nav class="navega" aria-label="Outros dias">
       <a href="{{ link_do_dia(t.anterior) }}">&larr; dia anterior</a>
       <a class="{{ 'hoje' if t.e_hoje }}" href="/hoje{% if tema %}?tema={{ tema }}{% endif %}">Hoje</a>
       <a href="{{ link_do_dia(t.proximo) }}">próximo dia &rarr;</a>
     </nav>
-  </header>
+  </div>
+</header>
+
+<div class="hoje-grade {{ 'com-lateral' if t.plano }}">
+
+  {# ============================ a coluna lateral ========================= #}
+  {% if t.plano %}
+  <aside class="lateral" aria-label="Resumo do dia">
+    {# O lugar do cronometro: vazio por enquanto, e escondido enquanto vazio. #}
+    <div class="lateral-cronometro" id="cronometro"></div>
+
+    {% if t.dia %}
+      {% set d = t.dia %}
+      <section class="ds-cartao agora" aria-live="polite">
+        {% if t.agora %}
+          {% set a = t.agora %}
+          <h2 class="lateral-titulo">Agora · {{ hm(t.hora) }}</h2>
+          {% if a.situacao == 'faixa' %}
+            <span class="rotulo">EM ANDAMENTO · {{ hm(a.atual.inicio) }}–{{ hm(a.atual.fim) }}</span>
+            <p class="principal-agora">{{ a.atual.titulo }}</p>
+            {% if a.proxima %}<p class="depois">depois: {{ resumo_da_faixa(a.proxima) }}, às {{ hm(a.proxima.inicio) }}</p>{% endif %}
+          {% elif a.situacao == 'antes' and a.proxima %}
+            <p class="principal-agora">Começa às {{ hm(a.proxima.inicio) }} com {{ resumo_da_faixa(a.proxima) }}</p>
+            <p class="depois">{{ a.proxima.titulo }}</p>
+          {% elif a.situacao == 'entre' %}
+            <p class="principal-agora">Próximo bloco às {{ hm(a.proxima.inicio) }}: {{ resumo_da_faixa(a.proxima) }}</p>
+            <p class="depois">{{ a.proxima.titulo }}</p>
+          {% else %}
+            <p class="principal-agora">Dia encerrado. Marque como foi lá embaixo.</p>
+          {% endif %}
+        {% else %}
+          {% set primeira = d.faixas() | first %}
+          <h2 class="lateral-titulo">Agora</h2>
+          <p class="principal-agora">{% if primeira %}Este dia: começa às {{ hm(primeira.inicio) }}{% else %}Este dia não tem faixa.{% endif %}</p>
+        {% endif %}
+      </section>
+
+      <section class="ds-cartao">
+        <h2 class="lateral-titulo">Esta semana</h2>
+        <nav class="semana" aria-label="Os dias desta semana">
+          {% for p in t.pilulas %}
+            {% set classe = 'futuro' if p.futuro else (p.meta or 'sem') %}
+            <a class="pilula {{ classe }} {{ 'aberta' if p.aberta }}" href="{{ link_do_dia(p.data) }}"
+               title="{{ p.data.strftime('%d/%m') }}: {{ META_LEGIVEL.get(p.meta, 'dia futuro' if p.futuro else 'sem marcação') }}"
+               {% if p.aberta %}aria-current="date"{% endif %}>
+              <span>{{ p.rotulo }}</span><b>{{ p.data.day }}</b>
+            </a>
+          {% endfor %}
+        </nav>
+        <p class="motivo">{{ selo('calculado') }} <span>{{ t.nivel.motivo }}</span></p>
+      </section>
+    {% endif %}
+
+    <section class="ds-cartao objetivo">
+      <h2 class="lateral-titulo">Objetivo</h2>
+      {% if t.nome_do_alvo %}<p class="alvo">🎯 {{ t.nome_do_alvo }}</p>{% endif %}
+      {% if meta_acertos %}<p>Meta da prova: {{ meta_acertos }} acertos</p>{% endif %}
+      {% set faltam = t.dias_para_o_fim %}
+      <p class="ds-suave">
+        {% if faltam < 0 %}{{ nome_do_ciclo }} encerrado
+        {% elif faltam == 0 %}Fim do {{ nome_do_ciclo }} hoje
+        {% elif faltam == 1 %}Fim do {{ nome_do_ciclo }} em 1 dia
+        {% else %}Fim do {{ nome_do_ciclo }} em {{ faltam }} dias{% endif %}
+      </p>
+    </section>
+  </aside>
+  {% endif %}
+
+  <main class="principal">
 
   {% if erro_de_data %}<p class="erro">{{ erro_de_data }}</p>{% endif %}
 
@@ -226,7 +361,7 @@
   {% elif t.estado == 'antes' %}
     <section class="ds-cartao vazio-grande">
       <div class="emoji" aria-hidden="true">🚀</div>
-      <h2>O {{ t.plano.titulo.split(' —')[0] }} começa em {{ t.plano.inicio.strftime('%d/%m') }} ({{ DIAS_LONGOS[t.plano.inicio.weekday()] | lower }})</h2>
+      <h2>O {{ nome_do_ciclo }} começa em {{ t.plano.inicio.strftime('%d/%m') }} ({{ DIAS_LONGOS[t.plano.inicio.weekday()] | lower }})</h2>
       {% if t.outro_dia %}
         {% set teoria = t.outro_dia.manha | selectattr('tipo', 'equalto', 'teoria') | first %}
         <p>O primeiro dia: {% if teoria %}<b>{{ teoria.materia }} · {{ teoria.titulo }}</b> de manhã, e {% endif %}<b>{{ t.outro_dia.total_questoes }} questões</b> à noite.</p>
@@ -237,7 +372,7 @@
   {% elif t.estado == 'depois' %}
     <section class="ds-cartao vazio-grande">
       <div class="emoji" aria-hidden="true">🏁</div>
-      <h2>O {{ t.plano.titulo.split(' —')[0] }} terminou em {{ t.plano.fim.strftime('%d/%m') }}</h2>
+      <h2>O {{ nome_do_ciclo }} terminou em {{ t.plano.fim.strftime('%d/%m') }}</h2>
       <p>O Ciclo {{ (t.plano.ciclo or 0) + 1 }} entra quando o <code>config/cronograma.yml</code> for atualizado.</p>
     </section>
 
@@ -251,68 +386,37 @@
   {% else %}
   {% set d = t.dia %}
 
-  {# ============================ faixa da semana ====================== #}
-  <nav class="semana" aria-label="Os dias desta semana">
-    {% for p in t.pilulas %}
-      {% set classe = 'futuro' if p.futuro else (p.meta or 'sem') %}
-      <a class="pilula {{ classe }} {{ 'aberta' if p.aberta }}" href="{{ link_do_dia(p.data) }}"
-         title="{{ p.data.strftime('%d/%m') }}: {{ META_LEGIVEL.get(p.meta, 'dia futuro' if p.futuro else 'sem marcação') }}"
-         {% if p.aberta %}aria-current="date"{% endif %}>
-        <span>{{ p.rotulo }}</span><b>{{ p.data.day }}</b>
-      </a>
-    {% endfor %}
-  </nav>
-  <p class="motivo">{{ selo('calculado') }} <span>{{ t.nivel.motivo }}</span></p>
-
   {# ============================ resumo ================================ #}
   <section class="resumo" aria-label="O dia em três números">
     <div class="ds-cartao"><span class="grande">{{ duracao_legivel(d.minutos_de_estudo) }}</span><small>de estudo</small></div>
     <div class="ds-cartao"><span class="grande">{{ d.total_questoes }}</span><small>questões</small></div>
-    <div class="ds-cartao"><small>termina às</small><span class="grande">{{ t.fim_do_dia.strftime('%H:%M') if t.fim_do_dia else '--' }}</span></div>
+    <div class="ds-cartao"><small>termina às</small><span class="grande">{{ hm(t.fim_do_dia) if t.fim_do_dia else '--' }}</span></div>
   </section>
-  {% if t.plano.meta_da_prova.acertos %}
-    <p class="meta-prova">Meta da prova: {{ t.plano.meta_da_prova.acertos }} acertos</p>
-  {% endif %}
-
-  {# ============================ agora ================================= #}
-  {% if t.agora %}
-    {% set a = t.agora %}
-    <section class="ds-cartao agora" aria-live="polite">
-      <span class="rotulo">AGORA · {{ t.hora.strftime('%H:%M') }}</span>
-      {% if a.situacao == 'faixa' %}
-        <p class="principal">{{ a.atual.inicio.strftime('%H:%M') }}–{{ a.atual.fim.strftime('%H:%M') }} · {{ a.atual.titulo }}</p>
-        {% if a.proxima %}<p class="depois">depois: {{ resumo_da_faixa(a.proxima) }}, às {{ a.proxima.inicio.strftime('%H:%M') }}</p>{% endif %}
-      {% elif a.situacao == 'antes' and a.proxima %}
-        <p class="principal">Começa às {{ a.proxima.inicio.strftime('%H:%M') }} com {{ resumo_da_faixa(a.proxima) }}</p>
-        <p class="depois">{{ a.proxima.titulo }}</p>
-      {% elif a.situacao == 'entre' %}
-        <p class="principal">Próximo bloco às {{ a.proxima.inicio.strftime('%H:%M') }}: {{ resumo_da_faixa(a.proxima) }}</p>
-        <p class="depois">{{ a.proxima.titulo }}</p>
-      {% else %}
-        <p class="principal">Dia encerrado. Marque como foi lá embaixo.</p>
-      {% endif %}
-    </section>
-  {% endif %}
 
   {# ============================ os tres blocos ======================== #}
   {% for b in t.blocos if b.faixas %}
-    <section class="ds-cartao bloco-dia" aria-labelledby="bloco-{{ b.chave }}">
+    <section class="ds-cartao bloco-dia bloco-{{ b.chave }}" aria-labelledby="bloco-{{ b.chave }}">
       <div class="ds-cartao__cabeca">
-        <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
-        <span class="horas">{{ b.inicio.strftime('%H:%M') }} – {{ b.fim.strftime('%H:%M') }}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
+        <div class="nome-do-bloco">
+          <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
+          {% if b.chave == 'pos22' %}<span class="etiqueta-sobreaviso">🌙 sobreaviso · pode interromper</span>{% endif %}
+        </div>
+        <span class="horas">{{ hm(b.inicio) }} – {{ hm(b.fim) }}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
       </div>
       <ol class="linha-tempo">
         {% for f in b.faixas %}
           {% set atual = t.agora and t.agora.atual is sameas f %}
           {% set passou = t.hora and f.fim <= t.hora %}
           <li class="faixa t-{{ f.tipo }} {{ 'atual' if atual }} {{ 'passou' if passou and not atual }}">
-            <span class="quando">{{ f.inicio.strftime('%H:%M') }} – {{ f.fim.strftime('%H:%M') }}</span>
+            <span class="quando">
+              <span>{{ hm(f.inicio) }} – {{ hm(f.fim) }}</span>
+              {% if atual %}<span class="etiqueta-agora">AGORA</span>{% endif %}
+            </span>
             {% if f.tipo == 'pausa' %}
               <div class="corpo">{{ ICONE_DO_TIPO.pausa }} Pausa · {{ f.duracao }} min{% if f.detalhe %} · {{ f.detalhe }}{% endif %}</div>
             {% else %}
               <div class="corpo">
                 <div class="topo">
-                  {% if atual %}<span class="selo-agora">AGORA</span>{% endif %}
                   <span class="tipo"><span aria-hidden="true">{{ ICONE_DO_TIPO[f.tipo] }}</span> {{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}</span>
                   {% if f.materia %}<span class="materia">{{ f.materia }}</span>{% endif %}
                 </div>
@@ -339,7 +443,7 @@
                 {% endif %}
 
                 {% if f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
-                {% if f.link %}<p class="links"><a href="{{ f.link }}" target="_blank" rel="noopener">ler a lei ↗</a></p>{% endif %}
+                {% if f.link %}<p class="links"><a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a></p>{% endif %}
               </div>
             {% endif %}
           </li>
@@ -408,6 +512,7 @@
   </section>
   {% endif %}
 
-</main>
+  </main>
+</div>
 </body>
 </html>

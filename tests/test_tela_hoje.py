@@ -35,7 +35,8 @@ def test_o_primeiro_dia(cliente):
     assert "15 questões" in texto
     assert "Qconcursos" in texto
     assert "Segunda, 28 de setembro" in texto
-    assert "Semana 1 de 6 · Nível 1" in texto
+    assert "Semana 1 de 6" in texto
+    assert "⚡ Nível 1" in texto
     assert "Primeira semana: nível 1." in texto
     assert "termina às" in texto and "19:35" in texto
     assert "Meta da prova: 79 acertos" in texto
@@ -46,7 +47,7 @@ def test_o_detalhe_da_teoria_fica_aberto_e_o_das_questoes_fechado(cliente):
     assert "Princípios da legalidade e da anterioridade" in texto
     assert "<details><summary>ver detalhe</summary>" in texto
     assert "Filtro: Direito Penal" in texto
-    assert 'target="_blank"' in texto and "ler a lei ↗" in texto
+    assert 'target="_blank"' in texto and "Ler no Planalto" in texto
 
 
 def test_revisao_diz_de_que_dia_volta_e_feriado_ganha_chip(cliente):
@@ -95,10 +96,12 @@ def test_data_invalida_nao_quebra(cliente):
 def test_agora_no_meio_de_uma_faixa(cliente, monkeypatch):
     _parar_o_relogio(monkeypatch, 2026, 9, 28, 18, 20)
     texto = cliente.get("/hoje").text
-    assert "AGORA · 18:20" in texto
-    assert "18:00–18:40 · Aprendizagem: Aplicação da lei penal" in texto
+    assert "Agora · 18:20" in texto
+    assert "EM ANDAMENTO · 18:00–18:40" in texto
+    assert "Aprendizagem: Aplicação da lei penal" in texto
     assert "depois: Pausa" in texto
-    assert 'class="selo-agora"' in texto
+    # Na linha do tempo, a faixa atual leva a etiqueta AGORA embaixo do horario.
+    assert 'class="etiqueta-agora"' in texto
     assert "passou" in texto               # a manha ja foi
 
 
@@ -113,7 +116,9 @@ def test_agora_antes_de_comecar_entre_blocos_e_no_fim(cliente, monkeypatch):
 
 def test_agora_so_aparece_no_dia_de_hoje(cliente, monkeypatch):
     _parar_o_relogio(monkeypatch, 2026, 9, 28, 18, 20)
-    assert "AGORA ·" not in cliente.get("/hoje?data=2026-09-29").text
+    texto = cliente.get("/hoje?data=2026-09-29").text
+    assert "Agora ·" not in texto
+    assert "Este dia: começa às 10:15" in texto
 
 
 # --- como foi o dia ----------------------------------------------------------
@@ -268,3 +273,65 @@ def test_a_reduzida_da_tela_acompanha_o_nivel(cliente, monkeypatch):
     _parar_o_relogio(monkeypatch, 2026, 10, 30, 12, 0)
     assert "só as 15 questões de Lei de Execução Penal" in cliente.get(
         "/hoje?data=2026-10-28").text
+
+
+# --- o visual novo (etapa A2) ------------------------------------------------
+
+def test_a_faixa_do_topo_tem_nivel_e_meta(cliente):
+    texto = cliente.get("/hoje?data=2026-10-28").text
+    assert 'class="heroi"' in texto
+    assert "⚡ Nível" in texto
+    assert "🎯 Meta: 79 acertos" in texto
+    assert "dias seguidos" in texto
+    # Sem a conta da sequencia (A6), o lugar fica com "–", nunca um numero.
+    assert "🔥 – dias seguidos" in texto
+
+
+def test_a_coluna_lateral_tem_os_tres_cartoes(cliente):
+    texto = cliente.get("/hoje?data=2026-10-28").text
+    assert 'class="lateral"' in texto
+    assert 'id="cronometro"' in texto          # o lugar do cronometro, vazio
+    for titulo in ("Agora", "Esta semana", "Objetivo"):
+        assert f'<h2 class="lateral-titulo">{titulo}' in texto
+    assert "Meta da prova: 79 acertos" in texto
+    assert 'class="pilula' in texto
+
+
+def test_o_botao_da_lei_diz_onde_abre():
+    from radar.web.app import rotulo_da_lei
+    assert rotulo_da_lei("https://www.planalto.gov.br/ccivil_03/leis/l7210.htm") == "Ler no Planalto"
+    assert rotulo_da_lei("https://leis.alesc.sc.gov.br/html/2005/1234.html") == "Ler na ALESC"
+    assert rotulo_da_lei("http://alesc.sc.gov.br/lei") == "Ler na ALESC"
+    assert rotulo_da_lei("https://www.stf.jus.br/sumula") == "Ler a lei"
+    # Um dominio que so TERMINA parecido nao e o Planalto.
+    assert rotulo_da_lei("https://falsoplanalto.gov.br/x") == "Ler a lei"
+
+
+def test_o_botao_da_lei_aparece_na_tela(cliente):
+    texto = cliente.get("/hoje?data=2026-09-28").text
+    assert 'class="botao-lei"' in texto and "⚖️" in texto and "Ler no Planalto" in texto
+
+
+def test_o_bloco_das_22h_e_sobreaviso(cliente):
+    texto = cliente.get("/hoje?data=2026-09-29").text
+    assert "bloco-pos22" in texto
+    assert "🌙 sobreaviso · pode interromper" in texto
+    assert "bloco-noite" in texto
+
+
+def test_fim_do_ciclo_em_n_dias(cliente, monkeypatch):
+    _parar_o_relogio(monkeypatch, 2026, 10, 28, 9, 0)
+    assert "Fim do Ciclo 1 em 10 dias" in cliente.get("/hoje").text
+
+
+def test_fim_do_ciclo_hoje_e_encerrado(cliente, monkeypatch):
+    _parar_o_relogio(monkeypatch, 2026, 11, 7, 9, 0)
+    assert "Fim do Ciclo 1 hoje" in cliente.get("/hoje").text
+    _parar_o_relogio(monkeypatch, 2026, 11, 10, 9, 0)
+    assert "Ciclo 1 encerrado" in cliente.get("/hoje").text
+
+
+def test_a_minima_se_chama_plano_b_no_formulario(cliente):
+    texto = cliente.get("/hoje?data=2026-09-28").text
+    assert "Plano B</small>" in texto
+    assert "Anki + poucas questões" not in texto

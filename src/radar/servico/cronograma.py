@@ -13,6 +13,7 @@ from datetime import date, datetime, time, timedelta
 from sqlalchemy import select
 
 from radar import acervo
+from radar import alvo
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import RegistroDoDia, agora
@@ -167,6 +168,11 @@ class TelaDoDia:
     registro: RegistroDoDia | None = None
     # O dia que o estado vazio mostra: amanha (domingo) ou o primeiro (antes).
     outro_dia: object = None
+    # O cartao "Objetivo": o nome do alvo sai do config/alvo.yml, nunca daqui.
+    nome_do_alvo: str | None = None
+    # Dias seguidos cumprindo a meta. Vazio ate a conta existir: a tela mostra
+    # "–" e nao um numero inventado.
+    sequencia: int | None = None
 
     @property
     def e_hoje(self) -> bool:
@@ -175,6 +181,14 @@ class TelaDoDia:
     @property
     def futuro(self) -> bool:
         return self.data > self.hoje
+
+    @property
+    def dias_para_o_fim(self) -> int | None:
+        """Quantos dias faltam, contados de HOJE (e nao do dia na tela), para
+        o fim do ciclo. Negativo quando ja acabou; None sem plano."""
+        if self.plano is None:
+            return None
+        return (self.plano.fim - self.hoje).days
 
     @property
     def anterior(self) -> date:
@@ -246,7 +260,8 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
         return TelaDoDia("erro", data, hoje, mensagem=str(erro))
 
     tela = TelaDoDia("dia", data, hoje, plano=plano,
-                     total_semanas=max((d.semana for d in plano.dias), default=0))
+                     total_semanas=max((d.semana for d in plano.dias), default=0),
+                     nome_do_alvo=alvo.principal().get("nome"))
     metas = _metas(plano)
 
     if data < plano.inicio:

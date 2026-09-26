@@ -1694,3 +1694,32 @@ Os detalhes:
 - **barra do topo**: "Radar" a esquerda, as abas centralizadas, o botao a
   direita. Abaixo de 640px a marca e o botao dividem a primeira linha e as
   abas quebram em linhas embaixo, sem rolagem lateral.
+
+### O visual novo da tela Hoje (etapa A2, 26/09/2026)
+
+- **faixa azul no topo, de ponta a ponta**: a data, "Ciclo · Semana N de 6",
+  os selos ⚡ Nivel, 🔥 dias seguidos e 🎯 Meta, e a navegacao entre dias.
+  O 🔥 mostra "–" enquanto a conta da sequencia nao existe (campo
+  `sequencia` da `TelaDoDia`, vazio): lugar reservado, nunca numero inventado;
+- **duas colunas a partir de 1100px**: a linha do tempo a esquerda e uma
+  coluna lateral de 300px, fixa ao rolar, com Agora, Esta semana (as
+  pilulas, que sairam do topo) e Objetivo. O lugar do Cronometro ja existe
+  no topo da coluna, vazio e escondido. No HTML a lateral vem ANTES da
+  linha do tempo: abaixo de 1100px e ali que ela aparece, logo depois da
+  faixa azul, sem CSS de reordenacao;
+- **"Fim do Ciclo em N dias" conta de HOJE**, nao do dia que esta na tela:
+  e quanto falta de verdade. Passou do fim, "Ciclo 1 encerrado";
+- **o nome do alvo no Objetivo sai do `config/alvo.yml`** (`principal.nome`),
+  como na home - nenhum nome de cargo escrito no template;
+- **o bloco das 22h e sobreaviso**: azul-noite, texto claro e a etiqueta
+  "🌙 sobreaviso · pode interromper". Tudo la dentro troca de cor (titulo,
+  chips, "ver detalhe", filtro): o "suave" do sobreaviso e um lilas claro, e
+  nao o cinza, que some no azul. O das 18h ganha so um azul leve;
+- **o link da lei virou botao e diz onde abre** - "Ler no Planalto", "Ler na
+  ALESC" ou "Ler a lei" - pelo dominio do proprio link (`rotulo_da_lei`, no
+  app.py), sem campo novo no YAML. Dominio que so termina parecido
+  ("falsoplanalto.gov.br") nao conta;
+- **cor nova e token novo**, com a versao clara e a escura no design.css:
+  `--heroi-*`, `--pontinho`, `--fundo-noite`, `--fundo-sobreaviso` e
+  `--sobreaviso-*`. O pontilhado do fundo vale so na tela Hoje;
+- no "Como foi o dia", a legenda da Minima passou a ser "Plano B".

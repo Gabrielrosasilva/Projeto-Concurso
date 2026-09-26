@@ -6,7 +6,7 @@ outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 import time
 from datetime import date
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 
 from fastapi import FastAPI, Form, Request
 from fastapi.exceptions import HTTPException
@@ -175,7 +175,7 @@ META_LEGIVEL = {"ideal": "Ideal", "reduzida": "Reduzida", "minima": "Mínima",
 OPCOES_DE_META = [
     ("ideal", "✅", "Ideal", "dia completo"),
     ("reduzida", "🟦", "Reduzida", "manhã + parte da noite"),
-    ("minima", "🟨", "Mínima", "Anki + poucas questões"),
+    ("minima", "🟨", "Mínima", "Plano B"),
     ("nao_fiz", "❌", "Não fiz", "o dia zerou"),
 ]
 # O detalhe destas faixas e o que estudar, artigo por artigo: fica aberto. O
@@ -183,12 +183,28 @@ OPCOES_DE_META = [
 DETALHE_ABERTO = {"teoria", "lei_seca", "portugues", "raciocinio"}
 DIAS_LONGOS = ("Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo")
 
+
+# O botao do link da lei diz ONDE ela abre: o Planalto (lei federal) ou a
+# ALESC (lei de SC). Pelo endereco, e nao por um campo a mais no YAML - o
+# link ja diz de onde e.
+SITES_DA_LEI = (("planalto.gov.br", "Ler no Planalto"), ("alesc.sc.gov.br", "Ler na ALESC"))
+
+
+def rotulo_da_lei(link: str) -> str:
+    """"Ler no Planalto", "Ler na ALESC" ou, de qualquer outro site, "Ler a lei"."""
+    site = (urlparse(link).hostname or "").lower()
+    for dominio, rotulo in SITES_DA_LEI:
+        if site == dominio or site.endswith("." + dominio):
+            return rotulo
+    return "Ler a lei"
+
 templates.env.globals.update(
     ONDE_LEGIVEL=ONDE_LEGIVEL, META_LEGIVEL=META_LEGIVEL,
     OPCOES_DE_META=OPCOES_DE_META, DETALHE_ABERTO=DETALHE_ABERTO,
     DIAS_LONGOS=DIAS_LONGOS, MESES=cronograma.MESES,
     TIPO_LEGIVEL=cronograma.TIPO_LEGIVEL, ICONE_DO_TIPO=cronograma.ICONE_DO_TIPO,
     duracao_legivel=cronograma.duracao_legivel,
+    rotulo_da_lei=rotulo_da_lei,
 )
 
 
