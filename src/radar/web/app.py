@@ -190,6 +190,14 @@ DIAS_LONGOS = ("Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Dom
 SITES_DA_LEI = (("planalto.gov.br", "Ler no Planalto"), ("alesc.sc.gov.br", "Ler na ALESC"))
 
 
+def tempo_do_plano_b(minutos: int) -> str:
+    """"30 min", "1 hora", "2 horas": como o botao e o resumo dizem o tempo."""
+    if minutos % 60:
+        return f"{minutos} min"
+    horas = minutos // 60
+    return "1 hora" if horas == 1 else f"{horas} horas"
+
+
 def rotulo_da_lei(link: str) -> str:
     """"Ler no Planalto", "Ler na ALESC" ou, de qualquer outro site, "Ler a lei"."""
     site = (urlparse(link).hostname or "").lower()
@@ -205,6 +213,7 @@ templates.env.globals.update(
     TIPO_LEGIVEL=cronograma.TIPO_LEGIVEL, ICONE_DO_TIPO=cronograma.ICONE_DO_TIPO,
     duracao_legivel=cronograma.duracao_legivel,
     rotulo_da_lei=rotulo_da_lei,
+    tempo_do_plano_b=tempo_do_plano_b,
 )
 
 
@@ -928,6 +937,24 @@ def hoje_faixa(
     tema = request.query_params.get("tema")
     destino = (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
                + f"#faixa-{bloco}-{posicao}")
+    return RedirectResponse(destino, status_code=303)
+
+
+@app.post("/hoje/plano-b")
+def hoje_plano_b(request: Request, data: str = Form(""), minutos: str = Form("")):
+    """Os botoes do Plano B: 30 ou 60 ativa; vazio volta ao plano completo."""
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro_da_faixa=f"Data inválida: {data!r}.",
+                               status=400)
+    try:
+        servico.cronograma.ativar_plano_b(quando, _inteiro(minutos, "O tempo do Plano B"))
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
+
+    tema = request.query_params.get("tema")
+    destino = f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
     return RedirectResponse(destino, status_code=303)
 
 

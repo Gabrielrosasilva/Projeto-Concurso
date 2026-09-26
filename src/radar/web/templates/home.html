@@ -88,6 +88,8 @@
       <span class="texto">
         {% if c.estado == 'domingo' %}
           <b>Hoje é descanso.</b>
+        {% elif c.plano_b %}
+          <b>Hoje: Plano B ({{ tempo_do_plano_b(c.plano_b) }})</b> · só o essencial e questões de prova do tema
         {% else %}
           Semana {{ c.dia.semana }} · Nível {{ c.nivel.efetivo }} ·
           {% if c.agora and c.agora.atual %}

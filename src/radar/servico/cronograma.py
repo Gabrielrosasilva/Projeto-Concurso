@@ -133,8 +133,15 @@ def _faixa_do_plano(plano, data: date, bloco: str, indice: int):
     gravado = plano.dia(data)
     if gravado is None:
         raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
-    if bloco not in plano_de_estudo.BLOCOS:
+    if bloco not in plano_de_estudo.TODOS_OS_BLOCOS:
         raise RegistroInvalido(f"Bloco {bloco!r} nao existe")
+    if bloco == plano_de_estudo.BLOCO_DO_PLANO_B:
+        # As faixas do Plano B nao estao no arquivo: saem do dia, com o Plano
+        # B que esta ativo. Sem ele ativo, nao ha o que marcar.
+        estado = estado_do_dia(data)
+        if estado is None or not estado.plano_b:
+            raise RegistroInvalido("O Plano B nao esta ativo neste dia.")
+        gravado = plano_de_estudo.montar_plano_b(plano, data, estado.plano_b)
     faixas = getattr(gravado, bloco)
     if not 0 <= indice < len(faixas):
         raise RegistroInvalido(f"O bloco {bloco} nao tem a faixa {indice}")
@@ -206,7 +213,7 @@ def faixas_feitas(dia, estado: EstadoDoDia | None) -> set[tuple[str, int]]:
     feitas = set()
     for check in estado.faixas_feitas or []:
         bloco, indice = check.get("bloco"), check.get("indice")
-        if bloco not in plano_de_estudo.BLOCOS or not isinstance(indice, int):
+        if bloco not in plano_de_estudo.TODOS_OS_BLOCOS or not isinstance(indice, int):
             continue
         faixas = getattr(dia, bloco)
         if not 0 <= indice < len(faixas):
@@ -246,7 +253,7 @@ def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
         bloco, indice = posicao
         return getattr(dia, bloco)[indice]
 
-    todas = [p for bloco in plano_de_estudo.BLOCOS for p in contam(bloco)]
+    todas = [p for bloco in plano_de_estudo.TODOS_OS_BLOCOS for p in contam(bloco)]
     feitas_que_contam = [p for p in todas if p in feitas]
     questoes = sum(faixa(p).questoes or 0 for p in feitas)
     sugestao = Sugestao(None, len(feitas_que_contam), len(todas), questoes)
@@ -264,6 +271,49 @@ def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
     elif alguma_de_questoes:
         sugestao.meta = "minima"
     return sugestao
+
+
+# --- o Plano B ---------------------------------------------------------------
+
+def ativar_plano_b(
+    data: date,
+    minutos: int | None,
+    *,
+    plano: plano_de_estudo.Plano | None = None,
+    hoje: date | None = None,
+) -> None:
+    """Grava o Plano B escolhido no dia (30 ou 60). `None` volta ao plano
+    completo. Os checks das faixas ficam como estao: voltar ao completo nao
+    apaga o que eu ja tinha riscado."""
+    hoje = hoje or hoje_local()
+    plano = plano or plano_de_estudo.carregar()
+    if minutos is not None:
+        if data > hoje:
+            raise RegistroInvalido(
+                f"{data:%d/%m/%Y} ainda nao chegou: Plano B e para o dia que apertou"
+            )
+        if plano.plano_b is None:
+            raise RegistroInvalido("O config/cronograma.yml nao tem o bloco `plano_b`.")
+        if minutos not in plano.plano_b.opcoes:
+            raise RegistroInvalido(
+                f"Plano B de {minutos} min nao existe (ha: "
+                f"{', '.join(str(m) for m in sorted(plano.plano_b.opcoes))})"
+            )
+        if data.weekday() == plano_de_estudo.DOMINGO:
+            raise RegistroInvalido("Domingo é descanso: não tem Plano B.")
+        if plano.dia(data) is None:
+            raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
+
+    criar_tabelas()
+    with sessao() as s:
+        estado = s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
+        if estado is None:
+            if minutos is None:
+                return
+            estado = EstadoDoDia(data=data, faixas_feitas=[])
+            s.add(estado)
+        estado.plano_b = minutos
+        estado.atualizado_em = agora()
 
 
 # --- a tela "Hoje" -----------------------------------------------------------
@@ -325,6 +375,13 @@ class TelaDoDia:
     # Os checks: as posicoes (bloco, indice) feitas, e o que elas sugerem.
     feitas: set = field(default_factory=set)
     sugestao: object = None
+    # O Plano B ativo (30 ou 60 minutos), e as opcoes que o botao oferece.
+    plano_b: int | None = None
+    opcoes_do_plano_b: list[int] = field(default_factory=list)
+
+    @property
+    def pode_ativar_plano_b(self) -> bool:
+        return bool(self.opcoes_do_plano_b) and self.dia is not None and not self.futuro
 
     @property
     def e_hoje(self) -> bool:
@@ -456,6 +513,23 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
         tela.hora = relogio.time().replace(second=0, microsecond=0)
         tela.agora = _agora(dia, tela.hora)
     tela.registro = registros(data, data).get(data)
-    tela.feitas = faixas_feitas(dia, estado_do_dia(data))
+    estado = estado_do_dia(data)
+    if plano.plano_b is not None:
+        tela.opcoes_do_plano_b = sorted(plano.plano_b.opcoes)
+    if estado and estado.plano_b in tela.opcoes_do_plano_b:
+        # Plano B ativo: a tela mostra SO ele. O dia vira um bloco so, e a
+        # meta sugerida e sempre a Minima - e o que o Plano B e.
+        tela.plano_b = estado.plano_b
+        do_plano_b = plano_de_estudo.montar_plano_b(plano, data, estado.plano_b,
+                                                    nivel.efetivo)
+        tela.blocos = [BlocoNaTela(plano_de_estudo.BLOCO_DO_PLANO_B,
+                                   "Plano B — o mínimo de hoje", do_plano_b.plano_b,
+                                   questoes=do_plano_b.total_questoes)]
+        tela.agora = None
+        tela.feitas = faixas_feitas(do_plano_b, estado)
+        tela.sugestao = sugerir_meta(do_plano_b, tela.feitas)
+        tela.sugestao.meta = "minima"
+        return tela
+    tela.feitas = faixas_feitas(dia, estado)
     tela.sugestao = sugerir_meta(dia, tela.feitas)
     return tela

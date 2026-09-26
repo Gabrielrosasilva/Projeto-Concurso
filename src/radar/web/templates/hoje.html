@@ -75,7 +75,7 @@
     .motivo{margin:var(--esp-3) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave);display:flex;gap:var(--esp-2);align-items:baseline;flex-wrap:wrap}
 
     /* --- resumo em 3 numeros --- */
-    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--esp-3)}
+    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:var(--esp-3);align-items:stretch}
     .resumo .ds-cartao{padding:var(--esp-3) var(--esp-4)}
     .grande{display:block;font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1.1;font-variant-numeric:tabular-nums}
     .resumo small{color:var(--cor-texto-suave);font-size:var(--tam-sm)}
@@ -147,6 +147,30 @@
     .faixa.feita .corpo{opacity:.55}
     .faixa.feita .titulo{text-decoration:line-through}
 
+    /* --- o Plano B --- */
+    /* O botao abre a escolha do tempo num <details>: sem JavaScript. */
+    .plano-b-controle{display:flex;align-items:center}
+    .plano-b-controle details{position:relative}
+    .plano-b-controle summary{list-style:none;cursor:pointer}
+    .plano-b-controle summary::-webkit-details-marker{display:none}
+    .botao-plano-b{display:inline-flex;align-items:center;gap:var(--esp-1);padding:var(--esp-3) var(--esp-4);border-radius:var(--raio);
+      border:1px solid var(--cor-aviso);background:var(--cor-aviso-fundo);color:var(--cor-aviso);font:inherit;
+      font-size:var(--tam-sm);font-weight:var(--peso-forte);cursor:pointer;white-space:nowrap}
+    .botao-plano-b:hover{filter:brightness(1.08)}
+    .escolha-plano-b{position:absolute;right:0;top:calc(100% + var(--esp-2));z-index:10;min-width:15rem;
+      background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);box-shadow:var(--sombra-alta);
+      padding:var(--esp-3)}
+    .escolha-plano-b p{margin:0 0 var(--esp-2);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    .escolha-plano-b form{display:flex;gap:var(--esp-2)}
+    .aviso-plano-b{margin:0 0 var(--esp-4);padding:var(--esp-3) var(--esp-4);border-radius:var(--raio);border:1px solid var(--cor-aviso);
+      background:var(--cor-aviso-fundo);color:var(--cor-aviso);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    .faixa.t-essencial .corpo{--cor-tipo:var(--faixa-lei-seca)}
+    .artigos{margin:var(--esp-2) 0 0;padding-left:var(--esp-5);font-size:var(--tam-sm)}
+    .artigos li{margin-bottom:var(--esp-1)}
+    .aviso-essencial{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-aviso);font-weight:var(--peso-medio)}
+    /* No Plano B nao ha horario: a ordem (1º, 2º) fica no lugar dele. */
+    .faixa .ordem{font-size:var(--tam-lg);font-weight:var(--peso-forte);color:var(--cor-texto)}
+
     /* --- o bloco das 18h: azul leve --- */
     .bloco-dia.bloco-noite{background:var(--fundo-noite)}
 
@@ -215,7 +239,9 @@
       .faixa{grid-template-columns:minmax(0,1fr) auto;gap:var(--esp-1) var(--esp-2)}
       .faixa .quando{grid-column:1 / -1}
       .faixa .quando{padding-top:0;flex-direction:row;align-items:center}
-      .resumo{gap:var(--esp-2)}
+      .resumo{gap:var(--esp-2);grid-template-columns:repeat(3,minmax(0,1fr))}
+      .resumo .plano-b-controle{grid-column:1 / -1}
+      .escolha-plano-b{left:0;right:auto}
       .resumo .ds-cartao{padding:var(--esp-2) var(--esp-3)}
       .grande{font-size:var(--tam-lg)}
       .apertar,.campos{grid-template-columns:1fr}
@@ -224,7 +250,7 @@
 
     /* --- impressao: so o plano do dia --- */
     @media print{
-      .topo-barra,.navega,.como-foi,.lateral{display:none !important}
+      .topo-barra,.navega,.como-foi,.lateral,.plano-b-controle{display:none !important}
       .hoje-grade.com-lateral{grid-template-columns:1fr}
       .faixa.passou{opacity:1}
       .ds-cartao{box-shadow:none}
@@ -294,7 +320,10 @@
     {% if t.dia %}
       {% set d = t.dia %}
       <section class="ds-cartao agora" aria-live="polite">
-        {% if t.agora %}
+        {% if t.plano_b %}
+          <h2 class="lateral-titulo">Agora</h2>
+          <p class="principal-agora">🆘 Plano B de {{ tempo_do_plano_b(t.plano_b) }}: quando der, na ordem.</p>
+        {% elif t.agora %}
           {% set a = t.agora %}
           <h2 class="lateral-titulo">Agora · {{ hm(t.hora) }}</h2>
           {% if a.situacao == 'faixa' %}
@@ -411,11 +440,48 @@
   {% else %}
   {% set d = t.dia %}
 
+  {% if t.plano_b %}
+    <p class="aviso-plano-b" role="status">🆘 Plano B ativado — dia corrido: sem teoria, só o essencial e questões de prova do tema de hoje. O dia conta como Mínima e a sua sequência continua.</p>
+  {% endif %}
+
   {# ============================ resumo ================================ #}
   <section class="resumo" aria-label="O dia em três números">
-    <div class="ds-cartao"><span class="grande">{{ duracao_legivel(d.minutos_de_estudo) }}</span><small>de estudo</small></div>
-    <div class="ds-cartao"><span class="grande">{{ d.total_questoes }}</span><small>questões</small></div>
-    <div class="ds-cartao"><small>termina às</small><span class="grande">{{ hm(t.fim_do_dia) if t.fim_do_dia else '--' }}</span></div>
+    {% if t.plano_b %}
+      {% set pb = t.blocos | first %}
+      <div class="ds-cartao"><span class="grande">~{{ tempo_do_plano_b(t.plano_b) }}</span><small>de Plano B</small></div>
+      <div class="ds-cartao"><span class="grande">{{ pb.questoes }}</span><small>questões</small></div>
+      <div class="ds-cartao"><small>horário</small><span class="grande">quando der</span></div>
+    {% else %}
+      <div class="ds-cartao"><span class="grande">{{ duracao_legivel(d.minutos_de_estudo) }}</span><small>de estudo</small></div>
+      <div class="ds-cartao"><span class="grande">{{ d.total_questoes }}</span><small>questões</small></div>
+      <div class="ds-cartao"><small>termina às</small><span class="grande">{{ hm(t.fim_do_dia) if t.fim_do_dia else '--' }}</span></div>
+    {% endif %}
+
+    {# O Plano B: so hoje ou dia passado. Com ele ativo, o botao desfaz. #}
+    {% if t.pode_ativar_plano_b %}
+      <div class="plano-b-controle">
+        {% if t.plano_b %}
+          <form method="post" action="/hoje/plano-b{% if tema %}?tema={{ tema }}{% endif %}">
+            <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+            <input type="hidden" name="minutos" value="">
+            <button class="botao-plano-b" type="submit">↩ Voltar ao plano completo</button>
+          </form>
+        {% else %}
+          <details>
+            <summary class="botao-plano-b">🆘 Ativar Plano B</summary>
+            <div class="escolha-plano-b">
+              <p>Quanto tempo você tem?</p>
+              <form method="post" action="/hoje/plano-b{% if tema %}?tema={{ tema }}{% endif %}">
+                <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                {% for m in t.opcoes_do_plano_b %}
+                  <button class="ds-botao" type="submit" name="minutos" value="{{ m }}">{{ tempo_do_plano_b(m) }}</button>
+                {% endfor %}
+              </form>
+            </div>
+          </details>
+        {% endif %}
+      </div>
+    {% endif %}
   </section>
 
   {# ============================ os tres blocos ======================== #}
@@ -426,17 +492,17 @@
           <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
           {% if b.chave == 'pos22' %}<span class="etiqueta-sobreaviso">🌙 sobreaviso · pode interromper</span>{% endif %}
         </div>
-        <span class="horas">{{ hm(b.inicio) }} – {{ hm(b.fim) }}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
+        <span class="horas">{% if b.inicio %}{{ hm(b.inicio) }} – {{ hm(b.fim) }}{% else %}sem horário{% endif %}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
       </div>
       <ol class="linha-tempo">
         {% for f in b.faixas %}
           {% set atual = t.agora and t.agora.atual is sameas f %}
-          {% set passou = t.hora and f.fim <= t.hora %}
+          {% set passou = t.hora and f.fim and f.fim <= t.hora %}
           {% set feita = (b.chave, loop.index0) in t.feitas %}
           <li class="faixa t-{{ f.tipo }} {{ 'atual' if atual }} {{ 'passou' if passou and not atual }} {{ 'feita' if feita }}"
               id="faixa-{{ b.chave }}-{{ loop.index0 }}">
             <span class="quando">
-              <span>{{ hm(f.inicio) }} – {{ hm(f.fim) }}</span>
+              {% if f.inicio %}<span>{{ hm(f.inicio) }} – {{ hm(f.fim) }}</span>{% else %}<span class="ordem">{{ loop.index }}º</span>{% endif %}
               {% if atual %}<span class="etiqueta-agora">AGORA</span>{% endif %}
             </span>
             {% if f.tipo == 'pausa' %}
@@ -450,19 +516,28 @@
                 <p class="titulo">{{ f.titulo }}</p>
                 {% if f.questoes %}<p class="qtd">{{ f.questoes }} questões</p>{% endif %}
 
-                {% if f.onde or f.cronometrado or f.opcional or f.baralho %}
+                {% set no_plano_b = b.chave == 'plano_b' %}
+                {% if f.onde or f.cronometrado or f.opcional or f.baralho or (no_plano_b and f.duracao) %}
                   <div class="chips">
+                    {% if no_plano_b and f.duracao %}<span class="chip">⏱ {{ f.duracao }} min</span>{% endif %}
                     {% if f.onde %}<span class="chip">{{ ONDE_LEGIVEL.get(f.onde, f.onde) }}</span>{% endif %}
                     {% if f.cronometrado %}<span class="chip">⏱ cronometrado</span>{% endif %}
-                    {% if f.opcional %}<span class="chip">opcional · fora do total</span>{% endif %}
+                    {% if f.opcional %}<span class="chip">{{ 'se sobrar tempo' if no_plano_b else 'opcional · fora do total' }}</span>{% endif %}
                     {% if f.baralho %}<span class="chip">🃏 {{ f.baralho }}</span>{% endif %}
                   </div>
                 {% endif %}
 
                 {% if f.origem %}<p class="detalhe ds-suave">volta do dia {{ f.origem | dia_mes }}</p>{% endif %}
 
+                {% if f.artigos %}
+                  <ul class="artigos">
+                    {% for a in f.artigos %}<li><b>{{ a.artigos }}</b> — {{ a.porque }}</li>{% endfor %}
+                  </ul>
+                {% endif %}
+                {% if f.aviso %}<p class="aviso-essencial">⚠️ {{ f.aviso }}</p>{% endif %}
+
                 {% if f.detalhe %}
-                  {% if f.tipo in DETALHE_ABERTO %}
+                  {% if f.tipo in DETALHE_ABERTO or no_plano_b %}
                     <p class="detalhe">{{ f.detalhe }}</p>
                   {% else %}
                     <details><summary>ver detalhe</summary><p class="detalhe">{{ f.detalhe }}</p></details>
@@ -493,7 +568,7 @@
   {% endfor %}
 
   {# ============================ se o dia apertar ====================== #}
-  {% if d.reduzida or d.minima %}
+  {% if not t.plano_b and (d.reduzida or d.minima) %}
     <section class="ds-cartao bloco-dia">
       <div class="ds-cartao__cabeca"><h2 class="ds-cartao__titulo">Se o dia apertar</h2></div>
       <div class="apertar">
@@ -509,7 +584,7 @@
   {# Sem registro salvo, "questoes feitas" chega com a soma das faixas
      marcadas. Depois de salvo, vale o que eu salvei. #}
   {% set valores = form or {
-      'meta': r.meta if r else '',
+      'meta': r.meta if r else ('minima' if t.plano_b else ''),
       'questoes_feitas': (r.questoes_feitas if r.questoes_feitas is not none else '') if r
                          else (s.questoes if s and s.questoes else ''),
       'acertos': r.acertos if r and r.acertos is not none else '',

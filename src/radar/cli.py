@@ -1804,6 +1804,9 @@ def hoje(
     feitas: int = typer.Option(None, help="Questoes feitas (anotadas a mao)"),
     acertos: int = typer.Option(None, help="Acertos nessas questoes"),
     anotacao: str = typer.Option(None, help="Um recado sobre o dia"),
+    plano_b: int = typer.Option(
+        None, "--plano-b", help="Mostra o Plano B do dia: 30 ou 60 (minutos)",
+    ),
 ) -> None:
     """O que estudar no dia, com horario, materia e questoes.
 
@@ -1862,6 +1865,9 @@ def hoje(
     # A mesma conta da tela: dia passado mostra a carga que valia naquele
     # dia, e semana que ainda nao chegou fica na carga do plano.
     nivel = servico.cronograma.nivel_do_dia(plano, quando)
+    if plano_b is not None:
+        _mostrar_plano_b(plano, quando, plano_b, nivel.efetivo)
+        return
     dia = cronograma.montar_dia(plano, quando, nivel.efetivo)
 
     cabecalho = f"Semana {dia.semana}"
@@ -1918,6 +1924,39 @@ def hoje(
 
 META_LEGIVEL = {"ideal": "Ideal", "reduzida": "Reduzida", "minima": "Mínima",
                 "nao_fiz": "Não fiz"}
+
+
+def _mostrar_plano_b(plano, quando, minutos: int, nivel: int) -> None:
+    """O Plano B do dia no terminal: na ordem, sem horario. So mostra - quem
+    ativa e a tela (ou o dia fica como estava)."""
+    try:
+        dia = cronograma.montar_plano_b(plano, quando, minutos, nivel)
+    except cronograma.ErroNoCronograma as erro:
+        console.print(f"[red]Sem Plano B:[/] {erro}")
+        raise typer.Exit(code=1)
+
+    console.print(f"[bold red]🆘 Plano B ({minutos} min) — o mínimo de hoje[/]")
+    console.print("[dim]Dia corrido: sem teoria, só o essencial e questões de "
+                  "prova do tema. Conta como Mínima.[/]")
+    for ordem, faixa in enumerate(dia.plano_b, start=1):
+        linha = f"{ordem}º  " + escape(faixa.titulo)
+        if faixa.duracao:
+            linha += f"  [dim]({faixa.duracao} min)[/]"
+        if faixa.questoes:
+            linha += f"  [bold]{faixa.questoes} questões[/]"
+        if faixa.opcional:
+            linha += "  [dim](se sobrar tempo)[/]"
+        console.print(linha)
+        for artigo in faixa.artigos:
+            console.print(f"     • [bold]{escape(artigo.artigos)}[/] — {escape(artigo.porque)}")
+        if faixa.aviso:
+            console.print(f"     [dark_orange]⚠ {escape(faixa.aviso)}[/]")
+        if faixa.filtro:
+            console.print(f"     [dim]Filtro: {escape(faixa.filtro)}[/]")
+        if faixa.detalhe and faixa.tipo != "essencial":
+            console.print(f"     {escape(faixa.detalhe)}")
+        if faixa.link:
+            console.print(f"     [dim]{faixa.link}[/]")
 
 
 def _registro_legivel(registro) -> str:

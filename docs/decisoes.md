@@ -1748,3 +1748,35 @@ Os detalhes:
   `atualizado_em`. O `apagar` do dia leva registro e checks, do banco e dos
   dois arquivos.
 
+### O botao Plano B (etapa A4, 26/09/2026)
+
+- **o cronograma.yml ganhou `essencial` (nos 30 dias uteis) e `plano_b`**, e
+  entrou sozinho no commit `66b893f`. So ganhou: fora o texto novo da
+  `minima`, nenhuma linha antiga mudou. Com `plano_b` no arquivo, todo dia
+  util sem `essencial` para o carregamento com o dia na mensagem; sem
+  `plano_b` (o YAML de teste), o `essencial` e opcional;
+- **o essencial e SELECAO DO PLANO, nao "o que a banca mais cobra"**. Os
+  artigos-chave foram escolhidos lendo o texto da lei, e nao contados nas
+  provas: o Direito ainda nao tem assunto gravado no acervo, entao nao ha
+  incidencia medida para sustentar "o mais cobrado". Dizer isso seria numero
+  sem fonte. O cabecalho do cronograma.yml e o codigo repetem a ressalva;
+- **nao ha resumo escrito por IA no Plano B**. O dia corrido e justamente o
+  dia em que eu nao confiro nada: um resumo de lei feito por modelo, que troca
+  prazo, percentual ou numero de artigo, seria estudado sem desconfianca. O
+  Plano B manda ler os artigos NO TEXTO OFICIAL (o link da teoria do dia) e
+  fazer questoes de prova - duas fontes que nao inventam;
+- **`montar_plano_b` e funcao pura** (cronograma.py): o tema, o filtro e a
+  materia saem das faixas do proprio dia (`rampa: direito` e `rampa:
+  portugues`); os numeros (8/15 de Direito, 0/4 de Portugues, 10/15 min de
+  essencial) saem do `plano_b` do arquivo, e nao da rampa - o Plano B nao
+  sobe com o nivel. Sem horario: a tela mostra 1º, 2º, 3º;
+- **o Plano B escolhido fica no EstadoDoDia (`plano_b` = 30 ou 60)**, com o
+  mesmo backup dos checks. Os checks valem no bloco `plano_b` (o titulo das
+  faixas nao muda entre 30 e 60, entao trocar o tempo nao perde o que ja
+  risquei). Voltar ao plano completo so apaga o `plano_b`: os checks do dia
+  normal continuam la;
+- **com Plano B ativo a Minima vem marcada no formulario**, mas nada e salvo
+  sozinho: o registro so existe quando eu clico em Salvar. Dia futuro nao
+  tem o botao (e o POST e recusado); domingo tambem nao;
+- o `radar hoje --plano-b 30` so MOSTRA o Plano B no terminal: nao ativa.
+

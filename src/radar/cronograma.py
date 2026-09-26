@@ -20,6 +20,11 @@ from radar import config
 
 # A ordem aqui e a ordem do dia.
 BLOCOS = ("manha", "noite", "pos22")
+# O Plano B nao e um bloco do arquivo: e o dia inteiro trocado por um bloco
+# so, montado a partir do dia (montar_plano_b). Os checks da tela usam este
+# nome como se fosse um bloco a mais.
+BLOCO_DO_PLANO_B = "plano_b"
+TODOS_OS_BLOCOS = BLOCOS + (BLOCO_DO_PLANO_B,)
 
 # Os tipos que existem no arquivo. Tipo fora desta lista quase sempre e erro
 # de digitacao, e erro de digitacao aqui vira icone errado ou faixa sumida
@@ -27,7 +32,7 @@ BLOCOS = ("manha", "noite", "pos22")
 TIPOS = {
     "teoria", "lei_seca", "portugues", "raciocinio", "pausa", "questoes",
     "revisao", "revisao_semanal", "correcao", "simulado", "diagnostico",
-    "anki", "bonus",
+    "anki", "bonus", "essencial",
 }
 
 # O nome e o icone do tipo na tela, no terminal e na web. O cru (lei_seca) e
@@ -38,12 +43,13 @@ TIPO_LEGIVEL = {
     "revisao": "Revisão", "revisao_semanal": "Revisão semanal",
     "correcao": "Correção", "simulado": "Simulado",
     "diagnostico": "Diagnóstico", "anki": "Anki", "bonus": "Bônus",
+    "essencial": "Essencial",
 }
 ICONE_DO_TIPO = {
     "teoria": "📖", "lei_seca": "⚖️", "portugues": "✍️", "raciocinio": "🧩",
     "pausa": "☕", "questoes": "🎯", "revisao": "🔁", "revisao_semanal": "🗂️",
     "correcao": "📝", "simulado": "🏁", "diagnostico": "🩺", "anki": "🃏",
-    "bonus": "⭐",
+    "bonus": "⭐", "essencial": "📌",
 }
 
 # Arredondamento da duracao das faixas de questoes. 15 questoes x 2,5 min dao
@@ -73,6 +79,14 @@ NOME_DA_RAMPA = {"direito": "Direito", "portugues": "Português"}
 
 # Meta que o feriado precisa bater para contar como "na Ideal".
 METAS_QUE_SALVAM_O_FERIADO = {"ideal", "reduzida", "minima"}
+
+
+SABADO = 5
+
+# Os campos de cada opcao do Plano B. Faltar um e erro de carregamento: sem
+# ele o botao nao sabe quanto dura nem quantas questoes pedir.
+CAMPOS_DA_OPCAO = ("minutos", "essencial_minutos", "questoes_direito",
+                   "questoes_portugues", "com_apoio")
 
 
 class ErroNoCronograma(ValueError):
@@ -107,6 +121,43 @@ class Faixa:
     opcional: bool = False
     # So o simulado usa: la a conta e 3 min por questao, e nao o padrao.
     min_por_questao: float | None = None
+    # So a faixa "essencial" do Plano B usa: os artigos a ler e o aviso.
+    artigos: list = field(default_factory=list)
+    aviso: str | None = None
+
+
+@dataclass
+class ArtigoEssencial:
+    artigos: str        # "LEP art. 112"
+    porque: str         # a frase que diz o que o artigo manda
+
+
+@dataclass
+class Essencial:
+    """Os artigos-chave do tema do dia, para o Plano B.
+
+    Selecao do plano, feita a partir do texto da lei - NAO e o que a banca
+    mais cobra: o Direito ainda nao tem assunto no acervo para medir isso.
+    """
+    chave: list[ArtigoEssencial]
+    apoio: list[ArtigoEssencial] = field(default_factory=list)
+    aviso: str | None = None
+
+
+@dataclass
+class OpcaoDoPlanoB:
+    minutos: int
+    essencial_minutos: int
+    questoes_direito: int
+    questoes_portugues: int
+    com_apoio: bool
+
+
+@dataclass
+class PlanoB:
+    opcoes: dict[int, OpcaoDoPlanoB]     # pelos minutos: 30, 60
+    sabado: str
+    sabado_questoes: int
 
 
 @dataclass
@@ -119,10 +170,14 @@ class Dia:
     manha: list[Faixa] = field(default_factory=list)
     noite: list[Faixa] = field(default_factory=list)
     pos22: list[Faixa] = field(default_factory=list)
+    essencial: Essencial | None = None
+    # So o dia devolvido pelo montar_plano_b tem isto; os tres de cima ficam
+    # vazios nele.
+    plano_b: list[Faixa] = field(default_factory=list)
 
     def faixas(self) -> list[Faixa]:
         """Todas as faixas, na ordem do dia."""
-        return self.manha + self.noite + self.pos22
+        return self.manha + self.noite + self.pos22 + self.plano_b
 
     @property
     def total_questoes(self) -> int:
@@ -155,6 +210,7 @@ class Plano:
     gatilho: dict
     semanas: dict[int, str]
     dias: list[Dia]
+    plano_b: PlanoB | None = None
 
     def dia(self, data: date) -> Dia | None:
         for dia in self.dias:
@@ -217,6 +273,57 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
     )
 
 
+def _artigos(brutos, onde: str) -> list[ArtigoEssencial]:
+    if not isinstance(brutos, list):
+        raise ErroNoCronograma(f"{onde}: precisa ser uma lista de artigos")
+    lidos = []
+    for bruto in brutos:
+        bruto = bruto or {}
+        for campo in ("artigos", "porque"):
+            if not bruto.get(campo):
+                raise ErroNoCronograma(f"{onde}: um item esta sem `{campo}`")
+        lidos.append(ArtigoEssencial(str(bruto["artigos"]), str(bruto["porque"])))
+    return lidos
+
+
+def _essencial(bruto, data: date) -> Essencial | None:
+    if bruto is None:
+        return None
+    onde = f"Dia {data.isoformat()}, essencial"
+    if not bruto.get("chave"):
+        raise ErroNoCronograma(f"{onde}: falta a lista `chave` (os artigos do Plano B de 30 min)")
+    return Essencial(
+        chave=_artigos(bruto["chave"], f"{onde}, chave"),
+        apoio=_artigos(bruto.get("apoio") or [], f"{onde}, apoio"),
+        aviso=bruto.get("aviso"),
+    )
+
+
+def _plano_b(bruto) -> PlanoB | None:
+    if bruto is None:
+        return None
+    opcoes = {}
+    for opcao in bruto.get("opcoes") or []:
+        opcao = opcao or {}
+        for campo in CAMPOS_DA_OPCAO:
+            if opcao.get(campo) is None:
+                raise ErroNoCronograma(
+                    f"`plano_b`: uma opcao esta sem `{campo}` "
+                    f"(cada uma precisa de {', '.join(CAMPOS_DA_OPCAO)})"
+                )
+        minutos = int(opcao["minutos"])
+        opcoes[minutos] = OpcaoDoPlanoB(
+            minutos, int(opcao["essencial_minutos"]), int(opcao["questoes_direito"]),
+            int(opcao["questoes_portugues"]), bool(opcao["com_apoio"]),
+        )
+    if not opcoes:
+        raise ErroNoCronograma("`plano_b`: falta a lista `opcoes` (30 min e 1 hora)")
+    for campo in ("sabado", "sabado_questoes"):
+        if bruto.get(campo) is None:
+            raise ErroNoCronograma(f"`plano_b`: falta `{campo}`")
+    return PlanoB(opcoes, str(bruto["sabado"]), int(bruto["sabado_questoes"]))
+
+
 def carregar(caminho: Path | None = None) -> Plano:
     """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma."""
     arquivo = caminho or (config.diretorio_config() / "cronograma.yml")
@@ -239,6 +346,8 @@ def carregar(caminho: Path | None = None) -> Plano:
         if not isinstance(gatilho.get(regra), int):
             raise ErroNoCronograma(f"`gatilho` precisa de {regra} (numero inteiro)")
 
+    plano_b = _plano_b(dados.get("plano_b"))
+
     dias = []
     vistas = set()
     for bruto in dados.get("dias") or []:
@@ -256,7 +365,15 @@ def carregar(caminho: Path | None = None) -> Plano:
             feriado=bruto.get("feriado"),
             reduzida=bruto.get("reduzida"),
             minima=bruto.get("minima"),
+            essencial=_essencial(bruto.get("essencial"), data),
         )
+        # Com Plano B no arquivo, todo dia util precisa dos artigos-chave: sem
+        # eles o botao abriria um Plano B vazio justo no dia corrido.
+        if plano_b and data.weekday() < SABADO and dia.essencial is None:
+            raise ErroNoCronograma(
+                f"Dia {data.isoformat()}: falta `essencial` (os artigos-chave "
+                f"do Plano B) - todo dia util precisa dele"
+            )
         for chave in BLOCOS:
             faixas = [_faixa(f, chave, data, chaves_da_rampa)
                       for f in bruto.get(chave) or []]
@@ -281,6 +398,7 @@ def carregar(caminho: Path | None = None) -> Plano:
         gatilho=gatilho,
         semanas={int(k): v for k, v in (dados.get("semanas") or {}).items()},
         dias=sorted(dias, key=lambda d: d.data),
+        plano_b=plano_b,
     )
 
 
@@ -353,6 +471,79 @@ def faixa_atual(dia: Dia, agora: time) -> tuple[Faixa | None, Faixa | None]:
         elif faixa.inicio > agora:
             return atual, faixa
     return atual, None
+
+
+# --- o Plano B -------------------------------------------------------------------
+# O dia corrido: sem teoria, sem Anki, sem pausa e sem horario. So o essencial
+# do tema do dia e questoes de prova dele. A lista de artigos e selecao do
+# plano (config/cronograma.yml), e nao o que a banca mais cobra; e nao ha
+# resumo escrito por IA - resumo de lei feito por modelo erra artigo.
+
+def montar_plano_b(plano: Plano, data: date, minutos: int,
+                   nivel: int | None = None) -> Dia | None:
+    """O Dia do Plano B: as faixas ficam em `plano_b`, sem horario.
+
+    None em domingo e fora do plano. `nivel` so serve para montar o dia de
+    onde saem o tema e o filtro - o numero de questoes e o do `plano_b`.
+    """
+    if plano.plano_b is None:
+        raise ErroNoCronograma("O config/cronograma.yml nao tem o bloco `plano_b`")
+    opcao = plano.plano_b.opcoes.get(minutos)
+    if opcao is None:
+        raise ErroNoCronograma(
+            f"Plano B de {minutos} min nao existe (ha: "
+            f"{', '.join(str(m) for m in sorted(plano.plano_b.opcoes))})"
+        )
+    dia = montar_dia(plano, data, nivel)
+    if dia is None:
+        return None
+    b = Dia(data=dia.data, semana=dia.semana, feriado=dia.feriado,
+            reduzida=dia.reduzida, minima=dia.minima, essencial=dia.essencial)
+
+    if data.weekday() == SABADO:
+        b.plano_b = [Faixa(
+            bloco=BLOCO_DO_PLANO_B, tipo="revisao",
+            titulo="Refazer as questões erradas da semana",
+            detalhe=plano.plano_b.sabado, questoes=plano.plano_b.sabado_questoes,
+            onde="qconcursos",
+        )]
+        return b
+
+    if dia.essencial is None:
+        raise ErroNoCronograma(f"Dia {data.isoformat()}: falta `essencial` para o Plano B")
+    teoria = next((f for f in dia.manha if f.tipo == "teoria"), None)
+    direito = _faixa_do_direito(dia)
+    portugues = next((f for f in dia.faixas() if f.rampa == "portugues"), None)
+    tema = teoria.titulo if teoria else (direito.titulo if direito else "o tema do dia")
+
+    artigos = list(dia.essencial.chave)
+    if opcao.com_apoio:
+        artigos += dia.essencial.apoio
+    faixas = [Faixa(
+        bloco=BLOCO_DO_PLANO_B, tipo="essencial",
+        titulo=f"Artigos-chave: {tema}",
+        materia=teoria.materia if teoria else (direito.materia if direito else None),
+        duracao=opcao.essencial_minutos,
+        link=teoria.link if teoria else None,
+        detalhe="Leia no texto oficial, só estes artigos.",
+        artigos=artigos, aviso=dia.essencial.aviso,
+    )]
+    if direito is not None:
+        faixas.append(Faixa(
+            bloco=BLOCO_DO_PLANO_B, tipo="questoes",
+            titulo=f"Questões de prova: {tema}",
+            materia=direito.materia, filtro=direito.filtro, onde=direito.onde,
+            questoes=opcao.questoes_direito,
+        ))
+    if opcao.questoes_portugues > 0 and portugues is not None:
+        faixas.append(Faixa(
+            bloco=BLOCO_DO_PLANO_B, tipo="questoes",
+            titulo=portugues.titulo, materia=portugues.materia,
+            filtro=portugues.filtro, onde=portugues.onde,
+            questoes=opcao.questoes_portugues, opcional=True,
+        ))
+    b.plano_b = faixas
+    return b
 
 
 # --- o gatilho: o nivel da semana ---------------------------------------------

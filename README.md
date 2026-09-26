@@ -383,6 +383,7 @@ radar hoje                              # o dia de hoje
 radar hoje --data 2026-10-28            # outro dia
 radar hoje --marcar ideal --feitas 25 --acertos 18
 radar hoje --marcar minima --data 2026-10-12 --anotacao "feriado"
+radar hoje --plano-b 30                 # so mostra o Plano B do dia (30 ou 60)
 ```
 
 `--marcar` aceita `ideal`, `reduzida`, `minima` ou `nao_fiz`. Marcar de novo o
@@ -392,6 +393,17 @@ mesmo dia corrige, nao duplica. Dia futuro e dia fora do plano sao recusados.
 sao digitados a mao (quase tudo do Qconcursos) e nao entram em nenhum acerto
 do radar: Meu foco, Onde estudar e a home contam so o que eu respondi dentro
 dele, questao por questao.
+
+### O Plano B, para o dia que apertou
+
+Na tela Hoje, ao lado dos tres numeros, o botao **🆘 Ativar Plano B** pergunta
+quanto tempo eu tenho (30 min ou 1 hora) e troca o dia inteiro por um bloco
+so, sem horario: os artigos-chave do tema do dia (o campo `essencial` do
+cronograma.yml) e questoes de prova do mesmo tema, com o filtro da faixa de
+Direito do dia. Na de 1 hora entram os artigos de apoio e, se sobrar tempo,
+um pouco de Portugues. No sabado e refazer as questoes erradas da semana.
+Sem Anki, sem pausa. O dia conta como Minima; **↩ Voltar ao plano completo**
+desfaz. So vale para hoje ou dia passado.
 
 ### O nivel sobe e desce sozinho
 
