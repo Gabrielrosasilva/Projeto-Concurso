@@ -420,6 +420,9 @@ chave. O que importa saber:
   isso mudar um numero de questoes empurra sozinho tudo o que vem depois;
 - a faixa com `rampa: direito` ou `rampa: portugues` usa o numero do nivel,
   e nao o `questoes` gravado;
+- na meta `reduzida`, escreva `{direito}` no lugar do numero de questoes de
+  Direito: a tela preenche com o numero do nivel da semana, o mesmo da faixa
+  `rampa: direito` daquele dia;
 - `opcional: true` e bonus: aparece, mas nao conta no total do dia;
 - domingo nao pode estar no arquivo. Data repetida, tipo desconhecido, rampa
   que nao existe ou faixa sem duracao nem questoes param o comando com a data

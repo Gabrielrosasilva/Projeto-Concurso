@@ -83,7 +83,7 @@ semanas:
 dias:
 - data: '2026-09-28'
   semana: 1
-  reduzida: A manhã inteira + só as 15 questões de Direito Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Aplicação da lei penal (arts. 1º a 12).'
   manha:
   - tipo: teoria
@@ -157,7 +157,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-09-29'
   semana: 1
-  reduzida: A manhã inteira + só as 15 questões de Direito Constitucional à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
   minima: 'Anki vencidos + 15 questões de: Art. 5º, caput e incisos I a XVI.'
   manha:
   - tipo: teoria
@@ -231,7 +231,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-09-30'
   semana: 1
-  reduzida: A manhã inteira + só as 15 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Objeto, classificação e exame criminológico (arts. 1º a 9º-A).'
   manha:
   - tipo: teoria
@@ -305,7 +305,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-01'
   semana: 1
-  reduzida: A manhã inteira + só as 15 questões de Direitos Humanos à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
   minima: 'Anki vencidos + 15 questões de: Teoria geral.'
   manha:
   - tipo: teoria
@@ -376,7 +376,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-02'
   semana: 1
-  reduzida: A manhã inteira + só as 15 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Assistência ao preso e ao egresso (arts. 10 a 27).'
   manha:
   - tipo: teoria
@@ -499,7 +499,7 @@ dias:
     detalhe: 'Sábado à noite já teve simulado: sem questões.'
 - data: '2026-10-05'
   semana: 2
-  reduzida: A manhã inteira + só as 20 questões de Direito Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Fato típico e nexo causal (art. 13).'
   manha:
   - tipo: teoria
@@ -581,7 +581,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-06'
   semana: 2
-  reduzida: A manhã inteira + só as 20 questões de Direito Constitucional à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
   minima: 'Anki vencidos + 15 questões de: Art. 5º, incisos XVII a XLIX.'
   manha:
   - tipo: teoria
@@ -666,7 +666,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-07'
   semana: 2
-  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Trabalho do preso (arts. 28 a 37).'
   manha:
   - tipo: teoria
@@ -749,7 +749,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-08'
   semana: 2
-  reduzida: A manhã inteira + só as 20 questões de Direitos Humanos à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
   minima: 'Anki vencidos + 15 questões de: Afirmação histórica e dimensões (gerações).'
   manha:
   - tipo: teoria
@@ -831,7 +831,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-09'
   semana: 2
-  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Deveres e direitos do preso (arts. 38 a 43).'
   manha:
   - tipo: teoria
@@ -974,7 +974,7 @@ dias:
 - data: '2026-10-12'
   semana: 3
   feriado: Feriado (N. Sra. Aparecida)
-  reduzida: A manhã inteira + só as 20 questões de Direito Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Tentativa, dolo, culpa e erro (arts. 14 a 21).'
   manha:
   - tipo: teoria
@@ -1056,7 +1056,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-13'
   semana: 3
-  reduzida: A manhã inteira + só as 20 questões de Direito Constitucional à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
   minima: 'Anki vencidos + 15 questões de: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios).'
   manha:
   - tipo: teoria
@@ -1141,7 +1141,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-14'
   semana: 3
-  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Disciplina, faltas graves e RDD (arts. 44 a 52).'
   manha:
   - tipo: teoria
@@ -1227,7 +1227,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-15'
   semana: 3
-  reduzida: A manhã inteira + só as 20 questões de Direitos Humanos à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
   minima: 'Anki vencidos + 15 questões de: Sistemas de proteção e responsabilidade do Estado.'
   manha:
   - tipo: teoria
@@ -1312,7 +1312,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-16'
   semana: 3
-  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60).'
   manha:
   - tipo: teoria
@@ -1452,7 +1452,7 @@ dias:
     detalhe: 'Sábado à noite já teve simulado: sem questões.'
 - data: '2026-10-19'
   semana: 4
-  reduzida: A manhã inteira + só as 25 questões de Direito Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Coação, obediência e excludentes de ilicitude (arts. 22 a 25).'
   manha:
   - tipo: teoria
@@ -1536,7 +1536,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-20'
   semana: 4
-  reduzida: A manhã inteira + só as 25 questões de Direito Constitucional à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
   minima: 'Anki vencidos + 15 questões de: Direitos sociais (arts. 6º a 11).'
   manha:
   - tipo: teoria
@@ -1620,7 +1620,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-21'
   semana: 4
-  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Órgãos da execução penal (arts. 61 a 81-B).'
   manha:
   - tipo: teoria
@@ -1705,7 +1705,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-22'
   semana: 4
-  reduzida: A manhã inteira + só as 25 questões de Direitos Humanos à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
   minima: 'Anki vencidos + 15 questões de: Na Constituição e o status dos tratados.'
   manha:
   - tipo: teoria
@@ -1788,7 +1788,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-23'
   semana: 4
-  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Estabelecimentos penais (arts. 82 a 104).'
   manha:
   - tipo: teoria
@@ -1928,7 +1928,7 @@ dias:
     detalhe: 'Sábado à noite já teve simulado: sem questões.'
 - data: '2026-10-26'
   semana: 5
-  reduzida: A manhã inteira + só as 25 questões de Direito Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Imputabilidade e concurso de pessoas (arts. 26 a 31).'
   manha:
   - tipo: teoria
@@ -2012,7 +2012,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-27'
   semana: 5
-  reduzida: A manhã inteira + só as 25 questões de Direito Constitucional à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
   minima: 'Anki vencidos + 15 questões de: Nacionalidade e direitos políticos (arts. 12 a 17).'
   manha:
   - tipo: teoria
@@ -2096,7 +2096,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-28'
   semana: 5
-  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Execução da pena, regimes e progressão (arts. 105 a 119).'
   manha:
   - tipo: teoria
@@ -2192,7 +2192,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-29'
   semana: 5
-  reduzida: A manhã inteira + só as 25 questões de Direitos Humanos à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
   minima: 'Anki vencidos + 15 questões de: Regras de Mandela - parte 1 (regras 1 a 35).'
   manha:
   - tipo: teoria
@@ -2283,7 +2283,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-10-30'
   semana: 5
-  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Permissão de saída, saída temporária e remição (arts. 120 a 130).'
   manha:
   - tipo: teoria
@@ -2446,7 +2446,7 @@ dias:
 - data: '2026-11-02'
   semana: 6
   feriado: Feriado (Finados)
-  reduzida: A manhã inteira + só as 25 questões de Direito Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Crimes do funcionário público contra a Administração (arts. 312 a 327).'
   manha:
   - tipo: teoria
@@ -2541,7 +2541,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-11-03'
   semana: 6
-  reduzida: A manhã inteira + só as 25 questões de Direito Constitucional à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
   minima: 'Anki vencidos + 15 questões de: Defesa do Estado e segurança pública (arts. 136 a 144).'
   manha:
   - tipo: teoria
@@ -2626,7 +2626,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-11-04'
   semana: 6
-  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Livramento condicional, monitoração e penas alternativas (arts. 131 a
     170).'
   manha:
@@ -2720,7 +2720,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-11-05'
   semana: 6
-  reduzida: A manhã inteira + só as 25 questões de Direitos Humanos à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
   minima: 'Anki vencidos + 15 questões de: Regras de Mandela - parte 2 (regras 36 em diante).'
   manha:
   - tipo: teoria
@@ -2812,7 +2812,7 @@ dias:
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
 - data: '2026-11-06'
   semana: 6
-  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
   minima: 'Anki vencidos + 15 questões de: Medida de segurança, incidentes e disposições finais (arts. 171 a 204).'
   manha:
   - tipo: teoria

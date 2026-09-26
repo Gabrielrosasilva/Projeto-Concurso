@@ -430,3 +430,29 @@ def test_gatilho_incompleto_da_erro(tmp_path):
         del d["gatilho"]["desce_apos_semanas_ruins"]
     with pytest.raises(cronograma.ErroNoCronograma, match="desce_apos_semanas_ruins"):
         cronograma.carregar(_com_mudanca(tmp_path, mudar))
+
+
+# --- a Reduzida acompanha o nivel --------------------------------------------
+
+def test_reduzida_diz_as_questoes_de_direito_do_nivel(real):
+    dia = date(2026, 10, 28)
+    assert "{direito}" in real.dia(dia).reduzida        # no arquivo, a marca
+    nivel_1 = cronograma.montar_dia(real, dia, 1).reduzida
+    nivel_5 = cronograma.montar_dia(real, dia, 5).reduzida
+    assert nivel_1 == "A manhã inteira + só as 15 questões de Lei de Execução Penal à noite."
+    assert "só as 25 questões" in nivel_5
+    # Sem nivel, vale o numero gravado na faixa.
+    assert "só as 25 questões" in cronograma.montar_dia(real, dia).reduzida
+
+
+def test_nenhuma_reduzida_sobra_com_a_marca(real):
+    for d in real.dias:
+        texto = cronograma.montar_dia(real, d.data).reduzida or ""
+        assert "{" not in texto, d.data
+
+
+def test_marca_sem_faixa_de_direito_da_erro(tmp_path):
+    def mudar(d):
+        d["dias"][1]["reduzida"] = "Só as {direito} questões."
+    with pytest.raises(cronograma.ErroNoCronograma, match="2026-09-29.*rampa: direito"):
+        cronograma.carregar(_com_mudanca(tmp_path, mudar))

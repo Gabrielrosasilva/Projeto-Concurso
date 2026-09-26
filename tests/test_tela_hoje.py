@@ -246,3 +246,14 @@ def test_dia_passado_continua_como_era(monkeypatch):
     t = servico.cronograma.tela_do_dia(date(2026, 10, 5))
     assert (t.nivel.situacao, t.nivel.efetivo) == ("ruim", 1)
     assert t.nivel.motivo.startswith("A semana 1 fechou com 6 dias abaixo")
+
+
+def test_a_reduzida_da_tela_acompanha_o_nivel(cliente, monkeypatch):
+    # Visto em setembro, 28/10 fica na carga do plano: nivel 5, 25 de Direito.
+    _parar_o_relogio(monkeypatch, 2026, 9, 26, 12, 0)
+    assert "só as 25 questões de Lei de Execução Penal" in cliente.get(
+        "/hoje?data=2026-10-28").text
+    # Visto em 30/10, sem marcacao nenhuma, o gatilho deixou no nivel 1: 15.
+    _parar_o_relogio(monkeypatch, 2026, 10, 30, 12, 0)
+    assert "só as 15 questões de Lei de Execução Penal" in cliente.get(
+        "/hoje?data=2026-10-28").text

@@ -58,6 +58,11 @@ MESES = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
 
 DOMINGO = 6
 
+# Na meta Reduzida, o lugar do numero de questoes de Direito. O numero muda
+# com o nivel, entao ele nao pode estar escrito no texto: quem preenche e o
+# montar_dia, com a faixa `rampa: direito` do dia ja montado.
+MARCA_DO_DIREITO = "{direito}"
+
 # As tres regras do gatilho, que moram no YAML. Sem elas o nivel nao tem
 # como ser calculado, entao faltar uma e erro de carregamento.
 REGRAS_DO_GATILHO = ("sobe_com_dias_na_ideal", "semana_ruim_com_dias_abaixo",
@@ -256,6 +261,12 @@ def carregar(caminho: Path | None = None) -> Plano:
             faixas = [_faixa(f, chave, data, chaves_da_rampa)
                       for f in bruto.get(chave) or []]
             setattr(dia, chave, faixas)
+        if (MARCA_DO_DIREITO in (dia.reduzida or "")
+                and _faixa_do_direito(dia) is None):
+            raise ErroNoCronograma(
+                f"Dia {data.isoformat()}: a Reduzida usa {MARCA_DO_DIREITO}, "
+                f"mas o dia nao tem faixa com `rampa: direito`"
+            )
         dias.append(dia)
 
     return Plano(
@@ -281,6 +292,10 @@ def duracao_de_questoes(questoes: int, min_por_questao: float) -> int:
     # ceil, senao uma conta exata subiria 5 minutos sem motivo.
     blocos_de_5 = math.ceil(round(questoes * min_por_questao / ARREDONDA_MINUTOS, 6))
     return blocos_de_5 * ARREDONDA_MINUTOS
+
+
+def _faixa_do_direito(dia: Dia) -> Faixa | None:
+    return next((f for f in dia.faixas() if f.rampa == "direito"), None)
 
 
 def montar_dia(plano: Plano, data: date, nivel: int | None = None) -> Dia | None:
@@ -319,6 +334,10 @@ def montar_dia(plano: Plano, data: date, nivel: int | None = None) -> Dia | None
                                     inicio=relogio.time(), fim=fim.time()))
             relogio = fim
         setattr(dia, chave, montadas)
+
+    direito = _faixa_do_direito(dia)
+    if dia.reduzida and direito is not None:
+        dia.reduzida = dia.reduzida.replace(MARCA_DO_DIREITO, str(direito.questoes))
     return dia
 
 
