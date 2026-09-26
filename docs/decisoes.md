@@ -1699,12 +1699,12 @@ Os detalhes:
 
 - **faixa azul no topo, de ponta a ponta**: a data, "Ciclo · Semana N de 6",
   os selos ⚡ Nivel, 🔥 dias seguidos e 🎯 Meta, e a navegacao entre dias.
-  O 🔥 mostra "–" enquanto a conta da sequencia nao existe (campo
-  `sequencia` da `TelaDoDia`, vazio): lugar reservado, nunca numero inventado;
+  O 🔥 mostrou "–" ate a A6 criar a conta da sequencia: lugar reservado,
+  nunca numero inventado;
 - **duas colunas a partir de 1100px**: a linha do tempo a esquerda e uma
   coluna lateral de 300px, fixa ao rolar, com Agora, Esta semana (as
-  pilulas, que sairam do topo) e Objetivo. O lugar do Cronometro ja existe
-  no topo da coluna, vazio e escondido. No HTML a lateral vem ANTES da
+  pilulas, que sairam do topo) e Objetivo. O Cronometro (A5) ocupa o topo
+  da coluna. No HTML a lateral vem ANTES da
   linha do tempo: abaixo de 1100px e ali que ela aparece, logo depois da
   faixa azul, sem CSS de reordenacao;
 - **"Fim do Ciclo em N dias" conta de HOJE**, nao do dia que esta na tela:

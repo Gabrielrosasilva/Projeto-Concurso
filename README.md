@@ -209,6 +209,14 @@ Os limites:
   abrir a pagina (e marcar coisas nela). Sem o `--rede`, ele so escuta no
   proprio PC.
 
+### Tema claro e escuro
+
+O radar abre no **escuro**. O botao **☀️/🌙** no canto direito da barra troca
+para o claro (e de volta), e a escolha fica guardada no navegador (um cookie),
+valendo para todas as paginas ate eu trocar de novo. O tema do Windows nao
+manda. Para comparar sem mudar a escolha, `?tema=claro` ou `?tema=escuro` no
+fim do endereco vale so para aquela pagina.
+
 ### A pagina web, aba por aba
 
 | aba | para que serve |
@@ -406,20 +414,53 @@ descanso.
 
 ### A tela Hoje
 
-`radar web` e abra **Hoje**, o primeiro item da barra. De cima para baixo:
+`radar web` e abra **Hoje**, o primeiro item da barra.
 
-- a data, a semana e o **nivel** da semana, com o motivo dele ("A semana 1
-  fechou com 6 dias abaixo da Ideal: repete o nivel 1");
-- os 6 dias da semana em pilulas, na cor do que eu marquei: Ideal verde,
-  Reduzida azul, Minima amarela, Nao fiz vermelha, sem marcacao cinza;
-- tres numeros: horas de estudo, questoes do dia e a que horas a noite acaba;
-- o cartao **AGORA**, so no dia de hoje: o que esta acontecendo e o que vem
-  depois;
-- os tres blocos (manha, noite, depois das 22h), uma faixa por linha, com o
-  detalhe do que estudar, o filtro do Qconcursos e o link da lei;
+**A faixa azul do topo** traz a data, "Ciclo 1 — a base · Semana N de 6", e
+tres selos: **⚡ Nivel** da semana, **🔥 dias seguidos** sem zerar e **🎯 Meta**
+de acertos da prova. A direita, os botoes para o dia anterior, hoje e o
+proximo.
+
+**A coluna do lado** (a direita em tela larga, fixa ao rolar; no celular,
+logo abaixo da faixa azul):
+
+- **⏱ Cronometro** - veja [O cronometro](#o-cronometro);
+- **Agora** - so no dia de hoje: a faixa EM ANDAMENTO, com horario, e o que
+  vem depois. Nos outros dias, a que horas o dia comeca;
+- **Esta semana** - os 6 dias em pilulas, na cor do que eu marquei (Ideal
+  verde, Reduzida azul, Minima amarela, Nao fiz vermelha, sem marcacao
+  cinza); a sequencia ("🔥 12 · dias seguidos sem zerar"); a frase da semana
+  (quanto falta para subir de nivel, semana garantida, ou "nao sobe mais,
+  mas cada dia feito mantem a sequencia"); e o motivo do nivel;
+- **Objetivo** - o alvo, a meta da prova e quantos dias faltam para o fim do
+  ciclo.
+
+**No meio**, de cima para baixo:
+
+- tres numeros (horas de estudo, questoes do dia, a que horas a noite acaba)
+  e o botao **🆘 Ativar Plano B** - veja [O Plano B](#o-plano-b-para-o-dia-que-apertou);
+- os tres blocos: **manha**; **noite**, num azul leve; e **depois das 22h**,
+  em azul-noite com a etiqueta "🌙 sobreaviso · pode interromper". Uma faixa
+  por linha, na cor do tipo, com o detalhe do que estudar, o filtro do
+  Qconcursos e o botao **⚖️ Ler no Planalto** (ou **na ALESC**) para a lei.
+  A faixa em andamento ganha borda verde e a etiqueta AGORA;
 - **Se o dia apertar**: a meta Reduzida e a Minima daquele dia;
 - **Como foi o dia**: o formulario onde eu marco a meta, as questoes feitas e
   os acertos. So hoje ou dia passado.
+
+**O circulo de cada faixa.** A direita de cada faixa (menos as pausas) ha um
+circulo: clicar marca como feita (circulo verde com ✓, faixa apagada e
+riscada) e clicar de novo desmarca. So hoje ou dia passado. Os checks
+**sugerem**, nunca marcam: o "Como foi o dia" ganha a linha "Sugestao: Ideal
+(11 de 11 faixas)" com a opcao sugerida destacada, e "questoes feitas" vem
+com a soma das faixas marcadas enquanto eu nao salvei. A regra: todas as
+faixas (fora pausa e bonus) = Ideal; a manha inteira + a faixa de Direito da
+noite = Reduzida; alguma faixa de questoes = Minima. Quem salva sou eu.
+
+**A sequencia 🔥** conta os dias do plano seguidos com Ideal, Reduzida ou
+Minima, de ontem para tras (hoje entra se ja estiver marcado). Domingo nao
+esta no plano e nao quebra; dia sem marcacao ou "Nao fiz" quebra. Com zero, a
+tela diz "Comece hoje a sua sequencia".
 
 A home (Meu foco) tem um cartao no topo com o que esta acontecendo agora e o
 botao **Abrir o dia**. Antes do ciclo ele diz quando comeca e leva ao
@@ -456,15 +497,21 @@ desfaz. So vale para hoje ou dia passado.
 
 ### O cronometro
 
-Cada faixa (menos a pausa) tem um ▶ ao lado do horario. Ele conta a duracao
+Cada faixa (menos a pausa, e tambem as do Plano B) tem um ▶ ao lado do
+horario. Ele conta a duracao
 cheia da faixa a partir do clique, no cartao **⏱ Cronometro** da coluna do
 lado, e quando acaba avisa em tela cheia, com som e notificacao do Windows:
 pausa, volta da pausa, ou a proxima faixa. Recarregar a pagina nao perde a
 contagem. **🔔 Testar aviso** pede a permissao de notificacao na primeira vez
 e dispara um aviso de teste. A notificacao do Windows so funciona abrindo o
 radar no proprio PC (`http://localhost:8000`); pelo IP, na rede, ficam a
-tela e o som. E o unico JavaScript do radar: sem ele, a tela funciona igual,
-so sem o cronometro.
+tela e o som. Se ela nao aparecer, confira a permissao (cadeado na barra de
+endereco → Notificacoes → Permitir) e o "Nao perturbe"/Assistente de Foco do
+Windows. O som so toca depois de um clique na pagina (regra dos navegadores):
+o ▶ e o Testar ja contam como clique.
+
+E o unico JavaScript do radar: sem ele, a tela funciona igual, so sem o
+cronometro.
 
 ### O nivel sobe e desce sozinho
 
@@ -507,13 +554,15 @@ trocando este arquivo.
 
 ### Backup
 
-O que eu marco vai para `data/registro_estudo.json` no `radar exportar` e no
-`radar sincronizar`, pelo mesmo caminho dos simulados: e a copia que o
+O que eu marco no "Como foi o dia" vai para `data/registro_estudo.json` no
+`radar exportar` e no `radar sincronizar`, pelo mesmo caminho dos simulados: e a copia que o
 `radar.db` nao tem. Na volta (`radar importar`), a chave e a data, e se os
 dois lados tem o mesmo dia, vale a anotacao mais recente.
 
-Os checks de cada faixa (o circulo da tela Hoje) vao, do mesmo jeito, para
-`data/estado_do_dia.json`, e na volta vale o `atualizado_em` mais recente.
+Os checks de cada faixa (o circulo da tela Hoje) e o Plano B escolhido vao,
+do mesmo jeito, para `data/estado_do_dia.json`, e na volta vale o
+`atualizado_em` mais recente. O cronometro nao vai: ele vive no navegador
+(localStorage) e so importa enquanto a faixa esta rodando.
 
 ## Os comandos
 

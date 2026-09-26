@@ -102,12 +102,12 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 o design system com os 6 selos, a navegacao de 7 destinos e a home de 3 blocos,
 tela de questao e relatorio, so meus erros, compilado 40/50/100 pelos pesos do
 edital, revisao espacada 1-7-30, descartar simulado, backup dos simulados, IA
-sem pagar (`gerar --pedido`), Macetes e a tela Hoje com o cronograma do Ciclo 1.
-**Falta:** conferir a lista de leis alteradas (`config/leis.yml`), migrar as
-outras telas ao design system (espera aprovacao), importar macete e explicacao,
-dar assunto ao Direito e o cronograma por IA. Acervo: 8.433 questoes (3.372
-enunciados, 10 anuladas), nenhuma com assunto gravado, nenhuma resposta dada.
-Arvore de `src/radar/` no [README](README.md); banco em `data/radar.db`.
+sem pagar (`gerar --pedido`), Macetes e a tela Hoje do Ciclo 1 com a Parte A
+(checks, Plano B, cronometro - o unico JS -, sequencia, escuro, `web --rede`).
+**Falta:** conferir `config/leis.yml`, a Parte B (as outras telas no design
+system), importar macete e explicacao, assunto no Direito, cronograma por IA.
+Acervo: 8.433 questoes (3.372 enunciados, 10 anuladas), sem assunto gravado nem
+resposta dada. Arvore no [README](README.md); banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
