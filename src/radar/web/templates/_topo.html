@@ -13,8 +13,11 @@
 
    Use assim, no topo do <body>:
 
-       {% from "_topo.html" import barra %}
+       {% from "_topo.html" import barra with context %}
        {{ barra('concursos') }}
+
+   O "with context" e o que deixa a barra ler o `request`: o botao ☀️/🌙
+   precisa saber o tema atual e o endereco para onde voltar.
 
    O parametro e qual destino fica aceso: hoje, foco, estudar, revisao,
    analises, concursos, mais. #}
@@ -23,13 +26,22 @@
 <nav class="topo-barra" aria-label="Navegacao principal">
   <a class="marca" href="/">Radar</a>
 
-  <a class="item {{ 'ativo' if ativo == 'hoje' }}" href="/hoje">📅 Hoje</a>
-  <a class="item {{ 'ativo' if ativo == 'foco' }}" href="/">🎯 Meu foco</a>
-  <a class="item {{ 'ativo' if ativo == 'estudar' }}" href="/estudar">📚 Estudar</a>
-  <a class="item {{ 'ativo' if ativo == 'revisao' }}" href="/revisao">🧠 Revisão</a>
-  <a class="item {{ 'ativo' if ativo == 'analises' }}" href="/analises">📊 Análises</a>
-  <a class="item {{ 'ativo' if ativo == 'concursos' }}" href="/concursos">🏛 Concursos</a>
-  <a class="item {{ 'ativo' if ativo == 'mais' }}" href="/mais">⚙ Mais</a>
+  <div class="abas">
+    <a class="item {{ 'ativo' if ativo == 'hoje' }}" href="/hoje">📅 Hoje</a>
+    <a class="item {{ 'ativo' if ativo == 'foco' }}" href="/">🎯 Meu foco</a>
+    <a class="item {{ 'ativo' if ativo == 'estudar' }}" href="/estudar">📚 Estudar</a>
+    <a class="item {{ 'ativo' if ativo == 'revisao' }}" href="/revisao">🧠 Revisão</a>
+    <a class="item {{ 'ativo' if ativo == 'analises' }}" href="/analises">📊 Análises</a>
+    <a class="item {{ 'ativo' if ativo == 'concursos' }}" href="/concursos">🏛 Concursos</a>
+    <a class="item {{ 'ativo' if ativo == 'mais' }}" href="/mais">⚙ Mais</a>
+  </div>
+
+  {# O icone e o do tema para onde o clique LEVA: no escuro aparece o sol. #}
+  {% if tema_da_pagina(request) == 'escuro' %}
+  <a class="tema" href="{{ link_de_trocar_tema(request) }}" title="Mudar para o tema claro" aria-label="Mudar para o tema claro">☀️</a>
+  {% else %}
+  <a class="tema" href="{{ link_de_trocar_tema(request) }}" title="Mudar para o tema escuro" aria-label="Mudar para o tema escuro">🌙</a>
+  {% endif %}
 </nav>
 {% endmacro %}
 

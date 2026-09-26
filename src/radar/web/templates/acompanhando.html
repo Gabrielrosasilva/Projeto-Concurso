@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +15,7 @@
       --estrela:#b45309; --estrela-fraca:#fef3c7;
       --duvida:#b45309; --duvida-fraco:#fdeed3;
     }
-    @media (prefers-color-scheme: dark){
-      :root{
+    :root:not([data-tema="claro"]){
         --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
         --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
         --verde:#4ade80; --verde-fraco:#10291d;
@@ -24,7 +23,6 @@
         --estrela:#fbbf24; --estrela-fraca:#2e2310;
         --duvida:#fbbf24; --duvida-fraco:#2e2310;
       }
-    }
     *{box-sizing:border-box}
     body{margin:0;background:var(--fundo);color:var(--texto);
       font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
@@ -96,7 +94,7 @@
 </head>
 <body>
 
-{% from "_topo.html" import barra %}
+{% from "_topo.html" import barra with context %}
 {{ barra('concursos') }}
 
 <main>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +33,7 @@
       --aviso:#b45309; --aviso-fraco:#fdeed3;
       --ia:#7c3aed; --ia-fraco:#efe8ff;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
+    :root:not([data-tema="claro"]){
         --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
         --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
         --certo:#4ade80; --certo-fraco:#10291d;
@@ -42,7 +41,6 @@
         --aviso:#fbbf24; --aviso-fraco:#2e2310;
         --ia:#c4b5fd; --ia-fraco:#241a3d;
       }
-    }
 
     *{box-sizing:border-box}
     body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
@@ -148,7 +146,7 @@
 </head>
 <body>
 
-{% from "_topo.html" import barra %}
+{% from "_topo.html" import barra with context %}
 {{ barra('estudar') }}
 {% from "_componentes.html" import selo %}
 

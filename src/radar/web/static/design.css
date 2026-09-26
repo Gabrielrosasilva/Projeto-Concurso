@@ -7,9 +7,9 @@
 
    Tres camadas, nesta ordem:
      1. as VARIAVEIS (tokens): cor, espaco, tipografia, raio, sombra;
-     2. o MODO ESCURO: as mesmas variaveis com outros valores. Segue o
-        sistema operacional, e `?tema=escuro` / `?tema=claro` na URL forca um
-        dos dois - serve para eu comparar sem mexer no Windows;
+     2. o MODO ESCURO: as mesmas variaveis com outros valores. E o padrao;
+        o claro e escolha minha (botao na barra, guardado em cookie), e
+        `?tema=claro` / `?tema=escuro` na URL forca um dos dois;
      3. os COMPONENTES: pagina, cartao, bloco, selo, aviso, botao, campo.
 
    Sem JavaScript: tudo aqui e CSS puro, como manda o CLAUDE.md.
@@ -95,41 +95,12 @@
 
 
 /* --- 2. modo escuro ------------------------------------------------------- */
-/* Os mesmos nomes, outros valores. Escrito duas vezes de proposito: uma para
-   quem segue o sistema, outra para o `?tema=escuro` forcar - e o `?tema=claro`
-   desliga a primeira. */
+/* Os mesmos nomes, outros valores. O escuro e o PADRAO: vale sempre que a
+   pagina nao disser data-tema="claro". Quem escreve o data-tema e o servidor
+   (tema_da_pagina, no app.py), lendo o `?tema=` da URL e o cookie `tema` -
+   o tema do Windows nao manda mais. */
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) {
-    color-scheme: dark;
-    --cor-fundo:        #0e1014;
-    --cor-superficie:   #171a21;
-    --cor-superficie-2: #1d2129;
-    --cor-texto:        #e7e9ee;
-    --cor-texto-suave:  #9aa2b0;
-    --cor-borda:        #2a303b;
-    --cor-acao:         #86a8ff;
-    --cor-acao-fundo:   #1b2740;
-    --cor-acao-texto:   #0e1014;
-    --selo-oficial:          #93b4ff;
-    --selo-oficial-fundo:    #17233d;
-    --selo-calculado:        #5ee0a0;
-    --selo-calculado-fundo:  #0f2a1e;
-    --selo-automatico:       #fcd34d;
-    --selo-automatico-fundo: #2b2210;
-    --selo-ia:               #fca5a5;
-    --selo-ia-fundo:         #2e1515;
-    --cor-aviso:        #fdba74;
-    --cor-aviso-fundo:  #2f1c0c;
-    --cor-roxo:  #c4b5fd;
-    --cor-ciano: #67e8f9;
-    --cor-rosa:  #f9a8d4;
-    --sombra:    0 1px 2px rgba(0, 0, 0, .4);
-    --sombra-alta: 0 8px 24px rgba(0, 0, 0, .5);
-  }
-}
-
-:root[data-tema="escuro"] {
+:root:not([data-tema="claro"]) {
   color-scheme: dark;
   --cor-fundo:        #0e1014;
   --cor-superficie:   #171a21;

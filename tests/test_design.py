@@ -37,12 +37,12 @@ def test_as_variaveis_existem(variavel):
     assert re.search(rf"{variavel}\s*:", CSS.read_text(encoding="utf-8"))
 
 
-def test_o_modo_escuro_segue_o_sistema_e_pode_ser_forcado():
+def test_o_escuro_e_o_padrao_e_nao_segue_o_sistema():
     css = CSS.read_text(encoding="utf-8")
-    assert "prefers-color-scheme: dark" in css
-    assert ':root[data-tema="escuro"]' in css
-    # O claro forcado desliga o escuro do sistema.
+    # O escuro vale sempre que a pagina nao disser claro...
     assert ':root:not([data-tema="claro"])' in css
+    # ...e o tema do Windows deixou de mandar.
+    assert "prefers-color-scheme" not in css
 
 
 def test_os_seis_selos_da_especificacao():
@@ -69,6 +69,64 @@ def test_a_tela_de_macetes_usa_o_design_system(cliente):
 
 def test_tema_escuro_pela_url(cliente):
     assert 'data-tema="escuro"' in cliente.get("/macetes?tema=escuro").text
+
+
+# --- o tema: escuro por padrao, claro por escolha (cookie) ------------------
+
+@pytest.mark.parametrize("endereco", ["/", "/hoje", "/mais", "/macetes", "/concursos"])
+def test_sem_cookie_a_pagina_sai_escura(cliente, endereco):
+    assert 'data-tema="escuro"' in cliente.get(endereco).text
+
+
+def test_com_cookie_claro_a_pagina_sai_clara(cliente):
+    cliente.cookies.set("tema", "claro")
+    assert 'data-tema="claro"' in cliente.get("/macetes").text
+
+
+def test_o_tema_da_url_vence_o_cookie(cliente):
+    cliente.cookies.set("tema", "claro")
+    assert 'data-tema="escuro"' in cliente.get("/macetes?tema=escuro").text
+
+
+def test_cookie_com_valor_estranho_cai_no_escuro(cliente):
+    cliente.cookies.set("tema", "roxo")
+    assert 'data-tema="escuro"' in cliente.get("/macetes").text
+
+
+def test_trocar_tema_grava_o_cookie_e_volta(cliente):
+    resposta = cliente.get("/tema?valor=claro&volta=/hoje", follow_redirects=False)
+    assert resposta.status_code == 303
+    assert resposta.headers["location"] == "/hoje"
+    assert "tema=claro" in resposta.headers["set-cookie"]
+
+
+def test_a_escolha_fica_lembrada_entre_as_paginas(cliente):
+    cliente.get("/tema?valor=claro&volta=/hoje")
+    assert 'data-tema="claro"' in cliente.get("/mais").text
+    assert 'data-tema="claro"' in cliente.get("/macetes").text
+
+
+@pytest.mark.parametrize("volta", [
+    "http://exemplo.com/", "https://exemplo.com", "//exemplo.com", "/\\exemplo.com", "hoje",
+])
+def test_volta_externa_e_recusada(cliente, volta):
+    resposta = cliente.get("/tema", params={"valor": "claro", "volta": volta},
+                           follow_redirects=False)
+    assert resposta.headers["location"] == "/"
+
+
+def test_o_botao_do_tema_esta_na_barra(cliente):
+    escuro = cliente.get("/macetes?banca=FEPESE").text
+    # No escuro o botao oferece o claro, e volta para a mesma pagina.
+    assert "☀️" in escuro
+    assert "/tema?valor=claro&amp;volta=%2Fmacetes%3Fbanca%3DFEPESE" in escuro
+
+
+def test_o_botao_tira_o_tema_da_url_na_volta(cliente):
+    """Se o ?tema= ficasse na volta, ele venceria o cookie recem-gravado."""
+    pagina = cliente.get("/hoje?tema=claro").text
+    assert "🌙" in pagina
+    assert "/tema?valor=escuro&amp;volta=%2Fhoje\"" in pagina
 
 
 def test_sem_javascript(cliente):

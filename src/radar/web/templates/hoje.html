@@ -1,6 +1,6 @@
 <!doctype html>
 {% set tema = request.query_params.get('tema', '') %}
-<html lang="pt-br" data-tema="{{ tema }}">
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -156,7 +156,7 @@
 </head>
 <body class="ds">
 
-{% from "_topo.html" import barra %}
+{% from "_topo.html" import barra with context %}
 {% from "_componentes.html" import selo %}
 {{ barra('hoje') }}
 

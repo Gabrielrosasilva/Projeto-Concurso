@@ -1302,9 +1302,9 @@ mais vale na prova.
   `ds-bloco--calculado`). O "conselho" de cada forma de perguntar, escrito a
   mao no `macetes.py`, ganhou a ressalva "dica fixa do radar, nao e
   contagem" - sob o selo verde sem ela, seria texto passando por contagem;
-- **modo escuro pelo sistema operacional, e `?tema=escuro` / `?tema=claro`
-  na URL forca um dos dois**, sem JavaScript: o atributo `data-tema` sai do
-  proprio template;
+- ~~modo escuro pelo sistema operacional~~ - substituido em 26/09/2026:
+  escuro e o padrao e claro e escolha, guardada em cookie (veja "Escuro e o
+  padrao", mais abaixo). O `?tema=` na URL continua forcando um dos dois;
 - **ponte com as telas antigas**: os nomes velhos de variavel (`--cartao`,
   `--azul`...) apontam para os novos dentro do design.css, e e isso que deixa
   a barra do topo igual em toda pagina durante a migracao. Sai quando a
@@ -1672,3 +1672,25 @@ Os detalhes:
   Minima amarela, Nao fiz vermelha;
 - recusa do formulario volta a tela com a mensagem e status 400, nunca 500.
   Os campos numericos chegam como texto, pelo mesmo motivo do converter_valor.
+
+## Escuro e o padrao; claro e escolha, guardada em cookie (26/09/2026)
+
+- **escuro e o padrao** em todas as paginas, e o tema do Windows
+  (`prefers-color-scheme`) deixou de mandar: a previa aprovada da tela Hoje e
+  escura, e eu estudo a noite;
+- **claro e escolha minha**, pelo botao ☀️/🌙 na barra do topo. A escolha
+  fica no cookie `tema` (claro|escuro, validade de dez anos). O botao e um
+  link simples, sem JavaScript: `GET /tema?valor=claro&volta=/hoje` grava o
+  cookie e volta para a pagina onde eu estava. So caminho interno serve de
+  `volta`: o que nao comeca com "/" (ou comeca com "//") volta para "/";
+- **o `?tema=` da URL continua valendo e vence o cookie** - serve para
+  comparar os dois sem trocar a escolha. O botao tira o `tema` da volta, senao
+  a URL venceria o cookie recem-gravado e o clique pareceria nao fazer nada;
+- **um lugar so decide**: `tema_da_pagina(request)`, no `web/app.py`,
+  exposta ao Jinja; todo `<html>` escreve `data-tema` com ela. Nenhuma rota
+  repete a conta. No design.css o escuro vale em `:root:not([data-tema="claro"])`;
+  as telas ainda nao migradas trocaram o `@media (prefers-color-scheme)` pelo
+  mesmo seletor, para o botao funcionar nelas tambem;
+- **barra do topo**: "Radar" a esquerda, as abas centralizadas, o botao a
+  direita. Abaixo de 640px a marca e o botao dividem a primeira linha e as
+  abas quebram em linhas embaixo, sem rolagem lateral.

@@ -6,6 +6,7 @@ outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 import time
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlencode
 
 from fastapi import FastAPI, Form, Request
 from fastapi.exceptions import HTTPException
@@ -120,6 +121,48 @@ templates.env.filters["numero"] = onde_estudar.numero
 # faz a conta - e nao com um 5 escrito no template.
 templates.env.globals["MINIMO_NA_MATERIA"] = onde_estudar.MINIMO_NA_MATERIA
 templates.env.globals["MINIMO_NO_ASSUNTO"] = onde_estudar.MINIMO_NO_ASSUNTO
+
+
+# --- o tema (claro ou escuro) -----------------------------------------------
+# Escuro e o padrao; claro e escolha minha, guardada no cookie `tema`. O
+# `?tema=` da URL vence o cookie: serve para comparar os dois sem trocar a
+# escolha. Um lugar so decide - toda pagina chama tema_da_pagina no <html>.
+TEMAS = ("claro", "escuro")
+TEMA_PADRAO = "escuro"
+# Dez anos: a escolha e minha e so muda quando eu clicar de novo.
+VALIDADE_DO_COOKIE_DE_TEMA = 10 * 365 * 24 * 3600
+
+
+def tema_da_pagina(request: Request) -> str:
+    """O tema desta pagina: o da URL, senao o do cookie, senao o escuro."""
+    for escolha in (request.query_params.get("tema"), request.cookies.get("tema")):
+        if escolha in TEMAS:
+            return escolha
+    return TEMA_PADRAO
+
+
+def link_de_trocar_tema(request: Request) -> str:
+    """O link do botao ☀️/🌙: pede o outro tema e volta para esta pagina.
+
+    O `tema` sai da volta de proposito: se ficasse, o `?tema=` da URL
+    venceria o cookie recem-gravado e o clique pareceria nao fazer nada.
+    """
+    outro = "claro" if tema_da_pagina(request) == "escuro" else "escuro"
+    resto = [(k, v) for k, v in request.query_params.multi_items() if k != "tema"]
+    volta = request.url.path + (f"?{urlencode(resto)}" if resto else "")
+    return f"/tema?{urlencode({'valor': outro, 'volta': volta})}"
+
+
+def _volta_interna(volta: str) -> str:
+    """So caminho deste site. "//outro.site" e "/\\outro.site" comecam com
+    barra, mas o navegador os le como outro endereco - por isso a recusa."""
+    if not volta.startswith("/") or volta.startswith("//") or volta.startswith("/\\"):
+        return "/"
+    return volta
+
+
+templates.env.globals["tema_da_pagina"] = tema_da_pagina
+templates.env.globals["link_de_trocar_tema"] = link_de_trocar_tema
 
 
 # --- a tela Hoje (o cronograma) ---------------------------------------------
@@ -392,6 +435,18 @@ def coletar():
         }
         for r in servico.coletar_tudo()
     ]
+
+
+@app.get("/tema")
+def trocar_tema(valor: str = TEMA_PADRAO, volta: str = "/"):
+    """O botao ☀️/🌙: grava a escolha no cookie e volta para onde eu estava.
+    E um link simples, sem JavaScript - por isso GET."""
+    if valor not in TEMAS:
+        valor = TEMA_PADRAO
+    resposta = RedirectResponse(_volta_interna(volta), status_code=303)
+    resposta.set_cookie("tema", valor, max_age=VALIDADE_DO_COOKIE_DE_TEMA,
+                        httponly=True, samesite="lax")
+    return resposta
 
 
 # --- o icone da aba (etapa 12) ----------------------------------------------

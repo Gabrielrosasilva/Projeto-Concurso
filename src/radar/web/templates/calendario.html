@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,13 +12,11 @@
       --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
       --prazo:#be123c; --prazo-fraco:#ffe4e9;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
+    :root:not([data-tema="claro"]){
         --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
         --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
         --prazo:#fb7185; --prazo-fraco:#2c1219;
       }
-    }
 
     *{box-sizing:border-box}
     body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
@@ -61,7 +59,7 @@
 </head>
 <body>
 
-{% from "_topo.html" import barra %}
+{% from "_topo.html" import barra with context %}
 {{ barra('concursos') }}
 
 <div class="pagina">
