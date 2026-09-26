@@ -344,7 +344,7 @@ class Nivel:
     planejado: int            # o do plano, quando tudo vai bem: a semana N e o nivel N
     calculado: int            # o que o gatilho deu, olhando as semanas fechadas
     efetivo: int              # o que vale: o menor dos dois
-    situacao: str             # primeira | subiu | neutra | ruim | desceu | aguardando
+    situacao: str             # primeira | subiu | neutra | ruim | desceu | futura
     motivo: str               # a frase pronta para a tela
 
 
@@ -395,8 +395,9 @@ def _motivo(plano: Plano, situacao: str, anterior: int, b: _Balanco | None,
     nivel = f"nível {efetivo} ({carga(plano, efetivo)})"
     if situacao == "primeira":
         return f"Primeira semana: nível {efetivo}."
-    if situacao == "aguardando":
-        return f"A semana {anterior} ainda não fechou: por ora, {nivel}."
+    if situacao == "futura":
+        return (f"Semana futura: carga do plano ({carga(plano, efetivo)}). O nível "
+                f"de verdade sai quando a semana {anterior} fechar.")
     if situacao == "subiu":
         return (f"A semana {anterior} fechou com {_plural(b.na_ideal, 'dia', 'dias')} "
                 f"na Ideal e nenhum zerado: {nivel}.")
@@ -419,6 +420,12 @@ def niveis(plano: Plano, metas: dict[date, str], hoje: date) -> dict[int, Nivel]
     `metas` e {data: meta} dos registros do diario. `hoje` decide quais
     semanas ja fecharam: so a semana com TODOS os dias no passado e avaliada.
     Os numeros das regras vem de `plano.gatilho`, nunca daqui.
+
+    Semana cuja anterior ainda nao fechou e "futura": fica na carga do
+    PLANO. Sem isso, olhar um dia de novembro em
+    setembro contava as semanas do meio como fechadas sem marcacao - ruins -
+    e mostrava uma carga que nenhum fato justificava. O `hoje` certo para
+    isso e o de `servico.cronograma.hoje_do_gatilho`.
     """
     sobe = plano.gatilho["sobe_com_dias_na_ideal"]
     ruim_com = plano.gatilho["semana_ruim_com_dias_abaixo"]
@@ -433,17 +440,27 @@ def niveis(plano: Plano, metas: dict[date, str], hoje: date) -> dict[int, Nivel]
     calculado = 1
     ruins_seguidas = 0
     # O fechamento da semana anterior: None se ela ainda nao fechou. Semana
-    # aberta trava todas as seguintes em "aguardando" - o gatilho nao chuta.
+    # aberta deixa todas as seguintes em "futura" - o gatilho nao chuta.
     fechamento = None
     alguma_aberta = False
 
     for semana in sorted(por_semana):
         planejado = min(max(semana, 1), teto)
+        dias = por_semana[semana]
+
+        if resultado and fechamento is None:
+            # A anterior ainda nao fechou: o gatilho nao tem o que dizer, e a
+            # semana fica na carga do plano. Nao mexe em `calculado` nem na
+            # contagem de ruins - o que nao aconteceu nao pesa na conta.
+            resultado[semana] = Nivel(
+                semana, planejado, calculado, planejado, "futura",
+                _motivo(plano, "futura", semana - 1, None, planejado, desce_apos),
+            )
+            alguma_aberta = True
+            continue
 
         if not resultado:
             situacao = "primeira"
-        elif fechamento is None:
-            situacao = "aguardando"
         elif fechamento.abaixo >= ruim_com:
             ruins_seguidas += 1
             if ruins_seguidas >= desce_apos:
@@ -468,7 +485,6 @@ def niveis(plano: Plano, metas: dict[date, str], hoje: date) -> dict[int, Nivel]
             _motivo(plano, situacao, semana - 1, fechamento, efetivo, desce_apos),
         )
 
-        dias = por_semana[semana]
         if not alguma_aberta and all(d.data < hoje for d in dias):
             fechamento = _balanco(dias, metas)
         else:

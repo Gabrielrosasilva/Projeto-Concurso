@@ -189,12 +189,34 @@ def _metas(plano) -> dict[date, str]:
     return {d: r.meta for d, r in registros(plano.inicio, plano.fim).items()}
 
 
-def _montado(plano, data: date, metas: dict[date, str]):
-    """O dia com o nivel efetivo da semana dele, como o `radar hoje` mostra."""
+def hoje_do_gatilho(data: date) -> date:
+    """O "hoje" que o gatilho usa para ver o dia `data`.
+
+    Dia passado: a propria data, para mostrar a carga que valia naquele dia.
+    Dia futuro: o hoje de verdade - o gatilho so sabe o que ja aconteceu, e
+    as semanas que ainda nao chegaram ficam na carga do plano.
+    """
+    return min(data, hoje_local())
+
+
+def nivel_do_dia(plano, data: date, metas: dict[date, str] | None = None):
+    """O nivel da semana de `data`, ou None se o dia nao esta no plano.
+
+    O lugar unico da conta, para a tela e o `radar hoje` nunca divergirem.
+    """
     gravado = plano.dia(data)
     if gravado is None:
+        return None
+    if metas is None:
+        metas = _metas(plano)
+    return plano_de_estudo.niveis(plano, metas, hoje_do_gatilho(data))[gravado.semana]
+
+
+def _montado(plano, data: date, metas: dict[date, str]):
+    """O dia com o nivel efetivo da semana dele, como o `radar hoje` mostra."""
+    nivel = nivel_do_dia(plano, data, metas)
+    if nivel is None:
         return None, None
-    nivel = plano_de_estudo.niveis(plano, metas, data)[gravado.semana]
     return plano_de_estudo.montar_dia(plano, data, nivel.efetivo), nivel
 
 

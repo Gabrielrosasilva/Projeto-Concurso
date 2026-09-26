@@ -1836,11 +1836,9 @@ def hoje(
                       "cronograma.[/]")
         return
 
-    # O nivel olha as semanas que fecharam ANTES de `quando`: ver um dia
-    # passado mostra a carga que valia naquele dia.
-    metas = {data: registro.meta for data, registro
-             in servico.cronograma.registros(plano.inicio, plano.fim).items()}
-    nivel = cronograma.niveis(plano, metas, quando)[gravado.semana]
+    # A mesma conta da tela: dia passado mostra a carga que valia naquele
+    # dia, e semana que ainda nao chegou fica na carga do plano.
+    nivel = servico.cronograma.nivel_do_dia(plano, quando)
     dia = cronograma.montar_dia(plano, quando, nivel.efetivo)
 
     cabecalho = f"Semana {dia.semana}"

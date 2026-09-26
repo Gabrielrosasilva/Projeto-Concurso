@@ -204,3 +204,45 @@ def test_a_home_no_domingo_e_fora_do_ciclo(cliente, monkeypatch):
 
 def test_sem_javascript(cliente):
     assert "<script" not in cliente.get("/hoje?data=2026-09-28").text.lower()
+
+
+# --- o gatilho olhando o futuro ----------------------------------------------
+
+def _niveis_vistos_de(real, quando):
+    from radar import cronograma
+    return cronograma.niveis(real, {}, servico.cronograma.hoje_do_gatilho(quando))
+
+
+def test_olhando_o_futuro_vale_a_carga_do_plano(cliente, monkeypatch):
+    from datetime import date
+
+    from radar import cronograma
+    _parar_o_relogio(monkeypatch, 2026, 9, 26, 12, 0)
+    t = servico.cronograma.tela_do_dia(date(2026, 10, 28))
+    assert (t.nivel.efetivo, t.nivel.situacao) == (5, "futura")
+    assert t.dia.total_questoes == 60
+    assert t.fim_do_dia.strftime("%H:%M") == "21:15"
+    situacoes = {n.situacao for n in _niveis_vistos_de(cronograma.carregar(),
+                                                        date(2026, 10, 28)).values()}
+    assert not situacoes & {"ruim", "desceu"}
+
+    texto = cliente.get("/hoje?data=2026-10-28").text
+    assert "Nível 5" in texto and "Semana futura: carga do plano" in texto
+
+
+def test_no_meio_do_ciclo_so_as_semanas_que_chegaram_contam(monkeypatch):
+    from datetime import date
+
+    from radar import cronograma
+    _parar_o_relogio(monkeypatch, 2026, 10, 10, 12, 0)     # sabado da semana 2
+    n = _niveis_vistos_de(cronograma.carregar(), date(2026, 10, 28))
+    assert (n[2].situacao, n[2].efetivo) == ("ruim", 1)   # a semana 1 fechou sem marca
+    assert [n[s].situacao for s in (3, 4, 5, 6)] == ["futura"] * 4
+
+
+def test_dia_passado_continua_como_era(monkeypatch):
+    from datetime import date
+    _parar_o_relogio(monkeypatch, 2026, 10, 30, 12, 0)
+    t = servico.cronograma.tela_do_dia(date(2026, 10, 5))
+    assert (t.nivel.situacao, t.nivel.efetivo) == ("ruim", 1)
+    assert t.nivel.motivo.startswith("A semana 1 fechou com 6 dias abaixo")

@@ -1628,8 +1628,9 @@ As regras, com os numeros do Ciclo 1:
 
 Os detalhes:
 
-- so semana com TODOS os dias no passado e avaliada. Semana aberta deixa as
-  seguintes em "aguardando", no nivel que ja se sabe - o gatilho nao chuta;
+- so semana com TODOS os dias no passado e avaliada. Semana cuja anterior
+  ainda nao fechou e "futura" e fica na carga do PLANO - o gatilho nao chuta,
+  e o que nao aconteceu nao entra na conta das outras;
 - dia passado sem marcacao conta como abaixo, mas NAO como zerado: so o
   `nao_fiz` trava a subida. Feriado conta como na Ideal se marcado minima ou
   melhor: a planilha pede pelo menos a minima no feriado, e cumprir o que o
@@ -1639,9 +1640,18 @@ Os detalhes:
 - efetivo = min(planejado, calculado). Como o calculado sobe no maximo 1 por
   semana, quem vai bem segue o plano, e quem tropeca fica atras dele ate
   firmar;
-- `radar hoje --data X` calcula o nivel com "hoje" = X: ver um dia passado
-  mostra a carga que valia naquele dia. Consequencia esperada: sem marcacao
-  nenhuma, a semana 1 fecha com 6 dias abaixo e a semana 2 repete o nivel 1.
+- o "hoje" do gatilho e min(dia visto, hoje de verdade), numa funcao so
+  (`servico.cronograma.hoje_do_gatilho`), usada pela tela e pelo `radar
+  hoje`. Dia passado mostra a carga que valia naquele dia; dia futuro mostra
+  o plano. A primeira versao usava o dia visto nos dois casos, e olhar
+  28/10 em setembro contava as semanas do meio como fechadas sem marcacao:
+  duas ruins seguidas, nivel 1, 45 questoes em vez de 60;
+- a semana e futura quando a ANTERIOR nao fechou, e nao quando ela propria
+  ainda nao comecou. A diferenca e o domingo: com a semana 1 fechada no
+  sabado, a segunda-feira seguinte ja tem nivel decidido pelo gatilho, e
+  mostrar a carga do plano ali seria esconder o resultado;
+- consequencia esperada: sem marcacao nenhuma, a semana 1 fecha com 6 dias
+  abaixo e a semana 2 repete o nivel 1.
 
 ### A tela Hoje (etapa 4, 26/09/2026)
 

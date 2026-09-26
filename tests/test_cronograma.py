@@ -343,15 +343,28 @@ def test_efetivo_e_o_menor_entre_planejado_e_calculado():
 
 
 def test_semana_em_andamento_nao_e_avaliada():
-    # Quinta da semana 1, e tudo ideal ate aqui: ainda nao conta.
+    # Quinta da semana 1, e tudo ideal ate aqui: ainda nao conta. As semanas
+    # que nem comecaram ficam na carga do plano.
     metas = _marcas(1, "ideal", "ideal", "ideal")
     n = cronograma.niveis(_plano_de_semanas(), metas, SEGUNDA + timedelta(days=3))
-    assert (n[2].situacao, n[2].efetivo) == ("aguardando", 1)
-    assert n[2].motivo.startswith("A semana 1 ainda não fechou")
-    assert n[3].situacao == "aguardando"
+    assert (n[2].situacao, n[2].efetivo) == ("futura", 2)
+    assert n[2].motivo == ("Semana futura: carga do plano (Direito 20, Português "
+                           "10). O nível de verdade sai quando a semana 1 fechar.")
+    assert (n[3].situacao, n[3].efetivo) == ("futura", 3)
     # No sabado ainda nao fechou; no domingo, sim.
     sabado = _dias_da_semana(1)[-1]
-    assert cronograma.niveis(_plano_de_semanas(), metas, sabado)[2].situacao == "aguardando"
+    assert cronograma.niveis(_plano_de_semanas(), metas, sabado)[2].situacao == "futura"
+    assert cronograma.niveis(_plano_de_semanas(), metas,
+                             _depois_da_semana(1))[2].situacao == "ruim"
+
+
+def test_semana_futura_nao_mexe_na_conta_das_outras():
+    # Semana 1 ruim e fechada; "hoje" e a segunda da semana 2.
+    metas = _marcas(1, *["minima"] * 6)
+    n = cronograma.niveis(_plano_de_semanas(), metas, _depois_da_semana(1) + timedelta(days=1))
+    assert (n[2].situacao, n[2].efetivo) == ("ruim", 1)
+    assert [n[s].situacao for s in (3, 4, 5)] == ["futura"] * 3
+    assert [n[s].efetivo for s in (3, 4, 5)] == [3, 4, 5]
 
 
 def test_dia_sem_marcacao_conta_como_abaixo():
