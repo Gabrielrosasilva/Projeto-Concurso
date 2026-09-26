@@ -14,6 +14,11 @@
      --sobreaviso-*. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
+    /* O cronometro sai do servidor com `hidden` e so o cronometro.js tira:
+       sem JavaScript, nada dele aparece. O !important e porque .ds-botao e
+       afins declaram display, e isso venceria o [hidden] do navegador. */
+    .hoje-pagina [hidden]{display:none !important}
+
     /* --- fundo: pontinhos discretos, so nesta tela --- */
     body.hoje-pagina{background-image:radial-gradient(var(--pontinho) 1px,transparent 1.3px);background-size:18px 18px}
 
@@ -53,6 +58,34 @@
     .lateral-titulo{margin:0 0 var(--esp-2);font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;
       text-transform:uppercase;color:var(--cor-texto-suave)}
     .lateral-cronometro:empty{display:none}
+
+    /* --- o cronometro (o unico JavaScript do radar: static/cronometro.js) --- */
+    .cronometro.rodando{border-color:var(--selo-calculado)}
+    .crono-nome{margin:0;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    .crono-tempo{margin:var(--esp-1) 0 var(--esp-2);font-family:var(--fonte-numero);font-size:2.6rem;font-weight:var(--peso-forte);
+      line-height:1.1;font-variant-numeric:tabular-nums}
+    .crono-botoes{display:flex;gap:var(--esp-2);flex-wrap:wrap}
+    .botao-secundario{padding:var(--esp-2) var(--esp-4);border-radius:var(--raio-sm);border:1px solid var(--cor-borda);
+      background:transparent;color:var(--cor-texto);font:inherit;font-size:var(--tam-sm);font-weight:var(--peso-medio);cursor:pointer}
+    .botao-secundario:hover{border-color:var(--cor-acao)}
+    .crono-testar{margin-top:var(--esp-3);padding:var(--esp-1) var(--esp-3);border-radius:var(--raio-sm);border:1px dashed var(--cor-borda);
+      background:transparent;color:var(--cor-texto-suave);font:inherit;font-size:var(--tam-xs);cursor:pointer}
+    .crono-testar:hover{color:var(--cor-texto);border-color:var(--cor-texto-suave)}
+    .crono-msg{margin:var(--esp-2) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .crono-msg:empty{display:none}
+    /* O ▶ pequeno ao lado do horario de cada faixa. */
+    .play-faixa{width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--cor-borda);background:var(--cor-superficie);
+      color:var(--cor-acao);font-size:var(--tam-xs);line-height:1;cursor:pointer;padding:0;display:grid;place-items:center}
+    .play-faixa:hover{border-color:var(--cor-acao)}
+    .play-faixa:focus-visible{outline:2px solid var(--cor-acao);outline-offset:2px}
+    /* O aviso em tela cheia, quando uma faixa acaba. */
+    .aviso-cheio{position:fixed;inset:0;z-index:100;background:var(--cor-veu);display:grid;place-items:center;padding:var(--esp-4)}
+    .aviso-caixa{width:100%;max-width:34rem;background:var(--cor-superficie);border:4px solid var(--cor-aviso);border-radius:var(--raio);
+      padding:var(--esp-6) var(--esp-5);text-align:center;box-shadow:var(--sombra-alta)}
+    .aviso-titulo{margin:0;font-size:var(--tam-2xl);font-weight:var(--peso-forte);line-height:var(--linha-titulo);color:var(--cor-aviso)}
+    .aviso-texto,.aviso-depois{margin:var(--esp-3) 0 0;font-size:var(--tam-md)}
+    .aviso-depois:empty{display:none}
+    .aviso-ok{margin-top:var(--esp-5);font-size:var(--tam-md);padding:var(--esp-3) var(--esp-6)}
     .agora .rotulo{display:block;font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.06em;color:var(--selo-calculado)}
     .agora .principal-agora{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte);line-height:var(--linha-titulo)}
     .agora .depois{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
@@ -186,6 +219,7 @@
     .ds .bloco-pos22 a,.bloco-pos22 .faixa summary{color:var(--sobreaviso-destaque)}
     .ds .bloco-pos22 a.botao-lei{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda)}
     .bloco-pos22 .faixa:not(.feita) .circulo{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda)}
+    .bloco-pos22 .play-faixa{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda);color:var(--sobreaviso-destaque)}
     .bloco-pos22 .faixa:not(.feita) .circulo:hover{border-color:var(--sobreaviso-destaque);color:var(--sobreaviso-destaque)}
     .etiqueta-sobreaviso{padding:.1rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
       background:var(--sobreaviso-superficie);border:1px solid var(--sobreaviso-borda);color:var(--sobreaviso-texto);white-space:nowrap}
@@ -250,7 +284,7 @@
 
     /* --- impressao: so o plano do dia --- */
     @media print{
-      .topo-barra,.navega,.como-foi,.lateral,.plano-b-controle{display:none !important}
+      .topo-barra,.navega,.como-foi,.lateral,.plano-b-controle,.play-faixa,.aviso-cheio{display:none !important}
       .hoje-grade.com-lateral{grid-template-columns:1fr}
       .faixa.passou{opacity:1}
       .ds-cartao{box-shadow:none}
@@ -314,8 +348,21 @@
   {# ============================ a coluna lateral ========================= #}
   {% if t.plano %}
   <aside class="lateral" aria-label="Resumo do dia">
-    {# O lugar do cronometro: vazio por enquanto, e escondido enquanto vazio. #}
-    <div class="lateral-cronometro" id="cronometro"></div>
+    {# O cronometro: escondido ate o cronometro.js tirar o `hidden`. Sem
+       JavaScript ele nao aparece, e o resto da tela nao depende dele. #}
+    <div class="lateral-cronometro" id="cronometro" hidden>
+      <section class="ds-cartao cronometro" aria-label="Cronômetro">
+        <h2 class="lateral-titulo">⏱ Cronômetro</h2>
+        <p class="crono-nome" data-crono="nome">Clique no ▶ de uma faixa para começar.</p>
+        <p class="crono-tempo" data-crono="tempo">--:--</p>
+        <div class="crono-botoes">
+          <button type="button" class="ds-botao" data-crono="pausar" hidden>Pausar</button>
+          <button type="button" class="botao-secundario" data-crono="parar" hidden>Parar</button>
+        </div>
+        <button type="button" class="crono-testar" data-crono="testar">🔔 Testar aviso</button>
+        <p class="crono-msg" data-crono="msg" role="status"></p>
+      </section>
+    </div>
 
     {% if t.dia %}
       {% set d = t.dia %}
@@ -499,11 +546,29 @@
           {% set atual = t.agora and t.agora.atual is sameas f %}
           {% set passou = t.hora and f.fim and f.fim <= t.hora %}
           {% set feita = (b.chave, loop.index0) in t.feitas %}
+          {# O que o cronometro precisa saber da faixa, escrito pelo servidor:
+             quanto dura, como se chama, e o que vem depois dela (se e pausa,
+             quanto dura a pausa e o que vem depois da pausa). #}
+          {% set cronometravel = f.tipo != 'pausa' and f.duracao %}
+          {% if cronometravel %}
+            {% set prox = t.proxima_de(f) %}
+            {% set prox_pausa = prox and prox.tipo == 'pausa' %}
+            {% set depois = t.proxima_de(prox) if prox_pausa else none %}
+          {% endif %}
           <li class="faixa t-{{ f.tipo }} {{ 'atual' if atual }} {{ 'passou' if passou and not atual }} {{ 'feita' if feita }}"
-              id="faixa-{{ b.chave }}-{{ loop.index0 }}">
+              id="faixa-{{ b.chave }}-{{ loop.index0 }}"
+              {%- if cronometravel %}
+              data-duracao="{{ f.duracao }}" data-titulo="{{ f.titulo }}"
+              data-proxima-titulo="{{ prox.titulo if prox else '' }}"
+              data-proxima-pausa="{{ 'sim' if prox_pausa else 'nao' }}"
+              data-proxima-duracao="{{ prox.duracao if prox_pausa else 0 }}"
+              data-depois-titulo="{{ depois.titulo if depois else '' }}"
+              {%- endif %}>
             <span class="quando">
               {% if f.inicio %}<span>{{ hm(f.inicio) }} – {{ hm(f.fim) }}</span>{% else %}<span class="ordem">{{ loop.index }}º</span>{% endif %}
               {% if atual %}<span class="etiqueta-agora">AGORA</span>{% endif %}
+              {% if cronometravel %}<button type="button" class="play-faixa" hidden
+                  title="Cronometrar {{ f.duracao }} min" aria-label="Cronometrar {{ f.duracao }} min: {{ f.titulo }}">▶</button>{% endif %}
             </span>
             {% if f.tipo == 'pausa' %}
               <div class="corpo">{{ ICONE_DO_TIPO.pausa }} Pausa · {{ f.duracao }} min{% if f.detalhe %} · {{ f.detalhe }}{% endif %}</div>
@@ -636,5 +701,18 @@
 
   </main>
 </div>
+
+{# O aviso de fim de faixa. Escondido; so o cronometro.js mostra. #}
+<div class="aviso-cheio" id="aviso-cheio" hidden role="alertdialog" aria-modal="true" aria-labelledby="aviso-titulo">
+  <div class="aviso-caixa">
+    <p class="aviso-titulo" id="aviso-titulo" data-aviso="titulo"></p>
+    <p class="aviso-texto" data-aviso="texto"></p>
+    <p class="aviso-depois" data-aviso="depois"></p>
+    <button type="button" class="ds-botao aviso-ok" data-aviso="ok">OK</button>
+  </div>
+</div>
+
+{# O unico JavaScript do radar (docs/decisoes.md). A tela funciona sem ele. #}
+<script src="/estatico/cronometro.js" defer></script>
 </body>
 </html>

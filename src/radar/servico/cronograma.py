@@ -379,6 +379,23 @@ class TelaDoDia:
     plano_b: int | None = None
     opcoes_do_plano_b: list[int] = field(default_factory=list)
 
+    def faixas_em_ordem(self) -> list:
+        """As faixas da tela, na ordem em que aparecem (o dia, ou o Plano B)."""
+        return [f for bloco in self.blocos for f in bloco.faixas]
+
+    def proxima_de(self, faixa):
+        """A faixa que vem depois desta na tela, ou None se ela e a ultima.
+
+        O cronometro usa: e o que ele anuncia quando a faixa acaba ("pausa de
+        10 min", "proximo: Correcao"). Atravessa os blocos - depois da ultima
+        da manha vem a primeira da noite.
+        """
+        ordem = self.faixas_em_ordem()
+        for i, f in enumerate(ordem):
+            if f is faixa:
+                return ordem[i + 1] if i + 1 < len(ordem) else None
+        return None
+
     @property
     def pode_ativar_plano_b(self) -> bool:
         return bool(self.opcoes_do_plano_b) and self.dia is not None and not self.futuro

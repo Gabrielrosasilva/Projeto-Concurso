@@ -505,6 +505,8 @@ def montar_plano_b(plano: Plano, data: date, minutos: int,
             bloco=BLOCO_DO_PLANO_B, tipo="revisao",
             titulo="Refazer as questões erradas da semana",
             detalhe=plano.plano_b.sabado, questoes=plano.plano_b.sabado_questoes,
+            duracao=duracao_de_questoes(plano.plano_b.sabado_questoes,
+                                        plano.minutos_por_questao),
             onde="qconcursos",
         )]
         return b
@@ -534,6 +536,7 @@ def montar_plano_b(plano: Plano, data: date, minutos: int,
             titulo=f"Questões de prova: {tema}",
             materia=direito.materia, filtro=direito.filtro, onde=direito.onde,
             questoes=opcao.questoes_direito,
+            duracao=duracao_de_questoes(opcao.questoes_direito, plano.minutos_por_questao),
         ))
     if opcao.questoes_portugues > 0 and portugues is not None:
         faixas.append(Faixa(
@@ -541,6 +544,7 @@ def montar_plano_b(plano: Plano, data: date, minutos: int,
             titulo=portugues.titulo, materia=portugues.materia,
             filtro=portugues.filtro, onde=portugues.onde,
             questoes=opcao.questoes_portugues, opcional=True,
+            duracao=duracao_de_questoes(opcao.questoes_portugues, plano.minutos_por_questao),
         ))
     b.plano_b = faixas
     return b

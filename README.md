@@ -405,6 +405,18 @@ um pouco de Portugues. No sabado e refazer as questoes erradas da semana.
 Sem Anki, sem pausa. O dia conta como Minima; **↩ Voltar ao plano completo**
 desfaz. So vale para hoje ou dia passado.
 
+### O cronometro
+
+Cada faixa (menos a pausa) tem um ▶ ao lado do horario. Ele conta a duracao
+cheia da faixa a partir do clique, no cartao **⏱ Cronometro** da coluna do
+lado, e quando acaba avisa em tela cheia, com som e notificacao do Windows:
+pausa, volta da pausa, ou a proxima faixa. Recarregar a pagina nao perde a
+contagem. **🔔 Testar aviso** pede a permissao de notificacao na primeira vez
+e dispara um aviso de teste. A notificacao do Windows so funciona abrindo o
+radar no proprio PC (`http://localhost:8000`); pelo IP, na rede, ficam a
+tela e o som. E o unico JavaScript do radar: sem ele, a tela funciona igual,
+so sem o cronometro.
+
 ### O nivel sobe e desce sozinho
 
 A noite tem uma **rampa**: o numero de questoes de Direito e de Portugues

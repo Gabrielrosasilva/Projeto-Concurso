@@ -218,8 +218,11 @@ def test_a_home_antes_do_ciclo_diz_quando_comeca(cliente, monkeypatch):
     assert "Ver o primeiro dia" in texto
 
 
-def test_sem_javascript(cliente):
-    assert "<script" not in cliente.get("/hoje?data=2026-09-28").text.lower()
+def test_o_unico_javascript_e_o_do_cronometro(cliente):
+    """A excecao da etapa A5 (docs/decisoes.md): um arquivo so, e nada inline."""
+    texto = cliente.get("/hoje?data=2026-09-28").text.lower()
+    assert texto.count("<script") == 1
+    assert '<script src="/estatico/cronometro.js" defer></script>' in texto
 
 
 # --- o gatilho olhando o futuro ----------------------------------------------

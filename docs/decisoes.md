@@ -1780,3 +1780,39 @@ Os detalhes:
   tem o botao (e o POST e recusado); domingo tambem nao;
 - o `radar hoje --plano-b 30` so MOSTRA o Plano B no terminal: nao ativa.
 
+### O cronometro: a UNICA excecao ao "sem JavaScript" (etapa A5, 26/09/2026)
+
+- **o cronometro e o unico JavaScript do radar**, e mora num arquivo so,
+  `src/radar/web/static/cronometro.js`. Nenhum `<script>` inline, em tela
+  nenhuma. A excecao existe porque avisar "acabou, vai para a pausa" com som
+  e notificacao do Windows e coisa que so o navegador faz;
+- **a tela funciona igual sem ele**: o servidor escreve o cartao do
+  cronometro, o aviso em tela cheia e os botoes ▶ com `hidden`, e so o
+  script tira. Sem JavaScript, nada do cronometro aparece, e o resto (checks,
+  Plano B, "Como foi o dia") continua sendo formulario;
+- **o servidor diz o que a faixa e, o script so conta**: cada faixa que nao
+  e pausa leva `data-duracao`, `data-titulo` e o que vem depois
+  (`data-proxima-titulo`, `-pausa`, `-duracao`, `data-depois-titulo`),
+  calculado em `TelaDoDia.proxima_de` - atravessa os blocos. As faixas de
+  questoes do Plano B ganharam duracao (questoes x minutos_por_questao) para
+  terem o que contar;
+- **conta a DURACAO CHEIA a partir do clique**, e nao ate o horario do plano:
+  50 min de teoria sao 50 min mesmo comecando atrasado;
+- **o fim fica no localStorage** (a hora de termino, nao "quanto falta"):
+  recarregar ou trocar de aba nao perde nada. O alarme e UM setTimeout ate o
+  termino, refeito quando a aba volta a ficar visivel; o relogio mm:ss da
+  tela atualiza a cada segundo, mas o alarme nao depende dele;
+- **o aviso e um trio**: tela cheia (veu `--cor-veu`, borda laranja), som
+  que repete ate o OK (Web Audio, sem arquivo de som) e notificacao do
+  Windows (Notification API, `requireInteraction`, uma tag so para nao
+  duplicar entre abas). "OK, pausa!" comeca a pausa sozinho;
+- **o som so comeca depois de um clique meu** (regra dos navegadores): o
+  contexto de audio nasce no ▶ ou no Testar; depois de recarregar a pagina
+  com o cronometro rodando, o primeiro clique nela religa;
+- **notificacao do Windows so em contexto seguro** (localhost). Aberto pelo
+  IP na rede, o Testar avisa que ali so ha a tela e o som; com a permissao
+  negada, ensina a liberar (cadeado -> Notificacoes -> Permitir) e lembra do
+  "Nao perturbe"/Assistente de Foco;
+- o comportamento do JS e testado na mao; o pytest segura o contrato (o
+  script, os data-*, pausa sem ▶, tudo `hidden` sem JS).
+
