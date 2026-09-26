@@ -13,7 +13,7 @@ Fluxo no Actions:  importar -> coletar -> exportar -> commit do JSON
 """
 import json
 import logging
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +27,7 @@ from radar.models import (
     Evento,
     QuestaoDeProva,
     QuestaoGerada,
+    RegistroDoDia,
     RespostaDeSimulado,
     Simulado,
 )
@@ -699,4 +700,114 @@ def esquecer_simulados(criados_em: list, caminho: Path | None = None) -> int:
             json.dumps(ficam, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
+    return len(linhas) - len(ficam)
+
+
+# --- o diario do cronograma --------------------------------------------------
+# O mesmo caminho do historico de treino: so existe nesta maquina, e sem o
+# arquivo morreria junto com o radar.db. A chave e a DATA do dia, e quando os
+# dois lados tem a mesma data, vale a anotacao mais recente (`anotado_em`) -
+# e o caso de eu corrigir no notebook um dia que marquei no outro computador.
+
+def caminho_dos_registros() -> Path:
+    return config.diretorio_dados() / "registro_estudo.json"
+
+
+def _registro_como_linha(registro: RegistroDoDia) -> dict:
+    return {
+        "data": registro.data.isoformat(),
+        "meta": registro.meta,
+        "questoes_feitas": registro.questoes_feitas,
+        "acertos": registro.acertos,
+        "anotacao": registro.anotacao,
+        "anotado_em": _serializar(registro.anotado_em),
+    }
+
+
+def _mais_recente(a: dict | None, b: dict) -> dict:
+    """Das duas linhas da mesma data, a de `anotado_em` mais novo."""
+    if a is None:
+        return b
+    if datetime.fromisoformat(b["anotado_em"]) > datetime.fromisoformat(a["anotado_em"]):
+        return b
+    return a
+
+
+def _ler_registros(origem: Path) -> list[dict]:
+    if not origem.exists():
+        return []
+    return json.loads(origem.read_text(encoding="utf-8")) or []
+
+
+def _gravar_registros(destino: Path, linhas: list[dict]) -> None:
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(
+        json.dumps(linhas, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+def exportar_registros(caminho: Path | None = None) -> int:
+    """Grava o diario no JSON. Devolve quantos dias.
+
+    Como o dos simulados, o arquivo so cresce: dia que esta no arquivo e nao
+    esta no banco fica no arquivo.
+    """
+    criar_tabelas()
+    destino = caminho or caminho_dos_registros()
+
+    juntos = {}
+    for linha in _ler_registros(destino):
+        juntos[linha["data"]] = linha
+    with sessao() as s:
+        for registro in s.scalars(select(RegistroDoDia)):
+            linha = _registro_como_linha(registro)
+            juntos[linha["data"]] = _mais_recente(juntos.get(linha["data"]), linha)
+
+    _gravar_registros(destino, [juntos[chave] for chave in sorted(juntos)])
+    return len(juntos)
+
+
+def importar_registros(caminho: Path | None = None) -> int:
+    """Traz o diario do JSON para o banco. Devolve quantos dias mudaram.
+
+    Dia que o banco nao tem entra; dia que os dois tem so e reescrito se a
+    linha do arquivo for mais recente. Rodar duas vezes da no mesmo.
+    """
+    origem = caminho or caminho_dos_registros()
+    linhas = _ler_registros(origem)
+    if not linhas:
+        return 0
+
+    criar_tabelas()
+    mudaram = 0
+    with sessao() as s:
+        for linha in linhas:
+            data = date.fromisoformat(linha["data"])
+            anotado_em = datetime.fromisoformat(linha["anotado_em"])
+            registro = s.scalar(
+                select(RegistroDoDia).where(RegistroDoDia.data == data)
+            )
+            if registro is not None and registro.anotado_em >= anotado_em:
+                continue
+            if registro is None:
+                registro = RegistroDoDia(data=data)
+                s.add(registro)
+            registro.meta = linha["meta"]
+            registro.questoes_feitas = linha.get("questoes_feitas")
+            registro.acertos = linha.get("acertos")
+            registro.anotacao = linha.get("anotacao")
+            registro.anotado_em = anotado_em
+            mudaram += 1
+    return mudaram
+
+
+def esquecer_registros(datas: list, caminho: Path | None = None) -> int:
+    """Tira do arquivo os dias apagados. Devolve quantos sairam."""
+    origem = caminho or caminho_dos_registros()
+    linhas = _ler_registros(origem)
+    chaves = {d.isoformat() for d in datas}
+    ficam = [linha for linha in linhas if linha["data"] not in chaves]
+    if len(ficam) != len(linhas):
+        _gravar_registros(origem, ficam)
     return len(linhas) - len(ficam)

@@ -113,6 +113,8 @@ from radar.servico import inicio        # noqa: F401 - usado pela web
 from radar.servico import compilado     # noqa: F401 - usado pela web
 # A revisao espacada, 1-7-30 dias. `servico.espacada.pendentes()`.
 from radar.servico import espacada      # noqa: F401 - usado pela web e CLI
+# O diario do cronograma. `servico.cronograma.registrar(...)`.
+from radar.servico import cronograma    # noqa: F401 - usado pela CLI
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

@@ -1583,3 +1583,18 @@ hoje` mostra o dia no terminal.
 - domingo e descanso: nao pode estar no arquivo, e `montar_dia` devolve None;
 - faixa `opcional` (o bonus) aparece mas nao entra no total do dia - senao o
   dia em que o trabalho aperta viraria dia "abaixo" sem motivo.
+
+### O diario do dia (etapa 2 do cronograma, 26/09/2026)
+
+- `radar hoje --marcar ideal|reduzida|minima|nao_fiz [--feitas N --acertos N]`
+  grava em `registros_de_estudo`, um registro por data. Marcar de novo
+  atualiza. Recusa: meta fora das quatro, numero negativo, acertos acima das
+  feitas (ou acertos sem feitas), data futura e data fora do plano;
+- questoes feitas e acertos dali sao o que eu ANOTO, quase tudo do
+  Qconcursos. Nao entram em acerto medido nenhum do radar - nem Meu foco,
+  nem Onde estudar, nem home, nem minimo. Ha teste garantindo;
+- a copia vai em `data/registro_estudo.json`, pelo mesmo caminho do
+  `simulados.json` (exportar, importar, sincronizar). A chave e a data; com
+  a mesma data dos dois lados, vale o `anotado_em` mais recente. O arquivo
+  so cresce, e por isso `servico.cronograma.apagar` tira do banco E do
+  arquivo.

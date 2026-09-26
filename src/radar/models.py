@@ -5,11 +5,12 @@ futuras (prazos, salario, relevancia). Isso e de proposito: o projeto nao usa
 Alembic, entao cada coluna nova depois significaria recriar o banco. Criar a
 coluna vazia agora custa zero e evita esse incomodo.
 """
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from typing import Any
 
 from sqlalchemy import (
     Boolean,
+    Date,
     DateTime,
     Integer,
     JSON,
@@ -417,3 +418,28 @@ class QuestaoGerada(Base):
 
     def __repr__(self) -> str:
         return f"<QuestaoGerada {self.modo} {self.enunciado[:40]!r}>"
+
+
+class RegistroDoDia(Base):
+    """Como foi um dia do cronograma, do jeito que EU anotei.
+
+    Questoes feitas e acertos aqui sao digitados a mao, e a maior parte vem
+    do Qconcursos. Por isso NAO entram em acerto medido nenhum do radar (Meu
+    foco, Onde estudar, home): la so conta o que eu respondi dentro do radar,
+    questao por questao. Isto e o diario do cronograma, e so.
+    """
+
+    __tablename__ = "registros_de_estudo"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    # Data local do dia de estudo, e nao instante: "28/09" e o dia do plano,
+    # nao importa a hora em que eu anotei.
+    data: Mapped[date] = mapped_column(Date, unique=True, index=True)
+    meta: Mapped[str] = mapped_column(String(10))
+    questoes_feitas: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    acertos: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    anotacao: Mapped[str | None] = mapped_column(Text, nullable=True)
+    anotado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<RegistroDoDia {self.data} {self.meta}>"

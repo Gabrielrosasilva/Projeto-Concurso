@@ -1490,6 +1490,17 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"{destino_simulados}"
     )
 
+    # O diario do cronograma, pelo mesmo motivo: so existe nesta maquina.
+    destino_registros = (
+        destino.with_name("registro_estudo.json") if caminho
+        else acervo.caminho_dos_registros()
+    )
+    dias_gravados = acervo.exportar_registros(destino_registros)
+    console.print(
+        f"[green]{dias_gravados}[/] dia(s) do cronograma exportado(s) para "
+        f"{destino_registros}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1550,6 +1561,14 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     )
     if origem_simulados.exists():
         _importar_simulados(origem_simulados)
+
+    origem_registros = (
+        origem.with_name("registro_estudo.json") if caminho
+        else acervo.caminho_dos_registros()
+    )
+    if origem_registros.exists():
+        dias = acervo.importar_registros(origem_registros)
+        console.print(f"   {dias} dia(s) do cronograma de volta ao banco")
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -1646,7 +1665,7 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/assuntos.json", "data/questoes_geradas.json",
                      "data/simulados.json", "data/macetes.json",
-                     "data/explicacoes.json")
+                     "data/explicacoes.json", "data/registro_estudo.json")
 
 
 @app.command()
@@ -1692,6 +1711,8 @@ def sincronizar(
         f"   {concursos} concurso(s) lido(s), {eventos_novos} evento(s) novo(s)"
     )
     _importar_simulados()
+    dias = acervo.importar_registros()
+    console.print(f"   {dias} dia(s) do cronograma de volta ao banco")
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -1710,10 +1731,12 @@ def sincronizar(
     # O historico de treino vive so nesta maquina - o robo nunca faz
     # simulado. E aqui que ele ganha a copia que o radar.db nao tem.
     total_simulados = acervo.exportar_simulados()
+    total_dias = acervo.exportar_registros()
     favoritos = servico.contar_favoritos()
     console.print(
-        f"   {total} concurso(s), {total_eventos} evento(s) e "
-        f"{total_simulados} simulado(s), com [bold]{favoritos}[/] favorito(s)"
+        f"   {total} concurso(s), {total_eventos} evento(s), "
+        f"{total_simulados} simulado(s) e {total_dias} dia(s) do cronograma, "
+        f"com [bold]{favoritos}[/] favorito(s)"
     )
 
     console.print("[bold]5/6[/] Commitando")
@@ -1762,8 +1785,18 @@ TIPO_LEGIVEL = {
 @app.command()
 def hoje(
     data: str = typer.Option(None, help="Outro dia, em AAAA-MM-DD (padrao: hoje)"),
+    marcar: str = typer.Option(
+        None, help="Como foi o dia: ideal, reduzida, minima ou nao_fiz",
+    ),
+    feitas: int = typer.Option(None, help="Questoes feitas (anotadas a mao)"),
+    acertos: int = typer.Option(None, help="Acertos nessas questoes"),
+    anotacao: str = typer.Option(None, help="Um recado sobre o dia"),
 ) -> None:
-    """O que estudar no dia, com horario, materia e questoes."""
+    """O que estudar no dia, com horario, materia e questoes.
+
+    Com --marcar, anota como foi o dia. Esses numeros sao o diario do
+    cronograma: NAO entram em acerto medido nenhum do radar.
+    """
     try:
         quando = (date.fromisoformat(data) if data
                   else datetime.now(fuso_local()).date())
@@ -1775,6 +1808,18 @@ def hoje(
         plano = cronograma.carregar()
     except cronograma.ErroNoCronograma as erro:
         console.print(f"[red]Problema no config/cronograma.yml:[/] {erro}")
+        raise typer.Exit(code=1)
+
+    if marcar:
+        try:
+            servico.cronograma.registrar(quando, marcar, feitas, acertos,
+                                         anotacao, plano=plano)
+        except servico.cronograma.RegistroInvalido as erro:
+            console.print(f"[red]Nao marquei:[/] {erro}")
+            raise typer.Exit(code=1)
+        console.print("[green]Marcado.[/]")
+    elif feitas is not None or acertos is not None or anotacao:
+        console.print("[red]Faltou --marcar[/] (ideal, reduzida, minima ou nao_fiz).")
         raise typer.Exit(code=1)
 
     console.print(f"[bold]{cronograma.data_por_extenso(quando).capitalize()}[/]")
@@ -1839,6 +1884,28 @@ def hoje(
         console.print(f"[yellow]Reduzida:[/] {escape(dia.reduzida)}")
     if dia.minima:
         console.print(f"[yellow]Mínima:[/] {escape(dia.minima)}")
+
+    registro = servico.cronograma.registros(quando, quando).get(quando)
+    if registro:
+        console.print(f"\n[bold]Como foi:[/] {_registro_legivel(registro)}")
+
+
+META_LEGIVEL = {"ideal": "Ideal", "reduzida": "Reduzida", "minima": "Mínima",
+                "nao_fiz": "Não fiz"}
+
+
+def _registro_legivel(registro) -> str:
+    partes = [META_LEGIVEL.get(registro.meta, registro.meta)]
+    if registro.questoes_feitas is not None:
+        feitas = f"{registro.questoes_feitas} questões feitas"
+        if registro.acertos is not None:
+            feitas += f", {registro.acertos} acertos"
+        partes.append(feitas)
+    partes.append(f"anotado em {formatar_data(registro.anotado_em)}")
+    texto = escape(" · ".join(partes))
+    if registro.anotacao:
+        texto += f"\n  [dim]{escape(registro.anotacao)}[/]"
+    return texto
 
 
 if __name__ == "__main__":

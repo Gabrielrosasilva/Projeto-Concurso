@@ -101,7 +101,7 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     IA escreveu - esses dois porque custaram dinheiro - e, desde 25/09/2026,
     os simulados: o meu historico de treino, que nao tinha copia nenhuma. E
     os macetes e as explicacoes importados do Claude Code, que nao moram em
-    tabela nenhuma.
+    tabela nenhuma. E, desde 26/09/2026, o diario do cronograma.
     """
     runner.invoke(cli.app, ["sincronizar"])
 
@@ -110,6 +110,7 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
         "data/concursos.json", "data/eventos.json", "data/assuntos.json",
         "data/questoes_geradas.json", "data/simulados.json",
         "data/macetes.json", "data/explicacoes.json",
+        "data/registro_estudo.json",
     }
 
 
