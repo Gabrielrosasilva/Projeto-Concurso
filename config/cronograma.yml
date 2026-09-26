@@ -1,0 +1,2951 @@
+# O cronograma de estudo, dia a dia. Lido pela tela "Hoje" e pelo `radar hoje`.
+#
+# Gerado a partir da planilha cronograma_policia_penal_sc_ciclo1.xlsx (Ciclo 1,
+# 28/09 a 07/11/2026). Pode editar a mao: e dado, nao codigo.
+#
+# COMO LER
+#
+#   blocos      - onde cada parte do dia comeca. Os horarios de cada faixa NAO
+#                 estao gravados: saem da soma das duracoes a partir do inicio
+#                 do bloco. Assim, quando a rampa muda o numero de questoes, o
+#                 horario acompanha sozinho.
+#   faixa       - uma linha do dia. `duracao` em minutos; OU `questoes`, e ai a
+#                 duracao e questoes x `min_por_questao` (padrao:
+#                 `minutos_por_questao`), arredondada para cima de 5 em 5.
+#   rampa       - o numero de questoes da noite por NIVEL (1 a 6). A faixa com
+#                 `rampa: direito` ou `rampa: portugues` usa o numero do nivel
+#                 efetivo da semana, e nao o `questoes` gravado (que e o do
+#                 plano, quando tudo vai bem).
+#   gatilho     - quando o nivel sobe ou desce. Ver src/radar/cronograma.py.
+#   opcional    - faixa bonus: aparece, mas nao conta no total do dia.
+#   onde        - qconcursos | radar | videoaula (so para o icone da tela).
+#   origem      - nas revisoes (R+7, R+30), a data do estudo que esta voltando.
+
+ciclo: 1
+titulo: Ciclo 1 — a base
+inicio: '2026-09-28'
+fim: '2026-11-07'
+meta_da_prova:
+  acertos: 79
+  corte_2019_ultima_vaga: 7.1
+  corte_2019_ultimo_classificado: 6.1
+blocos:
+  manha:
+    nome: Manhã — estudo
+    inicio: '10:15'
+  noite:
+    nome: Noite — questões
+    inicio: '18:00'
+  pos22:
+    nome: Depois das 22h — Anki
+    inicio: '22:00'
+minutos_por_questao: 2.5
+rampa:
+  1:
+    direito: 15
+    portugues: 10
+  2:
+    direito: 20
+    portugues: 10
+  3:
+    direito: 20
+    portugues: 15
+  4:
+    direito: 25
+    portugues: 15
+  5:
+    direito: 25
+    portugues: 15
+  6:
+    direito: 25
+    portugues: 15
+gatilho:
+  sobe_com_dias_na_ideal: 5
+  semana_ruim_com_dias_abaixo: 3
+  desce_apos_semanas_ruins: 2
+semanas:
+  1: 'ARRANCADA: 25 questões por noite. Sábado = diagnóstico no radar.'
+  2: 40 questões por noite (entra o R+7). Sábado = 1º simulado da semana (30).
+  3: '45 por noite. Segunda é feriado: se folgar, faça a meta mínima.'
+  4: 50 por noite. Português entra em pronomes; LEP chega nos estabelecimentos.
+  5: '50 a 60 por noite (entra o R+30 na quarta). LEP: progressão e remição.'
+  6: FECHAMENTO. Sábado 07/11 = simulado de 50 questões no radar.
+dias:
+- data: '2026-09-28'
+  semana: 1
+  reduzida: A manhã inteira + só as 15 questões de Direito Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Aplicação da lei penal (arts. 1º a 12).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Aplicação da lei penal (arts. 1º a 12)
+    detalhe: 'Princípios da legalidade e da anterioridade (art. 1º); lei penal no tempo: abolitio criminis, novatio
+      legis in mellius e in pejus, retroatividade da lei benéfica (art. 2º); lei excepcional e temporária (art.
+      3º); tempo do crime - teoria da ATIVIDADE (art. 4º); territorialidade (art. 5º); lugar do crime - teoria da
+      UBIQUIDADE (art. 6º); extraterritorialidade (art. 7º, visão geral); contagem de prazo penal - inclui o dia
+      do começo (art. 10).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Penal
+    titulo: 'Lei seca: Código Penal, arts. 1º a 12'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Substantivo e adjetivo (flexão nominal)
+    detalhe: Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo
+      pela função na frase.
+    onde: videoaula
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Direito Penal
+    titulo: 'Aprendizagem: Aplicação da lei penal (arts. 1º a 12)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Penal > aplicação da lei penal (lei penal no tempo e no espaço)
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Substantivo e adjetivo (flexão nominal)
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 20
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 30
+    titulo: Montagem do Anki
+    detalhe: 'Instale o Anki e crie os 5 baralhos: [1] Direito Penal, [2] Constitucional, [3] LEP, [4] Direitos
+      Humanos, [5] Português. Depois, crie 10 cartões dos arts. 1º a 12 do CP.'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-09-29'
+  semana: 1
+  reduzida: A manhã inteira + só as 15 questões de Direito Constitucional à noite.
+  minima: 'Anki vencidos + 15 questões de: Art. 5º, caput e incisos I a XVI.'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Constitucional
+    titulo: Art. 5º, caput e incisos I a XVI
+    detalhe: Titulares dos direitos (brasileiros e estrangeiros); igualdade (I); legalidade (II); ninguém será submetido
+      a TORTURA nem a tratamento desumano ou degradante (III); manifestação do pensamento e vedação ao anonimato
+      (IV); direito de resposta (V); liberdade de crença (VI a VIII); liberdade de expressão (IX); intimidade, vida
+      privada, honra e imagem (X); inviolabilidade da CASA - flagrante, desastre, socorro, ou de DIA por ordem judicial
+      (XI); sigilo das comunicações (XII); liberdade de profissão (XIII); informação (XIV); locomoção (XV); reunião
+      pacífica, sem armas, com aviso prévio (XVI).
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[2] Constitucional'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: 'Lei seca: Constituição Federal, art. 5º, caput a XVI'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Artigo, numeral e pronome (classificação)
+    detalhe: Artigo definido e indefinido; numerais cardinais, ordinais, multiplicativos e fracionários; os tipos
+      de pronome (pessoais, possessivos, demonstrativos, indefinidos, relativos, interrogativos).
+    onde: videoaula
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Art. 5º, caput e incisos I a XVI'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Artigo, numeral e pronome (classificação)
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 20
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [2] Constitucional
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Art. 5º, caput e incisos I a XVI.'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-09-30'
+  semana: 1
+  reduzida: A manhã inteira + só as 15 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Objeto, classificação e exame criminológico (arts. 1º a 9º-A).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)
+    detalhe: 'Objetivo da execução: efetivar a sentença e proporcionar a harmônica integração social (art. 1º);
+      aplicação ao preso provisório (art. 2º); direitos não atingidos pela sentença e vedação de distinção (art.
+      3º); cooperação da comunidade (art. 4º); classificação por antecedentes e personalidade (art. 5º); Comissão
+      Técnica de Classificação e programa individualizador (arts. 6º e 7º); exame criminológico (art. 8º); identificação
+      do perfil genético - DNA (art. 9º-A, alterado pela Lei 13.964/2019).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: Lei 7.210/1984 (LEP), arts. 1º a 9º-A'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Verbo 1: estrutura e flexão verbal'
+    detalhe: Radical, vogal temática e desinências; as 3 conjugações; flexão de número, pessoa, modo e tempo; verbos
+      regulares, irregulares e defectivos.
+    onde: videoaula
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > disposições gerais e classificação do condenado
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: 'Verbo 1: estrutura e flexão verbal'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 20
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Objeto, classificação e exame criminológico
+      (arts. 1º a 9º-A).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-01'
+  semana: 1
+  reduzida: A manhã inteira + só as 15 questões de Direitos Humanos à noite.
+  minima: 'Anki vencidos + 15 questões de: Teoria geral.'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direitos Humanos
+    titulo: Teoria geral
+    detalhe: 'Conceito e terminologia (direitos humanos x direitos fundamentais x direitos do homem); CARACTERÍSTICAS:
+      universalidade, indivisibilidade, interdependência, inalienabilidade, imprescritibilidade, irrenunciabilidade,
+      historicidade e vedação do retrocesso; fundamentação jusnaturalista, positivista e moral; eficácia vertical
+      (Estado x indivíduo) e horizontal (entre particulares).'
+    onde: videoaula
+    baralho: '[4] Direitos Humanos'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direitos Humanos
+    titulo: 'Lei seca: Declaração Universal dos Direitos Humanos (DUDH), preâmbulo e arts. 1º a 5º'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Interpretação 1: o método'
+    detalhe: Leia o COMANDO antes do texto; localize o trecho; diferencie paráfrase (certa) de extrapolação, redução
+      e contradição (erradas); cuidado com 'sempre', 'nunca', 'somente'.
+    onde: videoaula
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Direitos Humanos
+    titulo: 'Aprendizagem: Teoria geral'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direitos Humanos > teoria geral dos direitos humanos
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Interpretação de texto (cronometrada)
+    detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 20
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [4] Direitos Humanos
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Teoria geral.'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-02'
+  semana: 1
+  reduzida: A manhã inteira + só as 15 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Assistência ao preso e ao egresso (arts. 10 a 27).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Assistência ao preso e ao egresso (arts. 10 a 27)
+    detalhe: 'Assistência como dever do Estado (art. 10); as espécies (art. 11): material (arts. 12 e 13), saúde
+      (art. 14, inclusive pré-natal e pós-parto da mulher presa), jurídica e Defensoria (arts. 15 e 16), educacional
+      - ensino fundamental obrigatório e ensino médio (arts. 17 a 21-A), social (arts. 22 e 23), religiosa (art.
+      24); quem e EGRESSO (art. 26: liberado definitivo por 1 ano a contar da saída, e o liberado condicional durante
+      o período de prova) e sua assistência (arts. 25 e 27).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 10 a 27'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Verbo 2: emprego dos tempos e modos'
+    detalhe: Indicativo (certeza), subjuntivo (hipótese) e imperativo (ordem); correlação verbal ('se eu fosse...
+      eu faria'); futuro do subjuntivo de ver/vir/por ('quando eu vir', 'se ele vier').
+    onde: videoaula
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Assistência ao preso e ao egresso (arts. 10 a 27)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > assistência ao preso e ao egresso
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: 'Verbo 2: emprego dos tempos e modos'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 20
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Assistência ao preso e ao egresso (arts. 10
+      a 27).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-03'
+  semana: 1
+  reduzida: Faça só o simulado da noite.
+  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  manha:
+  - tipo: diagnostico
+    questoes: 20
+    materia: Raciocínio Lógico
+    titulo: Diagnóstico de Raciocínio Lógico
+    detalhe: 'Radar > Simulado > matéria Raciocínio Lógico > 20 questões, cronometradas. Anote o acerto: é ele que
+      confirma ou não o seu 8/10.'
+    cronometrado: true
+    onde: radar
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: revisao_semanal
+    duracao: 60
+    titulo: Revisão semanal
+    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
+      que mais te derrubaram; (3) zere o Anki atrasado.
+  noite:
+  - tipo: diagnostico
+    questoes: 20
+    materia: Língua Portuguesa
+    titulo: Diagnóstico de Português
+    detalhe: Radar > Simulado > matéria Língua Portuguesa > 20 questões, cronometradas. Anote o acerto.
+    cronometrado: true
+    onde: radar
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: simulado
+    questoes: 10
+    min_por_questao: 3
+    titulo: Mini-simulado da semana
+    detalhe: 'Qconcursos, banca FEPESE, sem consulta: 3 Penal (arts. 1º a 13) · 3 Constitucional (art. 5º, I a XVI)
+      · 4 LEP (arts. 1º a 27).'
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: Corrija os dois diagnósticos e o mini-simulado. Anote os erros por matéria.
+  pos22:
+  - tipo: anki
+    duracao: 10
+    titulo: 'Anki: só os vencidos'
+    detalhe: 'Sábado à noite já teve simulado: sem questões.'
+- data: '2026-10-05'
+  semana: 2
+  reduzida: A manhã inteira + só as 20 questões de Direito Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Fato típico e nexo causal (art. 13).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Fato típico e nexo causal (art. 13)
+    detalhe: 'Conceito analítico de crime (fato típico + ilícito + culpável); elementos do fato típico: conduta,
+      resultado, nexo causal e tipicidade; relação de causalidade e teoria da equivalência (art. 13, caput); superveniência
+      de causa relativamente independente (art. 13, § 1º); OMISSÃO penalmente relevante e o DEVER DE AGIR do garantidor
+      (art. 13, § 2º, alíneas a, b e c) - é o artigo que alcança quem tem o preso sob sua custódia.'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Penal
+    titulo: 'Lei seca: Código Penal, art. 13 e parágrafos'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Vozes do verbo
+    detalhe: Voz ativa, passiva ANALÍTICA (ser + particípio), passiva SINTÉTICA (VTD + se), reflexiva; conversão
+      ativa <-> passiva mantendo o tempo verbal.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-09-28'
+    titulo: 'R+7: Aplicação da lei penal (arts. 1º a 12)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 28/09, sem consulta, + 3 de Português:
+      substantivo e adjetivo (flexão nominal).'
+    filtro: Direito Penal > aplicação da lei penal (lei penal no tempo e no espaço)
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Direito Penal
+    titulo: 'Aprendizagem: Fato típico e nexo causal (art. 13)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Vozes do verbo
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 25
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [1] Direito Penal
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Fato típico e nexo causal (art. 13).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-06'
+  semana: 2
+  reduzida: A manhã inteira + só as 20 questões de Direito Constitucional à noite.
+  minima: 'Anki vencidos + 15 questões de: Art. 5º, incisos XVII a XLIX.'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Constitucional
+    titulo: Art. 5º, incisos XVII a XLIX
+    detalhe: 'Associação (XVII a XXI); propriedade e função social (XXII a XXVI); inafastabilidade do Judiciário
+      (XXXV); direito adquirido, ato jurídico perfeito e coisa julgada (XXXVI); júri (XXXVIII); legalidade e anterioridade
+      penal (XXXIX); lei penal só retroage para beneficiar (XL); racismo inafiançável e imprescritível (XLII); tortura,
+      tráfico, terrorismo e hediondos: inafiançáveis e insuscetíveis de graça ou anistia (XLIII); pessoalidade e
+      individualização da pena (XLV e XLVI); penas proibidas - morte (salvo guerra declarada), perpétua, trabalhos
+      forçados, banimento e cruéis (XLVII); pena cumprida em estabelecimentos distintos por natureza do delito,
+      idade e sexo (XLVIII); integridade física e moral do PRESO (XLIX).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[2] Constitucional'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: 'Lei seca: Constituição Federal, art. 5º, XVII a XLIX'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Concordância verbal 1: regra geral'
+    detalhe: Verbo concorda com o núcleo do sujeito; sujeito composto anteposto e posposto; núcleos ligados por
+      'ou', 'nem', 'com'; sujeito coletivo.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-09-29'
+    titulo: 'R+7: Art. 5º, caput e incisos I a XVI'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 29/09, sem consulta, + 3 de
+      Português: artigo, numeral e pronome (classificação).'
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Art. 5º, incisos XVII a XLIX'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: 'Concordância verbal 1: regra geral'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 25
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [2] Constitucional
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Art. 5º, incisos XVII a XLIX.'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-07'
+  semana: 2
+  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Trabalho do preso (arts. 28 a 37).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Trabalho do preso (arts. 28 a 37)
+    detalhe: 'Trabalho como dever social e condição de dignidade, fora da CLT (art. 28); remuneração de no mínimo
+      3/4 do salário mínimo e sua destinação (art. 29); trabalho interno OBRIGATÓRIO para o condenado a pena privativa
+      de liberdade e FACULTATIVO para o preso provisório (art. 31); jornada de 6 a 8 horas, com descanso nos domingos
+      e feriados (art. 33); trabalho externo: no fechado, só em serviço ou obra pública, com cautelas e limite de
+      10% de presos na obra (art. 36); autorizado pela direção, exige 1/6 da pena cumprida (art. 37).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 28 a 37'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Concordância verbal 2: casos especiais'
+    detalhe: HAVER e FAZER impessoais (sempre no singular); verbo + SE (passiva sintética concorda; índice de indeterminação
+      fica no singular); 'que' e 'quem'; 'a maioria de'; porcentagem; verbo SER.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-09-30'
+    titulo: 'R+7: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/09, sem consulta, + 3 de
+      Português: verbo 1: estrutura e flexão verbal.'
+    filtro: Execução Penal > disposições gerais e classificação do condenado
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Trabalho do preso (arts. 28 a 37)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > trabalho do preso
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: 'Concordância verbal 2: casos especiais'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 25
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Trabalho do preso (arts. 28 a 37).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-08'
+  semana: 2
+  reduzida: A manhã inteira + só as 20 questões de Direitos Humanos à noite.
+  minima: 'Anki vencidos + 15 questões de: Afirmação histórica e dimensões (gerações).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direitos Humanos
+    titulo: Afirmação histórica e dimensões (gerações)
+    detalhe: 'Marcos: Magna Carta (1215), Petition of Rights (1628), Bill of Rights inglês (1689), Declaração de
+      Virgínia e Independência dos EUA (1776), Declaração dos Direitos do Homem e do Cidadão (1789), Constituição
+      Mexicana (1917) e de Weimar (1919), ONU (1945) e DUDH (1948). Dimensões: 1ª LIBERDADE (civis e políticos),
+      2ª IGUALDADE (sociais, econômicos e culturais), 3ª FRATERNIDADE (difusos: paz, meio ambiente), 4ª e 5ª (debate
+      doutrinário).'
+    onde: videoaula
+    baralho: '[4] Direitos Humanos'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direitos Humanos
+    titulo: 'Lei seca: DUDH, arts. 6º a 30 (leitura corrida, marcando o que fala de preso, julgamento e tortura)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Interpretação 2: tipos de texto'
+    detalhe: Narração, descrição e dissertação; gêneros (crônica, notícia, artigo de opinião); ideia central x ideias
+      secundárias; tese e argumentos.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-01'
+    titulo: 'R+7: Teoria geral'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta, + 3 de Português:
+      interpretação 1: o método.'
+    filtro: Direitos Humanos > teoria geral dos direitos humanos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Direitos Humanos
+    titulo: 'Aprendizagem: Afirmação histórica e dimensões (gerações)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Interpretação de texto (cronometrada)
+    detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 25
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [4] Direitos Humanos
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Afirmação histórica e dimensões (gerações).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-09'
+  semana: 2
+  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Deveres e direitos do preso (arts. 38 a 43).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Deveres e direitos do preso (arts. 38 a 43)
+    detalhe: 'Deveres (art. 39): comportamento disciplinado, obediência ao servidor, urbanidade, conduta contra
+      fugas e subversão, trabalho, higiene, indenização a vítima e ao Estado, conservação dos objetos. Direitos
+      (art. 41): alimentação, vestuário, trabalho remunerado, previdência, pecúlio, atividades, assistência, proteção
+      contra o sensacionalismo, entrevista com advogado, VISITA do cônjuge, companheira, parentes e amigos, chamamento
+      nominal, audiência com o diretor, contato com o mundo exterior, atestado de pena a cumprir. O diretor pode
+      SUSPENDER ou RESTRINGIR por ato motivado os incisos V, X e XV (art. 41, parágrafo único). Preso provisório
+      e internado (arts. 42 e 43).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 38 a 43 (o art. 41 inteiro, duas vezes)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Concordância nominal
+    detalhe: Adjetivo com varios substantivos; ANEXO, INCLUSO, OBRIGADO e MESMO (concordam); MEIO, BASTANTE e MENOS
+      (quando variam); 'e proibido' x 'e proibida a entrada'.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-02'
+    titulo: 'R+7: Assistência ao preso e ao egresso (arts. 10 a 27)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 02/10, sem consulta, + 3 de
+      Português: verbo 2: emprego dos tempos e modos.'
+    filtro: Execução Penal > assistência ao preso e ao egresso
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Deveres e direitos do preso (arts. 38 a 43)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > deveres e direitos do preso
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Concordância nominal
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 25
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Deveres e direitos do preso (arts. 38 a 43).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-10'
+  semana: 2
+  reduzida: Faça só o simulado da noite.
+  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  manha:
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Princípios de contagem
+    detalhe: Princípio fundamental da contagem (multiplicativo e aditivo); arranjo; permutação simples e com repetição
+      (anagramas); combinação; o teste 'a ordem importa?'. Vídeo + 5 exemplos resolvidos no papel.
+    onde: videoaula
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: revisao_semanal
+    duracao: 60
+    titulo: Revisão semanal
+    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
+      que mais te derrubaram; (3) zere o Anki atrasado.
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 5
+    materia: Diagnósticos
+    origem: '2026-10-03'
+    titulo: 'R+7: refazer os erros dos diagnósticos'
+    detalhe: 'Refaça as questões que você ERROU nos diagnósticos de Raciocínio Lógico e de Português (radar: Só
+      meus erros).'
+    onde: radar
+  noite:
+  - tipo: simulado
+    questoes: 30
+    min_por_questao: 3
+    titulo: Simulado da semana
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 6 Penal (arts. 1º a 13) · 6 Constitucional (art.
+      5º, I a XLIX) · 8 LEP (arts. 1º a 43) · 4 Direitos Humanos (teoria geral e história) · 6 Português (classes,
+      verbos, vozes, concordância).'
+    cronometrado: true
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: princípios de contagem'
+    detalhe: Questões da FEPESE do assunto da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção do simulado
+    detalhe: Anote a nota e os erros por matéria.
+  pos22:
+  - tipo: anki
+    duracao: 10
+    titulo: 'Anki: só os vencidos'
+    detalhe: 'Sábado à noite já teve simulado: sem questões.'
+- data: '2026-10-12'
+  semana: 3
+  feriado: Feriado (N. Sra. Aparecida)
+  reduzida: A manhã inteira + só as 20 questões de Direito Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Tentativa, dolo, culpa e erro (arts. 14 a 21).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Tentativa, dolo, culpa e erro (arts. 14 a 21)
+    detalhe: Crime consumado e tentado, e a pena da tentativa (art. 14); desistência voluntária e arrependimento
+      eficaz (art. 15); arrependimento posterior (art. 16); crime impossível (art. 17); dolo direto e eventual;
+      culpa - imprudência, negligência e imperícia (art. 18); crime qualificado pelo resultado (art. 19); erro de
+      tipo (art. 20) e erro de proibição (art. 21).
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Penal
+    titulo: 'Lei seca: Código Penal, arts. 14 a 21'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Crase 1: regra geral e casos obrigatórios'
+    detalhe: A (preposição) + A (artigo) = À; verbos e nomes que exigem 'a'; locuções femininas ('às pressas', 'à
+      noite'); 'à moda de'; indicação de HORAS ('às 8h').
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-10-05'
+    titulo: 'R+7: Fato típico e nexo causal (art. 13)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português:
+      vozes do verbo.'
+    filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Direito Penal
+    titulo: 'Aprendizagem: Tentativa, dolo, culpa e erro (arts. 14 a 21)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Penal > iter criminis, tentativa, dolo e culpa, erro de tipo e de proibição
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Crase 1: regra geral e casos obrigatórios'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [1] Direito Penal
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Tentativa, dolo, culpa e erro (arts. 14 a 21).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-13'
+  semana: 3
+  reduzida: A manhã inteira + só as 20 questões de Direito Constitucional à noite.
+  minima: 'Anki vencidos + 15 questões de: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Constitucional
+    titulo: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)
+    detalhe: 'Presidiárias e amamentação (L); devido processo legal, contraditório e ampla defesa (LIV e LV); provas
+      ilícitas (LVI); presunção de inocência (LVII); prisão só em flagrante ou por ordem judicial (LXI); comunicação
+      da prisão ao juiz e a família, direito ao silêncio e a identificação dos responsáveis pela prisão (LXII a
+      LXIV); relaxamento da prisão ilegal (LXV); liberdade provisória (LXVI); prisão civil só do devedor de alimentos
+      (LXVII); REMÉDIOS: habeas corpus (LXVIII), mandado de segurança (LXIX e LXX), mandado de injunção (LXXI),
+      habeas data (LXXII), ação popular (LXXIII); razoável duração do processo (LXXVIII); tratados de direitos humanos
+      com força de emenda (§ 3º); Tribunal Penal Internacional (§ 4º).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[2] Constitucional'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: 'Lei seca: Constituição Federal, art. 5º, L a LXXVIII e § 1º a 4º'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Crase 2: proibida, facultativa e casos especiais'
+    detalhe: NUNCA antes de masculino, verbo, pronome pessoal e 'a' singular antes de plural; FACULTATIVA antes
+      de possessivo feminino, nome de mulher e depois de 'até'; CASA, TERRA e DISTÂNCIA.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-10-06'
+    titulo: 'R+7: Art. 5º, incisos XVII a XLIX'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 06/10, sem consulta, + 3 de
+      Português: concordância verbal 1: regra geral.'
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Constitucional > remédios constitucionais e garantias processuais
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Crase 2: proibida, facultativa e casos especiais'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [2] Constitucional
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-14'
+  semana: 3
+  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Disciplina, faltas graves e RDD (arts. 44 a 52).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Disciplina, faltas graves e RDD (arts. 44 a 52)
+    detalhe: 'Disciplina (art. 44); legalidade das faltas e sanções, vedadas a cela escura e a sanção coletiva (art.
+      45); faltas leves e medias ficam para a lei local, graves estão na LEP (art. 49); FALTAS GRAVES (art. 50):
+      movimento para subverter a ordem, fuga, possuir instrumento capaz de ofender, provocar acidente de trabalho,
+      descumprir as condições do aberto, não obedecer ao servidor ou não trabalhar, ter, usar ou fornecer APARELHO
+      TELEFÔNICO, de rádio ou similar (VII), recusar a identificação do perfil genético (VIII); faltas nas restritivas
+      de direitos (art. 51); REGIME DISCIPLINAR DIFERENCIADO (art. 52, redação da Lei 13.964/2019): até 2 ANOS,
+      cela individual, visitas QUINZENAIS de 2 pessoas por 2 horas, banho de sol de 2 horas diárias.'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 44 a 52 (o 50 e o 52 inteiros, duas vezes)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Pontuação 1: vírgula entre termos'
+    detalhe: Nunca separe sujeito do verbo nem verbo do complemento; vírgula no aposto, no vocativo, no adjunto
+      adverbial deslocado e na enumeração.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-07'
+    titulo: 'R+7: Trabalho do preso (arts. 28 a 37)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 07/10, sem consulta, + 3 de
+      Português: concordância verbal 2: casos especiais.'
+    filtro: Execução Penal > trabalho do preso
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Disciplina, faltas graves e RDD (arts. 44 a 52)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > disciplina, faltas disciplinares e regime disciplinar diferenciado
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Pontuação 1: vírgula entre termos'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Disciplina, faltas graves e RDD (arts. 44 a
+      52).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-15'
+  semana: 3
+  reduzida: A manhã inteira + só as 20 questões de Direitos Humanos à noite.
+  minima: 'Anki vencidos + 15 questões de: Sistemas de proteção e responsabilidade do Estado.'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direitos Humanos
+    titulo: Sistemas de proteção e responsabilidade do Estado
+    detalhe: 'Sistema global (ONU): DUDH, Pacto Internacional dos Direitos Civis e Políticos e Pacto dos Direitos
+      Econômicos, Sociais e Culturais (1966; o Brasil aderiu em 1992), Convenção contra a Tortura; sistema interamericano:
+      Convenção Americana - Pacto de San José da Costa Rica (1969; Brasil em 1992), Comissão e Corte Interamericana;
+      responsabilidade internacional do Estado pelos atos dos seus agentes; FEDERALIZAÇÃO de graves violações -
+      incidente de deslocamento de competência (CF art. 109, V-A e § 5º).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[4] Direitos Humanos'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direitos Humanos
+    titulo: 'Lei seca: CF art. 109, V-A e § 5º + Pacto de San José, arts. 4º a 8º (vida, integridade, liberdade,
+      garantias)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Interpretação 3: coesão e referência'
+    detalhe: 'A quem o pronome se refere; conectivos e o sentido que trazem (oposição: ''porém''; causa: ''porque'';
+      conclusão: ''portanto''; concessão: ''embora''); troca de conectivo sem mudar o sentido.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-08'
+    titulo: 'R+7: Afirmação histórica e dimensões (gerações)'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta, + 3 de Português:
+      interpretação 2: tipos de texto.'
+    filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Direitos Humanos
+    titulo: 'Aprendizagem: Sistemas de proteção e responsabilidade do Estado'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direitos Humanos > sistema global e sistema interamericano de proteção
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: Interpretação de texto (cronometrada)
+    detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [4] Direitos Humanos
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Sistemas de proteção e responsabilidade do Estado.'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-16'
+  semana: 3
+  reduzida: A manhã inteira + só as 20 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)
+    detalhe: 'Sanções (art. 53): advertência verbal, repreensão, suspensão ou restrição de direitos, isolamento
+      e inclusão no RDD; quem aplica - o diretor nas de I a IV, o JUIZ no RDD (art. 54); recompensas: elogio e regalias
+      (arts. 55 e 56); critérios de aplicação (art. 57); isolamento, suspensão e restrição até 30 DIAS, ressalvado
+      o RDD (art. 58); procedimento com direito de defesa (art. 59); ISOLAMENTO PREVENTIVO de até 10 DIAS pelo diretor,
+      e inclusão preventiva no RDD por despacho do juiz (art. 60).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 53 a 60'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Pontuação 2: vírgula entre orações e outros sinais'
+    detalhe: Orações coordenadas; adjetiva RESTRITIVA (sem vírgula) x EXPLICATIVA (com vírgula); orações adverbiais;
+      ponto e vírgula, dois-pontos, travessão e parênteses.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-09'
+    titulo: 'R+7: Deveres e direitos do preso (arts. 38 a 43)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 09/10, sem consulta, + 3 de
+      Português: concordância nominal.'
+    filtro: Execução Penal > deveres e direitos do preso
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 20
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > sanções, recompensas e procedimento disciplinar
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Pontuação 2: vírgula entre orações e outros sinais'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Sanções, recompensas e procedimento disciplinar
+      (arts. 53 a 60).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-17'
+  semana: 3
+  reduzida: Faça só o simulado da noite.
+  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  manha:
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Probabilidade
+    detalhe: Espaço amostral; evento complementar; união P(A ou B); probabilidade condicional; eventos independentes;
+      probabilidade usando combinação. Vídeo + 5 exemplos resolvidos no papel.
+    onde: videoaula
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: revisao_semanal
+    duracao: 60
+    titulo: Revisão semanal
+    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
+      que mais te derrubaram; (3) zere o Anki atrasado.
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 5
+    materia: Raciocínio Lógico
+    origem: '2026-10-10'
+    titulo: 'R+7: princípios de contagem'
+    detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
+    onde: qconcursos
+  noite:
+  - tipo: simulado
+    questoes: 30
+    min_por_questao: 3
+    titulo: Simulado da semana
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 6 Penal (arts. 1º a 21) · 6 Constitucional (art.
+      5º inteiro) · 8 LEP (arts. 1º a 60) · 4 Direitos Humanos (até sistemas de proteção) · 6 Português (concordância,
+      crase, pontuação).'
+    cronometrado: true
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: probabilidade'
+    detalhe: Questões da FEPESE do assunto da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção do simulado
+    detalhe: Anote a nota e os erros por matéria.
+  pos22:
+  - tipo: anki
+    duracao: 10
+    titulo: 'Anki: só os vencidos'
+    detalhe: 'Sábado à noite já teve simulado: sem questões.'
+- data: '2026-10-19'
+  semana: 4
+  reduzida: A manhã inteira + só as 25 questões de Direito Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Coação, obediência e excludentes de ilicitude (arts. 22 a 25).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)
+    detalhe: 'Coação moral irresistível e obediência hierárquica a ordem não manifestamente ilegal (art. 22); excludentes
+      de ilicitude (art. 23): estado de necessidade (art. 24), legítima defesa (art. 25), estrito cumprimento de
+      dever legal e exercício regular de direito; excesso doloso ou culposo (art. 23, parágrafo único); legítima
+      defesa do AGENTE DE SEGURANÇA PÚBLICA que repele agressão a vítima mantida refem (art. 25, parágrafo único,
+      incluido pela Lei 13.964/2019 - Pacote Anticrime).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Penal
+    titulo: 'Lei seca: Código Penal, arts. 22 a 25'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Pronomes 1: emprego'
+    detalhe: 'Retos x oblíquos (''para EU fazer'' x ''para MIM''); ''entre mim e ti''; se/si/consigo; ESTE/ESSE/AQUELE;
+      relativos: CUJO (sem artigo depois), ONDE (só lugar), O QUAL.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-10-12'
+    titulo: 'R+7: Tentativa, dolo, culpa e erro (arts. 14 a 21)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 12/10, sem consulta, + 3 de Português:
+      crase 1: regra geral e casos obrigatórios.'
+    filtro: Direito Penal > iter criminis, tentativa, dolo e culpa, erro de tipo e de proibição
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direito Penal
+    titulo: 'Aprendizagem: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Penal > excludentes de ilicitude e culpabilidade
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Pronomes 1: emprego'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [1] Direito Penal
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Coação, obediência e excludentes de ilicitude
+      (arts. 22 a 25).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-20'
+  semana: 4
+  reduzida: A manhã inteira + só as 25 questões de Direito Constitucional à noite.
+  minima: 'Anki vencidos + 15 questões de: Direitos sociais (arts. 6º a 11).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Constitucional
+    titulo: Direitos sociais (arts. 6º a 11)
+    detalhe: 'Rol do art. 6º e a renda básica familiar (parágrafo único, EC 114/2021); direitos dos trabalhadores
+      - os incisos mais cobrados do art. 7º: salário mínimo (IV), irredutibilidade (VI), 13º (VIII), jornada de
+      8h/44h (XIII), férias com 1/3 (XVII), licença-gestante de 120 dias (XVIII), licença-paternidade (XIX), trabalho
+      do menor (XXXIII: nenhum trabalho antes dos 16, salvo aprendiz a partir dos 14; nada noturno, perigoso ou
+      insalubre antes dos 18); liberdade sindical (art. 8º); greve (art. 9º); participação dos trabalhadores (arts.
+      10 e 11).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[2] Constitucional'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: 'Lei seca: Constituição Federal, arts. 6º a 11'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Pronomes 2: colocação pronominal'
+    detalhe: 'Próclise (palavras atrativas: não, que, quem, advérbios); mesóclise (futuro do presente e do pretérito);
+      ênclise (início de frase, imperativo afirmativo); locuções verbais.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-10-13'
+    titulo: 'R+7: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 13/10, sem consulta, + 3 de
+      Português: crase 2: proibida, facultativa e casos especiais.'
+    filtro: Direito Constitucional > remédios constitucionais e garantias processuais
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Direitos sociais (arts. 6º a 11)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Constitucional > direitos sociais
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Pronomes 2: colocação pronominal'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [2] Constitucional
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Direitos sociais (arts. 6º a 11).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-21'
+  semana: 4
+  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Órgãos da execução penal (arts. 61 a 81-B).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Órgãos da execução penal (arts. 61 a 81-B)
+    detalhe: 'Os órgãos do art. 61: CNPCP, Juízo da Execução, Ministério Público, Conselho Penitenciário, Departamentos
+      Penitenciários, Patronato, Conselho da Comunidade e Defensoria Pública; competências do JUIZ DA EXECUÇÃO (art.
+      66 - a lista mais cobrada: unificação de penas, progressão e regressão, remição, saída temporária, livramento
+      condicional, inspeção mensal, interdição do estabelecimento); Ministério Público (arts. 67 e 68); Conselho
+      Penitenciário (arts. 69 e 70); Departamento Penitenciário (arts. 71 a 74); direção e pessoal dos estabelecimentos
+      (arts. 75 a 77); Patronato (arts. 78 e 79); Conselho da Comunidade (arts. 80 e 81); Defensoria (arts. 81-A
+      e 81-B).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 61 a 81-B (o art. 66 inteiro, duas vezes)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Pronomes 3: formas de tratamento'
+    detalhe: Vossa Excelência, Vossa Senhoria, Vossa Magnificência; verbo e possessivo na 3ª PESSOA ('Vossa Excelência
+      sabe que seu...'); VOSSA (falando com) x SUA (falando de).
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-14'
+    titulo: 'R+7: Disciplina, faltas graves e RDD (arts. 44 a 52)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 14/10, sem consulta, + 3 de
+      Português: pontuação 1: vírgula entre termos.'
+    filtro: Execução Penal > disciplina, faltas disciplinares e regime disciplinar diferenciado
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Órgãos da execução penal (arts. 61 a 81-B)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > órgãos da execução penal
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Pronomes 3: formas de tratamento'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Órgãos da execução penal (arts. 61 a 81-B).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-22'
+  semana: 4
+  reduzida: A manhã inteira + só as 25 questões de Direitos Humanos à noite.
+  minima: 'Anki vencidos + 15 questões de: Na Constituição e o status dos tratados.'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direitos Humanos
+    titulo: Na Constituição e o status dos tratados
+    detalhe: 'Dignidade da pessoa humana como fundamento (art. 1º, III); prevalência dos direitos humanos (art.
+      4º, II); rol aberto de direitos (art. 5º, § 2º); tratado de direitos humanos aprovado em 2 turnos por 3/5
+      em cada Casa = EMENDA constitucional (§ 3º, EC 45/2004); os demais = SUPRALEGAIS (STF, RE 466.343: fim da
+      prisão do depositário infiel - Súmula Vinculante 25); submissão ao Tribunal Penal Internacional (§ 4º).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[4] Direitos Humanos'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direitos Humanos
+    titulo: 'Lei seca: CF arts. 1º, 3º, 4º e 5º § 1º a 4º'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Interpretação 4: inferência e sentido das palavras'
+    detalhe: Pressupostos e subentendidos; o que o texto permite concluir x o que ele não diz; sentido da palavra
+      no contexto; polissemia; denotação x conotação.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-15'
+    titulo: 'R+7: Sistemas de proteção e responsabilidade do Estado'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 15/10, sem consulta, + 3 de Português:
+      interpretação 3: coesão e referência.'
+    filtro: Direitos Humanos > sistema global e sistema interamericano de proteção
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direitos Humanos
+    titulo: 'Aprendizagem: Na Constituição e o status dos tratados'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direitos Humanos > direitos humanos na Constituição e incorporacao dos tratados
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: Interpretação de texto (cronometrada)
+    detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [4] Direitos Humanos
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Na Constituição e o status dos tratados.'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-23'
+  semana: 4
+  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Estabelecimentos penais (arts. 82 a 104).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Estabelecimentos penais (arts. 82 a 104)
+    detalhe: Mulher e maior de 60 anos em estabelecimento próprio (art. 82, § 1º); berçário e amamentação até no
+      mínimo 6 meses (art. 83, § 2º); separação do preso provisório e do condenado, e critérios (art. 84); lotação
+      compatível (art. 85); PENITENCIÁRIA - fechado, cela individual de no mínimo 6 m² (arts. 87 a 90); COLÔNIA
+      agrícola ou industrial - semiaberto (arts. 91 e 92); CASA DO ALBERGADO - aberto e limitação de fim de semana
+      (arts. 93 a 95); centro de observação (arts. 96 a 98); hospital de custódia (arts. 99 a 101); CADEIA PÚBLICA
+      - preso provisório (arts. 102 a 104).
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 82 a 104'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Termos integrantes 1: objeto direto e indireto'
+    detalhe: Transitividade verbal (VTD, VTI, VTDI, VI); objeto direto, direto preposicionado e pleonástico; objeto
+      indireto; pronome oblíquo como objeto (o, a, lhe).
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-16'
+    titulo: 'R+7: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 16/10, sem consulta, + 3 de
+      Português: pontuação 2: vírgula entre orações e outros sinais.'
+    filtro: Execução Penal > sanções, recompensas e procedimento disciplinar
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Estabelecimentos penais (arts. 82 a 104)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > estabelecimentos penais
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Termos integrantes 1: objeto direto e indireto'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Estabelecimentos penais (arts. 82 a 104).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-24'
+  semana: 4
+  reduzida: Faça só o simulado da noite.
+  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  manha:
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Conjuntos e diagramas lógicos
+    detalhe: União, interseção, diferença e complementar; problemas com 2 e 3 conjuntos no diagrama de Venn; diagramas
+      lógicos com 'todo', 'algum' e 'nenhum'. Vídeo + 5 exemplos resolvidos no papel.
+    onde: videoaula
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: revisao_semanal
+    duracao: 60
+    titulo: Revisão semanal
+    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
+      que mais te derrubaram; (3) zere o Anki atrasado.
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 5
+    materia: Raciocínio Lógico
+    origem: '2026-10-17'
+    titulo: 'R+7: probabilidade'
+    detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
+    onde: qconcursos
+  noite:
+  - tipo: simulado
+    questoes: 35
+    min_por_questao: 3
+    titulo: Simulado da semana
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 7 Penal (arts. 1º a 25) · 6 Constitucional (arts.
+      5º a 11) · 10 LEP (arts. 1º a 104) · 5 Direitos Humanos (até status dos tratados) · 7 Português (crase, pontuação,
+      pronomes).'
+    cronometrado: true
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: conjuntos e diagramas lógicos'
+    detalhe: Questões da FEPESE do assunto da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção do simulado
+    detalhe: Anote a nota e os erros por matéria.
+  pos22:
+  - tipo: anki
+    duracao: 10
+    titulo: 'Anki: só os vencidos'
+    detalhe: 'Sábado à noite já teve simulado: sem questões.'
+- data: '2026-10-26'
+  semana: 5
+  reduzida: A manhã inteira + só as 25 questões de Direito Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Imputabilidade e concurso de pessoas (arts. 26 a 31).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Imputabilidade e concurso de pessoas (arts. 26 a 31)
+    detalhe: 'Inimputáveis e semi-imputáveis por doença mental (art. 26); menores de 18 anos (art. 27); emoção,
+      paixão e embriaguez - voluntária, culposa, fortuita e a actio libera in causa (art. 28); concurso de pessoas:
+      teoria monista, participação de menor importância e cooperação dolosamente distinta (art. 29); circunstâncias
+      incomunicáveis (art. 30); ajuste, instigação e auxílio não punidos se o crime não chega a ser tentado (art.
+      31).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Penal
+    titulo: 'Lei seca: Código Penal, arts. 26 a 31'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Termos integrantes 2: complemento nominal e agente da passiva'
+    detalhe: 'Complemento nominal (completa nome; sentido PASSIVO: ''a leitura do livro'') x adjunto adnominal (sentido
+      ATIVO/posse: ''a leitura do aluno''); agente da passiva.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-10-19'
+    titulo: 'R+7: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 19/10, sem consulta, + 3 de Português:
+      pronomes 1: emprego.'
+    filtro: Direito Penal > excludentes de ilicitude e culpabilidade
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direito Penal
+    titulo: 'Aprendizagem: Imputabilidade e concurso de pessoas (arts. 26 a 31)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Penal > imputabilidade penal e concurso de pessoas
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Termos integrantes 2: complemento nominal e agente da passiva'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [1] Direito Penal
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Imputabilidade e concurso de pessoas (arts.
+      26 a 31).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-27'
+  semana: 5
+  reduzida: A manhã inteira + só as 25 questões de Direito Constitucional à noite.
+  minima: 'Anki vencidos + 15 questões de: Nacionalidade e direitos políticos (arts. 12 a 17).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Constitucional
+    titulo: Nacionalidade e direitos políticos (arts. 12 a 17)
+    detalhe: Brasileiros natos e naturalizados (art. 12, I e II); cargos PRIVATIVOS de brasileiro nato (§ 3º); perda
+      da nacionalidade (§ 4º); idioma e símbolos (art. 13); voto obrigatório (18 a 70 anos) e facultativo (16-17
+      anos, maiores de 70, analfabetos) (art. 14); condições de elegibilidade e idades mínimas (§ 3º); inelegibilidades
+      (§ 4º a 9º); perda e suspensão dos direitos políticos - condenação criminal transitada em julgado, enquanto
+      durarem os efeitos (art. 15, III); anterioridade eleitoral (art. 16); partidos políticos (art. 17).
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[2] Constitucional'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: 'Lei seca: Constituição Federal, arts. 12 a 17'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Ortografia oficial
+    detalhe: POR QUE / POR QUÊ / PORQUE / PORQUÊ; mal x mau; onde x aonde; há x a (tempo); senão x se não; a fim
+      x afim; x/ch, s/z/c, g/j; hífen no Novo Acordo.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-10-20'
+    titulo: 'R+7: Direitos sociais (arts. 6º a 11)'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 20/10, sem consulta, + 3 de
+      Português: pronomes 2: colocação pronominal.'
+    filtro: Direito Constitucional > direitos sociais
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Nacionalidade e direitos políticos (arts. 12 a 17)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Constitucional > nacionalidade e direitos políticos
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: Ortografia oficial
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [2] Constitucional
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Nacionalidade e direitos políticos (arts. 12
+      a 17).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-28'
+  semana: 5
+  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Execução da pena, regimes e progressão (arts. 105 a 119).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Execução da pena, regimes e progressão (arts. 105 a 119)
+    detalhe: 'Guia de recolhimento (arts. 105 a 107); a forma PROGRESSIVA (art. 112): os percentuais de 16% a 70%
+      conforme primariedade, violência ou grave ameaça, crime hediondo e resultado morte (Lei 13.964/2019), boa
+      conduta atestada pelo diretor, e o exame criminológico da Lei 14.843/2024 - CONFIRA a redação atual no Planalto;
+      progressão especial da gestante ou mãe/responsável por criança ou pessoa com deficiência (art. 112, § 3º);
+      regime aberto: condições (arts. 113 a 116); prisão domiciliar no aberto (art. 117); REGRESSÃO de regime (art.
+      118).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 105 a 119 (o 112 e o 118 inteiros, duas vezes)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: Acentuação gráfica
+    detalhe: 'Oxítonas, paroxítonas, proparoxítonas e monossílabos tônicos; Novo Acordo: sem acento nos ditongos
+      abertos ''ei/oi'' das paroxítonas (ideia, heroico - antes: idéia, heróico); hiatos com ''i/u''; acento diferencial
+      (pôr/por, pôde/pode, têm/tem).'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-21'
+    titulo: 'R+7: Órgãos da execução penal (arts. 61 a 81-B)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 21/10, sem consulta, + 3 de
+      Português: pronomes 3: formas de tratamento.'
+    filtro: Execução Penal > órgãos da execução penal
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-09-28'
+    titulo: 'R+30: Aplicação da lei penal (arts. 1º a 12)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 28/09, sem consulta, + 3 de Português:
+      substantivo e adjetivo (flexão nominal).'
+    filtro: Direito Penal > aplicação da lei penal (lei penal no tempo e no espaço)
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Execução da pena, regimes e progressão (arts. 105 a 119)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > regimes de cumprimento, progressão e regressão
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: Acentuação gráfica
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Execução da pena, regimes e progressão (arts.
+      105 a 119).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-29'
+  semana: 5
+  reduzida: A manhã inteira + só as 25 questões de Direitos Humanos à noite.
+  minima: 'Anki vencidos + 15 questões de: Regras de Mandela - parte 1 (regras 1 a 35).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direitos Humanos
+    titulo: Regras de Mandela - parte 1 (regras 1 a 35)
+    detalhe: 'Regras Mínimas da ONU para o Tratamento de Reclusos, revisadas em 2015. Princípios básicos: dignidade,
+      proibição de tortura, não discriminação (regras 1 a 5); registros dos presos (6 a 10); SEPARAÇÃO por categorias
+      - homens e mulheres, provisórios e condenados, jovens e adultos (11); alojamento (12 a 17); higiene, vestuário
+      e cama (18 a 21); alimentação (22); exercício ao ar livre de pelo menos 1 hora diária (23); saúde (24 a 35).'
+    onde: videoaula
+    baralho: '[4] Direitos Humanos'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direitos Humanos
+    titulo: 'Lei seca: Regras de Mandela, regras 1 a 35 (edição em português do CNJ)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Interpretação 5: tipos de discurso'
+    detalhe: Discurso direto, indireto e indireto livre; conversão entre eles (tempos verbais, pronomes, 'aqui'
+      -> 'ali').
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-22'
+    titulo: 'R+7: Na Constituição e o status dos tratados'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 22/10, sem consulta, + 3 de Português:
+      interpretação 4: inferência e sentido das palavras.'
+    filtro: Direitos Humanos > direitos humanos na Constituição e incorporacao dos tratados
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-09-29'
+    titulo: 'R+30: Art. 5º, caput e incisos I a XVI'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 29/09, sem consulta, + 3 de
+      Português: artigo, numeral e pronome (classificação).'
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direitos Humanos
+    titulo: 'Aprendizagem: Regras de Mandela - parte 1 (regras 1 a 35)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direitos Humanos > Regras Mínimas da ONU para o tratamento de presos (Regras de Mandela)
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: Interpretação de texto (cronometrada)
+    detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [4] Direitos Humanos
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Regras de Mandela - parte 1 (regras 1 a 35).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-30'
+  semana: 5
+  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Permissão de saída, saída temporária e remição (arts. 120 a 130).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Permissão de saída, saída temporária e remição (arts. 120 a 130)
+    detalhe: 'PERMISSÃO de saída (arts. 120 e 121): fechado e semiaberto, COM escolta, por falecimento ou doença
+      grave de familiar e tratamento médico, concedida pelo DIRETOR; SAÍDA TEMPORÁRIA (arts. 122 a 125): semiaberto,
+      SEM escolta, concedida pelo JUIZ - hipóteses e vedações ALTERADAS pela Lei 14.843/2024, confira a redação
+      atual; REMIÇÃO (arts. 126 a 130): 1 dia a cada 12 horas de estudo (em no mínimo 3 dias), 1 dia a cada 3 dias
+      de trabalho, +1/3 ao concluir etapa de ensino, perda de até 1/3 por falta grave (art. 127), tempo remido conta
+      como pena cumprida (art. 128).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 120 a 130'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Redação oficial 1: atributos e tratamento'
+    detalhe: 'Manual de Redação da Presidência (3ª edição, 2018): clareza, precisão, objetividade, concisão, coesão,
+      impessoalidade, formalidade e padrão culto; pronomes de tratamento e vocativos; fechos RESPEITOSAMENTE (autoridade
+      superior) e ATENCIOSAMENTE (mesma hierarquia ou inferior).'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-23'
+    titulo: 'R+7: Estabelecimentos penais (arts. 82 a 104)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 23/10, sem consulta, + 3 de
+      Português: termos integrantes 1: objeto direto e indireto.'
+    filtro: Execução Penal > estabelecimentos penais
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-09-30'
+    titulo: 'R+30: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/09, sem consulta, + 3 de
+      Português: verbo 1: estrutura e flexão verbal.'
+    filtro: Execução Penal > disposições gerais e classificação do condenado
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Permissão de saída, saída temporária e remição (arts. 120 a 130)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > autorizações de saída e remição
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Redação oficial 1: atributos e tratamento'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Permissão de saída, saída temporária e remição
+      (arts. 120 a 130).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-10-31'
+  semana: 5
+  reduzida: Faça só o simulado da noite.
+  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  manha:
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Argumentação e quantificadores
+    detalhe: Argumento válido x verdadeiro; silogismo; analogias e inferências; quantificadores e suas NEGAÇÕES
+      ('todo' -> 'algum não'; 'nenhum' -> 'algum'). Vídeo + 5 exemplos resolvidos no papel.
+    onde: videoaula
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: revisao_semanal
+    duracao: 60
+    titulo: Revisão semanal
+    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
+      que mais te derrubaram; (3) zere o Anki atrasado.
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 5
+    materia: Raciocínio Lógico
+    origem: '2026-10-24'
+    titulo: 'R+7: conjuntos e diagramas lógicos'
+    detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-01'
+    titulo: 'R+30: Teoria geral'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta, + 3 de Português:
+      interpretação 1: o método.'
+    filtro: Direitos Humanos > teoria geral dos direitos humanos
+    onde: qconcursos
+  noite:
+  - tipo: simulado
+    questoes: 40
+    min_por_questao: 3
+    titulo: Simulado da semana
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 7 Penal (arts. 1º a 31) · 7 Constitucional (arts.
+      5º a 17) · 12 LEP (arts. 1º a 130) · 6 Direitos Humanos (até Mandela parte 1) · 8 Português (tudo o que já
+      foi visto).'
+    cronometrado: true
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: argumentação e quantificadores'
+    detalhe: Questões da FEPESE do assunto da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção do simulado
+    detalhe: Anote a nota e os erros por matéria.
+  pos22:
+  - tipo: anki
+    duracao: 10
+    titulo: 'Anki: só os vencidos'
+    detalhe: 'Sábado à noite já teve simulado: sem questões.'
+- data: '2026-11-02'
+  semana: 6
+  feriado: Feriado (Finados)
+  reduzida: A manhã inteira + só as 25 questões de Direito Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Crimes do funcionário público contra a Administração (arts. 312 a 327).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Penal
+    titulo: Crimes do funcionário público contra a Administração (arts. 312 a 327)
+    detalhe: Peculato - apropriação, desvio, furto e culposo; no culposo, a reparação antes da sentença extingue
+      a punibilidade (art. 312, § 2º e 3º); peculato mediante erro de outrem (art. 313); CONCUSSÃO (art. 316) x
+      CORRUPÇÃO PASSIVA (art. 317) x PREVARICAÇÃO (art. 319); deixar de vedar ao preso o acesso a APARELHO CELULAR
+      (art. 319-A - é o crime típico do servidor do sistema prisional); condescendência criminosa (art. 320); advocacia
+      administrativa (art. 321); abandono de função (art. 323); violação de sigilo funcional (art. 325); conceito
+      de funcionário público para fins penais (art. 327).
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+    baralho: '[1] Direito Penal'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Penal
+    titulo: 'Lei seca: Código Penal, arts. 312 a 327'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Redação oficial 2: o padrão ofício'
+    detalhe: Partes do documento no padrão ofício (cabeçalho, identificação, local e data, endereçamento, assunto,
+      texto, fecho, assinatura); a 3ª edição unificou ofício, aviso e memorando num padrão só; e-mail oficial.
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-10-26'
+    titulo: 'R+7: Imputabilidade e concurso de pessoas (arts. 26 a 31)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 26/10, sem consulta, + 3 de Português:
+      termos integrantes 2: complemento nominal e agente da passiva.'
+    filtro: Direito Penal > imputabilidade penal e concurso de pessoas
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-02'
+    titulo: 'R+30: Assistência ao preso e ao egresso (arts. 10 a 27)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 02/10, sem consulta, + 3 de
+      Português: verbo 2: emprego dos tempos e modos.'
+    filtro: Execução Penal > assistência ao preso e ao egresso
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direito Penal
+    titulo: 'Aprendizagem: Crimes do funcionário público contra a Administração (arts. 312 a 327)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Penal > crimes contra a Administração Pública praticados por funcionário público
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Redação oficial 2: o padrão ofício'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [1] Direito Penal
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Crimes do funcionário público contra a Administração
+      (arts. 312 a 327).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-11-03'
+  semana: 6
+  reduzida: A manhã inteira + só as 25 questões de Direito Constitucional à noite.
+  minima: 'Anki vencidos + 15 questões de: Defesa do Estado e segurança pública (arts. 136 a 144).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direito Constitucional
+    titulo: Defesa do Estado e segurança pública (arts. 136 a 144)
+    detalhe: 'Estado de defesa (art. 136: decretado pelo Presidente, até 30 dias prorrogáveis uma vez; prisão por
+      crime contra o Estado comunicada ao juiz; vedada a incomunicabilidade do preso); estado de sítio (arts. 137
+      a 139); disposições gerais (arts. 140 e 141); Forças Armadas (arts. 142 e 143, visão geral); SEGURANÇA PÚBLICA
+      (art. 144): os órgãos, inclusive as POLÍCIAS PENAIS federal, estaduais e distrital (inciso VI, EC 104/2019);
+      § 5º-A: as polícias penais cuidam da segurança dos estabelecimentos penais e ficam vinculadas ao órgão que
+      administra o sistema penal; demais parágrafos (PF, PRF, PC, PM, bombeiros, guardas municipais no § 8º).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+    baralho: '[2] Constitucional'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: 'Lei seca: Constituição Federal, arts. 136 a 144 (leia o 144 inteiro, duas vezes)'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Revisão ativa 1: concordância, crase e pontuação'
+    detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
+      ainda erra.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-10-27'
+    titulo: 'R+7: Nacionalidade e direitos políticos (arts. 12 a 17)'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 27/10, sem consulta, + 3 de
+      Português: ortografia oficial.'
+    filtro: Direito Constitucional > nacionalidade e direitos políticos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Defesa do Estado e segurança pública (arts. 136 a 144)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direito Constitucional > defesa do Estado e segurança pública
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Revisão ativa 1: concordância, crase e pontuação'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [2] Constitucional
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Defesa do Estado e segurança pública (arts.
+      136 a 144).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-11-04'
+  semana: 6
+  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Livramento condicional, monitoração e penas alternativas (arts. 131 a
+    170).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Livramento condicional, monitoração e penas alternativas (arts. 131 a 170)
+    detalhe: 'Livramento condicional: concessão pelo juiz, condições obrigatórias e facultativas, revogação (arts.
+      131 a 146); MONITORAÇÃO ELETRÔNICA: hipóteses e deveres do monitorado (arts. 146-B a 146-D); penas restritivas
+      de direitos - prestação de serviços, limitação de fim de semana, interdição temporária (arts. 147 a 155);
+      suspensão condicional da pena - sursis (arts. 156 a 163); pena de multa (arts. 164 a 170).'
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 131 a 170'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Revisão ativa 2: pronomes, verbos e termos integrantes'
+    detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
+      ainda erra.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-28'
+    titulo: 'R+7: Execução da pena, regimes e progressão (arts. 105 a 119)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 28/10, sem consulta, + 3 de
+      Português: acentuação gráfica.'
+    filtro: Execução Penal > regimes de cumprimento, progressão e regressão
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direito Penal
+    origem: '2026-10-05'
+    titulo: 'R+30: Fato típico e nexo causal (art. 13)'
+    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português:
+      vozes do verbo.'
+    filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Livramento condicional, monitoração e penas alternativas (arts. 131 a 170)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > livramento condicional, monitoração eletrônica e penas restritivas
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Revisão ativa 2: pronomes, verbos e termos integrantes'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Livramento condicional, monitoração e penas
+      alternativas (arts. 131 a 170).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-11-05'
+  semana: 6
+  reduzida: A manhã inteira + só as 25 questões de Direitos Humanos à noite.
+  minima: 'Anki vencidos + 15 questões de: Regras de Mandela - parte 2 (regras 36 em diante).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Direitos Humanos
+    titulo: Regras de Mandela - parte 2 (regras 36 em diante)
+    detalhe: 'Restrições, disciplina e sanções (36 a 46): proibido o confinamento solitário indefinido ou PROLONGADO
+      - mais de 15 dias seguidos (regras 43 e 44), proibidas a redução de comida ou água e a sanção coletiva; instrumentos
+      de restrição (47 a 49); revistas de presos e celas (50 a 53); informação e direito de queixa (54 a 57); contato
+      com o mundo exterior e visitas (58 a 63); biblioteca, religião e pertences (64 a 67); notificações e investigações
+      (68 a 72); transferência (73); PESSOAL penitenciário (74 a 82); inspeções (83 a 85). Confira a numeração na
+      edição do CNJ.'
+    onde: videoaula
+    baralho: '[4] Direitos Humanos'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Direitos Humanos
+    titulo: 'Lei seca: Regras de Mandela, regras 36 a 85'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Interpretação 6: bateria cronometrada'
+    detalhe: 'Sem teoria: releia as 5 regras do método (aula de 01/10) e va para a bateria da noite.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-29'
+    titulo: 'R+7: Regras de Mandela - parte 1 (regras 1 a 35)'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 29/10, sem consulta, + 3 de Português:
+      interpretação 5: tipos de discurso.'
+    filtro: Direitos Humanos > Regras Mínimas da ONU para o tratamento de presos (Regras de Mandela)
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-10-06'
+    titulo: 'R+30: Art. 5º, incisos XVII a XLIX'
+    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 06/10, sem consulta, + 3 de
+      Português: concordância verbal 1: regra geral.'
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Direitos Humanos
+    titulo: 'Aprendizagem: Regras de Mandela - parte 2 (regras 36 em diante)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Direitos Humanos > Regras Mínimas da ONU para o tratamento de presos (Regras de Mandela)
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: Interpretação de texto (cronometrada)
+    detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
+    cronometrado: true
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [4] Direitos Humanos
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Regras de Mandela - parte 2 (regras 36 em diante).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-11-06'
+  semana: 6
+  reduzida: A manhã inteira + só as 25 questões de Lei de Execução Penal à noite.
+  minima: 'Anki vencidos + 15 questões de: Medida de segurança, incidentes e disposições finais (arts. 171 a 204).'
+  manha:
+  - tipo: teoria
+    duracao: 50
+    materia: Lei de Execução Penal
+    titulo: Medida de segurança, incidentes e disposições finais (arts. 171 a 204)
+    detalhe: Medida de segurança e cessação de periculosidade (arts. 171 a 179); conversões (arts. 180 a 184); EXCESSO
+      OU DESVIO de execução (arts. 185 e 186); anistia e indulto (arts. 187 a 193); procedimento judicial e AGRAVO
+      em execução, sem efeito suspensivo (arts. 194 a 197); vedação de expor o preso a inconveniente notoriedade
+      (art. 198); ALGEMAS disciplinadas por decreto federal (art. 199); disposições finais (arts. 200 a 204).
+    onde: videoaula
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+    baralho: '[3] LEP'
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+    detalhe: Levante, beba água, sem celular.
+  - tipo: lei_seca
+    duracao: 40
+    materia: Lei de Execução Penal
+    titulo: 'Lei seca: LEP, arts. 171 a 204'
+    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
+      o que marcou em cartões do Anki à noite.
+    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 30
+    materia: Língua Portuguesa
+    titulo: 'Revisão ativa 3: ortografia, acentuação e redação oficial'
+    detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
+      ainda erra.'
+    onde: videoaula
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-30'
+    titulo: 'R+7: Permissão de saída, saída temporária e remição (arts. 120 a 130)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/10, sem consulta, + 3 de
+      Português: redação oficial 1: atributos e tratamento.'
+    filtro: Execução Penal > autorizações de saída e remição
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Lei de Execução Penal
+    origem: '2026-10-07'
+    titulo: 'R+30: Trabalho do preso (arts. 28 a 37)'
+    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 07/10, sem consulta, + 3 de
+      Português: concordância verbal 2: casos especiais.'
+    filtro: Execução Penal > trabalho do preso
+    onde: qconcursos
+  - tipo: questoes
+    rampa: direito
+    questoes: 25
+    materia: Lei de Execução Penal
+    titulo: 'Aprendizagem: Medida de segurança, incidentes e disposições finais (arts. 171 a 204)'
+    detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
+      (sempre múltipla escolha).
+    filtro: Execução Penal > incidentes de execução, procedimento judicial e disposições finais
+    onde: qconcursos
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: questoes
+    rampa: portugues
+    questoes: 15
+    materia: Língua Portuguesa
+    titulo: 'Revisão ativa 3: ortografia, acentuação e redação oficial'
+    detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+  pos22:
+  - tipo: anki
+    duracao: 15
+    titulo: Anki [3] LEP
+    detalhe: 'Revise os cartões vencidos e crie 10 a 15 cartões de: Medida de segurança, incidentes e disposições
+      finais (arts. 171 a 204).'
+  - tipo: bonus
+    questoes: 10
+    opcional: true
+    materia: Raciocínio Lógico
+    titulo: 'Bônus: lógica proposicional'
+    detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+- data: '2026-11-07'
+  semana: 6
+  reduzida: Faça só o simulado da noite.
+  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  manha:
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Problemas aritméticos e geométricos
+    detalhe: Razão e proporção; regra de três simples e composta; porcentagem e aumentos sucessivos; perímetro e
+      área das figuras planas; teorema de Pitágoras. Vídeo + 5 exemplos resolvidos no papel.
+    onde: videoaula
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: revisao_semanal
+    duracao: 60
+    titulo: Revisão semanal
+    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
+      que mais te derrubaram; (3) zere o Anki atrasado.
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 5
+    materia: Raciocínio Lógico
+    origem: '2026-10-31'
+    titulo: 'R+7: argumentação e quantificadores'
+    detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direitos Humanos
+    origem: '2026-10-08'
+    titulo: 'R+30: Afirmação histórica e dimensões (gerações)'
+    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta, + 3 de Português:
+      interpretação 2: tipos de texto.'
+    filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
+    onde: qconcursos
+  noite:
+  - tipo: simulado
+    questoes: 50
+    min_por_questao: 3
+    titulo: Simulado de fechamento do Ciclo 1
+    detalhe: Radar > Simulado > Compilado > marque Língua Portuguesa, Raciocínio Lógico, Direitos Humanos, Direito
+      Constitucional, Direito Penal e Lei de Execução Penal > 50 questões. Sem consulta, sem pausa.
+    cronometrado: true
+    onde: radar
+  - tipo: correcao
+    duracao: 30
+    titulo: Correção
+    detalhe: Compare o acerto por matéria com o diagnóstico de 03/10. É esse número que decide o Ciclo 2.
+  pos22:
+  - tipo: anki
+    duracao: 10
+    titulo: 'Anki: só os vencidos'
+    detalhe: 'Sábado à noite já teve simulado: sem questões.'
