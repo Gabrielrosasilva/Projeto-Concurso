@@ -23,6 +23,7 @@ from radar.util import (
     formatar_data,
     fuso_local,
     ip_local,
+    para_local,
     porta_ocupada,
     primeira_porta_livre,
 )
@@ -741,6 +742,10 @@ def simulados() -> None:
 def descartar(
     simulado_id: int = typer.Argument(None, help="O id, de `radar simulados`"),
     todos: bool = typer.Option(False, "--todos", help="Apaga TODAS as rodadas"),
+    vazios: bool = typer.Option(
+        False, "--vazios",
+        help="Apaga so as rodadas sem nenhuma resposta, criadas ha mais de 1 dia",
+    ),
     sim: bool = typer.Option(False, "--sim", help="Nao pergunta antes de apagar"),
 ) -> None:
     """Apaga um simulado e as respostas dele - de verdade, e sem volta.
@@ -749,9 +754,14 @@ def descartar(
     acerto, a prioridade da home e a revisao. Sai do banco e tambem do
     data/simulados.json, senao o proximo `importar` a traria de volta.
     """
-    if todos == (simulado_id is not None):
-        console.print("[red]Diga um id, ou --todos.[/] Veja os ids em `radar simulados`.")
+    if sum((todos, vazios, simulado_id is not None)) != 1:
+        console.print("[red]Diga um id, ou --todos, ou --vazios.[/] "
+                      "Veja os ids em `radar simulados`.")
         raise typer.Exit(code=1)
+
+    if vazios:
+        _descartar_vazios(sim)
+        return
 
     if todos:
         rodadas = servico.listar_simulados()
@@ -1684,6 +1694,26 @@ def web(
 
 
 
+def _descartar_vazios(sim: bool) -> None:
+    """O `radar descartar --vazios`: mostra quais, pergunta, apaga."""
+    candidatos = servico.simulados_vazios()
+    if not candidatos:
+        console.print("Nenhum simulado vazio com mais de 1 dia. Nada a limpar.")
+        return
+    console.print(f"{len(candidatos)} simulado(s) sem nenhuma resposta, criados ha mais de 1 dia:")
+    for ident, criado in candidatos:
+        console.print(f"  #{ident}  criado em {para_local(criado):%d/%m/%Y às %H:%M}")
+    resposta = "s" if sim else typer.prompt(
+        "Apagar? Nao tem volta [s/N]", default="n", show_default=False,
+    )
+    if resposta.strip().lower() not in ("s", "sim", "y", "yes"):
+        console.print("Nada apagado.")
+        raise typer.Exit(code=1)
+    sairam = servico.descartar_vazios()
+    console.print(f"[green]{len(sairam)} simulado(s) vazio(s) apagado(s)[/], "
+                  f"do banco e do data/simulados.json.")
+
+
 # --- sincronizar com o GitHub (etapa 11) ------------------------------------
 #
 # Um comando para o que antes eram cinco passos na ordem certa. A ordem e o
@@ -1771,6 +1801,12 @@ def sincronizar(
             f"{quantos} {anel}" for anel, quantos in sorted(contagem.items())
         )
     )
+
+    # Antes de exportar: o simulado vazio e antigo sai do banco e do arquivo,
+    # sem perguntar - nao tem resposta nenhuma, entao nao ha o que perder.
+    vazios = servico.descartar_vazios()
+    if vazios:
+        console.print(f"   {len(vazios)} simulado(s) vazio(s) com mais de 1 dia apagado(s)")
 
     console.print("[bold]4/6[/] Escrevendo o meu banco de volta no JSON")
     total = acervo.exportar()

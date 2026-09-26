@@ -1864,3 +1864,21 @@ Os detalhes:
 - a regra de firewall do README e so do perfil **Privado**: em rede publica
   a porta continua fechada mesmo com o `--rede`.
 
+## Limpar os simulados vazios (etapa A8, 26/09/2026)
+
+- **cada clique em "Treinar" cria uma rodada**, com as questoes sorteadas e
+  nenhuma resposta ainda. A que eu abandono fica para sempre no banco e no
+  data/simulados.json: em 26/09 eram 7, todas com 20 questoes e 0 respostas;
+- **`radar descartar --vazios` apaga so o simulado SEM NENHUMA resposta e
+  criado ha MAIS DE 1 DIA**, do banco e do arquivo (pelo mesmo
+  `esquecer_simulados` do descartar - so do banco, o proximo importar o
+  traria de volta). O de hoje fica: pode ser a rodada que eu abri e ainda vou
+  fazer. Mostra quais (data e hora de criacao) e pergunta; `--sim` pula;
+- **uma resposta que seja e historico, e nunca sai** por esta limpeza. A
+  conferencia se repete dentro da transacao que apaga, para uma resposta dada
+  entre a listagem e o apagar tirar o simulado da limpeza;
+- **o `radar sincronizar` limpa sozinho, sem perguntar**, entre o
+  reclassificar e o exportar, e diz quantos sairam. Sem pergunta porque nao
+  ha o que perder: por definicao, nada ali foi respondido. Antes do exportar,
+  para o arquivo que vai ao GitHub ja sair limpo.
+

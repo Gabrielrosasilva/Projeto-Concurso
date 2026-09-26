@@ -85,6 +85,8 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     criar_simulado_de_erros,
     descartar_simulado,
     descartar_todos,
+    descartar_vazios,
+    simulados_vazios,
     listar_simulados,
     desempenho,
     desempenho_das_geradas,

@@ -267,3 +267,22 @@ def test_o_historico_de_treino_vai_junto(banco_temporario, git):
 
     linhas = json.loads(acervo.caminho_dos_simulados().read_text(encoding="utf-8"))
     assert len(linhas) == 1
+
+
+def test_limpa_os_simulados_vazios_antes_de_exportar(banco_temporario, git):
+    """Sem perguntar: o vazio e antigo nao vai para o arquivo, o de hoje vai."""
+    import json
+    from datetime import datetime, timedelta, timezone
+
+    from radar.models import Simulado
+
+    agora = datetime.now(timezone.utc)
+    with sessao() as s:
+        s.add(Simulado(filtros={}, criado_em=agora - timedelta(days=3)))
+        s.add(Simulado(filtros={}, criado_em=agora - timedelta(hours=2)))
+
+    saida = runner.invoke(cli.app, ["sincronizar"])
+    assert "1 simulado(s) vazio(s) com mais de 1 dia apagado(s)" in saida.output
+
+    linhas = json.loads(acervo.caminho_dos_simulados().read_text(encoding="utf-8"))
+    assert len(linhas) == 1

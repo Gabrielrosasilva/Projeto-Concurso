@@ -601,6 +601,7 @@ radar hoje                  # o cronograma do dia; --marcar grava como foi
 radar simulados             # lista as rodadas: id, data, acerto, materias
 radar descartar 3           # apaga a rodada 3 e as respostas dela (sem volta)
 radar descartar --todos     # apaga todas, perguntando antes
+radar descartar --vazios    # apaga as sem nenhuma resposta, com mais de 1 dia
 ```
 
 `radar avisar` e o **unico** lugar que manda mensagem, e quem o chama todo dia

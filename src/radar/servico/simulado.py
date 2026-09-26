@@ -13,6 +13,7 @@ fechar a pagina no meio e voltar depois, e o historico serve para medir se eu
 estou melhorando.
 """
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 
 from sqlalchemy import case, func, select
 
@@ -848,3 +849,54 @@ def descartar_todos() -> tuple[int, int]:
         resultado = _apagar(s, simulados)
     acervo.esquecer_simulados(criados)
     return resultado
+
+
+# Quanto tempo um simulado sem resposta tem antes de virar lixo. Um dia: o de
+# hoje pode ser a rodada que eu abri e ainda vou fazer.
+IDADE_PARA_LIMPAR = timedelta(days=1)
+
+
+def simulados_vazios(agora_: datetime | None = None) -> list[tuple[int, datetime]]:
+    """Os simulados SEM NENHUMA resposta e criados ha mais de um dia.
+
+    Cada clique em "Treinar" cria uma rodada, e a que eu abandonei fica com
+    as questoes sorteadas e nenhuma resposta. Uma resposta que seja e
+    historico de treino: nunca entra aqui. (id, criado_em), do mais antigo.
+    """
+    limite = (agora_ or agora()) - IDADE_PARA_LIMPAR
+    criar_tabelas()
+    with sessao() as s:
+        respondidos = select(RespostaDeSimulado.simulado_id).where(
+            RespostaDeSimulado.escolhida.is_not(None))
+        achados = s.execute(
+            select(Simulado.id, Simulado.criado_em)
+            .where(Simulado.criado_em < limite)
+            .where(Simulado.id.not_in(respondidos))
+            .order_by(Simulado.criado_em)
+        )
+        return [(ident, criado) for ident, criado in achados]
+
+
+def descartar_vazios(agora_: datetime | None = None) -> list[tuple[int, datetime]]:
+    """Apaga os simulados_vazios do banco E do data/simulados.json.
+
+    O arquivo pelo mesmo caminho do descartar: so do banco, o proximo
+    importar os traria de volta. Devolve os que sairam.
+    """
+    from radar import acervo
+
+    vazios = simulados_vazios(agora_)
+    if not vazios:
+        return []
+    with sessao() as s:
+        simulados = [s.get(Simulado, ident) for ident, _ in vazios]
+        # Confere de novo, dentro da transacao: uma resposta dada entre a
+        # listagem e aqui tira o simulado da limpeza.
+        simulados = [sim for sim in simulados if sim is not None and not s.scalar(
+            select(func.count()).select_from(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == sim.id)
+            .where(RespostaDeSimulado.escolhida.is_not(None)))]
+        sairam = [(sim.id, sim.criado_em) for sim in simulados]
+        _apagar(s, simulados)
+    acervo.esquecer_simulados([criado for _, criado in sairam])
+    return sairam
