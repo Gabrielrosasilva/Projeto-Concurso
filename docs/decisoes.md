@@ -1598,3 +1598,23 @@ hoje` mostra o dia no terminal.
   a mesma data dos dois lados, vale o `anotado_em` mais recente. O arquivo
   so cresce, e por isso `servico.cronograma.apagar` tira do banco E do
   arquivo.
+
+### O gatilho: o nivel sobe, fica ou desce sozinho (etapa 3, 26/09/2026)
+
+`cronograma.niveis(plano, metas, hoje)` da o nivel de cada semana; o `radar
+hoje` passa o efetivo para o `montar_dia` e mostra o motivo no topo. Os tres
+numeros da regra moram em `gatilho` no YAML, e faltar um e erro de carga.
+
+- so semana com TODOS os dias no passado e avaliada. Semana aberta deixa as
+  seguintes em "aguardando", no nivel que ja se sabe - o gatilho nao chuta;
+- dia passado sem marcacao conta como abaixo, mas NAO como zerado: so o
+  `nao_fiz` trava a subida. Feriado conta como na Ideal se marcado minima ou
+  melhor; sem marcacao, continua abaixo;
+- "ruins seguidas" quer dizer uma logo depois da outra: uma semana neutra ou
+  boa no meio recomeca a contagem;
+- efetivo = min(planejado, calculado). Como o calculado sobe no maximo 1 por
+  semana, quem vai bem segue o plano, e quem tropeca fica atras dele ate
+  firmar;
+- `radar hoje --data X` calcula o nivel com "hoje" = X: ver um dia passado
+  mostra a carga que valia naquele dia. Consequencia esperada: sem marcacao
+  nenhuma, a semana 1 fecha com 6 dias abaixo e a semana 2 repete o nivel 1.

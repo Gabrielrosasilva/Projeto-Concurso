@@ -1840,16 +1840,24 @@ def hoje(
         )
         return
 
-    dia = cronograma.montar_dia(plano, quando)
-    if dia is None:
+    gravado = plano.dia(quando)
+    if gravado is None:
         console.print("[yellow]Esse dia esta dentro do ciclo, mas nao esta no "
                       "cronograma.[/]")
         return
+
+    # O nivel olha as semanas que fecharam ANTES de `quando`: ver um dia
+    # passado mostra a carga que valia naquele dia.
+    metas = {data: registro.meta for data, registro
+             in servico.cronograma.registros(plano.inicio, plano.fim).items()}
+    nivel = cronograma.niveis(plano, metas, quando)[gravado.semana]
+    dia = cronograma.montar_dia(plano, quando, nivel.efetivo)
 
     cabecalho = f"Semana {dia.semana}"
     if dia.semana in plano.semanas:
         cabecalho += f" — {plano.semanas[dia.semana]}"
     console.print(escape(cabecalho))
+    console.print(f"[bold]Nível {nivel.efetivo}[/] · {escape(nivel.motivo)}")
     if dia.feriado:
         console.print(f"[bold dark_orange]{escape(dia.feriado)}[/]")
 

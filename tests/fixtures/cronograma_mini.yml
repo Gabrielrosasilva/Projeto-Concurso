@@ -90,3 +90,7 @@ dias:
     cronometrado: true
     titulo: Simulado da semana
   pos22: []
+gatilho:
+  sobe_com_dias_na_ideal: 5
+  semana_ruim_com_dias_abaixo: 3
+  desce_apos_semanas_ruins: 2

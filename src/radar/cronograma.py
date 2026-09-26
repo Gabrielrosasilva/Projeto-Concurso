@@ -41,6 +41,17 @@ MESES = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
 
 DOMINGO = 6
 
+# As tres regras do gatilho, que moram no YAML. Sem elas o nivel nao tem
+# como ser calculado, entao faltar uma e erro de carregamento.
+REGRAS_DO_GATILHO = ("sobe_com_dias_na_ideal", "semana_ruim_com_dias_abaixo",
+                     "desce_apos_semanas_ruins")
+
+# O nome da rampa na frase da tela ("Direito 20, Português 15").
+NOME_DA_RAMPA = {"direito": "Direito", "portugues": "Português"}
+
+# Meta que o feriado precisa bater para contar como "na Ideal".
+METAS_QUE_SALVAM_O_FERIADO = {"ideal", "reduzida", "minima"}
+
 
 class ErroNoCronograma(ValueError):
     """O arquivo tem um problema. A mensagem diz onde."""
@@ -201,6 +212,11 @@ def carregar(caminho: Path | None = None) -> Plano:
              for nivel, questoes in (dados.get("rampa") or {}).items()}
     chaves_da_rampa = {chave for nivel in rampa.values() for chave in nivel}
 
+    gatilho = dados.get("gatilho") or {}
+    for regra in REGRAS_DO_GATILHO:
+        if not isinstance(gatilho.get(regra), int):
+            raise ErroNoCronograma(f"`gatilho` precisa de {regra} (numero inteiro)")
+
     dias = []
     vistas = set()
     for bruto in dados.get("dias") or []:
@@ -234,7 +250,7 @@ def carregar(caminho: Path | None = None) -> Plano:
         blocos=blocos,
         minutos_por_questao=float(dados.get("minutos_por_questao") or 2.5),
         rampa=rampa,
-        gatilho=dados.get("gatilho") or {},
+        gatilho=gatilho,
         semanas={int(k): v for k, v in (dados.get("semanas") or {}).items()},
         dias=sorted(dias, key=lambda d: d.data),
     )
@@ -301,6 +317,148 @@ def faixa_atual(dia: Dia, agora: time) -> tuple[Faixa | None, Faixa | None]:
         elif faixa.inicio > agora:
             return atual, faixa
     return atual, None
+
+
+# --- o gatilho: o nivel da semana ---------------------------------------------
+
+@dataclass
+class Nivel:
+    semana: int
+    planejado: int            # o do plano, quando tudo vai bem: a semana N e o nivel N
+    calculado: int            # o que o gatilho deu, olhando as semanas fechadas
+    efetivo: int              # o que vale: o menor dos dois
+    situacao: str             # primeira | subiu | neutra | ruim | desceu | aguardando
+    motivo: str               # a frase pronta para a tela
+
+
+@dataclass
+class _Balanco:
+    """Como fechou uma semana."""
+    na_ideal: int = 0
+    abaixo: int = 0
+    zerados: int = 0
+    sem_marcacao: int = 0
+
+
+def _balanco(dias: list[Dia], metas: dict[date, str]) -> _Balanco:
+    balanco = _Balanco()
+    for dia in dias:
+        meta = metas.get(dia.data)
+        # A planilha pede pelo menos a minima no feriado; cumprir isso nao
+        # pode derrubar a semana.
+        if meta == "ideal" or (dia.feriado and meta in METAS_QUE_SALVAM_O_FERIADO):
+            balanco.na_ideal += 1
+            continue
+        balanco.abaixo += 1
+        if meta == "nao_fiz":
+            balanco.zerados += 1
+        elif meta is None:
+            balanco.sem_marcacao += 1
+    return balanco
+
+
+def carga(plano: Plano, nivel: int) -> str:
+    """'Direito 20, Português 15': o que o nivel significa na noite."""
+    return ", ".join(f"{NOME_DA_RAMPA.get(chave, chave.capitalize())} {questoes}"
+                     for chave, questoes in plano.rampa[nivel].items())
+
+
+def _plural(n: int, uma: str, varias: str) -> str:
+    return f"{n} {uma if n == 1 else varias}"
+
+
+def _ordinal(n: int) -> str:
+    nomes = {2: "Segunda", 3: "Terceira", 4: "Quarta", 5: "Quinta"}
+    return nomes.get(n, f"{n}ª")
+
+
+def _motivo(plano: Plano, situacao: str, anterior: int, b: _Balanco | None,
+            efetivo: int, desce_apos: int) -> str:
+    """A frase da tela, com os numeros que levaram ao nivel."""
+    nivel = f"nível {efetivo} ({carga(plano, efetivo)})"
+    if situacao == "primeira":
+        return f"Primeira semana: nível {efetivo}."
+    if situacao == "aguardando":
+        return f"A semana {anterior} ainda não fechou: por ora, {nivel}."
+    if situacao == "subiu":
+        return (f"A semana {anterior} fechou com {_plural(b.na_ideal, 'dia', 'dias')} "
+                f"na Ideal e nenhum zerado: {nivel}.")
+    if situacao == "desceu":
+        return f"{_ordinal(desce_apos)} semana ruim seguida: desce para o {nivel}."
+    if situacao == "ruim":
+        sem_marca = f" ({b.sem_marcacao} sem marcação)" if b.sem_marcacao else ""
+        return (f"A semana {anterior} fechou com {_plural(b.abaixo, 'dia', 'dias')} "
+                f"abaixo da Ideal{sem_marca}: repete o {nivel}.")
+    # neutra
+    resto = (f", mas {_plural(b.zerados, 'dia zerado', 'dias zerados')}"
+             if b.zerados else f" e {b.abaixo} abaixo")
+    return (f"A semana {anterior} fechou com {_plural(b.na_ideal, 'dia', 'dias')} "
+            f"na Ideal{resto}: repete o {nivel}.")
+
+
+def niveis(plano: Plano, metas: dict[date, str], hoje: date) -> dict[int, Nivel]:
+    """O nivel de cada semana do ciclo, a partir do que eu marquei.
+
+    `metas` e {data: meta} dos registros do diario. `hoje` decide quais
+    semanas ja fecharam: so a semana com TODOS os dias no passado e avaliada.
+    Os numeros das regras vem de `plano.gatilho`, nunca daqui.
+    """
+    sobe = plano.gatilho["sobe_com_dias_na_ideal"]
+    ruim_com = plano.gatilho["semana_ruim_com_dias_abaixo"]
+    desce_apos = plano.gatilho["desce_apos_semanas_ruins"]
+    teto = max(plano.rampa)
+
+    por_semana: dict[int, list[Dia]] = {}
+    for dia in plano.dias:
+        por_semana.setdefault(dia.semana, []).append(dia)
+
+    resultado = {}
+    calculado = 1
+    ruins_seguidas = 0
+    # O fechamento da semana anterior: None se ela ainda nao fechou. Semana
+    # aberta trava todas as seguintes em "aguardando" - o gatilho nao chuta.
+    fechamento = None
+    alguma_aberta = False
+
+    for semana in sorted(por_semana):
+        planejado = min(max(semana, 1), teto)
+
+        if not resultado:
+            situacao = "primeira"
+        elif fechamento is None:
+            situacao = "aguardando"
+        elif fechamento.abaixo >= ruim_com:
+            ruins_seguidas += 1
+            if ruins_seguidas >= desce_apos:
+                calculado = max(calculado - 1, 1)
+                ruins_seguidas = 0
+                situacao = "desceu"
+            else:
+                situacao = "ruim"
+        elif fechamento.na_ideal >= sobe and fechamento.zerados == 0:
+            calculado = min(calculado + 1, teto)
+            ruins_seguidas = 0
+            situacao = "subiu"
+        else:
+            # "Seguidas" quer dizer uma logo depois da outra: a neutra no
+            # meio separa duas ruins, e a contagem recomeca.
+            ruins_seguidas = 0
+            situacao = "neutra"
+
+        efetivo = min(planejado, calculado)
+        resultado[semana] = Nivel(
+            semana, planejado, calculado, efetivo, situacao,
+            _motivo(plano, situacao, semana - 1, fechamento, efetivo, desce_apos),
+        )
+
+        dias = por_semana[semana]
+        if not alguma_aberta and all(d.data < hoje for d in dias):
+            fechamento = _balanco(dias, metas)
+        else:
+            fechamento = None
+            alguma_aberta = True
+
+    return resultado
 
 
 def data_por_extenso(data: date) -> str:
