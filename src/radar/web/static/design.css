@@ -378,8 +378,38 @@ body.ds {
 /* Botao feito de link: sem isto o ".ds a" pinta o texto da mesma cor do
    fundo, e o botao aparece vazio. */
 .ds a.ds-botao { color: var(--cor-acao-texto); }
+/* Variantes: o secundario e contorno (a acao que nao gasta nem apaga); o
+   de perigo apaga de verdade; o de IA gasta dinheiro com a API. Perigo e IA
+   usam o vermelho dos selos de IA: e o "pare e leia antes" da tela. */
+.ds-botao--secundario {
+  background: transparent;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+.ds a.ds-botao--secundario { color: var(--cor-texto); }
+.ds-botao--secundario:hover { border-color: var(--cor-acao); filter: none; }
+.ds-botao--perigo,
+.ds-botao--ia { background: var(--selo-ia); color: var(--cor-superficie); }
+.ds-botao--pequeno { padding: var(--esp-1) var(--esp-3); font-size: var(--tam-xs); }
 .ds-link-acao { font-size: var(--tam-sm); font-weight: var(--peso-medio); text-decoration: none; }
 .ds-link-acao:hover { text-decoration: underline; }
+
+/* --- tabela --- */
+/* Numero alinhado a direita (ds-n), cabecalho miudo e suave. Tabela larga
+   vai dentro de .ds-rolagem: no celular ela rola dentro do cartao, e a
+   pagina nao rola de lado. */
+.ds-rolagem { overflow-x: auto; }
+.ds-tabela { width: 100%; border-collapse: collapse; font-size: var(--tam-sm); }
+.ds-tabela th,
+.ds-tabela td {
+  text-align: left;
+  padding: var(--esp-2);
+  border-bottom: 1px solid var(--cor-borda);
+  vertical-align: middle;
+}
+.ds-tabela th { font-size: var(--tam-xs); font-weight: var(--peso-medio); color: var(--cor-texto-suave); }
+.ds-tabela tr:last-child td { border-bottom: 0; }
+.ds-tabela .ds-n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* --- formulario --- */
 .ds-campo { display: grid; gap: var(--esp-1); font-size: var(--tam-sm); color: var(--cor-texto-suave); }

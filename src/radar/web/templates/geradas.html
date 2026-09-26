@@ -5,95 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Gerar questões &middot; Radar de Concursos</title>
-  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
-     design system, e o body sem class="ds" nao muda de cara. #}
+  {# Gerar questoes por IA e treinar com elas. Cor e espaco saem do
+     design.css: o aviso "treina, nao mede" e um bloco da familia IA, e o
+     botao que gasta dinheiro e o ds-botao--ia. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
-      --certo:#047857; --certo-fraco:#d3f2e4;
-      --errado:#be123c; --errado-fraco:#ffe4e9;
-      --aviso:#b45309; --aviso-fraco:#fdeed3;
-      --ia:#7c3aed; --ia-fraco:#efe8ff;
-    }
-    :root:not([data-tema="claro"]){
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
-        --certo:#4ade80; --certo-fraco:#10291d;
-        --errado:#fb7185; --errado-fraco:#2c1219;
-        --aviso:#fbbf24; --aviso-fraco:#2e2310;
-        --ia:#c4b5fd; --ia-fraco:#241a3d;
-      }
-
-    *{box-sizing:border-box}
-    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    .pagina{max-width:760px;margin:0 auto}
-
-    header{text-align:center;margin-bottom:1.5rem}
-    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
-    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
-
-    .caixa{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:12px;padding:1.25rem;margin-bottom:1rem}
-    h2{font-size:1rem;margin:0 0 .2rem}
-    .legenda{font-size:.82rem;color:var(--suave);margin:0 0 .9rem}
-
-    form.comecar{display:grid;gap:.75rem}
-    label{font-size:.85rem;color:var(--suave);display:grid;gap:.3rem}
-    select,input[type=number]{padding:.6rem .7rem;border:1px solid var(--borda);
-      border-radius:8px;background:var(--cartao);color:var(--texto);font-size:.95rem}
-    button{padding:.7rem 1.1rem;border:0;border-radius:8px;background:var(--azul);
-      color:#fff;font-size:.95rem;cursor:pointer}
-    button:hover{filter:brightness(1.08)}
-    button.gastar{background:var(--ia)}
-    button.calmo{background:transparent;color:var(--texto);
-      border:1px solid var(--borda)}
-    .dica{font-size:.82rem;color:var(--suave);margin:.2rem 0 0}
-    .acoes{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
-
-    /* O aviso que a etapa inteira existe para sustentar. Ele fica no topo, e
-       nao no rodape, porque e a primeira coisa que eu preciso lembrar ao
-       abrir esta tela. */
-    .aviso-ia{border-left:3px solid var(--ia);background:var(--ia-fraco);
-      border-radius:10px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.88rem}
-    .aviso-ia b{color:var(--ia)}
-
-    .recado{border-left:3px solid var(--aviso);background:var(--aviso-fraco);
-      border-radius:10px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.88rem}
-    .recado code{background:transparent;font-weight:600}
-
-    .custo{font-size:.9rem;margin:.6rem 0 0}
-    .custo b{font-size:1.05rem}
-
-    table{width:100%;border-collapse:collapse;font-size:.9rem}
-    th,td{text-align:left;padding:.45rem .4rem;border-bottom:1px solid var(--borda)}
-    th{font-size:.78rem;color:var(--suave);font-weight:600}
-    td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-
-    .vazio{text-align:center;color:var(--suave);padding:2rem 1rem}
+    .cartao-geradas{margin-bottom:var(--esp-4)}
+    .dica{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .comecar{display:grid;gap:var(--esp-3)}
+    .comecar .ds-botao{justify-self:start}
+    .custo{margin:var(--esp-3) 0;font-size:var(--tam-sm)}
+    .custo b{font-size:var(--tam-md)}
+    .custo .dica{display:inline}
+    /* O aviso que a etapa inteira existe para sustentar. Fica no topo, e nao
+       no rodape: e a primeira coisa que eu preciso lembrar ao abrir a tela. */
+    .aviso-ia{margin:0 0 var(--esp-4)}
+    .aviso-ia b{color:var(--selo-ia)}
+    /* O recado da ultima acao (gerou, importou, deu erro): laranja de aviso. */
+    .recado{margin:0 0 var(--esp-4);padding:var(--esp-3) var(--esp-4);border-radius:var(--raio-sm);
+      border-left:3px solid var(--cor-aviso);background:var(--cor-aviso-fundo);font-size:var(--tam-sm)}
+    .recado code{font-weight:var(--peso-medio)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
-<body>
+<body class="ds">
 
 {% from "_topo.html" import barra with context %}
 {{ barra('estudar') }}
 {% from "_componentes.html" import selo %}
 
-<div class="pagina">
+<main class="ds-pagina">
 
 {% from "_topo.html" import abas_de_estudar %}
   {{ abas_de_estudar('geradas') }}
 
-  <header>
+  <header class="ds-cabeca">
     <h1>Gerar questões</h1>
-    <p class="subtitulo">Questões escritas por IA, para treinar</p>
+    <p>Questões escritas por IA, para treinar</p>
   </header>
 
-  <div class="aviso-ia">
+  <div class="ds-bloco ds-bloco--ia aviso-ia">
     <b>Isto treina, não mede.</b> Questão gerada nunca entra na incidência, no
     peso das matérias, nos Macetes nem no “Onde estudar primeiro” — o que a
     FEPESE cobra continua saindo só das provas de verdade. O seu acerto nelas
@@ -105,15 +56,15 @@
   {% endif %}
 
   {# ---------------------------------------------------- gerar novas --- #}
-  <div class="caixa">
-    <h2>Gerar novas</h2>
-    <p class="legenda">
+  <section class="ds-cartao cartao-geradas">
+    <h2 class="ds-cartao__titulo">Gerar novas</h2>
+    <p class="ds-cartao__meta">
       O padrão é <b>variar</b> uma questão real da FEPESE com gabarito
       conferido: muda o cenário e os números, mantém a regra jurídica.
     </p>
 
     {% if not plano.pedidos %}
-      <div class="vazio">
+      <div class="ds-vazio">
         <p>Não há questão real do meu cargo para variar.</p>
         <p>Rode <code>radar provas</code> e depois <code>radar questoes</code>.</p>
       </div>
@@ -124,7 +75,7 @@
          acabei de ler - e nao um preco que ficou de uma escolha anterior.
          Sem JavaScript, como o resto do radar. #}
       <form class="comecar" method="get" action="/geradas">
-        <label>
+        <label class="ds-campo">
           Matéria
           <select name="materia">
             <option value="">Qualquer matéria do meu cargo</option>
@@ -135,13 +86,11 @@
             {% endfor %}
           </select>
         </label>
-        <label>
+        <label class="ds-campo">
           Quantas questões
           <input type="number" name="quantas" value="{{ quantas }}" min="1" max="30">
         </label>
-        <div class="acoes">
-          <button class="calmo" type="submit">Ver o custo disto</button>
-        </div>
+        <button class="ds-botao ds-botao--secundario" type="submit">Ver o custo disto</button>
       </form>
 
       <p class="custo">
@@ -167,7 +116,7 @@
       <form method="post" action="/geradas/gerar">
         <input type="hidden" name="materia" value="{{ materia or '' }}">
         <input type="hidden" name="quantas" value="{{ quantas }}">
-        <button class="gastar" type="submit">
+        <button class="ds-botao ds-botao--ia" type="submit">
           Gerar e treinar — gasta US$ {{ '%.2f'|format(plano.custo) }}
         </button>
       </form>
@@ -178,16 +127,16 @@
         e imprime a instrução palavra por palavra.
       </p>
     {% endif %}
-  </div>
+  </section>
 
   {# -------------------------------------------- treinar com as de casa - #}
-  <div class="caixa">
-    <h2>Treinar com as que já tenho</h2>
-    <p class="legenda">Não gasta nada: usa o que já foi gerado antes.</p>
+  <section class="ds-cartao cartao-geradas">
+    <h2 class="ds-cartao__titulo">Treinar com as que já tenho</h2>
+    <p class="ds-cartao__meta">Não gasta nada: usa o que já foi gerado antes.</p>
 
     {% if resumo.valem %}
       <form class="comecar" method="post" action="/geradas/treinar">
-        <label>
+        <label class="ds-campo">
           Matéria
           <select name="materia">
             <option value="">Qualquer uma</option>
@@ -198,13 +147,11 @@
             {% endfor %}
           </select>
         </label>
-        <label>
+        <label class="ds-campo">
           Quantas questões
           <input type="number" name="quantidade" value="5" min="1" max="30">
         </label>
-        <div class="acoes">
-          <button class="calmo" type="submit">Treinar</button>
-        </div>
+        <button class="ds-botao ds-botao--secundario" type="submit">Treinar</button>
       </form>
       <p class="dica">
         {{ resumo.valem }} questão(ões) gerada(s) valendo
@@ -212,50 +159,52 @@
         como errada(s) e saíram do sorteio{% endif %}.
       </p>
     {% else %}
-      <div class="vazio">
+      <div class="ds-vazio">
         <p>Ainda não há questão gerada.</p>
       </div>
     {% endif %}
-  </div>
+  </section>
 
   {# ------------------------------------------------- os dois numeros --- #}
   {% if desempenho_real or desempenho_gerado %}
-    <div class="caixa">
-      <h2>Como você vai, nos dois</h2>
-      <p class="legenda">
+    <section class="ds-cartao cartao-geradas">
+      <h2 class="ds-cartao__titulo">Como você vai, nos dois</h2>
+      <p class="ds-cartao__meta">
         Dois números, sempre. Acertar uma variação que a IA escreveu não é a
         mesma coisa que acertar o que a banca cobrou.
         {{ selo('calculado') }} Nas reais, cada questão conta uma vez, pela
         última resposta; nas geradas, conta cada tentativa. Entre parênteses,
         a base de cada porcentagem.
       </p>
-      <table>
-        <tr>
-          <th>Matéria</th>
-          <th class="n">{{ selo('prova', 'Nas reais') }}</th>
-          <th class="n">{{ selo('ia', 'Nas geradas') }}</th>
-        </tr>
-        {% for materia in materias_com_acerto %}
+      <div class="ds-rolagem">
+        <table class="ds-tabela">
           <tr>
-            <td>{{ materia }}</td>
-            <td class="n">
-              {% set r = desempenho_real.get(materia) %}
-              {% if r %}{{ '%.0f'|format(r.porcentagem) }}%
-                <span class="dica">({{ r.respondidas }})</span>
-              {% else %}&mdash;{% endif %}
-            </td>
-            <td class="n">
-              {% set g = desempenho_gerado.get(materia) %}
-              {% if g %}{{ '%.0f'|format(g.porcentagem) }}%
-                <span class="dica">({{ g.respondidas }})</span>
-              {% else %}&mdash;{% endif %}
-            </td>
+            <th>Matéria</th>
+            <th class="ds-n">{{ selo('prova', 'Nas reais') }}</th>
+            <th class="ds-n">{{ selo('ia', 'Nas geradas') }}</th>
           </tr>
-        {% endfor %}
-      </table>
-    </div>
+          {% for materia in materias_com_acerto %}
+            <tr>
+              <td>{{ materia }}</td>
+              <td class="ds-n">
+                {% set r = desempenho_real.get(materia) %}
+                {% if r %}{{ '%.0f'|format(r.porcentagem) }}%
+                  <span class="dica">({{ r.respondidas }})</span>
+                {% else %}&mdash;{% endif %}
+              </td>
+              <td class="ds-n">
+                {% set g = desempenho_gerado.get(materia) %}
+                {% if g %}{{ '%.0f'|format(g.porcentagem) }}%
+                  <span class="dica">({{ g.respondidas }})</span>
+                {% else %}&mdash;{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </section>
   {% endif %}
 
-</div>
+</main>
 </body>
 </html>

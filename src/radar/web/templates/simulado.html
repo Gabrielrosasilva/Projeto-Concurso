@@ -5,157 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Simulado &middot; Radar de Concursos</title>
-  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
-     design system, e o body sem class="ds" nao muda de cara. #}
+  {# A escolha da rodada: os dois cadernos (so meus erros e o compilado), o
+     simulado por materia, o acerto ate agora e as rodadas. A rodada em si e
+     a questao.html. Cor e espaco saem do design.css; aqui so o que e desta
+     tela. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    td.falta{color:#be123c;font-weight:600}
-    /* A caixinha nao divide a largura com o nome da materia. */
-    table.compilado{table-layout:auto}
-    table.compilado td:first-child,table.compilado th:first-child{width:1.8rem;padding-right:0}
-    table.compilado td:nth-child(2){width:100%}
+    .cartao-simulado{margin-bottom:var(--esp-4)}
+    .cartao-simulado .ds-cartao__titulo{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
+    .dica{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .comecar{display:grid;gap:var(--esp-3)}
+    .comecar .ds-botao{justify-self:start}
+
+    /* O compilado: a caixinha nao divide a largura com o nome da materia. */
+    .compilado td:first-child,.compilado th:first-child{width:1.8rem;padding-right:0}
+    .compilado td:nth-child(2){width:100%}
+    .compilado td.falta{color:var(--cor-aviso);font-weight:var(--peso-forte)}
+    .tamanhos{display:flex;gap:var(--esp-3);align-items:center;flex-wrap:wrap;margin-top:var(--esp-3)}
+    .tamanhos label{display:inline-flex;gap:var(--esp-1);align-items:center;font-size:var(--tam-sm)}
+
+    /* O acerto por materia: a coluna da materia empurra as outras para a
+       direita, e a largura fica na trilha - com a primeira coluna em 100%, a
+       celula encolhe ate o conteudo e a barra sumiria. */
+    .acerto td:first-child,.acerto th:first-child{width:100%}
+    .trilha{display:inline-block;width:100px;height:8px;border-radius:var(--raio-pill);
+      background:var(--cor-borda);overflow:hidden;vertical-align:middle}
+    .trilha span{display:block;height:100%;background:var(--selo-calculado)}
+    tr.pior .trilha span{background:var(--selo-ia)}
+
     /* Descartar em dois passos, sem JavaScript: o <details> mostra a
        pergunta, e so o segundo botao apaga. */
-    details.descartar summary{cursor:pointer;color:var(--suave);font-size:.8rem;
-      list-style:none}
+    details.descartar summary{cursor:pointer;color:var(--cor-texto-suave);font-size:var(--tam-xs);list-style:none}
     details.descartar summary::-webkit-details-marker{display:none}
-    details.descartar summary:hover{color:#be123c}
-    details.descartar form{display:flex;flex-direction:column;align-items:flex-end;
-      gap:.3rem;margin-top:.3rem;font-size:.78rem}
-    details.descartar button{background:#be123c;color:#fff;border:0;border-radius:6px;
-      padding:.3rem .6rem;font-size:.78rem;cursor:pointer}
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
-      --certo:#047857; --certo-fraco:#d3f2e4;
-      --errado:#be123c; --errado-fraco:#ffe4e9;
-      --aviso:#b45309; --aviso-fraco:#fdeed3;
-      --ia:#7c3aed; --ia-fraco:#efe8ff;
-    }
-    :root:not([data-tema="claro"]){
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
-        --certo:#4ade80; --certo-fraco:#10291d;
-        --errado:#fb7185; --errado-fraco:#2c1219;
-        --aviso:#fbbf24; --aviso-fraco:#2e2310;
-        --ia:#c4b5fd; --ia-fraco:#241a3d;
-      }
-
-    *{box-sizing:border-box}
-    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    .pagina{max-width:760px;margin:0 auto}
-
-    header{text-align:center;margin-bottom:1.5rem}
-    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
-    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
-    .voltar{display:inline-block;margin-bottom:1rem;color:var(--azul);
-      text-decoration:none;font-size:.85rem}
-
-    .caixa{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:12px;padding:1.25rem}
-
-    /* ------------------------------------------------------- comecar ---- */
-    form.comecar{display:grid;gap:.75rem}
-    label{font-size:.85rem;color:var(--suave);display:grid;gap:.3rem}
-    select,input[type=number]{padding:.6rem .7rem;border:1px solid var(--borda);
-      border-radius:8px;background:var(--cartao);color:var(--texto);font-size:.95rem}
-    button{padding:.7rem 1.1rem;border:0;border-radius:8px;background:var(--azul);
-      color:#fff;font-size:.95rem;cursor:pointer}
-    button:hover{filter:brightness(1.08)}
-    .dica{font-size:.82rem;color:var(--suave);margin:.2rem 0 0}
-
-    /* ------------------------------------------------------- questao ---- */
-    .andamento{display:flex;justify-content:space-between;align-items:center;
-      font-size:.85rem;color:var(--suave);margin-bottom:.6rem}
-    .barra{height:6px;border-radius:999px;background:var(--borda);overflow:hidden;
-      margin-bottom:1.25rem}
-    .barra div{height:100%;background:var(--azul)}
-
-    .materia{display:inline-block;font-size:.74rem;padding:.15rem .55rem;
-      border-radius:999px;background:var(--azul-fraco);color:var(--azul);
-      font-weight:600;margin-bottom:.7rem}
-    .enunciado{font-size:1.02rem;margin:0 0 1.1rem;white-space:pre-wrap}
-
-    .alternativas{display:grid;gap:.5rem}
-    .alternativas button{display:flex;gap:.6rem;text-align:left;width:100%;
-      background:var(--cartao);border:1px solid var(--borda);color:var(--texto);
-      padding:.75rem .9rem;font-size:.95rem;line-height:1.45}
-    .alternativas button:hover{border-color:var(--azul);background:var(--azul-fraco)}
-    .letra{font-weight:700;color:var(--suave);flex:0 0 1.1rem}
-
-    .fonte{margin-top:1.1rem;font-size:.78rem;color:var(--suave)}
-    .fonte a{color:var(--suave)}
-
-    /* ------------------------------------------------------ resultado --- */
-    .nota{text-align:center;padding:.5rem 0 1.25rem}
-    .nota .valor{font-size:2.6rem;font-weight:700;line-height:1}
-    .nota .de{color:var(--suave);font-size:.9rem}
-    .nota.bom .valor{color:var(--certo)}
-    .nota.ruim .valor{color:var(--errado)}
-
-    table{width:100%;border-collapse:collapse;font-size:.9rem}
-    th,td{text-align:left;padding:.5rem .4rem;border-bottom:1px solid var(--borda)}
-    th{font-size:.78rem;color:var(--suave);font-weight:600}
-    td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-    /* A coluna da materia empurra as outras para a direita: sem isso a
-       tabela reparte tudo em partes iguais e a barra fica solta no meio. */
-    th:first-child,td:first-child{width:100%}
-    /* A largura fica na trilha, nao na celula: com a primeira coluna em
-       100% a celula encolhe ate o conteudo e a barra some. */
-    .trilha{display:inline-block;width:100px;height:8px;border-radius:999px;
-      background:var(--borda);overflow:hidden;vertical-align:middle}
-    .trilha span{display:block;height:100%;background:var(--certo)}
-    tr.pior .trilha span{background:var(--errado)}
-
-    .revisao{margin-top:1.5rem;display:grid;gap:.6rem}
-    .revisao .item{background:var(--cartao);border:1px solid var(--borda);
-      border-left:3px solid var(--errado);border-radius:10px;padding:.8rem .9rem}
-    .revisao .item.acertei{border-left-color:var(--certo)}
-    .revisao .pergunta{font-size:.9rem;margin:0 0 .5rem}
-    .revisao .linha{font-size:.82rem;margin:.15rem 0}
-    .revisao .marquei{color:var(--errado)}
-    .revisao .correta{color:var(--certo);font-weight:600}
-
-    .acoes{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.25rem}
-    .acoes a{padding:.7rem 1.1rem;border-radius:8px;text-decoration:none;
-      font-size:.95rem;border:1px solid var(--borda);color:var(--texto)}
-    .acoes a.principal{background:var(--azul);color:#fff;border-color:transparent}
-
-    .vazio{text-align:center;color:var(--suave);padding:2rem 1rem}
-
-    /* ----------------------------------------------- questao gerada ---- */
-    /* O selo fica ACIMA do enunciado, e nao no rodape: eu preciso saber que
-       a questao e de IA antes de ler, e nao depois de responder. */
-    .selo-ia{border-left:3px solid var(--ia);background:var(--ia-fraco);
-      border-radius:10px;padding:.7rem .9rem;margin-bottom:.9rem;font-size:.84rem}
-    .selo-ia .titulo{font-weight:700;color:var(--ia);display:block}
-    .selo-ia .linha{margin:.25rem 0 0;color:var(--suave)}
-    .selo-ia a{color:var(--azul)}
-    .selo-ia form{display:inline;margin-top:.5rem}
-    .selo-ia button.errada{background:transparent;color:var(--errado);
-      border:1px solid var(--errado);padding:.3rem .7rem;font-size:.8rem;
-      border-radius:999px;margin-top:.5rem}
-    .revisao .item.de-ia{border-left-color:var(--ia)}
-    .marca-ia{display:inline-block;font-size:.72rem;padding:.1rem .5rem;
-      border-radius:999px;background:var(--ia-fraco);color:var(--ia);
-      font-weight:700;margin-bottom:.35rem}
+    details.descartar summary:hover{color:var(--selo-ia)}
+    details.descartar form{display:flex;flex-direction:column;align-items:flex-end;gap:var(--esp-1);
+      margin-top:var(--esp-1);font-size:var(--tam-xs);white-space:normal}
+    .rodadas td.materias{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
-<body>
+<body class="ds">
 
 {% from "_topo.html" import barra with context %}
 {{ barra('estudar') }}
 {% from "_componentes.html" import selo %}
 
-<div class="pagina">
+<main class="ds-pagina">
 
 {% from "_topo.html" import abas_de_estudar %}
   {{ abas_de_estudar('simulado') }}
 
-  <header>
+  <header class="ds-cabeca">
     <h1>Simulado</h1>
     {# A rodada montada pelo botao "Treinar" da home diz de onde ela saiu: a
        mistura muda o que o resultado significa. Acertar 70% nas questoes da
@@ -175,15 +75,11 @@
         {% set _ = partes.append(
              f.get('repetidas') ~ ' que eu ja tinha respondido') %}
       {% endif %}
-      <p class="subtitulo">
-        Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
-      </p>
+      <p>Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}</p>
     {% elif simulado and simulado.filtros.get('geradas') %}
-      <p class="subtitulo">
-        Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra
-      </p>
+      <p>Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra</p>
     {% else %}
-      <p class="subtitulo">Questões reais, tiradas das provas do acervo</p>
+      <p>Questões reais, tiradas das provas do acervo</p>
     {% endif %}
   </header>
 
@@ -193,27 +89,27 @@
     {# ------------------------------------------- os dois cadernos ------ #}
     {# Os dois so tem questao REAL. A tela diz isso no selo, porque a outra
        aba (Gerar questoes) monta rodada de IA - e as duas nunca se misturam. #}
-    <div class="caixa" style="margin-bottom:1rem">
-      <h2 style="font-size:1rem;margin:0 0 .2rem">Só meus erros {{ selo('prova', 'só questões reais') }}</h2>
+    <section class="ds-cartao cartao-simulado">
+      <h2 class="ds-cartao__titulo">Só meus erros {{ selo('prova', 'só questões reais') }}</h2>
       {% if erradas %}
-        <p class="dica" style="margin:0 0 .6rem">
+        <p class="ds-cartao__meta">
           {{ erradas }} questão(ões) que errei na última vez que respondi, sem as
           anuladas. Acertou depois, sai daqui.
         </p>
         <form method="post" action="/revisar">
-          <button type="submit">Refazer os {{ erradas }} erro(s)</button>
+          <button class="ds-botao" type="submit">Refazer os {{ erradas }} erro(s)</button>
         </form>
       {% else %}
-        <p class="dica" style="margin:0">Nenhum erro em aberto. Cada questão
+        <p class="ds-cartao__meta">Nenhum erro em aberto. Cada questão
           real que eu errar entra aqui, até eu acertá-la.</p>
       {% endif %}
-    </div>
+    </section>
 
     {% if planos_compilados %}
     {% set base = planos_compilados[0] %}
-    <div class="caixa" style="margin-bottom:1rem">
-      <h2 style="font-size:1rem;margin:0 0 .2rem">Simulado compilado {{ selo('prova', 'só questões reais') }}</h2>
-      <p class="dica" style="margin:0 0 .6rem">
+    <section class="ds-cartao cartao-simulado">
+      <h2 class="ds-cartao__titulo">Simulado compilado {{ selo('prova', 'só questões reais') }}</h2>
+      <p class="ds-cartao__meta">
         {{ selo('oficial', 'Quadro do edital ' ~ (base.ano_do_edital or '')) }}
         a distribuição segue o quadro de questões lido de
         <code>{{ base.arquivo_do_edital or 'edital' }}</code>. Primeiro as provas do
@@ -221,27 +117,29 @@
         o peso se redistribui entre as outras.
       </p>
       <form method="post" action="/simulado/compilado">
-        <table class="compilado">
-          <tr>
-            <th></th><th>Matéria</th><th class="n">Edital</th>
-            {% for p in planos_compilados %}<th class="n">{{ p.tamanho }}</th>{% endfor %}
-            <th class="n">No acervo</th>
-          </tr>
-          {% for linha in base.linhas %}
+        <div class="ds-rolagem">
+          <table class="ds-tabela compilado">
             <tr>
-              <td><input type="checkbox" name="materias" value="{{ linha.materia }}" checked aria-label="{{ linha.materia }}"></td>
-              <td>{{ linha.materia }}</td>
-              <td class="n">{{ linha.peso_no_edital }}</td>
-              {% for p in planos_compilados %}
-                {% set l = p.linhas | selectattr('materia', 'equalto', linha.materia) | first %}
-                <td class="n {{ 'falta' if l.pedidas > l.disponiveis }}"
-                    title="{% if l.pedidas > l.disponiveis %}o acervo tem {{ l.disponiveis }}: faltarão {{ l.pedidas - l.disponiveis }}{% endif %}">
-                  {{ l.pedidas }}{% if l.pedidas > l.disponiveis %}*{% endif %}</td>
-              {% endfor %}
-              <td class="n">{{ linha.disponiveis }}</td>
+              <th></th><th>Matéria</th><th class="ds-n">Edital</th>
+              {% for p in planos_compilados %}<th class="ds-n">{{ p.tamanho }}</th>{% endfor %}
+              <th class="ds-n">No acervo</th>
             </tr>
-          {% endfor %}
-        </table>
+            {% for linha in base.linhas %}
+              <tr>
+                <td><input type="checkbox" name="materias" value="{{ linha.materia }}" checked aria-label="{{ linha.materia }}"></td>
+                <td>{{ linha.materia }}</td>
+                <td class="ds-n">{{ linha.peso_no_edital }}</td>
+                {% for p in planos_compilados %}
+                  {% set l = p.linhas | selectattr('materia', 'equalto', linha.materia) | first %}
+                  <td class="ds-n {{ 'falta' if l.pedidas > l.disponiveis }}"
+                      title="{% if l.pedidas > l.disponiveis %}o acervo tem {{ l.disponiveis }}: faltarão {{ l.pedidas - l.disponiveis }}{% endif %}">
+                    {{ l.pedidas }}{% if l.pedidas > l.disponiveis %}*{% endif %}</td>
+                {% endfor %}
+                <td class="ds-n">{{ linha.disponiveis }}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
         {% set curtas = [] %}
         {% for p in planos_compilados %}{% for l in p.linhas %}{% if l.pedidas > l.disponiveis %}{% set _ = curtas.append(1) %}{% endif %}{% endfor %}{% endfor %}
         {% if curtas %}
@@ -249,27 +147,27 @@
             compilado entrega o que há e diz quanto faltou - completar com outra
             matéria desfiguraria o peso.</p>
         {% endif %}
-        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.6rem">
+        <div class="tamanhos">
           {% for n in tamanhos %}
-            <label style="display:inline-flex;gap:.3rem;align-items:center;font-size:.9rem">
+            <label>
               <input type="radio" name="tamanho" value="{{ n }}" {{ 'checked' if loop.first }}> {{ n }} questões
             </label>
           {% endfor %}
-          <button type="submit">Montar o compilado</button>
+          <button class="ds-botao" type="submit">Montar o compilado</button>
         </div>
       </form>
-    </div>
+    </section>
     {% endif %}
 
-    <div class="caixa">
+    <section class="ds-cartao cartao-simulado">
       {% if total_de_questoes == 0 %}
-        <div class="vazio">
+        <div class="ds-vazio">
           <p>Não há questão no banco ainda.</p>
           <p>Rode <code>radar provas</code> e depois <code>radar questoes</code>.</p>
         </div>
       {% else %}
         <form class="comecar" method="post" action="/simulado/novo">
-          <label>
+          <label class="ds-campo">
             Matéria
             <select name="materia">
               <option value="">Matérias que caem em qualquer concurso</option>
@@ -278,11 +176,11 @@
               {% endfor %}
             </select>
           </label>
-          <label>
+          <label class="ds-campo">
             Quantas questões
             <input type="number" name="quantidade" value="10" min="1" max="50">
           </label>
-          <button type="submit">Começar</button>
+          <button class="ds-botao" type="submit">Começar</button>
         </form>
         <p class="dica">
           {{ selo('calculado') }}
@@ -291,93 +189,93 @@
           aparece duas vezes na mesma rodada.
         </p>
       {% endif %}
-    </div>
+    </section>
 
     {% if desempenho_geral %}
-      <div class="caixa" style="margin-top:1rem">
-        <h2 style="font-size:1rem;margin:0 0 .3rem">Como você vai até agora</h2>
-        <p class="dica" style="margin:0 0 .8rem">
+      <section class="ds-cartao cartao-simulado">
+        <h2 class="ds-cartao__titulo">Como você vai até agora</h2>
+        <p class="ds-cartao__meta">
           {{ selo('calculado') }} Em questão real, somando todos os simulados:
           cada questão conta uma vez, pela última resposta que dei a ela.
           "Questões" é a base de cada porcentagem.
         </p>
-        <table>
-          <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Questões</th><th></th></tr>
+        <table class="ds-tabela acerto">
+          <tr><th>Matéria</th><th class="ds-n">Acerto</th><th class="ds-n">Questões</th><th></th></tr>
           {% for d in desempenho_geral %}
             <tr class="{{ 'pior' if d.porcentagem < 60 }}">
               <td>{{ d.materia }}</td>
-              <td class="n">{{ '%.0f'|format(d.porcentagem) }}%</td>
-              <td class="n">{{ d.respondidas }}</td>
+              <td class="ds-n">{{ '%.0f'|format(d.porcentagem) }}%</td>
+              <td class="ds-n">{{ d.respondidas }}</td>
               <td class="medida"><span class="trilha"><span style="width:{{ d.porcentagem }}%"></span></span></td>
             </tr>
           {% endfor %}
         </table>
         <p class="dica">A matéria com menor acerto aparece primeiro: é onde
           vale gastar tempo de estudo.</p>
-      </div>
+      </section>
     {% endif %}
 
     {# O segundo numero, e nunca somado ao primeiro: acertar uma variacao que
        a IA escreveu nao e a mesma coisa que acertar o que a banca cobrou. #}
     {% if desempenho_das_geradas %}
-      <div class="caixa" style="margin-top:1rem">
-        <h2 style="font-size:1rem;margin:0 0 .2rem">
-          {{ selo('ia') }} Nas questões geradas
-        </h2>
-        <p class="dica" style="margin:0 0 .8rem">
+      <section class="ds-cartao cartao-simulado">
+        <h2 class="ds-cartao__titulo">{{ selo('ia') }} Nas questões geradas</h2>
+        <p class="ds-cartao__meta">
           Número à parte, de propósito. Isto é treino, e não medida do que a
           FEPESE cobra.
         </p>
-        <table>
-          <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Feitas</th></tr>
+        <table class="ds-tabela">
+          <tr><th>Matéria</th><th class="ds-n">Acerto</th><th class="ds-n">Feitas</th></tr>
           {% for d in desempenho_das_geradas %}
             <tr>
               <td>{{ d.materia }}</td>
-              <td class="n">{{ '%.0f'|format(d.porcentagem) }}%</td>
-              <td class="n">{{ d.respondidas }}</td>
+              <td class="ds-n">{{ '%.0f'|format(d.porcentagem) }}%</td>
+              <td class="ds-n">{{ d.respondidas }}</td>
             </tr>
           {% endfor %}
         </table>
-      </div>
+      </section>
     {% endif %}
 
     {# -------------------------------------------- as rodadas ------------ #}
     {% if rodadas %}
-      <div class="caixa" style="margin-top:1rem">
-        <h2 style="font-size:1rem;margin:0 0 .2rem">Suas rodadas</h2>
-        <p class="dica" style="margin:0 0 .8rem">
+      <section class="ds-cartao cartao-simulado">
+        <h2 class="ds-cartao__titulo">Suas rodadas</h2>
+        <p class="ds-cartao__meta">
           Rodada de teste - chutada só para ver a tela - estraga o acerto, a
           prioridade da home e a revisão. Descartar apaga de verdade, e não
           tem volta.
         </p>
         {% if request.query_params.get('descartado') %}
-          <p class="dica" style="margin:0 0 .8rem"><b>Rodada descartada.</b></p>
+          <p class="ds-nota"><b>Rodada descartada.</b></p>
         {% endif %}
-        <table>
-          <tr><th>Data</th><th class="n">Questões</th><th class="n">Acerto</th><th>Matérias</th><th></th></tr>
-          {% for r in rodadas %}
-            <tr>
-              <td><a href="/simulado/{{ r.id }}">{{ r.criado_em | data }}</a>{% if r.gerada %} {{ selo('ia', 'IA') }}{% endif %}</td>
-              <td class="n">{{ r.respondidas }}/{{ r.questoes }}</td>
-              <td class="n">{% if r.porcentagem is not none %}{{ '%.0f'|format(r.porcentagem) }}%{% else %}&mdash;{% endif %}</td>
-              <td class="dica" style="margin:0">{{ r.materias[:2] | join(', ') }}{% if r.materias | length > 2 %} +{{ r.materias | length - 2 }}{% endif %}</td>
-              <td class="n">
-                <details class="descartar">
-                  <summary>descartar</summary>
-                  <form method="post" action="/simulado/{{ r.id }}/descartar">
-                    <span>Apagar esta rodada e {{ r.respondidas }} resposta(s)?</span>
-                    <button type="submit">Sim, apagar</button>
-                  </form>
-                </details>
-              </td>
-            </tr>
-          {% endfor %}
-        </table>
-      </div>
+        <div class="ds-rolagem">
+          <table class="ds-tabela rodadas">
+            <tr><th>Data</th><th class="ds-n">Questões</th><th class="ds-n">Acerto</th><th>Matérias</th><th></th></tr>
+            {% for r in rodadas %}
+              <tr>
+                <td><a href="/simulado/{{ r.id }}">{{ r.criado_em | data }}</a>{% if r.gerada %} {{ selo('ia', 'IA') }}{% endif %}</td>
+                <td class="ds-n">{{ r.respondidas }}/{{ r.questoes }}</td>
+                <td class="ds-n">{% if r.porcentagem is not none %}{{ '%.0f'|format(r.porcentagem) }}%{% else %}&mdash;{% endif %}</td>
+                <td class="materias">{{ r.materias[:2] | join(', ') }}{% if r.materias | length > 2 %} +{{ r.materias | length - 2 }}{% endif %}</td>
+                <td class="ds-n">
+                  <details class="descartar">
+                    <summary>descartar</summary>
+                    <form method="post" action="/simulado/{{ r.id }}/descartar">
+                      <span>Apagar esta rodada e {{ r.respondidas }} resposta(s)?</span>
+                      <button class="ds-botao ds-botao--perigo ds-botao--pequeno" type="submit">Sim, apagar</button>
+                    </form>
+                  </details>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </section>
     {% endif %}
 
   {% endif %}
 
-</div>
+</main>
 </body>
 </html>

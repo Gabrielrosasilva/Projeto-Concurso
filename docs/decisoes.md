@@ -1882,3 +1882,22 @@ Os detalhes:
   ha o que perder: por definicao, nada ali foi respondido. Antes do exportar,
   para o arquivo que vai ao GitHub ja sair limpo.
 
+## Parte B: as outras telas no design system (a partir de 26/09/2026)
+
+- **uma tela por etapa**, sem mudar funcionalidade nem dado: a tela passa a
+  usar so o design.css (`body class="ds"`, `ds-pagina`, `ds-cabeca`,
+  `ds-cartao`, `ds-campo`, `ds-botao`), fica com a cara da tela Hoje nos dois
+  temas, e o CSS antigo dela (as cores coladas no `<style>`) sai;
+- **o design system ganhou o que as telas antigas usavam e ele nao tinha**,
+  so com os tokens que ja existiam: a tabela (`ds-tabela`, numero em `ds-n`,
+  e `ds-rolagem` para a tabela larga rolar dentro do cartao no celular) e
+  tres variantes de botao - `ds-botao--secundario` (contorno, a acao que nao
+  gasta nem apaga), `ds-botao--perigo` (apaga de verdade) e `ds-botao--ia`
+  (gasta dinheiro com a API), os dois ultimos no vermelho da familia IA;
+- **B1, Estudar**: simulado.html e geradas.html. A simulado.html so desenha a
+  escolha da rodada (a rodada e a questao.html, ja migrada): o CSS de
+  questao, resultado e revisao que ela ainda carregava estava sem uso e
+  saiu. O aviso "isto treina, nao mede" virou bloco da familia IA
+  (`ds-bloco--ia`), no vermelho do selo de IA - antes era roxo, cor que o
+  design system nao tem.
+
