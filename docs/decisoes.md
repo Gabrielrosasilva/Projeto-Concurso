@@ -1572,10 +1572,14 @@ O Ciclo 1 (28/09 a 07/11) mora em `config/cronograma.yml`, que e DADO e se
 edita a mao; `src/radar/cronograma.py` so le, confere e faz a conta. `radar
 hoje` mostra o dia no terminal.
 
+- o cronograma e DADO, e nao codigo: o Ciclo 2 entra trocando o arquivo, sem
+  mexer em Python, e corrigir um dia e editar texto, nao abrir codigo;
 - os horarios NAO sao gravados: saem da soma das duracoes a partir do inicio
   do bloco. Faixa de questoes dura questoes x minutos por questao (2,5, ou o
   `min_por_questao` da faixa - o simulado usa 3), arredondado PARA CIMA de 5
-  em 5. Assim a rampa muda o numero e o horario acompanha sozinho;
+  em 5. O motivo e a rampa: ela troca o numero de questoes da noite conforme
+  o nivel, e com horario gravado cada troca deixaria a agenda errada dali em
+  diante. Calculado, o horario acompanha sozinho;
 - o arquivo e conferido ao carregar, e o erro diz a data do dia com problema:
   data repetida, domingo, faixa sem duracao nem questoes, tipo fora da lista,
   rampa inexistente, horario de bloco invalido. Erro de digitacao no dado
@@ -1592,7 +1596,10 @@ hoje` mostra o dia no terminal.
   feitas (ou acertos sem feitas), data futura e data fora do plano;
 - questoes feitas e acertos dali sao o que eu ANOTO, quase tudo do
   Qconcursos. Nao entram em acerto medido nenhum do radar - nem Meu foco,
-  nem Onde estudar, nem home, nem minimo. Ha teste garantindo;
+  nem Onde estudar, nem home, nem minimo. O acerto do radar e medido questao
+  por questao, com materia, assunto e anulada conhecidos; um total digitado
+  de memoria, de questoes de outras bancas, nao tem nada disso, e somado ali
+  poria lembranca no lugar de medida. Ha teste garantindo;
 - a copia vai em `data/registro_estudo.json`, pelo mesmo caminho do
   `simulados.json` (exportar, importar, sincronizar). A chave e a data; com
   a mesma data dos dois lados, vale o `anotado_em` mais recente. O arquivo
@@ -1603,13 +1610,30 @@ hoje` mostra o dia no terminal.
 
 `cronograma.niveis(plano, metas, hoje)` da o nivel de cada semana; o `radar
 hoje` passa o efetivo para o `montar_dia` e mostra o motivo no topo. Os tres
-numeros da regra moram em `gatilho` no YAML, e faltar um e erro de carga.
+numeros da regra moram em `gatilho` no YAML, e faltar um e erro de carga -
+sao eles que eu vou querer ajustar, e ajustar nao pode pedir codigo.
+
+As regras, com os numeros do Ciclo 1:
+
+- a semana 1 comeca no nivel 1; o PLANEJADO da semana N e N (ate o maior
+  nivel da `rampa`, 6);
+- semana BOA: 5 dias ou mais na Ideal (`sobe_com_dias_na_ideal`) e nenhum
+  `nao_fiz`. A seguinte sobe 1;
+- semana RUIM: 3 dias ou mais abaixo da Ideal (`semana_ruim_com_dias_abaixo`).
+  Repete o nivel; a 2a ruim SEGUIDA (`desce_apos_semanas_ruins`) desce 1,
+  nunca abaixo de 1, e a contagem recomeca;
+- qualquer outra e NEUTRA e repete. O motivo de repetir em vez de descer
+  logo: uma semana ruim isolada e acidente (trabalho, doenca); duas seguidas
+  dizem que a carga passou do que eu aguento.
+
+Os detalhes:
 
 - so semana com TODOS os dias no passado e avaliada. Semana aberta deixa as
   seguintes em "aguardando", no nivel que ja se sabe - o gatilho nao chuta;
 - dia passado sem marcacao conta como abaixo, mas NAO como zerado: so o
   `nao_fiz` trava a subida. Feriado conta como na Ideal se marcado minima ou
-  melhor; sem marcacao, continua abaixo;
+  melhor: a planilha pede pelo menos a minima no feriado, e cumprir o que o
+  plano pede nao pode derrubar a semana. Sem marcacao, continua abaixo;
 - "ruins seguidas" quer dizer uma logo depois da outra: uma semana neutra ou
   boa no meio recomeca a contagem;
 - efetivo = min(planejado, calculado). Como o calculado sobe no maximo 1 por
@@ -1622,8 +1646,10 @@ numeros da regra moram em `gatilho` no YAML, e faltar um e erro de carga.
 ### A tela Hoje (etapa 4, 26/09/2026)
 
 - `/hoje` e o PRIMEIRO item da barra: a navegacao passou a ter 7 destinos, os
-  seis do sitemap e o cronograma na frente. A home ganhou no topo o cartao
-  "Hoje no cronograma", que some fora do ciclo;
+  seis do sitemap e o cronograma na frente. Primeiro porque e a tela que eu
+  abro todo dia: a especificacao pede saber o que estudar em um clique, e o
+  cronograma responde isso com hora marcada. A home ganhou no topo o cartao
+  "Hoje no cronograma", pelo mesmo motivo, e ele some fora do ciclo;
 - toda conta sai pronta de `servico.cronograma.tela_do_dia`; o template so
   desenha. O relogio mora em `servico.cronograma.agora_local`, um lugar so,
   para o teste poder parar o tempo;

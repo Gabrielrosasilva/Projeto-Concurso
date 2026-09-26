@@ -164,6 +164,7 @@ radar web --host 0.0.0.0        # abre tambem no celular, na mesma wi-fi
 
 | aba | para que serve |
 |---|---|
+| **Hoje** | o cronograma do dia, e onde marco como foi ([Cronograma](#cronograma)) |
 | **Perto de mim** | o padrao: `nucleo` e `proximo`, com os filtros |
 | **Inscricoes abertas** | ordenada pelo prazo; 7 dias ou menos aparece em vermelho |
 | **Meus favoritos** | o que eu marquei, ordenado por quem fecha primeiro |
@@ -348,6 +349,92 @@ Tres campos sao **meus**, e a coleta nunca os sobrescreve:
   no titulo: o cartao mostra `R$ ??` e um lapis. Aceita do jeito que se digita
   (`5200`, `R$ 5.200`, `5.200,50`), e entra no filtro como qualquer outro.
 
+## Cronograma
+
+O plano de estudo do dia a dia, com horario, materia, assunto e numero de
+questoes. O Ciclo 1 vai de 28/09 a 07/11/2026, de segunda a sabado; domingo e
+descanso.
+
+### A tela Hoje
+
+`radar web` e abra **Hoje**, o primeiro item da barra. De cima para baixo:
+
+- a data, a semana e o **nivel** da semana, com o motivo dele ("A semana 1
+  fechou com 6 dias abaixo da Ideal: repete o nivel 1");
+- os 6 dias da semana em pilulas, na cor do que eu marquei: Ideal verde,
+  Reduzida azul, Minima amarela, Nao fiz vermelha, sem marcacao cinza;
+- tres numeros: horas de estudo, questoes do dia e a que horas a noite acaba;
+- o cartao **AGORA**, so no dia de hoje: o que esta acontecendo e o que vem
+  depois;
+- os tres blocos (manha, noite, depois das 22h), uma faixa por linha, com o
+  detalhe do que estudar, o filtro do Qconcursos e o link da lei;
+- **Se o dia apertar**: a meta Reduzida e a Minima daquele dia;
+- **Como foi o dia**: o formulario onde eu marco a meta, as questoes feitas e
+  os acertos. So hoje ou dia passado.
+
+A home (Meu foco) tem um cartao no topo com o que esta acontecendo agora e o
+botao **Abrir o dia**. Fora do ciclo ele some.
+
+### No terminal
+
+```bash
+radar hoje                              # o dia de hoje
+radar hoje --data 2026-10-28            # outro dia
+radar hoje --marcar ideal --feitas 25 --acertos 18
+radar hoje --marcar minima --data 2026-10-12 --anotacao "feriado"
+```
+
+`--marcar` aceita `ideal`, `reduzida`, `minima` ou `nao_fiz`. Marcar de novo o
+mesmo dia corrige, nao duplica. Dia futuro e dia fora do plano sao recusados.
+
+**O que eu anoto aqui e diario, nao medida.** As questoes feitas e os acertos
+sao digitados a mao (quase tudo do Qconcursos) e nao entram em nenhum acerto
+do radar: Meu foco, Onde estudar e a home contam so o que eu respondi dentro
+dele, questao por questao.
+
+### O nivel sobe e desce sozinho
+
+A noite tem uma **rampa**: o numero de questoes de Direito e de Portugues
+cresce com o nivel, de 1 a 6. O plano e a semana N no nivel N, mas o nivel
+que vale sai do que eu marquei na semana anterior, depois que ela fecha:
+
+- **semana boa** (5 dias ou mais na Ideal, nenhum "nao fiz"): sobe 1;
+- **semana ruim** (3 dias ou mais abaixo da Ideal): repete. A segunda ruim
+  seguida desce 1, nunca abaixo do 1;
+- qualquer outra: repete;
+- dia sem marcacao conta como abaixo; feriado marcado como minima ou melhor
+  conta como Ideal.
+
+O nivel nunca passa do planejado: quem vai bem segue o plano, quem tropeca
+repete a carga ate firmar. Os numeros moram em `gatilho` no YAML.
+
+### Editando o `config/cronograma.yml`
+
+E dado, nao codigo: pode editar a mao. O cabecalho do arquivo explica cada
+chave. O que importa saber:
+
+- **os horarios nao estao gravados.** Cada faixa tem `duracao` em minutos ou
+  `questoes`, e o horario sai da soma a partir do inicio do bloco (`blocos`:
+  manha 10:15, noite 18:00, pos22 22:00). Faixa de questoes dura questoes x
+  2,5 min (ou o `min_por_questao` dela), arredondado para cima de 5 em 5. Por
+  isso mudar um numero de questoes empurra sozinho tudo o que vem depois;
+- a faixa com `rampa: direito` ou `rampa: portugues` usa o numero do nivel,
+  e nao o `questoes` gravado;
+- `opcional: true` e bonus: aparece, mas nao conta no total do dia;
+- domingo nao pode estar no arquivo. Data repetida, tipo desconhecido, rampa
+  que nao existe ou faixa sem duracao nem questoes param o comando com a data
+  do dia errado na mensagem.
+
+Confira com `radar hoje --data AAAA-MM-DD` depois de editar. O Ciclo 2 entra
+trocando este arquivo.
+
+### Backup
+
+O que eu marco vai para `data/registro_estudo.json` no `radar exportar` e no
+`radar sincronizar`, pelo mesmo caminho dos simulados: e a copia que o
+`radar.db` nao tem. Na volta (`radar importar`), a chave e a data, e se os
+dois lados tem o mesmo dia, vale a anotacao mais recente.
+
 ## Os comandos
 
 ```bash
@@ -430,6 +517,7 @@ radar testar-telegram       # uma mensagem de teste, nao mexe no banco
 radar calendario            # grava radar.ics
 radar sincronizar           # troca com o GitHub: pull, importar, exportar, push
 radar auditar               # confere banco x PDFs e escreve docs/auditoria.md
+radar hoje                  # o cronograma do dia; --marcar grava como foi
 radar simulados             # lista as rodadas: id, data, acerto, materias
 radar descartar 3           # apaga a rodada 3 e as respostas dela (sem volta)
 radar descartar --todos     # apaga todas, perguntando antes
@@ -862,7 +950,7 @@ voce abre a web ou pede para baixar prova.
 src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
 ├── models.py       tabelas concursos, eventos, questoes, questoes_geradas,
-│                   simulados e respostas
+│                   simulados, respostas e registros_de_estudo
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
@@ -875,6 +963,7 @@ src/radar/
 │   ├── manual.py     IA sem API: pedido em arquivo, resposta importada
 │   ├── cartoes.py    a Central de Macetes: um cartao por materia
 │   ├── previsao.py   quando o municipio costuma abrir de novo
+│   ├── cronograma.py o diario do dia e o que a tela Hoje mostra
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
@@ -882,6 +971,7 @@ src/radar/
 ├── eventos.py      a linha do tempo: o que mudou em cada concurso, e quando
 ├── foco.py         a situacao do alvo principal, para a pagina inicial
 ├── onde_estudar.py por qual assunto comecar: quanto ele vale, quanto eu erro
+├── cronograma.py   le config/cronograma.yml: horarios, rampa e o nivel
 ├── leis.py         le config/leis.yml: onde ler o texto oficial da lei
 ├── acompanhando.py os favoritos: linha do tempo, proxima acao, fila de aviso
 ├── edital_materias.py  o quadro de distribuicao de questoes do edital
@@ -914,13 +1004,15 @@ src/radar/
 │   └── ieses.py                 fonte 3: API JSON da listagem de projetos
 └── web/          FastAPI + Jinja2
     ├── app.py                    rotas e o contexto de cada tela
-    └── templates/_topo.html      a barra de navegacao, igual em toda pagina
+    ├── templates/_topo.html      a barra de navegacao, igual em toda pagina
+    └── templates/hoje.html       a tela Hoje, o cronograma do dia
 
 config/
 ├── regioes.yml     os tres aneis de distancia
 ├── alvo.yml        os cargos que eu quero, em ordem
 ├── leis.yml        onde ler a lei de cada materia e assunto de Direito
-└── perfil.yml      meus dados, para a elegibilidade
+├── perfil.yml      meus dados, para a elegibilidade
+└── cronograma.yml  o plano de estudo, dia a dia (dado, editavel a mao)
 ```
 
 A ideia central: **cada fonte e um arquivo isolado em `collectors/`**. O resto

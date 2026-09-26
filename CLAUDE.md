@@ -98,12 +98,11 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
 ## Estado atual (detalhe no [historico](docs/historico.md) e nas [decisoes](docs/decisoes.md))
 
-**Pronto:** o radar (fases 1-15 do historico) e, da especificacao, a auditoria
-(`radar auditar`, lida na tela Mais), o design system com os 6 selos, a navegacao
-de 7 destinos e a home de 3 blocos, o cronograma de estudo (tela Hoje e
-`radar hoje`: horario, diario e o nivel que sobe e desce), tela de questao e relatorio, so meus erros,
-compilado 40/50/100 pelos pesos do edital, revisao espacada 1-7-30, descartar
-simulado, backup dos simulados, IA sem pagar (`gerar --pedido`) e Macetes.
+**Pronto:** o radar (fases 1-15 do historico) e, da especificacao, a auditoria,
+o design system com os 6 selos, a navegacao de 7 destinos e a home de 3 blocos,
+tela de questao e relatorio, so meus erros, compilado 40/50/100 pelos pesos do
+edital, revisao espacada 1-7-30, descartar simulado, backup dos simulados, IA
+sem pagar (`gerar --pedido`), Macetes e a tela Hoje com o cronograma do Ciclo 1.
 **Falta:** conferir a lista de leis alteradas (`config/leis.yml`), migrar as
 outras telas ao design system (espera aprovacao), importar macete e explicacao,
 dar assunto ao Direito e o cronograma por IA. Acervo: 8.433 questoes (3.372
