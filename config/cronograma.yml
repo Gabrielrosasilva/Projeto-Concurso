@@ -30,6 +30,13 @@
 #                 (Finados)"). Vira um chip laranja no cabecalho. Para o
 #                 gatilho, feriado feito como minima ou melhor conta como
 #                 dia "na Ideal".
+#   essencial   - no nivel do DIA (so dias uteis), os artigos-chave do tema
+#                 para o Plano B: `chave` (lidos no de 30 min) e `apoio`
+#                 (somados no de 1 hora). Selecao do plano, feita a partir do
+#                 texto da lei - NAO e incidencia medida da banca.
+#   plano_b     - as duas opcoes do botao Plano B (30 min e 1 hora) e o que o
+#                 sabado pede. O tema e o filtro das questoes saem das faixas
+#                 do proprio dia.
 
 ciclo: 1
 titulo: Ciclo 1 — a base
@@ -73,6 +80,20 @@ gatilho:
   sobe_com_dias_na_ideal: 5
   semana_ruim_com_dias_abaixo: 3
   desce_apos_semanas_ruins: 2
+plano_b:
+  opcoes:
+  - minutos: 30
+    essencial_minutos: 10
+    questoes_direito: 8
+    questoes_portugues: 0
+    com_apoio: false
+  - minutos: 60
+    essencial_minutos: 15
+    questoes_direito: 15
+    questoes_portugues: 4
+    com_apoio: true
+  sabado: Refaça 20 questões erradas da semana (no Qconcursos, filtre as que você errou nesta semana).
+  sabado_questoes: 20
 semanas:
   1: 'ARRANCADA: 25 questões por noite. Sábado = diagnóstico no radar.'
   2: 40 questões por noite (entra o R+7). Sábado = 1º simulado da semana (30).
@@ -84,7 +105,24 @@ dias:
 - data: '2026-09-28'
   semana: 1
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Aplicação da lei penal (arts. 1º a 12).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Aplicação da lei penal (arts. 1º a 12).'
+  essencial:
+    chave:
+    - artigos: CP art. 1º
+      porque: Não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.
+    - artigos: CP art. 2º
+      porque: Abolitio criminis apaga o crime; a lei nova mais benéfica retroage, mesmo após a condenação.
+    - artigos: CP art. 4º
+      porque: 'Tempo do crime: o momento da ação ou omissão (teoria da atividade).'
+    - artigos: CP art. 6º
+      porque: 'Lugar do crime: onde houve a conduta ou onde se produziu o resultado (ubiquidade).'
+    apoio:
+    - artigos: CP art. 3º
+      porque: Lei excepcional ou temporária continua valendo para os fatos do seu período.
+    - artigos: CP art. 5º
+      porque: 'Territorialidade: lei brasileira ao crime cometido no território nacional.'
+    - artigos: CP art. 10
+      porque: 'Prazo penal: inclui o dia do começo.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -158,7 +196,25 @@ dias:
 - data: '2026-09-29'
   semana: 1
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
-  minima: 'Anki vencidos + 15 questões de: Art. 5º, caput e incisos I a XVI.'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Art. 5º, caput e incisos I a XVI.'
+  essencial:
+    chave:
+    - artigos: CF art. 5º, III
+      porque: Ninguém será submetido a tortura nem a tratamento desumano ou degradante.
+    - artigos: CF art. 5º, XI
+      porque: 'Casa inviolável: só entra sem consentimento em flagrante, desastre, para socorro ou, de dia, por
+        ordem judicial.'
+    - artigos: CF art. 5º, XII
+      porque: Sigilo das comunicações; a telefônica só se quebra por ordem judicial, para investigação criminal
+        ou instrução processual.
+    - artigos: CF art. 5º, XVI
+      porque: Reunião pacífica, sem armas, em local aberto, com aviso prévio e sem precisar de autorização.
+    apoio:
+    - artigos: CF art. 5º, I e II
+      porque: 'Igualdade e legalidade: ninguém é obrigado a fazer ou deixar de fazer algo senão em virtude de
+        lei.'
+    - artigos: CF art. 5º, IV e X
+      porque: Manifestação livre, vedado o anonimato; intimidade, vida privada, honra e imagem invioláveis.
   manha:
   - tipo: teoria
     duracao: 50
@@ -232,7 +288,24 @@ dias:
 - data: '2026-09-30'
   semana: 1
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Objeto, classificação e exame criminológico (arts. 1º a 9º-A).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Objeto, classificação e exame criminológico (arts. 1º a 9º-A).'
+  essencial:
+    chave:
+    - artigos: LEP art. 1º
+      porque: A execução efetiva a sentença e busca a harmônica integração social do condenado e do internado.
+    - artigos: LEP art. 3º
+      porque: O preso mantém todos os direitos não atingidos pela sentença, sem distinção racial, social, religiosa
+        ou política.
+    - artigos: LEP arts. 5º e 6º
+      porque: Classificação pelos antecedentes e personalidade; a Comissão Técnica de Classificação monta o programa
+        individualizador.
+    apoio:
+    - artigos: LEP art. 2º, parágrafo único
+      porque: A LEP também se aplica ao preso provisório.
+    - artigos: LEP art. 8º
+      porque: O condenado ao regime fechado passa por exame criminológico.
+    - artigos: LEP art. 9º-A
+      porque: Identificação do perfil genético (DNA) nos casos da lei.
   manha:
   - tipo: teoria
     duracao: 50
@@ -306,7 +379,19 @@ dias:
 - data: '2026-10-01'
   semana: 1
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
-  minima: 'Anki vencidos + 15 questões de: Teoria geral.'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Teoria geral.'
+  essencial:
+    chave:
+    - artigos: Conceito
+      porque: 'Características dos direitos humanos: universalidade, indivisibilidade, interdependência, inalienabilidade,
+        imprescritibilidade, irrenunciabilidade e historicidade. Saiba o que cada uma quer dizer.'
+    - artigos: DUDH art. 1º
+      porque: Todos nascem livres e iguais em dignidade e direitos.
+    - artigos: DUDH art. 5º
+      porque: Ninguém será submetido a tortura, nem a tratamento ou castigo cruel, desumano ou degradante.
+    apoio:
+    - artigos: Conceito
+      porque: Direitos humanos (plano internacional) x direitos fundamentais (positivados na Constituição).
   manha:
   - tipo: teoria
     duracao: 50
@@ -377,7 +462,23 @@ dias:
 - data: '2026-10-02'
   semana: 1
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Assistência ao preso e ao egresso (arts. 10 a 27).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Assistência ao preso e ao egresso (arts. 10 a 27).'
+  essencial:
+    chave:
+    - artigos: LEP art. 10
+      porque: A assistência ao preso é dever do Estado e se estende ao egresso.
+    - artigos: LEP art. 11
+      porque: 'As 6 assistências: material, à saúde, jurídica, educacional, social e religiosa.'
+    - artigos: LEP art. 26
+      porque: 'Egresso: o liberado definitivo por 1 ano após a saída, e o liberado condicional durante o período
+        de prova.'
+    apoio:
+    - artigos: LEP art. 14, § 3º
+      porque: Acompanhamento médico à mulher presa no pré-natal e no pós-parto, extensivo ao recém-nascido.
+    - artigos: LEP art. 18
+      porque: Ensino fundamental obrigatório.
+    - artigos: LEP art. 24
+      porque: Liberdade de culto; nenhum preso é obrigado a participar de atividade religiosa.
   manha:
   - tipo: teoria
     duracao: 50
@@ -451,7 +552,7 @@ dias:
 - data: '2026-10-03'
   semana: 1
   reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  minima: Refaça 20 questões erradas da semana.
   manha:
   - tipo: diagnostico
     questoes: 20
@@ -500,7 +601,19 @@ dias:
 - data: '2026-10-05'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Fato típico e nexo causal (art. 13).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Fato típico e nexo causal (art. 13).'
+  essencial:
+    chave:
+    - artigos: CP art. 13, caput
+      porque: Causa é a ação ou omissão sem a qual o resultado não teria ocorrido.
+    - artigos: CP art. 13, § 1º
+      porque: Causa superveniente relativamente independente que, sozinha, produz o resultado exclui a imputação.
+    - artigos: CP art. 13, § 2º
+      porque: 'Omissão relevante: quem devia e podia agir para evitar o resultado responde por ele.'
+    apoio:
+    - artigos: CP art. 13, § 2º, a, b, c
+      porque: 'Tem o dever de agir quem: a) tem por lei obrigação de cuidado, proteção ou vigilância; b) assumiu
+        a responsabilidade de impedir o resultado; c) criou o risco com o seu comportamento anterior.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -582,7 +695,24 @@ dias:
 - data: '2026-10-06'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
-  minima: 'Anki vencidos + 15 questões de: Art. 5º, incisos XVII a XLIX.'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Art. 5º, incisos XVII a XLIX.'
+  essencial:
+    chave:
+    - artigos: CF art. 5º, XLIII
+      porque: 'Tortura, tráfico, terrorismo e hediondos: inafiançáveis e insuscetíveis de graça ou anistia.'
+    - artigos: CF art. 5º, XLVII
+      porque: Não haverá pena de morte (salvo guerra declarada), perpétua, de trabalhos forçados, de banimento
+        ou cruel.
+    - artigos: CF art. 5º, XLVIII e XLIX
+      porque: Pena cumprida em estabelecimento distinto conforme delito, idade e sexo; respeito à integridade
+        física e moral do preso.
+    apoio:
+    - artigos: CF art. 5º, XL
+      porque: A lei penal não retroage, salvo para beneficiar o réu.
+    - artigos: CF art. 5º, XLII e XLIV
+      porque: 'Racismo e ação de grupos armados contra a ordem constitucional: inafiançáveis e imprescritíveis.'
+    - artigos: CF art. 5º, XLV
+      porque: Nenhuma pena passará da pessoa do condenado.
   manha:
   - tipo: teoria
     duracao: 50
@@ -667,7 +797,23 @@ dias:
 - data: '2026-10-07'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Trabalho do preso (arts. 28 a 37).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Trabalho do preso (arts. 28 a 37).'
+  essencial:
+    chave:
+    - artigos: LEP art. 29
+      porque: Trabalho remunerado, nunca abaixo de 3/4 do salário mínimo.
+    - artigos: LEP art. 31
+      porque: Obrigatório para o condenado à pena privativa de liberdade; facultativo para o preso provisório.
+    - artigos: LEP art. 33
+      porque: Jornada de 6 a 8 horas, com descanso aos domingos e feriados.
+    - artigos: LEP art. 37
+      porque: 'Trabalho externo: aptidão, disciplina, responsabilidade e 1/6 da pena cumprida.'
+    apoio:
+    - artigos: LEP art. 28, § 2º
+      porque: O trabalho do preso não se sujeita à CLT.
+    - artigos: LEP art. 36
+      porque: No fechado, trabalho externo só em serviço ou obra pública, com cautelas e limite de 10% de presos
+        na obra.
   manha:
   - tipo: teoria
     duracao: 50
@@ -750,7 +896,17 @@ dias:
 - data: '2026-10-08'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
-  minima: 'Anki vencidos + 15 questões de: Afirmação histórica e dimensões (gerações).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Afirmação histórica e dimensões (gerações).'
+  essencial:
+    chave:
+    - artigos: Conceito
+      porque: 'Dimensões: 1ª liberdade (civis e políticos), 2ª igualdade (sociais, econômicos e culturais), 3ª
+        fraternidade (difusos: paz, meio ambiente).'
+    - artigos: Marcos
+      porque: Magna Carta (1215), Declaração dos Direitos do Homem e do Cidadão (1789) e DUDH (1948).
+    apoio:
+    - artigos: Marcos
+      porque: 'Constituição Mexicana (1917) e de Weimar (1919): as primeiras com direitos sociais.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -832,7 +988,20 @@ dias:
 - data: '2026-10-09'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Deveres e direitos do preso (arts. 38 a 43).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Deveres e direitos do preso (arts. 38 a 43).'
+  essencial:
+    chave:
+    - artigos: LEP art. 39
+      porque: Os deveres do condenado.
+    - artigos: LEP art. 41
+      porque: Os direitos do preso (leia a lista inteira).
+    - artigos: LEP art. 41, parágrafo único
+      porque: Os incisos V, X e XV podem ser suspensos ou restringidos por ato motivado do diretor.
+    apoio:
+    - artigos: LEP art. 40
+      porque: Todas as autoridades devem respeitar a integridade física e moral dos presos.
+    - artigos: LEP art. 42
+      porque: Os deveres e direitos valem, no que couber, para o preso provisório e o submetido a medida de segurança.
   manha:
   - tipo: teoria
     duracao: 50
@@ -917,7 +1086,7 @@ dias:
 - data: '2026-10-10'
   semana: 2
   reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  minima: Refaça 20 questões erradas da semana.
   manha:
   - tipo: raciocinio
     duracao: 50
@@ -975,7 +1144,23 @@ dias:
   semana: 3
   feriado: Feriado (N. Sra. Aparecida)
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Tentativa, dolo, culpa e erro (arts. 14 a 21).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Tentativa, dolo, culpa e erro (arts. 14 a 21).'
+  essencial:
+    chave:
+    - artigos: CP art. 14
+      porque: Consumado x tentado; a tentativa é punida com a pena do consumado diminuída de 1 a 2/3.
+    - artigos: CP art. 15
+      porque: 'Desistência voluntária e arrependimento eficaz: responde só pelos atos já praticados.'
+    - artigos: CP art. 18
+      porque: Dolo direto e eventual; culpa por imprudência, negligência ou imperícia.
+    apoio:
+    - artigos: CP art. 16
+      porque: 'Arrependimento posterior: sem violência ou grave ameaça, reparou até o recebimento da denúncia,
+        pena reduzida de 1 a 2/3.'
+    - artigos: CP art. 17
+      porque: 'Crime impossível: meio absolutamente ineficaz ou objeto absolutamente impróprio.'
+    - artigos: CP arts. 20 e 21
+      porque: Erro de tipo exclui o dolo; erro de proibição inevitável isenta de pena, evitável diminui.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1057,7 +1242,23 @@ dias:
 - data: '2026-10-13'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
-  minima: 'Anki vencidos + 15 questões de: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios).'
+  essencial:
+    chave:
+    - artigos: CF art. 5º, LXI
+      porque: Prisão só em flagrante ou por ordem escrita e fundamentada de autoridade judiciária competente.
+    - artigos: CF art. 5º, LXII a LXIV
+      porque: Prisão comunicada ao juiz e à família; direito ao silêncio e a assistência; direito de saber quem
+        o prendeu.
+    - artigos: CF art. 5º, LXVIII
+      porque: 'Habeas corpus: contra violência ou coação à liberdade de locomoção.'
+    apoio:
+    - artigos: CF art. 5º, L e LVII
+      porque: Presidiárias podem ficar com os filhos na amamentação; ninguém é culpado antes do trânsito em julgado.
+    - artigos: CF art. 5º, LXVII
+      porque: Prisão civil por dívida só a do devedor de alimentos.
+    - artigos: CF art. 5º, § 3º
+      porque: Tratado de direitos humanos aprovado em 2 turnos por 3/5 em cada Casa equivale a emenda.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1142,7 +1343,21 @@ dias:
 - data: '2026-10-14'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Disciplina, faltas graves e RDD (arts. 44 a 52).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Disciplina, faltas graves e RDD (arts. 44 a 52).'
+  essencial:
+    chave:
+    - artigos: LEP art. 50
+      porque: As faltas graves do condenado à pena privativa de liberdade, inclusive o celular (VII).
+    - artigos: LEP art. 52
+      porque: 'RDD: até 2 anos, cela individual, visitas quinzenais de 2 pessoas por 2 horas, 2 horas diárias
+        de banho de sol.'
+    - artigos: LEP art. 49
+      porque: Faltas leves e médias ficam para a lei local; as graves estão na LEP.
+    apoio:
+    - artigos: LEP art. 45
+      porque: Não há falta nem sanção sem previsão; vedadas a cela escura e a sanção coletiva.
+    - artigos: LEP art. 51
+      porque: Faltas graves de quem cumpre pena restritiva de direitos.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1228,7 +1443,17 @@ dias:
 - data: '2026-10-15'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
-  minima: 'Anki vencidos + 15 questões de: Sistemas de proteção e responsabilidade do Estado.'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Sistemas de proteção e responsabilidade do Estado.'
+  essencial:
+    chave:
+    - artigos: CF art. 109, V-A e § 5º
+      porque: 'Grave violação de direitos humanos: o Procurador-Geral da República pode pedir ao STJ o deslocamento
+        para a Justiça Federal.'
+    - artigos: Sistemas
+      porque: 'Global (ONU: DUDH e os Pactos de 1966) x interamericano (Pacto de San José, Comissão e Corte Interamericana).'
+    apoio:
+    - artigos: Conceito
+      porque: O Estado responde internacionalmente pelos atos dos seus agentes.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1313,7 +1538,20 @@ dias:
 - data: '2026-10-16'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60).'
+  essencial:
+    chave:
+    - artigos: LEP art. 53
+      porque: 'As sanções: advertência verbal, repreensão, suspensão ou restrição de direitos, isolamento e RDD.'
+    - artigos: LEP art. 54
+      porque: As de I a IV por ato motivado do diretor; o RDD por despacho fundamentado do juiz.
+    - artigos: LEP arts. 58 e 60
+      porque: Isolamento, suspensão e restrição até 30 dias; isolamento preventivo até 10 dias.
+    apoio:
+    - artigos: LEP arts. 55 e 56
+      porque: 'Recompensas: elogio e concessão de regalias.'
+    - artigos: LEP art. 59
+      porque: Falta apurada em procedimento, com direito de defesa.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1397,7 +1635,7 @@ dias:
 - data: '2026-10-17'
   semana: 3
   reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  minima: Refaça 20 questões erradas da semana.
   manha:
   - tipo: raciocinio
     duracao: 50
@@ -1453,7 +1691,21 @@ dias:
 - data: '2026-10-19'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Coação, obediência e excludentes de ilicitude (arts. 22 a 25).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Coação, obediência e excludentes de ilicitude (arts. 22 a 25).'
+  essencial:
+    chave:
+    - artigos: CP art. 23
+      porque: Não há crime em estado de necessidade, legítima defesa, estrito cumprimento de dever legal ou exercício
+        regular de direito; o excesso é punido.
+    - artigos: CP art. 25 e parágrafo único
+      porque: Legítima defesa, e a do agente de segurança pública que repele agressão a vítima mantida refém (Lei
+        13.964/2019).
+    apoio:
+    - artigos: CP art. 22
+      porque: 'Coação moral irresistível e obediência a ordem não manifestamente ilegal: só responde o autor da
+        coação ou da ordem.'
+    - artigos: CP art. 24, § 1º
+      porque: Não pode alegar estado de necessidade quem tinha o dever legal de enfrentar o perigo.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1537,7 +1789,22 @@ dias:
 - data: '2026-10-20'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
-  minima: 'Anki vencidos + 15 questões de: Direitos sociais (arts. 6º a 11).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Direitos sociais (arts. 6º a 11).'
+  essencial:
+    chave:
+    - artigos: CF art. 6º
+      porque: 'O rol dos direitos sociais: educação, saúde, alimentação, trabalho, moradia, transporte, lazer,
+        segurança, previdência, maternidade e infância, assistência.'
+    - artigos: CF art. 7º, XXXIII
+      porque: Nenhum trabalho antes dos 16 (salvo aprendiz, a partir dos 14); nada noturno, perigoso ou insalubre
+        antes dos 18.
+    - artigos: CF art. 9º
+      porque: 'Direito de greve: os trabalhadores decidem a oportunidade e os interesses.'
+    apoio:
+    - artigos: CF art. 7º, IV, XIII, XVII e XVIII
+      porque: Salário mínimo; jornada de 8h diárias e 44h semanais; férias com 1/3; licença-gestante de 120 dias.
+    - artigos: CF art. 8º
+      porque: Sindicato sem autorização do Estado; ninguém é obrigado a se filiar.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1621,7 +1888,22 @@ dias:
 - data: '2026-10-21'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Órgãos da execução penal (arts. 61 a 81-B).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Órgãos da execução penal (arts. 61 a 81-B).'
+  essencial:
+    chave:
+    - artigos: LEP art. 61
+      porque: Os órgãos da execução penal.
+    - artigos: LEP art. 66
+      porque: As competências do juiz da execução (leia a lista inteira).
+    - artigos: LEP art. 68
+      porque: O que incumbe ao Ministério Público.
+    apoio:
+    - artigos: LEP arts. 69 e 70
+      porque: 'Conselho Penitenciário: parecer sobre indulto e comutação, inspeção dos estabelecimentos.'
+    - artigos: LEP art. 75
+      porque: Requisitos para ser diretor de estabelecimento penal.
+    - artigos: LEP arts. 80 e 81
+      porque: 'Conselho da Comunidade: composição e atribuições.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -1706,7 +1988,19 @@ dias:
 - data: '2026-10-22'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
-  minima: 'Anki vencidos + 15 questões de: Na Constituição e o status dos tratados.'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Na Constituição e o status dos tratados.'
+  essencial:
+    chave:
+    - artigos: CF art. 5º, § 3º
+      porque: Tratado de direitos humanos aprovado em 2 turnos por 3/5 em cada Casa = emenda constitucional.
+    - artigos: STF
+      porque: Os demais tratados de direitos humanos são supralegais; por isso a prisão do depositário infiel
+        é ilícita (Súmula Vinculante 25).
+    apoio:
+    - artigos: CF art. 5º, § 2º
+      porque: O rol de direitos não exclui os decorrentes dos tratados.
+    - artigos: CF art. 1º, III e art. 4º, II
+      porque: Dignidade da pessoa humana como fundamento; prevalência dos direitos humanos.
   manha:
   - tipo: teoria
     duracao: 50
@@ -1789,7 +2083,22 @@ dias:
 - data: '2026-10-23'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Estabelecimentos penais (arts. 82 a 104).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Estabelecimentos penais (arts. 82 a 104).'
+  essencial:
+    chave:
+    - artigos: LEP art. 82, § 1º
+      porque: Mulher e maior de 60 anos, separadamente, em estabelecimento próprio.
+    - artigos: LEP art. 84
+      porque: Preso provisório separado do condenado por sentença transitada em julgado.
+    - artigos: LEP arts. 87 e 88
+      porque: 'Penitenciária: regime fechado, cela individual de no mínimo 6 m².'
+    - artigos: LEP art. 102
+      porque: 'Cadeia pública: destinada ao preso provisório.'
+    apoio:
+    - artigos: LEP art. 83, § 2º
+      porque: Berçário e amamentação até, no mínimo, 6 meses de idade.
+    - artigos: LEP arts. 91 e 93
+      porque: 'Colônia agrícola ou industrial: semiaberto; casa do albergado: aberto e limitação de fim de semana.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -1873,7 +2182,7 @@ dias:
 - data: '2026-10-24'
   semana: 4
   reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  minima: Refaça 20 questões erradas da semana.
   manha:
   - tipo: raciocinio
     duracao: 50
@@ -1929,7 +2238,22 @@ dias:
 - data: '2026-10-26'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Imputabilidade e concurso de pessoas (arts. 26 a 31).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Imputabilidade e concurso de pessoas (arts. 26 a 31).'
+  essencial:
+    chave:
+    - artigos: CP art. 26
+      porque: Inimputável por doença mental é isento de pena; o semi-imputável tem a pena reduzida.
+    - artigos: CP art. 27
+      porque: Menor de 18 anos é penalmente inimputável.
+    - artigos: CP art. 28
+      porque: Emoção e paixão não excluem a imputabilidade; só a embriaguez completa por caso fortuito ou força
+        maior isenta.
+    apoio:
+    - artigos: CP art. 29
+      porque: Quem concorre para o crime responde na medida da sua culpabilidade; participação de menor importância
+        e cooperação dolosamente distinta.
+    - artigos: CP art. 30
+      porque: Circunstâncias de caráter pessoal não se comunicam, salvo quando elementares do crime.
   manha:
   - tipo: teoria
     duracao: 50
@@ -2013,7 +2337,20 @@ dias:
 - data: '2026-10-27'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
-  minima: 'Anki vencidos + 15 questões de: Nacionalidade e direitos políticos (arts. 12 a 17).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Nacionalidade e direitos políticos (arts. 12 a 17).'
+  essencial:
+    chave:
+    - artigos: CF art. 12, I e II
+      porque: Quem é brasileiro nato e quem é naturalizado.
+    - artigos: CF art. 12, § 3º
+      porque: Os cargos privativos de brasileiro nato.
+    - artigos: CF art. 15, III
+      porque: Condenação criminal transitada em julgado suspende os direitos políticos enquanto durarem seus efeitos.
+    apoio:
+    - artigos: CF art. 14, § 1º
+      porque: Voto obrigatório dos 18 aos 70; facultativo aos 16 e 17, aos maiores de 70 e aos analfabetos.
+    - artigos: CF art. 14, § 3º, VI
+      porque: 'Idades mínimas: 35 Presidente e Senador; 30 Governador; 21 Deputado e Prefeito; 18 Vereador.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -2097,7 +2434,21 @@ dias:
 - data: '2026-10-28'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Execução da pena, regimes e progressão (arts. 105 a 119).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Execução da pena, regimes e progressão (arts. 105 a 119).'
+  essencial:
+    chave:
+    - artigos: LEP art. 112
+      porque: 'Progressão: o percentual de pena cumprida (16% a 70%) e a boa conduta. Confira a redação atual
+        no Planalto.'
+    - artigos: LEP art. 118
+      porque: 'Regressão: crime doloso, falta grave ou nova condenação que torne incabível o regime.'
+    apoio:
+    - artigos: LEP arts. 110 e 111
+      porque: Regime inicial fixado na sentença; unificação das penas para determinar o regime.
+    - artigos: LEP arts. 113 a 115
+      porque: 'Regime aberto: aceitação do programa e condições.'
+    - artigos: LEP art. 117
+      porque: 'Prisão domiciliar no aberto: maior de 70, doença grave, filho menor ou com deficiência, gestante.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -2193,7 +2544,21 @@ dias:
 - data: '2026-10-29'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
-  minima: 'Anki vencidos + 15 questões de: Regras de Mandela - parte 1 (regras 1 a 35).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Regras de Mandela - parte 1 (regras 1 a 35).'
+  essencial:
+    chave:
+    - artigos: Regras de Mandela 1 a 5
+      porque: Dignidade e proibição de tortura, sem nenhuma exceção.
+    - artigos: Regra 11
+      porque: 'Separação por categorias: homens e mulheres, provisórios e condenados, jovens e adultos.'
+    - artigos: Regra 23
+      porque: Pelo menos 1 hora diária de exercício ao ar livre.
+    apoio:
+    - artigos: Regras 12 a 17 e 22
+      porque: Alojamento e alimentação.
+    - artigos: Regras 24 a 35
+      porque: Saúde do preso é responsabilidade do Estado.
+    aviso: Confira a numeração na edição em português do CNJ.
   manha:
   - tipo: teoria
     duracao: 50
@@ -2284,7 +2649,22 @@ dias:
 - data: '2026-10-30'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Permissão de saída, saída temporária e remição (arts. 120 a 130).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Permissão de saída, saída temporária e remição (arts. 120 a 130).'
+  essencial:
+    chave:
+    - artigos: LEP arts. 120 e 121
+      porque: 'Permissão de saída: COM escolta, concedida pelo DIRETOR, em falecimento ou doença grave de familiar
+        e tratamento médico.'
+    - artigos: LEP art. 122
+      porque: 'Saída temporária: semiaberto, SEM vigilância direta, concedida pelo JUIZ. Alterada pela Lei 14.843/2024:
+        confira a redação atual.'
+    - artigos: LEP art. 126
+      porque: 'Remição: 1 dia a cada 12 horas de estudo (em no mínimo 3 dias) e 1 dia a cada 3 dias de trabalho.'
+    apoio:
+    - artigos: LEP art. 127
+      porque: Falta grave faz perder até 1/3 do tempo remido.
+    - artigos: LEP art. 128
+      porque: O tempo remido conta como pena cumprida.
   manha:
   - tipo: teoria
     duracao: 50
@@ -2380,7 +2760,7 @@ dias:
 - data: '2026-10-31'
   semana: 5
   reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  minima: Refaça 20 questões erradas da semana.
   manha:
   - tipo: raciocinio
     duracao: 50
@@ -2447,7 +2827,24 @@ dias:
   semana: 6
   feriado: Feriado (Finados)
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Crimes do funcionário público contra a Administração (arts. 312 a 327).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Crimes do funcionário público contra a Administração (arts. 312 a 327).'
+  essencial:
+    chave:
+    - artigos: CP art. 312
+      porque: 'Peculato: apropriar-se ou desviar bem de que tem a posse em razão do cargo; no culposo, a reparação
+        antes da sentença extingue a punibilidade.'
+    - artigos: CP arts. 316 e 317
+      porque: Concussão = EXIGIR vantagem; corrupção passiva = SOLICITAR, RECEBER ou ACEITAR promessa.
+    - artigos: CP art. 319-A
+      porque: Crime do servidor que deixa de vedar ao preso o acesso a aparelho telefônico ou de rádio.
+    apoio:
+    - artigos: CP art. 319
+      porque: 'Prevaricação: retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento
+        pessoal.'
+    - artigos: CP art. 320
+      porque: 'Condescendência criminosa: deixar de responsabilizar subordinado por indulgência.'
+    - artigos: CP art. 327
+      porque: Quem é funcionário público para fins penais, inclusive por equiparação.
   manha:
   - tipo: teoria
     duracao: 50
@@ -2542,7 +2939,23 @@ dias:
 - data: '2026-11-03'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
-  minima: 'Anki vencidos + 15 questões de: Defesa do Estado e segurança pública (arts. 136 a 144).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Defesa do Estado e segurança pública (arts. 136 a 144).'
+  essencial:
+    chave:
+    - artigos: CF art. 144, caput e VI
+      porque: Os órgãos da segurança pública, entre eles as polícias penais federal, estaduais e distrital (EC
+        104/2019).
+    - artigos: CF art. 144, § 5º-A
+      porque: Às polícias penais cabe a segurança dos estabelecimentos penais; ficam vinculadas ao órgão que administra
+        o sistema penal.
+    apoio:
+    - artigos: CF art. 136
+      porque: 'Estado de defesa: até 30 dias, prorrogável uma vez; prisão comunicada ao juiz; vedada a incomunicabilidade
+        do preso.'
+    - artigos: CF art. 137
+      porque: 'Estado de sítio: quando o de defesa é ineficaz, em comoção grave ou guerra.'
+    - artigos: CF art. 144, § 1º a § 8º
+      porque: 'A atribuição de cada órgão: PF, PRF, PC, PM, bombeiros e guardas municipais.'
   manha:
   - tipo: teoria
     duracao: 50
@@ -2627,8 +3040,20 @@ dias:
 - data: '2026-11-04'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Livramento condicional, monitoração e penas alternativas (arts. 131 a
-    170).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Livramento condicional, monitoração e penas alternativas (arts. 131 a 170).'
+  essencial:
+    chave:
+    - artigos: LEP arts. 131 e 132
+      porque: 'Livramento condicional: concedido pelo juiz, com condições obrigatórias.'
+    - artigos: LEP art. 140
+      porque: Quando o livramento é revogado.
+    - artigos: LEP arts. 146-B e 146-C
+      porque: 'Monitoração eletrônica: quando cabe e os deveres do monitorado.'
+    apoio:
+    - artigos: LEP arts. 147 e 148
+      porque: Execução das penas restritivas de direitos.
+    - artigos: LEP art. 156
+      porque: Suspensão condicional da pena (sursis).
   manha:
   - tipo: teoria
     duracao: 50
@@ -2721,7 +3146,21 @@ dias:
 - data: '2026-11-05'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
-  minima: 'Anki vencidos + 15 questões de: Regras de Mandela - parte 2 (regras 36 em diante).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Regras de Mandela - parte 2 (regras 36 em diante).'
+  essencial:
+    chave:
+    - artigos: Regras de Mandela 43 e 44
+      porque: Proibido o confinamento solitário indefinido ou prolongado (mais de 15 dias seguidos).
+    - artigos: Regras 47 a 49
+      porque: 'Instrumentos de restrição: quando podem e quando não podem ser usados.'
+    - artigos: Regras 50 a 53
+      porque: Revistas de presos e celas respeitando a dignidade.
+    apoio:
+    - artigos: Regras 58 a 63
+      porque: Contato com o mundo exterior e visitas.
+    - artigos: Regras 74 a 82
+      porque: O pessoal penitenciário.
+    aviso: Confira a numeração na edição em português do CNJ.
   manha:
   - tipo: teoria
     duracao: 50
@@ -2813,7 +3252,20 @@ dias:
 - data: '2026-11-06'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Anki vencidos + 15 questões de: Medida de segurança, incidentes e disposições finais (arts. 171 a 204).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Medida de segurança, incidentes e disposições finais (arts. 171 a 204).'
+  essencial:
+    chave:
+    - artigos: LEP art. 185
+      porque: 'Excesso ou desvio: ato praticado além dos limites da sentença, da lei ou do regulamento.'
+    - artigos: LEP art. 197
+      porque: Das decisões do juiz da execução cabe agravo, sem efeito suspensivo.
+    - artigos: LEP art. 199
+      porque: O emprego de algemas é disciplinado por decreto federal.
+    apoio:
+    - artigos: LEP arts. 175 e 176
+      porque: Cessação de periculosidade na medida de segurança.
+    - artigos: LEP art. 198
+      porque: Vedado expor o preso a inconveniente notoriedade.
   manha:
   - tipo: teoria
     duracao: 50
@@ -2906,7 +3358,7 @@ dias:
 - data: '2026-11-07'
   semana: 6
   reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana + Anki vencidos.
+  minima: Refaça 20 questões erradas da semana.
   manha:
   - tipo: raciocinio
     duracao: 50
