@@ -157,8 +157,57 @@ Depois disso, o lugar de olhar e a web:
 ```bash
 radar web                       # so nesta maquina
 radar web --porta 9000          # outra porta
-radar web --host 0.0.0.0        # abre tambem no celular, na mesma wi-fi
+radar web --rede                # abre tambem no celular, na mesma wi-fi
 ```
+
+### Abrir no celular
+
+O radar roda no PC; o celular so abre a pagina, pelo Wi-Fi de casa. Uma vez,
+no Windows:
+
+1. **Rede privada.** Configuracoes → Rede e Internet → Wi-Fi → a sua rede →
+   *Tipo de perfil de rede*: **Privada**. Em rede "Publica" o Windows fecha a
+   porta para o celular.
+2. **Subir com `--rede`:**
+
+   ```bash
+   radar web --rede
+   ```
+
+   Na primeira vez o Windows pergunta se o Python pode usar a rede: marque
+   **Redes privadas** e clique em **Permitir**. O radar mostra o endereco:
+
+   ```
+   Abra no celular (mesmo Wi-Fi): http://192.168.0.15:8000/hoje
+   ```
+
+   Se ele disser que nao achou o IP, rode `ipconfig` e use o "Endereco IPv4"
+   do adaptador Wi-Fi.
+3. **No celular**, conectado ao mesmo Wi-Fi, abra esse endereco. Vale salvar
+   na tela inicial.
+4. *(opcional)* **Fixar o IP do PC** no roteador (reserva de DHCP, "DHCP
+   reservation"), para o endereco nao mudar depois de reiniciar. O caminho
+   muda de roteador para roteador; costuma ficar em LAN → DHCP.
+5. **Se nao abrir**, crie a regra de firewall para a porta, so no perfil
+   Privado. No PowerShell **como administrador** (troque 8000 se usar outra
+   porta):
+
+   ```powershell
+   New-NetFirewallRule -DisplayName "Radar de Concursos (porta 8000)" -Direction Inbound -Protocol TCP -LocalPort 8000 -Action Allow -Profile Private
+   ```
+
+   Para desfazer: `Remove-NetFirewallRule -DisplayName "Radar de Concursos (porta 8000)"`.
+
+Os limites:
+
+- o PC precisa estar **ligado, com o `radar web --rede` rodando**;
+- so funciona **no Wi-Fi de casa** - fora dela, o celular nao enxerga o PC;
+- no celular **nao ha notificacao do cronometro**: o navegador so libera
+  notificacao em https (ou no proprio PC, pelo localhost). Fica o aviso na
+  tela e o som, com a pagina aberta;
+- o radar **nao tem senha**: qualquer pessoa conectada ao seu Wi-Fi consegue
+  abrir a pagina (e marcar coisas nela). Sem o `--rede`, ele so escuta no
+  proprio PC.
 
 ### A pagina web, aba por aba
 

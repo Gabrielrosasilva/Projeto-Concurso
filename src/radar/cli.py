@@ -22,6 +22,7 @@ from radar.util import (
     dias_ate,
     formatar_data,
     fuso_local,
+    ip_local,
     porta_ocupada,
     primeira_porta_livre,
 )
@@ -1610,12 +1611,26 @@ def _importar_simulados(origem: Path | None = None) -> None:
         )
 
 
+# Escutar em todas as placas de rede e o que deixa o celular chegar. So com
+# --rede (ou --host explicito): o padrao continua sendo so este PC.
+TODAS_AS_PLACAS = "0.0.0.0"  # noqa: S104 - so com --rede, escolha minha
+
+
+def host_do_servidor(rede: bool, host: str) -> str:
+    """Onde o servidor escuta: todas as placas com --rede, senao o --host."""
+    return TODAS_AS_PLACAS if rede else host
+
+
 @app.command()
 def web(
     porta: int = typer.Option(8000, help="Porta do servidor"),
     host: str = typer.Option(
         "127.0.0.1",
-        help="Use 0.0.0.0 para abrir tambem no celular, na mesma rede wi-fi",
+        help="Endereco onde escutar. Para o celular, prefira --rede",
+    ),
+    rede: bool = typer.Option(
+        False, "--rede",
+        help="Abre tambem no celular, na mesma rede Wi-Fi (escuta em 0.0.0.0)",
     ),
     recarregar: bool = typer.Option(
         False, help="Reinicia sozinho ao salvar arquivo (so para desenvolver)"
@@ -1623,6 +1638,8 @@ def web(
 ) -> None:
     """Sobe a interface web em http://localhost:8000"""
     import uvicorn
+
+    host = host_do_servidor(rede, host)
 
     if porta_ocupada(host, porta):
         # O erro cru do uvicorn (winerror 10048) nao diz o que fazer. Quase
@@ -1641,8 +1658,16 @@ def web(
         raise typer.Exit(code=1)
 
     console.print(f"\nRadar no ar em [bold cyan]http://localhost:{porta}[/]")
-    if host == "0.0.0.0":  # noqa: S104 - escolha explicita do usuario
-        console.print("Aberto na rede local: use o IP desta maquina no celular.")
+    if host == TODAS_AS_PLACAS:
+        ip = ip_local()
+        if ip:
+            console.print(f"Abra no celular (mesmo Wi-Fi): [bold cyan]http://{ip}:{porta}/hoje[/]")
+        else:
+            console.print(
+                "Aberto na rede, mas nao achei o IP deste PC. Rode [bold]ipconfig[/] "
+                f"e use o \"Endereco IPv4\" do Wi-Fi: http://<esse IP>:{porta}/hoje"
+            )
+        console.print("[dim]Sem senha: qualquer pessoa no seu Wi-Fi consegue abrir.[/]")
     console.print("Ctrl+C para parar.\n")
 
     # O modo recarregar fica DESLIGADO por padrao de proposito. Ele faz o

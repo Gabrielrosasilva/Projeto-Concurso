@@ -1842,3 +1842,25 @@ Os detalhes:
 - tudo em `servico.cronograma` (`sequencia` e `frase_da_semana`), contas
   puras com teste de data fingida; o template so escreve.
 
+### Abrir no celular: `radar web --rede` (etapa A7, 26/09/2026)
+
+- **e opt-in**: sem `--rede`, o servidor continua escutando so em
+  127.0.0.1, como sempre. Abrir para a rede e uma decisao de cada vez que eu
+  subo o radar, e nao um padrao - o notebook tambem entra em Wi-Fi que nao e
+  o de casa (cafe, rodoviaria), e ali o radar nao pode estar aberto por
+  descuido. O `--host` continua existindo; o `--rede` e o atalho com nome
+  claro, e e ele que mostra o endereco para o celular;
+- **nao ha login**, de proposito: o radar tem um usuario so, eu, e o que ele
+  guarda (concursos publicos, o meu diario de estudo) nao e segredo. Login
+  exigiria senha guardada, sessao e tela de entrada - manutencao que nao
+  compra nada numa rede de casa. O custo aceito, e escrito no README e na
+  propria saida do comando: qualquer pessoa no meu Wi-Fi consegue abrir. Se
+  um dia o radar sair de casa (internet, rede do trabalho), ai sim login
+  entra na conversa;
+- **o IP e descoberto sem ir a internet**: um socket UDP "conectado" a um
+  endereco privado so pergunta ao Windows por qual placa sairia o pacote -
+  nada e enviado. Sem rota, tenta o nome da maquina; sem nada, a saida manda
+  rodar `ipconfig`, em vez de chutar um endereco;
+- a regra de firewall do README e so do perfil **Privado**: em rede publica
+  a porta continua fechada mesmo com o `--rede`.
+

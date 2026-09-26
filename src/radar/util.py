@@ -97,6 +97,34 @@ def porta_ocupada(host: str, porta: int) -> bool:
         return tomada.connect_ex((alvo, porta)) == 0
 
 
+def ip_local() -> str | None:
+    """O IP deste PC na rede de casa (192.168..., 10...), ou None.
+
+    Sem ir a internet: um socket UDP "conectado" a um endereco privado so
+    pergunta ao sistema por qual placa sairia o pacote - nada e enviado. A
+    placa da rota padrao e, quase sempre, a do Wi-Fi. Se nao houver rota
+    (sem rede nenhuma), tenta o nome da maquina; sem nada util, None, e quem
+    chama manda rodar `ipconfig`.
+    """
+    import socket
+
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as tomada:
+            tomada.connect(("10.255.255.255", 1))
+            ip = tomada.getsockname()[0]
+        if ip and not ip.startswith(("127.", "0.")):
+            return ip
+    except OSError:
+        pass
+    try:
+        ip = socket.gethostbyname(socket.gethostname())
+        if ip and not ip.startswith(("127.", "0.")):
+            return ip
+    except OSError:
+        pass
+    return None
+
+
 def primeira_porta_livre(host: str, inicio: int, tentativas: int = 20) -> int | None:
     """A primeira porta livre a partir de `inicio`."""
     for porta in range(inicio, inicio + tentativas):
