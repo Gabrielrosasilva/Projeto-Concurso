@@ -68,9 +68,21 @@
   <p class="sub">O que estudar hoje, e por quê.</p>
 
   {# ---------------------------------- hoje no cronograma ---------------- #}
-  {# So em dia do ciclo; fora dele (antes, depois, sem arquivo) o cartao some. #}
+  {# Em dia do ciclo, e antes dele (para eu saber quando comeca). Depois do
+     fim, ou sem arquivo, o cartao some. #}
   {% set c = cronograma_hoje %}
-  {% if c.estado in ('dia', 'domingo') %}
+  {% if c.estado == 'antes' and c.outro_dia %}
+    {% set primeiro = c.outro_dia %}
+    {% set teoria = primeiro.manha | selectattr('tipo', 'equalto', 'teoria') | first %}
+    <section class="ds-cartao faixa cronograma-hoje" aria-label="Hoje no cronograma">
+      <span class="rotulo">📅 Cronograma</span>
+      <span class="texto">
+        <b>O {{ c.plano.titulo.split(' —')[0] }} começa {{ DIAS_LONGOS[primeiro.data.weekday()] | lower }}, {{ primeiro.data.strftime('%d/%m') }}</b>
+        {% if teoria %}· {{ teoria.materia }}: {{ teoria.titulo }}{% endif %}
+      </span>
+      <a class="ds-botao" href="/hoje?data={{ primeiro.data.isoformat() }}">Ver o primeiro dia &rarr;</a>
+    </section>
+  {% elif c.estado in ('dia', 'domingo') %}
     <section class="ds-cartao faixa cronograma-hoje" aria-label="Hoje no cronograma">
       <span class="rotulo">📅 Hoje no cronograma</span>
       <span class="texto">

@@ -195,11 +195,22 @@ def test_a_home_tem_o_cartao_do_dia(cliente, monkeypatch):
     assert "25 questões" in texto
 
 
-def test_a_home_no_domingo_e_fora_do_ciclo(cliente, monkeypatch):
+def test_a_home_no_domingo_e_depois_do_ciclo(cliente, monkeypatch):
     _parar_o_relogio(monkeypatch, 2026, 10, 4, 10, 0)
     assert "Hoje é descanso." in cliente.get("/").text
     _parar_o_relogio(monkeypatch, 2026, 12, 1, 10, 0)
-    assert "Hoje no cronograma" not in cliente.get("/").text
+    texto = cliente.get("/").text
+    assert "Hoje no cronograma" not in texto
+    assert "Ver o primeiro dia" not in texto and "Abrir o dia" not in texto
+
+
+def test_a_home_antes_do_ciclo_diz_quando_comeca(cliente, monkeypatch):
+    _parar_o_relogio(monkeypatch, 2026, 9, 26, 10, 0)
+    texto = cliente.get("/").text
+    assert "O Ciclo 1 começa segunda, 28/09" in texto
+    assert "Aplicação da lei penal (arts. 1º a 12)" in texto
+    assert 'href="/hoje?data=2026-09-28"' in texto
+    assert "Ver o primeiro dia" in texto
 
 
 def test_sem_javascript(cliente):

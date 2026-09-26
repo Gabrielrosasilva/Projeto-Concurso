@@ -1659,7 +1659,9 @@ Os detalhes:
   seis do sitemap e o cronograma na frente. Primeiro porque e a tela que eu
   abro todo dia: a especificacao pede saber o que estudar em um clique, e o
   cronograma responde isso com hora marcada. A home ganhou no topo o cartao
-  "Hoje no cronograma", pelo mesmo motivo, e ele some fora do ciclo;
+  "Hoje no cronograma", pelo mesmo motivo. Antes do ciclo ele diz quando
+  comeca e leva ao primeiro dia (sumir ali escondia justamente o que eu
+  preciso saber na vespera); depois do fim, some;
 - toda conta sai pronta de `servico.cronograma.tela_do_dia`; o template so
   desenha. O relogio mora em `servico.cronograma.agora_local`, um lugar so,
   para o teste poder parar o tempo;

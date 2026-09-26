@@ -373,7 +373,8 @@ descanso.
   os acertos. So hoje ou dia passado.
 
 A home (Meu foco) tem um cartao no topo com o que esta acontecendo agora e o
-botao **Abrir o dia**. Fora do ciclo ele some.
+botao **Abrir o dia**. Antes do ciclo ele diz quando comeca e leva ao
+primeiro dia; depois do fim, some.
 
 ### No terminal
 
