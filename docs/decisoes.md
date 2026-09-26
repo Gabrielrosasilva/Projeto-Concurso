@@ -1618,3 +1618,19 @@ numeros da regra moram em `gatilho` no YAML, e faltar um e erro de carga.
 - `radar hoje --data X` calcula o nivel com "hoje" = X: ver um dia passado
   mostra a carga que valia naquele dia. Consequencia esperada: sem marcacao
   nenhuma, a semana 1 fecha com 6 dias abaixo e a semana 2 repete o nivel 1.
+
+### A tela Hoje (etapa 4, 26/09/2026)
+
+- `/hoje` e o PRIMEIRO item da barra: a navegacao passou a ter 7 destinos, os
+  seis do sitemap e o cronograma na frente. A home ganhou no topo o cartao
+  "Hoje no cronograma", que some fora do ciclo;
+- toda conta sai pronta de `servico.cronograma.tela_do_dia`; o template so
+  desenha. O relogio mora em `servico.cronograma.agora_local`, um lugar so,
+  para o teste poder parar o tempo;
+- as cores por tipo de faixa sao tokens `--faixa-*` no design.css, apontando
+  para as cores que ja existiam. Tres hues novos (roxo, ciano, rosa) entraram
+  porque os selos ja gastam azul, verde, amarelo e vermelho com significado.
+  O registro do dia usa as cores dos selos: Ideal verde, Reduzida azul,
+  Minima amarela, Nao fiz vermelha;
+- recusa do formulario volta a tela com a mensagem e status 400, nunca 500.
+  Os campos numericos chegam como texto, pelo mesmo motivo do converter_valor.

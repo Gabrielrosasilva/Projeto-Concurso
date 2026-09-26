@@ -52,6 +52,7 @@
     .faixa .rotulo{font-weight:var(--peso-medio);white-space:nowrap}
     .faixa .texto{min-width:0;flex:1 1 300px;color:var(--cor-texto-suave)}
     .faixa .texto b{color:var(--cor-texto)}
+    .cronograma-hoje{margin-bottom:var(--esp-3)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -65,6 +66,31 @@
 <main class="home">
   <h1>Meu foco</h1>
   <p class="sub">O que estudar hoje, e por quê.</p>
+
+  {# ---------------------------------- hoje no cronograma ---------------- #}
+  {# So em dia do ciclo; fora dele (antes, depois, sem arquivo) o cartao some. #}
+  {% set c = cronograma_hoje %}
+  {% if c.estado in ('dia', 'domingo') %}
+    <section class="ds-cartao faixa cronograma-hoje" aria-label="Hoje no cronograma">
+      <span class="rotulo">📅 Hoje no cronograma</span>
+      <span class="texto">
+        {% if c.estado == 'domingo' %}
+          <b>Hoje é descanso.</b>
+        {% else %}
+          Semana {{ c.dia.semana }} · Nível {{ c.nivel.efetivo }} ·
+          {% if c.agora and c.agora.atual %}
+            agora: <b>{{ c.agora.atual.titulo }}</b> até {{ c.agora.atual.fim.strftime('%H:%M') }}
+          {% elif c.agora and c.agora.proxima %}
+            às {{ c.agora.proxima.inicio.strftime('%H:%M') }}: <b>{{ c.agora.proxima.titulo }}</b>
+          {% else %}
+            dia encerrado
+          {% endif %}
+          · <b>{{ c.dia.total_questoes }} questões</b> no dia
+        {% endif %}
+      </span>
+      <a class="ds-botao" href="/hoje">Abrir o dia &rarr;</a>
+    </section>
+  {% endif %}
 
   {% if not p.configurado %}
     <p class="ds-nota">Nenhum alvo principal em <code>config/alvo.yml</code>: a home inteira sai de lá.</p>

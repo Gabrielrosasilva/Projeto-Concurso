@@ -1,0 +1,413 @@
+<!doctype html>
+{% set tema = request.query_params.get('tema', '') %}
+<html lang="pt-br" data-tema="{{ tema }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Hoje &middot; Radar de Concursos</title>
+  {# A tela do cronograma: o que estudar no dia, a que horas, e onde eu marco
+     como foi. Toda conta (horario, nivel, faixa atual) vem pronta do
+     servico.cronograma.tela_do_dia; aqui so se desenha. Cor e espaco saem do
+     design.css - as cores por tipo de faixa sao as --faixa-*. #}
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    /* --- cabecalho --- */
+    .dia-cabeca{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--esp-3);flex-wrap:wrap;margin-bottom:var(--esp-4)}
+    .dia-cabeca h1{margin:0;font-size:var(--tam-xl);line-height:var(--linha-titulo);letter-spacing:-.02em}
+    .dia-cabeca .sub{margin:var(--esp-1) 0 0;color:var(--cor-texto-suave);font-size:var(--tam-sm);display:flex;gap:var(--esp-2);align-items:center;flex-wrap:wrap}
+    .navega{display:flex;gap:var(--esp-1);flex-wrap:wrap}
+    .navega a{text-decoration:none;font-size:var(--tam-sm);font-weight:var(--peso-medio);padding:var(--esp-1) var(--esp-3);
+      border:1px solid var(--cor-borda);border-radius:var(--raio-pill);background:var(--cor-superficie);color:var(--cor-texto-suave)}
+    .navega a:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
+    .navega a.hoje{background:var(--cor-acao-fundo);color:var(--cor-acao);border-color:transparent}
+    .chip-feriado{display:inline-block;padding:.1rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);
+      font-weight:var(--peso-forte);background:var(--cor-aviso-fundo);color:var(--cor-aviso);border:1px solid currentColor}
+
+    /* --- faixa da semana --- */
+    .semana{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--esp-2)}
+    .pilula{display:flex;flex-direction:column;align-items:center;gap:2px;padding:var(--esp-2) 0;text-decoration:none;
+      border-radius:var(--raio);border:2px solid transparent;font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      background:var(--cor-superficie-2);color:var(--cor-texto-suave)}
+    .pilula b{font-size:var(--tam-lg);font-variant-numeric:tabular-nums;line-height:1.1}
+    .ds a.pilula{color:var(--cor-texto-suave)}
+    .ds a.pilula.ideal   {background:var(--selo-calculado-fundo);  color:var(--selo-calculado)}
+    .ds a.pilula.reduzida{background:var(--selo-oficial-fundo);    color:var(--selo-oficial)}
+    .ds a.pilula.minima  {background:var(--selo-automatico-fundo); color:var(--selo-automatico)}
+    .ds a.pilula.nao_fiz {background:var(--selo-ia-fundo);         color:var(--selo-ia)}
+    .ds a.pilula.futuro  {background:transparent;border:2px dashed var(--cor-borda)}
+    .pilula.aberta{box-shadow:0 0 0 2px var(--cor-superficie),0 0 0 4px var(--cor-acao)}
+    .motivo{margin:var(--esp-3) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave);display:flex;gap:var(--esp-2);align-items:baseline;flex-wrap:wrap}
+
+    /* --- resumo em 3 numeros --- */
+    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--esp-3);margin-top:var(--esp-4)}
+    .resumo .ds-cartao{padding:var(--esp-3) var(--esp-4)}
+    .grande{display:block;font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1.1;font-variant-numeric:tabular-nums}
+    .resumo small{color:var(--cor-texto-suave);font-size:var(--tam-sm)}
+    .meta-prova{margin:var(--esp-2) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+
+    /* --- agora --- */
+    .agora{margin-top:var(--esp-4);background:var(--cor-acao-fundo);border-color:transparent}
+    .agora .rotulo{font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;color:var(--cor-acao)}
+    .agora .principal{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte)}
+    .agora .depois{margin:var(--esp-1) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+
+    /* --- os blocos e a linha do tempo --- */
+    .bloco-dia{margin-top:var(--esp-4);padding:var(--esp-4)}
+    .bloco-dia .ds-cartao__cabeca{margin-bottom:var(--esp-3)}
+    .bloco-dia .horas{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .linha-tempo{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-2)}
+    .faixa{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:var(--esp-3);align-items:start}
+    .faixa .quando{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave);padding-top:var(--esp-3);white-space:nowrap}
+    .faixa .corpo{--cor-tipo:var(--faixa-questoes);border-left:4px solid var(--cor-tipo);background:var(--cor-superficie-2);
+      border-radius:var(--raio-sm);padding:var(--esp-3) var(--esp-4);min-width:0}
+    .faixa .topo{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap;font-size:var(--tam-sm)}
+    .faixa .tipo{font-weight:var(--peso-forte);color:var(--cor-tipo)}
+    .faixa .materia{padding:.05rem .5rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto-suave)}
+    .faixa .titulo{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte);line-height:var(--linha-titulo)}
+    .faixa .qtd{margin:var(--esp-1) 0 0;font-size:var(--tam-lg);font-weight:var(--peso-forte);font-variant-numeric:tabular-nums;color:var(--cor-tipo)}
+    .faixa .chips{display:flex;gap:var(--esp-1);flex-wrap:wrap;margin-top:var(--esp-2)}
+    .chip{padding:.05rem .5rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      background:var(--cor-superficie);border:1px solid var(--cor-borda);color:var(--cor-texto-suave);white-space:nowrap}
+    .faixa .detalhe{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto)}
+    .faixa details{margin-top:var(--esp-2);font-size:var(--tam-sm)}
+    .faixa summary{cursor:pointer;color:var(--cor-acao);font-weight:var(--peso-medio)}
+    .faixa .filtro{margin:var(--esp-2) 0 0;font-family:var(--fonte-numero);font-size:var(--tam-xs);color:var(--cor-texto-suave);overflow-wrap:anywhere}
+    .faixa .links{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);display:flex;gap:var(--esp-3);flex-wrap:wrap}
+
+    .faixa.t-teoria .corpo{--cor-tipo:var(--faixa-teoria)}
+    .faixa.t-lei_seca .corpo{--cor-tipo:var(--faixa-lei-seca)}
+    .faixa.t-portugues .corpo{--cor-tipo:var(--faixa-portugues)}
+    .faixa.t-raciocinio .corpo{--cor-tipo:var(--faixa-raciocinio)}
+    .faixa.t-revisao .corpo,.faixa.t-revisao_semanal .corpo{--cor-tipo:var(--faixa-revisao)}
+    .faixa.t-simulado .corpo,.faixa.t-diagnostico .corpo{--cor-tipo:var(--faixa-simulado)}
+    .faixa.t-correcao .corpo{--cor-tipo:var(--faixa-correcao)}
+    .faixa.t-anki .corpo{--cor-tipo:var(--faixa-anki)}
+    .faixa.t-bonus .corpo{--cor-tipo:var(--faixa-bonus);border-left-style:dashed;background:transparent;border:1px dashed var(--cor-borda);border-left:4px dashed var(--cor-tipo)}
+
+    /* A pausa e so um respiro: linha fina, sem cartao. */
+    .faixa.t-pausa .quando{padding-top:0;font-size:var(--tam-xs)}
+    .faixa.t-pausa .corpo{background:transparent;border-left:2px solid var(--faixa-pausa);border-radius:0;padding:0 var(--esp-3);
+      font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+
+    /* No dia de hoje: a faixa atual acesa, as que passaram apagadas. */
+    .faixa.atual .corpo{background:var(--cor-acao-fundo)}
+    .faixa .selo-agora{font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;padding:.05rem .5rem;
+      border-radius:var(--raio-pill);background:var(--cor-acao);color:var(--cor-acao-texto)}
+    .faixa.passou{opacity:.55}
+
+    /* --- se o dia apertar --- */
+    .apertar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-3)}
+    .apertar h3{margin:0 0 var(--esp-1);font-size:var(--tam-sm)}
+    .apertar p{margin:0;font-size:var(--tam-sm)}
+
+    /* --- como foi o dia --- */
+    .metas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--esp-2);border:0;padding:0;margin:0 0 var(--esp-3)}
+    .metas legend{font-size:var(--tam-sm);color:var(--cor-texto-suave);margin-bottom:var(--esp-2);padding:0}
+    .opcao{position:relative}
+    .opcao input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+    .opcao > span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:4.5rem;text-align:center;
+      padding:var(--esp-2);border-radius:var(--raio);border:2px solid var(--cor-borda);background:var(--cor-superficie);
+      font-weight:var(--peso-medio);font-size:var(--tam-sm)}
+    .opcao > span small{font-weight:var(--peso-normal);color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .opcao > span .emoji{font-size:var(--tam-lg)}
+    .opcao input:focus-visible + span{outline:2px solid var(--cor-acao);outline-offset:2px}
+    .opcao input:checked + span{border-color:var(--cor-acao);background:var(--cor-acao-fundo)}
+    .opcao.ideal input:checked + span{border-color:var(--selo-calculado);background:var(--selo-calculado-fundo)}
+    .opcao.reduzida input:checked + span{border-color:var(--selo-oficial);background:var(--selo-oficial-fundo)}
+    .opcao.minima input:checked + span{border-color:var(--selo-automatico);background:var(--selo-automatico-fundo)}
+    .opcao.nao_fiz input:checked + span{border-color:var(--selo-ia);background:var(--selo-ia-fundo)}
+    .campos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-3);margin-bottom:var(--esp-3)}
+    .ds-campo textarea{width:100%;min-height:4rem;padding:var(--esp-2) var(--esp-3);border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
+      background:var(--cor-superficie);color:var(--cor-texto);font:inherit;font-size:var(--tam-base);resize:vertical}
+    fieldset.bloqueado{border:0;padding:0;margin:0;opacity:.5}
+    .erro{margin:0 0 var(--esp-3);padding:var(--esp-3) var(--esp-4);border-radius:var(--raio-sm);
+      background:var(--selo-ia-fundo);color:var(--selo-ia);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    .salvar{font-size:var(--tam-base);padding:var(--esp-3) var(--esp-5)}
+
+    /* --- estados vazios --- */
+    .vazio-grande{text-align:center;padding:var(--esp-7) var(--esp-5)}
+    .vazio-grande .emoji{font-size:3rem;line-height:1}
+    .vazio-grande h2{margin:var(--esp-3) 0 var(--esp-2);font-size:var(--tam-xl);letter-spacing:-.02em}
+    .vazio-grande p{margin:0;color:var(--cor-texto-suave)}
+
+    /* --- celular: uma coluna, horario em cima --- */
+    @media (max-width:640px){
+      .faixa{grid-template-columns:1fr;gap:var(--esp-1)}
+      .faixa .quando{padding-top:0}
+      .resumo{gap:var(--esp-2)}
+      .resumo .ds-cartao{padding:var(--esp-2) var(--esp-3)}
+      .grande{font-size:var(--tam-lg)}
+      .apertar,.campos{grid-template-columns:1fr}
+      .metas{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .semana{gap:var(--esp-1)}
+      .pilula b{font-size:var(--tam-md)}
+    }
+
+    /* --- impressao: so o plano do dia --- */
+    @media print{
+      .topo-barra,.navega,.como-foi,.agora{display:none !important}
+      .faixa.passou{opacity:1}
+      .ds-cartao{box-shadow:none}
+    }
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra %}
+{% from "_componentes.html" import selo %}
+{{ barra('hoje') }}
+
+{%- macro link_do_dia(d) -%}
+/hoje?data={{ d.isoformat() }}{% if tema %}&amp;tema={{ tema }}{% endif %}
+{%- endmacro -%}
+
+{%- macro dia_legivel(d) -%}
+{{ DIAS_LONGOS[d.weekday()] }}, {{ d.day }} de {{ MESES[d.month - 1] }}
+{%- endmacro -%}
+
+{%- macro resumo_da_faixa(f) -%}
+{{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}{% if f.materia %} · {{ f.materia }}{% endif %}{% if f.questoes %}, {{ f.questoes }} questões{% endif %}
+{%- endmacro -%}
+
+<main class="ds-pagina">
+
+  {# ============================ cabecalho ============================ #}
+  <header class="dia-cabeca">
+    <div>
+      <h1>{{ dia_legivel(t.data) }}</h1>
+      <p class="sub">
+        {% if t.plano %}{{ t.plano.titulo }}{% endif %}
+        {% if t.dia %} · Semana {{ t.dia.semana }} de {{ t.total_semanas }} · Nível {{ t.nivel.efetivo }}{% endif %}
+        {% if t.dia and t.dia.feriado %}<span class="chip-feriado">{{ t.dia.feriado }}</span>{% endif %}
+      </p>
+    </div>
+    <nav class="navega" aria-label="Outros dias">
+      <a href="{{ link_do_dia(t.anterior) }}">&larr; dia anterior</a>
+      <a class="{{ 'hoje' if t.e_hoje }}" href="/hoje{% if tema %}?tema={{ tema }}{% endif %}">Hoje</a>
+      <a href="{{ link_do_dia(t.proximo) }}">próximo dia &rarr;</a>
+    </nav>
+  </header>
+
+  {% if erro_de_data %}<p class="erro">{{ erro_de_data }}</p>{% endif %}
+
+  {# ============================ estados vazios ======================= #}
+  {% if t.estado == 'sem_arquivo' %}
+    <section class="ds-cartao vazio-grande">
+      <div class="emoji" aria-hidden="true">📄</div>
+      <h2>Falta o arquivo do cronograma</h2>
+      <p>Não achei <code>{{ t.mensagem }}</code>. A tela Hoje sai inteira dele.</p>
+    </section>
+
+  {% elif t.estado == 'erro' %}
+    <section class="ds-cartao vazio-grande">
+      <div class="emoji" aria-hidden="true">⚠️</div>
+      <h2>O cronograma tem um problema</h2>
+      <p>{{ t.mensagem }}</p>
+      <p class="ds-pequeno">Corrija o <code>config/cronograma.yml</code> e recarregue.</p>
+    </section>
+
+  {% elif t.estado == 'domingo' %}
+    <section class="ds-cartao vazio-grande">
+      <div class="emoji" aria-hidden="true">🌿</div>
+      <h2>Domingo é descanso total</h2>
+      <p>Sem estudo, sem Anki, sem questão.</p>
+      {% if t.outro_dia %}
+        {% set teoria = t.outro_dia.manha | selectattr('tipo', 'equalto', 'teoria') | first %}
+        {% set primeira = teoria or (t.outro_dia.faixas() | first) %}
+        {% if primeira %}
+          <p class="ds-pequeno" style="margin-top:var(--esp-4)">Amanhã: <a href="{{ link_do_dia(t.outro_dia.data) }}"><b>{{ primeira.titulo }}</b></a></p>
+        {% endif %}
+      {% endif %}
+    </section>
+
+  {% elif t.estado == 'antes' %}
+    <section class="ds-cartao vazio-grande">
+      <div class="emoji" aria-hidden="true">🚀</div>
+      <h2>O {{ t.plano.titulo.split(' —')[0] }} começa em {{ t.plano.inicio.strftime('%d/%m') }} ({{ DIAS_LONGOS[t.plano.inicio.weekday()] | lower }})</h2>
+      {% if t.outro_dia %}
+        {% set teoria = t.outro_dia.manha | selectattr('tipo', 'equalto', 'teoria') | first %}
+        <p>O primeiro dia: {% if teoria %}<b>{{ teoria.materia }} · {{ teoria.titulo }}</b> de manhã, e {% endif %}<b>{{ t.outro_dia.total_questoes }} questões</b> à noite.</p>
+        <p class="ds-pequeno" style="margin-top:var(--esp-4)"><a class="ds-botao" href="{{ link_do_dia(t.outro_dia.data) }}">Ver o primeiro dia &rarr;</a></p>
+      {% endif %}
+    </section>
+
+  {% elif t.estado == 'depois' %}
+    <section class="ds-cartao vazio-grande">
+      <div class="emoji" aria-hidden="true">🏁</div>
+      <h2>O {{ t.plano.titulo.split(' —')[0] }} terminou em {{ t.plano.fim.strftime('%d/%m') }}</h2>
+      <p>O Ciclo {{ (t.plano.ciclo or 0) + 1 }} entra quando o <code>config/cronograma.yml</code> for atualizado.</p>
+    </section>
+
+  {% elif t.estado == 'fora' %}
+    <section class="ds-cartao vazio-grande">
+      <div class="emoji" aria-hidden="true">🗓️</div>
+      <h2>Este dia não está no cronograma</h2>
+      <p>Ele cai dentro do ciclo, mas o <code>config/cronograma.yml</code> não tem nada para ele.</p>
+    </section>
+
+  {% else %}
+  {% set d = t.dia %}
+
+  {# ============================ faixa da semana ====================== #}
+  <nav class="semana" aria-label="Os dias desta semana">
+    {% for p in t.pilulas %}
+      {% set classe = 'futuro' if p.futuro else (p.meta or 'sem') %}
+      <a class="pilula {{ classe }} {{ 'aberta' if p.aberta }}" href="{{ link_do_dia(p.data) }}"
+         title="{{ p.data.strftime('%d/%m') }}: {{ META_LEGIVEL.get(p.meta, 'dia futuro' if p.futuro else 'sem marcação') }}"
+         {% if p.aberta %}aria-current="date"{% endif %}>
+        <span>{{ p.rotulo }}</span><b>{{ p.data.day }}</b>
+      </a>
+    {% endfor %}
+  </nav>
+  <p class="motivo">{{ selo('calculado') }} <span>{{ t.nivel.motivo }}</span></p>
+
+  {# ============================ resumo ================================ #}
+  <section class="resumo" aria-label="O dia em três números">
+    <div class="ds-cartao"><span class="grande">{{ duracao_legivel(d.minutos_de_estudo) }}</span><small>de estudo</small></div>
+    <div class="ds-cartao"><span class="grande">{{ d.total_questoes }}</span><small>questões</small></div>
+    <div class="ds-cartao"><small>termina às</small><span class="grande">{{ t.fim_do_dia.strftime('%H:%M') if t.fim_do_dia else '--' }}</span></div>
+  </section>
+  {% if t.plano.meta_da_prova.acertos %}
+    <p class="meta-prova">Meta da prova: {{ t.plano.meta_da_prova.acertos }} acertos</p>
+  {% endif %}
+
+  {# ============================ agora ================================= #}
+  {% if t.agora %}
+    {% set a = t.agora %}
+    <section class="ds-cartao agora" aria-live="polite">
+      <span class="rotulo">AGORA · {{ t.hora.strftime('%H:%M') }}</span>
+      {% if a.situacao == 'faixa' %}
+        <p class="principal">{{ a.atual.inicio.strftime('%H:%M') }}–{{ a.atual.fim.strftime('%H:%M') }} · {{ a.atual.titulo }}</p>
+        {% if a.proxima %}<p class="depois">depois: {{ resumo_da_faixa(a.proxima) }}, às {{ a.proxima.inicio.strftime('%H:%M') }}</p>{% endif %}
+      {% elif a.situacao == 'antes' and a.proxima %}
+        <p class="principal">Começa às {{ a.proxima.inicio.strftime('%H:%M') }} com {{ resumo_da_faixa(a.proxima) }}</p>
+        <p class="depois">{{ a.proxima.titulo }}</p>
+      {% elif a.situacao == 'entre' %}
+        <p class="principal">Próximo bloco às {{ a.proxima.inicio.strftime('%H:%M') }}: {{ resumo_da_faixa(a.proxima) }}</p>
+        <p class="depois">{{ a.proxima.titulo }}</p>
+      {% else %}
+        <p class="principal">Dia encerrado. Marque como foi lá embaixo.</p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  {# ============================ os tres blocos ======================== #}
+  {% for b in t.blocos if b.faixas %}
+    <section class="ds-cartao bloco-dia" aria-labelledby="bloco-{{ b.chave }}">
+      <div class="ds-cartao__cabeca">
+        <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
+        <span class="horas">{{ b.inicio.strftime('%H:%M') }} – {{ b.fim.strftime('%H:%M') }}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
+      </div>
+      <ol class="linha-tempo">
+        {% for f in b.faixas %}
+          {% set atual = t.agora and t.agora.atual is sameas f %}
+          {% set passou = t.hora and f.fim <= t.hora %}
+          <li class="faixa t-{{ f.tipo }} {{ 'atual' if atual }} {{ 'passou' if passou and not atual }}">
+            <span class="quando">{{ f.inicio.strftime('%H:%M') }} – {{ f.fim.strftime('%H:%M') }}</span>
+            {% if f.tipo == 'pausa' %}
+              <div class="corpo">{{ ICONE_DO_TIPO.pausa }} Pausa · {{ f.duracao }} min{% if f.detalhe %} · {{ f.detalhe }}{% endif %}</div>
+            {% else %}
+              <div class="corpo">
+                <div class="topo">
+                  {% if atual %}<span class="selo-agora">AGORA</span>{% endif %}
+                  <span class="tipo"><span aria-hidden="true">{{ ICONE_DO_TIPO[f.tipo] }}</span> {{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}</span>
+                  {% if f.materia %}<span class="materia">{{ f.materia }}</span>{% endif %}
+                </div>
+                <p class="titulo">{{ f.titulo }}</p>
+                {% if f.questoes %}<p class="qtd">{{ f.questoes }} questões</p>{% endif %}
+
+                {% if f.onde or f.cronometrado or f.opcional or f.baralho %}
+                  <div class="chips">
+                    {% if f.onde %}<span class="chip">{{ ONDE_LEGIVEL.get(f.onde, f.onde) }}</span>{% endif %}
+                    {% if f.cronometrado %}<span class="chip">⏱ cronometrado</span>{% endif %}
+                    {% if f.opcional %}<span class="chip">opcional · fora do total</span>{% endif %}
+                    {% if f.baralho %}<span class="chip">🃏 {{ f.baralho }}</span>{% endif %}
+                  </div>
+                {% endif %}
+
+                {% if f.origem %}<p class="detalhe ds-suave">volta do dia {{ f.origem | dia_mes }}</p>{% endif %}
+
+                {% if f.detalhe %}
+                  {% if f.tipo in DETALHE_ABERTO %}
+                    <p class="detalhe">{{ f.detalhe }}</p>
+                  {% else %}
+                    <details><summary>ver detalhe</summary><p class="detalhe">{{ f.detalhe }}</p></details>
+                  {% endif %}
+                {% endif %}
+
+                {% if f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
+                {% if f.link %}<p class="links"><a href="{{ f.link }}" target="_blank" rel="noopener">ler a lei ↗</a></p>{% endif %}
+              </div>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+  {% endfor %}
+
+  {# ============================ se o dia apertar ====================== #}
+  {% if d.reduzida or d.minima %}
+    <section class="ds-cartao bloco-dia">
+      <div class="ds-cartao__cabeca"><h2 class="ds-cartao__titulo">Se o dia apertar</h2></div>
+      <div class="apertar">
+        <div class="ds-bloco ds-bloco--oficial" style="margin-top:0"><h3>🟦 Reduzida</h3><p>{{ d.reduzida or '—' }}</p></div>
+        <div class="ds-bloco ds-bloco--automatico" style="margin-top:0"><h3>🟨 Mínima</h3><p>{{ d.minima or '—' }}</p></div>
+      </div>
+    </section>
+  {% endif %}
+
+  {# ============================ como foi o dia ======================== #}
+  {% set r = t.registro %}
+  {% set valores = form or {
+      'meta': r.meta if r else '',
+      'questoes_feitas': r.questoes_feitas if r and r.questoes_feitas is not none else '',
+      'acertos': r.acertos if r and r.acertos is not none else '',
+      'anotacao': (r.anotacao or '') if r else '' } %}
+  <section class="ds-cartao bloco-dia como-foi" id="como-foi">
+    <div class="ds-cartao__cabeca">
+      <h2 class="ds-cartao__titulo">{% if r %}Editar o registro de {{ t.data.strftime('%d/%m') }}{% else %}Como foi o dia{% endif %}</h2>
+    </div>
+    <p class="ds-cartao__meta">O que eu anoto aqui é o diário do cronograma: não entra em nenhum acerto medido do radar.</p>
+
+    {% if erro %}<p class="erro" role="alert">{{ erro }}</p>{% endif %}
+
+    {% if t.futuro %}
+      <p class="ds-nota">Só dá para marcar hoje ou um dia que já passou.</p>
+    {% endif %}
+
+    <form method="post" action="/hoje/registrar{% if tema %}?tema={{ tema }}{% endif %}">
+      <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+      <fieldset {% if t.futuro %}disabled class="bloqueado"{% endif %} style="border:0;padding:0;margin:0">
+        <fieldset class="metas">
+          <legend>Qual meta eu cumpri?</legend>
+          {% for valor, emoji, rotulo, explica in OPCOES_DE_META %}
+            <label class="opcao {{ valor }}">
+              <input type="radio" name="meta" value="{{ valor }}" {% if valores.meta == valor %}checked{% endif %}>
+              <span><span class="emoji" aria-hidden="true">{{ emoji }}</span>{{ rotulo }}<small>{{ explica }}</small></span>
+            </label>
+          {% endfor %}
+        </fieldset>
+        <div class="campos">
+          <label class="ds-campo">Questões feitas
+            <input type="number" name="questoes_feitas" min="0" inputmode="numeric" value="{{ valores.questoes_feitas }}">
+          </label>
+          <label class="ds-campo">Acertos
+            <input type="number" name="acertos" min="0" inputmode="numeric" value="{{ valores.acertos }}">
+          </label>
+        </div>
+        <label class="ds-campo" style="margin-bottom:var(--esp-3)">Anotação (opcional)
+          <textarea name="anotacao" maxlength="2000">{{ valores.anotacao }}</textarea>
+        </label>
+        <button class="ds-botao salvar" type="submit">Salvar</button>
+        {% if r %}<span class="ds-pequeno ds-suave">&nbsp; anotado em {{ r.anotado_em | data }}</span>{% endif %}
+      </fieldset>
+    </form>
+  </section>
+  {% endif %}
+
+</main>
+</body>
+</html>

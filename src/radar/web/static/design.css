@@ -83,6 +83,12 @@
   --sombra:    0 1px 2px rgba(16, 24, 40, .05);
   --sombra-alta: 0 8px 24px rgba(16, 24, 40, .12);
 
+  /* Tres cores a mais, so para distinguir tipos de faixa do cronograma: os
+     selos ja gastam azul, verde, amarelo e vermelho com significado. */
+  --cor-roxo:  #6d28d9;
+  --cor-ciano: #0e7490;
+  --cor-rosa:  #be185d;
+
   /* Largura da coluna de leitura. */
   --largura-pagina: 860px;
 }
@@ -115,6 +121,9 @@
     --selo-ia-fundo:         #2e1515;
     --cor-aviso:        #fdba74;
     --cor-aviso-fundo:  #2f1c0c;
+    --cor-roxo:  #c4b5fd;
+    --cor-ciano: #67e8f9;
+    --cor-rosa:  #f9a8d4;
     --sombra:    0 1px 2px rgba(0, 0, 0, .4);
     --sombra-alta: 0 8px 24px rgba(0, 0, 0, .5);
   }
@@ -141,6 +150,9 @@
   --selo-ia-fundo:         #2e1515;
   --cor-aviso:        #fdba74;
   --cor-aviso-fundo:  #2f1c0c;
+  --cor-roxo:  #c4b5fd;
+  --cor-ciano: #67e8f9;
+  --cor-rosa:  #f9a8d4;
   --sombra:    0 1px 2px rgba(0, 0, 0, .4);
   --sombra-alta: 0 8px 24px rgba(0, 0, 0, .5);
 }
@@ -159,6 +171,26 @@
   --borda:       var(--cor-borda);
   --azul:        var(--cor-acao);
   --azul-fraco:  var(--cor-acao-fundo);
+}
+
+
+/* --- cores do cronograma -------------------------------------------------- */
+/* Uma cor por tipo de faixa, sempre a mesma: bato o olho e sei se e teoria ou
+   questao. Apontam para as cores de cima, entao o modo escuro vem junto. E o
+   registro do dia usa as cores dos selos: Ideal verde, Reduzida azul, Minima
+   amarela, Nao fiz vermelha. */
+:root {
+  --faixa-teoria:     var(--selo-oficial);
+  --faixa-lei-seca:   var(--cor-aviso);
+  --faixa-portugues:  var(--selo-calculado);
+  --faixa-raciocinio: var(--cor-roxo);
+  --faixa-questoes:   var(--cor-acao);
+  --faixa-revisao:    var(--cor-rosa);
+  --faixa-simulado:   var(--selo-ia);
+  --faixa-correcao:   var(--selo-automatico);
+  --faixa-anki:       var(--cor-ciano);
+  --faixa-bonus:      var(--cor-texto-suave);
+  --faixa-pausa:      var(--cor-borda);
 }
 
 

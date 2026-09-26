@@ -163,13 +163,14 @@ def test_os_grids_declaram_coluna_que_encolhe(cliente):
 
 
 # --- a navegacao do topo ---------------------------------------------------
-# Os seis destinos do sitemap da especificacao. A barra e a mesma em toda
-# pagina: antes cada uma tinha so um "voltar ao radar", e nao dava para pular
-# de Macetes para Calendario sem passar pela home.
+# Os seis destinos do sitemap da especificacao, e o Hoje (o cronograma) na
+# frente deles. A barra e a mesma em toda pagina: antes cada uma tinha so um
+# "voltar ao radar", e nao dava para pular de Macetes para Calendario sem
+# passar pela home.
 
-def test_a_barra_do_topo_tem_os_seis_destinos(cliente):
+def test_a_barra_do_topo_tem_os_sete_destinos(cliente):
     texto = cliente.get("/concursos").text
-    for rotulo, destino in (("Meu foco", "/"), ("Estudar", "/estudar"),
+    for rotulo, destino in (("Hoje", "/hoje"), ("Meu foco", "/"), ("Estudar", "/estudar"),
                             ("Revisão", "/revisao"), ("Análises", "/analises"),
                             ("Concursos", "/concursos"), ("Mais", "/mais")):
         assert rotulo in texto, rotulo

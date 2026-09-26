@@ -100,7 +100,8 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
 **Pronto:** o radar (fases 1-15 do historico) e, da especificacao, a auditoria
 (`radar auditar`, lida na tela Mais), o design system com os 6 selos, a navegacao
-de 6 destinos e a home de 3 blocos, tela de questao e relatorio, so meus erros,
+de 7 destinos e a home de 3 blocos, o cronograma de estudo (tela Hoje e
+`radar hoje`: horario, diario e o nivel que sobe e desce), tela de questao e relatorio, so meus erros,
 compilado 40/50/100 pelos pesos do edital, revisao espacada 1-7-30, descartar
 simulado, backup dos simulados, IA sem pagar (`gerar --pedido`) e Macetes.
 **Falta:** conferir a lista de leis alteradas (`config/leis.yml`), migrar as

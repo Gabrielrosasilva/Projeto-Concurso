@@ -1772,16 +1772,6 @@ def sincronizar(
     )
 
 
-# O nome do tipo na tela. O cru (lei_seca) e para o arquivo.
-TIPO_LEGIVEL = {
-    "teoria": "Teoria", "lei_seca": "Lei seca", "portugues": "Português",
-    "raciocinio": "Raciocínio", "pausa": "Pausa", "questoes": "Questões",
-    "revisao": "Revisão", "revisao_semanal": "Revisão semanal",
-    "correcao": "Correção", "simulado": "Simulado",
-    "diagnostico": "Diagnóstico", "anki": "Anki", "bonus": "Bônus",
-}
-
-
 @app.command()
 def hoje(
     data: str = typer.Option(None, help="Outro dia, em AAAA-MM-DD (padrao: hoje)"),
@@ -1867,7 +1857,7 @@ def hoje(
             continue
         console.print(f"\n[bold cyan]{escape(plano.blocos[chave].nome)}[/]")
         for faixa in faixas:
-            partes = [TIPO_LEGIVEL[faixa.tipo]]
+            partes = [cronograma.TIPO_LEGIVEL[faixa.tipo]]
             if faixa.rotulo:
                 partes[0] = faixa.rotulo
             if faixa.materia:

@@ -1,7 +1,9 @@
 {# A barra de navegacao do topo, igual em todas as paginas.
 
-   Os seis destinos do sitemap da especificacao (docs/especificacao.md):
+   Os sete destinos: os seis do sitemap da especificacao
+   (docs/especificacao.md) e, na frente deles, o cronograma do dia:
 
+     Hoje      - o que estudar hoje, a que horas, e onde marco como foi
      Meu foco  - a home: o alvo, o que estudar agora, o que revisar
      Estudar   - treinar: Simulado e Gerar questoes
      Revisao   - Macetes (e, quando existirem, pegadinhas e assuntos)
@@ -14,13 +16,14 @@
        {% from "_topo.html" import barra %}
        {{ barra('concursos') }}
 
-   O parametro e qual destino fica aceso: foco, estudar, revisao, analises,
-   concursos, mais. #}
+   O parametro e qual destino fica aceso: hoje, foco, estudar, revisao,
+   analises, concursos, mais. #}
 
 {% macro barra(ativo='') %}
 <nav class="topo-barra" aria-label="Navegacao principal">
   <a class="marca" href="/">Radar</a>
 
+  <a class="item {{ 'ativo' if ativo == 'hoje' }}" href="/hoje">📅 Hoje</a>
   <a class="item {{ 'ativo' if ativo == 'foco' }}" href="/">🎯 Meu foco</a>
   <a class="item {{ 'ativo' if ativo == 'estudar' }}" href="/estudar">📚 Estudar</a>
   <a class="item {{ 'ativo' if ativo == 'revisao' }}" href="/revisao">🧠 Revisão</a>

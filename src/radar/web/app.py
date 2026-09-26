@@ -16,6 +16,7 @@ from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
 from radar import auditoria
 from radar import config
+from radar import cronograma
 from radar import leis
 from radar import onde_estudar
 from radar import regioes
@@ -119,6 +120,43 @@ templates.env.filters["numero"] = onde_estudar.numero
 # faz a conta - e nao com um 5 escrito no template.
 templates.env.globals["MINIMO_NA_MATERIA"] = onde_estudar.MINIMO_NA_MATERIA
 templates.env.globals["MINIMO_NO_ASSUNTO"] = onde_estudar.MINIMO_NO_ASSUNTO
+
+
+# --- a tela Hoje (o cronograma) ---------------------------------------------
+# Os nomes que a tela mostra. O cru (qconcursos, nao_fiz) e o do arquivo e do
+# banco; aqui ele vira gente.
+ONDE_LEGIVEL = {"qconcursos": "Qconcursos", "radar": "Radar", "videoaula": "Videoaula"}
+META_LEGIVEL = {"ideal": "Ideal", "reduzida": "Reduzida", "minima": "Mínima",
+                "nao_fiz": "Não fiz"}
+# (valor, emoji, rotulo, explicacao) dos quatro botoes do "Como foi o dia".
+OPCOES_DE_META = [
+    ("ideal", "✅", "Ideal", "dia completo"),
+    ("reduzida", "🟦", "Reduzida", "manhã + parte da noite"),
+    ("minima", "🟨", "Mínima", "Anki + poucas questões"),
+    ("nao_fiz", "❌", "Não fiz", "o dia zerou"),
+]
+# O detalhe destas faixas e o que estudar, artigo por artigo: fica aberto. O
+# das outras (questoes, correcao...) e instrucao, e fica num "ver detalhe".
+DETALHE_ABERTO = {"teoria", "lei_seca", "portugues", "raciocinio"}
+DIAS_LONGOS = ("Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo")
+
+templates.env.globals.update(
+    ONDE_LEGIVEL=ONDE_LEGIVEL, META_LEGIVEL=META_LEGIVEL,
+    OPCOES_DE_META=OPCOES_DE_META, DETALHE_ABERTO=DETALHE_ABERTO,
+    DIAS_LONGOS=DIAS_LONGOS, MESES=cronograma.MESES,
+    TIPO_LEGIVEL=cronograma.TIPO_LEGIVEL, ICONE_DO_TIPO=cronograma.ICONE_DO_TIPO,
+    duracao_legivel=cronograma.duracao_legivel,
+)
+
+
+def _dia_mes(valor) -> str:
+    """'2026-09-28' ou date -> '28/09'. A origem da revisao vem como texto."""
+    if isinstance(valor, str):
+        valor = date.fromisoformat(valor)
+    return valor.strftime("%d/%m")
+
+
+templates.env.filters["dia_mes"] = _dia_mes
 
 
 def _url_base_sem(request: Request, *parametros: str) -> str:
@@ -699,9 +737,91 @@ def meu_foco(request: Request):
         context={
             "h": servico.inicio.montar(),
             "hoje": date.today(),
+            # O cartao "Hoje no cronograma": so aparece em dia do ciclo.
+            "cronograma_hoje": servico.cronograma.tela_do_dia(),
             "questoes_do_treino": foco_do_alvo.QUESTOES_DO_TREINO,
         },
     )
+
+
+@app.get("/hoje", response_class=HTMLResponse)
+def hoje(request: Request, data: str | None = None):
+    """O dia do cronograma: horario, materia, questoes, e onde marco como foi."""
+    return _pagina_de_hoje(request, data)
+
+
+def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
+                    form: dict | None = None, status: int = 200):
+    quando = erro_de_data = None
+    if data:
+        try:
+            quando = date.fromisoformat(data)
+        except ValueError:
+            erro_de_data = f"Data inválida: {data!r}. Use AAAA-MM-DD; mostrando hoje."
+    return templates.TemplateResponse(
+        request=request,
+        name="hoje.html",
+        status_code=status,
+        context={
+            "t": servico.cronograma.tela_do_dia(quando),
+            "erro": erro,
+            "erro_de_data": erro_de_data,
+            "form": form,
+        },
+    )
+
+
+def _inteiro(texto: str, campo: str) -> int | None:
+    """Campo numerico do formulario: vazio vira None, lixo vira recusa."""
+    texto = (texto or "").strip()
+    if not texto:
+        return None
+    try:
+        return int(texto)
+    except ValueError:
+        raise servico.cronograma.RegistroInvalido(
+            f"{campo} precisa ser um número inteiro (veio {texto!r})"
+        )
+
+
+@app.post("/hoje/registrar")
+def hoje_registrar(
+    request: Request,
+    data: str = Form(""),
+    meta: str = Form(""),
+    questoes_feitas: str = Form(""),
+    acertos: str = Form(""),
+    anotacao: str = Form(""),
+):
+    """Grava como foi o dia e volta para ele. Recusa aparece na tela, sem 500.
+
+    Os campos chegam como TEXTO, pela mesma razao do converter_valor: o
+    formulario manda o campo vazio, e declarar `int` faria o vazio virar 422.
+    """
+    form = {"meta": meta, "questoes_feitas": questoes_feitas,
+            "acertos": acertos, "anotacao": anotacao}
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro=f"Data inválida: {data!r}.",
+                               form=form, status=400)
+    try:
+        if not meta:
+            raise servico.cronograma.RegistroInvalido(
+                "Escolha como foi o dia: Ideal, Reduzida, Mínima ou Não fiz."
+            )
+        servico.cronograma.registrar(
+            quando, meta,
+            _inteiro(questoes_feitas, "Questões feitas"),
+            _inteiro(acertos, "Acertos"),
+            anotacao.strip() or None,
+        )
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro=str(erro), form=form, status=400)
+
+    tema = request.query_params.get("tema")
+    destino = f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    return RedirectResponse(destino, status_code=303)
 
 
 @app.post("/revisao/hoje")

@@ -30,10 +30,27 @@ TIPOS = {
     "anki", "bonus",
 }
 
+# O nome e o icone do tipo na tela, no terminal e na web. O cru (lei_seca) e
+# para o arquivo.
+TIPO_LEGIVEL = {
+    "teoria": "Teoria", "lei_seca": "Lei seca", "portugues": "Português",
+    "raciocinio": "Raciocínio", "pausa": "Pausa", "questoes": "Questões",
+    "revisao": "Revisão", "revisao_semanal": "Revisão semanal",
+    "correcao": "Correção", "simulado": "Simulado",
+    "diagnostico": "Diagnóstico", "anki": "Anki", "bonus": "Bônus",
+}
+ICONE_DO_TIPO = {
+    "teoria": "📖", "lei_seca": "⚖️", "portugues": "✍️", "raciocinio": "🧩",
+    "pausa": "☕", "questoes": "🎯", "revisao": "🔁", "revisao_semanal": "🗂️",
+    "correcao": "📝", "simulado": "🏁", "diagnostico": "🩺", "anki": "🃏",
+    "bonus": "⭐",
+}
+
 # Arredondamento da duracao das faixas de questoes. 15 questoes x 2,5 min dao
 # 37,5 min; ninguem marca 18:37, entao vira 40.
 ARREDONDA_MINUTOS = 5
 
+DIAS_CURTOS = ("Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom")
 DIAS_DA_SEMANA = ("segunda-feira", "terça-feira", "quarta-feira",
                   "quinta-feira", "sexta-feira", "sábado", "domingo")
 MESES = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
@@ -459,6 +476,14 @@ def niveis(plano: Plano, metas: dict[date, str], hoje: date) -> dict[int, Nivel]
             alguma_aberta = True
 
     return resultado
+
+
+def duracao_legivel(minutos: int) -> str:
+    """120 -> '2h', 110 -> '1h50', 40 -> '40 min'."""
+    horas, resto = divmod(minutos, 60)
+    if not horas:
+        return f"{resto} min"
+    return f"{horas}h{resto:02d}" if resto else f"{horas}h"
 
 
 def data_por_extenso(data: date) -> str:
