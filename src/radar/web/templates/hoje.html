@@ -86,7 +86,8 @@
     .bloco-dia .nome-do-bloco{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
     .bloco-dia .horas{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
     .linha-tempo{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-2)}
-    .faixa{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:var(--esp-3);align-items:start}
+    .faixa{display:grid;grid-template-columns:7.5rem minmax(0,1fr) auto;gap:var(--esp-3);align-items:start;
+      scroll-margin-top:5rem}
     .faixa .quando{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave);padding-top:var(--esp-3);white-space:nowrap;
       display:flex;flex-direction:column;align-items:flex-start;gap:var(--esp-1)}
     .faixa .corpo{--cor-tipo:var(--faixa-questoes);border-left:4px solid var(--cor-tipo);background:var(--cor-superficie-2);
@@ -133,6 +134,19 @@
       border-radius:var(--raio-pill);background:var(--selo-calculado);color:var(--cor-superficie)}
     .faixa.passou{opacity:.55}
 
+    /* --- o circulo de cada faixa: marca e desmarca, sem JavaScript --- */
+    .marca-faixa{margin:0;padding-top:var(--esp-2)}
+    .circulo{width:2.5rem;height:2.5rem;border-radius:50%;border:2px solid var(--cor-borda);background:var(--cor-superficie);
+      color:transparent;font:inherit;font-size:var(--tam-lg);font-weight:var(--peso-forte);line-height:1;cursor:pointer;
+      display:grid;place-items:center;padding:0}
+    .circulo:hover{border-color:var(--selo-calculado);color:var(--selo-calculado)}
+    .circulo:focus-visible{outline:2px solid var(--cor-acao);outline-offset:2px}
+    .faixa.feita .circulo{background:var(--selo-calculado);border-color:var(--selo-calculado);color:var(--cor-superficie)}
+    /* Feita: o conteudo apaga e o titulo e riscado, mas continua legivel -
+       ainda posso querer ler o detalhe. */
+    .faixa.feita .corpo{opacity:.55}
+    .faixa.feita .titulo{text-decoration:line-through}
+
     /* --- o bloco das 18h: azul leve --- */
     .bloco-dia.bloco-noite{background:var(--fundo-noite)}
 
@@ -147,6 +161,8 @@
     .bloco-pos22 .faixa .materia,.bloco-pos22 .chip{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda);color:var(--sobreaviso-texto)}
     .ds .bloco-pos22 a,.bloco-pos22 .faixa summary{color:var(--sobreaviso-destaque)}
     .ds .bloco-pos22 a.botao-lei{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda)}
+    .bloco-pos22 .faixa:not(.feita) .circulo{background:var(--sobreaviso-superficie);border-color:var(--sobreaviso-borda)}
+    .bloco-pos22 .faixa:not(.feita) .circulo:hover{border-color:var(--sobreaviso-destaque);color:var(--sobreaviso-destaque)}
     .etiqueta-sobreaviso{padding:.1rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
       background:var(--sobreaviso-superficie);border:1px solid var(--sobreaviso-borda);color:var(--sobreaviso-texto);white-space:nowrap}
 
@@ -166,7 +182,14 @@
     .opcao > span small{font-weight:var(--peso-normal);color:var(--cor-texto-suave);font-size:var(--tam-xs)}
     .opcao > span .emoji{font-size:var(--tam-lg)}
     .opcao input:focus-visible + span{outline:2px solid var(--cor-acao);outline-offset:2px}
-    .opcao input:checked + span{border-color:var(--cor-acao);background:var(--cor-acao-fundo)}
+    /* A opcao que os checks sugerem: borda tracejada na cor dela. So
+       destaca - quem marca e salva sou eu. */
+    .opcao.sugerida > span{border-style:dashed}
+    .opcao.ideal.sugerida > span{border-color:var(--selo-calculado)}
+    .opcao.reduzida.sugerida > span{border-color:var(--selo-oficial)}
+    .opcao.minima.sugerida > span{border-color:var(--selo-automatico)}
+    .sugestao{margin:0 0 var(--esp-2);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    .opcao input:checked + span{border-style:solid;border-color:var(--cor-acao);background:var(--cor-acao-fundo)}
     .opcao.ideal input:checked + span{border-color:var(--selo-calculado);background:var(--selo-calculado-fundo)}
     .opcao.reduzida input:checked + span{border-color:var(--selo-oficial);background:var(--selo-oficial-fundo)}
     .opcao.minima input:checked + span{border-color:var(--selo-automatico);background:var(--selo-automatico-fundo)}
@@ -189,7 +212,8 @@
     @media (max-width:640px){
       .heroi__dentro{padding:var(--esp-5) var(--esp-4) var(--esp-4)}
       .heroi h1{font-size:var(--tam-xl)}
-      .faixa{grid-template-columns:1fr;gap:var(--esp-1)}
+      .faixa{grid-template-columns:minmax(0,1fr) auto;gap:var(--esp-1) var(--esp-2)}
+      .faixa .quando{grid-column:1 / -1}
       .faixa .quando{padding-top:0;flex-direction:row;align-items:center}
       .resumo{gap:var(--esp-2)}
       .resumo .ds-cartao{padding:var(--esp-2) var(--esp-3)}
@@ -327,6 +351,7 @@
   <main class="principal">
 
   {% if erro_de_data %}<p class="erro">{{ erro_de_data }}</p>{% endif %}
+  {% if erro_da_faixa %}<p class="erro" role="alert">{{ erro_da_faixa }}</p>{% endif %}
 
   {# ============================ estados vazios ======================= #}
   {% if t.estado == 'sem_arquivo' %}
@@ -407,7 +432,9 @@
         {% for f in b.faixas %}
           {% set atual = t.agora and t.agora.atual is sameas f %}
           {% set passou = t.hora and f.fim <= t.hora %}
-          <li class="faixa t-{{ f.tipo }} {{ 'atual' if atual }} {{ 'passou' if passou and not atual }}">
+          {% set feita = (b.chave, loop.index0) in t.feitas %}
+          <li class="faixa t-{{ f.tipo }} {{ 'atual' if atual }} {{ 'passou' if passou and not atual }} {{ 'feita' if feita }}"
+              id="faixa-{{ b.chave }}-{{ loop.index0 }}">
             <span class="quando">
               <span>{{ hm(f.inicio) }} – {{ hm(f.fim) }}</span>
               {% if atual %}<span class="etiqueta-agora">AGORA</span>{% endif %}
@@ -445,6 +472,19 @@
                 {% if f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
                 {% if f.link %}<p class="links"><a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a></p>{% endif %}
               </div>
+              {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito. #}
+              {% if not t.futuro %}
+                <form class="marca-faixa" method="post" action="/hoje/faixa{% if tema %}?tema={{ tema }}{% endif %}">
+                  <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                  <input type="hidden" name="bloco" value="{{ b.chave }}">
+                  <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                  <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                  <button class="circulo" type="submit"
+                          title="{{ 'Desmarcar' if feita else 'Marcar como feita' }}"
+                          aria-label="{{ 'Desmarcar' if feita else 'Marcar como feita' }}: {{ f.titulo }}"
+                          aria-pressed="{{ 'true' if feita else 'false' }}">✓</button>
+                </form>
+              {% endif %}
             {% endif %}
           </li>
         {% endfor %}
@@ -465,9 +505,13 @@
 
   {# ============================ como foi o dia ======================== #}
   {% set r = t.registro %}
+  {% set s = t.sugestao %}
+  {# Sem registro salvo, "questoes feitas" chega com a soma das faixas
+     marcadas. Depois de salvo, vale o que eu salvei. #}
   {% set valores = form or {
       'meta': r.meta if r else '',
-      'questoes_feitas': r.questoes_feitas if r and r.questoes_feitas is not none else '',
+      'questoes_feitas': (r.questoes_feitas if r.questoes_feitas is not none else '') if r
+                         else (s.questoes if s and s.questoes else ''),
       'acertos': r.acertos if r and r.acertos is not none else '',
       'anotacao': (r.anotacao or '') if r else '' } %}
   <section class="ds-cartao bloco-dia como-foi" id="como-foi">
@@ -485,10 +529,13 @@
     <form method="post" action="/hoje/registrar{% if tema %}?tema={{ tema }}{% endif %}">
       <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
       <fieldset {% if t.futuro %}disabled class="bloqueado"{% endif %} style="border:0;padding:0;margin:0">
+        {% if s and s.meta %}
+          <p class="sugestao">Sugestão: {{ META_LEGIVEL[s.meta] }} ({{ s.feitas }} de {{ s.total }} faixas)</p>
+        {% endif %}
         <fieldset class="metas">
           <legend>Qual meta eu cumpri?</legend>
           {% for valor, emoji, rotulo, explica in OPCOES_DE_META %}
-            <label class="opcao {{ valor }}">
+            <label class="opcao {{ valor }} {{ 'sugerida' if s and s.meta == valor }}">
               <input type="radio" name="meta" value="{{ valor }}" {% if valores.meta == valor %}checked{% endif %}>
               <span><span class="emoji" aria-hidden="true">{{ emoji }}</span>{{ rotulo }}<small>{{ explica }}</small></span>
             </label>

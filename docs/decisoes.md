@@ -1723,3 +1723,28 @@ Os detalhes:
   `--heroi-*`, `--pontinho`, `--fundo-noite`, `--fundo-sobreaviso` e
   `--sobreaviso-*`. O pontilhado do fundo vale so na tela Hoje;
 - no "Como foi o dia", a legenda da Minima passou a ser "Plano B".
+
+### O check de cada faixa, e o formulario que sugere (etapa A3, 26/09/2026)
+
+- **tabela nova `estados_do_dia`** (EstadoDoDia), separada do registro: o
+  registro e a meta que EU declaro; o estado e o rascunho de durante o dia
+  (as faixas riscadas e, na A4, o Plano B escolhido). Tambem e diario: nao
+  entra em acerto medido nenhum;
+- **a faixa e reconhecida por bloco + indice + TITULO**. So a posicao nao
+  basta: se o cronograma.yml mudar, a faixa 2 da noite pode virar outra, e o
+  check marcaria como feita uma faixa que eu nao fiz. Check cujo titulo nao
+  bate e ignorado, sem erro; marcar com titulo velho e recusado ("recarregue");
+- **o circulo e um formulario (POST /hoje/faixa), sem JavaScript**, e volta
+  para `#faixa-bloco-indice`. So em hoje ou dia passado; pausa nao tem;
+- **o formulario SUGERE, nunca marca**: a opcao sugerida fica tracejada, e
+  "questoes feitas" chega com a soma das faixas marcadas (numero do nivel
+  efetivo) so enquanto nao ha registro salvo. A regra, em ordem: todas as
+  faixas que contam = Ideal; manha inteira + Direito da noite = Reduzida;
+  alguma faixa de questoes = Minima; o resto, sem sugestao. "Contam" exclui
+  pausa e bonus (opcional) - o mesmo "fora do total" de sempre. Na SOMA das
+  questoes o bonus entra: se eu marquei, eu fiz;
+- **backup em `data/estado_do_dia.json`**, no mesmo caminho do
+  registro_estudo.json (exportar, importar, sincronizar), mescla pelo
+  `atualizado_em`. O `apagar` do dia leva registro e checks, do banco e dos
+  dois arquivos.
+

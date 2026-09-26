@@ -1501,6 +1501,17 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"{destino_registros}"
     )
 
+    # Os checks de cada faixa, pelo mesmo motivo.
+    destino_estados = (
+        destino.with_name("estado_do_dia.json") if caminho
+        else acervo.caminho_dos_estados()
+    )
+    estados_gravados = acervo.exportar_estados(destino_estados)
+    console.print(
+        f"[green]{estados_gravados}[/] dia(s) de faixas marcadas exportado(s) "
+        f"para {destino_estados}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1569,6 +1580,14 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_registros.exists():
         dias = acervo.importar_registros(origem_registros)
         console.print(f"   {dias} dia(s) do cronograma de volta ao banco")
+
+    origem_estados = (
+        origem.with_name("estado_do_dia.json") if caminho
+        else acervo.caminho_dos_estados()
+    )
+    if origem_estados.exists():
+        estados = acervo.importar_estados(origem_estados)
+        console.print(f"   {estados} dia(s) de faixas marcadas de volta ao banco")
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -1665,7 +1684,8 @@ def _git(*argumentos: str) -> subprocess.CompletedProcess:
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/assuntos.json", "data/questoes_geradas.json",
                      "data/simulados.json", "data/macetes.json",
-                     "data/explicacoes.json", "data/registro_estudo.json")
+                     "data/explicacoes.json", "data/registro_estudo.json",
+                     "data/estado_do_dia.json")
 
 
 @app.command()
@@ -1712,7 +1732,9 @@ def sincronizar(
     )
     _importar_simulados()
     dias = acervo.importar_registros()
-    console.print(f"   {dias} dia(s) do cronograma de volta ao banco")
+    estados = acervo.importar_estados()
+    console.print(f"   {dias} dia(s) do cronograma e {estados} dia(s) de faixas "
+                  f"marcadas de volta ao banco")
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -1732,6 +1754,7 @@ def sincronizar(
     # simulado. E aqui que ele ganha a copia que o radar.db nao tem.
     total_simulados = acervo.exportar_simulados()
     total_dias = acervo.exportar_registros()
+    acervo.exportar_estados()
     favoritos = servico.contar_favoritos()
     console.print(
         f"   {total} concurso(s), {total_eventos} evento(s), "
@@ -1849,12 +1872,17 @@ def hoje(
     if dia.feriado:
         console.print(f"[bold dark_orange]{escape(dia.feriado)}[/]")
 
+    # As faixas que eu risquei na tela, pela mesma regra dela: check cujo
+    # titulo nao bate mais com o cronograma.yml nao conta.
+    feitas = servico.cronograma.faixas_feitas(
+        dia, servico.cronograma.estado_do_dia(quando))
+
     for chave in cronograma.BLOCOS:
         faixas = getattr(dia, chave)
         if not faixas:
             continue
         console.print(f"\n[bold cyan]{escape(plano.blocos[chave].nome)}[/]")
-        for faixa in faixas:
+        for indice, faixa in enumerate(faixas):
             partes = [cronograma.TIPO_LEGIVEL[faixa.tipo]]
             if faixa.rotulo:
                 partes[0] = faixa.rotulo
@@ -1872,6 +1900,8 @@ def hoje(
                 linha += "  [dim](bônus, fora do total)[/]"
             if faixa.tipo == "pausa":
                 linha = f"[dim]{linha}[/]"
+            if (chave, indice) in feitas:
+                linha = f"[green]{escape('[✓]')}[/] {linha}"
             console.print(linha)
 
     console.print(f"\nTotal do dia: [bold]{dia.total_questoes} questões[/] "

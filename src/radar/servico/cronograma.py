@@ -16,7 +16,7 @@ from radar import acervo
 from radar import alvo
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
-from radar.models import RegistroDoDia, agora
+from radar.models import EstadoDoDia, RegistroDoDia, agora
 from radar.util import fuso_local
 
 METAS = ("ideal", "reduzida", "minima", "nao_fiz")
@@ -103,18 +103,167 @@ def registros(inicio: date, fim: date) -> dict[date, RegistroDoDia]:
 
 
 def apagar(data: date) -> bool:
-    """Tira o registro do banco E do data/registro_estudo.json.
+    """Apaga o dia inteiro do diario: o registro e os checks das faixas.
 
-    Os dois lugares, pelo mesmo motivo do descartar simulado: o arquivo so
-    cresce, e o que saisse so do banco voltaria no proximo `importar`.
+    Do banco E dos arquivos (data/registro_estudo.json e
+    data/estado_do_dia.json), pelo mesmo motivo do descartar simulado: o
+    arquivo so cresce, e o que saisse so do banco voltaria no proximo
+    `importar`.
     """
     criar_tabelas()
     with sessao() as s:
         registro = s.scalar(select(RegistroDoDia).where(RegistroDoDia.data == data))
         if registro is not None:
             s.delete(registro)
-    saiu_do_arquivo = acervo.esquecer_registros([data])
-    return registro is not None or saiu_do_arquivo > 0
+        estado = s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
+        if estado is not None:
+            s.delete(estado)
+    saiu_do_arquivo = (acervo.esquecer_registros([data])
+                       + acervo.esquecer_estados([data]))
+    return registro is not None or estado is not None or saiu_do_arquivo > 0
+
+
+# --- os checks de cada faixa ---------------------------------------------------
+# A faixa e reconhecida por bloco + indice + TITULO. So a posicao nao basta:
+# se o cronograma.yml mudar, a faixa 2 da noite pode virar outra, e o check
+# antigo marcaria como feita uma faixa que eu nao fiz. Com o titulo junto, o
+# check que nao bate mais e simplesmente ignorado.
+
+def _faixa_do_plano(plano, data: date, bloco: str, indice: int):
+    gravado = plano.dia(data)
+    if gravado is None:
+        raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
+    if bloco not in plano_de_estudo.BLOCOS:
+        raise RegistroInvalido(f"Bloco {bloco!r} nao existe")
+    faixas = getattr(gravado, bloco)
+    if not 0 <= indice < len(faixas):
+        raise RegistroInvalido(f"O bloco {bloco} nao tem a faixa {indice}")
+    return faixas[indice]
+
+
+def marcar_faixa(
+    data: date,
+    bloco: str,
+    indice: int,
+    titulo: str,
+    *,
+    plano: plano_de_estudo.Plano | None = None,
+    hoje: date | None = None,
+) -> bool:
+    """Marca a faixa se estava aberta, desmarca se estava feita.
+
+    Devolve True quando ela ficou FEITA. `plano` e `hoje` existem para o
+    teste, como no `registrar`.
+    """
+    hoje = hoje or hoje_local()
+    if data > hoje:
+        raise RegistroInvalido(
+            f"{data:%d/%m/%Y} ainda nao chegou: so se marca faixa de hoje ou de dia passado"
+        )
+    plano = plano or plano_de_estudo.carregar()
+    faixa = _faixa_do_plano(plano, data, bloco, indice)
+    if faixa.titulo != titulo:
+        raise RegistroInvalido(
+            "Essa faixa mudou no config/cronograma.yml desde que a tela abriu. "
+            "Recarregue a página e marque de novo."
+        )
+    if faixa.tipo == "pausa":
+        raise RegistroInvalido("Pausa não se marca.")
+
+    criar_tabelas()
+    with sessao() as s:
+        estado = s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
+        if estado is None:
+            estado = EstadoDoDia(data=data, faixas_feitas=[])
+            s.add(estado)
+        antes = list(estado.faixas_feitas or [])
+        # Check velho na mesma posicao, com outro titulo, sai junto: nao vale
+        # mais nada e so atrapalharia a leitura do arquivo.
+        mesma_posicao = [c for c in antes
+                         if c.get("bloco") == bloco and c.get("indice") == indice]
+        estava_feita = any(c.get("titulo") == titulo for c in mesma_posicao)
+        ficam = [c for c in antes if c not in mesma_posicao]
+        if not estava_feita:
+            ficam.append({"bloco": bloco, "indice": indice, "titulo": titulo})
+        # Lista nova, e nao append na velha: o SQLAlchemy so percebe que a
+        # coluna JSON mudou quando o valor e trocado.
+        estado.faixas_feitas = ficam
+        estado.atualizado_em = agora()
+    return not estava_feita
+
+
+def estado_do_dia(data: date) -> EstadoDoDia | None:
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
+
+
+def faixas_feitas(dia, estado: EstadoDoDia | None) -> set[tuple[str, int]]:
+    """As posicoes (bloco, indice) feitas que ainda batem com o dia do
+    cronograma.yml. Check cujo titulo nao bate e ignorado, sem erro."""
+    if dia is None or estado is None:
+        return set()
+    feitas = set()
+    for check in estado.faixas_feitas or []:
+        bloco, indice = check.get("bloco"), check.get("indice")
+        if bloco not in plano_de_estudo.BLOCOS or not isinstance(indice, int):
+            continue
+        faixas = getattr(dia, bloco)
+        if not 0 <= indice < len(faixas):
+            continue
+        faixa = faixas[indice]
+        if faixa.titulo == check.get("titulo") and faixa.tipo != "pausa":
+            feitas.add((bloco, indice))
+    return feitas
+
+
+@dataclass
+class Sugestao:
+    """O que os checks sugerem para o "Como foi o dia". So sugere: quem
+    escolhe a meta e salva sou eu."""
+    meta: str | None            # ideal | reduzida | minima | None (sem sugestao)
+    feitas: int                 # faixas que contam, feitas
+    total: int                  # faixas que contam: nem pausa, nem opcional
+    questoes: int               # soma das questoes das faixas marcadas
+
+
+def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
+    """A regra, em ordem:
+
+    - todas as faixas que contam (nem pausa, nem bonus) = Ideal;
+    - a manha inteira + a faixa de Direito da noite = Reduzida;
+    - pelo menos uma faixa de questoes (fora o bonus) = Minima;
+    - nada marcado, ou so o que nao fecha nenhuma regra = sem sugestao.
+
+    As questoes somam TODA faixa marcada, bonus inclusive: e o que eu fiz.
+    O numero e o do dia montado, ou seja, o do nivel efetivo.
+    """
+    def contam(bloco):
+        return [(bloco, i) for i, f in enumerate(getattr(dia, bloco))
+                if f.tipo != "pausa" and not f.opcional]
+
+    def faixa(posicao):
+        bloco, indice = posicao
+        return getattr(dia, bloco)[indice]
+
+    todas = [p for bloco in plano_de_estudo.BLOCOS for p in contam(bloco)]
+    feitas_que_contam = [p for p in todas if p in feitas]
+    questoes = sum(faixa(p).questoes or 0 for p in feitas)
+    sugestao = Sugestao(None, len(feitas_que_contam), len(todas), questoes)
+    if not feitas:
+        return sugestao
+
+    manha_inteira = all(p in feitas for p in contam("manha"))
+    direito_feito = any(f.rampa == "direito" and ("noite", i) in feitas
+                        for i, f in enumerate(dia.noite))
+    alguma_de_questoes = any(faixa(p).questoes and not faixa(p).opcional for p in feitas)
+    if todas and len(feitas_que_contam) == len(todas):
+        sugestao.meta = "ideal"
+    elif manha_inteira and direito_feito:
+        sugestao.meta = "reduzida"
+    elif alguma_de_questoes:
+        sugestao.meta = "minima"
+    return sugestao
 
 
 # --- a tela "Hoje" -----------------------------------------------------------
@@ -173,6 +322,9 @@ class TelaDoDia:
     # Dias seguidos cumprindo a meta. Vazio ate a conta existir: a tela mostra
     # "–" e nao um numero inventado.
     sequencia: int | None = None
+    # Os checks: as posicoes (bloco, indice) feitas, e o que elas sugerem.
+    feitas: set = field(default_factory=set)
+    sugestao: object = None
 
     @property
     def e_hoje(self) -> bool:
@@ -304,4 +456,6 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
         tela.hora = relogio.time().replace(second=0, microsecond=0)
         tela.agora = _agora(dia, tela.hora)
     tela.registro = registros(data, data).get(data)
+    tela.feitas = faixas_feitas(dia, estado_do_dia(data))
+    tela.sugestao = sugerir_meta(dia, tela.feitas)
     return tela

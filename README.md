@@ -439,6 +439,9 @@ O que eu marco vai para `data/registro_estudo.json` no `radar exportar` e no
 `radar.db` nao tem. Na volta (`radar importar`), a chave e a data, e se os
 dois lados tem o mesmo dia, vale a anotacao mais recente.
 
+Os checks de cada faixa (o circulo da tela Hoje) vao, do mesmo jeito, para
+`data/estado_do_dia.json`, e na volta vale o `atualizado_em` mais recente.
+
 ## Os comandos
 
 ```bash

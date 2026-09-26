@@ -822,7 +822,8 @@ def hoje(request: Request, data: str | None = None):
 
 
 def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
-                    form: dict | None = None, status: int = 200):
+                    form: dict | None = None, status: int = 200,
+                    erro_da_faixa: str | None = None):
     quando = erro_de_data = None
     if data:
         try:
@@ -838,6 +839,7 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,
+            "erro_da_faixa": erro_da_faixa,
         },
     )
 
@@ -892,6 +894,40 @@ def hoje_registrar(
 
     tema = request.query_params.get("tema")
     destino = f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    return RedirectResponse(destino, status_code=303)
+
+
+@app.post("/hoje/faixa")
+def hoje_faixa(
+    request: Request,
+    data: str = Form(""),
+    bloco: str = Form(""),
+    indice: str = Form(""),
+    titulo: str = Form(""),
+):
+    """O circulo de cada faixa: marca ou desmarca, e volta para a MESMA faixa
+    (o #faixa-... no fim do endereco), para eu nao perder o lugar na tela.
+
+    O titulo vem junto de proposito: se o cronograma.yml mudou desde que a
+    tela abriu, o servico recusa em vez de marcar a faixa errada.
+    """
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro_da_faixa=f"Data inválida: {data!r}.",
+                               status=400)
+    try:
+        posicao = _inteiro(indice, "A faixa")
+        if posicao is None:
+            raise servico.cronograma.RegistroInvalido("Faltou dizer qual faixa marcar.")
+        servico.cronograma.marcar_faixa(quando, bloco, posicao, titulo)
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
+
+    # Bloco e posicao ja passaram pelo servico: o endereco so leva o que e valido.
+    tema = request.query_params.get("tema")
+    destino = (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+               + f"#faixa-{bloco}-{posicao}")
     return RedirectResponse(destino, status_code=303)
 
 

@@ -443,3 +443,27 @@ class RegistroDoDia(Base):
 
     def __repr__(self) -> str:
         return f"<RegistroDoDia {self.data} {self.meta}>"
+
+
+class EstadoDoDia(Base):
+    """O que eu risquei no dia: as faixas feitas e o Plano B escolhido.
+
+    Diferente do RegistroDoDia (a meta que EU declarei), isto e o rascunho de
+    durante o dia - os checks de cada faixa. Tambem e diario: nao entra em
+    acerto medido nenhum do radar.
+    """
+
+    __tablename__ = "estados_do_dia"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    data: Mapped[date] = mapped_column(Date, unique=True, index=True)
+    # Lista de {bloco, indice, titulo}. O titulo vai junto de proposito: se o
+    # cronograma.yml mudar e a faixa daquela posicao for outra, o check antigo
+    # deixa de valer - em vez de marcar como feita uma faixa que eu nao fiz.
+    faixas_feitas: Mapped[list[Any]] = mapped_column(JSON, default=list)
+    # 30 ou 60 (minutos): o Plano B que escolhi no dia. None = nenhum.
+    plano_b: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    atualizado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<EstadoDoDia {self.data} {len(self.faixas_feitas or [])} feita(s)>"

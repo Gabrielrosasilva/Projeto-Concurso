@@ -24,6 +24,7 @@ from radar.db import criar_tabelas, sessao
 from radar.models import (
     Concurso,
     DataHoraUTC,
+    EstadoDoDia,
     Evento,
     QuestaoDeProva,
     QuestaoGerada,
@@ -724,11 +725,11 @@ def _registro_como_linha(registro: RegistroDoDia) -> dict:
     }
 
 
-def _mais_recente(a: dict | None, b: dict) -> dict:
-    """Das duas linhas da mesma data, a de `anotado_em` mais novo."""
+def _mais_recente(a: dict | None, b: dict, campo: str = "anotado_em") -> dict:
+    """Das duas linhas da mesma data, a de `campo` (a hora da mudanca) mais novo."""
     if a is None:
         return b
-    if datetime.fromisoformat(b["anotado_em"]) > datetime.fromisoformat(a["anotado_em"]):
+    if datetime.fromisoformat(b[campo]) > datetime.fromisoformat(a[campo]):
         return b
     return a
 
@@ -805,6 +806,82 @@ def importar_registros(caminho: Path | None = None) -> int:
 def esquecer_registros(datas: list, caminho: Path | None = None) -> int:
     """Tira do arquivo os dias apagados. Devolve quantos sairam."""
     origem = caminho or caminho_dos_registros()
+    linhas = _ler_registros(origem)
+    chaves = {d.isoformat() for d in datas}
+    ficam = [linha for linha in linhas if linha["data"] not in chaves]
+    if len(ficam) != len(linhas):
+        _gravar_registros(origem, ficam)
+    return len(linhas) - len(ficam)
+
+
+# --- os checks das faixas ------------------------------------------------------
+# O mesmo molde do diario: data/estado_do_dia.json, chave pela DATA, e quando
+# os dois lados tem o mesmo dia vale o de `atualizado_em` mais recente.
+
+def caminho_dos_estados() -> Path:
+    return config.diretorio_dados() / "estado_do_dia.json"
+
+
+def _estado_como_linha(estado: EstadoDoDia) -> dict:
+    return {
+        "data": estado.data.isoformat(),
+        "faixas_feitas": list(estado.faixas_feitas or []),
+        "plano_b": estado.plano_b,
+        "atualizado_em": _serializar(estado.atualizado_em),
+    }
+
+
+def exportar_estados(caminho: Path | None = None) -> int:
+    """Grava os checks no JSON. Devolve quantos dias. O arquivo so cresce."""
+    criar_tabelas()
+    destino = caminho or caminho_dos_estados()
+
+    juntos = {}
+    for linha in _ler_registros(destino):
+        juntos[linha["data"]] = linha
+    with sessao() as s:
+        for estado in s.scalars(select(EstadoDoDia)):
+            linha = _estado_como_linha(estado)
+            juntos[linha["data"]] = _mais_recente(
+                juntos.get(linha["data"]), linha, "atualizado_em")
+
+    _gravar_registros(destino, [juntos[chave] for chave in sorted(juntos)])
+    return len(juntos)
+
+
+def importar_estados(caminho: Path | None = None) -> int:
+    """Traz os checks do JSON para o banco. Devolve quantos dias mudaram.
+
+    Dia que o banco nao tem entra; dia que os dois tem so e reescrito se a
+    linha do arquivo for mais recente. Rodar duas vezes da no mesmo.
+    """
+    origem = caminho or caminho_dos_estados()
+    linhas = _ler_registros(origem)
+    if not linhas:
+        return 0
+
+    criar_tabelas()
+    mudaram = 0
+    with sessao() as s:
+        for linha in linhas:
+            data = date.fromisoformat(linha["data"])
+            atualizado_em = datetime.fromisoformat(linha["atualizado_em"])
+            estado = s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
+            if estado is not None and estado.atualizado_em >= atualizado_em:
+                continue
+            if estado is None:
+                estado = EstadoDoDia(data=data)
+                s.add(estado)
+            estado.faixas_feitas = list(linha.get("faixas_feitas") or [])
+            estado.plano_b = linha.get("plano_b")
+            estado.atualizado_em = atualizado_em
+            mudaram += 1
+    return mudaram
+
+
+def esquecer_estados(datas: list, caminho: Path | None = None) -> int:
+    """Tira do arquivo os dias apagados. Devolve quantos sairam."""
+    origem = caminho or caminho_dos_estados()
     linhas = _ler_registros(origem)
     chaves = {d.isoformat() for d in datas}
     ficam = [linha for linha in linhas if linha["data"] not in chaves]
