@@ -16,6 +16,7 @@ from radar import acervo, cronograma, servico
 from radar.cli import app as cli
 from radar.db import sessao
 from radar.models import EstadoDoDia
+from radar.servico import cronograma as servico_do_dia
 from radar.servico.cronograma import (
     RegistroInvalido,
     estado_do_dia,
@@ -72,7 +73,13 @@ def test_marcar_duas_faixas_guarda_as_duas(banco_temporario, plano):
     _marcar(plano, ANKI)
     assert _feitas(plano)[1] == {("manha", 0), ("pos22", 0)}
     (check_teoria, check_anki) = estado_do_dia(SEG).faixas_feitas
-    assert check_teoria == {"bloco": "manha", "indice": 0, "titulo": "Aplicação da lei penal"}
+    # Desde a etapa E2 o check guarda os numeros, e nao so a posicao: e o que
+    # faz o historico nao depender do YAML, que muda no Ciclo 2.
+    assert check_teoria["bloco"] == "manha"
+    assert check_teoria["indice"] == 0
+    assert check_teoria["titulo"] == "Aplicação da lei penal"
+    assert check_teoria["minutos"] == 50
+    assert check_teoria["materia"] == "Direito Penal"
     assert check_anki["titulo"] == "Anki"
 
 
@@ -252,10 +259,14 @@ def test_dia_futuro_nao_tem_circulo_e_recusa(cliente):
 
 def test_pausa_nao_tem_circulo(cliente):
     texto = cliente.get("/hoje?data=2026-09-28").text
-    # Cada faixa que nao e pausa tem um circulo; as pausas, nenhum.
+    # O circulo e das faixas SEM acerto: pausa nao tem nenhum, e as de questao
+    # tem o formulario "fiz X, acertei Y" no lugar dele (etapa E2).
     dia = cronograma.carregar().dia(SEG)
-    nao_pausas = sum(1 for f in dia.faixas() if f.tipo != "pausa")
-    assert texto.count('class="circulo"') == nao_pausas
+    com_circulo = sum(1 for f in dia.faixas()
+                      if f.tipo != "pausa" and not cronograma.tem_acerto(f))
+    assert texto.count('class="circulo"') == com_circulo
+    assert texto.count('class="fiz"') == sum(
+        1 for f in dia.faixas() if cronograma.tem_acerto(f))
 
 
 def test_o_formulario_sugere_e_soma_sem_marcar(cliente):
@@ -271,17 +282,22 @@ def test_o_formulario_sugere_e_soma_sem_marcar(cliente):
     # Sugere, mas nao marca: nenhuma das quatro opcoes vem com checked.
     assert "checked" not in texto.split('class="metas"')[1].split("</fieldset>")[0]
     # A soma e a do nivel 1 da semana 1: 15 de Direito + 10 de Portugues.
-    assert 'name="questoes_feitas" min="0" inputmode="numeric" value="25"' in texto
+    assert "Fiz hoje:</b> 25 questões" in texto
 
 
-def test_depois_de_salvo_vale_o_que_eu_salvei(cliente):
+def test_o_registro_salvo_guarda_o_numero_calculado(cliente):
+    """Salvar a meta grava os totais do dia; a tela nao pede numero nenhum."""
     faixa = _faixa_real(SEG, "noite", 0)
-    cliente.post("/hoje/faixa", data={
-        "data": "2026-09-28", "bloco": "noite", "indice": "0", "titulo": faixa.titulo})
-    cliente.post("/hoje/registrar", data={
-        "data": "2026-09-28", "meta": "nao_fiz", "questoes_feitas": "3"})
+    cliente.post("/hoje/faixa/questoes", data={
+        "data": "2026-09-28", "bloco": "noite", "indice": "0",
+        "titulo": faixa.titulo, "questoes": "12", "acertos": "9"})
+    cliente.post("/hoje/registrar", data={"data": "2026-09-28", "meta": "minima"})
+
+    (r,) = servico_do_dia.registros(SEG, SEG).values()
+    assert (r.questoes_feitas, r.acertos) == (12, 9)
     texto = cliente.get("/hoje?data=2026-09-28").text
-    assert 'inputmode="numeric" value="3"' in texto
+    assert 'name="questoes_feitas"' not in texto
+    assert "Gravado neste dia: 12 questões, 9 acertos." in texto
 
 
 # --- o comando ---------------------------------------------------------------

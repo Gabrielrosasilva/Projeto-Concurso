@@ -516,3 +516,43 @@ class ErroAnotado(Base):
 
     def __repr__(self) -> str:
         return f"<ErroAnotado {self.data_estudo} {self.materia} {self.motivo}>"
+
+
+class EstudoExtra(Base):
+    """Estudo que eu fiz FORA das faixas do plano, anotado a mao.
+
+    O plano manda no dia, mas o dia nao cabe nele: uma hora de lei seca no
+    almoco, 20 questoes na fila do banco, uma videoaula a noite. Sem isto,
+    esse tempo simplesmente nao existia em lugar nenhum - e eu terminava a
+    semana achando que tinha feito menos do que fiz.
+
+    Diario, como o RegistroDoDia: NAO entra em acerto medido nenhum do radar.
+    Quando `onde` e "radar", as questoes ficam vazias de proposito - o radar ja
+    contou cada uma delas, uma por uma, e soma-las aqui seria contar duas vezes.
+    """
+
+    __tablename__ = "estudos_extras"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    # O dia do cronograma a que este estudo pertence. Varios por dia.
+    data: Mapped[date] = mapped_column(Date, index=True)
+    # teoria | lei_seca | questoes | revisao (servico/extra.py).
+    o_que: Mapped[str] = mapped_column(String(20))
+    # Uma das materias de `materias`, no config/cronograma.yml.
+    materia: Mapped[str | None] = mapped_column(String(80), nullable=True, index=True)
+    assunto: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    minutos: Mapped[int] = mapped_column(Integer, default=0)
+    questoes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    acertos: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Questao feita com a lei aberta treina, mas nao mede: ela fica de fora da
+    # comparacao com a meta (docs/decisoes.md).
+    consulta: Mapped[bool] = mapped_column(Boolean, default=False)
+    # qconcursos | radar | outro.
+    onde: Mapped[str] = mapped_column(String(20), default="outro")
+    anotacao: Mapped[str | None] = mapped_column(Text, nullable=True)
+    criado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora, index=True)
+    # Para o backup saber qual lado esta mais novo, como no resto do diario.
+    atualizado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<EstudoExtra {self.data} {self.o_que} {self.minutos}min>"

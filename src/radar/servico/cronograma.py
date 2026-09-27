@@ -8,7 +8,7 @@ o que eu respondi dentro do radar, questao por questao; somar um numero
 digitado a mao ali misturaria medida com lembranca.
 """
 from dataclasses import dataclass, field
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 
 from sqlalchemy import select
 
@@ -16,18 +16,24 @@ from radar import acervo
 from radar import alvo
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
-from radar.models import EstadoDoDia, RegistroDoDia, agora
+from radar.models import EstadoDoDia, RegistroDoDia, RespostaDeSimulado, agora
+from radar.servico import extra as estudo_extra
+# A excecao vem do comum porque o estudo extra recusa pelos mesmos motivos, e
+# continua sendo lida como `servico.cronograma.RegistroInvalido`.
+from radar.servico.comum import RegistroInvalido    # noqa: F401 - reexportada
 from radar.util import fuso_local
 
 METAS = ("ideal", "reduzida", "minima", "nao_fiz")
 
 
-class RegistroInvalido(ValueError):
-    """O registro foi recusado. A mensagem diz por que."""
-
-
 def agora_local() -> datetime:
-    """O relogio de Florianopolis. Um lugar so, para o teste poder parar o tempo."""
+    """O relogio de Florianopolis.
+
+    UM lugar so, e e por isso que ele fica aqui e nao no comum: o teste para o
+    tempo trocando este nome, e o `hoje_local` logo abaixo tem que passar por
+    ele. Com os dois em arquivos diferentes, parar o relogio parava metade do
+    radar e a outra metade continuava em 2026 de verdade.
+    """
     return datetime.now(fuso_local())
 
 
@@ -90,6 +96,39 @@ def registrar(
     return registro
 
 
+def registrar_o_dia(
+    data: date,
+    meta: str,
+    anotacao: str | None = None,
+    *,
+    plano: plano_de_estudo.Plano | None = None,
+    hoje: date | None = None,
+) -> RegistroDoDia:
+    """O "Como foi o dia" da tela: eu escolho a meta, o radar faz a conta.
+
+    Os campos "questoes feitas" e "acertos" sairam da tela nesta etapa. Eram
+    eles que faziam o diario nao bater com o que eu tinha feito de verdade: eu
+    somava de cabeca, e quase sempre esquecia os extras. Agora o numero vem dos
+    checks das faixas, dos extras e do que eu respondi no radar.
+
+    Registro antigo, com numero digitado, continua valendo como esta: ele so
+    muda se eu salvar o dia de novo.
+    """
+    plano = plano or plano_de_estudo.carregar()
+    nivel = nivel_do_dia(plano, data)
+    dia = plano_de_estudo.montar_dia(plano, data, nivel.efetivo)
+    totais = totais_do_dia(dia, estado_do_dia(data), data)
+    somado = totais.total
+    return registrar(
+        data, meta,
+        questoes_feitas=somado.questoes or None,
+        acertos=somado.acertos if somado.medidas else None,
+        anotacao=anotacao,
+        plano=plano,
+        hoje=hoje,
+    )
+
+
 def registros(inicio: date, fim: date) -> dict[date, RegistroDoDia]:
     """Os registros entre as duas datas, inclusive, pela data."""
     criar_tabelas()
@@ -130,22 +169,104 @@ def apagar(data: date) -> bool:
 # check que nao bate mais e simplesmente ignorado.
 
 def _faixa_do_plano(plano, data: date, bloco: str, indice: int):
-    gravado = plano.dia(data)
-    if gravado is None:
+    """A faixa daquela posicao, MONTADA: com o horario, a duracao e o numero
+    de questoes do nivel daquele dia.
+
+    Montada, e nao crua do arquivo, porque e dela que saem os numeros que o
+    check guarda: a faixa crua de questoes nao tem duracao (ela sai da conta
+    questoes x minutos por questao) e tem o numero de questoes do plano, nao o
+    do nivel em que a semana estava.
+    """
+    if plano.dia(data) is None:
         raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
     if bloco not in plano_de_estudo.TODOS_OS_BLOCOS:
         raise RegistroInvalido(f"Bloco {bloco!r} nao existe")
+    nivel = nivel_do_dia(plano, data)
     if bloco == plano_de_estudo.BLOCO_DO_PLANO_B:
         # As faixas do Plano B nao estao no arquivo: saem do dia, com o Plano
         # B que esta ativo. Sem ele ativo, nao ha o que marcar.
         estado = estado_do_dia(data)
         if estado is None or not estado.plano_b:
             raise RegistroInvalido("O Plano B nao esta ativo neste dia.")
-        gravado = plano_de_estudo.montar_plano_b(plano, data, estado.plano_b)
-    faixas = getattr(gravado, bloco)
+        montado = plano_de_estudo.montar_plano_b(plano, data, estado.plano_b,
+                                                 nivel.efetivo)
+    else:
+        montado = plano_de_estudo.montar_dia(plano, data, nivel.efetivo)
+    faixas = getattr(montado, bloco)
     if not 0 <= indice < len(faixas):
         raise RegistroInvalido(f"O bloco {bloco} nao tem a faixa {indice}")
     return faixas[indice]
+
+
+def _faixa_para_marcar(data: date, bloco: str, indice: int, titulo: str,
+                       plano, hoje: date):
+    """A faixa que a tela mandou marcar, conferida. Comum aos tres comandos."""
+    if data > hoje:
+        raise RegistroInvalido(
+            f"{data:%d/%m/%Y} ainda nao chegou: so se marca faixa de hoje ou de dia passado"
+        )
+    faixa = _faixa_do_plano(plano, data, bloco, indice)
+    if faixa.titulo != titulo:
+        raise RegistroInvalido(
+            "Essa faixa mudou no config/cronograma.yml desde que a tela abriu. "
+            "Recarregue a página e marque de novo."
+        )
+    if faixa.tipo == "pausa":
+        raise RegistroInvalido("Pausa não se marca.")
+    return faixa
+
+
+def _gravar_check(data: date, bloco: str, indice: int, titulo: str,
+                  check: dict | None) -> bool:
+    """Troca o check daquela posicao pelo novo (ou tira, com None).
+
+    Devolve True quando a faixa ficou FEITA. Check velho na mesma posicao com
+    outro titulo sai junto: ele nao vale mais nada e so atrapalharia a leitura
+    do arquivo.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        estado = s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
+        if estado is None:
+            estado = EstadoDoDia(data=data, faixas_feitas=[])
+            s.add(estado)
+        antes = list(estado.faixas_feitas or [])
+        mesma_posicao = [c for c in antes
+                         if c.get("bloco") == bloco and c.get("indice") == indice]
+        ficam = [c for c in antes if c not in mesma_posicao]
+        if check is not None:
+            ficam.append(check)
+        # Lista nova, e nao append na velha: o SQLAlchemy so percebe que a
+        # coluna JSON mudou quando o valor e trocado.
+        estado.faixas_feitas = ficam
+        estado.atualizado_em = agora()
+    return check is not None
+
+
+def _check_da_faixa(bloco: str, indice: int, faixa, questoes=None, acertos=None,
+                    consulta: bool | None = None) -> dict:
+    """O que fica gravado de uma faixa feita.
+
+    Os numeros vao TODOS para o JSON - minutos, questoes, acertos, consulta,
+    materia e assunto - e nao so a posicao. O motivo e o Ciclo 2: quando o
+    cronograma.yml mudar, a faixa 2 da noite de 20/10 sera outra coisa, e o
+    historico tem que continuar contando o que eu fiz naquele dia. Posicao no
+    arquivo nao e historico; numero gravado e.
+    """
+    return {
+        "bloco": bloco,
+        "indice": indice,
+        "titulo": faixa.titulo,
+        "minutos": faixa.duracao or 0,
+        "questoes": questoes,
+        "acertos": acertos,
+        "consulta": bool(consulta if consulta is not None
+                         else plano_de_estudo.consulta_por_padrao(faixa)),
+        "materia": faixa.materia,
+        # O tema da faixa. "assunto" e o nome que o caderno de erros e o
+        # estudo extra usam para a mesma coisa.
+        "assunto": faixa.titulo,
+    }
 
 
 def marcar_faixa(
@@ -159,44 +280,98 @@ def marcar_faixa(
 ) -> bool:
     """Marca a faixa se estava aberta, desmarca se estava feita.
 
+    E o circulo das faixas SEM acerto (teoria, lei seca, correcao, Anki). As de
+    questao passam pelo `anotar_faixa`, que tem numero para guardar.
+
     Devolve True quando ela ficou FEITA. `plano` e `hoje` existem para o
     teste, como no `registrar`.
     """
     hoje = hoje or hoje_local()
-    if data > hoje:
-        raise RegistroInvalido(
-            f"{data:%d/%m/%Y} ainda nao chegou: so se marca faixa de hoje ou de dia passado"
-        )
     plano = plano or plano_de_estudo.carregar()
-    faixa = _faixa_do_plano(plano, data, bloco, indice)
-    if faixa.titulo != titulo:
-        raise RegistroInvalido(
-            "Essa faixa mudou no config/cronograma.yml desde que a tela abriu. "
-            "Recarregue a página e marque de novo."
-        )
-    if faixa.tipo == "pausa":
-        raise RegistroInvalido("Pausa não se marca.")
+    faixa = _faixa_para_marcar(data, bloco, indice, titulo, plano, hoje)
 
-    criar_tabelas()
-    with sessao() as s:
-        estado = s.scalar(select(EstadoDoDia).where(EstadoDoDia.data == data))
-        if estado is None:
-            estado = EstadoDoDia(data=data, faixas_feitas=[])
-            s.add(estado)
-        antes = list(estado.faixas_feitas or [])
-        # Check velho na mesma posicao, com outro titulo, sai junto: nao vale
-        # mais nada e so atrapalharia a leitura do arquivo.
-        mesma_posicao = [c for c in antes
-                         if c.get("bloco") == bloco and c.get("indice") == indice]
-        estava_feita = any(c.get("titulo") == titulo for c in mesma_posicao)
-        ficam = [c for c in antes if c not in mesma_posicao]
-        if not estava_feita:
-            ficam.append({"bloco": bloco, "indice": indice, "titulo": titulo})
-        # Lista nova, e nao append na velha: o SQLAlchemy so percebe que a
-        # coluna JSON mudou quando o valor e trocado.
-        estado.faixas_feitas = ficam
-        estado.atualizado_em = agora()
-    return not estava_feita
+    estado = estado_do_dia(data)
+    estava_feita = any(
+        c.get("bloco") == bloco and c.get("indice") == indice
+        and c.get("titulo") == titulo
+        for c in (estado.faixas_feitas if estado else []) or []
+    )
+    check = None if estava_feita else _check_da_faixa(bloco, indice, faixa,
+                                                     questoes=faixa.questoes)
+    return _gravar_check(data, bloco, indice, titulo, check)
+
+
+def anotar_faixa(
+    data: date,
+    bloco: str,
+    indice: int,
+    titulo: str,
+    questoes=None,
+    acertos=None,
+    consulta: bool = False,
+    *,
+    plano: plano_de_estudo.Plano | None = None,
+    hoje: date | None = None,
+) -> bool:
+    """Marca uma faixa de questoes com "fiz X, acertei Y".
+
+    Chamar de novo corrige os numeros - e o que faz a faixa feita reabrir o
+    formulario com os valores em vez de virar duas linhas no historico.
+
+    `acertos` vazio e normal e nao e erro: as questoes contam no VOLUME e nao
+    entram em acerto nenhum. Foi o que aconteceu de verdade - eu fiz, e nao
+    anotei quantas acertei.
+    """
+    hoje = hoje or hoje_local()
+    plano = plano or plano_de_estudo.carregar()
+    faixa = _faixa_para_marcar(data, bloco, indice, titulo, plano, hoje)
+    if not plano_de_estudo.tem_acerto(faixa):
+        raise RegistroInvalido(
+            f"A faixa {faixa.titulo!r} nao e de questoes: nela eu so marco que fiz."
+        )
+
+    feitas = _inteiro_do_check(questoes, "As questões feitas")
+    certas = _inteiro_do_check(acertos, "Os acertos")
+    if certas is not None:
+        if feitas is None:
+            raise RegistroInvalido("Acertos sem questões: diga quantas você fez.")
+        if certas > feitas:
+            raise RegistroInvalido(
+                f"Acertos ({certas}) maior que as questões feitas ({feitas})."
+            )
+
+    return _gravar_check(data, bloco, indice, titulo,
+                         _check_da_faixa(bloco, indice, faixa, feitas, certas,
+                                         consulta))
+
+
+def desmarcar_faixa(
+    data: date,
+    bloco: str,
+    indice: int,
+    titulo: str,
+    *,
+    plano: plano_de_estudo.Plano | None = None,
+    hoje: date | None = None,
+) -> bool:
+    """Tira o check da faixa, com os numeros que estavam nele. Sempre False."""
+    hoje = hoje or hoje_local()
+    plano = plano or plano_de_estudo.carregar()
+    _faixa_para_marcar(data, bloco, indice, titulo, plano, hoje)
+    return _gravar_check(data, bloco, indice, titulo, None)
+
+
+def _inteiro_do_check(valor, campo: str) -> int | None:
+    """Campo numerico do formulario da faixa: vazio vira None, lixo e recusado."""
+    if valor is None or (isinstance(valor, str) and not valor.strip()):
+        return None
+    try:
+        numero = int(str(valor).strip())
+    except ValueError:
+        raise RegistroInvalido(f"{campo} precisa ser um número inteiro (veio {valor!r})")
+    if numero < 0:
+        raise RegistroInvalido(f"{campo} não pode ser negativo ({numero})")
+    return numero
 
 
 def estado_do_dia(data: date) -> EstadoDoDia | None:
@@ -222,6 +397,224 @@ def faixas_feitas(dia, estado: EstadoDoDia | None) -> set[tuple[str, int]]:
         if faixa.titulo == check.get("titulo") and faixa.tipo != "pausa":
             feitas.add((bloco, indice))
     return feitas
+
+
+@dataclass
+class FaixaFeita:
+    """Uma faixa marcada, com o que eu anotei nela.
+
+    `do_plano` diz que os numeros sairam do cronograma.yml, e nao de mim: e o
+    caso dos checks antigos, gravados antes de a faixa ter formulario. Eles
+    continuam valendo - o que eu fiz naquele dia foi o que o plano pedia.
+    """
+    bloco: str
+    indice: int
+    titulo: str
+    minutos: int = 0
+    questoes: int | None = None
+    acertos: int | None = None
+    consulta: bool = False
+    materia: str | None = None
+    assunto: str | None = None
+    do_plano: bool = False
+
+    @property
+    def porcentagem(self) -> int | None:
+        """73, de "11 de 15 - 73%". None quando eu nao anotei os acertos."""
+        if not self.questoes or self.acertos is None:
+            return None
+        return round(100 * self.acertos / self.questoes)
+
+
+def valores_das_faixas(dia, estado: EstadoDoDia | None) -> dict:
+    """O que esta gravado em cada faixa feita, por posicao (bloco, indice).
+
+    Check sem os numeros (os gravados antes desta etapa) e preenchido pelo
+    plano, se a faixa ainda existir nele: o dia foi feito como o plano pedia, e
+    mostrar vazio ali seria perder a informacao que eu tinha.
+    """
+    if dia is None or estado is None:
+        return {}
+    valores = {}
+    for check in estado.faixas_feitas or []:
+        bloco, indice = check.get("bloco"), check.get("indice")
+        if bloco not in plano_de_estudo.TODOS_OS_BLOCOS or not isinstance(indice, int):
+            continue
+        faixas = getattr(dia, bloco)
+        if not 0 <= indice < len(faixas):
+            continue
+        faixa = faixas[indice]
+        if faixa.titulo != check.get("titulo") or faixa.tipo == "pausa":
+            continue
+        antigo = "questoes" not in check
+        valores[(bloco, indice)] = FaixaFeita(
+            bloco=bloco,
+            indice=indice,
+            titulo=faixa.titulo,
+            minutos=check.get("minutos") if check.get("minutos") is not None
+                    else (faixa.duracao or 0),
+            questoes=faixa.questoes if antigo else check.get("questoes"),
+            acertos=check.get("acertos"),
+            consulta=bool(check["consulta"]) if "consulta" in check
+                     else plano_de_estudo.consulta_por_padrao(faixa),
+            materia=check.get("materia") or faixa.materia,
+            assunto=check.get("assunto") or faixa.titulo,
+            do_plano=antigo,
+        )
+    return valores
+
+
+@dataclass
+class Numeros:
+    """Volume e acerto de uma origem: o plano, o extra ou o radar.
+
+    `questoes` e VOLUME - tudo o que eu respondi. `medidas` e quantas delas
+    contam para o acerto: as que tem resultado anotado e nao foram escritas por
+    IA. As duas sao diferentes de proposito, e e essa diferenca que faz "fiz 20
+    e nao anotei quantas acertei" nao virar "acertei 0 de 20".
+    """
+    questoes: int = 0
+    medidas: int = 0
+    acertos: int = 0
+    minutos: int = 0
+
+    def __add__(self, outro: "Numeros") -> "Numeros":
+        return Numeros(
+            questoes=self.questoes + outro.questoes,
+            medidas=self.medidas + outro.medidas,
+            acertos=self.acertos + outro.acertos,
+            minutos=self.minutos + outro.minutos,
+        )
+
+    def somar(self, questoes=None, acertos=None, minutos: int = 0) -> None:
+        """Soma uma linha (faixa, extra ou resposta) neste conjunto."""
+        self.questoes += questoes or 0
+        self.minutos += minutos or 0
+        if questoes and acertos is not None:
+            self.medidas += questoes
+            self.acertos += acertos
+
+    @property
+    def erros(self) -> int:
+        return max(self.medidas - self.acertos, 0)
+
+    @property
+    def porcentagem(self) -> int | None:
+        return round(100 * self.acertos / self.medidas) if self.medidas else None
+
+    @property
+    def vazio(self) -> bool:
+        return not (self.questoes or self.minutos)
+
+
+@dataclass
+class TotaisDoDia:
+    """Quanto eu estudei no dia, somando as tres origens.
+
+    A regra, e ela vale para o radar inteiro (docs/decisoes.md):
+
+    - VOLUME soma tudo: as faixas do plano, o estudo extra e as questoes que eu
+      respondi dentro do radar;
+    - o ACERTO principal tambem soma as tres, e a tela mostra embaixo a divisao
+      "radar: X% em N / anotado: Y% em M" - o primeiro e medido questao por
+      questao, o segundo e o que eu digitei;
+    - a comparacao com a META usa so questao SEM CONSULTA;
+    - questao escrita por IA nao entra em acerto nenhum: ela treina, nao mede.
+      Ela conta no volume, porque o tempo foi gasto.
+    """
+    plano: Numeros = field(default_factory=Numeros)
+    extra: Numeros = field(default_factory=Numeros)
+    radar: Numeros = field(default_factory=Numeros)
+    #: So o que vale para comparar com a meta: sem consulta, com acerto anotado.
+    sem_consulta: Numeros = field(default_factory=Numeros)
+    #: Questoes de IA respondidas no radar. Volume sim, acerto nunca.
+    geradas: int = 0
+
+    @property
+    def total(self) -> Numeros:
+        return self.plano + self.extra + self.radar
+
+    @property
+    def anotado(self) -> Numeros:
+        """O que eu digitei: as faixas e os extras, sem o radar."""
+        return self.plano + self.extra
+
+    @property
+    def minutos(self) -> int:
+        return self.plano.minutos + self.extra.minutos
+
+    @property
+    def vazio(self) -> bool:
+        return self.total.vazio
+
+
+def _janela_do_dia(data: date) -> tuple[datetime, datetime]:
+    """O dia local em UTC, para consultar hora gravada em UTC.
+
+    Sem isto, um simulado respondido as 22h de Florianopolis (1h do dia
+    seguinte em UTC) cairia no dia errado.
+    """
+    inicio = datetime.combine(data, time.min, tzinfo=fuso_local())
+    return (inicio.astimezone(timezone.utc),
+            (inicio + timedelta(days=1)).astimezone(timezone.utc))
+
+
+def numeros_do_radar(data: date) -> tuple[Numeros, int]:
+    """O que eu respondi DENTRO do radar naquele dia, e quantas eram de IA.
+
+    Aqui o acerto e medido, e nao digitado: o radar conferiu cada questao
+    contra o gabarito. Questao gerada por IA entra no volume (o tempo foi
+    gasto) e fica fora do acerto - ela treina, nao mede.
+
+    Minutos ficam em zero: o radar nao cronometra o simulado.
+    """
+    criar_tabelas()
+    inicio, fim = _janela_do_dia(data)
+    numeros = Numeros()
+    geradas = 0
+    with sessao() as s:
+        respostas = s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.respondida_em.is_not(None))
+            .where(RespostaDeSimulado.respondida_em >= inicio)
+            .where(RespostaDeSimulado.respondida_em < fim)
+        )
+        for resposta in respostas:
+            numeros.questoes += 1
+            if resposta.gerada:
+                geradas += 1
+                continue
+            numeros.medidas += 1
+            if resposta.acertou:
+                numeros.acertos += 1
+    return numeros, geradas
+
+
+def totais_do_dia(dia, estado: EstadoDoDia | None, data: date,
+                  extras: list | None = None) -> TotaisDoDia:
+    """A linha "Hoje: N questoes, N acertos, N erros, Nh de estudo".
+
+    Calculada, e nunca digitada: era justamente o numero digitado a mao que
+    fazia o diario nao bater com o que eu tinha feito de verdade.
+    """
+    totais = TotaisDoDia()
+
+    for feita in valores_das_faixas(dia, estado).values():
+        totais.plano.somar(feita.questoes, feita.acertos, feita.minutos)
+        if not feita.consulta:
+            totais.sem_consulta.somar(feita.questoes, feita.acertos, feita.minutos)
+
+    if extras is None:
+        extras = estudo_extra.do_dia(data)
+    for linha in extras:
+        totais.extra.somar(linha.questoes, linha.acertos, linha.minutos)
+        if not linha.consulta:
+            totais.sem_consulta.somar(linha.questoes, linha.acertos, linha.minutos)
+
+    totais.radar, totais.geradas = numeros_do_radar(data)
+    # O simulado do radar e sempre sem consulta: nao ha lei aberta ali dentro.
+    totais.sem_consulta.somar(totais.radar.medidas, totais.radar.acertos)
+    return totais
 
 
 @dataclass
@@ -384,6 +777,11 @@ class TelaDoDia:
     # Os checks: as posicoes (bloco, indice) feitas, e o que elas sugerem.
     feitas: set = field(default_factory=set)
     sugestao: object = None
+    # O que esta anotado em cada faixa feita, por posicao: fiz, acertei, minutos.
+    valores: dict = field(default_factory=dict)
+    # O estudo extra do dia, e os totais somados (plano + extra + radar).
+    extras: list = field(default_factory=list)
+    totais: object = None
     # O Plano B ativo (30 ou 60 minutos), e as opcoes que o botao oferece.
     plano_b: int | None = None
     opcoes_do_plano_b: list[int] = field(default_factory=list)
@@ -663,9 +1061,15 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
                                    questoes=do_plano_b.total_questoes)]
         tela.agora = None
         tela.feitas = faixas_feitas(do_plano_b, estado)
+        tela.valores = valores_das_faixas(do_plano_b, estado)
         tela.sugestao = sugerir_meta(do_plano_b, tela.feitas)
         tela.sugestao.meta = "minima"
+        tela.extras = estudo_extra.do_dia(data)
+        tela.totais = totais_do_dia(do_plano_b, estado, data, tela.extras)
         return tela
     tela.feitas = faixas_feitas(dia, estado)
+    tela.valores = valores_das_faixas(dia, estado)
     tela.sugestao = sugerir_meta(dia, tela.feitas)
+    tela.extras = estudo_extra.do_dia(data)
+    tela.totais = totais_do_dia(dia, estado, data, tela.extras)
     return tela

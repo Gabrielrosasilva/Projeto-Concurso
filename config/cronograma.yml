@@ -37,6 +37,21 @@
 #   plano_b     - as duas opcoes do botao Plano B (30 min e 1 hora) e o que o
 #                 sabado pede. O tema e o filtro das questoes saem das faixas
 #                 do proprio dia.
+#   materias    - as materias da PROVA, com quantas questoes cada uma tem e
+#                 quantas eu quero acertar (`meta`). Os numeros de `questoes`
+#                 sao do edital de 2019, o ultimo; a meta e minha, e a soma
+#                 delas e a meta da prova inteira (79 de 100).
+#                 E daqui que sai a comparacao "estou na meta desta materia?",
+#                 e por isso o carregamento confere tres coisas: nome repetido,
+#                 meta maior que as questoes da materia, e materia escrita numa
+#                 faixa que nao existe nesta lista (o que pega erro de
+#                 digitacao - "Direito Penall" nunca mais somaria em lugar
+#                 nenhum). Faixa SEM materia - pausa, correcao, simulado misto
+#                 de sabado - nao e conferida: ela conta no geral e em
+#                 nenhuma materia.
+#   materias_mistas - os rotulos que aparecem em `materia` de faixa mas NAO
+#                 sao materia do edital, porque a faixa cobre mais de uma.
+#                 Valem como faixa sem materia.
 #   mapa        - o ano inteiro em seis linhas, para a tela Hoje mostrar onde
 #                 eu estou. NAO manda em nada do dia a dia: quem manda no que
 #                 acontece hoje continua sendo `dias`, e o ciclo que esta
@@ -114,6 +129,27 @@ semanas:
   4: 50 por noite. Português entra em pronomes; LEP chega nos estabelecimentos.
   5: '50 a 60 por noite (entra o R+30 na quarta). LEP: progressão e remição.'
   6: FECHAMENTO. Sábado 07/11 = simulado de 50 questões no radar.
+materias:
+- {nome: Língua Portuguesa, questoes: 15, meta: 12}
+- {nome: Raciocínio Lógico, questoes: 10, meta: 9}
+- {nome: Direitos Humanos, questoes: 15, meta: 12}
+- {nome: Direito Constitucional, questoes: 5, meta: 4}
+- {nome: Administração Pública, questoes: 5, meta: 5}
+- {nome: Direito Penal, questoes: 5, meta: 4}
+- {nome: Legislação Especial, questoes: 10, meta: 7}
+- {nome: Direito Processual Penal, questoes: 5, meta: 4}
+- {nome: Legislação Estadual, questoes: 10, meta: 7}
+- {nome: Lei de Execução Penal, questoes: 10, meta: 8}
+- {nome: Sociologia Aplicada, questoes: 10, meta: 7}
+
+# Rotulo que aparece em `materia` de faixa e NAO e materia do edital: a faixa
+# cobre mais de uma. Hoje so o R+7 que refaz os erros dos diagnosticos, que sao
+# de Raciocinio Logico e de Portugues juntos. Vale como faixa sem materia:
+# conta no volume e no acerto geral, e em nenhuma materia - a mesma regra do
+# simulado misto de sabado.
+materias_mistas:
+- Diagnósticos
+
 mapa:
 - nome: Ciclo 1
   inicio: '2026-09-28'

@@ -112,6 +112,48 @@
     .ds a.botao-anotar{color:var(--cor-texto-suave)}
     .ds a.botao-anotar:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
 
+    /* --- "fiz X, acertei Y" na propria faixa (etapa E2) --- */
+    .resultado{margin-left:var(--esp-2);font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      color:var(--selo-calculado);white-space:nowrap}
+    .fiz{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:end;margin-top:var(--esp-2)}
+    .fiz label{display:grid;gap:2px;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .fiz input[type=number]{width:5rem;padding:var(--esp-1) var(--esp-2);
+      border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
+      background:var(--cor-superficie);color:var(--cor-texto);font:inherit;
+      font-size:var(--tam-sm);font-variant-numeric:tabular-nums}
+    .fiz input:focus,.form-extra input:focus,.form-extra select:focus{
+      outline:2px solid var(--cor-acao);outline-offset:1px}
+    .caixa{display:flex;align-items:center;gap:var(--esp-1);white-space:nowrap}
+    .fiz .caixa{padding-bottom:var(--esp-1)}
+    .fiz-feita{display:flex;flex-wrap:wrap;gap:var(--esp-3);align-items:center;
+      margin-top:var(--esp-2)}
+    .fiz-feita summary{cursor:pointer;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .fiz-feita form{display:inline}
+
+    /* --- a linha do total do dia --- */
+    .fiz-hoje{margin:0 0 var(--esp-1);font-size:var(--tam-md)}
+    .fiz-de-onde{margin:0 0 var(--esp-2);font-size:var(--tam-xs);
+      color:var(--cor-texto-suave);display:flex;align-items:center;gap:var(--esp-2);
+      flex-wrap:wrap}
+
+    /* --- o estudo extra --- */
+    .lista-extras{list-style:none;margin:0 0 var(--esp-4);padding:0;display:grid;gap:var(--esp-3)}
+    .lista-extras li{padding-bottom:var(--esp-3);border-bottom:1px solid var(--cor-borda)}
+    .lista-extras li:last-child{border-bottom:0;padding-bottom:0}
+    .topo-extra{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:baseline;
+      font-size:var(--tam-sm)}
+    .editar-extra summary,.novo-extra summary{cursor:pointer}
+    .novo-extra summary{display:inline-block;list-style:none}
+    .novo-extra summary::-webkit-details-marker{display:none}
+    .form-extra{display:grid;gap:var(--esp-3);margin-top:var(--esp-3)}
+    .linha-extra{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--esp-3)}
+    @media (max-width:760px){.linha-extra{grid-template-columns:1fr 1fr}}
+    .form-extra input[type=text],.form-extra input[type=number],.form-extra select{
+      width:100%;padding:var(--esp-2) var(--esp-3);border:1px solid var(--cor-borda);
+      border-radius:var(--raio-sm);background:var(--cor-superficie);color:var(--cor-texto);
+      font:inherit;font-size:var(--tam-sm)}
+    .acoes-extra{display:flex;gap:var(--esp-3);align-items:center;flex-wrap:wrap}
+
     /* --- o caderno de erros (na lateral) --- */
     .erros-hoje p{margin:0}
     .erros-hoje .erros-n{font-size:var(--tam-2xl);font-weight:var(--peso-forte);
@@ -301,7 +343,6 @@
     .opcao.reduzida input:checked + span{border-color:var(--selo-oficial);background:var(--selo-oficial-fundo)}
     .opcao.minima input:checked + span{border-color:var(--selo-automatico);background:var(--selo-automatico-fundo)}
     .opcao.nao_fiz input:checked + span{border-color:var(--selo-ia);background:var(--selo-ia-fundo)}
-    .campos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-3);margin-bottom:var(--esp-3)}
     .ds-campo textarea{width:100%;min-height:4rem;padding:var(--esp-2) var(--esp-3);border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
       background:var(--cor-superficie);color:var(--cor-texto);font:inherit;font-size:var(--tam-base);resize:vertical}
     fieldset.bloqueado{border:0;padding:0;margin:0;opacity:.5}
@@ -327,7 +368,7 @@
       .escolha-plano-b{left:0;right:auto}
       .resumo .ds-cartao{padding:var(--esp-2) var(--esp-3)}
       .grande{font-size:var(--tam-lg)}
-      .apertar,.campos{grid-template-columns:1fr}
+      .apertar{grid-template-columns:1fr}
       .metas{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
 
@@ -360,6 +401,79 @@
 {%- endmacro -%}
 
 {%- macro hm(h) -%}{{ h.strftime('%H:%M') }}{%- endmacro -%}
+
+{# O formulario do estudo extra: um so, para criar e para editar. Com `e`, ele
+   edita aquele extra; sem, cria um novo. As questoes ficam de fora quando o
+   lugar e o radar - lá cada questao ja foi contada uma por uma. #}
+{%- macro formulario_do_extra(e) -%}
+  {% set v = (form_do_extra if e is none else none) or {} %}
+  <form class="form-extra" method="post"
+        action="/hoje/extra{% if e %}/{{ e.id }}{% endif %}{% if tema %}?tema={{ tema }}{% endif %}">
+    <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+    <div class="linha-extra">
+      <label class="ds-campo">O que
+        <select name="o_que">
+          {% for chave, nome in O_QUE_DO_EXTRA.items() %}
+            <option value="{{ chave }}" {{ 'selected' if chave == (v.o_que or (e.o_que if e else 'questoes')) }}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ds-campo">Matéria
+        <select name="materia">
+          <option value="">—</option>
+          {% for m in t.plano.materias %}
+            <option value="{{ m.nome }}" {{ 'selected' if m.nome == (v.materia or (e.materia if e else '')) }}>{{ m.nome }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ds-campo">Minutos
+        <input type="number" name="minutos" min="1" inputmode="numeric" required
+               value="{{ v.minutos or (e.minutos if e else '') }}">
+      </label>
+      <label class="ds-campo">Onde
+        <select name="onde">
+          {% for chave, nome in ONDE_DO_EXTRA.items() %}
+            <option value="{{ chave }}" {{ 'selected' if chave == (v.onde or (e.onde if e else 'outro')) }}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+    <label class="ds-campo">Assunto
+      <input type="text" name="assunto" maxlength="200"
+             value="{{ v.assunto or (e.assunto if e else '') }}"
+             placeholder="ex.: progressão de regime">
+    </label>
+    <div class="linha-extra">
+      <label class="ds-campo">Questões
+        <input type="number" name="questoes" min="0" inputmode="numeric"
+               value="{{ v.questoes or (e.questoes if e and e.questoes is not none else '') }}">
+      </label>
+      <label class="ds-campo">Acertos
+        <input type="number" name="acertos" min="0" inputmode="numeric"
+               value="{{ v.acertos or (e.acertos if e and e.acertos is not none else '') }}">
+      </label>
+      <label class="ds-campo caixa">
+        <input type="checkbox" name="consulta" value="1"
+               {% if v.consulta or (e.consulta if e else false) %}checked{% endif %}>
+        com consulta
+      </label>
+    </div>
+    <p class="ds-pequeno ds-suave">
+      No <b>Radar</b> as questões e os acertos ficam vazios: cada questão que eu
+      respondo lá já é contada uma por uma. Do extra do radar vale o tempo.
+    </p>
+    <label class="ds-campo">Anotação
+      <input type="text" name="anotacao" maxlength="500"
+             value="{{ v.anotacao or (e.anotacao if e else '') }}">
+    </label>
+    <div class="acoes-extra">
+      <button class="ds-botao" type="submit">{{ 'Salvar' if e else 'Anotar' }}</button>
+      {% if e %}
+        <button class="ds-botao ds-botao--secundario" type="submit" name="apagar" value="1">apagar</button>
+      {% endif %}
+    </div>
+  </form>
+{%- endmacro -%}
 
 {%- macro texto_da_sequencia(n) -%}
 {% if not n %}Comece hoje a sua sequência{% elif n == 1 %}🔥 1 dia seguido{% else %}🔥 {{ n }} dias seguidos{% endif %}
@@ -647,6 +761,7 @@
           {% set atual = t.agora and t.agora.atual is sameas f %}
           {% set passou = t.hora and f.fim and f.fim <= t.hora %}
           {% set feita = (b.chave, loop.index0) in t.feitas %}
+          {% set anotado = t.valores.get((b.chave, loop.index0)) %}
           {# O que o cronometro precisa saber da faixa, escrito pelo servidor:
              quanto dura, como se chama, e o que vem depois dela (se e pausa,
              quanto dura a pausa e o que vem depois da pausa). #}
@@ -679,7 +794,13 @@
                   <span class="tipo"><span aria-hidden="true">{{ ICONE_DO_TIPO[f.tipo] }}</span> {{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}</span>
                   {% if f.materia %}<span class="materia">{{ f.materia }}</span>{% endif %}
                 </div>
-                <p class="titulo">{{ f.titulo }}</p>
+                <p class="titulo">{{ f.titulo }}
+                  {% if anotado and anotado.questoes %}
+                    <span class="resultado">{{ anotado.acertos if anotado.acertos is not none else '—' }}
+                      de {{ anotado.questoes }}{% if anotado.porcentagem is not none %} ·
+                      {{ anotado.porcentagem }}%{% endif %}</span>
+                  {% endif %}
+                </p>
                 {% if f.questoes %}<p class="qtd">{{ f.questoes }} questões</p>{% endif %}
 
                 {% set no_plano_b = b.chave == 'plano_b' %}
@@ -733,9 +854,55 @@
                       <span aria-hidden="true">📓</span> abrir os erros da semana</a>
                   </p>
                 {% endif %}
+
+                {# "Fiz X, acertei Y" - o check das faixas de questao. Feita, o
+                   formulario recolhe num <details> para corrigir, e ganha o
+                   botao de desmarcar ao lado. Sem JavaScript, como o resto. #}
+                {% if not t.futuro and TEM_ACERTO(f) %}
+                  {% set marcar %}
+                    <form class="fiz" method="post" action="/hoje/faixa/questoes{% if tema %}?tema={{ tema }}{% endif %}">
+                      <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                      <input type="hidden" name="bloco" value="{{ b.chave }}">
+                      <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                      <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                      <label>fiz
+                        <input type="number" name="questoes" min="0" inputmode="numeric"
+                               value="{{ anotado.questoes if anotado and anotado.questoes is not none else (f.questoes or '') }}">
+                      </label>
+                      <label>acertei
+                        <input type="number" name="acertos" min="0" inputmode="numeric"
+                               placeholder="—"
+                               value="{{ anotado.acertos if anotado and anotado.acertos is not none else '' }}">
+                      </label>
+                      <label class="caixa">
+                        <input type="checkbox" name="consulta" value="1"
+                               {% if (anotado.consulta if anotado else CONSULTA_POR_PADRAO(f)) %}checked{% endif %}>
+                        com consulta
+                      </label>
+                      <button class="ds-botao ds-botao--pequeno" type="submit">{{ 'Salvar' if feita else '✓ Fiz' }}</button>
+                    </form>
+                  {% endset %}
+                  {% if feita %}
+                    <div class="fiz-feita">
+                      <details><summary>corrigir os números</summary>{{ marcar }}</details>
+                      <form method="post" action="/hoje/faixa/questoes{% if tema %}?tema={{ tema }}{% endif %}">
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                        <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                        <button class="ds-botao ds-botao--secundario ds-botao--pequeno"
+                                type="submit" name="desmarcar" value="1">desmarcar</button>
+                      </form>
+                    </div>
+                  {% else %}
+                    {{ marcar }}
+                  {% endif %}
+                {% endif %}
               </div>
-              {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito. #}
-              {% if not t.futuro %}
+              {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito.
+                 Faixa de questoes nao tem circulo: tem o formulario "fiz X,
+                 acertei Y", logo abaixo do corpo. #}
+              {% if not t.futuro and not TEM_ACERTO(f) %}
                 <form class="marca-faixa" method="post" action="/hoje/faixa{% if tema %}?tema={{ tema }}{% endif %}">
                   <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                   <input type="hidden" name="bloco" value="{{ b.chave }}">
@@ -768,19 +935,48 @@
   {# ============================ como foi o dia ======================== #}
   {% set r = t.registro %}
   {% set s = t.sugestao %}
-  {# Sem registro salvo, "questoes feitas" chega com a soma das faixas
-     marcadas. Depois de salvo, vale o que eu salvei. #}
+  {# Os numeros sairam deste formulario na etapa E2: eles sao calculados, e
+     aparecem na linha "Fiz hoje" logo abaixo. O que eu escolho e a meta. #}
   {% set valores = form or {
       'meta': r.meta if r else ('minima' if t.plano_b else ''),
-      'questoes_feitas': (r.questoes_feitas if r.questoes_feitas is not none else '') if r
-                         else (s.questoes if s and s.questoes else ''),
-      'acertos': r.acertos if r and r.acertos is not none else '',
       'anotacao': (r.anotacao or '') if r else '' } %}
+  {% set tt = t.totais %}
   <section class="ds-cartao bloco-dia como-foi" id="como-foi">
     <div class="ds-cartao__cabeca">
       <h2 class="ds-cartao__titulo">{% if r %}Editar o registro de {{ t.data.strftime('%d/%m') }}{% else %}Como foi o dia{% endif %}</h2>
     </div>
     <p class="ds-cartao__meta">O que eu anoto aqui é o diário do cronograma: não entra em nenhum acerto medido do radar.</p>
+
+    {# O total do dia, somado sozinho: as faixas que eu marquei, o estudo extra
+       e o que eu respondi dentro do radar. Era isto que eu somava de cabeça - e
+       quase sempre esquecia os extras. #}
+    {% if tt and not tt.vazio %}
+      <p class="fiz-hoje">
+        <b>Fiz hoje:</b> {{ tt.total.questoes }} questões
+        {%- if tt.total.medidas %} · {{ tt.total.acertos }} acertos ·
+          {{ tt.total.erros }} erros{% endif %}
+        {%- if tt.minutos %} · {{ duracao(tt.minutos) }} de estudo
+          {%- if tt.plano.minutos and tt.extra.minutos %}
+            ({{ duracao(tt.plano.minutos) }} do plano + {{ duracao(tt.extra.minutos) }} extra)
+          {%- endif %}
+        {%- endif %}
+      </p>
+      {% if tt.radar.medidas and tt.anotado.medidas %}
+        <p class="fiz-de-onde">
+          {{ selo('calculado') }} radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
+          anotado: {{ tt.anotado.porcentagem }}% em {{ tt.anotado.medidas }}
+        </p>
+      {% endif %}
+      {% if tt.geradas %}
+        <p class="fiz-de-onde ds-suave">{{ tt.geradas }} questão(ões) de IA hoje: contam no volume, nunca no acerto.</p>
+      {% endif %}
+      {% if tt.total.erros %}
+        <p class="links">
+          <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, '', '', '/hoje?data=' ~ t.data.isoformat() ~ ('&tema=' ~ tema if tema else '') ~ '#como-foi') }}">
+            <span aria-hidden="true">📓</span> anotar os erros</a>
+        </p>
+      {% endif %}
+    {% endif %}
 
     {% if erro %}<p class="erro" role="alert">{{ erro }}</p>{% endif %}
 
@@ -803,14 +999,6 @@
             </label>
           {% endfor %}
         </fieldset>
-        <div class="campos">
-          <label class="ds-campo">Questões feitas
-            <input type="number" name="questoes_feitas" min="0" inputmode="numeric" value="{{ valores.questoes_feitas }}">
-          </label>
-          <label class="ds-campo">Acertos
-            <input type="number" name="acertos" min="0" inputmode="numeric" value="{{ valores.acertos }}">
-          </label>
-        </div>
         <label class="ds-campo" style="margin-bottom:var(--esp-3)">Anotação (opcional)
           <textarea name="anotacao" maxlength="2000">{{ valores.anotacao }}</textarea>
         </label>
@@ -818,6 +1006,63 @@
         {% if r %}<span class="ds-pequeno ds-suave">&nbsp; anotado em {{ r.anotado_em | data }}</span>{% endif %}
       </fieldset>
     </form>
+
+    {# Os numeros antigos, digitados a mao antes da etapa E2. Ficam a vista
+       porque eles valem: era o que eu sabia na epoca. #}
+    {% if r and (r.questoes_feitas is not none or r.acertos is not none) %}
+      <p class="ds-pequeno ds-suave">
+        Gravado neste dia: {{ r.questoes_feitas if r.questoes_feitas is not none else '—' }} questões
+        {%- if r.acertos is not none %}, {{ r.acertos }} acertos{% endif %}.
+      </p>
+    {% endif %}
+  </section>
+
+  {# ============================ estudo extra ========================== #}
+  <section class="ds-cartao bloco-dia extras" id="extras">
+    <div class="ds-cartao__cabeca">
+      <h2 class="ds-cartao__titulo">➕ Estudo extra</h2>
+    </div>
+    <p class="ds-cartao__meta">
+      O que eu estudei fora das faixas do plano. Conta no volume e no acerto do
+      dia; <b>não muda a meta</b> — fazer mais do que o plano pedia não
+      transforma um dia reduzido em ideal.
+    </p>
+
+    {% if erro_do_extra %}<p class="erro" role="alert">{{ erro_do_extra }}</p>{% endif %}
+
+    {% if t.extras %}
+      <ul class="lista-extras">
+        {% for e in t.extras %}
+          <li>
+            <div class="topo-extra">
+              <b>{{ O_QUE_DO_EXTRA.get(e.o_que, e.o_que) }}</b>
+              {% if e.materia %}<span class="ds-suave">{{ e.materia }}</span>{% endif %}
+              {% if e.assunto %}<span class="ds-suave">{{ e.assunto }}</span>{% endif %}
+              <span class="chip">{{ duracao(e.minutos) }}</span>
+              {% if e.questoes %}
+                <span class="chip">{{ e.acertos if e.acertos is not none else '—' }} de {{ e.questoes }}</span>
+              {% endif %}
+              {% if e.consulta %}<span class="chip">com consulta</span>{% endif %}
+              <span class="chip">{{ ONDE_DO_EXTRA.get(e.onde, e.onde) }}</span>
+            </div>
+            {% if e.anotacao %}<p class="ds-pequeno">{{ e.anotacao }}</p>{% endif %}
+            {% if not t.futuro %}
+              <details class="editar-extra">
+                <summary>editar</summary>
+                {{ formulario_do_extra(e) }}
+              </details>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if not t.futuro %}
+      <details class="novo-extra" {% if erro_do_extra %}open{% endif %}>
+        <summary class="ds-botao ds-botao--secundario">➕ Estudo extra</summary>
+        {{ formulario_do_extra(none) }}
+      </details>
+    {% endif %}
   </section>
   {% endif %}
 

@@ -119,6 +119,8 @@ from radar.servico import espacada      # noqa: F401 - usado pela web e CLI
 from radar.servico import cronograma    # noqa: F401 - usado pela CLI
 # O caderno de erros. `servico.erros.anotar(...)`. NAO mede nada: e diario.
 from radar.servico import erros         # noqa: F401 - usado pela web
+# O estudo extra, fora das faixas do plano. Tambem diario, tambem nao mede.
+from radar.servico import extra         # noqa: F401 - usado pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

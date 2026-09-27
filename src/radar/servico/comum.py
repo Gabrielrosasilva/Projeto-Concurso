@@ -12,6 +12,15 @@ from sqlalchemy import func
 from radar.models import Concurso, QuestaoDeProva
 
 
+class RegistroInvalido(ValueError):
+    """O que eu mandei anotar foi recusado. A mensagem diz por que.
+
+    Mora aqui, e nao no `servico/cronograma.py`, porque o diario do cronograma
+    e o estudo extra recusam pelos mesmos motivos - e um importando o outro so
+    para pegar a excecao fechava um circulo de imports.
+    """
+
+
 def sem_acento(texto: str) -> str:
     import unicodedata
 

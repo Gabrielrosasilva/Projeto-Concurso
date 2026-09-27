@@ -1535,6 +1535,18 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"{destino_erros}"
     )
 
+    # O estudo extra, pelo mesmo motivo: o tempo que eu estudei fora do plano
+    # nao esta em nenhum outro lugar.
+    destino_extras = (
+        destino.with_name("estudo_extra.json") if caminho
+        else acervo.caminho_dos_extras()
+    )
+    extras_gravados = acervo.exportar_extras(destino_extras)
+    console.print(
+        f"[green]{extras_gravados}[/] estudo(s) extra(s) exportado(s) para "
+        f"{destino_extras}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1619,6 +1631,14 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_erros.exists():
         erros_de_volta = acervo.importar_erros(origem_erros)
         console.print(f"   {erros_de_volta} erro(s) anotado(s) de volta ao banco")
+
+    origem_extras = (
+        origem.with_name("estudo_extra.json") if caminho
+        else acervo.caminho_dos_extras()
+    )
+    if origem_extras.exists():
+        extras_de_volta = acervo.importar_extras(origem_extras)
+        console.print(f"   {extras_de_volta} estudo(s) extra(s) de volta ao banco")
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -1968,7 +1988,8 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/assuntos.json", "data/questoes_geradas.json",
                      "data/simulados.json", "data/macetes.json",
                      "data/explicacoes.json", "data/registro_estudo.json",
-                     "data/estado_do_dia.json", "data/caderno_erros.json")
+                     "data/estado_do_dia.json", "data/caderno_erros.json",
+                     "data/estudo_extra.json")
 
 
 @app.command()
@@ -2017,8 +2038,10 @@ def sincronizar(
     dias = acervo.importar_registros()
     estados = acervo.importar_estados()
     erros_de_volta = acervo.importar_erros()
+    extras_de_volta = acervo.importar_extras()
     console.print(f"   {dias} dia(s) do cronograma, {estados} dia(s) de faixas "
-                  f"marcadas e {erros_de_volta} erro(s) anotado(s) de volta ao banco")
+                  f"marcadas, {erros_de_volta} erro(s) anotado(s) e "
+                  f"{extras_de_volta} estudo(s) extra(s) de volta ao banco")
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -2046,11 +2069,13 @@ def sincronizar(
     total_dias = acervo.exportar_registros()
     acervo.exportar_estados()
     total_erros = acervo.exportar_erros()
+    total_extras = acervo.exportar_extras()
     favoritos = servico.contar_favoritos()
     console.print(
         f"   {total} concurso(s), {total_eventos} evento(s), "
-        f"{total_simulados} simulado(s), {total_dias} dia(s) do cronograma e "
-        f"{total_erros} erro(s) anotado(s), com [bold]{favoritos}[/] favorito(s)"
+        f"{total_simulados} simulado(s), {total_dias} dia(s) do cronograma, "
+        f"{total_erros} erro(s) anotado(s) e {total_extras} estudo(s) extra(s), "
+        f"com [bold]{favoritos}[/] favorito(s)"
     )
 
     console.print("[bold]5/6[/] Commitando")
@@ -2171,8 +2196,9 @@ def hoje(
 
     # As faixas que eu risquei na tela, pela mesma regra dela: check cujo
     # titulo nao bate mais com o cronograma.yml nao conta.
-    feitas = servico.cronograma.faixas_feitas(
-        dia, servico.cronograma.estado_do_dia(quando))
+    estado = servico.cronograma.estado_do_dia(quando)
+    feitas = servico.cronograma.faixas_feitas(dia, estado)
+    anotado = servico.cronograma.valores_das_faixas(dia, estado)
 
     for chave in cronograma.BLOCOS:
         faixas = getattr(dia, chave)
@@ -2199,6 +2225,16 @@ def hoje(
                 linha = f"[dim]{linha}[/]"
             if (chave, indice) in feitas:
                 linha = f"[green]{escape('[✓]')}[/] {linha}"
+                feita = anotado.get((chave, indice))
+                if feita and feita.questoes:
+                    resultado = (f"{feita.acertos}/{feita.questoes}"
+                                 if feita.acertos is not None
+                                 else f"{feita.questoes} feitas")
+                    if feita.porcentagem is not None:
+                        resultado += f" · {feita.porcentagem}%"
+                    if feita.consulta:
+                        resultado += " · com consulta"
+                    linha += f"  [green]{escape(resultado)}[/]"
             console.print(linha)
 
     console.print(f"\nTotal do dia: [bold]{dia.total_questoes} questões[/] "
@@ -2207,6 +2243,16 @@ def hoje(
         console.print(f"[yellow]Reduzida:[/] {escape(dia.reduzida)}")
     if dia.minima:
         console.print(f"[yellow]Mínima:[/] {escape(dia.minima)}")
+
+    extras = servico.extra.do_dia(quando)
+    if extras:
+        console.print("\n[bold cyan]➕ Estudo extra[/]")
+        for linha_extra in extras:
+            console.print("  " + escape(_extra_legivel(linha_extra)))
+
+    totais = servico.cronograma.totais_do_dia(dia, estado, quando, extras)
+    if not totais.vazio:
+        console.print(f"\n[bold]Fiz hoje:[/] {escape(_totais_legiveis(totais))}")
 
     registro = servico.cronograma.registros(quando, quando).get(quando)
     if registro:
@@ -2248,6 +2294,52 @@ def _mostrar_plano_b(plano, quando, minutos: int, nivel: int) -> None:
             console.print(f"     {escape(faixa.detalhe)}")
         if faixa.link:
             console.print(f"     [dim]{faixa.link}[/]")
+
+
+def _extra_legivel(extra) -> str:
+    """"Questoes · LEP · Progressao · 30 min · 12/15 · Qconcursos"."""
+    partes = [servico.extra.O_QUE.get(extra.o_que, extra.o_que)]
+    if extra.materia:
+        partes.append(extra.materia)
+    if extra.assunto:
+        partes.append(extra.assunto)
+    partes.append(cronograma.duracao_legivel(extra.minutos))
+    if extra.questoes:
+        feitas = (f"{extra.acertos}/{extra.questoes}" if extra.acertos is not None
+                  else f"{extra.questoes} questões")
+        if extra.consulta:
+            feitas += " (com consulta)"
+        partes.append(feitas)
+    partes.append(servico.extra.ONDE.get(extra.onde, extra.onde))
+    return " · ".join(partes)
+
+
+def _totais_legiveis(totais) -> str:
+    """A mesma linha da tela: volume, acerto e de onde ele vem."""
+    somado = totais.total
+    partes = [f"{somado.questoes} questões"]
+    if somado.medidas:
+        partes.append(f"{somado.acertos} acertos")
+        partes.append(f"{somado.erros} erros")
+    if totais.minutos:
+        de_onde = []
+        if totais.plano.minutos:
+            de_onde.append(f"{cronograma.duracao_legivel(totais.plano.minutos)} do plano")
+        if totais.extra.minutos:
+            de_onde.append(f"{cronograma.duracao_legivel(totais.extra.minutos)} extra")
+        tempo = cronograma.duracao_legivel(totais.minutos) + " de estudo"
+        if len(de_onde) > 1:
+            tempo += " (" + " + ".join(de_onde) + ")"
+        partes.append(tempo)
+    linha = " · ".join(partes)
+    if totais.radar.medidas and totais.anotado.medidas:
+        linha += (f"\n  radar: {totais.radar.porcentagem}% em "
+                  f"{totais.radar.medidas} · anotado: "
+                  f"{totais.anotado.porcentagem}% em {totais.anotado.medidas}")
+    if totais.geradas:
+        linha += (f"\n  {totais.geradas} questão(oes) de IA: contam no volume, "
+                  f"nunca no acerto")
+    return linha
 
 
 def _registro_legivel(registro) -> str:

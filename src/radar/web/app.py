@@ -235,6 +235,11 @@ def rotulo_da_lei(link: str) -> str:
     return "Ler a lei"
 
 templates.env.globals.update(
+    O_QUE_DO_EXTRA=servico.extra.O_QUE, ONDE_DO_EXTRA=servico.extra.ONDE,
+    ONDE_SEM_QUESTOES=servico.extra.ONDE_SEM_QUESTOES,
+    TEM_ACERTO=cronograma.tem_acerto,
+    CONSULTA_POR_PADRAO=cronograma.consulta_por_padrao,
+    duracao=cronograma.duracao_legivel,
     ONDE_LEGIVEL=ONDE_LEGIVEL, META_LEGIVEL=META_LEGIVEL,
     OPCOES_DE_META=OPCOES_DE_META, DETALHE_ABERTO=DETALHE_ABERTO,
     DIAS_LONGOS=DIAS_LONGOS, MESES=cronograma.MESES,
@@ -862,7 +867,9 @@ def hoje(request: Request, data: str | None = None):
 
 def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
                     form: dict | None = None, status: int = 200,
-                    erro_da_faixa: str | None = None):
+                    erro_da_faixa: str | None = None,
+                    erro_do_extra: str | None = None,
+                    form_do_extra: dict | None = None):
     quando = erro_de_data = None
     if data:
         try:
@@ -879,6 +886,8 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             "erro_de_data": erro_de_data,
             "form": form,
             "erro_da_faixa": erro_da_faixa,
+            "erro_do_extra": erro_do_extra,
+            "form_do_extra": form_do_extra,
             # Quantos erros do caderno vencem hoje. Vem daqui, e nao do
             # TelaDoDia, porque o caderno ja le o cronograma - e o contrario
             # tambem faria um importar o outro.
@@ -905,17 +914,15 @@ def hoje_registrar(
     request: Request,
     data: str = Form(""),
     meta: str = Form(""),
-    questoes_feitas: str = Form(""),
-    acertos: str = Form(""),
     anotacao: str = Form(""),
 ):
     """Grava como foi o dia e volta para ele. Recusa aparece na tela, sem 500.
 
-    Os campos chegam como TEXTO, pela mesma razao do converter_valor: o
-    formulario manda o campo vazio, e declarar `int` faria o vazio virar 422.
+    Desde a etapa E2 os numeros nao chegam mais do formulario: eles sao a soma
+    das faixas marcadas, do estudo extra e do que eu respondi no radar. O que
+    chega daqui e a META, que continua sendo escolha minha.
     """
-    form = {"meta": meta, "questoes_feitas": questoes_feitas,
-            "acertos": acertos, "anotacao": anotacao}
+    form = {"meta": meta, "anotacao": anotacao}
     try:
         quando = date.fromisoformat(data)
     except ValueError:
@@ -926,12 +933,7 @@ def hoje_registrar(
             raise servico.cronograma.RegistroInvalido(
                 "Escolha como foi o dia: Ideal, Reduzida, Mínima ou Não fiz."
             )
-        servico.cronograma.registrar(
-            quando, meta,
-            _inteiro(questoes_feitas, "Questões feitas"),
-            _inteiro(acertos, "Acertos"),
-            anotacao.strip() or None,
-        )
+        servico.cronograma.registrar_o_dia(quando, meta, anotacao.strip() or None)
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro=str(erro), form=form, status=400)
 
@@ -972,6 +974,130 @@ def hoje_faixa(
     destino = (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
                + f"#faixa-{bloco}-{posicao}")
     return RedirectResponse(destino, status_code=303)
+
+
+@app.post("/hoje/faixa/questoes")
+def hoje_faixa_questoes(
+    request: Request,
+    data: str = Form(""),
+    bloco: str = Form(""),
+    indice: str = Form(""),
+    titulo: str = Form(""),
+    questoes: str = Form(""),
+    acertos: str = Form(""),
+    consulta: str = Form(""),
+    desmarcar: str = Form(""),
+):
+    """O "fiz X, acertei Y" de uma faixa de questoes, e o botao de desmarcar.
+
+    Volta para a MESMA faixa, como o circulo: a tela Hoje e longa, e perder o
+    lugar depois de anotar um numero e o tipo de atrito que faz parar de anotar.
+    """
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro_da_faixa=f"Data inválida: {data!r}.",
+                               status=400)
+    try:
+        posicao = _inteiro(indice, "A faixa")
+        if posicao is None:
+            raise servico.cronograma.RegistroInvalido("Faltou dizer qual faixa marcar.")
+        if desmarcar:
+            servico.cronograma.desmarcar_faixa(quando, bloco, posicao, titulo)
+        else:
+            servico.cronograma.anotar_faixa(
+                quando, bloco, posicao, titulo,
+                questoes=questoes, acertos=acertos, consulta=bool(consulta),
+            )
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
+
+    tema = request.query_params.get("tema")
+    destino = (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+               + f"#faixa-{bloco}-{posicao}")
+    return RedirectResponse(destino, status_code=303)
+
+
+def _volta_do_dia(request: Request, quando: date, ancora: str = "extras") -> str:
+    tema = request.query_params.get("tema")
+    return (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+            + f"#{ancora}")
+
+
+@app.post("/hoje/extra")
+def hoje_extra_novo(
+    request: Request,
+    data: str = Form(""),
+    o_que: str = Form("questoes"),
+    materia: str = Form(""),
+    assunto: str = Form(""),
+    minutos: str = Form(""),
+    questoes: str = Form(""),
+    acertos: str = Form(""),
+    consulta: str = Form(""),
+    onde: str = Form("outro"),
+    anotacao: str = Form(""),
+):
+    """Anota um estudo que eu fiz fora das faixas do plano."""
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro_do_extra=f"Data inválida: {data!r}.",
+                               status=400)
+    try:
+        servico.extra.anotar(
+            data=quando, o_que=o_que, materia=materia, assunto=assunto,
+            minutos=minutos, questoes=questoes, acertos=acertos,
+            consulta=bool(consulta), onde=onde, anotacao=anotacao,
+        )
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro_do_extra=str(erro),
+                               form_do_extra={
+                                   "o_que": o_que, "materia": materia,
+                                   "assunto": assunto, "minutos": minutos,
+                                   "questoes": questoes, "acertos": acertos,
+                                   "consulta": consulta, "onde": onde,
+                                   "anotacao": anotacao},
+                               status=400)
+    return RedirectResponse(_volta_do_dia(request, quando), status_code=303)
+
+
+@app.post("/hoje/extra/{ident}")
+def hoje_extra_editar(
+    request: Request,
+    ident: int,
+    data: str = Form(""),
+    o_que: str = Form("questoes"),
+    materia: str = Form(""),
+    assunto: str = Form(""),
+    minutos: str = Form(""),
+    questoes: str = Form(""),
+    acertos: str = Form(""),
+    consulta: str = Form(""),
+    onde: str = Form("outro"),
+    anotacao: str = Form(""),
+    apagar: str = Form(""),
+):
+    """Corrige ou apaga um estudo extra que eu ja tinha anotado."""
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro_do_extra=f"Data inválida: {data!r}.",
+                               status=400)
+    if apagar:
+        # Apagar o que nao existe mais (F5 na pagina) nao e erro: a tela
+        # recarregada ja conta a verdade.
+        servico.extra.apagar(ident)
+        return RedirectResponse(_volta_do_dia(request, quando), status_code=303)
+    try:
+        servico.extra.editar(
+            ident, data=quando, o_que=o_que, materia=materia, assunto=assunto,
+            minutos=minutos, questoes=questoes, acertos=acertos,
+            consulta=bool(consulta), onde=onde, anotacao=anotacao,
+        )
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro_do_extra=str(erro), status=400)
+    return RedirectResponse(_volta_do_dia(request, quando), status_code=303)
 
 
 @app.post("/hoje/plano-b")

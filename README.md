@@ -553,6 +553,31 @@ chave. O que importa saber:
 Confira com `radar hoje --data AAAA-MM-DD` depois de editar. O Ciclo 2 entra
 trocando este arquivo.
 
+#### As materias do edital, e a minha meta
+
+O bloco `materias` e a prova: quantas questoes cada materia tem (numeros do
+edital de 2019, o ultimo) e quantas eu quero acertar. A soma das metas e a meta
+da prova inteira - hoje **79 de 100**.
+
+```yaml
+materias:
+- {nome: Língua Portuguesa, questoes: 15, meta: 12}
+- {nome: Lei de Execução Penal, questoes: 10, meta: 8}
+# ... as outras nove
+```
+
+E daqui que sai a comparacao "estou na meta desta materia?", e por isso o
+carregamento confere tres coisas: **nome repetido**, **meta maior que as
+questoes** da materia, e **materia escrita numa faixa que nao existe nesta
+lista** - essa ultima e a que pega erro de digitacao, porque "Direito Penall"
+nunca mais somaria em lugar nenhum.
+
+Faixa **sem** materia (pausa, correcao, simulado misto de sabado) nao e
+conferida: ela conta no total do dia e em nenhuma materia. Quando a faixa tem
+rotulo de materia mas cobre mais de uma - o R+7 que refaz os erros dos
+diagnosticos, que sao de Raciocinio Logico e de Portugues -, o nome dela entra
+em `materias_mistas` e vale como faixa sem materia.
+
 #### O mapa do ano
 
 O bloco `mapa` e o ano inteiro em seis linhas, e serve para uma coisa so: o
@@ -583,6 +608,65 @@ em ordem, sem sobreposicao (uma etapa comeca **depois** do fim da anterior), e
 etapa sem data so no fim da lista. Vao entre duas etapas e permitido - entre o
 Ciclo 1 e o 2 ha um domingo, que nao e de nenhum dos dois.
 
+### Acertos na propria faixa, e o estudo extra
+
+Cada faixa de questoes da tela Hoje tem, no lugar do circulo, um formulario
+curto: **fiz [15] · acertei [__]** e a caixa **com consulta**.
+
+- **"fiz"** ja vem com as questoes daquela faixa no nivel do dia, e pode ser
+  mudado: fiz 25 no lugar de 15 e o mesmo tema, so mais questoes;
+- **"acertei" e opcional.** Vazio conta no volume e em acerto nenhum - foi o
+  que aconteceu: eu fiz e nao anotei quantas acertei. Contar como zero seria
+  mentira;
+- **"com consulta"** ja vem MARCADA na faixa de aprendizagem de Direito (o
+  detalhe dela diz "PODE consultar a lei") e desmarcada nas outras. Questao com
+  a lei aberta treina, e **fica fora da comparacao com a meta**: na prova nao
+  ha lei aberta;
+- faixa feita mostra **"11 de 15 · 73%"** ao lado do titulo, e o formulario
+  recolhe num "corrigir os numeros", com um **desmarcar** ao lado.
+
+Os numeros ficam gravados na propria faixa (minutos, questoes, acertos,
+consulta, materia e assunto), e nao so a posicao dela no arquivo: quando o
+cronograma.yml mudar no Ciclo 2, o historico continua contando o que eu fiz.
+
+O **➕ Estudo extra**, no fim do dia, e para o que eu estudei fora das faixas:
+uma hora de lei seca no almoco, 20 questoes na fila do banco. Cada um tem o
+que foi (teoria, lei seca, questoes, revisao), a materia, o assunto, os
+minutos, as questoes, os acertos e onde foi. **No Radar as questoes ficam
+vazias**: cada uma delas ja foi contada uma por uma, e somar aqui contaria o
+mesmo acerto duas vezes.
+
+O extra **nao muda a meta** do dia nem a sugestao dela: fazer mais do que o
+plano pedia nao transforma um dia reduzido em ideal.
+
+### O total do dia
+
+O "Como foi o dia" **nao tem mais campo de numero**. Ele mostra a soma, feita
+sozinha:
+
+```
+Fiz hoje: 35 questões · 27 acertos · 8 erros · 3h10 de estudo (2h40 do plano + 30 min extra)
+          radar: 80% em 10 · anotado: 76% em 25
+```
+
+O que eu escolho continua sendo a **meta** (Ideal, Reduzida, Minima, Nao fiz), e
+salvar grava os totais no registro do dia. As tres regras, com o porque em
+[docs/decisoes.md](docs/decisoes.md):
+
+| | soma o que |
+|---|---|
+| **volume** (questoes, horas) | faixas do plano + estudo extra + respostas no radar |
+| **acerto** | as tres, com a divisao "radar / anotado" embaixo |
+| **meta** | so questao **sem consulta** |
+
+Questao escrita por IA conta no volume e **em acerto nenhum** — ela treina, nao
+mede. Com erros no dia, aparece o atalho **📓 anotar os erros**, que abre o
+[caderno](#o-caderno-de-erros) ja no dia certo.
+
+O **Meu foco** e o **"Onde estudar primeiro"** continuam usando so o que o radar
+mede, questao por questao: eles respondem o que a banca cobra de mim, e a
+resposta nao pode depender de numero digitado a mao.
+
 ### Backup
 
 O que eu marco no "Como foi o dia" vai para `data/registro_estudo.json` no
@@ -595,9 +679,9 @@ do mesmo jeito, para `data/estado_do_dia.json`, e na volta vale o
 `atualizado_em` mais recente. O cronometro nao vai: ele vive no navegador
 (localStorage) e so importa enquanto a faixa esta rodando.
 
-O caderno de erros vai para `data/caderno_erros.json`, pelo mesmo caminho. A
-chave ali e o `criado_em` do erro (e nao a data, porque num dia eu anoto
-varios), e na volta vale o mais recente.
+O caderno de erros vai para `data/caderno_erros.json` e o estudo extra para
+`data/estudo_extra.json`, pelo mesmo caminho. A chave nos dois e o `criado_em`
+(e nao a data, porque num dia eu anoto varios), e na volta vale o mais recente.
 
 ## O caderno de erros
 
@@ -1244,7 +1328,8 @@ Falha em silencio seria o mesmo que nao ter backup.
 src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
 ├── models.py       tabelas concursos, eventos, questoes, questoes_geradas,
-│                   simulados, respostas, registros_de_estudo e erros_anotados
+│                   simulados, respostas, registros_de_estudo, erros_anotados
+│                   e estudos_extras
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
@@ -1259,6 +1344,7 @@ src/radar/
 │   ├── previsao.py   quando o municipio costuma abrir de novo
 │   ├── cronograma.py o diario do dia e o que a tela Hoje mostra
 │   ├── erros.py      o caderno de erros: anotar, e a revisao 1-7-30 dele
+│   ├── extra.py      o estudo extra, fora das faixas do plano
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?

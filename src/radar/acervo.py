@@ -26,6 +26,7 @@ from radar.models import (
     DataHoraUTC,
     ErroAnotado,
     EstadoDoDia,
+    EstudoExtra,
     Evento,
     QuestaoDeProva,
     QuestaoGerada,
@@ -980,5 +981,85 @@ def importar_erros(caminho: Path | None = None) -> int:
             erro.historico = list(linha.get("historico") or [])
             erro.arquivado = bool(linha.get("arquivado"))
             erro.atualizado_em = atualizado_em
+            mudaram += 1
+    return mudaram
+
+
+# --- o estudo extra ------------------------------------------------------------
+# O mesmo molde do caderno de erros: a chave e o `criado_em`, porque num dia eu
+# anoto varios, e quando os dois lados tem o mesmo vale o `atualizado_em` mais
+# recente.
+
+def caminho_dos_extras() -> Path:
+    return config.diretorio_dados() / "estudo_extra.json"
+
+
+def _extra_como_linha(extra: EstudoExtra) -> dict:
+    return {
+        "criado_em": _serializar(extra.criado_em),
+        "data": extra.data.isoformat(),
+        "o_que": extra.o_que,
+        "materia": extra.materia,
+        "assunto": extra.assunto,
+        "minutos": extra.minutos,
+        "questoes": extra.questoes,
+        "acertos": extra.acertos,
+        "consulta": bool(extra.consulta),
+        "onde": extra.onde,
+        "anotacao": extra.anotacao,
+        "atualizado_em": _serializar(extra.atualizado_em),
+    }
+
+
+def exportar_extras(caminho: Path | None = None) -> int:
+    """Grava o estudo extra no JSON. Devolve quantos. O arquivo so cresce."""
+    criar_tabelas()
+    destino = caminho or caminho_dos_extras()
+
+    juntos = {}
+    for linha in _ler_registros(destino):
+        juntos[linha["criado_em"]] = linha
+    with sessao() as s:
+        for extra in s.scalars(select(EstudoExtra)):
+            linha = _extra_como_linha(extra)
+            juntos[linha["criado_em"]] = _mais_recente(
+                juntos.get(linha["criado_em"]), linha, "atualizado_em")
+
+    _gravar_registros(destino, [juntos[chave] for chave in sorted(juntos)])
+    return len(juntos)
+
+
+def importar_extras(caminho: Path | None = None) -> int:
+    """Traz o estudo extra do JSON para o banco. Devolve quantos mudaram."""
+    origem = caminho or caminho_dos_extras()
+    linhas = _ler_registros(origem)
+    if not linhas:
+        return 0
+
+    criar_tabelas()
+    mudaram = 0
+    with sessao() as s:
+        for linha in linhas:
+            criado_em = datetime.fromisoformat(linha["criado_em"])
+            atualizado_em = datetime.fromisoformat(linha["atualizado_em"])
+            extra = s.scalar(
+                select(EstudoExtra).where(EstudoExtra.criado_em == criado_em)
+            )
+            if extra is not None and extra.atualizado_em >= atualizado_em:
+                continue
+            if extra is None:
+                extra = EstudoExtra(criado_em=criado_em)
+                s.add(extra)
+            extra.data = date.fromisoformat(linha["data"])
+            extra.o_que = linha["o_que"]
+            extra.materia = linha.get("materia")
+            extra.assunto = linha.get("assunto")
+            extra.minutos = int(linha.get("minutos") or 0)
+            extra.questoes = linha.get("questoes")
+            extra.acertos = linha.get("acertos")
+            extra.consulta = bool(linha.get("consulta"))
+            extra.onde = linha.get("onde") or "outro"
+            extra.anotacao = linha.get("anotacao")
+            extra.atualizado_em = atualizado_em
             mudaram += 1
     return mudaram

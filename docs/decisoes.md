@@ -2021,3 +2021,64 @@ O resto veio junto:
   lugar, o link para os erros da semana;
 - a aba **Revisao** passou a abrir no caderno, e nao nos Macetes: o que eu
   errei ontem manda mais que o costume da banca.
+## O que conta no volume, no acerto e na meta (etapa E2, 27/09/2026)
+
+Tres origens medem o meu estudo, e elas nao se misturam do mesmo jeito:
+
+- **VOLUME** (questoes feitas, horas) **soma tudo**: as faixas do plano que eu
+  marquei, o estudo extra e as questoes que eu respondi dentro do radar. Volume
+  e tempo gasto, e tempo gasto nao tem asterisco;
+- **o ACERTO principal tambem soma as tres**, e embaixo dele a tela mostra de
+  onde ele vem: "radar: X% em N · anotado: Y% em M". O primeiro foi medido
+  questao por questao contra o gabarito; o segundo fui eu que digitei. Sao
+  numeros de confianca diferente, e por isso aparecem separados - mas somar
+  apenas o radar seria fingir que as 40 questoes que eu faco no Qconcursos nao
+  existem;
+- **a comparacao com a META usa so questao SEM CONSULTA.** A meta e de prova, e
+  na prova nao ha lei aberta. A faixa de aprendizagem de Direito - a
+  `rampa: direito`, cujo proprio detalhe diz "PODE consultar a lei" - ja vem com
+  a caixa "com consulta" MARCADA: ela treina, e treinar com a lei aberta e o
+  jeito certo de aprender o artigo. O que ela nao pode e me dar a impressao de
+  que eu bati a meta;
+- **questao escrita por IA fica fora de todo acerto.** Ela conta no volume,
+  porque o tempo foi gasto, e nunca no acerto - e a mesma decisao da fase das
+  questoes geradas: elas treinam, nao medem o que a banca cobra;
+- **o Meu foco e o "Onde estudar primeiro" continuam usando SO o que o radar
+  mede, questao por questao.** Eles respondem "o que a banca cobra de mim e
+  quanto eu erro nisso", e a resposta nao pode depender de numero digitado a
+  mao. O diario (faixas, extra, caderno de erros) fica na tela Hoje, onde eu
+  sei o que estou lendo.
+
+O resto veio junto:
+
+- **os campos "questoes feitas" e "acertos" sairam do "Como foi o dia".** Eram
+  eles que faziam o diario nao bater com o que eu tinha feito: eu somava de
+  cabeca e esquecia os extras. Agora o numero e calculado, e salvar a meta grava
+  o total. Registro antigo, com numero digitado, continua valendo como esta - e
+  aparece na tela dizendo que foi gravado naquele dia;
+- **a META do dia continua sendo escolha minha.** O estudo extra nao muda a
+  meta nem a sugestao: fazer mais do que o plano pedia nao transforma um dia
+  reduzido em ideal;
+- **cada faixa de questoes guarda os numeros no proprio check** - minutos,
+  questoes, acertos, consulta, materia e assunto -, e nao so a posicao dela no
+  arquivo. E o Ciclo 2 que exige isso: quando o cronograma.yml mudar, a faixa 2
+  da noite de 20/10 sera outra coisa, e o historico tem que continuar contando o
+  que eu fiz naquele dia. Check antigo, sem os campos, e preenchido pelo plano
+  enquanto a faixa existir nele;
+- **"fiz" pode ser diferente do que o plano pedia** (25 no lugar de 15): mesmo
+  tema, mais questoes. Os minutos continuam sendo os da faixa - quanto tempo eu
+  gastei de verdade eu nao sei, e inventar seria pior;
+- **"acertei" vazio conta no volume e em acerto nenhum.** Foi o que aconteceu:
+  eu fiz e nao anotei quantas acertei. Contar como zero acerto seria mentira;
+- **o extra com `onde = radar` nao guarda questao nem acerto**, so o tempo: o
+  radar ja contou cada questao dele uma por uma, e somar aqui contaria o mesmo
+  acerto duas vezes;
+- **o bloco `materias`** (as 11 materias do edital de 2019, com as questoes de
+  cada uma e a minha meta) mora no config/cronograma.yml, e o carregamento
+  confere nome repetido, meta maior que as questoes da materia e materia escrita
+  numa faixa que nao existe na lista. A ultima e a que pega erro de digitacao:
+  "Direito Penall" nunca mais somaria em lugar nenhum;
+- **`materias_mistas`** e a saida para a faixa que tem rotulo de materia mas
+  cobre mais de uma - hoje so o R+7 que refaz os erros dos diagnosticos, que
+  sao de Raciocinio Logico e de Portugues juntos. Ela conta no volume e no
+  acerto geral, e em nenhuma materia, como o simulado misto de sabado.

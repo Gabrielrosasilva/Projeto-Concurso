@@ -218,7 +218,8 @@ def test_os_checks_valem_no_plano_b(cliente):
     assert resposta.headers["location"] == "/hoje?data=2026-10-28#faixa-plano_b-1"
     texto = cliente.get("/hoje?data=2026-10-28").text
     assert "Sugestão: Mínima (1 de 2 faixas)" in texto
-    assert 'inputmode="numeric" value="8"' in texto
+    # As 8 questoes da faixa do Plano B entram no total do dia (etapa E2).
+    assert "Fiz hoje:</b> 8 questões" in texto
 
 
 def test_voltar_ao_plano_completo(cliente):

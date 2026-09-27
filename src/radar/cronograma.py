@@ -52,6 +52,29 @@ ICONE_DO_TIPO = {
     "bonus": "⭐", "essencial": "📌",
 }
 
+# As faixas em que eu respondo questao, e portanto as que guardam "fiz X,
+# acertei Y". As outras (teoria, lei seca, pausa, correcao, Anki) so se marcam
+# como feitas. `revisao_semanal` fica fora de proposito: ela e "refaca os seus
+# erros da semana", sem numero de questoes proprio.
+TIPOS_COM_ACERTO = {"questoes", "revisao", "simulado", "diagnostico", "bonus"}
+
+
+def tem_acerto(faixa) -> bool:
+    """Esta faixa guarda acerto? E a pergunta que decide o formulario na tela."""
+    return faixa.tipo in TIPOS_COM_ACERTO
+
+
+def consulta_por_padrao(faixa) -> bool:
+    """A caixa "com consulta" ja vem marcada nesta faixa?
+
+    Vem marcada so na faixa de APRENDIZAGEM de Direito - a `rampa: direito`,
+    cujo proprio detalhe diz "PODE consultar a lei". Ela treina e nao mede, e
+    por isso fica fora da comparacao com a meta (docs/decisoes.md). Todas as
+    outras vem desmarcadas: sem consulta e o padrao da prova.
+    """
+    return faixa.tipo == "questoes" and faixa.rampa == "direito"
+
+
 # Arredondamento da duracao das faixas de questoes. 15 questoes x 2,5 min dao
 # 37,5 min; ninguem marca 18:37, entao vira 40.
 ARREDONDA_MINUTOS = 5
@@ -191,6 +214,23 @@ class Dia:
 
 
 @dataclass
+class MateriaDoEdital:
+    """Uma materia da prova: quantas questoes ela tem e quantas eu quero acertar.
+
+    Os numeros sao do edital de 2019 (o ultimo), e a meta e minha - a soma
+    delas e a meta total da prova. Isto e DADO, em config/cronograma.yml.
+    """
+    nome: str
+    questoes: int
+    meta: int
+
+    @property
+    def porcentagem_da_meta(self) -> int:
+        """Quantos por cento eu preciso acertar nesta materia."""
+        return round(100 * self.meta / self.questoes) if self.questoes else 0
+
+
+@dataclass
 class EtapaDoMapa:
     """Uma linha do mapa do ano: um ciclo, a pausa de fim de ano, o pos-edital.
 
@@ -250,6 +290,11 @@ class Plano:
     # O ano inteiro, em seis linhas. Vazio quando o arquivo nao tem `mapa`:
     # o mapa e enfeite util, e a tela Hoje nao pode depender dele.
     mapa: list[EtapaDoMapa] = field(default_factory=list)
+    # As materias da prova, com a meta de acertos de cada uma.
+    materias: list[MateriaDoEdital] = field(default_factory=list)
+    # Os rotulos que aparecem em `materia` de faixa e NAO sao materia do
+    # edital, porque a faixa e mista. Ver `_materias_das_faixas`.
+    materias_mistas: list[str] = field(default_factory=list)
 
     def dia(self, data: date) -> Dia | None:
         for dia in self.dias:
@@ -260,6 +305,25 @@ class Plano:
     def etapa_do_mapa(self, data: date) -> EtapaDoMapa | None:
         """Em que etapa do ano cai `data`. None no vao entre duas etapas."""
         return next((etapa for etapa in self.mapa if etapa.contem(data)), None)
+
+    def materia(self, nome: str | None) -> MateriaDoEdital | None:
+        """A materia do edital com esse nome, ou None (inclusive nas mistas)."""
+        if not nome:
+            return None
+        return next((m for m in self.materias if m.nome == nome), None)
+
+    def e_mista(self, nome: str | None) -> bool:
+        """Este rotulo cobre mais de uma materia? Ai ele nao pontua em nenhuma."""
+        return bool(nome) and nome in self.materias_mistas
+
+    @property
+    def meta_total(self) -> int:
+        """A soma das metas: quantos acertos eu quero na prova inteira."""
+        return sum(m.meta for m in self.materias)
+
+    @property
+    def questoes_da_prova(self) -> int:
+        return sum(m.questoes for m in self.materias)
 
 
 # --- leitura -----------------------------------------------------------------
@@ -423,6 +487,70 @@ def _mapa(bruto) -> list[EtapaDoMapa]:
     return etapas
 
 
+def _materias(bruto) -> list[MateriaDoEdital]:
+    """Le o bloco `materias` e confere o que so se descobre lendo tudo junto.
+
+    Duas regras, e as duas sao para eu nao me enganar editando a mao: nome
+    repetido (eu duplicaria a linha e dividiria a materia em duas) e meta
+    maior que o numero de questoes (querer 12 acertos numa materia de 10).
+    """
+    materias = []
+    vistos = set()
+    for ordem, cru in enumerate(bruto or [], start=1):
+        onde = f"`materias`, item {ordem}"
+        nome = str(cru.get("nome") or "").strip()
+        if not nome:
+            raise ErroNoCronograma(f"{onde}: falta o `nome`")
+        if nome in vistos:
+            raise ErroNoCronograma(f"`materias`: {nome} aparece duas vezes")
+        vistos.add(nome)
+        try:
+            questoes = int(cru["questoes"])
+            meta = int(cru["meta"])
+        except (KeyError, TypeError, ValueError):
+            raise ErroNoCronograma(
+                f"{onde} ({nome}): `questoes` e `meta` precisam ser numeros inteiros"
+            )
+        if questoes <= 0:
+            raise ErroNoCronograma(f"{onde} ({nome}): `questoes` precisa ser maior que zero")
+        if meta < 0:
+            raise ErroNoCronograma(f"{onde} ({nome}): `meta` nao pode ser negativa")
+        if meta > questoes:
+            raise ErroNoCronograma(
+                f"`materias`: a meta de {nome} ({meta}) e maior que as questoes "
+                f"que a prova tem dela ({questoes})"
+            )
+        materias.append(MateriaDoEdital(nome, questoes, meta))
+    return materias
+
+
+def _conferir_materias_das_faixas(dias: list[Dia], materias: list[MateriaDoEdital],
+                                  mistas: list[str]) -> None:
+    """Toda materia escrita numa faixa precisa existir no bloco `materias`.
+
+    E isto que pega o erro de digitacao: "Direito Penall" numa faixa passaria
+    despercebido para sempre, e as questoes daquele dia nao entrariam na conta
+    de materia nenhuma. Faixa SEM materia (pausa, correcao, simulado misto) nao
+    e conferida - ela conta no geral e em nenhuma materia.
+
+    `materias_mistas` e a saida para a faixa que tem rotulo de materia mas
+    cobre mais de uma (o R+7 dos diagnosticos, que refaz Raciocinio Logico e
+    Portugues juntos). Ela vale como faixa sem materia.
+    """
+    if not materias:
+        return          # sem o bloco, nao ha o que conferir
+    conhecidas = {m.nome for m in materias} | set(mistas)
+    for dia in dias:
+        for faixa in dia.faixas():
+            if faixa.materia and faixa.materia not in conhecidas:
+                raise ErroNoCronograma(
+                    f"Dia {dia.data.isoformat()}: a faixa {faixa.titulo!r} e de "
+                    f"{faixa.materia!r}, que nao esta em `materias`. Se for "
+                    f"materia mesmo, some ela la; se a faixa cobrir mais de uma, "
+                    f"some o nome em `materias_mistas`."
+                )
+
+
 def carregar(caminho: Path | None = None) -> Plano:
     """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma."""
     arquivo = caminho or (config.diretorio_config() / "cronograma.yml")
@@ -485,6 +613,10 @@ def carregar(caminho: Path | None = None) -> Plano:
             )
         dias.append(dia)
 
+    materias = _materias(dados.get("materias"))
+    mistas = [str(nome).strip() for nome in (dados.get("materias_mistas") or [])]
+    _conferir_materias_das_faixas(dias, materias, mistas)
+
     return Plano(
         ciclo=dados.get("ciclo"),
         titulo=dados.get("titulo") or "",
@@ -499,6 +631,8 @@ def carregar(caminho: Path | None = None) -> Plano:
         dias=sorted(dias, key=lambda d: d.data),
         plano_b=plano_b,
         mapa=_mapa(dados.get("mapa")),
+        materias=materias,
+        materias_mistas=mistas,
     )
 
 

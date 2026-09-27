@@ -124,31 +124,42 @@ def test_agora_so_aparece_no_dia_de_hoje(cliente, monkeypatch):
 # --- como foi o dia ----------------------------------------------------------
 
 def test_registrar_grava_e_volta_para_o_dia(cliente, monkeypatch):
+    """A meta e escolha minha; os numeros sao calculados (etapa E2)."""
     _parar_o_relogio(monkeypatch, 2026, 9, 30, 12, 0)
+    faixa = servico.cronograma.tela_do_dia(date(2026, 9, 28)).blocos[1].faixas[0]
+    cliente.post("/hoje/faixa/questoes", data={
+        "data": "2026-09-28", "bloco": "noite", "indice": "0",
+        "titulo": faixa.titulo, "questoes": "25", "acertos": "18"})
+
     resposta = cliente.post("/hoje/registrar", data={
-        "data": "2026-09-28", "meta": "ideal", "questoes_feitas": "25",
-        "acertos": "18", "anotacao": "rendeu"}, follow_redirects=False)
+        "data": "2026-09-28", "meta": "ideal", "anotacao": "rendeu"},
+        follow_redirects=False)
     assert resposta.status_code == 303
     assert resposta.headers["location"] == "/hoje?data=2026-09-28"
 
     (r,) = servico.cronograma.registros(
         datetime(2026, 9, 28).date(), datetime(2026, 9, 28).date()).values()
+    # Os numeros vieram da faixa que eu anotei, e nao de um campo digitado.
     assert (r.meta, r.questoes_feitas, r.acertos, r.anotacao) == ("ideal", 25, 18, "rendeu")
 
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert "Editar o registro de 28/09" in texto
     assert 'value="ideal" checked' in texto
-    assert 'value="25"' in texto
+    assert "18 acertos" in texto
     # A pilula do dia fica verde (classe ideal).
     assert "pilula ideal" in texto
 
 
-def test_campos_vazios_nao_quebram(cliente, monkeypatch):
+def test_dia_sem_nada_marcado_grava_a_meta_sem_numero(cliente, monkeypatch):
     _parar_o_relogio(monkeypatch, 2026, 9, 30, 12, 0)
     resposta = cliente.post("/hoje/registrar", data={
-        "data": "2026-09-28", "meta": "minima", "questoes_feitas": "",
-        "acertos": "", "anotacao": ""}, follow_redirects=False)
+        "data": "2026-09-28", "meta": "nao_fiz", "anotacao": ""},
+        follow_redirects=False)
     assert resposta.status_code == 303
+
+    (r,) = servico.cronograma.registros(
+        datetime(2026, 9, 28).date(), datetime(2026, 9, 28).date()).values()
+    assert (r.meta, r.questoes_feitas, r.acertos) == ("nao_fiz", None, None)
 
 
 def test_data_futura_e_recusada_na_tela(cliente, monkeypatch):
@@ -170,8 +181,7 @@ def test_dia_futuro_mostra_o_formulario_desabilitado(cliente, monkeypatch):
 
 @pytest.mark.parametrize("campos, texto", [
     ({"meta": ""}, "Escolha como foi o dia"),
-    ({"meta": "ideal", "questoes_feitas": "dez"}, "precisa ser um número inteiro"),
-    ({"meta": "ideal", "questoes_feitas": "10", "acertos": "12"}, "maior que questoes feitas"),
+    ({"meta": "voando"}, "nao existe"),
 ])
 def test_erro_de_validacao_aparece_na_tela(cliente, monkeypatch, campos, texto):
     _parar_o_relogio(monkeypatch, 2026, 9, 30, 12, 0)
