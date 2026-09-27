@@ -1100,6 +1100,58 @@ def hoje_extra_editar(
     return RedirectResponse(_volta_do_dia(request, quando), status_code=303)
 
 
+@app.get("/semanas", response_class=HTMLResponse)
+def semanas(request: Request, erro: str | None = None):
+    """Como eu fui em cada semana, agrupado pelos ciclos do mapa do ano.
+
+    A conta inteira mora em `servico.semanas`; aqui so entra o que e de tela.
+    """
+    try:
+        plano = cronograma.carregar()
+    except FileNotFoundError as falta:
+        return templates.TemplateResponse(
+            request=request, name="semanas.html",
+            context={"ciclos": [], "mensagem": f"Não achei {falta.filename}."},
+        )
+    except cronograma.ErroNoCronograma as problema:
+        return templates.TemplateResponse(
+            request=request, name="semanas.html",
+            context={"ciclos": [], "mensagem": str(problema)},
+        )
+
+    hoje = servico.cronograma.hoje_local()
+    return templates.TemplateResponse(
+        request=request,
+        name="semanas.html",
+        context={
+            "ciclos": servico.semanas.montar(plano, hoje),
+            "plano": plano,
+            "hoje": hoje,
+            "erro": erro,
+            "mensagem": None,
+        },
+    )
+
+
+@app.post("/semanas/nota")
+def semanas_nota(
+    request: Request,
+    inicio: str = Form(""),
+    funcionou: str = Form(""),
+    ajustar: str = Form(""),
+):
+    """A reflexao da semana: o que funcionou e o que ajustar."""
+    try:
+        quando = date.fromisoformat(inicio)
+        servico.semanas.anotar(quando, funcionou, ajustar)
+    except (ValueError, servico.cronograma.RegistroInvalido) as problema:
+        return semanas(request, erro=str(problema))
+
+    tema = request.query_params.get("tema")
+    destino = "/semanas" + (f"?tema={tema}" if tema else "")
+    return RedirectResponse(f"{destino}#semana-{quando.isoformat()}", status_code=303)
+
+
 @app.post("/hoje/plano-b")
 def hoje_plano_b(request: Request, data: str = Form(""), minutos: str = Form("")):
     """Os botoes do Plano B: 30 ou 60 ativa; vazio volta ao plano completo."""

@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Semanas &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    /* --- o grafico de barras: CSS puro, sem JavaScript nenhum --- */
+    .grafico{display:flex;align-items:flex-end;gap:var(--esp-3);height:170px;
+      padding-top:var(--esp-5)}
+    .coluna{flex:1 1 0;display:flex;flex-direction:column;justify-content:flex-end;
+      align-items:center;gap:var(--esp-1);height:100%;min-width:0}
+    .barra{width:100%;max-width:64px;border-radius:var(--raio-sm) var(--raio-sm) 0 0;
+      background:var(--cor-acao);position:relative}
+    .barra.andamento{background:repeating-linear-gradient(45deg,
+      var(--cor-acao) 0 6px, var(--cor-acao-fundo) 6px 12px)}
+    .barra .acerto{position:absolute;top:-1.35rem;left:0;right:0;text-align:center;
+      font-size:var(--tam-xs);font-weight:var(--peso-medio);color:var(--cor-texto)}
+    .coluna .rotulo{font-size:var(--tam-xs);color:var(--cor-texto-suave);
+      white-space:nowrap}
+    .coluna .valor{font-size:var(--tam-xs);font-variant-numeric:tabular-nums;
+      color:var(--cor-texto-suave)}
+
+    /* --- o cartao de uma semana --- */
+    .semana-cartao{display:grid;gap:var(--esp-3)}
+    .semana-cabeca{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:baseline}
+    .semana-cabeca h3{margin:0;font-size:var(--tam-md);font-weight:var(--peso-forte)}
+    .etiqueta{padding:1px var(--esp-2);border-radius:999px;font-size:var(--tam-xs);
+      font-weight:var(--peso-medio);border:1px solid var(--cor-borda)}
+    .etiqueta.andamento{background:var(--cor-acao-fundo);color:var(--cor-acao);
+      border-color:transparent}
+    .etiqueta.campea{background:var(--selo-calculado-fundo);color:var(--selo-calculado);
+      border-color:transparent}
+    .etiqueta.ruim{background:var(--cor-aviso-fundo);color:var(--cor-aviso);
+      border-color:transparent}
+
+    /* as pilulas dos dias, nas cores do diario (as mesmas da tela Hoje) */
+    .dias{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--esp-1)}
+    .dia{display:flex;flex-direction:column;align-items:center;gap:2px;
+      padding:var(--esp-2) 0;border-radius:var(--raio-sm);
+      border:2px solid transparent;font-size:var(--tam-xs);
+      font-weight:var(--peso-medio);text-decoration:none;
+      background:var(--cor-superficie-2);color:var(--cor-texto-suave)}
+    .dia b{font-size:var(--tam-base);font-variant-numeric:tabular-nums;line-height:1.1}
+    .ds a.dia{color:var(--cor-texto-suave)}
+    .ds a.dia.ideal   {background:var(--selo-calculado-fundo);  color:var(--selo-calculado)}
+    .ds a.dia.reduzida{background:var(--selo-oficial-fundo);    color:var(--selo-oficial)}
+    .ds a.dia.minima  {background:var(--selo-automatico-fundo); color:var(--selo-automatico)}
+    .ds a.dia.nao_fiz {background:var(--selo-ia-fundo);         color:var(--selo-ia)}
+    .ds a.dia.futuro  {background:transparent;border:2px dashed var(--cor-borda)}
+
+    /* os numeros da semana */
+    .numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr));
+      gap:var(--esp-3)}
+    .numero .n{font-size:var(--tam-lg);font-weight:var(--peso-forte);line-height:1.1;
+      font-variant-numeric:tabular-nums}
+    .numero .rot{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .numero .abaixo{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .seta{font-size:var(--tam-xs);font-weight:var(--peso-medio);white-space:nowrap}
+    .seta.melhor{color:var(--selo-calculado)}
+    .seta.pior{color:var(--selo-ia)}
+
+    .motivo-nivel{margin:0;font-size:var(--tam-sm);color:var(--cor-texto-suave);
+      display:flex;gap:var(--esp-2);align-items:flex-start;flex-wrap:wrap}
+
+    /* --- a reflexao --- */
+    .reflexao{display:grid;grid-template-columns:1fr 1fr;gap:var(--esp-3)}
+    @media (max-width:660px){.reflexao{grid-template-columns:1fr}}
+    .reflexao textarea{width:100%;padding:var(--esp-2) var(--esp-3);
+      border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
+      background:var(--cor-superficie);color:var(--cor-texto);font:inherit;
+      font-size:var(--tam-sm);line-height:var(--linha);resize:vertical}
+    .reflexao textarea:focus{outline:2px solid var(--cor-acao);outline-offset:1px}
+    .escrito{margin:0;font-size:var(--tam-sm);white-space:pre-line}
+
+    /* --- o ciclo fechado --- */
+    .ciclo-fechado summary{cursor:pointer;padding:var(--esp-3) 0;
+      font-size:var(--tam-md);font-weight:var(--peso-medio)}
+    .ciclo-fechado summary .resumo{color:var(--cor-texto-suave);
+      font-weight:var(--peso-normal);font-size:var(--tam-sm)}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_hoje with context %}
+{% from "_componentes.html" import selo %}
+{{ barra('hoje') }}
+
+{# ---------------------------------------------------------------- macros #}
+{%- macro seta(comparacao, sufixo='') -%}
+  {%- if comparacao -%}
+    <span class="seta {{ 'melhor' if comparacao.melhor else 'pior' }}">
+      {{ '↑' if comparacao.subiu else '↓' }}
+      {{ '+' if comparacao.subiu else '−' }}{{ comparacao.modulo }}{{ sufixo }}</span>
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro numero(valor, rotulo, comparacao=none, sufixo='', abaixo=none) -%}
+  <div class="numero">
+    <p class="n">{{ valor }}{{ sufixo }} {{ seta(comparacao, sufixo) }}</p>
+    <p class="rot">{{ rotulo }}</p>
+    {% if abaixo %}<p class="abaixo">{{ abaixo }}</p>{% endif %}
+  </div>
+{%- endmacro -%}
+
+{%- macro cartao_da_semana(s) -%}
+<article class="ds-cartao semana-cartao" id="semana-{{ s.inicio.isoformat() }}">
+  <div class="semana-cabeca">
+    <h3>Semana {{ s.numero }}</h3>
+    <span class="ds-suave">{{ s.inicio.strftime('%d/%m') }} a {{ s.fim.strftime('%d/%m') }}</span>
+    {% if s.em_andamento %}<span class="etiqueta andamento">em andamento</span>{% endif %}
+    {% if s.melhor %}<span class="etiqueta campea">🏆 melhor semana do ciclo</span>{% endif %}
+    {% if s.ruim and not s.em_andamento %}<span class="etiqueta ruim">semana ruim</span>{% endif %}
+  </div>
+
+  <nav class="dias" aria-label="Os dias da semana {{ s.numero }}">
+    {% for p in s.pilulas %}
+      <a class="dia {{ 'futuro' if p.futuro else (p.meta or 'sem') }}"
+         href="/hoje?data={{ p.data.isoformat() }}"
+         title="{{ p.data.strftime('%d/%m') }}: {{ META_LEGIVEL.get(p.meta, 'dia futuro' if p.futuro else 'sem marcação') }}">
+        <span>{{ p.rotulo }}</span><b>{{ p.data.day }}</b>
+      </a>
+    {% endfor %}
+  </nav>
+
+  <div class="numeros">
+    {{ numero(s.dias_completos ~ ' de ' ~ s.dias_no_plano, 'dias completos', s.comparacao.get('dias')) }}
+    {{ numero(s.numeros.questoes, 'questões feitas', s.comparacao.get('questoes')) }}
+    {% if s.numeros.medidas %}
+      {{ numero(s.numeros.acertos, 'acertos') }}
+      {{ numero(s.numeros.erros, 'erros', s.comparacao.get('erros')) }}
+      {{ numero(s.numeros.porcentagem, 'de acerto', s.comparacao.get('acerto'), '%',
+                ('sem consulta: ' ~ s.sem_consulta.porcentagem ~ '%') if s.sem_consulta.medidas else 'sem consulta: —') }}
+    {% else %}
+      {{ numero('—', 'de acerto', none, '', 'nenhum acerto anotado') }}
+    {% endif %}
+    {{ numero(duracao(s.minutos), 'estudadas', s.comparacao.get('minutos')) }}
+    {{ numero(s.sequencia, 'dias seguidos no fim da semana') }}
+    {% if s.plano_b %}{{ numero(s.plano_b, 'vez(es) no Plano B') }}{% endif %}
+    {% if s.erros_anotados %}
+      {{ numero(s.erros_anotados, 'erros no caderno') }}
+    {% endif %}
+  </div>
+
+  {% if s.geradas %}
+    <p class="ds-pequeno ds-suave">{{ s.geradas }} questão(ões) de IA nesta semana:
+      contam no volume, nunca no acerto.</p>
+  {% endif %}
+
+  {% if s.nivel %}
+    <p class="motivo-nivel">{{ selo('calculado') }}
+      <span><b>Nível {{ s.nivel.efetivo }}</b> · {{ s.nivel.motivo }}</span></p>
+  {% endif %}
+
+  {# A reflexao: as duas caixas. Escrita, ela aparece; para mudar, o <details>. #}
+  {% set n = s.nota %}
+  {% if n and (n.funcionou or n.ajustar) %}
+    <div class="reflexao">
+      {% if n.funcionou %}
+        <div><p class="rot ds-pequeno ds-suave">O que funcionou</p>
+          <p class="escrito">{{ n.funcionou }}</p></div>
+      {% endif %}
+      {% if n.ajustar %}
+        <div><p class="rot ds-pequeno ds-suave">O que ajustar</p>
+          <p class="escrito">{{ n.ajustar }}</p></div>
+      {% endif %}
+    </div>
+    <details><summary class="ds-pequeno">mudar a reflexão</summary>
+      {{ formulario_da_nota(s) }}</details>
+  {% else %}
+    <details><summary class="ds-pequeno">✍️ escrever a reflexão da semana</summary>
+      {{ formulario_da_nota(s) }}</details>
+  {% endif %}
+</article>
+{%- endmacro -%}
+
+{%- macro formulario_da_nota(s) -%}
+  <form method="post" action="/semanas/nota{% if tema %}?tema={{ tema }}{% endif %}">
+    <input type="hidden" name="inicio" value="{{ s.inicio.isoformat() }}">
+    <div class="reflexao">
+      <label class="ds-campo">O que funcionou
+        <textarea name="funcionou" rows="3" maxlength="2000">{{ s.nota.funcionou if s.nota and s.nota.funcionou else '' }}</textarea>
+      </label>
+      <label class="ds-campo">O que ajustar
+        <textarea name="ajustar" rows="3" maxlength="2000">{{ s.nota.ajustar if s.nota and s.nota.ajustar else '' }}</textarea>
+      </label>
+    </div>
+    <p><button class="ds-botao" type="submit">Salvar a reflexão</button></p>
+  </form>
+{%- endmacro -%}
+
+{%- macro grafico(ciclo) -%}
+  {% set maior = ciclo.maior_volume %}
+  {% if maior %}
+    <div class="ds-cartao">
+      <div class="ds-cartao__cabeca">
+        <h3 class="ds-cartao__titulo">Questões por semana</h3>
+        {{ selo('calculado') }}
+      </div>
+      <div class="grafico" role="img"
+           aria-label="Questões por semana: {% for s in ciclo.semanas %}semana {{ s.numero }}, {{ s.numeros.questoes }} questões{% if s.numeros.porcentagem is not none %}, {{ s.numeros.porcentagem }}% de acerto{% endif %}{% if not loop.last %}; {% endif %}{% endfor %}">
+        {% for s in ciclo.semanas %}
+          <div class="coluna">
+            {# A altura sai da regra de tres com a maior semana: CSS puro. #}
+            <div class="barra {{ 'andamento' if s.em_andamento }}"
+                 style="height:{{ (100 * s.numeros.questoes / maior) | round | int }}%">
+              {% if s.numeros.porcentagem is not none %}
+                <span class="acerto">{{ s.numeros.porcentagem }}%</span>
+              {% endif %}
+            </div>
+            <span class="valor">{{ s.numeros.questoes }}</span>
+            <span class="rotulo">S{{ s.numero }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{%- endmacro -%}
+
+<main class="ds-pagina">
+  {{ abas_de_hoje('semanas') }}
+
+  <header class="ds-cabeca">
+    <h1>Semanas</h1>
+    <p>
+      Como eu fui em cada semana, por ciclo. Os números somam as faixas do
+      plano, o estudo extra e o que eu respondi no radar; a comparação com a
+      meta usa só questão <b>sem consulta</b>.
+    </p>
+  </header>
+
+  {% if mensagem %}
+    <div class="ds-cartao"><p class="ds-nota">{{ mensagem }}</p></div>
+  {% endif %}
+  {% if erro %}<p class="ds-alerta" role="alert">⚠ {{ erro }}</p>{% endif %}
+
+  {% if not ciclos and not mensagem %}
+    <div class="ds-cartao">
+      <p class="ds-vazio">Nenhuma semana começou ainda. O primeiro dia do ciclo
+        é {{ plano.inicio.strftime('%d/%m/%Y') }}.</p>
+    </div>
+  {% endif %}
+
+  {% for c in ciclos %}
+    {% if c.terminou %}
+      {# Ciclo que acabou fica fechado: ele nao e mais decisao, e historia. #}
+      <details class="ciclo-fechado">
+        <summary>
+          {{ c.nome }}:
+          <span class="resumo">{{ c.resumo.dias_completos }} dias completos ·
+            {{ c.resumo.questoes }} questões{% if c.resumo.porcentagem is not none %} ·
+            {{ c.resumo.porcentagem }}% de acerto{% endif %}</span>
+        </summary>
+        <div class="ds-grade">
+          {% for s in c.semanas %}{{ cartao_da_semana(s) }}{% endfor %}
+        </div>
+      </details>
+    {% else %}
+      <section class="ds-secao">
+        <h2>{{ c.nome }}{% if c.atual %} <span class="etiqueta andamento">agora</span>{% endif %}</h2>
+        {% if c.etapa %}<p>{{ c.etapa.periodo }} · {{ c.etapa.foco }}</p>{% endif %}
+      </section>
+
+      {{ grafico(c) }}
+
+      <div class="ds-grade">
+        {% for s in c.semanas %}{{ cartao_da_semana(s) }}{% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</main>
+</body>
+</html>

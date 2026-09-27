@@ -822,6 +822,16 @@ def _balanco(dias: list[Dia], metas: dict[date, str]) -> _Balanco:
     return balanco
 
 
+def balanco_da_semana(dias: list[Dia], metas: dict[date, str]) -> _Balanco:
+    """Como uma semana fechou: dias na Ideal, abaixo, zerados e sem marcacao.
+
+    A MESMA conta do gatilho, e de proposito a mesma funcao: a tela de Semanas
+    nao pode dizer "4 dias completos" enquanto o gatilho conta 3. O feriado
+    cumprido na minima tambem conta como completo aqui, pelo mesmo motivo de la.
+    """
+    return _balanco(dias, metas)
+
+
 def carga(plano: Plano, nivel: int) -> str:
     """'Direito 20, Português 15': o que o nivel significa na noite."""
     return ", ".join(f"{NOME_DA_RAMPA.get(chave, chave.capitalize())} {questoes}"

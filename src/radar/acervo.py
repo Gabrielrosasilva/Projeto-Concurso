@@ -27,6 +27,7 @@ from radar.models import (
     ErroAnotado,
     EstadoDoDia,
     EstudoExtra,
+    NotaDaSemana,
     Evento,
     QuestaoDeProva,
     QuestaoGerada,
@@ -1061,5 +1062,66 @@ def importar_extras(caminho: Path | None = None) -> int:
             extra.onde = linha.get("onde") or "outro"
             extra.anotacao = linha.get("anotacao")
             extra.atualizado_em = atualizado_em
+            mudaram += 1
+    return mudaram
+
+
+# --- a reflexao de cada semana -------------------------------------------------
+# O molde do diario: a chave e a SEGUNDA da semana (numero de semana reinicia no
+# Ciclo 2; data nao reinicia), e vale o `atualizado_em` mais recente.
+
+def caminho_das_notas() -> Path:
+    return config.diretorio_dados() / "notas_semana.json"
+
+
+def _nota_como_linha(nota: NotaDaSemana) -> dict:
+    return {
+        "inicio": nota.inicio.isoformat(),
+        "funcionou": nota.funcionou,
+        "ajustar": nota.ajustar,
+        "atualizado_em": _serializar(nota.atualizado_em),
+    }
+
+
+def exportar_notas(caminho: Path | None = None) -> int:
+    """Grava as reflexoes no JSON. Devolve quantas. O arquivo so cresce."""
+    criar_tabelas()
+    destino = caminho or caminho_das_notas()
+
+    juntos = {}
+    for linha in _ler_registros(destino):
+        juntos[linha["inicio"]] = linha
+    with sessao() as s:
+        for nota in s.scalars(select(NotaDaSemana)):
+            linha = _nota_como_linha(nota)
+            juntos[linha["inicio"]] = _mais_recente(
+                juntos.get(linha["inicio"]), linha, "atualizado_em")
+
+    _gravar_registros(destino, [juntos[chave] for chave in sorted(juntos)])
+    return len(juntos)
+
+
+def importar_notas(caminho: Path | None = None) -> int:
+    """Traz as reflexoes do JSON para o banco. Devolve quantas mudaram."""
+    origem = caminho or caminho_das_notas()
+    linhas = _ler_registros(origem)
+    if not linhas:
+        return 0
+
+    criar_tabelas()
+    mudaram = 0
+    with sessao() as s:
+        for linha in linhas:
+            inicio = date.fromisoformat(linha["inicio"])
+            atualizado_em = datetime.fromisoformat(linha["atualizado_em"])
+            nota = s.scalar(select(NotaDaSemana).where(NotaDaSemana.inicio == inicio))
+            if nota is not None and nota.atualizado_em >= atualizado_em:
+                continue
+            if nota is None:
+                nota = NotaDaSemana(inicio=inicio)
+                s.add(nota)
+            nota.funcionou = linha.get("funcionou")
+            nota.ajustar = linha.get("ajustar")
+            nota.atualizado_em = atualizado_em
             mudaram += 1
     return mudaram

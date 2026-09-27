@@ -121,6 +121,8 @@ from radar.servico import cronograma    # noqa: F401 - usado pela CLI
 from radar.servico import erros         # noqa: F401 - usado pela web
 # O estudo extra, fora das faixas do plano. Tambem diario, tambem nao mede.
 from radar.servico import extra         # noqa: F401 - usado pela web
+# Como eu fui em cada semana, por ciclo. `servico.semanas.montar()`.
+from radar.servico import semanas       # noqa: F401 - usado pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

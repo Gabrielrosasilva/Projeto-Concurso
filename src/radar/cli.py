@@ -1547,6 +1547,18 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"{destino_extras}"
     )
 
+    # A reflexao de cada semana, pelo mesmo motivo de tudo isto: e texto que so
+    # eu escrevi, e nao existe em lugar nenhum fora deste banco.
+    destino_notas = (
+        destino.with_name("notas_semana.json") if caminho
+        else acervo.caminho_das_notas()
+    )
+    notas_gravadas = acervo.exportar_notas(destino_notas)
+    console.print(
+        f"[green]{notas_gravadas}[/] reflexao(oes) de semana exportada(s) para "
+        f"{destino_notas}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1639,6 +1651,14 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_extras.exists():
         extras_de_volta = acervo.importar_extras(origem_extras)
         console.print(f"   {extras_de_volta} estudo(s) extra(s) de volta ao banco")
+
+    origem_notas = (
+        origem.with_name("notas_semana.json") if caminho
+        else acervo.caminho_das_notas()
+    )
+    if origem_notas.exists():
+        notas_de_volta = acervo.importar_notas(origem_notas)
+        console.print(f"   {notas_de_volta} reflexao(oes) de semana de volta ao banco")
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -1989,7 +2009,7 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/simulados.json", "data/macetes.json",
                      "data/explicacoes.json", "data/registro_estudo.json",
                      "data/estado_do_dia.json", "data/caderno_erros.json",
-                     "data/estudo_extra.json")
+                     "data/estudo_extra.json", "data/notas_semana.json")
 
 
 @app.command()
@@ -2039,9 +2059,11 @@ def sincronizar(
     estados = acervo.importar_estados()
     erros_de_volta = acervo.importar_erros()
     extras_de_volta = acervo.importar_extras()
+    notas_de_volta = acervo.importar_notas()
     console.print(f"   {dias} dia(s) do cronograma, {estados} dia(s) de faixas "
-                  f"marcadas, {erros_de_volta} erro(s) anotado(s) e "
-                  f"{extras_de_volta} estudo(s) extra(s) de volta ao banco")
+                  f"marcadas, {erros_de_volta} erro(s) anotado(s), "
+                  f"{extras_de_volta} estudo(s) extra(s) e {notas_de_volta} "
+                  f"reflexao(oes) de volta ao banco")
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -2070,12 +2092,13 @@ def sincronizar(
     acervo.exportar_estados()
     total_erros = acervo.exportar_erros()
     total_extras = acervo.exportar_extras()
+    total_notas = acervo.exportar_notas()
     favoritos = servico.contar_favoritos()
     console.print(
         f"   {total} concurso(s), {total_eventos} evento(s), "
         f"{total_simulados} simulado(s), {total_dias} dia(s) do cronograma, "
-        f"{total_erros} erro(s) anotado(s) e {total_extras} estudo(s) extra(s), "
-        f"com [bold]{favoritos}[/] favorito(s)"
+        f"{total_erros} erro(s) anotado(s), {total_extras} estudo(s) extra(s) e "
+        f"{total_notas} reflexao(oes), com [bold]{favoritos}[/] favorito(s)"
     )
 
     console.print("[bold]5/6[/] Commitando")

@@ -2082,3 +2082,37 @@ O resto veio junto:
   cobre mais de uma - hoje so o R+7 que refaz os erros dos diagnosticos, que
   sao de Raciocinio Logico e de Portugues juntos. Ela conta no volume e no
   acerto geral, e em nenhuma materia, como o simulado misto de sabado.
+## A tela de Semanas usa as mesmas contas do dia (etapa E3, 27/09/2026)
+
+Nenhum numero desta tela e calculado de novo, e isso e a decisao:
+
+- **"dias completos" e o `balanco_da_semana` do cronograma**, a MESMA funcao que
+  o gatilho usa para decidir o nivel - incluindo o feriado cumprido na minima. A
+  tela nao pode dizer "4 dias completos" enquanto o gatilho conta 3 e mostra um
+  nivel que nao bate com a contagem ao lado;
+- **volume e acerto somam dia por dia, pelo `totais_do_dia`**, o mesmo que a
+  tela Hoje usa. Escrever uma soma semanal separada era mais rapido e garantia
+  que, no dia em que uma das duas mudasse, elas divergiriam em silencio;
+- **o `hoje` vai direto para o gatilho.** Passar pelo `hoje_do_gatilho` (que
+  olha o relogio de verdade) deixava todas as semanas como "futura" quando o
+  teste para o tempo - e um teste que nao consegue simular dezembro nao testa
+  nada do Ciclo 1.
+
+O resto do que decidi aqui:
+
+- **semana futura nao aparece**: ela nao tem o que contar. A semana corrente
+  aparece marcada "em andamento", porque os numeros dela sao parciais e mostrar
+  isso e mais honesto do que exibi-los como se ela tivesse fechado;
+- **a semana em andamento nao concorre ao 🏆**: comparar meia semana com uma
+  semana fechada e competicao torta;
+- **a seta do acerto compara PONTO a ponto** (72% para 68% = -4), que e como eu
+  leio "caiu 4 pontos", e nao a razao entre os dois. Semana sem acerto medido
+  nao compara acerto nenhum - comparar com o nada daria uma flecha inventada;
+- **em erros, menos e melhor**: a cor da seta sai de `melhor`, e nao do sinal da
+  diferenca;
+- **a chave da reflexao e a SEGUNDA-FEIRA**, e nao o numero da semana: numero e
+  do ciclo e reinicia no Ciclo 2; a data nao reinicia nunca;
+- **texto vazio na reflexao apaga o campo.** E assim que eu desfaco uma frase
+  escrita errado, sem um botao a mais na tela;
+- **o grafico e CSS puro** (altura por regra de tres com a maior semana), como a
+  pizza dos Macetes: o unico JavaScript do radar continua sendo o cronometro.

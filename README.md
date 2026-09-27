@@ -227,6 +227,7 @@ fim do endereco vale so para aquela pagina.
 | **Meus favoritos** | o que eu marquei, ordenado por quem fecha primeiro |
 | **Noticias e andamento** | procura em **tudo**, e ordena por fase, nao por data |
 | **Simulado** | responder questoes das provas do acervo |
+| **Semanas** | uma semana por cartao, por ciclo: dias completos, acerto, setas |
 | **Caderno de erros** | o que eu errei, a regra certa, e a revisao 1-7-30 |
 | **Macetes** | o costume da banca, por contagem |
 | **Previsao de abertura** | onde vale ficar de olho agora, municipio por municipio |
@@ -667,6 +668,47 @@ O **Meu foco** e o **"Onde estudar primeiro"** continuam usando so o que o radar
 mede, questao por questao: eles respondem o que a banca cobra de mim, e a
 resposta nao pode depender de numero digitado a mao.
 
+### Semanas: como fui em cada uma
+
+A aba **Semanas** (`/semanas`, ao lado de Hoje e do Caderno de erros) mostra
+uma semana por cartao, agrupadas pelos **ciclos do mapa do ano**. O ciclo de
+agora fica aberto; ciclo que terminou fecha num `<details>` com uma linha de
+resumo:
+
+```
+Ciclo 1: 29 dias completos · 1.420 questões · 72% de acerto ▸
+```
+
+Semana que ainda nao comecou nao aparece; a semana corrente aparece marcada
+**em andamento** — os numeros dela sao parciais, e dizer isso e mais honesto
+que mostra-los como se ela tivesse fechado.
+
+Cada cartao tem as **6 pilulas** dos dias (nas cores do diario, clicaveis) e:
+
+- **dias completos** — a MESMA conta do gatilho, incluindo o feriado cumprido
+  na minima. A tela nao pode dizer "4 completos" enquanto o gatilho conta 3;
+- **questoes, acertos, erros e % de acerto** (faixas + extras + radar) e,
+  embaixo, **"sem consulta: X%"** — o numero que se compara com a meta;
+- **horas estudadas** (faixas + extras, sem pausa: o radar nao cronometra
+  simulado), **sequencia** no fim da semana, **nivel** com o motivo, **vezes no
+  Plano B** e **erros anotados** no caderno;
+- **setas de comparacao com a semana anterior** (↑ +35 questoes, ↓ −4% de
+  acerto), verdes quando melhora e vermelhas quando piora. Acerto compara ponto
+  a ponto, e semana sem acerto medido nao compara acerto nenhum;
+- **🏆 na melhor semana do ciclo**: mais dias completos, e no empate mais
+  questoes. A semana em andamento nao concorre — ela nao acabou.
+
+No topo do ciclo aberto, um **grafico de barras em CSS puro** (sem JavaScript):
+questoes por semana, com o % de acerto em cima de cada barra.
+
+E, em cada semana, a **reflexao**: duas caixas, *O que funcionou* e *O que
+ajustar*. Elas existem porque numero nao responde "por que" — a semana em que
+eu fiz 300 questoes e acertei 60% tem uma explicacao, e daqui a um mes eu nao
+vou lembrar dela. Ficam em `data/notas_semana.json`, com a **segunda-feira**
+como chave (numero de semana reinicia no Ciclo 2; data nao reinicia).
+
+A conta inteira mora em `servico/semanas.py`; a tela so mostra.
+
 ### Backup
 
 O que eu marco no "Como foi o dia" vai para `data/registro_estudo.json` no
@@ -679,8 +721,9 @@ do mesmo jeito, para `data/estado_do_dia.json`, e na volta vale o
 `atualizado_em` mais recente. O cronometro nao vai: ele vive no navegador
 (localStorage) e so importa enquanto a faixa esta rodando.
 
-O caderno de erros vai para `data/caderno_erros.json` e o estudo extra para
-`data/estudo_extra.json`, pelo mesmo caminho. A chave nos dois e o `criado_em`
+O caderno de erros vai para `data/caderno_erros.json`, o estudo extra para
+`data/estudo_extra.json` e a reflexao das semanas para `data/notas_semana.json`,
+pelo mesmo caminho. A chave nos dois e o `criado_em`
 (e nao a data, porque num dia eu anoto varios), e na volta vale o mais recente.
 
 ## O caderno de erros
@@ -1328,8 +1371,8 @@ Falha em silencio seria o mesmo que nao ter backup.
 src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
 ├── models.py       tabelas concursos, eventos, questoes, questoes_geradas,
-│                   simulados, respostas, registros_de_estudo, erros_anotados
-│                   e estudos_extras
+│                   simulados, respostas, registros_de_estudo, erros_anotados,
+│                   estudos_extras e notas_da_semana
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
@@ -1345,6 +1388,7 @@ src/radar/
 │   ├── cronograma.py o diario do dia e o que a tela Hoje mostra
 │   ├── erros.py      o caderno de erros: anotar, e a revisao 1-7-30 dele
 │   ├── extra.py      o estudo extra, fora das faixas do plano
+│   ├── semanas.py    como fui em cada semana, agrupado pelos ciclos do mapa
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?

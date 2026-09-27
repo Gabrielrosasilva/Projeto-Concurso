@@ -483,10 +483,9 @@ def test_as_subabas_da_tela_hoje(cliente):
     texto = cliente.get("/hoje?data=2026-10-20").text
     assert "subabas-do-hoje" in texto
     assert "Caderno de erros" in texto
-    # "Semanas" so entra na etapa E2: aba que leva a 404 e pior que aba que
-    # falta. (A palavra existe na tela, no "Semanas leves" do mapa do ano -
-    # o que nao pode existir e a ABA.)
-    assert ">Semanas<" not in texto
+    # As tres abas, desde a etapa E3: o dia, as semanas e o caderno.
+    assert ">Semanas<" in texto
+    assert 'href="/semanas"' in texto
 
 
 def test_a_faixa_de_questoes_tem_o_botao_de_anotar_com_tudo_pronto(cliente):

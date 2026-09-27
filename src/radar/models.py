@@ -556,3 +556,26 @@ class EstudoExtra(Base):
 
     def __repr__(self) -> str:
         return f"<EstudoExtra {self.data} {self.o_que} {self.minutos}min>"
+
+
+class NotaDaSemana(Base):
+    """A reflexao da semana: o que funcionou e o que ajustar.
+
+    Duas caixas de texto por semana, e nada mais. Elas existem porque numero
+    nao responde "por que" - a semana em que eu fiz 300 questoes e acertei 60%
+    tem uma explicacao, e daqui a um mes eu nao vou lembrar dela.
+
+    A chave e a SEGUNDA da semana, e nao o numero dela: numero de semana e do
+    ciclo, e ele reinicia no Ciclo 2.
+    """
+
+    __tablename__ = "notas_da_semana"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    inicio: Mapped[date] = mapped_column(Date, unique=True, index=True)
+    funcionou: Mapped[str | None] = mapped_column(Text, nullable=True)
+    ajustar: Mapped[str | None] = mapped_column(Text, nullable=True)
+    atualizado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<NotaDaSemana {self.inicio}>"

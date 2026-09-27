@@ -102,7 +102,8 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     os simulados: o meu historico de treino, que nao tinha copia nenhuma. E
     os macetes e as explicacoes importados do Claude Code, que nao moram em
     tabela nenhuma. E, desde 26/09/2026, o diario do cronograma e os checks
-    de cada faixa; desde 27/09/2026, o caderno de erros e o estudo extra.
+    de cada faixa; desde 27/09/2026, o caderno de erros, o estudo extra e a
+    reflexao de cada semana.
     """
     runner.invoke(cli.app, ["sincronizar"])
 
@@ -113,6 +114,7 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
         "data/macetes.json", "data/explicacoes.json",
         "data/registro_estudo.json", "data/estado_do_dia.json",
         "data/caderno_erros.json", "data/estudo_extra.json",
+        "data/notas_semana.json",
     }
 
 

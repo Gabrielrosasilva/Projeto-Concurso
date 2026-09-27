@@ -928,6 +928,11 @@ def _metas(plano) -> dict[date, str]:
     return {d: r.meta for d, r in registros(plano.inicio, plano.fim).items()}
 
 
+def metas_do_plano(plano) -> dict[date, str]:
+    """{data: meta} do ciclo inteiro. O que o gatilho e a tela de Semanas leem."""
+    return _metas(plano)
+
+
 def hoje_do_gatilho(data: date) -> date:
     """O "hoje" que o gatilho usa para ver o dia `data`.
 
