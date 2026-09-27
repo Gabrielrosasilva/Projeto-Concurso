@@ -552,6 +552,36 @@ chave. O que importa saber:
 Confira com `radar hoje --data AAAA-MM-DD` depois de editar. O Ciclo 2 entra
 trocando este arquivo.
 
+#### O mapa do ano
+
+O bloco `mapa` e o ano inteiro em seis linhas, e serve para uma coisa so: o
+cartao **🗺️ Mapa do ano**, na lateral da tela Hoje, mostrar onde eu estou. O
+ciclo de hoje sai destacado com "voce esta aqui", e os que ja acabaram levam
+um ✓. No celular, um toque no titulo recolhe a lista.
+
+Ele **nao manda em nada do dia a dia**: quem manda no que acontece hoje
+continua sendo `dias`, e o ciclo que esta rodando e o `ciclo`/`inicio`/`fim` do
+topo do arquivo.
+
+```yaml
+mapa:
+- nome: Ciclo 2
+  inicio: '2026-11-09'
+  fim: '2026-12-19'
+  foco: 'O resto do programa: Processo Penal, Legislacao Especial, ...'
+- nome: Ciclo 4+
+  inicio: '2027-03-01'        # sem `fim`: etapa em aberto ("a partir de")
+  foco: Reforco pelos pontos fracos e simulados
+- nome: Pos-edital
+  quando: quando sair         # sem data: nunca e a etapa de agora
+  foco: Ciclo ajustado ao edital novo
+```
+
+Tres regras conferidas no carregamento, para eu nao me enganar editando: datas
+em ordem, sem sobreposicao (uma etapa comeca **depois** do fim da anterior), e
+etapa sem data so no fim da lista. Vao entre duas etapas e permitido - entre o
+Ciclo 1 e o 2 ha um domingo, que nao e de nenhum dos dois.
+
 ### Backup
 
 O que eu marco no "Como foi o dia" vai para `data/registro_estudo.json` no

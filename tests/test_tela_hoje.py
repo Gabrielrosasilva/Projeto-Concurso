@@ -4,7 +4,7 @@ Le o config/cronograma.yml de verdade: o que se testa e a tela, e o arquivo
 real e o dado fixo mais fiel que ha. O relogio e parado pelo agora_local,
 porque o ciclo real comeca depois do dia em que estes testes foram escritos.
 """
-from datetime import datetime
+from datetime import date, datetime
 
 import pytest
 from fastapi.testclient import TestClient
@@ -337,3 +337,52 @@ def test_a_minima_se_chama_plano_b_no_formulario(cliente):
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert "Plano B</small>" in texto
     assert "Anki + poucas questões" not in texto
+
+
+# --- o mapa do ano, na lateral ------------------------------------------------
+
+def test_o_mapa_do_ano_aparece_com_as_seis_etapas(cliente):
+    texto = cliente.get("/hoje?data=2026-09-28").text
+    assert "🗺️ Mapa do ano" in texto
+    for nome in ("Ciclo 1", "Ciclo 2", "Pausa de fim de ano", "Ciclo 3",
+                 "Ciclo 4+", "Pós-edital"):
+        assert nome in texto
+    assert "A base: Português, RL, Penal" in texto
+    assert "a partir de 01/03/2027" in texto
+    assert "quando sair" in texto
+    # No celular a lista recolhe num toque; no computador ela ja vem aberta.
+    assert "<details open>" in texto
+
+
+def test_o_ciclo_de_agora_diz_voce_esta_aqui(cliente, monkeypatch):
+    _parar_o_relogio(monkeypatch, 2026, 10, 20, 11, 0)
+    texto = cliente.get("/hoje").text
+    assert "você está aqui" in texto
+    marcados = [linha for linha in texto.splitlines() if 'class="atual"' in linha]
+    assert len(marcados) == 1
+
+
+def test_o_ciclo_passado_sai_marcado_e_o_atual_muda_com_o_dia(cliente, monkeypatch):
+    """Em dezembro, o Ciclo 1 ja passou e o Ciclo 2 e o de agora."""
+    _parar_o_relogio(monkeypatch, 2026, 12, 1, 11, 0)
+    tela = servico.cronograma.tela_do_dia()
+    por_nome = {p.etapa.nome: p for p in tela.mapa}
+    assert por_nome["Ciclo 1"].passada and not por_nome["Ciclo 1"].atual
+    assert por_nome["Ciclo 2"].atual and not por_nome["Ciclo 2"].passada
+    assert not por_nome["Ciclo 3"].passada and not por_nome["Ciclo 3"].atual
+
+
+def test_o_mapa_e_sempre_de_hoje_e_nao_do_dia_aberto(cliente, monkeypatch):
+    """Abrir uma quinta-feira de dezembro nao me move no ano."""
+    _parar_o_relogio(monkeypatch, 2026, 10, 20, 11, 0)
+    tela = servico.cronograma.tela_do_dia(date(2026, 12, 17))
+    atual = [p.etapa.nome for p in tela.mapa if p.atual]
+    assert atual == ["Ciclo 1"]
+
+
+def test_antes_do_ciclo_comecar_o_mapa_ja_aparece(cliente, monkeypatch):
+    """O estado "antes" volta cedo do tela_do_dia: o mapa nao pode faltar."""
+    _parar_o_relogio(monkeypatch, 2026, 9, 1, 11, 0)
+    texto = cliente.get("/hoje?data=2026-09-01").text
+    assert "🗺️ Mapa do ano" in texto
+    assert "você está aqui" not in texto     # nenhum ciclo comecou ainda

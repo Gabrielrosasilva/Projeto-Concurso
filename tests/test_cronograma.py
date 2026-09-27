@@ -456,3 +456,130 @@ def test_marca_sem_faixa_de_direito_da_erro(tmp_path):
         d["dias"][1]["reduzida"] = "Só as {direito} questões."
     with pytest.raises(cronograma.ErroNoCronograma, match="2026-09-29.*rampa: direito"):
         cronograma.carregar(_com_mudanca(tmp_path, mudar))
+
+
+# --- o mapa do ano -----------------------------------------------------------
+#
+# O mapa e DADO: estes testes conferem a leitura e as tres regras de ordem, e
+# nao o conteudo do plano - trocar um ciclo de data nao pode quebrar teste.
+
+def _mapa_de_teste():
+    return [
+        {"nome": "Ciclo 1", "inicio": "2026-09-28", "fim": "2026-11-07",
+         "foco": "A base"},
+        {"nome": "Ciclo 2", "inicio": "2026-11-09", "fim": "2026-12-19",
+         "foco": "O resto do programa"},
+        {"nome": "Ciclo 4+", "inicio": "2027-03-01", "foco": "Reforço"},
+        {"nome": "Pós-edital", "quando": "quando sair", "foco": "Ajustado ao edital"},
+    ]
+
+
+def _com_mapa(tmp_path, mapa):
+    return _com_mudanca(tmp_path, lambda d: d.update(mapa=mapa))
+
+
+def test_o_mapa_do_arquivo_real_tem_as_etapas_na_ordem():
+    plano = cronograma.carregar(REAL)
+    assert [e.nome for e in plano.mapa] == [
+        "Ciclo 1", "Ciclo 2", "Pausa de fim de ano", "Ciclo 3", "Ciclo 4+",
+        "Pós-edital",
+    ]
+    assert all(e.foco for e in plano.mapa)
+
+
+@pytest.mark.parametrize("dia, esperada", [
+    (date(2026, 9, 28), "Ciclo 1"),              # o primeiro dia dele
+    (date(2026, 10, 20), "Ciclo 1"),
+    (date(2026, 11, 7), "Ciclo 1"),              # o ultimo dia dele
+    (date(2026, 11, 10), "Ciclo 2"),
+    (date(2026, 12, 25), "Pausa de fim de ano"),
+    (date(2027, 1, 20), "Ciclo 3"),
+    (date(2027, 3, 1), "Ciclo 4+"),              # etapa em aberto, no 1o dia
+    (date(2028, 5, 5), "Ciclo 4+"),              # e um ano depois, ainda ela
+])
+def test_o_ciclo_de_cada_data(dia, esperada):
+    assert cronograma.carregar(REAL).etapa_do_mapa(dia).nome == esperada
+
+
+@pytest.mark.parametrize("dia", [
+    date(2026, 9, 1),     # antes de tudo comecar
+    date(2026, 11, 8),    # o domingo entre o Ciclo 1 e o 2
+    date(2027, 2, 28),    # o domingo entre o Ciclo 3 e o 4+
+])
+def test_data_fora_de_qualquer_etapa_nao_inventa_ciclo(dia):
+    assert cronograma.carregar(REAL).etapa_do_mapa(dia) is None
+
+
+def test_a_etapa_sem_data_nunca_e_a_de_agora():
+    plano = cronograma.carregar(REAL)
+    pos_edital = plano.mapa[-1]
+    assert pos_edital.inicio is None
+    assert not pos_edital.contem(date(2027, 7, 1))
+    assert not pos_edital.terminou(date(2027, 7, 1))
+
+
+def test_como_o_periodo_se_le_na_tela(tmp_path):
+    mapa = cronograma.carregar(_com_mapa(tmp_path, _mapa_de_teste())).mapa
+    assert mapa[0].periodo == "28/09/2026 a 07/11/2026"
+    assert mapa[2].periodo == "a partir de 01/03/2027"
+    assert mapa[3].periodo == "quando sair"
+
+
+def test_arquivo_sem_mapa_continua_valendo(plano):
+    """O mapa e enfeite util: sem ele a tela Hoje inteira nao pode parar."""
+    assert plano.mapa == []
+    assert plano.etapa_do_mapa(date(2026, 9, 28)) is None
+
+
+def test_etapa_que_comeca_antes_da_anterior_acabar_e_recusada(tmp_path):
+    mapa = _mapa_de_teste()
+    mapa[1]["inicio"] = "2026-11-07"          # o ultimo dia do Ciclo 1
+    with pytest.raises(cronograma.ErroNoCronograma, match="antes de Ciclo 1 acabar"):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+def test_etapa_fora_de_ordem_e_recusada(tmp_path):
+    mapa = _mapa_de_teste()
+    mapa[0], mapa[1] = mapa[1], mapa[0]
+    with pytest.raises(cronograma.ErroNoCronograma, match="antes de Ciclo 2 acabar"):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+def test_fim_antes_do_inicio_e_recusado(tmp_path):
+    mapa = _mapa_de_teste()
+    mapa[0]["fim"] = "2026-09-01"
+    with pytest.raises(cronograma.ErroNoCronograma, match="vem antes do inicio"):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+def test_fim_sem_inicio_e_recusado(tmp_path):
+    mapa = _mapa_de_teste()
+    del mapa[0]["inicio"]
+    with pytest.raises(cronograma.ErroNoCronograma, match="`fim` sem ter `inicio`"):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+def test_nada_pode_vir_depois_de_uma_etapa_em_aberto(tmp_path):
+    """Ciclo 4+ nao tem fim: outra etapa com data depois dele se sobreporia."""
+    mapa = _mapa_de_teste()
+    mapa.insert(3, {"nome": "Ciclo 5", "inicio": "2027-06-01", "foco": "x"})
+    with pytest.raises(cronograma.ErroNoCronograma, match="fica em aberto"):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+def test_etapa_com_data_depois_de_etapa_sem_data_e_recusada(tmp_path):
+    mapa = _mapa_de_teste()
+    mapa.append({"nome": "Ciclo 6", "inicio": "2028-01-03", "foco": "x"})
+    with pytest.raises(cronograma.ErroNoCronograma, match="ultima da lista"):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+@pytest.mark.parametrize("campo, erro", [
+    ("nome", "falta o `nome`"),
+    ("foco", "falta o `foco`"),
+])
+def test_etapa_sem_nome_ou_sem_foco_e_recusada(tmp_path, campo, erro):
+    mapa = _mapa_de_teste()
+    del mapa[0][campo]
+    with pytest.raises(cronograma.ErroNoCronograma, match=erro):
+        cronograma.carregar(_com_mapa(tmp_path, mapa))

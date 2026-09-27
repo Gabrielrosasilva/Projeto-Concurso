@@ -96,6 +96,25 @@
     .objetivo p{margin:0 0 var(--esp-1);font-size:var(--tam-sm)}
     .objetivo .alvo{font-size:var(--tam-md);font-weight:var(--peso-forte);margin-bottom:var(--esp-2)}
 
+    /* --- o mapa do ano (na lateral) --- */
+    .mapa summary{cursor:pointer;list-style:none}
+    .mapa summary::-webkit-details-marker{display:none}
+    .mapa summary .lateral-titulo{display:inline}
+    .mapa-lista{list-style:none;margin:var(--esp-3) 0 0;padding:0;display:grid;gap:var(--esp-3)}
+    .mapa-lista li{display:grid;grid-template-columns:1rem 1fr;gap:0 var(--esp-2);
+      font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .mapa-marca{grid-row:1/span 3;font-weight:var(--peso-forte);line-height:1.4}
+    .mapa-nome{color:var(--cor-texto)}
+    .mapa-quando,.mapa-foco{grid-column:2;font-size:var(--tam-xs);line-height:1.35}
+    .mapa-foco{color:var(--cor-texto-suave)}
+    .mapa-lista li.passada{opacity:.65}
+    .mapa-lista li.passada .mapa-marca{color:var(--selo-calculado)}
+    .mapa-lista li.atual .mapa-marca{color:var(--cor-acao)}
+    .mapa-lista li.atual .mapa-nome{font-weight:var(--peso-forte)}
+    .mapa-aqui{grid-column:2;justify-self:start;margin-top:2px;padding:1px var(--esp-2);
+      border-radius:var(--raio-sm);background:var(--cor-acao-fundo);color:var(--cor-acao);
+      font-size:var(--tam-xs);font-weight:var(--peso-medio)}
+
     /* --- faixa da semana (as pilulas, na lateral) --- */
     .semana{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--esp-1)}
     .pilula{display:flex;flex-direction:column;align-items:center;gap:2px;padding:var(--esp-2) 0;text-decoration:none;
@@ -443,6 +462,29 @@
         {% else %}Fim do {{ nome_do_ciclo }} em {{ faltam }} dias{% endif %}
       </p>
     </section>
+
+    {# O mapa do ano. Num <details> aberto: no computador ele fica do jeito
+       que esta, e no celular, onde a lateral cai por cima do dia, um toque no
+       titulo recolhe a lista inteira. Sem JavaScript, como o resto da tela. #}
+    {% if t.mapa %}
+    <section class="ds-cartao mapa">
+      <details open>
+        <summary><h2 class="lateral-titulo">🗺️ Mapa do ano</h2></summary>
+        <ol class="mapa-lista">
+          {% for p in t.mapa %}
+            <li class="{% if p.atual %}atual{% elif p.passada %}passada{% endif %}"
+                {% if p.atual %}aria-current="true"{% endif %}>
+              <span class="mapa-marca" aria-hidden="true">{% if p.passada %}✓{% elif p.atual %}▸{% else %}·{% endif %}</span>
+              <b class="mapa-nome">{{ p.etapa.nome }}</b>
+              {% if p.atual %}<span class="mapa-aqui">você está aqui</span>{% endif %}
+              <span class="mapa-quando">{{ p.etapa.periodo }}</span>
+              <span class="mapa-foco">{{ p.etapa.foco }}</span>
+            </li>
+          {% endfor %}
+        </ol>
+      </details>
+    </section>
+    {% endif %}
   </aside>
   {% endif %}
 

@@ -191,6 +191,42 @@ class Dia:
 
 
 @dataclass
+class EtapaDoMapa:
+    """Uma linha do mapa do ano: um ciclo, a pausa de fim de ano, o pos-edital.
+
+    E so para eu me situar - nada do dia a dia sai daqui. A etapa sem
+    `inicio` e a que depende de coisa que ainda nao aconteceu, e por isso ela
+    nunca e a de agora.
+    """
+    nome: str
+    foco: str
+    inicio: date | None = None
+    fim: date | None = None
+    quando: str | None = None     # o "quando sair", quando nao ha data
+
+    def contem(self, data: date) -> bool:
+        """`data` cai nesta etapa? Sem `fim`, a etapa vale dali em diante."""
+        if self.inicio is None or data < self.inicio:
+            return False
+        return self.fim is None or data <= self.fim
+
+    def terminou(self, data: date) -> bool:
+        """Ja acabou nesta data? Etapa em aberto nunca acaba."""
+        return self.fim is not None and self.fim < data
+
+    @property
+    def periodo(self) -> str:
+        """O periodo como ele se le na tela."""
+        if self.quando:
+            return self.quando
+        if self.inicio is None:
+            return "sem data"
+        if self.fim is None:
+            return f"a partir de {self.inicio:%d/%m/%Y}"
+        return f"{self.inicio:%d/%m/%Y} a {self.fim:%d/%m/%Y}"
+
+
+@dataclass
 class Bloco:
     chave: str
     nome: str
@@ -211,12 +247,19 @@ class Plano:
     semanas: dict[int, str]
     dias: list[Dia]
     plano_b: PlanoB | None = None
+    # O ano inteiro, em seis linhas. Vazio quando o arquivo nao tem `mapa`:
+    # o mapa e enfeite util, e a tela Hoje nao pode depender dele.
+    mapa: list[EtapaDoMapa] = field(default_factory=list)
 
     def dia(self, data: date) -> Dia | None:
         for dia in self.dias:
             if dia.data == data:
                 return dia
         return None
+
+    def etapa_do_mapa(self, data: date) -> EtapaDoMapa | None:
+        """Em que etapa do ano cai `data`. None no vao entre duas etapas."""
+        return next((etapa for etapa in self.mapa if etapa.contem(data)), None)
 
 
 # --- leitura -----------------------------------------------------------------
@@ -324,6 +367,62 @@ def _plano_b(bruto) -> PlanoB | None:
     return PlanoB(opcoes, str(bruto["sabado"]), int(bruto["sabado_questoes"]))
 
 
+def _etapa_do_mapa(cru: dict, ordem: int) -> EtapaDoMapa:
+    """Uma etapa, ja conferida por dentro."""
+    onde = f"`mapa`, etapa {ordem}"
+    nome = str(cru.get("nome") or "").strip()
+    if not nome:
+        raise ErroNoCronograma(f"{onde}: falta o `nome`")
+    foco = str(cru.get("foco") or "").strip()
+    if not foco:
+        raise ErroNoCronograma(f"{onde} ({nome}): falta o `foco` (uma linha)")
+
+    inicio = _data(cru["inicio"], f"{onde} ({nome}), inicio") if cru.get("inicio") else None
+    fim = _data(cru["fim"], f"{onde} ({nome}), fim") if cru.get("fim") else None
+    if inicio is None and fim is not None:
+        raise ErroNoCronograma(f"{onde} ({nome}): tem `fim` sem ter `inicio`")
+    if inicio and fim and fim < inicio:
+        raise ErroNoCronograma(
+            f"{onde} ({nome}): o fim ({fim.isoformat()}) vem antes do inicio "
+            f"({inicio.isoformat()})"
+        )
+    return EtapaDoMapa(nome, foco, inicio, fim, str(cru["quando"]) if cru.get("quando") else None)
+
+
+def _mapa(bruto) -> list[EtapaDoMapa]:
+    """Le o bloco `mapa` e confere a ordem da lista.
+
+    As tres regras existem para eu nao me enganar editando o arquivo a mao:
+    as datas em ordem, sem sobreposicao (uma etapa comeca DEPOIS do fim da
+    anterior, e nao no mesmo dia), e etapa sem data so no fim da lista.
+
+    Vao entre duas etapas e permitido de proposito: entre o Ciclo 1 e o 2 ha
+    um domingo, e esse domingo nao pertence a nenhum dos dois.
+    """
+    etapas = [_etapa_do_mapa(cru, ordem)
+              for ordem, cru in enumerate(bruto or [], start=1)]
+
+    for anterior, etapa in zip(etapas, etapas[1:]):
+        if etapa.inicio is None:
+            continue          # sem data: so pode vir depois, e vem
+        if anterior.inicio is None:
+            raise ErroNoCronograma(
+                f"`mapa`: {etapa.nome} tem data e vem depois de {anterior.nome}, "
+                f"que nao tem - etapa sem data e a ultima da lista"
+            )
+        if anterior.fim is None:
+            raise ErroNoCronograma(
+                f"`mapa`: {anterior.nome} fica em aberto (sem `fim`), entao nada "
+                f"pode vir depois dela - e {etapa.nome} vem"
+            )
+        if etapa.inicio <= anterior.fim:
+            raise ErroNoCronograma(
+                f"`mapa`: {etapa.nome} comeca em {etapa.inicio.isoformat()}, "
+                f"antes de {anterior.nome} acabar ({anterior.fim.isoformat()})"
+            )
+    return etapas
+
+
 def carregar(caminho: Path | None = None) -> Plano:
     """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma."""
     arquivo = caminho or (config.diretorio_config() / "cronograma.yml")
@@ -399,6 +498,7 @@ def carregar(caminho: Path | None = None) -> Plano:
         semanas={int(k): v for k, v in (dados.get("semanas") or {}).items()},
         dias=sorted(dias, key=lambda d: d.data),
         plano_b=plano_b,
+        mapa=_mapa(dados.get("mapa")),
     )
 
 

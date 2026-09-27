@@ -341,6 +341,14 @@ class BlocoNaTela:
 
 
 @dataclass
+class PontoDoMapa:
+    """Uma etapa do mapa do ano com o "voce esta aqui" ja decidido."""
+    etapa: object
+    atual: bool
+    passada: bool
+
+
+@dataclass
 class Agora:
     """O cartao AGORA: so existe quando o dia aberto e hoje."""
     situacao: str               # antes | faixa | entre | fim
@@ -379,6 +387,9 @@ class TelaDoDia:
     # O Plano B ativo (30 ou 60 minutos), e as opcoes que o botao oferece.
     plano_b: int | None = None
     opcoes_do_plano_b: list[int] = field(default_factory=list)
+    # O mapa do ano, com a etapa de hoje marcada. Vazio quando o arquivo nao
+    # tem o bloco `mapa` - ai o cartao nao aparece.
+    mapa: list[PontoDoMapa] = field(default_factory=list)
 
     def faixas_em_ordem(self) -> list:
         """As faixas da tela, na ordem em que aparecem (o dia, ou o Plano B)."""
@@ -562,6 +573,20 @@ def _agora(dia, hora: time) -> Agora:
     return Agora("fim")
 
 
+def mapa_do_ano(plano, hoje: date) -> list[PontoDoMapa]:
+    """O mapa do ano sabendo onde eu estou hoje.
+
+    "Passada" e a etapa que JA TERMINOU, e nao "a que vem antes da atual". A
+    diferenca aparece no vao entre dois ciclos (o domingo entre eles): ali
+    nenhuma etapa e a atual, e nem por isso a proxima virou passado.
+
+    E sempre de HOJE, nunca do dia aberto na tela: navegar para uma
+    quinta-feira de dezembro nao me move no ano.
+    """
+    return [PontoDoMapa(etapa, etapa.contem(hoje), etapa.terminou(hoje))
+            for etapa in plano.mapa]
+
+
 def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
     """O que a tela "Hoje" mostra para `data` (padrao: hoje, no fuso local)."""
     relogio = agora_local()
@@ -578,6 +603,7 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
     tela = TelaDoDia("dia", data, hoje, plano=plano,
                      total_semanas=max((d.semana for d in plano.dias), default=0),
                      nome_do_alvo=alvo.principal().get("nome"))
+    tela.mapa = mapa_do_ano(plano, hoje)
     metas = _metas(plano)
     # De HOJE, e nao do dia na tela: e a sequencia de verdade.
     tela.sequencia = sequencia(plano, metas, hoje)
