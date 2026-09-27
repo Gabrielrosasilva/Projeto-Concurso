@@ -1901,3 +1901,31 @@ Os detalhes:
   (`ds-bloco--ia`), no vermelho do selo de IA - antes era roxo, cor que o
   design system nao tem.
 
+## O orgao sozinho nao marca o alvo principal (etapa C1, 26/09/2026)
+
+- **o defeito**: `principal.orgaos` aceitava o nome da secretaria sozinho. A
+  SEJURI tambem faz selecao de outros cargos, e dois itens viraram alvo
+  principal - sirene no Telegram e linha na home - sem ser o meu concurso:
+  "SEJURI (SC) publica edital de selecao com salario de R$ 8,7 mil" (vaga no
+  CASE) e "SEJURI SC divulga novo edital com vaga para Medico". O orgao diz
+  QUEM publicou, nao O QUE: a mesma secretaria contrata medico, socioeducativo
+  e policial penal;
+- **agora, sem o cargo no texto, o orgao precisa de confirmacao**: uma palavra
+  de `orgao_exige_um_de` ("concurso publico") ou a banca ser uma das `bancas`
+  das edicoes anteriores (FEPESE) - e nenhuma palavra de `orgao_exclui`
+  ("processo seletivo", "selecao", "socioeducativo", "case"). As listas moram
+  em config/alvo.yml, nunca no codigo. Com o cargo no texto nada disso vale:
+  o titulo de 2013 lista o Agente Penitenciario e o Socioeducativo juntos;
+- **a banca entrou como confirmacao por causa de um item real**: a pagina da
+  FEPESE de 2019 cujo titulo e so "2019 – Secretaria de Estado da
+  Administracao Prisional e Socioeducativa", sem cargo e sem "concurso
+  publico". Pela regra so de palavras ela perderia a marca, e ela e o meu
+  concurso. A banca continua sem marcar nada sozinha: ela so confirma um
+  orgao que ja casou;
+- "socioeducativo" e por palavra inteira: nao casa com "Socioeducativa", o
+  nome da secretaria em 2019;
+- o motivo diz o que confirmou ("fala em SAP e em concurso publico", "e a
+  banca e FEPESE"): continuo podendo auditar a marca. O `radar reclassificar`
+  de 26/09 tirou a marca dos dois seletivos e manteve os quatro concursos de
+  2013, 2016 e 2019.
+

@@ -48,6 +48,32 @@ principal:
     - DEAP        # Departamento de Administracao Prisional
     - DPP         # Departamento de Policia Penal, onde o cargo mora hoje
 
+  # O ORGAO SOZINHO NAO BASTA. A SEJURI tambem faz selecao de outros cargos
+  # (medico, CASE, socioeducativo), e "SEJURI publica edital de selecao" virou
+  # alvo principal - sirene no Telegram e linha na home - sem ser o meu
+  # concurso. O orgao so marca quando o texto tambem tem o cargo (`termos`,
+  # acima), OU uma das palavras de `orgao_exige_um_de`, OU a banca e uma das
+  # `bancas` das edicoes anteriores. E, sem o cargo, nenhuma palavra de
+  # `orgao_exclui` pode aparecer.
+  #
+  # A banca entrou porque o concurso de 2019 tem, na FEPESE, uma pagina cujo
+  # titulo e so o nome da secretaria ("2019 – Secretaria de Estado da
+  # Administracao Prisional e Socioeducativa"): sem cargo, sem "concurso
+  # publico". O que diz que e o meu concurso e ser da FEPESE.
+  orgao_exige_um_de:
+    - concurso publico
+
+  # Palavra de selecao que nao e o meu concurso. Por palavra inteira, como o
+  # resto: "socioeducativo" NAO casa com "Socioeducativa", o nome da
+  # secretaria em 2019 - so com o cargo de Agente Socioeducativo. E nunca
+  # tira a marca de quem tem o cargo no texto: o titulo de 2013 lista o
+  # Agente Penitenciario e o Socioeducativo juntos.
+  orgao_exclui:
+    - processo seletivo
+    - selecao
+    - socioeducativo
+    - case
+
   # Como o cargo aparece escrito. "Agente penitenciario" e o nome antigo: foi
   # com ele que as duas edicoes do concurso sairam.
   # O plural entra escrito, e nao por regra: a comparacao e por palavra

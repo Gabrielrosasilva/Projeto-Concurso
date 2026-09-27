@@ -123,6 +123,23 @@ def _e_do_estado(principal: dict, texto: str, uf: str | None) -> bool:
     return bool(_primeiro(principal.get("prova_de_sc"), texto))
 
 
+def _o_que_confirma_o_orgao(principal: dict, texto: str, banca: str | None) -> str | None:
+    """Sem o cargo no texto, o que prova que o item do orgao e o MEU concurso.
+
+    Devolve o pedaco do motivo ("em \\"concurso publico\\"") ou None. Palavra de
+    selecao (`orgao_exclui`) derruba tudo; depois vale uma palavra de
+    `orgao_exige_um_de` no texto, ou a banca ser a das edicoes anteriores.
+    """
+    if _primeiro(principal.get("orgao_exclui"), texto):
+        return None
+    palavra = _primeiro(principal.get("orgao_exige_um_de"), texto)
+    if palavra:
+        return f'em "{palavra}"'
+    if banca and _primeiro(principal.get("bancas"), normalizar(banca)):
+        return f"a banca é {banca}, a das edições anteriores"
+    return None
+
+
 def _marcar_principal(
     principal: dict, texto: str, uf: str | None, banca: str | None
 ) -> Marca | None:
@@ -154,16 +171,24 @@ def _marcar_principal(
     # Sem o cargo no texto, quem pode marcar e o nome do orgao - e ai a prova
     # de estado continua obrigatoria. A sigla "SAP" e o nome de uma secretaria
     # de Sao Paulo tambem, e "SAP SP abre estagio" esta no feed de verdade.
-    achado = cargo or _primeiro(principal.get("orgaos"), texto)
-    if not achado or not do_estado:
+    # E o orgao sozinho nao basta: a SEJURI tambem faz selecao de medico e de
+    # CASE (config/alvo.yml, `orgao_exige_um_de` e `orgao_exclui`).
+    if not do_estado:
         return None
-
-    motivo = f'Alvo principal ({nome}): o texto fala em "{achado}".'
+    if cargo:
+        motivo = f'Alvo principal ({nome}): o texto fala em "{cargo}".'
+    else:
+        orgao = _primeiro(principal.get("orgaos"), texto)
+        confirmacao = orgao and _o_que_confirma_o_orgao(principal, texto, banca)
+        if not confirmacao:
+            return None
+        motivo = f'Alvo principal ({nome}): o texto fala em "{orgao}" e {confirmacao}.'
 
     # A banca nunca marca alvo sozinha - a FEPESE faz dezenas de concursos de
-    # prefeitura por ano. Aqui ela so entra para o aviso lembrar que o padrao
-    # de prova dessa banca eu ja conheco.
-    if banca and _primeiro(principal.get("bancas"), normalizar(banca)):
+    # prefeitura por ano. Aqui ela entra para o aviso lembrar que o padrao de
+    # prova dessa banca eu ja conheco (se ela ja nao foi o que confirmou).
+    if (banca and _primeiro(principal.get("bancas"), normalizar(banca))
+            and "a das edições anteriores" not in motivo):
         motivo += f" Banca {banca}, a mesma das edições anteriores."
 
     return Marca(PRINCIPAL, nome, motivo)

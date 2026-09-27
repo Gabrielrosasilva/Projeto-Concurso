@@ -8,9 +8,15 @@ A regra vem de config/alvo.yml, o arquivo de verdade. Nada de lista de cargo
 escrita dentro do teste: se o YAML mudar e o teste continuar passando, o teste
 nao estava testando o YAML.
 """
+import json
+from pathlib import Path
+
 import pytest
 
 from radar import alvo
+
+REAIS = json.loads((Path(__file__).parent / "fixtures" / "alvo_principal_reais.json")
+                   .read_text(encoding="utf-8"))
 
 
 @pytest.fixture(autouse=True)
@@ -27,8 +33,7 @@ def yaml_limpo():
     ("2013 - Secretaria de Estado da Justica e CidadaniaAgente Penitenciario "
      "(masculino)", "SC"),
     ("2016 - Governo do Estado de Santa Catarina Secretaria de Estado da "
-     "Justica e Cidadania", "SC"),
-    ("SEJURI SC divulga novo edital com vaga para Medico", "SC"),
+     "Justica e Cidadania Concurso Publico Edital 001/2016-SJC/SC", "SC"),
     ("Concurso Policia Penal SC e autorizado com 600 vagas", "SC"),
     ("Policial Penal SC: governo confirma banca para o proximo edital", "SC"),
     ("SAP SC abre concurso para Agente Penitenciario", "SC"),
@@ -46,7 +51,7 @@ def test_os_tres_nomes_da_secretaria_valem_igual():
     for nome in ("Secretaria de Estado da Justica e Cidadania",
                  "Secretaria de Estado da Administracao Prisional e Socioeducativa",
                  "Secretaria de Estado de Justica e Reintegracao Social"):
-        marca = alvo.marcar(f"Concurso {nome} abre vagas", uf="SC")
+        marca = alvo.marcar(f"Concurso Publico {nome} abre vagas", uf="SC")
         assert marca is not None and marca.alvo == alvo.PRINCIPAL, nome
 
 
@@ -528,3 +533,47 @@ def test_o_cargo_fora_do_estado_chega_ao_banco(banco_temporario):
 ])
 def test_reforco_e_cargo_e_ano(cargo, ano, esperado):
     assert alvo.e_reforco(cargo, ano) is esperado
+
+
+# --- o orgao sozinho nao basta (os seletivos da SEJURI) ----------------------
+# Os 6 itens que eram alvo principal em data/concursos.json em 26/09/2026,
+# com titulo, resumo, UF e banca como a coleta gravou. Os dois seletivos da
+# SEJURI viravam alvo so pelo nome da secretaria; os de 2013, 2016 e 2019 sao
+# o meu concurso e continuam.
+
+@pytest.mark.parametrize("item", REAIS, ids=[i["titulo"][:45] for i in REAIS])
+def test_os_seis_reais(item):
+    marca = alvo.marcar(item["titulo"], item["resumo"], uf=item["uf"],
+                        banca=item["banca"], municipio=item["municipio"])
+    e_principal = marca is not None and marca.alvo == alvo.PRINCIPAL
+    assert e_principal == item["principal"], marca
+
+
+def test_o_motivo_diz_o_que_confirmou_o_orgao():
+    so_a_secretaria = next(i for i in REAIS if i["titulo"].endswith("Prisional e Socioeducativa"))
+    marca = alvo.marcar(so_a_secretaria["titulo"], uf="SC", banca="FEPESE")
+    assert "a banca é FEPESE, a das edições anteriores" in marca.motivo
+    # A banca nao aparece duas vezes no motivo.
+    assert marca.motivo.count("FEPESE") == 1
+
+    publico = alvo.marcar("Concurso Publico SEJURI abre vagas", uf="SC")
+    assert 'em "concurso publico"' in publico.motivo
+
+
+@pytest.mark.parametrize("titulo", [
+    "SEJURI abre processo seletivo para medico",
+    "SEJURI publica edital de selecao",
+    "Concurso publico SEJURI para Agente Socioeducativo",
+    "Concurso publico SEJURI: vagas no CASE de Joinville",
+    "SEJURI divulga calendario de 2027",           # sem nada que confirme
+])
+def test_orgao_sem_confirmacao_ou_com_exclusao_nao_marca(titulo):
+    marca = alvo.marcar(titulo, uf="SC")
+    assert marca is None or marca.alvo != alvo.PRINCIPAL
+
+
+def test_com_o_cargo_no_texto_a_exclusao_nao_vale():
+    """O titulo de 2013 lista o Agente Penitenciario e o Socioeducativo juntos."""
+    marca = alvo.marcar("SEJURI abre selecao para Agente Penitenciario", uf="SC")
+    assert marca.alvo == alvo.PRINCIPAL
+

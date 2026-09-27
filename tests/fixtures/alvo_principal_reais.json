@@ -1,0 +1,50 @@
+[
+  {
+    "titulo": "SEJURI (SC) publica edital de seleção com salário de R$ 8,7 mil",
+    "resumo": "Processo seletivo da Secretaria de Estado de Justiça e Reintegração Social oferece vaga para CASE Regional de Joinville.",
+    "uf": "SC",
+    "banca": null,
+    "municipio": null,
+    "principal": false
+  },
+  {
+    "titulo": "SEJURI SC divulga novo edital com vaga para Médico e inicial de R$ 15 mil",
+    "resumo": "Processo seletivo SEJURI SC (Secretaria de Estado de Justiça e Reintegração Social) oferece uma vaga imediata e formação de cadastro reserva.",
+    "uf": "SC",
+    "banca": null,
+    "municipio": null,
+    "principal": false
+  },
+  {
+    "titulo": "2013 – Secretaria de Estado da Justiça e CidadaniaAgente Penitenciário (masculino)Agente Penitenciário (feminino)Agente de Segurança Socioeducativo (masculino)Agente de Segurança Socioeducativo (feminino)",
+    "resumo": null,
+    "uf": "SC",
+    "banca": "FEPESE",
+    "municipio": null,
+    "principal": true
+  },
+  {
+    "titulo": "2016 – Governo do Estado de Santa Catarina Secretaria de Estado da Justiça e Cidadania Concurso Público Edital 001/2016-SJC/SC",
+    "resumo": null,
+    "uf": "SC",
+    "banca": "FEPESE",
+    "municipio": null,
+    "principal": true
+  },
+  {
+    "titulo": "2019 – Secretaria de Estado da Administração Prisional e Socioeducativa – Concurso PúblicoConcurso Público – Edital 001/2019",
+    "resumo": null,
+    "uf": "SC",
+    "banca": "FEPESE",
+    "municipio": null,
+    "principal": true
+  },
+  {
+    "titulo": "2019 – Secretaria de Estado da Administração Prisional e Socioeducativa",
+    "resumo": null,
+    "uf": "SC",
+    "banca": "FEPESE",
+    "municipio": null,
+    "principal": true
+  }
+]
