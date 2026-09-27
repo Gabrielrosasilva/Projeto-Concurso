@@ -227,6 +227,7 @@ fim do endereco vale so para aquela pagina.
 | **Meus favoritos** | o que eu marquei, ordenado por quem fecha primeiro |
 | **Noticias e andamento** | procura em **tudo**, e ordena por fase, nao por data |
 | **Simulado** | responder questoes das provas do acervo |
+| **Caderno de erros** | o que eu errei, a regra certa, e a revisao 1-7-30 |
 | **Macetes** | o costume da banca, por contagem |
 | **Previsao de abertura** | onde vale ficar de olho agora, municipio por municipio |
 | **Calendario** | explica e entrega o `.ics` dos prazos |
@@ -593,6 +594,49 @@ Os checks de cada faixa (o circulo da tela Hoje) e o Plano B escolhido vao,
 do mesmo jeito, para `data/estado_do_dia.json`, e na volta vale o
 `atualizado_em` mais recente. O cronometro nao vai: ele vive no navegador
 (localStorage) e so importa enquanto a faixa esta rodando.
+
+O caderno de erros vai para `data/caderno_erros.json`, pelo mesmo caminho. A
+chave ali e o `criado_em` do erro (e nao a data, porque num dia eu anoto
+varios), e na volta vale o mais recente.
+
+## O caderno de erros
+
+O que eu errei, com a **regra certa escrita por mim** — e ela e obrigatoria,
+porque anotar "errei a 42" nao ensina nada e "o prazo conta da data da prisao,
+nao da condenacao" ensina. Fica em **🧠 Revisao > Caderno de erros**, que e
+onde a aba abre.
+
+Cada erro guarda o dia do estudo, a materia, o assunto, **por que** eu errei
+(nao sabia, confundi, li errado, pegadinha, chutei), de onde veio a questao e,
+se eu tiver, o link dela.
+
+**A revisao e a mesma 1-7-30 do resto do radar:**
+
+- anotei um erro, ele volta **amanha**;
+- **"Ja sei"** passa para a proxima etapa: 7 dias, depois 30. Acertei a de 30,
+  o erro esta aprendido e vai para o arquivo;
+- **"Ainda erro"** volta para a etapa 1, e volta amanha. Errar depois de 30
+  dias e errar do zero.
+
+A diferenca em relacao a revisao espacada do simulado e a origem: aquela e
+calculada das respostas gravadas no radar, e esta sai do meu julgamento - "ja
+sei" nao esta escrito em lugar nenhum a nao ser aqui.
+
+No topo da tela, **"O que mais te derruba"**: a contagem por materia e por
+motivo, com a frase que eu quero ler ("LEP: 60% dos erros sao pegadinha"). A
+porcentagem so aparece com pelo menos 3 erros na materia - de dois erros, um e
+50%, e 50% de dois nao e padrao.
+
+**De onde se anota:** na tela Hoje, cada faixa de questoes, revisao, simulado e
+diagnostico tem um **📓 Anotar erro** que abre o formulario com a data, a
+materia e o assunto daquela faixa ja preenchidos, e volta para a mesma faixa. No
+sabado, a faixa "Revisao semanal" leva direto aos **erros da semana**. Na coluna
+lateral, um cartao mostra quantos erros vencem hoje (e some quando nao ha nenhum).
+
+**O caderno nao mede nada.** Como o "Como foi o dia", ele e diario: o que esta
+nele **nao entra em acerto medido nenhum** do radar (Meu foco, Onde estudar,
+home, compilado). La so conta o que eu respondi dentro do radar, questao por
+questao.
 
 ## Os comandos
 
@@ -1200,7 +1244,7 @@ Falha em silencio seria o mesmo que nao ter backup.
 src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
 ├── models.py       tabelas concursos, eventos, questoes, questoes_geradas,
-│                   simulados, respostas e registros_de_estudo
+│                   simulados, respostas, registros_de_estudo e erros_anotados
 ├── db.py           engine preguicoso + context manager de sessao
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
@@ -1214,6 +1258,7 @@ src/radar/
 │   ├── cartoes.py    a Central de Macetes: um cartao por materia
 │   ├── previsao.py   quando o municipio costuma abrir de novo
 │   ├── cronograma.py o diario do dia e o que a tela Hoje mostra
+│   ├── erros.py      o caderno de erros: anotar, e a revisao 1-7-30 dele
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?

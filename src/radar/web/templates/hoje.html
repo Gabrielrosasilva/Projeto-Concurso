@@ -43,13 +43,20 @@
     /* --- a grade: uma coluna; duas a partir de 1100px --- */
     .hoje-grade{max-width:1200px;margin:0 auto;padding:var(--esp-5) var(--esp-4) var(--esp-7);display:grid;gap:var(--esp-4)}
     .hoje-grade > *{min-width:0}
+    /* As sub-abas ocupam a largura toda, acima das duas colunas. */
+    .subabas-do-hoje{grid-column:1/-1}
+    .subabas-do-hoje .subabas{margin-bottom:0}
     .lateral{display:grid;gap:var(--esp-4);align-content:start}
     @media (min-width:1100px){
       .hoje-grade.com-lateral{grid-template-columns:minmax(0,1fr) 300px;gap:var(--esp-5)}
       /* A lateral vem antes no HTML (no celular ela fica logo abaixo do
          topo); na tela larga ela vai para a direita e acompanha a rolagem. */
-      .com-lateral .lateral{grid-column:2;grid-row:1;position:sticky;top:4.5rem;align-self:start}
-      .com-lateral .principal{grid-column:1;grid-row:1}
+      /* As sub-abas na linha 1, e as duas colunas na 2: sem isto elas
+         cairiam para depois do dia, que e onde a auto-colocacao poe quem
+         chega numa linha ja ocupada. */
+      .com-lateral .subabas-do-hoje{grid-row:1}
+      .com-lateral .lateral{grid-column:2;grid-row:2;position:sticky;top:4.5rem;align-self:start}
+      .com-lateral .principal{grid-column:1;grid-row:2}
     }
     .principal > :first-child{margin-top:0}
 
@@ -95,6 +102,21 @@
     .agora .depois{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
     .objetivo p{margin:0 0 var(--esp-1);font-size:var(--tam-sm)}
     .objetivo .alvo{font-size:var(--tam-md);font-weight:var(--peso-forte);margin-bottom:var(--esp-2)}
+
+    /* O botao de anotar erro: a mesma forma do botao da lei, discreto, para
+       nao competir com o circulo de "faixa feita". */
+    .botao-anotar{display:inline-flex;align-items:center;gap:var(--esp-1);
+      padding:var(--esp-1) var(--esp-3);border:1px solid var(--cor-borda);
+      border-radius:999px;font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      text-decoration:none;background:var(--cor-superficie-2)}
+    .ds a.botao-anotar{color:var(--cor-texto-suave)}
+    .ds a.botao-anotar:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
+
+    /* --- o caderno de erros (na lateral) --- */
+    .erros-hoje p{margin:0}
+    .erros-hoje .erros-n{font-size:var(--tam-2xl);font-weight:var(--peso-forte);
+      line-height:1.05;font-variant-numeric:tabular-nums;color:var(--cor-aviso)}
+    .erros-hoje p:last-child{margin-top:var(--esp-2);font-size:var(--tam-sm)}
 
     /* --- o mapa do ano (na lateral) --- */
     .mapa summary{cursor:pointer;list-style:none}
@@ -321,7 +343,7 @@
 </head>
 <body class="ds hoje-pagina">
 
-{% from "_topo.html" import barra with context %}
+{% from "_topo.html" import barra, abas_de_hoje with context %}
 {% from "_componentes.html" import selo %}
 {{ barra('hoje') }}
 
@@ -375,6 +397,10 @@
 </header>
 
 <div class="hoje-grade {{ 'com-lateral' if t.plano }}">
+
+  {# As sub-abas: elas ficam DENTRO da grade, na coluna principal, para nao
+     brigarem com a coluna lateral no computador. #}
+  <div class="subabas-do-hoje">{{ abas_de_hoje('hoje') }}</div>
 
   {# ============================ a coluna lateral ========================= #}
   {% if t.plano %}
@@ -462,6 +488,17 @@
         {% else %}Fim do {{ nome_do_ciclo }} em {{ faltam }} dias{% endif %}
       </p>
     </section>
+
+    {# O caderno de erros. Some com zero de proposito: cartao que vive na tela
+       dizendo "0" deixa de ser aviso e vira enfeite. #}
+    {% if erros_para_rever %}
+    <section class="ds-cartao erros-hoje">
+      <h2 class="lateral-titulo">📓 Caderno de erros</h2>
+      <p class="erros-n">{{ erros_para_rever }}</p>
+      <p class="ds-suave">{{ 'erro para rever hoje' if erros_para_rever == 1 else 'erros para rever hoje' }}</p>
+      <p><a class="ds-link-acao" href="/erros">abrir o caderno &rarr;</a></p>
+    </section>
+    {% endif %}
 
     {# O mapa do ano. Num <details> aberto: no computador ele fica do jeito
        que esta, e no celular, onde a lateral cai por cima do dia, um toque no
@@ -675,6 +712,27 @@
 
                 {% if f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
                 {% if f.link %}<p class="links"><a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a></p>{% endif %}
+
+                {# Anotar o erro daqui mesmo, com a data, a materia e o
+                   assunto ja preenchidos, e voltando para esta faixa. So nas
+                   faixas em que eu respondo questao: e nelas que se erra. #}
+                {% if f.tipo in TIPOS_QUE_ANOTAM %}
+                  {# A volta e montada com "&" cru, e nao pelo link_do_dia: o
+                     macro escreve "&amp;" (certo no HTML), e essa volta vai
+                     ser codificada de novo pelo urlencode - o "&amp;" viraria
+                     um parametro chamado "amp;tema". #}
+                  {% set aqui = '/hoje?data=' ~ t.data.isoformat() ~ ('&tema=' ~ tema if tema else '') ~ '#faixa-' ~ b.chave ~ '-' ~ loop.index0 %}
+                  <p class="links">
+                    <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, f.materia, f.titulo, aqui) }}">
+                      <span aria-hidden="true">📓</span> Anotar erro</a>
+                  </p>
+                {% elif f.tipo == 'revisao_semanal' %}
+                  {# O sabado revisa a semana: daqui eu abro os erros dela. #}
+                  <p class="links">
+                    <a class="botao-anotar" href="/erros?semana={{ t.data.isoformat() }}&amp;situacao=todos">
+                      <span aria-hidden="true">📓</span> abrir os erros da semana</a>
+                  </p>
+                {% endif %}
               </div>
               {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito. #}
               {% if not t.futuro %}

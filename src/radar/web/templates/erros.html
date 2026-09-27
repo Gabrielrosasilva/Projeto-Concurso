@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Caderno de erros &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .filtro{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:var(--esp-3);align-items:end}
+    @media (max-width:760px){.filtro{grid-template-columns:1fr 1fr}}
+
+    /* --- o que mais te derruba --- */
+    .derruba{display:grid;gap:var(--esp-2);margin:0;padding:0;list-style:none;font-size:var(--tam-sm)}
+    .derruba li{display:grid;grid-template-columns:1fr auto;gap:var(--esp-2);align-items:baseline}
+    .derruba .nome{font-weight:var(--peso-medio)}
+    .derruba .n{font-variant-numeric:tabular-nums;color:var(--cor-texto-suave);white-space:nowrap}
+    .derruba .frase{grid-column:1/-1;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    /* A barra e desenhada com o proprio fundo: sem grafico e sem JavaScript. */
+    .barra{grid-column:1/-1;height:4px;border-radius:999px;background:var(--cor-superficie-2)}
+    .barra span{display:block;height:100%;border-radius:999px;background:var(--cor-acao)}
+
+    /* --- um erro --- */
+    .erro{display:grid;gap:var(--esp-2)}
+    .erro .cabeca{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:baseline}
+    .erro .materia{font-weight:var(--peso-forte)}
+    .erro .assunto{color:var(--cor-texto-suave)}
+    .erro .regra{margin:0;font-size:var(--tam-md);line-height:var(--linha)}
+    .erro .rodape{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:center;
+      font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .erro .acoes{display:flex;gap:var(--esp-2);flex-wrap:wrap}
+    .erro .acoes form{display:inline}
+    .chip{display:inline-block;padding:1px var(--esp-2);border-radius:999px;
+      border:1px solid var(--cor-borda);font-size:var(--tam-xs);white-space:nowrap}
+    .vencido{border-color:transparent;background:var(--cor-aviso-fundo);color:var(--cor-aviso);
+      font-weight:var(--peso-medio)}
+    .arquivado{opacity:.7}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_revisao with context %}
+{% from "_componentes.html" import selo %}
+{{ barra('revisao') }}
+
+<main class="ds-pagina">
+  {{ abas_de_revisao('erros') }}
+
+  <header class="ds-cabeca">
+    <h1>📓 Caderno de erros</h1>
+    <p>
+      O que eu errei, a regra certa, e quando ela volta (1, 7 e 30 dias).
+      Isto é diário: <b>não entra em acerto medido nenhum</b> do radar.
+    </p>
+  </header>
+
+  {% if aviso %}<p class="ds-alerta">⚠ {{ aviso }}</p>{% endif %}
+
+  <p>
+    <a class="ds-botao" href="/erros/novo?volta={{ volta | urlencode }}">📓 Anotar um erro</a>
+    {% if para_rever %}
+      <span class="ds-pequeno">· {{ para_rever }} para rever hoje</span>
+    {% endif %}
+  </p>
+
+  {# ------------------------------------------------- o que mais te derruba #}
+  {% if por_materia %}
+    <section class="ds-secao">
+      <h2>O que mais te derruba</h2>
+      <p>
+        Contado nos {{ total_do_recorte }} erro(s) deste recorte — inclusive os
+        já arquivados, porque eles também contam a história.
+      </p>
+    </section>
+    <div class="ds-grade">
+      <article class="ds-cartao">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">Por matéria</h3>
+          {{ selo('calculado') }}
+        </div>
+        <ul class="derruba">
+          {% for c in por_materia %}
+            <li>
+              <span class="nome">{{ c.nome }}</span>
+              <span class="n">{{ c.quantos }} erro{{ 's' if c.quantos != 1 }}</span>
+              <span class="barra"><span style="width:{{ (100 * c.quantos / por_materia[0].quantos) | round | int }}%"></span></span>
+              {% if c.motivo %}
+                <span class="frase">{{ c.porcentagem }}% dos erros são <b>{{ c.motivo | lower }}</b></span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <article class="ds-cartao">
+        <div class="ds-cartao__cabeca">
+          <h3 class="ds-cartao__titulo">Por motivo</h3>
+          {{ selo('calculado') }}
+        </div>
+        <ul class="derruba">
+          {% for c in por_motivo %}
+            <li>
+              <span class="nome">{{ c.nome }}</span>
+              <span class="n">{{ c.quantos }}</span>
+              <span class="barra"><span style="width:{{ (100 * c.quantos / por_motivo[0].quantos) | round | int }}%"></span></span>
+            </li>
+          {% endfor %}
+        </ul>
+      </article>
+    </div>
+  {% endif %}
+
+  {# ------------------------------------------------------------- o filtro #}
+  <section class="ds-secao">
+    <h2>Os erros</h2>
+  </section>
+  <form class="filtro ds-cartao" method="get" action="/erros">
+    <label class="ds-campo">Matéria
+      <select name="materia">
+        <option value="">todas</option>
+        {% for m in materias %}
+          <option value="{{ m }}" {{ 'selected' if m == materia }}>{{ m }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label class="ds-campo">Motivo
+      <select name="motivo">
+        <option value="">todos</option>
+        {% for chave, nome in MOTIVOS_DO_ERRO.items() %}
+          <option value="{{ chave }}" {{ 'selected' if chave == motivo }}>{{ nome }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label class="ds-campo">Mostrar
+      <select name="situacao">
+        {% for chave, nome in SITUACOES_DO_ERRO.items() %}
+          <option value="{{ chave }}" {{ 'selected' if chave == situacao }}>{{ nome }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label class="ds-campo">Semana de
+      <input type="date" name="semana" value="{{ semana.isoformat() if semana else '' }}">
+    </label>
+    <button class="ds-botao" type="submit">Filtrar</button>
+  </form>
+
+  {% if semana %}
+    <p class="ds-pequeno">
+      Semana de {{ semana_de_ate[0].strftime('%d/%m') }} a {{ semana_de_ate[1].strftime('%d/%m') }} ·
+      <a class="ds-link-acao" href="/erros?situacao={{ situacao }}">tirar o filtro de semana</a>
+    </p>
+  {% endif %}
+
+  {# -------------------------------------------------------------- a lista #}
+  {% if not erros %}
+    <div class="ds-cartao">
+      <p class="ds-vazio">
+        {% if situacao == 'hoje' %}
+          Nada para rever hoje. {% if para_rever == 0 and total_do_recorte %}
+          O caderno tem {{ total_do_recorte }} erro(s):
+          <a class="ds-link-acao" href="/erros?situacao=todos">ver todos</a>.{% endif %}
+        {% elif situacao == 'arquivados' %}
+          Nenhum erro arquivado ainda. Erro vai para o arquivo quando eu
+          acerto a revisão de 30 dias.
+        {% else %}
+          Nenhum erro neste recorte.
+        {% endif %}
+      </p>
+    </div>
+  {% endif %}
+
+  <div class="ds-grade">
+    {% for e in erros %}
+      {% set vencido = ESTA_PARA_REVER(e, hoje) %}
+      <article class="ds-cartao erro {{ 'arquivado' if e.arquivado }}" id="erro-{{ e.id }}">
+        <div class="cabeca">
+          <span class="materia">{{ e.materia }}</span>
+          {% if e.assunto %}<span class="assunto">{{ e.assunto }}</span>{% endif %}
+          <span class="chip">{{ MOTIVOS_DO_ERRO.get(e.motivo, e.motivo) }}</span>
+          {% if vencido %}
+            <span class="chip vencido">
+              {% if e.proxima_revisao < hoje %}atrasado desde {{ e.proxima_revisao.strftime('%d/%m') }}
+              {% else %}para rever hoje{% endif %}
+            </span>
+          {% elif e.arquivado %}
+            <span class="chip">✓ aprendido</span>
+          {% endif %}
+        </div>
+
+        <p class="regra">{{ e.regra }}</p>
+
+        <div class="rodape">
+          <span>estudo de {{ e.data_estudo.strftime('%d/%m/%Y') }}</span>
+          <span>· {{ FONTES_DO_ERRO.get(e.fonte, e.fonte) }}</span>
+          {% if e.referencia %}
+            <span>·
+              {% if e.referencia.startswith('http') %}
+                <a href="{{ e.referencia }}" target="_blank" rel="noopener">a questão</a>
+              {% else %}{{ e.referencia }}{% endif %}
+            </span>
+          {% endif %}
+          {% if not e.arquivado %}
+            <span>· revisão {{ e.etapa }} de 3{% if e.proxima_revisao and not vencido %},
+              volta em {{ e.proxima_revisao.strftime('%d/%m') }}{% endif %}</span>
+          {% endif %}
+          {% if e.historico %}
+            <span>· {{ e.historico | length }} revisão(ões) feita(s)</span>
+          {% endif %}
+        </div>
+
+        {% if vencido %}
+          <div class="acoes">
+            {% for resultado, rotulo, classe in [
+                 ('ja_sei', '✅ Já sei', 'ds-botao'),
+                 ('ainda_erro', '↻ Ainda erro', 'ds-botao ds-botao--secundario')] %}
+              <form method="post" action="/erros/{{ e.id }}/revisar">
+                <input type="hidden" name="resultado" value="{{ resultado }}">
+                <input type="hidden" name="volta" value="{{ volta }}">
+                <button class="{{ classe }} ds-botao--pequeno" type="submit">{{ rotulo }}</button>
+              </form>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</main>
+</body>
+</html>

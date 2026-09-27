@@ -4,7 +4,7 @@ Roda so em 127.0.0.1 de proposito (veja cli.web). Nao ha login porque nao ha
 outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 """
 import time
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
 
@@ -122,6 +122,13 @@ templates.env.filters["numero"] = onde_estudar.numero
 # faz a conta - e nao com um 5 escrito no template.
 templates.env.globals["MINIMO_NA_MATERIA"] = onde_estudar.MINIMO_NA_MATERIA
 templates.env.globals["MINIMO_NO_ASSUNTO"] = onde_estudar.MINIMO_NO_ASSUNTO
+# Os nomes do caderno de erros (motivo, fonte, o que a lista mostra) e a
+# pergunta "este erro esta vencido?". Vem do servico para nao existir um
+# "Pegadinha" escrito no HTML e outro no banco.
+templates.env.globals["MOTIVOS_DO_ERRO"] = servico.erros.MOTIVOS
+templates.env.globals["FONTES_DO_ERRO"] = servico.erros.FONTES
+templates.env.globals["SITUACOES_DO_ERRO"] = servico.erros.SITUACOES
+templates.env.globals["ESTA_PARA_REVER"] = servico.erros.esta_para_rever
 
 
 # --- o tema (claro ou escuro) -----------------------------------------------
@@ -199,6 +206,26 @@ def tempo_do_plano_b(minutos: int) -> str:
     return "1 hora" if horas == 1 else f"{horas} horas"
 
 
+# As faixas em que eu respondo questao - e, portanto, as que ganham o botao
+# "Anotar erro". A Revisao semanal fica de fora: ela nao tem materia e ganha,
+# no lugar, o link para os erros da semana.
+TIPOS_QUE_ANOTAM = {"questoes", "revisao", "simulado", "diagnostico"}
+
+
+def link_de_anotar_erro(data, materia, assunto, volta: str) -> str:
+    """O endereco do formulario com a faixa ja preenchida, e a volta para ela.
+
+    Monta com urlencode de proposito: titulo de faixa tem "&", ":" e acento, e
+    colar isso na mao no endereco quebra o pre-preenchimento em silencio.
+    """
+    return "/erros/novo?" + urlencode({
+        "data": data.isoformat(),
+        "materia": materia or "",
+        "assunto": assunto or "",
+        "volta": volta,
+    })
+
+
 def rotulo_da_lei(link: str) -> str:
     """"Ler no Planalto", "Ler na ALESC" ou, de qualquer outro site, "Ler a lei"."""
     site = (urlparse(link).hostname or "").lower()
@@ -215,6 +242,8 @@ templates.env.globals.update(
     duracao_legivel=cronograma.duracao_legivel,
     rotulo_da_lei=rotulo_da_lei,
     tempo_do_plano_b=tempo_do_plano_b,
+    TIPOS_QUE_ANOTAM=TIPOS_QUE_ANOTAM,
+    link_de_anotar_erro=link_de_anotar_erro,
 )
 
 
@@ -850,6 +879,10 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             "erro_de_data": erro_de_data,
             "form": form,
             "erro_da_faixa": erro_da_faixa,
+            # Quantos erros do caderno vencem hoje. Vem daqui, e nao do
+            # TelaDoDia, porque o caderno ja le o cronograma - e o contrario
+            # tambem faria um importar o outro.
+            "erros_para_rever": servico.erros.quantos_para_rever(),
         },
     )
 
@@ -1056,8 +1089,173 @@ def estudar():
 
 @app.get("/revisao")
 def revisao_secao():
-    """Revisao abre nos Macetes, a unica pagina dela por enquanto."""
-    return RedirectResponse("/macetes", status_code=303)
+    """Revisao abre no Caderno de erros: o que eu errei manda mais."""
+    return RedirectResponse("/erros", status_code=303)
+
+
+# --- o caderno de erros -------------------------------------------------------
+# A tela e o formulario. A regra da revisao (1-7-30) mora em servico/erros.py;
+# aqui so entra o que e de tela: o filtro, o "volta para onde eu estava" e a
+# recusa aparecendo na propria pagina em vez de num 500.
+
+
+def _erro_de_data(valor: str | None) -> tuple[date | None, str | None]:
+    """Data de query string: vazia vira None, lixo vira aviso na tela."""
+    if not valor:
+        return None, None
+    try:
+        return date.fromisoformat(valor), None
+    except ValueError:
+        return None, f"Data inválida: {valor!r}. Use AAAA-MM-DD."
+
+
+@app.get("/erros", response_class=HTMLResponse)
+def erros_anotados(
+    request: Request,
+    materia: str | None = None,
+    motivo: str | None = None,
+    situacao: str | None = None,
+    semana: str | None = None,
+):
+    """O caderno de erros: o que me derruba, e o que esta para rever hoje."""
+    materia = (materia or "").strip() or None
+    motivo = (motivo or "").strip() or None
+    situacao = (situacao or "").strip() or servico.erros.SITUACAO_PADRAO
+    if situacao not in servico.erros.SITUACOES:
+        situacao = servico.erros.SITUACAO_PADRAO
+    da_semana, aviso = _erro_de_data(semana)
+
+    hoje = servico.cronograma.hoje_local()
+    lista = servico.erros.listar(materia=materia, motivo=motivo,
+                                situacao=situacao, semana=da_semana, hoje=hoje)
+    # As contagens do topo saem de TODOS os erros do recorte de materia,
+    # motivo e semana - e nao do que esta vencido hoje. "O que mais te
+    # derruba" e uma pergunta sobre o caderno inteiro.
+    do_recorte = servico.erros.listar(materia=materia, motivo=motivo,
+                                      situacao="todos", semana=da_semana, hoje=hoje)
+    por_materia, por_motivo = servico.erros.o_que_mais_derruba(do_recorte)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="erros.html",
+        context={
+            "erros": lista,
+            "hoje": hoje,
+            "materia": materia,
+            "motivo": motivo,
+            "situacao": situacao,
+            "semana": da_semana,
+            "aviso": aviso,
+            "por_materia": por_materia,
+            "por_motivo": por_motivo,
+            "total_do_recorte": len(do_recorte),
+            "materias": servico.erros.materias_do_caderno(),
+            "para_rever": servico.erros.quantos_para_rever(hoje),
+            "volta": _caminho_de_volta(request),
+            "semana_de_ate": servico.erros.semana_de(da_semana) if da_semana else None,
+        },
+    )
+
+
+def _caminho_de_volta(request: Request) -> str:
+    """O endereco desta pagina, para o formulario saber para onde voltar."""
+    consulta = urlencode([(k, v) for k, v in request.query_params.multi_items()])
+    return request.url.path + (f"?{consulta}" if consulta else "")
+
+
+@app.get("/erros/novo", response_class=HTMLResponse)
+def erro_novo(
+    request: Request,
+    data: str | None = None,
+    materia: str | None = None,
+    assunto: str | None = None,
+    volta: str | None = None,
+):
+    """O formulario, aceitando tudo pre-preenchido pelo endereco.
+
+    E assim que o botao "Anotar erro" de cada faixa da tela Hoje funciona: ele
+    manda a data do dia, a materia e o assunto da faixa, e a volta com a
+    ancora da propria faixa. Sem isso, anotar um erro custava tres campos
+    digitados de novo - e erro que custa some.
+    """
+    quando, aviso = _erro_de_data(data)
+    return _formulario_de_erro(
+        request,
+        form={"data_estudo": (quando or servico.cronograma.hoje_local()).isoformat(),
+              "materia": (materia or "").strip(),
+              "assunto": (assunto or "").strip()},
+        volta=volta,
+        aviso=aviso,
+    )
+
+
+def _formulario_de_erro(request: Request, form: dict, volta: str | None,
+                        erro: str | None = None, aviso: str | None = None,
+                        status: int = 200):
+    return templates.TemplateResponse(
+        request=request,
+        name="erro_novo.html",
+        status_code=status,
+        context={
+            "form": form,
+            "volta": _volta_interna(volta or "/erros"),
+            "erro": erro,
+            "aviso": aviso,
+            "materias": servico.erros.materias_sugeridas(),
+            # O dia em que este erro volta, se eu gravar agora. E a mesma
+            # conta do servico, e nao um "+1" escrito no HTML.
+            "volta_em": (servico.cronograma.hoje_local()
+                         + timedelta(days=servico.erros.INTERVALOS[0])),
+        },
+    )
+
+
+@app.post("/erros/novo")
+def erro_gravar(
+    request: Request,
+    data_estudo: str = Form(""),
+    materia: str = Form(""),
+    assunto: str = Form(""),
+    motivo: str = Form(""),
+    regra: str = Form(""),
+    fonte: str = Form("qconcursos"),
+    referencia: str = Form(""),
+    volta: str = Form(""),
+):
+    """Grava o erro e volta para onde eu estava. Recusa aparece na tela."""
+    form = {"data_estudo": data_estudo, "materia": materia, "assunto": assunto,
+            "motivo": motivo, "regra": regra, "fonte": fonte,
+            "referencia": referencia}
+    quando, aviso = _erro_de_data(data_estudo)
+    if aviso:
+        return _formulario_de_erro(request, form, volta, erro=aviso, status=400)
+    try:
+        servico.erros.anotar(
+            data_estudo=quando, materia=materia, assunto=assunto, motivo=motivo,
+            regra=regra, fonte=fonte, referencia=referencia,
+        )
+    except servico.erros.ErroInvalido as recusa:
+        return _formulario_de_erro(request, form, volta, erro=str(recusa), status=400)
+
+    return RedirectResponse(_volta_interna(volta or "/erros"), status_code=303)
+
+
+@app.post("/erros/{ident}/revisar")
+def erro_revisar(
+    request: Request,
+    ident: int,
+    resultado: str = Form(""),
+    volta: str = Form(""),
+):
+    """Os botoes "Ja sei" e "Ainda erro" de cada erro vencido."""
+    destino = _volta_interna(volta or "/erros")
+    try:
+        servico.erros.revisar(ident, resultado)
+    except servico.erros.ErroInvalido:
+        # Erro que nao existe mais (apagado noutra aba) ou botao desconhecido:
+        # a lista recarregada ja conta a verdade, e 500 aqui nao ajuda ninguem.
+        return RedirectResponse(destino, status_code=303)
+    return RedirectResponse(destino, status_code=303)
 
 
 @app.get("/mais", response_class=HTMLResponse)

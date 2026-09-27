@@ -24,6 +24,7 @@ from radar.db import criar_tabelas, sessao
 from radar.models import (
     Concurso,
     DataHoraUTC,
+    ErroAnotado,
     EstadoDoDia,
     Evento,
     QuestaoDeProva,
@@ -888,3 +889,96 @@ def esquecer_estados(datas: list, caminho: Path | None = None) -> int:
     if len(ficam) != len(linhas):
         _gravar_registros(origem, ficam)
     return len(linhas) - len(ficam)
+
+
+# --- o caderno de erros --------------------------------------------------------
+# O mesmo molde do diario: data/caderno_erros.json, e quando os dois lados tem
+# o mesmo erro vale o de `atualizado_em` mais recente. So a CHAVE e outra: o
+# erro nao tem data unica (num dia eu anoto cinco), entao ela e o `criado_em`,
+# que tem microssegundo - dois erros criados no mesmo microssegundo nao existem.
+
+def caminho_dos_erros() -> Path:
+    return config.diretorio_dados() / "caderno_erros.json"
+
+
+def _erro_como_linha(erro: ErroAnotado) -> dict:
+    return {
+        "criado_em": _serializar(erro.criado_em),
+        "data_estudo": erro.data_estudo.isoformat(),
+        "materia": erro.materia,
+        "assunto": erro.assunto,
+        "motivo": erro.motivo,
+        "regra": erro.regra,
+        "fonte": erro.fonte,
+        "referencia": erro.referencia,
+        "etapa": erro.etapa,
+        "proxima_revisao": (erro.proxima_revisao.isoformat()
+                            if erro.proxima_revisao else None),
+        "historico": list(erro.historico or []),
+        "arquivado": bool(erro.arquivado),
+        "atualizado_em": _serializar(erro.atualizado_em),
+    }
+
+
+def exportar_erros(caminho: Path | None = None) -> int:
+    """Grava o caderno de erros no JSON. Devolve quantos erros.
+
+    Como o diario, o arquivo so cresce: erro que esta no arquivo e nao esta no
+    banco fica no arquivo. Ele e a unica copia do caderno fora do radar.db.
+    """
+    criar_tabelas()
+    destino = caminho or caminho_dos_erros()
+
+    juntos = {}
+    for linha in _ler_registros(destino):
+        juntos[linha["criado_em"]] = linha
+    with sessao() as s:
+        for erro in s.scalars(select(ErroAnotado)):
+            linha = _erro_como_linha(erro)
+            juntos[linha["criado_em"]] = _mais_recente(
+                juntos.get(linha["criado_em"]), linha, "atualizado_em")
+
+    _gravar_registros(destino, [juntos[chave] for chave in sorted(juntos)])
+    return len(juntos)
+
+
+def importar_erros(caminho: Path | None = None) -> int:
+    """Traz o caderno do JSON para o banco. Devolve quantos erros mudaram.
+
+    Erro que o banco nao tem entra; erro que os dois tem so e reescrito se a
+    linha do arquivo for mais recente. Rodar duas vezes da no mesmo.
+    """
+    origem = caminho or caminho_dos_erros()
+    linhas = _ler_registros(origem)
+    if not linhas:
+        return 0
+
+    criar_tabelas()
+    mudaram = 0
+    with sessao() as s:
+        for linha in linhas:
+            criado_em = datetime.fromisoformat(linha["criado_em"])
+            atualizado_em = datetime.fromisoformat(linha["atualizado_em"])
+            erro = s.scalar(
+                select(ErroAnotado).where(ErroAnotado.criado_em == criado_em)
+            )
+            if erro is not None and erro.atualizado_em >= atualizado_em:
+                continue
+            if erro is None:
+                erro = ErroAnotado(criado_em=criado_em)
+                s.add(erro)
+            erro.data_estudo = date.fromisoformat(linha["data_estudo"])
+            erro.materia = linha["materia"]
+            erro.assunto = linha.get("assunto")
+            erro.motivo = linha["motivo"]
+            erro.regra = linha["regra"]
+            erro.fonte = linha.get("fonte") or "outro"
+            erro.referencia = linha.get("referencia")
+            erro.etapa = int(linha.get("etapa") or 1)
+            proxima = linha.get("proxima_revisao")
+            erro.proxima_revisao = date.fromisoformat(proxima) if proxima else None
+            erro.historico = list(linha.get("historico") or [])
+            erro.arquivado = bool(linha.get("arquivado"))
+            erro.atualizado_em = atualizado_em
+            mudaram += 1
+    return mudaram

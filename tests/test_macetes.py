@@ -344,14 +344,18 @@ def test_campo_vazio_no_formulario_nao_vira_filtro(cliente):
 
 
 def test_o_radar_tem_link_para_os_macetes(cliente):
-    """Macetes e a Revisao do sitemap: a barra leva ate eles de qualquer
-    pagina."""
+    """Macetes e uma das duas telas da Revisao: a barra leva a seccao de
+    qualquer pagina, e as sub-abas levam dali aos Macetes.
+
+    Desde a etapa E1 o /revisao abre no Caderno de erros, e nao aqui: o que eu
+    errei ontem manda mais que o costume da banca."""
     _semear(_questao(1))
 
     assert 'href="/revisao"' in cliente.get("/concursos").text
     assert cliente.get("/revisao", follow_redirects=False).headers["location"] == (
-        "/macetes"
+        "/erros"
     )
+    assert 'href="/macetes"' in cliente.get("/erros").text
 
 
 

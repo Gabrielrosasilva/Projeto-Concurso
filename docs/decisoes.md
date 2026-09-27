@@ -1981,3 +1981,43 @@ Os detalhes que vieram com a escolha:
   aparece na tela;
 - `data/radar_web.pid` e `data/logs/` ficam **fora do git**: sao rastro de
   execucao desta maquina, e o robo do GitHub nao tem nada a ver com eles.
+## O caderno de erros tem tabela, e a regra certa e obrigatoria (etapa E1, 27/09/2026)
+
+Tres decisoes, e a primeira e a que mais vai me poupar discussao comigo mesmo:
+
+- **duas revisoes 1-7-30, de proposito.** Ja existia uma
+  (`servico/espacada.py`), calculada do historico de respostas e sem tabela
+  nenhuma. O caderno tem tabela (`erros_anotados`) porque a ORIGEM e outra: a
+  do espacada sai do que eu respondi DENTRO do radar, e pode ser recalculada
+  a qualquer momento; a do caderno sai do meu julgamento - "ja sei" nao esta
+  escrito em lugar nenhum a nao ser ali. Sem tabela, apertar "ja sei" nao
+  guardaria nada. Os INTERVALOS vem do `espacada`, para nao existirem dois
+  numeros para a mesma ideia;
+- **a `regra` e obrigatoria.** Anotar "errei a questao 42" nao ensina nada;
+  "o prazo de progressao conta da data da prisao, nao da condenacao" ensina. E
+  a regra que volta em 1, 7 e 30 dias - sem ela, o caderno seria uma lista de
+  derrotas. A recusa e em voz alta, na propria tela, e nao um campo vazio no
+  banco;
+- **o caderno NAO mede nada**, pela mesma razao do "Como foi o dia": o que
+  esta nele eu digitei a mao, e quase tudo vem do Qconcursos. Ele nao entra em
+  Meu foco, Onde estudar, home nem compilado - la so conta questao respondida
+  dentro do radar, uma por uma. Ha teste segurando isso.
+
+O resto veio junto:
+
+- a chave do backup (`data/caderno_erros.json`) e o `criado_em`, e nao a data:
+  num dia eu anoto cinco erros. Microssegundo separa dois erros; dois erros
+  criados no mesmo microssegundo nao existem;
+- **"para rever hoje" inclui o atrasado.** Erro que venceu anteontem e nao foi
+  revisado nao pode desaparecer da fila - desaparecer e o que ele faria se a
+  comparacao fosse por igualdade de data;
+- a porcentagem do "O que mais te derruba" so aparece com 3 erros ou mais na
+  materia. De dois erros, um e 50%, e 50% de dois nao e padrao nenhum;
+- **"Ainda erro" desarquiva.** Se eu apertei aquilo num erro que estava no
+  arquivo, ele nao estava aprendido;
+- o botao "Anotar erro" so aparece nas faixas em que eu respondo questao
+  (questoes, revisao, simulado, diagnostico): na teoria da manha nao ha o que
+  errar. A Revisao semanal do sabado nao tem materia, e por isso ganha, no
+  lugar, o link para os erros da semana;
+- a aba **Revisao** passou a abrir no caderno, e nao nos Macetes: o que eu
+  errei ontem manda mais que o costume da banca.

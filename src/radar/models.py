@@ -467,3 +467,52 @@ class EstadoDoDia(Base):
 
     def __repr__(self) -> str:
         return f"<EstadoDoDia {self.data} {len(self.faixas_feitas or [])} feita(s)>"
+
+
+class ErroAnotado(Base):
+    """Um erro meu, anotado a mao, com a regra certa escrita por mim.
+
+    O caderno de erros e um DIARIO, como o RegistroDoDia: ele NAO entra em
+    acerto medido nenhum do radar - nem no Meu foco, nem no Onde estudar, nem
+    no compilado, nem na home. A razao e a mesma de sempre: o que eu digito
+    aqui vem em maior parte do Qconcursos, e o que mede o que a banca cobra e
+    so o que eu respondi dentro do radar, questao por questao.
+
+    A revisao (1-7-30) mora nesta tabela, e nao e calculada como a do
+    `servico.espacada`. A diferenca e de origem: aquela sai das respostas
+    gravadas e pode ser recalculada a qualquer momento; esta sai do meu
+    julgamento ("ja sei" / "ainda erro"), que nao esta escrito em lugar
+    nenhum a nao ser aqui.
+    """
+
+    __tablename__ = "erros_anotados"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    criado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora, index=True)
+    # A data do DIA DO CRONOGRAMA em que o erro aconteceu, e nao o instante em
+    # que eu anotei: anotar no domingo um erro de sexta nao muda a sexta.
+    data_estudo: Mapped[date] = mapped_column(Date, index=True)
+    materia: Mapped[str] = mapped_column(String(80), index=True)
+    assunto: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    # nao_sabia | confundi | li_errado | pegadinha | chutei (servico/erros.py).
+    motivo: Mapped[str] = mapped_column(String(20), index=True)
+    # A regra certa, escrita por mim. E OBRIGATORIA de proposito: erro sem a
+    # regra e so um erro anotado - com ela, e uma coisa aprendida.
+    regra: Mapped[str] = mapped_column(Text)
+    # qconcursos | radar | simulado | outro.
+    fonte: Mapped[str] = mapped_column(String(20), default="qconcursos")
+    # Link ou numero da questao. Opcional: as vezes eu so tenho a regra.
+    referencia: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # 1, 2 ou 3: qual das revisoes (1, 7 e 30 dias) vem agora.
+    etapa: Mapped[int] = mapped_column(Integer, default=1)
+    proxima_revisao: Mapped[date | None] = mapped_column(Date, index=True, nullable=True)
+    # Lista de {data, resultado, etapa}: o que eu respondi em cada revisao.
+    # Fica aqui porque e o unico lugar que conta a HISTORIA do erro - se ele
+    # ja voltou tres vezes para a etapa 1, o problema nao e a memoria.
+    historico: Mapped[list[Any]] = mapped_column(JSON, default=list)
+    arquivado: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    # Para o backup saber qual lado esta mais novo, como no registro do dia.
+    atualizado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<ErroAnotado {self.data_estudo} {self.materia} {self.motivo}>"

@@ -205,10 +205,10 @@ def test_o_endereco_antigo_do_foco_leva_para_a_home(cliente):
     assert resposta.headers["location"] == "/"
 
 
-def test_estudar_abre_no_simulado_e_revisao_nos_macetes(cliente):
-    """Estudar e treinar; Macetes e revisao, como no sitemap."""
+def test_estudar_abre_no_simulado_e_revisao_no_caderno(cliente):
+    """Estudar e treinar; Revisao abre no Caderno de erros (etapa E1)."""
     assert cliente.get("/estudar", follow_redirects=False).headers["location"] == "/simulado"
-    assert cliente.get("/revisao", follow_redirects=False).headers["location"] == "/macetes"
+    assert cliente.get("/revisao", follow_redirects=False).headers["location"] == "/erros"
 
 
 def test_estudar_junta_simulado_e_gerar(cliente):

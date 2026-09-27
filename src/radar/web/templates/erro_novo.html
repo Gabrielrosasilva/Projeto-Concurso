@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Anotar erro &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    /* Formulario curto de proposito: quanto menos campo, mais erro anotado. */
+    .form-erro{display:grid;gap:var(--esp-4);max-width:46rem}
+    .dupla{display:grid;grid-template-columns:1fr 1fr;gap:var(--esp-4)}
+    @media (max-width:560px){.dupla{grid-template-columns:1fr}}
+    .form-erro textarea{width:100%;padding:var(--esp-2) var(--esp-3);
+      border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
+      background:var(--cor-superficie);color:var(--cor-texto);font:inherit;
+      font-size:var(--tam-base);line-height:var(--linha);resize:vertical}
+    .form-erro textarea:focus{outline:2px solid var(--cor-acao);outline-offset:2px}
+    .acoes{display:flex;gap:var(--esp-3);align-items:center;flex-wrap:wrap}
+    .obrigatorio{color:var(--cor-aviso)}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_revisao with context %}
+{{ barra('revisao') }}
+
+<main class="ds-pagina">
+  {{ abas_de_revisao('erros') }}
+
+  <header class="ds-cabeca">
+    <h1>📓 Anotar erro</h1>
+    <p>A regra certa é o que importa aqui: ela é o que vai voltar em 1, 7 e 30 dias.</p>
+  </header>
+
+  {% if erro %}<p class="ds-alerta" role="alert">⚠ {{ erro }}</p>{% endif %}
+  {% if aviso %}<p class="ds-alerta">⚠ {{ aviso }}</p>{% endif %}
+
+  <form class="form-erro ds-cartao" method="post" action="/erros/novo">
+    <input type="hidden" name="volta" value="{{ volta }}">
+
+    <div class="dupla">
+      <label class="ds-campo">Dia do estudo
+        <input type="date" name="data_estudo" value="{{ form.data_estudo or '' }}" required>
+      </label>
+      <label class="ds-campo">Matéria <span class="obrigatorio">*</span>
+        {# Texto livre com sugestao, e nao lista fechada: a materia vem do
+           cronograma, mas errar numa materia que nao esta nele acontece. #}
+        <input type="text" name="materia" value="{{ form.materia or '' }}"
+               list="materias-do-cronograma" autocomplete="off" required>
+        <datalist id="materias-do-cronograma">
+          {% for m in materias %}<option value="{{ m }}"></option>{% endfor %}
+        </datalist>
+      </label>
+    </div>
+
+    <label class="ds-campo">Assunto
+      <input type="text" name="assunto" value="{{ form.assunto or '' }}"
+             placeholder="ex.: progressão de regime">
+    </label>
+
+    <div class="dupla">
+      <label class="ds-campo">Por que eu errei <span class="obrigatorio">*</span>
+        <select name="motivo" required>
+          <option value="">escolha</option>
+          {% for chave, nome in MOTIVOS_DO_ERRO.items() %}
+            <option value="{{ chave }}" {{ 'selected' if chave == form.motivo }}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ds-campo">Onde
+        <select name="fonte">
+          {% for chave, nome in FONTES_DO_ERRO.items() %}
+            <option value="{{ chave }}" {{ 'selected' if chave == (form.fonte or 'qconcursos') }}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+
+    <label class="ds-campo">A regra certa <span class="obrigatorio">*</span>
+      <textarea name="regra" rows="3" required
+                placeholder="O que eu preciso lembrar da próxima vez, numa frase.">{{ form.regra or '' }}</textarea>
+    </label>
+
+    <label class="ds-campo">Referência
+      <input type="text" name="referencia" value="{{ form.referencia or '' }}"
+             placeholder="link da questão, ou o nº dela">
+    </label>
+
+    <div class="acoes">
+      <button class="ds-botao" type="submit">Anotar e voltar</button>
+      <a class="ds-link-acao" href="{{ volta }}">cancelar</a>
+      <span class="ds-pequeno">Volta em {{ volta_em.strftime('%d/%m') }}, na revisão 1 de 3.</span>
+    </div>
+  </form>
+</main>
+</body>
+</html>

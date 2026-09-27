@@ -1523,6 +1523,18 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"para {destino_estados}"
     )
 
+    # O caderno de erros, pelo mesmo motivo: e a unica copia dele fora do
+    # radar.db, e o que esta escrito nele sou eu que escrevi.
+    destino_erros = (
+        destino.with_name("caderno_erros.json") if caminho
+        else acervo.caminho_dos_erros()
+    )
+    erros_gravados = acervo.exportar_erros(destino_erros)
+    console.print(
+        f"[green]{erros_gravados}[/] erro(s) anotado(s) exportado(s) para "
+        f"{destino_erros}"
+    )
+
 
 @app.command()
 def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
@@ -1599,6 +1611,14 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_estados.exists():
         estados = acervo.importar_estados(origem_estados)
         console.print(f"   {estados} dia(s) de faixas marcadas de volta ao banco")
+
+    origem_erros = (
+        origem.with_name("caderno_erros.json") if caminho
+        else acervo.caminho_dos_erros()
+    )
+    if origem_erros.exists():
+        erros_de_volta = acervo.importar_erros(origem_erros)
+        console.print(f"   {erros_de_volta} erro(s) anotado(s) de volta ao banco")
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -1948,7 +1968,7 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/assuntos.json", "data/questoes_geradas.json",
                      "data/simulados.json", "data/macetes.json",
                      "data/explicacoes.json", "data/registro_estudo.json",
-                     "data/estado_do_dia.json")
+                     "data/estado_do_dia.json", "data/caderno_erros.json")
 
 
 @app.command()
@@ -1996,8 +2016,9 @@ def sincronizar(
     _importar_simulados()
     dias = acervo.importar_registros()
     estados = acervo.importar_estados()
-    console.print(f"   {dias} dia(s) do cronograma e {estados} dia(s) de faixas "
-                  f"marcadas de volta ao banco")
+    erros_de_volta = acervo.importar_erros()
+    console.print(f"   {dias} dia(s) do cronograma, {estados} dia(s) de faixas "
+                  f"marcadas e {erros_de_volta} erro(s) anotado(s) de volta ao banco")
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -2024,11 +2045,12 @@ def sincronizar(
     total_simulados = acervo.exportar_simulados()
     total_dias = acervo.exportar_registros()
     acervo.exportar_estados()
+    total_erros = acervo.exportar_erros()
     favoritos = servico.contar_favoritos()
     console.print(
         f"   {total} concurso(s), {total_eventos} evento(s), "
-        f"{total_simulados} simulado(s) e {total_dias} dia(s) do cronograma, "
-        f"com [bold]{favoritos}[/] favorito(s)"
+        f"{total_simulados} simulado(s), {total_dias} dia(s) do cronograma e "
+        f"{total_erros} erro(s) anotado(s), com [bold]{favoritos}[/] favorito(s)"
     )
 
     console.print("[bold]5/6[/] Commitando")
