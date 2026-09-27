@@ -235,6 +235,10 @@ def rotulo_da_lei(link: str) -> str:
     return "Ler a lei"
 
 templates.env.globals.update(
+    MINIMO_DA_AMOSTRA=servico.materias.MINIMO_DA_AMOSTRA,
+    linha_do_grafico=servico.materias.linha_do_grafico,
+    GRAFICO_LARGURA=servico.materias.LARGURA,
+    GRAFICO_ALTURA=servico.materias.ALTURA,
     O_QUE_DO_EXTRA=servico.extra.O_QUE, ONDE_DO_EXTRA=servico.extra.ONDE,
     ONDE_SEM_QUESTOES=servico.extra.ONDE_SEM_QUESTOES,
     TEM_ACERTO=cronograma.tem_acerto,
@@ -1212,6 +1216,37 @@ def analises(request: Request):
                 m for m in painel.incidencia
                 if m not in {x.nome for x in painel.materias_do_edital}
             ),
+        },
+    )
+
+
+@app.get("/analises/materias", response_class=HTMLResponse)
+def analises_materias(request: Request):
+    """O progresso em cada materia do edital, e a projecao da prova.
+
+    A conta inteira mora em `servico.materias`; aqui so entra o que e de tela.
+    """
+    try:
+        plano = cronograma.carregar()
+    except (FileNotFoundError, cronograma.ErroNoCronograma) as problema:
+        mensagem = (f"Não achei {problema.filename}."
+                    if isinstance(problema, FileNotFoundError) else str(problema))
+        return templates.TemplateResponse(
+            request=request, name="materias.html",
+            context={"materias": [], "projecao": None, "mensagem": mensagem},
+        )
+
+    hoje = servico.cronograma.hoje_local()
+    cartoes, projecao = servico.materias.montar(plano, hoje)
+    return templates.TemplateResponse(
+        request=request,
+        name="materias.html",
+        context={
+            "materias": cartoes,
+            "projecao": projecao,
+            "plano": plano,
+            "hoje": hoje,
+            "mensagem": None,
         },
     )
 

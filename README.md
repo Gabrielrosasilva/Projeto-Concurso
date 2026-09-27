@@ -228,6 +228,7 @@ fim do endereco vale so para aquela pagina.
 | **Noticias e andamento** | procura em **tudo**, e ordena por fase, nao por data |
 | **Simulado** | responder questoes das provas do acervo |
 | **Semanas** | uma semana por cartao, por ciclo: dias completos, acerto, setas |
+| **Minhas matérias** | o progresso por materia, a barra da meta e a projecao |
 | **Caderno de erros** | o que eu errei, a regra certa, e a revisao 1-7-30 |
 | **Macetes** | o costume da banca, por contagem |
 | **Previsao de abertura** | onde vale ficar de olho agora, municipio por municipio |
@@ -708,6 +709,50 @@ vou lembrar dela. Ficam em `data/notas_semana.json`, com a **segunda-feira**
 como chave (numero de semana reinicia no Ciclo 2; data nao reinicia).
 
 A conta inteira mora em `servico/semanas.py`; a tela so mostra.
+
+### Minhas materias: o progresso em cada uma
+
+Em **📊 Analises > Minhas materias** (`/analises/materias`), um cartao por
+materia do edital, na ordem do peso na prova. O recorte e o **ciclo de agora**:
+misturar o meu acerto de hoje com o da primeira semana responderia outra
+pergunta.
+
+No topo, a **projecao**:
+
+```
+Se a prova fosse hoje: ~46 acertos de 100 · meta 79
+```
+
+Ela soma, materia por materia, o meu acerto **sem consulta** vezes as questoes
+que aquela materia tem na prova. Materia com menos de **20 questoes sem
+consulta** fica de fora - nao entra como zero nem como a media das outras, que
+seriam as duas invencoes possiveis -, e a frase diz quantas ficaram. O selo e o
+de **tendencia**: e leitura, nao fato.
+
+Cada cartao tem:
+
+- **questoes feitas** (faixas + extras + radar) e, a parte, **"treino IA: N
+  (nao conta)"**;
+- **acerto geral** e, embaixo, **"radar: X% em N · anotado: Y% em M"**;
+- a **barra "voce x meta"**: o acerto sem consulta contra a meta da materia
+  (LEP: 8 de 10 = 80%), verde quando atinge, com o aviso **amostra pequena**
+  enquanto nao houver 20 questoes sem consulta;
+- um **grafico do acerto sem consulta semana a semana** — SVG desenhado no
+  servidor, sem JavaScript. Semana sem questao nao vira ponto: a linha pula
+  ela, em vez de fingir um zero que eu nao tirei;
+- **horas estudadas** e **"ultima vez: ha N dias"**;
+- o **programa andando**: "8 de 12 aulas vistas" (as faixas de estudo da manha
+  daquela materia, marcadas / as do plano);
+- os **assuntos**, do pior para o melhor acerto, com a quantidade de cada;
+- os **erros no caderno** da materia e o motivo mais comum, com link.
+
+Materia que eu ainda nao encostei fica **cinza**: "ainda nao estudei — entra no
+Ciclo 2", pelo mapa do ano.
+
+Os nomes casam pela regra que o radar ja usa (`compilado.mesma_materia`): o
+caderno de 2013 escreve "Direito Processo Penal" e o edital de 2019 "Direito
+Processual Penal", e os dois sao a mesma materia. A conta inteira mora em
+`servico/materias.py`; a tela so mostra.
 
 ### Backup
 
@@ -1389,6 +1434,7 @@ src/radar/
 │   ├── erros.py      o caderno de erros: anotar, e a revisao 1-7-30 dele
 │   ├── extra.py      o estudo extra, fora das faixas do plano
 │   ├── semanas.py    como fui em cada semana, agrupado pelos ciclos do mapa
+│   ├── materias.py   o progresso em cada materia do edital, e a projecao
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?

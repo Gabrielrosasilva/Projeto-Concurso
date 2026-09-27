@@ -77,6 +77,16 @@
 {% endmacro %}
 
 
+{# As sub-abas de Analises: o quadro do edital contra as provas, e o meu
+   progresso em cada materia. #}
+{% macro abas_de_analises(ativa='') %}
+<div class="subabas">
+  <a class="{{ 'ativo' if ativa == 'edital' }}" href="/analises">Edital</a>
+  <a class="{{ 'ativo' if ativa == 'materias' }}" href="/analises/materias">Minhas matérias</a>
+</div>
+{% endmacro %}
+
+
 {# As sub-abas de Concursos: a lista, os favoritos e as duas consultas que
    antes moravam no menu "Mais". #}
 {% macro abas_de_concursos(ativa='') %}

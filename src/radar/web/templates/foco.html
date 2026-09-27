@@ -178,11 +178,12 @@
 </head>
 <body>
 
-{% from "_topo.html" import barra with context %}
+{% from "_topo.html" import barra, abas_de_analises with context %}
 {% from "_componentes.html" import selo %}
 {{ barra('analises') }}
 
 <main>
+  {{ abas_de_analises('edital') }}
   <h1>Análises · {{ p.nome_do_alvo }}</h1>
   <p class="sub">O edital contra as provas, e por onde estudar. O resumo do
     dia está no <a href="/">Meu foco</a>.</p>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Minhas matérias &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    /* --- a projecao, no topo --- */
+    .projecao{display:flex;flex-wrap:wrap;gap:var(--esp-4);align-items:baseline}
+    .projecao .n{font-size:var(--tam-2xl);font-weight:var(--peso-forte);
+      line-height:1;font-variant-numeric:tabular-nums}
+    .projecao .meta{font-size:var(--tam-md);color:var(--cor-texto-suave)}
+
+    /* --- o cartao de uma materia --- */
+    .materia-cabeca{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:baseline;
+      justify-content:space-between}
+    .materia-cabeca h3{margin:0;font-size:var(--tam-md);font-weight:var(--peso-forte)}
+    .peso{font-size:var(--tam-xs);color:var(--cor-texto-suave);white-space:nowrap}
+    .cinza{opacity:.72}
+
+    .linha-numeros{display:flex;flex-wrap:wrap;gap:var(--esp-4);align-items:baseline}
+    .linha-numeros .n{font-size:var(--tam-lg);font-weight:var(--peso-forte);
+      font-variant-numeric:tabular-nums;line-height:1.1}
+    .linha-numeros .rot{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .de-onde{margin:0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+
+    /* --- a barra "voce x meta" --- */
+    .barra-meta{position:relative;height:1.35rem;border-radius:var(--raio-sm);
+      background:var(--cor-superficie-2);overflow:hidden}
+    .barra-meta .feito{height:100%;background:var(--cor-acao);border-radius:inherit}
+    .barra-meta .feito.na-meta{background:var(--selo-calculado)}
+    .barra-meta .feito.pouco{background:var(--cor-borda)}
+    /* O risco da meta: uma linha vertical na altura do alvo. */
+    .barra-meta .alvo{position:absolute;top:0;bottom:0;width:2px;
+      background:var(--cor-texto);opacity:.55}
+    .legenda-meta{display:flex;justify-content:space-between;gap:var(--esp-2);
+      font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+
+    /* --- o grafico do acerto por semana --- */
+    .tendencia{width:100%;height:44px;overflow:visible}
+    .tendencia polyline{fill:none;stroke:var(--cor-acao);stroke-width:2;
+      stroke-linejoin:round;stroke-linecap:round}
+    .tendencia .base{stroke:var(--cor-borda);stroke-width:1}
+
+    /* --- os assuntos --- */
+    .assuntos{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-1);
+      font-size:var(--tam-sm)}
+    .assuntos li{display:grid;grid-template-columns:1fr auto auto;gap:var(--esp-2);
+      align-items:baseline}
+    .assuntos .quanto{font-size:var(--tam-xs);color:var(--cor-texto-suave);
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+    .assuntos .nota{font-variant-numeric:tabular-nums;font-weight:var(--peso-medio);
+      white-space:nowrap}
+    .assuntos .nota.ruim{color:var(--selo-ia)}
+    .assuntos .nota.boa{color:var(--selo-calculado)}
+    .rodape-materia{display:flex;flex-wrap:wrap;gap:var(--esp-3);
+      font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_analises with context %}
+{% from "_componentes.html" import selo %}
+{{ barra('analises') }}
+
+{%- macro grafico(m) -%}
+  {% set pontos = linha_do_grafico(m.semanal) %}
+  {% if pontos %}
+    <svg class="tendencia" viewBox="0 0 {{ GRAFICO_LARGURA }} {{ GRAFICO_ALTURA }}"
+         preserveAspectRatio="none" role="img"
+         aria-label="Acerto sem consulta por semana: {% for p in m.semanal %}{% if p.porcentagem is not none %}semana {{ p.semana }}, {{ p.porcentagem }}%{% if not loop.last %}; {% endif %}{% endif %}{% endfor %}">
+      <line class="base" x1="0" y1="{{ GRAFICO_ALTURA }}" x2="{{ GRAFICO_LARGURA }}"
+            y2="{{ GRAFICO_ALTURA }}"></line>
+      <polyline points="{{ pontos }}"></polyline>
+    </svg>
+    <p class="de-onde">acerto sem consulta, semana a semana</p>
+  {% endif %}
+{%- endmacro -%}
+
+<main class="ds-pagina">
+  {{ abas_de_analises('materias') }}
+
+  <header class="ds-cabeca">
+    <h1>Minhas matérias</h1>
+    <p>
+      Quanto eu já fiz de cada matéria <b>neste ciclo</b>, e o quanto falta
+      para a meta. Os números somam as faixas do plano, o estudo extra e o que
+      eu respondi no radar; a comparação com a meta usa só questão
+      <b>sem consulta</b>.
+    </p>
+  </header>
+
+  {% if mensagem %}
+    <div class="ds-cartao"><p class="ds-nota">{{ mensagem }}</p></div>
+  {% endif %}
+
+  {# ------------------------------------------------------------ a projecao #}
+  {% if projecao %}
+    <div class="ds-cartao">
+      <div class="ds-cartao__cabeca">
+        <h2 class="ds-cartao__titulo">Se a prova fosse hoje</h2>
+        {{ selo('tendencia') }}
+      </div>
+      {% if projecao.tem_dado %}
+        <p class="projecao">
+          <span class="n">~{{ projecao.acertos }} acertos</span>
+          <span class="meta">de {{ projecao.questoes_da_prova }} · meta {{ projecao.meta }}</span>
+        </p>
+        <p class="ds-cartao__meta">
+          Somando, matéria por matéria, o meu acerto <b>sem consulta</b> vezes as
+          questões que ela tem na prova.
+          {% if projecao.sem_dado %}
+            {{ projecao.sem_dado | length }} matéria(s) ficaram de fora por falta
+            de amostra ({{ MINIMO_DA_AMOSTRA }} questões sem consulta):
+            {{ projecao.sem_dado | join(', ') }}. O número de cima conta só as
+            {{ projecao.com_dado | length }} que já têm base.
+          {% endif %}
+        </p>
+      {% else %}
+        <p class="ds-nota">
+          Ainda não dá para projetar: nenhuma matéria tem
+          {{ MINIMO_DA_AMOSTRA }} questões sem consulta neste ciclo. Até lá, o
+          número seria chute com cara de conta.
+        </p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {# ---------------------------------------------------- um cartao por materia #}
+  <div class="ds-grade">
+    {% for m in materias %}
+      <article class="ds-cartao {{ 'cinza' if m.nunca_estudei }}" id="materia-{{ loop.index }}">
+        <div class="materia-cabeca">
+          <h3>{{ m.nome }}</h3>
+          <span class="peso">{{ m.questoes_na_prova }} na prova · meta {{ m.meta }}</span>
+        </div>
+
+        {% if m.nunca_estudei %}
+          <p class="ds-nota" style="margin:0">
+            Ainda não estudei
+            {%- if m.ciclo_de_entrada %} — entra no <b>{{ m.ciclo_de_entrada }}</b>{% endif %}.
+          </p>
+        {% else %}
+          <div class="linha-numeros">
+            <span><span class="n">{{ m.geral.questoes }}</span>
+              <span class="rot">questões feitas</span></span>
+            {% if m.geral.medidas %}
+              <span><span class="n">{{ m.geral.porcentagem }}%</span>
+                <span class="rot">de acerto</span></span>
+            {% endif %}
+            {% if m.minutos %}
+              <span><span class="n">{{ duracao(m.minutos) }}</span>
+                <span class="rot">estudadas</span></span>
+            {% endif %}
+          </div>
+
+          {% if m.radar.medidas and m.anotado.medidas %}
+            <p class="de-onde">radar: {{ m.radar.porcentagem }}% em {{ m.radar.medidas }} ·
+              anotado: {{ m.anotado.porcentagem }}% em {{ m.anotado.medidas }}</p>
+          {% endif %}
+          {% if m.geradas %}
+            <p class="de-onde">treino IA: {{ m.geradas }} (não conta)</p>
+          {% endif %}
+
+          {# A barra: o meu acerto sem consulta contra a meta da materia. #}
+          {% set feito = m.sem_consulta.porcentagem or 0 %}
+          <div>
+            <div class="barra-meta">
+              <div class="feito {{ 'na-meta' if m.na_meta }} {{ 'pouco' if m.amostra_pequena }}"
+                   style="width:{{ feito }}%"></div>
+              <div class="alvo" style="left:{{ m.meta_em_porcentagem }}%"
+                   title="meta: {{ m.meta_em_porcentagem }}%"></div>
+            </div>
+            <p class="legenda-meta">
+              <span>sem consulta: {% if m.sem_consulta.medidas %}{{ feito }}% em
+                {{ m.sem_consulta.medidas }}{% else %}—{% endif %}</span>
+              <span>meta {{ m.meta_em_porcentagem }}% ({{ m.meta }} de {{ m.questoes_na_prova }})</span>
+            </p>
+            {% if m.amostra_pequena %}
+              <p class="de-onde">⚠ amostra pequena: menos de {{ MINIMO_DA_AMOSTRA }}
+                questões sem consulta</p>
+            {% endif %}
+          </div>
+
+          {{ grafico(m) }}
+
+          {% if m.aulas_no_plano %}
+            <p class="de-onde">programa: <b>{{ m.aulas_vistas }} de {{ m.aulas_no_plano }}</b>
+              aulas vistas</p>
+          {% endif %}
+
+          {% if m.assuntos %}
+            <div>
+              <p class="de-onde">assuntos, do pior para o melhor:</p>
+              <ul class="assuntos">
+                {% for a in m.assuntos[:6] %}
+                  <li>
+                    <span>{{ a.nome }}</span>
+                    <span class="quanto">{{ a.questoes }} questões</span>
+                    {% if a.porcentagem is not none %}
+                      <span class="nota {{ 'ruim' if a.porcentagem < m.meta_em_porcentagem else 'boa' }}">{{ a.porcentagem }}%</span>
+                    {% else %}
+                      <span class="quanto">—</span>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+              {% if m.assuntos | length > 6 %}
+                <p class="de-onde">e mais {{ m.assuntos | length - 6 }}.</p>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="rodape-materia">
+            {% if m.dias_desde_a_ultima_vez is not none %}
+              <span>última vez:
+                {% if m.dias_desde_a_ultima_vez == 0 %}hoje
+                {% elif m.dias_desde_a_ultima_vez == 1 %}ontem
+                {% else %}há {{ m.dias_desde_a_ultima_vez }} dias{% endif %}</span>
+            {% endif %}
+            {% if m.erros_no_caderno %}
+              <span>· <a class="ds-link-acao" href="/erros?materia={{ m.nome | urlencode }}&amp;situacao=todos">{{ m.erros_no_caderno }} erro(s) no caderno</a>{% if m.motivo_mais_comum %}, quase sempre <b>{{ m.motivo_mais_comum | lower }}</b>{% endif %}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</main>
+</body>
+</html>

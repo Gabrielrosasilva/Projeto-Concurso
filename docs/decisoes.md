@@ -2116,3 +2116,38 @@ O resto do que decidi aqui:
   escrita errado, sem um botao a mais na tela;
 - **o grafico e CSS puro** (altura por regra de tres com a maior semana), como a
   pizza dos Macetes: o unico JavaScript do radar continua sendo o cronometro.
+## Minhas materias: o recorte, a amostra e o nome (etapa E4, 27/09/2026)
+
+- **o recorte e o CICLO que esta no cronograma.yml**, e nao a vida inteira.
+  Misturar o meu acerto de hoje com o da primeira semana responde outra
+  pergunta - e e a pergunta errada para decidir o que estudar amanha. A tela
+  diz "neste ciclo" em voz alta, e o grafico semana a semana ja deixava isso
+  implicito;
+- **20 questoes sem consulta e o minimo para eu acreditar numa porcentagem.**
+  Abaixo disso a materia entra como "sem dado" e a barra ganha o aviso "amostra
+  pequena": 100% em cinco questoes nao e 100% de nada;
+- **materia sem amostra fica FORA da projecao** - nao entra como zero nem como
+  a media das outras. As duas coisas seriam invencao; a tela prefere dizer
+  quantas materias ficaram de fora e projetar so com o que tem base. Por isso o
+  selo e o de tendencia, e nao o de calculado;
+- **o nome casa pela regra que o radar ja usa** (`compilado.mesma_materia`), e
+  nao por texto exato: o caderno de 2013 escreve "Direito Processo Penal" e o
+  edital de 2019 "Direito Processual Penal". A mesma regra vale para o caderno
+  de erros e para o estudo extra;
+- **o "entra no Ciclo N" sai primeiro do PLANO**, e so depois do texto do mapa:
+  se a materia tem faixa nos dias gravados, o ciclo daqueles dias e fato. Para o
+  resto, a mencao do mapa ("Processo Penal") so decide quando casa com UMA
+  materia - "Penal" sozinho casa com tres, e ai a tela nao diz nada em vez de
+  dizer o ciclo errado. A comparacao ali e por palavra (prefixo comum de seis
+  letras: "processo" e "processual" sao a mesma), e nao pela distancia de texto
+  do `mesma_materia`, que apelido nao passa;
+- **"aulas vistas" conta as faixas de estudo da manha** (teoria, portugues e
+  raciocinio), uma por materia por dia. A `lei_seca` fica de fora: ela le a lei
+  do MESMO tema da teoria daquele dia, e contar as duas faria o programa de
+  Direito andar em dobro;
+- **o treino de IA conta para "eu ja encostei nesta materia"**, e so para isso.
+  Ele nao entra em acerto nenhum, mas dizer "ainda nao estudei" depois de 20
+  questoes geradas seria falso;
+- **o grafico e SVG desenhado no servidor.** Semana sem questao sem consulta nao
+  vira ponto: a linha pula, em vez de fingir um zero que eu nao tirei. Com menos
+  de dois pontos nao ha grafico - dois pontos e o minimo de uma linha.
