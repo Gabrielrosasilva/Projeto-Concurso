@@ -653,6 +653,19 @@ radar descartar --todos     # apaga todas, perguntando antes
 radar descartar --vazios    # apaga as sem nenhuma resposta, com mais de 1 dia
 ```
 
+**A web e a automacao**
+
+```bash
+radar web                   # sobe e segura o terminal; Ctrl+C para
+radar web --rede            # abre tambem no celular, na mesma rede Wi-Fi
+radar subir --abrir         # sobe em segundo plano, sem janela, e abre no navegador
+radar parar                 # desliga o que o `radar subir` subiu
+radar status                # no ar ou nao, e como foi o ultimo backup
+radar agendar               # web no logon e backup as 23:30, no Agendador
+radar agendar --status      # --remover apaga tarefas e atalhos
+radar backup                # o sincronizar das 23:30, agora e com log
+```
+
 `radar avisar` e o **unico** lugar que manda mensagem, e quem o chama todo dia
 e o robo do GitHub. Ele avisa nesta ordem: primeiro o que mudou nos concursos
 que voce segue, depois os que apareceram — se o teto do dia cortar alguma
@@ -1071,8 +1084,85 @@ no GitHub Actions, e commita o resultado. Tambem da para disparar na mao pela
 aba Actions.
 
 Actions e gratuito em repositorio privado ate 2.000 minutos por mes; a coleta
-gasta uns 3 minutos por dia. Sua maquina nao roda nada: ela so e usada quando
-voce abre a web ou pede para baixar prova.
+gasta uns 3 minutos por dia.
+
+### Deixar tudo automatico
+
+Um comando, uma vez so, e voce nao precisa mais lembrar de nada:
+
+```bash
+radar agendar
+```
+
+Ele cria **duas tarefas no Agendador do Windows**, no seu proprio usuario (nao
+pede administrador, nao pede senha):
+
+| Tarefa | Quando | O que faz |
+|---|---|---|
+| `Radar - web` | ao fazer logon | sobe a web em segundo plano, sem janela |
+| `Radar - backup` | todo dia as 23:30 | roda o `radar sincronizar` e guarda a saida em `data/logs/` |
+
+Se o PC estava desligado as 23:30, o backup roda assim que voce ligar - e por
+isso que as tarefas nascem de um XML e nao da linha de comando do `schtasks`,
+que nao tem essa opcao. Os logs com mais de 30 dias somem sozinhos.
+
+E cria **dois atalhos na Area de Trabalho**:
+
+- **Radar.bat** - sobe o radar e abre a tela Hoje no navegador;
+- **Parar o Radar.bat** - desliga.
+
+**Nao e servico do Windows**, de proposito: servico pede administrador, roda
+sem voce estar logado (para nada), e esconde o erro no Visualizador de Eventos.
+O porque completo esta em [docs/decisoes.md](docs/decisoes.md).
+
+#### O Git precisa lembrar o login do GitHub
+
+O backup das 23:30 faz `git push`. Se o git pedir usuario e senha naquela hora,
+ninguem vai estar la para digitar, e o backup falha todo dia.
+
+Quem resolve isso ja esta instalado: o **Git Credential Manager**, que vem com
+o Git para Windows. Ele guarda o login no Gerenciador de Credenciais do Windows
+na **primeira vez** que voce empurra algo:
+
+```bash
+git push
+```
+
+Na primeira vez abre uma janela do navegador para entrar no GitHub; da proxima
+em diante ele nao pergunta mais nada. Para conferir que ficou guardado, rode
+`radar backup`: se ele terminar sem pedir nada, o login esta no lugar.
+
+Se o backup falhar por causa disso, o motivo aparece no log e na tela **Mais**
+como `fatal: Authentication failed`.
+
+#### Subir, parar e conferir
+
+```bash
+radar subir              # sobe em segundo plano, sem janela, e devolve o prompt
+radar subir --abrir      # e ja abre a tela Hoje no navegador
+radar parar              # desliga
+radar status             # no ar ou nao, o endereco, e como foi o ultimo backup
+radar agendar --status   # o que o Agendador diz das duas tarefas
+radar agendar --remover  # apaga as tarefas e os atalhos
+radar backup             # faz um backup agora, sem esperar as 23:30
+```
+
+O `radar subir` e diferente do `radar web`: o `web` segura o terminal aberto e
+para com Ctrl+C; o `subir` deixa o servidor solto, sem janela nenhuma, e anota
+o numero do processo em `data/radar_web.pid` - que e como o `parar` sabe quem
+desligar. Ele confere se o servidor respondeu de verdade antes de dizer que
+subiu, e quando nao sobe mostra o fim de `data/logs/web.log`.
+
+```
+$ radar status
+Web: no ar em http://127.0.0.1:8000 (processo 24680)
+     desde 27/09/2026 às 08:12
+Backup: deu certo em 27/09/2026
+```
+
+**Backup que falhou aparece na tela Mais** ("O ultimo backup falhou em 26/09:
+fatal: Could not resolve host: github.com") e fica la ate o proximo dar certo.
+Falha em silencio seria o mesmo que nao ter backup.
 
 ## Como o projeto esta organizado
 
@@ -1125,6 +1215,7 @@ src/radar/
 ├── acervo.py       exporta e importa o banco em JSON (inclusive os simulados)
 ├── auditoria.py    confere o banco contra edital e gabarito definitivo
 ├── util.py         fuso e formatacao de data
+├── automacao.py    a web em segundo plano, as tarefas do Agendador e o backup
 ├── cli.py          comandos typer. `atualizar` roda a rotina inteira
 ├── collectors/
 │   ├── base.py                  Coletor + ItemColetado; robots.txt,

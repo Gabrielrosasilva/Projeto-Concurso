@@ -349,6 +349,19 @@ body.ds {
   font-size: var(--tam-sm);
   font-weight: var(--peso-medio);
 }
+/* O mesmo alerta, para o que nao e lei: backup que falhou, tarefa que nao
+   rodou. Mesma cor de proposito - alerta e alerta, e eu nao quero aprender
+   duas cores para a mesma coisa. */
+.ds-alerta {
+  display: block;
+  margin: var(--esp-2) 0;
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--raio-sm);
+  background: var(--cor-aviso-fundo);
+  color: var(--cor-aviso);
+  font-size: var(--tam-sm);
+  font-weight: var(--peso-medio);
+}
 .ds-nota {
   padding: var(--esp-3) var(--esp-4);
   border-radius: var(--raio-sm);

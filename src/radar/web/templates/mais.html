@@ -85,6 +85,38 @@
   </div>
 
   <section class="ds-secao">
+    <h2>Backup automático</h2>
+    <p>
+      Todo dia às 23:30 o Windows roda <code>radar sincronizar</code> sozinho e
+      guarda a saída em <code>data/logs/</code>. Quem cria a tarefa é
+      <code>radar agendar</code>, uma vez só.
+    </p>
+  </section>
+  <div class="ds-cartao">
+    {% if backup is none %}
+      <p class="ds-nota" style="margin:0">
+        Nenhum backup rodou ainda nesta máquina. Rode <code>radar agendar</code>
+        para criar a tarefa das 23:30, ou <code>radar backup</code> para fazer
+        um agora.
+      </p>
+    {% elif backup.deu_certo %}
+      <p class="ds-pequeno" style="margin:0">
+        Último backup: <b>{{ backup.dia.strftime('%d/%m/%Y') }}</b>, deu certo.
+      </p>
+    {% else %}
+      <p class="ds-alerta">
+        ⚠ O último backup falhou em {{ backup.dia.strftime('%d/%m') }}:
+        {{ backup.motivo or 'o log não diz o motivo' }}
+      </p>
+      <p class="ds-pequeno" style="margin:0">
+        Este aviso fica aqui até o próximo backup dar certo. A saída inteira
+        está em <code>{{ backup.caminho.name }}</code>; para tentar de novo
+        agora, <code>radar backup</code>.
+      </p>
+    {% endif %}
+  </div>
+
+  <section class="ds-secao">
     <h2>Configurações</h2>
     <p>O radar não tem tela de configuração: as regras moram em arquivo, e mudar o arquivo muda o radar.</p>
   </section>

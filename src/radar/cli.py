@@ -15,7 +15,7 @@ from rich.markup import escape
 from rich.panel import Panel
 from rich.table import Table
 
-from radar import acervo, alvo as alvos, avisos, config, cronograma, servico
+from radar import acervo, alvo as alvos, automacao, avisos, config, cronograma, servico
 from radar import provas as _provas
 from radar.models import agora
 from radar.util import (
@@ -1692,6 +1692,214 @@ def web(
 
         uvicorn.run(aplicacao_web, host=host, port=porta)
 
+
+# --- tudo automatico (etapa D1) ---------------------------------------------
+#
+# Quatro comandos para nunca mais precisar lembrar de nada: `subir` deixa a web
+# no ar sem janela, `parar` desliga, `status` conta como esta, e `agendar` poe
+# os dois no Agendador do Windows. O `backup` e o que a tarefa das 23h30 chama.
+# A logica toda mora em radar/automacao.py; aqui so a conversa com a tela.
+
+
+@app.command()
+def subir(
+    porta: int = typer.Option(automacao.PORTA_PADRAO, help="Porta do servidor"),
+    abrir: bool = typer.Option(
+        False, "--abrir", help="Abre a tela Hoje no navegador depois de subir",
+    ),
+) -> None:
+    """Sobe a web em segundo plano, sem janela, e devolve o prompt.
+
+    Diferente do `radar web`, que segura o terminal aberto: aqui o servidor
+    fica rodando sozinho, sem janela nenhuma, e quem desliga e `radar parar`.
+    """
+    servidor = automacao.no_ar()
+    if servidor:
+        console.print(
+            f"[green]Ja esta no ar[/] em [bold cyan]{servidor.endereco}[/] "
+            f"(processo {servidor.pid}). Nao subi outro."
+        )
+    else:
+        if porta_ocupada(automacao.HOST_PADRAO, porta):
+            # Porta ocupada sem arquivo de PID meu: e um `radar web` aberto
+            # em outra janela, e matar aquilo nao e tarefa deste comando.
+            console.print(
+                f"[red]A porta {porta} ja esta em uso[/], e nao fui eu que subi.\n"
+                f"Costuma ser um [bold]radar web[/] aberto em outra janela - "
+                f"feche com Ctrl+C, ou suba noutra porta: "
+                f"[bold]radar subir --porta {porta + 1}[/]."
+            )
+            raise typer.Exit(code=1)
+
+        servidor = automacao.subir(porta)
+        if not automacao.esperar_subir(servidor):
+            console.print(
+                "[red]Subiu e morreu.[/] Sem janela nao ha erro na tela, "
+                f"entao o que ele disse esta em [bold]{automacao.caminho_do_log_da_web()}[/]:"
+            )
+            for linha in automacao.fim_do_log_da_web():
+                console.print(f"  [dim]{escape(linha)}[/]")
+            automacao.apagar_arquivo_do_pid()
+            raise typer.Exit(code=1)
+
+        console.print(
+            f"[green]No ar[/] em [bold cyan]{servidor.endereco}[/] "
+            f"(processo {servidor.pid}), sem janela."
+        )
+        console.print("[dim]Para desligar: [bold]radar parar[/][/]")
+
+    if abrir:
+        import webbrowser
+
+        endereco = f"{servidor.endereco}/hoje"
+        console.print(f"Abrindo {endereco}")
+        webbrowser.open(endereco)
+
+
+@app.command()
+def parar() -> None:
+    """Desliga a web que o `radar subir` deixou rodando."""
+    servidor = automacao.parar()
+    if servidor is None:
+        console.print("Nada para desligar: nenhum servidor do `radar subir` rodando.")
+        console.print(
+            "[dim]Um [bold]radar web[/] aberto numa janela nao entra aqui - "
+            "esse para com Ctrl+C na propria janela.[/]"
+        )
+        return
+    console.print(f"[green]Desligado[/] (processo {servidor.pid}).")
+
+
+@app.command()
+def status() -> None:
+    """No ar ou nao, em que endereco, e como foi o ultimo backup."""
+    servidor = automacao.no_ar()
+    if servidor:
+        console.print(f"Web: [green]no ar[/] em [bold cyan]{servidor.endereco}[/] "
+                      f"(processo {servidor.pid})")
+        if servidor.subiu_em:
+            console.print(f"     [dim]desde {servidor.subiu_em:%d/%m/%Y às %H:%M}[/]")
+    else:
+        console.print("Web: [yellow]fora do ar.[/] Sobe com [bold]radar subir[/].")
+
+    backup = automacao.ultimo_backup()
+    if backup is None:
+        console.print(
+            "Backup: [yellow]nunca rodou.[/] O [bold]radar agendar[/] cria a "
+            "tarefa que roda todo dia às 23:30."
+        )
+        return
+    if backup.deu_certo:
+        console.print(f"Backup: [green]deu certo[/] em {backup.dia:%d/%m/%Y}")
+    else:
+        console.print(f"Backup: [red]falhou[/] em {backup.dia:%d/%m/%Y} - "
+                      f"{escape(backup.motivo or 'sem motivo no log')}")
+    console.print(f"     [dim]{backup.caminho}[/]")
+
+
+@app.command()
+def backup() -> None:
+    """Roda o `radar sincronizar` e guarda a saida em data/logs/.
+
+    E o que a tarefa das 23h30 chama. Rodar na mao serve para conferir que o
+    backup automatico funciona sem esperar a meia-noite.
+    """
+    console.print("Rodando o sincronizar e guardando a saída...")
+    resultado = automacao.rodar_backup()
+    if resultado.deu_certo:
+        console.print(f"[green]Backup em dia.[/] Log em {resultado.caminho}")
+    else:
+        console.print(f"[red]O backup falhou:[/] {escape(resultado.motivo or '')}")
+        console.print(f"[dim]A saída inteira esta em {resultado.caminho}[/]")
+        raise typer.Exit(code=1)
+
+
+@app.command()
+def agendar(
+    mostrar: bool = typer.Option(
+        False, "--status", help="So mostra o que esta criado, sem mexer em nada",
+    ),
+    remover: bool = typer.Option(
+        False, "--remover", help="Apaga as duas tarefas e os dois atalhos",
+    ),
+) -> None:
+    """Poe o radar no Agendador do Windows: web no logon, backup às 23:30.
+
+    Duas tarefas no MEU usuario, sem pedir administrador, e dois atalhos .bat
+    na Area de Trabalho. Nao e servico do Windows de proposito - o porque esta
+    em docs/decisoes.md.
+    """
+    if not automacao.e_windows():
+        console.print(
+            "[red]Este comando e do Windows.[/] O Agendador de Tarefas nao "
+            "existe aqui; no Linux o equivalente seria cron ou systemd --user."
+        )
+        raise typer.Exit(code=1)
+
+    if mostrar:
+        _mostrar_agendamento()
+        return
+
+    if remover:
+        for nome in (automacao.TAREFA_WEB, automacao.TAREFA_BACKUP):
+            resultado = automacao.remover_tarefa(nome)
+            if resultado.returncode == 0:
+                console.print(f"[green]Tarefa apagada:[/] {nome}")
+            else:
+                console.print(f"[dim]Nada a apagar em \"{nome}\".[/]")
+        apagados = automacao.apagar_atalhos()
+        for caminho in apagados:
+            console.print(f"[green]Atalho apagado:[/] {caminho}")
+        if not apagados:
+            console.print("[dim]Nenhum atalho na Área de Trabalho.[/]")
+        console.print(
+            "\nO servidor que estiver no ar continua no ar: "
+            "[bold]radar parar[/] desliga."
+        )
+        return
+
+    for nome, xml in automacao.tarefas().items():
+        resultado = automacao.criar_tarefa(nome, xml)
+        if resultado.returncode == 0:
+            console.print(f"[green]Tarefa criada:[/] {nome}")
+        else:
+            console.print(f"[red]Nao consegui criar \"{nome}\".[/]")
+            console.print(f"[dim]{escape((resultado.stderr or resultado.stdout).strip())}[/]")
+            raise typer.Exit(code=1)
+
+    for caminho in automacao.criar_atalhos():
+        console.print(f"[green]Atalho criado:[/] {caminho}")
+
+    console.print(
+        f"\nPronto. A web sobe sozinha no próximo logon, e o backup roda todo "
+        f"dia às {automacao.HORA_DO_BACKUP}.\n"
+        f"Confira com [bold]radar agendar --status[/] e [bold]radar status[/]."
+    )
+
+
+def _mostrar_agendamento() -> None:
+    """O `radar agendar --status`: o que o Agendador responde das duas tarefas.
+
+    Mostra os campos como o Windows os escreve, sem traduzir: o schtasks fala
+    no idioma do sistema, e procurar "Next Run Time" quebraria justamente
+    nesta maquina, que esta em portugues.
+    """
+    for nome in (automacao.TAREFA_WEB, automacao.TAREFA_BACKUP):
+        campos = automacao.consultar_tarefa(nome)
+        if campos is None:
+            console.print(f"[yellow]{nome}[/]: não está criada. "
+                          f"Rode [bold]radar agendar[/].")
+            continue
+        console.print(f"[bold green]{nome}[/]")
+        for chave, valor in campos.items():
+            console.print(f"  [dim]{escape(chave)}:[/] {escape(valor)}")
+        console.print()
+
+    pasta = automacao.diretorio_da_area_de_trabalho()
+    for atalho in automacao.ATALHOS:
+        caminho = pasta / atalho
+        marca = "[green]está lá[/]" if caminho.exists() else "[yellow]não está[/]"
+        console.print(f"Atalho \"{atalho}\": {marca}")
 
 
 def _descartar_vazios(sim: bool) -> None:

@@ -1929,3 +1929,55 @@ Os detalhes:
   de 26/09 tirou a marca dos dois seletivos e manteve os quatro concursos de
   2013, 2016 e 2019.
 
+## Tarefa no logon, e nao servico do Windows (etapa D1, 27/09/2026)
+
+O radar precisa estar no ar quando eu abrir o navegador, e o backup precisa
+rodar todo dia sem eu lembrar. Servico do Windows seria o caminho "profissional"
+e e o errado aqui:
+
+- **servico pede administrador** para instalar (`sc create`, ou um empacotador
+  tipo NSSM). Tarefa do proprio usuario qualquer um cria - sem UAC, sem senha
+  de admin, e eu posso recriar tudo depois de formatar sem pensar duas vezes;
+- **servico roda sem usuario logado**, e isso e desvantagem: o radar so serve
+  quando eu estou na frente do PC. Servico rodando sozinho as 3h da manha e
+  processo consumindo memoria para ninguem;
+- **servico nao tem "roda quando eu ligar o PC se perdeu o horario"**. A tarefa
+  tem (`StartWhenAvailable`), e e o que faz o backup das 23h30 acontecer mesmo
+  nas noites em que eu desliguei o PC as 22h;
+- **servico e dificil de parar**: `services.msc`, ou `net stop` no prompt de
+  administrador. Aqui e um .bat na Area de Trabalho, ou `radar parar`;
+- **servico esconde o erro.** O que nao sobe vira uma linha no Visualizador de
+  Eventos. A tarefa deixa o erro em `data/logs/`, e a tela Mais o mostra.
+
+Os detalhes que vieram com a escolha:
+
+- **XML, e nao a linha de comando do schtasks.** `schtasks /Create /SC DAILY
+  /ST 23:30` nao tem opcao para o `StartWhenAvailable`, que e justamente o que
+  eu quero. Por arquivo XML da, e o arquivo sai em **UTF-16**: com UTF-8 o
+  schtasks recusa dizendo "o XML da tarefa contem um valor formatado
+  incorretamente", mensagem que nao aponta para a codificacao;
+- **as duas tarefas chamam o `pythonw.exe -m radar.automacao`**, e nao o
+  `radar.bat`. O .bat abriria uma janela preta em todo logon e as 23h30. Pelo
+  mesmo motivo o `__main__` daquele modulo nao imprime nada: o pythonw nao tem
+  console, e o rich da CLI estouraria escrevendo num stdout que nao existe;
+- **a tarefa da web nao tem limite de execucao** (`PT0S`). O Agendador conta a
+  tarefa como rodando enquanto o servidor filho viver, e qualquer limite
+  mataria o radar no meio do dia. A do backup tem uma hora: sincronizar
+  pendurado numa credencial nao pode ficar assim ate amanha;
+- **o backup e `radar backup`, um embrulho de tres linhas em volta do
+  `radar sincronizar`.** A tarefa nao podia chamar o sincronizar direto porque
+  o log precisa de nome com a data (`%date%` do cmd muda de formato com o
+  idioma do Windows) e porque alguem tem que escrever a linha final dizendo se
+  deu certo. Essa linha (`RESULTADO: ok` / `RESULTADO: falhou - <motivo>`) e o
+  contrato com a tela Mais - procurar a palavra "erro" no meio da saida seria
+  adivinhar, e adivinhar erra calado;
+- **`radar parar` confere se o processo ainda e um Python** antes de matar.
+  Numero de processo se reaproveita: com o PC desligado na tomada, o
+  `data/radar_web.pid` sobra apontando para um numero que amanha pode ser o
+  Bloco de Notas;
+- **os atalhos vao para a Area de Trabalho que o registro do Windows informa**,
+  e nao para `%USERPROFILE%\Desktop`. Com o OneDrive ligado a pasta real e
+  `OneDrive\Desktop`, e atalho escrito no caminho antigo simplesmente nao
+  aparece na tela;
+- `data/radar_web.pid` e `data/logs/` ficam **fora do git**: sao rastro de
+  execucao desta maquina, e o robo do GitHub nao tem nada a ver com eles.

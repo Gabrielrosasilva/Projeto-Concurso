@@ -16,6 +16,7 @@ from radar import acompanhando as meus_favoritos
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
 from radar import auditoria
+from radar import automacao
 from radar import config
 from radar import cronograma
 from radar import leis
@@ -1070,6 +1071,10 @@ def mais(request: Request):
             "leis_conferidas": leis.mudancas_conferidas(),
             "auditoria_existe": auditoria.caminho_padrao().exists(),
             "auditoria_gerada_em": auditoria.data_do_relatorio(),
+            # Como foi o ultimo backup automatico. Aparece aqui, e nao na
+            # home, porque backup nao e estudo: e manutencao - mas falha de
+            # backup em silencio e como nao ter backup.
+            "backup": automacao.ultimo_backup(),
         },
     )
 
