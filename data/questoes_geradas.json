@@ -1,1 +1,402 @@
-[]
+[
+  {
+    "alternativas": {
+      "a": "Toda prática religiosa dentro da penitenciária depende de autorização prévia da administração.",
+      "b": "O diretor pode restringir atividades religiosas se entender que afetam a segurança.",
+      "c": "Nenhum preso ou internado será obrigado a participar de atividades ou cultos religiosos.",
+      "d": "As práticas religiosas devem ser condicionadas ao comportamento disciplinar do preso.",
+      "e": "Apenas as religiões oficialmente reconhecidas pelo Estado podem funcionar nos presídios."
+    },
+    "artigo": "art. 24, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123683+00:00",
+    "enunciado": "Quanto à liberdade religiosa do preso, a Lei de Execução Penal estabelece que:",
+    "impressao": "01a0e21d6b7ffae60db20fccaba79e6a",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "São corretas apenas as afirmativas 1 e 2.",
+      "c": "São corretas apenas as afirmativas 1 e 3.",
+      "d": "São corretas apenas as afirmativas 2 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 76, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123680+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, para exercer a função de diretor de penitenciária, é exigido que o candidato possua: 1. antecedentes criminais limpos e reconhecida conduta exemplar. 2. capacidade técnica comprovada em gestão institucional. 3. formação acadêmica de nível superior. 4. experiência profissional em qualquer setor.",
+    "impressao": "078b440db663c8b9c28fa5bac154594e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 41, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123677+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, são direitos dos presos: 1. recebimento de assistência médica. 2. comunicação periódica com a família. 3. atendimento educacional. 4. participação em programa de reabilitação.",
+    "impressao": "0d586effc7ad1e2c012b0f7b557e741a",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "1caa127a7bb47bdfaedb84899576d42f",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 2.",
+      "b": "São corretas apenas as afirmativas 1 e 2.",
+      "c": "São corretas apenas as afirmativas 1 e 3.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 76, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123682+00:00",
+    "enunciado": "A Lei de Execução Penal estabelece que para qualificar-se como diretor de unidade prisional o servidor deverá cumprir: 1. ter reputação ilibada. 2. demonstrar aptidão técnica. 3. possuir curso superior completo. 4. ter mais de quarenta anos de idade.",
+    "impressao": "11527c449449270564b3e52ead22c36b",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "Será prestada como instrumento compulsório de ressocialização.",
+      "b": "É vedada a participação de ministros de qualquer culto dentro da unidade prisional.",
+      "c": "Sua recusa por escrito isenta o preso de qualquer benefício penitenciário.",
+      "d": "Não poderá haver cerceamento da liberdade de culto dentro da unidade penal.",
+      "e": "Será oferecida apenas nas datas de festividades religiosas cristãs."
+    },
+    "artigo": "art. 24, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123684+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a assistência religiosa ao preso, é correto:",
+    "impressao": "1d77f7949bb741404160d5e85604f1f5",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "d": "São corretas apenas as afirmativas 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 26, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123685+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, considera-se egresso: 1. o condenado que cumpriu sua pena há menos de um ano. 2. o indivíduo libertado condicionalmente durante o período de prova. 3. aquele que obteve livramento condicional ou liberação definitiva. 4. o condenado em regime aberto que cumpre sua pena na comunidade.",
+    "impressao": "3d52529ecc448ffdce1837976fc26c07",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1 e 3.",
+      "c": "São corretas apenas as afirmativas 2 e 4.",
+      "d": "São corretas apenas as afirmativas 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 26, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123687+00:00",
+    "enunciado": "Para fins de execução penal, a Lei de Execução Penal define que egresso é: 1. aquele cuja pena se extinguiu há um ano. 2. o condenado que completou seu tempo de prisão há menos de seis meses. 3. o liberado condicional enquanto cumpre o período de prova. 4. o indivíduo que recebeu o perdão do Executivo.",
+    "impressao": "44aeaf3de5c938679148765bd862bddd",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 41, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123679+00:00",
+    "enunciado": "A Lei de Execução Penal reconhece como direitos dos presos: 1. visita ao cônjuge, parentes e amigos. 2. correspondência pessoal sem censura prévia. 3. atividade educacional durante o cumprimento da pena. 4. acesso a informações sobre sua situação processual.",
+    "impressao": "4e2ced15326ba7393387e54c284b44af",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "1caa127a7bb47bdfaedb84899576d42f",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "Departamento Penitenciário Nacional",
+      "b": "Conselho Penitenciário Estadual",
+      "c": "Conselho Nacional de Política Criminal e Penitenciária",
+      "d": "Corregedoria Geral de Justiça",
+      "e": "Diretoria de Segurança Pública"
+    },
+    "artigo": "art. 61, caput, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123672+00:00",
+    "enunciado": "Conforme a Lei de Execução Penal, o órgão responsável por assessorar o Ministério da Justiça e promover a formulação de políticas penais é:",
+    "impressao": "5a3ee22ea5a79b26fe081be14ecd8a8f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 39, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123688+00:00",
+    "enunciado": "A Lei de Execução Penal estabelece que são obrigações do preso: 1. guarda de seus pertences pessoais. 2. comportamento adequado nas áreas comuns do estabelecimento. 3. cumprimento das regras internas de segurança. 4. realização de trabalho obrigatório dentro da unidade.",
+    "impressao": "7239da7c3d4137494987202594ece4ad",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "42c41a2c6fd9b93a1e0e18ede43f2e9e",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 26, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123686+00:00",
+    "enunciado": "Conforme a Lei de Execução Penal, é considerado egresso: 1. aquele que recebeu indulto ou graça presidencial. 2. o condenado liberado conditionally durante os prazos de prova. 3. o preso cuja pena foi extinta há um ano ou menos. 4. aquele que transitou pela execução penal há menos de cinco anos.",
+    "impressao": "73601ccb44ec0d29adb63d0ab15765a6",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1 e 3.",
+      "c": "São corretas apenas as afirmativas 2 e 4.",
+      "d": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 126 e 127, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123675+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, em qual(is) regime(ns) é permitida a remissão de pena por trabalho ou estudo? 1. regime fechado. 2. regime semiaberto. 3. regime aberto. 4. penas substitutivas de privação de liberdade.",
+    "impressao": "80e38a6cd6d54112f708029e3eb3f830",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "São corretas apenas as afirmativas 1 e 2.",
+      "c": "São corretas apenas as afirmativas 3 e 4.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 76, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123681+00:00",
+    "enunciado": "Conforme a Lei de Execução Penal, são requisitos para que alguém possa ocupar cargo de diretor de estabelecimento penal: 1. idoneidade moral irretocável. 2. competência comprovada para a função. 3. vinculação ao Poder Público há no mínimo dois anos. 4. disponibilidade para realizar atividades administrativas.",
+    "impressao": "94046ef4c9b5fdacb3f6b3920c5ce083",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "Secretaria de Administração Penitenciária",
+      "b": "Tribunal de Justiça",
+      "c": "Ministério da Defesa",
+      "d": "Assembleia Legislativa Estadual",
+      "e": "Conselho Nacional de Política Criminal e Penitenciária"
+    },
+    "artigo": "art. 61, caput, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123668+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, qual órgão tem a competência de propor diretrizes para a política criminal e penitenciária nacional?",
+    "impressao": "99953583a721f06bbff46ad427384968",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "b": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 126 e 127, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123677+00:00",
+    "enunciado": "A Lei de Execução Penal estabelece a possibilidade de remissão de parte do tempo de execução da pena. Essa remissão pode ocorrer em: 1. cumprimento de pena em regime aberto. 2. cumprimento de pena em regime semiaberto mediante trabalho ou estudo. 3. execução de pena privativa de liberdade em regime fechado. 4. penas restritivas de direito.",
+    "impressao": "9fdb35534905ba531ca87da0612727bb",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 39, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123687+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, constituem deveres do condenado: 1. obediência ao regulamento disciplinar. 2. respeito à dignidade pessoal de outros reclusos. 3. cuidado com sua higiene e da cela. 4. participação obrigatória em programas de reabilitação.",
+    "impressao": "b1627356a1a44b4570a088abe19229a9",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "42c41a2c6fd9b93a1e0e18ede43f2e9e",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Conselho Nacional de Política Criminal e Penitenciária",
+      "b": "Procuradoria Geral da República",
+      "c": "Juizados de Execução Criminal",
+      "d": "Confederação Nacional de Juízes",
+      "e": "Instituto Nacional de Criminalística"
+    },
+    "artigo": "art. 61, caput, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123674+00:00",
+    "enunciado": "A Lei de Execução Penal atribui a um colegiado nacional a responsabilidade de estimular pesquisas penológicas e criminológicas. Qual é esse órgão?",
+    "impressao": "b22eb785ecf7d367de055ad7890ac83c",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "A recusa do preso em frequentar atividades religiosas constitui falta disciplinar grave.",
+      "b": "A administração penitenciária pode proibir a posse de livros sagrados nas celas.",
+      "c": "Os presos não poderão ser obrigados a participar de manifestações religiosas.",
+      "d": "A assistência religiosa é obrigatória como meio de ressocialização.",
+      "e": "Apenas religiões cristãs podem oferecer assistência dentro do estabelecimento."
+    },
+    "artigo": "art. 24, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123683+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, é correto afirmar que:",
+    "impressao": "c8dae1a9ea6b3f5c7585a9c7f82fe4f8",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 41, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123678+00:00",
+    "enunciado": "Conforme a Lei de Execução Penal, constituem direitos do condenado: 1. acesso a leitura e material educativo. 2. exercício de profissão, arte ou ofício compatível com o regime. 3. acesso a tratamento especializado. 4. direito de petição ao Poder Público.",
+    "impressao": "ca99b241e1e35c9450466f731e28e0a0",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "1caa127a7bb47bdfaedb84899576d42f",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 4.",
+      "b": "São corretas apenas as afirmativas 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 126 e 127, da Lei 7.210/1984",
+    "assunto": null,
+    "criada_em": "2026-09-27T02:55:49.123676+00:00",
+    "enunciado": "Quanto à remissão da pena prevista na Lei de Execução Penal, é correto afirmar que pode ser concedida: 1. aos presos em regime fechado que cumpram trabalho. 2. aos presos em regime semiaberto que frequentem curso educacional. 3. aos internados por medida de segurança. 4. aos condenados em regime aberto que realizem atividades laborais.",
+    "impressao": "e4ddc14b01e11a1c71f4109b15c91d9b",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 27/09/2026",
+    "modo": "variacao",
+    "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "c"
+  }
+]
