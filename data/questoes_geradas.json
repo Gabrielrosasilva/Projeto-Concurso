@@ -1,6 +1,26 @@
 [
   {
     "alternativas": {
+      "a": "o crime for de menor potencial ofensivo.",
+      "b": "não foi pedida ou foi negada a extradição e houve requisição do Ministro da Justiça.",
+      "c": "o agente ingressar voluntariamente em território nacional, independentemente de qualquer requisição.",
+      "d": "a vítima for parente do Presidente da República.",
+      "e": "o país estrangeiro não for signatário de tratado de extradição com o Brasil."
+    },
+    "artigo": "art. 7º, §3º, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386370+00:00",
+    "enunciado": "A lei brasileira aplica-se também ao crime cometido por estrangeiro contra brasileiro fora do Brasil, nos termos do §3º do art. 7º do Código Penal, se",
+    "impressao": "010469bb3e0a4118424f43c335be3e4d",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "Toda prática religiosa dentro da penitenciária depende de autorização prévia da administração.",
       "b": "O diretor pode restringir atividades religiosas se entender que afetam a segurança.",
       "c": "Nenhum preso ou internado será obrigado a participar de atividades ou cultos religiosos.",
@@ -101,6 +121,26 @@
   },
   {
     "alternativas": {
+      "a": "do resultado, considerando praticado o crime no momento em que este se produz.",
+      "b": "da ubiquidade, considerando praticado o crime tanto no momento da conduta quanto no do resultado.",
+      "c": "da atividade, considerando praticado o crime no momento da ação ou omissão, ainda que outro seja o momento do resultado.",
+      "d": "mista, aplicável apenas aos crimes permanentes.",
+      "e": "do efeito, que leva em conta exclusivamente a consumação do crime."
+    },
+    "artigo": "art. 4º do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386362+00:00",
+    "enunciado": "Quanto ao momento em que se considera praticado o crime, o Código Penal adotou a teoria",
+    "impressao": "39bac45df29cbe2b0c9d806571033ca8",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 2 e 3.",
       "c": "São corretas apenas as afirmativas 1, 2 e 4.",
@@ -116,6 +156,26 @@
     "modelo": "Claude Code, importado manualmente, em 27/09/2026",
     "modo": "variacao",
     "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "exclusivamente aplicar a pena privativa de liberdade fixada no exterior.",
+      "b": "obrigar o condenado à reparação do dano, a restituições e a outros efeitos civis, ou sujeitá-lo a medida de segurança.",
+      "c": "substituir a ação penal que ainda não foi proposta no Brasil.",
+      "d": "autorizar, por si só, a extradição do condenado.",
+      "e": "suspender o curso da prescrição no território nacional."
+    },
+    "artigo": "art. 9º, caput, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386371+00:00",
+    "enunciado": "A sentença estrangeira, quando a aplicação da lei brasileira produz na espécie as mesmas consequências, pode ser homologada no Brasil para",
+    "impressao": "412896e3873bfb9073002d07de48d495",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
   },
@@ -141,6 +201,26 @@
   },
   {
     "alternativas": {
+      "a": "apenas as embarcações brasileiras que estejam em alto-mar.",
+      "b": "as embarcações e aeronaves brasileiras de natureza pública, ou a serviço do governo brasileiro, onde quer que se encontrem.",
+      "c": "todas as embarcações e aeronaves brasileiras, sem qualquer distinção quanto à natureza.",
+      "d": "somente as aeronaves militares brasileiras em pouso no exterior.",
+      "e": "as embarcações estrangeiras que ingressem em porto brasileiro."
+    },
+    "artigo": "art. 5º, §1º, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386364+00:00",
+    "enunciado": "Para os efeitos penais, consideram-se como extensão do território nacional",
+    "impressao": "4a556e47a725f411240e3ca97f7d2a1f",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 3 e 4.",
       "c": "São corretas apenas as afirmativas 1, 2 e 3.",
@@ -161,6 +241,46 @@
   },
   {
     "alternativas": {
+      "a": "entrar o agente no território nacional.",
+      "b": "ser o fato punível também no país em que foi praticado.",
+      "c": "estar o crime incluído entre aqueles pelos quais a lei brasileira autoriza a extradição.",
+      "d": "ter sido o agente absolvido no estrangeiro ou ter aí cumprido a pena.",
+      "e": "não ter sido o agente perdoado no estrangeiro ou, por outro motivo, não estar extinta a punibilidade, segundo a lei mais favorável."
+    },
+    "artigo": "art. 7º, §2º, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386369+00:00",
+    "enunciado": "Nos casos de extraterritorialidade condicionada (art. 7º, II, do Código Penal), a aplicação da lei brasileira depende do concurso de todas as condições previstas no §2º do referido artigo, EXCETO:",
+    "impressao": "5247c5b22ec713c47751f55bf6c2e098",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "a condenação subsiste, pois a coisa julgada é imutável em qualquer circunstância.",
+      "b": "apenas a pena aplicada é extinta, mantendo-se os efeitos penais secundários da condenação, como a reincidência.",
+      "c": "cessam a execução e os efeitos penais da sentença condenatória.",
+      "d": "o fato somente deixa de ser crime se a lei nova for anterior ao início do processo.",
+      "e": "a extinção depende de requerimento do condenado dirigido ao Ministério Público."
+    },
+    "artigo": "art. 2º, caput, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386340+00:00",
+    "enunciado": "Lei nova deixa de considerar crime fato pelo qual o agente já havia sido condenado por sentença transitada em julgado. Nessa hipótese, à luz do Código Penal, é correto afirmar que",
+    "impressao": "545a8149527df3858920bb44ed1887be",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "Departamento Penitenciário Nacional",
       "b": "Conselho Penitenciário Estadual",
       "c": "Conselho Nacional de Política Criminal e Penitenciária",
@@ -176,6 +296,46 @@
     "modelo": "Claude Code, importado manualmente, em 27/09/2026",
     "modo": "variacao",
     "origem_impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "as frações de mês e as frações de salário-mínimo.",
+      "b": "as frações de dia e as frações de real.",
+      "c": "as frações de semana e as frações de dólar.",
+      "d": "as frações de hora e as frações de centavo.",
+      "e": "as frações de ano e as frações de real."
+    },
+    "artigo": "art. 11 do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386374+00:00",
+    "enunciado": "Nas penas privativas de liberdade e nas restritivas de direitos, e na pena de multa, o Código Penal determina que se desprezem, respectivamente,",
+    "impressao": "62fbcb7c5394df7bcc7c578d76baa0fb",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "da atividade, considerando praticado o crime somente onde ocorreu a ação ou omissão.",
+      "b": "do resultado, considerando praticado o crime somente onde este se produziu.",
+      "c": "da ubiquidade, considerando praticado o crime tanto onde ocorreu a ação ou omissão, no todo ou em parte, quanto onde se produziu ou deveria produzir-se o resultado.",
+      "d": "territorial estrita, que exclui a hipótese de tentativa.",
+      "e": "da intenção, que privilegia o local em que o agente planejou o crime."
+    },
+    "artigo": "art. 6º do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386365+00:00",
+    "enunciado": "Quanto ao lugar do crime, o Código Penal adotou a teoria",
+    "impressao": "6751832ddbe7df059ad84baa33f16fa1",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
   },
@@ -221,6 +381,46 @@
   },
   {
     "alternativas": {
+      "a": "sempre, ainda que em voo no espaço aéreo de outro país.",
+      "b": "achando-se aquelas em pouso no território nacional ou em voo no espaço aéreo correspondente, e estas em porto ou mar territorial do Brasil.",
+      "c": "apenas quando a vítima do crime for brasileira.",
+      "d": "desde que o comandante da aeronave ou embarcação seja brasileiro.",
+      "e": "unicamente quando não houver possibilidade de julgamento no país de origem."
+    },
+    "artigo": "art. 5º, §2º, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386365+00:00",
+    "enunciado": "Aplica-se também a lei brasileira aos crimes praticados a bordo de aeronaves ou embarcações estrangeiras de propriedade privada",
+    "impressao": "7aa09c17ce752049c8db7d2bc84a9a73",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "é absoluta, afastando qualquer convenção ou tratado internacional.",
+      "b": "ocorre sem prejuízo de convenções, tratados e regras de direito internacional.",
+      "c": "depende de reciprocidade expressa do país de origem do agente.",
+      "d": "somente alcança os crimes cometidos por brasileiros natos.",
+      "e": "é excepcionada quando a vítima for estrangeira."
+    },
+    "artigo": "art. 5º, caput, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386363+00:00",
+    "enunciado": "Segundo o art. 5º do Código Penal, a aplicação da lei brasileira aos crimes cometidos no território nacional",
+    "impressao": "7aabce137e5a34927a8939b92ff7a1fe",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 1 e 3.",
       "c": "São corretas apenas as afirmativas 2 e 4.",
@@ -241,6 +441,46 @@
   },
   {
     "alternativas": {
+      "a": "de pedido da parte interessada, dispensado qualquer tratado.",
+      "b": "de decisão do Senado Federal.",
+      "c": "da existência de tratado de extradição com o país de cuja autoridade judiciária emanou a sentença ou, na falta de tratado, de requisição do Ministro da Justiça.",
+      "d": "exclusivamente de decisão do Supremo Tribunal Federal, sem outro requisito.",
+      "e": "de manifestação favorável do Ministério Público Federal, apenas."
+    },
+    "artigo": "art. 9º, parágrafo único, \"b\", do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386372+00:00",
+    "enunciado": "A homologação da sentença estrangeira, para os efeitos de sujeitar o condenado a medida de segurança, depende",
+    "impressao": "83acab04f81287d6ee1f72589d904388",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "A lei penal pode retroagir para alcançar fato anterior à sua vigência, ainda que mais gravosa ao réu, desde que prevista em lei complementar.",
+      "b": "Não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.",
+      "c": "A analogia é admitida para suprir lacuna da lei penal incriminadora, em benefício da segurança jurídica.",
+      "d": "O costume constitui fonte formal imediata para a criação de tipos penais.",
+      "e": "A vedação à retroatividade da lei penal aplica-se apenas às contravenções, não aos crimes."
+    },
+    "artigo": "art. 1º do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386328+00:00",
+    "enunciado": "Sobre o princípio consagrado no art. 1º do Código Penal, assinale a alternativa correta.",
+    "impressao": "910e96b2cec409b58d28c82eb179ee9a",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "São corretas apenas as afirmativas 1 e 2.",
       "c": "São corretas apenas as afirmativas 3 e 4.",
@@ -256,6 +496,26 @@
     "modelo": "Claude Code, importado manualmente, em 27/09/2026",
     "modo": "variacao",
     "origem_impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "deixa de ser aplicada aos fatos praticados durante sua vigência, tão logo cessem as circunstâncias que a determinaram.",
+      "b": "aplica-se ao fato praticado durante sua vigência, ainda que decorrido o período de sua duração ou cessadas as circunstâncias que a determinaram.",
+      "c": "somente produz efeitos após sua revogação expressa por lei posterior.",
+      "d": "equipara-se à lei penal em branco, dependendo sempre de complementação por ato administrativo.",
+      "e": "não pode cominar penas mais severas que a legislação penal comum."
+    },
+    "artigo": "art. 3º do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386361+00:00",
+    "enunciado": "A lei excepcional ou temporária, quanto à sua aplicação no tempo,",
+    "impressao": "949300385703949002da93776782cca8",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
   },
@@ -301,6 +561,26 @@
   },
   {
     "alternativas": {
+      "a": "somente se o processo ainda estiver em curso, sem sentença.",
+      "b": "somente enquanto não houver sentença condenatória recorrível.",
+      "c": "ainda que já exista sentença condenatória transitada em julgado.",
+      "d": "apenas quando favorecer a vítima, sob pena de violação ao princípio da isonomia.",
+      "e": "desde que o agente comprove estar preso ao tempo da lei nova."
+    },
+    "artigo": "art. 2º, parágrafo único, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386341+00:00",
+    "enunciado": "A lei posterior que, de qualquer modo, favorece o agente aplica-se aos fatos anteriores",
+    "impressao": "a2e53acf5addc47eb4eb67d735e1616e",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 2 e 3.",
       "c": "São corretas apenas as afirmativas 1, 2 e 3.",
@@ -338,6 +618,26 @@
     "origem_impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "praticados por brasileiro, em qualquer hipótese.",
+      "b": "contra a vida ou a liberdade do Presidente da República.",
+      "c": "que o Brasil se obrigou a reprimir por tratado ou convenção.",
+      "d": "praticados em embarcações brasileiras mercantes, quando em território estrangeiro.",
+      "e": "cometidos por estrangeiro contra brasileiro, em qualquer circunstância."
+    },
+    "artigo": "art. 7º, I, \"a\", do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386366+00:00",
+    "enunciado": "Ficam sujeitos à lei brasileira, embora cometidos no estrangeiro, e independentemente das condições previstas no §2º do art. 7º do Código Penal, os crimes",
+    "impressao": "b92ac607257286cfadc4bcfe49631cec",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -381,6 +681,46 @@
   },
   {
     "alternativas": {
+      "a": "contra a vida do Presidente da República, cometidos no estrangeiro.",
+      "b": "de genocídio, quando o agente for brasileiro ou domiciliado no Brasil.",
+      "c": "praticados por brasileiro.",
+      "d": "contra a administração pública, por quem está a seu serviço.",
+      "e": "contra o patrimônio da União, cometidos no estrangeiro por estrangeiro a seu serviço."
+    },
+    "artigo": "art. 7º, II, \"b\", do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386368+00:00",
+    "enunciado": "Sujeitam-se à lei brasileira, na modalidade de extraterritorialidade condicionada, os crimes",
+    "impressao": "cc3de39c68a286b66e568e6579f49808",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "é desconsiderada para todos os efeitos no processo brasileiro.",
+      "b": "atenua a pena imposta no Brasil, quando diversas, ou nela é computada, quando idênticas.",
+      "c": "extingue automaticamente a punibilidade no Brasil.",
+      "d": "somente é considerada se o crime for de competência da Justiça Federal.",
+      "e": "impede, em qualquer hipótese, novo julgamento no Brasil."
+    },
+    "artigo": "art. 8º do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386370+00:00",
+    "enunciado": "Quanto à pena cumprida no estrangeiro pelo mesmo crime, o Código Penal estabelece que ela",
+    "impressao": "d80f9ee9fd6b2424ce4f260370d7e07f",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 4.",
       "b": "São corretas apenas as afirmativas 2 e 3.",
       "c": "São corretas apenas as afirmativas 1, 2 e 4.",
@@ -398,5 +738,65 @@
     "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "se exclui o dia do começo, computando-se o do vencimento.",
+      "b": "se computa o dia do começo.",
+      "c": "o prazo é contado em dias úteis, excluídos sábados, domingos e feriados.",
+      "d": "o prazo penal segue, em regra, a contagem do processo civil.",
+      "e": "o dia do começo somente é computado quando o prazo for superior a trinta dias."
+    },
+    "artigo": "art. 10 do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386373+00:00",
+    "enunciado": "Quanto à contagem de prazo penal, o Código Penal determina que",
+    "impressao": "ebfa2ed666f09fe3bfd2e295db52e1d5",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "somente se não tiver sido julgado no estrangeiro.",
+      "b": "ainda que absolvido ou condenado no estrangeiro.",
+      "c": "apenas se a pena aplicada no exterior for inferior à cominada no Brasil.",
+      "d": "desde que autorizado pelo Ministro da Justiça.",
+      "e": "somente após o trânsito em julgado da sentença estrangeira absolutória."
+    },
+    "artigo": "art. 7º, §1º, do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386367+00:00",
+    "enunciado": "Nos crimes de que trata o inciso I do art. 7º do Código Penal (extraterritorialidade incondicionada), o agente é punido segundo a lei brasileira",
+    "impressao": "edf556658d689c091c9971ba9e580a90",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "em qualquer hipótese, ainda que a lei especial disponha de modo diverso.",
+      "b": "se esta não dispuser de modo diverso.",
+      "c": "somente quando a lei especial for anterior ao Código Penal.",
+      "d": "exclusivamente nos crimes militares.",
+      "e": "apenas mediante autorização expressa do Congresso Nacional."
+    },
+    "artigo": "art. 12 do Código Penal (Decreto-Lei 2.848/1940)",
+    "assunto": null,
+    "criada_em": "2026-09-28T17:41:34.386374+00:00",
+    "enunciado": "As regras gerais do Código Penal aplicam-se aos fatos incriminados por lei especial",
+    "impressao": "f148f2d65e0286d62f05a360c794c960",
+    "materia": "Aplicação da lei penal (arts. 1º a 12)",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   }
 ]
