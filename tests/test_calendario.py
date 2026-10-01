@@ -207,7 +207,7 @@ def test_a_data_da_prova_vira_um_segundo_compromisso(banco_temporario):
 
     titulos = [e.titulo for e in servico.eventos_do_calendario()]
 
-    assert any(t.startswith("Ultimo dia") for t in titulos)
+    assert any(t.startswith("Último dia") for t in titulos)
     assert any(t.startswith("Prova:") for t in titulos)
 
 
@@ -234,7 +234,7 @@ def test_a_rota_serve_como_arquivo(cliente):
 def test_a_rota_traz_os_compromissos(cliente):
     _semear(_concurso("https://x.test/rota"))
 
-    assert "Ultimo dia de inscricao" in cliente.get("/calendario.ics").text
+    assert "Último dia de inscrição" in cliente.get("/calendario.ics").text
 
 
 # --- a pagina que explica ---------------------------------------------------

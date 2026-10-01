@@ -371,3 +371,92 @@ def test_sem_prazo_conhecido_a_fonte_continua_mandando(banco_temporario):
     with sessao() as s:
         assert s.scalar(select(Concurso)).situacao == "inscricoes_abertas"
     assert eventos.INSCRICOES_ABERTAS in _tipos()
+
+
+# --- como o evento aparece na tela (etapa 1B, pendencia A2) -----------------
+#
+# O banco guarda "Situacao: a -> b" e continua guardando: a traducao e so na
+# exibicao. Estes testes conferem a frase, e que o dado gravado nao mudou.
+
+@pytest.mark.parametrize("antes, depois, frase", [
+    ("prevista", "autorizado", "O concurso foi autorizado"),
+    ("autorizado", "banca_definida", "A banca foi definida"),
+    ("banca_definida", "edital_publicado", "O edital foi publicado"),
+    ("edital_publicado", "inscricoes_abertas", "As inscrições abriram"),
+    ("inscricoes_abertas", "encerrado", "As inscrições encerraram"),
+    ("desconhecida", "prevista", "O concurso passou a constar como previsto"),
+    ("prevista", "desconhecida", "A fonte deixou de informar a situação"),
+])
+def test_cada_transicao_vira_uma_frase(antes, depois, frase):
+    assert eventos.para_tela(f"Situacao: {antes} -> {depois}") == frase
+
+
+def test_situacao_que_volta_no_ciclo_nao_diz_que_avancou():
+    """O banco real tem "inscricoes_abertas -> edital_publicado": dizer "O
+    edital foi publicado" seria inventar um segundo edital."""
+    assert eventos.para_tela("Situacao: inscricoes_abertas -> edital_publicado") == (
+        "A situação voltou de inscrições abertas para edital publicado"
+    )
+
+
+def test_a_frase_sai_da_descricao_que_a_coleta_grava(banco_temporario):
+    """Ponta a ponta: o que o servico grava e o que a tela traduz casam - e o
+    banco continua com o texto cru."""
+    _coletar(_item(situacao="inscricoes_abertas"))
+    _coletar(_item(situacao="encerrado"))
+
+    gravada = _eventos()[-1].descricao
+    assert gravada == "Situacao: inscricoes_abertas -> encerrado"
+    assert eventos.para_tela(gravada) == "As inscrições encerraram"
+
+
+def test_o_apareceu_diz_a_situacao_com_nome_de_gente(banco_temporario):
+    _coletar(_item(situacao="edital_publicado"))
+
+    (apareceu,) = _eventos()
+    assert eventos.para_tela(apareceu.descricao) == (
+        "Entrou no radar pela fonte fepese (situação: edital publicado)"
+    )
+
+
+def test_prazo_e_retificacao_saem_com_acento(banco_temporario):
+    with sessao() as s:
+        eventos.registrar_prazo(s, URL, None, FECHA)
+        eventos.registrar_prazo(s, URL, ABRE, agora() - timedelta(days=1))
+        eventos.registrar_retificacao(s, URL, "edital.pdf")
+
+    textos = [eventos.para_tela(e.descricao) for e in _eventos()]
+    assert textos[0] == f"Prazo de inscrição: até {formatar_data(FECHA)}"
+    assert textos[1].startswith("Prazo de inscrição, já encerrado: de ")
+    assert textos[2] == ("Edital retificado: edital.pdf. Retificação muda "
+                         "prazo, vaga e requisito - vale reler.")
+
+
+@pytest.mark.parametrize("texto", [
+    "Governo estuda novo concurso da Policia Penal SC",   # titulo de noticia
+    "Prova marcada para 14/03/2027",
+    "Alguma descricao antiga, de formato desconhecido",
+])
+def test_texto_que_nao_e_da_coleta_passa_como_veio(texto):
+    assert eventos.para_tela(texto) == texto
+
+
+def test_nenhuma_frase_de_situacao_deixa_valor_cru():
+    from radar.models import SITUACOES
+
+    for antes in SITUACOES:
+        for depois in SITUACOES:
+            if antes == depois:
+                continue
+            frase = eventos.para_tela(f"Situacao: {antes} -> {depois}")
+            assert "_" not in frase and "->" not in frase, frase
+
+
+@pytest.mark.parametrize("tipo, rotulo", [
+    (eventos.INSCRICOES_ENCERRADAS, "inscrições encerradas"),
+    (eventos.INSCRICOES_ABERTAS, "inscrições abertas"),
+    (eventos.MUDOU_SITUACAO, "mudou a situação"),
+    ("noticia", "notícia"),
+])
+def test_o_tipo_do_evento_tem_acento(tipo, rotulo):
+    assert eventos.rotulo_do_tipo(tipo) == rotulo

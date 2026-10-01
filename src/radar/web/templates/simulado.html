@@ -69,11 +69,11 @@
       {% endif %}
       {% if f.get('da_banca') %}
         {% set _ = partes.append(
-             f.get('da_banca') ~ ' da mesma banca, mesmas materias') %}
+             f.get('da_banca') ~ ' da mesma banca, mesmas matérias') %}
       {% endif %}
       {% if f.get('repetidas') %}
         {% set _ = partes.append(
-             f.get('repetidas') ~ ' que eu ja tinha respondido') %}
+             f.get('repetidas') ~ ' que eu já tinha respondido') %}
       {% endif %}
       <p>Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}</p>
     {% elif simulado and simulado.filtros.get('geradas') %}

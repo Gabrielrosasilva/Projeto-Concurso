@@ -60,8 +60,8 @@
     {% if f.get('alvo') %}
       {% set partes = [] %}
       {% if f.get('proprias') %}{% set _ = partes.append(f.get('proprias') ~ ' das provas do cargo') %}{% endif %}
-      {% if f.get('da_banca') %}{% set _ = partes.append(f.get('da_banca') ~ ' da mesma banca, mesmas materias') %}{% endif %}
-      {% if f.get('repetidas') %}{% set _ = partes.append(f.get('repetidas') ~ ' que eu ja tinha respondido') %}{% endif %}
+      {% if f.get('da_banca') %}{% set _ = partes.append(f.get('da_banca') ~ ' da mesma banca, mesmas matérias') %}{% endif %}
+      {% if f.get('repetidas') %}{% set _ = partes.append(f.get('repetidas') ~ ' que eu já tinha respondido') %}{% endif %}
       Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
     {% elif f.get('geradas') %}
       Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra

@@ -439,3 +439,17 @@ def test_o_que_sobrou_do_teto_e_contado_de_verdade(banco_temporario, telegram):
 
     assert resultado.enviados == 3
     assert resultado.pendentes == 5
+
+
+def test_a_linha_do_tempo_mostra_frase_e_nao_valor_cru(cliente):
+    """Etapa 1B (pendencia A2): a tela dizia "inscricoes_abertas -> encerrado"."""
+    (id_,) = _semear(_concurso("https://a.test/1"))
+    servico.favoritar(id_)
+    _evento("https://a.test/1", "inscricoes_encerradas",
+            "Situacao: inscricoes_abertas -> encerrado")
+
+    texto = cliente.get("/acompanhando").text
+    assert "As inscrições encerraram" in texto
+    assert "inscrições encerradas" in texto
+    assert "inscricoes_abertas" not in texto
+    assert "-&gt;" not in texto

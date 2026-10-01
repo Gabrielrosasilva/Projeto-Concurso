@@ -198,10 +198,10 @@ def explicar_ausencia(cargo: str, universais: list[str]) -> str:
     E a resposta honesta: nao existe prova desse cargo no acervo, e o que serve
     de verdade sao as materias que caem em qualquer concurso.
     """
-    materias = ", ".join(universais[:4]) if universais else "as materias gerais"
+    materias = ", ".join(universais[:4]) if universais else "as matérias gerais"
     return (
         f"Nenhuma prova de {cargo} no acervo, e nenhuma parecida o bastante "
-        f"para valer a indicacao. O que serve para esse cargo sao as materias "
+        f"para valer a indicação. O que serve para esse cargo são as matérias "
         f"que caem em qualquer concurso ({materias}), com as provas da mesma "
         f"banca."
     )

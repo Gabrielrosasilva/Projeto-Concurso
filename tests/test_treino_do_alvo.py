@@ -292,7 +292,7 @@ def test_a_rodada_diz_de_onde_as_questoes_vieram(cliente):
 
     assert "Treino de Policia Penal SC" in texto
     assert "1 das provas do cargo" in texto
-    assert "1 da mesma banca, mesmas materias" in texto
+    assert "1 da mesma banca, mesmas matérias" in texto
 
 
 def test_o_simulado_comum_nao_ganha_o_rotulo_do_alvo(cliente):

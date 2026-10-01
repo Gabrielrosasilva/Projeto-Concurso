@@ -41,15 +41,8 @@ app = FastAPI(title="Radar de Concursos")
 # "nucleo" e jargao do codigo; na tela vale o que a pessoa entende.
 # As cores continuam as mesmas: quem le "Perto" ve o mesmo verde de antes.
 # O nome do campo e cru (vai para o banco); na tela vira gente.
-SITUACAO_LEGIVEL = {
-    "prevista": "previsto",
-    "autorizado": "autorizado",
-    "banca_definida": "banca contratada",
-    "edital_publicado": "edital publicado",
-    "inscricoes_abertas": "inscrições abertas",
-    "encerrado": "encerrado",
-    "desconhecida": "sem informação",
-}
+# Mora em eventos.py porque a linha do tempo usa os mesmos nomes na frase.
+SITUACAO_LEGIVEL = linha_do_tempo.NOME_DA_SITUACAO
 
 ROTULO_DO_ANEL = {
     "nucleo": "Perto",
@@ -114,6 +107,10 @@ templates.env.filters["titulo"] = separar_campos_grudados
 # acento. A grafia certa e a de config/regioes.yml, e e ela que a tela
 # mostra - sem precisar reescrever o que ja esta gravado.
 templates.env.filters["municipio"] = regioes.nome_canonico
+# A descricao do evento sai do banco como a coleta gravou ("Situacao:
+# inscricoes_abertas -> encerrado"); na tela vira frase. Banco nao muda.
+templates.env.filters["evento"] = linha_do_tempo.para_tela
+templates.env.filters["tipo_do_evento"] = linha_do_tempo.rotulo_do_tipo
 # Numero com virgula, como se escreve em portugues. A mesma funcao que monta a
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.
@@ -730,18 +727,18 @@ def simulado_responder(
 RECADOS_DAS_GERADAS = {
     "sem_chave": (
         "Falta a chave da Anthropic. Ponha RADAR_ANTHROPIC_KEY no .env e "
-        "recarregue - o passo a passo esta em COMO_LIGAR_A_IA.txt."
+        "recarregue - o passo a passo está em COMO_LIGAR_A_IA.txt."
     ),
     "sem_base": (
-        "Nao ha questao real do meu cargo para variar nesta materia."
+        "Não há questão real do meu cargo para variar nesta matéria."
     ),
     "nada": (
-        "A IA nao devolveu nenhuma questao aproveitavel desta vez. Nada foi "
+        "A IA não devolveu nenhuma questão aproveitável desta vez. Nada foi "
         "guardado; se houve chamada, ela foi cobrada do mesmo jeito."
     ),
     "errada": (
         "Marcada como errada. Ela saiu do sorteio para sempre, e as respostas "
-        "dela sairam da conta do meu acerto."
+        "dela saíram da conta do meu acerto."
     ),
 }
 

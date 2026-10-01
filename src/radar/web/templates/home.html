@@ -265,9 +265,9 @@
       <span class="rotulo">📋 Concurso</span>
       <span class="texto">
         {% if h.novidade %}
-          <b>{{ h.novidade.quando | data }}</b> · {{ h.novidade.tipo | replace('_', ' ') }}:
-          {% if h.novidade.link %}<a href="{{ h.novidade.link }}" target="_blank" rel="noopener">{{ h.novidade.texto }}</a>
-          {% else %}{{ h.novidade.texto }}{% endif %}
+          <b>{{ h.novidade.quando | data }}</b> · {{ h.novidade.tipo | tipo_do_evento }}:
+          {% if h.novidade.link %}<a href="{{ h.novidade.link }}" target="_blank" rel="noopener">{{ h.novidade.texto | evento }}</a>
+          {% else %}{{ h.novidade.texto | evento }}{% endif %}
         {% else %}
           Nada novo sobre o concurso. A linha do tempo passa a registrar a
           partir da próxima coleta - <code>radar atualizar</code>.

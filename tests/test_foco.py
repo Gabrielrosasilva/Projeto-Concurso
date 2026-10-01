@@ -1135,3 +1135,23 @@ def test_nada_de_numero_escrito_a_mao(cliente, com_quadro_do_edital):
 
     assert "duas provas" not in texto
     assert "Prova 2019:" in texto               # uma prova, e a tela diz qual
+
+
+def test_home_e_analises_mostram_a_frase_do_evento(cliente):
+    """Etapa 1B (pendencia A2): as duas telas mostravam "Situacao: prevista
+    -> autorizado" literalmente."""
+    from radar import eventos
+
+    with sessao() as s:
+        s.add(_concurso())
+    with sessao() as s:
+        eventos.registrar(
+            s, CONCURSO_DE_2019, eventos.MUDOU_SITUACAO,
+            "Situacao: prevista -> autorizado", CONCURSO_DE_2019,
+        )
+
+    for pagina in ("/", "/analises"):
+        texto = cliente.get(pagina).text
+        assert "O concurso foi autorizado" in texto, pagina
+        assert "mudou a situação" in texto, pagina
+        assert "prevista -&gt; autorizado" not in texto, pagina

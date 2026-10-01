@@ -275,7 +275,7 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
     # sorte dita em voz alta, justamente o que o minimo existe para evitar.
     if primeira.pontos is None:
         if primeira.respondidas:
-            medida = (f"Respondi so {primeira.respondidas} questão(ões) dele "
+            medida = (f"Respondi só {primeira.respondidas} questão(ões) dele "
                       f"- amostra pequena, abaixo das {MINIMO_NO_ASSUNTO} que "
                       f"fazem o acerto valer")
         else:

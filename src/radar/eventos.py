@@ -15,10 +15,11 @@ interpretacao**. Se o radar nao viu a mudanca acontecer, ele nao inventa a
 data - grava o momento em que percebeu, e a descricao diz o que mudou.
 """
 import logging
+import re
 
 from sqlalchemy import select
 
-from radar.models import Evento, agora
+from radar.models import SITUACOES, Evento, agora
 
 log = logging.getLogger(__name__)
 
@@ -173,6 +174,111 @@ def registrar_retificacao(
         f"requisito - vale reler.",
         link,
     )
+
+
+# --- como o evento aparece na tela ------------------------------------------
+#
+# A descricao gravada continua a de sempre ("Situacao: a -> b"): ela e chave
+# de deduplicacao no acervo (CHAVE_DO_EVENTO) e vai assim para o eventos.json.
+# Reescrever o banco por causa de texto de tela mudaria a chave e duplicaria
+# eventos na proxima importacao. A traducao e so aqui, na hora de mostrar.
+
+NOME_DA_SITUACAO = {
+    "prevista": "previsto",
+    "autorizado": "autorizado",
+    "banca_definida": "banca contratada",
+    "edital_publicado": "edital publicado",
+    "inscricoes_abertas": "inscrições abertas",
+    "encerrado": "encerrado",
+    "desconhecida": "sem informação",
+}
+
+# A frase diz para onde o concurso FOI: de onde ele veio quase sempre e o passo
+# anterior do ciclo, e repetir isso so alonga a linha do tempo.
+FRASE_DA_SITUACAO = {
+    "prevista": "O concurso passou a constar como previsto",
+    "autorizado": "O concurso foi autorizado",
+    "banca_definida": "A banca foi definida",
+    "edital_publicado": "O edital foi publicado",
+    "inscricoes_abertas": "As inscrições abriram",
+    "encerrado": "As inscrições encerraram",
+    "desconhecida": "A fonte deixou de informar a situação",
+}
+
+ROTULO_DO_TIPO = {
+    APARECEU: "apareceu",
+    MUDOU_SITUACAO: "mudou a situação",
+    EDITAL_PUBLICADO: "edital publicado",
+    INSCRICOES_ABERTAS: "inscrições abertas",
+    INSCRICOES_ENCERRADAS: "inscrições encerradas",
+    EDITAL_RETIFICADO: "edital retificado",
+    PROVA_MARCADA: "prova marcada",
+    # Nao e evento gravado, mas divide a lista de sinais com eles (foco.py).
+    "noticia": "notícia",
+}
+
+_SITUACAO = re.compile(r"^Situacao: (\S+) -> (\S+)$")
+_APARECEU = re.compile(r"^Entrou no radar pela fonte (.+), como (\S+)$")
+_PRAZO = re.compile(r"^Prazo de inscricao(, ja encerrado)?: (?:(de .+ a .+)|ate (.+))$")
+_RETIFICADO = re.compile(
+    r"^Edital retificado: (.+)\. Retificacao muda prazo, vaga e requisito - vale reler\.$"
+)
+
+
+def _nome(situacao: str) -> str:
+    return NOME_DA_SITUACAO.get(situacao, situacao.replace("_", " "))
+
+
+def _frase_da_mudanca(antes: str, depois: str) -> str:
+    """A frase de uma transicao de situacao.
+
+    Andar para tras acontece (a fonte reabre ou corrige: o banco real tem
+    "inscricoes_abertas -> edital_publicado"), e ai a frase do destino mentiria
+    - o edital nao foi publicado de novo. Evento e fato observado: diz que
+    voltou, e de onde para onde.
+    """
+    ciclo = [s for s in SITUACOES if s != "desconhecida"]
+    if antes in ciclo and depois in ciclo and ciclo.index(depois) < ciclo.index(antes):
+        return f"A situação voltou de {_nome(antes)} para {_nome(depois)}"
+    if depois in FRASE_DA_SITUACAO:
+        return FRASE_DA_SITUACAO[depois]
+    return f"A situação mudou de {_nome(antes)} para {_nome(depois)}"
+
+
+def para_tela(descricao: str | None) -> str:
+    """A descricao gravada, em frase de gente.
+
+    So reconhece as frases que este arquivo monta, e inteiras: qualquer outro
+    texto (titulo de noticia, descricao antiga de formato desconhecido) passa
+    como veio, em vez de ser remendado pela metade.
+    """
+    if not descricao:
+        return ""
+
+    if m := _SITUACAO.match(descricao):
+        return _frase_da_mudanca(m.group(1), m.group(2))
+
+    if m := _APARECEU.match(descricao):
+        return f"Entrou no radar pela fonte {m.group(1)} (situação: {_nome(m.group(2))})"
+
+    if m := _PRAZO.match(descricao):
+        quando = m.group(2) or f"até {m.group(3)}"
+        if m.group(1):
+            return f"Prazo de inscrição, já encerrado: {quando}"
+        return f"Prazo de inscrição: {quando}"
+
+    if m := _RETIFICADO.match(descricao):
+        return (f"Edital retificado: {m.group(1)}. Retificação muda prazo, "
+                f"vaga e requisito - vale reler.")
+
+    return descricao
+
+
+def rotulo_do_tipo(tipo: str | None) -> str:
+    """O nome curto do tipo de evento, com acento."""
+    if not tipo:
+        return ""
+    return ROTULO_DO_TIPO.get(tipo, tipo.replace("_", " "))
 
 
 def do_concurso(s, concurso_url: str) -> list[Evento]:

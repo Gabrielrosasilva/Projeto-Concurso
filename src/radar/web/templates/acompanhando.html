@@ -159,10 +159,10 @@
               <li class="{{ 'importante' if e.tipo in importantes }}">
                 <span class="quando">{{ e.data | data }}</span>
                 <span>
-                  <span class="tipo">{{ e.tipo | replace('_', ' ') }}</span>
+                  <span class="tipo">{{ e.tipo | tipo_do_evento }}</span>
                   {% if e.link %}
-                    <a href="{{ e.link }}" target="_blank" rel="noopener">{{ e.descricao }}</a>
-                  {% else %}{{ e.descricao }}{% endif %}
+                    <a href="{{ e.link }}" target="_blank" rel="noopener">{{ e.descricao | evento }}</a>
+                  {% else %}{{ e.descricao | evento }}{% endif %}
                 </span>
               </li>
             {% endfor %}

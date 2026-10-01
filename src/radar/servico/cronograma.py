@@ -58,17 +58,17 @@ def registrar(
     """
     if meta not in METAS:
         raise RegistroInvalido(
-            f"Meta {meta!r} nao existe. Use uma destas: {', '.join(METAS)}"
+            f"Meta {meta!r} não existe. Use uma destas: {', '.join(METAS)}"
         )
-    for nome, valor in (("questoes feitas", questoes_feitas), ("acertos", acertos)):
+    for nome, valor in (("questões feitas", questoes_feitas), ("acertos", acertos)):
         if valor is not None and valor < 0:
-            raise RegistroInvalido(f"{nome.capitalize()} nao pode ser negativo ({valor})")
+            raise RegistroInvalido(f"{nome.capitalize()} não pode ser negativo ({valor})")
     if acertos is not None:
         if questoes_feitas is None:
-            raise RegistroInvalido("Acertos sem questoes feitas: diga quantas fez")
+            raise RegistroInvalido("Acertos sem questões feitas: diga quantas fez")
         if acertos > questoes_feitas:
             raise RegistroInvalido(
-                f"Acertos ({acertos}) maior que questoes feitas ({questoes_feitas})"
+                f"Acertos ({acertos}) maior que questões feitas ({questoes_feitas})"
             )
 
     hoje = hoje or hoje_local()
@@ -76,11 +76,11 @@ def registrar(
         # Marcar o futuro seria anotar o que eu PRETENDO fazer, e o diario e
         # do que eu fiz.
         raise RegistroInvalido(
-            f"{data:%d/%m/%Y} ainda nao chegou: so se marca hoje ou dia passado"
+            f"{data:%d/%m/%Y} ainda não chegou: só se marca hoje ou dia passado"
         )
     plano = plano or plano_de_estudo.carregar()
     if plano.dia(data) is None:
-        raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
+        raise RegistroInvalido(f"{data:%d/%m/%Y} não está no cronograma")
 
     criar_tabelas()
     with sessao() as s:
@@ -178,23 +178,23 @@ def _faixa_do_plano(plano, data: date, bloco: str, indice: int):
     do nivel em que a semana estava.
     """
     if plano.dia(data) is None:
-        raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
+        raise RegistroInvalido(f"{data:%d/%m/%Y} não está no cronograma")
     if bloco not in plano_de_estudo.TODOS_OS_BLOCOS:
-        raise RegistroInvalido(f"Bloco {bloco!r} nao existe")
+        raise RegistroInvalido(f"Bloco {bloco!r} não existe")
     nivel = nivel_do_dia(plano, data)
     if bloco == plano_de_estudo.BLOCO_DO_PLANO_B:
         # As faixas do Plano B nao estao no arquivo: saem do dia, com o Plano
         # B que esta ativo. Sem ele ativo, nao ha o que marcar.
         estado = estado_do_dia(data)
         if estado is None or not estado.plano_b:
-            raise RegistroInvalido("O Plano B nao esta ativo neste dia.")
+            raise RegistroInvalido("O Plano B não está ativo neste dia.")
         montado = plano_de_estudo.montar_plano_b(plano, data, estado.plano_b,
                                                  nivel.efetivo)
     else:
         montado = plano_de_estudo.montar_dia(plano, data, nivel.efetivo)
     faixas = getattr(montado, bloco)
     if not 0 <= indice < len(faixas):
-        raise RegistroInvalido(f"O bloco {bloco} nao tem a faixa {indice}")
+        raise RegistroInvalido(f"O bloco {bloco} não tem a faixa {indice}")
     return faixas[indice]
 
 
@@ -203,7 +203,7 @@ def _faixa_para_marcar(data: date, bloco: str, indice: int, titulo: str,
     """A faixa que a tela mandou marcar, conferida. Comum aos tres comandos."""
     if data > hoje:
         raise RegistroInvalido(
-            f"{data:%d/%m/%Y} ainda nao chegou: so se marca faixa de hoje ou de dia passado"
+            f"{data:%d/%m/%Y} ainda não chegou: só se marca faixa de hoje ou de dia passado"
         )
     faixa = _faixa_do_plano(plano, data, bloco, indice)
     if faixa.titulo != titulo:
@@ -327,7 +327,7 @@ def anotar_faixa(
     faixa = _faixa_para_marcar(data, bloco, indice, titulo, plano, hoje)
     if not plano_de_estudo.tem_acerto(faixa):
         raise RegistroInvalido(
-            f"A faixa {faixa.titulo!r} nao e de questoes: nela eu so marco que fiz."
+            f"A faixa {faixa.titulo!r} não é de questões: nela eu só marco que fiz."
         )
 
     feitas = _inteiro_do_check(questoes, "As questões feitas")
@@ -683,19 +683,19 @@ def ativar_plano_b(
     if minutos is not None:
         if data > hoje:
             raise RegistroInvalido(
-                f"{data:%d/%m/%Y} ainda nao chegou: Plano B e para o dia que apertou"
+                f"{data:%d/%m/%Y} ainda não chegou: Plano B é para o dia que apertou"
             )
         if plano.plano_b is None:
-            raise RegistroInvalido("O config/cronograma.yml nao tem o bloco `plano_b`.")
+            raise RegistroInvalido("O config/cronograma.yml não tem o bloco `plano_b`.")
         if minutos not in plano.plano_b.opcoes:
             raise RegistroInvalido(
-                f"Plano B de {minutos} min nao existe (ha: "
+                f"Plano B de {minutos} min não existe (há: "
                 f"{', '.join(str(m) for m in sorted(plano.plano_b.opcoes))})"
             )
         if data.weekday() == plano_de_estudo.DOMINGO:
             raise RegistroInvalido("Domingo é descanso: não tem Plano B.")
         if plano.dia(data) is None:
-            raise RegistroInvalido(f"{data:%d/%m/%Y} nao esta no cronograma")
+            raise RegistroInvalido(f"{data:%d/%m/%Y} não está no cronograma")
 
     criar_tabelas()
     with sessao() as s:

@@ -149,7 +149,7 @@ def test_acertos_sem_questoes_e_recusado(banco_temporario, plano):
 def test_faixa_que_nao_e_de_questoes_nao_aceita_acerto(banco_temporario, plano):
     teoria = _faixa(plano, "manha", 0)
     assert not cronograma.tem_acerto(teoria)
-    with pytest.raises(diario.RegistroInvalido, match="nao e de questoes"):
+    with pytest.raises(diario.RegistroInvalido, match="não é de questões"):
         diario.anotar_faixa(SEG, "manha", 0, teoria.titulo, questoes=10,
                             plano=plano, hoje=HOJE)
 

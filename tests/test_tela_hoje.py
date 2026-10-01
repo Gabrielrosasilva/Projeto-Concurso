@@ -167,7 +167,7 @@ def test_data_futura_e_recusada_na_tela(cliente, monkeypatch):
     resposta = cliente.post("/hoje/registrar", data={
         "data": "2026-09-29", "meta": "ideal"})
     assert resposta.status_code == 400
-    assert "ainda nao chegou" in resposta.text
+    assert "ainda não chegou" in resposta.text
     assert servico.cronograma.registros(
         datetime(2026, 9, 1).date(), datetime(2026, 12, 31).date()) == {}
 
@@ -181,7 +181,7 @@ def test_dia_futuro_mostra_o_formulario_desabilitado(cliente, monkeypatch):
 
 @pytest.mark.parametrize("campos, texto", [
     ({"meta": ""}, "Escolha como foi o dia"),
-    ({"meta": "voando"}, "nao existe"),
+    ({"meta": "voando"}, "não existe"),
 ])
 def test_erro_de_validacao_aparece_na_tela(cliente, monkeypatch, campos, texto):
     _parar_o_relogio(monkeypatch, 2026, 9, 30, 12, 0)

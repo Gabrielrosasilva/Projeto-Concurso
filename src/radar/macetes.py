@@ -23,38 +23,38 @@ PADROES_DE_COMANDO: tuple[tuple[str, str, str], ...] = (
         # padrao anterior era n[ao], que casa duas letras e nunca pegou
         # "NAO E CORRETA".
         r"incorret|nao\s+(?:e|esta)\s+corret|except|falsa",
-        "Le com calma: aqui acertar e achar o ERRO. Marcar a alternativa "
-        "verdadeira e o jeito mais comum de perder ponto.",
+        "Lê com calma: aqui acertar é achar o ERRO. Marcar a alternativa "
+        "verdadeira é o jeito mais comum de perder ponto.",
     ),
     (
         "analise as frases e depois assinale",
         r"analise (?:as|os|o|a)\b",
-        "A resposta nao esta em uma frase so: e preciso julgar cada item "
+        "A resposta não está em uma frase só: é preciso julgar cada item "
         "antes de olhar as alternativas.",
     ),
     (
         "verdadeiro ou falso",
         r"\(\s*[vf]\s*\)",
-        "Um item errado no meio derruba a sequencia inteira. Vale conferir "
-        "item por item, e nao a sequencia de uma vez.",
+        "Um item errado no meio derruba a sequência inteira. Vale conferir "
+        "item por item, e não a sequência de uma vez.",
     ),
     (
-        "sequencia ou ordem correta",
+        "sequência ou ordem correta",
         r"sequ[e\u00ea]ncia correta|ordem correta",
-        "Costuma ter duas alternativas parecidas, diferentes so na ordem de "
+        "Costuma ter duas alternativas parecidas, diferentes só na ordem de "
         "dois itens do meio.",
     ),
     (
         "completa as lacunas",
         r"____|completa(?:m)? corretamente as lacunas",
         "A banca testa palavras parecidas (deferiu/diferiu, \"a\" e \"à\"). "
-        "Conferir lacuna por lacuna elimina alternativa rapido.",
+        "Conferir lacuna por lacuna elimina alternativa rápido.",
     ),
     (
         "todas as alternativas",
         r"todas as (?:alternativas|afirmativas)",
         "Alternativa do tipo 'todas as anteriores' costuma vir junto: se duas "
-        "estao claramente certas, ela e a candidata forte.",
+        "estão claramente certas, ela é a candidata forte.",
     ),
 )
 

@@ -98,7 +98,7 @@ def test_marcar_com_titulo_velho_e_recusado(banco_temporario, plano):
 
 
 def test_dia_futuro_recusa(banco_temporario, plano):
-    with pytest.raises(RegistroInvalido, match="ainda nao chegou"):
+    with pytest.raises(RegistroInvalido, match="ainda não chegou"):
         marcar_faixa(SEG, "manha", 0, TEORIA[2], plano=plano, hoje=SEG - timedelta(days=1))
 
 
@@ -254,7 +254,7 @@ def test_dia_futuro_nao_tem_circulo_e_recusa(cliente):
     resposta = cliente.post("/hoje/faixa", data={
         "data": "2026-10-01", "bloco": "manha", "indice": "0", "titulo": titulo})
     assert resposta.status_code == 400
-    assert "ainda nao chegou" in resposta.text
+    assert "ainda não chegou" in resposta.text
 
 
 def test_pausa_nao_tem_circulo(cliente):

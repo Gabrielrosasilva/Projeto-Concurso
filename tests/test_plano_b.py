@@ -150,7 +150,7 @@ def test_ativar_desativar_e_persistir(banco_temporario, plano):
 
 
 def test_futuro_e_recusado(banco_temporario, plano):
-    with pytest.raises(RegistroInvalido, match="ainda nao chegou"):
+    with pytest.raises(RegistroInvalido, match="ainda não chegou"):
         ativar_plano_b(QUARTA, 30, plano=plano, hoje=date(2026, 10, 27))
     assert estado_do_dia(QUARTA) is None
 
@@ -235,7 +235,7 @@ def test_dia_futuro_nao_tem_botao_e_recusa(cliente):
     assert "Ativar Plano B" not in cliente.get("/hoje?data=2026-10-31").text
     resposta = cliente.post("/hoje/plano-b", data={"data": "2026-10-31", "minutos": "30"})
     assert resposta.status_code == 400
-    assert "ainda nao chegou" in resposta.text
+    assert "ainda não chegou" in resposta.text
 
 
 def test_domingo_nao_tem_botao(cliente):

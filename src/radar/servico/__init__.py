@@ -893,7 +893,7 @@ def eventos_do_calendario() -> list[calendario.Evento]:
             if concurso.banca:
                 detalhe.append(f"Banca: {concurso.banca}.")
             if concurso.salario:
-                detalhe.append(f"Salario: R$ {concurso.salario:,.0f}."
+                detalhe.append(f"Salário: R$ {concurso.salario:,.0f}."
                                .replace(",", "."))
             if concurso.motivo_elegibilidade:
                 detalhe.append(concurso.motivo_elegibilidade)
@@ -903,7 +903,7 @@ def eventos_do_calendario() -> list[calendario.Evento]:
                 # sempre o mesmo evento, e o calendario atualiza em vez de
                 # duplicar quando o prazo muda.
                 identificador=f"inscricao:{concurso.url}",
-                titulo=f"Ultimo dia de inscricao: {concurso.titulo}",
+                titulo=f"Último dia de inscrição: {concurso.titulo}",
                 quando=fim,
                 descricao=" ".join(detalhe),
                 url=concurso.url,

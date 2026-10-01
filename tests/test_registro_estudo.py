@@ -66,7 +66,7 @@ def test_hoje_pode_ser_marcado(banco_temporario, plano):
 
 @pytest.mark.parametrize("args, kwargs, texto", [
     (("otima",), {}, "Meta 'otima'"),
-    (("ideal", 10, 11), {}, "maior que questoes feitas"),
+    (("ideal", 10, 11), {}, "maior que questões feitas"),
     (("ideal", -1), {}, "negativo"),
     (("ideal", 10, -2), {}, "negativo"),
 ])
@@ -76,12 +76,12 @@ def test_recusa_valor_errado(banco_temporario, plano, args, kwargs, texto):
 
 
 def test_recusa_data_futura(banco_temporario, plano):
-    with pytest.raises(RegistroInvalido, match="03/10/2026 ainda nao chegou"):
+    with pytest.raises(RegistroInvalido, match="03/10/2026 ainda não chegou"):
         registrar(date(2026, 10, 3), "ideal", plano=plano, hoje=SEG)
 
 
 def test_recusa_data_fora_do_plano(banco_temporario, plano):
-    with pytest.raises(RegistroInvalido, match="30/09/2026 nao esta no cronograma"):
+    with pytest.raises(RegistroInvalido, match="30/09/2026 não está no cronograma"):
         _marcar(plano, date(2026, 9, 30))
 
 
