@@ -1357,6 +1357,22 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
   virou estudo extra, com `--minutos` obrigatorio (decidido com voce antes de
   implementar: o roteiro nao previa que o extra exige minutos).
 
+## Etapa 1D do pedido de evolucao: a conferencia dos dias gravados (01/10)
+
+- `radar conferir-dias` (`servico/conferencia.py`) compara, dia a dia do
+  ciclo, o que esta gravado com a regra do `metricas`, e so le; com
+  `--aplicar`, faz copia de seguranca e corrige o aprovado;
+- no banco real: as copias do registro batiam (31/13 e 37/4); nenhum check
+  orfao, nenhuma resposta a questao anulada, nenhum acerto maior que as
+  questoes; 30/09 e 01/10 sem nada gravado. O que nao batia: o **Bonus
+  marcado com 0 questoes em 28/09 e em 29/09** (voce nao fez), e os **JSON
+  do diario vazios** - os dois dias so existiam no `radar.db`, porque o
+  `sincronizar` nao rodou desde 28/09;
+- aplicado com o seu "pode": os dois checks do Bonus sairam e o diario foi
+  exportado. 28/09 e 29/09 passaram de 3h50 para 3h25; as questoes nao
+  mudaram (31 e 37). Copia de antes em `data/copias/conferencia-2026-10-01-143927`;
+- a tela passou a recusar faixa de questoes com 0 questoes.
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e

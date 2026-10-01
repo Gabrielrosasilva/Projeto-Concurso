@@ -10,7 +10,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 1 | 1A — GitHub Actions verde | 🟡 falta o verde no GitHub |
 | 2 | 1B — Texto de máquina e Previsão | ✅ |
 | 3 | 1C — Fonte única das métricas | ✅ |
-| 4 | 1D — Conferência dos dados gravados | ⬜ |
+| 4 | 1D — Conferência dos dados gravados | ✅ |
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ⬜ |
 | 6 | 2 — Estrutura de conteúdos | ⬜ |
 | 7 | 3A — Classificação do alvo e incidência | ⬜ |
@@ -241,3 +241,79 @@ home lendo o mesmo acumulado do `metricas`.
 são iguais ao calculado. O Bônus de 28/09 e o de 29/09 estão marcados com 0
 questões e 25 min cada; a pergunta "você fez o Bônus?" continua de pé.
 
+---
+
+## 1D — Conferência dos dados gravados (01/10/2026)
+
+- Situação: concluída (aguardando sua aprovação para seguir à 6A)
+- Datas: início 01/10 · fim 01/10
+
+**Plano conferido contra o código antes de começar:** válido. O banco real
+mostrou três pontos, que você decidiu antes da implementação:
+1. **os JSON do diário estavam vazios** (`[]`): 28/09 e 29/09 só existiam no
+   `radar.db`, porque o `sincronizar` não rodou desde 28/09. A conferência
+   ganhou a coluna "dia fora do JSON", e o `--aplicar` termina exportando;
+2. **o Bônus com 0 questões estava em 28/09 e também em 29/09** (o roteiro
+   citava só 28/09). Você não fez nenhum dos dois: os dois saem;
+3. **regra do 0:** faixa de questões marcada com 0 questões (ou vazio) passa
+   a ser recusada pela tela, em vez de aceita com os minutos.
+
+**Arquivos alterados.**
+- novos: `src/radar/servico/conferencia.py` (a conferência e o `aplicar`),
+  `tests/test_conferencia_dos_dias.py`;
+- `src/radar/cli.py` — comando `radar conferir-dias [--de] [--ate] [--aplicar]`;
+- `src/radar/acervo.py` — `registros_no_arquivo` e `estados_no_arquivo`;
+- `src/radar/servico/cronograma.py` — `anotar_faixa` recusa 0 questões;
+- `src/radar/servico/__init__.py` — expõe `servico.conferencia`;
+- `tests/test_metricas.py` — o Bônus com 0 do 28/09 entra direto no banco
+  (a tela não aceita mais);
+- `.gitignore` — `data/copias/` (as cópias de segurança, com o banco);
+- dados: `data/registro_estudo.json` e `data/estado_do_dia.json` (o diário
+  exportado depois da correção);
+- docs: `decisoes.md`, `historico.md`, `CLAUDE.md` ("Estado atual"), este
+  arquivo. `pendencias.md` não tinha item desta etapa.
+
+**Testes novos (15, em `test_conferencia_dos_dias.py`).** Dia sem nada
+gravado; o 28/09 com o Bônus de 0 como única correção do dado; cópia do
+registro que bate e que não bate; treino de IA no dia; acertos maiores que
+as questões na faixa e no extra (a conta "não fecha" e a conferência não
+para); resposta a questão anulada; check órfão; dia fora do JSON, que some
+depois de exportar; a tela recusa 0, "0" e vazio; conferir não muda banco
+nem arquivo nem cria cópia; `aplicar` copia antes, tira só o Bônus (órfão e
+registro ficam) e a nova conferência bate, com 25 min a menos; `aplicar` sem
+nada a corrigir não grava nada; o comando só lê e, com `--aplicar`, corrige
+e mostra antes × depois; a linha do dia é a mesma do `metricas`.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_conferencia_dos_dias.py` + `test_metricas.py` + `test_acertos_do_dia.py`, 1ª rodada | 59 passed, 2 failed (um valor de minutos chutado no teste e o JSON lido como texto; os dois testes foram corrigidos) |
+| `test_conferencia_dos_dias.py` | 15 passed |
+| Suíte inteira, PC | **1900 passed** (1885 de antes + 15 novos), 15 min |
+
+**Comando real rodado (banco real).**
+- `radar conferir-dias` (só leitura): 28/09 e 29/09 com o registro batendo
+  (31/13 e 37/4), o Bônus "feita, 0 questões, 25 min" e "o registro e os
+  checks não estão no JSON"; 28/09 com 10 respostas de IA (7 certas);
+  nenhum órfão, anulada ou acerto maior; 30/09 e 01/10 "nada gravado".
+  "4 correções propostas. Nada mudou";
+- `radar conferir-dias --aplicar`: cópia em
+  `data/copias/conferencia-2026-10-01-143927` (radar.db e os dois JSON), e a
+  nova conferência sem proposta nenhuma;
+- `radar hoje --data 2026-09-28`: "Fiz hoje: 31 questões = 13 acertos + 8
+  erros + 10 de treino de IA · 3h25 de estudo".
+
+**Totais antes × depois.**
+
+| Dia | Antes | Depois |
+|---|---|---|
+| 28/09 | 31 questões = 13 + 8 + 10 de treino de IA · 3h50 | 31 questões = 13 + 8 + 10 de treino de IA · 3h25 |
+| 29/09 | 37 questões = 4 + 18 + 15 sem acerto anotado · 3h50 | 37 questões = 4 + 18 + 15 sem acerto anotado · 3h25 |
+
+**Critério de conclusão.**
+- [x] relatório rodado no banco real e mostrado;
+- [x] correções aprovadas aplicadas (Bônus de 28 e 29/09; diário exportado
+  para os JSON), com cópia de segurança antes;
+- [x] totais antes × depois conferidos: questões iguais, 25 min a menos em
+  cada dia.

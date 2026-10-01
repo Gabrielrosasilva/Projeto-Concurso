@@ -2350,3 +2350,28 @@ criados, entao as decisoes dela entram aqui no primeiro commit da Etapa 1:
 10. **o "acertei X de Y" do Onde estudar vem da conta**, e nao mais de volta
     da porcentagem (que arredondava).
 
+## A conferencia dos dias gravados (Etapa 1D, 01/10/2026)
+
+1. **Faixa de questoes marcada com 0 questoes nao e "feita".** O
+   `anotar_faixa` recusa 0 e vazio ("se nao fez nenhuma, desmarque a faixa").
+   Aceitar o 0 contava os minutos da faixa no dia: foi o Bonus de 28 e 29/09,
+   25 min cada, de um estudo que nao aconteceu (escolha sua, 01/10). Faixa de
+   teoria, lei seca e correcao continua so com o circulo;
+2. **`radar conferir-dias` so le.** Um relatorio por dia do ciclo: o registro
+   gravado contra a conta do `servico.metricas`, faixa feita com 0 questoes,
+   acertos maiores que as questoes (faixa ou extra), treino de IA no dia,
+   resposta a questao hoje anulada, check orfao, e dia do banco que nao esta
+   no JSON. A conferencia nao tem conta propria: a linha do dia e a do
+   `metricas`;
+3. **o `--aplicar` corrige so duas coisas, e so depois de aprovado:** tira o
+   check da faixa com 0 questoes e exporta o diario para os JSON. O resto
+   (acerto maior que questoes, orfao, anulada, copia que nao bate) e mostrado
+   com a proposta e fica para eu corrigir na tela ou decidir antes. Antes de
+   gravar, copia o `radar.db` (pela API de backup do SQLite, segura com o
+   `radar web` aberto) e os dois JSON para `data/copias/conferencia-<hora>/`,
+   fora do git;
+4. **as copias de total do registro (28/09: 31/13; 29/09: 37/4) ficam como
+   estao**: batem com a regra e nao aparecem mais (decisao 7 da 1C);
+5. **resposta a questao anulada depois continua no acerto** ate haver regra
+   para isso; a conferencia a acusa. No banco real nao ha nenhuma.
+

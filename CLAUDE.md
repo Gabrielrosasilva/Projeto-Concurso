@@ -109,8 +109,10 @@ Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 **Actions:** vermelho desde 26/09; os testes foram corrigidos na Etapa 1A
 (01/10) e falta conferir o verde la. **Em andamento:** o pedido de evolucao
 ([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A, a
-1B (frases dos eventos e da Previsao, acentos na tela web) e a 1C (fonte unica
-das metricas). Proxima: 1D, conferir os dias ja gravados.
+1B (frases dos eventos e da Previsao, acentos na tela web), a 1C (fonte unica
+das metricas) e a 1D (`radar conferir-dias`; o Bonus de 28 e 29/09 saiu, e
+faixa de questoes com 0 questoes e recusada). Proxima: 6A, rotina nova do
+Ciclo 1 e ANKI desativado.
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.
