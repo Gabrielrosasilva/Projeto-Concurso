@@ -41,6 +41,26 @@
   },
   {
     "alternativas": {
+      "a": "Ele mora num casebre à beira da estrada.",
+      "b": "Ela usa um chapelão elegante nas festas.",
+      "c": "O menino ganhou uma bicicleta novinha.",
+      "d": "Aquele jogador fez um golaço na final.",
+      "e": "A criança tem um sorriso lindo."
+    },
+    "artigo": "regra do grau do substantivo: superlativo/aumentativo sintético de valor depreciativo, com formas irregulares como \"casebre\" (de \"casa\").",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769986+00:00",
+    "enunciado": "Assinale a alternativa em que o substantivo destacado está flexionado no grau que indica ideia depreciativa (pejorativa), e não apenas variação de tamanho.",
+    "impressao": "0657d8680f5ad25c95ccb1cdf762cb31",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "São corretas apenas as afirmativas 1 e 2.",
       "c": "São corretas apenas as afirmativas 1 e 3.",
@@ -78,6 +98,26 @@
     "origem_impressao": "1caa127a7bb47bdfaedb84899576d42f",
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "\"guarda-noturno\" faz o plural em \"guardas-noturnos\", pois os dois elementos, substantivo e adjetivo, são variáveis.",
+      "b": "\"beija-flor\" faz o plural em \"beijas-flores\", pois o verbo \"beija\" também varia.",
+      "c": "\"porta-bandeira\" faz o plural em \"portas-bandeiras\", pois \"porta\" é substantivo neste composto e por isso varia.",
+      "d": "\"além-mar\" faz o plural em \"alens-mares\", pois o advérbio e o substantivo variam juntos.",
+      "e": "\"pé-de-moleque\" faz o plural em \"pés-de-moleques\", pois todos os substantivos do composto variam."
+    },
+    "artigo": "regra de plural dos substantivos compostos formados por substantivo+adjetivo: ambos os elementos vão para o plural (ex.: guarda-noturno → guardas-noturnos); compostos com verbo, advérbio ou preposição",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769992+00:00",
+    "enunciado": "Assinale a alternativa correta quanto ao plural do substantivo composto.",
+    "impressao": "0daf088eff40ea05099a8be2fc97731e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -198,6 +238,26 @@
     "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "Os acordos luso-brasileiros foram assinados ontem.",
+      "b": "Os produtos ítalos-brasileiros são exportados para a Europa.",
+      "c": "As relações anglos-americanas se estreitaram.",
+      "d": "Os costumes francos-canadenses são preservados.",
+      "e": "Os tratados sinos-japoneses foram revistos."
+    },
+    "artigo": "regra do plural dos adjetivos pátrios compostos: apenas o último elemento vai para o plural; o primeiro permanece na forma reduzida e invariável (ex.: luso-brasileiros).",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769991+00:00",
+    "enunciado": "Assinale a alternativa que apresenta corretamente o plural do adjetivo pátrio composto.",
+    "impressao": "47b618074f3593f0464d668a1d7a314b",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -421,6 +481,26 @@
   },
   {
     "alternativas": {
+      "a": "Os pobres precisam de mais políticas públicas.",
+      "b": "O homem pobre pedia esmola na praça.",
+      "c": "Ela mora num bairro pobre da cidade.",
+      "d": "É um país pobre em recursos naturais.",
+      "e": "Aquele povo pobre sofre com a seca."
+    },
+    "artigo": "regra de substantivação do adjetivo: antecedido de artigo e sem substantivo explícito a que se refira, o adjetivo passa a funcionar como substantivo (ex.: \"os pobres\").",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769991+00:00",
+    "enunciado": "Assinale a alternativa em que a palavra destacada está empregada como substantivo, e não como adjetivo.",
+    "impressao": "7aac45af6a2d59b8159d6b355e8dc41d",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 1 e 3.",
       "c": "São corretas apenas as afirmativas 2 e 4.",
@@ -461,6 +541,26 @@
   },
   {
     "alternativas": {
+      "a": "Ela usava blusas verde-oliva na cerimônia.",
+      "b": "Comprou camisas azuis-marinho para o uniforme.",
+      "c": "As paredes estavam pintadas de amarelas-ouro.",
+      "d": "Os sapatos eram verdes-claros de couro.",
+      "e": "As bermudas eram vermelhas-sangue de tão gastas."
+    },
+    "artigo": "regra do adjetivo composto indicativo de cor: quando o segundo elemento é um substantivo, o composto todo fica invariável (ex.: verde-oliva, azul-marinho).",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769989+00:00",
+    "enunciado": "Assinale a alternativa em que a concordância do adjetivo composto indicativo de cor está correta.",
+    "impressao": "8755ff73af31bb9ab35c0e69154aca60",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "A lei penal pode retroagir para alcançar fato anterior à sua vigência, ainda que mais gravosa ao réu, desde que prevista em lei complementar.",
       "b": "Não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.",
       "c": "A analogia é admitida para suprir lacuna da lei penal incriminadora, em benefício da segurança jurídica.",
@@ -478,6 +578,26 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "Comprou saia e sapato importados.",
+      "b": "Tinha cabelo e barba grisalha.",
+      "c": "Usava calça e blusa branco.",
+      "d": "Trouxe caderno e caneta vermelha.",
+      "e": "Encontrou livro e revista rasgada."
+    },
+    "artigo": "regra de concordância do adjetivo com mais de um substantivo de gêneros diferentes: posposto ao conjunto, o adjetivo vai para o masculino plural.",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769988+00:00",
+    "enunciado": "Assinale a alternativa que respeita a regra de concordância do adjetivo posposto a substantivos de gêneros diferentes.",
+    "impressao": "9192cbe37a251d7d00d87b6ba2a02416",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -641,6 +761,26 @@
   },
   {
     "alternativas": {
+      "a": "fácil → facílimo",
+      "b": "pobre → pobríssimo",
+      "c": "cruel → cruelíssimo",
+      "d": "doce → doceíssimo",
+      "e": "célebre → celebríssimo"
+    },
+    "artigo": "regra do superlativo absoluto sintético irregular (formas eruditas): fácil→facílimo, pobre→paupérrimo, cruel→crudelíssimo, doce→dulcíssimo, célebre→celebérrimo.",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769990+00:00",
+    "enunciado": "Assinale a alternativa que apresenta corretamente o superlativo absoluto sintético (forma erudita) do adjetivo indicado.",
+    "impressao": "bc4230f7da8667a1ab02314ce67fcd4a",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "A recusa do preso em frequentar atividades religiosas constitui falta disciplinar grave.",
       "b": "A administração penitenciária pode proibir a posse de livros sagrados nas celas.",
       "c": "Os presos não poderão ser obrigados a participar de manifestações religiosas.",
@@ -698,6 +838,46 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "\"guarda-roupa\" faz o plural em \"guarda-roupas\", pois apenas o segundo elemento (substantivo) varia.",
+      "b": "\"abaixo-assinado\" faz o plural em \"abaixo-assinados\", pois o advérbio \"abaixo\" também vai para o plural.",
+      "c": "\"segunda-feira\" faz o plural em \"segundas-feiras\", pois os dois elementos, numeral ordinal e substantivo, variam.",
+      "d": "\"mula-sem-cabeça\" faz o plural em \"mulas-sem-cabeças\", pois todos os elementos do composto são flexionáveis.",
+      "e": "\"guarda-chuva\" faz o plural em \"guardas-chuvas\", pois ambos os elementos são substantivos."
+    },
+    "artigo": "regra de flexão do plural dos substantivos compostos: variam os elementos substantivo, adjetivo e numeral; ficam invariáveis o verbo, o advérbio e a preposição do composto.",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769981+00:00",
+    "enunciado": "Sobre a flexão de número dos substantivos compostos, assinale a alternativa correta.",
+    "impressao": "cc44aaaa56e52c6d6fe1b5f8d508dec4",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Ele estuda Letras na universidade.",
+      "b": "Comprei duas casas na praia.",
+      "c": "As crianças brincavam no parque.",
+      "d": "Os livros estavam na estante.",
+      "e": "As portas estavam trancadas."
+    },
+    "artigo": "regra de flexão de número com mudança de sentido: alguns substantivos alteram o significado ao passar para o plural (ex.: \"letra\", unidade gráfica, e \"Letras\", curso/literatura).",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769993+00:00",
+    "enunciado": "Assinale a alternativa em que o substantivo, ao ser flexionado no plural, apresenta mudança de sentido em relação à forma no singular.",
+    "impressao": "d8043709d2eb22e7377edf0511122947",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -798,5 +978,25 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "\"cônjuge\" é substantivo comum de dois gêneros, pois o mesmo vocábulo serve aos dois sexos, distinguidos pelo artigo: \"o cônjuge\" / \"a cônjuge\".",
+      "b": "\"vítima\" é substantivo sobrecomum, pois tem uma forma para o masculino e outra para o feminino.",
+      "c": "\"jacaré\" é substantivo epiceno, porque muda de forma para indicar o sexo do animal: \"jacaré\" / \"jacareia\".",
+      "d": "\"professor\"/\"professora\" são exemplos de substantivos uniformes, pois a forma não se altera para indicar o gênero.",
+      "e": "\"testemunha\" é substantivo biforme, admitindo \"testemunho\" para o masculino com o mesmo sentido."
+    },
+    "artigo": "regra da flexão de gênero dos substantivos: substantivos comuns de dois gêneros (mesma forma, gênero indicado pelo artigo) diferem dos epicenos e dos sobrecomuns (uma só forma, sem indicação de sexo p",
+    "assunto": "Substantivo e adjetivo (flexão nominal, Flexão de gênero, número e grau do substantivo e do adjetivo; plural dos compostos; adjetivo x substantivo pela função na frase.)",
+    "criada_em": "2026-09-28T21:51:36.769987+00:00",
+    "enunciado": "Assinale a alternativa em que a classificação do substantivo quanto ao gênero está correta.",
+    "impressao": "ff4f2c48d5a3f06edf997b2563eec147",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 28/09/2026",
+    "modo": "do_zero",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   }
 ]
