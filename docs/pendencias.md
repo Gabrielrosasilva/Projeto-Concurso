@@ -37,10 +37,15 @@ O que foi observado:
 
 Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
 
-1. gravar assunto e artigo nas questoes FEPESE de Direito, comecando pelas
-   provas de Policia Penal e Agente Penitenciario SC;
-2. um mapa de incidencia por tema (🔥 cai sempre · ⚠ as vezes · 💤 nunca caiu),
-   mostrado em cada faixa; o 💤 vira "leitura por cima, 10 min";
+1. 🟡 gravar assunto e artigo nas questoes FEPESE de Direito, comecando pelas
+   provas de Policia Penal e Agente Penitenciario SC. **Feito na 3A para as
+   170 do alvo** (todas as materias, nao so Direito), pelo Claude Code;
+   **falta a sua conferencia** das 162 validas em Analises > Conferencia. O
+   complementar e da 3B;
+2. 🟡 um mapa de incidencia por tema. **Feito na 3A** (`radar incidencia` e
+   Analises > Incidencia), com os rotulos sem previsao: "apareceu nas 2
+   provas", "apareceu em 1 de 2", "nao apareceu nas provas analisadas". Falta
+   mostra-lo em cada faixa: e da 6B;
 3. 🟡 trocar a lei seca por "artigo cobrado": 10-15 min lendo so os artigos
    que cairam, mais a lista das pegadinhas, cada uma com o numero da questao
    real; o tempo que sobra vai para questoes. **Provisorio feito na 6A
@@ -57,16 +62,36 @@ Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
 roteiro):
 
 1. Quais provas FEPESE com Direito Penal estao no acervo? So a de 2019 da
-   Policia Penal, ou tambem 2013 e 2016?
-2. Quem classifica os assuntos: o Claude Code no VS Code, sem pagar, no mesmo
-   esquema do `gerar --pedido`, ou a mao?
+   Policia Penal, ou tambem 2013 e 2016? (fica para a 3B, que levanta o
+   complementar)
+
+A pergunta 2 (quem classifica) foi respondida na Etapa 0 e feita na 3A: o
+Claude Code, pelo `radar classificar --pedido/--importar`, e voce confere.
 
 As perguntas 3 (versao enxuta agora) e 4 (o Anki continua?) foram respondidas
 e feitas na Etapa 6A: rotina nova a partir de 02/10 e `anki: desativado`.
 
-Sem resposta tambem: **quantas questoes dos arts. 1o a 12 do CP cairam em
-2019?** O banco com as 8.433 questoes mora no meu PC; a copia que a sessao web
-tem esta vazia. Rodar a contagem la, nao chutar.
+**Quantas questoes dos arts. 1o a 12 do CP cairam em 2019?** Respondida na
+3A, por consulta a classificacao: **1** (2019-q51, a correta e o art. 8o; as
+alternativas passam pelos arts. 2o, 3o e 4o). Em 2013 foram 3 (q50, art. 8o;
+q51, art. 7o; q53, art. 2o). As quatro estao pendentes: o programa de 2019
+nao lista "aplicacao da lei penal".
+
+### B.6 🟡 Conferencia da classificacao do alvo (Etapa 3A)
+
+As 170 questoes do alvo estao classificadas pelo Claude Code (146 completas,
+9 parciais, 15 pendentes com motivo). **A 3A so fecha com as 162 validas
+conferidas por voce** em Analises > Conferencia (confirmar, corrigir ou
+pendente). Hoje: 0 de 162.
+
+### B.7 🔴 Erros de extracao nas provas do alvo
+
+O `radar auditar` (Etapa 3A) acusa 25 questoes do alvo com suspeita, listadas
+em `docs/auditoria.md`: o titulo da materia seguinte ou o rodape da FEPESE
+grudado na alternativa "e" (20), a grade de respostas na 2019-q99, o numero
+dentro do enunciado na 2019-q100 e "e cor-" cortado em 2019-q51 a 55. Mais um
+que a verificacao nao pega: a 2013-q20 perdeu a imagem do icone do Excel. O
+texto nao foi corrigido; o conserto e no leitor do caderno (`questoes.py`).
 
 ## C. Telas ainda no CSS antigo (B2 a B7) 🔴
 

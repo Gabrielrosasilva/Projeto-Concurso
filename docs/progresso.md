@@ -13,7 +13,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 4 | 1D — Conferência dos dados gravados | ✅ |
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
-| 7 | 3A — Classificação do alvo e incidência | ⬜ |
+| 7 | 3A — Classificação do alvo e incidência | 🟡 falta a sua conferência das 162 |
 | 8 | 3B — Acervo complementar FEPESE | ⬜ |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
 | 10 | 5 — Geração de questões | ⬜ |
@@ -514,4 +514,124 @@ assuntos no programa; `assuntos.json` vazio). Três pontos, mostrados antes:
   complementar;
 - [x] pendentes listados (`radar conteudos --pendentes`);
 - [x] docs atualizados.
+
+---
+
+## 3A — Classificação do alvo, incidência e padrões (01/10/2026)
+
+- Situação: 🟡 feita, falta a **sua conferência** das 162 válidas
+  (Análises > Conferência). Fecha quando ela terminar.
+- Datas: início 01/10 · fim 01/10 (a minha parte)
+
+**Plano conferido contra o código antes de começar:** válido. Três pontos
+decididos por você antes:
+1. o critério pede as 162 conferidas por você, o que não cabe numa conversa:
+   eu classifico as 170 agora e você confere depois (🟡 até lá);
+2. Meu foco e Onde estudar por nó ficam para a Etapa 4: contar por nó antes
+   da conferência poria classificação não conferida na tela;
+3. as 16 questões de 2013 fora do edital atual ganham assunto proposto (4 de
+   Direito Administrativo foram para Administração Pública, pelo item do
+   edital).
+
+**Mudou no meio, com você:** a primeira importação deu 160 classificações
+principais para 170 questões. A impressão é só do enunciado, e a FEPESE
+repete enunciado genérico ("De acordo com o Código Penal Brasileiro, é cor-"
+em 4 questões de 2019): 16 questões colidiam. A classificação passou a ser
+pela **chave da questão inteira** (enunciado + alternativas), com a migração
+v3, e a resposta foi importada de novo.
+
+**Arquivos alterados.**
+- novos: `src/radar/incidencia.py`, `src/radar/servico/incidencia.py`,
+  `config/amostra.yml`, `src/radar/web/templates/conferencia.html`,
+  `src/radar/web/templates/incidencia.html`;
+- `auditoria.py` — verificações de extração, sem gabarito, classificação por
+  prova; `docs/auditoria.md` regerado;
+- `servico/manual.py` — o tipo de pedido "classificação";
+  `servico/classificacoes.py` — a proposta com as recusas, a conferência, a
+  tela, a chave e o JSON antigo pela impressão; `servico/conteudos.py`
+  (`garantir`, pendentes pela chave); `questoes.py` (`chave_da_questao`);
+- `models.py` (`chave`, `tipo_de_questao`, `pegadinha`), `migracoes.py`
+  (passos 2 e 3); `acervo.py` (o assunto antigo pela chave);
+- `cli.py` — `radar classificar --pedido/--importar`, `radar incidencia
+  [--materia] [--padroes]`; `web/app.py` e `_topo.html` — as abas Incidência
+  e Conferência;
+- dados: `data/classificacoes.json` (170) e `data/conteudos.json` (a árvore
+  com 7 assuntos, 121 subassuntos e 57 elementos novos, todos com origem
+  "classificação" e procedência);
+- testes: `test_classificacao.py`, `test_incidencia.py` (novos), a fixture
+  `tests/fixtures/auditoria/extracao_com_defeitos.json`; acréscimos em
+  `test_auditoria.py`, `test_migracoes.py`, `test_conteudos.py`;
+- `README.md`; docs: `decisoes.md`, `historico.md`, `pendencias.md` (B.1 e
+  B.2 🟡; perguntas respondidas; novas B.6 conferência e B.7 erros de
+  extração), `CLAUDE.md`, este arquivo.
+
+**Testes novos (41).**
+- auditoria: cada verificação pega o defeito feito para ela (8 defeitos, mais
+  uma questão inteira com "Secretaria de Estado" e "Estado de Santa Catarina"
+  que não pode disparar nada); o relatório lista suspeitas, sem gabarito e
+  classificação;
+- importação: recusa sem procedência, sem justificativa (trecho ou item do
+  edital), com assunto fora do edital, com tipo fora da lista, elemento sem
+  subassunto, tipo de elemento de outra família, matéria trocada e questão
+  fora do pedido; pendente fica pendente na matéria, sem nó forçado, e exige
+  motivo; a mesma questão duas vezes; lote errado; fora do edital vai para o
+  edital só justificado ou ganha assunto próprio; a já conferida não é
+  sobrescrita; o pedido sai por matéria só com o alvo (sinônimo de 2013,
+  anuladas marcadas);
+- conferência: confirmar, corrigir e pendente, e a tela gravando e voltando
+  ao mesmo lugar;
+- incidência: anuladas e pendentes fora da conta mas mostradas; a questão
+  conta no nó e nos de cima; o denominador segue as provas da matéria; toda
+  linha leva a amostra; abaixo do mínimo, a frase exata; com a amostra, o
+  padrão aparece; o mapa do banco só conta o alvo (uma prova complementar
+  não muda nada); página e terminal sem "vai cair", "certamente" ou "sempre
+  cobra";
+- chave: o JSON antigo pela impressão vira chave (enunciado repetido vira
+  pendente em cada questão); a migração v3 faz o mesmo no banco.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_auditoria.py` + `test_auditoria_na_tela.py` | 24 passed |
+| `test_classificacao.py`, 1ª rodada | 18 passed, 1 failed (erro do teste: parâmetro com o nome do campo) → 19 passed; com a tela, 1 failed (o `>` escapado como `&gt;`) → 20 passed |
+| `test_migracoes.py` + `test_conteudos.py` com o passo 2 | 28 passed |
+| Depois da troca para a chave | 68 passed (classificação, conteúdos, migrações, auditoria); migração v3, 10 passed |
+| `test_incidencia.py`, 1ª rodada | 7 passed, 2 failed (o teste usou um comando que o `macetes.py` não conhece; e a página dizia "e não o que vai cair" — reescrita) → 9 passed |
+| Suíte inteira, PC (uma vez, no fim) | **1989 passed** (1948 de antes + 41 novos), 18 min |
+
+**Comando real rodado (banco real).**
+- `radar migrar`: v1 → v2 e v2 → v3, cada uma com cópia em `data/copias/` e
+  "Nenhuma linha perdida" (na v3, classificações 169 → 179 pela conversão;
+  depois a reimportação e a limpeza dos 9 artefatos deixaram 170);
+- `radar classificar --pedido`: 13 pedidos, 170 questões; resposta escrita
+  pelo Claude Code; `--importar`: **170 gravadas, 0 recusadas**;
+- classificação do alvo: **146 completas, 9 parciais, 15 pendentes** (todas
+  com motivo: aplicação da lei penal fora do programa de 2019, inquérito
+  policial, LC 472/2009 de 2013, questões que misturam assuntos, uma
+  anulada com o texto truncado). Conferidas: 0 de 162;
+- `radar auditar`: contagem, gabarito e anuladas batem nas 3 provas; 25
+  suspeitas de extração no alvo; a tabela de classificação (2013: 56 / 2 /
+  12; 2019: 90 / 7 / 3);
+- `radar incidencia --materia "Direito Penal" --padroes`: "9 questões · 2
+  provas · apareceu nas 2 provas"; "Tipicidade, ilicitude, culpabilidade,
+  punibilidade: 5 questões · 2 provas"; "Infração penal: elementos,
+  espécies: não apareceu nas provas analisadas"; fora da conta: 4
+  pendentes;
+- `radar web`: Análises > Incidência com as 13 matérias (LEP: "9 questões · 1
+  prova · apareceu na única prova que cobrava a matéria"); Análises >
+  Conferência com "0 de 162" e as 170 questões;
+- **a pergunta dos arts. 1º a 12 do CP:** em 2019, **1 questão** (q51, art.
+  8º; as alternativas passam pelos arts. 2º, 3º e 4º); em 2013, 3 (q50, q51
+  e q53). As quatro pendentes: o tema não está no programa de 2019.
+
+**Critério de conclusão.**
+- [x] `docs/auditoria.md` regerado: extraídas × prova, completa/parcial/
+  pendente, sem gabarito ou inconsistente, anuladas, erros de extração;
+- [x] as 170 questões do alvo classificadas (completa, parcial ou pendente
+  com motivo);
+- [ ] **as 162 válidas conferidas por você** — falta (Análises >
+  Conferência);
+- [x] `radar incidencia` e a página mostram o mapa com a amostra;
+- [x] a pergunta dos arts. 1º a 12 respondida com o número (1 em 2019).
 

@@ -113,8 +113,10 @@ Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 das metricas), a 1D (`radar conferir-dias`; o Bonus de 28 e 29/09 saiu, e
 faixa de questoes com 0 questoes e recusada), a 6A (de 02/10: 14 questoes de
 manha, lei seca dirigida, `anki: desativado`) e a 2 (arvore de conteudos,
-evidencia alvo/complementar/fora, banco na versao 1 com `radar migrar`).
-Proxima: 3A, classificacao do alvo e incidencia.
+evidencia alvo/complementar/fora, banco na versao 1 com `radar migrar`) e a
+3A (as 170 do alvo classificadas pelo Claude Code; mapa de incidencia e
+padroes; banco na versao 3) - **falta a sua conferencia das 162** em
+Analises > Conferencia. Proxima: 3B, acervo complementar FEPESE.
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.
@@ -126,7 +128,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 **Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
 tela nenhuma refaz a conta, e template nenhum soma. **Alvo, complementar e
 fora saem do `servico/evidencia.py`** (uma regra, nunca somados), e tudo que
-aponta para um conteudo usa o caminho do no (`data/conteudos.json`).
+aponta para um conteudo usa o caminho do no (`data/conteudos.json`); a
+classificacao reconhece a questao pela CHAVE (enunciado + alternativas), nunca
+so pela impressao do enunciado.
 Mudanca de estrutura do banco vira passo novo em `migracoes.py`.
 
 ## Fontes de dados

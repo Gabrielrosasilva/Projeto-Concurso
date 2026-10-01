@@ -2463,3 +2463,58 @@ estimava o Anki em 30 min; ele tinha 15 nos dias uteis e 10 no sabado):
    antes de desfazer). Qualquer comando migra sozinho na primeira vez, como as
    colunas novas ja faziam; banco novo nasce na versao atual, sem copia.
 
+## A classificacao do alvo, a incidencia e os padroes (Etapa 3A, 01/10/2026)
+
+1. **A classificacao e pela CHAVE da questao inteira** (enunciado +
+   alternativas, `questoes.chave_da_questao`), e nao pela impressao do
+   enunciado, como a Etapa 2 decidiu. Motivo, achado na classificacao: a
+   FEPESE repete enunciados genericos - "De acordo com o Codigo Penal
+   Brasileiro, e correto" em quatro questoes de 2019 -, e 16 questoes do alvo
+   colidiam. A chave continua achando a mesma questao reaproveitada em outro
+   caderno (escolha sua). Migracao v3: a tabela foi refeita; linha antiga de
+   enunciado repetido virou pendente em cada questao (nao da para saber de
+   qual era). Vale para o `data/classificacoes.json`, que ainda aceita linha
+   antiga com `impressao`. As 9 pendentes desse tipo que a conversao criou em
+   provas do complementar (artefato da importacao errada do mesmo dia) foram
+   apagadas;
+2. **classificacao pelo Claude Code**, pelo `radar classificar --pedido` e
+   `--importar` (decisao 8 da Etapa 0), com a procedencia "Claude Code,
+   importado manualmente, em <data>". A importacao recusa: questao fora do
+   pedido, sem justificativa (trecho e item do edital), assunto fora do edital
+   da materia, tipo fora do `config/taxonomia.yml`, elemento sem subassunto,
+   materia trocada numa materia do edital, e a questao que voce ja conferiu.
+   "Pendente" exige motivo e guarda o dispositivo;
+3. **materia fora do edital atual** (Informatica e Direito Administrativo de
+   2013): vai para um assunto de 2019 so quando o item do edital justifica
+   (4 de Direito Administrativo foram para Administracao Publica); senao ganha
+   assunto proposto debaixo dela, com origem "classificacao" (escolha sua);
+4. **tema fora do programa de 2019 fica pendente**, com o motivo: aplicacao da
+   lei penal (CP, arts. 1o a 12), inquerito policial, e a LC 472/2009 de 2013
+   (o edital de 2019 cobra a LC 675). Nenhum no novo foi criado para eles;
+5. **pendente substituida nao vira associada**: quando uma classificacao real
+   toma o lugar de uma pendente, a pendente sai (ela so dizia "ainda sem
+   classificacao"). Uma real substituida continua como associada;
+6. **conferencia em Analises > Conferencia**: confirmar (marca a data),
+   corrigir (outro no da materia; a procedencia vira "manual") ou pendente
+   (com o meu motivo). A 3A so fecha com as 162 validas conferidas;
+7. **o mapa de incidencia** (`incidencia.py`, puro): so o alvo; a questao conta
+   no no da classificacao principal e nos de cima; anulada e pendente ficam
+   fora e aparecem com o numero; o denominador e o numero de provas em que a
+   materia teve questao (LEP: 1, "apareceu na unica prova que cobrava a
+   materia"). Os rotulos: "apareceu nas 2 provas", "apareceu em 1 de 2
+   provas", "nao apareceu nas provas analisadas". Nenhum "vai cair";
+8. **padroes de cobranca** por no: forma de perguntar, gabarito e termos (do
+   `macetes.py`, uma por questao pela chave), tipo de questao e pegadinhas da
+   classificacao, sempre como "padrao identificado no acervo analisado: N
+   questoes · M provas · alvo". Abaixo do minimo do `config/amostra.yml`
+   (3 questoes em 2 provas), a frase exata "Nao ha evidencia suficiente no
+   acervo para afirmar isso.";
+9. **Meu foco e Onde estudar continuam como estavam** ate a Etapa 4 (escolha
+   sua): contar por no antes da sua conferencia poria classificacao nao
+   conferida na tela como numero;
+10. **auditoria ampliada**: verificacoes de extracao (enunciado curto, letras
+    fora de a-e, alternativa vazia, cabecalho/rodape no texto, numero da
+    questao no enunciado, figura citada, palavra cortada no fim), calibradas
+    nas 170 sem disparar em texto legitimo; sem gabarito; e a classificacao
+    por prova. O texto das questoes nao foi corrigido (pendencia B.7).
+

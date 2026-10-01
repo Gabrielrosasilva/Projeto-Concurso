@@ -1412,6 +1412,29 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
   provado, a prova nao e do alvo), e o `test_sincronizar` ganhou os dois JSON
   novos.
 
+## Etapa 3A do pedido de evolucao: classificacao do alvo, incidencia e padroes (01/10)
+
+- antes de implementar, tres decisoes suas: classificar as 170 agora e voce
+  conferir depois (a 3A fica 🟡); Meu foco e Onde estudar por no so na Etapa
+  4; materia fora do edital ganha assunto proposto;
+- auditoria ampliada e `docs/auditoria.md` regerado: 25 questoes do alvo com
+  suspeita de extracao (o titulo da materia seguinte grudado na alternativa
+  "e", a grade de respostas na 2019-q99...), nenhuma sem gabarito, e a
+  classificacao por prova;
+- o tipo de pedido "classificacao" no `manual.py`, o `radar classificar`, a
+  importacao que recusa, a tela de conferencia; migracoes v2 (tipo de questao
+  e pegadinha) e v3 (a chave);
+- as 170 classificadas pelo Claude Code lendo enunciado, alternativas e
+  gabarito: 146 completas, 9 parciais, 15 pendentes com motivo; 7 assuntos,
+  121 subassuntos e 57 elementos novos na arvore, com procedencia;
+- no meio, a primeira importacao mostrou 160 principais para 170 questoes:
+  a impressao (so do enunciado) juntava questoes diferentes. A chave passou a
+  ser a questao inteira (decidido com voce), a migracao v3 refez a tabela e a
+  resposta foi importada de novo;
+- `incidencia.py`, `radar incidencia` e Analises > Incidencia; os padroes por
+  no com o minimo do `config/amostra.yml`;
+- a pergunta dos arts. 1o a 12 do CP: 1 questao em 2019, 3 em 2013.
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e
