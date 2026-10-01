@@ -249,6 +249,7 @@ templates.env.globals.update(
     OPCOES_DE_META=OPCOES_DE_META, DETALHE_ABERTO=DETALHE_ABERTO,
     DIAS_LONGOS=DIAS_LONGOS, MESES=cronograma.MESES,
     TIPO_LEGIVEL=cronograma.TIPO_LEGIVEL, ICONE_DO_TIPO=cronograma.ICONE_DO_TIPO,
+    FRASE_DO_ANKI_DESATIVADO=cronograma.FRASE_DO_ANKI_DESATIVADO,
     duracao_legivel=cronograma.duracao_legivel,
     rotulo_da_lei=rotulo_da_lei,
     tempo_do_plano_b=tempo_do_plano_b,

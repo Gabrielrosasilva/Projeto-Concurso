@@ -187,6 +187,10 @@ def _faixa_para_marcar(data: date, bloco: str, indice: int, titulo: str,
         )
     if faixa.tipo == "pausa":
         raise RegistroInvalido("Pausa não se marca.")
+    if faixa.desligada:
+        raise RegistroInvalido(
+            f"{plano_de_estudo.FRASE_DO_ANKI_DESATIVADO}: a faixa não se marca."
+        )
     return faixa
 
 
@@ -469,7 +473,7 @@ def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
     """
     def contam(bloco):
         return [(bloco, i) for i, f in enumerate(getattr(dia, bloco))
-                if f.tipo != "pausa" and not f.opcional]
+                if f.tipo != "pausa" and not f.opcional and not f.desligada]
 
     def faixa(posicao):
         bloco, indice = posicao
@@ -871,9 +875,12 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
     for chave in plano_de_estudo.BLOCOS:
         faixas = getattr(dia, chave)
         bloco = BlocoNaTela(chave, plano.blocos[chave].nome, faixas)
-        if faixas:
-            bloco.inicio, bloco.fim = faixas[0].inicio, faixas[-1].fim
-            bloco.questoes = sum(f.questoes or 0 for f in faixas if not f.opcional)
+        # O horario do bloco sai das faixas que valem: o Anki desligado nao
+        # tem duracao, e um bloco so com ele fica sem horario.
+        ativas = [f for f in faixas if not f.desligada]
+        if ativas:
+            bloco.inicio, bloco.fim = ativas[0].inicio, ativas[-1].fim
+            bloco.questoes = sum(f.questoes or 0 for f in ativas if not f.opcional)
         tela.blocos.append(bloco)
 
     noite = dia.noite or dia.faixas()

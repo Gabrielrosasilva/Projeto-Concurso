@@ -555,6 +555,21 @@ chave. O que importa saber:
 Confira com `radar hoje --data AAAA-MM-DD` depois de editar. O Ciclo 2 entra
 trocando este arquivo.
 
+#### Religar o Anki
+
+O Anki esta **desativado** desde 02/10/2026: no topo do
+`config/cronograma.yml` esta `anki: desativado`. As 36 faixas `tipo: anki` e os
+30 `baralho` continuam no arquivo; desativado, a faixa vira a linha
+"ANKI temporariamente desativado" (sem horario, sem circulo, fora do total e da
+sugestao de meta) e o chip do baralho some.
+
+Para religar: troque a linha para `anki: ativado` e rode `radar hoje` para
+conferir. Nada mais - a faixa volta com o horario dela, o Bonus volta a comecar
+depois dela, e os baralhos reaparecem. Dois textos foram reescritos de 02/10 em
+diante e nao voltam sozinhos: a lei seca dirigida nao manda mais "transformar
+em cartoes do Anki", e o item (3) da revisao semanal virou "releia os
+artigos-chave da semana".
+
 #### As materias do edital, e a minha meta
 
 O bloco `materias` e a prova: quantas questoes cada materia tem (numeros do
@@ -621,9 +636,12 @@ curto: **fiz [15] · acertei [__]** e a caixa **com consulta**.
   que aconteceu: eu fiz e nao anotei quantas acertei. Contar como zero seria
   mentira;
 - **"com consulta"** ja vem MARCADA na faixa de aprendizagem de Direito (o
-  detalhe dela diz "PODE consultar a lei") e desmarcada nas outras. Questao com
-  a lei aberta treina, e **fica fora da comparacao com a meta**: na prova nao
-  ha lei aberta;
+  detalhe dela diz "PODE consultar a lei") e na fixacao da manha (8 questoes
+  logo depois da teoria), e desmarcada nas outras. Quem manda e a chave
+  `consulta: true` da faixa no `config/cronograma.yml`; sem ela, so a `rampa:
+  direito` vem marcada. Questao com a lei aberta treina, e **fica fora da
+  comparacao com a meta**: na prova nao ha lei aberta;
+- **0 questoes nao e faixa feita**: se nao fez nenhuma, desmarque;
 - faixa feita mostra **"11 de 15 · 73%"** ao lado do titulo, e o formulario
   recolhe num "corrigir os numeros", com um **desmarcar** ao lado.
 

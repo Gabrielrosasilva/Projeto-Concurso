@@ -500,8 +500,12 @@ def test_a_faixa_de_questoes_tem_o_botao_de_anotar_com_tudo_pronto(cliente):
 def test_a_teoria_da_manha_nao_tem_o_botao(cliente):
     """Anotar erro so onde eu respondo questao: na teoria nao ha o que errar."""
     texto = cliente.get("/hoje?data=2026-10-20").text
-    manha = texto.split('id="bloco-manha"')[1].split('id="bloco-noite"')[0]
-    assert "Anotar erro" not in manha
+    # Desde a 6A a manha tem questoes (a fixacao, logo depois da teoria): o
+    # botao aparece nelas, e continua fora da teoria.
+    teoria = texto.split('id="faixa-manha-0"')[1].split('id="faixa-manha-1"')[0]
+    fixacao = texto.split('id="faixa-manha-1"')[1].split('id="faixa-manha-2"')[0]
+    assert "Teoria" in teoria and "Anotar erro" not in teoria
+    assert "Fixação:" in fixacao and "Anotar erro" in fixacao
 
 
 def test_o_sabado_abre_os_erros_da_semana(cliente):

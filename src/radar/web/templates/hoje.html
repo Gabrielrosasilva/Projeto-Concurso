@@ -269,6 +269,7 @@
     /* Feita: o conteudo apaga e o titulo e riscado, mas continua legivel -
        ainda posso querer ler o detalhe. */
     .faixa.feita .corpo{opacity:.55}
+    .faixa-desligada{list-style:none;padding:var(--esp-1) 0;color:var(--cor-texto-suave);font-size:.85rem}
     .faixa.feita .titulo{text-decoration:line-through}
 
     /* --- o Plano B --- */
@@ -760,6 +761,13 @@
       </div>
       <ol class="linha-tempo">
         {% for f in b.faixas %}
+          {# O Anki com `anki: desativado`: so a linha minimizada, sem horario,
+             sem circulo. Fica na lista para as posicoes dos checks nao mudarem. #}
+          {% if f.desligada %}
+          <li class="faixa-desligada" id="faixa-{{ b.chave }}-{{ loop.index0 }}">
+            <span aria-hidden="true">{{ ICONE_DO_TIPO[f.tipo] }}</span> {{ FRASE_DO_ANKI_DESATIVADO }}
+          </li>
+          {% else %}
           {% set atual = t.agora and t.agora.atual is sameas f %}
           {% set passou = t.hora and f.fim and f.fim <= t.hora %}
           {% set feita = (b.chave, loop.index0) in t.feitas %}
@@ -918,6 +926,7 @@
               {% endif %}
             {% endif %}
           </li>
+          {% endif %}
         {% endfor %}
       </ol>
     </section>

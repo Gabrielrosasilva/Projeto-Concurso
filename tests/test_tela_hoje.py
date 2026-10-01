@@ -250,7 +250,7 @@ def test_olhando_o_futuro_vale_a_carga_do_plano(cliente, monkeypatch):
     _parar_o_relogio(monkeypatch, 2026, 9, 26, 12, 0)
     t = servico.cronograma.tela_do_dia(date(2026, 10, 28))
     assert (t.nivel.efetivo, t.nivel.situacao) == (5, "futura")
-    assert t.dia.total_questoes == 60
+    assert t.dia.total_questoes == 74          # 60 + as 14 da manha (6A)
     assert t.fim_do_dia.strftime("%H:%M") == "21:15"
     situacoes = {n.situacao for n in _niveis_vistos_de(cronograma.carregar(),
                                                         date(2026, 10, 28)).values()}

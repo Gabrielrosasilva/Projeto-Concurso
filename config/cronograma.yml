@@ -25,7 +25,13 @@
 #   cronometrado - true = a faixa e feita com cronometro. Vira o chip
 #                 "⏱ cronometrado" na tela; nao muda horario nem conta.
 #   baralho     - o baralho do Anki ligado a teoria do dia (ex.: "[3] LEP").
-#                 So exibicao.
+#                 So exibicao, e some com `anki: desativado`.
+#   consulta    - true = a caixa "com consulta" ja vem marcada na faixa (a
+#                 fixacao da manha). Sem a chave, so a `rampa: direito` vem
+#                 marcada. Questao com consulta fica fora da meta.
+#   anki        - no TOPO do arquivo: ativado | desativado. Desativado, as
+#                 faixas `tipo: anki` viram a linha "ANKI temporariamente
+#                 desativado", sem horario e fora do total.
 #   feriado     - no nivel do DIA, o nome do feriado (ex.: "Feriado
 #                 (Finados)"). Vira um chip laranja no cabecalho. Para o
 #                 gatilho, feriado feito como minima ou melhor conta como
@@ -70,6 +76,11 @@ ciclo: 1
 titulo: Ciclo 1 — a base
 inicio: '2026-09-28'
 fim: '2026-11-07'
+# O Anki esta DESATIVADO (Etapa 6A, 01/10/2026): as faixas `tipo: anki` e os
+# `baralho` continuam aqui, mas somem do dia, do total e da sugestao de meta;
+# no lugar fica a linha "ANKI temporariamente desativado". Para religar, troque
+# para `anki: ativado` - nada mais.
+anki: desativado
 meta_da_prova:
   acertos: 79
   corte_2019_ultima_vaga: 7.1
@@ -82,7 +93,7 @@ blocos:
     nome: Noite — questões
     inicio: '18:00'
   pos22:
-    nome: Depois das 22h — Anki
+    nome: Depois das 22h
     inicio: '22:00'
 minutos_por_questao: 2.5
 rampa:
@@ -554,38 +565,55 @@ dias:
       porque: Liberdade de culto; nenhum preso é obrigado a participar de atividade religiosa.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Assistência ao preso e ao egresso (arts. 10 a 27)
-    detalhe: 'Assistência como dever do Estado (art. 10); as espécies (art. 11): material (arts. 12 e 13), saúde
-      (art. 14, inclusive pré-natal e pós-parto da mulher presa), jurídica e Defensoria (arts. 15 e 16), educacional
-      - ensino fundamental obrigatório e ensino médio (arts. 17 a 21-A), social (arts. 22 e 23), religiosa (art.
-      24); quem e EGRESSO (art. 26: liberado definitivo por 1 ano a contar da saída, e o liberado condicional durante
-      o período de prova) e sua assistência (arts. 25 e 27).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Assistência como dever do Estado
+      (art. 10); as espécies (art. 11): material (arts. 12 e 13), saúde (art. 14, inclusive pré-natal e pós-parto
+      da mulher presa), jurídica e Defensoria (arts. 15 e 16), educacional - ensino fundamental obrigatório e ensino
+      médio (arts. 17 a 21-A), social (arts. 22 e 23), religiosa (art. 24); quem e EGRESSO (art. 26: liberado definitivo
+      por 1 ano a contar da saída, e o liberado condicional durante o período de prova) e sua assistência (arts.
+      25 e 27).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Assistência ao preso e ao egresso (arts. 10 a 27)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > assistência ao preso e ao egresso
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 10 a 27'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 10; LEP art. 11; LEP art. 26'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Verbo 2: emprego dos tempos e modos'
     detalhe: Indicativo (certeza), subjuntivo (hipótese) e imperativo (ordem); correlação verbal ('se eu fosse...
       eu faria'); futuro do subjuntivo de ver/vir/por ('quando eu vir', 'se ele vier').
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Verbo 2: emprego dos tempos e modos'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: questoes
     rampa: direito
@@ -642,7 +670,7 @@ dias:
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) zere o Anki atrasado.
+      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   noite:
   - tipo: diagnostico
     questoes: 20
@@ -689,37 +717,54 @@ dias:
         a responsabilidade de impedir o resultado; c) criou o risco com o seu comportamento anterior.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Penal
     titulo: Fato típico e nexo causal (art. 13)
-    detalhe: 'Conceito analítico de crime (fato típico + ilícito + culpável); elementos do fato típico: conduta,
-      resultado, nexo causal e tipicidade; relação de causalidade e teoria da equivalência (art. 13, caput); superveniência
-      de causa relativamente independente (art. 13, § 1º); OMISSÃO penalmente relevante e o DEVER DE AGIR do garantidor
-      (art. 13, § 2º, alíneas a, b e c) - é o artigo que alcança quem tem o preso sob sua custódia.'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Conceito analítico de crime (fato
+      típico + ilícito + culpável); elementos do fato típico: conduta, resultado, nexo causal e tipicidade; relação
+      de causalidade e teoria da equivalência (art. 13, caput); superveniência de causa relativamente independente
+      (art. 13, § 1º); OMISSÃO penalmente relevante e o DEVER DE AGIR do garantidor (art. 13, § 2º, alíneas a, b
+      e c) - é o artigo que alcança quem tem o preso sob sua custódia.'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
     baralho: '[1] Direito Penal'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Penal
+    titulo: 'Fixação: Fato típico e nexo causal (art. 13)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Penal
-    titulo: 'Lei seca: Código Penal, art. 13 e parágrafos'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CP art. 13, caput; CP art. 13, § 1º; CP art. 13, § 2º'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: Vozes do verbo
     detalhe: Voz ativa, passiva ANALÍTICA (ser + particípio), passiva SINTÉTICA (VTD + se), reflexiva; conversão
       ativa <-> passiva mantendo o tempo verbal.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Vozes do verbo'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -774,11 +819,11 @@ dias:
     - artigos: CF art. 5º, XLIII
       porque: 'Tortura, tráfico, terrorismo e hediondos: inafiançáveis e insuscetíveis de graça ou anistia.'
     - artigos: CF art. 5º, XLVII
-      porque: Não haverá pena de morte (salvo guerra declarada), perpétua, de trabalhos forçados, de banimento
-        ou cruel.
+      porque: Não haverá pena de morte (salvo guerra declarada), perpétua, de trabalhos forçados, de banimento ou
+        cruel.
     - artigos: CF art. 5º, XLVIII e XLIX
-      porque: Pena cumprida em estabelecimento distinto conforme delito, idade e sexo; respeito à integridade
-        física e moral do preso.
+      porque: Pena cumprida em estabelecimento distinto conforme delito, idade e sexo; respeito à integridade física
+        e moral do preso.
     apoio:
     - artigos: CF art. 5º, XL
       porque: A lei penal não retroage, salvo para beneficiar o réu.
@@ -788,40 +833,57 @@ dias:
       porque: Nenhuma pena passará da pessoa do condenado.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Constitucional
     titulo: Art. 5º, incisos XVII a XLIX
-    detalhe: 'Associação (XVII a XXI); propriedade e função social (XXII a XXVI); inafastabilidade do Judiciário
-      (XXXV); direito adquirido, ato jurídico perfeito e coisa julgada (XXXVI); júri (XXXVIII); legalidade e anterioridade
-      penal (XXXIX); lei penal só retroage para beneficiar (XL); racismo inafiançável e imprescritível (XLII); tortura,
-      tráfico, terrorismo e hediondos: inafiançáveis e insuscetíveis de graça ou anistia (XLIII); pessoalidade e
-      individualização da pena (XLV e XLVI); penas proibidas - morte (salvo guerra declarada), perpétua, trabalhos
-      forçados, banimento e cruéis (XLVII); pena cumprida em estabelecimentos distintos por natureza do delito,
-      idade e sexo (XLVIII); integridade física e moral do PRESO (XLIX).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Associação (XVII a XXI); propriedade
+      e função social (XXII a XXVI); inafastabilidade do Judiciário (XXXV); direito adquirido, ato jurídico perfeito
+      e coisa julgada (XXXVI); júri (XXXVIII); legalidade e anterioridade penal (XXXIX); lei penal só retroage para
+      beneficiar (XL); racismo inafiançável e imprescritível (XLII); tortura, tráfico, terrorismo e hediondos: inafiançáveis
+      e insuscetíveis de graça ou anistia (XLIII); pessoalidade e individualização da pena (XLV e XLVI); penas proibidas
+      - morte (salvo guerra declarada), perpétua, trabalhos forçados, banimento e cruéis (XLVII); pena cumprida
+      em estabelecimentos distintos por natureza do delito, idade e sexo (XLVIII); integridade física e moral do
+      PRESO (XLIX).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[2] Constitucional'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Constitucional
+    titulo: 'Fixação: Art. 5º, incisos XVII a XLIX'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Constitucional > direitos e deveres individuais e coletivos
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Constitucional
-    titulo: 'Lei seca: Constituição Federal, art. 5º, XVII a XLIX'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 5º, XLIII; CF art. 5º, XLVII; CF art. 5º, XLVIII e XLIX'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Concordância verbal 1: regra geral'
     detalhe: Verbo concorda com o núcleo do sujeito; sujeito composto anteposto e posposto; núcleos ligados por
       'ou', 'nem', 'com'; sujeito coletivo.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Concordância verbal 1: regra geral'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -889,38 +951,55 @@ dias:
         na obra.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Trabalho do preso (arts. 28 a 37)
-    detalhe: 'Trabalho como dever social e condição de dignidade, fora da CLT (art. 28); remuneração de no mínimo
-      3/4 do salário mínimo e sua destinação (art. 29); trabalho interno OBRIGATÓRIO para o condenado a pena privativa
-      de liberdade e FACULTATIVO para o preso provisório (art. 31); jornada de 6 a 8 horas, com descanso nos domingos
-      e feriados (art. 33); trabalho externo: no fechado, só em serviço ou obra pública, com cautelas e limite de
-      10% de presos na obra (art. 36); autorizado pela direção, exige 1/6 da pena cumprida (art. 37).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Trabalho como dever social e condição
+      de dignidade, fora da CLT (art. 28); remuneração de no mínimo 3/4 do salário mínimo e sua destinação (art.
+      29); trabalho interno OBRIGATÓRIO para o condenado a pena privativa de liberdade e FACULTATIVO para o preso
+      provisório (art. 31); jornada de 6 a 8 horas, com descanso nos domingos e feriados (art. 33); trabalho externo:
+      no fechado, só em serviço ou obra pública, com cautelas e limite de 10% de presos na obra (art. 36); autorizado
+      pela direção, exige 1/6 da pena cumprida (art. 37).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Trabalho do preso (arts. 28 a 37)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > trabalho do preso
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 28 a 37'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 29; LEP art. 31; LEP art. 33; LEP art. 37'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Concordância verbal 2: casos especiais'
     detalhe: HAVER e FAZER impessoais (sempre no singular); verbo + SE (passiva sintética concorda; índice de indeterminação
       fica no singular); 'que' e 'quem'; 'a maioria de'; porcentagem; verbo SER.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Concordância verbal 2: casos especiais'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -973,8 +1052,8 @@ dias:
   essencial:
     chave:
     - artigos: Conceito
-      porque: 'Dimensões: 1ª liberdade (civis e políticos), 2ª igualdade (sociais, econômicos e culturais), 3ª
-        fraternidade (difusos: paz, meio ambiente).'
+      porque: 'Dimensões: 1ª liberdade (civis e políticos), 2ª igualdade (sociais, econômicos e culturais), 3ª fraternidade
+        (difusos: paz, meio ambiente).'
     - artigos: Marcos
       porque: Magna Carta (1215), Declaração dos Direitos do Homem e do Cidadão (1789) e DUDH (1948).
     apoio:
@@ -982,36 +1061,52 @@ dias:
       porque: 'Constituição Mexicana (1917) e de Weimar (1919): as primeiras com direitos sociais.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direitos Humanos
     titulo: Afirmação histórica e dimensões (gerações)
-    detalhe: 'Marcos: Magna Carta (1215), Petition of Rights (1628), Bill of Rights inglês (1689), Declaração de
-      Virgínia e Independência dos EUA (1776), Declaração dos Direitos do Homem e do Cidadão (1789), Constituição
-      Mexicana (1917) e de Weimar (1919), ONU (1945) e DUDH (1948). Dimensões: 1ª LIBERDADE (civis e políticos),
-      2ª IGUALDADE (sociais, econômicos e culturais), 3ª FRATERNIDADE (difusos: paz, meio ambiente), 4ª e 5ª (debate
-      doutrinário).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Marcos: Magna Carta (1215), Petition
+      of Rights (1628), Bill of Rights inglês (1689), Declaração de Virgínia e Independência dos EUA (1776), Declaração
+      dos Direitos do Homem e do Cidadão (1789), Constituição Mexicana (1917) e de Weimar (1919), ONU (1945) e DUDH
+      (1948). Dimensões: 1ª LIBERDADE (civis e políticos), 2ª IGUALDADE (sociais, econômicos e culturais), 3ª FRATERNIDADE
+      (difusos: paz, meio ambiente), 4ª e 5ª (debate doutrinário).'
     onde: videoaula
     baralho: '[4] Direitos Humanos'
+  - tipo: questoes
+    questoes: 8
+    materia: Direitos Humanos
+    titulo: 'Fixação: Afirmação histórica e dimensões (gerações)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direitos Humanos
-    titulo: 'Lei seca: DUDH, arts. 6º a 30 (leitura corrida, marcando o que fala de preso, julgamento e tortura)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: Conceito; Marcos'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Interpretação 2: tipos de texto'
     detalhe: Narração, descrição e dissertação; gêneros (crônica, notícia, artigo de opinião); ideia central x ideias
       secundárias; tese e argumentos.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Interpretação 2: tipos de texto'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1077,40 +1172,56 @@ dias:
       porque: Os deveres e direitos valem, no que couber, para o preso provisório e o submetido a medida de segurança.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Deveres e direitos do preso (arts. 38 a 43)
-    detalhe: 'Deveres (art. 39): comportamento disciplinado, obediência ao servidor, urbanidade, conduta contra
-      fugas e subversão, trabalho, higiene, indenização a vítima e ao Estado, conservação dos objetos. Direitos
-      (art. 41): alimentação, vestuário, trabalho remunerado, previdência, pecúlio, atividades, assistência, proteção
-      contra o sensacionalismo, entrevista com advogado, VISITA do cônjuge, companheira, parentes e amigos, chamamento
-      nominal, audiência com o diretor, contato com o mundo exterior, atestado de pena a cumprir. O diretor pode
-      SUSPENDER ou RESTRINGIR por ato motivado os incisos V, X e XV (art. 41, parágrafo único). Preso provisório
-      e internado (arts. 42 e 43).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Deveres (art. 39): comportamento
+      disciplinado, obediência ao servidor, urbanidade, conduta contra fugas e subversão, trabalho, higiene, indenização
+      a vítima e ao Estado, conservação dos objetos. Direitos (art. 41): alimentação, vestuário, trabalho remunerado,
+      previdência, pecúlio, atividades, assistência, proteção contra o sensacionalismo, entrevista com advogado,
+      VISITA do cônjuge, companheira, parentes e amigos, chamamento nominal, audiência com o diretor, contato com
+      o mundo exterior, atestado de pena a cumprir. O diretor pode SUSPENDER ou RESTRINGIR por ato motivado os incisos
+      V, X e XV (art. 41, parágrafo único). Preso provisório e internado (arts. 42 e 43).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Deveres e direitos do preso (arts. 38 a 43)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > deveres e direitos do preso
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 38 a 43 (o art. 41 inteiro, duas vezes)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 39; LEP art. 41; LEP art. 41, parágrafo único'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: Concordância nominal
     detalhe: Adjetivo com varios substantivos; ANEXO, INCLUSO, OBRIGADO e MESMO (concordam); MEIO, BASTANTE e MENOS
       (quando variam); 'e proibido' x 'e proibida a entrada'.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Concordância nominal'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1175,7 +1286,7 @@ dias:
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) zere o Anki atrasado.
+      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5
@@ -1228,45 +1339,61 @@ dias:
       porque: Dolo direto e eventual; culpa por imprudência, negligência ou imperícia.
     apoio:
     - artigos: CP art. 16
-      porque: 'Arrependimento posterior: sem violência ou grave ameaça, reparou até o recebimento da denúncia,
-        pena reduzida de 1 a 2/3.'
+      porque: 'Arrependimento posterior: sem violência ou grave ameaça, reparou até o recebimento da denúncia, pena
+        reduzida de 1 a 2/3.'
     - artigos: CP art. 17
       porque: 'Crime impossível: meio absolutamente ineficaz ou objeto absolutamente impróprio.'
     - artigos: CP arts. 20 e 21
       porque: Erro de tipo exclui o dolo; erro de proibição inevitável isenta de pena, evitável diminui.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Penal
     titulo: Tentativa, dolo, culpa e erro (arts. 14 a 21)
-    detalhe: Crime consumado e tentado, e a pena da tentativa (art. 14); desistência voluntária e arrependimento
-      eficaz (art. 15); arrependimento posterior (art. 16); crime impossível (art. 17); dolo direto e eventual;
-      culpa - imprudência, negligência e imperícia (art. 18); crime qualificado pelo resultado (art. 19); erro de
-      tipo (art. 20) e erro de proibição (art. 21).
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Crime consumado e tentado, e a
+      pena da tentativa (art. 14); desistência voluntária e arrependimento eficaz (art. 15); arrependimento posterior
+      (art. 16); crime impossível (art. 17); dolo direto e eventual; culpa - imprudência, negligência e imperícia
+      (art. 18); crime qualificado pelo resultado (art. 19); erro de tipo (art. 20) e erro de proibição (art. 21).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
     baralho: '[1] Direito Penal'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Penal
+    titulo: 'Fixação: Tentativa, dolo, culpa e erro (arts. 14 a 21)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Penal > iter criminis, tentativa, dolo e culpa, erro de tipo e de proibição
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Penal
-    titulo: 'Lei seca: Código Penal, arts. 14 a 21'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CP art. 14; CP art. 15; CP art. 18'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Crase 1: regra geral e casos obrigatórios'
     detalhe: A (preposição) + A (artigo) = À; verbos e nomes que exigem 'a'; locuções femininas ('às pressas', 'à
       noite'); 'à moda de'; indicação de HORAS ('às 8h').
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Crase 1: regra geral e casos obrigatórios'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1334,40 +1461,57 @@ dias:
       porque: Tratado de direitos humanos aprovado em 2 turnos por 3/5 em cada Casa equivale a emenda.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Constitucional
     titulo: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)
-    detalhe: 'Presidiárias e amamentação (L); devido processo legal, contraditório e ampla defesa (LIV e LV); provas
-      ilícitas (LVI); presunção de inocência (LVII); prisão só em flagrante ou por ordem judicial (LXI); comunicação
-      da prisão ao juiz e a família, direito ao silêncio e a identificação dos responsáveis pela prisão (LXII a
-      LXIV); relaxamento da prisão ilegal (LXV); liberdade provisória (LXVI); prisão civil só do devedor de alimentos
-      (LXVII); REMÉDIOS: habeas corpus (LXVIII), mandado de segurança (LXIX e LXX), mandado de injunção (LXXI),
-      habeas data (LXXII), ação popular (LXXIII); razoável duração do processo (LXXVIII); tratados de direitos humanos
-      com força de emenda (§ 3º); Tribunal Penal Internacional (§ 4º).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Presidiárias e amamentação (L);
+      devido processo legal, contraditório e ampla defesa (LIV e LV); provas ilícitas (LVI); presunção de inocência
+      (LVII); prisão só em flagrante ou por ordem judicial (LXI); comunicação da prisão ao juiz e a família, direito
+      ao silêncio e a identificação dos responsáveis pela prisão (LXII a LXIV); relaxamento da prisão ilegal (LXV);
+      liberdade provisória (LXVI); prisão civil só do devedor de alimentos (LXVII); REMÉDIOS: habeas corpus (LXVIII),
+      mandado de segurança (LXIX e LXX), mandado de injunção (LXXI), habeas data (LXXII), ação popular (LXXIII);
+      razoável duração do processo (LXXVIII); tratados de direitos humanos com força de emenda (§ 3º); Tribunal
+      Penal Internacional (§ 4º).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[2] Constitucional'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Constitucional
+    titulo: 'Fixação: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Constitucional > remédios constitucionais e garantias processuais
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Constitucional
-    titulo: 'Lei seca: Constituição Federal, art. 5º, L a LXXVIII e § 1º a 4º'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 5º, LXI; CF art. 5º, LXII a LXIV; CF art. 5º, LXVIII'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Crase 2: proibida, facultativa e casos especiais'
     detalhe: NUNCA antes de masculino, verbo, pronome pessoal e 'a' singular antes de plural; FACULTATIVA antes
       de possessivo feminino, nome de mulher e depois de 'até'; CASA, TERRA e DISTÂNCIA.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Crase 2: proibida, facultativa e casos especiais'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1422,8 +1566,8 @@ dias:
     - artigos: LEP art. 50
       porque: As faltas graves do condenado à pena privativa de liberdade, inclusive o celular (VII).
     - artigos: LEP art. 52
-      porque: 'RDD: até 2 anos, cela individual, visitas quinzenais de 2 pessoas por 2 horas, 2 horas diárias
-        de banho de sol.'
+      porque: 'RDD: até 2 anos, cela individual, visitas quinzenais de 2 pessoas por 2 horas, 2 horas diárias de
+        banho de sol.'
     - artigos: LEP art. 49
       porque: Faltas leves e médias ficam para a lei local; as graves estão na LEP.
     apoio:
@@ -1433,40 +1577,57 @@ dias:
       porque: Faltas graves de quem cumpre pena restritiva de direitos.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Disciplina, faltas graves e RDD (arts. 44 a 52)
-    detalhe: 'Disciplina (art. 44); legalidade das faltas e sanções, vedadas a cela escura e a sanção coletiva (art.
-      45); faltas leves e medias ficam para a lei local, graves estão na LEP (art. 49); FALTAS GRAVES (art. 50):
-      movimento para subverter a ordem, fuga, possuir instrumento capaz de ofender, provocar acidente de trabalho,
-      descumprir as condições do aberto, não obedecer ao servidor ou não trabalhar, ter, usar ou fornecer APARELHO
-      TELEFÔNICO, de rádio ou similar (VII), recusar a identificação do perfil genético (VIII); faltas nas restritivas
-      de direitos (art. 51); REGIME DISCIPLINAR DIFERENCIADO (art. 52, redação da Lei 13.964/2019): até 2 ANOS,
-      cela individual, visitas QUINZENAIS de 2 pessoas por 2 horas, banho de sol de 2 horas diárias.'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Disciplina (art. 44); legalidade
+      das faltas e sanções, vedadas a cela escura e a sanção coletiva (art. 45); faltas leves e medias ficam para
+      a lei local, graves estão na LEP (art. 49); FALTAS GRAVES (art. 50): movimento para subverter a ordem, fuga,
+      possuir instrumento capaz de ofender, provocar acidente de trabalho, descumprir as condições do aberto, não
+      obedecer ao servidor ou não trabalhar, ter, usar ou fornecer APARELHO TELEFÔNICO, de rádio ou similar (VII),
+      recusar a identificação do perfil genético (VIII); faltas nas restritivas de direitos (art. 51); REGIME DISCIPLINAR
+      DIFERENCIADO (art. 52, redação da Lei 13.964/2019): até 2 ANOS, cela individual, visitas QUINZENAIS de 2 pessoas
+      por 2 horas, banho de sol de 2 horas diárias.'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Disciplina, faltas graves e RDD (arts. 44 a 52)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > disciplina, faltas disciplinares e regime disciplinar diferenciado
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 44 a 52 (o 50 e o 52 inteiros, duas vezes)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 50; LEP art. 52; LEP art. 49'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Pontuação 1: vírgula entre termos'
     detalhe: Nunca separe sujeito do verbo nem verbo do complemento; vírgula no aposto, no vocativo, no adjunto
       adverbial deslocado e na enumeração.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Pontuação 1: vírgula entre termos'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1529,39 +1690,55 @@ dias:
       porque: O Estado responde internacionalmente pelos atos dos seus agentes.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direitos Humanos
     titulo: Sistemas de proteção e responsabilidade do Estado
-    detalhe: 'Sistema global (ONU): DUDH, Pacto Internacional dos Direitos Civis e Políticos e Pacto dos Direitos
-      Econômicos, Sociais e Culturais (1966; o Brasil aderiu em 1992), Convenção contra a Tortura; sistema interamericano:
-      Convenção Americana - Pacto de San José da Costa Rica (1969; Brasil em 1992), Comissão e Corte Interamericana;
-      responsabilidade internacional do Estado pelos atos dos seus agentes; FEDERALIZAÇÃO de graves violações -
-      incidente de deslocamento de competência (CF art. 109, V-A e § 5º).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Sistema global (ONU): DUDH, Pacto
+      Internacional dos Direitos Civis e Políticos e Pacto dos Direitos Econômicos, Sociais e Culturais (1966; o
+      Brasil aderiu em 1992), Convenção contra a Tortura; sistema interamericano: Convenção Americana - Pacto de
+      San José da Costa Rica (1969; Brasil em 1992), Comissão e Corte Interamericana; responsabilidade internacional
+      do Estado pelos atos dos seus agentes; FEDERALIZAÇÃO de graves violações - incidente de deslocamento de competência
+      (CF art. 109, V-A e § 5º).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[4] Direitos Humanos'
+  - tipo: questoes
+    questoes: 8
+    materia: Direitos Humanos
+    titulo: 'Fixação: Sistemas de proteção e responsabilidade do Estado'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direitos Humanos > sistema global e sistema interamericano de proteção
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direitos Humanos
-    titulo: 'Lei seca: CF art. 109, V-A e § 5º + Pacto de San José, arts. 4º a 8º (vida, integridade, liberdade,
-      garantias)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 109, V-A e § 5º; Sistemas'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Interpretação 3: coesão e referência'
     detalhe: 'A quem o pronome se refere; conectivos e o sentido que trazem (oposição: ''porém''; causa: ''porque'';
       conclusão: ''portanto''; concessão: ''embora''); troca de conectivo sem mudar o sentido.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Interpretação 3: coesão e referência'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1611,7 +1788,8 @@ dias:
 - data: '2026-10-16'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Sanções, recompensas e procedimento disciplinar (arts.
+    53 a 60).'
   essencial:
     chave:
     - artigos: LEP art. 53
@@ -1627,38 +1805,55 @@ dias:
       porque: Falta apurada em procedimento, com direito de defesa.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)
-    detalhe: 'Sanções (art. 53): advertência verbal, repreensão, suspensão ou restrição de direitos, isolamento
-      e inclusão no RDD; quem aplica - o diretor nas de I a IV, o JUIZ no RDD (art. 54); recompensas: elogio e regalias
-      (arts. 55 e 56); critérios de aplicação (art. 57); isolamento, suspensão e restrição até 30 DIAS, ressalvado
-      o RDD (art. 58); procedimento com direito de defesa (art. 59); ISOLAMENTO PREVENTIVO de até 10 DIAS pelo diretor,
-      e inclusão preventiva no RDD por despacho do juiz (art. 60).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Sanções (art. 53): advertência
+      verbal, repreensão, suspensão ou restrição de direitos, isolamento e inclusão no RDD; quem aplica - o diretor
+      nas de I a IV, o JUIZ no RDD (art. 54); recompensas: elogio e regalias (arts. 55 e 56); critérios de aplicação
+      (art. 57); isolamento, suspensão e restrição até 30 DIAS, ressalvado o RDD (art. 58); procedimento com direito
+      de defesa (art. 59); ISOLAMENTO PREVENTIVO de até 10 DIAS pelo diretor, e inclusão preventiva no RDD por despacho
+      do juiz (art. 60).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > sanções, recompensas e procedimento disciplinar
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 53 a 60'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 53; LEP art. 54; LEP arts. 58 e 60'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Pontuação 2: vírgula entre orações e outros sinais'
     detalhe: Orações coordenadas; adjetiva RESTRITIVA (sem vírgula) x EXPLICATIVA (com vírgula); orações adverbiais;
       ponto e vírgula, dois-pontos, travessão e parênteses.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Pontuação 2: vírgula entre orações e outros sinais'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1724,7 +1919,7 @@ dias:
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) zere o Anki atrasado.
+      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5
@@ -1764,7 +1959,8 @@ dias:
 - data: '2026-10-19'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Coação, obediência e excludentes de ilicitude (arts. 22 a 25).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Coação, obediência e excludentes de ilicitude (arts.
+    22 a 25).'
   essencial:
     chave:
     - artigos: CP art. 23
@@ -1781,38 +1977,54 @@ dias:
       porque: Não pode alegar estado de necessidade quem tinha o dever legal de enfrentar o perigo.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Penal
     titulo: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)
-    detalhe: 'Coação moral irresistível e obediência hierárquica a ordem não manifestamente ilegal (art. 22); excludentes
-      de ilicitude (art. 23): estado de necessidade (art. 24), legítima defesa (art. 25), estrito cumprimento de
-      dever legal e exercício regular de direito; excesso doloso ou culposo (art. 23, parágrafo único); legítima
-      defesa do AGENTE DE SEGURANÇA PÚBLICA que repele agressão a vítima mantida refem (art. 25, parágrafo único,
-      incluido pela Lei 13.964/2019 - Pacote Anticrime).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Coação moral irresistível e obediência
+      hierárquica a ordem não manifestamente ilegal (art. 22); excludentes de ilicitude (art. 23): estado de necessidade
+      (art. 24), legítima defesa (art. 25), estrito cumprimento de dever legal e exercício regular de direito; excesso
+      doloso ou culposo (art. 23, parágrafo único); legítima defesa do AGENTE DE SEGURANÇA PÚBLICA que repele agressão
+      a vítima mantida refem (art. 25, parágrafo único, incluido pela Lei 13.964/2019 - Pacote Anticrime).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
     baralho: '[1] Direito Penal'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Penal
+    titulo: 'Fixação: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Penal > excludentes de ilicitude e culpabilidade
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Penal
-    titulo: 'Lei seca: Código Penal, arts. 22 a 25'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CP art. 23; CP art. 25 e parágrafo único'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Pronomes 1: emprego'
     detalhe: 'Retos x oblíquos (''para EU fazer'' x ''para MIM''); ''entre mim e ti''; se/si/consigo; ESTE/ESSE/AQUELE;
       relativos: CUJO (sem artigo depois), ONDE (só lugar), O QUAL.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Pronomes 1: emprego'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1866,8 +2078,8 @@ dias:
   essencial:
     chave:
     - artigos: CF art. 6º
-      porque: 'O rol dos direitos sociais: educação, saúde, alimentação, trabalho, moradia, transporte, lazer,
-        segurança, previdência, maternidade e infância, assistência.'
+      porque: 'O rol dos direitos sociais: educação, saúde, alimentação, trabalho, moradia, transporte, lazer, segurança,
+        previdência, maternidade e infância, assistência.'
     - artigos: CF art. 7º, XXXIII
       porque: Nenhum trabalho antes dos 16 (salvo aprendiz, a partir dos 14); nada noturno, perigoso ou insalubre
         antes dos 18.
@@ -1880,39 +2092,55 @@ dias:
       porque: Sindicato sem autorização do Estado; ninguém é obrigado a se filiar.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Constitucional
     titulo: Direitos sociais (arts. 6º a 11)
-    detalhe: 'Rol do art. 6º e a renda básica familiar (parágrafo único, EC 114/2021); direitos dos trabalhadores
-      - os incisos mais cobrados do art. 7º: salário mínimo (IV), irredutibilidade (VI), 13º (VIII), jornada de
-      8h/44h (XIII), férias com 1/3 (XVII), licença-gestante de 120 dias (XVIII), licença-paternidade (XIX), trabalho
-      do menor (XXXIII: nenhum trabalho antes dos 16, salvo aprendiz a partir dos 14; nada noturno, perigoso ou
-      insalubre antes dos 18); liberdade sindical (art. 8º); greve (art. 9º); participação dos trabalhadores (arts.
-      10 e 11).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Rol do art. 6º e a renda básica
+      familiar (parágrafo único, EC 114/2021); direitos dos trabalhadores - os incisos mais cobrados do art. 7º:
+      salário mínimo (IV), irredutibilidade (VI), 13º (VIII), jornada de 8h/44h (XIII), férias com 1/3 (XVII), licença-gestante
+      de 120 dias (XVIII), licença-paternidade (XIX), trabalho do menor (XXXIII: nenhum trabalho antes dos 16, salvo
+      aprendiz a partir dos 14; nada noturno, perigoso ou insalubre antes dos 18); liberdade sindical (art. 8º);
+      greve (art. 9º); participação dos trabalhadores (arts. 10 e 11).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[2] Constitucional'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Constitucional
+    titulo: 'Fixação: Direitos sociais (arts. 6º a 11)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Constitucional > direitos sociais
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Constitucional
-    titulo: 'Lei seca: Constituição Federal, arts. 6º a 11'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 6º; CF art. 7º, XXXIII; CF art. 9º'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Pronomes 2: colocação pronominal'
     detalhe: 'Próclise (palavras atrativas: não, que, quem, advérbios); mesóclise (futuro do presente e do pretérito);
       ênclise (início de frase, imperativo afirmativo); locuções verbais.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Pronomes 2: colocação pronominal'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -1979,40 +2207,56 @@ dias:
       porque: 'Conselho da Comunidade: composição e atribuições.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Órgãos da execução penal (arts. 61 a 81-B)
-    detalhe: 'Os órgãos do art. 61: CNPCP, Juízo da Execução, Ministério Público, Conselho Penitenciário, Departamentos
-      Penitenciários, Patronato, Conselho da Comunidade e Defensoria Pública; competências do JUIZ DA EXECUÇÃO (art.
-      66 - a lista mais cobrada: unificação de penas, progressão e regressão, remição, saída temporária, livramento
-      condicional, inspeção mensal, interdição do estabelecimento); Ministério Público (arts. 67 e 68); Conselho
-      Penitenciário (arts. 69 e 70); Departamento Penitenciário (arts. 71 a 74); direção e pessoal dos estabelecimentos
-      (arts. 75 a 77); Patronato (arts. 78 e 79); Conselho da Comunidade (arts. 80 e 81); Defensoria (arts. 81-A
-      e 81-B).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Os órgãos do art. 61: CNPCP, Juízo
+      da Execução, Ministério Público, Conselho Penitenciário, Departamentos Penitenciários, Patronato, Conselho
+      da Comunidade e Defensoria Pública; competências do JUIZ DA EXECUÇÃO (art. 66 - a lista mais cobrada: unificação
+      de penas, progressão e regressão, remição, saída temporária, livramento condicional, inspeção mensal, interdição
+      do estabelecimento); Ministério Público (arts. 67 e 68); Conselho Penitenciário (arts. 69 e 70); Departamento
+      Penitenciário (arts. 71 a 74); direção e pessoal dos estabelecimentos (arts. 75 a 77); Patronato (arts. 78
+      e 79); Conselho da Comunidade (arts. 80 e 81); Defensoria (arts. 81-A e 81-B).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Órgãos da execução penal (arts. 61 a 81-B)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > órgãos da execução penal
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 61 a 81-B (o art. 66 inteiro, duas vezes)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 61; LEP art. 66; LEP art. 68'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Pronomes 3: formas de tratamento'
     detalhe: Vossa Excelência, Vossa Senhoria, Vossa Magnificência; verbo e possessivo na 3ª PESSOA ('Vossa Excelência
       sabe que seu...'); VOSSA (falando com) x SUA (falando de).
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Pronomes 3: formas de tratamento'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2067,8 +2311,8 @@ dias:
     - artigos: CF art. 5º, § 3º
       porque: Tratado de direitos humanos aprovado em 2 turnos por 3/5 em cada Casa = emenda constitucional.
     - artigos: STF
-      porque: Os demais tratados de direitos humanos são supralegais; por isso a prisão do depositário infiel
-        é ilícita (Súmula Vinculante 25).
+      porque: Os demais tratados de direitos humanos são supralegais; por isso a prisão do depositário infiel é
+        ilícita (Súmula Vinculante 25).
     apoio:
     - artigos: CF art. 5º, § 2º
       porque: O rol de direitos não exclui os decorrentes dos tratados.
@@ -2076,37 +2320,54 @@ dias:
       porque: Dignidade da pessoa humana como fundamento; prevalência dos direitos humanos.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direitos Humanos
     titulo: Na Constituição e o status dos tratados
-    detalhe: 'Dignidade da pessoa humana como fundamento (art. 1º, III); prevalência dos direitos humanos (art.
-      4º, II); rol aberto de direitos (art. 5º, § 2º); tratado de direitos humanos aprovado em 2 turnos por 3/5
-      em cada Casa = EMENDA constitucional (§ 3º, EC 45/2004); os demais = SUPRALEGAIS (STF, RE 466.343: fim da
-      prisão do depositário infiel - Súmula Vinculante 25); submissão ao Tribunal Penal Internacional (§ 4º).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Dignidade da pessoa humana como
+      fundamento (art. 1º, III); prevalência dos direitos humanos (art. 4º, II); rol aberto de direitos (art. 5º,
+      § 2º); tratado de direitos humanos aprovado em 2 turnos por 3/5 em cada Casa = EMENDA constitucional (§ 3º,
+      EC 45/2004); os demais = SUPRALEGAIS (STF, RE 466.343: fim da prisão do depositário infiel - Súmula Vinculante
+      25); submissão ao Tribunal Penal Internacional (§ 4º).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[4] Direitos Humanos'
+  - tipo: questoes
+    questoes: 8
+    materia: Direitos Humanos
+    titulo: 'Fixação: Na Constituição e o status dos tratados'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direitos Humanos > direitos humanos na Constituição e incorporacao dos tratados
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direitos Humanos
-    titulo: 'Lei seca: CF arts. 1º, 3º, 4º e 5º § 1º a 4º'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 5º, § 3º; STF'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Interpretação 4: inferência e sentido das palavras'
     detalhe: Pressupostos e subentendidos; o que o texto permite concluir x o que ele não diz; sentido da palavra
       no contexto; polissemia; denotação x conotação.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Interpretação 4: inferência e sentido das palavras'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2174,39 +2435,55 @@ dias:
       porque: 'Colônia agrícola ou industrial: semiaberto; casa do albergado: aberto e limitação de fim de semana.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Estabelecimentos penais (arts. 82 a 104)
-    detalhe: Mulher e maior de 60 anos em estabelecimento próprio (art. 82, § 1º); berçário e amamentação até no
-      mínimo 6 meses (art. 83, § 2º); separação do preso provisório e do condenado, e critérios (art. 84); lotação
-      compatível (art. 85); PENITENCIÁRIA - fechado, cela individual de no mínimo 6 m² (arts. 87 a 90); COLÔNIA
-      agrícola ou industrial - semiaberto (arts. 91 e 92); CASA DO ALBERGADO - aberto e limitação de fim de semana
-      (arts. 93 a 95); centro de observação (arts. 96 a 98); hospital de custódia (arts. 99 a 101); CADEIA PÚBLICA
-      - preso provisório (arts. 102 a 104).
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Mulher e maior de 60 anos em estabelecimento
+      próprio (art. 82, § 1º); berçário e amamentação até no mínimo 6 meses (art. 83, § 2º); separação do preso
+      provisório e do condenado, e critérios (art. 84); lotação compatível (art. 85); PENITENCIÁRIA - fechado, cela
+      individual de no mínimo 6 m² (arts. 87 a 90); COLÔNIA agrícola ou industrial - semiaberto (arts. 91 e 92);
+      CASA DO ALBERGADO - aberto e limitação de fim de semana (arts. 93 a 95); centro de observação (arts. 96 a
+      98); hospital de custódia (arts. 99 a 101); CADEIA PÚBLICA - preso provisório (arts. 102 a 104).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Estabelecimentos penais (arts. 82 a 104)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > estabelecimentos penais
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 82 a 104'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 82, § 1º; LEP art. 84; LEP arts. 87 e 88; LEP art. 102'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Termos integrantes 1: objeto direto e indireto'
     detalhe: Transitividade verbal (VTD, VTI, VTDI, VI); objeto direto, direto preposicionado e pleonástico; objeto
       indireto; pronome oblíquo como objeto (o, a, lhe).
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Termos integrantes 1: objeto direto e indireto'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2271,7 +2548,7 @@ dias:
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) zere o Anki atrasado.
+      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5
@@ -2329,38 +2606,54 @@ dias:
       porque: Circunstâncias de caráter pessoal não se comunicam, salvo quando elementares do crime.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Penal
     titulo: Imputabilidade e concurso de pessoas (arts. 26 a 31)
-    detalhe: 'Inimputáveis e semi-imputáveis por doença mental (art. 26); menores de 18 anos (art. 27); emoção,
-      paixão e embriaguez - voluntária, culposa, fortuita e a actio libera in causa (art. 28); concurso de pessoas:
-      teoria monista, participação de menor importância e cooperação dolosamente distinta (art. 29); circunstâncias
-      incomunicáveis (art. 30); ajuste, instigação e auxílio não punidos se o crime não chega a ser tentado (art.
-      31).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Inimputáveis e semi-imputáveis
+      por doença mental (art. 26); menores de 18 anos (art. 27); emoção, paixão e embriaguez - voluntária, culposa,
+      fortuita e a actio libera in causa (art. 28); concurso de pessoas: teoria monista, participação de menor importância
+      e cooperação dolosamente distinta (art. 29); circunstâncias incomunicáveis (art. 30); ajuste, instigação e
+      auxílio não punidos se o crime não chega a ser tentado (art. 31).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
     baralho: '[1] Direito Penal'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Penal
+    titulo: 'Fixação: Imputabilidade e concurso de pessoas (arts. 26 a 31)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Penal > imputabilidade penal e concurso de pessoas
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Penal
-    titulo: 'Lei seca: Código Penal, arts. 26 a 31'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CP art. 26; CP art. 27; CP art. 28'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Termos integrantes 2: complemento nominal e agente da passiva'
     detalhe: 'Complemento nominal (completa nome; sentido PASSIVO: ''a leitura do livro'') x adjunto adnominal (sentido
       ATIVO/posse: ''a leitura do aluno''); agente da passiva.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Termos integrantes 2: complemento nominal e agente da passiva'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2426,38 +2719,55 @@ dias:
       porque: 'Idades mínimas: 35 Presidente e Senador; 30 Governador; 21 Deputado e Prefeito; 18 Vereador.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Constitucional
     titulo: Nacionalidade e direitos políticos (arts. 12 a 17)
-    detalhe: Brasileiros natos e naturalizados (art. 12, I e II); cargos PRIVATIVOS de brasileiro nato (§ 3º); perda
-      da nacionalidade (§ 4º); idioma e símbolos (art. 13); voto obrigatório (18 a 70 anos) e facultativo (16-17
-      anos, maiores de 70, analfabetos) (art. 14); condições de elegibilidade e idades mínimas (§ 3º); inelegibilidades
-      (§ 4º a 9º); perda e suspensão dos direitos políticos - condenação criminal transitada em julgado, enquanto
-      durarem os efeitos (art. 15, III); anterioridade eleitoral (art. 16); partidos políticos (art. 17).
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Brasileiros natos e naturalizados
+      (art. 12, I e II); cargos PRIVATIVOS de brasileiro nato (§ 3º); perda da nacionalidade (§ 4º); idioma e símbolos
+      (art. 13); voto obrigatório (18 a 70 anos) e facultativo (16-17 anos, maiores de 70, analfabetos) (art. 14);
+      condições de elegibilidade e idades mínimas (§ 3º); inelegibilidades (§ 4º a 9º); perda e suspensão dos direitos
+      políticos - condenação criminal transitada em julgado, enquanto durarem os efeitos (art. 15, III); anterioridade
+      eleitoral (art. 16); partidos políticos (art. 17).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[2] Constitucional'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Constitucional
+    titulo: 'Fixação: Nacionalidade e direitos políticos (arts. 12 a 17)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Constitucional > nacionalidade e direitos políticos
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Constitucional
-    titulo: 'Lei seca: Constituição Federal, arts. 12 a 17'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 12, I e II; CF art. 12, § 3º; CF art. 15, III'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: Ortografia oficial
     detalhe: POR QUE / POR QUÊ / PORQUE / PORQUÊ; mal x mau; onde x aonde; há x a (tempo); senão x se não; a fim
       x afim; x/ch, s/z/c, g/j; hífen no Novo Acordo.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Ortografia oficial'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2507,12 +2817,13 @@ dias:
 - data: '2026-10-28'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Execução da pena, regimes e progressão (arts. 105 a 119).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Execução da pena, regimes e progressão (arts. 105 a
+    119).'
   essencial:
     chave:
     - artigos: LEP art. 112
-      porque: 'Progressão: o percentual de pena cumprida (16% a 70%) e a boa conduta. Confira a redação atual
-        no Planalto.'
+      porque: 'Progressão: o percentual de pena cumprida (16% a 70%) e a boa conduta. Confira a redação atual no
+        Planalto.'
     - artigos: LEP art. 118
       porque: 'Regressão: crime doloso, falta grave ou nova condenação que torne incabível o regime.'
     apoio:
@@ -2524,40 +2835,56 @@ dias:
       porque: 'Prisão domiciliar no aberto: maior de 70, doença grave, filho menor ou com deficiência, gestante.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Execução da pena, regimes e progressão (arts. 105 a 119)
-    detalhe: 'Guia de recolhimento (arts. 105 a 107); a forma PROGRESSIVA (art. 112): os percentuais de 16% a 70%
-      conforme primariedade, violência ou grave ameaça, crime hediondo e resultado morte (Lei 13.964/2019), boa
-      conduta atestada pelo diretor, e o exame criminológico da Lei 14.843/2024 - CONFIRA a redação atual no Planalto;
-      progressão especial da gestante ou mãe/responsável por criança ou pessoa com deficiência (art. 112, § 3º);
-      regime aberto: condições (arts. 113 a 116); prisão domiciliar no aberto (art. 117); REGRESSÃO de regime (art.
-      118).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Guia de recolhimento (arts. 105
+      a 107); a forma PROGRESSIVA (art. 112): os percentuais de 16% a 70% conforme primariedade, violência ou grave
+      ameaça, crime hediondo e resultado morte (Lei 13.964/2019), boa conduta atestada pelo diretor, e o exame criminológico
+      da Lei 14.843/2024 - CONFIRA a redação atual no Planalto; progressão especial da gestante ou mãe/responsável
+      por criança ou pessoa com deficiência (art. 112, § 3º); regime aberto: condições (arts. 113 a 116); prisão
+      domiciliar no aberto (art. 117); REGRESSÃO de regime (art. 118).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Execução da pena, regimes e progressão (arts. 105 a 119)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > regimes de cumprimento, progressão e regressão
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 105 a 119 (o 112 e o 118 inteiros, duas vezes)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 112; LEP art. 118'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: Acentuação gráfica
     detalhe: 'Oxítonas, paroxítonas, proparoxítonas e monossílabos tônicos; Novo Acordo: sem acento nos ditongos
       abertos ''ei/oi'' das paroxítonas (ideia, heroico - antes: idéia, heróico); hiatos com ''i/u''; acento diferencial
       (pôr/por, pôde/pode, têm/tem).'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Acentuação gráfica'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2634,35 +2961,52 @@ dias:
     aviso: Confira a numeração na edição em português do CNJ.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direitos Humanos
     titulo: Regras de Mandela - parte 1 (regras 1 a 35)
-    detalhe: 'Regras Mínimas da ONU para o Tratamento de Reclusos, revisadas em 2015. Princípios básicos: dignidade,
-      proibição de tortura, não discriminação (regras 1 a 5); registros dos presos (6 a 10); SEPARAÇÃO por categorias
-      - homens e mulheres, provisórios e condenados, jovens e adultos (11); alojamento (12 a 17); higiene, vestuário
-      e cama (18 a 21); alimentação (22); exercício ao ar livre de pelo menos 1 hora diária (23); saúde (24 a 35).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Regras Mínimas da ONU para o Tratamento
+      de Reclusos, revisadas em 2015. Princípios básicos: dignidade, proibição de tortura, não discriminação (regras
+      1 a 5); registros dos presos (6 a 10); SEPARAÇÃO por categorias - homens e mulheres, provisórios e condenados,
+      jovens e adultos (11); alojamento (12 a 17); higiene, vestuário e cama (18 a 21); alimentação (22); exercício
+      ao ar livre de pelo menos 1 hora diária (23); saúde (24 a 35).'
     onde: videoaula
     baralho: '[4] Direitos Humanos'
+  - tipo: questoes
+    questoes: 8
+    materia: Direitos Humanos
+    titulo: 'Fixação: Regras de Mandela - parte 1 (regras 1 a 35)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direitos Humanos > Regras Mínimas da ONU para o tratamento de presos (Regras de Mandela)
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direitos Humanos
-    titulo: 'Lei seca: Regras de Mandela, regras 1 a 35 (edição em português do CNJ)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: Regras de Mandela 1 a 5; Regra 11; Regra 23'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Interpretação 5: tipos de discurso'
     detalhe: Discurso direto, indireto e indireto livre; conversão entre eles (tempos verbais, pronomes, 'aqui'
       -> 'ali').
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Interpretação 5: tipos de discurso'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2722,7 +3066,8 @@ dias:
 - data: '2026-10-30'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Permissão de saída, saída temporária e remição (arts. 120 a 130).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Permissão de saída, saída temporária e remição (arts.
+    120 a 130).'
   essencial:
     chave:
     - artigos: LEP arts. 120 e 121
@@ -2740,40 +3085,56 @@ dias:
       porque: O tempo remido conta como pena cumprida.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Permissão de saída, saída temporária e remição (arts. 120 a 130)
-    detalhe: 'PERMISSÃO de saída (arts. 120 e 121): fechado e semiaberto, COM escolta, por falecimento ou doença
-      grave de familiar e tratamento médico, concedida pelo DIRETOR; SAÍDA TEMPORÁRIA (arts. 122 a 125): semiaberto,
-      SEM escolta, concedida pelo JUIZ - hipóteses e vedações ALTERADAS pela Lei 14.843/2024, confira a redação
-      atual; REMIÇÃO (arts. 126 a 130): 1 dia a cada 12 horas de estudo (em no mínimo 3 dias), 1 dia a cada 3 dias
-      de trabalho, +1/3 ao concluir etapa de ensino, perda de até 1/3 por falta grave (art. 127), tempo remido conta
-      como pena cumprida (art. 128).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. PERMISSÃO de saída (arts. 120
+      e 121): fechado e semiaberto, COM escolta, por falecimento ou doença grave de familiar e tratamento médico,
+      concedida pelo DIRETOR; SAÍDA TEMPORÁRIA (arts. 122 a 125): semiaberto, SEM escolta, concedida pelo JUIZ -
+      hipóteses e vedações ALTERADAS pela Lei 14.843/2024, confira a redação atual; REMIÇÃO (arts. 126 a 130): 1
+      dia a cada 12 horas de estudo (em no mínimo 3 dias), 1 dia a cada 3 dias de trabalho, +1/3 ao concluir etapa
+      de ensino, perda de até 1/3 por falta grave (art. 127), tempo remido conta como pena cumprida (art. 128).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Permissão de saída, saída temporária e remição (arts. 120 a 130)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > autorizações de saída e remição
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 120 a 130'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP arts. 120 e 121; LEP art. 122; LEP art. 126'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Redação oficial 1: atributos e tratamento'
     detalhe: 'Manual de Redação da Presidência (3ª edição, 2018): clareza, precisão, objetividade, concisão, coesão,
       impessoalidade, formalidade e padrão culto; pronomes de tratamento e vocativos; fechos RESPEITOSAMENTE (autoridade
       superior) e ATENCIOSAMENTE (mesma hierarquia ou inferior).'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Redação oficial 1: atributos e tratamento'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -2849,7 +3210,7 @@ dias:
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) zere o Anki atrasado.
+      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5
@@ -2900,7 +3261,8 @@ dias:
   semana: 6
   feriado: Feriado (Finados)
   reduzida: A manhã inteira + só as {direito} questões de Direito Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Crimes do funcionário público contra a Administração (arts. 312 a 327).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Crimes do funcionário público contra a Administração
+    (arts. 312 a 327).'
   essencial:
     chave:
     - artigos: CP art. 312
@@ -2920,39 +3282,56 @@ dias:
       porque: Quem é funcionário público para fins penais, inclusive por equiparação.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Penal
     titulo: Crimes do funcionário público contra a Administração (arts. 312 a 327)
-    detalhe: Peculato - apropriação, desvio, furto e culposo; no culposo, a reparação antes da sentença extingue
-      a punibilidade (art. 312, § 2º e 3º); peculato mediante erro de outrem (art. 313); CONCUSSÃO (art. 316) x
-      CORRUPÇÃO PASSIVA (art. 317) x PREVARICAÇÃO (art. 319); deixar de vedar ao preso o acesso a APARELHO CELULAR
-      (art. 319-A - é o crime típico do servidor do sistema prisional); condescendência criminosa (art. 320); advocacia
-      administrativa (art. 321); abandono de função (art. 323); violação de sigilo funcional (art. 325); conceito
-      de funcionário público para fins penais (art. 327).
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Peculato - apropriação, desvio,
+      furto e culposo; no culposo, a reparação antes da sentença extingue a punibilidade (art. 312, § 2º e 3º);
+      peculato mediante erro de outrem (art. 313); CONCUSSÃO (art. 316) x CORRUPÇÃO PASSIVA (art. 317) x PREVARICAÇÃO
+      (art. 319); deixar de vedar ao preso o acesso a APARELHO CELULAR (art. 319-A - é o crime típico do servidor
+      do sistema prisional); condescendência criminosa (art. 320); advocacia administrativa (art. 321); abandono
+      de função (art. 323); violação de sigilo funcional (art. 325); conceito de funcionário público para fins penais
+      (art. 327).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
     baralho: '[1] Direito Penal'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Penal
+    titulo: 'Fixação: Crimes do funcionário público contra a Administração (arts. 312 a 327)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Penal > crimes contra a Administração Pública praticados por funcionário público
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Penal
-    titulo: 'Lei seca: Código Penal, arts. 312 a 327'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CP art. 312; CP arts. 316 e 317; CP art. 319-A'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Redação oficial 2: o padrão ofício'
     detalhe: Partes do documento no padrão ofício (cabeçalho, identificação, local e data, endereçamento, assunto,
       texto, fecho, assinatura); a 3ª edição unificou ofício, aviso e memorando num padrão só; e-mail oficial.
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Redação oficial 2: o padrão ofício'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -3016,8 +3395,7 @@ dias:
   essencial:
     chave:
     - artigos: CF art. 144, caput e VI
-      porque: Os órgãos da segurança pública, entre eles as polícias penais federal, estaduais e distrital (EC
-        104/2019).
+      porque: Os órgãos da segurança pública, entre eles as polícias penais federal, estaduais e distrital (EC 104/2019).
     - artigos: CF art. 144, § 5º-A
       porque: Às polícias penais cabe a segurança dos estabelecimentos penais; ficam vinculadas ao órgão que administra
         o sistema penal.
@@ -3031,39 +3409,56 @@ dias:
       porque: 'A atribuição de cada órgão: PF, PRF, PC, PM, bombeiros e guardas municipais.'
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direito Constitucional
     titulo: Defesa do Estado e segurança pública (arts. 136 a 144)
-    detalhe: 'Estado de defesa (art. 136: decretado pelo Presidente, até 30 dias prorrogáveis uma vez; prisão por
-      crime contra o Estado comunicada ao juiz; vedada a incomunicabilidade do preso); estado de sítio (arts. 137
-      a 139); disposições gerais (arts. 140 e 141); Forças Armadas (arts. 142 e 143, visão geral); SEGURANÇA PÚBLICA
-      (art. 144): os órgãos, inclusive as POLÍCIAS PENAIS federal, estaduais e distrital (inciso VI, EC 104/2019);
-      § 5º-A: as polícias penais cuidam da segurança dos estabelecimentos penais e ficam vinculadas ao órgão que
-      administra o sistema penal; demais parágrafos (PF, PRF, PC, PM, bombeiros, guardas municipais no § 8º).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Estado de defesa (art. 136: decretado
+      pelo Presidente, até 30 dias prorrogáveis uma vez; prisão por crime contra o Estado comunicada ao juiz; vedada
+      a incomunicabilidade do preso); estado de sítio (arts. 137 a 139); disposições gerais (arts. 140 e 141); Forças
+      Armadas (arts. 142 e 143, visão geral); SEGURANÇA PÚBLICA (art. 144): os órgãos, inclusive as POLÍCIAS PENAIS
+      federal, estaduais e distrital (inciso VI, EC 104/2019); § 5º-A: as polícias penais cuidam da segurança dos
+      estabelecimentos penais e ficam vinculadas ao órgão que administra o sistema penal; demais parágrafos (PF,
+      PRF, PC, PM, bombeiros, guardas municipais no § 8º).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[2] Constitucional'
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Constitucional
+    titulo: 'Fixação: Defesa do Estado e segurança pública (arts. 136 a 144)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direito Constitucional > defesa do Estado e segurança pública
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direito Constitucional
-    titulo: 'Lei seca: Constituição Federal, arts. 136 a 144 (leia o 144 inteiro, duas vezes)'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: CF art. 144, caput e VI; CF art. 144, § 5º-A'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Revisão ativa 1: concordância, crase e pontuação'
     detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
       ainda erra.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Revisão ativa 1: concordância, crase e pontuação'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -3113,7 +3508,8 @@ dias:
 - data: '2026-11-04'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Livramento condicional, monitoração e penas alternativas (arts. 131 a 170).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Livramento condicional, monitoração e penas alternativas
+    (arts. 131 a 170).'
   essencial:
     chave:
     - artigos: LEP arts. 131 e 132
@@ -3129,37 +3525,54 @@ dias:
       porque: Suspensão condicional da pena (sursis).
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Livramento condicional, monitoração e penas alternativas (arts. 131 a 170)
-    detalhe: 'Livramento condicional: concessão pelo juiz, condições obrigatórias e facultativas, revogação (arts.
-      131 a 146); MONITORAÇÃO ELETRÔNICA: hipóteses e deveres do monitorado (arts. 146-B a 146-D); penas restritivas
-      de direitos - prestação de serviços, limitação de fim de semana, interdição temporária (arts. 147 a 155);
-      suspensão condicional da pena - sursis (arts. 156 a 163); pena de multa (arts. 164 a 170).'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Livramento condicional: concessão
+      pelo juiz, condições obrigatórias e facultativas, revogação (arts. 131 a 146); MONITORAÇÃO ELETRÔNICA: hipóteses
+      e deveres do monitorado (arts. 146-B a 146-D); penas restritivas de direitos - prestação de serviços, limitação
+      de fim de semana, interdição temporária (arts. 147 a 155); suspensão condicional da pena - sursis (arts. 156
+      a 163); pena de multa (arts. 164 a 170).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Livramento condicional, monitoração e penas alternativas (arts. 131 a 170)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > livramento condicional, monitoração eletrônica e penas restritivas
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 131 a 170'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP arts. 131 e 132; LEP art. 140; LEP arts. 146-B e 146-C'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Revisão ativa 2: pronomes, verbos e termos integrantes'
     detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
       ainda erra.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Revisão ativa 2: pronomes, verbos e termos integrantes'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -3236,36 +3649,52 @@ dias:
     aviso: Confira a numeração na edição em português do CNJ.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Direitos Humanos
     titulo: Regras de Mandela - parte 2 (regras 36 em diante)
-    detalhe: 'Restrições, disciplina e sanções (36 a 46): proibido o confinamento solitário indefinido ou PROLONGADO
-      - mais de 15 dias seguidos (regras 43 e 44), proibidas a redução de comida ou água e a sanção coletiva; instrumentos
-      de restrição (47 a 49); revistas de presos e celas (50 a 53); informação e direito de queixa (54 a 57); contato
-      com o mundo exterior e visitas (58 a 63); biblioteca, religião e pertences (64 a 67); notificações e investigações
-      (68 a 72); transferência (73); PESSOAL penitenciário (74 a 82); inspeções (83 a 85). Confira a numeração na
-      edição do CNJ.'
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Restrições, disciplina e sanções
+      (36 a 46): proibido o confinamento solitário indefinido ou PROLONGADO - mais de 15 dias seguidos (regras 43
+      e 44), proibidas a redução de comida ou água e a sanção coletiva; instrumentos de restrição (47 a 49); revistas
+      de presos e celas (50 a 53); informação e direito de queixa (54 a 57); contato com o mundo exterior e visitas
+      (58 a 63); biblioteca, religião e pertences (64 a 67); notificações e investigações (68 a 72); transferência
+      (73); PESSOAL penitenciário (74 a 82); inspeções (83 a 85). Confira a numeração na edição do CNJ.'
     onde: videoaula
     baralho: '[4] Direitos Humanos'
+  - tipo: questoes
+    questoes: 8
+    materia: Direitos Humanos
+    titulo: 'Fixação: Regras de Mandela - parte 2 (regras 36 em diante)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Direitos Humanos > Regras Mínimas da ONU para o tratamento de presos (Regras de Mandela)
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Direitos Humanos
-    titulo: 'Lei seca: Regras de Mandela, regras 36 a 85'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: Regras de Mandela 43 e 44; Regras 47 a 49; Regras 50 a 53'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Interpretação 6: bateria cronometrada'
     detalhe: 'Sem teoria: releia as 5 regras do método (aula de 01/10) e va para a bateria da noite.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Interpretação 6: bateria cronometrada'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -3325,7 +3754,8 @@ dias:
 - data: '2026-11-06'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
-  minima: 'Plano B: os artigos-chave + questões de prova de: Medida de segurança, incidentes e disposições finais (arts. 171 a 204).'
+  minima: 'Plano B: os artigos-chave + questões de prova de: Medida de segurança, incidentes e disposições finais
+    (arts. 171 a 204).'
   essencial:
     chave:
     - artigos: LEP art. 185
@@ -3341,37 +3771,54 @@ dias:
       porque: Vedado expor o preso a inconveniente notoriedade.
   manha:
   - tipo: teoria
-    duracao: 50
+    duracao: 40
     materia: Lei de Execução Penal
     titulo: Medida de segurança, incidentes e disposições finais (arts. 171 a 204)
-    detalhe: Medida de segurança e cessação de periculosidade (arts. 171 a 179); conversões (arts. 180 a 184); EXCESSO
-      OU DESVIO de execução (arts. 185 e 186); anistia e indulto (arts. 187 a 193); procedimento judicial e AGRAVO
-      em execução, sem efeito suspensivo (arts. 194 a 197); vedação de expor o preso a inconveniente notoriedade
-      (art. 198); ALGEMAS disciplinadas por decreto federal (art. 199); disposições finais (arts. 200 a 204).
+    detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Medida de segurança e cessação
+      de periculosidade (arts. 171 a 179); conversões (arts. 180 a 184); EXCESSO OU DESVIO de execução (arts. 185
+      e 186); anistia e indulto (arts. 187 a 193); procedimento judicial e AGRAVO em execução, sem efeito suspensivo
+      (arts. 194 a 197); vedação de expor o preso a inconveniente notoriedade (art. 198); ALGEMAS disciplinadas
+      por decreto federal (art. 199); disposições finais (arts. 200 a 204).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
+  - tipo: questoes
+    questoes: 8
+    materia: Lei de Execução Penal
+    titulo: 'Fixação: Medida de segurança, incidentes e disposições finais (arts. 171 a 204)'
+    detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
+      com a meta.'
+    consulta: true
+    onde: qconcursos
+    filtro: Execução Penal > incidentes de execução, procedimento judicial e disposições finais
   - tipo: pausa
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 40
+    duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca: LEP, arts. 171 a 204'
-    detalhe: Leia no texto oficial marcando prazos, exceções e palavras como 'salvo', 'somente', 'vedado'. Transforme
-      o que marcou em cartões do Anki à noite.
+    titulo: 'Lei seca dirigida: LEP art. 185; LEP art. 197; LEP art. 199'
+    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
+      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
+      não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
   - tipo: pausa
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 30
+    duracao: 20
     materia: Língua Portuguesa
     titulo: 'Revisão ativa 3: ortografia, acentuação e redação oficial'
     detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
       ainda erra.'
     onde: videoaula
+  - tipo: questoes
+    questoes: 6
+    materia: Língua Portuguesa
+    titulo: 'Fixação: Revisão ativa 3: ortografia, acentuação e redação oficial'
+    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
   noite:
   - tipo: revisao
     rotulo: R+7
@@ -3447,7 +3894,7 @@ dias:
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) zere o Anki atrasado.
+      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5

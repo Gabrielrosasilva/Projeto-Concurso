@@ -67,12 +67,24 @@ def tem_acerto(faixa) -> bool:
 def consulta_por_padrao(faixa) -> bool:
     """A caixa "com consulta" ja vem marcada nesta faixa?
 
-    Vem marcada so na faixa de APRENDIZAGEM de Direito - a `rampa: direito`,
-    cujo proprio detalhe diz "PODE consultar a lei". Ela treina e nao mede, e
-    por isso fica fora da comparacao com a meta (docs/decisoes.md). Todas as
-    outras vem desmarcadas: sem consulta e o padrao da prova.
+    Manda a chave `consulta` da faixa, quando o arquivo a tem - e o caso da
+    fixacao da manha (Etapa 6A), feita logo depois de ler o tema. Sem a chave,
+    vem marcada so na faixa de APRENDIZAGEM de Direito - a `rampa: direito`,
+    cujo proprio detalhe diz "PODE consultar a lei". As duas treinam e nao
+    medem, e por isso ficam fora da comparacao com a meta (docs/decisoes.md).
+    Todas as outras vem desmarcadas: sem consulta e o padrao da prova.
     """
+    if faixa.consulta is not None:
+        return faixa.consulta
     return faixa.tipo == "questoes" and faixa.rampa == "direito"
+
+
+# A chave `anki` do topo do cronograma.yml. Desativado, o Anki some do dia sem
+# sair do arquivo: as faixas e os baralhos continuam la, e religar e trocar
+# uma palavra (README, "Religar o Anki").
+ANKI_ATIVADO = "ativado"
+ANKI_DESATIVADO = "desativado"
+FRASE_DO_ANKI_DESATIVADO = "ANKI temporariamente desativado"
 
 
 # Arredondamento da duracao das faixas de questoes. 15 questoes x 2,5 min dao
@@ -147,6 +159,13 @@ class Faixa:
     # So a faixa "essencial" do Plano B usa: os artigos a ler e o aviso.
     artigos: list = field(default_factory=list)
     aviso: str | None = None
+    # A chave `consulta` da faixa. None = a regra do `consulta_por_padrao`.
+    consulta: bool | None = None
+    # A faixa do Anki com `anki: desativado`. Ela continua na lista, na mesma
+    # posicao: os checks sao reconhecidos por bloco e posicao, e tira-la
+    # mudaria a posicao do Bonus que vem depois. Desligada, ela nao tem
+    # duracao, nao entra em total nem na sugestao de meta, e nao se marca.
+    desligada: bool = False
 
 
 @dataclass
@@ -199,8 +218,15 @@ class Dia:
     plano_b: list[Faixa] = field(default_factory=list)
 
     def faixas(self) -> list[Faixa]:
-        """Todas as faixas, na ordem do dia."""
-        return self.manha + self.noite + self.pos22 + self.plano_b
+        """Todas as faixas que valem, na ordem do dia.
+
+        A desligada (o Anki com `anki: desativado`) fica de fora: ela nao e
+        "a proxima faixa", nao soma e nao tem materia. Quem precisa dela - a
+        tela, que mostra a linha minimizada, e os checks, que contam posicao -
+        le o bloco direto (`dia.pos22`).
+        """
+        todas = self.manha + self.noite + self.pos22 + self.plano_b
+        return [f for f in todas if not f.desligada]
 
     @property
     def total_questoes(self) -> int:
@@ -295,6 +321,8 @@ class Plano:
     # Os rotulos que aparecem em `materia` de faixa e NAO sao materia do
     # edital, porque a faixa e mista. Ver `_materias_das_faixas`.
     materias_mistas: list[str] = field(default_factory=list)
+    # A chave `anki` do arquivo. Sem ela, ativado: e como o arquivo era antes.
+    anki: bool = True
 
     def dia(self, data: date) -> Dia | None:
         for dia in self.dias:
@@ -377,6 +405,8 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
         cronometrado=bool(bruta.get("cronometrado")),
         opcional=bool(bruta.get("opcional")),
         min_por_questao=bruta.get("min_por_questao"),
+        consulta=(bool(bruta["consulta"]) if bruta.get("consulta") is not None
+                  else None),
     )
 
 
@@ -574,6 +604,7 @@ def carregar(caminho: Path | None = None) -> Plano:
             raise ErroNoCronograma(f"`gatilho` precisa de {regra} (numero inteiro)")
 
     plano_b = _plano_b(dados.get("plano_b"))
+    anki = _anki(dados.get("anki"))
 
     dias = []
     vistas = set()
@@ -604,6 +635,8 @@ def carregar(caminho: Path | None = None) -> Plano:
         for chave in BLOCOS:
             faixas = [_faixa(f, chave, data, chaves_da_rampa)
                       for f in bruto.get(chave) or []]
+            if not anki:
+                faixas = [_sem_anki(f) for f in faixas]
             setattr(dia, chave, faixas)
         if (MARCA_DO_DIREITO in (dia.reduzida or "")
                 and _faixa_do_direito(dia) is None):
@@ -633,7 +666,25 @@ def carregar(caminho: Path | None = None) -> Plano:
         mapa=_mapa(dados.get("mapa")),
         materias=materias,
         materias_mistas=mistas,
+        anki=anki,
     )
+
+
+def _anki(valor) -> bool:
+    """A chave `anki`: ativado (o padrao, sem a chave) ou desativado."""
+    if valor is None:
+        return True
+    if valor not in (ANKI_ATIVADO, ANKI_DESATIVADO):
+        raise ErroNoCronograma(
+            f"`anki` e {ANKI_ATIVADO!r} ou {ANKI_DESATIVADO!r} (veio {valor!r})"
+        )
+    return valor == ANKI_ATIVADO
+
+
+def _sem_anki(faixa: Faixa) -> Faixa:
+    """A faixa como ela aparece com o Anki desativado: a do Anki desligada, e
+    o chip do baralho fora de todas. O arquivo nao muda."""
+    return replace(faixa, baralho=None, desligada=faixa.tipo == "anki")
 
 
 # --- a conta dos horarios ----------------------------------------------------
@@ -673,6 +724,12 @@ def montar_dia(plano: Plano, data: date, nivel: int | None = None) -> Dia | None
         relogio = datetime.combine(data, plano.blocos[chave].inicio)
         montadas = []
         for faixa in getattr(gravado, chave):
+            if faixa.desligada:
+                # Sem duracao: o relogio nao anda, e o Bonus que vem depois
+                # comeca as 22h em vez de esperar um Anki que nao existe.
+                montadas.append(replace(faixa, duracao=0, inicio=relogio.time(),
+                                        fim=relogio.time()))
+                continue
             questoes = faixa.questoes
             if nivel is not None and faixa.rampa:
                 questoes = plano.rampa[nivel][faixa.rampa]

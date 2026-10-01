@@ -2249,6 +2249,9 @@ def hoje(
             continue
         console.print(f"\n[bold cyan]{escape(plano.blocos[chave].nome)}[/]")
         for indice, faixa in enumerate(faixas):
+            if faixa.desligada:
+                console.print(f"[dim]{cronograma.FRASE_DO_ANKI_DESATIVADO}[/]")
+                continue
             partes = [cronograma.TIPO_LEGIVEL[faixa.tipo]]
             if faixa.rotulo:
                 partes[0] = faixa.rotulo
