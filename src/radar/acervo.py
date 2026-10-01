@@ -806,6 +806,13 @@ def importar_registros(caminho: Path | None = None) -> int:
     return mudaram
 
 
+def registros_no_arquivo(caminho: Path | None = None) -> dict[str, dict]:
+    """O diario como esta no JSON, pela data (AAAA-MM-DD). E o que a
+    conferencia dos dias (Etapa 1D) compara com o banco."""
+    return {linha["data"]: linha
+            for linha in _ler_registros(caminho or caminho_dos_registros())}
+
+
 def esquecer_registros(datas: list, caminho: Path | None = None) -> int:
     """Tira do arquivo os dias apagados. Devolve quantos sairam."""
     origem = caminho or caminho_dos_registros()
@@ -880,6 +887,12 @@ def importar_estados(caminho: Path | None = None) -> int:
             estado.atualizado_em = atualizado_em
             mudaram += 1
     return mudaram
+
+
+def estados_no_arquivo(caminho: Path | None = None) -> dict[str, dict]:
+    """Os checks como estao no JSON, pela data (AAAA-MM-DD)."""
+    return {linha["data"]: linha
+            for linha in _ler_registros(caminho or caminho_dos_estados())}
 
 
 def esquecer_estados(datas: list, caminho: Path | None = None) -> int:

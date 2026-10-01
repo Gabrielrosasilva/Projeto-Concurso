@@ -34,3 +34,8 @@ data/resposta_ia*.json
 # maquina, e nao dado - o robo do GitHub nao tem nada a ver com eles.
 data/radar_web.pid
 data/logs/
+
+# As copias de seguranca do `radar conferir-dias --aplicar`: o radar.db e os
+# JSON do diario no instante antes da correcao. Sao desta maquina, e o banco
+# nao vai para o git.
+data/copias/

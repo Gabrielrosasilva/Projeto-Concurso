@@ -2391,5 +2391,92 @@ def _registro_legivel(registro) -> str:
     return texto
 
 
+@app.command()
+def conferir_dias(
+    de: str = typer.Option(None, help="Primeiro dia, AAAA-MM-DD (padrao: inicio do ciclo)"),
+    ate: str = typer.Option(None, help="Ultimo dia, AAAA-MM-DD (padrao: hoje)"),
+    aplicar: bool = typer.Option(
+        False, "--aplicar",
+        help="Corrige o que a conferencia propoe, com copia de seguranca antes",
+    ),
+) -> None:
+    """Confere os dias gravados contra a regra de contagem. So le.
+
+    Uma linha por achado: o que esta gravado, o que a regra diz e o que fazer.
+    Com --aplicar, e so depois de aprovar o relatorio: copia o banco e os JSON
+    do diario, corrige o que a conferencia marcou e confere de novo.
+    """
+    try:
+        inicio = date.fromisoformat(de) if de else None
+        fim = date.fromisoformat(ate) if ate else None
+    except ValueError:
+        console.print("[red]Data invalida.[/] Use AAAA-MM-DD.")
+        raise typer.Exit(code=1)
+    try:
+        plano = cronograma.carregar()
+    except cronograma.ErroNoCronograma as erro:
+        console.print(f"[red]Problema no config/cronograma.yml:[/] {erro}")
+        raise typer.Exit(code=1)
+
+    antes = servico.conferencia.conferir(inicio, fim, plano=plano)
+    _mostrar_conferencia(antes)
+    a_corrigir = sum(len(dia.a_corrigir) for dia in antes)
+    if not aplicar:
+        if a_corrigir:
+            console.print(f"\n{a_corrigir} correcao(oes) proposta(s). Nada mudou: "
+                          "para aplicar, rode de novo com --aplicar.")
+        else:
+            console.print("\n[green]Nada a corrigir.[/]")
+        return
+
+    pasta = servico.conferencia.aplicar(antes)
+    if pasta is None:
+        console.print("\n[green]Nada a corrigir:[/] nada foi gravado.")
+        return
+    console.print(f"\n[green]{a_corrigir} correcao(oes) aplicada(s).[/] "
+                  f"Copia de seguranca em {pasta}")
+    depois = servico.conferencia.conferir(inicio, fim, plano=plano)
+    console.print("\n[bold]Depois da correcao[/]")
+    _mostrar_conferencia(depois)
+    _mostrar_antes_e_depois(antes, depois)
+
+
+def _mostrar_conferencia(dias) -> None:
+    tabela = Table(title="Conferencia dos dias gravados", show_lines=True)
+    for coluna in ("Dia", "O que", "O que esta gravado", "O que a regra diz", "Proposta"):
+        tabela.add_column(coluna)
+    for dia in dias:
+        rotulo = f"{dia.data:%d/%m}"
+        if not dia.gravado and not dia.achados:
+            tabela.add_row(rotulo, "-", "nada gravado", "-", "-")
+            continue
+        for achado in dia.achados:
+            proposta = escape(achado.proposta)
+            if achado.corrige:
+                proposta = f"[yellow]{proposta}[/]"
+            tabela.add_row(rotulo, escape(achado.tipo), escape(achado.gravado),
+                           escape(achado.regra), proposta)
+        tabela.add_row(rotulo, "conta do dia", "-",
+                       escape(f"{dia.conta} · "
+                              f"{cronograma.duracao_legivel(dia.minutos)} de estudo"),
+                       "-")
+    console.print(tabela)
+
+
+def _mostrar_antes_e_depois(antes, depois) -> None:
+    tabela = Table(title="Totais antes x depois")
+    for coluna in ("Dia", "Antes", "Depois"):
+        tabela.add_column(coluna)
+    for a, d in zip(antes, depois):
+        if not (a.gravado or d.gravado):
+            continue
+        tabela.add_row(
+            f"{a.data:%d/%m}",
+            escape(f"{a.conta} · {cronograma.duracao_legivel(a.minutos)}"),
+            escape(f"{d.conta} · {cronograma.duracao_legivel(d.minutos)}"),
+        )
+    console.print(tabela)
+
+
 if __name__ == "__main__":
     app()

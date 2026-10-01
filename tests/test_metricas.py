@@ -77,7 +77,7 @@ def _o_dia_28(plano):
     o Bonus marcado com 0 questoes, e 10 questoes de IA no radar (7 certas)."""
     _anotar(plano, "noite", 0, 11, 6)
     _anotar(plano, "noite", 2, 10, 7)
-    _anotar(plano, "pos22", 1, 0, "")
+    _bonus_com_zero_gravado_antes_da_1d(plano)
     for n in range(10):
         _responder(n < 7, _as_21h(minuto=n), gerada=True, questao_id=n + 1)
 
@@ -105,11 +105,27 @@ def test_o_acerto_da_ia_e_um_segundo_numero(banco_temporario, plano):
         "Treino de IA: 7 de 10 (70%), fora do acerto")
 
 
+def _bonus_com_zero_gravado_antes_da_1d(plano):
+    """O Bonus de 28/09: marcado com 0 questoes. Desde a 1D a tela recusa
+    isso, e o dado so existe gravado direto no banco - como o de verdade
+    estava antes da conferencia."""
+    faixa = _faixa(plano, "pos22", 1)
+    check = {"bloco": "pos22", "indice": 1, "titulo": faixa.titulo,
+             "minutos": faixa.duracao or 0, "questoes": 0, "acertos": None,
+             "consulta": False, "materia": faixa.materia, "assunto": faixa.titulo}
+    with sessao() as s:
+        estado = s.query(EstadoDoDia).filter_by(data=SEG).one_or_none()
+        if estado is None:
+            estado = EstadoDoDia(data=SEG, faixas_feitas=[])
+            s.add(estado)
+        estado.faixas_feitas = list(estado.faixas_feitas or []) + [check]
+
+
 def test_o_bonus_com_zero_questoes_conta_os_minutos_e_nenhuma_questao(
         banco_temporario, plano):
-    """A regra para a faixa marcada com 0 questoes e decidida na 1D; aqui so
-    se garante que ela nao inventa questao."""
-    _anotar(plano, "pos22", 1, 0, "")
+    """O que ja estava gravado com 0 questoes nao inventa questao. A tela nao
+    aceita mais o 0 (1D); a conferencia dos dias propoe desmarcar."""
+    _bonus_com_zero_gravado_antes_da_1d(plano)
 
     conta = metricas.do_dia(SEG, plano)
 

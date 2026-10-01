@@ -313,6 +313,14 @@ def anotar_faixa(
             raise RegistroInvalido(
                 f"Acertos ({certas}) maior que as questões feitas ({feitas})."
             )
+    if not feitas:
+        # Regra da 1D: faixa de questoes sem questao nao foi feita. Aceitar o
+        # 0 contava os minutos dela no dia - foi o Bonus de 28 e 29/09, 25 min
+        # cada, de um estudo que nao aconteceu.
+        raise RegistroInvalido(
+            "Faixa de questões com 0 questões não conta como feita: "
+            "se não fez nenhuma, desmarque a faixa."
+        )
 
     return _gravar_check(data, bloco, indice, titulo,
                          _check_da_faixa(bloco, indice, faixa, feitas, certas,
