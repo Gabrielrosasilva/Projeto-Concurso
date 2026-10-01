@@ -2375,3 +2375,36 @@ criados, entao as decisoes dela entram aqui no primeiro commit da Etapa 1:
 5. **resposta a questao anulada depois continua no acerto** ate haver regra
    para isso; a conferencia a acusa. No banco real nao ha nenhuma.
 
+## A rotina nova do Ciclo 1 e o Anki desativado (Etapa 6A, 01/10/2026)
+
+Aprovado por voce em 01/10, com os numeros do arquivo real (o roteiro
+estimava o Anki em 30 min; ele tinha 15 nos dias uteis e 10 no sabado):
+
+1. **a manha do dia util, de 02/10 em diante:** teoria dirigida 40 (teto, uma
+   fonte so) · **fixacao do tema, 8 questoes (20 min), com consulta** · pausa
+   10 · lei seca dirigida 20 (so os artigos `chave` do `essencial` do dia) ·
+   pausa 10 · Portugues, teoria 20 + **6 questoes (15 min)**. Sao 2h15 e 14
+   questoes (era 2h20 e nenhuma). A noite nao mudou;
+2. **o dia util ficou 20 min mais curto e com 14 questoes a mais** (semana 1:
+   3h50 e 39; com R+7: 4h20-4h25 e 49; com R+30: 4h50 e 59). O sabado perde os
+   10 min do Anki;
+3. **a fixacao vem com a caixa "com consulta" marcada**, como a aprendizagem
+   de Direito: acabou de ler o tema, o numero inflaria a meta. A chave
+   `consulta: true|false` passou a existir por faixa; sem ela, vale a regra de
+   antes (so a `rampa: direito`). A fixacao de Portugues e sem consulta;
+4. **dias antes de 02/10 nao mudaram** (teste com a impressao deles): os
+   checks sao reconhecidos por bloco, posicao e titulo. O 01/10 ficou no
+   formato antigo, porque a manha dele ja tinha passado;
+5. **`anki: desativado` no topo do `cronograma.yml`.** As 36 faixas e os 30
+   `baralho` continuam no arquivo. Desativada, a faixa fica NA MESMA POSICAO
+   (tira-la mudaria a posicao do Bonus, e os checks contam posicao), sem
+   duracao, fora do total, da sugestao de meta e de "a proxima faixa", e nao
+   se marca; a tela e o `radar hoje` mostram "ANKI temporariamente
+   desativado", e o chip do baralho some. **Para religar: `anki: ativado`.**
+   Sem a chave, vale ativado (o arquivo antigo carrega igual);
+6. **textos reescritos de 02/10 em diante:** a lei seca nao manda mais
+   "transformar em cartoes do Anki"; o item (3) da revisao semanal de sabado
+   virou "releia os artigos-chave da semana (os da lei seca dirigida)"
+   (escolha sua); o bloco "Depois das 22h — Anki" virou "Depois das 22h".
+   Religar o Anki nao desfaz esses textos.
+

@@ -11,7 +11,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 2 | 1B — Texto de máquina e Previsão | ✅ |
 | 3 | 1C — Fonte única das métricas | ✅ |
 | 4 | 1D — Conferência dos dados gravados | ✅ |
-| 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ⬜ |
+| 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ⬜ |
 | 7 | 3A — Classificação do alvo e incidência | ⬜ |
 | 8 | 3B — Acervo complementar FEPESE | ⬜ |
@@ -317,3 +317,91 @@ e mostra antes × depois; a linha do dia é a mesma do `metricas`.
   para os JSON), com cópia de segurança antes;
 - [x] totais antes × depois conferidos: questões iguais, 25 min a menos em
   cada dia.
+
+---
+
+## 6A — Rotina nova do Ciclo 1 e ANKI desativado (01/10/2026)
+
+- Situação: concluída (aguardando sua aprovação para seguir à Etapa 2)
+- Datas: início 01/10 · fim 01/10
+
+**Plano conferido contra o código antes de começar:** válido na estrutura,
+com os números corrigidos pelo arquivo real e mostrados antes de aplicar:
+1. o Anki tinha 15 min nos dias úteis e 10 no sábado (só 28/09 tinha 30), e
+   o dia útil ia de 4h10 a 5h10, não 4h25. A economia é de **20 min por dia
+   útil**, não 35;
+2. outros textos citavam o Anki: as 30 lei secas ("cartões do Anki à
+   noite"), o item (3) da revisão semanal e o nome do bloco "Depois das 22h —
+   Anki". Reescritos de 02/10 em diante;
+3. a faixa do Anki desligada fica na mesma posição, sem duração (tirá-la
+   mudaria a posição do Bônus e os checks contam posição).
+
+**Aprovado por você:** a distribuição como proposta; aplicação a partir de
+**02/10**; o item (3) do sábado vira "releia os artigos-chave da semana".
+
+**Arquivos alterados.**
+- `config/cronograma.yml` — `anki: desativado` no topo, as chaves novas no
+  cabeçalho, o bloco "Depois das 22h", e os 32 dias de 02/10 a 07/11 (26
+  úteis com a manhã nova, 6 sábados com o item trocado). Script de uso único
+  fora do repositório; o trecho antes de 02/10 ficou com o texto idêntico;
+- `src/radar/cronograma.py` — chave `anki` (`ativado`/`desativado`, sem a
+  chave = ativado), `Faixa.desligada`, `Faixa.consulta` e
+  `consulta_por_padrao` lendo a chave, `montar_dia` sem tempo para a
+  desligada, `Dia.faixas()` só com as que valem;
+- `src/radar/servico/cronograma.py` — a sugestão de meta ignora a desligada;
+  ela não se marca; o horário do bloco sai das faixas que valem;
+- `src/radar/web/templates/hoje.html` e `src/radar/web/app.py` — a linha
+  minimizada "ANKI temporariamente desativado";
+- `src/radar/cli.py` — a mesma linha no `radar hoje`;
+- `README.md` — "Religar o Anki" e a caixa "com consulta" na fixação;
+- testes: `tests/test_rotina_sem_anki.py` (novo); `test_cronograma.py`
+  (total do ciclo 1690 → 2054 = + 26 × 14), `test_tela_hoje.py` (28/10:
+  60 → 74), `test_caderno_erros.py` (o botão "Anotar erro" aparece na
+  fixação da manhã e continua fora da teoria). O `cronograma_mini.yml` não
+  mudou: sem a chave, ele carrega como antes;
+- docs: `decisoes.md`, `historico.md`, `pendencias.md` (B.3 e B.5 provisórios;
+  perguntas 3 e 4 respondidas), `CLAUDE.md` ("Estado atual"), este arquivo.
+
+**Testes novos (16, em `test_rotina_sem_anki.py`).** Sem a chave, ativado;
+desativado: a faixa fica no lugar, sem tempo, o Bônus começa às 22h, fora de
+`faixas()` e sem baralho; o total não muda e a sugestão dá Ideal sem o Anki;
+o Anki desligado não se marca; religar volta igual a antes; valor errado na
+chave é erro; `consulta: true` marca a caixa e `consulta: false` desmarca até
+a rampa de Direito; tela Hoje e `radar hoje` com a linha minimizada e a
+fixação; no arquivo real: Anki desativado sem apagar faixa nem baralho
+(36 e 30), **nenhum dia antes de 02/10 mudou** (impressão dos dias), toda
+manhã de dia útil com 14 questões (8 com consulta + 6 sem), manhã de 2h15 e
+nada do Anki no total, lei seca de 20 min com os artigos-chave do dia, Anki
+fora dos textos novos, Plano B montando em todos os dias úteis (30 e 60).
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| Arquivos do cronograma, depois das chaves `anki` e `consulta` | 203 passed |
+| `test_rotina_sem_anki.py`, 1ª rodada | 15 passed, 1 failed (a contagem de "tipo: anki" pegava os comentários novos; passou a contar "- tipo: anki") |
+| Arquivos do cronograma, depois da reescrita do YAML | 173 passed, 2 failed (`test_cronograma` e `test_tela_hoje` fixavam o total antigo; atualizados) → 108 passed |
+| Os outros arquivos que leem o cronograma real | 347 passed, 1 failed (`test_caderno_erros`: a manhã agora tem questões; ajustado) → 52 passed |
+| Suíte inteira, PC (uma vez, no fim) | **1916 passed** (1900 de antes + 16 novos), 14 min |
+
+**Comando real rodado.**
+- `radar hoje --data 2026-10-02`: manhã 10:15–12:30 com "Fixação: Assistência
+  ao preso e ao egresso" (8 questões) e "Fixação: Verbo 2" (6), "Lei seca
+  dirigida: LEP art. 10; LEP art. 11; LEP art. 26" (11:25–11:45), "ANKI
+  temporariamente desativado" e o Bônus às 22:00–22:25; "Total do dia: 39
+  questões";
+- `radar web` (porta 8771), `/hoje?data=2026-10-02`: as mesmas faixas, a
+  linha minimizada, nenhum chip 🃏, o bloco "Depois das 22h"; com o relógio
+  em 02/10, a caixa "com consulta" marcada na fixação de Direito e
+  desmarcada na de Português;
+- **religar testado:** `anki: ativado` → `radar hoje` mostra "22:00-22:15 Anki
+  [3] LEP" e o Bônus às 22:15, a tela volta a ter o chip "🃏 [3] LEP";
+  `anki: desativado` de novo → a linha minimizada volta, e o arquivo ficou
+  idêntico ao de antes da troca.
+
+**Critério de conclusão.**
+- [x] a proposta foi aprovada e aplicada;
+- [x] a tela Hoje e o `radar hoje` de 02/10 mostram a manhã com questões e o
+  ANKI minimizado;
+- [x] religar testado (troca a chave, confere, destroca);
+- [x] como religar está no README ("Religar o Anki").

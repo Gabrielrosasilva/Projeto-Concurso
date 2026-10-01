@@ -41,12 +41,17 @@ Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
    provas de Policia Penal e Agente Penitenciario SC;
 2. um mapa de incidencia por tema (🔥 cai sempre · ⚠ as vezes · 💤 nunca caiu),
    mostrado em cada faixa; o 💤 vira "leitura por cima, 10 min";
-3. trocar a lei seca por "artigo cobrado": 10-15 min lendo so os artigos que
-   cairam, mais a lista das pegadinhas, cada uma com o numero da questao real;
-   o tempo que sobra vai para questoes;
+3. 🟡 trocar a lei seca por "artigo cobrado": 10-15 min lendo so os artigos
+   que cairam, mais a lista das pegadinhas, cada uma com o numero da questao
+   real; o tempo que sobra vai para questoes. **Provisorio feito na 6A
+   (02/10):** a lei seca virou "dirigida", 20 min, so os artigos-chave do
+   `essencial` do dia (selecao do plano, nao incidencia). Os artigos que a
+   FEPESE cobrou entram na 6B;
 4. questoes distribuidas pela incidencia, nao uma por artigo (FEPESE real
    primeiro; as da IA so no modo `variacao`);
-5. teoria com teto: uma fonte por tema, nunca video por artigo.
+5. 🟡 teoria com teto: uma fonte por tema, nunca video por artigo.
+   **Provisorio feito na 6A:** teoria de 40 min com "uma fonte so: passou do
+   tempo, siga para a fixacao" no detalhe. A ficha da tarefa e da 6B.
 
 **Perguntas que ficaram sem resposta** (preciso delas antes de qualquer
 roteiro):
@@ -55,9 +60,9 @@ roteiro):
    Policia Penal, ou tambem 2013 e 2016?
 2. Quem classifica os assuntos: o Claude Code no VS Code, sem pagar, no mesmo
    esquema do `gerar --pedido`, ou a mao?
-3. Ate o mapa ficar pronto, quero uma versao enxuta do cronograma agora (lei
-   seca para 15 min e o resto em questoes)?
-4. O Anki continua? A faixa de 28/09 pede 30 min para montar os baralhos.
+
+As perguntas 3 (versao enxuta agora) e 4 (o Anki continua?) foram respondidas
+e feitas na Etapa 6A: rotina nova a partir de 02/10 e `anki: desativado`.
 
 Sem resposta tambem: **quantas questoes dos arts. 1o a 12 do CP cairam em
 2019?** O banco com as 8.433 questoes mora no meu PC; a copia que a sessao web

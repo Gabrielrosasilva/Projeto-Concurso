@@ -1373,6 +1373,24 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
   mudaram (31 e 37). Copia de antes em `data/copias/conferencia-2026-10-01-143927`;
 - a tela passou a recusar faixa de questoes com 0 questoes.
 
+## Etapa 6A do pedido de evolucao: questoes de manha e o Anki desativado (01/10)
+
+- a proposta foi apresentada com os numeros do arquivo real e aprovada antes
+  de mexer: o "Comportamento atual" do roteiro tinha o Anki em 30 min e o dia
+  em 4h25, e o arquivo tinha 15 min e dias de 4h10 a 5h10;
+- `config/cronograma.yml` reescrito de 02/10 em diante por um script de uma
+  vez so, fora do repositorio, com o resumo dia a dia (26 dias uteis com a
+  manha nova, 6 sabados com o item do Anki trocado). O trecho do arquivo
+  antes de 02/10 ficou com o texto identico;
+- a chave `anki` e a `consulta` por faixa no `cronograma.py`; a faixa do Anki
+  desligada fica na lista, sem duracao, e `Dia.faixas()` passou a devolver so
+  as que valem;
+- religar foi testado no arquivo real: com `anki: ativado` o Anki volta as
+  22:00-22:15, o Bonus a 22:15 e o chip do baralho reaparece;
+- tres testes que fixavam numeros do arquivo real mudaram junto: o total do
+  ciclo (1690 -> 2054 = + 26 x 14), o dia 28/10 (60 -> 74) e o botao "Anotar
+  erro", que agora aparece na fixacao da manha (e continua fora da teoria).
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e
