@@ -111,9 +111,10 @@ Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 ([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A, a
 1B (frases dos eventos e da Previsao, acentos na tela web), a 1C (fonte unica
 das metricas), a 1D (`radar conferir-dias`; o Bonus de 28 e 29/09 saiu, e
-faixa de questoes com 0 questoes e recusada) e a 6A (de 02/10: 14 questoes de
-manha, lei seca dirigida, `anki: desativado`). Proxima: Etapa 2, estrutura de
-conteudos.
+faixa de questoes com 0 questoes e recusada), a 6A (de 02/10: 14 questoes de
+manha, lei seca dirigida, `anki: desativado`) e a 2 (arvore de conteudos,
+evidencia alvo/complementar/fora, banco na versao 1 com `radar migrar`).
+Proxima: 3A, classificacao do alvo e incidencia.
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.
@@ -123,7 +124,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 (`servico/coleta.py`) - nada fora de `collectors/` sabe de onde vem o dado. O
 `servico` e um pacote, um arquivo por assunto; escreva `servico.funcao(...)`.
 **Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
-tela nenhuma refaz a conta, e template nenhum soma.
+tela nenhuma refaz a conta, e template nenhum soma. **Alvo, complementar e
+fora saem do `servico/evidencia.py`** (uma regra, nunca somados), e tudo que
+aponta para um conteudo usa o caminho do no (`data/conteudos.json`).
+Mudanca de estrutura do banco vira passo novo em `migracoes.py`.
 
 ## Fontes de dados
 

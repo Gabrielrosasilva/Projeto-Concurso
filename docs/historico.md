@@ -1391,6 +1391,27 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
   ciclo (1690 -> 2054 = + 26 x 14), o dia 28/10 (60 -> 74) e o botao "Anotar
   erro", que agora aparece na fixacao da manha (e continua fora da teoria).
 
+## Etapa 2 do pedido de evolucao: arvore de conteudos, evidencia e migracao (01/10)
+
+- plano conferido contra o codigo: valido. Duas decisoes suas antes de
+  implementar: as 20 geradas de Penal (tema fora do programa de 2019) ficam
+  so em "Direito Penal"; a copia da migracao vai para `data/copias/`;
+- novos: `migracoes.py`, `conteudos.py`, `servico/evidencia.py`,
+  `servico/conteudos.py`, `servico/classificacoes.py`,
+  `config/taxonomia.yml`; tabelas `conteudos`, `classificacoes` e
+  `versao_do_banco`; colunas `questoes.evidencia` e `conteudo` nas geradas, no
+  caderno de erros e no estudo extra; comandos `radar migrar` e `radar
+  conteudos`;
+- ensaio numa copia do banco e dos JSON no scratchpad, e so depois o banco
+  real: versao 0 -> 1, nenhuma linha perdida (8.433 questoes, 2.848
+  concursos, 80 respostas...), 98 nos, evidencia 170 / 7.356 / 907;
+- o caderno de erros e o estudo extra ganharam o JSON no disco agora: os 2
+  erros so existiam no radar.db (o `sincronizar` nao rodou desde 28/09);
+- tres arquivos de teste mudaram com a regra unica: o `test_treino_do_alvo` e
+  dois do `test_foco` montavam questao do alvo sem concurso (sem estado
+  provado, a prova nao e do alvo), e o `test_sincronizar` ganhou os dois JSON
+  novos.
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e

@@ -2408,3 +2408,58 @@ estimava o Anki em 30 min; ele tinha 15 nos dias uteis e 10 no sabado):
    (escolha sua); o bloco "Depois das 22h — Anki" virou "Depois das 22h".
    Religar o Anki nao desfaz esses textos.
 
+## A estrutura de conteudos, a evidencia e a migracao (Etapa 2, 01/10/2026)
+
+1. **Uma regra de evidencia, em `servico/evidencia.py`.** `alvo` = a prova do
+   cargo do alvo principal E do estado dele (config/alvo.yml); `complementar`
+   = outra prova de uma banca do alvo (FEPESE); `fora` = o resto (IESES). Ela
+   substitui as duas de antes: o `foco._provas_do_alvo` (cargo e estado)
+   passou a delegar a ela, e o simulado, que olhava so o cargo, tambem. A
+   coluna `questoes.evidencia` e a fotografia dela, refeita na migracao, ao
+   ler os cadernos, no `importar` e no `sincronizar`. No acervo real: 170 alvo
+   (2013 e 2019), 7.356 complementar (o Socioeducativo 2016 entre elas, que
+   deixou de ser "reforco" na contagem) e 907 fora. A auditoria continua
+   auditando o 2016 como antes (`alvo.e_reforco`);
+2. **a arvore** (`conteudos`): materia > assunto > subassunto > elemento, os
+   dois de baixo opcionais. O no se reconhece pelo **caminho de nomes**
+   ("Direito Penal > Imputabilidade penal"), no banco e nos JSON - nao pelo
+   id, que muda quando o banco e refeito. A semente e o anexo de programas de
+   2019 com o texto literal (11 materias, 85 assuntos) mais Nocoes de
+   Informatica e Direito Administrativo, que cairam em 2013, marcadas "fora do
+   edital atual". O arquivo versionado e o `data/conteudos.json`;
+3. **a taxonomia** mora no `config/taxonomia.yml`: os tipos de elemento por
+   familia de materia, os tipos de questao, as materias fora do edital e os
+   sinonimos de materia de prova antiga ("Direito Processo Penal" de 2013 =
+   "Direito Processual Penal"). Ampliar a lista nao muda o banco;
+4. **a classificacao** (`classificacoes`): pela impressao do enunciado; uma
+   principal por questao (a nova rebaixa a antiga a associada); status
+   **completa** (no sem filho), **parcial** (no com filho) ou **pendente** (so
+   a materia, ou dado assim por quem classificou); procedencia obrigatoria,
+   sem ela a linha e recusada. Questao sem classificacao tambem e pendente,
+   sem precisar de linha: hoje sao todas. Arquivo: `data/classificacoes.json`.
+   O formato antigo (`data/assuntos.json`) continua entrando, e vira
+   classificacao quando casa com um no; o resto fica pendente na materia, com
+   o texto antigo no trecho;
+5. **textos antigos**: ligados so quando casam EXATAMENTE (sem diferenca de
+   maiuscula nem acento) com um no; o texto fica onde esta. As 20 geradas de
+   Penal ("Aplicacao da lei penal (arts. 1o a 12)", tema que o programa de
+   2019 nao lista) ficam em "Direito Penal" com o assunto pendente (escolha
+   sua, 01/10): nenhum no novo fora do edital. A regra que as liga e geral -
+   texto que e titulo de uma faixa vale a materia da faixa. As 20 de LEP em
+   "Lei de Execucao Penal"; as 10 de Portugues e os 2 erros anotados so na
+   materia (o assunto nao casa);
+6. **chave `conteudo` nas faixas do cronograma.yml**, conferida no
+   carregamento contra o `data/conteudos.json` (sem o arquivo, nao confere).
+   So 6 faixas casam exatamente hoje (Portugues: Vozes do verbo, Ortografia
+   oficial, Acentuacao grafica; manha e noite). A "Fixacao: X" nao entra:
+   o texto nao e igual. O check da faixa guarda o `conteudo` quando ela tem;
+7. **migracao versionada** (`migracoes.py`): a versao fica na tabela
+   `versao_do_banco`; cada passo e numerado e nunca editado depois; antes de
+   qualquer passo, o radar.db e copiado para
+   `data/copias/migracao-v<de>-para-v<para>-<hora>/` (a pasta da 1D, fora do
+   git - escolha sua, no lugar do `data/backup/` do roteiro); passo que
+   termine com menos linhas e desfeito pela copia e a migracao para;
+   `radar migrar --desfazer` restaura a ultima copia (e guarda o banco de
+   antes de desfazer). Qualquer comando migra sozinho na primeira vez, como as
+   colunas novas ja faziam; banco novo nasce na versao atual, sem copia.
+

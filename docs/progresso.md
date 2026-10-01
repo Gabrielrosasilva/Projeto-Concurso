@@ -12,7 +12,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 3 | 1C — Fonte única das métricas | ✅ |
 | 4 | 1D — Conferência dos dados gravados | ✅ |
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
-| 6 | 2 — Estrutura de conteúdos | ⬜ |
+| 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | ⬜ |
 | 8 | 3B — Acervo complementar FEPESE | ⬜ |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
@@ -405,3 +405,113 @@ fora dos textos novos, Plano B montando em todos os dias úteis (30 e 60).
   ANKI minimizado;
 - [x] religar testado (troca a chave, confere, destroca);
 - [x] como religar está no README ("Religar o Anki").
+
+---
+
+## 2 — Estrutura de conteúdos (01/10/2026)
+
+- Situação: concluída (aguardando sua aprovação para seguir à 3A)
+- Datas: início 01/10 · fim 01/10
+
+**Plano conferido contra o código antes de começar:** válido. Os números do
+roteiro bateram (170 do alvo, 70 de 2016, 907 da IESES; 11 matérias e 85
+assuntos no programa; `assuntos.json` vazio). Três pontos, mostrados antes:
+1. **as 20 geradas de Penal** são de "Aplicação da lei penal (arts. 1º a
+   12)", que o programa de 2019 **não lista** (Penal tem 5 itens): não havia
+   "[assunto do edital]" onde ligá-las. Você escolheu: só "Direito Penal",
+   assunto pendente, nenhum nó novo;
+2. **cópia da migração** em `data/copias/` (a pasta da 1D), no lugar do
+   `data/backup/`: escolha sua;
+3. desenho: todo vínculo a um nó é o **caminho de nomes**, também no banco;
+   questão sem classificação é pendente sem precisar de linha.
+
+**Arquivos alterados.**
+- novos: `src/radar/migracoes.py`, `src/radar/conteudos.py`,
+  `src/radar/servico/evidencia.py`, `src/radar/servico/conteudos.py`,
+  `src/radar/servico/classificacoes.py`, `config/taxonomia.yml`;
+- `models.py` (tabelas `conteudos`, `classificacoes`, `versao_do_banco`;
+  `questoes.evidencia`; `conteudo` nas geradas, no caderno de erros e no
+  estudo extra), `db.py` (a versão conferida no `criar_tabelas`);
+- a regra única: `foco.py` (`_provas_do_alvo` delega; sai o `_e_do_cargo`),
+  `servico/simulado.py` (`_questoes_para_o_alvo`), `servico/provas.py`
+  (evidência refeita depois de ler os cadernos);
+- `acervo.py` (`conteudo` no caderno, no extra e nas geradas; o assunto
+  antigo vira classificação), `cli.py` (`radar migrar`, `radar conteudos`;
+  `importar`, `exportar` e `sincronizar` com os JSON novos e a evidência);
+- `cronograma.py` e `servico/cronograma.py` (a chave `conteudo` da faixa,
+  conferida contra a árvore, e no check); `config/cronograma.yml` (6 faixas
+  de Português com `conteudo`, todas de 05/10 em diante, e o cabeçalho);
+- dados: `data/conteudos.json`, `data/classificacoes.json` (vazio),
+  `data/caderno_erros.json` e `data/estudo_extra.json` (não existiam no
+  disco), `data/questoes_geradas.json` (só o campo `conteudo`);
+- testes: `test_migracoes.py`, `test_conteudos.py`, `test_evidencia.py`
+  (novos); `test_foco.py`, `test_treino_do_alvo.py` (questões do alvo agora
+  com o concurso de SC: sem estado provado não é alvo), `test_sincronizar.py`
+  (os dois JSON novos no commit);
+- `.gitignore` (comentário: `data/copias/` também guarda a migração);
+  `README.md`; docs: `decisoes.md`, `historico.md`, `pendencias.md`,
+  `CLAUDE.md`, este arquivo.
+
+**Testes novos (32).**
+- migração: o banco antigo está mesmo no formato antigo; migrar mantém as
+  contagens e cria o que falta (98 nós, evidência, ligações); a cópia é feita
+  antes e é o banco de antes; migrar duas vezes não duplica nem copia de
+  novo; qualquer comando migra sozinho; desfazer devolve o banco como era (e
+  guarda o de antes de desfazer); passo que apaga linha é desfeito pela
+  cópia; banco novo nasce na versão atual sem cópia; o comando mostra o
+  "antes × depois", "nada a migrar" e desfaz;
+- árvore: a semente dá as 11 matérias e os 85 assuntos literais (a "Regras
+  mínimas da ONU…", e o "espécies" sozinho, defeito do edital); as 2 de 2013
+  fora do edital; semear não duplica e o JSON reconstrói; níveis opcionais e
+  o elemento com tipo; o tipo segue a família; **tipo novo no YAML funciona
+  sem migração**;
+- classificação: **sem procedência é recusada**; o status sai da árvore; uma
+  principal por questão; **texto antigo que não casa fica pendente**; o JSON
+  vai e volta; o JSON recusa linha sem procedência ou com nó inexistente; o
+  `assuntos.json` antigo vira classificação;
+- textos antigos e cronograma: a prévia não grava; título de faixa vale a
+  matéria da faixa; sinônimo de 2013; a chave `conteudo` conferida contra a
+  árvore e gravada no check; sem árvore não confere; pendente é a questão sem
+  principal (anulada fora); o comando `radar conteudos --pendentes`;
+- evidência: a regra de cada prova; `atualizar` grava a coluna; **as duas
+  regras antigas dão o mesmo que a nova**; **adicionar prova complementar não
+  muda nenhum número do alvo** (incidência, questões do treino, pendentes).
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_evidencia.py` | 4 passed |
+| `test_migracoes.py`, 1ª rodada | 1 passed, 7 errors (campo `explicacao` inexistente na gerada do teste; corrigido) → 8 passed |
+| `test_conteudos.py`, 1ª rodada | falhas por autoflush (o status consultado depois do `add`; corrigido no `classificar`) → 18 passed |
+| Arquivos das áreas afetadas (19 arquivos) | 425 passed, 18 failed (16 do `test_treino_do_alvo` e 2 do `test_foco` sem concurso de SC; 1 do `test_sincronizar` com a lista de arquivos; ajustados) → 102 passed |
+| Novos com os testes de comando | 28 passed |
+| Cronograma real com a chave `conteudo` | 125 passed |
+| Suíte inteira, PC (uma vez, no fim) | **1948 passed** (1916 de antes + 32 novos), 17 min |
+
+**Comando real rodado (banco real).**
+- ensaio antes, numa cópia do banco e dos JSON no scratchpad: o mesmo
+  resultado abaixo;
+- `radar migrar`: versão 0 → 1, cópia em
+  `data/copias/migracao-v0-para-v1-2026-10-01-163540`. Antes × depois:
+  concursos 2848 = 2848, questoes 8433 = 8433, questoes_geradas 50 = 50,
+  respostas_de_simulado 80 = 80, simulados 4 = 4, eventos 58 = 58,
+  erros_anotados 2 = 2, registros_de_estudo 2 = 2, estados_do_dia 2 = 2;
+  novas: conteudos 98, classificacoes 0, versao_do_banco 1. "Nenhuma linha
+  perdida". De novo: "Banco já está na versão 1. Nada a migrar";
+- evidência no banco: **170 alvo** (2013: 70, 2019: 100), **7.356
+  complementar** (o 2016 com as 70), **907 fora**;
+- `radar conteudos`: "11 matéria(s) do edital · 2 fora do edital atual · 85
+  assunto(s)" — o mesmo que o `edital_programa` lê (11 e 85);
+- `radar conteudos --pendentes`: 162 alvo (2019: 95, 2013: 67; as 8
+  anuladas fora) · 7.354 complementar em 162 provas · 907 fora.
+
+**Critério de conclusão.**
+- [x] migração rodada no banco real, com o "antes × depois" batendo;
+- [x] `radar conteudos` mostra a árvore: 11 matérias e os 85 assuntos que o
+  `edital_programa.py` lê (mais as 2 fora do edital, marcadas);
+- [x] evidência conferida: 170 questões do alvo, as 70 de 2016 como
+  complementar;
+- [x] pendentes listados (`radar conteudos --pendentes`);
+- [x] docs atualizados.
+

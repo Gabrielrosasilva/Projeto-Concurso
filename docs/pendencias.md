@@ -109,7 +109,8 @@ O A2 e o A3, que mexiam nos mesmos templates, foram feitos na Etapa 1B.
   a descricao crua do evento), o relatorio `docs/auditoria.md`
   (`auditoria.py`) e o `motivo_elegibilidade` gravado (`perfil.py`). Os nomes
   de assunto do `macetes.py` ("Concordancia", "Pontuacao"...) sao chave de
-  casamento e so mudam com a taxonomia (Etapa 2). Prompts de IA ficam sem
+  casamento: a arvore de conteudos existe desde a Etapa 2, mas ligar esse
+  catalogo aos nos dela e da 3A, com a classificacao. Prompts de IA ficam sem
   acento de proposito;
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
