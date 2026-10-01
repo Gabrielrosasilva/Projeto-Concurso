@@ -15,7 +15,7 @@ estou melhorando.
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
-from sqlalchemy import case, func, select
+from sqlalchemy import func, select
 
 from radar import alvo as alvos
 from radar import macetes, regioes
@@ -28,6 +28,20 @@ from radar.models import (
     agora,
 )
 from radar.servico.comum import cargo_parecido as _cargo_parecido
+# A conta do acerto mora no `servico.metricas`, a fonte unica (Etapa 1C).
+# Os nomes continuam aqui porque a fachada `servico` e a home os leem daqui.
+from radar.servico.metricas import (     # noqa: F401 - reexportados
+    DIAS_DA_EVOLUCAO,
+    MINIMO_PARA_EVOLUCAO,
+    DesempenhoDaMateria,
+    Evolucao,
+    desempenho,
+    desempenho_das_geradas,
+    evolucao,
+    placar,
+    resumo_do_simulado,
+)
+from radar.servico.metricas import ultimas_respostas_reais as _ultimas_respostas_reais
 
 
 # Materias que caem em QUALQUER concurso, independente do cargo. Sao as que
@@ -393,139 +407,12 @@ def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
         return resposta.acertou
 
 
-@dataclass
-class DesempenhoDaMateria:
-    materia: str
-    respondidas: int = 0
-    acertos: int = 0
-
-    @property
-    def porcentagem(self) -> float:
-        return (self.acertos / self.respondidas * 100) if self.respondidas else 0.0
-
-
-def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
-    """Acerto por materia nas questoes REAIS.
-
-    **Sem id, e o acumulado, e ele conta QUESTAO, e nao tentativa**: cada
-    questao entra uma vez, pela minha resposta mais recente a ela.
-    "Respondidas" quer dizer questoes diferentes. Contar tentativas fazia a
-    mesma questao refeita 4 vezes valer 4 - e refazer questao ja decorada
-    inflava o acerto sem eu ter aprendido nada. Nenhuma tentativa e apagada:
-    elas continuam no banco, para a revisao espacada e a evolucao.
-
-    **Com id, e o relatorio daquela rodada**, e conta as respostas dela.
-
-    Questao gerada nao entra aqui, e nunca vai entrar somada: acertar uma
-    variacao que a IA escreveu nao e a mesma coisa que acertar o que a FEPESE
-    cobrou. O numero delas sai em `desempenho_das_geradas`, do lado.
-    """
-    criar_tabelas()
-    if simulado_id is None:
-        return _desempenho_pela_ultima_resposta()
-
-    consulta = (
-        select(
-            QuestaoDeProva.materia,
-            func.count(),
-            # Somar a coluna booleana direto NAO funciona: o SQLAlchemy
-            # devolve a soma com o tipo da coluna, entao 2 acertos voltam
-            # como True e viram 1. O case transforma em inteiro antes.
-            func.sum(case((RespostaDeSimulado.acertou.is_(True), 1), else_=0)),
-        )
-        .join(QuestaoDeProva, QuestaoDeProva.id == RespostaDeSimulado.questao_id)
-        .where(RespostaDeSimulado.escolhida.is_not(None))
-        .where(RespostaDeSimulado.gerada.is_(False))
-        .group_by(QuestaoDeProva.materia)
-    )
-    return _somar_desempenho(consulta, simulado_id)
-
-
-def _desempenho_pela_ultima_resposta() -> list[DesempenhoDaMateria]:
-    """O acumulado: uma linha por questao, a da ultima resposta."""
-    with sessao() as s:
-        ultimas = _ultimas_respostas_reais(s)
-        if not ultimas:
-            return []
-        materia_de = dict(s.execute(
-            select(QuestaoDeProva.id, QuestaoDeProva.materia)
-            .where(QuestaoDeProva.id.in_(list(ultimas)))
-        ).all())
-
-    por_materia: dict[str, DesempenhoDaMateria] = {}
-    for questao_id, resposta in ultimas.items():
-        if questao_id not in materia_de:
-            continue                    # questao que saiu do acervo
-        nome = materia_de[questao_id] or "sem materia"
-        linha = por_materia.setdefault(nome, DesempenhoDaMateria(nome))
-        linha.respondidas += 1
-        linha.acertos += 1 if resposta.acertou else 0
-
-    resultado = list(por_materia.values())
-    resultado.sort(key=lambda d: d.porcentagem)      # pior primeiro
-    return resultado
-
-
-def desempenho_das_geradas(
-    simulado_id: int | None = None,
-) -> list[DesempenhoDaMateria]:
-    """O mesmo, para as questoes escritas pela IA. Sempre um numero a parte.
-
-    Existe como funcao propria, e nao como parametro de `desempenho`, porque
-    o parametro convidaria alguem a somar os dois um dia. Sao duas perguntas
-    diferentes: "quanto eu acerto do que a banca cobrou" e "quanto eu acerto
-    no treino que eu mandei escrever".
-    """
-    criar_tabelas()
-    consulta = (
-        select(
-            QuestaoGerada.materia,
-            func.count(),
-            func.sum(case((RespostaDeSimulado.acertou.is_(True), 1), else_=0)),
-        )
-        .join(QuestaoGerada, QuestaoGerada.id == RespostaDeSimulado.questao_id)
-        .where(RespostaDeSimulado.escolhida.is_not(None))
-        .where(RespostaDeSimulado.gerada.is_(True))
-        .group_by(QuestaoGerada.materia)
-    )
-    return _somar_desempenho(consulta, simulado_id)
-
-
-def _somar_desempenho(consulta, simulado_id: int | None) -> list[DesempenhoDaMateria]:
-    """Roda a consulta de acerto por materia e ordena pior primeiro."""
-    if simulado_id is not None:
-        consulta = consulta.where(RespostaDeSimulado.simulado_id == simulado_id)
-
-    with sessao() as s:
-        linhas = s.execute(consulta).all()
-
-    resultado = [
-        DesempenhoDaMateria(m or "sem materia", int(total), int(acertos or 0))
-        for m, total, acertos in linhas
-    ]
-    # pior primeiro: e onde vale gastar tempo de estudo
-    resultado.sort(key=lambda d: d.porcentagem)
-    return resultado
-
-
 def simulados_recentes(limite: int = 10) -> list[Simulado]:
     criar_tabelas()
     with sessao() as s:
         return list(s.scalars(
             select(Simulado).order_by(Simulado.criado_em.desc()).limit(limite)
         ))
-
-
-def resumo_do_simulado(simulado_id: int) -> dict:
-    """Quantas questoes, quantas respondidas e quantos acertos."""
-    respostas = _respostas(simulado_id)
-    respondidas = [r for r in respostas if r.escolhida]
-    return {
-        "total": len(respostas),
-        "respondidas": len(respondidas),
-        "acertos": sum(1 for r in respondidas if r.acertou),
-        "terminou": bool(respostas) and len(respondidas) == len(respostas),
-    }
 
 
 def buscar_simulado(simulado_id: int) -> Simulado | None:
@@ -607,34 +494,6 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
 
 # --- os meus erros, e a minha evolucao (home, 25/09/2026) -------------------
 #
-# A home precisa de duas respostas: "o que eu tenho para revisar?" e "estou
-# melhorando?". As duas sao so sobre questao REAL - acertar o que a IA escreveu
-# nao entra, pela mesma regra do `desempenho`.
-
-# Abaixo disto de respostas, nao ha evolucao para medir: a tela convida a
-# responder, em vez de mostrar uma porcentagem de meia duzia de questoes.
-MINIMO_PARA_EVOLUCAO = 20
-
-# A janela da variacao. E a da especificacao: "a variacao nos ultimos 30 dias".
-DIAS_DA_EVOLUCAO = 30
-
-
-def _ultimas_respostas_reais(s) -> dict[int, RespostaDeSimulado]:
-    """{questao_id: a resposta mais recente que eu dei a ela}, so questao real.
-
-    A mais recente e a de maior `respondida_em`; empate, a de maior id. A
-    lista vem em ordem e o dict deixa a ultima sobrescrever - o volume e
-    pequeno, e isto se le melhor que uma subconsulta.
-    """
-    respostas = s.scalars(
-        select(RespostaDeSimulado)
-        .where(RespostaDeSimulado.escolhida.is_not(None))
-        .where(RespostaDeSimulado.gerada.is_(False))
-        .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
-    )
-    return {r.questao_id: r for r in respostas}
-
-
 def questoes_erradas() -> list[int]:
     """As questoes reais que eu errei na ULTIMA vez que respondi.
 
@@ -675,72 +534,6 @@ def criar_simulado_de_erros(quantidade: int = QUANTIDADE_PADRAO) -> Simulado | N
                 simulado_id=simulado.id, questao_id=questao_id, ordem=ordem
             ))
         return simulado
-
-
-@dataclass
-class Evolucao:
-    """Quanto eu acerto, e se isso mudou nos ultimos 30 dias."""
-
-    respondidas: int = 0
-    acertos: int = 0
-    #: Acerto nos ultimos 30 dias e antes deles. None quando a janela nao
-    #: tem resposta suficiente para dizer alguma coisa.
-    recente: float | None = None
-    anterior: float | None = None
-
-    @property
-    def porcentagem(self) -> float:
-        return (self.acertos / self.respondidas * 100) if self.respondidas else 0.0
-
-    @property
-    def mensuravel(self) -> bool:
-        return self.respondidas >= MINIMO_PARA_EVOLUCAO
-
-    @property
-    def faltam(self) -> int:
-        return max(0, MINIMO_PARA_EVOLUCAO - self.respondidas)
-
-    @property
-    def variacao(self) -> float | None:
-        if self.recente is None or self.anterior is None:
-            return None
-        return self.recente - self.anterior
-
-
-def evolucao() -> Evolucao:
-    """Acerto geral em questao real, e a variacao dos ultimos 30 dias.
-
-    Conta TODAS as respostas, e nao so a ultima de cada questao: a evolucao e
-    o meu historico, e errar e depois acertar a mesma questao e justamente o
-    que ela tem que mostrar. Cada metade da comparacao precisa do minimo de
-    respostas, senao a variacao e sorteio.
-    """
-    from datetime import timedelta
-
-    criar_tabelas()
-    with sessao() as s:
-        respostas = list(s.scalars(
-            select(RespostaDeSimulado)
-            .where(RespostaDeSimulado.escolhida.is_not(None))
-            .where(RespostaDeSimulado.gerada.is_(False))
-        ))
-
-    resultado = Evolucao(
-        respondidas=len(respostas),
-        acertos=sum(1 for r in respostas if r.acertou),
-    )
-    corte = agora() - timedelta(days=DIAS_DA_EVOLUCAO)
-    recentes = [r for r in respostas if r.respondida_em and r.respondida_em >= corte]
-    antigas = [r for r in respostas if r.respondida_em and r.respondida_em < corte]
-
-    def taxa(lista):
-        if len(lista) < MINIMO_PARA_EVOLUCAO:
-            return None
-        return sum(1 for r in lista if r.acertou) / len(lista) * 100
-
-    resultado.recente = taxa(recentes)
-    resultado.anterior = taxa(antigas)
-    return resultado
 
 
 # --- listar e descartar rodadas ---------------------------------------------
@@ -789,11 +582,11 @@ def listar_simulados() -> list[ResumoDaRodada]:
                 materias |= set(s.scalars(
                     select(QuestaoGerada.materia).where(QuestaoGerada.id.in_(geradas))
                 ))
-            respondidas = [r for r in respostas if r.escolhida is not None]
+            respondidas, acertos = placar(respostas)
             resumo.append(ResumoDaRodada(
                 id=sim.id, criado_em=sim.criado_em, questoes=len(respostas),
-                respondidas=len(respondidas),
-                acertos=sum(1 for r in respondidas if r.acertou),
+                respondidas=respondidas,
+                acertos=acertos,
                 materias=sorted(m for m in materias if m),
                 gerada=bool((sim.filtros or {}).get("geradas")),
             ))

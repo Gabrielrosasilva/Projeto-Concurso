@@ -920,6 +920,8 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
     Assunto nunca respondido simplesmente nao esta no dicionario. Ele nao vale
     zero por cento - zero diria que eu errei tudo.
     """
+    from radar import servico
+
     if not para_o_edital:
         return {}, {}
 
@@ -934,12 +936,6 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
         .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
     ).all()
 
-    # A ultima resposta de cada questao: a lista vem em ordem, e a mais
-    # recente sobrescreve as anteriores.
-    ultima_de: dict[int, tuple] = {}
-    for questao, resposta in linhas:
-        ultima_de[questao.id] = (questao, resposta)
-
     def assuntos(questao) -> tuple[str, list[str]]:
         materia = para_o_edital[questao.materia]
         chave = macetes.chave_da_materia(materia)
@@ -947,13 +943,13 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
             return materia, macetes.assuntos_do_enunciado(questao.enunciado, chave)
         return materia, [questao.assunto] if questao.assunto else []
 
-    medido: dict[tuple[str, str], list[int]] = {}
-    for questao, resposta in ultima_de.values():
+    def pares(questao) -> list[tuple[str, str]]:
         materia, nomes = assuntos(questao)
-        for nome in nomes:
-            conta = medido.setdefault((materia, nome), [0, 0])
-            conta[0] += 1
-            conta[1] += 1 if resposta.acertou else 0
+        return [(materia, nome) for nome in nomes]
+
+    # O acerto e o do `servico.metricas`, pela ultima resposta de cada questao:
+    # a fonte unica, no recorte *medido no radar*.
+    medido = servico.metricas.acumulado_por(pares, materias=list(para_o_edital))
 
     # A data olha TODAS as tentativas: e a ultima vez que eu mexi no assunto.
     ultimas: dict[tuple[str, str], object] = {}
@@ -967,7 +963,7 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
                 ultimas[(materia, nome)] = dia
 
     return (
-        {par: (feitas, certas) for par, (feitas, certas) in medido.items()},
+        {par: (numeros.medidas, numeros.acertos) for par, numeros in medido.items()},
         ultimas,
     )
 

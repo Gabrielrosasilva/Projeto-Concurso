@@ -49,7 +49,8 @@
 {% from "_componentes.html" import selo, bloco %}
 {{ barra('estudar') }}
 
-{% set porcento = (resumo.acertos / resumo.total * 100) if resumo.total else 0 %}
+{# Os numeros vem prontos do servico.metricas: o template so mostra. #}
+{% set porcento = resumo.porcentagem %}
 {% set erros = revisao | rejectattr('acertou') | list %}
 {% set acertos = revisao | selectattr('acertou') | list %}
 
@@ -105,7 +106,7 @@
 
   {# ------------------------------------------------------ os erros ----- #}
   <section class="ds-secao">
-    <h2>{{ erros | length }} erro(s) para entender</h2>
+    <h2>{{ resumo.erros }} erro(s) para entender</h2>
     <p>Cada parte com o seu selo: a alternativa sai da prova, a correta do gabarito, a explicação e o macete da IA.</p>
   </section>
   {# O "como pedir explicacao" aparece uma vez, e nao repetido em cada erro. #}
@@ -172,7 +173,7 @@
 
   {% if acertos %}
     <details class="acertos ds-cartao" style="margin-top:var(--esp-4)">
-      <summary>{{ acertos | length }} acerto(s)</summary>
+      <summary>{{ resumo.acertos }} acerto(s)</summary>
       <ul>
         {% for item in acertos %}
           <li>{% if item.gerada %}{{ selo('ia', 'criada por IA') }} {% endif %}{{ item.materia }} - {{ item.enunciado[:120] }}{% if item.enunciado | length > 120 %}...{% endif %}</li>

@@ -118,11 +118,9 @@ class LinhaDeEstudo:
     ultima: date | None = None
     #: O fator de tempo, ja calculado para hoje. 1 sem treino.
     fator: float = 1.0
-
-    @property
-    def acertos(self) -> int:
-        """Quantas eu acertei, de volta da porcentagem - para "acertei 1 de 2"."""
-        return round((self.acerto or 0) * self.respondidas / 100)
+    #: Quantas eu acertei, como veio da conta (`servico.metricas`) - e nao de
+    #: volta da porcentagem, que arredonda e pode dizer outro numero.
+    acertos: int = 0
 
     @property
     def amostra_pequena(self) -> bool:
@@ -234,6 +232,7 @@ def montar(
             lei=do_assunto(materia, assunto),
             ultima=ultima,
             fator=fator_de_tempo(ultima, hoje),
+            acertos=certas,
         ))
 
     # Empate desempata pelo assunto mais medido, e depois pelo nome: duas

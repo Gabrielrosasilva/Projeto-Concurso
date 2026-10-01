@@ -168,7 +168,7 @@
         </ol>
         <p class="miudo">
           {{ selo('oficial', 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
-          {{ selo('calculado', 'meu acerto') }} × tempo sem revisar. Com menos de
+          {{ selo('calculado', 'meu acerto medido no radar') }} × tempo sem revisar. Com menos de
           {{ MINIMO_NA_MATERIA }} questões, a matéria conta como não treinada:
           vale o peso inteiro, e o fator de tempo é neutro.
         </p>
@@ -218,7 +218,7 @@
             {% endfor %}
           </ul>
         {% endif %}
-        <p class="miudo">{{ selo('calculado') }} das {{ h.revisar.respondidas }} questões reais que respondi, pela última resposta de cada, sem anuladas.</p>
+        <p class="miudo">{{ selo('calculado') }} medido no radar: das {{ h.revisar.respondidas }} questões reais que respondi, pela última resposta de cada, sem anuladas.</p>
         <div class="rodape">
           <form method="post" action="/revisar">
             <button class="ds-botao" type="submit" style="width:100%">Revisar agora</button>
@@ -249,14 +249,14 @@
       <span class="texto">
         {% set e = h.evolucao %}
         {% if e.mensuravel %}
-          {{ selo('calculado') }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} questões reais.
+          {{ selo('calculado') }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} respostas a questões reais, medido no radar.
           {% if e.variacao is not none %}
             Últimos 30 dias: <b>{{ '%+.0f'|format(e.variacao) }} pontos</b> em relação a antes.
           {% else %}
             Ainda não há 20 respostas de cada lado dos últimos 30 dias para comparar.
           {% endif %}
         {% else %}
-          {% if e.respondidas %}Respondi {{ e.respondidas }} questão(ões).{% endif %}
+          {% if e.respondidas %}Dei {{ e.respondidas }} resposta(s) a questões reais no radar.{% endif %}
           Responda mais <b>{{ e.faltam }}</b> para eu medir sua evolução.
         {% endif %}
       </span>

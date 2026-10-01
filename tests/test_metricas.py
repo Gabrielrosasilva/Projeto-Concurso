@@ -22,6 +22,8 @@ from radar.servico import extra as estudo_extra
 from radar.servico import metricas
 from radar.util import fuso_local
 
+from tests.test_foco import com_quadro_do_edital  # noqa: F401 - fixture
+
 MINI = Path(__file__).parent / "fixtures" / "cronograma_mini.yml"
 SEG = date(2026, 9, 28)
 TER = date(2026, 9, 29)
@@ -329,3 +331,43 @@ def test_o_plano_b_conta_igual_no_dia_na_semana_e_na_materia(banco_temporario):
     assert (dia.questoes, dia.acertos) == (8, 5)
     assert semana == dia
     assert lep.geral == dia
+
+
+# --- questoes: o acumulado ----------------------------------------------------------
+
+def test_duas_respostas_e_uma_questao(banco_temporario, plano):
+    """Errei e depois acertei a mesma questao: o dia conta as duas RESPOSTAS,
+    o acumulado conta uma QUESTAO, pela ultima resposta (acertou)."""
+    from tests.test_espacada import _questao
+
+    questao = _questao(1)
+    _responder(False, _as_21h(minuto=1), questao_id=questao)
+    _responder(True, _as_21h(minuto=2), questao_id=questao)
+
+    assert metricas.do_dia(SEG, plano).radar.questoes == 2
+    total = metricas.acumulado()
+    assert (total.respondidas, total.acertos) == (1, 1)
+
+
+def test_meu_foco_e_home_leem_o_mesmo_acumulado(banco_temporario,
+                                                 com_quadro_do_edital):
+    """Recorte *medido no radar*, ultima resposta de cada questao: o Meu foco
+    e a home dizem o mesmo numero que o metricas."""
+    from radar import foco
+    from radar.regioes import normalizar
+    from radar.servico import inicio
+    from tests.test_home import _acervo
+    from tests.test_home import _responder as responder_rodada
+
+    _acervo(25, "Direito Penal")
+    responder_rodada(10, 15)
+
+    (penal,) = metricas.acumulado_por_materia()
+    meu_foco = next(d for nome, d in foco.montar().acerto_por_materia.items()
+                    if normalizar(nome) == normalizar("Direito Penal"))
+    home = inicio.montar()
+
+    assert (penal.respondidas, penal.acertos) == (25, 10)
+    assert (meu_foco.respondidas, meu_foco.acertos) == (25, 10)
+    assert home.revisar.respondidas == metricas.acumulado().respondidas == 25
+    assert ("Direito Penal", 40.0, 25) in home.revisar.materias_fracas

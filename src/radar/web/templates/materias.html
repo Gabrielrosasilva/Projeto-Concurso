@@ -158,7 +158,7 @@
           </div>
 
           {# A mesma frase do "Fiz hoje", da mesma fonte, so desta materia. #}
-          <p class="de-onde">{{ frase_da_conta(m.geral) }}</p>
+          {% if m.geral.questoes %}<p class="de-onde">{{ frase_da_conta(m.geral) }}</p>{% endif %}
           {% if m.radar.medidas and m.anotado.medidas %}
             <p class="de-onde">medido no radar: {{ m.radar.porcentagem }}% em {{ m.radar.medidas }} ·
               anotado: {{ m.anotado.porcentagem }}% em {{ m.anotado.medidas }}</p>

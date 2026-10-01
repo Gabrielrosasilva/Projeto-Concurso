@@ -34,6 +34,7 @@ from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado
 from radar.regioes import normalizar
 from radar.servico import espacada
+from radar.servico import metricas
 from radar.servico import simulado as treino
 from radar.util import para_local
 
@@ -173,7 +174,8 @@ def _revisar() -> Revisar:
             if d.respondidas >= onde_estudar.MINIMO_NA_MATERIA
             and d.porcentagem < ACERTO_FRACO
         ],
-        respondidas=sum(d.respondidas for d in desempenho),
+        # Quantas questoes reais diferentes eu respondi: a conta e do metricas.
+        respondidas=metricas.acumulado().respondidas,
     )
 
 
