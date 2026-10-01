@@ -108,6 +108,22 @@ def impressao_de(enunciado: str) -> str:
     return hashlib.sha256(texto.encode()).hexdigest()[:32]
 
 
+def chave_da_questao(enunciado: str, alternativas: dict | None) -> str:
+    """Hash da questao INTEIRA: o enunciado e as cinco alternativas.
+
+    A impressao, so do enunciado, nao serve para dizer QUAL questao e: a
+    FEPESE repete enunciados genericos ("De acordo com o Codigo Penal
+    Brasileiro, e correto") em questoes de alternativas diferentes - em 2019
+    foram 4 de Penal com o mesmo. E esta chave que a classificacao usa (Etapa
+    3A). Ela continua achando a mesma questao reaproveitada em outro caderno,
+    porque normaliza do mesmo jeito que a impressao.
+    """
+    partes = [enunciado or ""] + [
+        f"{letra} {texto or ''}" for letra, texto in sorted((alternativas or {}).items())
+    ]
+    return impressao_de(" | ".join(partes))
+
+
 @dataclass
 class Questao:
     numero: int

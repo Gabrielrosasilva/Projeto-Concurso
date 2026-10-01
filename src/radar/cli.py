@@ -1049,8 +1049,8 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"[red]Nada importado:[/] {erro}")
         raise typer.Exit(code=1) from erro
 
-    o_que = {"macetes": "macete(s)", "explicacoes": "explicacao(oes)"}.get(
-        resultado["tipo"], "questao(oes)")
+    o_que = {"macetes": "macete(s)", "explicacoes": "explicacao(oes)",
+             "classificacao": "classificacao(oes)"}.get(resultado["tipo"], "questao(oes)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
     console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
     if resultado["repetidas"]:
@@ -1059,7 +1059,10 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
         for motivo in resultado["recusas"]:
             console.print(f"  - {motivo}")
-    if resultado["tipo"] == "macetes":
+    if resultado["tipo"] == "classificacao":
+        console.print("[dim]Em data/classificacoes.json (versionado). Confira em "
+                      "radar web, Analises > Conferencia.[/]")
+    elif resultado["tipo"] == "macetes":
         console.print("[dim]Em data/macetes.json (versionado).[/]")
     elif resultado["tipo"] == "explicacoes":
         console.print("[dim]Em data/explicacoes.json (versionado). Aparecem no "
@@ -2425,6 +2428,93 @@ def _registro_legivel(registro) -> str:
     if registro.anotacao:
         texto += f"\n  [dim]{escape(registro.anotacao)}[/]"
     return texto
+
+
+@app.command()
+def classificar(
+    pedido: bool = typer.Option(
+        False, "--pedido", help="Escreve data/pedido_ia.json com as questoes do alvo"),
+    materia: str = typer.Option(
+        None, help="So uma materia, pelo caminho do no (ex.: \"Direito Penal\")"),
+    importar: Path = typer.Option(
+        None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
+) -> None:
+    """Classifica as questoes do alvo na arvore de conteudos, pelo Claude Code.
+
+    --pedido escreve o pedido (um por materia, com a arvore e as regras); a
+    resposta volta com --importar, que recusa assunto fora do edital, tipo fora
+    da lista, falta de justificativa e questao que nao estava no pedido.
+    """
+    if importar is not None:
+        _importar_resposta_da_ia(importar)
+        return
+    if not pedido:
+        console.print("Use --pedido para escrever o pedido, ou --importar ARQUIVO.")
+        raise typer.Exit(code=1)
+    lote = servico.manual.pedido_de_classificacao(materia)
+    if not lote["pedidos"]:
+        console.print("[yellow]Nada a pedir:[/] nenhuma questao do alvo sem conferencia"
+                      + (f" em {materia}" if materia else "") + ".")
+        return
+    destino = servico.manual.salvar_pedido(lote)
+    total = sum(len(p["questoes"]) for p in lote["pedidos"])
+    console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questao(oes)[/] "
+                  f"em {destino}")
+    for p in lote["pedidos"]:
+        fora = " [dim](fora do edital atual)[/]" if p["fora_do_edital"] else ""
+        console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}{fora}")
+
+
+@app.command()
+def incidencia(
+    materia: str = typer.Option(None, help="So uma materia, pelo nome do no"),
+    padroes: bool = typer.Option(
+        False, "--padroes", help="Mostra os padroes de cobranca de cada no"),
+) -> None:
+    """O mapa de incidencia do concurso-alvo, por no da arvore, com a amostra.
+
+    So o alvo (2013 e 2019): o complementar nunca entra nesta conta. Anuladas
+    e pendentes ficam fora da contagem e aparecem a parte, com o numero.
+    """
+    from radar import incidencia as regra
+
+    mapas = servico.incidencia.mapa(materia)
+    if not mapas:
+        console.print("[yellow]Nada no mapa[/] (a arvore esta vazia ou a materia nao existe).")
+        raise typer.Exit(code=1)
+    minimos = regra.carregar_minimos()
+    for m in mapas:
+        tabela = Table(title=f"{m.materia} — {m.topo.amostra} · {m.topo.rotulo}",
+                       title_justify="left")
+        for coluna in ("Conteudo", "Amostra", "O que aconteceu", "Anos", "Tipo"):
+            tabela.add_column(coluna)
+        for linha in m.linhas[1:]:
+            recuo = "  " * (linha.profundidade - 1)
+            tipos = ", ".join(f"{t} ({n})" for t, n in linha.tipos[:2])
+            tabela.add_row(escape(recuo + linha.nome), linha.amostra, linha.rotulo,
+                           ", ".join(map(str, linha.anos)) or "—", escape(tipos) or "—")
+        console.print(tabela)
+        console.print(f"   fora da conta: {m.anuladas} anulada(s) · {m.pendentes} pendente(s)"
+                      f" · provas da materia: {m.provas}")
+        if padroes:
+            abaixo = 0
+            for linha in m.linhas:
+                p = regra.padroes(linha, minimos)
+                if not p.suficiente:
+                    abaixo += 1
+                    continue
+                console.print(f"   [bold]{escape(linha.nome)}[/]: {p.amostra}")
+                if p.comandos:
+                    console.print("     comando: " + ", ".join(
+                        f"{c.nome} ({c.quantas})" for c in p.comandos))
+                if p.tipos:
+                    console.print("     tipo: " + ", ".join(f"{t} ({n})" for t, n in p.tipos))
+                if p.termos:
+                    console.print("     termos: " + ", ".join(t.palavra for t in p.termos))
+            if abaixo:
+                console.print(f"   {abaixo} no(s) abaixo do minimo ({minimos.questoes} questoes "
+                              f"em {minimos.provas} provas): {regra.FRASE_SEM_EVIDENCIA}")
+        console.print()
 
 
 @app.command()

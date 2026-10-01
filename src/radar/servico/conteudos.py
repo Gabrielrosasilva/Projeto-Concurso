@@ -164,6 +164,20 @@ def adicionar(pai: str | None, nome: str, *, origem: str = "manual",
     return no
 
 
+def garantir(pai: str | None, nome: str, **campos) -> str:
+    """O caminho do filho `nome` de `pai`: o que ja existe, ou um novo.
+
+    E o que a classificacao usa para o subassunto e o elemento que ela
+    propoe: a segunda questao do mesmo subassunto cai no no da primeira.
+    """
+    alvo = arvore.caminho(pai, nome)
+    criar_tabelas()
+    with sessao() as s:
+        if s.scalar(select(Conteudo.id).where(Conteudo.caminho == alvo)) is not None:
+            return alvo
+    return adicionar(pai, nome, **campos).caminho
+
+
 # --- os textos antigos -------------------------------------------------------------
 
 @dataclass
@@ -263,21 +277,24 @@ def pendentes() -> Pendentes:
     Inclusive a que nunca foi classificada: e o estado de todas hoje. Anulada
     fica de fora - a banca desfez a pergunta, e nao ha o que classificar.
     """
+    from radar.questoes import chave_da_questao
+
     criar_tabelas()
     with sessao() as s:
         classificadas = set(s.scalars(
-            select(Classificacao.impressao)
+            select(Classificacao.chave)
             .where(Classificacao.principal.is_(True))
             .where(Classificacao.status != "pendente")))
         linhas = s.execute(
             select(QuestaoDeProva.evidencia, QuestaoDeProva.ano,
-                   QuestaoDeProva.cargo, QuestaoDeProva.impressao)
+                   QuestaoDeProva.cargo, QuestaoDeProva.enunciado,
+                   QuestaoDeProva.alternativas)
             .where(QuestaoDeProva.anulada.is_not(True))).all()
 
     resultado = Pendentes()
     por_prova: dict[tuple, int] = {}
-    for ev, ano, cargo, impressao in linhas:
-        if impressao in classificadas:
+    for ev, ano, cargo, enunciado, alternativas in linhas:
+        if chave_da_questao(enunciado, alternativas) in classificadas:
             continue
         ev = ev or "sem evidência"
         resultado.por_evidencia[ev] = resultado.por_evidencia.get(ev, 0) + 1

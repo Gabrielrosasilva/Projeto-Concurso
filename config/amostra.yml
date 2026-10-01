@@ -1,0 +1,20 @@
+# Os minimos de amostra do radar, num lugar so. Lido por src/radar/incidencia.py.
+#
+# Abaixo do minimo, a tela nao tira conclusao: escreve exatamente "Nao ha
+# evidencia suficiente no acervo para afirmar isso." (regra inviolavel 4).
+#
+# COMO LER
+#
+#   acervo   - o que se diz sobre o que a BANCA cobrou: os padroes de cobranca
+#              de um no (forma de perguntar, gabarito, termos, tipo de
+#              questao). Proposta da Etapa 3A: 3 questoes em 2 provas. Com so
+#              2 provas do alvo, materia que caiu em uma prova so (LEP,
+#              Sociologia) nunca chega la - e e isso mesmo: uma prova so nao
+#              mostra padrao, mostra o que aconteceu uma vez.
+#
+# A secao do MEU desempenho (os minimos da decisao 6 da Etapa 0) entra aqui na
+# Etapa 4.
+
+acervo:
+  minimo_questoes: 3
+  minimo_provas: 2

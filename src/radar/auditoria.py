@@ -8,6 +8,15 @@ novo - nada conferido a mao, nada digitado aqui:
      banco, letra por letra?
   3. **as anuladas** do definitivo estao marcadas no banco, e so elas?
 
+E, desde a Etapa 3A, duas que nao precisam do PDF:
+
+  4. **a extracao tem cara de inteira?** Enunciado curto demais, alternativa
+     faltando ou vazia, cabecalho e rodape grudados no texto, figura citada
+     que nao veio, palavra cortada no fim. Sao SUSPEITAS, para conferir a
+     olho: o leitor nao sabe dizer se a questao original era assim;
+  5. **como esta a classificacao** de cada questao na arvore de conteudos:
+     completa, parcial ou pendente, e quantas eu ja conferi.
+
 O que esta auditoria NAO prova, e precisa estar escrito: ela usa o mesmo
 leitor de PDF que montou o banco (`questoes.extrair_texto` e a grade do
 `gabarito`). Se o leitor errar do mesmo jeito nas duas pontas, os dois lados
@@ -27,7 +36,62 @@ from radar import alvo, config, gabarito
 from radar import provas as arquivos_de_prova
 from radar.db import criar_tabelas, sessao
 from radar.edital_materias import MateriaDoEdital, arrumar_nome
-from radar.models import QuestaoDeProva
+from radar.models import Classificacao, QuestaoDeProva
+from radar.questoes import chave_da_questao
+
+
+# --- as verificacoes da extracao (Etapa 3A) ------------------------------------
+# Calibradas nas 170 questoes do alvo: cada uma pegou um defeito de verdade, e
+# nenhuma dispara em texto legitimo como "Secretaria de Estado" ou "Estado de
+# Santa Catarina", que aparecem no conteudo de muitas questoes. "Termina sem
+# pontuacao" ficou de fora: a FEPESE continua o enunciado na alternativa.
+
+# Menos que isto nao e enunciado. "Assinale a alternativa correta." tem 31.
+MINIMO_DO_ENUNCIADO = 20
+LETRAS = ("a", "b", "c", "d", "e")
+
+# A mobilia do caderno que o leitor grudou no texto: o titulo da materia
+# seguinte ("Nocoes de Informatica 10 questoes"), a grade de respostas e o
+# rodape da FEPESE.
+MOBILIA_NO_TEXTO = re.compile(
+    r"(?i)grade de respostas|n[aã]o destaque esta folha|fepese\.org\.br"
+    r"|campus universit[aá]rio|p[aá]gina \d+ de \d+|\b\d{1,3} quest[oõ]es\b"
+    r"|(?:\b\d{1,3}\s+){8,}"
+)
+NUMERO_NO_INICIO = re.compile(r"^\s*\d{1,3}\.\s")
+# Figura, tabela e grafico nao viram texto: se o enunciado cita um, conferir.
+CITA_FIGURA = re.compile(
+    r"(?i)\b(figura|imagem|gr[aá]fico|tabela|charge|tirinha|ilustra[cç][aã]o)\b")
+# "é cor-" no fim: a quebra de linha levou o resto da palavra.
+PALAVRA_CORTADA = re.compile(r"\w-\s*$")
+
+
+def suspeitas_de_extracao(enunciado: str | None, alternativas: dict | None) -> list[str]:
+    """O que parece errado na extracao de UMA questao. Vazio quando nada."""
+    enunciado = (enunciado or "").strip()
+    alternativas = alternativas or {}
+    achados = []
+    if len(enunciado) < MINIMO_DO_ENUNCIADO:
+        achados.append("enunciado vazio ou curto demais")
+    if tuple(sorted(alternativas)) != LETRAS:
+        achados.append("alternativas diferentes de a-e: "
+                       + (", ".join(sorted(alternativas)) or "nenhuma"))
+    vazias = [letra for letra, texto in sorted(alternativas.items())
+              if not (texto or "").strip()]
+    if vazias:
+        achados.append("alternativa vazia: " + ", ".join(vazias))
+    if NUMERO_NO_INICIO.search(enunciado):
+        achados.append("o numero da questao dentro do enunciado")
+    if MOBILIA_NO_TEXTO.search(enunciado):
+        achados.append("cabecalho ou rodape dentro do enunciado")
+    for letra, texto in sorted(alternativas.items()):
+        if MOBILIA_NO_TEXTO.search(texto or ""):
+            achados.append(f"cabecalho ou rodape dentro da alternativa {letra}")
+    if CITA_FIGURA.search(enunciado):
+        achados.append("cita figura, tabela ou grafico: conferir se veio")
+    if PALAVRA_CORTADA.search(enunciado):
+        achados.append("palavra cortada no fim do enunciado")
+    return achados
 
 
 def caminho_padrao() -> Path:
@@ -204,6 +268,13 @@ class ProvaAuditada:
     anuladas_no_banco: list[int] = field(default_factory=list)
     trocadas_pelo_definitivo: list[int] = field(default_factory=list)
     materia_da_questao: dict[int, str] = field(default_factory=dict)
+    #: (numero, o que parece errado na extracao)
+    suspeitas: list[tuple[int, str]] = field(default_factory=list)
+    #: Sem letra no banco e sem ser anulada.
+    sem_gabarito: list[int] = field(default_factory=list)
+    #: {completa | parcial | pendente: quantas}, pela classificacao principal.
+    classificacao: dict[str, int] = field(default_factory=dict)
+    conferidas: int = 0
 
     @property
     def problemas(self) -> list[str]:
@@ -408,6 +479,8 @@ def auditar() -> list[ProvaAuditada]:
     with sessao() as s:
         do_alvo = _provas_do_alvo(s)
         todas = list(s.scalars(select(QuestaoDeProva)))
+        principais = {c.chave: c for c in s.scalars(
+            select(Classificacao).where(Classificacao.principal.is_(True)))}
 
     por_prova: dict[str, list] = {}
     for q in todas:
@@ -441,9 +514,25 @@ def auditar() -> list[ProvaAuditada]:
             _do_mesmo_concurso(do_concurso, arquivos_de_prova.GABARITO),
             questoes,
         )
+        _auditar_extracao(prova, questoes, principais)
         auditadas.append(prova)
 
     return sorted(auditadas, key=lambda p: (p.reforco, p.ano or 0))
+
+
+def _auditar_extracao(prova: ProvaAuditada, questoes: list, principais: dict) -> None:
+    """As suspeitas de extracao, o gabarito faltando e a classificacao."""
+    for q in sorted(questoes, key=lambda q: q.numero):
+        for motivo in suspeitas_de_extracao(q.enunciado, q.alternativas):
+            prova.suspeitas.append((q.numero, motivo))
+        if not q.resposta and not q.anulada:
+            prova.sem_gabarito.append(q.numero)
+        classificacao = principais.get(chave_da_questao(q.enunciado, q.alternativas))
+        # Sem classificacao e pendente: e o estado de partida de todas.
+        status = classificacao.status if classificacao else "pendente"
+        prova.classificacao[status] = prova.classificacao.get(status, 0) + 1
+        if classificacao is not None and classificacao.conferida_em is not None:
+            prova.conferidas += 1
 
 
 # --- o relatorio ------------------------------------------------------------
@@ -502,12 +591,46 @@ def _secao(prova: ProvaAuditada) -> list[str]:
             f"{_numeros(prova.trocadas_pelo_definitivo, prova.materia_da_questao)}",
             f"- questoes em que o banco discorda do definitivo: "
             f"**{len(prova.divergencias)}** de {prova.questoes}",
+            f"- sem gabarito no banco (e sem ser anulada): "
+            f"{_numeros(prova.sem_gabarito, prova.materia_da_questao)}",
             "",
         ]
     else:
         linhas += ["**Nenhum gabarito definitivo do acervo e deste caderno.** "
                    "O banco esta com o gabarito do caderno, que e o provisorio.", ""]
     return linhas
+
+
+def _extracao_e_classificacao(provas: list[ProvaAuditada]) -> list[str]:
+    linhas = ["## Erros de extracao (suspeitas para conferir)", ""]
+    algum = False
+    for p in provas:
+        if not p.suspeitas:
+            continue
+        algum = True
+        quantas = len({n for n, _ in p.suspeitas})
+        linhas += [f"**{p.ano} {p.cargo}** — {quantas} questao(oes):", ""]
+        linhas += [f"- questao {n} ({p.materia_da_questao.get(n) or '?'}): {motivo}"
+                   for n, motivo in p.suspeitas]
+        linhas.append("")
+    if not algum:
+        linhas += ["- nenhuma suspeita.", ""]
+
+    linhas += [
+        "## Classificacao na arvore de conteudos",
+        "",
+        "Pela classificacao principal de cada questao; sem classificacao e "
+        "pendente. Conferidas: as que eu ja confirmei, corrigi ou deixei "
+        "pendente na tela de conferencia.",
+        "",
+        "| Prova | Questoes | Completa | Parcial | Pendente | Conferidas |",
+        "|---|---|---|---|---|---|",
+    ]
+    for p in provas:
+        c = p.classificacao
+        linhas.append(f"| {p.ano} {p.cargo} | {p.questoes} | {c.get('completa', 0)} | "
+                      f"{c.get('parcial', 0)} | {c.get('pendente', 0)} | {p.conferidas} |")
+    return linhas + [""]
 
 
 def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
@@ -527,12 +650,17 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
         "edital contra o que o banco separou do caderno;",
         "- **gabarito**: cada questao do banco contra o ultimo gabarito "
         "definitivo publicado (retificacao inclusive), letra por letra;",
-        "- **anuladas**: as do definitivo contra as marcadas no banco.",
+        "- **anuladas**: as do definitivo contra as marcadas no banco;",
+        "- **extracao**: enunciado curto demais, alternativa faltando ou vazia, "
+        "cabecalho ou rodape grudado no texto, figura citada, palavra cortada "
+        "no fim. Sao suspeitas para conferir a olho;",
+        "- **classificacao**: o status de cada questao na arvore de conteudos.",
         "",
         "**O que isto nao prova:** a auditoria le os PDFs com o mesmo leitor que "
         "montou o banco. Um erro do leitor que se repita nas duas pontas passa "
-        "batido. A conferencia de enunciado e alternativa, questao a questao, "
-        "nao e feita aqui.",
+        "batido. A verificacao de extracao procura os defeitos conhecidos; a "
+        "conferencia de enunciado e alternativa, palavra por palavra contra o "
+        "PDF, nao e feita aqui.",
         "",
         "## Onde os numeros nao batem",
         "",
@@ -580,6 +708,7 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
         "(sem as anuladas). As de reforco nao entram nesta soma.",
         "",
     ]
+    linhas += _extracao_e_classificacao(provas)
     for p in provas:
         linhas += _secao(p)
 

@@ -409,9 +409,12 @@ def importar_assuntos(caminho: Path | None = None) -> int:
     # O formato antigo vira tambem classificacao (Etapa 2): o que casa com um
     # no da arvore e ligado, o resto fica pendente na materia. Importado aqui
     # dentro porque o `servico` ja depende deste arquivo.
+    # O arquivo antigo e pela impressao do enunciado; a classificacao, pela
+    # chave da questao inteira: vale para cada questao daquele enunciado.
     from radar.servico import classificacoes
     for impressao, materia, assunto, modelo, quando in antigas:
-        classificacoes.do_texto_antigo(impressao, materia, assunto, modelo, quando)
+        for chave in classificacoes.chaves_da_impressao(impressao):
+            classificacoes.do_texto_antigo(chave, materia, assunto, modelo, quando)
 
     if recusadas:
         log.warning(

@@ -33,7 +33,7 @@ from radar.models import agora
 from radar.regioes import normalizar
 from radar.servico import geradas
 
-TIPOS = ("questoes", "macetes", "explicacoes")
+TIPOS = ("questoes", "macetes", "explicacoes", "classificacao")
 
 # Quantos macetes por materia. Tres cabe numa resposta so e obriga a IA a
 # escolher o que mais cai, em vez de listar tudo.
@@ -100,8 +100,49 @@ Responda SOMENTE um JSON, no formato:
 {"correta": "c", "explicacao": "...", "fonte": "art. 112 da Lei 7.210/1984"}"""
 
 
+INSTRUCAO_CLASSIFICACAO = """Voce recebe questoes reais da prova do meu cargo (Policia Penal / Agente Penitenciario de SC, banca FEPESE), com o gabarito oficial, todas da mesma materia, e a arvore de conteudos dessa materia.
+
+Classifique cada questao na arvore: materia > assunto > subassunto > elemento.
+
+Regras:
+- o ASSUNTO e escolhido DENTRO da lista `assuntos_do_edital` do pedido, com o
+  nome escrito exatamente como esta la. Assunto fora da lista sera RECUSADO;
+- proponha o SUBASSUNTO (o tema dentro do assunto, ex.: "Lei penal no tempo")
+  e, quando se aplicar, o ELEMENTO especifico cobrado (ex.: "CP, art. 2º"),
+  com o `tipo_elemento` tirado da lista `elementos` do pedido e a `referencia`
+  onde ler. Elemento sem subassunto sera recusado. Os dois sao opcionais:
+  nao invente um para preencher;
+- diga o `tipo_de_questao`, escolhido na lista `tipos_de_questao`;
+- descreva a `pegadinha`: o que torna a alternativa errada atraente. Se nao
+  houver, responda "";
+- justifique: `trecho` (o pedaco do enunciado ou da alternativa que decide o
+  assunto), `item_do_edital` (o item do edital, literal) e `dispositivo` (o
+  artigo da lei; fora de Direito, a regra);
+- SEM SEGURANCA, responda `"status": "pendente"` com o `motivo`. Pendente e
+  uma resposta valida e honesta; uma classificacao forcada nao e;
+- na materia FORA do edital atual (`fora_do_edital: true`), so use um assunto
+  de outra materia do edital (campo `materia`, e o assunto da lista
+  `outras_materias_do_edital`) se o item do edital justificar; senao,
+  proponha o assunto debaixo da propria materia.
+
+Responda SOMENTE um JSON, no formato:
+{"classificacoes": [{"questao": "2019-q51", "status": "classificada", "assunto": "...", "subassunto": "...", "elemento": "...", "tipo_elemento": "artigo", "referencia": "CP, art. 2º", "tipo_de_questao": "literalidade da lei", "pegadinha": "...", "trecho": "...", "item_do_edital": "...", "dispositivo": "art. 2º do Código Penal"}]}"""
+
+
 def _como_responder(tipo: str) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
+    if tipo == "classificacao":
+        return (
+            "Este arquivo foi gerado por `radar classificar --pedido`. Para cada "
+            "item de `pedidos`, siga a `instrucao` usando o texto de `pedido` e as "
+            "listas do proprio item. Responda TODOS num unico arquivo JSON, no "
+            "formato de `formato_da_resposta`: o mesmo `lote`, e o `id` de cada "
+            "pedido com a lista `classificacoes` dele. Salve como "
+            "data/resposta_ia.json e rode `radar classificar --importar "
+            "data/resposta_ia.json`. Classificacao com assunto fora do edital, "
+            "tipo fora da lista, sem justificativa, ou de questao que nao estava "
+            "no pedido sera RECUSADA."
+        )
     if tipo == "explicacoes":
         return (
             "Este arquivo foi gerado por `radar gerar --pedido --explicacoes`. "
@@ -139,6 +180,15 @@ def _como_responder(tipo: str) -> str:
 
 
 def _formato(tipo: str) -> dict:
+    if tipo == "classificacao":
+        item = {"questao": "2019-q51", "status": "classificada", "assunto": "...",
+                "subassunto": "...", "elemento": "...", "tipo_elemento": "artigo",
+                "referencia": "CP, art. 2º", "tipo_de_questao": "literalidade da lei",
+                "pegadinha": "...", "trecho": "...", "item_do_edital": "...",
+                "dispositivo": "art. 2º do Código Penal"}
+        pendente = {"questao": "2019-q52", "status": "pendente", "motivo": "..."}
+        return {"lote": "<o lote deste arquivo>",
+                "respostas": [{"id": "c1", "classificacoes": [item, pendente]}]}
     if tipo == "explicacoes":
         item = {"correta": "c", "explicacao": "...",
                 "fonte": "art. 112 da Lei 7.210/1984"}
@@ -273,6 +323,103 @@ def pedido_de_explicacoes() -> dict:
                            f"{gerador._questao_por_extenso(q)}"),
             })
     return _novo_lote("explicacoes", pedidos)
+
+
+def pedido_de_classificacao(materia: str | None = None) -> dict:
+    """Um pedido por materia, com as questoes do alvo e a arvore dela.
+
+    Vao todas as do alvo, anuladas inclusive (marcadas): a 3A classifica as
+    170. Fica de fora so a que eu ja conferi - a conferencia e minha e nao se
+    refaz por cima. A materia do caderno encontra o no pela regra dos textos
+    antigos (igual, ou pelo sinonimo do config/taxonomia.yml).
+    """
+    from sqlalchemy import select
+
+    from radar import conteudos as arvore
+    from radar.models import Classificacao, Conteudo, QuestaoDeProva
+    from radar.servico import evidencia
+
+    taxonomia = arvore.carregar_taxonomia()
+    criar_tabelas()
+    with sessao() as s:
+        nos = list(s.scalars(select(Conteudo)))
+        conferidas = set(s.scalars(
+            select(Classificacao.chave)
+            .where(Classificacao.principal.is_(True))
+            .where(Classificacao.conferida_em.is_not(None))))
+        questoes = list(s.scalars(
+            select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)
+            .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero)))
+
+    caminhos = [n.caminho for n in nos]
+    fora = {n.caminho for n in nos if n.nivel == "materia" and n.fora_do_edital}
+    do_edital = {n.caminho: [x.nome for x in nos
+                             if x.pai == n.caminho and x.origem == "edital"]
+                 for n in nos if n.nivel == "materia" and not n.fora_do_edital}
+
+    from radar.servico.classificacoes import chave_de
+
+    por_materia: dict[str, list] = {}
+    for q in questoes:
+        if chave_de(q) in conferidas:
+            continue
+        no = (arvore.achar(caminhos, q.materia)
+              or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
+        if no is None or (materia and no != materia):
+            continue
+        por_materia.setdefault(no, []).append(q)
+
+    pedidos = []
+    for numero, (no, lista) in enumerate(por_materia.items(), start=1):
+        blocos, codigos = [], {}
+        for q in lista:
+            codigo = _codigo(q)
+            codigos[codigo] = chave_de(q)
+            marca = " (ANULADA pela banca: classifique assim mesmo)" if q.anulada else ""
+            blocos.append(f"[{codigo}]{marca}\n{gerador._questao_por_extenso(q)}")
+        dela = [c for c in caminhos if c == no or c.startswith(no + arvore.SEPARADOR)]
+        item = {
+            "id": f"c{numero}", "materia": no, "fora_do_edital": no in fora,
+            "questoes": codigos,
+            "assuntos_do_edital": do_edital.get(no, []),
+            "arvore": dela,
+            "elementos": taxonomia.elementos_da_materia(no),
+            "tipos_de_questao": taxonomia.tipos_de_questao,
+            "instrucao": INSTRUCAO_CLASSIFICACAO,
+            "pedido": f"MATERIA: {no}\n\nQUESTOES\n\n" + "\n\n".join(blocos),
+        }
+        if no in fora:
+            item["outras_materias_do_edital"] = do_edital
+        pedidos.append(item)
+    return _novo_lote("classificacao", pedidos)
+
+
+def _importar_classificacao(lote: dict, respostas: list[dict], modelo: str) -> dict:
+    from radar.servico import classificacoes
+
+    por_id = {p["id"]: p for p in lote["pedidos"]}
+    gravadas, recusas, vistas = 0, [], set()
+    for resposta in respostas:
+        pedido = por_id.get(resposta.get("id"))
+        if pedido is None:
+            recusas.append(f"{resposta.get('id')}: nao existe esse pedido no lote")
+            continue
+        for item in resposta.get("classificacoes") or []:
+            if not isinstance(item, dict):
+                continue
+            codigo = item.get("questao")
+            if codigo in vistas:
+                recusas.append(f"{codigo}: classificada duas vezes na resposta")
+                continue
+            vistas.add(codigo)
+            try:
+                classificacoes.aplicar_proposta(item, pedido, modelo)
+                gravadas += 1
+            except classificacoes.PropostaRecusada as erro:
+                recusas.append(str(erro))
+    if gravadas:
+        classificacoes.exportar()
+    return {"gravadas": gravadas, "repetidas": 0, "recusas": recusas}
 
 
 def salvar_pedido(lote: dict, caminho: Path | None = None) -> Path:
@@ -530,7 +677,9 @@ def importar(resposta: Path, pedido: Path | None = None,
     respostas = [r for r in corpo.get("respostas") or [] if isinstance(r, dict)]
     modelo = procedencia(quando)
 
-    if lote.get("tipo") == "macetes":
+    if lote.get("tipo") == "classificacao":
+        resultado = _importar_classificacao(lote, respostas, modelo)
+    elif lote.get("tipo") == "macetes":
         resultado = _importar_macetes(lote, respostas, modelo)
     elif lote.get("tipo") == "explicacoes":
         resultado = _importar_explicacoes(lote, respostas, modelo)

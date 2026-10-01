@@ -902,7 +902,30 @@ radar cobertura             # quantas questoes ja tem assunto, por materia
 radar conteudos             # a arvore: materia > assunto > subassunto > elemento
 radar conteudos --pendentes # as questoes sem classificacao, alvo prova a prova
 radar conteudos --semear    # poe na arvore o que o edital tem e ela nao
+radar classificar --pedido  # pede ao Claude Code a classificacao do alvo
+radar classificar --importar data/resposta_ia.json   # grava o que presta
+radar incidencia            # o mapa do alvo por no, com a amostra
+radar incidencia --materia "Direito Penal" --padroes
 ```
+
+**Classificacao e incidencia do alvo (Etapa 3A).** As 170 questoes de 2013 e
+2019 sao classificadas pelo Claude Code: `radar classificar --pedido` escreve
+`data/pedido_ia.json` (um pedido por materia, com a arvore e as regras), a
+resposta volta com `--importar`, e a importacao recusa assunto fora do edital,
+tipo fora do `config/taxonomia.yml`, falta de justificativa e questao que nao
+estava no pedido. A proposta so vale depois de **conferida** em **Analises >
+Conferencia** (confirmar, corrigir ou pendente). A questao e reconhecida pela
+chave da questao inteira (enunciado + alternativas): a impressao, so do
+enunciado, juntava questoes de enunciado igual.
+
+O **mapa de incidencia** (`radar incidencia` e **Analises > Incidencia**) conta
+so o alvo, no por no, com a amostra em toda linha ("8 questoes · 2 provas") e
+o que aconteceu ("apareceu nas 2 provas", "apareceu em 1 de 2", "nao apareceu
+nas provas analisadas"). Anuladas e pendentes ficam fora da conta e aparecem a
+parte. Os padroes de cobranca (forma de perguntar, gabarito, termos, tipo de
+questao, pegadinhas) so aparecem com a amostra minima do `config/amostra.yml`;
+abaixo dela, a tela diz "Nao ha evidencia suficiente no acervo para afirmar
+isso."
 
 **A arvore de conteudos e a evidencia (Etapa 2).** Toda questao do acervo tem
 uma **evidencia**: `alvo` (a prova do meu cargo e do meu estado: 2013 e 2019,
@@ -1051,6 +1074,12 @@ exemplo, foi revogada pela Lei 13.869/2019.
 
 **O radar nao baixa nem guarda o texto de lei nenhuma.** Lei muda, e o unico
 lugar em que a versao vigente esta certa e a fonte.
+
+### A amostra minima, em `config/amostra.yml`
+
+Abaixo de quantas questoes e provas o radar nao tira conclusao. Hoje so a
+secao `acervo` (os padroes de cobranca: 3 questoes em 2 provas); a do meu
+desempenho entra na Etapa 4.
 
 ### A taxonomia, em `config/taxonomia.yml`
 
@@ -1478,6 +1507,7 @@ src/radar/
 ├── db.py           engine preguicoso + context manager de sessao
 ├── migracoes.py    a versao do banco: passos numerados, copia antes, desfazer
 ├── conteudos.py    a arvore de conteudos e a taxonomia (puro, sem banco)
+├── incidencia.py   o mapa de incidencia do alvo e os padroes (puro)
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
 │   │                 retificacao e calendario - e a fachada dos demais
@@ -1499,6 +1529,7 @@ src/radar/
 │   ├── evidencia.py  alvo, complementar ou fora: a regra unica da prova
 │   ├── conteudos.py  a arvore no banco: semear, JSON, textos antigos, pendentes
 │   ├── classificacoes.py a questao ligada a um no, com status e procedencia
+│   ├── incidencia.py o mapa do alvo a partir do banco
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
@@ -1549,6 +1580,7 @@ config/
 ├── leis.yml        onde ler a lei de cada materia e assunto de Direito
 ├── perfil.yml      meus dados, para a elegibilidade
 ├── taxonomia.yml   os tipos de elemento por familia de materia
+├── amostra.yml     os minimos de amostra (padroes de cobranca)
 └── cronograma.yml  o plano de estudo, dia a dia (dado, editavel a mao)
 ```
 

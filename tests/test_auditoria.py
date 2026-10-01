@@ -166,3 +166,35 @@ def test_reforco_nunca_entra_na_soma_do_alvo():
     texto = auditoria.relatorio(provas)
     assert "Provas do alvo: 1, com 98 questoes validas" in texto
     assert "REFORCO" in texto
+
+
+# --- a extracao (Etapa 3A) ------------------------------------------------------
+
+def _casos_de_extracao():
+    import json
+    return json.loads(_texto("extracao_com_defeitos.json"))
+
+
+@pytest.mark.parametrize("caso", _casos_de_extracao(), ids=lambda c: c["caso"])
+def test_cada_verificacao_pega_o_defeito_feito_para_ela(caso):
+    """Uma questao por defeito, tirados dos defeitos REAIS de 2013 e 2019; e a
+    inteira, com "Secretaria de Estado" e "Estado de Santa Catarina" no texto,
+    nao pode disparar nada."""
+    achados = auditoria.suspeitas_de_extracao(caso["enunciado"], caso["alternativas"])
+    if caso["defeito"] is None:
+        assert achados == []
+    else:
+        assert caso["defeito"] in achados
+
+
+def test_o_relatorio_lista_suspeitas_sem_gabarito_e_classificacao():
+    prova = _prova(ano=2019, cargo="Agente Penitenciário", reforco=False, questoes=3,
+                   suspeitas=[(99, "cabecalho ou rodape dentro da alternativa e")],
+                   sem_gabarito=[7], classificacao={"completa": 1, "pendente": 2},
+                   conferidas=1, materia_da_questao={99: "Sociologia Aplicada", 7: "LEP"})
+    texto = auditoria.relatorio([prova])
+
+    assert "## Erros de extracao (suspeitas para conferir)" in texto
+    assert "questao 99 (Sociologia Aplicada): cabecalho ou rodape dentro da alternativa e" in texto
+    assert "| 2019 Agente Penitenciário | 3 | 1 | 0 | 2 | 1 |" in texto
+    assert "sem gabarito no banco (e sem ser anulada): 7 (LEP)" in texto

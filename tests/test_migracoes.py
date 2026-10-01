@@ -15,6 +15,7 @@ from sqlalchemy import create_engine, select
 from radar import db, edital_programa, foco, migracoes
 from radar.models import (
     Base,
+    Classificacao,
     Concurso,
     ErroAnotado,
     QuestaoDeProva,
@@ -97,7 +98,7 @@ def test_migrar_mantem_as_contagens_e_cria_o_que_falta(banco_antigo):
     assert relatorio.perdidas == {}
     assert (relatorio.de, relatorio.para) == (0, migracoes.VERSAO_ATUAL)
     assert relatorio.antes == antes
-    assert depois["versao_do_banco"] == 1
+    assert depois["versao_do_banco"] == 1                    # uma linha so
     assert depois["conteudos"] == 11 + 85 + 2                # edital + fora dele
     with db.sessao() as s:
         assert set(s.scalars(select(QuestaoDeProva.evidencia))) == {"alvo"}
@@ -114,7 +115,7 @@ def test_a_copia_e_feita_antes(banco_antigo):
 
     copia = relatorio.copia / banco_antigo.name
     assert relatorio.copia.parent == banco_antigo.parent / "copias"
-    assert relatorio.copia.name.startswith("migracao-v0-para-v1-")
+    assert relatorio.copia.name.startswith(f"migracao-v0-para-v{migracoes.VERSAO_ATUAL}-")
     # A copia e o banco de ANTES: sem as tabelas novas.
     assert not set(NOVAS_TABELAS) & set(_tabelas(copia))
 
@@ -145,7 +146,7 @@ def test_desfazer_devolve_o_banco_como_era(banco_antigo):
 
     usada = migracoes.desfazer()
 
-    assert usada.name.startswith("migracao-v0-para-v1-")
+    assert usada.name.startswith(f"migracao-v0-para-v{migracoes.VERSAO_ATUAL}-")
     assert _tabelas(banco_antigo) == antes
     # E o banco migrado tambem foi guardado: desfazer por engano tem volta.
     assert any(p.name.startswith("antes-de-desfazer-")
@@ -158,7 +159,7 @@ def test_passo_que_apaga_linha_e_desfeito(banco_antigo, monkeypatch):
     def passo_ruim():
         with db.sessao() as s:
             s.delete(s.scalars(select(Concurso)).first())
-    monkeypatch.setitem(migracoes.PASSOS, 1, ("apaga", passo_ruim))
+    monkeypatch.setitem(migracoes.PASSOS, migracoes.VERSAO_ATUAL, ("apaga", passo_ruim))
 
     with pytest.raises(migracoes.MigracaoFalhou, match="concursos"):
         migracoes.migrar()
@@ -178,10 +179,55 @@ def test_o_comando_mostra_o_antes_e_depois(banco_antigo):
     runner = CliRunner()
     saida = runner.invoke(app, ["migrar"], env={"COLUMNS": "200"})
     assert saida.exit_code == 0, saida.output
-    assert "Migração da versão 0 para a 1" in saida.output
+    assert f"Migração da versão 0 para a {migracoes.VERSAO_ATUAL}" in saida.output
     assert "Nenhuma linha perdida" in saida.output
 
     assert "Nada a migrar" in runner.invoke(app, ["migrar"]).output
     desfeito = runner.invoke(app, ["migrar", "--desfazer"], env={"COLUMNS": "200"})
     assert "Banco devolvido" in desfeito.output
     assert migracoes.versao(db.get_engine()) == 0
+
+
+def test_a_classificacao_pela_impressao_vira_chave_no_passo_3(banco_temporario):
+    """O banco da versao 2 guardava a classificacao pela impressao do
+    enunciado. Na 3, cada linha vira a chave da questao inteira - e o
+    enunciado repetido vira pendente em cada questao, sem chute."""
+    from sqlalchemy import text
+
+    from radar.servico import classificacoes
+
+    conteudos.semear(programa=PROGRAMA)
+    imputabilidade = "Direito Penal > Imputabilidade penal"
+    with db.sessao() as s:
+        s.add(QuestaoDeProva(prova_url="p.pdf", numero=1, enunciado="Único?",
+                             alternativas={"a": "x"}, impressao="unica"))
+        for n, letra in ((2, "x"), (3, "y")):
+            s.add(QuestaoDeProva(prova_url="p.pdf", numero=n, enunciado="É correto",
+                                 alternativas={"a": letra}, impressao="repetida"))
+    with db.get_engine().begin() as conexao:
+        conexao.execute(text("DROP TABLE classificacoes"))
+        conexao.execute(text(
+            "CREATE TABLE classificacoes (id INTEGER PRIMARY KEY, impressao VARCHAR(32), "
+            "conteudo VARCHAR(800), principal BOOLEAN, status VARCHAR(10), trecho TEXT, "
+            "item_do_edital TEXT, dispositivo VARCHAR(200), tipo_de_questao VARCHAR(60), "
+            "pegadinha TEXT, procedencia VARCHAR(120), classificada_em DATETIME, "
+            "conferida_em DATETIME)"))
+        conexao.execute(text(
+            "INSERT INTO classificacoes (impressao, conteudo, principal, status, "
+            "procedencia, classificada_em) VALUES "
+            "('unica', :no, 1, 'completa', 'manual', '2026-10-01 10:00:00'), "
+            "('repetida', :no, 1, 'completa', 'manual', '2026-10-01 10:00:00')"),
+            {"no": imputabilidade})
+        conexao.execute(text("UPDATE versao_do_banco SET versao = 2"))
+
+    relatorio = migracoes.migrar()
+
+    assert (relatorio.de, relatorio.para) == (2, migracoes.VERSAO_ATUAL)
+    assert (relatorio.antes["classificacoes"], relatorio.depois["classificacoes"]) == (2, 3)
+    with db.sessao() as s:
+        por_chave = {c.chave: c for c in s.scalars(select(Classificacao))}
+    unica = por_chave[classificacoes.chave_da_questao("Único?", {"a": "x"})]
+    assert (unica.conteudo, unica.status) == (imputabilidade, "completa")
+    for letra in "xy":
+        c = por_chave[classificacoes.chave_da_questao("É correto", {"a": letra})]
+        assert (c.conteudo, c.status) == ("Direito Penal", "pendente")

@@ -57,11 +57,52 @@ def _passo_1() -> None:
     acervo.exportar_extras()
 
 
+def _passo_2() -> None:
+    """Etapa 3A: o tipo de questao e a pegadinha na classificacao.
+
+    So coluna nova, e a coluna vem do modelo: nao ha dado antigo a levar. O
+    passo existe para a mudanca ter versao e copia antes, como toda outra.
+    """
+
+
+def _passo_3() -> None:
+    """Etapa 3A: a classificacao passa a ser pela CHAVE da questao inteira.
+
+    A tabela e refeita: a coluna da questao muda de nome e de sentido, e o
+    SQLite nao troca coluna de lugar. Cada linha antiga volta pela mesma regra
+    do importar do JSON antigo: com a chave da unica questao daquele
+    enunciado, ou pendente em cada uma quando o enunciado se repete.
+    """
+    from radar.db import get_engine
+    from radar.models import Classificacao
+    from radar.servico import classificacoes
+
+    engine = get_engine()
+    colunas = {c["name"] for c in inspect(engine).get_columns("classificacoes")}
+    if "impressao" not in colunas:
+        return          # a tabela ja nasceu com a chave
+    with engine.begin() as conexao:
+        antigas = [dict(linha._mapping) for linha in
+                   conexao.execute(text("SELECT * FROM classificacoes"))]
+        conexao.execute(text("DROP TABLE classificacoes"))
+    Classificacao.__table__.create(engine)
+    for antiga in antigas:
+        antiga.pop("chave", None)        # a coluna vazia que o modelo novo pos
+        for campo in ("classificada_em", "conferida_em"):
+            if antiga.get(campo) is not None:
+                antiga[campo] = str(antiga[campo])
+        for linha in classificacoes._das_linhas_antigas(antiga):
+            classificacoes._classificar_da_linha(linha)
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
     1: ("A árvore de conteúdos, as classificações e a evidência de cada questão",
         _passo_1),
+    2: ("O tipo de questão e a pegadinha na classificação", _passo_2),
+    3: ("A classificação pela chave da questão inteira (enunciado e alternativas)",
+        _passo_3),
 }
 VERSAO_ATUAL = max(PASSOS)
 

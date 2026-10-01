@@ -646,19 +646,22 @@ class Conteudo(Base):
 class Classificacao(Base):
     """Uma questao ligada a um no da arvore.
 
-    A questao e reconhecida pela IMPRESSAO do enunciado, e nao pelo id: o id
-    muda quando o banco e refeito a partir dos PDFs. Uma questao tem UMA
+    A questao e reconhecida pela CHAVE - o hash do enunciado E das
+    alternativas (`questoes.chave_da_questao`) -, e nao pelo id, que muda
+    quando o banco e refeito a partir dos PDFs. Nem pela impressao, que e so
+    do enunciado: a banca repete enunciado generico em questoes diferentes
+    (Etapa 3A). Uma questao tem UMA
     classificacao principal, a que conta na incidencia; as outras sao
     associadas, mostradas e nunca somadas.
     """
 
     __tablename__ = "classificacoes"
     __table_args__ = (
-        UniqueConstraint("impressao", "conteudo", name="uq_classificacao_questao_no"),
+        UniqueConstraint("chave", "conteudo", name="uq_classificacao_chave_no"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    impressao: Mapped[str] = mapped_column(String(32), index=True)
+    chave: Mapped[str] = mapped_column(String(32), index=True)
     #: O no, pelo caminho. Na pendente, o mais fundo que se sabe (a materia).
     conteudo: Mapped[str] = mapped_column(String(TAMANHO_DO_CAMINHO), index=True)
     principal: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
@@ -668,6 +671,10 @@ class Classificacao(Base):
     trecho: Mapped[str | None] = mapped_column(Text, nullable=True)
     item_do_edital: Mapped[str | None] = mapped_column(Text, nullable=True)
     dispositivo: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    #: Como a questao cobra (config/taxonomia.yml: literalidade da lei, caso
+    #: pratico...) e o que torna a alternativa errada atraente (Etapa 3A).
+    tipo_de_questao: Mapped[str | None] = mapped_column(String(60), nullable=True)
+    pegadinha: Mapped[str | None] = mapped_column(Text, nullable=True)
     #: O modelo que classificou, ou "manual". Sem isso a linha nao entra.
     procedencia: Mapped[str] = mapped_column(String(120))
     classificada_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
@@ -675,7 +682,7 @@ class Classificacao(Base):
     conferida_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
 
     def __repr__(self) -> str:
-        return f"<Classificacao {self.impressao} {self.status} {self.conteudo!r}>"
+        return f"<Classificacao {self.chave} {self.status} {self.conteudo!r}>"
 
 
 class VersaoDoBanco(Base):

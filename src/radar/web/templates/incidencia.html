@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Incidência &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .mapa{width:100%;border-collapse:collapse;font-size:var(--tam-sm)}
+    .mapa th,.mapa td{text-align:left;padding:var(--esp-1) var(--esp-2);
+      border-bottom:1px solid var(--cor-borda);vertical-align:top}
+    .mapa th{font-size:var(--tam-xs);color:var(--cor-texto-suave);font-weight:var(--peso-normal)}
+    .mapa td.amostra{white-space:nowrap;font-variant-numeric:tabular-nums}
+    .mapa tr.zero td{color:var(--cor-texto-suave)}
+    .mapa tr.nivel-assunto td.nome{font-weight:var(--peso-forte)}
+    .recuo-1{padding-left:var(--esp-2)}
+    .recuo-2{padding-left:var(--esp-5)}
+    .recuo-3{padding-left:var(--esp-6)}
+    .resumo{display:flex;flex-wrap:wrap;gap:var(--esp-3);align-items:baseline}
+    .rolagem{overflow-x:auto}
+    .padroes{margin:var(--esp-2) 0 0;font-size:var(--tam-sm)}
+    .padroes dt{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .padroes dd{margin:0 0 var(--esp-1)}
+    .filtros{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:end}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_analises with context %}
+{{ barra('analises') }}
+
+<main class="ds-pagina">
+  {{ abas_de_analises('incidencia') }}
+
+  <header class="ds-cabeca">
+    <h1>Incidência no concurso-alvo</h1>
+    <p>
+      O que caiu nas provas da Polícia Penal SC (2013 e 2019), conteúdo por
+      conteúdo, com a amostra em toda linha. É o que <b>aconteceu</b> nas
+      provas analisadas: histórico, não previsão. Só o alvo: o acervo
+      complementar da FEPESE nunca entra nesta conta. Anuladas e pendentes
+      ficam fora e aparecem à parte.
+    </p>
+    <p class="ds-suave">
+      A classificação é do Claude Code e vale depois de conferida na aba
+      Conferência. Padrão de cobrança só com {{ minimos.questoes }} questões
+      em {{ minimos.provas }} provas ou mais; abaixo disso a tela diz que não há
+      evidência.
+    </p>
+  </header>
+
+  <form class="ds-cartao filtros" method="get" action="/analises/incidencia">
+    <label class="ds-campo">Matéria
+      <select name="materia">
+        <option value="">todas</option>
+        {% for m in todas %}<option value="{{ m }}" {{ 'selected' if m == materia }}>{{ m }}</option>{% endfor %}
+      </select>
+    </label>
+    <button class="ds-botao" type="submit">Ver</button>
+  </form>
+
+  {% for m in mapas %}
+    <section class="ds-cartao">
+      <div class="resumo">
+        <h2 class="ds-cartao__titulo">{{ m.materia }}</h2>
+        <span><b>{{ m.topo.amostra }}</b> · {{ m.topo.rotulo }}</span>
+        <span class="ds-suave">fora da conta: {{ m.anuladas }} anulada(s) · {{ m.pendentes }} pendente(s)</span>
+      </div>
+      <div class="rolagem">
+        <table class="mapa">
+          <thead><tr><th>Conteúdo</th><th>Amostra</th><th>O que aconteceu</th><th>Anos</th><th>Tipo de questão</th></tr></thead>
+          <tbody>
+          {% for l in m.linhas[1:] %}
+            <tr class="nivel-{{ l.nivel }} {{ 'zero' if not l.questoes }}">
+              <td class="nome recuo-{{ l.profundidade }}">{{ l.nome }}</td>
+              <td class="amostra">{{ l.amostra }}</td>
+              <td>{{ l.rotulo }}</td>
+              <td>{{ l.anos | join(', ') or '—' }}</td>
+              <td>{% for t, n in l.tipos[:2] %}{{ t }} ({{ n }}){% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% set p = padroes[m.materia] %}
+      <details class="padroes">
+        <summary>Padrões de cobrança da matéria</summary>
+        <p class="ds-suave">{{ p.amostra }}</p>
+        {% if not p.suficiente %}
+          <p>{{ p.frase }}</p>
+        {% else %}
+          <dl>
+            {% if p.tipos %}<dt>Tipo de questão</dt><dd>{% for t, n in p.tipos %}{{ t }} ({{ n }}){% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+            {% if p.comandos %}<dt>Forma de perguntar</dt><dd>{% for c in p.comandos %}{{ c.nome }} ({{ c.quantas }}){% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+            {% if p.gabarito %}<dt>Gabarito</dt><dd>{% for letra, n, pct in p.gabarito %}{{ letra }}: {{ n }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>{% endif %}
+            {% if p.termos %}<dt>Termos frequentes</dt><dd>{% for t in p.termos %}{{ t.palavra }}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+            {% if p.pegadinhas %}<dt>Pegadinhas apontadas</dt><dd><ul>{% for x in p.pegadinhas %}<li>{{ x }}</li>{% endfor %}</ul></dd>{% endif %}
+          </dl>
+        {% endif %}
+      </details>
+    </section>
+  {% else %}
+    <div class="ds-cartao"><p class="ds-nota">A árvore de conteúdos está vazia.</p></div>
+  {% endfor %}
+</main>
+</body>
+</html>

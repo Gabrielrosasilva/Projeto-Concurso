@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Conferência &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .contador{display:flex;flex-wrap:wrap;gap:var(--esp-4);align-items:baseline}
+    .contador .n{font-size:var(--tam-2xl);font-weight:var(--peso-forte);line-height:1;
+      font-variant-numeric:tabular-nums}
+    .filtros{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:end}
+    .questao{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:var(--esp-4)}
+    @media (max-width:760px){.questao{grid-template-columns:minmax(0,1fr)}}
+    .questao h3{margin:0 0 var(--esp-2);font-size:var(--tam-md)}
+    .enunciado{white-space:pre-line;margin:0 0 var(--esp-2)}
+    .alternativas{margin:0;padding-left:0;list-style:none}
+    .alternativas li{padding:var(--esp-1) 0}
+    .alternativas li.certa{font-weight:var(--peso-forte)}
+    .proposta dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--esp-1) var(--esp-2);margin:0}
+    .proposta dt{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .proposta dd{margin:0;overflow-wrap:anywhere}
+    .caminho{font-weight:var(--peso-forte)}
+    .acoes{display:flex;flex-wrap:wrap;gap:var(--esp-2);margin-top:var(--esp-3)}
+    .acoes form{display:flex;flex-wrap:wrap;gap:var(--esp-1);align-items:center}
+    .acoes select,.acoes input[type=text]{max-width:100%}
+    .conferida{opacity:.7}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_analises with context %}
+{{ barra('analises') }}
+
+<main class="ds-pagina">
+  {{ abas_de_analises('conferencia') }}
+
+  <header class="ds-cabeca">
+    <h1>Conferência da classificação</h1>
+    <p>
+      As questões do alvo (Polícia Penal SC, 2013 e 2019) com a classificação
+      proposta ao lado. A proposta é do Claude Code e <b>só vale depois de
+      conferida</b>: confirmar, corrigir para outro nó ou deixar pendente.
+    </p>
+  </header>
+
+  <section class="ds-cartao">
+    <div class="contador">
+      <span class="n">{{ t.conferidas_validas }} de {{ t.validas }}</span>
+      <span>válidas conferidas</span>
+      <span class="ds-suave">· {{ t.conferidas }} de {{ t.total }} contando as anuladas</span>
+    </div>
+    <form class="filtros" method="get" action="/analises/conferencia">
+      <label class="ds-campo">Matéria
+        <select name="materia">
+          <option value="">todas</option>
+          {% for m in t.materias %}
+            <option value="{{ m }}" {{ 'selected' if m == materia }}>{{ m }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="ds-campo caixa"><input type="checkbox" name="abertas" value="1" {{ 'checked' if abertas }}> só as não conferidas</label>
+      <button class="ds-botao" type="submit">Filtrar</button>
+    </form>
+  </section>
+
+  {% if not t.itens %}
+    <div class="ds-cartao"><p class="ds-nota">Nenhuma questão neste filtro.</p></div>
+  {% endif %}
+
+  {% for q in t.itens %}
+    {% set c = q.classificacao %}
+    <article class="ds-cartao questao {{ 'conferida' if q.conferida }}" id="q-{{ q.chave }}">
+      <div>
+        <h3>{{ q.codigo }} · {{ q.materia_do_caderno or 'sem matéria' }}
+          {% if q.anulada %}<span class="ds-selo">anulada pela banca</span>{% endif %}
+          {% if q.conferida %}<span class="ds-selo">✓ conferida</span>{% endif %}
+        </h3>
+        <p class="enunciado">{{ q.enunciado }}</p>
+        <ul class="alternativas">
+          {% for letra, texto in q.alternativas.items() %}
+            <li class="{{ 'certa' if letra == q.gabarito }}">{{ letra }}) {{ texto }}{% if letra == q.gabarito %} ← gabarito{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="proposta">
+        {% if c %}
+          <dl>
+            <dt>Nó</dt><dd class="caminho">{{ c.conteudo }}</dd>
+            <dt>Status</dt><dd>{{ c.status }}</dd>
+            {% if c.tipo_de_questao %}<dt>Tipo</dt><dd>{{ c.tipo_de_questao }}</dd>{% endif %}
+            {% if c.pegadinha %}<dt>Pegadinha</dt><dd>{{ c.pegadinha }}</dd>{% endif %}
+            {% if c.trecho %}<dt>Trecho</dt><dd>{{ c.trecho }}</dd>{% endif %}
+            {% if c.item_do_edital %}<dt>Item do edital</dt><dd>{{ c.item_do_edital }}</dd>{% endif %}
+            {% if c.dispositivo %}<dt>Dispositivo</dt><dd>{{ c.dispositivo }}</dd>{% endif %}
+            <dt>Quem</dt><dd>{{ c.procedencia }}</dd>
+          </dl>
+        {% else %}
+          <p class="ds-nota">Sem classificação ainda: pendente.</p>
+        {% endif %}
+
+        <div class="acoes">
+          {% if c %}
+            <form method="post" action="/analises/conferencia">
+              <input type="hidden" name="chave" value="{{ q.chave }}">
+              <input type="hidden" name="materia" value="{{ materia }}">
+              <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+              <button class="ds-botao" name="acao" value="confirmar">Confirmar</button>
+            </form>
+          {% endif %}
+          <form method="post" action="/analises/conferencia">
+            <input type="hidden" name="chave" value="{{ q.chave }}">
+            <input type="hidden" name="materia" value="{{ materia }}">
+            <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+            <select name="conteudo" aria-label="Corrigir para">
+              {% for opcao in q.opcoes %}
+                <option value="{{ opcao }}" {{ 'selected' if c and opcao == c.conteudo }}>{{ opcao }}</option>
+              {% endfor %}
+            </select>
+            <button class="ds-botao ds-botao--secundario" name="acao" value="corrigir">Corrigir</button>
+          </form>
+          {% if c %}
+            <form method="post" action="/analises/conferencia">
+              <input type="hidden" name="chave" value="{{ q.chave }}">
+              <input type="hidden" name="materia" value="{{ materia }}">
+              <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+              <input type="text" name="motivo" placeholder="por que fica pendente" aria-label="Motivo da pendência">
+              <button class="ds-botao ds-botao--secundario" name="acao" value="pendente">Pendente</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+</main>
+</body>
+</html>

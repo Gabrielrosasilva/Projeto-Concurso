@@ -170,9 +170,9 @@ def test_o_json_das_classificacoes_vai_e_volta(semeada):
 
 def test_o_json_recusa_linha_sem_procedencia(semeada):
     classificacoes.caminho_do_arquivo().write_text(json.dumps([
-        {"impressao": "q1", "conteudo": IMPUTABILIDADE, "procedencia": "manual"},
-        {"impressao": "q2", "conteudo": IMPUTABILIDADE},
-        {"impressao": "q3", "conteudo": "Não existe", "procedencia": "manual"},
+        {"chave": "q1", "conteudo": IMPUTABILIDADE, "procedencia": "manual"},
+        {"chave": "q2", "conteudo": IMPUTABILIDADE},
+        {"chave": "q3", "conteudo": "Não existe", "procedencia": "manual"},
     ]), encoding="utf-8")
     assert classificacoes.importar() == (1, 2)
 
@@ -191,8 +191,9 @@ def test_o_assunto_antigo_vira_classificacao(semeada):
 
     with sessao() as s:
         linhas = list(s.scalars(select(Classificacao)))
-    assert [(c.impressao, c.conteudo, c.procedencia) for c in linhas] == [
-        ("q1", IMPUTABILIDADE, "claude-x")]      # a sem procedencia nao entra
+    chave = classificacoes.chave_da_questao("?", None)
+    assert [(c.chave, c.conteudo, c.procedencia) for c in linhas] == [
+        (chave, IMPUTABILIDADE, "claude-x")]      # a sem procedencia nao entra
 
 
 # --- os textos antigos ------------------------------------------------------------------
@@ -275,14 +276,15 @@ def test_pendente_e_a_questao_sem_classificacao_principal(semeada):
     with sessao() as s:
         for n, ev in enumerate(("alvo", "alvo", "complementar"), start=1):
             s.add(QuestaoDeProva(prova_url="p.pdf", numero=n, materia="Direito Penal",
-                                 enunciado="?", impressao=f"q{n}", evidencia=ev, ano=2019,
+                                 enunciado=f"Q{n}?", impressao=f"q{n}", evidencia=ev, ano=2019,
                                  cargo="Agente Penitenciário"))
         s.add(QuestaoDeProva(prova_url="p.pdf", numero=9, enunciado="?", impressao="q9",
                              evidencia="alvo", anulada=True))
     assert conteudos.pendentes().por_evidencia == {"alvo": 2, "complementar": 1}
 
-    classificacoes.classificar("q1", IMPUTABILIDADE, "manual")
-    classificacoes.classificar("q2", PENAL, "manual")          # so a materia: pendente
+    classificacoes.classificar(classificacoes.chave_da_questao("Q1?", None), IMPUTABILIDADE, "manual")
+    # so a materia: pendente
+    classificacoes.classificar(classificacoes.chave_da_questao("Q2?", None), PENAL, "manual")
     situacao = conteudos.pendentes()
     assert situacao.por_evidencia == {"alvo": 1, "complementar": 1}
     assert situacao.por_prova == [("alvo", 2019, "Agente Penitenciário", 1),
@@ -302,3 +304,30 @@ def test_o_comando_mostra_a_arvore_e_os_pendentes(semeada):
     assert "Noções de Informática (fora do edital atual)" in saida.output
     assert "11 matéria(s) do edital · 2 fora do edital atual · 85 assunto(s)" in saida.output
     assert "Sem classificação (pendentes)" in saida.output
+
+
+def test_o_json_antigo_pela_impressao_vira_chave(semeada):
+    """Linha de antes da chave: igual quando o enunciado e de uma questao so;
+    pendente em cada uma quando ele se repete - nao da para saber de qual."""
+    with sessao() as s:
+        s.add(QuestaoDeProva(prova_url="p.pdf", numero=1, enunciado="Único?",
+                             alternativas={"a": "x"}, impressao="unica"))
+        for n, letra in ((2, "x"), (3, "y")):
+            s.add(QuestaoDeProva(prova_url="p.pdf", numero=n, enunciado="É correto",
+                                 alternativas={"a": letra}, impressao="repetida"))
+    classificacoes.caminho_do_arquivo().write_text(json.dumps([
+        {"impressao": "unica", "conteudo": IMPUTABILIDADE, "procedencia": "manual"},
+        {"impressao": "repetida", "conteudo": IMPUTABILIDADE, "procedencia": "manual"},
+    ]), encoding="utf-8")
+
+    assert classificacoes.importar() == (3, 0)
+
+    with sessao() as s:
+        por_chave = {c.chave: c for c in s.scalars(select(Classificacao))}
+    unica = por_chave[classificacoes.chave_da_questao("Único?", {"a": "x"})]
+    assert (unica.conteudo, unica.status) == (IMPUTABILIDADE, "completa")
+    for letra in "xy":
+        c = por_chave[classificacoes.chave_da_questao("É correto", {"a": letra})]
+        assert (c.conteudo, c.status) == (PENAL, "pendente")
+        assert "ambígua" in c.trecho
+

@@ -4,6 +4,7 @@ Roda so em 127.0.0.1 de proposito (veja cli.web). Nao ha login porque nao ha
 outro usuario, e por isso mesmo ela nao deve ficar exposta na rede.
 """
 import time
+from html import escape
 from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
@@ -1251,6 +1252,65 @@ def analises_materias(request: Request):
             "mensagem": None,
         },
     )
+
+
+@app.get("/analises/incidencia", response_class=HTMLResponse)
+def analises_incidencia(request: Request, materia: str = ""):
+    """O mapa de incidencia do alvo, por no da arvore, sempre com a amostra.
+    Os padroes de cobranca de cada no vao junto, ou a frase da falta de
+    evidencia quando a amostra nao chega ao minimo do config/amostra.yml."""
+    from radar import incidencia as regra
+
+    mapas = servico.incidencia.mapa(materia or None)
+    minimos = regra.carregar_minimos()
+    return templates.TemplateResponse(
+        request=request, name="incidencia.html",
+        context={
+            "mapas": mapas, "materia": materia, "minimos": minimos,
+            "padroes": {l.caminho: regra.padroes(l, minimos)
+                        for m in mapas for l in m.linhas},
+            "todas": [m.materia for m in servico.incidencia.mapa()] if materia else
+                     [m.materia for m in mapas],
+        },
+    )
+
+
+@app.get("/analises/conferencia", response_class=HTMLResponse)
+def analises_conferencia(request: Request, materia: str = "", abertas: str = ""):
+    """A conferencia da classificacao do alvo: enunciado, alternativas,
+    gabarito e a proposta lado a lado, com confirmar / corrigir / pendente."""
+    tela = servico.classificacoes.conferencia(materia or None, so_abertas=bool(abertas))
+    return templates.TemplateResponse(
+        request=request, name="conferencia.html",
+        context={"t": tela, "materia": materia, "abertas": bool(abertas)},
+    )
+
+
+@app.post("/analises/conferencia")
+def analises_conferir(
+    chave: str = Form(""),
+    acao: str = Form(""),
+    conteudo: str = Form(""),
+    motivo: str = Form(""),
+    materia: str = Form(""),
+    abertas: str = Form(""),
+):
+    """Grava a minha decisao sobre UMA questao e volta para o mesmo lugar."""
+    try:
+        if acao == "confirmar":
+            servico.classificacoes.conferir(chave)
+        elif acao == "corrigir":
+            servico.classificacoes.conferir(chave, corrigir_para=conteudo)
+        elif acao == "pendente":
+            servico.classificacoes.conferir(chave, pendente=motivo)
+        else:
+            raise servico.classificacoes.ClassificacaoInvalida(f"Ação {acao!r} não existe.")
+    except servico.classificacoes.ClassificacaoInvalida as erro:
+        return HTMLResponse(f"<p>Não gravei: {escape(str(erro))}</p>", status_code=400)
+    servico.classificacoes.exportar()
+    volta = "/analises/conferencia?" + urlencode(
+        {k: v for k, v in (("materia", materia), ("abertas", abertas)) if v})
+    return RedirectResponse(f"{volta}#q-{chave}", status_code=303)
 
 
 @app.get("/foco")

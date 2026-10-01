@@ -134,6 +134,7 @@ from radar.servico import conferencia   # noqa: F401 - usado pela CLI
 from radar.servico import evidencia     # noqa: F401 - usado pela CLI
 from radar.servico import conteudos     # noqa: F401 - usado pela CLI
 from radar.servico import classificacoes  # noqa: F401 - usado pela CLI
+from radar.servico import incidencia    # noqa: F401 - usado pela CLI e web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,
