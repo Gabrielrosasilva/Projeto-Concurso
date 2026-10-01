@@ -19,6 +19,10 @@ log = logging.getLogger(__name__)
 
 _engine: Engine | None = None
 _Sessao: sessionmaker[Session] | None = None
+# Se a versao do banco ja foi conferida nesta conexao. A conferencia roda uma
+# vez so: `criar_tabelas` e chamado a cada consulta, e os proprios passos da
+# migracao o chamam de novo.
+_versao_conferida = False
 
 
 def _registrar_sem_acento(engine: Engine) -> None:
@@ -63,16 +67,29 @@ def get_engine() -> Engine:
 
 def resetar_engine() -> None:
     """Descarta a conexao atual. Usado pelos testes entre um caso e outro."""
-    global _engine, _Sessao
+    global _engine, _Sessao, _versao_conferida
     if _engine is not None:
         _engine.dispose()
     _engine = None
     _Sessao = None
+    _versao_conferida = False
 
 
 def criar_tabelas() -> None:
-    """Deixa o banco igual ao modelo. Seguro rodar quantas vezes quiser."""
+    """Deixa o banco igual ao modelo. Seguro rodar quantas vezes quiser.
+
+    Na primeira vez em cada conexao, confere a versao do banco: banco de antes
+    da ultima migracao e migrado ali mesmo, com copia antes (`migracoes`).
+    Lembrar de rodar um comando depois do `git pull` nao pode ser requisito
+    para o radar funcionar - o mesmo motivo das colunas novas, abaixo.
+    """
+    global _versao_conferida
     engine = get_engine()
+    if not _versao_conferida:
+        # Marcado ANTES de migrar: os passos da migracao chamam esta funcao.
+        _versao_conferida = True
+        from radar import migracoes
+        migracoes.preparar(engine)
     Base.metadata.create_all(engine)
     _adicionar_colunas_novas(engine)
 

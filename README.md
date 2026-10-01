@@ -899,6 +899,33 @@ radar parecidas "Policial Penal"   # acha o cargo pelo nome antigo tambem
 radar assuntos              # SIMULA o assunto fino; --valendo gasta de verdade
 radar assuntos --so-alvo    # so as minhas provas, escolhendo na lista do edital
 radar cobertura             # quantas questoes ja tem assunto, por materia
+radar conteudos             # a arvore: materia > assunto > subassunto > elemento
+radar conteudos --pendentes # as questoes sem classificacao, alvo prova a prova
+radar conteudos --semear    # poe na arvore o que o edital tem e ela nao
+```
+
+**A arvore de conteudos e a evidencia (Etapa 2).** Toda questao do acervo tem
+uma **evidencia**: `alvo` (a prova do meu cargo e do meu estado: 2013 e 2019,
+170 questoes), `complementar` (outra prova da FEPESE, inclusive o
+Socioeducativo 2016) ou `fora` (outra banca). E uma regra so, no
+`servico/evidencia.py`, e os tres nunca se somam. A **arvore** nasce do anexo
+de programas do edital de 2019, com o texto literal (11 materias, 85 assuntos),
+mais Nocoes de Informatica e Direito Administrativo, que cairam em 2013 e nao
+estao no edital de agora. Ela mora em `data/conteudos.json`; a classificacao
+de cada questao (completa, parcial ou pendente, sempre com procedencia) mora em
+`data/classificacoes.json`. Os dois voltam no `importar` e vao no
+`sincronizar`.
+
+**Migracao do banco.** Mudanca de estrutura agora tem versao e copia antes.
+Qualquer comando migra sozinho na primeira vez; `radar migrar` faz o mesmo e
+mostra a tabela "antes x depois". A copia fica em
+`data/copias/migracao-v<de>-para-v<para>-<hora>/`, e `radar migrar
+--desfazer` devolve o banco a ela (para ficar na versao antiga, volte tambem o
+codigo pelo git: o proximo comando do radar novo migraria de novo).
+
+```bash
+radar migrar                # leva o banco a versao atual, com copia antes
+radar migrar --desfazer     # devolve o banco a copia da ultima migracao
 ```
 
 **Avisos e calendario**
@@ -1024,6 +1051,17 @@ exemplo, foi revogada pela Lei 13.869/2019.
 
 **O radar nao baixa nem guarda o texto de lei nenhuma.** Lei muda, e o unico
 lugar em que a versao vigente esta certa e a fonte.
+
+### A taxonomia, em `config/taxonomia.yml`
+
+Os tipos de "elemento" que cada familia de materia aceita na arvore de
+conteudos: artigo, inciso e sumula no Direito; regra gramatical e crase no
+Portugues; tipo de problema e tabela-verdade no Raciocinio; e assim por
+diante. Ampliar uma lista e editar o arquivo: o banco nao muda e nao ha
+migracao. Tipo fora da lista da familia e recusado, para um erro de digitacao
+nao virar tipo novo. O arquivo tambem guarda os tipos de questao, as materias
+que cairam no alvo e nao estao no edital atual, e os sinonimos de materia de
+provas antigas (como "Direito Processo Penal" de 2013).
 
 ### O perfil, em `config/perfil.yml`
 
@@ -1435,8 +1473,11 @@ src/radar/
 ├── config.py       le ambiente (.env). Nenhum efeito colateral no import.
 ├── models.py       tabelas concursos, eventos, questoes, questoes_geradas,
 │                   simulados, respostas, registros_de_estudo, erros_anotados,
-│                   estudos_extras e notas_da_semana
+│                   estudos_extras, notas_da_semana, conteudos,
+│                   classificacoes e versao_do_banco
 ├── db.py           engine preguicoso + context manager de sessao
+├── migracoes.py    a versao do banco: passos numerados, copia antes, desfazer
+├── conteudos.py    a arvore de conteudos e a taxonomia (puro, sem banco)
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
 │   │                 retificacao e calendario - e a fachada dos demais
@@ -1453,6 +1494,11 @@ src/radar/
 │   ├── extra.py      o estudo extra, fora das faixas do plano
 │   ├── semanas.py    como fui em cada semana, agrupado pelos ciclos do mapa
 │   ├── materias.py   o progresso em cada materia do edital, e a projecao
+│   ├── metricas.py   a fonte unica da contagem: questao, acerto e erro
+│   ├── conferencia.py o gravado no diario contra a regra, dia a dia
+│   ├── evidencia.py  alvo, complementar ou fora: a regra unica da prova
+│   ├── conteudos.py  a arvore no banco: semear, JSON, textos antigos, pendentes
+│   ├── classificacoes.py a questao ligada a um no, com status e procedencia
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
@@ -1502,6 +1548,7 @@ config/
 ├── alvo.yml        os cargos que eu quero, em ordem
 ├── leis.yml        onde ler a lei de cada materia e assunto de Direito
 ├── perfil.yml      meus dados, para a elegibilidade
+├── taxonomia.yml   os tipos de elemento por familia de materia
 └── cronograma.yml  o plano de estudo, dia a dia (dado, editavel a mao)
 ```
 

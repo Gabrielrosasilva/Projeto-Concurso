@@ -532,6 +532,10 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
                 else:
                     resultado.atualizadas += 1
 
+    # Questao nova nasce sem evidencia: a regra unica a preenche, com as
+    # outras, agora que o caderno esta no banco.
+    from radar.servico import evidencia
+    evidencia.atualizar()
     return resultado
 
 

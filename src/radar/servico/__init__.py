@@ -129,6 +129,11 @@ from radar.servico import materias      # noqa: F401 - usado pela web
 from radar.servico import metricas      # noqa: F401 - usado pela web e CLI
 # O gravado contra a regra, dia a dia. `servico.conferencia.conferir()`.
 from radar.servico import conferencia   # noqa: F401 - usado pela CLI
+# A Etapa 2: a evidencia de cada prova (alvo, complementar, fora), a arvore de
+# conteudos e as classificacoes. `servico.evidencia.atualizar()`.
+from radar.servico import evidencia     # noqa: F401 - usado pela CLI
+from radar.servico import conteudos     # noqa: F401 - usado pela CLI
+from radar.servico import classificacoes  # noqa: F401 - usado pela CLI
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

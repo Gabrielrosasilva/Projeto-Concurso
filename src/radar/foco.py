@@ -249,24 +249,6 @@ def _banca_do_alvo(s, concursos: list[Concurso], provas_do_alvo: set[str]) -> Ba
     return Banca(nome=nomes[0], confirmada=False, anos=anos)
 
 
-def _e_do_cargo(cargo: str | None) -> bool:
-    """Esta questao e de uma prova do cargo que eu quero?
-
-    Quem responde e `alvo.sinonimos_do_cargo`, que ja trata os `termos` do
-    YAML como os varios nomes do MESMO cargo e ja aplica a lista `exclui`.
-    Antes esta funcao comparava so os `termos`, e por isso uma prova de
-    "Policial Penal Federal" - que contem "policial penal" - entrava nas
-    contas da tela como se fosse minha. Ela e outro concurso, e tem bloco
-    proprio nos alvos secundarios.
-
-    A comparacao e feita em Python, e nao no SQL, por causa do acento: o LIKE
-    do SQLite ignora maiuscula mas NAO ignora acento, e o cargo gravado e
-    "Agente Penitenciario" com acento enquanto o termo do YAML vem sem. Com
-    ilike, as 170 questoes do cargo davam zero.
-    """
-    return bool(alvos.sinonimos_do_cargo(cargo or ""))
-
-
 def _anos_com_prova(s, provas_do_alvo: set[str], banca: str) -> list[int]:
     """Em que anos essa banca deixou prova do CARGO no acervo.
 
@@ -618,23 +600,11 @@ def _provas_do_alvo(s) -> set[str]:
     e feita UMA vez, sobre as ~200 provas distintas, e o resto do arquivo
     consulta o banco so por elas.
     """
-    linhas = s.execute(
-        select(
-            QuestaoDeProva.prova_url,
-            QuestaoDeProva.cargo,
-            Concurso.uf,
-            Concurso.titulo,
-            Concurso.resumo,
-        )
-        .join(Concurso, Concurso.url == QuestaoDeProva.concurso_url, isouter=True)
-        .distinct()
-    ).all()
+    # A regra mora no `servico.evidencia` desde a Etapa 2: e a mesma que o
+    # simulado usa, e a que grava a coluna `questoes.evidencia`.
+    from radar.servico import evidencia
 
-    return {
-        url for url, cargo, uf, titulo, resumo in linhas
-        if _e_do_cargo(cargo)
-        and alvos.e_do_estado_do_principal(uf, titulo, resumo)
-    }
+    return evidencia.provas(s, evidencia.ALVO)
 
 
 def _incidencia_do_cargo(s, provas_do_alvo: set[str]) -> tuple[dict, list[int]]:

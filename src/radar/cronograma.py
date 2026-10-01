@@ -9,6 +9,7 @@ quanto dura (ou quantas questoes tem), e o horario sai da soma a partir do
 inicio do bloco. Assim, quando a rampa troca 15 questoes por 20, tudo o que
 vem depois anda junto, sem ninguem reescrever horario a mao.
 """
+import json
 import math
 from dataclasses import dataclass, field, replace
 from datetime import date, datetime, time, timedelta
@@ -161,6 +162,10 @@ class Faixa:
     aviso: str | None = None
     # A chave `consulta` da faixa. None = a regra do `consulta_por_padrao`.
     consulta: bool | None = None
+    # O no da arvore de conteudos, pelo caminho ("Direito Penal > ..."). E a
+    # chave `conteudo` da faixa (Etapa 2), conferida no carregamento contra o
+    # data/conteudos.json. Opcional: o titulo continua dizendo o tema.
+    conteudo: str | None = None
     # A faixa do Anki com `anki: desativado`. Ela continua na lista, na mesma
     # posicao: os checks sao reconhecidos por bloco e posicao, e tira-la
     # mudaria a posicao do Bonus que vem depois. Desligada, ela nao tem
@@ -407,6 +412,7 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
         min_por_questao=bruta.get("min_por_questao"),
         consulta=(bool(bruta["consulta"]) if bruta.get("consulta") is not None
                   else None),
+        conteudo=bruta.get("conteudo"),
     )
 
 
@@ -581,6 +587,30 @@ def _conferir_materias_das_faixas(dias: list[Dia], materias: list[MateriaDoEdita
                 )
 
 
+def _conferir_conteudos_das_faixas(dias: list[Dia]) -> None:
+    """Toda chave `conteudo` precisa ser um no da arvore.
+
+    Pela mesma razao da materia: um caminho digitado errado nunca ligaria a
+    faixa a nada, e ninguem perceberia. A arvore vem do data/conteudos.json,
+    e nao do banco - este arquivo nao fala com banco.
+    """
+    usados = [(dia, f) for dia in dias for f in dia.faixas() if f.conteudo]
+    if not usados:
+        return
+    arquivo = config.diretorio_dados() / "conteudos.json"
+    if not arquivo.exists():
+        return          # sem a arvore, nao ha contra o que conferir
+    conhecidos = {linha["caminho"] for linha in
+                  json.loads(arquivo.read_text(encoding="utf-8")) or []}
+    for dia, faixa in usados:
+        if faixa.conteudo not in conhecidos:
+            raise ErroNoCronograma(
+                f"Dia {dia.data.isoformat()}: a faixa {faixa.titulo!r} aponta para o "
+                f"conteúdo {faixa.conteudo!r}, que não está na árvore "
+                f"(data/conteudos.json). Confira com `radar conteudos`."
+            )
+
+
 def carregar(caminho: Path | None = None) -> Plano:
     """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma."""
     arquivo = caminho or (config.diretorio_config() / "cronograma.yml")
@@ -649,6 +679,7 @@ def carregar(caminho: Path | None = None) -> Plano:
     materias = _materias(dados.get("materias"))
     mistas = [str(nome).strip() for nome in (dados.get("materias_mistas") or [])]
     _conferir_materias_das_faixas(dias, materias, mistas)
+    _conferir_conteudos_das_faixas(dias)
 
     return Plano(
         ciclo=dados.get("ciclo"),

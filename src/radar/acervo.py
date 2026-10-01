@@ -381,6 +381,7 @@ def importar_assuntos(caminho: Path | None = None) -> int:
 
     mudadas = 0
     recusadas = 0
+    antigas = []
     with sessao() as s:
         for linha in linhas:
             impressao, assunto = linha.get("impressao"), linha.get("assunto")
@@ -402,6 +403,15 @@ def importar_assuntos(caminho: Path | None = None) -> int:
                     questao.assunto_modelo = linha.get("modelo")
                     questao.assunto_em = quando
                     mudadas += 1
+            antigas.append((impressao, linha.get("materia"), assunto,
+                            linha.get("modelo"), quando))
+
+    # O formato antigo vira tambem classificacao (Etapa 2): o que casa com um
+    # no da arvore e ligado, o resto fica pendente na materia. Importado aqui
+    # dentro porque o `servico` ja depende deste arquivo.
+    from radar.servico import classificacoes
+    for impressao, materia, assunto, modelo, quando in antigas:
+        classificacoes.do_texto_antigo(impressao, materia, assunto, modelo, quando)
 
     if recusadas:
         log.warning(
@@ -495,6 +505,10 @@ def importar_geradas(caminho: Path | None = None) -> int:
             if ja is not None:
                 if linha.get("rejeitada") and not ja.rejeitada:
                     ja.rejeitada = True
+                # A ligacao ao no da arvore (Etapa 2) chega depois do texto:
+                # e a unica outra coisa que a linha do arquivo pode trazer.
+                if linha.get("conteudo") and not ja.conteudo:
+                    ja.conteudo = linha["conteudo"]
                 continue
 
             valores = {
@@ -922,6 +936,7 @@ def _erro_como_linha(erro: ErroAnotado) -> dict:
         "data_estudo": erro.data_estudo.isoformat(),
         "materia": erro.materia,
         "assunto": erro.assunto,
+        "conteudo": erro.conteudo,
         "motivo": erro.motivo,
         "regra": erro.regra,
         "fonte": erro.fonte,
@@ -985,6 +1000,7 @@ def importar_erros(caminho: Path | None = None) -> int:
             erro.data_estudo = date.fromisoformat(linha["data_estudo"])
             erro.materia = linha["materia"]
             erro.assunto = linha.get("assunto")
+            erro.conteudo = linha.get("conteudo")
             erro.motivo = linha["motivo"]
             erro.regra = linha["regra"]
             erro.fonte = linha.get("fonte") or "outro"
@@ -1015,6 +1031,7 @@ def _extra_como_linha(extra: EstudoExtra) -> dict:
         "o_que": extra.o_que,
         "materia": extra.materia,
         "assunto": extra.assunto,
+        "conteudo": extra.conteudo,
         "minutos": extra.minutos,
         "questoes": extra.questoes,
         "acertos": extra.acertos,
@@ -1068,6 +1085,7 @@ def importar_extras(caminho: Path | None = None) -> int:
             extra.o_que = linha["o_que"]
             extra.materia = linha.get("materia")
             extra.assunto = linha.get("assunto")
+            extra.conteudo = linha.get("conteudo")
             extra.minutos = int(linha.get("minutos") or 0)
             extra.questoes = linha.get("questoes")
             extra.acertos = linha.get("acertos")

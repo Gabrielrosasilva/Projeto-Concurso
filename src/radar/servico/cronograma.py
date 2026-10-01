@@ -231,7 +231,7 @@ def _check_da_faixa(bloco: str, indice: int, faixa, questoes=None, acertos=None,
     historico tem que continuar contando o que eu fiz naquele dia. Posicao no
     arquivo nao e historico; numero gravado e.
     """
-    return {
+    check = {
         "bloco": bloco,
         "indice": indice,
         "titulo": faixa.titulo,
@@ -245,6 +245,11 @@ def _check_da_faixa(bloco: str, indice: int, faixa, questoes=None, acertos=None,
         # estudo extra usam para a mesma coisa.
         "assunto": faixa.titulo,
     }
+    # O no da arvore, quando a faixa tem (Etapa 2). So entra com valor: os
+    # checks gravados antes continuam com o mesmo formato.
+    if faixa.conteudo:
+        check["conteudo"] = faixa.conteudo
+    return check
 
 
 def marcar_faixa(

@@ -205,25 +205,24 @@ def _questoes_para_o_alvo(s) -> tuple[list, list]:
     A segunda lista sai das materias da PRIMEIRA: o que define o que me serve
     e o que caiu na minha prova, e nao o catalogo de materias da banca.
     """
+    # Alvo e complementar pela regra unica do `servico.evidencia` (Etapa 2).
+    # Antes o simulado olhava so o cargo, e o Meu foco o cargo E o estado.
+    from radar.servico import evidencia
+
+    por_prova = evidencia.por_prova(s)
     candidatas = list(s.scalars(
         select(QuestaoDeProva).where(QuestaoDeProva.resposta.is_not(None))
     ))
 
-    proprias = [
-        q for q in candidatas if alvos.nomeia_cargo_do_principal(q.cargo or "")
-    ]
+    proprias = [q for q in candidatas if por_prova.get(q.prova_url) == evidencia.ALVO]
     if not proprias:
         return [], []
 
     materias = {regioes.normalizar(q.materia) for q in proprias if q.materia}
-    bancas = [regioes.normalizar(b) for b in alvos.bancas_do_principal()]
-    proprias_ids = {q.id for q in proprias}
-
     da_banca = [
         q for q in candidatas
-        if q.id not in proprias_ids
+        if por_prova.get(q.prova_url) == evidencia.COMPLEMENTAR
         and q.materia and regioes.normalizar(q.materia) in materias
-        and any(banca in regioes.normalizar(q.banca or "") for banca in bancas)
     ]
     return proprias, da_banca
 

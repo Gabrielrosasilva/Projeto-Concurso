@@ -19,8 +19,10 @@ from fastapi.testclient import TestClient
 
 from radar import servico
 from radar.db import sessao
-from radar.models import QuestaoDeProva
+from radar.models import Concurso, QuestaoDeProva
 from radar.web.app import app
+
+from tests.test_foco import CONCURSO_DE_2019, _concurso
 
 DO_ALVO = "Agente Penitenciário"
 
@@ -32,6 +34,9 @@ def _questao(numero: int, **mudancas) -> QuestaoDeProva:
         ano=2019,
         municipio=None,
         cargo=DO_ALVO,
+        # O concurso de SC: e dele que sai o estado, e desde a regra unica de
+        # evidencia (Etapa 2) o treino tambem pede o estado, como o Meu foco.
+        concurso_url=CONCURSO_DE_2019,
         numero=numero,
         materia="Direitos Humanos",
         enunciado=f"Enunciado {numero}?",
@@ -45,6 +50,8 @@ def _questao(numero: int, **mudancas) -> QuestaoDeProva:
 
 def _semear(*questoes):
     with sessao() as s:
+        if s.query(Concurso).filter_by(url=CONCURSO_DE_2019).first() is None:
+            s.add(_concurso())
         for q in questoes:
             s.add(q)
 

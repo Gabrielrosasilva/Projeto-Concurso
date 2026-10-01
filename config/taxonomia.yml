@@ -1,0 +1,127 @@
+# A taxonomia da arvore de conteudos (Etapa 2). Lida por src/radar/conteudos.py.
+#
+# A arvore e: materia > assunto > subassunto > elemento. Os dois niveis de
+# baixo sao opcionais, e o que e "elemento" muda com a materia - um artigo no
+# Direito, uma regra gramatical no Portugues, um tipo de problema no
+# Raciocinio. Esta lista diz quais tipos de elemento cada familia aceita.
+#
+# E DADO: ampliar uma lista aqui nao muda o banco nem pede migracao. Tipo
+# fora da lista da familia e recusado ao criar o no, para um erro de
+# digitacao ("artgo") nao virar um tipo novo sem ninguem perceber.
+#
+# COMO LER
+#
+#   familias            - cada familia: as `materias` dela (o nome exato do
+#                         no de materia) e os `elementos` que ela aceita.
+#                         Materia que nao esta em familia nenhuma aceita so
+#                         os `elementos_comuns`.
+#   elementos_comuns    - os tipos que servem para qualquer materia.
+#   tipos_de_questao    - como a questao cobra o conteudo. Usado na
+#                         classificacao (Etapa 3A) e nos padroes de cobranca.
+#   materias_fora_do_edital - materias que cairam numa prova do alvo e NAO
+#                         estao no edital de agora. Entram na arvore marcadas
+#                         como "fora do edital atual", com a prova de origem.
+#   sinonimos_de_materia - o mesmo nome escrito de outro jeito numa prova
+#                         antiga. So para LIGAR texto antigo a materia certa:
+#                         a arvore usa sempre o nome do edital.
+
+elementos_comuns:
+- conceito
+- princípio
+- classificação
+- diferença entre conceitos
+
+familias:
+  direito:
+    materias:
+    - Direito Penal
+    - Direito Processual Penal
+    - Direito Constitucional
+    - Lei de Execução Penal
+    - Legislação Especial
+    - Legislação Estadual
+    - Administração Pública
+    - Direito Administrativo
+    elementos:
+    - artigo
+    - inciso
+    - parágrafo
+    - súmula
+    - doutrina
+    - conceito jurídico
+    - instituto
+    - exceção
+    - prazo
+    - competência
+    - procedimento
+  portugues:
+    materias:
+    - Língua Portuguesa
+    elementos:
+    - regra gramatical
+    - estrutura sintática
+    - padrão de interpretação
+    - figura de linguagem
+    - concordância
+    - regência
+    - crase
+  raciocinio:
+    materias:
+    - Raciocínio Lógico
+    elementos:
+    - tipo de problema
+    - conceito lógico
+    - proposição
+    - tabela-verdade
+    - equivalência
+    - negação
+    - propriedade
+    - forma de resolução
+    - porcentagem
+    - análise combinatória
+  informatica:
+    materias:
+    - Noções de Informática
+    elementos:
+    - ferramenta
+    - comando
+    - atalho
+    - recurso
+    - protocolo
+    - função
+    - configuração
+    - tecnologia
+  direitos_humanos:
+    materias:
+    - Direitos Humanos
+    elementos:
+    - tratado
+    - convenção
+    - artigo
+    - contexto histórico
+    - entendimento
+  sociologia:
+    materias:
+    - Sociologia Aplicada
+    elementos:
+    - autor
+    - teoria sociológica
+    - contexto histórico
+
+tipos_de_questao:
+- literalidade da lei
+- conceito
+- caso prático
+- exceção ou pegadinha
+- cálculo
+- interpretação de texto
+- comparação entre conceitos
+
+materias_fora_do_edital:
+- nome: Noções de Informática
+  procedencia: prova de 2013 (Agente Penitenciário)
+- nome: Direito Administrativo
+  procedencia: prova de 2013 (Agente Penitenciário)
+
+sinonimos_de_materia:
+  Direito Processo Penal: Direito Processual Penal

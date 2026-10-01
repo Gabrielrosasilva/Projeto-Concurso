@@ -1476,6 +1476,13 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
         f"{destino_assuntos}"
     )
 
+    # A arvore de conteudos e as classificacoes (Etapa 2): o banco e
+    # reconstruivel, e elas so voltam pelo arquivo.
+    nos = servico.conteudos.exportar()
+    classificadas = servico.classificacoes.exportar()
+    console.print(f"[green]{nos}[/] nó(s) da árvore e [green]{classificadas}[/] "
+                  f"classificação(ões) exportados")
+
     # O quarto tambem custou dinheiro: as questoes que a IA escreveu. Elas
     # sao treino, e nao acervo - mas perde-las e paga-las de novo.
     destino_geradas = (
@@ -1582,6 +1589,12 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_eventos.exists():
         console.print(f"[green]{novos}[/] evento(s) novo(s) de {origem_eventos}")
 
+    # A arvore antes de tudo que se liga a ela: o assunto antigo e as
+    # classificacoes procuram o no pelo caminho.
+    nos = servico.conteudos.importar()
+    if nos:
+        console.print(f"[green]{nos}[/] nó(s) da árvore de conteúdos de volta")
+
     origem_assuntos = (
         origem.with_name("assuntos.json") if caminho
         else acervo.caminho_dos_assuntos()
@@ -1601,6 +1614,13 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
                 f"diz de que modelo e de quando eles vieram. Assunto sem "
                 f"procedencia nao entra no banco."
             )
+
+    entraram, recusadas = servico.classificacoes.importar()
+    if entraram or recusadas:
+        console.print(f"[green]{entraram}[/] classificação(ões) de volta")
+    if recusadas:
+        console.print(f"[red]{recusadas} classificação(ões) recusadas:[/] sem "
+                      f"procedência ou com um nó que a árvore não tem.")
 
     origem_geradas = (
         origem.with_name("questoes_geradas.json") if caminho
@@ -1659,6 +1679,13 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_notas.exists():
         notas_de_volta = acervo.importar_notas(origem_notas)
         console.print(f"   {notas_de_volta} reflexao(oes) de semana de volta ao banco")
+
+    # O concurso de uma prova pode ter chegado agora, e e ele que diz o
+    # estado: a evidencia de cada questao e refeita pela regra unica.
+    contagem = servico.evidencia.atualizar()
+    console.print("   evidência: " + ", ".join(
+        f"{quantas} {ev or 'sem evidência'}" for ev, quantas in sorted(
+            contagem.items(), key=lambda par: str(par[0]))))
 
     # Uma linha por execucao, principalmente para o log do robo: e ela que
     # responde "voce esta vendo os meus favoritos?". Eles chegam la pelo
@@ -2009,7 +2036,8 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/simulados.json", "data/macetes.json",
                      "data/explicacoes.json", "data/registro_estudo.json",
                      "data/estado_do_dia.json", "data/caderno_erros.json",
-                     "data/estudo_extra.json", "data/notas_semana.json")
+                     "data/estudo_extra.json", "data/notas_semana.json",
+                     "data/conteudos.json", "data/classificacoes.json")
 
 
 @app.command()
@@ -2055,6 +2083,8 @@ def sincronizar(
         f"   {concursos} concurso(s) lido(s), {eventos_novos} evento(s) novo(s)"
     )
     _importar_simulados()
+    servico.conteudos.importar()
+    servico.classificacoes.importar()
     dias = acervo.importar_registros()
     estados = acervo.importar_estados()
     erros_de_volta = acervo.importar_erros()
@@ -2069,6 +2099,7 @@ def sincronizar(
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
     # arquivo ja teria ido com a regra antiga.
     console.print("[bold]3/6[/] Aplicando a regra de hoje (reclassificar)")
+    servico.evidencia.atualizar()
     contagem = servico.reclassificar()
     console.print(
         "   " + ", ".join(
@@ -2093,6 +2124,8 @@ def sincronizar(
     total_erros = acervo.exportar_erros()
     total_extras = acervo.exportar_extras()
     total_notas = acervo.exportar_notas()
+    servico.conteudos.exportar()
+    servico.classificacoes.exportar()
     favoritos = servico.contar_favoritos()
     console.print(
         f"   {total} concurso(s), {total_eventos} evento(s), "
@@ -2392,6 +2425,113 @@ def _registro_legivel(registro) -> str:
     if registro.anotacao:
         texto += f"\n  [dim]{escape(registro.anotacao)}[/]"
     return texto
+
+
+@app.command()
+def migrar(
+    desfazer: bool = typer.Option(
+        False, "--desfazer",
+        help="Devolve o banco à cópia da última migração (data/copias/)",
+    ),
+) -> None:
+    """Leva o banco à estrutura atual, com cópia antes e "antes x depois".
+
+    Qualquer comando do radar já migra sozinho na primeira vez; este mostra a
+    conta. Rodar de novo num banco migrado não faz nada.
+    """
+    from radar import migracoes
+    from radar.db import get_engine
+
+    if desfazer:
+        try:
+            copia = migracoes.desfazer()
+        except FileNotFoundError as erro:
+            console.print(f"[red]{erro}[/]")
+            raise typer.Exit(code=1)
+        console.print(f"[green]Banco devolvido à cópia de {copia}[/] (versão "
+                      f"{migracoes.versao(get_engine())}). Para ficar nela, volte "
+                      f"também o código: o próximo comando do radar novo migra de novo.")
+        return
+
+    # Sem passar pelo `criar_tabelas`, que migraria em silêncio antes da conta.
+    relatorio = migracoes.migrar(get_engine())
+    if not relatorio.mudou:
+        console.print(f"[green]Banco já está na versão {relatorio.para}.[/] Nada a migrar.")
+        return
+    tabela = Table(title=f"Migração da versão {relatorio.de} para a {relatorio.para}")
+    for coluna in ("Tabela", "Antes", "Depois"):
+        tabela.add_column(coluna)
+    for nome in sorted(set(relatorio.antes) | set(relatorio.depois)):
+        tabela.add_row(nome, str(relatorio.antes.get(nome, "—")),
+                       str(relatorio.depois.get(nome, "—")))
+    console.print(tabela)
+    console.print(f"Nenhuma linha perdida. Cópia de antes em {relatorio.copia}")
+
+
+@app.command()
+def conteudos(
+    pendentes: bool = typer.Option(
+        False, "--pendentes", help="Lista as questões sem classificação, por prova"),
+    semear: bool = typer.Option(
+        False, "--semear", help="Põe na árvore o que o edital tem e ela ainda não"),
+) -> None:
+    """A árvore de conteúdos: matéria > assunto > subassunto > elemento."""
+    from rich.tree import Tree
+
+    from radar import conteudos as arvore_de_conteudos
+    from radar import foco
+
+    if semear:
+        entraram = servico.conteudos.semear(programa=foco.programa_do_alvo())
+        console.print(f"[green]{entraram}[/] nó(s) novo(s) do edital")
+
+    nos = servico.conteudos.nos()
+    if not nos:
+        console.print("[yellow]A árvore está vazia.[/] Rode `radar conteudos "
+                      "--semear` com o edital do alvo no acervo.")
+        raise typer.Exit(code=1)
+
+    raiz = Tree("[bold]Conteúdos[/]")
+    galhos = {None: raiz}
+    for no in nos:
+        rotulo = escape(no.nome)
+        if no.fora_do_edital:
+            rotulo += " [dim](fora do edital atual)[/]"
+        if no.tipo_elemento:
+            rotulo += f" [dim]· {escape(no.tipo_elemento)}[/]"
+        galhos[no.caminho] = galhos[no.pai].add(rotulo)
+    console.print(raiz)
+    do_edital = sum(1 for no in nos if no.nivel == "materia" and not no.fora_do_edital)
+    fora = sum(1 for no in nos if no.fora_do_edital)
+    partes = [f"{do_edital} matéria(s) do edital"]
+    if fora:
+        partes.append(f"{fora} fora do edital atual")
+    for nivel in arvore_de_conteudos.NIVEIS[1:]:
+        quantos = sum(1 for no in nos if no.nivel == nivel)
+        if quantos:
+            partes.append(f"{quantos} {nivel}(s)")
+    console.print("   " + " · ".join(partes))
+
+    if pendentes:
+        situacao = servico.conteudos.pendentes()
+        console.print("\n[bold]Sem classificação (pendentes)[/], fora as anuladas")
+        console.print("   " + " · ".join(
+            f"{n} {ev}" for ev, n in sorted(situacao.por_evidencia.items())))
+        # Prova a prova so o alvo: o complementar sao ~200 cadernos, e a lista
+        # inteira esconderia as duas linhas que importam.
+        tabela = Table(title="Provas do alvo")
+        for coluna in ("Ano", "Cargo", "Pendentes"):
+            tabela.add_column(coluna)
+        complementares = []
+        for ev, ano, cargo, n in situacao.por_prova:
+            if ev == servico.evidencia.ALVO:
+                tabela.add_row(str(ano or "—"), escape(cargo or "—"), str(n))
+            else:
+                complementares.append(n)
+        console.print(tabela)
+        if complementares:
+            console.print(f"   complementar: {sum(complementares)} pendente(s) em "
+                          f"{len(complementares)} prova(s) (cargo e ano)")
 
 
 @app.command()

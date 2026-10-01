@@ -26,6 +26,12 @@ class Base(DeclarativeBase):
     pass
 
 
+# O caminho de nomes de um no da arvore de conteudos ("Direito Penal >
+# Imputabilidade penal"). E por ele, e nao pelo id, que tudo se liga a um no:
+# o banco e reconstruivel, e o caminho sobrevive a reconstrucao.
+TAMANHO_DO_CAMINHO = 800
+
+
 def agora() -> datetime:
     """Momento atual, sempre em UTC e sempre com fuso explicito."""
     return datetime.now(timezone.utc)
@@ -298,6 +304,12 @@ class QuestaoDeProva(Base):
     assunto_modelo: Mapped[str | None] = mapped_column(String(60), nullable=True)
     assunto_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
 
+    # alvo | complementar | fora (Etapa 2). Quem preenche e UMA funcao,
+    # `servico.evidencia.atualizar`: a prova do meu cargo e do meu estado e
+    # alvo; outra prova da banca do alvo e complementar; o resto e fora. Nula
+    # so ate a primeira conta.
+    evidencia: Mapped[str | None] = mapped_column(String(12), index=True, nullable=True)
+
     extraida_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
 
     def __repr__(self) -> str:
@@ -399,6 +411,9 @@ class QuestaoGerada(Base):
     #: e melhor sem artigo do que com artigo inventado. A tela junta este
     #: texto com o link de config/leis.yml, para eu conferir em 10 segundos.
     artigo: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    #: O no da arvore de conteudos, pelo caminho. Opcional: a `materia` e o
+    #: `assunto` de texto continuam onde estao.
+    conteudo: Mapped[str | None] = mapped_column(String(TAMANHO_DO_CAMINHO), nullable=True)
 
     enunciado: Mapped[str] = mapped_column(Text)
     alternativas: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
@@ -494,6 +509,9 @@ class ErroAnotado(Base):
     data_estudo: Mapped[date] = mapped_column(Date, index=True)
     materia: Mapped[str] = mapped_column(String(80), index=True)
     assunto: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    # O no da arvore de conteudos, pelo caminho (Etapa 2). Opcional: a materia
+    # e o assunto digitados continuam onde estao.
+    conteudo: Mapped[str | None] = mapped_column(String(TAMANHO_DO_CAMINHO), nullable=True)
     # nao_sabia | confundi | li_errado | pegadinha | chutei (servico/erros.py).
     motivo: Mapped[str] = mapped_column(String(20), index=True)
     # A regra certa, escrita por mim. E OBRIGATORIA de proposito: erro sem a
@@ -541,6 +559,9 @@ class EstudoExtra(Base):
     # Uma das materias de `materias`, no config/cronograma.yml.
     materia: Mapped[str | None] = mapped_column(String(80), nullable=True, index=True)
     assunto: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    # O no da arvore de conteudos, pelo caminho (Etapa 2). Opcional: a materia
+    # e o assunto digitados continuam onde estao.
+    conteudo: Mapped[str | None] = mapped_column(String(TAMANHO_DO_CAMINHO), nullable=True)
     minutos: Mapped[int] = mapped_column(Integer, default=0)
     questoes: Mapped[int | None] = mapped_column(Integer, nullable=True)
     acertos: Mapped[int | None] = mapped_column(Integer, nullable=True)
@@ -579,3 +600,93 @@ class NotaDaSemana(Base):
 
     def __repr__(self) -> str:
         return f"<NotaDaSemana {self.inicio}>"
+
+
+# --- a arvore de conteudos (Etapa 2) -------------------------------------------
+
+class Conteudo(Base):
+    """Um no da arvore: materia > assunto > subassunto > elemento.
+
+    Os dois niveis de baixo sao opcionais, e o que e "elemento" muda com a
+    materia (artigo no Direito, regra gramatical no Portugues, tipo de
+    problema no Raciocinio): os tipos moram no config/taxonomia.yml, e
+    ampliar a lista nao muda esta tabela.
+    """
+
+    __tablename__ = "conteudos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    #: "Direito Penal > Imputabilidade penal". Unico: o nome so se repete em
+    #: pais diferentes.
+    caminho: Mapped[str] = mapped_column(String(TAMANHO_DO_CAMINHO), unique=True, index=True)
+    #: O caminho do pai; nulo na materia.
+    pai: Mapped[str | None] = mapped_column(String(TAMANHO_DO_CAMINHO), index=True, nullable=True)
+    nivel: Mapped[str] = mapped_column(String(12))
+    nome: Mapped[str] = mapped_column(String(400))
+    #: A ordem entre os irmaos: a do edital, quando veio dele.
+    ordem: Mapped[int] = mapped_column(Integer, default=0)
+    #: So no elemento: artigo, regra gramatical, tipo de problema...
+    tipo_elemento: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    #: Onde ler, quando se aplica: "CP, art. 2º".
+    referencia: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    #: edital | classificacao | manual.
+    origem: Mapped[str] = mapped_column(String(14))
+    #: O texto do edital, literal, quando o no veio dele.
+    texto_do_edital: Mapped[str | None] = mapped_column(Text, nullable=True)
+    #: Materia que caiu numa prova do alvo e nao esta no edital de agora.
+    fora_do_edital: Mapped[bool] = mapped_column(Boolean, default=False)
+    #: De onde veio: "edital 2019", "prova 2013", o modelo da IA, "manual".
+    procedencia: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    criado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    def __repr__(self) -> str:
+        return f"<Conteudo {self.caminho!r}>"
+
+
+class Classificacao(Base):
+    """Uma questao ligada a um no da arvore.
+
+    A questao e reconhecida pela IMPRESSAO do enunciado, e nao pelo id: o id
+    muda quando o banco e refeito a partir dos PDFs. Uma questao tem UMA
+    classificacao principal, a que conta na incidencia; as outras sao
+    associadas, mostradas e nunca somadas.
+    """
+
+    __tablename__ = "classificacoes"
+    __table_args__ = (
+        UniqueConstraint("impressao", "conteudo", name="uq_classificacao_questao_no"),
+    )
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    impressao: Mapped[str] = mapped_column(String(32), index=True)
+    #: O no, pelo caminho. Na pendente, o mais fundo que se sabe (a materia).
+    conteudo: Mapped[str] = mapped_column(String(TAMANHO_DO_CAMINHO), index=True)
+    principal: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+    #: completa | parcial | pendente.
+    status: Mapped[str] = mapped_column(String(10), index=True)
+    #: Por que: o trecho do enunciado, o item do edital e o dispositivo.
+    trecho: Mapped[str | None] = mapped_column(Text, nullable=True)
+    item_do_edital: Mapped[str | None] = mapped_column(Text, nullable=True)
+    dispositivo: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    #: O modelo que classificou, ou "manual". Sem isso a linha nao entra.
+    procedencia: Mapped[str] = mapped_column(String(120))
+    classificada_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+    #: Quando EU conferi. Nula = ainda nao conferida.
+    conferida_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
+
+    def __repr__(self) -> str:
+        return f"<Classificacao {self.impressao} {self.status} {self.conteudo!r}>"
+
+
+class VersaoDoBanco(Base):
+    """A versao da estrutura do banco: o ultimo passo de `migracoes` aplicado.
+
+    Uma linha so. Sem ela, o banco e da versao 0 - o de antes da Etapa 2.
+    """
+
+    __tablename__ = "versao_do_banco"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    versao: Mapped[int] = mapped_column(Integer, default=0)
+    migrado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+

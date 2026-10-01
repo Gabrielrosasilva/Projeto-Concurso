@@ -630,6 +630,7 @@ def test_a_tela_mostra_a_banca_como_hipotese(cliente):
 
 def test_o_botao_de_treino_aparece_quando_ha_questao(cliente):
     with sessao() as s:
+        s.add(_concurso())          # sem o concurso nao ha estado: nao e do alvo
         for n in range(1, 25):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
@@ -646,6 +647,7 @@ def test_sem_questao_o_botao_da_lugar_a_explicacao(cliente):
 
 def test_treinar_monta_a_rodada_e_leva_para_ela(cliente):
     with sessao() as s:
+        s.add(_concurso())
         for n in range(1, 31):
             s.add(_questao(n, "Agente Penitenciário", 2019, "Direitos Humanos"))
 
