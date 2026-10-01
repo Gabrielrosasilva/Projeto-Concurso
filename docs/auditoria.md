@@ -1,14 +1,16 @@
 # Auditoria dos dados de estudo
 
-> Gerado por `radar auditar` em 25/09/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
+> Gerado por `radar auditar` em 01/10/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
 
 ## O que foi conferido
 
 - **contagem por materia**: o quadro de distribuicao de questoes do edital contra o que o banco separou do caderno;
 - **gabarito**: cada questao do banco contra o ultimo gabarito definitivo publicado (retificacao inclusive), letra por letra;
-- **anuladas**: as do definitivo contra as marcadas no banco.
+- **anuladas**: as do definitivo contra as marcadas no banco;
+- **extracao**: enunciado curto demais, alternativa faltando ou vazia, cabecalho ou rodape grudado no texto, figura citada, palavra cortada no fim. Sao suspeitas para conferir a olho;
+- **classificacao**: o status de cada questao na arvore de conteudos.
 
-**O que isto nao prova:** a auditoria le os PDFs com o mesmo leitor que montou o banco. Um erro do leitor que se repita nas duas pontas passa batido. A conferencia de enunciado e alternativa, questao a questao, nao e feita aqui.
+**O que isto nao prova:** a auditoria le os PDFs com o mesmo leitor que montou o banco. Um erro do leitor que se repita nas duas pontas passa batido. A verificacao de extracao procura os defeitos conhecidos; a conferencia de enunciado e alternativa, palavra por palavra contra o PDF, nao e feita aqui.
 
 ## Onde os numeros nao batem
 
@@ -33,6 +35,63 @@ Materia em outra posicao no caderno que no edital (a contagem nao muda; vale con
 | 2016 Agente de Segurança Socioeducativo (AS) | reforco | 70 | 2 | Anexo1_Gabarito_Definitivo_Retificado.pdf (2017-07-20) | 0 |
 
 Provas do alvo: 2, com 162 questoes validas (sem as anuladas). As de reforco nao entram nesta soma.
+
+## Erros de extracao (suspeitas para conferir)
+
+**2013 Agente Penitenciário** — 10 questao(oes):
+
+- questao 3 (Língua Portuguesa): cabecalho ou rodape dentro da alternativa e
+- questao 5 (Língua Portuguesa): cabecalho ou rodape dentro da alternativa e
+- questao 20 (Noções de Informática): cabecalho ou rodape dentro da alternativa e
+- questao 28 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
+- questao 32 (Direito Constitucional): cabecalho ou rodape dentro da alternativa e
+- questao 45 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
+- questao 46 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
+- questao 48 (Direito Penal): cabecalho ou rodape dentro da alternativa e
+- questao 65 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
+- questao 68 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
+
+**2019 Agente Penitenciário - Feminino (AP)** — 15 questao(oes):
+
+- questao 13 (Língua Portuguesa): cabecalho ou rodape dentro da alternativa e
+- questao 25 (Raciocínio Lógico): cabecalho ou rodape dentro da alternativa e
+- questao 36 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
+- questao 46 (Administração Pública): cabecalho ou rodape dentro da alternativa e
+- questao 48 (Administração Pública): cabecalho ou rodape dentro da alternativa e
+- questao 51 (Direito Penal): palavra cortada no fim do enunciado
+- questao 52 (Direito Penal): palavra cortada no fim do enunciado
+- questao 53 (Direito Penal): palavra cortada no fim do enunciado
+- questao 55 (Direito Penal): cabecalho ou rodape dentro da alternativa e
+- questao 55 (Direito Penal): palavra cortada no fim do enunciado
+- questao 65 (Legislação Especial): cabecalho ou rodape dentro da alternativa e
+- questao 73 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
+- questao 80 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
+- questao 94 (Sociologia Aplicada): cabecalho ou rodape dentro da alternativa e
+- questao 99 (Sociologia Aplicada): cabecalho ou rodape dentro da alternativa e
+- questao 100 (Sociologia Aplicada): o numero da questao dentro do enunciado
+
+**2016 Agente de Segurança Socioeducativo (AS)** — 10 questao(oes):
+
+- questao 16 (Noções de Informática): cabecalho ou rodape dentro da alternativa e
+- questao 18 (Noções de Informática): cabecalho ou rodape dentro da alternativa e
+- questao 23 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
+- questao 25 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
+- questao 35 (Direito Constitucional): cabecalho ou rodape dentro da alternativa e
+- questao 45 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
+- questao 46 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
+- questao 48 (Direito Penal): cabecalho ou rodape dentro da alternativa e
+- questao 63 (Lei do Sinase): cabecalho ou rodape dentro da alternativa e
+- questao 70 (Lei do Sinase): cabecalho ou rodape dentro da alternativa e
+
+## Classificacao na arvore de conteudos
+
+Pela classificacao principal de cada questao; sem classificacao e pendente. Conferidas: as que eu ja confirmei, corrigi ou deixei pendente na tela de conferencia.
+
+| Prova | Questoes | Completa | Parcial | Pendente | Conferidas |
+|---|---|---|---|---|---|
+| 2013 Agente Penitenciário | 70 | 56 | 2 | 12 | 0 |
+| 2019 Agente Penitenciário - Feminino (AP) | 100 | 90 | 7 | 3 | 0 |
+| 2016 Agente de Segurança Socioeducativo (AS) | 70 | 0 | 0 | 70 | 0 |
 
 ## 2013 · Agente Penitenciário
 
@@ -65,6 +124,7 @@ Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o qu
 - anuladas marcadas no banco: 6 (Língua Portuguesa), 60 (Direito Processo Penal), 63 (Legislação Estadual)
 - letras que o definitivo trocou em relacao ao provisorio: 28 (Direitos Humanos)
 - questoes em que o banco discorda do definitivo: **0** de 70
+- sem gabarito no banco (e sem ser anulada): nenhuma
 
 ## 2019 · Agente Penitenciário - Feminino (AP)
 
@@ -100,6 +160,7 @@ Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o qu
 - anuladas marcadas no banco: 11 (Língua Portuguesa), 22 (Raciocínio Lógico), 33 (Direitos Humanos), 63 (Legislação Especial), 100 (Sociologia Aplicada)
 - letras que o definitivo trocou em relacao ao provisorio: 66 (Direito Processual Penal), 68 (Direito Processual Penal), 82 (Lei de Execução Penal), 87 (Lei de Execução Penal)
 - questoes em que o banco discorda do definitivo: **0** de 100
+- sem gabarito no banco (e sem ser anulada): nenhuma
 
 ## 2016 · Agente de Segurança Socioeducativo (AS) — REFORCO (outro cargo; nunca somada as do alvo)
 
@@ -134,6 +195,7 @@ Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o qu
 - anuladas marcadas no banco: 26 (Direitos Humanos), 29 (Direitos Humanos)
 - letras que o definitivo trocou em relacao ao provisorio: 66 (Lei do Sinase)
 - questoes em que o banco discorda do definitivo: **0** de 70
+- sem gabarito no banco (e sem ser anulada): nenhuma
 
 ## Questoes com lei posterior
 
