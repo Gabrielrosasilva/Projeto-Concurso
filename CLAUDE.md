@@ -1,7 +1,10 @@
 # CLAUDE.md
 Contexto permanente deste projeto, lido pelo Claude Code em toda sessao aberta
-nesta pasta. Curto de proposito (teto de 150 linhas). O que nao cabe aqui:
+nesta pasta. Curto de proposito. O que nao cabe aqui:
 
+- **[docs/novo.md](docs/novo.md)** — é o pedido: o que você quer que o sistema faça e as regras que não podem ser quebradas;
+- **[docs/progresso.md](docs/progresso.md)** — plano e os critérios de cada etapa;
+- **[docs/roteiro.md](docs/roteiro.md)** — plano e os critérios de cada etapa;
 - **[docs/decisoes.md](docs/decisoes.md)** — decisoes ja tomadas, com o motivo;
   nao se rediscutem. **Decisao que mudar, atualize la.**
 - **[docs/pendencias.md](docs/pendencias.md)** — o que falta, o que esta
