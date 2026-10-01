@@ -146,7 +146,7 @@ def test_a_previsao_diz_por_que(banco_temporario):
     motivo = _por_municipio(servico.previsao_de_abertura())["Tijucas"].motivo
 
     assert "2 concursos conhecidos" in motivo
-    assert "a cada 4 ano(s)" in motivo
+    assert "a cada 4 anos" in motivo
 
 
 def test_atrasado_vem_antes_de_quem_esta_em_dia(banco_temporario):
@@ -234,3 +234,92 @@ def test_sem_historico_a_tela_explica_o_que_fazer(cliente):
 
 def test_o_radar_tem_link_para_a_previsao(cliente):
     assert 'href="/previsao"' in cliente.get("/concursos").text
+
+
+# --- como a previsao aparece (etapa 1B, pendencia A3) -----------------------
+#
+# Data fingida: o "ano de hoje" e trocado para 2026, entao os anos abaixo sao
+# fixos e o teste nao muda de resultado conforme o calendario anda. A conta
+# nao mudou - so a frase e a ordem dentro da janela.
+
+@pytest.fixture
+def em_2026(monkeypatch):
+    from radar.servico import previsao
+
+    monkeypatch.setattr(previsao, "_este_ano", lambda: 2026)
+
+
+def test_ano_previsto_que_ja_passou_vira_atrasado(banco_temporario, em_2026):
+    """Um concurso so em 2021: previsto 2025, que em 2026 ainda esta na folga
+    ("esperado"), mas ja passou. A tela dizia "Previsto para 2025"."""
+    _semear(_concurso("2021 - Prefeitura de Tijucas", "Tijucas"))
+
+    previsao = _por_municipio(servico.previsao_de_abertura())["Tijucas"]
+
+    assert previsao.situacao == "esperado"          # a conta nao mudou
+    assert previsao.proximo_previsto == 2025
+    assert previsao.vencido
+    assert previsao.quando == "Atrasado: era esperado em 2025"
+
+
+def test_o_atrasado_da_janela_vem_no_topo(banco_temporario, em_2026):
+    """Biguacu (2021, 2023: previsto 2025, ja passou) esta parado ha menos
+    tempo que Palhoca (2022: previsto 2026). Pela ordem antiga, Palhoca vinha
+    antes; o que ja passou do ano tem que vir primeiro."""
+    _semear(
+        _concurso("2022 - Prefeitura de Palhoca", "Palhoca"),
+        _concurso("2021 - Prefeitura de Biguacu", "Biguacu"),
+        _concurso("2023 - Prefeitura de Biguacu", "Biguacu"),
+    )
+
+    janela = [p for p in servico.previsao_de_abertura() if p.situacao == "esperado"]
+
+    assert [p.municipio for p in janela] == ["Biguacu", "Palhoca"]
+    assert janela[1].quando == "Previsto para 2026"
+
+
+@pytest.mark.parametrize("ultimo, frase", [
+    (2026, "O último foi este ano"),
+    (2025, "O último foi há 1 ano"),
+    (2023, "O último foi há 3 anos"),
+])
+def test_ha_quanto_tempo_foi_o_ultimo(banco_temporario, em_2026, ultimo, frase):
+    _semear(_concurso(f"{ultimo} - Prefeitura de Tijucas", "Tijucas"))
+
+    motivo = _por_municipio(servico.previsao_de_abertura())["Tijucas"].motivo
+
+    assert frase in motivo
+    assert "ano(s)" not in motivo
+
+
+def test_em_dia_diz_so_com_acento(banco_temporario, em_2026):
+    _semear(_concurso("2026 - Prefeitura de Tijucas", "Tijucas"))
+
+    previsao = _por_municipio(servico.previsao_de_abertura())["Tijucas"]
+
+    assert previsao.situacao == "em_dia"
+    assert previsao.motivo.endswith("O último foi este ano, o próximo só em 2030.")
+    assert previsao.quando == "Próximo por volta de 2030"
+
+
+def test_atrasado_de_verdade_diz_quantos_anos_passaram(banco_temporario, em_2026):
+    _semear(
+        _concurso("2015 - Prefeitura de Tijucas", "Tijucas"),
+        _concurso("2018 - Prefeitura de Tijucas", "Tijucas"),
+    )
+
+    previsao = _por_municipio(servico.previsao_de_abertura())["Tijucas"]
+
+    assert previsao.situacao == "atrasado"
+    assert "passaram 5 anos do previsto" in previsao.motivo
+    assert previsao.quando == "Atrasado: era esperado em 2021"
+
+
+def test_a_tela_mostra_o_atraso_em_vez_do_ano_passado(cliente, em_2026):
+    _semear(_concurso("2021 - Prefeitura de Tijucas", "Tijucas"))
+
+    texto = cliente.get("/previsao").text
+
+    assert "Atrasado: era esperado em 2025" in texto
+    assert "Previsto para 2025" not in texto
+    assert "ano(s)" not in texto

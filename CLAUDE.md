@@ -108,7 +108,8 @@ Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 20 `variacao` de LEP).
 **Actions:** vermelho desde 26/09; os testes foram corrigidos na Etapa 1A
 (01/10) e falta conferir o verde la. **Em andamento:** o pedido de evolucao
-([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)).
+([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A e a
+1B (frases dos eventos e da Previsao, acentos na tela web).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.

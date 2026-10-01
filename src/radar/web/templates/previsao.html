@@ -122,10 +122,7 @@
           <div class="item {{ grupo }}">
             <div class="topo">
               <span class="municipio">{{ p.municipio | municipio }}</span>
-              <span class="quando">
-                {% if grupo == 'em_dia' %}Próximo por volta de {{ p.proximo_previsto }}
-                {% else %}Previsto para {{ p.proximo_previsto }}{% endif %}
-              </span>
+              <span class="quando">{{ p.quando }}</span>
             </div>
             <p class="motivo">{{ p.motivo }}</p>
             <p class="anos">

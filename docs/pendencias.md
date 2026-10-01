@@ -17,31 +17,6 @@ PC (1.840) e com o relogio simulado em 20/10/2026, 10/11/2026 e 15/03/2027.
 **Falta:** disparar o "Run workflow" na aba Actions (ou esperar o das 09:00
 UTC) e conferir o verde. Verde la, esta pendencia sai daqui.
 
-### A2. 🟡 Texto de maquina na tela (C2)
-
-- 🔴 `src/radar/eventos.py:98` escreve `Situacao: {de} -> {depois}`, e a home e
-  a Analises mostram isso literalmente (ex.: "inscricoes_abertas -> encerrado").
-  Mostrar uma frase por transicao ("As inscricoes encerraram", "O edital foi
-  publicado", "A banca foi definida"...). O dado cru fica como esta (banco e
-  `eventos.json` nao mudam); a traducao e so na exibicao;
-- ⚪ acentos em todo texto que chega a tela vindo do Python ou dos templates
-  (ex.: Calendario "Ultimo dia de inscricao", "Salario", "O botao"; diario
-  "maior que questoes feitas"). So texto exibido: comentario, variavel e chave
-  de dado ficam como estao. Os exemplos vieram do roteiro original; uma busca por
-  "Ultimo dia" em `src/` e nos templates nao achou nada, entao confira o que
-  ainda esta sem acento antes de editar;
-- testes: a frase de cada transicao; calendario e erro do diario acentuados.
-
-### A3. 🔴 Previsao com ano no passado e frases estranhas (C3)
-
-`src/radar/servico/previsao.py:71-85`, na tela Previsao:
-
-1. "Tijucas - Previsto para 2025", com o ano ja passado: mostrar "Atrasado: era
-   esperado em 2025", e esses ficam no topo de "Na janela de agora";
-2. "O ultimo foi ha 0 ano(s), so em 2030": usar "O ultimo foi este ano", "ha 1
-   ano", "ha 3 anos", e "so" com acento (o texto atual e `ano(s)` e `so em`);
-3. a conta da previsao nao muda, so como aparece. Testes com data fingida.
-
 ## B. O desenho do estudo (decisao tomada, desenho aberto)
 
 Veio do primeiro dia do Ciclo 1 (28/09) e esta registrado em
@@ -98,7 +73,7 @@ dado: so `ds-pagina`, `ds-cartao`, `ds-campo`, `ds-botao`, `ds-tabela` e os
 tokens que ja existem, nos dois temas, e o CSS antigo da tela sai. A ultima
 (B7) tambem ajusta a secao do README que descreve as telas. O enunciado
 original de cada etapa nao foi guardado; este paragrafo e o que sobrou dele.
-Fazer depois do A2 e do A3, que mexem nos mesmos templates.
+O A2 e o A3, que mexiam nos mesmos templates, foram feitos na Etapa 1B.
 
 ## D. Combinado para depois
 
@@ -122,6 +97,15 @@ Fazer depois do A2 e do A3, que mexem nos mesmos templates.
 - ⚪ **D1 e E1 a E4** foram commitados e testados, mas nao conferi uma a uma
   contra o roteiro que os pediu; vale uma passada de uso real (o backup das
   23h30 rodar no PC, o caderno de erros e a tela Semanas com dados de verdade);
+- 🔴 **Acento fora da tela web** (o que sobrou da A2, feita na Etapa 1B so
+  para a web): a saida do terminal (`cli.py`, ~100 textos, inclusive a
+  linha do tempo de `radar eventos`, que ainda mostra "Situacao: a -> b"), a
+  mensagem do Telegram (`avisos.py`: "Inscricoes abertas", "Inscricao ate" e
+  a descricao crua do evento), o relatorio `docs/auditoria.md`
+  (`auditoria.py`) e o `motivo_elegibilidade` gravado (`perfil.py`). Os nomes
+  de assunto do `macetes.py` ("Concordancia", "Pontuacao"...) sao chave de
+  casamento e so mudam com a taxonomia (Etapa 2). Prompts de IA ficam sem
+  acento de proposito;
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 

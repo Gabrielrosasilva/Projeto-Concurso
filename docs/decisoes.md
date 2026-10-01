@@ -2274,3 +2274,27 @@ criados, entao as decisoes dela entram aqui no primeiro commit da Etapa 1:
     tres pontos, explicados no roteiro: o Actions primeiro (1A), a rotina do
     Ciclo 1 antecipada (6A) e a Etapa 3 dividida em alvo (3A) e complementar
     (3B).
+
+## Texto de evento e previsao na tela (Etapa 1B, 01/10/2026)
+
+1. **A descricao do evento e traduzida so na exibicao** (`eventos.para_tela`,
+   filtro `evento` no Jinja). O banco e o `eventos.json` continuam com
+   "Situacao: a -> b": a descricao e parte da chave de deduplicacao do acervo
+   (`CHAVE_DO_EVENTO`), e reescrever o texto gravado duplicaria eventos na
+   proxima importacao. So frases que o proprio `eventos.py` monta sao
+   reconhecidas, e inteiras; qualquer outro texto (titulo de noticia) passa
+   como veio;
+2. **a frase diz para onde o concurso foi** ("As inscricoes encerraram"). Se a
+   situacao **anda para tras** no ciclo (o banco real tem
+   "inscricoes_abertas -> edital_publicado"), a frase diz "A situacao voltou
+   de ... para ...", e nao "O edital foi publicado": evento e fato observado;
+3. **o nome legivel da situacao mora em `eventos.NOME_DA_SITUACAO`**, e o
+   `SITUACAO_LEGIVEL` da web aponta para ele: um lugar so para "banca
+   contratada", "inscricoes abertas"...;
+4. **Previsao: ano previsto que ja passou e "Atrasado: era esperado em
+   AAAA"**, mesmo dentro da folga de 1 ano (grupo "Na janela de agora"), e
+   esses vem no topo da janela. A conta e os grupos nao mudaram;
+5. **acento so no texto que chega a tela web** nesta etapa. O terminal (CLI),
+   o Telegram, os prompts de IA, o relatorio de auditoria e os nomes de
+   assunto do `macetes.py` (que sao chave de casamento) ficaram como estavam;
+   ver `pendencias.md`.

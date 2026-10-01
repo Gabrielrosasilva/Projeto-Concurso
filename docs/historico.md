@@ -1313,6 +1313,30 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
 - o workflow so roda pelo agendamento ou pelo "Run workflow"; o verde no
   GitHub fica para conferir (pendencia A1).
 
+## Etapa 1B do pedido de evolucao: texto de maquina e Previsao (01/10)
+
+- **A2:** a linha do tempo (home, Analises, Acompanhando) mostrava
+  "Situacao: inscricoes_abertas -> encerrado" e o tipo cru ("inscricoes
+  encerradas"). Agora `eventos.para_tela` traduz na exibicao: uma frase por
+  transicao, "voltou de ... para ..." quando a situacao anda para tras, o
+  "Entrou no radar ... (situacao: edital publicado)", e prazo e retificacao
+  com acento. O banco e o `eventos.json` nao mudaram;
+- acentos no texto que chega a tela web: Calendario ("Ultimo dia de
+  inscricao", "Salario", "O botao"), os erros do diario, os recados de
+  Gerar questoes, a origem da rodada no simulado e na questao, os conselhos
+  do Macetes, "Respondi so" do Onde estudar e o recado de cargo sem prova
+  parecida. A busca por "Ultimo dia" da pendencia nao tinha achado nada porque
+  o texto estava no `servico/__init__.py`, com o resto da frase numa f-string;
+- **A3:** a Previsao mostrava "Previsto para 2025" em 2026 e "ha 0 ano(s), so
+  em 2030". Agora: "Atrasado: era esperado em 2025" no topo da janela, "O
+  ultimo foi este ano / ha 1 ano / ha N anos", "o proximo so em", "um a cada
+  N anos". A conta nao mudou. O ano de hoje passou a sair de `_este_ano()`,
+  que o teste troca para fingir a data;
+- conferido com o `radar web` de verdade: Previsao e Calendario com o banco
+  real; home, Analises e Acompanhando numa copia do banco com um evento a
+  mais, porque o banco real nao tem evento em concurso-alvo nem favorito (a
+  copia foi apagada depois).
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e

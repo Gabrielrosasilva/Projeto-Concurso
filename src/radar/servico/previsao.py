@@ -36,6 +36,15 @@ VALIDADE_MAXIMA = 4
 FOLGA = 1
 
 
+def _este_ano() -> int:
+    """O ano de hoje, num lugar so: e o que o teste troca para fingir a data."""
+    return date.today().year
+
+
+def _anos(n: int) -> str:
+    return "1 ano" if n == 1 else f"{n} anos"
+
+
 @dataclass
 class PrevisaoDeAbertura:
     municipio: str
@@ -44,10 +53,15 @@ class PrevisaoDeAbertura:
     proximo_previsto: int
     situacao: str            # atrasado | esperado | em_dia
     motivo: str
+    #: O ano previsto ja passou. Pode acontecer dentro da folga ("esperado"),
+    #: e ai a tela nao pode dizer "previsto para" um ano que ja foi.
+    vencido: bool = False
+    #: O que a tela escreve ao lado do municipio.
+    quando: str = ""
 
     @property
     def anos_parado(self) -> int:
-        return date.today().year - self.ultimo_ano
+        return _este_ano() - self.ultimo_ano
 
 
 def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
@@ -59,7 +73,7 @@ def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
     """
     ordenados = sorted(anos)
     ultimo = ordenados[-1]
-    este_ano = date.today().year
+    este_ano = _este_ano()
 
     if len(ordenados) >= 2:
         vaos = [b - a for a, b in zip(ordenados, ordenados[1:]) if b > a]
@@ -68,7 +82,7 @@ def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
         bruto = round(median(vaos)) if vaos else VALIDADE_MAXIMA
         intervalo = min(VALIDADE_MAXIMA, max(VALIDADE_MINIMA, bruto))
         base = (f"{len(ordenados)} concursos conhecidos ({ordenados[0]} a "
-                f"{ultimo}), um a cada {intervalo} ano(s)")
+                f"{ultimo}), um a cada {_anos(intervalo)}")
     else:
         intervalo = VALIDADE_MAXIMA
         base = f"um único concurso conhecido ({ultimo}), sem ritmo para medir"
@@ -76,13 +90,28 @@ def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
     previsto = ultimo + intervalo
     if este_ano > previsto + FOLGA:
         situacao = "atrasado"
-        conclusao = f"passou {este_ano - previsto} ano(s) do previsto"
+        # Atrasado e passar da folga, entao aqui sao sempre 2 anos ou mais.
+        conclusao = f"passaram {_anos(este_ano - previsto)} do previsto"
     elif este_ano >= previsto - FOLGA:
         situacao = "esperado"
-        conclusao = "e a janela de agora"
+        conclusao = "é a janela de agora"
     else:
         situacao = "em_dia"
-        conclusao = f"so em {previsto}"
+        conclusao = f"o próximo só em {previsto}"
+
+    parado = este_ano - ultimo
+    ultimo_foi = "este ano" if parado == 0 else f"há {_anos(parado)}"
+
+    # A conta nao muda; muda como ela aparece. Ano previsto que ja passou e
+    # atraso, mesmo dentro da folga: "previsto para 2025" lido em 2026 soa
+    # como algo que ainda vai acontecer.
+    vencido = previsto < este_ano
+    if vencido:
+        quando = f"Atrasado: era esperado em {previsto}"
+    elif situacao == "em_dia":
+        quando = f"Próximo por volta de {previsto}"
+    else:
+        quando = f"Previsto para {previsto}"
 
     return PrevisaoDeAbertura(
         municipio=municipio,
@@ -90,7 +119,9 @@ def _prever(municipio: str, anos: set[int]) -> PrevisaoDeAbertura:
         ultimo_ano=ultimo,
         proximo_previsto=previsto,
         situacao=situacao,
-        motivo=f"{base}. O último foi há {este_ano - ultimo} ano(s), {conclusao}.",
+        motivo=f"{base}. O último foi {ultimo_foi}, {conclusao}.",
+        vencido=vencido,
+        quando=quando,
     )
 
 
@@ -120,9 +151,10 @@ def previsao_de_abertura(
             anos_por_municipio.setdefault(concurso.municipio, set()).add(ano)
 
     previsoes = [_prever(m, anos) for m, anos in anos_por_municipio.items()]
-    # Atrasado primeiro, e dentro dele o que esta parado ha mais tempo.
+    # Atrasado primeiro, e dentro dele o que esta parado ha mais tempo. Na
+    # janela de agora, o que ja passou do ano previsto vem no topo.
     ordem = {"atrasado": 0, "esperado": 1, "em_dia": 2}
-    previsoes.sort(key=lambda p: (ordem[p.situacao], -p.anos_parado))
+    previsoes.sort(key=lambda p: (ordem[p.situacao], not p.vencido, -p.anos_parado))
     return previsoes
 
 
