@@ -2518,6 +2518,50 @@ def incidencia(
 
 
 @app.command()
+def complementar(
+    caminho: str = typer.Option(None, help="Onde gravar (padrao: docs/complementar.md)"),
+) -> None:
+    """Levanta o acervo complementar FEPESE: o que ha, e o que esta pronto.
+
+    So LE o banco e o manifesto: nenhuma prova entra em estatistica por causa
+    deste comando. O complementar nunca se soma a incidencia do alvo. Escolher
+    quais provas entram e decisao sua, depois de ler o relatorio.
+    """
+    from radar import complementar as regra
+
+    destino = Path(caminho) if caminho else servico.complementar.caminho_do_relatorio()
+    por_materia, validadas, cadernos = servico.complementar.escrever(destino)
+    if not cadernos:
+        console.print("[yellow]Nenhuma prova complementar no banco.[/] Rode "
+                      "`radar extrair` ou confira a evidencia das provas.")
+        raise typer.Exit(code=1)
+
+    tabela = Table(title="Acervo complementar FEPESE, por materia do meu edital",
+                   title_justify="left")
+    for coluna in ("Materia", "Pelo nome", "Provas", "Por termo (indicio)", "Provas"):
+        tabela.add_column(coluna)
+    for m in por_materia:
+        tabela.add_row(escape(m.materia), str(m.pelo_nome), str(m.provas_pelo_nome),
+                       str(m.por_termo), str(m.provas_por_termo))
+    console.print(tabela)
+
+    validadas_de_vez = sum(1 for v in validadas.values() if v.entra_nos_padroes)
+    so_classificar = sum(1 for v in validadas.values()
+                         if v.pode_classificar and not v.entra_nos_padroes)
+    recusadas = sum(1 for v in validadas.values() if not v.pode_classificar)
+    console.print(
+        f"{len(cadernos)} prova(s) complementar(es): [green]{validadas_de_vez} "
+        f"validada(s)[/] (extracao inteira e gabarito {regra.DEFINITIVO}), "
+        f"[yellow]{so_classificar} so para classificar[/] (gabarito provisorio "
+        f"ou ausente: fora dos padroes de cobranca), "
+        f"[red]{recusadas} recusada(s)[/]."
+    )
+    console.print("A incidencia do alvo NAO muda com nada disto: as duas "
+                  "evidencias nunca se somam.")
+    console.print(f"Relatorio em {destino} — escolha nele quais provas entram.")
+
+
+@app.command()
 def migrar(
     desfazer: bool = typer.Option(
         False, "--desfazer",

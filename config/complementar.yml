@@ -1,0 +1,98 @@
+# Os termos que procuram uma materia do edital DENTRO de um caderno
+# complementar. Lido por src/radar/servico/complementar.py (Etapa 3B).
+#
+# POR QUE ISTO EXISTE
+#
+# No acervo complementar a maioria das provas e de prefeitura, e o caderno
+# nao separa Direito Penal de Direito Constitucional: joga tudo num bloco
+# "Conhecimentos Especificos" (3.405 questoes) ou "Conhecimentos Gerais".
+# Contar so pelo NOME da materia no caderno perderia essas questoes.
+#
+# O QUE ESTA CONTAGEM VALE, E O QUE NAO VALE
+#
+# Ela e INDICIO (🟡), nunca evidencia: o termo pode aparecer de passagem, e a
+# falta dele nao prova que o assunto nao caiu. Serve para decidir quais
+# provas vale a pena classificar - e e a classificacao, questao a questao,
+# que diz de verdade qual conteudo caiu. O relatorio mostra as duas colunas
+# separadas e nunca as soma.
+#
+# E DADO: mexer aqui nao muda o banco nem pede migracao. Materia sem termo
+# nenhum fica so com a contagem pelo nome.
+
+termos:
+  Direito Penal:
+  - código penal
+  - decreto-lei 2.848
+  - tipicidade
+  - dolo
+  - culpabilidade
+  - crime doloso
+  Direito Processual Penal:
+  - código de processo penal
+  - processo penal
+  - inquérito policial
+  - prisão em flagrante
+  - prisão preventiva
+  Direito Constitucional:
+  - constituição federal
+  - constituição da república
+  - direitos e garantias fundamentais
+  - administração pública direta
+  Lei de Execução Penal:
+  - execução penal
+  - lei 7.210
+  - lei n. 7.210
+  - progressão de regime
+  - remição da pena
+  - falta grave
+  Legislação Especial:
+  - lei de drogas
+  - lei 11.343
+  - crimes hediondos
+  - lei 8.072
+  - abuso de autoridade
+  - lei 13.869
+  - tortura
+  - estatuto do desarmamento
+  Legislação Estadual:
+  - sistema prisional
+  - estabelecimento penal
+  - agente penitenciário
+  - polícia penal
+  - secretaria de estado da justiça
+  Direitos Humanos:
+  - direitos humanos
+  - declaração universal
+  - pacto de san josé
+  - convenção americana
+  - regras de mandela
+  Sociologia Aplicada:
+  - sociologia
+  - sociológic
+  - durkheim
+  - weber
+  - controle social
+  Língua Portuguesa:
+  - concordância verbal
+  - regência verbal
+  - crase
+  - oração subordinada
+  Raciocínio Lógico:
+  - proposição
+  - tabela-verdade
+  - negação da proposição
+  - análise combinatória
+  Administração Pública:
+  - administração pública
+  - licitação
+  - improbidade administrativa
+  - servidor público
+  Noções de Informática:
+  - planilha eletrônica
+  - navegador
+  - sistema operacional
+  - correio eletrônico
+  Direito Administrativo:
+  - ato administrativo
+  - poder de polícia
+  - processo administrativo disciplinar

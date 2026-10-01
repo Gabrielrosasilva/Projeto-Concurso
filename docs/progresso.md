@@ -14,7 +14,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | 🟡 falta a sua conferência das 162 |
-| 8 | 3B — Acervo complementar FEPESE | ⬜ |
+| 8 | 3B — Acervo complementar FEPESE | 🟡 levantamento feito, falta você aprovar a lista |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
 | 10 | 5 — Geração de questões | ⬜ |
 | 11 | 6B — Cronograma operacional | ⬜ |
@@ -635,3 +635,104 @@ v3, e a resposta foi importada de novo.
 - [x] `radar incidencia` e a página mostram o mapa com a amostra;
 - [x] a pergunta dos arts. 1º a 12 respondida com o número (1 em 2019).
 
+
+---
+
+## 3B — Acervo complementar FEPESE (01/10/2026)
+
+- Situação: 🟡 **passo 1 de 5 feito** (o levantamento). O roteiro tem uma
+  parada no meio: **você aprova a lista de provas** e só então vêm a validação
+  que lê o PDF, a classificação e a linha complementar na incidência.
+- Datas: início 01/10 · fim do passo 1 em 01/10
+
+**Plano conferido contra o código antes de começar: NÃO valia como estava.**
+Três pontos foram levantados antes de escrever qualquer linha, e você decidiu
+os três:
+
+1. **só 2 das 183 provas complementares passariam.** Rodei as verificações da
+   auditoria nas 183 (script fora do repositório, só leitura): **161 provas só
+   têm gabarito provisório** no acervo, e **o leitor de quadro do edital não
+   acha o quadro em nenhuma prova de prefeitura** — ele foi feito para os
+   editais do Estado. Passavam só o Socioeducativo 2013 e 2016. O roteiro
+   manda deixar fora da estatística a prova sem validação, e isso esvaziaria
+   a etapa. **Decidido (A):** o gabarito provisório vira status próprio — a
+   prova classifica, mas fica fora dos padrões de cobrança, que se medem
+   sobre a letra certa. **Decidido (B):** a validação confere o próprio
+   caderno (numeração, alternativas, gabarito, sha256) e registra o quadro do
+   edital como "não lido", em vez de dizer que bate;
+2. **Direito quase não aparece com o nome da matéria no complementar.** Fora o
+   Socioeducativo, as prefeituras jogam tudo em "Conhecimentos Específicos"
+   (3.405 questões). **Decidido (C):** o levantamento tem duas colunas, que
+   nunca se somam — *pelo nome da matéria* (certo) e *por termo no texto*
+   (🟡 indício, a confirmar na classificação);
+3. **número do roteiro desatualizado:** ele fala em 25 concursos no manifesto;
+   são 38 (37 FEPESE e 1 IESES), com 183 provas complementares no banco.
+
+**Arquivos alterados.**
+- novos: `src/radar/complementar.py` (puro: a validação, as duas colunas e as
+  respostas da §5), `src/radar/servico/complementar.py` (o levantamento a
+  partir do banco e o relatório), `config/complementar.yml` (os termos de
+  busca por matéria), `tests/test_complementar.py`, `docs/complementar.md`
+  (gerado);
+- `src/radar/cli.py` — comando `radar complementar [--caminho]`;
+- `src/radar/servico/__init__.py` — expõe `servico.complementar`;
+- docs: este arquivo. Nada em `models.py`, nenhuma migração: a 3B até aqui
+  **só lê**.
+
+**Testes novos (23, em `test_complementar.py`).** Validação: prova inteira com
+definitivo passa; provisório e ausente classificam e ficam fora dos padrões;
+numeração com buraco e número repetido; alternativa faltando; questão sem
+gabarito (e a anulada, que não é defeito); caderno vazio; **hash repetido com
+outro nome é recusado** e sha256 diferente não é repetição. Duas colunas: o
+nome conta e o termo é indício à parte; questão que já tem matéria própria não
+vira indício de outra; matéria sem nada diz isso sem afirmar o que não sabe.
+Do banco: o levantamento só lê o complementar; o tipo do gabarito vem do
+manifesto; **os números do alvo não mudam quando prova complementar entra**;
+as 6 perguntas da §5 respondidas pela fixture; o relatório mostra o motivo de
+cada prova fora, diz que as evidências nunca se somam e não tem texto com cara
+de previsão; o comando escreve o relatório e **não muda o banco**; sem prova
+complementar ele avisa; os termos vêm do config; o manifesto real tem sha256.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_complementar.py`, 1ª rodada | 22 passed, 1 failed — a fixture dava o mesmo enunciado às duas questões do alvo, e a chave da classificação é enunciado + alternativas: classificar uma classificava as duas (o defeito era do teste, e é o mesmo que a 3A achou nas 16 questões reais) |
+| `test_complementar.py`, depois da correção | 23 passed |
+| Suíte inteira, PC | **2012 passed** (1989 de antes + 23 novos) |
+
+**Comando real rodado (banco real, só leitura).** `radar complementar`:
+
+- **183 provas complementares, 7.356 questões.** 22 validadas (extração
+  inteira e gabarito definitivo), 106 só para classificar (gabarito provisório
+  ou ausente), 55 recusadas — 31 por extração e 24 por PDF repetido;
+- por matéria, pelo nome: Língua Portuguesa 1.478 em 175 provas · Noções de
+  Informática 334 em 63 · Raciocínio Lógico 300 em 60 · Direitos Humanos,
+  Direito Constitucional e Legislação Estadual 20 em 2 cada · Direito
+  Administrativo 12 em 2 · Direito Penal e Direito Processual Penal 4 em 2;
+- **Lei de Execução Penal: zero**, nem pelo nome nem por termo. O relatório
+  escreve a frase padrão de evidência insuficiente e diz que isso é sobre o
+  ACERVO, não sobre o que a FEPESE já cobrou;
+- por termo (🟡 indício): Direito Penal 139 em 76 provas · Direito
+  Constitucional 57 em 40 · Administração Pública 56 em 25 · Direitos Humanos
+  37 em 25 · Sociologia Aplicada 35 em 30;
+- a incidência do alvo conferida antes e depois: **igual**.
+
+**Dois achados para a sua decisão, no relatório.**
+1. **24 provas com o PDF repetido:** o mesmo sha256 em dois endereços. Parte é
+   o mesmo caderno em http e https (os três de Florianópolis 2025); parte são
+   dois hotsites de Palhoça (2024 emergencial e 2024 PS educa) com o mesmo
+   arquivo `S07.pdf` e cargos diferentes — e no banco as duas provas têm só 24
+   das 40 questões em comum. Ou a mesma prova entrou duas vezes, ou o hash do
+   manifesto está errado para elas. Nenhuma das duas coisas foi mexida;
+2. **31 provas com a numeração furada:** 26 delas são cadernos de 39 questões
+   de 2023 e um caso é um caderno de 40 em que falta a questão 20. É o mesmo
+   tipo de defeito da pendência B.7, agora no complementar.
+
+**Critério de conclusão.**
+- [x] `docs/complementar.md` gerado e mostrado;
+- [ ] **lista aprovada por você** — é o próximo passo, e a etapa está parada
+  aqui;
+- [ ] provas escolhidas validadas e classificadas;
+- [ ] a incidência mostra alvo e complementar separados, cada um com a
+  amostra.

@@ -1,0 +1,354 @@
+"""O levantamento do acervo complementar FEPESE (Etapa 3B, passo 1).
+
+O que estes testes seguram:
+
+- **os numeros do alvo nao mudam** quando prova complementar entra (secao 4
+  do pedido): nem a incidencia, nem o levantamento tocam no alvo;
+- o **hash repetido** com outro nome de arquivo e recusado;
+- prova que nao valida fica **fora da estatistica, com o motivo escrito**;
+- gabarito **provisorio** classifica mas nao entra nos padroes (decisao A da
+  3B);
+- as duas colunas (nome da materia x termo no texto) **nao se somam**, e a de
+  termo e marcada como indicio;
+- as **perguntas da secao 5** sao respondidas a partir da fixture, sem
+  afirmar o que o acervo nao tem;
+- o comando **so le**: nao grava questao, nao muda evidencia.
+
+Nenhum teste vai a internet, le o banco real nem depende da data de hoje.
+"""
+import json
+import re
+from pathlib import Path
+
+import pytest
+from typer.testing import CliRunner
+
+from radar import complementar, edital_programa
+from radar import provas as arquivos_de_prova
+from radar.cli import app as cli
+from radar.db import sessao
+from radar.models import QuestaoDeProva
+from radar.servico import classificacoes, conteudos
+from radar.servico import complementar as servico
+from radar.servico import incidencia as servico_da_incidencia
+
+PROGRAMA = edital_programa.ler_programa(
+    (Path(__file__).parent / "fixtures" / "provas" / "edital_sap_2019_programa.txt")
+    .read_text(encoding="utf-8"))
+
+PREVISAO = re.compile(r"(?i)vai cair|certamente|sempre cobra|cairá")
+
+ALTERNATIVAS = {letra: f"texto {letra}" for letra in complementar.LETRAS}
+
+
+# --- a validacao (puro) ------------------------------------------------------------
+
+def _caderno(url="https://fepese.test/socio.pdf", quantas=3, gabarito=complementar.DEFINITIVO,
+             sha256="aaa", **mudanca):
+    questoes = [complementar.QuestaoDoCaderno(
+        numero=n, materia_no_edital="Direito Penal", texto="Pergunta.",
+        letras=complementar.LETRAS, resposta="a") for n in range(1, quantas + 1)]
+    for campo, valor in mudanca.items():
+        setattr(questoes[0], campo, valor)
+    return complementar.Caderno(prova_url=url, cargo="Agente", ano=2016,
+                                questoes=questoes, sha256=sha256, gabarito=gabarito)
+
+
+def test_prova_inteira_com_definitivo_passa_na_validacao():
+    v = complementar.validar(_caderno())
+    assert (v.problemas, v.motivo) == ([], "")
+    assert v.pode_classificar and v.entra_nos_padroes
+    assert v.situacao == "validada"
+    # O quadro do edital NAO foi conferido, e o relatorio nunca diz que bate.
+    assert v.quadro_do_edital == "não lido"
+
+
+def test_gabarito_provisorio_classifica_mas_fica_fora_dos_padroes():
+    v = complementar.validar(_caderno(gabarito=complementar.PROVISORIO))
+    assert v.pode_classificar and not v.entra_nos_padroes
+    assert v.situacao == "só para classificar"
+    assert "provisório" in v.motivo and "letra certa" in v.motivo
+
+
+def test_gabarito_ausente_tambem_classifica_e_nao_entra_nos_padroes():
+    v = complementar.validar(_caderno(gabarito=complementar.AUSENTE))
+    assert v.pode_classificar and not v.entra_nos_padroes
+
+
+def test_numeracao_com_buraco_e_pega():
+    caderno = _caderno(quantas=3)
+    caderno.questoes[2].numero = 7
+    v = complementar.validar(caderno)
+    assert not v.pode_classificar
+    assert "3 questões extraídas, e o caderno vai até a 7" in v.motivo
+    assert "falta 3, 4, 5, 6" in v.motivo
+
+
+def test_numero_repetido_e_pego():
+    caderno = _caderno(quantas=3)
+    caderno.questoes[2].numero = 2
+    assert "repete 2" in complementar.validar(caderno).motivo
+
+
+def test_alternativa_faltando_e_pega():
+    v = complementar.validar(_caderno(letras=("a", "b", "c", "d")))
+    assert not v.pode_classificar
+    assert "alternativas diferentes de a-e nas questões 1" in v.motivo
+
+
+def test_questao_sem_gabarito_e_pega_e_a_anulada_nao():
+    v = complementar.validar(_caderno(resposta=None))
+    assert "sem letra no gabarito nas questões 1" in v.motivo
+
+    caderno = _caderno()
+    caderno.questoes[0].resposta, caderno.questoes[0].anulada = None, True
+    assert complementar.validar(caderno).pode_classificar
+
+
+def test_caderno_vazio_e_recusado():
+    vazio = complementar.Caderno(prova_url="x", cargo=None, ano=None, questoes=[])
+    assert complementar.validar(vazio).motivo == "nenhuma questão extraída"
+
+
+def test_hash_repetido_com_outro_nome_e_recusado():
+    """A mesma prova baixada com outro nome de arquivo nao entra duas vezes."""
+    primeira = _caderno(url="https://fepese.test/AS.pdf", sha256="igual")
+    segunda = _caderno(url="https://fepese.test/outro-nome.pdf", sha256="igual")
+
+    validadas = servico.validacoes([primeira, segunda])
+
+    assert validadas[primeira.prova_url].pode_classificar
+    recusada = validadas[segunda.prova_url]
+    assert not recusada.pode_classificar
+    assert recusada.motivo == "o mesmo PDF já está no acervo em https://fepese.test/AS.pdf"
+
+
+def test_sha256_diferente_nao_e_repeticao():
+    duas = [_caderno(url="https://fepese.test/a.pdf", sha256="a"),
+            _caderno(url="https://fepese.test/b.pdf", sha256="b")]
+    assert all(v.pode_classificar for v in servico.validacoes(duas).values())
+
+
+# --- as duas colunas (puro) --------------------------------------------------------
+
+TERMOS = {"Direito Penal": ["Código Penal"], "Lei de Execução Penal": ["execução penal"]}
+
+
+def _generica(numero, texto):
+    return complementar.QuestaoDoCaderno(numero=numero, materia_no_edital=None,
+                                         texto=texto, resposta="a")
+
+
+def _levantar(cadernos, materias=("Direito Penal", "Lei de Execução Penal")):
+    validadas = servico.validacoes(cadernos)
+    return {m.materia: m for m in
+            complementar.montar(list(materias), cadernos, TERMOS, validadas)}
+
+
+def test_o_nome_da_materia_conta_e_o_termo_e_indicio_a_parte():
+    caderno = complementar.Caderno(
+        prova_url="https://fepese.test/guarda.pdf", cargo="Guarda Municipal", ano=2024,
+        sha256="g", gabarito=complementar.PROVISORIO,
+        questoes=[
+            complementar.QuestaoDoCaderno(1, "Direito Penal", "Sobre o crime.", resposta="a"),
+            _generica(2, "Nos termos do Código Penal brasileiro, o dolo..."),
+            _generica(3, "Sobre a jornada de trabalho do servidor."),
+        ])
+    penal = _levantar([caderno])["Direito Penal"]
+
+    assert (penal.pelo_nome, penal.por_termo) == (1, 1)
+    assert penal.provas[0].questoes == 2        # as duas colunas nao se sobrepoem
+    assert "1 questão · 1 prova pelo nome da matéria" in penal.amostra()
+    assert "1 indício(s) por termo em 1 prova" in penal.amostra()
+
+
+def test_questao_que_ja_tem_materia_propria_nao_vira_indicio_de_outra():
+    """Questao do bloco "Lei de Execução Penal" que cita o Codigo Penal conta
+    em LEP, e nao vira indicio de Direito Penal."""
+    caderno = complementar.Caderno(
+        prova_url="u", cargo=None, ano=2016, sha256="s",
+        questoes=[complementar.QuestaoDoCaderno(
+            1, "Lei de Execução Penal", "Conforme o Código Penal e a execução penal...",
+            resposta="a")])
+    mapa = _levantar([caderno])
+
+    assert (mapa["Lei de Execução Penal"].pelo_nome, mapa["Lei de Execução Penal"].por_termo) == (1, 0)
+    assert mapa["Direito Penal"].provas == []
+
+
+def test_materia_sem_nada_no_acervo_diz_isso_sem_afirmar_o_que_nao_sabe():
+    vazio = complementar.Caderno(prova_url="u", cargo=None, ano=2024, sha256="s",
+                                 questoes=[_generica(1, "Sobre pedagogia.")])
+    lep = _levantar([vazio])["Lei de Execução Penal"]
+
+    assert not lep.tem_alguma_coisa
+    assert lep.amostra() == "nenhuma questão no acervo complementar"
+
+
+# --- do banco: o acervo da fixture -------------------------------------------------
+
+MANIFESTO = [
+    {"tipo": "prova", "url": "https://fepese.test/2016/AS.pdf", "sha256": "socio-2016",
+     "concurso_url": "https://fepese.test/2016", "arquivo": "AS.pdf"},
+    {"tipo": "gabarito_definitivo", "url": "https://fepese.test/2016/gab.pdf",
+     "sha256": "gab-2016", "concurso_url": "https://fepese.test/2016"},
+    {"tipo": "prova", "url": "https://fepese.test/2024/guarda.pdf", "sha256": "guarda",
+     "concurso_url": "https://fepese.test/2024", "arquivo": "GM.pdf"},
+    {"tipo": "gabarito", "url": "https://fepese.test/2024/gab.pdf", "sha256": "gab-2024",
+     "concurso_url": "https://fepese.test/2024"},
+]
+
+
+def _questao(prova, numero, materia, evidencia, ano, cargo, enunciado="Pergunta?",
+             concurso=None, resposta="a"):
+    return QuestaoDeProva(
+        prova_url=prova, concurso_url=concurso, banca="FEPESE", ano=ano, cargo=cargo,
+        numero=numero, materia=materia, enunciado=enunciado, alternativas=dict(ALTERNATIVAS),
+        resposta=resposta, impressao=f"{prova}-{numero}", evidencia=evidencia)
+
+
+@pytest.fixture
+def acervo(banco_temporario, tmp_path):
+    """Duas provas do alvo, o Socioeducativo 2016 e uma Guarda Municipal 2024."""
+    (tmp_path / "provas.json").write_text(json.dumps(MANIFESTO), encoding="utf-8")
+    conteudos.semear(programa=PROGRAMA)
+    with sessao() as s:
+        # O alvo: 2013 e 2019. Enunciados diferentes de proposito - a chave da
+        # classificacao e enunciado + alternativas, e duas questoes iguais
+        # seriam a mesma questao para ela.
+        for ano, numero in ((2013, 47), (2019, 51)):
+            s.add(_questao(f"https://fepese.test/{ano}.pdf", numero, "Direito Penal",
+                           "alvo", ano, "Agente Penitenciário",
+                           enunciado=f"Pergunta {numero} de {ano}?"))
+        # Complementar com gabarito definitivo: o Socioeducativo 2016.
+        for numero, materia in ((1, "Direito Penal"), (2, "Direito Penal"),
+                                (3, "Direitos Humanos")):
+            s.add(_questao("https://fepese.test/2016/AS.pdf", numero, materia,
+                           "complementar", 2016, "Agente de Segurança Socioeducativo",
+                           concurso="https://fepese.test/2016"))
+        # Complementar so com provisorio, e com bloco generico: a Guarda 2024.
+        s.add(_questao("https://fepese.test/2024/guarda.pdf", 1, "Conhecimentos Específicos",
+                       "complementar", 2024, "Guarda Municipal",
+                       enunciado="De acordo com o Código Penal, o dolo...",
+                       concurso="https://fepese.test/2024"))
+        s.add(_questao("https://fepese.test/2024/guarda.pdf", 2, "Conhecimentos Específicos",
+                       "complementar", 2024, "Guarda Municipal",
+                       enunciado="Sobre postura urbana...",
+                       concurso="https://fepese.test/2024"))
+    with sessao() as s:
+        alvo = next(q for q in s.query(QuestaoDeProva).filter_by(numero=47))
+        chave = classificacoes.chave_de(alvo)
+    classificacoes.classificar(chave, "Direito Penal > Imputabilidade penal", "manual")
+    return tmp_path
+
+
+def test_o_levantamento_so_le_o_complementar(acervo):
+    por_materia, validadas, cadernos = servico.levantamento()
+
+    assert {c.prova_url for c in cadernos} == {"https://fepese.test/2016/AS.pdf",
+                                               "https://fepese.test/2024/guarda.pdf"}
+    penal = next(m for m in por_materia if m.materia == "Direito Penal")
+    # As 2 do Socioeducativo pelo nome; a 1 da Guarda por termo. As do alvo
+    # (2013 e 2019) nao estao aqui.
+    assert (penal.pelo_nome, penal.por_termo) == (2, 1)
+
+
+def test_o_tipo_do_gabarito_vem_do_manifesto(acervo):
+    _, validadas, _ = servico.levantamento()
+
+    socio = validadas["https://fepese.test/2016/AS.pdf"]
+    guarda = validadas["https://fepese.test/2024/guarda.pdf"]
+    assert (socio.gabarito, socio.entra_nos_padroes) == (complementar.DEFINITIVO, True)
+    assert (guarda.gabarito, guarda.entra_nos_padroes) == (complementar.PROVISORIO, False)
+    assert guarda.pode_classificar
+
+
+def test_os_numeros_do_alvo_nao_mudam_com_prova_complementar(acervo):
+    """Secao 4 do pedido: a incidencia do alvo e a mesma antes e depois."""
+    antes = {m.materia: (m.topo.amostra, m.topo.rotulo)
+             for m in servico_da_incidencia.mapa()}
+
+    servico.levantamento()
+    with sessao() as s:
+        for numero in range(1, 30):
+            s.add(_questao("https://fepese.test/2024/outra.pdf", numero, "Direito Penal",
+                           "complementar", 2024, "Procurador do Município"))
+    depois = {m.materia: (m.topo.amostra, m.topo.rotulo)
+              for m in servico_da_incidencia.mapa()}
+
+    assert antes == depois
+    assert antes["Direito Penal"][0] == "1 questão · 1 prova"
+
+
+def test_as_perguntas_da_secao_5_sao_respondidas_pela_fixture(acervo):
+    por_materia, _, _ = servico.levantamento()
+    respostas = {r.pergunta[:2]: r.resposta for r in complementar.responder(por_materia)}
+
+    assert "Direito Penal (2 em 1 prova)" in respostas["1."]
+    # LEP nao tem nada no acervo da fixture - e o texto diz isso sem afirmar
+    # que a FEPESE nunca cobrou.
+    assert "Nenhuma questão de Lei de Execução Penal" in respostas["3."]
+    assert complementar.FRASE_SEM_EVIDENCIA in respostas["3."]
+    assert "Sociologia Aplicada" in respostas["4."]
+    # So a prova com definitivo conta como reforco pronto.
+    assert "Direito Penal (2 em 1 prova)" in respostas["6."]
+    assert "Direitos Humanos (1 em 1 prova)" in respostas["6."]
+
+
+def test_o_relatorio_mostra_o_motivo_de_cada_prova_fora(acervo):
+    texto = servico.relatorio(*servico.levantamento())
+
+    assert "só para classificar" in texto and "validada" in texto
+    assert "fora dos padrões de cobrança" in texto
+    assert "não lido" in texto                      # o quadro do edital
+    assert complementar.FRASE_SEM_EVIDENCIA in texto
+    assert not PREVISAO.search(texto)
+
+
+def test_o_relatorio_diz_que_as_evidencias_nunca_se_somam(acervo):
+    texto = servico.relatorio(*servico.levantamento())
+    assert "nunca" in texto and "incidência da Polícia Penal SC" in texto
+    assert "2 provas complementares" in texto
+
+
+def test_o_comando_escreve_o_relatorio_e_nao_muda_o_banco(acervo, tmp_path):
+    def fotografia():
+        with sessao() as s:
+            return sorted((q.prova_url, q.numero, q.evidencia, q.materia)
+                          for q in s.query(QuestaoDeProva))
+
+    antes = fotografia()
+    destino = tmp_path / "complementar.md"
+    saida = CliRunner().invoke(cli, ["complementar", "--caminho", str(destino)],
+                               env={"COLUMNS": "200"})
+
+    assert saida.exit_code == 0, saida.output
+    assert fotografia() == antes
+    assert destino.exists()
+    assert "Direito Penal" in destino.read_text(encoding="utf-8")
+    assert "1 validada(s)" in saida.output and "1 so para classificar" in saida.output
+    assert not PREVISAO.search(saida.output)
+
+
+def test_sem_prova_complementar_o_comando_avisa(banco_temporario, tmp_path):
+    (tmp_path / "provas.json").write_text("[]", encoding="utf-8")
+    conteudos.semear(programa=PROGRAMA)
+
+    saida = CliRunner().invoke(cli, ["complementar", "--caminho",
+                                     str(tmp_path / "vazio.md")])
+
+    assert saida.exit_code == 1
+    assert "Nenhuma prova complementar" in saida.output
+
+
+def test_os_termos_vem_do_config():
+    termos = servico.carregar_termos()
+    assert "código penal" in [t.lower() for t in termos["Direito Penal"]]
+    assert "execução penal" in [t.lower() for t in termos["Lei de Execução Penal"]]
+
+
+def test_o_manifesto_de_verdade_tem_o_sha256_de_cada_caderno():
+    """O hash e o que recusa a mesma prova duas vezes: sem ele, nada feito."""
+    com_hash = [r for r in arquivos_de_prova.carregar_manifesto()
+                if r.get("tipo") == arquivos_de_prova.PROVA and r.get("sha256")]
+    assert len(com_hash) > 100

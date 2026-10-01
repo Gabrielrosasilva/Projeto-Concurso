@@ -135,6 +135,8 @@ from radar.servico import evidencia     # noqa: F401 - usado pela CLI
 from radar.servico import conteudos     # noqa: F401 - usado pela CLI
 from radar.servico import classificacoes  # noqa: F401 - usado pela CLI
 from radar.servico import incidencia    # noqa: F401 - usado pela CLI e web
+# A Etapa 3B: o levantamento do acervo complementar FEPESE (so leitura).
+from radar.servico import complementar  # noqa: F401 - usado pela CLI
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,
