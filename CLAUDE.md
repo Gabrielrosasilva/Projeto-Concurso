@@ -108,8 +108,9 @@ Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 20 `variacao` de LEP).
 **Actions:** vermelho desde 26/09; os testes foram corrigidos na Etapa 1A
 (01/10) e falta conferir o verde la. **Em andamento:** o pedido de evolucao
-([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A e a
-1B (frases dos eventos e da Previsao, acentos na tela web).
+([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A, a
+1B (frases dos eventos e da Previsao, acentos na tela web) e a 1C (fonte unica
+das metricas). Proxima: 1D, conferir os dias ja gravados.
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.
@@ -118,6 +119,8 @@ no [README](README.md); banco em `data/radar.db`.
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 (`servico/coleta.py`) - nada fora de `collectors/` sabe de onde vem o dado. O
 `servico` e um pacote, um arquivo por assunto; escreva `servico.funcao(...)`.
+**Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
+tela nenhuma refaz a conta, e template nenhum soma.
 
 ## Fontes de dados
 

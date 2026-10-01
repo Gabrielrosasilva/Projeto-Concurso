@@ -1337,6 +1337,26 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
   mais, porque o banco real nao tem evento em concurso-alvo nem favorito (a
   copia foi apagada depois).
 
+## Etapa 1C do pedido de evolucao: a fonte unica das metricas (01/10)
+
+- `servico/metricas.py` passou a ser o unico lugar que conta questao, acerto e
+  erro: o `Numeros` com os quatro estados (acerto, erro, sem acerto anotado,
+  treino de IA), a lista de lancamentos de um periodo e a soma por recorte;
+  mais o acumulado pela ultima resposta, as rodadas e a evolucao, que sairam
+  do `simulado.py` (os nomes continuam la, reexportados);
+- quatro commits, como o roteiro pedia: o modulo e os testes do 28/09; Hoje e
+  `radar hoje`; Semanas e Minhas materias; Meu foco, Onde estudar, home e
+  relatorio;
+- com o banco real: 28/09 fecha em "31 = 13 + 8 + 10 de treino de IA"; 29/09
+  em "37 = 4 + 18 + 15 sem acerto anotado" (a faixa de aprendizagem com
+  consulta e sem acerto); a semana 1, em 68 = 31 + 37;
+- duas divergencias apareceram e foram consertadas pela lista unica: o dia de
+  Plano B sumia de Semanas e de Minhas materias, e o treino de IA contava no
+  volume da semana e nao no da materia;
+- o registro do dia deixou de gravar copia do total; o `radar hoje --feitas`
+  virou estudo extra, com `--minutos` obrigatorio (decidido com voce antes de
+  implementar: o roteiro nao previa que o extra exige minutos).
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e

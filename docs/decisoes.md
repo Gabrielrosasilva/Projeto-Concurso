@@ -2031,6 +2031,12 @@ O resto veio junto:
 > **Revista em 01/10/2026 (Etapa 0, decisoes 4 e 7):** a contagem vai para uma
 > fonte unica com recortes de nome fixo (Etapa 1C), e o Meu foco e o Onde
 > estudar passam a usar radar + anotado a partir da Etapa 4.
+>
+> **Revista de novo em 01/10/2026 (Etapa 1C):** feita a fonte unica
+> (`servico/metricas.py`). O que mudou aqui: o registro do dia deixou de
+> guardar a copia do total (o item "salvar a meta grava o total" abaixo nao
+> vale mais), e o `radar hoje --feitas` grava estudo extra. Ver "A fonte unica
+> das metricas", no fim do arquivo.
 
 Tres origens medem o meu estudo, e elas nao se misturam do mesmo jeito:
 
@@ -2298,3 +2304,49 @@ criados, entao as decisoes dela entram aqui no primeiro commit da Etapa 1:
    o Telegram, os prompts de IA, o relatorio de auditoria e os nomes de
    assunto do `macetes.py` (que sao chave de casamento) ficaram como estavam;
    ver `pendencias.md`.
+
+## A fonte unica das metricas (Etapa 1C, 01/10/2026)
+
+1. **Toda contagem de questao, acerto e erro mora no `servico/metricas.py`.**
+   Tela Hoje, `radar hoje`, Semanas, Minhas materias, Meu foco, Onde estudar,
+   home e relatorio do simulado pedem o numero a ele; nenhum template soma.
+   Ele e a evolucao do `Numeros`/`TotaisDoDia` que estavam no
+   `servico/cronograma.py` (que sairam de la), e nao um modulo paralelo;
+2. **a regra:** `questoes = acertos + erros + sem acerto anotado + treino de
+   IA`. O `Numeros` guarda os quatro estados e o total e a soma deles, entao a
+   linha nao tem como nao fechar. "Fiz hoje: 31 questoes = 13 acertos + 8
+   erros + 10 de treino de IA", com o acerto da IA como segundo numero ("7 de
+   10, fora do acerto"). Estado que nao existe nao aparece na frase;
+3. **linha anotada com mais acertos que questoes e acusada**
+   (`ContaInconsistente`, com a data e a faixa), e nao arredondada: o
+   `max(medidas - acertos, 0)` antigo escondia o erro;
+4. **os recortes tem nome fixo** - *medido no radar*, *anotado*, *treino de
+   IA* e *total* - e a tela escreve qual mostra. Meu foco, Onde estudar e home
+   continuam no *medido no radar* ate a Etapa 4 (decisao 7 da Etapa 0), agora
+   dito na tela;
+5. **duas contagens com nome diferente:** *respostas* (volume do dia, da
+   semana, e a evolucao da home) e *questoes* (o acumulado, pela ultima
+   resposta de cada questao). A mesma questao em duas rodadas sao 2 respostas
+   e 1 questao. A home dizia "N questoes reais" para o que eram respostas;
+   passou a dizer "respostas";
+6. **todas as telas somam a mesma lista de lancamentos** (faixas marcadas,
+   estudo extra, respostas no radar). Mesmo periodo, mesmo numero: o dia, a
+   semana e a soma dos cartoes de materia dao os mesmos `Numeros`. Isso
+   consertou duas divergencias que existiam: o dia de **Plano B** (a tela Hoje
+   contava as faixas dele; Semanas e Minhas materias montavam o dia normal e
+   nao achavam check nenhum) e o **treino de IA** (entrava no volume da semana
+   e nao no da materia; agora entra no total das duas, fora do acerto);
+7. **o registro do dia guarda so a meta e o recado.** As copias de total ja
+   gravadas (28/09: 31/13; 29/09: 37/4, iguais ao calculado) ficam no banco e
+   no `registro_estudo.json`, mas saem da tela e do `radar hoje`; a 1D as
+   confere. Salvar a meta nao apaga a copia antiga;
+8. **`radar hoje --feitas N [--acertos M] --minutos X [--materia ...]` grava
+   um estudo extra** (Qconcursos, sem consulta), que entra no "Fiz hoje" como
+   anotado. Sem `--minutos`, recusa: o extra exige tempo ("estudo sem tempo
+   nao e estudo"), e essa regra nao foi afrouxada (escolha sua, 01/10);
+9. **o grafico semanal de Minhas materias passa a incluir as respostas no
+   radar** no acerto sem consulta da semana: antes so faixas e extras
+   entravam nele, e o cartao (que ja contava o radar) dizia outra coisa;
+10. **o "acertei X de Y" do Onde estudar vem da conta**, e nao mais de volta
+    da porcentagem (que arredondava).
+

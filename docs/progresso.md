@@ -9,7 +9,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 |---|---|---|
 | 1 | 1A — GitHub Actions verde | 🟡 falta o verde no GitHub |
 | 2 | 1B — Texto de máquina e Previsão | ✅ |
-| 3 | 1C — Fonte única das métricas | ⬜ |
+| 3 | 1C — Fonte única das métricas | ✅ |
 | 4 | 1D — Conferência dos dados gravados | ⬜ |
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ⬜ |
 | 6 | 2 — Estrutura de conteúdos | ⬜ |
@@ -148,3 +148,96 @@ cópia foi apagada; o banco real não foi alterado.
   Previsão (home e Análises na cópia do banco, pelo motivo acima);
 - [x] A2 e A3 saíram do `pendencias.md` (o resto dos acentos, fora da web,
   ficou no bloco D).
+
+---
+
+## 1C — Fonte única das métricas (01/10/2026)
+
+- Situação: concluída (aguardando sua aprovação para seguir à 1D)
+- Datas: início 01/10 · fim 01/10
+
+**Plano conferido contra o código antes de começar:** válido; os estados, o
+caso de 28/09 e quem refazia a conta batiam com o roteiro. Uma mudança, que
+você decidiu antes da implementação: o estudo extra exige minutos, então
+`radar hoje --feitas` passou a pedir `--minutos`.
+
+Encontrado no caminho, e consertado pela própria fonte única:
+- **Plano B**: a tela Hoje contava as faixas dele, mas Semanas e Minhas
+  matérias montavam o dia normal e perdiam essas questões;
+- **treino de IA**: entrava no volume da semana e não no da matéria;
+- **home**: chamava de "questões" o que eram respostas (evolução);
+- **relatório do simulado**: calculava porcentagem e contava erros no
+  template.
+
+**Commits.**
+1. `f411b5f` — o módulo `servico/metricas.py` e os testes do 28/09;
+2. `c97a890` — Hoje e `radar hoje`; o registro do dia guarda só meta e recado;
+   `--feitas` vira estudo extra;
+3. `dbb154f` — Semanas e Minhas matérias somam a mesma lista; sai a conta
+   antiga do `servico/cronograma.py`;
+4. Meu foco, Onde estudar, home e relatório (o acumulado, as rodadas e a
+   evolução saem do `simulado.py` para o `metricas.py`);
+5. docs.
+
+**Arquivos alterados.**
+- novos: `src/radar/servico/metricas.py`, `tests/test_metricas.py`;
+- serviço: `servico/cronograma.py`, `servico/semanas.py`,
+  `servico/materias.py`, `servico/simulado.py`, `servico/inicio.py`,
+  `servico/__init__.py`, `foco.py`, `onde_estudar.py`, `cli.py`,
+  `web/app.py`;
+- telas: `hoje.html`, `semanas.html`, `materias.html`, `foco.html`,
+  `home.html`, `relatorio.html`;
+- testes ajustados: `test_acertos_do_dia.py`, `test_registro_estudo.py`,
+  `test_faixas_do_dia.py`, `test_tela_hoje.py`, `test_semanas.py`,
+  `test_materias_na_tela.py`;
+- docs: `decisoes.md` (nova seção + nota na E2), `historico.md`, `CLAUDE.md`,
+  este arquivo. `pendencias.md` não tinha item desta etapa.
+
+**Testes novos (18, em `test_metricas.py`).** 28/09 reproduzido
+("31 = 13 + 8 + 10 de treino de IA", IA 7 de 10 como segundo número); Bônus
+com 0 questões; a regra fechando em todos os recortes; total = soma dos
+recortes; IA nunca no acerto; rodada não terminada não conta; linha com mais
+acertos que questões é acusada; 22h30 e 0h05 no dia certo; mesma questão em
+duas rodadas = 2 respostas e 1 questão; o dia igual dentro de um período
+maior; tela Hoje e `radar hoje` com a mesma linha; Hoje = Semanas = soma de
+Minhas matérias (Numeros idênticos); o mesmo num dia de Plano B; Meu foco e
+home lendo o mesmo acumulado do `metricas`.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_metricas.py` (passo 1) | 12 passed |
+| Arquivos do passo 2 | 179 passed |
+| Arquivos do passo 3 | 186 passed, 3 failed (testes que liam o campo antigo `geradas`; ajustados) → 67 passed |
+| Arquivos do passo 4 | 191 passed |
+| Suíte inteira, PC | **1885 passed** |
+| `test_materias_na_tela.py` + `test_metricas.py`, depois do último ajuste de tela | 49 passed |
+
+**Comando real rodado (banco real, só leitura).**
+- `radar hoje --data 2026-09-28` → "Fiz hoje: 31 questões = 13 acertos + 8
+  erros + 10 de treino de IA · 3h50 de estudo" e "Treino de IA: 7 de 10
+  (70%), fora do acerto"; o "Como foi" mostra só a meta e o recado;
+- `radar hoje --data 2026-09-29` → "37 questões = 4 acertos + 18 erros + 15
+  sem acerto anotado";
+- `radar web` (porta 8767): a tela Hoje de 28/09 e 29/09 com as mesmas
+  linhas; Semanas, "Total: 68 questões = 17 acertos + 26 erros + 15 sem acerto
+  anotado + 10 de treino de IA" (= 31 + 37); Minhas matérias, home e Análises
+  com o recorte "medido no radar" escrito. Nessa conferência apareceu um
+  cartão de matéria com "0 questões = 0 acertos + 0 erros" (só minutos); a
+  frase passou a aparecer só com questão.
+
+**Critério de conclusão.**
+- [x] `pytest -q` verde (1885);
+- [x] `radar hoje --data 2026-09-28` e a tela Hoje de 28/09 mostram a conta
+  fechada;
+- [x] busca no código: fora do `metricas.py`, nenhum serviço ou template soma
+  acerto. O que sobra são razões calculadas sobre números que já vêm contados
+  (prioridade do Onde estudar e da home, porcentagem de uma faixa ou de uma
+  rodada);
+- [x] decisão no `decisoes.md`, com a nota do que muda na E2.
+
+**Para a 1D.** As cópias gravadas no registro (28/09: 31/13; 29/09: 37/4)
+são iguais ao calculado. O Bônus de 28/09 e o de 29/09 estão marcados com 0
+questões e 25 min cada; a pergunta "você fez o Bônus?" continua de pé.
+
