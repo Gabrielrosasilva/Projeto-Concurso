@@ -75,8 +75,11 @@ def test_pausa_nao_tem_botao_nem_data(cliente, dia):
     assert texto.count('class="play-faixa"') == nao_pausas
 
 
-def test_sem_javascript_nada_do_cronometro_aparece(cliente):
+def test_sem_javascript_nada_do_cronometro_aparece(cliente, monkeypatch):
     """Tudo sai escondido; so o cronometro.js tira o `hidden`."""
+    # Relogio parado na vespera: o teste nao pode depender da data de hoje.
+    momento = datetime(2026, 9, 27, 12, 0, tzinfo=fuso_local())
+    monkeypatch.setattr(servico.cronograma, "agora_local", lambda: momento)
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert '<div class="lateral-cronometro" id="cronometro" hidden>' in texto
     assert re.search(r'<div class="aviso-cheio" id="aviso-cheio" hidden', texto)

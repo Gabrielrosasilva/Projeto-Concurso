@@ -1295,6 +1295,24 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
   FEPESE cobra: foi montado pelo edital de 2019. Detalhe e os numeros em
   pendencias e em decisoes.
 
+## Etapa 1A do pedido de evolucao: os testes que quebravam o Actions (01/10)
+
+- primeiro commit da Etapa 1: as 14 decisoes da Etapa 0 (o plano, no
+  [roteiro](roteiro.md)) entraram no `decisoes.md`, com nota de revisao nas
+  decisoes que elas substituem (selos, minimos de amostra, E2 e E4); o "Estado
+  atual" do `CLAUDE.md` passou de "40 geradas, todas `do_zero`" para as 50 que
+  o arquivo tem (30 `do_zero`, 20 `variacao`);
+- as tres correcoes da pendencia A1, so nos testes: o da tarefa da web compara
+  com `automacao.python_sem_janela()`; o do cronometro para o relogio em 27/09;
+  o `_concurso` do `test_avisos.py` publica em `agora() - 1 dia`;
+- antes da correcao a suite ja falhava tambem no Windows (o teste do
+  cronometro: 28/09 deixou de ser futuro). Depois: 1.840 passando no PC e com
+  o relogio simulado em 20/10/2026, 10/11/2026 e 15/03/2027 (`time-machine`
+  instalado fora do repositorio, num plugin do pytest de uso unico). O
+  `test_avisos.py` antigo, com o relogio em 20/10, da as 18 falhas previstas;
+- o workflow so roda pelo agendamento ou pelo "Run workflow"; o verde no
+  GitHub fica para conferir (pendencia A1).
+
 ## Armadilhas desta rodada
 
 - teste que usa data fixa ou o nome do executavel do Windows funciona no PC e

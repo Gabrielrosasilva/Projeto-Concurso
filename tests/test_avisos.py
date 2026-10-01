@@ -3,14 +3,14 @@
 Nenhum teste aqui vai a internet: o envio e substituido por uma funcao falsa
 que so guarda o que teria sido mandado.
 """
-from datetime import datetime, timezone
+from datetime import timedelta
 
 import pytest
 from sqlalchemy import select
 
 from radar import avisos, servico
 from radar.db import sessao
-from radar.models import Concurso
+from radar.models import Concurso, agora
 
 
 @pytest.fixture
@@ -42,7 +42,8 @@ def _concurso(**mudancas) -> Concurso:
         relevancia="nucleo",
         motivo_relevancia="Palhoca (SC) esta no anel nucleo.",
         salario=5200.0,
-        publicado_em=datetime(2026, 9, 17, 12, 0, tzinfo=timezone.utc),
+        # Relativa a hoje: data fixa sai da janela de 30 dias de novidade.
+        publicado_em=agora() - timedelta(days=1),
     )
     base.update(mudancas)
     return Concurso(**base)

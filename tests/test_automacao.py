@@ -118,7 +118,9 @@ def test_nao_desiste_no_notebook_na_bateria(xml):
 
 def test_a_tarefa_da_web_chama_o_python_sem_janela_neste_modulo():
     acao = _arvore(automacao.xml_da_tarefa_web("PC\\eu")).find(".//t:Exec", NS)
-    assert acao.find("t:Command", NS).text.endswith(("pythonw.exe", "python.exe"))
+    # Compara com a funcao, e nao com "pythonw.exe": no Linux do Actions ele nao
+    # existe e a funcao devolve o proprio python.
+    assert acao.find("t:Command", NS).text == str(automacao.python_sem_janela())
     assert acao.find("t:Arguments", NS).text == "-m radar.automacao"
     assert acao.find("t:WorkingDirectory", NS).text == str(automacao.config.RAIZ)
 

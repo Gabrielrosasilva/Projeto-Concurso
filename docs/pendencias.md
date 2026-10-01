@@ -9,36 +9,13 @@ Legenda: 🔴 nao feita · 🟡 feita pela metade · ⚪ nao verificada.
 
 ## A. Quebrado agora
 
-### A1. 🔴 O GitHub Actions esta vermelho desde `9ca6c04`
+### A1. 🟡 GitHub Actions: corrigido no PC, falta ver o verde la
 
-A coleta diaria (`.github/workflows/coleta.yml`, 09:00 UTC) para no `pytest -q`
-e nao coleta, nao avisa e nao exporta. Ultimo verde: run 36245200577, em
-`52a38aa` (26/09). Runs vermelhos: 36325681266 (`9ca6c04`) e 36455934061
-(`3e225fb`). O codigo do radar esta certo; o problema e de tres testes, e a
-suite local (Windows) passa.
-
-Corrigir **so os testes**, sem tocar em `src/` nem no `coleta.yml`:
-
-1. `tests/test_automacao.py`,
-   `test_a_tarefa_da_web_chama_o_python_sem_janela_neste_modulo`: troque o
-   `endswith(("pythonw.exe", "python.exe"))` por
-   `== str(automacao.python_sem_janela())`. No Linux nao existe `pythonw`.
-2. `tests/test_cronometro.py`, `test_sem_javascript_nada_do_cronometro_aparece`:
-   receber `monkeypatch` e parar o relogio na vespera, como em
-   `test_as_faixas_do_plano_b_tambem_tem_play`:
-   `monkeypatch.setattr(servico.cronograma, "agora_local", lambda: datetime(2026, 9, 27, 12, 0, tzinfo=fuso_local()))`.
-   O teste assume que 28/09 e futuro, e desde 28/09 nao e mais.
-3. `tests/test_avisos.py`, funcao `_concurso`: trocar
-   `publicado_em=datetime(2026, 9, 17, ...)` por `agora() - timedelta(days=1)`
-   e ajustar os imports (`timedelta`; `agora` vem de `radar.models`). A data
-   fixa sai da janela de 30 dias de novidade e 18 testes quebram por volta de
-   17/10.
-
-Validado fora do repositorio: com essas tres mudancas a suite inteira passou
-(1.840) com o relogio simulado em 20/10/2026, 10/11/2026 e 15/03/2027.
-Depois: commit, push e "Run workflow" na aba Actions (o `workflow_dispatch`
-existe) para confirmar o verde. O aviso "Node.js 20 is deprecated" no log nao e
-o erro.
+Os tres testes que dependiam do Windows ou da data de hoje foram corrigidos na
+Etapa 1A (01/10/2026; detalhe no [historico](historico.md)). A suite passa no
+PC (1.840) e com o relogio simulado em 20/10/2026, 10/11/2026 e 15/03/2027.
+**Falta:** disparar o "Run workflow" na aba Actions (ou esperar o das 09:00
+UTC) e conferir o verde. Verde la, esta pendencia sai daqui.
 
 ### A2. 🟡 Texto de maquina na tela (C2)
 
