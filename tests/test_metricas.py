@@ -100,7 +100,7 @@ def test_o_acerto_da_ia_e_um_segundo_numero(banco_temporario, plano):
     assert conta.total.porcentagem == 62            # 13 de 21: so as reais
     assert conta.treino_ia.ia_acertos == 7
     assert metricas.frase_da_ia(conta.total) == (
-        "treino de IA: 7 de 10 (70%), fora do acerto")
+        "Treino de IA: 7 de 10 (70%), fora do acerto")
 
 
 def test_o_bonus_com_zero_questoes_conta_os_minutos_e_nenhuma_questao(
@@ -226,3 +226,46 @@ def test_o_dia_e_o_mesmo_dentro_de_um_periodo_maior(banco_temporario, plano):
 
     assert do_periodo == metricas.do_dia(SEG, plano)
     assert metricas.contar(linhas).total.questoes == 32
+
+
+# --- a tela Hoje e o `radar hoje` -------------------------------------------------
+#
+# No cronograma de verdade, como os outros testes de tela: o 28/09 dele tem as
+# mesmas faixas do mini nas mesmas posicoes (Penal, Portugues, Bonus).
+
+def _o_dia_28_de_verdade():
+    real = cronograma.carregar()
+    _o_dia_28(real)
+    return real
+
+
+def test_a_tela_hoje_mostra_o_28_09_fechado(banco_temporario, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    _o_dia_28_de_verdade()
+    monkeypatch.setattr(diario, "agora_local",
+                        lambda: datetime(2026, 9, 30, 12, 0, tzinfo=fuso_local()))
+
+    texto = TestClient(app).get("/hoje?data=2026-09-28").text
+
+    assert ("Fiz hoje:</b> 31 questões = 13 acertos + 8 erros "
+            "+ 10 de treino de IA") in texto
+    assert "Treino de IA: 7 de 10 (70%), fora do acerto" in texto
+
+
+def test_o_radar_hoje_mostra_a_mesma_linha(banco_temporario):
+    from typer.testing import CliRunner
+
+    from radar.cli import app as cli
+
+    _o_dia_28_de_verdade()
+
+    saida = CliRunner().invoke(cli, ["hoje", "--data", "2026-09-28"],
+                               env={"COLUMNS": "200"})
+
+    assert saida.exit_code == 0, saida.output
+    assert ("Fiz hoje: 31 questões = 13 acertos + 8 erros "
+            "+ 10 de treino de IA") in saida.output
+    assert "Treino de IA: 7 de 10 (70%), fora do acerto" in saida.output

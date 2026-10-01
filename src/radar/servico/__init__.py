@@ -125,6 +125,8 @@ from radar.servico import extra         # noqa: F401 - usado pela web
 from radar.servico import semanas       # noqa: F401 - usado pela web
 # O progresso por materia do edital. `servico.materias.montar()`.
 from radar.servico import materias      # noqa: F401 - usado pela web
+# A fonte unica da contagem: questao, acerto, erro. `servico.metricas.do_dia(...)`.
+from radar.servico import metricas      # noqa: F401 - usado pela web e CLI
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

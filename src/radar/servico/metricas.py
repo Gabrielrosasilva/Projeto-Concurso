@@ -156,10 +156,10 @@ def frase_da_conta(numeros: Numeros) -> str:
 
 
 def frase_da_ia(numeros: Numeros) -> str | None:
-    """O segundo numero: "treino de IA: 7 de 10 (70%), fora do acerto"."""
+    """O segundo numero: "Treino de IA: 7 de 10 (70%), fora do acerto"."""
     if not numeros.ia:
         return None
-    return (f"treino de IA: {numeros.ia_acertos} de {numeros.ia} "
+    return (f"Treino de IA: {numeros.ia_acertos} de {numeros.ia} "
             f"({numeros.porcentagem_ia}%), fora do acerto")
 
 

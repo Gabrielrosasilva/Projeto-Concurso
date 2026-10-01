@@ -949,28 +949,26 @@
     </div>
     <p class="ds-cartao__meta">O que eu anoto aqui é o diário do cronograma: não entra em nenhum acerto medido do radar.</p>
 
-    {# O total do dia, somado sozinho: as faixas que eu marquei, o estudo extra
-       e o que eu respondi dentro do radar. Era isto que eu somava de cabeça - e
-       quase sempre esquecia os extras. #}
+    {# O total do dia vem do servico.metricas, a fonte unica: as faixas que eu
+       marquei, o estudo extra e o que eu respondi no radar. A linha mostra os
+       estados que somam o total, para ela fechar a conta na frente de quem le. #}
     {% if tt and not tt.vazio %}
       <p class="fiz-hoje">
-        <b>Fiz hoje:</b> {{ tt.total.questoes }} questões
-        {%- if tt.total.medidas %} · {{ tt.total.acertos }} acertos ·
-          {{ tt.total.erros }} erros{% endif %}
+        <b>Fiz hoje:</b> {{ frase_da_conta(tt.total) }}
         {%- if tt.minutos %} · {{ duracao(tt.minutos) }} de estudo
-          {%- if tt.plano.minutos and tt.extra.minutos %}
-            ({{ duracao(tt.plano.minutos) }} do plano + {{ duracao(tt.extra.minutos) }} extra)
+          {%- if tt.faixas.minutos and tt.extra.minutos %}
+            ({{ duracao(tt.faixas.minutos) }} do plano + {{ duracao(tt.extra.minutos) }} extra)
           {%- endif %}
         {%- endif %}
       </p>
       {% if tt.radar.medidas and tt.anotado.medidas %}
         <p class="fiz-de-onde">
-          {{ selo('calculado') }} radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
+          {{ selo('calculado') }} medido no radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
           anotado: {{ tt.anotado.porcentagem }}% em {{ tt.anotado.medidas }}
         </p>
       {% endif %}
-      {% if tt.geradas %}
-        <p class="fiz-de-onde ds-suave">{{ tt.geradas }} questão(ões) de IA hoje: contam no volume, nunca no acerto.</p>
+      {% if tt.total.ia %}
+        <p class="fiz-de-onde ds-suave">{{ selo('ia') }} {{ frase_da_ia(tt.total) }}: conta no volume.</p>
       {% endif %}
       {% if tt.total.erros %}
         <p class="links">
@@ -1009,14 +1007,6 @@
       </fieldset>
     </form>
 
-    {# Os numeros antigos, digitados a mao antes da etapa E2. Ficam a vista
-       porque eles valem: era o que eu sabia na epoca. #}
-    {% if r and (r.questoes_feitas is not none or r.acertos is not none) %}
-      <p class="ds-pequeno ds-suave">
-        Gravado neste dia: {{ r.questoes_feitas if r.questoes_feitas is not none else '—' }} questões
-        {%- if r.acertos is not none %}, {{ r.acertos }} acertos{% endif %}.
-      </p>
-    {% endif %}
   </section>
 
   {# ============================ estudo extra ========================== #}

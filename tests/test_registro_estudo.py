@@ -35,20 +35,32 @@ def _marcar(plano, data=SEG, meta="ideal", *args, **kwargs):
 # --- criar e atualizar -------------------------------------------------------
 
 def test_cria_o_registro(banco_temporario, plano):
-    _marcar(plano, SEG, "ideal", 25, 18, "rendeu")
+    _marcar(plano, SEG, "ideal", "rendeu")
     (r,) = registros(SEG, SEG).values()
-    assert (r.data, r.meta, r.questoes_feitas, r.acertos, r.anotacao) == (
-        SEG, "ideal", 25, 18, "rendeu")
+    assert (r.data, r.meta, r.anotacao) == (SEG, "ideal", "rendeu")
+    # O registro nao guarda mais numero: o do dia e calculado (Etapa 1C).
+    assert (r.questoes_feitas, r.acertos) == (None, None)
     assert r.anotado_em.tzinfo is not None
 
 
+def test_salvar_a_meta_nao_apaga_a_copia_antiga(banco_temporario, plano):
+    """O 28/09 tem "31 questoes, 13 acertos" gravado. Salvar a meta de novo
+    nao pode apagar isso: a 1D confere essas copias antes de qualquer coisa."""
+    with sessao() as s:
+        s.add(RegistroDoDia(data=SEG, meta="reduzida", questoes_feitas=31,
+                            acertos=13))
+    _marcar(plano, SEG, "minima")
+    (r,) = registros(SEG, SEG).values()
+    assert (r.meta, r.questoes_feitas, r.acertos) == ("minima", 31, 13)
+
+
 def test_marcar_de_novo_atualiza_em_vez_de_duplicar(banco_temporario, plano):
-    _marcar(plano, SEG, "ideal", 25, 18)
-    _marcar(plano, SEG, "reduzida", 15, 10)
+    _marcar(plano, SEG, "ideal", "primeira")
+    _marcar(plano, SEG, "reduzida", "segunda")
     achados = registros(date(2026, 9, 1), date(2026, 12, 31))
     assert list(achados) == [SEG]
     assert achados[SEG].meta == "reduzida"
-    assert achados[SEG].questoes_feitas == 15
+    assert achados[SEG].anotacao == "segunda"
 
 
 def test_registros_respeita_o_intervalo(banco_temporario, plano):
@@ -64,15 +76,9 @@ def test_hoje_pode_ser_marcado(banco_temporario, plano):
 
 # --- as recusas --------------------------------------------------------------
 
-@pytest.mark.parametrize("args, kwargs, texto", [
-    (("otima",), {}, "Meta 'otima'"),
-    (("ideal", 10, 11), {}, "maior que questões feitas"),
-    (("ideal", -1), {}, "negativo"),
-    (("ideal", 10, -2), {}, "negativo"),
-])
-def test_recusa_valor_errado(banco_temporario, plano, args, kwargs, texto):
-    with pytest.raises(RegistroInvalido, match=texto):
-        registrar(SEG, *args, plano=plano, hoje=HOJE, **kwargs)
+def test_recusa_meta_que_nao_existe(banco_temporario, plano):
+    with pytest.raises(RegistroInvalido, match="Meta 'otima'"):
+        registrar(SEG, "otima", plano=plano, hoje=HOJE)
 
 
 def test_recusa_data_futura(banco_temporario, plano):
@@ -87,7 +93,7 @@ def test_recusa_data_fora_do_plano(banco_temporario, plano):
 
 def test_recusa_nao_grava_nada(banco_temporario, plano):
     with pytest.raises(RegistroInvalido):
-        _marcar(plano, SEG, "ideal", 10, 11)
+        _marcar(plano, SEG, "otima")
     assert registros(SEG, SEG) == {}
 
 
@@ -100,7 +106,11 @@ def _apagar_do_banco():
 
 def test_exportar_e_importar_ida_e_volta(banco_temporario, plano, tmp_path):
     arquivo = tmp_path / "registro_estudo.json"
-    _marcar(plano, SEG, "ideal", 25, 18, "rendeu")
+    with sessao() as s:
+        # Um registro antigo, com a copia do numero: ela continua indo e
+        # voltando pelo JSON, mesmo sem aparecer mais na tela.
+        s.add(RegistroDoDia(data=SEG, meta="ideal", questoes_feitas=25,
+                            acertos=18, anotacao="rendeu"))
     _marcar(plano, HOJE, "minima")
 
     assert acervo.exportar_registros(arquivo) == 2
@@ -182,7 +192,7 @@ def test_registrar_o_dia_nao_muda_o_desempenho(banco_temporario, plano):
 
     antes = servico.desempenho()
     evolucao_antes = servico.evolucao()
-    _marcar(plano, SEG, "ideal", 100, 100)
+    _marcar(plano, SEG, "ideal")
     assert servico.desempenho() == antes
     assert servico.evolucao() == evolucao_antes
     assert antes[0].respondidas == 2
@@ -200,10 +210,18 @@ def test_comando_marca_e_mostra(banco_temporario, tmp_path, monkeypatch):
 
     runner = CliRunner()
     saida = runner.invoke(app, ["hoje", "--data", "2026-09-28", "--marcar", "ideal",
-                                "--feitas", "25", "--acertos", "18"])
+                                "--feitas", "25", "--acertos", "18",
+                                "--minutos", "50"], env={"COLUMNS": "200"})
     assert saida.exit_code == 0, saida.output
+    assert "Anotado como estudo extra." in saida.output
     assert "Marcado." in saida.output
-    assert "Ideal · 25 questões feitas, 18 acertos" in saida.output
+    # O numero digitado virou estudo extra, e o "Fiz hoje" o conta como anotado.
+    assert "Fiz hoje: 25 questões = 18 acertos + 7 erros" in saida.output
+    (extra,) = servico.extra.do_dia(SEG)
+    assert (extra.questoes, extra.acertos, extra.minutos, extra.onde) == (
+        25, 18, 50, "qconcursos")
+    (r,) = registros(SEG, SEG).values()
+    assert (r.meta, r.questoes_feitas, r.acertos) == ("ideal", None, None)
 
     # Sem --marcar, mostra o que ja esta anotado.
     assert "Como foi:" in runner.invoke(app, ["hoje", "--data", "2026-09-28"]).output
@@ -211,6 +229,12 @@ def test_comando_marca_e_mostra(banco_temporario, tmp_path, monkeypatch):
     recusa = runner.invoke(app, ["hoje", "--data", "2026-09-28", "--marcar", "otima"])
     assert recusa.exit_code == 1
     assert "Nao marquei" in recusa.output
+
+    # Questao sem minutos nao vira estudo extra: a regra do extra continua.
+    sem_tempo = runner.invoke(app, ["hoje", "--data", "2026-09-28", "--feitas", "10"])
+    assert sem_tempo.exit_code == 1
+    assert "Faltou --minutos" in sem_tempo.output
+    assert len(servico.extra.do_dia(SEG)) == 1
 
 
 def test_tabela_nova_entra_em_banco_antigo(tmp_path, monkeypatch):

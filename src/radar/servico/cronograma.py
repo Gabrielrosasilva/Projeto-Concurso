@@ -1,11 +1,10 @@
 """O diario do cronograma: como foi cada dia, anotado a mao.
 
 A meta do dia e uma das quatro do plano - ideal, reduzida, minima, ou nao
-fiz. Questoes feitas e acertos sao o que EU digito, e a maior parte vem do
-Qconcursos: por isso ficam aqui, numa tabela so deles, e NAO entram em
-acerto medido nenhum do radar. O Meu foco, o Onde estudar e a home contam so
-o que eu respondi dentro do radar, questao por questao; somar um numero
-digitado a mao ali misturaria medida com lembranca.
+fiz. O registro do dia guarda so a meta e o recado: o numero do dia e
+CALCULADO, das faixas, dos extras e do radar, pelo `servico.metricas` - o
+unico lugar que conta questao (Etapa 1C). O Meu foco, o Onde estudar e a home
+contam so o que eu respondi dentro do radar, e dizem isso na tela.
 """
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta, timezone
@@ -44,14 +43,18 @@ def hoje_local() -> date:
 def registrar(
     data: date,
     meta: str,
-    questoes_feitas: int | None = None,
-    acertos: int | None = None,
     anotacao: str | None = None,
     *,
     plano: plano_de_estudo.Plano | None = None,
     hoje: date | None = None,
 ) -> RegistroDoDia:
-    """Cria ou atualiza o registro daquela data.
+    """Cria ou atualiza o registro daquela data: a meta e o recado.
+
+    Nao guarda numero nenhum (Etapa 1C). Antes, salvar a meta gravava uma
+    COPIA do total do dia, e a tela mostrava as duas - o calculado e a copia
+    -, que divergem no dia em que eu corrijo uma faixa. As copias ja gravadas
+    ficam no banco e no JSON como estao: nada e apagado, so deixam de ser o
+    numero do dia. A 1D confere uma a uma.
 
     `plano` e `hoje` existem para o teste: o ciclo real comeca no futuro, e
     sem eles nenhum teste conseguiria marcar um dia "passado" do plano.
@@ -60,16 +63,6 @@ def registrar(
         raise RegistroInvalido(
             f"Meta {meta!r} não existe. Use uma destas: {', '.join(METAS)}"
         )
-    for nome, valor in (("questões feitas", questoes_feitas), ("acertos", acertos)):
-        if valor is not None and valor < 0:
-            raise RegistroInvalido(f"{nome.capitalize()} não pode ser negativo ({valor})")
-    if acertos is not None:
-        if questoes_feitas is None:
-            raise RegistroInvalido("Acertos sem questões feitas: diga quantas fez")
-        if acertos > questoes_feitas:
-            raise RegistroInvalido(
-                f"Acertos ({acertos}) maior que questões feitas ({questoes_feitas})"
-            )
 
     hoje = hoje or hoje_local()
     if data > hoje:
@@ -89,8 +82,6 @@ def registrar(
             registro = RegistroDoDia(data=data)
             s.add(registro)
         registro.meta = meta
-        registro.questoes_feitas = questoes_feitas
-        registro.acertos = acertos
         registro.anotacao = anotacao
         registro.anotado_em = agora()
     return registro
@@ -106,27 +97,10 @@ def registrar_o_dia(
 ) -> RegistroDoDia:
     """O "Como foi o dia" da tela: eu escolho a meta, o radar faz a conta.
 
-    Os campos "questoes feitas" e "acertos" sairam da tela nesta etapa. Eram
-    eles que faziam o diario nao bater com o que eu tinha feito de verdade: eu
-    somava de cabeca, e quase sempre esquecia os extras. Agora o numero vem dos
-    checks das faixas, dos extras e do que eu respondi no radar.
-
-    Registro antigo, com numero digitado, continua valendo como esta: ele so
-    muda se eu salvar o dia de novo.
+    A conta nao e gravada: ela e feita na hora pelo `servico.metricas`, das
+    faixas, dos extras e do que eu respondi no radar.
     """
-    plano = plano or plano_de_estudo.carregar()
-    nivel = nivel_do_dia(plano, data)
-    dia = plano_de_estudo.montar_dia(plano, data, nivel.efetivo)
-    totais = totais_do_dia(dia, estado_do_dia(data), data)
-    somado = totais.total
-    return registrar(
-        data, meta,
-        questoes_feitas=somado.questoes or None,
-        acertos=somado.acertos if somado.medidas else None,
-        anotacao=anotacao,
-        plano=plano,
-        hoje=hoje,
-    )
+    return registrar(data, meta, anotacao, plano=plano, hoje=hoje)
 
 
 def registros(inicio: date, fim: date) -> dict[date, RegistroDoDia]:
@@ -779,7 +753,8 @@ class TelaDoDia:
     sugestao: object = None
     # O que esta anotado em cada faixa feita, por posicao: fiz, acertei, minutos.
     valores: dict = field(default_factory=dict)
-    # O estudo extra do dia, e os totais somados (plano + extra + radar).
+    # O estudo extra do dia, e a conta dele (`metricas.Conta`: faixas + extra
+    # + radar + treino de IA), da fonte unica.
     extras: list = field(default_factory=list)
     totais: object = None
     # O Plano B ativo (30 ou 60 minutos), e as opcoes que o botao oferece.
@@ -1070,11 +1045,19 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
         tela.sugestao = sugerir_meta(do_plano_b, tela.feitas)
         tela.sugestao.meta = "minima"
         tela.extras = estudo_extra.do_dia(data)
-        tela.totais = totais_do_dia(do_plano_b, estado, data, tela.extras)
+        tela.totais = _conta_do_dia(data, plano)
         return tela
     tela.feitas = faixas_feitas(dia, estado)
     tela.valores = valores_das_faixas(dia, estado)
     tela.sugestao = sugerir_meta(dia, tela.feitas)
     tela.extras = estudo_extra.do_dia(data)
-    tela.totais = totais_do_dia(dia, estado, data, tela.extras)
+    tela.totais = _conta_do_dia(data, plano)
     return tela
+
+
+def _conta_do_dia(data: date, plano):
+    """O "Fiz hoje", pelo `metricas` - importado aqui dentro porque ele le
+    as faixas por este modulo, e os dois se importando no topo dariam um
+    ciclo."""
+    from radar.servico import metricas
+    return metricas.do_dia(data, plano)

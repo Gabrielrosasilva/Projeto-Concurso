@@ -348,9 +348,7 @@ def test_a_tela_mostra_a_linha_do_total(cliente):
         "minutos": "30", "questoes": "20", "acertos": "16", "onde": "qconcursos"})
 
     texto = cliente.get("/hoje?data=2026-09-28").text
-    assert "Fiz hoje:</b> 35 questões" in texto
-    assert "27 acertos" in texto
-    assert "8 erros" in texto
+    assert "Fiz hoje:</b> 35 questões = 27 acertos + 8 erros" in texto
     assert "do plano + 30 min extra" in texto
     # Com erro no dia, o atalho para o caderno da etapa E1.
     assert "anotar os erros" in texto

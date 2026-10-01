@@ -139,8 +139,9 @@ def test_registrar_grava_e_volta_para_o_dia(cliente, monkeypatch):
 
     (r,) = servico.cronograma.registros(
         datetime(2026, 9, 28).date(), datetime(2026, 9, 28).date()).values()
-    # Os numeros vieram da faixa que eu anotei, e nao de um campo digitado.
-    assert (r.meta, r.questoes_feitas, r.acertos, r.anotacao) == ("ideal", 25, 18, "rendeu")
+    # O registro guarda a meta e o recado; o numero vem da faixa, na hora.
+    assert (r.meta, r.questoes_feitas, r.acertos, r.anotacao) == (
+        "ideal", None, None, "rendeu")
 
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert "Editar o registro de 28/09" in texto

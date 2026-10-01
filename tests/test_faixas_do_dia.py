@@ -285,8 +285,9 @@ def test_o_formulario_sugere_e_soma_sem_marcar(cliente):
     assert "Fiz hoje:</b> 25 questões" in texto
 
 
-def test_o_registro_salvo_guarda_o_numero_calculado(cliente):
-    """Salvar a meta grava os totais do dia; a tela nao pede numero nenhum."""
+def test_o_registro_salvo_guarda_so_a_meta(cliente):
+    """Salvar a meta nao grava copia do total (Etapa 1C): o numero do dia e
+    calculado na hora, e a tela mostra um so."""
     faixa = _faixa_real(SEG, "noite", 0)
     cliente.post("/hoje/faixa/questoes", data={
         "data": "2026-09-28", "bloco": "noite", "indice": "0",
@@ -294,10 +295,11 @@ def test_o_registro_salvo_guarda_o_numero_calculado(cliente):
     cliente.post("/hoje/registrar", data={"data": "2026-09-28", "meta": "minima"})
 
     (r,) = servico_do_dia.registros(SEG, SEG).values()
-    assert (r.questoes_feitas, r.acertos) == (12, 9)
+    assert (r.meta, r.questoes_feitas, r.acertos) == ("minima", None, None)
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert 'name="questoes_feitas"' not in texto
-    assert "Gravado neste dia: 12 questões, 9 acertos." in texto
+    assert "Gravado neste dia" not in texto
+    assert "Fiz hoje:</b> 12 questões = 9 acertos + 3 erros" in texto
 
 
 # --- o comando ---------------------------------------------------------------

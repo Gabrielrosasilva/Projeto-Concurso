@@ -111,6 +111,10 @@ templates.env.filters["municipio"] = regioes.nome_canonico
 # inscricoes_abertas -> encerrado"); na tela vira frase. Banco nao muda.
 templates.env.filters["evento"] = linha_do_tempo.para_tela
 templates.env.filters["tipo_do_evento"] = linha_do_tempo.rotulo_do_tipo
+# A linha "N questoes = acertos + erros + ..." sai do servico.metricas, a
+# fonte unica: a tela e o `radar hoje` escrevem a mesma frase.
+templates.env.globals["frase_da_conta"] = servico.metricas.frase_da_conta
+templates.env.globals["frase_da_ia"] = servico.metricas.frase_da_ia
 # Numero com virgula, como se escreve em portugues. A mesma funcao que monta a
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.

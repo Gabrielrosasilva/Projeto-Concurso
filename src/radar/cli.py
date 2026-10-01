@@ -2140,8 +2140,12 @@ def hoje(
     marcar: str = typer.Option(
         None, help="Como foi o dia: ideal, reduzida, minima ou nao_fiz",
     ),
-    feitas: int = typer.Option(None, help="Questoes feitas (anotadas a mao)"),
+    feitas: int = typer.Option(
+        None, help="Questoes feitas fora do radar (vira estudo extra; pede --minutos)",
+    ),
     acertos: int = typer.Option(None, help="Acertos nessas questoes"),
+    minutos: int = typer.Option(None, help="Minutos gastos nessas questoes"),
+    materia: str = typer.Option(None, help="Materia dessas questoes (opcional)"),
     anotacao: str = typer.Option(None, help="Um recado sobre o dia"),
     plano_b: int = typer.Option(
         None, "--plano-b", help="Mostra o Plano B do dia: 30 ou 60 (minutos)",
@@ -2149,8 +2153,9 @@ def hoje(
 ) -> None:
     """O que estudar no dia, com horario, materia e questoes.
 
-    Com --marcar, anota como foi o dia. Esses numeros sao o diario do
-    cronograma: NAO entram em acerto medido nenhum do radar.
+    Com --marcar, anota a meta do dia. Com --feitas (e --minutos), anota
+    questoes feitas fora do radar como estudo extra: elas entram no "Fiz hoje"
+    como anotado, e em acerto medido nenhum do radar.
     """
     try:
         quando = (date.fromisoformat(data) if data
@@ -2165,15 +2170,30 @@ def hoje(
         console.print(f"[red]Problema no config/cronograma.yml:[/] {erro}")
         raise typer.Exit(code=1)
 
+    # O numero digitado nao vai mais para o registro do dia (Etapa 1C): ele
+    # vira um estudo extra, e entra na conta do dia pela mesma porta da tela.
+    if feitas is not None or acertos is not None:
+        if minutos is None:
+            console.print("[red]Faltou --minutos:[/] questao anotada vira estudo "
+                          "extra, e estudo sem tempo nao e estudo.")
+            raise typer.Exit(code=1)
+        try:
+            servico.extra.anotar(data=quando, o_que="questoes", materia=materia,
+                                 minutos=minutos, questoes=feitas, acertos=acertos,
+                                 onde="qconcursos", plano=plano)
+        except servico.extra.RegistroInvalido as erro:
+            console.print(f"[red]Nao anotei:[/] {erro}")
+            raise typer.Exit(code=1)
+        console.print("[green]Anotado como estudo extra.[/]")
+
     if marcar:
         try:
-            servico.cronograma.registrar(quando, marcar, feitas, acertos,
-                                         anotacao, plano=plano)
+            servico.cronograma.registrar(quando, marcar, anotacao, plano=plano)
         except servico.cronograma.RegistroInvalido as erro:
             console.print(f"[red]Nao marquei:[/] {erro}")
             raise typer.Exit(code=1)
         console.print("[green]Marcado.[/]")
-    elif feitas is not None or acertos is not None or anotacao:
+    elif anotacao:
         console.print("[red]Faltou --marcar[/] (ideal, reduzida, minima ou nao_fiz).")
         raise typer.Exit(code=1)
 
@@ -2273,9 +2293,9 @@ def hoje(
         for linha_extra in extras:
             console.print("  " + escape(_extra_legivel(linha_extra)))
 
-    totais = servico.cronograma.totais_do_dia(dia, estado, quando, extras)
-    if not totais.vazio:
-        console.print(f"\n[bold]Fiz hoje:[/] {escape(_totais_legiveis(totais))}")
+    conta = servico.metricas.do_dia(quando, plano)
+    if not conta.vazio:
+        console.print(f"\n[bold]Fiz hoje:[/] {escape(_totais_legiveis(conta))}")
 
     registro = servico.cronograma.registros(quando, quando).get(quando)
     if registro:
@@ -2337,41 +2357,33 @@ def _extra_legivel(extra) -> str:
     return " · ".join(partes)
 
 
-def _totais_legiveis(totais) -> str:
-    """A mesma linha da tela: volume, acerto e de onde ele vem."""
-    somado = totais.total
-    partes = [f"{somado.questoes} questões"]
-    if somado.medidas:
-        partes.append(f"{somado.acertos} acertos")
-        partes.append(f"{somado.erros} erros")
-    if totais.minutos:
+def _totais_legiveis(conta) -> str:
+    """A mesma linha da tela, pelas mesmas frases do `servico.metricas`."""
+    partes = [servico.metricas.frase_da_conta(conta.total)]
+    if conta.minutos:
         de_onde = []
-        if totais.plano.minutos:
-            de_onde.append(f"{cronograma.duracao_legivel(totais.plano.minutos)} do plano")
-        if totais.extra.minutos:
-            de_onde.append(f"{cronograma.duracao_legivel(totais.extra.minutos)} extra")
-        tempo = cronograma.duracao_legivel(totais.minutos) + " de estudo"
+        if conta.faixas.minutos:
+            de_onde.append(f"{cronograma.duracao_legivel(conta.faixas.minutos)} do plano")
+        if conta.extra.minutos:
+            de_onde.append(f"{cronograma.duracao_legivel(conta.extra.minutos)} extra")
+        tempo = cronograma.duracao_legivel(conta.minutos) + " de estudo"
         if len(de_onde) > 1:
             tempo += " (" + " + ".join(de_onde) + ")"
         partes.append(tempo)
     linha = " · ".join(partes)
-    if totais.radar.medidas and totais.anotado.medidas:
-        linha += (f"\n  radar: {totais.radar.porcentagem}% em "
-                  f"{totais.radar.medidas} · anotado: "
-                  f"{totais.anotado.porcentagem}% em {totais.anotado.medidas}")
-    if totais.geradas:
-        linha += (f"\n  {totais.geradas} questão(oes) de IA: contam no volume, "
-                  f"nunca no acerto")
+    if conta.radar.medidas and conta.anotado.medidas:
+        linha += (f"\n  medido no radar: {conta.radar.porcentagem}% em "
+                  f"{conta.radar.medidas} · anotado: "
+                  f"{conta.anotado.porcentagem}% em {conta.anotado.medidas}")
+    if conta.total.ia:
+        linha += f"\n  {servico.metricas.frase_da_ia(conta.total)}: conta no volume"
     return linha
 
 
 def _registro_legivel(registro) -> str:
+    """A meta e o recado. O numero do dia e o "Fiz hoje", calculado: a copia
+    que o registro antigo guardava nao aparece mais (Etapa 1C)."""
     partes = [META_LEGIVEL.get(registro.meta, registro.meta)]
-    if registro.questoes_feitas is not None:
-        feitas = f"{registro.questoes_feitas} questões feitas"
-        if registro.acertos is not None:
-            feitas += f", {registro.acertos} acertos"
-        partes.append(feitas)
     partes.append(f"anotado em {formatar_data(registro.anotado_em)}")
     texto = escape(" · ".join(partes))
     if registro.anotacao:
