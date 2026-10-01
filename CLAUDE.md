@@ -1,14 +1,14 @@
 # CLAUDE.md
-
 Contexto permanente deste projeto, lido pelo Claude Code em toda sessao aberta
 nesta pasta. Curto de proposito (teto de 150 linhas). O que nao cabe aqui:
 
-- **[docs/decisoes.md](docs/decisoes.md)** — decisoes ja tomadas, com o motivo.
-  Nao precisam ser rediscutidas. **Decisao que mudar, atualize la.**
-- **[docs/especificacao.md](docs/especificacao.md)** — o redesign em andamento;
-  leia antes de mexer em tela ou em dado de estudo.
-- **[docs/historico.md](docs/historico.md)** — como cada fase foi feita;
-  **[README.md](README.md)** — o que e, como instalar e usar no dia a dia.
+- **[docs/decisoes.md](docs/decisoes.md)** — decisoes ja tomadas, com o motivo;
+  nao se rediscutem. **Decisao que mudar, atualize la.**
+- **[docs/pendencias.md](docs/pendencias.md)** — o que falta, o que esta
+  quebrado e o que ficou combinado. **Leia antes de propor etapa.**
+- **[docs/especificacao.md](docs/especificacao.md)** — o redesign; leia antes de
+  mexer em tela ou em dado de estudo. **[docs/historico.md](docs/historico.md)**
+  — como cada fase foi feita. **[README.md](README.md)** — instalar e usar.
 
 ## O que e
 
@@ -21,15 +21,14 @@ Prioridade: funcionar e ser facil de manter sozinho.
 Analista de infraestrutura/SRE. Domino Linux, Docker, Kubernetes, Terraform,
 GitLab CI, GitHub Actions, AWS e OCI, shell script, SQL e Java. **Nao tenho
 pratica em Python** — e a linguagem escolhida aqui justamente para aprender.
-
 Por causa disso:
-- prefira o jeito simples e legivel ao jeito esperto;
-- prefira biblioteca padrao quando a diferenca for pequena;
-- nao introduza abstracao nova sem necessidade concreta;
-- comentario explica **por que**, nao o que a linha faz.
+- prefira o jeito simples e legivel ao esperto, e a biblioteca padrao quando a
+  diferenca for pequena;
+- nao introduza abstracao sem necessidade concreta; comentario explica **por
+  que**, nao o que a linha faz.
 
-Escreva comentarios, commits e texto de interface em **portugues**. Nomes de
-variaveis, funcoes e arquivos tambem — o codigo ja segue isso.
+Comentarios, commits, texto de interface e nomes de variaveis, funcoes e
+arquivos: em **portugues** — o codigo ja segue isso.
 
 ## O que eu procuro num concurso
 
@@ -96,18 +95,17 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (detalhe no [historico](docs/historico.md) e nas [decisoes](docs/decisoes.md))
+## Estado atual (01/10/2026; detalhe no [historico](docs/historico.md))
 
-**Pronto:** o radar (fases 1-15 do historico) e, da especificacao, a auditoria,
-o design system com os 6 selos, a navegacao de 7 destinos e a home de 3 blocos,
-tela de questao e relatorio, so meus erros, compilado 40/50/100 pelos pesos do
-edital, revisao espacada 1-7-30, descartar simulado, backup dos simulados, IA
-sem pagar (`gerar --pedido`), Macetes e a tela Hoje do Ciclo 1 com a Parte A
-(checks, Plano B, cronometro - o unico JS -, sequencia, escuro, `web --rede`).
-**Falta:** conferir `config/leis.yml`, a Parte B (as outras telas no design
-system), importar macete e explicacao, assunto no Direito, cronograma por IA.
-Acervo: 8.433 questoes (3.372 enunciados, 10 anuladas), sem assunto gravado nem
-resposta dada. Arvore no [README](README.md); banco em `data/radar.db`.
+**Pronto:** o radar (fases 1-15), a especificacao (design system, home, erros,
+compilado, revisao 1-7-30, Macetes, `gerar --pedido`) e o **Ciclo 1 de estudo,
+rodando desde 28/09** (`config/cronograma.yml`: tela Hoje, cronometro - o unico
+JS -, caderno de erros, Semanas, Minhas materias; automacao no Windows).
+Acervo: 8.433 questoes, sem assunto gravado; 40 geradas, todas `do_zero`.
+**Quebrado:** o GitHub Actions, vermelho desde 26/09 (a coleta diaria nao roda).
+**Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
+CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
+no [README](README.md); banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
@@ -133,7 +131,9 @@ Nao existe API oficial unica de concursos no Brasil.
 - **commit e push ao fim de cada etapa**, nunca deixando trabalho so no disco;
 - **se uma decisao mudar, atualize `docs/decisoes.md`** na mesma etapa;
 - **uma coisa por vez.** Uma mudanca, testada, e so entao a proxima. Nao
-  refatore o que nao faz parte do pedido;
+  refatore o que nao faz parte do pedido. **Uma conversa por etapa:** ao fim,
+  atualize os docs e o "Estado atual";
+- **teste nunca depende do Windows nem da data de hoje** (o Actions e Linux);
 - **questao gerada por IA TREINA, nunca MEDE**: vive em `questoes_geradas`,
   fora de tudo que conta o que a banca cobra, e o acerto nela e um segundo
   numero - nunca somado ao das reais;

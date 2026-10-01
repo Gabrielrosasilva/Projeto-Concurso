@@ -2151,3 +2151,54 @@ O resto do que decidi aqui:
 - **o grafico e SVG desenhado no servidor.** Semana sem questao sem consulta nao
   vira ponto: a linha pula, em vez de fingir um zero que eu nao tirei. Com menos
   de dois pontos nao ha grafico - dois pontos e o minimo de uma linha.
+
+## De 28/09 a 01/10/2026: o primeiro dia de estudo, o Actions e o jeito de trabalhar
+
+- **Guarda Municipal de Florianopolis e de Balneario Camboriu continuam com o
+  👀, sem sirene (cancela a "C1b").** Eu so quero ficar sabendo quando sair
+  edital, e o `de_olho` ja faz isso: fura o teto de avisos e ganha cartao na
+  home. A sirene e o nivel do alvo principal (o concurso que eu espero ha anos)
+  e dar a ela um segundo uso apagaria a diferenca que ela existe para marcar;
+- **teste nao depende do sistema operacional nem da data de hoje.** O GitHub
+  Actions e o unico lugar que roda em Linux e com a data de verdade, e la
+  quebraram tres testes que passavam no meu Windows: um comparava o executavel
+  com `pythonw.exe` (no Linux nao existe), um assumia 28/09 como futuro e um
+  tinha a data fixa de 17/09, que sai da janela de 30 dias de novidade e falha
+  em torno de 17/10. A regra: o teste compara com a funcao do proprio modulo
+  (`python_sem_janela()`), fixa o relogio (`agora_local`) ou usa data relativa a
+  `agora()`. Conferido rodando a suite inteira com o relogio simulado em
+  20/10/2026, 10/11/2026 e 15/03/2027. A lib de relogio simulado so foi usada
+  fora do repositorio, para auditar; nao virou dependencia;
+- **a profundidade de estudo de cada tema tem que seguir o que a FEPESE cobra
+  de verdade, e nao so o edital de 2019.** Foi o que eu decidi no primeiro dia
+  do Ciclo 1, ao ver a faixa de teoria de 50 minutos para "Aplicacao da lei
+  penal (arts. 1o a 12)", sem nenhuma indicacao de quanto a banca cobra cada
+  artigo. O cronograma atual foi montado pelo conteudo e pelo peso das materias
+  no edital; a incidencia por tema nunca foi medida, porque as questoes do
+  acervo nao tem assunto gravado (0 questoes de Direito com assunto, desde a
+  etapa 15-0). Tema que a banca nunca cobriu deve ser leitura por cima, e a
+  tela deve dizer isso com o numero. **Direcao decidida, desenho em aberto**
+  (pendencias.md, bloco B);
+- **a lei seca de 40 minutos por dia, como esta, vai mudar.** Sao 30 faixas
+  (cerca de 20 horas) de ler o artigo inteiro grifando "salvo", "somente",
+  "vedado", sem saber quais artigos caem. A leitura certa e a dos artigos que a
+  banca cobrou, do jeito que cobrou. O formato novo nao foi decidido;
+- **questao gerada so e boa quando parte de questao real.** O modo `variacao`
+  (muda o cenario, mantem a regra e o gabarito oficial da questao de origem) e
+  o seguro; o `do_zero` e excecao, para assunto sem nenhuma questao real. Sem
+  assunto gravado no Direito, as 40 questoes geradas ate hoje sao todas
+  `do_zero`: imitam o estilo da banca, mas nenhuma esta ancorada num gabarito
+  oficial. Continuam treinando e nunca medindo (regra que ja valia). Gravar o
+  assunto e o que destrava o `variacao`;
+- **uma conversa por etapa, e o estado mora no repositorio.** Cada mensagem
+  reenvia a conversa inteira; o cache de prompt barateia a parte repetida mas
+  expira se eu paro um tempo e nao sobrevive a troca de modelo; e conversa
+  muito longa e resumida sozinha, perdendo detalhe. Por isso: termina a etapa,
+  commit, `/clear`, e o chat novo comeca lendo o `CLAUDE.md` e os docs. Toda
+  etapa fecha atualizando `historico.md` (o que foi feito), `decisoes.md` (o
+  que foi decidido e por que), `pendencias.md` (o que sobrou) e o "Estado
+  atual" do `CLAUDE.md`. Resumo colado no chat novo e a pior opcao: custa token
+  de novo, envelhece e depende de eu lembrar de colar;
+- **modelo: o mais forte para analisar e decidir, o mais barato para etapa
+  mecanica, escolhido no inicio da conversa e sem trocar no meio** (a troca
+  perde o cache).

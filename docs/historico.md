@@ -1162,3 +1162,149 @@ porque barra e uma medida e a medida e justamente o que falta.
 Numeros depois de zerar: 0 questoes com assunto de Direito, 108 questoes das
 minhas provas sem assunto (eram 15), e 12 barras no grafico, todas de Portugues
 e Raciocinio Logico.
+
+---
+
+# De 25/09 a 01/10/2026: a especificacao, o cronograma e o primeiro dia de estudo
+
+Ate aqui o historico parou na etapa 15-0. O que veio depois estava so no git e
+no `decisoes.md`. Cada bloco abaixo diz o que foi feito e em qual commit; o
+**porque** de cada escolha esta em [decisoes.md](decisoes.md), e o que ficou
+aberto esta em [pendencias.md](pendencias.md).
+
+## A especificacao do redesign (25/09, fases 0 a 6)
+
+`afd4ae3` gravou `docs/especificacao.md` e o CLAUDE.md passou a apontar para
+ela. Uma fase por vez, cada uma com commit:
+
+- fase 0, auditoria (`0a5cf79`): `radar auditar` escreve `docs/auditoria.md`,
+  com a contagem por materia contra o quadro do edital, o gabarito definitivo e
+  as anuladas. Tudo bate nas tres provas; a ordem das materias de 2016 denuncia
+  um rotulo trocado (questoes 49-60). Na mesma rodada: backup dos simulados em
+  `data/simulados.json` e a prova de 2016 como reforco (nunca somada a 2013 e
+  2019). A tela `/auditoria` veio depois (`34cd6cf`);
+- IA sem pagar (`1360929`): `radar gerar --pedido` grava os pedidos em
+  `data/pedido_ia.json`, o Claude Code responde em `data/resposta_ia.json` e
+  `radar gerar --importar` confere e grava, com procedencia "Claude Code,
+  importado manualmente, em <data>";
+- fase 5, Central de Macetes (`78ea3ee`): um cartao por materia, com o selo
+  verde (padrao da banca, por contagem) separado do vermelho (macete de IA, com
+  fonte e procedencia). A lista de leis alteradas nao foi gravada;
+- fase 1, design system (`1ff4b41`, `1b5d40c`): `design.css` com tokens, os seis
+  selos como macro e o modo escuro; depois "nenhum numero sem fonte" em todas as
+  telas;
+- fase 2, navegacao e home (`35bfc34`): seis destinos e a home de tres blocos
+  (alvo, o que estudar agora, o que revisar), que cabe em 1366x680;
+- descartar simulado (`153db8b`), tela de questao e relatorio (`835efd3`),
+  "so meus erros" e o compilado de 40/50/100 pelos pesos do edital (`5ee1633`),
+  revisao espacada 1-7-30 com fator de tempo na prioridade (`214e94c`);
+- duas rodadas de acerto: o acumulado pela ultima resposta de cada questao
+  (`17207ad`) e um minimo de respostas so, 5 na materia e 3 no assunto
+  (`691c3a0`). `89d633a` reescreveu o "Estado atual" do CLAUDE.md.
+
+Acervo conferido no banco nessa data: 8.433 questoes, 3.372 enunciados, 10
+anuladas.
+
+## O cronograma do Ciclo 1 (26/09)
+
+Nasceu de uma conversa de estrategia fora do repositorio (perfil de estudo,
+FEPESE, edital de 2019) e de uma planilha. Primeira versao recusada pelo
+usuario, que pediu estudo especifico em tudo: duas horas de teoria de manha e
+questoes a tarde e a noite. O que entrou como dado em `config/cronograma.yml`:
+Ciclo 1 de 28/09 a 07/11/2026, 36 dias de estudo e 1.690 questoes.
+
+- `a507654`, `815f9fb`: o YAML como veio da planilha e `cronograma.py` (puro),
+  que confere o arquivo e calcula o horario de cada faixa a partir do inicio do
+  bloco, com a rampa por nivel de 1 a 6 em Direito e Portugues;
+- `f5eb720`: o diario (`radar hoje --marcar`, tabela `registros_de_estudo`,
+  copia em `data/registro_estudo.json`);
+- `dcbf107`: o gatilho que sobe, mantem ou desce o nivel da semana sozinho;
+- `2de0f0e`, `412a73f`: a tela Hoje na web, o cartao na home e a documentacao;
+- dois bugs do gatilho, os dois pegos na auditoria, olhando a tela: `fdde951` (o dia
+  visto em setembro usava 28/10 como "hoje" e dava nivel 1 com 45 questoes; o
+  "hoje" do gatilho passou a ser o menor entre o dia visto e o dia real) e
+  `d42c842` (a reduzida trazia o numero de Direito gravado, e nao o do nivel).
+  A primeira correcao foi pulada por engano uma vez; so a segunda rodada
+  fechou.
+
+## A Parte A: a tela Hoje como ela e (26/09)
+
+Escuro como padrao com botao na barra (`3d769da`); faixa azul no topo, coluna
+lateral e bloco das 22h em sobreaviso (`0cf0fcd`); circulo de "feita" em cada
+faixa e formulario que sugere a meta (`99b657f`); botao Plano B de 30 min ou 1
+hora, com o essencial do tema (`52a38aa`); cronometro com aviso em tela cheia,
+som e notificacao do Windows, o unico JavaScript do radar (`be49a77`); sequencia
+de dias sem zerar e a frase da semana (`e3f315a`); `radar web --rede` para o
+celular (`0285a85`); `radar descartar --vazios` (`4c3b6cf`); documentacao
+(`1404b09`).
+
+A notificacao do Windows nao apareceu de primeira. O que resolveu foi o botao
+"Testar em 10 s" e a linha de diagnostico no cartao (`95d5bad`), mais conferir
+as configuracoes de notificacao do Windows. Depois disso o balao aparece; falta
+so ativar a permissao no navegador (ver pendencias).
+
+## B1, C1, D1 e D2 (26 e 27/09)
+
+- `953e1ba` (B1): Simulado e Gerar questoes migrados para o `design.css`. So
+  estas duas foram feitas; seis telas ainda usam o CSS antigo (ver pendencias);
+- `3b0b249` (C1): o nome da SEJURI sozinho marcava alvo principal e dois
+  seletivos (CASE e medico) viraram aviso de alarme no Telegram. Agora, sem o
+  cargo no texto, o orgao exige "concurso publico" ou a banca das edicoes
+  anteriores, e nenhuma palavra de selecao. Os dois seletivos sairam; 2013, 2016
+  e 2019 continuam;
+- `303cac5` (D1): tudo automatico no Windows. `radar subir`, `parar`, `status`,
+  `agendar` e `backup`; duas tarefas no Agendador, "Radar - web" no logon e
+  "Radar - backup" as 23:30, no usuario e sem administrador, criadas por XML
+  para ligar o "executar assim que possivel". Nao e servico do Windows;
+- `9ca6c04` (D2): o mapa do ano (seis etapas) como bloco do `cronograma.yml` e
+  cartao na lateral da tela Hoje.
+
+## Fase E: o diario passa a medir (27/09)
+
+- `40add6a` (E1): o caderno de erros, com a regra certa obrigatoria e revisao
+  1-7-30 propria (`data/caderno_erros.json`);
+- `9a3dad0` (E2): acertos na propria faixa, o estudo extra e o total do dia
+  (`data/estudo_extra.json`); a meta usa so questao sem consulta; bloco
+  `materias` no YAML com as 11 materias do edital e a meta de 79 de 100;
+- `3efe4c2` (E3): a aba Semanas, agrupada pelos ciclos do mapa, com reflexao
+  da semana (`data/notas_semana.json`) e as mesmas contas do dia;
+- `3e225fb` (E4): a aba Minhas materias, com a projecao "se a prova fosse hoje".
+
+A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
+
+## O primeiro dia de estudo e o que ele mostrou (28/09 a 01/10)
+
+- `b206a31` (dados) e `c8609b5`: 20 questoes de treino sobre a aplicacao da lei
+  penal (CP, arts. 1 a 12), respondidas pelo Claude Code sem chave da API, pelo
+  fluxo `gerar --pedido` / `--importar`. O arquivo tem 40 questoes geradas, todas
+  em modo `do_zero`;
+- o fluxo de tres passos (pedido, resposta, importar) confundiu uma vez: o
+  usuario rodou o `--importar` sem a resposta escrita ("Nao achei
+  data\resposta_ia.json"). Sao 7 pedidos para 20 questoes, porque cada pedido
+  gera 3 variacoes de uma questao real;
+- **o GitHub Actions esta vermelho desde `9ca6c04`.** A coleta diaria so rodou
+  ate 26/09 (ultimo verde: run 36245200577, em `52a38aa`). Causa, medida
+  rodando a suite no Linux e depois com o relogio simulado em outras datas:
+  tres testes dependem do Windows ou da data de hoje. Dois ja falham (o do
+  `pythonw.exe` e o do cronometro, que assumia 28/09 como futuro); o terceiro, o
+  de `test_avisos.py`, tem data fixa de 17/09 e quebra por volta de 17/10, ao
+  sair da janela de 30 dias de novidade. Com as tres correcoes a suite passou
+  inteira (1.840) com o relogio em 20/10/2026, 10/11/2026 e 15/03/2027. A
+  correcao **nao foi aplicada**; esta em pendencias;
+- o primeiro dia mostrou que o conteudo da faixa de Direito nao reflete o que a
+  FEPESE cobra: foi montado pelo edital de 2019. Detalhe e os numeros em
+  pendencias e em decisoes.
+
+## Armadilhas desta rodada
+
+- teste que usa data fixa ou o nome do executavel do Windows funciona no PC e
+  quebra no Actions; o Actions e o unico lugar que roda em Linux e com a data
+  de verdade, e um teste vermelho la quase sempre e isso;
+- ao testar com relogio simulado, `test_404.py` falhou numa rodada em 28/09 e
+  passa com o relogio real: foi artefato do simulador, nao bug do radar;
+- copiei um arquivo de trabalho (`listagem_stats.json`) para a raiz do
+  repositorio por engano e o removi antes do commit: arquivo de apoio fica fora
+  da pasta do projeto;
+- um token do Telegram foi colado numa conversa no inicio; foi revogado.
+  Token, chat id e chave da API vivem so em variavel de ambiente ou em Secrets,
+  nunca em arquivo versionado nem em conversa.
