@@ -1293,7 +1293,8 @@ mais vale na prova.
 - **os componentes em macro Jinja, `_componentes.html`**: `selo()`, `bloco()`,
   `legenda_dos_selos()` e `aviso_lei()`. O selo e sempre escrito pela macro,
   com o emoji e o texto da tabela da especificacao;
-- **seis selos, quatro cores**: a cor diz a ORIGEM - azul para o que a banca
+- **seis selos, quatro cores** (*revista em 01/10/2026, Etapa 0, decisao 5:
+  passam a 🟢🔵🟡🟣 quando a Etapa 7A trocar*): a cor diz a ORIGEM - azul para o que a banca
   publicou (fonte oficial, extraida da prova), verde para o que o sistema
   contou, amarelo para o que o sistema adivinhou (classificacao automatica,
   tendencia), vermelho para o que a IA escreveu. O aviso de lei alterada e
@@ -1514,6 +1515,10 @@ valer apenas com `<body class="ds">`.
   ganhou o desempate pelo id.
 
 ## Um minimo de respostas so, nas tres telas (26/09/2026)
+
+> **Revista em 01/10/2026 (Etapa 0, decisao 6):** os minimos passam a 20 na
+> materia, 10 no assunto e 6 no subassunto/elemento, para o sistema inteiro.
+> O 5/3 abaixo vale ate a Etapa 4 aplicar.
 
 - **`onde_estudar.MINIMO_NA_MATERIA = 5` e `MINIMO_NO_ASSUNTO = 3`**, e mais
   nenhum. A home tinha o seu 5; o Meu foco, o "comece por aqui" e o Onde
@@ -2023,6 +2028,10 @@ O resto veio junto:
   errei ontem manda mais que o costume da banca.
 ## O que conta no volume, no acerto e na meta (etapa E2, 27/09/2026)
 
+> **Revista em 01/10/2026 (Etapa 0, decisoes 4 e 7):** a contagem vai para uma
+> fonte unica com recortes de nome fixo (Etapa 1C), e o Meu foco e o Onde
+> estudar passam a usar radar + anotado a partir da Etapa 4.
+
 Tres origens medem o meu estudo, e elas nao se misturam do mesmo jeito:
 
 - **VOLUME** (questoes feitas, horas) **soma tudo**: as faixas do plano que eu
@@ -2124,6 +2133,8 @@ O resto do que decidi aqui:
   diz "neste ciclo" em voz alta, e o grafico semana a semana ja deixava isso
   implicito;
 - **20 questoes sem consulta e o minimo para eu acreditar numa porcentagem.**
+  (*Mantido na materia pela decisao 6 da Etapa 0, 01/10/2026, que estende a
+  regra ao sistema inteiro.*)
   Abaixo disso a materia entra como "sem dado" e a barra ganha o aviso "amostra
   pequena": 100% em cinco questoes nao e 100% de nada;
 - **materia sem amostra fica FORA da projecao** - nao entra como zero nem como
@@ -2202,3 +2213,64 @@ O resto do que decidi aqui:
 - **modelo: o mais forte para analisar e decidir, o mais barato para etapa
   mecanica, escolhido no inicio da conversa e sem trocar no meio** (a troca
   perde o cache).
+
+## Etapa 0 do pedido de evolucao: o plano e o que ele decidiu (01/10/2026)
+
+O pedido e o [docs/novo.md](novo.md); o plano das Etapas 1 a 8, com a ordem e
+o detalhe de cada uma, e o [docs/roteiro.md](roteiro.md); o andamento fica no
+[docs/progresso.md](progresso.md). Na Etapa 0 so esses dois arquivos podiam ser
+criados, entao as decisoes dela entram aqui no primeiro commit da Etapa 1:
+
+1. **branch sempre `main`**, sem branch nem PR. A `claude/busy-davinci-fgt1br`
+   foi apagada: nao tinha nada fora da `main`;
+2. **uma conversa por etapa (ou subetapa)**, com o estado no repositorio: o
+   roteiro, o progresso e os docs;
+3. **o dia 28/09 foi investigado com os dados reais.** Penal 11 questoes / 6
+   acertos e Portugues 10 / 7 (anotados, do Qconcursos), mais 10 de IA
+   respondidas no radar: o "Fiz hoje" mostrou 31 questoes, 13 acertos e 8 erros.
+   Nao houve contagem dupla, fuso errado nem dado perdido: a linha nao fecha
+   porque as 10 de IA entram no volume e, pela regra, nunca no acerto, e a
+   linha nao dizia isso. O registro do dia guardou "31 questoes, 13 acertos",
+   que se le como 18 erros. E o Bonus foi marcado como feito com 0 questoes
+   (os 25 min dele estao dentro das 3h50). O conserto e da 1C e da 1D;
+4. **numeros iguais em toda tela:** uma fonte unica de contagem, com recortes
+   de nome fixo - *medido no radar*, *anotado* (faixas e estudo extra, que vem
+   do Qconcursos), *treino de IA* e *total*. Mesmo recorte e mesmo periodo dao
+   o mesmo numero, e cada tela escreve o recorte que mostra (Etapa 1C);
+5. **os selos passam a quatro: 🟢 fonte oficial · 🔵 estatistica do acervo ·
+   🟡 analise automatica · 🟣 gerado por IA.** Substitui os "seis selos, quatro
+   cores" (🟦🟩🟨🟥) da fase 1 da especificacao. Vale quando a Etapa 7A trocar;
+   ate la as telas seguem com os antigos;
+6. **limites de amostra num lugar so, para o sistema inteiro**, em respostas
+   sem consulta: materia 20, assunto 10, subassunto ou elemento 6. Estados:
+   *amostra insuficiente* (abaixo do minimo: fora de ordenacao e de projecao),
+   *precisa revisar* (abaixo de 60%), *em aprendizado* (de 60% ate abaixo da
+   meta), *desempenho consistente* (na meta ou acima) e *bom desempenho com
+   amostra suficiente* (na meta, com o dobro do minimo, em dois dias ou mais).
+   A meta e a da materia no `config/cronograma.yml`; sem ela, a da prova (79
+   de 100). Motivo: com 10 questoes a margem de uma porcentagem ainda e de ~30
+   pontos; com 20, de ~22. Substitui os minimos 5/3 do Onde estudar e o 20 de
+   Minhas materias quando a Etapa 4 aplicar;
+7. **desempenho por conteudo usa o radar e o Qconcursos**, sempre com a divisao
+   "radar X% em N · anotado Y% em M", e questao de IA nunca entra. A partir da
+   Etapa 4 o Meu foco e o Onde estudar passam a usar esse desempenho - isso
+   revisa a decisao E2, que os deixava so no radar. Ate la ficam no recorte
+   *medido no radar*, escrito na tela;
+8. **as 162 questoes validas do alvo sao classificadas pelo Claude Code**, no
+   fluxo pedido/importar, com procedencia, e conferidas por mim (Etapa 3A);
+9. **fichas de tarefa (§11 do novo.md):** o texto escrito por IA e aceito,
+   marcado 🟣, com procedencia e conferivel;
+10. **2019: o caderno masculino e igual ao feminino (AP)**, que e o auditado;
+11. **o concurso-alvo tem so as provas de 2013 e 2019**, ja no banco; nao ha
+    prova nova para importar. O acervo complementar e o que ja esta no banco
+    (Socioeducativo 2016 e as provas FEPESE de prefeituras), e o levantamento
+    da §5 vira consulta a esse acervo (Etapa 3B);
+12. **o ANKI e desligado por uma chave no `config/cronograma.yml`**, sem apagar
+    nada, ja no Ciclo 1 (Etapa 6A);
+13. **rotina com questoes tambem de manha**, ja no Ciclo 1, com a proposta
+    aprovada antes de mexer no cronograma (Etapa 6A);
+14. **as pendencias do `docs/pendencias.md` foram encaixadas nas etapas** (a
+    tabela "Pendencias × etapas" do roteiro). A ordem difere da do novo.md em
+    tres pontos, explicados no roteiro: o Actions primeiro (1A), a rotina do
+    Ciclo 1 antecipada (6A) e a Etapa 3 dividida em alvo (3A) e complementar
+    (3B).

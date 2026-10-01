@@ -104,7 +104,8 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 compilado, revisao 1-7-30, Macetes, `gerar --pedido`) e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje, cronometro - o unico
 JS -, caderno de erros, Semanas, Minhas materias; automacao no Windows).
-Acervo: 8.433 questoes, sem assunto gravado; 40 geradas, todas `do_zero`.
+Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
+20 `variacao` de LEP).
 **Quebrado:** o GitHub Actions, vermelho desde 26/09 (a coleta diaria nao roda).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore

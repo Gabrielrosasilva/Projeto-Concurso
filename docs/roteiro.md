@@ -48,7 +48,7 @@ mudar na execução, desde que o comportamento pedido seja respeitado.
 
 Estas decisões ainda não estão no `docs/decisoes.md` (na Etapa 0 só este
 arquivo e o `docs/progresso.md` podiam ser criados). **O primeiro commit da
-Etapa 1 as registra lá.**
+Etapa 1 as registra lá.** (Registradas no `decisoes.md` na 1A, em 01/10/2026.)
 
 1. **Branch:** sempre `main`, sem branch nem PR (CLAUDE.md). A
    `claude/busy-davinci-fgt1br` foi apagada: não tinha nada fora da `main`.
