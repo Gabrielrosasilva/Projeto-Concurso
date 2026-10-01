@@ -157,12 +157,14 @@
             {% endif %}
           </div>
 
+          {# A mesma frase do "Fiz hoje", da mesma fonte, so desta materia. #}
+          <p class="de-onde">{{ frase_da_conta(m.geral) }}</p>
           {% if m.radar.medidas and m.anotado.medidas %}
-            <p class="de-onde">radar: {{ m.radar.porcentagem }}% em {{ m.radar.medidas }} ·
+            <p class="de-onde">medido no radar: {{ m.radar.porcentagem }}% em {{ m.radar.medidas }} ·
               anotado: {{ m.anotado.porcentagem }}% em {{ m.anotado.medidas }}</p>
           {% endif %}
-          {% if m.geradas %}
-            <p class="de-onde">treino IA: {{ m.geradas }} (não conta)</p>
+          {% if m.geral.ia %}
+            <p class="de-onde">{{ frase_da_ia(m.geral) }}</p>
           {% endif %}
 
           {# A barra: o meu acerto sem consulta contra a meta da materia. #}

@@ -147,7 +147,7 @@ def test_a_questao_de_ia_fica_fora_do_acerto(banco_temporario, plano):
     _responder("Direito Penal", False, _em(SEG))
 
     penal = _cartao(_montar(plano)[0], "Direito Penal")
-    assert penal.geradas == 1
+    assert penal.geral.ia == 1                       # volume, no total
     assert penal.radar.medidas == 1
     assert penal.geral.porcentagem == 0              # so a real mede
 
@@ -399,7 +399,7 @@ def test_a_tela_avisa_a_amostra_pequena(cliente, plano):
 def test_a_tela_mostra_o_treino_de_ia_a_parte(cliente, plano):
     _responder("Direito Penal", True, _em(SEG), gerada=True)
     texto = cliente.get("/analises/materias").text
-    assert "treino IA: 1 (não conta)" in texto
+    assert "Treino de IA: 1 de 1 (100%), fora do acerto" in texto
 
 
 def test_a_tela_desenha_o_grafico_sem_javascript(cliente, plano):

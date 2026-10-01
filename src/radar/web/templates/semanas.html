@@ -145,9 +145,10 @@
     {% endif %}
   </div>
 
-  {% if s.geradas %}
-    <p class="ds-pequeno ds-suave">{{ s.geradas }} questão(ões) de IA nesta semana:
-      contam no volume, nunca no acerto.</p>
+  {# A mesma frase do "Fiz hoje", da mesma fonte: a semana e a soma dos dias. #}
+  {% if s.numeros.questoes %}
+    <p class="ds-pequeno ds-suave">{{ selo('calculado') }} Total: {{ frase_da_conta(s.numeros) }}.
+      {%- if s.numeros.ia %} {{ frase_da_ia(s.numeros) }}.{% endif %}</p>
   {% endif %}
 
   {% if s.nivel %}

@@ -7,7 +7,7 @@ unico lugar que conta questao (Etapa 1C). O Meu foco, o Onde estudar e a home
 contam so o que eu respondi dentro do radar, e dizem isso na tela.
 """
 from dataclasses import dataclass, field
-from datetime import date, datetime, time, timedelta, timezone
+from datetime import date, datetime, time, timedelta
 
 from sqlalchemy import select
 
@@ -15,7 +15,7 @@ from radar import acervo
 from radar import alvo
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
-from radar.models import EstadoDoDia, RegistroDoDia, RespostaDeSimulado, agora
+from radar.models import EstadoDoDia, RegistroDoDia, agora
 from radar.servico import extra as estudo_extra
 # A excecao vem do comum porque o estudo extra recusa pelos mesmos motivos, e
 # continua sendo lida como `servico.cronograma.RegistroInvalido`.
@@ -436,159 +436,6 @@ def valores_das_faixas(dia, estado: EstadoDoDia | None) -> dict:
             do_plano=antigo,
         )
     return valores
-
-
-@dataclass
-class Numeros:
-    """Volume e acerto de uma origem: o plano, o extra ou o radar.
-
-    `questoes` e VOLUME - tudo o que eu respondi. `medidas` e quantas delas
-    contam para o acerto: as que tem resultado anotado e nao foram escritas por
-    IA. As duas sao diferentes de proposito, e e essa diferenca que faz "fiz 20
-    e nao anotei quantas acertei" nao virar "acertei 0 de 20".
-    """
-    questoes: int = 0
-    medidas: int = 0
-    acertos: int = 0
-    minutos: int = 0
-
-    def __add__(self, outro: "Numeros") -> "Numeros":
-        return Numeros(
-            questoes=self.questoes + outro.questoes,
-            medidas=self.medidas + outro.medidas,
-            acertos=self.acertos + outro.acertos,
-            minutos=self.minutos + outro.minutos,
-        )
-
-    def somar(self, questoes=None, acertos=None, minutos: int = 0) -> None:
-        """Soma uma linha (faixa, extra ou resposta) neste conjunto."""
-        self.questoes += questoes or 0
-        self.minutos += minutos or 0
-        if questoes and acertos is not None:
-            self.medidas += questoes
-            self.acertos += acertos
-
-    @property
-    def erros(self) -> int:
-        return max(self.medidas - self.acertos, 0)
-
-    @property
-    def porcentagem(self) -> int | None:
-        return round(100 * self.acertos / self.medidas) if self.medidas else None
-
-    @property
-    def vazio(self) -> bool:
-        return not (self.questoes or self.minutos)
-
-
-@dataclass
-class TotaisDoDia:
-    """Quanto eu estudei no dia, somando as tres origens.
-
-    A regra, e ela vale para o radar inteiro (docs/decisoes.md):
-
-    - VOLUME soma tudo: as faixas do plano, o estudo extra e as questoes que eu
-      respondi dentro do radar;
-    - o ACERTO principal tambem soma as tres, e a tela mostra embaixo a divisao
-      "radar: X% em N / anotado: Y% em M" - o primeiro e medido questao por
-      questao, o segundo e o que eu digitei;
-    - a comparacao com a META usa so questao SEM CONSULTA;
-    - questao escrita por IA nao entra em acerto nenhum: ela treina, nao mede.
-      Ela conta no volume, porque o tempo foi gasto.
-    """
-    plano: Numeros = field(default_factory=Numeros)
-    extra: Numeros = field(default_factory=Numeros)
-    radar: Numeros = field(default_factory=Numeros)
-    #: So o que vale para comparar com a meta: sem consulta, com acerto anotado.
-    sem_consulta: Numeros = field(default_factory=Numeros)
-    #: Questoes de IA respondidas no radar. Volume sim, acerto nunca.
-    geradas: int = 0
-
-    @property
-    def total(self) -> Numeros:
-        return self.plano + self.extra + self.radar
-
-    @property
-    def anotado(self) -> Numeros:
-        """O que eu digitei: as faixas e os extras, sem o radar."""
-        return self.plano + self.extra
-
-    @property
-    def minutos(self) -> int:
-        return self.plano.minutos + self.extra.minutos
-
-    @property
-    def vazio(self) -> bool:
-        return self.total.vazio
-
-
-def _janela_do_dia(data: date) -> tuple[datetime, datetime]:
-    """O dia local em UTC, para consultar hora gravada em UTC.
-
-    Sem isto, um simulado respondido as 22h de Florianopolis (1h do dia
-    seguinte em UTC) cairia no dia errado.
-    """
-    inicio = datetime.combine(data, time.min, tzinfo=fuso_local())
-    return (inicio.astimezone(timezone.utc),
-            (inicio + timedelta(days=1)).astimezone(timezone.utc))
-
-
-def numeros_do_radar(data: date) -> tuple[Numeros, int]:
-    """O que eu respondi DENTRO do radar naquele dia, e quantas eram de IA.
-
-    Aqui o acerto e medido, e nao digitado: o radar conferiu cada questao
-    contra o gabarito. Questao gerada por IA entra no volume (o tempo foi
-    gasto) e fica fora do acerto - ela treina, nao mede.
-
-    Minutos ficam em zero: o radar nao cronometra o simulado.
-    """
-    criar_tabelas()
-    inicio, fim = _janela_do_dia(data)
-    numeros = Numeros()
-    geradas = 0
-    with sessao() as s:
-        respostas = s.scalars(
-            select(RespostaDeSimulado)
-            .where(RespostaDeSimulado.respondida_em.is_not(None))
-            .where(RespostaDeSimulado.respondida_em >= inicio)
-            .where(RespostaDeSimulado.respondida_em < fim)
-        )
-        for resposta in respostas:
-            numeros.questoes += 1
-            if resposta.gerada:
-                geradas += 1
-                continue
-            numeros.medidas += 1
-            if resposta.acertou:
-                numeros.acertos += 1
-    return numeros, geradas
-
-
-def totais_do_dia(dia, estado: EstadoDoDia | None, data: date,
-                  extras: list | None = None) -> TotaisDoDia:
-    """A linha "Hoje: N questoes, N acertos, N erros, Nh de estudo".
-
-    Calculada, e nunca digitada: era justamente o numero digitado a mao que
-    fazia o diario nao bater com o que eu tinha feito de verdade.
-    """
-    totais = TotaisDoDia()
-
-    for feita in valores_das_faixas(dia, estado).values():
-        totais.plano.somar(feita.questoes, feita.acertos, feita.minutos)
-        if not feita.consulta:
-            totais.sem_consulta.somar(feita.questoes, feita.acertos, feita.minutos)
-
-    if extras is None:
-        extras = estudo_extra.do_dia(data)
-    for linha in extras:
-        totais.extra.somar(linha.questoes, linha.acertos, linha.minutos)
-        if not linha.consulta:
-            totais.sem_consulta.somar(linha.questoes, linha.acertos, linha.minutos)
-
-    totais.radar, totais.geradas = numeros_do_radar(data)
-    # O simulado do radar e sempre sem consulta: nao ha lei aberta ali dentro.
-    totais.sem_consulta.somar(totais.radar.medidas, totais.radar.acertos)
-    return totais
 
 
 @dataclass

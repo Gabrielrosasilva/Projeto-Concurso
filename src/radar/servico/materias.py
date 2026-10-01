@@ -6,7 +6,8 @@ pergunta. A tela diz isso em voz alta.
 
 As regras sao as da etapa E2 (docs/decisoes.md), e as mesmas funcoes:
 
-  * VOLUME e ACERTO somam faixas do plano + estudo extra + respostas no radar;
+  * VOLUME e ACERTO saem do `servico.metricas`, a fonte unica: a mesma lista
+    de lancamentos do "Fiz hoje" e da tela de Semanas, separada por materia;
   * a barra "voce x meta" usa so questao SEM CONSULTA - na prova nao ha lei
     aberta;
   * questao escrita por IA aparece a parte ("treino IA"), e em acerto nenhum;
@@ -18,24 +19,17 @@ As regras sao as da etapa E2 (docs/decisoes.md), e as mesmas funcoes:
 Tudo aqui e conta: a tela so mostra.
 """
 from dataclasses import dataclass, field
-from datetime import date, timedelta
+from datetime import date
 
 from sqlalchemy import select
 
 from radar import cronograma as plano_de_estudo
-from radar.db import criar_tabelas, sessao
-from radar.models import (
-    EstadoDoDia,
-    QuestaoDeProva,
-    QuestaoGerada,
-    RespostaDeSimulado,
-)
+from radar.db import sessao
+from radar.models import EstadoDoDia
 from radar.regioes import normalizar
-from radar.util import para_local
 from radar.servico import cronograma as diario
 from radar.servico import erros as caderno
-from radar.servico import extra as estudo_extra
-from radar.servico import semanas as tela_das_semanas
+from radar.servico import metricas
 from radar.servico.compilado import mesma_materia
 
 #: Abaixo disto, a porcentagem nao e leitura: e sorte. 20 questoes sem consulta
@@ -56,13 +50,23 @@ TIPOS_DE_AULA = {"teoria", "portugues", "raciocinio"}
 class AssuntoNaMateria:
     """Um tema dentro da materia: o que eu fiz nele e quanto acertei."""
     nome: str
-    questoes: int = 0
-    medidas: int = 0
-    acertos: int = 0
+    numeros: metricas.Numeros = field(default_factory=metricas.Numeros)
+
+    @property
+    def questoes(self) -> int:
+        return self.numeros.questoes
+
+    @property
+    def medidas(self) -> int:
+        return self.numeros.medidas
+
+    @property
+    def acertos(self) -> int:
+        return self.numeros.acertos
 
     @property
     def porcentagem(self) -> int | None:
-        return round(100 * self.acertos / self.medidas) if self.medidas else None
+        return self.numeros.porcentagem
 
 
 @dataclass
@@ -79,11 +83,11 @@ class MateriaNaTela:
     nome: str
     questoes_na_prova: int
     meta: int
-    geral: object = None            # Numeros: faixas + extras + radar
-    radar: object = None            # so o que o radar mediu, questao por questao
-    anotado: object = None          # so o que eu digitei (faixas + extras)
-    sem_consulta: object = None     # o que vale para a meta
-    geradas: int = 0                # treino de IA: fora de todo acerto
+    # Os recortes do `servico.metricas`, so desta materia.
+    geral: object = field(default_factory=metricas.Numeros)         # total, com o treino de IA
+    radar: object = field(default_factory=metricas.Numeros)         # medido no radar
+    anotado: object = field(default_factory=metricas.Numeros)       # faixas + extras
+    sem_consulta: object = field(default_factory=metricas.Numeros)  # o que vale para a meta
     minutos: int = 0
     ultima_vez: date | None = None
     aulas_vistas: int = 0
@@ -103,12 +107,11 @@ class MateriaNaTela:
     def nunca_estudei(self) -> bool:
         """Nao encostei nesta materia neste ciclo.
 
-        O treino de IA conta AQUI, e so aqui: ele nao mede acerto nenhum, mas
-        dizer "ainda nao estudei" depois de eu ter feito 20 questoes geradas
-        seria falso - e o cartao cinza some.
+        O treino de IA conta aqui (ele esta no `geral.questoes`): ele nao mede
+        acerto nenhum, mas dizer "ainda nao estudei" depois de eu ter feito 20
+        questoes geradas seria falso - e o cartao cinza some.
         """
-        return not (self.geral.questoes or self.minutos or self.aulas_vistas
-                    or self.geradas)
+        return not (self.geral.questoes or self.minutos or self.aulas_vistas)
 
     @property
     def amostra_pequena(self) -> bool:
@@ -228,61 +231,6 @@ def _mencoes(foco: str) -> list[str]:
     return [pedaco.strip() for pedaco in texto.split(",") if pedaco.strip()]
 
 
-def _numeros_do_radar(materias: list[str], inicio: date, fim: date):
-    """O que o radar mediu por materia no periodo, e o treino de IA a parte.
-
-    Devolve (por_materia, geradas_por_materia, assuntos), com o acerto medido
-    questao por questao - aqui nao ha numero digitado.
-    """
-    criar_tabelas()
-    comeco, termino = diario._janela_do_dia(inicio)
-    _, fim_utc = diario._janela_do_dia(fim)
-
-    por_materia = {nome: diario.Numeros() for nome in materias}
-    geradas = {nome: 0 for nome in materias}
-    assuntos: dict[str, dict[str, AssuntoNaMateria]] = {}
-    ultima: dict[str, date] = {}
-
-    with sessao() as s:
-        respostas = list(s.scalars(
-            select(RespostaDeSimulado)
-            .where(RespostaDeSimulado.respondida_em.is_not(None))
-            .where(RespostaDeSimulado.respondida_em >= comeco)
-            .where(RespostaDeSimulado.respondida_em < fim_utc)
-        ))
-        reais = {q.id: q for q in s.scalars(
-            select(QuestaoDeProva).where(QuestaoDeProva.id.in_(
-                [r.questao_id for r in respostas if not r.gerada] or [0]))
-        )}
-        de_ia = {q.id: q for q in s.scalars(
-            select(QuestaoGerada).where(QuestaoGerada.id.in_(
-                [r.questao_id for r in respostas if r.gerada] or [0]))
-        )}
-
-    for resposta in respostas:
-        questao = (de_ia if resposta.gerada else reais).get(resposta.questao_id)
-        if questao is None:
-            continue
-        nome = _achar(questao.materia, materias)
-        if nome is None:
-            continue
-        if resposta.gerada:
-            # Treino: conta a parte, e em acerto nenhum.
-            geradas[nome] += 1
-            continue
-        por_materia[nome].somar(1, 1 if resposta.acertou else 0)
-        quando = para_local(resposta.respondida_em).date()
-        if nome not in ultima or quando > ultima[nome]:
-            ultima[nome] = quando
-        tema = (getattr(questao, "assunto", None) or "").strip()
-        if tema:
-            alvo = assuntos.setdefault(nome, {}).setdefault(tema, AssuntoNaMateria(tema))
-            alvo.questoes += 1
-            alvo.medidas += 1
-            alvo.acertos += 1 if resposta.acertou else 0
-    return por_materia, geradas, assuntos, ultima
-
-
 def montar(plano=None, hoje: date | None = None) -> tuple[list[MateriaNaTela], Projecao]:
     """Um cartao por materia do edital, na ordem do peso na prova, e a projecao."""
     plano = plano or plano_de_estudo.carregar()
@@ -290,135 +238,78 @@ def montar(plano=None, hoje: date | None = None) -> tuple[list[MateriaNaTela], P
     nomes = [m.nome for m in plano.materias]
 
     cartoes = {
-        m.nome: MateriaNaTela(
-            nome=m.nome,
-            questoes_na_prova=m.questoes,
-            meta=m.meta,
-            geral=diario.Numeros(),
-            radar=diario.Numeros(),
-            anotado=diario.Numeros(),
-            sem_consulta=diario.Numeros(),
-        )
+        m.nome: MateriaNaTela(nome=m.nome, questoes_na_prova=m.questoes, meta=m.meta)
         for m in plano.materias
     }
     if not cartoes:
         return [], Projecao()
 
-    assuntos: dict[str, dict[str, AssuntoNaMateria]] = {}
-    ultima: dict[str, date] = {}
-    # O acerto sem consulta por semana, para o grafico: {materia: {semana: Numeros}}
-    por_semana: dict[str, dict[int, object]] = {nome: {} for nome in nomes}
-
-    def guardar(nome, tema, questoes, acertos):
-        tema = (tema or "").strip()
-        if not tema or not questoes:
-            return
-        alvo = assuntos.setdefault(nome, {}).setdefault(tema, AssuntoNaMateria(tema))
-        alvo.questoes += questoes
-        if acertos is not None:
-            alvo.medidas += questoes
-            alvo.acertos += acertos
-
-    def visto_em(nome, quando):
-        if nome not in ultima or quando > ultima[nome]:
-            ultima[nome] = quando
-
-    # --- as faixas do plano que eu marquei ---------------------------------
+    # A mesma lista de lancamentos que o "Fiz hoje" e a tela de Semanas somam,
+    # agora separada por materia. Faixa mista ou sem materia, e resposta a
+    # questao de materia que nao casa com o edital, ficam no total do dia e
+    # em materia nenhuma.
     inicio = plano.inicio
     fim = min(plano.fim, hoje)
-    estados = {}
-    with sessao() as s:
-        for estado in s.scalars(select(EstadoDoDia).where(
-                EstadoDoDia.data >= inicio, EstadoDoDia.data <= fim)):
-            estados[estado.data] = estado
+    da_materia: dict[str, list] = {nome: [] for nome in nomes}
+    for linha in metricas.lancamentos(inicio, fim, plano):
+        nome = _achar(linha.materia, nomes)
+        if nome is not None:
+            da_materia[nome].append(linha)
 
     semana_do_dia = {dia.data: dia.semana for dia in plano.dias}
-    for data in _dias_do_ciclo(plano, hoje):
-        estado = estados.get(data)
-        if estado is None:
-            continue
-        nivel = diario.nivel_do_dia(plano, data)
-        montado = plano_de_estudo.montar_dia(plano, data,
-                                             nivel.efetivo if nivel else None)
-        for feita in diario.valores_das_faixas(montado, estado).values():
-            nome = _achar(feita.materia, nomes)
-            if nome is None:
-                continue          # faixa mista, ou sem materia: conta no geral
-            cartoes[nome].minutos += feita.minutos or 0
-            visto_em(nome, data)
-            if not feita.questoes:
-                continue
-            cartoes[nome].geral.somar(feita.questoes, feita.acertos)
-            cartoes[nome].anotado.somar(feita.questoes, feita.acertos)
-            guardar(nome, feita.assunto, feita.questoes, feita.acertos)
-            if not feita.consulta:
-                cartoes[nome].sem_consulta.somar(feita.questoes, feita.acertos)
-                semana = semana_do_dia.get(data)
-                if semana:
-                    alvo = por_semana[nome].setdefault(semana, diario.Numeros())
-                    alvo.somar(feita.questoes, feita.acertos)
+    semanas_do_ciclo = sorted({d.semana for d in plano.dias if d.data <= hoje})
+    with sessao() as s:
+        estados = {e.data: e for e in s.scalars(select(EstadoDoDia).where(
+            EstadoDoDia.data >= inicio, EstadoDoDia.data <= fim))}
 
-    # --- o estudo extra -----------------------------------------------------
-    for linha in estudo_extra.entre(inicio, fim):
-        nome = _achar(linha.materia, nomes)
-        if nome is None:
-            continue
-        cartoes[nome].minutos += linha.minutos or 0
-        visto_em(nome, linha.data)
-        if not linha.questoes:
-            continue
-        cartoes[nome].geral.somar(linha.questoes, linha.acertos)
-        cartoes[nome].anotado.somar(linha.questoes, linha.acertos)
-        guardar(nome, linha.assunto, linha.questoes, linha.acertos)
-        if not linha.consulta:
-            cartoes[nome].sem_consulta.somar(linha.questoes, linha.acertos)
+    for nome, linhas in da_materia.items():
+        cartao = cartoes[nome]
+        conta = metricas.contar(linhas)
+        cartao.geral = conta.total
+        cartao.radar = conta.radar
+        cartao.anotado = conta.anotado
+        cartao.sem_consulta = conta.sem_consulta
+        cartao.minutos = conta.minutos
+        # O treino de IA nao conta como "a ultima vez que estudei a materia":
+        # ele nao mede, e a data dele esconderia ha quanto tempo eu nao faco
+        # questao de prova.
+        datas = [linha.data for linha in linhas if not linha.gerada]
+        cartao.ultima_vez = max(datas) if datas else None
+
+        por_tema: dict[str, list] = {}
+        for linha in linhas:
+            tema = (linha.assunto or "").strip()
+            if tema and linha.questoes and not linha.gerada:
+                por_tema.setdefault(tema, []).append(linha)
+        cartao.assuntos = _ordenar_assuntos({
+            tema: AssuntoNaMateria(tema, metricas.contar(das).total)
+            for tema, das in por_tema.items()
+        })
+
+        # O grafico: o acerto sem consulta de cada semana do ciclo.
+        por_semana: dict[int, list] = {}
+        for linha in linhas:
             semana = semana_do_dia.get(linha.data)
             if semana:
-                alvo = por_semana[nome].setdefault(semana, diario.Numeros())
-                alvo.somar(linha.questoes, linha.acertos)
-
-    # --- o que o radar mediu ------------------------------------------------
-    do_radar, geradas, assuntos_do_radar, ultima_do_radar = _numeros_do_radar(
-        nomes, inicio, fim)
-    for nome in nomes:
-        numeros = do_radar[nome]
-        cartoes[nome].radar = numeros
-        cartoes[nome].geradas = geradas[nome]
-        cartoes[nome].geral.questoes += numeros.questoes
-        cartoes[nome].geral.medidas += numeros.medidas
-        cartoes[nome].geral.acertos += numeros.acertos
-        # O simulado do radar e sempre sem consulta: nao ha lei aberta ali.
-        cartoes[nome].sem_consulta.questoes += numeros.questoes
-        cartoes[nome].sem_consulta.medidas += numeros.medidas
-        cartoes[nome].sem_consulta.acertos += numeros.acertos
-        if nome in ultima_do_radar:
-            visto_em(nome, ultima_do_radar[nome])
-        for tema, achado in assuntos_do_radar.get(nome, {}).items():
-            alvo = assuntos.setdefault(nome, {}).setdefault(tema, AssuntoNaMateria(tema))
-            alvo.questoes += achado.questoes
-            alvo.medidas += achado.medidas
-            alvo.acertos += achado.acertos
+                por_semana.setdefault(semana, []).append(linha)
+        semanal = {semana: metricas.contar(das).sem_consulta
+                   for semana, das in por_semana.items()}
+        cartao.semanal = [
+            PontoDaSemana(semana,
+                          semanal[semana].porcentagem if semana in semanal else None,
+                          semanal[semana].questoes if semana in semanal else 0)
+            for semana in semanas_do_ciclo
+        ]
 
     # --- o programa andando, os erros e o grafico ---------------------------
     aulas = _aulas_do_plano(plano, nomes)
     vistas = _aulas_vistas(plano, nomes, estados, hoje)
     do_caderno = caderno.listar(situacao="todos", hoje=hoje)
-    semanas_do_ciclo = sorted({d.semana for d in plano.dias if d.data <= hoje})
 
     for nome, cartao in cartoes.items():
         cartao.aulas_no_plano = aulas.get(nome, 0)
         cartao.aulas_vistas = vistas.get(nome, 0)
-        cartao.ultima_vez = ultima.get(nome)
-        cartao.assuntos = _ordenar_assuntos(assuntos.get(nome, {}))
         cartao.erros_no_caderno, cartao.motivo_mais_comum = _erros(do_caderno, nome)
-        cartao.semanal = [
-            PontoDaSemana(
-                semana,
-                por_semana[nome].get(semana).porcentagem if semana in por_semana[nome] else None,
-                por_semana[nome][semana].questoes if semana in por_semana[nome] else 0,
-            )
-            for semana in semanas_do_ciclo
-        ]
         if cartao.nunca_estudei:
             cartao.ciclo_de_entrada = ciclo_de_entrada(plano, nome, hoje)
 

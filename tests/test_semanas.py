@@ -202,7 +202,7 @@ def test_questao_de_ia_conta_no_volume_e_em_acerto_nenhum(banco_temporario, plan
     _resposta(False, datetime(2026, 9, 28, 21, 1, tzinfo=fuso_local()))
 
     semana = _por_numero(_ciclo1(plano, hoje=S2))[1]
-    assert semana.geradas == 1
+    assert semana.numeros.ia == 1
     assert semana.numeros.questoes == 2
     assert semana.numeros.medidas == 1
     assert semana.numeros.porcentagem == 0

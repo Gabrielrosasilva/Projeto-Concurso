@@ -269,3 +269,63 @@ def test_o_radar_hoje_mostra_a_mesma_linha(banco_temporario):
     assert ("Fiz hoje: 31 questões = 13 acertos + 8 erros "
             "+ 10 de treino de IA") in saida.output
     assert "Treino de IA: 7 de 10 (70%), fora do acerto" in saida.output
+
+
+# --- mesmo periodo, mesmo numero, em todas as telas --------------------------------
+#
+# Hoje, Semanas e Minhas materias somam a mesma lista do `metricas`. Com toda
+# linha do dia numa materia do edital, o dia, a semana e a soma dos cartoes
+# tem que dar EXATAMENTE os mesmos Numeros - acerto, erro, IA e minutos.
+
+def _soma(numeros):
+    total = metricas.Numeros()
+    for n in numeros:
+        total = total + n
+    return total
+
+
+def test_hoje_semanas_e_materias_dao_o_mesmo_numero(banco_temporario):
+    from radar.servico import materias, semanas
+    from tests.test_materias_na_tela import _anotar as anotar_na_materia
+    from tests.test_materias_na_tela import _responder as responder_na_materia
+    from tests.test_semanas import _ciclo1, _por_numero
+
+    real = cronograma.carregar()
+    anotar_na_materia(real, SEG, "Direito Penal", 11, 6)
+    anotar_na_materia(real, SEG, "Língua Portuguesa", 10, 7)
+    for n in range(10):
+        responder_na_materia("Direito Penal", n < 7, _as_21h(minuto=n), gerada=True)
+    responder_na_materia("Língua Portuguesa", False, _as_21h(minuto=20))
+
+    dia = metricas.do_dia(SEG, real).total
+    semana = _por_numero(_ciclo1(real, hoje=date(2026, 10, 5)))[1].numeros
+    cartoes, _ = materias.montar(real, hoje=date(2026, 10, 5))
+
+    assert dia.questoes == 32
+    assert semana == dia
+    assert _soma(c.geral for c in cartoes) == dia
+
+
+def test_o_plano_b_conta_igual_no_dia_na_semana_e_na_materia(banco_temporario):
+    """Antes, a tela Hoje contava as faixas do Plano B e a de Semanas montava
+    o dia normal - e nao achava check nenhum: as questoes sumiam da semana."""
+    from radar.servico import materias, semanas
+    from tests.test_semanas import _ciclo1, _por_numero
+
+    real = cronograma.carregar()
+    quarta, depois = date(2026, 10, 28), date(2026, 11, 2)
+    diario.ativar_plano_b(quarta, 30, plano=real, hoje=depois)
+    nivel = diario.nivel_do_dia(real, quarta)
+    questoes = cronograma.montar_plano_b(real, quarta, 30, nivel.efetivo).plano_b[1]
+    diario.anotar_faixa(quarta, cronograma.BLOCO_DO_PLANO_B, 1, questoes.titulo,
+                        questoes=8, acertos=5, plano=real, hoje=depois)
+
+    dia = metricas.do_dia(quarta, real).total
+    numero = real.dia(quarta).semana
+    semana = _por_numero(_ciclo1(real, hoje=depois))[numero].numeros
+    cartoes, _ = materias.montar(real, hoje=depois)
+    lep = next(c for c in cartoes if c.nome == questoes.materia)
+
+    assert (dia.questoes, dia.acertos) == (8, 5)
+    assert semana == dia
+    assert lep.geral == dia

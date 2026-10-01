@@ -6,10 +6,10 @@ fechou com 4 dias completos e 72% de acerto" sem abrir navegador nenhum.
 Os numeros seguem as regras da etapa E2 (docs/decisoes.md), e as mesmas
 funcoes:
 
-  * VOLUME e ACERTO somam faixas do plano + estudo extra + respostas no radar,
-    dia por dia, pelo `servico.cronograma.totais_do_dia` - o mesmo que a tela
-    Hoje usa. Duas contas para a mesma pergunta divergem no dia em que uma
-    delas muda;
+  * VOLUME e ACERTO saem do `servico.metricas`, a fonte unica: a semana soma
+    a MESMA lista de lancamentos que o "Fiz hoje" de cada dia dela (faixas,
+    estudo extra, respostas no radar e treino de IA). Duas contas para a mesma
+    pergunta divergem no dia em que uma delas muda;
   * a comparacao com a META usa so questao SEM CONSULTA;
   * "dias completos" e o `balanco_da_semana` do cronograma, o MESMO que o
     gatilho usa para decidir o nivel - incluindo o feriado cumprido na minima.
@@ -27,7 +27,7 @@ from radar.db import criar_tabelas, sessao
 from radar.models import EstadoDoDia, NotaDaSemana, agora
 from radar.servico import cronograma as diario
 from radar.servico import erros as caderno
-from radar.servico import extra as estudo_extra
+from radar.servico import metricas
 
 # Quantas casas a porcentagem tem na tela: nenhuma. "72%" responde; "71,875%"
 # nao responde melhor.
@@ -57,14 +57,19 @@ class ResumoDoCiclo:
     """A linha do ciclo fechado: o que sobrou dele em quatro numeros."""
     dias_completos: int = 0
     dias_no_plano: int = 0
-    questoes: int = 0
-    medidas: int = 0
-    acertos: int = 0
-    minutos: int = 0
+    numeros: metricas.Numeros = field(default_factory=metricas.Numeros)
+
+    @property
+    def questoes(self) -> int:
+        return self.numeros.questoes
 
     @property
     def porcentagem(self) -> int | None:
-        return round(100 * self.acertos / self.medidas) if self.medidas else None
+        return self.numeros.porcentagem
+
+    @property
+    def minutos(self) -> int:
+        return self.numeros.minutos
 
 
 @dataclass
@@ -79,12 +84,11 @@ class SemanaNaTela:
     dias_no_plano: int = 0
     zerados: int = 0
     sem_marcacao: int = 0
-    #: Volume e acerto da semana: faixas + extras + radar.
+    #: Volume e acerto da semana, no recorte total: faixas + extras + radar +
+    #: treino de IA (`numeros.ia`, que fica fora do acerto).
     numeros: object = None
     #: So o que vale para a meta (sem consulta).
     sem_consulta: object = None
-    #: Questoes de IA respondidas na semana: volume sim, acerto nunca.
-    geradas: int = 0
     minutos: int = 0
     sequencia: int = 0
     nivel: object = None
@@ -189,14 +193,6 @@ def _estados(inicio: date, fim: date) -> dict[date, EstadoDoDia]:
         return {e.data: e for e in achados}
 
 
-def _somar(destino, origem) -> None:
-    """Soma um `Numeros` no outro, sem criar objeto novo."""
-    destino.questoes += origem.questoes
-    destino.medidas += origem.medidas
-    destino.acertos += origem.acertos
-    destino.minutos += origem.minutos
-
-
 def _comparar(agora_: SemanaNaTela, antes: SemanaNaTela) -> dict:
     """As setas do cartao: quanto mudou da semana anterior.
 
@@ -266,9 +262,8 @@ def montar(plano=None, hoje: date | None = None) -> list[CicloNaTela]:
     # e deixaria todas as semanas como "futura" quando o teste para o tempo.
     niveis = plano_de_estudo.niveis(plano, metas, hoje)
     estados = _estados(plano.inicio, plano.fim)
-    extras = {}
-    for linha in estudo_extra.entre(plano.inicio, plano.fim):
-        extras.setdefault(linha.data, []).append(linha)
+    # Uma lista so, para o ciclo inteiro: cada semana soma o pedaco dela.
+    linhas = metricas.lancamentos(plano.inicio, min(plano.fim, hoje), plano)
     reflexoes = notas(plano.inicio, plano.fim)
     do_caderno = caderno.listar(situacao="todos", hoje=hoje)
 
@@ -296,25 +291,17 @@ def montar(plano=None, hoje: date | None = None) -> list[CicloNaTela]:
             dias_no_plano=len(dias),
             zerados=balanco.zerados,
             sem_marcacao=balanco.sem_marcacao,
-            numeros=diario.Numeros(),
-            sem_consulta=diario.Numeros(),
             nivel=nivel,
             nota=reflexoes.get(inicio),
         )
 
+        conta = metricas.contar(l for l in linhas if inicio <= l.data <= min(fim, hoje))
+        semana.numeros = conta.total
+        semana.sem_consulta = conta.sem_consulta
+        semana.minutos = conta.minutos
         for dia in dias:
-            if dia.data > hoje:
-                continue
-            montado = plano_de_estudo.montar_dia(
-                plano, dia.data, nivel.efetivo if nivel else None)
             estado = estados.get(dia.data)
-            totais = diario.totais_do_dia(montado, estado, dia.data,
-                                          extras.get(dia.data, []))
-            _somar(semana.numeros, totais.total)
-            _somar(semana.sem_consulta, totais.sem_consulta)
-            semana.geradas += totais.geradas
-            semana.minutos += totais.minutos
-            if estado is not None and estado.plano_b:
+            if dia.data <= hoje and estado is not None and estado.plano_b:
                 semana.plano_b += 1
 
         # As pilulas dos seis dias do plano, na ordem da semana.
@@ -372,9 +359,6 @@ def _ciclo(nome: str, semanas: list[SemanaNaTela], etapa=None, atual: bool = Fal
     for semana in semanas:
         resumo.dias_completos += semana.dias_completos
         resumo.dias_no_plano += semana.dias_no_plano
-        resumo.questoes += semana.numeros.questoes
-        resumo.medidas += semana.numeros.medidas
-        resumo.acertos += semana.numeros.acertos
-        resumo.minutos += semana.minutos
+        resumo.numeros = resumo.numeros + semana.numeros
     return CicloNaTela(nome=nome, etapa=etapa, atual=atual, terminou=terminou,
                        semanas=semanas, resumo=resumo)

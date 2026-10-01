@@ -24,6 +24,7 @@ from radar.cli import app as cli
 from radar.db import sessao
 from radar.models import RespostaDeSimulado, Simulado
 from radar.servico import cronograma as diario
+from radar.servico import metricas
 from radar.util import fuso_local
 from radar.web.app import app
 
@@ -67,8 +68,8 @@ def _dia_montado(plano, data=SEG):
 
 
 def _totais(plano, data=SEG):
-    dia = _dia_montado(plano, data)
-    return diario.totais_do_dia(dia, diario.estado_do_dia(data), data)
+    """A conta do dia, pela fonte unica (Etapa 1C)."""
+    return metricas.do_dia(data, plano)
 
 
 # --- o check com os numeros ----------------------------------------------------
@@ -254,7 +255,7 @@ def test_o_total_soma_faixa_extra_e_radar(banco_temporario, plano):
     assert totais.total.questoes == 27          # 15 + 10 + 2
     assert totais.total.acertos == 20           # 11 + 8 + 1
     assert totais.total.erros == 7
-    assert totais.plano.minutos + totais.extra.minutos == totais.minutos
+    assert totais.faixas.minutos + totais.extra.minutos == totais.minutos
     assert totais.extra.minutos == 30
 
 
@@ -274,9 +275,9 @@ def test_questao_de_ia_conta_no_volume_e_em_acerto_nenhum(banco_temporario, plan
     _resposta(True, datetime(2026, 9, 28, 21, 1, tzinfo=fuso_local()))
 
     totais = _totais(plano)
-    assert totais.geradas == 1
-    assert totais.radar.questoes == 2          # o tempo foi gasto nas duas
-    assert totais.radar.medidas == 1           # so a real mede
+    assert totais.total.ia == 1
+    assert totais.total.questoes == 2          # o tempo foi gasto nas duas
+    assert totais.total.medidas == 1           # so a real mede
     assert totais.radar.acertos == 1
 
 
