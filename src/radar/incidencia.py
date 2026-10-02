@@ -184,11 +184,14 @@ def complementar_por_no(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> 
     linhas = {}
     for no in nos:
         debaixo = [o for o in validas if _debaixo(o.conteudo, no.caminho)]
+        # A mesma questao em dez cadernos e UMA questao: a chave desempata.
+        distintas = {o.impressao or f"{o.prova}-{id(o)}": o for o in debaixo}
         linhas[no.caminho] = LinhaComplementar(
             caminho=no.caminho,
-            questoes=len(debaixo),
+            questoes=len(distintas),
+            ocorrencias=len(debaixo),
             provas=len({o.prova for o in debaixo}),
-            classificadas=sum(1 for o in debaixo if o.status != "pendente"))
+            classificadas=sum(1 for o in distintas.values() if o.status != "pendente"))
     return linhas
 
 

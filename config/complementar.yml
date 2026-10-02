@@ -16,6 +16,10 @@
 # que diz de verdade qual conteudo caiu. O relatorio mostra as duas colunas
 # separadas e nunca as soma.
 #
+# O termo casa como PALAVRA INTEIRA: "dolo" nao casa dentro de "dolorosa".
+# Por isso nao use pedaco de palavra ("sociologic" nao casa nada) - escreva a
+# palavra como ela aparece.
+#
 # E DADO: mexer aqui nao muda o banco nem pede migracao. Materia sem termo
 # nenhum fica so com a contagem pelo nome.
 
@@ -68,7 +72,8 @@ termos:
   - regras de mandela
   Sociologia Aplicada:
   - sociologia
-  - sociológic
+  - sociológica
+  - sociológico
   - durkheim
   - weber
   - controle social
@@ -96,3 +101,42 @@ termos:
   - ato administrativo
   - poder de polícia
   - processo administrativo disciplinar
+
+# O catalogo de palavras-chave do `src/radar/macetes.py` tem nomes proprios
+# ("Crase", "Verbos"); a arvore usa o texto LITERAL do edital de 2019. Este
+# mapa liga um ao outro, e e o que permite propor assunto para as milhares de
+# questoes de Portugues e Raciocinio Logico do complementar sem ler uma a uma.
+#
+# A proposta que sai daqui e AUTOMATICA (🟡): a procedencia diz isso, e ela
+# vale depois da sua conferencia POR AMOSTRA (20 por materia). Nome do
+# catalogo que nao estiver aqui nao vira classificacao nenhuma - a questao
+# fica sem linha, em vez de ir para um assunto parecido.
+#
+# Quando o enunciado casa com DOIS assuntos (crase e regencia andam juntas), a
+# questao tambem fica sem linha: escolher um dos dois seria chute.
+
+catalogo_para_edital:
+  Língua Portuguesa:
+    Interpretacao de texto: Compreensão e interpretação de texto (s)
+    Verbos: Emprego de tempos e modos verbais
+    Classes de palavras: "Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo"
+    Concordancia: Concordância nominal e verbal
+    Crase: Emprego da crase
+    Ortografia: Ortografia oficial
+    Pontuacao: Pontuação
+    Sintaxe da oracao: "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal"
+    Acentuacao: Acentuação gráfica
+    Colocacao pronominal: "Pronomes: emprego, forma de tratamento e colocação"
+    Vozes verbais: Vozes do verbo
+    # Sem par no edital de 2019 (ficam sem linha, de proposito): Emprego de
+    # palavras, Figuras de linguagem, Periodo composto, Formacao de palavras,
+    # Semantica, Regencia, Coesao e coerencia.
+  Raciocínio Lógico:
+    Logica proposicional: Lógica proposicional (ou sentencial)
+    Probabilidade: Princípios de contagem e probabilidade
+    Analise combinatoria: Princípios de contagem e probabilidade
+    Conjuntos: Operações com conjuntos
+    Porcentagem: Raciocínio lógico envolvendo problemas aritméticos e geométricos
+    Problemas com valores e idades: Raciocínio lógico envolvendo problemas aritméticos e geométricos
+    Regra de tres e proporcao: Raciocínio lógico envolvendo problemas aritméticos e geométricos
+    Sequencias e padroes: Raciocínio lógico envolvendo problemas aritméticos e geométricos

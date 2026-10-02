@@ -103,17 +103,23 @@ classificadas e 18 pendentes com motivo; a incidencia ja mostra o complementar
 por no nessas materias. **Falta o resto**, e a linha diz quantas ("993 sem
 classificacao ainda" em Portugues):
 
-1. ✅ **os 80 de Direito, Direitos Humanos e Legislacao Estadual do
-   Socioeducativo 2013 e 2016** - feitos em 02/10;
-2. **os blocos "Conhecimentos Especificos" das provas de seguranca e fiscalizacao**
-   (Guarda Municipal 2024, Procurador, Agente de Fiscalizacao, Agente Social,
-   Educador Social): e onde moram os 139 indicios de Direito Penal, 57 de
-   Constitucional, 56 de Administracao Publica, 37 de Direitos Humanos e 35 de
-   Sociologia. Nenhuma dessas provas tem gabarito definitivo: classificam, mas
-   nao entram nos padroes de cobranca;
-3. **Portugues e Raciocinio Logico** (993 + 290 questoes): o catalogo do
-   `macetes.py` serve de primeira proposta (🟡), com conferencia por amostra de
-   20 por materia, como o roteiro pede.
+1. ✅ **os 80 do Socioeducativo 2013 e 2016** - feitos em 02/10;
+2. ✅ **os blocos genericos** - feitos em 02/10: das 125 com indicio,
+   44 classificadas e 81 sem linha (conteudo do cargo daquele concurso);
+3. ✅ **Portugues e Raciocinio Logico pelo catalogo** - feitos em 02/10: 92 + 16
+   propostas automaticas 🟡.
+
+**O que sobra na B.8:**
+- **a sua conferencia**: 44 do lote 2 e 108 do catalogo esperam conferencia -
+  as do catalogo por AMOSTRA (20 por materia; taxa de erro alta, o lote volta);
+- **as questoes sem linha**: 81 do lote 2 (conteudo de outro cargo, de
+  proposito) e, em Portugues e Raciocinio Logico, as que o catalogo nao cobre
+  (47 sem palavra, 23 ambiguas, 22 sem par no edital em Portugues; 21 e 8 em
+  Raciocinio). Ampliar o catalogo ou o mapa do `config/complementar.yml`
+  resolve parte;
+- **os 1.738 "Conhecimentos Especificos" distintos sem indicio nenhum**: sao
+  conteudo do cargo daquele concurso (enfermagem, pedagogia, contabilidade).
+  Nao ha por que classifica-los.
 
 ### B.10 🔴 Blocos de materia trocados no Socioeducativo 2013 e 2016
 

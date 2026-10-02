@@ -1055,6 +1055,11 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
     console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
     if resultado["repetidas"]:
         console.print(f"[dim]{resultado['repetidas']} repetida(s), ignorada(s).[/]")
+    fora = resultado.get("fora_do_edital") or []
+    if fora:
+        console.print(f"[dim]{len(fora)} questao(oes) de bloco generico nao sao de "
+                      "materia nenhuma do meu edital: ficam sem linha, que ja e o "
+                      "estado de quem nao tem classificacao.[/]")
     if resultado["recusas"]:
         console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
         for motivo in resultado["recusas"]:
@@ -2438,6 +2443,14 @@ def classificar(
         None, help="So estas materias, pelo caminho do no (pode repetir)"),
     evidencia: str = typer.Option(
         "alvo", help="De onde vem a questao: alvo ou complementar"),
+    catalogo: bool = typer.Option(
+        False, "--catalogo",
+        help="No complementar: propoe o assunto pelo catalogo de palavras-chave "
+             "(automatico, 🟡, para conferir por amostra)"),
+    genericos: bool = typer.Option(
+        False, "--genericos",
+        help="No complementar: as questoes de bloco generico (Conhecimentos "
+             "Especificos), agrupadas pela materia que o termo sugere"),
     importar: Path = typer.Option(
         None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
 ) -> None:
@@ -2454,11 +2467,28 @@ def classificar(
     if importar is not None:
         _importar_resposta_da_ia(importar)
         return
+    if catalogo:
+        if evidencia != "complementar" or not materia:
+            console.print("[red]--catalogo pede --evidencia complementar e ao menos "
+                          "uma --materia[/] (ex.: --materia \"Língua Portuguesa\").")
+            raise typer.Exit(code=1)
+        for nome in materia:
+            r = servico.complementar.classificar_pelo_catalogo(nome)
+            console.print(f"[green]{escape(nome)}: {r.propostas} proposta(s)[/] "
+                          f"(automaticas, para conferir por amostra)")
+            console.print(f"  [dim]sem linha: {r.sem_assunto} sem palavra do catalogo, "
+                          f"{r.ambiguas} com mais de um assunto, {r.sem_par_no_edital} "
+                          f"sem par no edital; {r.ja_classificadas} ja tinham "
+                          f"classificacao[/]")
+            for assunto, quantas in sorted(r.por_assunto.items(), key=lambda x: -x[1]):
+                console.print(f"    {escape(assunto)}: {quantas}")
+        return
     if not pedido:
         console.print("Use --pedido para escrever o pedido, ou --importar ARQUIVO.")
         raise typer.Exit(code=1)
     try:
-        lote = servico.manual.pedido_de_classificacao(list(materia or []), evidencia)
+        lote = servico.manual.pedido_de_classificacao(
+            list(materia or []), evidencia, genericos=genericos)
     except ValueError as erro:
         console.print(f"[red]{erro}[/]")
         raise typer.Exit(code=1)
@@ -2472,8 +2502,11 @@ def classificar(
     console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questao(oes)[/] "
                   f"em {destino}")
     for p in lote["pedidos"]:
-        fora = " [dim](fora do edital atual)[/]" if p["fora_do_edital"] else ""
-        console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}{fora}")
+        if p.get("bloco_generico"):
+            marca = " [dim](bloco generico: a materia e suspeita do termo)[/]"
+        else:
+            marca = " [dim](fora do edital atual)[/]" if p["fora_do_edital"] else ""
+        console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}{marca}")
 
 
 @app.command()

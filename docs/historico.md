@@ -1489,3 +1489,26 @@ oito ficaram pendentes com o motivo, e a pendencia foi registrada.
 A incidencia agora mostra o complementar por NO, e nao so por materia: em
 Direitos Humanos, "Policia Penal SC: 24 questoes · 2 provas · Acervo
 complementar FEPESE: 18 questoes · 2 provas". Os numeros do alvo nao mudaram.
+
+## Etapa 3B, lotes 2 e 3 do complementar (02/10)
+
+**Lote 2, blocos genericos.** Entrou o pedido `--genericos`, em que a materia
+tambem e resposta. Dos 3.420 em bloco generico nas provas aceitas, 125 tinham
+indicio de materia minha depois de corrigir a busca por termo (palavra
+inteira, nao pedaco: "dolo" casava em "dolorosa"). Das 125, **44
+classificadas** e 81 sem linha - conteudo do cargo daquele concurso
+(pedagogia, saude, licitacao, legislacao municipal), que era o esperado.
+Direito Constitucional foi de 20 para 34 questoes distintas no complementar, e
+Administracao Publica, de 0 para 21.
+
+**Lote 3, Portugues e Raciocinio Logico pelo catalogo.** `radar classificar
+--catalogo` propoe o assunto pelo catalogo de palavras-chave do `macetes.py`,
+com o mapa para o edital no `config/complementar.yml`: **92 propostas em
+Portugues e 16 em Raciocinio Logico**, todas marcadas como automaticas e para
+conferir por amostra. O que nao casa, casa dois assuntos ou nao tem par no
+edital fica sem linha.
+
+**Achado que mudou a conta:** as 993 ocorrencias de Portugues no complementar
+sao **184 questoes distintas** - a FEPESE repete o mesmo caderno em dezenas de
+cargos. A linha complementar passou a contar distintas, com as ocorrencias
+entre parenteses. O alvo nao mudou.

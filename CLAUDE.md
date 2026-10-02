@@ -120,9 +120,10 @@ Analises > Conferencia. A **3B** esta pela metade: o levantamento
 (`radar complementar`, `docs/complementar.md`), a regra de quem entra (ter
 materia do edital de 2019 e passar na validacao minima: 122 provas de 183, em
 `data/acervo_complementar.json`) e a linha complementar da incidencia, sempre
-separada da do alvo; as **80 do Socioeducativo** (Direito, Direitos Humanos e
-Legislacao Estadual) ja classificadas - **faltam os outros lotes** do
-complementar (pendencia B.8) e a sua conferencia.
+separada da do alvo (em questao DISTINTA, com as ocorrencias ao lado) e os
+tres lotes classificados: as 80 do Socioeducativo, 44 de bloco generico e 108
+propostas automaticas do catalogo em Portugues e Raciocinio Logico. **Falta a
+sua conferencia** (as automaticas, por amostra) - pendencia B.8.
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.

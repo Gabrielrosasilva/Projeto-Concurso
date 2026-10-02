@@ -95,7 +95,9 @@
             {% if c.trecho %}<dt>Trecho</dt><dd>{{ c.trecho }}</dd>{% endif %}
             {% if c.item_do_edital %}<dt>Item do edital</dt><dd>{{ c.item_do_edital }}</dd>{% endif %}
             {% if c.dispositivo %}<dt>Dispositivo</dt><dd>{{ c.dispositivo }}</dd>{% endif %}
-            <dt>Quem</dt><dd>{{ c.procedencia }}</dd>
+            <dt>Quem</dt><dd>{{ c.procedencia }}{% if 'catálogo automático' in (c.procedencia or '') %}
+              <br><span class="ds-suave">🟡 classificação automática, conferida por amostra:
+              confira 20 por matéria; se a taxa de erro for alta, o lote volta.</span>{% endif %}</dd>
           </dl>
         {% else %}
           <p class="ds-nota">Sem classificação ainda: pendente.</p>

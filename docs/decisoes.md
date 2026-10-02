@@ -2602,3 +2602,39 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     real nao ha uma chave sequer repetida entre alvo e complementar (foi
     conferido); se houvesse, seria a MESMA questao reaproveitada, e classificar
     uma classificaria a outra - que e o comportamento decidido na 3A.
+
+## A classificacao do complementar: blocos genericos e catalogo (Etapa 3B, 02/10/2026)
+
+11. **bloco generico e um tipo de pedido proprio.** Nas prefeituras o caderno
+    nao diz a materia: joga tudo em "Conhecimentos Especificos". Nesses lotes
+    a MATERIA tambem e pergunta - o pedido vai marcado `bloco_generico`, leva
+    a arvore inteira, e a resposta diz em que materia do meu edital a questao
+    cai. A importacao recusa materia fora do edital de agora e assunto fora
+    dela. **Pendente em bloco generico nao vira linha**: sem materia no
+    caderno nao ha onde pendura-la, e questao sem linha ja e pendente desde a
+    Etapa 2;
+12. **o lote so agrupa pela suspeita do termo**, e o pedido escreve isso. O
+    termo passou a casar **palavra inteira**: "dolo" casava dentro de
+    "dolorosa" e levava questao de enfermagem para Direito Penal. So isso
+    derrubou o lote de Direito Penal de 45 para 2 questoes - o resto era
+    lixo. Termo em pedaco de palavra ("sociologic") nao casa mais nada, e o
+    `config/complementar.yml` avisa;
+13. **a mesma questao em dois cadernos e UMA questao**, e o pedido nao a manda
+    duas vezes. O codigo da questao ("2024-q29") so e unico dentro de um
+    lote: dois lotes podem ter questoes diferentes com o mesmo ano e numero,
+    e a conferencia de repeticao passou a ser por lote;
+14. **a incidencia complementar conta questao DISTINTA**, com as ocorrencias
+    ao lado: "187 questoes · 122 provas (998 ocorrencias em cadernos
+    diferentes)". Motivo: a FEPESE repete o mesmo caderno de Portugues em
+    dezenas de cargos do mesmo concurso, e dizer 998 faria o acervo parecer
+    cinco vezes maior do que e. A contagem do ALVO nao muda: la cada caderno
+    e um concurso diferente;
+15. **Portugues e Raciocinio Logico pelo catalogo** (`radar classificar
+    --catalogo`): o catalogo de palavras-chave do `macetes.py` propoe o
+    assunto, e o mapa dele para o texto literal do edital mora no
+    `config/complementar.yml`. A proposta sai com a procedencia "catalogo
+    automatico (macetes.py), conferir por amostra" e a tela de conferencia
+    mostra o aviso 🟡. **Nada e forcado**: enunciado que nao casa palavra
+    nenhuma, que casa DOIS assuntos (crase e regencia andam juntas) ou cujo
+    nome nao tem par no edital fica sem linha; questao ja classificada nao e
+    sobrescrita.

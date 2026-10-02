@@ -14,7 +14,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | 🟡 falta a sua conferência das 162 |
-| 8 | 3B — Acervo complementar FEPESE | 🟡 acervo definido; lote 1 (80) classificado; faltam os lotes 2 e 3 |
+| 8 | 3B — Acervo complementar FEPESE | 🟡 acervo e 3 lotes classificados; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
 | 10 | 5 — Geração de questões | ⬜ |
 | 11 | 6B — Cronograma operacional | ⬜ |
@@ -870,3 +870,85 @@ edital é Legislação Especial, e o bloco do caderno dizia Direito Penal).
 **O que falta na 3B.** Os lotes 2 e 3 da pendência B.8: os blocos
 "Conhecimentos Específicos" das provas de segurança e fiscalização, e depois
 Português e Raciocínio Lógico. E a conferência por amostra destas 80 é sua.
+
+### 3B, passo 4 (lotes 2 e 3): blocos genéricos e catálogo (02/10)
+
+**Lote 2 — blocos genéricos.** Nas prefeituras o caderno não diz a matéria
+("Conhecimentos Específicos"), então a matéria virou pergunta: o pedido vai
+marcado `bloco_generico`, leva a árvore inteira, e a resposta diz em que
+matéria do edital a questão cai. Pendente aqui **não vira linha** — sem
+matéria no caderno não há onde pendurá-la.
+
+**Corrigido no caminho, defeito meu:** a busca por termo casava pedaço de
+palavra — "dolo" dentro de "dolorosa" levava questão de enfermagem para
+Direito Penal. Passou a casar **palavra inteira**, e só isso derrubou o lote
+de Direito Penal de 45 para 2 questões. Também passei a mandar cada questão
+**uma vez só** (a mesma questão em dois cadernos é uma questão), e a conferir
+repetição de código **por lote** (o código "2024-q29" existe em vários lotes,
+em provas diferentes).
+
+**Lote 3 — Portugués e Raciocínio Lógico pelo catálogo.** `radar classificar
+--catalogo` usa o catálogo de palavras-chave do `macetes.py`, com o mapa para
+o texto literal do edital no `config/complementar.yml`. A proposta é
+automática 🟡 e a tela de conferência escreve "classificação automática,
+conferida por amostra".
+
+**Achado que mudou a conta.** As 993 ocorrências de Português no complementar
+são **184 questões distintas**: a FEPESE repete o mesmo caderno em dezenas de
+cargos do mesmo concurso. A linha complementar passou a contar **questões
+distintas**, com as ocorrências entre parênteses — dizer 993 faria o acervo
+parecer cinco vezes maior do que é. A contagem do alvo não muda: lá cada
+caderno é um concurso diferente.
+
+**Arquivos alterados.**
+- `src/radar/complementar.py` — `procurar()` (palavra inteira) e
+  `LinhaComplementar` com `ocorrencias`;
+- `src/radar/incidencia.py` — a linha complementar conta por chave;
+- `src/radar/servico/manual.py` — `genericos=True`,
+  `INSTRUCAO_CLASSIFICACAO_GENERICA`, `_materia_sugerida_por_termo`, uma
+  questão por chave no pedido, repetição por lote, `fora_do_edital` no
+  resultado da importação;
+- `src/radar/servico/classificacoes.py` — matéria escolhida no bloco
+  genérico, `PendenteSemMateria`, `propor_pelo_catalogo`;
+- `src/radar/servico/complementar.py` — `carregar_mapa_do_catalogo`,
+  `classificar_pelo_catalogo`;
+- `src/radar/cli.py` — `--genericos` e `--catalogo`; `conferencia.html` — o
+  aviso 🟡;
+- `config/complementar.yml` — o mapa catálogo → edital e a nota da palavra
+  inteira; dados: `data/classificacoes.json`, `data/conteudos.json`,
+  `docs/complementar.md`;
+- docs: `decisoes.md`, `historico.md`, `pendencias.md`, este arquivo.
+
+**Testes novos (9, total de 50 no arquivo).** O pedido genérico só pega bloco
+sem matéria minha; o termo casa palavra inteira e não pedaço; a matéria vem na
+resposta e sem ela é recusada; matéria fora do edital é recusada; pendente em
+bloco genérico fica sem linha; o catálogo propõe e marca a procedência; o
+catálogo não chuta com dois assuntos nem com nenhum; não sobrescreve
+classificação existente; a mesma questão em vários cadernos conta uma vez.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_complementar.py`, 1ª rodada dos novos | 48 passed, 2 failed — eu é que errei as expectativas: "concordância verbal" casa dois assuntos do catálogo (e o certo é ficar sem linha), e a numeração do caderno de teste tinha de fechar |
+| `test_complementar.py` | 50 passed |
+| `test_complementar.py` + `test_incidencia.py` + `test_classificacao.py` | 70 passed |
+| Suíte inteira, PC | **2039 passed** |
+
+**Comando real rodado (banco real).**
+- `radar classificar --pedido --evidencia complementar --genericos`: 11 lotes,
+  125 questões; importação: **44 gravadas, 81 sem linha**, 0 recusadas;
+- `radar classificar --catalogo --evidencia complementar --materia "Língua
+  Portuguesa" --materia "Raciocínio Lógico"`: **92 + 16 propostas**; sem linha
+  em Português 47 sem palavra do catálogo, 23 ambíguas, 22 sem par no edital;
+- o complementar hoje, por matéria (distintas · classificadas): Português
+  187 · 95 · Raciocínio Lógico 45 · 16 · Constitucional 34 · 34 · Direitos
+  Humanos 21 · 19 · Administração Pública 21 · 21 · Legislação Estadual
+  20 · 10 · Processual Penal 6 · 2 · Penal 5 · 4 · Legislação Especial 5 · 5;
+  **LEP e Sociologia seguem em zero**;
+- o alvo conferido de novo: as 13 matérias com os mesmos números e as mesmas
+  pendentes de antes dos três lotes.
+
+**O que falta na 3B:** a sua conferência (as 44 do lote 2 uma a uma, as 108 do
+catálogo por amostra) e, se você quiser, ampliar o catálogo para cobrir o que
+ficou sem linha. Detalhe na pendência B.8.

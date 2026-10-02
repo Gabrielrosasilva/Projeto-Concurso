@@ -47,6 +47,16 @@ def carregar_termos(caminho: Path | None = None) -> dict[str, list[str]]:
             for m, termos in (dados.get("termos") or {}).items()}
 
 
+def carregar_mapa_do_catalogo(caminho: Path | None = None) -> dict[str, dict[str, str]]:
+    """{materia: {nome no catalogo: assunto do edital}} do config."""
+    arquivo = caminho or (config.diretorio_config() / "complementar.yml")
+    if not Path(arquivo).exists():
+        return {}
+    dados = yaml.safe_load(Path(arquivo).read_text(encoding="utf-8")) or {}
+    return {str(m): {str(k): str(v) for k, v in (pares or {}).items()}
+            for m, pares in (dados.get("catalogo_para_edital") or {}).items()}
+
+
 def _gabarito_por_concurso() -> dict[str, str]:
     """{concurso_url: o melhor gabarito que o acervo tem dele}."""
     melhor: dict[str, str] = {}
@@ -360,3 +370,28 @@ def escrever(caminho: Path | None = None):
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(relatorio(*levantado, registros=registros), encoding="utf-8")
     return levantado
+
+
+def classificar_pelo_catalogo(materia: str):
+    """Roda o catalogo nas questoes DESTA materia nas provas aceitas.
+
+    So o complementar: no alvo a classificacao e lida uma a uma, com
+    conferencia de todas - e o que a 3A fez. Aqui sao milhares de questoes de
+    Portugues e Raciocinio Logico, e o caminho e o que o roteiro pede:
+    proposta automatica 🟡 conferida por amostra.
+    """
+    from radar.servico import classificacoes, evidencia
+
+    aceitas = provas_aceitas()
+    if not aceitas:
+        return classificacoes.ResultadoDoCatalogo()
+    criar_tabelas()
+    with sessao() as s:
+        questoes = list(s.scalars(
+            select(QuestaoDeProva)
+            .where(QuestaoDeProva.evidencia == evidencia.COMPLEMENTAR,
+                   QuestaoDeProva.prova_url.in_(aceitas),
+                   QuestaoDeProva.materia == materia)))
+    # Uma por CHAVE: a mesma questao em dois cadernos e uma so.
+    por_chave = {classificacoes.chave_de(q): (q.enunciado or "") for q in questoes}
+    return classificacoes.propor_pelo_catalogo(materia, por_chave)

@@ -944,7 +944,19 @@ sobre a letra certa.
 As questoes das provas aceitas sao classificadas pelo mesmo fluxo do alvo,
 com `--evidencia complementar` (prova recusada na validacao nao e
 classificada). O lote nunca mistura as duas evidencias, e o que sai dai nunca
-entra na incidencia da Policia Penal.
+entra na incidencia da Policia Penal. Quando o caderno nao diz a materia
+("Conhecimentos Especificos"), `--genericos` monta o pedido em que a MATERIA
+tambem e resposta, agrupado pela materia que um termo do
+`config/complementar.yml` sugere - e so uma suspeita. Para Portugues e
+Raciocinio Logico, `--catalogo` propoe o assunto pelo catalogo de
+palavras-chave do `macetes.py`: proposta automatica 🟡, que vale depois da
+conferencia POR AMOSTRA. Nada e forcado: sem palavra, com dois assuntos ou sem
+par no edital, a questao fica sem linha.
+
+Na linha complementar a conta e em questao **distinta**, com as ocorrencias ao
+lado ("187 questoes · 122 provas (998 ocorrencias em cadernos diferentes)"): a
+FEPESE repete o mesmo caderno de Portugues em dezenas de cargos do mesmo
+concurso.
 
 `radar complementar --aplicar` grava em `data/acervo_complementar.json` quais
 provas entram: as que tem **materia do edital de 2019** e passam na validacao

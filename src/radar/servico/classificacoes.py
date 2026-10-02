@@ -162,6 +162,12 @@ def do_texto_antigo(chave: str, materia: str | None, assunto: str | None,
 # o tipo tem que estar no config/taxonomia.yml, e quem nao tem seguranca
 # responde "pendente" - que fica pendente, sem no forcado.
 
+class PendenteSemMateria(Exception):
+    """Pendente num bloco generico: nao ha materia onde grava-la, e a questao
+    fica sem linha - o mesmo estado de quem nunca foi classificado. Nao e
+    erro: e o resultado esperado da maioria das questoes de bloco generico."""
+
+
 class PropostaRecusada(ValueError):
     """Uma classificacao da resposta que nao entra. A mensagem diz por que."""
 
@@ -195,6 +201,14 @@ def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
     if chave is None:
         raise PropostaRecusada(f"{codigo}: a questão não estava no pedido")
     materia = pedido["materia"]
+    if pedido.get("bloco_generico"):
+        # No bloco generico a materia e RESPOSTA, nao premissa: o caderno so
+        # diz "Conhecimentos Especificos", e o lote agrupa pela suspeita do
+        # termo.
+        escolhida = (item.get("materia") or "").strip()
+        if item.get("status") != PENDENTE and not escolhida:
+            raise PropostaRecusada(f"{codigo}: bloco genérico sem a matéria escolhida")
+        materia = escolhida or materia
 
     with sessao() as s:
         ja = s.scalar(select(Classificacao)
@@ -207,6 +221,11 @@ def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
             motivo = (item.get("motivo") or "").strip()
             if not motivo:
                 raise PropostaRecusada(f"{codigo}: pendente sem motivo")
+            if pedido.get("bloco_generico"):
+                # Sem materia no caderno nao ha onde pendurar a pendente: a
+                # questao fica sem linha, que ja e o estado de quem nao tem
+                # classificacao (Etapa 2).
+                raise PendenteSemMateria(f"{codigo}: {motivo}")
             # O dispositivo vai junto mesmo na pendente: "caiu o art. 8º do CP"
             # e verdade mesmo quando o assunto do edital nao cobre o artigo.
             classificar(chave, materia, procedencia, status=PENDENTE,
@@ -235,7 +254,18 @@ def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
         # do edital justifica) ou num assunto novo debaixo dela.
         destino = item.get("materia") or materia
         assunto_novo = False
-        if destino != materia:
+        if pedido.get("bloco_generico"):
+            # A materia escolhida tem que ser do edital de agora, e o assunto
+            # tem que ser dela. Fora disso a resposta devia ser pendente.
+            no_do_destino = _no(s, materia)
+            if no_do_destino is None or no_do_destino.fora_do_edital:
+                raise PropostaRecusada(
+                    f"{codigo}: {materia!r} não é matéria do edital de agora")
+            caminho_do_assunto = _assunto_do_edital(s, materia, assunto)
+            if caminho_do_assunto is None:
+                raise PropostaRecusada(
+                    f"{codigo}: assunto fora do edital de {materia}: {assunto!r}")
+        elif destino != materia:
             if not pedido.get("fora_do_edital"):
                 raise PropostaRecusada(f"{codigo}: matéria trocada ({destino!r}) "
                                        f"numa matéria que está no edital")
@@ -281,6 +311,75 @@ def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
                 item_do_edital=item_do_edital, dispositivo=item.get("dispositivo"),
                 tipo_de_questao=tipo, pegadinha=item.get("pegadinha"))
     return caminho_do_no
+
+
+# --- a proposta automatica pelo catalogo (Etapa 3B, lote 3) --------------------
+
+PROCEDENCIA_DO_CATALOGO = "catálogo automático (macetes.py), conferir por amostra"
+
+
+@dataclass
+class ResultadoDoCatalogo:
+    """O que uma passada do catalogo fez, para o comando mostrar."""
+
+    propostas: int = 0
+    sem_assunto: int = 0        # o catalogo nao casou nada
+    ambiguas: int = 0           # casou mais de um assunto: nao se escolhe
+    sem_par_no_edital: int = 0  # casou, mas o nome nao tem par no config
+    ja_classificadas: int = 0   # tinham linha, e nao se mexe por cima
+    por_assunto: dict = field(default_factory=dict)
+
+
+def propor_pelo_catalogo(materia: str, chaves_das_questoes: dict) -> ResultadoDoCatalogo:
+    """Propoe o assunto das questoes de UMA materia pelo catalogo de palavras.
+
+    `chaves_das_questoes` e {chave: enunciado}. A proposta e automatica e sai
+    marcada como tal na procedencia: ela vale depois da conferencia POR
+    AMOSTRA (o roteiro pede 20 por materia). Nada e forcado:
+
+    - enunciado que nao casa palavra nenhuma fica SEM LINHA;
+    - enunciado que casa dois assuntos tambem: escolher um seria chute;
+    - nome do catalogo sem par no `config/complementar.yml` idem;
+    - questao que ja tem classificacao nao e sobrescrita.
+    """
+    from radar import macetes
+    from radar.servico import complementar as acervo
+
+    mapa = acervo.carregar_mapa_do_catalogo().get(materia, {})
+    chave_do_catalogo = macetes.chave_da_materia(materia)
+    resultado = ResultadoDoCatalogo()
+    if not mapa or chave_do_catalogo is None:
+        return resultado
+
+    criar_tabelas()
+    with sessao() as s:
+        ja_tem = set(s.scalars(select(Classificacao.chave)
+                               .where(Classificacao.principal.is_(True))))
+
+    for chave, enunciado in chaves_das_questoes.items():
+        if chave in ja_tem:
+            resultado.ja_classificadas += 1
+            continue
+        nomes = macetes.assuntos_do_enunciado(enunciado, chave_do_catalogo)
+        if not nomes:
+            resultado.sem_assunto += 1
+            continue
+        assuntos = {mapa[nome] for nome in nomes if nome in mapa}
+        if not assuntos:
+            resultado.sem_par_no_edital += 1
+            continue
+        if len(assuntos) > 1:
+            resultado.ambiguas += 1
+            continue
+        assunto = assuntos.pop()
+        caminho = arvore.caminho(materia, assunto)
+        classificar(chave, caminho, PROCEDENCIA_DO_CATALOGO,
+                    trecho=f"catálogo: {', '.join(nomes)}", item_do_edital=assunto)
+        resultado.propostas += 1
+        resultado.por_assunto[assunto] = resultado.por_assunto.get(assunto, 0) + 1
+    if resultado.propostas:
+        exportar()
+    return resultado
 
 
 def conferir(chave: str, *, corrigir_para: str | None = None,

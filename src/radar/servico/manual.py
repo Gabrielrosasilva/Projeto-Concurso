@@ -147,6 +147,31 @@ INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR = INSTRUCAO_CLASSIFICACAO.replace(
     '"status": "pendente" com o motivo - nao force.')
 
 
+# No bloco generico a MATERIA tambem e pergunta: o caderno so diz
+# "Conhecimentos Especificos", e a questao pode nem ser de materia minha.
+INSTRUCAO_CLASSIFICACAO_GENERICA = """Voce recebe questoes reais de OUTRO concurso da FEPESE (o acervo complementar: nao e a prova do meu cargo), com o gabarito. O caderno NAO diz a materia delas: o bloco se chama "Conhecimentos Especificos" ou parecido. O nome do lote e so a suspeita que um termo levantou, e pode estar errado.
+
+Para cada questao, diga em que materia DO MEU EDITAL ela cai, e classifique nela.
+
+Regras:
+- a MATERIA vai no campo `materia`, escrita exatamente como aparece em
+  `outras_materias_do_edital`. O ASSUNTO e escolhido dentro da lista daquela
+  materia, com o nome exatamente como esta la;
+- **a questao que nao for de nenhuma materia do meu edital** (conteudo do
+  cargo daquele concurso: pedagogia, enfermagem, contabilidade, informatica,
+  atualidades...) recebe `"status": "pendente"` com o motivo. Isso e o
+  esperado para a maioria: o termo so levantou suspeita. Nao force;
+- no resto, valem as mesmas regras da classificacao normal: subassunto e
+  elemento opcionais (elemento sem subassunto e recusado), `tipo_elemento` da
+  lista `elementos`, `tipo_de_questao` da lista, `pegadinha`, e a
+  justificativa com `trecho`, `item_do_edital` e `dispositivo`.
+
+O numero daqui vive numa linha separada e NUNCA e somado a incidencia da Policia Penal SC.
+
+Responda SOMENTE um JSON, no formato:
+{"classificacoes": [{"questao": "2024-q31", "status": "classificada", "materia": "Direito Penal", "assunto": "...", "subassunto": "...", "tipo_de_questao": "conceito", "pegadinha": "...", "trecho": "...", "item_do_edital": "...", "dispositivo": "..."}]}"""
+
+
 def _como_responder(tipo: str) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
     if tipo == "classificacao":
@@ -343,8 +368,34 @@ def pedido_de_explicacoes() -> dict:
     return _novo_lote("explicacoes", pedidos)
 
 
+def _materia_sugerida_por_termo():
+    """Devolve f(questao) -> materia do edital que os termos sugerem, ou None.
+
+    E so uma SUSPEITA, para agrupar o pedido em lotes do tamanho de uma
+    leitura: o termo pode estar de passagem, e quem decide a materia e a
+    classificacao. A lista mora no `config/complementar.yml`.
+    """
+    from radar import complementar as regra
+    from radar.servico import complementar as acervo
+
+    termos = {m: [regra.procurar(x) for x in ts if x]
+              for m, ts in acervo.carregar_termos().items()}
+
+    def sugerir(q):
+        texto = regra.normalizar(
+            (q.enunciado or "") + " "
+            + " ".join(str(v) for v in (q.alternativas or {}).values()))
+        for m, lista in termos.items():
+            if any(b.search(texto) for b in lista):
+                return m
+        return None
+
+    return sugerir
+
+
 def pedido_de_classificacao(materia: str | list[str] | None = None,
-                            de_evidencia: str | None = None) -> dict:
+                            de_evidencia: str | None = None,
+                            genericos: bool = False) -> dict:
     """Um pedido por materia, com as questoes e a arvore dela.
 
     `de_evidencia` diz de onde vem a questao: `alvo` (o padrao: as 170 de
@@ -357,6 +408,13 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
     conferi - a conferencia e minha e nao se refaz por cima. A materia do
     caderno encontra o no pela regra dos textos antigos (igual, ou pelo
     sinonimo do config/taxonomia.yml).
+
+    `genericos` inverte a seleção no complementar: em vez das questoes cujo
+    caderno declara uma materia minha, pede as de BLOCO GENERICO - o caderno
+    so diz "Conhecimentos Especificos" -, agrupadas pela materia que os termos
+    do `config/complementar.yml` sugerem. Nelas, a materia tambem e pergunta:
+    o pedido vai marcado `bloco_generico` e leva a arvore inteira, e a
+    resposta diz em que materia a questao cai (ou que nao cai em nenhuma).
     """
     from sqlalchemy import select
 
@@ -388,6 +446,9 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
                 QuestaoDeProva.prova_url.in_(acervo.provas_aceitas()))
         questoes = list(s.scalars(consulta))
 
+    if genericos and de_evidencia != evidencia.COMPLEMENTAR:
+        raise ValueError("bloco genérico só existe no acervo complementar")
+
     caminhos = [n.caminho for n in nos]
     fora = {n.caminho for n in nos if n.nivel == "materia" and n.fora_do_edital}
     do_edital = {n.caminho: [x.nome for x in nos
@@ -397,26 +458,45 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
     from radar.servico.classificacoes import chave_de
 
     por_materia: dict[str, list] = {}
+    sugerida = _materia_sugerida_por_termo() if genericos else {}
     for q in questoes:
         if chave_de(q) in conferidas:
             continue
         no = (arvore.achar(caminhos, q.materia)
               or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
-        if no is None or (so_estas and no not in so_estas):
+        if genericos:
+            # Aqui interessa justamente a questao SEM materia minha no
+            # caderno; o termo so diz em que lote ela entra, e nao onde ela
+            # sera pendurada - isso quem decide e a classificacao.
+            if no is not None:
+                continue
+            no = sugerida(q)
+            if no is None:
+                continue
+        elif no is None:
+            continue
+        if so_estas and no not in so_estas:
             continue
         por_materia.setdefault(no, []).append(q)
 
     pedidos = []
     for numero, (no, lista) in enumerate(por_materia.items(), start=1):
-        blocos, codigos = [], {}
+        blocos, codigos, ja_no_lote = [], {}, set()
         for q in lista:
+            chave = chave_de(q)
+            # A MESMA questao em dois cadernos (a FEPESE reaproveita) e uma
+            # questao so para a classificacao, que trabalha por chave:
+            # mandar as duas seria pedir o mesmo trabalho duas vezes.
+            if chave in ja_no_lote:
+                continue
+            ja_no_lote.add(chave)
             codigo = _codigo(q)
             # Duas provas do mesmo ano no mesmo lote (acontece no
             # complementar) dariam o mesmo codigo, e a resposta ficaria
             # ambigua: um sufixo da prova desempata.
             if codigo in codigos:
                 codigo = f"{codigo}-{sum(map(ord, q.prova_url)) % 1000:03d}"
-            codigos[codigo] = chave_de(q)
+            codigos[codigo] = chave
             marca = " (ANULADA pela banca: classifique assim mesmo)" if q.anulada else ""
             blocos.append(f"[{codigo}]{marca}\n{gerador._questao_por_extenso(q)}")
         dela = [c for c in caminhos if c == no or c.startswith(no + arvore.SEPARADOR)]
@@ -428,13 +508,22 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
             "elementos": taxonomia.elementos_da_materia(no),
             "tipos_de_questao": taxonomia.tipos_de_questao,
             "evidencia": de_evidencia,
-            "instrucao": (INSTRUCAO_CLASSIFICACAO
+            "bloco_generico": genericos,
+            "instrucao": (INSTRUCAO_CLASSIFICACAO_GENERICA if genericos else
+                          INSTRUCAO_CLASSIFICACAO
                           if de_evidencia == evidencia.ALVO
                           else INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR),
             "pedido": f"MATERIA: {no}\n\nQUESTOES\n\n" + "\n\n".join(blocos),
         }
-        if no in fora:
+        if no in fora or genericos:
             item["outras_materias_do_edital"] = do_edital
+        if genericos:
+            # O caderno nao diz a materia: o nome do lote e so a SUSPEITA que
+            # o termo levantou, e o pedido avisa isso.
+            item["materia_sugerida_pelo_termo"] = no
+            item["pedido"] = ("BLOCO GENÉRICO (o caderno não diz a matéria). "
+                              f"Termo sugeriu: {no}\n\nQUESTOES\n\n"
+                              + "\n\n".join(blocos))
         pedidos.append(item)
     return _novo_lote("classificacao", pedidos)
 
@@ -444,6 +533,7 @@ def _importar_classificacao(lote: dict, respostas: list[dict], modelo: str) -> d
 
     por_id = {p["id"]: p for p in lote["pedidos"]}
     gravadas, recusas, vistas = 0, [], set()
+    sem_materia = []
     for resposta in respostas:
         pedido = por_id.get(resposta.get("id"))
         if pedido is None:
@@ -452,19 +542,25 @@ def _importar_classificacao(lote: dict, respostas: list[dict], modelo: str) -> d
         for item in resposta.get("classificacoes") or []:
             if not isinstance(item, dict):
                 continue
+            # O codigo ("2024-q29") so e unico DENTRO de um pedido: dois
+            # lotes podem ter questoes diferentes com o mesmo ano e numero,
+            # vindas de provas diferentes. A repeticao se conta por pedido.
             codigo = item.get("questao")
-            if codigo in vistas:
-                recusas.append(f"{codigo}: classificada duas vezes na resposta")
+            if (pedido["id"], codigo) in vistas:
+                recusas.append(f"{pedido['id']}/{codigo}: classificada duas vezes na resposta")
                 continue
-            vistas.add(codigo)
+            vistas.add((pedido["id"], codigo))
             try:
                 classificacoes.aplicar_proposta(item, pedido, modelo)
                 gravadas += 1
+            except classificacoes.PendenteSemMateria as fora:
+                sem_materia.append(str(fora))
             except classificacoes.PropostaRecusada as erro:
                 recusas.append(str(erro))
     if gravadas:
         classificacoes.exportar()
-    return {"gravadas": gravadas, "repetidas": 0, "recusas": recusas}
+    return {"gravadas": gravadas, "repetidas": 0, "recusas": recusas,
+            "fora_do_edital": sem_materia}
 
 
 def salvar_pedido(lote: dict, caminho: Path | None = None) -> Path:

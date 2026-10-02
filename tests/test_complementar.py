@@ -29,7 +29,7 @@ from radar import complementar, edital_programa
 from radar import provas as arquivos_de_prova
 from radar.cli import app as cli
 from radar.db import sessao
-from radar.models import QuestaoDeProva
+from radar.models import Classificacao, QuestaoDeProva
 from radar.servico import classificacoes, conteudos
 from radar.servico import complementar as servico
 from radar.servico import incidencia as servico_da_incidencia
@@ -570,3 +570,186 @@ def test_classificar_o_complementar_nao_mexe_na_conta_do_alvo(acervo):
     assert linhas["Direito Penal > Imputabilidade penal"].questoes == 2
     assert linhas["Direito Penal"].classificadas == 2
     assert linhas["Direito Penal"].frase == "Acervo complementar FEPESE: 2 questões · 1 prova"
+
+
+# --- bloco generico, catalogo automatico e contagem de distintas ----------------
+
+def _generica_no_banco(s, prova, numero, enunciado, ano=2016,
+                       cargo="Agente de Segurança Socioeducativo",
+                       materia="Conhecimentos Específicos",
+                       concurso="https://fepese.test/2016"):
+    s.add(_questao(prova, numero, materia, "complementar", ano, cargo,
+                   enunciado=enunciado, concurso=concurso))
+
+
+def test_o_pedido_generico_so_pega_bloco_sem_materia_minha(acervo):
+    from radar.servico import manual
+
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        _generica_no_banco(s, "https://fepese.test/2016/AS.pdf", 9,
+                           "Sobre o Código Penal e o dolo, assinale...")
+    lote = manual.pedido_de_classificacao(de_evidencia="complementar", genericos=True)
+
+    assert [p["materia"] for p in lote["pedidos"]] == ["Direito Penal"]
+    pedido = lote["pedidos"][0]
+    assert pedido["bloco_generico"]
+    assert pedido["materia_sugerida_pelo_termo"] == "Direito Penal"
+    assert "o caderno não diz a matéria" in pedido["pedido"]
+    # As questoes que o caderno JA nomeia nao entram no pedido generico.
+    assert len(pedido["questoes"]) == 1
+
+
+def test_o_termo_casa_palavra_inteira_e_nao_pedaco(acervo):
+    """O termo dolo dentro de dolorosa enchia o indicio de questao de saude."""
+    from radar.servico import manual
+
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        _generica_no_banco(s, "https://fepese.test/2016/AS.pdf", 9,
+                           "Sobre a experiência dolorosa do paciente, assinale...")
+    lote = manual.pedido_de_classificacao(de_evidencia="complementar", genericos=True)
+
+    assert lote["pedidos"] == []
+
+
+def _pedido_generico():
+    from radar.servico import manual
+
+    return manual.pedido_de_classificacao(
+        de_evidencia="complementar", genericos=True)["pedidos"][0]
+
+
+def test_no_bloco_generico_a_materia_vem_na_resposta(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        _generica_no_banco(s, "https://fepese.test/2016/AS.pdf", 9,
+                           "De acordo com o Código Penal, o peculato...")
+    pedido = _pedido_generico()
+    codigo = next(iter(pedido["questoes"]))
+
+    with pytest.raises(classificacoes.PropostaRecusada, match="sem a matéria escolhida"):
+        classificacoes.aplicar_proposta(
+            {"questao": codigo, "status": "classificada",
+             "assunto": "Imputabilidade penal", "tipo_de_questao": "conceito",
+             "trecho": "x", "item_do_edital": "y"}, pedido, "teste")
+
+    caminho = classificacoes.aplicar_proposta(
+        {"questao": codigo, "status": "classificada", "materia": "Direito Penal",
+         "assunto": "Crimes contra a Administração Pública",
+         "tipo_de_questao": "conceito", "trecho": "peculato",
+         "item_do_edital": "Crimes contra a Administração Pública"}, pedido, "teste")
+    assert caminho == "Direito Penal > Crimes contra a Administração Pública"
+
+
+def test_bloco_generico_so_aceita_materia_do_edital_de_agora(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        _generica_no_banco(s, "https://fepese.test/2016/AS.pdf", 9,
+                           "De acordo com o Código Penal, o peculato...")
+    pedido = _pedido_generico()
+    codigo = next(iter(pedido["questoes"]))
+
+    with pytest.raises(classificacoes.PropostaRecusada, match="não é matéria do edital"):
+        classificacoes.aplicar_proposta(
+            {"questao": codigo, "status": "classificada",
+             "materia": "Noções de Informática", "assunto": "qualquer",
+             "tipo_de_questao": "conceito", "trecho": "x", "item_do_edital": "y"},
+            pedido, "teste")
+
+
+def test_pendente_em_bloco_generico_fica_sem_linha(acervo):
+    """Sem materia no caderno nao ha onde pendurar a pendente: ela nao vira
+    linha, que ja e o estado de quem nao tem classificacao."""
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        _generica_no_banco(s, "https://fepese.test/2016/AS.pdf", 9,
+                           "De acordo com o Código Penal, o peculato...")
+    pedido = _pedido_generico()
+    codigo = next(iter(pedido["questoes"]))
+
+    with pytest.raises(classificacoes.PendenteSemMateria):
+        classificacoes.aplicar_proposta(
+            {"questao": codigo, "status": "pendente", "motivo": "é de enfermagem"},
+            pedido, "teste")
+    assert servico_da_incidencia.linhas_complementares()["Direito Penal"].classificadas == 0
+
+
+def test_o_catalogo_propoe_assunto_e_marca_a_procedencia(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        for numero, enunciado in (
+                (10, "Assinale a alternativa em que o sinal indicativo de crase está correto."),
+                (11, "Analise a concordância verbal do trecho destacado."),
+                (12, "Sobre o texto 1, assinale a alternativa correta.")):
+            s.add(_questao("https://fepese.test/2016/AS.pdf", numero,
+                           "Língua Portuguesa", "complementar", 2016,
+                           "Agente de Segurança Socioeducativo", enunciado=enunciado,
+                           concurso="https://fepese.test/2016"))
+
+    r = servico.classificar_pelo_catalogo("Língua Portuguesa")
+
+    # A da concordância verbal casa DOIS assuntos do catálogo (concordância e
+    # verbos): fica sem linha, que é o certo.
+    assert (r.propostas, r.ambiguas) == (2, 1)
+    assert r.por_assunto["Emprego da crase"] == 1
+    with sessao() as s:
+        linha = next(c for c in s.query(Classificacao)
+                     if c.conteudo.endswith("Emprego da crase"))
+    assert linha.procedencia == classificacoes.PROCEDENCIA_DO_CATALOGO
+    assert "conferir por amostra" in linha.procedencia
+    assert linha.trecho.startswith("catálogo:")
+
+
+def test_o_catalogo_nao_chuta_quando_casa_dois_assuntos_ou_nenhum(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        for numero, enunciado in (
+                (10, "Sobre a crase e a regência verbal do trecho, assinale."),
+                (11, "Assinale a alternativa que indica o nome do autor do poema.")):
+            s.add(_questao("https://fepese.test/2016/AS.pdf", numero,
+                           "Língua Portuguesa", "complementar", 2016,
+                           "Agente de Segurança Socioeducativo", enunciado=enunciado,
+                           concurso="https://fepese.test/2016"))
+
+    r = servico.classificar_pelo_catalogo("Língua Portuguesa")
+
+    assert r.propostas == 0
+    assert (r.ambiguas, r.sem_assunto) == (1, 1)
+
+
+def test_o_catalogo_nao_sobrescreve_classificacao_que_ja_existe(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    with sessao() as s:
+        s.add(_questao("https://fepese.test/2016/AS.pdf", 10, "Língua Portuguesa",
+                       "complementar", 2016, "Agente de Segurança Socioeducativo",
+                       enunciado="Assinale a alternativa sobre o emprego da crase.",
+                       concurso="https://fepese.test/2016"))
+    with sessao() as s:
+        q = next(x for x in s.query(QuestaoDeProva).filter_by(numero=10))
+        chave = classificacoes.chave_de(q)
+    classificacoes.classificar(chave, "Língua Portuguesa > Pontuação", "manual")
+
+    r = servico.classificar_pelo_catalogo("Língua Portuguesa")
+
+    assert (r.propostas, r.ja_classificadas) == (0, 1)
+
+
+def test_a_mesma_questao_em_varios_cadernos_conta_uma_vez(acervo):
+    """A FEPESE repete o caderno de Portugues em dezenas de cargos: no acervo
+    real as 993 ocorrencias sao 184 questoes. Contar 993 inflaria o acervo."""
+    # A numeração de cada caderno tem de fechar, senão a prova é recusada na
+    # validação: a 4 completa o AS.pdf (1 a 3 vêm da fixture), e o AS2.pdf
+    # nasce com a 1.
+    with sessao() as s:
+        for prova, numero in (("https://fepese.test/2016/AS.pdf", 4),
+                              ("https://fepese.test/2016/AS2.pdf", 1)):
+            s.add(_questao(prova, numero, "Direito Penal", "complementar", 2016,
+                           "Agente de Segurança Socioeducativo",
+                           enunciado="A mesma questão, nos dois cadernos.",
+                           concurso="https://fepese.test/2016"))
+    servico.aplicar(hoje=date(2026, 10, 1))
+
+    linha = servico_da_incidencia.linhas_complementares()["Direito Penal"]
+    assert linha.ocorrencias == linha.questoes + 1
+    assert "ocorrências em cadernos diferentes" in linha.frase

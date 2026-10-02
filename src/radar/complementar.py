@@ -72,6 +72,19 @@ def normalizar(texto: str | None) -> str:
     return re.sub(r"\s+", " ", sem_acento).strip().lower()
 
 
+def procurar(termo: str) -> re.Pattern:
+    """O termo como PALAVRA INTEIRA, ja normalizado.
+
+    Procurar pedaco de palavra enche o indicio de lixo: "dolo" casa dentro de
+    "dolorosa" e levava questao de enfermagem para Direito Penal. O termo
+    pode ter mais de uma palavra ("codigo penal"), e ai o espaco vale como
+    separador qualquer (pontuacao, quebra de linha).
+    """
+    palavras = [re.escape(parte) for parte in normalizar(termo).split()]
+    return re.compile(r"(?<![0-9a-z])" + r"[^0-9a-z]+".join(palavras)
+                      + r"(?![0-9a-z])")
+
+
 @dataclass
 class QuestaoDoCaderno:
     """Uma questao de uma prova complementar, do jeito que o levantamento usa."""
@@ -272,7 +285,7 @@ def montar(materias: list[str], cadernos: list[Caderno],
     A ordem e a das materias que vieram; dentro de cada uma, a prova com mais
     questoes primeiro.
     """
-    procurar = {m: [normalizar(t) for t in termos.get(m, []) if t] for m in materias}
+    buscas = {m: [procurar(t) for t in termos.get(m, []) if t] for m in materias}
     levantamento = []
     for materia in materias:
         da_materia = MateriaComplementar(materia=materia)
@@ -285,9 +298,9 @@ def montar(materias: list[str], cadernos: list[Caderno],
                 # So o que o nome nao contou - nem para esta materia, nem
                 # para outra: questao que ja tem materia propria no caderno
                 # nao vira indicio de uma terceira.
-                if q.materia_no_edital is None and procurar[materia]:
+                if q.materia_no_edital is None and buscas[materia]:
                     texto = normalizar(q.texto)
-                    if any(t in texto for t in procurar[materia]):
+                    if any(b.search(texto) for b in buscas[materia]):
                         por_termo += 1
             if pelo_nome or por_termo:
                 da_materia.provas.append(ProvaDaMateria(
@@ -353,15 +366,23 @@ def decidir(validacao: Validacao, materias_do_edital: list[str]) -> tuple[bool, 
 
 @dataclass
 class LinhaComplementar:
-    """O que o acervo complementar tem debaixo de um no da arvore."""
+    """O que o acervo complementar tem debaixo de um no da arvore.
+
+    A conta e em questao DISTINTA, pela chave. Nao e detalhe: a FEPESE repete
+    o mesmo caderno de Portugues em dezenas de cargos do mesmo concurso, e no
+    acervo real as 993 ocorrencias de Portugues sao 184 questoes distintas.
+    Dizer 993 faria o acervo parecer cinco vezes maior do que e. As
+    ocorrencias ficam ao lado, entre parenteses, porque elas contam outra
+    coisa: em quantos cadernos aquilo foi cobrado.
+    """
 
     caminho: str
-    questoes: int = 0
+    questoes: int = 0           # distintas, pela chave
+    ocorrencias: int = 0        # com a repeticao entre cadernos
     provas: int = 0
-    #: Dessas, quantas ja tem classificacao. No nivel da materia a conta
-    #: aceita a questao sem classificar (o caderno diz a materia, e isso e
-    #: evidencia); abaixo dela, so a classificada conta - e por isso as duas
-    #: colunas existem.
+    #: Dessas (distintas), quantas ja tem classificacao. No nivel da materia a
+    #: conta aceita a questao sem classificar (o caderno diz a materia, e isso
+    #: e evidencia); abaixo dela, so a classificada conta.
     classificadas: int = 0
 
     @property
@@ -373,9 +394,14 @@ class LinhaComplementar:
         """A linha pronta, do jeito que a secao 4 pede."""
         if not self.questoes:
             return "Acervo complementar FEPESE: nada no acervo"
+        notas = []
+        if self.ocorrencias > self.questoes:
+            notas.append(f"{self.ocorrencias} ocorrências em cadernos diferentes")
         falta = self.questoes - self.classificadas
-        pendente = f" ({falta} sem classificação ainda)" if falta else ""
-        return f"Acervo complementar FEPESE: {self.amostra}{pendente}"
+        if falta:
+            notas.append(f"{falta} sem classificação ainda")
+        extra = f" ({'; '.join(notas)})" if notas else ""
+        return f"Acervo complementar FEPESE: {self.amostra}{extra}"
 
 
 # --- as perguntas da secao 5 do pedido ------------------------------------------
