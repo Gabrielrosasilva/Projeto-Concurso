@@ -22,7 +22,7 @@ def cliente(banco_temporario):
     return TestClient(app)
 
 
-def _acervo(n: int = 6, materia: str = "Direito Penal"):
+def _acervo(n: int = 25, materia: str = "Direito Penal"):
     with sessao() as s:
         s.add(_concurso())
         for i in range(n):
@@ -69,13 +69,14 @@ def test_sem_treino_nada_nasce_vazio_tudo_convida(cliente, com_quadro_do_edital)
 
 def test_com_erro_o_revisar_enche_e_o_botao_aparece(cliente, com_quadro_do_edital):
     _acervo()
-    _responder(certas=2, erradas=3)
+    # 20 respostas: o minimo do nivel "materia" no config/amostra.yml. Com
+    # menos que isso a materia nao entra em "fraca" - e o ponto do minimo.
+    _responder(certas=8, erradas=12)
 
     texto = cliente.get("/").text
 
     assert "Revisar agora" in texto
-    assert "Direito Penal · 40% em 5" in texto          # materia fraca
-    assert "Responda mais <b>15</b>" in texto
+    assert "Direito Penal · 40% em 20" in texto         # materia fraca
 
 
 def test_revisar_agora_monta_a_rodada_so_com_os_erros(cliente, com_quadro_do_edital):

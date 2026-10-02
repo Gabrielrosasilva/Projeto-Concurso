@@ -12,9 +12,44 @@
 #              Sociologia) nunca chega la - e e isso mesmo: uma prova so nao
 #              mostra padrao, mostra o que aconteceu uma vez.
 #
-# A secao do MEU desempenho (os minimos da decisao 6 da Etapa 0) entra aqui na
-# Etapa 4.
+#   desempenho - o que se diz sobre MIM: o estado de um no da arvore de
+#              conteudos (Amostra insuficiente, Precisa revisar, Em
+#              aprendizado, Desempenho consistente, Bom desempenho com
+#              amostra suficiente). Sao os limites da decisao 6 da Etapa 0,
+#              lidos por src/radar/amostra.py.
+#
+# As duas secoes nunca se somam: uma fala da banca, a outra de mim.
 
 acervo:
   minimo_questoes: 3
   minimo_provas: 2
+
+desempenho:
+  # Quantas respostas SEM CONSULTA cada nivel da arvore precisa ter para o
+  # numero dele valer. Com 10 questoes a margem de uma porcentagem ainda e de
+  # uns 30 pontos; com 20, de uns 22. Abaixo do minimo o numero aparece na
+  # tela com o rotulo "Amostra insuficiente" e nao ordena nem projeta nada.
+  #
+  # O subassunto e o elemento pedem menos por necessidade: ha subassunto com 6
+  # questoes no acervo inteiro, e exigir 10 ali seria nunca medir - por falta
+  # de prova, nao por falta de estudo meu.
+  minimos:
+    materia: 20
+    assunto: 10
+    subassunto: 6
+    elemento: 6
+
+  # Abaixo desta porcentagem o no "precisa revisar", mesmo que a meta dele
+  # seja menor que isso.
+  precisa_revisar_abaixo_de: 60
+
+  # A meta de materia que nao tem meta propria no config/cronograma.yml: a da
+  # prova inteira do edital de 2019, 79 de 100.
+  meta_padrao: 79
+
+  # O estado mais alto ("Bom desempenho com amostra suficiente") pede mais que
+  # estar na meta: o dobro do minimo, respondido em dois dias diferentes ou
+  # mais. Uma tarde boa num assunto fresco na cabeca nao e dominio.
+  bom_desempenho:
+    vezes_o_minimo: 2
+    dias_distintos: 2

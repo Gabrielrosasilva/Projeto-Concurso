@@ -66,7 +66,7 @@ def test_acertar_tudo_deixa_o_assunto_sem_pontos_a_ganhar():
     isso, e nao esconder o assunto."""
     linhas = _linhas(
         {("Lei de Execução Penal", "Progressão de regime"): (10, 0)},
-        acertos={("Lei de Execução Penal", "Progressão de regime"): (8, 8)},
+        acertos={("Lei de Execução Penal", "Progressão de regime"): (10, 10)},
     )
 
     assert linhas[0].pontos == 0.0

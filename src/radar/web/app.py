@@ -14,6 +14,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from radar import acompanhando as meus_favoritos
+from radar import amostra
 from radar import eventos as linha_do_tempo
 from radar import foco as foco_do_alvo
 from radar import auditoria
@@ -120,10 +121,11 @@ templates.env.globals["frase_da_ia"] = servico.metricas.frase_da_ia
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.
 templates.env.filters["numero"] = onde_estudar.numero
-# Os minimos de resposta, para a tela dizer "2 de 5" com o mesmo numero que
-# faz a conta - e nao com um 5 escrito no template.
-templates.env.globals["MINIMO_NA_MATERIA"] = onde_estudar.MINIMO_NA_MATERIA
-templates.env.globals["MINIMO_NO_ASSUNTO"] = onde_estudar.MINIMO_NO_ASSUNTO
+# Os minimos de resposta, para a tela dizer "2 de 20" com o mesmo numero que
+# faz a conta - e nao com um numero escrito no template. Os dois saem do
+# config/amostra.yml (Etapa 4): um lugar so para as telas e para as contas.
+templates.env.globals["MINIMO_NA_MATERIA"] = amostra.carregar().do_nivel("materia")
+templates.env.globals["MINIMO_NO_ASSUNTO"] = amostra.carregar().do_nivel("assunto")
 # Os nomes do caderno de erros (motivo, fonte, o que a lista mostra) e a
 # pergunta "este erro esta vencido?". Vem do servico para nao existir um
 # "Pegadinha" escrito no HTML e outro no banco.
@@ -237,7 +239,6 @@ def rotulo_da_lei(link: str) -> str:
     return "Ler a lei"
 
 templates.env.globals.update(
-    MINIMO_DA_AMOSTRA=servico.materias.MINIMO_DA_AMOSTRA,
     linha_do_grafico=servico.materias.linha_do_grafico,
     GRAFICO_LARGURA=servico.materias.LARGURA,
     GRAFICO_ALTURA=servico.materias.ALTURA,

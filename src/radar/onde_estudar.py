@@ -26,6 +26,7 @@ que houve foi eu nao ter treinado. A tela diz isso com todas as letras.
 from dataclasses import dataclass
 from datetime import date
 
+from radar import amostra as regua
 from radar.leis import Lei, do_assunto
 from radar.regioes import normalizar
 
@@ -42,11 +43,9 @@ NA_TELA = 12
 # "ainda nao treinado": entra pelo peso (ou pelas questoes esperadas), e o
 # fator de tempo fica neutro.
 #
-# O assunto pede menos que a materia porque ha assunto com so 3 questoes no
-# acervo inteiro: ele nunca chegaria a 5 sem repetir questao - e questao
-# repetida conta uma vez so, pela ultima resposta.
-MINIMO_NA_MATERIA = 5
-MINIMO_NO_ASSUNTO = 3
+# O minimo nao mora mais aqui: ele vem do config/amostra.yml, pelo
+# `radar.amostra` (Etapa 4). Este arquivo continua puro - quem chama passa os
+# minimos, e sem eles valem os da decisao 6.
 
 
 def e_amostra_pequena(respondidas: int, minimo: int) -> bool:
@@ -121,10 +120,14 @@ class LinhaDeEstudo:
     #: Quantas eu acertei, como veio da conta (`servico.metricas`) - e nao de
     #: volta da porcentagem, que arredonda e pode dizer outro numero.
     acertos: int = 0
+    #: O minimo que esta linha precisava ter para o acerto virar medida. Vem
+    #: do config/amostra.yml e viaja NA LINHA, para a tela escrever o mesmo
+    #: numero que fez a conta.
+    minimo: int = regua.PADRAO.do_nivel("assunto")
 
     @property
     def amostra_pequena(self) -> bool:
-        return e_amostra_pequena(self.respondidas, MINIMO_NO_ASSUNTO)
+        return e_amostra_pequena(self.respondidas, self.minimo)
 
     @property
     def dias_sem_revisar(self) -> int | None:
@@ -175,6 +178,7 @@ def montar(
     origens: dict[str, str],
     ultimas: dict[tuple[str, str], date] | None = None,
     hoje: date | None = None,
+    minimos: regua.Minimos | None = None,
 ) -> list[LinhaDeEstudo]:
     """As linhas ordenadas por quanto ha para ganhar em cada assunto.
 
@@ -188,6 +192,7 @@ def montar(
     ha "questoes esperadas" nenhuma, e inventar um peso e justamente o que
     faria eu estudar a materia errada por meses.
     """
+    minimo = (minimos or regua.PADRAO).do_nivel("assunto")
     peso_da_materia = {m.nome: m.questoes for m in materias_do_edital}
 
     # A base e a soma das marcas da PROPRIA materia, e nao o total do acervo:
@@ -213,7 +218,7 @@ def montar(
         # nao vira pontos, e sem pontos o fator de tempo fica neutro. Senao 1
         # erro jogava o assunto para o topo por "0%", e 1 acerto o jogava
         # para o fim como se eu dominasse.
-        medido = respondidas >= MINIMO_NO_ASSUNTO
+        medido = respondidas >= minimo
         pontos = esperadas * (1 - acerto / 100) if medido else None
         ultima = (ultimas or {}).get((materia, assunto)) if medido else None
 
@@ -233,6 +238,7 @@ def montar(
             ultima=ultima,
             fator=fator_de_tempo(ultima, hoje),
             acertos=certas,
+            minimo=minimo,
         ))
 
     # Empate desempata pelo assunto mais medido, e depois pelo nome: duas
@@ -275,7 +281,7 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
     if primeira.pontos is None:
         if primeira.respondidas:
             medida = (f"Respondi só {primeira.respondidas} questão(ões) dele "
-                      f"- amostra pequena, abaixo das {MINIMO_NO_ASSUNTO} que "
+                      f"- amostra pequena, abaixo das {primeira.minimo} que "
                       f"fazem o acerto valer")
         else:
             medida = "Eu ainda não respondi nenhuma questão dele no simulado"

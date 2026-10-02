@@ -24,6 +24,7 @@ from pathlib import Path
 from sqlalchemy import func, select
 
 from radar import alvo as alvos
+from radar import amostra as regua
 from radar import config, edital_materias, edital_programa, macetes, onde_estudar, provas
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
@@ -705,15 +706,16 @@ def _pior_das_pesadas(pesadas: set[str], acerto: dict) -> str | None:
     E a resposta para "por onde eu comeco a estudar hoje": errar muito numa
     materia de 2 questoes custa 2 questoes; errar numa de 15 decide a prova.
 
-    So entra materia com acerto MEDIDO - pelo menos
-    `onde_estudar.MINIMO_NA_MATERIA` questoes. Abaixo disso a porcentagem e
-    sorte, e apontar "comece por aqui" em cima dela seria inventar. A home usa
-    o mesmo minimo, e por isso as duas telas apontam a mesma materia.
+    So entra materia com acerto MEDIDO - pelo menos o minimo do nivel
+    "materia" no config/amostra.yml. Abaixo disso a porcentagem e sorte, e
+    apontar "comece por aqui" em cima dela seria inventar. A home e Minhas
+    materias usam o mesmo minimo, e por isso as telas nao discordam.
     """
+    minimo = regua.carregar().do_nivel("materia")
     medidas = [
         (nome, acerto[nome]) for nome in pesadas
         if nome in acerto
-        and acerto[nome].respondidas >= onde_estudar.MINIMO_NA_MATERIA
+        and acerto[nome].respondidas >= minimo
     ]
     if not medidas:
         return None
@@ -955,6 +957,7 @@ def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
     acertos, ultimas = _acerto_por_assunto(s, para_o_edital)
     linhas = onde_estudar.montar(
         materias_do_edital, contagens, acertos, origens, ultimas,
+        minimos=regua.carregar(),
     )
 
     # A materia que nao rendeu nenhum assunto nao pode so sumir do grafico.

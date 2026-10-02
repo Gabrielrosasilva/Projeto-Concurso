@@ -15,7 +15,7 @@ IA e explicavel na tela:
 
   * o PESO e o do quadro do edital, e nao o do acervo: e o que a proxima prova
     promete cobrar;
-  * com menos de `onde_estudar.MINIMO_NA_MATERIA` na materia, o acerto e "desconhecido"
+  * com menos que o minimo da materia (config/amostra.yml) o acerto e "desconhecido"
     e a materia entra como "ainda nao treinada", valendo o peso inteiro - o
     maximo que ela poderia valer, a mesma regra do "Onde estudar primeiro";
   * o FATOR DE TEMPO e o de `onde_estudar.fator_de_tempo`: 1 no dia da
@@ -29,6 +29,7 @@ from datetime import date, datetime, timezone
 
 from sqlalchemy import func, select
 
+from radar import amostra as regua
 from radar import foco, onde_estudar
 from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado
@@ -38,8 +39,9 @@ from radar.servico import metricas
 from radar.servico import simulado as treino
 from radar.util import para_local
 
-# O minimo de respostas e o de `onde_estudar.MINIMO_NA_MATERIA`: um so, para
-# a home, o Meu foco e o Onde estudar primeiro nunca discordarem.
+# O minimo de respostas e o do nivel "materia" no config/amostra.yml: um so,
+# para a home, o Meu foco, o Onde estudar primeiro e Minhas materias nunca
+# discordarem (Etapa 4).
 
 # Quantas materias o bloco mostra. Tres, como a especificacao pede.
 QUANTAS_PRIORIDADES = 3
@@ -58,6 +60,9 @@ class Prioridade:
     valor: float = 0.0                # a conta da formula, para ordenar
     fator: float = 1.0                # o fator de tempo; 1 sem treino
     dias_sem_revisar: int | None = None
+    #: O minimo que esta materia precisava, para o cartao escrever o mesmo
+    #: numero que fez a conta.
+    minimo: int = regua.PADRAO.do_nivel("materia")
 
     @property
     def treinada(self) -> bool:
@@ -70,7 +75,7 @@ class Prioridade:
         if not self.treinada:
             if self.respondidas:
                 return (f"{base} · amostra pequena ({self.respondidas} de "
-                        f"{onde_estudar.MINIMO_NA_MATERIA})")
+                        f"{self.minimo})")
             return f"{base} · ainda não treinada"
         texto = (f"{base} · {self.acerto:.0f}% de acerto em "
                  f"{self.respondidas} questões")
@@ -84,7 +89,7 @@ class Prioridade:
 class Revisar:
     erradas: int = 0
     #: [(materia, acerto %, respondidas)] com acerto abaixo de ACERTO_FRACO
-    #: e base de pelo menos onde_estudar.MINIMO_NA_MATERIA.
+    #: e base de pelo menos o minimo da materia (config/amostra.yml).
     materias_fracas: list = field(default_factory=list)
     respondidas: int = 0
 
@@ -136,6 +141,7 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
         return []
 
     hoje = hoje or date.today()
+    minimo = regua.carregar().do_nivel("materia")
     ultimas = _ultima_resposta_por_materia()
     medido = {normalizar(d.materia): d for d in treino.desempenho() if d.respondidas}
     lista = []
@@ -143,7 +149,7 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
         peso = m.questoes / total * 100
         d = medido.get(normalizar(m.nome))
         respondidas = d.respondidas if d else 0
-        if respondidas >= onde_estudar.MINIMO_NA_MATERIA:
+        if respondidas >= minimo:
             acerto = d.porcentagem
             ultima = ultimas.get(normalizar(m.nome))
             fator = onde_estudar.fator_de_tempo(ultima, hoje)
@@ -157,7 +163,7 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
         lista.append(Prioridade(
             materia=m.nome, questoes_no_edital=m.questoes, peso=peso,
             respondidas=respondidas, acerto=acerto, valor=valor,
-            fator=fator, dias_sem_revisar=dias,
+            fator=fator, dias_sem_revisar=dias, minimo=minimo,
         ))
 
     # Empate de valor: a de mais questoes primeiro - e a que decide a prova.
@@ -166,12 +172,13 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
 
 
 def _revisar() -> Revisar:
+    minimo = regua.carregar().do_nivel("materia")
     desempenho = treino.desempenho()
     return Revisar(
         erradas=len(treino.questoes_erradas()),
         materias_fracas=[
             (d.materia, d.porcentagem, d.respondidas) for d in desempenho
-            if d.respondidas >= onde_estudar.MINIMO_NA_MATERIA
+            if d.respondidas >= minimo
             and d.porcentagem < ACERTO_FRACO
         ],
         # Quantas questoes reais diferentes eu respondi: a conta e do metricas.

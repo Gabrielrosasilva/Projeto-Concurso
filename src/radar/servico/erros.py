@@ -66,6 +66,14 @@ SITUACAO_PADRAO = "hoje"
 NO_QUE_DERRUBA = 5
 
 # Abaixo disto, a porcentagem por motivo nao diz nada: um erro de dois e 50%.
+#
+# ESTE NUMERO FICA AQUI DE PROPOSITO, e nao no config/amostra.yml com os
+# minimos de desempenho (Etapa 4). Ele mede outra coisa: a FATIA de cada
+# motivo dentro dos meus erros ("3 dos meus 10 erros foram por pressa"), e nao
+# o meu acerto num conteudo. Sao duas perguntas com riscos diferentes - errar
+# a fatia de um motivo nao me faz estudar a materia errada por meses -, e
+# juntar as duas na mesma regua tornaria as duas erradas. Avaliado e mantido na
+# Etapa 4; esta escrito tambem no src/radar/amostra.py.
 MINIMO_PARA_A_PORCENTAGEM = 3
 
 

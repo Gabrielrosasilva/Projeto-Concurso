@@ -823,13 +823,14 @@ def _treinar(materia: str, acertos: int, erros: int) -> None:
 def test_a_tabela_mostra_o_acerto_ao_lado_do_peso(cliente, com_quadro_do_edital):
     with sessao() as s:
         s.add(_concurso())
-    _treinar("Direitos Humanos", acertos=2, erros=8)      # 20%
+    # 20 respostas: o minimo do nivel "materia" no config/amostra.yml.
+    _treinar("Direitos Humanos", acertos=4, erros=16)     # 20%
 
     texto = cliente.get("/analises").text
 
     assert "Meu acerto" in texto
     assert "20%" in texto
-    assert "de 10" in texto
+    assert "de 20" in texto
 
 
 def test_a_materia_sem_treino_nao_aparece_como_zero(cliente, com_quadro_do_edital):
@@ -843,8 +844,8 @@ def test_a_materia_sem_treino_nao_aparece_como_zero(cliente, com_quadro_do_edita
 def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
     with sessao() as s:
         s.add(_concurso())
-    _treinar("Direitos Humanos", acertos=2, erros=8)      # 20%, 15 questoes
-    _treinar("Língua Portuguesa", acertos=9, erros=1)     # 90%, 15 questoes
+    _treinar("Direitos Humanos", acertos=4, erros=16)     # 20%, 15 questoes
+    _treinar("Língua Portuguesa", acertos=18, erros=2)    # 90%, 15 questoes
 
     texto = cliente.get("/analises").text
 

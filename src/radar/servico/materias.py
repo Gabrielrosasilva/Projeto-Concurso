@@ -23,6 +23,7 @@ from datetime import date
 
 from sqlalchemy import select
 
+from radar import amostra as regua
 from radar import cronograma as plano_de_estudo
 from radar.db import sessao
 from radar.models import EstadoDoDia
@@ -32,9 +33,10 @@ from radar.servico import erros as caderno
 from radar.servico import metricas
 from radar.servico.compilado import mesma_materia
 
-#: Abaixo disto, a porcentagem nao e leitura: e sorte. 20 questoes sem consulta
-#: e o minimo para eu olhar um numero por materia e acreditar nele.
-MINIMO_DA_AMOSTRA = 20
+#: Abaixo do minimo, a porcentagem nao e leitura: e sorte. O numero vem do
+#: config/amostra.yml, nivel "materia" (Etapa 4) - o mesmo que a home, o Meu
+#: foco e o Onde estudar primeiro usam. Antes havia um 20 escrito aqui e um 5
+#: no onde_estudar: duas reguas para a mesma duvida.
 
 #: Quantos assuntos o cartao lista. O resto vira "e mais N".
 ASSUNTOS_NO_CARTAO = 6
@@ -98,6 +100,8 @@ class MateriaNaTela:
     semanal: list = field(default_factory=list)
     #: Em que ciclo do mapa ela entra, quando eu ainda nao estudei nada dela.
     ciclo_de_entrada: str | None = None
+    #: O minimo de respostas sem consulta deste nivel, do config/amostra.yml.
+    minimo: int = regua.PADRAO.do_nivel("materia")
 
     @property
     def meta_em_porcentagem(self) -> int:
@@ -115,7 +119,7 @@ class MateriaNaTela:
 
     @property
     def amostra_pequena(self) -> bool:
-        return self.sem_consulta.medidas < MINIMO_DA_AMOSTRA
+        return self.sem_consulta.medidas < self.minimo
 
     @property
     def na_meta(self) -> bool:
@@ -237,8 +241,10 @@ def montar(plano=None, hoje: date | None = None) -> tuple[list[MateriaNaTela], P
     hoje = hoje or diario.hoje_local()
     nomes = [m.nome for m in plano.materias]
 
+    minimo = regua.carregar().do_nivel("materia")
     cartoes = {
-        m.nome: MateriaNaTela(nome=m.nome, questoes_na_prova=m.questoes, meta=m.meta)
+        m.nome: MateriaNaTela(nome=m.nome, questoes_na_prova=m.questoes,
+                              meta=m.meta, minimo=minimo)
         for m in plano.materias
     }
     if not cartoes:

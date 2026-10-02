@@ -114,7 +114,7 @@
           questões que ela tem na prova.
           {% if projecao.sem_dado %}
             {{ projecao.sem_dado | length }} matéria(s) ficaram de fora por falta
-            de amostra ({{ MINIMO_DA_AMOSTRA }} questões sem consulta):
+            de amostra ({{ MINIMO_NA_MATERIA }} questões sem consulta):
             {{ projecao.sem_dado | join(', ') }}. O número de cima conta só as
             {{ projecao.com_dado | length }} que já têm base.
           {% endif %}
@@ -122,7 +122,7 @@
       {% else %}
         <p class="ds-nota">
           Ainda não dá para projetar: nenhuma matéria tem
-          {{ MINIMO_DA_AMOSTRA }} questões sem consulta neste ciclo. Até lá, o
+          {{ MINIMO_NA_MATERIA }} questões sem consulta neste ciclo. Até lá, o
           número seria chute com cara de conta.
         </p>
       {% endif %}
@@ -182,7 +182,7 @@
               <span>meta {{ m.meta_em_porcentagem }}% ({{ m.meta }} de {{ m.questoes_na_prova }})</span>
             </p>
             {% if m.amostra_pequena %}
-              <p class="de-onde">⚠ amostra pequena: menos de {{ MINIMO_DA_AMOSTRA }}
+              <p class="de-onde">⚠ amostra pequena: menos de {{ MINIMO_NA_MATERIA }}
                 questões sem consulta</p>
             {% endif %}
           </div>
