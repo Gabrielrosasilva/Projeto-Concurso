@@ -143,7 +143,11 @@ class Painel:
 
     #: Como eu vou em cada materia, pelo nome que o EDITAL usa. Materia que eu
     #: nunca treinei nao aparece aqui - ela nao tem acerto, e nao tem zero.
+    #: Desde a Etapa 4 ele soma o radar e o anotado (decisao 7).
     acerto_por_materia: dict = field(default_factory=dict)
+    #: {materia: "radar 70% em 10 · anotado 73% em 15"} - a divisao que a tela
+    #: escreve ao lado do numero, para dizer de onde ele veio.
+    divisao_por_materia: dict = field(default_factory=dict)
     #: As materias que puxam mais nota. Ver `materias_de_maior_peso`.
     materias_pesadas: set = field(default_factory=set)
     #: A pior das pesadas. None quando nenhuma delas foi treinada ainda.
@@ -677,7 +681,12 @@ def _acerto_por_materia(materias: list) -> dict:
     """Quanto eu acerto em cada materia do edital, pelo nome que ele usa.
 
     Vem do simulado - de TODOS os simulados, nao so do ultimo: uma rodada de
-    20 questoes nao diz se eu sei a materia, e o acumulado diz.
+    20 questoes nao diz se eu sei a materia, e o acumulado diz - MAIS o
+    anotado do Qconcursos nas faixas e nos extras ligados a um conteudo
+    daquela materia (decisao 7 da Etapa 0, que revisa a E2). A tela escreve a
+    divisao "radar X% em N · anotado Y% em M", em `divisao_por_materia`: os
+    dois numeros medem de maneiras diferentes, e um numero unico esconderia
+    isso.
 
     A chave e o nome do edital porque e ele que manda na tela, e os dois lados
     escrevem diferente: o edital diz "Lingua Portuguesa" e o cabecalho do
@@ -693,11 +702,56 @@ def _acerto_por_materia(materias: list) -> dict:
     medido = {
         normalizar(d.materia): d for d in servico.desempenho() if d.respondidas
     }
-    return {
-        m.nome: medido[normalizar(m.nome)]
-        for m in materias
-        if normalizar(m.nome) in medido
+    anotado = {
+        normalizar(nome): valor for nome, valor
+        in servico.desempenho_por_conteudo.anotado_por_materia().items()
     }
+
+    saida = {}
+    for m in materias:
+        chave = normalizar(m.nome)
+        no_radar, anotada = medido.get(chave), anotado.get(chave)
+        if no_radar is None and anotada is None:
+            # Materia que eu nunca respondi nao entra: ela nao vale zero por
+            # cento - zero diria que eu errei tudo.
+            continue
+        respondidas = (no_radar.respondidas if no_radar else 0) + (
+            anotada.respostas if anotada else 0)
+        acertos = (no_radar.acertos if no_radar else 0) + (
+            anotada.acertos if anotada else 0)
+        saida[m.nome] = servico.metricas.DesempenhoDaMateria(
+            materia=m.nome, respondidas=respondidas, acertos=acertos)
+    return saida
+
+
+def divisao_por_materia(materias: list) -> dict[str, str]:
+    """{materia: "radar 70% em 10 · anotado 73% em 15"}, para a tela.
+
+    A frase da decisao 7: sempre as duas metades, mesmo vazias. Ver
+    "anotado —" ao lado de "radar 70%" diz que eu nao anotei nada ali.
+    """
+    from radar import servico
+
+    medido = {normalizar(d.materia): d for d in servico.desempenho()}
+    anotado = {normalizar(nome): valor for nome, valor
+               in servico.desempenho_por_conteudo.anotado_por_materia().items()}
+
+    def lado(nome, porcentagem, quantas):
+        if not quantas:
+            return f"{nome} —"
+        return f"{nome} {porcentagem:.0f}% em {quantas}"
+
+    saida = {}
+    for m in materias:
+        chave = normalizar(m.nome)
+        no_radar, anotada = medido.get(chave), anotado.get(chave)
+        saida[m.nome] = " · ".join([
+            lado("radar", no_radar.porcentagem if no_radar else 0,
+                 no_radar.respondidas if no_radar else 0),
+            lado("anotado", anotada.porcentagem if anotada else 0,
+                 anotada.respostas if anotada else 0),
+        ])
+    return saida
 
 
 def _pior_das_pesadas(pesadas: set[str], acerto: dict) -> str | None:
@@ -934,10 +988,23 @@ def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
             if ultimas.get((materia, nome)) is None or dia > ultimas[(materia, nome)]:
                 ultimas[(materia, nome)] = dia
 
-    return (
-        {par: (numeros.medidas, numeros.acertos) for par, numeros in medido.items()},
-        ultimas,
-    )
+    contagem = {par: [numeros.medidas, numeros.acertos]
+                for par, numeros in medido.items()}
+
+    # O anotado do Qconcursos, no (materia, assunto) do no que eu escolhi ao
+    # anotar (decisao 7). Par que a tela nao conhece - assunto do catalogo que
+    # nao e o nome do edital - fica de fora: nada e aproximado.
+    for par, anotada in servico.desempenho_por_conteudo.anotado_por_assunto().items():
+        if par[0] not in para_o_edital.values():
+            continue
+        atual = contagem.setdefault(par, [0, 0])
+        atual[0] += anotada.respostas
+        atual[1] += anotada.acertos
+        if anotada.ultima and (ultimas.get(par) is None
+                               or anotada.ultima > ultimas[par]):
+            ultimas[par] = anotada.ultima
+
+    return {par: tuple(valores) for par, valores in contagem.items()}, ultimas
 
 
 def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
@@ -1028,6 +1095,7 @@ def montar() -> Painel:
     # dois juntos respondem a pergunta que o quadro sozinho nao responde: por
     # onde comecar hoje.
     painel.acerto_por_materia = _acerto_por_materia(materias)
+    painel.divisao_por_materia = divisao_por_materia(materias)
     painel.materias_pesadas = materias_de_maior_peso(materias, edital.total)
     painel.pior_materia = _pior_das_pesadas(
         painel.materias_pesadas, painel.acerto_por_materia

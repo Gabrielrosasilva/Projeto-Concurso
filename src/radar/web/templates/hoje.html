@@ -444,6 +444,18 @@
              value="{{ v.assunto or (e.assunto if e else '') }}"
              placeholder="ex.: progressão de regime">
     </label>
+    {# O no da arvore de conteudos (Etapa 4). O assunto digitado acima fica
+       onde esta: o no e um vinculo a MAIS, e e ele que leva o anotado do
+       Qconcursos ao subassunto. Vazio e normal - antes era sempre vazio. #}
+    <label class="ds-campo">Conteúdo <span class="ds-dica">(opcional, para o desempenho por conteúdo)</span>
+      {% set escolhido = v.conteudo or (e.conteudo if e else '') %}
+      <select name="conteudo">
+        <option value="">— nenhum —</option>
+        {% for caminho, rotulo in OPCOES_DE_CONTEUDO() %}
+          <option value="{{ caminho }}" {{ 'selected' if caminho == escolhido }}>{{ rotulo }}</option>
+        {% endfor %}
+      </select>
+    </label>
     <div class="linha-extra">
       <label class="ds-campo">Questões
         <input type="number" name="questoes" min="0" inputmode="numeric"
@@ -884,6 +896,26 @@
                                placeholder="—"
                                value="{{ anotado.acertos if anotado and anotado.acertos is not none else '' }}">
                       </label>
+                      {# O conteudo da faixa, para o anotado chegar ao subassunto
+                         (Etapa 4). Um select so, com o caminho no valor: tres
+                         caixas encadeadas precisariam de JS. Fora do ramo da
+                         faixa o servico recusa - para isso existe o extra. #}
+                      {% set raiz = (anotado.conteudo if anotado and anotado.conteudo else f.conteudo) %}
+                      {% if raiz %}
+                        {% set dentro = OPCOES_DE_CONTEUDO(f.conteudo or raiz) %}
+                        {% if dentro | length > 1 %}
+                        <label>conteúdo
+                          <select name="conteudo">
+                            {% for caminho, rotulo in dentro %}
+                              <option value="{{ caminho }}"
+                                      {% if caminho == raiz %}selected{% endif %}>{{ rotulo }}</option>
+                            {% endfor %}
+                          </select>
+                        </label>
+                        {% else %}
+                          <input type="hidden" name="conteudo" value="{{ raiz }}">
+                        {% endif %}
+                      {% endif %}
                       <label class="caixa">
                         <input type="checkbox" name="consulta" value="1"
                                {% if (anotado.consulta if anotado else CONSULTA_POR_PADRAO(f)) %}checked{% endif %}>

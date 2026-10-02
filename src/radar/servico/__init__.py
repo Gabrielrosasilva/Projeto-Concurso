@@ -133,6 +133,14 @@ from radar.servico import conferencia   # noqa: F401 - usado pela CLI
 # conteudos e as classificacoes. `servico.evidencia.atualizar()`.
 from radar.servico import evidencia     # noqa: F401 - usado pela CLI
 from radar.servico import conteudos     # noqa: F401 - usado pela CLI
+# A Etapa 4: o meu desempenho por NO da arvore, com os dois recortes (radar e
+# anotado) e o estado da amostra. Entra como MODULO porque `desempenho` ja e
+# funcao nesta fachada, querendo dizer "por materia" - escreva
+# `servico.desempenho_por_conteudo.tela()`.
+from radar.servico import desempenho_por_conteudo   # noqa: F401 - web e CLI
+# O controle que o ANKI fazia: estudado, nao estudado, revisar, refazer.
+# `servico.estudo.para_revisar()`.
+from radar.servico import estudo        # noqa: F401 - usado pela web e CLI
 from radar.servico import classificacoes  # noqa: F401 - usado pela CLI
 from radar.servico import incidencia    # noqa: F401 - usado pela CLI e web
 # A Etapa 3B: o levantamento do acervo complementar FEPESE (so leitura).

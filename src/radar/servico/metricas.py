@@ -187,6 +187,11 @@ class Lancamento:
     gerada: bool = False
     materia: str | None = None
     assunto: str | None = None
+    #: O no da arvore de conteudos, pelo caminho de nomes ("Direito Penal >
+    #: Imputabilidade penal"). None quando o lancamento nao aponta para no
+    #: nenhum: ele conta no dia e no desempenho por conteudo de nenhum no.
+    #: E por aqui que o recorte "anotado" chega a arvore (Etapa 4).
+    conteudo: str | None = None
     #: Para a mensagem de erro dizer onde a conta nao fecha.
     descricao: str = ""
 
@@ -250,6 +255,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
                 questoes=feita.questoes or 0, acertos=feita.acertos,
                 minutos=feita.minutos or 0, consulta=feita.consulta,
                 materia=feita.materia, assunto=feita.assunto,
+                conteudo=feita.conteudo,
                 descricao=f"{data:%d/%m/%Y}, faixa {feita.titulo!r}",
             ))
 
@@ -260,6 +266,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
             questoes=extra.questoes or 0, acertos=extra.acertos,
             minutos=extra.minutos or 0, consulta=bool(extra.consulta),
             materia=extra.materia, assunto=extra.assunto,
+            conteudo=extra.conteudo,
             descricao=f"{extra.data:%d/%m/%Y}, estudo extra #{extra.id}",
         ))
 

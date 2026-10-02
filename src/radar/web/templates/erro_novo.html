@@ -60,6 +60,17 @@
              placeholder="ex.: progressão de regime">
     </label>
 
+    {# O no da arvore (Etapa 4): e ele que faz o erro anotado virar gatilho de
+       revisao DAQUELE conteudo, e nao da materia inteira. Opcional. #}
+    <label class="ds-campo">Conteúdo <span class="ds-dica">(opcional, liga o erro ao conteúdo)</span>
+      <select name="conteudo">
+        <option value="">— nenhum —</option>
+        {% for caminho, rotulo in OPCOES_DE_CONTEUDO() %}
+          <option value="{{ caminho }}" {{ 'selected' if caminho == (form.conteudo or '') }}>{{ rotulo }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
     <div class="dupla">
       <label class="ds-campo">Por que eu errei <span class="obrigatorio">*</span>
         <select name="motivo" required>

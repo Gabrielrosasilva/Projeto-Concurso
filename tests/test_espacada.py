@@ -8,7 +8,7 @@ from datetime import date, datetime, timedelta, timezone
 import pytest
 from sqlalchemy import select
 
-from radar import foco, onde_estudar, servico
+from radar import amostra, foco, onde_estudar, servico
 from radar.db import sessao
 from radar.models import QuestaoDeProva, QuestaoGerada, RespostaDeSimulado, Simulado
 from radar.servico import espacada, inicio
@@ -161,7 +161,12 @@ def test_com_treino_o_tempo_sem_revisar_entra_na_conta(banco_temporario,
                                                        com_quadro_do_edital):
     with sessao() as s:
         s.add(_concurso())
-    ids = [_questao(n, materia="Língua Portuguesa") for n in range(1, 6)]
+    # 20 questoes: o minimo do nivel "materia" no config/amostra.yml (Etapa 4).
+    # Com menos que isso a materia conta como nao treinada, e o fator de tempo
+    # fica neutro - e e justamente o que o minimo existe para fazer.
+    quantas = amostra.carregar().do_nivel("materia")
+    ids = [_questao(n, materia="Língua Portuguesa")
+           for n in range(1, quantas + 1)]
     quinze_dias = date.today() - timedelta(days=15)
     for i in ids:
         _respondi(i, False, quinze_dias)

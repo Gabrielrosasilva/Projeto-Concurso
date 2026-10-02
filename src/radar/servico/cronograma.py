@@ -13,6 +13,7 @@ from sqlalchemy import select
 
 from radar import acervo
 from radar import alvo
+from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import EstadoDoDia, RegistroDoDia, agora
@@ -222,7 +223,8 @@ def _gravar_check(data: date, bloco: str, indice: int, titulo: str,
 
 
 def _check_da_faixa(bloco: str, indice: int, faixa, questoes=None, acertos=None,
-                    consulta: bool | None = None) -> dict:
+                    consulta: bool | None = None,
+                    conteudo: str | None = None) -> dict:
     """O que fica gravado de uma faixa feita.
 
     Os numeros vao TODOS para o JSON - minutos, questoes, acertos, consulta,
@@ -245,11 +247,45 @@ def _check_da_faixa(bloco: str, indice: int, faixa, questoes=None, acertos=None,
         # estudo extra usam para a mesma coisa.
         "assunto": faixa.titulo,
     }
-    # O no da arvore, quando a faixa tem (Etapa 2). So entra com valor: os
+    # O no da arvore. O padrao e a chave `conteudo` da faixa (Etapa 2); o
+    # formulario pode descer para um no mais fundo dela (Etapa 4) - e assim
+    # que o anotado do Qconcursos chega ao subassunto. So entra com valor: os
     # checks gravados antes continuam com o mesmo formato.
-    if faixa.conteudo:
-        check["conteudo"] = faixa.conteudo
+    escolhido = _conferir_o_no(conteudo, faixa)
+    if escolhido:
+        check["conteudo"] = escolhido
     return check
+
+
+def _conferir_o_no(caminho: str | None, faixa) -> str | None:
+    """O no escolhido no formulario, ou o da faixa quando nao escolhi nenhum.
+
+    Duas recusas, as duas em voz alta:
+
+      * no que nao existe na arvore - senao o check ficaria pendurado num
+        caminho que ninguem le;
+      * no de fora do ramo da faixa, quando a faixa aponta para um no. Anotar
+        Portugues dentro da faixa de LEP nao e detalhar, e trocar de materia -
+        e para isso existe o estudo extra.
+    """
+    caminho = (caminho or "").strip()
+    if not caminho:
+        return faixa.conteudo
+    from radar import servico
+
+    if caminho not in servico.conteudos.caminhos():
+        raise RegistroInvalido(
+            f"O conteúdo {caminho!r} não está na árvore (data/conteudos.json). "
+            f"Confira com `radar conteudos`."
+        )
+    if faixa.conteudo and not (caminho == faixa.conteudo
+                               or caminho.startswith(faixa.conteudo + arvore.SEPARADOR)):
+        raise RegistroInvalido(
+            f"O conteúdo {caminho!r} não está dentro de {faixa.conteudo!r}, "
+            f"que é o da faixa {faixa.titulo!r}. Para anotar outro conteúdo, "
+            f"use o estudo extra."
+        )
+    return caminho
 
 
 def marcar_faixa(
@@ -292,6 +328,7 @@ def anotar_faixa(
     questoes=None,
     acertos=None,
     consulta: bool = False,
+    conteudo: str | None = None,
     *,
     plano: plano_de_estudo.Plano | None = None,
     hoje: date | None = None,
@@ -333,7 +370,7 @@ def anotar_faixa(
 
     return _gravar_check(data, bloco, indice, titulo,
                          _check_da_faixa(bloco, indice, faixa, feitas, certas,
-                                         consulta))
+                                         consulta, conteudo))
 
 
 def desmarcar_faixa(
@@ -407,6 +444,11 @@ class FaixaFeita:
     consulta: bool = False
     materia: str | None = None
     assunto: str | None = None
+    #: O no da arvore de conteudos, pelo caminho de nomes. Vem do check (o que
+    #: eu escolhi ao anotar) ou, sem ele, da chave `conteudo` da faixa no
+    #: cronograma.yml. None quando a faixa nao aponta para no nenhum - e ai o
+    #: que eu fiz conta no dia e em no nenhum (Etapa 4).
+    conteudo: str | None = None
     do_plano: bool = False
 
     @property
@@ -450,6 +492,7 @@ def valores_das_faixas(dia, estado: EstadoDoDia | None) -> dict:
                      else plano_de_estudo.consulta_por_padrao(faixa),
             materia=check.get("materia") or faixa.materia,
             assunto=check.get("assunto") or faixa.titulo,
+            conteudo=check.get("conteudo") or faixa.conteudo,
             do_plano=antigo,
         )
     return valores

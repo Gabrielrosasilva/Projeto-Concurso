@@ -340,11 +340,13 @@
           {% if p.anos_das_provas | length < 3 %}<b>Base pequena:</b>
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length > 1 }} do cargo.{% endif %}</span>
         {% endif %}
-        <span>{{ selo('calculado') }}<b>Meu acerto, medido no radar:</b> em
-          questão real respondida aqui dentro, vale a última resposta de cada
-          questão; o número pequeno é quantas questões diferentes eu respondi.
-          O que eu anoto do Qconcursos ainda não entra: ele está na tela Hoje e
-          em Minhas matérias.</span>
+        <span>{{ selo('calculado') }}<b>Meu acerto</b> soma duas origens, e a
+          linha de baixo de cada matéria mostra a divisão: <b>radar</b> é
+          questão real respondida aqui dentro, pela última resposta de cada;
+          <b>anotado</b> é o que eu digitei das faixas e dos extras do
+          Qconcursos, no conteúdo que eu escolhi ao anotar. Só o que foi
+          respondido sem consulta entra. Os dois nunca são somados na
+          divisão - eles medem de maneiras diferentes.</span>
       </div>
       <table>
         <thead>
@@ -388,6 +390,9 @@
                   <span class="feitas">de {{ acerto.respondidas }}</span>
                 {%- else -%}
                   não treinei
+                {%- endif -%}
+                {%- if acerto and p.divisao_por_materia.get(m.nome) %}
+                  <span class="feitas">{{ p.divisao_por_materia[m.nome] }}</span>
                 {%- endif -%}
               </td>
               {% for ano in p.anos_das_provas %}
@@ -452,8 +457,9 @@
           ganhar</b> são conta sobre esses assuntos e sobre
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length != 1 }}
           - leitura, e não fato.</span>
-        <span>{{ selo('calculado') }}<b>meu acerto</b> é o medido no radar,
-          pela última resposta de cada questão.</span>
+        <span>{{ selo('calculado') }}<b>meu acerto</b> soma o medido no radar
+          (pela última resposta de cada questão) e o anotado das faixas e dos
+          extras ligados a um conteúdo daquele assunto, sem consulta.</span>
       </div>
       <p class="conclusao">{{ p.conclusao_do_estudo }}</p>
 

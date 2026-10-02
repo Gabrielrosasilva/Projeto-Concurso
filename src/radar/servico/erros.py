@@ -100,6 +100,26 @@ def _texto(valor, campo: str, obrigatorio: bool = False, limite: int = 0) -> str
     return texto[:limite] if limite else texto
 
 
+def _conferir_o_no(caminho: str | None) -> str | None:
+    """O caminho do no, se ele existe na arvore. None quando nao veio nada.
+
+    A materia e o assunto digitados continuam onde estao: o no e um vinculo a
+    MAIS, nao uma troca. Erro sem no nenhum e normal - era assim antes desta
+    etapa, e continua contando no caderno.
+    """
+    caminho = (caminho or "").strip()
+    if not caminho:
+        return None
+    from radar import servico
+
+    if caminho not in servico.conteudos.caminhos():
+        raise ErroInvalido(
+            f"O conteúdo {caminho!r} não está na árvore (data/conteudos.json). "
+            f"Confira com `radar conteudos`."
+        )
+    return caminho
+
+
 def anotar(
     data_estudo: date | None = None,
     materia: str = "",
@@ -108,6 +128,7 @@ def anotar(
     regra: str = "",
     fonte: str = "qconcursos",
     referencia: str | None = None,
+    conteudo: str | None = None,
     hoje: date | None = None,
 ) -> ErroAnotado:
     """Grava um erro novo. Ele volta AMANHA, na etapa 1.
@@ -138,6 +159,10 @@ def anotar(
         regra=regra,
         fonte=fonte,
         referencia=_texto(referencia, "A referência"),
+        # O no da arvore, escolhido no formulario (Etapa 4). Conferido contra
+        # a arvore: no que nao existe e recusado em voz alta, para o erro nao
+        # ficar pendurado num caminho que ninguem le.
+        conteudo=_conferir_o_no(conteudo),
         etapa=1,
         proxima_revisao=hoje + timedelta(days=INTERVALOS[0]),
         historico=[],

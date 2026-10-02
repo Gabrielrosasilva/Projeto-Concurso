@@ -122,8 +122,12 @@ separada da do alvo (em questao DISTINTA, com as ocorrencias ao lado) e os
 tres lotes classificados: as 80 do Socioeducativo, 44 de bloco generico e 108
 propostas automaticas do catalogo em Portugues e Raciocinio Logico. **Falta a
 conferencia do complementar** (as automaticas, por amostra), que a tela ainda
-nao permite: ela lista so o alvo - pendencia B.8. **Proxima: Etapa 4**
-(amostra, desempenho por no e controle de estudo).
+nao permite: ela lista so o alvo - pendencia B.8. E a **4** (de 02/10: os
+minimos de amostra num lugar so no `config/amostra.yml`, o desempenho por no da
+arvore com os recortes radar e anotado nunca somados, o controle que o ANKI
+fazia - estudado, nao estudado, revisar, refazer -, a tela "Analises > Meu
+desempenho" e o `radar desempenho`). **Proxima: Etapa 5** (geracao de questoes
+com filtro hierarquico e os tres modos).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.
@@ -133,7 +137,13 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 (`servico/coleta.py`) - nada fora de `collectors/` sabe de onde vem o dado. O
 `servico` e um pacote, um arquivo por assunto; escreva `servico.funcao(...)`.
 **Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
-tela nenhuma refaz a conta, e template nenhum soma. **Alvo, complementar e
+tela nenhuma refaz a conta, e template nenhum soma. **Todo minimo de amostra sai do
+`config/amostra.yml`**, pelo `radar/amostra.py`: nenhuma tela tem regua propria
+(o 3 do `servico/erros.py` e a excecao declarada - ele mede fatia de motivo de
+erro, nao acerto). **O desempenho por conteudo e do
+`servico/desempenho_por_conteudo.py`**, e os dois recortes - medido no radar e
+anotado - **nunca sao somados na tela**, so no estado da amostra.
+**Alvo, complementar e
 fora saem do `servico/evidencia.py`** (uma regra, nunca somados; e prova
 complementar so entra em estatistica se estiver aceita no
 `data/acervo_complementar.json`), e tudo que

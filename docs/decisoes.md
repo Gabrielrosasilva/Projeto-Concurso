@@ -2668,3 +2668,72 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     a classificacao passar a escolher questao para treino - ai a tela ganha o
     filtro de evidencia e a conferencia por amostra acontece (20 por materia;
     taxa de erro alta, o lote volta). Isso esta na pendencia B.8.
+
+## Etapa 4 — amostra, desempenho por conteudo e controle de estudo (02/10/2026)
+
+19. **os minimos de amostra vivem num lugar so**, o `config/amostra.yml`,
+    secao `desempenho`, lida pelo `src/radar/amostra.py`. Os valores sao os da
+    decisao 6 da Etapa 0: **20** respostas sem consulta na materia, **10** no
+    assunto, **6** no subassunto e no elemento. **Revogados** o 5 na materia e
+    o 3 no assunto do `onde_estudar.py` e o 20 do `servico/materias.py`: eram
+    tres reguas para a mesma duvida, e tres leituras do mesmo dia.
+
+    **O 3 do caderno de erros FICA onde esta** (`servico/erros.py`),
+    avaliado nesta etapa: ele mede a FATIA de cada motivo de erro ("3 dos meus
+    10 erros foram por pressa"), e nao o meu acerto num conteudo. Sao duas
+    perguntas com riscos diferentes, e juntar as duas na mesma regua tornaria
+    as duas erradas. O motivo esta escrito nos dois arquivos;
+
+20. **"estudado" tem definicao** (a resposta a §8 do novo.md): um no esta
+    **estudado** quando uma faixa de ESTUDO (`teoria`, `lei_seca`,
+    `portugues`, `raciocinio`) ligada a ele ou a um no abaixo dele foi marcada
+    como feita, ou quando ha estudo extra de teoria ou de lei seca nele. Esta
+    **praticado** quando tem resposta, minha no radar ou anotada. **Nao
+    estudado** e nenhum dos dois, e um no pode ser os dois primeiros ao mesmo
+    tempo.
+
+    **Faixa de questoes nao deixa um conteudo "estudado"**: fazer questao e
+    praticar, e eu posso praticar o que nunca li. **O filho nao herda do pai**:
+    ter lido o assunto nao e ter estudado cada parte dele;
+
+21. **o desempenho por conteudo soma o radar e o anotado para o ESTADO, e
+    nunca os soma na tela** (aplica a decisao 7, que revisa a E2). A tela
+    escreve sempre a divisao "radar X% em N · anotado Y% em M", com travessao
+    na metade vazia. Motivo: as duas origens medem de maneiras diferentes - uma
+    e questao a questao aqui dentro, a outra e a minha anotacao do Qconcursos -
+    e um numero unico esconderia isso; mas ignorar metade do meu treino no
+    estado seria pior. **Só o respondido sem consulta** entra no estado; o que
+    teve consulta e o que eu fiz sem anotar o acerto ficam no volume, a parte.
+    Questao escrita por IA nunca entra em nada disto;
+
+22. **o anotado chega ao conteudo por um seletor nos formularios** (faixa,
+    estudo extra, caderno de erros). Um `<select>` so, com o caminho inteiro no
+    valor e o nome recuado no rotulo, em vez de tres caixas encadeadas:
+    encadear precisaria de JavaScript, e o cronometro continua sendo o unico JS
+    do projeto. **Na faixa o seletor nao sai do ramo dela**: anotar Portugues
+    dentro da faixa de LEP nao e detalhar, e trocar de materia - e para isso
+    existe o estudo extra. No que nao existe na arvore e recusado em voz alta;
+
+23. **a revisao por no nao mora em tabela nenhuma**, pela mesma escolha do
+    `espacada.py`: sai do historico, e descartar um simulado de teste apaga
+    sozinho o que ele agendava. **Tres gatilhos**, e a linha diz qual disparou:
+    erro recente (no radar ou no caderno), estado "precisa revisar", e o prazo
+    1-7-30 vencido. **A ancora do 1-7-30 e o ultimo estudo** ou, sem estudo
+    nenhum, o PRIMEIRO contato pratico: ancorar na ultima resposta reiniciaria
+    a conta a cada questao, e a etapa nunca andaria;
+
+24. **"questoes a refazer" sao duas listas separadas**, nunca somadas: as
+    erradas no radar (eu refaco respondendo) e as do caderno de erros (eu
+    refaco relendo a regra que eu escrevi). Somar as duas daria um numero que
+    nao corresponde a nenhuma acao;
+
+25. **o modulo novo se chama `servico/desempenho_por_conteudo.py`**, e nao
+    `servico/desempenho.py` como o roteiro propunha: `servico.desempenho()` ja
+    existe na fachada e e o desempenho por MATERIA. Duas coisas com o mesmo
+    nome no mesmo lugar e exatamente o que esta etapa veio consertar em outro
+    canto;
+
+26. **o recorte de tempo padrao e o ciclo em andamento** (decisao E4), com a
+    opcao "desde o inicio" na tela e no `--desde-o-inicio` do comando. A
+    pergunta "eu ja estudei isto?", porem, olha **sempre desde o inicio**: ter
+    lido a LEP no Ciclo 1 nao desaprende quando o Ciclo 2 comeca.

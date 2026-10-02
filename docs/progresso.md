@@ -15,7 +15,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | ✅ |
 | 8 | 3B — Acervo complementar FEPESE | 🟡 acervo e 3 lotes classificados; falta a sua conferência |
-| 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
+| 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
 | 10 | 5 — Geração de questões | ⬜ |
 | 11 | 6B — Cronograma operacional | ⬜ |
 | 12 | 7A — Selos e marcação de IA | ⬜ |
@@ -977,3 +977,140 @@ conferência do **complementar** (as 44 do bloco genérico e as 108 do catálogo
 não existe ali — a tela de Conferência lista só o alvo. Ou a tela ganha o
 filtro de evidência, ou o complementar segue não conferido, marcado como está.
 Isso **não** bloqueia a Etapa 4, que depende do alvo.
+
+---
+
+## 4 — Amostra, desempenho por conteúdo e controle de estudo (02/10/2026)
+
+- Situação: ✅ concluída
+- Datas: início 02/10 · fim 02/10
+
+**Plano conferido contra o código antes de começar: válido.** Item por item: o
+`config/amostra.yml` tinha só a seção `acervo`; os três mínimos estavam onde o
+roteiro descreve (`onde_estudar.py` com 5 e 3, `servico/materias.py` com 20,
+`servico/erros.py` com 3); `servico/desempenho.py` e `servico/estudo.py` não
+existiam; as metas por matéria estavam no `config/cronograma.yml` e a da prova
+é 79/100; `ErroAnotado.conteudo` e `EstudoExtra.conteudo` já existiam como
+coluna (Etapa 2) e **ninguém escrevia neles**.
+
+**Quatro ajustes de execução, mostrados antes de implementar:**
+1. **`metricas.Lancamento` e `cronograma.FaixaFeita` não levavam `conteudo`** —
+   o check do dia gravava e a leitura descartava. Sem isso o recorte *anotado*
+   não chegaria ao nó. O campo entrou na fonte única, não num módulo paralelo;
+2. o recorte *medido no radar* por nó sai da tabela `classificacoes` **pela
+   chave** (enunciado + alternativas, da 3A), e não de `questoes.assunto`, que
+   em Direito é vazio;
+3. `espacada.py` continua agendando a rodada pelo assunto do catálogo; a revisão
+   por nó nasceu no `estudo.py` lendo o mesmo histórico, sem fila paralela;
+4. **consequência medida e avisada:** o banco real tem **12 respostas reais**.
+   Com os mínimos da decisão 6, quase toda linha do *medido no radar* vira
+   "Amostra insuficiente" — é o comportamento pedido na §16, e a tela fica
+   visivelmente mais vazia de porcentagem do que estava.
+
+**Mudou no meio:** o módulo não pôde se chamar `servico/desempenho.py`, como o
+roteiro propunha — `servico.desempenho()` já é função na fachada, e é o
+desempenho por **matéria**. Virou `servico/desempenho_por_conteudo.py`
+(decisão 25).
+
+**Arquivos alterados.**
+- novos: `src/radar/amostra.py` (puro: os mínimos e os cinco estados),
+  `src/radar/servico/desempenho_por_conteudo.py`,
+  `src/radar/servico/estudo.py`, `src/radar/web/templates/desempenho.html`,
+  `tests/test_amostra.py`, `tests/test_desempenho.py`, `tests/test_estudo.py`;
+- `config/amostra.yml` — a seção `desempenho` (mínimos por nível, corte dos
+  60%, meta padrão, o que faz "bom desempenho");
+- os mínimos trocados: `onde_estudar.py` (`montar(..., minimos=)`, e o mínimo
+  viaja **na linha**), `foco.py`, `servico/inicio.py`, `servico/materias.py`,
+  `web/app.py` (os globais do Jinja saem do config);
+- `servico/erros.py` — o porquê de o 3 dele ficar, escrito no arquivo;
+- o `conteudo` na fonte única: `servico/metricas.py` (`Lancamento.conteudo`),
+  `servico/cronograma.py` (`FaixaFeita.conteudo`, `_conferir_o_no`,
+  `anotar_faixa(..., conteudo=)`);
+- o seletor: `servico/extra.py` e `servico/erros.py` (`conteudo` conferido
+  contra a árvore), `web/app.py` (`opcoes_de_conteudo`, os três POST),
+  templates `hoje.html` (faixa e extra) e `erro_novo.html`;
+- a decisão 7: `foco.py` (`_acerto_por_materia` soma o anotado;
+  `divisao_por_materia`; `_acerto_por_assunto` soma o anotado),
+  `servico/inicio.py` (a home lê o mesmo desempenho), `foco.html` e `home.html`;
+- a tela e o comando: `_topo.html` (a sub-aba), `web/app.py`
+  (`/analises/desempenho`), `cli.py` (`radar desempenho`);
+- testes ajustados pelos mínimos novos: `test_minimo.py` (lê o config em vez de
+  importar constante), `test_onde_estudar.py`, `test_foco.py`, `test_home.py`,
+  `test_espacada.py`;
+- docs: `decisoes.md` (decisões 19 a 26), `historico.md`, `pendencias.md` (a
+  **B.11** nova: os blocos minimizáveis da aba Hoje, pedidos por você no meio
+  desta etapa e deixados para conversa própria), `CLAUDE.md`, este arquivo.
+
+**Testes novos (72).**
+- `test_amostra.py` (17): os mínimos vêm do arquivo real; **mudar um valor no
+  YAML muda o comportamento** (mínimo 4 mede com 4; corte em 90 põe 85% em
+  "precisa revisar"); arquivo sem a seção e arquivo inexistente usam os valores
+  da decisão; nível desconhecido usa o da matéria; as bordas: 19/20, no mínimo
+  exato, 55%/60%, exatamente na meta, o dobro do mínimo com 1 e com 2 dias, o
+  dobro abaixo da meta, matéria sem meta usa a da prova, o subassunto com 6;
+  sem resposta a porcentagem é desconhecida e não zero; a frase da amostra
+  pequena diz o mínimo do nível; **nenhum mínimo de amostra fora do config**
+  (conferido por busca no `src/`);
+- `test_desempenho.py` (31): a resposta conta no nó e nos de cima; o anotado
+  entra no nó escolhido e sobe; a divisão mostra as duas metades e nunca a
+  soma, com travessão na vazia; com consulta fica no volume e fora do estado;
+  IA nunca conta; questão sem classificação e anotação sem conteúdo contam em
+  nó nenhum; "fiz e não anotei quantas acertei" é volume sem acerto;
+  classificação para nó apagado não faz o nó renascer; o estado sai do nível do
+  nó; dois dias contam para o estado mais alto; o recorte padrão é o ciclo; a
+  tela em ordem de árvore com recuo, filtrada por matéria, com a frase da
+  amostra pequena; nó sem resposta não entra; o anotado por matéria e por
+  assunto, e o nó que para na matéria não vira assunto; a faixa recusa nó de
+  fora do ramo dela e nó que não existe; sem escolher nada vale o nó da faixa;
+  a página mostra estado, divisão e amostra, convida quando não há dado, não
+  tem texto com cara de previsão e **não usa JavaScript**;
+- `test_estudo.py` (24): sem nada tudo é não estudado; faixa de teoria deixa
+  estudado (e o filho **não** herda); faixa de questões deixa praticado e não
+  estudado; extra de teoria deixa estudado; os dois rótulos juntos; os não
+  estudados listam a matéria e não os filhos dela, e descem quando o pai foi
+  estudado; a evolução semanal igual à da tela Semanas no mesmo período, e o
+  que teve consulta fica fora dela; os três gatilhos de revisão (prazo, erro no
+  radar, erro no caderno, desempenho abaixo do corte) e os motivos acumulados
+  na mesma linha; o que eu nunca estudei não entra na fila; acertar na data do
+  vencimento empurra o prazo e tira o nó da fila; o mais atrasado primeiro; o
+  refazer separa radar e caderno e nunca soma, por nó e no total; sem erro a
+  lista está vazia; gerada errada não entra.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_amostra.py` + `test_minimo.py`, depois da troca dos mínimos | 28 passed |
+| Áreas tocadas pelos mínimos (`test_onde_estudar`, `test_foco`, `test_home`, `test_materias_na_tela`) | 121 passed, 4 failed — os quatro contavam com os mínimos antigos (5 na matéria, 8 no assunto); atualizados → 94 passed |
+| `test_metricas` + `test_faixas_do_dia` + `test_registro_estudo` + `test_caderno_erros`, depois do `conteudo` na fonte única | 111 passed |
+| `test_desempenho.py`, 1ª rodada | 20 passed, 7 failed — a troca do corpo do `_check_da_faixa` não tinha sido aplicada (o comentário no arquivo era outro) e o `conteudo` escolhido não chegava ao check; corrigido → 27 passed |
+| `test_estudo.py`, 1ª rodada | 18 passed, 4 failed — três erros meus no teste (a API do `semanas.montar`, um motivo de erro que não existe, um erro anotado que ainda não estava vencido) e **um defeito real**: a âncora do 1-7-30 era a última prática, e não o primeiro contato, então a etapa nunca andava. Corrigido no `estudo.py` → 22 passed |
+| `test_desempenho.py` + `test_estudo.py` + `test_amostra.py` | 72 passed |
+| Arquivos das áreas tocadas (13 arquivos) | 368 passed |
+| Suíte inteira, PC, 1ª rodada | 2112 passed, **1 failed** — `test_espacada.py::test_com_treino_o_tempo_sem_revisar_entra_na_conta`: ele treinava 5 questões, que era o mínimo antigo da matéria. Com 20, a matéria conta como não treinada e o fator de tempo fica neutro — que é exatamente o que o mínimo existe para fazer. O teste passou a treinar `amostra.carregar().do_nivel("materia")` questões → 14 passed |
+| Suíte inteira, PC, depois da correção | **2113 passed** (2039 de antes + 72 novos + 2 da tela e do comando), 19 min |
+
+**Comando real rodado (banco real, só leitura).**
+- `radar desempenho`: as 10 linhas que existem — Língua Portuguesa
+  "radar 25% em 8 · anotado —", e abaixo dela os assuntos e subassuntos, todos
+  "Amostra insuficiente" com a amostra ao lado ("2 de 8 respostas sem
+  consulta"). O rodapé escreve os mínimos do config e as duas listas de
+  refazer, separadas;
+- `radar desempenho --revisar`: 10 nós na fila, cada um com o motivo
+  ("erro recente · prazo de revisão vencido (1 dia(s))") e o atraso de 2 dias;
+- `radar web`, `/analises/desempenho`: as quatro seções (o que respondi, o que
+  voltou para revisão, o que ainda não estudei — 24 matérias —, e as questões a
+  refazer: 10 erradas no radar e 2 no caderno). O filtro de matéria e de
+  período funciona pelo botão "Ver", sem JavaScript;
+- o anotado está vazio no banco real porque as faixas com `conteudo` começam em
+  **05/10** (Etapa 2): o seletor passa a ter efeito a partir dali. Nenhum dado
+  foi alterado nesta etapa.
+
+**Critério de conclusão.**
+- [x] **nenhum mínimo de amostra fora do `config/amostra.yml`** — conferido por
+  busca, e o teste `test_nenhum_minimo_de_amostra_fora_do_config` guarda isso.
+  O 3 do caderno de erros fica, documentado nos dois arquivos: ele mede fatia
+  de motivo, não acerto;
+- [x] a página "Meu desempenho" mostra estado e amostra por nó, com dados
+  reais;
+- [x] a definição de "estudado" registrada no `decisoes.md` (decisão 20).

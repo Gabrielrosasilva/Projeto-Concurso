@@ -143,7 +143,11 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
     hoje = hoje or date.today()
     minimo = regua.carregar().do_nivel("materia")
     ultimas = _ultima_resposta_por_materia()
-    medido = {normalizar(d.materia): d for d in treino.desempenho() if d.respondidas}
+    # O mesmo desempenho do Meu foco: radar + anotado (decisao 7 da Etapa 0).
+    # Antes a home lia so o radar, e as duas telas podiam discordar.
+    medido = {normalizar(nome): d
+              for nome, d in foco._acerto_por_materia(painel.materias_do_edital).items()
+              if d.respondidas}
     lista = []
     for m in painel.materias_do_edital:
         peso = m.questoes / total * 100
@@ -171,9 +175,12 @@ def prioridades(painel: foco.Painel, hoje: date | None = None) -> list[Prioridad
     return lista[:QUANTAS_PRIORIDADES]
 
 
-def _revisar() -> Revisar:
+def _revisar(painel: foco.Painel | None = None) -> Revisar:
     minimo = regua.carregar().do_nivel("materia")
-    desempenho = treino.desempenho()
+    # O mesmo desempenho do Meu foco: radar + anotado (decisao 7).
+    desempenho = list(
+        foco._acerto_por_materia(painel.materias_do_edital).values()
+    ) if painel is not None and painel.materias_do_edital else treino.desempenho()
     return Revisar(
         erradas=len(treino.questoes_erradas()),
         materias_fracas=[
@@ -191,7 +198,7 @@ def montar() -> Home:
     return Home(
         painel=painel,
         prioridades=prioridades(painel),
-        revisar=_revisar(),
+        revisar=_revisar(painel),
         revisoes_de_hoje=espacada.pendentes(),
         proxima_revisao=next(
             (r for r in espacada.agenda() if not r.pendente(date.today())), None

@@ -124,6 +124,21 @@ def _conferir(
     return minutos, questoes, acertos
 
 
+def _conferir_o_no(caminho: str | None) -> str | None:
+    """O caminho do no, se ele existe na arvore. None quando nao veio nada."""
+    caminho = (caminho or "").strip()
+    if not caminho:
+        return None
+    from radar import servico
+
+    if caminho not in servico.conteudos.caminhos():
+        raise RegistroInvalido(
+            f"O conteúdo {caminho!r} não está na árvore (data/conteudos.json). "
+            f"Confira com `radar conteudos`."
+        )
+    return caminho
+
+
 def anotar(
     data: date | None = None,
     o_que: str = "questoes",
@@ -135,6 +150,7 @@ def anotar(
     consulta: bool = False,
     onde: str = "outro",
     anotacao: str | None = None,
+    conteudo: str | None = None,
     *,
     plano=None,
     hoje: date | None = None,
@@ -163,6 +179,10 @@ def anotar(
         consulta=bool(consulta) and onde != ONDE_SEM_QUESTOES,
         onde=onde,
         anotacao=(anotacao or "").strip() or None,
+        # O no da arvore, escolhido no formulario (Etapa 4). E por aqui que o
+        # anotado do Qconcursos chega ao subassunto: antes ele parava na
+        # materia e no titulo da faixa.
+        conteudo=_conferir_o_no(conteudo),
     )
     with sessao() as s:
         s.add(extra)
@@ -220,6 +240,8 @@ def editar(ident: int, *, plano=None, hoje: date | None = None, **campos) -> Est
             extra.anotacao = (campos["anotacao"] or "").strip() or None
         if "consulta" in campos:
             extra.consulta = bool(campos["consulta"]) and onde != ONDE_SEM_QUESTOES
+        if "conteudo" in campos:
+            extra.conteudo = _conferir_o_no(campos["conteudo"])
         extra.atualizado_em = agora()
         s.add(extra)
     return extra

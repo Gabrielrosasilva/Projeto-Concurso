@@ -230,6 +230,34 @@ def link_de_anotar_erro(data, materia, assunto, volta: str) -> str:
     })
 
 
+def opcoes_de_conteudo(raiz: str | None = None) -> list[tuple[str, str]]:
+    """[(caminho, rotulo recuado)] para o seletor de conteudo (Etapa 4).
+
+    Um `select` so, com o caminho inteiro no valor e o nome recuado no rotulo,
+    em vez de tres caixas encadeadas: encadear precisaria de JavaScript, e o
+    cronometro continua sendo o unico JS do projeto. O recuo ja mostra a
+    hierarquia materia > assunto > subassunto > elemento.
+
+    Com `raiz`, so aquele no e os de baixo dele - e o caso da faixa, que nao
+    deixa anotar fora do ramo dela.
+    """
+    from radar import conteudos as arvore
+
+    caminhos = sorted(servico.conteudos.caminhos())
+    if raiz:
+        caminhos = [c for c in caminhos
+                    if c == raiz or c.startswith(raiz + arvore.SEPARADOR)]
+        corte = len(arvore.partes(raiz)) - 1
+    else:
+        corte = 0
+    saida = []
+    for caminho in caminhos:
+        nomes = arvore.partes(caminho)
+        recuo = " " * 3 * max(0, len(nomes) - 1 - corte)
+        saida.append((caminho, f"{recuo}{nomes[-1]}"))
+    return saida
+
+
 def rotulo_da_lei(link: str) -> str:
     """"Ler no Planalto", "Ler na ALESC" ou, de qualquer outro site, "Ler a lei"."""
     site = (urlparse(link).hostname or "").lower()
@@ -239,6 +267,7 @@ def rotulo_da_lei(link: str) -> str:
     return "Ler a lei"
 
 templates.env.globals.update(
+    OPCOES_DE_CONTEUDO=opcoes_de_conteudo,
     linha_do_grafico=servico.materias.linha_do_grafico,
     GRAFICO_LARGURA=servico.materias.LARGURA,
     GRAFICO_ALTURA=servico.materias.ALTURA,
@@ -994,6 +1023,7 @@ def hoje_faixa_questoes(
     questoes: str = Form(""),
     acertos: str = Form(""),
     consulta: str = Form(""),
+    conteudo: str = Form(""),
     desmarcar: str = Form(""),
 ):
     """O "fiz X, acertei Y" de uma faixa de questoes, e o botao de desmarcar.
@@ -1016,6 +1046,7 @@ def hoje_faixa_questoes(
             servico.cronograma.anotar_faixa(
                 quando, bloco, posicao, titulo,
                 questoes=questoes, acertos=acertos, consulta=bool(consulta),
+                conteudo=conteudo,
             )
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
@@ -1045,6 +1076,7 @@ def hoje_extra_novo(
     consulta: str = Form(""),
     onde: str = Form("outro"),
     anotacao: str = Form(""),
+    conteudo: str = Form(""),
 ):
     """Anota um estudo que eu fiz fora das faixas do plano."""
     try:
@@ -1057,6 +1089,7 @@ def hoje_extra_novo(
             data=quando, o_que=o_que, materia=materia, assunto=assunto,
             minutos=minutos, questoes=questoes, acertos=acertos,
             consulta=bool(consulta), onde=onde, anotacao=anotacao,
+            conteudo=conteudo,
         )
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_do_extra=str(erro),
@@ -1065,7 +1098,7 @@ def hoje_extra_novo(
                                    "assunto": assunto, "minutos": minutos,
                                    "questoes": questoes, "acertos": acertos,
                                    "consulta": consulta, "onde": onde,
-                                   "anotacao": anotacao},
+                                   "anotacao": anotacao, "conteudo": conteudo},
                                status=400)
     return RedirectResponse(_volta_do_dia(request, quando), status_code=303)
 
@@ -1084,6 +1117,7 @@ def hoje_extra_editar(
     consulta: str = Form(""),
     onde: str = Form("outro"),
     anotacao: str = Form(""),
+    conteudo: str = Form(""),
     apagar: str = Form(""),
 ):
     """Corrige ou apaga um estudo extra que eu ja tinha anotado."""
@@ -1102,6 +1136,7 @@ def hoje_extra_editar(
             ident, data=quando, o_que=o_que, materia=materia, assunto=assunto,
             minutos=minutos, questoes=questoes, acertos=acertos,
             consulta=bool(consulta), onde=onde, anotacao=anotacao,
+            conteudo=conteudo,
         )
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_do_extra=str(erro), status=400)
@@ -1251,6 +1286,37 @@ def analises_materias(request: Request):
             "plano": plano,
             "hoje": hoje,
             "mensagem": None,
+        },
+    )
+
+
+@app.get("/analises/desempenho", response_class=HTMLResponse)
+def analises_desempenho(request: Request, materia: str = "", recorte: str = ""):
+    """O meu desempenho por NO da arvore, com o estado e a amostra de cada um,
+    mais o que voltou para revisao, o que eu nunca estudei e o que refazer.
+
+    Toda a conta mora no `servico.desempenho_por_conteudo` e no
+    `servico.estudo`; aqui so entra o que e de tela.
+    """
+    from radar.servico import desempenho_por_conteudo as por_conteudo
+
+    escolhido = recorte if recorte in (por_conteudo.CICLO, por_conteudo.SEMPRE)         else por_conteudo.CICLO
+    linhas = por_conteudo.tela(escolhido, materia or None)
+    return templates.TemplateResponse(
+        request=request, name="desempenho.html",
+        context={
+            "linhas": linhas,
+            "materia": materia,
+            "recorte": escolhido,
+            "minimos": amostra.carregar(),
+            # As materias da arvore, para o filtro - e nao so as que tem
+            # resposta: eu preciso poder olhar uma materia vazia e ver que ela
+            # esta vazia.
+            "materias": sorted({no.nome for no in servico.conteudos.nos()
+                                if no.nivel == "materia"}),
+            "fila": servico.estudo.para_revisar(recorte=escolhido),
+            "nao_estudados": servico.estudo.nao_estudados(),
+            "refazer": servico.estudo.refazer(),
         },
     )
 
@@ -1501,19 +1567,20 @@ def erro_gravar(
     regra: str = Form(""),
     fonte: str = Form("qconcursos"),
     referencia: str = Form(""),
+    conteudo: str = Form(""),
     volta: str = Form(""),
 ):
     """Grava o erro e volta para onde eu estava. Recusa aparece na tela."""
     form = {"data_estudo": data_estudo, "materia": materia, "assunto": assunto,
             "motivo": motivo, "regra": regra, "fonte": fonte,
-            "referencia": referencia}
+            "referencia": referencia, "conteudo": conteudo}
     quando, aviso = _erro_de_data(data_estudo)
     if aviso:
         return _formulario_de_erro(request, form, volta, erro=aviso, status=400)
     try:
         servico.erros.anotar(
             data_estudo=quando, materia=materia, assunto=assunto, motivo=motivo,
-            regra=regra, fonte=fonte, referencia=referencia,
+            regra=regra, fonte=fonte, referencia=referencia, conteudo=conteudo,
         )
     except servico.erros.ErroInvalido as recusa:
         return _formulario_de_erro(request, form, volta, erro=str(recusa), status=400)

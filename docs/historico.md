@@ -1520,3 +1520,47 @@ pelo `radar-bot`), a primeira desde 26/09. O `coleta.yml` roda `pytest -q`
 antes de coletar, e um passo que falha aborta o job: o commit e a prova de que
 a suite passou no Linux. A pendencia A1 saiu do `pendencias.md`, e com ela o
 bloco "Quebrado agora" ficou vazio.
+
+## Etapa 4 — amostra, desempenho por conteudo e controle de estudo (02/10)
+
+As tres reguas para a mesma duvida ("ja da para acreditar neste numero?")
+viraram uma, e o desempenho desceu da materia para o conteudo.
+
+**Os minimos.** O 5 e o 3 do `onde_estudar.py` e o 20 do `servico/materias.py`
+sairam do codigo: agora vem do `config/amostra.yml`, secao `desempenho`, com os
+valores da decisao 6 (20 na materia, 10 no assunto, 6 no subassunto e no
+elemento) e os cinco estados da §16 do novo.md. O modulo novo
+`src/radar/amostra.py` e puro: le o YAML e devolve o estado de um no. O 3 do
+caderno de erros ficou onde estava, de proposito: ele mede a fatia de cada
+motivo de erro, nao acerto.
+
+**Consequencia medida, e mostrada antes:** com 12 respostas reais no banco,
+quase toda linha do recorte "medido no radar" passou a dizer "Amostra
+insuficiente". E o comportamento pedido - o numero aparece e nao ordena nem
+projeta nada -, e quatro testes que contavam com os minimos antigos (5 na
+materia, 3 ou 8 no assunto) foram atualizados para os novos.
+
+**O desempenho por no.** `servico/desempenho_por_conteudo.py` junta as duas
+origens do meu treino: o radar (cada questao real, pela ultima resposta, ligada
+ao no pela classificacao da 3A, reconhecida pela CHAVE) e o anotado (as faixas e
+os extras ligados a um no). As duas nunca sao somadas na tela - a linha escreve
+"radar X% em N · anotado Y% em M" -, e sao somadas para o estado, que e o meu
+desempenho naquele conteudo. A questao conta no no dela e em todos os de cima.
+So o sem consulta conta para o estado; IA nunca conta.
+
+**O seletor.** O `conteudo` passou a viajar na fonte unica (`metricas.Lancamento`
+e `cronograma.FaixaFeita` ganharam o campo; o check do dia ja gravava e a
+leitura descartava). Os tres formularios - faixa, estudo extra, caderno de erros
+- ganharam um `<select>` com o caminho do no, recuado por nivel, sem JavaScript.
+Na faixa ele nao sai do ramo dela.
+
+**O controle de estudo.** `servico/estudo.py` responde o que o ANKI fazia:
+estudado, praticado, nao estudado (com a definicao da decisao 20), a data do
+primeiro e do ultimo estudo, a evolucao semana a semana com as contas da tela
+Semanas, os tres gatilhos de revisao e as duas listas de refazer. Nada gravado
+em tabela: tudo sai do historico.
+
+**As telas.** Nasceu "Analises → Meu desempenho" e o comando
+`radar desempenho [--revisar] [--desde-o-inicio] [--materia]`. O Meu foco, a
+home e o Onde estudar passaram a somar o anotado ao radar (decisao 7, que revisa
+a E2), e as frases das telas trocaram "medido no radar" pela divisao.

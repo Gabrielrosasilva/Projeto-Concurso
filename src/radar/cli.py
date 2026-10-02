@@ -2510,6 +2510,79 @@ def classificar(
 
 
 @app.command()
+def desempenho(
+    materia: str = typer.Option(None, help="So uma materia, pelo nome do no"),
+    desde_o_inicio: bool = typer.Option(
+        False, "--desde-o-inicio",
+        help="Tudo, e nao so o ciclo em andamento (o padrao)"),
+    revisar: bool = typer.Option(
+        False, "--revisar", help="So o que voltou para revisao hoje"),
+) -> None:
+    """O meu desempenho por no da arvore, com o estado e a amostra de cada um.
+
+    Duas origens, NUNCA somadas num numero so: "radar" e questao real
+    respondida aqui dentro, pela ultima resposta de cada; "anotado" e o que eu
+    digitei das faixas e dos extras do Qconcursos. So o respondido sem consulta
+    conta para o estado. Questao escrita por IA nao entra em nada disto.
+    """
+    from radar import amostra as regua
+    from radar.servico import desempenho_por_conteudo as por_conteudo
+
+    recorte = por_conteudo.SEMPRE if desde_o_inicio else por_conteudo.CICLO
+    rotulo = "desde o inicio" if desde_o_inicio else "o ciclo em andamento"
+
+    if revisar:
+        fila = servico.estudo.para_revisar(recorte=recorte)
+        if not fila:
+            console.print("[green]Nada vencido.[/] Conteudo que eu nunca "
+                          "estudei nao entra: revisar o que eu nao vi nao e "
+                          "revisao.")
+            return
+        tabela = Table(title=f"Para revisar hoje ({len(fila)})", title_justify="left")
+        for coluna in ("Conteudo", "Por que", "Atraso", "A refazer"):
+            tabela.add_column(coluna)
+        for r in fila:
+            refazer = []
+            if r.erradas:
+                refazer.append(f"{len(r.erradas)} errada(s) no radar")
+            if r.erros_do_caderno:
+                refazer.append(f"{len(r.erros_do_caderno)} no caderno")
+            tabela.add_row(escape(r.caminho), escape(r.porque),
+                           f"{r.atraso} dia(s)" if r.atraso else "-",
+                           escape(" · ".join(refazer)) or "-")
+        console.print(tabela)
+        return
+
+    linhas = por_conteudo.tela(recorte, materia)
+    if not linhas:
+        console.print(f"[yellow]Nada respondido em {rotulo}[/], ou o que eu "
+                      f"respondi nao esta classificado em conteudo nenhum.")
+        raise typer.Exit(code=1)
+
+    minimos = regua.carregar()
+    tabela = Table(title=f"Meu desempenho — {rotulo}", title_justify="left")
+    for coluna in ("Conteudo", "Estado", "Acerto", "Radar x anotado", "Amostra"):
+        tabela.add_column(coluna)
+    for linha in linhas:
+        recuo = "  " * linha.profundidade
+        taxa = (f"{linha.estado.porcentagem}%"
+                if linha.estado.porcentagem is not None else "-")
+        tabela.add_row(escape(recuo + linha.nome), escape(linha.estado.nome),
+                       taxa, escape(linha.divisao), escape(linha.estado.amostra))
+    console.print(tabela)
+    console.print(
+        f"[dim]Minimos do config/amostra.yml: {minimos.do_nivel('materia')} na "
+        f"materia, {minimos.do_nivel('assunto')} no assunto, "
+        f"{minimos.do_nivel('subassunto')} no subassunto ou elemento. Abaixo do "
+        f"minimo o numero aparece e nao entra em ordenacao nem em projecao.[/]")
+
+    refazer = servico.estudo.refazer()
+    console.print(f"[dim]A refazer: {len(refazer.do_radar)} errada(s) no radar · "
+                  f"{len(refazer.do_caderno)} no caderno de erros (as duas listas "
+                  f"nunca se somam).[/]")
+
+
+@app.command()
 def incidencia(
     materia: str = typer.Option(None, help="So uma materia, pelo nome do no"),
     padroes: bool = typer.Option(
