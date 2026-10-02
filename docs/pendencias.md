@@ -150,21 +150,6 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   B.7, agora no complementar. O conserto e no leitor do caderno
   (`questoes.py`).
 
-### B.11 🔴 Blocos minimizaveis na aba Hoje, e o ANKI sempre fechado
-
-Pedido em 02/10/2026, durante a Etapa 4, e deixado para uma conversa propria
-(nao e da Etapa 4: e tela).
-
-- cada bloco da aba Hoje - "Manha - estudo", "Noite - estudo" e "Depois das
-  22h" - tem que **minimizar e maximizar** ao clique no canto superior
-  direito do cabecalho, perto dos horarios. Os dois sentidos;
-- o bloco do ANKI nasce **sempre minimizado**, e minimizado mostra a mensagem
-  de que ele esta temporariamente desativado. Abrir e acao minha.
-
-Desenho provavel: `<details>/<summary>` puro, sem JavaScript - o cronometro
-continua sendo o unico JS do projeto (CLAUDE.md). Lembrar o estado entre
-recarregamentos precisaria de JS e nao foi pedido.
-
 ## C. Telas ainda no CSS antigo (B2 a B7) 🔴
 
 B1 migrou Simulado e Gerar questoes para o `design.css`. Faltam seis telas que

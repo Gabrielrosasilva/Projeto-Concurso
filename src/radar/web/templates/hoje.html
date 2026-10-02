@@ -209,6 +209,22 @@
     .bloco-dia .ds-cartao__cabeca{margin-bottom:var(--esp-3)}
     .bloco-dia .nome-do-bloco{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
     .bloco-dia .horas{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    /* A dobra do bloco (B.11): o cabecalho inteiro e o botao, e o sinal fica
+       no canto direito, depois dos horarios. Sem o list-style o triangulo
+       padrao do <details> nao aparece ao lado do titulo. */
+    .bloco-dobra > summary{cursor:pointer;list-style:none}
+    .bloco-dobra > summary::-webkit-details-marker{display:none}
+    .bloco-dobra > summary:focus-visible{outline:2px solid var(--cor-acao);outline-offset:2px;border-radius:var(--raio-1,4px)}
+    .bloco-dia .dobra-sinal{font-size:var(--tam-sm);color:var(--cor-texto-suave);line-height:1.6;
+      padding-left:var(--esp-2);user-select:none}
+    .bloco-dia .dobra-sinal::after{content:"▾"}
+    .bloco-dobra[open] .dobra-sinal::after{content:"▴"}
+    /* Fechado, o cabecalho nao precisa do espaco que separava ele das faixas. */
+    .bloco-dobra:not([open]) > summary.ds-cartao__cabeca{margin-bottom:0}
+    /* A frase do ANKI desativado so aparece com o bloco fechado: aberto, a
+       propria faixa minimizada ja diz a mesma coisa. */
+    .bloco-dia .anki-dobrado{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .bloco-dobra[open] .anki-dobrado{display:none}
     .linha-tempo{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-2)}
     .faixa{display:grid;grid-template-columns:7.5rem minmax(0,1fr) auto;gap:var(--esp-3);align-items:start;
       scroll-margin-top:5rem}
@@ -762,15 +778,37 @@
   </section>
 
   {# ============================ os tres blocos ======================== #}
+  {#
+     Cada bloco DOBRA: um clique no cabecalho - inclusive no canto direito, em
+     cima dos horarios - recolhe a lista de faixas, e outro clique a traz de
+     volta. E um <details>/<summary> puro, sem JavaScript nenhum: o cronometro
+     continua sendo o unico JS do projeto (CLAUDE.md), como no Mapa do ano da
+     lateral.
+
+     "Depois das 22h" nasce FECHADO, e os outros abertos. O bloco e sobreaviso
+     (pode interromper) e, com `anki: desativado`, nao ha nada ali para fazer
+     fora do Bonus - abrir e acao minha. Fechado, ele mostra no proprio
+     cabecalho a frase de que o ANKI esta temporariamente desativado.
+
+     O que ficou de fora de proposito: LEMBRAR a dobra entre recarregamentos
+     precisaria de JavaScript (localStorage), e nao foi pedido. Cada abertura
+     da tela comeca no padrao.
+  #}
   {% for b in t.blocos if b.faixas %}
+    {% set tem_anki_desligado = b.faixas | selectattr('desligada') | list %}
+    {% set nasce_aberto = b.chave != 'pos22' %}
     <section class="ds-cartao bloco-dia bloco-{{ b.chave }}" aria-labelledby="bloco-{{ b.chave }}">
-      <div class="ds-cartao__cabeca">
+      <details class="bloco-dobra"{{ ' open' if nasce_aberto }}>
+      <summary class="ds-cartao__cabeca">
         <div class="nome-do-bloco">
           <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
           {% if b.chave == 'pos22' %}<span class="etiqueta-sobreaviso">🌙 sobreaviso · pode interromper</span>{% endif %}
+          {# So com o bloco fechado: aberto, a propria faixa ja diz isso. #}
+          {% if tem_anki_desligado %}<span class="anki-dobrado">{{ FRASE_DO_ANKI_DESATIVADO }}</span>{% endif %}
         </div>
         <span class="horas">{% if b.inicio %}{{ hm(b.inicio) }} – {{ hm(b.fim) }}{% else %}sem horário{% endif %}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
-      </div>
+        <span class="dobra-sinal" aria-hidden="true"></span>
+      </summary>
       <ol class="linha-tempo">
         {% for f in b.faixas %}
           {# O Anki com `anki: desativado`: so a linha minimizada, sem horario,
@@ -961,6 +999,7 @@
           {% endif %}
         {% endfor %}
       </ol>
+      </details>
     </section>
   {% endfor %}
 

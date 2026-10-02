@@ -1114,3 +1114,80 @@ desempenho por **matéria**. Virou `servico/desempenho_por_conteudo.py`
 - [x] a página "Meu desempenho" mostra estado e amostra por nó, com dados
   reais;
 - [x] a definição de "estudado" registrada no `decisoes.md` (decisão 20).
+
+---
+
+## B.11 — Os blocos da aba Hoje dobram (02/10/2026)
+
+- Situação: ✅ concluída
+- Não é etapa do roteiro: é a pendência que você pediu no meio da Etapa 4 e
+  mandou deixar para conversa própria.
+
+**O que você pediu.** Minimizar e maximizar cada bloco da aba Hoje ("Manhã —
+estudo", "Noite — estudo", "Depois das 22h") pelo clique na parte de cima,
+canto direito, perto dos horários — os dois sentidos. E o ANKI sempre
+minimizado, mostrando a mensagem de que está temporariamente desativado, com
+abrir sendo ação sua.
+
+**Como foi feito.** `<details>/<summary>` puro, **sem JavaScript** — o
+cronômetro continua sendo o único JS do projeto, e o Mapa do ano da lateral já
+usava o mesmo recurso. O `<summary>` é o próprio `.ds-cartao__cabeca`, então o
+**cabeçalho inteiro** é o botão: o canto que você pediu está dentro dele, com
+um sinal ▾ / ▴ à direita dos horários mostrando o estado. Alvo de clique maior
+do que só o canto, e o canto funciona.
+
+**Duas decisões de execução, que valem você saber:**
+1. **"Depois das 22h" nasce fechado**, e não só a faixa do Anki. A faixa
+   desligada já é uma linha só, sem nada para abrir; o que faz sentido
+   recolher é o bloco. Fechado, o cabeçalho dele carrega a frase "ANKI
+   temporariamente desativado"; aberto, essa frase sai e fica a da faixa
+   minimizada da 6A — a mesma frase duas vezes no mesmo bloco seria ruído. A
+   frase segue a **faixa desligada**, e não o nome do bloco: religando o Anki
+   ela desaparece sozinha;
+2. **a dobra não é lembrada entre recarregamentos.** Guardar o estado precisa
+   de `localStorage`, que é JavaScript, e não foi pedido. Cada abertura da tela
+   começa no padrão. Consequência prática: depois de anotar uma faixa do Bônus,
+   a volta recolhe o bloco das 22h de novo (os navegadores atuais abrem o
+   `<details>` quando a âncora cai dentro dele, mas o padrão volta na próxima
+   abertura).
+
+**Arquivos alterados.**
+- `src/radar/web/templates/hoje.html` — o `<details class="bloco-dobra">` em
+  volta do cabeçalho e da `<ol class="linha-tempo">`, o `<summary>`, o sinal da
+  dobra, a frase do ANKI no cabeçalho, e o CSS dos cinco seletores novos;
+- novo: `tests/test_blocos_dobraveis.py`;
+- docs: `decisoes.md` (27 a 29), `historico.md`, `pendencias.md` (**a B.11
+  saiu**), `CLAUDE.md`, este arquivo.
+
+**Testes novos (11).** Cada bloco é um `<details>` com o cabeçalho de
+`<summary>`; os horários e o sinal ficam **dentro** da área que recolhe (era o
+ponto do pedido); o sinal vira quando abre, só com CSS; a `<ol>` das faixas
+fica dentro do `<details>` (fora dele, fechar não esconderia nada); Manhã e
+Noite nascem abertos e o das 22h fechado; fechado o bloco das 22h mostra que o
+ANKI está desativado, e aberto a frase do cabeçalho sai e a da faixa fica;
+**com o Anki religado o cabeçalho não fala de desativado** (o teste religa num
+arquivo copiado, porque a chave `anki` é aplicada na leitura do arquivo, não ao
+montar o dia — o config real não é tocado); nenhum `onclick`/`onchange`; e **o
+único `<script>` da tela continua sendo o cronômetro**.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_blocos_dobraveis.py`, 1ª rodada | 10 passed, 1 failed — o meu teste do Anki religado remontava o `Plano` em memória, e a chave `anki` é aplicada na **leitura** do arquivo (`_sem_anki`): a faixa já vinha desligada. Passou a religar num arquivo copiado, como a 6A fez |
+| `test_blocos_dobraveis.py` | 11 passed |
+| As telas que leem a aba Hoje (`test_tela_hoje`, `test_rotina_sem_anki`, `test_cronometro`, `test_plano_b`, `test_faixas_do_dia`) | 125 passed |
+| Suíte inteira, PC | **2124 passed** (2113 de antes + 11 novos), 19 min |
+
+**Comando real rodado.** `radar web` nos dias 02/10, 03/10 e 05/10: nos três,
+Manhã e Noite abertos e "Depois das 22h" fechado, com a frase do ANKI no
+cabeçalho e **um único `<script>`** na página. Num dia com o **Plano B ativo**
+(numa cópia do banco, apagada depois): o bloco `plano_b` também dobra e nasce
+aberto. O banco real não foi alterado.
+
+**Critério de conclusão.**
+- [x] os três blocos minimizam e maximizam pelo cabeçalho, nos dois sentidos;
+- [x] o bloco do ANKI nasce minimizado e, minimizado, mostra a mensagem de
+  desativado;
+- [x] nenhum JavaScript novo — o cronômetro segue sendo o único;
+- [x] a pendência B.11 saiu do `pendencias.md`.

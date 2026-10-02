@@ -2737,3 +2737,27 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     opcao "desde o inicio" na tela e no `--desde-o-inicio` do comando. A
     pergunta "eu ja estudei isto?", porem, olha **sempre desde o inicio**: ter
     lido a LEP no Ciclo 1 nao desaprende quando o Ciclo 2 comeca.
+
+## Os blocos da aba Hoje dobram (B.11, 02/10/2026)
+
+27. **cada bloco do dia e um `<details>` com o cabecalho de `<summary>`**: um
+    clique no cabecalho - inclusive no canto direito, em cima dos horarios -
+    recolhe a lista de faixas, e outro clique a traz de volta. **Sem
+    JavaScript**: o cronometro continua sendo o unico JS do projeto, e o Mapa
+    do ano da lateral ja usava o mesmo recurso. O cabecalho INTEIRO e o botao,
+    e nao so o canto: e um alvo de clique maior, e o canto pedido esta dentro
+    dele, com um sinal (▾ / ▴) que mostra o estado;
+
+28. **"Depois das 22h" nasce FECHADO**, e os outros blocos abertos. Motivo: o
+    bloco e sobreaviso ("pode interromper") e, com `anki: desativado`, nao ha
+    nada ali para fazer fora do Bonus - abrir e acao minha, que foi o pedido.
+    Fechado, ele mostra no proprio cabecalho a frase "ANKI temporariamente
+    desativado"; aberto, a frase do cabecalho sai e fica a da faixa
+    minimizada, que a 6A criou - a mesma frase duas vezes no mesmo bloco seria
+    ruido. A frase segue a faixa DESLIGADA, e nao o nome do bloco: religando o
+    Anki ela desaparece sozinha, e o bloco continua nascendo fechado;
+
+29. **a dobra NAO e lembrada entre recarregamentos**, de proposito: guardar o
+    estado precisaria de JavaScript (`localStorage`) e nao foi pedido. Cada
+    abertura da tela comeca no padrao - os dois primeiros abertos, o das 22h
+    fechado.

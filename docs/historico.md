@@ -1564,3 +1564,22 @@ em tabela: tudo sai do historico.
 `radar desempenho [--revisar] [--desde-o-inicio] [--materia]`. O Meu foco, a
 home e o Onde estudar passaram a somar o anotado ao radar (decisao 7, que revisa
 a E2), e as frases das telas trocaram "medido no radar" pela divisao.
+
+## Os blocos da aba Hoje dobram (B.11, 02/10)
+
+Pedido durante a Etapa 4 e feito em conversa propria, depois dela.
+
+Cada bloco do dia - "Manha", "Noite", "Depois das 22h" e o do Plano B - virou
+um `<details>` cujo `<summary>` e o proprio cabecalho do cartao: um clique nele,
+inclusive no canto direito em cima dos horarios, recolhe a lista de faixas, e
+outro a traz de volta. Um sinal ▾ / ▴ no canto direito mostra o estado. **Sem
+JavaScript nenhum** - o cronometro continua sendo o unico JS da tela, e o Mapa
+do ano da lateral ja fazia assim.
+
+"Depois das 22h" nasce **fechado**, e fechado mostra no cabecalho que o ANKI
+esta temporariamente desativado; aberto, essa frase sai e fica a da faixa
+minimizada da 6A. A frase segue a faixa desligada, e nao o nome do bloco: o
+teste religa o Anki num arquivo copiado e confere que ela desaparece.
+
+Lembrar a dobra entre recarregamentos ficou de fora: precisaria de
+`localStorage`, e nao foi pedido.

@@ -126,7 +126,8 @@ nao permite: ela lista so o alvo - pendencia B.8. E a **4** (de 02/10: os
 minimos de amostra num lugar so no `config/amostra.yml`, o desempenho por no da
 arvore com os recortes radar e anotado nunca somados, o controle que o ANKI
 fazia - estudado, nao estudado, revisar, refazer -, a tela "Analises > Meu
-desempenho" e o `radar desempenho`). **Proxima: Etapa 5** (geracao de questoes
+desempenho" e o `radar desempenho`) e a **B.11** (os blocos da aba Hoje dobram,
+sem JS; o das 22h nasce fechado). **Proxima: Etapa 5** (geracao de questoes
 com filtro hierarquico e os tres modos).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
