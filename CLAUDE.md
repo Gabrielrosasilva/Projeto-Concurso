@@ -106,8 +106,7 @@ rodando desde 28/09** (`config/cronograma.yml`: tela Hoje, cronometro - o unico
 JS -, caderno de erros, Semanas, Minhas materias; automacao no Windows).
 Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 20 `variacao` de LEP).
-**Actions:** vermelho desde 26/09; os testes foram corrigidos na Etapa 1A
-(01/10) e falta conferir o verde la. **Em andamento:** o pedido de evolucao
+**Actions:** verde desde 02/10 - a coleta diaria voltou a rodar sozinha. **Em andamento:** o pedido de evolucao
 ([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A, a
 1B (frases dos eventos e da Previsao, acentos na tela web), a 1C (fonte unica
 das metricas), a 1D (`radar conferir-dias`; o Bonus de 28 e 29/09 saiu, e

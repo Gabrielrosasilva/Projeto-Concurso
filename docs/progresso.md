@@ -7,7 +7,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 
 | # | Etapa | Situação |
 |---|---|---|
-| 1 | 1A — GitHub Actions verde | 🟡 falta o verde no GitHub |
+| 1 | 1A — GitHub Actions verde | ✅ |
 | 2 | 1B — Texto de máquina e Previsão | ✅ |
 | 3 | 1C — Fonte única das métricas | ✅ |
 | 4 | 1D — Conferência dos dados gravados | ✅ |
@@ -64,10 +64,11 @@ confirmou que o plugin muda `date.today()` e `agora()`.
 
 **Critério de conclusão.**
 - [x] `pytest -q` verde no PC;
-- [ ] workflow verde no GitHub — o `coleta.yml` só roda pelo agendamento
-  (09:00 UTC) ou pelo "Run workflow"; falta disparar e conferir;
-- [~] pendência A1: rebaixada a 🟡 "falta ver o verde lá". Sai do
-  `pendencias.md` quando o Actions passar.
+- [x] **workflow verde no GitHub (02/10/2026)** — a coleta diária rodou
+  sozinha e commitou `adafb03 coleta: 2026-10-02` às 15:13 UTC. O
+  `coleta.yml` roda `pytest -q` antes de coletar, e passo que falha aborta o
+  job: o commit é a prova de que a suíte passou no Linux;
+- [x] pendência A1 fora do `pendencias.md`.
 
 ---
 

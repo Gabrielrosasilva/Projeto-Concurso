@@ -2651,3 +2651,20 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     conferi-la nao muda numero algum. Os dois totais continuam a vista ("162
     de 162 validas · 170 de 170 contando as anuladas") e a caixa "mostrar as
     anuladas" traz de volta. Nada foi apagado.
+
+## A conferencia do complementar fica para depois (02/10/2026)
+
+18. **o acervo complementar segue NAO conferido, por ora** (escolha sua, 02/10).
+    As 44 do bloco generico e as 108 do catalogo nao tem tela: a aba
+    Conferencia lista so o alvo. Em vez de construir o filtro de evidencia
+    agora, elas ficam como estao - e isso nao esconde nada: cada linha ja
+    carrega a procedencia ("Claude Code, importado manualmente" ou "catalogo
+    automatico (macetes.py), conferir por amostra"), e a linha complementar da
+    incidencia escreve quantas faltam classificar.
+
+    **Por que nao atrapalha agora:** o desempenho da Etapa 4 sai das MINHAS
+    respostas, nao da classificacao do complementar; e a incidencia do alvo
+    nunca se mistura com ele. **Quando volta a importar:** na Etapa 5, quando
+    a classificacao passar a escolher questao para treino - ai a tela ganha o
+    filtro de evidencia e a conferencia por amostra acontece (20 por materia;
+    taxa de erro alta, o lote volta). Isso esta na pendencia B.8.

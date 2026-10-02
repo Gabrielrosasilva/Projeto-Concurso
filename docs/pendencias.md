@@ -9,13 +9,10 @@ Legenda: 🔴 nao feita · 🟡 feita pela metade · ⚪ nao verificada.
 
 ## A. Quebrado agora
 
-### A1. 🟡 GitHub Actions: corrigido no PC, falta ver o verde la
-
-Os tres testes que dependiam do Windows ou da data de hoje foram corrigidos na
-Etapa 1A (01/10/2026; detalhe no [historico](historico.md)). A suite passa no
-PC (1.840) e com o relogio simulado em 20/10/2026, 10/11/2026 e 15/03/2027.
-**Falta:** disparar o "Run workflow" na aba Actions (ou esperar o das 09:00
-UTC) e conferir o verde. Verde la, esta pendencia sai daqui.
+Nada. A A1 (Actions vermelho desde 26/09) saiu em **02/10/2026**: a coleta
+diaria voltou a rodar e commitou `coleta: 2026-10-02`. O `coleta.yml` roda
+`pytest -q` ANTES de coletar, e passo que falha aborta o job - o commit e a
+prova de que a suite passou no Linux.
 
 ## B. O desenho do estudo (decisao tomada, desenho aberto)
 
@@ -106,7 +103,10 @@ classificacao ainda" em Portugues):
 - **a sua conferencia**: 44 do lote 2 e 108 do catalogo esperam conferencia -
   as do catalogo por AMOSTRA (20 por materia; taxa de erro alta, o lote volta).
   **A tela de Conferencia lista so o alvo**: para conferir o complementar ela
-  precisa de um filtro de evidencia, que ainda nao existe;
+  precisa de um filtro de evidencia, que ainda nao existe. **Decidido em 02/10
+  (decisao 18): fica para a Etapa 5**, quando a classificacao passar a
+  escolher questao para treino. Ate la o complementar vale como esta, com a
+  procedencia a vista;
 - **as questoes sem linha**: 81 do lote 2 (conteudo de outro cargo, de
   proposito) e, em Portugues e Raciocinio Logico, as que o catalogo nao cobre
   (47 sem palavra, 23 ambiguas, 22 sem par no edital em Portugues; 21 e 8 em

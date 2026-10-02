@@ -1512,3 +1512,11 @@ edital fica sem linha.
 sao **184 questoes distintas** - a FEPESE repete o mesmo caderno em dezenas de
 cargos. A linha complementar passou a contar distintas, com as ocorrencias
 entre parenteses. O alvo nao mudou.
+
+## O Actions voltou ao verde (02/10)
+
+A coleta diaria rodou sozinha e commitou `coleta: 2026-10-02` (as 15:13 UTC,
+pelo `radar-bot`), a primeira desde 26/09. O `coleta.yml` roda `pytest -q`
+antes de coletar, e um passo que falha aborta o job: o commit e a prova de que
+a suite passou no Linux. A pendencia A1 saiu do `pendencias.md`, e com ela o
+bloco "Quebrado agora" ficou vazio.
