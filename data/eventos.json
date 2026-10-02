@@ -1,6 +1,14 @@
 [
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/2026/10/02/concurso-trt-8a-regiao-tem-edital-publicado-com-iniciais-de-ate-r-16-mil/",
+    "data": "2026-10-02T15:13:13.126605+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/2026/10/02/concurso-trt-8a-regiao-tem-edital-publicado-com-iniciais-de-ate-r-16-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/ap/2026/10/01/concurso-gcm-de-santana-ap-promove-edital-com-100-vagas-de-nivel-medio/",
     "data": "2026-10-01T15:50:58.347561+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -9,10 +17,26 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/ap/2026/10/02/concurso-sead-ap-soma-mais-de-710-vagas-em-dois-editais-para-efetivos/",
+    "data": "2026-10-02T15:13:13.128635+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/ap/2026/10/02/concurso-sead-ap-soma-mais-de-710-vagas-em-dois-editais-para-efetivos/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/ba/2026/09/24/fesf-sus-ba-anuncia-vagas-com-remuneracao-que-chega-a-r-19-mil/",
     "data": "2026-09-24T13:53:44.698211+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/ba/2026/09/24/fesf-sus-ba-anuncia-vagas-com-remuneracao-que-chega-a-r-19-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/ba/2026/10/02/edital-eppgg-ba-abre-50-vagas-com-salario-de-r-108-mil-em-concurso/",
+    "data": "2026-10-02T15:13:13.120412+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/ba/2026/10/02/edital-eppgg-ba-abre-50-vagas-com-salario-de-r-108-mil-em-concurso/",
     "tipo": "apareceu"
   },
   {
@@ -37,6 +61,14 @@
     "data": "2026-10-01T15:50:58.336486+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/es/2026/10/01/pm-es-esta-com-dois-novos-editais-abertos-para-nivel-tecnico/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/es/2026/10/02/concurso-creci-es-tem-edital-publicado-com-abertura-de-vagas/",
+    "data": "2026-10-02T15:13:13.123507+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/es/2026/10/02/concurso-creci-es-tem-edital-publicado-com-abertura-de-vagas/",
     "tipo": "apareceu"
   },
   {
@@ -121,6 +153,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/02/concurso-prefeitura-de-lagoa-santa-mg-divulga-edital-com-79-vagas/",
+    "data": "2026-10-02T15:13:13.122483+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/02/concurso-prefeitura-de-lagoa-santa-mg-divulga-edital-com-79-vagas/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/02/mg-prefeitura-de-paraguacu-anunciou-a-abertura-de-dois-novos-editais-de-seletivo/",
+    "data": "2026-10-02T15:13:13.118362+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/02/mg-prefeitura-de-paraguacu-anunciou-a-abertura-de-dois-novos-editais-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/ms/2026/09/25/ms-prefeitura-de-coxim-promove-edital-com-vaga-de-nivel-fundamental/",
     "data": "2026-09-26T13:29:04.530844+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -161,6 +209,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pi/2026/10/02/concurso-prefeitura-de-sao-joao-da-varjota-pi-abre-106-vagas-para-varias-areas/",
+    "data": "2026-10-02T15:13:13.111110+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pi/2026/10/02/concurso-prefeitura-de-sao-joao-da-varjota-pi-abre-106-vagas-para-varias-areas/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/pr/2026/09/25/concurso-camara-de-rio-azul-pr-oferece-vencimento-de-ate-r-5-275/",
     "data": "2026-09-26T13:29:04.528663+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -177,6 +233,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pr/2026/10/02/prefeitura-de-irati-pr-oferta-iniciais-de-ate-r-47-mil-em-seletivo/",
+    "data": "2026-10-02T15:13:13.116201+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pr/2026/10/02/prefeitura-de-irati-pr-oferta-iniciais-de-ate-r-47-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/rj/2026/09/24/concurso-prefeitura-de-sao-goncalo-rj-anuncia-a-abertura-de-mais-de-600-vagas/",
     "data": "2026-09-24T13:53:44.708132+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -189,6 +253,14 @@
     "data": "2026-09-26T13:29:04.533967+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rj/2026/09/25/riosaude-rj-abre-nova-selecao-com-duas-vagas-para-nivel-medio/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rj/2026/10/02/processo-seletivo-cbmerj-abre-192-vagas-com-remuneracao-de-ate-r-122-mil/",
+    "data": "2026-10-02T15:13:13.121489+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rj/2026/10/02/processo-seletivo-cbmerj-abre-192-vagas-com-remuneracao-de-ate-r-122-mil/",
     "tipo": "apareceu"
   },
   {
@@ -317,6 +389,30 @@
     "data": "2026-10-01T15:50:58.327537+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rs/2026/10/01/prefeitura-de-maquine-rs-anuncia-dois-novos-editais-de-selecao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/02/prefeitura-de-campo-bom-rs-abre-vagas-para-auxiliar-em-saude-bucal-e-estagiarios/",
+    "data": "2026-10-02T15:13:13.115062+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/02/prefeitura-de-campo-bom-rs-abre-vagas-para-auxiliar-em-saude-bucal-e-estagiarios/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/02/prefeitura-de-rio-grande-rs-lanca-seletivo-para-profissionais-de-nivel-superior/",
+    "data": "2026-10-02T15:13:13.117256+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/02/prefeitura-de-rio-grande-rs-lanca-seletivo-para-profissionais-de-nivel-superior/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/02/prefeitura-de-tramandai-rs-oferece-remuneracoes-de-ate-r-84-mil/",
+    "data": "2026-10-02T15:13:13.119341+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/02/prefeitura-de-tramandai-rs-oferece-remuneracoes-de-ate-r-84-mil/",
     "tipo": "apareceu"
   },
   {
@@ -573,6 +669,30 @@
     "data": "2026-09-25T14:16:39.185276+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sp/2026/09/25/prefeitura-de-pindorama-sp-publica-edital-de-seletivo-na-area-da-educacao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/02/concurso-prefeitura-de-lencois-paulista-sp-tem-salario-de-ate-r-86-mil/",
+    "data": "2026-10-02T15:13:13.125608+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/02/concurso-prefeitura-de-lencois-paulista-sp-tem-salario-de-ate-r-86-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/02/concurso-sefaz-sp-oferta-60-vagas-com-salarios-de-ate-r-113-mil/",
+    "data": "2026-10-02T15:13:13.124525+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/02/concurso-sefaz-sp-oferta-60-vagas-com-salarios-de-ate-r-113-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/02/prefeitura-de-santa-adelia-sp-divulga-seletivo-com-vagas-na-area-da-educacao/",
+    "data": "2026-10-02T15:13:13.127659+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/02/prefeitura-de-santa-adelia-sp-divulga-seletivo-com-vagas-na-area-da-educacao/",
     "tipo": "apareceu"
   },
   {
