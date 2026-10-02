@@ -1,5 +1,33 @@
 [
   {
+    "chave": "0057afb1535d05092d9caeca66da1ac4",
+    "classificada_em": "2026-10-02T02:52:53.327956+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos",
+    "dispositivo": "Regras Mínimas das Nações Unidas para a Administração da Justiça da Infância e da Juventude (Beijing)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Regras de Beijing (administração da justiça da infância e da juventude): tema do concurso socioeducativo, fora do programa de Direitos Humanos do edital de 2019"
+  },
+  {
+    "chave": "00b176c83db0784979d5e517fb438341",
+    "classificada_em": "2026-10-02T02:52:54.503377+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Controle da administração pública > Ação popular > CF, art. 5º, LXXIII",
+    "dispositivo": "CF, art. 5º, LXXIII; Lei 4.717/1965",
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "a ação civil pública e a de improbidade são reais, mas não são do cidadão; o distrator aposta nisso",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "De qual instrumento dispõe o cidadão para realizar o controle dos atos públicos"
+  },
+  {
     "chave": "023050ae17208370ded51eecb2ac939d",
     "classificada_em": "2026-10-01T21:56:11.417681+00:00",
     "conferida_em": null,
@@ -70,6 +98,34 @@
     "trecho": "entidades autônomas, criadas por lei, de direito público, para atividades típicas: autarquias"
   },
   {
+    "chave": "07e92e5aeb3936d516e3e1934235e53c",
+    "classificada_em": "2026-10-02T02:52:54.151680+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública > CF, art. 144",
+    "dispositivo": "CF, art. 144, I e V",
+    "item_do_edital": "organização da segurança pública",
+    "pegadinha": "põe a defesa civil na lista do art. 144, onde ela não está",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "a segurança pública é composta pelos seguintes órgãos: Bombeiro militar, Polícia federal"
+  },
+  {
+    "chave": "0810742ebea53cdd979ac9977ddc0a23",
+    "classificada_em": "2026-10-02T02:52:55.481026+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "Constituição do Estado de Santa Catarina, art. 21",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Constituição do Estado de Santa Catarina de 1989: o programa de Legislação Estadual do edital de 2019 lista só a Lei 6.745, a LC 675 e a LC 529"
+  },
+  {
     "chave": "085922641e49c26749743fd0d7e55759",
     "classificada_em": "2026-10-01T21:56:11.492154+00:00",
     "conferida_em": null,
@@ -112,6 +168,20 @@
     "trecho": "Lucas é chato: Gabriela não é rica; logo nem Flávia nem Joana são organizadas"
   },
   {
+    "chave": "0b36f3dbd4d826a2db1f97cec5037c7b",
+    "classificada_em": "2026-10-02T02:52:53.470797+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > organização da segurança pública > Polícias militares e corpos de bombeiros como forças auxiliares > CF, art. 144, § 6º",
+    "dispositivo": "CF, art. 144, § 6º",
+    "item_do_edital": "organização da segurança pública",
+    "pegadinha": "inclui a polícia civil entre as forças auxiliares e reserva do Exército",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "são forças auxiliares do Exército: Polícia Militar, Bombeiro Militar"
+  },
+  {
     "chave": "0b42fcd8646515505f61f3194b264b4f",
     "classificada_em": "2026-10-01T21:56:08.229341+00:00",
     "conferida_em": null,
@@ -140,6 +210,20 @@
     "trecho": "são isentas de contribuição para a seguridade social as entidades beneficentes de assistência social"
   },
   {
+    "chave": "0f059a0bc79f5441c88186f989abe8b8",
+    "classificada_em": "2026-10-02T02:52:54.891308+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 23",
+    "dispositivo": "CP, art. 23, III",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "mistura causas que afetam a culpabilidade (menoridade, embriaguez) e meras emoções com as excludentes de ilicitude",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "é excludente de ilicitude: o exercício regular de direito"
+  },
+  {
     "chave": "0f6c919682aaf7c7b494b5d72ff823bb",
     "classificada_em": "2026-10-01T21:56:13.390617+00:00",
     "conferida_em": null,
@@ -154,6 +238,20 @@
     "trecho": "vírus, há, anéis, ônix"
   },
   {
+    "chave": "104ca987bc3d370d1e58737248df7341",
+    "classificada_em": "2026-10-02T02:52:55.552436+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Processual Penal",
+    "dispositivo": "Lei estadual 6.745/1985 (licença para tratamento de saúde)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Direito Processual Penal, mas a questão é de Legislação Estadual (Estatuto do Servidor de SC / Constituição Estadual): erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
+  },
+  {
     "chave": "10af1dc18136f0ff725cd4361f0a1bf4",
     "classificada_em": "2026-10-01T21:56:08.406036+00:00",
     "conferida_em": null,
@@ -166,6 +264,20 @@
     "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "pendente: morte do acusado e extinção da punibilidade: o programa de 2019 não lista o tema"
+  },
+  {
+    "chave": "11a01ce15a4c977afe88254fb5f5563f",
+    "classificada_em": "2026-10-02T02:52:54.105246+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XXX",
+    "dispositivo": "CF, art. 7º, XXX",
+    "item_do_edital": "direitos sociais",
+    "pegadinha": "cria exceções que a Constituição não faz: desconto por deficiência, exclusão da responsabilidade civil do empregador",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "É vedada a diferença de salários, de exercício de funções e de critério de admissão por motivo de sexo, idade, cor ou estado civil"
   },
   {
     "chave": "12417ed18aa1a76228c8d701975abe22",
@@ -224,6 +336,34 @@
     "trecho": "o Google calcula 7*3+5 = 26"
   },
   {
+    "chave": "172ea3d81a93f8a091d9db9569788105",
+    "classificada_em": "2026-10-02T02:52:55.109903+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Faltas por motivo de doença",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "todos os distratores são prazos plausíveis; o que decide é o corte de três dias entre atestado médico e órgão médico oficial",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "caso sua falta for de até três dias, atestado médico, se o período for superior a três dias, atestado emitido pelo órgão médico oficial"
+  },
+  {
+    "chave": "18c4e543d2a344d62da3629d106698a1",
+    "classificada_em": "2026-10-02T02:52:52.605974+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada",
+    "dispositivo": "CF, art. 5º, §§ 2º e 3º",
+    "item_do_edital": "A Constituição brasileira e os tratados internacionais de direitos humanos",
+    "pegadinha": "as erradas oferecem a forma do ato de incorporação (decreto legislativo, decreto executivo) no lugar da hierarquia",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Norma internacional incorporada ao sistema jurídico brasileiro tem hierarquia de qual espécie normativa"
+  },
+  {
     "chave": "1b4d704872e4fab0f43e57c31a1c41b9",
     "classificada_em": "2026-10-01T21:56:11.050845+00:00",
     "conferida_em": null,
@@ -236,6 +376,20 @@
     "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "pendente: LC estadual 472/2009 (plano de carreira do Sistema Prisional de 2013): o edital de 2019 cobra a LC 675, outra lei"
+  },
+  {
+    "chave": "1ca970e98136c0acc716f79eebd09ee2",
+    "classificada_em": "2026-10-02T02:52:55.310650+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei Complementar n.º 675 de 03 de junho de 2016 (Plano de cargos e salário) > Requisitos para ingresso na carreira",
+    "dispositivo": "LC estadual 675/2016",
+    "item_do_edital": "Lei Complementar n.º 675 de 03 de junho de 2016 (Plano de cargos e salário)",
+    "pegadinha": "a lista mistura requisitos verdadeiros com inventados (ser estrangeiro, CNH A e B, idade mínima de 21 anos)",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "são requisitos para o ingresso nas respectivas carreiras: estar quite com as obrigações eleitorais e militares; não registrar sentença penal condenatória transitada em julgado"
   },
   {
     "chave": "1cd4104dcf6effa33fefec19456aec2d",
@@ -266,6 +420,20 @@
     "trecho": "ao CNPCP incumbe estimular e promover a pesquisa criminológica"
   },
   {
+    "chave": "1f3bf36e82992ec2340cc8e5e42876a4",
+    "classificada_em": "2026-10-02T02:52:54.973025+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "CPP, art. 5º, § 4º",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Legislação Estadual, mas a questão é de Direito Processual Penal: erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
+  },
+  {
     "chave": "2013f6670cfde6e8b28ecfb2c5784d3c",
     "classificada_em": "2026-10-01T21:56:08.386971+00:00",
     "conferida_em": null,
@@ -278,6 +446,20 @@
     "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "pendente: inquérito policial: o programa de Processo Penal de 2019 não lista o tema"
+  },
+  {
+    "chave": "204e460d21f44f3fd12cbd51e8d5185e",
+    "classificada_em": "2026-10-02T02:52:55.183142+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Período de trânsito",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "prazos próximos (5, 7, 15, 20 dias) disputam com os 30 dias do Estatuto",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o prazo do período de trânsito concedido ao servidor público que for designado para exercer suas funções fora da sua cidade de lotação"
   },
   {
     "chave": "21176b43a753072eebcd13698b71bc24",
@@ -294,6 +476,34 @@
     "trecho": "pendente: aplicação da lei penal (CP, arts. 1º a 12): o programa de Direito Penal de 2019 não lista o tema"
   },
   {
+    "chave": "22345bb3d3fe7206f9a3bf83fe2ee6b4",
+    "classificada_em": "2026-10-02T02:52:54.843294+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 312",
+    "dispositivo": "CP, art. 312",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "os distratores são crimes vizinhos do mesmo capítulo (concussão, prevaricação, excesso de exação)",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "servidor público que se apropriar de dinheiro, valor ou qualquer outro bem móvel, público ou particular, de que tem a posse em razão do cargo"
+  },
+  {
+    "chave": "22c42b6e820452815f4424b2587f43c4",
+    "classificada_em": "2026-10-02T02:52:53.521965+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXVIII",
+    "dispositivo": "CF, art. 5º, LXVIII",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "oferece os outros remédios (habeas data, mandado de injunção, mandado de segurança) para um caso de liberdade de locomoção",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "quando alguém sofrer ou se achar ameaçado de sofrer violência ou coação em sua liberdade de locomoção"
+  },
+  {
     "chave": "2321633d3c77e80c69509d91d93cfa0f",
     "classificada_em": "2026-10-01T21:56:10.775470+00:00",
     "conferida_em": null,
@@ -306,6 +516,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "idoneidade moral e reconhecida aptidão para a função"
+  },
+  {
+    "chave": "236cb4615c27e0dc7ad0da6cc21688c0",
+    "classificada_em": "2026-10-02T02:52:54.580511+00:00",
+    "conferida_em": null,
+    "conteudo": "Administração Pública > Organização administrativa: administração direta e indireta > Autarquia",
+    "dispositivo": "Decreto-Lei 200/1967, art. 5º, I",
+    "item_do_edital": "Organização administrativa: administração direta e indireta",
+    "pegadinha": "chama a criação de autarquia de desconcentração e atribui a ela personalidade de direito privado",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Possui personalidade, patrimônio e receita próprios, para executar atividades típicas da Administração Pública"
   },
   {
     "chave": "23ae980b87ea443e2a50dca2215012c5",
@@ -334,6 +558,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "a ordem e a disciplina serão mantidas com firmeza, sem impor restrições além das necessárias"
+  },
+  {
+    "chave": "269298a1c1dd3f7f1946d5fad724cf63",
+    "classificada_em": "2026-10-02T02:52:55.515325+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Readaptação, recondução e redistribuição",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "troca as definições entre si: descreve a readaptação como redistribuição e vice-versa",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "em se tratando de hipóteses de recondução, o funcionário reconduzido ficará na condição de excedente, sem a perda de direitos"
   },
   {
     "chave": "26d10b4c319ac0661150dfcfff965fb7",
@@ -420,6 +658,20 @@
     "trecho": "cadastrar armeiros, identificar armas, cadastrar apreensões"
   },
   {
+    "chave": "2bb49ccd6a5e48655a7826c6c8fd4c04",
+    "classificada_em": "2026-10-02T02:52:54.371596+00:00",
+    "conferida_em": null,
+    "conteudo": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração > Descentralização por serviço",
+    "dispositivo": null,
+    "item_do_edital": "conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração",
+    "pegadinha": "opõe descentralização a desconcentração, que é a distribuição interna de competências no mesmo ente",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "as Autarquias e Fundações exercem suas funções por meio de descentralização"
+  },
+  {
     "chave": "303d31a0f6747b4e6fc681f7b9967c13",
     "classificada_em": "2026-10-01T21:56:13.807491+00:00",
     "conferida_em": null,
@@ -490,6 +742,20 @@
     "trecho": "vedada a transação nas ações de improbidade; prazo das ações"
   },
   {
+    "chave": "3328f50481c123dd9b294cbf745e1f73",
+    "classificada_em": "2026-10-02T02:52:53.286835+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Tratados equivalentes a emenda constitucional (EC 45/2004) > CF, art. 5º, § 3º",
+    "dispositivo": "CF, art. 5º, § 3º, incluído pela EC 45/2004",
+    "item_do_edital": "A Constituição brasileira e os tratados internacionais de direitos humanos",
+    "pegadinha": "oferece leis de outras esferas (municipal, estadual, federal) para um tratado que a EC 45 equiparou a emenda",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "serão equivalentes às emendas constitucionais"
+  },
+  {
     "chave": "34f58f6c3b657b44048e600f1af06ae5",
     "classificada_em": "2026-10-01T21:56:13.914939+00:00",
     "conferida_em": null,
@@ -502,6 +768,20 @@
     "status": "completa",
     "tipo_de_questao": "cálculo",
     "trecho": "0,3 + 0,7 × 0,6 = 0,72"
+  },
+  {
+    "chave": "35e8a81ae7daf416d59b3268704642ae",
+    "classificada_em": "2026-10-02T02:52:53.813890+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório > CF, art. 14, § 1º, II",
+    "dispositivo": "CF, art. 14, § 1º, II, b",
+    "item_do_edital": "cidadania e direitos políticos",
+    "pegadinha": "oferece conscritos e estrangeiros, que não votam, como se fossem casos de voto facultativo",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o voto é facultativo para os maiores de 70 anos"
   },
   {
     "chave": "36dc65e56fdaff5914533ecd75ceaa15",
@@ -630,6 +910,20 @@
     "trecho": "condutas lesivas ao meio ambiente: sanções penais e administrativas, independentemente de reparar o dano"
   },
   {
+    "chave": "4288b3f1a76b797db873e247f2446de4",
+    "classificada_em": "2026-10-02T02:52:53.570757+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > direitos sociais > Rol dos direitos sociais > CF, art. 6º",
+    "dispositivo": "CF, art. 6º",
+    "item_do_edital": "direitos sociais",
+    "pegadinha": "põe a evangelização no meio de direitos sociais verdadeiros (saúde, educação, segurança, alimentação)",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "não é direito social: a evangelização"
+  },
+  {
     "chave": "4299ef84edd8f17c330c5c4b62e82180",
     "classificada_em": "2026-10-01T21:56:09.449184+00:00",
     "conferida_em": null,
@@ -656,6 +950,20 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "a autoridade policial não inicia ação penal, nem nas contravenções"
+  },
+  {
+    "chave": "45d5f2a21fdeab2c5f25a0f10e268963",
+    "classificada_em": "2026-10-02T02:52:55.463443+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Jornada, serviço extraordinário e posse",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "afirma que o serviço extraordinário não tem limite de carga horária semanal e que o prazo de posse é improrrogável",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "A interrupção do exercício fora dos casos legais e além dos limites admitidos, sujeita o funcionário a processo disciplinar e às penas pertinentes"
   },
   {
     "chave": "4608d0af2cec6209ab1183224b38902d",
@@ -698,6 +1006,34 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "incorporados, os tratados são considerados norma infraconstitucional"
+  },
+  {
+    "chave": "4738a551cf3cdb9500059c568f30a96c",
+    "classificada_em": "2026-10-02T02:52:54.334515+00:00",
+    "conferida_em": null,
+    "conteudo": "Administração Pública > Organização administrativa: administração direta e indireta > Personalidade jurídica das entidades da administração",
+    "dispositivo": "Decreto-Lei 200/1967, art. 4º",
+    "item_do_edital": "Organização administrativa: administração direta e indireta",
+    "pegadinha": "troca a natureza das entidades: empresa pública com personalidade de direito público, autarquia de direito privado",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "Os órgãos que compõem a administração pública direta não possuem personalidade jurídica"
+  },
+  {
+    "chave": "47ea6b60698981d9eb91a1a2d9e260b3",
+    "classificada_em": "2026-10-02T02:52:52.789763+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos",
+    "dispositivo": "art. 61 da Convenção Americana sobre Direitos Humanos",
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "afirma que qualquer pessoa pode peticionar à Corte; quem o faz é a Comissão ou o Estado-Parte",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "conceito",
+    "trecho": "Age apenas por provocação dos Estados integrantes do sistema"
   },
   {
     "chave": "49fb53b311abe444854bb0abc58c6ed2",
@@ -784,6 +1120,34 @@
     "trecho": "convivência, espécies, relevância, presídio, carcerário: paroxítonas terminadas em ditongo"
   },
   {
+    "chave": "5135f76580e4480ae14131aaf157de29",
+    "classificada_em": "2026-10-02T02:52:55.064715+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "LC estadual 472/2009",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto correspondente"
+  },
+  {
+    "chave": "54f4fe7fe5740d57a3776244bc6fe299",
+    "classificada_em": "2026-10-02T02:52:54.249368+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > educação, cultura e desporto > Direito à educação > CF, art. 208, § 1º",
+    "dispositivo": "CF, art. 208, § 1º",
+    "item_do_edital": "educação, cultura e desporto",
+    "pegadinha": "o ensino religioso é de matrícula facultativa, e a atuação prioritária dos Estados não é no ensino superior",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "O acesso ao ensino obrigatório e gratuito é direito público subjetivo"
+  },
+  {
     "chave": "55a4ea166bd064d12a3c243fc0d3b4ec",
     "classificada_em": "2026-10-01T21:56:08.674086+00:00",
     "conferida_em": null,
@@ -812,6 +1176,20 @@
     "trecho": "a legislação local poderá estabelecer normas complementares para o regime aberto"
   },
   {
+    "chave": "56d9a5407495ab8f11084c9ee2dbf951",
+    "classificada_em": "2026-10-02T02:52:55.047015+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "LC estadual 472/2009",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto correspondente"
+  },
+  {
     "chave": "5910957069ae82e1922bb58d28c02ada",
     "classificada_em": "2026-10-01T21:56:13.778104+00:00",
     "conferida_em": null,
@@ -838,6 +1216,20 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "iminente; privilégio; quiser; deferir; vultosa"
+  },
+  {
+    "chave": "5b2b1da188855f939c571d94d5f93446",
+    "classificada_em": "2026-10-02T02:52:55.590831+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Processual Penal",
+    "dispositivo": "Constituição do Estado de Santa Catarina (direitos dos servidores)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Direito Processual Penal, mas a questão é de Legislação Estadual (Estatuto do Servidor de SC / Constituição Estadual): erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
   },
   {
     "chave": "5c146ddca28c67088822081e504dd963",
@@ -896,6 +1288,20 @@
     "trecho": "C(12,2) − 3·C(4,2) + 3 = 51 retas"
   },
   {
+    "chave": "61b3ab7455bf9e480c12272b6872c13d",
+    "classificada_em": "2026-10-02T02:52:53.961537+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais > CF, art. 5º, XLII",
+    "dispositivo": "CF, art. 5º, XLII",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "oferece crimes graves mas prescritíveis (tráfico, estupro, extorsão mediante sequestro) no lugar do racismo",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o crime que, de acordo com a Constituição Federal, é considerado imprescritível e inafiançável"
+  },
+  {
     "chave": "620ede34b21504d330f2c56255ffc402",
     "classificada_em": "2026-10-01T21:56:12.914175+00:00",
     "conferida_em": null,
@@ -908,6 +1314,34 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "trocar senhas, criptografar dados sigilosos e manter o antivírus atualizado"
+  },
+  {
+    "chave": "6214ceb5cc8c12b00bae9f4fbeb91fb7",
+    "classificada_em": "2026-10-02T02:52:52.897422+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos > Internacionalização dos direitos humanos no pós-guerra",
+    "dispositivo": null,
+    "item_do_edital": "Afirmação histórica dos direitos humanos",
+    "pegadinha": "o texto cita o nazismo, e as erradas oferecem outros marcos históricos: Revolução Francesa, Primeira Guerra",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "interpretação de texto",
+    "trecho": "surgiu a partir do pós-guerra, como resposta às atrocidades e aos horrores cometidos durante o nazismo"
+  },
+  {
+    "chave": "624ebc5b184ac36e76a64e58bc0d3eba",
+    "classificada_em": "2026-10-02T02:52:54.954017+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Penal",
+    "dispositivo": "Lei 9.455/1997, art. 1º, § 5º",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: crime de tortura (Lei 9.455/1997): no edital de 2019 isso é Legislação Especial, e o bloco do caderno diz Direito Penal; trocar de matéria só é permitido em matéria fora do edital"
   },
   {
     "chave": "62e7c8dbda287708190101ab17ecca45",
@@ -980,6 +1414,34 @@
     "trecho": "declaração de estado de guerra ou resposta a agressão armada estrangeira"
   },
   {
+    "chave": "67df19174a18f06bd263fbb390e2e6d9",
+    "classificada_em": "2026-10-02T02:52:55.391507+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei Complementar n.º 675 de 03 de junho de 2016 (Plano de cargos e salário) > Estrutura de remuneração: vencimento, adicionais e hora extraordinária",
+    "dispositivo": "LC estadual 675/2016",
+    "item_do_edital": "Lei Complementar n.º 675 de 03 de junho de 2016 (Plano de cargos e salário)",
+    "pegadinha": "números plausíveis trocados: adicional noturno de 25%, hora extra com acréscimo de 100%",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o vencimento do cargo corresponde a uma carga horária de 40 horas semanais"
+  },
+  {
+    "chave": "686b8e6fc263993695fd6d9aedcb4140",
+    "classificada_em": "2026-10-02T02:52:53.765152+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente > CF, art. 225, § 4º",
+    "dispositivo": "CF, art. 225, § 4º",
+    "item_do_edital": "meio ambiente",
+    "pegadinha": "restringe a responsabilidade às pessoas físicas e a proteção à geração presente",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "A Mata Atlântica é patrimônio nacional"
+  },
+  {
     "chave": "6a9be85604191bf6497e12b77a2d5395",
     "classificada_em": "2026-10-01T21:56:12.758820+00:00",
     "conferida_em": null,
@@ -992,6 +1454,34 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "Layout da página > Marca d'água"
+  },
+  {
+    "chave": "6b4c5152e880b73bb8301abebd8c0693",
+    "classificada_em": "2026-10-02T02:52:53.716700+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais > CF, art. 5º, XLII",
+    "dispositivo": "CF, art. 5º, XLII",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "afirma que em hipótese nenhuma se admite a pena de morte, esquecendo a guerra declarada, e que a pena passaria aos herdeiros",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "A prática do racismo constitui crime inafiançável e imprescritível"
+  },
+  {
+    "chave": "6ce66f5634e4aa8663834b24c788ca5b",
+    "classificada_em": "2026-10-02T02:52:53.149106+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos",
+    "dispositivo": "Convenção Internacional sobre os Direitos da Criança, de 1989",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: instrumento de proteção da criança (Convenção da ONU de 1989): conteúdo do concurso socioeducativo, sem assunto correspondente no programa de Direitos Humanos do edital de 2019"
   },
   {
     "chave": "6e6a1b4b9a1f21bd592f61a9eedebc6b",
@@ -1034,6 +1524,20 @@
     "status": "completa",
     "tipo_de_questao": "exceção ou pegadinha",
     "trecho": "o princípio da não discriminação leva em conta as necessidades INDIVIDUAIS dos reclusos"
+  },
+  {
+    "chave": "738e856cb592706290cb0485ecde8158",
+    "classificada_em": "2026-10-02T02:52:52.827242+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)",
+    "dispositivo": null,
+    "item_do_edital": "Afirmação histórica dos direitos humanos",
+    "pegadinha": "chama a DUDH de tratado internacional ou de acordo contratual; ela é resolução da Assembleia Geral da ONU",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Originou-se de uma recomendação em forma de resolução adotada pela Organização das Nações Unidas"
   },
   {
     "chave": "7403af5a0b232d638139040cafcbef75",
@@ -1090,6 +1594,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "solicitar ou receber, em razão da função, vantagem indevida"
+  },
+  {
+    "chave": "77c317d87023ff89dac5cc628686b998",
+    "classificada_em": "2026-10-02T02:52:54.056967+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > nacionalidade > Brasileiros natos e naturalizados > CF, art. 12, I, a",
+    "dispositivo": "CF, art. 12, I, a",
+    "item_do_edital": "nacionalidade",
+    "pegadinha": "troca prazos e condições da naturalização e afirma que o filho de brasileiro nascido fora sempre será nato",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "É brasileiro nato o nascido na República Federativa do Brasil, ainda que de pais estrangeiros, desde que estes não estejam a serviço de seu país"
   },
   {
     "chave": "78e15eecd9a893ab1f0964491d18073b",
@@ -1162,6 +1680,20 @@
     "trecho": "de custódia a pena; período utilitarista"
   },
   {
+    "chave": "7bf87ca40a98bb08bcec7a4d70a3f0a7",
+    "classificada_em": "2026-10-02T02:52:55.427561+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Férias",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "pede a INCORRETA, e a acumulação de férias é justamente o que o Estatuto proíbe",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "É permitida a acumulação de férias"
+  },
+  {
     "chave": "7c41bc4cd30edd21a9625c2e8932a76c",
     "classificada_em": "2026-10-01T21:56:08.059790+00:00",
     "conferida_em": null,
@@ -1174,6 +1706,20 @@
     "status": "pendente",
     "tipo_de_questao": "caso prático",
     "trecho": "pendente: aplicação da lei penal (CP, arts. 1º a 12): o programa de Direito Penal de 2019 não lista o tema"
+  },
+  {
+    "chave": "7d669df29657538621ddd4d6ed5fa828",
+    "classificada_em": "2026-10-02T02:52:52.682616+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Gerações (dimensões) dos direitos humanos",
+    "dispositivo": null,
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "troca as gerações de lugar: põe os direitos sociais na quarta e os de liberdade na segunda",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Os direitos de liberdade são classificados como de primeira geração"
   },
   {
     "chave": "7e004d85a4757372bfff652a45ce09dc",
@@ -1216,6 +1762,34 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "a culpa exclusiva da vítima exclui a responsabilidade do Estado"
+  },
+  {
+    "chave": "8033e7dab26733cf83cd75e3eb5063eb",
+    "classificada_em": "2026-10-02T02:52:53.065369+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos > Convenção Americana, art. 61",
+    "dispositivo": "art. 61 da Convenção Americana sobre Direitos Humanos",
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "oferece qualquer pessoa como legitimada: o indivíduo peticiona à Comissão, não à Corte",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Podem submeter casos para decisão da Corte Interamericana de Direitos Humanos"
+  },
+  {
+    "chave": "8133c252b18667dc5b91d1555cef4023",
+    "classificada_em": "2026-10-02T02:52:53.911827+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Tribunal do júri > CF, art. 5º, XXXVIII",
+    "dispositivo": "CF, art. 5º, XXXVIII, d",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "amplia a competência do júri para crimes culposos e para crimes violentos em geral",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o tribunal do júri é competente para julgar os crimes dolosos contra a vida"
   },
   {
     "chave": "81f50183f47bfebaa9b224f4b1094df1",
@@ -1274,6 +1848,20 @@
     "trecho": "opor-se à execução de ato legal, mediante violência ou ameaça"
   },
   {
+    "chave": "840426f8ce6b92effa7db8797bd1bc08",
+    "classificada_em": "2026-10-02T02:52:55.009687+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "LC estadual 472/2009",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto correspondente"
+  },
+  {
     "chave": "86b982c4f3f37743b886d15562a710dc",
     "classificada_em": "2026-10-01T21:56:14.232224+00:00",
     "conferida_em": null,
@@ -1302,6 +1890,20 @@
     "trecho": "200 − (80 + 46 − 22) = 96"
   },
   {
+    "chave": "8997494b6d5dff51330fe94e710c4468",
+    "classificada_em": "2026-10-02T02:52:52.932031+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Sistema global e sistemas regionais de proteção",
+    "dispositivo": null,
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "inverte ONU e OEA nas lacunas, e oferece a União Europeia como sistema regional do Brasil",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "O sistema global é o sistema da (1). No plano regional o Brasil faz parte da (2)"
+  },
+  {
     "chave": "89baf76295360d2f63bd057474c53718",
     "classificada_em": "2026-10-01T21:56:13.217508+00:00",
     "conferida_em": null,
@@ -1314,6 +1916,20 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "a vírgula marca a elipse do verbo (zeugma)"
+  },
+  {
+    "chave": "8a02b3c6fe8ea38583743584e292305d",
+    "classificada_em": "2026-10-02T02:52:53.015442+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José) > Convenção Americana, art. 5º",
+    "dispositivo": "art. 5º da Convenção Americana sobre Direitos Humanos",
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "as erradas negam o texto da Convenção: autorizam prisão civil por dívida e excluem a liberdade de buscar informação",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Ninguém deve ser submetido a torturas, nem a penas ou tratos cruéis, desumanos ou degradantes"
   },
   {
     "chave": "8ca222bf719f956a4ca80a0182f0c8a8",
@@ -1456,6 +2072,20 @@
     "trecho": "vedada a pena de cesta básica ou prestação pecuniária"
   },
   {
+    "chave": "955e512c6e4ae4420da14c2c9b83e23b",
+    "classificada_em": "2026-10-02T02:52:52.645385+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Características dos direitos humanos",
+    "dispositivo": null,
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "efetividade entra na lista ao lado de universalidade e indivisibilidade, e o gabarito oficial aceitou as três",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "São características da Declaração Universal dos Direitos Humanos. 1. universalidade. 2. efetividade. 3. indivisibilidade"
+  },
+  {
     "chave": "96c23c93f4f8004854195645bb6535ea",
     "classificada_em": "2026-10-01T21:56:13.099517+00:00",
     "conferida_em": null,
@@ -1540,6 +2170,20 @@
     "trecho": "sem efeito a nomeação se a posse não ocorrer no prazo"
   },
   {
+    "chave": "9cccd5c854ed990aed0e8a9257d11d20",
+    "classificada_em": "2026-10-02T02:52:53.128077+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
+    "dispositivo": "arts. 1º, 18 e 19 da Declaração Universal dos Direitos Humanos",
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "a afirmativa 1 restringe a liberdade religiosa aos países ocidentais e cristãos; a questão foi anulada pela banca",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Afirma que todos os seres humanos nascem livres e iguais em dignidade e direitos"
+  },
+  {
     "chave": "9d2b40aa6d9ca6548b48498a368429a9",
     "classificada_em": "2026-10-01T21:56:13.740012+00:00",
     "conferida_em": null,
@@ -1552,6 +2196,20 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "pares substantivo/adjetivo tirados do texto 2"
+  },
+  {
+    "chave": "9d5979d3e979ba13753dc786be2e61c4",
+    "classificada_em": "2026-10-02T02:52:54.201191+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > família, criança, adolescente e idoso > Medida privativa de liberdade ao adolescente > CF, art. 227, § 3º, V",
+    "dispositivo": "CF, art. 227, § 3º, V",
+    "item_do_edital": "família, criança, adolescente e idoso",
+    "pegadinha": "as três afirmativas são verdadeiras, e o distrator aposta em quem desconfia de listas completas",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "a aplicação de qualquer medida privativa de liberdade a adolescente deverá obedecer ao princípio da brevidade, da excepcionalidade e do respeito à condição peculiar de pessoa em desenvolvimento"
   },
   {
     "chave": "9f5be8ca59c016860fee9dbd31bd6696",
@@ -1638,6 +2296,62 @@
     "trecho": "palavras variáveis classificadas em artigo, substantivo, adjetivo, verbo e substantivo"
   },
   {
+    "chave": "a79445bf138351aeee2d5d0d81421eb9",
+    "classificada_em": "2026-10-02T02:52:53.308390+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos",
+    "dispositivo": "Diretrizes das Nações Unidas para a Prevenção da Delinquência Juvenil (Riad)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Regras de Riad (prevenção da delinquência juvenil): tema do concurso socioeducativo, fora do programa de Direitos Humanos do edital de 2019"
+  },
+  {
+    "chave": "a8aa037f97a835c47ce3b0b8e2064ddb",
+    "classificada_em": "2026-10-02T02:52:54.008846+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal > CF, art. 5º, LIV",
+    "dispositivo": "CF, art. 5º, LIV",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "a alternativa do juízo de exceção é atraente por falar em plenitude de defesa, mas juízo de exceção é vedado",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Ninguém será privado da liberdade ou de seus bens sem o devido processo legal"
+  },
+  {
+    "chave": "a9623f058d5076985c4f45885c276091",
+    "classificada_em": "2026-10-02T02:52:55.220753+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Remoção",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "prazos vizinhos (seis meses, um ano, três anos) disputam com os dois anos do Estatuto",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o servidor removido por interesse do serviço público não poderá novamente ser removido antes de decorridos dois anos"
+  },
+  {
+    "chave": "a964eba1958081dfc2acf46400b12727",
+    "classificada_em": "2026-10-02T02:52:54.418641+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Servidores públicos > Acumulação remunerada de cargos > CF, art. 37, XVI",
+    "dispositivo": "CF, art. 37, XVI, a",
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "as erradas inventam combinações (dois técnicos com um científico, dois médicos com um de professor)",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "é vedada a acumulação remunerada de cargos públicos, exceto a de dois cargos de professor"
+  },
+  {
     "chave": "a9781244d221e89407521a3fc052327b",
     "classificada_em": "2026-10-01T21:56:13.032650+00:00",
     "conferida_em": null,
@@ -1708,6 +2422,34 @@
     "trecho": "não se pune a tentativa por ineficácia absoluta do meio ou impropriedade absoluta do objeto"
   },
   {
+    "chave": "abb3918b36e414bf1d1ecaba4e774f9b",
+    "classificada_em": "2026-10-02T02:52:53.618943+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XXVIII",
+    "dispositivo": "CF, art. 7º, XXVIII",
+    "item_do_edital": "direitos sociais",
+    "pegadinha": "deforma incisos reais: remuneração diurna superior à noturna, aviso prévio de dez dias, repouso aos sábados e domingos",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "é direito dos trabalhadores urbanos e rurais: seguro contra acidentes de trabalho"
+  },
+  {
+    "chave": "abb51db5eee2437f20fd85cc63c3f357",
+    "classificada_em": "2026-10-02T02:52:54.936267+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Fuga de pessoa presa ou submetida a medida de segurança > CP, art. 351",
+    "dispositivo": "CP, art. 351, § 4º",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "afirma que o crime é próprio de agente público e que a mera tentativa do preso de evadir-se já o configura",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "O crime será apenado com detenção ou multa, em caso de culpa do funcionário incumbido da custódia ou guarda"
+  },
+  {
     "chave": "ad74bdefda110d8100c9435798a776d6",
     "classificada_em": "2026-10-01T21:56:10.386033+00:00",
     "conferida_em": null,
@@ -1720,6 +2462,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "oferecida a denúncia, notificação do acusado para defesa prévia em 10 dias"
+  },
+  {
+    "chave": "ae4862011b0f1220a654ed8305cd1b9e",
+    "classificada_em": "2026-10-02T02:52:54.298018+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > meio ambiente > Estudo prévio de impacto ambiental > CF, art. 225, § 1º, IV",
+    "dispositivo": "CF, art. 225, § 1º, IV",
+    "item_do_edital": "meio ambiente",
+    "pegadinha": "oferece documentos administrativos reais (alvará, licença de instalação) no lugar do EIA exigido pela Constituição",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o documento, ao qual se dará publicidade, exigido para instalação de obra ou atividade potencialmente causadora de significativa degradação do meio ambiente"
   },
   {
     "chave": "ae6d02013c0cc74b0aefa9573caa7fb0",
@@ -1792,6 +2548,20 @@
     "trecho": "harmônica integração social do condenado; assistência para o retorno à convivência"
   },
   {
+    "chave": "b311fcf638ba4f211dd44642d7989332",
+    "classificada_em": "2026-10-02T02:52:53.863874+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais > CF, art. 5º, XLVII",
+    "dispositivo": "CF, art. 5º, XLVII, b e e",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "inclui as penas restritivas de direito entre as proibidas, quando elas são justamente admitidas",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "não haverá penas: cruéis, de caráter perpétuo"
+  },
+  {
     "chave": "b43f103fcea72adc4efa65134f0aaeed",
     "classificada_em": "2026-10-01T21:56:09.530006+00:00",
     "conferida_em": null,
@@ -1832,6 +2602,20 @@
     "status": "completa",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "terceira geração: titularidade coletiva, solidariedade, paz, desenvolvimento, meio ambiente"
+  },
+  {
+    "chave": "b77bd3840bb36ce6a02fb835d60f52a2",
+    "classificada_em": "2026-10-02T02:52:55.260588+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "CPP, art. 514",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Legislação Estadual, mas a questão é de Direito Processual Penal: erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
   },
   {
     "chave": "b7cc62c6256e4bf2b9ef9b829a14102c",
@@ -1890,6 +2674,20 @@
     "trecho": "o agente assumiu o risco de produzir o resultado"
   },
   {
+    "chave": "bc290ec49410c27e38b8568597b828d1",
+    "classificada_em": "2026-10-02T02:52:54.456627+00:00",
+    "conferida_em": null,
+    "conteudo": "Administração Pública > Princípios administrativos > Princípio da eficiência",
+    "dispositivo": "CF, art. 37, caput",
+    "item_do_edital": "Princípios administrativos",
+    "pegadinha": "oferece outros princípios verdadeiros (moralidade, proporcionalidade, supremacia do interesse público) para a descrição da eficiência",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "o serviço público deve buscar resultados satisfatórios, zelando pela boa qualidade da ação administrativa"
+  },
+  {
     "chave": "bd506fa857bbfa587b177b22bf12e729",
     "classificada_em": "2026-10-01T21:56:13.665101+00:00",
     "conferida_em": null,
@@ -1932,6 +2730,20 @@
     "trecho": "pendente: inquérito policial: o programa de Processo Penal de 2019 não lista o tema"
   },
   {
+    "chave": "c1d0230ad950ecc4937b75608dcbb2ce",
+    "classificada_em": "2026-10-02T02:52:55.533483+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "Constituição do Estado de Santa Catarina",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Constituição do Estado de Santa Catarina de 1989: o programa de Legislação Estadual do edital de 2019 lista só a Lei 6.745, a LC 675 e a LC 529"
+  },
+  {
     "chave": "c2a05e7850568bbe2c610035b80b1c7a",
     "classificada_em": "2026-10-01T21:56:12.276629+00:00",
     "conferida_em": null,
@@ -1944,6 +2756,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "só é lícito o uso de algemas em caso de resistência, receio de fuga ou perigo, justificado por escrito"
+  },
+  {
+    "chave": "c33995a7ba4bc5b8674b93fd3653c3d9",
+    "classificada_em": "2026-10-02T02:52:53.667652+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > nacionalidade > Brasileiros natos > CF, art. 12, I",
+    "dispositivo": "CF, art. 12, I, b",
+    "item_do_edital": "nacionalidade",
+    "pegadinha": "as erradas misturam hipóteses de naturalização e a condição dos portugueses equiparados",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "os nascidos no estrangeiro, de pai brasileiro ou mãe brasileira, desde que qualquer deles esteja a serviço da República Federativa do Brasil"
   },
   {
     "chave": "c7631529d63c2e6319cfd4d7b6a58855",
@@ -1974,6 +2800,20 @@
     "trecho": "o ensino não é facultativo em todos os níveis"
   },
   {
+    "chave": "c99040198207506a3083f2db39fb7f0c",
+    "classificada_em": "2026-10-02T02:52:55.146779+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Posse e exercício",
+    "dispositivo": "Lei estadual 6.745/1985",
+    "item_do_edital": "Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina)",
+    "pegadinha": "exercício e posse são vizinhos, e a alternativa exercício atrai quem não distingue os dois atos",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "o ato pelo qual o nomeado para um cargo público manifesta, pessoal e expressamente, a sua vontade de aceitar a nomeação"
+  },
+  {
     "chave": "ca0060296877f55b6e718644a0cd5dca",
     "classificada_em": "2026-10-01T21:56:12.503321+00:00",
     "conferida_em": null,
@@ -1988,6 +2828,62 @@
     "trecho": "deve incluir-se no pessoal, 'tanto quanto possível', um número suficiente de especialistas"
   },
   {
+    "chave": "cba643d68d69568ca5fd7ce41a783f27",
+    "classificada_em": "2026-10-02T02:52:55.573457+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Processual Penal",
+    "dispositivo": "Lei estadual 6.745/1985 (férias)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Direito Processual Penal, mas a questão é de Legislação Estadual (Estatuto do Servidor de SC / Constituição Estadual): erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
+  },
+  {
+    "chave": "cbfc837eb8ddfc8e376890e23330ebef",
+    "classificada_em": "2026-10-02T02:52:53.374871+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > seguridade social > Assistência social > CF, art. 203",
+    "dispositivo": "CF, art. 203, I, III e V",
+    "item_do_edital": "seguridade social",
+    "pegadinha": "mistura na lista a autodeterminação dos povos, que é princípio das relações internacionais (art. 4º), e não objetivo da assistência social",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "a assistência social tem por objetivos: o amparo às crianças e aos adolescentes carentes"
+  },
+  {
+    "chave": "cc129b5fed15607677f03141471d3e67",
+    "classificada_em": "2026-10-02T02:52:53.422368+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de defesa > CF, art. 136",
+    "dispositivo": "CF, art. 136, caput",
+    "item_do_edital": "Defesa do Estado e das instituições democráticas: segurança pública",
+    "pegadinha": "as erradas descrevem o estado de sítio (comoção grave de repercussão nacional, agressão armada estrangeira)",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "houver necessidade de prontamente restabelecer, em locais restritos e determinados, áreas atingidas por calamidades de grandes proporções na natureza"
+  },
+  {
+    "chave": "cd44299a8f3a11cfc2a53976140d10b4",
+    "classificada_em": "2026-10-02T02:52:55.241497+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "CPP, art. 306, § 2º (nota de culpa)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Legislação Estadual, mas a questão é de Direito Processual Penal: erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
+  },
+  {
     "chave": "cd8b517ef812aab800e90661babf3841",
     "classificada_em": "2026-10-01T21:56:13.353604+00:00",
     "conferida_em": null,
@@ -2000,6 +2896,34 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "Excelentíssimo Senhor, para o Presidente da República"
+  },
+  {
+    "chave": "d0c3c148fa32215b8d9b3503229ae118",
+    "classificada_em": "2026-10-02T02:52:54.797953+00:00",
+    "conferida_em": null,
+    "conteudo": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia",
+    "dispositivo": "CTN, art. 78",
+    "item_do_edital": "Poderes e deveres dos administradores públicos",
+    "pegadinha": "os outros poderes administrativos (hierárquico, regulamentar, autotutela) são reais e disputam a resposta",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "o poder de que dispõe a administração pública para conter abusos do direito individual"
+  },
+  {
+    "chave": "d2f450fb1ef3d55600dd51273521b399",
+    "classificada_em": "2026-10-02T02:52:54.543098+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Atos administrativos > Anulação e revogação",
+    "dispositivo": "Súmula 473 do STF",
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "generaliza a autoexecutoriedade para todo ato e tira da administração o poder de anular (autotutela)",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "A anulação do ato administrativo retira do mundo jurídico todos os seus efeitos desde a sua criação"
   },
   {
     "chave": "d6ae691d8cc9fcd69a9b9b617d696fb6",
@@ -2058,6 +2982,20 @@
     "trecho": "pendente: afirmativas sobre cinco assuntos (tratamento, crase, referência pronominal, vozes do verbo, verbo haver): sem assunto principal seguro"
   },
   {
+    "chave": "da5317248ab378267c4f43b844b55f23",
+    "classificada_em": "2026-10-02T02:52:52.860986+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração e Programa de Ação de Viena (1993)",
+    "dispositivo": null,
+    "item_do_edital": "Afirmação histórica dos direitos humanos",
+    "pegadinha": "datas falsas (ano 2000, 1970) e a invenção de que a Declaração ainda estaria em elaboração",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Documento datado do ano de 1993, que reiterou e reeditou os termos da Declaração Universal dos Direitos Humanos de 1948"
+  },
+  {
     "chave": "da788328fe45837da0af567daaad1d0e",
     "classificada_em": "2026-10-01T21:56:09.487678+00:00",
     "conferida_em": null,
@@ -2070,6 +3008,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "princípios do ensino e autonomia das universidades"
+  },
+  {
+    "chave": "dbbe791e067bff3d9840793c8230ecea",
+    "classificada_em": "2026-10-02T02:52:52.968687+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos",
+    "dispositivo": "arts. 52 a 56 da Convenção Americana sobre Direitos Humanos",
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "troca números da Convenção: cinco juízes, votação aberta, quorum de quatro, proibição de reeleição",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Sediada em San José (Costa Rica) é uma instituição judiciária autônoma cujo objetivo é a aplicação e a interpretação da Convenção Americana sobre Direitos Humanos"
   },
   {
     "chave": "dd33ca448c6524f2361df127ca482133",
@@ -2086,6 +3038,34 @@
     "trecho": "Erving Goffman, Manicômios, prisões e conventos: instituições totais"
   },
   {
+    "chave": "ddee7263d332d3f3495187b8639d4cb9",
+    "classificada_em": "2026-10-02T02:52:55.608970+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Processual Penal",
+    "dispositivo": "Constituição do Estado de Santa Catarina (Secretários de Estado)",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Direito Processual Penal, mas a questão é de Legislação Estadual (Estatuto do Servidor de SC / Constituição Estadual): erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
+  },
+  {
+    "chave": "df8ded157ededb2c4925f77880ff02d2",
+    "classificada_em": "2026-10-02T02:52:54.991494+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "CPP, arts. 513 a 518",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: o bloco do caderno diz Legislação Estadual, mas a questão é de Direito Processual Penal: erro de separação por matéria na extração do caderno. Trocar de matéria só é permitido em matéria fora do edital"
+  },
+  {
     "chave": "e06f98ffc0903c9472fac1bcbc14fe17",
     "classificada_em": "2026-10-01T21:56:12.992340+00:00",
     "conferida_em": null,
@@ -2098,6 +3078,34 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "acessa Gmail, Hotmail e Yahoo; POP3, IMAP e SMTP; anti-spam"
+  },
+  {
+    "chave": "e1ce87a080ae889fc7da354e448ffe33",
+    "classificada_em": "2026-10-02T02:52:52.520215+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Dignidade da pessoa humana como fundamento",
+    "dispositivo": null,
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "as erradas trocam o fundamento por objetivos inventados: pacificação religiosa, estratificação social",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "A Declaração Universal dos Direitos Humanos tem como fundamento o princípio da dignidade da pessoa humana"
+  },
+  {
+    "chave": "e1dd86ed22be843e9367b6632081bc17",
+    "classificada_em": "2026-10-02T02:52:55.028088+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual",
+    "dispositivo": "LC estadual 472/2009",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": null,
+    "trecho": "pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto correspondente"
   },
   {
     "chave": "e48b7f0a0600db9e5498e85da3517fd7",
@@ -2114,6 +3122,20 @@
     "trecho": "o Excel importa e atualiza dados de bancos relacionais"
   },
   {
+    "chave": "e68b872360cf64ed8206afdbb39617d7",
+    "classificada_em": "2026-10-02T02:52:54.675844+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Servidores públicos > Disponibilidade > CF, art. 41, § 3º",
+    "dispositivo": "CF, art. 41, § 3º",
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "oferece institutos vizinhos (remoção, recondução, readaptação) para o caso de extinção do cargo",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "a situação jurídica na qual ficará o servidor quando extinto o seu cargo ou declarada a sua desnecessidade"
+  },
+  {
     "chave": "e74f064966d1e351f0783ee02f86334f",
     "classificada_em": "2026-10-01T21:56:13.609199+00:00",
     "conferida_em": null,
@@ -2128,6 +3150,34 @@
     "trecho": "três das cinco afirmativas são sobre pronome (colocação, relativo e 'lhe')"
   },
   {
+    "chave": "e913b27ca8482b841f78646c3078c4be",
+    "classificada_em": "2026-10-02T02:52:54.629446+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Responsabilidade civil do Estado > Excludentes e ação regressiva > CF, art. 37, § 6º",
+    "dispositivo": "CF, art. 37, § 6º",
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "afirma que a culpa exclusiva da vítima não exclui a responsabilidade e que a ação regressiva independe de culpa ou dolo",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "exceção ou pegadinha",
+    "trecho": "O Estado não será responsabilizado civilmente quando um agente público praticar ato ilícito contra terceiro fora do exercício de suas atribuições"
+  },
+  {
+    "chave": "eb89b82973f8ba5c0b27b451f7865654",
+    "classificada_em": "2026-10-02T02:52:55.349217+00:00",
+    "conferida_em": null,
+    "conteudo": "Legislação Estadual > Lei Complementar n.º 675 de 03 de junho de 2016 (Plano de cargos e salário) > Progressão funcional e estágio probatório",
+    "dispositivo": "LC estadual 675/2016",
+    "item_do_edital": "Lei Complementar n.º 675 de 03 de junho de 2016 (Plano de cargos e salário)",
+    "pegadinha": "as erradas invertem definições do próprio texto legal (carreira, enquadramento funcional) e ampliam quem faz jus à progressão",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Não fará jus à progressão funcional o servidor que, durante o período aquisitivo, se encontrar em estágio probatório"
+  },
+  {
     "chave": "eb8e5bd81478afb8e4bfe34764939bf9",
     "classificada_em": "2026-10-01T21:56:13.314556+00:00",
     "conferida_em": null,
@@ -2140,6 +3190,20 @@
     "status": "completa",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "discurso direto na primeira frase e indireto na segunda (A e C)"
+  },
+  {
+    "chave": "ecf279c9c576faa199e7b1bb9deaf92e",
+    "classificada_em": "2026-10-02T02:52:54.724227+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Servidores públicos > Acumulação remunerada de cargos > CF, art. 37, XVII",
+    "dispositivo": "CF, art. 37, XVII",
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "a compatibilidade de horários sozinha parece bastar, mas a acumulação só vale nas hipóteses do inciso XVI",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "A proibição de acumulação remunerada de cargos públicos estende-se a empregos e funções e abrange autarquias, fundações, empresas públicas e sociedades de economia mista"
   },
   {
     "chave": "ed2359fa4dc5a3d22d655345a5540538",
@@ -2198,6 +3262,20 @@
     "trecho": "violação dos direitos da pessoa humana: fundamento da intervenção da União nos Estados"
   },
   {
+    "chave": "f2d76f7598e546697ac4b1923ca620b0",
+    "classificada_em": "2026-10-02T02:52:52.567754+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Teoria geral dos direitos humanos > Sistema interamericano de proteção > Protocolo de San Salvador",
+    "dispositivo": "art. 11 do Protocolo de San Salvador",
+    "item_do_edital": "Teoria geral dos direitos humanos",
+    "pegadinha": "os distratores usam nomes de cidades parecidos (Assunção, Cruz Alta) e confundem com a Declaração de San José",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "A proteção, preservação e o melhoramento do meio ambiente estão previstos no Protocolo Adicional à Convenção Americana sobre Direitos Humanos"
+  },
+  {
     "chave": "f36c430428191d942d9eead29cbcfaaa",
     "classificada_em": "2026-10-01T21:56:13.275700+00:00",
     "conferida_em": null,
@@ -2210,6 +3288,20 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "os presídios foram reformados: reformaram-se os presídios"
+  },
+  {
+    "chave": "f3bd2138b53f01d3e966cc752cc02506",
+    "classificada_em": "2026-10-02T02:52:54.760605+00:00",
+    "conferida_em": null,
+    "conteudo": "Direito Administrativo > Atos administrativos > Quem pratica e controle judicial",
+    "dispositivo": null,
+    "item_do_edital": "matéria fora do edital de 2019: assunto proposto debaixo de Direito Administrativo",
+    "pegadinha": "afirma que só pessoas jurídicas de direito público praticam atos administrativos e que o ato discricionário dispensa motivação",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Os Poderes Judiciário e Legislativo podem praticar atos administrativos"
   },
   {
     "chave": "f4a83ec525fc26e79340952d00c09385",
@@ -2268,6 +3360,20 @@
     "trecho": "remição por trabalho ou estudo no fechado e no semiaberto; por estudo no aberto"
   },
   {
+    "chave": "f8a88d36f8b1f94a6dccff8960b241cd",
+    "classificada_em": "2026-10-02T02:52:52.743094+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos > Marcos históricos dos direitos humanos",
+    "dispositivo": null,
+    "item_do_edital": "Afirmação histórica dos direitos humanos",
+    "pegadinha": "datas e autores deslocados: a Declaração dos Direitos do Homem e do Cidadão no século vinte",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "São Tomás de Aquino, durante a Idade Média, atuou como grande defensor dos Direitos Humanos"
+  },
+  {
     "chave": "f90de2f9ad77289d1e9e1cb19c479e30",
     "classificada_em": "2026-10-01T21:56:11.849779+00:00",
     "conferida_em": null,
@@ -2308,6 +3414,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "o trabalho é obrigatório e remunerado, dentro ou fora do estabelecimento, na forma da LEP"
+  },
+  {
+    "chave": "fcb20be1ef29b9cb645b4c5844a206bf",
+    "classificada_em": "2026-10-02T02:52:52.481346+00:00",
+    "conferida_em": null,
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)",
+    "dispositivo": "Declaração Universal dos Direitos Humanos, de 10/12/1948",
+    "item_do_edital": "Afirmação histórica dos direitos humanos",
+    "pegadinha": "as erradas prendem a DUDH às vítimas da Segunda Guerra ou ao eixo nazista, como se tivesse alcance restrito",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "O texto foi proclamado após o término da Segunda Guerra Mundial e serviu de inspiração para a elaboração de diversos textos constitucionais"
   },
   {
     "chave": "fe3a6acaae6cf1de1127b1d954809048",

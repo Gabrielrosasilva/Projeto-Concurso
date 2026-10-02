@@ -95,18 +95,16 @@ dentro do enunciado na 2019-q100 e "e cor-" cortado em 2019-q51 a 55. Mais um
 que a verificacao nao pega: a 2013-q20 perdeu a imagem do icone do Excel. O
 texto nao foi corrigido; o conserto e no leitor do caderno (`questoes.py`).
 
-### B.8 🔴 Classificacao do acervo complementar (Etapa 3B, passo 4)
+### B.8 🟡 Classificacao do acervo complementar (Etapa 3B, passo 4)
 
-As 122 provas aceitas no `data/acervo_complementar.json` estao no acervo, mas
-**nenhuma questao delas foi classificada**: a linha complementar da incidencia
-so mostra numero no nivel da MATERIA, e diz quantas faltam ("993 sem
-classificacao ainda"). O que falta, na ordem que eu sugeri e voce ainda nao
-escolheu:
+As 122 provas aceitas no `data/acervo_complementar.json` estao no acervo.
+**Feito (02/10):** as 80 do Socioeducativo 2013 e 2016 (lote 1), com 62
+classificadas e 18 pendentes com motivo; a incidencia ja mostra o complementar
+por no nessas materias. **Falta o resto**, e a linha diz quantas ("993 sem
+classificacao ainda" em Portugues):
 
-1. **os 80 de Direito, Direitos Humanos e Legislacao Estadual do Socioeducativo
-   2013 e 2016** - poucas questoes, as unicas do complementar nas materias que
-   mais importam, e as unicas com gabarito definitivo. Melhor relacao entre
-   esforco e proveito;
+1. ✅ **os 80 de Direito, Direitos Humanos e Legislacao Estadual do
+   Socioeducativo 2013 e 2016** - feitos em 02/10;
 2. **os blocos "Conhecimentos Especificos" das provas de seguranca e fiscalizacao**
    (Guarda Municipal 2024, Procurador, Agente de Fiscalizacao, Agente Social,
    Educador Social): e onde moram os 139 indicios de Direito Penal, 57 de
@@ -116,6 +114,27 @@ escolheu:
 3. **Portugues e Raciocinio Logico** (993 + 290 questoes): o catalogo do
    `macetes.py` serve de primeira proposta (🟡), com conferencia por amostra de
    20 por materia, como o roteiro pede.
+
+### B.10 🔴 Blocos de materia trocados no Socioeducativo 2013 e 2016
+
+A classificacao do lote 1 (02/10) achou 8 questoes no bloco errado, nos dois
+cadernos do Socioeducativo:
+
+- **2013-q49, 2013-q50, 2016-q49 e 2016-q50**: sao de Direito Processual Penal
+  (inquerito na acao publica condicionada, crimes de responsabilidade de
+  funcionario publico, nota de culpa) e estao no bloco "Legislacao Estadual";
+- **2013-q59, 2013-q60, 2016-q59 e 2016-q60**: sao de Legislacao Estadual
+  (Estatuto do Servidor de SC, Constituicao Estadual) e estao no bloco
+  "Direito Processual Penal".
+
+Isso vem da separacao do caderno por materia (`questoes.py`), que erra a
+fronteira entre blocos quando o titulo da materia seguinte gruda no texto - o
+mesmo defeito da B.7, agora mudando a MATERIA da questao. Consequencia hoje:
+as oito estao pendentes (a importacao, com razao, nao deixa trocar de materia
+quando ela esta no edital), e a contagem "pelo nome da materia" do
+complementar erra por 4 em cada uma das duas materias. **Nada foi corrigido.**
+Duas saidas, nenhuma escolhida: consertar a fronteira no leitor e reextrair,
+ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 
 ### B.9 🔴 Defeitos do acervo complementar achados na 3B
 

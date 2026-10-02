@@ -903,6 +903,7 @@ radar conteudos             # a arvore: materia > assunto > subassunto > element
 radar conteudos --pendentes # as questoes sem classificacao, alvo prova a prova
 radar conteudos --semear    # poe na arvore o que o edital tem e ela nao
 radar classificar --pedido  # pede ao Claude Code a classificacao do alvo
+radar classificar --pedido --evidencia complementar --materia "Direito Penal"
 radar classificar --importar data/resposta_ia.json   # grava o que presta
 radar incidencia            # o mapa do alvo por no, com a amostra
 radar incidencia --materia "Direito Penal" --padroes
@@ -939,6 +940,11 @@ PDF (a mesma prova com outro nome e recusada); o quadro do edital fica "nao
 lido", porque o leitor de quadro so da conta dos editais do Estado. Gabarito
 **provisorio** classifica mas nao entra nos padroes de cobranca, que se medem
 sobre a letra certa.
+
+As questoes das provas aceitas sao classificadas pelo mesmo fluxo do alvo,
+com `--evidencia complementar` (prova recusada na validacao nao e
+classificada). O lote nunca mistura as duas evidencias, e o que sai dai nunca
+entra na incidencia da Policia Penal.
 
 `radar complementar --aplicar` grava em `data/acervo_complementar.json` quais
 provas entram: as que tem **materia do edital de 2019** e passam na validacao

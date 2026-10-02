@@ -2567,3 +2567,38 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
    dela, e isso e evidencia; **abaixo da materia so conta a classificada**, e
    quantas faltam vai escrito na linha ("993 sem classificacao ainda").
    Adivinhar o assunto pelo nome do caderno seria o que a regra 9 proibe.
+
+## A classificacao do acervo complementar (Etapa 3B, passo 4, 02/10/2026)
+
+7. **o mesmo fluxo da 3A, com a evidencia escolhida**: `radar classificar
+   --pedido --evidencia complementar` pede as provas ACEITAS no acervo
+   (prova recusada na validacao nao e classificada - seria dar a ela um lugar
+   na estatistica que a validacao negou), e `--materia` passou a aceitar mais
+   de uma. A instrucao do complementar diz que a prova NAO e a do meu cargo e
+   que o numero dela nunca entra na incidencia da Policia Penal. O lote nunca
+   mistura as duas evidencias;
+8. **as 80 do Socioeducativo 2013 e 2016 classificadas** (Direito Penal,
+   Processual Penal, Constitucional, Direitos Humanos, Legislacao Estadual e
+   Direito Administrativo): 62 classificadas e 18 pendentes com motivo. As
+   pendentes, por motivo: 8 por **bloco trocado no caderno** (ver abaixo), 4
+   da LC 472/2009 (o edital de 2019 cobra a LC 675), 3 de instrumentos de
+   infancia e juventude (Regras de Riad, de Beijing e a Convencao de 1989:
+   tema do concurso socioeducativo, fora do meu programa de Direitos
+   Humanos), 2 da Constituicao do Estado de SC (o programa lista so a Lei
+   6.745, a LC 675 e a LC 529) e 1 de tortura (Lei 9.455/1997, que no meu
+   edital e Legislacao Especial, nao Direito Penal);
+9. **erro de separacao por materia nos cadernos do Socioeducativo**, achado
+   pela classificacao: 8 questoes estao no bloco errado. As 2013-q49, 2013-q50,
+   2016-q49 e 2016-q50 sao de Processo Penal e estao no bloco "Legislacao
+   Estadual"; as 2013-q59, 2013-q60, 2016-q59 e 2016-q60 sao de Legislacao
+   Estadual e estao no bloco "Direito Processual Penal". **Nada foi
+   corrigido**: a importacao recusa trocar de materia quando ela esta no
+   edital (e bom que recuse), e consertar isso e mexer no leitor do caderno.
+   As oito ficaram pendentes com o motivo escrito, e a pendencia esta no
+   `pendencias.md`;
+10. **a classificacao do complementar nao mexe em numero nenhum do alvo**, e
+    isso tem teste: os 170 continuam 146 completas, 9 parciais e 15
+    pendentes, e nenhuma linha do alvo foi escrita na importacao. No acervo
+    real nao ha uma chave sequer repetida entre alvo e complementar (foi
+    conferido); se houvesse, seria a MESMA questao reaproveitada, e classificar
+    uma classificaria a outra - que e o comportamento decidido na 3A.

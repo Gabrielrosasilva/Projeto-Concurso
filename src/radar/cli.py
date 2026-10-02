@@ -2434,16 +2434,22 @@ def _registro_legivel(registro) -> str:
 def classificar(
     pedido: bool = typer.Option(
         False, "--pedido", help="Escreve data/pedido_ia.json com as questoes do alvo"),
-    materia: str = typer.Option(
-        None, help="So uma materia, pelo caminho do no (ex.: \"Direito Penal\")"),
+    materia: list[str] = typer.Option(
+        None, help="So estas materias, pelo caminho do no (pode repetir)"),
+    evidencia: str = typer.Option(
+        "alvo", help="De onde vem a questao: alvo ou complementar"),
     importar: Path = typer.Option(
         None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
 ) -> None:
-    """Classifica as questoes do alvo na arvore de conteudos, pelo Claude Code.
+    """Classifica questoes na arvore de conteudos, pelo Claude Code.
 
     --pedido escreve o pedido (um por materia, com a arvore e as regras); a
     resposta volta com --importar, que recusa assunto fora do edital, tipo fora
     da lista, falta de justificativa e questao que nao estava no pedido.
+
+    --evidencia complementar pede as provas FEPESE aceitas no acervo
+    complementar, em vez das do alvo. Prova fora do acervo nao e classificada,
+    e o que sai dai nunca entra na incidencia da Policia Penal.
     """
     if importar is not None:
         _importar_resposta_da_ia(importar)
@@ -2451,10 +2457,15 @@ def classificar(
     if not pedido:
         console.print("Use --pedido para escrever o pedido, ou --importar ARQUIVO.")
         raise typer.Exit(code=1)
-    lote = servico.manual.pedido_de_classificacao(materia)
+    try:
+        lote = servico.manual.pedido_de_classificacao(list(materia or []), evidencia)
+    except ValueError as erro:
+        console.print(f"[red]{erro}[/]")
+        raise typer.Exit(code=1)
     if not lote["pedidos"]:
-        console.print("[yellow]Nada a pedir:[/] nenhuma questao do alvo sem conferencia"
-                      + (f" em {materia}" if materia else "") + ".")
+        onde = " em " + ", ".join(materia) if materia else ""
+        console.print(f"[yellow]Nada a pedir:[/] nenhuma questao do {evidencia} "
+                      f"sem conferencia{onde}.")
         return
     destino = servico.manual.salvar_pedido(lote)
     total = sum(len(p["questoes"]) for p in lote["pedidos"])

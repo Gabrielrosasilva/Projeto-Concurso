@@ -129,6 +129,24 @@ Responda SOMENTE um JSON, no formato:
 {"classificacoes": [{"questao": "2019-q51", "status": "classificada", "assunto": "...", "subassunto": "...", "elemento": "...", "tipo_elemento": "artigo", "referencia": "CP, art. 2º", "tipo_de_questao": "literalidade da lei", "pegadinha": "...", "trecho": "...", "item_do_edital": "...", "dispositivo": "art. 2º do Código Penal"}]}"""
 
 
+
+# A mesma tarefa, noutro acervo. O que muda e de QUEM e a prova, e para onde
+# vai o numero: o complementar mostra o estilo da banca e NUNCA entra na
+# incidencia da Policia Penal.
+INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR = INSTRUCAO_CLASSIFICACAO.replace(
+    "Voce recebe questoes reais da prova do meu cargo (Policia Penal / Agente "
+    "Penitenciario de SC, banca FEPESE), com o gabarito oficial, todas da mesma "
+    "materia, e a arvore de conteudos dessa materia.",
+    "Voce recebe questoes reais de OUTRO concurso da FEPESE (o acervo "
+    "complementar: nao e a prova do meu cargo), com o gabarito, todas da mesma "
+    "materia, e a arvore de conteudos dessa materia - a do MEU edital, que e "
+    "onde elas serao penduradas. "
+    "Isto serve para estudar o estilo da banca. O numero daqui vive numa linha "
+    "separada e NUNCA e somado a incidencia da Policia Penal SC. Se o conteudo "
+    "cobrado nao couber em nenhum assunto do meu edital, responda "
+    '"status": "pendente" com o motivo - nao force.')
+
+
 def _como_responder(tipo: str) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
     if tipo == "classificacao":
@@ -325,19 +343,32 @@ def pedido_de_explicacoes() -> dict:
     return _novo_lote("explicacoes", pedidos)
 
 
-def pedido_de_classificacao(materia: str | None = None) -> dict:
-    """Um pedido por materia, com as questoes do alvo e a arvore dela.
+def pedido_de_classificacao(materia: str | list[str] | None = None,
+                            de_evidencia: str | None = None) -> dict:
+    """Um pedido por materia, com as questoes e a arvore dela.
 
-    Vao todas as do alvo, anuladas inclusive (marcadas): a 3A classifica as
-    170. Fica de fora so a que eu ja conferi - a conferencia e minha e nao se
-    refaz por cima. A materia do caderno encontra o no pela regra dos textos
-    antigos (igual, ou pelo sinonimo do config/taxonomia.yml).
+    `de_evidencia` diz de onde vem a questao: `alvo` (o padrao: as 170 de
+    2013 e 2019) ou `complementar` (as provas FEPESE aceitas no
+    `data/acervo_complementar.json`; prova nao aceita nao e classificada).
+    As duas nunca se misturam num lote, e o que a classificacao do
+    complementar produz nunca entra na conta do alvo.
+
+    Vao todas, anuladas inclusive (marcadas). Fica de fora so a que eu ja
+    conferi - a conferencia e minha e nao se refaz por cima. A materia do
+    caderno encontra o no pela regra dos textos antigos (igual, ou pelo
+    sinonimo do config/taxonomia.yml).
     """
     from sqlalchemy import select
 
     from radar import conteudos as arvore
     from radar.models import Classificacao, Conteudo, QuestaoDeProva
+    from radar.servico import complementar as acervo
     from radar.servico import evidencia
+
+    de_evidencia = de_evidencia or evidencia.ALVO
+    if de_evidencia not in (evidencia.ALVO, evidencia.COMPLEMENTAR):
+        raise ValueError(f"evidência {de_evidencia!r}: use alvo ou complementar")
+    so_estas = ([materia] if isinstance(materia, str) else list(materia or [])) or None
 
     taxonomia = arvore.carregar_taxonomia()
     criar_tabelas()
@@ -347,9 +378,15 @@ def pedido_de_classificacao(materia: str | None = None) -> dict:
             select(Classificacao.chave)
             .where(Classificacao.principal.is_(True))
             .where(Classificacao.conferida_em.is_not(None))))
-        questoes = list(s.scalars(
-            select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)
-            .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero)))
+        consulta = (select(QuestaoDeProva)
+                    .where(QuestaoDeProva.evidencia == de_evidencia)
+                    .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero))
+        if de_evidencia == evidencia.COMPLEMENTAR:
+            # Prova fora do acervo nao e classificada: seria dar a ela um
+            # lugar na estatistica que a validacao negou.
+            consulta = consulta.where(
+                QuestaoDeProva.prova_url.in_(acervo.provas_aceitas()))
+        questoes = list(s.scalars(consulta))
 
     caminhos = [n.caminho for n in nos]
     fora = {n.caminho for n in nos if n.nivel == "materia" and n.fora_do_edital}
@@ -365,7 +402,7 @@ def pedido_de_classificacao(materia: str | None = None) -> dict:
             continue
         no = (arvore.achar(caminhos, q.materia)
               or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
-        if no is None or (materia and no != materia):
+        if no is None or (so_estas and no not in so_estas):
             continue
         por_materia.setdefault(no, []).append(q)
 
@@ -374,6 +411,11 @@ def pedido_de_classificacao(materia: str | None = None) -> dict:
         blocos, codigos = [], {}
         for q in lista:
             codigo = _codigo(q)
+            # Duas provas do mesmo ano no mesmo lote (acontece no
+            # complementar) dariam o mesmo codigo, e a resposta ficaria
+            # ambigua: um sufixo da prova desempata.
+            if codigo in codigos:
+                codigo = f"{codigo}-{sum(map(ord, q.prova_url)) % 1000:03d}"
             codigos[codigo] = chave_de(q)
             marca = " (ANULADA pela banca: classifique assim mesmo)" if q.anulada else ""
             blocos.append(f"[{codigo}]{marca}\n{gerador._questao_por_extenso(q)}")
@@ -385,7 +427,10 @@ def pedido_de_classificacao(materia: str | None = None) -> dict:
             "arvore": dela,
             "elementos": taxonomia.elementos_da_materia(no),
             "tipos_de_questao": taxonomia.tipos_de_questao,
-            "instrucao": INSTRUCAO_CLASSIFICACAO,
+            "evidencia": de_evidencia,
+            "instrucao": (INSTRUCAO_CLASSIFICACAO
+                          if de_evidencia == evidencia.ALVO
+                          else INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR),
             "pedido": f"MATERIA: {no}\n\nQUESTOES\n\n" + "\n\n".join(blocos),
         }
         if no in fora:

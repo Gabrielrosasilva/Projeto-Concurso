@@ -14,7 +14,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | 🟡 falta a sua conferência das 162 |
-| 8 | 3B — Acervo complementar FEPESE | 🟡 acervo definido (122 provas); falta classificar |
+| 8 | 3B — Acervo complementar FEPESE | 🟡 acervo definido; lote 1 (80) classificado; faltam os lotes 2 e 3 |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
 | 10 | 5 — Geração de questões | ⬜ |
 | 11 | 6B — Cronograma operacional | ⬜ |
@@ -807,3 +807,66 @@ as duas linhas com "as duas nunca se somam"; anulada fica fora; o comando sem
   **não classificadas** — é a pendência B.8;
 - [x] a incidência mostra alvo e complementar separados, cada um com a
   amostra.
+
+### 3B, passo 4 (lote 1): as 80 do Socioeducativo classificadas (02/10)
+
+**O que foi feito.** O fluxo de pedido/importação da 3A passou a servir ao
+complementar, e o primeiro lote — o que eu sugeri e você aprovou — foi
+classificado: as 80 questões de Direito, Direitos Humanos e Legislação
+Estadual do Socioeducativo 2013 e 2016.
+
+**Arquivos alterados.**
+- `src/radar/servico/manual.py` — `pedido_de_classificacao` com
+  `de_evidencia` (alvo ou complementar; complementar só traz prova aceita no
+  acervo) e `materia` aceitando uma lista; `INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR`;
+  código da questão com sufixo quando duas provas do mesmo ano caem no lote;
+- `src/radar/cli.py` — `radar classificar --evidencia` e `--materia` repetível;
+- dados: `data/classificacoes.json` (80 novas) e `data/conteudos.json` (os nós
+  de subassunto e elemento que a classificação criou);
+- docs: `decisoes.md`, `historico.md`, `pendencias.md` (B.8 passa a 🟡; nova
+  B.10), este arquivo.
+
+**Testes novos (5, total de 41 no arquivo).** O pedido do complementar só traz
+prova aceita (sem o arquivo de status, não traz nada); a instrução do
+complementar avisa que não é a prova do meu cargo e que o número não entra na
+incidência do alvo; o pedido do alvo continua só com o alvo; evidência
+inexistente é recusada; **classificar o complementar inteiro não muda nenhum
+número do alvo**, e o complementar passa a contar abaixo da matéria.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_complementar.py`, 1ª rodada | 40 passed, 1 failed — a fixture dava o mesmo enunciado às três questões do Socioeducativo, e a chave as unia numa só (o mesmo defeito que a 3A achou nas 16 reais). Fixture corrigida |
+| `test_complementar.py` | 41 passed |
+| `test_classificacao.py` + `test_ia_manual.py` | 40 passed |
+| Suíte inteira, PC | **2030 passed** |
+
+**Comando real rodado (banco real).**
+- `radar classificar --pedido --evidencia complementar --materia ...` (6
+  matérias): 6 pedidos, 80 questões;
+- `radar classificar --importar data/resposta_ia.json`: 1ª rodada 79 gravadas
+  e **1 recusada** (tipo de elemento "parágrafo" não existe na família de
+  Direitos Humanos no `config/taxonomia.yml` — a recusa estava certa);
+  corrigido para "artigo", 2ª rodada **80 gravadas, 0 recusadas**;
+- resultado: **62 classificadas, 18 pendentes com motivo**;
+- `radar incidencia --materia "Direitos Humanos"`: "Polícia Penal SC: 24
+  questões · 2 provas · Acervo complementar FEPESE: 18 questões · 2 provas",
+  e agora com linha por nó (Corte Interamericana: 3 no complementar, 0 no
+  alvo);
+- **o alvo conferido depois da importação:** os 170 continuam 146 completas,
+  9 parciais e 15 pendentes, e nenhuma classificação do alvo foi escrita na
+  data de hoje. Também conferi que **não há uma única chave repetida entre
+  alvo e complementar** no acervo real.
+
+**As 18 pendentes, por motivo.** 8 por bloco de matéria trocado no caderno
+(pendência B.10, achada aqui); 4 da LC 472/2009 (o edital de 2019 cobra a LC
+675); 3 de instrumentos de infância e juventude (Regras de Riad, de Beijing e
+a Convenção de 1989: tema do concurso socioeducativo, fora do meu programa de
+Direitos Humanos); 2 da Constituição do Estado de SC (o programa lista só a
+Lei 6.745, a LC 675 e a LC 529); 1 de tortura (Lei 9.455/1997, que no meu
+edital é Legislação Especial, e o bloco do caderno dizia Direito Penal).
+
+**O que falta na 3B.** Os lotes 2 e 3 da pendência B.8: os blocos
+"Conhecimentos Específicos" das provas de segurança e fiscalização, e depois
+Português e Raciocínio Lógico. E a conferência por amostra destas 80 é sua.

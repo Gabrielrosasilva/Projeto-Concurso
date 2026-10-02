@@ -1472,3 +1472,20 @@ Achados do acervo real, nenhum deles corrigido aqui: **LEP, Sociologia
 Aplicada, Legislacao Especial e Administracao Publica tem zero questao pelo
 nome da materia** no complementar; 24 provas tem o mesmo sha256 em dois
 enderecos; 31 tem a numeracao furada.
+
+## Etapa 3B, passo 4: as 80 do Socioeducativo classificadas (02/10)
+
+`radar classificar` ganhou `--evidencia complementar` e `--materia` repetivel.
+As 80 questoes de Direito, Direitos Humanos e Legislacao Estadual do
+Socioeducativo 2013 e 2016 - as unicas do complementar nas materias que mais
+importam, e as unicas com gabarito definitivo - foram classificadas pelo
+Claude Code: 62 classificadas, 18 pendentes com motivo.
+
+A classificacao achou um defeito que a auditoria nao pegava: **8 questoes
+estao no bloco de materia errado** nos cadernos do Socioeducativo (Processo
+Penal dentro de "Legislacao Estadual" e vice-versa). Nada foi corrigido; as
+oito ficaram pendentes com o motivo, e a pendencia foi registrada.
+
+A incidencia agora mostra o complementar por NO, e nao so por materia: em
+Direitos Humanos, "Policia Penal SC: 24 questoes · 2 provas · Acervo
+complementar FEPESE: 18 questoes · 2 provas". Os numeros do alvo nao mudaram.

@@ -226,8 +226,11 @@ def acervo(banco_temporario, tmp_path):
         # Complementar com gabarito definitivo: o Socioeducativo 2016.
         for numero, materia in ((1, "Direito Penal"), (2, "Direito Penal"),
                                 (3, "Direitos Humanos")):
+            # Enunciados diferentes: a chave e enunciado + alternativas, e
+            # questoes iguais seriam a MESMA questao para a classificacao.
             s.add(_questao("https://fepese.test/2016/AS.pdf", numero, materia,
                            "complementar", 2016, "Agente de Segurança Socioeducativo",
+                           enunciado=f"Questão {numero} de 2016 sobre {materia}?",
                            concurso="https://fepese.test/2016"))
         # Complementar so com provisorio, e com bloco generico: a Guarda 2024.
         s.add(_questao("https://fepese.test/2024/guarda.pdf", 1, "Conhecimentos Específicos",
@@ -493,3 +496,77 @@ def test_o_comando_com_aplicar_grava_e_sem_aplicar_nao(acervo, tmp_path):
     assert com.exit_code == 0, com.output
     assert servico.caminho_do_registro().exists()
     assert "1 prova(s) no acervo complementar" in com.output
+
+
+# --- classificar o complementar (Etapa 3B, passo 4) ------------------------------
+
+def test_o_pedido_do_complementar_so_traz_prova_aceita(acervo):
+    from radar.servico import manual
+
+    # Sem o arquivo de status, nao ha o que pedir: nenhuma prova foi aceita.
+    assert manual.pedido_de_classificacao(de_evidencia="complementar")["pedidos"] == []
+
+    servico.aplicar(hoje=date(2026, 10, 1))
+    lote = manual.pedido_de_classificacao(de_evidencia="complementar")
+
+    provas = {c.split("-")[0] for p in lote["pedidos"] for c in p["questoes"]}
+    assert provas == {"2016"}                   # a Guarda 2024 nao entrou no acervo
+    assert {p["materia"] for p in lote["pedidos"]} == {"Direito Penal", "Direitos Humanos"}
+    assert all(p["evidencia"] == "complementar" for p in lote["pedidos"])
+
+
+def test_o_pedido_do_complementar_avisa_que_nao_e_a_prova_do_meu_cargo(acervo):
+    from radar.servico import manual
+
+    servico.aplicar(hoje=date(2026, 10, 1))
+    lote = manual.pedido_de_classificacao(de_evidencia="complementar")
+
+    instrucao = lote["pedidos"][0]["instrucao"]
+    assert "OUTRO concurso da FEPESE" in instrucao
+    assert "NUNCA e somado a incidencia da Policia Penal" in instrucao
+
+
+def test_o_pedido_do_alvo_continua_so_com_o_alvo(acervo):
+    from radar.servico import manual
+
+    servico.aplicar(hoje=date(2026, 10, 1))
+    lote = manual.pedido_de_classificacao()
+
+    provas = {c.split("-")[0] for p in lote["pedidos"] for c in p["questoes"]}
+    assert provas == {"2013", "2019"}
+    assert all(p["evidencia"] == "alvo" for p in lote["pedidos"])
+    assert "prova do meu cargo" in lote["pedidos"][0]["instrucao"]
+
+
+def test_evidencia_que_nao_existe_e_recusada(acervo):
+    from radar.servico import manual
+
+    with pytest.raises(ValueError, match="alvo ou complementar"):
+        manual.pedido_de_classificacao(de_evidencia="fora")
+
+
+def test_classificar_o_complementar_nao_mexe_na_conta_do_alvo(acervo):
+    """O numero do alvo e o mesmo antes e depois de classificar o acervo
+    complementar inteiro (secao 4 do pedido)."""
+    servico.aplicar(hoje=date(2026, 10, 1))
+    antes = {m.materia: (m.topo.amostra, m.pendentes)
+             for m in servico_da_incidencia.mapa()}
+
+    with sessao() as s:
+        questoes = [q for q in s.query(QuestaoDeProva)
+                    .filter_by(prova_url="https://fepese.test/2016/AS.pdf")
+                    if q.materia == "Direito Penal"]
+        chaves = [classificacoes.chave_de(q) for q in questoes]
+    for chave in chaves:
+        classificacoes.classificar(chave, "Direito Penal > Imputabilidade penal",
+                                   "Claude Code, teste")
+
+    depois = {m.materia: (m.topo.amostra, m.pendentes)
+              for m in servico_da_incidencia.mapa()}
+    assert antes == depois
+
+    # E agora o complementar conta ABAIXO da materia, onde antes nao contava.
+    linhas = servico_da_incidencia.linhas_complementares()
+    assert linhas["Direito Penal > Imputabilidade penal"].questoes == 2
+    assert linhas["Direito Penal"].classificadas == 2
+    assert linhas["Direito Penal"].frase == "Acervo complementar FEPESE: 2 questões · 1 prova"
