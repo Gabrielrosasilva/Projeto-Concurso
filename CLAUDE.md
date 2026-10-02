@@ -116,7 +116,12 @@ manha, lei seca dirigida, `anki: desativado`) e a 2 (arvore de conteudos,
 evidencia alvo/complementar/fora, banco na versao 1 com `radar migrar`) e a
 3A (as 170 do alvo classificadas pelo Claude Code; mapa de incidencia e
 padroes; banco na versao 3) - **falta a sua conferencia das 162** em
-Analises > Conferencia. Proxima: 3B, acervo complementar FEPESE.
+Analises > Conferencia. A **3B** esta pela metade: o levantamento
+(`radar complementar`, `docs/complementar.md`), a regra de quem entra (ter
+materia do edital de 2019 e passar na validacao minima: 122 provas de 183, em
+`data/acervo_complementar.json`) e a linha complementar da incidencia, sempre
+separada da do alvo; **falta classificar as questoes do complementar**
+(pendencia B.8).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.
@@ -127,7 +132,9 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 `servico` e um pacote, um arquivo por assunto; escreva `servico.funcao(...)`.
 **Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
 tela nenhuma refaz a conta, e template nenhum soma. **Alvo, complementar e
-fora saem do `servico/evidencia.py`** (uma regra, nunca somados), e tudo que
+fora saem do `servico/evidencia.py`** (uma regra, nunca somados; e prova
+complementar so entra em estatistica se estiver aceita no
+`data/acervo_complementar.json`), e tudo que
 aponta para um conteudo usa o caminho do no (`data/conteudos.json`); a
 classificacao reconhece a questao pela CHAVE (enunciado + alternativas), nunca
 so pela impressao do enunciado.

@@ -14,7 +14,10 @@ relatorio cobre 183 provas. Entao `definitivo` aqui quer dizer "o concurso
 desta prova publicou gabarito definitivo, e ele esta no acervo". Qual grade
 e desta prova se confere na validacao da prova escolhida, que le o PDF.
 """
+import json
 import logging
+from dataclasses import asdict
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -134,6 +137,94 @@ def levantamento() -> tuple[list[complementar.MateriaComplementar],
     return por_materia, validadas, lista
 
 
+# --- o arquivo de status: quais provas estao no acervo complementar -------------
+#
+# O que a secao 5 do pedido manda guardar de cada prova: fonte, concurso,
+# cargo, ano, hash, tipo de evidencia, status de validacao e data de
+# inclusao. Fica num JSON versionado, como o `data/classificacoes.json`: o
+# banco e reconstruivel, e esta decisao nao pode se perder com ele.
+
+
+def caminho_do_registro() -> Path:
+    return config.diretorio_dados() / "acervo_complementar.json"
+
+
+def carregar_registro() -> dict[str, dict]:
+    """{prova_url: registro gravado}. Vazio quando o arquivo nao existe."""
+    arquivo = caminho_do_registro()
+    if not arquivo.exists():
+        return {}
+    dados = json.loads(arquivo.read_text(encoding="utf-8"))
+    return {r["prova_url"]: r for r in dados.get("provas", [])}
+
+
+def _do_manifesto() -> dict[str, dict]:
+    return {r["url"]: r for r in arquivos_de_prova.carregar_manifesto()
+            if r.get("tipo") == arquivos_de_prova.PROVA and r.get("url")}
+
+
+def decidir_todas(hoje: date | None = None,
+                  levantado: tuple | None = None) -> list[complementar.Registro]:
+    """A decisao de cada prova complementar, sem gravar nada.
+
+    A data de inclusao de quem ja estava no arquivo e PRESERVADA: ela conta
+    desde quando a prova esta no acervo, e nao desde a ultima vez que o
+    comando rodou. `levantado` evita refazer o levantamento quem ja o tem.
+    """
+    hoje = hoje or date.today()
+    por_materia, validadas, lista = levantado or levantamento()
+    gravado = carregar_registro()
+    manifesto = _do_manifesto()
+
+    minhas: dict[str, list[str]] = {}
+    for m in por_materia:
+        for p in m.provas:
+            if p.pelo_nome:
+                minhas.setdefault(p.prova_url, []).append(m.materia)
+
+    registros = []
+    for caderno in sorted(lista, key=lambda c: (-(c.ano or 0), c.cargo or "")):
+        validacao = validadas[caderno.prova_url]
+        materias = minhas.get(caderno.prova_url, [])
+        aceita, motivo = complementar.decidir(validacao, materias)
+        antes = gravado.get(caderno.prova_url, {})
+        do_manifesto = manifesto.get(caderno.prova_url, {})
+        registros.append(complementar.Registro(
+            prova_url=caderno.prova_url, cargo=caderno.cargo, ano=caderno.ano,
+            concurso_url=do_manifesto.get("concurso_url"),
+            arquivo=do_manifesto.get("arquivo"), sha256=caderno.sha256,
+            questoes=len(caderno.questoes), materias_do_edital=materias,
+            gabarito=validacao.gabarito, quadro_do_edital=validacao.quadro_do_edital,
+            aceita=aceita, motivo=motivo,
+            entra_nos_padroes=aceita and validacao.entra_nos_padroes,
+            incluida_em=(antes.get("incluida_em") or f"{hoje:%Y-%m-%d}") if aceita else None,
+        ))
+    return registros
+
+
+def aplicar(hoje: date | None = None,
+            levantado: tuple | None = None) -> tuple[list[complementar.Registro], dict]:
+    """Grava o arquivo de status. Devolve (registros, o que mudou)."""
+    antes = carregar_registro()
+    registros = decidir_todas(hoje, levantado)
+    mudanca = {
+        "entraram": [r.prova_url for r in registros
+                     if r.aceita and not antes.get(r.prova_url, {}).get("aceita")],
+        "sairam": [r.prova_url for r in registros
+                   if not r.aceita and antes.get(r.prova_url, {}).get("aceita")],
+    }
+    caminho_do_registro().write_text(
+        json.dumps({"provas": [asdict(r) for r in registros]},
+                   ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return registros, mudanca
+
+
+def provas_aceitas() -> set[str]:
+    """Os cadernos que o arquivo de status aceita. Sem arquivo, conjunto
+    vazio: nenhuma prova complementar entra em estatistica por acidente."""
+    return {url for url, r in carregar_registro().items() if r.get("aceita")}
+
+
 # --- o relatorio ------------------------------------------------------------
 
 def _tabela_das_materias(por_materia) -> list[str]:
@@ -155,7 +246,7 @@ def _tabela_das_materias(por_materia) -> list[str]:
     return linhas + [""]
 
 
-def _tabela_das_provas(por_materia, validadas) -> list[str]:
+def _tabela_das_provas(por_materia, validadas, registros) -> list[str]:
     """Uma linha por prova que tem alguma coisa de alguma materia minha."""
     interessantes: dict[str, dict] = {}
     for m in por_materia:
@@ -176,26 +267,33 @@ def _tabela_das_provas(por_materia, validadas) -> list[str]:
         "dos editais do Estado, e nas provas de prefeitura ele não acha o "
         "quadro. Isso se confere na validação da prova escolhida, que lê o PDF.",
         "",
-        "| Ano | Cargo | Questões minhas | Gabarito | Situação | Por quê |",
-        "|---|---|---|---|---|---|",
+        "| Ano | Cargo | Questões minhas | Gabarito | Situação | No acervo | Por quê |",
+        "|---|---|---|---|---|---|---|",
     ]
+    por_url = {r.prova_url: r for r in registros}
     for url, dados in sorted(interessantes.items(),
                              key=lambda item: (-item[1]["total"], item[1]["ano"] or 0)):
         v = validadas[url]
+        r = por_url.get(url)
+        no_acervo = "—"
+        if r is not None:
+            no_acervo = f"sim, desde {r.incluida_em}" if r.aceita else "não"
         linhas.append(
             f"| {dados['ano'] or '—'} | {dados['cargo'] or '—'} | "
             f"{dados['total']} ({'; '.join(dados['materias'])}) | {v.gabarito} | "
-            f"{v.situacao} | {v.motivo or '—'} |")
+            f"{v.situacao} | {no_acervo} | {v.motivo or '—'} |")
     return linhas + [""]
 
 
-def relatorio(por_materia, validadas, lista) -> str:
+def relatorio(por_materia, validadas, lista, registros=None) -> str:
     """O docs/complementar.md inteiro, em texto."""
     com_definitivo = sum(1 for v in validadas.values() if v.entra_nos_padroes)
     so_classificar = sum(1 for v in validadas.values()
                          if v.pode_classificar and not v.entra_nos_padroes)
     recusadas = sum(1 for v in validadas.values() if not v.pode_classificar)
     questoes = sum(len(c.questoes) for c in lista)
+    registros = registros if registros is not None else []
+    no_acervo = sum(1 for r in registros if r.aceita)
 
     linhas = [
         "# Acervo complementar FEPESE",
@@ -228,8 +326,23 @@ def relatorio(por_materia, validadas, lista) -> str:
         "só então ganham a linha própria na incidência.",
         "",
     ]
+    if registros:
+        linhas += [
+            "## Quem entra no acervo, pela regra do edital de 2019",
+            "",
+            "Entra a prova que tem **ao menos uma matéria do edital de 2019** "
+            "pelo nome no caderno e que passa na validação mínima. Matéria que "
+            "não está no edital de agora (Noções de Informática, Direito "
+            "Administrativo, Temas de Educação) **não serve de motivo** para a "
+            "prova entrar. A decisão de cada prova, com a data de inclusão e o "
+            "hash, fica em `data/acervo_complementar.json`, gravado por "
+            "`radar complementar --aplicar`.",
+            "",
+            f"Hoje: **{no_acervo} provas no acervo**, de {len(lista)}.",
+            "",
+        ]
     linhas += _tabela_das_materias(por_materia)
-    linhas += _tabela_das_provas(por_materia, validadas)
+    linhas += _tabela_das_provas(por_materia, validadas, registros)
     linhas += ["## As perguntas da seção 5 do pedido", "",
                "Respondidas **só com o que o acervo tem**. \"Não há prova com "
                "LEP no acervo\" é diferente de \"a FEPESE nunca cobrou LEP\": "
@@ -242,7 +355,8 @@ def relatorio(por_materia, validadas, lista) -> str:
 def escrever(caminho: Path | None = None):
     """Gera o relatorio e devolve (por_materia, validacoes, cadernos)."""
     destino = Path(caminho) if caminho else caminho_do_relatorio()
-    por_materia, validadas, lista = levantamento()
+    levantado = levantamento()
+    registros = decidir_todas(levantado=levantado)
     destino.parent.mkdir(parents=True, exist_ok=True)
-    destino.write_text(relatorio(por_materia, validadas, lista), encoding="utf-8")
-    return por_materia, validadas, lista
+    destino.write_text(relatorio(*levantado, registros=registros), encoding="utf-8")
+    return levantado

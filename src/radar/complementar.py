@@ -299,6 +299,85 @@ def montar(materias: list[str], cadernos: list[Caderno],
     return levantamento
 
 
+# --- quem entra no acervo complementar ------------------------------------------
+#
+# A regra e sua (01/10/2026): entra a prova que tem ao menos uma materia do
+# edital de 2019, e que passa na validacao minima. Materia que nao esta no
+# edital de agora (Nocoes de Informatica, Direito Administrativo, Temas de
+# Educacao) nao serve de motivo para a prova entrar - o acervo e para estudar
+# o que vai cair na minha prova, nao para colecionar caderno.
+
+@dataclass
+class Registro:
+    """Uma prova do acervo complementar, com o que ela permite e desde quando.
+
+    E isto que vai para o `data/acervo_complementar.json`: o arquivo
+    versionado que a secao 5 do pedido descreve (fonte, hash, status de
+    validacao e data de inclusao).
+    """
+
+    prova_url: str
+    cargo: str | None
+    ano: int | None
+    concurso_url: str | None
+    arquivo: str | None
+    sha256: str | None
+    questoes: int
+    materias_do_edital: list[str]
+    gabarito: str
+    quadro_do_edital: str
+    aceita: bool
+    motivo: str
+    entra_nos_padroes: bool
+    incluida_em: str | None
+
+
+def decidir(validacao: Validacao, materias_do_edital: list[str]) -> tuple[bool, str]:
+    """A prova entra? E, quando nao entra ou entra pela metade, por que.
+
+    A ordem importa: a prova sem materia minha nao entra, e nem adianta
+    conferir a extracao dela.
+    """
+    if not materias_do_edital:
+        return False, "nenhuma matéria do edital de 2019 neste caderno"
+    if not validacao.pode_classificar:
+        return False, validacao.motivo
+    return True, validacao.motivo       # vazio, ou o aviso do gabarito provisorio
+
+
+# --- a linha complementar da incidencia -----------------------------------------
+#
+# Secao 4 do pedido: "Policia Penal SC: 2 ocorrencias em 2 provas · Acervo
+# complementar FEPESE: 30 ocorrencias em X provas". As duas linhas vivem
+# lado a lado e NUNCA se somam.
+
+@dataclass
+class LinhaComplementar:
+    """O que o acervo complementar tem debaixo de um no da arvore."""
+
+    caminho: str
+    questoes: int = 0
+    provas: int = 0
+    #: Dessas, quantas ja tem classificacao. No nivel da materia a conta
+    #: aceita a questao sem classificar (o caderno diz a materia, e isso e
+    #: evidencia); abaixo dela, so a classificada conta - e por isso as duas
+    #: colunas existem.
+    classificadas: int = 0
+
+    @property
+    def amostra(self) -> str:
+        return f"{_questoes(self.questoes)} · {_provas(self.provas)}"
+
+    @property
+    def frase(self) -> str:
+        """A linha pronta, do jeito que a secao 4 pede."""
+        if not self.questoes:
+            return "Acervo complementar FEPESE: nada no acervo"
+        falta = self.questoes - self.classificadas
+        pendente = f" ({falta} sem classificação ainda)" if falta else ""
+        return f"Acervo complementar FEPESE: {self.amostra}{pendente}"
+
+
 # --- as perguntas da secao 5 do pedido ------------------------------------------
 
 @dataclass

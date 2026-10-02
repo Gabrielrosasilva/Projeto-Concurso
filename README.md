@@ -906,6 +906,8 @@ radar classificar --pedido  # pede ao Claude Code a classificacao do alvo
 radar classificar --importar data/resposta_ia.json   # grava o que presta
 radar incidencia            # o mapa do alvo por no, com a amostra
 radar incidencia --materia "Direito Penal" --padroes
+radar complementar          # o que o acervo complementar FEPESE tem, por materia
+radar complementar --aplicar  # grava quais provas entram no acervo complementar
 ```
 
 **Classificacao e incidencia do alvo (Etapa 3A).** As 170 questoes de 2013 e
@@ -926,6 +928,26 @@ parte. Os padroes de cobranca (forma de perguntar, gabarito, termos, tipo de
 questao, pegadinhas) so aparecem com a amostra minima do `config/amostra.yml`;
 abaixo dela, a tela diz "Nao ha evidencia suficiente no acervo para afirmar
 isso."
+
+**O acervo complementar FEPESE (Etapa 3B).** `radar complementar` consulta o
+que ja esta no banco e escreve `docs/complementar.md`: por materia do meu
+edital, quantas questoes cada prova complementar tem **pelo nome da materia**
+(certo) e **por termo no texto** (🟡 indicio, do `config/complementar.yml`) -
+duas colunas que nunca se somam. Cada prova leva a validacao minima: numeracao
+de 1 a N sem buraco, cinco alternativas, gabarito em toda questao e sha256 do
+PDF (a mesma prova com outro nome e recusada); o quadro do edital fica "nao
+lido", porque o leitor de quadro so da conta dos editais do Estado. Gabarito
+**provisorio** classifica mas nao entra nos padroes de cobranca, que se medem
+sobre a letra certa.
+
+`radar complementar --aplicar` grava em `data/acervo_complementar.json` quais
+provas entram: as que tem **materia do edital de 2019** e passam na validacao
+(hoje, 122 de 183), cada uma com hash, status e data de inclusao. Sem esse
+arquivo, nenhuma prova complementar entra em estatistica. Na incidencia, o
+complementar e uma **coluna propria**, ao lado do alvo e nunca somada a ele:
+"Policia Penal SC: 9 questoes · 2 provas · Acervo complementar FEPESE: 4
+questoes · 2 provas". No nivel da materia conta a questao sem classificacao
+(o caderno diz a materia); abaixo dela, so a classificada.
 
 **A arvore de conteudos e a evidencia (Etapa 2).** Toda questao do acervo tem
 uma **evidencia**: `alvo` (a prova do meu cargo e do meu estado: 2013 e 2019,

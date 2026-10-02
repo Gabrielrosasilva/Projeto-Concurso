@@ -2518,3 +2518,52 @@ estimava o Anki em 30 min; ele tinha 15 nos dias uteis e 10 no sabado):
     nas 170 sem disparar em texto legitimo; sem gabarito; e a classificacao
     por prova. O texto das questoes nao foi corrigido (pendencia B.7).
 
+
+## O acervo complementar FEPESE (Etapa 3B, 01/10/2026)
+
+O plano da 3B nao sobreviveu ao contato com o acervo, e os tres primeiros
+pontos foram decididos por voce antes de qualquer linha de codigo:
+
+1. **gabarito provisorio e um status proprio.** Das 183 provas complementares,
+   161 so tem o gabarito provisorio no acervo (o que vem embutido no caderno);
+   definitivo so existe para 22. A regra estrita do roteiro - prova sem
+   validacao fica fora da estatistica - esvaziaria a etapa. Entao: a prova com
+   provisorio **classifica** (para saber de que assunto a banca gosta, ele
+   basta) e fica **fora dos padroes de cobranca** (forma de perguntar,
+   distribuicao do gabarito, qual alternativa engana), que se medem sobre a
+   letra CERTA, e essa muda depois dos recursos;
+2. **a validacao confere o proprio caderno**, sem reler o PDF: numeracao de 1
+   a N sem buraco nem repeticao, cinco alternativas em toda questao, gabarito
+   em toda questao (ou anulada) e sha256 do PDF contra o acervo. O quadro de
+   distribuicao do edital fica registrado como **"nao lido"**, nunca como "bate":
+   o leitor de quadro (`auditoria.py`) foi feito para os editais do Estado e
+   nao acha o quadro em edital de prefeitura. Conferir o quadro fica para a
+   validacao da prova escolhida, que le o PDF;
+3. **duas colunas que nunca se somam** no levantamento: *pelo nome da materia*
+   (o caderno diz "Direito Penal": e certo) e *por termo no texto* (🟡 indicio:
+   o caderno so diz "Conhecimentos Especificos" e um termo do
+   `config/complementar.yml` apareceu). Indicio nao e evidencia, e so a questao
+   que o nome NAO contou entra nele - a mesma questao nunca conta duas vezes.
+   Motivo: fora o Socioeducativo, as prefeituras jogam tudo em "Conhecimentos
+   Especificos" (3.405 questoes), e contar so pelo nome perderia isso;
+4. **quem entra no acervo** (decisao sua, 01/10, com autonomia): a prova que
+   tem **ao menos uma materia do edital de 2019** pelo nome no caderno e passa
+   na validacao minima. Materia fora do edital de agora (Nocoes de Informatica,
+   Direito Administrativo, Temas de Educacao) **nao serve de motivo** para a
+   prova entrar. No acervo real: 122 das 183. Consequencia medida e registrada:
+   **173 das 175 provas que se qualificam entram so por Portugues e Raciocinio
+   Logico** - so o Socioeducativo 2013 e 2016 trazem Direito, Direitos Humanos
+   e Legislacao Estadual;
+5. **a decisao fica num arquivo versionado**, `data/acervo_complementar.json`,
+   gravado por `radar complementar --aplicar`: fonte, concurso, cargo, ano,
+   arquivo, sha256, questoes, materias do edital, tipo de gabarito, quadro do
+   edital, aceita/recusada com o motivo, e a **data de inclusao**, que e
+   preservada quando o comando roda de novo. Sem o arquivo, **nenhuma** prova
+   complementar entra em estatistica: levantar nao e aprovar;
+6. **a linha complementar da incidencia** anda ao lado da do alvo e nunca e
+   somada a ela (regra inviolavel 1): "Policia Penal SC: 9 questoes · 2 provas ·
+   Acervo complementar FEPESE: 4 questoes · 2 provas". No nivel da **materia** a
+   questao sem classificacao conta, porque o proprio caderno declara a materia
+   dela, e isso e evidencia; **abaixo da materia so conta a classificada**, e
+   quantas faltam vai escrito na linha ("993 sem classificacao ainda").
+   Adivinhar o assunto pelo nome do caderno seria o que a regra 9 proibe.

@@ -2483,17 +2483,27 @@ def incidencia(
         console.print("[yellow]Nada no mapa[/] (a arvore esta vazia ou a materia nao existe).")
         raise typer.Exit(code=1)
     minimos = regra.carregar_minimos()
+    # A linha do acervo complementar anda ao lado da do alvo, e nunca somada
+    # a ela (secao 4 do pedido).
+    complementares = servico.incidencia.linhas_complementares()
     for m in mapas:
         tabela = Table(title=f"{m.materia} — {m.topo.amostra} · {m.topo.rotulo}",
                        title_justify="left")
-        for coluna in ("Conteudo", "Amostra", "O que aconteceu", "Anos", "Tipo"):
+        for coluna in ("Conteudo", "Policia Penal SC", "O que aconteceu",
+                       "Complementar FEPESE", "Anos", "Tipo"):
             tabela.add_column(coluna)
         for linha in m.linhas[1:]:
             recuo = "  " * (linha.profundidade - 1)
             tipos = ", ".join(f"{t} ({n})" for t, n in linha.tipos[:2])
+            do_acervo = complementares.get(linha.caminho)
             tabela.add_row(escape(recuo + linha.nome), linha.amostra, linha.rotulo,
+                           do_acervo.amostra if do_acervo and do_acervo.questoes else "—",
                            ", ".join(map(str, linha.anos)) or "—", escape(tipos) or "—")
         console.print(tabela)
+        topo = complementares.get(m.topo.caminho)
+        console.print(f"   Policia Penal SC: {m.topo.amostra} · "
+                      f"{topo.frase if topo else 'Acervo complementar FEPESE: nada no acervo'}"
+                      " (as duas nunca se somam)")
         console.print(f"   fora da conta: {m.anuladas} anulada(s) · {m.pendentes} pendente(s)"
                       f" · provas da materia: {m.provas}")
         if padroes:
@@ -2520,17 +2530,22 @@ def incidencia(
 @app.command()
 def complementar(
     caminho: str = typer.Option(None, help="Onde gravar (padrao: docs/complementar.md)"),
+    aplicar: bool = typer.Option(
+        False, "--aplicar",
+        help="Grava quais provas entram em data/acervo_complementar.json"),
 ) -> None:
     """Levanta o acervo complementar FEPESE: o que ha, e o que esta pronto.
 
-    So LE o banco e o manifesto: nenhuma prova entra em estatistica por causa
-    deste comando. O complementar nunca se soma a incidencia do alvo. Escolher
-    quais provas entram e decisao sua, depois de ler o relatorio.
+    Sem --aplicar, so LE o banco e o manifesto e escreve o relatorio: nenhuma
+    prova entra em estatistica. Com --aplicar, grava a lista das que entram -
+    as que tem materia do edital de 2019 e passam na validacao minima. O
+    complementar nunca se soma a incidencia do alvo.
     """
     from radar import complementar as regra
 
     destino = Path(caminho) if caminho else servico.complementar.caminho_do_relatorio()
-    por_materia, validadas, cadernos = servico.complementar.escrever(destino)
+    levantado = servico.complementar.escrever(destino)
+    por_materia, validadas, cadernos = levantado
     if not cadernos:
         console.print("[yellow]Nenhuma prova complementar no banco.[/] Rode "
                       "`radar extrair` ou confira a evidencia das provas.")
@@ -2558,7 +2573,26 @@ def complementar(
     )
     console.print("A incidencia do alvo NAO muda com nada disto: as duas "
                   "evidencias nunca se somam.")
-    console.print(f"Relatorio em {destino} — escolha nele quais provas entram.")
+    console.print(f"Relatorio em {destino}")
+
+    if not aplicar:
+        decididas = servico.complementar.decidir_todas(levantado=levantado)
+        entram = sum(1 for r in decididas if r.aceita)
+        console.print(f"[dim]Pela regra do edital de 2019, {entram} prova(s) "
+                      f"entrariam. Nada foi gravado: rode com --aplicar.[/]")
+        return
+
+    registros, mudanca = servico.complementar.aplicar(levantado=levantado)
+    aceitas = [r for r in registros if r.aceita]
+    nos_padroes = sum(1 for r in registros if r.entra_nos_padroes)
+    console.print(f"[green]{len(aceitas)} prova(s) no acervo complementar[/] "
+                  f"({nos_padroes} também nos padroes de cobranca), "
+                  f"{len(registros) - len(aceitas)} fora, cada uma com o motivo. "
+                  f"Gravado em {servico.complementar.caminho_do_registro()}")
+    if mudanca["entraram"]:
+        console.print(f"  entraram agora: {len(mudanca['entraram'])}")
+    if mudanca["sairam"]:
+        console.print(f"  [yellow]sairam: {len(mudanca['sairam'])}[/]")
 
 
 @app.command()

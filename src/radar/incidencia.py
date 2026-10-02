@@ -160,6 +160,38 @@ def montar(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> list[MapaDaMa
     return mapas
 
 
+# --- a linha do acervo complementar (secao 4) -----------------------------------
+
+def complementar_por_no(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> dict:
+    """{caminho do no: LinhaComplementar}, do acervo complementar FEPESE.
+
+    Linha SEPARADA da do alvo, e nunca somada a ela (regra inviolavel 1):
+    "Policia Penal SC: 2 questoes · 2 provas · Acervo complementar FEPESE:
+    30 questoes · 12 provas".
+
+    A diferenca para a conta do alvo: aqui a questao SEM classificacao conta
+    na materia, porque o proprio caderno diz a materia dela ("Lingua
+    Portuguesa"), e isso e evidencia, nao palpite. Abaixo da materia so conta
+    a classificada - sem classificacao nao ha como saber o assunto, e
+    inventar um seria o que a regra 9 proibe. Quantas ainda faltam
+    classificar vai escrito na linha.
+
+    Anulada continua fora: a banca desfez a pergunta.
+    """
+    from radar.complementar import LinhaComplementar
+
+    validas = [o for o in ocorrencias if not o.anulada and o.conteudo]
+    linhas = {}
+    for no in nos:
+        debaixo = [o for o in validas if _debaixo(o.conteudo, no.caminho)]
+        linhas[no.caminho] = LinhaComplementar(
+            caminho=no.caminho,
+            questoes=len(debaixo),
+            provas=len({o.prova for o in debaixo}),
+            classificadas=sum(1 for o in debaixo if o.status != "pendente"))
+    return linhas
+
+
 # --- os padroes de cobranca (secao 13) ------------------------------------------
 
 @dataclass

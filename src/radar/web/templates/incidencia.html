@@ -39,9 +39,9 @@
     <p>
       O que caiu nas provas da Polícia Penal SC (2013 e 2019), conteúdo por
       conteúdo, com a amostra em toda linha. É o que <b>aconteceu</b> nas
-      provas analisadas: histórico, não previsão. Só o alvo: o acervo
-      complementar da FEPESE nunca entra nesta conta. Anuladas e pendentes
-      ficam fora e aparecem à parte.
+      provas analisadas: histórico, não previsão. O acervo complementar da
+      FEPESE anda na coluna ao lado, <b>nunca somado</b> a esta conta.
+      Anuladas e pendentes ficam fora e aparecem à parte.
     </p>
     <p class="ds-suave">
       A classificação é do Claude Code e vale depois de conferida na aba
@@ -68,15 +68,22 @@
         <span><b>{{ m.topo.amostra }}</b> · {{ m.topo.rotulo }}</span>
         <span class="ds-suave">fora da conta: {{ m.anuladas }} anulada(s) · {{ m.pendentes }} pendente(s)</span>
       </div>
+      <div class="resumo">
+        <span>Polícia Penal SC: <b>{{ m.topo.amostra }}</b></span>
+        <span>{{ (complementar[m.topo.caminho].frase if complementar.get(m.topo.caminho) else 'Acervo complementar FEPESE: nada no acervo') }}</span>
+        <span class="ds-suave">as duas nunca se somam</span>
+      </div>
       <div class="rolagem">
         <table class="mapa">
-          <thead><tr><th>Conteúdo</th><th>Amostra</th><th>O que aconteceu</th><th>Anos</th><th>Tipo de questão</th></tr></thead>
+          <thead><tr><th>Conteúdo</th><th>Polícia Penal SC</th><th>O que aconteceu</th><th>Complementar FEPESE</th><th>Anos</th><th>Tipo de questão</th></tr></thead>
           <tbody>
           {% for l in m.linhas[1:] %}
             <tr class="nivel-{{ l.nivel }} {{ 'zero' if not l.questoes }}">
               <td class="nome recuo-{{ l.profundidade }}">{{ l.nome }}</td>
               <td class="amostra">{{ l.amostra }}</td>
               <td>{{ l.rotulo }}</td>
+              {% set c = complementar.get(l.caminho) %}
+              <td class="amostra">{{ c.amostra if c and c.questoes else '—' }}</td>
               <td>{{ l.anos | join(', ') or '—' }}</td>
               <td>{% for t, n in l.tipos[:2] %}{{ t }} ({{ n }}){% if not loop.last %}, {% endif %}{% else %}—{% endfor %}</td>
             </tr>

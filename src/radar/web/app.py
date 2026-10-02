@@ -1267,6 +1267,8 @@ def analises_incidencia(request: Request, materia: str = ""):
         request=request, name="incidencia.html",
         context={
             "mapas": mapas, "materia": materia, "minimos": minimos,
+            # A linha do acervo complementar, SEMPRE separada da do alvo.
+            "complementar": servico.incidencia.linhas_complementares(),
             "padroes": {l.caminho: regra.padroes(l, minimos)
                         for m in mapas for l in m.linhas},
             "todas": [m.materia for m in servico.incidencia.mapa()] if materia else

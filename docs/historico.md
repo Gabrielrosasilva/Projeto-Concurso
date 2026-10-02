@@ -1448,3 +1448,27 @@ A suite chegou a 1.838 testes verdes no Linux dessa data, fora os dois abaixo.
 - um token do Telegram foi colado numa conversa no inicio; foi revogado.
   Token, chat id e chave da API vivem so em variavel de ambiente ou em Secrets,
   nunca em arquivo versionado nem em conversa.
+
+## Etapa 3B do pedido de evolucao: o acervo complementar FEPESE (01/10)
+
+Passos 1, 3 e 5 dos 5 da 3B. O 2 (a sua aprovacao da lista) virou a regra do
+edital de 2019, com autonomia dada por voce; o 4 (classificacao fina das
+provas aceitas) nao foi feito e esta no `pendencias.md`.
+
+O plano do roteiro nao valia: rodando as verificacoes da auditoria nas 183
+provas complementares, so 2 passariam (161 so tem gabarito provisorio, e o
+leitor de quadro do edital nao le edital de prefeitura). As decisoes que
+destravaram estao no `decisoes.md`.
+
+Entrou: `radar complementar [--aplicar]`, o modulo puro `complementar.py` (a
+validacao minima, as duas colunas e as respostas da secao 5), o servico que
+le o banco e o manifesto, `config/complementar.yml` (os termos de busca),
+`docs/complementar.md` (gerado), o arquivo de status
+`data/acervo_complementar.json` (122 provas aceitas de 183) e a coluna
+"Complementar FEPESE" na incidencia, no terminal e na tela, sempre separada
+da do alvo.
+
+Achados do acervo real, nenhum deles corrigido aqui: **LEP, Sociologia
+Aplicada, Legislacao Especial e Administracao Publica tem zero questao pelo
+nome da materia** no complementar; 24 provas tem o mesmo sha256 em dois
+enderecos; 31 tem a numeracao furada.

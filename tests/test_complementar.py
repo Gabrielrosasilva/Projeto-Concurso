@@ -18,9 +18,11 @@ Nenhum teste vai a internet, le o banco real nem depende da data de hoje.
 """
 import json
 import re
+from datetime import date
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
 from typer.testing import CliRunner
 
 from radar import complementar, edital_programa
@@ -31,6 +33,7 @@ from radar.models import QuestaoDeProva
 from radar.servico import classificacoes, conteudos
 from radar.servico import complementar as servico
 from radar.servico import incidencia as servico_da_incidencia
+from radar.web.app import app
 
 PROGRAMA = edital_programa.ler_programa(
     (Path(__file__).parent / "fixtures" / "provas" / "edital_sap_2019_programa.txt")
@@ -352,3 +355,141 @@ def test_o_manifesto_de_verdade_tem_o_sha256_de_cada_caderno():
     com_hash = [r for r in arquivos_de_prova.carregar_manifesto()
                 if r.get("tipo") == arquivos_de_prova.PROVA and r.get("sha256")]
     assert len(com_hash) > 100
+
+
+# --- quem entra no acervo, e a linha complementar da incidencia -------------------
+
+def test_prova_sem_materia_do_edital_nao_entra():
+    """Nocoes de Informatica e Temas de Educacao nao estao no edital de 2019:
+    nao servem de motivo para a prova entrar."""
+    validacao = complementar.validar(_caderno())
+    assert complementar.decidir(validacao, []) == (
+        False, "nenhuma matéria do edital de 2019 neste caderno")
+
+
+def test_prova_com_materia_do_edital_e_extracao_inteira_entra():
+    assert complementar.decidir(complementar.validar(_caderno()),
+                                ["Direito Penal"]) == (True, "")
+
+
+def test_prova_com_materia_minha_mas_extracao_furada_nao_entra():
+    caderno = _caderno(quantas=3)
+    caderno.questoes[2].numero = 9
+    entra, motivo = complementar.decidir(complementar.validar(caderno), ["Direito Penal"])
+    assert not entra and "a numeração não fecha" in motivo
+
+
+def test_prova_com_gabarito_provisorio_entra_com_o_aviso():
+    entra, motivo = complementar.decidir(
+        complementar.validar(_caderno(gabarito=complementar.PROVISORIO)), ["Direito Penal"])
+    assert entra and "fora dos padrões de cobrança" in motivo
+
+
+def test_aplicar_grava_o_arquivo_de_status(acervo):
+    registros, mudanca = servico.aplicar(hoje=date(2026, 10, 1))
+
+    gravado = servico.carregar_registro()
+    assert set(gravado) == {"https://fepese.test/2016/AS.pdf",
+                            "https://fepese.test/2024/guarda.pdf"}
+    socio = gravado["https://fepese.test/2016/AS.pdf"]
+    assert socio["aceita"] and socio["entra_nos_padroes"]
+    assert socio["incluida_em"] == "2026-10-01"
+    assert socio["sha256"] == "socio-2016" and socio["arquivo"] == "AS.pdf"
+    assert sorted(socio["materias_do_edital"]) == ["Direito Penal", "Direitos Humanos"]
+    # A Guarda so tem bloco generico: nenhuma materia do edital pelo nome.
+    guarda = gravado["https://fepese.test/2024/guarda.pdf"]
+    assert not guarda["aceita"] and guarda["incluida_em"] is None
+    assert guarda["motivo"] == "nenhuma matéria do edital de 2019 neste caderno"
+    assert len(mudanca["entraram"]) == 1 and mudanca["sairam"] == []
+
+
+def test_a_data_de_inclusao_nao_muda_quando_o_comando_roda_de_novo(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    servico.aplicar(hoje=date(2026, 12, 25))
+
+    gravado = servico.carregar_registro()
+    assert gravado["https://fepese.test/2016/AS.pdf"]["incluida_em"] == "2026-10-01"
+
+
+def test_sem_o_arquivo_de_status_nenhuma_prova_entra_na_estatistica(acervo):
+    """Levantar nao e aprovar: sem a lista aplicada, o complementar e zero."""
+    assert servico.provas_aceitas() == set()
+    assert servico_da_incidencia.ocorrencias_complementares() == []
+    linhas = servico_da_incidencia.linhas_complementares()
+    assert linhas["Direito Penal"].questoes == 0
+    assert linhas["Direito Penal"].frase == "Acervo complementar FEPESE: nada no acervo"
+
+
+def test_a_linha_complementar_aparece_depois_de_aplicar(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+
+    linhas = servico_da_incidencia.linhas_complementares()
+    penal = linhas["Direito Penal"]
+    assert (penal.questoes, penal.provas, penal.classificadas) == (2, 1, 0)
+    assert penal.frase == ("Acervo complementar FEPESE: 2 questões · 1 prova "
+                           "(2 sem classificação ainda)")
+    # Sem classificacao, nada conta abaixo da materia: assunto nenhum e
+    # adivinhado a partir do nome do caderno.
+    assert linhas["Direito Penal > Imputabilidade penal"].questoes == 0
+
+
+def test_a_prova_recusada_fica_fora_da_linha_complementar(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+    # A Guarda 2024 nao entrou: o indicio por termo dela nao vira estatistica.
+    assert servico.provas_aceitas() == {"https://fepese.test/2016/AS.pdf"}
+    assert {o.prova for o in servico_da_incidencia.ocorrencias_complementares()} == {
+        "https://fepese.test/2016/AS.pdf"}
+
+
+def test_a_linha_do_alvo_nao_muda_quando_o_complementar_entra(acervo):
+    antes = {m.materia: (m.topo.amostra, m.topo.rotulo)
+             for m in servico_da_incidencia.mapa()}
+
+    servico.aplicar(hoje=date(2026, 10, 1))
+
+    depois = {m.materia: (m.topo.amostra, m.topo.rotulo)
+              for m in servico_da_incidencia.mapa()}
+    assert antes == depois
+    # E o numero do complementar nao e o do alvo: 2 contra 1, lado a lado.
+    assert depois["Direito Penal"][0] == "1 questão · 1 prova"
+    assert servico_da_incidencia.linhas_complementares()["Direito Penal"].questoes == 2
+
+
+def test_a_tela_e_o_terminal_mostram_as_duas_linhas_sem_somar(acervo):
+    servico.aplicar(hoje=date(2026, 10, 1))
+
+    texto = TestClient(app).get("/analises/incidencia").text
+    assert "Polícia Penal SC" in texto and "Acervo complementar FEPESE" in texto
+    assert "as duas nunca se somam" in texto
+    assert not PREVISAO.search(texto)
+
+    saida = CliRunner().invoke(cli, ["incidencia"], env={"COLUMNS": "250"})
+    assert saida.exit_code == 0, saida.output
+    assert "Complementar FEPESE" in saida.output
+    assert "as duas nunca se somam" in saida.output
+    assert not PREVISAO.search(saida.output)
+
+
+def test_a_questao_anulada_fica_fora_da_linha_complementar(acervo):
+    with sessao() as s:
+        q = next(x for x in s.query(QuestaoDeProva)
+                 .filter_by(prova_url="https://fepese.test/2016/AS.pdf", numero=1))
+        q.anulada = True
+    servico.aplicar(hoje=date(2026, 10, 1))
+
+    assert servico_da_incidencia.linhas_complementares()["Direito Penal"].questoes == 1
+
+
+def test_o_comando_com_aplicar_grava_e_sem_aplicar_nao(acervo, tmp_path):
+    destino = str(tmp_path / "rel.md")
+    sem = CliRunner().invoke(cli, ["complementar", "--caminho", destino],
+                             env={"COLUMNS": "200"})
+    assert sem.exit_code == 0, sem.output
+    assert "Nada foi gravado" in sem.output
+    assert not servico.caminho_do_registro().exists()
+
+    com = CliRunner().invoke(cli, ["complementar", "--caminho", destino, "--aplicar"],
+                             env={"COLUMNS": "200"})
+    assert com.exit_code == 0, com.output
+    assert servico.caminho_do_registro().exists()
+    assert "1 prova(s) no acervo complementar" in com.output

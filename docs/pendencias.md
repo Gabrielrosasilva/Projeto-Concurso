@@ -61,9 +61,11 @@ Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
 **Perguntas que ficaram sem resposta** (preciso delas antes de qualquer
 roteiro):
 
-1. Quais provas FEPESE com Direito Penal estao no acervo? So a de 2019 da
-   Policia Penal, ou tambem 2013 e 2016? (fica para a 3B, que levanta o
-   complementar)
+1. Quais provas FEPESE com Direito Penal estao no acervo? **Respondida na 3B**
+   (`docs/complementar.md`): pelo nome da materia, so o Socioeducativo 2013 e
+   2016, com 2 questoes cada. Nas prefeituras, Direito Penal so aparece dentro
+   de "Conhecimentos Especificos" - 139 indicios por termo em 76 provas, que
+   so a classificacao confirma.
 
 A pergunta 2 (quem classifica) foi respondida na Etapa 0 e feita na 3A: o
 Claude Code, pelo `radar classificar --pedido/--importar`, e voce confere.
@@ -92,6 +94,41 @@ grudado na alternativa "e" (20), a grade de respostas na 2019-q99, o numero
 dentro do enunciado na 2019-q100 e "e cor-" cortado em 2019-q51 a 55. Mais um
 que a verificacao nao pega: a 2013-q20 perdeu a imagem do icone do Excel. O
 texto nao foi corrigido; o conserto e no leitor do caderno (`questoes.py`).
+
+### B.8 🔴 Classificacao do acervo complementar (Etapa 3B, passo 4)
+
+As 122 provas aceitas no `data/acervo_complementar.json` estao no acervo, mas
+**nenhuma questao delas foi classificada**: a linha complementar da incidencia
+so mostra numero no nivel da MATERIA, e diz quantas faltam ("993 sem
+classificacao ainda"). O que falta, na ordem que eu sugeri e voce ainda nao
+escolheu:
+
+1. **os 80 de Direito, Direitos Humanos e Legislacao Estadual do Socioeducativo
+   2013 e 2016** - poucas questoes, as unicas do complementar nas materias que
+   mais importam, e as unicas com gabarito definitivo. Melhor relacao entre
+   esforco e proveito;
+2. **os blocos "Conhecimentos Especificos" das provas de seguranca e fiscalizacao**
+   (Guarda Municipal 2024, Procurador, Agente de Fiscalizacao, Agente Social,
+   Educador Social): e onde moram os 139 indicios de Direito Penal, 57 de
+   Constitucional, 56 de Administracao Publica, 37 de Direitos Humanos e 35 de
+   Sociologia. Nenhuma dessas provas tem gabarito definitivo: classificam, mas
+   nao entram nos padroes de cobranca;
+3. **Portugues e Raciocinio Logico** (993 + 290 questoes): o catalogo do
+   `macetes.py` serve de primeira proposta (🟡), com conferencia por amostra de
+   20 por materia, como o roteiro pede.
+
+### B.9 🔴 Defeitos do acervo complementar achados na 3B
+
+- **24 provas com o mesmo sha256 em dois enderecos.** Parte e o mesmo caderno
+  em http e https (os tres de Florianopolis 2025); parte sao dois hotsites de
+  Palhoca (2024 emergencial e 2024 PS educa) com o mesmo `S07.pdf` e cargos
+  diferentes - e no banco as duas provas tem so 24 das 40 questoes em comum.
+  Ou a mesma prova entrou duas vezes, ou o hash do manifesto esta errado para
+  elas. A validacao recusa a segunda; nada foi apagado;
+- **31 provas com a numeracao furada**, 26 delas cadernos de 39 questoes de
+  2023, e um caderno de 40 em que falta a questao 20. Mesmo tipo de defeito da
+  B.7, agora no complementar. O conserto e no leitor do caderno
+  (`questoes.py`).
 
 ## C. Telas ainda no CSS antigo (B2 a B7) 🔴
 

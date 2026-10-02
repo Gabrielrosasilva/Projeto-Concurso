@@ -14,7 +14,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | 🟡 falta a sua conferência das 162 |
-| 8 | 3B — Acervo complementar FEPESE | 🟡 levantamento feito, falta você aprovar a lista |
+| 8 | 3B — Acervo complementar FEPESE | 🟡 acervo definido (122 provas); falta classificar |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
 | 10 | 5 — Geração de questões | ⬜ |
 | 11 | 6B — Cronograma operacional | ⬜ |
@@ -640,10 +640,11 @@ v3, e a resposta foi importada de novo.
 
 ## 3B — Acervo complementar FEPESE (01/10/2026)
 
-- Situação: 🟡 **passo 1 de 5 feito** (o levantamento). O roteiro tem uma
-  parada no meio: **você aprova a lista de provas** e só então vêm a validação
-  que lê o PDF, a classificação e a linha complementar na incidência.
-- Datas: início 01/10 · fim do passo 1 em 01/10
+- Situação: 🟡 **passos 1, 3 e 5 de 5 feitos**. O passo 2 (sua aprovação da
+  lista) virou uma regra, com a autonomia que você deu: entra a prova que tem
+  matéria do edital de 2019 e passa na validação. **Falta o passo 4**, a
+  classificação das questões do complementar (pendência B.8).
+- Datas: início 01/10 · fim dos passos 1, 3 e 5 em 01/10
 
 **Plano conferido contra o código antes de começar: NÃO valia como estava.**
 Três pontos foram levantados antes de escrever qualquer linha, e você decidiu
@@ -735,4 +736,74 @@ complementar ele avisa; os termos vêm do config; o manifesto real tem sha256.
   aqui;
 - [ ] provas escolhidas validadas e classificadas;
 - [ ] a incidência mostra alvo e complementar separados, cada um com a
+  amostra.
+
+### 3B, segunda parte: quem entra no acervo e a linha complementar (01/10)
+
+**O que você decidiu nesta parte.** Autonomia para eu escolher as provas, com
+o critério: entra a prova que tem matéria do **edital de 2019** (Sociologia
+Aplicada, LEP, Legislação Estadual, Direito Processual Penal, Legislação
+Especial, Direito Penal, Administração Pública, Direito Constitucional,
+Direitos Humanos, Raciocínio Lógico, Língua Portuguesa).
+
+**O que medi antes de aplicar, e que vale você saber:** das 175 provas que se
+qualificam, **173 entram só por Português e Raciocínio Lógico**. Só o
+Socioeducativo 2013 e 2016 trazem Direito, Direitos Humanos e Legislação
+Estadual. Matéria fora do edital de agora (Noções de Informática, Direito
+Administrativo, Temas de Educação) não serviu de motivo para entrar.
+
+**Arquivos alterados (segunda parte).**
+- `src/radar/complementar.py` — `Registro`, `decidir` (a regra do edital) e
+  `LinhaComplementar` (a linha da §4);
+- `src/radar/incidencia.py` — `complementar_por_no`, separada da conta do alvo;
+- `src/radar/servico/complementar.py` — o arquivo de status
+  (`data/acervo_complementar.json`): gravar, carregar, preservar a data de
+  inclusão, e `provas_aceitas()`;
+- `src/radar/servico/incidencia.py` — `ocorrencias_complementares()` e
+  `linhas_complementares()`, só das provas aceitas;
+- `src/radar/cli.py` — `radar complementar --aplicar`; a coluna "Complementar
+  FEPESE" e a linha dupla no `radar incidencia`;
+- `src/radar/web/app.py` e `incidencia.html` — a coluna e a linha dupla na
+  tela, com "as duas nunca se somam";
+- dados: `data/acervo_complementar.json` (novo, versionado);
+- docs: `decisoes.md`, `historico.md`, `pendencias.md` (a pergunta 1 do bloco B
+  respondida; novas B.8 e B.9), `CLAUDE.md`, este arquivo.
+
+**Testes novos (13, total de 36 no arquivo).** Prova sem matéria do edital não
+entra; com matéria e extração inteira entra; com matéria e extração furada não
+entra; com provisório entra com o aviso. O `--aplicar` grava o arquivo com
+hash, matérias e data; a data de inclusão **não muda** quando o comando roda de
+novo; **sem o arquivo, nenhuma prova entra na estatística**; depois de aplicar
+a linha aparece, e nada conta abaixo da matéria sem classificação; a prova
+recusada fica fora; **a linha do alvo não muda**; a tela e o terminal mostram
+as duas linhas com "as duas nunca se somam"; anulada fica fora; o comando sem
+`--aplicar` não grava.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_complementar.py` | 36 passed |
+| `test_incidencia.py` + `test_complementar.py` | 32 passed (antes dos 13 novos) |
+| Suíte inteira, PC | **2025 passed** |
+
+**Comando real rodado (banco real).**
+- `radar complementar --aplicar` (11 s): **122 provas no acervo**, 22 também
+  nos padrões de cobrança, 61 fora com o motivo. `data/acervo_complementar.json`
+  com 183 registros (122 com `incluida_em: 2026-10-01`, 61 com `null`);
+- `radar incidencia --materia "Direito Penal"`: "Polícia Penal SC: 9 questões ·
+  2 provas · Acervo complementar FEPESE: 4 questões · 2 provas (4 sem
+  classificação ainda) (as duas nunca se somam)";
+- Língua Portuguesa: "22 questões · 2 provas" do alvo contra "993 questões ·
+  122 provas (993 sem classificação ainda)" do complementar;
+- `radar web` (porta 8790), Análises > Incidência: as duas linhas lado a lado
+  nas 13 matérias e a coluna "Complementar FEPESE" na tabela.
+
+**Critério de conclusão (atualizado).**
+- [x] `docs/complementar.md` gerado e mostrado;
+- [x] lista definida — pela regra do edital de 2019, com a consequência medida
+  e registrada;
+- [~] provas escolhidas **validadas** (122 de 183, cada recusa com o motivo);
+  **não classificadas** — é a pendência B.8;
+- [x] a incidência mostra alvo e complementar separados, cada um com a
   amostra.
