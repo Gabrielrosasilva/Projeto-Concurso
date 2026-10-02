@@ -1596,3 +1596,36 @@ teste religa o Anki num arquivo copiado e confere que ela desaparece.
 
 Lembrar a dobra entre recarregamentos ficou de fora: precisaria de
 `localStorage`, e nao foi pedido.
+
+## Etapa 5 — geracao de questoes com escopo fechado (02/10)
+
+**O filtro.** `radar/conteudos.resolver_escopo` (puro) fecha o caminho
+materia > assunto > subassunto > elemento, conferindo cada nivel DENTRO do de
+cima. Nome que a arvore nao tem para o comando, com ate 5 sugestoes do
+`difflib`, e nao gera nada. O `Escopo.dentro()` e o que a importacao usa depois.
+
+**Os tres modos.** `treino` (escopo fechado), `revisao` (so os nos estudados,
+pela definicao da Etapa 4) e `simulado` (amplo, pelo edital e pelo peso). Sem
+`--modo`: com assunto e treino, so com materia e simulado, e a saida escreve
+qual foi.
+
+**As questoes de base passaram a sair da CLASSIFICACAO**, e nao da coluna
+`materia`: `geradas.reais_do_escopo` pega as reais cujo no esta dentro do
+escopo, **alvo antes do complementar** (§9), e prova complementar so entra se
+estiver aceita no acervo. Faltou real para o tanto pedido? O resto sai da fonte
+oficial do `config/leis.yml` ou do item do edital, DENTRO do mesmo no, marcado
+"sem questao real de referencia".
+
+**A importacao recusa quatro coisas**, contando na saida: conteudo declarado
+fora do escopo, artigo que nao e nenhum dos dispositivos pedidos, vinculo com
+questao real que nao estava no pedido, e `do_zero` sem a marca. A garantia e a
+validacao do que a IA declara - a leitura do texto continua minha.
+
+**Quatro colunas novas** em `questoes_geradas` (`modo_do_pedido`, `escopo`,
+`base`, `evidencia_da_base`), na migracao v4 com copia antes; o dispositivo
+reusa o `artigo`, que ja era isso. Nas 50 antigas os campos ficam nulos.
+
+**Achado no caminho, e consertado:** o `data/questoes_geradas.json` estava `[]`
+desde o commit da Etapa 2, enquanto o banco tinha as 50. O arquivo e o
+registro, e o banco se reconstroi dele: refazer o banco teria perdido as 50.
+Exportado do banco real (50 de volta) e com teste para nao repetir.

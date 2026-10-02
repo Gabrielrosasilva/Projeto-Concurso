@@ -129,8 +129,11 @@ arvore com os recortes radar e anotado nunca somados, o controle que o ANKI
 fazia - estudado, nao estudado, revisar, refazer -, a tela "Analises > Meu
 desempenho" e o `radar desempenho`) e a **B.11** (os blocos da aba Hoje dobram
 pelo sinal do canto; o das 22h nasce fechado, e a dobra e lembrada pelo
-`static/dobra.js`). **Proxima: Etapa 5** (geracao de questoes
-com filtro hierarquico e os tres modos).
+`static/dobra.js`) e a **5** (de 02/10: o filtro hierarquico do `radar gerar`
+- materia > assunto > subassunto > elemento, com sugestao de nome e sem alargar
+escopo -, os tres modos treino/revisao/simulado, e a base de cada gerada
+gravada com a evidencia). **Proxima: Etapa 6B** (cronograma operacional:
+fichas de tarefa e prioridade). 
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.

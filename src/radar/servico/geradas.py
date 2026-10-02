@@ -60,6 +60,113 @@ def _reais_do_alvo(s, materia: str | None = None) -> list[QuestaoDeProva]:
     return list(por_enunciado.values())
 
 
+# --- as questoes reais de um ESCOPO (Etapa 5) -----------------------------------
+#
+# O `_reais_do_alvo` escolhe pela coluna `materia`, o texto que o caderno
+# escreveu. Isso basta para o simulado, e nao basta para o treino: "Lei de
+# Execucao Penal" tem dezenas de assuntos, e a §7 existe justamente para eu nao
+# receber questao de um conteudo que ainda nem estudei.
+#
+# Aqui a escolha e pela CLASSIFICACAO (Etapa 3A): a questao entra se o no dela
+# esta dentro do escopo. E a prioridade e a da §9 - questao real do mesmo no,
+# ALVO primeiro, complementar depois, cada uma marcada.
+
+
+def _por_chave(s, chaves: set) -> dict:
+    """{chave: questao} das questoes reais daquelas chaves, sem anulada."""
+    from radar.servico.classificacoes import chave_de
+
+    if not chaves:
+        return {}
+    achadas = {}
+    for questao in s.scalars(
+        select(QuestaoDeProva)
+        .where(QuestaoDeProva.resposta.is_not(None))
+        .where(QuestaoDeProva.anulada.is_not(True))
+    ):
+        chave = chave_de(questao)
+        if chave in chaves and chave not in achadas:
+            achadas[chave] = questao
+    return achadas
+
+
+def reais_do_escopo(escopo) -> list[tuple[QuestaoDeProva, str]]:
+    """[(questao, evidencia)] das reais classificadas DENTRO do escopo.
+
+    Alvo primeiro, complementar depois (§9), e cada uma marcada com a sua
+    evidencia - a tela e o pedido precisam dizer qual e qual, e os dois nunca
+    se somam. Prova complementar so entra se estiver aceita no acervo
+    (`data/acervo_complementar.json`), a mesma regra de toda estatistica.
+    """
+    from radar.models import Classificacao
+    from radar.servico import complementar as acervo_complementar
+
+    criar_tabelas()
+    with sessao() as s:
+        dentro = {c.chave for c in s.scalars(
+            select(Classificacao).where(Classificacao.principal.is_(True))
+        ) if escopo.dentro(c.conteudo)}
+        if not dentro:
+            return []
+
+        do_alvo = _provas_do_alvo(s)
+        questoes = _por_chave(s, dentro)
+        aceitas = acervo_complementar.provas_aceitas()
+
+        saida, vistos = [], set()
+        for evidencia, serve in (
+            ("alvo", lambda q: q.prova_url in do_alvo),
+            ("complementar", lambda q: q.prova_url in aceitas),
+        ):
+            for chave, questao in questoes.items():
+                if chave in vistos or not serve(questao):
+                    continue
+                vistos.add(chave)
+                saida.append((questao, evidencia))
+        return saida
+
+
+def nos_estudados(materia: str | None = None) -> list[str]:
+    """Os nos que eu JA ESTUDEI, para o modo revisao (decisao 20).
+
+    Vem do `servico.estudo`, e nao de uma conta nova: "estudado" tem uma
+    definicao so, e ela mora la.
+    """
+    from radar.servico import estudo
+
+    saida = []
+    for caminho, situacao in estudo.situacoes().items():
+        if not (situacao.estudado or situacao.praticado):
+            continue
+        if materia and situacao.materia != materia:
+            continue
+        saida.append(caminho)
+    return sorted(saida)
+
+
+def escopo_da_revisao(materia: str) -> object:
+    """O escopo do modo revisao: a materia, restrita aos nos que eu estudei.
+
+    Nenhum no estudado levanta `EscopoInvalido`: pedir revisao do que eu nunca
+    vi nao e revisao, e gerar a materia inteira "para nao ficar vazio" seria
+    exatamente o alargamento de escopo que a §8 proibe.
+    """
+    from radar import conteudos as arvore
+    from radar.servico import conteudos as servico_conteudos
+
+    caminhos = servico_conteudos.caminhos()
+    da_materia = arvore.resolver_escopo(caminhos, materia)
+    estudados = [c for c in nos_estudados(materia) if c != da_materia.no]
+    if not estudados:
+        raise arvore.EscopoInvalido(
+            f"Eu ainda não estudei nenhum conteúdo de {materia!r}, então não há "
+            f"o que revisar. O que conta como estudado está em "
+            f"`radar desempenho` (Análises > Meu desempenho)."
+        )
+    return arvore.Escopo(no=da_materia.no, nivel="assunto",
+                         elementos=tuple(estudados))
+
+
 def materias_para_gerar() -> list[tuple[str, int, int]]:
     """[(materia, quantas reais servem de base, quantas ja foram geradas)].
 
@@ -110,10 +217,147 @@ def _impressoes_geradas(s) -> set[str]:
     return {i for (i,) in s.execute(select(QuestaoGerada.impressao)).all()}
 
 
+def _preparar_no_escopo(escopo, modo: str, quantas: int,
+                        semente: int | None) -> dict:
+    """Os pedidos de um escopo fechado: treino e revisao.
+
+    A prioridade da base e a da §9, e ela decide tudo o que vem aqui:
+
+      1. **questao real do mesmo no** - alvo primeiro, complementar depois.
+         Cada uma vira um pedido de variacao, com a evidencia marcada;
+      2. **fonte oficial** (`config/leis.yml`), quando nao houver questao real:
+         o pedido do zero, com o dispositivo e o link;
+      3. **item do edital**, quando nao houver nem lei: o texto literal do
+         programa.
+
+    O que NAO acontece aqui: alargar o escopo para achar base. Sem questao real
+    do no, o pedido vai do zero DENTRO do mesmo no - e nunca de um no vizinho.
+    """
+    from radar import leis
+
+    reais = reais_do_escopo(escopo)
+    criar_tabelas()
+    with sessao() as s:
+        ja_usadas = _origens_ja_usadas(s)
+        ja_geradas = _impressoes_geradas(s)
+
+    novas = [(q, e) for q, e in reais if q.impressao not in ja_usadas]
+    repetidas = [(q, e) for q, e in reais if q.impressao in ja_usadas]
+    embaralhar = random.Random(semente)
+    embaralhar.shuffle(novas)
+    embaralhar.shuffle(repetidas)
+    # O alvo volta para a frente depois do embaralho: a §9 nao e sugestao.
+    ordenadas = sorted(novas + repetidas, key=lambda par: par[1] != "alvo")
+
+    pedidos: list[dict] = []
+    faltam = quantas
+    for questao, evidencia in ordenadas:
+        if faltam <= 0:
+            break
+        neste = min(motor.VARIACOES_POR_QUESTAO, faltam)
+        pedidos.append({
+            "modo": "variacao", "questao": questao, "quantas": neste,
+            "conteudo": escopo.no, "escopo": escopo,
+            "base": "questao_real", "evidencia_da_base": evidencia,
+        })
+        faltam -= neste
+
+    # Faltou questao real DENTRO do escopo para o tanto que eu pedi: a fonte
+    # oficial, e depois o item do edital. E a ordem da §9, e vale tambem quando
+    # ha UMA real e eu pedi vinte - o que nao vale e sair do escopo para achar
+    # base, que e o que a §7 veio consertar. A §9 manda registrar que estas nao
+    # tem questao real de referencia, e e o que `base` e
+    # `evidencia_da_base: nenhuma` dizem.
+    sem_base = not reais
+    if faltam > 0:
+        nomes = _nomes_do_escopo(escopo)
+        lei = leis.do_assunto(escopo.materia, nomes[-1])
+        base = "fonte_oficial" if lei else "item_do_edital"
+        exemplos = _exemplos_de_estilo(escopo)
+        while faltam > 0:
+            neste = min(motor.VARIACOES_POR_QUESTAO, faltam)
+            pedidos.append({
+                "modo": "do_zero", "materia": escopo.materia,
+                "assunto": nomes[-1], "exemplos": exemplos, "quantas": neste,
+                "conteudo": escopo.no, "escopo": escopo,
+                "base": base, "evidencia_da_base": "nenhuma", "lei": lei,
+            })
+            faltam -= neste
+
+    caracteres = 0
+    for pedido in pedidos:
+        if pedido["modo"] == "do_zero":
+            corpo = motor._montar_pedido_do_zero(
+                pedido["materia"], pedido["assunto"], pedido["exemplos"],
+                pedido["quantas"],
+            )
+            caracteres += len(motor.INSTRUCAO_DO_ZERO) + len(corpo)
+        else:
+            corpo = motor._montar_pedido_variacao(pedido["questao"],
+                                                  pedido["quantas"])
+            caracteres += len(motor.INSTRUCAO_VARIACAO) + len(corpo)
+    entrada, saida, custo = motor.estimar(
+        len(pedidos), caracteres, motor.VARIACOES_POR_QUESTAO
+    )
+    return {
+        "pedidos": pedidos,
+        "quantas": sum(p["quantas"] for p in pedidos),
+        "modo": "do_zero" if sem_base and pedidos else "variacao",
+        "modo_do_pedido": modo,
+        "escopo": escopo,
+        "sem_base": sem_base,
+        "base_disponivel": len(reais),
+        "do_alvo": sum(1 for _q, e in reais if e == "alvo"),
+        "do_complementar": sum(1 for _q, e in reais if e == "complementar"),
+        "ja_geradas": ja_geradas,
+        "entrada": entrada,
+        "saida": saida,
+        "custo": custo,
+    }
+
+
+def _nomes_do_escopo(escopo) -> list[str]:
+    from radar import conteudos as arvore
+
+    return arvore.partes(escopo.caminhos[0])
+
+
+def _exemplos_de_estilo(escopo) -> list:
+    """Questoes reais da MATERIA, so como exemplo de estilo da banca.
+
+    Elas nao sao a base da questao gerada - a base e a fonte oficial ou o item
+    do edital, e e isso que fica gravado. Servem para a IA escrever no formato
+    da FEPESE, e por isso vem da materia inteira, nao do no.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        candidatas = _reais_do_alvo(s, escopo.materia) or _reais_do_alvo(s)
+    return candidatas[: motor.EXEMPLOS_DO_ZERO]
+
+
+def modo_do_pedido(escopo, pedido: str | None = None) -> str:
+    """O modo, escolhido ou deduzido do escopo (§8).
+
+    Sem `--modo`: com assunto e TREINO, so com materia e SIMULADO. A saida
+    escreve qual foi, porque "amplo" e "especifico" nao podem se confundir.
+    """
+    from radar.models import MODOS_DE_PEDIDO
+
+    if pedido:
+        if pedido not in MODOS_DE_PEDIDO:
+            raise ValueError(
+                f"modo {pedido!r} nao existe: escolha {', '.join(MODOS_DE_PEDIDO)}"
+            )
+        return pedido
+    return "treino" if (escopo is not None and escopo.especifico) else "simulado"
+
+
 def preparar(
     materia: str | None = None,
     quantas: int = QUANTIDADE_PADRAO,
     semente: int | None = None,
+    escopo=None,
+    modo: str | None = None,
 ) -> dict:
     """Monta a lista de pedidos e estima o custo. NAO gasta nada.
 
@@ -124,9 +368,26 @@ def preparar(
     A escolha da questao de base prefere a que nunca foi variada. Variar de
     novo a mesma questao daria uma quarta versao da mesma pergunta, quando
     ainda ha pergunta que nunca virou treino nenhum.
+
+    Com `escopo` (Etapa 5), as questoes de base saem da CLASSIFICACAO e nao da
+    coluna `materia`: so as que estao dentro do escopo entram, alvo antes do
+    complementar (§9). Sem escopo, o comportamento amplo de sempre - que a §7
+    manda preservar, porque e dele que sai o simulado.
     """
     criar_tabelas()
     quantas = max(1, int(quantas))
+    escolhido = modo_do_pedido(escopo, modo)
+    if escolhido == "revisao":
+        escopo = escopo_da_revisao(materia)
+
+    # O SIMULADO e amplo por definicao (§8, modo 3): mesmo com a materia
+    # escolhida, ele vai pelo caminho de sempre - a coluna `materia` -, e nao
+    # pela classificacao. Restringir o simulado as questoes ja classificadas o
+    # deixaria menor do que ele e, e a §7 manda preservar a consulta ampla.
+    if escopo is not None and escolhido != "simulado":
+        return _preparar_no_escopo(escopo, escolhido, quantas, semente)
+    if escopo is not None:
+        materia = escopo.materia
 
     with sessao() as s:
         candidatas = _reais_do_alvo(s, materia)
@@ -189,6 +450,8 @@ def preparar(
         "pedidos": pedidos,
         "quantas": sum(p["quantas"] for p in pedidos),
         "modo": "do_zero" if sem_base and pedidos else "variacao",
+        "modo_do_pedido": escolhido,
+        "escopo": None,
         "sem_base": sem_base,
         "base_disponivel": len(candidatas),
         "ja_geradas": ja_geradas,
@@ -229,6 +492,14 @@ def gravar(questoes: list) -> int:
                 modelo=nova.modelo,
                 materia=nova.materia,
                 assunto=nova.assunto,
+                # O escopo e a base (Etapa 5). Nulos no pedido amplo e nas 50
+                # geradas antes dela: nao houve escopo, e inventar um diria
+                # que elas foram pedidas de um jeito que nao foram.
+                conteudo=getattr(nova, "conteudo", None),
+                modo_do_pedido=getattr(nova, "modo_do_pedido", None),
+                escopo=getattr(nova, "escopo", None),
+                base=getattr(nova, "base", None),
+                evidencia_da_base=getattr(nova, "evidencia_da_base", None),
                 artigo=nova.artigo,
                 enunciado=nova.enunciado,
                 alternativas=nova.alternativas,

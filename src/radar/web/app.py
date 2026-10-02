@@ -230,6 +230,27 @@ def link_de_anotar_erro(data, materia, assunto, volta: str) -> str:
     })
 
 
+def _filhos_na_tela(materia: str | None, assunto: str | None = None) -> list[str]:
+    """Os nomes que nascem direto debaixo daquele no, para o seletor da tela.
+
+    Vazio quando o pai nao foi escolhido ainda: a tela nao oferece assunto de
+    materia nenhuma, nem subassunto de assunto nenhum.
+    """
+    from radar import conteudos as arvore
+
+    if not materia:
+        return []
+    pai = materia if not assunto else arvore.SEPARADOR.join([materia, assunto])
+    caminhos = servico.conteudos.caminhos()
+    if pai not in caminhos:
+        return []
+    comeco = pai + arvore.SEPARADOR
+    return sorted(
+        c[len(comeco):] for c in caminhos
+        if c.startswith(comeco) and arvore.SEPARADOR not in c[len(comeco):]
+    )
+
+
 def opcoes_de_conteudo(raiz: str | None = None) -> list[tuple[str, str]]:
     """[(caminho, rotulo recuado)] para o seletor de conteudo (Etapa 4).
 
@@ -783,14 +804,41 @@ RECADOS_DAS_GERADAS = {
 def geradas(
     request: Request,
     materia: str = "",
+    assunto: str = "",
+    subassunto: str = "",
     quantas: int = 5,
+    modo: str = "",
     recado: str = "",
 ):
-    """A tela de gerar questao, com o custo antes do botao."""
+    """A tela de gerar questao, com o custo antes do botao.
+
+    O filtro hierarquico e o MESMO do terminal (Etapa 5): o escopo sai do
+    `radar.conteudos`, e nome que a arvore nao tem vira recado na tela, sem
+    gerar nada - a §7 proibe gerar de outra coisa.
+    """
+    from radar import conteudos as arvore
     from radar import gerador
 
     escolhida = materia.strip() or None
     quantas = quantas if 1 <= quantas <= 30 else 5
+
+    escopo = erro_do_escopo = None
+    try:
+        escopo = arvore.resolver_escopo(
+            servico.conteudos.caminhos(), escolhida,
+            assunto.strip() or None, subassunto.strip() or None,
+        )
+    except arvore.EscopoInvalido as erro:
+        erro_do_escopo = str(erro)
+
+    try:
+        plano = servico.geradas.preparar(
+            escolhida, quantas, escopo=escopo,
+            modo=modo.strip() or None,
+        )
+    except (arvore.EscopoInvalido, ValueError) as erro:
+        erro_do_escopo = erro_do_escopo or str(erro)
+        plano = servico.geradas.preparar(escolhida, quantas)
 
     real = {d.materia: d for d in servico.desempenho()}
     gerado = {d.materia: d for d in servico.desempenho_das_geradas()}
@@ -799,7 +847,15 @@ def geradas(
         request=request,
         name="geradas.html",
         context={
-            "plano": servico.geradas.preparar(escolhida, quantas),
+            "plano": plano,
+            "assunto": assunto,
+            "subassunto": subassunto,
+            "modo": modo,
+            "erro_do_escopo": erro_do_escopo,
+            # Os assuntos e subassuntos da materia escolhida, para o seletor
+            # nao oferecer nome que nao existe.
+            "assuntos": _filhos_na_tela(escolhida),
+            "subassuntos": _filhos_na_tela(escolhida, assunto.strip() or None),
             "materias": servico.geradas.materias_para_gerar(),
             "resumo": servico.geradas.contar(),
             "materia": escolhida,

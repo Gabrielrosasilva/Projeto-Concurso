@@ -834,6 +834,21 @@ def gerar(
     materia: str = typer.Option(
         None, help="So desta materia. Sem isso, de qualquer materia do cargo"
     ),
+    assunto: str = typer.Option(
+        None, help="Fecha o escopo no assunto daquela materia (modo treino)"
+    ),
+    subassunto: str = typer.Option(
+        None, help="Desce mais um nivel, dentro do assunto"
+    ),
+    elemento: list[str] = typer.Option(
+        None, "--elemento",
+        help="Um dispositivo, regra ou tipo de problema do no. Repetivel",
+    ),
+    modo: str = typer.Option(
+        None, "--modo",
+        help="treino | revisao | simulado. Sem isso: com assunto e treino, "
+             "so com materia e simulado",
+    ),
     quantas: int = typer.Option(5, help="Quantas questoes gerar"),
     teto: float = typer.Option(
         None, help="Teto de gasto em dolar. O comando para ao chegar nele"
@@ -884,12 +899,15 @@ def gerar(
     if importar:
         _importar_resposta_da_ia(Path(importar))
         return
+
+    escopo = _escopo_do_pedido(materia, assunto, subassunto, elemento)
     if pedido:
-        _salvar_pedido_da_ia(materia, quantas, macetes, explicacoes)
+        _salvar_pedido_da_ia(materia, quantas, macetes, explicacoes,
+                             escopo=escopo, modo=modo)
         return
 
     limite = gerador.TETO_PADRAO if teto is None else teto
-    plano = servico.geradas.preparar(materia, quantas)
+    plano = servico.geradas.preparar(materia, quantas, escopo=escopo, modo=modo)
 
     if not plano["pedidos"]:
         console.print(
@@ -997,8 +1015,67 @@ def gerar(
     )
 
 
+def _mostrar_o_escopo(lote: dict) -> None:
+    """O modo e o escopo na saida. A §8 pede que amplo e especifico nao se
+    confundam, e e esta linha que impede isso."""
+    primeiro = (lote.get("pedidos") or [{}])[0]
+    modo = primeiro.get("modo_do_pedido")
+    if not modo:
+        return
+    escopo = primeiro.get("escopo")
+    if escopo:
+        console.print(f"Modo [bold]{modo}[/], escopo fechado em "
+                      f"[bold]{escape(escopo)}[/]")
+        restritos = primeiro.get("escopo_dispositivos") or []
+        if restritos:
+            nomes = [d.split(" > ")[-1] for d in restritos]
+            # No modo revisao a lista NAO e de dispositivos: sao os conteudos
+            # que eu ja estudei, e chama-los de dispositivo seria mentir sobre
+            # o que o escopo tem dentro.
+            rotulo = ("So os conteudos que eu ja estudei"
+                      if modo == "revisao" else "So estes dispositivos")
+            console.print(f"[dim]{rotulo}: {escape('; '.join(nomes))}[/]")
+    else:
+        console.print(f"Modo [bold]{modo}[/]: abrangencia ampla, pelo edital e "
+                      f"pelo peso das materias. [dim]Nao e treino especifico - "
+                      f"para isso, passe --assunto.[/]")
+
+    bases = {}
+    for p in lote.get("pedidos") or []:
+        chave = (p.get("base"), p.get("evidencia_da_base"))
+        bases[chave] = bases.get(chave, 0) + p.get("quantas", 0)
+    for (base, evidencia), quantas in sorted(bases.items(), key=lambda i: str(i[0])):
+        if not base:
+            continue
+        de_onde = (f"{base} ({evidencia})" if evidencia and evidencia != "nenhuma"
+                   else f"{base}, sem questao real de referencia")
+        console.print(f"[dim]  {quantas} questao(oes) de {de_onde}[/]")
+
+
+def _escopo_do_pedido(materia, assunto, subassunto, elemento):
+    """O escopo, conferido contra a arvore. Nome que nao existe PARA o comando.
+
+    A §7 e explicita: filtro que nao existe no banco tem de me avisar e sugerir
+    os nomes existentes, "em vez de gerar questoes de outra coisa". Por isso a
+    saida e um erro com as sugestoes, e nunca um escopo mais largo.
+    """
+    from radar import conteudos as arvore
+
+    try:
+        return arvore.resolver_escopo(
+            servico.conteudos.caminhos(), materia, assunto, subassunto,
+            list(elemento or []),
+        )
+    except arvore.EscopoInvalido as erro:
+        console.print(f"[red]{escape(str(erro))}[/]")
+        console.print("[dim]Nada foi gerado: eu nao alargo o escopo sozinho. "
+                      "Veja a arvore com [bold]radar conteudos[/].[/]")
+        raise typer.Exit(code=1) from erro
+
+
 def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
-                         explicacoes: bool = False) -> None:
+                         explicacoes: bool = False, escopo=None,
+                         modo: str | None = None) -> None:
     """O `--pedido`: todos os pedidos num arquivo, sem chamar a API."""
     if explicacoes:
         lote = servico.manual.pedido_de_explicacoes()
@@ -1011,7 +1088,16 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
     elif macetes:
         lote = servico.manual.pedido_de_macetes(materia)
     else:
-        lote = servico.manual.pedido_de_questoes(materia, quantas)
+        try:
+            lote = servico.manual.pedido_de_questoes(
+                materia, quantas, escopo=escopo, modo=modo)
+        except Exception as erro:
+            from radar.conteudos import EscopoInvalido
+
+            if not isinstance(erro, (EscopoInvalido, ValueError)):
+                raise
+            console.print(f"[red]{escape(str(erro))}[/]")
+            raise typer.Exit(code=1) from erro
 
     if not lote["pedidos"]:
         console.print(
@@ -1026,6 +1112,7 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
     console.print(
         f"[green]{len(lote['pedidos'])} pedido(s) de {o_que}[/] em {destino}"
     )
+    _mostrar_o_escopo(lote)
     console.print(f"[dim]Lote {lote['lote']}. Nada foi gasto.[/]")
     console.print(
         "Responda pelo Claude Code: peca para ele ler o arquivo e seguir o "

@@ -101,6 +101,29 @@ ELEGIBILIDADES = ("elegivel", "inelegivel", "a_confirmar")
 # nenhuma questao no acervo.
 MODOS_DE_GERACAO = ("variacao", "do_zero")
 
+# Os tres modos de PEDIDO da secao 8 do novo.md (Etapa 5). Eixo diferente do
+# `MODOS_DE_GERACAO`, que diz como a questao foi ESCRITA (variando uma real ou
+# do zero): aqui e para que ela foi pedida.
+#
+#   treino   - escopo fechado: materia > assunto [> subassunto [> elemento]].
+#              Nada fora dele entra;
+#   revisao  - so os nos que eu JA ESTUDEI (a definicao esta na decisao 20);
+#   simulado - a abrangencia ampla de sempre, pelo edital e pelo peso.
+MODOS_DE_PEDIDO = ("treino", "revisao", "simulado")
+
+# Em que a questao gerada se APOIA (secao 9: a regra de ouro). A prioridade e
+# esta ordem: questao real do mesmo no primeiro, fonte oficial depois, e o item
+# do edital por ultimo.
+#
+# `sem_referencia` e o caso que a §9 manda registrar com todas as letras: nao
+# havia questao real relacionada. O sistema NUNCA inventa um vinculo com uma
+# questao real so para preencher o campo.
+BASES_DA_GERADA = ("questao_real", "fonte_oficial", "item_do_edital")
+
+# A base era do concurso-alvo ou do acervo complementar? "nenhuma" quando nao
+# houve questao real embaixo.
+EVIDENCIAS_DA_BASE = ("alvo", "complementar", "nenhuma")
+
 # O que pode acontecer com um concurso e virar linha do tempo. O vocabulario e
 # fechado pelo mesmo motivo dos outros: string solta pelo codigo vira erro de
 # digitacao silencioso.
@@ -414,6 +437,33 @@ class QuestaoGerada(Base):
     #: O no da arvore de conteudos, pelo caminho. Opcional: a `materia` e o
     #: `assunto` de texto continuam onde estao.
     conteudo: Mapped[str | None] = mapped_column(String(TAMANHO_DO_CAMINHO), nullable=True)
+
+    # --- o escopo e a base do pedido (Etapa 5) -----------------------------
+    #
+    # Os quatro campos abaixo respondem "de onde esta questao saiu", que e o
+    # que a §9 chama de regra de ouro. Nulos nas 50 geradas antes desta etapa:
+    # elas nasceram de um pedido que nao tinha escopo nenhum, e inventar um
+    # agora seria dizer que elas foram pedidas de um jeito que nao foram.
+
+    #: treino | revisao | simulado, de MODOS_DE_PEDIDO.
+    modo_do_pedido: Mapped[str | None] = mapped_column(
+        String(10), index=True, nullable=True
+    )
+
+    #: O escopo que o pedido fechou, pelo caminho do no. E contra ele que a
+    #: importacao recusa questao de fora.
+    escopo: Mapped[str | None] = mapped_column(
+        String(TAMANHO_DO_CAMINHO), nullable=True
+    )
+
+    #: questao_real | fonte_oficial | item_do_edital, de BASES_DA_GERADA.
+    base: Mapped[str | None] = mapped_column(String(20), index=True, nullable=True)
+
+    #: alvo | complementar | nenhuma, de EVIDENCIAS_DA_BASE. "nenhuma" e o
+    #: registro explicito que a §9 pede: nao havia questao real relacionada.
+    evidencia_da_base: Mapped[str | None] = mapped_column(
+        String(14), index=True, nullable=True
+    )
 
     enunciado: Mapped[str] = mapped_column(Text)
     alternativas: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)

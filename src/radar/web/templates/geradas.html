@@ -86,12 +86,70 @@
             {% endfor %}
           </select>
         </label>
+        {# O filtro hierarquico (Etapa 5). Um nivel por vez, e cada seletor so
+           oferece o que existe debaixo do de cima: escolher a materia e clicar
+           em "Ver o custo" traz os assuntos dela. Sem JavaScript, como o resto
+           da tela. Pedir "Lei de Execucao Penal" sozinho e amplo demais - e o
+           que a secao 7 do pedido veio consertar. #}
+        {% if assuntos %}
+          <label class="ds-campo">
+            Assunto <span class="dica">(fecha o escopo: modo treino)</span>
+            <select name="assunto">
+              <option value="">a matéria inteira (simulado)</option>
+              {% for nome in assuntos %}
+                <option value="{{ nome }}" {{ 'selected' if nome == assunto }}>{{ nome }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        {% endif %}
+        {% if subassuntos %}
+          <label class="ds-campo">
+            Subassunto
+            <select name="subassunto">
+              <option value="">todo o assunto</option>
+              {% for nome in subassuntos %}
+                <option value="{{ nome }}" {{ 'selected' if nome == subassunto }}>{{ nome }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        {% endif %}
         <label class="ds-campo">
           Quantas questões
           <input type="number" name="quantas" value="{{ quantas }}" min="1" max="30">
         </label>
         <button class="ds-botao ds-botao--secundario" type="submit">Ver o custo disto</button>
       </form>
+
+      {% if erro_do_escopo %}
+        <p class="dica" role="alert">
+          <b>Não gerei nada:</b> {{ erro_do_escopo }}
+          Eu não alargo o escopo sozinho — a árvore está em
+          <a href="/analises/incidencia">Análises &rsaquo; Incidência</a>.
+        </p>
+      {% endif %}
+
+      {# O modo e o escopo, escritos: a §8 pede que a seleção ampla não se
+         confunda com treino específico. #}
+      <p class="dica">
+        Modo <b>{{ plano.modo_do_pedido or 'simulado' }}</b>:
+        {%- if plano.escopo %}
+          escopo fechado em <b>{{ plano.escopo.no }}</b>. Nada de fora dele
+          entra — a importação recusa e diz quantas recusou.
+        {%- else %}
+          abrangência ampla, pelo edital e pelo peso das matérias. Não é treino
+          específico; para isso, escolha um assunto.
+        {%- endif %}
+      </p>
+      {% if plano.escopo %}
+        <p class="dica">
+          Base: {{ plano.do_alvo or 0 }} questão(ões) real(is) do
+          <b>concurso-alvo</b> e {{ plano.do_complementar or 0 }} do
+          <b>acervo complementar</b> dentro deste conteúdo
+          {%- if plano.base_disponivel == 0 %} — nenhuma: as questões sairão da
+          fonte oficial ou do item do edital, e ficarão marcadas como
+          <b>sem questão real de referência</b>{% endif %}.
+        </p>
+      {% endif %}
 
       <p class="custo">
         {{ selo('tendencia', 'Estimativa') }}
@@ -115,6 +173,8 @@
 
       <form method="post" action="/geradas/gerar">
         <input type="hidden" name="materia" value="{{ materia or '' }}">
+        <input type="hidden" name="assunto" value="{{ assunto or '' }}">
+        <input type="hidden" name="subassunto" value="{{ subassunto or '' }}">
         <input type="hidden" name="quantas" value="{{ quantas }}">
         <button class="ds-botao ds-botao--ia" type="submit">
           Gerar e treinar — gasta US$ {{ '%.2f'|format(plano.custo) }}

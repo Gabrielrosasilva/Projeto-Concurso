@@ -2789,3 +2789,82 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     (`#faixa-pos22-1`, que e onde a tela volta depois de eu anotar uma faixa), o
     bloco daquela faixa fica aberto e nao e recolhido - recolher justo o que eu
     acabei de anotar esconderia a resposta do meu proprio clique.
+
+## Etapa 5 — o filtro hierarquico, os tres modos e a base da gerada (02/10/2026)
+
+31. **o escopo e um caminho fechado da arvore**, e mora no modulo puro
+    (`radar/conteudos.resolver_escopo`): materia > assunto > subassunto >
+    elemento. Dois nomes em portugues, `--assunto`, `--subassunto` e
+    `--elemento` (repetivel), no lugar do `--artigos "1,2,3"` que a §7
+    sugeria - a propria §7 abre essa porta ("nao precisa usar exatamente esses
+    nomes"), e `--elemento` serve tambem para regra gramatical e tipo de
+    problema, que a §14 pede. **O nivel de baixo exige o de cima**: subassunto
+    sem assunto nao fecha escopo, porque duas materias podem ter subassunto de
+    nome igual;
+
+32. **nome que a arvore nao tem PARA o comando**, com ate 5 sugestoes
+    (`difflib`, biblioteca padrao) e um corte de semelhanca de 0,5: abaixo
+    disso ele lista os que existem em vez de sugerir qualquer coisa. **Nada e
+    aproximado e nada e alargado**: nome errado nunca vira o nome mais
+    parecido. E a §7 ao pe da letra ("avisar e sugerir, em vez de gerar
+    questoes de outra coisa");
+
+33. **o simulado continua amplo, inclusive com a materia escolhida.** So
+    materia nao e escopo especifico: o pedido vai pela coluna `materia` como
+    sempre, e nao pela classificacao. Motivo: restringir o simulado as questoes
+    ja classificadas o deixaria menor do que ele e, e a §7 manda preservar a
+    consulta ampla. Sem `--modo`, **com assunto e treino, so com materia e
+    simulado**, e a saida escreve qual foi;
+
+34. **o modo revisao usa o "estudado" da Etapa 4**, e nao uma conta nova (a
+    definicao esta na decisao 20). Ele monta um escopo da materia restrito aos
+    nos estudados. **Sem nada estudado, ele PARA** em vez de gerar a materia
+    inteira: alargar o escopo "para nao ficar vazio" e exatamente o que a §8
+    proibe;
+
+35. **a prioridade da base da §9 vale tambem para completar o pedido.** Pedi 20
+    e o no tem 1 questao real: 3 variacoes dela, e as 17 restantes do zero
+    DENTRO do mesmo no, pela fonte oficial do `config/leis.yml` ou pelo item do
+    edital. O que nao se faz e sair do escopo para achar base. As do zero saem
+    marcadas `evidencia_da_base: nenhuma`, que e o registro explicito que a §9
+    pede - **o sistema nunca inventa vinculo com questao real**;
+
+36. **a garantia da §8 e a validacao do que a IA DECLARA**, e nao a confianca
+    nela. O pedido exige que cada questao escreva o `conteudo` dela, e a
+    importacao recusa (contando na saida): conteudo fora do escopo, artigo que
+    nao e nenhum dos dispositivos pedidos, vinculo com questao real que nao
+    estava no pedido, e `do_zero` sem a marca. A leitura do TEXTO continua
+    minha, no treino, com o botao "essa questao esta errada";
+
+37. **o artigo bate pelo NUMERO, nao pelo texto**: "LEP, art. 112" e "art. 112
+    da Lei 7.210/1984" sao o mesmo dispositivo. Elemento que nao e artigo
+    (regra gramatical, tipo de problema) nao passa por essa conferencia - o no
+    declarado ja garantiu o escopo;
+
+38. **`modo_do_pedido` e coluna nova, e `modo` fica como esta.** O `modo` da
+    questao gerada ja quer dizer "variacao ou do zero" - como ela foi ESCRITA.
+    O modo do pedido e outro eixo: para que ela foi pedida. Juntar os dois num
+    campo seria o duplo sentido que a Etapa 4 veio consertar em outro canto. O
+    **dispositivo** reusa a coluna `artigo`, que ja existia e e exatamente
+    isso;
+
+39. **os campos novos ficam NULOS nas 50 geradas antigas** (migracao v4, com
+    copia antes). Elas nasceram de um pedido que nao tinha escopo nenhum, e
+    preencher agora diria que foram pedidas de um jeito que nao foram.
+
+## Achado da Etapa 5: o JSON das geradas estava vazio (02/10/2026)
+
+40. **o `data/questoes_geradas.json` versionado estava `[]`** desde o commit da
+    Etapa 2 (`904f1b7`), enquanto o banco tinha as 50. O export daquela etapa
+    rodou contra um banco temporario e sobrescreveu o arquivo - o mesmo
+    tropeco que eu repeti nesta etapa e peguei na hora.
+
+    **Por que importa:** o arquivo e o registro, e o banco e reconstruivel A
+    PARTIR dele. Com o arquivo vazio, refazer o banco perderia as 50 - e o §23
+    e explicito: nenhum dado antigo pode ter sido perdido. Nada foi perdido de
+    fato (o banco as tinha), mas o registro versionado estava.
+
+    **Consertado nesta etapa**, exportando do banco real: as 50 estao no
+    arquivo (30 `do_zero`, 20 `variacao`), e um teste novo
+    (`test_o_json_real_das_geradas_nao_esta_vazio`) nao deixa isso voltar a
+    acontecer calado.

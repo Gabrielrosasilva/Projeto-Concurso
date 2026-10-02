@@ -1393,6 +1393,58 @@ radar gerar --pedido --explicacoes           # explicacao de cada questao que er
 radar gerar --importar data/resposta_ia.json # le a resposta, confere e grava
 ```
 
+#### O filtro hierarquico e os tres modos (Etapa 5)
+
+Pedir so a materia e amplo demais: "Lei de Execucao Penal" tem dezenas de
+assuntos, e eu podia receber questao de conteudo que ainda nem estudei. O
+escopo fecha ate onde eu quiser, e **nada de fora dele entra**:
+
+```bash
+radar gerar --pedido --quantas 20   --materia "Direito Penal"   --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade"   --subassunto "Abolitio criminis" --elemento "CP, art. 2º"
+
+radar gerar --pedido --modo revisao --materia "Lingua Portuguesa" --quantas 20
+radar gerar --pedido --modo simulado --materia "Direito Penal" --quantas 20
+```
+
+**Os tres modos** (`--modo`), e o que cada um faz:
+
+| Modo | O que entra |
+|---|---|
+| `treino` | so o escopo fechado: materia > assunto [> subassunto [> elemento]] |
+| `revisao` | so os conteudos que eu JA ESTUDEI (`radar desempenho`) |
+| `simulado` | a abrangencia ampla de sempre, pelo edital e pelo peso |
+
+Sem `--modo`: **com assunto e treino, so com materia e simulado**, e a saida
+escreve qual foi - amplo e especifico nao podem se confundir.
+
+**Nome que a arvore nao tem para o comando**, com ate cinco sugestoes, e nao
+gera nada:
+
+```
+$ radar gerar --pedido --materia "Direito Penal" --assunto "Aplicacao da Lei Penal"
+O assunto 'Aplicacao da Lei Penal' nao existe em 'Direito Penal'.
+Voce quis dizer: Imputabilidade penal?
+Nada foi gerado: eu nao alargo o escopo sozinho.
+```
+
+**A base de cada questao fica gravada** (a regra de ouro da secao 9), nesta
+ordem de prioridade: questao real do mesmo no - **alvo antes do complementar** -,
+depois a fonte oficial do `config/leis.yml`, e por fim o item do edital. Quando
+nao ha questao real, a questao fica marcada com **"sem questao real de
+referencia"**: o sistema nunca inventa um vinculo para preencher o campo.
+
+**A garantia e a validacao do que a IA declara.** Cada questao da resposta tem
+de dizer o `conteudo` dela, e a importacao recusa, contando na saida:
+
+- conteudo declarado fora do escopo pedido;
+- com dispositivo pedido, artigo citado que nao e nenhum deles;
+- vinculo com questao real que nao estava no pedido;
+- `do_zero` sem a marca de "sem questao real de referencia".
+
+A leitura do TEXTO continua sendo minha, no treino, com o botao "essa questao
+esta errada" que ja existe. O mesmo filtro esta na tela, em **Estudar > Gerar
+questoes**.
+
 O `--pedido` nao chama a API. Ele escreve os mesmos pedidos que o `--valendo`
 mandaria, com a instrucao, o campo `como_responder` e o `formato_da_resposta`
 dentro do arquivo. Eu abro o Claude Code no VS Code, peco para ele ler

@@ -191,3 +191,166 @@ def achar(caminhos: list[str], texto: str | None, pai: str | None = None) -> str
         if mesmo_pai and normalizar(nomes[-1]) == alvo:
             return candidato
     return None
+
+
+# --- o escopo de um pedido de geracao (Etapa 5) ---------------------------------
+#
+# A secao 7 do pedido: "Lei de Execucao Penal" sozinho e amplo demais, e pode
+# trazer questao de conteudo que eu nem estudei. O escopo e o caminho fechado
+# materia > assunto > subassunto > elemento, e tudo o que for gerado tem de
+# estar DENTRO dele.
+#
+# Duas regras que mandam aqui:
+#
+#   * **nada e aproximado.** Nome que nao existe na arvore nao vira o nome mais
+#     parecido: o pedido PARA e devolve as sugestoes, para eu escolher. Alargar
+#     o escopo sozinho e o defeito que esta etapa veio consertar;
+#   * **o nivel de baixo exige o de cima.** Pedir subassunto sem assunto nao e
+#     um escopo: e uma busca pelo nome, e duas materias podem ter subassunto de
+#     nome igual.
+
+#: Quantos nomes parecidos sugerir quando o pedido erra o nome. Cinco e o que
+#: cabe numa linha de terminal sem virar lista para estudar.
+QUANTAS_SUGESTOES = 5
+
+#: Abaixo desta semelhanca o nome nem e sugerido: sugerir qualquer coisa e pior
+#: que dizer "nao achei", porque convida a aceitar o que nao e.
+SEMELHANCA_MINIMA = 0.5
+
+
+class EscopoInvalido(ValueError):
+    """Um nome que a arvore nao tem. A mensagem traz as sugestoes."""
+
+    def __init__(self, mensagem: str, sugestoes: list[str] | None = None):
+        super().__init__(mensagem)
+        self.sugestoes = sugestoes or []
+
+
+@dataclass(frozen=True)
+class Escopo:
+    """O escopo fechado de um pedido: o no mais fundo, e os elementos dele.
+
+    `elementos` so e preenchido quando eu pedi elemento explicitamente. Vazio,
+    o escopo e o no e TUDO abaixo dele.
+    """
+
+    no: str
+    nivel: str
+    elementos: tuple = ()
+
+    @property
+    def materia(self) -> str:
+        return partes(self.no)[0]
+
+    @property
+    def caminhos(self) -> tuple:
+        """Os caminhos que o pedido cobre: os elementos, ou o no."""
+        return self.elementos or (self.no,)
+
+    @property
+    def especifico(self) -> bool:
+        """Desceu do nivel da materia? E o que separa treino de simulado."""
+        return self.nivel != NIVEIS[0]
+
+    def dentro(self, caminho: str | None) -> bool:
+        """Aquele no esta dentro deste escopo?
+
+        Com elemento pedido, so os elementos valem - e os nos abaixo deles, se
+        um dia houver. Sem elemento, vale o no e tudo abaixo.
+        """
+        if not caminho:
+            return False
+        return any(caminho == alvo or caminho.startswith(alvo + SEPARADOR)
+                   for alvo in self.caminhos)
+
+    def como_texto(self) -> str:
+        if not self.elementos:
+            return self.no
+        nomes = ", ".join(partes(e)[-1] for e in self.elementos)
+        return f"{self.no} ({nomes})"
+
+
+def _parecidos(procurado: str, candidatos: list[str]) -> list[str]:
+    """Os nomes mais parecidos, do mais para o menos. Vazio se nenhum serve."""
+    import difflib
+
+    por_nome = {}
+    for caminho in candidatos:
+        por_nome.setdefault(partes(caminho)[-1], caminho)
+    achados = difflib.get_close_matches(
+        procurado or "", list(por_nome), n=QUANTAS_SUGESTOES, cutoff=SEMELHANCA_MINIMA
+    )
+    return [por_nome[nome] for nome in achados]
+
+
+def _filhos(caminhos: list[str], pai: str | None) -> list[str]:
+    """Os caminhos que nascem direto debaixo de `pai`."""
+    if pai is None:
+        return [c for c in caminhos if SEPARADOR not in c]
+    comeco = pai + SEPARADOR
+    return [c for c in caminhos
+            if c.startswith(comeco) and SEPARADOR not in c[len(comeco):]]
+
+
+def _descer(caminhos: list[str], pai: str | None, nome: str, rotulo: str) -> str:
+    """O filho de `pai` chamado `nome`. Erra em voz alta, com sugestoes."""
+    achado = achar(caminhos, nome, pai=pai)
+    if achado:
+        return achado
+
+    irmaos = _filhos(caminhos, pai)
+    sugestoes = _parecidos(nome, irmaos)
+    onde = f" em {pai!r}" if pai else ""
+    if not irmaos:
+        recado = (f"{rotulo} {nome!r} não existe{onde}, e {pai!r} não tem "
+                  f"nenhum nível abaixo dele.")
+    elif sugestoes:
+        recado = (f"{rotulo} {nome!r} não existe{onde}. "
+                  f"Você quis dizer: {'; '.join(partes(s)[-1] for s in sugestoes)}?")
+    else:
+        recado = (f"{rotulo} {nome!r} não existe{onde}. "
+                  f"Os que existem: {'; '.join(partes(i)[-1] for i in irmaos)}.")
+    raise EscopoInvalido(recado, sugestoes)
+
+
+def resolver_escopo(
+    caminhos: list[str],
+    materia: str | None = None,
+    assunto: str | None = None,
+    subassunto: str | None = None,
+    elementos: list[str] | None = None,
+) -> Escopo | None:
+    """O escopo de um pedido. None quando nao pedi nada (vale o edital inteiro).
+
+    Cada nivel e conferido DENTRO do de cima, e um nome que a arvore nao tem
+    para o pedido com sugestoes - nunca viram o nome mais parecido.
+    """
+    elementos = [e for e in (elementos or []) if (e or "").strip()]
+    if not materia:
+        if assunto or subassunto or elementos:
+            raise EscopoInvalido(
+                "Sem a matéria eu não sei onde procurar o assunto: "
+                "diga a matéria também."
+            )
+        return None
+
+    no = _descer(caminhos, None, materia, "A matéria")
+    nivel = NIVEIS[0]
+    if assunto:
+        no = _descer(caminhos, no, assunto, "O assunto")
+        nivel = NIVEIS[1]
+    elif subassunto:
+        raise EscopoInvalido(
+            "Subassunto sem assunto não fecha um escopo: duas matérias podem "
+            "ter subassunto de mesmo nome. Diga o assunto também."
+        )
+    if subassunto:
+        no = _descer(caminhos, no, subassunto, "O subassunto")
+        nivel = NIVEIS[2]
+
+    escolhidos = []
+    for nome in elementos:
+        escolhidos.append(_descer(caminhos, no, nome, "O elemento"))
+    if escolhidos:
+        nivel = NIVEIS[3]
+    return Escopo(no=no, nivel=nivel, elementos=tuple(escolhidos))

@@ -238,9 +238,12 @@ def _formato(tipo: str) -> dict:
         return {"lote": "<o lote deste arquivo>",
                 "respostas": [{"id": "e1", "explicacao": item}]}
     if tipo == "questoes":
+        # `conteudo` so e exigido no pedido com escopo (Etapa 5), e esta no
+        # formato sempre: mostrar o campo e o que faz a resposta vir com ele.
         item = {"enunciado": "...", "alternativas": {
             "a": "...", "b": "...", "c": "...", "d": "...", "e": "..."},
-            "resposta": "c", "artigo": "art. 41, XV, da Lei 7.210/1984"}
+            "resposta": "c", "artigo": "art. 41, XV, da Lei 7.210/1984",
+            "conteudo": "<copie o CONTEUDO do pedido, quando houver>"}
         return {"lote": "<o lote deste arquivo>",
                 "respostas": [{"id": "p1", "questoes": [item]}]}
     item = {"assunto": "...", "regra": "...", "fonte": "art. 112 da Lei 7.210/1984",
@@ -263,17 +266,60 @@ def _novo_lote(tipo: str, pedidos: list[dict]) -> dict:
 
 # --- montar o pedido --------------------------------------------------------
 
+#: O que entra no pedido quando ele tem ESCOPO (Etapa 5, secoes 7 a 9). A
+#: ordem de nao sair do escopo e a parte que importa, e ela vem com a exigencia
+#: de cada questao DECLARAR o no e o dispositivo: e declarando que a importacao
+#: pode recusar o que saiu, e e isso que faz a garantia ser verificavel em vez
+#: de confianca.
+INSTRUCAO_DO_ESCOPO = """
+ESCOPO FECHADO - a regra mais importante deste pedido:
+
+- toda questao tem de estar DENTRO do conteudo indicado em CONTEUDO, abaixo.
+  Nao escreva questao de outro assunto da mesma materia, nem de um assunto
+  vizinho, nem de um tema mais amplo que contenha este;
+- se o escopo listar DISPOSITIVOS, cada questao tem de cobrar um deles;
+- em cada questao, responda tambem:
+    "conteudo": o caminho do conteudo, copiado igual ao que esta em CONTEUDO;
+    "artigo":   o dispositivo em que ela se apoia ("LEP, art. 112"), ou "" se
+                voce nao tiver certeza - artigo inventado e pior que nenhum;
+- se voce nao conseguir escrever a quantidade pedida SEM sair do escopo,
+  escreva menos questoes. Faltar questao e um problema pequeno; questao de
+  outro assunto estraga o treino, porque eu vou estudar achando que e isto.
+"""
+
+
+def _instrucao_com_escopo(instrucao: str, escopo, lei=None) -> str:
+    """A instrucao original mais o escopo, o dispositivo e o link oficial."""
+    linhas = [instrucao, INSTRUCAO_DO_ESCOPO, f"CONTEUDO: {escopo.no}"]
+    if escopo.elementos:
+        from radar import conteudos as arvore
+
+        nomes = [arvore.partes(e)[-1] for e in escopo.elementos]
+        linhas.append(f"DISPOSITIVOS: {'; '.join(nomes)}")
+    if lei is not None:
+        linhas.append(f"FONTE OFICIAL: {lei.titulo}")
+        if lei.url:
+            linhas.append(f"TEXTO DA LEI: {lei.url}")
+        if lei.nota:
+            # A ressalva do config/leis.yml (lei revogada, data divergente): se
+            # ela existe, a IA tem de saber antes de escrever a questao.
+            linhas.append(f"ATENCAO: {lei.nota}")
+    return "\n".join(linhas)
+
+
 def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
-                       semente: int | None = None) -> dict:
+                       semente: int | None = None, escopo=None,
+                       modo: str | None = None) -> dict:
     """Os mesmos pedidos que o `--valendo` mandaria a API, todos num lote.
 
     Sai do mesmo `geradas.preparar`: a escolha da questao de base, o modo do
     zero e a divisao em chamadas sao os de sempre. O que muda e so quem
     responde.
     """
-    plano = geradas.preparar(materia, quantas, semente)
+    plano = geradas.preparar(materia, quantas, semente, escopo=escopo, modo=modo)
     pedidos = []
     for numero, pedido in enumerate(plano["pedidos"], start=1):
+        se_escopo = pedido.get("escopo")
         if pedido["modo"] == "do_zero":
             instrucao = gerador.INSTRUCAO_DO_ZERO
             corpo = gerador._montar_pedido_do_zero(
@@ -289,9 +335,21 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
             base = {"materia": questao.materia,
                     "assunto": getattr(questao, "assunto", None),
                     "origem_impressao": questao.impressao}
+        if se_escopo is not None:
+            instrucao = _instrucao_com_escopo(instrucao, se_escopo,
+                                              pedido.get("lei"))
         pedidos.append({
             "id": f"p{numero}", "modo": pedido["modo"],
             "quantas": pedido["quantas"], **base,
+            # O escopo viaja NO PEDIDO, pelo caminho de nomes: e contra ele que
+            # a importacao recusa questao de fora, e o arquivo do pedido e o
+            # que fica para eu auditar depois.
+            "modo_do_pedido": plano["modo_do_pedido"],
+            "conteudo": pedido.get("conteudo"),
+            "escopo": se_escopo.no if se_escopo is not None else None,
+            "escopo_dispositivos": list(se_escopo.elementos) if se_escopo is not None else [],
+            "base": pedido.get("base"),
+            "evidencia_da_base": pedido.get("evidencia_da_base"),
             "instrucao": instrucao, "pedido": corpo,
         })
     return _novo_lote("questoes", pedidos)
@@ -596,6 +654,83 @@ def _ler_json(texto: str) -> dict:
         raise ValueError(f"a resposta nao e um JSON valido ({erro})") from erro
 
 
+def _fora_do_escopo(pedido: dict, item: dict, conferida: dict) -> str | None:
+    """Por que esta questao nao entra. None quando ela esta dentro.
+
+    Quatro recusas, todas do roteiro da Etapa 5:
+
+      * **o no declarado nao esta dentro do escopo pedido.** E a recusa
+        principal: ela e o que faz a §8 ("nenhuma questao fora do escopo") ser
+        verificavel, e nao uma promessa;
+      * **com dispositivo pedido, o artigo citado tem de bater.** Pedi o art.
+        119 e a questao cita o 112: nao serve, ainda que o assunto seja o mesmo;
+      * **`origem_impressao` so se a questao real estava no pedido** - a §9
+        proibe inventar vinculo com questao real;
+      * **`do_zero` so com a marca "sem questao real de referencia"**, que aqui
+        e `evidencia_da_base: nenhuma`.
+
+    Pedido sem escopo (o simulado amplo de sempre) nao passa por nada disto: ele
+    nao fechou escopo nenhum, e inventar um agora mudaria o que eu pedi.
+    """
+    from radar import conteudos as arvore
+
+    escopo = pedido.get("escopo")
+
+    # As duas recusas que valem com escopo ou sem ele: elas sao sobre a BASE.
+    if pedido["modo"] == "variacao" and not pedido.get("origem_impressao"):
+        return "variacao sem a questao real de base no pedido"
+    if pedido["modo"] == "do_zero":
+        if pedido.get("origem_impressao"):
+            return "do_zero com vinculo a questao real, que o pedido nao tinha"
+        if escopo and pedido.get("evidencia_da_base") != "nenhuma":
+            return ("do_zero sem a marca \"sem questao real de referencia\" "
+                    "(evidencia_da_base)")
+
+    if not escopo:
+        return None
+
+    declarado = " ".join((item.get("conteudo") or "").split())
+    if not declarado:
+        return "a questao nao declarou o conteudo dela"
+    dentro = (declarado == escopo
+              or declarado.startswith(escopo + arvore.SEPARADOR))
+    if not dentro:
+        return f"o conteudo declarado {declarado!r} esta fora de {escopo!r}"
+
+    dispositivos = pedido.get("escopo_dispositivos") or []
+    if dispositivos:
+        citado = normalizar(conferida.get("artigo") or "")
+        nomes = [arvore.partes(d)[-1] for d in dispositivos]
+        # Bate quando o numero do dispositivo aparece no artigo citado: a IA
+        # escreve "LEP, art. 119" ou "art. 119 da Lei 7.210/1984", e as duas
+        # formas sao a mesma coisa. O que nao vale e citar outro artigo.
+        if not any(_mesmo_dispositivo(nome, citado) for nome in nomes):
+            return (f"o artigo citado ({conferida.get('artigo') or 'nenhum'}) "
+                    f"nao e nenhum dos pedidos: {'; '.join(nomes)}")
+    return None
+
+
+#: "LEP, art. 119" -> "119"; "CP, art. 2º" -> "2". E o numero que identifica o
+#: dispositivo: o resto e como cada um escreve o nome da lei.
+_NUMERO_DO_ARTIGO = re.compile(r"art\.?\s*([0-9]+)\s*(?:-\s*([a-z]))?", re.I)
+
+
+def _mesmo_dispositivo(pedido: str, citado: str) -> bool:
+    """O artigo citado e o pedido? Compara pelo NUMERO, nao pelo texto."""
+    do_pedido = _NUMERO_DO_ARTIGO.search(normalizar(pedido))
+    if not do_pedido:
+        # Elemento que nao e artigo (regra gramatical, tipo de problema): a
+        # conferencia pelo numero nao se aplica, e o no declarado ja garantiu
+        # o escopo.
+        return True
+    numero = do_pedido.group(1)
+    letra = do_pedido.group(2)
+    for achado in _NUMERO_DO_ARTIGO.finditer(citado):
+        if achado.group(1) == numero and (achado.group(2) or None) == (letra or None):
+            return True
+    return False
+
+
 def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
     por_id = {p["id"]: p for p in lote["pedidos"]}
     aceitas, recusas = [], []
@@ -618,11 +753,27 @@ def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
             if not fonte_serve(conferida["artigo"], pedido.get("materia")):
                 recusas.append(f"{onde}: sem o artigo da lei em que se apoia")
                 continue
+
+            # As recusas de ESCOPO (Etapa 5). A garantia da §8 e esta: a IA
+            # DECLARA o no e o dispositivo, e aqui se confere o que ela
+            # declarou. Nada e corrigido para caber - o que saiu do escopo e
+            # recusado e contado na saida.
+            fora = _fora_do_escopo(pedido, item, conferida)
+            if fora:
+                recusas.append(f"{onde}: {fora}")
+                continue
+
             aceitas.append(gerador.QuestaoNova(
                 modo=pedido["modo"], materia=pedido.get("materia"),
                 assunto=pedido.get("assunto"),
                 origem_impressao=pedido.get("origem_impressao"),
-                modelo=modelo, **conferida,
+                modelo=modelo,
+                modo_do_pedido=pedido.get("modo_do_pedido"),
+                conteudo=item.get("conteudo") or pedido.get("conteudo"),
+                escopo=pedido.get("escopo"),
+                base=pedido.get("base"),
+                evidencia_da_base=pedido.get("evidencia_da_base"),
+                **conferida,
             ))
 
     # Repetida dentro da resposta, ou ja gerada antes: nao entra duas vezes.

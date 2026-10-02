@@ -16,7 +16,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 7 | 3A — Classificação do alvo e incidência | ✅ |
 | 8 | 3B — Acervo complementar FEPESE | 🟡 acervo e 3 lotes classificados; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
-| 10 | 5 — Geração de questões | ⬜ |
+| 10 | 5 — Geração de questões | ✅ |
 | 11 | 6B — Cronograma operacional | ⬜ |
 | 12 | 7A — Selos e marcação de IA | ⬜ |
 | 13 | 7B — As 6 telas no design system | ⬜ |
@@ -1247,3 +1247,162 @@ sai de fininho onde não há bloco nenhum.
 | As telas que leem a aba Hoje + `test_design` | 121 passed, 1 failed — `test_tela_hoje::test_o_unico_javascript_e_o_do_cronometro`, que afirmava um `<script>` só. Era a afirmação que esta mudança revoga: o teste foi reescrito para exigir os dois arquivos e nada inline |
 | `test_tela_hoje.py` + `test_blocos_dobraveis.py` | 58 passed |
 | Suíte inteira, PC | **2132 passed** (2124 de antes + 8 novos), 20 min |
+
+---
+
+## 5 — Geração de questões com escopo fechado (02/10/2026)
+
+- Situação: ✅ concluída
+- Datas: início 02/10 · fim 02/10
+
+**Plano conferido contra o código antes de começar: válido na estrutura, com um
+problema no critério de conclusão que você decidiu antes de eu escrever código.**
+
+**O problema, e a sua decisão.** Os dois exemplos da §23 que o critério manda
+rodar **não existem na árvore real**:
+
+```
+no critério                             em data/conteudos.json
+──────────────────────────────────────────────────────────────
+Direito Penal > Aplicação da Lei Penal      NÃO EXISTE
+  > Lei penal no tempo                      NÃO EXISTE
+LEP > Progressão de regime > Art. 112       NÃO EXISTE
+```
+
+Não é defeito novo: a Etapa 2 já tinha achado que "Aplicação da lei penal" é
+**título de faixa do cronograma**, e não item do programa de 2019 — foi por isso
+que as 20 geradas de Penal ficaram com assunto pendente. A árvore tem só os nós
+do edital mais os que as 170 do alvo tocaram.
+
+Você escolheu: **rodar os equivalentes reais e mostrar a recusa dos literais**,
+em vez de criar nós que o edital não lista (que violaria a regra inviolável 9).
+
+**Três ajustes de execução, avisados antes:**
+1. **precisou de migração v4.** O roteiro diz que os campos novos da gerada vêm
+   "na migração da Etapa 2", mas a Etapa 2 só acrescentou `conteudo`;
+2. **colisão de nome:** `QuestaoGerada.modo` já quer dizer "variacao | do_zero"
+   (como a questão foi escrita). O modo do pedido é outro eixo, então virou
+   `modo_do_pedido`; o **dispositivo** reusa a coluna `artigo`, que já era isso;
+3. **`geradas.preparar` filtrava por `questoes.materia`** (o texto do caderno) e
+   só olhava o alvo. Com escopo, passou a escolher pela **classificação**, e a
+   buscar alvo **e** complementar, cada um marcado (§9).
+
+**Mudou no meio, e é a decisão 33:** o **simulado continua amplo mesmo com a
+matéria escolhida**. Só matéria não é escopo específico; restringir o simulado às
+questões já classificadas o deixaria menor do que ele é, e a §7 manda preservar a
+consulta ampla.
+
+**Arquivos alterados.**
+- `src/radar/conteudos.py` — `Escopo`, `EscopoInvalido`, `resolver_escopo` e as
+  sugestões por `difflib` (tudo puro, sem banco);
+- `src/radar/models.py` — `MODOS_DE_PEDIDO`, `BASES_DA_GERADA`,
+  `EVIDENCIAS_DA_BASE`, e as 4 colunas novas em `QuestaoGerada`;
+- `src/radar/migracoes.py` — o passo 4 (versão 4), com cópia antes;
+- `src/radar/servico/geradas.py` — `reais_do_escopo` (pela classificação, alvo
+  antes do complementar), `nos_estudados`, `escopo_da_revisao`,
+  `modo_do_pedido`, `_preparar_no_escopo`, e o `preparar` com `escopo=` e
+  `modo=`;
+- `src/radar/servico/manual.py` — `INSTRUCAO_DO_ESCOPO`,
+  `_instrucao_com_escopo` (o dispositivo e o link oficial do `config/leis.yml`),
+  o escopo viajando no pedido, e as quatro recusas em `_fora_do_escopo` /
+  `_mesmo_dispositivo`;
+- `src/radar/gerador.py` — os campos novos em `QuestaoNova`;
+- `src/radar/cli.py` — `--assunto`, `--subassunto`, `--elemento` (repetível) e
+  `--modo` no `radar gerar`; `_escopo_do_pedido` e `_mostrar_o_escopo`;
+- `src/radar/web/app.py` e `geradas.html` — o mesmo filtro na tela, com os
+  seletores em cascata (um nível por vez, sem JavaScript), o modo e o escopo
+  escritos, e o recado de nome inexistente;
+- dados: `data/questoes_geradas.json` (ver o achado abaixo);
+- novo: `tests/test_geracao_por_conteudo.py`;
+- docs: `decisoes.md` (31 a 40), `historico.md`, `README.md` (a seção do filtro
+  e dos três modos), `CLAUDE.md`, este arquivo.
+
+**Achado que não era da etapa, e consertado.** O `data/questoes_geradas.json`
+versionado estava **`[]`** desde o commit da Etapa 2 (`904f1b7`), enquanto o
+banco tinha as 50. O export daquela etapa rodou contra um banco temporário e
+sobrescreveu o arquivo — o mesmo tropeço que eu repeti aqui e peguei na hora.
+**Por que importa:** o arquivo é o registro, e o banco se reconstrói a partir
+dele; com o arquivo vazio, refazer o banco perderia as 50, e o §23 é explícito
+("nenhum dado antigo pode ter sido perdido"). Nada se perdeu de fato — o banco
+as tinha. Exportado do banco real: **as 50 voltaram** (30 `do_zero`, 20
+`variacao`), e um teste novo não deixa isso acontecer calado de novo.
+
+**Testes novos (42).**
+- o filtro: desce os quatro níveis; sem nada não há escopo e a consulta ampla
+  continua; assunto errado **sugere o parecido**; matéria errada lista as que
+  existem; nome sem semelhança lista em vez de sugerir; subassunto sem assunto e
+  assunto sem matéria não fecham escopo; `--elemento` repetível restringe, e o
+  irmão não pedido fica fora; sem elemento cobre tudo abaixo; nó de nome
+  parecido de outro ramo não entra (o `startswith` ingênuo erraria);
+- as reais do escopo: saem da classificação; **alvo antes do complementar**;
+  prova complementar não aceita fica fora; anulada não serve de base;
+- os modos: com assunto é treino, só com matéria é simulado, modo inexistente é
+  recusado; revisão só pega nó estudado e **para** sem nada estudado; o
+  **simulado continua amplo** mesmo com a matéria escolhida (e com `--modo
+  simulado` explícito);
+- a base: a real vem primeiro e o resto sai da fonte oficial **dentro do mesmo
+  nó**; sem real nenhuma a base é a fonte ou o edital;
+- o pedido: manda não sair do escopo e declarar o nó; escreve os dispositivos; o
+  pedido amplo não ganha escopo;
+- **a importação (o teste que a §8 pede):** uma resposta com itens dentro e fora,
+  e **só os de dentro são gravados** — as duas recusas dizem o conteúdo e o
+  escopo; questão que não declara o conteúdo é recusada; com dispositivo pedido o
+  artigo tem de bater, e bate escrito de outra forma ("art. 112 da Lei
+  7.210/1984"); a base e a evidência ficam gravadas; `do_zero` fica marcado "sem
+  questão real de referência"; vínculo com real fora do pedido é recusado;
+  variação sem a real de base é recusada; o pedido amplo não exige o nó;
+- o que já existia: as geradas antigas continuam listadas com os campos nulos; o
+  JSON leva os campos novos; **o JSON real não está vazio**;
+- a tela: oferece o assunto da matéria escolhida, escreve o escopo e o modo, e
+  recusa nome que não existe sem gerar.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_geracao_por_conteudo.py`, 1ª rodada | 6 erros meus no teste (o `Concurso` de teste sem os campos que o `_provas_do_alvo` exige, o concurso inserido duas vezes, o caderno complementar pendurado no concurso-alvo, e a assinatura do `manual.importar`) → corrigidos |
+| `test_geracao_por_conteudo.py` | 42 passed |
+| `test_gerador` + `test_ia_manual` + `test_migracoes` + `test_conteudos` | 90 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2174 passed** (2132 de antes + 42 novos), 23 min |
+
+**Comando real rodado (banco real; a importação, numa cópia).**
+
+1. **os dois nomes literais da §23 — recusados, como devem ser:**
+   - `--materia "Direito Penal" --assunto "Aplicação da Lei Penal"` → "O assunto
+     'Aplicação da Lei Penal' não existe em 'Direito Penal'. Você quis dizer:
+     Imputabilidade penal?" + "Nada foi gerado: eu não alargo o escopo sozinho";
+   - `--materia "LEP"` → "A matéria 'LEP' não existe. Os que existem: …" (com as
+     13 matérias);
+2. **o equivalente real de "Direito Penal · lei penal no tempo", 20 questões:**
+   `--assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto
+   "Abolitio criminis" --elemento "CP, art. 2º"` → 7 pedidos, modo **treino**,
+   escopo fechado, "Só estes dispositivos: CP, art. 2º", 3 de questão real
+   (complementar) + 17 da fonte oficial sem questão real de referência;
+3. **o equivalente real de "LEP · Progressão de regime · Art. 112", 20
+   questões:** `--subassunto "Regimes de cumprimento da pena" --elemento "LEP,
+   art. 119"` → 7 pedidos, modo **treino**, 3 de questão real (**alvo**) + 17 da
+   fonte oficial;
+4. **a conferência de que nada saiu do escopo:** no `data/pedido_ia.json`, **um
+   único escopo** nos 7 pedidos, um único modo (`treino`), um único dispositivo,
+   20 questões no total, e **toda** instrução com "ESCOPO FECHADO" e o
+   `CONTEUDO:` certo;
+5. **o modo revisão:** `--modo revisao --materia "Língua Portuguesa"` → escopo
+   da matéria restrito aos 9 conteúdos que eu estudei; `--materia "Direito
+   Penal"` → "Eu ainda não estudei nenhum conteúdo de 'Direito Penal', então não
+   há o que revisar";
+6. **a importação com item fora do escopo** (numa cópia do banco, apagada
+   depois): 1 gravada e **2 recusadas**, cada recusa dizendo o conteúdo
+   declarado e o escopo. A gravada ficou com `modo_do_pedido: treino`, o escopo,
+   o conteúdo, `base: questao_real`, `evidencia_da_base: alvo` e o artigo. As
+   **50 antigas seguem com escopo nulo**. O banco real não foi alterado.
+
+**Critério de conclusão.**
+- [x] os dois exemplos da §23 **rodados de verdade no PC** — os literais, para
+  mostrar que o filtro os **recusa e sugere**, e os equivalentes reais, com 20
+  questões cada;
+- [x] a conferência de que **nenhuma questão saiu do escopo**: no pedido (um só
+  escopo nos 7 pedidos de cada exemplo) e na importação (2 de 3 recusadas, com o
+  motivo);
+- [x] por que os nomes literais não rodam está registrado aqui e na decisão 31
+  — eles não existem na árvore, e criá-los violaria a regra inviolável 9.
+"""

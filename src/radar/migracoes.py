@@ -95,6 +95,21 @@ def _passo_3() -> None:
             classificacoes._classificar_da_linha(linha)
 
 
+def _passo_4() -> None:
+    """Etapa 5: o escopo e a base de cada questao gerada.
+
+    Quatro colunas novas em `questoes_geradas` (modo_do_pedido, escopo, base e
+    evidencia_da_base), e o dado antigo fica NULO de proposito: as 50 geradas
+    nasceram de um pedido que nao tinha escopo nenhum, e preencher agora diria
+    que elas foram pedidas de um jeito que nao foram. O que o passo faz e
+    levar as colunas novas para o arquivo versionado - o banco e reconstruivel
+    a partir dele, e sem isto a reconstrucao perderia os campos.
+    """
+    from radar import acervo
+
+    acervo.exportar_geradas()
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -103,6 +118,8 @@ PASSOS = {
     2: ("O tipo de questão e a pegadinha na classificação", _passo_2),
     3: ("A classificação pela chave da questão inteira (enunciado e alternativas)",
         _passo_3),
+    4: ("O escopo e a base de cada questão gerada (modo do pedido, base, evidência)",
+        _passo_4),
 }
 VERSAO_ATUAL = max(PASSOS)
 

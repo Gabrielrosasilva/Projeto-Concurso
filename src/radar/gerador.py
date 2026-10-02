@@ -166,6 +166,18 @@ class QuestaoNova:
     #: mao, por exemplo. Quem cria a questao diz de onde ela veio.
     modelo: str | None = None
 
+    # --- o escopo e a base do pedido (Etapa 5) -----------------------------
+    #: O no da arvore que a questao declarou, pelo caminho.
+    conteudo: str | None = None
+    #: treino | revisao | simulado.
+    modo_do_pedido: str | None = None
+    #: O escopo que o pedido fechou. None no pedido amplo.
+    escopo: str | None = None
+    #: questao_real | fonte_oficial | item_do_edital.
+    base: str | None = None
+    #: alvo | complementar | nenhuma.
+    evidencia_da_base: str | None = None
+
     @property
     def impressao(self) -> str:
         return impressao_de(self.enunciado)
