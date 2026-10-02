@@ -229,11 +229,14 @@ def test_a_home_antes_do_ciclo_diz_quando_comeca(cliente, monkeypatch):
     assert "Ver o primeiro dia" in texto
 
 
-def test_o_unico_javascript_e_o_do_cronometro(cliente):
-    """A excecao da etapa A5 (docs/decisoes.md): um arquivo so, e nada inline."""
+def test_o_javascript_da_tela_sao_dois_arquivos_e_nada_inline(cliente):
+    """As duas excecoes (docs/decisoes.md): o cronometro (etapa A5) e a dobra
+    dos blocos (B.11). Dois arquivos, os dois `defer`, e NADA embutido na
+    pagina - a tela funciona sem os dois."""
     texto = cliente.get("/hoje?data=2026-09-28").text.lower()
-    assert texto.count("<script") == 1
+    assert texto.count("<script") == 2
     assert '<script src="/estatico/cronometro.js" defer></script>' in texto
+    assert '<script src="/estatico/dobra.js" defer></script>' in texto
 
 
 # --- o gatilho olhando o futuro ----------------------------------------------

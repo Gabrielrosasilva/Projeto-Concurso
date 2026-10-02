@@ -1191,3 +1191,59 @@ aberto. O banco real não foi alterado.
   desativado;
 - [x] nenhum JavaScript novo — o cronômetro segue sendo o único;
 - [x] a pendência B.11 saiu do `pendencias.md`.
+
+### B.11, segunda passada: so o canto dobra, e a dobra e lembrada (02/10)
+
+Você pediu as duas coisas que eu havia deixado em aberto no fim da primeira
+passada. As duas foram aplicadas.
+
+**1. Só o sinal do canto dobra.** Um clique no título ou nos horários não
+recolhe mais o bloco. Como: `pointer-events: none` no `<summary>`, para o
+clique atravessar, e `auto` só no sinal. O **teclado não passa por `pointer-
+events`**, então Tab até o cabeçalho e Enter continuam dobrando, com o foco
+visível. O sinal ganhou área de clique de verdade (1,75rem, com borda no hover)
+e um `title` dizendo o que faz — o alvo ficou pequeno, e um glifo de dez pixels
+não é botão.
+
+**2. A dobra é lembrada — e isto cria o segundo JavaScript do radar.** Eu avisei
+antes de mexer: guardar o estado precisa de `localStorage`, e o `CLAUDE.md`
+registrava que o cronômetro era o único JS. Você pediu mesmo assim, então a
+regra mudou e está registrada (decisão 30): **duas exceções, as duas só na tela
+Hoje, as duas dispensáveis.**
+
+O limite é o mesmo do cronômetro, e é ele que faz a exceção aceitável: o padrão
+(`<details open>`) é escrito pelo **servidor**, a dobra responde ao clique com
+ou sem JavaScript, e o `dobra.js` só restaura e salva. Todo acesso ao
+`localStorage` está em `try/catch` — janela privada ou dado do site limpo não
+quebram a tela. A chave é o **bloco** (`data-bloco`), não o dia: "prefiro o das
+22h fechado" é preferência, não coisa de 02/10. E o bloco da **âncora** (onde a
+tela volta depois de anotar uma faixa) nunca é recolhido, senão o sistema
+esconderia a resposta do seu próprio clique.
+
+**Arquivos alterados.**
+- novo: `src/radar/web/static/dobra.js`;
+- `src/radar/web/templates/hoje.html` — `data-bloco` e `title` no cabeçalho, o
+  CSS do `pointer-events` e da área do sinal, o segundo `<script>`;
+- `tests/test_blocos_dobraveis.py` — reescrito (19 testes);
+- `tests/test_tela_hoje.py` — `test_o_unico_javascript_e_o_do_cronometro` virou
+  `test_o_javascript_da_tela_sao_dois_arquivos_e_nada_inline`;
+- docs: `decisoes.md` (a 27 reescrita, a **29 revogada** e a **30** nova; a
+  seção do cronômetro da etapa A5 ganhou a nota de revisão), `historico.md`,
+  `README.md` (a seção "Dobrar os blocos do dia"), `CLAUDE.md`, este arquivo.
+
+**Testes (19, oito deles novos nesta passada).** Só o sinal recebe o clique; o
+cabeçalho continua focável pelo teclado; o sinal tem área de clique de verdade;
+o `title` explica o canto; a tela tem **os dois scripts e só eles**, nenhum
+inline e nenhum `onclick`; a dobra funciona sem o JavaScript (o padrão está no
+HTML); cada bloco leva a chave que o script guarda; o `dobra.js` é servido e
+protege **todo** acesso ao armazenamento; ele não recolhe o bloco da âncora; e
+sai de fininho onde não há bloco nenhum.
+
+**Resultado dos testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_blocos_dobraveis.py` reescrito | 19 passed |
+| As telas que leem a aba Hoje + `test_design` | 121 passed, 1 failed — `test_tela_hoje::test_o_unico_javascript_e_o_do_cronometro`, que afirmava um `<script>` só. Era a afirmação que esta mudança revoga: o teste foi reescrito para exigir os dois arquivos e nada inline |
+| `test_tela_hoje.py` + `test_blocos_dobraveis.py` | 58 passed |
+| Suíte inteira, PC | **2132 passed** (2124 de antes + 8 novos), 20 min |

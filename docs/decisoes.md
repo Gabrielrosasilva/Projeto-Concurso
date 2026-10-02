@@ -1785,7 +1785,13 @@ Os detalhes:
   tem o botao (e o POST e recusado); domingo tambem nao;
 - o `radar hoje --plano-b 30` so MOSTRA o Plano B no terminal: nao ativa.
 
-### O cronometro: a UNICA excecao ao "sem JavaScript" (etapa A5, 26/09/2026)
+### O cronometro: a primeira excecao ao "sem JavaScript" (etapa A5, 26/09/2026)
+
+> **Revisado em 02/10/2026 (B.11):** ele deixou de ser o UNICO. A dobra dos
+> blocos da tela Hoje (`static/dobra.js`) e a segunda excecao, pelo mesmo
+> critério: guardar estado no navegador e coisa que so o navegador faz, e a
+> tela funciona igual sem o arquivo. Ver a decisao 30. As duas excecoes valem
+> **so na tela Hoje**; o resto do radar continua sem JavaScript.
 
 - **o cronometro e o unico JavaScript do radar**, e mora num arquivo so,
   `src/radar/web/static/cronometro.js`. Nenhum `<script>` inline, em tela
@@ -2740,13 +2746,17 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
 
 ## Os blocos da aba Hoje dobram (B.11, 02/10/2026)
 
-27. **cada bloco do dia e um `<details>` com o cabecalho de `<summary>`**: um
-    clique no cabecalho - inclusive no canto direito, em cima dos horarios -
-    recolhe a lista de faixas, e outro clique a traz de volta. **Sem
-    JavaScript**: o cronometro continua sendo o unico JS do projeto, e o Mapa
-    do ano da lateral ja usava o mesmo recurso. O cabecalho INTEIRO e o botao,
-    e nao so o canto: e um alvo de clique maior, e o canto pedido esta dentro
-    dele, com um sinal (▾ / ▴) que mostra o estado;
+27. **cada bloco do dia e um `<details>` com o cabecalho de `<summary>`**: a
+    dobra em si nao usa JavaScript nenhum, como o Mapa do ano da lateral ja
+    fazia, e um sinal (▾ / ▴) no canto direito mostra o estado.
+
+    **So o SINAL do canto dobra**, e nao o cabecalho inteiro (escolha sua, na
+    segunda passada): um clique no titulo ou nos horarios nao pode recolher o
+    bloco sem eu querer. Como se faz: `pointer-events: none` no `<summary>`,
+    para o clique atravessar, e `auto` so no sinal. O **teclado nao passa por
+    ali**, entao Tab ate o cabecalho e Enter continuam dobrando, e o foco
+    continua visivel. O sinal ganhou area de clique de verdade (1,75rem) e um
+    `title` dizendo o que ele faz, porque o alvo ficou pequeno;
 
 28. **"Depois das 22h" nasce FECHADO**, e os outros blocos abertos. Motivo: o
     bloco e sobreaviso ("pode interromper") e, com `anki: desativado`, nao ha
@@ -2757,7 +2767,25 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     ruido. A frase segue a faixa DESLIGADA, e nao o nome do bloco: religando o
     Anki ela desaparece sozinha, e o bloco continua nascendo fechado;
 
-29. **a dobra NAO e lembrada entre recarregamentos**, de proposito: guardar o
-    estado precisaria de JavaScript (`localStorage`) e nao foi pedido. Cada
-    abertura da tela comeca no padrao - os dois primeiros abertos, o das 22h
-    fechado.
+29. ~~a dobra NAO e lembrada entre recarregamentos~~ — **revogada no mesmo dia,
+    por voce**: ela passou a ser lembrada. Ver a decisao 30.
+
+30. **a dobra e LEMBRADA entre recarregamentos**, e isso cria o **segundo
+    JavaScript do radar**: `src/radar/web/static/dobra.js`. Eu avisei que
+    guardar o estado precisa de `localStorage`, e que isso muda a regra do
+    "cronometro e o unico JS"; voce pediu mesmo assim, e a regra mudou -
+    passam a ser **duas excecoes, as duas so na tela Hoje**.
+
+    O limite e o mesmo do cronometro, e e ele que faz a excecao aceitavel: **a
+    tela funciona igual sem o arquivo.** O padrao (`<details open>` em quem
+    nasce aberto) e escrito pelo SERVIDOR, e a dobra responde ao clique com ou
+    sem JavaScript; o script so restaura o que eu deixei e salva o que eu mudo.
+    Todo acesso ao `localStorage` esta em `try/catch`: janela privada ou dado
+    do site limpo nao podem quebrar a tela.
+
+    **A chave e o BLOCO** (`data-bloco`: manha, noite, pos22, plano_b), e nao o
+    dia: "eu prefiro o bloco das 22h fechado" e uma preferencia minha, nao uma
+    coisa de 02/10. **Excecao:** quando o endereco traz uma ancora
+    (`#faixa-pos22-1`, que e onde a tela volta depois de eu anotar uma faixa), o
+    bloco daquela faixa fica aberto e nao e recolhido - recolher justo o que eu
+    acabei de anotar esconderia a resposta do meu proprio clique.

@@ -66,7 +66,7 @@
       text-transform:uppercase;color:var(--cor-texto-suave)}
     .lateral-cronometro:empty{display:none}
 
-    /* --- o cronometro (o unico JavaScript do radar: static/cronometro.js) --- */
+    /* --- o cronometro (static/cronometro.js; o outro JS e static/dobra.js) --- */
     .cronometro.rodando{border-color:var(--selo-calculado)}
     .crono-nome{margin:0;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
     .crono-tempo{margin:var(--esp-1) 0 var(--esp-2);font-family:var(--fonte-numero);font-size:2.6rem;font-weight:var(--peso-forte);
@@ -209,14 +209,22 @@
     .bloco-dia .ds-cartao__cabeca{margin-bottom:var(--esp-3)}
     .bloco-dia .nome-do-bloco{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
     .bloco-dia .horas{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
-    /* A dobra do bloco (B.11): o cabecalho inteiro e o botao, e o sinal fica
-       no canto direito, depois dos horarios. Sem o list-style o triangulo
-       padrao do <details> nao aparece ao lado do titulo. */
-    .bloco-dobra > summary{cursor:pointer;list-style:none}
+    /* A dobra do bloco (B.11): SO o sinal do canto direito dobra, e nao o
+       cabecalho inteiro - um clique no titulo ou nos horarios nao pode recolher
+       o bloco sem eu querer. O `pointer-events: none` no <summary> faz o clique
+       atravessar, e o `auto` no sinal o traz de volta so ali; o teclado nao
+       passa por aqui, entao Tab + Enter no cabecalho continua dobrando.
+       Sem o list-style o triangulo padrao do <details> apareceria ao lado do
+       titulo. */
+    .bloco-dobra > summary{list-style:none;cursor:default;pointer-events:none}
     .bloco-dobra > summary::-webkit-details-marker{display:none}
     .bloco-dobra > summary:focus-visible{outline:2px solid var(--cor-acao);outline-offset:2px;border-radius:var(--raio-1,4px)}
-    .bloco-dia .dobra-sinal{font-size:var(--tam-sm);color:var(--cor-texto-suave);line-height:1.6;
-      padding-left:var(--esp-2);user-select:none}
+    .bloco-dia .dobra-sinal{pointer-events:auto;cursor:pointer;user-select:none;
+      font-size:var(--tam-sm);color:var(--cor-texto-suave);
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:1.75rem;min-height:1.75rem;margin-left:var(--esp-1);
+      border:1px solid transparent;border-radius:var(--raio-1,4px)}
+    .bloco-dia .dobra-sinal:hover{border-color:var(--cor-borda);color:var(--cor-texto)}
     .bloco-dia .dobra-sinal::after{content:"▾"}
     .bloco-dobra[open] .dobra-sinal::after{content:"▴"}
     /* Fechado, o cabecalho nao precisa do espaco que separava ele das faixas. */
@@ -779,27 +787,32 @@
 
   {# ============================ os tres blocos ======================== #}
   {#
-     Cada bloco DOBRA: um clique no cabecalho - inclusive no canto direito, em
-     cima dos horarios - recolhe a lista de faixas, e outro clique a traz de
-     volta. E um <details>/<summary> puro, sem JavaScript nenhum: o cronometro
-     continua sendo o unico JS do projeto (CLAUDE.md), como no Mapa do ano da
-     lateral.
+     Cada bloco DOBRA: um clique no SINAL do canto direito do cabecalho, em
+     cima dos horarios, recolhe a lista de faixas, e outro clique a traz de
+     volta. E um <details>/<summary>, como no Mapa do ano da lateral, e a
+     dobra funciona sem JavaScript nenhum.
+
+     Duas coisas foram pedidas depois, e mudaram isto:
+       * so o SINAL do canto dobra, e nao o cabecalho inteiro: o resto do
+         <summary> leva `pointer-events: none` no CSS, para um clique no titulo
+         ou nos horarios nao recolher o bloco sem querer. Pelo teclado, o
+         cabecalho continua focavel e o Enter dobra;
+       * a dobra e LEMBRADA entre recarregamentos, pelo `dobra.js`
+         (localStorage). O HTML continua trazendo o padrao, e sem JavaScript a
+         dobra funciona igual - so nao lembra.
 
      "Depois das 22h" nasce FECHADO, e os outros abertos. O bloco e sobreaviso
      (pode interromper) e, com `anki: desativado`, nao ha nada ali para fazer
      fora do Bonus - abrir e acao minha. Fechado, ele mostra no proprio
      cabecalho a frase de que o ANKI esta temporariamente desativado.
 
-     O que ficou de fora de proposito: LEMBRAR a dobra entre recarregamentos
-     precisaria de JavaScript (localStorage), e nao foi pedido. Cada abertura
-     da tela comeca no padrao.
   #}
   {% for b in t.blocos if b.faixas %}
     {% set tem_anki_desligado = b.faixas | selectattr('desligada') | list %}
     {% set nasce_aberto = b.chave != 'pos22' %}
     <section class="ds-cartao bloco-dia bloco-{{ b.chave }}" aria-labelledby="bloco-{{ b.chave }}">
-      <details class="bloco-dobra"{{ ' open' if nasce_aberto }}>
-      <summary class="ds-cartao__cabeca">
+      <details class="bloco-dobra" data-bloco="{{ b.chave }}"{{ ' open' if nasce_aberto }}>
+      <summary class="ds-cartao__cabeca" title="Recolher ou expandir este bloco">
         <div class="nome-do-bloco">
           <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
           {% if b.chave == 'pos22' %}<span class="etiqueta-sobreaviso">🌙 sobreaviso · pode interromper</span>{% endif %}
@@ -807,6 +820,10 @@
           {% if tem_anki_desligado %}<span class="anki-dobrado">{{ FRASE_DO_ANKI_DESATIVADO }}</span>{% endif %}
         </div>
         <span class="horas">{% if b.inicio %}{{ hm(b.inicio) }} – {{ hm(b.fim) }}{% else %}sem horário{% endif %}{% if b.questoes %} · {{ b.questoes }} questões{% endif %}</span>
+        {# O UNICO alvo de clique do cabecalho: o canto direito, depois dos
+           horarios. O resto do <summary> tem `pointer-events: none` no CSS,
+           para um clique no titulo ou nos horarios nao dobrar o bloco sem eu
+           querer. O teclado continua valendo: Tab ate o cabecalho e Enter. #}
         <span class="dobra-sinal" aria-hidden="true"></span>
       </summary>
       <ol class="linha-tempo">
@@ -1151,7 +1168,10 @@
   </div>
 </div>
 
-{# O unico JavaScript do radar (docs/decisoes.md). A tela funciona sem ele. #}
+{# Os dois JavaScript do radar, os dois so na tela Hoje e os dois dispensaveis
+   (docs/decisoes.md): o cronometro, que avisa a hora da pausa, e a dobra, que
+   lembra quais blocos eu deixei recolhidos. A tela funciona sem os dois. #}
 <script src="/estatico/cronometro.js" defer></script>
+<script src="/estatico/dobra.js" defer></script>
 </body>
 </html>

@@ -102,8 +102,9 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
 **Pronto:** o radar (fases 1-15), a especificacao (design system, home, erros,
 compilado, revisao 1-7-30, Macetes, `gerar --pedido`) e o **Ciclo 1 de estudo,
-rodando desde 28/09** (`config/cronograma.yml`: tela Hoje, cronometro - o unico
-JS -, caderno de erros, Semanas, Minhas materias; automacao no Windows).
+rodando desde 28/09** (`config/cronograma.yml`: tela Hoje, cronometro e dobra
+dos blocos - os dois unicos JS, os dois so nesta tela e os dois dispensaveis -,
+caderno de erros, Semanas, Minhas materias; automacao no Windows).
 Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
 20 `variacao` de LEP).
 **Actions:** verde desde 02/10 - a coleta diaria voltou a rodar sozinha. **Em andamento:** o pedido de evolucao
@@ -126,8 +127,9 @@ nao permite: ela lista so o alvo - pendencia B.8. E a **4** (de 02/10: os
 minimos de amostra num lugar so no `config/amostra.yml`, o desempenho por no da
 arvore com os recortes radar e anotado nunca somados, o controle que o ANKI
 fazia - estudado, nao estudado, revisar, refazer -, a tela "Analises > Meu
-desempenho" e o `radar desempenho`) e a **B.11** (os blocos da aba Hoje dobram,
-sem JS; o das 22h nasce fechado). **Proxima: Etapa 5** (geracao de questoes
+desempenho" e o `radar desempenho`) e a **B.11** (os blocos da aba Hoje dobram
+pelo sinal do canto; o das 22h nasce fechado, e a dobra e lembrada pelo
+`static/dobra.js`). **Proxima: Etapa 5** (geracao de questoes
 com filtro hierarquico e os tres modos).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore

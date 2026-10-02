@@ -513,8 +513,21 @@ endereco → Notificacoes → Permitir) e o "Nao perturbe"/Assistente de Foco do
 Windows. O som so toca depois de um clique na pagina (regra dos navegadores):
 o ▶ e o Testar ja contam como clique.
 
-E o unico JavaScript do radar: sem ele, a tela funciona igual, so sem o
-cronometro.
+E um dos dois JavaScript do radar - o outro e o `dobra.js`, que lembra quais
+blocos do dia eu deixei recolhidos. Os dois sao so da tela Hoje e os dois sao
+dispensaveis: sem eles a tela funciona igual, so sem o cronometro e sem lembrar
+a dobra.
+
+### Dobrar os blocos do dia
+
+Cada bloco da aba Hoje - Manha, Noite, "Depois das 22h" e o do Plano B - recolhe
+e volta pelo **sinal ▾ / ▴ no canto direito do cabecalho**, do lado dos
+horarios. So o sinal dobra: um clique no titulo ou nos horarios nao mexe em
+nada. Pelo teclado, Tab ate o cabecalho e Enter.
+
+"Depois das 22h" **nasce fechado**, e fechado ele mostra ali mesmo que o ANKI
+esta temporariamente desativado - abrir e acao sua. O que voce deixar recolhido
+fica lembrado para a proxima abertura (por bloco, nao por dia).
 
 ### O nivel sobe e desce sozinho
 

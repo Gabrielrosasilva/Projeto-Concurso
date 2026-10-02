@@ -1570,11 +1570,24 @@ a E2), e as frases das telas trocaram "medido no radar" pela divisao.
 Pedido durante a Etapa 4 e feito em conversa propria, depois dela.
 
 Cada bloco do dia - "Manha", "Noite", "Depois das 22h" e o do Plano B - virou
-um `<details>` cujo `<summary>` e o proprio cabecalho do cartao: um clique nele,
-inclusive no canto direito em cima dos horarios, recolhe a lista de faixas, e
-outro a traz de volta. Um sinal ▾ / ▴ no canto direito mostra o estado. **Sem
-JavaScript nenhum** - o cronometro continua sendo o unico JS da tela, e o Mapa
-do ano da lateral ja fazia assim.
+um `<details>` cujo `<summary>` e o proprio cabecalho do cartao, com um sinal
+▾ / ▴ no canto direito. A dobra em si nao usa JavaScript, como o Mapa do ano da
+lateral ja fazia.
+
+**Duas mudancas suas, no mesmo dia, depois da primeira versao:**
+
+1. **so o sinal do canto dobra**, e nao o cabecalho inteiro: um clique no titulo
+   ou nos horarios nao pode recolher o bloco sem querer. Feito com
+   `pointer-events: none` no `<summary>` e `auto` so no sinal - o teclado nao
+   passa por ali, entao Tab + Enter continuam dobrando. O sinal ganhou area de
+   clique de 1,75rem e um `title`, porque o alvo ficou pequeno;
+2. **a dobra passou a ser lembrada** entre recarregamentos, e isso criou o
+   **segundo JavaScript do radar**: `static/dobra.js`. Eu avisei que isso muda a
+   regra do "cronometro e o unico JS"; voce pediu mesmo assim. O limite e o
+   mesmo do cronometro: o padrao vem do servidor, a dobra funciona sem o
+   arquivo, e todo acesso ao `localStorage` esta em try/catch. A chave e o
+   BLOCO, nao o dia, e o bloco da ancora (onde a tela volta depois de eu anotar
+   uma faixa) nunca e recolhido.
 
 "Depois das 22h" nasce **fechado**, e fechado mostra no cabecalho que o ANKI
 esta temporariamente desativado; aberto, essa frase sai e fica a da faixa
