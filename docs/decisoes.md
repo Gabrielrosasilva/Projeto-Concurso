@@ -2638,3 +2638,16 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     nenhuma, que casa DOIS assuntos (crase e regencia andam juntas) ou cujo
     nome nao tem par no edital fica sem linha; questao ja classificada nao e
     sobrescrita.
+
+## A conferencia do alvo e as anuladas (02/10/2026)
+
+16. **as 162 validas foram conferidas por voce em 02/10**, e com isso a 3A
+    fechou. Confirmar marca a data da conferencia e **nao** reescreve a
+    procedencia: a linha continua dizendo "Claude Code, importado
+    manualmente", e e isso que deixa auditavel que a proposta foi de IA e a
+    conferencia foi sua;
+17. **a questao anulada sai da lista da conferencia** (escolha sua): a banca
+    desfez a pergunta, ela nao entra em conta nenhuma - nem na incidencia -, e
+    conferi-la nao muda numero algum. Os dois totais continuam a vista ("162
+    de 162 validas · 170 de 170 contando as anuladas") e a caixa "mostrar as
+    anuladas" traz de volta. Nada foi apagado.

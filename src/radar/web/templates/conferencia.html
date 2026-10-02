@@ -50,7 +50,9 @@
     <div class="contador">
       <span class="n">{{ t.conferidas_validas }} de {{ t.validas }}</span>
       <span>válidas conferidas</span>
-      <span class="ds-suave">· {{ t.conferidas }} de {{ t.total }} contando as anuladas</span>
+      <span class="ds-suave">· {{ t.conferidas }} de {{ t.total }} contando as anuladas,
+        que ficam fora da lista: a banca desfez a pergunta, e elas não entram em
+        conta nenhuma</span>
     </div>
     <form class="filtros" method="get" action="/analises/conferencia">
       <label class="ds-campo">Matéria
@@ -62,6 +64,7 @@
         </select>
       </label>
       <label class="ds-campo caixa"><input type="checkbox" name="abertas" value="1" {{ 'checked' if abertas }}> só as não conferidas</label>
+      <label class="ds-campo caixa"><input type="checkbox" name="anuladas" value="1" {{ 'checked' if anuladas }}> mostrar as anuladas</label>
       <button class="ds-botao" type="submit">Filtrar</button>
     </form>
   </section>

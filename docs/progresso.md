@@ -13,7 +13,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 4 | 1D — Conferência dos dados gravados | ✅ |
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
-| 7 | 3A — Classificação do alvo e incidência | 🟡 falta a sua conferência das 162 |
+| 7 | 3A — Classificação do alvo e incidência | ✅ |
 | 8 | 3B — Acervo complementar FEPESE | 🟡 acervo e 3 lotes classificados; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ⬜ |
 | 10 | 5 — Geração de questões | ⬜ |
@@ -519,8 +519,8 @@ assuntos no programa; `assuntos.json` vazio). Três pontos, mostrados antes:
 
 ## 3A — Classificação do alvo, incidência e padrões (01/10/2026)
 
-- Situação: 🟡 feita, falta a **sua conferência** das 162 válidas
-  (Análises > Conferência). Fecha quando ela terminar.
+- Situação: ✅ concluída. A sua conferência das 162 válidas entrou em
+  **02/10/2026** (a tela marca 162 de 162; com as 8 anuladas, 170 de 170).
 - Datas: início 01/10 · fim 01/10 (a minha parte)
 
 **Plano conferido contra o código antes de começar:** válido. Três pontos
@@ -630,8 +630,7 @@ v3, e a resposta foi importada de novo.
   pendente, sem gabarito ou inconsistente, anuladas, erros de extração;
 - [x] as 170 questões do alvo classificadas (completa, parcial ou pendente
   com motivo);
-- [ ] **as 162 válidas conferidas por você** — falta (Análises >
-  Conferência);
+- [x] **as 162 válidas conferidas por você** — feito em 02/10/2026;
 - [x] `radar incidencia` e a página mostram o mapa com a amostra;
 - [x] a pergunta dos arts. 1º a 12 respondida com o número (1 em 2019).
 
@@ -952,3 +951,28 @@ classificação existente; a mesma questão em vários cadernos conta uma vez.
 **O que falta na 3B:** a sua conferência (as 44 do lote 2 uma a uma, as 108 do
 catálogo por amostra) e, se você quiser, ampliar o catálogo para cobrir o que
 ficou sem linha. Detalhe na pendência B.8.
+
+
+### Fechamento da 3A e as anuladas fora da conferência (02/10)
+
+Você conferiu as 170 do alvo (162 válidas + as 8 anuladas), e com isso a 3A
+fecha. A procedência de cada linha continua "Claude Code, importado
+manualmente": confirmar marca a data da conferência, não reescreve quem
+classificou — é isso que deixa auditável que a proposta foi de IA e a
+conferência foi sua.
+
+**Mudança pedida por você:** a tela Conferência não lista mais as **anuladas**.
+A banca desfez a pergunta, elas não entram em conta nenhuma (nem na
+incidência), e conferi-las não muda número algum. Os dois totais continuam à
+vista ("162 de 162 válidas · 170 de 170 contando as anuladas") e a caixa
+"mostrar as anuladas" traz de volta quando você quiser.
+
+**Arquivos alterados.** `src/radar/servico/classificacoes.py` (`com_anuladas`),
+`src/radar/web/app.py`, `conferencia.html`, `tests/test_classificacao.py`
+(2 testes novos), e os docs. **Testes:** `test_classificacao.py` 22 passed.
+
+**Antes da Etapa 4, uma coisa que falta e que não dá para fazer na tela:** a
+conferência do **complementar** (as 44 do bloco genérico e as 108 do catálogo)
+não existe ali — a tela de Conferência lista só o alvo. Ou a tela ganha o
+filtro de evidência, ou o complementar segue não conferido, marcado como está.
+Isso **não** bloqueia a Etapa 4, que depende do alvo.

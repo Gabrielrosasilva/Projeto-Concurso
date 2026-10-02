@@ -114,16 +114,17 @@ das metricas), a 1D (`radar conferir-dias`; o Bonus de 28 e 29/09 saiu, e
 faixa de questoes com 0 questoes e recusada), a 6A (de 02/10: 14 questoes de
 manha, lei seca dirigida, `anki: desativado`) e a 2 (arvore de conteudos,
 evidencia alvo/complementar/fora, banco na versao 1 com `radar migrar`) e a
-3A (as 170 do alvo classificadas pelo Claude Code; mapa de incidencia e
-padroes; banco na versao 3) - **falta a sua conferencia das 162** em
-Analises > Conferencia. A **3B** esta pela metade: o levantamento
+3A (as 170 do alvo classificadas pelo Claude Code e **conferidas por voce em
+02/10**; mapa de incidencia e padroes; banco na versao 3). A **3B** esta pela metade: o levantamento
 (`radar complementar`, `docs/complementar.md`), a regra de quem entra (ter
 materia do edital de 2019 e passar na validacao minima: 122 provas de 183, em
 `data/acervo_complementar.json`) e a linha complementar da incidencia, sempre
 separada da do alvo (em questao DISTINTA, com as ocorrencias ao lado) e os
 tres lotes classificados: as 80 do Socioeducativo, 44 de bloco generico e 108
 propostas automaticas do catalogo em Portugues e Raciocinio Logico. **Falta a
-sua conferencia** (as automaticas, por amostra) - pendencia B.8.
+conferencia do complementar** (as automaticas, por amostra), que a tela ainda
+nao permite: ela lista so o alvo - pendencia B.8. **Proxima: Etapa 4**
+(amostra, desempenho por no e controle de estudo).
 **Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
 CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
 no [README](README.md); banco em `data/radar.db`.

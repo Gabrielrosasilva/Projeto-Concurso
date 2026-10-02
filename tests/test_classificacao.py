@@ -291,3 +291,42 @@ def test_a_tela_mostra_a_proposta_e_grava_a_decisao(alvo):
 
     recusa = cliente.post("/analises/conferencia", data={"chave": _k("2019-51"), "acao": "x"})
     assert recusa.status_code == 400
+
+
+def test_a_conferencia_esconde_as_anuladas_e_a_caixa_traz_de_volta(banco_temporario):
+    """A banca desfez a pergunta: conferir uma anulada nao muda numero nenhum,
+    e ela so atrapalha a lista. Os totais continuam mostrando as duas contas."""
+    conteudos.semear(programa=PROGRAMA)
+    with sessao() as s:
+        for numero, anulada in ((1, False), (2, True)):
+            q = QuestaoDeProva(
+                prova_url="https://fepese.test/2019.pdf", banca="FEPESE", ano=2019,
+                numero=numero, materia="Direito Penal",
+                enunciado=f"Questão {numero} de 2019?",
+                alternativas={"a": "x", "b": "y"}, resposta=None if anulada else "a",
+                anulada=anulada, impressao=f"2019-{numero}", evidencia="alvo")
+            s.add(q)
+
+    tela = classificacoes.conferencia()
+    assert [i.codigo for i in tela.itens] == ["2019-q1"]
+    assert (tela.total, tela.validas) == (2, 1)
+
+    com = classificacoes.conferencia(com_anuladas=True)
+    assert [i.codigo for i in com.itens] == ["2019-q1", "2019-q2"]
+
+
+def test_a_tela_de_conferencia_nao_lista_anulada_sem_a_caixa(banco_temporario):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    conteudos.semear(programa=PROGRAMA)
+    with sessao() as s:
+        s.add(QuestaoDeProva(
+            prova_url="https://fepese.test/2019.pdf", banca="FEPESE", ano=2019,
+            numero=7, materia="Direito Penal", enunciado="Questão anulada de 2019?",
+            alternativas={"a": "x"}, anulada=True, impressao="2019-7", evidencia="alvo"))
+
+    cliente = TestClient(app)
+    assert "2019-q7" not in cliente.get("/analises/conferencia").text
+    assert "2019-q7" in cliente.get("/analises/conferencia?anuladas=1").text

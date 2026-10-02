@@ -446,12 +446,16 @@ class Conferencia:
     materias: list[str] = field(default_factory=list)
 
 
-def conferencia(materia: str | None = None, so_abertas: bool = False) -> Conferencia:
+def conferencia(materia: str | None = None, so_abertas: bool = False,
+                com_anuladas: bool = False) -> Conferencia:
     """As questoes do alvo com a proposta ao lado, para eu conferir uma a uma.
 
     `materia` filtra pelo no da materia (o do caderno ou o da classificacao);
-    `so_abertas` esconde as ja conferidas. Os totais sao sempre do alvo
-    inteiro: e eles que dizem quanto falta para a 3A fechar.
+    `so_abertas` esconde as ja conferidas; `com_anuladas` traz de volta as que
+    a banca anulou, que por padrao ficam FORA da lista - elas nao entram em
+    conta nenhuma (nem na incidencia), e conferi-las nao muda numero algum.
+    Os totais sao sempre do alvo inteiro, com e sem as anuladas: e eles que
+    dizem quanto falta.
     """
     from radar.servico import evidencia
 
@@ -482,6 +486,8 @@ def conferencia(materia: str | None = None, so_abertas: bool = False) -> Confere
         if materia and materia not in (do_caderno, da_classificacao):
             continue
         if so_abertas and conferida:
+            continue
+        if q.anulada and not com_anuladas:
             continue
         # A materia do caderno e a da classificacao (quando a de 2013 foi para
         # um assunto de 2019): corrigir pode ir para qualquer uma das duas.

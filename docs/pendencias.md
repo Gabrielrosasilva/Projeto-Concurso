@@ -40,8 +40,8 @@ Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
 1. 🟡 gravar assunto e artigo nas questoes FEPESE de Direito, comecando pelas
    provas de Policia Penal e Agente Penitenciario SC. **Feito na 3A para as
    170 do alvo** (todas as materias, nao so Direito), pelo Claude Code;
-   **falta a sua conferencia** das 162 validas em Analises > Conferencia. O
-   complementar e da 3B;
+   e **conferido por voce em 02/10**. O complementar e da 3B (a conferencia
+   dele ainda nao tem tela: ver B.8);
 2. 🟡 um mapa de incidencia por tema. **Feito na 3A** (`radar incidencia` e
    Analises > Incidencia), com os rotulos sem previsao: "apareceu nas 2
    provas", "apareceu em 1 de 2", "nao apareceu nas provas analisadas". Falta
@@ -79,13 +79,6 @@ alternativas passam pelos arts. 2o, 3o e 4o). Em 2013 foram 3 (q50, art. 8o;
 q51, art. 7o; q53, art. 2o). As quatro estao pendentes: o programa de 2019
 nao lista "aplicacao da lei penal".
 
-### B.6 🟡 Conferencia da classificacao do alvo (Etapa 3A)
-
-As 170 questoes do alvo estao classificadas pelo Claude Code (146 completas,
-9 parciais, 15 pendentes com motivo). **A 3A so fecha com as 162 validas
-conferidas por voce** em Analises > Conferencia (confirmar, corrigir ou
-pendente). Hoje: 0 de 162.
-
 ### B.7 🔴 Erros de extracao nas provas do alvo
 
 O `radar auditar` (Etapa 3A) acusa 25 questoes do alvo com suspeita, listadas
@@ -111,7 +104,9 @@ classificacao ainda" em Portugues):
 
 **O que sobra na B.8:**
 - **a sua conferencia**: 44 do lote 2 e 108 do catalogo esperam conferencia -
-  as do catalogo por AMOSTRA (20 por materia; taxa de erro alta, o lote volta);
+  as do catalogo por AMOSTRA (20 por materia; taxa de erro alta, o lote volta).
+  **A tela de Conferencia lista so o alvo**: para conferir o complementar ela
+  precisa de um filtro de evidencia, que ainda nao existe;
 - **as questoes sem linha**: 81 do lote 2 (conteudo de outro cargo, de
   proposito) e, em Portugues e Raciocinio Logico, as que o catalogo nao cobre
   (47 sem palavra, 23 ambiguas, 22 sem par no edital em Portugues; 21 e 8 em

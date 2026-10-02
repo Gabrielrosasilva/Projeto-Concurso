@@ -1278,13 +1278,16 @@ def analises_incidencia(request: Request, materia: str = ""):
 
 
 @app.get("/analises/conferencia", response_class=HTMLResponse)
-def analises_conferencia(request: Request, materia: str = "", abertas: str = ""):
+def analises_conferencia(request: Request, materia: str = "", abertas: str = "",
+                         anuladas: str = ""):
     """A conferencia da classificacao do alvo: enunciado, alternativas,
     gabarito e a proposta lado a lado, com confirmar / corrigir / pendente."""
-    tela = servico.classificacoes.conferencia(materia or None, so_abertas=bool(abertas))
+    tela = servico.classificacoes.conferencia(materia or None, so_abertas=bool(abertas),
+                                              com_anuladas=bool(anuladas))
     return templates.TemplateResponse(
         request=request, name="conferencia.html",
-        context={"t": tela, "materia": materia, "abertas": bool(abertas)},
+        context={"t": tela, "materia": materia, "abertas": bool(abertas),
+                 "anuladas": bool(anuladas)},
     )
 
 
