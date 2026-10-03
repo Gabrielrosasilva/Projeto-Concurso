@@ -176,6 +176,31 @@
   },
   {
     "alternativas": {
+      "a": "cuidadosamente selecionados como aptos a conviver nessas condições, com vigilância regular durante a noite.",
+      "b": "escolhidos por sorteio.",
+      "c": "de qualquer categoria, sem seleção.",
+      "d": "condenados por crimes graves, apenas.",
+      "e": "sem vigilância noturna, para preservar a privacidade."
+    },
+    "artigo": "Regras de Mandela, regra 12, item 2",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362798+00:00",
+    "enunciado": "Segundo as Regras de Mandela, quando forem usados dormitórios coletivos, eles devem ser ocupados por presos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0243e5db147f4da063de8cdadfdf09d0",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Ao chegar ao presídio, o juiz conversou com os presos.",
       "b": "O juiz, ao chegar ao presídio, conversou com os presos.",
       "c": "O juiz conversou com os presos, ao chegar ao presídio.",
@@ -451,6 +476,31 @@
   },
   {
     "alternativas": {
+      "a": "As decisões clínicas só podem ser tomadas pelos profissionais de saúde responsáveis e não podem ser desconsideradas por funcionários prisionais não médicos.",
+      "b": "A prestação de cuidados de saúde aos presos é responsabilidade do Estado.",
+      "c": "Os registros dos presos devem ser mantidos em sigilo e disponibilizados apenas a quem, por responsabilidade profissional, precise acessá-los.",
+      "d": "Onde houver celas individuais, cada preso deve ocupar sozinho, à noite, uma cela; havendo exceção por superlotação temporária, não é desejável alojar dois presos numa mesma cela.",
+      "e": "O sistema prisional pode agravar o sofrimento inerente à privação da liberdade sempre que isso servir de exemplo aos demais presos."
+    },
+    "artigo": "Regras de Mandela, regra 3 (e regras 9, 12.1, 24.1 e 27.2)",
+    "assunto": "Regras de aplicação geral",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362784+00:00",
+    "enunciado": "Considerando as Regras de Mandela, assinale a alternativa INCORRETA.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "alvo",
+    "impressao": "0552764ee9daab25430187cc522ca0ac",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "bb3000300f5b08c04a3fcd90780d9d1b",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "A primeira geração corresponde aos direitos de igualdade, como o direito ao trabalho.",
       "b": "A segunda geração corresponde aos direitos sociais, econômicos e culturais, que exigem prestações positivas do Estado.",
       "c": "A terceira geração corresponde às liberdades públicas negativas.",
@@ -598,6 +648,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "Regras de Mandela, regras 5 e 22",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362798+00:00",
+    "enunciado": "Considere as afirmativas sobre as Regras de Mandela: 1. A administração prisional deve fazer as adaptações razoáveis para que presos com deficiência física, mental ou de outra natureza tenham acesso pleno e efetivo à vida prisional, em base equitativa. 2. O regime prisional deve procurar reduzir as diferenças entre a vida na prisão e a vida em liberdade que tendam a diminuir a responsabilidade dos presos ou o respeito à sua dignidade. 3. Os presos devem receber, nas horas habituais, alimentação de valor nutritivo adequado à saúde, de boa qualidade, bem preparada e servida. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "06c5eab464da0362071f34c2b27d1151",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -2226,6 +2301,31 @@
   },
   {
     "alternativas": {
+      "a": "em legítima defesa, em caso de tentativa de fuga ou de resistência física, ativa ou passiva, a uma ordem baseada na lei ou nos regulamentos.",
+      "b": "para obter confissões.",
+      "c": "como sanção disciplinar.",
+      "d": "sempre que o preso desrespeitar verbalmente o agente.",
+      "e": "para acelerar a contagem dos presos."
+    },
+    "artigo": "Regras de Mandela, regra 82, item 1",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468636+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o pessoal prisional, nas suas relações com os presos, não deve usar a força, exceto:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "1b9d6347fa344bf230ce87c67bc8bfe7",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 2.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -3021,6 +3121,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "7f6e49f0bfe30c81f0547e088a46d318",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "proteger a sociedade contra o crime e reduzir a reincidência.",
+      "b": "punir com rigor e servir de exemplo.",
+      "c": "afastar o preso definitivamente do convívio social.",
+      "d": "arrecadar recursos para o Estado.",
+      "e": "obter a confissão do preso."
+    },
+    "artigo": "Regras de Mandela, regra 4, item 1",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362786+00:00",
+    "enunciado": "Segundo as Regras de Mandela, os objetivos da pena de prisão ou de medidas semelhantes de privação da liberdade são, prioritariamente:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "250aa5d6e60f2a5ae1b4776aaf600bc8",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -3876,6 +4001,31 @@
   },
   {
     "alternativas": {
+      "a": "foi ou será prejudicada pela continuação da prisão ou por qualquer condição da prisão.",
+      "b": "melhorou com o trabalho.",
+      "c": "depende da visita da família.",
+      "d": "exige transferência para regime mais rigoroso.",
+      "e": "impede o exercício do direito de voto."
+    },
+    "artigo": "Regras de Mandela, regra 33",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362796+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o médico deve informar o diretor do estabelecimento sempre que considerar que a saúde física ou mental de um preso:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "32ddcb1a1caa211489b3659908d5df44",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "treze membros designados por ato do Ministério da Justiça, com mandato de dois anos, renovado um terço em cada ano.",
       "b": "sete membros eleitos pelos presos.",
       "c": "onze membros nomeados pelo Presidente do STF.",
@@ -3967,6 +4117,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "344648e027840337c9d1b0eb8c6b47d8",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "devem ser tomadas providências, sempre que possível, para que as crianças nasçam num hospital fora do estabelecimento, e, se a criança nascer no estabelecimento, esse fato não deve constar da certidão de nascimento.",
+      "b": "o parto deve ocorrer sempre na própria cela.",
+      "c": "o nascimento no estabelecimento deve constar da certidão.",
+      "d": "a gestante deve ser transferida para um estabelecimento masculino.",
+      "e": "o acompanhamento pré-natal é facultativo."
+    },
+    "artigo": "Regras de Mandela, regra 28",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362793+00:00",
+    "enunciado": "Segundo as Regras de Mandela, quanto ao parto das mulheres presas:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "346f45590605e44ca9870a358138b605",
+    "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -4348,6 +4523,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "uma vez por semana.",
+      "b": "uma vez por mês.",
+      "c": "duas vezes por mês.",
+      "d": "uma vez a cada quinze dias.",
+      "e": "três vezes por dia."
+    },
+    "artigo": "Regras de Mandela, regra 16",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362792+00:00",
+    "enunciado": "Segundo as Regras de Mandela, as instalações de banho devem permitir que todo preso tome banho, à temperatura adequada ao clima, com a frequência necessária à higiene, mas, em clima temperado, pelo menos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "38490402e64cba77adec7e104f2f1fdd",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -5726,6 +5926,31 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "Regras de Mandela, regras 75.1, 75.3 e 76.2",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468646+00:00",
+    "enunciado": "Considere as afirmativas sobre o pessoal prisional nas Regras de Mandela: 1. Todo o pessoal deve ter um nível adequado de instrução e receber os meios para exercer as funções de forma profissional. 2. A formação continuada deve ser assegurada depois da entrada em funções e ao longo da carreira. 3. O pessoal que trabalha com certas categorias de presos deve receber formação com o foco correspondente. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "4987a624994df0145eee7cbc7b12e672",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "apenas as embarcações brasileiras que estejam em alto-mar.",
       "b": "as embarcações e aeronaves brasileiras de natureza pública, ou a serviço do governo brasileiro, onde quer que se encontrem.",
       "c": "todas as embarcações e aeronaves brasileiras, sem qualquer distinção quanto à natureza.",
@@ -5792,6 +6017,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "4ab30ab304a754f3795d7df6e6058bcd",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "não deve ser, de modo algum, degradante ou humilhante.",
+      "b": "deve identificá-lo publicamente como preso.",
+      "c": "pode ser usado sem lavagem por até um mês.",
+      "d": "deve ser pago pelo próprio preso.",
+      "e": "deve ser igual ao uniforme dos agentes."
+    },
+    "artigo": "Regras de Mandela, regra 19, item 1",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362793+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o preso que não puder usar suas próprias roupas deve receber vestuário adequado ao clima e suficiente para mantê-lo em boa saúde, o qual:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "4b20fd1cb25ead79a262992380a01b25",
+    "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -6176,6 +6426,31 @@
   },
   {
     "alternativas": {
+      "a": "Num estabelecimento para homens e mulheres, a parte destinada às mulheres deve ficar sob a autoridade de uma funcionária responsável, que guardará as chaves de toda essa parte.",
+      "b": "Nenhum funcionário do sexo masculino deve entrar na parte destinada às mulheres sem estar acompanhado de uma funcionária.",
+      "c": "As presas devem ser atendidas e vigiadas somente por funcionárias, o que não impede médicos e professores do sexo masculino de exercer ali suas funções profissionais.",
+      "d": "O diretor, seu substituto e a maioria do pessoal devem falar a língua da maior parte dos presos, ou uma língua compreendida pela maioria deles.",
+      "e": "O uso de intérprete é proibido, e o pessoal deve comunicar-se com os presos apenas na língua oficial do país."
+    },
+    "artigo": "Regras de Mandela, regra 80, item 2 (e regras 80.1 e 81)",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468635+00:00",
+    "enunciado": "Assinale a alternativa INCORRETA quanto ao pessoal do estabelecimento prisional, segundo as Regras de Mandela.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "alvo",
+    "impressao": "53f65076df797ea012abd5dd220a8a8f",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "d9195a4b6daff3a0e583b6e0150017ec",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "a condenação subsiste, pois a coisa julgada é imutável em qualquer circunstância.",
       "b": "apenas a pena aplicada é extinta, mantendo-se os efeitos penais secundários da condenação, como a reincidência.",
       "c": "cessam a execução e os efeitos penais da sentença condenatória.",
@@ -6198,6 +6473,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "sob a autoridade de uma funcionária responsável, que guarda as chaves de toda essa parte.",
+      "b": "sob a autoridade do diretor, sem distinção.",
+      "c": "aberta à circulação de todo o pessoal masculino.",
+      "d": "sob a guarda das próprias presas.",
+      "e": "sob a autoridade de um funcionário homem armado."
+    },
+    "artigo": "Regras de Mandela, regra 81, item 1",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468647+00:00",
+    "enunciado": "Segundo as Regras de Mandela, num estabelecimento que recebe homens e mulheres, a parte destinada às mulheres deve ficar:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "54e578b3967d9e4ab7d79db9435a749f",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -6501,6 +6801,31 @@
   },
   {
     "alternativas": {
+      "a": "a quantidade, a qualidade, o preparo e a distribuição da comida.",
+      "b": "a escala de plantão dos agentes.",
+      "c": "a progressão de regime dos presos.",
+      "d": "as visitas íntimas.",
+      "e": "a compra de armamento."
+    },
+    "artigo": "Regras de Mandela, regra 35, item 1, a",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362797+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o médico ou o órgão de saúde pública competente deve inspecionar regularmente e aconselhar o diretor do estabelecimento sobre, entre outros temas:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "59577f7877cccb07293f1db97cd55d83",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "A ineficácia relativa do meio empregado torna o crime impossível.",
       "b": "Não se pune a tentativa quando, por ineficácia absoluta do meio ou por absoluta impropriedade do objeto, é impossível consumar-se o crime.",
       "c": "No crime impossível, a pena é a da tentativa, diminuída de um terço.",
@@ -6573,6 +6898,31 @@
     "origem_impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "dedicar todo o seu tempo de trabalho às funções oficiais, não ser nomeado em tempo parcial e residir no estabelecimento ou nas suas imediações.",
+      "b": "exercer a função em tempo parcial.",
+      "c": "residir obrigatoriamente na capital.",
+      "d": "acumular a direção com outro cargo público.",
+      "e": "ser escolhido pelos presos."
+    },
+    "artigo": "Regras de Mandela, regra 79, item 2",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468638+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o diretor do estabelecimento prisional deve:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "5a91b6842c6793592517a074f7f75692",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -6671,6 +7021,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "a19000121df70a8c9d48183ff18d4d71",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "qualquer lesão visível e as queixas de maus-tratos anteriores.",
+      "b": "a religião do preso, obrigatoriamente.",
+      "c": "a renda da família.",
+      "d": "a opinião política do preso.",
+      "e": "o histórico escolar completo."
+    },
+    "artigo": "Regras de Mandela, regra 7, d",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362788+00:00",
+    "enunciado": "Segundo as Regras de Mandela, na admissão de todo preso deve ser registrada no sistema de gestão de registros, entre outras informações:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "5cb5d7f595ebb4112cbed70bfa0e6fad",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -7126,6 +7501,31 @@
   },
   {
     "alternativas": {
+      "a": "o respeito à dignidade humana de todos os presos e a proibição de certas condutas, em especial a tortura e outros tratamentos cruéis, desumanos ou degradantes.",
+      "b": "o direito de aplicar castigos corporais.",
+      "c": "a obrigação de obter confissões.",
+      "d": "a autorização para revistas sem nenhum limite.",
+      "e": "a dispensa do respeito à dignidade dos presos considerados perigosos."
+    },
+    "artigo": "Regras de Mandela, regra 76, item 1, b",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468643+00:00",
+    "enunciado": "Segundo as Regras de Mandela, a formação do pessoal prisional deve tratar dos direitos e deveres do pessoal no exercício das funções, incluindo:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "660ec0829fce06504a250deab4f254bb",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Nunca esqueceram-se do plantão.",
       "b": "Ninguém disse-me nada.",
       "c": "Aqui se trabalha com disciplina.",
@@ -7467,6 +7867,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "6c117405f221b5f8689380a197dc1666",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "adequados para atrair e manter homens e mulheres capazes, com benefícios e condições de serviço favoráveis, dada a natureza exigente do trabalho.",
+      "b": "iguais ao salário mínimo.",
+      "c": "pagos pelos presos.",
+      "d": "fixados livremente pelo diretor de cada estabelecimento.",
+      "e": "variáveis conforme o número de presos disciplinados."
+    },
+    "artigo": "Regras de Mandela, regra 74, item 3",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468641+00:00",
+    "enunciado": "Segundo as Regras de Mandela, os salários do pessoal prisional devem ser:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6d0a1ccf8c104d39a6626553984ddea9",
+    "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -8026,6 +8451,31 @@
   },
   {
     "alternativas": {
+      "a": "Nenhuma pessoa deve ser recebida num estabelecimento prisional sem uma ordem de detenção válida.",
+      "b": "Todo preso que não trabalhe ao ar livre deve ter, se o tempo permitir, pelo menos uma hora diária de exercício adequado ao ar livre.",
+      "c": "A água potável deve estar disponível a todo preso sempre que ele precisar.",
+      "d": "Se uma criança nascer no estabelecimento prisional, esse fato deve constar da certidão de nascimento.",
+      "e": "As crianças que vivem no estabelecimento prisional com o pai ou a mãe nunca devem ser tratadas como presas."
+    },
+    "artigo": "Regras de Mandela, regra 28 (e regras 7, 22.2, 23.1 e 29.2)",
+    "assunto": "Regras de aplicação geral",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362783+00:00",
+    "enunciado": "Sobre as Regras de Mandela, assinale a alternativa INCORRETA.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "alvo",
+    "impressao": "72bd4ff61f89026d4a2657459594c9cd",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "bb3000300f5b08c04a3fcd90780d9d1b",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "primeira, segunda e terceira gerações.",
       "b": "segunda, primeira e terceira gerações.",
       "c": "primeira, terceira e segunda gerações.",
@@ -8251,6 +8701,31 @@
   },
   {
     "alternativas": {
+      "a": "Antes de entrar em funções, todo o pessoal deve receber formação adaptada às suas funções gerais e específicas.",
+      "b": "Só podem ingressar no serviço prisional os candidatos aprovados nas provas teóricas e práticas ao fim dessa formação.",
+      "c": "O pessoal deve ser nomeado em tempo integral, como pessoal prisional profissional, com estatuto de servidor público e estabilidade sujeita apenas a boa conduta, eficiência e aptidão física.",
+      "d": "O pessoal que trabalha em contato direto com os presos deve, como regra, andar armado.",
+      "e": "O pessoal deve receber treinamento físico especial que lhe permita conter presos agressivos."
+    },
+    "artigo": "Regras de Mandela, regra 82, item 3 (e regras 74.3, 75.2 e 82.2)",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468633+00:00",
+    "enunciado": "Sobre o pessoal prisional nas Regras de Mandela, assinale a alternativa INCORRETA.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "alvo",
+    "impressao": "762a25b32efdd19b2e3ce8e8dd3f0e8e",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "d9195a4b6daff3a0e583b6e0150017ec",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "responde por peculato, pois é equiparado a funcionário público para os efeitos penais.",
       "b": "responde por apropriação indébita, pois não é servidor.",
       "c": "não comete crime.",
@@ -8267,6 +8742,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "77f40fb3bd5c1fe13edbc5970c014dda",
     "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "o caráter, a capacidade administrativa, a formação adequada e a experiência.",
+      "b": "apenas o tempo de serviço.",
+      "c": "a indicação dos presos.",
+      "d": "a filiação partidária.",
+      "e": "apenas o grau de escolaridade."
+    },
+    "artigo": "Regras de Mandela, regra 79, item 1",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468649+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o diretor do estabelecimento prisional deve ser adequadamente qualificado para a sua tarefa, considerando:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "78218e4099fe4264bae669844d4cd1d1",
+    "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -9326,6 +9826,31 @@
   },
   {
     "alternativas": {
+      "a": "A administração prisional deve selecionar cuidadosamente o pessoal de todas as categorias, pois da integridade, humanidade, capacidade profissional e aptidão pessoal dele depende a boa administração das prisões.",
+      "b": "O diretor do estabelecimento pode ser nomeado em regime de tempo parcial, desde que resida na mesma cidade.",
+      "c": "Todo o pessoal deve comportar-se de modo a influenciar positivamente os presos pelo exemplo e a merecer o respeito deles.",
+      "d": "Os serviços de assistentes sociais, professores e instrutores técnicos devem ser assegurados de forma permanente, sem excluir colaboradores em tempo parcial ou voluntários.",
+      "e": "A administração prisional deve assegurar cursos de formação continuada ao longo da carreira do pessoal."
+    },
+    "artigo": "Regras de Mandela, regra 79, item 2 (e regras 74.1, 75.3, 77 e 78.2)",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468629+00:00",
+    "enunciado": "A respeito das regras sobre o pessoal do estabelecimento prisional nas Regras de Mandela, assinale a alternativa INCORRETA.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "alvo",
+    "impressao": "8359daa7ddf68d38448774ce7ef030d4",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "d9195a4b6daff3a0e583b6e0150017ec",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "A primeira geração exige, em regra, uma abstenção do Estado.",
       "b": "A segunda geração exige, em regra, prestações positivas do Estado.",
       "c": "A terceira geração tem titularidade coletiva ou difusa.",
@@ -9451,6 +9976,31 @@
   },
   {
     "alternativas": {
+      "a": "pelo menos uma hora diária de exercício adequado ao ar livre.",
+      "b": "pelo menos trinta minutos semanais de sol.",
+      "c": "duas horas por mês de recreação.",
+      "d": "exercício apenas nos fins de semana.",
+      "e": "exercício somente com autorização judicial."
+    },
+    "artigo": "Regras de Mandela, regra 23, item 1",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362788+00:00",
+    "enunciado": "Segundo as Regras de Mandela, todo preso que não trabalhe ao ar livre deve ter, se o tempo permitir:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8549ea972144a54a214ed22e138b20e6",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "A primeira geração consagra os direitos de liberdade, como os civis e políticos, que exigem do Estado uma abstenção.",
       "b": "A segunda geração consagra os direitos de fraternidade, como o direito à paz.",
       "c": "A terceira geração consagra os direitos individuais clássicos, como a liberdade de locomoção.",
@@ -9523,6 +10073,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "não deve andar armado, e em nenhuma circunstância deve receber armas sem ter sido treinado para usá-las.",
+      "b": "deve andar sempre armado.",
+      "c": "pode portar armas sem treinamento.",
+      "d": "deve usar armas de fogo durante as visitas.",
+      "e": "deve deixar as armas com os presos de confiança."
+    },
+    "artigo": "Regras de Mandela, regra 82, item 3",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468645+00:00",
+    "enunciado": "Segundo as Regras de Mandela, exceto em circunstâncias especiais, o pessoal que exerce funções em contato direto com os presos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "86e1b92f4680fa1d68ff2da7a609c6c5",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -9801,6 +10376,31 @@
   },
   {
     "alternativas": {
+      "a": "no melhor interesse da criança.",
+      "b": "na conveniência da administração.",
+      "c": "no tempo de pena que falta cumprir.",
+      "d": "na vontade dos demais presos.",
+      "e": "no comportamento carcerário do genitor."
+    },
+    "artigo": "Regras de Mandela, regra 29, item 1",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362794+00:00",
+    "enunciado": "Segundo as Regras de Mandela, a decisão de permitir que uma criança permaneça com o pai ou a mãe no estabelecimento prisional deve basear-se:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8c0fa0894a58fe8d7fff006a834170c5",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Pode adotar medidas provisórias em casos de extrema gravidade e urgência, quando necessário para evitar danos irreparáveis às pessoas.",
       "b": "Só pode emitir opiniões consultivas, sem julgar casos.",
       "c": "É subordinada ao Supremo Tribunal Federal.",
@@ -10067,6 +10667,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "8e15ecd1e272dbb1633ad30d64abed4e",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "em tempo integral, como pessoal prisional profissional, com estatuto de servidor público e estabilidade sujeita apenas a boa conduta, eficiência e aptidão física.",
+      "b": "por contrato temporário renovável a cada mês.",
+      "c": "entre os próprios presos de bom comportamento.",
+      "d": "sem nenhuma exigência de formação.",
+      "e": "por indicação política, sem estabilidade."
+    },
+    "artigo": "Regras de Mandela, regra 74, item 3",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468640+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o pessoal prisional deve ser nomeado:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8e37d9b949e522dce7412c3d4135dc0d",
+    "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -10901,6 +11526,31 @@
   },
   {
     "alternativas": {
+      "a": "sem estar acompanhado de uma funcionária.",
+      "b": "em nenhuma hipótese, nem acompanhado.",
+      "c": "sem autorização judicial.",
+      "d": "fora do horário de visitas, apenas.",
+      "e": "sem portar arma."
+    },
+    "artigo": "Regras de Mandela, regra 81, item 2",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468648+00:00",
+    "enunciado": "Segundo as Regras de Mandela, nenhum funcionário do sexo masculino deve entrar na parte do estabelecimento destinada às mulheres:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9740528ddd8671fc1a2799b9270412f6",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "novatio legis in pejus.",
       "b": "ultra-atividade da lei penal.",
       "c": "abolitio criminis.",
@@ -11226,6 +11876,31 @@
   },
   {
     "alternativas": {
+      "a": "os presos ainda não julgados devem ser mantidos separados dos condenados.",
+      "b": "homens e mulheres podem dividir os mesmos alojamentos.",
+      "c": "os presos por dívida devem ficar com os presos por crime.",
+      "d": "os jovens devem ficar com os adultos, para aprenderem a disciplina.",
+      "e": "a separação depende apenas da vontade do preso."
+    },
+    "artigo": "Regras de Mandela, regra 11, b",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362787+00:00",
+    "enunciado": "Segundo as Regras de Mandela, quanto à separação das categorias de presos, é correto afirmar:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9a5df31048ce5c1c4f4cfb2ecc6d1dbb",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "é permitida, desde que registrada em cartório.",
       "b": "depende apenas de autorização da autoridade policial local.",
       "c": "é vedada, pois a Constituição proíbe a associação de caráter paramilitar.",
@@ -11248,6 +11923,31 @@
     "origem_impressao": "7dfdd1bc8a6d21678d35f906b8f63768",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "psiquiatras, psicólogos, assistentes sociais, professores e instrutores técnicos.",
+      "b": "apenas agentes armados.",
+      "c": "somente advogados.",
+      "d": "somente médicos legistas.",
+      "e": "apenas religiosos."
+    },
+    "artigo": "Regras de Mandela, regra 78, item 1",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468644+00:00",
+    "enunciado": "Segundo as Regras de Mandela, sempre que possível, o pessoal prisional deve incluir um número suficiente de especialistas, tais como:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9c578fd9659e9f4124611b72fe151dd2",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -11526,6 +12226,31 @@
   },
   {
     "alternativas": {
+      "a": "somente por funcionárias, o que não impede que funcionários homens, em especial médicos e professores, exerçam suas funções profissionais nos estabelecimentos ou setores femininos.",
+      "b": "por funcionários de qualquer sexo, indistintamente.",
+      "c": "apenas por funcionários homens armados.",
+      "d": "por outras presas de confiança.",
+      "e": "somente pelo diretor."
+    },
+    "artigo": "Regras de Mandela, regra 81, item 3",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468646+00:00",
+    "enunciado": "Segundo as Regras de Mandela, as presas devem ser atendidas e vigiadas:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a05d2a9b72208c536c0ff059dcee4c98",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "inviolável, sendo assegurado o livre exercício dos cultos religiosos.",
       "b": "garantida apenas às religiões reconhecidas pelo Estado.",
       "c": "restrita ao âmbito privado, vedado o culto público.",
@@ -11671,6 +12396,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "63615ebfc16bf214a041e7e6be96d6fa",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "só podem ser tomadas pelos profissionais de saúde responsáveis e não podem ser desconsideradas por funcionários prisionais não médicos.",
+      "b": "cabem ao diretor do estabelecimento.",
+      "c": "dependem de aprovação da equipe de segurança.",
+      "d": "podem ser revistas pelo agente de plantão.",
+      "e": "cabem ao juiz da execução."
+    },
+    "artigo": "Regras de Mandela, regra 27, item 2",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362790+00:00",
+    "enunciado": "Segundo as Regras de Mandela, as decisões clínicas sobre a saúde dos presos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a28e22698edeea23bbdd3bf43c4376e9",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -12476,6 +13226,31 @@
   },
   {
     "alternativas": {
+      "a": "comportar-se e desempenhar suas funções de modo a influenciar positivamente os presos pelo exemplo e a merecer o respeito deles.",
+      "b": "manter distância total dos presos, sem nenhuma comunicação.",
+      "c": "obedecer às lideranças dos presos.",
+      "d": "aplicar castigos exemplares.",
+      "e": "evitar o registro das ocorrências."
+    },
+    "artigo": "Regras de Mandela, regra 77",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468650+00:00",
+    "enunciado": "Segundo as Regras de Mandela, todo o pessoal prisional deve, em todas as circunstâncias:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "af3f315e861be84627e9796fbe6b7d40",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "a submissão à sanção disciplinar imposta.",
       "b": "a urbanidade no trato com os demais condenados.",
       "c": "a entrevista pessoal e reservada com o advogado.",
@@ -13101,6 +13876,31 @@
   },
   {
     "alternativas": {
+      "a": "segurança e proteção, incluindo o conceito de segurança dinâmica, o uso da força e de instrumentos de contenção, e técnicas preventivas como a negociação e a mediação.",
+      "b": "técnicas de interrogatório para obter confissões.",
+      "c": "apenas tiro e defesa pessoal.",
+      "d": "apenas legislação tributária.",
+      "e": "a gestão financeira do estabelecimento."
+    },
+    "artigo": "Regras de Mandela, regra 76, item 1, c",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468640+00:00",
+    "enunciado": "Segundo as Regras de Mandela, a formação do pessoal prisional deve incluir, no mínimo, entre outros temas:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b63100fd6f24e71a9939569f2fbf1dd0",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "para um único período subsequente.",
       "b": "para dois períodos subsequentes.",
       "c": "indefinidamente.",
@@ -13598,6 +14398,31 @@
     "origem_impressao": "b4d4023f28875a187f6b419e0382f8d4",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "visitar cada um deles com frequência, e cada estabelecimento deverá ter um funcionário residente responsável.",
+      "b": "visitar cada estabelecimento uma vez por ano.",
+      "c": "delegar a direção aos presos de bom comportamento.",
+      "d": "unificar os estabelecimentos.",
+      "e": "residir alternadamente em cada um, sem outro responsável."
+    },
+    "artigo": "Regras de Mandela, regra 79, item 3",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468639+00:00",
+    "enunciado": "Segundo as Regras de Mandela, quando dois ou mais estabelecimentos estiverem sob a autoridade de um só diretor, ele deverá:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "bd44548afb195db20ac6b5ed47da3eca",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -16351,6 +17176,31 @@
   },
   {
     "alternativas": {
+      "a": "é um serviço social de grande importância.",
+      "b": "é uma atividade secundária do Estado.",
+      "c": "deve ser mantido em segredo do público.",
+      "d": "é tarefa exclusivamente policial.",
+      "e": "dispensa formação específica."
+    },
+    "artigo": "Regras de Mandela, regra 74, item 2",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468642+00:00",
+    "enunciado": "Segundo as Regras de Mandela, a administração prisional deve procurar despertar e manter, no espírito do pessoal e do público, a convicção de que o trabalho prisional:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e3b608dd6fbfc003c7645baa404402c8",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "aos efeitos da pesquisa biológica, que permite manipulações do patrimônio genético.",
       "b": "ao direito de propriedade.",
       "c": "ao direito de voto.",
@@ -16492,6 +17342,56 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "e55c78357c54e6e96455a94bf27f81d3",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "em sigilo, disponíveis apenas a quem, por responsabilidade profissional, precise acessá-los, assegurado ao preso o acesso aos próprios registros, ressalvadas as restrições da lei nacional.",
+      "b": "públicos, para qualquer interessado.",
+      "c": "apenas em papel, vedado o meio eletrônico.",
+      "d": "inacessíveis ao próprio preso em qualquer hipótese.",
+      "e": "em poder da família do preso."
+    },
+    "artigo": "Regras de Mandela, regra 9",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362795+00:00",
+    "enunciado": "Segundo as Regras de Mandela, os registros dos presos devem ser mantidos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e5a0e4c3426f7d1348f38f3bba498faa",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "aos sinais de estresse psicológico decorrentes da prisão, incluindo o risco de suicídio ou de automutilação e os sintomas de abstinência.",
+      "b": "à capacidade financeira do preso.",
+      "c": "à religião do preso.",
+      "d": "aos antecedentes criminais.",
+      "e": "à preferência do preso por determinada cela."
+    },
+    "artigo": "Regras de Mandela, regra 30, c",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362799+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o profissional de saúde que examina o preso na admissão deve dar atenção especial, entre outros pontos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e5c4903353da860594bf5f3b506eefc2",
+    "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -16716,6 +17616,31 @@
     "escopo": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Tratados equivalentes a emenda constitucional (EC 45/2004)",
     "evidencia_da_base": "nenhuma",
     "impressao": "e828d66fb4f9eab7cb303c4e06ce428d",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "documentar e comunicar os casos à autoridade médica, administrativa ou judicial competente, tomando cuidado para não expor o preso a risco.",
+      "b": "ignorar os sinais, pois ocorreram antes da prisão.",
+      "c": "comunicar apenas à família do preso.",
+      "d": "aguardar uma queixa formal do preso.",
+      "e": "registrar apenas no prontuário, sem comunicar ninguém."
+    },
+    "artigo": "Regras de Mandela, regra 34",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362791+00:00",
+    "enunciado": "Segundo as Regras de Mandela, se um profissional de saúde, ao examinar o preso na admissão, perceber sinais de tortura ou de outros tratamentos cruéis, desumanos ou degradantes, ele deverá:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e8cbea11b0da6466835cf8955b65cd08",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
@@ -17123,6 +18048,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "usar apenas a força estritamente necessária e comunicar imediatamente o incidente ao diretor do estabelecimento.",
+      "b": "comunicar o fato apenas no fim do mês.",
+      "c": "usar a força que julgar conveniente, sem registro.",
+      "d": "comunicar o fato apenas à família do preso.",
+      "e": "aguardar a queixa do preso para registrar o fato."
+    },
+    "artigo": "Regras de Mandela, regra 82, item 1",
+    "assunto": "Pessoal do estabelecimento prisional",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "criada_em": "2026-10-03T23:28:51.468637+00:00",
+    "enunciado": "Segundo as Regras de Mandela, o funcionário prisional que recorrer à força deve:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "edd476ea0feb19469b7275f531315466",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -17951,6 +18901,31 @@
   },
   {
     "alternativas": {
+      "a": "é responsabilidade do Estado, e os presos devem ter os mesmos padrões de cuidado disponíveis na comunidade, gratuitamente e sem discriminação por sua situação jurídica.",
+      "b": "é responsabilidade do próprio preso.",
+      "c": "depende de pagamento pela família.",
+      "d": "pode ser inferior à oferecida na comunidade.",
+      "e": "é restrita aos presos condenados."
+    },
+    "artigo": "Regras de Mandela, regra 24, item 1",
+    "assunto": "Regras de aplicação geral",
+    "base": "item_do_edital",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362789+00:00",
+    "enunciado": "Segundo as Regras de Mandela, a prestação de cuidados de saúde aos presos:",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "fa13d22acfddd66bfebf13876746a617",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Furto qualificado.",
       "b": "Peculato.",
       "c": "Concussão.",
@@ -18223,6 +19198,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Todos os presos devem ser tratados com o respeito devido à sua dignidade e ao seu valor como seres humanos, e nenhuma circunstância justifica a tortura.",
+      "b": "Os objetivos da pena de prisão são, prioritariamente, proteger a sociedade contra o crime e reduzir a reincidência.",
+      "c": "Para pôr em prática a não discriminação, a administração prisional deve levar em conta as necessidades individuais dos presos, em especial das categorias mais vulneráveis.",
+      "d": "Os presos ainda não julgados podem ser mantidos junto com os condenados sempre que faltarem vagas.",
+      "e": "Os presos jovens devem ser mantidos separados dos adultos."
+    },
+    "artigo": "Regras de Mandela, regra 11, b (e regras 1, 2.2, 4.1 e 11, d)",
+    "assunto": "Regras de aplicação geral",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "criada_em": "2026-10-03T23:27:12.362778+00:00",
+    "enunciado": "Em relação às regras de aplicação geral das Regras Mínimas das Nações Unidas para o Tratamento de Presos (Regras de Mandela), assinale a alternativa INCORRETA.",
+    "escopo": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral",
+    "evidencia_da_base": "alvo",
+    "impressao": "fe30a457983345dbb100830f1dd7f112",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "bb3000300f5b08c04a3fcd90780d9d1b",
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {

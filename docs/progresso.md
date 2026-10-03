@@ -23,7 +23,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
 | 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1 e F2 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore e o complementar aceito no costume e no treino); falta o resto da seção F |
-| 17 | O estoque de geradas até 07/11 (pedido de 03/10) | 🔄 55 de 57 lotes feitos (685 questões; banco e JSON 50 → 735); faltam os 2 das Regras de Mandela (50 e 57), à espera da sua decisão |
+| 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 
 ---
 
@@ -2142,9 +2142,22 @@ e 52 (commits `989f9e4`, `53da083`, `9b4d649`, `43ce39f` e o da semana de
 questões), repostas com enunciados próprios. Antes de cada commit, o JSON foi
 conferido contra o do HEAD: o anterior inteiro continua, as novas têm modelo e
 `conteudo`, e a soma bate com o plano. O texto de lei veio da compilação da
-Câmara. **Pendentes, os lotes 50 e 57** (Regras de Mandela, 40 questões): a
-importação exige "art." ou "súmula" em Direitos Humanos e recusa a citação
-"regra N" - o detalhe e as duas saídas estão no `docs/estoque_de_geradas.md`.
+Câmara. Os lotes 50 e 57 (Regras de Mandela) pararam: a importação exigia
+"art." ou "súmula" em Direitos Humanos e recusava a citação "regra N".
+
+**A decisão 76 e os lotes 50 e 57:** a importação passou a aceitar "regra"
+seguida de número como fonte - as Regras de Mandela não têm artigo -, em
+`src/radar/servico/manual.py` (o `CITA_ARTIGO` e a frase do pedido que diz como
+citar), com 5 testes novos no `tests/test_ia_manual.py`: 4 da regra (com o
+número serve; sem ele, não) e 1 da questão de Mandela que entra pela
+importação. O comando, de verdade: os dois lotes, 40 de 40, escritos sobre o
+texto oficial da ONU (UNODC); JSON 735 → 775.
+
+| Rodada | Resultado |
+|---|---|
+| `test_ia_manual.py` (5 novos) | 26 passed |
+| `test_central_de_macetes.py`, `test_relatorio.py`, `test_geracao_por_conteudo.py`, `test_gerador.py` (o macete e a explicação usam a mesma regra) | 113 passed |
+| Suíte inteira, PC (uma vez) | **2430 passed** (2425 de antes + os 5 novos), 0 failed, 25 min |
 
 ### F1 — o "Onde estudar primeiro" lê a árvore ✅
 

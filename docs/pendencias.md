@@ -255,14 +255,6 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   conferencia); o filtro, so com o caminho exato do Qconcursos, que eu nao
   sei - me passe se quiser;
 
-- 🟡 **O estoque de geradas ate 07/11** (decisao 73): 55 de 57 lotes feitos
-  (685 questoes, JSON em 735). Faltam os lotes 50 e 57, das Regras de Mandela
-  (40 questoes), que dependem do item abaixo;
-- 🔴 **A importacao recusa a citacao das Regras de Mandela**: em Direitos
-  Humanos o `manual.CITA_ARTIGO` so aceita "art." ou "sumula", e a regra de
-  Mandela se cita como "regra 12.1". Decidir: aceitar "regra" na importacao
-  (codigo, uma subetapa) ou citar, ao lado da regra, o artigo da LEP ou da CF
-  que diga o mesmo. Detalhe no `docs/estoque_de_geradas.md`;
 - ⚪ **A gerada e unica pelo enunciado** (`QuestaoGerada.impressao`): dois
   comandos genericos iguais com alternativas diferentes viram uma so, e a
   importacao conta a segunda como repetida. Por desenho; no estoque, cada

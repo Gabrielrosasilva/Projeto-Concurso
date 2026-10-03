@@ -1941,3 +1941,14 @@ mudaram em 2024-2026 (art. 41, art. 112 e art. 146-E da LEP; art. 310 do CPP).
 **O que ficou:** os lotes 50 e 57, das Regras de Mandela. A importacao exige
 "art." ou "sumula" na fonte de Direitos Humanos, e a regra de Mandela se cita
 como "regra N". Parei nesses dois e segui com os outros.
+
+## As Regras de Mandela no estoque, decisao 76 (03/10)
+
+**O que travava:** a importacao so aceitava, em Direitos Humanos, fonte com
+"art." ou "sumula", e a regra de Mandela se cita como "regra 12.1". Os lotes 50
+e 57 do estoque pararam ai, e a escolha foi sua.
+
+**O conserto:** "regra" seguida de numero passou a valer como fonte (decisao
+76), com teste; sem o numero, continua recusada. Depois, os dois lotes - 40
+questoes escritas sobre o texto oficial da ONU, baixado do UNODC. O estoque
+fechou nos 57 lotes e 725 questoes; o JSON, em 775.

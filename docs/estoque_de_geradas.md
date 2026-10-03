@@ -115,8 +115,8 @@ treino de 04/10 a 07/11 menos as reais ainda não respondidas nos nós dele -
 dividido entre os nós de subassunto do tema, no máximo 20 por nó (5 no nó que é
 um artigo só). Os lotes 2 a 56 foram feitos todos em 03/10 (escolha sua); como
 o /geradas sorteia pela matéria, o treino rápido já mistura temas que ainda não
-estudei (está nas pendências). Os lotes 50 e 57 ficaram de fora - ver "Os lotes
-2 a 56", abaixo.
+estudei (está nas pendências). Os lotes 50 e 57 entraram depois da decisão 76
+- ver "Os lotes 2 a 56", abaixo.
 
 ### 05 a 10/10
 
@@ -325,7 +325,7 @@ estudei (está nas pendências). Os lotes 50 e 57 ficaram de fora - ver "Os lote
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Regimes de cumprimento da pena" --quantas 20
    ```
-50. **29/10 · DH · Regras de Mandela - parte 1 (regras 1 a 35)** - Regras de aplicação geral: 20 (3 variação + 17 do zero) - **pendente** (a citação "regra N" é recusada; ver abaixo)
+50. **29/10 · DH · Regras de Mandela - parte 1 (regras 1 a 35)** - Regras de aplicação geral: 20 (3 variação + 17 do zero)
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Regras de aplicação geral" --quantas 20
    ```
@@ -356,7 +356,7 @@ estudei (está nas pendências). Os lotes 50 e 57 ficaram de fora - ver "Os lote
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Monitoração eletrônica" --quantas 20
    ```
-57. **05/11 · DH · Regras de Mandela - parte 2 (regras 36 em diante)** - Pessoal do estabelecimento prisional: 20 (3 variação + 17 do zero) - **pendente** (a citação "regra N" é recusada; ver abaixo)
+57. **05/11 · DH · Regras de Mandela - parte 2 (regras 36 em diante)** - Pessoal do estabelecimento prisional: 20 (3 variação + 17 do zero)
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Pessoal do estabelecimento prisional" --quantas 20
    ```
@@ -432,13 +432,13 @@ Qconcursos, como o plano manda.
   audiência de custódia por videoconferência). Os incisos I a IV do art. 112,
   reescritos em 2026, ficaram de fora: a redação compilada repete percentuais e
   é fácil de errar.
-- **Os lotes 50 e 57, pendentes (40 questões):** são as Regras de Mandela, e em
-  Direitos Humanos a importação exige "art." ou "súmula" na fonte
-  (`manual.CITA_ARTIGO`). A regra de Mandela se cita como "regra 12.1" - e essa
-  citação é recusada. Escrever "art." no lugar de "regra" seria citar errado.
-  Duas saídas, à sua escolha: aceitar "regra" na importação (mudança de código,
-  uma subetapa) ou citar, ao lado da regra, o artigo da LEP ou da CF que diz a
-  mesma coisa, só quando disser.
+- **Os lotes 50 e 57 (Regras de Mandela, 40 questões):** pararam porque, em
+  Direitos Humanos, a importação só aceitava "art." ou "súmula" na fonte, e a
+  regra de Mandela se cita como "regra 12.1". Com a sua escolha, a importação
+  passou a aceitar "regra" seguida de número (decisão 76), e os dois entraram:
+  40 de 40, escritos sobre o texto oficial da ONU (o PDF do UNODC, em inglês) -
+  as regras 1 a 35 no lote 50 e as 74 a 82, do pessoal, no lote 57. O estoque
+  fechou nos 57 lotes: 725 questões, e o JSON em 775.
 
 ## Cuidados
 
