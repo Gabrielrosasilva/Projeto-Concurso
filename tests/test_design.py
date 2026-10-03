@@ -1,4 +1,4 @@
-"""O design system: um arquivo de estilo, seis selos, modo escuro, e nada de JS.
+"""O design system: um arquivo de estilo, os selos de origem, modo escuro, e nada de JS.
 
 A tela de Macetes e a primeira a usar. Estes testes seguram o contrato que as
 proximas telas vao herdar - se alguem renomear uma variavel ou tirar um selo,
@@ -31,7 +31,11 @@ def test_o_arquivo_de_estilo_e_servido(cliente):
     "--cor-fundo", "--cor-superficie", "--cor-texto", "--cor-acao",
     "--esp-1", "--esp-4", "--esp-7",
     "--fonte", "--tam-base", "--peso-forte", "--linha",
-    "--raio", "--selo-ia", "--selo-oficial", "--cor-aviso",
+    "--raio", "--cor-aviso",
+    # as quatro origens da secao 20 do novo.md, e o plano (Etapa 7A)
+    "--selo-oficial", "--selo-acervo", "--selo-automatico", "--selo-ia", "--selo-plano",
+    # a meta do dia, com token proprio desde a 7A
+    "--meta-ideal", "--meta-reduzida", "--meta-minima", "--meta-nao-fiz",
 ])
 def test_as_variaveis_existem(variavel):
     assert re.search(rf"{variavel}\s*:", CSS.read_text(encoding="utf-8"))
@@ -45,20 +49,83 @@ def test_o_escuro_e_o_padrao_e_nao_segue_o_sistema():
     assert "prefers-color-scheme" not in css
 
 
-def test_os_seis_selos_da_especificacao():
-    """Os seis, com o emoji e o texto da tabela da especificacao."""
+def test_os_selos_da_especificacao():
+    """As quatro origens do novo.md, com o emoji, o texto e a cor da tabela."""
     modulo = templates.env.get_template("_componentes.html").module
     esperados = {
-        "oficial": ("🟦", "Fonte oficial"),
-        "prova": ("🟦", "Extraída da prova"),
-        "calculado": ("🟩", "Calculado pelo sistema"),
-        "classificacao": ("🟨", "Classificação automática"),
-        "tendencia": ("🟨", "Tendência"),
-        "ia": ("🟥", "Gerado por IA"),
+        "oficial": ("🟢", "Fonte oficial", "oficial"),
+        "prova": ("🟢", "Extraída da prova", "oficial"),
+        "acervo": ("🔵", "Estatística do acervo", "acervo"),
+        "automatico": ("🟡", "Análise automática", "automatico"),
+        "classificacao": ("🟡", "Análise automática (classificação)", "automatico"),
+        "tendencia": ("🟡", "Análise automática (tendência)", "automatico"),
+        "ia": ("🟣", "Gerado por IA", "ia"),
+        "plano": ("📌", "Seleção do plano (cronograma)", "plano"),
     }
-    for tipo, (emoji, texto) in esperados.items():
+    for tipo, (emoji, texto, cor) in esperados.items():
         html = str(modulo.selo(tipo))
         assert emoji in html and texto in html, tipo
+        assert f"ds-selo--{cor}" in html, tipo
+
+
+def test_o_selo_calculado_saiu():
+    """O verde quer dizer oficial: o "calculado" virou acervo ou automatico."""
+    from radar import origem
+
+    assert "calculado" not in origem.SELOS
+    assert "--selo-calculado" not in CSS.read_text(encoding="utf-8")
+
+
+def test_o_selo_curto_e_o_mesmo_selo():
+    """A ficha usa o mesmo componente, so com o emoji: o texto vai no title."""
+    modulo = templates.env.get_template("_componentes.html").module
+    html = str(modulo.selo("acervo", curto=True))
+    assert "ds-selo--acervo" in html and "🔵" in html
+    assert 'aria-label="Estatística do acervo"' in html
+
+
+def _bloco(css: str, marca: str) -> str:
+    """O corpo da primeira regra depois da marca (um seletor, ou o titulo de
+    uma secao do design.css), para conferir para onde cada token aponta."""
+    inicio = css.index("{", css.index(marca))
+    return css[inicio:css.index("}", inicio)]
+
+
+def test_os_selos_tem_as_cores_do_novo_md():
+    """Verde oficial, azul acervo, amarelo automatico, roxo IA - nos dois temas,
+    porque o selo aponta para a cor com nome e o escuro troca a cor com nome."""
+    css = CSS.read_text(encoding="utf-8")
+    origens = _bloco(css, "--- os selos de origem")
+    assert "--selo-oficial:          var(--cor-verde)" in origens
+    assert "--selo-acervo:           var(--cor-azul)" in origens
+    assert "--selo-automatico:       var(--cor-ambar)" in origens
+    assert "--selo-ia:               var(--cor-roxo)" in origens
+    escuro = _bloco(css, ':root:not([data-tema="claro"])')
+    for cor in ("--cor-verde:", "--cor-azul:", "--cor-ambar:", "--cor-roxo:", "--cor-roxo-fundo:"):
+        assert cor in escuro, cor
+
+
+def test_a_meta_do_dia_nao_usa_a_cor_dos_selos():
+    """Ideal verde, Reduzida azul, Minima amarela, Nao fiz vermelha: as cores de
+    antes da 7A, com token proprio - trocar um selo nao pinta a meta."""
+    css = CSS.read_text(encoding="utf-8")
+    assert "--meta-ideal:          var(--cor-verde)" in css
+    assert "--meta-reduzida:       var(--cor-azul)" in css
+    assert "--meta-minima:         var(--cor-ambar)" in css
+    assert "--meta-nao-fiz:        var(--cor-vermelho)" in css
+    pasta = CSS.parent.parent / "templates"
+    for arquivo in ("hoje.html", "semanas.html"):
+        texto = (pasta / arquivo).read_text(encoding="utf-8")
+        for meta in ("ideal", "reduzida", "minima", "nao-fiz"):
+            assert f"var(--meta-{meta})" in texto, (arquivo, meta)
+
+
+def test_so_o_selo_e_o_bloco_usam_a_cor_dos_selos():
+    """Fora do design.css, ninguem pinta com --selo-*: a cor de origem e do
+    selo e do bloco. Bom e ruim usam --cor-verde e --cor-vermelho."""
+    pasta = CSS.parent.parent / "templates"
+    for arquivo in sorted(pasta.glob("*.html")):
+        assert "--selo-" not in arquivo.read_text(encoding="utf-8"), arquivo.name
 
 
 def test_a_tela_de_macetes_usa_o_design_system(cliente):
@@ -151,7 +218,8 @@ def test_a_questao_real_do_simulado_leva_o_selo_da_prova(cliente):
 
     texto = cliente.get(f"/simulado/{simulado.id}").text
 
-    assert "ds-selo--oficial" in texto and "Extraída da prova" in texto
+    assert "ds-selo--oficial" in texto and "🟢 Extraída da prova" in texto.replace(
+        '<span aria-hidden="true">🟢</span>', "🟢")
 
 
 def test_o_custo_em_reais_diz_que_o_cambio_e_fixo(cliente):

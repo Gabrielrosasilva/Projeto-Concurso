@@ -28,7 +28,7 @@ import pytest
 from fastapi.testclient import TestClient
 from typer.testing import CliRunner
 
-from radar import amostra, conteudos as arvore, cronograma, fichas, incidencia, leis, prioridade
+from radar import amostra, conteudos as arvore, cronograma, fichas, incidencia, leis, origem, prioridade
 from radar.cli import app as cli
 from radar.servico import estudo
 from radar.servico import fichas as servico_fichas
@@ -155,7 +155,7 @@ def test_todo_campo_tem_origem_registrada():
         if campo == "fonte":
             continue        # a fonte carrega a dela: oficial ou ia
         assert campo in fichas.ORIGEM_DO_CAMPO, campo
-    assert set(fichas.ORIGEM_DO_CAMPO.values()) <= set(fichas.SELOS)
+    assert set(fichas.ORIGEM_DO_CAMPO.values()) <= set(origem.SELOS)
     ficha = _montar()
     assert ficha.fonte.origem == fichas.OFICIAL
     assert ficha.ler_exatamente.origem == fichas.IA
@@ -163,7 +163,7 @@ def test_todo_campo_tem_origem_registrada():
 
 def test_texto_de_ia_leva_o_selo_roxo_e_a_procedencia():
     ficha = _montar()
-    assert fichas.SELOS[fichas.IA][0] == "🟣"
+    assert origem.SELOS[fichas.IA].emoji == "🟣"
     assert fichas.ORIGEM_DO_CAMPO["entender"] == fichas.IA
     assert fichas.ORIGEM_DO_CAMPO["memorizar"] == fichas.IA
     assert ficha.procedencia == "Claude Code, importado manualmente, em 02/10/2026"

@@ -20,7 +20,7 @@
     /* O aviso que a etapa inteira existe para sustentar. Fica no topo, e nao
        no rodape: e a primeira coisa que eu preciso lembrar ao abrir a tela. */
     .aviso-ia{margin:0 0 var(--esp-4)}
-    .aviso-ia b{color:var(--selo-ia)}
+    .aviso-ia b{color:var(--cor-roxo)}
     /* O recado da ultima acao (gerou, importou, deu erro): laranja de aviso. */
     .recado{margin:0 0 var(--esp-4);padding:var(--esp-3) var(--esp-4);border-radius:var(--raio-sm);
       border-left:3px solid var(--cor-aviso);background:var(--cor-aviso-fundo);font-size:var(--tam-sm)}
@@ -232,7 +232,7 @@
       <p class="ds-cartao__meta">
         Dois números, sempre. Acertar uma variação que a IA escreveu não é a
         mesma coisa que acertar o que a banca cobrou.
-        {{ selo('calculado') }} Nas reais, cada questão conta uma vez, pela
+        {{ selo('automatico') }} Nas reais, cada questão conta uma vez, pela
         última resposta; nas geradas, conta cada tentativa. Entre parênteses,
         a base de cada porcentagem.
       </p>

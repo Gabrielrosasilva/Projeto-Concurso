@@ -25,7 +25,7 @@
     .status{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
     .etiqueta{font-size:var(--tam-xs);font-weight:var(--peso-forte);text-transform:uppercase;
       letter-spacing:.04em;padding:.15rem .55rem;border-radius:var(--raio-pill)}
-    .etiqueta.aberto{background:var(--selo-calculado-fundo);color:var(--selo-calculado)}
+    .etiqueta.aberto{background:var(--cor-verde-fundo);color:var(--cor-verde)}
     .etiqueta.fechado{background:var(--cor-superficie-2);color:var(--cor-texto-suave);
       border:1px solid var(--cor-borda)}
     .linhas{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--esp-1) var(--esp-3);
@@ -39,7 +39,7 @@
     .prioridades .porque{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .trilha{height:6px;border-radius:3px;background:var(--cor-borda);overflow:hidden}
     .trilha span{display:block;height:100%;background:var(--cor-acao)}
-    .trilha.nao-treinada span{background:var(--selo-automatico)}
+    .trilha.nao-treinada span{background:var(--cor-ambar)}
 
     .numero-grande{font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1;
       font-variant-numeric:tabular-nums}
@@ -168,7 +168,7 @@
         </ol>
         <p class="miudo">
           {{ selo('oficial', 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
-          {{ selo('calculado', 'meu acerto: radar + anotado') }} × tempo sem revisar. Com menos de
+          {{ selo('automatico', 'meu acerto: radar + anotado') }} × tempo sem revisar. Com menos de
           {{ MINIMO_NA_MATERIA }} questões, a matéria conta como não treinada:
           vale o peso inteiro, e o fator de tempo é neutro.
         </p>
@@ -218,7 +218,7 @@
             {% endfor %}
           </ul>
         {% endif %}
-        <p class="miudo">{{ selo('calculado') }} medido no radar: das {{ h.revisar.respondidas }} questões reais que respondi, pela última resposta de cada, sem anuladas.</p>
+        <p class="miudo">{{ selo('automatico') }} medido no radar: das {{ h.revisar.respondidas }} questões reais que respondi, pela última resposta de cada, sem anuladas.</p>
         <div class="rodape">
           <form method="post" action="/revisar">
             <button class="ds-botao" type="submit" style="width:100%">Revisar agora</button>
@@ -249,7 +249,7 @@
       <span class="texto">
         {% set e = h.evolucao %}
         {% if e.mensuravel %}
-          {{ selo('calculado') }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} respostas a questões reais, medido no radar.
+          {{ selo('automatico') }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} respostas a questões reais, medido no radar.
           {% if e.variacao is not none %}
             Últimos 30 dias: <b>{{ '%+.0f'|format(e.variacao) }} pontos</b> em relação a antes.
           {% else %}

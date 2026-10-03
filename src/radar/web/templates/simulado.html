@@ -30,14 +30,14 @@
     .acerto td:first-child,.acerto th:first-child{width:100%}
     .trilha{display:inline-block;width:100px;height:8px;border-radius:var(--raio-pill);
       background:var(--cor-borda);overflow:hidden;vertical-align:middle}
-    .trilha span{display:block;height:100%;background:var(--selo-calculado)}
-    tr.pior .trilha span{background:var(--selo-ia)}
+    .trilha span{display:block;height:100%;background:var(--cor-verde)}
+    tr.pior .trilha span{background:var(--cor-vermelho)}
 
     /* Descartar em dois passos, sem JavaScript: o <details> mostra a
        pergunta, e so o segundo botao apaga. */
     details.descartar summary{cursor:pointer;color:var(--cor-texto-suave);font-size:var(--tam-xs);list-style:none}
     details.descartar summary::-webkit-details-marker{display:none}
-    details.descartar summary:hover{color:var(--selo-ia)}
+    details.descartar summary:hover{color:var(--cor-vermelho)}
     details.descartar form{display:flex;flex-direction:column;align-items:flex-end;gap:var(--esp-1);
       margin-top:var(--esp-1);font-size:var(--tam-xs);white-space:normal}
     .rodadas td.materias{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
@@ -183,7 +183,7 @@
           <button class="ds-botao" type="submit">Começar</button>
         </form>
         <p class="dica">
-          {{ selo('calculado') }}
+          {{ selo('automatico') }}
           São {{ "{:,}".format(total_de_questoes)|replace(",", ".") }} questões no acervo, de provas de verdade,
           com o gabarito que a própria banca publicou. A mesma questão nunca
           aparece duas vezes na mesma rodada.
@@ -195,7 +195,7 @@
       <section class="ds-cartao cartao-simulado">
         <h2 class="ds-cartao__titulo">Como você vai até agora</h2>
         <p class="ds-cartao__meta">
-          {{ selo('calculado') }} Em questão real, somando todos os simulados:
+          {{ selo('automatico') }} Em questão real, somando todos os simulados:
           cada questão conta uma vez, pela última resposta que dei a ela.
           "Questões" é a base de cada porcentagem.
         </p>

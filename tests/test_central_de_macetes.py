@@ -145,7 +145,7 @@ def test_o_cartao_mostra_os_selos_separados(cliente):
 
     assert "Central de macetes" in pagina
     # Cada parte dentro do bloco da sua origem, e nunca no do outro.
-    assert 'ds-bloco--calculado' in pagina and "Padrão da banca" in pagina
+    assert 'ds-bloco--acervo' in pagina and "Padrão da banca" in pagina
     assert 'ds-bloco--ia' in pagina and "Macete (IA)" in pagina
     assert "Fonte citada: art. 112 da Lei 7.210/1984" in pagina
     assert "Pegadinha recorrente" in pagina

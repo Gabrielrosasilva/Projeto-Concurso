@@ -24,6 +24,7 @@ from radar import cronograma
 from radar import fichas as fichas_puras
 from radar import leis
 from radar import onde_estudar
+from radar import origem
 from radar import regioes
 from radar import servico
 from radar.util import (
@@ -134,6 +135,13 @@ templates.env.globals["MOTIVOS_DO_ERRO"] = servico.erros.MOTIVOS
 templates.env.globals["FONTES_DO_ERRO"] = servico.erros.FONTES
 templates.env.globals["SITUACOES_DO_ERRO"] = servico.erros.SITUACOES
 templates.env.globals["ESTA_PARA_REVER"] = servico.erros.esta_para_rever
+# Os selos e as duas frases que nao podem variar (Etapa 7A): moram no
+# radar/origem.py, e a tela, a ficha e o terminal leem de la. O "Amostra
+# insuficiente" e o estado do radar/amostra.py, o mesmo do desempenho.
+templates.env.globals["SELOS"] = origem.SELOS
+templates.env.globals["FRASE_SEM_EVIDENCIA"] = origem.FRASE_SEM_EVIDENCIA
+templates.env.globals["FRASE_DA_QUESTAO_DE_IA"] = origem.FRASE_DA_QUESTAO_DE_IA
+templates.env.globals["AMOSTRA_INSUFICIENTE"] = amostra.INSUFICIENTE
 
 
 # --- o tema (claro ou escuro) -----------------------------------------------
@@ -1378,7 +1386,7 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
         raise HTTPException(status_code=404)
     return templates.TemplateResponse(
         request=request, name="ficha.html",
-        context={"f": ficha, "data": quando, "SELOS_DA_FICHA": fichas_puras.SELOS,
+        context={"f": ficha, "data": quando,
                  "comando_de_gerar": fichas_puras.comando_de_gerar},
     )
 

@@ -5,33 +5,31 @@
    Use assim:
 
        {% from "_componentes.html" import selo, legenda_dos_selos %}
-       {{ selo('calculado') }}
+       {{ selo(linha.origem) }}
        {{ selo('ia', 'Macete (IA)') }}
 
-   Os seis selos sao os da especificacao, e o texto padrao de cada um e o da
-   tabela dela. `texto` troca so a palavra; a cor e o emoji ficam, porque sao
-   eles que dizem a origem. #}
+   Os selos moram no radar/origem.py (o SELOS, global do Jinja): as quatro
+   origens do novo.md, tres variacoes com uma palavra a mais (prova,
+   classificacao, tendencia) e o plano. O servico grava a origem no dado e a
+   tela passa a origem adiante - quem escolhe a cor e o dado. `texto` troca
+   so a palavra; a cor e o emoji ficam, porque sao eles que dizem a origem. #}
 
-{% set SELOS = {
-  'oficial':       ('oficial',    '🟦', 'Fonte oficial',             'Edital, gabarito definitivo ou retificado - PDF oficial da banca'),
-  'prova':         ('oficial',    '🟦', 'Extraída da prova',         'Questão real, tirada do caderno oficial'),
-  'calculado':     ('calculado',  '🟩', 'Calculado pelo sistema',    'Contagem no acervo de questões'),
-  'classificacao': ('automatico', '🟨', 'Classificação automática',  'Atribuído por palavra-chave, pelo classificador'),
-  'tendencia':     ('automatico', '🟨', 'Tendência',                 'Leitura dos números - base pequena, confira'),
-  'ia':            ('ia',         '🟥', 'Gerado por IA',             'Texto de IA: material auxiliar, confira na fonte'),
-} %}
-
-{% macro selo(tipo, texto=None) -%}
+{% macro selo(tipo, texto=None, curto=False) -%}
   {%- set s = SELOS[tipo] -%}
-  <span class="ds-selo ds-selo--{{ s[0] }}" title="{{ s[3] }}"><span aria-hidden="true">{{ s[1] }}</span> {{ texto or s[2] }}</span>
+  {%- if curto -%}
+  <span class="ds-selo ds-selo--{{ s.origem }} ds-selo--curto" title="{{ s.texto }}: {{ s.explicacao }}" aria-label="{{ s.texto }}">{{ s.emoji }}</span>
+  {%- else -%}
+  <span class="ds-selo ds-selo--{{ s.origem }}" title="{{ s.explicacao }}"><span aria-hidden="true">{{ s.emoji }}</span> {{ texto or s.texto }}</span>
+  {%- endif -%}
 {%- endmacro %}
 
-{# A familia de cor de um selo, para o bloco que o acompanha. #}
-{% macro familia(tipo) -%}{{ SELOS[tipo][0] }}{%- endmacro %}
+{# A origem de um selo, que e a familia de cor do bloco que o acompanha. #}
+{% macro familia(tipo) -%}{{ SELOS[tipo].origem }}{%- endmacro %}
 
-{% macro legenda_dos_selos(tipos=('oficial', 'prova', 'calculado', 'classificacao', 'tendencia', 'ia')) %}
+{# Sem `tipos`, todos os selos que alguma tela usa, na ordem do origem.py. #}
+{% macro legenda_dos_selos(tipos=None) %}
 <div class="ds-legenda-selos" aria-label="O que cada selo quer dizer">
-  {% for t in tipos %}{{ selo(t) }}{% endfor %}
+  {% for t in (tipos or SELOS) %}{{ selo(t) }}{% endfor %}
 </div>
 {% endmacro %}
 

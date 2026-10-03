@@ -67,7 +67,7 @@
     .lateral-cronometro:empty{display:none}
 
     /* --- o cronometro (static/cronometro.js; o outro JS e static/dobra.js) --- */
-    .cronometro.rodando{border-color:var(--selo-calculado)}
+    .cronometro.rodando{border-color:var(--cor-verde)}
     .crono-nome{margin:0;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
     .crono-tempo{margin:var(--esp-1) 0 var(--esp-2);font-family:var(--fonte-numero);font-size:2.6rem;font-weight:var(--peso-forte);
       line-height:1.1;font-variant-numeric:tabular-nums}
@@ -97,7 +97,7 @@
     .aviso-texto,.aviso-depois{margin:var(--esp-3) 0 0;font-size:var(--tam-md)}
     .aviso-depois:empty{display:none}
     .aviso-ok{margin-top:var(--esp-5);font-size:var(--tam-md);padding:var(--esp-3) var(--esp-6)}
-    .agora .rotulo{display:block;font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.06em;color:var(--selo-calculado)}
+    .agora .rotulo{display:block;font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.06em;color:var(--cor-verde)}
     .agora .principal-agora{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte);line-height:var(--linha-titulo)}
     .agora .depois{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
     .objetivo p{margin:0 0 var(--esp-1);font-size:var(--tam-sm)}
@@ -114,7 +114,7 @@
 
     /* --- "fiz X, acertei Y" na propria faixa (etapa E2) --- */
     .resultado{margin-left:var(--esp-2);font-size:var(--tam-xs);font-weight:var(--peso-medio);
-      color:var(--selo-calculado);white-space:nowrap}
+      color:var(--cor-verde);white-space:nowrap}
     .fiz{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:end;margin-top:var(--esp-2)}
     .fiz label{display:grid;gap:2px;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .fiz input[type=number]{width:5rem;padding:var(--esp-1) var(--esp-2);
@@ -172,7 +172,7 @@
     .mapa-quando,.mapa-foco{grid-column:2;font-size:var(--tam-xs);line-height:1.35}
     .mapa-foco{color:var(--cor-texto-suave)}
     .mapa-lista li.passada{opacity:.65}
-    .mapa-lista li.passada .mapa-marca{color:var(--selo-calculado)}
+    .mapa-lista li.passada .mapa-marca{color:var(--cor-verde)}
     .mapa-lista li.atual .mapa-marca{color:var(--cor-acao)}
     .mapa-lista li.atual .mapa-nome{font-weight:var(--peso-forte)}
     .mapa-aqui{grid-column:2;justify-self:start;margin-top:2px;padding:1px var(--esp-2);
@@ -186,10 +186,10 @@
       background:var(--cor-superficie-2);color:var(--cor-texto-suave)}
     .pilula b{font-size:var(--tam-md);font-variant-numeric:tabular-nums;line-height:1.1}
     .ds a.pilula{color:var(--cor-texto-suave)}
-    .ds a.pilula.ideal   {background:var(--selo-calculado-fundo);  color:var(--selo-calculado)}
-    .ds a.pilula.reduzida{background:var(--selo-oficial-fundo);    color:var(--selo-oficial)}
-    .ds a.pilula.minima  {background:var(--selo-automatico-fundo); color:var(--selo-automatico)}
-    .ds a.pilula.nao_fiz {background:var(--selo-ia-fundo);         color:var(--selo-ia)}
+    .ds a.pilula.ideal   {background:var(--meta-ideal-fundo);    color:var(--meta-ideal)}
+    .ds a.pilula.reduzida{background:var(--meta-reduzida-fundo); color:var(--meta-reduzida)}
+    .ds a.pilula.minima  {background:var(--meta-minima-fundo);   color:var(--meta-minima)}
+    .ds a.pilula.nao_fiz {background:var(--meta-nao-fiz-fundo);  color:var(--meta-nao-fiz)}
     .ds a.pilula.futuro  {background:transparent;border:2px dashed var(--cor-borda)}
     .pilula.aberta{box-shadow:0 0 0 2px var(--cor-superficie),0 0 0 4px var(--cor-acao)}
     .sequencia{margin:var(--esp-3) 0 0;font-size:var(--tam-sm)}
@@ -277,9 +277,9 @@
 
     /* No dia de hoje: a faixa atual com borda verde e a etiqueta AGORA
        embaixo do horario; as que passaram, apagadas. */
-    .faixa.atual .corpo{box-shadow:0 0 0 2px var(--selo-calculado)}
+    .faixa.atual .corpo{box-shadow:0 0 0 2px var(--cor-verde)}
     .etiqueta-agora{font-family:var(--fonte);font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;padding:.05rem .5rem;
-      border-radius:var(--raio-pill);background:var(--selo-calculado);color:var(--cor-superficie)}
+      border-radius:var(--raio-pill);background:var(--cor-verde);color:var(--cor-superficie)}
     .faixa.passou{opacity:.55}
 
     /* --- o circulo de cada faixa: marca e desmarca, sem JavaScript --- */
@@ -287,9 +287,9 @@
     .circulo{width:2.5rem;height:2.5rem;border-radius:50%;border:2px solid var(--cor-borda);background:var(--cor-superficie);
       color:transparent;font:inherit;font-size:var(--tam-lg);font-weight:var(--peso-forte);line-height:1;cursor:pointer;
       display:grid;place-items:center;padding:0}
-    .circulo:hover{border-color:var(--selo-calculado);color:var(--selo-calculado)}
+    .circulo:hover{border-color:var(--cor-verde);color:var(--cor-verde)}
     .circulo:focus-visible{outline:2px solid var(--cor-acao);outline-offset:2px}
-    .faixa.feita .circulo{background:var(--selo-calculado);border-color:var(--selo-calculado);color:var(--cor-superficie)}
+    .faixa.feita .circulo{background:var(--cor-verde);border-color:var(--cor-verde);color:var(--cor-superficie)}
     /* Feita: o conteudo apaga e o titulo e riscado, mas continua legivel -
        ainda posso querer ler o detalhe. */
     .faixa.feita .corpo{opacity:.55}
@@ -359,21 +359,23 @@
     /* A opcao que os checks sugerem: borda tracejada na cor dela. So
        destaca - quem marca e salva sou eu. */
     .opcao.sugerida > span{border-style:dashed}
-    .opcao.ideal.sugerida > span{border-color:var(--selo-calculado)}
-    .opcao.reduzida.sugerida > span{border-color:var(--selo-oficial)}
-    .opcao.minima.sugerida > span{border-color:var(--selo-automatico)}
+    .opcao.ideal.sugerida > span{border-color:var(--meta-ideal)}
+    .opcao.reduzida.sugerida > span{border-color:var(--meta-reduzida)}
+    .opcao.minima.sugerida > span{border-color:var(--meta-minima)}
     .sugestao{margin:0 0 var(--esp-2);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
     .opcao input:checked + span{border-style:solid;border-color:var(--cor-acao);background:var(--cor-acao-fundo)}
-    .opcao.ideal input:checked + span{border-color:var(--selo-calculado);background:var(--selo-calculado-fundo)}
-    .opcao.reduzida input:checked + span{border-color:var(--selo-oficial);background:var(--selo-oficial-fundo)}
-    .opcao.minima input:checked + span{border-color:var(--selo-automatico);background:var(--selo-automatico-fundo)}
-    .opcao.nao_fiz input:checked + span{border-color:var(--selo-ia);background:var(--selo-ia-fundo)}
+    .opcao.ideal input:checked + span{border-color:var(--meta-ideal);background:var(--meta-ideal-fundo)}
+    .opcao.reduzida input:checked + span{border-color:var(--meta-reduzida);background:var(--meta-reduzida-fundo)}
+    .opcao.minima input:checked + span{border-color:var(--meta-minima);background:var(--meta-minima-fundo)}
+    .opcao.nao_fiz input:checked + span{border-color:var(--meta-nao-fiz);background:var(--meta-nao-fiz-fundo)}
     .ds-campo textarea{width:100%;min-height:4rem;padding:var(--esp-2) var(--esp-3);border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
       background:var(--cor-superficie);color:var(--cor-texto);font:inherit;font-size:var(--tam-base);resize:vertical}
     fieldset.bloqueado{border:0;padding:0;margin:0;opacity:.5}
     .erro{margin:0 0 var(--esp-3);padding:var(--esp-3) var(--esp-4);border-radius:var(--raio-sm);
-      background:var(--selo-ia-fundo);color:var(--selo-ia);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+      background:var(--cor-vermelho-fundo);color:var(--cor-vermelho);font-size:var(--tam-sm);font-weight:var(--peso-medio)}
     .salvar{font-size:var(--tam-base);padding:var(--esp-3) var(--esp-5)}
+    .ds-bloco.meta-reduzida{background:var(--meta-reduzida-fundo);border-left-color:var(--meta-reduzida)}
+    .ds-bloco.meta-minima{background:var(--meta-minima-fundo);border-left-color:var(--meta-minima)}
 
     /* --- estados vazios --- */
     .vazio-grande{text-align:center;padding:var(--esp-7) var(--esp-5)}
@@ -623,7 +625,7 @@
           {% else %}Comece hoje a sua sequência{% endif %}
         </p>
         {% if t.frase %}<p class="frase">{{ t.frase }}</p>{% endif %}
-        <p class="motivo">{{ selo('calculado') }} <span>{{ t.nivel.motivo }}</span></p>
+        <p class="motivo">{{ selo('automatico') }} <span>{{ t.nivel.motivo }}</span></p>
         <p><a class="ds-link-acao" href="/semanas">ver todas as semanas &rarr;</a></p>
       </section>
     {% endif %}
@@ -1034,8 +1036,8 @@
     <section class="ds-cartao bloco-dia">
       <div class="ds-cartao__cabeca"><h2 class="ds-cartao__titulo">Se o dia apertar</h2></div>
       <div class="apertar">
-        <div class="ds-bloco ds-bloco--oficial" style="margin-top:0"><h3>🟦 Reduzida</h3><p>{{ d.reduzida or '—' }}</p></div>
-        <div class="ds-bloco ds-bloco--automatico" style="margin-top:0"><h3>🟨 Mínima</h3><p>{{ d.minima or '—' }}</p></div>
+        <div class="ds-bloco meta-reduzida" style="margin-top:0"><h3>🟦 Reduzida</h3><p>{{ d.reduzida or '—' }}</p></div>
+        <div class="ds-bloco meta-minima" style="margin-top:0"><h3>🟨 Mínima</h3><p>{{ d.minima or '—' }}</p></div>
       </div>
     </section>
   {% endif %}
@@ -1069,7 +1071,7 @@
       </p>
       {% if tt.radar.medidas and tt.anotado.medidas %}
         <p class="fiz-de-onde">
-          {{ selo('calculado') }} medido no radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
+          {{ selo('automatico') }} medido no radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
           anotado: {{ tt.anotado.porcentagem }}% em {{ tt.anotado.medidas }}
         </p>
       {% endif %}

@@ -1124,7 +1124,8 @@ def test_a_tabela_diz_de_onde_vem_cada_coluna(cliente, com_quadro_do_edital):
     texto = cliente.get("/analises").text
 
     assert "ds-selo--oficial" in texto          # edital
-    assert "ds-selo--calculado" in texto        # provas e meu acerto
+    assert "ds-selo--acervo" in texto           # as provas
+    assert "ds-selo--automatico" in texto       # o meu acerto
     assert "2019, 2." in texto                  # as anuladas daquele ano
     assert "Base pequena" in texto
 

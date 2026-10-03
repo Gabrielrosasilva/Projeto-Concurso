@@ -91,7 +91,7 @@
     {{ validade_maxima }} anos depois do último. Dentro dessa faixa, quem
     manda é o ritmo do próprio município.
     <br><br>
-    {{ selo('calculado') }} O que isto <b>não sabe</b>: o histórico é só o
+    {{ selo('automatico') }} O que isto <b>não sabe</b>: o histórico é só o
     que as fontes coletadas publicaram -
     {% for c in cobertura -%}
       {{ c.fonte }} ({{ c.primeiro_ano }}{% if c.ultimo_ano != c.primeiro_ano %} a {{ c.ultimo_ano }}{% endif %},

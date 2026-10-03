@@ -19,6 +19,7 @@ from radar import acervo, alvo as alvos, automacao, avisos, config, cronograma, 
 from radar import fichas as fichas_puras
 from radar import provas as _provas
 from radar.models import agora
+from radar.origem import SELOS
 from radar.util import (
     dias_ate,
     formatar_data,
@@ -2723,7 +2724,7 @@ def fichas(
 
 
 def _selo(origem: str) -> str:
-    return fichas_puras.SELOS[origem][0]
+    return SELOS[origem].emoji
 
 
 def _mostrar_ficha(f) -> None:

@@ -331,7 +331,7 @@
           {% if p.arquivo_do_edital %}<code>{{ p.arquivo_do_edital }}</code>{% else %}do edital{% endif %}
           ({{ p.total_do_edital }} questões).</span>
         {% if p.anos_das_provas %}
-        <span>{{ selo('calculado') }}<b>Prova {{ p.anos_das_provas | join(' e ') }}:</b>
+        <span>{{ selo('acervo') }}<b>Prova {{ p.anos_das_provas | join(' e ') }}:</b>
           questões válidas no banco, contadas pela matéria do caderno. Ficam de
           fora as anuladas no gabarito definitivo:
           {% for ano in p.anos_das_provas -%}
@@ -340,7 +340,7 @@
           {% if p.anos_das_provas | length < 3 %}<b>Base pequena:</b>
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length > 1 }} do cargo.{% endif %}</span>
         {% endif %}
-        <span>{{ selo('calculado') }}<b>Meu acerto</b> soma duas origens, e a
+        <span>{{ selo('automatico') }}<b>Meu acerto</b> soma duas origens, e a
           linha de baixo de cada matéria mostra a divisão: <b>radar</b> é
           questão real respondida aqui dentro, pela última resposta de cada;
           <b>anotado</b> é o que eu digitei das faixas e dos extras do
@@ -457,7 +457,7 @@
           ganhar</b> são conta sobre esses assuntos e sobre
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length != 1 }}
           - leitura, e não fato.</span>
-        <span>{{ selo('calculado') }}<b>meu acerto</b> soma o medido no radar
+        <span>{{ selo('automatico') }}<b>meu acerto</b> soma o medido no radar
           (pela última resposta de cada questão) e o anotado das faixas e dos
           extras ligados a um conteúdo daquele assunto, sem consulta.</span>
       </div>

@@ -26,8 +26,8 @@ import yaml
 
 from radar import config
 from radar.onde_estudar import fator_de_tempo, numero
-
-OFICIAL, ACERVO, AUTOMATICO = "oficial", "acervo", "automatico"
+# As origens de cada fator: as mesmas do resto do site (Etapa 7A).
+from radar.origem import ACERVO, AUTOMATICO, OFICIAL
 
 
 @dataclass(frozen=True)

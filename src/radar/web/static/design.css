@@ -34,18 +34,19 @@
   --cor-acao-fundo:   #e8eeff;
   --cor-acao-texto:   #ffffff;
 
-  /* Os selos de confianca. Quatro familias, porque os seis selos da
-     especificacao sao quatro origens: o que a banca publicou (azul), o que o
-     sistema contou (verde), o que o sistema adivinhou (amarelo) e o que a IA
-     escreveu (vermelho). A cor diz a origem antes de eu ler a palavra. */
-  --selo-oficial:          #1d4ed8;
-  --selo-oficial-fundo:    #e6edff;
-  --selo-calculado:        #047857;
-  --selo-calculado-fundo:  #dff5eb;
-  --selo-automatico:       #92400e;
-  --selo-automatico-fundo: #fdf1d8;
-  --selo-ia:               #b91c1c;
-  --selo-ia-fundo:         #fdeaea;
+  /* As cores com nome. Ninguem pinta com elas direto quando a cor tem um
+     significado: o selo usa --selo-*, a meta do dia usa --meta-* (os dois,
+     mais abaixo). Assim trocar a cor de um selo nao pinta a meta junto, como
+     quase aconteceu na Etapa 7A. Bom e ruim (acerto na meta, alternativa
+     certa, seta que subiu) usam verde e vermelho direto: e o que eles sao. */
+  --cor-verde:          #047857;
+  --cor-verde-fundo:    #dff5eb;
+  --cor-azul:           #1d4ed8;
+  --cor-azul-fundo:     #e6edff;
+  --cor-ambar:          #92400e;
+  --cor-ambar-fundo:    #fdf1d8;
+  --cor-vermelho:       #b91c1c;
+  --cor-vermelho-fundo: #fdeaea;
 
   /* O aviso "a lei mudou": nao e selo de origem, e alerta de validade. */
   --cor-aviso:        #9a3412;
@@ -84,11 +85,12 @@
   --sombra:    0 1px 2px rgba(16, 24, 40, .05);
   --sombra-alta: 0 8px 24px rgba(16, 24, 40, .12);
 
-  /* Tres cores a mais, so para distinguir tipos de faixa do cronograma: os
-     selos ja gastam azul, verde, amarelo e vermelho com significado. */
-  --cor-roxo:  #6d28d9;
-  --cor-ciano: #0e7490;
-  --cor-rosa:  #be185d;
+  /* Tres cores a mais. O roxo e o do selo de IA e o da faixa de raciocinio;
+     ciano e rosa so distinguem tipos de faixa do cronograma. */
+  --cor-roxo:       #6d28d9;
+  --cor-roxo-fundo: #ede9fe;
+  --cor-ciano:      #0e7490;
+  --cor-rosa:       #be185d;
 
   /* A tela Hoje. A faixa azul do topo (heroi) e degrade das duas primeiras;
      o texto dela e branco nos dois temas, e o "vidro" e o fundo translucido
@@ -136,19 +138,20 @@
   --cor-acao:         #86a8ff;
   --cor-acao-fundo:   #1b2740;
   --cor-acao-texto:   #0e1014;
-  --selo-oficial:          #93b4ff;
-  --selo-oficial-fundo:    #17233d;
-  --selo-calculado:        #5ee0a0;
-  --selo-calculado-fundo:  #0f2a1e;
-  --selo-automatico:       #fcd34d;
-  --selo-automatico-fundo: #2b2210;
-  --selo-ia:               #fca5a5;
-  --selo-ia-fundo:         #2e1515;
+  --cor-verde:          #5ee0a0;
+  --cor-verde-fundo:    #0f2a1e;
+  --cor-azul:           #93b4ff;
+  --cor-azul-fundo:     #17233d;
+  --cor-ambar:          #fcd34d;
+  --cor-ambar-fundo:    #2b2210;
+  --cor-vermelho:       #fca5a5;
+  --cor-vermelho-fundo: #2e1515;
   --cor-aviso:        #fdba74;
   --cor-aviso-fundo:  #2f1c0c;
-  --cor-roxo:  #c4b5fd;
-  --cor-ciano: #67e8f9;
-  --cor-rosa:  #f9a8d4;
+  --cor-roxo:       #c4b5fd;
+  --cor-roxo-fundo: #241b3d;
+  --cor-ciano:      #67e8f9;
+  --cor-rosa:       #f9a8d4;
   --heroi-1:            #172554;
   --heroi-2:            #1e40af;
   --heroi-texto:        #ffffff;
@@ -185,23 +188,52 @@
 }
 
 
+/* --- os selos de origem --------------------------------------------------- */
+/* As quatro origens da secao 20 do novo.md: o que a banca ou a lei publicou
+   (verde), o que o sistema contou no acervo (azul), o que o sistema calculou
+   ou deduziu (amarelo) e o que a IA escreveu (roxo). Mais o plano, neutro. A
+   cor diz a origem antes de eu ler a palavra; o selo e o bloco usam estes,
+   e mais ninguem. Apontam para as cores com nome, entao o escuro vem junto. */
+:root {
+  --selo-oficial:          var(--cor-verde);
+  --selo-oficial-fundo:    var(--cor-verde-fundo);
+  --selo-acervo:           var(--cor-azul);
+  --selo-acervo-fundo:     var(--cor-azul-fundo);
+  --selo-automatico:       var(--cor-ambar);
+  --selo-automatico-fundo: var(--cor-ambar-fundo);
+  --selo-ia:               var(--cor-roxo);
+  --selo-ia-fundo:         var(--cor-roxo-fundo);
+  --selo-plano:            var(--cor-texto-suave);
+  --selo-plano-fundo:      var(--cor-superficie-2);
+}
+
+
 /* --- cores do cronograma -------------------------------------------------- */
 /* Uma cor por tipo de faixa, sempre a mesma: bato o olho e sei se e teoria ou
-   questao. Apontam para as cores de cima, entao o modo escuro vem junto. E o
-   registro do dia usa as cores dos selos: Ideal verde, Reduzida azul, Minima
-   amarela, Nao fiz vermelha. */
+   questao. E a meta do dia tem as suas: Ideal verde, Reduzida azul, Minima
+   amarela, Nao fiz vermelha - as de antes da 7A, que ja nao sao as dos
+   selos. */
 :root {
-  --faixa-teoria:     var(--selo-oficial);
+  --faixa-teoria:     var(--cor-azul);
   --faixa-lei-seca:   var(--cor-aviso);
-  --faixa-portugues:  var(--selo-calculado);
+  --faixa-portugues:  var(--cor-verde);
   --faixa-raciocinio: var(--cor-roxo);
   --faixa-questoes:   var(--cor-acao);
   --faixa-revisao:    var(--cor-rosa);
-  --faixa-simulado:   var(--selo-ia);
-  --faixa-correcao:   var(--selo-automatico);
+  --faixa-simulado:   var(--cor-vermelho);
+  --faixa-correcao:   var(--cor-ambar);
   --faixa-anki:       var(--cor-ciano);
   --faixa-bonus:      var(--cor-texto-suave);
   --faixa-pausa:      var(--cor-borda);
+
+  --meta-ideal:          var(--cor-verde);
+  --meta-ideal-fundo:    var(--cor-verde-fundo);
+  --meta-reduzida:       var(--cor-azul);
+  --meta-reduzida-fundo: var(--cor-azul-fundo);
+  --meta-minima:         var(--cor-ambar);
+  --meta-minima-fundo:   var(--cor-ambar-fundo);
+  --meta-nao-fiz:        var(--cor-vermelho);
+  --meta-nao-fiz-fundo:  var(--cor-vermelho-fundo);
 }
 
 
@@ -315,9 +347,10 @@ body.ds {
 .ds-bloco p { margin: var(--esp-1) 0; }
 .ds-bloco ul { margin: var(--esp-1) 0; padding-left: var(--esp-4); }
 .ds-bloco--oficial    { background: var(--selo-oficial-fundo);    border-left-color: var(--selo-oficial); }
-.ds-bloco--calculado  { background: var(--selo-calculado-fundo);  border-left-color: var(--selo-calculado); }
+.ds-bloco--acervo     { background: var(--selo-acervo-fundo);     border-left-color: var(--selo-acervo); }
 .ds-bloco--automatico { background: var(--selo-automatico-fundo); border-left-color: var(--selo-automatico); }
 .ds-bloco--ia         { background: var(--selo-ia-fundo);         border-left-color: var(--selo-ia); }
+.ds-bloco--plano      { background: var(--selo-plano-fundo);      border-left-color: var(--selo-plano); }
 
 /* --- o selo --- */
 .ds-selo {
@@ -333,9 +366,13 @@ body.ds {
   border: 1px solid currentColor;
 }
 .ds-selo--oficial    { color: var(--selo-oficial);    background: var(--selo-oficial-fundo); }
-.ds-selo--calculado  { color: var(--selo-calculado);  background: var(--selo-calculado-fundo); }
+.ds-selo--acervo     { color: var(--selo-acervo);     background: var(--selo-acervo-fundo); }
 .ds-selo--automatico { color: var(--selo-automatico); background: var(--selo-automatico-fundo); }
 .ds-selo--ia         { color: var(--selo-ia);         background: var(--selo-ia-fundo); }
+.ds-selo--plano      { color: var(--selo-plano);      background: var(--selo-plano-fundo); }
+/* So o emoji, para a lista que leva um selo por linha (a ficha): o texto vai
+   no title e no aria-label, e a legenda do topo diz o que cada um e. */
+.ds-selo--curto { padding: 0 .3rem; border-color: transparent; }
 .ds-legenda-selos { display: flex; flex-wrap: wrap; gap: var(--esp-2); margin: var(--esp-3) 0; }
 
 /* --- avisos --- */
@@ -392,8 +429,8 @@ body.ds {
    fundo, e o botao aparece vazio. */
 .ds a.ds-botao { color: var(--cor-acao-texto); }
 /* Variantes: o secundario e contorno (a acao que nao gasta nem apaga); o
-   de perigo apaga de verdade; o de IA gasta dinheiro com a API. Perigo e IA
-   usam o vermelho dos selos de IA: e o "pare e leia antes" da tela. */
+   de perigo apaga de verdade, em vermelho; o de IA gasta dinheiro com a API,
+   na cor do selo de IA - o que ele produz e texto de IA. */
 .ds-botao--secundario {
   background: transparent;
   color: var(--cor-texto);
@@ -401,8 +438,8 @@ body.ds {
 }
 .ds a.ds-botao--secundario { color: var(--cor-texto); }
 .ds-botao--secundario:hover { border-color: var(--cor-acao); filter: none; }
-.ds-botao--perigo,
-.ds-botao--ia { background: var(--selo-ia); color: var(--cor-superficie); }
+.ds-botao--perigo { background: var(--cor-vermelho); color: var(--cor-superficie); }
+.ds-botao--ia     { background: var(--selo-ia);      color: var(--cor-superficie); }
 .ds-botao--pequeno { padding: var(--esp-1) var(--esp-3); font-size: var(--tam-xs); }
 .ds-link-acao { font-size: var(--tam-sm); font-weight: var(--peso-medio); text-decoration: none; }
 .ds-link-acao:hover { text-decoration: underline; }

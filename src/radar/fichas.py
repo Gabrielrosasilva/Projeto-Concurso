@@ -40,28 +40,15 @@ from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
 from radar import incidencia
 from radar import prioridade as regra_de_prioridade
+# As origens (secao 20), mais a do plano, e a frase da regra inviolavel 4: as
+# mesmas do resto do site, que desde a Etapa 7A moram todas no origem.py.
+from radar.origem import ACERVO, AUTOMATICO, FRASE_SEM_EVIDENCIA, IA, OFICIAL, PLANO
 from radar.regioes import normalizar
-
-#: A frase da regra inviolavel 4, a MESMA do mapa de incidencia.
-FRASE_SEM_EVIDENCIA = incidencia.FRASE_SEM_EVIDENCIA
 
 #: Campo escrito que ainda nao foi escrito. Nao e a frase do acervo: "nao ha
 #: evidencia no acervo" diria uma coisa sobre as provas, e o que falta aqui e
 #: texto, nao prova.
 FRASE_SEM_TEXTO = "Ainda não há texto escrito para este campo da ficha."
-
-# As origens (secao 20), mais a do plano.
-PLANO, OFICIAL, ACERVO, AUTOMATICO, IA = "plano", "oficial", "acervo", "automatico", "ia"
-
-#: Os quatro selos do novo.md, e o do plano. A ficha ja nasce com eles
-#: (decisao 41); o resto do site troca na Etapa 7A.
-SELOS = {
-    PLANO: ("📌", "Seleção do plano (cronograma)"),
-    OFICIAL: ("🟢", "Fonte oficial"),
-    ACERVO: ("🔵", "Estatística do acervo"),
-    AUTOMATICO: ("🟡", "Análise automática"),
-    IA: ("🟣", "Gerado por IA"),
-}
 
 #: Os campos da secao 11 do novo.md e o nome deles aqui. E a estrutura unica:
 #: o teste confere que a ficha tem todos.

@@ -60,11 +60,11 @@
     tr:last-child td{border-bottom:0}
     .barrinha{display:inline-block;width:90px;height:8px;border-radius:4px;
       background:var(--cor-borda);vertical-align:middle;overflow:hidden}
-    .barrinha span{display:block;height:100%;background:var(--selo-calculado)}
+    .barrinha span{display:block;height:100%;background:var(--cor-verde)}
 
     /* --------------------------------------- central: detalhe do macete */
     .regra{font-size:var(--tam-base);margin:0 0 var(--esp-2)}
-    .pegadinha{border-left:3px solid var(--selo-ia);padding-left:var(--esp-3);
+    .pegadinha{border-left:3px solid var(--cor-vermelho);padding-left:var(--esp-3);
       margin:var(--esp-2) 0}
     .procedencia{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .termos b{font-weight:var(--peso-medio)}
@@ -92,7 +92,7 @@
       anuladas. Cada parte do cartão fica na cor da sua origem:
     </p>
   </section>
-  {{ legenda_dos_selos(('prova', 'calculado', 'ia')) }}
+  {{ legenda_dos_selos(('prova', 'acervo', 'ia')) }}
 
   {% if not leis_conferidas %}
     <p class="ds-nota">
@@ -120,7 +120,7 @@
       <article class="ds-cartao" id="materia-{{ loop.index }}">
         <div class="ds-cartao__cabeca">
           <h3 class="ds-cartao__titulo">{{ c.materia }}</h3>
-          {{ selo('calculado', c.questoes ~ ' questões analisadas') }}
+          {{ selo('acervo', c.questoes ~ ' questões analisadas') }}
         </div>
         <p class="ds-cartao__meta">
           {{ c.de_onde | capitalize }}, sem as anuladas{% if c.base_pequena %}
@@ -130,7 +130,7 @@
           <p class="ds-aviso-lei">⚠ {{ c.com_lei_mudada }} questão(ões) com lei alterada depois da prova</p>
         {% endif %}
 
-        {% call bloco('calculado', 'Padrão da banca') %}
+        {% call bloco('acervo', 'Padrão da banca') %}
           {% if c.comandos %}
             <ul>
               {% for k in c.comandos %}
@@ -277,7 +277,7 @@
   {% else %}
 
     <p class="ds-suave ds-pequeno" style="margin:var(--esp-4) 0">
-      {{ selo('calculado') }}
+      {{ selo('acervo') }}
       <b>{{ analise.total }}</b> questões no recorte,
       <b>{{ analise.distintas }}</b> com enunciado diferente.
       {% if analise.total > analise.distintas %}
@@ -311,7 +311,7 @@
       <article class="ds-cartao" style="grid-column:1/-1">
         <div class="ds-cartao__cabeca">
           <h3 class="ds-cartao__titulo">Quantas questões caem numa prova</h3>
-          {{ selo('calculado') }}
+          {{ selo('acervo') }}
         </div>
         <p class="ds-cartao__meta">
           A fatia é a participação da matéria no total de questões da
@@ -385,7 +385,7 @@
       <article class="ds-cartao">
         <div class="ds-cartao__cabeca">
           <h3 class="ds-cartao__titulo">Como a banca pergunta</h3>
-          {{ selo('calculado') }}
+          {{ selo('acervo') }}
         </div>
         <p class="ds-cartao__meta">No recorte que você pediu</p>
         {% for c in analise.comandos %}
@@ -404,7 +404,7 @@
       <article class="ds-cartao">
         <div class="ds-cartao__cabeca">
           <h3 class="ds-cartao__titulo">Questões que ela repete</h3>
-          {{ selo('calculado') }}
+          {{ selo('acervo') }}
         </div>
         <p class="ds-cartao__meta">Já caíram várias vezes e devem cair de novo</p>
         {% for r in analise.repetidas %}

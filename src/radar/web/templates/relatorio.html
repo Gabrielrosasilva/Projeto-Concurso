@@ -14,26 +14,26 @@
     .nota{display:flex;align-items:baseline;gap:var(--esp-3);flex-wrap:wrap}
     .nota .valor{font-size:2.6rem;font-weight:var(--peso-forte);line-height:1;
       font-variant-numeric:tabular-nums}
-    .nota .valor.bom{color:var(--selo-calculado)}
-    .nota .valor.ruim{color:var(--selo-ia)}
+    .nota .valor.bom{color:var(--cor-verde)}
+    .nota .valor.ruim{color:var(--cor-vermelho)}
     table{width:100%;border-collapse:collapse;font-size:var(--tam-sm)}
     th,td{text-align:left;padding:var(--esp-2);border-bottom:1px solid var(--cor-borda)}
     th{font-size:var(--tam-xs);color:var(--cor-texto-suave);font-weight:var(--peso-medio)}
     td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     tr:last-child td{border-bottom:0}
-    tr.abaixo td{color:var(--selo-ia)}
+    tr.abaixo td{color:var(--cor-vermelho)}
     tr.abaixo td:first-child{font-weight:var(--peso-medio)}
     .trilha{display:inline-block;width:90px;height:8px;border-radius:4px;
       background:var(--cor-borda);overflow:hidden;vertical-align:middle}
-    .trilha span{display:block;height:100%;background:var(--selo-calculado)}
-    tr.abaixo .trilha span{background:var(--selo-ia)}
+    .trilha span{display:block;height:100%;background:var(--cor-verde)}
+    tr.abaixo .trilha span{background:var(--cor-vermelho)}
 
     .erro .enunciado{margin:var(--esp-2) 0 var(--esp-3);font-size:var(--tam-sm);
       white-space:pre-line}
     .par{display:grid;gap:var(--esp-2)}
     .linha-resp{display:grid;grid-template-columns:auto 1fr;gap:var(--esp-2);
       align-items:start;font-size:var(--tam-sm)}
-    .linha-resp.marquei .texto{text-decoration:line-through;text-decoration-color:var(--selo-ia)}
+    .linha-resp.marquei .texto{text-decoration:line-through;text-decoration-color:var(--cor-vermelho)}
     .convite{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .acoes{display:flex;gap:var(--esp-2);flex-wrap:wrap;margin-top:var(--esp-5)}
     .acoes a.secundario{padding:var(--esp-2) var(--esp-4);border:1px solid var(--cor-borda);
@@ -69,7 +69,7 @@
   <section class="ds-cartao">
     <div class="ds-cartao__cabeca">
       <h2 class="ds-cartao__titulo">Resultado geral</h2>
-      {% if de_ia %}{{ selo('ia', 'Treino com IA') }}{% else %}{{ selo('calculado') }}{% endif %}
+      {% if de_ia %}{{ selo('ia', 'Treino com IA') }}{% else %}{{ selo('automatico') }}{% endif %}
     </div>
     <div class="nota">
       <span class="valor {{ 'bom' if porcento >= 60 else 'ruim' }}">{{ '%.0f'|format(porcento) }}%</span>
@@ -87,7 +87,7 @@
   <section class="ds-cartao" style="margin-top:var(--esp-4)">
     <div class="ds-cartao__cabeca">
       <h2 class="ds-cartao__titulo">Por matéria</h2>
-      {{ selo('calculado') }}
+      {{ selo('automatico') }}
     </div>
     <p class="ds-cartao__meta">Em vermelho, as que ficaram abaixo da média desta rodada ({{ '%.0f'|format(porcento) }}%).</p>
     <table>
@@ -134,7 +134,7 @@
 
       <div class="par">
         <div class="linha-resp marquei">
-          <span class="ds-selo" style="color:var(--selo-ia);background:var(--selo-ia-fundo)">Você marcou {{ item.escolhida }})</span>
+          <span class="ds-selo" style="color:var(--cor-vermelho);background:var(--cor-vermelho-fundo)">Você marcou {{ item.escolhida }})</span>
           <span class="texto">{{ item.texto_escolhido }}</span>
         </div>
         <div class="linha-resp">

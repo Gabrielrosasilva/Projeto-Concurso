@@ -15,8 +15,6 @@
     .lista li:last-child{border-bottom:0}
     .marcas{margin:var(--esp-2) 0 0;padding-left:var(--esp-5);font-size:var(--tam-sm)}
     .marcas li{margin:var(--esp-1) 0}
-    .selo-ficha{display:inline-block;min-width:1.4em}
-    .legenda{display:flex;flex-wrap:wrap;gap:var(--esp-3);font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .subtitulo{margin:var(--esp-3) 0 0;font-size:var(--tam-sm);font-weight:var(--peso-forte)}
     .comando{font-family:var(--fonte-numero, ui-monospace, Consolas, monospace);font-size:var(--tam-xs);
       overflow-wrap:anywhere;color:var(--cor-texto-suave)}
@@ -28,13 +26,12 @@
 <body class="ds">
 
 {% from "_topo.html" import barra, abas_de_hoje with context %}
+{% from "_componentes.html" import selo, legenda_dos_selos %}
 {{ barra('hoje') }}
 
 {# O selo de cada parte. A origem vem do DADO (radar/fichas.py); o template so
-   desenha. Os quatro do novo.md mais o do plano (decisao 41). #}
-{% macro s(origem) -%}
-  <span class="selo-ficha" title="{{ SELOS_DA_FICHA[origem][1] }}" aria-label="{{ SELOS_DA_FICHA[origem][1] }}">{{ SELOS_DA_FICHA[origem][0] }}</span>
-{%- endmacro %}
+   desenha, com o mesmo selo do resto do site, na forma curta: um por linha. #}
+{% macro s(origem) -%}{{ selo(origem, curto=True) }}{%- endmacro %}
 
 <main class="ds-pagina">
   {{ abas_de_hoje('fichas') }}
@@ -56,11 +53,7 @@
     </div>
   </header>
 
-  <div class="legenda" aria-label="O que cada selo quer dizer">
-    {% for origem in ('plano', 'oficial', 'acervo', 'automatico', 'ia') %}
-      <span>{{ SELOS_DA_FICHA[origem][0] }} {{ SELOS_DA_FICHA[origem][1] }}</span>
-    {% endfor %}
-  </div>
+  {{ legenda_dos_selos(('plano', 'oficial', 'acervo', 'automatico', 'ia')) }}
 
   <section class="ds-cartao">
     <h2>Por que agora</h2>

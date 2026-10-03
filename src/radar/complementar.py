@@ -53,12 +53,13 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 
+# O que a tela escreve quando o acervo nao sustenta a afirmacao (regra 4): a
+# frase mora no origem.py, a mesma em todo lugar.
+from radar.origem import FRASE_SEM_EVIDENCIA
+
 LETRAS = ("a", "b", "c", "d", "e")
 
 DEFINITIVO, PROVISORIO, AUSENTE = "definitivo", "provisório", "ausente"
-
-#: O que a tela escreve quando o acervo nao sustenta a afirmacao (regra 4).
-FRASE_SEM_EVIDENCIA = "Não há evidência suficiente no acervo para afirmar isso."
 
 #: O quadro de distribuicao de questoes do edital nao foi conferido: o leitor
 #: de quadro (auditoria.py) so le os editais do Estado.

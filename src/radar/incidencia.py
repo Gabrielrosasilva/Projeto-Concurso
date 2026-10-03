@@ -22,8 +22,8 @@ import yaml
 
 from radar import config
 from radar import conteudos as arvore
-
-FRASE_SEM_EVIDENCIA = "Não há evidência suficiente no acervo para afirmar isso."
+# A frase da regra inviolavel 4 mora no origem.py, a mesma em todo lugar.
+from radar.origem import FRASE_SEM_EVIDENCIA
 
 
 @dataclass
