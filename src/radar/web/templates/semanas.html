@@ -147,12 +147,12 @@
 
   {# A mesma frase do "Fiz hoje", da mesma fonte: a semana e a soma dos dias. #}
   {% if s.numeros.questoes %}
-    <p class="ds-pequeno ds-suave">{{ selo('automatico') }} Total: {{ frase_da_conta(s.numeros) }}.
+    <p class="ds-pequeno ds-suave">{{ selo(s.numeros.origem) }} Total: {{ frase_da_conta(s.numeros) }}.
       {%- if s.numeros.ia %} {{ frase_da_ia(s.numeros) }}.{% endif %}</p>
   {% endif %}
 
   {% if s.nivel %}
-    <p class="motivo-nivel">{{ selo('automatico') }}
+    <p class="motivo-nivel">{{ selo(s.nivel.origem) }}
       <span><b>Nível {{ s.nivel.efetivo }}</b> · {{ s.nivel.motivo }}</span></p>
   {% endif %}
 
@@ -199,7 +199,7 @@
     <div class="ds-cartao">
       <div class="ds-cartao__cabeca">
         <h3 class="ds-cartao__titulo">Questões por semana</h3>
-        {{ selo('automatico') }}
+        {{ selo(ciclo.semanas[0].numeros.origem) }}
       </div>
       <div class="grafico" role="img"
            aria-label="Questões por semana: {% for s in ciclo.semanas %}semana {{ s.numero }}, {{ s.numeros.questoes }} questões{% if s.numeros.porcentagem is not none %}, {{ s.numeros.porcentagem }}% de acerto{% endif %}{% if not loop.last %}; {% endif %}{% endfor %}">

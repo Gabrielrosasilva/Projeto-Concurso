@@ -396,6 +396,23 @@ def test_o_grafico_sai_em_css_sem_javascript(cliente, plano):
     assert "<script" not in texto.lower()
 
 
+def test_o_selo_da_semana_sai_do_dado(cliente, plano, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem dos Numeros e do
+    Nivel, o selo do total, do grafico e do nivel troca junto."""
+    from radar.servico import metricas
+
+    _anotar_faixa(plano, S1, 40, 30)
+    monkeypatch.setattr(metricas.Numeros, "origem", "acervo")
+    monkeypatch.setattr(cronograma.Nivel, "origem", "ia")
+
+    texto = cliente.get("/semanas").text
+
+    assert '<span aria-hidden="true">🔵</span> Estatística do acervo</span> Total:' in texto
+    assert ('Questões por semana</h3>\n        <span class="ds-selo ds-selo--acervo"'
+            in texto.replace("\r\n", "\n"))
+    assert '<p class="motivo-nivel"><span class="ds-selo ds-selo--ia"' in texto
+
+
 def test_a_tela_mostra_o_sem_consulta_e_as_setas(cliente, plano):
     _anotar_faixa(plano, S1, 20, 16, consulta=True)
     _anotar_faixa(plano, S2, 30, 20, consulta=False)
