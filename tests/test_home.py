@@ -79,6 +79,18 @@ def test_com_erro_o_revisar_enche_e_o_botao_aparece(cliente, com_quadro_do_edita
     assert "Direito Penal · 40% em 20" in texto         # materia fraca
 
 
+def test_o_selo_do_revisar_sai_do_dado(cliente, com_quadro_do_edital, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem no dado, o selo
+    troca junto."""
+    _acervo()
+    _responder(certas=8, erradas=12)
+    monkeypatch.setattr(inicio.Revisar, "origem", "ia")
+
+    texto = cliente.get("/").text
+
+    assert '<span aria-hidden="true">🟣</span> Gerado por IA</span> medido no radar' in texto
+
+
 def test_revisar_agora_monta_a_rodada_so_com_os_erros(cliente, com_quadro_do_edital):
     _acervo()
     _responder(certas=2, erradas=3)

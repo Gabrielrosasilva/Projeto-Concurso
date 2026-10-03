@@ -167,8 +167,8 @@
           {% endfor %}
         </ol>
         <p class="miudo">
-          {{ selo('oficial', 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
-          {{ selo('automatico', 'meu acerto: radar + anotado') }} × tempo sem revisar. Com menos de
+          {{ selo(p.origens.edital, 'Edital ' ~ (p.ano_do_edital or '')) }} peso ×
+          {{ selo(p.origens.meu_acerto, 'meu acerto: radar + anotado') }} × tempo sem revisar. Com menos de
           {{ MINIMO_NA_MATERIA }} questões, a matéria conta como não treinada:
           vale o peso inteiro, e o fator de tempo é neutro.
         </p>
@@ -218,7 +218,7 @@
             {% endfor %}
           </ul>
         {% endif %}
-        <p class="miudo">{{ selo('automatico') }} medido no radar: das {{ h.revisar.respondidas }} questões reais que respondi, pela última resposta de cada, sem anuladas.</p>
+        <p class="miudo">{{ selo(h.revisar.origem) }} medido no radar: das {{ h.revisar.respondidas }} questões reais que respondi, pela última resposta de cada, sem anuladas.</p>
         <div class="rodape">
           <form method="post" action="/revisar">
             <button class="ds-botao" type="submit" style="width:100%">Revisar agora</button>
@@ -249,7 +249,7 @@
       <span class="texto">
         {% set e = h.evolucao %}
         {% if e.mensuravel %}
-          {{ selo('automatico') }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} respostas a questões reais, medido no radar.
+          {{ selo(e.origem) }} <b>{{ '%.0f'|format(e.porcentagem) }}%</b> de acerto em {{ e.respondidas }} respostas a questões reais, medido no radar.
           {% if e.variacao is not none %}
             Últimos 30 dias: <b>{{ '%+.0f'|format(e.variacao) }} pontos</b> em relação a antes.
           {% else %}
