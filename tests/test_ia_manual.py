@@ -134,6 +134,29 @@ def test_fora_de_direito_basta_a_regra(acervo_do_alvo, tmp_path):
     assert manual.importar(arquivo)["gravadas"] == 1
 
 
+@pytest.mark.parametrize("fonte, serve", [
+    ("Regras de Mandela, regra 12.1", True),
+    ("Regras Mínimas da ONU (Regras de Mandela), regras 1 a 5", True),
+    ("conforme as Regras de Mandela", False),
+    ("Regra: a dignidade do preso", False),
+])
+def test_em_direitos_humanos_a_regra_de_mandela_vale_como_fonte(fonte, serve):
+    """As Regras de Mandela nao tem artigo: citam-se pela regra, com o numero
+    (decisao 76). Sem o numero nao e fonte, como "conforme a doutrina"."""
+    assert manual.fonte_serve(fonte, "Direitos Humanos") is serve
+
+
+def test_questao_das_regras_de_mandela_entra_citando_a_regra(acervo_do_alvo, tmp_path):
+    _semear(_real(90, materia="Direitos Humanos", impressao="dh90",
+                  enunciado="Segundo as Regras de Mandela, questao 90?"))
+    lote = _pedido_salvo(manual.pedido_de_questoes("Direitos Humanos", 1))
+    questao = _questao_boa("Segundo as Regras de Mandela, a cela individual...")
+    questao["artigo"] = "Regras de Mandela, regra 12.1"
+    arquivo = _responder(lote, [{"id": "p1", "questoes": [questao]}], tmp_path)
+
+    assert manual.importar(arquivo)["gravadas"] == 1
+
+
 def test_questao_a_mais_do_que_o_pedido_e_recusada(acervo_do_alvo, tmp_path):
     lote = _pedido_salvo(manual.pedido_de_questoes("Lei de Execução Penal", 1))
     arquivo = _responder(lote, [{"id": "p1", "questoes": [

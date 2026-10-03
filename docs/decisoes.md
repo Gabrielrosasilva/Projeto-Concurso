@@ -3454,3 +3454,15 @@ mede (7A); commit e push por subetapa (8A).
       recusada pode ter o gabarito ou a materia errados, e a regra fica uma
       so com a da rodada que mede (escolha 7A).
     A evidencia de cada prova sai do `evidencia.por_prova`, a regra unica.
+
+76. **nas Regras de Mandela, a fonte e a regra, pelo numero** (03/10). O
+    `radar gerar --importar` exige, nas materias de lei, que a fonte cite
+    "art." ou "sumula" (`manual.CITA_ARTIGO`). As Regras Minimas da ONU para o
+    Tratamento de Presos, que o edital cobra em Direitos Humanos, nao tem
+    artigo: citam-se pela regra ("Regras de Mandela, regra 12.1"), e essa
+    citacao correta era recusada - os lotes 50 e 57 do estoque pararam nela.
+    Agora "regra" seguida de numero tambem serve, na questao, no macete e na
+    explicacao, e o pedido diz isso a quem responde. Sem o numero continua
+    recusado ("conforme as Regras de Mandela"), como "conforme a doutrina".
+    Escolha de 03/10, entre aceitar a regra e citar ao lado o artigo da LEP ou
+    da CF que dissesse o mesmo: a questao cita a fonte verdadeira.

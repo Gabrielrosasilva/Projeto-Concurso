@@ -254,7 +254,9 @@ def _como_responder(tipo: str) -> str:
     )
     if tipo == "questoes":
         texto += (
-            "Questao sem o artigo da lei no campo `artigo` sera RECUSADA - fora "
+            "Questao sem o artigo da lei no campo `artigo` sera RECUSADA - nas "
+            "Regras de Mandela, que nao tem artigo, cite a regra pelo numero "
+            "(\"Regras de Mandela, regra 12.1\"); fora "
             "de Direito (Portugues, Raciocinio Logico), ponha ali a regra em "
             "que a resposta se apoia. Se nao tiver certeza do artigo, nao "
             "escreva a questao: a instrucao diz para deixar vazio, mas aqui "
@@ -780,8 +782,11 @@ def salvar_pedido(lote: dict, caminho: Path | None = None) -> Path:
 
 # --- ler a resposta de volta ------------------------------------------------
 
-# "art. 41", "arts. 5º e 6º", "artigo 112", "Súmula Vinculante 56".
-CITA_ARTIGO = re.compile(r"(?i)\bart(?:igo)?s?\.?\s*\d|\bs[uú]mula\b")
+# "art. 41", "arts. 5º e 6º", "artigo 112", "Súmula Vinculante 56" - e "regra
+# 12.1": as Regras de Mandela, que o edital cobra em Direitos Humanos, nao tem
+# artigo, e se citam pela regra (decisao 76). Sem o numero, nao serve: "conforme
+# as Regras de Mandela" continua recusado, como "conforme a doutrina".
+CITA_ARTIGO = re.compile(r"(?i)\bart(?:igo)?s?\.?\s*\d|\bs[uú]mula\b|\bregras?\s+\d")
 
 
 def fonte_serve(fonte: str | None, materia: str | None) -> bool:

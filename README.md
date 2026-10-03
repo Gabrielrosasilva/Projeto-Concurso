@@ -1622,8 +1622,10 @@ O `--importar` confere antes de gravar, e **conta em voz alta o que recusou**:
 - a resposta tem que ser do **mesmo lote** do pedido. Pedido novo substitui o
   velho, e resposta de lote velho e recusada inteira;
 - questao: as cinco alternativas, um gabarito que aponta para uma delas, e **o
-  artigo da lei** — aqui artigo vazio e recusado. Fora de Direito (as materias
-  em `sem_lei` do `config/leis.yml`), vale a regra gramatical ou logica;
+  artigo da lei** — aqui artigo vazio e recusado. Nas Regras de Mandela, que
+  nao tem artigo, vale a regra pelo numero ("regra 12.1", decisao 76). Fora de
+  Direito (as materias em `sem_lei` do `config/leis.yml`), vale a regra
+  gramatical ou logica;
 - macete: regra, fonte (com artigo, nas materias de lei) e os codigos das
   **questoes reais** em que ele se apoia — codigo que nao estava no pedido e
   recusado, porque viraria link para questao que nao existe.
