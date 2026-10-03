@@ -557,10 +557,21 @@ def test_a_pagina_da_ficha_mostra_tudo_com_o_selo_e_sem_previsao(com_ficha_real)
     assert "O cronograma de 29/10 traz este tema: R+30" in html
     assert "Não há evidência suficiente no acervo para afirmar isso." in html
     assert "Polícia Penal SC:" in html and "Acervo complementar FEPESE" in html
-    assert "não são questões oficiais da FEPESE" in html
+    assert "Gerada por IA: não é questão oficial da FEPESE." in html
     assert "Conferi esta ficha" in html
     assert not PREVISAO.search(html)
     assert "<script" not in html
+
+
+def test_o_selo_de_cada_parte_sai_da_origem_do_campo(com_ficha_real, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem de um campo no
+    dado, o selo daquela parte troca junto."""
+    monkeypatch.setattr(fichas, "ORIGEM_DO_CAMPO",
+                        {**fichas.ORIGEM_DO_CAMPO, "geradas": origem.OFICIAL})
+
+    html = TestClient(app).get("/fichas/art-5o-caput-e-incisos-i-a-xvi?data=2026-10-29").text
+
+    assert re.search(r'ds-selo--oficial ds-selo--curto"[^>]*>🟢</span> Questões geradas por IA', html)
 
 
 def test_ficha_que_nao_existe_e_404(com_ficha_real):

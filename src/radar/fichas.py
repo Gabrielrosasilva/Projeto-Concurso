@@ -85,7 +85,7 @@ ORIGEM_DO_CAMPO = {
     "padroes_do_alvo": ACERVO, "linha_complementar": ACERVO,
     "questoes_reais": ACERVO,
     "meta_de_questoes": PLANO,
-    "quando_revisar": AUTOMATICO,
+    "quando_revisar": AUTOMATICO, "refazer": AUTOMATICO,
     "desempenho": AUTOMATICO, "geradas": IA,
 }
 
@@ -532,6 +532,11 @@ class FichaDeEstudo:
     @property
     def conferida(self) -> bool:
         return bool(self.escrita.conferida_em)
+
+    @property
+    def origens(self) -> dict[str, str]:
+        """A origem de cada campo, para a tela desenhar o selo dela (7A)."""
+        return ORIGEM_DO_CAMPO
 
     @property
     def procedencia(self) -> str:

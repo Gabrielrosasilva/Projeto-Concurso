@@ -73,26 +73,26 @@
       <p class="frase-padrao">Sem fonte oficial cadastrada no config/leis.yml para este assunto.</p>
     {% endif %}
 
-    <p class="subtitulo">Ler exatamente {{ s('ia') }}</p>
+    <p class="subtitulo">Ler exatamente {{ s(f.origens.ler_exatamente) }}</p>
     <p>{{ f.ler_exatamente.texto or f.vazio('ler_exatamente') }}</p>
     {% if f.artigos_chave %}
-      <p class="subtitulo">{{ s('plano') }} Artigos-chave do dia (seleção do plano, a partir do texto da lei; não é incidência)</p>
+      <p class="subtitulo">{{ s(f.origens.artigos_chave) }} Artigos-chave do dia (seleção do plano, a partir do texto da lei; não é incidência)</p>
       <ul class="marcas">
         {% for a in f.artigos_chave %}<li><b>{{ a.artigos }}</b> — {{ a.porque }}</li>{% endfor %}
       </ul>
     {% endif %}
 
-    <p class="subtitulo">Como pesquisar {{ s('ia') }}</p>
+    <p class="subtitulo">Como pesquisar {{ s(f.origens.como_pesquisar) }}</p>
     {% if f.como_pesquisar %}
       <ul class="marcas">{% for b in f.como_pesquisar %}<li>“{{ b }}”</li>{% endfor %}</ul>
     {% else %}<p class="frase-padrao">{{ f.vazio('como_pesquisar') }}</p>{% endif %}
 
-    <p class="subtitulo">Você precisa entender {{ s('ia') }}</p>
+    <p class="subtitulo">Você precisa entender {{ s(f.origens.entender) }}</p>
     {% if f.entender %}
       <ul class="marcas">{% for t in f.entender %}<li>{{ t }}</li>{% endfor %}</ul>
     {% else %}<p class="frase-padrao">{{ f.vazio('entender') }}</p>{% endif %}
 
-    <p class="subtitulo">Você precisa memorizar {{ s('ia') }}</p>
+    <p class="subtitulo">Você precisa memorizar {{ s(f.origens.memorizar) }}</p>
     {% if f.memorizar %}
       <ul class="marcas">{% for t in f.memorizar %}<li>{{ t }}</li>{% endfor %}</ul>
     {% else %}<p class="frase-padrao">{{ f.vazio('memorizar') }}</p>{% endif %}
@@ -100,7 +100,7 @@
 
   <section class="ds-cartao">
     <h2>Pegadinhas</h2>
-    <p class="subtitulo">{{ s('acervo') }} No acervo (cada uma de uma questão real)</p>
+    <p class="subtitulo">{{ s(f.origens.pegadinhas_do_acervo) }} No acervo (cada uma de uma questão real)</p>
     {% if f.pegadinhas_do_acervo %}
       <ul class="marcas">
         {% for q in f.pegadinhas_do_acervo %}
@@ -109,7 +109,7 @@
       </ul>
     {% else %}<p class="frase-padrao">{{ f.vazio('pegadinhas_do_acervo') }}</p>{% endif %}
     {% if f.pegadinhas_escritas %}
-      <p class="subtitulo">{{ s('ia') }} Confusões comuns neste conteúdo (texto de IA, não é padrão do acervo)</p>
+      <p class="subtitulo">{{ s(f.origens.pegadinhas_escritas) }} Confusões comuns neste conteúdo (texto de IA, não é padrão do acervo)</p>
       <ul class="marcas">{% for t in f.pegadinhas_escritas %}<li>{{ t }}</li>{% endfor %}</ul>
     {% endif %}
   </section>
@@ -117,10 +117,10 @@
   <section class="ds-cartao">
     <h2>Como a FEPESE cobrou (acervo analisado)</h2>
     {% if f.sem_no %}
-      <p>{{ s('acervo') }} Este tema não tem nó na árvore de conteúdos: nada do acervo é contado nele.</p>
+      <p>{{ s(f.origens.padroes_do_alvo) }} Este tema não tem nó na árvore de conteúdos: nada do acervo é contado nele.</p>
       <p class="frase-padrao">{{ f.vazio('padroes_do_alvo') }}</p>
     {% else %}
-      <p>{{ s('acervo') }} <b>Polícia Penal SC:</b> {{ f.linha_do_alvo.amostra }} — {{ f.linha_do_alvo.rotulo }}</p>
+      <p>{{ s(f.origens.padroes_do_alvo) }} <b>Polícia Penal SC:</b> {{ f.linha_do_alvo.amostra }} — {{ f.linha_do_alvo.rotulo }}</p>
       {% set p = f.padroes_do_alvo %}
       {% if not p.suficiente %}
         <p class="frase-padrao">{{ p.frase }}</p>
@@ -133,7 +133,7 @@
           {% if p.termos %}<li>Termos frequentes: {% for t in p.termos %}{{ t.palavra }}{% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
         </ul>
       {% endif %}
-      <p>{{ s('acervo') }} {{ f.linha_complementar.frase }} <span class="ds-suave">(linha separada: as duas nunca se somam)</span></p>
+      <p>{{ s(f.origens.linha_complementar) }} {{ f.linha_complementar.frase }} <span class="ds-suave">(linha separada: as duas nunca se somam)</span></p>
     {% endif %}
   </section>
 
@@ -142,7 +142,7 @@
     {% if f.questoes_reais %}
       <ul class="lista">
         {% for q in f.questoes_reais %}
-          <li>{{ s('acervo') }} <b>{{ q.codigo }}</b> · {{ q.onde }} · gabarito {{ (q.resposta or '?') | upper }} · {{ q.no }}
+          <li>{{ s(f.origens.questoes_reais) }} <b>{{ q.codigo }}</b> · {{ q.onde }} · gabarito {{ (q.resposta or '?') | upper }} · {{ q.no }}
             <details><summary>ver o enunciado</summary><p class="enunciado">{{ q.enunciado }}</p></details>
           </li>
         {% endfor %}
@@ -155,15 +155,15 @@
     {% if f.meta_de_questoes %}
       <ul class="lista">
         {% for pr in f.meta_de_questoes %}
-          <li>{{ s('plano') }} {{ pr.data.strftime('%d/%m') }} · <b>{{ pr.rotulo }}</b>: {{ pr.questoes }} questões{% if pr.consulta %}, com consulta (fora da meta){% else %}, sem consulta{% endif %}{% if pr.filtro %} <span class="ds-suave">— filtro: {{ pr.filtro }}</span>{% endif %}</li>
+          <li>{{ s(f.origens.meta_de_questoes) }} {{ pr.data.strftime('%d/%m') }} · <b>{{ pr.rotulo }}</b>: {{ pr.questoes }} questões{% if pr.consulta %}, com consulta (fora da meta){% else %}, sem consulta{% endif %}{% if pr.filtro %} <span class="ds-suave">— filtro: {{ pr.filtro }}</span>{% endif %}</li>
         {% endfor %}
       </ul>
     {% else %}<p class="frase-padrao">O cronograma não tem faixa de questões deste tema.</p>{% endif %}
     {% set do_alvo = f.questoes_reais | selectattr('evidencia', 'equalto', 'alvo') | list %}
     {% if f.questoes_reais %}
-      <p>{{ s('acervo') }} No radar há {{ f.questoes_reais | length }} questão(ões) real(is) exatamente deste conteúdo ({{ do_alvo | length }} do alvo, {{ (f.questoes_reais | length) - (do_alvo | length) }} do complementar): comece por elas.</p>
+      <p>{{ s(f.origens.questoes_reais) }} No radar há {{ f.questoes_reais | length }} questão(ões) real(is) exatamente deste conteúdo ({{ do_alvo | length }} do alvo, {{ (f.questoes_reais | length) - (do_alvo | length) }} do complementar): comece por elas.</p>
     {% endif %}
-    <p class="subtitulo">{{ s('ia') }} Questões geradas por IA neste conteúdo — não são questões oficiais da FEPESE</p>
+    <p class="subtitulo">{{ s(f.origens.geradas) }} Questões geradas por IA neste conteúdo. {{ FRASE_DA_QUESTAO_DE_IA }}</p>
     {% if f.geradas %}
       <ul class="marcas">
         {% for g in f.geradas %}<li>{{ g.enunciado[:140] }}{% if g.enunciado | length > 140 %}…{% endif %}</li>{% endfor %}
@@ -177,7 +177,7 @@
 
   <section class="ds-cartao">
     <h2>Erros para revisar depois</h2>
-    <p>{{ s('automatico') }} Erradas no radar (pela última resposta): <b>{{ f.refazer.do_radar | length }}</b>
+    <p>{{ s(f.origens.refazer) }} Erradas no radar (pela última resposta): <b>{{ f.refazer.do_radar | length }}</b>
       · no caderno de erros, para rever: <b>{{ f.refazer.do_caderno | length }}</b>
       <span class="ds-suave">(duas listas, nunca somadas)</span></p>
     {% if f.refazer.do_caderno %}
@@ -195,9 +195,9 @@
   <section class="ds-cartao">
     <h2>Meu desempenho neste conteúdo</h2>
     {% if f.estado %}
-      <p>{{ s('automatico') }} {{ f.desempenho.divisao() }} · <b>{{ f.estado.nome }}</b> · {{ f.estado.amostra }}</p>
+      <p>{{ s(f.origens.desempenho) }} {{ f.desempenho.divisao() }} · <b>{{ f.estado.nome }}</b> · {{ f.estado.amostra }}</p>
     {% else %}
-      <p>{{ s('automatico') }} Ainda sem resposta neste conteúdo.</p>
+      <p>{{ s(f.origens.desempenho) }} Ainda sem resposta neste conteúdo.</p>
     {% endif %}
     <p class="ds-suave">Situação: {{ f.situacao }}. O desempenho é o do ciclo em andamento, radar e anotado separados; questão de IA não entra.</p>
   </section>
