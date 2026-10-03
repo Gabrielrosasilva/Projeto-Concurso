@@ -250,6 +250,11 @@ def test_tabela_nova_entra_em_banco_antigo(tmp_path, monkeypatch):
     motor.dispose()
 
     monkeypatch.setenv("RADAR_DATABASE_URL", f"sqlite:///{arquivo}")
+    # O banco sem versao migra sozinho, e a migracao exporta os JSON versionados
+    # e copia o banco para <dados>/copias. Sem apontar os dados para o tmp_path,
+    # este teste sobrescrevia data/questoes_geradas.json com o [] do banco
+    # vazio - foi assim que as 50 geradas sumiram do arquivo duas vezes.
+    monkeypatch.setenv("RADAR_DATA_DIR", str(tmp_path))
     db.resetar_engine()
     try:
         db.criar_tabelas()
