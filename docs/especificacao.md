@@ -28,18 +28,33 @@ mais didática → compreensão rápida → ação imediata.
 
 ## Selos de confiança (aparecem em todo conteúdo)
 
+As quatro origens da seção 20 do novo.md, com as cores dele desde a Etapa 7A
+(decisões 53 a 58). Moram num lugar só, o `src/radar/origem.py`; o serviço
+grava a origem no dado e a tela desenha o selo a partir dela.
+
 | Selo | O que é | Origem | Exemplo |
 |---|---|---|---|
-| 🟦 Fonte oficial | Edital, gabarito definitivo/retificado | PDF oficial FEPESE | "O edital 2019 cobrou 10 questões de Português" |
-| 🟦 Extraída da prova | Questão real | Caderno oficial | Questão 14, SAP/SC 2019 |
-| 🟩 Calculado pelo sistema | Contagem no acervo | Banco de questões | "Português = 20% das questões" |
-| 🟨 Classificação automática | Assunto atribuído por palavra-chave | Classificador | Q14 → "Inquérito policial" |
-| 🟨 Tendência | Leitura dos números | Estatística (base pequena!) | "A FEPESE costuma cobrar interpretação" |
-| 🟥 Gerado por IA | Macete, explicação, questão criada | LLM — material auxiliar | Mnemônico, questão gerada |
+| 🟢 Fonte oficial | Edital, gabarito definitivo/retificado, lei | PDF oficial FEPESE, Planalto, ALESC | "O edital 2019 cobrou 10 questões de Português" |
+| 🟢 Extraída da prova | Questão real | Caderno oficial | Questão 14, SAP/SC 2019 |
+| 🔵 Estatística do acervo | Contagem nas provas do acervo, com a amostra | Banco de questões | "Português = 20% das questões · 60 questões · 2 provas" |
+| 🟡 Análise automática | O que o sistema calcula de mim e do radar | Desempenho, prioridade, nível, contagem de erros | "62% em 21 questões, medido no radar" |
+| 🟡 Análise automática (classificação) | Assunto atribuído por palavra-chave | Classificador | Q14 → "Inquérito policial" |
+| 🟡 Análise automática (tendência) | Leitura dos números, previsão de data, estimativa | Estatística (base pequena!) | "Se a prova fosse hoje: ~4 acertos" |
+| 🟣 Gerado por IA | Macete, explicação, questão criada, ficha | LLM — material auxiliar | Mnemônico, questão gerada |
+| 📌 Seleção do plano | O que eu planejei no cronograma | `config/cronograma.yml` | Artigos-chave do dia, número de questões |
 
 Regras dos selos:
-- Conteúdo 🟥 **nunca** aparece misturado com conteúdo oficial sem o selo.
-- Questão ou explicação 🟥 precisa **citar o artigo de lei** que fundamenta a resposta.
+- Conteúdo 🟣 **nunca** aparece misturado com conteúdo oficial sem o selo.
+- Questão de IA mostra sempre o 🟣 e a frase **"Gerada por IA: não é questão
+  oficial da FEPESE."**
+- Quando o acervo não sustenta uma estatística, padrão ou conclusão, a tela
+  escreve exatamente **"Não há evidência suficiente no acervo para afirmar
+  isso."**; para o meu desempenho com pouca resposta, o estado é **"Amostra
+  insuficiente"**; para fato que ainda não se sabe (prazo, banca), "não sei
+  ainda".
+- As metas do dia (Ideal, Reduzida, Mínima, Não fiz) **não** são selos: têm as
+  cores delas (`--meta-*`), que não mudam quando um selo muda.
+- Questão ou explicação 🟣 precisa **citar o artigo de lei** que fundamenta a resposta.
 - Questão de prova antiga cujo tema mudou por lei posterior ganha o aviso
   **"⚠ A lei mudou depois desta prova"** (EC 104/2019, Lei 13.964/2019 — Pacote
   Anticrime —, alterações na LEP, CP, CPP etc.). A lista de temas afetados mora em
@@ -61,7 +76,7 @@ Onde cada tela atual vai parar:
 | `index.html` (radar de concursos) | Concursos → Inscrições abertas / Outros |
 | `foco.html` | Meu foco (home) + Análises |
 | `simulado.html` | Estudar → Simulados |
-| `geradas.html` | Estudar → Treino rápido (com selo 🟥) |
+| `geradas.html` | Estudar → Treino rápido (com selo 🟣) |
 | `macetes.html` | Revisão |
 | `acompanhando.html`, `calendario.html`, `previsao.html` | Concursos |
 
@@ -97,13 +112,13 @@ Cálculo **sem IA**, explicável na tela:
 - Para cada erro: a alternativa que marquei, a correta, a explicação e o macete
   relacionado, cada um com o seu selo.
 - **Não mostrar "nota de corte estimada"** enquanto não houver fonte oficial para ela
-  (resultado/classificação publicados). Se um dia houver, mostrar com o selo 🟦 e a fonte.
+  (resultado/classificação publicados). Se um dia houver, mostrar com o selo 🟢 e a fonte.
 
 ## Central de macetes (formato do card)
 
 - Assunto + base ("83 questões analisadas") + selo.
-- 🟩 **Padrão da banca**: o que a contagem mostra.
-- 🟥 **Macete (IA)**: regra prática, com a fonte legal/gramatical.
+- 🔵 **Padrão da banca**: o que a contagem mostra.
+- 🟣 **Macete (IA)**: regra prática, com a fonte legal/gramatical.
 - ⚠ **Pegadinha recorrente**: com link **[Ver questões reais relacionadas]**.
 
 ## Cronograma via IA — FASE FUTURA

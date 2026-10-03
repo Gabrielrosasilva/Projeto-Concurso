@@ -1416,9 +1416,16 @@ acerto), e matéria com menos de 5 respostas conta como não treinada.
 
 As cores, o espaco e a letra moram em **`src/radar/web/static/design.css`**, e
 os componentes (selo, bloco, aviso de lei) em **`templates/_componentes.html`**.
-A tela de Macetes e a primeira a usar os dois; as outras migram depois de eu
-aprovar o visual. Modo escuro segue o sistema, e `?tema=escuro` ou
-`?tema=claro` na URL forca um dos dois para comparar.
+O escuro e o padrao; o botao da barra troca e guarda a escolha em cookie, e
+`?tema=escuro` ou `?tema=claro` na URL forca um dos dois para comparar.
+
+Os **selos** sao as quatro origens da secao 20 do novo.md (Etapa 7A): 🟢 fonte
+oficial (edital, gabarito, lei, a questao da prova), 🔵 estatistica do acervo,
+🟡 analise automatica (o meu desempenho, a prioridade, a classificacao, a
+tendencia) e 🟣 gerado por IA - mais o 📌 do plano, na ficha. Eles moram em
+**`src/radar/origem.py`**, e quem escolhe a cor e o dado: cada servico grava a
+origem (`origem`, ou `origens` quando junta partes) e a tela so desenha. A meta
+do dia (Ideal, Reduzida, Minima, Nao fiz) nao e selo e tem as cores dela.
 
 #### A Central de Macetes
 
@@ -1428,17 +1435,17 @@ de onde veio, e as partes nao se misturam:
 
 - **base**: "24 questoes analisadas — provas 2013 e 2019", com o aviso
   **base pequena** — sao so duas provas do cargo;
-- **🟩 Padrao da banca**: a contagem do `macetes.py` sobre essas questoes —
+- **🔵 Padrao da banca**: a contagem do `macetes.py` sobre essas questoes —
   como ela pergunta ("3 de 24 pedem a INCORRETA") e as palavras que mais
   aparecem;
-- **🟥 Macete (IA)**: a regra, a **fonte citada** (com o link oficial da lei
+- **🟣 Macete (IA)**: a regra, a **fonte citada** (com o link oficial da lei
   da materia) e a **pegadinha recorrente**, com a procedencia embaixo. Vem de
   `data/macetes.json`, pelo caminho sem API (`--pedido --macetes` /
   `--importar`). Macete sem fonte ou sem procedencia **nao aparece**, mesmo
   que alguem o escreva a mao no arquivo;
 - **[Ver questoes reais relacionadas]** abre as questoes em que o macete se
-  apoia, com o selo 🟦, o gabarito definitivo e o link do caderno — e ali que
-  eu confiro o 🟥 contra a prova.
+  apoia, com o selo 🟢, o gabarito definitivo e o link do caderno — e ali que
+  eu confiro o 🟣 contra a prova.
 
 O aviso **⚠ A lei mudou depois desta prova** sai da lista `mudancas:` do
 `config/leis.yml`: tema, lei, quais anos de prova ficaram velhos e as palavras
@@ -1698,6 +1705,8 @@ src/radar/
 ├── migracoes.py    a versao do banco: passos numerados, copia antes, desfazer
 ├── conteudos.py    a arvore de conteudos e a taxonomia (puro, sem banco)
 ├── incidencia.py   o mapa de incidencia do alvo e os padroes (puro)
+├── origem.py       as quatro origens e os selos (🟢 🔵 🟡 🟣 e o 📌), e as
+│                   duas frases que nao variam: a do acervo e a da IA
 ├── servico/        as regras, um arquivo por assunto:
 │   ├── __init__.py   consulta, favoritos, detalhe, elegibilidade,
 │   │                 retificacao e calendario - e a fachada dos demais

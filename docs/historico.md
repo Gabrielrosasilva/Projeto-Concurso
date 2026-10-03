@@ -1675,3 +1675,45 @@ acervo nem foi contado para ela.
 
 **O que ficou:** a minha conferencia das 61 fichas e o Ciclo 2, que depende do
 simulado de fechamento de 07/11 e da minha aprovacao antes de 09/11.
+
+## Etapa 7A — os selos do novo.md, a frase padrao e a questao de IA (02-03/10)
+
+**O pedido:** as quatro origens da secao 20 do novo.md com as cores dele, a
+origem registrada no dado e nao so pintada, a frase da regra 4 identica em
+todo lugar, e questao de IA nunca parecendo oficial. Antes de comecar, cinco
+ajustes ao roteiro foram aprovados: dividir o antigo "calculado" pela natureza
+do dado (acervo ou automatico), unificar a frase que ja existia duas vezes,
+a ficha da 6B usar o mesmo componente, dar cor propria a tudo que reusava a
+cor de selo (e nao so as metas) e gravar a origem nos dados que a tela mostra
+com selo, e nao em todo numero de todo servico.
+
+**Como foi feito**, em passos pequenos, cada um com os testes dele e um
+commit:
+1. o `src/radar/origem.py` (as origens, o `SELOS` e as duas frases), os
+   tokens do `design.css` (cores com nome, `--selo-*`, `--meta-*`) e o
+   `_componentes.html` lendo o `SELOS`; as cores que nao eram selo (meta do
+   dia, bom e ruim, o que esta rodando) passaram a usar a cor pelo nome;
+2. a origem nos tipos que os servicos entregam a tela (atributo `origem`,
+   `origens` quando o objeto junta partes, ou propriedade quando depende do
+   dado), com o `tests/test_origem.py`;
+3. a frase padrao: a constante unica, o "Amostra insuficiente" no lugar do
+   "amostra pequena" e a frase do acervo onde a falta era de evidencia;
+4. as telas, uma por commit: Meu foco, home, Hoje, Semanas, Caderno de erros,
+   Macetes, a rodada (questao e relatorio), Simulado, Gerar questoes,
+   Concursos, Minhas materias, Previsao e Mais, e a Ficha - cada uma com um
+   teste que troca a origem NO DADO e confere que o selo troca junto;
+5. a varredura das telas (`tests/test_varredura_das_telas.py`), e os docs.
+
+**A conferencia no navegador** foi por captura do Edge sem janela, nos dois
+temas, com o banco real: Hoje, Semanas, home, Meu foco, Minhas materias,
+Simulado, relatorio, Gerar questoes, Macetes, Mais, ficha e Previsao. As metas
+do dia ficaram com as cores de antes; os selos, com as do novo.md.
+
+**Achados no caminho.** A varredura achou uma previsao que ninguem tinha
+visto: "Já caíram várias vezes e devem cair de novo", no cartao das questoes
+repetidas dos Macetes - trocada. A captura achou que o `?tema=` da URL (o que
+forca claro ou escuro) colide com o filtro "Materia ou tema" dos Macetes -
+anotado em pendencias, porque o conserto e renomear um parametro que pode
+estar em link salvo. E a tela Mais mostrava o backup de 02/10 falho: as 23h30
+o `radar sincronizar` nao conseguiu o pull porque havia mudanca nao commitada
+no disco (era o trabalho desta etapa em andamento).

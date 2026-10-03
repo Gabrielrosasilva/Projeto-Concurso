@@ -98,7 +98,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (02/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (03/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao (design system, home, erros,
 compilado, revisao 1-7-30, Macetes, `gerar --pedido`) e o **Ciclo 1 de estudo,
@@ -140,7 +140,11 @@ as **61 fichas** do resto do Ciclo 1 escritas pelo Claude Code em
 `data/fichas.json`, **todas por conferir**; o texto de lei pelo vigente da
 compilacao da Camara). **Falta da 6B:** a sua conferencia das fichas e o
 **Ciclo 2**, que depende do simulado de 07/11 e da sua aprovacao antes de
-09/11. **Proxima: Etapa 7A** (selos, frase padrao e marcacao de IA).
+09/11. E a **7A** (de 03/10: os selos do novo.md - 🟢 oficial, 🔵 acervo,
+🟡 automatico, 🟣 IA - em todo o site, a origem gravada no dado, a frase da
+regra 4 e o "Amostra insuficiente" no lugar das variacoes, e o 🟣 com "nao e
+questao oficial da FEPESE" em toda tela que mostra questao de IA).
+**Proxima: Etapa 7B** (as 6 telas no CSS antigo).
 **Em aberto:** o numero de questoes das faixas ainda e o do plano, e nao o da
 incidencia (a ficha mostra a incidencia e manda comecar pelas reais); 6 telas
 no CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md);
@@ -160,7 +164,10 @@ reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
 `data/fichas.json`, 🟣 com a procedencia. **O desempenho por conteudo e do
 `servico/desempenho_por_conteudo.py`**, e os dois recortes - medido no radar e
 anotado - **nunca sao somados na tela**, so no estado da amostra.
-**Alvo, complementar e
+**Os selos moram no `radar/origem.py`**, e quem escolhe a cor e o dado: o
+servico grava a origem (`origem`, ou `origens` quando junta partes) e o
+template so desenha; `--selo-*` so no `design.css`, e a meta do dia tem as
+cores dela. **Alvo, complementar e
 fora saem do `servico/evidencia.py`** (uma regra, nunca somados; e prova
 complementar so entra em estatistica se estiver aceita no
 `data/acervo_complementar.json`), e tudo que

@@ -2996,3 +2996,84 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     esse numero que decide o Ciclo 2". A proposta sai depois dele, pela
     prioridade e pela rotina da 6A, e so vira YAML com a minha aprovacao,
     antes de 09/11.
+
+## Etapa 7A — os selos do novo.md, a frase padrao e a questao de IA (02-03/10/2026)
+
+53. **as cores do novo.md em todo o site, e o "calculado" deixou de existir.**
+    🟢 fonte oficial (edital, gabarito, lei e a questao tirada da prova), 🔵
+    estatistica do acervo, 🟡 analise automatica (com as variacoes
+    "classificacao" e "tendencia") e 🟣 gerado por IA, mais o 📌 do plano.
+    Moram num lugar so, o `src/radar/origem.py`: a tela (o `selo` do
+    `_componentes.html`), a ficha e o terminal leem de la. O antigo 🟩
+    "calculado pelo sistema" foi dividido pela natureza do dado: contagem
+    nas provas virou 🔵 acervo; o que o sistema calcula de mim e do radar
+    (meu acerto, medido no radar, total do dia, nivel, erros do caderno,
+    concursos coletados) virou 🟡 automatico. **Por que dividir, e nao
+    trocar a cor:** o verde passou a querer dizer oficial, e "meu acerto"
+    nao e estatistica do acervo (regra inviolavel 1).
+
+54. **a origem mora no dado, e a tela so desenha.** Tres formas, a mais
+    simples que serve:
+    - tipo de origem fixa: atributo de classe `origem` (Numeros, Evolucao,
+      Nivel, Revisar, Contagem, Desempenho, FatiaDoCaderno, Cartao,
+      MaceteDoCartao, Previsao, Cobertura, Projecao, Lei, QuestaoDeProva e
+      QuestaoGerada). Nas duas questoes **nao e coluna**: a tabela ja diz de
+      onde a linha veio, e nao ha migracao;
+    - tipo que junta partes de origens diferentes: `origens`, parte ->
+      origem (a Conta do dia - o treino de IA leva o selo da IA -, o Painel
+      do Meu foco, a Analise dos Macetes, o Plano do compilado e a ficha,
+      pelo `ORIGEM_DO_CAMPO`);
+    - origem que depende do dado: propriedade ou campo (a questao da revisao
+      e a rodada: prova ou IA; a resposta certa: gabarito definitivo ou
+      resposta da IA; o acerto por materia: IA nas geradas; o salario: lido
+      do anuncio, ou sem selo quando fui eu que digitei).
+    Selo de LEGENDA ou de NOTA DE METODO (frase fixa da tela que explica uma
+    regra: a legenda da Mais, "so questoes reais", "os minimos vem do
+    config/amostra.yml") continua escrito no template. Tres campos antigos
+    se chamam `origem` com outro sentido e ficaram como estao, por estarem
+    fora do pedido: `Conteudo.origem` (edital/classificacao/manual),
+    `Lancamento.origem` (faixa/extra/radar) e `servico.geradas.origem_de` (a
+    questao real em que a gerada se baseia).
+
+55. **a meta do dia tem cor propria, e nada pinta com a cor de selo.** O
+    `design.css` ganhou cores com nome (`--cor-verde`, `--cor-azul`,
+    `--cor-ambar`, `--cor-vermelho`, `--cor-roxo-fundo`); o `--selo-*` aponta
+    para elas; a meta usa `--meta-ideal`, `--meta-reduzida`, `--meta-minima` e
+    `--meta-nao-fiz` (verde, azul, amarelo e vermelho - as de antes); bom e
+    ruim (acerto na meta, alternativa certa, seta da semana) e as faixas do
+    cronograma usam as cores com nome direto. **Por que:** trocar o selo
+    pintaria a Reduzida de verde e a Mínima de outra cor sem ninguem pedir.
+    Um teste proibe `--selo-*` fora do `design.css`. Os emojis da meta (✅ 🟦
+    🟨 ❌) ficam: sao meta, nao selo. Duas mudancas de cor de proposito: o
+    botao que gasta a API fica roxo, a cor da IA (o de apagar continua
+    vermelho), e o roxo da IA e o mesmo da faixa de raciocinio.
+
+56. **tres frases, cada uma para uma falta diferente.**
+    - o ACERVO nao sustenta (incidencia, padrao, por qual assunto comecar):
+      "Não há evidência suficiente no acervo para afirmar isso.", exata, numa
+      constante so (`origem.FRASE_SEM_EVIDENCIA`, antes copiada em tres
+      arquivos), com teste de que nenhum outro arquivo a escreve;
+    - o meu DESEMPENHO tem pouca resposta: "Amostra insuficiente"
+      (`amostra.INSUFICIENTE`, decisao 6), no Meu foco, na home, em Minhas
+      materias e no "Onde estudar primeiro" - "amostra pequena" saiu;
+    - FATO que ainda nao se sabe (prazo, banca, validade, edital nao lido, o
+      que houve antes da primeira coleta): "nao sei ainda", como antes - nao
+      e falta de evidencia no acervo.
+    O aviso "base pequena" (so duas provas do cargo) continua: ele acompanha
+    um numero que tem amostra, e nao toma o lugar dele.
+
+57. **questao de IA: o 🟣 e "Gerada por IA: não é questão oficial da
+    FEPESE." onde ela aparecer** - a questao aberta (antes do enunciado), o
+    relatorio da rodada de IA, o acerto nas geradas do Simulado, a tela Gerar
+    questoes e as geradas da ficha. No relatorio, a resposta certa da gerada
+    leva "Resposta da IA", em roxo, e nunca "Gabarito definitivo".
+
+58. **a varredura das telas e um teste** (`tests/test_varredura_das_telas.py`):
+    21 telas abertas com uma base de data fixa, conferindo a regra 2 (nada de
+    "vai cair", "devem cair", "certamente", "sempre cobra"...), a 5 (onde a
+    questao de IA aparece, o 🟣 e a frase aparecem junto) e a 3 (toda
+    porcentagem com a amostra perto: "em N", "de N", "(N)", "N questões", ou
+    o numero da celula ao lado, na tabela e no grafico). Ela achou "Já caíram
+    várias vezes e devem cair de novo" no cartao "Questões que ela repete" dos
+    Macetes - previsao -, trocado por "é o que já aconteceu, e não uma
+    previsão".

@@ -18,7 +18,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
 | 10 | 5 — Geração de questões | ✅ |
 | 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; falta a sua conferência das 61 fichas e o Ciclo 2, depois do simulado de 07/11 |
-| 12 | 7A — Selos e marcação de IA | ⬜ |
+| 12 | 7A — Selos e marcação de IA | ✅ |
 | 13 | 7B — As 6 telas no design system | ⬜ |
 | 14 | 8 — Auditoria final integrada | ⬜ |
 
@@ -1512,3 +1512,97 @@ Fica em aberto:
   sem nó, decisão 43);
 - [ ] o Ciclo 2 (passo 5 do roteiro): a proposta depois do simulado de 07/11 e a
   sua aprovação antes de 09/11.
+
+## 7A — Selos, frase padrão e marcação de IA (02-03/10/2026)
+
+- Situação: ✅
+- Datas: início 02/10 · fim 03/10
+
+**Como foi feita.** Os cinco passos do roteiro, cada um com os testes dele e
+um commit, e as telas uma por commit (17 commits, de `19a1e34` a `ec19488`,
+mais o dos docs).
+
+**O que mudou em relação ao roteiro, e por quê** (os cinco ajustes aprovados
+antes de começar; decisões 53 a 58):
+- o antigo 🟩 "calculado" foi **dividido** pela natureza do dado, e não só
+  trocado de cor: contagem nas provas virou 🔵 acervo; o que o sistema calcula
+  de mim e do radar virou 🟡 automático (decisão 53);
+- a frase da regra 4 já existia em dois arquivos (e uma terceira cópia na
+  ficha): virou **uma constante só**, no `origem.py`; "não sei ainda" ficou
+  para fato que não se sabe (decisão 56);
+- a ficha da 6B, que já tinha os quatro selos com um dicionário próprio,
+  passou a usar o **mesmo componente** de selo, na forma curta;
+- não só as metas reusavam a cor dos selos: a faixa do cronograma, o "agora",
+  o círculo de feito, o cronômetro e o bom/ruim de várias telas também. Todos
+  ganharam cor pelo nome, e um teste proíbe `--selo-*` fora do `design.css`
+  (decisão 55);
+- a origem foi gravada **nos dados que a tela mostra com selo** (17 telas), e
+  não em todo número de todo serviço (decisão 54).
+
+**Arquivos alterados.**
+- novo: `src/radar/origem.py` (as origens, o `SELOS`, a frase da regra 4 e a
+  da questão de IA);
+- `src/radar/web/static/design.css` — cores com nome, `--selo-*` nas cores do
+  novo.md, `--meta-*`, as classes `ds-selo--acervo`, `--plano` e `--curto`;
+- `src/radar/web/templates/_componentes.html` — o `selo` lê o `SELOS`, com a
+  forma curta;
+- os serviços que entregam dado com selo: `servico/metricas.py`,
+  `cronograma.py`, `foco.py`, `servico/inicio.py`, `servico/erros.py`,
+  `servico/desempenho_por_conteudo.py`, `macetes.py`, `servico/cartoes.py`,
+  `servico/previsao.py`, `servico/materias.py`, `servico/simulado.py`,
+  `servico/compilado.py`, `leis.py`, `models.py` (a origem da questão e do
+  salário, sem coluna nova), `servico/geradas.py`, `servico/manual.py`,
+  `fichas.py` e `prioridade.py`;
+- a frase padrão: `incidencia.py`, `complementar.py`, `onde_estudar.py`;
+- `src/radar/web/app.py` e `src/radar/cli.py` — o `SELOS` e as frases como
+  globais do Jinja, e o terminal lendo o mesmo `SELOS`;
+- 17 templates: `foco`, `home`, `hoje`, `semanas`, `erros`, `macetes`,
+  `macete_questoes`, `questao`, `relatorio`, `simulado`, `geradas`, `index`,
+  `materias`, `previsao`, `mais`, `ficha` e `desempenho`;
+- testes novos: `tests/test_origem.py` e `tests/test_varredura_das_telas.py`;
+  ajustados ou ampliados: `test_design`, `test_fichas`, `test_foco`,
+  `test_central_de_macetes`, `test_macetes`, `test_home`, `test_metricas`,
+  `test_semanas`, `test_caderno_erros`, `test_gerador`, `test_relatorio`,
+  `test_web`, `test_previsao`, `test_materias_na_tela` e `test_minimo`;
+- docs: `especificacao.md` (a tabela dos selos), `decisoes.md` (53 a 58),
+  `historico.md`, `pendencias.md`, `README.md`, `CLAUDE.md`, este arquivo.
+
+Nenhum dado mudou, e o banco não mudou de versão: a origem da questão real e
+da gerada é da tabela, e não uma coluna.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| Passo 1 (selos, tokens e cores das telas), 21 arquivos, 1ª rodada | 27 passed, 1 failed (o próprio teste novo: o ajudante procurava "marca {", e a marca é o título da seção) |
+| Passo 1, depois do conserto do teste | 686 passed |
+| Passo 2 (a origem nos serviços): `test_origem.py`, depois 22 arquivos | 35 passed; 607 passed |
+| Passo 3 (a frase padrão), 6 arquivos | 170 passed |
+| Meu foco · home · Semanas · Caderno de erros | 70 · 9 · 37 · 53 passed |
+| Hoje (`test_metricas`, `test_tela_hoje`, `test_acertos_do_dia`) | 85 passed, 1 failed (o teste novo: a linha "medido no radar" só aparece com resposta real no dia; o teste ganhou uma) → 3 passed |
+| Macetes (`test_macetes`, `test_central_de_macetes`) | 67 passed, 2 failed (a questão do macete lia a origem do modelo, e não da `QuestaoRelacionada`, que passou a delegar; o teste das repetidas usava impressões diferentes) → 105 passed, com o `test_origem` |
+| Rodada (questão e relatório), Simulado, Gerar questões | 99 · 146 · 181 passed |
+| Concursos, Minhas matérias, Previsão e Mais | 200 passed; o teste novo da Mais, 1 failed (a legenda do topo já tem todos os selos: o teste passou a olhar só a cabeça do cartão) → 29 passed |
+| Ficha (`test_fichas`, `test_prioridade`) | 74 passed |
+| Varredura das telas, 1ª rodada | 2 passed, 1 failed: "15 \| 15%" e "60% \| 21", a base na célula ao lado; e a base de teste dependia da data de hoje → reescrita com data fixa e o vizinho aceito: 3 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2316 passed** (2248 de antes + 68 novos), 0 failed, 23 min — e depois dela o `data/` intacto (`git status` sem nada em `data/`) |
+
+**Comando real rodado (banco real).**
+1. `radar web --porta 8765` e as telas Hoje, Semanas, home, Meu foco, Minhas
+   matérias, Simulado, relatório de uma rodada, Gerar questões, Macetes,
+   Mais, uma ficha e Previsão, capturadas pelo Edge sem janela com
+   `?tema=claro` e `?tema=escuro` (24 capturas);
+2. `radar fichas --tema "Aplicação da lei penal (arts. 1º a 12)" --data
+   2026-10-05` → cada linha com o selo do `origem.py` (📌 🟢 🔵 🟡 🟣).
+
+**Critério de conclusão.**
+- [x] `pytest -q` verde (acima);
+- [x] as telas conferidas no navegador, nos dois temas: os selos com as cores
+  do novo.md (🟢 verde, 🔵 azul, 🟡 amarelo, 🟣 roxo), as metas do dia com as
+  cores de antes (a Reduzida azul e a Mínima amarela no "Se o dia apertar" e
+  nas pílulas da semana), o bom e o ruim em verde e vermelho;
+- [x] `especificacao.md` (a tabela dos selos) e `decisoes.md` (53 a 58) dizem
+  as cores novas.
+
+Achado e anotado em pendências (A): o `?tema=` da URL colide com o filtro
+"Matéria ou tema" dos Macetes - fora da 7A.

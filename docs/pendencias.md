@@ -9,10 +9,18 @@ Legenda: 🔴 nao feita · 🟡 feita pela metade · ⚪ nao verificada.
 
 ## A. Quebrado agora
 
-Nada. A A1 (Actions vermelho desde 26/09) saiu em **02/10/2026**: a coleta
-diaria voltou a rodar e commitou `coleta: 2026-10-02`. O `coleta.yml` roda
+A A1 (Actions vermelho desde 26/09) saiu em **02/10/2026**: a coleta diaria
+voltou a rodar e commitou `coleta: 2026-10-02`. O `coleta.yml` roda
 `pytest -q` ANTES de coletar, e passo que falha aborta o job - o commit e a
 prova de que a suite passou no Linux.
+
+- 🔴 **`?tema=` na tela Macetes** (achado na conferencia da 7A, 03/10): o
+  parametro que forca o tema claro/escuro pela URL e o mesmo nome do filtro
+  "Materia ou tema" do recorte por banca. `/macetes?tema=claro` pinta a tela
+  de claro E procura o tema "claro". O botao da barra nao sofre disso (ele
+  grava o cookie e tira o `tema` da URL na volta); so quem digita o
+  parametro. O conserto e renomear um dos dois - e o do filtro aparece em
+  link salvo, entao a escolha e sua.
 
 ## B. O desenho do estudo (decisao tomada, desenho aberto)
 
