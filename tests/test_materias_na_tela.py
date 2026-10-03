@@ -390,6 +390,19 @@ def test_a_tela_mostra_a_projecao(cliente, plano):
     assert "ficaram de fora por falta" in texto
 
 
+def test_o_selo_da_projecao_sai_do_dado(cliente, plano, monkeypatch):
+    """A projecao e tendencia, e o selo le a origem da Projecao (Etapa 7A)."""
+    from radar.servico import materias
+
+    _anotar(plano, SEG, "Direito Penal", 20, 16)
+    monkeypatch.setattr(materias.Projecao, "origem", "ia")
+
+    texto = cliente.get("/analises/materias").text
+
+    inicio = texto.index("Se a prova fosse hoje</h2>")
+    assert "ds-selo--ia" in texto[inicio:texto.index("</div>", inicio)]
+
+
 def test_a_tela_avisa_a_amostra_pequena(cliente, plano):
     _anotar(plano, SEG, "Direito Penal", 10, 9)
     texto = cliente.get("/analises/materias").text
