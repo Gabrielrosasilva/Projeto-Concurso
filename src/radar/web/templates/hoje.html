@@ -121,6 +121,8 @@
     .faixa .composicao li{margin:2px 0}
     .faixa .composicao .sub,.faixa .composicao .regra{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
     .faixa .composicao form{margin:var(--esp-2) 0 0}
+    .faixa .composicao details{margin:var(--esp-2) 0 0}
+    .faixa .composicao table{margin:var(--esp-2) 0 0}
 
     /* --- "fiz X, acertei Y" na propria faixa (etapa E2) --- */
     .resultado{margin-left:var(--esp-2);font-size:var(--tam-xs);font-weight:var(--peso-medio);
@@ -438,6 +440,14 @@
 {%- endmacro -%}
 
 {%- macro hm(h) -%}{{ h.strftime('%H:%M') }}{%- endmacro -%}
+
+{# Um numero da comparacao do fechamento: "X de Y · Z%", e o rotulo quando a
+   amostra nao sustenta a porcentagem (config/amostra.yml). #}
+{%- macro medida_do_sabado(m, vazio) -%}
+  {%- if m is none -%}<span class="sub">{{ vazio }}</span>
+  {%- else -%}{{ m.acertos }} de {{ m.respondidas }} · {{ m.porcentagem }}%{% if not m.suficiente %}<br><span class="sub">Amostra insuficiente</span>{% endif %}
+  {%- endif -%}
+{%- endmacro -%}
 
 {# O formulario do estudo extra: um so, para criar e para editar. Com `e`, ele
    edita aquele extra; sem, cria um novo. As questoes ficam de fora quando o
@@ -937,7 +947,37 @@
                    botao que cria a rodada ja com ela. Criada, a faixa mostra a
                    composicao GRAVADA na rodada e o link para ela. #}
                 {% set medida = composicoes.get((b.chave, loop.index0)) if composicoes else none %}
-                {% if medida %}
+                {% if medida and medida.no_qconcursos %}
+                  {# O simulado da semana, no Qconcursos (decisao 69): a mesma
+                     regra, entre os temas que eu ja estudei. Sem rodada aqui:
+                     a composicao diz quantas de cada tema, e o filtro. #}
+                  {% set c = medida.composicao %}
+                  <div class="composicao no-qconcursos">
+                    <p class="so-questoes">Só questões: não há o que estudar nesta faixa.</p>
+                    <p>{{ selo('automatico', 'Composição calculada') }}
+                      {% if c.materias | length > 1 %}{{ c.total }} questões divididas entre as matérias pelo peso do edital {{ selo('oficial', curto=True) }};{% endif %}
+                      dentro de cada matéria, entre os temas estudados antes deste dia: pela incidência nas provas do cargo quando o tema tem amostra, e por igual quando não tem, o tema mais recente primeiro.</p>
+                    {% for m in c.materias %}
+                      <p class="materia-da-rodada"><b>{{ m.total }} de {{ m.materia }}</b> · provas do cargo: {{ m.alvo }} {{ selo('acervo', curto=True) }}</p>
+                      <ul>
+                        {% for a in m.com_amostra if a.pedidas %}
+                          <li><b>{{ a.pedidas }}</b> · {{ a.nome }} <span class="sub">(estudado em {{ a.estudado_em | dia_mes }})</span> — provas do cargo: {{ a.alvo }}{% if a.complementar %}; complementar: {{ a.complementar }}, com peso {{ c.peso_do_complementar | numero(2) }} na divisão{% endif %}
+                            {% if a.filtro %}<br><span class="sub">Filtro: {{ a.filtro }}</span>{% endif %}</li>
+                        {% endfor %}
+                        {% for a in m.sem_amostra if a.pedidas %}
+                          <li><b>{{ a.pedidas }}</b> · {{ a.nome }} <span class="sub">(estudado em {{ a.estudado_em | dia_mes }}; provas do cargo: {{ a.alvo }})</span>
+                            {% if a.filtro %}<br><span class="sub">Filtro: {{ a.filtro }}</span>{% endif %}</li>
+                        {% endfor %}
+                      </ul>
+                      {% if m.sem_amostra %}<p class="sub">Temas sem amostra nas provas do cargo: <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span> Por isso, partes iguais entre eles.</p>{% endif %}
+                      {% set sem_questao = m.assuntos | selectattr('pedidas', 'equalto', 0) | map(attribute='nome') | list %}
+                      {% if sem_questao %}<p class="sub">Sem questão neste simulado, porque há mais temas que questões: {{ sem_questao | join('; ') }}.</p>{% endif %}
+                    {% endfor %}
+                    {% if c.fora %}<p class="sub">Fora da divisão, sem tema estudado antes deste dia: {{ c.fora | join('; ') }}.</p>{% endif %}
+                    {% if not c.materias and not c.fora %}<p class="aviso-essencial">⚠️ Sem o quadro do edital lido, não há peso para dividir as questões entre as matérias.</p>{% endif %}
+                    <p class="regra">No Qconcursos: caderno novo, banca FEPESE, sem consulta, um filtro por tema, na quantidade acima. Tema sem filtro no plano: procure pelo nome do tema.</p>
+                  </div>
+                {% elif medida %}
                   {% set c = medida.composicao %}
                   <div class="composicao">
                     <p class="so-questoes">Só questões: não há o que estudar nesta faixa.</p>
@@ -980,6 +1020,82 @@
                     {% else %}
                       <p class="sub">O botão de criar a rodada aparece no dia da faixa.</p>
                     {% endif %}
+                  </div>
+                {% endif %}
+
+                {# O sabado (decisao 70): a revisao semanal, o R+7 dos
+                   diagnosticos e a comparacao do fechamento, com o que ja esta
+                   gravado - o plano, o caderno e as rodadas. #}
+                {% set sab = do_sabado.get((b.chave, loop.index0)) if do_sabado else none %}
+                {% if sab and sab.tipo == 'revisao_semanal' %}
+                  <div class="composicao do-sabado">
+                    <p>{{ selo('automatico', 'Calculado do plano e do caderno') }} A semana de {{ sab.inicio | dia_mes }} a {{ sab.fim | dia_mes }}.</p>
+                    <p class="materia-da-rodada"><b>(1) Os erros anotados na semana: {{ sab.erros }}</b></p>
+                    {% if sab.erros %}
+                      <ul>
+                        {% for tema in sab.temas if tema.erros %}<li><b>{{ tema.erros }}</b> · {{ tema.tema }} <span class="sub">({{ tema.materia }})</span></li>{% endfor %}
+                        {% if sab.sem_tema %}<li><b>{{ sab.sem_tema }}</b> · <span class="sub">sem um tema desta semana no assunto anotado</span></li>{% endif %}
+                      </ul>
+                    {% else %}
+                      <p class="sub">Nenhum erro anotado no caderno nesta semana: anote os erros das correções antes de revisar.</p>
+                    {% endif %}
+                    {% if sab.mais_erros %}
+                      <p class="materia-da-rodada"><b>(2) Onde mais errou</b>: as regras para escrever no caderno saem destes temas.</p>
+                      <ul>{% for tema in sab.mais_erros %}<li>{{ tema.tema }} · {{ tema.erros }} {{ 'erro' if tema.erros == 1 else 'erros' }}</li>{% endfor %}</ul>
+                      {% if sab.motivos %}<p class="sub">Por motivo: {% for m in sab.motivos %}{{ m.nome }} {{ m.quantos }}{{ ' · ' if not loop.last }}{% endfor %}.</p>{% endif %}
+                    {% endif %}
+                    {% if sab.artigos %}
+                      <p class="materia-da-rodada"><b>(3) Os artigos-chave da semana</b></p>
+                      <ul class="artigos">{% for a in sab.artigos %}<li>{{ a.data | dia_mes }} · <b>{{ a.artigos }}</b> — {{ a.porque }}</li>{% endfor %}</ul>
+                    {% endif %}
+                    <details><summary>Os temas da semana ({{ sab.temas | length }})</summary>
+                      <ul>{% for tema in sab.temas %}<li>{{ tema.data | dia_mes }} · {{ tema.tema }} <span class="sub">({{ tema.materia }})</span>{% if tema.ficha_id %} · <a href="/fichas/{{ tema.ficha_id }}?data={{ t.data.isoformat() }}">ficha</a>{% endif %}{% if tema.nos %}<br><span class="sub">{{ tema.nos | join('; ') }}</span>{% endif %}</li>{% endfor %}</ul>
+                    </details>
+                  </div>
+                {% elif sab and sab.tipo == 'erros_das_rodadas' %}
+                  <div class="composicao do-sabado">
+                    <p class="so-questoes">Só questões: não há o que estudar nesta faixa.</p>
+                    {% if not sab.rodadas %}
+                      <p class="sub">Nenhuma rodada dos diagnósticos de {{ sab.dia | dia_mes }} foi criada no radar: não há erro gravado para refazer.</p>
+                    {% elif not sab.erros %}
+                      <p class="sub">As rodadas de {{ sab.dia | dia_mes }} não têm erro gravado: nenhuma questão respondida errada.</p>
+                    {% else %}
+                      <p>{{ selo('automatico', 'Calculado das rodadas') }} {{ sab.erros | length }} {{ 'erro' if sab.erros | length == 1 else 'erros' }} nos diagnósticos de {{ sab.dia | dia_mes }}.
+                        {% if sab.escolhidos | length < sab.erros | length %}Esta faixa refaz {{ sab.escolhidos | length }}, o número do plano, divididos pelos assuntos em que você mais errou.{% else %}Esta faixa refaz todos.{% endif %}</p>
+                      <ul>
+                        {% for assunto, erros, refeitos in sab.por_assunto %}<li><b>{{ refeitos }}</b> de {{ erros }} · {{ assunto }}</li>{% endfor %}
+                      </ul>
+                      <p class="regra">Só as questões reais que você errou nas rodadas de {{ sab.dia | dia_mes }}: nenhuma questão nova, nenhuma de IA.</p>
+                      {% if sab.rodada_id %}
+                        <p class="links"><a class="botao-anotar" href="/simulado/{{ sab.rodada_id }}"><span aria-hidden="true">▶</span> Abrir a rodada desta faixa</a></p>
+                      {% elif not t.futuro or t.e_hoje %}
+                        <form method="post" action="/hoje/rodada">
+                          <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                          <input type="hidden" name="bloco" value="{{ b.chave }}">
+                          <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                          <button type="submit" class="ds-botao ds-botao--secundario">Criar a rodada com os erros</button>
+                        </form>
+                      {% else %}
+                        <p class="sub">O botão de criar a rodada aparece no dia da faixa.</p>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                {% elif sab and sab.tipo == 'comparacao' %}
+                  <div class="composicao do-sabado">
+                    <p>{{ selo('automatico', 'Calculado das rodadas e do ciclo') }} O acerto por matéria, sem consulta, em três medidas separadas, que não se somam. Abaixo de {{ sab.minimo }} respostas (o mínimo da matéria no config/amostra.yml), o número leva "Amostra insuficiente" e não decide nada sozinho.</p>
+                    <div class="ds-rolagem">
+                      <table class="ds-tabela">
+                        <thead><tr><th>Matéria</th><th class="ds-n">Diagnóstico de {{ sab.com | dia_mes }}</th><th class="ds-n">Fechamento de {{ sab.dia | dia_mes }}</th><th class="ds-n">Acumulado do ciclo</th></tr></thead>
+                        <tbody>
+                          {% for l in sab.linhas %}
+                            <tr><td>{{ l.materia }}</td>
+                              <td class="ds-n">{{ medida_do_sabado(l.diagnostico, 'sem diagnóstico') }}</td>
+                              <td class="ds-n">{{ medida_do_sabado(l.fechamento, 'sem resposta ainda') }}</td>
+                              <td class="ds-n">{{ medida_do_sabado(l.ciclo, 'nada sem consulta ainda') }}</td></tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 {% endif %}
 

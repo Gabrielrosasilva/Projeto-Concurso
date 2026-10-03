@@ -82,6 +82,10 @@ class AssuntoNaComposicao:
     #: {subassunto: quantas}, das questoes que a rodada escolhe. "" e a
     #: questao classificada so no assunto, sem subassunto.
     subassuntos: dict = field(default_factory=dict)
+    #: So no simulado do Qconcursos: o filtro do tema la (o da faixa do plano)
+    #: e o dia em que o tema foi estudado.
+    filtro: str | None = None
+    estudado_em: date | None = None
 
 
 @dataclass
@@ -111,6 +115,10 @@ class Composicao:
     total: int
     peso_do_complementar: float
     regra: str = REGRA
+    #: So no simulado do Qconcursos: as materias da faixa sem tema estudado
+    #: antes do dia. Ficam fora da divisao - questao do que eu nao estudei
+    #: nao mede o que eu estudei.
+    fora: list[str] = field(default_factory=list)
     #: O peso entre as materias e oficial (o quadro do edital); a amostra e do
     #: acervo; a divisao e conta do sistema.
     origens = {"pesos": OFICIAL, "amostra": ACERVO, "conta": AUTOMATICO}
@@ -295,15 +303,24 @@ class Contexto:
     complementar: dict
     estoque: dict[str, list[Candidata]]
     respondidas: set[str]
+    #: O que a composicao por tema (o Qconcursos) conta de novo para cada tema.
+    nos: list = field(default_factory=list)
+    ocorrencias: list = field(default_factory=list)
+    complementares: list = field(default_factory=list)
 
     @classmethod
-    def ler(cls) -> "Contexto":
+    def ler(cls, com_estoque: bool = True) -> "Contexto":
+        """`com_estoque=False` quando so o simulado do Qconcursos vai compor:
+        ele nao escolhe questao, e o estoque e a parte mais cara da leitura."""
+        nos = servico_conteudos.nos()
+        alvo = servico_incidencia.ocorrencias()
+        complementares = servico_incidencia.ocorrencias_complementares()
         return cls(
-            mapas=servico_incidencia.mapa(),
-            complementar=incidencia.complementar_por_no(
-                servico_conteudos.nos(), servico_incidencia.ocorrencias_complementares()),
-            estoque=_estoque(),
-            respondidas=_respondidas())
+            mapas=incidencia.montar(nos, alvo),
+            complementar=incidencia.complementar_por_no(nos, complementares),
+            estoque=_estoque() if com_estoque else {},
+            respondidas=_respondidas() if com_estoque else set(),
+            nos=nos, ocorrencias=alvo, complementares=complementares)
 
 
 def compor(materias: list[str], total: int, *, pesos: dict[str, int] | None = None,
@@ -426,6 +443,144 @@ def escolher(composicao: Composicao, estoque: dict[str, list[Candidata]],
     return escolhidas
 
 
+# --- o simulado do Qconcursos (subetapa 2B, decisao 69) ---------------------------
+#
+# O simulado da semana fica no Qconcursos: o acervo do radar nao tem questao
+# bastante (a LEP tem 8 no acervo inteiro, e o de 31/10 pede 12). Ele nao cria
+# rodada aqui, mas a composicao e a mesma regra - com uma troca so: dentro da
+# materia, a unidade e o TEMA que eu ja estudei (o do cronograma, com os nos da
+# ficha), e nao o assunto do edital. E o tema que tem o filtro do Qconcursos.
+
+#: A unidade da composicao no Qconcursos nao tem estoque que acabe.
+SEM_LIMITE = 10 ** 6
+
+REGRA_DO_QCONCURSOS = "decisão 69: a regra da 67, entre os temas estudados antes do dia"
+
+
+def no_qconcursos(faixa) -> bool:
+    """O simulado da semana, no Qconcursos, com as materias escritas no plano."""
+    return (faixa is not None and faixa.tipo == "simulado"
+            and faixa.onde == "qconcursos" and bool(faixa.questoes)
+            and bool(getattr(faixa, "materias_da_rodada", ())))
+
+
+def _filtro_do_tema(tema) -> str | None:
+    """O filtro do Qconcursos do tema: o da primeira faixa dele que tem um."""
+    return next((f.faixa.filtro for f in tema.faixas if f.faixa.filtro), None)
+
+
+def _estudados(temas, materia: str, data: date) -> list[tuple]:
+    """[(tema, faixa de estudo)] da materia estudados antes de `data`, o mais
+    recente primeiro."""
+    estudados = [(tema, tema.estudo()) for tema in temas
+                 if compilado.mesma_materia(materia, tema.materia)]
+    estudados = [(tema, estudo) for tema, estudo in estudados
+                 if estudo is not None and estudo.data < data]
+    estudados.sort(key=lambda par: (par[1].data, par[0].tema), reverse=True)
+    return estudados
+
+
+def compor_por_tema(data: date, materias: list[str], total: int, plano, *,
+                    pesos: dict[str, int] | None = None,
+                    contexto: "Contexto | None" = None) -> Composicao:
+    """A composicao do simulado do Qconcursos de `data`.
+
+    As materias se dividem pelo quadro do edital, e cada materia pelos temas
+    estudados ANTES de `data` (a faixa de estudo do tema veio antes): o tema
+    com amostra nas provas do cargo, pela incidencia dos nos da ficha; o resto,
+    por igual, com a frase padrao. No empate, o tema mais recente primeiro: e o
+    simulado DA SEMANA, e o tema antigo volta no R+30 e no fechamento. Materia
+    sem tema estudado antes do dia fica fora da divisao.
+
+    A unica diferenca de conta para a regra da 67 e a parte dos temas sem
+    amostra: ela e o RESTO da incidencia da materia (as questoes do alvo fora
+    dos temas com amostra), e nao a soma do que se contou neles. Tema sem
+    ficha ou sem no nao tem incidencia contada - a tela diz isso, e nao "nao
+    apareceu" -, e contar zero para ele podia zerar o grupo inteiro.
+    """
+    from radar import fichas
+    from radar.servico import fichas as servico_fichas
+
+    regra = regra_da_prioridade.carregar()
+    minimos = incidencia.carregar_minimos()
+    temas = fichas.temas_do_plano(plano)
+    com_tema = [m for m in materias if _estudados(temas, m, data)]
+    fora = [m for m in materias if m not in com_tema]
+    if len(com_tema) == 1:
+        por_materia = {com_tema[0]: total}
+    elif com_tema:
+        pesos = pesos if pesos is not None else _pesos_do_edital(com_tema)
+        do_edital = {m: p for m, p in pesos.items()
+                     if any(compilado.mesma_materia(m, escolhida) for escolhida in com_tema)}
+        por_materia = compilado.distribuir(do_edital, total)
+    else:
+        por_materia = {}
+
+    escritas = servico_fichas.carregar()
+    contexto = contexto or Contexto.ler(com_estoque=False)
+    ocorrencias, complementares = contexto.ocorrencias, contexto.complementares
+
+    saida = []
+    for materia, n in por_materia.items():
+        mapa = next((m for m in contexto.mapas
+                     if compilado.mesma_materia(m.materia, materia)), None)
+        nome_na_arvore = mapa.materia if mapa else materia
+        total_alvo = len(mapa.topo.questoes) if mapa else 0
+        linha_c = contexto.complementar.get(nome_na_arvore)
+        classificadas_c = linha_c.classificadas if linha_c else 0
+
+        assuntos, alvo_com = [], 0
+        for ordem, (tema, estudo) in enumerate(_estudados(temas, materia, data)):
+            escrita = fichas.da_faixa(estudo.faixa, escritas)
+            nos = escrita.nos if escrita else []
+            if nos:
+                dentro = fichas.dentro_de(nos)
+                linha = incidencia.linha_do_escopo(f"tema:{tema.tema}", tema.tema, dentro,
+                                                   nome_na_arvore, ocorrencias)
+                lc = incidencia.complementar_do_escopo(f"tema:{tema.tema}", dentro,
+                                                       complementares)
+                n_alvo, n_provas, amostra = len(linha.questoes), len(linha.provas), linha.amostra
+            else:
+                lc, n_alvo, n_provas = None, 0, 0
+                amostra = "o tema não tem nó na árvore: o acervo não foi contado"
+            tem_amostra = n_alvo >= minimos.questoes and n_provas >= minimos.provas
+            if tem_amostra:
+                fatia_alvo = n_alvo / total_alvo if total_alvo else 0.0
+                fatia_c = (lc.classificadas / classificadas_c
+                           if lc and classificadas_c else 0.0)
+                peso = fatia_alvo + regra.peso_do_complementar * fatia_c
+                alvo_com += n_alvo
+            else:
+                peso = 1.0
+            assuntos.append(AssuntoNaComposicao(
+                ordem=ordem, caminho=f"tema:{tema.tema}", nome=tema.tema,
+                grupo=COM_AMOSTRA if tem_amostra else SEM_AMOSTRA, peso=peso,
+                alvo=amostra,
+                complementar=lc.amostra if lc and lc.classificadas else None,
+                estoque=SEM_LIMITE, filtro=_filtro_do_tema(tema),
+                estudado_em=estudo.data))
+
+        dividir(materia, n, assuntos, alvo_com, max(total_alvo - alvo_com, 0))
+        com = sorted((a for a in assuntos if a.grupo == COM_AMOSTRA),
+                     key=lambda a: (-a.pedidas, a.ordem))
+        sem = [a for a in assuntos if a.grupo == SEM_AMOSTRA]
+        saida.append(MateriaNaComposicao(
+            materia=nome_na_arvore, total=n,
+            alvo=mapa.topo.amostra if mapa else incidencia.amostra(0, 0),
+            assuntos=com + sem))
+    return Composicao(materias=saida, total=total,
+                      peso_do_complementar=regra.peso_do_complementar,
+                      regra=REGRA_DO_QCONCURSOS, fora=fora)
+
+
+@dataclass
+class FaixaDoQconcursos:
+    """O que a tela Hoje mostra no simulado do Qconcursos: so a composicao."""
+
+    composicao: Composicao
+    no_qconcursos: bool = True
+
+
 # --- a faixa do cronograma --------------------------------------------------------
 
 def mede(faixa) -> bool:
@@ -446,7 +601,9 @@ def _semente(data: date, bloco: str, indice: int) -> str:
     return f"{data.isoformat()}|{bloco}|{indice}"
 
 
-def _identidade(data: date, bloco: str, indice: int, faixa) -> dict:
+def identidade_da_faixa(data: date, bloco: str, indice: int, faixa) -> dict:
+    """O que reconhece a rodada de uma faixa: o dia, o bloco, a posicao e o
+    titulo - os mesmos que reconhecem os checks da tela."""
     return {"data": data.isoformat(), "bloco": bloco, "indice": indice,
             "titulo": faixa.titulo}
 
@@ -454,7 +611,7 @@ def _identidade(data: date, bloco: str, indice: int, faixa) -> dict:
 def rodada_da_faixa(data: date, bloco: str, indice: int, faixa) -> Simulado | None:
     """A rodada ja criada para esta faixa, se houver. Criada uma vez, ela nao
     e recriada: o que eu respondi fica como foi gravado."""
-    procurada = _identidade(data, bloco, indice, faixa)
+    procurada = identidade_da_faixa(data, bloco, indice, faixa)
     criar_tabelas()
     with sessao() as s:
         for simulado in s.scalars(select(Simulado).order_by(Simulado.id)):
@@ -530,7 +687,7 @@ def criar_rodada(data: date, bloco: str, indice: int, faixa) -> Simulado | None:
         simulado = Simulado(filtros={
             "quantidade": len(escolhidas),
             "rodada": "composta",
-            "faixa": _identidade(data, bloco, indice, faixa),
+            "faixa": identidade_da_faixa(data, bloco, indice, faixa),
             "composicao": composicao.como_dicionario(),
             # De onde veio cada questao, como o simulado do alvo grava.
             "proprias": sum(1 for c in escolhidas if c.evidencia == evidencia.ALVO),
@@ -552,22 +709,39 @@ def criar_rodada_do_dia(data: date, bloco: str, indice: int) -> Simulado | None:
     Le o dia pela mesma montagem da tela Hoje, para a faixa ser a que eu vi.
     """
     from radar.servico import cronograma as servico_cronograma
+    from radar.servico import sabado
 
     tela = servico_cronograma.tela_do_dia(data)
     for bloco_na_tela in tela.blocos:
         if bloco_na_tela.chave == bloco and 0 <= indice < len(bloco_na_tela.faixas):
-            return criar_rodada(data, bloco, indice, bloco_na_tela.faixas[indice])
+            faixa = bloco_na_tela.faixas[indice]
+            # O R+7 dos diagnosticos refaz os erros das rodadas do dia de
+            # origem: a rodada dele sai do servico do sabado.
+            if sabado.refaz_rodadas(faixa):
+                return sabado.criar_rodada_dos_erros(data, bloco, indice, faixa, tela.plano)
+            return criar_rodada(data, bloco, indice, faixa)
     return None
 
 
-def das_faixas(blocos, data: date) -> dict:
-    """{(bloco, indice): FaixaQueMede} das faixas do dia que medem.
+def das_faixas(blocos, data: date, plano=None) -> dict:
+    """{(bloco, indice): FaixaQueMede ou FaixaDoQconcursos} das faixas do dia
+    que medem: no radar, a rodada; no Qconcursos, so a composicao.
 
     Dia sem faixa que mede nao conta nada: a tela Hoje continua rapida."""
     que_medem = [(bloco.chave, indice, faixa) for bloco in blocos
                  for indice, faixa in enumerate(bloco.faixas) if mede(faixa)]
-    if not que_medem:
+    no_site = [(bloco.chave, indice, faixa) for bloco in blocos
+               for indice, faixa in enumerate(bloco.faixas) if no_qconcursos(faixa)]
+    if plano is None:
+        no_site = []
+    if not que_medem and not no_site:
         return {}
-    contexto = Contexto.ler()
-    return {(bloco, indice): planejar(data, bloco, indice, faixa, contexto)
-            for bloco, indice, faixa in que_medem}
+    # Uma leitura so para as duas: no sabado de 03/10 elas estao no mesmo dia.
+    contexto = Contexto.ler(com_estoque=bool(que_medem))
+    saida: dict = {}
+    saida.update({(bloco, indice): planejar(data, bloco, indice, faixa, contexto)
+                  for bloco, indice, faixa in que_medem})
+    saida.update({(bloco, indice): FaixaDoQconcursos(compor_por_tema(
+        data, list(faixa.materias_da_rodada), faixa.questoes, plano, contexto=contexto))
+        for bloco, indice, faixa in no_site})
+    return saida

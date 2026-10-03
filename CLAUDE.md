@@ -120,18 +120,23 @@ primeiro" nao soma mais o alvo e o complementar; o backup das 23h30, que
 falhava desde 27/09, roda com a pasta suja; a lista de leis alteradas depois
 das provas existe (15 itens, 17 questoes, por conferir:
 [leis_alteradas](docs/leis_alteradas.md)); e os docs foram revistos. **O ciclo
-especifico (pedido de 03/10):** feita a 2A - o diagnostico e o simulado de
+especifico (pedido de 03/10):** feitas a 2A - o diagnostico e o simulado de
 07/11 mostram de quais assuntos e subassuntos sao as questoes e criam a rodada
-com essa composicao (decisao 67); faltam a 2B, a 2C e a secao F.
+com essa composicao (decisao 67) - e a 2B - o simulado do Qconcursos sem
+numero escrito a mao, a revisao semanal, o R+7 dos diagnosticos e a
+comparacao de 07/11 (decisoes 69 e 70); faltam a 2C e a secao F.
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 50 geradas; banco na versao 4.
 **Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
 por amostra - B.8) e os 15 itens da lista de leis; o **Ciclo 2**, depois do
 simulado de 07/11 e antes de 09/11.
 **Conferir:** a primeira noite do backup consertado (`data/logs/` ou a tela
-Mais) e o Actions de 03/10, o primeiro com o codigo novo (pendencias A e D).
+Mais) e o Actions de 04/10, o primeiro com a 2A e a 2B (pendencias A e D); o de
+03/10 foi verde.
 **Em aberto:** a media "por prova" dos Macetes sem o numero de provas, o
-`?tema=` dos Macetes, o numero de questoes das faixas (ainda o do plano) e os
+`?tema=` dos Macetes, o numero de questoes das faixas (ainda o do plano; o R+7
+dos diagnosticos refaz 5 erros), os temas sem no e o Portugues sem filtro do
+Qconcursos, e os
 achados da varredura de 03/10 - entre eles, o "Onde estudar" que ainda nao le
 a arvore de conteudos (pendencia F). Ordem e detalhe em
 [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
@@ -159,7 +164,10 @@ servico grava a origem (`origem`, ou `origens` quando junta partes) e o
 template so desenha; `--selo-*` so no `design.css`, e a meta do dia tem as
 cores dela. **A composicao das rodadas que medem** (diagnostico e simulado no radar) **sai
 do `servico/composicao.py`** (decisao 67): so questao real da FEPESE, do alvo e
-do complementar aceito, e gravada na rodada. **Alvo, complementar e
+do complementar aceito, e gravada na rodada; a do simulado do Qconcursos
+tambem, por tema estudado (decisao 69). **O sabado** - a revisao semanal, o
+R+7 dos diagnosticos e a comparacao de 07/11 - **sai do `servico/sabado.py`**
+(decisao 70). **Alvo, complementar e
 fora saem do `servico/evidencia.py`** (uma regra, nunca somados; e prova
 complementar so entra em estatistica se estiver aceita no
 `data/acervo_complementar.json`), e tudo que

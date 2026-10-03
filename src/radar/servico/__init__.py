@@ -116,6 +116,9 @@ from radar.servico import compilado     # noqa: F401 - usado pela web
 # A composicao das rodadas que medem (decisao 67): o diagnostico e o simulado
 # do sabado. `servico.composicao.das_faixas(...)`.
 from radar.servico import composicao    # noqa: F401 - usado pela web
+# O sabado: a revisao semanal, o R+7 dos diagnosticos e a comparacao do
+# fechamento (decisao 70). `servico.sabado.das_faixas(...)`.
+from radar.servico import sabado        # noqa: F401 - usado pela web
 # A revisao espacada, 1-7-30 dias. `servico.espacada.pendentes()`.
 from radar.servico import espacada      # noqa: F401 - usado pela web e CLI
 # O diario do cronograma. `servico.cronograma.registrar(...)`.

@@ -479,8 +479,10 @@ def _pior_primeiro(linhas: list[DesempenhoDaMateria]) -> list[DesempenhoDaMateri
     return linhas
 
 
-def _por_materia_das_respostas(tabela, gerada: bool, simulado_id: int | None):
-    """Acerto por materia contando RESPOSTAS - de uma rodada, ou todas."""
+def _por_materia_das_respostas(tabela, gerada: bool, simulado_id: int | None,
+                               simulado_ids: list[int] | None = None):
+    """Acerto por materia contando RESPOSTAS - de uma rodada, de varias, ou
+    todas."""
     criar_tabelas()
     consulta = (
         select(tabela.materia, RespostaDeSimulado)
@@ -490,6 +492,8 @@ def _por_materia_das_respostas(tabela, gerada: bool, simulado_id: int | None):
     )
     if simulado_id is not None:
         consulta = consulta.where(RespostaDeSimulado.simulado_id == simulado_id)
+    if simulado_ids is not None:
+        consulta = consulta.where(RespostaDeSimulado.simulado_id.in_(simulado_ids))
     with sessao() as s:
         linhas = s.execute(consulta).all()
 
@@ -516,6 +520,36 @@ def desempenho(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
     if simulado_id is None:
         return acumulado_por_materia()
     return _por_materia_das_respostas(QuestaoDeProva, False, simulado_id)
+
+
+def desempenho_das_rodadas(simulado_ids: list[int]) -> list[DesempenhoDaMateria]:
+    """Acerto por materia nas questoes REAIS de varias rodadas juntas: as que
+    mediram num mesmo dia (os dois diagnosticos de 03/10). Conta as respostas
+    delas, como o relatorio de uma rodada; nenhuma rodada, nenhuma linha."""
+    if not simulado_ids:
+        return []
+    return _por_materia_das_respostas(QuestaoDeProva, False, None, list(simulado_ids))
+
+
+def erros_das_rodadas(simulado_ids: list[int]) -> list[RespostaDeSimulado]:
+    """As respostas ERRADAS a questao real nestas rodadas, rodada por rodada
+    na ordem da lista e, dentro dela, na ordem das questoes.
+
+    Nao respondida nao e erro - a mesma regra do `placar`. E o que o R+7 dos
+    diagnosticos refaz (servico/sabado.py).
+    """
+    if not simulado_ids:
+        return []
+    criar_tabelas()
+    with sessao() as s:
+        respostas = list(s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id.in_(list(simulado_ids)))
+            .where(RespostaDeSimulado.gerada.is_(False))
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .where(RespostaDeSimulado.acertou.is_(False))))
+    posicao = {simulado_id: i for i, simulado_id in enumerate(simulado_ids)}
+    return sorted(respostas, key=lambda r: (posicao[r.simulado_id], r.ordem))
 
 
 def desempenho_das_geradas(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:

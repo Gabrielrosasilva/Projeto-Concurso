@@ -1846,3 +1846,24 @@ recriada. O `cronograma.yml` mudou so no `detalhe` das tres faixas que medem e
 na lista de materias do 07/11 (chave nova, `materias_da_rodada`); nenhum titulo
 mudou, e os dias antes de 03/10 tem teste. E o modo simulado da geracao passou
 a dividir pelo peso do edital (decisao 68).
+
+## O sabado, subetapa 2B (03/10)
+
+**O que estava generico:** os simulados de sabado no Qconcursos tinham os
+numeros escritos a mao no YAML; a revisao semanal mandava "refazer TODAS as
+questoes que voce errou" e "reler os artigos-chave da semana" sem dizer
+quais; o R+7 de 10/10 mandava ao "So meus erros" (todos os erros de todas as
+rodadas); e a correcao de 07/11 pedia para comparar com o diagnostico sem
+mostrar numero.
+
+**A 2B:** o simulado do Qconcursos saiu pela regra da 67, entre os temas ja
+estudados (decisao 69); o sabado ganhou um servico proprio, o
+`servico/sabado.py` (decisao 70), que diz a semana com o que ja esta gravado -
+o plano, o caderno de erros e as rodadas. O R+7 cria a rodada so com os erros
+dos diagnosticos, no numero do plano; a correcao de 07/11 compara o
+diagnostico, o fechamento e o acumulado do ciclo, sem somar. O YAML mudou so
+em detalhe e em chave nova (`materias_da_rodada` nos sabados, `compara_com`
+no 07/11); nenhum titulo mudou.
+
+O Actions de 03/10 passou: o commit `coleta: 2026-10-03` e a prova (o job roda
+a suite antes de coletar).

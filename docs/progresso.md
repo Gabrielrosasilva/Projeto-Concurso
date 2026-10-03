@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A feita (as faixas que medem); faltam a 2B, a 2C e a seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A e 2B feitas (as faixas que medem, o simulado do Qconcursos e o sábado); faltam a 2C e a seção F |
 
 ---
 
@@ -2023,3 +2023,46 @@ dividiu as 20 entre as 11 matérias pelo edital.
 | `test_gerador.py`, os 2 novos do modo simulado | 2 passed |
 | Os 12 arquivos das áreas tocadas (cronograma, tela Hoje, Plano B, geração, compilado, varredura, design system, aceite) | 328 passed |
 | Suíte inteira, PC (uma vez, no fim da 2A) | **2392 passed** (2372 de antes + 20 novos: 18 da composição e 2 do modo simulado da geração), 0 failed, 25 min |
+
+### 2B — o sábado ✅
+
+**O que mudou** (decisões 69 e 70):
+- `src/radar/servico/composicao.py`: a composição do simulado do Qconcursos
+  (`compor_por_tema`), por tema estudado antes do dia, com o filtro do tema;
+  a tela lê o acervo uma vez só para ela e para a do radar;
+- `src/radar/servico/sabado.py` (novo): a revisão semanal (os temas, os
+  erros anotados por tema, os motivos e os artigos-chave da semana), o R+7
+  dos diagnósticos (os erros das rodadas de 03/10 e a rodada deles) e a
+  comparação de 07/11 (diagnóstico, fechamento e ciclo, separados);
+- `src/radar/servico/metricas.py`: o acerto de várias rodadas juntas e os
+  erros delas - as contas novas, no lugar das contas;
+- a tela Hoje: o simulado do Qconcursos mostra a composição sem botão; a
+  revisão semanal, o R+7 (com o botão "Criar a rodada com os erros", no
+  mesmo `POST /hoje/rodada`) e a tabela de 07/11. Sem JavaScript novo;
+- `config/cronograma.yml`: o `detalhe` dos cinco simulados de sábado sem
+  número e com `materias_da_rodada`; o detalhe do R+7 de 10/10; e a chave
+  nova `compara_com` na correção de 07/11, lida e conferida pelo
+  `src/radar/cronograma.py`. Nenhum título mudou, e os dias antes de 03/10
+  continuam com a mesma impressão;
+- docs: `decisoes.md` (69 e 70), `pendencias.md` (o Actions de 03/10 saiu -
+  foi verde -; entraram o R+7 de 5 erros e os temas sem nó), `README.md`,
+  `historico.md` e o "Estado atual" do `CLAUDE.md`.
+
+**Com o banco real** (numa cópia): o mini-simulado de hoje sai com 3 de
+Constitucional, 2 de Penal e 5 da LEP, um filtro por tema; o de 10/10 com 9 de
+Português, 9 de Direitos Humanos, 3 de Constitucional, 3 de Penal e 6 da LEP;
+o de 31/10 com 12, 12, 4, 4 e 8. A revisão semanal de hoje mostra a semana de
+28/09 a 02/10: 10 temas, 2 erros anotados (1 no art. 5º, 1 em artigo, numeral
+e pronome) e 17 artigos-chave. Com os diagnósticos respondidos numa cópia (11
+erros), o R+7 de 10/10 refez 5 - 2 de Interpretação, 1 de Lógica
+proposicional, 1 de Contagem e 1 de Equivalências -, só questão real, e o
+segundo clique reabriu a mesma rodada. A tela de 03/10 abre em ~3 s; a de
+10/10 em ~2 s; a de 07/11 em ~3 s.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_sabado.py` (novo) e `test_composicao.py` (8 novos do Qconcursos; os títulos dos cinco sábados) | 37 passed |
+| Suíte inteira, PC (uma vez, no fim da 2B) | **2411 passed** (2392 de antes + 19 novos: 11 do sábado e 8 do Qconcursos), 0 failed, 25 min |
+| `test_sabado.py` e `test_composicao.py` de novo, depois da última linha do template (o "Só questões" no R+7) | 37 passed |

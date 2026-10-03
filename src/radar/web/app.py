@@ -988,9 +988,12 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # A ficha de estudo de cada faixa (Etapa 6B), pelo titulo do tema.
             # So le o data/fichas.json: abrir a tela Hoje continua rapido.
             "fichas_das_faixas": servico.fichas.das_faixas(tela.blocos),
-            # A composicao das faixas que medem (decisao 67). So conta quando o
-            # dia tem diagnostico ou simulado no radar.
-            "composicoes": servico.composicao.das_faixas(tela.blocos, tela.data),
+            # A composicao das faixas que medem (decisao 67) e a do simulado do
+            # Qconcursos (decisao 69). So conta quando o dia tem uma delas.
+            "composicoes": servico.composicao.das_faixas(tela.blocos, tela.data, tela.plano),
+            # A revisao semanal, o R+7 dos diagnosticos e a comparacao do
+            # fechamento (decisao 70). So conta no sabado.
+            "do_sabado": servico.sabado.das_faixas(tela.blocos, tela.data, tela.plano),
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,

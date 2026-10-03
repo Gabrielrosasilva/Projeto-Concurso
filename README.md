@@ -537,6 +537,22 @@ A composicao e deterministica (a mesma faixa da as mesmas questoes) e fica
 gravada na rodada. Criada, a rodada nao e recriada: a faixa passa a mostrar a
 composicao gravada e o link **Abrir a rodada desta faixa**.
 
+### O sabado: o simulado da semana, a revisao, o R+7 e a comparacao
+
+- **o simulado da semana** continua no Qconcursos, mas sem numero escrito a
+  mao: a faixa diz so as materias, e a tela Hoje mostra quantas questoes de
+  cada tema ja estudado, com o filtro do tema (decisao 69). A conta e a do
+  diagnostico, com o tema no lugar do assunto do edital; no empate, o tema
+  mais recente primeiro;
+- **a revisao semanal** mostra os temas da semana, os erros anotados no
+  caderno por tema, onde mais errou e os artigos-chave dos dias (decisao 70);
+- **o R+7 dos diagnosticos** (10/10) lista os erros das rodadas de 03/10 e
+  cria uma rodada so com eles - no maximo o numero do plano, pelos assuntos
+  com mais erro - pelo botao **Criar a rodada com os erros**;
+- **a correcao de 07/11** mostra, por materia, o diagnostico de 03/10, o
+  fechamento de 07/11 e o acumulado do ciclo sem consulta, lado a lado e sem
+  somar, com "Amostra insuficiente" abaixo do minimo da materia.
+
 ### No terminal
 
 ```bash

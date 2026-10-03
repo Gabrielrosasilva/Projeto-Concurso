@@ -695,8 +695,12 @@ dias:
     questoes: 10
     min_por_questao: 3
     titulo: Mini-simulado da semana
-    detalhe: 'Qconcursos, banca FEPESE, sem consulta: 3 Penal (arts. 1º a 13) · 3 Constitucional (art. 5º, I a XVI)
-      · 4 LEP (arts. 1º a 27).'
+    detalhe: 'Qconcursos, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já estudado, na
+      quantidade calculada para cada um.'
+    materias_da_rodada:
+    - Direito Penal
+    - Direito Constitucional
+    - Lei de Execução Penal
     cronometrado: true
     onde: qconcursos
   - tipo: correcao
@@ -1306,17 +1310,22 @@ dias:
     materia: Diagnósticos
     origem: '2026-10-03'
     titulo: 'R+7: refazer os erros dos diagnósticos'
-    detalhe: 'Refaça as questões que você ERROU nos diagnósticos de Raciocínio Lógico e de Português (radar: Só
-      meus erros).'
+    detalhe: 'Refaça, no radar, as questões que você ERROU nos diagnósticos de 03/10: a lista está abaixo, e a
+      rodada sai pelo botão "Criar a rodada com os erros".'
     onde: radar
   noite:
   - tipo: simulado
     questoes: 30
     min_por_questao: 3
     titulo: Simulado da semana
-    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 6 Penal (arts. 1º a 13) · 6 Constitucional (art.
-      5º, I a XLIX) · 8 LEP (arts. 1º a 43) · 4 Direitos Humanos (teoria geral e história) · 6 Português (classes,
-      verbos, vozes, concordância).'
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já
+      estudado, na quantidade calculada para cada um.'
+    materias_da_rodada:
+    - Direito Penal
+    - Direito Constitucional
+    - Lei de Execução Penal
+    - Direitos Humanos
+    - Língua Portuguesa
     cronometrado: true
     onde: qconcursos
   - tipo: pausa
@@ -1946,9 +1955,14 @@ dias:
     questoes: 30
     min_por_questao: 3
     titulo: Simulado da semana
-    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 6 Penal (arts. 1º a 21) · 6 Constitucional (art.
-      5º inteiro) · 8 LEP (arts. 1º a 60) · 4 Direitos Humanos (até sistemas de proteção) · 6 Português (concordância,
-      crase, pontuação).'
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já
+      estudado, na quantidade calculada para cada um.'
+    materias_da_rodada:
+    - Direito Penal
+    - Direito Constitucional
+    - Lei de Execução Penal
+    - Direitos Humanos
+    - Língua Portuguesa
     cronometrado: true
     onde: qconcursos
   - tipo: pausa
@@ -2575,9 +2589,14 @@ dias:
     questoes: 35
     min_por_questao: 3
     titulo: Simulado da semana
-    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 7 Penal (arts. 1º a 25) · 6 Constitucional (arts.
-      5º a 11) · 10 LEP (arts. 1º a 104) · 5 Direitos Humanos (até status dos tratados) · 7 Português (crase, pontuação,
-      pronomes).'
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já
+      estudado, na quantidade calculada para cada um.'
+    materias_da_rodada:
+    - Direito Penal
+    - Direito Constitucional
+    - Lei de Execução Penal
+    - Direitos Humanos
+    - Língua Portuguesa
     cronometrado: true
     onde: qconcursos
   - tipo: pausa
@@ -3256,9 +3275,14 @@ dias:
     questoes: 40
     min_por_questao: 3
     titulo: Simulado da semana
-    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta: 7 Penal (arts. 1º a 31) · 7 Constitucional (arts.
-      5º a 17) · 12 LEP (arts. 1º a 130) · 6 Direitos Humanos (até Mandela parte 1) · 8 Português (tudo o que já
-      foi visto).'
+    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já
+      estudado, na quantidade calculada para cada um.'
+    materias_da_rodada:
+    - Direito Penal
+    - Direito Constitucional
+    - Lei de Execução Penal
+    - Direitos Humanos
+    - Língua Portuguesa
     cronometrado: true
     onde: qconcursos
   - tipo: pausa
@@ -3955,7 +3979,9 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: Compare o acerto por matéria com o diagnóstico de 03/10. É esse número que decide o Ciclo 2.
+    detalhe: Compare o acerto por matéria com o diagnóstico de 03/10, na tabela abaixo. É esse número que decide
+      o Ciclo 2.
+    compara_com: '2026-10-03'
   pos22:
   - tipo: anki
     duracao: 10

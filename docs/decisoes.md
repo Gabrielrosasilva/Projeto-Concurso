@@ -3288,3 +3288,60 @@ mede (7A); commit e push por subetapa (8A).
     quadro do edital (o `compilado.distribuir`), so entre as materias com
     questao real do alvo para servir de base, e o `radar gerar` diz a divisao.
     Com a materia escolhida, nada muda: nao ha o que dividir.
+
+69. **o simulado da semana fica no Qconcursos, e a composicao dele e a regra
+    da 67 entre os temas ja estudados** (escolha 4A, subetapa 2B). O detalhe
+    dos cinco simulados de sabado (03/10 a 31/10) trazia os numeros escritos a
+    mao ("3 Penal (arts. 1º a 13) · 3 Constitucional..."). Agora a faixa tem so
+    as materias (`materias_da_rodada`, sem numero), e a tela Hoje calcula
+    (`composicao.compor_por_tema`):
+    - o total e o do plano, dividido entre as materias pelo quadro do edital
+      (o `compilado.distribuir`);
+    - dentro da materia, a unidade e o TEMA estudado antes do dia (a faixa de
+      estudo do cronograma), e nao o assunto do edital: e o tema que diz o que
+      ja foi visto, e e ele que tem o filtro do Qconcursos;
+    - o tema com amostra no alvo (pelos nos da ficha) entra pela incidencia,
+      com o complementar a 0,25; os sem amostra dividem o resto por igual, com
+      a frase padrao. No empate, o mais recente vai primeiro: e o simulado DA
+      SEMANA, e o tema antigo volta no R+30 e no fechamento;
+    - a parte dos temas sem amostra e o RESTO da incidencia da materia (as
+      questoes do alvo fora dos temas com amostra), e nao a soma do que se
+      contou neles - a unica diferenca de conta para a 67. Tema sem ficha ou
+      sem no nao tem incidencia contada, e contar zero para ele zeraria o
+      grupo; a tela diz "o tema não tem nó na árvore: o acervo não foi
+      contado", e nao "nao apareceu";
+    - materia sem tema estudado antes do dia fica fora da divisao;
+    - nao ha rodada: a questao e do Qconcursos. A composicao nao e gravada, e
+      muda quando mudam o acervo e as fichas.
+    Com o banco de 03/10: o mini-simulado de hoje sai com 3 de Constitucional
+    (art. 5º, I a XVI), 2 de Penal (aplicacao da lei penal) e 5 da LEP (3 de
+    assistencia ao preso, 2 de objeto e classificacao) - o plano escrevia
+    "3 Penal (arts. 1º a 13)", mas o art. 13 so e estudado em 05/10. O de
+    10/10 sai com 9 de Portugues, 9 de Direitos Humanos, 3 de Constitucional,
+    3 de Penal e 6 da LEP. As faixas de Portugues nao tem `filtro` no plano, e
+    a tela manda procurar pelo nome do tema - filtro do Qconcursos nao se
+    inventa.
+
+70. **o sabado diz o que revisar com o que ja esta gravado**
+    (`servico/sabado.py`, subetapa 2B):
+    - a **Revisao semanal** mostra os temas da semana do plano (com os nos da
+      ficha e o link para ela), os erros anotados no caderno de segunda a
+      sabado - o mesmo filtro do link "abrir os erros da semana" -, por tema,
+      os temas com mais erro e os motivos, e os artigos-chave do `essencial`
+      de cada dia. O detalhe da faixa nao mudou;
+    - o **R+7 dos diagnosticos** (10/10) lista os erros das rodadas de 03/10
+      por assunto e cria, pelo botao "Criar a rodada com os erros", uma rodada
+      so com eles: questao real, nunca recriada. O plano pede 5: com mais
+      erros, ele refaz 5, divididos entre os assuntos pelo numero de erros (o
+      `compilado.distribuir`); com menos, refaz todos. Quem reconhece a faixa
+      e o dado: revisao NO RADAR com dia de origem;
+    - a **correcao de 07/11** ganhou a chave `compara_com: '2026-10-03'`
+      (conferida no carregamento) e mostra, por materia, o diagnostico de
+      03/10, o fechamento de 07/11 e o acumulado do ciclo sem consulta (o
+      numero de Minhas materias): tres colunas, nunca somadas, com "Amostra
+      insuficiente" abaixo de 20 respostas (o minimo da materia no
+      `config/amostra.yml`). Com 20 questoes por materia no diagnostico e de 4
+      a 13 no fechamento, o fechamento sozinho nunca tem amostra - e por isso
+      o acumulado do ciclo fica do lado, como a escolha 3A+C combinou.
+    As duas contas novas - o acerto de varias rodadas juntas e os erros delas -
+    moram no `servico/metricas.py`.

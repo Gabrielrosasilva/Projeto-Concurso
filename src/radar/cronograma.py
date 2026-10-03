@@ -171,6 +171,10 @@ class Faixa:
     # de 07/11). A composicao das questoes sai do `servico/composicao.py`; aqui
     # so a lista, conferida contra o bloco `materias` - nunca numero (dec. 67).
     materias_da_rodada: tuple = ()
+    # O dia com que a faixa compara as rodadas do proprio dia (a correcao do
+    # fechamento de 07/11 compara com o diagnostico de 03/10). AAAA-MM-DD,
+    # como a `origem`; quem compara e o `servico/sabado.py`.
+    compara_com: str | None = None
     # A faixa do Anki com `anki: desativado`. Ela continua na lista, na mesma
     # posicao: os checks sao reconhecidos por bloco e posicao, e tira-la
     # mudaria a posicao do Bonus que vem depois. Desligada, ela nao tem
@@ -419,6 +423,10 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
                   else None),
         conteudo=bruta.get("conteudo"),
         materias_da_rodada=tuple(bruta.get("materias_da_rodada") or ()),
+        # Conferida no carregamento: data errada aqui faria a comparacao sumir
+        # da tela sem aviso nenhum.
+        compara_com=(_data(bruta["compara_com"], f"{onde}, compara_com").isoformat()
+                     if bruta.get("compara_com") else None),
     )
 
 
