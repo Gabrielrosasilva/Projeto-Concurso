@@ -393,7 +393,7 @@
             <div class="topo">{{ c.nome }}</div>
             <div class="sub ds-numero">{{ c.quantas }} questões &middot; {{ "%.0f"|format(c.porcentagem) }}% do recorte</div>
             {# O conselho foi escrito a mao no macetes.py: nao e contagem, e
-               por isso nao pode passar por 🟩 sem dizer isso. #}
+               por isso nao pode passar por 🔵 sem dizer isso. #}
             <p><span class="ds-suave">Dica fixa do radar, não é contagem:</span> {{ c.conselho }}</p>
           </div>
         {% endfor %}

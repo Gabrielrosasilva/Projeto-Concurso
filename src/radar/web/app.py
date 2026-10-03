@@ -723,7 +723,7 @@ def simulado_questao(request: Request, simulado_id: int):
                 "de_ia": de_ia,
                 "desempenho_da_rodada": da_rodada,
                 "revisao": revisao,
-                # O 🟥 de cada erro: a explicacao importada pelo caminho sem
+                # O 🟣 de cada erro: a explicacao importada pelo caminho sem
                 # API, e o macete que cita aquela questao.
                 "explicacoes": servico.manual.carregar_explicacoes(),
                 "macetes_da_questao": _macetes_por_questao(),
@@ -1847,7 +1847,7 @@ def macetes(
 def questoes_do_macete(request: Request, impressao: str):
     """[Ver questoes reais relacionadas]: o macete de IA ao lado da prova.
 
-    E aqui que eu confiro o 🟥 contra o 🟦 - a questao como a banca escreveu,
+    E aqui que eu confiro o 🟣 contra o 🟢 - a questao como a banca escreveu,
     com o gabarito definitivo. Macete que nao existe, ou que perdeu a fonte ou
     a procedencia no arquivo, da 404: ele tambem nao aparece nos cartoes.
     """

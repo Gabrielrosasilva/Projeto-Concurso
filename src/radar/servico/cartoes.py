@@ -5,12 +5,12 @@ onde veio - e nunca se mistura com a parte de outro selo:
 
   * a BASE: quantas questoes reais da materia, e de quais provas. So existem
     duas provas do cargo (2013 e 2019), e isso aparece como "base pequena";
-  * 🟩 o PADRAO DA BANCA: contagem do `macetes.py` sobre essas questoes -
+  * 🔵 o PADRAO DA BANCA: contagem do `macetes.py` sobre essas questoes -
     como ela pergunta, que palavra mais aparece. Nada escrito por IA;
-  * 🟥 o MACETE e a PEGADINHA: texto de IA, importado pelo caminho da parte 8
+  * 🟣 o MACETE e a PEGADINHA: texto de IA, importado pelo caminho da parte 8
     (`radar gerar --pedido --macetes` / `--importar`), com a fonte legal ou
     gramatical e a procedencia. Macete sem fonte ou sem procedencia NAO
-    aparece: a especificacao exige que todo conteudo 🟥 cite a fonte, e o
+    aparece: a especificacao exige que todo conteudo 🟣 cite a fonte, e o
     arquivo e editavel a mao.
 
 A questao real citada pelo macete abre numa pagina propria, com o selo de
