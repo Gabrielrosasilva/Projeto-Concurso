@@ -464,6 +464,20 @@ def test_a_tela_mostra_o_que_mais_derruba(cliente):
     assert "100% dos erros são <b>pegadinha</b>" in texto
 
 
+def test_o_selo_do_que_mais_derruba_sai_do_dado(cliente, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem da Contagem, os
+    selos dos dois cartoes trocam junto."""
+    from radar.servico import erros
+
+    _anotar(materia="LEP", motivo="pegadinha")
+    monkeypatch.setattr(erros.Contagem, "origem", "acervo")
+
+    texto = cliente.get("/erros?situacao=todos").text
+
+    assert texto.count('class="ds-selo ds-selo--acervo"') == 2
+    assert "ds-selo--automatico" not in texto
+
+
 def test_o_filtro_de_semana_aparece_escrito_na_tela(cliente):
     _anotar()
     texto = cliente.get("/erros?semana=2026-10-20&situacao=todos").text

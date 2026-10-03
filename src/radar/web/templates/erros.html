@@ -77,7 +77,7 @@
       <article class="ds-cartao">
         <div class="ds-cartao__cabeca">
           <h3 class="ds-cartao__titulo">Por matéria</h3>
-          {{ selo('automatico') }}
+          {{ selo(por_materia[0].origem) }}
         </div>
         <ul class="derruba">
           {% for c in por_materia %}
@@ -96,7 +96,7 @@
       <article class="ds-cartao">
         <div class="ds-cartao__cabeca">
           <h3 class="ds-cartao__titulo">Por motivo</h3>
-          {{ selo('automatico') }}
+          {% if por_motivo %}{{ selo(por_motivo[0].origem) }}{% endif %}
         </div>
         <ul class="derruba">
           {% for c in por_motivo %}
