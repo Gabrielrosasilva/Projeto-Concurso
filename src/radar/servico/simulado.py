@@ -204,13 +204,17 @@ def _questoes_para_o_alvo(s) -> tuple[list, list]:
     """(questoes das provas do cargo, questoes da banca nas mesmas materias).
 
     A segunda lista sai das materias da PRIMEIRA: o que define o que me serve
-    e o que caiu na minha prova, e nao o catalogo de materias da banca.
+    e o que caiu na minha prova, e nao o catalogo de materias da banca. E dela
+    so entram as provas ACEITAS no data/acervo_complementar.json (decisao 75):
+    o treino e o compilado, que mede, saem daqui, e uma prova que a Etapa 3B
+    recusou pode ter o gabarito ou a materia errados.
     """
     # Alvo e complementar pela regra unica do `servico.evidencia` (Etapa 2).
     # Antes o simulado olhava so o cargo, e o Meu foco o cargo E o estado.
-    from radar.servico import evidencia
+    from radar.servico import complementar, evidencia
 
     por_prova = evidencia.por_prova(s)
+    aceitas = complementar.provas_aceitas()
     candidatas = list(s.scalars(
         select(QuestaoDeProva).where(QuestaoDeProva.resposta.is_not(None))
     ))
@@ -223,6 +227,7 @@ def _questoes_para_o_alvo(s) -> tuple[list, list]:
     da_banca = [
         q for q in candidatas
         if por_prova.get(q.prova_url) == evidencia.COMPLEMENTAR
+        and q.prova_url in aceitas
         and q.materia and regioes.normalizar(q.materia) in materias
     ]
     return proprias, da_banca

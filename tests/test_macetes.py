@@ -34,6 +34,26 @@ def _semear(*questoes):
     with sessao() as s:
         for q in questoes:
             s.add(q)
+    _aceitar(questoes)
+
+
+def _aceitar(questoes) -> None:
+    """Registra as provas como aceitas no acervo complementar (o arquivo da
+    3B), como as provas reais estao. O costume da banca e o treino do alvo so
+    contam prova aceita (decisao 75)."""
+    import json
+
+    from radar.servico import complementar
+
+    caminho = complementar.caminho_do_registro()
+    registro = (json.loads(caminho.read_text(encoding="utf-8"))
+                if caminho.exists() else {"provas": []})
+    ja = {p["prova_url"] for p in registro["provas"]}
+    for q in questoes:
+        if q.prova_url not in ja:
+            registro["provas"].append({"prova_url": q.prova_url, "aceita": True})
+            ja.add(q.prova_url)
+    caminho.write_text(json.dumps(registro), encoding="utf-8")
 
 
 @pytest.fixture
@@ -622,3 +642,27 @@ def test_a_tela_desenha_a_pizza(cliente):
 
     assert "conic-gradient" in texto
     assert "legenda-pizza" in texto
+
+
+# --- so o complementar aceito (decisao 75) ------------------------------------
+
+def test_o_costume_conta_so_o_complementar_aceito(banco_temporario):
+    """A regra inviolavel 1: o costume da banca nao mistura as provas do meu
+    cargo (que tem a Central de macetes) nem as de prova que a 3B recusou.
+    As duas ficam de fora, contadas."""
+    from tests.test_foco import CONCURSO_DE_2019, _concurso
+
+    with sessao() as s:
+        s.add(_concurso())
+    _semear(_questao(1), _questao(2))                     # aceitas
+    with sessao() as s:
+        # Do meu cargo, do concurso de SC: alvo.
+        s.add(_questao(3, cargo="Agente Penitenciário", concurso_url=CONCURSO_DE_2019,
+                       prova_url="https://x.test/ap2019.pdf"))
+        # Da banca, mas de prova que a 3B nao aceitou.
+        s.add(_questao(4, prova_url="https://x.test/recusada.pdf"))
+
+    analise = servico.analisar_banca("FEPESE")
+
+    assert analise.total == 2
+    assert (analise.do_cargo, analise.recusadas) == (1, 1)

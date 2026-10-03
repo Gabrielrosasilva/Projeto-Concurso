@@ -3436,3 +3436,21 @@ mede (7A); commit e push por subetapa (8A).
     lei inteira. O painel ficou ~1 s mais lento (as ocorrencias do
     complementar e o desempenho por no): a tela Analises abre em ~3 s e a home
     em ~4 s.
+
+75. **so o complementar ACEITO entra no costume da banca, no treino do alvo e
+    no compilado** (F2). Dois lugares ainda usavam qualquer prova da FEPESE:
+    - o **"costume de qualquer banca"** dos Macetes contava "sobre o acervo
+      inteiro": na FEPESE, as 170 do cargo, as 5.015 do complementar aceito e
+      as 2.341 de provas que a 3B recusou num numero so - estatistica, contra a
+      regra inviolavel 1. Agora ele conta so a evidencia que vale: da banca do
+      alvo, o complementar aceito (as provas do cargo tem a Central de
+      macetes); de outra banca, a prova dela (fora). O que ficou de fora vai
+      contado na tela ("Ficaram fora desta conta 170 das provas do meu cargo e
+      2.341 de provas que a Etapa 3B recusou"), e nunca somado;
+    - o **"Treinar"** do alvo, e o **compilado**, que sai da mesma lista e mede,
+      completavam com qualquer prova de evidencia complementar. Agora so com
+      as aceitas: 1.593 questoes da banca nas materias do cargo, contra 2.190
+      (saem 597 de provas recusadas). Escolha de 03/10: e treino, mas a prova
+      recusada pode ter o gabarito ou a materia errados, e a regra fica uma
+      so com a da rodada que mede (escolha 7A).
+    A evidencia de cada prova sai do `evidencia.por_prova`, a regra unica.

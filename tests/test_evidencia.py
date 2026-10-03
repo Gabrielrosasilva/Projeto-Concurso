@@ -56,9 +56,15 @@ def test_atualizar_grava_a_coluna(banco_temporario):
 
 
 def test_as_duas_regras_antigas_dao_o_mesmo_que_a_nova(banco_temporario):
+    from tests.test_treino_do_alvo import _aceitar
+
     with sessao() as s:
         _acervo(s)
     evidencia.atualizar()
+    with sessao() as s:
+        # O treino so completa com prova aceita na Etapa 3B (decisao 75).
+        _aceitar(s.scalars(select(QuestaoDeProva)
+                           .where(QuestaoDeProva.ano == 2016)).all())
 
     with sessao() as s:
         do_foco = foco._provas_do_alvo(s)
@@ -67,7 +73,7 @@ def test_as_duas_regras_antigas_dao_o_mesmo_que_a_nova(banco_temporario):
                                   .where(QuestaoDeProva.evidencia == "alvo")))
     assert do_foco == da_coluna == {q.prova_url for q in proprias}
     assert len(proprias) == 6
-    # A "da banca" do simulado e o complementar nas mesmas materias.
+    # A "da banca" do simulado e o complementar aceito nas mesmas materias.
     assert {q.ano for q in da_banca} == {2016}
 
 

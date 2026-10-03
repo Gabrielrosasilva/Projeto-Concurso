@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa e o "Onde estudar" pela árvore); falta o resto da seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1 e F2 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore e o complementar aceito no costume e no treino); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | 🔄 lote 1 de 57 feito (19 questões, banco e JSON 50 → 69); os outros 56 pelo `docs/estoque_de_geradas.md` |
 
 ---
@@ -2171,3 +2171,33 @@ anotado —". A LEP vem primeiro, com 10 questões esperadas.
 | `test_assuntos.py`, `test_caderno_erros.py`, `test_home.py`, `test_ultima_resposta.py` | 108 passed |
 | Suíte inteira, PC (uma vez, no fim do F1) | **2423 passed** (2422 de antes + 1 do conserto da geração), 0 failed, 25 min |
 | `test_origem.py` e `test_foco.py` de novo, depois da troca do selo do assunto | 108 passed |
+
+### F2 — só o complementar aceito no costume da banca e no treino ✅
+
+**O que mudou** (decisão 75):
+- `src/radar/servico/provas.py`: o recorte do "costume de qualquer banca" se
+  separa em três (`_separar`): o que vale (o complementar aceito, ou a outra
+  banca), o do cargo e o de prova recusada. Só o primeiro entra na conta; os
+  outros dois vão contados na tela (`macetes.Analise.do_cargo` e
+  `.recusadas`);
+- `src/radar/servico/simulado.py`: o `_questoes_para_o_alvo` completa só com
+  prova aceita - vale para o "Treinar" e para o compilado;
+- `src/radar/web/templates/macetes.html`: a frase da seção e a linha do que
+  ficou de fora;
+- testes: o `_semear` do `test_macetes.py` e do `test_treino_do_alvo.py`
+  registra as provas como aceitas (como as reais estão); um teste novo em cada;
+  o `test_evidencia.py` registra a prova de 2016 como aceita.
+
+**Com o banco real** (numa cópia): o costume da FEPESE conta 5.015 questões
+(2.292 enunciados diferentes), e a tela diz que ficaram fora 170 do cargo e
+2.341 de provas recusadas; o recorte pelo cargo do alvo dá zero e manda para a
+Central. O treino do alvo completa com 1.593 questões da banca (eram 2.190).
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| Os 6 arquivos afetados, 1ª rodada | 122 passed, 17 failed (os testes gravavam prova do complementar sem registrá-la como aceita) |
+| Os mesmos 6, com o registro e 2 testes novos | 141 passed |
+| A suíte inteira, 1ª rodada | 2424 passed, 1 failed (o `test_evidencia.py` também gravava a prova do complementar sem registrá-la) |
+| A suíte inteira, com o registro no `test_evidencia.py` | 2425 passed |

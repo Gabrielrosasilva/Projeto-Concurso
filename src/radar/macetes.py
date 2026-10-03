@@ -143,6 +143,12 @@ class Analise:
     retrato: "RetratoDaMateria | None" = None
     assunto_procurado: "Assunto | None" = None
 
+    # O que o recorte tinha e ficou FORA da conta (decisao 75): as questoes das
+    # provas do cargo (elas tem a Central de macetes) e as de prova que a
+    # Etapa 3B recusou. Contadas, e nunca somadas ao resto.
+    do_cargo: int = 0
+    recusadas: int = 0
+
 
 def contar_comandos(questoes: list) -> list[Comando]:
     """Quantas questoes usam cada forma de perguntar, da mais comum a menos."""

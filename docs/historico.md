@@ -1913,3 +1913,14 @@ fatias da incidencia (cargo e complementar aceito, separados) e o acerto do
 desempenho por conteudo, mostrado nos dois recortes (decisao 74). A revisao
 espacada passou a usar o mesmo assunto. Resultado: 66 assuntos em todas as
 materias, 12 questoes sem assunto (eram 108).
+
+## O complementar que vale, F2 (03/10)
+
+**O que estava errado:** o "costume de qualquer banca" dos Macetes contava a
+FEPESE inteira num numero so - as provas do cargo, o complementar aceito e as
+provas que a 3B recusou -, e o "Treinar" (com o compilado) completava com
+qualquer prova da banca.
+
+**O F2:** os dois passaram a usar so o complementar aceito (decisao 75). O
+costume diz o que ficou de fora (170 do cargo, 2.341 de provas recusadas); o
+treino completa com 1.593 questoes da banca, e nao mais 2.190.

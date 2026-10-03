@@ -629,6 +629,35 @@ def bancas_sem_acervo() -> list[str]:
     return [b for b in citadas if b.lower() not in com_prova]
 
 
+def _separar(questoes: list[QuestaoDeProva]) -> tuple[list, list, list]:
+    """(as que valem, as do cargo, as de prova recusada) - decisao 75.
+
+    O costume de qualquer banca e estatistica, e a regra inviolavel 1 nao deixa
+    misturar evidencia. Da banca do alvo vale o acervo complementar ACEITO no
+    data/acervo_complementar.json; as provas do cargo tem a Central de macetes
+    (e a incidencia), e a prova que a Etapa 3B recusou nao entra em conta
+    nenhuma. De outra banca vale a prova dela (fora), que nunca se soma com a
+    da FEPESE: o filtro de banca ja separa as duas.
+    """
+    from radar.servico import complementar, evidencia
+
+    criar_tabelas()
+    with sessao() as s:
+        por_prova = evidencia.por_prova(s)
+    aceitas = complementar.provas_aceitas()
+
+    valem, do_cargo, recusadas = [], [], []
+    for q in questoes:
+        qual = por_prova.get(q.prova_url, evidencia.FORA)
+        if qual == evidencia.ALVO:
+            do_cargo.append(q)
+        elif qual == evidencia.COMPLEMENTAR and q.prova_url not in aceitas:
+            recusadas.append(q)
+        else:
+            valem.append(q)
+    return valem, do_cargo, recusadas
+
+
 def composicao_do_caderno(banca: str | None = None) -> list[macetes.FatiaDoCaderno]:
     """Quantas questoes de cada materia caem num caderno tipico da banca."""
     criar_tabelas()
@@ -640,7 +669,17 @@ def _questoes_filtradas(
     cargo: str | None = None,
     tema: str | None = None,
 ) -> list[QuestaoDeProva]:
-    """As questoes do recorte pedido.
+    """As questoes do recorte que VALEM para o costume da banca (decisao 75):
+    o `_separar` do `_questoes_do_recorte`."""
+    return _separar(_questoes_do_recorte(banca, cargo, tema))[0]
+
+
+def _questoes_do_recorte(
+    banca: str | None = None,
+    cargo: str | None = None,
+    tema: str | None = None,
+) -> list[QuestaoDeProva]:
+    """As questoes do recorte pedido, de toda evidencia.
 
     O `tema` e texto livre de proposito: eu escrevo "crase" ou "primeiros
     socorros", e nao o nome exato da materia. A busca olha a materia E o
@@ -677,8 +716,11 @@ def analisar_banca(
     pergunta seguinte natural de quem procurou por um assunto.
     """
     criar_tabelas()
-    questoes = _questoes_filtradas(banca, cargo, tema)
+    questoes, do_cargo, recusadas = _separar(_questoes_do_recorte(banca, cargo, tema))
     analise = macetes.analisar(questoes)
+    # O que ficou de fora vai contado na tela, e nunca somado ao resto.
+    analise.do_cargo = len(do_cargo)
+    analise.recusadas = len(recusadas)
 
     if not questoes:
         return analise

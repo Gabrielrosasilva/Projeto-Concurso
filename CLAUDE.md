@@ -125,8 +125,10 @@ especifico (pedido de 03/10):** feitas a 2A - o diagnostico e o simulado de
 com essa composicao (decisao 67) - e a 2B - o simulado do Qconcursos sem
 numero escrito a mao, a revisao semanal, o R+7 dos diagnosticos e a
 comparacao de 07/11 (decisoes 69 e 70) - e a 2C - cada faixa diz o assunto, o
-subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feito o F1: o
-"Onde estudar primeiro" e a revisao espacada leem a arvore (decisao 74).
+subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feitos o F1 - o
+"Onde estudar primeiro" e a revisao espacada leem a arvore (decisao 74) - e o
+F2 - so o complementar aceito no costume da banca, no treino e no compilado
+(decisao 75).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 69 geradas (19 do estoque ate 07/11, lote 1 de 57:
 `docs/estoque_de_geradas.md`); banco na versao 4.

@@ -347,7 +347,8 @@ E so link: o radar nao baixa nem guarda o texto de lei nenhuma.
 
 O botao de treino monta a rodada nesta ordem: primeiro as questoes das
 **provas do proprio cargo**; quando elas acabam, as da **mesma banca nas
-mesmas materias** em outros concursos; e so entao repete o que voce ja
+mesmas materias** em outros concursos - so das provas **aceitas** no
+levantamento da Etapa 3B (decisao 75); e so entao repete o que voce ja
 respondeu, dizendo que repetiu. Materia que nao caiu na sua prova nao entra.
 
 Quem e o alvo sai de `config/alvo.yml`. **Onde o dado nao existe, a tela diz
@@ -1512,6 +1513,12 @@ origem (`origem`, ou `origens` quando junta partes) e a tela so desenha. A meta
 do dia (Ideal, Reduzida, Minima, Nao fiz) nao e selo e tem as cores dela.
 
 #### A Central de Macetes
+
+Abaixo da Central, **o costume de qualquer banca** e a exploracao por banca,
+cargo e tema. Ele conta so a evidencia que vale (decisao 75): da FEPESE, o
+acervo complementar **aceito** - as provas do cargo tem a Central, e prova
+recusada no levantamento da Etapa 3B nao entra -; de outra banca, as provas
+dela. O que ficou de fora vai contado na tela, e nunca somado.
 
 O topo de `/macetes` e um **cartao por materia** das minhas provas (2013 e
 2019, sem as anuladas), no formato da especificacao. Cada parte leva o selo

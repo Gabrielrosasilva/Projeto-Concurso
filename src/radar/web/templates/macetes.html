@@ -189,7 +189,9 @@
   {# ====================================== o costume de qualquer banca === #}
   <section class="ds-secao">
     <h2>O costume de qualquer banca</h2>
-    <p>Contagem sobre o acervo inteiro, no recorte que eu escolher.</p>
+    <p>Contagem sobre as provas aceitas da banca, no recorte que eu escolher. As
+      provas do meu cargo têm a Central de macetes, acima, e prova recusada no
+      levantamento da Etapa 3B não entra (regra 1: evidências nunca somadas).</p>
   </section>
 
   <div class="ds-cartao">
@@ -278,6 +280,9 @@
   {% elif analise.total == 0 %}
     <div class="ds-cartao ds-vazio" style="margin-top:var(--esp-4)">
       <p>Nenhuma questão no acervo para esse recorte.</p>
+      {% if analise.do_cargo or analise.recusadas %}
+        <p>Ficaram fora desta conta{% if analise.do_cargo %} {{ analise.do_cargo }} das provas do meu cargo (estão na Central de macetes, acima){% endif %}{% if analise.do_cargo and analise.recusadas %} e{% endif %}{% if analise.recusadas %} {{ analise.recusadas }} de provas que a Etapa 3B recusou{% endif %}.</p>
+      {% endif %}
       <p>O acervo tem prova de cargo municipal de SC. Tema de TI, por
          exemplo, não aparece porque essas provas não cobram TI.</p>
     </div>
@@ -291,6 +296,9 @@
       {% if analise.total > analise.distintas %}
         A banca reaproveita: é por isso que as contas de gabarito e de assunto
         contam uma vez por enunciado.
+      {% endif %}
+      {% if analise.do_cargo or analise.recusadas %}
+        Ficaram fora desta conta{% if analise.do_cargo %} {{ analise.do_cargo }} das provas do meu cargo (estão na Central de macetes, acima){% endif %}{% if analise.do_cargo and analise.recusadas %} e{% endif %}{% if analise.recusadas %} {{ analise.recusadas }} de provas que a Etapa 3B recusou{% endif %}.
       {% endif %}
     </p>
 

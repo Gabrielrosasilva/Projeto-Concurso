@@ -54,6 +54,26 @@ def _semear(*questoes):
             s.add(_concurso())
         for q in questoes:
             s.add(q)
+    _aceitar(questoes)
+
+
+def _aceitar(questoes) -> None:
+    """Registra as provas como aceitas no acervo complementar (o arquivo da
+    3B), como as provas reais estao. O costume da banca e o treino do alvo so
+    contam prova aceita (decisao 75)."""
+    import json
+
+    from radar.servico import complementar
+
+    caminho = complementar.caminho_do_registro()
+    registro = (json.loads(caminho.read_text(encoding="utf-8"))
+                if caminho.exists() else {"provas": []})
+    ja = {p["prova_url"] for p in registro["provas"]}
+    for q in questoes:
+        if q.prova_url not in ja:
+            registro["provas"].append({"prova_url": q.prova_url, "aceita": True})
+            ja.add(q.prova_url)
+    caminho.write_text(json.dumps(registro), encoding="utf-8")
 
 
 def _responder_tudo(simulado_id: int) -> None:
@@ -326,3 +346,19 @@ def test_caderno_sem_gabarito_nao_promete_rodada(cliente):
 
     resposta = cliente.post("/foco/treinar", follow_redirects=False)
     assert resposta.headers["location"] == "/simulado"
+
+
+def test_prova_da_banca_nao_aceita_nao_entra_no_treino(banco_temporario):
+    """Decisao 75: o treino (e o compilado) completam so com prova ACEITA no
+    acervo complementar - a recusada na 3B pode ter gabarito errado."""
+    from sqlalchemy import select
+
+    _semear(_questao(1))
+    with sessao() as s:
+        s.add(_questao(50, cargo="Merendeira"))           # prova nao registrada
+
+    with sessao() as s:
+        proprias, da_banca = servico._questoes_para_o_alvo(s)
+        assert len(proprias) == 1
+        assert da_banca == []
+        assert s.scalar(select(QuestaoDeProva).where(QuestaoDeProva.numero == 50))
