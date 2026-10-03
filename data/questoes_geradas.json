@@ -151,6 +151,31 @@
   },
   {
     "alternativas": {
+      "a": "dinheiro, valor ou qualquer outro bem móvel, público ou particular.",
+      "b": "apenas o dinheiro público.",
+      "c": "apenas os bens imóveis.",
+      "d": "apenas os bens particulares.",
+      "e": "apenas os documentos públicos."
+    },
+    "artigo": "CP, art. 312, caput",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067143+00:00",
+    "enunciado": "O objeto material do peculato, segundo o Código Penal, é:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "022574393d1478f89539631d9f98a865",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Ao chegar ao presídio, o juiz conversou com os presos.",
       "b": "O juiz, ao chegar ao presídio, conversou com os presos.",
       "c": "O juiz conversou com os presos, ao chegar ao presídio.",
@@ -173,6 +198,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "a revogação da prisão domiciliar.",
+      "b": "a extinção da pena.",
+      "c": "a progressão de regime.",
+      "d": "a concessão de indulto.",
+      "e": "a dispensa da monitoração."
+    },
+    "artigo": "LEP, art. 146-C, parágrafo único, VI",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669745+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a violação comprovada dos deveres da monitoração eletrônica pelo condenado em prisão domiciliar poderá acarretar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "02c39d334372df2c6bdf8003d3b41429",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -271,6 +321,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "dda179a70ee9ffa0894feb6b14cb7dd6",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "advertência, por escrito.",
+      "b": "multa.",
+      "c": "prisão preventiva.",
+      "d": "perda de todos os dias remidos.",
+      "e": "suspensão das visitas por um ano."
+    },
+    "artigo": "LEP, art. 146-C, parágrafo único, VII",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669739+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, quando o juiz da execução decide não aplicar nenhuma das medidas previstas para a violação dos deveres da monitoração eletrônica, como a regressão ou a revogação da saída temporária, ele aplicará:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "043a234bd7e07fdc664ccfc7ef6b6999",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -851,6 +926,31 @@
   },
   {
     "alternativas": {
+      "a": "A violação comprovada poderá acarretar, a critério do juiz da execução, ouvidos o Ministério Público e a defesa, a revogação do livramento condicional.",
+      "b": "A violação acarreta automaticamente a perda de todos os dias remidos.",
+      "c": "O condenado não precisa responder aos contatos do servidor responsável.",
+      "d": "A monitoração se aplica somente a presos provisórios.",
+      "e": "A revogação da monitoração depende de nova condenação."
+    },
+    "artigo": "LEP, art. 146-C, parágrafo único, VIII",
+    "assunto": "Monitoração eletrônica",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669735+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, é correto afirmar sobre as consequências da violação dos deveres da monitoração eletrônica:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "alvo",
+    "impressao": "0ac9dd5a16f45e838fd58fc912f60514",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "em cada Casa do Congresso Nacional, em dois turnos, por três quintos dos votos dos respectivos membros.",
       "b": "no Senado Federal, em turno único, por maioria simples.",
       "c": "em sessão conjunta do Congresso Nacional, por maioria absoluta.",
@@ -871,6 +971,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "a9f001e9bfee1a4b286755a7513c94ad",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "peculato.",
+      "b": "emprego irregular de verbas públicas.",
+      "c": "prevaricação.",
+      "d": "corrupção passiva.",
+      "e": "advocacia administrativa."
+    },
+    "artigo": "CP, art. 312, caput",
+    "assunto": "Peculato",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067134+00:00",
+    "enunciado": "Um servidor desvia, em proveito de um amigo, verba pública de que tem a posse em razão do cargo. De acordo com o Código Penal, ele pratica:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "complementar",
+    "impressao": "0addb2265256ad8f58958d2b48ccd575",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "61f6a4bb1f1b178978ea93adf71954c9",
     "rejeitada": false,
     "resposta": "a"
   },
@@ -1026,6 +1151,31 @@
   },
   {
     "alternativas": {
+      "a": "reduz de metade a pena imposta.",
+      "b": "extingue a punibilidade.",
+      "c": "não produz efeito.",
+      "d": "reduz a pena de um terço.",
+      "e": "substitui a pena por prestação de serviços."
+    },
+    "artigo": "CP, art. 312, § 3º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067138+00:00",
+    "enunciado": "Segundo o Código Penal, no peculato culposo, a reparação do dano posterior à sentença irrecorrível:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0d22470b3f35bfed0a08d125de432911",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 2 e 4.",
       "c": "São corretas apenas as afirmativas 1, 2 e 3.",
@@ -1048,6 +1198,31 @@
     "origem_impressao": "1caa127a7bb47bdfaedb84899576d42f",
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "excesso de exação.",
+      "b": "concussão simples.",
+      "c": "peculato.",
+      "d": "corrupção passiva.",
+      "e": "emprego irregular de verbas públicas."
+    },
+    "artigo": "CP, art. 316, § 1º",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701762+00:00",
+    "enunciado": "Segundo o Código Penal, o funcionário que exige tributo ou contribuição social que sabe ou deveria saber indevido, ou, quando devido, emprega na cobrança meio vexatório ou gravoso que a lei não autoriza, comete:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0d6602204c4c5a728cda946ddc3e8958",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -1173,6 +1348,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "a utilização do equipamento de monitoração eletrônica pelo condenado, nas hipóteses legais.",
+      "b": "a escolha da empresa fornecedora do equipamento.",
+      "c": "a contratação dos servidores da central de monitoração.",
+      "d": "o valor a ser pago pelo condenado pelo equipamento.",
+      "e": "a monitoração das visitas íntimas."
+    },
+    "artigo": "LEP, art. 66, V, j",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669741+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, compete ao juiz da execução determinar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0fb147378c21f16cdf872cf72d1af3eb",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -1701,6 +1901,31 @@
   },
   {
     "alternativas": {
+      "a": "não impede a utilização de equipamento de monitoração eletrônica pelo condenado, quando assim determinar o juiz da execução.",
+      "b": "proíbe o uso de monitoração eletrônica.",
+      "c": "exige escolta policial.",
+      "d": "depende de autorização do Ministério Público.",
+      "e": "só é admitida no regime fechado."
+    },
+    "artigo": "LEP, art. 122, § 1º",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669740+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a ausência de vigilância direta na saída temporária:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "18d57cf567edc12ccc0c1820b27fd68e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Os agentes viram o fugitivo e prenderam-no.",
       "b": "Os agentes viram o fugitivo e prenderam-o.",
       "c": "Os agentes viram o fugitivo e prenderam-lhe.",
@@ -1796,6 +2021,31 @@
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Peculato mediante erro de outrem.",
+      "b": "Estelionato.",
+      "c": "Apropriação de coisa achada.",
+      "d": "Concussão.",
+      "e": "Excesso de exação."
+    },
+    "artigo": "CP, art. 313",
+    "assunto": "Peculato",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067133+00:00",
+    "enunciado": "De acordo com o Código Penal, que crime pratica o funcionário público que se apropria de dinheiro ou qualquer utilidade que, no exercício do cargo, recebeu por erro de outrem?",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "complementar",
+    "impressao": "1b102b4b1a294627bd7aa9bbed2293c6",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "61f6a4bb1f1b178978ea93adf71954c9",
     "rejeitada": false,
     "resposta": "a"
   },
@@ -1951,6 +2201,31 @@
   },
   {
     "alternativas": {
+      "a": "violação de sigilo funcional.",
+      "b": "prevaricação.",
+      "c": "advocacia administrativa.",
+      "d": "concussão.",
+      "e": "condescendência criminosa."
+    },
+    "artigo": "CP, art. 325",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701758+00:00",
+    "enunciado": "Segundo o Código Penal, o funcionário público que revela fato de que tem ciência em razão do cargo e que deva permanecer em segredo comete:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "1b7c652e8ff1c73197869a9686a4f7e5",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 2.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -2073,6 +2348,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "será fiscalizado por meio de monitoração eletrônica.",
+      "b": "dispensará qualquer fiscalização.",
+      "c": "será acompanhado por escolta armada em tempo integral.",
+      "d": "só poderá sair com autorização do Conselho Penitenciário.",
+      "e": "terá a saída proibida em qualquer caso."
+    },
+    "artigo": "LEP, art. 146-E",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669737+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o condenado por crime contra a mulher por razões da condição do sexo feminino ou por crime contra a dignidade sexual, ao usufruir de qualquer benefício em que ocorra a sua saída do estabelecimento penal:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "1ccc62dab67ef4f40cea444df6895620",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -3026,6 +3326,31 @@
   },
   {
     "alternativas": {
+      "a": "na concussão o funcionário exige a vantagem indevida; na corrupção passiva, ele a solicita, recebe ou aceita promessa dela.",
+      "b": "na concussão não há vantagem indevida.",
+      "c": "a corrupção passiva só ocorre fora da função.",
+      "d": "a concussão só se aplica a tributos.",
+      "e": "não há diferença, pois são o mesmo crime."
+    },
+    "artigo": "CP, arts. 316 e 317",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701760+00:00",
+    "enunciado": "A diferença entre concussão e corrupção passiva, segundo o Código Penal, está em que:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "2a12101981d105c14b26c594da297185",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 3.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -3776,6 +4101,31 @@
   },
   {
     "alternativas": {
+      "a": "inserção de dados falsos em sistema de informações.",
+      "b": "modificação ou alteração não autorizada de sistema de informações.",
+      "c": "violação de sigilo funcional.",
+      "d": "falsidade ideológica comum.",
+      "e": "prevaricação."
+    },
+    "artigo": "CP, art. 313-A",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701764+00:00",
+    "enunciado": "Segundo o Código Penal, o funcionário autorizado que insere dados falsos nos sistemas informatizados da Administração Pública com o fim de obter vantagem indevida para si ou para outrem comete:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "366a59d881a0fa3211414ec2ddbbcd69",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "o acusado, seu advogado constituído ou membro da Defensoria Pública, e o membro do Ministério Público.",
       "b": "apenas o acusado e o delegado de polícia.",
       "c": "a vítima e as testemunhas.",
@@ -4301,6 +4651,31 @@
   },
   {
     "alternativas": {
+      "a": "abster-se de remover, violar, modificar ou danificar o dispositivo de monitoração, ou de permitir que outrem o faça.",
+      "b": "recarregar o equipamento apenas uma vez por mês.",
+      "c": "informar a sua localização por telefone ao juiz, diariamente.",
+      "d": "usar o equipamento apenas durante o dia.",
+      "e": "devolver o equipamento sempre que viajar."
+    },
+    "artigo": "LEP, art. 146-C, II",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669737+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, constitui dever do condenado submetido à monitoração eletrônica:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3c55aec85ba1261c15e7035ebc938641",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "a natureza do delito, a idade e o sexo do apenado.",
       "b": "a renda e a escolaridade do apenado.",
       "c": "a religião e a nacionalidade do apenado.",
@@ -4548,6 +4923,31 @@
     "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "LEP, arts. 146-B e 146-C",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669744+00:00",
+    "enunciado": "Considere as afirmativas sobre a monitoração eletrônica na Lei de Execução Penal: 1. O condenado deve receber visitas do servidor responsável pela monitoração, responder aos seus contatos e cumprir suas orientações. 2. A violação dos deveres poderá acarretar a regressão do regime, a critério do juiz, ouvidos o Ministério Público e a defesa. 3. A monitoração eletrônica só pode ser aplicada no regime aberto. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "4004bf6a0cfe3e068e0d8df5c2264891",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -5073,6 +5473,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Corrupção passiva.",
+      "b": "Concussão.",
+      "c": "Prevaricação.",
+      "d": "Peculato.",
+      "e": "Advocacia administrativa."
+    },
+    "artigo": "CP, art. 316",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701749+00:00",
+    "enunciado": "Qual o crime que pratica o funcionário público que exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão dela, vantagem indevida?",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "alvo",
+    "impressao": "45a3e225f8471acb62bc63b494a861e7",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "ed3425edb4aefe63cba8ee0cd903cedc",
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -5976,6 +6401,31 @@
   },
   {
     "alternativas": {
+      "a": "condescendência criminosa.",
+      "b": "prevaricação.",
+      "c": "advocacia administrativa.",
+      "d": "corrupção passiva privilegiada.",
+      "e": "violência arbitrária."
+    },
+    "artigo": "CP, art. 320",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701757+00:00",
+    "enunciado": "Segundo o Código Penal, o funcionário que deixa, por indulgência, de responsabilizar subordinado que cometeu infração no exercício do cargo comete:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "586ef9a3c42cdfb5dc4618e5cd4f9f2c",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 3 e 4.",
       "c": "São corretas apenas as afirmativas 1, 2 e 3.",
@@ -6017,6 +6467,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "58c8b34d2e532688078705eea51c6c28",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "corrupção passiva privilegiada, punida com detenção de três meses a um ano, ou multa.",
+      "b": "concussão.",
+      "c": "prevaricação, por satisfazer sentimento pessoal.",
+      "d": "advocacia administrativa.",
+      "e": "corrupção ativa."
+    },
+    "artigo": "CP, art. 317, § 2º",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701759+00:00",
+    "enunciado": "Segundo o Código Penal, o funcionário que pratica, deixa de praticar ou retarda ato de ofício, com infração de dever funcional, cedendo a pedido ou influência de outrem, comete:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "592e9b5a1a3ec0db341de7ac9768095e",
+    "materia": "Direito Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -6196,6 +6671,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "a19000121df70a8c9d48183ff18d4d71",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "aplicar pena privativa de liberdade a ser cumprida nos regimes aberto ou semiaberto, ou conceder progressão para tais regimes.",
+      "b": "aplicar pena a ser cumprida no regime fechado.",
+      "c": "decretar prisão preventiva por crime hediondo.",
+      "d": "conceder indulto.",
+      "e": "arquivar o inquérito policial."
+    },
+    "artigo": "LEP, art. 146-B, VI (incluído pela Lei 14.843/2024)",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669741+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, com a redação dada pela Lei nº 14.843/2024, o juiz poderá definir a fiscalização por monitoração eletrônica ao:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "5e5a5396d312b8563748d125645dbf80",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -6401,6 +6901,31 @@
   },
   {
     "alternativas": {
+      "a": "quando se tornar desnecessária ou inadequada, ou se o acusado ou condenado violar os deveres a que estiver sujeito ou cometer falta grave.",
+      "b": "apenas a pedido do condenado.",
+      "c": "somente por decisão do diretor do estabelecimento.",
+      "d": "apenas em caso de nova condenação.",
+      "e": "em nenhuma hipótese, depois de determinada."
+    },
+    "artigo": "LEP, art. 146-D",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669738+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a monitoração eletrônica poderá ser revogada:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "614191cf7bef76cf6e82dab22922238d",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 2.",
       "c": "É correta apenas a afirmativa 3.",
@@ -6551,6 +7076,31 @@
   },
   {
     "alternativas": {
+      "a": "detenção, de três meses a um ano.",
+      "b": "reclusão, de dois a doze anos.",
+      "c": "reclusão, de um a quatro anos.",
+      "d": "apenas multa.",
+      "e": "detenção, de um a três anos."
+    },
+    "artigo": "CP, art. 312, § 2º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067136+00:00",
+    "enunciado": "Segundo o Código Penal, se o funcionário concorre culposamente para o crime de outrem, a pena é de:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "656938518f691aa61bf731d480bf08a9",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "A Convenção autoriza a prisão civil por dívida de qualquer natureza.",
       "b": "As penas privativas da liberdade devem ter por finalidade essencial a reforma e a readaptação social dos condenados.",
       "c": "A pena pode passar da pessoa do delinquente para seus herdeiros.",
@@ -6648,6 +7198,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "exerce cargo, emprego ou função em entidade paraestatal, e quem trabalha para empresa prestadora de serviço contratada ou conveniada para a execução de atividade típica da Administração Pública.",
+      "b": "trabalha em qualquer empresa privada.",
+      "c": "presta serviço voluntário a entidade privada sem convênio.",
+      "d": "é aposentado do serviço público.",
+      "e": "foi aprovado em concurso e ainda não foi nomeado."
+    },
+    "artigo": "CP, art. 327, § 1º",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701761+00:00",
+    "enunciado": "Segundo o Código Penal, equipara-se a funcionário público, para os efeitos penais, quem:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "67543380098fa9e8f488cdf9fd7c484b",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -6851,6 +7426,31 @@
   },
   {
     "alternativas": {
+      "a": "é inaplicável.",
+      "b": "é sempre aplicável.",
+      "c": "aplica-se apenas ao peculato culposo.",
+      "d": "aplica-se quando o valor for inferior a um salário mínimo.",
+      "e": "aplica-se apenas a servidores temporários."
+    },
+    "artigo": "Súmula 599 do STJ; CP, art. 312",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067139+00:00",
+    "enunciado": "Segundo a Súmula 599 do Superior Tribunal de Justiça, nos crimes contra a administração pública, como o peculato, o princípio da insignificância:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6bbd174aaf82a0f5a5f398a7ad4415aa",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "as ações de habeas corpus e habeas data.",
       "b": "as ações de mandado de segurança.",
       "c": "as ações de indenização.",
@@ -6892,6 +7492,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "6d568cd8979eed3e3cfcec37d9c43c1c",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "reclusão, de dois a doze anos, e multa.",
+      "b": "detenção, de três meses a um ano.",
+      "c": "reclusão, de um a quatro anos, e multa.",
+      "d": "detenção, de seis meses a dois anos.",
+      "e": "reclusão, de três a oito anos."
+    },
+    "artigo": "CP, art. 312, caput",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067135+00:00",
+    "enunciado": "Segundo o Código Penal, a pena do peculato doloso previsto no caput do art. 312 é de:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6d68916b806239e9777f990fe1574631",
+    "materia": "Direito Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -7071,6 +7696,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "215c3c1ebb1ae806f9d616ed754e3b5b",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Prevaricação.",
+      "b": "Corrupção passiva.",
+      "c": "Condescendência criminosa.",
+      "d": "Concussão.",
+      "e": "Abandono de função."
+    },
+    "artigo": "CP, art. 319",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701753+00:00",
+    "enunciado": "Qual o crime que pratica o funcionário público que retardar ou deixar de praticar, indevidamente, ato de ofício, ou praticá-lo contra disposição expressa de lei, para satisfazer interesse ou sentimento pessoal?",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "alvo",
+    "impressao": "70d98b9fe62dd1ac7e8b6254a7e281c0",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "ed3425edb4aefe63cba8ee0cd903cedc",
     "rejeitada": false,
     "resposta": "a"
   },
@@ -7598,6 +8248,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "responde por peculato, pois é equiparado a funcionário público para os efeitos penais.",
+      "b": "responde por apropriação indébita, pois não é servidor.",
+      "c": "não comete crime.",
+      "d": "responde por furto simples.",
+      "e": "responde apenas civilmente."
+    },
+    "artigo": "CP, art. 312 e art. 327, § 1º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067144+00:00",
+    "enunciado": "O empregado de empresa contratada para executar atividade típica da Administração Pública que se apropria de bem público de que tem a posse em razão da função:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "77f40fb3bd5c1fe13edbc5970c014dda",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -8226,6 +8901,31 @@
   },
   {
     "alternativas": {
+      "a": "apenas no peculato culposo.",
+      "b": "em qualquer modalidade de peculato.",
+      "c": "apenas no peculato-furto.",
+      "d": "apenas no peculato mediante erro de outrem.",
+      "e": "em nenhuma modalidade."
+    },
+    "artigo": "CP, art. 312, §§ 2º e 3º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067141+00:00",
+    "enunciado": "Segundo o Código Penal, a reparação do dano anterior à sentença irrecorrível extingue a punibilidade:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "7f7e13c3282dc89b266378dac4622194",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "aos albergados e aos egressos.",
       "b": "apenas aos presos provisórios.",
       "c": "aos agentes penitenciários.",
@@ -8323,6 +9023,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "peculato culposo.",
+      "b": "peculato doloso.",
+      "c": "prevaricação.",
+      "d": "nenhum crime.",
+      "e": "furto."
+    },
+    "artigo": "CP, art. 312, § 2º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067140+00:00",
+    "enunciado": "Um agente penitenciário, por descuido, deixa aberto o armário onde estavam guardados valores apreendidos, e um colega se aproveita disso para subtraí-los. Segundo o Código Penal, o agente descuidado responde por:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "80ad33e5c218687b51f65ee293152ba6",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -8548,6 +9273,31 @@
     "origem_impressao": "edc02a547b44a55d9ed970f98ef13f16",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "O peculato pode recair sobre bem particular de que o funcionário tem a posse em razão do cargo.",
+      "b": "O desvio do bem em proveito alheio configura peculato.",
+      "c": "No peculato culposo, a reparação do dano antes da sentença irrecorrível extingue a punibilidade.",
+      "d": "No peculato doloso, a reparação do dano antes da sentença irrecorrível extingue a punibilidade.",
+      "e": "Apropriar-se de dinheiro recebido por erro de outrem, no exercício do cargo, é crime."
+    },
+    "artigo": "CP, arts. 312 e 313",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067145+00:00",
+    "enunciado": "Assinale a alternativa INCORRETA sobre o peculato no Código Penal.",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "82d4d672fa72c21b506e51202738f76d",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -8892,6 +9642,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "88c05c7967bdfef3c2cd2b05099813a1",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "em lugar compreendido na faixa de fronteira.",
+      "b": "em dia útil.",
+      "c": "por mais de trinta dias.",
+      "d": "em município pequeno.",
+      "e": "durante as férias."
+    },
+    "artigo": "CP, art. 323, § 2º",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701763+00:00",
+    "enunciado": "Segundo o Código Penal, abandonar cargo público, fora dos casos permitidos em lei, configura abandono de função; a pena é mais grave se o fato ocorre:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "88ca99c96a8629ac88ea6922de11e2ca",
+    "materia": "Direito Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -9751,6 +10526,31 @@
   },
   {
     "alternativas": {
+      "a": "extingue a punibilidade.",
+      "b": "reduz a pena de metade.",
+      "c": "reduz a pena de um a dois terços.",
+      "d": "não produz efeito.",
+      "e": "converte a pena em multa."
+    },
+    "artigo": "CP, art. 312, § 3º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067137+00:00",
+    "enunciado": "Segundo o Código Penal, no peculato culposo, a reparação do dano, se precede a sentença irrecorrível:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "937b5b8748d896c01316f0771b509ae4",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "São corretas apenas as afirmativas 1 e 2.",
       "c": "São corretas apenas as afirmativas 3 e 4.",
@@ -9896,6 +10696,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "7377b2dd470e419f202601959c6bedf9",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "o crime do art. 319-A, punido com detenção de 3 meses a 1 ano.",
+      "b": "prevaricação comum, punida com reclusão.",
+      "c": "corrupção passiva.",
+      "d": "apenas falta disciplinar, sem crime.",
+      "e": "condescendência criminosa."
+    },
+    "artigo": "CP, art. 319-A",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701756+00:00",
+    "enunciado": "O Diretor de Penitenciária que deixa de cumprir seu dever de vedar ao preso o acesso a aparelho telefônico, de rádio ou similar, que permita a comunicação com outros presos ou com o ambiente externo comete, segundo o Código Penal:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "952d543708bbec6d160c970ee763b012",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -10201,6 +11026,56 @@
   },
   {
     "alternativas": {
+      "a": "ao juiz da execução, ouvidos o Ministério Público e a defesa.",
+      "b": "ao servidor responsável pela monitoração.",
+      "c": "ao diretor do estabelecimento, sem ouvir a defesa.",
+      "d": "à empresa fornecedora do equipamento.",
+      "e": "ao Conselho da Comunidade."
+    },
+    "artigo": "LEP, art. 146-C, parágrafo único",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669746+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a decisão sobre as consequências da violação dos deveres da monitoração eletrônica cabe:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "98fd384dc3e543d3dfe92fca7aa2bf05",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "ocupantes de cargos em comissão ou de função de direção ou assessoramento de órgão da administração direta, sociedade de economia mista, empresa pública ou fundação instituída pelo poder público.",
+      "b": "servidores efetivos em estágio probatório.",
+      "c": "servidores aposentados.",
+      "d": "reincidentes em qualquer crime.",
+      "e": "servidores temporários."
+    },
+    "artigo": "CP, art. 327, § 2º",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701761+00:00",
+    "enunciado": "Segundo o Código Penal, a pena dos crimes praticados por funcionário público contra a administração em geral será aumentada da terça parte quando os autores forem:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "98ff0edabc195c2f1bf7d733ed696fcf",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "ao preso provisório e ao submetido à medida de segurança.",
       "b": "apenas ao condenado em regime fechado.",
       "c": "apenas ao preso provisório.",
@@ -10376,6 +11251,31 @@
   },
   {
     "alternativas": {
+      "a": "a fiscalização por monitoramento eletrônico, sem prejuízo das condições gerais e obrigatórias.",
+      "b": "a proibição de trabalhar.",
+      "c": "o recolhimento integral ao estabelecimento.",
+      "d": "a perda dos dias remidos.",
+      "e": "o pagamento de fiança diária."
+    },
+    "artigo": "LEP, art. 115",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669744+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o juiz poderá estabelecer condições especiais para a concessão do regime aberto, entre as quais:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9c8c404dd00941ee030f21650bce1627",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "direito do preso.",
       "b": "regalia concedida pelo diretor.",
       "c": "sanção disciplinar.",
@@ -10446,6 +11346,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "f807269a1c6ccf7f12e01fc95c3b59cf",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "Tráfico de influência.",
+      "b": "Advocacia administrativa.",
+      "c": "Corrupção ativa.",
+      "d": "Exploração de prestígio.",
+      "e": "Peculato."
+    },
+    "artigo": "CP, art. 321",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701755+00:00",
+    "enunciado": "Qual o crime que pratica o funcionário público que patrocinar, direta ou indiretamente, interesse privado perante a administração pública, valendo-se da qualidade de funcionário?",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "alvo",
+    "impressao": "9de82370c46a3a0ecaf97f8bd35be008",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "ed3425edb4aefe63cba8ee0cd903cedc",
     "rejeitada": false,
     "resposta": "b"
   },
@@ -10571,6 +11496,31 @@
     "modo": "variacao",
     "modo_do_pedido": null,
     "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "viola dever do monitorado e poderá acarretar, a critério do juiz, a revogação do livramento condicional.",
+      "b": "é irrelevante, pois o livramento não admite monitoração.",
+      "c": "gera automaticamente a extinção da pena.",
+      "d": "só gera advertência verbal do servidor.",
+      "e": "gera a perda da nacionalidade."
+    },
+    "artigo": "LEP, art. 146-C, II, e parágrafo único, VIII",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669747+00:00",
+    "enunciado": "Um condenado em livramento condicional, monitorado eletronicamente, danifica o dispositivo de propósito. Segundo a Lei de Execução Penal, essa conduta:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9ff7ea4ca20554741b98b8edd971301a",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -10748,6 +11698,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "reclusão, de um a quatro anos, e multa.",
+      "b": "reclusão, de dois a doze anos, e multa.",
+      "c": "detenção, de três meses a um ano.",
+      "d": "detenção, de um a três meses.",
+      "e": "reclusão, de três a oito anos."
+    },
+    "artigo": "CP, art. 313",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067142+00:00",
+    "enunciado": "Segundo o Código Penal, a pena do peculato mediante erro de outrem é de:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a432787e8db117744da897e8b878f75f",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -11067,6 +12042,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "a884283f202fdcaa93ad302c687cebe8",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "autorizar a saída temporária no regime semiaberto.",
+      "b": "aplicar pena a ser cumprida no regime fechado.",
+      "c": "determinar a internação em hospital de custódia.",
+      "d": "decretar a prisão temporária.",
+      "e": "conceder indulto."
+    },
+    "artigo": "LEP, art. 146-B, II",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669736+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o juiz poderá definir a fiscalização por meio da monitoração eletrônica quando, entre outras hipóteses:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a8a23a5b4773571961aea74b4e0eb293",
+    "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -11776,6 +12776,31 @@
   },
   {
     "alternativas": {
+      "a": "dos cuidados que deverá adotar com o equipamento eletrônico e dos deveres previstos em lei.",
+      "b": "apenas do horário de recarga.",
+      "c": "da tabela de preços do equipamento.",
+      "d": "do nome da empresa fornecedora.",
+      "e": "das regras do regime fechado."
+    },
+    "artigo": "LEP, art. 146-C, caput",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669748+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o condenado submetido à monitoração eletrônica será instruído acerca:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b268d28189e37f0325efe453a567b9c0",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "responde pelo crime tentado.",
       "b": "só responde pelos atos já praticados.",
       "c": "fica isento de qualquer responsabilidade penal.",
@@ -11846,6 +12871,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "63615ebfc16bf214a041e7e6be96d6fa",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "não configura o peculato do Código Penal, por faltar o ânimo de apropriação, ressalvadas as previsões de leis especiais, como a dos prefeitos.",
+      "b": "é sempre peculato doloso.",
+      "c": "é peculato culposo.",
+      "d": "é concussão.",
+      "e": "é furto qualificado."
+    },
+    "artigo": "CP, art. 312; Decreto-Lei 201/1967, art. 1º, II",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067145+00:00",
+    "enunciado": "Segundo a doutrina, o chamado peculato de uso, em que o funcionário apenas utiliza momentaneamente bem infungível da Administração e o devolve, sem intenção de se apropriar dele:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b40df5510664e40d88a28bec2369cea9",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -11971,6 +13021,31 @@
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "O juiz poderá definir a fiscalização por meio de monitoração eletrônica ao determinar a prisão domiciliar.",
+      "b": "A monitoração eletrônica é vedada no livramento condicional.",
+      "c": "O próprio condenado escolhe se usará o equipamento.",
+      "d": "A monitoração substitui a pena privativa de liberdade em regime fechado.",
+      "e": "Cabe ao diretor do estabelecimento definir a monitoração."
+    },
+    "artigo": "LEP, art. 146-B, IV",
+    "assunto": "Monitoração eletrônica",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669733+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, quanto à monitoração eletrônica, assinale a alternativa correta.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "alvo",
+    "impressao": "b536401df1257eb0370f7b2ad1daf509",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
     "rejeitada": false,
     "resposta": "a"
   },
@@ -13651,6 +14726,31 @@
   },
   {
     "alternativas": {
+      "a": "limitação de frequência a lugares específicos.",
+      "b": "prestação pecuniária.",
+      "c": "perda de bens e valores.",
+      "d": "suspensão da habilitação para dirigir veículo.",
+      "e": "multa substitutiva."
+    },
+    "artigo": "LEP, art. 146-B, VII",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669742+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o juiz poderá definir a fiscalização por meio de monitoração eletrônica ao aplicar pena restritiva de direitos que estabeleça:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "cebe86b736fa1c22f5680106b247b51c",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "em outro local, mediante autorização da direção do estabelecimento.",
       "b": "apenas depois de autorização do juiz da execução.",
       "c": "somente se o preso custear o atendimento.",
@@ -14101,6 +15201,31 @@
   },
   {
     "alternativas": {
+      "a": "retarda ou deixa de praticar qualquer ato de ofício ou o pratica infringindo dever funcional.",
+      "b": "devolve a vantagem recebida.",
+      "c": "é servidor efetivo.",
+      "d": "confessa o crime.",
+      "e": "é reincidente."
+    },
+    "artigo": "CP, art. 317, § 1º",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701758+00:00",
+    "enunciado": "Segundo o Código Penal, a pena da corrupção passiva é aumentada de um terço se, em consequência da vantagem ou promessa, o funcionário:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d5d663ca5296abf5b50cf66c3ea29ab3",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "material.",
       "b": "jurídica.",
       "c": "financeira.",
@@ -14123,6 +15248,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "a conversão da pena restritiva de direitos em pena privativa de liberdade.",
+      "b": "a perda da nacionalidade.",
+      "c": "a cassação dos direitos políticos.",
+      "d": "a suspensão do processo.",
+      "e": "o aumento da pena pela metade."
+    },
+    "artigo": "LEP, art. 146-C, parágrafo único, IX",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669743+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a violação comprovada dos deveres da monitoração eletrônica poderá acarretar, a critério do juiz da execução:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d63d5f11ff3a2bfa846cc06baa3013ec",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -14173,6 +15323,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "CP, art. 312, caput e § 1º",
+    "assunto": "Peculato",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067141+00:00",
+    "enunciado": "Considere as afirmativas sobre o peculato no Código Penal: 1. O peculato-apropriação exige que o funcionário tenha a posse do bem em razão do cargo. 2. O peculato-furto ocorre quando o funcionário, sem ter a posse, subtrai o bem valendo-se da facilidade que lhe proporciona a qualidade de funcionário. 3. O peculato pode ter como objeto bem particular, desde que o funcionário tenha a posse em razão do cargo. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d795a622cfb025ae8dc72e098104b43e",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -14623,6 +15798,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "A monitoração eletrônica poderá ser revogada quando se tornar desnecessária ou inadequada.",
+      "b": "A monitoração só pode ser revogada se o condenado praticar crime doloso.",
+      "c": "O condenado pode remover o equipamento dentro da residência.",
+      "d": "A violação dos deveres acarreta, obrigatoriamente, a regressão de regime.",
+      "e": "A monitoração é exclusiva do regime aberto."
+    },
+    "artigo": "LEP, art. 146-D, I",
+    "assunto": "Monitoração eletrônica",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669729+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a monitoração eletrônica, é correto afirmar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "alvo",
+    "impressao": "dc3266188014827731779df391c0ea34",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -15442,6 +16642,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "e74e8cad7f04a67b10f36152d54a2c5e",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "embora transitoriamente ou sem remuneração, exerce cargo, emprego ou função pública.",
+      "b": "é servidor efetivo e estável, apenas.",
+      "c": "recebe remuneração dos cofres públicos, apenas.",
+      "d": "ocupa cargo em comissão, apenas.",
+      "e": "é agente político, apenas."
+    },
+    "artigo": "CP, art. 327, caput",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701756+00:00",
+    "enunciado": "Segundo o Código Penal, considera-se funcionário público, para os efeitos penais, quem:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e80749090cd5e450e3218ef8dadfe52a",
+    "materia": "Direito Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -16326,6 +17551,31 @@
   },
   {
     "alternativas": {
+      "a": "violência arbitrária, punida com detenção, além da pena correspondente à violência.",
+      "b": "abandono de função.",
+      "c": "prevaricação.",
+      "d": "exercício funcional ilegalmente prolongado.",
+      "e": "condescendência criminosa."
+    },
+    "artigo": "CP, art. 322",
+    "assunto": "Crimes praticados por funcionário público contra a administração em geral",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "criada_em": "2026-10-03T23:00:51.701763+00:00",
+    "enunciado": "Segundo o Código Penal, praticar violência, no exercício de função ou a pretexto de exercê-la, configura o crime de:",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f37c88205e6ae970054d59a16cedc0a1",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "continuará a beneficiar-se com a remição.",
       "b": "perde o direito à remição.",
       "c": "tem a remição suspensa até a recuperação, sem contagem.",
@@ -16701,6 +17951,31 @@
   },
   {
     "alternativas": {
+      "a": "Furto qualificado.",
+      "b": "Peculato.",
+      "c": "Concussão.",
+      "d": "Prevaricação.",
+      "e": "Apropriação indébita."
+    },
+    "artigo": "CP, art. 312, § 1º",
+    "assunto": "Peculato",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "criada_em": "2026-10-03T23:01:57.067128+00:00",
+    "enunciado": "De acordo com o Código Penal, que crime pratica o funcionário público que, embora não tendo a posse do dinheiro, valor ou bem, o subtrai, ou concorre para que seja subtraído, em proveito próprio ou alheio, valendo-se de facilidade que lhe proporciona a qualidade de funcionário?",
+    "escopo": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+    "evidencia_da_base": "complementar",
+    "impressao": "fa313436b0464d13df8dd3c36bd25ec1",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "61f6a4bb1f1b178978ea93adf71954c9",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "Compareceu à audiência marcada.",
       "b": "Não dou atenção a reclamações infundadas.",
       "c": "Entregou-se à polícia.",
@@ -16898,6 +18173,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "autorizar a saída temporária no regime semiaberto.",
+      "b": "determinar a prisão domiciliar.",
+      "c": "conceder o livramento condicional.",
+      "d": "aplicar pena restritiva de direitos com limitação de frequência a lugares específicos.",
+      "e": "aplicar pena a ser cumprida integralmente no regime fechado, sem saída."
+    },
+    "artigo": "LEP, art. 146-B",
+    "assunto": "Monitoração eletrônica",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "criada_em": "2026-10-03T23:03:36.669747+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, NÃO é hipótese em que o juiz poderá definir a fiscalização por monitoração eletrônica:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "fd2cb6c5f99ac2568c7f9afcd35f4ba4",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {

@@ -255,9 +255,18 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   conferencia); o filtro, so com o caminho exato do Qconcursos, que eu nao
   sei - me passe se quiser;
 
-- 🟡 **O estoque de geradas ate 07/11** (decisao 73): o lote 1 esta feito
-  (abolitio criminis, 19). Faltam os lotes 2 a 57, uma semana por vez, pelo
-  `docs/estoque_de_geradas.md` - os 21 da semana de 05/10 primeiro;
+- 🟡 **O estoque de geradas ate 07/11** (decisao 73): 55 de 57 lotes feitos
+  (685 questoes, JSON em 735). Faltam os lotes 50 e 57, das Regras de Mandela
+  (40 questoes), que dependem do item abaixo;
+- 🔴 **A importacao recusa a citacao das Regras de Mandela**: em Direitos
+  Humanos o `manual.CITA_ARTIGO` so aceita "art." ou "sumula", e a regra de
+  Mandela se cita como "regra 12.1". Decidir: aceitar "regra" na importacao
+  (codigo, uma subetapa) ou citar, ao lado da regra, o artigo da LEP ou da CF
+  que diga o mesmo. Detalhe no `docs/estoque_de_geradas.md`;
+- ⚪ **A gerada e unica pelo enunciado** (`QuestaoGerada.impressao`): dois
+  comandos genericos iguais com alternativas diferentes viram uma so, e a
+  importacao conta a segunda como repetida. Por desenho; no estoque, cada
+  enunciado foi escrito com o que cobra;
 - 🔴 **As 20 geradas de 28/09 estao com a materia "Aplicacao da lei penal
   (arts. 1º a 12)"**, e nao "Direito Penal": ficam fora do treino de Direito
   Penal no /geradas. E as 50 antigas tem so a materia no `conteudo`, entao

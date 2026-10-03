@@ -130,7 +130,8 @@ subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feitos o F1 - o
 F2 - so o complementar aceito no costume da banca, no treino e no compilado
 (decisao 75).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
-complementares aceitas); 69 geradas (19 do estoque ate 07/11, lote 1 de 57:
+complementares aceitas); 735 geradas (685 do estoque ate 07/11, 55 de 57
+lotes - faltam os 2 das Regras de Mandela, cuja citacao a importacao recusa:
 `docs/estoque_de_geradas.md`); banco na versao 4.
 **Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
 por amostra - B.8) e os 15 itens da lista de leis; o **Ciclo 2**, depois do

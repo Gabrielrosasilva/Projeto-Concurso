@@ -1924,3 +1924,20 @@ qualquer prova da banca.
 **O F2:** os dois passaram a usar so o complementar aceito (decisao 75). O
 costume diz o que ficou de fora (170 do cargo, 2.341 de provas recusadas); o
 treino completa com 1.593 questoes da banca, e nao mais 2.190.
+
+## O estoque de geradas, lotes 2 a 56 (03/10)
+
+**O pedido:** os 56 lotes que faltavam, agora, na ordem de uso, com um commit
+por semana.
+
+**Como foi:** cada lote pelo mesmo caminho do lote 1 (`radar gerar --pedido`,
+a resposta escrita pelo Claude Code, `radar gerar --importar`), e o texto de lei
+conferido na compilacao da Camara antes de escrever - a LEP, a CF, o CP e o CPP
+mudaram em 2024-2026 (art. 41, art. 112 e art. 146-E da LEP; art. 310 do CPP).
+666 questoes em 54 lotes, nenhuma recusada; 5 do lote 6 sairam como repetidas
+(o mesmo comando em varias questoes) e foram repostas. O JSON foi de 69 para
+735.
+
+**O que ficou:** os lotes 50 e 57, das Regras de Mandela. A importacao exige
+"art." ou "sumula" na fonte de Direitos Humanos, e a regra de Mandela se cita
+como "regra N". Parei nesses dois e segui com os outros.

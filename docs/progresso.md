@@ -23,7 +23,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
 | 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1 e F2 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore e o complementar aceito no costume e no treino); falta o resto da seção F |
-| 17 | O estoque de geradas até 07/11 (pedido de 03/10) | 🔄 lote 1 de 57 feito (19 questões, banco e JSON 50 → 69); os outros 56 pelo `docs/estoque_de_geradas.md` |
+| 17 | O estoque de geradas até 07/11 (pedido de 03/10) | 🔄 55 de 57 lotes feitos (685 questões; banco e JSON 50 → 735); faltam os 2 das Regras de Mandela (50 e 57), à espera da sua decisão |
 
 ---
 
@@ -2134,6 +2134,17 @@ do conserto):
 | `test_geracao_por_conteudo.py` (1 novo), `test_ia_manual.py`, `test_gerador.py` | 108 passed |
 | `test_aceite.py`, `test_central_de_macetes.py`, `test_classificacao.py`, `test_fichas.py`, `test_origem.py`, `test_relatorio.py` (os outros que passam pela geração ou pela importação) | 167 passed |
 | O `data/questoes_geradas.json` depois das duas rodadas | 69 (não foi sobrescrito) |
+
+**Os lotes 2 a 56** (o pedido de 03/10, "os 56 agora", um commit por semana):
+666 questões em 54 lotes, sem mudança de código. Por semana: 210, 160, 141, 103
+e 52 (commits `989f9e4`, `53da083`, `9b4d649`, `43ce39f` e o da semana de
+02/11). Nenhuma recusada; 5 repetidas no lote 6 (o mesmo comando em seis
+questões), repostas com enunciados próprios. Antes de cada commit, o JSON foi
+conferido contra o do HEAD: o anterior inteiro continua, as novas têm modelo e
+`conteudo`, e a soma bate com o plano. O texto de lei veio da compilação da
+Câmara. **Pendentes, os lotes 50 e 57** (Regras de Mandela, 40 questões): a
+importação exige "art." ou "súmula" em Direitos Humanos e recusa a citação
+"regra N" - o detalhe e as duas saídas estão no `docs/estoque_de_geradas.md`.
 
 ### F1 — o "Onde estudar primeiro" lê a árvore ✅
 

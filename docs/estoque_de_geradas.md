@@ -113,8 +113,10 @@ O `git pull --rebase` é porque o robô da coleta faz push todo dia.
 A conta de cada lote (decisão 73): o déficit do tema - as questões das faixas de
 treino de 04/10 a 07/11 menos as reais ainda não respondidas nos nós dele -
 dividido entre os nós de subassunto do tema, no máximo 20 por nó (5 no nó que é
-um artigo só). Gere uma semana por vez, alguns dias antes: o /geradas sorteia
-pela matéria, e o estoque de um tema ainda não estudado entraria no treino.
+um artigo só). Os lotes 2 a 56 foram feitos todos em 03/10 (escolha sua); como
+o /geradas sorteia pela matéria, o treino rápido já mistura temas que ainda não
+estudei (está nas pendências). Os lotes 50 e 57 ficaram de fora - ver "Os lotes
+2 a 56", abaixo.
 
 ### 05 a 10/10
 
@@ -323,7 +325,7 @@ pela matéria, e o estoque de um tema ainda não estudado entraria no treino.
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Regimes de cumprimento da pena" --quantas 20
    ```
-50. **29/10 · DH · Regras de Mandela - parte 1 (regras 1 a 35)** - Regras de aplicação geral: 20 (3 variação + 17 do zero)
+50. **29/10 · DH · Regras de Mandela - parte 1 (regras 1 a 35)** - Regras de aplicação geral: 20 (3 variação + 17 do zero) - **pendente** (a citação "regra N" é recusada; ver abaixo)
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Regras de aplicação geral" --quantas 20
    ```
@@ -354,7 +356,7 @@ pela matéria, e o estoque de um tema ainda não estudado entraria no treino.
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Monitoração eletrônica" --quantas 20
    ```
-57. **05/11 · DH · Regras de Mandela - parte 2 (regras 36 em diante)** - Pessoal do estabelecimento prisional: 20 (3 variação + 17 do zero)
+57. **05/11 · DH · Regras de Mandela - parte 2 (regras 36 em diante)** - Pessoal do estabelecimento prisional: 20 (3 variação + 17 do zero) - **pendente** (a citação "regra N" é recusada; ver abaixo)
    ```powershell
    .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Pessoal do estabelecimento prisional" --quantas 20
    ```
@@ -410,7 +412,40 @@ Qconcursos, como o plano manda.
   genérico da prova complementar. Agora a variação com escopo grava a matéria e
   o assunto do escopo.
 
+## Os lotes 2 a 56, feitos em 03/10/2026
+
+- **O que entrou:** 666 questões em 54 lotes (todos, menos o 50), um commit por
+  semana de uso: 05-10/10, 210 (`989f9e4`); 12-17/10, 160 (`53da083`);
+  19-24/10, 141 (`9b4d649`); 26-31/10, 103 (`43ce39f`); 02-07/11, 52. Com o lote
+  1, o estoque tem 685: Português 165, LEP 138, Constitucional 136, Direitos
+  Humanos 114, Penal 107, Raciocínio Lógico 25. No banco e no JSON, 69 → 735.
+- **Recusas:** nenhuma. **Repetidas:** 5, no lote 6 - o mesmo comando
+  ("Assinale a alternativa correta quanto à concordância verbal.") em seis
+  questões de alternativas diferentes; a importação guardou uma (ver
+  "Cuidados"). As 5 foram reescritas com enunciados próprios e repostas com um
+  pedido de 5 no mesmo nó.
+- **O texto de lei:** conferido na compilação da Câmara (LEP, CF, CP e CPP),
+  como manda a lista de leis. Entraram as mudanças de 2024 a 2026: LEP, art. 41,
+  § 1º (quem suspende visita é o juiz da execução) e § 2º, e art. 41-A; art. 112
+  (o caput e os percentuais do hediondo, de 70% a 85%) e o exame criminológico
+  do § 1º; art. 126, § 9º; art. 146-B, VI a VIII, e art. 146-E; CPP, art. 310 (a
+  audiência de custódia por videoconferência). Os incisos I a IV do art. 112,
+  reescritos em 2026, ficaram de fora: a redação compilada repete percentuais e
+  é fácil de errar.
+- **Os lotes 50 e 57, pendentes (40 questões):** são as Regras de Mandela, e em
+  Direitos Humanos a importação exige "art." ou "súmula" na fonte
+  (`manual.CITA_ARTIGO`). A regra de Mandela se cita como "regra 12.1" - e essa
+  citação é recusada. Escrever "art." no lugar de "regra" seria citar errado.
+  Duas saídas, à sua escolha: aceitar "regra" na importação (mudança de código,
+  uma subetapa) ou citar, ao lado da regra, o artigo da LEP ou da CF que diz a
+  mesma coisa, só quando disser.
+
 ## Cuidados
+
+- **Enunciado repetido não entra.** A gerada é única pelo enunciado (a
+  `impressao`): dois comandos genéricos iguais, com alternativas diferentes,
+  viram uma questão só, e o resto sai como "repetida(s), ignorada(s)". Escreva
+  cada enunciado com o que ele cobra.
 
 - **Leia as questões ao treinar.** Elas são material auxiliar (🟣); a que estiver
   errada, marque no treino com "essa questão está errada" - ela sai do sorteio.
