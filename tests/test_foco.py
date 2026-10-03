@@ -877,12 +877,15 @@ def _com_assunto(
     prova: str | None = None,
     banca: str = "FEPESE",
 ) -> QuestaoDeProva:
-    """Uma questao ja classificada. `prova` fora do padrao a torna reforco."""
+    """Uma questao ja classificada. `prova` fora do padrao a tira do alvo: ela
+    so entra como complementar com a evidencia gravada e a prova aceita
+    (`_aceitar`)."""
     return QuestaoDeProva(
         prova_url=prova or f"https://fepese.test/{ano}/{cargo}.pdf",
         concurso_url=CONCURSO_DE_2019,
         banca=banca, ano=ano, cargo=cargo, numero=numero, materia=materia,
         assunto=assunto,
+        evidencia=None if prova is None else "complementar",
         enunciado=f"Sobre {assunto or materia}, questão {numero}?",
         alternativas={"a": "x", "b": "y"}, resposta="a",
         impressao=f"{materia}-{assunto}-{numero}",
@@ -893,7 +896,7 @@ def test_a_secao_mostra_o_assunto_e_quantas_questoes_ele_deve_valer(
     cliente, com_quadro_do_edital
 ):
     """A LEP vale 10 no edital. Com 6 das 10 marcas da materia num assunto,
-    ele deve valer 6 questoes da prova."""
+    sao 6 questoes esperadas na prova."""
     with sessao() as s:
         s.add(_concurso())
         for n in range(1, 7):
@@ -906,6 +909,17 @@ def test_a_secao_mostra_o_assunto_e_quantas_questoes_ele_deve_valer(
     assert "Onde estudar primeiro" in texto
     assert "Progressão de regime" in texto
     assert "6 questões esperadas" in texto
+
+
+def _aceitar(*provas: str) -> None:
+    """Grava as provas como aceitas no acervo complementar (o arquivo da 3B)."""
+    import json
+
+    from radar.servico import complementar
+
+    complementar.caminho_do_registro().write_text(json.dumps(
+        {"provas": [{"prova_url": url, "aceita": True} for url in provas]}),
+        encoding="utf-8")
 
 
 def test_o_assunto_pequeno_em_que_eu_erro_passa_na_frente_do_grande(
@@ -944,23 +958,67 @@ def test_o_assunto_nunca_treinado_nao_aparece_como_zero_por_cento(
     assert "0% em 0" not in texto
 
 
-def test_a_tela_separa_o_que_e_meu_do_que_e_reforco(cliente, com_quadro_do_edital):
-    """Os dois numeros nunca aparecem somados: uma questao da minha prova nao
-    vale o mesmo que uma de outro concurso da mesma banca."""
+OUTRO_CONCURSO = "https://fepese.test/outro-concurso.pdf"
+
+
+def _alvo_e_complementar(s) -> None:
+    """2 questoes do cargo e 2 de outro assunto; 8 de outro concurso da banca."""
+    s.add(_concurso())
+    for n in range(1, 3):
+        s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+    for n in range(3, 5):
+        s.add(_com_assunto(n, "Lei de Execução Penal", "Faltas disciplinares"))
+    for n in range(5, 13):
+        s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime",
+                           cargo="Merendeira", prova=OUTRO_CONCURSO))
+
+
+def test_a_tela_separa_o_que_e_do_cargo_do_que_e_complementar(
+    cliente, com_quadro_do_edital
+):
+    """As duas fatias, cada uma sobre a sua base, e nunca somadas: uma questao
+    da minha prova nao vale o mesmo que uma de outro concurso da mesma banca."""
     with sessao() as s:
-        s.add(_concurso())
-        for n in range(1, 3):
-            s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
-        for n in range(3, 11):
-            s.add(_com_assunto(
-                n, "Lei de Execução Penal", "Progressão de regime",
-                cargo="Merendeira", prova="https://fepese.test/outro-concurso.pdf",
-            ))
+        _alvo_e_complementar(s)
+    _aceitar(OUTRO_CONCURSO)
 
     texto = cliente.get("/analises").text
 
-    assert "2 do meu cargo" in texto
-    assert "8 de reforço" in texto
+    assert "2 de 4 nas provas do cargo" in texto
+    assert "8 de 8 no acervo" in texto
+    assert "com peso 0,25 só na ordem" in texto
+
+
+def test_o_complementar_nao_muda_as_questoes_esperadas_do_cargo(
+    cliente, com_quadro_do_edital
+):
+    """A regra inviolavel 1, na tela: 2 das 4 marcas do cargo numa materia de
+    10 sao 5 questoes esperadas, com ou sem as 8 do complementar. Ate a Etapa
+    8 elas somavam: (2 + 8) de 12 davam 8,3."""
+    with sessao() as s:
+        _alvo_e_complementar(s)
+    _aceitar(OUTRO_CONCURSO)
+
+    linhas = {l.assunto: l for l in foco.montar().onde_comecar}
+
+    assert linhas["Progressão de regime"].esperadas == 5.0
+    assert linhas["Faltas disciplinares"].esperadas == 5.0
+    assert linhas["Progressão de regime"].complementar == 8
+
+
+def test_prova_complementar_nao_aceita_fica_fora_do_onde_estudar(
+    cliente, com_quadro_do_edital
+):
+    """A mesma regra da incidencia: prova que o levantamento da 3B nao aceitou
+    nao entra em estatistica nenhuma - antes entrava qualquer caderno da
+    banca."""
+    with sessao() as s:
+        _alvo_e_complementar(s)
+
+    linhas = {l.assunto: l for l in foco.montar().onde_comecar}
+
+    assert linhas["Progressão de regime"].complementar == 0
+    assert "com peso 0,25 só na ordem" not in cliente.get("/analises").text
 
 
 def test_o_assunto_de_direito_ganha_o_link_para_a_lei(cliente, com_quadro_do_edital):
@@ -1055,7 +1113,7 @@ def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital)
 
     texto = cliente.get("/analises").text
 
-    assert "deve valer 10 questões e eu acerto 40%" in texto
+    assert "10 questões esperadas pelas provas do cargo, e eu acerto 40%" in texto
     assert "6 pontos a ganhar" in texto
 
 

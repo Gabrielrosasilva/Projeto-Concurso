@@ -8,9 +8,9 @@ Complementar é toda prova de uma banca do alvo (a FEPESE) que **não** é do me
 
 No acervo de hoje: **183 provas complementares**, 7356 questões. Delas, **22** passam na validação inteira (extração sem defeito e gabarito definitivo), **106** servem para classificar mas ficam fora dos padrões de cobrança, e **55** são recusadas.
 
-## O que ainda não foi feito
+## Onde isto está
 
-Este relatório é o **levantamento**. Nada entrou em estatística nenhuma por causa dele. O que vem depois, na ordem, e só com a sua aprovação: você escolhe as provas, elas passam pela validação que lê o PDF, são classificadas por matéria (com conferência por amostra) e só então ganham a linha própria na incidência.
+O levantamento já virou acervo (Etapa 3B): **122 provas** estão aceitas no `data/acervo_complementar.json` e têm a **linha própria na incidência**, sempre separada da do alvo e contada em questão distinta. Parte das questões delas foi classificada por conteúdo, com procedência; o resto conta só na matéria que o caderno declara. O que falta: a sua conferência das classificações automáticas, por amostra; e os padrões de cobrança do complementar (tipo de questão, pegadinha), que ainda não são calculados - a linha dele mostra a contagem.
 
 ## Quem entra no acervo, pela regra do edital de 2019
 

@@ -14,13 +14,15 @@ voltou a rodar e commitou `coleta: 2026-10-02`. O `coleta.yml` roda
 `pytest -q` ANTES de coletar, e passo que falha aborta o job - o commit e a
 prova de que a suite passou no Linux.
 
-- 🔴 **O backup das 23h30 nao funciona** (achado na auditoria da Etapa 8,
-  03/10). Os logs de `data/logs/` registram 6 execucoes - 27/09, 29/09,
-  30/09 (duas), 01/10 e 02/10 - e todas falharam no primeiro passo: "cannot
-  pull with rebase: You have unstaged changes". O `radar sincronizar` tenta o
-  pull com mudanca local no disco e para; a tela Mais e o `radar status`
-  avisam, mas nada foi para o GitHub por ele. **Combinado:** o conserto e uma
-  etapa propria, logo depois da 8;
+- ⚪ **Conferir a primeira noite do backup consertado** (03/10, decisao 64).
+  O `radar sincronizar` deixou de exigir a pasta limpa e o `git add` deixou de
+  receber arquivo que nao existe; o comando foi rodado de verdade numa copia
+  do repositorio, com o banco real e a pasta suja. Falta a primeira execucao
+  da tarefa das 23h30 no repositorio de verdade: o log de
+  `data/logs/sincronizar-2026-10-03.log` (ou a tela Mais) tem que terminar em
+  `RESULTADO: ok`, e o GitHub ganhar um commit `sincronizar: 2026-10-03` -
+  e com ele os 4 simulados de 28 e 29/09, que ate hoje so existem no
+  `radar.db`;
 - 🔴 **`?tema=` na tela Macetes** (achado na conferencia da 7A, 03/10): o
   parametro que forca o tema claro/escuro pela URL e o mesmo nome do filtro
   "Materia ou tema" do recorte por banca. `/macetes?tema=claro` pinta a tela
@@ -31,10 +33,12 @@ prova de que a suite passou no Linux.
 
 ## B. O desenho do estudo (decisao tomada, desenho aberto)
 
-Veio do primeiro dia do Ciclo 1 (28/09) e esta registrado em
-[decisoes.md](decisoes.md) como **direcao**. Nada disso virou codigo.
+Veio do primeiro dia do Ciclo 1 (28/09) e foi registrado em
+[decisoes.md](decisoes.md) como **direcao**. As etapas 2 a 6B transformaram a
+maior parte em codigo - o que foi feito de cada sugestao esta marcado abaixo;
+o que sobra esta nos itens 🟡 e nas B.7 a B.10.
 
-O que foi observado:
+O que foi observado em 28/09:
 
 - o conteudo e o peso de cada faixa vieram do **edital de 2019**; a frequencia
   com que a FEPESE cobra cada tema nunca foi medida, porque as questoes nao
@@ -47,7 +51,7 @@ O que foi observado:
   penal"): nao ha distribuicao por artigo;
 - as 40 questoes geradas sao todas `do_zero` (nenhuma ancorada em questao real).
 
-Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
+Sugestoes de 28/09, em ordem de impacto, e o que foi feito de cada uma:
 
 1. 🟡 gravar assunto e artigo nas questoes FEPESE de Direito, comecando pelas
    provas de Policia Penal e Agente Penitenciario SC. **Feito na 3A para as
@@ -126,7 +130,9 @@ classificacao ainda" em Portugues):
   **A tela de Conferencia lista so o alvo**: para conferir o complementar ela
   precisa de um filtro de evidencia, que ainda nao existe. **Decidido em 02/10
   (decisao 18): fica para a Etapa 5**, quando a classificacao passar a
-  escolher questao para treino. Ate la o complementar vale como esta, com a
+  escolher questao para treino - **e a Etapa 5 nao o fez** (ela passou a
+  escolher pela classificacao, mas a tela continua so com o alvo; achado da
+  varredura de 03/10). Ate la o complementar vale como esta, com a
   procedencia a vista;
 - **as questoes sem linha**: 81 do lote 2 (conteudo de outro cargo, de
   proposito) e, em Portugues e Raciocinio Logico, as que o catalogo nao cobre
@@ -173,16 +179,13 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 
 ## D. Combinado para depois
 
-- 🔴 **`config/leis.yml`**: conferir a lista `mudancas` (leis alteradas depois
-  das provas). Esta vazia; a tela de Macetes diz "ainda nao gravada" em vez de
-  inventar. **Ponto de partida, levantado na 6B (02/10):** as mudancas da LEP
-  depois de 2019, todas no texto compilado da Camara - Lei 13.964/2019 (RDD,
-  art. 112 em percentuais, saida temporaria), Lei 14.843/2024 (exame
-  criminologico na progressao, saida temporaria so para estudo, art. 124
-  revogado, monitoracao), Lei 14.994/2024 (art. 41, § 1º: o juiz suspende os
-  direitos; § 2º), Lei 15.280/2025 (art. 119-A), Lei 15.295/2025 (art. 9º-A),
-  Leis 15.358, 15.402, 15.407 e 15.410/2026 (art. 112 com regra geral de 1/6 e
-  hediondos de 70% a 85%, RDD, arts. 41-A e 41-B, art. 50, IX, art. 86);
+- 🟡 **Conferir a lista de leis alteradas** (`config/leis.yml`, `mudancas`;
+  decisao 65). Ela existe desde 03/10: 15 itens, escritos pelo Claude Code a
+  partir do texto compilado (Camara e ALESC), que pegam 17 questoes de 2013 e
+  2019 - todos `conferida: false`, e por isso o aviso sai com o 🟣. Para cada
+  item, leia a evidencia em [leis_alteradas.md](leis_alteradas.md) e troque
+  para `conferida: true` (ou apague o item). Comece pelas 5 em que o gabarito
+  oficial ficou errado: 2013 q64 e q66, 2019 q46, q71 e q75;
 - 🔴 **Conferir as 61 fichas da 6B** (Hoje > Fichas, botao "Conferi esta
   ficha", ou `radar fichas --conferir <tema>`), comecando pelas da semana. Na
   conferencia, vale olhar os nos de cada uma: 13 ficaram sem no (decisao 43);
@@ -217,14 +220,6 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   assunto). Prazo: antes de 09/11;
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
-- 🔴 **Os dois exemplos de geracao da §23 nao existem na arvore** (auditoria
-  da Etapa 8): "Direito Penal > Aplicacao da lei penal > Lei penal no tempo"
-  (o programa de 2019 nao lista o tema) e "LEP > Progressao de regime > Art.
-  112" (a LEP e um assunto so, e nenhuma questao do alvo deu esse no). O
-  `radar gerar` recusa e sugere, como deve, e o escopo fechado funciona com os
-  nos que existem (docs/auditoria_final.md). **Decisao sua:** criar os dois
-  caminhos como nos manuais, com procedencia, ou deixar a arvore so com o
-  edital e a classificacao;
 - 🔴 **Macetes, "Quantas questoes caem numa prova"** (auditoria da Etapa 8):
   a fatia tem a base no centro do grafico, mas a media "8.5/prova" nao diz em
   quantas provas - a amostra fica pela metade (regra inviolavel 3);
@@ -248,3 +243,46 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 - **C1b, sirene para a Guarda Municipal de Florianopolis e de Balneario
   Camboriu**: nao e para fazer. O `de_olho` ja avisa com 👀 quando sair algo,
   que e tudo o que eu quero (ver decisoes.md).
+
+## F. Achados da varredura de 03/10 (depois da Etapa 8)
+
+A varredura dos docs contra o codigo e o banco achou estes pontos, que nenhuma
+etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
+(decisoes 63 a 66 e a limpeza dos docs); estes ficam:
+
+- 🔴 **O "Onde estudar primeiro" nao le a arvore de conteudos.** Ele ainda
+  tira o assunto da coluna `assunto` (zerada em 25/09) e do catalogo de
+  Portugues e Raciocinio Logico. A decisao 9 da 3A previa a leitura por no na
+  Etapa 4, e isso nao foi feito. Consequencia na tela: as 9 materias de
+  Direito aparecem como "nenhuma questao minha delas esta classificada",
+  quando as 170 do alvo estao classificadas e conferidas desde 02/10;
+- 🔴 **Macetes, "O costume de qualquer banca"**: a contagem e "sobre o acervo
+  inteiro", entao, na FEPESE, junta o alvo, o complementar e as provas que a
+  3B recusou num numero so. E recorte de exploracao, mas e estatistica: pede
+  as evidencias separadas (regra inviolavel 1) e so as provas aceitas;
+- 🔴 **Os padroes de cobranca do complementar nunca sao calculados**: o
+  `entra_nos_padroes` da validacao so aparece nos relatorios, e a linha
+  complementar da incidencia mostra so a contagem;
+- 🟡 **O modo simulado da geracao nao pondera pelo peso do edital**: a §8 pede
+  "respeitando o edital, o peso das materias"; hoje ele sorteia pela materia;
+- 🟡 **`geradas.origem_de` acha a questao real so pela impressao**, com
+  `limit(1)`: em 3 das 20 geradas por variacao a impressao bate com 3 questoes
+  da mesma prova, e o selo pode apontar a questao errada. A regra do projeto e
+  reconhecer pela chave (enunciado + alternativas);
+- 🟡 **`radar desempenho --materia "Lingua Portuguesa"`** (sem acento) devolve
+  "Nada respondido": a busca do nome da materia e sensivel a acento;
+- 🟡 **§19 do novo.md**: a tela Meu desempenho nao mostra a data da ultima
+  revisao de cada conteudo nem a evolucao por assunto (o servico ja guarda a
+  ultima data do anotado);
+- 🟡 **§14, item 7 do novo.md ("quais conceitos aparecem associados")**: as
+  402 classificacoes sao todas principais; nenhuma questao tem conteudo
+  associado, e a pergunta nao tem resposta;
+- 🟡 **Minimos fixos fora do `config/amostra.yml`**: `MINIMO_PARA_EVOLUCAO`
+  (20, `servico/metricas.py`), `MINIMO_PARA_TENDENCIA` (50, `macetes.py`),
+  `PROVAS_PARA_TENDENCIA` (3, `servico/cartoes.py`) e o `length < 3` de tres
+  templates (`foco.html`, `home.html`, `previsao.html`). Estao declarados no
+  `CLAUDE.md` como excecao; leva-los ao `config/amostra.yml` e decisao sua;
+- ⚪ **A lista de leis alteradas so tem o que as provas de 2013 e 2019
+  cobraram.** Mudanca que nenhuma questao cobra (a saida temporaria so para
+  estudo, as policias penais da EC 104/2019) fica de fora do aviso - esta em
+  `docs/leis_alteradas.md`, "Casos de fronteira".

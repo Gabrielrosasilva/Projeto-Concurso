@@ -1,6 +1,6 @@
 # Auditoria dos dados de estudo
 
-> Gerado por `radar auditar` em 01/10/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
+> Gerado por `radar auditar` em 03/10/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
 
 ## O que foi conferido
 
@@ -89,9 +89,9 @@ Pela classificacao principal de cada questao; sem classificacao e pendente. Conf
 
 | Prova | Questoes | Completa | Parcial | Pendente | Conferidas |
 |---|---|---|---|---|---|
-| 2013 Agente Penitenciário | 70 | 56 | 2 | 12 | 0 |
-| 2019 Agente Penitenciário - Feminino (AP) | 100 | 90 | 7 | 3 | 0 |
-| 2016 Agente de Segurança Socioeducativo (AS) | 70 | 0 | 0 | 70 | 0 |
+| 2013 Agente Penitenciário | 70 | 56 | 2 | 12 | 70 |
+| 2019 Agente Penitenciário - Feminino (AP) | 100 | 90 | 7 | 3 | 100 |
+| 2016 Agente de Segurança Socioeducativo (AS) | 70 | 29 | 6 | 35 | 0 |
 
 ## 2013 · Agente Penitenciário
 

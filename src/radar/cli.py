@@ -2125,14 +2125,71 @@ def _descartar_vazios(sim: bool) -> None:
 #   commit + push - o robo passa a conhece-los na proxima execucao
 
 
+def _pasta_do_git() -> Path:
+    """Onde o git roda: a raiz do projeto. Funcao, e nao constante, para o
+    teste com git de verdade apontar para um repositorio de mentira."""
+    return config.RAIZ
+
+
 def _git(*argumentos: str) -> subprocess.CompletedProcess:
     """Roda um comando git na pasta do projeto e devolve o resultado."""
     return subprocess.run(
         ["git", *argumentos],
         capture_output=True,
         text=True,
-        cwd=Path(__file__).resolve().parent.parent.parent,
+        cwd=_pasta_do_git(),
     )
+
+
+def _saida_do_git(resultado: subprocess.CompletedProcess) -> str:
+    return (resultado.stderr or resultado.stdout or "").strip()
+
+
+def _mudados_sem_commit() -> list[str]:
+    """Os arquivos versionados mudados e nao commitados (os novos nao contam:
+    eles nao atrapalham o git)."""
+    status = _git("status", "--porcelain", "--untracked-files=no")
+    return [linha[3:] for linha in (status.stdout or "").splitlines() if linha.strip()]
+
+
+def _trazer_do_github() -> str | None:
+    """O passo 1: traz o que esta no GitHub. Devolve o erro, ou None.
+
+    Ate 03/10/2026 era um `git pull --rebase`, e o rebase se recusa a rodar
+    com QUALQUER arquivo versionado mudado na pasta: o codigo de uma etapa pela
+    metade bastava, e o backup das 23h30 falhou assim todos os dias desde
+    27/09. Agora sao dois caminhos, e nenhum mexe no que eu nao commitei:
+
+    - o de todo dia: avancar ate o GitHub (`merge --ff-only`). O git deixa
+      avancar com a pasta suja, desde que o que chega - a coleta do robo mexe
+      so em data/concursos.json e data/eventos.json - nao caia em cima de um
+      arquivo mudado aqui. Se cair, ele recusa sem tocar em nada;
+    - quando ha commit meu que nao subiu e o robo subiu outro, as historias se
+      separaram e so o rebase junta. Ele so roda com a pasta limpa e, se der
+      conflito, volta tudo como estava (`rebase --abort`).
+    """
+    busca = _git("fetch", "origin", "main")
+    if busca.returncode != 0:
+        return _saida_do_git(busca)
+
+    avanco = _git("merge", "--ff-only", "origin/main")
+    if avanco.returncode == 0:
+        return None
+
+    mudados = _mudados_sem_commit()
+    if mudados:
+        lista = ", ".join(mudados[:5]) + (" e outros" if len(mudados) > 5 else "")
+        return (f"{_saida_do_git(avanco)}\n"
+                f"Ha {len(mudados)} arquivo(s) mudado(s) sem commit ({lista}), e o "
+                f"git nao junta o GitHub por cima deles: commite ou guarde "
+                f"(git stash) e rode de novo")
+
+    rebase = _git("rebase", "origin/main")
+    if rebase.returncode != 0:
+        _git("rebase", "--abort")
+        return (f"{_saida_do_git(rebase)}\n"
+                f"O rebase deu conflito e foi desfeito: a pasta esta como antes")
+    return None
 
 
 ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
@@ -2172,13 +2229,14 @@ def sincronizar(
 
     So mexe nos arquivos de `ARQUIVOS_DO_RADAR` - entre eles o
     `data/simulados.json`, a unica copia do meu historico de treino fora do
-    radar.db. O que mais estiver mudado na pasta fica como esta.
+    radar.db. O que mais estiver mudado na pasta fica como esta: nem o pull
+    nem o commit tocam nele.
     """
     console.print("[bold]1/6[/] Trazendo o que o robo coletou")
-    pull = _git("pull", "--rebase", "origin", "main")
-    if pull.returncode != 0:
+    erro = _trazer_do_github()
+    if erro:
         console.print("[red]O pull falhou.[/] Resolva a mao e rode de novo:\n")
-        console.print(f"[dim]{(pull.stderr or pull.stdout).strip()}[/]")
+        console.print(f"[dim]{escape(erro)}[/]")
         raise typer.Exit(code=1)
 
     console.print("[bold]2/6[/] Lendo o JSON para dentro do banco")
@@ -2240,15 +2298,27 @@ def sincronizar(
     )
 
     console.print("[bold]5/6[/] Commitando")
-    _git("add", *ARQUIVOS_DO_RADAR)
-    mudou = _git("diff", "--staged", "--quiet").returncode != 0
+    # So os que existem. Um caminho que nao existe faz o `git add` parar com
+    # erro SEM adicionar nenhum - e o backup dizia "nada mudou" sem ter
+    # guardado nada. O data/macetes.json e o data/explicacoes.json so nascem
+    # no primeiro import do Claude Code.
+    arquivos = [a for a in ARQUIVOS_DO_RADAR
+                if (config.diretorio_dados() / Path(a).name).exists()]
+    adicao = _git("add", "--", *arquivos)
+    if adicao.returncode != 0:
+        console.print("[red]O git add falhou.[/]")
+        console.print(f"[dim]{escape(_saida_do_git(adicao))}[/]")
+        raise typer.Exit(code=1)
+    mudou = _git("diff", "--staged", "--quiet", "--", *arquivos).returncode != 0
     if not mudou:
         console.print("   [dim]Nada mudou: nao ha o que commitar.[/]")
         console.print("\n[green]Em dia com o GitHub.[/]")
         return
 
     data = agora().strftime("%Y-%m-%d")
-    commit = _git("commit", "-m", f"sincronizar: {data}")
+    # Com os caminhos no fim, o commit leva SO os arquivos do radar, mesmo que
+    # eu tenha outra coisa no stage pela metade.
+    commit = _git("commit", "-m", f"sincronizar: {data}", "--", *arquivos)
     if commit.returncode != 0:
         console.print("[red]O commit falhou.[/]")
         console.print(f"[dim]{(commit.stderr or commit.stdout).strip()}[/]")

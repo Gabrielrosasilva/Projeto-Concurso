@@ -29,9 +29,9 @@ existe código".
 | 10 | Quais geradas fazer | ✅ atende | teste `[quais questões geradas...]`; ficha real: 0 geradas e o `radar gerar` de cada nó |
 | 11 | Quais erros revisar | ✅ atende | teste `[quais erros devo revisar depois]`; ficha real: 0 no radar, 0 no caderno, nunca somados |
 | 12 | Por que priorizado hoje | ✅ atende | teste `[por que esse conteúdo...]`; ficha real: o R+7 de 06/10 e cada fator |
-| 13 | Selecionar matéria → assunto → subassunto → elemento e gerar sem sair do escopo | ⚠️ atende o mecanismo, **não os dois exemplos com a árvore real** | testes dos dois pedidos na árvore de fixture; no real, os dois caminhos não existem (abaixo) |
+| 13 | Selecionar matéria → assunto → subassunto → elemento e gerar sem sair do escopo | ✅ atende (corrigido em 03/10: estava ⚠️) | testes dos dois pedidos na árvore de fixture; no real, os literais são recusados com sugestão e os equivalentes reais rodam no escopo - como decidido na Etapa 5 (decisão 66) |
 | 14 | Números iguais em todas as telas | ✅ atende | teste `os_numeros_sao_iguais_em_todas_as_telas`; real: 28/09 e 29/09, semana 1 e Minhas matérias |
-| 15 | Incidência do alvo não muda por prova complementar | ✅ atende | teste `a_incidencia_do_alvo_nao_muda...`; real (numa cópia): 426 linhas iguais com 0 ou 122 provas complementares |
+| 15 | Incidência do alvo não muda por prova complementar | ✅ atende | teste `a_incidencia_do_alvo_nao_muda...`; real (numa cópia): 426 linhas iguais com 0 ou 122 provas complementares. **A auditoria conferiu só a incidência**: o "Onde estudar primeiro" somava o complementar nas questões esperadas - corrigido em 03/10 (decisão 63) |
 | 16 | Nenhum dado antigo perdido | ✅ atende | teste `nenhum_dado_antigo_e_perdido_na_migracao`; real: contagens contra a cópia de antes da Etapa 2 |
 | 17 | ANKI desativado, mas reativável | ✅ atende | teste `o_anki_esta_desativado_e_religa...`; real: `radar hoje` com a config e com uma cópia religada |
 | 18 | Nenhuma estatística sem amostra | ⚠️ atende, **com 1 lugar sem a amostra completa** | teste `nenhuma_estatistica_aparece_sem_amostra`; real: 31 aberturas de tela, 114 porcentagens (abaixo) |
@@ -42,7 +42,7 @@ E o roteiro da etapa, além da §23:
 | Conferência | Situação |
 |---|---|
 | Actions verde | ✅ até 02/10 (o `coleta: 2026-10-02` do radar-bot); a primeira execução com o código da 7A, 7B e 8 é a de hoje, e fica para conferir |
-| Uso real do backup das 23h30 | ❌ **falhou em todas as execuções registradas** (abaixo) |
+| Uso real do backup das 23h30 | ❌ **falhou em todas as execuções registradas** (abaixo) - consertado em 03/10 (decisão 64); falta conferir a primeira noite |
 | Uso real do caderno de erros | ✅ |
 | Uso real da tela Semanas | ✅ |
 
@@ -107,8 +107,11 @@ LEP, art. 119").
 | Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis (a lei penal no tempo, CP art. 2º) | 7 chamadas | 1 (do complementar) + do zero na fonte oficial do mesmo nó | sim |
 | Lei de Execução Penal > Lei nº 7.210 > Regimes de cumprimento da pena | 7 chamadas | 1 (do alvo) + do zero na fonte oficial do mesmo nó | sim |
 
-**Pendência:** criar (ou não) os nós dos dois exemplos é escolha sua - ver
-pendências.
+~~**Pendência:** criar (ou não) os nós dos dois exemplos é escolha sua - ver
+pendências.~~ **Corrigido em 03/10:** isso já estava decidido desde a Etapa 5 -
+rodar os equivalentes reais e mostrar a recusa dos literais, em vez de criar
+nós que o edital não lista (decisão 66). A auditoria reabriu a questão por
+engano; o item 13 atende.
 
 ## 3. Os seis itens finais (14 a 19)
 
@@ -201,3 +204,19 @@ a resposta certa da gerada é "Resposta da IA". As duas reais não têm a frase.
 - **Semanas, com dado real:** a semana 1 com 68 questões, 17 acertos, 26
   erros, 40% de acerto (sem consulta: 40%), 6h50, 2 erros no caderno e a
   linha da conta igual à das outras telas.
+
+## Correções depois da auditoria (03/10/2026)
+
+A varredura dos docs, depois desta auditoria, achou quatro pontos que mudam o
+que está acima:
+
+1. **Item 13 → ✅.** A escolha sobre os dois exemplos da §23 já tinha sido feita
+   na Etapa 5 e só não estava no `decisoes.md`; a auditoria a reabriu como
+   pendência (decisão 66). A §23 fica com **18 de 19 itens atendidos**; o que
+   falta é o item 18 (a média "por prova" do gráfico dos Macetes).
+2. **O item 15 foi conferido só na incidência.** O "Onde estudar primeiro"
+   somava o alvo e o complementar nas questões esperadas, e o complementar era
+   qualquer caderno da FEPESE (decisão 63, corrigido).
+3. **O backup das 23h30** foi consertado (decisão 64).
+4. **A lista de leis alteradas** foi gravada, por conferir (decisão 65,
+   `docs/leis_alteradas.md`).

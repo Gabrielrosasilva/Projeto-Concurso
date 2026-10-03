@@ -15,12 +15,13 @@ LEP = MateriaDoEdital(nome="Lei de Execução Penal", questoes=10)
 PORTUGUES = MateriaDoEdital(nome="Língua Portuguesa", questoes=15)
 
 
-def _linhas(contagens, acertos=None, materias=None, origens=None):
+def _linhas(contagens, acertos=None, materias=None, origens=None, peso=0.0):
     return onde_estudar.montar(
         materias or [LEP, PORTUGUES],
         contagens,
         acertos or {},
         origens or {},
+        peso_do_complementar=peso,
     )
 
 
@@ -30,8 +31,8 @@ def test_questoes_esperadas_e_o_peso_do_edital_vezes_a_fatia():
     """Metade das marcas da materia num assunto, numa materia de 10 questoes,
     sao 5 questoes esperadas. E a conta inteira, e ela e so isso."""
     linhas = _linhas({
-        ("Lei de Execução Penal", "Progressão de regime"): (5, 5),
-        ("Lei de Execução Penal", "Faltas disciplinares"): (5, 5),
+        ("Lei de Execução Penal", "Progressão de regime"): (5, 0),
+        ("Lei de Execução Penal", "Faltas disciplinares"): (5, 0),
     })
 
     assert [l.esperadas for l in linhas] == [5.0, 5.0]
@@ -138,17 +139,88 @@ def test_a_ordem_nao_muda_entre_duas_aberturas():
            [l.assunto for l in _linhas(contagens)]
 
 
-# --- o reforco --------------------------------------------------------------
+# --- o acervo complementar --------------------------------------------------
+#
+# A regra inviolavel 1 do novo.md: a incidencia do alvo e a do complementar
+# nunca viram um numero so. Ate a Etapa 8 o "reforco" somava na fatia - 13 do
+# cargo e 57 de outros concursos davam uma "questao esperada" so.
 
-def test_o_reforco_conta_na_fatia_mas_fica_separado_na_linha():
-    """Os dois numeros somam na conta e nunca aparecem somados na tela: uma
-    questao da minha prova nao vale o mesmo que uma de outro concurso."""
-    linhas = _linhas({("Lei de Execução Penal", "Progressão de regime"): (2, 8)})
+def test_o_complementar_nunca_entra_nas_questoes_esperadas():
+    """As questoes esperadas e os pontos sao so das provas do cargo, com o
+    complementar pesando ou nao na ordem."""
+    contagens = {
+        ("Lei de Execução Penal", "Progressão de regime"): (2, 30),
+        ("Lei de Execução Penal", "Faltas disciplinares"): (2, 0),
+    }
+    sem = {l.assunto: l.esperadas for l in _linhas(contagens)}
+    com = {l.assunto: l.esperadas for l in _linhas(contagens, peso=0.25)}
 
-    assert linhas[0].proprias == 2
-    assert linhas[0].reforco == 8
-    assert linhas[0].apoio == 10
-    assert linhas[0].base_da_materia == 10
+    assert sem == com == {"Progressão de regime": 5.0, "Faltas disciplinares": 5.0}
+
+
+def test_as_duas_fatias_ficam_separadas_na_linha():
+    """Cada fatia sobre a sua base: a do cargo sobre as marcas da materia nas
+    provas do cargo, e a do complementar sobre as dele."""
+    linhas = _linhas({
+        ("Lei de Execução Penal", "Progressão de regime"): (2, 8),
+        ("Lei de Execução Penal", "Faltas disciplinares"): (2, 32),
+    }, peso=0.25)
+    progressao = next(l for l in linhas if l.assunto == "Progressão de regime")
+
+    assert (progressao.proprias, progressao.base_do_alvo) == (2, 4)
+    assert (progressao.complementar, progressao.base_do_complementar) == (8, 40)
+    assert progressao.fatia_no_alvo == 0.5
+    assert progressao.fatia_no_complementar == 0.2
+
+
+def test_o_complementar_pesa_so_na_ordem_com_o_peso_declarado():
+    """Peso 0,25: o tamanho que ordena e 10 x (fatia do cargo + 0,25 x fatia
+    do complementar). Com peso 0, a ordem e so a do cargo."""
+    contagens = {
+        ("Lei de Execução Penal", "A"): (3, 0),     # 10 x 3/5 = 6
+        ("Lei de Execução Penal", "B"): (2, 30),    # 10 x (2/5 + 0,25 x 1) = 6,5
+    }
+
+    assert [l.assunto for l in _linhas(contagens)] == ["A", "B"]
+    linhas = _linhas(contagens, peso=0.25)
+    assert [l.assunto for l in linhas] == ["B", "A"]
+    assert linhas[0].tamanho == 6.5
+    assert linhas[0].esperadas == 4.0           # o numero do cargo nao mudou
+
+
+def test_assunto_que_so_caiu_no_complementar_entra_sem_questao_esperada():
+    """Com peso, ele entra na ordem - e com zero questao esperada, dizendo
+    isso. Sem peso, ele nao entra: nada dele e do cargo."""
+    contagens = {
+        ("Lei de Execução Penal", "Do cargo"): (4, 0),
+        ("Lei de Execução Penal", "Só da banca"): (0, 8),
+    }
+
+    assert [l.assunto for l in _linhas(contagens)] == ["Do cargo"]
+    so_da_banca = next(l for l in _linhas(contagens, peso=0.25)
+                       if l.assunto == "Só da banca")
+    assert so_da_banca.so_no_complementar
+    assert so_da_banca.esperadas == 0.0
+
+
+def test_a_conclusao_do_assunto_so_do_complementar_diz_de_onde_ele_vem():
+    """Ele so chega ao topo quando o do cargo ja esta dominado. A frase diz
+    que ele vem do complementar, e nao promete questao do cargo."""
+    linhas = _linhas(
+        {
+            ("Lei de Execução Penal", "Do cargo"): (4, 0),
+            ("Lei de Execução Penal", "Só da banca"): (0, 8),
+        },
+        acertos={("Lei de Execução Penal", "Do cargo"): (10, 10)},
+        peso=0.25,
+    )
+    frase = onde_estudar.conclusao(linhas)
+
+    assert linhas[0].assunto == "Só da banca"
+    assert "vem primeiro pelo acervo complementar" in frase
+    assert "8 de 8 marcas" in frase
+    assert "peso 0,25" in frase
+    assert "não há questão esperada dele" in frase
 
 
 # --- a conclusao ------------------------------------------------------------
@@ -160,9 +232,12 @@ def test_a_conclusao_sai_dos_numeros_da_primeira_linha():
     )
     frase = onde_estudar.conclusao(linhas)
 
-    assert "10 questões" in frase
+    assert "10 questões esperadas pelas provas do cargo" in frase
     assert "40%" in frase
     assert "6 pontos a ganhar" in frase
+    # A ordem e regra de priorizacao, e nao previsao: a frase nao diz quanto
+    # o assunto "deve valer" na prova.
+    assert "deve valer" not in frase
 
 
 def test_a_conclusao_de_assunto_nunca_treinado_nao_promete_pontos():

@@ -139,6 +139,13 @@ def do_assunto(materia: str | None, assunto: str | None) -> Lei | None:
 #                                 # dia da prova, so o ano
 #     marcas: [progressao]        # procuradas no enunciado e nas alternativas
 #     materias: [Lei de Execucao Penal]   # opcional: so nestas materias
+#     procedencia: Claude Code (...), 03/10/2026, pela compilacao da Camara
+#     conferida: false
+#
+# O item que eu escrevo nao precisa de procedencia: ele e meu. O que uma IA
+# escreveu leva a `procedencia` (regra do projeto: dado de IA so entra com
+# ela) e fica POR CONFERIR - o aviso aparece, mas com o 🟣 e o "por
+# conferir" - ate eu marcar `conferida: true`.
 
 
 @dataclass(frozen=True)
@@ -148,12 +155,24 @@ class Mudanca:
     tema: str
     lei: str
     o_que_mudou: str | None = None
+    procedencia: str | None = None
+    conferida: bool = True
+
+
+def _por_conferir(item: dict) -> bool:
+    """Item escrito por IA (tem procedencia) e ainda nao marcado conferido."""
+    return bool(item.get("procedencia")) and not item.get("conferida")
 
 
 def mudancas_conferidas() -> bool:
     """A lista de leis alteradas existe no YAML? Sem ela, nao ha aviso - e a
     tela precisa dizer que a falta e da lista, e nao da lei."""
     return "mudancas" in _arquivo()
+
+
+def mudancas_por_conferir() -> int:
+    """Quantos itens da lista vieram de IA e eu ainda nao conferi."""
+    return sum(1 for item in _arquivo().get("mudancas") or [] if _por_conferir(item))
 
 
 def mudancas_da_questao(
@@ -182,5 +201,7 @@ def mudancas_da_questao(
             tema=str(item.get("tema") or ""),
             lei=str(item.get("lei") or ""),
             o_que_mudou=item.get("o_que_mudou") or None,
+            procedencia=item.get("procedencia") or None,
+            conferida=not _por_conferir(item),
         ))
     return achadas

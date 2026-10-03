@@ -58,7 +58,10 @@ Regras dos selos:
 - Questão de prova antiga cujo tema mudou por lei posterior ganha o aviso
   **"⚠ A lei mudou depois desta prova"** (EC 104/2019, Lei 13.964/2019 — Pacote
   Anticrime —, alterações na LEP, CP, CPP etc.). A lista de temas afetados mora em
-  `config/leis.yml`, não no código.
+  `config/leis.yml`, não no código. Desde 03/10/2026 ela existe (15 itens,
+  conferidos questão a questão no texto compilado: `docs/leis_alteradas.md`),
+  escrita pelo Claude Code e por conferir - o aviso sai com o 🟣 até eu marcar
+  cada item `conferida: true`.
 
 ## Navegação (sitemap)
 
@@ -80,6 +83,13 @@ Onde cada tela atual vai parar:
 | `macetes.html` | Revisão |
 | `acompanhando.html`, `calendario.html`, `previsao.html` | Concursos |
 
+**Como ficou** (Etapa 7B, 03/10/2026): sete destinos, e não seis - o
+📅 **Hoje** (o cronograma do dia, que o Ciclo 1 trouxe) entrou primeiro. Meu
+foco é a home; Estudar tem Simulado e Gerar questões; Revisão tem o Caderno de
+erros e os Macetes; Análises tem Edital (o `foco.html`), Minhas matérias, Meu
+desempenho, Incidência e Conferência; Concursos tem Todos, Acompanhando,
+Calendário e Previsão; Mais tem as fontes e evidências.
+
 ## Home — só 5 blocos, nada além disso
 
 1. **🎯 Polícia Penal SC**: status do concurso (edital aberto? previsão?).
@@ -93,8 +103,10 @@ Onde cada tela atual vai parar:
 Cálculo **sem IA**, explicável na tela:
 `prioridade = incidência do assunto na FEPESE × (1 − minha taxa de acerto) × fator de tempo desde a última revisão`
 
-- Com menos de 5 respostas no assunto, a taxa de acerto é tratada como "desconhecida"
-  e o assunto entra como "ainda não treinado".
+- Com menos respostas no assunto que o mínimo do `config/amostra.yml` (era 5
+  nesta especificação; hoje é 10 no assunto e 20 na matéria, desde a Etapa 4),
+  a taxa de acerto é tratada como "desconhecida" e o assunto entra como "ainda
+  não treinado".
 - O cartão mostra o porquê: "Alta incidência + 32% de acerto em 25 questões".
 
 ## Simulados

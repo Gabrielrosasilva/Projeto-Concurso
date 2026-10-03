@@ -1,23 +1,31 @@
 """`radar sincronizar`: o que o robo sabe e o que eu sei, no mesmo lugar.
 
-Nenhum teste aqui chama o git de verdade: o `_git` e trocado por um falso que
-so anota o que teria sido rodado. O que importa testar nao e o git - e a
-ORDEM, porque e ela que protege o dado:
+Quase todo teste aqui troca o `_git` por um falso que so anota o que teria
+sido rodado: o que eles testam e a ORDEM, porque e ela que protege o dado:
 
     pull -> importar -> reclassificar -> exportar -> commit -> push
 
 Importar antes de exportar nao e detalhe. Na ordem inversa, eu escreveria o
 meu banco por cima do JSON antes de ler o que o robo ja avisou, e ele mandaria
 tudo de novo no dia seguinte.
+
+O fim do arquivo usa o git DE VERDADE, em repositorios dentro do tmp_path (sem
+internet: a "origem" e uma pasta). Foi o git falso que deixou passar os dois
+defeitos que derrubaram o backup das 23h30 de 27/09 a 03/10: o `pull
+--rebase` se recusa a rodar com a pasta suja, e o `git add` com um arquivo que
+nao existe nao adiciona nenhum.
 """
+import shutil
 import subprocess
+from dataclasses import dataclass
+from pathlib import Path
 
 import pytest
 from typer.testing import CliRunner
 
 from sqlalchemy import select
 
-from radar import acervo, cli, servico
+from radar import acervo, cli, config, servico
 from radar.db import sessao
 from radar.models import Concurso
 
@@ -91,7 +99,9 @@ def test_a_sequencia_do_git(banco_temporario, git):
     resultado = runner.invoke(cli.app, ["sincronizar"])
 
     assert resultado.exit_code == 0
-    assert git.verbos == ["pull", "add", "diff", "commit", "push"]
+    # O "pull" sao dois passos: buscar e avancar so para a frente.
+    assert git.verbos == ["fetch", "merge", "add", "diff", "commit", "push"]
+    assert ("merge", "--ff-only", "origin/main") in git.comandos
 
 
 def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
@@ -107,10 +117,19 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     conteudos e as classificacoes. Desde a Etapa 6B (02/10/2026), as fichas
     de estudo: a conferencia que eu marco na tela mora la.
     """
+    # Os cinco que o sincronizar nao escreve - existem porque outro comando
+    # os gravou antes.
+    for nome in ("assuntos", "questoes_geradas", "macetes", "explicacoes", "fichas"):
+        (config.diretorio_dados() / f"{nome}.json").write_text("[]", encoding="utf-8")
+
     runner.invoke(cli.app, ["sincronizar"])
 
     (add,) = [c for c in git.comandos if c[0] == "add"]
-    assert set(add[1:]) == {
+    (commit,) = [c for c in git.comandos if c[0] == "commit"]
+    assert add[1] == "--"
+    # O commit leva os caminhos no fim: so eles, mesmo com outra coisa no stage.
+    assert commit[commit.index("--") + 1:] == add[2:]
+    assert set(add[2:]) == {
         "data/concursos.json", "data/eventos.json", "data/assuntos.json",
         "data/questoes_geradas.json", "data/simulados.json",
         "data/macetes.json", "data/explicacoes.json",
@@ -122,19 +141,43 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     }
 
 
+def test_arquivo_que_nao_existe_fica_fora_do_git_add(banco_temporario, git):
+    """O defeito escondido atras do pull: um caminho que nao existe faz o `git
+    add` parar com erro sem adicionar NENHUM, e o backup dizia "nada mudou".
+    O data/macetes.json e o data/explicacoes.json ainda nao existem."""
+    runner.invoke(cli.app, ["sincronizar"])
+
+    (add,) = [c for c in git.comandos if c[0] == "add"]
+    assert "data/macetes.json" not in add
+    assert "data/explicacoes.json" not in add
+    assert "data/simulados.json" in add          # este o sincronizar escreve
+
+
+def test_git_add_que_falha_para_e_nao_diz_que_nada_mudou(banco_temporario,
+                                                         monkeypatch):
+    falso = GitFalso(falha_em=("add",))
+    monkeypatch.setattr(cli, "_git", falso)
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert resultado.exit_code == 1
+    assert "git add falhou" in resultado.output
+    assert "Nada mudou" not in resultado.output
+
+
 # --- quando da errado -------------------------------------------------------
 
 def test_pull_que_falha_para_tudo(banco_temporario, monkeypatch):
-    """Conflito de rebase e coisa para eu resolver a mao. O comando nao tenta
-    adivinhar, e principalmente nao exporta por cima."""
-    falso = GitFalso(falha_em=("pull",))
+    """Sem GitHub (sem rede, sem credencial), nada continua. O comando nao
+    tenta adivinhar, e principalmente nao exporta por cima."""
+    falso = GitFalso(falha_em=("fetch",))
     monkeypatch.setattr(cli, "_git", falso)
 
     resultado = runner.invoke(cli.app, ["sincronizar"])
 
     assert resultado.exit_code == 1
     assert "pull falhou" in resultado.output
-    assert falso.verbos == ["pull"]          # nao passou disso
+    assert falso.verbos == ["fetch"]          # nao passou disso
 
 
 def test_push_que_falha_avisa_que_o_commit_ficou_feito(banco_temporario,
@@ -293,3 +336,155 @@ def test_limpa_os_simulados_vazios_antes_de_exportar(banco_temporario, git):
 
     linhas = json.loads(acervo.caminho_dos_simulados().read_text(encoding="utf-8"))
     assert len(linhas) == 1
+
+
+# --- com o git de verdade (03/10/2026) --------------------------------------
+#
+# Tres repositorios no tmp_path: a "origem" (o GitHub, uma pasta bare), o
+# "robo" (o Actions, que sobe a coleta) e o "local" (esta maquina). O teste
+# so pula se a maquina nao tiver git - o runner do Actions tem.
+
+@dataclass
+class Repos:
+    origem: Path
+    robo: Path
+    local: Path
+
+
+def _rodar(pasta: Path, *argumentos: str) -> str:
+    resultado = subprocess.run(["git", *argumentos], cwd=pasta,
+                               capture_output=True, text=True)
+    assert resultado.returncode == 0, resultado.stderr
+    return resultado.stdout.strip()
+
+
+def _identidade(pasta: Path) -> None:
+    _rodar(pasta, "config", "user.name", "teste")
+    _rodar(pasta, "config", "user.email", "teste@exemplo.test")
+    _rodar(pasta, "config", "commit.gpgsign", "false")
+
+
+def _escrever(arquivo: Path, texto: str) -> None:
+    arquivo.parent.mkdir(parents=True, exist_ok=True)
+    arquivo.write_text(texto, encoding="utf-8")
+
+
+@pytest.fixture
+def repos(banco_temporario, tmp_path, monkeypatch):
+    if shutil.which("git") is None:
+        pytest.skip("sem git nesta maquina")
+
+    origem = tmp_path / "origem.git"
+    _rodar(tmp_path, "init", "--bare", "-b", "main", str(origem))
+
+    robo = tmp_path / "robo"
+    _rodar(tmp_path, "clone", str(origem), str(robo))
+    _identidade(robo)
+    _escrever(robo / "data" / "concursos.json", "[]\n")
+    _escrever(robo / "data" / "eventos.json", "[]\n")
+    _escrever(robo / "codigo.py", "x = 1\n")
+    _rodar(robo, "add", ".")
+    _rodar(robo, "commit", "-m", "inicio")
+    _rodar(robo, "push", "origin", "HEAD:main")
+
+    local = tmp_path / "local"
+    _rodar(tmp_path, "clone", str(origem), str(local))
+    _identidade(local)
+
+    monkeypatch.setattr(cli, "_pasta_do_git", lambda: local)
+    monkeypatch.setenv("RADAR_DATA_DIR", str(local / "data"))
+    return Repos(origem=origem, robo=robo, local=local)
+
+
+def _coleta_do_robo(repos: Repos) -> None:
+    """O Actions sobe a coleta do dia: so data/eventos.json muda."""
+    _escrever(repos.robo / "data" / "eventos.json", "[ ]\n")
+    _rodar(repos.robo, "commit", "-am", "coleta: 2026-10-03")
+    _rodar(repos.robo, "push", "origin", "HEAD:main")
+
+
+def _assuntos(pasta: Path) -> list[str]:
+    return _rodar(pasta, "log", "--format=%s").splitlines()
+
+
+def test_com_a_pasta_suja_o_backup_traz_a_coleta_e_commita_so_o_radar(repos):
+    """O caso de todo dia desde 27/09: uma etapa pela metade na pasta, e a
+    coleta do robo no GitHub. Antes, o `pull --rebase` recusava."""
+    _coleta_do_robo(repos)
+    _escrever(repos.local / "codigo.py", "x = 2  # pela metade\n")
+    _escrever(repos.local / "rascunho.txt", "nao versionado\n")
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert resultado.exit_code == 0, resultado.output
+    assert "Sincronizado" in resultado.output
+    assert _assuntos(repos.local)[1:] == ["coleta: 2026-10-03", "inicio"]
+    assert _assuntos(repos.local)[0].startswith("sincronizar: ")
+    # Subiu: o GitHub esta no mesmo commit que a pasta.
+    assert _rodar(repos.origem, "rev-parse", "main") == \
+        _rodar(repos.local, "rev-parse", "HEAD")
+    # O commit levou so o data/, e a etapa pela metade ficou como estava.
+    levados = _rodar(repos.local, "show", "--name-only", "--format=", "HEAD").split()
+    assert levados and all(nome.startswith("data/") for nome in levados)
+    assert "data/simulados.json" in levados
+    assert (repos.local / "codigo.py").read_text(encoding="utf-8") == \
+        "x = 2  # pela metade\n"
+    pendentes = _rodar(repos.local, "status", "--porcelain").splitlines()
+    assert "M codigo.py" in [linha.strip() for linha in pendentes]
+
+
+def test_sem_nada_novo_no_github_o_backup_tambem_roda(repos):
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert resultado.exit_code == 0, resultado.output
+    assert _assuntos(repos.local)[0].startswith("sincronizar: ")
+
+
+def test_historias_separadas_com_a_pasta_suja_param_sem_tocar_em_nada(repos):
+    """Commit meu que nao subiu, a coleta do robo no GitHub, e a pasta suja: so
+    o rebase juntaria, e ele nao roda com a pasta suja. O comando para ANTES
+    de importar, e a pasta fica exatamente como estava."""
+    _escrever(repos.local / "codigo.py", "x = 3\n")
+    _rodar(repos.local, "commit", "-am", "meu commit que nao subiu")
+    _coleta_do_robo(repos)
+    _escrever(repos.local / "data" / "concursos.json", "[]  \n")   # pela metade
+    antes = _rodar(repos.local, "rev-parse", "HEAD")
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert resultado.exit_code == 1
+    assert "commite ou guarde" in resultado.output
+    assert _rodar(repos.local, "rev-parse", "HEAD") == antes
+    assert (repos.local / "data" / "concursos.json").read_text(encoding="utf-8") \
+        == "[]  \n"
+    assert not (repos.local / "data" / "simulados.json").exists()   # nao exportou
+    assert _rodar(repos.local, "stash", "list") == ""
+    assert not (repos.local / ".git" / "rebase-merge").exists()
+
+
+def test_historias_separadas_com_a_pasta_limpa_viram_rebase(repos):
+    _escrever(repos.local / "codigo.py", "x = 3\n")
+    _rodar(repos.local, "commit", "-am", "meu commit que nao subiu")
+    _coleta_do_robo(repos)
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert resultado.exit_code == 0, resultado.output
+    assert _assuntos(repos.local)[1:] == [
+        "meu commit que nao subiu", "coleta: 2026-10-03", "inicio"]
+    assert _rodar(repos.origem, "rev-parse", "main") == \
+        _rodar(repos.local, "rev-parse", "HEAD")
+
+
+def test_a_coleta_que_cai_num_arquivo_mudado_aqui_nao_passa_por_cima(repos):
+    """O robo mexeu no data/eventos.json, e o meu tambem esta mudado sem
+    commit: o git recusa avancar, e o arquivo continua o meu."""
+    _coleta_do_robo(repos)
+    _escrever(repos.local / "data" / "eventos.json", "[]\n\n")
+
+    resultado = runner.invoke(cli.app, ["sincronizar"])
+
+    assert resultado.exit_code == 1
+    assert "data/eventos.json" in resultado.output
+    assert (repos.local / "data" / "eventos.json").read_text(encoding="utf-8") \
+        == "[]\n\n"

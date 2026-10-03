@@ -3,8 +3,9 @@ Contexto permanente deste projeto, lido pelo Claude Code em toda sessao aberta
 nesta pasta. Curto de proposito. O que nao cabe aqui:
 
 - **[docs/novo.md](docs/novo.md)** — é o pedido: o que você quer que o sistema faça e as regras que não podem ser quebradas;
-- **[docs/progresso.md](docs/progresso.md)** — plano e os critérios de cada etapa;
 - **[docs/roteiro.md](docs/roteiro.md)** — plano e os critérios de cada etapa;
+- **[docs/progresso.md](docs/progresso.md)** — como cada etapa andou: situação,
+  arquivos, testes e o critério de conclusão marcado;
 - **[docs/decisoes.md](docs/decisoes.md)** — decisoes ja tomadas, com o motivo;
   nao se rediscutem. **Decisao que mudar, atualize la.**
 - **[docs/pendencias.md](docs/pendencias.md)** — o que falta, o que esta
@@ -47,8 +48,9 @@ Bombeiro Militar, Policia Cientifica). **A lista ordena, nao descarta** —
 nenhum concurso sai do radar por nao estar nela. Ela mora em
 `config/alvo.yml`, nunca no codigo; bater no alvo principal fura o filtro de
 distancia e o teto de avisos, e vale ate para noticia. A lista `de_olho` do
-mesmo arquivo fura o teto e ganha cartao na home para a **Guarda Municipal de
-Florianopolis e de Balneario Camboriu**, sem virar alvo nem entrar no estudo.
+mesmo arquivo fura o teto e ganha cartao na tela Analises > Edital para a
+**Guarda Municipal de Florianopolis e de Balneario Camboriu**, sem virar alvo
+nem entrar no estudo.
 
 Para todo o resto continuam valendo os criterios de sempre, nesta ordem:
 
@@ -112,19 +114,24 @@ conteudo com a amostra, a geracao com escopo fechado, a ficha de estudo de
 cada tema (61 em `data/fichas.json`), os selos do novo.md (🟢 oficial, 🔵
 acervo, 🟡 automatico, 🟣 IA) gravados no dado, e o site inteiro no design
 system. A **auditoria final** ([auditoria_final](docs/auditoria_final.md))
-confere a §23 do novo.md: **17 de 19 itens atendem com o dado real**.
+confere a §23 do novo.md: **18 de 19 itens atendem com o dado real**.
+**Correcoes depois da auditoria (03/10, decisoes 63 a 66):** o "Onde estudar
+primeiro" nao soma mais o alvo e o complementar; o backup das 23h30, que
+falhava desde 27/09, roda com a pasta suja; a lista de leis alteradas depois
+das provas existe (15 itens, 17 questoes, por conferir:
+[leis_alteradas](docs/leis_alteradas.md)); e os docs foram revistos.
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 50 geradas; banco na versao 4.
-**Falta, de voce:** conferir as 61 fichas e o complementar (as automaticas,
-por amostra - B.8); o **Ciclo 2**, depois do simulado de 07/11 e antes de
-09/11.
-**Quebrado:** o backup das 23h30 falhou em todas as execucoes desde 27/09 -
-**e a proxima etapa** (pendencia A).
-**Em aberto:** os nos dos dois exemplos de geracao da §23 (decisao sua), a
-media "por prova" dos Macetes sem o numero de provas, o `?tema=` dos Macetes,
-e o numero de questoes das faixas, que ainda e o do plano. **Actions:** verde
-ate 02/10; conferir o de 03/10, o primeiro com o codigo novo. Ordem e detalhe
-em [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
+**Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
+por amostra - B.8) e os 15 itens da lista de leis; o **Ciclo 2**, depois do
+simulado de 07/11 e antes de 09/11.
+**Conferir:** a primeira noite do backup consertado (`data/logs/` ou a tela
+Mais) e o Actions de 03/10, o primeiro com o codigo novo (pendencias A e D).
+**Em aberto:** a media "por prova" dos Macetes sem o numero de provas, o
+`?tema=` dos Macetes, o numero de questoes das faixas (ainda o do plano) e os
+achados da varredura de 03/10 - entre eles, o "Onde estudar" que ainda nao le
+a arvore de conteudos (pendencia F). Ordem e detalhe em
+[docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
 banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
@@ -133,9 +140,12 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 `servico` e um pacote, um arquivo por assunto; escreva `servico.funcao(...)`.
 **Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
 tela nenhuma refaz a conta, e template nenhum soma. **Todo minimo de amostra sai do
-`config/amostra.yml`**, pelo `radar/amostra.py`: nenhuma tela tem regua propria
-(o 3 do `servico/erros.py` e a excecao declarada - ele mede fatia de motivo de
-erro, nao acerto). **A prioridade de um tema sai do `config/prioridade.yml`**,
+`config/amostra.yml`**, pelo `radar/amostra.py`: nenhuma tela tem regua propria.
+As excecoes declaradas (pendencia F): o 3 do `servico/erros.py` (fatia de
+motivo de erro, nao acerto), o `MINIMO_PARA_EVOLUCAO` (20, `servico/metricas.py`),
+o `MINIMO_PARA_TENDENCIA` (50, `macetes.py`) e o "base pequena" de menos de 3
+provas (`PROVAS_PARA_TENDENCIA` no `servico/cartoes.py`, e o `length < 3` de
+tres templates). **A prioridade de um tema sai do `config/prioridade.yml`**,
 pelo `radar/prioridade.py`, e a ficha de estudo do `radar/fichas.py`: o tema e
 reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
 `data/fichas.json`, 🟣 com a procedencia. **O desempenho por conteudo e do

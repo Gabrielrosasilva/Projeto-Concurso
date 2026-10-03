@@ -8,16 +8,28 @@ O alvo principal e **Policia Penal SC**, e depois dele as outras carreiras de
 seguranca publica. Para o resto, o filtro que importa e **onde a prova e
 aplicada** — Grande Florianopolis e arredores.
 
-**Estado: fases 1 a 6, 8 e 9 prontas**, fase 7 parcial. Tres fontes coletando,
-elegibilidade lida do edital, 5.928 questoes catalogadas, simulado, previsao de
-abertura, a aba Macetes, a home "Meu foco" e a aba Acompanhando.
+**Estado (03/10/2026):** o radar (fases 1 a 15), a especificacao e o pedido de
+evolucao (etapas 1A a 8) prontos, e o Ciclo 1 de estudo rodando desde 28/09.
+Tres fontes coletando, 8.433 questoes no acervo (as 170 do alvo classificadas
+e conferidas), simulado, geracao de questoes com escopo fechado, ficha de
+estudo de cada tema, a tela Hoje e as analises. O que falta esta no "Estado
+atual" do [CLAUDE.md](CLAUDE.md) e em [docs/pendencias.md](docs/pendencias.md).
 
 Os outros documentos do projeto:
 
 - **[CLAUDE.md](CLAUDE.md)** — contexto permanente, para trabalhar no codigo;
+- **[docs/novo.md](docs/novo.md)** — o pedido de evolucao e as regras que nao
+  podem ser quebradas; **[docs/roteiro.md](docs/roteiro.md)** — o plano dele,
+  etapa por etapa; **[docs/progresso.md](docs/progresso.md)** — como cada etapa
+  andou: situacao, testes e criterio de conclusao;
 - **[docs/decisoes.md](docs/decisoes.md)** — as decisoes ja tomadas, com o motivo;
+- **[docs/pendencias.md](docs/pendencias.md)** — o que falta, o que esta
+  quebrado e o que ficou combinado;
 - **[docs/historico.md](docs/historico.md)** — como cada fase foi feita, com os
   numeros medidos;
+- **[docs/auditoria_final.md](docs/auditoria_final.md)** e
+  **[docs/leis_alteradas.md](docs/leis_alteradas.md)** — a conferencia contra a
+  §23 do pedido, e a das leis que mudaram depois das provas;
 - **COMO_LIGAR_A_IA.txt** — o passo a passo da unica parte que custa dinheiro.
 
 ## Instalando
@@ -138,8 +150,17 @@ dois: `git pull` → `radar importar` → `radar exportar` → commit → push.
 A ordem importa. Importar **antes** de exportar e o que traz as marcas de
 aviso do robo para o seu banco antes de voce escrever o JSON de volta — na
 ordem inversa, ele mandaria tudo de novo no dia seguinte. Ele so encosta nos
-JSON do radar em `data/`; o resto da pasta fica como esta, e conflito de
-rebase ele nao tenta resolver: para e mostra o erro.
+JSON do radar em `data/`; o resto da pasta fica como esta.
+
+**A pasta nao precisa estar limpa** (desde 03/10/2026). O "pull" e um `git
+fetch` seguido de um `git merge --ff-only`: o GitHub entra avancando so para a
+frente, e o codigo de uma etapa pela metade fica onde esta - a coleta do robo
+mexe so em `data/concursos.json` e `data/eventos.json`. O commit leva so os
+JSON do radar que existem, mesmo com outra coisa no stage. Ele para, e diz
+por que, em dois casos: quando o que chega do GitHub cai num arquivo que esta
+mudado aqui sem commit, e quando ha commit seu que ainda nao subiu ao mesmo
+tempo que um do robo - ai so o rebase junta as duas historias, e ele so roda
+com a pasta limpa (se der conflito, ele desfaz e a pasta fica como estava).
 
 Um deles e **`data/simulados.json`**: cada simulado e cada resposta que voce
 deu. E o unico dado que nao se reconstroi de lugar nenhum, e ate 25/09/2026
@@ -219,20 +240,18 @@ fim do endereco vale so para aquela pagina.
 
 ### A pagina web, aba por aba
 
-| aba | para que serve |
+Sete destinos na barra do topo, cada um com as suas paginas (desde a Etapa
+7B, 03/10/2026):
+
+| aba | o que tem la |
 |---|---|
-| **Hoje** | o cronograma do dia, e onde marco como foi ([Cronograma](#cronograma)) |
-| **Perto de mim** | o padrao: `nucleo` e `proximo`, com os filtros |
-| **Inscricoes abertas** | ordenada pelo prazo; 7 dias ou menos aparece em vermelho |
-| **Meus favoritos** | o que eu marquei, ordenado por quem fecha primeiro |
-| **Noticias e andamento** | procura em **tudo**, e ordena por fase, nao por data |
-| **Simulado** | responder questoes das provas do acervo |
-| **Semanas** | uma semana por cartao, por ciclo: dias completos, acerto, setas |
-| **Minhas matérias** | o progresso por materia, a barra da meta e a projecao |
-| **Caderno de erros** | o que eu errei, a regra certa, e a revisao 1-7-30 |
-| **Macetes** | o costume da banca, por contagem |
-| **Previsao de abertura** | onde vale ficar de olho agora, municipio por municipio |
-| **Calendario** | explica e entrega o `.ics` dos prazos |
+| **📅 Hoje** | o cronograma do dia, e onde marco como foi ([Cronograma](#cronograma)); dentro dela, **Semanas**, **Fichas** e o **Caderno de erros** |
+| **🎯 Meu foco** | a home: o alvo, o que estudar agora e o que revisar |
+| **📚 Estudar** | **Simulado** (questoes das provas do acervo) e **Gerar questoes** (🟣, so treino) |
+| **🧠 Revisao** | o **Caderno de erros** (a regra certa e a revisao 1-7-30) e os **Macetes** (o costume da banca, por contagem) |
+| **📊 Analises** | **Edital** (o edital contra as provas e onde estudar primeiro), **Minhas materias** (o progresso, a meta e a projecao), **Meu desempenho**, **Incidencia** e **Conferencia** |
+| **🏛 Concursos** | **Todos** (a lista, com busca, atalhos e filtros), **Acompanhando** (um bloco por favorito), **Calendario** (o `.ics` dos prazos) e **Previsao** (onde vale ficar de olho agora) |
+| **⚙ Mais** | fontes e evidencias, a auditoria e o ultimo backup |
 
 Os favoritos tem aba propria, **[Acompanhando](#como-a-tela-e-organizada)**.
 Ela substituiu o mural lateral, que mostrava os mesmos concursos num cartao
@@ -268,18 +287,12 @@ filtro** que nao achou nada.
 
 ### Como a tela e organizada
 
-No topo, quatro destinos e um menu:
+As abas estao na tabela de cima. Esta parte descreve as telas que mais pedem
+explicacao: **Analises > Edital**, **Acompanhando** e **Concursos**.
 
-| item | o que tem la |
-|---|---|
-| **Meu foco** | a home: a situacao do alvo principal |
-| **Concursos** | a lista, com busca, atalhos e filtros |
-| **Acompanhando** | um bloco por favorito: o que mudou e o que fazer agora |
-| **Estudar** | Macetes e Simulado, nesta ordem |
-| **Mais** | Previsao e Calendario |
-
-**Meu foco** e a pagina inicial, e responde "o que esta acontecendo com o
-concurso que eu espero?". Ela mostra se ha edital aberto, qual foi o ultimo
+**Analises > Edital** (`/analises`) foi a pagina inicial ate a Etapa 7B, com o
+nome de "Meu foco" - o nome passou para a home nova. Ela responde "o que esta
+acontecendo com o concurso que eu espero?". Ela mostra se ha edital aberto, qual foi o ultimo
 concurso, a banca e a validade; os sinais recentes (eventos e noticias do
 alvo); as materias do edital com o peso de cada uma, ao lado do que caiu de
 verdade nas provas **e do meu acerto em cada uma**; e um botao para treinar 20
@@ -298,7 +311,7 @@ tarde; "estudar as Regras de Mandela" e. A conta e esta, e nao ha nada alem
 dela:
 
     questoes esperadas = o peso da materia no edital
-                         x a fatia que aquele assunto ocupa nas provas
+                         x a fatia que aquele assunto ocupa nas provas do cargo
     pontos a ganhar    = questoes esperadas x (1 - seu acerto no simulado)
 
 Sao duas colunas porque nenhuma decide sozinha: um assunto de 10 questoes em
@@ -307,15 +320,21 @@ acerta 25% vale 3. O grafico e de barras deitadas, CSS puro, do maior para o
 menor, e uma frase curta em cima dele repete em portugues o que a primeira
 barra diz em pixel.
 
-Cada linha mostra **em quantas questoes ela se apoia**, e separa o que e seu do
-que nao e: "13 do meu cargo · 57 de reforco". Sao so duas provas do cargo no
-acervo, e duas provas nao sustentam uma fatia - o **reforco** e a mesma banca
-nas mesmas materias, em outros concursos. Os dois numeros nunca aparecem
-somados.
+Cada linha mostra **em quantas questoes ela se apoia**, uma fatia por
+evidencia e nunca somadas: "13 de 38 nas provas do cargo · 54 de 169 no acervo
+complementar, com peso 0,25 so na ordem". Sao so duas provas do cargo no
+acervo, e duas provas sustentam pouco uma fatia - por isso entra o **acervo
+complementar**: as provas da FEPESE **aceitas** no
+`data/acervo_complementar.json` (Etapa 3B). Ele nunca entra nas questoes
+esperadas nem nos pontos a ganhar (regra inviolavel 1 do novo.md): pesa so na
+**ordem**, com o peso do `config/prioridade.yml` - a mesma regra da prioridade
+das fichas -, e o assunto que so caiu no complementar aparece como "so no
+acervo complementar", sem questao esperada.
 
 Assunto que voce nunca treinou fica com barra **amarela** e entra na ordem so
-pelas questoes esperadas, dizendo isso na tela: sem acerto medido nao ha pontos
-a ganhar para calcular, e zero por cento seria mentira. Cada assunto de Direito
+pelo tamanho (as questoes esperadas, mais o complementar com o seu peso),
+dizendo isso na tela: sem acerto medido nao ha pontos a ganhar para calcular,
+e zero por cento seria mentira. Cada assunto de Direito
 ganha um link **"ler a lei"**, que vai para o Planalto (lei federal e
 Constituicao) ou para a ALESC (lei estadual de SC) e sai de `config/leis.yml`.
 E so link: o radar nao baixa nem guarda o texto de lei nenhuma.
@@ -1138,8 +1157,8 @@ Tres marcas, e elas nao valem a mesma coisa:
 
 Um bloco secundario pode ainda trazer uma lista **`de_olho`** de cidades. Hoje
 so a Guarda Municipal tem, com Florianopolis e Balneario Camboriu: nessas duas
-o aviso **fura o teto** (abre com 👀) e a cidade ganha um cartao "De olho" no
-Meu foco, com a situacao de cada uma. O cargo continua secundario - isso nao
+o aviso **fura o teto** (abre com 👀) e a cidade ganha um cartao "De olho" na
+tela Analises > Edital, com a situacao de cada uma. O cargo continua secundario - isso nao
 entra no estudo, que e do cargo que eu vou prestar.
 
 Tres cuidados que o arquivo toma, e que valem a leitura antes de mexer nele:
@@ -1401,16 +1420,17 @@ se baixa — e o radar continua so apontando o link da lei.
 
 #### A navegacao e a home
 
-A barra tem os seis destinos da especificacao: **Meu foco** (a home),
-**Estudar** (Simulado, Gerar questões), **Revisão** (Macetes), **Análises**
-(o edital contra as provas, onde estudar primeiro), **Concursos** (a lista,
-Acompanhando, Calendário, Previsão) e **Mais** (fontes e evidências).
+A barra tem os seis destinos da especificacao e mais um, o **Hoje** (o
+cronograma do dia, que o Ciclo 1 trouxe): **Hoje**, **Meu foco** (a home),
+**Estudar**, **Revisão**, **Análises**, **Concursos** e **Mais** - as paginas
+de cada um estao na tabela "A pagina web, aba por aba".
 
 A home tem três blocos — o alvo, **o que estudar agora** com [Começar
 treino], e **o que revisar** com [Revisar agora] — e duas faixas finas,
 evolução e concurso. Bloco sem dado convida: abaixo de 20 respostas, a
 evolução diz quantas faltam. A prioridade é peso no edital × (1 − meu
-acerto), e matéria com menos de 5 respostas conta como não treinada.
+acerto), e matéria com menos respostas que o mínimo da matéria no
+`config/amostra.yml` (hoje 20) conta como não treinada.
 
 #### O design system
 
@@ -1456,8 +1476,15 @@ de onde veio, e as partes nao se misturam:
 
 O aviso **⚠ A lei mudou depois desta prova** sai da lista `mudancas:` do
 `config/leis.yml`: tema, lei, quais anos de prova ficaram velhos e as palavras
-que reconhecem a questao. **Enquanto a lista nao existir, nenhuma questao
-ganha o aviso**, e a tela diz isso em vez de ficar calada.
+que reconhecem a questao. Sem a lista, nenhuma questao ganha o aviso, e a tela
+diz isso em vez de ficar calada.
+
+A lista existe desde 03/10/2026: 15 itens, que pegam 17 questoes das provas de
+2013 e 2019, conferidos questao a questao no texto compilado da lei (a
+evidencia esta em [docs/leis_alteradas.md](docs/leis_alteradas.md)). Eles foram
+escritos pelo Claude Code e estao **por conferir**: o aviso sai com o 🟣
+"Escrito por IA, por conferir" ate voce trocar `conferida: false` por
+`conferida: true` no item - ou apagar o item, se estiver errado.
 
 #### Sem pagar: o pedido em arquivo, respondido pelo Claude Code
 
@@ -1640,6 +1667,10 @@ pede administrador, nao pede senha):
 Se o PC estava desligado as 23:30, o backup roda assim que voce ligar - e por
 isso que as tarefas nascem de um XML e nao da linha de comando do `schtasks`,
 que nao tem essa opcao. Os logs com mais de 30 dias somem sozinhos.
+
+Ele roda com uma etapa pela metade na pasta: o `radar sincronizar` nao precisa
+da pasta limpa (acima, em "Trocando com o GitHub"). De 27/09 a 03/10/2026
+precisava, e o backup falhou em todas as noites.
 
 E cria **dois atalhos na Area de Trabalho**:
 
@@ -1854,7 +1885,10 @@ pytest -q
 ```
 
 Os testes usam arquivos de exemplo em `tests/fixtures/` e um SQLite temporario.
-**Nenhum deles vai a internet**, entao passam offline e rodam em menos de 1s.
+**Nenhum deles vai a internet**, entao passam offline. Sao ~2.400, e a suite
+inteira leva uns 25 minutos neste PC: durante o
+trabalho, rode so o arquivo do que mudou, e a suite inteira uma vez no fim -
+o `coleta.yml` roda a suite antes de coletar.
 
 ## Sobre as fontes
 

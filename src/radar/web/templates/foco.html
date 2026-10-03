@@ -440,7 +440,9 @@
                 if not a.repete_a_materia %}<span class="materia">{{ a.materia }}</span>{%
                 endif %}</span>
               <span class="assunto-valor">
-                {%- if a.pontos is not none -%}
+                {%- if a.so_no_complementar -%}
+                  só no acervo complementar
+                {%- elif a.pontos is not none -%}
                   {{ a.pontos | numero }} pontos a ganhar
                 {%- else -%}
                   {{ a.esperadas | numero }} questões esperadas
@@ -454,15 +456,21 @@
 
             <div class="apoio">
               <span>
-                {# Os dois numeros nunca aparecem somados: uma questao da minha
-                   prova vale mais que uma de outro concurso da mesma banca. #}
-                {{ a.proprias }} do meu cargo
-                {%- if a.reforco %} &middot; {{ a.reforco }} de reforço{% endif -%}
-                , de {{ a.base_da_materia }} marcadas em {{ a.materia }}
+                {# As duas fatias, cada uma sobre a sua base, e nunca somadas
+                   (regra inviolavel 1): uma questao da minha prova vale mais
+                   que uma de outro concurso da mesma banca. #}
+                {{ a.proprias }} de {{ a.base_do_alvo }} nas provas do cargo
+                {%- if a.peso_do_complementar and a.complementar %} &middot;
+                  {{ a.complementar }} de {{ a.base_do_complementar }} no acervo
+                  complementar, com peso {{ a.peso_do_complementar | numero(2) }} só na ordem
+                {%- endif -%}
               </span>
               <span>&middot;</span>
               <span>
-                {%- if a.pontos is not none -%}
+                {%- if a.so_no_complementar -%}
+                  nenhuma questão esperada: o assunto não caiu nas provas do cargo
+                  {%- if a.respondidas %}; acertei {{ a.acertos }} de {{ a.respondidas }}{% endif -%}
+                {%- elif a.pontos is not none -%}
                   {{ a.esperadas | numero }} questões esperadas, e eu acerto
                   {{ a.acerto | numero(0) }}% em {{ a.respondidas }} questão(ões) diferente(s)
                   {%- if a.dias_sem_revisar %}; {{ a.dias_sem_revisar }} dia(s) sem revisar (×{{ a.fator | numero }}){% endif -%}
@@ -482,13 +490,17 @@
         {% endfor %}
       </div>
 
+      {% set peso_c = p.onde_comecar[0].peso_do_complementar %}
       <p class="legenda">
         <strong>Questões esperadas</strong> é o peso da matéria no edital de
-        {{ p.ano_do_edital }} vezes a fatia que o assunto ocupa nas provas.
-        <strong>Pontos a ganhar</strong> é isso vezes o que eu ainda erro:
-        é o que está em jogo hoje, e não o tamanho do assunto. A ordem ainda
-        multiplica pelo <strong>tempo sem revisar</strong>: ×1 no dia, até ×2
-        depois de um mês. Assunto nunca treinado tem esse fator neutro.
+        {{ p.ano_do_edital }} vezes a fatia que o assunto ocupa nas provas do
+        cargo. <strong>Pontos a ganhar</strong> é isso vezes o que eu ainda
+        erro: é o que está em jogo hoje, e não o tamanho do assunto. A ordem
+        {% if peso_c %}soma à fatia do cargo a do acervo complementar com peso
+        {{ peso_c | numero(2) }} (<code>config/prioridade.yml</code>, a mesma
+        regra da prioridade das fichas), e {% endif %}multiplica pelo
+        <strong>tempo sem revisar</strong>: ×1 no dia, até ×2 depois de um mês.
+        Assunto nunca treinado tem esse fator neutro.
       </p>
 
       {% if p.onde_comecar | selectattr('pontos', 'none') | first %}
@@ -496,9 +508,11 @@
           As barras <span class="nao-sei">amarelas</span> são assuntos que eu
           nunca treinei, ou treinei menos de {{ MINIMO_NO_ASSUNTO }} questões -
           abaixo disso a porcentagem é sorte. Não dá para calcular pontos a
-          ganhar sem acerto medido, então elas entram pelas <strong>questões esperadas</strong> -
-          que é o máximo que elas poderiam valer. Treinar o assunto é o que
-          troca essa barra por uma azul, e o número por um de verdade.
+          ganhar sem acerto medido, então elas entram pelo tamanho do assunto
+          - as <strong>questões esperadas</strong>{% if peso_c %}, mais o
+          complementar com o seu peso{% endif %} -, que é o máximo que elas
+          poderiam valer. Treinar o assunto é o que troca essa barra por uma
+          azul, e o número por um de verdade.
         </p>
       {% endif %}
 
@@ -506,11 +520,17 @@
         {% set n_provas = p.anos_das_provas | length %}
         {{ selo(p.origens.estimativa, 'Base pequena') }}
         São só <strong>{{ n_provas }} prova{{ 's' if n_provas != 1 }}</strong>
-        do cargo no acervo ({{ p.anos_das_provas | join(' e ') }}), e isso não
-        sustenta uma fatia. Por isso entra o <strong>reforço</strong>: a
-        mesma banca, nas mesmas matérias, em outros concursos. Os dois números
-        ficam sempre separados acima - a questão da minha prova é a que conta
-        de verdade, e a de reforço só diz do costume da banca.
+        do cargo no acervo ({{ p.anos_das_provas | join(' e ') }}), e isso
+        sustenta pouco uma fatia.
+        {% if peso_c %}Por isso entra o <strong>acervo complementar</strong>:
+        as provas da mesma banca aceitas no levantamento da Etapa 3B
+        (<code>data/acervo_complementar.json</code>), nas mesmas matérias. Ele
+        nunca é somado ao do cargo: as questões esperadas e os pontos a ganhar
+        são só das provas do cargo, e o complementar pesa só na ordem - ele
+        diz do costume da banca, e não do que a prova do meu cargo cobrou.
+        {% else %}O acervo complementar está com peso 0 no
+        <code>config/prioridade.yml</code>: a ordem é só a das provas do cargo.
+        {% endif %}
       </p>
 
       {% if p.assuntos_fora_da_tela %}

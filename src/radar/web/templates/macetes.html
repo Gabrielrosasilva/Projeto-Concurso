@@ -101,6 +101,14 @@
       Até lá, nenhuma questão ganha o aviso - o que não quer dizer que a lei
       não tenha mudado.
     </p>
+  {% elif leis_por_conferir %}
+    <p class="ds-nota">
+      {{ selo('ia', 'Escrito por IA, por conferir') }} {{ leis_por_conferir }}
+      item(ns) da lista de leis alteradas em <code>config/leis.yml</code>
+      foram escritos pelo Claude Code, a partir do texto compilado da lei, e
+      ainda não foram conferidos por você: o aviso deles aparece com o 🟣 até
+      você marcar <code>conferida: true</code> em cada um.
+    </p>
   {% endif %}
 
   {# Sem nenhum macete importado, o "como trazer" aparece UMA vez aqui, e
@@ -127,7 +135,7 @@
           · <b>base pequena</b>{% endif %}
         </p>
         {% if c.com_lei_mudada %}
-          <p class="ds-aviso-lei">⚠ {{ c.com_lei_mudada }} questão(ões) com lei alterada depois da prova</p>
+          <p class="ds-aviso-lei">⚠ {{ c.com_lei_mudada }} questão(ões) com lei alterada depois da prova{% if leis_por_conferir %} {{ selo('ia', 'Escrito por IA, por conferir') }}{% endif %}</p>
         {% endif %}
 
         {% call bloco(c.origem, 'Padrão da banca') %}

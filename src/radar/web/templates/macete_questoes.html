@@ -49,6 +49,12 @@
       O aviso de lei alterada depende da lista em <code>config/leis.yml</code>,
       que ainda não foi conferida: nenhuma questão o recebe por enquanto.
     </p>
+  {% elif leis_por_conferir %}
+    <p class="ds-nota" style="margin-top:var(--esp-4)">
+      O aviso de lei alterada com o 🟣 vem de itens da lista em
+      <code>config/leis.yml</code> escritos pelo Claude Code e ainda não
+      conferidos por você.
+    </p>
   {% endif %}
 
   {% for r in relacionadas %}

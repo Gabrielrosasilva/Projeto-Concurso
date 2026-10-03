@@ -1594,8 +1594,9 @@ esta temporariamente desativado; aberto, essa frase sai e fica a da faixa
 minimizada da 6A. A frase segue a faixa desligada, e nao o nome do bloco: o
 teste religa o Anki num arquivo copiado e confere que ela desaparece.
 
-Lembrar a dobra entre recarregamentos ficou de fora: precisaria de
-`localStorage`, e nao foi pedido.
+Na primeira versao, lembrar a dobra entre recarregamentos tinha ficado de
+fora (precisaria de `localStorage`, e nao tinha sido pedido); a segunda
+mudanca acima a trouxe, no `static/dobra.js`.
 
 ## Etapa 5 — geracao de questoes com escopo fechado (02/10)
 
@@ -1773,3 +1774,52 @@ geracao e a media "por prova" do grafico de pizza dos Macetes, sem o numero de
 provas. Fora da §23: o backup nunca funcionou nos logs (desde 27/09), o
 caderno de erros e a Semanas funcionam com o dado real, e o Actions estava
 verde ate 02/10 - o de hoje, o primeiro com o codigo novo, fica para conferir.
+
+## Correcoes depois da auditoria (03/10)
+
+**O pedido:** os cinco pontos que a varredura dos docs achou depois da Etapa
+8, nesta ordem e um de cada vez, com um commit so no fim.
+
+**1. O "Onde estudar primeiro" somava o alvo e o complementar.** A conta das
+questoes esperadas usava as marcas do cargo e as do "reforco" no mesmo
+numerador e no mesmo denominador - a regra inviolavel 1 do novo.md nao deixa.
+E o reforco era qualquer caderno da FEPESE, sem olhar o levantamento da 3B.
+Agora as questoes esperadas e os pontos sao so das provas do cargo; o
+complementar, so das provas aceitas, pesa so na ordem, com o 0,25 do
+`config/prioridade.yml` - a mesma conta da prioridade das fichas -, e a tela
+mostra as duas fatias, cada uma sobre a sua base (decisao 63).
+
+**2. O backup das 23h30.** Falhava todas as noites desde 27/09 com "cannot
+pull with rebase: You have unstaged changes": o rebase recusa a pasta suja, e
+quase sempre havia uma etapa pela metade nela. Atras dele, o `git add` recebia
+tres arquivos que nao existem e, com isso, nao adicionava nenhum. O pull virou
+`fetch` + `merge --ff-only` (o rebase so com a pasta limpa, e desfeito se der
+conflito), e o `git add` e o commit levam so os arquivos do radar que existem
+(decisao 64). Os testes novos usam o git de verdade, em repositorios no
+`tmp_path`; e o comando rodou numa copia do repositorio, com o banco real.
+
+**3. A lista de leis alteradas.** Nunca tinha sido gravada: a decisao antiga
+esperava a conferencia do usuario antes. Foi feita questao a questao - as 115
+de Direito das duas provas, em cinco frentes paralelas, cada dispositivo no
+texto compilado da Camara ou da ALESC, com as datas das provas tiradas do
+acervo (10/11/2013 e 01/12/2019) - e deu 17 questoes em 15 itens. As leis de
+SC foram as que mais mudaram: a carreira cobrada nas duas provas (LC
+472/2009 e LC 675/2016) foi revogada, e o cargo virou Policial Penal (EC
+estadual 80/2020, LC 774/2021). A lista entrou com procedencia e por
+conferir, e o aviso sai com o 🟣 ate a conferencia (decisao 65); a evidencia
+esta em `docs/leis_alteradas.md`.
+
+**4. O erro da Etapa 8 nos docs.** A escolha da Etapa 5 sobre os dois exemplos
+de geracao da §23 (rodar os equivalentes reais e mostrar a recusa dos literais)
+nunca tinha ido para o `decisoes.md`; a auditoria da Etapa 8 nao a achou e a
+reabriu como pendencia, com o item 13 da §23 em ⚠️. O registro que faltava e
+a decisao 66; o item 13 passou a ✅ e a §23 ficou com 18 de 19 itens.
+
+**5. A limpeza geral dos docs.** Os dois relatorios gerados foram regerados (o
+do complementar dizia "nada entrou em estatistica" com 122 provas na
+incidencia, e o texto passou a depender de o acervo ter sido aplicado); o
+README, a especificacao e o CLAUDE.md perderam o que tinha ficado velho - a
+navegacao de antes do redesign, o estado de 5.928 questoes, o minimo de 5
+respostas, o tempo dos testes, o cartao "De olho" na home -; e as pendencias
+ganharam a secao F, com os 10 achados da varredura que nenhuma etapa tinha
+registrado. Commit e push uma vez so, no fim dos cinco itens, a pedido.

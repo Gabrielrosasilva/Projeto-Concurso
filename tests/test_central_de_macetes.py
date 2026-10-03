@@ -29,9 +29,16 @@ LEP_81 = dict(
 
 @pytest.fixture
 def config_propria(tmp_path, monkeypatch):
-    """Uma copia do config de verdade, para o teste poder mexer no leis.yml."""
+    """Uma copia do config de verdade, para o teste poder mexer no leis.yml.
+
+    Sem a lista `mudancas` de verdade: cada teste diz qual lista quer, e
+    nenhum depende do que o arquivo do projeto tem hoje."""
     pasta = tmp_path / "config"
     shutil.copytree(CONFIG, pasta)
+    arquivo = pasta / "leis.yml"
+    texto = arquivo.read_text(encoding="utf-8")
+    if "\nmudancas:" in texto:
+        arquivo.write_text(texto[:texto.index("\nmudancas:") + 1], encoding="utf-8")
     monkeypatch.setenv("RADAR_CONFIG_DIR", str(pasta))
     leis.recarregar()
     yield pasta
@@ -68,7 +75,7 @@ def _gravar_arquivo(*macetes):
     manual.caminho_dos_macetes().write_text(json.dumps(list(macetes)), "utf-8")
 
 
-def _mudanca_da_lep(pasta, anos=(2019,)):
+def _mudanca_da_lep(pasta, anos=(2019,), extra=""):
     arquivo = pasta / "leis.yml"
     texto = arquivo.read_text(encoding="utf-8")
     texto += (
@@ -78,9 +85,12 @@ def _mudanca_da_lep(pasta, anos=(2019,)):
         "    o_que_mudou: novas fracoes no art. 112\n"
         f"    anos: [{', '.join(str(a) for a in anos)}]\n"
         "    marcas: [progressao]\n"
-    )
+    ) + extra
     arquivo.write_text(texto, encoding="utf-8")
     leis.recarregar()
+
+
+DE_IA = "    procedencia: Claude Code (teste), 03/10/2026\n"
 
 
 # --- o cartao ---------------------------------------------------------------
@@ -129,6 +139,28 @@ def test_prova_fora_dos_anos_da_lista_nao_ganha_aviso(acervo, config_propria):
     da lista fica sem aviso."""
     _mudanca_da_lep(config_propria, anos=(2013,))
     assert cartoes.cartoes()[0].com_lei_mudada == 0
+
+
+def test_item_escrito_por_ia_fica_por_conferir(acervo, config_propria):
+    """Dado de IA so entra com procedencia - e, ate eu conferir, o aviso diz
+    que veio dela."""
+    _mudanca_da_lep(config_propria, extra=DE_IA)
+    _gravar_arquivo(_macete())
+
+    (mudanca,) = cartoes.cartoes()[0].macetes[0].mudancas
+    assert not mudanca.conferida
+    assert mudanca.procedencia == "Claude Code (teste), 03/10/2026"
+    assert leis.mudancas_por_conferir() == 1
+
+
+def test_item_meu_ou_conferido_nao_fica_por_conferir(acervo, config_propria):
+    """Sem procedencia o item e meu; com `conferida: true`, eu ja conferi."""
+    _mudanca_da_lep(config_propria, extra=DE_IA + "    conferida: true\n")
+    _gravar_arquivo(_macete())
+
+    (mudanca,) = cartoes.cartoes()[0].macetes[0].mudancas
+    assert mudanca.conferida
+    assert leis.mudancas_por_conferir() == 0
 
 
 # --- a tela -----------------------------------------------------------------
@@ -188,6 +220,30 @@ def test_sem_macete_a_tela_diz_como_trazer_sem_api(cliente):
 
 def test_a_tela_avisa_que_a_lista_de_leis_nao_foi_conferida(cliente):
     assert "ainda não foi" in cliente.get("/macetes").text
+
+
+def test_o_aviso_de_ia_sai_com_o_selo_roxo_e_por_conferir(cliente, config_propria):
+    _mudanca_da_lep(config_propria, extra=DE_IA)
+    _gravar_arquivo(_macete())
+
+    questoes = cliente.get("/macetes/" + "a" * 32 + "/questoes").text
+    aviso = questoes[questoes.index("⚠ A lei mudou depois desta prova"):]
+    aviso = aviso[:aviso.index("</p>")]
+    assert "ds-selo--ia" in aviso and "Escrito por IA, por conferir" in aviso
+
+    central = cliente.get("/macetes").text
+    assert "escritos pelo Claude Code" in central
+    assert "por conferir" in cliente.get("/mais").text
+
+
+def test_o_aviso_conferido_sai_sem_o_selo(cliente, config_propria):
+    _mudanca_da_lep(config_propria, extra=DE_IA + "    conferida: true\n")
+    _gravar_arquivo(_macete())
+
+    questoes = cliente.get("/macetes/" + "a" * 32 + "/questoes").text
+
+    assert "⚠ A lei mudou depois desta prova" in questoes
+    assert "Escrito por IA, por conferir" not in questoes
 
 
 def test_ver_questoes_reais_mostra_a_prova_com_o_gabarito(cliente, config_propria):

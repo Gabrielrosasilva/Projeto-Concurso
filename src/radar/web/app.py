@@ -1727,6 +1727,7 @@ def mais(request: Request):
         context={
             "cobertura": servico.previsao.cobertura_do_historico(),
             "leis_conferidas": leis.mudancas_conferidas(),
+            "leis_por_conferir": leis.mudancas_por_conferir(),
             "auditoria_existe": auditoria.caminho_padrao().exists(),
             "auditoria_gerada_em": auditoria.data_do_relatorio(),
             # Como foi o ultimo backup automatico. Aparece aqui, e nao na
@@ -1828,6 +1829,7 @@ def macetes(
             # prova. O recorte por banca, embaixo, e para explorar.
             "cartoes": servico.cartoes.cartoes(),
             "leis_conferidas": leis.mudancas_conferidas(),
+            "leis_por_conferir": leis.mudancas_por_conferir(),
             "analise": analise,
             "parecidas": parecidas,
             "recado_do_cargo": recado,
@@ -1863,6 +1865,7 @@ def questoes_do_macete(request: Request, impressao: str):
             "relacionadas": relacionadas,
             "lei": leis.da_materia(macete.get("materia")),
             "leis_conferidas": leis.mudancas_conferidas(),
+            "leis_por_conferir": leis.mudancas_por_conferir(),
         },
     )
 

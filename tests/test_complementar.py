@@ -317,6 +317,24 @@ def test_o_relatorio_diz_que_as_evidencias_nunca_se_somam(acervo):
     assert "2 provas complementares" in texto
 
 
+def test_antes_de_aplicar_o_relatorio_e_so_o_levantamento(acervo):
+    texto = servico.relatorio(*servico.levantamento())
+    assert "Nada entrou em estatística nenhuma" in texto
+    assert "Onde isto está" not in texto
+
+
+def test_depois_de_aplicar_o_relatorio_nao_diz_que_nada_entrou(acervo):
+    """O docs/complementar.md dizia "nada entrou" com 122 provas ja na
+    incidencia (achado da varredura de 03/10/2026)."""
+    servico.aplicar(hoje=date(2026, 10, 1))
+
+    texto = servico.relatorio(*servico.levantamento())
+
+    assert "Nada entrou" not in texto
+    assert "**1 provas** estão aceitas" in texto
+    assert "linha própria na incidência" in texto
+
+
 def test_o_comando_escreve_o_relatorio_e_nao_muda_o_banco(acervo, tmp_path):
     def fotografia():
         with sessao() as s:

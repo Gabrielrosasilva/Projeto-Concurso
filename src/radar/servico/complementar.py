@@ -327,15 +327,37 @@ def relatorio(por_materia, validadas, lista, registros=None) -> str:
         f"**{so_classificar}** servem para classificar mas ficam fora dos "
         f"padrões de cobrança, e **{recusadas}** são recusadas.",
         "",
-        "## O que ainda não foi feito",
-        "",
-        "Este relatório é o **levantamento**. Nada entrou em estatística "
-        "nenhuma por causa dele. O que vem depois, na ordem, e só com a sua "
-        "aprovação: você escolhe as provas, elas passam pela validação que lê "
-        "o PDF, são classificadas por matéria (com conferência por amostra) e "
-        "só então ganham a linha própria na incidência.",
-        "",
     ]
+    # O texto depende de o acervo ja ter sido aplicado: antes do `--aplicar`,
+    # isto e so o levantamento; depois, as provas aceitas ja tem a linha
+    # propria na incidencia - e dizer "nada entrou" seria mentir.
+    aplicadas = len(provas_aceitas())
+    if aplicadas:
+        linhas += [
+            "## Onde isto está",
+            "",
+            f"O levantamento já virou acervo (Etapa 3B): **{aplicadas} provas** "
+            "estão aceitas no `data/acervo_complementar.json` e têm a **linha "
+            "própria na incidência**, sempre separada da do alvo e contada em "
+            "questão distinta. Parte das questões delas foi classificada por "
+            "conteúdo, com procedência; o resto conta só na matéria que o "
+            "caderno declara. O que falta: a sua conferência das classificações "
+            "automáticas, por amostra; e os padrões de cobrança do "
+            "complementar (tipo de questão, pegadinha), que ainda não são "
+            "calculados - a linha dele mostra a contagem.",
+            "",
+        ]
+    else:
+        linhas += [
+            "## O que ainda não foi feito",
+            "",
+            "Este relatório é o **levantamento**. Nada entrou em estatística "
+            "nenhuma por causa dele. O que vem depois, na ordem, e só com a sua "
+            "aprovação: você escolhe as provas, elas passam pela validação que "
+            "lê o PDF, são classificadas por matéria (com conferência por "
+            "amostra) e só então ganham a linha própria na incidência.",
+            "",
+        ]
     if registros:
         linhas += [
             "## Quem entra no acervo, pela regra do edital de 2019",

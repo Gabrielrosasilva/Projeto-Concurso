@@ -42,7 +42,8 @@
 </div>
 {% endmacro %}
 
-{# O aviso da especificacao, com o texto dela. #}
+{# O aviso da especificacao, com o texto dela. O item que uma IA escreveu e
+   eu ainda nao conferi leva o 🟣: e dado de IA, e diz isso. #}
 {% macro aviso_lei(mudanca) %}
-<p class="ds-aviso-lei">⚠ A lei mudou depois desta prova: {{ mudanca.tema }} ({{ mudanca.lei }}){% if mudanca.o_que_mudou %} - {{ mudanca.o_que_mudou }}{% endif %}</p>
+<p class="ds-aviso-lei">⚠ A lei mudou depois desta prova: {{ mudanca.tema }} ({{ mudanca.lei }}){% if mudanca.o_que_mudou %} - {{ mudanca.o_que_mudou }}{% endif %}{% if not mudanca.conferida %} {{ selo('ia', 'Escrito por IA, por conferir') }}{% endif %}</p>
 {% endmacro %}

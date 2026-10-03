@@ -7,6 +7,12 @@ O `CLAUDE.md` aponta para ca e fica so com o contexto permanente do projeto.
 O porque detalhado de cada fase, com os numeros medidos, esta em
 [docs/historico.md](historico.md).
 
+**Como ler a numeracao** (nota de 03/10/2026). Ate a primeira secao da Etapa
+3B, cada secao do pedido de evolucao numera as suas decisoes de 1 em diante -
+a Etapa 0 vai de 1 a 14, a 3A de 1 a 10 -, e por isso "decisao 9" sozinho e
+ambiguo ali: cite com a etapa ("decisao 9 da 3A"). Da 3B em diante a
+numeracao e continua (7 a 66, ate aqui), e o numero sozinho basta.
+
 - datas: sempre UTC com fuso, convertidas para horario local so na exibicao;
 - a coleta faz upsert e **nunca** sobrescreve `interesse` e `notas`;
 - fonte que falha e registrada e a coleta segue com as outras;
@@ -628,7 +634,8 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   exportar e o que traz o `avisado_em` do robo para o meu banco antes de eu
   escrever o JSON de volta; na ordem inversa eu apagaria as marcas dele, e ele
   mandaria tudo de novo no dia seguinte. Ele nao resolve conflito de rebase e
-  nao encosta em arquivo que nao seja os dois JSON;
+  nao encosta em arquivo que nao seja os dois JSON (o "pull" deixou de ser
+  `pull --rebase` em 03/10/2026: decisao 64);
 - a CLI passou a chamar `git` por subprocess, o que ate aqui so acontecia no
   workflow em bash. E o preco de ter um comando so, e fica contido numa funcao
   de quatro linhas.
@@ -917,7 +924,11 @@ O porque detalhado de cada fase, com os numeros medidos, esta em
   `pontos <= esperadas` sempre - e a barra fica amarela, a cor de "nao sei
   ainda" no resto da tela, para nunca ser lida como se medisse o mesmo que as
   azuis;
-- **o reforco soma na fatia e nunca aparece somado na tela.** Sao duas provas do
+- ~~**o reforco soma na fatia e nunca aparece somado na tela.**~~ **Substituida
+  pela decisao 63 (03/10/2026):** somar na fatia era somar alvo e complementar
+  num numero so, o que a regra inviolavel 1 do novo.md proibe. Hoje as
+  questoes esperadas sao so das provas do cargo, e o complementar (so as
+  provas aceitas) pesa so na ordem. O texto de antes: sao duas provas do
   cargo, e duas provas nao sustentam uma fatia: entra a mesma banca nas MESMAS
   materias, em outros concursos. "13 do meu cargo · 57 de reforco" e uma
   informacao diferente de "70 questoes", e a questao da minha prova e a unica
@@ -1274,9 +1285,12 @@ mais vale na prova.
 - **o aviso de lei alterada so sai do `mudancas:` do config/leis.yml**, com os
   ANOS de prova escritos em cada item - o radar sabe o ano da prova, nao o
   dia, e deduzir "prova anterior a lei" de um ano seria chutar no caso da EC
-  104 (dezembro de 2019) contra a prova de 2019. **A lista ainda nao foi
-  gravada**: ela espera a minha conferencia (parte 1). Sem ela a tela diz que
-  a lista falta, em vez de sugerir que nenhuma lei mudou;
+  104 (dezembro de 2019) contra a prova de 2019. ~~**A lista ainda nao foi
+  gravada**: ela espera a minha conferencia (parte 1).~~ **Mudou em 03/10/2026
+  (decisao 65):** a lista foi gravada pelo Claude Code, com procedencia, e
+  fica POR CONFERIR - o aviso sai com o 🟣 ate eu marcar `conferida: true`.
+  Sem lista nenhuma, a tela continua dizendo que ela falta, em vez de sugerir
+  que nenhuma lei mudou;
 - 2013 e 2019 escrevem Processual Penal de dois jeitos, e por isso sao dois
   cartoes. E a divergencia de nome que a auditoria mostra.
 
@@ -3123,4 +3137,101 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     mais proximos que existem; criar os dois caminhos como nos manuais fica
     para decisao sua (regra inviolavel 9). E o backup das 23h30, que a
     auditoria achou quebrado desde 27/09, e consertado numa etapa propria, e
-    nao dentro da auditoria.
+    nao dentro da auditoria. **Corrigida em 03/10/2026:** nao havia o que
+    decidir sobre os nos - a escolha tinha sido feita na Etapa 5 e so nao
+    estava registrada aqui (decisao 66). E o backup foi consertado no mesmo
+    dia (decisao 64).
+
+## Correcoes depois da auditoria (03/10/2026)
+
+A varredura dos docs, depois da Etapa 8, achou cinco pontos; eles foram
+corrigidos nesta ordem, um de cada vez.
+
+63. **o "Onde estudar primeiro" nao soma mais o alvo e o complementar.** Desde
+    a fase do grafico (decisao "o reforco soma na fatia", acima), as questoes
+    esperadas eram `peso x (do cargo + reforco) / (base do cargo + base do
+    reforco)` - um numero so, feito das duas evidencias, o que a regra
+    inviolavel 1 do novo.md proibe. E o "reforco" era qualquer caderno da
+    FEPESE, aceito ou nao no levantamento da Etapa 3B. Agora:
+    - as **questoes esperadas** e os **pontos a ganhar** sao so das provas do
+      cargo: `peso da materia x fatia do assunto nas provas do cargo`;
+    - o complementar e so o das provas **aceitas** no
+      `data/acervo_complementar.json`, com a evidencia gravada - a mesma regra
+      da incidencia;
+    - ele pesa so na **ordem**, com o peso do `config/prioridade.yml` (0,25),
+      a mesma conta da prioridade das fichas (decisao 44): `peso da materia x
+      (fatia do cargo + 0,25 x fatia do complementar)`, vezes o que eu erro e o
+      tempo, quando ha acerto medido. Com peso 0 a ordem e so a do cargo;
+    - a tela mostra as duas fatias, cada uma sobre a sua base ("13 de 38 nas
+      provas do cargo · 54 de 169 no acervo complementar, com peso 0,25 so na
+      ordem"); assunto que so caiu no complementar aparece como "so no acervo
+      complementar", sem questao esperada nenhuma;
+    - a conclusao deixou de dizer que o assunto "deve valer" tantas questoes:
+      e regra de priorizacao, e nao previsao. Ela diz "vem primeiro na ordem"
+      e da as questoes esperadas pelas provas do cargo.
+    Com o banco real, Interpretacao de texto continua em primeiro (4,8 → 5,1
+    questoes esperadas, agora so do cargo), e "Conjuntos" (0 do cargo, 4 de
+    outras provas) deixou de aparecer com 1 questao esperada.
+
+64. **o backup roda com a pasta suja, e nunca mexe no que nao e dele.** O
+    `radar sincronizar` fazia `git pull --rebase`, e o rebase recusa rodar com
+    QUALQUER arquivo versionado mudado - o codigo de uma etapa pela metade
+    bastava. Os logs mostram as 6 execucoes de 27/09 a 02/10 paradas nisso: o
+    ultimo sincronizar que funcionou foi o de 25/09, o banco local ficou sem 32
+    eventos da coleta do robo, e os 4 simulados de 28 e 29/09 so existem no
+    `radar.db`. Atras dele havia um segundo defeito: o `git add` recebia os 15
+    caminhos de `ARQUIVOS_DO_RADAR`, e `data/macetes.json`,
+    `data/explicacoes.json` e `data/notas_semana.json` nao existem - com um
+    caminho inexistente o `git add` para sem adicionar NENHUM, e o backup ia
+    dizer "nada mudou" sem ter guardado nada. Agora:
+    - o pull e `git fetch` + `git merge --ff-only origin/main`: o git avanca
+      com a pasta suja, desde que o que chega nao caia num arquivo mudado aqui
+      (se cair, ele recusa sem tocar em nada, e o comando para dizendo qual);
+    - quando ha commit local que nao subiu e o robo subiu outro, so o rebase
+      junta - e ele so roda com a pasta limpa; com conflito, `rebase --abort`
+      e a pasta fica como estava. Nunca `--autostash`: com conflito na volta,
+      ele deixaria marcas de conflito no meu codigo pela metade;
+    - o `git add` leva so os arquivos que existem, e o commit leva os caminhos
+      no fim (`git commit -- arquivos`): so os do radar, mesmo com outra coisa
+      no stage. `git add` que falha para o comando, e nao vira "nada mudou";
+    - o teste usa o **git de verdade**, em repositorios no `tmp_path` (a
+      "origem" e uma pasta, sem internet): foi o git falso dos testes que
+      deixou os dois defeitos passarem.
+
+65. **a lista de leis alteradas e gravada pelo Claude Code, com procedencia, e
+    fica por conferir.** A decisao antiga era esperar a minha conferencia antes
+    de gravar - e a lista nunca nasceu. Agora:
+    - cada questao de Direito das duas provas (115 das 170) foi conferida
+      contra o texto **compilado e atualizado** (a Camara para lei federal,
+      codigos e Constituicao - o Planalto recusa a conexao daqui -, e a ALESC
+      para lei de SC), com a data de cada prova tirada dos documentos do
+      acervo: 10/11/2013 e 01/12/2019. Entra so a mudanca com a anotacao da
+      compilacao na mao, e que toca no que a questao cobra; jurisprudencia nao
+      conta;
+    - deu 17 questoes, em 15 itens (`config/leis.yml`, `mudancas`), e as
+      `marcas` foram afinadas contra as 170 questoes reais com a mesma funcao
+      que a tela usa: pegam as 17, nenhuma a mais;
+    - cada item leva `procedencia` (modelo e data), `fonte` (o texto que foi
+      lido - nao e link de "ler a lei") e `conferida: false`. Item com
+      procedencia e sem `conferida: true` e dado de IA: o aviso sai com o 🟣
+      "Escrito por IA, por conferir", e as telas Macetes e Mais dizem quantos
+      faltam. Item sem procedencia e meu, e vale como conferido;
+    - a evidencia de cada item (a anotacao copiada, o efeito em cada questao,
+      os casos de fronteira que ficaram de fora e os limites da conferencia)
+      esta em `docs/leis_alteradas.md`.
+    Em 5 questoes o gabarito oficial ficou errado pela lei de hoje: 2013 q64 e
+    q66, 2019 q46, q71 e q75.
+
+66. **(registro atrasado, decisao de 02/10/2026, na Etapa 5) os dois exemplos
+    de geracao da §23 rodam pelos equivalentes reais, e os literais mostram a
+    recusa.** "Direito Penal > Aplicacao da Lei Penal > Lei penal no tempo" e
+    "LEP > Progressao de regime > Art. 112" nao existem na arvore - a Etapa 2
+    ja tinha visto que "Aplicacao da lei penal" e titulo de faixa do
+    cronograma, e nao item do programa de 2019. Antes de comecar a Etapa 5 eu
+    escolhi rodar os equivalentes reais (CP, art. 2º, e LEP, art. 119, 20
+    questoes cada, no escopo) e mostrar que o filtro recusa e sugere os nomes
+    literais, em vez de criar nos que o edital nao lista (regra inviolavel 9).
+    A escolha ficou so no `progresso.md`; a auditoria da Etapa 8 nao a achou,
+    reabriu a questao como "decisao sua" (decisao 62 e uma pendencia) e marcou
+    o item 13 da §23 com ⚠️. Corrigido: o item 13 atende, a §23 fica com 18
+    de 19 itens, e a pendencia saiu.

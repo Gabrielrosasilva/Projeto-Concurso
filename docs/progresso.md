@@ -20,7 +20,8 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; falta a sua conferência das 61 fichas e o Ciclo 2, depois do simulado de 07/11 |
 | 12 | 7A — Selos e marcação de IA | ✅ |
 | 13 | 7B — As 6 telas no design system | ✅ |
-| 14 | 8 — Auditoria final integrada | 🟡 17 de 19 itens da §23 atendem com o dado real; 2 viraram pendência |
+| 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
+| 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
 
 ---
 
@@ -74,7 +75,7 @@ confirmou que o plugin muda `date.today()` e `agora()`.
 
 ## 1B — Texto de máquina e Previsão (01/10/2026)
 
-- Situação: concluída (aguardando sua aprovação para seguir à 1C)
+- Situação: ✅ concluída
 - Datas: início 01/10 · fim 01/10
 
 **Plano conferido contra o código antes de começar:** válido. Três ajustes de
@@ -154,7 +155,7 @@ cópia foi apagada; o banco real não foi alterado.
 
 ## 1C — Fonte única das métricas (01/10/2026)
 
-- Situação: concluída (aguardando sua aprovação para seguir à 1D)
+- Situação: ✅ concluída
 - Datas: início 01/10 · fim 01/10
 
 **Plano conferido contra o código antes de começar:** válido; os estados, o
@@ -246,7 +247,7 @@ questões e 25 min cada; a pergunta "você fez o Bônus?" continua de pé.
 
 ## 1D — Conferência dos dados gravados (01/10/2026)
 
-- Situação: concluída (aguardando sua aprovação para seguir à 6A)
+- Situação: ✅ concluída
 - Datas: início 01/10 · fim 01/10
 
 **Plano conferido contra o código antes de começar:** válido. O banco real
@@ -323,7 +324,7 @@ e mostra antes × depois; a linha do dia é a mesma do `metricas`.
 
 ## 6A — Rotina nova do Ciclo 1 e ANKI desativado (01/10/2026)
 
-- Situação: concluída (aguardando sua aprovação para seguir à Etapa 2)
+- Situação: ✅ concluída
 - Datas: início 01/10 · fim 01/10
 
 **Plano conferido contra o código antes de começar:** válido na estrutura,
@@ -411,7 +412,7 @@ fora dos textos novos, Plano B montando em todos os dias úteis (30 e 60).
 
 ## 2 — Estrutura de conteúdos (01/10/2026)
 
-- Situação: concluída (aguardando sua aprovação para seguir à 3A)
+- Situação: ✅ concluída
 - Datas: início 01/10 · fim 01/10
 
 **Plano conferido contra o código antes de começar:** válido. Os números do
@@ -640,10 +641,12 @@ v3, e a resposta foi importada de novo.
 
 ## 3B — Acervo complementar FEPESE (01/10/2026)
 
-- Situação: 🟡 **passos 1, 3 e 5 de 5 feitos**. O passo 2 (sua aprovação da
-  lista) virou uma regra, com a autonomia que você deu: entra a prova que tem
-  matéria do edital de 2019 e passa na validação. **Falta o passo 4**, a
-  classificação das questões do complementar (pendência B.8).
+- Situação: 🟡 **os 5 passos feitos**; falta a sua conferência. O passo 2
+  (sua aprovação da lista) virou uma regra, com a autonomia que você deu:
+  entra a prova que tem matéria do edital de 2019 e passa na validação. O
+  passo 4, a classificação, foi feito em três lotes em 02/10 (abaixo); falta a
+  sua conferência das classificações automáticas, por amostra (pendência
+  B.8).
 - Datas: início 01/10 · fim dos passos 1, 3 e 5 em 01/10
 
 **Plano conferido contra o código antes de começar: NÃO valia como estava.**
@@ -1670,8 +1673,10 @@ lado do campo de busca; o alinhamento foi acertado antes do commit.
 
 ## 8 — Auditoria final integrada (03/10/2026)
 
-- Situação: 🟡 feita; 17 dos 19 itens da §23 atendem com o dado real, e os 2
-  que não atendem por inteiro são pendência (abaixo)
+- Situação: 🟡 feita; 18 dos 19 itens da §23 atendem com o dado real, e o
+  que não atende por inteiro é pendência (abaixo). Eram 17: o item 13 estava
+  ⚠️ por um erro meu, corrigido em 03/10 (veja "Correções depois da
+  auditoria", item 4)
 - Datas: início 03/10 · fim 03/10
 
 **Como foi feita.** Antes de começar, a checagem do plano achou dois pontos,
@@ -1700,7 +1705,7 @@ Nenhum código de produção mudou, e nenhum dado real foi alterado.
 | Item | Situação |
 |---|---|
 | 1 a 12 — a ficha do Art. 5º responde o que ler, onde, como procurar, entender, memorizar, pegadinhas, como a FEPESE cobrou, questões reais, quantas fazer, geradas, erros e por que hoje | ✅ teste e ficha real |
-| 13 — selecionar matéria → assunto → subassunto → elemento e gerar sem sair do escopo | ⚠️ o mecanismo atende (teste e nós reais mais próximos); os dois exemplos não existem na árvore real → pendência |
+| 13 — selecionar matéria → assunto → subassunto → elemento e gerar sem sair do escopo | ✅ o mecanismo atende (teste e nós reais mais próximos), e os dois exemplos rodam pelos equivalentes reais, como decidido na Etapa 5 (decisão 66) - estava ⚠️ por engano |
 | 14 — números iguais em todas as telas | ✅ 28/09, 29/09 e a semana 1 iguais na Hoje, no `radar hoje`, na Semanas e em Minhas matérias |
 | 15 — a incidência do alvo não muda por prova complementar | ✅ 426 linhas iguais com 0 e com 122 provas complementares (numa cópia) |
 | 16 — nenhum dado antigo perdido | ✅ cada tabela igual à cópia de antes da Etapa 2 |
@@ -1730,3 +1735,213 @@ com a cópia religada); e as telas pelo `TestClient`, com o banco real.
 - [x] o que não atende está registrado como pendência, com o motivo - e por
   isso a etapa fica 🟡, e não ✅;
 - [x] o "Estado atual" do `CLAUDE.md` reescrito.
+
+## Correções depois da auditoria (03/10/2026)
+
+- Situação: ✅ os cinco itens feitos; falta a sua conferência dos 15 itens da
+  lista de leis e conferir a primeira noite do backup consertado
+- Datas: início 03/10 · fim 03/10
+
+**O pedido:** a varredura dos docs depois da Etapa 8 achou cinco pontos, e você
+pediu os cinco, nesta ordem, um só depois do outro pronto: (1) o "Onde estudar
+primeiro" somando alvo e complementar; (2) o backup das 23h30; (3) a lista de
+leis alteradas do `config/leis.yml`; (4) o meu erro da Etapa 8 nos docs; (5) a
+limpeza geral dos docs. Commit e push uma vez só, no fim do item 5.
+
+### Item 1 — o "Onde estudar primeiro" e a regra inviolável 1 ✅
+
+**O que estava errado.** As questões esperadas eram `peso × (do cargo +
+reforço) / (base do cargo + base do reforço)`: um número só, feito do alvo e
+do complementar - o que a regra inviolável 1 proíbe. E o "reforço" era
+qualquer caderno da FEPESE, aceito ou não no levantamento da 3B. A Etapa 8 não
+pegou isso.
+
+**O que mudou** (decisão 63):
+- `src/radar/onde_estudar.py`: as questões esperadas e os pontos são só das
+  provas do cargo; o complementar entra só na ordem, com o peso do
+  `config/prioridade.yml` (0,25, a mesma conta da prioridade das fichas); a
+  linha guarda as duas fatias separadas; a conclusão diz "vem primeiro na
+  ordem", e não mais "deve valer";
+- `src/radar/foco.py`: o complementar é só o das provas aceitas no
+  `data/acervo_complementar.json`, a mesma regra da incidência;
+- `foco.html`: as duas fatias na linha ("13 de 38 nas provas do cargo · 54 de
+  169 no acervo complementar, com peso 0,25 só na ordem") e as legendas;
+- `README.md` (a seção do Onde estudar) e `docs/decisoes.md` (63, e a decisão
+  antiga "o reforço soma na fatia" marcada como substituída).
+
+**Com o banco real** (numa cópia): Interpretação de texto continua em
+primeiro, com 5,1 questões esperadas só do cargo (eram 4,8 com o reforço
+somado); "Conjuntos", que nunca caiu nas provas do cargo, aparecia com 1
+questão esperada e agora aparece como "só no acervo complementar", fora das 12
+da tela.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_onde_estudar.py`, 1ª rodada | 20 passed, 1 failed (a frase do assunto só do complementar dizia "questões classificadas", e o que ela conta são marcas de assunto; corrigida a frase) |
+| `test_onde_estudar.py` + `test_foco.py` | 92 passed, 1 failed (o teste da prova não aceita procurava um trecho que também está na legenda; afinado) → os 12 do recorte passed |
+| `test_minimo.py`, `test_espacada.py`, `test_prioridade.py` | 40 passed |
+
+### Item 2 — o backup das 23h30 ✅
+
+**O que estava errado.** Dois defeitos, um atrás do outro:
+1. o `radar sincronizar` fazia `git pull --rebase`, e o rebase recusa rodar
+   com qualquer arquivo versionado mudado na pasta - o código de uma etapa pela
+   metade bastava. As 6 execuções de 27/09 a 02/10 pararam aí;
+2. escondido atrás dele: o `git add` recebia os 15 caminhos do radar, e 3 não
+   existem (`data/macetes.json`, `data/explicacoes.json`,
+   `data/notas_semana.json`). Com um caminho inexistente o `git add` para sem
+   adicionar nenhum, e o backup diria "nada mudou" sem ter guardado nada.
+
+Resultado: o último sincronizar que funcionou foi o de 25/09; o banco local
+está sem 32 eventos da coleta do robô, e os 4 simulados de 28 e 29/09 só
+existem no `radar.db`.
+
+**O que mudou** (decisão 64), em `src/radar/cli.py`:
+- o pull virou `git fetch` + `git merge --ff-only origin/main`, que avança com
+  a pasta suja desde que o que chega não caia num arquivo mudado aqui;
+- commit local que não subiu + commit do robô: rebase só com a pasta limpa, e
+  `rebase --abort` se der conflito (antes, um conflito deixava o rebase pela
+  metade);
+- o `git add` leva só os arquivos que existem, o commit leva os caminhos no
+  fim (só os do radar, mesmo com outra coisa no stage), e `git add` que falha
+  para o comando;
+- `README.md` (Trocando com o GitHub; a tarefa do backup), `docs/decisoes.md`
+  (64), `docs/pendencias.md` (o backup saiu de A; ficou a conferência da
+  primeira noite) e o "Estado atual" do `CLAUDE.md`.
+
+**Testes.** `tests/test_sincronizar.py` ganhou 7 testes, 5 deles com o **git de
+verdade** em repositórios no `tmp_path` (a "origem" é uma pasta, sem internet):
+pasta suja + coleta do robô; nada novo no GitHub; histórias separadas com a
+pasta suja (para sem tocar em nada: mesmo HEAD, sem stash, sem rebase pela
+metade, sem exportar); histórias separadas com a pasta limpa (rebase); e a
+coleta que cai num arquivo mudado aqui (recusa, o arquivo continua o meu).
+
+| Rodada | Resultado |
+|---|---|
+| `test_sincronizar.py` | 21 passed (14 de antes, 3 ajustados ao fetch/merge, + 7 novos) |
+
+**Comando real.** Numa cópia do repositório (`git clone` para uma origem
+falsa, local), com o banco real copiado, a pasta suja com as mudanças dos itens
+1 e 2, e uma coleta do robô simulada na origem: `python -m radar.cli
+sincronizar` trouxe a coleta, importou (2878 concursos, 32 eventos novos),
+exportou e commitou só `data/concursos.json`, `data/eventos.json`,
+`data/notas_semana.json` e `data/simulados.json`, empurrou para a origem, e
+deixou os 11 arquivos em andamento como estavam. Depois, `radar backup` no
+mesmo lugar: `Nada mudou` e `RESULTADO: ok` no log.
+
+### Item 3 — a lista de leis alteradas depois das provas ✅
+
+**O que faltava.** A lista `mudancas` do `config/leis.yml` nunca tinha sido
+gravada (a decisão antiga mandava esperar a sua conferência), e por isso
+nenhuma questão antiga ganhava o aviso **⚠ A lei mudou depois desta prova**.
+
+**Como foi feita** (decisão 65):
+1. as datas das provas, nos documentos oficiais do acervo: 2013 em 10/11/2013
+   (edital, item 11.1.4) e 2019 em 01/12/2019 (termos aditivos 3 e 4 e o
+   gabarito);
+2. as 115 questões de Direito, em cinco frentes paralelas (Constituição;
+   CP e CPP; LEP, leis especiais e administração; leis de SC; Direitos
+   Humanos), cada dispositivo conferido no texto compilado da Câmara ou da
+   ALESC, com a anotação copiada como evidência;
+3. o resultado: 17 questões tocam regra que mudou (1 na CF, 3 no CPP, 2 na
+   LEP e na improbidade, 10 nas leis de SC, 1 em Direitos Humanos), em 15
+   itens; as `marcas` foram afinadas contra as 170 questões reais com a mesma
+   função da tela: 17 pegas, nenhuma a mais, nenhuma faltando;
+4. o código: `Mudanca` ganhou `procedencia` e `conferida`; item escrito por IA
+   e não conferido sai com o 🟣 "Escrito por IA, por conferir", e as telas
+   Macetes e Mais dizem quantos faltam (`leis.mudancas_por_conferir()`);
+5. a evidência de cada item, para a sua conferência, em
+   `docs/leis_alteradas.md`.
+
+**Arquivos.** `config/leis.yml` (a lista, no fim), `src/radar/leis.py`,
+`src/radar/web/app.py`, `_componentes.html`, `macetes.html`,
+`macete_questoes.html`, `mais.html`; testes em `test_leis.py` (3 novos, sobre
+a lista real) e `test_central_de_macetes.py` (4 novos; o `config_propria`
+passou a tirar a lista real, para cada teste dizer qual lista quer); docs:
+`leis_alteradas.md` (novo), `decisoes.md` (65, e a antiga marcada como
+substituída), `pendencias.md`, `README.md`, `especificacao.md`, o "Estado
+atual" do `CLAUDE.md`.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_central_de_macetes.py` + `test_leis.py`, com o código novo | 30 passed |
+| Os 18 arquivos que leem leis, Macetes ou Mais | 650 passed |
+| `test_leis.py` + `test_central_de_macetes.py`, com a lista real | 33 passed |
+
+**Uso real (banco real, numa cópia).** A Central de Macetes mostra o aviso em
+6 cartões - Legislação Estadual 9, Direito Processo Penal 2 e 1 em cada um de
+Direito Constitucional, LEP, Administração Pública e Direito Processual Penal
+(as 17 menos as 2 anuladas, que o cartão não conta) -, cada um com o 🟣
+"Escrito por IA, por conferir"; a nota da Central e a tela Mais dizem "15
+item(ns) ... por conferir".
+
+### Item 4 — o meu erro da Etapa 8 nos docs ✅
+
+**O erro.** Na Etapa 5 você decidiu, antes de eu escrever código, rodar os
+equivalentes reais dos dois exemplos de geração da §23 e mostrar a recusa dos
+literais, em vez de criar nós que o edital não lista. A escolha ficou só neste
+arquivo (seção da Etapa 5), e não no `decisoes.md`. Na Etapa 8 eu não a achei:
+reabri a questão como "decisão sua" (decisão 62 e uma pendência em D) e marquei
+o item 13 da §23 com ⚠️ - e a auditoria ficou com 17 de 19.
+
+**A correção.**
+- `docs/decisoes.md`: a decisão 66 registra a escolha da Etapa 5, com a data
+  dela (02/10); a 62 ganhou a nota de que estava errada nesse ponto;
+- `docs/auditoria_final.md`: o item 13 passou a ✅; o item 15 ganhou a nota de
+  que a auditoria só conferiu a incidência (o "Onde estudar" somava o
+  complementar - item 1); a linha do backup diz que ele foi consertado; e uma
+  seção nova, "Correções depois da auditoria";
+- `docs/pendencias.md`: a pendência dos nós saiu;
+- este arquivo (a linha da Etapa 8 e a seção dela) e o "Estado atual" do
+  `CLAUDE.md`: **18 de 19 itens**.
+
+Nenhum código mudou neste item.
+
+### Item 5 — a limpeza geral dos docs ✅
+
+**Os relatórios gerados, regerados de verdade:**
+- `docs/complementar.md` (`radar complementar`): dizia "Nada entrou em
+  estatística nenhuma" com 122 provas já na incidência. O texto agora depende
+  de o acervo ter sido aplicado (`servico/complementar.py`, com 2 testes
+  novos): antes do `--aplicar`, é o levantamento; depois, "Onde isto está";
+- `docs/auditoria.md` (`radar auditar`): era de 01/10, com 0 classificações
+  conferidas; agora mostra as 170 do alvo conferidas.
+
+**Os textos velhos corrigidos:**
+- `README.md`: o estado do topo (dizia "fases 1 a 6, 8 e 9", "5.928
+  questões"), a lista dos documentos, as três descrições da navegação de antes
+  do redesign (a tabela "aba por aba", "Como a tela é organizada" e a barra do
+  design system), o mínimo da home (dizia 5; é o do `config/amostra.yml`,
+  hoje 20), o cartão "De olho" (fica em Análises > Edital, não na home) e o
+  tempo dos testes (dizia "menos de 1s"; são ~2.400 e uns 25 minutos);
+- `docs/especificacao.md`: como a navegação ficou (sete destinos) e o mínimo
+  de amostra de hoje;
+- `CLAUDE.md`: o cartão "De olho", as exceções de mínimo fixo declaradas, a
+  descrição do `progresso.md` (era igual à do roteiro) e o "Estado atual"
+  reescrito;
+- este arquivo: as cinco etapas que diziam "aguardando sua aprovação" e a
+  situação da 3B (dizia que faltava o passo 4, feito em 02/10);
+- `docs/pendencias.md`: o cabeçalho da B (dizia "nada disso virou código"), a
+  nota da decisão 18 (a Etapa 5 não fez o filtro de evidência da Conferência)
+  e a seção **F** nova, com os 10 achados da varredura que nenhuma etapa tinha
+  registrado;
+- `docs/decisoes.md`: como ler a numeração (até a 3B ela recomeça por seção);
+- `docs/historico.md`: a contradição da dobra dos blocos (dizia que lembrar a
+  dobra "ficou de fora", e a mesma seção diz que foi feito).
+
+### Testes e comandos de todos os itens
+
+| Rodada | Resultado |
+|---|---|
+| `test_complementar.py`, com o relatório novo | 52 passed |
+| Suíte inteira, PC (uma vez, no fim dos cinco itens) | **2372 passed** (2350 de antes + 22 novos: 4 do Onde estudar, 2 da tela, 7 do sincronizar - 5 com git de verdade -, 4 dos Macetes, 3 da lista de leis e 2 do relatório do complementar), 0 failed, 23 min |
+
+**Comandos reais rodados:** a tela Análises (o "Onde estudar") e as telas
+Macetes e Mais com o banco real (numa cópia); `python -m radar.cli
+sincronizar` e `radar backup` numa cópia do repositório, com origem local;
+`radar complementar` e `radar auditar` no projeto. Commit e push uma vez só,
+no fim do item 5, como você pediu.

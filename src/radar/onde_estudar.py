@@ -8,8 +8,18 @@ materia, qual assunto?** Direitos Humanos vale 15 questoes, mas estudar
 A conta e esta, e ela cabe em duas linhas:
 
     questoes esperadas = quantas questoes o edital reserva para a materia
-                         x a fatia que aquele assunto ocupa nas provas
+                         x a fatia que aquele assunto ocupa nas provas DO CARGO
     pontos a ganhar    = questoes esperadas x (1 - meu acerto no simulado)
+
+O acervo complementar (as provas FEPESE ACEITAS no data/acervo_complementar.json)
+nunca entra nesses dois numeros: a regra inviolavel 1 do novo.md nao deixa a
+incidencia do alvo e a do complementar virarem um numero so. Ele entra so na
+ORDEM, com o peso declarado no config/prioridade.yml (a §15 e a decisao 44 da
+prioridade das fichas): o tamanho que ordena e
+
+    peso da materia x (fatia no alvo + peso do complementar x fatia no complementar)
+
+e a tela mostra as duas fatias separadas, com o peso escrito.
 
 "Pontos a ganhar" e o que eu deixo na mesa hoje. Um assunto de 10 questoes em
 que eu acerto 90% vale 1 ponto a recuperar; um de 4 questoes em que eu acerto
@@ -98,16 +108,20 @@ class LinhaDeEstudo:
     #: Quantas questoes o edital reserva para a materia inteira.
     questoes_no_edital: int
 
-    #: Em quantas questoes a fatia se apoia, separadas por procedencia. As
-    #: proprias sao as provas do meu cargo no meu estado - so duas existem. O
-    #: reforco vem da mesma banca nas mesmas materias, em outros concursos.
+    #: Em quantas questoes cada fatia se apoia, uma por evidencia, e nunca
+    #: somadas (regra inviolavel 1). As proprias sao as provas do meu cargo
+    #: no meu estado - so duas existem. O complementar e o das provas FEPESE
+    #: aceitas no acervo complementar (Etapa 3B).
     proprias: int
-    reforco: int
-    #: O denominador da fatia: todas as marcas de assunto daquela materia.
-    base_da_materia: int
+    complementar: int
+    #: Os denominadores das duas fatias: as marcas de assunto da materia nas
+    #: provas do cargo, e no complementar.
+    base_do_alvo: int
+    base_do_complementar: int
 
-    #: O produto das duas coisas acima. Fracionado de proposito: dizer "3,8
-    #: questoes" e mais honesto que arredondar para 4 e parecer contagem.
+    #: O peso da materia vezes a fatia no ALVO. Fracionado de proposito: dizer
+    #: "3,8 questoes" e mais honesto que arredondar para 4 e parecer contagem.
+    #: O complementar nunca entra aqui.
     esperadas: float
 
     #: Meu acerto naquele assunto, em porcento. None = nunca treinei.
@@ -130,6 +144,9 @@ class LinhaDeEstudo:
     #: do config/amostra.yml e viaja NA LINHA, para a tela escrever o mesmo
     #: numero que fez a conta.
     minimo: int = regua.PADRAO.do_nivel("assunto")
+    #: O peso declarado do complementar na ORDEM (config/prioridade.yml). Zero
+    #: quer dizer que a ordem e so a do alvo.
+    peso_do_complementar: float = 0.0
 
     @property
     def amostra_pequena(self) -> bool:
@@ -140,9 +157,27 @@ class LinhaDeEstudo:
         return None if self.ultima is None else (date.today() - self.ultima).days
 
     @property
-    def apoio(self) -> int:
-        """Em quantas questoes do acervo esta linha inteira se apoia."""
-        return self.proprias + self.reforco
+    def fatia_no_alvo(self) -> float:
+        return _fatia(self.proprias, self.base_do_alvo)
+
+    @property
+    def fatia_no_complementar(self) -> float:
+        return _fatia(self.complementar, self.base_do_complementar)
+
+    @property
+    def tamanho(self) -> float:
+        """O que ordena a lista antes do acerto: o peso da materia vezes a fatia
+        no alvo e, com o peso declarado, a do complementar. E regra de
+        priorizacao, e nao incidencia - por isso nao aparece como numero de
+        questoes na tela, e as duas fatias aparecem separadas."""
+        return self.questoes_no_edital * (
+            self.fatia_no_alvo + self.peso_do_complementar * self.fatia_no_complementar)
+
+    @property
+    def so_no_complementar(self) -> bool:
+        """O assunto nunca caiu nas provas do cargo: esta na lista so pelo
+        complementar, e sem questao esperada nenhuma."""
+        return not self.proprias
 
     @property
     def repete_a_materia(self) -> bool:
@@ -159,18 +194,17 @@ class LinhaDeEstudo:
     def ordem(self) -> float:
         """Por onde a lista e ordenada, do maior para o menor.
 
-        Com acerto medido, sao os pontos a ganhar. Sem acerto, e o proprio
-        tamanho esperado do assunto - que e o teto dos pontos a ganhar, ja que
-        `pontos <= esperadas` sempre. Um assunto que eu nunca treinei entra,
-        entao, pelo maximo que ele PODERIA valer: e o unico palpite que nao
-        precisa de dado que eu nao tenho.
+        Com acerto medido, e o tamanho vezes o que eu ainda erro, vezes o
+        fator de tempo. Sem acerto, e o proprio tamanho - o teto do que o
+        assunto poderia valer: e o unico palpite que nao precisa de dado que
+        eu nao tenho, e o fator fica neutro.
 
-        Com acerto medido entra tambem o fator de tempo: pontos a ganhar x
-        fator. Sem acerto, o fator e 1 - neutro - e a ordem e so o tamanho.
+        Com o peso do complementar em zero, o tamanho e as questoes esperadas
+        e a ordem e a de antes: pontos a ganhar x fator.
         """
         if self.pontos is None:
-            return self.esperadas
-        return self.pontos * self.fator
+            return self.tamanho
+        return self.tamanho * (1 - self.acerto / 100) * self.fator
 
 
 def _fatia(marcas: int, base: int) -> float:
@@ -185,14 +219,17 @@ def montar(
     ultimas: dict[tuple[str, str], date] | None = None,
     hoje: date | None = None,
     minimos: regua.Minimos | None = None,
+    peso_do_complementar: float = 0.0,
 ) -> list[LinhaDeEstudo]:
     """As linhas ordenadas por quanto ha para ganhar em cada assunto.
 
     - `materias_do_edital`: o quadro lido do PDF, que da o peso de cada materia;
-    - `contagens`: {(materia, assunto): (proprias, reforco)}, em enunciados
-      distintos;
+    - `contagens`: {(materia, assunto): (proprias, complementar)}, em
+      enunciados distintos - o complementar so das provas aceitas;
     - `acertos`: {(materia, assunto): (respondidas, acertos)}, do simulado;
-    - `origens`: {materia: "catalogo" ou "edital"}.
+    - `origens`: {materia: "catalogo" ou "edital"};
+    - `peso_do_complementar`: o do config/prioridade.yml; zero, a ordem e so
+      a do alvo.
 
     Materia que nao esta no quadro do edital fica de fora: sem o peso dela nao
     ha "questoes esperadas" nenhuma, e inventar um peso e justamente o que
@@ -201,21 +238,27 @@ def montar(
     minimo = (minimos or regua.PADRAO).do_nivel("assunto")
     peso_da_materia = {m.nome: m.questoes for m in materias_do_edital}
 
-    # A base e a soma das marcas da PROPRIA materia, e nao o total do acervo:
-    # a fatia responde "quanto desta materia e este assunto", e so as questoes
-    # dela entram na conta.
-    base: dict[str, int] = {}
-    for (materia, _assunto), (proprias, reforco) in contagens.items():
-        base[materia] = base.get(materia, 0) + proprias + reforco
+    # Cada base e a soma das marcas da PROPRIA materia, e nao o total do
+    # acervo: a fatia responde "quanto desta materia e este assunto". E sao
+    # duas bases, uma por evidencia - somar as duas e o que a regra 1 proibe.
+    base_do_alvo: dict[str, int] = {}
+    base_do_complementar: dict[str, int] = {}
+    for (materia, _assunto), (proprias, complementar) in contagens.items():
+        base_do_alvo[materia] = base_do_alvo.get(materia, 0) + proprias
+        base_do_complementar[materia] = base_do_complementar.get(materia, 0) + complementar
 
     linhas = []
-    for (materia, assunto), (proprias, reforco) in contagens.items():
+    for (materia, assunto), (proprias, complementar) in contagens.items():
         if materia not in peso_da_materia:
             continue
 
         no_edital = peso_da_materia[materia]
-        esperadas = no_edital * _fatia(proprias + reforco, base.get(materia, 0))
-        if not esperadas:
+        if not no_edital:
+            continue
+        esperadas = no_edital * _fatia(proprias, base_do_alvo.get(materia, 0))
+        # Sem marca nenhuma no alvo, o assunto so entra se o complementar
+        # pesar na ordem - e entra com zero questao esperada, dizendo isso.
+        if not proprias and not (peso_do_complementar and complementar):
             continue
 
         respondidas, certas = acertos.get((materia, assunto), (0, 0))
@@ -233,8 +276,9 @@ def montar(
             assunto=assunto,
             questoes_no_edital=no_edital,
             proprias=proprias,
-            reforco=reforco,
-            base_da_materia=base.get(materia, 0),
+            complementar=complementar,
+            base_do_alvo=base_do_alvo.get(materia, 0),
+            base_do_complementar=base_do_complementar.get(materia, 0),
             esperadas=esperadas,
             acerto=acerto,
             respondidas=respondidas,
@@ -245,11 +289,13 @@ def montar(
             fator=fator_de_tempo(ultima, hoje),
             acertos=certas,
             minimo=minimo,
+            peso_do_complementar=peso_do_complementar,
         ))
 
-    # Empate desempata pelo assunto mais medido, e depois pelo nome: duas
-    # aberturas seguidas da tela tem que mostrar a mesma ordem.
-    linhas.sort(key=lambda l: (-l.ordem, -l.apoio, l.assunto))
+    # Empate desempata pelo assunto mais visto nas provas do cargo, depois no
+    # complementar, e por fim pelo nome: duas aberturas seguidas da tela tem
+    # que mostrar a mesma ordem.
+    linhas.sort(key=lambda l: (-l.ordem, -l.proprias, -l.complementar, l.assunto))
     return linhas
 
 
@@ -282,6 +328,17 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
     primeira = linhas[0]
     onde = _como_chamar(primeira)
 
+    # O primeiro da ordem pode estar ali so pelo complementar: entao a frase
+    # diz isso, com os numeros dele, e nao inventa questao esperada do cargo.
+    if primeira.so_no_complementar:
+        return (
+            f"{onde} vem primeiro pelo acervo complementar: "
+            f"{primeira.complementar} de {primeira.base_do_complementar} marcas "
+            f"de assunto da matéria nas provas aceitas, com peso "
+            f"{numero(primeira.peso_do_complementar, 2)} na ordem. Nas provas do "
+            f"cargo ele não apareceu - não há questão esperada dele."
+        )
+
     # Sem pontos, a frase NAO cita porcentagem: com amostra insuficiente ela
     # seria sorte dita em voz alta, justamente o que o minimo existe para evitar.
     if primeira.pontos is None:
@@ -292,15 +349,15 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
         else:
             medida = "Eu ainda não respondi nenhuma questão dele no simulado"
         return (
-            f"{onde} é o maior bloco esperado da prova: "
-            f"{numero(primeira.esperadas)} questões. "
+            f"{onde} vem primeiro na ordem: "
+            f"{numero(primeira.esperadas)} questões esperadas pelas provas do cargo. "
             f"{medida}, então não dá para dizer quanto há a ganhar - vale "
             f"medir antes de escolher por onde começar."
         )
 
     return (
-        f"{onde} deve valer {numero(primeira.esperadas)} questões e eu acerto "
-        f"{numero(primeira.acerto, 0)}% delas: são "
-        f"{numero(primeira.pontos)} pontos a ganhar, "
-        f"mais do que em qualquer outro assunto."
+        f"{onde} vem primeiro na ordem: {numero(primeira.esperadas)} questões "
+        f"esperadas pelas provas do cargo, e eu acerto "
+        f"{numero(primeira.acerto, 0)}% delas - são "
+        f"{numero(primeira.pontos)} pontos a ganhar."
     )

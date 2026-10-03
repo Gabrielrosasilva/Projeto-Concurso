@@ -167,3 +167,54 @@ def test_so_existem_planalto_e_alesc_no_arquivo():
     for endereco in enderecos:
         assert urlparse(endereco).scheme == "https"
         assert urlparse(endereco).netloc in FONTES, endereco
+
+
+# --- a lista de leis alteradas depois das provas (03/10/2026) ---------------
+#
+# O aviso "A lei mudou depois desta prova" le estes campos. Item sem um deles
+# some calado - ou, pior, avisa a prova errada.
+
+ANOS_DAS_PROVAS = {2013, 2019}
+
+# Onde cada mudanca da lista foi conferida: a compilacao da Camara (o Planalto
+# recusa a conexao daqui) e a ALESC. Nao e link de "ler a lei".
+FONTES_DA_CONFERENCIA = ("www2.camara.leg.br", "leis.alesc.sc.gov.br")
+
+
+def _mudancas() -> list[dict]:
+    return leis._arquivo().get("mudancas") or []
+
+
+def test_a_lista_de_leis_alteradas_existe_e_tem_o_que_o_aviso_le():
+    assert _mudancas(), "a lista existe desde 03/10/2026"
+    for item in _mudancas():
+        assert item.get("tema") and item.get("lei") and item.get("o_que_mudou"), item
+        assert item.get("anos") and set(item["anos"]) <= ANOS_DAS_PROVAS, item
+        # Marca que o YAML leu como numero (8.429 sem aspas vira float) nunca
+        # bateria no texto da questao.
+        assert item.get("marcas") and all(
+            isinstance(m, str) and m.strip() for m in item["marcas"]), item
+
+
+def test_item_escrito_por_ia_diz_quem_escreveu_e_onde_conferiu():
+    """Regra do projeto: dado de IA so entra com procedencia (modelo e data)."""
+    for item in _mudancas():
+        if item.get("conferida"):
+            continue
+        assert "Claude Code" in str(item.get("procedencia")), item
+        assert "2026" in str(item.get("procedencia")), item
+        assert urlparse(str(item.get("fonte"))).netloc in FONTES_DA_CONFERENCIA, item
+
+
+def test_a_lista_reconhece_a_questao_pelo_texto_dela():
+    """A q67 de 2019, com o texto do caderno: a audiencia de custodia mudou o
+    art. 310 depois da prova - e a mesma questao, em 2013, tambem avisaria."""
+    texto = ("De acordo com o Código de Processo Penal, é ao receber o auto de "
+             "prisão em flagrante, a autoridade judiciária poderá conceder "
+             "liberdade provisória de forma fundamentada.")
+
+    (mudanca,) = leis.mudancas_da_questao(2019, "Direito Processual Penal", texto)
+
+    assert "310" in mudanca.tema
+    assert not mudanca.conferida
+    assert leis.mudancas_da_questao(2019, "Direito Penal", texto) == []

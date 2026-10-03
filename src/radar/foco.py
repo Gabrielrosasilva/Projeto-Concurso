@@ -21,11 +21,13 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from sqlalchemy import func, select
+from sqlalchemy import and_, func, or_, select
 
 from radar import alvo as alvos
 from radar import amostra as regua
-from radar import config, edital_materias, edital_programa, macetes, onde_estudar, provas
+from radar import (
+    config, edital_materias, edital_programa, macetes, onde_estudar, prioridade, provas,
+)
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
 from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado
@@ -823,10 +825,13 @@ def _contar_questoes_do_alvo(s, provas_do_alvo: set[str]) -> int:
 #     dentro do conteudo programatico pelo `radar assuntos --so-alvo`. Sem
 #     rodar esse comando elas nao aparecem aqui, e a tela diz isso.
 #
-# Sao so DUAS provas do cargo, e duas provas nao sustentam uma fatia. Por isso
-# entra o reforco: a mesma banca, nas MESMAS materias, em outros concursos - a
-# FEPESE cobra crase do mesmo jeito em qualquer caderno que faca. A tela separa
-# os dois numeros sempre, porque eles nao valem a mesma coisa.
+# Sao so DUAS provas do cargo, e duas provas sustentam pouco uma fatia. Por
+# isso entra o acervo complementar: as provas FEPESE ACEITAS no
+# data/acervo_complementar.json (Etapa 3B) - a banca cobra crase do mesmo
+# jeito em qualquer caderno que faca. Mas ele nunca vira numero do alvo (regra
+# inviolavel 1): as questoes esperadas e os pontos a ganhar sao so das provas
+# do cargo, e o complementar entra so na ORDEM, com o peso declarado no
+# config/prioridade.yml. A tela mostra as duas fatias, sempre separadas.
 
 
 def _materias_do_acervo_no_edital(s, materias_do_edital: list) -> dict[str, str]:
@@ -858,27 +863,31 @@ def _materias_do_acervo_no_edital(s, materias_do_edital: list) -> dict[str, str]
 
 
 def _questoes_para_a_fatia(s, minhas_provas: set[str], nomes: list[str]) -> list:
-    """As questoes que sustentam a fatia de cada assunto: as minhas e o reforco.
+    """As questoes que sustentam as fatias de cada assunto: as minhas e as do
+    acervo complementar.
 
-    O reforco e a mesma banca nas mesmas materias, em outros concursos. Nao e a
-    mesma coisa que a minha prova, e a tela nunca finge que e - mas centenas de
-    enunciados dizem do costume da banca o que 170 nao dizem.
+    O complementar e so o das provas ACEITAS no data/acervo_complementar.json,
+    a mesma regra da incidencia (`servico.incidencia`): prova que a validacao
+    recusou nao entra em estatistica nenhuma, e aqui tambem nao. Ate a Etapa 8
+    entrava qualquer caderno da FEPESE, aceito ou nao.
     """
+    from radar.servico import complementar as acervo
+    from radar.servico import evidencia
+
     if not nomes:
         return []
 
-    bancas = [normalizar(b) for b in alvos.bancas_do_principal()]
-    questoes = s.scalars(
+    return list(s.scalars(
         select(QuestaoDeProva)
         .where(QuestaoDeProva.materia.in_(nomes))
         # Anulada nao entra em conta nenhuma: a banca disse que ela nao existe.
         .where(QuestaoDeProva.anulada.is_not(True))
-    )
-    return [
-        q for q in questoes
-        if q.prova_url in minhas_provas
-        or any(banca in normalizar(q.banca or "") for banca in bancas)
-    ]
+        .where(or_(
+            QuestaoDeProva.prova_url.in_(minhas_provas),
+            and_(QuestaoDeProva.evidencia == evidencia.COMPLEMENTAR,
+                 QuestaoDeProva.prova_url.in_(acervo.provas_aceitas())),
+        ))
+    ))
 
 
 def _marcas_de_assunto(
@@ -886,8 +895,9 @@ def _marcas_de_assunto(
 ) -> tuple[list[tuple[str, int]], int]:
     """([(assunto, em quantos enunciados distintos ele cai)], quantos sem assunto).
 
-    Em enunciado distinto, e nao em questao, dos dois lados da conta. O reforco
-    vem de duzias de cadernos, e la a banca reaproveita muito: uma questao que
+    Em enunciado distinto, e nao em questao, dos dois lados da conta. O
+    complementar vem de duzias de cadernos, e la a banca reaproveita muito: uma
+    questao que
     aparece em 38 provas decidiria o grafico sozinha. E o mesmo motivo que fez
     o `macetes.uma_por_enunciado` existir.
 
@@ -913,7 +923,8 @@ def _marcas_de_assunto(
 def _contagens_de_assunto(
     questoes: list, para_o_edital: dict[str, str], minhas_provas: set[str]
 ) -> tuple[dict, dict, int]:
-    """({(materia, assunto): (proprias, reforco)}, {materia: origem}, sem assunto)."""
+    """({(materia, assunto): (proprias, complementar)}, {materia: origem},
+    sem assunto). As duas contagens ficam lado a lado e nunca se somam."""
     por_materia: dict[str, list] = {}
     for questao in questoes:
         por_materia.setdefault(para_o_edital[questao.materia], []).append(questao)
@@ -927,19 +938,20 @@ def _contagens_de_assunto(
         origens[materia] = onde_estudar.CATALOGO if chave else onde_estudar.EDITAL
 
         minhas = [q for q in lista if q.prova_url in minhas_provas]
-        reforco = [q for q in lista if q.prova_url not in minhas_provas]
+        complementar = [q for q in lista if q.prova_url not in minhas_provas]
 
-        for coluna, grupo in ((0, minhas), (1, reforco)):
+        for coluna, grupo in ((0, minhas), (1, complementar)):
             marcas, fora = _marcas_de_assunto(grupo, chave)
             for nome, quantas in marcas:
                 contagens.setdefault((materia, nome), [0, 0])[coluna] += quantas
-            # So as MINHAS contam como "falta classificar": o reforco esta la
-            # para sustentar a fatia, e nao para eu estudar por ele.
+            # So as MINHAS contam como "falta classificar": o complementar
+            # esta la para pesar na ordem, e nao para eu estudar por ele.
             if coluna == 0:
                 sem_assunto += fora
 
     return (
-        {par: (proprias, reforco) for par, (proprias, reforco) in contagens.items()},
+        {par: (proprias, complementar)
+         for par, (proprias, complementar) in contagens.items()},
         origens,
         sem_assunto,
     )
@@ -1039,6 +1051,9 @@ def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
     linhas = onde_estudar.montar(
         materias_do_edital, contagens, acertos, origens, ultimas,
         minimos=regua.carregar(),
+        # O mesmo peso que o complementar tem na prioridade das fichas: uma
+        # regra so, num arquivo so.
+        peso_do_complementar=prioridade.carregar().peso_do_complementar,
     )
 
     # A materia que nao rendeu nenhum assunto nao pode so sumir do grafico.

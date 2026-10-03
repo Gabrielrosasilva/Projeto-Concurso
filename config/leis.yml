@@ -3,6 +3,8 @@
 # Isto e uma lista de enderecos, e so isso. O radar nao baixa, nao copia e nao
 # guarda o texto de lei nenhuma: ele abre o link no site de quem publica. Lei
 # muda - e o unico lugar em que a versao vigente esta certa e a fonte oficial.
+# (No fim do arquivo mora a outra lista, a `mudancas`: as leis que mudaram
+# depois das provas de 2013 e 2019, para o aviso na questao antiga.)
 #
 # Duas fontes, e nao mais:
 #
@@ -174,3 +176,209 @@ materias:
         # LC 529 como "17 de janeiro de 2011". O numero e o ano conferem, e o
         # texto e o do Regimento Interno - um dos dois errou o mes.
         nota: a ALESC publica esta LC como de 17 de janeiro, e não de dezembro
+
+# --- A LEI QUE MUDOU DEPOIS DA PROVA -----------------------------------------
+#
+# A lista do aviso "⚠ A lei mudou depois desta prova" (src/radar/leis.py). Cada
+# item diz qual norma mudou o que, QUAIS provas ficaram velhas (`anos`, escrito
+# e nao deduzido) e como reconhecer a questao: `marcas`, procuradas sem acento
+# e sem caixa no enunciado e nas alternativas, e `materias`, quando restringe.
+#
+# As datas das duas provas, conferidas nos documentos oficiais do acervo:
+#   2013: 10/11/2013 (edital SJC 2013, item 11.1.4);
+#   2019: 01/12/2019 (Edital 001/2019-SAP/SC, termos aditivos 3 e 4, e o
+#         cabecalho do gabarito: "01 de dezembro, das 13 as 18 h").
+#
+# Os itens abaixo foram escritos pelo Claude Code em 03/10/2026. Cada questao
+# de Direito das duas provas foi conferida contra o texto compilado e
+# atualizado da norma - a compilacao da Camara dos Deputados para lei federal,
+# codigos e Constituicao (o Planalto recusa a conexao daqui), a ALESC para lei
+# de SC - e so entrou aqui a mudanca com a anotacao da compilacao na mao
+# ("Redacao dada pela Lei n ..."). A `fonte` de cada item e o texto que foi
+# lido; ela NAO e link de "ler a lei" (esses continuam so no Planalto e na
+# ALESC, la em cima).
+#
+# Todos estao POR CONFERIR (`conferida: false`): o aviso aparece com o 🟣 ate
+# voce conferir o item e trocar para `conferida: true` - ou apagar o item, se
+# ele estiver errado.
+mudancas:
+
+  # --- Constituicao -----------------------------------------------------------
+
+  # 2019, q42 (contribuicoes do art. 195).
+  - tema: Contribuições da seguridade social (CF, art. 195)
+    lei: Emenda Constitucional 132/2023
+    o_que_mudou: o art. 195 ganhou o inciso V (contribuição sobre bens e serviços), e o inciso I, "b" (receita ou faturamento), e o IV (importador) estão revogados a partir de 2027
+    anos: [2013, 2019]
+    materias: [Direito Constitucional]
+    marcas: [importador de bens ou servicos, receita ou o faturamento]
+    fonte: https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-normaatualizada-pl.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
+
+  # --- Codigo de Processo Penal -----------------------------------------------
+
+  # 2013, q55 (como o inquerito comeca). O art. 5º, II, nao mudou: o aviso e
+  # o do art. 3º-A, que poe a requisicao pelo juiz em xeque.
+  - tema: Requisição de inquérito pelo juiz (CPP, art. 5º, II)
+    lei: Lei 13.964/2019 (art. 3º-A do CPP)
+    o_que_mudou: o art. 5º, II, não mudou, mas o art. 3º-A deu ao processo penal estrutura acusatória e vedou a iniciativa do juiz na fase de investigação, o que põe em xeque a requisição do inquérito pela autoridade judiciária
+    anos: [2013, 2019]
+    materias: [Direito Processual Penal, Direito Processo Penal]
+    marcas: [requisicao da autoridade judiciaria]
+    fonte: https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-3689-3-outubro-1941-322206-normaatualizada-pe.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
+
+  # 2013, q57 (prazo do inquerito).
+  - tema: Prazo do inquérito com o investigado preso
+    lei: Lei 13.964/2019 (art. 3º-B do CPP)
+    o_que_mudou: o art. 10 continua (10 dias com o indiciado preso, 30 solto), mas o juiz das garantias pode prorrogar uma única vez, por até 15 dias, o inquérito com o investigado preso (art. 3º-B, VIII e § 2º)
+    anos: [2013, 2019]
+    materias: [Direito Processual Penal, Direito Processo Penal]
+    marcas: [encerramento do inquerito]
+    fonte: https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-3689-3-outubro-1941-322206-normaatualizada-pe.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
+
+  # 2019, q67 (o juiz e o auto de prisao em flagrante).
+  - tema: Auto de prisão em flagrante e liberdade provisória (CPP, art. 310)
+    lei: Leis 13.964/2019, 15.272/2025 e 15.358/2026
+    o_que_mudou: o juiz decide em audiência de custódia, em até 24 horas da prisão (hoje por videoconferência); deve negar a liberdade provisória ao reincidente, ao integrante de organização criminosa armada ou milícia e a quem porta arma de uso restrito (§ 2º); e examina as circunstâncias dos §§ 5º e 6º
+    anos: [2013, 2019]
+    materias: [Direito Processual Penal, Direito Processo Penal]
+    marcas: [liberdade provisoria, relaxar a prisao]
+    fonte: https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-3689-3-outubro-1941-322206-normaatualizada-pe.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
+
+  # --- Crime hediondo ---------------------------------------------------------
+
+  # 2019, q33 (anulada; o excerto 4 descreve a regra antiga).
+  - tema: Progressão de regime no crime hediondo
+    lei: Leis 13.964/2019, 14.843/2024 e 15.358/2026
+    o_que_mudou: o § 2º do art. 2º da Lei 8.072 (2/5 e 3/5) foi revogado; os percentuais do hediondo estão no art. 112 da LEP (hoje de 70% a 85%), e o exame criminológico passou a ser exigido em toda progressão
+    anos: [2013, 2019]
+    marcas: [crime hediondo, delito tipificado como hediondo]
+    fonte: https://www2.camara.leg.br/legin/fed/lei/1990/lei-8072-25-julho-1990-372192-normaatualizada-pl.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
+
+  # --- Legislacao estadual de SC ----------------------------------------------
+  #
+  # A carreira cobrada nas duas provas foi reescrita: a LC 472/2009 (2013) foi
+  # revogada pela LC 675/2016, que foi revogada pela LC 777/2021; o cargo virou
+  # Policial Penal (EC estadual 80/2020), e o Estatuto da Policia Penal e a
+  # LC 774/2021.
+
+  # 2013, q61, q62, q63 e q66.
+  - tema: Plano de carreira do Agente Penitenciário (LC 472/2009)
+    lei: LC estadual 675/2016 (revogou a LC 472/2009) e LC estadual 774/2021
+    o_que_mudou: a LC 472/2009 foi revogada inteira (LC 675/2016, art. 76, VII); o cargo virou Policial Penal (EC estadual 80/2020), e o concurso, o estágio probatório e a progressão estão hoje no Estatuto da Polícia Penal (LC 774/2021)
+    anos: [2013]
+    materias: [Legislacao Estadual]
+    marcas: [472/2009, secretaria executiva da justica e cidadania]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/16991
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2013, q66: o gabarito oficial ficou errado.
+  - tema: Adicional de local de exercício
+    lei: LC estadual 675/2016 e LC estadual 774/2021
+    o_que_mudou: o adicional foi extinto (LC 675/2016, art. 51, I), e o Policial Penal recebe subsídio em parcela única (LC 774/2021, art. 42) - não há mais percentual
+    anos: [2013]
+    materias: [Legislacao Estadual]
+    marcas: [local de exercicio]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/19505
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2013, q64 (o gabarito oficial ficou errado), e 2019, q72 (a alternativa C).
+  - tema: Remuneração do trabalho do preso (LC 529/2011, art. 52)
+    lei: LC estadual 809/2022
+    o_que_mudou: o piso deixou de ser três quartos do salário-mínimo regional e passou a ser 3/4 do salário mínimo nacional
+    anos: [2013, 2019]
+    materias: [Legislacao Estadual]
+    marcas: [salario-minimo regional, salario minimo regional]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/17506
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2013, q68.
+  - tema: Licença à gestante da servidora estadual (LC 447/2009)
+    lei: Lei estadual 18.316/2021
+    o_que_mudou: o prazo continua de 180 dias, mas a licença deixou de ser só da servidora efetiva - hoje é de toda servidora gestante
+    anos: [2013, 2019]
+    materias: [Legislacao Estadual]
+    marcas: [licenca gestacao, licenca a gestante]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/16703
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2019, q71, q75 e q79.
+  - tema: Plano de carreira do Agente Penitenciário (LC 675/2016)
+    lei: LC estadual 777/2021 (revogou a LC 675/2016) e LC estadual 774/2021
+    o_que_mudou: a LC 675/2016 foi revogada (só os arts. 22 a 35, da progressão, valem para o interstício que já corria); o cargo virou Policial Penal (EC estadual 80/2020), com o Estatuto da LC 774/2021
+    anos: [2019]
+    materias: [Legislacao Estadual]
+    marcas: ["675, de 3 de junho"]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/19505
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2019, q71: o gabarito oficial ficou errado.
+  - tema: Gratificação por hora extraordinária
+    lei: LC estadual 774/2021 e LC estadual 777/2021
+    o_que_mudou: a gratificação foi extinta e absorvida pelo subsídio (LC 774/2021, art. 45, VII, para o Policial Penal; LC 777/2021, art. 52, VII, para o socioeducativo)
+    anos: [2019]
+    materias: [Legislacao Estadual]
+    marcas: [gratificacao por hora extraordinaria]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/21250
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2019, q75: para o Policial Penal, o gabarito oficial ficou errado.
+  - tema: Prerrogativas do Policial Penal (porte de arma)
+    lei: LC estadual 774/2021, art. 66
+    o_que_mudou: o rol foi reescrito - o porte é em serviço e fora dele, sem a vedação no interior das unidades; a prioridade nos serviços é "em razão do serviço", sem a saúde; e a prisão especial vale também na prisão definitiva
+    anos: [2019]
+    materias: [Legislacao Estadual]
+    marcas: [prerrogativas dos agentes penitenciarios]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/21250
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # 2019, q79.
+  - tema: Progressão funcional e ato de bravura
+    lei: LC estadual 774/2021, arts. 29 a 38
+    o_que_mudou: a progressão do Policial Penal está na LC 774/2021 - a cada 3 anos, com duas modalidades extraordinárias -, e o ato de bravura foi redefinido
+    anos: [2019]
+    materias: [Legislacao Estadual]
+    marcas: [ato de bravura]
+    fonte: https://leis.alesc.sc.gov.br/ato-normativo/21250
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pelo texto compilado da ALESC
+    conferida: false
+
+  # --- Improbidade e LEP ------------------------------------------------------
+
+  # 2019, q46: o gabarito oficial ficou errado.
+  - tema: Improbidade administrativa - acordo, posse e prescrição (Lei 8.429/1992)
+    lei: Lei 14.230/2021 (e a Lei 13.964/2019, no acordo)
+    o_que_mudou: a vedação de acordo (art. 17, § 1º) caiu e hoje o Ministério Público pode celebrar acordo de não persecução civil (art. 17-B); a posse depende da declaração de imposto de renda (art. 13); e a prescrição é de 8 anos contados do fato (art. 23)
+    anos: [2013, 2019]
+    materias: [Administracao Publica, Direito Administrativo]
+    marcas: ["8.429", acordo ou a conciliacao, declaracao dos bens e valores]
+    fonte: https://www2.camara.leg.br/legin/fed/lei/1992/lei-8429-2-junho-1992-357452-normaatualizada-pl.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
+
+  # 2019, q89.
+  - tema: Monitoração eletrônica (LEP, arts. 146-B a 146-E)
+    lei: Leis 14.843/2024, 14.994/2024 e 15.280/2025
+    o_que_mudou: o art. 146-B passou a prever a monitoração também nos regimes aberto e semiaberto (e na progressão para eles), na restritiva de direitos com limitação de frequência e no livramento condicional; e o art. 146-E a tornou obrigatória na saída do condenado por crime contra a mulher por razões da condição do sexo feminino ou por crime contra a dignidade sexual
+    anos: [2013, 2019]
+    materias: [Lei de Execucao Penal]
+    marcas: [monitoracao eletronica]
+    fonte: https://www2.camara.leg.br/legin/fed/lei/1980-1987/lei-7210-11-julho-1984-356938-normaatualizada-pl.html
+    procedencia: Claude Code (claude-opus-5-5), 03/10/2026, pela compilação da Câmara
+    conferida: false
