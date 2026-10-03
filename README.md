@@ -513,6 +513,30 @@ escritas) e do Claude Code, marcado 🟣 com a procedencia, e fica em
 o botao **Conferi esta ficha** (ou `radar fichas --conferir`) marca a data e nao
 apaga a procedencia.
 
+### As faixas que medem: o diagnostico e o simulado no radar
+
+O diagnostico (03/10) e o simulado de fechamento (07/11) **medem**, e por isso
+nao tem ficha: a faixa diz **"Só questões: não há o que estudar nesta faixa."**
+e mostra a **composicao** - de quais assuntos e subassuntos sao as questoes, e
+de onde saiu cada numero -, com o botao **Criar a rodada com esta composição**.
+A regra e uma so (decisao 67, `src/radar/servico/composicao.py`):
+
+- o total e o do plano; com varias materias (o 07/11), ele se divide pelo
+  quadro do edital, com a mesma conta do simulado compilado;
+- dentro da materia, o assunto com amostra nas provas do cargo (3 questoes em
+  2 provas, do `config/amostra.yml`) entra pela incidencia - com o complementar
+  valendo 0,25, como na prioridade -; os sem amostra dividem o resto por igual,
+  com a frase "Não há evidência suficiente no acervo para afirmar isso.";
+- so questao real da FEPESE, classificada no assunto: das provas do cargo
+  primeiro, depois do complementar ACEITO; uma por enunciado, sem anulada, com
+  gabarito. Questao de IA nunca entra: ela treina, nao mede;
+- assunto sem questao bastante passa o que falta para os outros da materia; se
+  a materia inteira nao tiver, falta mesmo, e a faixa diz quanto.
+
+A composicao e deterministica (a mesma faixa da as mesmas questoes) e fica
+gravada na rodada. Criada, a rodada nao e recriada: a faixa passa a mostrar a
+composicao gravada e o link **Abrir a rodada desta faixa**.
+
 ### No terminal
 
 ```bash
@@ -1514,7 +1538,7 @@ radar gerar --pedido --modo simulado --materia "Direito Penal" --quantas 20
 |---|---|
 | `treino` | so o escopo fechado: materia > assunto [> subassunto [> elemento]] |
 | `revisao` | so os conteudos que eu JA ESTUDEI (`radar desempenho`) |
-| `simulado` | a abrangencia ampla de sempre, pelo edital e pelo peso |
+| `simulado` | a abrangencia ampla de sempre; sem materia escolhida, as questoes se dividem pelo peso do edital |
 
 Sem `--modo`: **com assunto e treino, so com materia e simulado**, e a saida
 escreve qual foi - amplo e especifico nao podem se confundir.

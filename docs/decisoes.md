@@ -3235,3 +3235,56 @@ corrigidos nesta ordem, um de cada vez.
     reabriu a questao como "decisao sua" (decisao 62 e uma pendencia) e marcou
     o item 13 da §23 com ⚠️. Corrigido: o item 13 atende, a §23 fica com 18
     de 19 itens, e a pendencia saiu.
+
+## As faixas que medem e o ciclo especifico (pedido de 03/10/2026)
+
+O pedido de 03/10 (o sabado generico e o "item 4" das pendencias) foi
+respondido em duas partes - as perguntas, com evidencia, e o plano - e
+aprovado "com as recomendadas". As escolhas, de uma vez: o Pedido 1 e a secao
+F inteira, em subetapas depois do Pedido 2, com o item 4 dela ja na 2A (1B);
+a regra abaixo (2A); a comparacao de 07/11 mostra a rodada de 07/11 e o
+acumulado do ciclo, separados (3A+C, na 2B); os simulados semanais ficam no
+Qconcursos, com a composicao calculada (4A, na 2B); nenhum no de subassunto e
+criado - a faixa mostra o assunto, o subassunto quando existe e o elemento
+(5B, na 2C); o diagnostico de hoje espera a 2A (6B); so o complementar ACEITO
+mede (7A); commit e push por subetapa (8A).
+
+67. **a composicao das rodadas que medem e uma regra so, em
+    `servico/composicao.py`, a mesma no diagnostico de 03/10 e no simulado de
+    07/11.** O diagnostico mandava "Radar > Simulado > materia X", que sorteia
+    de qualquer banca com aquele nome de materia - em Portugues, 254
+    enunciados, 39 da IESES e 68 de provas que a 3B recusou -, sem dizer de
+    que assunto. Agora:
+    - o total e o do plano; com varias materias, ele se divide pelo quadro do
+      edital com o `compilado.distribuir` (o do simulado compilado);
+    - dentro da materia, o assunto com amostra no ALVO (`config/amostra.yml`:
+      3 questoes em 2 provas) pesa "fatia do alvo + 0,25 x fatia do
+      complementar" (a conta da prioridade, decisao 44); os sem amostra
+      dividem o resto por igual, com a frase padrao, porque o edital nao da
+      peso entre os assuntos de uma materia. A parte de cada grupo e a fatia
+      das questoes do alvo que cai nele;
+    - so questao real da FEPESE classificada no assunto (a arvore, e nao a
+      coluna `assunto`): alvo primeiro, depois o complementar ACEITO; uma por
+      chave e uma por enunciado, sem anulada, com gabarito, nunca gerada;
+    - o que falta num assunto vai para os outros da materia, pelo mesmo peso,
+      primeiro no mesmo grupo; faltou na materia inteira, falta mesmo;
+    - o desempate entre assuntos de mesmo peso e a ordem do edital;
+    - a escolha e deterministica (a semente e a faixa: data, bloco e posicao),
+      a nunca respondida antes da respondida, e a rodada grava a composicao
+      (`filtros["composicao"]`, com a regra) e a faixa de onde veio. Criada,
+      ela nao e recriada.
+    Com o banco de 03/10: Portugues sai com 8 de Interpretacao (9 questoes ·
+    2 provas) e 1 de cada um dos outros 12 assuntos; Raciocinio Logico, que so
+    caiu em 2019, sai todo pelo edital - 7 dos 12 assuntos nao tem questao real
+    classificada, e a rodada usa 20 das 25 que existem. No 07/11, as 50 dao 13
+    de Portugues, 8 de Raciocinio Logico, 13 de Direitos Humanos, 4 de
+    Constitucional, 4 de Penal e 8 da LEP. A faixa so mede quando e diagnostico
+    ou simulado FEITO NO RADAR; o simulado do Qconcursos fica para a 2B.
+
+68. **o modo simulado da geracao divide as questoes pelo peso do edital**
+    (item 4 da secao F das pendencias). A §8 pede que o modo 3 respeite "o
+    edital, o peso das materias"; sem materia escolhida, a geracao sorteava as
+    bases sem olhar o peso. Agora `geradas.preparar` divide o pedido pelo
+    quadro do edital (o `compilado.distribuir`), so entre as materias com
+    questao real do alvo para servir de base, e o `radar gerar` diz a divisao.
+    Com a materia escolhida, nada muda: nao ha o que dividir.

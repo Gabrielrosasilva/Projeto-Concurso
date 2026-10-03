@@ -338,6 +338,25 @@ def _exemplos_de_estilo(escopo) -> list:
     return candidatas[: motor.EXEMPLOS_DO_ZERO]
 
 
+def _pelo_peso_do_edital(candidatas: list, quantas: int) -> dict[str, int] | None:
+    """{materia do edital: quantas}, para o simulado sem materia escolhida.
+
+    A §8 pede que o modo simulado respeite "o edital, o peso das materias":
+    as questoes se dividem pelo quadro do edital, com o `compilado.distribuir`
+    - a mesma conta do simulado compilado e da composicao (decisao 67) -, so
+    entre as materias que tem questao real do alvo para servir de base. None
+    sem o quadro lido: ai vale o sorteio de antes, e a saida nao diz peso.
+    """
+    from radar.servico import compilado
+
+    pesos, _edital, _arquivo = compilado._pesos(None)
+    com_base = {m: p for m, p in pesos.items()
+                if any(compilado.mesma_materia(m, q.materia) for q in candidatas)}
+    if not com_base:
+        return None
+    return compilado.distribuir(com_base, quantas)
+
+
 def modo_do_pedido(escopo, pedido: str | None = None) -> str:
     """O modo, escolhido ou deduzido do escopo (§8).
 
@@ -408,12 +427,30 @@ def preparar(
 
     pedidos: list[dict] = []
     faltam = quantas
-    for questao in ordenadas:
-        if faltam <= 0:
-            break
-        neste = min(motor.VARIACOES_POR_QUESTAO, faltam)
-        pedidos.append({"modo": "variacao", "questao": questao, "quantas": neste})
-        faltam -= neste
+    distribuicao = None
+    if escolhido == "simulado" and not materia and candidatas:
+        distribuicao = _pelo_peso_do_edital(candidatas, quantas)
+    if distribuicao:
+        # Materia por materia, na ordem do quadro, cada uma com as bases dela
+        # (a nunca variada antes da ja variada, como no caminho de sempre).
+        from radar.servico.compilado import mesma_materia
+
+        for do_edital, pedidas in distribuicao.items():
+            da_materia = [q for q in ordenadas if mesma_materia(do_edital, q.materia)]
+            for questao in da_materia:
+                if pedidas <= 0:
+                    break
+                neste = min(motor.VARIACOES_POR_QUESTAO, pedidas)
+                pedidos.append({"modo": "variacao", "questao": questao, "quantas": neste})
+                pedidas -= neste
+        faltam = quantas - sum(p["quantas"] for p in pedidos)
+    else:
+        for questao in ordenadas:
+            if faltam <= 0:
+                break
+            neste = min(motor.VARIACOES_POR_QUESTAO, faltam)
+            pedidos.append({"modo": "variacao", "questao": questao, "quantas": neste})
+            faltam -= neste
 
     # Sem questao real na materia nao ha o que variar, e ai vale o modo do
     # zero - com questoes reais servindo so de exemplo de estilo. E a excecao,
@@ -455,6 +492,8 @@ def preparar(
         "modo": "do_zero" if sem_base and pedidos else "variacao",
         "modo_do_pedido": escolhido,
         "escopo": None,
+        # {materia: quantas} quando o simulado se dividiu pelo edital.
+        "distribuicao": distribuicao,
         "sem_base": sem_base,
         "base_disponivel": len(candidatas),
         "ja_geradas": ja_geradas,

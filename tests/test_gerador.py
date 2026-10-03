@@ -702,3 +702,42 @@ def test_o_resultado_da_rodada_gerada_nao_vem_vazio(cliente):
 
     assert "Lei de Execução Penal" in pagina
     assert "criada por IA" in pagina
+
+
+# --- o modo simulado e o peso do edital (item 4 da secao F, 03/10/2026) ---------
+
+def test_o_simulado_sem_materia_divide_pelo_peso_do_edital(banco_temporario, monkeypatch):
+    """A §8 pede que o modo simulado respeite "o edital, o peso das materias".
+    Antes ele sorteava as bases sem olhar o peso; agora as questoes se dividem
+    pelo quadro do edital, como o compilado e a composicao (decisao 67)."""
+    from radar.servico import compilado
+
+    _semear(_concurso(),
+            *[_real(n, impressao=f"lep{n}") for n in range(1, 5)],
+            *[_real(n, materia="Língua Portuguesa", impressao=f"port{n}",
+                    enunciado=f"Questao de portugues {n}?") for n in range(5, 9)])
+    monkeypatch.setattr(compilado, "_pesos", lambda escolhidas: (
+        {"Língua Portuguesa": 15, "Lei de Execução Penal": 10}, None, None))
+
+    plano = servico.geradas.preparar(None, 10, modo="simulado", semente=1)
+
+    assert plano["distribuicao"] == {"Língua Portuguesa": 6, "Lei de Execução Penal": 4}
+    por_materia: dict[str, int] = {}
+    for pedido in plano["pedidos"]:
+        materia = pedido["questao"].materia
+        por_materia[materia] = por_materia.get(materia, 0) + pedido["quantas"]
+    assert por_materia == {"Língua Portuguesa": 6, "Lei de Execução Penal": 4}
+
+
+def test_o_simulado_com_materia_escolhida_nao_se_divide(banco_temporario, monkeypatch):
+    """Com a materia escolhida nao ha o que dividir: o caminho de sempre."""
+    from radar.servico import compilado
+
+    _semear(_concurso(), *[_real(n, impressao=f"lep{n}") for n in range(1, 5)])
+    monkeypatch.setattr(compilado, "_pesos", lambda escolhidas: (
+        {"Lei de Execução Penal": 10}, None, None))
+
+    plano = servico.geradas.preparar("Lei de Execução Penal", 6, modo="simulado")
+
+    assert plano["distribuicao"] is None
+    assert plano["quantas"] == 6

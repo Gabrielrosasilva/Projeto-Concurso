@@ -988,6 +988,9 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # A ficha de estudo de cada faixa (Etapa 6B), pelo titulo do tema.
             # So le o data/fichas.json: abrir a tela Hoje continua rapido.
             "fichas_das_faixas": servico.fichas.das_faixas(tela.blocos),
+            # A composicao das faixas que medem (decisao 67). So conta quando o
+            # dia tem diagnostico ou simulado no radar.
+            "composicoes": servico.composicao.das_faixas(tela.blocos, tela.data),
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,
@@ -1013,6 +1016,25 @@ def _inteiro(texto: str, campo: str) -> int | None:
         raise servico.cronograma.RegistroInvalido(
             f"{campo} precisa ser um número inteiro (veio {texto!r})"
         )
+
+
+@app.post("/hoje/rodada")
+def hoje_rodada(data: str = Form(""), bloco: str = Form(""), indice: str = Form("")):
+    """Cria a rodada da faixa que mede, ja com a composicao, e vai para ela.
+
+    A rodada que ja existe e reaberta, e nunca recriada: o que eu respondi
+    fica como foi gravado. Sem questao para compor, volta para a faixa.
+    """
+    try:
+        quando = date.fromisoformat(data)
+        posicao = int(indice)
+    except ValueError:
+        return RedirectResponse("/hoje", status_code=303)
+    simulado = servico.composicao.criar_rodada_do_dia(quando, bloco, posicao)
+    if simulado is None:
+        return RedirectResponse(f"/hoje?data={quando.isoformat()}#faixa-{bloco}-{posicao}",
+                                status_code=303)
+    return RedirectResponse(f"/simulado/{simulado.id}", status_code=303)
 
 
 @app.post("/hoje/registrar")

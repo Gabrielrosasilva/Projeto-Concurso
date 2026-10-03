@@ -119,7 +119,10 @@ confere a §23 do novo.md: **18 de 19 itens atendem com o dado real**.
 primeiro" nao soma mais o alvo e o complementar; o backup das 23h30, que
 falhava desde 27/09, roda com a pasta suja; a lista de leis alteradas depois
 das provas existe (15 itens, 17 questoes, por conferir:
-[leis_alteradas](docs/leis_alteradas.md)); e os docs foram revistos.
+[leis_alteradas](docs/leis_alteradas.md)); e os docs foram revistos. **O ciclo
+especifico (pedido de 03/10):** feita a 2A - o diagnostico e o simulado de
+07/11 mostram de quais assuntos e subassuntos sao as questoes e criam a rodada
+com essa composicao (decisao 67); faltam a 2B, a 2C e a secao F.
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 50 geradas; banco na versao 4.
 **Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
@@ -154,7 +157,9 @@ anotado - **nunca sao somados na tela**, so no estado da amostra.
 **Os selos moram no `radar/origem.py`**, e quem escolhe a cor e o dado: o
 servico grava a origem (`origem`, ou `origens` quando junta partes) e o
 template so desenha; `--selo-*` so no `design.css`, e a meta do dia tem as
-cores dela. **Alvo, complementar e
+cores dela. **A composicao das rodadas que medem** (diagnostico e simulado no radar) **sai
+do `servico/composicao.py`** (decisao 67): so questao real da FEPESE, do alvo e
+do complementar aceito, e gravada na rodada. **Alvo, complementar e
 fora saem do `servico/evidencia.py`** (uma regra, nunca somados; e prova
 complementar so entra em estatistica se estiver aceita no
 `data/acervo_complementar.json`), e tudo que

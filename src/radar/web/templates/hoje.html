@@ -112,6 +112,16 @@
     .ds a.botao-anotar{color:var(--cor-texto-suave)}
     .ds a.botao-anotar:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
 
+    /* A composicao da faixa que mede (decisao 67): de quais assuntos e
+       subassuntos sao as questoes, e de onde saiu cada numero. */
+    .faixa .composicao{margin:var(--esp-2) 0 0;font-size:var(--tam-sm)}
+    .faixa .composicao .so-questoes{font-weight:var(--peso-forte);margin:0 0 var(--esp-2)}
+    .faixa .composicao .materia-da-rodada{margin:var(--esp-2) 0 0}
+    .faixa .composicao ul{margin:var(--esp-1) 0 var(--esp-2);padding-left:var(--esp-5)}
+    .faixa .composicao li{margin:2px 0}
+    .faixa .composicao .sub,.faixa .composicao .regra{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .faixa .composicao form{margin:var(--esp-2) 0 0}
+
     /* --- "fiz X, acertei Y" na propria faixa (etapa E2) --- */
     .resultado{margin-left:var(--esp-2);font-size:var(--tam-xs);font-weight:var(--peso-medio);
       color:var(--cor-verde);white-space:nowrap}
@@ -920,6 +930,57 @@
                 {% if ficha %}
                   <p class="links"><a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if tema %}&amp;tema={{ tema }}{% endif %}">
                     <span aria-hidden="true">📋</span> Ficha de estudo</a></p>
+                {% endif %}
+
+                {# A faixa que MEDE (diagnostico e simulado no radar): so
+                   questao real da FEPESE, na composicao da decisao 67, e o
+                   botao que cria a rodada ja com ela. Criada, a faixa mostra a
+                   composicao GRAVADA na rodada e o link para ela. #}
+                {% set medida = composicoes.get((b.chave, loop.index0)) if composicoes else none %}
+                {% if medida %}
+                  {% set c = medida.composicao %}
+                  <div class="composicao">
+                    <p class="so-questoes">Só questões: não há o que estudar nesta faixa.</p>
+                    <p>{{ selo('automatico', 'Composição calculada') }}
+                      {% if c.materias | length > 1 %}{{ c.total }} questões divididas entre as matérias pelo peso do edital {{ selo('oficial', curto=True) }};{% endif %}
+                      dentro de cada matéria, pela incidência nas provas do cargo quando há amostra, e por igual entre os assuntos do edital quando não há.</p>
+                    {% for m in c.materias %}
+                      <p class="materia-da-rodada"><b>{{ m.total }} de {{ m.materia }}</b> · provas do cargo: {{ m.alvo }} {{ selo('acervo', curto=True) }}</p>
+                      {% if m.com_amostra %}
+                        <ul>
+                          {% for a in m.com_amostra if a.pedidas %}
+                            <li><b>{{ a.pedidas }}</b> · {{ a.nome }} — provas do cargo: {{ a.alvo }}{% if a.complementar %}; complementar: {{ a.complementar }}, com peso {{ c.peso_do_complementar | numero(2) }} na divisão{% endif %}
+                              {% if a.subassuntos %}<br><span class="sub">{% for sub, n in a.subassuntos | dictsort %}{{ n }} {{ sub or 'só no assunto, sem subassunto classificado' }}{{ '; ' if not loop.last }}{% endfor %}</span>{% endif %}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                      {% if m.sem_amostra %}
+                        <p class="sub">Assuntos sem amostra nas provas do cargo: <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span> Por isso, partes iguais entre os assuntos do edital.</p>
+                        <ul>
+                          {% for a in m.sem_amostra if a.pedidas %}
+                            <li><b>{{ a.pedidas }}</b> · {{ a.nome }}
+                              {% if a.subassuntos %}<br><span class="sub">{% for sub, n in a.subassuntos | dictsort %}{{ n }} {{ sub or 'só no assunto, sem subassunto classificado' }}{{ '; ' if not loop.last }}{% endfor %}</span>{% endif %}</li>
+                          {% endfor %}
+                        </ul>
+                        {% set vazios = m.sem_amostra | selectattr('estoque', 'equalto', 0) | map(attribute='nome') | list %}
+                        {% if vazios %}<p class="sub">Sem questão real da FEPESE classificada no acervo: {{ vazios | join('; ') }}.</p>{% endif %}
+                      {% endif %}
+                      {% if m.faltaram %}<p class="aviso-essencial">⚠️ Faltaram {{ m.faltaram }} questões de {{ m.materia }}: o acervo não tem mais questão real classificada nesta matéria.</p>{% endif %}
+                    {% endfor %}
+                    <p class="regra">Só questões reais da FEPESE: das provas do cargo primeiro, depois do acervo complementar aceito; uma por enunciado, sem anulada, com gabarito. Questão gerada por IA não entra: ela treina, não mede.</p>
+                    {% if medida.rodada_id %}
+                      <p class="links"><a class="botao-anotar" href="/simulado/{{ medida.rodada_id }}"><span aria-hidden="true">▶</span> Abrir a rodada desta faixa</a></p>
+                    {% elif not t.futuro or t.e_hoje %}
+                      <form method="post" action="/hoje/rodada">
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                        <button type="submit" class="ds-botao ds-botao--secundario">Criar a rodada com esta composição</button>
+                      </form>
+                    {% else %}
+                      <p class="sub">O botão de criar a rodada aparece no dia da faixa.</p>
+                    {% endif %}
+                  </div>
                 {% endif %}
 
                 {# Anotar o erro daqui mesmo, com a data, a materia e o

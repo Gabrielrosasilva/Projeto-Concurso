@@ -238,6 +238,15 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
+- 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A esta feita (a composicao
+  das faixas que medem, decisao 67). Faltam, nesta ordem: a **2B** - os
+  simulados de sabado no Qconcursos com a composicao calculada (sem numero
+  escrito a mao no YAML), a revisao semanal com os temas e os erros da semana,
+  o R+7 dos diagnosticos e a comparacao de 07/11 (a rodada de 07/11 e o
+  acumulado do ciclo, separados) -; a **2C** - o bonus e a interpretacao
+  cronometrada com ficha ou no, e o assunto, o subassunto e o elemento na
+  propria faixa -; e depois a **secao F** inteira (o Pedido 1);
+
 ## E. Cancelado
 
 - **C1b, sirene para a Guarda Municipal de Florianopolis e de Balneario
@@ -263,8 +272,6 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 - 🔴 **Os padroes de cobranca do complementar nunca sao calculados**: o
   `entra_nos_padroes` da validacao so aparece nos relatorios, e a linha
   complementar da incidencia mostra so a contagem;
-- 🟡 **O modo simulado da geracao nao pondera pelo peso do edital**: a §8 pede
-  "respeitando o edital, o peso das materias"; hoje ele sorteia pela materia;
 - 🟡 **`geradas.origem_de` acha a questao real so pela impressao**, com
   `limit(1)`: em 3 das 20 geradas por variacao a impressao bate com 3 questoes
   da mesma prova, e o selo pode apontar a questao errada. A regra do projeto e

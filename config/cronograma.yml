@@ -32,6 +32,10 @@
 #   anki        - no TOPO do arquivo: ativado | desativado. Desativado, as
 #                 faixas `tipo: anki` viram a linha "ANKI temporariamente
 #                 desativado", sem horario e fora do total.
+#   materias_da_rodada - nas faixas que MEDEM no radar (diagnostico e
+#                 simulado), as materias da rodada quando sao mais de uma. A
+#                 composicao das questoes nao e escrita aqui: sai do
+#                 src/radar/servico/composicao.py (decisao 67).
 #   conteudo    - o no da arvore de conteudos, pelo caminho ("Lingua
 #                 Portuguesa > Vozes do verbo"). Opcional; conferido contra
 #                 data/conteudos.json (`radar conteudos`). So entra quando o
@@ -663,8 +667,8 @@ dias:
     questoes: 20
     materia: Raciocínio Lógico
     titulo: Diagnóstico de Raciocínio Lógico
-    detalhe: 'Radar > Simulado > matéria Raciocínio Lógico > 20 questões, cronometradas. Anote o acerto: é ele que
-      confirma ou não o seu 8/10.'
+    detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
+      "Criar a rodada com esta composição". Anote o acerto: é ele que confirma ou não o seu 8/10.'
     cronometrado: true
     onde: radar
   - tipo: pausa
@@ -680,7 +684,8 @@ dias:
     questoes: 20
     materia: Língua Portuguesa
     titulo: Diagnóstico de Português
-    detalhe: Radar > Simulado > matéria Língua Portuguesa > 20 questões, cronometradas. Anote o acerto.
+    detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
+      "Criar a rodada com esta composição". Anote o acerto.'
     cronometrado: true
     onde: radar
   - tipo: pausa
@@ -3935,8 +3940,16 @@ dias:
     questoes: 50
     min_por_questao: 3
     titulo: Simulado de fechamento do Ciclo 1
-    detalhe: Radar > Simulado > Compilado > marque Língua Portuguesa, Raciocínio Lógico, Direitos Humanos, Direito
-      Constitucional, Direito Penal e Lei de Execução Penal > 50 questões. Sem consulta, sem pausa.
+    detalhe: 'Questões reais da FEPESE das seis matérias do ciclo, sem consulta e sem pausa: o peso do edital divide
+      entre as matérias, e dentro de cada uma vale a mesma regra do diagnóstico de 03/10. Crie a rodada pelo botão
+      "Criar a rodada com esta composição".'
+    materias_da_rodada:
+    - Língua Portuguesa
+    - Raciocínio Lógico
+    - Direitos Humanos
+    - Direito Constitucional
+    - Direito Penal
+    - Lei de Execução Penal
     cronometrado: true
     onde: radar
   - tipo: correcao

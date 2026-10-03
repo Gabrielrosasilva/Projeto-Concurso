@@ -22,6 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A feita (as faixas que medem); faltam a 2B, a 2C e a seção F |
 
 ---
 
@@ -1945,3 +1946,80 @@ Macetes e Mais com o banco real (numa cópia); `python -m radar.cli
 sincronizar` e `radar backup` numa cópia do repositório, com origem local;
 `radar complementar` e `radar auditar` no projeto. Commit e push uma vez só,
 no fim do item 5, como você pediu.
+
+## 16 — O ciclo 1 específico (pedido de 03/10/2026)
+
+- Situação: 🔄 em andamento; a subetapa 2A está feita
+- Datas: início 03/10
+
+**O pedido.** Dois, ligados: (1) implementar o "item 4" das pendências; (2) o
+sábado de 03/10 está genérico - o diagnóstico manda "Radar > Simulado > matéria
+X > 20 questões" sem dizer de que assunto - e o ciclo 1 inteiro talvez também.
+Primeiro as respostas com evidência e o plano, sem mexer em nada; depois o
+"pode", com as alternativas recomendadas.
+
+**As respostas do Passo 1** (só leitura):
+1. a ficha não depende da data, e sim do tema: ela é reconhecida pelo título
+   (decisão 42) em qualquer dia; a chave `conteudo` existe em só 6 faixas de
+   Português; o sábado de 03/10 é o único só de medida - do 10/10 em diante o
+   sábado tem estudo de Raciocínio Lógico com ficha -, e as faixas que medem
+   (diagnóstico, simulado, revisão semanal, R+7 dos diagnósticos) nunca têm
+   ficha. Mesmo com ficha, a faixa não mostrava o assunto: ele ficava dentro
+   da ficha;
+2. de 03/10 a 07/11, 121 das 182 faixas de questões não dizem o assunto e o
+   subassunto exatos: 45 sem ficha nem nó (diagnósticos, simulados, revisões
+   semanais, o R+7 dos diagnósticos, 25 bônus, 5 interpretações
+   cronometradas), 30 com ficha sem nó (LEP e Português), 29 só no assunto e
+   17 com nós mistos;
+3. os dias seguintes já se veem: "← dia anterior · Hoje · próximo dia →" e
+   `/hoje?data=AAAA-MM-DD`;
+4. o diagnóstico foi feito por matéria, e o caminho dele sorteava de qualquer
+   banca (em Português, 39 da IESES e 68 de provas recusadas na 3B entre 254);
+5. a pendência F do "Onde estudar" continua aberta: a composição usa a
+   incidência por nó da árvore, e não o "Onde estudar".
+
+As decisões: 1B, 2A, 3A+C, 4A, 5B, 6B, 7A e 8A (registradas no `decisoes.md`,
+antes da decisão 67).
+
+### 2A — as faixas que medem ✅
+
+**O que mudou** (decisões 67 e 68):
+- `src/radar/servico/composicao.py` (novo): a regra de composição, a rodada
+  que mede (só questão real da FEPESE do alvo e do complementar aceito, uma
+  por enunciado, sem anulada, com gabarito, nunca gerada), a composição
+  gravada na rodada e a rodada que não é recriada;
+- a tela Hoje: a faixa que mede diz "Só questões: não há o que estudar nesta
+  faixa.", mostra a composição - assunto, quantas, a amostra das provas do
+  cargo, o complementar separado com o peso, os subassuntos das questões
+  escolhidas e a frase padrão onde falta amostra - e o botão "Criar a rodada
+  com esta composição" (`POST /hoje/rodada`); criada, mostra a composição
+  gravada e o link para a rodada;
+- `config/cronograma.yml`: só o `detalhe` das três faixas que medem (03/10
+  manhã e noite, 07/11 noite) e a chave nova `materias_da_rodada` no 07/11;
+  nenhum título mudou. `src/radar/cronograma.py` lê a chave e confere cada
+  nome contra o bloco `materias`;
+- o item 4 da seção F: o modo simulado da geração, sem matéria, divide pelo
+  peso do edital (`servico/geradas.py`), e o `radar gerar` diz a divisão;
+- docs: `decisoes.md` (as escolhas, 67 e 68), `pendencias.md` (o item 4 da F
+  saiu; o que falta do pedido entrou em D), `README.md`, `historico.md` e o
+  "Estado atual" do `CLAUDE.md`.
+
+**Com o banco real** (numa cópia): o diagnóstico de Raciocínio Lógico sai com
+20 de 20 pelo edital (nenhum assunto tem amostra; 7 dos 12 sem questão real
+classificada); o de Português com 8 de Interpretação e 1 de cada um dos
+outros 12 assuntos; o 07/11 com 50 de 50. A rodada criada pelo botão teve 20
+questões, todas da FEPESE, 17 das provas do cargo e 3 do complementar aceito,
+nenhuma gerada, nenhuma anulada, 20 enunciados distintos; o segundo clique
+reabriu a mesma rodada. A tela de 03/10 abre em ~3 s (as outras não mudam:
+~0,4 s). `radar gerar --quantas 20 --modo simulado` (simulação, nada gasto)
+dividiu as 20 entre as 11 matérias pelo edital.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_composicao.py` (novo), 1ª rodada | 11 passed, 1 failed (o ajudante do teste passava `onde` duas vezes; corrigido no teste) |
+| `test_composicao.py` | 18 passed |
+| `test_gerador.py`, os 2 novos do modo simulado | 2 passed |
+| Os 12 arquivos das áreas tocadas (cronograma, tela Hoje, Plano B, geração, compilado, varredura, design system, aceite) | 328 passed |
+| Suíte inteira, PC (uma vez, no fim da 2A) | **2392 passed** (2372 de antes + 20 novos: 18 da composição e 2 do modo simulado da geração), 0 failed, 25 min |

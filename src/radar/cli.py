@@ -919,6 +919,10 @@ def gerar(
         raise typer.Exit(code=1)
 
     console.print(f"Questoes a gerar: [bold]{plano['quantas']}[/]")
+    if plano.get("distribuicao"):
+        # O simulado sem materia segue o peso do edital (§8, decisao 67).
+        partes = ", ".join(f"{n} de {m}" for m, n in plano["distribuicao"].items() if n)
+        console.print(f"[dim]Divididas pelo peso do edital: {partes}[/]")
     console.print(
         f"[dim]{len(plano['pedidos'])} chamada(s) a API, "
         f"ate {gerador.VARIACOES_POR_QUESTAO} questoes por chamada[/]"

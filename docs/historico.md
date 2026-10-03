@@ -1823,3 +1823,26 @@ navegacao de antes do redesign, o estado de 5.928 questoes, o minimo de 5
 respostas, o tempo dos testes, o cartao "De olho" na home -; e as pendencias
 ganharam a secao F, com os 10 achados da varredura que nenhuma etapa tinha
 registrado. Commit e push uma vez so, no fim dos cinco itens, a pedido.
+
+## O sabado generico e o ciclo especifico, subetapa 2A (03/10)
+
+**O pedido:** o sabado de 03/10 mostrava "Diagnostico de Raciocinio Logico" e
+"Diagnostico de Portugues" com o detalhe "Radar > Simulado > materia X > 20
+questoes", sem dizer de que assunto; e o ciclo inteiro, estava assim tambem?
+Junto, o "item 4" das pendencias.
+
+**O que a leitura achou:** 121 das 182 faixas de questoes de 03/10 a 07/11 nao
+dizem o assunto e o subassunto exatos; o sabado de 03/10 e o unico so de
+medida; o caminho do diagnostico sorteava de qualquer banca (a IESES e provas
+recusadas na 3B entravam); e a arvore so tem amostra no alvo, em Portugues,
+para Interpretacao - Raciocinio Logico so caiu em 2019.
+
+**A 2A:** uma regra de composicao (decisao 67) num servico novo, o
+`servico/composicao.py`, que usa o que ja existia - a incidencia por no da
+arvore, o `compilado.distribuir`, o minimo do `config/amostra.yml` e o peso do
+complementar do `config/prioridade.yml`. A tela Hoje mostra a composicao nas
+faixas que medem e cria a rodada com ela; a rodada grava a composicao e nao e
+recriada. O `cronograma.yml` mudou so no `detalhe` das tres faixas que medem e
+na lista de materias do 07/11 (chave nova, `materias_da_rodada`); nenhum titulo
+mudou, e os dias antes de 03/10 tem teste. E o modo simulado da geracao passou
+a dividir pelo peso do edital (decisao 68).

@@ -167,6 +167,10 @@ class Faixa:
     # chave `conteudo` da faixa (Etapa 2), conferida no carregamento contra o
     # data/conteudos.json. Opcional: o titulo continua dizendo o tema.
     conteudo: str | None = None
+    # As materias de uma rodada que mede mais de uma (o simulado de fechamento
+    # de 07/11). A composicao das questoes sai do `servico/composicao.py`; aqui
+    # so a lista, conferida contra o bloco `materias` - nunca numero (dec. 67).
+    materias_da_rodada: tuple = ()
     # A faixa do Anki com `anki: desativado`. Ela continua na lista, na mesma
     # posicao: os checks sao reconhecidos por bloco e posicao, e tira-la
     # mudaria a posicao do Bonus que vem depois. Desligada, ela nao tem
@@ -414,6 +418,7 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
         consulta=(bool(bruta["consulta"]) if bruta.get("consulta") is not None
                   else None),
         conteudo=bruta.get("conteudo"),
+        materias_da_rodada=tuple(bruta.get("materias_da_rodada") or ()),
     )
 
 
@@ -577,6 +582,7 @@ def _conferir_materias_das_faixas(dias: list[Dia], materias: list[MateriaDoEdita
     if not materias:
         return          # sem o bloco, nao ha o que conferir
     conhecidas = {m.nome for m in materias} | set(mistas)
+    do_edital = {m.nome for m in materias}
     for dia in dias:
         for faixa in dia.faixas():
             if faixa.materia and faixa.materia not in conhecidas:
@@ -586,6 +592,15 @@ def _conferir_materias_das_faixas(dias: list[Dia], materias: list[MateriaDoEdita
                     f"materia mesmo, some ela la; se a faixa cobrir mais de uma, "
                     f"some o nome em `materias_mistas`."
                 )
+            # A rodada que mede varias materias so aceita materia do edital: e
+            # do peso dela no edital que sai a divisao das questoes.
+            for nome in faixa.materias_da_rodada:
+                if nome not in do_edital:
+                    raise ErroNoCronograma(
+                        f"Dia {dia.data.isoformat()}: a faixa {faixa.titulo!r} "
+                        f"tem {nome!r} em `materias_da_rodada`, que nao esta em "
+                        f"`materias`."
+                    )
 
 
 def _conferir_conteudos_das_faixas(dias: list[Dia]) -> None:
