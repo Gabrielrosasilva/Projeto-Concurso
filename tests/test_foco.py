@@ -1131,6 +1131,18 @@ def test_a_tabela_diz_de_onde_vem_cada_coluna(cliente, com_quadro_do_edital):
     assert "Base pequena" in texto
 
 
+def test_o_selo_de_cada_coluna_sai_do_painel(cliente, com_quadro_do_edital, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem NO DADO, o selo
+    troca junto."""
+    _prova_com_anuladas(anuladas=2, validas=3)
+    monkeypatch.setattr(foco.Painel, "origens",
+                        {**foco.ORIGENS_DO_PAINEL, "edital": origem.IA})
+
+    texto = cliente.get("/analises").text
+
+    assert '<span aria-hidden="true">🟣</span> Gerado por IA</span><b>Edital' in texto
+
+
 def test_nada_de_numero_escrito_a_mao(cliente, com_quadro_do_edital):
     """"duas provas" e "materia de 5 questoes" eram texto fixo. Com uma prova
     so no banco, a tela tem que dizer uma."""
