@@ -21,6 +21,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
+from radar.origem import CLASSIFICACAO, IA, PROVA
+
 
 class Base(DeclarativeBase):
     pass
@@ -227,6 +229,14 @@ class Concurso(Base):
     # descobrir daqui a tres meses que o dado existia e foi jogado fora.
     extra: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
 
+    @property
+    def origem_do_salario(self) -> str | None:
+        """O selo do salario (Etapa 7A): lido do anuncio pelo classificador,
+        ou None quando fui eu que digitei - ai a tela diz "anotado por mim"."""
+        if self.salario is None or self.salario_manual:
+            return None
+        return CLASSIFICACAO
+
     def __repr__(self) -> str:
         return f"<Concurso {self.uf or '--'} {self.titulo[:50]!r}>"
 
@@ -334,6 +344,10 @@ class QuestaoDeProva(Base):
     evidencia: Mapped[str | None] = mapped_column(String(12), index=True, nullable=True)
 
     extraida_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    #: A origem do selo (Etapa 7A): questao real, tirada do caderno oficial.
+    #: Nao e coluna - a tabela ja diz isso de cada linha.
+    origem = PROVA
 
     def __repr__(self) -> str:
         return f"<Questao {self.numero} {self.materia} {self.enunciado[:40]!r}>"
@@ -480,6 +494,10 @@ class QuestaoGerada(Base):
     rejeitada: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
 
     criada_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
+
+    #: A origem do selo (Etapa 7A): escrita pela IA. Nao e coluna - a tabela
+    #: ja diz isso de cada linha.
+    origem = IA
 
     def __repr__(self) -> str:
         return f"<QuestaoGerada {self.modo} {self.enunciado[:40]!r}>"

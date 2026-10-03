@@ -29,6 +29,7 @@ from radar import config, edital_materias, edital_programa, macetes, onde_estuda
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
 from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado
+from radar.origem import ACERVO, AUTOMATICO, CLASSIFICACAO, OFICIAL, TENDENCIA
 from radar.questoes import extrair_texto
 from radar.regioes import normalizar
 from radar.util import para_local
@@ -102,9 +103,22 @@ class DeOlho:
         return f"{self.cargo} de {self.cidade}"
 
 
+#: A origem de cada parte do painel que a tela mostra com selo (Etapa 7A).
+#: A tela le daqui, e nao escolhe a cor.
+ORIGENS_DO_PAINEL = {
+    "edital": OFICIAL,          # o quadro de materias e o peso
+    "provas": ACERVO,           # as questoes validas de cada prova do cargo
+    "meu_acerto": AUTOMATICO,   # radar + anotado, sem consulta
+    "assunto": CLASSIFICACAO,   # o assunto de cada questao
+    "estimativa": TENDENCIA,    # questoes esperadas e pontos a ganhar
+}
+
+
 @dataclass
 class Painel:
     """Tudo que a tela de foco mostra. Campo vazio = nao sei ainda."""
+    origens = ORIGENS_DO_PAINEL
+
 
     nome_do_alvo: str = "alvo principal"
     configurado: bool = True

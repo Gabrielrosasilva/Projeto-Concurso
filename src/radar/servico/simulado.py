@@ -27,6 +27,7 @@ from radar.models import (
     Simulado,
     agora,
 )
+from radar.origem import IA, OFICIAL, PROVA
 from radar.servico.comum import cargo_parecido as _cargo_parecido
 # A conta do acerto mora no `servico.metricas`, a fonte unica (Etapa 1C).
 # Os nomes continuam aqui porque a fachada `servico` e a home os leem daqui.
@@ -443,6 +444,16 @@ class ItemDeRevisao:
     ano: int | None = None
     banca: str | None = None
 
+    @property
+    def origem(self) -> str:
+        """A questao: tirada da prova, ou escrita pela IA (Etapa 7A)."""
+        return IA if self.gerada else PROVA
+
+    @property
+    def origem_da_resposta(self) -> str:
+        """A letra certa: o gabarito definitivo, ou a resposta que a IA deu."""
+        return IA if self.gerada else OFICIAL
+
 
 def revisao(simulado_id: int) -> list[ItemDeRevisao]:
     """O que eu marquei e qual era a correta, questao a questao.
@@ -553,6 +564,11 @@ class ResumoDaRodada:
     acertos: int
     materias: list[str]
     gerada: bool
+
+    @property
+    def origem(self) -> str:
+        """De onde vieram as questoes da rodada: da prova, ou da IA."""
+        return IA if self.gerada else PROVA
 
     @property
     def porcentagem(self) -> float | None:

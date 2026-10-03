@@ -30,6 +30,7 @@ from radar.models import EstadoDoDia
 from radar.regioes import normalizar
 from radar.servico import cronograma as diario
 from radar.servico import erros as caderno
+from radar.origem import TENDENCIA
 from radar.servico import metricas
 from radar.servico.compilado import mesma_materia
 
@@ -142,6 +143,8 @@ class MateriaNaTela:
 @dataclass
 class Projecao:
     """Se a prova fosse hoje. E leitura, nao fato - e a tela diz isso."""
+    origem = TENDENCIA
+
     acertos: int = 0
     meta: int = 0
     questoes_da_prova: int = 0

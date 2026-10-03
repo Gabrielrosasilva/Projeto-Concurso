@@ -47,6 +47,7 @@ from radar.models import (
     agora,
 )
 from radar.servico import cronograma as diario
+from radar.origem import AUTOMATICO, IA
 from radar.servico import extra as estudo_extra
 from radar.util import fuso_local, para_local
 
@@ -56,6 +57,16 @@ RECORTES = {
     "anotado": "anotado",
     "treino_ia": "treino de IA",
     "total": "total",
+}
+
+#: A origem de cada recorte, para o selo (Etapa 7A): o que eu fiz e conta do
+#: sistema; o treino de IA leva o selo da IA, porque e resposta a questao que
+#: a IA escreveu - e ela nunca pode parecer questao da banca.
+ORIGEM_DO_RECORTE = {
+    "radar": AUTOMATICO,
+    "anotado": AUTOMATICO,
+    "treino_ia": IA,
+    "total": AUTOMATICO,
 }
 
 FAIXA = "faixa"
@@ -79,6 +90,9 @@ class Numeros:
     O total nao e guardado: ele E a soma dos estados. Por isso nao ha como a
     linha "N questoes = acertos + erros + ..." deixar de fechar.
     """
+    #: A origem do selo: o sistema contou o que eu fiz.
+    origem = AUTOMATICO
+
     acertos: int = 0
     erros: int = 0
     #: Feitas, mas sem acerto anotado: volume sim, acerto nao.
@@ -305,6 +319,9 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
 @dataclass
 class Conta:
     """Um periodo somado, separado pelos recortes de nome fixo."""
+    #: A origem de cada recorte, para a tela desenhar o selo de cada linha.
+    origens = ORIGEM_DO_RECORTE
+
     #: O que eu anotei nas faixas do plano.
     faixas: Numeros = field(default_factory=Numeros)
     #: O que eu anotei no estudo extra.
@@ -384,6 +401,9 @@ class DesempenhoDaMateria:
     #: No acumulado, QUESTOES diferentes; numa rodada, as respostas dela.
     respondidas: int = 0
     acertos: int = 0
+    #: Acerto em questao real e conta do sistema; o das geradas leva o selo
+    #: da IA (`desempenho_das_geradas`), e os dois nunca se somam.
+    origem: str = AUTOMATICO
 
     @property
     def porcentagem(self) -> float:
@@ -477,7 +497,7 @@ def _por_materia_das_respostas(tabela, gerada: bool, simulado_id: int | None):
     for materia, resposta in linhas:
         por_materia.setdefault(materia or "sem materia", []).append(resposta)
     return _pior_primeiro([
-        DesempenhoDaMateria(nome, *placar(respostas))
+        DesempenhoDaMateria(nome, *placar(respostas), origem=IA if gerada else AUTOMATICO)
         for nome, respostas in por_materia.items()
     ])
 
@@ -518,6 +538,8 @@ def resumo_do_simulado(simulado_id: int) -> dict:
         ))
     respondidas, acertos = placar(respostas)
     return {
+        # O resultado da rodada de questao gerada leva o selo da IA.
+        "origem": IA if any(r.gerada for r in respostas) else AUTOMATICO,
         "total": len(respostas),
         "respondidas": respondidas,
         "acertos": acertos,
@@ -531,6 +553,7 @@ def resumo_do_simulado(simulado_id: int) -> dict:
 @dataclass
 class Evolucao:
     """Quanto eu acerto, e se isso mudou nos ultimos 30 dias."""
+    origem = AUTOMATICO
 
     #: RESPOSTAS a questao real, e nao questoes: a evolucao e o historico.
     respondidas: int = 0

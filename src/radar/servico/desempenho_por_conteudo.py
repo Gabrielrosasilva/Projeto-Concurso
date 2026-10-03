@@ -52,6 +52,7 @@ from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import Classificacao, QuestaoDeProva
+from radar.origem import AUTOMATICO
 from radar.servico import conteudos as servico_conteudos
 from radar.servico import metricas
 
@@ -104,6 +105,8 @@ class Metade:
 @dataclass
 class Desempenho:
     """Um no da arvore e o que eu fiz nele, pelos dois recortes."""
+    origem = AUTOMATICO
+
 
     caminho: str
     nivel: str
@@ -367,6 +370,8 @@ def do_escopo(dentro, *, caminho: str, nome: str, nivel: str,
 @dataclass
 class LinhaDaTela:
     """Um no na tela "Meu desempenho", com o estado e a amostra."""
+    origem = AUTOMATICO
+
 
     desempenho: Desempenho
     estado: regua.Estado

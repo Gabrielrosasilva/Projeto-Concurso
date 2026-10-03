@@ -16,12 +16,15 @@ from functools import cache
 import yaml
 
 from radar import config
+from radar.origem import OFICIAL
 from radar.regioes import normalizar
 
 
 @dataclass(frozen=True)
 class Lei:
     """Onde ler o texto oficial de um assunto."""
+    origem = OFICIAL
+
 
     titulo: str
     url: str

@@ -17,6 +17,7 @@ from sqlalchemy import select
 
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso
+from radar.origem import AUTOMATICO, TENDENCIA
 from radar.servico.comum import ano_do_concurso as _ano_do_concurso
 
 
@@ -47,6 +48,9 @@ def _anos(n: int) -> str:
 
 @dataclass
 class PrevisaoDeAbertura:
+    #: Toda data desta tela e previsao, e nao fato.
+    origem = TENDENCIA
+
     municipio: str
     anos: list[int]
     ultimo_ano: int
@@ -161,6 +165,8 @@ def previsao_de_abertura(
 @dataclass
 class Cobertura:
     """De que anos uma fonte tem concurso no banco."""
+    origem = AUTOMATICO
+
 
     fonte: str
     primeiro_ano: int

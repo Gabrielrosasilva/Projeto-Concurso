@@ -18,6 +18,7 @@ from pathlib import Path
 import yaml
 
 from radar import config
+from radar.origem import AUTOMATICO
 
 # A ordem aqui e a ordem do dia.
 BLOCOS = ("manha", "noite", "pos22")
@@ -876,6 +877,9 @@ def montar_plano_b(plano: Plano, data: date, minutos: int,
 
 @dataclass
 class Nivel:
+    #: A origem do selo (Etapa 7A): o gatilho e conta do sistema.
+    origem = AUTOMATICO
+
     semana: int
     planejado: int            # o do plano, quando tudo vai bem: a semana N e o nivel N
     calculado: int            # o que o gatilho deu, olhando as semanas fechadas

@@ -17,6 +17,7 @@ from sqlalchemy import func, select
 from radar import config, gerador
 from radar import gerador as motor
 from radar.db import criar_tabelas, sessao
+from radar.origem import TENDENCIA
 from radar.models import (
     QuestaoDeProva,
     QuestaoGerada,
@@ -313,6 +314,8 @@ def _preparar_no_escopo(escopo, modo: str, quantas: int,
         "entrada": entrada,
         "saida": saida,
         "custo": custo,
+        # O custo e estimativa, antes de gastar (Etapa 7A).
+        "origem_do_custo": TENDENCIA,
     }
 
 
@@ -458,6 +461,8 @@ def preparar(
         "entrada": entrada,
         "saida": saida,
         "custo": custo,
+        # O custo e estimativa, antes de gastar (Etapa 7A).
+        "origem_do_custo": TENDENCIA,
     }
 
 

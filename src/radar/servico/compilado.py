@@ -26,6 +26,7 @@ from difflib import SequenceMatcher
 from radar import foco
 from radar.db import criar_tabelas, sessao
 from radar.models import RespostaDeSimulado, Simulado
+from radar.origem import OFICIAL, PROVA
 from radar.regioes import normalizar
 from radar.servico import simulado as treino
 
@@ -84,6 +85,10 @@ class LinhaDoCompilado:
 
 @dataclass
 class Plano:
+    #: O compilado so tem questao real, e a distribuicao e a do quadro do
+    #: edital (Etapa 7A).
+    origens = {"questoes": PROVA, "quadro": OFICIAL}
+
     tamanho: int
     arquivo_do_edital: str | None
     ano_do_edital: int | None

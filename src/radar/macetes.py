@@ -12,6 +12,8 @@ import unicodedata
 from collections import Counter
 from dataclasses import dataclass, field
 
+from radar.origem import ACERVO, CLASSIFICACAO, TENDENCIA
+
 
 # Como a banca costuma formular a pergunta. Isto e o mais proximo de
 # "pegadinha" que da para medir: pedir a INCORRETA e o jeito classico de fazer
@@ -110,9 +112,22 @@ class Repetida:
     cadernos: int
 
 
+#: A origem de cada parte do retrato (Etapa 7A). O assunto vem do
+#: classificador; a leitura do gabarito e tendencia; o resto e contagem.
+ORIGENS_DA_ANALISE = {
+    "recorte": ACERVO,
+    "assunto": CLASSIFICACAO,
+    "comandos": ACERVO,
+    "repetidas": ACERVO,
+    "gabarito": TENDENCIA,
+}
+
+
 @dataclass
 class Analise:
     """O retrato do recorte pedido: uma banca, um cargo, um tema."""
+    origens = ORIGENS_DA_ANALISE
+
 
     total: int = 0
     distintas: int = 0
@@ -451,6 +466,8 @@ def assunto_do_tema(tema: str, retrato: "RetratoDaMateria") -> "Assunto | None":
 
 @dataclass
 class FatiaDoCaderno:
+    origem = ACERVO
+
     materia: str
     por_caderno: float
     total: int

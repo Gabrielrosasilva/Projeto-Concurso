@@ -25,6 +25,7 @@ from sqlalchemy import select
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import ErroAnotado, agora
+from radar.origem import AUTOMATICO
 from radar.servico import cronograma as diario_do_cronograma
 from radar.servico.espacada import INTERVALOS
 
@@ -84,6 +85,7 @@ class ErroInvalido(ValueError):
 @dataclass
 class Contagem:
     """Uma linha do "O que mais te derruba"."""
+    origem = AUTOMATICO
     nome: str
     quantos: int
     #: O motivo mais frequente DENTRO desta materia, e quantos por cento.

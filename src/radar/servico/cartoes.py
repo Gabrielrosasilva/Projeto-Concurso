@@ -24,6 +24,7 @@ from sqlalchemy import select
 from radar import leis, macetes
 from radar.db import criar_tabelas, sessao
 from radar.models import QuestaoDeProva
+from radar.origem import ACERVO, IA, PROVA
 from radar.regioes import normalizar
 from radar.servico import manual
 
@@ -34,6 +35,8 @@ PROVAS_PARA_TENDENCIA = 3
 
 @dataclass
 class MaceteDoCartao:
+    origem = IA
+
     regra: str
     fonte: str
     pegadinha: str | None
@@ -48,6 +51,9 @@ class MaceteDoCartao:
 
 @dataclass
 class Cartao:
+    #: O cartao e contagem nas provas; o macete dentro dele e da IA.
+    origem = ACERVO
+
     materia: str
     questoes: int
     anos: list[int]
@@ -162,6 +168,8 @@ def cartoes() -> list[Cartao]:
 
 @dataclass
 class QuestaoRelacionada:
+    origem = PROVA
+
     questao: QuestaoDeProva
     mudancas: list
 

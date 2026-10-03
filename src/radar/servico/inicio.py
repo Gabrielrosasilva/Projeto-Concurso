@@ -34,6 +34,7 @@ from radar import foco, onde_estudar
 from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado
 from radar.regioes import normalizar
+from radar.origem import AUTOMATICO
 from radar.servico import espacada
 from radar.servico import metricas
 from radar.servico import simulado as treino
@@ -87,6 +88,7 @@ class Prioridade:
 
 @dataclass
 class Revisar:
+    origem = AUTOMATICO
     erradas: int = 0
     #: [(materia, acerto %, respondidas)] com acerto abaixo de ACERTO_FRACO
     #: e base de pelo menos o minimo da materia (config/amostra.yml).
