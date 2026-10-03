@@ -18,6 +18,7 @@ TELAS = [
     ("/calendario", 200),
     ("/previsao", 200),
     ("/acompanhando", 200),
+    ("/analises", 200),
 ]
 
 #: A paleta que cada tela antiga definia para si.
