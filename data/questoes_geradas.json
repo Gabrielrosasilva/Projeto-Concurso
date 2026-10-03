@@ -151,6 +151,31 @@
   },
   {
     "alternativas": {
+      "a": "a pena deve ser cumprida até o fim, porque a coisa julgada não pode ser alterada.",
+      "b": "a lei nova só se aplica aos fatos praticados depois da sua vigência.",
+      "c": "a pena deve ser apenas reduzida pela metade.",
+      "d": "cessam a execução e os efeitos penais da sentença condenatória.",
+      "e": "o condenado deve requerer revisão criminal, sem a qual a lei nova não o alcança."
+    },
+    "artigo": "CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107518+00:00",
+    "enunciado": "Lei nova deixa de considerar crime determinada conduta. Um condenado por essa conduta, com sentença transitada em julgado, está cumprindo pena. Nesse caso, de acordo com o Código Penal:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "1116074d19359bf3de4d49b7bcfb8f7c",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 2.",
       "b": "São corretas apenas as afirmativas 1 e 2.",
       "c": "São corretas apenas as afirmativas 1 e 3.",
@@ -201,6 +226,56 @@
   },
   {
     "alternativas": {
+      "a": "Abolitio criminis, que extingue a punibilidade do agente.",
+      "b": "Novatio legis in mellius, que apenas reduz a pena aplicada.",
+      "c": "Ultra-atividade, que mantém a punição dos fatos anteriores.",
+      "d": "Anistia, que exclui a ilicitude do fato.",
+      "e": "Continuidade delitiva, que unifica as penas."
+    },
+    "artigo": "CP, art. 2º, caput, e art. 107, III",
+    "assunto": "Abolitio criminis",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107514+00:00",
+    "enunciado": "Determinada lei deixa de prever como crime uma conduta que antes era punida. Assinale a alternativa que indica corretamente o nome desse fenômeno e a sua consequência para quem praticou a conduta.",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "complementar",
+    "impressao": "248183b39015631487de5e8953043d67",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "7f6e49f0bfe30c81f0547e088a46d318",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "gera reincidência, porque a coisa julgada não pode ser desfeita.",
+      "b": "gera reincidência apenas se a pena anterior tiver sido cumprida integralmente.",
+      "c": "só deixa de gerar reincidência por decisão do Supremo Tribunal Federal.",
+      "d": "gera reincidência específica.",
+      "e": "não pode ser considerada para fins penais, pois cessaram os efeitos penais da sentença condenatória."
+    },
+    "artigo": "CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107522+00:00",
+    "enunciado": "João foi condenado, com sentença transitada em julgado, por crime que lei posterior deixou de prever como infração penal. Anos depois, João pratica outro crime. Considerando o Código Penal, a condenação anterior:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3838b71aa12c8e8929d967bead04e7b6",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "do resultado, considerando praticado o crime no momento em que este se produz.",
       "b": "da ubiquidade, considerando praticado o crime tanto no momento da conduta quanto no do resultado.",
       "c": "da atividade, considerando praticado o crime no momento da ação ou omissão, ainda que outro seja o momento do resultado.",
@@ -223,6 +298,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "não há crime sem lei anterior que o defina.",
+      "b": "a lei penal não retroagirá, salvo para beneficiar o réu.",
+      "c": "nenhuma pena passará da pessoa do condenado.",
+      "d": "ninguém será considerado culpado até o trânsito em julgado de sentença penal condenatória.",
+      "e": "a lei não excluirá da apreciação do Poder Judiciário lesão ou ameaça a direito."
+    },
+    "artigo": "CF, art. 5º, XL",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107527+00:00",
+    "enunciado": "A lei penal posterior que deixa de considerar o fato como crime alcança os fatos anteriores à sua vigência. O fundamento constitucional dessa retroatividade é a regra segundo a qual:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3b75cd8f8abfe645dc65c71dc84619a3",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -276,6 +376,31 @@
   },
   {
     "alternativas": {
+      "a": "aumenta a pena do crime.",
+      "b": "cria nova circunstância agravante.",
+      "c": "não mais considera o fato como criminoso.",
+      "d": "amplia o prazo prescricional.",
+      "e": "transforma a pena de multa em pena privativa de liberdade."
+    },
+    "artigo": "CP, art. 107, III",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107525+00:00",
+    "enunciado": "De acordo com o Código Penal, extingue-se a punibilidade pela retroatividade de lei que:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "434f263c61a5fdadde54ba426ad7e25b",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 1 e 3.",
       "c": "São corretas apenas as afirmativas 2 e 4.",
@@ -298,6 +423,56 @@
     "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "CP, art. 2º, caput; CP, art. 107, III",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107521+00:00",
+    "enunciado": "Considere as afirmativas sobre a abolitio criminis, de acordo com o Código Penal: 1. Ninguém pode ser punido por fato que lei posterior deixa de considerar crime. 2. A abolitio criminis faz cessar a execução e os efeitos penais da sentença condenatória. 3. A abolitio criminis só alcança os fatos ainda não julgados. 4. A retroatividade de lei que não mais considera o fato como criminoso extingue a punibilidade. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "45508240768cbf69bc8c6b9fab4f8614",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "reconhecer a extinção da punibilidade.",
+      "b": "manter a condenação, porque o fato foi praticado antes da lei nova.",
+      "c": "reduzir a pena pela metade.",
+      "d": "converter a pena privativa de liberdade em multa.",
+      "e": "aguardar o trânsito em julgado para aplicar a lei nova."
+    },
+    "artigo": "CP, art. 107, III; CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107527+00:00",
+    "enunciado": "Maria foi condenada por um crime e, antes do julgamento do seu recurso, entrou em vigor lei que deixou de considerar a conduta como criminosa. De acordo com o Código Penal, o tribunal deve:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "462856e0930c49b869170e904fe1a41f",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -348,6 +523,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "só se aplica aos fatos praticados depois da sua vigência.",
+      "b": "depende de regulamentação para produzir efeitos.",
+      "c": "só beneficia o réu primário.",
+      "d": "não alcança os condenados à pena de multa.",
+      "e": "faz cessar a execução e os efeitos penais da condenação, ainda que já exista sentença transitada em julgado."
+    },
+    "artigo": "CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107529+00:00",
+    "enunciado": "Sobre a lei posterior que deixa de considerar o fato como crime, é correto afirmar, de acordo com o Código Penal, que ela:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "4dd2e62d554e8998692860168b0a798e",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -451,6 +651,31 @@
   },
   {
     "alternativas": {
+      "a": "ao tribunal que proferiu a última decisão no processo.",
+      "b": "ao juízo das execuções.",
+      "c": "ao Supremo Tribunal Federal, por meio de revisão criminal.",
+      "d": "ao delegado de polícia que presidiu o inquérito.",
+      "e": "ao Ministério Público, mediante arquivamento."
+    },
+    "artigo": "Súmula 611 do STF; LEP, art. 66, I",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107520+00:00",
+    "enunciado": "Após o trânsito em julgado da sentença condenatória, a aplicação de lei posterior mais benigna, inclusive da que deixa de considerar o fato como crime, compete:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "60cb010b2fa1faf279fde0cdffb30c58",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "as frações de mês e as frações de salário-mínimo.",
       "b": "as frações de dia e as frações de real.",
       "c": "as frações de semana e as frações de dólar.",
@@ -501,6 +726,31 @@
   },
   {
     "alternativas": {
+      "a": "retroage e alcança os fatos anteriores à sua vigência.",
+      "b": "não retroage, aplicando-se só aos fatos futuros.",
+      "c": "retroage somente se o caso ainda estiver na fase de inquérito.",
+      "d": "retroage apenas em relação aos crimes hediondos.",
+      "e": "não retroage quando já houver sentença condenatória transitada em julgado."
+    },
+    "artigo": "CF, art. 5º, XL; CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107519+00:00",
+    "enunciado": "Segundo a Constituição Federal, a lei penal não retroagirá, salvo para beneficiar o réu. Com base nessa regra e no Código Penal, a lei que deixa de considerar determinado fato como crime:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6bb591698ef1cb9d32c0ba611691c661",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 2 e 3.",
       "c": "São corretas apenas as afirmativas 1, 2 e 3.",
@@ -548,6 +798,31 @@
     "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "apenas a execução da pena privativa de liberdade, mantidos os demais efeitos penais da condenação.",
+      "b": "somente os efeitos civis da sentença condenatória.",
+      "c": "a execução da pena, desde que a sentença ainda não tenha transitado em julgado.",
+      "d": "os efeitos penais da sentença, mas não a execução da pena já iniciada.",
+      "e": "a execução e os efeitos penais da sentença condenatória."
+    },
+    "artigo": "CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107517+00:00",
+    "enunciado": "De acordo com o Código Penal, ninguém pode ser punido por fato que lei posterior deixa de considerar crime, cessando em virtude dela:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "745a1c57ce9a1d814a5ba08f01e89cd4",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -701,6 +976,31 @@
   },
   {
     "alternativas": {
+      "a": "o inquérito deve prosseguir, porque a lei nova só alcança fatos posteriores a ela.",
+      "b": "extingue-se a punibilidade, pois a lei que deixa de considerar o fato criminoso retroage.",
+      "c": "o investigado deverá responder pelo crime, com pena reduzida.",
+      "d": "o fato passa a ser considerado contravenção penal.",
+      "e": "a lei nova só produzirá efeitos depois do trânsito em julgado."
+    },
+    "artigo": "CP, art. 107, III; CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107524+00:00",
+    "enunciado": "Durante o inquérito policial que apura determinado crime, entra em vigor lei que deixa de considerar a conduta investigada como crime. Nesse caso:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8c9eed26839dcebe58a87e1a1aa5a64b",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "A lei penal pode retroagir para alcançar fato anterior à sua vigência, ainda que mais gravosa ao réu, desde que prevista em lei complementar.",
       "b": "Não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.",
       "c": "A analogia é admitida para suprir lacuna da lei penal incriminadora, em benefício da segurança jurídica.",
@@ -801,6 +1101,56 @@
   },
   {
     "alternativas": {
+      "a": "graça.",
+      "b": "indulto.",
+      "c": "perdão judicial.",
+      "d": "abolitio criminis.",
+      "e": "novatio legis incriminadora."
+    },
+    "artigo": "CP, art. 2º, caput, e art. 107, III",
+    "assunto": "Abolitio criminis",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107516+00:00",
+    "enunciado": "Pedro cumpria pena por um crime cujo tipo penal foi revogado por lei posterior, que deixou de considerar o fato criminoso. A situação descrita caracteriza:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "complementar",
+    "impressao": "96c6e3ca0bcbcd1ce2e84862e0c95103",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "7f6e49f0bfe30c81f0547e088a46d318",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "novatio legis in pejus.",
+      "b": "ultra-atividade da lei penal.",
+      "c": "abolitio criminis.",
+      "d": "novatio legis incriminadora.",
+      "e": "continuidade delitiva."
+    },
+    "artigo": "CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "questao_real",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107510+00:00",
+    "enunciado": "Um tipo penal previsto em lei é revogado por lei posterior, que deixa de considerar crime a conduta nele descrita. Esse fenômeno é denominado:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "complementar",
+    "impressao": "9770b5810292cee64974b14a062df7aa",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "7f6e49f0bfe30c81f0547e088a46d318",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "Secretaria de Administração Penitenciária",
       "b": "Tribunal de Justiça",
       "c": "Ministério da Defesa",
@@ -873,6 +1223,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "é extinta, porque a abolitio criminis apaga todos os efeitos da sentença.",
+      "b": "é convertida em pena de multa.",
+      "c": "passa a ser executada pelo juízo das execuções penais.",
+      "d": "permanece, porque a abolitio criminis faz cessar apenas os efeitos penais da sentença condenatória.",
+      "e": "é reduzida pela metade."
+    },
+    "artigo": "CP, art. 2º, caput; CP, art. 91, I",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107523+00:00",
+    "enunciado": "Lei nova revoga um tipo penal e deixa de considerar crime a conduta nele descrita. Quanto à obrigação de indenizar o dano causado pelo fato, tornada certa por sentença condenatória anterior, é correto afirmar que ela:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ae09c489b04de22a6d3df5c1f65c0a06",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -1026,6 +1401,31 @@
   },
   {
     "alternativas": {
+      "a": "Na abolitio criminis, a lei nova deixa de considerar o fato como crime; na novatio legis in mellius, o fato continua sendo crime, mas a lei nova favorece o agente de outro modo.",
+      "b": "Na abolitio criminis, a lei nova aumenta a pena; na novatio legis in mellius, ela reduz a pena.",
+      "c": "As duas só se aplicam aos fatos praticados depois da vigência da lei nova.",
+      "d": "A abolitio criminis não retroage; a novatio legis in mellius retroage.",
+      "e": "A novatio legis in mellius extingue a punibilidade; a abolitio criminis apenas reduz a pena."
+    },
+    "artigo": "CP, art. 2º, caput e parágrafo único",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107524+00:00",
+    "enunciado": "Assinale a alternativa que diferencia corretamente a abolitio criminis da novatio legis in mellius.",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "cb4298bf023221b74fba88e38272a9b3",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "contra a vida do Presidente da República, cometidos no estrangeiro.",
       "b": "de genocídio, quando o agente for brasileiro ou domiciliado no Brasil.",
       "c": "praticados por brasileiro.",
@@ -1126,6 +1526,31 @@
   },
   {
     "alternativas": {
+      "a": "Faz cessar a execução da pena.",
+      "b": "Faz cessar os efeitos penais da sentença condenatória.",
+      "c": "Alcança fatos já decididos por sentença condenatória transitada em julgado.",
+      "d": "É causa de extinção da punibilidade.",
+      "e": "Só produz efeitos para os fatos praticados depois da vigência da lei nova."
+    },
+    "artigo": "CP, art. 2º, caput; CP, art. 107, III",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107526+00:00",
+    "enunciado": "Sobre a abolitio criminis, assinale a alternativa INCORRETA.",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "da8febab48bf7da900484842f32fc060",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 4.",
       "b": "São corretas apenas as afirmativas 2 e 3.",
       "c": "São corretas apenas as afirmativas 1, 2 e 4.",
@@ -1223,6 +1648,56 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "poderá ser processado, pois vale a lei do tempo do fato.",
+      "b": "poderá ser punido apenas com pena de multa.",
+      "c": "só não será punido se for réu primário.",
+      "d": "não poderá ser punido, porque ninguém pode ser punido por fato que lei posterior deixa de considerar crime.",
+      "e": "poderá ser punido se o fato tiver sido praticado com violência."
+    },
+    "artigo": "CP, art. 2º, caput",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107528+00:00",
+    "enunciado": "Uma lei nova revoga expressamente um crime e deixa de considerar a conduta como infração penal. Em relação a quem praticou essa conduta antes da lei nova e ainda não foi processado, é correto afirmar que:",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f15c0cbdc532314753b365dd4fe18661",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "Alcança apenas os fatos que ainda não foram julgados em definitivo.",
+      "b": "É causa de exclusão da ilicitude do fato.",
+      "c": "É causa de extinção da punibilidade.",
+      "d": "Depende de pedido expresso do condenado para produzir efeitos.",
+      "e": "Aplica-se somente aos crimes punidos com pena de multa."
+    },
+    "artigo": "CP, art. 107, III",
+    "assunto": "Abolitio criminis",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "criada_em": "2026-10-03T20:14:51.107518+00:00",
+    "enunciado": "Assinale a alternativa correta sobre a abolitio criminis, segundo o Código Penal.",
+    "escopo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f56990c93e281f93b032d51180f02eef",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
