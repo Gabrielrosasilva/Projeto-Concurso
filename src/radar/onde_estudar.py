@@ -282,13 +282,13 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
     primeira = linhas[0]
     onde = _como_chamar(primeira)
 
-    # Sem pontos, a frase NAO cita porcentagem: com amostra pequena ela seria
-    # sorte dita em voz alta, justamente o que o minimo existe para evitar.
+    # Sem pontos, a frase NAO cita porcentagem: com amostra insuficiente ela
+    # seria sorte dita em voz alta, justamente o que o minimo existe para evitar.
     if primeira.pontos is None:
         if primeira.respondidas:
             medida = (f"Respondi só {primeira.respondidas} questão(ões) dele "
-                      f"- amostra pequena, abaixo das {primeira.minimo} que "
-                      f"fazem o acerto valer")
+                      f"- {regua.INSUFICIENTE.lower()}, abaixo das {primeira.minimo} "
+                      f"que fazem o acerto valer")
         else:
             medida = "Eu ainda não respondi nenhuma questão dele no simulado"
         return (

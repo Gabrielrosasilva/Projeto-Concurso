@@ -384,7 +384,7 @@
                   {# Mostra, mas apagado: abaixo do minimo e sorte, e nao
                      entra no "comece por aqui". #}
                   {{ '%.0f'|format(acerto.porcentagem) }}%
-                  <span class="feitas">· {{ acerto.respondidas }} de {{ MINIMO_NA_MATERIA }} · amostra pequena</span>
+                  <span class="feitas">· {{ acerto.respondidas }} de {{ MINIMO_NA_MATERIA }} · {{ AMOSTRA_INSUFICIENTE }}</span>
                 {%- elif acerto -%}
                   {{ '%.0f'|format(acerto.porcentagem) }}%
                   <span class="feitas">de {{ acerto.respondidas }}</span>
@@ -498,7 +498,7 @@
                   {{ a.acerto | numero(0) }}% em {{ a.respondidas }} questão(ões) diferente(s)
                   {%- if a.dias_sem_revisar %}; {{ a.dias_sem_revisar }} dia(s) sem revisar (×{{ a.fator | numero }}){% endif -%}
                 {%- elif a.respondidas -%}
-                  acertei {{ a.acertos }} de {{ a.respondidas }}, amostra pequena
+                  acertei {{ a.acertos }} de {{ a.respondidas }} · {{ AMOSTRA_INSUFICIENTE }}
                 {%- else -%}
                   ainda não respondi nenhuma no simulado
                 {%- endif -%}
@@ -557,9 +557,9 @@
       {% if p.materias_sem_assunto %}
         <div class="mudas">
           <p class="legenda">
-            Estas matérias caem na prova e eu
-            <span class="nao-sei">não sei ainda</span> por qual assunto começar
-            nelas - nenhuma questão minha está classificada:
+            Estas matérias caem na prova, e nenhuma questão minha delas está
+            classificada. Por qual assunto começar nelas:
+            <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span>
           </p>
           <ul>
             {% for m in p.materias_sem_assunto %}
@@ -592,9 +592,9 @@
       </p>
     {% else %}
       <p class="vazio">
-        <span class="nao-sei">não sei ainda</span> &mdash; nenhuma questão das
-        minhas provas tem assunto detectado, e sem assunto não há fatia para
-        multiplicar pelo peso do edital. As matérias de Direito saem do
+        <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span> Nenhuma questão
+        das minhas provas tem assunto detectado, e sem assunto não há fatia
+        para multiplicar pelo peso do edital. As matérias de Direito saem do
         conteúdo programático, com <code>radar assuntos --so-alvo</code>.
       </p>
       {% if p.materias_sem_assunto %}

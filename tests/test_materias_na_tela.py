@@ -393,7 +393,7 @@ def test_a_tela_mostra_a_projecao(cliente, plano):
 def test_a_tela_avisa_a_amostra_pequena(cliente, plano):
     _anotar(plano, SEG, "Direito Penal", 10, 9)
     texto = cliente.get("/analises/materias").text
-    assert "amostra pequena" in texto
+    assert "Amostra insuficiente" in texto
 
 
 def test_a_tela_mostra_o_treino_de_ia_a_parte(cliente, plano):

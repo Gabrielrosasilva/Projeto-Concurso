@@ -69,14 +69,23 @@ def test_a_frase_padrao_e_a_mesma_constante_em_todo_lugar():
     assert fichas.FRASE_SEM_EVIDENCIA is origem.FRASE_SEM_EVIDENCIA
 
 
-def test_a_frase_padrao_mora_num_arquivo_so():
-    achados = sorted(
+def _arquivos_que_dizem(trecho: str) -> list[str]:
+    return sorted(
         p.relative_to(FONTE).as_posix()
         for p in FONTE.rglob("*")
         if p.suffix in (".py", ".html")
-        and "evidência suficiente no acervo" in p.read_text(encoding="utf-8")
+        and trecho in p.read_text(encoding="utf-8").lower()
     )
-    assert achados == ["origem.py"]
+
+
+def test_a_frase_padrao_mora_num_arquivo_so():
+    assert _arquivos_que_dizem("evidência suficiente no acervo") == ["origem.py"]
+
+
+def test_o_desempenho_com_pouca_resposta_diz_amostra_insuficiente():
+    """Um rotulo so, o estado da decisao 6 - e nao "amostra pequena" numa tela
+    e outro nome na seguinte."""
+    assert _arquivos_que_dizem("amostra pequena") == []
 
 
 # --- a origem nos servicos ------------------------------------------------------

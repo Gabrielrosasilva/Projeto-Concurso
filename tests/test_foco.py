@@ -15,7 +15,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
-from radar import edital_materias, foco
+from radar import edital_materias, foco, origem
 from radar.db import sessao
 from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado, agora
 from radar.web.app import app
@@ -1024,7 +1024,8 @@ def test_materia_sem_assunto_nao_some_do_grafico_calada(
 
     texto = cliente.get("/analises").text
     assert "Estas matérias caem na prova" in texto
-    assert "não sei ainda" in texto
+    # Por qual assunto comecar e conclusao do acervo: a frase da regra 4.
+    assert origem.FRASE_SEM_EVIDENCIA in texto
 
 
 def test_a_materia_muda_aparece_com_o_peso_dela(cliente, com_quadro_do_edital):

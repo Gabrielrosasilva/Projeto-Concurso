@@ -182,7 +182,7 @@
               <span>meta {{ m.meta_em_porcentagem }}% ({{ m.meta }} de {{ m.questoes_na_prova }})</span>
             </p>
             {% if m.amostra_pequena %}
-              <p class="de-onde">⚠ amostra pequena: menos de {{ MINIMO_NA_MATERIA }}
+              <p class="de-onde">⚠ {{ AMOSTRA_INSUFICIENTE }}: menos de {{ MINIMO_NA_MATERIA }}
                 questões sem consulta</p>
             {% endif %}
           </div>

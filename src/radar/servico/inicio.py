@@ -75,7 +75,7 @@ class Prioridade:
         base = f"{self.questoes_no_edital} questões no edital"
         if not self.treinada:
             if self.respondidas:
-                return (f"{base} · amostra pequena ({self.respondidas} de "
+                return (f"{base} · {regua.INSUFICIENTE} ({self.respondidas} de "
                         f"{self.minimo})")
             return f"{base} · ainda não treinada"
         texto = (f"{base} · {self.acerto:.0f}% de acerto em "

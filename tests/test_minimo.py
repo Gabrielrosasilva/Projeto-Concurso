@@ -1,6 +1,6 @@
 """Um minimo de respostas so, nas tres telas.
 
-Abaixo do minimo o acerto e sorte: aparece com "amostra pequena", e nao entra
+Abaixo do minimo o acerto e sorte: aparece com "Amostra insuficiente", e nao entra
 em conta nenhuma. Antes, 1 erro jogava o assunto para o topo por "0%", 1
 acerto o jogava para o fim, e a home e o Meu foco podiam apontar materias
 diferentes para comecar.
@@ -74,7 +74,7 @@ def test_a_conclusao_nao_cita_porcentagem_de_amostra_pequena():
     por, _ = _linhas({("Direito Penal", "C"): (2, 0)})
     frase = onde_estudar.conclusao(sorted(por.values(), key=lambda l: -l.ordem))
     assert "%" not in frase
-    assert "amostra pequena" in frase
+    assert "amostra insuficiente" in frase
 
 
 # --- Meu foco ---------------------------------------------------------------
@@ -106,7 +106,7 @@ def test_a_tabela_mostra_amostra_pequena_e_sem_comece_por_aqui(
 
     texto = TestClient(app).get("/analises").text
 
-    assert f"2 de {MINIMO_NA_MATERIA} · amostra pequena" in texto
+    assert f"2 de {MINIMO_NA_MATERIA} · Amostra insuficiente" in texto
     assert "comece por aqui" not in texto
     assert "é onde eu vou pior" not in texto
 
@@ -121,7 +121,7 @@ def test_a_home_diz_amostra_pequena(banco_temporario, com_quadro_do_edital):
     dh = next(p for p in inicio.prioridades(foco.montar())
               if p.materia == "Direitos Humanos")
     assert not dh.treinada and dh.fator == 1.0
-    assert dh.porque.endswith(f"amostra pequena (2 de {MINIMO_NA_MATERIA})")
+    assert dh.porque.endswith(f"Amostra insuficiente (2 de {MINIMO_NA_MATERIA})")
 
 
 def test_a_home_e_o_meu_foco_apontam_a_mesma_materia(banco_temporario,
