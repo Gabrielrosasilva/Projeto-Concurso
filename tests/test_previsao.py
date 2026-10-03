@@ -228,6 +228,37 @@ def test_a_tela_mostra_os_anos_que_embasam_a_conta(cliente):
     assert f"{este_ano - 8}, {este_ano - 4}" in texto
 
 
+def test_o_selo_da_cobertura_sai_do_dado(cliente, monkeypatch):
+    """O "o que isto nao sabe" mostra a cobertura, contada no banco: o selo
+    dela le a origem da Cobertura (Etapa 7A)."""
+    from radar.servico import previsao
+
+    _semear(_concurso("2018 - Prefeitura de Tijucas", "Tijucas"))
+    monkeypatch.setattr(previsao.Cobertura, "origem", "acervo")
+
+    texto = cliente.get("/previsao").text
+
+    assert "🔵</span> Estatística do acervo</span> O que isto" in texto
+
+
+def test_os_concursos_coletados_da_tela_mais_leem_a_mesma_origem(cliente, monkeypatch):
+    """A tela Mais mostra a mesma cobertura, com o selo dela (Etapa 7A)."""
+    from radar.servico import previsao
+
+    def cabeca_do_cartao():
+        # A legenda do topo da tela tem todos os selos: o que vale e o selo
+        # na cabeca do cartao, entre o titulo e o fim dela.
+        texto = cliente.get("/mais").text
+        inicio = texto.index("Concursos coletados</h3>")
+        return texto[inicio:texto.index("</div>", inicio)]
+
+    _semear(_concurso("2018 - Prefeitura de Tijucas", "Tijucas"))
+    assert "ds-selo--automatico" in cabeca_do_cartao()
+
+    monkeypatch.setattr(previsao.Cobertura, "origem", "acervo")
+    assert "ds-selo--acervo" in cabeca_do_cartao()
+
+
 def test_sem_historico_a_tela_explica_o_que_fazer(cliente):
     assert "radar coletar" in cliente.get("/previsao").text
 

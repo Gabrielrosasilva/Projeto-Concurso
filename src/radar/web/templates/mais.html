@@ -38,7 +38,7 @@
     <article class="ds-cartao">
       <div class="ds-cartao__cabeca">
         <h3 class="ds-cartao__titulo">Concursos coletados</h3>
-        {{ selo('automatico') }}
+        {% if cobertura %}{{ selo(cobertura[0].origem) }}{% endif %}
       </div>
       <p class="ds-cartao__meta">Contado no banco, por fonte.</p>
       {% if cobertura %}
