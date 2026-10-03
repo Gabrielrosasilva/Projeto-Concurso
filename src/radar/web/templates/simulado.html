@@ -108,9 +108,9 @@
     {% if planos_compilados %}
     {% set base = planos_compilados[0] %}
     <section class="ds-cartao cartao-simulado">
-      <h2 class="ds-cartao__titulo">Simulado compilado {{ selo('prova', 'só questões reais') }}</h2>
+      <h2 class="ds-cartao__titulo">Simulado compilado {{ selo(base.origens.questoes, 'só questões reais') }}</h2>
       <p class="ds-cartao__meta">
-        {{ selo('oficial', 'Quadro do edital ' ~ (base.ano_do_edital or '')) }}
+        {{ selo(base.origens.quadro, 'Quadro do edital ' ~ (base.ano_do_edital or '')) }}
         a distribuição segue o quadro de questões lido de
         <code>{{ base.arquivo_do_edital or 'edital' }}</code>. Primeiro as provas do
         cargo, depois a mesma banca nas mesmas matérias. Desmarque uma matéria e
@@ -183,7 +183,7 @@
           <button class="ds-botao" type="submit">Começar</button>
         </form>
         <p class="dica">
-          {{ selo('automatico') }}
+          {{ selo('acervo') }}
           São {{ "{:,}".format(total_de_questoes)|replace(",", ".") }} questões no acervo, de provas de verdade,
           com o gabarito que a própria banca publicou. A mesma questão nunca
           aparece duas vezes na mesma rodada.
@@ -195,7 +195,7 @@
       <section class="ds-cartao cartao-simulado">
         <h2 class="ds-cartao__titulo">Como você vai até agora</h2>
         <p class="ds-cartao__meta">
-          {{ selo('automatico') }} Em questão real, somando todos os simulados:
+          {{ selo(desempenho_geral[0].origem) }} Em questão real, somando todos os simulados:
           cada questão conta uma vez, pela última resposta que dei a ela.
           "Questões" é a base de cada porcentagem.
         </p>
@@ -219,10 +219,10 @@
        a IA escreveu nao e a mesma coisa que acertar o que a banca cobrou. #}
     {% if desempenho_das_geradas %}
       <section class="ds-cartao cartao-simulado">
-        <h2 class="ds-cartao__titulo">{{ selo('ia') }} Nas questões geradas</h2>
+        <h2 class="ds-cartao__titulo">{{ selo(desempenho_das_geradas[0].origem) }} Nas questões geradas</h2>
         <p class="ds-cartao__meta">
-          Número à parte, de propósito. Isto é treino, e não medida do que a
-          FEPESE cobra.
+          <b>{{ FRASE_DA_QUESTAO_DE_IA }}</b> Número à parte, de propósito:
+          isto é treino, e não medida do que a FEPESE cobra.
         </p>
         <table class="ds-tabela">
           <tr><th>Matéria</th><th class="ds-n">Acerto</th><th class="ds-n">Feitas</th></tr>
@@ -254,7 +254,7 @@
             <tr><th>Data</th><th class="ds-n">Questões</th><th class="ds-n">Acerto</th><th>Matérias</th><th></th></tr>
             {% for r in rodadas %}
               <tr>
-                <td><a href="/simulado/{{ r.id }}">{{ r.criado_em | data }}</a>{% if r.gerada %} {{ selo('ia', 'IA') }}{% endif %}</td>
+                <td><a href="/simulado/{{ r.id }}">{{ r.criado_em | data }}</a>{% if r.gerada %} {{ selo(r.origem, 'IA') }}{% endif %}</td>
                 <td class="ds-n">{{ r.respondidas }}/{{ r.questoes }}</td>
                 <td class="ds-n">{% if r.porcentagem is not none %}{{ '%.0f'|format(r.porcentagem) }}%{% else %}&mdash;{% endif %}</td>
                 <td class="materias">{{ r.materias[:2] | join(', ') }}{% if r.materias | length > 2 %} +{{ r.materias | length - 2 }}{% endif %}</td>

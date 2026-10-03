@@ -676,6 +676,13 @@ def test_a_tela_do_simulado_mostra_os_dois_numeros_separados(cliente):
 
     assert "Como você vai até agora" in pagina
     assert "Nas questões geradas" in pagina
+    # Cada numero com o selo da sua origem, lido do dado (Etapa 7A): o das
+    # reais e conta do sistema; o das geradas, da IA - com a frase da regra 5.
+    assert '<span aria-hidden="true">🟡</span> Análise automática</span> Em questão real' in pagina
+    assert '<span aria-hidden="true">🟣</span> Gerado por IA</span> Nas questões geradas' in pagina
+    assert "Gerada por IA: não é questão oficial da FEPESE." in pagina
+    # E a rodada de IA, na lista, leva o 🟣.
+    assert '<span aria-hidden="true">🟣</span> IA</span>' in pagina
 
 
 def test_o_resultado_da_rodada_gerada_nao_vem_vazio(cliente):
