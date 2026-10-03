@@ -23,6 +23,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
 | 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B e 2C feitas (as faixas que medem, o simulado do Qconcursos, o sábado e o assunto na faixa); falta a seção F |
+| 17 | O estoque de geradas até 07/11 (pedido de 03/10) | 🔄 lote 1 de 57 feito (19 questões, banco e JSON 50 → 69); os outros 56 pelo `docs/estoque_de_geradas.md` |
 
 ---
 
@@ -2101,3 +2102,35 @@ tema · Elemento: LEP, arts. 28 a 37".
 | `test_onde_na_arvore.py` (novo), 1ª rodada | 9 passed, 1 failed (a tela: o texto do edital dos testes dava "Tabelas- verdade", e o plano não carregava; consertado no `ler_programa`) |
 | `test_onde_na_arvore.py` e `test_edital_programa.py` (1 novo: o hífen) | 22 passed |
 | Suíte inteira, PC (uma vez, no fim da 2C) | **2422 passed** (2411 de antes + 11 novos: 10 do assunto na faixa e 1 do hífen), 0 failed, 25 min |
+
+## 17 — O estoque de geradas até 07/11 (pedido de 03/10/2026)
+
+**O pedido:** um estoque de questões de treino geradas para os conteúdos das
+faixas até 07/11, sem chave da API (o Claude Code responde o `--pedido`), com
+matéria, assunto e subassunto; o Passo 1 (passo a passo e plano, somente
+leitura), o Passo 2 (o lote 1, junto) e o passo a passo salvo para repetir.
+
+**O plano aprovado (decisão 73):** 57 lotes, um nó de subassunto cada, 725
+questões (216 por variação, 509 do zero), por semana de uso: 05–10/10, 21 lotes
+(229); 12–17/10, 15 (160); 19–24/10, 10 (141); 26–31/10, 7 (123); 02–07/11, 4
+(72). Os 28 temas sem subassunto na árvore ficam sem estoque.
+
+**O lote 1** (Direito Penal > Tipicidade, ilicitude, culpabilidade,
+punibilidade > Abolitio criminis): 19 gravadas de 19, nenhuma recusada nem
+repetida - 3 por variação da questão real do complementar e 16 do zero, pela
+fonte oficial, marcadas sem questão real de referência. Banco 50 → 69; JSON
+50 → 69; no nó, 0 → 19; a ficha do tema mostra as 19.
+
+**O bug achado e consertado (decisão 72):** a variação herdava a matéria da
+questão de base ("Conhecimentos Específicos"); agora grava a do escopo.
+Arquivos: `src/radar/servico/geradas.py`, `src/radar/servico/manual.py` e um
+teste novo em `tests/test_geracao_por_conteudo.py`.
+
+**Testes** (só os de geração e importação, a pedido; a mudança de código é a
+do conserto):
+
+| Rodada | Resultado |
+|---|---|
+| `test_geracao_por_conteudo.py` (1 novo), `test_ia_manual.py`, `test_gerador.py` | 108 passed |
+| `test_aceite.py`, `test_central_de_macetes.py`, `test_classificacao.py`, `test_fichas.py`, `test_origem.py`, `test_relatorio.py` (os outros que passam pela geração ou pela importação) | 167 passed |
+| O `data/questoes_geradas.json` depois das duas rodadas | 69 (não foi sobrescrito) |

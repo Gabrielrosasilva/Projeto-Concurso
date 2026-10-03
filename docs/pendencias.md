@@ -255,6 +255,19 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   conferencia); o filtro, so com o caminho exato do Qconcursos, que eu nao
   sei - me passe se quiser;
 
+- 🟡 **O estoque de geradas ate 07/11** (decisao 73): o lote 1 esta feito
+  (abolitio criminis, 19). Faltam os lotes 2 a 57, uma semana por vez, pelo
+  `docs/estoque_de_geradas.md` - os 21 da semana de 05/10 primeiro;
+- 🔴 **As 20 geradas de 28/09 estao com a materia "Aplicacao da lei penal
+  (arts. 1º a 12)"**, e nao "Direito Penal": ficam fora do treino de Direito
+  Penal no /geradas. E as 50 antigas tem so a materia no `conteudo`, entao
+  nenhuma ficha as mostra. Corrigir e mexer em dado antigo - decisao sua;
+- 🟡 **O /geradas treina pela materia, e nao pelo no**: a ficha lista as
+  geradas do tema, mas manda treinar no /geradas, que mistura os temas da
+  materia - inclusive os ainda nao estudados;
+- 🟡 **A ajuda do `radar gerar`** ainda diz que o do zero "so entra quando nao
+  existe questao real na materia"; desde a decisao 35 ele completa dentro do no;
+
 ## E. Cancelado
 
 - **C1b, sirene para a Guarda Municipal de Florianopolis e de Balneario

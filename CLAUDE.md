@@ -127,7 +127,8 @@ numero escrito a mao, a revisao semanal, o R+7 dos diagnosticos e a
 comparacao de 07/11 (decisoes 69 e 70) - e a 2C - cada faixa diz o assunto, o
 subassunto e o elemento (decisao 71); falta a secao F.
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
-complementares aceitas); 50 geradas; banco na versao 4.
+complementares aceitas); 69 geradas (19 do estoque ate 07/11, lote 1 de 57:
+`docs/estoque_de_geradas.md`); banco na versao 4.
 **Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
 por amostra - B.8) e os 15 itens da lista de leis; o **Ciclo 2**, depois do
 simulado de 07/11 e antes de 09/11.

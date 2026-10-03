@@ -1881,3 +1881,22 @@ ficha (🟣) ou, sem ficha, os nos que o plano da para a faixa (📌, a chave no
 cronometrada ganharam `nos` de 05/10 em diante. Para o plano carregar nos
 testes, o leitor do programa do edital passou a juntar "Tabelas-" e "verdade"
 em qualquer texto, como ja fazia no PDF.
+
+## O estoque de geradas, lote 1 (03/10)
+
+**O pedido:** deixar no sistema, antes de precisar, questoes de treino geradas
+para os conteudos das faixas ate 07/11, sem chave da API - o Claude Code
+responde o `radar gerar --pedido` e o `radar gerar --importar` grava -, com
+materia, assunto e subassunto.
+
+**O plano** (somente leitura, numa copia do banco): 61 temas de treino, 1.925
+questoes nas faixas, 211 reais livres nos 86 nos deles. So 33 temas tem no de
+subassunto; o estoque ficou em 57 lotes e 725 questoes (decisao 73). As 50
+geradas antigas tem so a materia no `conteudo` e nao contam para no nenhum.
+
+**O lote 1:** o pedido mostrou um bug - a variacao herdava a materia
+"Conhecimentos Especificos" da questao do complementar. Parei, e com a sua
+escolha o conserto entrou antes (decisao 72, com teste). Depois: 19 de 19
+gravadas (3 por variacao, 16 do zero pela fonte oficial), procedencia "Claude
+Code, importado manualmente, em 03/10/2026"; banco e JSON de 50 para 69. O
+passo a passo para os outros lotes esta em `docs/estoque_de_geradas.md`.
