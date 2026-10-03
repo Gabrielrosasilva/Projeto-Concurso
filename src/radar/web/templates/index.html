@@ -346,7 +346,7 @@
           {# De onde veio o valor: eu digitei, ou o radar leu do texto do
              anuncio - e a leitura por regra de texto pode errar. #}
           {% if c.salario_manual %}<span class="rot">(anotado por mim)</span>
-          {% else %}{{ selo('classificacao', 'lido do anúncio') }}{% endif %}
+          {% else %}{{ selo(c.origem_do_salario, 'lido do anúncio') }}{% endif %}
           <a class="lapis" href="{{ url_com_editar }}{{ c.id }}"
              title="Anotar a remuneração" aria-label="Anotar a remuneração">&#9998;</a>
         </span>

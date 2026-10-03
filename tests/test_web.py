@@ -309,6 +309,22 @@ def test_o_cartao_mostra_titulo_e_a_linha_de_sempre(cliente):
     assert "prazo não confirmado" in texto   # prazo
 
 
+def test_o_selo_do_salario_sai_do_concurso(cliente, monkeypatch):
+    """Lido do anuncio, o salario leva o selo da classificacao; a origem vem
+    do proprio Concurso (Etapa 7A), e trocada la, troca na tela."""
+    with sessao() as s:
+        s.add(Concurso(url="https://a.test/1", fonte="f", titulo="Palhoca",
+                       uf="SC", municipio="Palhoca", relevancia="nucleo",
+                       tipo="concurso", salario=5200.0))
+
+    texto = cliente.get("/concursos").text
+    assert "🟡</span> lido do anúncio" in texto
+
+    monkeypatch.setattr(Concurso, "origem_do_salario", property(lambda self: "oficial"))
+    texto = cliente.get("/concursos").text
+    assert "🟢</span> lido do anúncio" in texto
+
+
 def test_banca_tipo_e_motivo_ficam_dentro_de_detalhes(cliente):
     with sessao() as s:
         s.add(Concurso(url="https://a.test/1", fonte="f", titulo="Palhoca",
