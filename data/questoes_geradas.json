@@ -26,6 +26,56 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "LEP, art. 126, §§ 6º e 7º",
+    "assunto": "Remição",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577383+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, podem remir, pela frequência a curso de ensino regular ou de educação profissional, parte do tempo de execução da pena ou do período de prova: 1. o condenado em regime aberto. 2. o condenado em regime semiaberto. 3. o que usufrui liberdade condicional. 4. o preso cautelar, já que as regras da remição se aplicam à prisão cautelar. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "alvo",
+    "impressao": "0100afe3aac0a5c3ecc748ef05a9991d",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "pode alistar-se e votar, facultativamente.",
+      "b": "é obrigado a alistar-se e votar.",
+      "c": "não pode votar até completar dezoito anos.",
+      "d": "só pode votar com autorização dos pais.",
+      "e": "pode votar apenas em plebiscitos."
+    },
+    "artigo": "CF, art. 14, § 1º, II, c",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667663+00:00",
+    "enunciado": "Pedro completou 16 anos em setembro. Segundo a Constituição Federal, ele:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0103d8c28e89bab6a8a892f8a0ad7700",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "o crime for de menor potencial ofensivo.",
       "b": "não foi pedida ou foi negada a extradição e houve requisição do Ministro da Justiça.",
       "c": "o agente ingressar voluntariamente em território nacional, independentemente de qualquer requisição.",
@@ -173,6 +223,31 @@
     "origem_impressao": "600dc0892b24ee4032547534e99f840a",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "é causa de remição de parte do tempo de execução de pena sob regime fechado ou semiaberto.",
+      "b": "não gera remição.",
+      "c": "gera remição apenas no regime aberto.",
+      "d": "gera indulto.",
+      "e": "extingue a pena."
+    },
+    "artigo": "Súmula 341 do STJ; LEP, art. 126",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577397+00:00",
+    "enunciado": "Segundo a Súmula 341 do Superior Tribunal de Justiça, a frequência a curso de ensino formal:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "040a269daffaf3fdbe5ffcfe199000cc",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -426,6 +501,31 @@
   },
   {
     "alternativas": {
+      "a": "a autoridades de mesma hierarquia ou de hierarquia inferior.",
+      "b": "apenas ao Presidente da República.",
+      "c": "a autoridades de hierarquia superior.",
+      "d": "exclusivamente a autoridades estrangeiras.",
+      "e": "apenas aos chefes de Poder."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): Atenciosamente, para autoridades de mesma hierarquia ou de hierarquia inferior; Respeitosamente, para autoridades de hierarquia superior.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799154+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, o fecho Atenciosamente deve ser empregado nas comunicações dirigidas:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "06c4791951ddb17f44b7e6872e30f0d3",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "a votação aberta dos jurados, para controle social.",
       "b": "a fundamentação obrigatória do voto de cada jurado.",
       "c": "a escolha dos jurados pelas partes.",
@@ -448,6 +548,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "interrompe o prazo para a obtenção da progressão, reiniciando-se a contagem com base na pena remanescente.",
+      "b": "não tem nenhum efeito sobre a progressão.",
+      "c": "extingue a pena.",
+      "d": "apenas suspende o prazo, que volta a correr do ponto em que parou.",
+      "e": "acarreta a perda de todos os dias remidos, sem limite."
+    },
+    "artigo": "LEP, art. 112, § 6º",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997574+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o cometimento de falta grave durante a execução da pena privativa de liberdade:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0728fce234a8d06cd49a9d0b03faaddc",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -776,6 +901,31 @@
   },
   {
     "alternativas": {
+      "a": "afastar-se da atividade.",
+      "b": "ser agregado pela autoridade superior.",
+      "c": "passar para a inatividade antes do registro.",
+      "d": "renunciar à patente.",
+      "e": "obter autorização do comandante."
+    },
+    "artigo": "CF, art. 14, § 8º, I",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592384+00:00",
+    "enunciado": "De acordo com a Constituição Federal, o militar alistável é elegível; se contar menos de dez anos de serviço, deverá:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0b8328e6a39e529a83c736523f4fd525",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Tudo se resolveu com o diálogo.",
       "b": "Se lhe perguntarem, diga a verdade.",
       "c": "Diga-me o horário da visita.",
@@ -798,6 +948,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "obrigatórios, salvo para os analfabetos.",
+      "b": "proibidos.",
+      "c": "facultativos para sempre.",
+      "d": "obrigatórios apenas para os homens.",
+      "e": "obrigatórios somente depois dos vinte e um anos."
+    },
+    "artigo": "CF, art. 14, § 1º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667668+00:00",
+    "enunciado": "Segundo a Constituição Federal, o alistamento eleitoral e o voto dos maiores de dezesseis e menores de dezoito anos são facultativos; a partir dos dezoito anos, tornam-se:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0c75cfe78a333ba85cb07eaf7bab5dc5",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -871,6 +1046,31 @@
     "modo": "variacao",
     "modo_do_pedido": null,
     "origem_impressao": "1caa127a7bb47bdfaedb84899576d42f",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "CF, art. 14, § 1º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667661+00:00",
+    "enunciado": "Considere as afirmativas de acordo com a Constituição Federal: 1. O voto é obrigatório para os maiores de dezoito anos. 2. O voto é facultativo para os maiores de setenta anos. 3. O voto é facultativo para os maiores de dezesseis e menores de dezoito anos. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0d6938d8dc1c620fa3130fb7c13ec79b",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "e"
   },
@@ -976,6 +1176,31 @@
   },
   {
     "alternativas": {
+      "a": "Magnífico Reitor,",
+      "b": "Excelentíssimo Senhor Reitor,",
+      "c": "Ilustríssimo Reitor,",
+      "d": "Digníssimo Reitor,",
+      "e": "Eminentíssimo Reitor,"
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): os reitores de universidade recebem o tratamento Vossa Magnificência e o vocativo Magnífico Reitor.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799147+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, em comunicação dirigida ao reitor de uma universidade, o vocativo adequado é:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "alvo",
+    "impressao": "0fc02f86cede69bcee74a3929c46d548",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "7377b2dd470e419f202601959c6bedf9",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "V • F • V • V",
       "b": "V • V • F • V",
       "c": "F • F • V • V",
@@ -1048,6 +1273,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "Senhor Fulano de Tal,",
+      "b": "Ilustríssimo Senhor Fulano de Tal,",
+      "c": "Digníssimo Senhor Fulano de Tal,",
+      "d": "Excelentíssimo Senhor Fulano de Tal,",
+      "e": "Meritíssimo Senhor Fulano de Tal,"
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): para particulares, basta Senhor (ou Senhora) seguido do nome; o superlativo ilustríssimo está dispensado.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799153+00:00",
+    "enunciado": "Em comunicação oficial dirigida a um particular, segundo o Manual de Redação da Presidência da República, o vocativo adequado é:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "114889120b475f5a1dbc0c4366221359",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -1326,6 +1576,31 @@
   },
   {
     "alternativas": {
+      "a": "Vereador.",
+      "b": "Prefeito.",
+      "c": "Deputado Estadual.",
+      "d": "juiz de paz.",
+      "e": "Senador."
+    },
+    "artigo": "CF, art. 14, § 3º, VI, d",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592389+00:00",
+    "enunciado": "Segundo a Constituição Federal, a idade mínima de dezoito anos é condição de elegibilidade para:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "174f0d0600dbace642bcf4d3d3e1d0ac",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 2.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -1373,6 +1648,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "o plebiscito.",
+      "b": "o referendo.",
+      "c": "a iniciativa popular.",
+      "d": "o sufrágio universal.",
+      "e": "o veto popular."
+    },
+    "artigo": "CF, art. 14, caput",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592388+00:00",
+    "enunciado": "Segundo a Constituição Federal, NÃO é forma de exercício da soberania popular prevista no art. 14:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "18932ecc40f756703c8da7602b22d143",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -2051,6 +2351,56 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "LEP, art. 126, §§ 7º, 8º e 9º (o § 9º pela Lei 15.402/2026)",
+    "assunto": "Remição",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577384+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a remição de pena: 1. aplica-se às hipóteses de prisão cautelar. 2. não é impedida pelo cumprimento da pena em regime domiciliar. 3. é declarada pelo diretor do estabelecimento, sem ouvir o Ministério Público. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "alvo",
+    "impressao": "20078f309d08a83b19a3e0368b756941",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "conclusão do ensino fundamental, médio ou superior durante o cumprimento da pena, certificada pelo órgão competente.",
+      "b": "bom comportamento carcerário.",
+      "c": "trabalho aos domingos.",
+      "d": "participação em culto religioso.",
+      "e": "matrícula em curso a distância."
+    },
+    "artigo": "LEP, art. 126, § 5º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577389+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o tempo a remir em função das horas de estudo será acrescido de 1/3 no caso de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "202e6116d0b7d94e0c18f2038fa517df",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "não sofre consequência alguma, pois a liberdade de crença é absoluta.",
       "b": "poderá ser privado de direitos.",
       "c": "será preso em flagrante.",
@@ -2117,6 +2467,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "2268b64cf10907ff6f199cbff88ad7e0",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "satisfeito",
+      "b": "satisfeita",
+      "c": "satisfeitos",
+      "d": "satisfeitas",
+      "e": "satisfeitíssima"
+    },
+    "artigo": "Regra: com pronome de tratamento, o adjetivo concorda com o sexo da pessoa a que se refere (o Ministro: satisfeito), e não com a palavra Excelência.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799157+00:00",
+    "enunciado": "Na frase \"Sua Excelência, o Ministro, compareceu ao evento e mostrou-se ___ com o resultado\", a lacuna é preenchida por:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "22c508f230e005b4a74c404bc7af6768",
+    "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -2201,6 +2576,31 @@
   },
   {
     "alternativas": {
+      "a": "condenação criminal transitada em julgado, enquanto durarem seus efeitos.",
+      "b": "simples instauração de inquérito policial.",
+      "c": "recebimento da denúncia.",
+      "d": "prisão em flagrante.",
+      "e": "decisão administrativa do Tribunal de Contas."
+    },
+    "artigo": "CF, art. 15, III",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592382+00:00",
+    "enunciado": "Segundo a Constituição Federal, é vedada a cassação de direitos políticos, cuja perda ou suspensão só se dará, entre outros casos, por:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "2385634f570ed20e06300b6274dbb2d6",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Não houve rebelião mas a tensão, permaneceu alta.",
       "b": "O preso pediu transferência, e o diretor, negou.",
       "c": "Os documentos, que estavam na gaveta, foram enviados ao juiz.",
@@ -2248,6 +2648,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "a nacionalidade brasileira.",
+      "b": "o pleno exercício dos direitos políticos.",
+      "c": "o domicílio eleitoral na circunscrição.",
+      "d": "a filiação partidária.",
+      "e": "a escolaridade de nível médio."
+    },
+    "artigo": "CF, art. 14, § 3º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592380+00:00",
+    "enunciado": "São condições de elegibilidade, segundo a Constituição Federal, EXCETO:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "24306b6b0521414c84507e112343b5f7",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -2376,6 +2801,31 @@
   },
   {
     "alternativas": {
+      "a": "Excelentíssimo Senhor Presidente do Supremo Tribunal Federal,",
+      "b": "Senhor Doutor,",
+      "c": "Ilustríssimo Senhor Ministro,",
+      "d": "Vossa Senhoria,",
+      "e": "Prezado Senhor,"
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República, 3ª ed.): o vocativo Excelentíssimo Senhor, seguido do cargo, é empregado nas comunicações dirigidas aos chefes de Poder.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799145+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, o vocativo adequado em comunicação dirigida ao Presidente do Supremo Tribunal Federal é:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "alvo",
+    "impressao": "269a028ed162feee86fa273271f77ba8",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "7377b2dd470e419f202601959c6bedf9",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "isolar adjuntos adverbiais antepostos ao sujeito.",
       "b": "separar o sujeito do verbo.",
       "c": "isolar um vocativo.",
@@ -2401,6 +2851,31 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "CF, art. 14, §§ 1º, II, b, 2º, 3º, VI, b, e 5º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592375+00:00",
+    "enunciado": "Considere as afirmativas a respeito dos direitos políticos na Constituição Federal: 1. O alistamento eleitoral e o voto são facultativos para os maiores de setenta anos. 2. Os estrangeiros podem alistar-se como eleitores depois de um ano de residência no país. 3. A idade mínima de trinta anos é condição de elegibilidade para Governador. 4. O Presidente da República pode ser reeleito para dois períodos subsequentes. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "alvo",
+    "impressao": "280d7612bc3e493f8bb04691754b91e1",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "d9d759565313c682164498c83c06774a",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "as ações de habeas corpus e habeas data e, na forma da lei, os atos necessários ao exercício da cidadania.",
       "b": "todas as ações judiciais.",
       "c": "apenas as ações de mandado de segurança.",
@@ -2417,6 +2892,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "281538f5d0a5b81ce1d3e9281e0aa3bc",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "A Sua Excelência o Senhor, seguido do nome e do cargo.",
+      "b": "A Vossa Excelência o Senhor, seguido do nome e do cargo.",
+      "c": "Ao Ilustríssimo Senhor, seguido do nome.",
+      "d": "Ao Digníssimo Senhor, seguido do nome.",
+      "e": "Excelentíssimo Doutor, seguido do nome."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): no endereçamento usa-se A Sua Excelência o Senhor; Sua, porque se fala da autoridade, e não com ela.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799148+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, no envelope de comunicação dirigida a autoridade tratada por Vossa Excelência, o endereçamento tem a forma:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "285ad7db0593dc6561d5093714a273e2",
+    "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -2523,6 +3023,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "CF, art. 14, caput e § 1º, I",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592376+00:00",
+    "enunciado": "Analise as afirmativas com base na Constituição Federal: 1. A soberania popular será exercida pelo sufrágio universal e pelo voto direto e secreto, com valor igual para todos. 2. O plebiscito, o referendo e a iniciativa popular são formas de exercício da soberania popular. 3. O alistamento eleitoral é facultativo para os maiores de dezoito anos. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "alvo",
+    "impressao": "2aae0271b9ac6a4d86f3dab690e7cd30",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "d9d759565313c682164498c83c06774a",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -2773,6 +3298,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "já titular de mandato eletivo e candidato à reeleição.",
+      "b": "tiver curso superior.",
+      "c": "for filiado a outro partido.",
+      "d": "residir em outro Estado.",
+      "e": "tiver mais de setenta anos."
+    },
+    "artigo": "CF, art. 14, § 7º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592387+00:00",
+    "enunciado": "Segundo a Constituição Federal, são inelegíveis, no território de jurisdição do titular, o cônjuge e os parentes consanguíneos ou afins, até o segundo grau ou por adoção, do Prefeito, salvo se:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "2dd0816784e29f37ceb7605120cbafea",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -3201,6 +3751,31 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "Regra: na passagem para o discurso indireto, o futuro do presente vira futuro do pretérito (voltarei: voltaria), o imperativo vira pretérito imperfeito do subjuntivo (saia: saísse) e os advérbios se a",
+    "assunto": "Discurso direto e indireto",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "criada_em": "2026-10-03T22:56:04.682798+00:00",
+    "enunciado": "Considere as frases. A. \"Voltarei amanhã\", prometeu o preso. / O preso prometeu que voltaria no dia seguinte. B. \"Saia daqui!\", ordenou o guarda. / O guarda ordenou que ele saísse dali. Analise as afirmativas: 1. Em A, o futuro voltarei passou ao futuro do pretérito voltaria no discurso indireto. 2. Em B, o imperativo saia passou ao pretérito imperfeito do subjuntivo saísse. 3. Em A, o advérbio amanhã foi mantido no discurso indireto. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "evidencia_da_base": "alvo",
+    "impressao": "35db46b324a0e544bc986c1f16327e5e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "a5de09d0a1a56a4b791a0f616044de53",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "o acusado, seu advogado constituído ou membro da Defensoria Pública, e o membro do Ministério Público.",
       "b": "apenas o acusado e o delegado de polícia.",
       "c": "a vítima e as testemunhas.",
@@ -3217,6 +3792,56 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "367ac8a434ce76467e1e28088a8f44e3",
     "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "permanecer no local designado durante o repouso e nos dias de folga.",
+      "b": "sair para o trabalho e retornar nos horários fixados.",
+      "c": "não se ausentar da cidade onde reside sem autorização judicial.",
+      "d": "comparecer a juízo para informar e justificar as suas atividades, quando determinado.",
+      "e": "recolher-se ao estabelecimento penal durante todo o dia."
+    },
+    "artigo": "LEP, art. 115",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997578+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, são condições gerais e obrigatórias do regime aberto, EXCETO:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "369aebc1f48f37b060998e2b8de918a6",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "Vossa Santidade.",
+      "b": "Vossa Eminência.",
+      "c": "Vossa Excelência Reverendíssima.",
+      "d": "Vossa Magnificência.",
+      "e": "Vossa Senhoria."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): o Papa recebe o tratamento Vossa Santidade.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799158+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, as comunicações dirigidas ao Papa empregam o pronome de tratamento:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "36bbd0be2843043f6010a362c3b5829b",
+    "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -3401,6 +4026,31 @@
   },
   {
     "alternativas": {
+      "a": "os analfabetos.",
+      "b": "os maiores de setenta anos.",
+      "c": "os estrangeiros e, durante o período do serviço militar obrigatório, os conscritos.",
+      "d": "os maiores de dezesseis e menores de dezoito anos.",
+      "e": "os brasileiros naturalizados."
+    },
+    "artigo": "CF, art. 14, § 2º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592378+00:00",
+    "enunciado": "Segundo a Constituição Federal, não podem alistar-se como eleitores:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "alvo",
+    "impressao": "3957fe7d864ffbc2ece7d65a6b26f287",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "c0af9616d8039f0c3ecba70ec6d1d9c7",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "portanto.",
       "b": "porque.",
       "c": "contudo.",
@@ -3473,6 +4123,31 @@
     "origem_impressao": "a84f92b2439d8c6a2f596e677d8bd9b5",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "12 horas de frequência escolar, divididas, no mínimo, em 3 dias.",
+      "b": "8 horas de frequência, num único dia.",
+      "c": "3 dias de frequência, sem contagem de horas.",
+      "d": "24 horas de estudo, divididas em 4 dias.",
+      "e": "6 horas de frequência escolar."
+    },
+    "artigo": "LEP, art. 126, § 1º, I",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577386+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a remição pelo estudo é feita à razão de 1 dia de pena a cada:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3a26ab2bbf71029358b1680fc3e9bfc2",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -3601,6 +4276,31 @@
   },
   {
     "alternativas": {
+      "a": "Vossa Excelência e Senhor Juiz.",
+      "b": "Vossa Senhoria e Excelentíssimo Senhor Juiz.",
+      "c": "Vossa Magnificência e Magnífico Juiz.",
+      "d": "Vossa Excelência e Ilustríssimo Juiz.",
+      "e": "Vossa Senhoria e Meritíssimo."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): juízes recebem Vossa Excelência; o vocativo Excelentíssimo Senhor fica reservado aos chefes de Poder, e as demais autoridades recebem Senhor segu",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799152+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, em comunicação dirigida a um juiz, o pronome de tratamento e o vocativo adequados são, respectivamente:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3c52a8372738ea175b6d23b3df03039a",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "a natureza do delito, a idade e o sexo do apenado.",
       "b": "a renda e a escolaridade do apenado.",
       "c": "a religião e a nacionalidade do apenado.",
@@ -3701,6 +4401,31 @@
   },
   {
     "alternativas": {
+      "a": "as demais autoridades, não tratadas por Vossa Excelência, e para particulares.",
+      "b": "o Presidente da República.",
+      "c": "os Ministros de Estado.",
+      "d": "os juízes.",
+      "e": "os senadores."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): Vossa Excelência para as altas autoridades dos três Poderes, como Presidente, Ministros, parlamentares e juízes; Vossa Senhoria para as demais au",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799151+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, o tratamento Vossa Senhoria é empregado para:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3d9b58fee45a6db487320b6217ff8cfe",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "transitivo indireto, e à liberdade é objeto indireto.",
       "b": "transitivo direto, e à liberdade é objeto direto.",
       "c": "intransitivo, e à liberdade é adjunto adverbial.",
@@ -3717,6 +4442,56 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "3ddb778d3f2d914b674b731aba56fbaa",
     "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "direto, secreto, universal e periódico.",
+      "b": "obrigatório.",
+      "c": "facultativo dos analfabetos.",
+      "d": "dos maiores de dezesseis anos.",
+      "e": "eletrônico."
+    },
+    "artigo": "CF, art. 60, § 4º, II",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667660+00:00",
+    "enunciado": "Segundo a Constituição Federal, não será objeto de deliberação a proposta de emenda tendente a abolir o voto:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3e957d5dabda7c4001ba78872af706c3",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "até seis meses antes do pleito.",
+      "b": "até três meses antes do pleito.",
+      "c": "até um ano antes do pleito.",
+      "d": "no dia da eleição.",
+      "e": "em nenhuma hipótese, pois a renúncia não é exigida."
+    },
+    "artigo": "CF, art. 14, § 6º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592383+00:00",
+    "enunciado": "Segundo a Constituição Federal, o Presidente da República, os Governadores e os Prefeitos, para concorrerem a outros cargos, devem renunciar aos respectivos mandatos:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3f81867e0353ed30c678b619c6466849",
+    "materia": "Direito Constitucional",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -4148,6 +4923,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "40% da pena.",
+      "b": "50% da pena.",
+      "c": "60% da pena.",
+      "d": "70% da pena.",
+      "e": "85% da pena."
+    },
+    "artigo": "LEP, art. 112, V (redação da Lei 15.358/2026)",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997570+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o apenado primário condenado por crime hediondo ou equiparado, sem resultado morte, somente progride de regime depois de cumprir ao menos:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "441f9986fd62cec37b42451aaea0aef2",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -4826,6 +5626,31 @@
   },
   {
     "alternativas": {
+      "a": "O diretor perguntou ao preso: – Você quer trabalhar na cozinha?",
+      "b": "O diretor perguntou ao preso: – Ele queria trabalhar na cozinha?",
+      "c": "O diretor perguntou ao preso que queria trabalhar na cozinha.",
+      "d": "O diretor perguntou ao preso: – Se ele queria trabalhar na cozinha.",
+      "e": "O diretor perguntou ao preso: – Quis trabalhar na cozinha?"
+    },
+    "artigo": "Regra: no discurso direto, a pergunta é reproduzida como foi feita, com a pessoa e o tempo da fala (você quer), depois de dois-pontos e travessão; a conjunção se do discurso indireto desaparece.",
+    "assunto": "Discurso direto e indireto",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "criada_em": "2026-10-03T22:56:04.682801+00:00",
+    "enunciado": "Assinale a alternativa que transpõe corretamente para o discurso direto a frase: O diretor perguntou ao preso se ele queria trabalhar na cozinha.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "5172762f32e5da18fc43167656d2a962",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "mensalmente, registrando a sua presença em livro próprio.",
       "b": "anualmente.",
       "c": "apenas quando houver rebelião.",
@@ -5046,6 +5871,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "7f7eb9f21e2711ff16c23216be9120ba",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Solicito a Vossa Excelência que encaminhe seu parecer.",
+      "b": "Solicito a Vossa Excelência que encaminheis vosso parecer.",
+      "c": "Solicito a Sua Excelência que encaminhe teu parecer.",
+      "d": "Solicito a Vossa Excelência que encaminhes o vosso parecer.",
+      "e": "Solicito a Vossa Excelência que encaminheis seu parecer."
+    },
+    "artigo": "Regra: com Vossa Excelência, o verbo vai à 3ª pessoa (encaminhe) e o possessivo é seu, sua; vosso e as formas de 2ª pessoa não concordam com o pronome de tratamento.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799155+00:00",
+    "enunciado": "Um policial penal redige ofício a uma autoridade que recebe o tratamento Vossa Excelência. A frase corretamente redigida é:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "57f2dcff6d7206035c70f061fc1707b9",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -5426,6 +6276,31 @@
   },
   {
     "alternativas": {
+      "a": "a relação de seus dias remidos.",
+      "b": "o valor em dinheiro dos dias remidos.",
+      "c": "a escolha do regime.",
+      "d": "o direito de converter os dias remidos em saídas.",
+      "e": "a dispensa do exame criminológico."
+    },
+    "artigo": "LEP, art. 129, § 2º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577398+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, quanto à remição, ao condenado dar-se-á:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "602625cb91f6cecc18a40904dde36261",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 3.",
       "b": "São corretas apenas as afirmativas 2 e 4.",
       "c": "São corretas apenas as afirmativas 1, 2 e 3.",
@@ -5726,6 +6601,31 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "Regra: os pronomes de tratamento levam verbo e possessivo à 3ª pessoa (seu, sua); Vossa para falar com a autoridade e Sua para falar dela.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799157+00:00",
+    "enunciado": "Considere as afirmativas sobre as formas de tratamento na redação oficial: 1. Os pronomes de tratamento levam o verbo à terceira pessoa. 2. Usa-se Vossa Excelência ao falar com a autoridade e Sua Excelência ao falar dela. 3. Os possessivos que acompanham os pronomes de tratamento são vosso e vossa. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "66a1aaa13bce3a6a6e32b98711b3adcc",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "da atividade, considerando praticado o crime somente onde ocorreu a ação ou omissão.",
       "b": "do resultado, considerando praticado o crime somente onde este se produziu.",
       "c": "da ubiquidade, considerando praticado o crime tanto onde ocorreu a ação ou omissão, no todo ou em parte, quanto onde se produziu ou deveria produzir-se o resultado.",
@@ -5816,6 +6716,31 @@
     "escopo": "Língua Portuguesa > Pontuação > Emprego da vírgula",
     "evidencia_da_base": "nenhuma",
     "impressao": "69fa9cdceb8626f31603c5a0f6b37ccb",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "O agente disse que tinha feito a revista naquele dia.",
+      "b": "O agente disse que eu fiz a revista hoje.",
+      "c": "O agente disse que faz a revista hoje.",
+      "d": "O agente disse: fez a revista naquele dia.",
+      "e": "O agente disse que fará a revista amanhã."
+    },
+    "artigo": "Regra: no discurso indireto, a 1ª pessoa passa à 3ª, o pretérito perfeito passa ao mais-que-perfeito (fiz: tinha feito) e hoje passa a naquele dia.",
+    "assunto": "Discurso direto e indireto",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "criada_em": "2026-10-03T22:56:04.682800+00:00",
+    "enunciado": "Assinale a alternativa que transpõe corretamente para o discurso indireto a frase: O agente disse: – Eu fiz a revista hoje.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6a481f147ebeb88a991088b548ef9158",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
@@ -5942,6 +6867,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "6c117405f221b5f8689380a197dc1666",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "a autoridades de hierarquia superior.",
+      "b": "a autoridades de mesma hierarquia.",
+      "c": "a autoridades de hierarquia inferior.",
+      "d": "apenas a particulares.",
+      "e": "a qualquer destinatário, indistintamente."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): Respeitosamente, para autoridades de hierarquia superior; Atenciosamente, para autoridades de mesma hierarquia ou de hierarquia inferior.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799148+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, o fecho Respeitosamente deve ser empregado nas comunicações dirigidas:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6d568cd8979eed3e3cfcec37d9c43c1c",
+    "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -6776,6 +7726,31 @@
   },
   {
     "alternativas": {
+      "a": "vinte e um anos.",
+      "b": "trinta anos.",
+      "c": "trinta e cinco anos.",
+      "d": "dezoito anos.",
+      "e": "quarenta anos."
+    },
+    "artigo": "CF, art. 14, § 3º, VI, a",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592380+00:00",
+    "enunciado": "Segundo a Constituição Federal, a idade mínima para concorrer ao cargo de Senador é de:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "7993d2cdc228ab347f5be390f7590856",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "É vedada a associação de caráter paramilitar.",
       "b": "A criação de associações independe de autorização.",
       "c": "As associações podem ter suas atividades suspensas por decisão judicial.",
@@ -6951,6 +7926,31 @@
   },
   {
     "alternativas": {
+      "a": "Deputado Federal, Deputado Estadual ou Distrital, Prefeito, Vice-Prefeito e juiz de paz.",
+      "b": "Vereador.",
+      "c": "Senador.",
+      "d": "Governador.",
+      "e": "Presidente da República."
+    },
+    "artigo": "CF, art. 14, § 3º, VI, c",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592381+00:00",
+    "enunciado": "Segundo a Constituição Federal, a idade mínima de vinte e um anos é condição de elegibilidade para:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "7ba6034f228709c9bacc9d17e43ed69e",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "submeter-se às normas de execução da pena.",
       "b": "indenizar integralmente o Estado antes de qualquer progressão.",
       "c": "trabalhar fora do estabelecimento.",
@@ -7101,6 +8101,31 @@
   },
   {
     "alternativas": {
+      "a": "maiores de dezesseis e menores de dezoito anos.",
+      "b": "maiores de dezoito e menores de vinte e um anos.",
+      "c": "conscritos.",
+      "d": "estrangeiros.",
+      "e": "maiores de sessenta anos."
+    },
+    "artigo": "CF, art. 14, § 1º, II, c",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667655+00:00",
+    "enunciado": "Conforme a Constituição Federal, o voto é facultativo para os:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "complementar",
+    "impressao": "7ede0c4898d6730eb9cbd0f0dae88615",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "6594644c84f19842e5e34616021a6c27",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "em votação secreta e pelo voto da maioria absoluta dos Estados-Partes na Convenção, na Assembleia Geral da OEA.",
       "b": "em votação aberta, pela maioria simples dos Estados.",
       "c": "por indicação do Secretário-Geral da ONU.",
@@ -7176,6 +8201,31 @@
   },
   {
     "alternativas": {
+      "a": "falsidade ideológica, previsto no art. 299 do Código Penal.",
+      "b": "prevaricação.",
+      "c": "corrupção passiva.",
+      "d": "falso testemunho.",
+      "e": "estelionato."
+    },
+    "artigo": "LEP, art. 130; CP, art. 299",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577392+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, declarar ou atestar falsamente prestação de serviço para fim de instruir pedido de remição constitui o crime de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "7f288c094dd043a1a1bb2f9c11434ed4",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "aos albergados e aos egressos.",
       "b": "apenas aos presos provisórios.",
       "c": "aos agentes penitenciários.",
@@ -7191,6 +8241,31 @@
     "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal",
     "evidencia_da_base": "nenhuma",
     "impressao": "7f92428fa33f559fbb6babcab5c49872",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "boa conduta carcerária, comprovada pelo diretor do estabelecimento, e pelos resultados do exame criminológico, respeitadas as normas que vedam a progressão.",
+      "b": "apenas o cumprimento do tempo, dispensado o exame criminológico.",
+      "c": "parecer favorável do Conselho da Comunidade.",
+      "d": "autorização do Ministério Público.",
+      "e": "declaração de emprego fora do presídio."
+    },
+    "artigo": "LEP, art. 112, § 1º (redação da Lei 14.843/2024)",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997572+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, em todos os casos, o apenado somente terá direito à progressão de regime se ostentar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "7fcbed439c6ea7a816b3e675beca4e41",
     "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
@@ -7323,6 +8398,56 @@
     "origem_impressao": "97c396dc273e56728692e8dd2f1b914f",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "mantém os direitos políticos, pois a suspensão exige condenação criminal transitada em julgado.",
+      "b": "tem os direitos políticos cassados automaticamente.",
+      "c": "perde a nacionalidade.",
+      "d": "fica proibido de votar por determinação constitucional expressa.",
+      "e": "tem os direitos políticos suspensos desde a prisão."
+    },
+    "artigo": "CF, art. 15, III",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592383+00:00",
+    "enunciado": "O preso provisório, ainda não condenado por sentença transitada em julgado, quanto aos direitos políticos:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8131a92d4478d679ff299dc872204e56",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "obrigatórios.",
+      "b": "facultativos.",
+      "c": "proibidos.",
+      "d": "permitidos apenas com autorização judicial.",
+      "e": "permitidos apenas nas eleições municipais."
+    },
+    "artigo": "CF, art. 14, § 1º, II, c",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592379+00:00",
+    "enunciado": "Um jovem de dezessete anos deseja votar nas próximas eleições. Segundo a Constituição Federal, para ele o alistamento eleitoral e o voto são:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "alvo",
+    "impressao": "81b6d71e3a1514df8dca521d8015ba24",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "c0af9616d8039f0c3ecba70ec6d1d9c7",
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -7751,6 +8876,31 @@
   },
   {
     "alternativas": {
+      "a": "Vossa Eminência.",
+      "b": "Vossa Santidade.",
+      "c": "Vossa Magnificência.",
+      "d": "Vossa Senhoria.",
+      "e": "Vossa Majestade."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): os cardeais recebem o tratamento Vossa Eminência.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799159+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, os cardeais recebem o tratamento:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "88c05c7967bdfef3c2cd2b05099813a1",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Refiro-me à pessoas que faltaram à reunião.",
       "b": "Ele não costuma ir à festas.",
       "c": "A revista começou às oito horas.",
@@ -7851,6 +9001,31 @@
   },
   {
     "alternativas": {
+      "a": "quinze dias contados da diplomação.",
+      "b": "trinta dias contados da posse.",
+      "c": "dez dias contados da eleição.",
+      "d": "cinco dias contados da proclamação do resultado.",
+      "e": "um ano contado da diplomação."
+    },
+    "artigo": "CF, art. 14, § 10",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592385+00:00",
+    "enunciado": "Segundo a Constituição Federal, o mandato eletivo poderá ser impugnado ante a Justiça Eleitoral no prazo de:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8a96e39e026e1fadec0b1004b6d27609",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Pode adotar medidas provisórias em casos de extrema gravidade e urgência, quando necessário para evitar danos irreparáveis às pessoas.",
       "b": "Só pode emitir opiniões consultivas, sem julgar casos.",
       "c": "É subordinada ao Supremo Tribunal Federal.",
@@ -7871,6 +9046,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "00ec7c239bca271706bbd4aa09db95cc",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "pelo juiz da execução, ouvidos o Ministério Público e a defesa.",
+      "b": "pelo diretor do estabelecimento.",
+      "c": "pelo Conselho Penitenciário.",
+      "d": "pelo Ministério Público, isoladamente.",
+      "e": "automaticamente, sem decisão judicial."
+    },
+    "artigo": "LEP, art. 126, § 8º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577393+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a remição será declarada:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8c58e51b933dadd803566523ba71695c",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -8101,6 +9301,31 @@
   },
   {
     "alternativas": {
+      "a": "1 dia de pena a cada 3 dias de trabalho.",
+      "b": "1 dia de pena a cada 2 dias de trabalho.",
+      "c": "1 dia de pena a cada 12 horas de trabalho.",
+      "d": "2 dias de pena a cada 3 dias de trabalho.",
+      "e": "1 dia de pena a cada 5 dias de trabalho."
+    },
+    "artigo": "LEP, art. 126, § 1º, II",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577385+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a contagem do tempo para a remição pelo trabalho é feita à razão de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8e650283c392f19d1ffeab0e1132d32a",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "tem sede na Capital da República e é subordinado ao Ministério da Justiça.",
       "b": "é subordinado ao Supremo Tribunal Federal.",
       "c": "tem uma sede em cada Estado.",
@@ -8146,6 +9371,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "b10e74bfad75c5d4840d67caf1afce27",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "vírgula.",
+      "b": "dois-pontos.",
+      "c": "ponto e vírgula.",
+      "d": "ponto final.",
+      "e": "travessão."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): o vocativo que abre o texto do expediente é seguido de vírgula (Excelentíssimo Senhor Presidente da República,).",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799156+00:00",
+    "enunciado": "No ofício, o vocativo \"Excelentíssimo Senhor Presidente da República\" é seguido de:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8f5890f51566f127f0a77f116ac4daff",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -8526,6 +9776,31 @@
   },
   {
     "alternativas": {
+      "a": "85% da pena, vedado o livramento condicional.",
+      "b": "70% da pena.",
+      "c": "60% da pena, admitido o livramento condicional.",
+      "d": "50% da pena.",
+      "e": "1/6 da pena."
+    },
+    "artigo": "LEP, art. 112, VIII (redação da Lei 15.358/2026)",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997571+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, para o apenado reincidente em crime hediondo ou equiparado com resultado morte, a progressão de regime exige o cumprimento de ao menos:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "941eb0023379c142a4eb58bf61196a06",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "primeira geração.",
       "b": "segunda geração.",
       "c": "terceira geração.",
@@ -8601,6 +9876,56 @@
   },
   {
     "alternativas": {
+      "a": "Senhor Senador,",
+      "b": "Ilustríssimo Senhor Senador,",
+      "c": "Digníssimo Senador,",
+      "d": "Magnífico Senador,",
+      "e": "A Sua Excelência o Senador,"
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República, 3ª ed.): Excelentíssimo Senhor é o vocativo dos chefes de Poder; as demais autoridades tratadas por Vossa Excelência recebem Senhor seguido do car",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799140+00:00",
+    "enunciado": "Em comunicação oficial dirigida a um Senador, segundo o Manual de Redação da Presidência da República, o vocativo adequado é:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "alvo",
+    "impressao": "94f5e4c4d99b60460f7a5565d7f2a9ca",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "7377b2dd470e419f202601959c6bedf9",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "as horas diárias de trabalho e de estudo serão definidas de forma a se compatibilizarem.",
+      "b": "é vedada a cumulação.",
+      "c": "prevalece apenas o trabalho.",
+      "d": "prevalece apenas o estudo.",
+      "e": "a cumulação depende de parecer do Conselho Penitenciário."
+    },
+    "artigo": "LEP, art. 126, § 3º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577395+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, para fins de cumulação dos casos de remição por trabalho e por estudo:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "955459eecc84b979727c91f57a130fe8",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "somente se a pessoa provar prejuízo material.",
       "b": "independentemente de prova do prejuízo.",
       "c": "somente se a pessoa for figura pública.",
@@ -8648,6 +9973,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "servidores públicos.",
+      "b": "conscritos.",
+      "c": "maiores de setenta anos.",
+      "d": "estrangeiros residentes.",
+      "e": "maiores de dezoito e menores de sessenta anos."
+    },
+    "artigo": "CF, art. 14, § 1º, II, b",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667650+00:00",
+    "enunciado": "Segundo a Constituição Federal, é facultativo o voto dos:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "complementar",
+    "impressao": "95e43de36928209563d49b55c986c0a1",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "6594644c84f19842e5e34616021a6c27",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -9751,6 +11101,31 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "CF, art. 15, caput, II, IV e V",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592387+00:00",
+    "enunciado": "Considere as afirmativas de acordo com a Constituição Federal: 1. A perda ou suspensão dos direitos políticos ocorre, entre outros casos, por incapacidade civil absoluta. 2. A recusa de cumprir obrigação a todos imposta ou prestação alternativa pode levar à perda ou à suspensão dos direitos políticos. 3. A cassação de direitos políticos é permitida em caso de improbidade administrativa. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a9173adf7b40f45d3cee391743deedb6",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "por meio de videoconferência em tempo real.",
       "b": "presencialmente, em qualquer caso.",
       "c": "por escrito, sem a presença do acusado.",
@@ -9901,6 +11276,31 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 3.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "CF, art. 14, caput e § 1º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667666+00:00",
+    "enunciado": "Considere as afirmativas sobre o voto na Constituição Federal: 1. É direto e secreto. 2. Tem valor diferenciado conforme a escolaridade do eleitor. 3. É obrigatório para os maiores de dezoito anos, com as exceções previstas. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ad3cbb7d34b4f59010acfe156704dc9a",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "decisão administrativa fundamentada.",
       "b": "decisão judicial transitada em julgado.",
       "c": "deliberação da maioria dos associados.",
@@ -9976,6 +11376,56 @@
   },
   {
     "alternativas": {
+      "a": "Atenciosamente,",
+      "b": "Respeitosamente,",
+      "c": "Saudações cordiais,",
+      "d": "Sem mais para o momento,",
+      "e": "Com elevada estima e distinta consideração,"
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): Atenciosamente, para autoridades de mesma hierarquia ou de hierarquia inferior; Respeitosamente, para as de hierarquia superior.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799159+00:00",
+    "enunciado": "Assinale o fecho adequado a um ofício dirigido pelo diretor de um estabelecimento penal a um servidor que lhe é subordinado.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ae264ce9baa250dfe5ea496403c0c0a8",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "os resultados do exame criminológico afirmarem a existência de indícios de que não voltará a cometer crimes da mesma natureza.",
+      "b": "tiver cumprido 1/6 da pena.",
+      "c": "a vítima concordar.",
+      "d": "houver parecer do Conselho da Comunidade.",
+      "e": "pagar indenização integral à vítima."
+    },
+    "artigo": "LEP, art. 119-A",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997601+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o condenado por crimes contra a dignidade sexual somente ingressará em regime mais benéfico, ou perceberá benefício que autorize a saída do estabelecimento, se:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ae49f1cd17f98786a12a5ffdcc026852",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "estado de necessidade.",
       "b": "legítima defesa.",
       "c": "exercício regular de direito.",
@@ -9992,6 +11442,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "ae61a202c74aa579133ca2fde7ad6ab4",
     "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "motivada e precedida de manifestação do Ministério Público e do defensor.",
+      "b": "dispensada de fundamentação.",
+      "c": "proferida sem ouvir o Ministério Público.",
+      "d": "precedida apenas de parecer do diretor.",
+      "e": "submetida ao Conselho Penitenciário."
+    },
+    "artigo": "LEP, art. 112, § 2º",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997573+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a decisão do juiz que determinar a progressão de regime será sempre:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "aec2b5954d99525e5cea11b905e671bf",
+    "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -10023,6 +11498,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "deverá ser ouvido, previamente, o condenado.",
+      "b": "a regressão é automática, sem oitiva.",
+      "c": "basta a comunicação do diretor ao Ministério Público.",
+      "d": "a regressão depende de nova sentença condenatória.",
+      "e": "a regressão é decidida pelo Conselho Penitenciário."
+    },
+    "artigo": "LEP, art. 118, § 2º",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997580+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, na regressão por prática de crime doloso ou falta grave, e na transferência do regime aberto por frustração dos fins da execução:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "af51b5d8c4451760411175bf140fe81f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -10301,6 +11801,31 @@
   },
   {
     "alternativas": {
+      "a": "1/8 da pena no regime anterior.",
+      "b": "1/6 da pena no regime anterior.",
+      "c": "1/4 da pena no regime anterior.",
+      "d": "metade da pena.",
+      "e": "2/5 da pena."
+    },
+    "artigo": "LEP, art. 112, § 3º, III",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997575+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, no caso de mulher gestante ou que for mãe ou responsável por crianças ou pessoas com deficiência, um dos requisitos cumulativos para a progressão de regime é ter cumprido ao menos:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b2cfde641af1b6952647907c308352c9",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Diz-se tentado o crime quando, iniciada a execução, não se consuma por circunstâncias alheias à vontade do agente.",
       "b": "Pune-se a tentativa quando, por ineficácia absoluta do meio, é impossível consumar-se o crime.",
       "c": "Quando o agente desiste voluntariamente de prosseguir na execução, responde por tentativa.",
@@ -10321,6 +11846,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "63615ebfc16bf214a041e7e6be96d6fa",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "mediante alvará do juiz, se por outro motivo não estiver preso.",
+      "b": "por ordem do diretor, independentemente de alvará.",
+      "c": "somente depois de parecer do Ministério Público.",
+      "d": "30 dias depois da extinção.",
+      "e": "mediante pagamento das custas."
+    },
+    "artigo": "LEP, art. 109",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997602+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, cumprida ou extinta a pena, o condenado será posto em liberdade:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b4b5a12e218411ef4b95e6720fe6a08e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -10351,6 +11901,31 @@
   },
   {
     "alternativas": {
+      "a": "aos chefes de Poder.",
+      "b": "a todos os servidores públicos.",
+      "c": "aos particulares.",
+      "d": "aos reitores de universidade.",
+      "e": "aos diretores de estabelecimento penal."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): o vocativo Excelentíssimo Senhor, seguido do cargo, é empregado nas comunicações dirigidas aos chefes de Poder.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799154+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, o vocativo Excelentíssimo Senhor, seguido do cargo, é reservado:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b4e2183e6aa228667206eb0e16a09025",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "aos que comprovarem insuficiência de recursos.",
       "b": "a todos, sem exceção.",
       "c": "apenas aos presos.",
@@ -10367,6 +11942,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "b4fa66e2e1d0a7ca58e5270fe5c08894",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "não é forma de tratamento, e sim título acadêmico, a ser empregado apenas para quem concluiu curso de doutorado.",
+      "b": "é a forma de tratamento obrigatória para advogados.",
+      "c": "substitui Vossa Excelência.",
+      "d": "é exigida para todo bacharel.",
+      "e": "deve anteceder o nome de qualquer autoridade."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): doutor não é forma de tratamento, e sim título acadêmico; deve ser usado apenas para quem tem o grau por ter concluído curso de doutorado.",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799150+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, a palavra doutor:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b503aef1f6a9b8ca7ec438df2a0c5cce",
+    "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -10417,6 +12017,106 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "b5a994cf20c5d99a6639444a14bcdc14",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "para um único período subsequente.",
+      "b": "para dois períodos subsequentes.",
+      "c": "indefinidamente.",
+      "d": "apenas depois de um mandato de intervalo.",
+      "e": "em nenhuma hipótese."
+    },
+    "artigo": "CF, art. 14, § 5º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592386+00:00",
+    "enunciado": "Segundo a Constituição Federal, os chefes do Poder Executivo e quem os houver sucedido ou substituído no curso dos mandatos poderão ser reeleitos:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b72e5e1c09bc71b7ea621d3fe3a8287c",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "exerce uma faculdade constitucional, pois para os maiores de setenta anos o voto é facultativo.",
+      "b": "comete crime eleitoral.",
+      "c": "perde os direitos políticos.",
+      "d": "é obrigada a justificar a ausência.",
+      "e": "fica inelegível."
+    },
+    "artigo": "CF, art. 14, § 1º, II, b",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667665+00:00",
+    "enunciado": "Segundo a Constituição Federal, uma pessoa de 75 anos que decide não votar:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b77a18ced71439f6f4f94e0c7ceadd6c",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "internado em Hospital de Custódia e Tratamento Psiquiátrico.",
+      "b": "posto em liberdade imediatamente.",
+      "c": "transferido para o regime aberto.",
+      "d": "mantido na mesma cela, com acompanhamento.",
+      "e": "entregue à família."
+    },
+    "artigo": "LEP, art. 108",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997600+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o condenado a quem sobreviver doença mental será:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b794276e1c3b946a163624011f36702b",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "condenado maior de setenta anos, condenado acometido de doença grave, condenada com filho menor ou deficiente físico ou mental, ou condenada gestante.",
+      "b": "qualquer condenado primário.",
+      "c": "condenado com emprego fixo.",
+      "d": "condenado por crime culposo, apenas.",
+      "e": "condenado com mais de sessenta anos."
+    },
+    "artigo": "LEP, art. 117",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997579+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, somente se admitirá o recolhimento do beneficiário de regime aberto em residência particular quando se tratar de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b79d0cd1cf5dfab92cea3e72ad6d4d63",
+    "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -10501,6 +12201,31 @@
   },
   {
     "alternativas": {
+      "a": "como pena cumprida, para todos os efeitos.",
+      "b": "apenas para fins de progressão de regime.",
+      "c": "apenas para o livramento condicional.",
+      "d": "como pena suspensa.",
+      "e": "somente depois do trânsito em julgado da última condenação."
+    },
+    "artigo": "LEP, art. 128",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577391+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o tempo remido será computado:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b9cdcc42f15df24f3f98d6c65137878e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "A participação em atividade religiosa é obrigatória para os presos condenados.",
       "b": "No estabelecimento haverá local apropriado para os cultos religiosos.",
       "c": "A posse de livros de instrução religiosa é proibida.",
@@ -10576,6 +12301,31 @@
   },
   {
     "alternativas": {
+      "a": "Militares de carreira.",
+      "b": "Analfabetos.",
+      "c": "Servidores do Poder Judiciário.",
+      "d": "Maiores de vinte e um anos.",
+      "e": "Brasileiros naturalizados."
+    },
+    "artigo": "CF, art. 14, § 1º, II, a",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667654+00:00",
+    "enunciado": "Assinale a alternativa que indica um grupo para o qual, segundo a Constituição Federal, o voto é facultativo.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "complementar",
+    "impressao": "bb0ba410c93712d77c64e6de315618a0",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "6594644c84f19842e5e34616021a6c27",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "leu – restava – foi",
       "b": "leram – restava – foram",
       "c": "leram – restavam – foram",
@@ -10598,6 +12348,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "não pode alistar-se como eleitor.",
+      "b": "tem voto obrigatório.",
+      "c": "tem voto facultativo.",
+      "d": "pode votar apenas nas eleições municipais.",
+      "e": "pode votar com autorização do comandante."
+    },
+    "artigo": "CF, art. 14, § 2º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667658+00:00",
+    "enunciado": "Um jovem brasileiro de 18 anos, durante o período do serviço militar obrigatório (conscrito), segundo a Constituição Federal:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "bbd9dc5cfb03e941ce134d1d27f5a41a",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -10701,6 +12476,31 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 3.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "CF, art. 14, §§ 2º, 3º, VI, c, e 4º",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592370+00:00",
+    "enunciado": "Analise as afirmativas sobre os direitos políticos, com base na Constituição Federal: 1. Os conscritos, durante o período do serviço militar obrigatório, não podem alistar-se como eleitores. 2. É condição de elegibilidade a idade mínima de dezoito anos para Prefeito. 3. São inelegíveis os inalistáveis e os analfabetos. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "alvo",
+    "impressao": "bc8cbad05ec67ae9925fd7b17b781fdc",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "d9d759565313c682164498c83c06774a",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "V • F • V • F",
       "b": "V • V • F • F",
       "c": "F • V • F • V",
@@ -10723,6 +12523,56 @@
     "origem_impressao": "b4d4023f28875a187f6b419e0382f8d4",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "após 1 ano da ocorrência do fato, ou antes, após o cumprimento do requisito temporal exigível para a obtenção do direito.",
+      "b": "após 6 meses, em qualquer caso.",
+      "c": "somente após 2 anos.",
+      "d": "apenas com a extinção da pena.",
+      "e": "imediatamente após a falta."
+    },
+    "artigo": "LEP, art. 112, § 7º",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997576+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o bom comportamento, para fins de progressão, é readquirido:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "bdccd52db4f9bf2de7c8e32bd96b635e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "estiver trabalhando ou comprovar a possibilidade de fazê-lo imediatamente, e apresentar fundados indícios de que irá ajustar-se ao novo regime.",
+      "b": "tiver cumprido metade da pena.",
+      "c": "tiver curso superior.",
+      "d": "tiver família no município.",
+      "e": "pagar fiança."
+    },
+    "artigo": "LEP, art. 114, I e II",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997577+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, somente poderá ingressar no regime aberto o condenado que:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "bdd527dd85b24b5aba64029ae08437e8",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -11076,6 +12926,56 @@
   },
   {
     "alternativas": {
+      "a": "não é cláusula pétrea, ao contrário do voto direto, secreto, universal e periódico.",
+      "b": "é cláusula pétrea expressa.",
+      "c": "foi abolida pela Constituição de 1988.",
+      "d": "aplica-se aos maiores de setenta anos.",
+      "e": "aplica-se aos estrangeiros residentes."
+    },
+    "artigo": "CF, art. 14, § 1º, e art. 60, § 4º, II",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667660+00:00",
+    "enunciado": "A obrigatoriedade do voto, no Brasil:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "c428e8a0e4553d2f66ac369a903d4aa8",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "está – sua",
+      "b": "estais – vossa",
+      "c": "está – vossa",
+      "d": "estás – tua",
+      "e": "estais – sua"
+    },
+    "artigo": "Regra: os pronomes de tratamento levam o verbo e o possessivo à 3ª pessoa (Vossa Excelência está; sua presença), e o adjetivo concorda com o sexo da autoridade (convidado).",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799151+00:00",
+    "enunciado": "Na frase \"Vossa Excelência ___ convidado para a solenidade, e ___ presença é aguardada\", dirigida a um ministro, as lacunas são preenchidas por:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "c4af986cc56784f73be546f572bc8794",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "O juiz ouviu as testemunhas: o juiz ouviu-as.",
       "b": "O preso obedeceu ao agente: o preso obedeceu-o.",
       "c": "O diretor viu o preso: o diretor viu-lhe.",
@@ -11142,6 +13042,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "c5ddbc44af1b513603a076e4e0bb1669",
     "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "tráfico de drogas privilegiado, previsto no § 4º do art. 33 da Lei nº 11.343/2006.",
+      "b": "latrocínio.",
+      "c": "estupro.",
+      "d": "tráfico de drogas previsto no caput do art. 33 da Lei nº 11.343/2006.",
+      "e": "homicídio qualificado."
+    },
+    "artigo": "LEP, art. 112, § 5º",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997576+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, para fins de progressão de regime, NÃO se considera hediondo ou equiparado o crime de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "c6578119b6fc01594741063f7a48f9fc",
+    "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -11301,6 +13226,31 @@
   },
   {
     "alternativas": {
+      "a": "15 dias.",
+      "b": "30 dias.",
+      "c": "45 dias.",
+      "d": "60 dias.",
+      "e": "90 dias."
+    },
+    "artigo": "LEP, art. 126, § 1º, II",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577387+00:00",
+    "enunciado": "Um preso trabalhou 90 dias no regime fechado. Pela regra da Lei de Execução Penal, ele terá direito a remir:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "c98b83ab45cf748759b1581b4e62c55c",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "O tráfico ilícito de entorpecentes é crime imprescritível.",
       "b": "O terrorismo é crime imprescritível.",
       "c": "O racismo é crime insuscetível de graça ou anistia, mas prescritível.",
@@ -11442,6 +13392,31 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "cba9404da5cd61667cf941a88546bdd0",
     "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "praticar fato definido como crime doloso ou falta grave.",
+      "b": "receber visita fora do horário.",
+      "c": "tiver bom comportamento.",
+      "d": "cometer falta leve.",
+      "e": "requerer a remição."
+    },
+    "artigo": "LEP, art. 118, I",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997580+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a execução da pena privativa de liberdade ficará sujeita à forma regressiva quando o condenado:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "cc051ebdf83cc400210b9a27372532b2",
+    "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -11976,6 +13951,31 @@
   },
   {
     "alternativas": {
+      "a": "pode alistar-se e votar facultativamente, mas é inelegível.",
+      "b": "não pode votar nem ser votado.",
+      "c": "tem voto obrigatório e é elegível.",
+      "d": "pode ser eleito, mas não pode votar.",
+      "e": "só pode votar nas eleições municipais."
+    },
+    "artigo": "CF, art. 14, § 1º, II, a, e § 4º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667659+00:00",
+    "enunciado": "Quanto aos direitos políticos do analfabeto, a Constituição Federal estabelece que ele:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d35a46d53c4a0ba196f16bb8e526516e",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Obediência ao servidor e respeito a qualquer pessoa com quem deva relacionar-se, e execução do trabalho, das tarefas e das ordens recebidas.",
       "b": "Higiene pessoal e conservação dos objetos de uso pessoal.",
       "c": "Indenização à vítima e indenização ao Estado.",
@@ -12251,6 +14251,56 @@
   },
   {
     "alternativas": {
+      "a": "ao menos 1/6 da pena no regime anterior e seu mérito indicar a progressão.",
+      "b": "metade da pena, independentemente do mérito.",
+      "c": "2/3 da pena no regime anterior.",
+      "d": "16% da pena, sem exigência de mérito.",
+      "e": "1/3 da pena, desde que primário."
+    },
+    "artigo": "LEP, art. 112, caput (redação da Lei 15.402/2026)",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997570+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, com a redação dada pela Lei nº 15.402/2026, a pena privativa de liberdade será executada de forma progressiva, como regra geral, quando o preso tiver cumprido:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d857353a4d93ea2e76ab44293e83e4b4",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "até 1/3 do tempo remido, recomeçando a contagem a partir da data da infração disciplinar.",
+      "b": "todo o tempo remido, obrigatoriamente.",
+      "c": "metade do tempo remido.",
+      "d": "até 2/3 do tempo remido.",
+      "e": "apenas o tempo remido no último mês."
+    },
+    "artigo": "LEP, art. 127",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577390+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, em caso de falta grave, o juiz poderá revogar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d89ab8cd0bfa7ac550b437bd0abd3f99",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Aos litigantes, em processo judicial ou administrativo, e aos acusados em geral são assegurados o contraditório e a ampla defesa, com os meios e recursos a ela inerentes.",
       "b": "O contraditório é assegurado apenas na fase de recurso.",
       "c": "No processo administrativo não há ampla defesa.",
@@ -12348,6 +14398,31 @@
     "origem_impressao": "18b0502b81be7339852051869ba1dad0",
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "maiores de dezoito e menores de setenta anos.",
+      "b": "servidores públicos.",
+      "c": "analfabetos.",
+      "d": "militares em geral.",
+      "e": "brasileiros naturalizados."
+    },
+    "artigo": "CF, art. 14, § 1º, II, a",
+    "assunto": "Alistamento eleitoral e voto",
+    "base": "questao_real",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "criada_em": "2026-10-03T22:50:50.592377+00:00",
+    "enunciado": "De acordo com a Constituição Federal, o alistamento eleitoral e o voto são facultativos para os:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Alistamento eleitoral e voto",
+    "evidencia_da_base": "alvo",
+    "impressao": "d9c9f034a67e65f87baa3dabf8832c8e",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "c0af9616d8039f0c3ecba70ec6d1d9c7",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -12476,6 +14551,31 @@
   },
   {
     "alternativas": {
+      "a": "parte do período de prova.",
+      "b": "a totalidade da pena.",
+      "c": "apenas a pena de multa.",
+      "d": "nada, pois a remição só existe no regime fechado.",
+      "e": "apenas se estiver trabalhando."
+    },
+    "artigo": "LEP, art. 126, § 6º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577398+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o condenado que usufrui liberdade condicional pode remir, pela frequência a curso de ensino regular ou de educação profissional:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "db45d0b07ab5462585ef141274245e6b",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Vossa Senhoria pode assinar o termo de visita.",
       "b": "Vossa Excelência podeis assinar o termo.",
       "c": "Vós precisa assinar o termo.",
@@ -12523,6 +14623,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "Regra: o discurso direto reproduz a fala com travessão ou aspas; o indireto a relata por meio de verbo de dizer e conjunção; o indireto livre funde a fala ou o pensamento da personagem com a narração,",
+    "assunto": "Discurso direto e indireto",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "criada_em": "2026-10-03T22:56:04.682799+00:00",
+    "enunciado": "Observe as frases. A. A defensora afirmou: – Recorrerei da decisão. B. A defensora afirmou que recorreria da decisão. C. Recorreria da decisão? A defensora ainda não sabia. Sobre as frases, analise as afirmativas: 1. A está em discurso direto. 2. B está em discurso indireto. 3. C apresenta discurso indireto livre, em que o pensamento da personagem se mistura à voz do narrador. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "evidencia_da_base": "alvo",
+    "impressao": "dc4710a2ffa387bb472adae64c2e7153",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "a5de09d0a1a56a4b791a0f616044de53",
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -12726,6 +14851,81 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 3.",
+      "c": "São corretas apenas as afirmativas 1 e 2.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "LEP, art. 126, caput e § 6º",
+    "assunto": "Remição",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577378+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, pode remir parte do tempo de execução da pena por trabalho o condenado que cumpre pena em regime: 1. fechado. 2. semiaberto. 3. aberto. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "alvo",
+    "impressao": "e0386fa59662daccb3bf03a425dc8da5",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "obrigatório.",
+      "b": "facultativo.",
+      "c": "proibido.",
+      "d": "obrigatório apenas nas eleições presidenciais.",
+      "e": "facultativo apenas nas eleições municipais."
+    },
+    "artigo": "CF, art. 14, § 1º, II, b",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667657+00:00",
+    "enunciado": "Maria tem 72 anos e é alfabetizada. Segundo a Constituição Federal, para ela o voto é:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e05c560ed111af7827ea24ba70a72ccd",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "O juiz.",
+      "b": "O diretor do estabelecimento.",
+      "c": "O Ministério Público.",
+      "d": "O Conselho Penitenciário.",
+      "e": "A legislação local."
+    },
+    "artigo": "LEP, art. 110",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997561+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa que indica corretamente quem estabelecerá, na sentença, o regime no qual o condenado iniciará o cumprimento da pena privativa de liberdade.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "alvo",
+    "impressao": "e0707c9726356885743c3e584b90face",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "dd187bad3bf4639a3f2c8dfd13831b00",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "terem titularidade transindividual, pertencendo a grupos ou a toda a humanidade.",
       "b": "serem exigíveis apenas contra particulares.",
       "c": "dependerem de contribuição financeira do titular.",
@@ -12848,6 +15048,56 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "vedado.",
+      "b": "obrigatório.",
+      "c": "facultativo.",
+      "d": "permitido depois de dez anos de residência.",
+      "e": "permitido apenas nas eleições municipais."
+    },
+    "artigo": "CF, art. 14, § 2º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667664+00:00",
+    "enunciado": "Para um estrangeiro residente no Brasil há muitos anos, sem a condição especial que a Constituição prevê para os portugueses, o alistamento eleitoral, segundo a Constituição Federal, é:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e1a0218ea315e866daae8c83ef9c9071",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "A guia expedida pela autoridade judiciária.",
+      "b": "O boletim de ocorrência.",
+      "c": "O mandado do Ministério Público.",
+      "d": "O ofício do diretor do estabelecimento.",
+      "e": "A certidão de antecedentes."
+    },
+    "artigo": "LEP, art. 107",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997567+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa que indica corretamente o documento sem o qual ninguém será recolhido para cumprimento de pena privativa de liberdade.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "alvo",
+    "impressao": "e1c0014d298491dba5c609f5cfcc5317",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "dd187bad3bf4639a3f2c8dfd13831b00",
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -13001,6 +15251,31 @@
   },
   {
     "alternativas": {
+      "a": "mensalmente.",
+      "b": "anualmente.",
+      "c": "semestralmente.",
+      "d": "apenas quando solicitado.",
+      "e": "ao fim da pena."
+    },
+    "artigo": "LEP, art. 129",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577395+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, a autoridade administrativa encaminhará ao juízo da execução cópia do registro de todos os condenados que estejam trabalhando ou estudando, com a informação dos dias de trabalho ou das horas de frequência escolar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e4f38b1d2badc3c4ee8b899141ffa387",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Os presos que trabalham têm direito à remição.",
       "b": "Florianópolis capital de Santa Catarina recebeu o evento.",
       "c": "Senhores atenção ao horário.",
@@ -13148,6 +15423,31 @@
     "origem_impressao": "957cee90f9ef58e9f0b61178df34d76e",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "analfabetos e os maiores de setenta anos.",
+      "b": "servidores públicos e os militares.",
+      "c": "brasileiros naturalizados.",
+      "d": "residentes no exterior.",
+      "e": "doadores de sangue."
+    },
+    "artigo": "CF, art. 14, § 1º, II, a e b",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667662+00:00",
+    "enunciado": "Segundo a Constituição Federal, o voto é obrigatório para os maiores de dezoito anos, exceto para os:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e74e8cad7f04a67b10f36152d54a2c5e",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -13326,6 +15626,31 @@
   },
   {
     "alternativas": {
+      "a": "obrigatórios.",
+      "b": "facultativos.",
+      "c": "proibidos.",
+      "d": "facultativos, se for servidor público.",
+      "e": "obrigatórios apenas nas eleições gerais."
+    },
+    "artigo": "CF, art. 14, § 1º, I",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667657+00:00",
+    "enunciado": "João tem 30 anos, é alfabetizado e não presta serviço militar. Segundo a Constituição Federal, para ele o alistamento eleitoral e o voto são:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ec020c021fb5ec6b2e883e1155d2c1da",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "adjunto adverbial de lugar.",
       "b": "objeto indireto.",
       "c": "objeto direto.",
@@ -13471,6 +15796,31 @@
     "modo": "variacao",
     "modo_do_pedido": "treino",
     "origem_impressao": "b6b7a8c666f2bcac1e742c9a6419a5ee",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "mensalmente, por declaração da unidade de ensino, a frequência e o aproveitamento escolar.",
+      "b": "anualmente, a matrícula.",
+      "c": "apenas a matrícula inicial.",
+      "d": "semestralmente, as notas.",
+      "e": "nada, bastando a autorização judicial."
+    },
+    "artigo": "LEP, art. 129, § 1º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577396+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o condenado autorizado a estudar fora do estabelecimento penal deverá comprovar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ed14f546c7606657e4bbb4b6a199d3e6",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
   },
@@ -13876,6 +16226,31 @@
   },
   {
     "alternativas": {
+      "a": "5 dias.",
+      "b": "10 dias.",
+      "c": "12 dias.",
+      "d": "20 dias.",
+      "e": "40 dias."
+    },
+    "artigo": "LEP, art. 126, § 1º, I",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577388+00:00",
+    "enunciado": "Um preso frequentou 120 horas de aulas do ensino médio, distribuídas ao longo de vários dias. Pela regra da Lei de Execução Penal, ele terá direito a remir:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f2a678feee6b03e29d113d8a29891bde",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "de caráter perpétuo.",
       "b": "de trabalhos forçados.",
       "c": "de banimento.",
@@ -13917,6 +16292,56 @@
     "evidencia_da_base": "nenhuma",
     "impressao": "f33a615a395f3ca9c59bb1a4c755e3d1",
     "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "estão dispensados: para quem recebe Vossa Senhoria e para particulares basta Senhor, e a dignidade é pressuposto de quem exerce cargo público.",
+      "b": "são obrigatórios para todos os servidores públicos.",
+      "c": "devem ser usados apenas para juízes.",
+      "d": "substituem o pronome de tratamento.",
+      "e": "são usados apenas no endereçamento."
+    },
+    "artigo": "Regra (Manual de Redação da Presidência da República): fica dispensado o superlativo ilustríssimo para quem recebe Vossa Senhoria e para particulares, bastando Senhor; digníssimo não se usa, pois a di",
+    "assunto": "Vocativos e formas de tratamento",
+    "base": "item_do_edital",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "criada_em": "2026-10-03T22:59:25.799149+00:00",
+    "enunciado": "Segundo o Manual de Redação da Presidência da República, quanto ao emprego de ilustríssimo e de digníssimo, é correto afirmar:",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f3724d2d5a5434770d650dddcaec5b01",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "continuará a beneficiar-se com a remição.",
+      "b": "perde o direito à remição.",
+      "c": "tem a remição suspensa até a recuperação, sem contagem.",
+      "d": "passa a remir pela metade.",
+      "e": "só remirá se o acidente ocorrer fora do estabelecimento."
+    },
+    "artigo": "LEP, art. 126, § 4º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577390+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, o preso impossibilitado, por acidente, de prosseguir no trabalho ou nos estudos:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f454dc6ff1604acd3517e0dc729e4770",
+    "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
@@ -14001,6 +16426,56 @@
   },
   {
     "alternativas": {
+      "a": "são inelegíveis.",
+      "b": "podem ser eleitos para Vereador.",
+      "c": "têm voto facultativo.",
+      "d": "podem votar em plebiscitos.",
+      "e": "tornam-se elegíveis após dez anos de residência."
+    },
+    "artigo": "CF, art. 14, § 4º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667666+00:00",
+    "enunciado": "Segundo a Constituição Federal, os inalistáveis:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f582473b3fb74fed115fb558865dfa2b",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "poderão ser desenvolvidas de forma presencial ou por metodologia de ensino a distância e deverão ser certificadas pelas autoridades educacionais competentes.",
+      "b": "só podem ser presenciais.",
+      "c": "dispensam qualquer certificação.",
+      "d": "só valem para o ensino superior.",
+      "e": "dependem de autorização do Conselho da Comunidade."
+    },
+    "artigo": "LEP, art. 126, § 2º",
+    "assunto": "Remição",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "criada_em": "2026-10-03T22:57:29.577394+00:00",
+    "enunciado": "Segundo a Lei de Execução Penal, as atividades de estudo para fins de remição:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f5915510cdeea8185576ecfcda3431f9",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Ninguém poderá ser compelido a associar-se ou a permanecer associado.",
       "b": "O associado só pode desligar-se da associação após cinco anos de filiação.",
       "c": "A lei pode obrigar o cidadão a associar-se a qualquer entidade.",
@@ -14048,6 +16523,31 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "não pode, pois os analfabetos são inelegíveis, embora possam votar facultativamente.",
+      "b": "pode, pois a idade mínima para Vereador é de dezoito anos.",
+      "c": "pode, desde que esteja filiada a partido.",
+      "d": "pode, porque tem voto obrigatório.",
+      "e": "pode, mediante autorização da Justiça Eleitoral."
+    },
+    "artigo": "CF, art. 14, § 1º, II, a, e § 4º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667667+00:00",
+    "enunciado": "Uma pessoa analfabeta de 40 anos deseja candidatar-se a Vereador. Segundo a Constituição Federal:",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "f83e4c5f303a47ed5cbfdc266b27a470",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -14226,6 +16726,31 @@
   },
   {
     "alternativas": {
+      "a": "O voto é facultativo para os analfabetos.",
+      "b": "O voto é obrigatório para os maiores de dezoito anos.",
+      "c": "O voto é facultativo para os maiores de setenta anos.",
+      "d": "Os conscritos, durante o serviço militar obrigatório, não podem alistar-se.",
+      "e": "O voto é obrigatório para os maiores de dezesseis e menores de dezoito anos."
+    },
+    "artigo": "CF, art. 14, §§ 1º e 2º",
+    "assunto": "Voto facultativo e obrigatório",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "criada_em": "2026-10-03T22:52:06.667663+00:00",
+    "enunciado": "Quanto à obrigatoriedade do voto, assinale a alternativa INCORRETA de acordo com a Constituição Federal.",
+    "escopo": "Direito Constitucional > cidadania e direitos políticos > Voto facultativo e obrigatório",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "fae168a535045584cbe60294488c2a8f",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "habeas data.",
       "b": "habeas corpus.",
       "c": "mandado de injunção.",
@@ -14248,6 +16773,31 @@
     "origem_impressao": "52f03427c14c604bd73c4100cf8858a7",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "É correta apenas a afirmativa 1.",
+      "b": "É correta apenas a afirmativa 2.",
+      "c": "São corretas apenas as afirmativas 1 e 3.",
+      "d": "São corretas apenas as afirmativas 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2 e 3."
+    },
+    "artigo": "Regra: no discurso direto, a fala da personagem é reproduzida com as próprias palavras (travessão ou aspas); no indireto, o narrador a relata com verbo de dizer e conjunção (que, se), e o presente pas",
+    "assunto": "Discurso direto e indireto",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "criada_em": "2026-10-03T22:56:04.682794+00:00",
+    "enunciado": "Observe as frases. A. \"Estou cansado\", disse o agente. / O agente disse que estava cansado. B. O diretor perguntou: – Quem fez a revista? / O diretor perguntou quem tinha feito a revista. C. A cela é pequena. / É pequena a cela. Sobre as frases, analise as afirmativas: 1. Em A e B, a primeira frase está em discurso direto e a segunda, em discurso indireto. 2. Em C há discurso indireto nas duas frases. 3. Na passagem de A para o discurso indireto, o presente estou passou ao pretérito imperfeito estava. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto",
+    "evidencia_da_base": "alvo",
+    "impressao": "fbcd9a783f88c4773f27f06dd516d0d6",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "a5de09d0a1a56a4b791a0f616044de53",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -14446,6 +16996,31 @@
     "modo": "do_zero",
     "modo_do_pedido": null,
     "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "pelo resultado da soma ou unificação das penas, observada, quando for o caso, a detração ou a remição.",
+      "b": "pela pena mais grave, isoladamente.",
+      "c": "pela pena mais leve.",
+      "d": "pelo primeiro crime julgado.",
+      "e": "pelo diretor do estabelecimento."
+    },
+    "artigo": "LEP, art. 111",
+    "assunto": "Regimes de cumprimento da pena",
+    "base": "questao_real",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "criada_em": "2026-10-03T22:54:06.997568+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, quando houver condenação por mais de um crime, no mesmo processo ou em processos distintos, o regime de cumprimento será determinado:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena",
+    "evidencia_da_base": "alvo",
+    "impressao": "ff7650c6e7d5d845e76631ccdff0e059",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_impressao": "dd187bad3bf4639a3f2c8dfd13831b00",
     "rejeitada": false,
     "resposta": "a"
   },
