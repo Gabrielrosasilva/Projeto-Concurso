@@ -1744,3 +1744,32 @@ tokens, a ponte saiu do `design.css` e o README ganhou o paragrafo das telas.
 `tests/test_telas_no_design_system.py` nasceu com a primeira tela e cresceu a
 cada uma: cada tela abre com o design system e sem a paleta antiga, todo
 template de pagina marca `class="ds"`, e ninguem usa os nomes velhos.
+
+## Etapa 8 — a auditoria final integrada (03/10)
+
+**O pedido:** conferir o sistema de ponta a ponta contra a §23 do novo.md -
+cada etapa tinha sido testada sozinha, e ninguem tinha conferido o conjunto.
+
+**Antes de comecar**, a checagem do plano achou dois pontos e eles viraram
+decisao (61 e 62): os dois exemplos de geracao da §23 nao existem na arvore
+real, e o backup das 23h30 falhou em todas as execucoes registradas. Ficou
+combinado provar o escopo fechado numa arvore de fixture e registrar a falta
+dos nos como pendencia, e consertar o backup numa etapa propria.
+
+**Como foi feito.** Primeiro o `tests/test_aceite.py`: as 12 perguntas da
+ficha, os dois pedidos de geracao (com o vizinho de cada no recusado) e os 6
+itens finais, montados com os construtores que as etapas ja usavam. Depois o
+uso real, item por item, com o banco de verdade: a ficha do Art. 5º no
+terminal, os dois pedidos (recusados) e os nos mais proximos (escopo fechado),
+os numeros de 28 e 29/09 e da semana 1 em quatro lugares, a incidencia do alvo
+com 0 e com 122 provas complementares numa copia do `data/`, as tabelas contra
+a copia de antes da Etapa 2, o ANKI religado numa copia da `config/`, a
+varredura da 7A nas telas reais e as rodadas de IA. Tudo foi para o
+`docs/auditoria_final.md`.
+
+**O que a auditoria achou:** 17 dos 19 itens da §23 atendem com o dado real.
+Os dois que nao atendem por inteiro viraram pendencia - os nos dos exemplos de
+geracao e a media "por prova" do grafico de pizza dos Macetes, sem o numero de
+provas. Fora da §23: o backup nunca funcionou nos logs (desde 27/09), o
+caderno de erros e a Semanas funcionam com o dado real, e o Actions estava
+verde ate 02/10 - o de hoje, o primeiro com o codigo novo, fica para conferir.

@@ -100,58 +100,32 @@ sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
 ## Estado atual (03/10/2026; detalhe no [historico](docs/historico.md))
 
-**Pronto:** o radar (fases 1-15), a especificacao (design system, home, erros,
-compilado, revisao 1-7-30, Macetes, `gerar --pedido`) e o **Ciclo 1 de estudo,
-rodando desde 28/09** (`config/cronograma.yml`: tela Hoje, cronometro e dobra
-dos blocos - os dois unicos JS, os dois so nesta tela e os dois dispensaveis -,
-caderno de erros, Semanas, Minhas materias; automacao no Windows).
-Acervo: 8.433 questoes, sem assunto gravado; 50 geradas (30 `do_zero`,
-20 `variacao` de LEP).
-**Actions:** verde desde 02/10 - a coleta diaria voltou a rodar sozinha. **Em andamento:** o pedido de evolucao
-([roteiro](docs/roteiro.md), [progresso](docs/progresso.md)); feitas a 1A, a
-1B (frases dos eventos e da Previsao, acentos na tela web), a 1C (fonte unica
-das metricas), a 1D (`radar conferir-dias`; o Bonus de 28 e 29/09 saiu, e
-faixa de questoes com 0 questoes e recusada), a 6A (de 02/10: 14 questoes de
-manha, lei seca dirigida, `anki: desativado`) e a 2 (arvore de conteudos,
-evidencia alvo/complementar/fora, banco na versao 1 com `radar migrar`) e a
-3A (as 170 do alvo classificadas pelo Claude Code e **conferidas por voce em
-02/10**; mapa de incidencia e padroes; banco na versao 3). A **3B** esta pela metade: o levantamento
-(`radar complementar`, `docs/complementar.md`), a regra de quem entra (ter
-materia do edital de 2019 e passar na validacao minima: 122 provas de 183, em
-`data/acervo_complementar.json`) e a linha complementar da incidencia, sempre
-separada da do alvo (em questao DISTINTA, com as ocorrencias ao lado) e os
-tres lotes classificados: as 80 do Socioeducativo, 44 de bloco generico e 108
-propostas automaticas do catalogo em Portugues e Raciocinio Logico. **Falta a
-conferencia do complementar** (as automaticas, por amostra), que a tela ainda
-nao permite: ela lista so o alvo - pendencia B.8. E a **4** (de 02/10: os
-minimos de amostra num lugar so no `config/amostra.yml`, o desempenho por no da
-arvore com os recortes radar e anotado nunca somados, o controle que o ANKI
-fazia - estudado, nao estudado, revisar, refazer -, a tela "Analises > Meu
-desempenho" e o `radar desempenho`) e a **B.11** (os blocos da aba Hoje dobram
-pelo sinal do canto; o das 22h nasce fechado, e a dobra e lembrada pelo
-`static/dobra.js`) e a **5** (de 02/10: o filtro hierarquico do `radar gerar`
-- materia > assunto > subassunto > elemento, com sugestao de nome e sem alargar
-escopo -, os tres modos treino/revisao/simulado, e a base de cada gerada
-gravada com a evidencia) e a **6B** (de 02/10: a ficha de estudo de cada tema
-do cronograma - o que ler, como pesquisar, entender, memorizar, pegadinhas,
-como a FEPESE cobrou, questoes reais, quantas fazer, erros e por que agora -,
-na tela Hoje e no `radar fichas`, com a prioridade do `config/prioridade.yml`;
-as **61 fichas** do resto do Ciclo 1 escritas pelo Claude Code em
-`data/fichas.json`, **todas por conferir**; o texto de lei pelo vigente da
-compilacao da Camara). **Falta da 6B:** a sua conferencia das fichas e o
-**Ciclo 2**, que depende do simulado de 07/11 e da sua aprovacao antes de
-09/11. E a **7A** (de 03/10: os selos do novo.md - 🟢 oficial, 🔵 acervo,
-🟡 automatico, 🟣 IA - em todo o site, a origem gravada no dado, a frase da
-regra 4 e o "Amostra insuficiente" no lugar das variacoes, e o 🟣 com "nao e
-questao oficial da FEPESE" em toda tela que mostra questao de IA) e a **7B**
-(de 03/10: as 6 telas que faltavam no design system - 404, Calendario,
-Previsao, Acompanhando, Analises e Concursos -, a barra do topo nos tokens e a
-ponte dos nomes antigos fora do `design.css`).
-**Proxima: Etapa 8** (auditoria final integrada).
-**Em aberto:** o numero de questoes das faixas ainda e o do plano, e nao o da
-incidencia (a ficha mostra a incidencia e manda comecar pelas reais).
-Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md);
-arvore no [README](README.md); banco em `data/radar.db`.
+**Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
+rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
+dobra dos blocos sao os dois unicos JS, so nesta tela e dispensaveis -,
+caderno de erros, Semanas, Minhas materias; automacao no Windows). E o
+**pedido de evolucao** ([roteiro](docs/roteiro.md),
+[progresso](docs/progresso.md)), etapas 1A a 8: a fonte unica das metricas, a
+arvore de conteudos (materia > assunto > subassunto > elemento) com alvo,
+complementar e fora separados, a incidencia e os padroes, o desempenho por
+conteudo com a amostra, a geracao com escopo fechado, a ficha de estudo de
+cada tema (61 em `data/fichas.json`), os selos do novo.md (🟢 oficial, 🔵
+acervo, 🟡 automatico, 🟣 IA) gravados no dado, e o site inteiro no design
+system. A **auditoria final** ([auditoria_final](docs/auditoria_final.md))
+confere a §23 do novo.md: **17 de 19 itens atendem com o dado real**.
+Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
+complementares aceitas); 50 geradas; banco na versao 4.
+**Falta, de voce:** conferir as 61 fichas e o complementar (as automaticas,
+por amostra - B.8); o **Ciclo 2**, depois do simulado de 07/11 e antes de
+09/11.
+**Quebrado:** o backup das 23h30 falhou em todas as execucoes desde 27/09 -
+**e a proxima etapa** (pendencia A).
+**Em aberto:** os nos dos dois exemplos de geracao da §23 (decisao sua), a
+media "por prova" dos Macetes sem o numero de provas, o `?tema=` dos Macetes,
+e o numero de questoes das faixas, que ainda e o do plano. **Actions:** verde
+ate 02/10; conferir o de 03/10, o primeiro com o codigo novo. Ordem e detalhe
+em [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
+banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`

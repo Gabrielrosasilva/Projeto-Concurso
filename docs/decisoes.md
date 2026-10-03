@@ -3103,3 +3103,24 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     `detalhes`, `menu-faixa`) ficaram como estavam; mudou o estilo, nao a
     marcacao que outra parte le. A 404 continua sem a barra do topo, como
     sempre foi.
+
+## Etapa 8 — a auditoria final integrada (03/10/2026)
+
+61. **o aceite da §23 tem duas provas, e a etapa nao se da por concluida
+    "porque existe codigo".** Cada item tem um teste em `tests/test_aceite.py`,
+    com banco de fixture montado pelos mesmos construtores das etapas (a ficha
+    do Art. 5º, a arvore, o acervo complementar, o banco antigo, a
+    varredura), e o uso real com o banco e a config de verdade, registrado no
+    `docs/auditoria_final.md`. O que mexeria em dado real foi feito numa copia
+    (o `data/` pelo `RADAR_DATA_DIR`, a `config/` pelo `RADAR_CONFIG_DIR`). O
+    item que nao atende vira pendencia com o motivo, e a etapa fica 🟡.
+
+62. **os dois exemplos de geracao da §23 nao viram no a forca.** "Direito
+    Penal > Aplicacao da lei penal > Lei penal no tempo" e "LEP > Progressao de
+    regime > Art. 112" nao existem na arvore real (ela nasce do edital de 2019
+    e da classificacao das questoes reais). O aceite prova o escopo fechado
+    numa arvore de fixture com os dois caminhos, e o uso real roda com os nos
+    mais proximos que existem; criar os dois caminhos como nos manuais fica
+    para decisao sua (regra inviolavel 9). E o backup das 23h30, que a
+    auditoria achou quebrado desde 27/09, e consertado numa etapa propria, e
+    nao dentro da auditoria.

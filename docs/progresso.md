@@ -20,7 +20,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; falta a sua conferência das 61 fichas e o Ciclo 2, depois do simulado de 07/11 |
 | 12 | 7A — Selos e marcação de IA | ✅ |
 | 13 | 7B — As 6 telas no design system | ✅ |
-| 14 | 8 — Auditoria final integrada | ⬜ |
+| 14 | 8 — Auditoria final integrada | 🟡 17 de 19 itens da §23 atendem com o dado real; 2 viraram pendência |
 
 ---
 
@@ -1667,3 +1667,66 @@ lado do campo de busca; o alinhamento foi acertado antes do commit.
 **Critério de conclusão.**
 - [x] as seis conferidas no navegador, nos dois temas (acima);
 - [x] o bloco C saiu do `pendencias.md`.
+
+## 8 — Auditoria final integrada (03/10/2026)
+
+- Situação: 🟡 feita; 17 dos 19 itens da §23 atendem com o dado real, e os 2
+  que não atendem por inteiro são pendência (abaixo)
+- Datas: início 03/10 · fim 03/10
+
+**Como foi feita.** Antes de começar, a checagem do plano achou dois pontos,
+decididos por você (decisões 61 e 62): os dois exemplos de geração da §23 não
+existem na árvore real - o aceite prova o escopo numa árvore de fixture, e a
+falta dos nós vira pendência -, e o backup das 23h30, quebrado desde 27/09,
+vira etapa própria. Depois:
+1. `tests/test_aceite.py`, com banco de fixture: as 12 perguntas da ficha, os
+   dois pedidos de geração e os 6 itens finais;
+2. o uso real, item por item, com o banco e a config de verdade - e o que
+   mexeria em dado, numa cópia (`RADAR_DATA_DIR`, `RADAR_CONFIG_DIR`);
+3. o resultado de cada item em `docs/auditoria_final.md`.
+
+**Arquivos alterados.**
+- novos: `tests/test_aceite.py` e `docs/auditoria_final.md`;
+- docs: `decisoes.md` (61 e 62), `pendencias.md` (o backup em A; os nós da
+  §23, a média "por prova" dos Macetes e o Actions de 03/10 em D; o item de
+  "uso real" de D1 e E1 a E4 saiu, conferido), `historico.md`, o "Estado
+  atual" do `CLAUDE.md` reescrito, e este arquivo.
+
+Nenhum código de produção mudou, e nenhum dado real foi alterado.
+
+**Os itens da §23** (o detalhe e a evidência de cada um estão no
+`docs/auditoria_final.md`):
+
+| Item | Situação |
+|---|---|
+| 1 a 12 — a ficha do Art. 5º responde o que ler, onde, como procurar, entender, memorizar, pegadinhas, como a FEPESE cobrou, questões reais, quantas fazer, geradas, erros e por que hoje | ✅ teste e ficha real |
+| 13 — selecionar matéria → assunto → subassunto → elemento e gerar sem sair do escopo | ⚠️ o mecanismo atende (teste e nós reais mais próximos); os dois exemplos não existem na árvore real → pendência |
+| 14 — números iguais em todas as telas | ✅ 28/09, 29/09 e a semana 1 iguais na Hoje, no `radar hoje`, na Semanas e em Minhas matérias |
+| 15 — a incidência do alvo não muda por prova complementar | ✅ 426 linhas iguais com 0 e com 122 provas complementares (numa cópia) |
+| 16 — nenhum dado antigo perdido | ✅ cada tabela igual à cópia de antes da Etapa 2 |
+| 17 — ANKI desativado, mas reativável | ✅ `radar hoje` com a config real e com uma cópia religada |
+| 18 — nenhuma estatística sem amostra | ⚠️ 114 porcentagens em 31 aberturas de tela; a média "por prova" do gráfico dos Macetes não diz em quantas provas → pendência |
+| 19 — nenhuma questão gerada como oficial | ✅ as 2 rodadas de IA com 🟣 e a frase, sem "Gabarito definitivo" |
+
+Fora da §23: o Actions estava verde até 02/10 (conferir o de 03/10); o backup
+das 23h30 falhou em todas as execuções registradas (pendência A, próxima
+etapa); o caderno de erros e a Semanas funcionam com o dado real.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_aceite.py`, 1ª rodada | 22 passed, 2 failed, 2 errors: a regex da linha da conta não aceitava o "IA" maiúsculo; a chave `anki: desativado` aparece também num comentário do YAML; e faltava importar a fixture do quadro do edital que a varredura usa - os três no próprio teste |
+| `test_aceite.py`, depois | 26 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2350 passed** (2324 de antes + 26 do aceite), 0 failed, 24 min; o `data/` e a `config/` intactos |
+
+**Comandos reais rodados (banco real).** `radar fichas --tema "Art. 5º, caput
+e incisos I a XVI" --data 2026-10-06`; os dois `radar gerar` da §23 (recusados,
+sem gastar); `radar hoje --data` de 28/09 a 02/10 e 05/10 (com a config real e
+com a cópia religada); e as telas pelo `TestClient`, com o banco real.
+
+**Critério de conclusão.**
+- [x] cada item da §23 marcado, com a evidência (teste, comando ou tela);
+- [x] o que não atende está registrado como pendência, com o motivo - e por
+  isso a etapa fica 🟡, e não ✅;
+- [x] o "Estado atual" do `CLAUDE.md` reescrito.

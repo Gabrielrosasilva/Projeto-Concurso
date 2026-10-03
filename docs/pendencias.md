@@ -14,6 +14,13 @@ voltou a rodar e commitou `coleta: 2026-10-02`. O `coleta.yml` roda
 `pytest -q` ANTES de coletar, e passo que falha aborta o job - o commit e a
 prova de que a suite passou no Linux.
 
+- 🔴 **O backup das 23h30 nao funciona** (achado na auditoria da Etapa 8,
+  03/10). Os logs de `data/logs/` registram 6 execucoes - 27/09, 29/09,
+  30/09 (duas), 01/10 e 02/10 - e todas falharam no primeiro passo: "cannot
+  pull with rebase: You have unstaged changes". O `radar sincronizar` tenta o
+  pull com mudanca local no disco e para; a tela Mais e o `radar status`
+  avisam, mas nada foi para o GitHub por ele. **Combinado:** o conserto e uma
+  etapa propria, logo depois da 8;
 - 🔴 **`?tema=` na tela Macetes** (achado na conferencia da 7A, 03/10): o
   parametro que forca o tema claro/escuro pela URL e o mesmo nome do filtro
   "Materia ou tema" do recorte por banca. `/macetes?tema=claro` pinta a tela
@@ -210,9 +217,19 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   assunto). Prazo: antes de 09/11;
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
-- ⚪ **D1 e E1 a E4** foram commitados e testados, mas nao conferi uma a uma
-  contra o roteiro que os pediu; vale uma passada de uso real (o backup das
-  23h30 rodar no PC, o caderno de erros e a tela Semanas com dados de verdade);
+- 🔴 **Os dois exemplos de geracao da §23 nao existem na arvore** (auditoria
+  da Etapa 8): "Direito Penal > Aplicacao da lei penal > Lei penal no tempo"
+  (o programa de 2019 nao lista o tema) e "LEP > Progressao de regime > Art.
+  112" (a LEP e um assunto so, e nenhuma questao do alvo deu esse no). O
+  `radar gerar` recusa e sugere, como deve, e o escopo fechado funciona com os
+  nos que existem (docs/auditoria_final.md). **Decisao sua:** criar os dois
+  caminhos como nos manuais, com procedencia, ou deixar a arvore so com o
+  edital e a classificacao;
+- 🔴 **Macetes, "Quantas questoes caem numa prova"** (auditoria da Etapa 8):
+  a fatia tem a base no centro do grafico, mas a media "8.5/prova" nao diz em
+  quantas provas - a amostra fica pela metade (regra inviolavel 3);
+- ⚪ **Conferir o Actions de 03/10**: o primeiro `coleta:` do radar-bot com o
+  codigo da 7A, 7B e 8. O de 02/10 foi verde;
 - 🔴 **Acento fora da tela web** (o que sobrou da A2, feita na Etapa 1B so
   para a web): a saida do terminal (`cli.py`, ~100 textos, inclusive a
   linha do tempo de `radar eventos`, que ainda mostra "Situacao: a -> b"), a
