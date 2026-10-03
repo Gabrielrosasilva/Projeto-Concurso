@@ -8,7 +8,7 @@ from datetime import date, datetime, timezone
 
 import pytest
 
-from radar import foco, servico
+from radar import servico
 from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
 from radar.servico import espacada
@@ -115,17 +115,20 @@ def test_a_revisao_espacada_ainda_ve_o_erro_antigo(banco_temporario):
     ((True, False), (1, 0)),
 ])
 def test_o_acerto_por_assunto_segue_a_mesma_regra(banco_temporario, ordem, esperado):
+    """O acerto por assunto do Onde estudar e o do desempenho por conteudo
+    (decisao 74): a ultima resposta de cada questao, no no dela."""
+    from radar.servico import desempenho_por_conteudo as por_conteudo
+    from tests.test_foco import _classificar
+
     q = _questao(materia="Língua Portuguesa",
                  enunciado="Assinale a alternativa em que o uso da crase está correto.")
+    _classificar(q, "Língua Portuguesa > Emprego da crase")
     _simulado_com(q, ordem[0], _as(10))
     _simulado_com(q, ordem[1], _as(14, date(2026, 10, 3)))
 
-    with sessao() as s:
-        acertos, ultimas = foco._acerto_por_assunto(
-            s, {"Língua Portuguesa": "Língua Portuguesa"}
-        )
+    no = por_conteudo.por_no(por_conteudo.SEMPRE, hoje=date(2026, 10, 4))[
+        "Língua Portuguesa > Emprego da crase"]
 
-    (par,) = acertos
-    assert acertos[par] == esperado
+    assert (no.respostas, no.acertos) == esperado
     # A data e a da tentativa mais recente, para o fator de tempo.
-    assert ultimas[par] == date(2026, 10, 3)
+    assert max(no.radar.dias) == date(2026, 10, 3)

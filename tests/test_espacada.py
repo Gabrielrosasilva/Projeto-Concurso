@@ -13,7 +13,7 @@ from radar.db import sessao
 from radar.models import QuestaoDeProva, QuestaoGerada, RespostaDeSimulado, Simulado
 from radar.servico import espacada, inicio
 
-from tests.test_foco import _concurso, com_quadro_do_edital  # noqa: F401
+from tests.test_foco import _classificar, _concurso, com_quadro_do_edital  # noqa: F401
 
 CADERNO = "https://fepese.test/ap2019.pdf"
 DIA = date(2026, 10, 1)
@@ -182,20 +182,20 @@ def test_com_treino_o_tempo_sem_revisar_entra_na_conta(banco_temporario,
 def test_resposta_de_gerada_nao_conta_no_acerto_do_assunto(banco_temporario,
                                                            com_quadro_do_edital):
     """As duas tabelas numeram do 1: sem o filtro, errar a gerada 1 contava
-    como erro na questao real 1."""
+    como erro na questao real 1. O acerto por assunto do Onde estudar e o do
+    desempenho por conteudo (decisao 74)."""
+    from radar.servico import desempenho_por_conteudo as por_conteudo
+
     with sessao() as s:
         s.add(_concurso())
     real = _questao(1, materia="Língua Portuguesa")
+    _classificar(real, "Língua Portuguesa > Emprego da crase")
     with sessao() as s:
         s.add(QuestaoGerada(modo="variacao", enunciado="gerada?", resposta="a",
                             impressao="g1", modelo="teste"))
     _respondi(real, False, DIA, gerada=True)
 
-    with sessao() as s:
-        acertos, ultimas = foco._acerto_por_assunto(
-            s, {"Língua Portuguesa": "Língua Portuguesa"}
-        )
-    assert acertos == {} and ultimas == {}
+    assert por_conteudo.por_no(por_conteudo.SEMPRE, hoje=DIA) == {}
 
 
 def test_a_home_mostra_a_revisao_vencida_com_o_botao(acervo, com_quadro_do_edital):

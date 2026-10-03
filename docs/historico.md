@@ -1900,3 +1900,16 @@ escolha o conserto entrou antes (decisao 72, com teste). Depois: 19 de 19
 gravadas (3 por variacao, 16 do zero pela fonte oficial), procedencia "Claude
 Code, importado manualmente, em 03/10/2026"; banco e JSON de 50 para 69. O
 passo a passo para os outros lotes esta em `docs/estoque_de_geradas.md`.
+
+## O "Onde estudar" pela arvore, F1 (03/10)
+
+**O que estava errado:** o "Onde estudar primeiro" tirava o assunto do
+catalogo de palavras-chave e da coluna `assunto`, zerada em 25/09. As nove
+materias de Direito apareciam sem nenhuma questao classificada, e os numeros
+de Portugues nao batiam com a Incidencia.
+
+**O F1:** o assunto e o no da arvore em que a questao foi classificada, com as
+fatias da incidencia (cargo e complementar aceito, separados) e o acerto do
+desempenho por conteudo, mostrado nos dois recortes (decisao 74). A revisao
+espacada passou a usar o mesmo assunto. Resultado: 66 assuntos em todas as
+materias, 12 questoes sem assunto (eram 108).

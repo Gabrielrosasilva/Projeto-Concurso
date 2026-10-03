@@ -3405,3 +3405,34 @@ mede (7A); commit e push por subetapa (8A).
       materia, e o estoque de um tema ainda nao estudado entraria no treino;
     - o lote 1 (abolitio criminis, 19) foi feito junto, em 03/10; os outros 56
       sao feitos por mim, pelo `docs/estoque_de_geradas.md`.
+
+## A secao F das pendencias (Pedido 1 de 03/10/2026)
+
+74. **o "Onde estudar primeiro" e a revisao espacada leem a arvore de
+    conteudos** (F1). O assunto vinha do catalogo de palavras-chave
+    (Portugues e Raciocinio Logico) e da coluna `assunto` (o resto, zerada em
+    25/09): a tela dizia que as nove materias de Direito nao tinham "nenhuma
+    questao classificada", com as 170 do cargo classificadas e conferidas
+    desde 02/10 - e o catalogo dava outros numeros que a Incidencia (13 de 38
+    em Interpretacao, contra 9 de 22). A decisao 9 da 3A tinha deixado isso
+    para depois da conferencia; ela foi feita, e agora:
+    - o assunto e o no de nivel assunto da arvore (o item do edital) em que a
+      questao foi classificada. As fatias sao as da incidencia: as questoes do
+      cargo (evidencia alvo) e as do complementar aceito, cada uma sobre a sua
+      base, e o complementar so na ordem, como na decisao 63;
+    - o meu acerto em cada assunto e o do desempenho por conteudo (decisao 7):
+      a tela mostra a divisao "radar X% em N · anotado Y% em M", e a soma dos
+      dois so faz a conta - a amostra e os pontos a ganhar. Antes ela
+      mostrava "eu acerto X%", somado;
+    - "sem assunto" e a questao do cargo pendente ou classificada so na
+      materia (eram 108; sao 12), e a materia sem nenhuma linha continua na
+      lista das que caem na prova (eram 9; e nenhuma);
+    - a revisao espacada agenda pelo mesmo assunto (a classificacao da
+      questao); sem assunto, a materia, como antes;
+    - o selo do assunto no painel passou de 🟡 "classificacao por
+      palavra-chave" para 🔵 acervo: e a contagem por no da incidencia.
+    Com o banco de 03/10: 66 assuntos em todas as materias; a LEP vem
+    primeiro, com 10 questoes esperadas, porque o edital tem um item so para a
+    lei inteira. O painel ficou ~1 s mais lento (as ocorrencias do
+    complementar e o desempenho por no): a tela Analises abre em ~3 s e a home
+    em ~4 s.

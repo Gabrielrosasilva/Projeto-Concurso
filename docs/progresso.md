@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B e 2C feitas (as faixas que medem, o simulado do Qconcursos, o sábado e o assunto na faixa); falta a seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa e o "Onde estudar" pela árvore); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | 🔄 lote 1 de 57 feito (19 questões, banco e JSON 50 → 69); os outros 56 pelo `docs/estoque_de_geradas.md` |
 
 ---
@@ -2134,3 +2134,40 @@ do conserto):
 | `test_geracao_por_conteudo.py` (1 novo), `test_ia_manual.py`, `test_gerador.py` | 108 passed |
 | `test_aceite.py`, `test_central_de_macetes.py`, `test_classificacao.py`, `test_fichas.py`, `test_origem.py`, `test_relatorio.py` (os outros que passam pela geração ou pela importação) | 167 passed |
 | O `data/questoes_geradas.json` depois das duas rodadas | 69 (não foi sobrescrito) |
+
+### F1 — o "Onde estudar primeiro" lê a árvore ✅
+
+**O que mudou** (decisão 74):
+- `src/radar/foco.py`: o `_onde_comecar` conta pela árvore - a incidência do
+  cargo e a linha do complementar aceito de cada assunto, e o acerto do
+  desempenho por conteúdo. Saíram as cinco funções do catálogo e da coluna
+  `assunto`;
+- `src/radar/onde_estudar.py`: a linha leva a divisão "radar · anotado", e a
+  conclusão a usa no lugar de um acerto somado;
+- `src/radar/servico/espacada.py`: a revisão espaçada agenda pelo assunto da
+  classificação;
+- `src/radar/web/templates/foco.html`: os textos da seção (de onde vem o
+  assunto, o acerto nos dois recortes, como classificar o que falta); e o selo
+  do assunto passou a 🔵 acervo (`foco.ORIGENS_DO_PAINEL` e `test_origem.py`);
+- testes: os 10 do "Onde estudar" no `test_foco.py` classificam as questões na
+  árvore; o de gerada no `test_espacada.py` e o da última resposta no
+  `test_ultima_resposta.py` medem o desempenho por nó;
+- docs: `decisoes.md` (74), `pendencias.md` (o item 1 da F saiu; entraram o
+  "Treinar" com o complementar inteiro e o tempo do painel), `README.md`,
+  `historico.md` e o "Estado atual" do `CLAUDE.md`.
+
+**Com o banco real** (numa cópia): 66 assuntos em todas as matérias (antes, só
+Português e Raciocínio Lógico); 12 questões do cargo sem assunto (eram 108);
+nenhuma matéria "sem questão classificada" (eram 9). Interpretação de texto: 9
+de 22 nas provas do cargo · 52 de 95 no complementar, "radar 33% em 3 ·
+anotado —". A LEP vem primeiro, com 10 questões esperadas.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| Os 6 arquivos afetados, 1ª rodada | 130 passed, 13 failed (os testes do jeito antigo: assunto na coluna e a função removida) |
+| Os mesmos 6, reescritos | 143 passed |
+| `test_assuntos.py`, `test_caderno_erros.py`, `test_home.py`, `test_ultima_resposta.py` | 108 passed |
+| Suíte inteira, PC (uma vez, no fim do F1) | **2423 passed** (2422 de antes + 1 do conserto da geração), 0 failed, 25 min |
+| `test_origem.py` e `test_foco.py` de novo, depois da troca do selo do assunto | 108 passed |

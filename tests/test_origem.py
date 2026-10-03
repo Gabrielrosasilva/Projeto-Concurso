@@ -118,7 +118,7 @@ ORIGENS_POR_PARTE = [
      {"radar": AUTOMATICO, "anotado": AUTOMATICO, "treino_ia": IA, "total": AUTOMATICO}),
     ("foco.Painel", foco.Painel.origens,
      {"edital": OFICIAL, "provas": ACERVO, "meu_acerto": AUTOMATICO,
-      "assunto": CLASSIFICACAO, "estimativa": TENDENCIA}),
+      "assunto": ACERVO, "estimativa": TENDENCIA}),
     ("macetes.Analise", macetes.Analise.origens,
      {"recorte": ACERVO, "assunto": CLASSIFICACAO, "comandos": ACERVO,
       "repetidas": ACERVO, "gabarito": TENDENCIA}),

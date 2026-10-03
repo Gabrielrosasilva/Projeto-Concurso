@@ -280,12 +280,14 @@ A varredura dos docs contra o codigo e o banco achou estes pontos, que nenhuma
 etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 (decisoes 63 a 66 e a limpeza dos docs); estes ficam:
 
-- 🔴 **O "Onde estudar primeiro" nao le a arvore de conteudos.** Ele ainda
-  tira o assunto da coluna `assunto` (zerada em 25/09) e do catalogo de
-  Portugues e Raciocinio Logico. A decisao 9 da 3A previa a leitura por no na
-  Etapa 4, e isso nao foi feito. Consequencia na tela: as 9 materias de
-  Direito aparecem como "nenhuma questao minha delas esta classificada",
-  quando as 170 do alvo estao classificadas e conferidas desde 02/10;
+- 🔴 **O "Treinar" do alvo completa com o complementar inteiro**: o
+  `servico.simulado._questoes_para_o_alvo` usa toda prova de evidencia
+  complementar, inclusive as que a 3B recusou. A regra do CLAUDE.md e so a
+  aceita em estatistica, e a escolha 7A (03/10) estendeu isso ao que mede;
+  aqui e treino, mas a rodada sai do mesmo acervo - decidir junto com a F;
+- 🟡 **O painel ficou ~1 s mais lento com o F1** (decisao 74): a tela Analises
+  abre em ~3 s e a home em ~4 s. O custo e ler as ocorrencias do complementar
+  (0,9 s) e o desempenho por no (0,5 s);
 - 🔴 **Macetes, "O costume de qualquer banca"**: a contagem e "sobre o acervo
   inteiro", entao, na FEPESE, junta o alvo, o complementar e as provas que a
   3B recusou num numero so. E recorte de exploracao, mas e estatistica: pede

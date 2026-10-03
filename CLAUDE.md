@@ -125,7 +125,8 @@ especifico (pedido de 03/10):** feitas a 2A - o diagnostico e o simulado de
 com essa composicao (decisao 67) - e a 2B - o simulado do Qconcursos sem
 numero escrito a mao, a revisao semanal, o R+7 dos diagnosticos e a
 comparacao de 07/11 (decisoes 69 e 70) - e a 2C - cada faixa diz o assunto, o
-subassunto e o elemento (decisao 71); falta a secao F.
+subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feito o F1: o
+"Onde estudar primeiro" e a revisao espacada leem a arvore (decisao 74).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 69 geradas (19 do estoque ate 07/11, lote 1 de 57:
 `docs/estoque_de_geradas.md`); banco na versao 4.
@@ -138,9 +139,8 @@ D); o de 03/10 foi verde.
 **Em aberto:** a media "por prova" dos Macetes sem o numero de provas, o
 `?tema=` dos Macetes, o numero de questoes das faixas (ainda o do plano; o R+7
 dos diagnosticos refaz 5 erros), os temas sem no e o Portugues sem filtro do
-Qconcursos, e os
-achados da varredura de 03/10 - entre eles, o "Onde estudar" que ainda nao le
-a arvore de conteudos (pendencia F). Ordem e detalhe em
+Qconcursos, e o resto dos achados da varredura de 03/10 (pendencia F). Ordem
+e detalhe em
 [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
 banco em `data/radar.db`.
 
@@ -160,7 +160,10 @@ pelo `radar/prioridade.py`, e a ficha de estudo do `radar/fichas.py`: o tema e
 reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
 `data/fichas.json`, 🟣 com a procedencia. **O desempenho por conteudo e do
 `servico/desempenho_por_conteudo.py`**, e os dois recortes - medido no radar e
-anotado - **nunca sao somados na tela**, so no estado da amostra.
+anotado - **nunca sao somados na tela**, so no estado da amostra. **O assunto
+do "Onde estudar primeiro" e da revisao espacada e o no da arvore** em que a
+questao foi classificada (decisao 74), e nao o catalogo nem a coluna
+`assunto`.
 **Os selos moram no `radar/origem.py`**, e quem escolhe a cor e o dado: o
 servico grava a origem (`origem`, ou `origens` quando junta partes) e o
 template so desenha; `--selo-*` so no `design.css`, e a meta do dia tem as

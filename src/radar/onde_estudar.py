@@ -147,6 +147,10 @@ class LinhaDeEstudo:
     #: O peso declarado do complementar na ORDEM (config/prioridade.yml). Zero
     #: quer dizer que a ordem e so a do alvo.
     peso_do_complementar: float = 0.0
+    #: "radar 70% em 10 · anotado 73% em 15" (decisao 7): o que a tela mostra
+    #: do meu acerto. O `acerto` acima junta os dois so para a conta da ordem
+    #: e da amostra - a tela nunca o mostra sozinho. None sem resposta.
+    divisao: str | None = None
 
     @property
     def amostra_pequena(self) -> bool:
@@ -220,6 +224,7 @@ def montar(
     hoje: date | None = None,
     minimos: regua.Minimos | None = None,
     peso_do_complementar: float = 0.0,
+    divisoes: dict[tuple[str, str], str] | None = None,
 ) -> list[LinhaDeEstudo]:
     """As linhas ordenadas por quanto ha para ganhar em cada assunto.
 
@@ -229,7 +234,9 @@ def montar(
     - `acertos`: {(materia, assunto): (respondidas, acertos)}, do simulado;
     - `origens`: {materia: "catalogo" ou "edital"};
     - `peso_do_complementar`: o do config/prioridade.yml; zero, a ordem e so
-      a do alvo.
+      a do alvo;
+    - `divisoes`: {(materia, assunto): "radar X% em N · anotado Y% em M"}, o
+      que a tela escreve no lugar de um acerto somado.
 
     Materia que nao esta no quadro do edital fica de fora: sem o peso dela nao
     ha "questoes esperadas" nenhuma, e inventar um peso e justamente o que
@@ -290,6 +297,7 @@ def montar(
             acertos=certas,
             minimo=minimo,
             peso_do_complementar=peso_do_complementar,
+            divisao=(divisoes or {}).get((materia, assunto)),
         ))
 
     # Empate desempata pelo assunto mais visto nas provas do cargo, depois no
@@ -343,11 +351,12 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
     # seria sorte dita em voz alta, justamente o que o minimo existe para evitar.
     if primeira.pontos is None:
         if primeira.respondidas:
-            medida = (f"Respondi só {primeira.respondidas} questão(ões) dele "
+            de_onde = f" ({primeira.divisao})" if primeira.divisao else ""
+            medida = (f"Respondi só {primeira.respondidas} questão(ões) dele{de_onde} "
                       f"- {regua.INSUFICIENTE.lower()}, abaixo das {primeira.minimo} "
                       f"que fazem o acerto valer")
         else:
-            medida = "Eu ainda não respondi nenhuma questão dele no simulado"
+            medida = "Eu ainda não respondi nenhuma questão dele, nem no radar nem anotada"
         return (
             f"{onde} vem primeiro na ordem: "
             f"{numero(primeira.esperadas)} questões esperadas pelas provas do cargo. "
@@ -355,6 +364,14 @@ def conclusao(linhas: list[LinhaDeEstudo]) -> str | None:
             f"medir antes de escolher por onde começar."
         )
 
+    if primeira.divisao:
+        # Os dois recortes, cada um com o seu numero (decisao 7): a soma dos
+        # dois so fez a conta dos pontos.
+        return (
+            f"{onde} vem primeiro na ordem: {numero(primeira.esperadas)} questões "
+            f"esperadas pelas provas do cargo, e o meu acerto nele é "
+            f"{primeira.divisao} - são {numero(primeira.pontos)} pontos a ganhar."
+        )
     return (
         f"{onde} vem primeiro na ordem: {numero(primeira.esperadas)} questões "
         f"esperadas pelas provas do cargo, e eu acerto "

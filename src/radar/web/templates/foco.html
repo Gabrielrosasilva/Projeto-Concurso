@@ -420,15 +420,18 @@
       {% set maior = p.onde_comecar[0].ordem %}
 
       <div class="fontes">
-        <span>{{ selo(p.origens.assunto) }}o <b>assunto</b> de cada questão saiu
-          do catálogo de palavras-chave ou do conteúdo programático.</span>
+        <span>{{ selo(p.origens.assunto) }}o <b>assunto</b> é o da classificação de
+          cada questão na árvore de conteúdos: os mesmos números de Análises &gt;
+          Incidência.</span>
         <span>{{ selo(p.origens.estimativa) }}<b>questões esperadas</b> e <b>pontos a
           ganhar</b> são conta sobre esses assuntos e sobre
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length != 1 }}
           - leitura, e não fato.</span>
-        <span>{{ selo(p.origens.meu_acerto) }}<b>meu acerto</b> soma o medido no radar
-          (pela última resposta de cada questão) e o anotado das faixas e dos
-          extras ligados a um conteúdo daquele assunto, sem consulta.</span>
+        <span>{{ selo(p.origens.meu_acerto) }}<b>meu acerto</b> aparece nos dois
+          recortes, cada um com o seu número: o medido no radar (pela última
+          resposta de cada questão) e o anotado das faixas e dos extras ligados
+          ao assunto, sem consulta. Juntos, eles só decidem se a amostra basta e
+          a ordem.</span>
       </div>
       <p class="conclusao">{{ p.conclusao_do_estudo }}</p>
 
@@ -467,17 +470,19 @@
               </span>
               <span>&middot;</span>
               <span>
+                {#- O acerto aparece nos dois recortes, e nunca somado
+                    (decisao 7): a soma so faz a conta da ordem. -#}
+                {%- set meu = a.divisao or (a.acertos ~ ' de ' ~ a.respondidas) -%}
                 {%- if a.so_no_complementar -%}
                   nenhuma questão esperada: o assunto não caiu nas provas do cargo
-                  {%- if a.respondidas %}; acertei {{ a.acertos }} de {{ a.respondidas }}{% endif -%}
+                  {%- if a.respondidas %}; meu acerto: {{ meu }}{% endif -%}
                 {%- elif a.pontos is not none -%}
-                  {{ a.esperadas | numero }} questões esperadas, e eu acerto
-                  {{ a.acerto | numero(0) }}% em {{ a.respondidas }} questão(ões) diferente(s)
+                  {{ a.esperadas | numero }} questões esperadas; meu acerto: {{ meu }}
                   {%- if a.dias_sem_revisar %}; {{ a.dias_sem_revisar }} dia(s) sem revisar (×{{ a.fator | numero }}){% endif -%}
                 {%- elif a.respondidas -%}
-                  acertei {{ a.acertos }} de {{ a.respondidas }} · {{ AMOSTRA_INSUFICIENTE }}
+                  meu acerto: {{ meu }} · {{ AMOSTRA_INSUFICIENTE }}
                 {%- else -%}
-                  ainda não respondi nenhuma no simulado
+                  ainda não treinei: nenhuma resposta no radar nem anotada
                 {%- endif -%}
               </span>
               {% if a.lei %}
@@ -546,8 +551,9 @@
       {% if p.materias_sem_assunto %}
         <div class="mudas">
           <p class="legenda">
-            Estas matérias caem na prova, e nenhuma questão minha delas está
-            classificada. Por qual assunto começar nelas:
+            Estas matérias caem na prova, e nenhuma questão das provas do cargo
+            delas está classificada num assunto da árvore. Por qual assunto
+            começar nelas:
             <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span>
           </p>
           <ul>
@@ -563,13 +569,12 @@
 
       {% if p.questoes_sem_assunto %}
         <p class="legenda">
-          {{ p.questoes_sem_assunto }} questões das minhas provas ainda estão
-          <strong>sem assunto</strong> e não entram em nenhuma barra - o que
-          falta não é elas não caírem, é eu não as ter classificado. As de
-          Direito saem do conteúdo programático do edital, com
-          <code>radar assuntos --so-alvo</code>; as de Português e Raciocínio
-          Lógico saem do catálogo de palavras-chave, de graça, e o que sobra
-          ali é enunciado que o catálogo não cobre.
+          {{ p.questoes_sem_assunto }} questões das provas do cargo ainda estão
+          <strong>sem assunto</strong> na árvore (pendentes, ou classificadas
+          só na matéria) e não entram em nenhuma barra - o que falta não é elas
+          não caírem, é a classificação delas. Elas aparecem em
+          <code>radar conteudos --pendentes</code>, e a classificação sai de
+          <code>radar classificar --pedido</code>.
         </p>
       {% endif %}
 
@@ -582,9 +587,9 @@
     {% else %}
       <p class="vazio">
         <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span> Nenhuma questão
-        das minhas provas tem assunto detectado, e sem assunto não há fatia
-        para multiplicar pelo peso do edital. As matérias de Direito saem do
-        conteúdo programático, com <code>radar assuntos --so-alvo</code>.
+        das provas do cargo está classificada num assunto da árvore, e sem
+        assunto não há fatia para multiplicar pelo peso do edital. A
+        classificação sai de <code>radar classificar --pedido</code>.
       </p>
       {% if p.materias_sem_assunto %}
         <div class="mudas">

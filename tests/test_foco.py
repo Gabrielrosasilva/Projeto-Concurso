@@ -863,9 +863,9 @@ def test_sem_treino_nenhum_a_tela_nao_aponta_materia(cliente, com_quadro_do_edit
 # --- onde estudar primeiro --------------------------------------------------
 #
 # A secao desce um andar em relacao a tabela acima: nao "que materia pesa
-# mais", e sim "dentro dela, qual assunto". O assunto de Direito sai da coluna
-# `assunto`, que o `radar assuntos --so-alvo` escolhe dentro do conteudo
-# programatico do edital; o de Portugues sai do catalogo de palavras-chave.
+# mais", e sim "dentro dela, qual assunto". O assunto e o no da arvore de
+# conteudos em que a questao foi classificada (decisao 74), e o acerto e o do
+# desempenho por conteudo, com o radar e o anotado separados na tela.
 
 
 def _com_assunto(
@@ -885,11 +885,44 @@ def _com_assunto(
         concurso_url=CONCURSO_DE_2019,
         banca=banca, ano=ano, cargo=cargo, numero=numero, materia=materia,
         assunto=assunto,
-        evidencia=None if prova is None else "complementar",
+        evidencia="alvo" if prova is None else "complementar",
         enunciado=f"Sobre {assunto or materia}, questão {numero}?",
         alternativas={"a": "x", "b": "y"}, resposta="a",
         impressao=f"{materia}-{assunto}-{numero}",
     )
+
+
+def _classificar(questao_id: int, caminho: str) -> None:
+    """Classifica a questao no no `caminho`, criando na arvore os nos que
+    faltarem."""
+    from radar import conteudos as arvore
+    from radar.models import Conteudo
+    from radar.servico import classificacoes
+
+    with sessao() as s:
+        existentes = set(s.scalars(select(Conteudo.caminho)))
+        pai = None
+        for nivel, nome in zip(("materia", "assunto", "subassunto", "elemento"),
+                               arvore.partes(caminho)):
+            no = arvore.caminho(pai, nome)
+            if no not in existentes:
+                s.add(Conteudo(caminho=no, pai=pai, nivel=nivel, nome=nome,
+                               origem="edital", procedencia="teste"))
+                existentes.add(no)
+            pai = no
+        chave = classificacoes.chave_de(s.get(QuestaoDeProva, questao_id))
+    classificacoes.classificar(chave, caminho, "teste")
+
+
+def _classificar_pelo_assunto() -> None:
+    """Classifica cada questao gravada com `assunto` no no "materia >
+    assunto". O Onde estudar le a ARVORE (decisao 74), e nao a coluna: aqui
+    a coluna so diz em que no cada questao do teste cai."""
+    with sessao() as s:
+        questoes = [(q.id, q.materia, q.assunto) for q in s.scalars(
+            select(QuestaoDeProva).where(QuestaoDeProva.assunto.is_not(None)))]
+    for questao_id, materia, assunto in questoes:
+        _classificar(questao_id, f"{materia} > {assunto}")
 
 
 def test_a_secao_mostra_o_assunto_e_quantas_questoes_ele_deve_valer(
@@ -903,6 +936,7 @@ def test_a_secao_mostra_o_assunto_e_quantas_questoes_ele_deve_valer(
             s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
         for n in range(7, 11):
             s.add(_com_assunto(n, "Lei de Execução Penal", "Faltas disciplinares"))
+    _classificar_pelo_assunto()
 
     texto = cliente.get("/analises").text
 
@@ -933,6 +967,7 @@ def test_o_assunto_pequeno_em_que_eu_erro_passa_na_frente_do_grande(
             s.add(_com_assunto(n, "Lei de Execução Penal", "Assunto grande"))
         for n in range(11, 15):
             s.add(_com_assunto(n, "Lei de Execução Penal", "Assunto pequeno"))
+    _classificar_pelo_assunto()
 
     _treinar_assunto("Lei de Execução Penal", "Assunto grande", acertos=9, erros=1)
     _treinar_assunto("Lei de Execução Penal", "Assunto pequeno", acertos=0, erros=4)
@@ -951,10 +986,11 @@ def test_o_assunto_nunca_treinado_nao_aparece_como_zero_por_cento(
         s.add(_concurso())
         for n in range(1, 11):
             s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+    _classificar_pelo_assunto()
 
     texto = cliente.get("/analises").text
 
-    assert "ainda não respondi nenhuma no simulado" in texto
+    assert "ainda não treinei: nenhuma resposta no radar nem anotada" in texto
     assert "0% em 0" not in texto
 
 
@@ -981,6 +1017,7 @@ def test_a_tela_separa_o_que_e_do_cargo_do_que_e_complementar(
     with sessao() as s:
         _alvo_e_complementar(s)
     _aceitar(OUTRO_CONCURSO)
+    _classificar_pelo_assunto()
 
     texto = cliente.get("/analises").text
 
@@ -998,6 +1035,7 @@ def test_o_complementar_nao_muda_as_questoes_esperadas_do_cargo(
     with sessao() as s:
         _alvo_e_complementar(s)
     _aceitar(OUTRO_CONCURSO)
+    _classificar_pelo_assunto()
 
     linhas = {l.assunto: l for l in foco.montar().onde_comecar}
 
@@ -1014,6 +1052,7 @@ def test_prova_complementar_nao_aceita_fica_fora_do_onde_estudar(
     banca."""
     with sessao() as s:
         _alvo_e_complementar(s)
+    _classificar_pelo_assunto()
 
     linhas = {l.assunto: l for l in foco.montar().onde_comecar}
 
@@ -1030,6 +1069,7 @@ def test_o_assunto_de_direito_ganha_o_link_para_a_lei(cliente, com_quadro_do_edi
                 "Lei n.º 6.745, de 28 de dezembro de 1985 "
                 "(Estatuto do Servidor do Estado de Santa Catarina)",
             ))
+    _classificar_pelo_assunto()
 
     texto = cliente.get("/analises").text
 
@@ -1049,7 +1089,7 @@ def test_sem_assunto_nenhum_a_tela_diz_o_que_falta_rodar(
 
     texto = cliente.get("/analises").text
 
-    assert "radar assuntos --so-alvo" in texto
+    assert "radar classificar --pedido" in texto
     assert "pontos a ganhar" not in texto
 
 
@@ -1065,14 +1105,13 @@ def test_materia_sem_assunto_nao_some_do_grafico_calada(
     """
     with sessao() as s:
         s.add(_concurso())
-        # Portugues sai do catalogo de palavras-chave, de graca: o assunto
-        # dele vem do ENUNCIADO, e nao da coluna, entao ele continua rendendo
-        # barra mesmo sem nada classificado.
+        # Portugues tem as questoes classificadas na arvore: rende barra.
         for n in range(1, 4):
             s.add(_com_assunto(n, "Língua Portuguesa", "crase"))
-        # A LEP depende do assunto pago, e agora nao tem nenhum.
+        # A LEP nao tem nenhuma questao classificada num assunto.
         for n in range(10, 20):
             s.add(_com_assunto(n, "Lei de Execução Penal", None))
+    _classificar_pelo_assunto()
 
     painel = foco.montar()
     mudas = {m.nome for m in painel.materias_sem_assunto}
@@ -1106,6 +1145,7 @@ def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital)
         s.add(_concurso())
         for n in range(1, 11):
             s.add(_com_assunto(n, "Lei de Execução Penal", "Progressão de regime"))
+    _classificar_pelo_assunto()
 
     _treinar_assunto(
         "Lei de Execução Penal", "Progressão de regime", acertos=4, erros=6
@@ -1113,7 +1153,9 @@ def test_a_conclusao_repete_os_numeros_do_grafico(cliente, com_quadro_do_edital)
 
     texto = cliente.get("/analises").text
 
-    assert "10 questões esperadas pelas provas do cargo, e eu acerto 40%" in texto
+    # O acerto vem nos dois recortes (decisao 7), e nao somado.
+    assert ("10 questões esperadas pelas provas do cargo, e o meu acerto nele é "
+            "radar 40% em 10 · anotado —") in texto
     assert "6 pontos a ganhar" in texto
 
 

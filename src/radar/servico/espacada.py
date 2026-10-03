@@ -15,11 +15,10 @@ Duas vantagens que valem o recalculo: nao ha estado para dessincronizar, e
 descartar um simulado de teste apaga sozinho o que ele tinha agendado - a
 resposta sumiu, e a agenda que dependia dela tambem.
 
-O "assunto" e o mesmo do "Onde estudar primeiro": o do catalogo de
-palavras-chave para Portugues e Raciocinio Logico, e o do edital para o
-resto. Questao sem assunto nenhum - hoje, toda questao de Direito, que ainda
-nao foi classificada - agenda a MATERIA inteira, e a tela diz isso: e melhor
-revisar "Direito Penal" do que nao revisar nada.
+O "assunto" e o mesmo do "Onde estudar primeiro" (decisao 74): o no da
+arvore de conteudos em que a questao foi classificada, no nivel do assunto.
+Questao sem classificacao num assunto agenda a MATERIA inteira, e a tela diz
+isso: e melhor revisar "Direito Penal" do que nao revisar nada.
 
 So questao real. Errar uma questao gerada nao agenda nada: ela nao mede o que
 a banca cobra, e o assunto dela e o que a IA disse que era.
@@ -30,7 +29,6 @@ from datetime import date, timedelta
 
 from sqlalchemy import select
 
-from radar import macetes
 from radar.db import criar_tabelas, sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
 from radar.util import para_local
@@ -68,17 +66,35 @@ class Revisao:
         return max(0, (hoje - self.vence_em).days)
 
 
-def assuntos_da_questao(questao) -> list[str | None]:
-    """Os assuntos de uma questao, pela mesma regra do Onde estudar primeiro.
+def assuntos_por_chave() -> dict[str, str]:
+    """{chave da questao: o assunto da classificacao principal dela}.
 
-    [None] quando nao ha assunto nenhum: a revisao cai na materia.
+    Lido uma vez por conta, e nao por questao. A classificacao que para na
+    materia nao diz assunto, e fica de fora.
     """
-    chave = macetes.chave_da_materia(questao.materia)
-    if chave:
-        nomes = macetes.assuntos_do_enunciado(questao.enunciado, chave)
-    else:
-        nomes = [questao.assunto] if questao.assunto else []
-    return nomes or [None]
+    from radar import conteudos as arvore
+    from radar.servico import desempenho_por_conteudo as por_conteudo
+
+    saida = {}
+    for chave, caminho in por_conteudo.nos_das_questoes().items():
+        partes = arvore.partes(caminho or "")
+        if len(partes) > 1:
+            saida[chave] = partes[1]
+    return saida
+
+
+def assuntos_da_questao(questao, assuntos: dict[str, str] | None = None) -> list[str | None]:
+    """O assunto de uma questao, pela mesma regra do Onde estudar primeiro: o
+    da classificacao dela na arvore.
+
+    [None] quando ela nao esta classificada num assunto: a revisao cai na
+    materia. `assuntos` e o `assuntos_por_chave()`, para quem pergunta de
+    muitas questoes.
+    """
+    from radar.servico.classificacoes import chave_de
+
+    assuntos = assuntos if assuntos is not None else assuntos_por_chave()
+    return [assuntos.get(chave_de(questao))]
 
 
 def agenda(hoje: date | None = None) -> list[Revisao]:
@@ -96,10 +112,11 @@ def agenda(hoje: date | None = None) -> list[Revisao]:
             .order_by(RespostaDeSimulado.respondida_em)
         ).all()
 
+    assuntos = assuntos_por_chave()
     estado: dict[tuple, Revisao] = {}
     for questao, resposta in linhas:
         dia = para_local(resposta.respondida_em).date()
-        for assunto in assuntos_da_questao(questao):
+        for assunto in assuntos_da_questao(questao, assuntos):
             chave = (questao.materia or "sem materia", assunto)
             atual = estado.get(chave)
             if not resposta.acertou:
@@ -134,6 +151,7 @@ def criar_simulado_de_revisao(hoje: date | None = None) -> Simulado | None:
     if not vencidas:
         return None
 
+    assuntos = assuntos_por_chave()
     criar_tabelas()
     with sessao() as s:
         respondidas = set(s.scalars(
@@ -157,7 +175,7 @@ def criar_simulado_de_revisao(hoje: date | None = None) -> Simulado | None:
                         break
                     if q.id in respondidas or q.id in do_assunto or q.id in ids:
                         continue
-                    if r.assunto is not None and r.assunto not in assuntos_da_questao(q):
+                    if r.assunto is not None and r.assunto not in assuntos_da_questao(q, assuntos):
                         continue
                     do_assunto.append(q.id)
             ids.extend(i for i in do_assunto if i not in ids)

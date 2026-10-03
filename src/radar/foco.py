@@ -21,20 +21,19 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from sqlalchemy import and_, func, or_, select
+from sqlalchemy import func, select
 
 from radar import alvo as alvos
 from radar import amostra as regua
 from radar import (
-    config, edital_materias, edital_programa, macetes, onde_estudar, prioridade, provas,
+    config, edital_materias, edital_programa, onde_estudar, prioridade, provas,
 )
 from radar.db import criar_tabelas, sessao
 from radar.eventos import Evento
-from radar.models import Concurso, QuestaoDeProva, RespostaDeSimulado
-from radar.origem import ACERVO, AUTOMATICO, CLASSIFICACAO, OFICIAL, TENDENCIA
+from radar.models import Concurso, QuestaoDeProva
+from radar.origem import ACERVO, AUTOMATICO, OFICIAL, TENDENCIA
 from radar.questoes import extrair_texto
 from radar.regioes import normalizar
-from radar.util import para_local
 
 log = logging.getLogger(__name__)
 
@@ -111,7 +110,9 @@ ORIGENS_DO_PAINEL = {
     "edital": OFICIAL,          # o quadro de materias e o peso
     "provas": ACERVO,           # as questoes validas de cada prova do cargo
     "meu_acerto": AUTOMATICO,   # radar + anotado, sem consulta
-    "assunto": CLASSIFICACAO,   # o assunto de cada questao
+    # O assunto e o no da arvore em que a questao foi classificada, com a
+    # contagem da incidencia (decisao 74): estatistica do acervo.
+    "assunto": ACERVO,
     "estimativa": TENDENCIA,    # questoes esperadas e pontos a ganhar
 }
 
@@ -816,251 +817,93 @@ def _contar_questoes_do_alvo(s, provas_do_alvo: set[str]) -> int:
 # dentro da materia, QUAL ASSUNTO. "Estudar Direitos Humanos" nao e um plano de
 # tarde; "estudar as Regras de Mandela" e.
 #
-# O assunto vem de dois lugares, e a tela diz qual e qual porque um custou
-# dinheiro e o outro nao:
-#
-#   * CATALOGO - Portugues e Raciocinio Logico saem do catalogo de
-#     palavras-chave do `macetes`, de graca, e ja funcionam hoje;
-#   * EDITAL - as outras nove materias saem da coluna `assunto`, escolhida
-#     dentro do conteudo programatico pelo `radar assuntos --so-alvo`. Sem
-#     rodar esse comando elas nao aparecem aqui, e a tela diz isso.
+# O assunto e o no da ARVORE de conteudos em que cada questao foi classificada
+# (decisao 74): os assuntos do edital, com as questoes do cargo classificadas e
+# conferidas. Os numeros sao os da incidencia (Analises > Incidencia), pela
+# mesma conta - e por isso as duas telas dizem a mesma coisa. Ate a Etapa 8 o
+# assunto vinha do catalogo de palavras-chave (Portugues e Raciocinio Logico) e
+# da coluna `assunto` (o resto, zerada em 25/09): as nove materias de Direito
+# apareciam como "nenhuma questao classificada".
 #
 # Sao so DUAS provas do cargo, e duas provas sustentam pouco uma fatia. Por
 # isso entra o acervo complementar: as provas FEPESE ACEITAS no
-# data/acervo_complementar.json (Etapa 3B) - a banca cobra crase do mesmo
-# jeito em qualquer caderno que faca. Mas ele nunca vira numero do alvo (regra
-# inviolavel 1): as questoes esperadas e os pontos a ganhar sao so das provas
-# do cargo, e o complementar entra so na ORDEM, com o peso declarado no
-# config/prioridade.yml. A tela mostra as duas fatias, sempre separadas.
+# data/acervo_complementar.json (Etapa 3B), na mesma arvore. Mas ele nunca
+# vira numero do alvo (regra inviolavel 1): as questoes esperadas e os pontos a
+# ganhar sao so das provas do cargo, e o complementar entra so na ORDEM, com o
+# peso declarado no config/prioridade.yml. A tela mostra as duas fatias, sempre
+# separadas.
+#
+# O meu acerto em cada assunto e o do desempenho por conteudo (decisao 7): o
+# medido no radar e o anotado, cada um com o seu numero na tela. Os dois juntos
+# so decidem se a amostra basta e a ordem - a mesma regra do estado da amostra.
 
 
-def _materias_do_acervo_no_edital(s, materias_do_edital: list) -> dict[str, str]:
-    """{nome como a prova escreve: nome como o EDITAL escreve}.
+def _onde_comecar(materias_do_edital: list):
+    """(linhas do grafico, questoes do cargo sem assunto, materias sem linha).
 
-    Os dois lados escrevem diferente - o edital diz "Lei de Execucao Penal" e o
-    cabecalho do caderno pode dizer "LEI DE EXECUCAO PENAL" - e a conta so
-    fecha quando os dois viram a mesma chave. O nome que vale e o do edital,
-    porque e dele que sai o peso.
-
-    Materia que o edital de hoje nao lista fica de fora de proposito: 2013
-    cobrou Nocoes de Informatica e 2019 nao cobra, e questao dela nao tem peso
-    nenhum para multiplicar.
+    Lista vazia quando nenhuma questao esta classificada num assunto: a tela
+    diz que falta classificar, e nao inventa uma ordem de estudo em cima de
+    nada.
     """
+    from radar import conteudos as arvore
+    from radar import incidencia
+    from radar.servico import conteudos as servico_conteudos
+    from radar.servico import desempenho_por_conteudo as por_conteudo
+    from radar.servico import incidencia as servico_incidencia
+
+    # O nome que vale e o do edital, porque e dele que sai o peso; a arvore
+    # escreve a materia pela mesma regra do quadro, e o `normalizar` casa os
+    # dois. Materia que o edital de hoje nao lista fica de fora: 2013 cobrou
+    # Nocoes de Informatica, e questao dela nao tem peso para multiplicar.
     do_edital = {normalizar(m.nome): m.nome for m in materias_do_edital}
-    if not do_edital:
-        return {}
+    nos = servico_conteudos.nos()
+    alvo = servico_incidencia.ocorrencias()
+    complementar = incidencia.complementar_por_no(
+        nos, servico_incidencia.ocorrencias_complementares())
+    desempenho = por_conteudo.por_no(por_conteudo.SEMPRE)
 
-    nomes = s.scalars(
-        select(QuestaoDeProva.materia)
-        .where(QuestaoDeProva.materia.is_not(None))
-        .distinct()
-    )
-    return {
-        nome: do_edital[normalizar(nome)]
-        for nome in nomes
-        if normalizar(nome) in do_edital
-    }
-
-
-def _questoes_para_a_fatia(s, minhas_provas: set[str], nomes: list[str]) -> list:
-    """As questoes que sustentam as fatias de cada assunto: as minhas e as do
-    acervo complementar.
-
-    O complementar e so o das provas ACEITAS no data/acervo_complementar.json,
-    a mesma regra da incidencia (`servico.incidencia`): prova que a validacao
-    recusou nao entra em estatistica nenhuma, e aqui tambem nao. Ate a Etapa 8
-    entrava qualquer caderno da FEPESE, aceito ou nao.
-    """
-    from radar.servico import complementar as acervo
-    from radar.servico import evidencia
-
-    if not nomes:
-        return []
-
-    return list(s.scalars(
-        select(QuestaoDeProva)
-        .where(QuestaoDeProva.materia.in_(nomes))
-        # Anulada nao entra em conta nenhuma: a banca disse que ela nao existe.
-        .where(QuestaoDeProva.anulada.is_not(True))
-        .where(or_(
-            QuestaoDeProva.prova_url.in_(minhas_provas),
-            and_(QuestaoDeProva.evidencia == evidencia.COMPLEMENTAR,
-                 QuestaoDeProva.prova_url.in_(acervo.provas_aceitas())),
-        ))
-    ))
-
-
-def _marcas_de_assunto(
-    questoes: list, chave: str | None
-) -> tuple[list[tuple[str, int]], int]:
-    """([(assunto, em quantos enunciados distintos ele cai)], quantos sem assunto).
-
-    Em enunciado distinto, e nao em questao, dos dois lados da conta. O
-    complementar vem de duzias de cadernos, e la a banca reaproveita muito: uma
-    questao que
-    aparece em 38 provas decidiria o grafico sozinha. E o mesmo motivo que fez
-    o `macetes.uma_por_enunciado` existir.
-
-    A conta dos "sem assunto" sai junto, e nao numa segunda passada, porque ela
-    custa o mesmo trabalho: sao 18 expressoes regulares sobre cada enunciado, e
-    rodar tudo duas vezes botava meio segundo na abertura da home.
-    """
-    unicas = macetes.uma_por_enunciado(questoes)
-    if chave:
-        achados, fora = macetes.assuntos_de(unicas, chave)
-        return [(a.nome, a.distintas) for a in achados], fora
-
-    marcas: dict[str, int] = {}
-    fora = 0
-    for questao in unicas:
-        if questao.assunto:
-            marcas[questao.assunto] = marcas.get(questao.assunto, 0) + 1
-        else:
-            fora += 1
-    return list(marcas.items()), fora
-
-
-def _contagens_de_assunto(
-    questoes: list, para_o_edital: dict[str, str], minhas_provas: set[str]
-) -> tuple[dict, dict, int]:
-    """({(materia, assunto): (proprias, complementar)}, {materia: origem},
-    sem assunto). As duas contagens ficam lado a lado e nunca se somam."""
-    por_materia: dict[str, list] = {}
-    for questao in questoes:
-        por_materia.setdefault(para_o_edital[questao.materia], []).append(questao)
-
-    contagens: dict[tuple[str, str], list[int]] = {}
-    origens: dict[str, str] = {}
-    sem_assunto = 0
-
-    for materia, lista in por_materia.items():
-        chave = macetes.chave_da_materia(materia)
-        origens[materia] = onde_estudar.CATALOGO if chave else onde_estudar.EDITAL
-
-        minhas = [q for q in lista if q.prova_url in minhas_provas]
-        complementar = [q for q in lista if q.prova_url not in minhas_provas]
-
-        for coluna, grupo in ((0, minhas), (1, complementar)):
-            marcas, fora = _marcas_de_assunto(grupo, chave)
-            for nome, quantas in marcas:
-                contagens.setdefault((materia, nome), [0, 0])[coluna] += quantas
-            # So as MINHAS contam como "falta classificar": o complementar
-            # esta la para pesar na ordem, e nao para eu estudar por ele.
-            if coluna == 0:
-                sem_assunto += fora
-
-    return (
-        {par: (proprias, complementar)
-         for par, (proprias, complementar) in contagens.items()},
-        origens,
-        sem_assunto,
-    )
-
-
-def _acerto_por_assunto(s, para_o_edital: dict[str, str]) -> tuple[dict, dict]:
-    """({(materia, assunto): (respondidas, acertos)}, {(materia, assunto):
-    data da ultima resposta}), de TODOS os simulados, so questao REAL.
-
-    Do acumulado e nao do ultimo, pelo mesmo motivo do acerto por materia: uma
-    rodada de 20 questoes nao diz se eu sei o assunto, e o somado diz.
-
-    E conta QUESTAO, nao tentativa, pela mesma regra do `desempenho`: primeiro
-    fica a ultima resposta de cada questao, e so ela e distribuida pelos
-    assuntos. A DATA, essa sim, olha todas as tentativas: e a da ultima vez
-    que eu mexi no assunto, e e ela que alimenta o fator de tempo.
-
-    Assunto nunca respondido simplesmente nao esta no dicionario. Ele nao vale
-    zero por cento - zero diria que eu errei tudo.
-    """
-    from radar import servico
-
-    if not para_o_edital:
-        return {}, {}
-
-    linhas = s.execute(
-        select(QuestaoDeProva, RespostaDeSimulado)
-        .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
-        .where(RespostaDeSimulado.escolhida.is_not(None))
-        # Sem isto, a resposta a uma questao GERADA contava no assunto da
-        # questao real de mesmo id - as duas tabelas numeram a partir do 1.
-        .where(RespostaDeSimulado.gerada.is_(False))
-        .where(QuestaoDeProva.materia.in_(list(para_o_edital)))
-        .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
-    ).all()
-
-    def assuntos(questao) -> tuple[str, list[str]]:
-        materia = para_o_edital[questao.materia]
-        chave = macetes.chave_da_materia(materia)
-        if chave:
-            return materia, macetes.assuntos_do_enunciado(questao.enunciado, chave)
-        return materia, [questao.assunto] if questao.assunto else []
-
-    def pares(questao) -> list[tuple[str, str]]:
-        materia, nomes = assuntos(questao)
-        return [(materia, nome) for nome in nomes]
-
-    # O acerto e o do `servico.metricas`, pela ultima resposta de cada questao:
-    # a fonte unica, no recorte *medido no radar*.
-    medido = servico.metricas.acumulado_por(pares, materias=list(para_o_edital))
-
-    # A data olha TODAS as tentativas: e a ultima vez que eu mexi no assunto.
-    ultimas: dict[tuple[str, str], object] = {}
-    for questao, resposta in linhas:
-        if not resposta.respondida_em:
+    contagens: dict[tuple[str, str], tuple[int, int]] = {}
+    acertos: dict[tuple[str, str], tuple[int, int]] = {}
+    ultimas: dict = {}
+    divisoes: dict[tuple[str, str], str] = {}
+    for mapa in incidencia.montar(nos, alvo):
+        materia = do_edital.get(normalizar(mapa.materia))
+        if materia is None:
             continue
-        dia = para_local(resposta.respondida_em).date()
-        materia, nomes = assuntos(questao)
-        for nome in nomes:
-            if ultimas.get((materia, nome)) is None or dia > ultimas[(materia, nome)]:
-                ultimas[(materia, nome)] = dia
+        for linha in mapa.linhas:
+            if linha.nivel != "assunto" or linha.fora_do_edital:
+                continue
+            par = (materia, linha.nome)
+            do_complementar = complementar.get(linha.caminho)
+            contagens[par] = (len(linha.questoes),
+                              do_complementar.classificadas if do_complementar else 0)
+            meu = desempenho.get(linha.caminho)
+            if meu is not None and meu.respostas:
+                acertos[par] = (meu.respostas, meu.acertos)
+                ultimas[par] = max(meu.radar.dias | meu.anotado.dias)
+                divisoes[par] = meu.divisao()
 
-    contagem = {par: [numeros.medidas, numeros.acertos]
-                for par, numeros in medido.items()}
-
-    # O anotado do Qconcursos, no (materia, assunto) do no que eu escolhi ao
-    # anotar (decisao 7). Par que a tela nao conhece - assunto do catalogo que
-    # nao e o nome do edital - fica de fora: nada e aproximado.
-    for par, anotada in servico.desempenho_por_conteudo.anotado_por_assunto().items():
-        if par[0] not in para_o_edital.values():
-            continue
-        atual = contagem.setdefault(par, [0, 0])
-        atual[0] += anotada.respostas
-        atual[1] += anotada.acertos
-        if anotada.ultima and (ultimas.get(par) is None
-                               or anotada.ultima > ultimas[par]):
-            ultimas[par] = anotada.ultima
-
-    return {par: tuple(valores) for par, valores in contagem.items()}, ultimas
-
-
-def _onde_comecar(s, minhas_provas: set[str], materias_do_edital: list):
-    """(linhas do grafico, questoes sem assunto, materias sem assunto nenhum).
-
-    Lista vazia quando nenhum assunto foi detectado: a tela diz que falta
-    classificar, e nao inventa uma ordem de estudo em cima de nada.
-    """
-    para_o_edital = _materias_do_acervo_no_edital(s, materias_do_edital)
-    questoes = _questoes_para_a_fatia(s, minhas_provas, list(para_o_edital))
-    if not questoes:
-        return [], 0, list(materias_do_edital)
-
-    contagens, origens, sem_assunto = _contagens_de_assunto(
-        questoes, para_o_edital, minhas_provas
-    )
-    acertos, ultimas = _acerto_por_assunto(s, para_o_edital)
     linhas = onde_estudar.montar(
-        materias_do_edital, contagens, acertos, origens, ultimas,
+        materias_do_edital, contagens, acertos, {}, ultimas,
         minimos=regua.carregar(),
         # O mesmo peso que o complementar tem na prioridade das fichas: uma
         # regra so, num arquivo so.
         peso_do_complementar=prioridade.carregar().peso_do_complementar,
+        divisoes=divisoes,
     )
 
-    # A materia que nao rendeu nenhum assunto nao pode so sumir do grafico.
-    # Ela cai no edital valendo questao, e sumir diria "nao cai" - quando o
-    # que aconteceu foi eu nao ter classificado nada dela.
-    com_assunto = {materia for materia, _assunto in contagens}
-    mudas = [m for m in materias_do_edital if m.nome not in com_assunto]
+    # So as do CARGO contam como "falta classificar": o complementar esta la
+    # para pesar na ordem, e nao para eu estudar por ele.
+    sem_assunto = sum(
+        1 for o in alvo
+        if not o.anulada and do_edital.get(normalizar(o.materia or "")) is not None
+        and (o.status == "pendente" or len(arvore.partes(o.conteudo or "")) < 2))
+
+    # A materia que nao rendeu nenhuma linha nao pode so sumir do grafico. Ela
+    # cai no edital valendo questao, e sumir diria "nao cai" - quando o que
+    # aconteceu foi nenhuma questao dela estar classificada num assunto.
+    com_linha = {linha.materia for linha in linhas}
+    mudas = [m for m in materias_do_edital if m.nome not in com_linha]
     return linhas, sem_assunto, mudas
 
 
@@ -1130,13 +973,11 @@ def montar() -> Painel:
         painel.materias_pesadas, painel.acerto_por_materia
     )
 
-    # Sessao nova, e nao a de cima, porque esta parte so existe depois do
-    # edital lido: e o peso de cada materia que transforma "fatia do assunto"
-    # em "questoes esperadas", e o edital sai de um PDF, nao do banco. O que
-    # ela reaproveita e o `minhas_provas`, que ja e so um punhado de enderecos.
+    # Esta parte so existe depois do edital lido: e o peso de cada materia que
+    # transforma "fatia do assunto" em "questoes esperadas", e o edital sai de
+    # um PDF, nao do banco.
     if materias:
-        with sessao() as s:
-            linhas, sem_assunto, mudas = _onde_comecar(s, minhas_provas, materias)
+        linhas, sem_assunto, mudas = _onde_comecar(materias)
         painel.onde_comecar = linhas[:onde_estudar.NA_TELA]
         painel.assuntos_fora_da_tela = max(0, len(linhas) - onde_estudar.NA_TELA)
         painel.conclusao_do_estudo = onde_estudar.conclusao(linhas)

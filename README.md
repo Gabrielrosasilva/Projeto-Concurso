@@ -312,7 +312,13 @@ dela:
 
     questoes esperadas = o peso da materia no edital
                          x a fatia que aquele assunto ocupa nas provas do cargo
-    pontos a ganhar    = questoes esperadas x (1 - seu acerto no simulado)
+    pontos a ganhar    = questoes esperadas x (1 - seu acerto no assunto)
+
+O assunto e o no da **arvore de conteudos** em que cada questao foi
+classificada (decisao 74): os mesmos numeros de Analises > Incidencia. O seu
+acerto aparece nos dois recortes, cada um com o seu numero - o medido no radar
+e o anotado das faixas e dos extras, sem consulta -; os dois juntos so decidem
+se a amostra basta e a conta dos pontos.
 
 Sao duas colunas porque nenhuma decide sozinha: um assunto de 10 questoes em
 que voce acerta 90% vale 1 ponto a recuperar, e um de 4 questoes em que voce
@@ -321,7 +327,7 @@ menor, e uma frase curta em cima dele repete em portugues o que a primeira
 barra diz em pixel.
 
 Cada linha mostra **em quantas questoes ela se apoia**, uma fatia por
-evidencia e nunca somadas: "13 de 38 nas provas do cargo · 54 de 169 no acervo
+evidencia e nunca somadas: "9 de 22 nas provas do cargo · 52 de 95 no acervo
 complementar, com peso 0,25 so na ordem". Sao so duas provas do cargo no
 acervo, e duas provas sustentam pouco uma fatia - por isso entra o **acervo
 complementar**: as provas da FEPESE **aceitas** no
@@ -789,9 +795,9 @@ Questao escrita por IA conta no volume e **em acerto nenhum** — ela treina, na
 mede. Com erros no dia, aparece o atalho **📓 anotar os erros**, que abre o
 [caderno](#o-caderno-de-erros) ja no dia certo.
 
-O **Meu foco** e o **"Onde estudar primeiro"** continuam usando so o que o radar
-mede, questao por questao: eles respondem o que a banca cobra de mim, e a
-resposta nao pode depender de numero digitado a mao.
+A tabela de materias do **Meu foco** continua usando so o que o radar mede,
+questao por questao. O **"Onde estudar primeiro"** usa o desempenho por
+conteudo, com o medido no radar e o anotado lado a lado (decisao 74).
 
 ### Semanas: como fui em cada uma
 
@@ -1388,6 +1394,10 @@ Com `--so-alvo` sao duas mudancas, e as duas importam:
 Portugues e Raciocinio Logico **nao entram na conta paga**: eles continuam
 saindo do catalogo de palavras-chave, de graca, e ja cobrem 83% e 44% das
 minhas questoes.
+
+> Desde a decisao 74 (03/10/2026), o "Onde estudar primeiro" e a revisao
+> espacada nao leem mais esta coluna nem o catalogo: o assunto e o da
+> classificacao na arvore de conteudos (`radar classificar`).
 
 O que for pago vai para **`data/assuntos.json`**, que e versionado e entra no
 `exportar`, no `importar` e no `sincronizar` como os outros dois. A chave e a
