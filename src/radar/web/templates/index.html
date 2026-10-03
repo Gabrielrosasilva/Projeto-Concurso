@@ -5,44 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Radar de Concursos</title>
-  {# So pelo selo e pelas variaveis: esta tela ainda nao migrou para o
-     design system, e o body sem class="ds" nao muda de cara. #}
+  {# O radar de concursos: a busca, os atalhos por anel e um cartao por
+     concurso. Cor e espaco saem do design.css; aqui so o que e desta tela.
+     As cores dos aneis tem significado: perto verde, proximo amarelo,
+     estadual azul, longe cinza, e "a confirmar" cinza tracejado - e o "ainda
+     nao sei" da tela. O roxo ficou so para a IA (Etapa 7A). #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
-      --nucleo:#047857; --nucleo-fraco:#d3f2e4;
-      --proximo:#b45309; --proximo-fraco:#fdeed3;
-      --remoto:#64748b; --remoto-fraco:#eef1f5;
-      --indef:#7c3aed; --indef-fraco:#efe6fe;
-      --estadual:#9333ea; --estadual-fraco:#f3e4ff;
-      --prazo:#be123c; --prazo-fraco:#ffe4e9;
-      --estrela:#b45309; --estrela-fraca:#fef3c7;
-    }
-    :root:not([data-tema="claro"]){
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
-        --nucleo:#4ade80; --nucleo-fraco:#10291d;
-        --proximo:#fbbf24; --proximo-fraco:#2e2310;
-        --remoto:#94a3b8; --remoto-fraco:#1c2027;
-        --indef:#c4b5fd; --indef-fraco:#241b3a;
-        --estadual:#d8b4fe; --estadual-fraco:#2a1436;
-        --prazo:#fb7185; --prazo-fraco:#2c1219;
-        --estrela:#fbbf24; --estrela-fraca:#2e2310;
-      }
-
-    *{box-sizing:border-box}
-    body{margin:0;padding:0;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-
-    main{padding:1.75rem 1.25rem 4rem;max-width:920px;margin:0 auto;width:100%}
-    /* O titulo fica sobre a lista. */
-    .cabecalho{text-align:center;margin-bottom:1.5rem}
-    h1{margin:0 0 .2rem;font-size:1.7rem;letter-spacing:-.02em}
-    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
-
     /* titulo longo sem espaco (URL, nome comprido) nao pode furar a coluna */
     .titulo{overflow-wrap:anywhere}
 
@@ -53,22 +22,18 @@
        nesta pagina (e so nesta) os quatro destinos apareciam com borda e
        fundo de botao, diferentes do resto do site. */
 
-    form.filtros{display:grid;gap:.5rem;margin-bottom:1rem;
+    form.filtros{display:grid;gap:var(--esp-2);margin-bottom:var(--esp-4);
       grid-template-columns:repeat(auto-fit,minmax(135px,1fr))}
-    input{padding:.55rem .7rem;border:1px solid var(--borda);border-radius:8px;
-      background:var(--cartao);color:var(--texto);font-size:.9rem;min-width:0}
-    input:focus{outline:2px solid var(--azul);outline-offset:-1px}
-    .acoes{display:flex;gap:.5rem}
-    button,.limpar{padding:.55rem 1rem;border-radius:8px;font-size:.9rem;
-      cursor:pointer;border:1px solid transparent;background:var(--azul);color:#fff;
-      text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap}
-    .limpar{background:transparent;color:var(--suave);border-color:var(--borda)}
+    input{padding:var(--esp-2) var(--esp-3);border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
+      background:var(--cor-superficie);color:var(--cor-texto);font:inherit;font-size:var(--tam-sm);min-width:0}
+    input:focus{outline:2px solid var(--cor-acao);outline-offset:-1px}
+    .acoes{display:flex;gap:var(--esp-2);align-items:center}
 
     /* Campo de minimo e a caixinha de faixas, lado a lado numa celula so
        da grade de filtros. */
     /* O par ocupa duas colunas da grade: o campo sozinho ficava espremido a
        quase nada quando o nome da faixa escolhida e longo. */
-    .salario{display:flex;gap:.35rem;min-width:0;grid-column:span 2}
+    .salario{display:flex;gap:var(--esp-1);min-width:0;grid-column:span 2}
     .salario input{flex:1 1 6rem;min-width:5rem}
     @media (max-width:520px){ .salario{grid-column:span 1} }
 
@@ -77,214 +42,214 @@
        quando abre. */
     .menu-faixa{position:relative}
     .menu-faixa>summary{list-style:none;cursor:pointer;white-space:nowrap;
-      display:flex;align-items:center;gap:.3rem;height:100%;max-width:12rem;
+      display:flex;align-items:center;gap:var(--esp-1);height:100%;max-width:12rem;
       overflow:hidden;text-overflow:ellipsis;
-      padding:.55rem .7rem;border:1px solid var(--borda);border-radius:8px;
-      background:var(--cartao);color:var(--suave);font-size:.85rem}
+      padding:var(--esp-2) var(--esp-3);border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
+      background:var(--cor-superficie);color:var(--cor-texto-suave);font-size:var(--tam-sm)}
     .menu-faixa[open]>summary,.menu-faixa>summary:has(+ .opcoes a.ativa){
-      font-weight:600}
+      font-weight:var(--peso-medio)}
     .menu-faixa>summary::-webkit-details-marker{display:none}
-    .menu-faixa>summary:hover{border-color:var(--azul);color:var(--azul)}
-    .menu-faixa[open]>summary{border-color:var(--azul);color:var(--azul)}
+    .menu-faixa>summary:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
+    .menu-faixa[open]>summary{border-color:var(--cor-acao);color:var(--cor-acao)}
     .menu-faixa .seta{font-size:.7em;opacity:.7}
 
     .menu-faixa .opcoes{position:absolute;z-index:10;top:calc(100% + .3rem);
       right:0;min-width:15rem;display:flex;flex-direction:column;gap:.15rem;
-      padding:.35rem;border:1px solid var(--borda);border-radius:10px;
-      background:var(--cartao);box-shadow:0 8px 24px #0002}
-    .menu-faixa .opcoes a{font-size:.82rem;padding:.45rem .6rem;border-radius:6px;
-      color:var(--texto);text-decoration:none;white-space:nowrap}
-    .menu-faixa .opcoes a:hover{background:var(--azul-fraco);color:var(--azul)}
-    .menu-faixa .opcoes a.ativa{background:var(--nucleo-fraco);color:var(--nucleo);
-      font-weight:700}
-    .menu-faixa .opcoes a.limpar-faixa{color:var(--suave);border-top:1px solid
-      var(--borda);border-radius:0;margin-top:.2rem;padding-top:.5rem}
+      padding:var(--esp-1);border:1px solid var(--cor-borda);border-radius:var(--raio);
+      background:var(--cor-superficie);box-shadow:var(--sombra-alta)}
+    .ds .menu-faixa .opcoes a{font-size:var(--tam-sm);padding:var(--esp-2) var(--esp-2);border-radius:var(--raio-sm);
+      color:var(--cor-texto);text-decoration:none;white-space:nowrap}
+    .ds .menu-faixa .opcoes a:hover{background:var(--cor-acao-fundo);color:var(--cor-acao)}
+    .ds .menu-faixa .opcoes a.ativa{background:var(--cor-verde-fundo);color:var(--cor-verde);
+      font-weight:var(--peso-forte)}
+    .ds .menu-faixa .opcoes a.limpar-faixa{color:var(--cor-texto-suave);border-top:1px solid
+      var(--cor-borda);border-radius:0;margin-top:.2rem;padding-top:var(--esp-2)}
 
     /* A busca da aba de noticias e o filtro principal dela, entao ganha mais
        peso visual que os campos das outras abas. */
-    form.busca-noticia{display:flex;gap:.5rem;margin:0 0 .9rem}
-    form.busca-noticia input{flex:1;min-width:0;font-size:1rem;padding:.7rem .9rem}
+    form.busca-noticia{display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-2);margin:0 0 var(--esp-3)}
+    form.busca-noticia input{flex:1;min-width:12rem;font-size:var(--tam-base);padding:var(--esp-3) var(--esp-3)}
 
-    .resumo-fases{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
-    .fase-conta{font-size:.76rem;padding:.25rem .6rem;border-radius:999px;
-      background:var(--remoto-fraco);color:var(--remoto)}
+    .resumo-fases{display:flex;flex-wrap:wrap;gap:var(--esp-1);margin:0 0 var(--esp-3)}
+    .fase-conta{font-size:var(--tam-xs);padding:.25rem var(--esp-2);border-radius:var(--raio-pill);
+      background:var(--cor-borda);color:var(--cor-texto-suave);border:1px solid transparent}
     .fase-conta b{font-variant-numeric:tabular-nums}
-    .fase-conta.fase-inscricoes_abertas{background:var(--nucleo-fraco);color:var(--nucleo)}
-    .fase-conta.fase-banca_definida{background:var(--proximo-fraco);color:var(--proximo)}
-    .fase-conta.fase-autorizado{background:var(--indef-fraco);color:var(--indef)}
-    .fase-conta.fase-prevista{background:var(--azul-fraco);color:var(--azul)}
+    .fase-conta.fase-inscricoes_abertas{background:var(--cor-verde-fundo);color:var(--cor-verde)}
+    .fase-conta.fase-banca_definida{background:var(--cor-ambar-fundo);color:var(--cor-ambar)}
+    .fase-conta.fase-autorizado{background:transparent;color:var(--cor-texto-suave);
+      border:1px dashed var(--cor-texto-suave)}
+    .fase-conta.fase-prevista{background:var(--cor-acao-fundo);color:var(--cor-acao)}
 
-    .contagem{color:var(--suave);font-size:.85rem;margin:0 0 .7rem}
-    .aviso-filtro{background:var(--proximo-fraco);color:var(--proximo);
-      font-size:.82rem;padding:.6rem .8rem;border-radius:8px;margin:0 0 .8rem}
-    .aviso-filtro a{color:inherit}
+    .contagem{color:var(--cor-texto-suave);font-size:var(--tam-sm);margin:0 0 var(--esp-3)}
+    .aviso-filtro{background:var(--cor-ambar-fundo);color:var(--cor-ambar);
+      font-size:var(--tam-sm);padding:var(--esp-2) var(--esp-3);border-radius:var(--raio-sm);margin:0 0 var(--esp-3)}
+    .ds .aviso-filtro a{color:inherit}
 
     /* --------------------------------------------------------- cartoes --- */
-    ul.lista{list-style:none;padding:0;margin:0;display:grid;gap:.55rem;
+    /* Cada concurso e um cartao do design system, com a borda da esquerda
+       na cor do anel. */
+    ul.lista{list-style:none;padding:0;margin:0;display:grid;gap:var(--esp-2);
       grid-template-columns:minmax(0,1fr)}
-    ul.lista>li{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:10px;padding:.85rem 1rem;border-left:3px solid var(--borda)}
-    ul.lista>li.nucleo{border-left-color:var(--nucleo)}
-    ul.lista>li.proximo{border-left-color:var(--proximo)}
-    ul.lista>li.estadual{border-left-color:var(--estadual)}
-    ul.lista>li.indefinida{border-left-color:var(--indef)}
+    ul.lista>li{background:var(--cor-superficie);border:1px solid var(--cor-borda);
+      border-radius:var(--raio);box-shadow:var(--sombra);padding:var(--esp-3) var(--esp-4);
+      border-left:3px solid var(--cor-borda)}
+    ul.lista>li.nucleo{border-left-color:var(--cor-verde)}
+    ul.lista>li.proximo{border-left-color:var(--cor-ambar)}
+    ul.lista>li.estadual{border-left-color:var(--cor-azul)}
+    ul.lista>li.indefinida{border-left-style:dashed;border-left-color:var(--cor-texto-suave)}
 
-    .topo{display:flex;gap:.6rem;align-items:flex-start}
+    .topo{display:flex;gap:var(--esp-2);align-items:flex-start}
     .topo .titulo{flex:1}
-    .titulo{color:var(--texto);text-decoration:none;font-weight:600;display:block}
-    .titulo:hover{color:var(--azul)}
+    .ds a.titulo{color:var(--cor-texto);text-decoration:none;font-weight:var(--peso-medio);display:block}
+    .ds a.titulo:hover{color:var(--cor-acao)}
     .fav{display:block;margin:0;padding:0}
     .fav button{background:transparent;border:0;padding:0 .1rem;cursor:pointer;
-      font-size:1.25rem;line-height:1.2;color:var(--suave)}
-    .fav button:hover{color:var(--estrela)}
-    .fav button.marcada{color:var(--estrela)}
+      font-size:1.25rem;line-height:1.2;color:var(--cor-texto-suave)}
+    .fav button:hover{color:var(--cor-ambar)}
+    .fav button.marcada{color:var(--cor-ambar)}
 
-    .selos{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin-top:.55rem}
-    .selo{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;font-weight:600;
-      display:inline-flex;gap:.28rem;align-items:baseline}
+    .selos{display:flex;flex-wrap:wrap;gap:var(--esp-1);align-items:center;margin-top:var(--esp-2)}
+    .selo{font-size:var(--tam-xs);padding:.15rem var(--esp-2);border-radius:var(--raio-pill);
+      font-weight:var(--peso-medio);display:inline-flex;gap:.28rem;align-items:baseline;
+      border:1px solid transparent}
     /* O rotulo diz o que o valor e; sem ele "FEPESE" nao quer dizer nada. */
-    .selo .rot{font-weight:400;opacity:.7}
-    .selo.nucleo{background:var(--nucleo-fraco);color:var(--nucleo)}
-    .selo.proximo{background:var(--proximo-fraco);color:var(--proximo)}
-    .selo.estadual{background:var(--estadual-fraco);color:var(--estadual)}
-    .selo.remoto{background:var(--remoto-fraco);color:var(--remoto)}
-    .selo.indefinida{background:var(--indef-fraco);color:var(--indef)}
-    .selo.neutro{background:transparent;color:var(--suave);font-weight:400;
-      border:1px solid var(--borda)}
-    .selo.aberta{background:var(--nucleo-fraco);color:var(--nucleo)}
-    .selo.fechada{background:var(--remoto-fraco);color:var(--remoto)}
-    .selo.prazo{background:var(--prazo-fraco);color:var(--prazo)}
-    .selo.prazo.urgente{font-weight:700}
-    .selo.dinheiro{background:var(--nucleo-fraco);color:var(--nucleo)}
-    .selo.dinheiro.sem-valor{background:transparent;color:var(--suave);
-      border:1px dashed var(--borda);font-weight:400}
-    .meta{color:var(--suave);font-size:.79rem}
-    .motivo{color:var(--suave);font-size:.78rem;margin-top:.4rem;font-style:italic}
+    .selo .rot{font-weight:var(--peso-normal);opacity:.7}
+    .selo.nucleo{background:var(--cor-verde-fundo);color:var(--cor-verde)}
+    .selo.proximo{background:var(--cor-ambar-fundo);color:var(--cor-ambar)}
+    .selo.estadual{background:var(--cor-azul-fundo);color:var(--cor-azul)}
+    .selo.remoto{background:var(--cor-borda);color:var(--cor-texto-suave)}
+    .selo.indefinida{background:transparent;color:var(--cor-texto-suave);
+      border:1px dashed var(--cor-texto-suave)}
+    .selo.neutro{background:transparent;color:var(--cor-texto-suave);font-weight:var(--peso-normal);
+      border:1px solid var(--cor-borda)}
+    .selo.aberta{background:var(--cor-verde-fundo);color:var(--cor-verde)}
+    .selo.fechada{background:var(--cor-borda);color:var(--cor-texto-suave)}
+    .selo.prazo{background:var(--cor-vermelho-fundo);color:var(--cor-vermelho)}
+    .selo.prazo.urgente{font-weight:var(--peso-forte)}
+    .selo.dinheiro{background:var(--cor-verde-fundo);color:var(--cor-verde)}
+    .selo.dinheiro.sem-valor{background:transparent;color:var(--cor-texto-suave);
+      border:1px dashed var(--cor-borda);font-weight:var(--peso-normal)}
+    .meta{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .motivo{color:var(--cor-texto-suave);font-size:var(--tam-xs);margin-top:var(--esp-1);font-style:italic}
 
     /* Editar salario: um link recarrega a pagina com ?editar=<id>, e o cartao
        correspondente troca o valor por um campo. Tentei <details> antes; ele
        crescia para uns 90px dentro do selo e deixava uma caixa vazia na tela.
        Link e previsivel, funciona sem JavaScript e da para testar. */
-    .lapis{opacity:.6;font-size:.85em;text-decoration:none;color:inherit}
-    .lapis:hover{opacity:1}
-    form.salario{display:inline-flex;gap:.3rem;align-items:center}
-    form.salario input{padding:.15rem .4rem;font-size:.72rem;width:6.5rem;
-      border-radius:6px}
-    form.salario button{padding:.15rem .5rem;font-size:.72rem;border-radius:6px}
+    .ds a.lapis{opacity:.6;font-size:.85em;text-decoration:none;color:inherit}
+    .ds a.lapis:hover{opacity:1}
+    form.salario{display:inline-flex;gap:var(--esp-1);align-items:center}
+    form.salario input{padding:.15rem var(--esp-1);font-size:var(--tam-xs);width:6.5rem;
+      border-radius:var(--raio-sm)}
+    .ds form.salario a{font-size:var(--tam-xs);color:var(--cor-texto-suave);text-decoration:none}
 
     /* Minha anotacao sobre o concurso. Fica abaixo dos selos, ocupando a
        largura do cartao: o texto costuma ser uma frase inteira, e nao um
        valor curto como o salario. */
-    .nota{margin-top:.5rem;font-size:.84rem;background:var(--fundo);
-      border-left:3px solid var(--borda);border-radius:0 6px 6px 0;
-      padding:.45rem .7rem;white-space:pre-wrap}
-    .nota .rot{color:var(--suave);font-size:.72rem;display:block}
-    form.nota-edicao{margin-top:.5rem;display:grid;gap:.35rem}
-    form.nota-edicao textarea{font:inherit;font-size:.84rem;padding:.45rem .6rem;
-      border:1px solid var(--borda);border-radius:8px;background:var(--cartao);
-      color:var(--texto);resize:vertical;min-height:3.6rem;width:100%}
-    form.nota-edicao .acoes{display:flex;gap:.5rem;align-items:center}
-    form.nota-edicao button{padding:.25rem .8rem;font-size:.78rem;border-radius:6px}
-    .anotar{font-size:.76rem;color:var(--azul);text-decoration:none;
-      margin-top:.4rem;display:inline-block}
-    form.salario a{font-size:.72rem;color:var(--suave);text-decoration:none}
+    .nota{margin-top:var(--esp-2);font-size:var(--tam-sm);background:var(--cor-fundo);
+      border-left:3px solid var(--cor-borda);border-radius:0 var(--raio-sm) var(--raio-sm) 0;
+      padding:var(--esp-2) var(--esp-3);white-space:pre-wrap}
+    .nota .rot{color:var(--cor-texto-suave);font-size:var(--tam-xs);display:block}
+    form.nota-edicao{margin-top:var(--esp-2);display:grid;gap:var(--esp-1)}
+    form.nota-edicao textarea{font:inherit;font-size:var(--tam-sm);padding:var(--esp-2) var(--esp-2);
+      border:1px solid var(--cor-borda);border-radius:var(--raio-sm);background:var(--cor-superficie);
+      color:var(--cor-texto);resize:vertical;min-height:3.6rem;width:100%}
+    .ds a.anotar{font-size:var(--tam-xs);text-decoration:none;
+      margin-top:var(--esp-1);display:inline-block}
 
-    .etapas{display:flex;flex-wrap:wrap;gap:.3rem;list-style:none;padding:0;
-      margin:.6rem 0 .2rem}
-    .etapas li{font-size:.72rem;padding:.15rem .5rem;border-radius:999px;
-      border:1px dashed var(--borda);color:var(--suave)}
+    .etapas{display:flex;flex-wrap:wrap;gap:var(--esp-1);list-style:none;padding:0;
+      margin:var(--esp-2) 0 .2rem}
+    .etapas li{font-size:var(--tam-xs);padding:.15rem var(--esp-2);border-radius:var(--raio-pill);
+      border:1px dashed var(--cor-borda);color:var(--cor-texto-suave)}
     .etapas li.feita{border-style:solid;border-color:transparent;
-      background:var(--remoto-fraco);color:var(--remoto)}
-    .etapas li.atual{border-style:solid;border-color:transparent;font-weight:700;
-      background:var(--nucleo-fraco);color:var(--nucleo)}
+      background:var(--cor-borda);color:var(--cor-texto-suave)}
+    .etapas li.atual{border-style:solid;border-color:transparent;font-weight:var(--peso-forte);
+      background:var(--cor-verde-fundo);color:var(--cor-verde)}
 
-    .vazio{text-align:center;padding:2.5rem 1.25rem;background:var(--cartao);
-      border:1px dashed var(--borda);border-radius:10px}
-    .vazio p{margin:.4rem 0;color:var(--suave);font-size:.9rem}
-    .vazio .grande{font-size:1.05rem;color:var(--texto);font-weight:600}
-    .vazio a{color:var(--azul)}
-    code{background:var(--azul-fraco);color:var(--azul);padding:.1rem .4rem;
-      border-radius:4px;font-size:.85em}
+    ul.lista>li.vazio{text-align:center;padding:var(--esp-6) var(--esp-4);border-style:dashed;
+      border-left-width:1px;box-shadow:none}
+    .vazio p{margin:var(--esp-1) 0;color:var(--cor-texto-suave);font-size:var(--tam-sm)}
+    .vazio .grande{font-size:var(--tam-md);color:var(--cor-texto);font-weight:var(--peso-medio)}
 
     /* ------------------------------------------------- busca e atalhos --- */
     /* A busca vem antes dos atalhos porque e o que eu uso mais: procurar pelo
        nome do orgao resolve o caso que nenhum atalho resolve. */
-    form.busca{display:flex;gap:.5rem;margin-bottom:.9rem}
+    form.busca{display:flex;gap:var(--esp-2);margin-bottom:var(--esp-3)}
     form.busca input{flex:1 1 auto}
 
-    .atalhos{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.75rem}
-    .atalhos a{display:inline-flex;align-items:center;gap:.4rem;
-      text-decoration:none;padding:.45rem .85rem;border-radius:999px;
-      font-size:.85rem;font-weight:600;border:1px solid var(--borda);
-      background:var(--cartao);color:var(--suave)}
-    .atalhos a:hover{border-color:var(--azul)}
-    .atalhos a .n{font-weight:700;font-variant-numeric:tabular-nums;opacity:.75}
-    .atalhos a.ativo{border-color:transparent}
-    .atalhos a.ativo.perto{background:var(--nucleo-fraco);color:var(--nucleo)}
-    .atalhos a.ativo.estadual{background:var(--estadual-fraco);color:var(--estadual)}
-    .atalhos a.ativo.abertas{background:var(--prazo-fraco);color:var(--prazo)}
-    .atalhos a.ativo.tudo{background:var(--azul-fraco);color:var(--azul)}
+    .atalhos{display:flex;flex-wrap:wrap;gap:var(--esp-2);margin-bottom:var(--esp-3)}
+    .ds .atalhos a{display:inline-flex;align-items:center;gap:var(--esp-1);
+      text-decoration:none;padding:var(--esp-2) var(--esp-3);border-radius:var(--raio-pill);
+      font-size:var(--tam-sm);font-weight:var(--peso-medio);border:1px solid var(--cor-borda);
+      background:var(--cor-superficie);color:var(--cor-texto-suave)}
+    .ds .atalhos a:hover{border-color:var(--cor-acao)}
+    .atalhos a .n{font-weight:var(--peso-forte);font-variant-numeric:tabular-nums;opacity:.75}
+    .ds .atalhos a.ativo{border-color:transparent}
+    .ds .atalhos a.ativo.perto{background:var(--cor-verde-fundo);color:var(--cor-verde)}
+    .ds .atalhos a.ativo.estadual{background:var(--cor-azul-fundo);color:var(--cor-azul)}
+    .ds .atalhos a.ativo.abertas{background:var(--cor-vermelho-fundo);color:var(--cor-vermelho)}
+    .ds .atalhos a.ativo.tudo{background:var(--cor-acao-fundo);color:var(--cor-acao)}
 
     /* "mais filtros" nasce fechado: sao seis campos que eu uso de vez em
        quando, e abertos eles empurravam a lista para baixo da dobra. */
-    .mais-filtros{margin-bottom:1rem;border:1px solid var(--borda);
-      border-radius:10px;background:var(--cartao)}
-    .mais-filtros>summary{list-style:none;cursor:pointer;padding:.55rem .85rem;
-      font-size:.85rem;font-weight:600;color:var(--suave);
-      display:flex;align-items:center;gap:.4rem}
+    .mais-filtros{margin-bottom:var(--esp-4);border:1px solid var(--cor-borda);
+      border-radius:var(--raio);background:var(--cor-superficie)}
+    .mais-filtros>summary{list-style:none;cursor:pointer;padding:var(--esp-2) var(--esp-3);
+      font-size:var(--tam-sm);font-weight:var(--peso-medio);color:var(--cor-texto-suave);
+      display:flex;align-items:center;gap:var(--esp-1)}
     .mais-filtros>summary::-webkit-details-marker{display:none}
-    .mais-filtros>summary:hover{color:var(--azul)}
-    .mais-filtros[open]>summary{border-bottom:1px solid var(--borda);
-      color:var(--azul)}
+    .mais-filtros>summary:hover{color:var(--cor-acao)}
+    .mais-filtros[open]>summary{border-bottom:1px solid var(--cor-borda);
+      color:var(--cor-acao)}
     .mais-filtros .seta{font-size:.7em;opacity:.7}
-    .mais-filtros .corpo{padding:.85rem}
-    .mais-filtros .aceso{background:var(--azul-fraco);color:var(--azul);
-      font-size:.7rem;padding:.05rem .45rem;border-radius:999px;font-weight:700}
-    .outros-aneis{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem;
-      padding-top:.75rem;border-top:1px dashed var(--borda)}
-    .outros-aneis a{text-decoration:none;font-size:.8rem;font-weight:600;
-      padding:.3rem .7rem;border-radius:999px;border:1px solid var(--borda);
-      color:var(--suave);background:var(--cartao)}
-    .outros-aneis a:hover{border-color:var(--azul);color:var(--azul)}
-    .outros-aneis a.ativo{border-color:transparent;background:var(--azul-fraco);
-      color:var(--azul)}
+    .mais-filtros .corpo{padding:var(--esp-3)}
+    .mais-filtros .aceso{background:var(--cor-acao-fundo);color:var(--cor-acao);
+      font-size:var(--tam-xs);padding:.05rem var(--esp-2);border-radius:var(--raio-pill);font-weight:var(--peso-forte)}
+    .outros-aneis{display:flex;flex-wrap:wrap;gap:var(--esp-2);margin-top:var(--esp-3);
+      padding-top:var(--esp-3);border-top:1px dashed var(--cor-borda)}
+    .ds .outros-aneis a{text-decoration:none;font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      padding:var(--esp-1) var(--esp-3);border-radius:var(--raio-pill);border:1px solid var(--cor-borda);
+      color:var(--cor-texto-suave);background:var(--cor-superficie)}
+    .ds .outros-aneis a:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
+    .ds .outros-aneis a.ativo{border-color:transparent;background:var(--cor-acao-fundo);
+      color:var(--cor-acao)}
 
     /* --------------------------------------------- cartao enxuto ------ */
     /* A linha que responde as tres perguntas de sempre: onde, quanto, ate
        quando. Tudo numa linha so, separada por pontos - a versao anterior
        usava um selo por informacao e o cartao virava um paragrafo de selos. */
-    .linha-chave{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;
-      margin-top:.5rem;font-size:.85rem;color:var(--suave)}
+    .linha-chave{display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-1);
+      margin-top:var(--esp-2);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
     .linha-chave .sep{opacity:.45}
-    .linha-chave .onde{color:var(--texto);font-weight:600}
-    .linha-chave .dinheiro{color:var(--texto);font-weight:700;
+    .linha-chave .onde{color:var(--cor-texto);font-weight:var(--peso-medio)}
+    .linha-chave .dinheiro{color:var(--cor-texto);font-weight:var(--peso-forte);
       font-variant-numeric:tabular-nums}
-    .linha-chave .dinheiro.sem-valor{color:var(--suave);font-weight:600}
-    .linha-chave .prazo-frio{color:var(--suave)}
+    .linha-chave .dinheiro.sem-valor{color:var(--cor-texto-suave);font-weight:var(--peso-medio)}
+    .linha-chave .prazo-frio{color:var(--cor-texto-suave)}
     .linha-chave .lapis{margin-left:.15rem}
 
     /* "detalhes" nasce fechado. O conteudo continua no HTML, entao o Ctrl+F
        do navegador continua achando banca e motivo mesmo com ele fechado. */
-    .detalhes{margin-top:.55rem}
+    .detalhes{margin-top:var(--esp-2)}
     .detalhes>summary{list-style:none;cursor:pointer;display:inline-flex;
-      align-items:center;gap:.3rem;font-size:.78rem;font-weight:600;
-      color:var(--suave);padding:.15rem 0}
+      align-items:center;gap:var(--esp-1);font-size:var(--tam-xs);font-weight:var(--peso-medio);
+      color:var(--cor-texto-suave);padding:.15rem 0}
     .detalhes>summary::-webkit-details-marker{display:none}
-    .detalhes>summary:hover{color:var(--azul)}
-    .detalhes[open]>summary{color:var(--azul)}
+    .detalhes>summary:hover{color:var(--cor-acao)}
+    .detalhes[open]>summary{color:var(--cor-acao)}
     .detalhes .seta{font-size:.75em;opacity:.7}
-    .detalhes .selos{margin-top:.5rem}
+    .detalhes .selos{margin-top:var(--esp-2)}
 
     /* ------------------------------------------------------- ver mais --- */
-    .ver-mais{margin:1.25rem 0 0;text-align:center}
-    .ver-mais a{display:inline-block;padding:.6rem 1.4rem;border-radius:999px;
-      border:1px solid var(--borda);background:var(--cartao);color:var(--azul);
-      text-decoration:none;font-weight:600;font-size:.9rem}
-    .ver-mais a:hover{border-color:var(--azul)}
+    .ver-mais{margin:var(--esp-5) 0 0;text-align:center}
+    .ds .ver-mais a{display:inline-block;padding:var(--esp-2) var(--esp-5);border-radius:var(--raio-pill);
+      border:1px solid var(--cor-borda);background:var(--cor-superficie);
+      text-decoration:none;font-weight:var(--peso-medio);font-size:var(--tam-sm)}
+    .ds .ver-mais a:hover{border-color:var(--cor-acao)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
-<body>
+<body class="ds">
 
 {% from "_topo.html" import barra with context %}
 {{ barra('concursos') }}
@@ -335,7 +300,7 @@
             <input name="salario" inputmode="decimal" placeholder="ex: 5200"
                    value="{{ '{:.0f}'.format(c.salario) if c.salario else '' }}"
                    aria-label="Remuneração em reais" autofocus>
-            <button type="submit">Salvar</button>
+            <button class="ds-botao ds-botao--pequeno" type="submit">Salvar</button>
             <a href="{{ url_sem_editar }}">cancelar</a>
           </form>
         </span>
@@ -425,7 +390,7 @@
         <textarea name="notas" placeholder="O que eu preciso lembrar deste concurso"
                   aria-label="Minha anotacao" autofocus>{{ c.notas or '' }}</textarea>
         <div class="acoes">
-          <button type="submit">Salvar</button>
+          <button class="ds-botao ds-botao--pequeno" type="submit">Salvar</button>
           <a href="{{ url_sem_editar }}">cancelar</a>
         </div>
       </form>
@@ -457,12 +422,12 @@
   </li>
 {% endmacro %}
 
-  <main>
+  <main class="ds-pagina">
     {% from "_topo.html" import abas_de_concursos %}
     {{ abas_de_concursos('concursos') }}
-    <header class="cabecalho">
+    <header class="ds-cabeca">
       <h1>Radar de Concursos</h1>
-      <p class="subtitulo">Acompanhamento pessoal &middot; Grande Florianópolis e região</p>
+      <p>Acompanhamento pessoal &middot; Grande Florianópolis e região</p>
     </header>
 
     {% if not noticias %}
@@ -476,8 +441,8 @@
       {% if relevancia %}<input type="hidden" name="relevancia" value="{{ relevancia }}">{% endif %}
       <input name="termo" value="{{ termo }}"
              placeholder="Buscar por órgão, cargo ou cidade">
-      <button type="submit">Buscar</button>
-      {% if termo %}<a class="limpar" href="{{ url_sem_termo }}">Limpar</a>{% endif %}
+      <button class="ds-botao" type="submit">Buscar</button>
+      {% if termo %}<a class="ds-botao ds-botao--secundario" href="{{ url_sem_termo }}">Limpar</a>{% endif %}
     </form>
 
     {# Quatro atalhos, e so. Os outros aneis foram para "mais filtros": eu
@@ -543,8 +508,8 @@
         </details>
       </div>
       <div class="acoes">
-        <button type="submit">Filtrar</button>
-        <a class="limpar" href="/concursos">Limpar</a>
+        <button class="ds-botao" type="submit">Filtrar</button>
+        <a class="ds-botao ds-botao--secundario" href="/concursos">Limpar</a>
       </div>
     </form>
 
@@ -570,9 +535,9 @@
         <input type="hidden" name="noticias" value="true">
         <input name="termo" value="{{ termo }}" autofocus
                placeholder="PM, polícia científica, bombeiro, Guarda Municipal...">
-        <button type="submit">Procurar</button>
-        {% if termo %}<a class="limpar" href="/concursos?noticias=true">Limpar</a>{% endif %}
-        <a class="limpar" href="/concursos">Voltar aos concursos</a>
+        <button class="ds-botao" type="submit">Procurar</button>
+        {% if termo %}<a class="ds-botao ds-botao--secundario" href="/concursos?noticias=true">Limpar</a>{% endif %}
+        <a class="ds-botao ds-botao--secundario" href="/concursos">Voltar aos concursos</a>
       </form>
 
       {% if fases %}

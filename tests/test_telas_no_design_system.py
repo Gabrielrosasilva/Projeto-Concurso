@@ -19,6 +19,7 @@ TELAS = [
     ("/previsao", 200),
     ("/acompanhando", 200),
     ("/analises", 200),
+    ("/concursos", 200),
 ]
 
 #: A paleta que cada tela antiga definia para si.
