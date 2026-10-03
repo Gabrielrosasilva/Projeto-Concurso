@@ -334,6 +334,96 @@ def da_faixa(faixa, escritas: list[FichaEscrita]) -> FichaEscrita | None:
     return None
 
 
+# --- onde a faixa esta na arvore (subetapa 2C, decisao 71) ------------------------
+#
+# O assunto e o subassunto ficavam dentro da ficha: a faixa dizia o tema e so.
+# Agora a propria faixa diz o assunto, o subassunto - ou que a arvore nao tem
+# subassunto para ela - e o elemento. Nada aqui cria no (escolha 5B): o que
+# nao esta na arvore, a tela diz que nao esta.
+
+@dataclass(frozen=True)
+class AssuntoDaFaixa:
+    """Um assunto da arvore que a faixa cobre, e o que ela cobre dele."""
+
+    nome: str
+    #: Os subassuntos da arvore que a faixa cobre.
+    subassuntos: tuple = ()
+    elementos: tuple = ()
+    #: Sem subassunto: a faixa cobre o assunto INTEIRO (o no escolhido e o
+    #: proprio assunto, e a arvore tem subassunto nele)? Falso, a tela diz que
+    #: nao ha subassunto na arvore para o tema - a frase da escolha 5B.
+    inteiro: bool = False
+
+
+@dataclass(frozen=True)
+class OndeNaArvore:
+    """O assunto, o subassunto e o elemento de uma faixa, ditos na faixa."""
+
+    assuntos: tuple               # (AssuntoDaFaixa, ...), na ordem dos nos
+    #: O elemento exato, escrito na ficha ("LEP, arts. 28 a 37").
+    elemento: str | None = None
+    tipo_elemento: str | None = None
+    #: IA quando vem da ficha (escrita por IA, por conferir); PLANO quando vem
+    #: dos nos que o cronograma.yml da para a faixa.
+    origem: str = IA
+    #: A ficha nao aponta no: o assunto e o que ela escreveu, conferido
+    #: contra a arvore quando foi importada.
+    sem_no: bool = False
+
+
+def _por_assunto(nos, caminhos, escolhidos: bool = True) -> tuple:
+    """Os nos agrupados por assunto, na ordem em que aparecem.
+
+    `caminhos` e a arvore inteira: e dela que sai se o assunto tem subassunto.
+    `escolhidos` falso quando o no nao foi escolhido (a ficha sem no): ai o
+    tema e um pedaco do assunto, e nunca "o assunto inteiro".
+    """
+    por_assunto: dict[str, tuple[str, list, list]] = {}
+    for no in nos:
+        partes = arvore.partes(no)
+        if len(partes) < 2:
+            continue
+        no_do_assunto = arvore.SEPARADOR.join(partes[:2])
+        _caminho, subassuntos, elementos = por_assunto.setdefault(
+            partes[1], (no_do_assunto, [], []))
+        if len(partes) > 2 and partes[2] not in subassuntos:
+            subassuntos.append(partes[2])
+        if len(partes) > 3 and partes[3] not in elementos:
+            elementos.append(partes[3])
+    return tuple(
+        AssuntoDaFaixa(nome, tuple(subs), tuple(elems), inteiro=(
+            escolhidos and not subs
+            and any(c.startswith(caminho + arvore.SEPARADOR) for c in caminhos)))
+        for nome, (caminho, subs, elems) in por_assunto.items())
+
+
+def onde_na_arvore(faixa, escrita: "FichaEscrita | None",
+                   caminhos=()) -> OndeNaArvore | None:
+    """Onde a faixa esta na arvore: pela ficha, ou pelos nos do plano.
+
+    A ficha manda quando existe: os nos dela; sem no, o assunto e o
+    subassunto que ela escreveu (a importacao conferiu os dois contra a
+    arvore). Sem ficha, os nos da propria faixa no cronograma.yml (`nos`, ou
+    o `conteudo`). None quando nada diz. `caminhos` e a arvore inteira.
+    """
+    if escrita is not None and escrita.nos:
+        return OndeNaArvore(_por_assunto(escrita.nos, caminhos), escrita.elemento,
+                            escrita.tipo_elemento, IA)
+    if escrita is not None and escrita.assunto:
+        no = arvore.caminho(escrita.materia, escrita.assunto)
+        if escrita.subassunto:
+            no = arvore.caminho(no, escrita.subassunto)
+        return OndeNaArvore(_por_assunto([no], caminhos, escolhidos=False),
+                            escrita.elemento, escrita.tipo_elemento, IA, sem_no=True)
+    nos = list(getattr(faixa, "nos", ()) or ())
+    if not nos and getattr(faixa, "conteudo", None):
+        nos = [faixa.conteudo]
+    assuntos = _por_assunto(nos, caminhos)
+    if not assuntos:
+        return None
+    return OndeNaArvore(assuntos, origem=PLANO)
+
+
 def faixas_do_tema(plano, tema: str, materia: str) -> list[FaixaDoTema]:
     """Todas as faixas do plano que sao deste tema, na ordem do calendario.
 

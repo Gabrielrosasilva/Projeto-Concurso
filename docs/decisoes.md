@@ -3345,3 +3345,34 @@ mede (7A); commit e push por subetapa (8A).
       o acumulado do ciclo fica do lado, como a escolha 3A+C combinou.
     As duas contas novas - o acerto de varias rodadas juntas e os erros delas -
     moram no `servico/metricas.py`.
+
+71. **a faixa diz onde esta na arvore** (escolha 5B, subetapa 2C). O assunto
+    e o subassunto so apareciam dentro da ficha. Agora cada faixa com ficha,
+    ou com no do plano, mostra nela mesma o assunto, o subassunto - ou "nao ha
+    subassunto na arvore para este tema" - e o elemento exato
+    (`fichas.onde_na_arvore`):
+    - pela ficha (🟣, escrita pela IA e por conferir): os nos dela, agrupados
+      por assunto; sem no, o assunto e o subassunto que ela escreveu (a
+      importacao conferiu os dois contra a arvore), com o aviso de que a
+      ficha nao aponta no;
+    - sem ficha, pelos nos do plano (📌): a chave nova `nos` da faixa no
+      `cronograma.yml` - uma lista, como a da ficha, conferida no carregamento
+      contra a arvore e contra a materia da faixa -, ou o `conteudo`. O
+      `conteudo` continua sendo o no em que o acerto e anotado; `nos` so diz o
+      que a faixa cobre;
+    - "o assunto inteiro" so quando o no escolhido e o proprio assunto e a
+      arvore tem subassunto nele. A LEP tem subassunto na arvore (Remicao,
+      Assistencia...), mas nao para o trabalho do preso: ali a frase e "nao ha
+      subassunto na arvore para este tema";
+    - nenhum no foi criado. O bonus ganhou `nos` com Logica proposicional (ou
+      sentencial), Tabelas-verdade e Equivalencias - o titulo diz logica
+      proposicional e o detalhe, tabelas-verdade e equivalencias, e os tres
+      sao assuntos do edital -, e a interpretacao cronometrada com
+      Compreensao e interpretacao de texto, de 05/10 em diante. Os dias
+      passados ficaram como estavam.
+    Com o plano real, as 176 faixas de questoes de 03/10 a 07/11 dizem o
+    assunto: 167 nesta linha (137 pela ficha, 30 pelo plano) e 9 na composicao
+    do sabado (decisoes 67 e 69). Junto, o `ler_programa` passou a juntar a
+    palavra partida no hifen, o que antes so a leitura do PDF fazia: o texto
+    do edital usado nos testes dava "Tabelas- verdade", e a arvore real tem
+    "Tabelas-verdade".

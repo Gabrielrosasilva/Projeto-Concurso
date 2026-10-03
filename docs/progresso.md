@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A e 2B feitas (as faixas que medem, o simulado do Qconcursos e o sábado); faltam a 2C e a seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B e 2C feitas (as faixas que medem, o simulado do Qconcursos, o sábado e o assunto na faixa); falta a seção F |
 
 ---
 
@@ -2066,3 +2066,38 @@ segundo clique reabriu a mesma rodada. A tela de 03/10 abre em ~3 s; a de
 | `test_sabado.py` (novo) e `test_composicao.py` (8 novos do Qconcursos; os títulos dos cinco sábados) | 37 passed |
 | Suíte inteira, PC (uma vez, no fim da 2B) | **2411 passed** (2392 de antes + 19 novos: 11 do sábado e 8 do Qconcursos), 0 failed, 25 min |
 | `test_sabado.py` e `test_composicao.py` de novo, depois da última linha do template (o "Só questões" no R+7) | 37 passed |
+
+### 2C — o assunto na própria faixa ✅
+
+**O que mudou** (decisão 71):
+- `src/radar/fichas.py`: `onde_na_arvore` - o assunto, o subassunto (ou que
+  a árvore não tem) e o elemento de uma faixa, pela ficha ou pelos nós do
+  plano; `servico/fichas.py`: `arvore_das_faixas`, para a tela;
+- `src/radar/cronograma.py`: a chave nova `nos` da faixa, conferida contra a
+  árvore e contra a matéria;
+- a tela Hoje: a linha embaixo do título de cada faixa, com o selo da origem
+  (🟣 a ficha, 📌 o plano). Sem JavaScript novo;
+- `config/cronograma.yml`: `nos` nos 25 bônus (de 05/10 a 06/11) e nas 5
+  interpretações cronometradas (de 08/10 a 05/11). Nenhum título mudou, e os
+  dias passados não ganharam nada;
+- `src/radar/edital_programa.py`: a palavra partida no hífen volta inteira
+  em qualquer texto, e não só no PDF ("Tabelas-verdade");
+- docs: `decisoes.md` (71), `pendencias.md`, `README.md`, `historico.md` e o
+  "Estado atual" do `CLAUDE.md`.
+
+**Com o plano e as fichas reais**: das 176 faixas de questões de 03/10 a
+07/11, 167 dizem o assunto nesta linha (137 pela ficha, 30 pelo plano) e 9 na
+composição do sábado. Das linhas de assunto, 84 mostram o subassunto
+escolhido, 86 dizem "o assunto inteiro" e 87 "não há subassunto na árvore
+para este tema". A tela de 05/10 mostra, no bônus, "📌 Lógica proposicional
+(ou sentencial) · Tabelas-verdade · Equivalências"; a de 07/10, no trabalho do
+preso, "🟣 Lei de Execução Penal (...) · não há subassunto na árvore para este
+tema · Elemento: LEP, arts. 28 a 37".
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_onde_na_arvore.py` (novo), 1ª rodada | 9 passed, 1 failed (a tela: o texto do edital dos testes dava "Tabelas- verdade", e o plano não carregava; consertado no `ler_programa`) |
+| `test_onde_na_arvore.py` e `test_edital_programa.py` (1 novo: o hífen) | 22 passed |
+| Suíte inteira, PC (uma vez, no fim da 2C) | **2422 passed** (2411 de antes + 11 novos: 10 do assunto na faixa e 1 do hífen), 0 failed, 25 min |

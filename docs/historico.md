@@ -1867,3 +1867,17 @@ no 07/11); nenhum titulo mudou.
 
 O Actions de 03/10 passou: o commit `coleta: 2026-10-03` e a prova (o job roda
 a suite antes de coletar).
+
+## O assunto na faixa, subetapa 2C (03/10)
+
+**O que estava generico:** a faixa dizia o tema e so; o assunto e o
+subassunto ficavam dentro da ficha, e o bonus e a interpretacao cronometrada
+nao tinham nem ficha nem no.
+
+**A 2C:** cada faixa diz, nela mesma, o assunto, o subassunto - ou que a
+arvore nao tem subassunto para o tema - e o elemento (decisao 71). A fonte e a
+ficha (🟣) ou, sem ficha, os nos que o plano da para a faixa (📌, a chave nova
+`nos`). Nenhum no foi criado, pela escolha 5B. O bonus e a interpretacao
+cronometrada ganharam `nos` de 05/10 em diante. Para o plano carregar nos
+testes, o leitor do programa do edital passou a juntar "Tabelas-" e "verdade"
+em qualquer texto, como ja fazia no PDF.

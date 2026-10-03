@@ -18,6 +18,7 @@ from pathlib import Path
 import yaml
 
 from radar import config
+from radar.conteudos import SEPARADOR
 from radar.origem import AUTOMATICO
 
 # A ordem aqui e a ordem do dia.
@@ -167,6 +168,11 @@ class Faixa:
     # chave `conteudo` da faixa (Etapa 2), conferida no carregamento contra o
     # data/conteudos.json. Opcional: o titulo continua dizendo o tema.
     conteudo: str | None = None
+    # Os nos que a faixa COBRE, quando ela nao tem ficha e um no so nao basta
+    # (o bonus de tabelas-verdade e equivalencias sao dois assuntos do
+    # edital). Como os `nos` da ficha: so dizem onde a faixa esta na arvore,
+    # na tela. O `conteudo` continua sendo o no em que o acerto e anotado.
+    nos: tuple = ()
     # As materias de uma rodada que mede mais de uma (o simulado de fechamento
     # de 07/11). A composicao das questoes sai do `servico/composicao.py`; aqui
     # so a lista, conferida contra o bloco `materias` - nunca numero (dec. 67).
@@ -422,6 +428,7 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
         consulta=(bool(bruta["consulta"]) if bruta.get("consulta") is not None
                   else None),
         conteudo=bruta.get("conteudo"),
+        nos=tuple(bruta.get("nos") or ()),
         materias_da_rodada=tuple(bruta.get("materias_da_rodada") or ()),
         # Conferida no carregamento: data errada aqui faria a comparacao sumir
         # da tela sem aviso nenhum.
@@ -612,13 +619,14 @@ def _conferir_materias_das_faixas(dias: list[Dia], materias: list[MateriaDoEdita
 
 
 def _conferir_conteudos_das_faixas(dias: list[Dia]) -> None:
-    """Toda chave `conteudo` precisa ser um no da arvore.
+    """Toda chave `conteudo`, e todo caminho da lista `nos`, precisa ser um no
+    da arvore - e os `nos`, da materia da faixa.
 
     Pela mesma razao da materia: um caminho digitado errado nunca ligaria a
     faixa a nada, e ninguem perceberia. A arvore vem do data/conteudos.json,
     e nao do banco - este arquivo nao fala com banco.
     """
-    usados = [(dia, f) for dia in dias for f in dia.faixas() if f.conteudo]
+    usados = [(dia, f) for dia in dias for f in dia.faixas() if f.conteudo or f.nos]
     if not usados:
         return
     arquivo = config.diretorio_dados() / "conteudos.json"
@@ -627,12 +635,19 @@ def _conferir_conteudos_das_faixas(dias: list[Dia]) -> None:
     conhecidos = {linha["caminho"] for linha in
                   json.loads(arquivo.read_text(encoding="utf-8")) or []}
     for dia, faixa in usados:
-        if faixa.conteudo not in conhecidos:
-            raise ErroNoCronograma(
-                f"Dia {dia.data.isoformat()}: a faixa {faixa.titulo!r} aponta para o "
-                f"conteúdo {faixa.conteudo!r}, que não está na árvore "
-                f"(data/conteudos.json). Confira com `radar conteudos`."
-            )
+        for caminho in ([faixa.conteudo] if faixa.conteudo else []) + list(faixa.nos):
+            if caminho not in conhecidos:
+                raise ErroNoCronograma(
+                    f"Dia {dia.data.isoformat()}: a faixa {faixa.titulo!r} aponta para o "
+                    f"conteúdo {caminho!r}, que não está na árvore "
+                    f"(data/conteudos.json). Confira com `radar conteudos`."
+                )
+        for caminho in faixa.nos:
+            if faixa.materia and not caminho.startswith(faixa.materia + SEPARADOR):
+                raise ErroNoCronograma(
+                    f"Dia {dia.data.isoformat()}: a faixa {faixa.titulo!r} é de "
+                    f"{faixa.materia!r}, e o nó {caminho!r} é de outra matéria."
+                )
 
 
 def carregar(caminho: Path | None = None) -> Plano:

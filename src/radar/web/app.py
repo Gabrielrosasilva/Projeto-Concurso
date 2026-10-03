@@ -988,6 +988,9 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # A ficha de estudo de cada faixa (Etapa 6B), pelo titulo do tema.
             # So le o data/fichas.json: abrir a tela Hoje continua rapido.
             "fichas_das_faixas": servico.fichas.das_faixas(tela.blocos),
+            # O assunto, o subassunto e o elemento de cada faixa, na propria
+            # faixa (decisao 71): pela ficha, ou pelos nos do plano.
+            "arvore_das_faixas": servico.fichas.arvore_das_faixas(tela.blocos),
             # A composicao das faixas que medem (decisao 67) e a do simulado do
             # Qconcursos (decisao 69). So conta quando o dia tem uma delas.
             "composicoes": servico.composicao.das_faixas(tela.blocos, tela.data, tela.plano),

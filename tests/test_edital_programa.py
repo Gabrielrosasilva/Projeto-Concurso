@@ -88,6 +88,12 @@ def test_o_ponto_e_virgula_separa_a_lista_do_edital(programa):
     assert "nacionalidade" in constitucional
 
 
+def test_a_palavra_partida_no_hifen_volta_inteira(programa):
+    """No anexo, "Tabelas-" fica no fim de uma linha e "verdade" no comeco da
+    outra. O no da arvore e "Tabelas-verdade", e e ele que o plano aponta."""
+    assert "Tabelas-verdade" in programa["Raciocínio Lógico"]
+
+
 def test_texto_sem_o_anexo_devolve_vazio():
     """Nunca chutar: edital sem programa nao vira lista inventada."""
     assert edital_programa.ler_programa("Edital de abertura. Sao 100 vagas.") == {}

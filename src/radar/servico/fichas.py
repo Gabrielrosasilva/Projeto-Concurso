@@ -75,6 +75,28 @@ def das_faixas(blocos, escritas: list[fichas.FichaEscrita] | None = None) -> dic
     return saida
 
 
+def arvore_das_faixas(blocos, escritas: list[fichas.FichaEscrita] | None = None) -> dict:
+    """{(bloco, indice): OndeNaArvore} - o assunto, o subassunto e o elemento
+    de cada faixa, para a tela Hoje dizer na propria faixa (decisao 71).
+
+    Barato como o `das_faixas`: so le o arquivo das fichas e os caminhos da
+    arvore - nao conta nada.
+    """
+    from radar.servico import conteudos
+
+    escritas = carregar() if escritas is None else escritas
+    caminhos = set(conteudos.caminhos())
+    saida = {}
+    for bloco in blocos:
+        for indice, faixa in enumerate(bloco.faixas):
+            if getattr(faixa, "desligada", False):
+                continue
+            onde = fichas.onde_na_arvore(faixa, fichas.da_faixa(faixa, escritas), caminhos)
+            if onde is not None:
+                saida[(bloco.chave, indice)] = onde
+    return saida
+
+
 def contexto(hoje: date | None = None, plano=None,
              escritas: list[fichas.FichaEscrita] | None = None) -> fichas.Contexto:
     """Tudo o que as fichas precisam, contado uma vez so."""

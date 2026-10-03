@@ -118,7 +118,13 @@ def ler_programa(texto: str) -> dict[str, list[str]]:
     nao vira lista inventada, pela mesma razao que o quadro de materias e
     recusado quando nao fecha a conta.
     """
-    comeco = INICIO_DO_PROGRAMA.search(texto or "")
+    # A palavra partida no fim da linha volta inteira, COM o hifen: no anexo de
+    # 2019 a unica ocorrencia num assunto e "Tabelas-verdade", que e hifenizada
+    # de verdade. Juntar sem o hifen dava "Tabelasverdade"; nao juntar dava
+    # "Tabelas- verdade". Fica aqui, e nao so na leitura do PDF, para o texto de
+    # qualquer origem dar a mesma arvore - o plano aponta o no pelo nome.
+    texto = re.sub(r"(\w)-[ \t]*\n[ \t]*(\w)", r"\1-\2", texto or "")
+    comeco = INICIO_DO_PROGRAMA.search(texto)
     if not comeco:
         return {}
 
@@ -161,8 +167,4 @@ def ler_programa_do_pdf(caminho: Path) -> dict[str, list[str]]:
         log.warning("nao li o programa de %s (%s)", caminho.name, type(erro).__name__)
         return {}
 
-    # A palavra partida no fim da linha volta inteira, COM o hifen: no anexo de
-    # 2019 a unica ocorrencia e "Tabelas-verdade", que e hifenizada de verdade.
-    # Juntar sem o hifen dava "Tabelasverdade".
-    texto = re.sub(r"(\w)-[ \t]*\n[ \t]*(\w)", r"\1-\2", texto)
     return ler_programa(texto)

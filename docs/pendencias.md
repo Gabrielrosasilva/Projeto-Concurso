@@ -224,7 +224,7 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   a fatia tem a base no centro do grafico, mas a media "8.5/prova" nao diz em
   quantas provas - a amostra fica pela metade (regra inviolavel 3);
 - ⚪ **Conferir o Actions de 04/10**: o primeiro `coleta:` do radar-bot com o
-  codigo da 2A e da 2B. O de 03/10 foi verde (o commit `coleta: 2026-10-03`
+  codigo da 2A, da 2B e da 2C. O de 03/10 foi verde (o commit `coleta: 2026-10-03`
   e a prova: o job roda o `pytest -q` antes de coletar);
 - 🔴 **Acento fora da tela web** (o que sobrou da A2, feita na Etapa 1B so
   para a web): a saida do terminal (`cli.py`, ~100 textos, inclusive a
@@ -239,18 +239,18 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
-- 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A e a 2B estao feitas (as
-  faixas que medem, o simulado do Qconcursos e o sabado: decisoes 67, 69 e
-  70). Faltam, nesta ordem: a **2C** - o bonus e a interpretacao cronometrada
-  com ficha ou no, e o assunto, o subassunto e o elemento na propria faixa -;
-  e depois a **secao F** inteira (o Pedido 1);
+- 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A, a 2B e a 2C estao
+  feitas (as faixas que medem, o simulado do Qconcursos, o sabado e o assunto
+  na propria faixa: decisoes 67, 69, 70 e 71). Falta a **secao F** inteira (o
+  Pedido 1), em subetapas, comecando pelo "Onde estudar" lendo a arvore;
 - ⚪ **O R+7 dos diagnosticos refaz 5 erros** (decisao 70): e o numero do
   plano. Com mais erros, os outros ficam para a rodada "So meus erros" da
   home. Se quiser refazer todos, e trocar o `questoes: 5` da faixa de 10/10 -
   decisao sua;
 - ⚪ **Temas sem no e Portugues sem filtro** (achados da 2B): as fichas de LEP e de
   Portugues sem no (30 faixas de 03/10 a 07/11) deixam o tema, no simulado do
-  Qconcursos, sem incidencia contada; e as faixas de Portugues nao tem `filtro` do
+  Qconcursos, sem incidencia contada - e a faixa diz "a ficha nao aponta no da
+  arvore" (2C); e as faixas de Portugues nao tem `filtro` do
   Qconcursos. Dar no a uma ficha e mexer no texto da IA (precisa da sua
   conferencia); o filtro, so com o caminho exato do Qconcursos, que eu nao
   sei - me passe se quiser;

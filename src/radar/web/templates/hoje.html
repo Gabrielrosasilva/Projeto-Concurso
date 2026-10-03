@@ -112,6 +112,12 @@
     .ds a.botao-anotar{color:var(--cor-texto-suave)}
     .ds a.botao-anotar:hover{border-color:var(--cor-acao);color:var(--cor-acao)}
 
+    /* Onde a faixa esta na arvore (decisao 71): o assunto, o subassunto e o
+       elemento, na propria faixa. */
+    .faixa .na-arvore{margin:var(--esp-1) 0 0;font-size:var(--tam-sm)}
+    .faixa .na-arvore p{margin:2px 0}
+    .faixa .na-arvore .sub{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+
     /* A composicao da faixa que mede (decisao 67): de quais assuntos e
        subassuntos sao as questoes, e de onde saiu cada numero. */
     .faixa .composicao{margin:var(--esp-2) 0 0;font-size:var(--tam-sm)}
@@ -910,6 +916,21 @@
                     {% if f.cronometrado %}<span class="chip">⏱ cronometrado</span>{% endif %}
                     {% if f.opcional %}<span class="chip">{{ 'se sobrar tempo' if no_plano_b else 'opcional · fora do total' }}</span>{% endif %}
                     {% if f.baralho %}<span class="chip">🃏 {{ f.baralho }}</span>{% endif %}
+                  </div>
+                {% endif %}
+
+                {# Onde a faixa esta na arvore (decisao 71): o assunto, o
+                   subassunto - ou que a arvore nao tem - e o elemento. Pela
+                   ficha (escrita por IA) ou pelos nos do plano; nenhum no e
+                   criado (escolha 5B). #}
+                {% set onde = arvore_das_faixas.get((b.chave, loop.index0)) if arvore_das_faixas else none %}
+                {% if onde %}
+                  <div class="na-arvore">
+                    {% for a in onde.assuntos %}
+                      <p>{% if loop.first %}{{ selo(onde.origem, curto=True) }} {% endif %}Assunto: <b>{{ a.nome }}</b> · Subassunto: {% if a.subassuntos %}{{ a.subassuntos | join('; ') }}{% elif a.inteiro %}<span class="sub">o assunto inteiro</span>{% else %}<span class="sub">não há subassunto na árvore para este tema</span>{% endif %}{% if a.elementos %} · {{ a.elementos | join('; ') }}{% endif %}</p>
+                    {% endfor %}
+                    {% if onde.elemento %}<p>Elemento: {{ onde.elemento }}{% if onde.tipo_elemento %} <span class="sub">({{ onde.tipo_elemento }})</span>{% endif %}</p>{% endif %}
+                    {% if onde.sem_no %}<p class="sub">A ficha não aponta nó da árvore: o assunto é o que ela escreveu.</p>{% endif %}
                   </div>
                 {% endif %}
 

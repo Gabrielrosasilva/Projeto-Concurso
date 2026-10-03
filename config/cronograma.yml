@@ -825,6 +825,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-06'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
@@ -944,6 +948,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-07'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -1060,6 +1068,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-08'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
@@ -1153,6 +1165,8 @@ dias:
     detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
     cronometrado: true
     onde: qconcursos
+    nos:
+    - Língua Portuguesa > Compreensão e interpretação de texto (s)
   - tipo: correcao
     duracao: 25
     titulo: Correção
@@ -1168,6 +1182,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-09'
   semana: 2
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -1284,6 +1302,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-10'
   semana: 2
   reduzida: Faça só o simulado da noite.
@@ -1461,6 +1483,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-13'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
@@ -1579,6 +1605,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-14'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -1696,6 +1726,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-15'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
@@ -1792,6 +1826,8 @@ dias:
     detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
     cronometrado: true
     onde: qconcursos
+    nos:
+    - Língua Portuguesa > Compreensão e interpretação de texto (s)
   - tipo: correcao
     duracao: 30
     titulo: Correção
@@ -1807,6 +1843,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-16'
   semana: 3
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -1922,6 +1962,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-17'
   semana: 3
   reduzida: Faça só o simulado da noite.
@@ -2098,6 +2142,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-20'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
@@ -2213,6 +2261,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-21'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -2329,6 +2381,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-22'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
@@ -2426,6 +2482,8 @@ dias:
     detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
     cronometrado: true
     onde: qconcursos
+    nos:
+    - Língua Portuguesa > Compreensão e interpretação de texto (s)
   - tipo: correcao
     duracao: 30
     titulo: Correção
@@ -2441,6 +2499,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-23'
   semana: 4
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -2556,6 +2618,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-24'
   semana: 4
   reduzida: Faça só o simulado da noite.
@@ -2732,6 +2798,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-27'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
@@ -2848,6 +2918,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-28'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -2979,6 +3053,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-29'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
@@ -3086,6 +3164,8 @@ dias:
     detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
     cronometrado: true
     onde: qconcursos
+    nos:
+    - Língua Portuguesa > Compreensão e interpretação de texto (s)
   - tipo: correcao
     duracao: 30
     titulo: Correção
@@ -3101,6 +3181,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-30'
   semana: 5
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -3232,6 +3316,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-10-31'
   semana: 5
   reduzida: Faça só o simulado da noite.
@@ -3434,6 +3522,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-11-03'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Direito Constitucional à noite.
@@ -3551,6 +3643,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-11-04'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -3675,6 +3771,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-11-05'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Direitos Humanos à noite.
@@ -3782,6 +3882,8 @@ dias:
     detalhe: Textos da FEPESE, 2,5 min por questão no cronômetro. Use o método da aula de 01/10.
     cronometrado: true
     onde: qconcursos
+    nos:
+    - Língua Portuguesa > Compreensão e interpretação de texto (s)
   - tipo: correcao
     duracao: 30
     titulo: Correção
@@ -3797,6 +3899,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-11-06'
   semana: 6
   reduzida: A manhã inteira + só as {direito} questões de Lei de Execução Penal à noite.
@@ -3921,6 +4027,10 @@ dias:
     materia: Raciocínio Lógico
     titulo: 'Bônus: lógica proposicional'
     detalhe: 'Só se o trabalho deixar: 10 questões de tabelas-verdade e equivalências.'
+    nos:
+    - Raciocínio Lógico > Lógica proposicional (ou sentencial)
+    - Raciocínio Lógico > Tabelas-verdade
+    - Raciocínio Lógico > Equivalências
 - data: '2026-11-07'
   semana: 6
   reduzida: Faça só o simulado da noite.

@@ -513,6 +513,13 @@ escritas) e do Claude Code, marcado 🟣 com a procedencia, e fica em
 o botao **Conferi esta ficha** (ou `radar fichas --conferir`) marca a data e nao
 apaga a procedencia.
 
+Embaixo do titulo, a propria faixa diz **onde esta na arvore**: o assunto, o
+subassunto - ou "não há subassunto na árvore para este tema" - e o elemento
+exato (decisao 71). Vem da ficha (🟣) ou, na faixa sem ficha, dos nos que o
+plano da para ela (📌): a chave `nos` do `cronograma.yml`, uma lista de
+caminhos da arvore conferida no carregamento. O bonus de logica proposicional
+e a interpretacao cronometrada usam essa chave.
+
 ### As faixas que medem: o diagnostico e o simulado no radar
 
 O diagnostico (03/10) e o simulado de fechamento (07/11) **medem**, e por isso
