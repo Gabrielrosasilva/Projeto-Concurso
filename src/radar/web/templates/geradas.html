@@ -45,6 +45,7 @@
   </header>
 
   <div class="ds-bloco ds-bloco--ia aviso-ia">
+    {{ selo('ia') }} <b>{{ FRASE_DA_QUESTAO_DE_IA }}</b><br>
     <b>Isto treina, não mede.</b> Questão gerada nunca entra na incidência, no
     peso das matérias, nos Macetes nem no “Onde estudar primeiro” — o que a
     FEPESE cobra continua saindo só das provas de verdade. O seu acerto nelas
@@ -152,7 +153,7 @@
       {% endif %}
 
       <p class="custo">
-        {{ selo('tendencia', 'Estimativa') }}
+        {{ selo(plano.origem_do_custo, 'Estimativa') }}
         {{ plano.quantas }} questão(ões)
         {%- if materia %} de {{ materia }}{% endif %}, por
         <b>US$ {{ '%.2f'|format(plano.custo) }}</b>

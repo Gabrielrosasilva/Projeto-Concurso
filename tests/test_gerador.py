@@ -514,6 +514,9 @@ def test_a_tela_avisa_que_isto_treina_e_nao_mede(cliente):
 
     assert "treina, não mede" in pagina
     assert "nunca somado" in pagina
+    # Regra 5 do novo.md, no topo da tela que so mostra questao de IA.
+    assert "🟣" in pagina
+    assert "Gerada por IA: não é questão oficial da FEPESE." in pagina
 
 
 def test_o_botao_que_gasta_traz_o_preco_nele_mesmo(cliente):
@@ -528,6 +531,8 @@ def test_o_botao_que_gasta_traz_o_preco_nele_mesmo(cliente):
 
     assert "Ver o custo disto" in pagina
     assert "Gerar e treinar — gasta US$" in pagina
+    # O custo e estimativa, e o selo dele sai do plano (Etapa 7A).
+    assert '<span aria-hidden="true">🟡</span> Estimativa</span>' in pagina
 
 
 def test_gerar_sem_chave_volta_dizendo_o_que_falta(cliente, monkeypatch):
