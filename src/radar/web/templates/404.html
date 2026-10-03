@@ -5,52 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Página não encontrada &middot; Radar de Concursos</title>
+  {# O endereco que nao existe. Sem a barra do topo, como sempre foi: os
+     links do fim levam de volta. Cor e espaco saem do design.css; aqui so o
+     que e desta tela. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8;
-      --alerta:#b45309; --alerta-fraco:#fdeed3;
-    }
-    :root:not([data-tema="claro"]){
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff;
-        --alerta:#fbbf24; --alerta-fraco:#2e2310;
-      }
-
-    *{box-sizing:border-box}
-    body{margin:0;padding:3rem 1rem;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
-    .pagina{max-width:600px;margin:0 auto}
-
-    h1{margin:0 0 .3rem;font-size:1.5rem;letter-spacing:-.02em}
-    .caminho{font-family:ui-monospace,Consolas,monospace;font-size:.9rem;
-      color:var(--suave);margin:0 0 1.5rem}
-
-    .caixa{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:12px;padding:1.25rem;margin-bottom:1rem}
-    .caixa.motivo{background:var(--alerta-fraco);border-color:transparent}
-    .caixa.motivo h2{color:var(--alerta)}
-    h2{font-size:1rem;margin:0 0 .6rem}
-    p{margin:0 0 .7rem;font-size:.92rem}
-    p:last-child{margin-bottom:0}
-    code{font-family:ui-monospace,Consolas,monospace;font-size:.88rem;
-      background:var(--borda);padding:.1rem .4rem;border-radius:5px}
-
-    .links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
-    .links a{padding:.6rem 1rem;border-radius:8px;text-decoration:none;
-      font-size:.9rem;border:1px solid var(--borda);color:var(--texto)}
-    .links a.principal{background:var(--azul);color:#fff;border-color:transparent}
+    .caminho{margin:var(--esp-1) 0 0;font-family:var(--fonte-numero);font-size:var(--tam-sm);
+      color:var(--cor-texto-suave);overflow-wrap:anywhere}
+    .ds-cartao{margin-bottom:var(--esp-4)}
+    .ds-cartao h2{margin:0 0 var(--esp-2);font-size:var(--tam-md)}
+    .ds-cartao p{margin:0 0 var(--esp-2)}
+    .ds-cartao p:last-child{margin-bottom:0}
+    /* O motivo mais provavel e um alerta: tem a cor do alerta. */
+    .ds-cartao.motivo{background:var(--cor-aviso-fundo);border-color:transparent}
+    .ds-cartao.motivo h2{color:var(--cor-aviso)}
+    .links{display:flex;flex-wrap:wrap;gap:var(--esp-2);margin-top:var(--esp-5)}
   </style>
 </head>
-<body>
-<div class="pagina">
+<body class="ds">
+<main class="ds-pagina">
 
-  <h1>Essa página não existe aqui</h1>
-  <p class="caminho">{{ caminho }}</p>
+  <header class="ds-cabeca">
+    <h1>Essa página não existe aqui</h1>
+    <p class="caminho">{{ caminho }}</p>
+  </header>
 
   {% if servidor_velho %}
-    <div class="caixa motivo">
+    <section class="ds-cartao motivo">
       <h2>O motivo mais provável: o servidor está rodando código antigo</h2>
       <p>
         Há arquivo de código no disco mais novo que este servidor. O endereço
@@ -65,24 +46,24 @@
         <b>Como resolver:</b> volte na janela onde o <code>radar web</code>
         está rodando, pare com <code>Ctrl+C</code> e suba de novo.
       </p>
-    </div>
+    </section>
   {% else %}
-    <div class="caixa">
+    <section class="ds-cartao">
       <h2>Endereço errado</h2>
       <p>
         Não há nada nesse endereço. Se você digitou na mão, confira; se chegou
         por um link daqui de dentro, me avise.
       </p>
-    </div>
+    </section>
   {% endif %}
 
-  <div class="links">
-    <a class="principal" href="/">Radar</a>
-    <a href="/previsao">Previsão de abertura</a>
-    <a href="/macetes">Macetes</a>
-    <a href="/simulado">Simulado</a>
-  </div>
+  <nav class="links" aria-label="Voltar para o radar">
+    <a class="ds-botao" href="/">Radar</a>
+    <a class="ds-botao ds-botao--secundario" href="/previsao">Previsão de abertura</a>
+    <a class="ds-botao ds-botao--secundario" href="/macetes">Macetes</a>
+    <a class="ds-botao ds-botao--secundario" href="/simulado">Simulado</a>
+  </nav>
 
-</div>
+</main>
 </body>
 </html>
