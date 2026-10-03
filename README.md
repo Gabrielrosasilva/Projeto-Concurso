@@ -469,6 +469,31 @@ A home (Meu foco) tem um cartao no topo com o que esta acontecendo agora e o
 botao **Abrir o dia**. Antes do ciclo ele diz quando comeca e leva ao
 primeiro dia; depois do fim, some.
 
+### A ficha de estudo de cada tema
+
+Toda faixa de um tema que tem ficha - a teoria, a fixacao, a aprendizagem, o
+R+7, o R+30 e o Plano B - ganha o botao **📋 Ficha de estudo**. A ficha e a
+mesma em todas: o tema e reconhecido pelo titulo da faixa, sem o prefixo
+("Fixação: ", "R+7: "...). A aba **Hoje > Fichas** lista os temas de hoje em
+diante, com e sem ficha, na ordem do calendario e com a prioridade de cada um
+na linha.
+
+A ficha diz, com o selo da origem de cada parte: **por que agora** (o dia do
+cronograma e cada fator da prioridade, com o numero), a **fonte** (🟢 a lei do
+`config/leis.yml`, ou a fonte sugerida), **o que ler exatamente** e os
+artigos-chave do dia, **como pesquisar**, **o que entender** e **o que
+memorizar**, as **pegadinhas** (🔵 as das questoes reais, com o numero, e 🟣 as
+escritas), **como a FEPESE cobrou** (alvo e complementar em linhas separadas,
+com a amostra), as **questoes reais** do escopo, **quantas questoes fazer** (as
+faixas do plano e um `radar gerar` por no), os **erros a refazer** e **quando
+revisar**. Campo sem dado diz a frase padrao, e nao inventa.
+
+O texto (o que ler, como pesquisar, entender, memorizar e as pegadinhas
+escritas) e do Claude Code, marcado 🟣 com a procedencia, e fica em
+`data/fichas.json` (versionado). Ele so vale como conferido depois que eu leio:
+o botao **Conferi esta ficha** (ou `radar fichas --conferir`) marca a data e nao
+apaga a procedencia.
+
 ### No terminal
 
 ```bash
@@ -481,6 +506,8 @@ radar hoje --plano-b 30                 # so mostra o Plano B do dia (30 ou 60)
 
 `--marcar` aceita `ideal`, `reduzida`, `minima` ou `nao_fiz`. Marcar de novo o
 mesmo dia corrige, nao duplica. Dia futuro e dia fora do plano sao recusados.
+A faixa com ficha ganha o 📋, e o fim da saida lista as fichas do dia com o
+`radar fichas --tema ... --data ...` de cada uma.
 
 **O que eu anoto aqui e diario, nao medida.** As questoes feitas e os acertos
 sao digitados a mao (quase tudo do Qconcursos) e nao entram em nenhum acerto
@@ -925,7 +952,23 @@ radar complementar --aplicar  # grava quais provas entram no acervo complementar
 radar desempenho            # o MEU acerto por no, com o estado e a amostra
 radar desempenho --materia "Lingua Portuguesa" --desde-o-inicio
 radar desempenho --revisar  # o que voltou para revisao hoje, e por que
+radar fichas                # os temas de hoje em diante: com ficha ou sem, e a prioridade
+radar fichas --tema "Art. 5º, caput e incisos I a XVI" --data 2026-10-06
+radar fichas --pedido       # pede ao Claude Code as fichas dos temas sem ficha
+radar fichas --importar data/resposta_ia.json   # grava as que passam na conferencia
+radar fichas --conferir art-5o-caput-e-incisos-i-a-xvi   # marca como lida por mim
 ```
+
+**A ficha de estudo e a prioridade (Etapa 6B).** `radar fichas --tema` mostra
+a mesma ficha da tela (ver [A ficha de estudo de cada tema](#a-ficha-de-estudo-de-cada-tema)).
+O texto vem pelo caminho sem API: `--pedido` escreve `data/pedido_ia.json` com
+os temas do cronograma que ainda nao tem ficha (com as faixas, os
+artigos-chave e a arvore da materia), e `--importar` recusa ficha de outro
+tema, no que a arvore nao tem, no dentro de outro, campo obrigatorio vazio e
+texto com cara de previsao. A ficha que eu ja conferi nao e sobrescrita;
+`--pedido --refazer` pede de novo as que eu ainda nao conferi. A prioridade
+de cada tema segue o `config/prioridade.yml` (ver
+[A prioridade das fichas](#a-prioridade-das-fichas-em-configprioridadeyml)).
 
 **O meu desempenho por conteudo (Etapa 4).** `radar desempenho` e
 **Analises > Meu desempenho** respondem como eu vou em cada no da arvore, e nao
@@ -1157,6 +1200,24 @@ lugar em que a versao vigente esta certa e a fonte.
 Abaixo de quantas questoes e provas o radar nao tira conclusao. Hoje so a
 secao `acervo` (os padroes de cobranca: 3 questoes em 2 provas); a do meu
 desempenho entra na Etapa 4.
+
+### A prioridade das fichas, em `config/prioridade.yml`
+
+A regra que ordena os temas e explica "por que agora" na ficha. E regra de
+priorizacao, e nao previsao de prova:
+
+```
+prioridade = peso da materia no edital (questoes da prova)
+           x (fatia do ALVO + peso_do_complementar x fatia do complementar)
+           x (1 - meu acerto, so com amostra suficiente; sem ela, 1)
+           x tempo (1 a fator_maximo, pelos dias desde a ultima pratica)
+           x multiplicador, quando o conteudo esta na fila de revisao
+```
+
+Os numeros ajustaveis: `piso_em_questoes` (o tema que nao apareceu nas provas
+conta meia questao, para nao zerar), `peso_do_complementar` (0,25; com 0 a
+ordem e so a do alvo), `dias_para_dobrar` e `fator_maximo` do tempo, e o
+`multiplicador` da revisao (1,5). Mude la e a ficha mostra a conta nova.
 
 ### A taxonomia, em `config/taxonomia.yml`
 

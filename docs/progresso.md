@@ -17,7 +17,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 8 | 3B — Acervo complementar FEPESE | 🟡 acervo e 3 lotes classificados; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
 | 10 | 5 — Geração de questões | ✅ |
-| 11 | 6B — Cronograma operacional | ⬜ |
+| 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; falta a sua conferência das 61 fichas e o Ciclo 2, depois do simulado de 07/11 |
 | 12 | 7A — Selos e marcação de IA | ⬜ |
 | 13 | 7B — As 6 telas no design system | ⬜ |
 | 14 | 8 — Auditoria final integrada | ⬜ |
@@ -1405,4 +1405,110 @@ as tinha. Exportado do banco real: **as 50 voltaram** (30 `do_zero`, 20
   motivo);
 - [x] por que os nomes literais não rodam está registrado aqui e na decisão 31
   — eles não existem na árvore, e criá-los violaria a regra inviolável 9.
-"""
+
+---
+
+## 6B — Cronograma operacional: fichas e prioridade (02/10/2026)
+
+- Situação: 🟡 feita; falta a sua conferência das 61 fichas e o Ciclo 2
+  (passo 5), que depende do simulado de 07/11
+- Datas: início 02/10 · fim 02/10
+
+**Como foi feita.** Em três sessões, no mesmo dia:
+1. o código — a `FichaDeEstudo`, a prioridade, o pedido e a importação, as
+   telas e o terminal —, com 56 testes novos;
+2. o texto das 61 fichas, escrito pelo Claude Code em partes de duas por
+   arquivo e conferido uma a uma pelo `conferir_escrita` antes de juntar;
+3. a importação, os consertos achados no caminho e os docs.
+
+**O que mudou em relação ao roteiro, e por quê** (decisões 41 a 52):
+- o tema é a chave (o título da faixa sem o prefixo), e não uma chave
+  `conteudo` gravada em cada faixa: o `cronograma.yml` não muda por causa da
+  ficha (decisão 42);
+- a fila de revisão **sugere** e não troca o tema das faixas R+7/R+30: o
+  check e o registro do dia gravam o tema do calendário (decisão 45);
+- os artigos-chave da ficha saem do `essencial`, e não o contrário: o Plano B
+  não passa a depender de texto de IA ainda não conferido (decisão 46);
+- o Ciclo 2 fica para depois do simulado de 07/11, que é o que o decide
+  (decisão 52).
+
+**Arquivos alterados.**
+- novos: `src/radar/fichas.py`, `src/radar/prioridade.py`,
+  `src/radar/servico/fichas.py`, `config/prioridade.yml`,
+  `src/radar/web/templates/ficha.html` e `fichas.html`,
+  `tests/test_fichas.py`, `tests/test_prioridade.py`,
+  `tests/fixtures/cronograma_fichas.yml`;
+- `src/radar/cli.py` — `radar fichas` e o 📋 no `radar hoje`;
+- `src/radar/web/app.py`, `_topo.html` e `hoje.html` — a sub-aba Fichas, a
+  página da ficha e o botão nas faixas;
+- `src/radar/incidencia.py` e `servico/incidencia.py` — a linha de um escopo
+  de vários nós e o complementar do escopo;
+- `servico/desempenho_por_conteudo.py` — o desempenho de um escopo de vários
+  nós, cada resposta uma vez; `servico/estudo.py` — o "refazer" do escopo;
+- `src/radar/onde_estudar.py` — o fator de tempo com os números vindos de fora;
+- `servico/manual.py` — o pedido e a importação de fichas, e a data da
+  procedência no fuso de Florianópolis (decisão 51);
+- `config/cronograma.yml` — o detalhe da teoria e o Plano B de 09/10, 28/10 e
+  30/10 pelo texto vigente da LEP (decisão 48);
+- testes que já existiam: `test_sincronizar.py` (o `data/fichas.json` no
+  sincronizar), `test_registro_estudo.py` (o teste que sobrescrevia o `data/`
+  real, decisão 50) e `test_ia_manual.py` (a data da procedência);
+- dados: `data/fichas.json` (novo) e `data/questoes_geradas.json` (as 50 de
+  volta);
+- docs: `decisoes.md` (41 a 52), `historico.md`, `pendencias.md`,
+  `README.md`, `CLAUDE.md`, este arquivo.
+
+**Antes × depois dos dados** (o banco não mudou).
+
+| Arquivo | Antes | Depois |
+|---|---|---|
+| `data/fichas.json` | não existia | 61 fichas: Português 26, LEP 12, Penal 6, Constitucional 6, Direitos Humanos 6, Raciocínio Lógico 5 — todas por conferir |
+| `data/questoes_geradas.json` | `[]` no git desde a Etapa 2 | 50 (30 `do_zero`, 20 `variacao`), exportadas do banco real |
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| Suíte inteira antes da importação (02/10, 21h) | 2243 passed, 3 failed: os 2 da 6B que pedem o `data/fichas.json` e o do JSON das geradas vazio |
+| `test_fichas`, `test_prioridade`, `test_geracao_por_conteudo`, `test_registro_estudo` e `test_sincronizar`, depois da importação e do conserto | 144 passed |
+| `test_ia_manual` e `test_central_de_macetes` (a data da procedência) | 31 passed |
+| `test_prioridade` e `test_fichas`, depois do texto da ficha sem nó (decisão 43) | 73 passed |
+| Suíte inteira, final (PC, 02/10) | **2248 passed**, 0 failed, 21 min 44 s — e depois dela o `data/questoes_geradas.json` continua com as 50, o caderno e os extras intactos e nenhuma cópia nova em `data/copias/` |
+
+**Comando real rodado (banco real).**
+1. `radar fichas --importar data/resposta_ia.json` → "61 ficha(s) gravado(s)",
+   procedência "Claude Code, importado manualmente, em 02/10/2026";
+2. `radar fichas --tema "Art. 5º, caput e incisos I a XVI" --data 2026-10-06`
+   → a ficha do cenário da §23 (abaixo);
+3. `radar hoje --data` 2026-10-09, 2026-10-28 e 2026-10-30 → a lei seca e o
+   Plano B com o texto novo da LEP;
+4. as telas `/fichas`, `/fichas/<id>` e `/hoje` → 200, com o selo 🟣, o "por
+   que agora" e as questões reais.
+
+**Critério de conclusão** — o cenário da §23 com dados reais: "Direito
+Constitucional → Direitos Fundamentais → Art. 5º → incisos I a XVI". A ficha
+de 06/10 (R+7) diz:
+- [x] o que ler, onde e como procurar: "CF, art. 5º: o caput e os incisos I a
+  XVI, no texto oficial (Planalto)", a fonte 🟢 (a Constituição, com o link),
+  os 6 artigos-chave do dia e 3 buscas;
+- [x] o que entender (8 itens) e o que memorizar (5);
+- [x] as pegadinhas e como a FEPESE cobrou: 3 do acervo (2013-q31 do alvo,
+  conferida; 2024-q24 e 2024-q26 do complementar) e 4 escritas; "Polícia Penal
+  SC: 1 questão · 1 prova" e "Acervo complementar FEPESE: 2 questões · 2
+  provas" em linhas separadas, e a frase "Não há evidência suficiente no
+  acervo para afirmar isso." no padrão do alvo, abaixo da amostra;
+- [x] as questões reais: 2013-q31 (alvo), 2024-q24 e 2024-q26 (complementar);
+- [x] quantas fazer e quais geradas: as faixas do plano (aprendizagem de 15,
+  com consulta; R+7 e R+30 de 10, sem consulta), "comece pelas 3 reais" e um
+  `radar gerar` por nó (nenhuma gerada no escopo ainda);
+- [x] os erros a revisar: 0 no radar e 0 no caderno neste escopo, nunca
+  somados;
+- [x] por que hoje: "O cronograma de 06/10 traz este tema: R+7 (a volta do
+  estudo de 29/09)" e cada fator da prioridade, com o número e a origem
+  (0,41; 49º de 61 temas).
+
+Fica em aberto:
+- [ ] a sua conferência das 61 fichas (na conferência, olhar os nós: 13 ficaram
+  sem nó, decisão 43);
+- [ ] o Ciclo 2 (passo 5 do roteiro): a proposta depois do simulado de 07/11 e a
+  sua aprovação antes de 09/11.

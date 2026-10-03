@@ -98,7 +98,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (01/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (02/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao (design system, home, erros,
 compilado, revisao 1-7-30, Macetes, `gerar --pedido`) e o **Ciclo 1 de estudo,
@@ -132,11 +132,19 @@ pelo sinal do canto; o das 22h nasce fechado, e a dobra e lembrada pelo
 `static/dobra.js`) e a **5** (de 02/10: o filtro hierarquico do `radar gerar`
 - materia > assunto > subassunto > elemento, com sugestao de nome e sem alargar
 escopo -, os tres modos treino/revisao/simulado, e a base de cada gerada
-gravada com a evidencia). **Proxima: Etapa 6B** (cronograma operacional:
-fichas de tarefa e prioridade). 
-**Em aberto:** as faixas de estudo nao seguem o que a FEPESE cobra; 6 telas no
-CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md); arvore
-no [README](README.md); banco em `data/radar.db`.
+gravada com a evidencia) e a **6B** (de 02/10: a ficha de estudo de cada tema
+do cronograma - o que ler, como pesquisar, entender, memorizar, pegadinhas,
+como a FEPESE cobrou, questoes reais, quantas fazer, erros e por que agora -,
+na tela Hoje e no `radar fichas`, com a prioridade do `config/prioridade.yml`;
+as **61 fichas** do resto do Ciclo 1 escritas pelo Claude Code em
+`data/fichas.json`, **todas por conferir**; o texto de lei pelo vigente da
+compilacao da Camara). **Falta da 6B:** a sua conferencia das fichas e o
+**Ciclo 2**, que depende do simulado de 07/11 e da sua aprovacao antes de
+09/11. **Proxima: Etapa 7A** (selos, frase padrao e marcacao de IA).
+**Em aberto:** o numero de questoes das faixas ainda e o do plano, e nao o da
+incidencia (a ficha mostra a incidencia e manda comecar pelas reais); 6 telas
+no CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md);
+arvore no [README](README.md); banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,
 herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
@@ -146,7 +154,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 tela nenhuma refaz a conta, e template nenhum soma. **Todo minimo de amostra sai do
 `config/amostra.yml`**, pelo `radar/amostra.py`: nenhuma tela tem regua propria
 (o 3 do `servico/erros.py` e a excecao declarada - ele mede fatia de motivo de
-erro, nao acerto). **O desempenho por conteudo e do
+erro, nao acerto). **A prioridade de um tema sai do `config/prioridade.yml`**,
+pelo `radar/prioridade.py`, e a ficha de estudo do `radar/fichas.py`: o tema e
+reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
+`data/fichas.json`, 🟣 com a procedencia. **O desempenho por conteudo e do
 `servico/desempenho_por_conteudo.py`**, e os dois recortes - medido no radar e
 anotado - **nunca sao somados na tela**, so no estado da amostra.
 **Alvo, complementar e

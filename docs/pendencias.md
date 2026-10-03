@@ -39,21 +39,27 @@ Sugestoes feitas e **ainda nao aprovadas** (em ordem de impacto):
    170 do alvo** (todas as materias, nao so Direito), pelo Claude Code;
    e **conferido por voce em 02/10**. O complementar e da 3B (a conferencia
    dele ainda nao tem tela: ver B.8);
-2. 🟡 um mapa de incidencia por tema. **Feito na 3A** (`radar incidencia` e
+2. ✅ um mapa de incidencia por tema. **Feito na 3A** (`radar incidencia` e
    Analises > Incidencia), com os rotulos sem previsao: "apareceu nas 2
-   provas", "apareceu em 1 de 2", "nao apareceu nas provas analisadas". Falta
-   mostra-lo em cada faixa: e da 6B;
+   provas", "apareceu em 1 de 2", "nao apareceu nas provas analisadas". **Na
+   faixa, feito na 6B (02/10):** a ficha de cada tema traz "Como a FEPESE
+   cobrou", com o alvo e o complementar em linhas separadas e a amostra;
 3. 🟡 trocar a lei seca por "artigo cobrado": 10-15 min lendo so os artigos
    que cairam, mais a lista das pegadinhas, cada uma com o numero da questao
    real; o tempo que sobra vai para questoes. **Provisorio feito na 6A
    (02/10):** a lei seca virou "dirigida", 20 min, so os artigos-chave do
-   `essencial` do dia (selecao do plano, nao incidencia). Os artigos que a
-   FEPESE cobrou entram na 6B;
-4. questoes distribuidas pela incidencia, nao uma por artigo (FEPESE real
-   primeiro; as da IA so no modo `variacao`);
-5. 🟡 teoria com teto: uma fonte por tema, nunca video por artigo.
+   `essencial` do dia (selecao do plano, nao incidencia). **Na 6B (02/10)**, a
+   ficha de cada tema lista as questoes reais com o artigo de cada uma e as
+   pegadinhas com o numero da questao; a faixa de lei seca continua com os
+   artigos do `essencial`;
+4. 🟡 questoes distribuidas pela incidencia, nao uma por artigo (FEPESE real
+   primeiro; as da IA so no modo `variacao`). **Na 6B (02/10)**, a ficha manda
+   comecar pelas reais do escopo e traz um `radar gerar` por no; o numero de
+   questoes de cada faixa continua o do plano;
+5. ✅ teoria com teto: uma fonte por tema, nunca video por artigo.
    **Provisorio feito na 6A:** teoria de 40 min com "uma fonte so: passou do
-   tempo, siga para a fixacao" no detalhe. A ficha da tarefa e da 6B.
+   tempo, siga para a fixacao" no detalhe. **A ficha da tarefa, feita na 6B
+   (02/10):** cada tema diz o que ler exatamente e uma fonte so.
 
 **Perguntas que ficaram sem resposta** (preciso delas antes de qualquer
 roteiro):
@@ -166,7 +172,32 @@ O A2 e o A3, que mexiam nos mesmos templates, foram feitos na Etapa 1B.
 
 - 🔴 **`config/leis.yml`**: conferir a lista `mudancas` (leis alteradas depois
   das provas). Esta vazia; a tela de Macetes diz "ainda nao gravada" em vez de
-  inventar;
+  inventar. **Ponto de partida, levantado na 6B (02/10):** as mudancas da LEP
+  depois de 2019, todas no texto compilado da Camara - Lei 13.964/2019 (RDD,
+  art. 112 em percentuais, saida temporaria), Lei 14.843/2024 (exame
+  criminologico na progressao, saida temporaria so para estudo, art. 124
+  revogado, monitoracao), Lei 14.994/2024 (art. 41, § 1º: o juiz suspende os
+  direitos; § 2º), Lei 15.280/2025 (art. 119-A), Lei 15.295/2025 (art. 9º-A),
+  Leis 15.358, 15.402, 15.407 e 15.410/2026 (art. 112 com regra geral de 1/6 e
+  hediondos de 70% a 85%, RDD, arts. 41-A e 41-B, art. 50, IX, art. 86);
+- 🔴 **Conferir as 61 fichas da 6B** (Hoje > Fichas, botao "Conferi esta
+  ficha", ou `radar fichas --conferir <tema>`), comecando pelas da semana. Na
+  conferencia, vale olhar os nos de cada uma: 13 ficaram sem no (decisao 43);
+- 🔴 **Fichas de Direito Penal e Constitucional sem o texto vigente**: as 12
+  foram escritas antes de a 6B adotar a conferencia pelo texto compilado
+  (decisao 48). O CP e a CF tambem mudaram depois de 2019; refazer a
+  conferencia artigo por artigo antes de estudar cada tema;
+- 🔴 **Reclassificacoes que as fichas mostraram**: 2 questoes de regencia
+  estao em "Emprego de tempos e modos verbais"; as de pronome do complementar
+  estao em "Classes gramaticais variaveis", junto com substantivo e adjetivo;
+  as de concordancia, crase, pontuacao e complemento nominal estao so no nivel
+  do assunto, e por isso as fichas de tema nao as contam; "Regras de aplicacao
+  geral" (Regras de Mandela) nomeia a Parte I inteira (regras 1 a 85);
+- ⚪ **Pastas de teste em `data/copias/`**: 15 pastas `migracao-v0-para-v*`
+  com `antigo.db` sao copias do banco de um teste, e nao do banco real (a
+  causa saiu na 6B, decisao 50). Podem ser apagadas a mao. E o
+  `migracoes.ultima_copia()` ordena pelo NOME, que comeca pela versao, e nao
+  pela hora como diz a docstring: hoje acerta por acaso (v3 > v0);
 - 🔴 **Importar macete e explicacao**: `radar gerar --pedido --macetes` e
   `--explicacoes`, e o `--importar` de cada um. `data/macetes.json` e
   `data/explicacoes.json` ainda nao existem;
@@ -174,11 +205,13 @@ O A2 e o A3, que mexiam nos mesmos templates, foram feitos na Etapa 1B.
   com assunto; "Onde estudar primeiro" so tem Portugues e Raciocinio Logico;
 - 🔴 **Cronograma por IA**: fase futura da especificacao; so entra se a revisao
   espacada simples nao bastar, com o teto de gasto do `gerador.py`;
-- ⚪ **Ciclo 2** (09/11 a 19/12, "o resto do programa"): a faixa de 07/11, no fim do
-  Ciclo 1, manda comparar o acerto por materia com o diagnostico de 03/10; e
-  esse numero que decide o Ciclo 2. Depois, editar o `config/cronograma.yml`
-  (as faixas gravadas no diario continuam contando; o check guarda materia e
-  assunto);
+- 🔴 **Ciclo 2** (09/11 a 19/12, "o resto do programa") - **o passo 5 da 6B**
+  (decisao 52): a faixa de 07/11, no fim do Ciclo 1, manda comparar o acerto
+  por materia com o diagnostico de 03/10; e esse numero que decide o Ciclo 2.
+  Depois dele: a proposta pela prioridade (`config/prioridade.yml`) e pela
+  rotina da 6A, a minha aprovacao e so entao o `config/cronograma.yml` (as
+  faixas gravadas no diario continuam contando; o check guarda materia e
+  assunto). Prazo: antes de 09/11;
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
 - ⚪ **D1 e E1 a E4** foram commitados e testados, mas nao conferi uma a uma

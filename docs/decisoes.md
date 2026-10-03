@@ -2868,3 +2868,131 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     arquivo (30 `do_zero`, 20 `variacao`), e um teste novo
     (`test_o_json_real_das_geradas_nao_esta_vazio`) nao deixa isso voltar a
     acontecer calado.
+
+    **Revisto na Etapa 6B (02/10/2026):** o conserto nao chegou ao commit da
+    Etapa 5 - o arquivo continuava `[]` no git. A causa era um teste, e esta na
+    decisao 50.
+
+## Etapa 6B — a ficha de estudo e a prioridade (02/10/2026)
+
+41. **a ficha ja nasce com os selos do novo.md** - 🟢 fonte oficial, 🔵
+    estatistica do acervo, 🟡 analise automatica, 🟣 gerado por IA -, mais o 📌
+    do que o plano escolheu (o cronograma.yml). Cada campo tem UMA origem,
+    escrita no `ORIGEM_DO_CAMPO` do `src/radar/fichas.py`. O resto do site
+    troca os selos na Etapa 7A; a ficha nao espera por ela.
+
+42. **o tema e a chave, e nao uma chave `conteudo` em cada faixa.** O roteiro
+    previa gravar o `conteudo` em toda faixa do resto do Ciclo 1. A ficha e
+    reconhecida pelo TITULO exato da faixa, sem o prefixo ("Fixação: ",
+    "Aprendizagem: ", "R+7: ", "R+30: ", "Artigos-chave: ", "Questões de
+    prova: "), e pela materia. **Por que:** o cronograma.yml nao muda por
+    causa da ficha, e a mesma ficha aparece em toda faixa do tema - teoria,
+    fixacao, aprendizagem, revisoes e Plano B. Nada e aproximado: titulo
+    diferente e outro tema. A lista de prefixos e fechada; um prefixo novo no
+    YAML tem de entrar no `PREFIXOS_DO_TEMA`.
+
+43. **o escopo da ficha e a lista de nos (`nos`), escolhida com o porque.**
+    Dela saem as questoes reais, a incidencia, os padroes e o meu desempenho.
+    A escolha e julgamento, e por isso vem justificada (`por_que_estes_nos`) e
+    espera a minha conferencia. As regras:
+    - sem no que sirva, a lista fica VAZIA e diz por que - nenhum no e criado
+      (regra 9). Em 02/10 sao 13 assim: 6 da LEP (os trechos sem questao
+      classificada) e 7 de Portugues (questoes classificadas so no nivel do
+      assunto, junto com as de outro tema). A ficha sem no vale o piso de meia
+      questao na prioridade, mas o "por que agora" diz que o tema nao tem no e
+      que o acervo nao foi contado - e nao "nao apareceu nas provas", que
+      ninguem verificou (regra inviolavel 4);
+    - a materia inteira nunca e escopo, e um no dentro de outro na mesma ficha
+      e recusado (a mesma resposta contaria duas vezes);
+    - **fichas irmas nao repetem no.** Quando um no cobre dois temas (o
+      subassunto "Concordancia verbal" serve a regra geral e aos casos
+      especiais), ele fica numa so, e a outra diz onde ele esta;
+    - **as revisoes ativas e a bateria de interpretacao cobrem os assuntos
+      inteiros de proposito:** sao revisao do que as fichas de tema cobrem, e
+      as questoes classificadas so no nivel do assunto, que nenhuma ficha de
+      tema pode contar, entram nelas.
+
+44. **a prioridade mora no `config/prioridade.yml`, e e regra, nao
+    previsao.** A conta e a do Onde estudar, evoluida: peso da materia no
+    edital x (fatia do ALVO + 0,25 x fatia do complementar) x (1 - acerto, so
+    com amostra suficiente) x tempo (1 a 2, dobra em 30 dias) x 1,5 quando o
+    conteudo esta na fila de revisao. Tema do edital que nao apareceu nas
+    provas conta **meia questao** (piso), para nao zerar e ficar sempre abaixo
+    de quem apareceu uma vez. O complementar entra em fator proprio, com o peso
+    escrito no YAML (§15); com peso 0 a ordem e so a do alvo. A ficha mostra
+    cada fator com o numero e a origem, e a frase "e regra de priorizacao, nao
+    previsao de prova".
+
+45. **a fila de revisao SUGERE, e nao troca o tema da faixa R+7/R+30.** O
+    roteiro dizia que o conteudo dessas faixas seria escolhido pela fila na
+    hora de mostrar. A faixa continua com o tema do calendario - e ele que o
+    check, o registro do dia e o caderno gravam -, e a fila aparece na ficha,
+    em "Quando revisar", com o motivo, e pesa x1,5 na prioridade. Trocar o
+    tema na hora de mostrar faria a faixa dizer uma coisa e o registro outra.
+
+46. **os artigos-chave da ficha saem do `essencial` do dia da teoria**, e nao
+    o contrario. O roteiro dizia que o Plano B tiraria o essencial da ficha. O
+    `essencial` e selecao do plano (📌), ja alimenta o Plano B e a lei seca
+    dirigida, e o texto da ficha e de IA (🟣) e espera conferencia: o Plano B
+    nao passa a depender dele. So a ficha do tema da TEORIA do dia mostra os
+    artigos-chave - o essencial e do Direito do dia, e nao do Portugues.
+
+47. **o texto da ficha vem do Claude Code, pelo pedido e importar, e a
+    conferencia e minha.** `radar fichas --pedido` escreve o pedido com os
+    temas sem ficha; a importacao recusa tema fora do pedido, no fora da
+    arvore, campo obrigatorio vazio e texto com cara de previsao ("vai cair",
+    "a FEPESE sempre..."). A procedencia e "Claude Code, importado
+    manualmente, em <data>" - nunca o nome de um modelo. Conferir
+    (`--conferir` ou o botao) grava a data e NAO apaga a procedencia; a ficha
+    conferida nao e sobrescrita por importacao nova, e `--pedido --refazer`
+    pede de novo so as nao conferidas. As 61 de 02/10 estao todas por
+    conferir.
+
+48. **texto de lei na ficha e o texto VIGENTE, conferido na compilacao da
+    Camara.** O Planalto recusa a conexao do Claude Code; a norma atualizada
+    da Camara (Centro de Documentacao e Informacao) traz cada dispositivo com a
+    lei que deu a redacao. As fichas da LEP dizem ate que lei o texto foi
+    conferido ("ate a Lei 15.410, de 20/05/2026") e quando a mudanca e
+    posterior as provas de 2013 e 2019. A LEP mudou muito em 2024-2026 (art.
+    9º-A, art. 41, § 1º, art. 52, art. 112, saida temporaria, art. 124
+    revogado), e o detalhe do cronograma de 09/10, 28/10 e 30/10 foi corrigido
+    pelo mesmo texto. As fichas de Direito Penal e Constitucional, escritas
+    antes, nao passaram por essa conferencia (ver pendencias).
+
+49. **fonte sugerida: uma so por ficha, quando nao ha lei.** Portugues: "A
+    Gramatica para Concursos Publicos" (Fernando Pestana); interpretacao:
+    "Para Entender o Texto" (Fiorin e Platao); tipos de discurso: a "Nova
+    Gramatica do Portugues Contemporaneo" (Cunha e Cintra); redacao oficial: o
+    Manual de Redacao da Presidencia, 3ª edicao (2018); Raciocinio Logico:
+    "Raciocinio Logico Simplificado", vols. 1 e 2 (Sergio Carvalho e Weber
+    Campos); doutrina de Direitos Humanos: o "Curso de Direitos Humanos" (Andre
+    de Carvalho Ramos); Regras de Mandela: a traducao oficial do CNJ (2016). As
+    revisoes ativas apontam para o caderno de erros, e a bateria de
+    interpretacao para as minhas notas da aula de 01/10.
+
+50. **teste nenhum aponta o banco para o tmp sem apontar os dados.** O
+    `test_tabela_nova_entra_em_banco_antigo` criava um banco sem versao no
+    `tmp_path` e mudava so o `RADAR_DATABASE_URL`. O banco sem versao migra
+    sozinho, e os passos 1 e 4 da migracao exportam os JSON versionados e
+    copiam o banco para `<dados>/copias`. Resultado: a cada `pytest`, o
+    `data/questoes_geradas.json` virava o `[]` do banco vazio, o caderno de
+    erros e os extras eram regravados, e uma pasta `migracao-v0-para-v*` com
+    `antigo.db` caia em `data/copias/`. Foi assim que as 50 geradas sumiram do
+    arquivo na Etapa 2 e de novo depois do conserto da Etapa 5 (a suite
+    inteira, rodada no fim, sobrescreveu o arquivo antes do commit).
+    **Consertado:** o teste aponta tambem o `RADAR_DATA_DIR` para o
+    `tmp_path`, e as 50 foram exportadas de novo do banco real (0 -> 50: 30
+    `do_zero`, 20 `variacao`). Depois da suite inteira, o arquivo continua com
+    as 50 - conferido antes do commit.
+
+51. **a data da procedencia e a de Florianopolis.** O `procedencia()` formatava
+    o `agora()`, que e UTC: as fichas importadas as 22h de 02/10 sairam "em
+    03/10/2026". Passou a converter para o fuso local, com teste de hora fixa,
+    e as 61 foram reimportadas com a data certa (nenhuma estava conferida).
+
+52. **o Ciclo 2 fica para depois do simulado de 07/11.** O passo 5 da 6B
+    (proposta -> aprovacao -> YAML) nao foi feito: a faixa de correcao de
+    07/11 manda comparar o acerto por materia com o diagnostico de 03/10, e "e
+    esse numero que decide o Ciclo 2". A proposta sai depois dele, pela
+    prioridade e pela rotina da 6A, e so vira YAML com a minha aprovacao,
+    antes de 09/11.

@@ -1629,3 +1629,49 @@ reusa o `artigo`, que ja era isso. Nas 50 antigas os campos ficam nulos.
 desde o commit da Etapa 2, enquanto o banco tinha as 50. O arquivo e o
 registro, e o banco se reconstroi dele: refazer o banco teria perdido as 50.
 Exportado do banco real (50 de volta) e com teste para nao repetir.
+
+## Etapa 6B — a ficha de estudo e a prioridade (02/10)
+
+**A estrutura.** `radar/fichas.py` (puro) monta a `FichaDeEstudo` com os
+campos da §11, cada um com a origem (📌 plano, 🟢 oficial, 🔵 acervo, 🟡
+automatico, 🟣 IA). `radar/prioridade.py` (puro) faz a conta do
+`config/prioridade.yml`. `servico/fichas.py` junta o que o banco ja conta - a
+incidencia do alvo e do complementar, o desempenho por conteudo, a fila de
+revisao, as geradas, o cronograma - e le e grava o `data/fichas.json`. O tema
+e reconhecido pelo titulo da faixa sem o prefixo, e a mesma ficha aparece na
+teoria, na fixacao, na aprendizagem, no R+7, no R+30 e no Plano B.
+
+**Onde aparece.** O botao 📋 Ficha de estudo nas faixas da tela Hoje, a
+sub-aba Hoje > Fichas (os temas de hoje em diante, na ordem do calendario, com
+a prioridade de cada um na linha), a
+pagina de cada ficha com o botao "Conferi esta ficha", e o terminal: `radar
+fichas` (lista, `--tema`, `--pedido`, `--importar`, `--conferir`) e o `radar
+hoje`, que marca a faixa com 📋 e lista as fichas do dia.
+
+**O texto das 61 fichas** foi escrito pelo Claude Code em tres sessoes, em
+partes de duas fichas por arquivo (`fichas_*.json`, conferidas uma a uma
+pelo `conferir_escrita` antes de juntar), e importado em 02/10 pelo
+`radar fichas --importar`. Para a LEP, as Regras de Mandela e a redacao
+oficial, o texto foi conferido no documento oficial: a LEP compilada pela
+Camara (ate a Lei 15.410, de 20/05/2026), a traducao do CNJ das Regras de
+Mandela e o Manual de Redacao da Presidencia (3ª edicao). A LEP tinha mudado
+muito desde as provas - o juiz, e nao mais o diretor, suspende os direitos do
+art. 41; o art. 112 voltou a regra geral de 1/6 e levou os hediondos a 70% a
+85%; a saida temporaria ficou so para estudo e o art. 124 foi revogado; o
+art. 9º-A passou a valer para toda reclusao em regime inicial fechado. O
+detalhe do cronograma de 09/10, 28/10 e 30/10 foi corrigido junto, e a ficha
+dos arts. 1º a 9º-A, escrita antes, tambem.
+
+**Achado no caminho, e consertado de vez:** o JSON das geradas tinha voltado a
+`[]` depois do conserto da Etapa 5. A causa era o
+`test_tabela_nova_entra_em_banco_antigo`: ele apontava o banco para o tmp, mas
+nao os dados, e a migracao automatica do banco sem versao exportava o banco
+vazio por cima do `data/questoes_geradas.json` (e copiava o banco de teste
+para `data/copias/`). Teste consertado, as 50 exportadas de novo do banco
+real. E a data da procedencia passou a ser a de Florianopolis: a importacao
+das 22h tinha saido "em 03/10/2026". Por ultimo, a ficha sem no deixou de
+dizer "nao apareceu nas provas analisadas" no "por que agora": sem no, o
+acervo nem foi contado para ela.
+
+**O que ficou:** a minha conferencia das 61 fichas e o Ciclo 2, que depende do
+simulado de fechamento de 07/11 e da minha aprovacao antes de 09/11.
