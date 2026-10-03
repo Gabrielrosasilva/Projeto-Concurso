@@ -15,6 +15,7 @@ from radar.web.app import app
 #: (endereco, status esperado). A 404 responde 404 de proposito.
 TELAS = [
     ("/isso-nao-existe", 404),
+    ("/calendario", 200),
 ]
 
 #: A paleta que cada tela antiga definia para si.

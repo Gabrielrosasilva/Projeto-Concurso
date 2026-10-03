@@ -5,75 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Calendário &middot; Radar de Concursos</title>
+  {# Os prazos de inscricao na agenda: o que vai entrar no .ics e como
+     importar. Cor e espaco saem do design.css; aqui so o que e desta tela. #}
+  <link rel="stylesheet" href="/estatico/design.css">
   <style>
-    :root {
-      color-scheme: light dark;
-      --fundo:#f5f6f8; --cartao:#fff; --texto:#13161d; --suave:#5c6572;
-      --borda:#e3e6eb; --azul:#1d4ed8; --azul-fraco:#e8eeff;
-      --prazo:#be123c; --prazo-fraco:#ffe4e9;
-    }
-    :root:not([data-tema="claro"]){
-        --fundo:#0e1014; --cartao:#171a21; --texto:#e8eaee; --suave:#98a0ae;
-        --borda:#262b35; --azul:#7aa2ff; --azul-fraco:#1b2740;
-        --prazo:#fb7185; --prazo-fraco:#2c1219;
-      }
+    .ds-cartao{margin-bottom:var(--esp-4)}
+    .ds-cartao h2{margin:0 0 var(--esp-2);font-size:var(--tam-md)}
+    .ds-cartao p{margin:0 0 var(--esp-2)}
+    .ds-cartao p:last-child{margin-bottom:0}
+    .sob-botao{font-size:var(--tam-xs);color:var(--cor-texto-suave);margin-top:var(--esp-2)}
 
-    *{box-sizing:border-box}
-    body{margin:0;padding:1.75rem 1rem 4rem;background:var(--fundo);color:var(--texto);
-         font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    .pagina{max-width:720px;margin:0 auto}
+    ol{margin:var(--esp-1) 0 0;padding-left:var(--esp-5);font-size:var(--tam-sm)}
+    ol li{margin-bottom:var(--esp-1)}
+    .sistema{font-weight:var(--peso-medio);font-size:var(--tam-sm);margin:var(--esp-4) 0 0}
 
-    header{text-align:center;margin-bottom:1.25rem}
-    h1{margin:0 0 .2rem;font-size:1.6rem;letter-spacing:-.02em}
-    .subtitulo{margin:0;color:var(--suave);font-size:.9rem}
-    .voltar{display:inline-block;margin-bottom:1rem;color:var(--azul);
-      text-decoration:none;font-size:.85rem}
-
-    .caixa{background:var(--cartao);border:1px solid var(--borda);
-      border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1rem}
-    h2{font-size:1rem;margin:0 0 .6rem}
-    p{margin:0 0 .7rem;font-size:.92rem}
-    p:last-child{margin-bottom:0}
-
-    .baixar{display:inline-block;background:var(--azul);color:#fff;
-      text-decoration:none;padding:.75rem 1.4rem;border-radius:8px;
-      font-size:.98rem;font-weight:600}
-    .baixar:hover{filter:brightness(1.08)}
-    .sob-botao{font-size:.8rem;color:var(--suave);margin-top:.6rem}
-
-    ol{margin:.4rem 0 0;padding-left:1.2rem;font-size:.9rem}
-    ol li{margin-bottom:.3rem}
-    .sistema{font-weight:600;font-size:.88rem;margin:.9rem 0 .1rem}
-
-    .compromisso{display:grid;grid-template-columns:auto 1fr;gap:.2rem .8rem;
-      padding:.55rem 0;border-bottom:1px solid var(--borda);font-size:.9rem}
-    .compromisso:last-child{border-bottom:0}
-    .quando{font-variant-numeric:tabular-nums;color:var(--prazo);
-      font-weight:600;white-space:nowrap}
+    /* Um compromisso por linha: a data na coluna da esquerda, em vermelho de
+       prazo; o que e e de onde, na da direita. */
+    .compromisso{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--esp-1) var(--esp-3);
+      padding:var(--esp-2) 0;border-bottom:1px solid var(--cor-borda);font-size:var(--tam-sm)}
+    .compromisso:last-of-type{border-bottom:0}
+    .quando{font-variant-numeric:tabular-nums;color:var(--cor-vermelho);
+      font-weight:var(--peso-medio);white-space:nowrap}
     .oque{overflow:hidden;text-overflow:ellipsis}
-    .onde{grid-column:2;font-size:.8rem;color:var(--suave)}
-
-    .vazio{text-align:center;color:var(--suave);padding:1.5rem 1rem}
+    .onde{grid-column:2;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
-<body>
+<body class="ds">
 
 {% from "_topo.html" import barra with context %}
 {{ barra('concursos') }}
 
-<div class="pagina">
+<main class="ds-pagina">
   {% from "_topo.html" import abas_de_concursos %}
   {{ abas_de_concursos('calendario') }}
 
-
-
-  <header>
+  <header class="ds-cabeca">
     <h1>Calendário</h1>
-    <p class="subtitulo">Os prazos de inscrição na agenda do seu celular</p>
+    <p>Os prazos de inscrição na agenda do seu celular</p>
   </header>
 
-  <div class="caixa">
+  <section class="ds-cartao">
     <h2>Para que serve</h2>
     <p>
       O aviso do Telegram chega <b>uma vez</b> e some no meio das outras
@@ -86,9 +58,9 @@
       todo calendário entende. Você abre o arquivo uma vez e os compromissos
       entram na sua agenda.
     </p>
-  </div>
+  </section>
 
-  <div class="caixa">
+  <section class="ds-cartao">
     {% if eventos %}
       <h2>O que vai entrar na agenda</h2>
       {% for e in eventos %}
@@ -99,8 +71,8 @@
         </div>
       {% endfor %}
 
-      <p style="margin-top:1.1rem">
-        <a class="baixar" href="/calendario.ics" download>
+      <p style="margin-top:var(--esp-4)">
+        <a class="ds-botao" href="/calendario.ics" download>
           Baixar {{ eventos | length }} compromisso(s)
         </a>
       </p>
@@ -110,15 +82,15 @@
         atrapalha quem abre a agenda.
       </p>
     {% else %}
-      <div class="vazio">
+      <div class="ds-vazio">
         <p>Nenhum prazo em pe para exportar agora.</p>
         <p>Entra o que é favorito ou está perto de casa, com data de inscrição
            conhecida e ainda aberta.</p>
       </div>
     {% endif %}
-  </div>
+  </section>
 
-  <div class="caixa">
+  <section class="ds-cartao">
     <h2>Como importar, depois de baixar</h2>
 
     <p class="sistema">No celular (Android ou iPhone)</p>
@@ -146,8 +118,8 @@
       tirado do endereço do concurso. Se o prazo for retificado, a agenda
       corrige sozinha.
     </p>
-  </div>
+  </section>
 
-</div>
+</main>
 </body>
 </html>
