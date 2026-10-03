@@ -293,6 +293,32 @@ def test_a_tela_mostra_o_recorte_pedido(cliente):
     assert "3</b> questões no recorte" in texto
 
 
+def test_o_selo_do_recorte_sai_da_analise(cliente, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem do recorte no
+    dado, o selo troca junto."""
+    _semear(*[
+        _questao(i, enunciado=f"Sobre a crase na frase {i}.", impressao=f"i{i}")
+        for i in range(3)
+    ])
+    monkeypatch.setattr(macetes.Analise, "origens",
+                        {**macetes.ORIGENS_DA_ANALISE, "recorte": "ia"})
+
+    texto = cliente.get("/macetes?banca=FEPESE&tema=crase").text
+
+    assert ('<span aria-hidden="true">🟣</span> Gerado por IA</span>\n      <b>3</b> '
+            "questões no recorte") in texto.replace("\r\n", "\n")
+
+
+def test_as_questoes_repetidas_nao_viram_previsao(cliente):
+    """Regra 2 do novo.md: o acervo diz o que caiu, e nunca o que vai cair."""
+    _semear(*[_questao(i, impressao="a-mesma") for i in range(3)])
+
+    texto = cliente.get("/macetes?banca=FEPESE").text
+
+    assert "Questões que ela repete" in texto
+    assert "devem cair" not in texto and "vai cair" not in texto
+
+
 def test_a_tela_explica_quando_nao_acha_nada(cliente):
     """O acervo e de cargo municipal de SC: tema de TI nao existe ali, e dizer
     isso e melhor que uma tela vazia."""

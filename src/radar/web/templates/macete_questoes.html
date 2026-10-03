@@ -34,7 +34,7 @@
     <p>O macete de IA ao lado da prova de verdade, para conferir um contra o outro.</p>
   </header>
 
-  {% call bloco('ia', 'Macete (IA)' ~ (' · ' ~ macete.assunto if macete.assunto else '')) %}
+  {% call bloco(macete.origem, 'Macete (IA)' ~ (' · ' ~ macete.assunto if macete.assunto else '')) %}
     <p class="regra">{{ macete.regra }}</p>
     <p class="ds-suave">
       Fonte citada: {{ macete.fonte }}
@@ -56,7 +56,7 @@
     <article class="ds-cartao" style="margin-top:var(--esp-4)">
       <div class="ds-cartao__cabeca">
         <h2 class="ds-cartao__titulo">Questão {{ q.numero }} · FEPESE {{ q.ano }}{% if q.cargo %} · {{ q.cargo }}{% endif %}</h2>
-        {{ selo('prova') }}
+        {{ selo(r.origem) }}
       </div>
       {% for mud in r.mudancas %}{{ aviso_lei(mud) }}{% endfor %}
       <p class="enunciado">{{ q.enunciado }}</p>

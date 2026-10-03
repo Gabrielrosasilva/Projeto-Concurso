@@ -104,7 +104,7 @@ ORIGEM_FIXA = [
     ("macetes.FatiaDoCaderno", macetes.FatiaDoCaderno.origem, ACERVO),
     ("cartoes.Cartao", cartoes.Cartao.origem, ACERVO),
     ("cartoes.MaceteDoCartao", cartoes.MaceteDoCartao.origem, IA),
-    ("cartoes.QuestaoRelacionada", cartoes.QuestaoRelacionada.origem, PROVA),
+    ("cartoes.QuestaoRelacionada", cartoes.QuestaoRelacionada(QuestaoDeProva(), []).origem, PROVA),
     ("previsao.PrevisaoDeAbertura", previsao.PrevisaoDeAbertura.origem, TENDENCIA),
     ("previsao.Cobertura", previsao.Cobertura.origem, AUTOMATICO),
     ("materias.Projecao", materias.Projecao.origem, TENDENCIA),

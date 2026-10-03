@@ -168,17 +168,20 @@ def cartoes() -> list[Cartao]:
 
 @dataclass
 class QuestaoRelacionada:
-    origem = PROVA
-
     questao: QuestaoDeProva
     mudancas: list
+
+    @property
+    def origem(self) -> str:
+        """A da questao: tirada do caderno oficial (Etapa 7A)."""
+        return self.questao.origem
 
 
 def questoes_do_macete(impressao: str) -> tuple[dict, list] | None:
     """O macete e as questoes REAIS em que ele se apoia, ou None.
 
-    E o destino do link [Ver questoes reais relacionadas]: ali o 🟥 encontra o
-    🟦, e eu confiro o macete contra a prova de verdade.
+    E o destino do link [Ver questoes reais relacionadas]: ali o 🟣 encontra o
+    🟢, e eu confiro o macete contra a prova de verdade.
     """
     macete = next(
         (m for m in manual.carregar_macetes()
@@ -199,4 +202,5 @@ def questoes_do_macete(impressao: str) -> tuple[dict, list] | None:
             )
             if questao is not None:
                 relacionadas.append(QuestaoRelacionada(questao, mudancas_da(questao)))
-    return macete, relacionadas
+    # O macete e texto de IA; a origem vai no dado, para a tela nao escolher.
+    return {**macete, "origem": IA}, relacionadas

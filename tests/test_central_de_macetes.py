@@ -153,6 +153,34 @@ def test_o_cartao_mostra_os_selos_separados(cliente):
     assert "/macetes/" + "a" * 32 + "/questoes" in pagina
 
 
+def test_o_bloco_de_cada_parte_sai_do_dado(cliente, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem do cartao e do
+    macete no dado, o bloco de cada um troca junto."""
+    from radar.servico import cartoes
+
+    _gravar_arquivo(_macete())
+    monkeypatch.setattr(cartoes.Cartao, "origem", "automatico")
+    monkeypatch.setattr(cartoes.MaceteDoCartao, "origem", "oficial")
+
+    pagina = cliente.get("/macetes").text
+
+    assert "ds-bloco--automatico" in pagina and "ds-bloco--acervo" not in pagina
+    assert "ds-bloco--oficial" in pagina and "ds-bloco--ia" not in pagina
+
+
+def test_a_questao_real_do_macete_le_a_origem_do_dado(cliente, monkeypatch):
+    from radar.models import QuestaoDeProva
+
+    _gravar_arquivo(_macete())
+    monkeypatch.setattr(QuestaoDeProva, "origem", "acervo")
+
+    pagina = cliente.get("/macetes/" + "a" * 32 + "/questoes").text
+
+    assert "ds-selo--acervo" in pagina
+    # E o macete, que veio de um arquivo, sai do servico com a origem dele.
+    assert "ds-bloco--ia" in pagina
+
+
 def test_sem_macete_a_tela_diz_como_trazer_sem_api(cliente):
     pagina = cliente.get("/macetes").text
     assert "radar gerar --pedido --macetes" in pagina
