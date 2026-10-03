@@ -471,6 +471,32 @@ def test_a_base_e_a_evidencia_ficam_gravadas(arvore_de_teste, tmp_path):
     assert gravada.evidencia_da_base == "alvo"
 
 
+def test_a_variacao_leva_a_materia_e_o_assunto_do_escopo(arvore_de_teste, tmp_path,
+                                                         monkeypatch):
+    """A base do complementar pode vir de um bloco generico de outra prova
+    ("Conhecimentos Especificos"): a gerada fica com a materia e o assunto do
+    ESCOPO, e nao com os gravados na questao de base - senao ela some do treino
+    da materia no /geradas, que sorteia pela materia."""
+    _gravar(_questao(1, CADERNO_COMPLEMENTAR, materia="Conhecimentos Específicos"),
+            ART_112)
+    monkeypatch.setattr("radar.servico.complementar.provas_aceitas",
+                        lambda *a, **k: {CADERNO_COMPLEMENTAR})
+    lote = manual.pedido_de_questoes(quantas=3, escopo=_resolver(
+        LEP, "Regimes de cumprimento da pena"))
+
+    (pedido,) = lote["pedidos"]
+    assert pedido["modo"] == "variacao"
+    assert (pedido["materia"], pedido["assunto"]) == (LEP, "Regimes de cumprimento da pena")
+
+    _importar(tmp_path, lote, [
+        _item(enunciado="Dentro do escopo: o regime aberto se baseia em quê?")])
+    with sessao() as s:
+        (gravada,) = list(s.scalars(select_geradas()))
+    assert gravada.materia == LEP
+    assert gravada.assunto == "Regimes de cumprimento da pena"
+    assert gravada.evidencia_da_base == "complementar"
+
+
 def test_do_zero_fica_marcado_sem_questao_real_de_referencia(arvore_de_teste,
                                                              tmp_path):
     """A §9: quando nao houver questao real, tem de ficar registrado que ela

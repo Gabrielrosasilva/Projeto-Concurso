@@ -252,12 +252,18 @@ def _preparar_no_escopo(escopo, modo: str, quantas: int,
 
     pedidos: list[dict] = []
     faltam = quantas
+    nomes = _nomes_do_escopo(escopo)
     for questao, evidencia in ordenadas:
         if faltam <= 0:
             break
         neste = min(motor.VARIACOES_POR_QUESTAO, faltam)
         pedidos.append({
             "modo": "variacao", "questao": questao, "quantas": neste,
+            # A materia e o assunto da gerada sao os do ESCOPO, como no do
+            # zero, e nao os gravados na questao de base: a do complementar
+            # pode vir de um bloco generico de outra prova ("Conhecimentos
+            # Especificos"), e a gerada ficaria fora do treino da materia.
+            "materia": escopo.materia, "assunto": nomes[-1],
             "conteudo": escopo.no, "escopo": escopo,
             "base": "questao_real", "evidencia_da_base": evidencia,
         })
@@ -271,7 +277,6 @@ def _preparar_no_escopo(escopo, modo: str, quantas: int,
     # `evidencia_da_base: nenhuma` dizem.
     sem_base = not reais
     if faltam > 0:
-        nomes = _nomes_do_escopo(escopo)
         lei = leis.do_assunto(escopo.materia, nomes[-1])
         base = "fonte_oficial" if lei else "item_do_edital"
         exemplos = _exemplos_de_estilo(escopo)

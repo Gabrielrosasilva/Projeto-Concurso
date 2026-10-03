@@ -3376,3 +3376,32 @@ mede (7A); commit e push por subetapa (8A).
     palavra partida no hifen, o que antes so a leitura do PDF fazia: o texto
     do edital usado nos testes dava "Tabelas- verdade", e a arvore real tem
     "Tabelas-verdade".
+
+## O estoque de geradas ate 07/11 (pedido de 03/10/2026)
+
+72. **a variacao com escopo grava a materia e o assunto do ESCOPO**, e nao os
+    da questao real que serviu de base. Achado no lote 1: a base do
+    complementar pode vir de um bloco generico de outra prova ("Conhecimentos
+    Especificos", "Legislacao e Educacao"), e a variacao herdava esse nome - 3
+    das 19 do abolitio criminis, e cerca de 27 nos 57 lotes do plano, ficariam
+    fora do treino de Direito Penal no /geradas, que sorteia pela materia. O
+    `geradas._preparar_no_escopo` poe a materia e o ultimo nome do escopo no
+    pedido de variacao, como ja fazia no do zero, e o `manual` usa os dois. O
+    pedido amplo, sem escopo, nao muda. O caminho da API (`--valendo`) nao tem
+    o defeito: ele nao usa escopo e so varia questao do alvo.
+
+73. **o estoque de geradas ate 07/11 e so dos nos de subassunto**, um no por
+    lote (o `--pedido` fecha um escopo so), aprovado com as recomendadas:
+    - quanto: o deficit do tema - as questoes das faixas de treino de 04/10 a
+      07/11 (fixacao, aprendizagem, Portugues, R+7, R+30, bonus e
+      interpretacao; diagnostico e simulados ficam fora, porque medem) menos as
+      reais ainda nao respondidas nos nos dele - dividido entre os nos de
+      subassunto do tema, no maximo 20 por no, e 5 no no que e um artigo so.
+      Da 57 lotes e 725 questoes (216 por variacao, 509 do zero);
+    - os 28 temas sem subassunto na arvore (15 so com o assunto, 13 com ficha
+      sem no) ficam sem estoque: gerar com materia, assunto e subassunto
+      pediria criar no, e a escolha 5B foi nao criar;
+    - a ordem e a da data de uso, uma semana por vez: o /geradas sorteia pela
+      materia, e o estoque de um tema ainda nao estudado entraria no treino;
+    - o lote 1 (abolitio criminis, 19) foi feito junto, em 03/10; os outros 56
+      sao feitos por mim, pelo `docs/estoque_de_geradas.md`.

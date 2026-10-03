@@ -386,8 +386,10 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
             questao = pedido["questao"]
             instrucao = gerador.INSTRUCAO_VARIACAO
             corpo = gerador._montar_pedido_variacao(questao, pedido["quantas"])
-            base = {"materia": questao.materia,
-                    "assunto": getattr(questao, "assunto", None),
+            # Com escopo, a materia e o assunto vem do pedido (os do escopo);
+            # no pedido amplo, sem escopo, continuam os da questao de base.
+            base = {"materia": pedido.get("materia") or questao.materia,
+                    "assunto": pedido.get("assunto") or getattr(questao, "assunto", None),
                     "origem_impressao": questao.impressao}
         if se_escopo is not None:
             instrucao = _instrucao_com_escopo(instrucao, se_escopo,
