@@ -625,7 +625,7 @@
           {% else %}Comece hoje a sua sequência{% endif %}
         </p>
         {% if t.frase %}<p class="frase">{{ t.frase }}</p>{% endif %}
-        <p class="motivo">{{ selo('automatico') }} <span>{{ t.nivel.motivo }}</span></p>
+        <p class="motivo">{{ selo(t.nivel.origem) }} <span>{{ t.nivel.motivo }}</span></p>
         <p><a class="ds-link-acao" href="/semanas">ver todas as semanas &rarr;</a></p>
       </section>
     {% endif %}
@@ -1071,12 +1071,12 @@
       </p>
       {% if tt.radar.medidas and tt.anotado.medidas %}
         <p class="fiz-de-onde">
-          {{ selo('automatico') }} medido no radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
+          {{ selo(tt.origens.radar) }} medido no radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
           anotado: {{ tt.anotado.porcentagem }}% em {{ tt.anotado.medidas }}
         </p>
       {% endif %}
       {% if tt.total.ia %}
-        <p class="fiz-de-onde ds-suave">{{ selo('ia') }} {{ frase_da_ia(tt.total) }}: conta no volume.</p>
+        <p class="fiz-de-onde ds-suave">{{ selo(tt.origens.treino_ia) }} {{ frase_da_ia(tt.total) }}: conta no volume.</p>
       {% endif %}
       {% if tt.total.erros %}
         <p class="links">

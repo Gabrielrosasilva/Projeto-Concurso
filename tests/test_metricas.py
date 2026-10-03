@@ -271,6 +271,34 @@ def test_a_tela_hoje_mostra_o_28_09_fechado(banco_temporario, monkeypatch):
     assert ("Fiz hoje:</b> 31 questões = 13 acertos + 8 erros "
             "+ 10 de treino de IA") in texto
     assert "Treino de IA: 7 de 10 (70%), fora do acerto" in texto
+    # O treino de IA leva o selo da IA (Etapa 7A): e resposta a questao que
+    # a IA escreveu, e ela nunca pode parecer questao da banca.
+    assert ('<span aria-hidden="true">🟣</span> Gerado por IA</span> '
+            "Treino de IA: 7 de 10") in texto
+
+
+def test_o_selo_de_cada_linha_do_dia_sai_do_dado(banco_temporario, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem no dado - o
+    recorte da Conta e o Nivel da semana -, o selo troca junto."""
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    _o_dia_28_de_verdade()
+    # Uma questao real respondida no radar, para a linha "medido no radar"
+    # aparecer ao lado do anotado.
+    _responder(True, _as_21h(minuto=30), questao_id=99)
+    monkeypatch.setattr(diario, "agora_local",
+                        lambda: datetime(2026, 9, 30, 12, 0, tzinfo=fuso_local()))
+    monkeypatch.setattr(metricas.Conta, "origens",
+                        {**metricas.ORIGEM_DO_RECORTE, "radar": "acervo"})
+    monkeypatch.setattr(cronograma.Nivel, "origem", "ia")
+
+    texto = TestClient(app).get("/hoje?data=2026-09-28").text
+
+    assert ('<span aria-hidden="true">🔵</span> Estatística do acervo</span> '
+            "medido no radar") in texto
+    assert '<p class="motivo"><span class="ds-selo ds-selo--ia"' in texto
 
 
 def test_o_radar_hoje_mostra_a_mesma_linha(banco_temporario):
