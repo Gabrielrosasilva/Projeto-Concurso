@@ -32,8 +32,9 @@ from radar.db import criar_tabelas, sessao
 from radar.models import agora
 from radar.regioes import normalizar
 from radar.servico import geradas
+from radar.util import fuso_local
 
-TIPOS = ("questoes", "macetes", "explicacoes", "classificacao")
+TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas")
 
 # Quantos macetes por materia. Tres cabe numa resposta so e obriga a IA a
 # escolher o que mais cai, em vez de listar tudo.
@@ -54,8 +55,15 @@ def caminho_das_explicacoes() -> Path:
 
 def procedencia(quando: datetime | None = None) -> str:
     """O que vai no campo `modelo`. Diz o caminho, e nao um modelo que eu nao
-    sei qual foi."""
-    return f"Claude Code, importado manualmente, em {(quando or agora()):%d/%m/%Y}"
+    sei qual foi.
+
+    A data e a do relogio de Florianopolis: o `agora()` e UTC, e uma
+    importacao depois das 21h saia com o dia seguinte (as 61 fichas de
+    02/10/2026, importadas as 22h, sairam "em 03/10/2026")."""
+    momento = quando or agora()
+    if momento.tzinfo is not None:
+        momento = momento.astimezone(fuso_local())
+    return f"Claude Code, importado manualmente, em {momento:%d/%m/%Y}"
 
 
 # --- as instrucoes ----------------------------------------------------------
@@ -172,8 +180,45 @@ Responda SOMENTE um JSON, no formato:
 {"classificacoes": [{"questao": "2024-q31", "status": "classificada", "materia": "Direito Penal", "assunto": "...", "subassunto": "...", "tipo_de_questao": "conceito", "pegadinha": "...", "trecho": "...", "item_do_edital": "...", "dispositivo": "..."}]}"""
 
 
+# A ficha de estudo (Etapa 6B, secao 11): o texto que o cronograma nao tem -
+# o que ler, como pesquisar, o que entender e memorizar - e os nos da arvore
+# que o tema cobre. O resto da ficha (incidencia, padroes, questoes reais,
+# desempenho, prioridade) o radar calcula: a IA nao escreve numero do acervo.
+INSTRUCAO_FICHA = """Voce recebe UM tema do meu cronograma de estudo para a Policia Penal SC (banca FEPESE): as faixas em que ele aparece, com o detalhe que o plano escreveu, os artigos-chave do dia quando houver, e a arvore de conteudos da materia, com quantas questoes reais o acervo tem em cada no (alvo = as provas do meu cargo; complementar = outras provas da FEPESE).
+
+Escreva a FICHA DE ESTUDO do tema: o que eu preciso fazer para estudar exatamente isto, com comeco, meio e fim.
+
+Regras:
+- `nos`: os caminhos da arvore que este tema cobre, copiados EXATAMENTE da lista `arvore` do pedido. Escolha os nos do tema, e nao um no amplo que contenha outros temas (a materia inteira e recusada; um no dentro do outro tambem). Sem no que sirva, responda "nos": [] e diga por que - nao force. Justifique em `por_que_estes_nos`;
+- `assunto` e `subassunto`: os nomes do edital, copiados da arvore (opcionais; subassunto exige assunto);
+- `elemento`: a parte exata ("CF, art. 5º, caput e incisos I a XVI"; em Portugues, a regra; em Raciocinio, o tipo de problema), e `tipo_elemento` da lista `elementos`;
+- `ler_exatamente`: o que ler, com os dispositivos e onde (o texto oficial, quando houver lei);
+- `como_pesquisar`: 3 buscas para YouTube ou Google, do jeito que se digita;
+- `entender`: os conceitos que eu preciso entender, curtos e objetivos;
+- `memorizar`: o que decorar - prazos, fracoes, listas, excecoes -, com o dispositivo de cada um;
+- `pegadinhas`: as confusoes comuns NESTE conteudo (o que costuma ser trocado ou invertido). NAO afirme o que a FEPESE faz: o padrao da banca sai do acervo, com o numero, e quem mostra e o sistema;
+- `fonte_sugerida`: so quando NAO houver lei (Portugues, Raciocinio, doutrina): uma fonte de estudo, uma so;
+- a lei pode ter mudado depois das provas de 2013 e 2019: escreva pelo texto VIGENTE e diga quando a mudanca importa;
+- nada de previsao ("vai cair", "certamente", "a FEPESE sempre..."): sera RECUSADO;
+- sem seguranca sobre um artigo ou um numero, nao escreva: um prazo errado ensina errado.
+
+Responda SOMENTE um JSON, no formato:
+{"ficha": {"tema": "...", "assunto": "...", "subassunto": "", "elemento": "...", "tipo_elemento": "...", "nos": ["..."], "por_que_estes_nos": "...", "ler_exatamente": "...", "como_pesquisar": ["..."], "entender": ["..."], "memorizar": ["..."], "pegadinhas": ["..."], "fonte_sugerida": ""}}"""
+
+
 def _como_responder(tipo: str) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
+    if tipo == "fichas":
+        return (
+            "Este arquivo foi gerado por `radar fichas --pedido`. Para cada item "
+            "de `pedidos`, siga a `instrucao` usando o texto de `pedido` e as "
+            "listas do proprio item. Responda TODOS num unico arquivo JSON, no "
+            "formato de `formato_da_resposta`: o mesmo `lote`, e o `id` de cada "
+            "pedido com o objeto `ficha` dele. Salve como data/resposta_ia.json e "
+            "rode `radar fichas --importar data/resposta_ia.json`. Ficha com no "
+            "fora da arvore, sem o que ler, sem como pesquisar, sem o que "
+            "entender ou memorizar, ou com texto de previsao sera RECUSADA."
+        )
     if tipo == "classificacao":
         return (
             "Este arquivo foi gerado por `radar classificar --pedido`. Para cada "
@@ -223,6 +268,14 @@ def _como_responder(tipo: str) -> str:
 
 
 def _formato(tipo: str) -> dict:
+    if tipo == "fichas":
+        item = {"tema": "<o tema do pedido>", "assunto": "...", "subassunto": "",
+                "elemento": "...", "tipo_elemento": "...", "nos": ["..."],
+                "por_que_estes_nos": "...", "ler_exatamente": "...",
+                "como_pesquisar": ["..."], "entender": ["..."], "memorizar": ["..."],
+                "pegadinhas": ["..."], "fonte_sugerida": ""}
+        return {"lote": "<o lote deste arquivo>",
+                "respostas": [{"id": "f1", "ficha": item}]}
     if tipo == "classificacao":
         item = {"questao": "2019-q51", "status": "classificada", "assunto": "...",
                 "subassunto": "...", "elemento": "...", "tipo_elemento": "artigo",
@@ -584,6 +637,98 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
                               + "\n\n".join(blocos))
         pedidos.append(item)
     return _novo_lote("classificacao", pedidos)
+
+
+def pedido_de_fichas(materia: str | None = None, desde=None,
+                     refazer: bool = False) -> dict:
+    """Um pedido por tema do cronograma que ainda nao tem ficha (Etapa 6B).
+
+    O pedido leva o que o Claude Code precisa para escrever SEM inventar: as
+    faixas do tema com o detalhe do plano, os artigos-chave do dia, a arvore da
+    materia com quantas questoes reais o acervo tem em cada no (alvo e
+    complementar separados, nunca somados), os tipos de elemento e o link da
+    lei. `refazer` inclui o tema cuja ficha eu ainda nao conferi; a conferida
+    nunca volta.
+    """
+    from radar import conteudos as arvore
+    from radar import cronograma as plano_de_estudo
+    from radar import fichas
+    from radar import incidencia
+    from radar.servico import conteudos as servico_conteudos
+    from radar.servico import cronograma as diario
+    from radar.servico import fichas as servico_fichas
+    from radar.servico import incidencia as servico_incidencia
+
+    plano = plano_de_estudo.carregar()
+    desde = desde or diario.hoje_local()
+    escritas = servico_fichas.carregar()
+    if refazer:
+        conferidas = {(e.chave, e.materia) for e in escritas if e.conferida_em}
+        temas = [t for t in fichas.temas_do_plano(plano, desde)
+                 if (fichas.chave_do_tema(t.tema), t.materia) not in conferidas]
+    else:
+        temas = servico_fichas.sem_ficha(plano, desde, escritas)
+    if materia:
+        temas = [t for t in temas if t.materia == materia]
+
+    nos = servico_conteudos.nos()
+    mapa = {linha.caminho: len(linha.questoes)
+            for m in incidencia.montar(nos, servico_incidencia.ocorrencias())
+            for linha in m.linhas}
+    complementar = incidencia.complementar_por_no(
+        nos, servico_incidencia.ocorrencias_complementares())
+    taxonomia = arvore.carregar_taxonomia()
+
+    pedidos = []
+    for numero, tema in enumerate(temas, start=1):
+        faixas = [{"data": f.data.isoformat(), "bloco": f.bloco, "tipo": f.faixa.tipo,
+                   "titulo": f.faixa.titulo, "questoes": f.faixa.questoes,
+                   "detalhe": f.faixa.detalhe, "filtro": f.faixa.filtro,
+                   "link": f.faixa.link}
+                  for f in tema.faixas]
+        artigos = []
+        estudo = tema.estudo()
+        if estudo is not None and estudo.faixa.tipo == "teoria":
+            dia = plano.dia(estudo.data)
+            if dia is not None and dia.essencial is not None:
+                artigos = [{"artigos": a.artigos, "porque": a.porque}
+                           for a in dia.essencial.chave + dia.essencial.apoio]
+        da_materia = [n for n in nos if n.caminho == tema.materia
+                      or n.caminho.startswith(tema.materia + arvore.SEPARADOR)]
+        arvore_do_pedido = [
+            {"caminho": n.caminho, "nivel": n.nivel,
+             "alvo": mapa.get(n.caminho, 0),
+             "complementar": complementar[n.caminho].questoes
+             if n.caminho in complementar else 0}
+            for n in da_materia]
+        lei = leis.da_materia(tema.materia)
+        corpo = [f"TEMA: {tema.tema}", f"MATERIA: {tema.materia}", "", "FAIXAS"]
+        for f in faixas:
+            corpo.append(f"- {f['data']} ({f['tipo']}): {f['titulo']}"
+                         + (f" | {f['questoes']} questoes" if f["questoes"] else "")
+                         + (f"\n  {f['detalhe']}" if f["detalhe"] else ""))
+        if artigos:
+            corpo += ["", "ARTIGOS-CHAVE DO DIA (selecao do plano, nao incidencia)"]
+            corpo += [f"- {a['artigos']}: {a['porque']}" for a in artigos]
+        corpo += ["", "ARVORE (alvo / complementar)"]
+        corpo += [f"- {n['caminho']} [{n['nivel']}] ({n['alvo']} / {n['complementar']})"
+                  for n in arvore_do_pedido]
+        pedidos.append({
+            "id": f"f{numero}", "tema": tema.tema, "materia": tema.materia,
+            "faixas": faixas, "artigos_chave": artigos,
+            "arvore": arvore_do_pedido,
+            "elementos": taxonomia.elementos_da_materia(tema.materia),
+            "lei": {"titulo": lei.titulo, "url": lei.url} if lei else None,
+            "instrucao": INSTRUCAO_FICHA,
+            "pedido": "\n".join(corpo),
+        })
+    return _novo_lote("fichas", pedidos)
+
+
+def _importar_fichas(lote: dict, respostas: list[dict], modelo: str) -> dict:
+    from radar.servico import fichas as servico_fichas
+
+    return servico_fichas.importar_respostas(lote["pedidos"], respostas, modelo)
 
 
 def _importar_classificacao(lote: dict, respostas: list[dict], modelo: str) -> dict:
@@ -971,6 +1116,8 @@ def importar(resposta: Path, pedido: Path | None = None,
 
     if lote.get("tipo") == "classificacao":
         resultado = _importar_classificacao(lote, respostas, modelo)
+    elif lote.get("tipo") == "fichas":
+        resultado = _importar_fichas(lote, respostas, modelo)
     elif lote.get("tipo") == "macetes":
         resultado = _importar_macetes(lote, respostas, modelo)
     elif lote.get("tipo") == "explicacoes":

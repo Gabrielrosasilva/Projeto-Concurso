@@ -911,6 +911,15 @@
                 {% if f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
                 {% if f.link %}<p class="links"><a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a></p>{% endif %}
 
+                {# A ficha de estudo do tema (Etapa 6B): o que ler, como pesquisar,
+                   como a FEPESE cobrou, quantas questoes, por que agora. A mesma
+                   ficha em toda faixa do tema, reconhecida pelo titulo. #}
+                {% set ficha = fichas_das_faixas.get((b.chave, loop.index0)) if fichas_das_faixas else none %}
+                {% if ficha %}
+                  <p class="links"><a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if tema %}&amp;tema={{ tema }}{% endif %}">
+                    <span aria-hidden="true">📋</span> Ficha de estudo</a></p>
+                {% endif %}
+
                 {# Anotar o erro daqui mesmo, com a data, a materia e o
                    assunto ja preenchidos, e voltando para esta faixa. So nas
                    faixas em que eu respondo questao: e nelas que se erra. #}

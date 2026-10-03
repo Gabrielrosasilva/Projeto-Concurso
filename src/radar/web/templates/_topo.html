@@ -67,11 +67,13 @@
 {% endmacro %}
 
 
-{# As sub-abas da tela Hoje: o dia, as semanas e o caderno de erros. #}
+{# As sub-abas da tela Hoje: o dia, as semanas, as fichas de estudo de cada
+   tema (Etapa 6B) e o caderno de erros. #}
 {% macro abas_de_hoje(ativa='hoje') %}
 <div class="subabas">
   <a class="{{ 'ativo' if ativa == 'hoje' }}" href="/hoje">Hoje</a>
   <a class="{{ 'ativo' if ativa == 'semanas' }}" href="/semanas">Semanas</a>
+  <a class="{{ 'ativo' if ativa == 'fichas' }}" href="/fichas">Fichas</a>
   <a class="{{ 'ativo' if ativa == 'erros' }}" href="/erros">Caderno de erros</a>
 </div>
 {% endmacro %}

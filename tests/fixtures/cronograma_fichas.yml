@@ -1,0 +1,116 @@
+# Cronograma das fichas de estudo (Etapa 6B): um tema de Direito com teoria,
+# fixacao, aprendizagem e as duas revisoes, um tema de Portugues no mesmo dia, e
+# um sabado de Raciocinio com a materia escrita na frente do titulo.
+ciclo: 9
+titulo: Ciclo das fichas
+inicio: '2026-09-28'
+fim: '2026-10-31'
+blocos:
+  manha:
+    nome: Manhã
+    inicio: '10:15'
+  noite:
+    nome: Noite
+    inicio: '18:00'
+  pos22:
+    nome: Depois das 22h
+    inicio: '22:00'
+minutos_por_questao: 2.5
+rampa:
+  1:
+    direito: 15
+    portugues: 10
+  2:
+    direito: 20
+    portugues: 10
+semanas:
+  1: Semana 1.
+  2: Semana 2.
+gatilho:
+  sobe_com_dias_na_ideal: 5
+  semana_ruim_com_dias_abaixo: 3
+  desce_apos_semanas_ruins: 2
+materias:
+- {nome: Língua Portuguesa, questoes: 15, meta: 12}
+- {nome: Direito Constitucional, questoes: 5, meta: 4}
+- {nome: Raciocínio Lógico, questoes: 10, meta: 9}
+dias:
+- data: '2026-09-29'
+  semana: 1
+  essencial:
+    chave:
+    - artigos: CF art. 5º, XI
+      porque: Casa inviolável, salvo flagrante, desastre, socorro ou, de dia, ordem judicial.
+    apoio:
+    - artigos: CF art. 5º, XII
+      porque: Sigilo das comunicações.
+  manha:
+  - tipo: teoria
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: Art. 5º, caput e incisos I a XVI
+    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: questoes
+    questoes: 8
+    materia: Direito Constitucional
+    titulo: 'Fixação: Art. 5º, caput e incisos I a XVI'
+    consulta: true
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
+  - tipo: portugues
+    duracao: 20
+    materia: Língua Portuguesa
+    titulo: Vozes do verbo
+  noite:
+  - tipo: questoes
+    rampa: direito
+    questoes: 15
+    materia: Direito Constitucional
+    titulo: 'Aprendizagem: Art. 5º, caput e incisos I a XVI'
+    filtro: Direito Constitucional > direitos individuais
+  - tipo: questoes
+    rampa: portugues
+    questoes: 10
+    materia: Língua Portuguesa
+    titulo: Vozes do verbo
+  pos22: []
+- data: '2026-10-03'
+  semana: 1
+  manha:
+  - tipo: raciocinio
+    duracao: 40
+    materia: Raciocínio Lógico
+    titulo: Princípios de contagem
+  noite:
+  - tipo: questoes
+    questoes: 15
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: princípios de contagem'
+  pos22: []
+- data: '2026-10-06'
+  semana: 2
+  manha:
+  - tipo: teoria
+    duracao: 40
+    materia: Direito Constitucional
+    titulo: Art. 5º, incisos XVII a XLIX
+  noite:
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-09-29'
+    titulo: 'R+7: Art. 5º, caput e incisos I a XVI'
+  pos22: []
+- data: '2026-10-29'
+  semana: 2
+  manha: []
+  noite:
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 10
+    materia: Direito Constitucional
+    origem: '2026-09-29'
+    titulo: 'R+30: Art. 5º, caput e incisos I a XVI'
+  pos22: []

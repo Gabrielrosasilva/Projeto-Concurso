@@ -1169,8 +1169,9 @@ dias:
       porque: Os deveres do condenado.
     - artigos: LEP art. 41
       porque: Os direitos do preso (leia a lista inteira).
-    - artigos: LEP art. 41, parágrafo único
-      porque: Os incisos V, X e XV podem ser suspensos ou restringidos por ato motivado do diretor.
+    - artigos: LEP art. 41, § 1º
+      porque: Os incisos V, X e XV podem ser suspensos ou restringidos por ato motivado do juiz da execução (Lei
+        14.994/2024; até ela era o diretor, no antigo parágrafo único).
     apoio:
     - artigos: LEP art. 40
       porque: Todas as autoridades devem respeitar a integridade física e moral dos presos.
@@ -1186,8 +1187,9 @@ dias:
       a vítima e ao Estado, conservação dos objetos. Direitos (art. 41): alimentação, vestuário, trabalho remunerado,
       previdência, pecúlio, atividades, assistência, proteção contra o sensacionalismo, entrevista com advogado,
       VISITA do cônjuge, companheira, parentes e amigos, chamamento nominal, audiência com o diretor, contato com
-      o mundo exterior, atestado de pena a cumprir. O diretor pode SUSPENDER ou RESTRINGIR por ato motivado os incisos
-      V, X e XV (art. 41, parágrafo único). Preso provisório e internado (arts. 42 e 43).'
+      o mundo exterior, atestado de pena a cumprir. O JUIZ DA EXECUÇÃO pode SUSPENDER ou RESTRINGIR por ato motivado
+      os incisos V, X e XV (art. 41, § 1º - até a Lei 14.994/2024 era o diretor, no antigo parágrafo único). Preso
+      provisório e internado (arts. 42 e 43).'
     onde: videoaula
     link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
     baralho: '[3] LEP'
@@ -1207,7 +1209,7 @@ dias:
   - tipo: lei_seca
     duracao: 20
     materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP art. 39; LEP art. 41; LEP art. 41, parágrafo único'
+    titulo: 'Lei seca dirigida: LEP art. 39; LEP art. 41; LEP art. 41, § 1º'
     detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
       ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
       não é o que a banca mais cobra.'
@@ -2830,8 +2832,8 @@ dias:
   essencial:
     chave:
     - artigos: LEP art. 112
-      porque: 'Progressão: o percentual de pena cumprida (16% a 70%) e a boa conduta. Confira a redação atual no
-        Planalto.'
+      porque: 'Progressão: regra geral de 1/6 e percentuais de 20% a 85% (redação de 2026), boa conduta comprovada
+        pelo diretor e exame criminológico (Lei 14.843/2024).'
     - artigos: LEP art. 118
       porque: 'Regressão: crime doloso, falta grave ou nova condenação que torne incabível o regime.'
     apoio:
@@ -2847,9 +2849,11 @@ dias:
     materia: Lei de Execução Penal
     titulo: Execução da pena, regimes e progressão (arts. 105 a 119)
     detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Guia de recolhimento (arts. 105
-      a 107); a forma PROGRESSIVA (art. 112): os percentuais de 16% a 70% conforme primariedade, violência ou grave
-      ameaça, crime hediondo e resultado morte (Lei 13.964/2019), boa conduta atestada pelo diretor, e o exame criminológico
-      da Lei 14.843/2024 - CONFIRA a redação atual no Planalto; progressão especial da gestante ou mãe/responsável
+      a 107); a forma PROGRESSIVA (art. 112, redação das Leis 15.358 e 15.402, de 2026): regra geral de 1/6 da pena
+      e mérito; 20%, 25% ou 30% conforme reincidência e violência ou grave ameaça; 70%, 75%, 80% ou 85% nos hediondos,
+      conforme primariedade e resultado morte (a tabela de 16% a 70% da Lei 13.964/2019 não vale mais); boa conduta
+      comprovada pelo diretor e exame criminológico (§ 1º, Lei 14.843/2024) - texto conferido até a Lei 15.410, de
+      20/05/2026: confira no Planalto se mudou depois; progressão especial da gestante ou mãe/responsável
       por criança ou pessoa com deficiência (art. 112, § 3º); regime aberto: condições (arts. 113 a 116); prisão
       domiciliar no aberto (art. 117); REGRESSÃO de regime (art. 118).'
     onde: videoaula
@@ -3084,8 +3088,8 @@ dias:
       porque: 'Permissão de saída: COM escolta, concedida pelo DIRETOR, em falecimento ou doença grave de familiar
         e tratamento médico.'
     - artigos: LEP art. 122
-      porque: 'Saída temporária: semiaberto, SEM vigilância direta, concedida pelo JUIZ. Alterada pela Lei 14.843/2024:
-        confira a redação atual.'
+      porque: 'Saída temporária: semiaberto, SEM vigilância direta, concedida pelo JUIZ; desde a Lei 14.843/2024,
+        só para estudo, e vedada no crime hediondo ou com violência ou grave ameaça contra pessoa.'
     - artigos: LEP art. 126
       porque: 'Remição: 1 dia a cada 12 horas de estudo (em no mínimo 3 dias) e 1 dia a cada 3 dias de trabalho.'
     apoio:
@@ -3101,7 +3105,10 @@ dias:
     detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. PERMISSÃO de saída (arts. 120
       e 121): fechado e semiaberto, COM escolta, por falecimento ou doença grave de familiar e tratamento médico,
       concedida pelo DIRETOR; SAÍDA TEMPORÁRIA (arts. 122 a 125): semiaberto, SEM escolta, concedida pelo JUIZ -
-      hipóteses e vedações ALTERADAS pela Lei 14.843/2024, confira a redação atual; REMIÇÃO (arts. 126 a 130): 1
+      desde a Lei 14.843/2024, só para frequência a curso supletivo profissionalizante, de ensino médio ou superior
+      (visita à família e atividades de retorno ao convívio social foram revogadas), vedada ao condenado por crime
+      hediondo ou com violência ou grave ameaça contra pessoa (art. 122, § 2º), e o art. 124 (até 7 dias, renováveis
+      4 vezes por ano) foi revogado; REMIÇÃO (arts. 126 a 130): 1
       dia a cada 12 horas de estudo (em no mínimo 3 dias), 1 dia a cada 3 dias de trabalho, +1/3 ao concluir etapa
       de ensino, perda de até 1/3 por falta grave (art. 127), tempo remido conta como pena cumprida (art. 128).'
     onde: videoaula

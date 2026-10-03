@@ -1,0 +1,54 @@
+# A regra de PRIORIDADE das fichas de estudo (Etapa 6B, secao 15 do novo.md).
+#
+# E regra de priorizacao, e NAO previsao de prova: diz por que um tema pede
+# mais atencao agora, com os numeros que levaram a isso. Lido pelo
+# src/radar/prioridade.py, que faz a conta; a ficha mostra cada fator, com o
+# numero e de onde ele veio ("Voce esta estudando isto agora porque...").
+#
+# A CONTA
+#
+#   prioridade = peso da materia no edital (em questoes da prova)
+#              x incidencia   = fatia do ALVO + peso_do_complementar x fatia do complementar
+#              x desempenho   = 1 - meu acerto (so com amostra suficiente; sem ela, 1)
+#              x tempo        = 1 a fator_maximo, pelos dias desde a ultima pratica
+#              x revisao      = multiplicador, quando o conteudo esta na fila de revisao
+#
+# E a formula do Onde estudar ("questoes x fatia x (1 - acerto) x tempo"),
+# evoluida em tres pontos: a fatia e a do ALVO, por no da arvore; o acervo
+# complementar entra em linha propria, com o peso MENOR escrito aqui (§15); e
+# a fila de revisao da Etapa 4 pesa.
+#
+# De onde vem cada numero:
+#   - o peso da materia: o bloco `materias` do config/cronograma.yml (o quadro
+#     do edital de 2019);
+#   - a fatia do alvo: as questoes das provas de 2013 e 2019 classificadas
+#     dentro dos nos da ficha, sobre as questoes da materia nessas provas
+#     (anuladas e pendentes fora, como no mapa de incidencia);
+#   - a fatia do complementar: o mesmo, em questao DISTINTA e so classificada,
+#     nas provas aceitas em data/acervo_complementar.json;
+#   - o acerto: o do servico/desempenho_por_conteudo.py (radar + anotado, so
+#     sem consulta), e a amostra minima do config/amostra.yml;
+#   - a fila de revisao: a do servico/estudo.py (erro recente, abaixo de 60%,
+#     prazo 1-7-30 vencido).
+
+incidencia:
+  # Tema do edital que nao apareceu nas provas do alvo conta como se tivesse
+  # MEIA questao. Sem piso ele teria prioridade zero - "nunca estude" -, e o
+  # edital o cobra; com o piso de meia questao ele fica sempre abaixo de quem
+  # apareceu uma vez, que e o que o historico diz.
+  piso_em_questoes: 0.5
+  # O acervo complementar FEPESE (outras provas da banca) pesa um quarto do
+  # alvo. Ele mostra o estilo da banca, nao o que a prova do meu cargo cobrou.
+  # Com 0, a ordem dos temas e so a do alvo.
+  peso_do_complementar: 0.25
+
+tempo:
+  # O fator de tempo do Onde estudar: 1 no dia da ultima pratica, 2 depois de
+  # `dias_para_dobrar` dias, e para ai. So vale com amostra suficiente - sem
+  # ela nao ha "ultima revisao" que diga alguma coisa, e o fator fica 1.
+  dias_para_dobrar: 30
+  fator_maximo: 2.0
+
+revisao:
+  # Conteudo na fila de revisao (Etapa 4) sobe metade. A fila diz o motivo.
+  multiplicador: 1.5

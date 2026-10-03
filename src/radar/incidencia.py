@@ -43,6 +43,12 @@ class Ocorrencia:
     #: O `macetes.uma_por_enunciado` agrupa por este nome. Aqui vai a CHAVE
     #: da questao inteira: duas questoes de enunciado igual sao duas.
     impressao: str = ""
+    #: O numero da questao no caderno. A ficha de estudo (Etapa 6B) escreve
+    #: "2013-q15", e e por ele que eu acho a questao na prova.
+    numero: int | None = None
+    #: A classificacao principal ja foi conferida por mim? O alvo foi (02/10);
+    #: o complementar ainda nao (decisao 18), e a ficha diz qual e qual.
+    conferida: bool = False
 
 
 @dataclass
@@ -129,18 +135,32 @@ def _debaixo(caminho: str | None, no: str) -> bool:
     return bool(caminho) and (caminho == no or caminho.startswith(no + arvore.SEPARADOR))
 
 
+def validas(ocorrencias: list[Ocorrencia]) -> list[Ocorrencia]:
+    """As que CONTAM: nem anulada (a banca desfez a pergunta), nem pendente
+    (sem classificacao segura nao ha no onde contar). Uma regra so, para o
+    mapa e para a ficha de estudo dizerem o mesmo numero."""
+    return [o for o in ocorrencias
+            if not o.anulada and o.status != "pendente" and o.conteudo]
+
+
+def provas_da_materia(ocorrencias: list[Ocorrencia], materia: str) -> int:
+    """O denominador: em quantas provas a materia teve questao. LEP so caiu
+    em 2019, e "1 de 2 provas" enganaria quando o edital de 2013 nem a
+    cobrava."""
+    return len({o.prova for o in ocorrencias if o.materia == materia})
+
+
 def montar(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> list[MapaDaMateria]:
     """O mapa, materia por materia, na ordem da arvore.
 
     `nos` vem na ordem da arvore (pai antes dos filhos). A questao conta no no
     da sua classificacao principal e em todos os que estao acima dele.
     """
-    validas = [o for o in ocorrencias
-               if not o.anulada and o.status != "pendente" and o.conteudo]
+    contam = validas(ocorrencias)
     mapas = []
     for materia in (n for n in nos if n.nivel == "materia"):
         da_materia = [o for o in ocorrencias if o.materia == materia.caminho]
-        denominador = len({o.prova for o in da_materia})
+        denominador = provas_da_materia(ocorrencias, materia.caminho)
         linhas = []
         for no in nos:
             if not _debaixo(no.caminho, materia.caminho):
@@ -149,7 +169,7 @@ def montar(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> list[MapaDaMa
                 caminho=no.caminho, nivel=no.nivel, nome=no.nome,
                 profundidade=len(arvore.partes(no.caminho)) - 1,
                 fora_do_edital=no.fora_do_edital,
-                questoes=[o for o in validas if _debaixo(o.conteudo, no.caminho)],
+                questoes=[o for o in contam if _debaixo(o.conteudo, no.caminho)],
                 denominador=denominador))
         # Materia sem questao nenhuma no alvo continua no mapa: o edital a
         # cobra, e "não apareceu" tambem e informacao.
@@ -178,21 +198,52 @@ def complementar_por_no(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> 
 
     Anulada continua fora: a banca desfez a pergunta.
     """
+    sem_anulada = [o for o in ocorrencias if not o.anulada and o.conteudo]
+    return {no.caminho: _linha_complementar(
+                no.caminho, [o for o in sem_anulada if _debaixo(o.conteudo, no.caminho)])
+            for no in nos}
+
+
+def _linha_complementar(caminho: str, debaixo: list[Ocorrencia]):
+    """A linha complementar de um conjunto de questoes. A conta mora aqui, e
+    so aqui: o no da arvore e o escopo da ficha de estudo usam a mesma."""
     from radar.complementar import LinhaComplementar
 
-    validas = [o for o in ocorrencias if not o.anulada and o.conteudo]
-    linhas = {}
-    for no in nos:
-        debaixo = [o for o in validas if _debaixo(o.conteudo, no.caminho)]
-        # A mesma questao em dez cadernos e UMA questao: a chave desempata.
-        distintas = {o.impressao or f"{o.prova}-{id(o)}": o for o in debaixo}
-        linhas[no.caminho] = LinhaComplementar(
-            caminho=no.caminho,
-            questoes=len(distintas),
-            ocorrencias=len(debaixo),
-            provas=len({o.prova for o in debaixo}),
-            classificadas=sum(1 for o in distintas.values() if o.status != "pendente"))
-    return linhas
+    # A mesma questao em dez cadernos e UMA questao: a chave desempata.
+    distintas = {o.impressao or f"{o.prova}-{id(o)}": o for o in debaixo}
+    return LinhaComplementar(
+        caminho=caminho,
+        questoes=len(distintas),
+        ocorrencias=len(debaixo),
+        provas=len({o.prova for o in debaixo}),
+        classificadas=sum(1 for o in distintas.values() if o.status != "pendente"))
+
+
+# --- um escopo que nao e um no so (a ficha de estudo, Etapa 6B) -------------------
+#
+# "Art. 5º, caput e incisos I a XVI" cobre tres subassuntos de um assunto e o
+# caput, que no edital e outro assunto. A ficha guarda a lista de nos, e estas
+# duas funcoes contam a lista com as MESMAS regras do mapa: nada de conta
+# paralela.
+
+def linha_do_escopo(caminho: str, nome: str, dentro, materia: str,
+                    ocorrencias: list[Ocorrencia]) -> LinhaDoMapa:
+    """A linha do alvo para um escopo: as questoes que contam dentro dele, e o
+    denominador da materia. `dentro(caminho)` diz se um no esta no escopo."""
+    return LinhaDoMapa(
+        caminho=caminho, nivel="escopo", nome=nome,
+        profundidade=0,
+        questoes=[o for o in validas(ocorrencias) if dentro(o.conteudo)],
+        denominador=provas_da_materia(ocorrencias, materia))
+
+
+def complementar_do_escopo(caminho: str, dentro, ocorrencias: list[Ocorrencia]):
+    """A linha complementar para um escopo, separada da do alvo e nunca
+    somada a ela. Abaixo da materia so conta a questao classificada."""
+    return _linha_complementar(
+        caminho, [o for o in ocorrencias
+                  if not o.anulada and o.conteudo and o.status != "pendente"
+                  and dentro(o.conteudo)])
 
 
 # --- os padroes de cobranca (secao 13) ------------------------------------------

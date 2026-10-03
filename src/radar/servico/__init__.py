@@ -145,6 +145,9 @@ from radar.servico import classificacoes  # noqa: F401 - usado pela CLI
 from radar.servico import incidencia    # noqa: F401 - usado pela CLI e web
 # A Etapa 3B: o levantamento do acervo complementar FEPESE (so leitura).
 from radar.servico import complementar  # noqa: F401 - usado pela CLI
+# A Etapa 6B: a ficha de estudo de cada tema do cronograma, e a prioridade.
+# `servico.fichas.ficha("art-5o-caput-e-incisos-i-a-xvi")`.
+from radar.servico import fichas        # noqa: F401 - usado pela web e CLI
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

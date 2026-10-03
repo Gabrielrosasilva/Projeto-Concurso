@@ -81,6 +81,13 @@ def test_o_pedido_de_macete_e_um_por_materia_com_os_codigos(acervo_do_alvo):
 
 # --- a importacao da questao ------------------------------------------------
 
+def test_a_data_da_procedencia_e_a_de_florianopolis():
+    # 01:16 UTC de 03/10 ainda e 22:16 de 02/10 aqui: a importacao das fichas
+    # da Etapa 6B saiu com o dia seguinte quando a data era a do UTC.
+    noite = datetime(2026, 10, 3, 1, 16, tzinfo=timezone.utc)
+    assert manual.procedencia(noite) == "Claude Code, importado manualmente, em 02/10/2026"
+
+
 def test_importa_e_grava_com_a_procedencia_honesta(acervo_do_alvo, tmp_path):
     lote = _pedido_salvo(manual.pedido_de_questoes("Lei de Execução Penal", 3))
     arquivo = _responder(lote, [{"id": "p1", "questoes": [_questao_boa()]}], tmp_path)

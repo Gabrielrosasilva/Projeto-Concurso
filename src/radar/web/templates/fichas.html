@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Fichas de estudo &middot; Radar de Concursos</title>
+  <link rel="stylesheet" href="/estatico/design.css">
+  <style>
+    .temas{width:100%;border-collapse:collapse;font-size:var(--tam-sm)}
+    .temas th,.temas td{text-align:left;padding:var(--esp-1) var(--esp-2);
+      border-bottom:1px solid var(--cor-borda);vertical-align:top}
+    .temas th{font-size:var(--tam-xs);color:var(--cor-texto-suave);font-weight:var(--peso-normal)}
+    .temas td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+    .temas tr.sem-ficha td{color:var(--cor-texto-suave)}
+    .pequena{display:block;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+  </style>
+  {% include "_topo_estilo.html" %}
+</head>
+<body class="ds">
+
+{% from "_topo.html" import barra, abas_de_hoje with context %}
+{{ barra('hoje') }}
+
+<main class="ds-pagina">
+  {{ abas_de_hoje('fichas') }}
+
+  <header class="ds-cabeca">
+    <h1>Fichas de estudo</h1>
+    <p>
+      Uma ficha por tema do cronograma, de hoje em diante: o que ler, como
+      pesquisar, o que entender e memorizar (🟣 texto escrito por IA, para eu
+      conferir), e o que o radar calcula - como a FEPESE cobrou, com a amostra e
+      o alvo separado do complementar, as questões reais, quantas fazer e quando
+      revisar. A <b>prioridade</b> é regra de priorização (config/prioridade.yml),
+      não previsão de prova.
+    </p>
+  </header>
+
+  <section class="ds-cartao">
+    {% set com = linhas | selectattr('tem_ficha') | list %}
+    <h2>{{ linhas | length }} tema(s), {{ com | length }} com ficha</h2>
+    {% if linhas %}
+      <div class="ds-rolagem">
+        <table class="temas">
+          <thead>
+            <tr><th>Próxima vez</th><th>Tema</th><th>Prioridade</th><th>Acervo</th><th>Ficha</th></tr>
+          </thead>
+          <tbody>
+            {% for l in linhas %}
+              {% set proxima = l.tema.proxima(hoje) %}
+              <tr class="{{ '' if l.tem_ficha else 'sem-ficha' }}">
+                <td class="n">{{ proxima.strftime('%d/%m') if proxima else '—' }}</td>
+                <td>
+                  {% if l.tem_ficha %}<a href="/fichas/{{ l.escrita.id }}{% if proxima %}?data={{ proxima.isoformat() }}{% endif %}">{{ l.tema.tema }}</a>{% else %}{{ l.tema.tema }}{% endif %}
+                  <span class="pequena">{{ l.tema.materia }}</span>
+                </td>
+                <td class="n">
+                  {% if l.prioridade %}🟡 {{ l.prioridade.valor | numero(2) }}
+                    <span class="pequena">{{ l.prioridade.posicao }}º de {{ l.prioridade.de }}</span>
+                  {% else %}—{% endif %}
+                </td>
+                <td>
+                  {% if l.tem_ficha %}
+                    🔵 Polícia Penal SC: {{ l.alvo.amostra }}
+                    <span class="pequena">🔵 {{ l.complementar.frase }}</span>
+                  {% else %}—{% endif %}
+                </td>
+                <td>
+                  {% if l.tem_ficha %}🟣 {{ 'conferida' if l.escrita.conferida_em else 'não conferida' }}
+                  {% else %}sem ficha <span class="pequena">radar fichas --pedido</span>{% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="ds-vazio">Nenhum tema de estudo no cronograma de hoje em diante.</p>
+    {% endif %}
+  </section>
+</main>
+</body>
+</html>

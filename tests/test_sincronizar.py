@@ -104,7 +104,8 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
     tabela nenhuma. E, desde 26/09/2026, o diario do cronograma e os checks
     de cada faixa; desde 27/09/2026, o caderno de erros, o estudo extra e a
     reflexao de cada semana. Desde a Etapa 2 (01/10/2026), a arvore de
-    conteudos e as classificacoes.
+    conteudos e as classificacoes. Desde a Etapa 6B (02/10/2026), as fichas
+    de estudo: a conferencia que eu marco na tela mora la.
     """
     runner.invoke(cli.app, ["sincronizar"])
 
@@ -117,6 +118,7 @@ def test_so_os_json_do_radar_entram_no_commit(banco_temporario, git):
         "data/caderno_erros.json", "data/estudo_extra.json",
         "data/notas_semana.json",
         "data/conteudos.json", "data/classificacoes.json",
+        "data/fichas.json",
     }
 
 

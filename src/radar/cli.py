@@ -16,6 +16,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 from radar import acervo, alvo as alvos, automacao, avisos, config, cronograma, servico
+from radar import fichas as fichas_puras
 from radar import provas as _provas
 from radar.models import agora
 from radar.util import (
@@ -1137,11 +1138,15 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         raise typer.Exit(code=1) from erro
 
     o_que = {"macetes": "macete(s)", "explicacoes": "explicacao(oes)",
-             "classificacao": "classificacao(oes)"}.get(resultado["tipo"], "questao(oes)")
+             "classificacao": "classificacao(oes)",
+             "fichas": "ficha(s)"}.get(resultado["tipo"], "questao(oes)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
     console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
     if resultado["repetidas"]:
         console.print(f"[dim]{resultado['repetidas']} repetida(s), ignorada(s).[/]")
+    if resultado.get("substituidas"):
+        console.print(f"[dim]{resultado['substituidas']} ficha(s) nao conferida(s) "
+                      f"substituida(s) pela nova.[/]")
     fora = resultado.get("fora_do_edital") or []
     if fora:
         console.print(f"[dim]{len(fora)} questao(oes) de bloco generico nao sao de "
@@ -1154,6 +1159,9 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
     if resultado["tipo"] == "classificacao":
         console.print("[dim]Em data/classificacoes.json (versionado). Confira em "
                       "radar web, Analises > Conferencia.[/]")
+    elif resultado["tipo"] == "fichas":
+        console.print("[dim]Em data/fichas.json (versionado). Confira cada uma em "
+                      "radar web, Hoje > Fichas, ou com radar fichas --tema.[/]")
     elif resultado["tipo"] == "macetes":
         console.print("[dim]Em data/macetes.json (versionado).[/]")
     elif resultado["tipo"] == "explicacoes":
@@ -2132,7 +2140,8 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/explicacoes.json", "data/registro_estudo.json",
                      "data/estado_do_dia.json", "data/caderno_erros.json",
                      "data/estudo_extra.json", "data/notas_semana.json",
-                     "data/conteudos.json", "data/classificacoes.json")
+                     "data/conteudos.json", "data/classificacoes.json",
+                     "data/fichas.json")
 
 
 @app.command()
@@ -2370,6 +2379,10 @@ def hoje(
     estado = servico.cronograma.estado_do_dia(quando)
     feitas = servico.cronograma.faixas_feitas(dia, estado)
     anotado = servico.cronograma.valores_das_faixas(dia, estado)
+    # A ficha de cada tema do dia (Etapa 6B): a faixa ganha o 📋, e o fim da
+    # saida diz como abrir. So le o data/fichas.json - nao conta nada.
+    escritas = servico.fichas.carregar()
+    fichas_do_dia: dict = {}
 
     for chave in cronograma.BLOCOS:
         faixas = getattr(dia, chave)
@@ -2380,6 +2393,9 @@ def hoje(
             if faixa.desligada:
                 console.print(f"[dim]{cronograma.FRASE_DO_ANKI_DESATIVADO}[/]")
                 continue
+            ficha_da_faixa = fichas_puras.da_faixa(faixa, escritas)
+            if ficha_da_faixa is not None:
+                fichas_do_dia.setdefault(ficha_da_faixa.id, ficha_da_faixa)
             partes = [cronograma.TIPO_LEGIVEL[faixa.tipo]]
             if faixa.rotulo:
                 partes[0] = faixa.rotulo
@@ -2395,6 +2411,8 @@ def hoje(
                 linha += "  [magenta]⏱ cronometrado[/]"
             if faixa.opcional:
                 linha += "  [dim](bônus, fora do total)[/]"
+            if ficha_da_faixa is not None:
+                linha += "  📋"
             if faixa.tipo == "pausa":
                 linha = f"[dim]{linha}[/]"
             if (chave, indice) in feitas:
@@ -2413,6 +2431,14 @@ def hoje(
 
     console.print(f"\nTotal do dia: [bold]{dia.total_questoes} questões[/] "
                   f"e {dia.minutos_de_estudo} min de estudo de manhã")
+    if fichas_do_dia:
+        console.print("\n[bold]📋 Fichas de estudo do dia[/] (o que ler, como "
+                      "pesquisar, como a FEPESE cobrou, quantas questões):")
+        for ident, escrita in fichas_do_dia.items():
+            console.print(f"  {escape(escrita.tema)}:")
+            # Sem quebra de linha: e um comando para copiar e colar.
+            console.print(f"    radar fichas --tema {ident} --data {quando.isoformat()}",
+                          soft_wrap=True)
     if dia.reduzida:
         console.print(f"[yellow]Reduzida:[/] {escape(dia.reduzida)}")
     if dia.minima:
@@ -2594,6 +2620,237 @@ def classificar(
         else:
             marca = " [dim](fora do edital atual)[/]" if p["fora_do_edital"] else ""
         console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}{marca}")
+
+
+@app.command()
+def fichas(
+    tema: str = typer.Option(
+        None, "--tema", help="Mostra a ficha deste tema (o titulo ou o id da ficha)"),
+    data: str = typer.Option(
+        None, help="Com --tema: o dia do 'por que agora', AAAA-MM-DD (padrao: hoje)"),
+    pedido: bool = typer.Option(
+        False, "--pedido", help="Escreve data/pedido_ia.json com os temas sem ficha"),
+    materia: str = typer.Option(None, help="Com --pedido: so os temas desta materia"),
+    desde: str = typer.Option(
+        None, help="Os temas do cronograma de AAAA-MM-DD em diante (padrao: hoje)"),
+    refazer: bool = typer.Option(
+        False, "--refazer",
+        help="Com --pedido: pede de novo os temas cuja ficha eu ainda nao conferi"),
+    importar: Path = typer.Option(
+        None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
+    conferir: str = typer.Option(
+        None, "--conferir", help="Marca como conferida por mim a ficha deste tema"),
+) -> None:
+    """A ficha de estudo de cada tema do cronograma (Etapa 6B, secao 11).
+
+    Sem opcao, lista os temas de hoje em diante: com ficha ou sem, e a
+    prioridade de cada um. --tema mostra a ficha inteira: o que ler, como
+    pesquisar, o que entender e memorizar, as pegadinhas, como a FEPESE cobrou
+    (alvo e complementar separados, com a amostra), as questoes reais, quantas
+    fazer, o que refazer, quando revisar e por que agora.
+
+    --pedido e --importar sao o caminho sem API (o texto e escrito pelo Claude
+    Code e marcado como gerado por IA); --conferir marca a ficha como lida.
+    """
+    def _data(texto: str | None, nome: str) -> date | None:
+        if not texto:
+            return None
+        try:
+            return date.fromisoformat(texto)
+        except ValueError:
+            console.print(f"[red]{nome} invalida: {texto!r}.[/] Use AAAA-MM-DD.")
+            raise typer.Exit(code=1)
+
+    if importar is not None:
+        _importar_resposta_da_ia(importar)
+        return
+    if conferir:
+        try:
+            escrita = servico.fichas.conferir(conferir)
+        except LookupError as erro:
+            console.print(f"[red]{escape(str(erro))}[/]")
+            raise typer.Exit(code=1)
+        console.print(f"[green]Conferida:[/] {escape(escrita.tema)} "
+                      f"({escrita.conferida_em}). O texto continua marcado como "
+                      f"escrito por IA, com a procedência dele.")
+        return
+    if pedido:
+        lote = servico.manual.pedido_de_fichas(materia, _data(desde, "Data"), refazer)
+        if not lote["pedidos"]:
+            console.print("[yellow]Nada a pedir:[/] todo tema do cronograma "
+                          "dali em diante já tem ficha.")
+            return
+        destino = servico.manual.salvar_pedido(lote)
+        console.print(f"[green]{len(lote['pedidos'])} pedido(s) de ficha[/] em {destino}")
+        for p in lote["pedidos"]:
+            console.print(f"  {p['id']}: {escape(p['materia'])} · {escape(p['tema'])}")
+        console.print(f"[dim]Lote {lote['lote']}. Responda pelo Claude Code e rode "
+                      f"radar fichas --importar data/resposta_ia.json[/]")
+        return
+    if tema:
+        ficha = servico.fichas.ficha(tema, _data(data, "Data") or
+                                     servico.cronograma.hoje_local())
+        if ficha is None:
+            console.print(f"[red]Não há ficha para {tema!r}.[/] Veja os temas com "
+                          f"[bold]radar fichas[/].")
+            raise typer.Exit(code=1)
+        _mostrar_ficha(ficha)
+        return
+
+    linhas = servico.fichas.lista(_data(desde, "Data"))
+    if not linhas:
+        console.print("Nenhum tema de estudo no cronograma dali em diante.")
+        return
+    com = sum(1 for l in linhas if l.tem_ficha)
+    console.print(f"[bold]{len(linhas)} tema(s) do cronograma[/], {com} com ficha:")
+    for linha in linhas:
+        proxima = linha.tema.proxima(_data(desde, "Data") or servico.cronograma.hoje_local())
+        quando_ = proxima.strftime("%d/%m") if proxima else "--/--"
+        if linha.tem_ficha:
+            p = linha.prioridade
+            conferida = "conferida" if linha.escrita.conferida_em else "nao conferida"
+            console.print(
+                f"  {quando_}  {escape(linha.tema.materia)} · {escape(linha.tema.tema)}"
+                f"  [dim]{linha.escrita.id}[/]\n"
+                f"         prioridade {fichas_puras.regra_de_prioridade.numero(p.valor, 2)} "
+                f"({p.posicao}º de {p.de}) · alvo {linha.alvo.amostra} · "
+                f"{escape(linha.complementar.frase)} · 🟣 {conferida}")
+        else:
+            console.print(f"  {quando_}  {escape(linha.tema.materia)} · "
+                          f"{escape(linha.tema.tema)}  [yellow]sem ficha[/]")
+    if com < len(linhas):
+        console.print("[dim]Para pedir as que faltam: radar fichas --pedido[/]")
+
+
+def _selo(origem: str) -> str:
+    return fichas_puras.SELOS[origem][0]
+
+
+def _mostrar_ficha(f) -> None:
+    """A ficha no terminal, na ordem da secao 11, cada parte com o selo."""
+    def titulo(texto: str) -> None:
+        console.print(f"\n[bold cyan]{texto}[/]")
+
+    def item(origem: str, texto: str, recuo: int = 2) -> None:
+        console.print(" " * recuo + f"{_selo(origem)} {escape(texto)}")
+
+    console.print(f"[bold]📋 Ficha de estudo — {escape(f.tema)}[/]")
+    console.print(escape(" → ".join(f.caminho_exibido)))
+    estado = (f"conferida por você em {f.escrita.conferida_em}" if f.conferida
+              else f"ainda não conferida por você (radar fichas --conferir {f.id})")
+    console.print(f"[dim]{_selo('ia')} texto escrito por {escape(f.procedencia)} · "
+                  f"{estado}[/]")
+
+    titulo("Por que agora")
+    for motivo in f.por_que_agora:
+        item(motivo.origem, motivo.texto)
+
+    titulo("Fonte principal")
+    if f.fonte is None:
+        console.print("  Sem fonte oficial cadastrada no config/leis.yml para este assunto.")
+    else:
+        item(f.fonte.origem, f.fonte.texto + (f" — {f.fonte.link}" if f.fonte.link else ""))
+        if f.fonte.nota:
+            console.print(f"     [dark_orange]⚠ {escape(f.fonte.nota)}[/]")
+
+    titulo("O que ler exatamente")
+    item("ia", f.ler_exatamente.texto)
+    if f.artigos_chave:
+        item("plano", "Artigos-chave do dia (seleção do plano, não é incidência):")
+        for artigo in f.artigos_chave:
+            console.print(f"     • [bold]{escape(artigo.artigos)}[/] — {escape(artigo.porque)}")
+
+    for nome, campo in (("Como pesquisar", "como_pesquisar"),
+                        ("Você precisa entender", "entender"),
+                        ("Você precisa memorizar", "memorizar")):
+        titulo(f"{nome} {_selo('ia')}")
+        valores = getattr(f, campo)
+        for valor in valores:
+            console.print(f"  • {escape(valor)}")
+        if not valores:
+            console.print(f"  {f.vazio(campo)}")
+
+    titulo("Pegadinhas")
+    if f.pegadinhas_do_acervo:
+        item("acervo", "No acervo (cada uma de uma questão real):")
+        for q in f.pegadinhas_do_acervo:
+            marca = "conferida" if q.conferida else "classificação não conferida"
+            console.print(f"     • {q.codigo} ({q.onde}, {marca}): {escape(q.pegadinha)}")
+    else:
+        item("acervo", f.vazio("pegadinhas_do_acervo"))
+    if f.pegadinhas_escritas:
+        item("ia", "Confusões comuns neste conteúdo (texto de IA, não é padrão do acervo):")
+        for texto in f.pegadinhas_escritas:
+            console.print(f"     • {escape(texto)}")
+
+    titulo("Como a FEPESE cobrou (acervo analisado)")
+    if f.sem_no:
+        item("acervo", "Este tema não tem nó na árvore: nada do acervo é contado nele. "
+             + f.vazio("padroes_do_alvo"))
+    else:
+        linha = f.linha_do_alvo
+        item("acervo", f"Polícia Penal SC: {linha.amostra} — {linha.rotulo}")
+        padroes = f.padroes_do_alvo
+        if not padroes.suficiente:
+            console.print(f"     {padroes.frase}")
+        else:
+            console.print(f"     {escape(padroes.amostra)}")
+            if padroes.tipos:
+                console.print("     tipo de questão: " + escape(", ".join(
+                    f"{t} ({n})" for t, n in padroes.tipos)))
+            if padroes.comandos:
+                console.print("     forma de perguntar: " + escape(", ".join(
+                    f"{c.nome} ({c.quantas})" for c in padroes.comandos)))
+            if padroes.gabarito:
+                console.print("     gabarito: " + escape(" · ".join(
+                    f"{letra}: {n}" for letra, n, _pct in padroes.gabarito)))
+            if padroes.termos:
+                console.print("     termos frequentes: " + escape(", ".join(
+                    t.palavra for t in padroes.termos)))
+        item("acervo", f"{f.linha_complementar.frase} (linha separada, nunca somada à do alvo)")
+
+    titulo("Questões reais relacionadas")
+    if f.questoes_reais:
+        for q in f.questoes_reais:
+            item("acervo", f"{q.codigo} · {q.onde} · gabarito {(q.resposta or '?').upper()} · {q.no}")
+    else:
+        item("acervo", f.vazio("questoes_reais"))
+
+    titulo("Quantas questões fazer")
+    if f.meta_de_questoes:
+        for p in f.meta_de_questoes:
+            consulta = ", com consulta (fora da meta)" if p.consulta else ", sem consulta"
+            filtro = f" — filtro: {p.filtro}" if p.filtro else ""
+            item("plano", f"{p.data:%d/%m} · {p.rotulo}: {p.questoes} questões{consulta}{filtro}")
+    else:
+        item("plano", "O cronograma não tem faixa de questões deste tema.")
+    alvo = sum(1 for q in f.questoes_reais if q.evidencia == "alvo")
+    if f.questoes_reais:
+        item("acervo", f"No radar: {len(f.questoes_reais)} questão(ões) real(is) "
+             f"deste conteúdo ({alvo} do alvo, {len(f.questoes_reais) - alvo} do "
+             f"complementar): comece por elas.")
+    item("ia", f"Geradas por IA neste conteúdo: {len(f.geradas)} (não são questões "
+         f"oficiais da FEPESE).")
+    for no in f.nos:
+        console.print(f"     {escape(fichas_puras.comando_de_gerar(no))}", soft_wrap=True)
+
+    titulo("Erros para revisar depois")
+    r = f.refazer
+    item("automatico", f"Erradas no radar (a última resposta): {len(r.do_radar)} · "
+         f"no caderno de erros, para rever: {len(r.do_caderno)} (nunca somadas)")
+    for erro in r.do_caderno:
+        console.print(f"     • {escape(erro.regra)}")
+
+    titulo("Quando revisar")
+    for motivo in f.quando_revisar:
+        item(motivo.origem, motivo.texto)
+
+    titulo("Meu desempenho neste conteúdo")
+    if f.estado is None:
+        item("automatico", f"Ainda sem resposta neste conteúdo · {f.situacao}")
+    else:
+        texto = f"{f.desempenho.divisao()} · {f.estado.nome} · {f.estado.amostra}"
+        item("automatico", f"{texto} · {f.situacao}")
 
 
 @app.command()

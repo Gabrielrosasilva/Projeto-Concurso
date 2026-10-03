@@ -21,6 +21,7 @@ from radar import auditoria
 from radar import automacao
 from radar import config
 from radar import cronograma
+from radar import fichas as fichas_puras
 from radar import leis
 from radar import onde_estudar
 from radar import regioes
@@ -969,12 +970,16 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             quando = date.fromisoformat(data)
         except ValueError:
             erro_de_data = f"Data inválida: {data!r}. Use AAAA-MM-DD; mostrando hoje."
+    tela = servico.cronograma.tela_do_dia(quando)
     return templates.TemplateResponse(
         request=request,
         name="hoje.html",
         status_code=status,
         context={
-            "t": servico.cronograma.tela_do_dia(quando),
+            "t": tela,
+            # A ficha de estudo de cada faixa (Etapa 6B), pelo titulo do tema.
+            # So le o data/fichas.json: abrir a tela Hoje continua rapido.
+            "fichas_das_faixas": servico.fichas.das_faixas(tela.blocos),
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,
@@ -1344,6 +1349,49 @@ def analises_materias(request: Request):
             "mensagem": None,
         },
     )
+
+
+@app.get("/fichas", response_class=HTMLResponse)
+def fichas_do_cronograma(request: Request):
+    """Os temas do cronograma de hoje em diante, com a ficha de cada um, a
+    prioridade e o que ainda falta escrever."""
+    return templates.TemplateResponse(
+        request=request, name="fichas.html",
+        context={"linhas": servico.fichas.lista(),
+                 "hoje": servico.cronograma.hoje_local()},
+    )
+
+
+@app.get("/fichas/{ident}", response_class=HTMLResponse)
+def ficha_de_estudo(request: Request, ident: str, data: str = ""):
+    """A ficha inteira de um tema (secao 11): a tarefa com comeco, meio e fim.
+
+    `data` e o dia aberto na tela Hoje, de onde vem o "por que agora". Toda a
+    conta mora no `radar.fichas` e no `radar.prioridade`; aqui so a tela.
+    """
+    try:
+        quando = date.fromisoformat(data) if data else servico.cronograma.hoje_local()
+    except ValueError:
+        quando = servico.cronograma.hoje_local()
+    ficha = servico.fichas.ficha(ident, quando)
+    if ficha is None:
+        raise HTTPException(status_code=404)
+    return templates.TemplateResponse(
+        request=request, name="ficha.html",
+        context={"f": ficha, "data": quando, "SELOS_DA_FICHA": fichas_puras.SELOS,
+                 "comando_de_gerar": fichas_puras.comando_de_gerar},
+    )
+
+
+@app.post("/fichas/{ident}/conferir")
+def ficha_conferir(ident: str, data: str = Form("")):
+    """Marca a ficha como conferida por mim, e volta para ela."""
+    try:
+        escrita = servico.fichas.conferir(ident)
+    except LookupError:
+        return RedirectResponse("/fichas", status_code=303)
+    volta = f"/fichas/{escrita.id}" + (f"?data={data}" if data else "")
+    return RedirectResponse(volta, status_code=303)
 
 
 @app.get("/analises/desempenho", response_class=HTMLResponse)

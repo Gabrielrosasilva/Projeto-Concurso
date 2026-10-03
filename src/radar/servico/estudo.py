@@ -441,3 +441,23 @@ def refazer(caminho: str | None = None, hoje: date | None = None) -> Refazer:
                        do_caderno=caderno.para_rever(hoje))
     return Refazer(do_radar=_erradas_por_no().get(caminho, []),
                    do_caderno=_caderno_por_no(hoje).get(caminho, []))
+
+
+def refazer_do_escopo(dentro, hoje: date | None = None) -> Refazer:
+    """O que refazer num escopo de VARIOS nos (a ficha de estudo, Etapa 6B).
+
+    As mesmas duas listas do `refazer`, juntando os nos do escopo. Como cada
+    lista ja traz o no e os de cima dele, uma questao aparece em mais de um
+    no: aqui ela entra uma vez so.
+    """
+    hoje = hoje or date.today()
+    do_radar: list = []
+    for caminho, ids in _erradas_por_no().items():
+        if dentro(caminho):
+            do_radar.extend(i for i in ids if i not in do_radar)
+    do_caderno: list = []
+    for caminho, erros_do_no in _caderno_por_no(hoje).items():
+        if dentro(caminho):
+            do_caderno.extend(e for e in erros_do_no
+                              if all(e.id != j.id for j in do_caderno))
+    return Refazer(do_radar=do_radar, do_caderno=do_caderno)

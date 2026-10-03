@@ -248,6 +248,70 @@ def _ancestrais(caminho: str) -> list[str]:
     return [arvore.SEPARADOR.join(nomes[:n + 1]) for n in range(len(nomes))]
 
 
+@dataclass(frozen=True)
+class Entrada:
+    """Uma resposta (radar) ou uma anotacao (faixa, extra), no no dela.
+
+    E a materia-prima das duas contas deste arquivo: a por no (`por_no`) e a
+    de um escopo de varios nos (`do_escopo`, da ficha de estudo). As regras -
+    o que e resposta do radar, o que teve consulta, o que ficou sem acerto
+    anotado - moram aqui, uma vez, e as duas somam a mesma lista.
+    """
+
+    caminho: str
+    origem: str               # NO_RADAR | ANOTADO
+    dia: date
+    respostas: int = 0        # sem consulta e com o acerto anotado
+    acertos: int = 0
+    com_consulta: int = 0
+    sem_resultado: int = 0
+
+
+def entradas(recorte: str = CICLO, plano=None,
+             hoje: date | None = None) -> list[Entrada]:
+    """Tudo o que eu respondi ou anotei no recorte, cada coisa no no dela.
+
+    Questao sem classificacao e anotacao sem conteudo nao entram: elas contam
+    no dia (o `metricas` ja as contou) e em no nenhum.
+    """
+    plano = plano or plano_de_estudo.carregar()
+    inicio, fim = _janela(recorte, plano, hoje)
+    saida: list[Entrada] = []
+
+    # --- medido no radar ---------------------------------------------------
+    de_quem = nos_das_questoes()
+    for chave, acertou, dia in _questoes_respondidas(inicio, fim):
+        caminho = de_quem.get(chave)
+        if caminho is None:
+            continue
+        saida.append(Entrada(caminho, NO_RADAR, dia, respostas=1,
+                             acertos=1 if acertou else 0))
+
+    # --- anotado (faixas e estudo extra) ----------------------------------
+    for linha in metricas.lancamentos(inicio or plano.inicio, fim, plano):
+        if linha.origem == metricas.RADAR or not linha.conteudo:
+            continue
+        if not linha.questoes:
+            continue
+        if linha.consulta:
+            saida.append(Entrada(linha.conteudo, ANOTADO, linha.data,
+                                 com_consulta=linha.questoes))
+        elif linha.acertos is None:
+            saida.append(Entrada(linha.conteudo, ANOTADO, linha.data,
+                                 sem_resultado=linha.questoes))
+        else:
+            saida.append(Entrada(linha.conteudo, ANOTADO, linha.data,
+                                 respostas=linha.questoes, acertos=linha.acertos))
+    return saida
+
+
+def _somar(destino: Desempenho, entrada: Entrada) -> None:
+    metade = destino.radar if entrada.origem == NO_RADAR else destino.anotado
+    metade.somar(entrada.respostas, entrada.acertos, entrada.dia)
+    metade.com_consulta += entrada.com_consulta
+    metade.sem_resultado += entrada.sem_resultado
+
+
 def por_no(recorte: str = CICLO, plano=None,
            hoje: date | None = None) -> dict[str, Desempenho]:
     """{caminho: Desempenho} de todo no que tem alguma resposta.
@@ -257,7 +321,6 @@ def por_no(recorte: str = CICLO, plano=None,
     zerados so faria a tela ter de filtrar de novo.
     """
     plano = plano or plano_de_estudo.carregar()
-    inicio, fim = _janela(recorte, plano, hoje)
     metas = _metas_das_materias(plano)
     niveis = {no.caminho: no.nivel for no in servico_conteudos.nos()}
     nos: dict[str, Desempenho] = {}
@@ -277,36 +340,28 @@ def por_no(recorte: str = CICLO, plano=None,
         )
         return nos[caminho]
 
-    # --- medido no radar ---------------------------------------------------
-    de_quem = nos_das_questoes()
-    for chave, acertou, dia in _questoes_respondidas(inicio, fim):
-        caminho = de_quem.get(chave)
-        if caminho is None:
-            # Questao sem classificacao: conta no dia (o `metricas` ja a
-            # contou) e em no nenhum. A tela diz quantas sao.
-            continue
-        for ancestral in _ancestrais(caminho):
+    for entrada in entradas(recorte, plano, hoje):
+        for ancestral in _ancestrais(entrada.caminho):
             no = achar(ancestral)
             if no is not None:
-                no.radar.somar(1, 1 if acertou else 0, dia)
-
-    # --- anotado (faixas e estudo extra) ----------------------------------
-    for linha in metricas.lancamentos(inicio or plano.inicio, fim, plano):
-        if linha.origem == metricas.RADAR or not linha.conteudo:
-            continue
-        if not linha.questoes:
-            continue
-        for ancestral in _ancestrais(linha.conteudo):
-            no = achar(ancestral)
-            if no is None:
-                continue
-            if linha.consulta:
-                no.anotado.com_consulta += linha.questoes
-            elif linha.acertos is None:
-                no.anotado.sem_resultado += linha.questoes
-            else:
-                no.anotado.somar(linha.questoes, linha.acertos, linha.data)
+                _somar(no, entrada)
     return nos
+
+
+def do_escopo(dentro, *, caminho: str, nome: str, nivel: str,
+              meta: int | None, lista: list[Entrada]) -> Desempenho:
+    """O meu desempenho num ESCOPO de varios nos (a ficha de estudo).
+
+    `dentro(caminho)` diz se o no da entrada esta no escopo. Cada resposta
+    conta UMA vez, mesmo que o escopo tenha dois nos: e a soma das entradas,
+    e nao a soma dos nos (que contaria duas vezes a resposta de um no que
+    esta debaixo de outro). As regras sao as do `por_no`, pela mesma lista.
+    """
+    saida = Desempenho(caminho=caminho, nivel=nivel, nome=nome, meta=meta)
+    for entrada in lista:
+        if dentro(entrada.caminho):
+            _somar(saida, entrada)
+    return saida
 
 
 @dataclass

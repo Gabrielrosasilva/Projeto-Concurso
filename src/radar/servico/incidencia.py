@@ -10,6 +10,25 @@ from radar.servico import conteudos, evidencia
 from radar.servico.classificacoes import chave_de
 
 
+def _materia_do_caderno(caminhos: list[str], taxonomia):
+    """f(nome da materia no caderno) -> no da materia, lembrando o que ja achou.
+
+    Sao milhares de questoes e uns vinte nomes de materia: procurar o mesmo
+    nome na arvore a cada questao era o que deixava a leitura do complementar
+    em segundos (o `arvore.achar` normaliza cada caminho a cada chamada). O
+    resultado e o mesmo de antes, so que perguntado uma vez por nome.
+    """
+    achados: dict[str | None, str | None] = {}
+
+    def achar(nome: str | None) -> str | None:
+        if nome not in achados:
+            achados[nome] = (arvore.achar(caminhos, nome)
+                             or arvore.achar(caminhos, taxonomia.materia_do_texto(nome)))
+        return achados[nome]
+
+    return achar
+
+
 def ocorrencias() -> list[incidencia.Ocorrencia]:
     """Uma por questao do ALVO, com a classificacao principal dela.
 
@@ -25,21 +44,21 @@ def ocorrencias() -> list[incidencia.Ocorrencia]:
         questoes = list(s.scalars(
             select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)))
 
+    do_caderno = _materia_do_caderno(caminhos, taxonomia)
     resultado = []
     for q in questoes:
         chave = chave_de(q)
         c = principais.get(chave)
-        do_caderno = (arvore.achar(caminhos, q.materia)
-                      or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
         resultado.append(incidencia.Ocorrencia(
             prova=q.prova_url, ano=q.ano,
-            materia=arvore.partes(c.conteudo)[0] if c else do_caderno,
+            materia=arvore.partes(c.conteudo)[0] if c else do_caderno(q.materia),
             conteudo=c.conteudo if c else None,
             status=c.status if c else "pendente",
             anulada=bool(q.anulada),
             tipo_de_questao=c.tipo_de_questao if c else None,
             pegadinha=c.pegadinha if c else None,
-            enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave))
+            enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave,
+            numero=q.numero, conferida=bool(c and c.conferida_em)))
     return resultado
 
 
@@ -76,13 +95,12 @@ def ocorrencias_complementares() -> list[incidencia.Ocorrencia]:
             .where(QuestaoDeProva.evidencia == evidencia.COMPLEMENTAR,
                    QuestaoDeProva.prova_url.in_(aceitas))))
 
+    do_caderno = _materia_do_caderno(caminhos, taxonomia)
     resultado = []
     for q in questoes:
         chave = chave_de(q)
         c = principais.get(chave)
-        do_caderno = (arvore.achar(caminhos, q.materia)
-                      or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
-        conteudo = c.conteudo if c else do_caderno
+        conteudo = c.conteudo if c else do_caderno(q.materia)
         if conteudo is None:
             continue              # bloco generico sem classificacao: nao da para contar
         resultado.append(incidencia.Ocorrencia(
@@ -91,7 +109,8 @@ def ocorrencias_complementares() -> list[incidencia.Ocorrencia]:
             anulada=bool(q.anulada),
             tipo_de_questao=c.tipo_de_questao if c else None,
             pegadinha=c.pegadinha if c else None,
-            enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave))
+            enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave,
+            numero=q.numero, conferida=bool(c and c.conferida_em)))
     return resultado
 
 

@@ -69,12 +69,18 @@ DIAS_PARA_DOBRAR = 30
 FATOR_MAXIMO = 2.0
 
 
-def fator_de_tempo(ultima: date | None, hoje: date | None = None) -> float:
-    """1 sem treino; de 1 a 2 conforme os dias desde a ultima resposta."""
+def fator_de_tempo(ultima: date | None, hoje: date | None = None,
+                   dias_para_dobrar: int = DIAS_PARA_DOBRAR,
+                   maximo: float = FATOR_MAXIMO) -> float:
+    """1 sem treino; de 1 a 2 conforme os dias desde a ultima resposta.
+
+    Os dois numeros podem vir de fora: a prioridade da ficha de estudo (Etapa
+    6B) os le do config/prioridade.yml. Sem eles, valem os desta tela.
+    """
     if ultima is None:
         return 1.0
     dias = max(0, ((hoje or date.today()) - ultima).days)
-    return min(FATOR_MAXIMO, 1 + dias / DIAS_PARA_DOBRAR)
+    return min(maximo, 1 + dias / dias_para_dobrar)
 
 
 # De onde saiu o nome do assunto. Nao e detalhe de implementacao: uma origem
