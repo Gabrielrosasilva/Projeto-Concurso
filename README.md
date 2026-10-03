@@ -1419,6 +1419,13 @@ os componentes (selo, bloco, aviso de lei) em **`templates/_componentes.html`**.
 O escuro e o padrao; o botao da barra troca e guarda a escolha em cookie, e
 `?tema=escuro` ou `?tema=claro` na URL forca um dos dois para comparar.
 
+**Toda tela esta no design system** desde a Etapa 7B: cada uma marca
+`<body class="ds">`, usa a coluna `ds-pagina`, o cartao, a tabela e o botao
+do `design.css`, e o `<style>` dela so guarda o que e so dela, nos tokens de
+la. Nenhuma tela define a propria paleta, e a barra do topo tambem le os
+tokens. Na lista de Concursos, a cor do anel diz a distancia: perto verde,
+proximo amarelo, estadual azul, longe cinza e "a confirmar" cinza tracejado.
+
 Os **selos** sao as quatro origens da secao 20 do novo.md (Etapa 7A): 🟢 fonte
 oficial (edital, gabarito, lei, a questao da prova), 🔵 estatistica do acervo,
 🟡 analise automatica (o meu desempenho, a prioridade, a classificacao, a

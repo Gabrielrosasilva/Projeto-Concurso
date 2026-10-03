@@ -6,6 +6,7 @@ design.css, e sem a paleta antiga - o `:root` proprio com --fundo, --cartao,
 testes de funcao de cada tela continuam nos arquivos dela.
 """
 import re
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -42,3 +43,26 @@ def test_a_tela_esta_no_design_system(cliente, endereco, status):
     assert "/estatico/design.css" in html
     achado = PALETA_ANTIGA.search(html)
     assert not achado, achado and achado.group(0)
+
+
+WEB = Path(__file__).resolve().parent.parent / "src" / "radar" / "web"
+
+
+def test_toda_tela_marca_o_design_system():
+    """Nenhuma tela com a cara antiga: todo template de pagina tem o body ds.
+    Os parciais (_topo, _componentes...) vao dentro das paginas."""
+    for arquivo in sorted((WEB / "templates").glob("*.html")):
+        if arquivo.name.startswith("_"):
+            continue
+        assert re.search(r'<body class="ds\b', arquivo.read_text(encoding="utf-8")), arquivo.name
+
+
+def test_a_ponte_dos_nomes_antigos_saiu():
+    """A ponte (--cartao, --azul...) existia no design.css para a barra do
+    topo e as telas antigas. Com a ultima tela migrada, ela saiu - e ninguem
+    pode voltar a usar os nomes velhos, que nao apontam mais para nada."""
+    velhos = re.compile(r"var\(--(fundo|cartao|texto|suave|borda|azul|azul-fraco)\)")
+    arquivos = sorted((WEB / "templates").glob("*.html")) + [WEB / "static" / "design.css"]
+    for arquivo in arquivos:
+        achado = velhos.search(arquivo.read_text(encoding="utf-8"))
+        assert not achado, (arquivo.name, achado and achado.group(0))

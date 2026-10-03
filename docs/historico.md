@@ -1717,3 +1717,30 @@ anotado em pendencias, porque o conserto e renomear um parametro que pode
 estar em link salvo. E a tela Mais mostrava o backup de 02/10 falho: as 23h30
 o `radar sincronizar` nao conseguiu o pull porque havia mudanca nao commitada
 no disco (era o trabalho desta etapa em andamento).
+
+## Etapa 7B — as 6 telas no design system (03/10)
+
+**O pedido:** acabar com as duas caras do site. Seis telas ainda tinham a
+propria paleta (`:root` com `--fundo`, `--cartao`, `--azul`...) e o `body` sem
+a classe do design system: a 404, o Calendario, a Previsao, o Acompanhando, o
+Analises (`foco.html`) e o Concursos (`index.html`).
+
+**Antes de comecar, duas decisoes minhas** (59 e 60): o roxo das telas antigas
+(Estadual SC, "a confirmar", a fase "autorizado", o aviso da secretaria) nao
+podia ficar, porque desde a 7A o roxo e a cor da IA - virou azul e cinza
+tracejado; e a barra do topo, que ainda lia os nomes antigos pela "ponte" do
+`design.css`, entrou no ultimo commit, junto com a saida da ponte.
+
+**Como foi feito:** uma tela por commit, da menor para a maior - 404,
+Calendario, Previsao, Acompanhando, Analises e Concursos. Em cada uma: `body
+class="ds"`, `ds-pagina`, `ds-cabeca`, `ds-cartao`, `ds-tabela`, `ds-botao`,
+e o `<style>` da tela reescrito nos tokens, sem a paleta propria. As classes
+que testes e links leem ficaram. Cada tela foi aberta com o banco real e
+capturada pelo Edge sem janela nos dois temas antes do commit; na de noticias
+do Concursos, a captura mostrou os botoes esticados ao lado do campo de busca,
+e o alinhamento foi acertado. Por ultimo, a barra do topo passou para os
+tokens, a ponte saiu do `design.css` e o README ganhou o paragrafo das telas.
+
+`tests/test_telas_no_design_system.py` nasceu com a primeira tela e cresceu a
+cada uma: cada tela abre com o design system e sem a paleta antiga, todo
+template de pagina marca `class="ds"`, e ninguem usa os nomes velhos.

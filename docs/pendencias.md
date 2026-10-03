@@ -164,18 +164,6 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   B.7, agora no complementar. O conserto e no leitor do caderno
   (`questoes.py`).
 
-## C. Telas ainda no CSS antigo (B2 a B7) 🔴
-
-B1 migrou Simulado e Gerar questoes para o `design.css`. Faltam seis telas que
-ainda nao tem `body class="ds"` (conferido nos templates): **`foco.html`
-(Analises), `index.html` (Concursos), `previsao.html`, `acompanhando.html`,
-`calendario.html` e `404.html`**. Uma por etapa, sem mudar funcionalidade nem
-dado: so `ds-pagina`, `ds-cartao`, `ds-campo`, `ds-botao`, `ds-tabela` e os
-tokens que ja existem, nos dois temas, e o CSS antigo da tela sai. A ultima
-(B7) tambem ajusta a secao do README que descreve as telas. O enunciado
-original de cada etapa nao foi guardado; este paragrafo e o que sobrou dele.
-O A2 e o A3, que mexiam nos mesmos templates, foram feitos na Etapa 1B.
-
 ## D. Combinado para depois
 
 - 🔴 **`config/leis.yml`**: conferir a lista `mudancas` (leis alteradas depois

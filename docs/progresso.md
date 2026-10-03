@@ -19,7 +19,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 10 | 5 — Geração de questões | ✅ |
 | 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; falta a sua conferência das 61 fichas e o Ciclo 2, depois do simulado de 07/11 |
 | 12 | 7A — Selos e marcação de IA | ✅ |
-| 13 | 7B — As 6 telas no design system | ⬜ |
+| 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | ⬜ |
 
 ---
@@ -1606,3 +1606,64 @@ da gerada é da tabela, e não uma coluna.
 
 Achado e anotado em pendências (A): o `?tema=` da URL colide com o filtro
 "Matéria ou tema" dos Macetes - fora da 7A.
+
+## 7B — As 6 telas no design system (03/10/2026)
+
+- Situação: ✅
+- Datas: início 03/10 · fim 03/10
+
+**Como foi feita.** Uma tela por commit, da menor para a maior (`d135971` a
+`405d4af`): 404, Calendário, Previsão, Acompanhando, Análises (`foco.html`) e
+Concursos (`index.html`). Em cada uma: `body class="ds"`, `ds-pagina`,
+`ds-cabeca`, `ds-cartao`, `ds-tabela` (dentro de `ds-rolagem`), `ds-botao`, e o
+`<style>` da tela reescrito nos tokens, sem a paleta própria. O último commit
+leva a barra do topo para os tokens, tira a ponte do `design.css` e ajusta o
+README.
+
+**O que mudou em relação ao roteiro, e por quê** (aprovado antes de começar;
+decisões 59 e 60):
+- o roxo das telas antigas (Estadual SC, "a confirmar", a fase "autorizado",
+  o aviso da secretaria) virou **azul e cinza tracejado**: desde a 7A o roxo é
+  a cor da IA, e o roteiro manda usar só os tokens que já existem;
+- **a barra do topo e a ponte** entraram na etapa: o `_topo_estilo.html` (dentro
+  de toda página) ainda lia `--cartao`, `--azul`... pela ponte do `design.css`,
+  que o próprio arquivo dizia que sairia com a última tela;
+- as classes que testes e links leem (`li class="nucleo"`, `atalhos`,
+  `mais-filtros`, `detalhes`, `menu-faixa`) ficaram: mudou o estilo, não a
+  marcação. A 404 segue sem a barra do topo, como sempre foi.
+
+**Arquivos alterados.**
+- `src/radar/web/templates/404.html`, `calendario.html`, `previsao.html`,
+  `acompanhando.html`, `foco.html` e `index.html` — as seis telas;
+- `src/radar/web/templates/_topo_estilo.html` — a barra do topo nos tokens;
+- `src/radar/web/static/design.css` — a ponte dos nomes antigos saiu;
+- teste novo: `tests/test_telas_no_design_system.py`;
+- docs: `README.md` (o parágrafo das telas no design system), `decisoes.md`
+  (59 e 60), `pendencias.md` (o bloco C saiu), `historico.md`, `CLAUDE.md` e
+  este arquivo.
+
+Nenhum dado mudou, e nenhum texto de tela mudou.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| 404 (`test_404`, `test_telas_no_design_system`) | 7 passed |
+| Calendário (`test_calendario`) | 29 passed |
+| Previsão (`test_previsao`) | 32 passed |
+| Acompanhando (`test_acompanhando`, `test_favoritos`) | 105 passed |
+| Análises (`test_foco`, `test_minimo`, `test_onde_estudar`, `test_treino_do_alvo`, `test_design`) | 172 passed |
+| Concursos (`test_web`, `test_filtros`, `test_favoritos`, `test_elegibilidade`, `test_detalhes`, `test_abertas`, `test_retificacao`, `test_perfil`) | 280 passed |
+| Barra do topo e ponte (`test_telas_no_design_system`, `test_design`, `test_web`) | 106 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2324 passed** (2316 de antes + 8 novos), 0 failed, 23 min; o `data/` intacto |
+
+**Comando real rodado (banco real).** `radar web --porta 8765`, e cada tela
+capturada pelo Edge sem janela com `?tema=claro` e `?tema=escuro`: 404,
+Calendário, Previsão, Acompanhando, Análises, Concursos (a lista inteira, o
+filtro Estadual SC e a aba de notícias) e a barra do topo na tela Mais. A
+captura da aba de notícias mostrou os botões "Limpar" e "Voltar" esticados ao
+lado do campo de busca; o alinhamento foi acertado antes do commit.
+
+**Critério de conclusão.**
+- [x] as seis conferidas no navegador, nos dois temas (acima);
+- [x] o bloco C saiu do `pendencias.md`.

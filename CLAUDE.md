@@ -143,11 +143,14 @@ compilacao da Camara). **Falta da 6B:** a sua conferencia das fichas e o
 09/11. E a **7A** (de 03/10: os selos do novo.md - 🟢 oficial, 🔵 acervo,
 🟡 automatico, 🟣 IA - em todo o site, a origem gravada no dado, a frase da
 regra 4 e o "Amostra insuficiente" no lugar das variacoes, e o 🟣 com "nao e
-questao oficial da FEPESE" em toda tela que mostra questao de IA).
-**Proxima: Etapa 7B** (as 6 telas no CSS antigo).
+questao oficial da FEPESE" em toda tela que mostra questao de IA) e a **7B**
+(de 03/10: as 6 telas que faltavam no design system - 404, Calendario,
+Previsao, Acompanhando, Analises e Concursos -, a barra do topo nos tokens e a
+ponte dos nomes antigos fora do `design.css`).
+**Proxima: Etapa 8** (auditoria final integrada).
 **Em aberto:** o numero de questoes das faixas ainda e o do plano, e nao o da
-incidencia (a ficha mostra a incidencia e manda comecar pelas reais); 6 telas
-no CSS antigo. Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md);
+incidencia (a ficha mostra a incidencia e manda comecar pelas reais).
+Ordem e detalhe em [docs/pendencias.md](docs/pendencias.md);
 arvore no [README](README.md); banco em `data/radar.db`.
 
 **Arquitetura a preservar:** cada fonte e um arquivo isolado em `collectors/`,

@@ -172,22 +172,6 @@
 }
 
 
-/* --- ponte com as telas antigas ------------------------------------------ */
-/* A barra do topo e as telas ainda nao migradas usam os nomes velhos
-   (--cartao, --azul...). Enquanto houver tela antiga, eles apontam para os
-   novos - assim a barra fica igual em toda pagina. Sai quando a ultima tela
-   migrar. */
-:root {
-  --fundo:       var(--cor-fundo);
-  --cartao:      var(--cor-superficie);
-  --texto:       var(--cor-texto);
-  --suave:       var(--cor-texto-suave);
-  --borda:       var(--cor-borda);
-  --azul:        var(--cor-acao);
-  --azul-fraco:  var(--cor-acao-fundo);
-}
-
-
 /* --- os selos de origem --------------------------------------------------- */
 /* As quatro origens da secao 20 do novo.md: o que a banca ou a lei publicou
    (verde), o que o sistema contou no acervo (azul), o que o sistema calculou
@@ -242,8 +226,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 /* O que muda a pagina INTEIRA (fundo, letra, links) so vale em quem marca
-   <body class="ds"> - as telas ja migradas. As outras podem incluir este
-   arquivo so para usar o selo e o bloco, sem mudar de cara antes da hora. */
+   <body class="ds">. Desde a Etapa 7B, toda tela marca. */
 body.ds {
   margin: 0;
   background: var(--cor-fundo);

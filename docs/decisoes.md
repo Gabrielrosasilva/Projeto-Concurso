@@ -3077,3 +3077,29 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     várias vezes e devem cair de novo" no cartao "Questões que ela repete" dos
     Macetes - previsao -, trocado por "é o que já aconteceu, e não uma
     previsão".
+
+## Etapa 7B — as 6 telas no design system (03/10/2026)
+
+59. **o roxo das telas antigas virou azul e neutro.** Concursos e Analises
+    pintavam de roxo "Estadual SC", "A confirmar", a fase "autorizado" e o
+    aviso de outra inscricao na secretaria. Desde a 7A o roxo e a cor da IA
+    (decisao 53), e o roteiro manda usar so os tokens que ja existem. Ficou:
+    **Estadual SC e o aviso da secretaria em azul** (`--cor-azul`), e **"a
+    confirmar" e "autorizado" em cinza com borda tracejada** - e o "ainda nao
+    sei" da tela. A cor do anel continua dizendo a distancia: perto verde,
+    proximo amarelo, longe cinza. As outras cores das telas antigas foram para
+    o token mais proximo (o vermelho de prazo, que era rosa, ficou o
+    `--cor-vermelho`; o amarelo de "nao sei ainda", o `--cor-ambar`).
+
+60. **a ponte dos nomes antigos saiu, e a barra do topo le os tokens.** O
+    `design.css` mantinha `--fundo`, `--cartao`, `--azul`... apontando para os
+    tokens novos, porque a barra do topo (`_topo_estilo.html`, dentro de toda
+    pagina) e as telas antigas usavam esses nomes. Com a ultima tela migrada,
+    a barra passou para os tokens e a ponte saiu - sem mudar a cara de nada,
+    porque a ponte ja apontava para os mesmos valores. Um teste proibe os
+    nomes velhos em qualquer template e no `design.css`, e outro exige
+    `body class="ds"` em todo template de pagina. Na migracao, as classes que
+    testes e links usam (`li class="nucleo"`, `atalhos`, `mais-filtros`,
+    `detalhes`, `menu-faixa`) ficaram como estavam; mudou o estilo, nao a
+    marcacao que outra parte le. A 404 continua sem a barra do topo, como
+    sempre foi.
