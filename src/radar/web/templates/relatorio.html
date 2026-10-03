@@ -58,7 +58,7 @@
   <header class="ds-cabeca">
     <h1>Resultado da rodada</h1>
     <p>
-      {% if de_ia %}Questões <b>escritas por IA</b>: treino, e não medida do que a banca cobra.
+      {% if de_ia %}<b>{{ FRASE_DA_QUESTAO_DE_IA }}</b> Questão escrita por IA é treino, e não medida do que a banca cobra.
       {% elif (simulado.filtros or {}).get('erros') %}Revisão dos meus erros.
       {% elif (simulado.filtros or {}).get('compilado') %}Compilado de {{ simulado.filtros.get('compilado') }} pelo quadro do edital {{ simulado.filtros.get('ano_do_edital') or '' }} - só questões reais.
       {% else %}Questões reais das provas do acervo.{% endif %}
@@ -69,7 +69,7 @@
   <section class="ds-cartao">
     <div class="ds-cartao__cabeca">
       <h2 class="ds-cartao__titulo">Resultado geral</h2>
-      {% if de_ia %}{{ selo('ia', 'Treino com IA') }}{% else %}{{ selo('automatico') }}{% endif %}
+      {{ selo(resumo.origem, 'Treino com IA' if de_ia else None) }}
     </div>
     <div class="nota">
       <span class="valor {{ 'bom' if porcento >= 60 else 'ruim' }}">{{ '%.0f'|format(porcento) }}%</span>
@@ -87,7 +87,7 @@
   <section class="ds-cartao" style="margin-top:var(--esp-4)">
     <div class="ds-cartao__cabeca">
       <h2 class="ds-cartao__titulo">Por matéria</h2>
-      {{ selo('automatico') }}
+      {{ selo(desempenho_da_rodada[0].origem) }}
     </div>
     <p class="ds-cartao__meta">Em vermelho, as que ficaram abaixo da média desta rodada ({{ '%.0f'|format(porcento) }}%).</p>
     <table>
@@ -128,7 +128,7 @@
         <span class="ds-pequeno ds-suave">
           {{ item.materia or 'sem matéria' }}{% if not item.gerada and item.numero %} · questão {{ item.numero }}, {{ item.banca }} {{ item.ano }}{% endif %}
         </span>
-        {% if item.gerada %}{{ selo('ia', 'criada por IA') }}{% else %}{{ selo('prova') }}{% endif %}
+        {{ selo(item.origem, 'criada por IA' if item.gerada else None) }}
       </div>
       <p class="enunciado">{{ item.enunciado }}</p>
 
@@ -138,8 +138,7 @@
           <span class="texto">{{ item.texto_escolhido }}</span>
         </div>
         <div class="linha-resp">
-          {% if item.gerada %}{{ selo('ia', 'Resposta da IA ' ~ item.correta ~ ')') }}
-          {% else %}{{ selo('oficial', 'Gabarito definitivo ' ~ item.correta ~ ')') }}{% endif %}
+          {{ selo(item.origem_da_resposta, ('Resposta da IA ' if item.gerada else 'Gabarito definitivo ') ~ item.correta ~ ')') }}
           <span>{{ item.texto_correto }}</span>
         </div>
       </div>
@@ -147,7 +146,7 @@
       {% if item.gerada %}
         {% if item.artigo %}<p class="ds-suave ds-pequeno">A IA disse se apoiar em {{ item.artigo }}.</p>{% endif %}
       {% elif explicacao %}
-        {% call bloco('ia', 'Explicação (IA)') %}
+        {% call bloco(explicacao.origem, 'Explicação (IA)') %}
           <p>{{ explicacao.explicacao }}</p>
           <p class="ds-suave">Fonte citada: {{ explicacao.fonte }}{% if lei %} · <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a>{% endif %}</p>
           <p class="convite">{{ explicacao.modelo }} · confira na fonte antes de confiar</p>
@@ -155,12 +154,12 @@
       {% else %}
         <p class="convite" style="margin-top:var(--esp-3)">
           Explicação ainda não pedida.
-          {% if lei %}Enquanto isso: <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a> {{ selo('oficial') }}{% endif %}
+          {% if lei %}Enquanto isso: <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a> {{ selo(lei.origem) }}{% endif %}
         </p>
       {% endif %}
 
       {% for m in relacionados %}
-        {% call bloco('ia', 'Macete relacionado') %}
+        {% call bloco(m.origem, 'Macete relacionado') %}
           <p>{{ m.regra }}</p>
           {% if m.pegadinha %}<p><b>⚠ Pegadinha:</b> {{ m.pegadinha }}</p>{% endif %}
           <p class="convite">Fonte citada: {{ m.fonte }} · <a href="/macetes/{{ m.impressao }}/questoes">ver as questões reais</a></p>
@@ -176,7 +175,7 @@
       <summary>{{ resumo.acertos }} acerto(s)</summary>
       <ul>
         {% for item in acertos %}
-          <li>{% if item.gerada %}{{ selo('ia', 'criada por IA') }} {% endif %}{{ item.materia }} - {{ item.enunciado[:120] }}{% if item.enunciado | length > 120 %}...{% endif %}</li>
+          <li>{% if item.gerada %}{{ selo(item.origem, 'criada por IA') }} {% endif %}{{ item.materia }} - {{ item.enunciado[:120] }}{% if item.enunciado | length > 120 %}...{% endif %}</li>
         {% endfor %}
       </ul>
     </details>

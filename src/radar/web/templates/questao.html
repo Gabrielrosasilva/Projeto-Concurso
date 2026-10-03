@@ -80,12 +80,13 @@
   <article class="ds-cartao questao">
     <div class="cabeca">
       <span class="materia">{{ questao.materia or 'sem matéria' }}</span>
-      {% if de_ia %}{{ selo('ia') }}{% else %}{{ selo('prova') }}{% endif %}
+      {{ selo(questao.origem) }}
     </div>
 
     {% if de_ia %}
-      {% call bloco('ia', 'Questão criada por IA') %}
+      {% call bloco(questao.origem, 'Questão criada por IA') %}
         <div class="aviso-ia">
+          <p><b>{{ FRASE_DA_QUESTAO_DE_IA }}</b></p>
           {% if origem %}
             <p>Variação da questão {{ origem.numero }} de {{ origem.banca }} {{ origem.ano }}{% if origem.cargo %}, {{ origem.cargo }}{% endif %} — aquela tem gabarito oficial conferido; esta não.</p>
           {% else %}

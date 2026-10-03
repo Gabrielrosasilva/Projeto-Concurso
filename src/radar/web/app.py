@@ -763,7 +763,7 @@ def _macetes_por_questao() -> dict[str, list]:
             continue
         for q in m.get("questoes") or []:
             chave = f"{q.get('prova_url')}#{q.get('numero')}"
-            por_questao.setdefault(chave, []).append(m)
+            por_questao.setdefault(chave, []).append({**m, "origem": origem.IA})
     return por_questao
 
 

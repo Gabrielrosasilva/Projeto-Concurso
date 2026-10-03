@@ -30,6 +30,7 @@ from pathlib import Path
 from radar import config, gerador, leis
 from radar.db import criar_tabelas, sessao
 from radar.models import agora
+from radar.origem import IA
 from radar.regioes import normalizar
 from radar.servico import geradas
 from radar.util import fuso_local
@@ -1032,7 +1033,8 @@ def carregar_explicacoes(caminho: Path | None = None) -> dict[str, dict]:
         return {}
     linhas = json.loads(origem.read_text(encoding="utf-8")) or []
     return {
-        e["impressao"]: e for e in linhas
+        # A origem do selo (Etapa 7A): explicacao e texto de IA.
+        e["impressao"]: {**e, "origem": IA} for e in linhas
         if e.get("impressao") and (e.get("fonte") or "").strip()
         and (e.get("modelo") or "").strip() and e.get("criado_em")
     }

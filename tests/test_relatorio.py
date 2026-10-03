@@ -56,6 +56,22 @@ def test_o_relatorio_tem_resultado_materia_e_erros(cliente):
     assert "Gabarito definitivo a)" in texto
 
 
+def test_os_selos_do_erro_saem_do_item(cliente, monkeypatch):
+    """A tela nao escolhe a cor (Etapa 7A): trocada a origem do item no dado,
+    o selo da questao e o da resposta certa trocam junto."""
+    from radar.servico import simulado
+
+    rodada = _rodada_com_um_erro()
+    monkeypatch.setattr(simulado.ItemDeRevisao, "origem", property(lambda self: "acervo"))
+    monkeypatch.setattr(simulado.ItemDeRevisao, "origem_da_resposta",
+                        property(lambda self: "automatico"))
+
+    texto = cliente.get(f"/simulado/{rodada}").text
+
+    assert '<span aria-hidden="true">🔵</span> Estatística do acervo</span>' in texto
+    assert '<span aria-hidden="true">🟡</span> Gabarito definitivo a)</span>' in texto
+
+
 def test_nao_ha_nota_de_corte(cliente):
     """Sem resultado oficial publicado, nao ha fonte para nota de corte."""
     texto = cliente.get(f"/simulado/{_rodada_com_um_erro()}").text

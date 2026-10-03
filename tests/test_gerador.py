@@ -569,6 +569,40 @@ def test_a_questao_gerada_chega_com_selo_e_com_a_origem(cliente):
     assert "Questão criada por IA" in pagina
     assert "Variação da questão 1" in pagina
     assert "FEPESE 2019" in pagina
+    # Regra 5 do novo.md, sempre visivel: o 🟣 e a frase, antes do enunciado.
+    assert "🟣" in pagina
+    assert "Gerada por IA: não é questão oficial da FEPESE." in pagina
+    assert pagina.index("não é questão oficial da FEPESE") < pagina.index('class="enunciado"')
+
+
+def test_o_relatorio_da_rodada_de_ia_diz_que_nao_e_questao_oficial(cliente):
+    """Regra 5 do novo.md no relatorio: a pagina diz a frase, e cada erro, o
+    resultado e a resposta levam o 🟣 - a resposta da IA nunca parece o
+    gabarito definitivo."""
+    _gravar_uma()
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+    _resposta, questao = servico.questao_atual(rodada.id)
+    servico.responder(rodada.id, questao.id, "a")            # errou: a certa e c
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "Gerada por IA: não é questão oficial da FEPESE." in pagina
+    assert '<span aria-hidden="true">🟣</span> Treino com IA' in pagina
+    assert '<span aria-hidden="true">🟣</span> criada por IA' in pagina
+    assert '<span aria-hidden="true">🟣</span> Resposta da IA c)' in pagina
+    assert "Gabarito definitivo" not in pagina
+
+
+def test_a_questao_real_da_rodada_nao_leva_o_aviso_de_ia(cliente):
+    """O selo sai da questao: a real e 🟢, e o aviso de IA nao aparece nela."""
+    _semear(_concurso(), _real(1))
+    rodada = servico.criar_simulado(quantidade=1)
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "🟢</span> Extraída da prova" in pagina
+    assert "🟣" not in pagina
+    assert "não é questão oficial da FEPESE" not in pagina
 
 
 def test_o_artigo_aparece_com_o_link_da_lei(cliente):
