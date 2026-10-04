@@ -2002,3 +2002,16 @@ conferido uma vez por conexao e a linha complementar montada direto (decisao
 80). A home caiu para ~1,4 s e Analises para ~1 s, com as paginas iguais byte a
 byte. No caminho, um achado antigo: os termos frequentes empatados trocam de
 ordem a cada vez que o radar sobe - ficou nas pendencias.
+
+## A faixa sem `conteudo` no que ela cobre, F7 (04/10)
+
+**O que faltava:** so 6 faixas do plano tem a chave `conteudo`, e nenhum R+7.
+A teoria, a lei seca e o R+7 contavam no dia e em conteudo nenhum, e o Meu
+desempenho nao via o que eu estudava nas faixas.
+
+**A F7 (a opcao (b), sua escolha):** a faixa sem `conteudo` conta no que cobre
+- os `nos` do plano e a ficha depois de conferida - so para estudado,
+praticado e as datas; o acerto fica fora (decisao 81). Hoje nada muda, porque
+nenhuma ficha esta conferida; com as duas de 28 e 29/09, 9 nos de Penal e
+Constitucional acenderiam. O achado: o R+7 feito nao tira o conteudo da fila,
+porque o 1-7-30 so anda com acerto no radar - ficou para voce decidir.

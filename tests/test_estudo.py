@@ -10,7 +10,9 @@ O que estes testes seguram:
   * a evolucao semanal com as mesmas contas da tela Semanas - toda resposta,
     e nao so a ultima de cada questao -, e a semana abaixo do minimo marcada;
   * a data da ultima revisao (decisao 79): so o que e revisao, nunca a
-    pratica comum.
+    pratica comum;
+  * a faixa sem `conteudo` conta no que cobre - os `nos` do plano e a
+    ficha conferida -, so para a situacao e as datas (decisao 81).
 
 As datas sao fixas e o cronograma e o mini: nada aqui depende do dia em que o
 teste roda.
@@ -19,22 +21,27 @@ import re
 from datetime import date, datetime, timedelta
 
 import pytest
+import yaml
 from sqlalchemy import select
 
 from radar import amostra as regua
+from radar import cronograma, fichas
 from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
 from radar.servico import desempenho_por_conteudo as por_conteudo
 from radar.servico import erros as caderno
 from radar.servico import estudo
+from radar.servico import conteudos as servico_conteudos
+from radar.servico import cronograma as diario
 from radar.servico import extra as estudo_extra
+from radar.servico import fichas as servico_fichas
 from radar.servico import metricas
 from radar.servico import semanas as tela_de_semanas
 from radar.util import fuso_local
 
 from tests.test_desempenho import (  # noqa: F401 - fixtures e ajudantes
-    APLICACAO, HOJE, NO_TEMPO, PENAL, PORTUGUES, SEG, TER, _anotar, _responder,
-    arvore, plano,
+    APLICACAO, HOJE, MINI, NO_TEMPO, PENAL, PORTUGUES, SEG, TER, _anotar,
+    _responder, arvore, plano,
 )
 
 
@@ -435,3 +442,90 @@ def test_questao_de_ia_errada_nao_entra_no_refazer(plano):
     _responder(1, False, SEG, gerada=True, classificar_em=NO_TEMPO)
 
     assert estudo.refazer(hoje=HOJE).vazio
+
+
+# --- a faixa sem `conteudo` conta no que cobre (decisao 81) ---------------------
+
+@pytest.fixture
+def plano_com_nos(arvore, tmp_path):
+    """O cronograma mini SEM `conteudo`: a faixa de questoes de 28/09 e o R+7
+    de 29/09 dizem o que cobrem pela chave `nos` do plano."""
+    servico_conteudos.exportar()
+    dados = yaml.safe_load(MINI.read_text(encoding="utf-8"))
+    dados["dias"][0]["noite"][0]["nos"] = [NO_TEMPO]    # Aprendizagem, de Direito Penal
+    dados["dias"][1]["noite"][0]["nos"] = [NO_TEMPO]    # o R+7
+    arquivo = tmp_path / "cronograma_com_nos.yml"
+    arquivo.write_text(yaml.safe_dump(dados, allow_unicode=True), encoding="utf-8")
+    return cronograma.carregar(arquivo)
+
+
+def _ficha(**mudar) -> fichas.FichaEscrita:
+    """A ficha do tema da teoria de 28/09 ("Aplicação da lei penal")."""
+    base = dict(tema="Aplicação da lei penal", materia=PENAL, nos=[NO_TEMPO],
+                modelo="Claude Code, de teste", criado_em="2026-10-02T12:00:00+00:00")
+    base.update(mudar)
+    return fichas.FichaEscrita(**base)
+
+
+def test_a_faixa_sem_conteudo_conta_nos_nos_do_plano_so_para_situacao_e_datas(plano_com_nos):
+    _anotar(plano_com_nos, "noite", 0, 15, 11)          # sem escolher conteudo
+
+    todas = estudo.situacoes(plano=plano_com_nos, hoje=HOJE)
+
+    for caminho in (NO_TEMPO, APLICACAO, PENAL):
+        assert todas[caminho].praticado and todas[caminho].ultima_pratica == SEG
+    # O acerto nao vai a no nenhum: nem o desempenho, nem a evolucao.
+    assert todas[NO_TEMPO].semanal == [] and todas[NO_TEMPO].desempenho is None
+    assert NO_TEMPO not in por_conteudo.por_no(plano=plano_com_nos, hoje=HOJE)
+    assert todas[PORTUGUES].rotulo == estudo.NAO_ESTUDADO
+
+
+def test_o_r7_sem_conteudo_marca_a_revisao_do_que_cobre(plano_com_nos):
+    _anotar(plano_com_nos, "noite", 0, 10, 8, data=TER)
+
+    todas = estudo.situacoes(plano=plano_com_nos, hoje=HOJE)
+
+    assert todas[NO_TEMPO].ultima_revisao == TER
+    assert todas[PENAL].ultima_revisao == TER
+
+
+def test_a_ficha_so_liga_a_faixa_depois_de_conferida(plano_com_nos):
+    """A teoria de 28/09 nao tem `nos` no plano: so a ficha diz o que ela
+    cobre, e a ficha e da IA ate eu conferir."""
+    servico_fichas.gravar([_ficha()])
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano_com_nos, hoje=HOJE)
+
+    assert not estudo.situacoes(plano=plano_com_nos, hoje=HOJE)[NO_TEMPO].estudado
+
+    servico_fichas.gravar([_ficha(conferida_em="2026-10-03")])
+    todas = estudo.situacoes(plano=plano_com_nos, hoje=HOJE)
+
+    assert todas[NO_TEMPO].estudado and todas[NO_TEMPO].ultimo_estudo == SEG
+    assert todas[APLICACAO].estudado
+
+
+def test_a_ficha_conferida_sem_no_conta_no_assunto_que_ela_escreve(plano_com_nos):
+    servico_fichas.gravar([_ficha(nos=[], assunto="Aplicação da lei penal",
+                                  conferida_em="2026-10-03")])
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano_com_nos, hoje=HOJE)
+
+    todas = estudo.situacoes(plano=plano_com_nos, hoje=HOJE)
+
+    assert todas[APLICACAO].estudado
+    # O subassunto nao: a ficha nao disse que o tema e ele.
+    assert not todas[NO_TEMPO].estudado
+
+
+def test_a_faixa_com_conteudo_continua_so_no_conteudo(plano):
+    """Com a chave `conteudo`, nada muda: o acerto vai ao no escolhido, e a
+    ficha conferida nao espalha a faixa para outros nos."""
+    servico_fichas.gravar([_ficha(nos=[NO_TEMPO], conferida_em="2026-10-03")])
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano, hoje=HOJE)
+
+    todas = estudo.situacoes(plano=plano, hoje=HOJE)
+
+    assert todas[APLICACAO].estudado
+    assert not todas[NO_TEMPO].estudado

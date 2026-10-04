@@ -173,9 +173,11 @@
         {{ selo('automatico') }} <b>Revisão</b> é a faixa de revisão do plano
         (o R+7) ou o estudo extra de revisão anotados no conteúdo, ou questão
         dele respondida numa rodada que revisa: a revisão espaçada e as
-        rodadas só de erradas. Questão de rodada comum é prática, não revisão;
-        e a faixa do plano só chega a um conteúdo quando tem a chave
-        <code>conteudo</code> no <code>config/cronograma.yml</code>. A
+        rodadas só de erradas. Questão de rodada comum é prática, não revisão.
+        A faixa sem a chave <code>conteudo</code> no
+        <code>config/cronograma.yml</code> conta no que ela cobre - os nós
+        que o plano dá a ela e os da ficha que eu já conferi - só aqui, na
+        situação e nas datas: o acerto dela não vai a conteúdo nenhum. A
         evolução usa as contas da tela Semanas - toda resposta sem consulta, e
         não só a última de cada questão. A semana em cinza teve menos de
         {{ minimos.do_nivel('assunto') }} respostas no assunto (o mínimo do
@@ -184,8 +186,9 @@
       </p>
     {% else %}
       <p class="convite">Ainda não estudei nem pratiquei nenhum conteúdo da
-        árvore{{ ' nesta matéria' if materia }}. Faixa sem a chave
-        <code>conteudo</code> no plano conta no dia, e em conteúdo nenhum.</p>
+        árvore{{ ' nesta matéria' if materia }}. A faixa sem a chave
+        <code>conteudo</code> no plano só chega a um conteúdo pelos nós que o
+        plano dá a ela, ou pela ficha do tema depois de conferida.</p>
     {% endif %}
   </section>
 

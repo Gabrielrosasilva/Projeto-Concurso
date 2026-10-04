@@ -3558,3 +3558,25 @@ mede (7A); commit e push por subetapa (8A).
     conferidas sairam iguais byte a byte antes e depois (com o
     `PYTHONHASHSEED` fixo), tirando o relogio da Hoje e a estimativa de custo
     da /geradas, que sorteia as questoes de base a cada abertura.
+
+81. **a faixa sem `conteudo` conta no que ela cobre, so para a situacao e as
+    datas** (F7, a opcao (b) que voce escolheu em 03/10). So 6 faixas do plano
+    tem a chave `conteudo`, e nenhum R+7: sem ela, a teoria, a lei seca e o
+    R+7 contavam no dia e em no nenhum, e o Meu desempenho nao via o que eu
+    estudava nas faixas. Agora:
+    - **o que a faixa cobre** sao os `nos` que o plano da a ela (📌, meu dado)
+      e, depois que eu confiro a ficha do tema, os nos da ficha - ou, na ficha
+      sem no, o assunto e o subassunto que ela escreve. **A ficha por
+      conferir nao entra**: ate la, o vinculo e so da IA;
+    - nesses nos (e nos de cima) a faixa marca **estudado ou praticado e as
+      datas** - o estudo, a pratica e a revisao -, e alimenta a fila de
+      revisao e o "o que eu ainda nao estudei";
+    - **o acerto nao vai a no nenhum**: nao se sabe de qual dos nos cobertos
+      ele e. O desempenho, o estado e a evolucao continuam so com o radar e o
+      anotado no `conteudo` (decisao 71). Nem os minutos sao espalhados;
+    - a faixa COM `conteudo` continua como era: so o no escolhido.
+    Com o banco de 04/10 nada muda ainda: nenhuma das 61 fichas esta
+    conferida, e nenhuma faixa com `nos` foi feita (as primeiras sao de
+    05/10). Com as duas fichas das faixas ja marcadas (28 e 29/09) conferidas,
+    9 nos de Penal e Constitucional passariam a "estudado e praticado", e a
+    fila de revisao iria de 10 para 19.

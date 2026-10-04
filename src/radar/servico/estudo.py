@@ -11,6 +11,11 @@ cada no da arvore:
   * **praticado** - eu respondi questao dele, aqui ou anotada;
   * **nao estudado** - nenhum dos dois.
 
+A faixa liga-se ao no pela chave `conteudo`. A que nao a tem conta no que
+cobre - os `nos` do plano, e os da ficha depois de conferida -, mas so para
+estudado, praticado e as datas: o acerto dela nao vai a no nenhum, porque nao
+se sabe de qual dos cobertos ele e (decisao 81).
+
 E, por no: a data do primeiro e do ultimo estudo, a da ultima revisao, a taxa
 de acerto (do `desempenho_por_conteudo`) e a evolucao semana a semana, com as
 MESMAS contas da tela Semanas.
@@ -39,11 +44,13 @@ from datetime import date, timedelta
 from radar import amostra as regua
 from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
+from radar import fichas
 from radar.regioes import normalizar
 from radar.servico import conteudos as servico_conteudos
 from radar.servico import desempenho_por_conteudo as por_conteudo
 from radar.servico import erros as caderno
 from radar.servico import espacada
+from radar.servico import fichas as servico_fichas
 from radar.servico import metricas
 
 #: Os tipos de faixa que fazem um conteudo "estudado". `questoes`, `revisao`,
@@ -213,6 +220,7 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
     # A faixa e o extra chegam ao no que eu escolhi ao anotar; a resposta do
     # radar, ao no da classificacao da questao.
     de_quem = por_conteudo.nos_das_questoes()
+    escritas = servico_fichas.carregar()
     inicio = plano.inicio
     fim = min(plano.fim, hoje) if plano.fim else hoje
     por_semana: dict[str, dict[int, list]] = {}
@@ -222,31 +230,32 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
         else:
             onde = linha.conteudo
         if not onde:
+            if linha.origem == metricas.FAIXA and linha.faixa is not None:
+                # Faixa sem `conteudo`: conta no que ela cobre, so para a
+                # situacao e as datas. O acerto fica fora - nao se sabe de
+                # qual dos nos cobertos ele e (decisao 81).
+                cobertos = _o_que_a_faixa_cobre(linha.faixa, escritas, situacao)
+                for caminho in {a for no in cobertos for a in _ancestrais(no)}:
+                    if caminho in situacao:
+                        _situacao_e_datas(situacao[caminho], linha)
             continue
         semana = _semana_de(plano, linha.data)
         for caminho in _ancestrais(onde):
             atual = situacao.get(caminho)
             if atual is None:
                 continue
-            if linha.revisao:
-                atual.ultima_revisao = _mais_nova(atual.ultima_revisao, linha.data)
             if semana is not None:
                 # TODA resposta, e nao so a ultima de cada questao: a evolucao
                 # e o historico - errar e depois acertar e o que ela mostra.
                 por_semana.setdefault(caminho, {}).setdefault(semana, []).append(linha)
             if linha.origem == metricas.RADAR:
-                continue      # o "praticado" do radar sai das ultimas respostas, abaixo
+                # O "praticado" do radar sai das ultimas respostas, abaixo;
+                # daqui so a revisao.
+                if linha.revisao:
+                    atual.ultima_revisao = _mais_nova(atual.ultima_revisao, linha.data)
+                continue
             atual.minutos += linha.minutos
-            if linha.questoes:
-                atual.praticado = True
-                atual.primeira_pratica = _mais_velha(atual.primeira_pratica, linha.data)
-                atual.ultima_pratica = _mais_nova(atual.ultima_pratica, linha.data)
-            else:
-                # Faixa ou extra sem questao: foi leitura. E isto que faz o
-                # conteudo "estudado".
-                atual.estudado = True
-                atual.primeiro_estudo = _mais_velha(atual.primeiro_estudo, linha.data)
-                atual.ultimo_estudo = _mais_nova(atual.ultimo_estudo, linha.data)
+            _situacao_e_datas(atual, linha)
 
     # --- as respostas do radar --------------------------------------------
     for chave, _, dia in por_conteudo._questoes_respondidas(None, hoje):
@@ -272,6 +281,40 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
         atual.semanal = _evolucao(por_semana.get(caminho, {}),
                                   minimos.do_nivel(atual.nivel))
     return situacao
+
+
+def _situacao_e_datas(atual: Situacao, linha) -> None:
+    """O que uma faixa ou um extra diz de um no: estudado ou praticado, e
+    quando. Nada de acerto aqui."""
+    if linha.revisao:
+        atual.ultima_revisao = _mais_nova(atual.ultima_revisao, linha.data)
+    if linha.questoes:
+        atual.praticado = True
+        atual.primeira_pratica = _mais_velha(atual.primeira_pratica, linha.data)
+        atual.ultima_pratica = _mais_nova(atual.ultima_pratica, linha.data)
+    else:
+        # Faixa ou extra sem questao: foi leitura. E isto que faz o
+        # conteudo "estudado".
+        atual.estudado = True
+        atual.primeiro_estudo = _mais_velha(atual.primeiro_estudo, linha.data)
+        atual.ultimo_estudo = _mais_nova(atual.ultimo_estudo, linha.data)
+
+
+def _o_que_a_faixa_cobre(faixa, escritas, arvore_inteira) -> set[str]:
+    """Os nos que uma faixa SEM `conteudo` cobre (decisao 81): os `nos` que o
+    plano da a ela e, depois que eu confiro a ficha do tema, os da ficha. A
+    ficha por conferir nao entra: ate la, o vinculo e so da IA."""
+    cobertos = set(getattr(faixa, "nos", ()) or ())
+    escrita = fichas.da_faixa(faixa, escritas)
+    if escrita is not None and escrita.conferida_em:
+        cobertos.update(escrita.nos)
+        if not escrita.nos and escrita.assunto:
+            # A ficha sem no diz o assunto (e o subassunto) por escrito.
+            assunto = arvore.caminho(escrita.materia, escrita.assunto)
+            cobertos.add(assunto)
+            if escrita.subassunto:
+                cobertos.add(arvore.caminho(assunto, escrita.subassunto))
+    return {caminho for caminho in cobertos if caminho in arvore_inteira}
 
 
 def _evolucao(por_semana: dict[int, list], minimo: int) -> list[Semana]:

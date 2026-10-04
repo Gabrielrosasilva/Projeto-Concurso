@@ -242,7 +242,7 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 - 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A, a 2B e a 2C estao
   feitas (as faixas que medem, o simulado do Qconcursos, o sabado e o assunto
   na propria faixa: decisoes 67, 69, 70 e 71). Da **secao F** (o Pedido 1),
-  feitas a F1 a F6 (decisoes 74, 75, 77, 78, 79 e 80); falta o resto dela, em
+  feitas a F1 a F7 (decisoes 74, 75, 77 a 81); falta o resto dela, em
   subetapas;
 - ⚪ **O R+7 dos diagnosticos refaz 5 erros** (decisao 70): e o numero do
   plano. Com mais erros, os outros ficam para a rodada "So meus erros" da
@@ -294,24 +294,21 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
   consegue identificar. As 30 do estoque podem ser religadas pelos pedidos
   que ficaram no historico da conversa de 03/10 (o texto de cada questao de
   base foi impresso la); as 3 de 27/09 nao tem registro. Decisao sua;
-- 🟡 **As faixas do plano quase nao chegam a arvore** (achado do F5, decisao
-  79): a faixa so conta num no pela chave `conteudo` do
-  `config/cronograma.yml`, e so 6 faixas a tem. Ate 07/11, das 45 faixas de
-  revisao nenhuma tem (38 so tem no pela ficha, que e da IA e esta por
-  conferir); das 95 de estudo, 3. Sem ela, a tela Hoje nem mostra o seletor
-  de conteudo, e o R+7, a teoria e a lei seca contam no dia e em no nenhum:
-  o Meu desempenho nao ve o que eu estudei nas faixas, e a ultima revisao
-  so vem das rodadas de revisao do radar e do estudo extra. Decisao sua:
-  (a) deixar assim; (b) a faixa sem `conteudo` conta no no que ela cobre
-  (`fichas.onde_na_arvore`) para o "estudado" e para as datas, nunca para o
-  acerto - pelos `nos` do plano ja, e pela ficha so depois de voce
-  conferi-la; (c) eu proponho a chave `conteudo` de cada faixa a partir das
-  fichas, e voce confere antes de entrar no plano;
+- 🟡 **A revisao feita nao empurra o prazo do 1-7-30** (achado da F7, decisao
+  81): o prazo so anda com acerto no RADAR na data do vencimento ou depois.
+  O R+7 feito no Qconcursos marca a data da revisao (decisao 79), mas o
+  conteudo continua "prazo de revisao vencido" ate eu acertar questao dele
+  no radar. Com as fichas conferidas, as faixas passam a encher a fila (com
+  as duas de 28 e 29/09, de 10 para 19), e o R+7 nao tira ninguem dela.
+  Decisao sua: (a) deixar assim; (b) a revisao feita fora do radar no
+  vencimento ou depois - a faixa de revisao marcada, o extra de revisao -
+  tambem passa o conteudo para a etapa seguinte, como o acerto no radar ja
+  faz (a rodada de revisao do radar ja anda pelo acerto);
 - ⚪ **O "estudado" do codigo e mais largo que a decisao 20**: qualquer faixa
   ou extra SEM questao deixa o no estudado (as constantes `TIPOS_DE_ESTUDO` e
   `EXTRA_DE_ESTUDO` de `servico/estudo.py` estao declaradas e sem uso). Hoje
-  so o extra de revisao sem questao cai nisso; com a (b) ou a (c) acima, a
-  faixa de correcao marcada tambem cairia;
+  so o extra de revisao sem questao cai nisso: a faixa de correcao nao tem
+  `conteudo` nem cobre no nenhum (decisao 81);
 - ⚪ **O 1-7-30 sem estudo conta da ULTIMA resposta de cada questao**
   (`estudo.situacoes`, `primeira_pratica`): questao refeita empurra o
   "primeiro contato" para a data da refeita. A evolucao ja conta toda

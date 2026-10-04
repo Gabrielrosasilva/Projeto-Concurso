@@ -218,6 +218,10 @@ class Lancamento:
     #: A linha do radar nao tem `conteudo` - nao fui eu que escolhi o no -, e
     #: e por esta chave que ela chega a ele, pela classificacao da questao.
     chave: str | None = None
+    #: A faixa do plano, nas linhas de faixa. E por ela que a faixa sem
+    #: `conteudo` chega ao que cobre - so para a situacao e as datas do no,
+    #: nunca para o acerto (servico/estudo.py, decisao 81).
+    faixa: object = None
 
 
 def rodada_que_revisa(filtros: dict | None) -> bool:
@@ -289,6 +293,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
                 conteudo=feita.conteudo,
                 descricao=f"{data:%d/%m/%Y}, faixa {feita.titulo!r}",
                 revisao=feita.tipo in plano_de_estudo.TIPOS_DE_REVISAO,
+                faixa=getattr(montado, feita.bloco)[feita.indice],
             ))
 
     # --- o estudo extra ----------------------------------------------------

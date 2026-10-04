@@ -134,15 +134,17 @@ cobranca tambem do complementar, a parte e so com gabarito definitivo (decisao
 78) - e o F5 - o Meu desempenho mostra a ultima revisao de cada conteudo e a
 evolucao no assunto, contando toda resposta (decisao 79) - e o F6 - o painel
 sem conta repetida: a home de ~4 s para ~1,4 s, Analises de ~3 s para ~1 s
-(decisao 80).
+(decisao 80) - e a F7 - a faixa sem `conteudo` conta no que cobre, so para a
+situacao e as datas (decisao 81).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 775 geradas (725 do estoque ate 07/11, os 57 lotes:
 `docs/estoque_de_geradas.md`; nas Regras de Mandela a fonte e a regra, decisao
 76); banco na versao 5.
-**Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
-por amostra - B.8) e os 15 itens da lista de leis; decidir como as faixas do
-plano chegam a arvore (so 6 tem a chave `conteudo`, e nenhum R+7: pendencia
-F); o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
+**Falta, de voce:** conferir as 61 fichas (a conferida tambem liga as faixas
+do tema ao Meu desempenho, decisao 81), o complementar (as automaticas, por
+amostra - B.8) e os 15 itens da lista de leis; decidir se a revisao feita
+fora do radar empurra o prazo do 1-7-30 (pendencia F); o **Ciclo 2**, depois
+do simulado de 07/11 e antes de 09/11.
 **Conferir:** a primeira noite do backup consertado (`data/logs/` ou a tela
 Mais) e o Actions de 04/10, o primeiro com a 2A, a 2B e a 2C (pendencias A e
 D); o de 03/10 foi verde.
@@ -185,7 +187,9 @@ do complementar aceito, e gravada na rodada; a do simulado do Qconcursos
 tambem, por tema estudado (decisao 69). **O sabado** - a revisao semanal, o
 R+7 dos diagnosticos e a comparacao de 07/11 - **sai do `servico/sabado.py`**
 (decisao 70). **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
-(decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. **Alvo,
+(decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. Para o
+estudado e as datas, a faixa sem `conteudo` conta nos `nos` do plano e na
+ficha CONFERIDA, nunca no acerto (decisao 81). **Alvo,
 complementar e
 fora saem do `servico/evidencia.py`** (uma regra, nunca somados; e prova
 complementar so entra em estatistica se estiver aceita no

@@ -1063,7 +1063,9 @@ A mesma tela faz o que o ANKI fazia: **quando eu estudei e revisei cada
 conteudo** (a ultima vez, a ultima revisao - so faixa de revisao, extra de
 revisao ou rodada que revisa no radar; pratica nao conta - e, no assunto, o
 acerto semana a semana, com toda resposta e a semana abaixo do minimo em
-cinza), **o que eu ainda nao estudei**, **o que voltou para revisao** (por erro
+cinza - a faixa sem a chave `conteudo` conta no que cobre, os `nos` do plano e
+a ficha que eu ja conferi, so para a situacao e as datas, nunca para o
+acerto), **o que eu ainda nao estudei**, **o que voltou para revisao** (por erro
 recente, por desempenho abaixo do corte, ou pelo prazo 1-7-30 vencido - a linha
 diz qual) e **as questoes a refazer** (as erradas no radar e as do caderno de
 erros, em duas listas que nunca se somam). Nada disso e gravado em tabela: sai

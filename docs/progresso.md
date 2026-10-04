@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 a F6 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento, os padrões do complementar, a última revisão e a evolução no Meu desempenho, e o painel mais leve); falta o resto da seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 a F7 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento, os padrões do complementar, a última revisão e a evolução no Meu desempenho, o painel mais leve e a faixa sem `conteudo` no que ela cobre); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 
 ---
@@ -2372,3 +2372,33 @@ ordem a cada processo, antes e depois - ficou nas pendências.
 | `test_backup_simulados.py`, `test_classificacao.py`, `test_classificador.py`, `test_complementar.py`, `test_cronograma.py`, `test_fichas.py`, `test_incidencia.py`, `test_migracao.py`, `test_migracoes.py`, `test_questoes.py`, `test_questoes_ieses.py` | 359 passed |
 | `test_incidencia.py` (4 novos: o nó e os de cima contra a regra antiga), `test_migracao.py` (1 novo: as colunas uma vez por conexão), `test_cronograma.py` (1 novo: o leitor em C lê igual) | 97 passed |
 | Suíte inteira, PC (uma vez) | **2472 passed** (2466 de antes + 6 novos), 0 failed, 22 min (eram 25: as colunas conferidas uma vez por conexão também aceleram os testes) |
+
+### F7 — a faixa sem `conteudo` conta no que ela cobre ✅
+
+A opção (b) da pendência das faixas, escolhida por você (decisão 81).
+
+**O que mudou:**
+- `src/radar/servico/metricas.py`: a linha de faixa leva a faixa do plano
+  (`Lancamento.faixa`);
+- `src/radar/servico/estudo.py`: a faixa sem `conteudo` conta no que cobre
+  (`_o_que_a_faixa_cobre`: os `nos` do plano e a ficha conferida, ou o
+  assunto que a ficha sem nó escreve), só para estudado, praticado e as
+  datas (`_situacao_e_datas`); o acerto e os minutos ficam fora;
+- `desempenho.html`: a regra escrita embaixo da seção "Quando eu estudei e
+  revisei cada conteúdo".
+
+**Com o banco real:** nada muda ainda - nenhuma das 61 fichas está
+conferida, e nenhuma faixa com `nos` foi feita (as primeiras são de 05/10).
+Simulado em memória: com as duas fichas das faixas já marcadas (28 e 29/09)
+conferidas, 9 nós de Penal e Constitucional passam a "estudado e
+praticado", e a fila de revisão vai de 10 para 19. Isso mostrou que o R+7
+feito não tira o conteúdo da fila (o 1-7-30 só anda com acerto no radar):
+está nas pendências, como decisão sua.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_estudo.py`, `test_fichas.py`, `test_metricas.py`, antes dos testes novos | 117 passed |
+| `test_estudo.py` (5 novos: os `nos` do plano só para situação e datas, o R+7 sem `conteudo`, a ficha só depois de conferida, a ficha sem nó no assunto, a faixa com `conteudo` como era) | 45 passed |
+| Suíte inteira, PC (uma vez) | **2477 passed** (2472 de antes + 5 novos), 0 failed, 22 min |
