@@ -6,17 +6,17 @@
 
 Complementar é toda prova de uma banca do alvo (a FEPESE) que **não** é do meu cargo no meu estado. Ela serve para entender o estilo da banca — e **nunca** entra na incidência da Polícia Penal SC. Os dois números vivem em linhas separadas e jamais são somados (regra inviolável 1): a incidência do alvo continua sendo só 2013 e 2019, e adicionar prova complementar não muda nenhum número dela.
 
-No acervo de hoje: **183 provas complementares**, 7344 questões. Delas, **22** passam na validação inteira (extração sem defeito e gabarito definitivo), **155** servem para classificar mas ficam fora dos padrões de cobrança, e **6** são recusadas.
+No acervo de hoje: **183 provas complementares**, 7385 questões. Delas, **22** passam na validação inteira (extração sem defeito e gabarito definitivo), **158** servem para classificar mas ficam fora dos padrões de cobrança, e **3** são recusadas.
 
 ## Onde isto está
 
-O levantamento já virou acervo (Etapa 3B): **142 provas** estão aceitas no `data/acervo_complementar.json` e têm a **linha própria na incidência**, sempre separada da do alvo e contada em questão distinta. Parte das questões delas foi classificada por conteúdo, com procedência; o resto conta só na matéria que o caderno declara. O que falta é a sua conferência das classificações, na tela Análises > Conferência, com o filtro do complementar aceito. A proposta automática do catálogo se confere por amostra; a de 04/10 errou o assunto em quase metade dela, e o lote foi refeito (decisão 87). Os padrões de cobrança do complementar (tipo de questão, pegadinha) saem à parte dos do alvo, só das provas com gabarito definitivo (decisão 78).
+O levantamento já virou acervo (Etapa 3B): **169 provas** estão aceitas no `data/acervo_complementar.json` e têm a **linha própria na incidência**, sempre separada da do alvo e contada em questão distinta. Parte das questões delas foi classificada por conteúdo, com procedência; o resto conta só na matéria que o caderno declara. O que falta é a sua conferência das classificações, na tela Análises > Conferência, com o filtro do complementar aceito. A proposta automática do catálogo se confere por amostra; a de 04/10 errou o assunto em quase metade dela, e o lote foi refeito (decisão 87). Os padrões de cobrança do complementar (tipo de questão, pegadinha) saem à parte dos do alvo, só das provas com gabarito definitivo (decisão 78).
 
 ## Quem entra no acervo, pela regra do edital de 2019
 
 Entra a prova que tem **ao menos uma matéria do edital de 2019** pelo nome no caderno e que passa na validação mínima. Matéria que não está no edital de agora (Noções de Informática, Direito Administrativo, Temas de Educação) **não serve de motivo** para a prova entrar. A decisão de cada prova, com a data de inclusão e o hash, fica em `data/acervo_complementar.json`, gravado por `radar complementar --aplicar`.
 
-Hoje: **169 provas no acervo**, de 183.
+Hoje: **172 provas no acervo**, de 183.
 
 ## O que o acervo complementar tem de cada matéria do meu edital
 
@@ -24,10 +24,10 @@ Duas colunas, **que nunca se somam**: *pelo nome* é o que o caderno chama com o
 
 | Matéria | Pelo nome | Provas | Por termo 🟡 | Provas |
 |---|---|---|---|---|
-| Língua Portuguesa | 1498 | 175 | 8 | 5 |
+| Língua Portuguesa | 1506 | 175 | 8 | 5 |
 | Raciocínio Lógico | 300 | 60 | 2 | 2 |
 | Sociologia Aplicada | 0 | 0 | 34 | 30 |
-| Direitos Humanos | 20 | 2 | 37 | 25 |
+| Direitos Humanos | 20 | 2 | 36 | 24 |
 | Direito Constitucional | 20 | 2 | 57 | 40 |
 | Administração Pública | 0 | 0 | 58 | 25 |
 | Direito Penal | 4 | 2 | 3 | 2 |
@@ -35,7 +35,7 @@ Duas colunas, **que nunca se somam**: *pelo nome* é o que o caderno chama com o
 | Legislação Estadual | 20 | 2 | 1 | 1 |
 | Legislação Especial | 0 | 0 | 6 | 5 |
 | Lei de Execução Penal | 0 | 0 | 0 | 0 |
-| Noções de Informática | 332 | 63 | 13 | 6 |
+| Noções de Informática | 334 | 63 | 13 | 6 |
 | Direito Administrativo | 12 | 2 | 8 | 5 |
 
 ## As provas que interessam, e o que cada uma permite
@@ -48,7 +48,7 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2013 | Agente de Segurança Socioeducativo | 60 (Língua Portuguesa (10); Direitos Humanos (10); Direito Constitucional (10); Direito Penal (2); Direito Processual Penal (2); Legislação Estadual (10); Noções de Informática (10); Direito Administrativo (6)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Guarda Municipal | 31 (Língua Portuguesa (5); Raciocínio Lógico (5); Direito Constitucional (8); Direito Penal (2); Direito Processual Penal (2); Legislação Estadual (1); Legislação Especial (2); Noções de Informática (5); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Administrador | 27 (Língua Portuguesa (7); Raciocínio Lógico (5); Sociologia Aplicada (2); Administração Pública (7); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
-| 2024 | Contador | 27 (Língua Portuguesa (7); Raciocínio Lógico (5); Direito Constitucional (2); Administração Pública (5); Direito Penal (1); Noções de Informática (6); Direito Administrativo (1)) | provisório | recusada | não | 59 questões extraídas, e o caderno vai até a 60: a numeração não fecha (falta 49) |
+| 2024 | Contador | 27 (Língua Portuguesa (7); Raciocínio Lógico (5); Direito Constitucional (2); Administração Pública (5); Direito Penal (1); Noções de Informática (6); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Agente de Fiscalização | 25 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (1); Administração Pública (5); Direito Administrativo (4)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Assistente Social | 25 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (2); Direito Constitucional (1); Administração Pública (3); Direito Processual Penal (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Orientador Social | 24 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (3); Administração Pública (2); Direito Processual Penal (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -73,6 +73,7 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2024 | Analista de Informática | 17 (Língua Portuguesa (10); Raciocínio Lógico (5); Noções de Informática (2)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Educador Social | 17 (Língua Portuguesa (10); Raciocínio Lógico (5); Sociologia Aplicada (1); Direito Constitucional (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Técnico em Enfermagem | 17 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (2)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2024 | Auxiliar de Sala | 16 (Língua Portuguesa (10); Direitos Humanos (1); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Engenheiro Civil | 16 (Língua Portuguesa (10); Raciocínio Lógico (5); Administração Pública (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Farmacêutico | 16 (Língua Portuguesa (10); Direito Constitucional (1); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Farmacêutico-Bioquímico | 16 (Língua Portuguesa (10); Raciocínio Lógico (5); Administração Pública (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -199,12 +200,11 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2025 | Gari de Limpeza Pública - 07/09/2025 | 9 (Língua Portuguesa (8); Administração Pública (1)) | provisório | recusada | não | o mesmo PDF já está no acervo em http://2025seletivocomcap.fepese.org.br/?go=download&path=9&inline=1&arquivo=prova_gari_limpeza_publica.pdf |
 | 2025 | Motorista - 07/09/2025 | 9 (Língua Portuguesa (8); Administração Pública (1)) | provisório | recusada | não | o mesmo PDF já está no acervo em http://2025seletivocomcap.fepese.org.br/?go=download&path=9&inline=1&arquivo=prova_motorista.pdf |
 | 2024 | Agente Social | 8 (Língua Portuguesa (5); Sociologia Aplicada (2); Direito Constitucional (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
-| 2024 | Auxiliar de Sala | 8 (Língua Portuguesa (4); Direitos Humanos (1); Noções de Informática (3)) | provisório | recusada | não | 14 questões extraídas, e o caderno vai até a 39: a numeração não fecha (falta 2, 3, 5, 6, 8, 10, 12, 13, 15, 17, 19, 21, 22, 24, 25, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38); alternativas diferentes de a-e nas questões 1, 4, 7, 9, 11, 14, 16, 18, 20, 23 e mais 4 |
 | 2024 | Professor Anos Iniciais (1° ao 5° ano do Ensino fundamental) - 20h | 6 (Língua Portuguesa (6)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Especialista em Educação: Orientador Educacional | 6 (Língua Portuguesa (5); Direitos Humanos (1)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Educação Física | 6 (Língua Portuguesa (5); Sociologia Aplicada (1)) | definitivo | validada | sim, desde 2026-10-01 | — |
-| 2024 | Professor de Língua Portuguesa | 6 (Língua Portuguesa (5); Direitos Humanos (1)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2023 | Fiscal de Posturas (FP) | 5 (Língua Portuguesa (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2023 | Monitor Escolar I (PMUTE) | 5 (Língua Portuguesa (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Especialista em Educação: Administrador Escolar | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Especialista em Educação: Supervisor Escolar | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Artes | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
@@ -216,9 +216,9 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2024 | Professor de Inovação e Tecnologia | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Libras | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Língua Inglesa | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
+| 2024 | Professor de Língua Portuguesa | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Matemática | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Música | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
-| 2023 | Monitor Escolar I (PMUTE) | 3 (Língua Portuguesa (3)) | provisório | recusada | não | 11 questões extraídas, e o caderno vai até a 24: a numeração não fecha (falta 2, 4, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23); alternativas diferentes de a-e nas questões 1, 3, 5, 7, 10, 12, 15, 17, 20, 22 e mais 1 |
 | 2024 | [ Auxiliar de Ensino ] - Educação Especial - Educação Infantil / Ensino Fundamental | 3 (Sociologia Aplicada (1); Direitos Humanos (2)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | [ Auxiliar de Ensino ] - Intérprete Educacional | 2 (Direitos Humanos (2)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | [ Professor - Artesanato ] - Bordado à máquina | 2 (Direitos Humanos (2)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -234,7 +234,7 @@ Respondidas **só com o que o acervo tem**. "Não há prova com LEP no acervo" �
 
 **1. Quais matérias da Polícia Penal têm boa quantidade de provas FEPESE complementares?**
 
-Pelo nome da matéria no caderno, da maior para a menor: Língua Portuguesa (1498 em 175 provas); Noções de Informática (332 em 63 provas); Raciocínio Lógico (300 em 60 provas); Direitos Humanos (20 em 2 provas); Direito Constitucional (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas).
+Pelo nome da matéria no caderno, da maior para a menor: Língua Portuguesa (1506 em 175 provas); Noções de Informática (334 em 63 provas); Raciocínio Lógico (300 em 60 provas); Direitos Humanos (20 em 2 provas); Direito Constitucional (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas).
 
 **2. Quais têm pouco ou nenhum material complementar?**
 

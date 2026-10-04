@@ -261,3 +261,19 @@ def test_a_chave_da_base_das_geradas_chega_no_passo_5(banco_temporario):
     assert gerada.origem_chave == chave_da_questao("Única?", {"a": "x"})
     linhas = json.loads(acervo.caminho_das_geradas().read_text(encoding="utf-8"))
     assert [l["origem_chave"] for l in linhas] == [gerada.origem_chave]
+
+
+def test_a_ultima_copia_e_pela_hora_e_tem_o_banco(banco_antigo):
+    """O nome comeca pela versao: "v4-para-v5" vem depois de "v0-para-v4" no
+    alfabeto mesmo sendo mais velha. E pasta sem o banco (a de um teste) nao
+    serve para desfazer."""
+    copias = banco_antigo.parent / "copias"
+    for nome, arquivo in [
+        ("migracao-v4-para-v5-2026-10-01-120000", banco_antigo.name),
+        ("migracao-v0-para-v4-2026-10-02-120000", banco_antigo.name),
+        ("migracao-v9-para-v9-2026-10-03-120000", "antigo.db"),
+    ]:
+        (copias / nome).mkdir(parents=True)
+        (copias / nome / arquivo).write_bytes(b"")
+
+    assert migracoes.ultima_copia().name == "migracao-v0-para-v4-2026-10-02-120000"

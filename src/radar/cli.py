@@ -15,7 +15,7 @@ from rich.markup import escape
 from rich.panel import Panel
 from rich.table import Table
 
-from radar import acervo, alvo as alvos, automacao, avisos, config, cronograma, servico
+from radar import acervo, alvo as alvos, automacao, avisos, config, cronograma, eventos as linha_do_tempo, servico
 from radar import fichas as fichas_puras
 from radar import provas as _provas
 from radar.models import agora
@@ -43,7 +43,7 @@ def _prazo(quando) -> str:
         return f"[bold red]{texto} ({faltam}d)[/]"
     return f"{texto} ({faltam}d)"
 
-app = typer.Typer(help="Radar de concursos publicos (uso pessoal)", no_args_is_help=True)
+app = typer.Typer(help="Radar de concursos públicos (uso pessoal)", no_args_is_help=True)
 console = Console()
 log = logging.getLogger(__name__)
 
@@ -77,7 +77,7 @@ SITUACAO_LEGIVEL = {
     "autorizado": "autorizado",
     "banca_definida": "banca contratada",
     "edital_publicado": "edital publicado",
-    "inscricoes_abertas": "inscricoes abertas",
+    "inscricoes_abertas": "inscrições abertas",
     "encerrado": "encerrado",
     "desconhecida": "-",
 }
@@ -103,12 +103,12 @@ CORES_DO_ANEL = {
 def atualizar(
     completo: bool = typer.Option(
         False, "--completo",
-        help="Tambem baixa provas novas e le as questoes delas (demora)",
+        help="Também baixa provas novas e lê as questões delas (demora)",
     ),
     avisar_telegram: bool = typer.Option(
         False,
         "--avisar/--sem-avisar",
-        help="Manda no Telegram (por padrao NAO manda: quem avisa e o robo)",
+        help="Manda no Telegram (por padrão NÃO manda: quem avisa é o robô)",
     ),
 ) -> None:
     """Roda a rotina inteira, na ordem certa. Sem mandar mensagem.
@@ -129,13 +129,13 @@ def atualizar(
     """
     etapas = [
         ("Coletando das fontes", lambda: str(_resumo_da_coleta())),
-        ("Lendo a pagina dos concursos novos",
+        ("Lendo a página dos concursos novos",
          lambda: str(servico.detalhar_pendentes(limite=15))),
         ("Baixando edital de concurso aberto",
          lambda: str(servico.montar_acervo(limite=5, abertos=True))),
         ("Lendo o que o edital exige",
          lambda: str(servico.ler_elegibilidade(limite=30))),
-        ("Conferindo retificacao de edital",
+        ("Conferindo retificação de edital",
          lambda: str(servico.conferir_retificacoes(limite=10))),
     ]
 
@@ -144,7 +144,7 @@ def atualizar(
         # depois o que apareceu de novo. Se o teto do dia cortar alguma coisa,
         # que corte a descoberta, e nao a mudanca no meu favorito.
         etapas.append(
-            ("Avisando mudanca nos favoritos",
+            ("Avisando mudança nos favoritos",
              lambda: str(servico.avisar_favoritos()))
         )
         etapas.append(("Avisando no Telegram", lambda: str(servico.avisar())))
@@ -154,7 +154,7 @@ def atualizar(
             ("Montando o acervo de provas", lambda: str(servico.montar_acervo(limite=10)))
         )
         etapas.append(
-            ("Extraindo questoes dos cadernos",
+            ("Extraindo questões dos cadernos",
              lambda: str(servico.extrair_questoes(limite=20)))
         )
 
@@ -177,7 +177,7 @@ def atualizar(
         console.print("[green]Tudo em dia.[/]")
 
     abertas = len(servico.listar(abertas=True, todas_relevancias=True))
-    console.print(f"[bold]{abertas}[/] concurso(s) com inscricao aberta agora.")
+    console.print(f"[bold]{abertas}[/] concurso(s) com inscrição aberta agora.")
     console.print("[dim]Veja na tela: radar web[/]")
 
 
@@ -192,27 +192,27 @@ def _resumo_da_coleta() -> str:
 def listar(
     uf: str = typer.Option(None, help="Sigla do estado, ex: SC"),
     banca: str = typer.Option(None, help="Nome da banca, ex: FEPESE"),
-    termo: str = typer.Option(None, help="Palavra no titulo ou no resumo"),
+    termo: str = typer.Option(None, help="Palavra no título ou no resumo"),
     situacao: str = typer.Option(None, help="Ex: edital_publicado, autorizado"),
     relevancia: str = typer.Option(
         None, help="nucleo, proximo, estadual, remoto ou indefinida"
     ),
     todos: bool = typer.Option(
-        False, "--todos", help="Mostra todos os aneis, nao so o que e perto"
+        False, "--todos", help="Mostra todos os anéis, não só o que é perto"
     ),
     noticias: bool = typer.Option(
-        False, "--noticias", help="Inclui o que o filtro marcou como noticia"
+        False, "--noticias", help="Inclui o que o filtro marcou como notícia"
     ),
     abertas: bool = typer.Option(
-        False, "--abertas", help="So o que da para se inscrever hoje"
+        False, "--abertas", help="Só o que dá para se inscrever hoje"
     ),
     favoritos: bool = typer.Option(
-        False, "--favoritos", help="So os que eu marquei como favoritos"
+        False, "--favoritos", help="Só os que eu marquei como favoritos"
     ),
     salario_min: float = typer.Option(
-        None, "--salario-min", help="Remuneracao minima, ex: 5000"
+        None, "--salario-min", help="Remuneração mínima, ex: 5000"
     ),
-    limite: int = typer.Option(30, help="Quantidade maxima de linhas"),
+    limite: int = typer.Option(30, help="Quantidade máxima de linhas"),
 ) -> None:
     """Mostra o que ja esta no banco.
 
@@ -230,10 +230,10 @@ def listar(
     # O id aparece para dar para favoritar pelo terminal: radar favoritar <id>
     tabela.add_column("id", style="dim", no_wrap=True)
     tabela.add_column("Onde", no_wrap=True)
-    tabela.add_column("Salario", justify="right", no_wrap=True)
-    tabela.add_column("Inscricao ate", no_wrap=True)
+    tabela.add_column("Salário", justify="right", no_wrap=True)
+    tabela.add_column("Inscrição até", no_wrap=True)
     tabela.add_column("Status", no_wrap=True)
-    tabela.add_column("Titulo")
+    tabela.add_column("Título")
 
     for c in itens:
         cor = CORES_DO_ANEL.get(c.relevancia, "")
@@ -255,15 +255,15 @@ def listar(
         fora = contagem["remoto"] + contagem["indefinida"]
         if fora:
             console.print(
-                f"\n[yellow]Nada perto de voce por enquanto.[/] Ha {fora} "
-                f"concurso(s) em outras regioes: use [bold]radar listar --todos[/]"
+                f"\n[yellow]Nada perto de você por enquanto.[/] Há {fora} "
+                f"concurso(s) em outras regiões: use [bold]radar listar --todos[/]"
             )
 
 
 @app.command()
 def carga_inicial(
-    dias: int = typer.Option(90, help="Quantos dias de historico buscar"),
-    sim: bool = typer.Option(False, "--sim", help="Nao perguntar antes de comecar"),
+    dias: int = typer.Option(90, help="Quantos dias de histórico buscar"),
+    sim: bool = typer.Option(False, "--sim", help="Não perguntar antes de começar"),
 ) -> None:
     """Traz o historico que a coleta diaria nao pegou.
 
@@ -278,14 +278,14 @@ def carga_inicial(
     minutos = paginas * 1.5 / 60
 
     console.print(
-        f"Vou buscar [bold]{dias} dias[/] de historico: ate {paginas} paginas "
+        f"Vou buscar [bold]{dias} dias[/] de histórico: até {paginas} páginas "
         f"do feed, com pausa de 1,5s entre elas.\n"
         f"Tempo estimado: [bold]{minutos:.0f} minuto(s)[/]. Ctrl+C para parar."
     )
     if not sim and not typer.confirm("Comecar?", default=True):
         raise typer.Abort()
 
-    with console.status("Lendo o feed para tras..."):
+    with console.status("Lendo o feed para trás..."):
         resultado = servico.carga_inicial(dias=dias)
 
     console.print(f"[red]{resultado}[/]" if resultado.erro else f"[green]{resultado}[/]")
@@ -293,7 +293,7 @@ def carga_inicial(
     contagem = servico.contar_por_relevancia()
     console.print(
         f"\nNo banco agora: [bold green]{contagem['nucleo']}[/] perto, "
-        f"[bold yellow]{contagem['proximo']}[/] proximo, "
+        f"[bold yellow]{contagem['proximo']}[/] próximo, "
         f"{contagem['remoto']} longe, {contagem['indefinida']} a confirmar."
     )
 
@@ -307,7 +307,7 @@ def provas(
     ),
     revisitar: bool = typer.Option(
         False, "--revisitar",
-        help="Le de novo hotsite que ja esta no acervo, atras de documento novo",
+        help="Lê de novo hotsite que já está no acervo, atrás de documento novo",
     ),
 ) -> None:
     """Monta o acervo: le os hotsites e baixa edital, prova e gabarito.
@@ -320,12 +320,12 @@ def provas(
     manifesto data/provas.json, com o sha256 de cada arquivo.
     """
     console.print(
-        f"Vou ler ate [bold]{limite}[/] concurso(s). Cada um custa 3 paginas "
-        f"mais os PDFs, com pausa de 1,5s entre as requisicoes."
+        f"Vou ler até [bold]{limite}[/] concurso(s). Cada um custa 3 páginas "
+        f"mais os PDFs, com pausa de 1,5s entre as requisições."
     )
     if revisitar:
         console.print(
-            "[dim]Revisitando: hotsite ja lido entra de novo. E assim que "
+            "[dim]Revisitando: hotsite já lido entra de novo. É assim que "
             "gabarito definitivo publicado depois da prova aparece.[/]"
         )
 
@@ -346,7 +346,7 @@ def provas(
 
 @app.command()
 def baixar_provas(
-    forcar: bool = typer.Option(False, "--forcar", help="Rebaixa o que ja existe"),
+    forcar: bool = typer.Option(False, "--forcar", help="Rebaixa o que já existe"),
 ) -> None:
     """Reconstroi o acervo em disco a partir do manifesto.
 
@@ -363,7 +363,7 @@ def baixar_provas(
 
     console.print(
         f"[green]{contagem['baixados']}[/] baixado(s), "
-        f"{contagem['ja_tinha']} ja estava(m) no disco"
+        f"{contagem['ja_tinha']} já estava(m) no disco"
         + (f", [red]{contagem['falhas']}[/] falhou/falharam" if contagem["falhas"] else "")
     )
 
@@ -372,7 +372,7 @@ def baixar_provas(
 def questoes(
     limite: int = typer.Option(30, help="Quantas provas ler nesta rodada"),
     refazer: bool = typer.Option(
-        False, "--refazer", help="Le de novo os cadernos que ja viraram questao"
+        False, "--refazer", help="Lê de novo os cadernos que já viraram questão"
     ),
 ) -> None:
     """Separa os cadernos do acervo em questoes, com materia e gabarito.
@@ -388,7 +388,7 @@ def questoes(
     console.print(f"[green]{resultado}[/]")
     total = servico.contar_questoes()
     if total:
-        console.print(f"\nBanco de questoes: [bold]{total}[/] questao(oes)")
+        console.print(f"\nBanco de questões: [bold]{total}[/] questão(ões)")
 
 
 @app.command()
@@ -400,7 +400,7 @@ def previsao() -> None:
     """
     previsoes = servico.previsao_de_abertura()
     if not previsoes:
-        console.print("[yellow]Nenhum municipio com historico ainda.[/]")
+        console.print("[yellow]Nenhum município com histórico ainda.[/]")
         return
 
     cores = {"atrasado": "red", "esperado": "yellow", "em_dia": "green"}
@@ -416,9 +416,9 @@ def previsao() -> None:
 
     console.print()
     console.print(
-        "[dim]O historico vem da FEPESE (2006-2026) e do feed (so 2026). "
-        "Municipio que usou outra banca entre 2021 e 2025 aparece mais "
-        "atrasado do que e.[/]"
+        "[dim]O histórico vem da FEPESE (2006-2026) e do feed (só 2026). "
+        "Município que usou outra banca entre 2021 e 2025 aparece mais "
+        "atrasado do que é.[/]"
     )
 
 
@@ -426,7 +426,7 @@ def previsao() -> None:
 def elegibilidade(
     limite: int = typer.Option(50, help="Quantos concursos ler nesta rodada"),
     refazer: bool = typer.Option(
-        False, "--refazer", help="Le de novo os que ja tem exigencias gravadas"
+        False, "--refazer", help="Lê de novo os que já têm exigências gravadas"
     ),
 ) -> None:
     """Le os editais do acervo e grava o que cada concurso exige.
@@ -462,7 +462,7 @@ def calendario(
     console.print(
         f"[green]{len(eventos)} compromisso(s)[/] em [bold]{destino}[/]"
     )
-    console.print("[dim]Abra o arquivo para importar no seu calendario.[/]")
+    console.print("[dim]Abra o arquivo para importar no seu calendário.[/]")
 
 
 @app.command()
@@ -489,7 +489,7 @@ def parecidas(
         console.print(
             f"{marca} [bold]{parecida.cargo}[/] "
             f"[dim]{parecida.banca or '-'} / {parecida.municipio or '-'} / "
-            f"{parecida.ano or '-'} / {parecida.questoes} questoes[/]"
+            f"{parecida.ano or '-'} / {parecida.questoes} questões[/]"
         )
         console.print(f"    [dim]{parecida.motivo}[/]")
 
@@ -530,18 +530,18 @@ def retificacoes(
 @app.command()
 def assuntos(
     limite: int = typer.Option(
-        None, help="Quantas questoes classificar. Sem isso, todas as pendentes"
+        None, help="Quantas questões classificar. Sem isso, todas as pendentes"
     ),
     teto: float = typer.Option(
-        0.50, help="Teto de gasto em dolar. O comando para ao chegar nele"
+        0.50, help="Teto de gasto em dólar. O comando para ao chegar nele"
     ),
     simular: bool = typer.Option(
         True, "--simular/--valendo",
-        help="Simular NAO gasta nada: so mostra o custo. Use --valendo para rodar",
+        help="Simular NÃO gasta nada: só mostra o custo. Use --valendo para rodar",
     ),
     so_alvo: bool = typer.Option(
         False, "--so-alvo",
-        help="So as questoes das provas do meu cargo, no meu estado",
+        help="Só as questões das provas do meu cargo, no meu estado",
     ),
 ) -> None:
     """Classifica o assunto fino das questoes de Conhecimentos Especificos.
@@ -563,36 +563,36 @@ def assuntos(
 
     if so_alvo and not permitidos:
         console.print(
-            "[red]Nao li o conteudo programatico do edital do alvo.[/] "
-            "Sem a lista, a IA voltaria a inventar nome de assunto - entao "
-            "nao gasto."
+            "[red]Não li o conteúdo programático do edital do alvo.[/] "
+            "Sem a lista, a IA voltaria a inventar nome de assunto - então "
+            "não gasto."
         )
         raise typer.Exit(code=1)
 
     if not pendentes:
-        console.print("[green]Nenhuma questao pendente de assunto.[/]")
+        console.print("[green]Nenhuma questão pendente de assunto.[/]")
         return
 
     entrada, saida, custo = classificador.estimar(pendentes, permitidos)
-    console.print(f"Questoes a classificar: [bold]{len(pendentes)}[/]")
+    console.print(f"Questões a classificar: [bold]{len(pendentes)}[/]")
     if permitidos:
         quantos = sum(len(v) for v in permitidos.values())
         console.print(
             f"[dim]Escolhendo dentro de {quantos} assunto(s) do edital, "
-            f"em {len(permitidos)} materia(s)[/]"
+            f"em {len(permitidos)} matéria(s)[/]"
         )
     console.print(
-        f"[dim]{entrada:,} tokens de entrada, {saida:,} de saida[/]".replace(",", ".")
+        f"[dim]{entrada:,} tokens de entrada, {saida:,} de saída[/]".replace(",", ".")
     )
     console.print(
         f"Custo estimado: [bold]US$ {custo:.2f}[/] "
-        f"[dim](~R$ {custo * config.CAMBIO_DE_REFERENCIA:.2f}, cambio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
+        f"[dim](~R$ {custo * config.CAMBIO_DE_REFERENCIA:.2f}, câmbio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
     )
     console.print(f"[dim]Modelo: {classificador.MODELO}[/]")
 
     if simular:
         console.print()
-        console.print("[yellow]Isto foi so uma simulacao: nada foi gasto.[/]")
+        console.print("[yellow]Isto foi só uma simulação: nada foi gasto.[/]")
         comando = "radar assuntos --valendo"
         if so_alvo:
             comando += " --so-alvo"
@@ -616,7 +616,7 @@ def assuntos(
         )
 
     console.print(
-        f"[green]{resultado['classificados']} questao(oes) classificada(s)[/], "
+        f"[green]{resultado['classificados']} questão(ões) classificada(s)[/], "
         f"{resultado['gravados']} linha(s) do banco atualizada(s)"
     )
     console.print(
@@ -631,8 +631,8 @@ def assuntos(
     if resultado.get("guardados"):
         console.print(
             f"[dim]{resultado['guardados']} assunto(s) guardados em "
-            f"data/assuntos.json - este arquivo e versionado, e e o que "
-            f"impede eu pagar de novo pela mesma questao.[/]"
+            f"data/assuntos.json - este arquivo é versionado, e é o que "
+            f"impede eu pagar de novo pela mesma questão.[/]"
         )
     if resultado.get("falhas"):
         console.print(f"[dim]{resultado['falhas']} lote(s) falharam.[/]")
@@ -642,7 +642,7 @@ def assuntos(
 
 # De onde sai o assunto de cada materia, na tela.
 ROTULO_DA_ORIGEM = {
-    "catalogo": "catalogo (de graca)",
+    "catalogo": "catálogo (de graça)",
     # "custa", e nao "pago": a coluna diz por qual caminho o assunto sai,
     # e nao que ele ja foi comprado. A diferenca ficou cara em 24/09.
     "edital": "edital (custa)",
@@ -661,9 +661,9 @@ def _mostrar_cobertura(so_alvo: bool = True) -> None:
                else "Cobertura de assunto no acervo inteiro"),
         box=None,
     )
-    tabela.add_column("Materia")
+    tabela.add_column("Matéria")
     tabela.add_column("Com assunto", justify="right")
-    tabela.add_column("Questoes", justify="right")
+    tabela.add_column("Questões", justify="right")
     tabela.add_column("%", justify="right")
     tabela.add_column("De onde")
 
@@ -681,7 +681,7 @@ def _mostrar_cobertura(so_alvo: bool = True) -> None:
     console.print()
     console.print(tabela)
     console.print(
-        f"[bold]{com}[/] de [bold]{total}[/] questao(oes) com assunto "
+        f"[bold]{com}[/] de [bold]{total}[/] questão(ões) com assunto "
         f"([bold]{(com / total * 100) if total else 0:.0f}%[/])"
     )
 
@@ -690,7 +690,7 @@ def _mostrar_cobertura(so_alvo: bool = True) -> None:
 def cobertura(
     so_alvo: bool = typer.Option(
         True, "--so-alvo/--tudo",
-        help="So as provas do meu cargo (padrao), ou o acervo inteiro",
+        help="Só as provas do meu cargo (padrão), ou o acervo inteiro",
     ),
 ) -> None:
     """Quantas questoes ja tem assunto, por materia.
@@ -724,10 +724,10 @@ def simulados() -> None:
     tabela = Table(title=f"{len(rodadas)} simulado(s)")
     tabela.add_column("id", justify="right")
     tabela.add_column("Data")
-    tabela.add_column("Questoes", justify="right")
+    tabela.add_column("Questões", justify="right")
     tabela.add_column("Respondidas", justify="right")
     tabela.add_column("Acerto", justify="right")
-    tabela.add_column("Materias")
+    tabela.add_column("Matérias")
     for r in rodadas:
         acerto = f"{r.porcentagem:.0f}%" if r.porcentagem is not None else "-"
         materias = _materias_curtas(r.materias)
@@ -746,9 +746,9 @@ def descartar(
     todos: bool = typer.Option(False, "--todos", help="Apaga TODAS as rodadas"),
     vazios: bool = typer.Option(
         False, "--vazios",
-        help="Apaga so as rodadas sem nenhuma resposta, criadas ha mais de 1 dia",
+        help="Apaga só as rodadas sem nenhuma resposta, criadas há mais de 1 dia",
     ),
-    sim: bool = typer.Option(False, "--sim", help="Nao pergunta antes de apagar"),
+    sim: bool = typer.Option(False, "--sim", help="Não pergunta antes de apagar"),
 ) -> None:
     """Apaga um simulado e as respostas dele - de verdade, e sem volta.
 
@@ -774,7 +774,7 @@ def descartar(
         # "s" de sim: o typer.confirm so entende "y", e eu respondo em portugues.
         resposta = "s" if sim else typer.prompt(
             f"Apagar {len(rodadas)} simulado(s) e {respondidas} resposta(s)? "
-            f"Nao tem volta [s/N]", default="n", show_default=False,
+            f"Não tem volta [s/N]", default="n", show_default=False,
         )
         if resposta.strip().lower() not in ("s", "sim", "y", "yes"):
             console.print("Nada apagado.")
@@ -784,19 +784,19 @@ def descartar(
     else:
         respostas = servico.descartar_simulado(simulado_id)
         if respostas is None:
-            console.print(f"[red]Nao existe simulado {simulado_id}.[/]")
+            console.print(f"[red]Não existe simulado {simulado_id}.[/]")
             raise typer.Exit(code=1)
         console.print(f"[green]Simulado {simulado_id} apagado[/], com {respostas} resposta(s).")
 
     console.print(
         "[dim]Saiu do banco e do data/simulados.json. Rode `radar sincronizar` "
-        "para a copia do GitHub esquecer tambem.[/]"
+        "para a cópia do GitHub esquecer também.[/]"
     )
 
 
 @app.command()
 def auditar(
-    caminho: str = typer.Option(None, help="Onde gravar (padrao: docs/auditoria.md)"),
+    caminho: str = typer.Option(None, help="Onde gravar (padrão: docs/auditoria.md)"),
 ) -> None:
     """Confere o banco contra os PDFs: contagem por materia, gabarito, anuladas.
 
@@ -813,72 +813,72 @@ def auditar(
         papel = "reforco" if p.reforco else "alvo"
         cor = "red" if p.problemas else "green"
         console.print(
-            f"[{cor}]{p.ano} {p.cargo}[/] ({papel}): {p.questoes} questoes, "
+            f"[{cor}]{p.ano} {p.cargo}[/] ({papel}): {p.questoes} questões, "
             f"{len(p.anuladas_no_banco)} anuladas, "
-            f"{len(p.divergencias)} divergencia(s) de gabarito"
+            f"{len(p.divergencias)} divergência(s) de gabarito"
         )
     # Materia fora da ordem do edital nao muda numero nenhum, mas e o sinal de
     # que a separacao do caderno pode ter trocado o rotulo de dois blocos.
     fora_de_ordem = sum(len(p.fora_de_ordem) for p in provas)
     if problemas:
-        console.print(f"[red]{problemas} numero(s) nao batem[/] - veja {destino}")
+        console.print(f"[red]{problemas} número(s) não batem[/] - veja {destino}")
     elif fora_de_ordem:
         console.print(
-            f"[yellow]Os numeros batem, mas {fora_de_ordem} materia(s) estao "
+            f"[yellow]Os números batem, mas {fora_de_ordem} matéria(s) estão "
             f"fora da ordem do edital[/] - veja {destino}"
         )
     else:
-        console.print(f"[green]Tudo bate.[/] Relatorio em {destino}")
+        console.print(f"[green]Tudo bate.[/] Relatório em {destino}")
 
 
 @app.command()
 def gerar(
     materia: str = typer.Option(
-        None, help="So desta materia. Sem isso, de qualquer materia do cargo"
+        None, help="Só desta matéria. Sem isso, de qualquer matéria do cargo"
     ),
     assunto: str = typer.Option(
-        None, help="Fecha o escopo no assunto daquela materia (modo treino)"
+        None, help="Fecha o escopo no assunto daquela matéria (modo treino)"
     ),
     subassunto: str = typer.Option(
-        None, help="Desce mais um nivel, dentro do assunto"
+        None, help="Desce mais um nível, dentro do assunto"
     ),
     elemento: list[str] = typer.Option(
         None, "--elemento",
-        help="Um dispositivo, regra ou tipo de problema do no. Repetivel",
+        help="Um dispositivo, regra ou tipo de problema do no. Repetível",
     ),
     modo: str = typer.Option(
         None, "--modo",
-        help="treino | revisao | simulado. Sem isso: com assunto e treino, "
-             "so com materia e simulado",
+        help="treino | revisao | simulado. Sem isso: com assunto é treino, "
+             "só com matéria é simulado",
     ),
-    quantas: int = typer.Option(5, help="Quantas questoes gerar"),
+    quantas: int = typer.Option(5, help="Quantas questões gerar"),
     teto: float = typer.Option(
-        None, help="Teto de gasto em dolar. O comando para ao chegar nele"
+        None, help="Teto de gasto em dólar. O comando para ao chegar nele"
     ),
     simular: bool = typer.Option(
         True, "--simular/--valendo",
-        help="Simular NAO gasta nada: so mostra o custo. Use --valendo para rodar",
+        help="Simular NÃO gasta nada: só mostra o custo. Use --valendo para rodar",
     ),
     ver_pedido: bool = typer.Option(
         True, "--ver-pedido/--sem-pedido",
-        help="Na simulacao, mostra o texto exato que iria para a IA",
+        help="Na simulação, mostra o texto exato que iria para a IA",
     ),
     pedido: bool = typer.Option(
         False, "--pedido",
         help="Salva TODOS os pedidos em data/pedido_ia.json, para responder "
-        "fora da API (no Claude Code). Nao gasta nada",
+        "fora da API (no Claude Code). Não gasta nada",
     ),
     macetes: bool = typer.Option(
         False, "--macetes",
-        help="Com --pedido: pede macetes por materia em vez de questoes",
+        help="Com --pedido: pede macetes por matéria em vez de questões",
     ),
     explicacoes: bool = typer.Option(
         False, "--explicacoes",
-        help="Com --pedido: pede a explicacao das questoes que eu errei",
+        help="Com --pedido: pede a explicação das questões que eu errei",
     ),
     importar: str = typer.Option(
         None, "--importar",
-        help="Le a resposta de um --pedido, confere e grava o que presta",
+        help="Lê a resposta de um --pedido, confere e grava o que presta",
     ),
 ) -> None:
     """Escreve questoes novas com a IA, para TREINAR.
@@ -889,8 +889,11 @@ def gerar(
     nelas aparece sempre como um segundo numero, do lado do das reais.
 
     O padrao e VARIAR uma questao real da FEPESE com gabarito conferido -
-    muda o cenario e os numeros, mantem a regra juridica. O modo do zero so
-    entra quando nao existe questao real na materia.
+    muda o cenario e os numeros, mantem a regra juridica. O modo do zero
+    entra quando nao ha questao real no escopo, e tambem completa o pedido
+    quando a base nao basta - sempre DENTRO do mesmo no, pela fonte oficial
+    ou pelo item do edital, marcado sem questao real de referencia (o radar
+    nunca inventa vinculo com questao real).
 
     Esta e a segunda parte do radar que custa dinheiro, e como a outra ela so
     SIMULA por padrao: para gastar de verdade e preciso passar --valendo.
@@ -913,40 +916,40 @@ def gerar(
 
     if not plano["pedidos"]:
         console.print(
-            "[red]Nao ha questao real do meu cargo para variar.[/] "
+            "[red]Não há questão real do meu cargo para variar.[/] "
             "Rode [bold]radar provas[/] e [bold]radar questoes[/] primeiro."
         )
         raise typer.Exit(code=1)
 
-    console.print(f"Questoes a gerar: [bold]{plano['quantas']}[/]")
+    console.print(f"Questões a gerar: [bold]{plano['quantas']}[/]")
     if plano.get("distribuicao"):
         # O simulado sem materia segue o peso do edital (§8, decisao 67).
         partes = ", ".join(f"{n} de {m}" for m, n in plano["distribuicao"].items() if n)
         console.print(f"[dim]Divididas pelo peso do edital: {partes}[/]")
     console.print(
         f"[dim]{len(plano['pedidos'])} chamada(s) a API, "
-        f"ate {gerador.VARIACOES_POR_QUESTAO} questoes por chamada[/]"
+        f"até {gerador.VARIACOES_POR_QUESTAO} questões por chamada[/]"
     )
     if plano["sem_base"]:
         console.print(
-            "[yellow]Modo do zero:[/] nao ha questao real desta materia no "
-            "acervo, entao as reais entram so como exemplo de estilo."
+            "[yellow]Modo do zero:[/] não há questão real desta matéria no "
+            "acervo, então as reais entram só como exemplo de estilo."
         )
     else:
         console.print(
-            f"[dim]Modo variacao, a partir de {plano['base_disponivel']} "
-            f"questao(oes) real(is) do cargo com gabarito conferido[/]"
+            f"[dim]Modo variação, a partir de {plano['base_disponivel']} "
+            f"questão(ões) real(is) do cargo com gabarito conferido[/]"
         )
     # Os numeros sao formatados um a um: trocar a virgula na frase inteira
     # comeria tambem a virgula do portugues.
     entrada = f"{plano['entrada']:,}".replace(",", ".")
     saida = f"{plano['saida']:,}".replace(",", ".")
     console.print(
-        f"[dim]{entrada} tokens de entrada, {saida} de saida (estimados)[/]"
+        f"[dim]{entrada} tokens de entrada, {saida} de saída (estimados)[/]"
     )
     console.print(
         f"Custo estimado: [bold]US$ {plano['custo']:.2f}[/] "
-        f"[dim](~R$ {plano['custo'] * config.CAMBIO_DE_REFERENCIA:.2f}, cambio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
+        f"[dim](~R$ {plano['custo'] * config.CAMBIO_DE_REFERENCIA:.2f}, câmbio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
     )
     console.print(f"[dim]Modelo: {gerador.MODELO}[/]")
 
@@ -954,11 +957,11 @@ def gerar(
         if ver_pedido:
             _mostrar_pedido(plano["pedidos"][0])
         console.print()
-        console.print("[yellow]Isto foi so uma simulacao: nada foi gasto.[/]")
+        console.print("[yellow]Isto foi só uma simulação: nada foi gasto.[/]")
         console.print(
-            "[dim]O texto das questoes nao aparece aqui porque ele ainda nao "
-            "existe: quem escreve e a API, e sem chamada nao ha questao. O que "
-            "da para ver antes de pagar e o pedido acima.[/]"
+            "[dim]O texto das questões não aparece aqui porque ele ainda não "
+            "existe: quem escreve é a API, e sem chamada não há questão. O que "
+            "dá para ver antes de pagar é o pedido acima.[/]"
         )
         comando = "radar gerar --valendo"
         if materia:
@@ -985,11 +988,11 @@ def gerar(
         )
 
     if resultado.get("erro"):
-        console.print(f"[red]Nao gerei nada:[/] {resultado['erro']}")
+        console.print(f"[red]Não gerei nada:[/] {resultado['erro']}")
         raise typer.Exit(code=1)
 
     console.print(
-        f"[green]{resultado['geradas']} questao(oes) gerada(s)[/] em "
+        f"[green]{resultado['geradas']} questão(ões) gerada(s)[/] em "
         f"{resultado['chamadas']} chamada(s)"
     )
     console.print(
@@ -1007,9 +1010,9 @@ def gerar(
         )
     if resultado.get("guardadas"):
         console.print(
-            f"[dim]{resultado['guardadas']} questao(oes) em "
-            f"data/questoes_geradas.json - este arquivo e versionado, e e o "
-            f"que impede eu pagar de novo pela mesma questao.[/]"
+            f"[dim]{resultado['guardadas']} questão(ões) em "
+            f"data/questoes_geradas.json - este arquivo é versionado, e é o "
+            f"que impede eu pagar de novo pela mesma questão.[/]"
         )
     if resultado.get("falhas"):
         console.print(f"[dim]{resultado['falhas']} chamada(s) falharam.[/]")
@@ -1038,12 +1041,12 @@ def _mostrar_o_escopo(lote: dict) -> None:
             # No modo revisao a lista NAO e de dispositivos: sao os conteudos
             # que eu ja estudei, e chama-los de dispositivo seria mentir sobre
             # o que o escopo tem dentro.
-            rotulo = ("So os conteudos que eu ja estudei"
-                      if modo == "revisao" else "So estes dispositivos")
+            rotulo = ("Só os conteúdos que eu já estudei"
+                      if modo == "revisao" else "Só estes dispositivos")
             console.print(f"[dim]{rotulo}: {escape('; '.join(nomes))}[/]")
     else:
-        console.print(f"Modo [bold]{modo}[/]: abrangencia ampla, pelo edital e "
-                      f"pelo peso das materias. [dim]Nao e treino especifico - "
+        console.print(f"Modo [bold]{modo}[/]: abrangência ampla, pelo edital e "
+                      f"pelo peso das matérias. [dim]Não é treino específico - "
                       f"para isso, passe --assunto.[/]")
 
     bases = {}
@@ -1054,8 +1057,8 @@ def _mostrar_o_escopo(lote: dict) -> None:
         if not base:
             continue
         de_onde = (f"{base} ({evidencia})" if evidencia and evidencia != "nenhuma"
-                   else f"{base}, sem questao real de referencia")
-        console.print(f"[dim]  {quantas} questao(oes) de {de_onde}[/]")
+                   else f"{base}, sem questão real de referência")
+        console.print(f"[dim]  {quantas} questão(ões) de {de_onde}[/]")
 
 
 def _escopo_do_pedido(materia, assunto, subassunto, elemento):
@@ -1074,8 +1077,8 @@ def _escopo_do_pedido(materia, assunto, subassunto, elemento):
         )
     except arvore.EscopoInvalido as erro:
         console.print(f"[red]{escape(str(erro))}[/]")
-        console.print("[dim]Nada foi gerado: eu nao alargo o escopo sozinho. "
-                      "Veja a arvore com [bold]radar conteudos[/].[/]")
+        console.print("[dim]Nada foi gerado: eu não alargo o escopo sozinho. "
+                      "Veja a árvore com [bold]radar conteudos[/].[/]")
         raise typer.Exit(code=1) from erro
 
 
@@ -1087,8 +1090,8 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
         lote = servico.manual.pedido_de_explicacoes()
         if not lote["pedidos"]:
             console.print(
-                "[yellow]Nenhuma questao errada sem explicacao.[/] Elas saem "
-                "das questoes reais que eu errei na ultima vez que respondi."
+                "[yellow]Nenhuma questão errada sem explicação.[/] Elas saem "
+                "das questões reais que eu errei na última vez que respondi."
             )
             return
     elif macetes:
@@ -1107,26 +1110,26 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
 
     if not lote["pedidos"]:
         console.print(
-            "[red]Nao ha questao real do meu cargo para montar o pedido.[/] "
+            "[red]Não há questão real do meu cargo para montar o pedido.[/] "
             "Rode [bold]radar provas[/] e [bold]radar questoes[/] primeiro."
         )
         raise typer.Exit(code=1)
 
     destino = servico.manual.salvar_pedido(lote)
-    o_que = ("explicacoes, uma por questao errada" if explicacoes
-             else "macetes, um por materia" if macetes else "questoes")
+    o_que = ("explicações, uma por questão errada" if explicacoes
+             else "macetes, um por matéria" if macetes else "questões")
     console.print(
         f"[green]{len(lote['pedidos'])} pedido(s) de {o_que}[/] em {destino}"
     )
     _mostrar_o_escopo(lote)
     console.print(f"[dim]Lote {lote['lote']}. Nada foi gasto.[/]")
     console.print(
-        "Responda pelo Claude Code: peca para ele ler o arquivo e seguir o "
+        "Responda pelo Claude Code: peça para ele ler o arquivo e seguir o "
         "campo [bold]como_responder[/]. Depois:\n"
         "  [bold]radar gerar --importar data/resposta_ia.json[/]"
     )
     console.print(
-        "[dim]Um pedido novo substitui o anterior: resposta de lote velho e "
+        "[dim]Um pedido novo substitui o anterior: resposta de lote velho é "
         "recusada no importar.[/]"
     )
 
@@ -1134,7 +1137,7 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
 def _importar_resposta_da_ia(arquivo: Path) -> None:
     """O `--importar`: confere a resposta e diz em voz alta o que recusou."""
     if not arquivo.exists():
-        console.print(f"[red]Nao achei {arquivo}.[/]")
+        console.print(f"[red]Não achei {arquivo}.[/]")
         raise typer.Exit(code=1)
     try:
         resultado = servico.manual.importar(arquivo)
@@ -1142,32 +1145,32 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"[red]Nada importado:[/] {erro}")
         raise typer.Exit(code=1) from erro
 
-    o_que = {"macetes": "macete(s)", "explicacoes": "explicacao(oes)",
-             "classificacao": "classificacao(oes)",
+    o_que = {"macetes": "macete(s)", "explicacoes": "explicação(ões)",
+             "classificacao": "classificação(ões)",
              "associados": "conceito(s) associado(s)",
-             "fichas": "ficha(s)"}.get(resultado["tipo"], "questao(oes)")
+             "fichas": "ficha(s)"}.get(resultado["tipo"], "questão(ões)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
-    console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
+    console.print(f"[dim]Procedência: {resultado['modelo']}[/]")
     if resultado["repetidas"]:
         console.print(f"[dim]{resultado['repetidas']} repetida(s), ignorada(s).[/]")
     if resultado.get("substituidas"):
-        console.print(f"[dim]{resultado['substituidas']} ficha(s) nao conferida(s) "
-                      f"substituida(s) pela nova.[/]")
+        console.print(f"[dim]{resultado['substituidas']} ficha(s) não conferida(s) "
+                      f"substituída(s) pela nova.[/]")
     fora = resultado.get("fora_do_edital") or []
     if fora:
-        console.print(f"[dim]{len(fora)} questao(oes) de bloco generico nao sao de "
-                      "materia nenhuma do meu edital: ficam sem linha, que ja e o "
-                      "estado de quem nao tem classificacao.[/]")
+        console.print(f"[dim]{len(fora)} questão(ões) de bloco genérico não são de "
+                      "matéria nenhuma do meu edital: ficam sem linha, que já é o "
+                      "estado de quem não tem classificação.[/]")
     if resultado["recusas"]:
         console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
         for motivo in resultado["recusas"]:
             console.print(f"  - {motivo}")
     if resultado["tipo"] == "classificacao":
         console.print("[dim]Em data/classificacoes.json (versionado). Confira em "
-                      "radar web, Analises > Conferencia.[/]")
+                      "radar web, Análises > Conferência.[/]")
     elif resultado["tipo"] == "associados":
-        console.print("[dim]Em data/classificacoes.json (versionado), como classificacao "
-                      "associada: aparece em radar web, Analises > Incidencia, e nunca "
+        console.print("[dim]Em data/classificacoes.json (versionado), como classificação "
+                      "associada: aparece em radar web, Análises > Incidência, e nunca "
                       "entra na contagem.[/]")
     elif resultado["tipo"] == "fichas":
         console.print("[dim]Em data/fichas.json (versionado). Confira cada uma em "
@@ -1176,7 +1179,7 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print("[dim]Em data/macetes.json (versionado).[/]")
     elif resultado["tipo"] == "explicacoes":
         console.print("[dim]Em data/explicacoes.json (versionado). Aparecem no "
-                      "relatorio do simulado, ao lado de cada erro.[/]")
+                      "relatório do simulado, ao lado de cada erro.[/]")
     elif resultado["gravadas"]:
         console.print(
             "Responda em [bold]radar web[/], na aba Estudar - com o selo de "
@@ -1207,7 +1210,7 @@ def _mostrar_pedido(pedido: dict) -> None:
 
     console.print()
     console.print("[bold]O primeiro pedido, como ele sai daqui:[/]")
-    console.print(Panel(instrucao, title="instrucao", border_style="dim"))
+    console.print(Panel(instrucao, title="instrução", border_style="dim"))
     console.print(Panel(corpo, title="pedido", border_style="dim"))
 
 
@@ -1225,19 +1228,19 @@ def padrao(
 
     if not linhas:
         console.print(
-            "[yellow]Sem questao no banco com esses filtros.[/] "
+            "[yellow]Sem questão no banco com esses filtros.[/] "
             "Rode [bold]radar provas[/] e depois [bold]radar questoes[/]."
         )
         return
 
     total = sum(n for _, n in linhas)
-    titulo = "Incidencia por materia"
+    titulo = "Incidência por matéria"
     if cargo:
         titulo += f" - cargo contendo \"{cargo}\""
 
-    tabela = Table(title=f"{titulo} ({total} questoes)")
-    tabela.add_column("Materia")
-    tabela.add_column("Questoes", justify="right")
+    tabela = Table(title=f"{titulo} ({total} questões)")
+    tabela.add_column("Matéria")
+    tabela.add_column("Questões", justify="right")
     tabela.add_column("Peso", justify="right")
     tabela.add_column("", width=22)
 
@@ -1265,10 +1268,10 @@ def repetidas(
     achadas = servico.questoes_repetidas(minimo=minimo)
 
     if not achadas:
-        console.print("Nenhuma questao repetida ate agora.")
+        console.print("Nenhuma questão repetida até agora.")
         return
 
-    console.print(f"[bold]{len(achadas)}[/] questao(oes) apareceram em {minimo}+ provas:\n")
+    console.print(f"[bold]{len(achadas)}[/] questão(ões) apareceram em {minimo}+ provas:\n")
     for _, vezes, enunciado in achadas[:limite]:
         console.print(f"[bold green]{vezes}x[/] {enunciado[:100]}")
 
@@ -1286,12 +1289,12 @@ def favoritar(
     concurso = servico.favoritar(concurso_id, favorito=not remover)
 
     if concurso is None:
-        console.print(f"[red]Nao achei concurso com id {concurso_id}.[/]")
+        console.print(f"[red]Não achei concurso com id {concurso_id}.[/]")
         raise typer.Exit(code=1)
 
     verbo = "removido dos" if remover else "adicionado aos"
     console.print(f"[green]{verbo} favoritos:[/] {concurso.titulo}")
-    console.print(f"Agora sao {servico.contar_favoritos()} favorito(s).")
+    console.print(f"Agora são {servico.contar_favoritos()} favorito(s).")
 
 
 @app.command()
@@ -1306,11 +1309,11 @@ def salario(
     concurso = servico.definir_salario(concurso_id, valor)
 
     if concurso is None:
-        console.print(f"[red]Nao achei concurso com id {concurso_id}.[/]")
+        console.print(f"[red]Não achei concurso com id {concurso_id}.[/]")
         raise typer.Exit(code=1)
 
     if valor is None:
-        console.print(f"[green]Salario limpo:[/] {concurso.titulo[:60]}")
+        console.print(f"[green]Salário limpo:[/] {concurso.titulo[:60]}")
     else:
         formatado = f"{valor:,.0f}".replace(",", ".")
         console.print(f"[green]R$ {formatado}[/] gravado em: {concurso.titulo[:60]}")
@@ -1333,7 +1336,7 @@ def situacoes() -> None:
 
 @app.command()
 def detalhar(
-    limite: int = typer.Option(150, help="Quantas paginas ler nesta rodada"),
+    limite: int = typer.Option(150, help="Quantas páginas ler nesta rodada"),
 ) -> None:
     """Le a pagina de cada concurso que interessa e completa o registro.
 
@@ -1346,11 +1349,11 @@ def detalhar(
     fim os federais. O que e de outro estado fica de fora.
     """
     console.print(
-        f"Vou ler ate [bold]{limite}[/] pagina(s), com pausa de 1,5s entre "
+        f"Vou ler até [bold]{limite}[/] página(s), com pausa de 1,5s entre "
         f"elas. Tempo estimado: [bold]{limite * 1.5 / 60:.0f} minuto(s)[/]."
     )
 
-    with console.status("Lendo as paginas..."):
+    with console.status("Lendo as páginas..."):
         resultado = servico.detalhar_pendentes(limite=limite)
 
     console.print(f"[green]{resultado}[/]")
@@ -1358,7 +1361,7 @@ def detalhar(
     abertas = servico.contar_abertas()
     if abertas:
         console.print(
-            f"\n[bold green]{abertas}[/] concurso(s) com inscricao aberta agora: "
+            f"\n[bold green]{abertas}[/] concurso(s) com inscrição aberta agora: "
             f"[bold]radar listar --abertas[/]"
         )
 
@@ -1366,11 +1369,11 @@ def detalhar(
 @app.command()
 def avisar(
     limite: int = typer.Option(
-        servico.LIMITE_DE_AVISOS, help="Maximo de mensagens nesta rodada"
+        servico.LIMITE_DE_AVISOS, help="Máximo de mensagens nesta rodada"
     ),
     favoritos: bool = typer.Option(
         True, "--favoritos/--sem-favoritos",
-        help="Tambem manda o que mudou nos concursos que eu sigo",
+        help="Também manda o que mudou nos concursos que eu sigo",
     ),
 ) -> None:
     """Manda no Telegram o que mudou nos favoritos e os concursos novos.
@@ -1402,7 +1405,7 @@ def avisar(
 
 def _falta_configurar_o_telegram() -> None:
     console.print(
-        "[yellow]Telegram nao configurado.[/] Preencha no arquivo .env:\n"
+        "[yellow]Telegram não configurado.[/] Preencha no arquivo .env:\n"
         "  RADAR_TELEGRAM_TOKEN=...   (pegue com o @BotFather)\n"
         "  RADAR_TELEGRAM_CHAT_ID=... (pegue com o @userinfobot)"
     )
@@ -1424,14 +1427,14 @@ def testar_telegram() -> None:
 
     ok = avisos.enviar(
         "✅ <b>Radar de Concursos</b>\n"
-        "Telegram configurado certo. Os avisos vao chegar aqui."
+        "Telegram configurado certo. Os avisos vão chegar aqui."
     )
     if ok:
         console.print("[green]Mensagem enviada.[/] Confira o Telegram.")
     else:
         console.print(
-            "[red]Nao consegui enviar.[/] Confira se o token esta certo e se "
-            "voce ja mandou /start para o seu bot."
+            "[red]Não consegui enviar.[/] Confira se o token está certo e se "
+            "você já mandou /start para o seu bot."
         )
         raise typer.Exit(code=1)
 
@@ -1470,7 +1473,7 @@ def _mostrar_alvos() -> None:
     console.print()
     secundarios = contagem.get(alvos.SECUNDARIO, 0)
     if secundarios:
-        console.print(f"[cyan]Alvo secundario[/]: {secundarios}")
+        console.print(f"[cyan]Alvo secundário[/]: {secundarios}")
 
     # O mesmo cargo em outro estado sai contado e separado: ele avisa como o
     # principal e nao entra em nada que seja estudo, e eu preciso ver essa
@@ -1479,7 +1482,7 @@ def _mostrar_alvos() -> None:
     if fora:
         console.print(
             f"[yellow]Mesmo cargo, fora de SC[/]: {fora} "
-            f"[dim](avisa; nao entra no estudo)[/]"
+            f"[dim](avisa; não entra no estudo)[/]"
         )
 
     principais = servico.concursos_do_alvo(alvos.PRINCIPAL)
@@ -1497,8 +1500,8 @@ def _mostrar_alvos() -> None:
 
 ROTULO_DO_EVENTO = {
     "apareceu": "apareceu",
-    "mudou_situacao": "situacao",
-    "inscricoes_abertas": "inscricao",
+    "mudou_situacao": "situação",
+    "inscricoes_abertas": "inscrição",
     "inscricoes_encerradas": "encerrou",
     "edital_retificado": "retificado",
     "prova_marcada": "prova",
@@ -1526,7 +1529,7 @@ def eventos(
     """
     achado = servico.eventos_do_concurso(concurso_id)
     if achado is None:
-        console.print(f"[red]Nao achei concurso com id {concurso_id}.[/]")
+        console.print(f"[red]Não achei concurso com id {concurso_id}.[/]")
         raise typer.Exit(code=1)
 
     concurso, linha = achado
@@ -1535,7 +1538,7 @@ def eventos(
 
     if not linha:
         console.print(
-            "[yellow]Sem evento registrado.[/] A linha do tempo comeca a ser "
+            "[yellow]Sem evento registrado.[/] A linha do tempo começa a ser "
             "gravada na primeira coleta depois que o concurso entra no radar."
         )
         return
@@ -1551,7 +1554,9 @@ def eventos(
         tabela.add_row(
             formatar_data(evento.data),
             f"[{cor}]{rotulo}[/]" if cor else rotulo,
-            evento.descricao,
+            # A descricao gravada e chave ("Situacao: a -> b"); a tela mostra
+            # a frase, como a linha do tempo do site.
+            escape(linha_do_tempo.para_tela(evento.descricao) or evento.descricao or ""),
         )
 
     console.print(tabela)
@@ -1604,7 +1609,7 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
     )
     geradas_gravadas = acervo.exportar_geradas(destino_geradas)
     console.print(
-        f"[green]{geradas_gravadas}[/] questao(oes) gerada(s) exportada(s) "
+        f"[green]{geradas_gravadas}[/] questão(ões) gerada(s) exportada(s) "
         f"para {destino_geradas}"
     )
 
@@ -1675,7 +1680,7 @@ def exportar(caminho: str = typer.Option(None, help="Destino do JSON")) -> None:
     )
     notas_gravadas = acervo.exportar_notas(destino_notas)
     console.print(
-        f"[green]{notas_gravadas}[/] reflexao(oes) de semana exportada(s) para "
+        f"[green]{notas_gravadas}[/] reflexão(ões) de semana exportada(s) para "
         f"{destino_notas}"
     )
 
@@ -1691,7 +1696,7 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     origem = Path(caminho) if caminho else acervo.caminho_padrao()
     total = acervo.importar(origem)
     if total == 0:
-        console.print(f"[yellow]Nada a importar[/] (nao achei {origem})")
+        console.print(f"[yellow]Nada a importar[/] (não achei {origem})")
     else:
         console.print(f"[green]{total}[/] concurso(s) importado(s) de {origem}")
 
@@ -1715,7 +1720,7 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_assuntos.exists():
         mudadas = acervo.importar_assuntos(origem_assuntos)
         console.print(
-            f"[green]{mudadas}[/] questao(oes) reganharam o assunto ja pago, "
+            f"[green]{mudadas}[/] questão(ões) reganharam o assunto já pago, "
             f"de {origem_assuntos}"
         )
         # Recusa em silencio seria o mesmo erro de novo: o arquivo importaria
@@ -1723,9 +1728,9 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
         recusados = acervo.assuntos_sem_origem(origem_assuntos)
         if recusados:
             console.print(
-                f"[red]{len(recusados)} assunto(s) recusados:[/] o arquivo nao "
+                f"[red]{len(recusados)} assunto(s) recusados:[/] o arquivo não "
                 f"diz de que modelo e de quando eles vieram. Assunto sem "
-                f"procedencia nao entra no banco."
+                f"procedência não entra no banco."
             )
 
     entraram, recusadas = servico.classificacoes.importar()
@@ -1742,7 +1747,7 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     if origem_geradas.exists():
         voltaram = acervo.importar_geradas(origem_geradas)
         console.print(
-            f"[green]{voltaram}[/] questao(oes) gerada(s) de volta, "
+            f"[green]{voltaram}[/] questão(ões) gerada(s) de volta, "
             f"de {origem_geradas}"
         )
 
@@ -1791,7 +1796,7 @@ def importar(caminho: str = typer.Option(None, help="Origem do JSON")) -> None:
     )
     if origem_notas.exists():
         notas_de_volta = acervo.importar_notas(origem_notas)
-        console.print(f"   {notas_de_volta} reflexao(oes) de semana de volta ao banco")
+        console.print(f"   {notas_de_volta} reflexão(ões) de semana de volta ao banco")
 
     # O concurso de uma prova pode ter chegado agora, e e ele que diz o
     # estado: a evidencia de cada questao e refeita pela regra unica.
@@ -1815,9 +1820,9 @@ def _importar_simulados(origem: Path | None = None) -> None:
         # Fica de fora quando a questao ainda nao foi extraida neste banco.
         # Ele continua no arquivo; o remedio e extrair e importar de novo.
         console.print(
-            f"   [yellow]{de_fora} simulado(s) ficaram de fora:[/] as questoes "
-            f"deles ainda nao estao neste banco. Rode `radar questoes` e "
-            f"importe de novo - o arquivo nao perde nada enquanto isso."
+            f"   [yellow]{de_fora} simulado(s) ficaram de fora:[/] as questões "
+            f"deles ainda não estão neste banco. Rode `radar questoes` e "
+            f"importe de novo - o arquivo não perde nada enquanto isso."
         )
 
 
@@ -1836,14 +1841,14 @@ def web(
     porta: int = typer.Option(8000, help="Porta do servidor"),
     host: str = typer.Option(
         "127.0.0.1",
-        help="Endereco onde escutar. Para o celular, prefira --rede",
+        help="Endereço onde escutar. Para o celular, prefira --rede",
     ),
     rede: bool = typer.Option(
         False, "--rede",
-        help="Abre tambem no celular, na mesma rede Wi-Fi (escuta em 0.0.0.0)",
+        help="Abre também no celular, na mesma rede Wi-Fi (escuta em 0.0.0.0)",
     ),
     recarregar: bool = typer.Option(
-        False, help="Reinicia sozinho ao salvar arquivo (so para desenvolver)"
+        False, help="Reinicia sozinho ao salvar arquivo (só para desenvolver)"
     ),
 ) -> None:
     """Sobe a interface web em http://localhost:8000"""
@@ -1856,7 +1861,7 @@ def web(
         # sempre e um servidor que ficou aberto noutra janela.
         livre = primeira_porta_livre(host, porta + 1)
         console.print(
-            f"[red]A porta {porta} ja esta em uso.[/]\n"
+            f"[red]A porta {porta} já está em uso.[/]\n"
             f"Costuma ser um [bold]radar web[/] aberto em outra janela - "
             f"procure a janela e feche com Ctrl+C."
         )
@@ -1874,8 +1879,8 @@ def web(
             console.print(f"Abra no celular (mesmo Wi-Fi): [bold cyan]http://{ip}:{porta}/hoje[/]")
         else:
             console.print(
-                "Aberto na rede, mas nao achei o IP deste PC. Rode [bold]ipconfig[/] "
-                f"e use o \"Endereco IPv4\" do Wi-Fi: http://<esse IP>:{porta}/hoje"
+                "Aberto na rede, mas não achei o IP deste PC. Rode [bold]ipconfig[/] "
+                f"e use o \"Endereço IPv4\" do Wi-Fi: http://<esse IP>:{porta}/hoje"
             )
         console.print("[dim]Sem senha: qualquer pessoa no seu Wi-Fi consegue abrir.[/]")
     console.print("Ctrl+C para parar.\n")
@@ -1916,15 +1921,15 @@ def subir(
     servidor = automacao.no_ar()
     if servidor:
         console.print(
-            f"[green]Ja esta no ar[/] em [bold cyan]{servidor.endereco}[/] "
-            f"(processo {servidor.pid}). Nao subi outro."
+            f"[green]Já está no ar[/] em [bold cyan]{servidor.endereco}[/] "
+            f"(processo {servidor.pid}). Não subi outro."
         )
     else:
         if porta_ocupada(automacao.HOST_PADRAO, porta):
             # Porta ocupada sem arquivo de PID meu: e um `radar web` aberto
             # em outra janela, e matar aquilo nao e tarefa deste comando.
             console.print(
-                f"[red]A porta {porta} ja esta em uso[/], e nao fui eu que subi.\n"
+                f"[red]A porta {porta} já está em uso[/], e não fui eu que subi.\n"
                 f"Costuma ser um [bold]radar web[/] aberto em outra janela - "
                 f"feche com Ctrl+C, ou suba noutra porta: "
                 f"[bold]radar subir --porta {porta + 1}[/]."
@@ -1934,8 +1939,8 @@ def subir(
         servidor = automacao.subir(porta)
         if not automacao.esperar_subir(servidor):
             console.print(
-                "[red]Subiu e morreu.[/] Sem janela nao ha erro na tela, "
-                f"entao o que ele disse esta em [bold]{automacao.caminho_do_log_da_web()}[/]:"
+                "[red]Subiu e morreu.[/] Sem janela não há erro na tela, "
+                f"então o que ele disse está em [bold]{automacao.caminho_do_log_da_web()}[/]:"
             )
             for linha in automacao.fim_do_log_da_web():
                 console.print(f"  [dim]{escape(linha)}[/]")
@@ -1963,8 +1968,8 @@ def parar() -> None:
     if servidor is None:
         console.print("Nada para desligar: nenhum servidor do `radar subir` rodando.")
         console.print(
-            "[dim]Um [bold]radar web[/] aberto numa janela nao entra aqui - "
-            "esse para com Ctrl+C na propria janela.[/]"
+            "[dim]Um [bold]radar web[/] aberto numa janela não entra aqui - "
+            "esse para com Ctrl+C na própria janela.[/]"
         )
         return
     console.print(f"[green]Desligado[/] (processo {servidor.pid}).")
@@ -2010,14 +2015,14 @@ def backup() -> None:
         console.print(f"[green]Backup em dia.[/] Log em {resultado.caminho}")
     else:
         console.print(f"[red]O backup falhou:[/] {escape(resultado.motivo or '')}")
-        console.print(f"[dim]A saída inteira esta em {resultado.caminho}[/]")
+        console.print(f"[dim]A saída inteira está em {resultado.caminho}[/]")
         raise typer.Exit(code=1)
 
 
 @app.command()
 def agendar(
     mostrar: bool = typer.Option(
-        False, "--status", help="So mostra o que esta criado, sem mexer em nada",
+        False, "--status", help="Só mostra o que está criado, sem mexer em nada",
     ),
     remover: bool = typer.Option(
         False, "--remover", help="Apaga as duas tarefas e os dois atalhos",
@@ -2031,7 +2036,7 @@ def agendar(
     """
     if not automacao.e_windows():
         console.print(
-            "[red]Este comando e do Windows.[/] O Agendador de Tarefas nao "
+            "[red]Este comando é do Windows.[/] O Agendador de Tarefas não "
             "existe aqui; no Linux o equivalente seria cron ou systemd --user."
         )
         raise typer.Exit(code=1)
@@ -2063,7 +2068,7 @@ def agendar(
         if resultado.returncode == 0:
             console.print(f"[green]Tarefa criada:[/] {nome}")
         else:
-            console.print(f"[red]Nao consegui criar \"{nome}\".[/]")
+            console.print(f"[red]Não consegui criar \"{nome}\".[/]")
             console.print(f"[dim]{escape((resultado.stderr or resultado.stdout).strip())}[/]")
             raise typer.Exit(code=1)
 
@@ -2108,11 +2113,11 @@ def _descartar_vazios(sim: bool) -> None:
     if not candidatos:
         console.print("Nenhum simulado vazio com mais de 1 dia. Nada a limpar.")
         return
-    console.print(f"{len(candidatos)} simulado(s) sem nenhuma resposta, criados ha mais de 1 dia:")
+    console.print(f"{len(candidatos)} simulado(s) sem nenhuma resposta, criados há mais de 1 dia:")
     for ident, criado in candidatos:
         console.print(f"  #{ident}  criado em {para_local(criado):%d/%m/%Y às %H:%M}")
     resposta = "s" if sim else typer.prompt(
-        "Apagar? Nao tem volta [s/N]", default="n", show_default=False,
+        "Apagar? Não tem volta [s/N]", default="n", show_default=False,
     )
     if resposta.strip().lower() not in ("s", "sim", "y", "yes"):
         console.print("Nada apagado.")
@@ -2189,15 +2194,15 @@ def _trazer_do_github() -> str | None:
     if mudados:
         lista = ", ".join(mudados[:5]) + (" e outros" if len(mudados) > 5 else "")
         return (f"{_saida_do_git(avanco)}\n"
-                f"Ha {len(mudados)} arquivo(s) mudado(s) sem commit ({lista}), e o "
-                f"git nao junta o GitHub por cima deles: commite ou guarde "
+                f"Há {len(mudados)} arquivo(s) mudado(s) sem commit ({lista}), e o "
+                f"git não junta o GitHub por cima deles: commite ou guarde "
                 f"(git stash) e rode de novo")
 
     rebase = _git("rebase", "origin/main")
     if rebase.returncode != 0:
         _git("rebase", "--abort")
         return (f"{_saida_do_git(rebase)}\n"
-                f"O rebase deu conflito e foi desfeito: a pasta esta como antes")
+                f"O rebase deu conflito e foi desfeito: a pasta está como antes")
     return None
 
 
@@ -2215,7 +2220,7 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
 def sincronizar(
     empurrar: bool = typer.Option(
         True, "--empurrar/--sem-empurrar",
-        help="Faz o push no fim. Desligado, para antes e so mostra o que mudou",
+        help="Faz o push no fim. Desligado, para antes e só mostra o que mudou",
     ),
 ) -> None:
     """Troca com o GitHub o que cada lado sabe, e aplica a regra de hoje.
@@ -2241,10 +2246,10 @@ def sincronizar(
     radar.db. O que mais estiver mudado na pasta fica como esta: nem o pull
     nem o commit tocam nele.
     """
-    console.print("[bold]1/6[/] Trazendo o que o robo coletou")
+    console.print("[bold]1/6[/] Trazendo o que o robô coletou")
     erro = _trazer_do_github()
     if erro:
-        console.print("[red]O pull falhou.[/] Resolva a mao e rode de novo:\n")
+        console.print("[red]O pull falhou.[/] Resolva à mão e rode de novo:\n")
         console.print(f"[dim]{escape(erro)}[/]")
         raise typer.Exit(code=1)
 
@@ -2265,7 +2270,7 @@ def sincronizar(
     console.print(f"   {dias} dia(s) do cronograma, {estados} dia(s) de faixas "
                   f"marcadas, {erros_de_volta} erro(s) anotado(s), "
                   f"{extras_de_volta} estudo(s) extra(s) e {notas_de_volta} "
-                  f"reflexao(oes) de volta ao banco")
+                  f"reflexão(ões) de volta ao banco")
 
     # Depois de importar e ANTES de exportar: e a unica posicao que funciona.
     # Antes do importar, o JSON velho passaria por cima; depois do exportar, o
@@ -2303,7 +2308,7 @@ def sincronizar(
         f"   {total} concurso(s), {total_eventos} evento(s), "
         f"{total_simulados} simulado(s), {total_dias} dia(s) do cronograma, "
         f"{total_erros} erro(s) anotado(s), {total_extras} estudo(s) extra(s) e "
-        f"{total_notas} reflexao(oes), com [bold]{favoritos}[/] favorito(s)"
+        f"{total_notas} reflexão(ões), com [bold]{favoritos}[/] favorito(s)"
     )
 
     console.print("[bold]5/6[/] Commitando")
@@ -2320,7 +2325,7 @@ def sincronizar(
         raise typer.Exit(code=1)
     mudou = _git("diff", "--staged", "--quiet", "--", *arquivos).returncode != 0
     if not mudou:
-        console.print("   [dim]Nada mudou: nao ha o que commitar.[/]")
+        console.print("   [dim]Nada mudou: não há o que commitar.[/]")
         console.print("\n[green]Em dia com o GitHub.[/]")
         return
 
@@ -2335,34 +2340,34 @@ def sincronizar(
 
     if not empurrar:
         console.print("[bold]6/6[/] [yellow]Sem empurrar, a pedido.[/]")
-        console.print("   O commit esta feito; falta `git push`.")
+        console.print("   O commit está feito; falta `git push`.")
         return
 
     console.print("[bold]6/6[/] Empurrando")
     push = _git("push", "origin", "HEAD:main")
     if push.returncode != 0:
-        console.print("[red]O push falhou.[/] O commit esta feito aqui:\n")
+        console.print("[red]O push falhou.[/] O commit está feito aqui:\n")
         console.print(f"[dim]{(push.stderr or push.stdout).strip()}[/]")
         raise typer.Exit(code=1)
 
     console.print(
-        f"\n[green]Sincronizado.[/] O robo passa a conhecer {favoritos} "
-        f"favorito(s) na proxima coleta."
+        f"\n[green]Sincronizado.[/] O robô passa a conhecer {favoritos} "
+        f"favorito(s) na próxima coleta."
     )
 
 
 @app.command()
 def hoje(
-    data: str = typer.Option(None, help="Outro dia, em AAAA-MM-DD (padrao: hoje)"),
+    data: str = typer.Option(None, help="Outro dia, em AAAA-MM-DD (padrão: hoje)"),
     marcar: str = typer.Option(
         None, help="Como foi o dia: ideal, reduzida, minima ou nao_fiz",
     ),
     feitas: int = typer.Option(
-        None, help="Questoes feitas fora do radar (vira estudo extra; pede --minutos)",
+        None, help="Questões feitas fora do radar (vira estudo extra; pede --minutos)",
     ),
-    acertos: int = typer.Option(None, help="Acertos nessas questoes"),
-    minutos: int = typer.Option(None, help="Minutos gastos nessas questoes"),
-    materia: str = typer.Option(None, help="Materia dessas questoes (opcional)"),
+    acertos: int = typer.Option(None, help="Acertos nessas questões"),
+    minutos: int = typer.Option(None, help="Minutos gastos nessas questões"),
+    materia: str = typer.Option(None, help="Matéria dessas questões (opcional)"),
     anotacao: str = typer.Option(None, help="Um recado sobre o dia"),
     plano_b: int = typer.Option(
         None, "--plano-b", help="Mostra o Plano B do dia: 30 ou 60 (minutos)",
@@ -2378,7 +2383,7 @@ def hoje(
         quando = (date.fromisoformat(data) if data
                   else datetime.now(fuso_local()).date())
     except ValueError:
-        console.print(f"[red]Data invalida: {data!r}.[/] Use AAAA-MM-DD.")
+        console.print(f"[red]Data inválida: {data!r}.[/] Use AAAA-MM-DD.")
         raise typer.Exit(code=1)
 
     try:
@@ -2391,15 +2396,15 @@ def hoje(
     # vira um estudo extra, e entra na conta do dia pela mesma porta da tela.
     if feitas is not None or acertos is not None:
         if minutos is None:
-            console.print("[red]Faltou --minutos:[/] questao anotada vira estudo "
-                          "extra, e estudo sem tempo nao e estudo.")
+            console.print("[red]Faltou --minutos:[/] questão anotada vira estudo "
+                          "extra, e estudo sem tempo não é estudo.")
             raise typer.Exit(code=1)
         try:
             servico.extra.anotar(data=quando, o_que="questoes", materia=materia,
                                  minutos=minutos, questoes=feitas, acertos=acertos,
                                  onde="qconcursos", plano=plano)
         except servico.extra.RegistroInvalido as erro:
-            console.print(f"[red]Nao anotei:[/] {erro}")
+            console.print(f"[red]Não anotei:[/] {erro}")
             raise typer.Exit(code=1)
         console.print("[green]Anotado como estudo extra.[/]")
 
@@ -2407,7 +2412,7 @@ def hoje(
         try:
             servico.cronograma.registrar(quando, marcar, anotacao, plano=plano)
         except servico.cronograma.RegistroInvalido as erro:
-            console.print(f"[red]Nao marquei:[/] {erro}")
+            console.print(f"[red]Não marquei:[/] {erro}")
             raise typer.Exit(code=1)
         console.print("[green]Marcado.[/]")
     elif anotacao:
@@ -2434,7 +2439,7 @@ def hoje(
 
     gravado = plano.dia(quando)
     if gravado is None:
-        console.print("[yellow]Esse dia esta dentro do ciclo, mas nao esta no "
+        console.print("[yellow]Esse dia está dentro do ciclo, mas não está no "
                       "cronograma.[/]")
         return
 
@@ -2631,25 +2636,25 @@ def _registro_legivel(registro) -> str:
 @app.command()
 def classificar(
     pedido: bool = typer.Option(
-        False, "--pedido", help="Escreve data/pedido_ia.json com as questoes do alvo"),
+        False, "--pedido", help="Escreve data/pedido_ia.json com as questões do alvo"),
     materia: list[str] = typer.Option(
-        None, help="So estas materias, pelo caminho do no (pode repetir)"),
+        None, help="Só estas matérias, pelo caminho do nó (pode repetir)"),
     evidencia: str = typer.Option(
-        "alvo", help="De onde vem a questao: alvo ou complementar"),
+        "alvo", help="De onde vem a questão: alvo ou complementar"),
     catalogo: bool = typer.Option(
         False, "--catalogo",
-        help="No complementar: propoe o assunto pelo catalogo de palavras-chave "
-             "(automatico, 🟡, para conferir por amostra)"),
+        help="No complementar: propõe o assunto pelo catálogo de palavras-chave "
+             "(automático, 🟡, para conferir por amostra)"),
     genericos: bool = typer.Option(
         False, "--genericos",
-        help="No complementar: as questoes de bloco generico (Conhecimentos "
-             "Especificos), agrupadas pela materia que o termo sugere"),
+        help="No complementar: as questões de bloco genérico (Conhecimentos "
+             "Específicos), agrupadas pela matéria que o termo sugere"),
     associados: bool = typer.Option(
         False, "--associados",
-        help="Com --pedido: os OUTROS conceitos que cada questao do alvo cobra "
-             "(§14, item 7), alem da classificacao principal"),
+        help="Com --pedido: os OUTROS conceitos que cada questão do alvo cobra "
+             "(§14, item 7), além da classificação principal"),
     importar: Path = typer.Option(
-        None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
+        None, "--importar", help="Lê a resposta (data/resposta_ia.json) e grava"),
 ) -> None:
     """Classifica questoes na arvore de conteudos, pelo Claude Code.
 
@@ -2672,11 +2677,11 @@ def classificar(
         for nome in materia:
             r = servico.complementar.classificar_pelo_catalogo(nome)
             console.print(f"[green]{escape(nome)}: {r.propostas} proposta(s)[/] "
-                          f"(automaticas, para conferir por amostra)")
-            console.print(f"  [dim]sem linha: {r.sem_assunto} sem palavra do catalogo, "
+                          f"(automáticas, para conferir por amostra)")
+            console.print(f"  [dim]sem linha: {r.sem_assunto} sem palavra do catálogo, "
                           f"{r.ambiguas} com mais de um assunto, {r.sem_par_no_edital} "
-                          f"sem par no edital; {r.ja_classificadas} ja tinham "
-                          f"classificacao[/]")
+                          f"sem par no edital; {r.ja_classificadas} já tinham "
+                          f"classificação[/]")
             for assunto, quantas in sorted(r.por_assunto.items(), key=lambda x: -x[1]):
                 console.print(f"    {escape(assunto)}: {quantas}")
         return
@@ -2686,12 +2691,12 @@ def classificar(
     if associados:
         lote = servico.manual.pedido_de_associados(list(materia or []))
         if not lote["pedidos"]:
-            console.print("[yellow]Nada a pedir:[/] nenhuma questao do alvo com "
-                          "classificacao principal.")
+            console.print("[yellow]Nada a pedir:[/] nenhuma questão do alvo com "
+                          "classificação principal.")
             return
         destino = servico.manual.salvar_pedido(lote)
         total = sum(len(p["questoes"]) for p in lote["pedidos"])
-        console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questao(oes)[/] "
+        console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questão(ões)[/] "
                       f"em {destino} (conceitos associados)")
         for p in lote["pedidos"]:
             console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}")
@@ -2704,16 +2709,16 @@ def classificar(
         raise typer.Exit(code=1)
     if not lote["pedidos"]:
         onde = " em " + ", ".join(materia) if materia else ""
-        console.print(f"[yellow]Nada a pedir:[/] nenhuma questao do {evidencia} "
-                      f"sem conferencia{onde}.")
+        console.print(f"[yellow]Nada a pedir:[/] nenhuma questão do {evidencia} "
+                      f"sem conferência{onde}.")
         return
     destino = servico.manual.salvar_pedido(lote)
     total = sum(len(p["questoes"]) for p in lote["pedidos"])
-    console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questao(oes)[/] "
+    console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questão(ões)[/] "
                   f"em {destino}")
     for p in lote["pedidos"]:
         if p.get("bloco_generico"):
-            marca = " [dim](bloco generico: a materia e suspeita do termo)[/]"
+            marca = " [dim](bloco genérico: a matéria é suspeita do termo)[/]"
         else:
             marca = " [dim](fora do edital atual)[/]" if p["fora_do_edital"] else ""
         console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}{marca}")
@@ -2722,19 +2727,19 @@ def classificar(
 @app.command()
 def fichas(
     tema: str = typer.Option(
-        None, "--tema", help="Mostra a ficha deste tema (o titulo ou o id da ficha)"),
+        None, "--tema", help="Mostra a ficha deste tema (o título ou o id da ficha)"),
     data: str = typer.Option(
-        None, help="Com --tema: o dia do 'por que agora', AAAA-MM-DD (padrao: hoje)"),
+        None, help="Com --tema: o dia do 'por que agora', AAAA-MM-DD (padrão: hoje)"),
     pedido: bool = typer.Option(
         False, "--pedido", help="Escreve data/pedido_ia.json com os temas sem ficha"),
-    materia: str = typer.Option(None, help="Com --pedido: so os temas desta materia"),
+    materia: str = typer.Option(None, help="Com --pedido: só os temas desta matéria"),
     desde: str = typer.Option(
-        None, help="Os temas do cronograma de AAAA-MM-DD em diante (padrao: hoje)"),
+        None, help="Os temas do cronograma de AAAA-MM-DD em diante (padrão: hoje)"),
     refazer: bool = typer.Option(
         False, "--refazer",
-        help="Com --pedido: pede de novo os temas cuja ficha eu ainda nao conferi"),
+        help="Com --pedido: pede de novo os temas cuja ficha eu ainda não conferi"),
     importar: Path = typer.Option(
-        None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
+        None, "--importar", help="Lê a resposta (data/resposta_ia.json) e grava"),
     conferir: str = typer.Option(
         None, "--conferir", help="Marca como conferida por mim a ficha deste tema"),
 ) -> None:
@@ -2755,7 +2760,7 @@ def fichas(
         try:
             return date.fromisoformat(texto)
         except ValueError:
-            console.print(f"[red]{nome} invalida: {texto!r}.[/] Use AAAA-MM-DD.")
+            console.print(f"[red]{nome} inválida: {texto!r}.[/] Use AAAA-MM-DD.")
             raise typer.Exit(code=1)
 
     if importar is not None:
@@ -2805,7 +2810,7 @@ def fichas(
         quando_ = proxima.strftime("%d/%m") if proxima else "--/--"
         if linha.tem_ficha:
             p = linha.prioridade
-            conferida = "conferida" if linha.escrita.conferida_em else "nao conferida"
+            conferida = "conferida" if linha.escrita.conferida_em else "não conferida"
             console.print(
                 f"  {quando_}  {escape(linha.tema.materia)} · {escape(linha.tema.tema)}"
                 f"  [dim]{linha.escrita.id}[/]\n"
@@ -2970,12 +2975,12 @@ def _mostrar_ficha(f) -> None:
 
 @app.command()
 def desempenho(
-    materia: str = typer.Option(None, help="So uma materia, pelo nome do no"),
+    materia: str = typer.Option(None, help="Só uma matéria, pelo nome do no"),
     desde_o_inicio: bool = typer.Option(
         False, "--desde-o-inicio",
-        help="Tudo, e nao so o ciclo em andamento (o padrao)"),
+        help="Tudo, e não só o ciclo em andamento (o padrão)"),
     revisar: bool = typer.Option(
-        False, "--revisar", help="So o que voltou para revisao hoje"),
+        False, "--revisar", help="Só o que voltou para revisão hoje"),
 ) -> None:
     """O meu desempenho por no da arvore, com o estado e a amostra de cada um.
 
@@ -2988,14 +2993,14 @@ def desempenho(
     from radar.servico import desempenho_por_conteudo as por_conteudo
 
     recorte = por_conteudo.SEMPRE if desde_o_inicio else por_conteudo.CICLO
-    rotulo = "desde o inicio" if desde_o_inicio else "o ciclo em andamento"
+    rotulo = "desde o início" if desde_o_inicio else "o ciclo em andamento"
 
     if revisar:
         fila = servico.estudo.para_revisar(recorte=recorte)
         if not fila:
-            console.print("[green]Nada vencido.[/] Conteudo que eu nunca "
-                          "estudei nao entra: revisar o que eu nao vi nao e "
-                          "revisao.")
+            console.print("[green]Nada vencido.[/] Conteúdo que eu nunca "
+                          "estudei não entra: revisar o que eu não vi não é "
+                          "revisão.")
             return
         tabela = Table(title=f"Para revisar hoje ({len(fila)})", title_justify="left")
         for coluna in ("Conteudo", "Por que", "Atraso", "A refazer"):
@@ -3015,7 +3020,7 @@ def desempenho(
     linhas = por_conteudo.tela(recorte, materia)
     if not linhas:
         console.print(f"[yellow]Nada respondido em {rotulo}[/], ou o que eu "
-                      f"respondi nao esta classificado em conteudo nenhum.")
+                      f"respondi não está classificado em conteúdo nenhum.")
         raise typer.Exit(code=1)
 
     minimos = regua.carregar()
@@ -3030,10 +3035,10 @@ def desempenho(
                        taxa, escape(linha.divisao), escape(linha.estado.amostra))
     console.print(tabela)
     console.print(
-        f"[dim]Minimos do config/amostra.yml: {minimos.do_nivel('materia')} na "
-        f"materia, {minimos.do_nivel('assunto')} no assunto, "
+        f"[dim]Mínimos do config/amostra.yml: {minimos.do_nivel('materia')} na "
+        f"matéria, {minimos.do_nivel('assunto')} no assunto, "
         f"{minimos.do_nivel('subassunto')} no subassunto ou elemento. Abaixo do "
-        f"minimo o numero aparece e nao entra em ordenacao nem em projecao.[/]")
+        f"mínimo o número aparece e não entra em ordenação nem em projeção.[/]")
 
     refazer = servico.estudo.refazer()
     console.print(f"[dim]A refazer: {len(refazer.do_radar)} errada(s) no radar · "
@@ -3043,9 +3048,9 @@ def desempenho(
 
 @app.command()
 def incidencia(
-    materia: str = typer.Option(None, help="So uma materia, pelo nome do no"),
+    materia: str = typer.Option(None, help="Só uma matéria, pelo nome do no"),
     padroes: bool = typer.Option(
-        False, "--padroes", help="Mostra os padroes de cobranca de cada no"),
+        False, "--padroes", help="Mostra os padrões de cobrança de cada no"),
 ) -> None:
     """O mapa de incidencia do concurso-alvo, por no da arvore, com a amostra.
 
@@ -3056,7 +3061,7 @@ def incidencia(
 
     mapas = servico.incidencia.mapa(materia)
     if not mapas:
-        console.print("[yellow]Nada no mapa[/] (a arvore esta vazia ou a materia nao existe).")
+        console.print("[yellow]Nada no mapa[/] (a árvore está vazia ou a matéria não existe).")
         raise typer.Exit(code=1)
     minimos = regra.carregar_minimos()
     # A linha do acervo complementar anda ao lado da do alvo, e nunca somada
@@ -3071,7 +3076,7 @@ def incidencia(
     for m in mapas:
         tabela = Table(title=f"{m.materia} — {m.topo.amostra} · {m.topo.rotulo}",
                        title_justify="left")
-        for coluna in ("Conteudo", "Policia Penal SC", "O que aconteceu",
+        for coluna in ("Conteúdo", "Polícia Penal SC", "O que aconteceu",
                        "Complementar FEPESE", "Anos", "Tipo"):
             tabela.add_column(coluna)
         for linha in m.linhas[1:]:
@@ -3083,11 +3088,11 @@ def incidencia(
                            ", ".join(map(str, linha.anos)) or "—", escape(tipos) or "—")
         console.print(tabela)
         topo = complementares.get(m.topo.caminho)
-        console.print(f"   Policia Penal SC: {m.topo.amostra} · "
+        console.print(f"   Polícia Penal SC: {m.topo.amostra} · "
                       f"{topo.frase if topo else 'Acervo complementar FEPESE: nada no acervo'}"
                       " (as duas nunca se somam)")
         console.print(f"   fora da conta: {m.anuladas} anulada(s) · {m.pendentes} pendente(s)"
-                      f" · provas da materia: {m.provas}")
+                      f" · provas da matéria: {m.provas}")
         if padroes:
             abaixo = 0
             for linha in m.linhas:
@@ -3104,7 +3109,7 @@ def incidencia(
                 if p.termos:
                     console.print("     termos: " + ", ".join(t.palavra for t in p.termos))
             if abaixo:
-                console.print(f"   {abaixo} no(s) abaixo do minimo ({minimos.questoes} questoes "
+                console.print(f"   {abaixo} nó(s) abaixo do mínimo ({minimos.questoes} questões "
                               f"em {minimos.provas} provas): {regra.FRASE_SEM_EVIDENCIA}")
             abaixo = 0
             for linha in m.linhas:
@@ -3126,20 +3131,20 @@ def incidencia(
                     console.print("     tipo: " + escape(", ".join(f"{t} ({n})" for t, n in p.tipos)))
                 console.print(f"     [dim]{escape(p.nota)}[/]")
             if abaixo:
-                console.print(f"   complementar: {abaixo} no(s) abaixo do minimo: "
+                console.print(f"   complementar: {abaixo} nó(s) abaixo do mínimo: "
                               f"{regra.FRASE_SEM_EVIDENCIA}")
             # §14, item 7: os conceitos que caem juntos (decisao 86).
             for a in juntos.get(m.materia) or []:
                 console.print(f"   junto: {escape(a.nome_principal)} + "
                               f"{escape(a.nome_associado)}: {len(a.questoes)} "
                               f"({escape(', '.join(a.questoes))}) "
-                              f"[dim]- classificacao do Claude Code, por conferir[/]")
+                              f"[dim]- classificação do Claude Code, por conferir[/]")
         console.print()
 
 
 @app.command()
 def complementar(
-    caminho: str = typer.Option(None, help="Onde gravar (padrao: docs/complementar.md)"),
+    caminho: str = typer.Option(None, help="Onde gravar (padrão: docs/complementar.md)"),
     aplicar: bool = typer.Option(
         False, "--aplicar",
         help="Grava quais provas entram em data/acervo_complementar.json"),
@@ -3158,12 +3163,12 @@ def complementar(
     por_materia, validadas, cadernos = levantado
     if not cadernos:
         console.print("[yellow]Nenhuma prova complementar no banco.[/] Rode "
-                      "`radar extrair` ou confira a evidencia das provas.")
+                      "`radar extrair` ou confira a evidência das provas.")
         raise typer.Exit(code=1)
 
-    tabela = Table(title="Acervo complementar FEPESE, por materia do meu edital",
+    tabela = Table(title="Acervo complementar FEPESE, por matéria do meu edital",
                    title_justify="left")
-    for coluna in ("Materia", "Pelo nome", "Provas", "Por termo (indicio)", "Provas"):
+    for coluna in ("Matéria", "Pelo nome", "Provas", "Por termo (indício)", "Provas"):
         tabela.add_column(coluna)
     for m in por_materia:
         tabela.add_row(escape(m.materia), str(m.pelo_nome), str(m.provas_pelo_nome),
@@ -3176,14 +3181,14 @@ def complementar(
     recusadas = sum(1 for v in validadas.values() if not v.pode_classificar)
     console.print(
         f"{len(cadernos)} prova(s) complementar(es): [green]{validadas_de_vez} "
-        f"validada(s)[/] (extracao inteira e gabarito {regra.DEFINITIVO}), "
-        f"[yellow]{so_classificar} so para classificar[/] (gabarito provisorio "
-        f"ou ausente: fora dos padroes de cobranca), "
+        f"validada(s)[/] (extração inteira e gabarito {regra.DEFINITIVO}), "
+        f"[yellow]{so_classificar} só para classificar[/] (gabarito provisório "
+        f"ou ausente: fora dos padrões de cobrança), "
         f"[red]{recusadas} recusada(s)[/]."
     )
-    console.print("A incidencia do alvo NAO muda com nada disto: as duas "
-                  "evidencias nunca se somam.")
-    console.print(f"Relatorio em {destino}")
+    console.print("A incidência do alvo NÃO muda com nada disto: as duas "
+                  "evidências nunca se somam.")
+    console.print(f"Relatório em {destino}")
 
     if not aplicar:
         decididas = servico.complementar.decidir_todas(levantado=levantado)
@@ -3196,13 +3201,13 @@ def complementar(
     aceitas = [r for r in registros if r.aceita]
     nos_padroes = sum(1 for r in registros if r.entra_nos_padroes)
     console.print(f"[green]{len(aceitas)} prova(s) no acervo complementar[/] "
-                  f"({nos_padroes} também nos padroes de cobranca), "
+                  f"({nos_padroes} também nos padrões de cobrança), "
                   f"{len(registros) - len(aceitas)} fora, cada uma com o motivo. "
                   f"Gravado em {servico.complementar.caminho_do_registro()}")
     if mudanca["entraram"]:
         console.print(f"  entraram agora: {len(mudanca['entraram'])}")
     if mudanca["sairam"]:
-        console.print(f"  [yellow]sairam: {len(mudanca['sairam'])}[/]")
+        console.print(f"  [yellow]saíram: {len(mudanca['sairam'])}[/]")
 
 
 @app.command()
@@ -3314,11 +3319,11 @@ def conteudos(
 
 @app.command()
 def conferir_dias(
-    de: str = typer.Option(None, help="Primeiro dia, AAAA-MM-DD (padrao: inicio do ciclo)"),
-    ate: str = typer.Option(None, help="Ultimo dia, AAAA-MM-DD (padrao: hoje)"),
+    de: str = typer.Option(None, help="Primeiro dia, AAAA-MM-DD (padrão: início do ciclo)"),
+    ate: str = typer.Option(None, help="Último dia, AAAA-MM-DD (padrão: hoje)"),
     aplicar: bool = typer.Option(
         False, "--aplicar",
-        help="Corrige o que a conferencia propoe, com copia de seguranca antes",
+        help="Corrige o que a conferência propõe, com cópia de segurança antes",
     ),
 ) -> None:
     """Confere os dias gravados contra a regra de contagem. So le.
@@ -3331,7 +3336,7 @@ def conferir_dias(
         inicio = date.fromisoformat(de) if de else None
         fim = date.fromisoformat(ate) if ate else None
     except ValueError:
-        console.print("[red]Data invalida.[/] Use AAAA-MM-DD.")
+        console.print("[red]Data inválida.[/] Use AAAA-MM-DD.")
         raise typer.Exit(code=1)
     try:
         plano = cronograma.carregar()
@@ -3344,7 +3349,7 @@ def conferir_dias(
     a_corrigir = sum(len(dia.a_corrigir) for dia in antes)
     if not aplicar:
         if a_corrigir:
-            console.print(f"\n{a_corrigir} correcao(oes) proposta(s). Nada mudou: "
+            console.print(f"\n{a_corrigir} correção(ões) proposta(s). Nada mudou: "
                           "para aplicar, rode de novo com --aplicar.")
         else:
             console.print("\n[green]Nada a corrigir.[/]")
@@ -3354,17 +3359,17 @@ def conferir_dias(
     if pasta is None:
         console.print("\n[green]Nada a corrigir:[/] nada foi gravado.")
         return
-    console.print(f"\n[green]{a_corrigir} correcao(oes) aplicada(s).[/] "
-                  f"Copia de seguranca em {pasta}")
+    console.print(f"\n[green]{a_corrigir} correção(ões) aplicada(s).[/] "
+                  f"Cópia de segurança em {pasta}")
     depois = servico.conferencia.conferir(inicio, fim, plano=plano)
-    console.print("\n[bold]Depois da correcao[/]")
+    console.print("\n[bold]Depois da correção[/]")
     _mostrar_conferencia(depois)
     _mostrar_antes_e_depois(antes, depois)
 
 
 def _mostrar_conferencia(dias) -> None:
-    tabela = Table(title="Conferencia dos dias gravados", show_lines=True)
-    for coluna in ("Dia", "O que", "O que esta gravado", "O que a regra diz", "Proposta"):
+    tabela = Table(title="Conferência dos dias gravados", show_lines=True)
+    for coluna in ("Dia", "O que", "O que está gravado", "O que a regra diz", "Proposta"):
         tabela.add_column(coluna)
     for dia in dias:
         rotulo = f"{dia.data:%d/%m}"

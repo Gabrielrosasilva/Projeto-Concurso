@@ -159,7 +159,7 @@ def test_o_resumo_junta_tudo_numa_linha():
     ))
     resumo = elegibilidade.resumir(achado)
 
-    assert "superior" in resumo and "categoria D" in resumo and "teste fisico" in resumo
+    assert "superior" in resumo and "categoria D" in resumo and "teste físico" in resumo
 
 
 def test_edital_que_nao_diz_nada_admite_isso():

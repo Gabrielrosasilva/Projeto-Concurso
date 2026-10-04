@@ -428,8 +428,8 @@ class ResultadoDetalhe:
         if not self.lidos:
             return "Nada novo para detalhar."
         texto = (
-            f"{self.lidos} pagina(s) lida(s): {self.com_prazo} com prazo de "
-            f"inscricao, {self.com_banca} com banca"
+            f"{self.lidos} página(s) lida(s): {self.com_prazo} com prazo de "
+            f"inscrição, {self.com_banca} com banca"
         )
         if self.reclassificados:
             texto += f", {self.reclassificados} mudaram de anel"
@@ -738,9 +738,9 @@ class ResultadoElegibilidade:
     def __str__(self) -> str:
         if not self.concursos:
             return "Nenhum concurso com edital no acervo para ler."
-        texto = f"{self.concursos} concurso(s), {self.lidos} com exigencias lidas"
+        texto = f"{self.concursos} concurso(s), {self.lidos} com exigências lidas"
         if self.ilegiveis:
-            texto += f", {self.ilegiveis} com edital so em imagem"
+            texto += f", {self.ilegiveis} com edital só em imagem"
         if self.sem_edital:
             texto += f", {self.sem_edital} sem edital no acervo"
         if self.quebrados:
@@ -984,7 +984,7 @@ class ResultadoRetificacao:
         # fazer nada a respeito. Nao conferir porque o site nao respondeu e
         # justamente o caso de rodar de novo mais tarde.
         if not self.conferidos and not self.falhas:
-            return "Nenhum edital em pe para conferir."
+            return "Nenhum edital em pé para conferir."
 
         partes = []
         if self.conferidos:
@@ -995,7 +995,7 @@ class ResultadoRetificacao:
             )
         if self.falhas:
             partes.append(
-                f"[yellow]nao consegui baixar {self.falhas} edital(is)[/]"
+                f"[yellow]não consegui baixar {self.falhas} edital(is)[/]"
             )
         return ", ".join(partes)
 

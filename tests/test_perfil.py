@@ -33,6 +33,13 @@ def test_quem_tem_superior_atende_vaga_de_medio():
     assert perfil.avaliar(_exigencias(niveis=["medio"]), EU).situacao == "elegivel"
 
 
+def test_o_motivo_diz_o_nivel_com_acento():
+    """A chave e "medio" (a do dado e do perfil.yml); o motivo vai para a tela."""
+    veredito = perfil.avaliar(_exigencias(niveis=["superior", "medio"]), EU)
+
+    assert veredito.motivo == "tenho superior, que atende às vagas de superior, médio"
+
+
 def test_vaga_so_de_superior_barra_quem_tem_medio():
     so_medio = perfil.Perfil(escolaridade="medio")
 
@@ -79,7 +86,7 @@ def test_teto_de_idade_sem_eu_ter_informado_a_minha():
     veredito = perfil.avaliar(_exigencias(idade_maxima=30), sem_idade)
 
     assert veredito.situacao == "elegivel"
-    assert "nao informei" in veredito.motivo
+    assert "não informei" in veredito.motivo
 
 
 # --- CNH --------------------------------------------------------------------
@@ -112,7 +119,7 @@ def test_edital_ilegivel_nao_vira_veredito():
     veredito = perfil.avaliar(Exigencias(legivel=False), EU)
 
     assert veredito.situacao == "a_confirmar"
-    assert "nao pode ser lido" in veredito.motivo
+    assert "não pode ser lido" in veredito.motivo
 
 
 # --- o arquivo de perfil ----------------------------------------------------

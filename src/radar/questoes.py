@@ -42,7 +42,9 @@ log = logging.getLogger(__name__)
 # existem estao uma em cada formato, a de 2013 na escrita e a de 2019 na de
 # simbolo. Enquanto so o formato novo era lido, a de 2013 dava zero questao.
 MARCA_CERTA = "Check-square"
-MARCA_ERRADA = "SQUARE"
+# Em alguns cadernos de 2023 e 2024 (Palhoca emergencial, Brusque educa) a
+# mesma fonte sai em minusculas: "a. square texto".
+MARCA_ERRADA = "(?:SQUARE|square)"
 CAIXA_ESCRITA = r"\([ \t]*[Xx]?[ \t]*\)"
 
 # "Lingua Portuguesa 10 questoes". O nome nao pode ter digito: isso descarta
@@ -58,6 +60,17 @@ PADRAO_SECAO = re.compile(
 # questoes, e com o teto em dois digitos a de numero 100 era lida como
 # alternativa solta e jogada fora. O caderno so ficou com 99.
 PADRAO_QUESTAO = re.compile(r"^[ \t]*(\d{1,3})\.[ \t]+(?=\S)", re.MULTILINE)
+
+# O comeco de um texto-base que vale para varias questoes: o cabecalho
+# sozinho na linha ("Caso 3", "Texto 2") ou a frase que o anuncia ("Para
+# responder as questoes 49 a 51, considere..."). Ele vem entre a ultima
+# alternativa de uma questao e o numero da seguinte, e nao e de nenhuma das
+# duas (S7 de Sao Jose 2024).
+PADRAO_TEXTO_BASE = re.compile(
+    r"^[ \t]*(?:(?:Caso|Texto)[ \t]+\d{1,2}[ \t]*$"
+    r"|Para responder [àa]s? quest[õo]es?\b)",
+    re.MULTILINE | re.IGNORECASE,
+)
 
 # "a. SQUARE texto", "b. Check-square texto" ou, no caderno antigo,
 # "a. ( ) texto" e "b. ( X ) texto".
@@ -501,6 +514,9 @@ def _ler_alternativas(
             secao = PADRAO_SECAO.search(texto, achado.end(), limite)
             if secao:
                 limite = _inicio_do_titulo(texto, secao)
+            base = PADRAO_TEXTO_BASE.search(texto, achado.end(), limite)
+            if base:
+                limite = base.start()
 
         alternativas[letra] = cortar_mobilia(_limpar(texto[achado.end():limite]))
         if _e_a_marcada(achado.group(2)):
@@ -527,6 +543,17 @@ def _marcador_da_questao(regiao: str, anterior: int) -> re.Match | None:
         return None
     primeiro = achados[0]
     if primeiro.start() != 0 or int(primeiro.group(1)) > anterior:
+        # Lista que comeca em "1." e segue em sequencia ANTES do numero e o
+        # texto-base de um grupo de questoes ("Caso 3": "1. Lancamento...
+        # 8. Arrecadacao...", e so entao "49."). A regiao tem uma questao so,
+        # e ela e o primeiro marcador que quebra a sequencia. A lista de dentro
+        # do enunciado vem depois do numero, e nao comeca em 1 colada nele.
+        corrida = 1
+        while (corrida < len(achados)
+               and int(achados[corrida].group(1)) == int(achados[corrida - 1].group(1)) + 1):
+            corrida += 1
+        if int(primeiro.group(1)) == 1 and 2 <= corrida < len(achados) and anterior:
+            return achados[corrida]
         return primeiro
     esperado, fim_da_lista = int(primeiro.group(1)), 0
     for item in re.finditer(r"(?<![\w.])(\d{1,3})\.(?=[ \t\xa0])", regiao):

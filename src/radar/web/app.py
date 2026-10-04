@@ -814,6 +814,10 @@ RECADOS_DAS_GERADAS = {
         "Marcada como errada. Ela saiu do sorteio para sempre, e as respostas "
         "dela saíram da conta do meu acerto."
     ),
+    "nada_no_no": (
+        "Não há questão gerada para treinar neste conteúdo. Escolha outro, ou "
+        "gere pelo nó na ficha do tema."
+    ),
 }
 
 
@@ -826,8 +830,12 @@ def geradas(
     quantas: int = 5,
     modo: str = "",
     recado: str = "",
+    treinar: str = "",
 ):
     """A tela de gerar questao, com o custo antes do botao.
+
+    `treinar` e o no ja escolhido no "Treinar com as que ja tenho" - e por
+    onde a ficha do tema manda treinar so as geradas dela.
 
     O filtro hierarquico e o MESMO do terminal (Etapa 5): o escopo sai do
     `radar.conteudos`, e nome que a arvore nao tem vira recado na tela, sem
@@ -874,6 +882,8 @@ def geradas(
             "assuntos": _filhos_na_tela(escolhida),
             "subassuntos": _filhos_na_tela(escolhida, assunto.strip() or None),
             "materias": servico.geradas.materias_para_gerar(),
+            "para_treinar": servico.geradas.conteudos_para_treinar(),
+            "treinar": treinar.strip(),
             "resumo": servico.geradas.contar(),
             "materia": escolhida,
             "quantas": quantas,
@@ -919,16 +929,24 @@ def geradas_gerar(materia: str = Form(""), quantas: str = Form("5")):
 
 
 @app.post("/geradas/treinar")
-def geradas_treinar(materia: str = Form(""), quantidade: str = Form("5")):
-    """Uma rodada com o que ja foi gerado antes. Nao gasta nada."""
+def geradas_treinar(
+    materia: str = Form(""), conteudo: str = Form(""), quantidade: str = Form("5"),
+):
+    """Uma rodada com o que ja foi gerado antes. Nao gasta nada.
+
+    `conteudo` e o no da arvore - materia, assunto ou subassunto - e pega
+    tudo que esta abaixo dele; `materia` continua valendo para quem ja
+    mandava so ela.
+    """
     quantas = converter_valor(quantidade)
     quantas = int(quantas) if quantas and 1 <= quantas <= 30 else 5
 
     rodada = servico.geradas.criar_simulado(
-        quantidade=quantas, materia=materia.strip() or None
+        quantidade=quantas, materia=materia.strip() or None,
+        conteudo=conteudo.strip() or None,
     )
     if rodada is None:
-        return RedirectResponse("/geradas", status_code=303)
+        return RedirectResponse("/geradas?recado=nada_no_no", status_code=303)
     return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
 
 
@@ -1508,19 +1526,22 @@ def analises_incidencia(request: Request, materia: str = ""):
 
 @app.get("/analises/conferencia", response_class=HTMLResponse)
 def analises_conferencia(request: Request, materia: str = "", abertas: str = "",
-                         anuladas: str = "", evidencia: str = "", amostra: str = ""):
+                         anuladas: str = "", evidencia: str = "", amostra: str = "",
+                         associados: str = ""):
     """A conferencia da classificacao: enunciado, alternativas, gabarito e a
     proposta lado a lado, com confirmar / corrigir / pendente. O alvo por
     padrao; o complementar aceito pelo filtro, com a amostra do catalogo."""
     recorte = "complementar" if evidencia == "complementar" else "alvo"
     tela = servico.classificacoes.conferencia(
         materia or None, so_abertas=bool(abertas), com_anuladas=bool(anuladas),
-        evidencia_escolhida=recorte, so_amostra=bool(amostra))
+        evidencia_escolhida=recorte, so_amostra=bool(amostra),
+        so_associados_abertos=bool(associados) and recorte == "alvo")
     return templates.TemplateResponse(
         request=request, name="conferencia.html",
         context={"t": tela, "materia": materia, "abertas": bool(abertas),
                  "anuladas": bool(anuladas), "evidencia": recorte,
-                 "amostra": bool(amostra) and recorte == "complementar"},
+                 "amostra": bool(amostra) and recorte == "complementar",
+                 "associados": bool(associados) and recorte == "alvo"},
     )
 
 
@@ -1534,10 +1555,18 @@ def analises_conferir(
     abertas: str = Form(""),
     evidencia: str = Form(""),
     amostra: str = Form(""),
+    associados: str = Form(""),
 ):
-    """Grava a minha decisao sobre UMA questao e volta para o mesmo lugar."""
+    """Grava a minha decisao sobre UMA questao e volta para o mesmo lugar.
+
+    Os conceitos associados tem as duas acoes deles - confirmar e tirar -,
+    com o no em `conteudo`; a principal nao muda com elas."""
     try:
-        if acao == "confirmar":
+        if acao == "associado_confirmar":
+            servico.classificacoes.conferir_associado(chave, conteudo)
+        elif acao == "associado_tirar":
+            servico.classificacoes.tirar_associado(chave, conteudo)
+        elif acao == "confirmar":
             servico.classificacoes.conferir(chave)
         elif acao == "corrigir":
             servico.classificacoes.conferir(chave, corrigir_para=conteudo)
@@ -1550,7 +1579,8 @@ def analises_conferir(
     servico.classificacoes.exportar()
     volta = "/analises/conferencia?" + urlencode(
         {k: v for k, v in (("materia", materia), ("abertas", abertas),
-                           ("evidencia", evidencia), ("amostra", amostra)) if v})
+                           ("evidencia", evidencia), ("amostra", amostra),
+                           ("associados", associados)) if v})
     return RedirectResponse(f"{volta}#q-{chave}", status_code=303)
 
 

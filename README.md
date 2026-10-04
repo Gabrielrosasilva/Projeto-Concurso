@@ -1101,7 +1101,8 @@ Cada materia ainda mostra os **conceitos que aparecem juntos nas questoes**
 enunciado ou nas alternativas, com as questoes de cada par. Vem de
 `radar classificar --pedido --associados` (respondido pelo Claude Code,
 com o 🟣 "por conferir") e nunca entra na contagem, que e so da principal
-(decisao 86).
+(decisao 86). Confere-se na Analises > Conferencia, em cada questao, com
+Confirmar ou Tirar, e a caixa "so com associado por conferir" (decisao 94).
 
 **O acervo complementar FEPESE (Etapa 3B).** `radar complementar` consulta o
 que ja esta no banco e escreve `docs/complementar.md`: por materia do meu
@@ -1470,8 +1471,15 @@ em **dois numeros**, o das reais e o das geradas, e nunca somado.
   definitivo conferido e pede 3 variacoes — muda cenario e numeros, mantem a
   regra juridica. O estilo e o da banca de verdade e a resposta esta ancorada
   num gabarito que a propria banca publicou;
-- **do zero** so entra quando nao existe questao real na materia. Ai as
-  questoes reais entram so como exemplo de **estilo**, sem gabarito junto.
+- **do zero** entra quando nao ha questao real no escopo, e tambem completa
+  o pedido quando a base nao basta - sempre dentro do mesmo no, pela fonte
+  oficial ou pelo item do edital, marcada sem questao real de referencia
+  (decisao 35).
+
+**Treinar com as que ja tenho** (`/geradas`) escolhe pelo no da arvore:
+a materia, um assunto ou um subassunto, cada um com quantas geradas tem, e o
+no pega tudo que esta abaixo dele. A ficha do tema manda para la com o no ja
+escolhido (decisao 91).
 
 A base e so a prova do **meu cargo, no meu estado**, e questao anulada fica de
 fora. Cada questao gerada guarda o modo, a questao real de origem, a materia, o

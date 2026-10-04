@@ -487,7 +487,7 @@ def test_subir_com_a_web_ja_no_ar_nao_sobe_outra(pasta_de_dados, monkeypatch):
     resultado = _rodar("subir")
 
     assert subiu == []
-    assert "Ja esta no ar" in resultado.output
+    assert "Já está no ar" in resultado.output
 
 
 def test_subir_recusa_porta_ocupada_por_outro(pasta_de_dados, monkeypatch):
@@ -500,7 +500,7 @@ def test_subir_recusa_porta_ocupada_por_outro(pasta_de_dados, monkeypatch):
 
     assert resultado.exit_code == 1
     assert subiu == []
-    assert "ja esta em uso" in resultado.output
+    assert "já está em uso" in resultado.output
 
 
 def test_subir_que_nao_responde_mostra_o_fim_do_log(pasta_de_dados, monkeypatch):

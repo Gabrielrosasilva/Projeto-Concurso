@@ -29,6 +29,11 @@
     .amostras{border-collapse:collapse;margin-top:var(--esp-3)}
     .amostras th,.amostras td{padding:var(--esp-1) var(--esp-3) var(--esp-1) 0;text-align:left;
       font-variant-numeric:tabular-nums}
+    .associados{margin-top:var(--esp-3);padding-top:var(--esp-2);border-top:1px solid var(--cor-borda)}
+    .associados h4{margin:0 0 var(--esp-1);font-size:var(--tam-sm)}
+    .associados ul{margin:0;padding-left:0;list-style:none}
+    .associados li{padding:var(--esp-1) 0}
+    .associados form{display:inline-flex;gap:var(--esp-1)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -68,6 +73,11 @@
         que ficam fora da lista: a banca desfez a pergunta, e elas não entram em
         conta nenhuma</span>
     </div>
+    {% if t.associados %}
+    <p class="ds-suave">{{ t.associados_conferidos }} de {{ t.associados }} conceitos associados
+      conferidos. O associado é outro nó que a questão também cobra: nunca entra
+      na contagem, e o que eu confirmo fica mesmo que uma importação nova não o traga.</p>
+    {% endif %}
     {% if t.amostras %}
     <table class="amostras">
       <caption class="ds-suave">🟡 A amostra do catálogo, por matéria: sempre as mesmas
@@ -100,6 +110,8 @@
       <label class="ds-campo caixa"><input type="checkbox" name="anuladas" value="1" {{ 'checked' if anuladas }}> mostrar as anuladas</label>
       {% if evidencia == 'complementar' %}
       <label class="ds-campo caixa"><input type="checkbox" name="amostra" value="1" {{ 'checked' if amostra }}> só a amostra do catálogo</label>
+      {% else %}
+      <label class="ds-campo caixa"><input type="checkbox" name="associados" value="1" {{ 'checked' if associados }}> só com associado por conferir</label>
       {% endif %}
       <button class="ds-botao" type="submit">Filtrar</button>
     </form>
@@ -155,6 +167,7 @@
               <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
               <input type="hidden" name="evidencia" value="{{ evidencia }}">
               <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
+              <input type="hidden" name="associados" value="{{ '1' if associados }}">
               <button class="ds-botao" name="acao" value="confirmar">Confirmar</button>
             </form>
           {% endif %}
@@ -164,6 +177,7 @@
             <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
             <input type="hidden" name="evidencia" value="{{ evidencia }}">
             <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
+              <input type="hidden" name="associados" value="{{ '1' if associados }}">
             <select name="conteudo" aria-label="Corrigir para">
               {% for opcao in q.opcoes %}
                 <option value="{{ opcao }}" {{ 'selected' if c and opcao == c.conteudo }}>{{ opcao }}</option>
@@ -178,11 +192,38 @@
               <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
               <input type="hidden" name="evidencia" value="{{ evidencia }}">
               <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
+              <input type="hidden" name="associados" value="{{ '1' if associados }}">
               <input type="text" name="motivo" placeholder="por que fica pendente" aria-label="Motivo da pendência">
               <button class="ds-botao ds-botao--secundario" name="acao" value="pendente">Pendente</button>
             </form>
           {% endif %}
         </div>
+
+        {% if q.associados %}
+        <div class="associados">
+          <h4>Conceitos associados ({{ q.associados_abertos }} por conferir)</h4>
+          <ul>
+            {% for a in q.associados %}
+            <li>
+              <span class="caminho">{{ a.conteudo }}</span>
+              {% if a.conferida_em %}<span class="ds-selo">✓ conferido</span>
+              {% else %}<span class="ds-selo">🟣 por conferir</span>{% endif %}
+              {% if a.trecho %}<br><span class="ds-suave">“{{ a.trecho }}”</span>{% endif %}
+              <form method="post" action="/analises/conferencia">
+                <input type="hidden" name="chave" value="{{ q.chave }}">
+                <input type="hidden" name="conteudo" value="{{ a.conteudo }}">
+                <input type="hidden" name="materia" value="{{ materia }}">
+                <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+                <input type="hidden" name="evidencia" value="{{ evidencia }}">
+                <input type="hidden" name="associados" value="{{ '1' if associados }}">
+                {% if not a.conferida_em %}<button class="ds-botao" name="acao" value="associado_confirmar">Confirmar</button>{% endif %}
+                <button class="ds-botao ds-botao--secundario" name="acao" value="associado_tirar">Tirar</button>
+              </form>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       </div>
     </article>
   {% endfor %}

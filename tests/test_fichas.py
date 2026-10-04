@@ -583,6 +583,27 @@ def test_a_pagina_da_ficha_mostra_tudo_com_o_selo_e_sem_previsao(com_ficha_real)
     assert "<script" not in html
 
 
+def test_treinar_as_geradas_leva_cada_no_da_ficha_ja_escolhido(com_ficha_real):
+    """O link nao manda mais para a materia inteira: um por no do tema, com o
+    no escolhido no seletor do /geradas."""
+    from urllib.parse import quote
+
+    from radar.db import sessao
+    from radar.models import QuestaoGerada
+
+    with sessao() as s:
+        s.add(QuestaoGerada(modo="variacao", materia=DC, conteudo=CASA_XI,
+                            enunciado="Enunciado gerado sobre o domicílio, com tamanho.",
+                            alternativas={l: l for l in "abcde"}, resposta="a",
+                            impressao="g1", rejeitada=False))
+
+    html = TestClient(app).get("/fichas/art-5o-caput-e-incisos-i-a-xvi?data=2026-10-29").text
+
+    for no in (VIDA, CASA, INTIMIDADE):
+        assert f'href="/geradas?treinar={quote(no, safe="")}#treinar"' in html
+    assert "Treinar as geradas: Inviolabilidade do domicílio" in html
+
+
 def test_o_selo_de_cada_parte_sai_da_origem_do_campo(com_ficha_real, monkeypatch):
     """A tela nao escolhe a cor (Etapa 7A): trocada a origem de um campo no
     dado, o selo daquela parte troca junto."""

@@ -15,7 +15,7 @@ import time
 import requests
 
 from radar import alvo as alvos
-from radar import config
+from radar import config, eventos, regioes
 from radar.models import Concurso, agora
 from radar.util import formatar_data
 
@@ -71,7 +71,8 @@ def formatar(concurso: Concurso) -> str:
     detalhes = []
     if concurso.salario:
         detalhes.append(f"R$ {concurso.salario:,.0f}".replace(",", "."))
-    detalhes.append(concurso.relevancia)
+    # O anel pelo nome de gente ("nucleo" -> "núcleo"), o mesmo da tela.
+    detalhes.append(regioes.NOME_DO_ANEL.get(concurso.relevancia, concurso.relevancia))
     if concurso.tipo and concurso.tipo != "desconhecido":
         detalhes.append(concurso.tipo)
     linhas.append(" · ".join(detalhes))
@@ -146,8 +147,8 @@ def enviar_varios(textos: list[str]) -> list[bool]:
 AVISO_DO_EVENTO = {
     "edital_publicado": ("\U0001F4C4", "Edital publicado"),
     "edital_retificado": ("\U0000270F", "Edital retificado"),
-    "inscricoes_abertas": ("\U0001F7E2", "Inscricoes abertas"),
-    "inscricoes_encerradas": ("\U0001F534", "Inscricoes encerradas"),
+    "inscricoes_abertas": ("\U0001F7E2", "Inscrições abertas"),
+    "inscricoes_encerradas": ("\U0001F534", "Inscrições encerradas"),
     "prova_marcada": ("\U0001F4C5", "Prova marcada"),
 }
 
@@ -164,14 +165,16 @@ def formatar_evento(evento, concurso) -> str:
     linhas = [
         f"{emoji} <b>{rotulo}</b> \u2605",
         html.escape(concurso.titulo),
-        f"\n<i>{html.escape(evento.descricao)}</i>",
+        # A descricao gravada e chave ("Situacao: a -> b"); a mensagem leva a
+        # frase da tela, como a linha do tempo do site.
+        f"\n<i>{html.escape(eventos.para_tela(evento.descricao) or evento.descricao or '')}</i>",
     ]
 
     if concurso.inscricoes_ate:
         faltam = (concurso.inscricoes_ate - agora()).days
         if faltam >= 0:
             linhas.append(
-                f"Inscricao ate {formatar_data(concurso.inscricoes_ate)}"
+                f"Inscrição até {formatar_data(concurso.inscricoes_ate)}"
                 f" \u00b7 faltam {faltam}d"
             )
 
@@ -191,6 +194,6 @@ def formatar_retificacao(retificacao) -> str:
         "<b>Edital retificado</b>\n"
         f"{retificacao.titulo}\n\n"
         f"Arquivo: {retificacao.arquivo}\n"
-        "Retificacao muda prazo, vaga e requisito. Vale reler.\n\n"
+        "Retificação muda prazo, vaga e requisito. Vale reler.\n\n"
         f"{retificacao.url}"
     )

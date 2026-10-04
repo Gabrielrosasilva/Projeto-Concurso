@@ -169,3 +169,51 @@ def test_a_pagina_mostra_os_conceitos_que_aparecem_juntos(alvo, tmp_path):
 
 def test_sem_associado_a_pagina_nao_mostra_o_bloco(alvo):
     assert "Conceitos que aparecem juntos" not in TestClient(app).get("/analises/incidencia").text
+
+
+# --- a conferencia dos associados -----------------------------------------------------
+
+def test_a_importacao_nova_tira_o_associado_que_saiu_e_guarda_o_conferido(alvo, tmp_path):
+    """Refazer o pedido acrescentava e atualizava, mas nao apagava: o associado
+    que a resposta nova nao traz sai - menos o que eu ja conferi."""
+    principal, outro = alvo
+    terceiro = _assuntos()[2]
+    _importar(tmp_path, manual.pedido_de_associados(),
+              [{"no": outro, "trecho": "um"}, {"no": terceiro, "trecho": "dois"}])
+    classificacoes.conferir_associado(_chave(51), terceiro)
+
+    _importar(tmp_path, manual.pedido_de_associados(), [])
+
+    assert {c.conteudo for c in _linhas(51)} == {principal, terceiro}
+
+
+def test_a_tela_de_conferencia_mostra_confirma_e_tira_o_associado(alvo, tmp_path):
+    principal, outro = alvo
+    _importar(tmp_path, manual.pedido_de_associados(),
+              [{"no": outro, "trecho": "a alternativa c fala disso"}])
+    cliente = TestClient(app)
+
+    pagina = cliente.get("/analises/conferencia?associados=1").text
+    assert "Conceitos associados (1 por conferir)" in pagina
+    assert "a alternativa c fala disso" in pagina
+    assert "0 de 1 conceitos associados" in pagina
+    assert "2019-q52" not in pagina  # sem associado, fora do filtro
+
+    cliente.post("/analises/conferencia", data={
+        "chave": _chave(51), "conteudo": outro, "acao": "associado_confirmar"})
+    assert "1 de 1 conceitos associados" in cliente.get("/analises/conferencia").text
+    assert "2019-q51" not in cliente.get("/analises/conferencia?associados=1").text
+
+    resposta = cliente.post("/analises/conferencia", data={
+        "chave": _chave(51), "conteudo": outro, "acao": "associado_tirar",
+        "associados": "1"}, follow_redirects=False)
+    assert "associados=1" in resposta.headers["location"]
+    linhas = _linhas(51)
+    assert [c.conteudo for c in linhas] == [principal] and linhas[0].principal
+
+
+def test_tirar_associado_que_nao_existe_nao_mexe_em_nada(alvo):
+    principal, _ = alvo
+    with pytest.raises(classificacoes.ClassificacaoInvalida):
+        classificacoes.tirar_associado(_chave(51), principal)  # e a principal
+    assert [c.conteudo for c in _linhas(51)] == [principal]

@@ -2091,3 +2091,33 @@ com as do outro concurso no lugar. As 21 foram baixadas, as copias sairam (as
 inteiro foi relido duas vezes - com a classificacao indo junto para a chave
 nova, so quando o texto e o da mesma questao. A auditoria do alvo ficou sem
 suspeita, e o complementar aceito foi de 122 para 169 provas (decisao 90).
+
+## Depois do lote de 04/10: treinar pelo no, macetes, acento e o leitor
+
+**O /geradas pelo no:** treinar as geradas misturava os temas da materia,
+inclusive os que eu ainda nao tinha estudado. O seletor virou a arvore -
+materia, assunto, subassunto, com a contagem -, e a ficha manda para la com o
+no do tema ja escolhido (decisao 91).
+
+**Macetes e explicacoes:** os dois arquivos nunca tinham existido. O Claude
+Code respondeu os pedidos a mao, artigo por artigo contra o texto vigente
+baixado da Camara e da ALESC: 40 macetes, e 6 das 10 explicacoes - as outras
+4 dependem do texto da prova, que o radar nao guarda, e ficaram sem resposta
+em vez de resposta chutada (decisao 92).
+
+**O acento fora da web:** terminal, Telegram, auditoria e motivo de
+elegibilidade. Uma ferramenta pos acento so em texto de saida e so em palavra
+sem ambiguidade; o resto foi decidido um a um, e os valores que eu digito
+ficaram como sao (decisao 93).
+
+**Os conceitos associados** ganharam a conferencia que faltava: Confirmar ou
+Tirar em cada questao, e a importacao nova deixou de acumular o que saiu da
+resposta (decisao 94).
+
+**O leitor**, de novo: o "Caso 3" do S7 de Sao Jose traz uma lista "1." a
+"8." antes da questao 49, e o leitor tomava o "1." pelo numero; e dois
+cadernos escrevem a caixa da alternativa como "square", em minusculas. Com os
+dois consertos, e com a ultima alternativa parando no texto-base, os 3
+cadernos fecharam e 9 outros perderam o texto-base grudado na "e" - inclusive
+duas questoes da prova de 2019 do alvo. O acervo foi relido (ensaiado antes
+numa copia), sem perder classificacao nenhuma (decisao 95).

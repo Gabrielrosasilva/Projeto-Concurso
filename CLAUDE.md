@@ -141,12 +141,21 @@ cor; as geradas antigas com materia e no (7 erradas fora do sorteio); a base
 da media nos Macetes; e o leitor do caderno consertado (o lixo no fim da
 alternativa, a palavra partida, a numeracao, a ordem das secoes) com o acervo
 relido e as 21 provas que o download nunca tinha baixado.
-Acervo: 8.421 questoes (as 170 do alvo classificadas e conferidas; 169
+**Depois do lote (04/10, decisoes 91 a 95):** o /geradas treina pelo no
+(materia, assunto ou subassunto), e a ficha manda direto para os do tema; 40
+macetes e 6 explicacoes escritos contra o texto vigente; acento no terminal,
+no Telegram, na auditoria e no motivo de elegibilidade (a descricao dos
+comandos, os valores digitados e as chaves ficam sem); a conferencia dos
+conceitos associados na Analises > Conferencia; e o leitor entende o
+texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
+cadernos que sobravam fecharam, e o acervo foi relido.
+Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
 provas complementares aceitas); 775 geradas (7 rejeitadas); banco na versao 5.
 **Falta, de voce:** conferir as 61 fichas (a conferida tambem liga as faixas
 do tema ao Meu desempenho, decisao 81), as 232 classificacoes do complementar
-(Analises > Conferencia, filtro "complementar aceito") e os 15 itens da lista
-de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
+(Analises > Conferencia, filtro "complementar aceito"), os 109 conceitos
+associados (o mesmo lugar, "so com associado por conferir") e os 15 itens da
+lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
 **Conferir:** o Actions de 04/10 - ate o fim do lote, o GitHub nao tinha o
 commit `coleta: 2026-10-04` (pendencia D). O backup das 23h30 voltou em 03/10.
 **Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos

@@ -115,6 +115,9 @@ classificacao ainda" em Portugues):
   2 no mesmo dia: todas no no certo; um dispositivo que nao existe (CPP, art.
   282, § 7º) virou o art. 282, § 5º, e o art. 316, paragrafo unico. Proposta
   nova do catalogo, se ele rodar de novo, se confere pela amostra da tela;
+- **a sua conferencia dos 109 conceitos associados** do alvo (decisoes 86 e
+  94): Analises > Conferencia, evidencia "alvo", caixa "so com associado por
+  conferir" - 72 questoes, cada associado com Confirmar ou Tirar;
 - **as questoes sem linha**: 81 do lote 2 (conteudo de outro cargo, de
   proposito) e, em Portugues e Raciocinio Logico, as que o catalogo nao cobre
   (47 sem palavra, 23 ambiguas, 22 sem par no edital em Portugues; 21 e 8 em
@@ -131,11 +134,10 @@ download gravando dois S07.pdf no mesmo lugar - as 21 provas que faltavam
 foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
 "N." da lista da alternativa anterior pelo numero da questao. Sobram:
 
-- **3 cadernos ainda com a numeracao furada**, de formato que o leitor nao
-  entende: o de Palhoca 2024 emergencial (14 de 39 questoes lidas), o de
-  Brusque 2023 educa (11 de 24) - os dois com alternativas fora do padrao
-  a-e - e o S7 de Sao Jose 2024, sem a questao 49. A validacao os recusa, e
-  nada deles conta;
+- ~~3 cadernos com a numeracao furada~~: resolvidos em 04/10 (decisao 95) -
+  o texto-base "Caso 3" antes da questao e a marca "square" minuscula; as 3
+  provas entraram no complementar aceito (169 -> 172), ainda sem
+  classificacao, como as outras que entraram pela validacao;
 - **os tres de Florianopolis 2025 (COMCAP) em http e https** sao de fato a
   mesma prova em dois enderecos: a segunda fica recusada, como deve;
 - **a 2013-q20 do alvo sem a imagem** do icone do Excel: o PDF traz a figura,
@@ -171,16 +173,12 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   as de concordancia, crase, pontuacao e complemento nominal estao so no nivel
   do assunto, e por isso as fichas de tema nao as contam; "Regras de aplicacao
   geral" (Regras de Mandela) nomeia a Parte I inteira (regras 1 a 85);
-- ⚪ **Pastas de teste em `data/copias/`**: 15 pastas `migracao-v0-para-v*`
-  com `antigo.db` sao copias do banco de um teste, e nao do banco real (a
-  causa saiu na 6B, decisao 50). Podem ser apagadas a mao. E o
-  `migracoes.ultima_copia()` ordena pelo NOME, que comeca pela versao, e nao
-  pela hora como diz a docstring: hoje acerta por acaso (v3 > v0);
-- 🔴 **Importar macete e explicacao**: `radar gerar --pedido --macetes` e
-  `--explicacoes`, e o `--importar` de cada um. `data/macetes.json` e
-  `data/explicacoes.json` ainda nao existem;
-- 🔴 **Assunto no Direito** (o item 1 do bloco B). Hoje: 0 questoes de Direito
-  com assunto; "Onde estudar primeiro" so tem Portugues e Raciocinio Logico;
+- ⚪ **Quatro explicacoes nao escritas** (04/10, decisao 92): das 10 questoes
+  reais que voce errou, 4 dependem do texto da prova ou do termo sublinhado,
+  que o radar nao guarda (2013 q2, 2016 q3, 2019 q6 e a de 2024 do
+  Catupiry). Ficaram sem explicacao em vez de explicacao chutada; o
+  proximo `radar gerar --pedido --explicacoes` pede de novo so elas e as
+  que voce errar daqui para frente;
 - 🔴 **Cronograma por IA**: fase futura da especificacao; so entra se a revisao
   espacada simples nao bastar, com o teto de gasto do `gerador.py`;
 - 🔴 **Ciclo 2** (09/11 a 19/12, "o resto do programa") - **o passo 5 da 6B**
@@ -197,16 +195,11 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   e a prova: o job roda o `pytest -q` antes de coletar). No fim do lote de
   04/10 o GitHub ainda nao tinha o `coleta: 2026-10-04` (o `gh` nao esta
   instalado aqui; vi pelo `git fetch`), e o proximo ja roda com o lote;
-- 🔴 **Acento fora da tela web** (o que sobrou da A2, feita na Etapa 1B so
-  para a web): a saida do terminal (`cli.py`, ~100 textos, inclusive a
-  linha do tempo de `radar eventos`, que ainda mostra "Situacao: a -> b"), a
-  mensagem do Telegram (`avisos.py`: "Inscricoes abertas", "Inscricao ate" e
-  a descricao crua do evento), o relatorio `docs/auditoria.md`
-  (`auditoria.py`) e o `motivo_elegibilidade` gravado (`perfil.py`). Os nomes
-  de assunto do `macetes.py` ("Concordancia", "Pontuacao"...) sao chave de
-  casamento: a arvore de conteudos existe desde a Etapa 2, mas ligar esse
-  catalogo aos nos dela e da 3A, com a classificacao. Prompts de IA ficam sem
-  acento de proposito;
+- ⚪ **O que ficou sem acento de proposito** (decisao 93): a descricao de
+  cada comando no `radar --help` (e a docstring da funcao, e o codigo segue
+  sem acento), os valores que eu digito (`--anel proximo`, `--modo revisao`,
+  `--marcar minima`), os prompts de IA e os nomes de assunto do
+  `macetes.py`, que sao chave de casamento;
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
@@ -232,11 +225,6 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   estabelecimento de 27/09 cita o "art. 76" da LEP, e o requisito e do art.
   75. As duas ficaram no sorteio: o botao "essa questao esta errada" do
   /geradas tira, se voce concordar;
-- 🟡 **O /geradas treina pela materia, e nao pelo no**: a ficha lista as
-  geradas do tema, mas manda treinar no /geradas, que mistura os temas da
-  materia - inclusive os ainda nao estudados;
-- 🟡 **A ajuda do `radar gerar`** ainda diz que o do zero "so entra quando nao
-  existe questao real na materia"; desde a decisao 35 ele completa dentro do no;
 
 ## E. Cancelado
 
@@ -255,7 +243,3 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
   diferentes, e nao ha registro do pedido. O selo diz que o acervo nao
   consegue identificar. As 30 do estoque de 03/10 foram religadas em 04/10
   pelo historico da conversa (F10);
-- ⚪ **Os conceitos associados nao tem tela de conferencia** (decisao 86): as
-  109 associacoes de 04/10 aparecem com o 🟣 "por conferir" na Incidencia,
-  e a Analises > Conferencia so mostra a principal. E uma importacao nova
-  acrescenta e atualiza, mas nao apaga o associado que saiu da resposta;

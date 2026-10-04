@@ -3766,3 +3766,91 @@ mede (7A); commit e push por subetapa (8A).
     suspeita", e o complementar aceito foi de 122 para 169 provas (das 14
     fora, so 3 ainda pela numeracao). A pendente trocada tambem passou a sair
     sempre, e nao so quando a nova nao e pendente.
+
+## Depois do lote de 04/10/2026
+
+91. **as geradas se treinam pelo no: materia, assunto ou subassunto** (04/10;
+    pedido do dia). O "Treinar com as que ja tenho" do /geradas trocou o
+    seletor de materia por um seletor da arvore - a materia e, recuados
+    dentro dela, os assuntos e os subassuntos que tem gerada, cada um com
+    quantas valem (`geradas.conteudos_para_treinar`). Escolher um no sorteia
+    dele e de tudo abaixo (`criar_simulado(conteudo=...)`): o assunto pega os
+    subassuntos, o subassunto pega os elementos, e a materia pega tambem a
+    gerada que ficou sem no, pela coluna `materia`. O filtro e pelo
+    separador " > ", e nao pelo comeco do texto, para "Teoria do crime" nao
+    pegar um irmao que comece igual. O elemento nao vira opcao - poucas
+    geradas por elemento, e a lista viraria um paredao. O no vai gravado nos
+    `filtros` da rodada, e o `materia` do POST continua valendo. A ficha do
+    tema manda um link por no dela, com o no ja escolhido
+    (`/geradas?treinar=<no>`), em vez de mandar para a materia inteira - que
+    misturava os temas ainda nao estudados. No que nao tem gerada volta com
+    recado, sem criar rodada vazia.
+
+92. **os macetes e as explicacoes existem, escritos contra o texto vigente**
+    (04/10; o `radar gerar --pedido --macetes` / `--explicacoes` e o
+    `--importar`). O Claude Code respondeu os dois lotes a mao, com a
+    procedencia "Claude Code, importado manualmente, em 04/10/2026":
+    - **40 macetes** em `data/macetes.json`, ate 3 por materia nas 14 do alvo,
+      cada um citando as questoes reais em que se apoia (as 40 abrem as
+      questoes certas). Todo artigo citado foi lido no texto compilado (CF,
+      CP, CPP, LEP, Leis 11.340, 9.455, 10.826 e 8.429, DL 200; LC 529, LC
+      774 da ALESC) e no `docs/leis_alteradas.md`; quando a lei mudou depois
+      da prova, o macete diz isso (improbidade, carreira estadual, piso do
+      trabalho do preso, remicao no domiciliar). Os 3 macetes de Sociologia
+      Aplicada sem lei citam a obra ou o proprio gabarito oficial;
+    - **6 explicacoes** em `data/explicacoes.json`, das 10 questoes reais que
+      eu errei. As outras 4 dependem do texto da prova ou do termo
+      sublinhado, que o radar nao guarda - e a regra e "sem fonte segura, nao
+      responda". Ficaram sem explicacao em vez de explicacao chutada.
+
+93. **o texto de gente fora da tela web tambem tem acento** (o resto da A2;
+    decisao 5 da Etapa 1B). Ganhou acento: a saida do terminal (`cli.py`, 240
+    textos), a mensagem do Telegram (o anel pelo nome, "Inscrições abertas",
+    "Inscrição até" e o evento pela frase da tela, `eventos.para_tela`, e
+    nao pela chave "Situacao: a -> b"), a linha do tempo do `radar eventos`,
+    o `__str__` dos resultados do servico, o `docs/auditoria.md`
+    (regenerado: so o texto mudou, os numeros sao os mesmos) e o motivo de
+    elegibilidade (o nivel pelo nome, "médio"; os 37 concursos relidos, nenhum
+    veredito mudou). A troca no `cli.py` foi feita por uma ferramenta que so
+    mexe em literal de texto (fora docstring, log, regex, chave e comparacao)
+    e so em palavra sem ambiguidade; e/é, esta/está, da/dá e tem/têm foram
+    decididos um a um. **Fica sem acento de proposito:** a descricao de cada
+    comando no `radar --help` (e a docstring, e o codigo segue sem acento),
+    os valores que eu digito (`--anel proximo`, `--modo revisao`, `--marcar
+    minima`), as chaves gravadas, os prompts de IA e os nomes de assunto do
+    `macetes.py`.
+
+94. **os conceitos associados se conferem na Analises > Conferencia**
+    (decisao 86). Cada questao do alvo mostra os associados dela, com o
+    trecho, o selo 🟣 "por conferir" ou ✓ e dois botoes: Confirmar (grava a
+    data; continua fora da contagem) e Tirar (apaga o associado; a principal
+    nao muda). O topo conta "N de M conceitos associados conferidos", e o
+    filtro "só com associado por conferir" deixa so as que faltam. A
+    importacao nova passou a tirar o associado que saiu da resposta - menos o
+    conferido, que e meu.
+
+95. **o leitor do caderno entende o texto-base compartilhado e a marca
+    minuscula** (os 3 cadernos que sobraram da decisao 90):
+    - uma lista que comeca em "1." e segue em sequencia ANTES do numero da
+      questao e o texto-base de um grupo ("Caso 3: 1. Lancamento... 8.
+      Arrecadacao...", e so entao "49."): a questao e o primeiro marcador que
+      quebra a sequencia; e a ultima alternativa da questao de cima para no
+      "Caso N" / "Texto N" ou no "Para responder as questoes...". O S7 de Sao
+      Jose 2024 foi de 59 para 60 questoes (e a "questao 1" dele deixou de
+      ser o lixo do Caso 3);
+    - a caixa da alternativa errada tambem sai como "square", em minusculas
+      (Palhoca emergencial 2024, Brusque educa 2023): o leitor so achava a
+      certa e lia 14 de 39;
+    - o `migracoes.ultima_copia()` escolhe pela HORA do fim do nome e so pasta
+      com o banco: a ordem alfabetica comecava pela versao. As 15 pastas de
+      teste (`antigo.db` de 8 KB) sairam de `data/copias/`.
+    Comparado o leitor de antes com o de agora nos 216 cadernos, 12 mudaram:
+    os 3 de fora e 9 em que so a alternativa "e" perdeu o texto-base grudado
+    nela (inclusive as questoes 6 e 8 da prova de 2019 do alvo). A releitura
+    (ensaiada antes numa copia): 41 questoes novas (8.421 -> 8.462), 29 com o
+    texto mudado (4 classificacoes e 9 geradas levadas para a chave nova), 26
+    em que o numero passou a ser de outra questao (a classificacao ficou na
+    chave antiga); as 511 classificacoes iguais (402 principais, 170
+    conferidas, nenhuma orfa) e as 236 geradas com base continuam com ela. A
+    auditoria do alvo segue sem suspeita, e o complementar aceito foi de 169
+    para 172 provas - das 11 fora, nenhuma mais pela numeracao.

@@ -323,20 +323,20 @@ class ResultadoExtracao:
     def __str__(self) -> str:
         if not self.provas:
             return "Nenhuma prova nova para ler."
-        texto = f"{self.provas} prova(s) lida(s), {self.questoes} questao(oes)"
+        texto = f"{self.provas} prova(s) lida(s), {self.questoes} questão(ões)"
         if self.atualizadas:
             texto += f", {self.atualizadas} atualizada(s)"
         if self.texto_mudou:
             texto += (f", {self.texto_mudou} com o texto mudado "
-                      f"({self.classificacoes_levadas} classificacao(oes) levada(s) "
+                      f"({self.classificacoes_levadas} classificação(ões) levada(s) "
                       f"para a chave nova, {self.geradas_religadas} gerada(s) religada(s))")
         if self.conteudo_trocado:
-            texto += (f", {self.conteudo_trocado} com outra questao no mesmo numero "
-                      f"(a classificacao ficou na chave antiga)")
+            texto += (f", {self.conteudo_trocado} com outra questão no mesmo número "
+                      f"(a classificação ficou na chave antiga)")
         if self.repetidas:
-            texto += f", {self.repetidas} ja vista(s) em outra prova"
+            texto += f", {self.repetidas} já vista(s) em outra prova"
         if self.vazias:
-            texto += f", {self.vazias} sem questao"
+            texto += f", {self.vazias} sem questão"
         return texto
 
 

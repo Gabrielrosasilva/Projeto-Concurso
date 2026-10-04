@@ -45,7 +45,7 @@ class ResultadoAviso:
 
     def __str__(self) -> str:
         if not self.configurado:
-            return "Telegram nao configurado: nenhum aviso enviado."
+            return "Telegram não configurado: nenhum aviso enviado."
         if not self.enviados and not self.pendentes:
             return "Nada novo para avisar."
         texto = f"{self.enviados} aviso(s) enviado(s)"

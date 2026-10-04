@@ -19,7 +19,7 @@ from functools import cache
 import yaml
 
 from radar import config
-from radar.elegibilidade import Exigencias
+from radar.elegibilidade import NOME_DO_NIVEL, Exigencias
 
 ELEGIVEL, INELEGIVEL, A_CONFIRMAR = "elegivel", "inelegivel", "a_confirmar"
 
@@ -77,6 +77,10 @@ class Veredito:
 ORDEM_DE_ESCOLARIDADE = ("fundamental", "medio", "superior")
 
 
+def _nome(nivel: str) -> str:
+    return NOME_DO_NIVEL.get(nivel, nivel)
+
+
 def _atende_escolaridade(minha: str | None, exigidos: list[str]) -> bool | None:
     """Tenho escolaridade para alguma das vagas? None quando nao da para dizer."""
     if not minha or minha not in ORDEM_DE_ESCOLARIDADE or not exigidos:
@@ -100,7 +104,7 @@ def avaliar(exigencias: Exigencias, quem: Perfil | None = None) -> Veredito:
     veredito = Veredito()
 
     if not exigencias.legivel:
-        veredito.motivos.append("edital nao pode ser lido")
+        veredito.motivos.append("edital não pode ser lido")
         return veredito
 
     # --- idade --------------------------------------------------------------
@@ -114,7 +118,7 @@ def avaliar(exigencias: Exigencias, quem: Perfil | None = None) -> Veredito:
         veredito.motivos.append(f"idade {quem.idade} dentro do teto")
     elif exigencias.idade_maxima:
         veredito.motivos.append(
-            f"edital poe teto de {exigencias.idade_maxima} anos e eu nao informei "
+            f"edital põe teto de {exigencias.idade_maxima} anos e eu não informei "
             "meu ano de nascimento"
         )
 
@@ -122,7 +126,7 @@ def avaliar(exigencias: Exigencias, quem: Perfil | None = None) -> Veredito:
     atende = _atende_escolaridade(quem.escolaridade, exigencias.niveis)
     if atende is False:
         veredito.situacao = INELEGIVEL
-        veredito.motivos.append("nenhuma vaga no nivel que eu tenho")
+        veredito.motivos.append("nenhuma vaga no nível que eu tenho")
         return veredito
     if atende:
         veredito.situacao = ELEGIVEL
@@ -133,8 +137,8 @@ def avaliar(exigencias: Exigencias, quem: Perfil | None = None) -> Veredito:
             <= ORDEM_DE_ESCOLARIDADE.index(quem.escolaridade)
         ]
         veredito.motivos.append(
-            f"tenho {quem.escolaridade}, que atende as vagas de "
-            + ", ".join(atendidos)
+            f"tenho {_nome(quem.escolaridade)}, que atende às vagas de "
+            + ", ".join(_nome(n) for n in atendidos)
         )
     else:
         veredito.motivos.append("escolaridade a confirmar")
@@ -146,7 +150,7 @@ def avaliar(exigencias: Exigencias, quem: Perfil | None = None) -> Veredito:
         categorias = {c.strip() for c in exigencias.cnh.split() if c.strip().isalpha()}
         if quem.cnh and not (categorias & set(quem.cnh)):
             veredito.motivos.append(
-                f"alguma vaga pede CNH {exigencias.cnh}, que eu nao tenho"
+                f"alguma vaga pede CNH {exigencias.cnh}, que eu não tenho"
             )
 
     return veredito

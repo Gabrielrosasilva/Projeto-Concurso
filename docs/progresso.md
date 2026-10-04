@@ -2665,3 +2665,67 @@ classificações saíram inteiras (402 principais, 170 conferidas, nenhuma órf�
 | `test_macetes.py` (a base da média) | 59 passed |
 | `test_releitura.py` (novo, 20: o leitor, a ordem das seções, a numeração, o caminho do download, a troca de chave e a trava), `test_questoes.py`, `test_questoes_ieses.py`, `test_provas.py` | 121 passed |
 | Suíte inteira, PC (uma vez, no fim) | **2533 passed**, 0 failed, 21 min |
+
+## Depois do lote de 04/10 (decisões 91 a 95)
+
+### O /geradas treina pelo nó ✅
+
+Decisão 91. `servico/geradas.py` (`conteudos_para_treinar`, o `conteudo` do
+`_sortear` e do `criar_simulado`), `web/app.py` (o `conteudo` do POST, o
+`treinar` do GET e o recado `nada_no_no`), `geradas.html` (o seletor
+matéria > assunto > subassunto, com a contagem) e `ficha.html` (um link por nó
+do tema). No banco real: 81 opções - 6 matérias, 17 assuntos, 58 subassuntos.
+
+### Macetes e explicações ✅
+
+Decisão 92. Respondidos à mão os dois lotes do `radar gerar --pedido`: 40
+macetes (14 matérias, todos abrindo as questões reais que citam) e 6
+explicações (4 ficaram de fora: dependem do texto da prova). Nenhum código
+mudou; os arquivos `data/macetes.json` e `data/explicacoes.json` nasceram.
+
+### Acento fora da tela web ✅
+
+Decisão 93. `cli.py` (240 textos, a linha do tempo do `radar eventos` pela
+frase da tela, os cabeçalhos de tabela), `avisos.py` (o anel, os rótulos e o
+evento pela frase), `auditoria.py` (e o `docs/auditoria.md` regenerado),
+`elegibilidade.py` e `perfil.py` (o nível pelo nome; os 37 concursos relidos,
+nenhum veredito mudou), o `__str__` dos resultados do serviço. A ajuda do
+`radar gerar` passou a descrever o modo do zero como a decisão 35 manda.
+
+### A conferência dos conceitos associados ✅
+
+Decisão 94. `servico/classificacoes.py` (`conferir_associado`,
+`tirar_associado`, os associados no item e a contagem, o filtro, e a
+importação que tira o associado que saiu da resposta), `web/app.py` e
+`conferencia.html`. No banco real: 0 de 109 conferidos, em 72 questões.
+
+### O leitor: texto-base, marca minúscula, e as cópias de teste ✅
+
+Decisão 95. `questoes.py` (`PADRAO_TEXTO_BASE`, a sequência que começa em "1."
+antes do número, a `MARCA_ERRADA` nas duas grafias) e `migracoes.py`
+(`ultima_copia` pela hora). Comparado o leitor de antes com o de agora nos 216
+cadernos: 12 mudaram - os 3 que estavam fora (S7 de São José 60 de 60,
+Palhoça M1 40 de 40, Brusque ME1 25 de 25) e 9 em que só a alternativa "e"
+perdeu o texto-base grudado nela ("Texto 2 / Leia o texto abaixo..."),
+inclusive as questões 6 e 8 da prova de 2019 do alvo.
+
+**A releitura, ensaiada antes numa cópia:** 41 questões novas (8.421 →
+8.462), 29 com o texto mudado (4 classificações e 9 geradas levadas para a
+chave nova), 26 em que o número passou a ser de outra questão; as 511
+classificações iguais (402 principais, 170 conferidas, nenhuma órfã) e as 236
+geradas com base continuam com ela. `radar auditar`: nenhuma suspeita no alvo.
+`radar complementar --aplicar`: 169 → 172 provas aceitas. As 15 pastas de
+teste saíram de `data/copias/`; o `ultima_copia()` escolhe pela hora.
+
+### Testes
+
+| Rodada | Resultado |
+|---|---|
+| `test_treinar_pelo_no.py` (novo, 8), `test_gerador.py`, `test_geracao_por_conteudo.py`, `test_fichas.py` (1 novo), `test_design.py` | 208 + 8 + 1 passed |
+| `test_avisos.py` (1 novo), `test_retificacao.py`, `test_acompanhando.py`, `test_eventos.py` | 146 passed |
+| `test_elegibilidade.py`, `test_perfil.py` (1 novo) | 39 + 16 passed |
+| os 25 arquivos que usam a CLI, depois do acento (8 asserções de texto acertadas) | 671 passed |
+| `test_auditoria.py`, `test_auditoria_na_tela.py`, `test_cli.py` (1 novo: a linha do tempo) | 24 + 7 passed |
+| `test_associados.py` (3 novos), `test_migracoes.py` (1 novo) | 28 + 12 passed |
+| `test_texto_base.py` (novo, 3), `test_marca_minuscula.py` (novo, 1), `test_questoes.py`, `test_releitura.py` | 67 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2553 passed**, 0 failed, 23 min |

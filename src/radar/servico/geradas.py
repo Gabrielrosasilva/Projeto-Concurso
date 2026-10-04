@@ -12,7 +12,7 @@ uma questao de Merendeira, que nao me serve.
 import logging
 import random
 
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 
 from radar import config, gerador
 from radar import gerador as motor
@@ -752,12 +752,48 @@ def rejeitar(questao_id: int) -> bool:
         return True
 
 
+#: Ate onde a tela de treinar desce na arvore: materia, assunto, subassunto.
+#: O elemento fica de fora - sao poucas geradas por elemento, e a lista
+#: viraria um paredao de opcoes com 1 ou 2 questoes cada.
+NIVEIS_PARA_TREINAR = 3
+
+
+def conteudos_para_treinar() -> list[tuple[str, int, int]]:
+    """[(caminho do no, nivel, quantas geradas valem nele e abaixo dele)].
+
+    E o seletor do "Treinar com as que ja tenho": materia, e dentro dela os
+    assuntos e subassuntos que tem gerada, na ordem da arvore. A gerada conta
+    no no dela e em todos os de cima - treinar o assunto pega os subassuntos.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        linhas = s.execute(
+            select(QuestaoGerada.conteudo, QuestaoGerada.materia)
+            .where(QuestaoGerada.rejeitada.is_(False))
+            .where(QuestaoGerada.resposta.is_not(None))
+        ).all()
+
+    from radar.conteudos import SEPARADOR
+
+    quantas: dict[tuple[str, ...], int] = {}
+    for conteudo, materia in linhas:
+        partes = tuple((conteudo or materia or "sem materia").split(SEPARADOR))
+        for nivel in range(1, min(len(partes), NIVEIS_PARA_TREINAR) + 1):
+            quantas[partes[:nivel]] = quantas.get(partes[:nivel], 0) + 1
+
+    return [(SEPARADOR.join(partes), len(partes), n)
+            for partes, n in sorted(quantas.items())]
+
+
 def _sortear(
     quantidade: int,
     materia: str | None = None,
     impressoes: list[str] | None = None,
+    conteudo: str | None = None,
 ) -> list[int]:
     """Ids de questoes geradas que valem para o sorteio."""
+    from radar.conteudos import SEPARADOR
+
     consulta = (
         select(QuestaoGerada)
         .where(QuestaoGerada.rejeitada.is_(False))
@@ -765,6 +801,16 @@ def _sortear(
     )
     if materia:
         consulta = consulta.where(QuestaoGerada.materia == materia)
+    if conteudo:
+        # O no e tudo que esta abaixo dele. A materia (sem separador) tambem
+        # vale pela coluna `materia`, para a gerada que ficou sem no.
+        dentro = [
+            QuestaoGerada.conteudo == conteudo,
+            QuestaoGerada.conteudo.startswith(conteudo + SEPARADOR, autoescape=True),
+        ]
+        if SEPARADOR not in conteudo:
+            dentro.append(QuestaoGerada.materia == conteudo)
+        consulta = consulta.where(or_(*dentro))
     if impressoes is not None:
         consulta = consulta.where(QuestaoGerada.impressao.in_(impressoes))
 
@@ -779,6 +825,7 @@ def criar_simulado(
     quantidade: int = QUANTIDADE_PADRAO,
     materia: str | None = None,
     impressoes: list[str] | None = None,
+    conteudo: str | None = None,
 ) -> Simulado | None:
     """Uma rodada SO de questoes geradas, na mesma tela do simulado de sempre.
 
@@ -788,7 +835,7 @@ def criar_simulado(
     """
     criar_tabelas()
 
-    ids = _sortear(quantidade, materia, impressoes)
+    ids = _sortear(quantidade, materia, impressoes, conteudo)
     if not ids:
         return None
 
@@ -796,6 +843,7 @@ def criar_simulado(
         simulado = Simulado(filtros={
             "quantidade": len(ids),
             "materia": materia,
+            "conteudo": conteudo,
             # E esta marca que a tela le para mostrar o selo no topo.
             "geradas": True,
         })

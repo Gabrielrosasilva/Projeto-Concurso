@@ -81,14 +81,14 @@ def suspeitas_de_extracao(enunciado: str | None, alternativas: dict | None) -> l
     if vazias:
         achados.append("alternativa vazia: " + ", ".join(vazias))
     if NUMERO_NO_INICIO.search(enunciado):
-        achados.append("o numero da questao dentro do enunciado")
+        achados.append("o número da questão dentro do enunciado")
     if MOBILIA_NO_TEXTO.search(enunciado):
-        achados.append("cabecalho ou rodape dentro do enunciado")
+        achados.append("cabeçalho ou rodapé dentro do enunciado")
     for letra, texto in sorted(alternativas.items()):
         if MOBILIA_NO_TEXTO.search(texto or ""):
-            achados.append(f"cabecalho ou rodape dentro da alternativa {letra}")
+            achados.append(f"cabeçalho ou rodapé dentro da alternativa {letra}")
     if CITA_FIGURA.search(enunciado):
-        achados.append("cita figura, tabela ou grafico: conferir se veio")
+        achados.append("cita figura, tabela ou gráfico: conferir se veio")
     if PALAVRA_CORTADA.search(enunciado):
         achados.append("palavra cortada no fim do enunciado")
     return achados
@@ -282,7 +282,7 @@ class ProvaAuditada:
         achados = []
         if not self.edital_lido:
             achados.append("nenhum edital do acervo tem um quadro que feche "
-                           f"{self.questoes} questoes para este cargo")
+                           f"{self.questoes} questões para este cargo")
         for linha in self.contagem:
             if not linha.bate:
                 achados.append(
@@ -291,9 +291,9 @@ class ProvaAuditada:
                     f"o banco tem {linha.no_caderno if linha.no_caderno is not None else '-'}"
                 )
         if not self.gabarito_que_vale:
-            achados.append("nenhum gabarito definitivo do acervo e deste caderno")
+            achados.append("nenhum gabarito definitivo do acervo é deste caderno")
         for numero, banco, oficial in self.divergencias:
-            achados.append(f"questao {numero}: banco diz {banco}, definitivo diz {oficial}")
+            achados.append(f"questão {numero}: banco diz {banco}, definitivo diz {oficial}")
         return achados
 
     @property
@@ -544,24 +544,24 @@ def _numeros(lista: list[int], materias: dict[int, str]) -> str:
 
 
 def _secao(prova: ProvaAuditada) -> list[str]:
-    marca = " — REFORCO (outro cargo; nunca somada as do alvo)" if prova.reforco else ""
+    marca = " — REFORÇO (outro cargo; nunca somada as do alvo)" if prova.reforco else ""
     linhas = [
         f"## {prova.ano} · {prova.cargo}{marca}",
         "",
-        f"Caderno: <{prova.prova_url}> — {prova.questoes} questoes no banco.",
+        f"Caderno: <{prova.prova_url}> — {prova.questoes} questões no banco.",
         "",
-        "### Contagem por materia",
+        "### Contagem por matéria",
         "",
     ]
     if prova.edital_lido:
         linhas.append(f"Quadro lido de `{prova.edital_lido}`. A linha do edital "
                       "e a do caderno se encontram pelo NOME; as colunas de "
-                      "posicao dizem onde cada materia esta em cada um.")
+                      "posição dizem onde cada matéria está em cada um.")
     else:
         linhas.append("**Nenhum quadro de edital fechou a conta para este cargo.**")
     linhas += [
         "",
-        "| Posicao edital / caderno | Edital | Questoes | Banco (caderno) | Questoes | Bate? |",
+        "| Posição edital / caderno | Edital | Questões | Banco (caderno) | Questões | Bate? |",
         "|---|---|---|---|---|---|",
     ]
     for l in prova.contagem:
@@ -581,49 +581,49 @@ def _secao(prova: ProvaAuditada) -> list[str]:
     if prova.gabarito_que_vale:
         linhas += [
             "Definitivos deste caderno no acervo, do mais velho ao mais novo "
-            "(o ultimo e o que vale):",
+            "(o último é o que vale):",
             "",
             *[f"- `{d}`" for d in prova.definitivos_lidos],
             "",
             f"- anuladas no definitivo que vale: {_numeros(prova.anuladas_oficiais, prova.materia_da_questao)}",
             f"- anuladas marcadas no banco: {_numeros(prova.anuladas_no_banco, prova.materia_da_questao)}",
-            f"- letras que o definitivo trocou em relacao ao provisorio: "
+            f"- letras que o definitivo trocou em relação ao provisório: "
             f"{_numeros(prova.trocadas_pelo_definitivo, prova.materia_da_questao)}",
-            f"- questoes em que o banco discorda do definitivo: "
+            f"- questões em que o banco discorda do definitivo: "
             f"**{len(prova.divergencias)}** de {prova.questoes}",
             f"- sem gabarito no banco (e sem ser anulada): "
             f"{_numeros(prova.sem_gabarito, prova.materia_da_questao)}",
             "",
         ]
     else:
-        linhas += ["**Nenhum gabarito definitivo do acervo e deste caderno.** "
-                   "O banco esta com o gabarito do caderno, que e o provisorio.", ""]
+        linhas += ["**Nenhum gabarito definitivo do acervo é deste caderno.** "
+                   "O banco está com o gabarito do caderno, que é o provisório.", ""]
     return linhas
 
 
 def _extracao_e_classificacao(provas: list[ProvaAuditada]) -> list[str]:
-    linhas = ["## Erros de extracao (suspeitas para conferir)", ""]
+    linhas = ["## Erros de extração (suspeitas para conferir)", ""]
     algum = False
     for p in provas:
         if not p.suspeitas:
             continue
         algum = True
         quantas = len({n for n, _ in p.suspeitas})
-        linhas += [f"**{p.ano} {p.cargo}** — {quantas} questao(oes):", ""]
-        linhas += [f"- questao {n} ({p.materia_da_questao.get(n) or '?'}): {motivo}"
+        linhas += [f"**{p.ano} {p.cargo}** — {quantas} questão(ões):", ""]
+        linhas += [f"- questão {n} ({p.materia_da_questao.get(n) or '?'}): {motivo}"
                    for n, motivo in p.suspeitas]
         linhas.append("")
     if not algum:
         linhas += ["- nenhuma suspeita.", ""]
 
     linhas += [
-        "## Classificacao na arvore de conteudos",
+        "## Classificação na árvore de conteúdos",
         "",
-        "Pela classificacao principal de cada questao; sem classificacao e "
-        "pendente. Conferidas: as que eu ja confirmei, corrigi ou deixei "
-        "pendente na tela de conferencia.",
+        "Pela classificação principal de cada questão; sem classificação é "
+        "pendente. Conferidas: as que eu já confirmei, corrigi ou deixei "
+        "pendente na tela de conferência.",
         "",
-        "| Prova | Questoes | Completa | Parcial | Pendente | Conferidas |",
+        "| Prova | Questões | Completa | Parcial | Pendente | Conferidas |",
         "|---|---|---|---|---|---|",
     ]
     for p in provas:
@@ -640,29 +640,29 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
     linhas = [
         "# Auditoria dos dados de estudo",
         "",
-        f"> Gerado por `radar auditar` em {hoje:%d/%m/%Y}. **Nao edite a mao**: "
+        f"> Gerado por `radar auditar` em {hoje:%d/%m/%Y}. **Não edite a mão**: "
         "rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do "
         "acervo e do banco, nada foi digitado.",
         "",
         "## O que foi conferido",
         "",
-        "- **contagem por materia**: o quadro de distribuicao de questoes do "
+        "- **contagem por matéria**: o quadro de distribuição de questões do "
         "edital contra o que o banco separou do caderno;",
-        "- **gabarito**: cada questao do banco contra o ultimo gabarito "
-        "definitivo publicado (retificacao inclusive), letra por letra;",
+        "- **gabarito**: cada questão do banco contra o último gabarito "
+        "definitivo publicado (retificação inclusive), letra por letra;",
         "- **anuladas**: as do definitivo contra as marcadas no banco;",
-        "- **extracao**: enunciado curto demais, alternativa faltando ou vazia, "
-        "cabecalho ou rodape grudado no texto, figura citada, palavra cortada "
-        "no fim. Sao suspeitas para conferir a olho;",
-        "- **classificacao**: o status de cada questao na arvore de conteudos.",
+        "- **extração**: enunciado curto demais, alternativa faltando ou vazia, "
+        "cabeçalho ou rodapé grudado no texto, figura citada, palavra cortada "
+        "no fim. São suspeitas para conferir a olho;",
+        "- **classificação**: o status de cada questão na árvore de conteúdos.",
         "",
-        "**O que isto nao prova:** a auditoria le os PDFs com o mesmo leitor que "
+        "**O que isto não prova:** a auditoria lê os PDFs com o mesmo leitor que "
         "montou o banco. Um erro do leitor que se repita nas duas pontas passa "
-        "batido. A verificacao de extracao procura os defeitos conhecidos; a "
-        "conferencia de enunciado e alternativa, palavra por palavra contra o "
-        "PDF, nao e feita aqui.",
+        "batido. A verificação de extração procura os defeitos conhecidos; a "
+        "conferência de enunciado e alternativa, palavra por palavra contra o "
+        "PDF, não é feita aqui.",
         "",
-        "## Onde os numeros nao batem",
+        "## Onde os números não batem",
         "",
     ]
     algum = False
@@ -675,15 +675,15 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
                       f"{len(provas)} provas.")
     nomes = [(p, l) for p in provas for l in p.nomes_diferentes]
     if nomes:
-        linhas += ["", "Contagem certa com o nome escrito diferente (nao e erro "
-                   "de numero, mas a tela mostra o nome do caderno):", ""]
+        linhas += ["", "Contagem certa com o nome escrito diferente (não é erro "
+                   "de número, mas a tela mostra o nome do caderno):", ""]
         linhas += [f"- {p.ano}: edital \"{l.edital}\", caderno \"{l.caderno}\""
                    for p, l in nomes]
     ordem = [(p, l) for p in provas for l in p.fora_de_ordem]
     if ordem:
-        linhas += ["", "Materia em outra posicao no caderno que no edital (a "
-                   "contagem nao muda; vale conferir se o caderno e mesmo "
-                   "assim ou se a separacao por materia trocou os blocos):", ""]
+        linhas += ["", "Matéria em outra posição no caderno que no edital (a "
+                   "contagem não muda; vale conferir se o caderno é mesmo "
+                   "assim ou se a separação por matéria trocou os blocos):", ""]
         linhas += [f"- {p.ano}: {l.edital} - {l.ordem_edital}a no edital, "
                    f"{l.ordem_caderno}a no caderno" for p, l in ordem]
 
@@ -691,7 +691,7 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
         "",
         "## Resumo",
         "",
-        "| Prova | Papel | Questoes | Anuladas | Definitivo que vale | Divergencias |",
+        "| Prova | Papel | Questões | Anuladas | Definitivo que vale | Divergências |",
         "|---|---|---|---|---|---|",
     ]
     for p in provas:
@@ -704,8 +704,8 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
     validas = sum(p.questoes - len(p.anuladas_no_banco) for p in do_alvo)
     linhas += [
         "",
-        f"Provas do alvo: {len(do_alvo)}, com {validas} questoes validas "
-        "(sem as anuladas). As de reforco nao entram nesta soma.",
+        f"Provas do alvo: {len(do_alvo)}, com {validas} questões válidas "
+        "(sem as anuladas). As de reforço não entram nesta soma.",
         "",
     ]
     linhas += _extracao_e_classificacao(provas)
@@ -713,11 +713,11 @@ def relatorio(provas: list[ProvaAuditada], hoje: date | None = None) -> str:
         linhas += _secao(p)
 
     linhas += [
-        "## Questoes com lei posterior",
+        "## Questões com lei posterior",
         "",
         "Pendente: a lista de temas afetados por lei posterior "
-        "(`config/leis.yml`) ainda nao foi conferida. Quando for, esta secao "
-        "passa a listar as questoes que ganham o aviso.",
+        "(`config/leis.yml`) ainda não foi conferida. Quando for, esta seção "
+        "passa a listar as questões que ganham o aviso.",
         "",
     ]
     return "\n".join(linhas)

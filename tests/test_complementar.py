@@ -350,7 +350,7 @@ def test_o_comando_escreve_o_relatorio_e_nao_muda_o_banco(acervo, tmp_path):
     assert fotografia() == antes
     assert destino.exists()
     assert "Direito Penal" in destino.read_text(encoding="utf-8")
-    assert "1 validada(s)" in saida.output and "1 so para classificar" in saida.output
+    assert "1 validada(s)" in saida.output and "1 só para classificar" in saida.output
     assert not PREVISAO.search(saida.output)
 
 

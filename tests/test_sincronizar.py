@@ -189,7 +189,7 @@ def test_push_que_falha_avisa_que_o_commit_ficou_feito(banco_temporario,
 
     assert resultado.exit_code == 1
     assert "push falhou" in resultado.output
-    assert "commit esta feito" in resultado.output
+    assert "commit está feito" in resultado.output
 
 
 # --- quando nao ha o que fazer ----------------------------------------------

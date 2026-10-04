@@ -574,20 +574,6 @@
     "trecho": "Se retirássemos o artigo uma diante do substantivo reunião, estariam plasmadas as condições para o acento indicativo de crase"
   },
   {
-    "chave": "12417ed18aa1a76228c8d701975abe22",
-    "classificada_em": "2026-10-01T21:56:13.571131+00:00",
-    "conferida_em": "2026-10-02T16:04:30.953439+00:00",
-    "conteudo": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
-    "dispositivo": "função sintática dos termos",
-    "item_do_edital": "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
-    "pegadinha": "",
-    "principal": true,
-    "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
-    "tipo_de_questao": "conceito",
-    "trecho": "'aos seres humanos' é objeto indireto de 'garantem'"
-  },
-  {
     "chave": "13980687c1a6b0b16f8799561fa025b8",
     "classificada_em": "2026-10-01T21:56:10.631699+00:00",
     "conferida_em": "2026-10-02T16:06:00.084339+00:00",
@@ -614,6 +600,20 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "são gratuitos para os reconhecidamente pobres, na forma da lei: a certidão de óbito; o registro civil de nascimento"
+  },
+  {
+    "chave": "15628c69642cc66d8e0d3c2c1a06866f",
+    "classificada_em": "2026-10-01T21:56:13.571131+00:00",
+    "conferida_em": "2026-10-02T16:04:30.953439+00:00",
+    "conteudo": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
+    "dispositivo": "função sintática dos termos",
+    "item_do_edital": "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
+    "pegadinha": "",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "'aos seres humanos' é objeto indireto de 'garantem'"
   },
   {
     "chave": "156df558ad00726f0404d3ad974bd909",
@@ -1904,6 +1904,20 @@
     "trecho": "devem ser revistas periodicamente para não causarem constrangimento ilegal, em caso de excesso na duração"
   },
   {
+    "chave": "43bef045a92921b55e7285df4328c6dd",
+    "classificada_em": "2026-10-02T03:54:00.835833+00:00",
+    "conferida_em": null,
+    "conteudo": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Uniformidade de tratamento",
+    "dispositivo": null,
+    "item_do_edital": "Pronomes: emprego, forma de tratamento e colocação",
+    "pegadinha": "mistura crase, porquê e conjunção integrante nas outras alternativas, todas plausíveis",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "interpretação de texto",
+    "trecho": "O emprego do pronome lhe, no final do primeiro parágrafo, está alinhado com a expressão de tratamento você"
+  },
+  {
     "chave": "457fbbe0c584ac1c4c2f85b6e0b4ea25",
     "classificada_em": "2026-10-01T21:56:08.595995+00:00",
     "conferida_em": "2026-10-02T16:05:39.145345+00:00",
@@ -2462,20 +2476,6 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "Eu os amo"
-  },
-  {
-    "chave": "5a2de854ba652c80ee3990fd11aa412a",
-    "classificada_em": "2026-10-02T03:54:00.924381+00:00",
-    "conferida_em": null,
-    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância do verbo haver impessoal",
-    "dispositivo": null,
-    "item_do_edital": "Concordância nominal e verbal",
-    "pegadinha": "junta concordância, acentuação de ter e regência de assistir numa só questão",
-    "principal": true,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
-    "tipo_de_questao": "interpretação de texto",
-    "trecho": "O verbo haver, no último período, foi empregado com desvio de concordância, porque na construção não há sujeito"
   },
   {
     "chave": "5b2b1da188855f939c571d94d5f93446",
@@ -3780,20 +3780,6 @@
     "trecho": "Considerando o que se afirma no texto 1"
   },
   {
-    "chave": "825120a82261334cf58c56f8fe636ac0",
-    "classificada_em": "2026-10-02T03:54:00.835833+00:00",
-    "conferida_em": null,
-    "conteudo": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Uniformidade de tratamento",
-    "dispositivo": null,
-    "item_do_edital": "Pronomes: emprego, forma de tratamento e colocação",
-    "pegadinha": "mistura crase, porquê e conjunção integrante nas outras alternativas, todas plausíveis",
-    "principal": true,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
-    "tipo_de_questao": "interpretação de texto",
-    "trecho": "O emprego do pronome lhe, no final do primeiro parágrafo, está alinhado com a expressão de tratamento você"
-  },
-  {
     "chave": "82529b64d8f6bcc34e8752b9e6bb1de4",
     "classificada_em": "2026-10-04T11:47:08.153046+00:00",
     "conferida_em": null,
@@ -4268,6 +4254,20 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "Em que período a pontuação está correta?"
+  },
+  {
+    "chave": "93fa648f8ba447c65faacba716196778",
+    "classificada_em": "2026-10-01T21:56:13.628765+00:00",
+    "conferida_em": "2026-10-02T16:04:33.482066+00:00",
+    "conteudo": "Língua Portuguesa",
+    "dispositivo": "",
+    "item_do_edital": null,
+    "pegadinha": null,
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "conceito",
+    "trecho": "pendente: afirmativas sobre cinco assuntos (tratamento, crase, referência pronominal, vozes do verbo, verbo haver): sem assunto principal seguro"
   },
   {
     "chave": "949aa2114c601e322ac398318ef44a76",
@@ -5698,6 +5698,20 @@
     "trecho": "Essa Secretaria me pertence, tudo aqui me pertence e todos devem me obedecer"
   },
   {
+    "chave": "ce70cdd6a76821b544f31c90c344efe3",
+    "classificada_em": "2026-10-02T03:54:00.924381+00:00",
+    "conferida_em": null,
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância do verbo haver impessoal",
+    "dispositivo": null,
+    "item_do_edital": "Concordância nominal e verbal",
+    "pegadinha": "junta concordância, acentuação de ter e regência de assistir numa só questão",
+    "principal": true,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "interpretação de texto",
+    "trecho": "O verbo haver, no último período, foi empregado com desvio de concordância, porque na construção não há sujeito"
+  },
+  {
     "chave": "cef1cb8b73eb4c470c6aa2e701179b06",
     "classificada_em": "2026-10-04T11:47:08.191633+00:00",
     "conferida_em": null,
@@ -5934,20 +5948,6 @@
     "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "b) A Corte Interamericana de Direitos Humanos integra o Sistema Interamericano de Proteção dos Direitos Humanos."
-  },
-  {
-    "chave": "da0a4f34224a10080ee3d8fabd38573d",
-    "classificada_em": "2026-10-01T21:56:13.628765+00:00",
-    "conferida_em": "2026-10-02T16:04:33.482066+00:00",
-    "conteudo": "Língua Portuguesa",
-    "dispositivo": "",
-    "item_do_edital": null,
-    "pegadinha": null,
-    "principal": true,
-    "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "pendente",
-    "tipo_de_questao": "conceito",
-    "trecho": "pendente: afirmativas sobre cinco assuntos (tratamento, crase, referência pronominal, vozes do verbo, verbo haver): sem assunto principal seguro"
   },
   {
     "chave": "da5317248ab378267c4f43b844b55f23",

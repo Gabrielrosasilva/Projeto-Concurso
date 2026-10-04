@@ -228,7 +228,7 @@ def test_comando_marca_e_mostra(banco_temporario, tmp_path, monkeypatch):
 
     recusa = runner.invoke(app, ["hoje", "--data", "2026-09-28", "--marcar", "otima"])
     assert recusa.exit_code == 1
-    assert "Nao marquei" in recusa.output
+    assert "Não marquei" in recusa.output
 
     # Questao sem minutos nao vira estudo extra: a regra do extra continua.
     sem_tempo = runner.invoke(app, ["hoje", "--data", "2026-09-28", "--feitas", "10"])

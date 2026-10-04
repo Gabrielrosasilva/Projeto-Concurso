@@ -190,7 +190,10 @@
       <ul class="marcas">
         {% for g in f.geradas %}<li>{{ g.enunciado[:140] }}{% if g.enunciado | length > 140 %}…{% endif %}</li>{% endfor %}
       </ul>
-      <p><a class="ds-link-acao" href="/geradas">Treinar as geradas</a></p>
+      {# Cada no do tema leva so as geradas dele (e as de baixo), ja
+         escolhido no seletor - e nao a materia inteira. #}
+      {% for no in f.nos %}<p><a class="ds-link-acao" href="/geradas?treinar={{ no | urlencode }}#treinar">Treinar as geradas{% if f.nos | length > 1 %}: {{ no.split(' > ')[-1] }}{% endif %}</a></p>{% endfor %}
+      {% if not f.nos %}<p><a class="ds-link-acao" href="/geradas#treinar">Treinar as geradas</a></p>{% endif %}
     {% else %}
       <p class="frase-padrao">Nenhuma questão gerada neste conteúdo ainda. Para gerar, um pedido por nó (o escopo fechado da Etapa 5):</p>
     {% endif %}

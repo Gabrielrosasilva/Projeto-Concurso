@@ -280,6 +280,6 @@ def test_a_cli_conta_as_recusas_em_voz_alta(acervo_do_alvo, tmp_path):
     resultado = runner.invoke(cli.app, ["gerar", "--importar", str(arquivo)])
 
     assert resultado.exit_code == 0
-    assert "1 questao(oes) gravado(s)" in resultado.output
+    assert "1 questão(ões) gravado(s)" in resultado.output
     assert "1 recusada(s)" in resultado.output
     assert "importado manualmente" in resultado.output

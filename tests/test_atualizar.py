@@ -107,4 +107,4 @@ def test_o_resumo_conta_as_inscricoes_abertas(monkeypatch, etapas_falsas):
 
     resultado = executor.invoke(app, ["atualizar", "--sem-avisar"])
 
-    assert "3 concurso(s) com inscricao aberta" in resultado.output
+    assert "3 concurso(s) com inscrição aberta" in resultado.output

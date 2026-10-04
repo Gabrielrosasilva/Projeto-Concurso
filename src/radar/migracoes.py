@@ -21,6 +21,7 @@ Banco novo (sem tabela nenhuma) nao migra: nasce na versao atual. E o caso de
 todo teste e do robo do GitHub, que monta o banco do zero a cada execucao.
 """
 import logging
+import re
 import sqlite3
 from contextlib import closing
 from dataclasses import dataclass, field
@@ -36,6 +37,8 @@ from radar.util import fuso_local
 log = logging.getLogger(__name__)
 
 PREFIXO_DA_COPIA = "migracao"
+#: A hora que o `copiar_banco` poe no fim do nome da pasta.
+HORA_DA_COPIA = re.compile(r"\d{4}-\d{2}-\d{2}-\d{6}$")
 
 
 def _passo_1() -> None:
@@ -315,14 +318,22 @@ def migrar(engine: Engine | None = None) -> Relatorio:
 
 
 def ultima_copia() -> Path | None:
-    """A copia da migracao mais recente. O nome tem a hora, entao a ordem
-    alfabetica e a ordem do tempo."""
+    """A copia da migracao mais recente, pela HORA do fim do nome.
+
+    O nome comeca pela versao ("migracao-v4-para-v5-2026-10-03-205958"), e
+    a ordem alfabetica dele nao e a do tempo: uma "v0-para-v4" de ontem
+    vinha antes de uma "v4-para-v5" de hoje so por sorte. E so vale a pasta
+    que tem o banco - sem ele nao ha o que restaurar.
+    """
     pasta = caminho_das_copias()
     if not pasta.exists():
         return None
-    copias = sorted(p for p in pasta.iterdir()
-                    if p.is_dir() and p.name.startswith(PREFIXO_DA_COPIA + "-"))
-    return copias[-1] if copias else None
+    banco = _arquivo_do_banco()
+    nome_do_banco = banco.name if banco else "radar.db"
+    copias = [p for p in pasta.iterdir()
+              if p.is_dir() and p.name.startswith(PREFIXO_DA_COPIA + "-")
+              and HORA_DA_COPIA.search(p.name) and (p / nome_do_banco).exists()]
+    return max(copias, key=lambda p: HORA_DA_COPIA.search(p.name).group(0), default=None)
 
 
 def desfazer() -> Path:

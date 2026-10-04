@@ -1,45 +1,45 @@
 # Auditoria dos dados de estudo
 
-> Gerado por `radar auditar` em 04/10/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
+> Gerado por `radar auditar` em 04/10/2026. **Não edite a mão**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
 
 ## O que foi conferido
 
-- **contagem por materia**: o quadro de distribuicao de questoes do edital contra o que o banco separou do caderno;
-- **gabarito**: cada questao do banco contra o ultimo gabarito definitivo publicado (retificacao inclusive), letra por letra;
+- **contagem por matéria**: o quadro de distribuição de questões do edital contra o que o banco separou do caderno;
+- **gabarito**: cada questão do banco contra o último gabarito definitivo publicado (retificação inclusive), letra por letra;
 - **anuladas**: as do definitivo contra as marcadas no banco;
-- **extracao**: enunciado curto demais, alternativa faltando ou vazia, cabecalho ou rodape grudado no texto, figura citada, palavra cortada no fim. Sao suspeitas para conferir a olho;
-- **classificacao**: o status de cada questao na arvore de conteudos.
+- **extração**: enunciado curto demais, alternativa faltando ou vazia, cabeçalho ou rodapé grudado no texto, figura citada, palavra cortada no fim. São suspeitas para conferir a olho;
+- **classificação**: o status de cada questão na árvore de conteúdos.
 
-**O que isto nao prova:** a auditoria le os PDFs com o mesmo leitor que montou o banco. Um erro do leitor que se repita nas duas pontas passa batido. A verificacao de extracao procura os defeitos conhecidos; a conferencia de enunciado e alternativa, palavra por palavra contra o PDF, nao e feita aqui.
+**O que isto não prova:** a auditoria lê os PDFs com o mesmo leitor que montou o banco. Um erro do leitor que se repita nas duas pontas passa batido. A verificação de extração procura os defeitos conhecidos; a conferência de enunciado e alternativa, palavra por palavra contra o PDF, não é feita aqui.
 
-## Onde os numeros nao batem
+## Onde os números não batem
 
 - nenhum lugar: contagem, gabarito e anuladas batem nas 3 provas.
 
-Contagem certa com o nome escrito diferente (nao e erro de numero, mas a tela mostra o nome do caderno):
+Contagem certa com o nome escrito diferente (não é erro de número, mas a tela mostra o nome do caderno):
 
 - 2013: edital "Direito Processual Penal", caderno "Direito Processo Penal"
 - 2016: edital "Direito da Criança e do Adolescente- Lei do Sinase", caderno "Lei do Sinase"
 
 ## Resumo
 
-| Prova | Papel | Questoes | Anuladas | Definitivo que vale | Divergencias |
+| Prova | Papel | Questões | Anuladas | Definitivo que vale | Divergências |
 |---|---|---|---|---|---|
 | 2013 Agente Penitenciário | alvo | 70 | 3 | GabaritoDefinitivo_Retificado.pdf (2013-11-28) | 0 |
 | 2019 Agente Penitenciário - Feminino (AP) | alvo | 100 | 5 | Anexo_1_2019_Gabarito_SAP_definitivo_retificacao.pdf (2020-01-23) | 0 |
 | 2016 Agente de Segurança Socioeducativo (AS) | reforco | 70 | 2 | Anexo1_Gabarito_Definitivo_Retificado.pdf (2017-07-20) | 0 |
 
-Provas do alvo: 2, com 162 questoes validas (sem as anuladas). As de reforco nao entram nesta soma.
+Provas do alvo: 2, com 162 questões válidas (sem as anuladas). As de reforço não entram nesta soma.
 
-## Erros de extracao (suspeitas para conferir)
+## Erros de extração (suspeitas para conferir)
 
 - nenhuma suspeita.
 
-## Classificacao na arvore de conteudos
+## Classificação na árvore de conteúdos
 
-Pela classificacao principal de cada questao; sem classificacao e pendente. Conferidas: as que eu ja confirmei, corrigi ou deixei pendente na tela de conferencia.
+Pela classificação principal de cada questão; sem classificação é pendente. Conferidas: as que eu já confirmei, corrigi ou deixei pendente na tela de conferência.
 
-| Prova | Questoes | Completa | Parcial | Pendente | Conferidas |
+| Prova | Questões | Completa | Parcial | Pendente | Conferidas |
 |---|---|---|---|---|---|
 | 2013 Agente Penitenciário | 70 | 56 | 2 | 12 | 70 |
 | 2019 Agente Penitenciário - Feminino (AP) | 100 | 90 | 7 | 3 | 100 |
@@ -47,13 +47,13 @@ Pela classificacao principal de cada questao; sem classificacao e pendente. Conf
 
 ## 2013 · Agente Penitenciário
 
-Caderno: <http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf> — 70 questoes no banco.
+Caderno: <http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf> — 70 questões no banco.
 
-### Contagem por materia
+### Contagem por matéria
 
-Quadro lido de `Edital_SJC_2013_09_20_Final.pdf`. A linha do edital e a do caderno se encontram pelo NOME; as colunas de posicao dizem onde cada materia esta em cada um.
+Quadro lido de `Edital_SJC_2013_09_20_Final.pdf`. A linha do edital e a do caderno se encontram pelo NOME; as colunas de posição dizem onde cada matéria está em cada um.
 
-| Posicao edital / caderno | Edital | Questoes | Banco (caderno) | Questoes | Bate? |
+| Posição edital / caderno | Edital | Questões | Banco (caderno) | Questões | Bate? |
 |---|---|---|---|---|---|
 | 1 / 1 | Língua Portuguesa | 10 | Língua Portuguesa | 10 | sim |
 | 2 / 2 | Noções de Informática | 10 | Noções de Informática | 10 | sim |
@@ -67,26 +67,26 @@ Quadro lido de `Edital_SJC_2013_09_20_Final.pdf`. A linha do edital e a do cader
 
 ### Gabarito definitivo e anuladas
 
-Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o que vale):
+Definitivos deste caderno no acervo, do mais velho ao mais novo (o último é o que vale):
 
 - `gabarito_definitivo.pdf (2013-11-27)`
 - `GabaritoDefinitivo_Retificado.pdf (2013-11-28)`
 
 - anuladas no definitivo que vale: 6 (Língua Portuguesa), 60 (Direito Processo Penal), 63 (Legislação Estadual)
 - anuladas marcadas no banco: 6 (Língua Portuguesa), 60 (Direito Processo Penal), 63 (Legislação Estadual)
-- letras que o definitivo trocou em relacao ao provisorio: 28 (Direitos Humanos)
-- questoes em que o banco discorda do definitivo: **0** de 70
+- letras que o definitivo trocou em relação ao provisório: 28 (Direitos Humanos)
+- questões em que o banco discorda do definitivo: **0** de 70
 - sem gabarito no banco (e sem ser anulada): nenhuma
 
 ## 2019 · Agente Penitenciário - Feminino (AP)
 
-Caderno: <https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf> — 100 questoes no banco.
+Caderno: <https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf> — 100 questões no banco.
 
-### Contagem por materia
+### Contagem por matéria
 
-Quadro lido de `2019_SAP_Edital_1.pdf`. A linha do edital e a do caderno se encontram pelo NOME; as colunas de posicao dizem onde cada materia esta em cada um.
+Quadro lido de `2019_SAP_Edital_1.pdf`. A linha do edital e a do caderno se encontram pelo NOME; as colunas de posição dizem onde cada matéria está em cada um.
 
-| Posicao edital / caderno | Edital | Questoes | Banco (caderno) | Questoes | Bate? |
+| Posição edital / caderno | Edital | Questões | Banco (caderno) | Questões | Bate? |
 |---|---|---|---|---|---|
 | 1 / 1 | Língua Portuguesa | 15 | Língua Portuguesa | 15 | sim |
 | 2 / 2 | Raciocínio Lógico | 10 | Raciocínio Lógico | 10 | sim |
@@ -103,26 +103,26 @@ Quadro lido de `2019_SAP_Edital_1.pdf`. A linha do edital e a do caderno se enco
 
 ### Gabarito definitivo e anuladas
 
-Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o que vale):
+Definitivos deste caderno no acervo, do mais velho ao mais novo (o último é o que vale):
 
 - `_Gabarito_SAP_definitivo.pdf (2019-12-13)`
 - `Anexo_1_2019_Gabarito_SAP_definitivo_retificacao.pdf (2020-01-23)`
 
 - anuladas no definitivo que vale: 11 (Língua Portuguesa), 22 (Raciocínio Lógico), 33 (Direitos Humanos), 63 (Legislação Especial), 100 (Sociologia Aplicada)
 - anuladas marcadas no banco: 11 (Língua Portuguesa), 22 (Raciocínio Lógico), 33 (Direitos Humanos), 63 (Legislação Especial), 100 (Sociologia Aplicada)
-- letras que o definitivo trocou em relacao ao provisorio: 66 (Direito Processual Penal), 68 (Direito Processual Penal), 82 (Lei de Execução Penal), 87 (Lei de Execução Penal)
-- questoes em que o banco discorda do definitivo: **0** de 100
+- letras que o definitivo trocou em relação ao provisório: 66 (Direito Processual Penal), 68 (Direito Processual Penal), 82 (Lei de Execução Penal), 87 (Lei de Execução Penal)
+- questões em que o banco discorda do definitivo: **0** de 100
 - sem gabarito no banco (e sem ser anulada): nenhuma
 
-## 2016 · Agente de Segurança Socioeducativo (AS) — REFORCO (outro cargo; nunca somada as do alvo)
+## 2016 · Agente de Segurança Socioeducativo (AS) — REFORÇO (outro cargo; nunca somada as do alvo)
 
-Caderno: <https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf> — 70 questoes no banco.
+Caderno: <https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf> — 70 questões no banco.
 
-### Contagem por materia
+### Contagem por matéria
 
-Quadro lido de `2016_SJC_Edital_01.pdf`. A linha do edital e a do caderno se encontram pelo NOME; as colunas de posicao dizem onde cada materia esta em cada um.
+Quadro lido de `2016_SJC_Edital_01.pdf`. A linha do edital e a do caderno se encontram pelo NOME; as colunas de posição dizem onde cada matéria está em cada um.
 
-| Posicao edital / caderno | Edital | Questoes | Banco (caderno) | Questoes | Bate? |
+| Posição edital / caderno | Edital | Questões | Banco (caderno) | Questões | Bate? |
 |---|---|---|---|---|---|
 | 1 / 1 | Língua Portuguesa | 10 | Língua Portuguesa | 10 | sim |
 | 2 / 2 | Noções de Informática | 10 | Noções de Informática | 10 | sim |
@@ -137,7 +137,7 @@ Quadro lido de `2016_SJC_Edital_01.pdf`. A linha do edital e a do caderno se enc
 
 ### Gabarito definitivo e anuladas
 
-Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o que vale):
+Definitivos deste caderno no acervo, do mais velho ao mais novo (o último é o que vale):
 
 - `2016_SECJUSTICA_Gabarito_Definitivo.pdf (2016-09-23)`
 - `gabarito_definitivo_ar.pdf (2016-10-03)`
@@ -145,10 +145,10 @@ Definitivos deste caderno no acervo, do mais velho ao mais novo (o ultimo e o qu
 
 - anuladas no definitivo que vale: 26 (Direitos Humanos), 29 (Direitos Humanos)
 - anuladas marcadas no banco: 26 (Direitos Humanos), 29 (Direitos Humanos)
-- letras que o definitivo trocou em relacao ao provisorio: 66 (Lei do Sinase)
-- questoes em que o banco discorda do definitivo: **0** de 70
+- letras que o definitivo trocou em relação ao provisório: 66 (Lei do Sinase)
+- questões em que o banco discorda do definitivo: **0** de 70
 - sem gabarito no banco (e sem ser anulada): nenhuma
 
-## Questoes com lei posterior
+## Questões com lei posterior
 
-Pendente: a lista de temas afetados por lei posterior (`config/leis.yml`) ainda nao foi conferida. Quando for, esta secao passa a listar as questoes que ganham o aviso.
+Pendente: a lista de temas afetados por lei posterior (`config/leis.yml`) ainda não foi conferida. Quando for, esta seção passa a listar as questões que ganham o aviso.

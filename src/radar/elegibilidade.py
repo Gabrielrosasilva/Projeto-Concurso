@@ -132,22 +132,27 @@ def ler(edital: str) -> Exigencias:
     return achado
 
 
+#: O nivel pelo nome de gente. A chave ("medio") e a do dado e do
+#: config/perfil.yml; o nome ("médio") e so o texto que chega a tela.
+NOME_DO_NIVEL = {SUPERIOR: "superior", MEDIO: "médio", FUNDAMENTAL: "fundamental"}
+
+
 def resumir(exigencias: Exigencias) -> str:
     """Uma linha em portugues, para a tela e para o log."""
     if not exigencias.legivel:
-        return "Edital ilegivel: provavelmente digitalizado como imagem."
+        return "Edital ilegível: provavelmente digitalizado como imagem."
 
     partes = []
     if exigencias.niveis:
-        nomes = {SUPERIOR: "superior", MEDIO: "medio", FUNDAMENTAL: "fundamental"}
-        partes.append("vagas de nivel " + ", ".join(nomes[n] for n in exigencias.niveis))
+        partes.append("vagas de nível " + ", ".join(
+            NOME_DO_NIVEL[n] for n in exigencias.niveis))
     if exigencias.idade_maxima:
-        partes.append(f"idade maxima {exigencias.idade_maxima}")
+        partes.append(f"idade máxima {exigencias.idade_maxima}")
     if exigencias.cnh:
         partes.append("exige CNH" + ("" if exigencias.cnh == "sim"
                                      else f" categoria {exigencias.cnh}"))
     if exigencias.taf:
-        partes.append("tem teste fisico")
+        partes.append("tem teste físico")
 
     if not partes:
         return "Nada identificado no edital."

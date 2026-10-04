@@ -1,0 +1,56 @@
+[
+  {
+    "correta": "c",
+    "criado_em": "2026-10-04T17:15:01.597948+00:00",
+    "explicacao": "Discriminado é especificado, detalhado item por item, e vultosos é de grande vulto - os dois bem empregados em (c). Na (a), tempo decorrido pede Há cerca de; na (b), finalidade é a fim de (afim é o que tem afinidade); na (d), o certo é infestam e despercebidos (desapercebido é desprevenido); na (e), rodas abaixadas são arriadas (arrear é pôr arreios).",
+    "fonte": "parônimos e locuções (Vocabulário Ortográfico da Língua Portuguesa, ABL)",
+    "impressao": "02877624608dbeb9d091c5018f5261ab",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-04T17:15:01.597948+00:00",
+    "explicacao": "Iminente é o que está prestes a acontecer (a demolição); eminente é o elevado, ilustre. Privilégio se escreve com i, e o verbo querer faz o futuro do subjuntivo com s (quiser, quisesse), nunca com z. Deferir é atender, conceder (a comissão não atendeu o pedido); diferir é adiar ou ser diferente. Vultosa é de grande vulto, volumosa; vultuosa é inchada, congestionada (termo médico) - a armadilha mais tentadora da questão.",
+    "fonte": "parônimos e ortografia oficial (Vocabulário Ortográfico da Língua Portuguesa, ABL)",
+    "impressao": "561f6cf9c3907e723489f419f852968e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-04T17:15:01.597948+00:00",
+    "explicacao": "Perigo iminente é o que está prestes a acontecer; eminente é o elevado, ilustre - e é a troca mais tentadora. Mandato é a delegação de poderes para alguém agir em nome de outro (como a autorização para movimentar as contas); mandado é uma ordem, sobretudo judicial (mandado de prisão). Deferiu é atendeu, concedeu a solicitação; diferiu seria adiou.",
+    "fonte": "parônimos (Vocabulário Ortográfico da Língua Portuguesa, ABL)",
+    "impressao": "65ce2bd1d2cbcc8d74e79f25b8095932",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-04T17:15:01.597948+00:00",
+    "explicacao": "Na frase 1, sujeito ligado por ou com ideia de exclusão (só um ganha) leva o verbo ao singular. Na frase 4, fazer indicando tempo decorrido é impessoal e fica no singular (Faz dez minutos). Na frase 3, o verbo ser concorda com o numeral: Foram sete quilômetros. A frase 2 é o ponto delicado: com porcentagem, a banca exigiu a concordância com o numeral (1% votou), embora parte dos gramáticos aceite também o plural com o especificador (dos eleitores) - vale saber que a FEPESE cobrou assim.",
+    "fonte": "concordância verbal: sujeito ligado por ou, verbo fazer impessoal, verbo ser e porcentagem (gramática normativa)",
+    "impressao": "b2a32ca7ef623fd700bbf3d260bb84da",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-04T17:15:01.597948+00:00",
+    "explicacao": "Na frase 1, também chamada de cidade luz é um aposto explicativo e vai entre vírgulas (a questão julga só a vírgula, não o fato de a cidade luz ser Paris). Na frase 2, a vírgula separa o adjunto adverbial anteposto (Em 2028) e o termo explicativo nos Estados Unidos. Na frase 3, a vírgula separa da Olimpíada do seu adjunto de 2032, o que a norma não admite, e na Austrália, explicativo, deveria vir entre vírgulas. Por isso só 1 e 2 estão corretas.",
+    "fonte": "emprego da vírgula: aposto, adjunto adverbial deslocado e termos que não se separam (gramática normativa)",
+    "impressao": "bc17bc17db4ae73911045ec6caa29b4f",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-04T17:15:01.597948+00:00",
+    "explicacao": "Em (e), consigo é reflexivo e se refere ao próprio sujeito (os voluntários), e ajudá-los usa o oblíquo -los depois do infinitivo, como manda a norma. A (b) e a (d) erram pela falta de uniformidade de tratamento: misturam você (3ª pessoa) com te/teu (2ª). A (c) mistura o tu (deves, concentra, joga) com o se de 3ª pessoa: seria concentra-te. A (a) erra duas vezes: informar alguém de algo pede informe-o de que, e com nós vira conosco quando não há reforço (como nós dois, nós mesmos).",
+    "fonte": "uniformidade de tratamento e emprego dos pronomes oblíquos (gramática normativa)",
+    "impressao": "f8982d6f04e1efea305b3dde354b2014",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  }
+]

@@ -610,4 +610,23 @@ def test_sem_telegram_configurado_o_comando_explica(banco_temporario,
     resultado = _runner().invoke(app, ["avisar"])
 
     assert resultado.exit_code == 0
-    assert "Telegram nao configurado" in resultado.output
+    assert "Telegram não configurado" in resultado.output
+
+
+def test_a_mensagem_sai_com_acento_e_com_a_frase_da_tela(banco_temporario):
+    """O que chega no celular e texto de gente: o anel pelo nome ("núcleo"),
+    e o evento pela frase da linha do tempo do site, e nao pela chave gravada
+    ("Situacao: a -> b")."""
+    from radar.models import Evento
+
+    assert "núcleo" in avisos.formatar(_concurso())
+
+    concurso = _concurso(inscricoes_ate=agora() + timedelta(days=5))
+    evento = Evento(concurso_url=concurso.url, tipo="inscricoes_abertas",
+                    descricao="Situacao: edital_publicado -> inscricoes_abertas")
+    texto = avisos.formatar_evento(evento, concurso)
+
+    assert "Inscrições abertas" in texto
+    assert "As inscrições abriram" in texto
+    assert "Situacao:" not in texto
+    assert "Inscrição até" in texto

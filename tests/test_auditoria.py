@@ -157,15 +157,15 @@ def _prova(**campos):
 def test_relatorio_diz_onde_nao_bate():
     provas = [_prova(divergencias=[(33, "c", "anulada")])]
     texto = auditoria.relatorio(provas)
-    assert "questao 33: banco diz c, definitivo diz anulada" in texto
+    assert "questão 33: banco diz c, definitivo diz anulada" in texto
 
 
 def test_reforco_nunca_entra_na_soma_do_alvo():
     provas = [_prova(), _prova(ano=2016, cargo="Agente Socioeducativo",
                                 reforco=True, questoes=70)]
     texto = auditoria.relatorio(provas)
-    assert "Provas do alvo: 1, com 98 questoes validas" in texto
-    assert "REFORCO" in texto
+    assert "Provas do alvo: 1, com 98 questões válidas" in texto
+    assert "REFORÇO" in texto
 
 
 # --- a extracao (Etapa 3A) ------------------------------------------------------
@@ -189,12 +189,12 @@ def test_cada_verificacao_pega_o_defeito_feito_para_ela(caso):
 
 def test_o_relatorio_lista_suspeitas_sem_gabarito_e_classificacao():
     prova = _prova(ano=2019, cargo="Agente Penitenciário", reforco=False, questoes=3,
-                   suspeitas=[(99, "cabecalho ou rodape dentro da alternativa e")],
+                   suspeitas=[(99, "cabeçalho ou rodapé dentro da alternativa e")],
                    sem_gabarito=[7], classificacao={"completa": 1, "pendente": 2},
                    conferidas=1, materia_da_questao={99: "Sociologia Aplicada", 7: "LEP"})
     texto = auditoria.relatorio([prova])
 
-    assert "## Erros de extracao (suspeitas para conferir)" in texto
-    assert "questao 99 (Sociologia Aplicada): cabecalho ou rodape dentro da alternativa e" in texto
+    assert "## Erros de extração (suspeitas para conferir)" in texto
+    assert "questão 99 (Sociologia Aplicada): cabeçalho ou rodapé dentro da alternativa e" in texto
     assert "| 2019 Agente Penitenciário | 3 | 1 | 0 | 2 | 1 |" in texto
     assert "sem gabarito no banco (e sem ser anulada): 7 (LEP)" in texto

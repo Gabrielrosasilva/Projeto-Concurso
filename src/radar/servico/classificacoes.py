@@ -229,6 +229,16 @@ def aplicar_associados(item: dict, pedido: dict, procedencia: str) -> int:
             raise PropostaRecusada(f"{codigo}: {no!r} sem o trecho em que aparece")
         aceitos.setdefault(no, trecho)
 
+    # O associado que saiu da resposta sai do banco - menos o que eu ja
+    # conferi, que e meu. Sem isto, refazer o pedido so acrescentava.
+    with sessao() as s:
+        for velho in s.scalars(
+                select(Classificacao).where(Classificacao.chave == chave)
+                .where(Classificacao.principal.is_(False))
+                .where(Classificacao.conferida_em.is_(None))):
+            if velho.conteudo not in aceitos:
+                s.delete(velho)
+
     gravados = 0
     for no, trecho in aceitos.items():
         if no in conferidas:
@@ -236,6 +246,31 @@ def aplicar_associados(item: dict, pedido: dict, procedencia: str) -> int:
         classificar(chave, no, procedencia, principal=False, trecho=trecho)
         gravados += 1
     return gravados
+
+
+def _associado(s, chave: str, conteudo: str) -> Classificacao:
+    linha = s.scalar(select(Classificacao).where(Classificacao.chave == chave)
+                     .where(Classificacao.conteudo == conteudo)
+                     .where(Classificacao.principal.is_(False)))
+    if linha is None:
+        raise ClassificacaoInvalida("Essa questão não tem esse conceito associado.")
+    return linha
+
+
+def conferir_associado(chave: str, conteudo: str) -> None:
+    """Confirma um conceito associado: ele continua fora da contagem, e uma
+    importacao nova nao o tira nem o sobrescreve."""
+    criar_tabelas()
+    with sessao() as s:
+        _associado(s, chave, conteudo).conferida_em = agora()
+
+
+def tirar_associado(chave: str, conteudo: str) -> None:
+    """Apaga um conceito associado que a questao nao cobra. A principal nao
+    muda."""
+    criar_tabelas()
+    with sessao() as s:
+        s.delete(_associado(s, chave, conteudo))
 
 
 def _mesmo_ramo(um: str, outro: str) -> bool:
@@ -582,6 +617,12 @@ class ItemDeConferencia:
     outros_cadernos: int = 0
     #: Proposta do catalogo que caiu na amostra da materia.
     na_amostra: bool = False
+    #: Os conceitos associados (classificacoes NAO principais), com o trecho.
+    associados: list = field(default_factory=list)
+
+    @property
+    def associados_abertos(self) -> int:
+        return sum(1 for a in self.associados if a.conferida_em is None)
 
     @property
     def conferida(self) -> bool:
@@ -611,11 +652,15 @@ class Conferencia:
     #: A amostra de cada materia (so no complementar) e o tamanho dela.
     amostras: list[AmostraDoCatalogo] = field(default_factory=list)
     tamanho_da_amostra: int = 0
+    #: Os conceitos associados do recorte inteiro, e quantos ja conferi.
+    associados: int = 0
+    associados_conferidos: int = 0
 
 
 def conferencia(materia: str | None = None, so_abertas: bool = False,
                 com_anuladas: bool = False, evidencia_escolhida: str = "alvo",
-                so_amostra: bool = False) -> Conferencia:
+                so_amostra: bool = False,
+                so_associados_abertos: bool = False) -> Conferencia:
     """As questoes com a proposta ao lado, para eu conferir uma a uma.
 
     `materia` filtra pelo no da materia (o do caderno ou o da classificacao);
@@ -627,7 +672,8 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
 
     `evidencia_escolhida` e o recorte: o alvo (o padrao) ou o complementar
     aceito, nunca os dois juntos (regra inviolavel 1). `so_amostra` so vale no
-    complementar: a amostra das propostas do catalogo.
+    complementar: a amostra das propostas do catalogo. `so_associados_abertos`
+    deixa so as questoes do alvo com conceito associado por conferir.
     """
     from radar import amostra as regua
     from radar.servico import evidencia
@@ -641,6 +687,10 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
         caminhos = list(s.scalars(select(Conteudo.caminho)))
         principais = {c.chave: c for c in s.scalars(
             select(Classificacao).where(Classificacao.principal.is_(True)))}
+        associados: dict[str, list] = {}
+        for c in s.scalars(select(Classificacao).where(Classificacao.principal.is_(False))
+                           .order_by(Classificacao.conteudo)):
+            associados.setdefault(c.chave, []).append(c)
         questoes = list(s.scalars(
             select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)
             .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero)))
@@ -660,9 +710,14 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
         resultado.validas += not q.anulada
         resultado.conferidas += conferida
         resultado.conferidas_validas += conferida and not q.anulada
+        dela = associados.get(chave_de(q), [])
+        resultado.associados += len(dela)
+        resultado.associados_conferidos += sum(1 for a in dela if a.conferida_em)
         if materia and materia not in (do_caderno, da_classificacao):
             continue
         if so_abertas and conferida:
+            continue
+        if so_associados_abertos and not any(a.conferida_em is None for a in dela):
             continue
         if q.anulada and not com_anuladas:
             continue
@@ -675,7 +730,8 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
             codigo=f"{q.ano}-q{q.numero}", chave=chave_de(q),
             materia_do_caderno=q.materia, enunciado=q.enunciado,
             alternativas=q.alternativas or {}, gabarito=q.resposta,
-            anulada=bool(q.anulada), classificacao=c, opcoes=opcoes))
+            anulada=bool(q.anulada), classificacao=c, opcoes=opcoes,
+            associados=dela))
     resultado.materias = sorted(materias)
     return resultado
 

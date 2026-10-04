@@ -1,0 +1,1084 @@
+[
+  {
+    "assunto": "Organização administrativa",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 4º e 5º, I, do Decreto-Lei 200/1967",
+    "impressao": "529e076df80eb07d0322169325533c52",
+    "materia": "Administração Pública",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Trocar desconcentração por descentralização quando o enunciado diz 'dentro de uma mesma entidade ou da mesma pessoa jurídica'.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q48",
+        "impressao": "a062a81819972457d516c2430598203e",
+        "numero": 48,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q50",
+        "impressao": "5293efbe93fe9e6c82b1b2133ba03a86",
+        "numero": 50,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Desconcentração fica DENTRO da mesma pessoa jurídica (distribui para órgãos, com hierarquia); descentralização passa a atividade para OUTRA pessoa, as entidades da administração indireta. Autarquia é o serviço autônomo criado por lei, com personalidade jurídica, patrimônio e receita próprios, para atividade típica da Administração."
+  },
+  {
+    "assunto": "Princípios e improbidade na Constituição",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 37, caput e § 4º, da Constituição Federal",
+    "impressao": "ee6ebf1813d83d61d186f7e057cdff71",
+    "materia": "Administração Pública",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Incluir 'cassação' dos direitos políticos ou 'perda' dos bens: a Constituição diz suspensão e indisponibilidade.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q47",
+        "impressao": "9aae9c0b39b82b827ba8329239f44e36",
+        "numero": 47,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Os princípios expressos do art. 37 são LIMPE: legalidade, impessoalidade, moralidade, publicidade e eficiência. Improbidade gera, na forma e gradação da lei: suspensão dos direitos políticos, perda da função pública, indisponibilidade dos bens e ressarcimento ao erário, sem prejuízo da ação penal."
+  },
+  {
+    "assunto": "Improbidade administrativa (Lei 8.429/1992)",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 17-B e 23 da Lei 8.429/1992, com a redação da Lei 14.230/2021",
+    "impressao": "b082381b398ce4ced0101556cc2f2a6e",
+    "materia": "Administração Pública",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Responder pela lei antiga: vedação de acordo e prazo contado do fim do mandato.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q46",
+        "impressao": "1d85b31308bb03c61a8f8c2e6d75f1d2",
+        "numero": 46,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A Lei 14.230/2021 mudou o que a prova de 2019 cobrou: hoje cabe acordo de não persecução civil (a vedação de acordo foi revogada) e a ação prescreve em 8 anos contados do fato. A afirmativa 1 da questão de 2019 (é vedada a transação) ficou desatualizada."
+  },
+  {
+    "assunto": "Administração direta e indireta",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 4º e 5º do Decreto-Lei 200/1967",
+    "impressao": "cb8e028a6990d98f114e3ea6ede59782",
+    "materia": "Direito Administrativo",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Pôr Secretarias de Estado na administração indireta.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q41",
+        "impressao": "a6ce3ff3240d1825591c181803832b1f",
+        "numero": 41,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q43",
+        "impressao": "1aa55d03ac7ca552f0e5d16901f9572b",
+        "numero": 43,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A indireta tem quatro entidades com personalidade própria: autarquias, empresas públicas, sociedades de economia mista e fundações públicas. Empresa pública e sociedade de economia mista são de direito PRIVADO. Secretaria de Estado é órgão da direta: atua por desconcentração, não por descentralização."
+  },
+  {
+    "assunto": "Responsabilidade civil do Estado",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 37, § 6º, da Constituição Federal",
+    "impressao": "c99c336c56af9673851d7b5356dcd224",
+    "materia": "Direito Administrativo",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Dizer que o Estado 'sempre' responde, ou que divide o prejuízo meio a meio com o servidor.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q42",
+        "impressao": "b8d70eed1928eabe7eae92b193b0d023",
+        "numero": 42,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q46",
+        "impressao": "6d577b256534f9d2deeaf92d13de645c",
+        "numero": 46,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "O Estado responde OBJETIVAMENTE (sem precisar provar culpa) pelos danos que seus agentes causarem a terceiros, e cobra do agente em ação de regresso se houve dolo ou culpa. A culpa exclusiva da vítima exclui a responsabilidade."
+  },
+  {
+    "assunto": "Legalidade e poderes administrativos",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 37, caput, da Constituição Federal",
+    "impressao": "e5b03b65235ac9af151853846b5558e6",
+    "materia": "Direito Administrativo",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Trocar os poderes: punir o servidor é poder disciplinar, e o escalonamento interno é o poder hierárquico.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q44",
+        "impressao": "d2fc49bcda90b375f20dd1e090d48d13",
+        "numero": 44,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q45",
+        "impressao": "fe60ab580086a53acf4d5e5af0dba4a3",
+        "numero": 45,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Pela legalidade, o administrador só faz o que a lei permite ou autoriza (o particular faz tudo que a lei não proíbe). No poder vinculado a lei fixa a conduta; no discricionário há escolha por conveniência e oportunidade, dentro da lei."
+  },
+  {
+    "assunto": "Inviolabilidade do domicílio",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 5º, XI, da Constituição Federal",
+    "impressao": "a0fb630eb0d89a758f457888af45eecf",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Ordem judicial 'de dia ou de noite'; ou a polícia entrando 'a qualquer momento' sem flagrante.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q31",
+        "impressao": "2f0859a50a0d288efb1b4a0854aad7ff",
+        "numero": 31,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Sem consentimento do morador, só se entra na casa em flagrante delito, desastre ou para prestar socorro (a qualquer hora), ou por ordem judicial (só durante o dia)."
+  },
+  {
+    "assunto": "Crimes inafiançáveis e imprescritíveis",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 5º, XLII, XLIII e XLIV, da Constituição Federal",
+    "impressao": "52cf014d632c74ecbf8a2da2cd3d92b4",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Trocar as listas: dar 'graça ou anistia' aos grupos armados ou 'imprescritível' à tortura.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q32",
+        "impressao": "f807269a1c6ccf7f12e01fc95c3b59cf",
+        "numero": 32,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Imprescritíveis (e inafiançáveis) só dois: racismo e ação de grupos armados contra a ordem constitucional e o Estado democrático. Tortura, tráfico, terrorismo e hediondos são inafiançáveis e insuscetíveis de graça ou anistia, mas prescrevem."
+  },
+  {
+    "assunto": "Nacionalidade e direitos políticos",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 12, § 3º, e 14, §§ 1º a 3º e 5º, da Constituição Federal",
+    "impressao": "741c47cb58dd4457b5ee1519ba0ee473",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Ministro de Tribunal Superior (só o do STF é privativo de nato) e 21 anos para Vereador.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q34",
+        "impressao": "c6a2689004d7a9eddf66215b0d469dd4",
+        "numero": 34,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q38",
+        "impressao": "c0af9616d8039f0c3ecba70ec6d1d9c7",
+        "numero": 38,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q43",
+        "impressao": "d9d759565313c682164498c83c06774a",
+        "numero": 43,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Brasileiro nato é exigido para Presidente e Vice, Presidentes da Câmara e do Senado, Ministro do STF, carreira diplomática, oficial das Forças Armadas e Ministro de Estado da Defesa. Voto obrigatório para maiores de 18; facultativo para analfabetos, maiores de 70 e entre 16 e 18; estrangeiros e conscritos não se alistam. Idade mínima: 35 Presidente/Senador, 30 Governador, 21 Deputado/Prefeito, 18 Vereador; reeleição para um único período subsequente."
+  },
+  {
+    "assunto": "Lei penal no tempo",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 2º e 3º do Código Penal",
+    "impressao": "eb7f0f625860ac2705abb5d7662bf3ad",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Manter os efeitos penais da condenação, ou dizer que a sentença transitada não pode ser alcançada.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q53",
+        "impressao": "864d1b19db3f5323e6e64e8d1ce318f3",
+        "numero": 53,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q51",
+        "impressao": "d2e234e1c835df3d4ec7c1284c7d9901",
+        "numero": 51,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Abolitio criminis (a lei nova deixa de considerar crime) apaga a execução e os efeitos PENAIS da condenação, mesmo depois do trânsito em julgado; a lei que de qualquer modo favorece também retroage. A lei excepcional ou temporária continua valendo para o fato praticado durante a sua vigência."
+  },
+  {
+    "assunto": "Pena cumprida no estrangeiro e extraterritorialidade",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 7º, I, 'c', e 8º do Código Penal",
+    "impressao": "0eeb2274ad36f44f8663d86836448a0c",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Inverter atenua e computa, ou dizer que a soberania impede computar a pena cumprida no estrangeiro.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q50",
+        "impressao": "0fedf13ea9ca2c592e8832f3473a63d1",
+        "numero": 50,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q51",
+        "impressao": "d2485a56f6d805e2f5cad2674e70501b",
+        "numero": 51,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q51",
+        "impressao": "d2e234e1c835df3d4ec7c1284c7d9901",
+        "numero": 51,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Pena cumprida lá fora pelo mesmo crime: ATENUA a daqui quando diversas, é COMPUTADA quando idênticas (diversas atenua, idênticas computa). O crime contra a administração pública por quem está a seu serviço fica sujeito à lei brasileira mesmo cometido no estrangeiro."
+  },
+  {
+    "assunto": "Crimes contra a administração pública",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 317, 329 e 357 do Código Penal",
+    "impressao": "79772f4404a7232a27dd2ef5d45251e9",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Pôr 'servidor público' genérico ou 'advogado' na lista da exploração de prestígio; e confundir resistência (com violência ou ameaça) com desobediência.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q52",
+        "impressao": "068ba0c652a745bc007263e162e724ad",
+        "numero": 52,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q54",
+        "impressao": "ed3425edb4aefe63cba8ee0cd903cedc",
+        "numero": 54,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q54",
+        "impressao": "5800bb92da30ea0bd7b6afcf951476f0",
+        "numero": 54,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Resistência é opor-se a ato legal com violência ou ameaça ao funcionário; corrupção passiva é o funcionário solicitar, receber ou aceitar promessa de vantagem em razão da função. Exploração de prestígio é pedir dinheiro a pretexto de influir em juiz, jurado, MP, funcionário de justiça, perito, tradutor, intérprete ou testemunha."
+  },
+  {
+    "assunto": "Inquérito policial",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 3º-B, § 2º, 5º, 10 e 17 do Código de Processo Penal",
+    "impressao": "80a7a6820ae6e046e6a5c8e5a5601923",
+    "materia": "Direito Processo Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Delegado arquivando com autorização do MP ou do Chefe de Polícia; e inverter os prazos de preso e solto.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q55",
+        "impressao": "d9062123a9472f7e7bff17a1e9745a85",
+        "numero": 55,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q56",
+        "impressao": "447647688f4c99ff690cfd3ffb5fcb18",
+        "numero": 56,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q57",
+        "impressao": "80efb21081fc5418ae25e5a36bd9c4f9",
+        "numero": 57,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Na ação pública o inquérito começa de ofício, por requisição do juiz ou do MP, ou a requerimento do ofendido. Prazo: 10 dias com o indiciado preso, 30 solto (só o do solto se prorroga pelo art. 10; desde 2019, o juiz das garantias pode prorrogar o do preso uma vez, por até 15 dias). O delegado NUNCA arquiva o inquérito."
+  },
+  {
+    "assunto": "Morte do acusado e perícia",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 62 e 159 do Código de Processo Penal",
+    "impressao": "999549facc5b1c188b4ad545967a52b5",
+    "materia": "Direito Processo Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Arquivar o processo ou seguir contra os sucessores do morto.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q58",
+        "impressao": "c03e9c030dac0f409855fb753c993618",
+        "numero": 58,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q59",
+        "impressao": "75abbca3311099372df252cae4ddf993",
+        "numero": 59,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Morte do acusado: o juiz só declara extinta a punibilidade à vista da certidão de óbito e depois de ouvir o MP. Perícia: feita por perito oficial portador de diploma de curso superior; sem perito oficial, por 2 pessoas idôneas com diploma superior."
+  },
+  {
+    "assunto": "Comunicação da prisão e nota de culpa",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 306, caput e §§ 1º e 2º, do Código de Processo Penal",
+    "impressao": "18dca95d7556b8b34fd1039d03ec152c",
+    "materia": "Direito Processual Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "A nota de culpa leva a assinatura da AUTORIDADE (o preso assina o recibo); e o Departamento Prisional não está na lista de comunicação.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q68",
+        "impressao": "30f9b5961981c904ab4b8fd61729c25c",
+        "numero": 68,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q70",
+        "impressao": "2943ab5e5a383e0938f34e3c5bc06578",
+        "numero": 70,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A prisão e o local são comunicados imediatamente ao juiz, ao MP e à família do preso (ou pessoa que ele indicar). Em 24 horas o auto vai ao juiz (e à Defensoria, se não houver advogado) e o preso recebe, mediante recibo, a nota de culpa assinada pela autoridade, com o motivo da prisão, o nome do condutor e o das testemunhas."
+  },
+  {
+    "assunto": "Ação penal nas contravenções",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 129, I, da Constituição Federal e art. 26 do Código de Processo Penal",
+    "impressao": "7cf460389169a635ef4da18ae42382be",
+    "materia": "Direito Processual Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Aplicar o art. 26 do CPP pela letra, como se ainda valesse.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q66",
+        "impressao": "245b21a475eb54bdab32f96c09d1cbf3",
+        "numero": 66,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A ação penal pública é privativa do Ministério Público, também nas contravenções. O art. 26 do CPP (ação iniciada por auto de flagrante ou portaria do juiz ou do delegado) não foi recepcionado pela Constituição: o delegado não dá início à ação penal."
+  },
+  {
+    "assunto": "Tratados de direitos humanos na Constituição",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 5º, §§ 1º, 2º e 3º, da Constituição Federal",
+    "impressao": "1233f088c32738b75ed0cc650d2cab92",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Três turnos, dois quintos, aprovação só no Senado, ou incorporação pela simples assinatura do Presidente.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q28",
+        "impressao": "215c3c1ebb1ae806f9d616ed754e3b5b",
+        "numero": 28,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q27",
+        "impressao": "fc78140d4664c443cf561e047b67971d",
+        "numero": 27,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q29",
+        "impressao": "a9f001e9bfee1a4b286755a7513c94ad",
+        "numero": 29,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Tratado de direitos humanos aprovado em cada Casa do Congresso, em dois turnos, por três quintos dos votos equivale a emenda constitucional; sem esse rito, fica abaixo da Constituição. As normas de direitos fundamentais têm aplicação imediata, e o rol da Constituição não exclui os direitos dos tratados de que o Brasil seja parte."
+  },
+  {
+    "assunto": "Algemas e audiência de custódia",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "Súmula Vinculante 11 do STF e art. 310 do Código de Processo Penal",
+    "impressao": "46fb20c4ebebddfc5e29eb17dd931a3b",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Proibir as algemas em todas as situações, ou dispensar a justificativa por escrito.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q31",
+        "impressao": "763c843f06638e70a18ba4b6be666061",
+        "numero": 31,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q36",
+        "impressao": "525f56c7f3f3a030e82ab88cd49d6ff1",
+        "numero": 36,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Algema só é lícita em caso de resistência, fundado receio de fuga ou perigo à integridade física própria ou alheia, por parte do preso ou de terceiros, justificada por escrito, sob pena de responsabilidade do agente e nulidade da prisão ou do ato. O preso é levado sem demora ao juiz (Pacto de San José, art. 7.5): é a audiência de custódia, em até 24 horas da prisão."
+  },
+  {
+    "assunto": "O preso nos direitos fundamentais",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 5º, LXIII e LXXV, e 34, VII, 'b', da Constituição Federal",
+    "impressao": "cdb19d0e43d6f9c530a85ef46db62606",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Confundir a intervenção federal com estado de defesa ou de sítio.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q35",
+        "impressao": "babd1501f58e74d157b9705589d5f831",
+        "numero": 35,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q39",
+        "impressao": "ce346cd3b9bf22f36fff8d4eb7d95cad",
+        "numero": 39,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q40",
+        "impressao": "51aa2e4c3349a3f13476a88a2ca0729b",
+        "numero": 40,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "O direito de permanecer calado é o de não se autoincriminar. O Estado indeniza o condenado por erro judiciário e quem ficar preso além do tempo da sentença. Desrespeitar os direitos da pessoa humana é um dos princípios que autorizam a intervenção da União nos Estados."
+  },
+  {
+    "assunto": "Lei Maria da Penha",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 7º, 18, 22, § 3º, e 23, IV, da Lei 11.340/2006",
+    "impressao": "610aaf70a61ea92fea65157d774eb5e8",
+    "materia": "Legislação Especial",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Rótulo trocado (descrição da patrimonial chamada de física), forma inventada ('psicofísica') e prazo de 5 dias.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q56",
+        "impressao": "0d3face1a4595b4028ef8b117a428804",
+        "numero": 56,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q62",
+        "impressao": "f7339e2a7496ab04d435f9f6198ed055",
+        "numero": 62,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "As formas de violência têm definição própria: física ofende o corpo; patrimonial é reter, subtrair ou destruir objetos, documentos e bens; moral é calúnia, difamação ou injúria (e desde 2026 há também a vicária). O juiz decide as medidas protetivas em 48 horas, pode requisitar a força policial a qualquer momento e pode determinar a separação de corpos."
+  },
+  {
+    "assunto": "Estatuto do Desarmamento",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 2º, 4º, 12 e 14 da Lei 10.826/2003",
+    "impressao": "a8c791e781ba5a2839885dd8da1325e5",
+    "materia": "Legislação Especial",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Acrescentar 'e no exterior' ao cadastro do Sinarm, ou dispensar a prova de ocupação lícita e residência.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q57",
+        "impressao": "54c2e805e1c01885545a23c8696a7684",
+        "numero": 57,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q58",
+        "impressao": "336aa603390362aa7f3b4f7ee5277162",
+        "numero": 58,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q64",
+        "impressao": "17ad13d2b62a083afbcaa9f38122c04f",
+        "numero": 64,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Posse (em casa ou no trabalho de que é titular) de arma de uso permitido: detenção de 1 a 3 anos; porte (fora dali): reclusão de 2 a 4 anos. O Sinarm cadastra armas produzidas, importadas e vendidas NO PAÍS, as apreensões e os armeiros (e lhes concede licença). Para comprar, exige-se ocupação lícita e residência certa."
+  },
+  {
+    "assunto": "Lei de Tortura",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 1º, §§ 3º, 4º, 6º e 7º, da Lei 9.455/1997",
+    "impressao": "154d1132ef0cc3c2993a433c9a42556e",
+    "materia": "Legislação Especial",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Pena da tortura com morte de 8 a 12 anos.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q59",
+        "impressao": "d5a4567feabc35b955fe9832f4e8146b",
+        "numero": 59,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Tortura com lesão grave ou gravíssima: reclusão de 4 a 10 anos; com morte: 8 a 16. Aumenta de 1/6 a 1/3 se o autor é agente público, se a vítima é criança, gestante, pessoa com deficiência, adolescente ou maior de 60, ou se há sequestro. É inafiançável e insuscetível de graça ou anistia, e o regime inicial é o fechado (salvo o omisso do § 2º)."
+  },
+  {
+    "assunto": "Trabalho do preso no Regimento Interno",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 24, § 3º, 52 e 53, parágrafo único, da LC estadual 529/2011",
+    "impressao": "56758f5715a32b2b8622f10636afc631",
+    "materia": "Legislação Estadual",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Trabalho do preso com vínculo de CLT, e o piso de 2/3 ou do mínimo regional.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q64",
+        "impressao": "3db7d8f1105fb82e2ebf7b88bd18596a",
+        "numero": 64,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q65",
+        "impressao": "fd2da2843411eec8ba9e12e4786ea393",
+        "numero": 65,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q72",
+        "impressao": "871ff31c8a8a60d9f17cb450e85e6d10",
+        "numero": 72,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Para o condenado, o trabalho é obrigatório e remunerado, dentro ou fora do estabelecimento; para o preso provisório não é obrigatório e só pode ser no interior (logo, nada de trabalho externo). O piso hoje é 3/4 do salário mínimo NACIONAL (LC 809/2022): a alternativa 'salário-mínimo regional' da prova de 2013 ficou desatualizada."
+  },
+  {
+    "assunto": "Regimento Interno: classificação, ensino, saúde e disciplina",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 2º, 3º, 35, 48 e 109, III, da LC estadual 529/2011",
+    "impressao": "e22228c365452c9c000dd5cc070d2475",
+    "materia": "Legislação Estadual",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Ensino 'facultativo em todos os níveis', e preso provisório 'regido por regulamento próprio'.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q69",
+        "impressao": "ee8892e8e389688c66084e167072e998",
+        "numero": 69,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q73",
+        "impressao": "cc35a416478d61d2d70e84e26c0d6aca",
+        "numero": 73,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q74",
+        "impressao": "028947bd74e431dd6d6592396ddc5bef",
+        "numero": 74,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q80",
+        "impressao": "4b5caf57a5fe568ebed3dac69d2b8916",
+        "numero": 80,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A Comissão Técnica de Classificação propõe progressões, regressões e conversões. O Ensino Fundamental é obrigatório; ao ingressar, o preso faz exame de saúde obrigatório. A ordem e a disciplina são mantidas com firmeza, sem restrições além das necessárias, e a lei vale, no que couber, também para o preso provisório."
+  },
+  {
+    "assunto": "Carreira: o que mudou depois das provas",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 13, 31, 42, 45, VII, e 66, I, da LC estadual 774/2021",
+    "impressao": "4f81fbed1dcf7b935c2ace74949a3a06",
+    "materia": "Legislação Estadual",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Responder pela lei revogada: adicional de 10% em delegacia, gratificação por hora extra e progressão de 4 em 4 anos.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q61",
+        "impressao": "b5a234363c9996cb3ca35cd9325cb3c1",
+        "numero": 61,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q66",
+        "impressao": "fbee370f6d14954b3a18ec91c8d05d3b",
+        "numero": 66,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q71",
+        "impressao": "5dd5790769df249f2ff1f3f41b980e0f",
+        "numero": 71,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q75",
+        "impressao": "af77ee0fa837b7fd31f9c4eee3ad2788",
+        "numero": 75,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q79",
+        "impressao": "b6a3d337619b6b80a41e83cd62ce0bb4",
+        "numero": 79,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "As leis de carreira cobradas (LC 472/2009 e LC 675/2016) foram revogadas: hoje vale o Estatuto da Polícia Penal. O concurso tem prova objetiva, capacidade física, aptidão psicológica, exame toxicológico e investigação social; a remuneração é subsídio em parcela única (sem adicional de local de exercício nem hora extra); a progressão é a cada 3 anos; o porte de arma é em serviço e fora dele."
+  },
+  {
+    "assunto": "Remição",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "art. 126, caput, §§ 1º, 6º, 7º e 9º, da Lei 7.210/1984",
+    "impressao": "b2dcc7c598bae4d1be3b3d37dd851b02",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Incluir as penas restritivas de direitos, ou dar remição por trabalho no regime aberto.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q82",
+        "impressao": "e30d026c5a17eb3079fb7e564a11065f",
+        "numero": 82,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Por trabalho OU estudo, no fechado e no semiaberto: 1 dia de pena a cada 3 de trabalho, ou a cada 12 horas de estudo divididas em no mínimo 3 dias. No aberto e no livramento condicional, só por estudo. Vale na prisão cautelar e, desde 2026, também no regime domiciliar."
+  },
+  {
+    "assunto": "Deveres, direitos e egresso",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 26, 39 e 41 da Lei 7.210/1984",
+    "impressao": "67ad0f5fedf52879c9b8f7a0556c4f5f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Chamar de egresso o preso do regime aberto, ou tirar a indenização à vítima da lista de deveres.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q81",
+        "impressao": "42c41a2c6fd9b93a1e0e18ede43f2e9e",
+        "numero": 81,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q86",
+        "impressao": "97c396dc273e56728692e8dd2f1b914f",
+        "numero": 86,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q87",
+        "impressao": "1caa127a7bb47bdfaedb84899576d42f",
+        "numero": 87,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Deveres do condenado incluem submeter-se à sanção, conservar seus objetos, higiene e asseio da cela e indenizar a vítima e o Estado. Direitos do preso incluem trabalho remunerado, chamamento nominal, audiência especial com o diretor e representação e petição a qualquer autoridade. Egresso é só o liberado definitivo (por 1 ano da saída) e o condicional (no período de prova)."
+  },
+  {
+    "assunto": "Diretor, assistência religiosa e órgãos",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 24, § 2º, 64, IV, 75 e 119 da Lei 7.210/1984",
+    "impressao": "d52c1b90820bc664e281cf3ae1d09629",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Diploma superior 'em qualquer área', 'experiência em gestão pública' e 'mais de 35 anos' para diretor.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q83",
+        "impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+        "numero": 83,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q84",
+        "impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
+        "numero": 84,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q88",
+        "impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
+        "numero": 88,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q90",
+        "impressao": "dd187bad3bf4639a3f2c8dfd13831b00",
+        "numero": 90,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "O diretor precisa de diploma superior em Direito, Psicologia, Ciências Sociais, Pedagogia ou Serviços Sociais, experiência administrativa na área e idoneidade moral. Ninguém é obrigado a atividade religiosa. Estimular e promover a pesquisa criminológica é do CNPCP. Normas complementares do regime aberto vêm da legislação local."
+  },
+  {
+    "assunto": "Concordância verbal e voz passiva",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "concordância verbal e voz passiva sintética (gramática normativa)",
+    "impressao": "d84cdf66991284010ae51b184c39df8d",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Soltou-se os presos / Louve-se os esforços: verbo no singular com sujeito plural.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q1",
+        "impressao": "cc471337d14fdc2b8b894b98cb53124c",
+        "numero": 1,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q7",
+        "impressao": "d9e2f2bcddd9f98b0362165a36ed4fb3",
+        "numero": 7,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Verbo transitivo direto + se é voz passiva sintética: o verbo concorda com o sujeito paciente (Reformaram-se os presídios; Louvem-se os esforços). Fazer indicando tempo ou clima é impessoal e passa a impessoalidade ao auxiliar (Poderá fazer invernos). Os Estados Unidos têm (com artigo plural, verbo no plural)."
+  },
+  {
+    "assunto": "Acentuação gráfica",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "regras de acentuação do Acordo Ortográfico de 1990",
+    "impressao": "5a824b811ea443323d4a46e2a3cd51f2",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Ítens, rúbrica, urubús: acentos que não existem.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q10",
+        "impressao": "1ec4eb764df6762668aa006cd69c0ada",
+        "numero": 10,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q10",
+        "impressao": "bcf34856b9115db627216ac27ff64377",
+        "numero": 10,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Paroxítona terminada em ditongo crescente leva acento (convivência, espécies, presídio, carcerário). Paroxítona terminada em -us e -x leva (vírus, ônix); terminada em -ens não leva (itens). Oxítona terminada em -i e -u não leva (urubus), salvo no hiato (Piauí); ditongo aberto éi, ói em oxítona leva (anéis, anzóis). Rubrica é paroxítona, sem acento."
+  },
+  {
+    "assunto": "Pontuação",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "emprego da vírgula (gramática normativa)",
+    "impressao": "120fc7e172d25e5c086d3b159616124e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Uma só vírgula na intercalada ('que na visão deste Tribunal, é') e vírgula entre o verbo e o complemento.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q5",
+        "impressao": "b604977a08b47d7fc5919d395585fb94",
+        "numero": 5,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A vírgula marca a omissão de um verbo já dito (O chefe foi recebido pela autoridade e o servidor, pelos companheiros). Expressão intercalada fica entre DUAS vírgulas; antes de mas adversativo vai vírgula; e não se separa o verbo do seu complemento."
+  },
+  {
+    "assunto": "Atalhos do navegador",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "atalhos de teclado documentados do Firefox (suporte da Mozilla)",
+    "impressao": "ea45a51cfee77548539a4211953d153a",
+    "materia": "Noções de Informática",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Trocar Ctrl+N (janela) por Ctrl+T (aba).",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q15",
+        "impressao": "440c1fc86fbead0cd0510e572650bffd",
+        "numero": 15,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Ctrl+T abre uma aba nova, Ctrl+W fecha a aba atual, Ctrl+N abre uma janela nova e Ctrl+Shift+T reabre a última aba fechada - os mesmos no Firefox, no Chrome e no Edge."
+  },
+  {
+    "assunto": "Excel: exibição de números e AutoSoma",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "Página Inicial > grupo Número > Aumentar Casas Decimais (Microsoft Excel)",
+    "impressao": "de2535ad3559aacf57232718bd9843d4",
+    "materia": "Noções de Informática",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Formatar como texto ou 'número real': muda o tipo, não as casas exibidas.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q12",
+        "impressao": "929e01ec3d1acdd5cf2ebd96d2725b7e",
+        "numero": 12,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2013,
+        "codigo": "2013-q20",
+        "impressao": "a9cc19e89efcbca6ff5fdbe83caa4638",
+        "numero": 20,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "O Excel guarda o valor exato e só EXIBE arredondado: para ver 9,5% em vez de 10%, aumente as casas decimais (Página Inicial > Número). O botão Σ é a AutoSoma."
+  },
+  {
+    "assunto": "Word: marca d'água",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "Layout da Página > Marca D'Água (Microsoft Word 2010)",
+    "impressao": "734ffe7340bc20b0fe530eced0af2520",
+    "materia": "Noções de Informática",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Procurar a marca d'água na guia Exibição.",
+    "questoes": [
+      {
+        "ano": 2013,
+        "codigo": "2013-q13",
+        "impressao": "b70cdfcd69a120f098d69f26188310d7",
+        "numero": 13,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Marca d'água (texto como CONFIDENCIAL atravessando a página, semitransparente) fica em Layout da Página no Word 2010; do Word 2013 em diante, na guia Design."
+  },
+  {
+    "assunto": "Probabilidade",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "regra do produto e do evento complementar (probabilidade)",
+    "impressao": "5193d435aa1a8755aa8e0776d925ea1e",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Somar as probabilidades (0,7 + 0,6) ou esquecer de tirar o primeiro sorteado do total.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q16",
+        "impressao": "600dc0892b24ee4032547534e99f840a",
+        "numero": 16,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q21",
+        "impressao": "97cbdaf146e8554e1d3188d2bd771abc",
+        "numero": 21,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "'E' multiplica, e 'não acontecer' é 1 menos a chance de acontecer: receber na caixa = 0,7 x 0,4 = 0,28, logo não receber = 0,72. Sem reposição, o segundo sorteio perde um: dois nomes masculinos = 14/30 x 13/29, cerca de 20,9%."
+  },
+  {
+    "assunto": "Operações com conjuntos",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "princípio da inclusão-exclusão (teoria dos conjuntos)",
+    "impressao": "a7bc0f1cf71dcd4524756e6f7be0664e",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Esquecer de descontar a interseção e contar duas vezes quem está nos dois grupos.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q18",
+        "impressao": "ee280736279cae2dc41df0768774eedd",
+        "numero": 18,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q19",
+        "impressao": "1aac6b2938dfff4f48a11098b7f34edd",
+        "numero": 19,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q25",
+        "impressao": "e2e3321c04df09af7f0c10196da73c46",
+        "numero": 25,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "União = A + B - interseção, e 'nem A nem B' = total - união. Ex.: 200 - (80 + 46 - 22) = 96. Com subgrupos (só homens), faça a conta do grupo inteiro menos a das mulheres antes de usar a fórmula."
+  },
+  {
+    "assunto": "Equivalências lógicas",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "contrapositiva e leis de De Morgan (lógica proposicional)",
+    "impressao": "b3940e1c67f1f78bfa25b08adcf30201",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Negar o 'ou' mantendo 'ou', ou inverter a condicional sem negar os dois lados.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q23",
+        "impressao": "d21511113f89404d4f6bf6572f32c453",
+        "numero": 23,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "'Se P então Q' equivale a 'se não Q então não P' (contrapositiva). Para negar, use De Morgan: não (A e B) = não A ou não B; não (A ou B) = não A e não B."
+  },
+  {
+    "assunto": "Autores e obras",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "FOUCAULT, Vigiar e punir (1975); GOFFMAN, Manicômios, prisões e conventos (1961)",
+    "impressao": "03fe8ded8186ff88ecefe79d13396bad",
+    "materia": "Sociologia Aplicada",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Atribuir as instituições totais a Foucault, ou dar a Foucault outro título (Microfísica do poder).",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q94",
+        "impressao": "81474e4e54a13f06929278458d845665",
+        "numero": 94,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q96",
+        "impressao": "e39f1f7d6710869e279d9d410a64bea7",
+        "numero": 96,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Michel Foucault escreveu Vigiar e punir: nascimento da prisão (1975), sobre vigilância e disciplina em prisões, hospitais e escolas. Erving Goffman escreveu Manicômios, prisões e conventos e cunhou as instituições TOTAIS, fechadas ao mundo externo."
+  },
+  {
+    "assunto": "História da prisão",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "gabarito oficial das questões 91 a 93 da prova FEPESE 2019",
+    "impressao": "98187d1e9a0a46d24681ede76068c5e5",
+    "materia": "Sociologia Aplicada",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Dizer que nas colônias do século XV o encarceramento já era a principal pena.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q91",
+        "impressao": "1cd3bcf563fb464741e2dba613c70db6",
+        "numero": 91,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q92",
+        "impressao": "84e88bb6c00f848c60961ed5b88b42c5",
+        "numero": 92,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      },
+      {
+        "ano": 2019,
+        "codigo": "2019-q93",
+        "impressao": "70cfaab02b2694d5c24d2e2b236f25fd",
+        "numero": 93,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "Por muito tempo a prisão foi só CUSTÓDIA: guardava o réu até a pena (morte, açoites, mutilações). Virou pena privativa de liberdade aproveitando a mão de obra dos presos, numa fase chamada utilitarista. No Oriente Antigo a punição tinha caráter religioso, e na Idade Média as penas eram corporais."
+  },
+  {
+    "assunto": "Objetivos da execução e assistência",
+    "criado_em": "2026-10-04T17:22:41.386045+00:00",
+    "fonte": "arts. 1º, 10, 17 e 22 da Lei 7.210/1984",
+    "impressao": "434b1ed2562c459340d823a295f4a9e5",
+    "materia": "Sociologia Aplicada",
+    "modelo": "Claude Code, importado manualmente, em 04/10/2026",
+    "pegadinha": "Trocar a finalidade de uma assistência pela de outra.",
+    "questoes": [
+      {
+        "ano": 2019,
+        "codigo": "2019-q99",
+        "impressao": "65585e83111be1e993ad1bf87fdaf4d1",
+        "numero": 99,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf"
+      }
+    ],
+    "regra": "A execução penal efetiva a sentença e proporciona a harmônica integração social do condenado. A assistência ao preso é dever do Estado, para prevenir o crime e orientar o retorno à sociedade; a educacional compreende instrução escolar e formação profissional; a social ampara o preso e o prepara para a liberdade."
+  }
+]

@@ -398,17 +398,17 @@
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "M1.pdf",
    "sha256": "11cbd78a87e91464f1a8f92e897abba9111a833638deebcd8dee91f318d3495f",
-   "questoes": 14,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
     "Noções de Informática"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "14 questões extraídas, e o caderno vai até a 39: a numeração não fecha (falta 2, 3, 5, 6, 8, 10, 12, 13, 15, 17, 19, 21, 22, 24, 25, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38); alternativas diferentes de a-e nas questões 1, 4, 7, 9, 11, 14, 16, 18, 20, 23 e mais 4",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
@@ -550,7 +550,7 @@
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-sao-jose/",
    "arquivo": "S7.pdf",
    "sha256": "25488f4916cdb889cd3c88502535a129ca53e07f54c4e5ebb1602d1ed7d78ed5",
-   "questoes": 59,
+   "questoes": 60,
    "materias_do_edital": [
     "Língua Portuguesa",
     "Raciocínio Lógico",
@@ -558,10 +558,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "59 questões extraídas, e o caderno vai até a 60: a numeração não fecha (falta 49)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024sas-sj.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
@@ -2579,16 +2579,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-brusque/",
    "arquivo": "ME1.pdf",
    "sha256": "db604f67d7452987adacb3fb4bd1e5126dd744c731cb8df5711483f5accc6f41",
-   "questoes": 11,
+   "questoes": 25,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "11 questões extraídas, e o caderno vai até a 24: a numeração não fecha (falta 2, 4, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23); alternativas diferentes de a-e nas questões 1, 3, 5, 7, 10, 12, 15, 17, 20, 22 e mais 1",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ME2.pdf",

@@ -191,20 +191,21 @@
   </section>
 
   {# -------------------------------------------- treinar com as de casa - #}
-  <section class="ds-cartao cartao-geradas">
+  <section class="ds-cartao cartao-geradas" id="treinar">
     <h2 class="ds-cartao__titulo">Treinar com as que já tenho</h2>
     <p class="ds-cartao__meta">Não gasta nada: usa o que já foi gerado antes.</p>
 
     {% if resumo.valem %}
       <form class="comecar" method="post" action="/geradas/treinar">
+        {# Materia, assunto e subassunto num seletor so, recuados como na
+           arvore: escolher o assunto pega os subassuntos dele. #}
         <label class="ds-campo">
-          Matéria
-          <select name="materia">
-            <option value="">Qualquer uma</option>
-            {% for nome, reais, ja in materias %}
-              {% if ja %}
-                <option value="{{ nome }}">{{ nome }} ({{ ja }})</option>
-              {% endif %}
+          O que treinar
+          <select name="conteudo">
+            <option value="">Qualquer matéria</option>
+            {% for caminho, nivel, ja in para_treinar %}
+              <option value="{{ caminho }}"{% if caminho == treinar %} selected{% endif %}>
+                {%- for _ in range(nivel - 1) %}&nbsp;&nbsp;&nbsp;&nbsp;{% endfor %}{% if nivel > 1 %}↳ {% endif %}{{ caminho.split(' > ')[-1] }} ({{ ja }})</option>
             {% endfor %}
           </select>
         </label>

@@ -308,7 +308,7 @@ def test_o_comando_so_le_e_com_aplicar_corrige(com_o_mini, plano):
 
     saida = runner.invoke(app, ["conferir-dias", "--aplicar"], env={"COLUMNS": "250"})
     assert saida.exit_code == 0, saida.output
-    assert "Copia de seguranca em" in saida.output
+    assert "Cópia de segurança em" in saida.output
     assert "Totais antes x depois" in saida.output
     # A linha do 28/09 nos totais: os mesmos minutos do metricas, menos 25.
     minutos = metricas.do_dia(SEG, plano).minutos

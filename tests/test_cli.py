@@ -64,3 +64,25 @@ def test_exportar_escreve_os_dois_arquivos(banco_temporario, tmp_path):
     assert resultado.exit_code == 0
     assert arquivo.exists()
     assert (tmp_path / "eventos.json").exists()
+
+
+def test_a_linha_do_tempo_mostra_a_frase_e_nao_a_chave(banco_temporario):
+    """A descricao gravada e chave de deduplicacao ("Situacao: a -> b"); o
+    terminal mostra a mesma frase do site, com acento."""
+    from radar.db import sessao
+    from radar.models import Concurso, Evento
+
+    with sessao() as s:
+        concurso = Concurso(url="https://exemplo.test/c", fonte="teste",
+                            titulo="Concurso de teste", uf="SC")
+        s.add(concurso)
+        s.flush()
+        s.add(Evento(concurso_url=concurso.url, tipo="mudou_situacao",
+                     descricao="Situacao: edital_publicado -> inscricoes_abertas"))
+        concurso_id = concurso.id
+
+    resultado = runner.invoke(app, ["eventos", str(concurso_id)], env={"COLUMNS": "200"})
+
+    assert resultado.exit_code == 0, resultado.output
+    assert "As inscrições abriram" in resultado.output
+    assert "Situacao:" not in resultado.output
