@@ -89,6 +89,11 @@
           <p><b>{{ FRASE_DA_QUESTAO_DE_IA }}</b></p>
           {% if origem %}
             <p>Variação da questão {{ origem.numero }} de {{ origem.banca }} {{ origem.ano }}{% if origem.cargo %}, {{ origem.cargo }}{% endif %} — aquela tem gabarito oficial conferido; esta não.</p>
+          {% elif questao.modo == 'variacao' %}
+            {# Variacao cuja base o acervo daqui nao consegue identificar: o
+               caderno nao esta aqui, ou o enunciado se repete em questoes
+               diferentes. Nao e "do zero", e apontar uma seria chutar. #}
+            <p>Variação de uma questão real que o acervo daqui não consegue identificar: o caderno de origem não está aqui, ou o enunciado dela se repete em questões diferentes. Confira com cuidado.</p>
           {% else %}
             <p>Escrita do zero, sem questão real embaixo. Confira com cuidado.</p>
           {% endif %}

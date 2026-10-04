@@ -1952,3 +1952,16 @@ e 57 do estoque pararam ai, e a escolha foi sua.
 76), com teste; sem o numero, continua recusada. Depois, os dois lotes - 40
 questoes escritas sobre o texto oficial da ONU, baixado do UNODC. O estoque
 fechou nos 57 lotes e 725 questoes; o JSON, em 775.
+
+## A base da gerada pela chave, e a materia sem acento, F3 (03/10)
+
+**O que estava errado:** o selo da questao gerada achava a questao real de
+base pela impressao do enunciado, e a FEPESE repete o comando em questoes de
+alternativas diferentes - o selo podia apontar a errada; e o `--materia` do
+`radar desempenho` e do `radar incidencia` nao achava a materia digitada sem
+acento.
+
+**O F3:** a variacao passou a guardar a chave da base (decisao 77), com o
+passo 5 da migracao preenchendo as antigas onde nao ha duvida - 206 de 239; as
+33 ambiguas ficaram sem base, e a tela diz isso em vez de "escrita do zero". O
+filtro de materia passou a ignorar acento e caixa.

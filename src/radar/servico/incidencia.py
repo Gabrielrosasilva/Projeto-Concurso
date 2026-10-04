@@ -6,6 +6,7 @@ from radar import conteudos as arvore
 from radar import incidencia
 from radar.db import criar_tabelas, sessao
 from radar.models import Classificacao, Conteudo, QuestaoDeProva
+from radar.regioes import normalizar
 from radar.servico import conteudos, evidencia
 from radar.servico.classificacoes import chave_de
 
@@ -65,7 +66,9 @@ def ocorrencias() -> list[incidencia.Ocorrencia]:
 def mapa(materia: str | None = None) -> list[incidencia.MapaDaMateria]:
     mapas = incidencia.montar(conteudos.nos(), ocorrencias())
     if materia:
-        mapas = [m for m in mapas if m.materia == materia]
+        # Sem acento e sem caixa, como o `radar desempenho --materia`.
+        procurada = normalizar(materia)
+        mapas = [m for m in mapas if normalizar(m.materia) == procurada]
     return mapas
 
 

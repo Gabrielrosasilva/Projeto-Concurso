@@ -31,6 +31,7 @@ from radar import config, gerador, leis
 from radar.db import criar_tabelas, sessao
 from radar.models import agora
 from radar.origem import IA
+from radar.questoes import chave_da_questao
 from radar.regioes import normalizar
 from radar.servico import geradas
 from radar.util import fuso_local
@@ -383,7 +384,7 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
                 pedido.get("exemplos") or [], pedido["quantas"],
             )
             base = {"materia": pedido["materia"], "assunto": pedido.get("assunto"),
-                    "origem_impressao": None}
+                    "origem_impressao": None, "origem_chave": None}
         else:
             questao = pedido["questao"]
             instrucao = gerador.INSTRUCAO_VARIACAO
@@ -392,7 +393,11 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
             # no pedido amplo, sem escopo, continuam os da questao de base.
             base = {"materia": pedido.get("materia") or questao.materia,
                     "assunto": pedido.get("assunto") or getattr(questao, "assunto", None),
-                    "origem_impressao": questao.impressao}
+                    "origem_impressao": questao.impressao,
+                    # A chave diz QUAL questao foi: o enunciado sozinho se
+                    # repete em questoes diferentes da mesma prova.
+                    "origem_chave": chave_da_questao(questao.enunciado,
+                                                     questao.alternativas)}
         if se_escopo is not None:
             instrucao = _instrucao_com_escopo(instrucao, se_escopo,
                                               pedido.get("lei"))
@@ -920,6 +925,7 @@ def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
                 modo=pedido["modo"], materia=pedido.get("materia"),
                 assunto=pedido.get("assunto"),
                 origem_impressao=pedido.get("origem_impressao"),
+                origem_chave=pedido.get("origem_chave"),
                 modelo=modelo,
                 modo_do_pedido=pedido.get("modo_do_pedido"),
                 conteudo=item.get("conteudo") or pedido.get("conteudo"),

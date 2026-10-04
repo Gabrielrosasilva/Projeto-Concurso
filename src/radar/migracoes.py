@@ -110,6 +110,22 @@ def _passo_4() -> None:
     acervo.exportar_geradas()
 
 
+def _passo_5() -> None:
+    """Secao F (F3): a chave da questao real de base de cada gerada.
+
+    Uma coluna nova em `questoes_geradas` (origem_chave), que vem do modelo. O
+    passo preenche as variacoes antigas so quando a impressao delas aponta
+    para uma questao so do acervo; quando aponta para questoes diferentes, a
+    chave fica nula - chutar uma seria o erro que o passo corrige. Depois leva
+    a coluna para o arquivo versionado, de onde o banco e reconstruido.
+    """
+    from radar import acervo
+    from radar.servico import geradas
+
+    geradas.preencher_origem_chave()
+    acervo.exportar_geradas()
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -120,6 +136,7 @@ PASSOS = {
         _passo_3),
     4: ("O escopo e a base de cada questão gerada (modo do pedido, base, evidência)",
         _passo_4),
+    5: ("A chave da questão real de base de cada questão gerada", _passo_5),
 }
 VERSAO_ATUAL = max(PASSOS)
 

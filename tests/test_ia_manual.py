@@ -106,6 +106,20 @@ def test_importa_e_grava_com_a_procedencia_honesta(acervo_do_alvo, tmp_path):
     assert [l["modelo"] for l in linhas] == [gerada.modelo]
 
 
+def test_a_variacao_importada_guarda_a_chave_da_base(acervo_do_alvo, tmp_path):
+    """F3: o pedido leva a chave da questao real (enunciado e alternativas), e a
+    importacao a grava - e por ela que a tela acha a base."""
+    lote = _pedido_salvo(manual.pedido_de_questoes("Lei de Execução Penal", 3))
+    arquivo = _responder(lote, [{"id": "p1", "questoes": [_questao_boa()]}], tmp_path)
+
+    manual.importar(arquivo, quando=DIA)
+
+    with sessao() as s:
+        (gerada,) = s.scalars(select(QuestaoGerada))
+    assert gerada.origem_chave
+    assert gerada.origem_chave == lote["pedidos"][0]["origem_chave"]
+
+
 @pytest.mark.parametrize("estrago, motivo", [
     (lambda q: q["alternativas"].pop("e"), "5 alternativas"),
     (lambda q: q.update(resposta="f"), "gabarito"),

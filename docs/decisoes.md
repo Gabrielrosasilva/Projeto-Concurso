@@ -3466,3 +3466,19 @@ mede (7A); commit e push por subetapa (8A).
     recusado ("conforme as Regras de Mandela"), como "conforme a doutrina".
     Escolha de 03/10, entre aceitar a regra e citar ao lado o artigo da LEP ou
     da CF que dissesse o mesmo: a questao cita a fonte verdadeira.
+
+77. **a questao gerada guarda a CHAVE da questao real de base, e o selo so
+    aponta questao real por ela** (F3). O `geradas.origem_de` achava a base
+    pela impressao do enunciado, com `limit(1)`; e a FEPESE repete o comando
+    ("De acordo com a Lei de Execucao Penal, e correto") em questoes de
+    alternativas diferentes - o selo podia apontar a errada. Agora:
+    - a variacao grava a `origem_chave` (enunciado e alternativas,
+      `questoes.chave_da_questao`), pela API e pelo `radar gerar --importar`;
+    - o selo acha a base pela chave; sem chave, so quando a impressao aponta
+      uma questao so (ou a mesma questao em mais de um caderno);
+    - a variacao antiga cuja impressao aponta questoes diferentes fica SEM
+      base: o passo 5 da migracao nao escolhe uma, e a tela diz "o acervo
+      daqui nao consegue identificar" em vez de "escrita do zero", que ela
+      nao foi.
+    No banco de 03/10: 206 das 239 variacoes ganharam a chave; 33 ficaram sem
+    (30 do estoque de 03/10, 3 de 27/09).

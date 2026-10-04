@@ -24,6 +24,7 @@ from radar.models import (
     RespostaDeSimulado,
     Simulado,
 )
+from radar.questoes import chave_da_questao
 
 log = logging.getLogger(__name__)
 
@@ -538,6 +539,7 @@ def gravar(questoes: list) -> int:
             s.add(QuestaoGerada(
                 modo=nova.modo,
                 origem_impressao=nova.origem_impressao,
+                origem_chave=getattr(nova, "origem_chave", None),
                 modelo=nova.modelo,
                 materia=nova.materia,
                 assunto=nova.assunto,
@@ -629,19 +631,71 @@ def buscar(questao_id: int) -> QuestaoGerada | None:
 def origem_de(questao: QuestaoGerada | None) -> QuestaoDeProva | None:
     """A questao REAL em que a gerada se baseou, para o selo da tela.
 
-    None quando a questao foi escrita do zero, ou quando o acervo local ainda
-    nao tem o caderno de origem - o selo entao diz so o que sabe.
+    Reconhecida pela CHAVE (enunciado e alternativas), a regra do projeto: a
+    impressao, so do enunciado, pode ser de questoes diferentes da mesma
+    prova, e o selo apontaria a errada. Sem a chave gravada (as variacoes de
+    antes do F3), a impressao so serve quando todas as questoes dela sao a
+    mesma questao, reaproveitada em mais de um caderno.
+
+    None quando a questao foi escrita do zero, quando o acervo local ainda nao
+    tem o caderno de origem, ou quando nao ha como saber qual das questoes foi
+    a base - o selo entao diz so o que sabe.
     """
     if questao is None or not questao.origem_impressao:
         return None
 
     criar_tabelas()
     with sessao() as s:
-        return s.scalar(
+        candidatas = s.scalars(
             select(QuestaoDeProva)
             .where(QuestaoDeProva.impressao == questao.origem_impressao)
-            .limit(1)
+            .order_by(QuestaoDeProva.id)
         )
+        return _a_da_chave(candidatas, questao.origem_chave)
+
+
+def _a_da_chave(candidatas, chave: str | None) -> QuestaoDeProva | None:
+    """A questao com a chave pedida; sem chave, a unica que a impressao deixa.
+
+    A mesma questao em dois cadernos tem a mesma chave: qualquer uma das duas
+    serve, e fica a primeira.
+    """
+    por_chave: dict[str, QuestaoDeProva] = {}
+    for questao in candidatas:
+        por_chave.setdefault(chave_da_questao(questao.enunciado, questao.alternativas),
+                             questao)
+    if chave:
+        return por_chave.get(chave)
+    return next(iter(por_chave.values())) if len(por_chave) == 1 else None
+
+
+def preencher_origem_chave() -> int:
+    """Grava a chave da base nas variacoes que ainda nao a tem. Quantas.
+
+    So quando a impressao da base aponta para uma questao so do acervo (ou
+    para a mesma questao em mais de um caderno). Quando aponta para questoes
+    diferentes, a chave fica nula: nao ha como saber qual foi a base, e
+    escolher uma seria o mesmo erro do `limit(1)` que o F3 tirou.
+    """
+    criar_tabelas()
+    preenchidas = 0
+    with sessao() as s:
+        variacoes = s.scalars(
+            select(QuestaoGerada)
+            .where(QuestaoGerada.origem_impressao.is_not(None))
+            .where(QuestaoGerada.origem_chave.is_(None))
+        ).all()
+        for gerada in variacoes:
+            candidatas = s.scalars(
+                select(QuestaoDeProva)
+                .where(QuestaoDeProva.impressao == gerada.origem_impressao)
+                .order_by(QuestaoDeProva.id)
+            )
+            base = _a_da_chave(candidatas, None)
+            if base is not None:
+                gerada.origem_chave = chave_da_questao(base.enunciado, base.alternativas)
+                preenchidas += 1
+    return preenchidas
 
 
 def rejeitar(questao_id: int) -> bool:

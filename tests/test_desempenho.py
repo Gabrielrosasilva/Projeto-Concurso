@@ -285,6 +285,16 @@ def test_a_tela_filtra_por_materia(plano):
     assert [l.caminho for l in linhas] == [PORTUGUES]
 
 
+def test_o_filtro_de_materia_ignora_acento_e_caixa(plano):
+    """F3: "lingua portuguesa", digitado no terminal sem acento, e a materia
+    "Língua Portuguesa" da arvore - antes, "Nada respondido"."""
+    _responder(2, True, SEG, materia=PORTUGUES, classificar_em=PORTUGUES)
+
+    linhas = por_conteudo.tela(materia="lingua portuguesa", plano=plano, hoje=HOJE)
+
+    assert [l.caminho for l in linhas] == [PORTUGUES]
+
+
 def test_abaixo_do_minimo_a_tela_escreve_a_frase_e_nao_a_conclusao(plano):
     _responder(1, True, SEG, classificar_em=NO_TEMPO)
 

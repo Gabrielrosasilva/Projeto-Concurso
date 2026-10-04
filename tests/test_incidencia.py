@@ -172,6 +172,14 @@ def test_o_mapa_do_banco_so_conta_o_alvo(alvo):
     assert (lep.topo.amostra, lep.pendentes) == ("0 questões · 0 provas", 1)
 
 
+def test_o_filtro_de_materia_do_mapa_ignora_acento_e_caixa(alvo):
+    """F3: o mesmo filtro do `radar incidencia --materia`, digitado sem acento."""
+    (penal,) = servico_da_incidencia.mapa("direito penal")
+    (lep,) = servico_da_incidencia.mapa("Lei de Execucao Penal")
+
+    assert (penal.materia, lep.materia) == ("Direito Penal", "Lei de Execução Penal")
+
+
 def test_a_pagina_e_o_terminal_mostram_a_amostra_e_nao_preveem(alvo):
     texto = TestClient(app).get("/analises/incidencia").text
     assert "2 questões · 2 provas" in texto and "apareceu nas 2 provas" in texto

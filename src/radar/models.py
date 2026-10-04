@@ -435,6 +435,14 @@ class QuestaoGerada(Base):
         String(32), index=True, nullable=True
     )
 
+    #: A CHAVE da questao real de base: enunciado e alternativas
+    #: (`questoes.chave_da_questao`). A impressao, so do enunciado, nao diz QUAL
+    #: questao foi - a FEPESE repete o comando ("De acordo com a Lei de
+    #: Execucao Penal, e correto") em questoes de alternativas diferentes.
+    #: Nula no do_zero, e nas variacoes antigas cujo enunciado se repete no
+    #: acervo com alternativas diferentes: ai nao ha como saber qual foi.
+    origem_chave: Mapped[str | None] = mapped_column(String(32), nullable=True)
+
     #: Qual modelo escreveu. A procedencia fica gravada no dado, e nao so no
     #: commit: sem isto nao ha como saber depois o que produziu cada questao.
     modelo: Mapped[str | None] = mapped_column(String(60), nullable=True)

@@ -15,6 +15,7 @@ import pytest
 from radar import acervo, gerador, servico
 from radar.db import sessao
 from radar.models import Concurso, QuestaoDeProva, QuestaoGerada
+from radar.questoes import chave_da_questao
 
 CONCURSO = "https://fepese.test/concurso/sap-2019"
 DO_ALVO = "Agente Penitenciário"
@@ -409,6 +410,75 @@ def test_a_origem_da_variacao_e_recuperavel(banco_temporario):
     assert origem.numero == 1
 
 
+# --- a base pela CHAVE, e nao so pelo enunciado (F3) -----------------------
+
+COMANDO = "De acordo com a Lei de Execucao Penal, e correto"
+OUTRAS = {l: f"outra alternativa {l}" for l in "abcde"}
+
+
+def _duas_com_o_mesmo_comando():
+    """A FEPESE repete o comando com alternativas diferentes na mesma prova."""
+    _semear(_concurso(),
+            _real(1, enunciado=COMANDO, impressao="repetida"),
+            _real(2, enunciado=COMANDO, impressao="repetida", alternativas=OUTRAS))
+
+
+def test_a_origem_e_achada_pela_chave_quando_o_comando_se_repete(banco_temporario):
+    _duas_com_o_mesmo_comando()
+    questao = _gravar_uma(origem_impressao="repetida",
+                          origem_chave=chave_da_questao(COMANDO, OUTRAS))
+
+    origem = servico.geradas.origem_de(servico.geradas.buscar(questao.id))
+
+    assert origem.numero == 2
+
+
+def test_sem_a_chave_o_comando_repetido_nao_vira_chute(banco_temporario):
+    """A variacao de antes do F3 nao guardou a chave: entre duas questoes
+    diferentes, nao ha como saber qual foi, e o selo nao aponta nenhuma."""
+    _duas_com_o_mesmo_comando()
+    questao = _gravar_uma(origem_impressao="repetida")
+
+    assert servico.geradas.origem_de(servico.geradas.buscar(questao.id)) is None
+
+
+def test_sem_a_chave_a_mesma_questao_em_dois_cadernos_ainda_serve(banco_temporario):
+    """Reaproveitada em outro caderno, e a mesma questao: a chave e uma so."""
+    _semear(_concurso(),
+            _real(1, impressao="reaproveitada"),
+            _real(1, impressao="reaproveitada", prova_url="https://fepese.test/outra.pdf"))
+    questao = _gravar_uma(origem_impressao="reaproveitada")
+
+    assert servico.geradas.origem_de(servico.geradas.buscar(questao.id)) is not None
+
+
+def test_as_variacoes_antigas_ganham_a_chave_so_sem_duvida(banco_temporario):
+    """O passo 5 da migracao: chave onde a impressao aponta uma questao so;
+    nula onde aponta questoes diferentes."""
+    _semear(_real(3))
+    _duas_com_o_mesmo_comando()
+    sem_duvida = _gravar_uma(origem_impressao="real3", impressao="g1")
+    com_duvida = _gravar_uma(origem_impressao="repetida", impressao="g2",
+                             enunciado="Outra questao gerada, sobre outro comando.")
+
+    assert servico.geradas.preencher_origem_chave() == 1
+
+    real3 = _real(3)
+    with sessao() as s:
+        assert (s.get(QuestaoGerada, sem_duvida.id).origem_chave
+                == chave_da_questao(real3.enunciado, real3.alternativas))
+        assert s.get(QuestaoGerada, com_duvida.id).origem_chave is None
+
+
+def test_a_variacao_pela_api_guarda_a_chave_da_base(banco_temporario):
+    falsa = _SessaoFalsa([_resposta_com(_questao_boa())])
+    base = _real(1)
+
+    novas, _entrada, _saida = gerador.variar(base, "chave", 1, falsa)
+
+    assert novas[0].origem_chave == chave_da_questao(base.enunciado, base.alternativas)
+
+
 # --- a regra que sustenta a etapa -------------------------------------------
 
 def test_questao_gerada_nao_entra_em_nada_que_meca(banco_temporario):
@@ -578,6 +648,20 @@ def test_a_questao_gerada_chega_com_selo_e_com_a_origem(cliente):
     assert "🟣" in pagina
     assert "Gerada por IA: não é questão oficial da FEPESE." in pagina
     assert pagina.index("não é questão oficial da FEPESE") < pagina.index('class="enunciado"')
+
+
+def test_variacao_sem_base_identificada_nao_diz_que_foi_do_zero(cliente):
+    """F3: quando o acervo nao diz qual questao foi a base, a tela nao chuta
+    uma - e tambem nao diz que a questao foi escrita do zero, porque nao foi."""
+    _duas_com_o_mesmo_comando()
+    _gravar_uma(origem_impressao="repetida")
+    rodada = servico.geradas.criar_simulado(quantidade=1)
+
+    pagina = cliente.get(f"/simulado/{rodada.id}").text
+
+    assert "não consegue identificar" in pagina
+    assert "Escrita do zero" not in pagina
+    assert "Variação da questão" not in pagina
 
 
 def test_o_relatorio_da_rodada_de_ia_diz_que_nao_e_questao_oficial(cliente):

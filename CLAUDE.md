@@ -128,11 +128,12 @@ comparacao de 07/11 (decisoes 69 e 70) - e a 2C - cada faixa diz o assunto, o
 subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feitos o F1 - o
 "Onde estudar primeiro" e a revisao espacada leem a arvore (decisao 74) - e o
 F2 - so o complementar aceito no costume da banca, no treino e no compilado
-(decisao 75).
+(decisao 75) - e o F3 - a gerada guarda a chave da questao real de base
+(decisao 77), e o `--materia` aceita o nome sem acento.
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 775 geradas (725 do estoque ate 07/11, os 57 lotes:
 `docs/estoque_de_geradas.md`; nas Regras de Mandela a fonte e a regra, decisao
-76); banco na versao 4.
+76); banco na versao 5.
 **Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
 por amostra - B.8) e os 15 itens da lista de leis; o **Ciclo 2**, depois do
 simulado de 07/11 e antes de 09/11.
@@ -183,7 +184,8 @@ complementar so entra em estatistica se estiver aceita no
 `data/acervo_complementar.json`), e tudo que
 aponta para um conteudo usa o caminho do no (`data/conteudos.json`); a
 classificacao reconhece a questao pela CHAVE (enunciado + alternativas), nunca
-so pela impressao do enunciado.
+so pela impressao do enunciado - e a gerada aponta a sua base tambem pela chave
+(decisao 77).
 Mudanca de estrutura do banco vira passo novo em `migracoes.py`.
 
 ## Fontes de dados

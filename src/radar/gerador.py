@@ -53,7 +53,7 @@ from dataclasses import dataclass, field
 import requests
 
 from radar import config
-from radar.questoes import impressao_de
+from radar.questoes import chave_da_questao, impressao_de
 
 log = logging.getLogger(__name__)
 
@@ -161,6 +161,9 @@ class QuestaoNova:
     materia: str | None = None
     assunto: str | None = None
     origem_impressao: str | None = None
+    #: A chave (enunciado e alternativas) da questao real de base: e ela que
+    #: diz qual questao foi, quando o enunciado se repete no acervo.
+    origem_chave: str | None = None
     #: Quem escreveu. SEM padrao de proposito: um padrao aqui carimbaria como
     #: saida da API uma questao que chegou por outro caminho - a importada a
     #: mao, por exemplo. Quem cria a questao diz de onde ela veio.
@@ -399,6 +402,7 @@ def variar(
             materia=questao.materia,
             assunto=getattr(questao, "assunto", None),
             origem_impressao=questao.impressao,
+            origem_chave=chave_da_questao(questao.enunciado, questao.alternativas),
             modelo=MODELO,
             **conferida,
         ))

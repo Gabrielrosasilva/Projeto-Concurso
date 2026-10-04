@@ -231,3 +231,33 @@ def test_a_classificacao_pela_impressao_vira_chave_no_passo_3(banco_temporario):
     for letra in "xy":
         c = por_chave[classificacoes.chave_da_questao("É correto", {"a": letra})]
         assert (c.conteudo, c.status) == ("Direito Penal", "pendente")
+
+
+def test_a_chave_da_base_das_geradas_chega_no_passo_5(banco_temporario):
+    """F3: a variacao antiga ganha a chave da base quando a impressao aponta
+    uma questao so, e o arquivo versionado leva a coluna nova."""
+    import json
+
+    from sqlalchemy import text
+
+    from radar import acervo
+    from radar.questoes import chave_da_questao
+
+    with db.sessao() as s:
+        s.add(QuestaoDeProva(prova_url="p.pdf", numero=1, enunciado="Única?",
+                             alternativas={"a": "x"}, impressao="unica"))
+        s.add(QuestaoGerada(modo="variacao", origem_impressao="unica",
+                            modelo="Claude Code, importado manualmente, em 03/10/2026",
+                            enunciado="Uma variação gerada.", alternativas={"a": "y"},
+                            resposta="a", impressao="g1"))
+    with db.get_engine().begin() as conexao:
+        conexao.execute(text("UPDATE versao_do_banco SET versao = 4"))
+
+    relatorio = migracoes.migrar()
+
+    assert (relatorio.de, relatorio.para) == (4, migracoes.VERSAO_ATUAL)
+    with db.sessao() as s:
+        gerada = s.scalar(select(QuestaoGerada))
+    assert gerada.origem_chave == chave_da_questao("Única?", {"a": "x"})
+    linhas = json.loads(acervo.caminho_das_geradas().read_text(encoding="utf-8"))
+    assert [l["origem_chave"] for l in linhas] == [gerada.origem_chave]

@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1 e F2 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore e o complementar aceito no costume e no treino); falta o resto da seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1, F2 e F3 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave e a matéria sem acento); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 
 ---
@@ -2225,3 +2225,41 @@ Central. O treino do alvo completa com 1.593 questões da banca (eram 2.190).
 | Os mesmos 6, com o registro e 2 testes novos | 141 passed |
 | A suíte inteira, 1ª rodada | 2424 passed, 1 failed (o `test_evidencia.py` também gravava a prova do complementar sem registrá-la) |
 | A suíte inteira, com o registro no `test_evidencia.py` | 2425 passed |
+
+### F3 — a base da gerada pela chave, e a matéria sem acento ✅
+
+**(a) A base da questão gerada** (decisão 77):
+- `src/radar/models.py`: a coluna `origem_chave` em `questoes_geradas`;
+- `src/radar/gerador.py` e `src/radar/servico/manual.py`: a variação grava a
+  chave da questão real de base, pela API e pelo `radar gerar --importar` (o
+  pedido leva a chave);
+- `src/radar/servico/geradas.py`: o `origem_de` acha a base pela chave; sem
+  chave, só quando a impressão aponta uma questão só. O
+  `preencher_origem_chave` preenche as antigas onde não há dúvida;
+- `src/radar/migracoes.py`: o passo 5 (versão 5), que preenche e exporta o
+  `data/questoes_geradas.json` com a coluna nova;
+- `src/radar/web/templates/questao.html`: a variação sem base identificada diz
+  que o acervo não consegue identificá-la, e não mais "Escrita do zero".
+
+**(b) A matéria sem acento:** o filtro `--materia` do `radar desempenho` e do
+`radar incidencia` compara sem acento e sem caixa (`regioes.normalizar`), em
+`src/radar/servico/desempenho_por_conteudo.py` e `src/radar/servico/incidencia.py`.
+
+**Com o banco real:** `radar migrar` levou o banco da versão 4 à 5, com cópia
+antes e nenhuma linha perdida. Das 239 variações, 206 ganharam a chave; 33
+ficaram sem, porque o enunciado da base aponta de 2 a 4 questões diferentes
+(30 do estoque de 03/10, 3 de 27/09 - está nas pendências). O JSON continua com
+775, agora com a coluna. `radar desempenho --materia "Lingua Portuguesa"
+--desde-o-inicio` mostra a matéria (antes, "Nada respondido"), e `radar
+incidencia --materia "lei de execucao penal"` mostra a LEP.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_gerador.py` (6 novos: a chave, o comando repetido, a mesma questão em dois cadernos, o preenchimento, a API e a tela) | 50 passed |
+| `test_ia_manual.py` (1 novo: a importação grava a chave), `test_migracoes.py` (1 novo: o passo 5), `test_geracao_por_conteudo.py` | 81 passed |
+| `test_desempenho.py` e `test_incidencia.py` (1 novo em cada: sem acento) | 42 passed |
+| Suíte inteira, 1ª rodada | 2439 passed, 1 failed (a varredura das telas proíbe "com certeza", e a frase nova dizia "não identifica com certeza"; passou a "não consegue identificar") |
+| `test_varredura_das_telas.py` e `test_gerador.py`, com a frase nova | 53 passed |
+| Suíte inteira, 2ª rodada | **2440 passed** (2430 de antes + 10 novos), 0 failed, 25 min |

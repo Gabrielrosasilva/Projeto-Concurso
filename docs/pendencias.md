@@ -287,12 +287,13 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 - 🔴 **Os padroes de cobranca do complementar nunca sao calculados**: o
   `entra_nos_padroes` da validacao so aparece nos relatorios, e a linha
   complementar da incidencia mostra so a contagem;
-- 🟡 **`geradas.origem_de` acha a questao real so pela impressao**, com
-  `limit(1)`: em 3 das 20 geradas por variacao a impressao bate com 3 questoes
-  da mesma prova, e o selo pode apontar a questao errada. A regra do projeto e
-  reconhecer pela chave (enunciado + alternativas);
-- 🟡 **`radar desempenho --materia "Lingua Portuguesa"`** (sem acento) devolve
-  "Nada respondido": a busca do nome da materia e sensivel a acento;
+- 🟡 **33 variacoes geradas sem a questao real de base identificada** (F3,
+  decisao 77): 30 do estoque de 03/10 e 3 de 27/09. A base delas tem um
+  enunciado que se repete no acervo com alternativas diferentes, e elas foram
+  gravadas antes de a chave ser guardada; o selo diz que o acervo nao
+  consegue identificar. As 30 do estoque podem ser religadas pelos pedidos
+  que ficaram no historico da conversa de 03/10 (o texto de cada questao de
+  base foi impresso la); as 3 de 27/09 nao tem registro. Decisao sua;
 - 🟡 **§19 do novo.md**: a tela Meu desempenho nao mostra a data da ultima
   revisao de cada conteudo nem a evolucao por assunto (o servico ja guarda a
   ultima data do anotado);

@@ -53,6 +53,7 @@ from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import Classificacao, QuestaoDeProva
 from radar.origem import AUTOMATICO
+from radar.regioes import normalizar
 from radar.servico import conteudos as servico_conteudos
 from radar.servico import metricas
 
@@ -413,9 +414,12 @@ def tela(recorte: str = CICLO, materia: str | None = None, plano=None,
     sozinho nao se le.
     """
     minimos = regua.carregar()
+    # Sem acento e sem caixa: "Lingua Portuguesa", digitado no terminal, e a
+    # mesma materia da arvore.
+    procurada = normalizar(materia) if materia else None
     linhas = []
     for caminho, no in por_no(recorte, plano, hoje).items():
-        if materia and no.materia != materia:
+        if procurada and normalizar(no.materia) != procurada:
             continue
         linhas.append(LinhaDaTela(desempenho=no, estado=no.estado(minimos)))
     linhas.sort(key=lambda l: l.caminho)
