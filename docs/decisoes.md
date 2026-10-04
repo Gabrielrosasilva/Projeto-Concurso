@@ -3580,3 +3580,189 @@ mede (7A); commit e push por subetapa (8A).
     05/10). Com as duas fichas das faixas ja marcadas (28 e 29/09) conferidas,
     9 nos de Penal e Constitucional passariam a "estudado e praticado", e a
     fila de revisao iria de 10 para 19.
+
+82. **a revisao feita fora do radar passa o 1-7-30 de etapa** (F8, a opcao
+    (b) que voce aprovou em 04/10). O prazo so andava com acerto no RADAR na
+    data do vencimento ou depois: o R+7 feito no Qconcursos marcava a data da
+    revisao (decisao 79), mas o conteudo continuava "prazo de revisao vencido".
+    Agora:
+    - a faixa de revisao marcada (o R+7) e o estudo extra de revisao, no
+      vencimento ou depois, passam o conteudo para a etapa seguinte, como o
+      acerto no radar ja fazia. Antes do vencimento e treino, e nao conta - a
+      mesma regra do `espacada.py`;
+    - a rodada de revisao do radar continua andando pelo acerto: errar nela
+      marca a data da revisao, mas nao passa de etapa;
+    - a revisao sem questao (o extra de revisao so de leitura) deixou de
+      contar como estudo. Contar reiniciaria o prazo na etapa 1 em vez de
+      passar de etapa - e a decisao 20 ja dizia que "estudado" vem de faixa de
+      estudo e de extra de teoria ou de lei seca.
+    Com o banco de 04/10 a fila continua com 10: nenhum R+7 nem extra de
+    revisao foi feito ainda.
+
+## O lote de 04/10/2026 (o resto da secao F, as conferencias e os abertos)
+
+83. **os ultimos minimos fixos foram para o `config/amostra.yml`** (F11).
+    Eram excecoes declaradas desde a varredura de 03/10, e o pedido do lote
+    foi resolver a secao F com o que eu recomendo. Agora:
+    - `desempenho.evolucao` (20): respostas em cada metade da comparacao dos
+      ultimos 30 dias, na evolucao da home - era o `MINIMO_PARA_EVOLUCAO`;
+    - `acervo.tendencia_de_gabarito` (50): questoes com gabarito para falar
+      de tendencia de letra nos Macetes - era o `MINIMO_PARA_TENDENCIA`;
+    - `acervo.provas_para_tendencia` (3): abaixo disto de provas, o que sai
+      delas leva o aviso "base pequena" - era o `PROVAS_PARA_TENDENCIA` dos
+      cartoes e o `length < 3` do Meu foco, da home e da previsao.
+    Os valores nao mudaram. Os dois do acervo ficam na secao `acervo` porque
+    falam da banca, e o da evolucao na `desempenho`, porque fala de mim - as
+    duas secoes nunca se somam. O teste que procura minimo escrito em codigo
+    passou a vigiar os tres nomes e os templates. Fica de fora so o 3 do
+    `servico/erros.py`, que mede a fatia de um motivo de erro, e nao acerto.
+
+84. **o que mudou na lei num ponto que nenhuma questao cobra vai para a ficha
+    do tema** (F12). Os 9 "casos de fronteira" do `docs/leis_alteradas.md`
+    tinham ficado fora do aviso da questao, para ele nao virar ruido - e
+    tambem fora de qualquer tela. Agora:
+    - moram na lista `fronteira:` do `config/leis.yml`, com o que mudou, a
+      lei, a fonte onde conferir, a procedencia e `conferida: false`;
+    - chegam a ficha de estudo do tema - e so a ela -, por dois caminhos
+      escritos no item: um no dele no mesmo ramo de um no do tema, ou uma
+      marca dele no titulo do tema, na mesma materia (a saida temporaria nao
+      tem no na arvore, e nenhum no foi criado). A ficha sem no vale pelo
+      subassunto que escreve; so o assunto - na LEP, a lei inteira - poria
+      cada caso em todas as fichas da materia;
+    - a contagem de leis por conferir passou a somar as duas listas (15 + 9).
+    Conferidos no texto da Camara de 03/10: a EC 104/2019 (art. 144, VI e §
+    5º-A), a LEP arts. 41, 122 e 126, § 9º, o CP art. 25, paragrafo unico, e a
+    CF arts. 201 e 206, IX. Na conferencia apareceram os arts. 41-A e 41-B da
+    LEP (Lei 15.358/2026), que entraram no item do art. 41. Os tres de lei
+    especial (Maria da Penha, tortura, desarmamento) ficam com a conferencia
+    de 03/10 e o link do Planalto. Hoje cinco fichas mostram o aviso; os de
+    lei especial, seguridade e educacao esperam as fichas do Ciclo 2.
+
+85. **o primeiro contato com um conteudo e a primeira resposta, de todas**
+    (F15). A ancora do 1-7-30 de quem so praticou (sem estudo) e a primeira
+    pratica, mas ela era tirada da ULTIMA resposta de cada questao: refazer
+    uma questao empurrava o "primeiro contato" para o dia da refeita, e o
+    prazo andava para frente sem eu ter revisado nada. Agora a primeira e a
+    ultima pratica saem de toda resposta (`metricas.respostas_reais`). O
+    acerto que passa de etapa continua o da ultima resposta de cada questao;
+    a anulada continua fora. Junto (F14), o "estudado" passou a usar as
+    constantes da decisao 20, que estavam declaradas e sem uso: so a faixa de
+    estudo (teoria, lei seca, portugues, raciocinio) e o extra de teoria ou de
+    lei seca - a correcao marcada, mesmo apontando o no, nao e estudo.
+
+86. **os conceitos associados respondem a §14, item 7, e nunca entram na
+    contagem** (F13). A pergunta "quais conceitos aparecem associados" nao
+    tinha resposta: as 402 classificacoes eram todas principais. Agora:
+    - `radar classificar --pedido --associados` pede, para cada questao do
+      alvo com a principal, os OUTROS nos que ela tambem cobra, no enunciado
+      ou nas alternativas, com o trecho; a importacao recusa no fora da arvore,
+      a materia inteira, o ramo da principal (o no, os de cima e os de baixo)
+      e conceito sem trecho, sem gravar a questao pela metade, e nao
+      sobrescreve associado que eu ja tenha conferido;
+    - o associado e a classificacao NAO principal que o modelo ja previa; a
+      principal conferida nao muda;
+    - a Incidencia mostra, em cada materia, "Conceitos que aparecem juntos
+      nas questoes": o par (principal + associado), as questoes e o selo 🟣
+      "Classificacao do Claude Code, por conferir"; o `radar incidencia
+      --padroes` tambem. A contagem da tabela continua so com a principal.
+    O Claude Code respondeu as 155 questoes do alvo (04/10): 74 com
+    associado, 109 associacoes, 81 so com o principal ("na duvida, deixe de
+    fora"). As 402 classificacoes de antes ficaram identicas, e as celulas de
+    amostra da Incidencia sairam iguais.
+
+87. **a conferencia do complementar tem tela, e o lote do catalogo voltou**
+    (B.8). A tela Analises > Conferencia so listava o alvo; agora tem o filtro
+    "Evidencia" (alvo ou complementar aceito, nunca os dois juntos). No
+    complementar ela lista uma linha por questao CLASSIFICADA (a mesma questao
+    aparece em varios cadernos do concurso, um por cargo, e a classificacao e
+    uma so, pela chave), e a proposta automatica do catalogo se confere por
+    amostra: as 20 primeiras de cada materia pelo hash da chave - sempre as
+    mesmas -, com a conta "conferidas" e "corrigidas ou pendentes". O tamanho
+    da amostra mora no `config/amostra.yml` (`acervo.amostra_do_catalogo`).
+    Corrigir uma proposta do catalogo guarda no trecho que ela era do
+    catalogo, para a amostra nao perder justamente o erro.
+    O Claude Code conferiu a amostra em 04/10: o catalogo errou o assunto em
+    9 das 20 de Portugues e em 9 das 16 de Raciocinio Logico. Ele casa
+    palavra no enunciado: "lacunas do texto" virava Interpretacao, "conjunto
+    {2, 3, 4}" virava Conjuntos, pronome ia para Classes gramaticais. Pela
+    regra da 3B, o lote voltou: as 108 foram classificadas de novo, uma a uma,
+    pelo `radar classificar --importar` (lote 4: 104 com no e 4 pendentes -
+    3 sem item no edital, conjuncoes, silabas e sujeito, e a de MS Word que o
+    caderno grudou no Raciocinio). Nenhum no foi criado. A regencia, que o
+    edital de 2019 nao tem, foi para Termos integrantes > Objeto direto e
+    indireto, o mesmo lugar da ficha. E a proposta do catalogo que perde o
+    posto de principal SAI, em vez de virar associada como as outras:
+    palavra-chave casada nao e conceito que a questao cobra (as 73 que ja
+    tinham virado associadas na importacao foram apagadas).
+
+88. **a cor forcada pela URL e o `?cor=`, e o `tema` e so o filtro dos
+    Macetes** (04/10; achado da 7A, em 03/10). O mesmo nome fazia as duas coisas:
+    `/macetes?tema=claro` pintava a tela de claro E procurava o tema "claro",
+    e o botao ☀️/🌙, que tira o parametro da cor da volta, tirava junto o
+    filtro. Ficou o `tema` do filtro, que e o que aparece em link salvo (as
+    fichas apontam para os Macetes por ele); a cor passou a `?cor=claro` /
+    `?cor=escuro`. O cookie continua `tema`: e interno, e renomear apagaria a
+    escolha gravada no navegador. De quebra, a tela Semanas passou a levar a
+    cor forcada no "salvar nota" - ela lia uma variavel que nunca existia.
+
+89. **as geradas antigas ganharam materia e no, e as erradas sairam do
+    sorteio** (04/10). As 50 de antes do escopo fechado so tinham a materia no
+    `conteudo`, e as 20 de 28/09 ainda tinham a materia "Aplicacao da lei
+    penal (arts. 1º a 12)" - fora do treino de Direito Penal no /geradas. O
+    Claude Code leu as 50 contra a lei: as 20 viraram "Direito Penal" (as do
+    art. 2º no no do art. 2º; o resto fica na materia, porque o edital de 2019
+    nao tem "aplicacao da lei penal"); 13 de LEP e as 10 de Portugues ganharam
+    o no do artigo ou do assunto. E 7 variacoes de LEP de 27/09 tinham gabarito
+    errado ou nenhuma alternativa certa - diretor sem o nivel superior do art.
+    75, egresso fora do art. 26, o trabalho que o art. 39, V, faz dever, a
+    remicao pelo trabalho no regime aberto que o art. 126 nao da: foram
+    rejeitadas pelo mesmo `rejeitar` do botao "essa questao esta errada".
+    Nenhuma tinha resposta, entao nada foi apagado; o texto delas continua no
+    arquivo, marcado. Duas duvidosas ficaram para mim (pendencia D).
+
+90. **o leitor do caderno conserta o que grudava, o que sumia e o que trocava
+    de materia; e reler o caderno leva a classificacao junto, so quando e a
+    mesma questao** (04/10; B.7, B.9 e B.10). No `questoes.py`:
+    - a ultima alternativa e cortada no titulo da secao seguinte ("Direitos
+      Humanos 10 questoes", tambem o de duas linhas e o entre parenteses de
+      2013) e no fim do caderno da FEPESE (a grade de respostas, o rodape da
+      fundacao, a "Coluna em Branco");
+    - a linha que continua uma palavra quebrada nao e mais apagada como
+      cabecalho repetido: as quatro questoes de 2019 que acabavam em "e cor-"
+      voltaram a "e correto afirmar:";
+    - o "100." saiu do enunciado da questao 100 (o corte so aceitava dois
+      digitos), e a questao voltou inteira;
+    - a ORDEM das secoes sai da primeira questao depois de cada titulo, quando
+      essa pista fecha as faixas: o extrator de duas colunas punha o titulo de
+      Direito Processual Penal depois do de Legislacao Estadual no
+      Socioeducativo, e 162 questoes de 13 cadernos estavam na materia
+      vizinha (as 8 da B.10, reclassificadas: 6 com no e 2 pendentes, porque a
+      Constituicao do Estado nao esta no edital de 2019);
+    - o numero da questao nao e o "N." da lista numerada da alternativa
+      anterior ("1. silepse • 2. comparacao" / "3. eufemismo"): 29 questoes
+      que sumiam voltaram, 26 delas a questao 20 de cadernos de Florianopolis.
+    No download, dois hotsites com arquivo de mesmo nome (a FEPESE chama de
+    S07.pdf provas diferentes de Palhoca) dividiam o caminho, e o segundo
+    nunca era baixado: a prova dele apontava para o PDF do outro, e 16 dessas
+    copias estavam ACEITAS no complementar com o rotulo errado. Agora o caminho
+    de outra url ganha o nome do hotsite na frente, e a reconstrucao pelo
+    manifesto usa o caminho gravado. As 21 provas que faltavam foram baixadas
+    (o dono de cada PDF e o hotsite impresso na capa), as 5 respostas de
+    simulado que caiam nas copias foram para a questao identica da prova dona,
+    e as 840 copias sairam.
+    O `radar questoes --refazer` agora leva a classificacao e a base das
+    geradas para a chave nova quando o texto muda (`classificacoes.rechavear`,
+    `geradas.rechavear`) - a antiga que ainda existe em outro caderno e
+    copiada, a que sumiu e levada, fica uma principal por questao, a
+    conferida -, mas so quando o texto novo e o da MESMA questao (um contido
+    no outro, ou 80% igual). Quando o numero passa a ser de outra questao, a
+    classificacao fica onde estava. As duas releituras de verdade (cada uma
+    ensaiada antes numa copia do banco): 637 questoes com o texto limpo, 64
+    classificacoes e 45 geradas levadas para a chave nova, 799 questoes das
+    provas baixadas, 29 recuperadas, 1 numero corrigido sem levar nada; o
+    banco foi de 8.433 a 8.421 questoes, as 511 classificacoes sairam iguais
+    tirando a chave (402 principais, 170 conferidas, nenhuma orfa), e as 236
+    geradas com base continuam com ela. A auditoria do alvo passou a "nenhuma
+    suspeita", e o complementar aceito foi de 122 para 169 provas (das 14
+    fora, so 3 ainda pela numeracao). A pendente trocada tambem passou a sair
+    sempre, e nao so quando a nova nao e pendente.

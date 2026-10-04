@@ -135,7 +135,15 @@ def test_a_tela_de_macetes_usa_o_design_system(cliente):
 
 
 def test_tema_escuro_pela_url(cliente):
-    assert 'data-tema="escuro"' in cliente.get("/macetes?tema=escuro").text
+    assert 'data-tema="escuro"' in cliente.get("/macetes?cor=escuro").text
+
+
+def test_o_tema_do_filtro_dos_macetes_nao_mexe_na_cor(cliente):
+    """O `tema` da URL e o filtro "Materia ou tema" dos Macetes, e so ele: ate
+    04/10 o mesmo nome forcava a cor, e `?tema=claro` pintava a tela E
+    procurava "claro". A cor forcada e o `?cor=`."""
+    assert 'data-tema="escuro"' in cliente.get("/macetes?tema=claro").text
+    assert 'data-tema="claro"' in cliente.get("/macetes?tema=crase&cor=claro").text
 
 
 # --- o tema: escuro por padrao, claro por escolha (cookie) ------------------
@@ -152,7 +160,7 @@ def test_com_cookie_claro_a_pagina_sai_clara(cliente):
 
 def test_o_tema_da_url_vence_o_cookie(cliente):
     cliente.cookies.set("tema", "claro")
-    assert 'data-tema="escuro"' in cliente.get("/macetes?tema=escuro").text
+    assert 'data-tema="escuro"' in cliente.get("/macetes?cor=escuro").text
 
 
 def test_cookie_com_valor_estranho_cai_no_escuro(cliente):
@@ -189,9 +197,15 @@ def test_o_botao_do_tema_esta_na_barra(cliente):
     assert "/tema?valor=claro&amp;volta=%2Fmacetes%3Fbanca%3DFEPESE" in escuro
 
 
-def test_o_botao_tira_o_tema_da_url_na_volta(cliente):
-    """Se o ?tema= ficasse na volta, ele venceria o cookie recem-gravado."""
-    pagina = cliente.get("/hoje?tema=claro").text
+def test_o_botao_mantem_o_filtro_dos_macetes_na_volta(cliente):
+    """Antes do `?cor=`, o botao tirava o `tema` da volta - e com ele o filtro."""
+    pagina = cliente.get("/macetes?banca=FEPESE&tema=crase").text
+    assert "volta=%2Fmacetes%3Fbanca%3DFEPESE%26tema%3Dcrase" in pagina
+
+
+def test_o_botao_tira_a_cor_da_url_na_volta(cliente):
+    """Se o ?cor= ficasse na volta, ele venceria o cookie recem-gravado."""
+    pagina = cliente.get("/hoje?cor=claro").text
     assert "🌙" in pagina
     assert "/tema?valor=escuro&amp;volta=%2Fhoje\"" in pagina
 

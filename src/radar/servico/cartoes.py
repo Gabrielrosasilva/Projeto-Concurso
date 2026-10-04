@@ -21,16 +21,13 @@ from dataclasses import dataclass, field
 
 from sqlalchemy import select
 
+from radar import amostra as regua
 from radar import leis, macetes
 from radar.db import criar_tabelas, sessao
 from radar.models import QuestaoDeProva
 from radar.origem import ACERVO, IA, PROVA
 from radar.regioes import normalizar
 from radar.servico import manual
-
-# Com menos provas que isto, a tendencia tirada delas leva o aviso "base
-# pequena" (regra 4 da especificacao). Hoje sao duas.
-PROVAS_PARA_TENDENCIA = 3
 
 
 @dataclass
@@ -62,10 +59,13 @@ class Cartao:
     lei: "leis.Lei | None" = None
     macetes: list[MaceteDoCartao] = field(default_factory=list)
     com_lei_mudada: int = 0
+    #: Com menos provas que isto, a tendencia tirada delas leva o aviso
+    #: "base pequena" (regra 4 da especificacao). Do config/amostra.yml.
+    provas_para_tendencia: int = regua.PADRAO.provas_para_tendencia
 
     @property
     def base_pequena(self) -> bool:
-        return len(self.anos) < PROVAS_PARA_TENDENCIA
+        return len(self.anos) < self.provas_para_tendencia
 
     @property
     def de_onde(self) -> str:
@@ -127,6 +127,7 @@ def cartoes() -> list[Cartao]:
     por_chave = {_chave_da_questao(q.prova_url, q.numero): q for q in questoes}
 
     importados = [m for m in manual.carregar_macetes() if _macete_aparece(m)]
+    provas_para_tendencia = regua.carregar().provas_para_tendencia
 
     resultado = []
     for materia, lista in por_materia.items():
@@ -138,6 +139,7 @@ def cartoes() -> list[Cartao]:
             termos=macetes.termos_frequentes(lista, 6),
             lei=leis.da_materia(materia),
             com_lei_mudada=sum(1 for q in lista if mudancas_da(q)),
+            provas_para_tendencia=provas_para_tendencia,
         )
         for m in importados:
             if normalizar(m.get("materia") or "") != normalizar(materia):

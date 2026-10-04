@@ -179,7 +179,8 @@
 {%- endmacro -%}
 
 {%- macro formulario_da_nota(s) -%}
-  <form method="post" action="/semanas/nota{% if tema %}?tema={{ tema }}{% endif %}">
+  {% set cor = request.query_params.get('cor', '') %}
+  <form method="post" action="/semanas/nota{% if cor %}?cor={{ cor }}{% endif %}">
     <input type="hidden" name="inicio" value="{{ s.inicio.isoformat() }}">
     <div class="reflexao">
       <label class="ds-campo">O que funcionou

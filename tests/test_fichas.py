@@ -594,6 +594,39 @@ def test_o_selo_de_cada_parte_sai_da_origem_do_campo(com_ficha_real, monkeypatch
     assert re.search(r'ds-selo--oficial ds-selo--curto"[^>]*>🟢</span> Questões geradas por IA', html)
 
 
+def test_a_ficha_mostra_a_lei_que_mudou_num_ponto_que_as_provas_nao_cobraram(banco_temporario):
+    """Decisao 84: a saida temporaria chega pela marca do titulo (a arvore nao
+    tem no para ela), e a remicao no regime domiciliar pelo no da ficha."""
+    lep = "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)"
+    escrita = fichas.FichaEscrita(
+        tema="Permissão de saída, saída temporária e remição (arts. 120 a 130)",
+        materia="Lei de Execução Penal", nos=[f"{lep} > Remição"],
+        modelo="Claude Code, de teste", criado_em="2026-10-02T12:00:00+00:00")
+    servico_fichas.gravar([escrita])
+
+    html = TestClient(app).get(f"/fichas/{escrita.id}").text
+
+    assert "num ponto que elas não cobraram" in html
+    assert "Saída temporária (LEP, art. 122)" in html
+    assert "Remição no regime domiciliar" in html
+    # Na ficha nao ha "esta prova": o aviso abre direto pelo tema.
+    assert "A lei mudou depois desta prova" not in html
+
+
+def test_o_assunto_inteiro_nao_liga_a_ficha_sem_no_a_lei_que_mudou():
+    """Sem no, a ficha vale pelo subassunto que escreve. So o assunto - na LEP,
+    a lei inteira - poria cada caso de fronteira em todas as fichas dela."""
+    lep = "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)"
+    so_assunto = fichas.FichaEscrita(tema="Trabalho do preso", materia="Lei de Execução Penal",
+                                     assunto=lep)
+    com_sub = fichas.FichaEscrita(tema="Estabelecimentos penais", materia="Lei de Execução Penal",
+                                  assunto=lep, subassunto="Estabelecimentos penais")
+
+    assert fichas._nos_do_tema(so_assunto) == []
+    assert fichas._nos_do_tema(com_sub) == [
+        f"Lei de Execução Penal > {lep} > Estabelecimentos penais"]
+
+
 def test_ficha_que_nao_existe_e_404(com_ficha_real):
     assert TestClient(app).get("/fichas/nao-existe").status_code == 404
 

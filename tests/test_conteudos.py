@@ -140,6 +140,28 @@ def test_uma_principal_por_questao_e_a_outra_fica_associada(semeada):
                       "Direito Penal > Crimes contra a Administração Pública": True}
 
 
+def test_a_pendente_trocada_sai_mesmo_por_outra_pendente(semeada):
+    """Pendente nao e no a associar: trocada - ate por outra pendente, de
+    outra materia, como nas 8 do Socioeducativo (B.10) -, ela sai."""
+    classificacoes.classificar("q1", PENAL, "manual", status="pendente")
+    classificacoes.classificar("q1", "Direito Processual Penal", "manual", status="pendente")
+    with sessao() as s:
+        linhas = {c.conteudo: c.principal for c in s.scalars(select(Classificacao))}
+    assert linhas == {"Direito Processual Penal": True}
+
+
+def test_a_proposta_do_catalogo_trocada_sai_e_nao_vira_associada(semeada):
+    """Palavra-chave casada no enunciado nao e conceito que a questao cobra:
+    a proposta do catalogo, quando outra classificacao toma o lugar dela, foi
+    reprovada, e nao fica como associada (B.8)."""
+    classificacoes.classificar("q1", IMPUTABILIDADE, classificacoes.PROCEDENCIA_DO_CATALOGO)
+    classificacoes.classificar("q1", "Direito Penal > Crimes contra a Administração Pública",
+                               "Claude Code")
+    with sessao() as s:
+        linhas = {c.conteudo: c.principal for c in s.scalars(select(Classificacao))}
+    assert linhas == {"Direito Penal > Crimes contra a Administração Pública": True}
+
+
 def test_texto_antigo_que_nao_casa_fica_pendente(semeada):
     casou = classificacoes.do_texto_antigo("q1", "Direito Penal", "Imputabilidade penal",
                                            "claude-x")

@@ -1144,6 +1144,7 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
 
     o_que = {"macetes": "macete(s)", "explicacoes": "explicacao(oes)",
              "classificacao": "classificacao(oes)",
+             "associados": "conceito(s) associado(s)",
              "fichas": "ficha(s)"}.get(resultado["tipo"], "questao(oes)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
     console.print(f"[dim]Procedencia: {resultado['modelo']}[/]")
@@ -1164,6 +1165,10 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
     if resultado["tipo"] == "classificacao":
         console.print("[dim]Em data/classificacoes.json (versionado). Confira em "
                       "radar web, Analises > Conferencia.[/]")
+    elif resultado["tipo"] == "associados":
+        console.print("[dim]Em data/classificacoes.json (versionado), como classificacao "
+                      "associada: aparece em radar web, Analises > Incidencia, e nunca "
+                      "entra na contagem.[/]")
     elif resultado["tipo"] == "fichas":
         console.print("[dim]Em data/fichas.json (versionado). Confira cada uma em "
                       "radar web, Hoje > Fichas, ou com radar fichas --tema.[/]")
@@ -2639,6 +2644,10 @@ def classificar(
         False, "--genericos",
         help="No complementar: as questoes de bloco generico (Conhecimentos "
              "Especificos), agrupadas pela materia que o termo sugere"),
+    associados: bool = typer.Option(
+        False, "--associados",
+        help="Com --pedido: os OUTROS conceitos que cada questao do alvo cobra "
+             "(§14, item 7), alem da classificacao principal"),
     importar: Path = typer.Option(
         None, "--importar", help="Le a resposta (data/resposta_ia.json) e grava"),
 ) -> None:
@@ -2674,6 +2683,19 @@ def classificar(
     if not pedido:
         console.print("Use --pedido para escrever o pedido, ou --importar ARQUIVO.")
         raise typer.Exit(code=1)
+    if associados:
+        lote = servico.manual.pedido_de_associados(list(materia or []))
+        if not lote["pedidos"]:
+            console.print("[yellow]Nada a pedir:[/] nenhuma questao do alvo com "
+                          "classificacao principal.")
+            return
+        destino = servico.manual.salvar_pedido(lote)
+        total = sum(len(p["questoes"]) for p in lote["pedidos"])
+        console.print(f"[green]{len(lote['pedidos'])} pedido(s), {total} questao(oes)[/] "
+                      f"em {destino} (conceitos associados)")
+        for p in lote["pedidos"]:
+            console.print(f"  {p['id']}: {escape(p['materia'])} - {len(p['questoes'])}")
+        return
     try:
         lote = servico.manual.pedido_de_classificacao(
             list(materia or []), evidencia, genericos=genericos)
@@ -3045,6 +3067,7 @@ def incidencia(
     # parte dos do alvo (decisao 78).
     dos_padroes = (servico.incidencia.ocorrencias_dos_padroes(do_complementar)
                    if padroes else [])
+    juntos = servico.incidencia.associacoes(mapas) if padroes else {}
     for m in mapas:
         tabela = Table(title=f"{m.materia} — {m.topo.amostra} · {m.topo.rotulo}",
                        title_justify="left")
@@ -3105,6 +3128,12 @@ def incidencia(
             if abaixo:
                 console.print(f"   complementar: {abaixo} no(s) abaixo do minimo: "
                               f"{regra.FRASE_SEM_EVIDENCIA}")
+            # §14, item 7: os conceitos que caem juntos (decisao 86).
+            for a in juntos.get(m.materia) or []:
+                console.print(f"   junto: {escape(a.nome_principal)} + "
+                              f"{escape(a.nome_associado)}: {len(a.questoes)} "
+                              f"({escape(', '.join(a.questoes))}) "
+                              f"[dim]- classificacao do Claude Code, por conferir[/]")
         console.print()
 
 

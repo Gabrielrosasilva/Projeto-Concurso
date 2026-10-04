@@ -51,6 +51,9 @@ class Ocorrencia:
     #: A classificacao principal ja foi conferida por mim? O alvo foi (02/10);
     #: o complementar ainda nao (decisao 18), e a ficha diz qual e qual.
     conferida: bool = False
+    #: Os outros nos que a questao tambem cobra - as classificacoes
+    #: associadas (§14, item 7; decisao 86). Nunca contam na incidencia.
+    associados: tuple = ()
 
 
 @dataclass
@@ -180,6 +183,48 @@ def montar(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> list[MapaDaMa
             anuladas=sum(1 for o in da_materia if o.anulada),
             pendentes=sum(1 for o in da_materia if not o.anulada and o.status == "pendente")))
     return mapas
+
+
+# --- os conceitos associados (§14, item 7) --------------------------------------
+#
+# "Quais conceitos aparecem associados": o no principal da questao e os outros
+# que ela tambem cobra, no enunciado ou nas alternativas. So o alvo, e so as
+# questoes que contam. A contagem da incidencia nao muda: la so entra a
+# principal (decisao 86).
+
+@dataclass(frozen=True)
+class Associacao:
+    """Dois conceitos que caem na mesma questao."""
+
+    principal: str
+    associado: str
+    #: "2019 q83", uma por questao distinta, na ordem.
+    questoes: tuple
+
+    @property
+    def nome_principal(self) -> str:
+        return arvore.partes(self.principal)[-1]
+
+    @property
+    def nome_associado(self) -> str:
+        return arvore.partes(self.associado)[-1]
+
+
+def associacoes(ocorrencias: list[Ocorrencia], materia: str) -> list[Associacao]:
+    """Os pares principal + associado das questoes que contam na materia, do
+    que mais aparece ao que menos. Sem associado classificado, lista vazia."""
+    pares: dict[tuple, dict] = {}
+    for o in validas(ocorrencias):
+        if o.materia != materia:
+            continue
+        for associado in o.associados:
+            # Pela chave: a mesma questao em dois cadernos e uma so.
+            pares.setdefault((o.conteudo, associado), {})[o.impressao] = (
+                f"{o.ano} q{o.numero}")
+    saida = [Associacao(principal=p, associado=a, questoes=tuple(sorted(codigos.values())))
+             for (p, a), codigos in pares.items()]
+    saida.sort(key=lambda x: (-len(x.questoes), x.principal, x.associado))
+    return saida
 
 
 # --- a linha do acervo complementar (secao 4) -----------------------------------

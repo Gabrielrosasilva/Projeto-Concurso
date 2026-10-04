@@ -9,6 +9,7 @@ O que estes testes guardam:
   * abaixo do minimo o numero aparece e nao ordena nada;
   * nenhum minimo de amostra sobrou fora do config/amostra.yml.
 """
+import re
 from pathlib import Path
 
 import pytest
@@ -161,12 +162,62 @@ def test_nenhum_minimo_de_amostra_fora_do_config():
     la e no radar/amostra.py.
     """
     raiz = Path(__file__).resolve().parent.parent / "src" / "radar"
+    # Os tres ultimos ficaram como excecao declarada ate 04/10 (decisao 83).
     proibidos = ("MINIMO_NA_MATERIA =", "MINIMO_NO_ASSUNTO =",
-                 "MINIMO_DA_AMOSTRA =")
+                 "MINIMO_DA_AMOSTRA =", "MINIMO_PARA_EVOLUCAO =",
+                 "MINIMO_PARA_TENDENCIA =", "PROVAS_PARA_TENDENCIA =",
+                 "AMOSTRA_DO_CATALOGO =")
     achados = []
     for arquivo in raiz.rglob("*.py"):
         texto = arquivo.read_text(encoding="utf-8")
         for proibido in proibidos:
             if proibido in texto:
                 achados.append(f"{arquivo.name}: {proibido}")
+    # Nem no template: o "base pequena" era um `length < 3` em tres telas.
+    for arquivo in (raiz / "web" / "templates").glob("*.html"):
+        if re.search(r"\|\s*length\s*<\s*\d", arquivo.read_text(encoding="utf-8")):
+            achados.append(f"{arquivo.name}: length < numero")
     assert not achados, f"minimo escrito em codigo: {achados}"
+
+
+def test_os_tres_que_estavam_no_codigo_vem_do_arquivo_real():
+    """Decisao 83: a evolucao da home, a tendencia de letra no gabarito e o
+    "base pequena" sairam do codigo, com os mesmos valores."""
+    minimos = amostra.carregar()
+    assert minimos.evolucao == 20
+    assert minimos.tendencia_de_gabarito == 50
+    assert minimos.provas_para_tendencia == 3
+
+
+def test_a_amostra_da_conferencia_do_catalogo_vem_do_arquivo_real():
+    """A B.8 confere a classificacao do catalogo por amostra: 20 por materia,
+    no arquivo, e nao na tela (que dizia o 20 escrito no template)."""
+    assert amostra.carregar().amostra_do_catalogo == 20
+    assert amostra.PADRAO.amostra_do_catalogo == 20
+
+
+def test_mudar_o_yaml_muda_a_tendencia_do_gabarito_e_a_evolucao(tmp_path, monkeypatch):
+    from radar import macetes
+    from radar.servico import metricas
+
+    class Questao:
+        def __init__(self, resposta):
+            self.resposta = resposta
+
+    cinco = [Questao(letra) for letra in "abcde"]
+    assert macetes.distribuicao_do_gabarito(cinco)[1] == "amostra_pequena"
+
+    _config(tmp_path, """
+acervo:
+  tendencia_de_gabarito: 5
+desempenho:
+  evolucao: 2
+""")
+    monkeypatch.setenv("RADAR_CONFIG_DIR", str(tmp_path))
+
+    # Com o minimo em 5, as cinco letras ja falam: uma de cada, equilibrado.
+    assert macetes.distribuicao_do_gabarito(cinco)[1] == "equilibrado"
+    minimo = amostra.carregar().evolucao
+    assert minimo == 2
+    assert metricas.Evolucao(respondidas=2, acertos=1, minimo=minimo).mensuravel
+    assert not metricas.Evolucao(respondidas=2, acertos=1).mensuravel   # o padrao, 20

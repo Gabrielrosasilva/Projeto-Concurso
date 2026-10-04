@@ -209,7 +209,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "F1.pdf",
-   "sha256": "6fb2256e2c728057ca33c88392b12c808cf03a3ae7eb4ce2b9d19484cb4a8fcd",
+   "sha256": "594a89d0739e3eefb084a7fa4bbba4c83fd70c525cb1c23f7826ded4268509a6",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
@@ -234,10 +234,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=F1.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS03.pdf",
@@ -309,10 +309,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=F2.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024emergencialsaudepalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
@@ -320,18 +320,18 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-saude/",
    "arquivo": "M1.pdf",
-   "sha256": "e90a1e59dfff745d72ae33ec206c9af657e49850357d3480b68984d9b8568a2c",
-   "questoes": 40,
+   "sha256": "fdf899128b0d66849b958db6df2df9ed3b7a3cc891477457b156dfb99085ea27",
+   "questoes": 35,
    "materias_do_edital": [
     "Língua Portuguesa",
     "Noções de Informática"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024cpeducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS06.pdf",
@@ -397,8 +397,8 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "M1.pdf",
-   "sha256": "e90a1e59dfff745d72ae33ec206c9af657e49850357d3480b68984d9b8568a2c",
-   "questoes": 40,
+   "sha256": "11cbd78a87e91464f1a8f92e897abba9111a833638deebcd8dee91f318d3495f",
+   "questoes": 14,
    "materias_do_edital": [
     "Língua Portuguesa",
     "Noções de Informática"
@@ -406,7 +406,7 @@
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
    "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024cpeducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
+   "motivo": "14 questões extraídas, e o caderno vai até a 39: a numeração não fecha (falta 2, 3, 5, 6, 8, 10, 12, 13, 15, 17, 19, 21, 22, 24, 25, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38); alternativas diferentes de a-e nas questões 1, 4, 7, 9, 11, 14, 16, 18, 20, 23 e mais 4",
    "entra_nos_padroes": false,
    "incluida_em": null
   },
@@ -416,7 +416,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-processo-seletivo-12/",
    "arquivo": "M1.pdf",
-   "sha256": "e90a1e59dfff745d72ae33ec206c9af657e49850357d3480b68984d9b8568a2c",
+   "sha256": "0f08a3b2de05d9fb5394c984807a7aa56b23138992171b9e9a42c9d0c2b2d71b",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -424,10 +424,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024cpeducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=SS02.pdf",
@@ -757,18 +757,18 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-saude/",
    "arquivo": "S1.pdf",
-   "sha256": "a2bec4b6a292553058798390141ce4e0225d2ffe6a27d3ab4d1115fac11592a2",
-   "questoes": 40,
+   "sha256": "87a47f7bea447da8caa26855a2ede7eae15127a407610a57c91bd12a9e28668b",
+   "questoes": 35,
    "materias_do_edital": [
     "Língua Portuguesa",
     "Noções de Informática"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024cpeducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S1.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=SS08.pdf",
@@ -929,7 +929,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "F2.pdf",
-   "sha256": "d1619c8a1a3003b2adc9946e9b52f3cc7116799bf22d0f204721e4aa0d25fbb1",
+   "sha256": "28f8e5008d73f60ecef68b140f040f43fef5e53b5fb9577293d2c85715753d04",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
@@ -1023,17 +1023,17 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca-saude/",
    "arquivo": "F1.pdf",
-   "sha256": "6fb2256e2c728057ca33c88392b12c808cf03a3ae7eb4ce2b9d19484cb4a8fcd",
-   "questoes": 40,
+   "sha256": "905c6f5cfef73ede461b037897ab2533c9095ad464092b38ec86ab80e584742e",
+   "questoes": 35,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=F1.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024emergencialsaudepalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S3.pdf",
@@ -1193,7 +1193,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S12.pdf",
-   "sha256": "61cf6b25bc03942147839c6854cfdc320797980ac97b226bd1d662f3294a6ae3",
+   "sha256": "9b468e3ea52447f112649e4df456cf44930e2c9075ff266f703e6aae34a7412d",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1212,7 +1212,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S13.pdf",
-   "sha256": "44575e81e829240310378f27eca2914a1d158119ed933e80a14d08e333126cfa",
+   "sha256": "833ce68124d964a4e44e21292cf2897f4a7bfacd0bb6b67f65bebbda9ecbf552",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1231,7 +1231,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S14.pdf",
-   "sha256": "be9a5ce24f58b67208dfbb4f4fee6d98b2e0238c7b10bfad40192e717e1abd02",
+   "sha256": "5928955c1fde98001c9e24dc9b8a37c3bfdee21e72577f375ac054a4199352f1",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1250,7 +1250,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S02.pdf",
-   "sha256": "05bf0c70506e4ee42742a9b0e1807a9ba8f4e24802105e9b3e079b51fab010fc",
+   "sha256": "ed1f932683f64c83eaf140805c89fa3292a6cd481e243d9918c5827ea891b9ec",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1277,10 +1277,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S03.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E03.pdf",
@@ -1307,7 +1307,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S03.pdf",
-   "sha256": "1b4ab64d9229876bc0d5a3948b86d043bc3c454275a6b371b1c6767d613cb071",
+   "sha256": "1a7bcf69d4142bc9c1f7af7d553f50fae28ecb8dc0595433fb484c272b58b43c",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1334,10 +1334,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S04.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S04.pdf",
@@ -1345,7 +1345,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S04.pdf",
-   "sha256": "bdff93aadffb6ddc674e907300cf98a2874778cbf6a7e4fd3fcb892acc18298b",
+   "sha256": "71ce183cb785fd8ae7f197cfbb3e44366792cb3480cc7c3d729abd8d03ab0712",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1372,10 +1372,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S05.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E04.pdf",
@@ -1410,10 +1410,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S06.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E05.pdf",
@@ -1440,7 +1440,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S05.pdf",
-   "sha256": "fa43829d620c6c307598bd328ba9db7d86a114734d10202e3b4e6580a5d56a09",
+   "sha256": "f524972a6f3fb26abd5624e293e530419c94df662ae9ab9e2425e4718a154b1a",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1459,7 +1459,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S06.pdf",
-   "sha256": "00e31565149daa96338b607d6e1cf94b0ed6af7ad47623195f5cff47ceeccc6d",
+   "sha256": "73c40f5f9b4d4da8f2215daf385c7cd9fa776bf35a37300f9b1e7364213f3b61",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1486,10 +1486,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S07.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E07.pdf",
@@ -1516,7 +1516,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S07.pdf",
-   "sha256": "3491ab64ac4ff650bd25ea528da1b388cf7c94a110e0be1e4d279f608afa8744",
+   "sha256": "6d51207121caf819a76684654d773322d0a6514a6143e2d172320c02aef1b5b3",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1543,10 +1543,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S08.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E08.pdf",
@@ -1573,7 +1573,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S08.pdf",
-   "sha256": "1c83d2ccd6d22c59393d9e35de335ac1525d9137d1dfe3fccc1d5cffd0545792",
+   "sha256": "5b116ec43c22cf4c12ac3acc6948a567f1e0cd9393b83936f3ea0092ad150f52",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1592,7 +1592,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S09.pdf",
-   "sha256": "484cd6b3b82704698539f9a33f9c6aa75992208ebdd34d903db0620b43808d08",
+   "sha256": "a3a4d936605377347f24c71f4786efa8e8a262ef9a6925219d268db0a8063eb9",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1611,7 +1611,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S01.pdf",
-   "sha256": "dfe20062ac511c60ad0375eb1fc752b13d33ec7fc9f5f673035b8d4f45799577",
+   "sha256": "1e13f518a640894641278359d3cdc0c2a16508577ec96e247947d2ab39fc5a0e",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1638,10 +1638,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S02.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S09.pdf",
@@ -1657,10 +1657,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S09.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E09.pdf",
@@ -1741,7 +1741,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S10.pdf",
-   "sha256": "e3ad3d06604f3c91fb1247cc3e1ebe6511acc399b2ea0e02705d9a7bc4ca2fcf",
+   "sha256": "3f169379952e18f6c1d6a04b6669419ecb630cec791ad24c787624de103ce27d",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1768,10 +1768,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S10.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024bcseletivoeduca.fepese.org.br/?go=download&path=2&inline=1&arquivo=P05.pdf",
@@ -1805,10 +1805,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S11.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E10.pdf",
@@ -1853,7 +1853,7 @@
    "ano": 2024,
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-palhoca/",
    "arquivo": "S11.pdf",
-   "sha256": "1eaf66c93984763db78475c721adbcd885c48cab60fe3cd817f80d3e67f192a9",
+   "sha256": "329bf4185c13c3b548774cd3b35ba15caf048fd2c2c001fa97a9dee7ae5669e6",
    "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa",
@@ -1880,10 +1880,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024bcseletivoeduca.fepese.org.br/?go=download&path=2&inline=1&arquivo=P07.pdf",
@@ -1953,10 +1953,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S12.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E06.pdf",
@@ -2099,10 +2099,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S13.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E01.pdf",
@@ -2156,10 +2156,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "o mesmo PDF já está no acervo em https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S14.pdf",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024sas-sj.fepese.org.br/?go=download&path=2&inline=1&arquivo=S5.pdf",
@@ -2207,7 +2207,7 @@
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-sao-jose/",
    "arquivo": "S6.pdf",
    "sha256": "0d39de1d693b418aea45d3e9e71c580da4f1d41beada2425ce51be8f56d88c42",
-   "questoes": 59,
+   "questoes": 60,
    "materias_do_edital": [
     "Língua Portuguesa",
     "Raciocínio Lógico",
@@ -2215,10 +2215,10 @@
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "59 questões extraídas, e o caderno vai até a 60: a numeração não fecha (falta 47)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=SS12.pdf",
@@ -2341,7 +2341,7 @@
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-sao-jose-emergencial/",
    "arquivo": "AE2.pdf",
    "sha256": "146c30b22fefa3f5cd6ce80f9cd4404c3cd9c5a4cc39737d9606ed7e88bf9350",
-   "questoes": 29,
+   "questoes": 30,
    "materias_do_edital": [],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
@@ -2357,7 +2357,7 @@
    "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-sao-jose-emergencial/",
    "arquivo": "AE1.pdf",
    "sha256": "c1cff7c8af31d6bf08cf96e62c0cb2c6202c1612c22236c747b84490d4485348",
-   "questoes": 29,
+   "questoes": 30,
    "materias_do_edital": [],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
@@ -2469,16 +2469,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "AE.pdf",
    "sha256": "ab46e109bd69dac8fd82ae20553d042d637c1fd9ae04aefb26896648829c86c4",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
@@ -2635,16 +2635,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "OE.pdf",
    "sha256": "76553ec73a889e5366d4fad9d66dea320a32c42ed56adfb7aa6b6aa05a7363eb",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=PA6.pdf",
@@ -2653,16 +2653,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "PA6.pdf",
    "sha256": "7856803f4a840a4ddc081ad8a284b24a3f758b536823919b84a48284f95f90c7",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=PA1.pdf",
@@ -2671,16 +2671,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "PA1.pdf",
    "sha256": "b036ff52d8c4a89f9a4566bd3525fe834cdba74e3f0e99844b0802e51b0c519b",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=PA2.pdf",
@@ -2689,16 +2689,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "PA2.pdf",
    "sha256": "ff90e4ec3b46e42442042233225a2de3a87112968daf7db2549886f7df2462dd",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=PA3.pdf",
@@ -2707,16 +2707,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "PA3.pdf",
    "sha256": "74d99e928f6242f3527266f077f8c4f51021b8375f40e8183d9ee37ba586f9d3",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=PA4.pdf",
@@ -2725,16 +2725,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "PA4.pdf",
    "sha256": "3db3ae906f49f938bb2b8e89d5af5354e98ae23d415e127dda397164b5ccef79",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=PA5.pdf",
@@ -2743,16 +2743,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "PA5.pdf",
    "sha256": "a9ec3709b901631bd701c2ea9faad3b2d14cbb1784c794b90029028cb708d2c3",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S03.pdf",
@@ -2780,16 +2780,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P01.pdf",
    "sha256": "634e6f19f257aa79e59d862830367ac4ed3c772d1017f797a4c90ec2aea00d4f",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S04.pdf",
@@ -2817,16 +2817,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P02.pdf",
    "sha256": "03a2f06da8ed76aee98dc81e5007d85cbfcbefadb7e39c767962825ba3b7ebc7",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P03.pdf",
@@ -2835,16 +2835,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P03.pdf",
    "sha256": "9e66378258b71e4a1451be0b309bd14c5a2c2bab954e93f90f0882027a12e74c",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P04.pdf",
@@ -2853,16 +2853,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P04.pdf",
    "sha256": "5b96d834250bb68715a1c39426ee285b67702c6efeb46512e1a3a1ac651fd002",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S05.pdf",
@@ -2909,16 +2909,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P05.pdf",
    "sha256": "5b89c9be19e461ebdb84377209704bc7a651dd8472179771e77226b759e0094f",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P06.pdf",
@@ -2927,16 +2927,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P06.pdf",
    "sha256": "9156fde74aca94cca921d559db1807f05f5660304f3232431327d64a8bdfc72f",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P07.pdf",
@@ -2945,16 +2945,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P07.pdf",
    "sha256": "3dc58007af818f7e1d29160ae76fbbb026856af30efedadfc055d2b26d1a6306",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S07.pdf",
@@ -3001,16 +3001,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P08.pdf",
    "sha256": "ce8250a7277c33a05b4ad655b81ca83fbc9d8daf457bfd387c63c6bc149cfbae",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S09.pdf",
@@ -3038,16 +3038,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P09.pdf",
    "sha256": "06c8b09e7f1a0e164fef58b191c89a1afdc515269d5f41702e0be8cc2d0e18d2",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S10.pdf",
@@ -3075,16 +3075,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P10.pdf",
    "sha256": "73a6d9b9e70b87afbff666e186ce5795c5b61bed0103d1b5f36f019b5a7c6001",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S11.pdf",
@@ -3131,16 +3131,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P11.pdf",
    "sha256": "3275bcba532b45038a4d140a7b185173136004ab27c830860ffb42a100b32368",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S13.pdf",
@@ -3168,16 +3168,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P12.pdf",
    "sha256": "fecd1e940c393a6e724e9b5b4ab9092981632beea891ad2957085db1faa1d7c6",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P13.pdf",
@@ -3186,16 +3186,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P13.pdf",
    "sha256": "7805b5cd5686bbdf5839eda639a2555f8749973928691886ceeff63f173c6083",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P14.pdf",
@@ -3204,16 +3204,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P14.pdf",
    "sha256": "6c324e615af61e80a64aa1196e7d3ed7e8c85436afee9ada034f00d1c159e6a9",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S14.pdf",
@@ -3279,16 +3279,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P15.pdf",
    "sha256": "8e9df07986fac22f3520bf8f889d2958d8c78a09756ba69d5ba6cffeb9f26e35",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P16.pdf",
@@ -3297,16 +3297,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P16.pdf",
    "sha256": "147b2d06884fadc672c01c352dc7e35c8351c914ed9eebbcaf8a05d5c165c3e7",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=P17.pdf",
@@ -3315,16 +3315,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "P17.pdf",
    "sha256": "6ceddca7acc899c98d5ecfdbdf80f5f28f08d048c196287073d59c3ec5846b99",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S17.pdf",
@@ -3352,16 +3352,16 @@
    "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-substituto2024/",
    "arquivo": "SE.pdf",
    "sha256": "d2d50756ab6d71dc7cb9b7bb385593a2d5bc1b0a10b171d9b3bd24417a2bd82e",
-   "questoes": 39,
+   "questoes": 40,
    "materias_do_edital": [
     "Língua Portuguesa"
    ],
    "gabarito": "provisório",
    "quadro_do_edital": "não lido",
-   "aceita": false,
-   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 20)",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
-   "incluida_em": null
+   "incluida_em": "2026-10-04"
   },
   {
    "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",

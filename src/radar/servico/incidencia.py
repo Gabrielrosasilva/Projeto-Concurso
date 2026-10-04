@@ -42,6 +42,12 @@ def ocorrencias() -> list[incidencia.Ocorrencia]:
         caminhos = list(s.scalars(select(Conteudo.caminho)))
         principais = {c.chave: c for c in s.scalars(
             select(Classificacao).where(Classificacao.principal.is_(True)))}
+        # Os conceitos associados (§14, item 7): os outros nos da questao.
+        associados: dict[str, list] = {}
+        for c in s.scalars(select(Classificacao)
+                           .where(Classificacao.principal.is_(False))
+                           .where(Classificacao.status != "pendente")):
+            associados.setdefault(c.chave, []).append(c.conteudo)
         questoes = list(s.scalars(
             select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)))
 
@@ -59,8 +65,19 @@ def ocorrencias() -> list[incidencia.Ocorrencia]:
             tipo_de_questao=c.tipo_de_questao if c else None,
             pegadinha=c.pegadinha if c else None,
             enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave,
-            numero=q.numero, conferida=bool(c and c.conferida_em)))
+            numero=q.numero, conferida=bool(c and c.conferida_em),
+            associados=tuple(sorted(associados.get(chave, [])))))
     return resultado
+
+
+def associacoes(mapas: list[incidencia.MapaDaMateria],
+                ocorrencias_do_alvo: list | None = None) -> dict:
+    """{materia: [Associacao]}: os conceitos que caem juntos nas questoes do
+    alvo, para os mapas pedidos (§14, item 7)."""
+    if ocorrencias_do_alvo is None:
+        ocorrencias_do_alvo = ocorrencias()
+    return {m.materia: incidencia.associacoes(ocorrencias_do_alvo, m.materia)
+            for m in mapas}
 
 
 def mapa(materia: str | None = None) -> list[incidencia.MapaDaMateria]:

@@ -14,22 +14,10 @@ voltou a rodar e commitou `coleta: 2026-10-02`. O `coleta.yml` roda
 `pytest -q` ANTES de coletar, e passo que falha aborta o job - o commit e a
 prova de que a suite passou no Linux.
 
-- ⚪ **Conferir a primeira noite do backup consertado** (03/10, decisao 64).
-  O `radar sincronizar` deixou de exigir a pasta limpa e o `git add` deixou de
-  receber arquivo que nao existe; o comando foi rodado de verdade numa copia
-  do repositorio, com o banco real e a pasta suja. Falta a primeira execucao
-  da tarefa das 23h30 no repositorio de verdade: o log de
-  `data/logs/sincronizar-2026-10-03.log` (ou a tela Mais) tem que terminar em
-  `RESULTADO: ok`, e o GitHub ganhar um commit `sincronizar: 2026-10-03` -
-  e com ele os 4 simulados de 28 e 29/09, que ate hoje so existem no
-  `radar.db`;
-- 🔴 **`?tema=` na tela Macetes** (achado na conferencia da 7A, 03/10): o
-  parametro que forca o tema claro/escuro pela URL e o mesmo nome do filtro
-  "Materia ou tema" do recorte por banca. `/macetes?tema=claro` pinta a tela
-  de claro E procura o tema "claro". O botao da barra nao sofre disso (ele
-  grava o cookie e tira o `tema` da URL na volta); so quem digita o
-  parametro. O conserto e renomear um dos dois - e o do filtro aparece em
-  link salvo, entao a escolha e sua.
+O backup das 23h30 (decisao 64) tambem voltou: a noite de 03/10 terminou em
+`RESULTADO: ok` (`data/logs/sincronizar-2026-10-03.log`) e subiu o commit
+`sincronizar: 2026-10-04`, com os 3 simulados de 28 e 29/09 (o quarto estava
+vazio, e a limpeza o apagou). Nada quebrado agora.
 
 ## B. O desenho do estudo (decisao tomada, desenho aberto)
 
@@ -101,18 +89,11 @@ alternativas passam pelos arts. 2o, 3o e 4o). Em 2013 foram 3 (q50, art. 8o;
 q51, art. 7o; q53, art. 2o). As quatro estao pendentes: o programa de 2019
 nao lista "aplicacao da lei penal".
 
-### B.7 🔴 Erros de extracao nas provas do alvo
-
-O `radar auditar` (Etapa 3A) acusa 25 questoes do alvo com suspeita, listadas
-em `docs/auditoria.md`: o titulo da materia seguinte ou o rodape da FEPESE
-grudado na alternativa "e" (20), a grade de respostas na 2019-q99, o numero
-dentro do enunciado na 2019-q100 e "e cor-" cortado em 2019-q51 a 55. Mais um
-que a verificacao nao pega: a 2013-q20 perdeu a imagem do icone do Excel. O
-texto nao foi corrigido; o conserto e no leitor do caderno (`questoes.py`).
-
 ### B.8 🟡 Classificacao do acervo complementar (Etapa 3B, passo 4)
 
-As 122 provas aceitas no `data/acervo_complementar.json` estao no acervo.
+As 169 provas aceitas no `data/acervo_complementar.json` estao no acervo
+(eram 122 ate 04/10: o leitor consertado e as 21 provas baixadas fizeram
+entrar 47, decisao 90).
 **Feito (02/10):** as 80 do Socioeducativo 2013 e 2016 (lote 1), com 62
 classificadas e 18 pendentes com motivo; a incidencia ja mostra o complementar
 por no nessas materias. **Falta o resto**, e a linha diz quantas ("993 sem
@@ -122,18 +103,18 @@ classificacao ainda" em Portugues):
 2. ✅ **os blocos genericos** - feitos em 02/10: das 125 com indicio,
    44 classificadas e 81 sem linha (conteudo do cargo daquele concurso);
 3. ✅ **Portugues e Raciocinio Logico pelo catalogo** - feitos em 02/10: 92 + 16
-   propostas automaticas 🟡.
+   propostas automaticas 🟡. **Reprovadas na amostra de 04/10** (o catalogo
+   errou o assunto em 9 de 20 e em 9 de 16) e refeitas pelo Claude Code, uma a
+   uma: o lote 4 (decisao 87).
 
 **O que sobra na B.8:**
-- **a sua conferencia**: 44 do lote 2 e 108 do catalogo esperam conferencia -
-  as do catalogo por AMOSTRA (20 por materia; taxa de erro alta, o lote volta).
-  **A tela de Conferencia lista so o alvo**: para conferir o complementar ela
-  precisa de um filtro de evidencia, que ainda nao existe. **Decidido em 02/10
-  (decisao 18): fica para a Etapa 5**, quando a classificacao passar a
-  escolher questao para treino - **e a Etapa 5 nao o fez** (ela passou a
-  escolher pela classificacao, mas a tela continua so com o alvo; achado da
-  varredura de 03/10). Ate la o complementar vale como esta, com a
-  procedencia a vista;
+- **a sua conferencia**, uma a uma, das 232 classificadas do complementar
+  aceito: as 124 do Claude Code de 02/10 (lotes 1 e 2) e as 108 refeitas em
+  04/10 (lote 4). A tela existe desde 04/10 (decisao 87): Analises >
+  Conferencia, filtro "complementar aceito". O Claude Code releu as 44 do lote
+  2 no mesmo dia: todas no no certo; um dispositivo que nao existe (CPP, art.
+  282, § 7º) virou o art. 282, § 5º, e o art. 316, paragrafo unico. Proposta
+  nova do catalogo, se ele rodar de novo, se confere pela amostra da tela;
 - **as questoes sem linha**: 81 do lote 2 (conteudo de outro cargo, de
   proposito) e, em Portugues e Raciocinio Logico, as que o catalogo nao cobre
   (47 sem palavra, 23 ambiguas, 22 sem par no edital em Portugues; 21 e 8 em
@@ -143,59 +124,50 @@ classificacao ainda" em Portugues):
   conteudo do cargo daquele concurso (enfermagem, pedagogia, contabilidade).
   Nao ha por que classifica-los.
 
-### B.10 🔴 Blocos de materia trocados no Socioeducativo 2013 e 2016
+### B.9 🟡 Defeitos do acervo complementar achados na 3B
 
-A classificacao do lote 1 (02/10) achou 8 questoes no bloco errado, nos dois
-cadernos do Socioeducativo:
+Resolvidos em 04/10 (decisao 90): o "mesmo sha256 em dois enderecos" era o
+download gravando dois S07.pdf no mesmo lugar - as 21 provas que faltavam
+foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
+"N." da lista da alternativa anterior pelo numero da questao. Sobram:
 
-- **2013-q49, 2013-q50, 2016-q49 e 2016-q50**: sao de Direito Processual Penal
-  (inquerito na acao publica condicionada, crimes de responsabilidade de
-  funcionario publico, nota de culpa) e estao no bloco "Legislacao Estadual";
-- **2013-q59, 2013-q60, 2016-q59 e 2016-q60**: sao de Legislacao Estadual
-  (Estatuto do Servidor de SC, Constituicao Estadual) e estao no bloco
-  "Direito Processual Penal".
-
-Isso vem da separacao do caderno por materia (`questoes.py`), que erra a
-fronteira entre blocos quando o titulo da materia seguinte gruda no texto - o
-mesmo defeito da B.7, agora mudando a MATERIA da questao. Consequencia hoje:
-as oito estao pendentes (a importacao, com razao, nao deixa trocar de materia
-quando ela esta no edital), e a contagem "pelo nome da materia" do
-complementar erra por 4 em cada uma das duas materias. **Nada foi corrigido.**
-Duas saidas, nenhuma escolhida: consertar a fronteira no leitor e reextrair,
-ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
-
-### B.9 🔴 Defeitos do acervo complementar achados na 3B
-
-- **24 provas com o mesmo sha256 em dois enderecos.** Parte e o mesmo caderno
-  em http e https (os tres de Florianopolis 2025); parte sao dois hotsites de
-  Palhoca (2024 emergencial e 2024 PS educa) com o mesmo `S07.pdf` e cargos
-  diferentes - e no banco as duas provas tem so 24 das 40 questoes em comum.
-  Ou a mesma prova entrou duas vezes, ou o hash do manifesto esta errado para
-  elas. A validacao recusa a segunda; nada foi apagado;
-- **31 provas com a numeracao furada**, 26 delas cadernos de 39 questoes de
-  2023, e um caderno de 40 em que falta a questao 20. Mesmo tipo de defeito da
-  B.7, agora no complementar. O conserto e no leitor do caderno
-  (`questoes.py`).
+- **3 cadernos ainda com a numeracao furada**, de formato que o leitor nao
+  entende: o de Palhoca 2024 emergencial (14 de 39 questoes lidas), o de
+  Brusque 2023 educa (11 de 24) - os dois com alternativas fora do padrao
+  a-e - e o S7 de Sao Jose 2024, sem a questao 49. A validacao os recusa, e
+  nada deles conta;
+- **os tres de Florianopolis 2025 (COMCAP) em http e https** sao de fato a
+  mesma prova em dois enderecos: a segunda fica recusada, como deve;
+- **a 2013-q20 do alvo sem a imagem** do icone do Excel: o PDF traz a figura,
+  e o texto nao. E Nocoes de Informatica, fora do edital de 2019.
 
 ## D. Combinado para depois
 
-- 🟡 **Conferir a lista de leis alteradas** (`config/leis.yml`, `mudancas`;
-  decisao 65). Ela existe desde 03/10: 15 itens, escritos pelo Claude Code a
-  partir do texto compilado (Camara e ALESC), que pegam 17 questoes de 2013 e
-  2019 - todos `conferida: false`, e por isso o aviso sai com o 🟣. Para cada
-  item, leia a evidencia em [leis_alteradas.md](leis_alteradas.md) e troque
-  para `conferida: true` (ou apague o item). Comece pelas 5 em que o gabarito
-  oficial ficou errado: 2013 q64 e q66, 2019 q46, q71 e q75;
+- 🟡 **Marcar a lista de leis alteradas como conferida** (`config/leis.yml`;
+  decisoes 65 e 84). Os 15 itens de `mudancas` foram reconferidos pelo Claude
+  Code em 04/10, artigo por artigo, no texto oficial de hoje (Camara e ALESC):
+  **nenhum esta errado**, e as ressalvas - o que nao se le daqui (a data de
+  2027 da EC 132, as ADIs que a compilacao cita, a EC estadual 80/2020) - estao
+  na tabela de [leis_alteradas.md](leis_alteradas.md). Os 9 de `fronteira`
+  tambem foram conferidos (decisao 84). Falta so o seu `conferida: true` em
+  cada um - e o que tira o 🟣 -, comecando pelas 5 em que o gabarito oficial
+  ficou errado: 2013 q64 e q66, 2019 q46, q71 e q75;
 - 🔴 **Conferir as 61 fichas da 6B** (Hoje > Fichas, botao "Conferi esta
   ficha", ou `radar fichas --conferir <tema>`), comecando pelas da semana. Na
-  conferencia, vale olhar os nos de cada uma: 13 ficaram sem no (decisao 43);
-- 🔴 **Fichas de Direito Penal e Constitucional sem o texto vigente**: as 12
-  foram escritas antes de a 6B adotar a conferencia pelo texto compilado
-  (decisao 48). O CP e a CF tambem mudaram depois de 2019; refazer a
-  conferencia artigo por artigo antes de estudar cada tema;
+  conferencia, vale olhar os nos de cada uma: 13 ficaram sem no (decisao 43).
+  O Claude Code leu as 61 contra a fonte em 04/10 - LEP, CF, CP e CPP no texto
+  compilado de 03/10, Mandela no texto da ONU: 15 corrigidas (um erro de
+  verdade, a regra 40 de Mandela) e 7 com ponto que ele nao conseguiu
+  conferir, entre eles a guarda municipal no STF e o Manual de Redacao.
+  Tudo em [conferencia_das_fichas.md](conferencia_das_fichas.md); a
+  conferencia continua sua;
 - 🔴 **Reclassificacoes que as fichas mostraram**: 2 questoes de regencia
-  estao em "Emprego de tempos e modos verbais"; as de pronome do complementar
-  estao em "Classes gramaticais variaveis", junto com substantivo e adjetivo;
+  estao em "Emprego de tempos e modos verbais" (no complementar, a regencia
+  foi para Termos integrantes > Objeto direto e indireto, o lugar da ficha -
+  decisao 87; as 2 do alvo sao conferidas suas, e mudar e com voce); as de
+  pronome do complementar
+  estavam em "Classes gramaticais variaveis", junto com substantivo e adjetivo
+  (refeitas no lote 4 de 04/10: foram para Pronomes, decisao 87);
   as de concordancia, crase, pontuacao e complemento nominal estao so no nivel
   do assunto, e por isso as fichas de tema nao as contam; "Regras de aplicacao
   geral" (Regras de Mandela) nomeia a Parte I inteira (regras 1 a 85);
@@ -220,12 +192,11 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   assunto). Prazo: antes de 09/11;
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
-- 🔴 **Macetes, "Quantas questoes caem numa prova"** (auditoria da Etapa 8):
-  a fatia tem a base no centro do grafico, mas a media "8.5/prova" nao diz em
-  quantas provas - a amostra fica pela metade (regra inviolavel 3);
 - ⚪ **Conferir o Actions de 04/10**: o primeiro `coleta:` do radar-bot com o
   codigo da 2A, da 2B e da 2C. O de 03/10 foi verde (o commit `coleta: 2026-10-03`
-  e a prova: o job roda o `pytest -q` antes de coletar);
+  e a prova: o job roda o `pytest -q` antes de coletar). No fim do lote de
+  04/10 o GitHub ainda nao tinha o `coleta: 2026-10-04` (o `gh` nao esta
+  instalado aqui; vi pelo `git fetch`), e o proximo ja roda com o lote;
 - 🔴 **Acento fora da tela web** (o que sobrou da A2, feita na Etapa 1B so
   para a web): a saida do terminal (`cli.py`, ~100 textos, inclusive a
   linha do tempo de `radar eventos`, que ainda mostra "Situacao: a -> b"), a
@@ -239,11 +210,6 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
-- 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A, a 2B e a 2C estao
-  feitas (as faixas que medem, o simulado do Qconcursos, o sabado e o assunto
-  na propria faixa: decisoes 67, 69, 70 e 71). Da **secao F** (o Pedido 1),
-  feitas a F1 a F7 (decisoes 74, 75, 77 a 81); falta o resto dela, em
-  subetapas;
 - ⚪ **O R+7 dos diagnosticos refaz 5 erros** (decisao 70): e o numero do
   plano. Com mais erros, os outros ficam para a rodada "So meus erros" da
   home. Se quiser refazer todos, e trocar o `questoes: 5` da faixa de 10/10 -
@@ -260,10 +226,12 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
   comandos genericos iguais com alternativas diferentes viram uma so, e a
   importacao conta a segunda como repetida. Por desenho; no estoque, cada
   enunciado foi escrito com o que cobra;
-- 🔴 **As 20 geradas de 28/09 estao com a materia "Aplicacao da lei penal
-  (arts. 1º a 12)"**, e nao "Direito Penal": ficam fora do treino de Direito
-  Penal no /geradas. E as 50 antigas tem so a materia no `conteudo`, entao
-  nenhuma ficha as mostra. Corrigir e mexer em dado antigo - decisao sua;
+- ⚪ **Duas geradas antigas para voce olhar** (decisao 89): a de genero do
+  substantivo de 28/09 da "conjuge" como comum de dois generos, e a gramatica
+  tradicional o da como sobrecomum ("o conjuge"); e a do diretor de
+  estabelecimento de 27/09 cita o "art. 76" da LEP, e o requisito e do art.
+  75. As duas ficaram no sorteio: o botao "essa questao esta errada" do
+  /geradas tira, se voce concordar;
 - 🟡 **O /geradas treina pela materia, e nao pelo no**: a ficha lista as
   geradas do tema, mas manda treinar no /geradas, que mistura os temas da
   materia - inclusive os ainda nao estudados;
@@ -282,46 +250,12 @@ A varredura dos docs contra o codigo e o banco achou estes pontos, que nenhuma
 etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 (decisoes 63 a 66 e a limpeza dos docs); estes ficam:
 
-- ⚪ **Os termos frequentes empatados mudam de ordem a cada vez que o radar
-  sobe** (achado do F6): na Incidencia e nos Macetes, as palavras com a mesma
-  contagem saem numa ordem que o Python sorteia por processo, e no corte
-  (as 8 primeiras) ate a palavra mostrada pode trocar. Desempatar em ordem
-  alfabetica resolve;
-- 🟡 **33 variacoes geradas sem a questao real de base identificada** (F3,
-  decisao 77): 30 do estoque de 03/10 e 3 de 27/09. A base delas tem um
-  enunciado que se repete no acervo com alternativas diferentes, e elas foram
-  gravadas antes de a chave ser guardada; o selo diz que o acervo nao
-  consegue identificar. As 30 do estoque podem ser religadas pelos pedidos
-  que ficaram no historico da conversa de 03/10 (o texto de cada questao de
-  base foi impresso la); as 3 de 27/09 nao tem registro. Decisao sua;
-- 🟡 **A revisao feita nao empurra o prazo do 1-7-30** (achado da F7, decisao
-  81): o prazo so anda com acerto no RADAR na data do vencimento ou depois.
-  O R+7 feito no Qconcursos marca a data da revisao (decisao 79), mas o
-  conteudo continua "prazo de revisao vencido" ate eu acertar questao dele
-  no radar. Com as fichas conferidas, as faixas passam a encher a fila (com
-  as duas de 28 e 29/09, de 10 para 19), e o R+7 nao tira ninguem dela.
-  Decisao sua: (a) deixar assim; (b) a revisao feita fora do radar no
-  vencimento ou depois - a faixa de revisao marcada, o extra de revisao -
-  tambem passa o conteudo para a etapa seguinte, como o acerto no radar ja
-  faz (a rodada de revisao do radar ja anda pelo acerto);
-- ⚪ **O "estudado" do codigo e mais largo que a decisao 20**: qualquer faixa
-  ou extra SEM questao deixa o no estudado (as constantes `TIPOS_DE_ESTUDO` e
-  `EXTRA_DE_ESTUDO` de `servico/estudo.py` estao declaradas e sem uso). Hoje
-  so o extra de revisao sem questao cai nisso: a faixa de correcao nao tem
-  `conteudo` nem cobre no nenhum (decisao 81);
-- ⚪ **O 1-7-30 sem estudo conta da ULTIMA resposta de cada questao**
-  (`estudo.situacoes`, `primeira_pratica`): questao refeita empurra o
-  "primeiro contato" para a data da refeita. A evolucao ja conta toda
-  resposta (decisao 79); a ancora da revisao ficou como estava;
-- 🟡 **§14, item 7 do novo.md ("quais conceitos aparecem associados")**: as
-  402 classificacoes sao todas principais; nenhuma questao tem conteudo
-  associado, e a pergunta nao tem resposta;
-- 🟡 **Minimos fixos fora do `config/amostra.yml`**: `MINIMO_PARA_EVOLUCAO`
-  (20, `servico/metricas.py`), `MINIMO_PARA_TENDENCIA` (50, `macetes.py`),
-  `PROVAS_PARA_TENDENCIA` (3, `servico/cartoes.py`) e o `length < 3` de tres
-  templates (`foco.html`, `home.html`, `previsao.html`). Estao declarados no
-  `CLAUDE.md` como excecao; leva-los ao `config/amostra.yml` e decisao sua;
-- ⚪ **A lista de leis alteradas so tem o que as provas de 2013 e 2019
-  cobraram.** Mudanca que nenhuma questao cobra (a saida temporaria so para
-  estudo, as policias penais da EC 104/2019) fica de fora do aviso - esta em
-  `docs/leis_alteradas.md`, "Casos de fronteira".
+- ⚪ **3 variacoes geradas de 27/09 sem a questao real de base** (decisao
+  77): o enunciado da base delas se repete no acervo com alternativas
+  diferentes, e nao ha registro do pedido. O selo diz que o acervo nao
+  consegue identificar. As 30 do estoque de 03/10 foram religadas em 04/10
+  pelo historico da conversa (F10);
+- ⚪ **Os conceitos associados nao tem tela de conferencia** (decisao 86): as
+  109 associacoes de 04/10 aparecem com o 🟣 "por conferir" na Incidencia,
+  e a Analises > Conferencia so mostra a principal. E uma importacao nova
+  acrescenta e atualiza, mas nao apaga o associado que saiu da resposta;

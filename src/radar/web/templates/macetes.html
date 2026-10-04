@@ -331,7 +331,8 @@
         </div>
         <p class="ds-cartao__meta">
           A fatia é a participação da matéria no total de questões da
-          {{ banca }}; o número ao lado é quanto ela cai por prova. Os dois
+          {{ banca }}; o número ao lado é quanto ela cai por prova, e em
+          quantas provas a média foi tirada. Os dois
           não andam juntos porque nem toda matéria cai em todo cargo - Temas
           de Educação são 10 questões, mas só em prova de professor.
         </p>
@@ -349,7 +350,8 @@
                 <span class="nome" title="{{ f.rotulo }}">{{ f.rotulo }}</span>
                 <span class="valor">
                   {{ "%.0f"|format(f.porcentagem) }}%{% if f.por_caderno %} &middot;
-                  {{ "%.1f"|format(f.por_caderno) }}/prova{% endif %}</span>
+                  {{ "%.1f"|format(f.por_caderno) }}/prova{% if f.provas %} em {{ f.provas }}
+                  prova{{ 's' if f.provas != 1 }}{% endif %}{% endif %}</span>
               </li>
             {% endfor %}
           </ul>

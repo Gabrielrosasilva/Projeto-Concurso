@@ -1,6 +1,6 @@
 # Auditoria dos dados de estudo
 
-> Gerado por `radar auditar` em 03/10/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
+> Gerado por `radar auditar` em 04/10/2026. **Nao edite a mao**: rode o comando de novo. Tudo aqui foi lido dos PDFs oficiais do acervo e do banco, nada foi digitado.
 
 ## O que foi conferido
 
@@ -21,11 +21,6 @@ Contagem certa com o nome escrito diferente (nao e erro de numero, mas a tela mo
 - 2013: edital "Direito Processual Penal", caderno "Direito Processo Penal"
 - 2016: edital "Direito da Criança e do Adolescente- Lei do Sinase", caderno "Lei do Sinase"
 
-Materia em outra posicao no caderno que no edital (a contagem nao muda; vale conferir se o caderno e mesmo assim ou se a separacao por materia trocou os blocos):
-
-- 2016: Direito Processual Penal - 7a no edital, 8a no caderno
-- 2016: Legislação Estadual - 8a no edital, 7a no caderno
-
 ## Resumo
 
 | Prova | Papel | Questoes | Anuladas | Definitivo que vale | Divergencias |
@@ -38,50 +33,7 @@ Provas do alvo: 2, com 162 questoes validas (sem as anuladas). As de reforco nao
 
 ## Erros de extracao (suspeitas para conferir)
 
-**2013 Agente Penitenciário** — 10 questao(oes):
-
-- questao 3 (Língua Portuguesa): cabecalho ou rodape dentro da alternativa e
-- questao 5 (Língua Portuguesa): cabecalho ou rodape dentro da alternativa e
-- questao 20 (Noções de Informática): cabecalho ou rodape dentro da alternativa e
-- questao 28 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
-- questao 32 (Direito Constitucional): cabecalho ou rodape dentro da alternativa e
-- questao 45 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
-- questao 46 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
-- questao 48 (Direito Penal): cabecalho ou rodape dentro da alternativa e
-- questao 65 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
-- questao 68 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
-
-**2019 Agente Penitenciário - Feminino (AP)** — 15 questao(oes):
-
-- questao 13 (Língua Portuguesa): cabecalho ou rodape dentro da alternativa e
-- questao 25 (Raciocínio Lógico): cabecalho ou rodape dentro da alternativa e
-- questao 36 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
-- questao 46 (Administração Pública): cabecalho ou rodape dentro da alternativa e
-- questao 48 (Administração Pública): cabecalho ou rodape dentro da alternativa e
-- questao 51 (Direito Penal): palavra cortada no fim do enunciado
-- questao 52 (Direito Penal): palavra cortada no fim do enunciado
-- questao 53 (Direito Penal): palavra cortada no fim do enunciado
-- questao 55 (Direito Penal): cabecalho ou rodape dentro da alternativa e
-- questao 55 (Direito Penal): palavra cortada no fim do enunciado
-- questao 65 (Legislação Especial): cabecalho ou rodape dentro da alternativa e
-- questao 73 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
-- questao 80 (Legislação Estadual): cabecalho ou rodape dentro da alternativa e
-- questao 94 (Sociologia Aplicada): cabecalho ou rodape dentro da alternativa e
-- questao 99 (Sociologia Aplicada): cabecalho ou rodape dentro da alternativa e
-- questao 100 (Sociologia Aplicada): o numero da questao dentro do enunciado
-
-**2016 Agente de Segurança Socioeducativo (AS)** — 10 questao(oes):
-
-- questao 16 (Noções de Informática): cabecalho ou rodape dentro da alternativa e
-- questao 18 (Noções de Informática): cabecalho ou rodape dentro da alternativa e
-- questao 23 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
-- questao 25 (Direitos Humanos): cabecalho ou rodape dentro da alternativa e
-- questao 35 (Direito Constitucional): cabecalho ou rodape dentro da alternativa e
-- questao 45 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
-- questao 46 (Direito Administrativo): cabecalho ou rodape dentro da alternativa e
-- questao 48 (Direito Penal): cabecalho ou rodape dentro da alternativa e
-- questao 63 (Lei do Sinase): cabecalho ou rodape dentro da alternativa e
-- questao 70 (Lei do Sinase): cabecalho ou rodape dentro da alternativa e
+- nenhuma suspeita.
 
 ## Classificacao na arvore de conteudos
 
@@ -91,7 +43,7 @@ Pela classificacao principal de cada questao; sem classificacao e pendente. Conf
 |---|---|---|---|---|---|
 | 2013 Agente Penitenciário | 70 | 56 | 2 | 12 | 70 |
 | 2019 Agente Penitenciário - Feminino (AP) | 100 | 90 | 7 | 3 | 100 |
-| 2016 Agente de Segurança Socioeducativo (AS) | 70 | 29 | 6 | 35 | 0 |
+| 2016 Agente de Segurança Socioeducativo (AS) | 70 | 33 | 4 | 33 | 0 |
 
 ## 2013 · Agente Penitenciário
 
@@ -178,8 +130,8 @@ Quadro lido de `2016_SJC_Edital_01.pdf`. A linha do edital e a do caderno se enc
 | 4 / 4 | Direito Constitucional | 10 | Direito Constitucional | 10 | sim |
 | 5 / 5 | Direito Administrativo | 6 | Direito Administrativo | 6 | sim |
 | 6 / 6 | Direito Penal | 2 | Direito Penal | 2 | sim |
-| 7 / 8 | Direito Processual Penal | 2 | Direito Processual Penal | 2 | sim |
-| 8 / 7 | Legislação Estadual | 10 | Legislação Estadual | 10 | sim |
+| 7 / 7 | Direito Processual Penal | 2 | Direito Processual Penal | 2 | sim |
+| 8 / 8 | Legislação Estadual | 10 | Legislação Estadual | 10 | sim |
 | 9 / 9 | Direito da Criança e do Adolescente- Lei do Sinase | 10 | Lei do Sinase | 10 | sim (nome difere) |
 | | **Total** | **70** | | **70** | |
 

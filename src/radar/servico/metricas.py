@@ -37,6 +37,7 @@ from datetime import date, datetime, time, timedelta, timezone
 
 from sqlalchemy import select
 
+from radar import amostra as regua
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import (
@@ -218,6 +219,10 @@ class Lancamento:
     #: A linha do radar nao tem `conteudo` - nao fui eu que escolhi o no -, e
     #: e por esta chave que ela chega a ele, pela classificacao da questao.
     chave: str | None = None
+    #: O tipo da faixa no plano (teoria, questoes, revisao...) ou o "o que"
+    #: do estudo extra (teoria, lei_seca...). Vazio no radar. E ele que diz
+    #: se a linha deixa o no "estudado" (decisao 20).
+    tipo: str = ""
     #: A faixa do plano, nas linhas de faixa. E por ela que a faixa sem
     #: `conteudo` chega ao que cobre - so para a situacao e as datas do no,
     #: nunca para o acerto (servico/estudo.py, decisao 81).
@@ -293,6 +298,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
                 conteudo=feita.conteudo,
                 descricao=f"{data:%d/%m/%Y}, faixa {feita.titulo!r}",
                 revisao=feita.tipo in plano_de_estudo.TIPOS_DE_REVISAO,
+                tipo=feita.tipo,
                 faixa=getattr(montado, feita.bloco)[feita.indice],
             ))
 
@@ -306,6 +312,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
             conteudo=extra.conteudo,
             descricao=f"{extra.data:%d/%m/%Y}, estudo extra #{extra.id}",
             revisao=extra.o_que == "revisao",
+            tipo=extra.o_que,
         ))
 
     # --- o que eu respondi dentro do radar ------------------------------------
@@ -419,10 +426,6 @@ def do_dia(data: date, plano=None) -> Conta:
 # tentativa e apagada - elas seguem no banco, e contam como RESPOSTAS no
 # volume do dia e na evolucao.
 
-# Abaixo disto de respostas, nao ha evolucao para medir: a tela convida a
-# responder, em vez de mostrar uma porcentagem de meia duzia de questoes.
-MINIMO_PARA_EVOLUCAO = 20
-
 # A janela da variacao. E a da especificacao: "a variacao nos ultimos 30 dias".
 DIAS_DA_EVOLUCAO = 30
 
@@ -448,6 +451,21 @@ def placar(respostas) -> tuple[int, int]:
     return len(dadas), sum(1 for r in dadas if r.acertou)
 
 
+def respostas_reais(s) -> list[RespostaDeSimulado]:
+    """Toda resposta que eu dei a questao real, na ordem em que dei.
+
+    O historico inteiro, e nao a ultima de cada questao: "quando eu vi isto
+    pela primeira vez" se responde com a primeira resposta (o 1-7-30 do
+    `servico/estudo.py`, decisao 85).
+    """
+    return list(s.scalars(
+        select(RespostaDeSimulado)
+        .where(RespostaDeSimulado.escolhida.is_not(None))
+        .where(RespostaDeSimulado.gerada.is_(False))
+        .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
+    ))
+
+
 def ultimas_respostas_reais(s) -> dict[int, RespostaDeSimulado]:
     """{questao_id: a resposta mais recente que eu dei a ela}, so questao real.
 
@@ -455,13 +473,7 @@ def ultimas_respostas_reais(s) -> dict[int, RespostaDeSimulado]:
     lista vem em ordem e o dict deixa a ultima sobrescrever - o volume e
     pequeno, e isto se le melhor que uma subconsulta.
     """
-    respostas = s.scalars(
-        select(RespostaDeSimulado)
-        .where(RespostaDeSimulado.escolhida.is_not(None))
-        .where(RespostaDeSimulado.gerada.is_(False))
-        .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
-    )
-    return {r.questao_id: r for r in respostas}
+    return {r.questao_id: r for r in respostas_reais(s)}
 
 
 def acumulado_por(chaves_da_questao, materias: list[str] | None = None) -> dict:
@@ -628,6 +640,10 @@ class Evolucao:
     #: tem resposta suficiente para dizer alguma coisa.
     recente: float | None = None
     anterior: float | None = None
+    #: Abaixo disto de respostas nao ha evolucao para medir: a tela convida
+    #: a responder, em vez de mostrar a porcentagem de meia duzia de
+    #: questoes. Vem do config/amostra.yml (`desempenho.evolucao`).
+    minimo: int = regua.PADRAO.evolucao
 
     @property
     def porcentagem(self) -> float:
@@ -635,11 +651,11 @@ class Evolucao:
 
     @property
     def mensuravel(self) -> bool:
-        return self.respondidas >= MINIMO_PARA_EVOLUCAO
+        return self.respondidas >= self.minimo
 
     @property
     def faltam(self) -> int:
-        return max(0, MINIMO_PARA_EVOLUCAO - self.respondidas)
+        return max(0, self.minimo - self.respondidas)
 
     @property
     def variacao(self) -> float | None:
@@ -665,13 +681,14 @@ def evolucao() -> Evolucao:
         ))
 
     respondidas, acertos = placar(respostas)
-    resultado = Evolucao(respondidas=respondidas, acertos=acertos)
+    minimo = regua.carregar().evolucao
+    resultado = Evolucao(respondidas=respondidas, acertos=acertos, minimo=minimo)
     corte = agora() - timedelta(days=DIAS_DA_EVOLUCAO)
     recentes = [r for r in respostas if r.respondida_em and r.respondida_em >= corte]
     antigas = [r for r in respostas if r.respondida_em and r.respondida_em < corte]
 
     def taxa(lista):
-        if len(lista) < MINIMO_PARA_EVOLUCAO:
+        if len(lista) < minimo:
             return None
         feitas, certas = placar(lista)
         return certas / feitas * 100

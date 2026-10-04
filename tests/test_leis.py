@@ -218,3 +218,60 @@ def test_a_lista_reconhece_a_questao_pelo_texto_dela():
     assert "310" in mudanca.tema
     assert not mudanca.conferida
     assert leis.mudancas_da_questao(2019, "Direito Penal", texto) == []
+
+
+# --- o que mudou num ponto que nenhuma questao cobra (decisao 84) -------------
+
+LEP = "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)"
+
+
+def _fronteira() -> list[dict]:
+    return leis._arquivo().get("fronteira") or []
+
+
+def test_a_fronteira_tem_procedencia_fonte_oficial_e_nos_que_existem():
+    """Os 9 casos de fronteira do docs/leis_alteradas.md, cada um com quem
+    escreveu, onde conferir e nos que a arvore tem: no inventado nunca liga a
+    ficha nenhuma, e fica calado."""
+    import json
+    from pathlib import Path
+
+    arquivo = Path(__file__).resolve().parent.parent / "data" / "conteudos.json"
+    caminhos = {n["caminho"] if isinstance(n, dict) else n
+                for n in json.loads(arquivo.read_text(encoding="utf-8"))}
+
+    assert len(_fronteira()) == 9
+    for item in _fronteira():
+        assert item.get("tema") and item.get("lei") and item.get("o_que_mudou"), item
+        assert "Claude Code" in str(item.get("procedencia")), item
+        assert urlparse(str(item.get("fonte"))).netloc in FONTES_DA_CONFERENCIA + FONTES, item
+        assert item.get("nos") or item.get("marcas"), item
+        for no in item.get("nos") or []:
+            assert no in caminhos, no
+
+
+def test_a_ficha_recebe_a_fronteira_pelo_no_ou_pela_marca_do_titulo():
+    (pelo_no,) = leis.fronteira_do_tema(
+        "Lei de Execução Penal", [f"{LEP} > Direitos do preso"], "Um título qualquer")
+    assert "41" in pelo_no.tema and not pelo_no.conferida
+
+    # A saida temporaria nao tem no na arvore: chega pela marca do titulo.
+    temas = [m.tema for m in leis.fronteira_do_tema(
+        "Lei de Execução Penal", [],
+        "Permissão de saída, saída temporária e remição (arts. 120 a 130)")]
+    assert any("Saída temporária" in tema for tema in temas)
+    assert any("Remição" in tema for tema in temas)
+
+
+def test_a_marca_so_vale_na_materia_do_item_e_o_ramo_tem_de_ser_o_mesmo():
+    # "remição" no titulo de uma ficha de Portugues nao e a LEP.
+    assert leis.fronteira_do_tema("Língua Portuguesa", [], "Pontuação: remição") == []
+    # Um no de outro ramo da mesma materia nao liga.
+    assert leis.fronteira_do_tema(
+        "Direito Penal", ["Direito Penal > Imputabilidade penal"], "Imputabilidade") == []
+
+
+def test_a_contagem_por_conferir_inclui_a_fronteira():
+    pendentes = [item for item in _mudancas() + _fronteira()
+                 if item.get("procedencia") and not item.get("conferida")]
+    assert leis.mudancas_por_conferir() == len(pendentes)

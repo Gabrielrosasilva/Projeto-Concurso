@@ -9,7 +9,7 @@
      1. as VARIAVEIS (tokens): cor, espaco, tipografia, raio, sombra;
      2. o MODO ESCURO: as mesmas variaveis com outros valores. E o padrao;
         o claro e escolha minha (botao na barra, guardado em cookie), e
-        `?tema=claro` / `?tema=escuro` na URL forca um dos dois;
+        `?cor=claro` / `?cor=escuro` na URL forca um dos dois;
      3. os COMPONENTES: pagina, cartao, bloco, selo, aviso, botao, campo.
 
    Sem JavaScript: tudo aqui e CSS puro, como manda o CLAUDE.md.
@@ -124,7 +124,7 @@
 /* --- 2. modo escuro ------------------------------------------------------- */
 /* Os mesmos nomes, outros valores. O escuro e o PADRAO: vale sempre que a
    pagina nao disser data-tema="claro". Quem escreve o data-tema e o servidor
-   (tema_da_pagina, no app.py), lendo o `?tema=` da URL e o cookie `tema` -
+   (tema_da_pagina, no app.py), lendo o `?cor=` da URL e o cookie `tema` -
    o tema do Windows nao manda mais. */
 
 :root:not([data-tema="claro"]) {

@@ -1,5 +1,5 @@
 <!doctype html>
-{% set tema = request.query_params.get('tema', '') %}
+{% set cor = request.query_params.get('cor', '') %}
 <html lang="pt-br" data-tema="{{ tema_da_pagina(request) }}">
 <head>
   <meta charset="utf-8">
@@ -434,7 +434,7 @@
 {{ barra('hoje') }}
 
 {%- macro link_do_dia(d) -%}
-/hoje?data={{ d.isoformat() }}{% if tema %}&amp;tema={{ tema }}{% endif %}
+/hoje?data={{ d.isoformat() }}{% if cor %}&amp;cor={{ cor }}{% endif %}
 {%- endmacro -%}
 
 {%- macro dia_legivel(d) -%}
@@ -461,7 +461,7 @@
 {%- macro formulario_do_extra(e) -%}
   {% set v = (form_do_extra if e is none else none) or {} %}
   <form class="form-extra" method="post"
-        action="/hoje/extra{% if e %}/{{ e.id }}{% endif %}{% if tema %}?tema={{ tema }}{% endif %}">
+        action="/hoje/extra{% if e %}/{{ e.id }}{% endif %}{% if cor %}?cor={{ cor }}{% endif %}">
     <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
     <div class="linha-extra">
       <label class="ds-campo">O que
@@ -569,7 +569,7 @@
     </div>
     <nav class="navega" aria-label="Outros dias">
       <a href="{{ link_do_dia(t.anterior) }}">&larr; dia anterior</a>
-      <a class="{{ 'hoje' if t.e_hoje }}" href="/hoje{% if tema %}?tema={{ tema }}{% endif %}">Hoje</a>
+      <a class="{{ 'hoje' if t.e_hoje }}" href="/hoje{% if cor %}?cor={{ cor }}{% endif %}">Hoje</a>
       <a href="{{ link_do_dia(t.proximo) }}">próximo dia &rarr;</a>
     </nav>
   </div>
@@ -790,7 +790,7 @@
     {% if t.pode_ativar_plano_b %}
       <div class="plano-b-controle">
         {% if t.plano_b %}
-          <form method="post" action="/hoje/plano-b{% if tema %}?tema={{ tema }}{% endif %}">
+          <form method="post" action="/hoje/plano-b{% if cor %}?cor={{ cor }}{% endif %}">
             <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
             <input type="hidden" name="minutos" value="">
             <button class="botao-plano-b" type="submit">↩ Voltar ao plano completo</button>
@@ -800,7 +800,7 @@
             <summary class="botao-plano-b">🆘 Ativar Plano B</summary>
             <div class="escolha-plano-b">
               <p>Quanto tempo você tem?</p>
-              <form method="post" action="/hoje/plano-b{% if tema %}?tema={{ tema }}{% endif %}">
+              <form method="post" action="/hoje/plano-b{% if cor %}?cor={{ cor }}{% endif %}">
                 <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                 {% for m in t.opcoes_do_plano_b %}
                   <button class="ds-botao" type="submit" name="minutos" value="{{ m }}">{{ tempo_do_plano_b(m) }}</button>
@@ -959,7 +959,7 @@
                    ficha em toda faixa do tema, reconhecida pelo titulo. #}
                 {% set ficha = fichas_das_faixas.get((b.chave, loop.index0)) if fichas_das_faixas else none %}
                 {% if ficha %}
-                  <p class="links"><a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if tema %}&amp;tema={{ tema }}{% endif %}">
+                  <p class="links"><a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if cor %}&amp;cor={{ cor }}{% endif %}">
                     <span aria-hidden="true">📋</span> Ficha de estudo</a></p>
                 {% endif %}
 
@@ -1128,7 +1128,7 @@
                      macro escreve "&amp;" (certo no HTML), e essa volta vai
                      ser codificada de novo pelo urlencode - o "&amp;" viraria
                      um parametro chamado "amp;tema". #}
-                  {% set aqui = '/hoje?data=' ~ t.data.isoformat() ~ ('&tema=' ~ tema if tema else '') ~ '#faixa-' ~ b.chave ~ '-' ~ loop.index0 %}
+                  {% set aqui = '/hoje?data=' ~ t.data.isoformat() ~ ('&cor=' ~ cor if cor else '') ~ '#faixa-' ~ b.chave ~ '-' ~ loop.index0 %}
                   <p class="links">
                     <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, f.materia, f.titulo, aqui) }}">
                       <span aria-hidden="true">📓</span> Anotar erro</a>
@@ -1146,7 +1146,7 @@
                    botao de desmarcar ao lado. Sem JavaScript, como o resto. #}
                 {% if not t.futuro and TEM_ACERTO(f) %}
                   {% set marcar %}
-                    <form class="fiz" method="post" action="/hoje/faixa/questoes{% if tema %}?tema={{ tema }}{% endif %}">
+                    <form class="fiz" method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
                       <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                       <input type="hidden" name="bloco" value="{{ b.chave }}">
                       <input type="hidden" name="indice" value="{{ loop.index0 }}">
@@ -1191,7 +1191,7 @@
                   {% if feita %}
                     <div class="fiz-feita">
                       <details><summary>corrigir os números</summary>{{ marcar }}</details>
-                      <form method="post" action="/hoje/faixa/questoes{% if tema %}?tema={{ tema }}{% endif %}">
+                      <form method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
                         <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                         <input type="hidden" name="bloco" value="{{ b.chave }}">
                         <input type="hidden" name="indice" value="{{ loop.index0 }}">
@@ -1209,7 +1209,7 @@
                  Faixa de questoes nao tem circulo: tem o formulario "fiz X,
                  acertei Y", logo abaixo do corpo. #}
               {% if not t.futuro and not TEM_ACERTO(f) %}
-                <form class="marca-faixa" method="post" action="/hoje/faixa{% if tema %}?tema={{ tema }}{% endif %}">
+                <form class="marca-faixa" method="post" action="/hoje/faixa{% if cor %}?cor={{ cor }}{% endif %}">
                   <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                   <input type="hidden" name="bloco" value="{{ b.chave }}">
                   <input type="hidden" name="indice" value="{{ loop.index0 }}">
@@ -1278,7 +1278,7 @@
       {% endif %}
       {% if tt.total.erros %}
         <p class="links">
-          <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, '', '', '/hoje?data=' ~ t.data.isoformat() ~ ('&tema=' ~ tema if tema else '') ~ '#como-foi') }}">
+          <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, '', '', '/hoje?data=' ~ t.data.isoformat() ~ ('&cor=' ~ cor if cor else '') ~ '#como-foi') }}">
             <span aria-hidden="true">📓</span> anotar os erros</a>
         </p>
       {% endif %}
@@ -1290,7 +1290,7 @@
       <p class="ds-nota">Só dá para marcar hoje ou um dia que já passou.</p>
     {% endif %}
 
-    <form method="post" action="/hoje/registrar{% if tema %}?tema={{ tema }}{% endif %}">
+    <form method="post" action="/hoje/registrar{% if cor %}?cor={{ cor }}{% endif %}">
       <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
       <fieldset {% if t.futuro %}disabled class="bloqueado"{% endif %} style="border:0;padding:0;margin:0">
         {% if s and s.meta %}

@@ -29,6 +29,7 @@
 <body class="ds">
 
 {% from "_topo.html" import barra, abas_de_analises with context %}
+{% from "_componentes.html" import selo with context %}
 {{ barra('analises') }}
 
 <main class="ds-pagina">
@@ -91,6 +92,25 @@
           </tbody>
         </table>
       </div>
+      {% set juntos = associados.get(m.materia) %}
+      {% if juntos %}
+        {# §14, item 7 (decisao 86): o no principal e os outros que a questao
+           tambem cobra. Nunca entra na contagem da tabela acima. #}
+        <details class="padroes">
+          <summary>Conceitos que aparecem juntos nas questões {{ selo('ia', 'Classificação do Claude Code, por conferir') }}</summary>
+          <ul>
+            {% for a in juntos %}
+              <li><b title="{{ a.principal }}">{{ a.nome_principal }}</b> com
+                <b title="{{ a.associado }}">{{ a.nome_associado }}</b>:
+                {{ a.questoes | length }} questão{{ 'ões' if a.questoes | length > 1 }}
+                ({{ a.questoes | join(', ') }})</li>
+            {% endfor %}
+          </ul>
+          <p class="ds-suave">Polícia Penal SC. O associado é o outro conceito que a
+            questão também cobra, no enunciado ou nas alternativas, além do principal.
+            Ele não entra na contagem da tabela: lá só conta a classificação principal.</p>
+        </details>
+      {% endif %}
       <details class="padroes">
         <summary>Padrões de cobrança da matéria</summary>
         {# Dois blocos, um por evidencia, e nunca somados (secao 4 e 13). #}

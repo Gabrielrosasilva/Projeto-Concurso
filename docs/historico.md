@@ -2015,3 +2015,79 @@ praticado e as datas; o acerto fica fora (decisao 81). Hoje nada muda, porque
 nenhuma ficha esta conferida; com as duas de 28 e 29/09, 9 nos de Penal e
 Constitucional acenderiam. O achado: o R+7 feito nao tira o conteudo da fila,
 porque o 1-7-30 so anda com acerto no radar - ficou para voce decidir.
+
+## A revisao feita passa o 1-7-30 de etapa, F8 (04/10)
+
+**O que estava errado:** o prazo da revisao so andava com acerto no radar.
+O R+7 feito no Qconcursos marcava a data da revisao, mas o conteudo continuava
+"prazo vencido" - e, com as fichas conferidas (F7), a fila so ia encher.
+
+**A F8 (a opcao (b), aprovada por voce):** a faixa de revisao e o extra de
+revisao, no vencimento ou depois, passam de etapa como o acerto no radar; a
+revisao sem questao deixou de contar como estudo, que reiniciava o prazo
+(decisao 82). Subiu no commit do lote de 04/10.
+
+## Os termos empatados em ordem alfabetica, F9 (04/10)
+
+O achado do F6: os termos frequentes empatados mudavam de ordem a cada vez que
+o radar subia, porque entram na conta por um conjunto, e o Python sorteia a
+ordem dele por processo. Agora o empate e alfabetico, sem olhar acento, e a
+pagina sai igual em qualquer processo. Subiu no commit do lote de 04/10.
+
+## O lote de 04/10: o resto da secao F, as conferencias e os abertos
+
+Pedido: fechar a F8 e a F9, fazer o resto da secao F, depois as conferencias
+e os abertos que listei, tudo com o que eu recomendo, e so no fim a suite, o
+commit e o push.
+
+**F10, as variacoes religadas:** as 30 do estoque de 03/10 sem a questao de
+base acharam a base no historico da conversa, onde cada pedido tinha sido
+impresso com as alternativas. Sobraram as 3 de 27/09, sem registro.
+
+**F11, os minimos:** os tres que tinham ficado escritos no codigo - a evolucao
+da home, a tendencia de letra no gabarito e o "base pequena" - foram para o
+`config/amostra.yml`, com os mesmos valores (decisao 83).
+
+**F12, as leis de fronteira:** os 9 casos em que a lei mudou depois da prova
+num ponto que a questao nao cobra sairam do documento e foram para a ficha do
+tema, onde vale saber deles (decisao 84). Na conferencia apareceram os arts.
+41-A e 41-B da LEP, de 2026.
+
+**F14 e F15:** o "estudado" passou a seguir a decisao 20 pelas constantes que
+estavam sem uso, e a ancora do 1-7-30 de quem so praticou passou a ser a
+primeira resposta de verdade, e nao a ultima de cada questao (decisao 85).
+
+**F13, os conceitos associados:** a §14 pergunta "quais conceitos aparecem
+associados", e nenhuma questao tinha associado. Um pedido novo, respondido
+pelo Claude Code para as 155 questoes do alvo, deu 109 associacoes - a
+Incidencia mostra os pares, e a contagem nao muda (decisao 86).
+
+**As conferencias:** as 61 fichas foram lidas contra a fonte - a lei no texto
+compilado da Camara, Mandela no texto da ONU, Portugues e Raciocinio pela
+regra -, e 15 foram corrigidas; so uma tinha erro de conteudo (a regra 40 de
+Mandela proibe dar ao preso FUNCAO disciplinar, e a ficha falava de castigo).
+As 15 leis da lista foram reconferidas: nenhuma errada. A marca de conferida,
+nas duas, continua sua.
+
+**B.8, o complementar:** a tela de Conferencia ganhou o filtro do complementar
+aceito e a amostra fixa do catalogo. A amostra reprovou o catalogo - ele casa
+palavra no enunciado, e "lacunas do texto" virava Interpretacao -, e as 108
+propostas foram classificadas de novo; a proposta do catalogo trocada deixou
+de virar "conceito associado" (decisao 87).
+
+**Os abertos:** o `?tema=` dos Macetes virou `?cor=` para a cor (decisao 88);
+as geradas antigas ganharam materia e no, e 7 de LEP com gabarito errado
+sairam do sorteio (decisao 89); a media "por prova" dos Macetes diz em
+quantas provas.
+
+**B.7, B.9 e B.10, o leitor do caderno:** o lixo que grudava no fim da ultima
+alternativa (o titulo da secao seguinte, a grade de respostas, o rodape), a
+metade de palavra apagada como cabecalho ("e cor-"), o "100." no enunciado, a
+lista numerada da alternativa tomada pelo numero da questao seguinte e a
+ordem das secoes trocada pelas duas colunas foram consertados no leitor; e o
+download que gravava dois S07.pdf no mesmo lugar deixou 21 provas sem baixar,
+com as do outro concurso no lugar. As 21 foram baixadas, as copias sairam (as
+5 respostas que caiam nelas foram para a questao identica), e o acervo
+inteiro foi relido duas vezes - com a classificacao indo junto para a chave
+nova, so quando o texto e o da mesma questao. A auditoria do alvo ficou sem
+suspeita, e o complementar aceito foi de 122 para 169 provas (decisao 90).

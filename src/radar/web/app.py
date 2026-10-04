@@ -128,6 +128,9 @@ templates.env.filters["numero"] = onde_estudar.numero
 # config/amostra.yml (Etapa 4): um lugar so para as telas e para as contas.
 templates.env.globals["MINIMO_NA_MATERIA"] = amostra.carregar().do_nivel("materia")
 templates.env.globals["MINIMO_NO_ASSUNTO"] = amostra.carregar().do_nivel("assunto")
+# E o "base pequena": com menos provas que isto, o que sai delas leva o
+# aviso. Mesmo arquivo, para o 3 nao ficar escrito em tres templates.
+templates.env.globals["PROVAS_PARA_TENDENCIA"] = amostra.carregar().provas_para_tendencia
 # Os nomes do caderno de erros (motivo, fonte, o que a lista mostra) e a
 # pergunta "este erro esta vencido?". Vem do servico para nao existir um
 # "Pegadinha" escrito no HTML e outro no banco.
@@ -146,17 +149,20 @@ templates.env.globals["AMOSTRA_INSUFICIENTE"] = amostra.INSUFICIENTE
 
 # --- o tema (claro ou escuro) -----------------------------------------------
 # Escuro e o padrao; claro e escolha minha, guardada no cookie `tema`. O
-# `?tema=` da URL vence o cookie: serve para comparar os dois sem trocar a
+# `?cor=` da URL vence o cookie: serve para comparar os dois sem trocar a
 # escolha. Um lugar so decide - toda pagina chama tema_da_pagina no <html>.
+# O parametro era `?tema=` ate 04/10, e esbarrava no filtro "Materia ou tema"
+# dos Macetes: `/macetes?tema=claro` pintava a tela E procurava "claro".
 TEMAS = ("claro", "escuro")
 TEMA_PADRAO = "escuro"
+PARAMETRO_DA_COR = "cor"
 # Dez anos: a escolha e minha e so muda quando eu clicar de novo.
 VALIDADE_DO_COOKIE_DE_TEMA = 10 * 365 * 24 * 3600
 
 
 def tema_da_pagina(request: Request) -> str:
-    """O tema desta pagina: o da URL, senao o do cookie, senao o escuro."""
-    for escolha in (request.query_params.get("tema"), request.cookies.get("tema")):
+    """O tema desta pagina: o da URL (`?cor=`), senao o do cookie, senao o escuro."""
+    for escolha in (request.query_params.get(PARAMETRO_DA_COR), request.cookies.get("tema")):
         if escolha in TEMAS:
             return escolha
     return TEMA_PADRAO
@@ -165,11 +171,13 @@ def tema_da_pagina(request: Request) -> str:
 def link_de_trocar_tema(request: Request) -> str:
     """O link do botao ☀️/🌙: pede o outro tema e volta para esta pagina.
 
-    O `tema` sai da volta de proposito: se ficasse, o `?tema=` da URL
-    venceria o cookie recem-gravado e o clique pareceria nao fazer nada.
+    O `cor` sai da volta de proposito: se ficasse, o `?cor=` da URL venceria
+    o cookie recem-gravado e o clique pareceria nao fazer nada. O resto da URL
+    fica - inclusive o `tema` do filtro dos Macetes.
     """
     outro = "claro" if tema_da_pagina(request) == "escuro" else "escuro"
-    resto = [(k, v) for k, v in request.query_params.multi_items() if k != "tema"]
+    resto = [(k, v) for k, v in request.query_params.multi_items()
+             if k != PARAMETRO_DA_COR]
     volta = request.url.path + (f"?{urlencode(resto)}" if resto else "")
     return f"/tema?{urlencode({'valor': outro, 'volta': volta})}"
 
@@ -1071,8 +1079,8 @@ def hoje_registrar(
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro=str(erro), form=form, status=400)
 
-    tema = request.query_params.get("tema")
-    destino = f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    destino = f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
     return RedirectResponse(destino, status_code=303)
 
 
@@ -1104,8 +1112,8 @@ def hoje_faixa(
         return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
 
     # Bloco e posicao ja passaram pelo servico: o endereco so leva o que e valido.
-    tema = request.query_params.get("tema")
-    destino = (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    destino = (f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
                + f"#faixa-{bloco}-{posicao}")
     return RedirectResponse(destino, status_code=303)
 
@@ -1148,15 +1156,15 @@ def hoje_faixa_questoes(
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
 
-    tema = request.query_params.get("tema")
-    destino = (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    destino = (f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
                + f"#faixa-{bloco}-{posicao}")
     return RedirectResponse(destino, status_code=303)
 
 
 def _volta_do_dia(request: Request, quando: date, ancora: str = "extras") -> str:
-    tema = request.query_params.get("tema")
-    return (f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    return (f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
             + f"#{ancora}")
 
 
@@ -1287,8 +1295,8 @@ def semanas_nota(
     except (ValueError, servico.cronograma.RegistroInvalido) as problema:
         return semanas(request, erro=str(problema))
 
-    tema = request.query_params.get("tema")
-    destino = "/semanas" + (f"?tema={tema}" if tema else "")
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    destino = "/semanas" + (f"?cor={cor}" if cor else "")
     return RedirectResponse(f"{destino}#semana-{quando.isoformat()}", status_code=303)
 
 
@@ -1305,8 +1313,8 @@ def hoje_plano_b(request: Request, data: str = Form(""), minutos: str = Form("")
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
 
-    tema = request.query_params.get("tema")
-    destino = f"/hoje?data={quando.isoformat()}" + (f"&tema={tema}" if tema else "")
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    destino = f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
     return RedirectResponse(destino, status_code=303)
 
 
@@ -1490,6 +1498,8 @@ def analises_incidencia(request: Request, materia: str = ""):
             # definitivo, ao lado dos do alvo e nunca somados (decisao 78).
             "padroes_complementares": servico.incidencia.padroes_complementares(
                 mapas, minimos, do_complementar),
+            # Os conceitos que caem juntos nas questoes do alvo (§14, item 7).
+            "associados": servico.incidencia.associacoes(mapas),
             "todas":[m.materia for m in servico.incidencia.mapa()] if materia else
                      [m.materia for m in mapas],
         },
@@ -1498,15 +1508,19 @@ def analises_incidencia(request: Request, materia: str = ""):
 
 @app.get("/analises/conferencia", response_class=HTMLResponse)
 def analises_conferencia(request: Request, materia: str = "", abertas: str = "",
-                         anuladas: str = ""):
-    """A conferencia da classificacao do alvo: enunciado, alternativas,
-    gabarito e a proposta lado a lado, com confirmar / corrigir / pendente."""
-    tela = servico.classificacoes.conferencia(materia or None, so_abertas=bool(abertas),
-                                              com_anuladas=bool(anuladas))
+                         anuladas: str = "", evidencia: str = "", amostra: str = ""):
+    """A conferencia da classificacao: enunciado, alternativas, gabarito e a
+    proposta lado a lado, com confirmar / corrigir / pendente. O alvo por
+    padrao; o complementar aceito pelo filtro, com a amostra do catalogo."""
+    recorte = "complementar" if evidencia == "complementar" else "alvo"
+    tela = servico.classificacoes.conferencia(
+        materia or None, so_abertas=bool(abertas), com_anuladas=bool(anuladas),
+        evidencia_escolhida=recorte, so_amostra=bool(amostra))
     return templates.TemplateResponse(
         request=request, name="conferencia.html",
         context={"t": tela, "materia": materia, "abertas": bool(abertas),
-                 "anuladas": bool(anuladas)},
+                 "anuladas": bool(anuladas), "evidencia": recorte,
+                 "amostra": bool(amostra) and recorte == "complementar"},
     )
 
 
@@ -1518,6 +1532,8 @@ def analises_conferir(
     motivo: str = Form(""),
     materia: str = Form(""),
     abertas: str = Form(""),
+    evidencia: str = Form(""),
+    amostra: str = Form(""),
 ):
     """Grava a minha decisao sobre UMA questao e volta para o mesmo lugar."""
     try:
@@ -1533,7 +1549,8 @@ def analises_conferir(
         return HTMLResponse(f"<p>Não gravei: {escape(str(erro))}</p>", status_code=400)
     servico.classificacoes.exportar()
     volta = "/analises/conferencia?" + urlencode(
-        {k: v for k, v in (("materia", materia), ("abertas", abertas)) if v})
+        {k: v for k, v in (("materia", materia), ("abertas", abertas),
+                           ("evidencia", evidencia), ("amostra", amostra)) if v})
     return RedirectResponse(f"{volta}#q-{chave}", status_code=303)
 
 
@@ -1847,6 +1864,7 @@ def macetes(
     fatias_do_caderno = servico.macetes.fatias(
         [(f.materia, f.total) for f in composicao],
         extras={f.materia: f.por_caderno for f in composicao},
+        provas={f.materia: f.cadernos for f in composicao},
     )
     fatias_de_assunto = (
         servico.macetes.fatias(

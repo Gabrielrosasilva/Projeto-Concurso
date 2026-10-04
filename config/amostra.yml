@@ -24,6 +24,23 @@ acervo:
   minimo_questoes: 3
   minimo_provas: 2
 
+  # Tendencia de letra no gabarito ("a FEPESE gosta da C?", nos Macetes):
+  # abaixo disto de questoes com gabarito nao se fala de tendencia. Buscando
+  # "crase" saem 59 questoes, mas so 7 enunciados diferentes: qualquer letra
+  # que aparecesse duas vezes viraria "tendencia" que e so sorteio.
+  tendencia_de_gabarito: 50
+
+  # Com menos provas que isto, o que se tira delas leva o aviso "base
+  # pequena" (regra 4 da especificacao): os cartoes, o Meu foco, a home e a
+  # previsao. Hoje o alvo tem duas provas.
+  provas_para_tendencia: 3
+
+  # A classificacao automatica do catalogo (o complementar de Portugues e de
+  # Raciocinio Logico) se confere por amostra: tantas por materia, na tela
+  # Analises > Conferencia. Se a taxa de erro da amostra for alta, o lote
+  # volta (pendencia B.8).
+  amostra_do_catalogo: 20
+
 desempenho:
   # Quantas respostas SEM CONSULTA cada nivel da arvore precisa ter para o
   # numero dele valer. Com 10 questoes a margem de uma porcentagem ainda e de
@@ -46,6 +63,11 @@ desempenho:
   # A meta de materia que nao tem meta propria no config/cronograma.yml: a da
   # prova inteira do edital de 2019, 79 de 100.
   meta_padrao: 79
+
+  # A evolucao do meu acerto (a home): o acerto dos ultimos 30 dias contra o
+  # de antes. Cada metade da comparacao precisa disto de respostas, senao a
+  # variacao e sorteio; abaixo, a tela convida a responder.
+  evolucao: 20
 
   # O estado mais alto ("Bom desempenho com amostra suficiente") pede mais que
   # estar na meta: o dobro do minimo, respondido em dois dias diferentes ou

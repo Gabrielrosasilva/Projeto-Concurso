@@ -139,7 +139,7 @@
         <dd>
           {% if p.anos_das_provas %}{{ p.anos_das_provas | join(' e ') }} ·
             {{ h.questoes_para_treinar }} questões
-            {% if p.anos_das_provas | length < 3 %}· <b>base pequena</b>{% endif %}
+            {% if p.anos_das_provas | length < PROVAS_PARA_TENDENCIA %}· <b>base pequena</b>{% endif %}
           {% else %}nenhuma no acervo{% endif %}
         </dd>
       </dl>

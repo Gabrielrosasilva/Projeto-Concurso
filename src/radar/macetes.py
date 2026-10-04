@@ -12,6 +12,7 @@ import unicodedata
 from collections import Counter
 from dataclasses import dataclass, field
 
+from radar import amostra as regua
 from radar.origem import ACERVO, CLASSIFICACAO, TENDENCIA
 
 
@@ -79,11 +80,6 @@ resposta marque indique julgue verifique leia trecho periodo enunciado
 """.split())
 
 MINIMO_DE_LETRAS = 4
-
-# Abaixo disso nao da para dizer nada sobre a letra do gabarito. Buscando
-# "crase" saem 59 questoes, mas so 7 enunciados diferentes: qualquer letra que
-# aparecesse duas vezes viraria "tendencia" que e so sorteio.
-MINIMO_PARA_TENDENCIA = 50
 
 
 def _sem_acento(texto: str) -> str:
@@ -181,7 +177,8 @@ def distribuicao_do_gabarito(questoes: list) -> tuple[list[tuple[str, int, float
         return [], "amostra_pequena"
 
     linhas = [(letra, n, n / total * 100) for letra, n in sorted(letras.items())]
-    if total < MINIMO_PARA_TENDENCIA:
+    # O minimo e do config/amostra.yml (`acervo.tendencia_de_gabarito`).
+    if total < regua.carregar().tendencia_de_gabarito:
         return linhas, "amostra_pequena"
 
     # Ate 4 pontos porcentuais de diferenca para 20% e sorteio, nao tendencia.
@@ -206,7 +203,12 @@ def termos_frequentes(questoes: list, quantos: int = 15) -> list[Termo]:
                 vistas.add(palavra.lower())
         conta.update(vistas)
 
-    return [Termo(palavra=p, quantas=n) for p, n in conta.most_common(quantos)]
+    # Empate em ordem alfabetica, sem olhar acento. As palavras entram na
+    # conta por um conjunto, cuja ordem o Python sorteia a cada processo: sem
+    # isto, os empatados - e, no corte, ate a palavra mostrada - mudavam a
+    # cada vez que o radar subia.
+    ordenadas = sorted(conta.items(), key=lambda par: (-par[1], _sem_acento(par[0]), par[0]))
+    return [Termo(palavra=p, quantas=n) for p, n in ordenadas[:quantos]]
 
 
 def mais_repetidas(questoes: list, quantos: int = 5) -> list[Repetida]:
@@ -477,6 +479,8 @@ class FatiaDoCaderno:
     materia: str
     por_caderno: float
     total: int
+    #: Em quantos cadernos a materia apareceu: a base da media.
+    cadernos: int = 0
 
 
 def composicao_do_caderno(questoes: list) -> list[FatiaDoCaderno]:
@@ -504,6 +508,7 @@ def composicao_do_caderno(questoes: list) -> list[FatiaDoCaderno]:
             materia=materia,
             por_caderno=len(doGrupo) / cadernos if cadernos else 0.0,
             total=len(doGrupo),
+            cadernos=cadernos,
         ))
 
     fatias.sort(key=lambda f: -f.por_caderno)
@@ -534,11 +539,15 @@ class Fatia:
     # Numero que acompanha a fatia na legenda, quando ele diz outra coisa que
     # a porcentagem nao diz - "9,0 questoes por prova", por exemplo.
     por_caderno: float | None = None
+    # Em quantas provas: a media sem a base e a amostra pela metade (regra
+    # inviolavel 3) - "8,5/prova" pode ser de 2 provas ou de 60.
+    provas: int | None = None
 
 
 def fatias(
     itens: list[tuple[str, float]],
     extras: dict[str, float] | None = None,
+    provas: dict[str, int] | None = None,
 ) -> list[Fatia]:
     """Transforma [(rotulo, valor)] nas fatias de um grafico de pizza.
 
@@ -575,6 +584,7 @@ def fatias(
             fim=fim,
             cor=CORES_DA_PIZZA[indice % len(CORES_DA_PIZZA)],
             por_caderno=(extras or {}).get(rotulo),
+            provas=(provas or {}).get(rotulo),
         ))
         acumulado = fim
 

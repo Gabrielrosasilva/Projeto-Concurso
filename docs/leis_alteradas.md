@@ -220,12 +220,43 @@ Efeito: o gabarito continua certo (E: art. 146-B, II, inalterado), mas o rol de 
 - Lei 14.994/2024 (redação da Lei 15.280/2025) (09/10/2024 (redação de 05/12/2025)), art. 146-E: (Artigo acrescido pela Lei nº 14.994, de 9/10/2024, e com redação dada pela Lei nº 15.280, de 5/12/2025)
 - Lei 14.843/2024 (11/04/2024), art. 146-C, parágrafo único, VIII e IX: (Inciso acrescido pela Lei nº 14.843, de 11/4/2024)
 
+## Reconferência de 04/10/2026 (Claude Code, texto oficial de hoje)
+
+Cada item foi lido de novo, artigo por artigo, no texto compilado: o da
+Câmara (CF, CPP, LEP, Leis 8.072 e 8.429) e o da ALESC (LC 472/2009, LC
+675/2016, LC 529/2011, LC 447/2009 e LC 774/2021), baixados uma vez, com o
+User-Agent do radar. **Nenhum item está errado.** O `conferida` continua
+`false`: conferir é o seu atestado - é ele que tira o 🟣 -, e esta lista é o
+que eu achei para você marcar em segundos. As ressalvas são o que eu não
+consigo ler daqui.
+
+| # | Item | Confere? | Onde | Ressalva |
+|---|---|---|---|---|
+| 1 | CF, art. 195 | sim, em parte | o inciso V (EC 132/2023) está no texto; o I, "b", e o IV trazem "Vide EC 132" | a data de 2027 é do art. 22 da EC 132, que não está na compilação da CF |
+| 2 | CPP, art. 3º-A | sim | "vedadas a iniciativa do juiz na fase de investigação" (Lei 13.964/2019) | a compilação remete às ADIs 6.298, 6.299, 6.300 e 6.305 (STF, 2023) |
+| 3 | CPP, art. 3º-B, VIII e § 2º; art. 10 | sim | prorrogar "uma única vez, a duração do inquérito por até 15 (quinze) dias" | as mesmas ADIs: o STF deu interpretação ao juiz das garantias |
+| 4 | CPP, art. 310 | sim | 24 horas e videoconferência (Lei 15.358/2026); o § 2º (Lei 13.964/2019); os §§ 5º e 6º | as mesmas ADIs |
+| 5 | Lei 8.072, art. 2º, § 2º; LEP, art. 112 | sim | § 2º "revogado pela Lei nº 13.964"; hediondo de 70% (V) a 85% (VIII); exame criminológico "em todos os casos" (§ 1º, Lei 14.843/2024) | o caput do art. 112 foi reescrito pela Lei 15.402/2026 (1/6 como regra, com as exceções) - não muda o item, mas vale ao estudar |
+| 6 | LC 472/2009 | sim | "Revogada parcialmente pela LC 605/13 e totalmente pel LC 675/16"; LC 675, art. 76, VII | o cargo como Policial Penal pela EC estadual 80/2020 não foi relido (a Constituição de SC não foi baixada) |
+| 7 | Adicional de local de exercício | sim | LC 675, art. 51, I (extinto); LC 774, art. 42, parágrafo único (subsídio em parcela única) | - |
+| 8 | LC 529/2011, art. 52 | sim | "3/4 (três quartos) do salário mínimo nacional" (LC 809/2022) | - |
+| 9 | LC 447/2009, art. 1º | sim | "À servidora gestante é assegurada licença (...) 180 (cento e oitenta) dias" (Lei 18.316/2021) | a ADI STF 7524 (30/10/2025) deu interpretação conforme: vale para toda servidora, efetiva ou não |
+| 10 | LC 675/2016 | sim | "Revogada pela Lei: 777/2021 (Exceção dos arts. 22 ao 35, conforme art. 80)"; LC 774, art. 88 | - |
+| 11 | Gratificação por hora extraordinária | sim | LC 774, art. 45, VII | o próprio inciso remete à ADI TJSC 5041420-85.2022.8.24.0000 e à ADI STF 7469/2023 |
+| 12 | LC 774, art. 66 | sim | I (porte em serviço e fora dele), III ("quando em razão do serviço"), VIII (prisão especial provisória e definitiva) | - |
+| 13 | LC 774, arts. 29 a 38 | sim | art. 31 ("a cada 3 (três) anos"), art. 37 (bravura e post mortem), art. 38 | - |
+| 14 | Lei 8.429 | sim | art. 13 (declaração de imposto de renda), art. 17, § 1º (revogado), art. 17-B (acordo de não persecução civil), art. 23 (8 anos do fato), todos da Lei 14.230/2021 | o art. 17-B remete às ADIs 7.042 e 7.043 |
+| 15 | LEP, arts. 146-B e 146-E | sim | 146-B, VI a VIII (Lei 14.843/2024); 146-E (Leis 14.994/2024 e 15.280/2025) | - |
+
+Na mesma leitura da LEP apareceram os arts. 41-A e 41-B (Lei 15.358/2026),
+que entraram na lista `fronteira:` do `config/leis.yml` (decisão 84).
+
 ## Casos de fronteira que ficaram fora da lista
 
-O artigo mudou depois da prova, mas num ponto que a questão não cobra. Ficaram fora para o aviso não virar ruído; vale saber deles ao estudar o tema:
+O artigo mudou depois da prova, mas num ponto que a questão não cobra. Ficaram fora do aviso da questão para ele não virar ruído; vale saber deles ao estudar o tema - e desde 04/10/2026 eles estão na lista `fronteira:` do `config/leis.yml` e aparecem na ficha do tema (decisão 84). Na conferência de 04/10 entraram também os arts. 41-A e 41-B da LEP, novos (Lei 15.358/2026), junto com o art. 41:
 
 - **CF, art. 144** (2013 q35 e 2019 q44): a EC 104/2019, de 04/12/2019 - quatro dias depois da prova de 2019 -, criou as polícias penais (inciso VI, § 5º-A e nova redação do § 6º). Nenhuma das duas questões cobra isso. A PEC 18/2025 (Segurança Pública) ainda não é norma;
-- **LEP, art. 41** (2019 q87): hoje é o juiz da execução, e não o diretor, quem suspende ou restringe os direitos dos incisos V, X e XV, e o condenado por crime contra a mulher não tem visita íntima (Lei 14.994/2024);
+- **LEP, art. 41** (2019 q87): hoje é o juiz da execução, e não o diretor, quem suspende ou restringe os direitos dos incisos V, X e XV, e o condenado por crime contra a mulher não tem visita íntima (Lei 14.994/2024); e os arts. 41-A e 41-B (Lei 15.358/2026) permitem gravar o encontro no parlatório ou virtual do preso ligado a organização criminosa ultraviolenta, grupo paramilitar ou milícia, e mandam a conversa monitorada com o advogado para um juízo de controle separado;
 - **LEP, art. 126** (2019 q82): o § 9º (Lei 15.402/2026) - o regime domiciliar não impede a remição;
 - **LEP, art. 122**: a saída temporária ficou só para frequência a curso (Lei 14.843/2024), e o § 2º veda a saída e o trabalho externo sem vigilância ao condenado por crime hediondo ou com violência ou grave ameaça - nenhuma questão do alvo cobra a saída temporária em si;
 - **Lei 11.340/2006, art. 7º** (2019 q62): o inciso VI, violência vicária (Lei 15.384/2026);

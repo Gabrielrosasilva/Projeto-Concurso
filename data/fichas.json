@@ -61,7 +61,7 @@
       "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Gratuidades constitucionais aos reconhecidamente pobres"
     ],
     "por_que_estes_nos": "Dos incisos L a LXXVIII, têm nó: direitos do preso (LXIII), devido processo legal (LIV), remédios constitucionais (LXVIII e LXXII) e gratuidades (LXXVI). Os §§ 3º e 4º (tratados e Tribunal Penal Internacional) não têm nó no Direito Constitucional - o § 3º aparece em Direitos Humanos.",
-    "ler_exatamente": "CF, art. 5º, incisos L a LXXVIII e §§ 1º a 4º, no texto oficial - primeiro os da prisão (LXI a LXVII) e os remédios (LXVIII a LXXIII).",
+    "ler_exatamente": "CF, art. 5º, incisos L a LXXVIII e §§ 1º a 4º, no texto oficial - primeiro os da prisão (LXI a LXVII) e os remédios (LXVIII a LXXIII); e o LXXIX (EC 115/2022), o último inciso do artigo, fora do título do tema.",
     "como_pesquisar": [
       "remédios constitucionais habeas corpus mandado de segurança habeas data mandado de injunção ação popular diferenças",
       "artigo 5 incisos LXI a LXVI prisão em flagrante comunicação ao juiz e à família",
@@ -81,7 +81,8 @@
       "Ação popular: o autor fica isento de custas e do ônus da sucumbência, salvo comprovada má-fé (LXXIII).",
       "Mandado de segurança coletivo (LXX): partido político com representação no Congresso Nacional; organização sindical, entidade de classe ou associação legalmente constituída e em funcionamento há pelo menos 1 ano.",
       "Tratado de direitos humanos com força de emenda (§ 3º): 2 turnos, 3/5 dos votos, em cada Casa do Congresso.",
-      "LXXVIII: razoável duração do processo, no âmbito judicial e administrativo, e os meios que garantam a celeridade da tramitação."
+      "LXXVIII: razoável duração do processo, no âmbito judicial e administrativo, e os meios que garantam a celeridade da tramitação.",
+      "LXXIX (EC 115/2022): é assegurado, nos termos da lei, o direito à proteção dos dados pessoais, inclusive nos meios digitais - o inciso que fecha o art. 5º."
     ],
     "pegadinhas": [
       "Trocar os remédios: liberdade de locomoção é habeas corpus; informação pessoal é habeas data; falta de norma regulamentadora é mandado de injunção.",
@@ -91,7 +92,7 @@
       "Trocar o quórum do § 3º (3/5, em dois turnos, em cada Casa) por maioria absoluta."
     ],
     "fonte_sugerida": null,
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -342,7 +343,7 @@
     ],
     "memorizar": [
       "Legítima defesa: agressão ATUAL OU IMINENTE; estado de necessidade: perigo ATUAL.",
-      "Não pode alegar estado de necessidade quem tinha o dever legal de enfrentar o perigo (art. 24, § 1º); se era razoável exigir o sacrifício, a pena pode ser reduzida de 1 a 2/3 (art. 24, § 2º).",
+      "Não pode alegar estado de necessidade quem tinha o dever legal de enfrentar o perigo (art. 24, § 1º); se era razoável exigir o sacrifício, a pena pode ser reduzida de 1/3 a 2/3 - 'de um a dois terços' (art. 24, § 2º).",
       "Obediência hierárquica só aproveita ao subordinado se a ordem NÃO era manifestamente ilegal (art. 22).",
       "Excesso nas excludentes: responde pelo excesso doloso ou culposo (art. 23, parágrafo único)."
     ],
@@ -353,7 +354,7 @@
       "Classificar coação e obediência como excludentes de ilicitude: elas afastam a culpabilidade."
     ],
     "fonte_sugerida": null,
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -465,20 +466,21 @@
       "Concurso de pessoas (art. 29): quem concorre para o crime incide nas penas a ele cominadas, na medida da sua culpabilidade (teoria monista)."
     ],
     "memorizar": [
-      "Semi-imputável (art. 26, parágrafo único) e embriaguez fortuita incompleta (art. 28, § 2º): redução de 1 a 2/3.",
+      "Semi-imputável (art. 26, parágrafo único) e embriaguez fortuita incompleta (art. 28, § 2º): redução de 1/3 a 2/3 - 'de um a dois terços'.",
       "Participação de menor importância: diminuição de 1/6 a 1/3 (art. 29, § 1º).",
       "Cooperação dolosamente distinta: quem quis participar de crime menos grave recebe a pena deste, aumentada até a metade se o resultado mais grave era previsível (art. 29, § 2º).",
       "Circunstâncias e condições de caráter pessoal não se comunicam, salvo quando elementares do crime (art. 30).",
-      "Ajuste, determinação, instigação e auxílio não são puníveis se o crime não chega, pelo menos, a ser tentado (art. 31)."
+      "Ajuste, determinação, instigação e auxílio, salvo disposição expressa em contrário, não são puníveis se o crime não chega, pelo menos, a ser tentado (art. 31)."
     ],
     "pegadinhas": [
       "Dizer que a embriaguez voluntária completa isenta de pena: só a fortuita ou por força maior.",
       "Dizer que a emoção ou a paixão excluem a imputabilidade.",
       "Dizer que a condição pessoal nunca se comunica: comunica-se quando é elementar do crime (ex.: a condição de funcionário público no peculato).",
-      "Trocar as frações da semi-imputabilidade (1 a 2/3) e da participação de menor importância (1/6 a 1/3)."
+      "Trocar as frações da semi-imputabilidade (1/3 a 2/3) e da participação de menor importância (1/6 a 1/3).",
+      "Esquecer a ressalva do art. 31: a lei pode punir o ajuste por si só - a associação criminosa (CP, art. 288) é crime ainda que o crime planejado não chegue a ser tentado."
     ],
     "fonte_sugerida": null,
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -509,8 +511,8 @@
       "Erro sobre elemento do tipo exclui o dolo, permitida a punição por culpa se prevista em lei (art. 20); erro sobre a ilicitude do fato, se inevitável, isenta de pena, e se evitável pode diminuí-la (art. 21)."
     ],
     "memorizar": [
-      "Tentativa: pena do consumado diminuída de 1 a 2/3, salvo disposição em contrário (art. 14, parágrafo único).",
-      "Arrependimento posterior: redução de 1 a 2/3 (art. 16).",
+      "Tentativa: pena do consumado diminuída de 1/3 a 2/3 ('de um a dois terços'), salvo disposição em contrário (art. 14, parágrafo único).",
+      "Arrependimento posterior: redução de 1/3 a 2/3 (art. 16).",
       "Erro de proibição evitável: diminuição de 1/6 a 1/3 (art. 21).",
       "Crime qualificado pelo resultado: só responde pelo resultado que agrava a pena quem o causou ao menos culposamente (art. 19).",
       "Erro sobre a pessoa: valem as condições da vítima que o agente queria atingir, não as da atingida (art. 20, § 3º)."
@@ -519,10 +521,10 @@
       "Trocar desistência voluntária por arrependimento posterior: na desistência o crime não se consuma; no arrependimento posterior ele já se consumou.",
       "Admitir arrependimento posterior em crime com violência ou grave ameaça, ou depois do recebimento da denúncia.",
       "Dizer que no crime impossível se pune a tentativa.",
-      "Trocar as frações: 1 a 2/3 (tentativa e arrependimento posterior) e 1/6 a 1/3 (erro de proibição evitável)."
+      "Trocar as frações: 1/3 a 2/3 (tentativa e arrependimento posterior) e 1/6 a 1/3 (erro de proibição evitável)."
     ],
     "fonte_sugerida": null,
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -598,7 +600,7 @@
       "Rol aberto (art. 5º, § 2º): os direitos expressos não excluem outros decorrentes do regime, dos princípios e dos tratados de que o Brasil seja parte; as normas de direitos fundamentais têm aplicação imediata (§ 1º), e os direitos e garantias individuais são cláusula pétrea (art. 60, § 4º, IV).",
       "Hierarquia dos tratados de direitos humanos: aprovados em cada Casa do Congresso, em 2 turnos, por 3/5 dos votos dos respectivos membros, equivalem a EMENDA constitucional (§ 3º, EC 45/2004); os demais são SUPRALEGAIS - abaixo da Constituição e acima das leis (STF, RE 466.343, 2008). Tratado que não é de direitos humanos tem força de lei ordinária.",
       "Consequência da supralegalidade: o Pacto de San José (art. 7.7) só admite a prisão civil do devedor de alimentos, e por isso é ilícita a prisão do depositário infiel, qualquer que seja a modalidade do depósito (Súmula Vinculante 25).",
-      "Audiência de custódia: vem do art. 7.5 da Convenção Americana e do art. 9.3 do Pacto dos Direitos Civis e Políticos - o preso é levado, sem demora, à presença de um juiz. O STF mandou implantá-la (ADPF 347, 2015), o CNJ a regulou (Resolução 213/2015), e o CPP a prevê em até 24 horas da prisão (art. 310).",
+      "Audiência de custódia: vem do art. 7.5 da Convenção Americana e do art. 9.3 do Pacto dos Direitos Civis e Políticos - o preso é levado, sem demora, à presença de um juiz. O STF mandou implantá-la (ADPF 347, 2015), o CNJ a regulou (Resolução 213/2015), e o CPP a prevê em até 24 horas da prisão, hoje por videoconferência em tempo real (art. 310, caput, com a redação da Lei 15.358/2026).",
       "Tribunal Penal Internacional: o Brasil se submete à jurisdição de tribunal penal internacional a cuja criação tenha manifestado adesão (art. 5º, § 4º, EC 45/2004) - o do Estatuto de Roma, que é complementar às jurisdições nacionais."
     ],
     "memorizar": [
@@ -616,7 +618,7 @@
       "Dizer que a prisão civil do devedor de alimentos também foi afastada: ela continua admitida (CF, art. 5º, LXVII; Pacto de San José, art. 7.7)."
     ],
     "fonte_sugerida": null,
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -647,7 +649,7 @@
     ],
     "memorizar": [
       "Separação (regra 11): homens e mulheres (sempre que possível em unidades separadas; nos estabelecimentos mistos, recintos femininos totalmente separados); presos preventivos separados dos condenados; presos por dívidas e outros presos civis separados dos criminais; jovens separados dos adultos.",
-      "Acomodação (regra 12): cela para o descanso noturno com um preso só; mesmo na superlotação temporária, não é recomendável pôr dois presos na mesma cela; dormitórios só com presos selecionados e vigilância regular à noite.",
+      "Acomodação (regra 12): onde o alojamento é em celas individuais, cada preso ocupa a sua à noite; se a superlotação temporária obrigar a uma exceção, não é recomendável pôr dois presos na mesma cela; dormitórios só com presos selecionados e vigilância regular à noite.",
       "Banho pelo menos uma vez por semana em clima temperado (regra 16); água potável sempre que o preso precisar (regra 22).",
       "Exercício (regra 23): pelo menos 1 hora diária ao ar livre para o preso que não trabalha a céu aberto, se o clima permitir.",
       "Roupas (regra 19): nunca degradantes ou humilhantes; ao sair do estabelecimento por motivo autorizado, o preso pode usar roupa própria ou outra discreta.",
@@ -661,7 +663,7 @@
       "Admitir tortura em situação excepcional: a regra 1 diz que ela não se justifica em qualquer circunstância."
     ],
     "fonte_sugerida": "Regras de Mandela - tradução oficial do CNJ (Série Tratados Internacionais de Direitos Humanos, 2016).",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -683,7 +685,7 @@
       "regras de mandela presos não julgados regras 111 a 120"
     ],
     "entender": [
-      "Disciplina (regras 36 a 42): ordem sem mais restrição do que o necessário; infração, sanção, autoridade competente e toda separação involuntária previstas em lei ou regulamento (regra 37); ninguém é punido duas vezes pela mesma infração, e a sanção é proporcional (regra 39); nenhum preso é empregado a serviço da unidade em cumprimento de medida disciplinar (regra 40); o preso é informado da acusação, pode se defender e buscar revisão judicial da sanção (regra 41).",
+      "Disciplina (regras 36 a 42): ordem sem mais restrição do que o necessário; infração, sanção, autoridade competente e toda separação involuntária previstas em lei ou regulamento (regra 37); ninguém é punido duas vezes pela mesma infração, e a sanção é proporcional (regra 39); nenhum preso exerce função disciplinar a serviço da unidade, o que não impede os sistemas de autogestão supervisionados (regra 40); o preso é informado da acusação, pode se defender e buscar revisão judicial da sanção (regra 41).",
       "Proibidos (regra 43): confinamento solitário indefinido; confinamento solitário prolongado; cela escura ou constantemente iluminada; castigos corporais ou redução da dieta ou da água potável; castigos coletivos. Instrumento de imobilização nunca é sanção, e a sanção não pode proibir o contato com a família - só restringi-lo por prazo limitado, quando estritamente necessário.",
       "Confinamento solitário (regras 44 e 45): 22 horas ou mais por dia sem contato humano significativo; prolongado é o de mais de 15 dias consecutivos; só em casos excepcionais, como último recurso, pelo menor prazo possível, com revisão independente; proibido para preso com deficiência mental ou física que a medida possa agravar.",
       "Instrumentos de restrição (regras 47 a 49): correntes, imobilizadores de ferro e outros inerentemente degradantes ou dolorosos são proibidos; os demais só com previsão legal - contra fuga na transferência (retirados diante da autoridade judicial ou administrativa) ou por ordem do diretor, para evitar dano; nunca em mulher em trabalho de parto, durante o parto e logo depois dele (regra 48).",
@@ -703,10 +705,11 @@
       "Transformar em obrigação absoluta o que a regra diz 'na medida do possível' - a equipe de especialistas da regra 78, por exemplo.",
       "Dizer que a sanção disciplinar pode proibir o contato com a família: a regra 43 só admite restrição por prazo limitado, quando estritamente necessária.",
       "Dizer que o preso não julgado é obrigado a trabalhar: pode trabalhar, não é obrigado, e é remunerado se trabalhar (regra 116).",
-      "Admitir instrumento de imobilização como sanção disciplinar (regra 43) ou em mulher em trabalho de parto (regra 48)."
+      "Admitir instrumento de imobilização como sanção disciplinar (regra 43) ou em mulher em trabalho de parto (regra 48).",
+      "Ler a regra 40 como castigo: ela proíbe dar ao preso função disciplinar sobre os outros, e não fala do trabalho do preso punido."
     ],
     "fonte_sugerida": "Regras de Mandela - tradução oficial do CNJ (Série Tratados Internacionais de Direitos Humanos, 2016).",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -743,7 +746,7 @@
     "memorizar": [
       "Comissão Interamericana: 7 membros, mandato de 4 anos, uma reeleição; Corte Interamericana: 7 juízes, mandato de 6 anos, uma reeleição.",
       "Petição individual vai à Comissão, nunca direto à Corte; à Corte, só Estados Partes e a Comissão (art. 61).",
-      "Requisitos da petição (art. 46): esgotamento dos recursos internos; 6 meses da decisão definitiva; ausência de outro processo internacional sobre o mesmo caso.",
+      "Requisitos da petição (art. 46): esgotamento dos recursos internos; 6 meses da decisão definitiva; ausência de outro processo internacional sobre o mesmo caso; e a identificação de quem peticiona (nome, nacionalidade, profissão, domicílio e assinatura). Os dois primeiros não se exigem sem devido processo legal interno, quando o acesso aos recursos foi negado ou quando há demora injustificada (art. 46, § 2º).",
       "Pacto de San José: 1969, promulgado pelo Decreto 678/1992; Protocolo de San Salvador: 1988 (direitos econômicos, sociais e culturais e meio ambiente).",
       "Incidente de deslocamento de competência: grave violação de direitos humanos; suscitado pelo PGR; decidido pelo STJ; vai para a Justiça Federal; cabe em qualquer fase (CF, art. 109, § 5º)."
     ],
@@ -755,7 +758,7 @@
       "Trocar os mandatos: 4 anos na Comissão, 6 na Corte."
     ],
     "fonte_sugerida": "André de Carvalho Ramos, Curso de Direitos Humanos (Saraiva Jur).",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -788,7 +791,7 @@
     "memorizar": [
       "Viena (1993, § 5º): todos os direitos humanos são universais, indivisíveis, interdependentes e inter-relacionados.",
       "Inalienáveis, imprescritíveis e irrenunciáveis: não se transferem, não se perdem pelo tempo e não se renunciam (o titular pode deixar de exercer, mas não abrir mão).",
-      "DUDH, art. 1º: todos os seres humanos nascem livres e iguais em dignidade e em direitos. Art. 5º: ninguém será submetido a tortura nem a penas ou tratamentos cruéis, desumanos ou degradantes.",
+      "DUDH, art. 1º: todos os seres humanos nascem livres e iguais em dignidade e em direitos. Art. 5º: ninguém será submetido à tortura, nem a tratamento ou castigo cruel, desumano ou degradante.",
       "Vertical = Estado x indivíduo; horizontal = particular x particular; diagonal = particulares desiguais.",
       "Proibição de retrocesso (efeito cliquet): os direitos já reconhecidos não podem ser suprimidos ou reduzidos."
     ],
@@ -800,7 +803,7 @@
       "Dizer que universalidade significa que todos os países aplicam os direitos do mesmo jeito: significa que toda pessoa é titular deles."
     ],
     "fonte_sugerida": "André de Carvalho Ramos, Curso de Direitos Humanos (Saraiva Jur).",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -825,7 +828,7 @@
       "A assistência ao preso e ao internado é dever do Estado, para prevenir o crime e orientar o retorno à convivência em sociedade, e estende-se ao egresso (art. 10).",
       "As seis assistências (art. 11): material, à saúde, jurídica, educacional, social e religiosa.",
       "Material (arts. 12 e 13): alimentação, vestuário e instalações higiênicas, e locais para a venda de produtos permitidos e não fornecidos pela Administração.",
-      "Saúde (art. 14): atendimento médico, farmacêutico e odontológico, preventivo e curativo; se o estabelecimento não estiver aparelhado, a assistência é prestada em outro local, com autorização da direção; à mulher, acompanhamento médico principalmente no pré-natal e no pós-parto, extensivo ao recém-nascido.",
+      "Saúde (art. 14): atendimento médico, farmacêutico e odontológico, preventivo e curativo; se o estabelecimento não estiver aparelhado, a assistência é prestada em outro local, com autorização da direção; à mulher, acompanhamento médico principalmente no pré-natal e no pós-parto, extensivo ao recém-nascido (§ 3º), e tratamento humanitário à grávida nos atos médico-hospitalares preparatórios do parto e no trabalho de parto, e à mulher no puerpério, com assistência integral à saúde dela e do recém-nascido (§ 4º, Lei 14.326/2022).",
       "Jurídica (arts. 15 e 16): para os presos e internados sem recursos para constituir advogado; as Unidades da Federação devem ter assistência jurídica integral e gratuita pela Defensoria Pública, dentro e fora dos estabelecimentos.",
       "Religiosa (art. 24): com liberdade de culto, participação nos serviços organizados e posse de livros de instrução religiosa; haverá local apropriado para os cultos; nenhum preso ou internado será obrigado a participar de atividade religiosa."
     ],
@@ -843,7 +846,7 @@
       "Esquecer uma das seis assistências do art. 11, ou acrescentar uma 'assistência financeira'."
     ],
     "fonte_sugerida": null,
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -1432,7 +1435,7 @@
       "Regra geral: o verbo concorda em número e pessoa com o NÚCLEO do sujeito, esteja ele antes ou depois do verbo ('Chegaram os documentos'; 'A lista dos aprovados saiu').",
       "Sujeito composto antes do verbo: plural ('O diretor e o agente saíram'). Depois do verbo: plural ou concordância com o núcleo mais próximo ('Saíram o diretor e o agente' / 'Saiu o diretor e o agente').",
       "Pessoas diferentes: a 1ª prevalece sobre as outras ('Eu e você iremos'); a 2ª prevalece sobre a 3ª ('Tu e ele ireis', ou 'irão', na língua corrente).",
-      "Núcleos ligados por 'ou': singular se há exclusão ('Pedro ou Paulo será eleito'); plural se a ideia é de soma ('O frio ou o calor me incomodam'). Por 'nem': em regra, plural ('Nem um nem outro vieram'). Por 'com': plural quando os dois praticam a ação juntos; singular quando o segundo é acessório, entre vírgulas.",
+      "Núcleos ligados por 'ou': singular se há exclusão ('Pedro ou Paulo será eleito'); plural se a ideia é de soma ('O frio ou o calor me incomodam'). Por 'nem': em regra, plural ('Nem o diretor nem o agente vieram'), e singular se um exclui o outro ('Nem Pedro nem Paulo será o eleito'); com 'nem um nem outro', singular ou plural. Por 'com': plural quando os dois praticam a ação juntos; singular quando o segundo é acessório, entre vírgulas.",
       "Sujeito coletivo sozinho leva o verbo ao singular ('A turma saiu'); coletivo ou partitivo seguido de especificador no plural ('a maioria dos presos', 'grande parte dos alunos') admite singular ou plural."
     ],
     "memorizar": [
@@ -1450,7 +1453,7 @@
       "Tratar como erro a concordância com o núcleo mais próximo no sujeito composto posposto: ela é aceita."
     ],
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulo de concordância verbal.",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -1823,7 +1826,8 @@
       "Mau x bom; mal x bem.",
       "Há = passado; a = futuro ou distância.",
       "Eminente = ilustre; iminente = prestes a ocorrer; deferir = conceder; diferir = adiar.",
-      "Hífen: mesma vogal ou H = com hífen; vogais diferentes = junto; R ou S depois de vogal = letra dobrada."
+      "Hífen: mesma vogal ou H = com hífen; vogais diferentes = junto; R ou S depois de vogal = letra dobrada.",
+      "Exceção do hífen: o prefixo co- se junta mesmo diante de 'o' ('cooperar', 'coordenar'), e re- e pre- átonos também ('reeleição', 'preexistente')."
     ],
     "pegadinhas": [
       "Usar 'porque' junto em pergunta direta ('Porque você saiu?').",
@@ -1833,7 +1837,7 @@
       "Aplicar o hífen antigo ('auto-escola', 'anti-rábico')."
     ],
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulo de ortografia.",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -1981,14 +1985,14 @@
     ],
     "entender": [
       "Próclise (pronome antes do verbo) é obrigatória com palavras atrativas: negativas (não, nunca, ninguém, nada), pronomes relativos, conjunções subordinativas ('quando', 'se', 'embora', 'que'), advérbios sem vírgula depois ('Aqui se trabalha'), pronomes indefinidos e interrogativos, e nas frases exclamativas e optativas ('Deus o abençoe').",
-      "Mesóclise (pronome no meio do verbo) é obrigatória no futuro do presente e no futuro do pretérito quando não há palavra atrativa ('Entregar-lhe-ei'; 'Far-se-ia'); havendo atrativa, próclise ('Não lhe entregarei').",
+      "Mesóclise (pronome no meio do verbo) no futuro do presente e no futuro do pretérito sem palavra atrativa: obrigatória quando o verbo abre a frase ('Entregar-lhe-ei'; 'Far-se-ia'); com sujeito não atrativo antes, a próclise também é aceita ('O diretor lhe entregará'); havendo atrativa, próclise ('Não lhe entregarei'). Ênclise com o futuro, nunca.",
       "Ênclise (pronome depois do verbo) no início de frase ('Entregaram-me o ofício'), depois de pausa marcada por vírgula, no imperativo afirmativo ('Faça-o') e, em regra, com o infinitivo impessoal.",
       "Na norma culta, não se inicia frase com pronome oblíquo átono ('Me disseram' é registro coloquial).",
       "Locução verbal: sem atrativa, o pronome vai depois do auxiliar, com hífen, ou depois do principal ('Quero-lhe dizer' / 'Quero dizer-lhe'); com atrativa, antes do auxiliar ou depois do principal ('Não lhe quero dizer' / 'Não quero dizer-lhe'). Nunca depois de particípio ('tinha entregado-lhe' é erro)."
     ],
     "memorizar": [
       "Atrativas: não, nunca, que, quem, quando, se, embora, advérbios sem vírgula, indefinidos e interrogativos.",
-      "Futuro + sem atrativa = mesóclise; futuro + atrativa = próclise.",
+      "Futuro abrindo a frase = mesóclise; futuro + atrativa = próclise; futuro + ênclise = erro.",
       "Início de frase e imperativo afirmativo = ênclise.",
       "Particípio nunca recebe o pronome depois.",
       "Advérbio seguido de vírgula não atrai: 'Aqui, trabalha-se muito'."
@@ -2001,7 +2005,7 @@
       "Esquecer que o advérbio separado por vírgula deixa de atrair o pronome."
     ],
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulo de colocação pronominal.",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -2206,7 +2210,7 @@
     ],
     "memorizar": [
       "'Para eu' + verbo; 'entre mim e ti'; 'cujo' sem artigo depois; 'onde' só para lugar.",
-      "Atrativa = próclise; futuro sem atrativa = mesóclise; início de frase = ênclise.",
+      "Atrativa = próclise; futuro abrindo a frase = mesóclise (nunca ênclise); início de frase = ênclise.",
       "'Quando eu vir' (ver); 'se ele vier' (vir); 'se ele mantiver'; 'ele interveio'.",
       "'Vendem-se casas'; 'precisa-se de agentes'.",
       "O/a = objeto direto; lhe = objeto indireto; complemento nominal = sentido passivo."
@@ -2219,7 +2223,7 @@
       "Chamar de complemento nominal todo termo com preposição ligado a substantivo."
     ],
     "fonte_sugerida": "O caderno de erros do radar, nos temas de pronomes, verbos e termos integrantes.",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },
@@ -2414,7 +2418,7 @@
     ],
     "entender": [
       "Voz ativa: o sujeito pratica a ação ('A polícia prendeu os suspeitos'). Voz passiva: o sujeito sofre a ação ('Os suspeitos foram presos pela polícia'). Reflexiva: o sujeito pratica e sofre ('Ele se feriu'); recíproca: 'Eles se abraçaram'.",
-      "Só verbo transitivo direto (ou direto e indireto) vai para a passiva: o objeto direto da ativa vira sujeito da passiva, e o sujeito da ativa vira agente da passiva.",
+      "Só verbo transitivo direto (ou direto e indireto) vai para a passiva: o objeto direto da ativa vira sujeito da passiva, e o sujeito da ativa vira agente da passiva. Exceção clássica: obedecer, desobedecer e responder, embora transitivos indiretos, admitem a passiva ('As ordens foram obedecidas').",
       "Passiva analítica: verbo SER (ou estar, ficar) + particípio, que concorda com o sujeito ('As cartas foram enviadas'). Passiva sintética: verbo transitivo direto + SE (partícula apassivadora), com o verbo concordando com o sujeito ('Enviaram-se as cartas' = 'As cartas foram enviadas').",
       "Na transposição, o tempo se mantém no auxiliar: 'prendeu' → 'foi preso'; 'prendia' → 'era preso'; 'prenderá' → 'será preso'; 'tinha prendido' → 'tinha sido preso'.",
       "SE com verbo transitivo indireto, intransitivo ou de ligação é índice de indeterminação do sujeito, e o verbo fica no singular ('Precisa-se de funcionários'; 'Vive-se bem aqui')."
@@ -2434,7 +2438,7 @@
       "Esquecer a concordância do particípio na analítica ('As cartas foram enviado')."
     ],
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulo de vozes verbais.",
-    "modelo": "Claude Code, importado manualmente, em 02/10/2026",
+    "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
     "conferida_em": null
   },

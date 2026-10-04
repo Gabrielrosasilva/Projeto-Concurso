@@ -547,6 +547,6 @@ def test_o_cartao_da_lateral_fala_no_singular(cliente, monkeypatch):
 
 def test_a_volta_do_botao_nao_perde_o_tema(cliente):
     """O link_do_dia escreve "&amp;" (certo no HTML). Essa volta e codificada
-    de novo, e o "&amp;" viraria um parametro chamado "amp;tema"."""
-    texto = cliente.get("/hoje?data=2026-10-20&tema=claro").text
-    assert "volta=%2Fhoje%3Fdata%3D2026-10-20%26tema%3Dclaro%23faixa-noite-0" in texto
+    de novo, e o "&amp;" viraria um parametro chamado "amp;cor"."""
+    texto = cliente.get("/hoje?data=2026-10-20&cor=claro").text
+    assert "volta=%2Fhoje%3Fdata%3D2026-10-20%26cor%3Dclaro%23faixa-noite-0" in texto

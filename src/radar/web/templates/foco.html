@@ -304,7 +304,7 @@
           {% for ano in p.anos_das_provas -%}
             {{ ano }}, {{ p.anuladas_por_ano.get(ano, 0) }}{{ '; ' if not loop.last else '.' }}
           {%- endfor %}
-          {% if p.anos_das_provas | length < 3 %}<b>Base pequena:</b>
+          {% if p.anos_das_provas | length < PROVAS_PARA_TENDENCIA %}<b>Base pequena:</b>
           {{ p.anos_das_provas | length }} prova{{ 's' if p.anos_das_provas | length > 1 }} do cargo.{% endif %}</span>
         {% endif %}
         <span>{{ selo(p.origens.meu_acerto) }}<b>Meu acerto</b> soma duas origens, e a

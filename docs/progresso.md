@@ -14,16 +14,17 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | ✅ |
-| 8 | 3B — Acervo complementar FEPESE | 🟡 acervo e 3 lotes classificados; falta a sua conferência |
+| 8 | 3B — Acervo complementar FEPESE | 🟡 169 provas aceitas (eram 122: o leitor consertado e as 21 provas baixadas em 04/10); 4 lotes classificados (o do catálogo refeito); a conferência tem tela; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
 | 10 | 5 — Geração de questões | ✅ |
-| 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; falta a sua conferência das 61 fichas e o Ciclo 2, depois do simulado de 07/11 |
+| 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; as 61 fichas revistas pelo Claude Code em 04/10 contra a fonte (15 corrigidas: [conferencia_das_fichas](conferencia_das_fichas.md)); falta a sua conferência e o Ciclo 2, depois do simulado de 07/11 |
 | 12 | 7A — Selos e marcação de IA | ✅ |
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
-| 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 a F7 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento, os padrões do complementar, a última revisão e a evolução no Meu desempenho, o painel mais leve e a faixa sem `conteudo` no que ela cobre); falta o resto da seção F |
+| 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; o backup voltou na noite de 03/10; falta a sua conferência da lista de leis (reconferida pelo Claude Code em 04/10) |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | ✅ 2A, 2B, 2C e a seção F inteira, F1 a F15 (decisões 67 a 86) |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
+| 18 | O lote de 04/10 (as conferências e os abertos) | ✅ as 61 fichas e as 15 leis conferidas contra a fonte (a marca de conferida continua sua), a tela de conferência do complementar e o lote do catálogo refeito, o `?cor=`, as geradas antigas, a base da média nos Macetes, e o leitor do caderno consertado com a releitura (B.7, B.9, B.10; decisões 87 a 90) |
 
 ---
 
@@ -2402,3 +2403,265 @@ está nas pendências, como decisão sua.
 | `test_estudo.py`, `test_fichas.py`, `test_metricas.py`, antes dos testes novos | 117 passed |
 | `test_estudo.py` (5 novos: os `nos` do plano só para situação e datas, o R+7 sem `conteudo`, a ficha só depois de conferida, a ficha sem nó no assunto, a faixa com `conteudo` como era) | 45 passed |
 | Suíte inteira, PC (uma vez) | **2477 passed** (2472 de antes + 5 novos), 0 failed, 22 min |
+
+### F8 — a revisão feita passa o 1-7-30 de etapa ✅
+
+A opção (b) da pendência do prazo, aprovada por você (decisão 82). Fica no
+disco, sem commit: o commit e o push esperam o seu pedido.
+
+**O que mudou** (`src/radar/servico/estudo.py`):
+- `Situacao.revisoes_fora_do_radar`: os dias de faixa de revisão e de extra
+  de revisão; no `para_revisar` eles entram com o acerto no radar no
+  `_etapa_e_vencimento` - no vencimento ou depois, passam de etapa;
+- a revisão sem questão deixou de contar como estudo (não reinicia o prazo);
+- `desempenho.html`: a frase do prazo no bloco "O que voltou para revisão".
+
+**Com o banco real:** a fila continua com 10 - nenhum R+7 nem extra de
+revisão foi feito ainda.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_estudo.py` (5 novos: o R+7 no vencimento, o extra de revisão sem reiniciar o prazo, revisar antes do vencimento, errar na rodada de revisão do radar, o R+7 só pelos `nos` do plano) | 50 passed |
+| `test_estudo_extra.py`, `test_fichas.py`, `test_desempenho.py`, `test_registro_estudo.py`, `test_geracao_por_conteudo.py`, `test_gerador.py` | 232 passed |
+| Suíte inteira, PC (uma vez) | **2482 passed** (2477 de antes + 5 novos), 0 failed, 22 min |
+| `test_estudo.py`, `test_desempenho.py` e `test_varredura_das_telas.py`, com a frase final da tela | 85 passed |
+
+### F9 — os termos frequentes empatados em ordem alfabética ✅
+
+O achado do F6: na Incidência e nos Macetes, as palavras com a mesma contagem
+saíam numa ordem que o Python sorteia a cada processo (elas entram na conta
+por um `set`), e no corte até a palavra mostrada trocava.
+
+**O que mudou:** `src/radar/macetes.py`, `termos_frequentes` - o empate sai
+em ordem alfabética, sem olhar acento ("época" entre "direito" e "zona").
+
+**Com o banco real:** a Incidência e os Macetes, abertos em três processos
+com `PYTHONHASHSEED` 1, 2 e 3, saíram iguais byte a byte (antes, cada
+processo dava uma ordem).
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_macetes.py` (1 novo: o empate em ordem alfabética, sem olhar acento), `test_central_de_macetes.py`, `test_incidencia.py` | 96 passed |
+| Onde os termos aparecem: `test_aceite.py`, `test_caderno_erros.py`, `test_central_de_macetes.py`, `test_foco.py`, `test_materias_na_tela.py`, `test_metricas.py`, `test_origem.py`, `test_tela_hoje.py`, `test_web.py`, `test_fichas.py`, `test_complementar.py` | 449 passed |
+| Suíte inteira | uma vez, no fim do lote de 04/10, antes do commit (a seu pedido) |
+
+### F10 — as 30 variações do estoque religadas à questão de base ✅
+
+Das 33 variações sem a questão real de base (F3, decisão 77), as 30 do
+estoque de 03/10 tinham o pedido impresso no histórico da conversa: o
+ajudante do estoque mostrava a linha "REAL:" com o enunciado e as
+alternativas da base de cada pedido. Para cada grupo de 3, a base é a
+candidata (mesma impressão) cujas alternativas aparecem no pedido do lote do
+mesmo nó - uma só em cada grupo; no lote 18, dois pedidos de enunciado igual
+se separam pelo assunto (assistência educacional, 2019 q85; religiosa, 2019
+q83). Cada chave foi conferida contra as candidatas antes de gravar, e o
+`data/questoes_geradas.json` foi exportado do banco real: 775 questões, 236
+com a base (eram 206). As 3 de 27/09 seguem sem - não há registro do pedido.
+
+| Grupo | Base |
+|---|---|
+| 165-167 | 2013 AP q26 |
+| 180-182 | 2013 AS q26 |
+| 254-256 | 2019 AP q85 |
+| 257-259 | 2019 AP q83 |
+| 280-282 | 2019 AP q53 |
+| 298-300 | 2019 AP q55 |
+| 316-318 | 2013 AP q40 |
+| 419-421 | 2013 AP q23 |
+| 443-445 | 2019 AP q52 |
+| 716-718 | 2019 AP q89 |
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_geracao_por_conteudo.py` (1 novo: no registro real, só as 3 de 27/09 seguem sem base), `test_gerador.py` | 94 passed |
+
+### F11 — os últimos mínimos fixos no `config/amostra.yml` ✅
+
+Decisão 83. `config/amostra.yml` ganhou `desempenho.evolucao` (20),
+`acervo.tendencia_de_gabarito` (50) e `acervo.provas_para_tendencia` (3),
+lidos pelo `radar/amostra.py` (`Minimos`). Saíram do código o
+`MINIMO_PARA_EVOLUCAO` (`servico/metricas.py`: a `Evolucao` guarda o mínimo
+com que foi medida), o `MINIMO_PARA_TENDENCIA` (`macetes.py`), o
+`PROVAS_PARA_TENDENCIA` (`servico/cartoes.py`: o `Cartao` guarda o dele) e o
+`length < 3` do `foco.html`, do `home.html` e do `previsao.html` (o
+`app.py` publica `PROVAS_PARA_TENDENCIA`, como já publicava os mínimos de
+nível). Os valores não mudaram.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_amostra.py` (o teste-guarda vigia os três nomes e os templates; 2 novos: os valores do arquivo real e mudar o YAML muda a tendência e a evolução), `test_macetes.py`, `test_central_de_macetes.py`, `test_foco.py`, `test_web.py`, `test_metricas.py`, os da previsão | 262 passed |
+
+### F12 — as leis de fronteira na ficha do tema ✅
+
+Decisão 84. Os 9 casos de fronteira (o artigo mudou depois da prova num ponto
+que a questão não cobra) foram para a lista `fronteira:` do
+`config/leis.yml`, e a ficha de estudo os mostra no cartão "O que estudar",
+logo depois da fonte oficial, com o 🟣 "por conferir"
+(`leis.fronteira_do_tema`; `fichas.montar`, `_nos_do_tema`; `ficha.html`; o
+aviso ganhou uma frase de abertura opcional, porque na ficha não há "esta
+prova"). A contagem de leis por conferir passou de 15 para 24.
+
+**Com o dado real:** cinco fichas mostram o aviso - Defesa do Estado e
+segurança pública (polícias penais), Coação, obediência e excludentes
+(legítima defesa do refém), Deveres e direitos do preso (arts. 41, 41-A e
+41-B), e Permissão de saída, saída temporária e remição (saída temporária e
+remição no regime domiciliar). Os de Maria da Penha, tortura, desarmamento,
+seguridade e educação esperam as fichas do Ciclo 2.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_leis.py` (4 novos: procedência, fonte e nós do real; o nó e a marca; a marca só na matéria do item e o ramo; a contagem), `test_fichas.py` (2 novos: a página e o assunto inteiro que não liga), `test_central_de_macetes.py`, `test_macetes.py` | 156 passed |
+
+### F14 — o "estudado" pelas constantes da decisão 20 ✅
+
+`TIPOS_DE_ESTUDO` e `EXTRA_DE_ESTUDO` (`servico/estudo.py`) estavam
+declaradas e sem uso. Agora `_e_estudo` as usa: só a faixa de estudo e o
+extra de teoria ou de lei seca deixam o nó estudado. O lançamento do
+`metricas` ganhou o `tipo` (o da faixa, ou o "o que" do extra).
+
+### F15 — o primeiro contato é a primeira resposta, de todas ✅
+
+Decisão 85. A primeira e a última prática saem de toda resposta
+(`metricas.respostas_reais`; `_questoes_respondidas(todas=True)`), e não só da
+última de cada questão. Com o banco real nada muda (a fila continua com 10, e
+os não estudados com 24): nenhuma questão foi refeita ainda.
+
+**Testes (F14 e F15).**
+
+| Rodada | Resultado |
+|---|---|
+| `test_estudo.py`, `test_estudo_extra.py`, `test_metricas.py`, com o código da F14 | 102 passed |
+| `test_estudo.py` (2 novos: a correção marcada não é estudo; a questão refeita não empurra o primeiro contato), `test_desempenho.py`, `test_metricas.py`, `test_fichas.py` | 163 passed |
+
+### F13 — os conceitos associados (§14, item 7) ✅
+
+Decisão 86.
+- `servico/manual.py`: o tipo `associados` - `pedido_de_associados` (cada
+  questão do alvo com a principal, a árvore inteira, a instrução), o formato
+  da resposta e `_importar_associados`;
+- `servico/classificacoes.py`: `aplicar_associados` confere tudo antes de
+  gravar (nó da árvore, de assunto para baixo, fora do ramo da principal, com
+  trecho) e grava como classificação não principal;
+- `incidencia.py`: a `Ocorrencia` leva os `associados`, e `associacoes` junta
+  os pares por matéria; `servico/incidencia.py` lê os associados do banco;
+- a tela de Incidência (`app.py`, `incidencia.html`) e o `radar incidencia
+  --padroes` mostram os pares; `radar classificar --pedido --associados` pede,
+  e o `--importar` diz "conceito(s) associado(s)".
+
+**O dado:** o pedido real saiu com 13 pedidos e 155 questões; o Claude Code
+respondeu todas (74 com associado, 109 associações), e a importação gravou as
+109 sem recusa. As 402 classificações de antes ficaram idênticas, e as 826
+células de amostra da Incidência saíram iguais às de antes.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_associados.py` (novo, 10: o pedido, a gravação sem mexer na principal, as quatro recusas, a questão fora do pedido, a incidência que não conta o associado, a página com e sem o bloco) | 10 passed |
+| `test_associados.py`, `test_classificacao.py`, `test_incidencia.py`, `test_fichas.py`, `test_ia_manual.py`, `test_complementar.py` | 192 passed |
+
+## 18 — O lote de 04/10/2026 (as conferências e os abertos)
+
+**O pedido:** fechar a F8 e a F9, fazer o resto da seção F sem perguntar, ir
+direto para as conferências (o "3") e os outros abertos (o "5"), e só no fim
+rodar a suíte inteira, fazer o commit e o push. A seção F está na seção 17
+acima (F10 a F15); aqui ficam as conferências e os abertos.
+
+### As 61 fichas, lidas contra a fonte ✅
+
+Decisão nenhuma: é revisão do texto do Claude Code, e a marca de conferida
+continua sua (decisão 16). LEP, CF, CP e CPP no texto compilado da Câmara de
+03/10, artigo por artigo e número por número; Regras de Mandela no texto da
+ONU; Português e Raciocínio Lógico pela regra. **15 corrigidas**, uma com erro
+de conteúdo (a regra 40 de Mandela), as outras completadas (o art. 14, § 4º,
+da LEP; o inciso LXXIX do art. 5º; a ressalva do art. 31 do CP; a custódia por
+videoconferência; a exceção do hífen; a da passiva; quando a mesóclise é
+obrigatória...) ou desfeitas de escrita ambígua ("1 a 2/3"). 7 ficaram com
+ponto que daqui não se confere (o Manual de Redação e o Pacto de San José
+estão no Planalto; o STF responde 403). Tudo em
+[conferencia_das_fichas](conferencia_das_fichas.md). Gravadas pelo
+`servico.fichas` (o arquivo sai idêntico numa volta sem mudança), com "revista
+pelo Claude Code em 04/10/2026" na procedência.
+
+### As 15 leis alteradas ✅
+
+Reconferidas artigo por artigo no texto oficial de 04/10 (Câmara e ALESC):
+nenhuma está errada; as ressalvas estão na tabela de
+[leis_alteradas](leis_alteradas.md). O `conferida: true` continua seu.
+
+### B.8 — a conferência do complementar, e o lote do catálogo que voltou ✅
+
+Decisão 87.
+- `servico/classificacoes.py`: `conferencia(..., evidencia_escolhida, so_amostra)`
+  - o complementar aceito, uma linha por chave classificada, com "a mesma
+  questão está em mais N cadernos"; a amostra do catálogo (as 20 primeiras de
+  cada matéria pelo hash da chave, `acervo.amostra_do_catalogo` no
+  `config/amostra.yml`) e a conta dela; `conferir` guarda no trecho que a
+  proposta era do catálogo; a proposta do catálogo trocada sai, em vez de
+  virar associada;
+- `web/app.py` e `conferencia.html`: o filtro "Evidência", a caixa "só a
+  amostra do catálogo", a tabela da amostra e o recorte que volta depois de
+  gravar;
+- a auditoria da amostra: o catálogo errou o assunto em 9 de 20 (Português) e
+  9 de 16 (Raciocínio Lógico); as 108 propostas foram classificadas de novo
+  pelo importador (lote 4: 104 com nó, 4 pendentes; nenhum nó criado); as 73
+  propostas que a importação rebaixou a associadas saíram; as 44 do lote 2
+  foram relidas (um dispositivo que não existia, corrigido);
+- o `docs/complementar.md` (gerado) dizia que os padrões do complementar não
+  eram calculados: o gerador foi corrigido.
+
+### O `?cor=` ✅
+
+Decisão 88. `app.py` (`PARAMETRO_DA_COR`, `tema_da_pagina`,
+`link_de_trocar_tema` e os seis redirecionamentos da Hoje e de Semanas),
+`hoje.html`, `semanas.html` (que lia uma variável que nunca existia), os
+comentários do `design.css` e do `fichas.py`, o README.
+
+### As geradas antigas ✅
+
+Decisão 89: as 20 de 28/09 com a matéria "Direito Penal"; 25 com o nó (13 de
+LEP, 2 do art. 2º do CP, 10 de Português); 7 variações de LEP de 27/09
+rejeitadas por gabarito errado (nenhuma tinha resposta); 2 duvidosas na
+pendência D.
+
+### Macetes: a base da média ✅
+
+`macetes.py` (`FatiaDoCaderno.cadernos`, `Fatia.provas`), `app.py` e
+`macetes.html`: "18.3/prova em 120 provas".
+
+### B.7, B.9 e B.10 — o leitor do caderno, o download e a releitura ✅
+
+Decisão 90. `questoes.py` (o título da seção seguinte, o fim do caderno, a
+palavra partida, o "100.", a ordem das seções), `provas.py` e
+`servico/provas.py` (o caminho de quem colide; a reconstrução pelo caminho
+gravado; a releitura que leva a classificação e as geradas para a chave nova),
+`servico/classificacoes.py` e `servico/geradas.py` (`rechavear`).
+
+**Os ensaios, numa cópia do banco:** com o leitor de antes, a releitura não
+mudou nenhuma das 8.433 questões; com o consertado, mudaram 718 questões (690 do complementar e 20 do alvo na alternativa, 8 no enunciado) e, com a ordem das seções, 162 de matéria, e as 511
+classificações saíram inteiras (402 principais, 170 conferidas, nenhuma órfã).
+
+**O dado de verdade:** baixadas as 21 provas que faltavam (as 5 respostas que caíam nas cópias foram para a questão idêntica da prova dona, e as 840 cópias saíram); duas releituras, cada uma ensaiada antes: 637 questões com o texto limpo, 64 classificações e 45 geradas levadas para a chave nova, 799 questões das provas baixadas, 29 recuperadas pela numeração e 1 número corrigido sem levar classificação. Banco 8.433 → 8.421; as 511 classificações iguais tirando a chave (402 principais, 170 conferidas, nenhuma órfã); as 236 geradas com base continuam com ela. `radar auditar`: nenhuma suspeita no alvo. `radar complementar --aplicar`: 122 → 169 provas aceitas; das 14 fora, 3 ainda pela numeração (formatos que o leitor não entende). As 8 do Socioeducativo da B.10, na matéria certa, foram classificadas (6 com nó, 2 pendentes: a Constituição do Estado não está no edital).
+
+### Testes do lote
+
+| Rodada | Resultado |
+|---|---|
+| `test_fichas.py` (as 61 fichas reais passam de novo pela importação) | 60 passed |
+| `test_classificacao.py` (4 novos: o complementar aceito, a amostra fixa, o rastro do catálogo, a tela), `test_amostra.py`, `test_complementar.py` | 100 passed |
+| `test_conteudos.py` (2 novos: a proposta do catálogo e a pendente trocadas saem), `test_classificacao.py`, `test_associados.py` | 58 passed |
+| `test_design.py` (2 novos do `?cor=`), `test_caderno_erros.py`, `test_macetes.py`, `test_semanas.py`, `test_tela_hoje.py`, `test_fichas.py`, `test_web.py` | 348 passed |
+| `test_geracao_por_conteudo.py`, `test_gerador.py`, `test_fichas.py`, `test_backup_simulados.py`, `test_registro_estudo.py` (as geradas antigas) | 174 passed |
+| `test_macetes.py` (a base da média) | 59 passed |
+| `test_releitura.py` (novo, 20: o leitor, a ordem das seções, a numeração, o caminho do download, a troca de chave e a trava), `test_questoes.py`, `test_questoes_ieses.py`, `test_provas.py` | 121 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2533 passed**, 0 failed, 21 min |

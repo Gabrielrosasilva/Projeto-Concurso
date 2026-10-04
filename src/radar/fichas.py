@@ -87,7 +87,7 @@ ORIGEM_DO_CAMPO = {
     "questoes_reais": ACERVO,
     "meta_de_questoes": PLANO,
     "quando_revisar": AUTOMATICO, "refazer": AUTOMATICO,
-    "desempenho": AUTOMATICO, "geradas": IA,
+    "desempenho": AUTOMATICO, "geradas": IA, "leis_mudadas": IA,
 }
 
 #: Os prefixos que o cronograma poe no titulo das faixas de um mesmo tema. A
@@ -143,8 +143,8 @@ def chave_do_tema(tema: str | None) -> str:
 
 def id_do_tema(tema: str) -> str:
     """O endereco da ficha: "Art. 5º, caput e incisos I a XVI" ->
-    "art-5o-caput-e-incisos-i-a-xvi". Vai na URL, e por isso nao e o `tema`:
-    `?tema=` ja e o tema claro/escuro da web."""
+    "art-5o-caput-e-incisos-i-a-xvi". Vai na URL pelo endereco, e nao por um
+    `?tema=` (que ate 04/10 era tambem o claro/escuro da web)."""
     return re.sub(r"[^a-z0-9]+", "-", chave_do_tema(tema)).strip("-")
 
 
@@ -576,6 +576,9 @@ class Contexto:
     #: Os cadernos complementares que entram nos padroes de cobranca: os
     #: aceitos com gabarito definitivo (decisao 78). Vazio, nenhum entra.
     provas_dos_padroes: set = field(default_factory=set)
+    #: (materia, nos, titulo) -> [leis.Mudanca]: a lei que mudou num ponto que
+    #: nenhuma questao cobra (decisao 84). None, nenhuma.
+    leis_mudadas: object = None
 
 
 @dataclass
@@ -620,6 +623,9 @@ class FichaDeEstudo:
     estado: object
     situacao: str
     faixas: list
+    #: A lei que mudou depois das provas num ponto que elas nao cobram
+    #: (decisao 84). Escrito por IA, por conferir - o aviso diz isso.
+    leis_mudadas: list = field(default_factory=list)
 
     @property
     def id(self) -> str:
@@ -950,7 +956,24 @@ def montar(escrita: FichaEscrita, ctx: Contexto, data: date | None = None,
         geradas=[g for g in ctx.geradas if dentro(getattr(g, "conteudo", None))],
         refazer=ctx.refazer(dentro), desempenho=desempenho, estado=estado,
         situacao=_situacao(dentro, ctx), faixas=faixas,
+        leis_mudadas=(ctx.leis_mudadas(escrita.materia, _nos_do_tema(escrita), escrita.tema)
+                      if ctx.leis_mudadas else []),
     )
+
+
+def _nos_do_tema(escrita: FichaEscrita) -> list[str]:
+    """Os nos que dizem onde o tema esta, para ligar a ele a lei que mudou.
+
+    Os da ficha; sem eles, o subassunto que ela escreve. So o assunto nao
+    serve: na LEP o assunto e a lei inteira, e cada caso de fronteira dela
+    iria parar em todas as fichas da materia.
+    """
+    if escrita.nos:
+        return list(escrita.nos)
+    if escrita.assunto and escrita.subassunto:
+        return [arvore.caminho(arvore.caminho(escrita.materia, escrita.assunto),
+                               escrita.subassunto)]
+    return []
 
 
 def comando_de_gerar(no: str, quantas: int = 10) -> str:

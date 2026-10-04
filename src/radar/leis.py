@@ -16,6 +16,7 @@ from functools import cache
 import yaml
 
 from radar import config
+from radar.conteudos import SEPARADOR
 from radar.origem import OFICIAL
 from radar.regioes import normalizar
 
@@ -171,8 +172,10 @@ def mudancas_conferidas() -> bool:
 
 
 def mudancas_por_conferir() -> int:
-    """Quantos itens da lista vieram de IA e eu ainda nao conferi."""
-    return sum(1 for item in _arquivo().get("mudancas") or [] if _por_conferir(item))
+    """Quantos itens das duas listas - `mudancas` e `fronteira` - vieram de
+    IA e eu ainda nao conferi."""
+    itens = (_arquivo().get("mudancas") or []) + (_arquivo().get("fronteira") or [])
+    return sum(1 for item in itens if _por_conferir(item))
 
 
 def mudancas_da_questao(
@@ -205,3 +208,44 @@ def mudancas_da_questao(
             conferida=not _por_conferir(item),
         ))
     return achadas
+
+
+# --- o que mudou num ponto que nenhuma questao cobra (decisao 84) ---------------
+#
+# A lista `fronteira:` do config/leis.yml: o artigo mudou depois da prova, num
+# ponto que a questao nao cobra - nao ha aviso na questao, e sim na ficha do
+# tema, onde vale saber dele.
+
+
+def fronteira_do_tema(materia: str | None, nos, titulo: str | None) -> list[Mudanca]:
+    """Os itens da `fronteira` que tocam um tema da ficha de estudo.
+
+    Duas maneiras, as duas escritas no YAML: um no do item no mesmo ramo da
+    arvore que um no do tema (um debaixo do outro), ou uma marca do item no
+    titulo do tema, quando a materia e a do item. Nada e deduzido do texto.
+    """
+    procurado = normalizar(titulo or "")
+    da_materia = normalizar(materia or "")
+    achadas = []
+    for item in _arquivo().get("fronteira") or []:
+        nos_do_item = [str(n) for n in item.get("nos") or []]
+        pelo_no = any(_mesmo_ramo(a, b) for a in nos_do_item for b in nos or ())
+        materias = [normalizar(str(m)) for m in item.get("materias") or []]
+        marcas = [normalizar(str(m)) for m in item.get("marcas") or []]
+        pela_marca = (da_materia in materias
+                      and any(marca and marca in procurado for marca in marcas))
+        if pelo_no or pela_marca:
+            achadas.append(Mudanca(
+                tema=str(item.get("tema") or ""),
+                lei=str(item.get("lei") or ""),
+                o_que_mudou=item.get("o_que_mudou") or None,
+                procedencia=item.get("procedencia") or None,
+                conferida=not _por_conferir(item),
+            ))
+    return achadas
+
+
+def _mesmo_ramo(um: str, outro: str) -> bool:
+    """Um no e o outro, ou um debaixo do outro."""
+    return (um == outro or um.startswith(outro + SEPARADOR)
+            or outro.startswith(um + SEPARADOR))

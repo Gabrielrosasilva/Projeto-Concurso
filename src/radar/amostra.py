@@ -26,6 +26,12 @@ mede a fatia de cada motivo de erro ("3 dos meus 10 erros foram por pressa").
 E outra pergunta, com outro risco, e misturar as duas na mesma regua tornaria
 as duas erradas. Esta anotado no `servico/erros.py`.
 
+**Os tres que tinham ficado no codigo vieram para ca em 04/10** (decisao 83):
+a evolucao da home (20 respostas por metade), a tendencia de letra no
+gabarito (50 questoes) e o "base pequena" (menos de 3 provas). E o tamanho da
+amostra com que se confere a classificacao do catalogo (20 por materia) nasceu
+aqui, na mesma data.
+
 Modulo puro: recebe contagem e devolve estado. Quem varre o banco e o
 `servico/desempenho.py`.
 """
@@ -73,6 +79,20 @@ class Minimos:
     #: A meta de quem nao tem meta propria.
     meta_padrao: int = META_DA_PROVA
 
+    #: A evolucao do meu acerto (a home): respostas em cada metade da
+    #: comparacao dos ultimos 30 dias (secao `desempenho`).
+    evolucao: int = 20
+
+    #: Estes dois falam da BANCA, e nao de mim (secao `acervo`): questoes com
+    #: gabarito para falar de tendencia de letra nos Macetes, e provas abaixo
+    #: das quais o que sai delas leva o aviso "base pequena".
+    tendencia_de_gabarito: int = 50
+    provas_para_tendencia: int = 3
+
+    #: Quantas propostas do catalogo eu confiro por materia (a amostra da
+    #: pendencia B.8). Tambem da secao `acervo`: fala da classificacao dele.
+    amostra_do_catalogo: int = 20
+
     def do_nivel(self, nivel: str) -> int:
         """O minimo daquele nivel. Nivel que eu nao conheco usa o da materia,
         que e o mais exigente: na duvida, medir menos e nao medir errado."""
@@ -99,6 +119,7 @@ def carregar(caminho: Path | None = None) -> Minimos:
             por_nivel[nivel] = int(valor)
 
     bom = secao.get("bom_desempenho") or {}
+    acervo = dados.get("acervo") or {}
     return Minimos(
         por_nivel=por_nivel,
         precisa_revisar_abaixo_de=int(
@@ -106,6 +127,13 @@ def carregar(caminho: Path | None = None) -> Minimos:
         vezes_o_minimo=int(bom.get("vezes_o_minimo", PADRAO.vezes_o_minimo)),
         dias_distintos=int(bom.get("dias_distintos", PADRAO.dias_distintos)),
         meta_padrao=int(secao.get("meta_padrao", PADRAO.meta_padrao)),
+        evolucao=int(secao.get("evolucao", PADRAO.evolucao)),
+        tendencia_de_gabarito=int(
+            acervo.get("tendencia_de_gabarito", PADRAO.tendencia_de_gabarito)),
+        provas_para_tendencia=int(
+            acervo.get("provas_para_tendencia", PADRAO.provas_para_tendencia)),
+        amostra_do_catalogo=int(
+            acervo.get("amostra_do_catalogo", PADRAO.amostra_do_catalogo)),
     )
 
 

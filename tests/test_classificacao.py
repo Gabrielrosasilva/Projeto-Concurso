@@ -330,3 +330,122 @@ def test_a_tela_de_conferencia_nao_lista_anulada_sem_a_caixa(banco_temporario):
     cliente = TestClient(app)
     assert "2019-q7" not in cliente.get("/analises/conferencia").text
     assert "2019-q7" in cliente.get("/analises/conferencia?anuladas=1").text
+
+
+# --- o complementar aceito (B.8) ---------------------------------------------------
+
+def _aceitar(*urls):
+    """O arquivo de status do complementar, com estas provas aceitas."""
+    from radar.servico import complementar
+    complementar.caminho_do_registro().write_text(json.dumps(
+        {"provas": [{"prova_url": u, "aceita": True} for u in urls]}), encoding="utf-8")
+
+
+def _do_complementar(url, numero, enunciado, cargo="Agente de Trânsito"):
+    return QuestaoDeProva(
+        prova_url=url, banca="FEPESE", ano=2024, municipio="Brusque", cargo=cargo,
+        numero=numero, materia="Direito Penal", enunciado=enunciado,
+        alternativas={l: l for l in "abcde"}, resposta="b",
+        impressao=f"{url}-{numero}", evidencia="complementar")
+
+
+def _linha(chave):
+    with sessao() as s:
+        return s.scalar(select(Classificacao).where(Classificacao.chave == chave)
+                        .where(Classificacao.principal.is_(True)))
+
+
+def test_o_complementar_lista_so_o_aceito_e_uma_linha_por_questao(alvo):
+    aceita = "https://fepese.test/2024/A.pdf"
+    outra_aceita = "https://fepese.test/2024/B.pdf"
+    recusada = "https://fepese.test/2024/C.pdf"
+    _aceitar(aceita, outra_aceita)
+    with sessao() as s:
+        # A mesma questao em dois cadernos aceitos do concurso, um por cargo.
+        s.add(_do_complementar(aceita, 1, "Sobre a imputabilidade, é correto?"))
+        s.add(_do_complementar(outra_aceita, 1, "Sobre a imputabilidade, é correto?",
+                               cargo="Fiscal de Tributos"))
+        s.add(_do_complementar(aceita, 2, "Questão que ninguém classificou?"))
+        s.add(_do_complementar(recusada, 3, "Questão de prova recusada?"))
+    caminho = "Direito Penal > " + IMPUTABILIDADE
+    for codigo in (f"{aceita}-1", f"{recusada}-3", "2019-51"):
+        classificacoes.classificar(_k(codigo), caminho, "Claude Code")
+
+    tela = classificacoes.conferencia(evidencia_escolhida="complementar")
+
+    (item,) = tela.itens
+    assert item.enunciado == "Sobre a imputabilidade, é correto?"
+    assert item.outros_cadernos == 1
+    assert item.codigo == "FEPESE 2024 · Brusque · Agente de Trânsito · q1"
+    assert (tela.total, tela.evidencia, tela.amostras) == (1, "complementar", [])
+    # E o alvo continua so com o alvo: nada do complementar entra nele.
+    alvo_ = classificacoes.conferencia()
+    assert "Sobre a imputabilidade, é correto?" not in [i.enunciado for i in alvo_.itens]
+    assert alvo_.total == 6
+
+
+def test_a_amostra_do_catalogo_e_fixa_e_a_correcao_conta_o_erro(alvo, monkeypatch):
+    import dataclasses
+
+    from radar import amostra as regua
+    monkeypatch.setattr(regua, "carregar", lambda caminho=None: dataclasses.replace(
+        regua.PADRAO, amostra_do_catalogo=2))
+    url = "https://fepese.test/2024/A.pdf"
+    _aceitar(url)
+    with sessao() as s:
+        for numero in range(1, 6):
+            s.add(_do_complementar(url, numero, f"Proposta {numero} do catálogo?"))
+    for numero in range(1, 6):
+        classificacoes.classificar(_k(f"{url}-{numero}"), "Direito Penal > " + IMPUTABILIDADE,
+                                   classificacoes.PROCEDENCIA_DO_CATALOGO)
+
+    antes = classificacoes.conferencia(evidencia_escolhida="complementar", so_amostra=True)
+    amostra = [i.chave for i in antes.itens]
+    assert len(amostra) == 2 and all(i.na_amostra for i in antes.itens)
+    (resumo,) = antes.amostras
+    assert (resumo.materia, resumo.propostas, resumo.tamanho, resumo.conferidas) == (
+        "Direito Penal", 5, 2, 0)
+
+    classificacoes.conferir(amostra[0])                                 # estava certa
+    classificacoes.conferir(amostra[1], corrigir_para="Direito Penal")  # estava errada
+
+    # A correcao vira "manual", mas guarda de onde veio: a amostra nao muda,
+    # e o erro do catalogo aparece na conta.
+    assert classificacoes.ERA_DO_CATALOGO in _linha(amostra[1]).trecho
+    depois = classificacoes.conferencia(evidencia_escolhida="complementar", so_amostra=True)
+    assert [i.chave for i in depois.itens] == amostra
+    (resumo,) = depois.amostras
+    assert (resumo.conferidas, resumo.corrigidas) == (2, 1)
+
+
+def test_corrigir_proposta_que_nao_e_do_catalogo_nao_ganha_o_rastro(alvo):
+    classificacoes.classificar(_k("2019-51"), "Direito Penal > " + IMPUTABILIDADE, "Claude Code")
+    classificacoes.conferir(_k("2019-51"), corrigir_para="Direito Penal")
+    assert _principal("2019-51").trecho == "corrigida na conferência"
+
+
+def test_a_tela_do_complementar_volta_para_o_mesmo_recorte(alvo):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    url = "https://fepese.test/2024/A.pdf"
+    _aceitar(url)
+    with sessao() as s:
+        s.add(_do_complementar(url, 1, "Proposta do catálogo?"))
+    chave = _k(f"{url}-1")
+    classificacoes.classificar(chave, "Direito Penal > " + IMPUTABILIDADE,
+                               classificacoes.PROCEDENCIA_DO_CATALOGO)
+    cliente = TestClient(app)
+
+    texto = cliente.get("/analises/conferencia?evidencia=complementar&amostra=1").text
+    assert "Proposta do catálogo?" in texto and "🟡 na amostra" in texto
+    assert "Questão 51 de 2019" not in texto                     # o alvo nao entra
+    assert "Proposta do catálogo?" not in cliente.get("/analises/conferencia").text
+
+    resposta = cliente.post("/analises/conferencia", data={
+        "chave": chave, "acao": "confirmar", "evidencia": "complementar", "amostra": "1"},
+        follow_redirects=False)
+    assert resposta.headers["location"] == (
+        f"/analises/conferencia?evidencia=complementar&amostra=1#q-{chave}")
+    assert _linha(chave).conferida_em is not None

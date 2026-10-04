@@ -36,7 +36,7 @@ from radar.regioes import normalizar
 from radar.servico import geradas
 from radar.util import fuso_local
 
-TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas")
+TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas", "associados")
 
 # Quantos macetes por materia. Tres cabe numa resposta so e obriga a IA a
 # escolher o que mais cai, em vez de listar tudo.
@@ -139,6 +139,25 @@ Responda SOMENTE um JSON, no formato:
 {"classificacoes": [{"questao": "2019-q51", "status": "classificada", "assunto": "...", "subassunto": "...", "elemento": "...", "tipo_elemento": "artigo", "referencia": "CP, art. 2º", "tipo_de_questao": "literalidade da lei", "pegadinha": "...", "trecho": "...", "item_do_edital": "...", "dispositivo": "art. 2º do Código Penal"}]}"""
 
 
+# Os conceitos ASSOCIADOS (§14, item 7 do novo.md): a questao ja tem o no
+# principal, conferido; aqui se pede o que ELA TAMBEM cobra. Nunca entram na
+# incidencia - la so conta a principal (decisao 86).
+INSTRUCAO_ASSOCIADOS = """Voce recebe questoes reais da prova do meu cargo (Policia Penal / Agente Penitenciario de SC, banca FEPESE), cada uma com o no PRINCIPAL da arvore de conteudos em que ela ja foi classificada e conferida, e a arvore inteira (`arvore`).
+
+Diga, para cada questao, os OUTROS conceitos que ela tambem cobra: os nos da arvore que aparecem no enunciado ou nas alternativas, alem do principal. E o que responde "quais conceitos aparecem associados".
+
+Regras:
+- use so nos da lista `arvore`, com o caminho escrito exatamente como esta la. No fora da lista sera RECUSADO;
+- o associado e de assunto para baixo: a materia inteira nao e conceito;
+- nunca o principal, nem um no acima ou abaixo dele: isso e o mesmo conceito;
+- justifique cada um com o `trecho` da questao (do enunciado ou da alternativa) em que ele aparece;
+- alternativa errada tambem conta: se ela fala de outro conceito, a questao o poe ao lado do principal;
+- nao force: a questao que so cobra o principal responde "nos": []. Na duvida, deixe de fora.
+
+Responda SOMENTE um JSON, no formato:
+{"associados": [{"questao": "2019-q83", "nos": [{"no": "<caminho da arvore>", "trecho": "..."}]}]}"""
+
+
 
 # A mesma tarefa, noutro acervo. O que muda e de QUEM e a prova, e para onde
 # vai o numero: o complementar mostra o estilo da banca e NUNCA entra na
@@ -233,6 +252,17 @@ def _como_responder(tipo: str) -> str:
             "tipo fora da lista, sem justificativa, ou de questao que nao estava "
             "no pedido sera RECUSADA."
         )
+    if tipo == "associados":
+        return (
+            "Este arquivo foi gerado por `radar classificar --pedido --associados`. "
+            "Para cada item de `pedidos`, siga a `instrucao` usando o texto de "
+            "`pedido` e a `arvore` do item. Responda TODOS num unico arquivo JSON, "
+            "no formato de `formato_da_resposta`: o mesmo `lote`, e o `id` de cada "
+            "pedido com a lista `associados` dele. Salve como data/resposta_ia.json "
+            "e rode `radar classificar --importar data/resposta_ia.json`. No fora "
+            "da arvore, a materia inteira, o ramo da principal, conceito sem "
+            "`trecho` ou questao que nao estava no pedido serao RECUSADOS."
+        )
     if tipo == "explicacoes":
         return (
             "Este arquivo foi gerado por `radar gerar --pedido --explicacoes`. "
@@ -289,6 +319,11 @@ def _formato(tipo: str) -> dict:
         pendente = {"questao": "2019-q52", "status": "pendente", "motivo": "..."}
         return {"lote": "<o lote deste arquivo>",
                 "respostas": [{"id": "c1", "classificacoes": [item, pendente]}]}
+    if tipo == "associados":
+        item = {"questao": "2019-q83",
+                "nos": [{"no": "<caminho da arvore>", "trecho": "..."}]}
+        return {"lote": "<o lote deste arquivo>",
+                "respostas": [{"id": "a1", "associados": [item]}]}
     if tipo == "explicacoes":
         item = {"correta": "c", "explicacao": "...",
                 "fonte": "art. 112 da Lei 7.210/1984"}
@@ -741,6 +776,95 @@ def _importar_fichas(lote: dict, respostas: list[dict], modelo: str) -> dict:
     return servico_fichas.importar_respostas(lote["pedidos"], respostas, modelo)
 
 
+def pedido_de_associados(materia: str | list[str] | None = None) -> dict:
+    """O pedido dos conceitos ASSOCIADOS (§14, item 7): para cada questao do
+    alvo que ja tem a classificacao principal (e nao pendente), os outros nos
+    que ela tambem cobra. Um pedido por materia da principal, com a arvore
+    inteira - o associado pode morar noutra materia.
+
+    A conferida entra: o associado nao mexe na principal, que e o que a
+    conferencia protege.
+    """
+    from sqlalchemy import select
+
+    from radar import conteudos as arvore
+    from radar.models import Classificacao, Conteudo, QuestaoDeProva
+    from radar.servico import evidencia
+    from radar.servico.classificacoes import PENDENTE, chave_de
+
+    so_estas = ([materia] if isinstance(materia, str) else list(materia or [])) or None
+    criar_tabelas()
+    with sessao() as s:
+        caminhos = sorted(s.scalars(select(Conteudo.caminho)))
+        principais = {c.chave: c.conteudo for c in s.scalars(
+            select(Classificacao).where(Classificacao.principal.is_(True))
+            .where(Classificacao.status != PENDENTE))}
+        questoes = list(s.scalars(
+            select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)
+            .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero)))
+
+    por_materia: dict[str, list] = {}
+    for q in questoes:
+        principal = principais.get(chave_de(q))
+        if principal is None:
+            continue
+        da_materia = arvore.partes(principal)[0]
+        if so_estas and da_materia not in so_estas:
+            continue
+        por_materia.setdefault(da_materia, []).append((q, principal))
+
+    pedidos = []
+    for numero, (da_materia, lista) in enumerate(sorted(por_materia.items()), start=1):
+        blocos, codigos, principal_de, ja = [], {}, {}, set()
+        for q, principal in lista:
+            chave = chave_de(q)
+            if chave in ja:
+                continue          # a mesma questao em dois cadernos e uma so
+            ja.add(chave)
+            codigo = _codigo(q)
+            if codigo in codigos:
+                codigo = f"{codigo}-{sum(map(ord, q.prova_url)) % 1000:03d}"
+            codigos[codigo] = chave
+            principal_de[codigo] = principal
+            blocos.append(f"[{codigo}] PRINCIPAL: {principal}\n"
+                          f"{gerador._questao_por_extenso(q)}")
+        pedidos.append({
+            "id": f"a{numero}", "materia": da_materia,
+            "questoes": codigos, "principais": principal_de,
+            "arvore": caminhos,
+            "instrucao": INSTRUCAO_ASSOCIADOS,
+            "pedido": f"MATERIA: {da_materia}\n\nQUESTOES\n\n" + "\n\n".join(blocos),
+        })
+    return _novo_lote("associados", pedidos)
+
+
+def _importar_associados(lote: dict, respostas: list[dict], modelo: str) -> dict:
+    from radar.servico import classificacoes
+
+    por_id = {p["id"]: p for p in lote["pedidos"]}
+    gravadas, recusas, vistas = 0, [], set()
+    for resposta in respostas:
+        pedido = por_id.get(resposta.get("id"))
+        if pedido is None:
+            recusas.append(f"{resposta.get('id')}: nao existe esse pedido no lote")
+            continue
+        for item in resposta.get("associados") or []:
+            if not isinstance(item, dict):
+                continue
+            codigo = item.get("questao")
+            if (pedido["id"], codigo) in vistas:
+                recusas.append(f"{pedido['id']}/{codigo}: respondida duas vezes")
+                continue
+            vistas.add((pedido["id"], codigo))
+            try:
+                gravadas += classificacoes.aplicar_associados(item, pedido, modelo)
+            except classificacoes.PropostaRecusada as erro:
+                recusas.append(str(erro))
+    if gravadas:
+        classificacoes.exportar()
+    return {"gravadas": gravadas, "repetidas": 0, "recusas": recusas}
+
+
 def _importar_classificacao(lote: dict, respostas: list[dict], modelo: str) -> dict:
     from radar.servico import classificacoes
 
@@ -1131,6 +1255,8 @@ def importar(resposta: Path, pedido: Path | None = None,
 
     if lote.get("tipo") == "classificacao":
         resultado = _importar_classificacao(lote, respostas, modelo)
+    elif lote.get("tipo") == "associados":
+        resultado = _importar_associados(lote, respostas, modelo)
     elif lote.get("tipo") == "fichas":
         resultado = _importar_fichas(lote, respostas, modelo)
     elif lote.get("tipo") == "macetes":

@@ -26,6 +26,9 @@
     .acoes form{display:flex;flex-wrap:wrap;gap:var(--esp-1);align-items:center}
     .acoes select,.acoes input[type=text]{max-width:100%}
     .conferida{opacity:.7}
+    .amostras{border-collapse:collapse;margin-top:var(--esp-3)}
+    .amostras th,.amostras td{padding:var(--esp-1) var(--esp-3) var(--esp-1) 0;text-align:left;
+      font-variant-numeric:tabular-nums}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -39,11 +42,22 @@
 
   <header class="ds-cabeca">
     <h1>Conferência da classificação</h1>
+    {% if t.evidencia == 'complementar' %}
+    <p>
+      As questões do <b>acervo complementar aceito</b> (FEPESE, outros cargos)
+      que já têm classificação, uma linha por questão: a mesma questão aparece
+      em vários cadernos do concurso, e conferir uma vez vale para todos. O alvo
+      e o complementar nunca se misturam nesta tela. A proposta automática do
+      catálogo (🟡) se confere por amostra, {{ t.tamanho_da_amostra }} por
+      matéria; a do Claude Code, uma a uma.
+    </p>
+    {% else %}
     <p>
       As questões do alvo (Polícia Penal SC, 2013 e 2019) com a classificação
       proposta ao lado. A proposta é do Claude Code e <b>só vale depois de
       conferida</b>: confirmar, corrigir para outro nó ou deixar pendente.
     </p>
+    {% endif %}
   </header>
 
   <section class="ds-cartao">
@@ -54,7 +68,26 @@
         que ficam fora da lista: a banca desfez a pergunta, e elas não entram em
         conta nenhuma</span>
     </div>
+    {% if t.amostras %}
+    <table class="amostras">
+      <caption class="ds-suave">🟡 A amostra do catálogo, por matéria: sempre as mesmas
+        questões. Se a taxa de erro for alta, o lote volta.</caption>
+      <thead><tr><th>Matéria</th><th>Propostas</th><th>Na amostra</th><th>Conferidas</th><th>Corrigidas ou pendentes</th></tr></thead>
+      <tbody>
+        {% for a in t.amostras %}
+        <tr><td>{{ a.materia }}</td><td>{{ a.propostas }}</td><td>{{ a.tamanho }}</td>
+          <td>{{ a.conferidas }} de {{ a.tamanho }}</td><td>{{ a.corrigidas }} de {{ a.conferidas }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
     <form class="filtros" method="get" action="/analises/conferencia">
+      <label class="ds-campo">Evidência
+        <select name="evidencia">
+          <option value="alvo" {{ 'selected' if evidencia == 'alvo' }}>alvo</option>
+          <option value="complementar" {{ 'selected' if evidencia == 'complementar' }}>complementar aceito</option>
+        </select>
+      </label>
       <label class="ds-campo">Matéria
         <select name="materia">
           <option value="">todas</option>
@@ -65,6 +98,9 @@
       </label>
       <label class="ds-campo caixa"><input type="checkbox" name="abertas" value="1" {{ 'checked' if abertas }}> só as não conferidas</label>
       <label class="ds-campo caixa"><input type="checkbox" name="anuladas" value="1" {{ 'checked' if anuladas }}> mostrar as anuladas</label>
+      {% if evidencia == 'complementar' %}
+      <label class="ds-campo caixa"><input type="checkbox" name="amostra" value="1" {{ 'checked' if amostra }}> só a amostra do catálogo</label>
+      {% endif %}
       <button class="ds-botao" type="submit">Filtrar</button>
     </form>
   </section>
@@ -79,8 +115,13 @@
       <div>
         <h3>{{ q.codigo }} · {{ q.materia_do_caderno or 'sem matéria' }}
           {% if q.anulada %}<span class="ds-selo">anulada pela banca</span>{% endif %}
+          {% if q.na_amostra %}<span class="ds-selo">🟡 na amostra</span>{% endif %}
           {% if q.conferida %}<span class="ds-selo">✓ conferida</span>{% endif %}
         </h3>
+        {% if q.outros_cadernos %}
+          <p class="ds-suave">A mesma questão está em mais {{ q.outros_cadernos }}
+            caderno{{ 's' if q.outros_cadernos > 1 }} do concurso: a conferência vale para todos.</p>
+        {% endif %}
         <p class="enunciado">{{ q.enunciado }}</p>
         <ul class="alternativas">
           {% for letra, texto in q.alternativas.items() %}
@@ -100,7 +141,7 @@
             {% if c.dispositivo %}<dt>Dispositivo</dt><dd>{{ c.dispositivo }}</dd>{% endif %}
             <dt>Quem</dt><dd>{{ c.procedencia }}{% if 'catálogo automático' in (c.procedencia or '') %}
               <br><span class="ds-suave">🟡 classificação automática, conferida por amostra:
-              confira 20 por matéria; se a taxa de erro for alta, o lote volta.</span>{% endif %}</dd>
+              confira {{ t.tamanho_da_amostra }} por matéria; se a taxa de erro for alta, o lote volta.</span>{% endif %}</dd>
           </dl>
         {% else %}
           <p class="ds-nota">Sem classificação ainda: pendente.</p>
@@ -112,6 +153,8 @@
               <input type="hidden" name="chave" value="{{ q.chave }}">
               <input type="hidden" name="materia" value="{{ materia }}">
               <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+              <input type="hidden" name="evidencia" value="{{ evidencia }}">
+              <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
               <button class="ds-botao" name="acao" value="confirmar">Confirmar</button>
             </form>
           {% endif %}
@@ -119,6 +162,8 @@
             <input type="hidden" name="chave" value="{{ q.chave }}">
             <input type="hidden" name="materia" value="{{ materia }}">
             <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+            <input type="hidden" name="evidencia" value="{{ evidencia }}">
+            <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
             <select name="conteudo" aria-label="Corrigir para">
               {% for opcao in q.opcoes %}
                 <option value="{{ opcao }}" {{ 'selected' if c and opcao == c.conteudo }}>{{ opcao }}</option>
@@ -131,6 +176,8 @@
               <input type="hidden" name="chave" value="{{ q.chave }}">
               <input type="hidden" name="materia" value="{{ materia }}">
               <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+              <input type="hidden" name="evidencia" value="{{ evidencia }}">
+              <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
               <input type="text" name="motivo" placeholder="por que fica pendente" aria-label="Motivo da pendência">
               <button class="ds-botao ds-botao--secundario" name="acao" value="pendente">Pendente</button>
             </form>

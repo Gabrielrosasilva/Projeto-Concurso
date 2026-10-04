@@ -12,7 +12,9 @@ O que estes testes seguram:
   * a data da ultima revisao (decisao 79): so o que e revisao, nunca a
     pratica comum;
   * a faixa sem `conteudo` conta no que cobre - os `nos` do plano e a
-    ficha conferida -, so para a situacao e as datas (decisao 81).
+    ficha conferida -, so para a situacao e as datas (decisao 81);
+  * a revisao feita fora do radar passa o 1-7-30 de etapa, como o acerto
+    no radar (decisao 82).
 
 As datas sao fixas e o cronograma e o mini: nada aqui depende do dia em que o
 teste roda.
@@ -86,6 +88,21 @@ def test_faixa_de_questoes_nao_deixa_o_no_estudado_e_sim_praticado(plano):
     assert todas[NO_TEMPO].ultima_pratica == SEG
 
 
+def test_so_a_faixa_de_estudo_deixa_o_no_estudado(arvore, tmp_path):
+    """Decisao 20, com as constantes TIPOS_DE_ESTUDO e EXTRA_DE_ESTUDO: a
+    correcao marcada, mesmo apontando o no, nao e estudo."""
+    servico_conteudos.exportar()
+    dados = yaml.safe_load(MINI.read_text(encoding="utf-8"))
+    dados["dias"][0]["noite"][3]["conteudo"] = APLICACAO       # a Correcao de 28/09
+    arquivo = tmp_path / "cronograma_com_correcao.yml"
+    arquivo.write_text(yaml.safe_dump(dados, allow_unicode=True), encoding="utf-8")
+    com_correcao = cronograma.carregar(arquivo)
+
+    diario.marcar_faixa(SEG, "noite", 3, "Correção", plano=com_correcao, hoje=HOJE)
+
+    assert not estudo.situacoes(plano=com_correcao, hoje=HOJE)[APLICACAO].estudado
+
+
 def test_estudo_extra_de_teoria_deixa_estudado(plano):
     estudo_extra.anotar(data=SEG, o_que="teoria", minutos=40,
                         conteudo=NO_TEMPO, plano=plano, hoje=HOJE)
@@ -93,6 +110,18 @@ def test_estudo_extra_de_teoria_deixa_estudado(plano):
     todas = estudo.situacoes(plano=plano, hoje=HOJE)
 
     assert todas[NO_TEMPO].estudado and todas[NO_TEMPO].minutos == 40
+
+
+def test_a_questao_refeita_nao_empurra_o_primeiro_contato(plano):
+    """Decisao 85: a ancora do 1-7-30 sem estudo e a PRIMEIRA resposta, de
+    todas - e nao a ultima de cada questao, que a refeita empurrava."""
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _responder_de_novo(1, True, TER, filtros={})
+
+    situacao = estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO]
+
+    assert situacao.primeira_pratica == SEG
+    assert situacao.ultima_pratica == TER
 
 
 def test_responder_no_radar_deixa_praticado(plano):
@@ -529,3 +558,68 @@ def test_a_faixa_com_conteudo_continua_so_no_conteudo(plano):
 
     assert todas[APLICACAO].estudado
     assert not todas[NO_TEMPO].estudado
+
+
+# --- a revisao feita fora do radar passa de etapa (decisao 82) ------------------
+
+def _na_fila(plano_do_teste) -> dict:
+    return {r.caminho: r for r in estudo.para_revisar(plano=plano_do_teste, hoje=HOJE)}
+
+
+def test_o_r7_no_vencimento_passa_o_prazo_para_a_etapa_seguinte(plano):
+    """Estudei em 28/09; a revisao de 1 dia vencia em 29/09, e foi nesse dia o
+    R+7, anotado no assunto. A de 7 dias vence em 06/10: o assunto sai da
+    fila."""
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano, hoje=HOJE)
+    assert estudo.POR_PRAZO in _na_fila(plano)[APLICACAO].porque
+
+    _anotar(plano, "noite", 0, 10, 8, data=TER, conteudo=APLICACAO)     # o R+7
+
+    assert APLICACAO not in _na_fila(plano)
+
+
+def test_o_extra_de_revisao_passa_de_etapa_e_nao_reinicia_o_prazo(plano):
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano, hoje=HOJE)
+    estudo_extra.anotar(data=TER, o_que="revisao", minutos=30,
+                        conteudo=APLICACAO, plano=plano, hoje=HOJE)
+
+    situacao = estudo.situacoes(plano=plano, hoje=HOJE)[APLICACAO]
+
+    # A revisao sem questao nao conta como estudo: o prazo nao recomeca dela.
+    assert situacao.ultimo_estudo == SEG and situacao.ultima_revisao == TER
+    assert APLICACAO not in _na_fila(plano)
+
+
+def test_revisar_antes_do_vencimento_nao_passa_de_etapa(plano):
+    """No mesmo dia do estudo e treino: a revisao de 1 dia continua vencida."""
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano, hoje=HOJE)
+    estudo_extra.anotar(data=SEG, o_que="revisao", minutos=20,
+                        conteudo=APLICACAO, plano=plano, hoje=HOJE)
+
+    fila = _na_fila(plano)
+
+    assert estudo.POR_PRAZO in fila[APLICACAO].porque and fila[APLICACAO].etapa == 1
+
+
+def test_errar_na_rodada_de_revisao_do_radar_nao_passa_de_etapa(plano):
+    """A rodada de revisao do radar anda pelo acerto: errada, ela marca a data
+    da revisao, mas o prazo continua vencido."""
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _responder_de_novo(1, False, TER, filtros={"quantidade": 1, "erros": True})
+
+    situacao = estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO]
+
+    assert situacao.ultima_revisao == TER and situacao.revisoes_fora_do_radar == []
+    assert estudo.POR_PRAZO in _na_fila(plano)[NO_TEMPO].porque
+
+
+def test_o_r7_que_so_chega_pelos_nos_do_plano_tambem_passa_de_etapa(plano_com_nos):
+    _anotar(plano_com_nos, "noite", 0, 15, 11)                 # pratica em 28/09
+    assert NO_TEMPO in _na_fila(plano_com_nos)
+
+    _anotar(plano_com_nos, "noite", 0, 10, 8, data=TER)        # o R+7 em 29/09
+
+    assert NO_TEMPO not in _na_fila(plano_com_nos)

@@ -235,7 +235,7 @@ Os limites:
 O radar abre no **escuro**. O botao **☀️/🌙** no canto direito da barra troca
 para o claro (e de volta), e a escolha fica guardada no navegador (um cookie),
 valendo para todas as paginas ate eu trocar de novo. O tema do Windows nao
-manda. Para comparar sem mudar a escolha, `?tema=claro` ou `?tema=escuro` no
+manda. Para comparar sem mudar a escolha, `?cor=claro` ou `?cor=escuro` no
 fim do endereco vale so para aquela pagina.
 
 ### A pagina web, aba por aba
@@ -1003,7 +1003,8 @@ radar retificacoes          # acusa edital que mudou (--avisar manda no Telegram
 
 ```bash
 radar questoes              # separa os cadernos do acervo em questoes
-radar questoes --refazer    # passa o parser novo por cima do acervo inteiro
+radar questoes --refazer    # passa o parser novo por cima do acervo inteiro;
+                            # o texto que muda leva a classificacao junto
 radar padrao                # o que a banca mais cobra, por materia
 radar padrao --cargo Guarda
 radar repetidas             # as questoes que a banca mais reaproveita
@@ -1067,8 +1068,10 @@ cinza - a faixa sem a chave `conteudo` conta no que cobre, os `nos` do plano e
 a ficha que eu ja conferi, so para a situacao e as datas, nunca para o
 acerto), **o que eu ainda nao estudei**, **o que voltou para revisao** (por erro
 recente, por desempenho abaixo do corte, ou pelo prazo 1-7-30 vencido - a linha
-diz qual) e **as questoes a refazer** (as erradas no radar e as do caderno de
-erros, em duas listas que nunca se somam). Nada disso e gravado em tabela: sai
+diz qual; o prazo passa de etapa com o acerto no radar e com a revisao feita,
+o R+7 ou o extra de revisao, no vencimento ou depois) e **as questoes a
+refazer** (as erradas no radar e as do caderno de erros, em duas listas que
+nunca se somam). Nada disso e gravado em tabela: sai
 do historico.
 
 **Classificacao e incidencia do alvo (Etapa 3A).** As 170 questoes de 2013 e
@@ -1093,6 +1096,13 @@ acervo complementar FEPESE: so das provas com gabarito definitivo, em questao
 distinta, e com o tipo de questao e as pegadinhas so da classificacao ja
 conferida (decisao 78).
 
+Cada materia ainda mostra os **conceitos que aparecem juntos nas questoes**
+(§14, item 7): o no principal e os outros que a questao tambem cobra, no
+enunciado ou nas alternativas, com as questoes de cada par. Vem de
+`radar classificar --pedido --associados` (respondido pelo Claude Code,
+com o 🟣 "por conferir") e nunca entra na contagem, que e so da principal
+(decisao 86).
+
 **O acervo complementar FEPESE (Etapa 3B).** `radar complementar` consulta o
 que ja esta no banco e escreve `docs/complementar.md`: por materia do meu
 edital, quantas questoes cada prova complementar tem **pelo nome da materia**
@@ -1114,7 +1124,12 @@ tambem e resposta, agrupado pela materia que um termo do
 Raciocinio Logico, `--catalogo` propoe o assunto pelo catalogo de
 palavras-chave do `macetes.py`: proposta automatica 🟡, que vale depois da
 conferencia POR AMOSTRA. Nada e forcado: sem palavra, com dois assuntos ou sem
-par no edital, a questao fica sem linha.
+par no edital, a questao fica sem linha. A conferencia e na tela Analises >
+Conferencia, filtro "complementar aceito" (uma linha por questao, mesmo que
+ela se repita em varios cadernos); "so a amostra do catalogo" mostra as 20 de
+cada materia - sempre as mesmas - e quantas delas foram corrigidas. A amostra
+de 04/10 reprovou o lote (o catalogo errou o assunto em quase metade), e as
+108 foram classificadas de novo pelo Claude Code (decisao 87).
 
 Na linha complementar a conta e em questao **distinta**, com as ocorrencias ao
 lado ("187 questoes · 122 provas (998 ocorrencias em cadernos diferentes)"): a
@@ -1123,7 +1138,7 @@ concurso.
 
 `radar complementar --aplicar` grava em `data/acervo_complementar.json` quais
 provas entram: as que tem **materia do edital de 2019** e passam na validacao
-(hoje, 122 de 183), cada uma com hash, status e data de inclusao. Sem esse
+(hoje, 169 de 183), cada uma com hash, status e data de inclusao. Sem esse
 arquivo, nenhuma prova complementar entra em estatistica. Na incidencia, o
 complementar e uma **coluna propria**, ao lado do alvo e nunca somada a ele:
 "Policia Penal SC: 9 questoes · 2 provas · Acervo complementar FEPESE: 4
@@ -1280,9 +1295,13 @@ lugar em que a versao vigente esta certa e a fonte.
 
 ### A amostra minima, em `config/amostra.yml`
 
-Abaixo de quantas questoes e provas o radar nao tira conclusao. Hoje so a
-secao `acervo` (os padroes de cobranca: 3 questoes em 2 provas); a do meu
-desempenho entra na Etapa 4.
+Abaixo de quantas questoes e provas o radar nao tira conclusao. Duas secoes,
+que nunca se somam: `acervo` fala da banca (os padroes de cobranca: 3
+questoes em 2 provas; a tendencia de letra no gabarito: 50 questoes; o "base
+pequena": menos de 3 provas) e `desempenho` fala de mim (o minimo de cada
+nivel da arvore, os cortes dos estados e a evolucao da home: 20 respostas
+em cada metade). Mude o numero la e toda tela muda com ele - nao ha minimo
+escrito no codigo, fora o 3 do caderno de erros, que mede outra coisa.
 
 ### A prioridade das fichas, em `config/prioridade.yml`
 
@@ -1505,7 +1524,7 @@ acerto), e matéria com menos respostas que o mínimo da matéria no
 As cores, o espaco e a letra moram em **`src/radar/web/static/design.css`**, e
 os componentes (selo, bloco, aviso de lei) em **`templates/_componentes.html`**.
 O escuro e o padrao; o botao da barra troca e guarda a escolha em cookie, e
-`?tema=escuro` ou `?tema=claro` na URL forca um dos dois para comparar.
+`?cor=escuro` ou `?cor=claro` na URL forca um dos dois para comparar.
 
 **Toda tela esta no design system** desde a Etapa 7B: cada uma marca
 `<body class="ds">`, usa a coluna `ds-pagina`, o cartao, a tabela e o botao
@@ -1559,6 +1578,13 @@ evidencia esta em [docs/leis_alteradas.md](docs/leis_alteradas.md)). Eles foram
 escritos pelo Claude Code e estao **por conferir**: o aviso sai com o 🟣
 "Escrito por IA, por conferir" ate voce trocar `conferida: false` por
 `conferida: true` no item - ou apagar o item, se estiver errado.
+
+A lista `fronteira:` do mesmo arquivo guarda o que mudou depois das provas
+num ponto que nenhuma questao cobra (a EC 104/2019 das policias penais, a
+saida temporaria da Lei 14.843/2024...). Ali nao ha aviso na questao - ela
+continua certa -, e sim na **ficha do tema**, onde vale saber: o item entra
+quando um no dele esta no mesmo ramo de um no da ficha, ou quando uma marca
+dele esta no titulo do tema. Tambem por conferir, com o 🟣.
 
 #### Sem pagar: o pedido em arquivo, respondido pelo Claude Code
 
@@ -1951,8 +1977,11 @@ pegar tambem o edital de quem ainda esta em andamento.
 
 Os PDFs vao para `data/provas/`, que esta no `.gitignore`. O que e versionado e
 o **manifesto** (`data/provas.json`): link de origem, banca, orgao, municipio,
-cargo, ano, tipo e o `sha256` de cada arquivo. Com ele, `radar baixar-provas`
-reconstroi o acervo inteiro em qualquer maquina.
+cargo, ano, tipo, o `sha256` e o caminho de cada arquivo. Com ele, `radar
+baixar-provas` reconstroi o acervo inteiro em qualquer maquina - no caminho
+gravado, porque a FEPESE da o mesmo nome de arquivo (S07.pdf) a provas de
+concursos diferentes do mesmo municipio, e o segundo leva o nome do hotsite na
+frente (decisao 90).
 
 ### Testes
 

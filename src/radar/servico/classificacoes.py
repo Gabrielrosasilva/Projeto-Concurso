@@ -19,6 +19,7 @@ comecam "De acordo com o Codigo Penal Brasileiro, e correto". O arquivo
 versionado e o `data/classificacoes.json`, pela chave e pelo caminho do no: os
 dois sobrevivem a reconstrucao do banco.
 """
+import hashlib
 import json
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -105,12 +106,15 @@ def classificar(chave: str, conteudo: str, procedencia: str | None, *,
         if principal:
             # Uma principal por questao: a nova tira o posto da antiga, que
             # continua la como associada - menos a pendente, que nao e no
-            # nenhum a associar: ela so dizia "ainda sem classificacao".
+            # nenhum a associar: ela so dizia "ainda sem classificacao". E
+            # menos a proposta do catalogo: palavra-chave casada no enunciado
+            # nao e conceito que a questao cobra, e trocada ela foi reprovada
+            # (B.8, em 04/10 o catalogo errou quase metade da amostra).
             for outra in s.scalars(select(Classificacao)
                                    .where(Classificacao.chave == chave)
                                    .where(Classificacao.principal.is_(True))
                                    .where(Classificacao.conteudo != conteudo)):
-                if outra.status == PENDENTE and status != PENDENTE:
+                if outra.status == PENDENTE or outra.procedencia == PROCEDENCIA_DO_CATALOGO:
                     s.delete(outra)
                 else:
                     outra.principal = False
@@ -184,6 +188,60 @@ def _assunto_do_edital(s, materia: str, assunto: str | None) -> str | None:
         select(Conteudo).where(Conteudo.pai == materia)
         .where(Conteudo.origem == "edital"))]
     return arvore.achar(filhos, assunto, pai=materia)
+
+
+def aplicar_associados(item: dict, pedido: dict, procedencia: str) -> int:
+    """Grava os conceitos ASSOCIADOS de uma questao (§14, item 7; decisao 86).
+    Devolve quantos gravou.
+
+    O associado e outro no que a questao tambem cobra: da arvore, de assunto
+    para baixo, fora do ramo da principal, e com o trecho em que aparece.
+    Levanta PropostaRecusada com o motivo, sem gravar nada pela metade - todos
+    os nos sao conferidos antes do primeiro gravado. Nunca vira principal e
+    nunca entra na incidencia; o que eu ja conferi nao e sobrescrito.
+    """
+    codigo = item.get("questao")
+    chave = (pedido.get("questoes") or {}).get(codigo)
+    if chave is None:
+        raise PropostaRecusada(f"{codigo}: a questão não estava no pedido")
+    principal = (pedido.get("principais") or {}).get(codigo) or ""
+
+    criar_tabelas()
+    with sessao() as s:
+        caminhos = set(s.scalars(select(Conteudo.caminho)))
+        conferidas = set(s.scalars(
+            select(Classificacao.conteudo).where(Classificacao.chave == chave)
+            .where(Classificacao.conferida_em.is_not(None))))
+
+    aceitos: dict[str, str] = {}
+    for entrada in item.get("nos") or []:
+        if not isinstance(entrada, dict):
+            raise PropostaRecusada(f"{codigo}: cada associado é um no com o trecho")
+        no = (entrada.get("no") or "").strip()
+        trecho = (entrada.get("trecho") or "").strip()
+        if no not in caminhos:
+            raise PropostaRecusada(f"{codigo}: {no!r} não está na árvore")
+        if len(arvore.partes(no)) < 2:
+            raise PropostaRecusada(f"{codigo}: {no!r} é a matéria inteira, e não um conceito")
+        if _mesmo_ramo(no, principal):
+            raise PropostaRecusada(f"{codigo}: {no!r} está no ramo da principal ({principal})")
+        if not trecho:
+            raise PropostaRecusada(f"{codigo}: {no!r} sem o trecho em que aparece")
+        aceitos.setdefault(no, trecho)
+
+    gravados = 0
+    for no, trecho in aceitos.items():
+        if no in conferidas:
+            continue
+        classificar(chave, no, procedencia, principal=False, trecho=trecho)
+        gravados += 1
+    return gravados
+
+
+def _mesmo_ramo(um: str, outro: str) -> bool:
+    """Um no e o outro, ou um debaixo do outro: o mesmo conceito."""
+    return (um == outro or um.startswith(outro + arvore.SEPARADOR)
+            or outro.startswith(um + arvore.SEPARADOR))
 
 
 def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
@@ -317,6 +375,17 @@ def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
 
 PROCEDENCIA_DO_CATALOGO = "catálogo automático (macetes.py), conferir por amostra"
 
+#: O que a conferencia acrescenta ao trecho quando corrige (ou deixa
+#: pendente) uma proposta do catalogo. A procedencia vira "manual", e sem
+#: este rastro a amostra perderia justamente as que eu corrigi - que sao a
+#: taxa de erro do catalogo.
+ERA_DO_CATALOGO = "a proposta era do catálogo automático"
+
+
+def veio_do_catalogo(c: Classificacao) -> bool:
+    """A proposta e do catalogo, ou foi corrigida a partir de uma."""
+    return c.procedencia == PROCEDENCIA_DO_CATALOGO or ERA_DO_CATALOGO in (c.trecho or "")
+
 
 @dataclass
 class ResultadoDoCatalogo:
@@ -397,22 +466,100 @@ def conferir(chave: str, *, corrigir_para: str | None = None,
     if atual is None and corrigir_para is None:
         raise ClassificacaoInvalida("Essa questão ainda não tem classificação.")
     quando = agora()
+    rastro = f"; {ERA_DO_CATALOGO}" if atual is not None and veio_do_catalogo(atual) else ""
     if corrigir_para is not None:
         return classificar(chave, corrigir_para, "manual",
-                           trecho="corrigida na conferência",
+                           trecho="corrigida na conferência" + rastro,
                            tipo_de_questao=atual.tipo_de_questao if atual else None,
                            pegadinha=atual.pegadinha if atual else None,
                            conferida_em=quando)
     if pendente is not None:
         materia = arvore.partes(atual.conteudo)[0]
         return classificar(chave, materia, "manual", status=PENDENTE,
-                           trecho=f"pendente: {pendente.strip() or 'sem motivo escrito'}",
+                           trecho=f"pendente: {pendente.strip() or 'sem motivo escrito'}{rastro}",
                            tipo_de_questao=atual.tipo_de_questao,
                            pegadinha=atual.pegadinha, conferida_em=quando)
     with sessao() as s:
         linha = s.get(Classificacao, atual.id)
         linha.conferida_em = quando
     return linha
+
+
+# --- quando a releitura do caderno muda o texto ------------------------------------
+
+#: O que uma classificacao leva consigo quando muda de chave.
+CAMPOS_QUE_MUDAM_DE_CHAVE = ("conteudo", "principal", "status", "trecho",
+                             "item_do_edital", "dispositivo", "tipo_de_questao",
+                             "pegadinha", "procedencia", "classificada_em",
+                             "conferida_em")
+
+
+def rechavear(trocas: dict[str, set[str]], em_uso: set[str]) -> dict[str, int]:
+    """Leva as classificacoes da chave antiga para a nova.
+
+    A chave e o hash do texto da questao, e o `radar questoes --refazer` com o
+    leitor consertado muda o texto - o "e cor-" que vira "e correto afirmar:",
+    o titulo da secao seguinte que sai da alternativa (B.7). Sem isto, a
+    classificacao conferida ficaria presa a um texto que nao existe mais.
+
+    `trocas` e {chave antiga: chaves novas}; `em_uso`, as chaves que ainda
+    existem no acervo depois da releitura. A antiga que ainda esta em uso (a
+    mesma questao em outro caderno, que nao mudou) e COPIADA; a que nao esta
+    mais, levada. Se a chave nova ja tem linha no mesmo no, fica uma so - a
+    conferida, quando so uma das duas foi conferida. E continua valendo uma
+    principal por questao: sobrando duas, fica a conferida (ou a que ja
+    estava la), e a outra vira associada - ou sai, se era pendente.
+    """
+    resumo = {"levadas": 0, "juntadas": 0, "principais_desfeitas": 0}
+    if not trocas:
+        return resumo
+    criar_tabelas()
+    with sessao() as s:
+        tocadas: set[str] = set()
+        for antiga, novas in trocas.items():
+            linhas = list(s.scalars(select(Classificacao)
+                                   .where(Classificacao.chave == antiga)))
+            if not linhas:
+                continue
+            for nova in sorted(novas - {antiga}):
+                tocadas.add(nova)
+                for linha in linhas:
+                    ja = s.scalar(select(Classificacao)
+                                  .where(Classificacao.chave == nova)
+                                  .where(Classificacao.conteudo == linha.conteudo))
+                    if ja is None:
+                        s.add(Classificacao(chave=nova, **{
+                            campo: getattr(linha, campo)
+                            for campo in CAMPOS_QUE_MUDAM_DE_CHAVE}))
+                        resumo["levadas"] += 1
+                    else:
+                        if linha.conferida_em and not ja.conferida_em:
+                            for campo in CAMPOS_QUE_MUDAM_DE_CHAVE:
+                                setattr(ja, campo, getattr(linha, campo))
+                        resumo["juntadas"] += 1
+            if antiga not in em_uso:
+                for linha in linhas:
+                    s.delete(linha)
+        s.flush()
+        for nova in tocadas:
+            principais = list(s.scalars(select(Classificacao)
+                                        .where(Classificacao.chave == nova)
+                                        .where(Classificacao.principal.is_(True))
+                                        .order_by(Classificacao.id)))
+            if len(principais) < 2:
+                continue
+            fica = next((c for c in principais if c.conferida_em), principais[0])
+            for outra in principais:
+                if outra is fica:
+                    continue
+                if outra.status == PENDENTE:
+                    s.delete(outra)
+                else:
+                    outra.principal = False
+                resumo["principais_desfeitas"] += 1
+    if resumo["levadas"] or resumo["juntadas"]:
+        exportar()
+    return resumo
 
 
 # --- a tela de conferencia -----------------------------------------------------
@@ -430,10 +577,26 @@ class ItemDeConferencia:
     classificacao: Classificacao | None
     #: Os nos em que ela pode ser corrigida: a materia dela e tudo abaixo.
     opcoes: list[str] = field(default_factory=list)
+    #: No complementar, a mesma questao em outros cadernos do concurso (um
+    #: por cargo): a classificacao e uma so, e vale para todos.
+    outros_cadernos: int = 0
+    #: Proposta do catalogo que caiu na amostra da materia.
+    na_amostra: bool = False
 
     @property
     def conferida(self) -> bool:
         return self.classificacao is not None and self.classificacao.conferida_em is not None
+
+
+@dataclass
+class AmostraDoCatalogo:
+    """A conferencia por amostra das propostas do catalogo numa materia."""
+
+    materia: str
+    propostas: int      # o que o catalogo propos (contando as que eu corrigi)
+    tamanho: int        # quantas estao na amostra: o config, ou todas se forem menos
+    conferidas: int
+    corrigidas: int     # corrigidas ou deixadas pendentes: o erro do catalogo
 
 
 @dataclass
@@ -444,20 +607,33 @@ class Conferencia:
     conferidas: int = 0
     conferidas_validas: int = 0
     materias: list[str] = field(default_factory=list)
+    evidencia: str = "alvo"
+    #: A amostra de cada materia (so no complementar) e o tamanho dela.
+    amostras: list[AmostraDoCatalogo] = field(default_factory=list)
+    tamanho_da_amostra: int = 0
 
 
 def conferencia(materia: str | None = None, so_abertas: bool = False,
-                com_anuladas: bool = False) -> Conferencia:
-    """As questoes do alvo com a proposta ao lado, para eu conferir uma a uma.
+                com_anuladas: bool = False, evidencia_escolhida: str = "alvo",
+                so_amostra: bool = False) -> Conferencia:
+    """As questoes com a proposta ao lado, para eu conferir uma a uma.
 
     `materia` filtra pelo no da materia (o do caderno ou o da classificacao);
     `so_abertas` esconde as ja conferidas; `com_anuladas` traz de volta as que
     a banca anulou, que por padrao ficam FORA da lista - elas nao entram em
     conta nenhuma (nem na incidencia), e conferi-las nao muda numero algum.
-    Os totais sao sempre do alvo inteiro, com e sem as anuladas: e eles que
+    Os totais sao sempre do recorte inteiro, com e sem as anuladas: e eles que
     dizem quanto falta.
+
+    `evidencia_escolhida` e o recorte: o alvo (o padrao) ou o complementar
+    aceito, nunca os dois juntos (regra inviolavel 1). `so_amostra` so vale no
+    complementar: a amostra das propostas do catalogo.
     """
+    from radar import amostra as regua
     from radar.servico import evidencia
+
+    if evidencia_escolhida == evidencia.COMPLEMENTAR:
+        return _conferencia_do_complementar(materia, so_abertas, com_anuladas, so_amostra)
 
     taxonomia = arvore.carregar_taxonomia()
     criar_tabelas()
@@ -469,7 +645,8 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
             select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.ALVO)
             .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero)))
 
-    resultado = Conferencia(itens=[], total=len(questoes))
+    resultado = Conferencia(itens=[], total=len(questoes),
+                            tamanho_da_amostra=regua.carregar().amostra_do_catalogo)
     materias = set()
     for q in questoes:
         c = principais.get(chave_de(q))
@@ -501,6 +678,108 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
             anulada=bool(q.anulada), classificacao=c, opcoes=opcoes))
     resultado.materias = sorted(materias)
     return resultado
+
+
+def _conferencia_do_complementar(materia, so_abertas, com_anuladas,
+                                 so_amostra) -> Conferencia:
+    """O complementar ACEITO, uma linha por classificacao.
+
+    A mesma questao aparece em varios cadernos do mesmo concurso (um por
+    cargo), e a classificacao e uma so, pela chave: conferir uma vez vale para
+    todos. Questao sem classificacao nao entra - sao milhares, quase todas
+    conteudo do cargo daquele concurso, e aqui se confere a PROPOSTA.
+    """
+    from radar import amostra as regua
+    from radar.servico import complementar, evidencia
+
+    taxonomia = arvore.carregar_taxonomia()
+    aceitas = complementar.provas_aceitas()
+    criar_tabelas()
+    with sessao() as s:
+        caminhos = list(s.scalars(select(Conteudo.caminho)))
+        principais = {c.chave: c for c in s.scalars(
+            select(Classificacao).where(Classificacao.principal.is_(True)))}
+        questoes = list(s.scalars(
+            select(QuestaoDeProva)
+            .where(QuestaoDeProva.evidencia == evidencia.COMPLEMENTAR)
+            .where(QuestaoDeProva.prova_url.in_(aceitas))
+            .order_by(QuestaoDeProva.ano, QuestaoDeProva.municipio,
+                      QuestaoDeProva.cargo, QuestaoDeProva.numero)))
+
+    por_chave: dict[str, list] = {}
+    for q in questoes:
+        chave = chave_de(q)
+        if chave in principais:
+            por_chave.setdefault(chave, []).append(q)
+
+    tamanho = regua.carregar().amostra_do_catalogo
+    amostras, escolhidas = _amostras_do_catalogo(por_chave, principais, tamanho)
+    resultado = Conferencia(itens=[], total=len(por_chave),
+                            evidencia=evidencia.COMPLEMENTAR, amostras=amostras,
+                            tamanho_da_amostra=tamanho)
+    na_amostra = set(escolhidas)
+    materias = set()
+    for chave, mesma in por_chave.items():
+        q, c = mesma[0], principais[chave]
+        da_classificacao = arvore.partes(c.conteudo)[0]
+        do_caderno = (arvore.achar(caminhos, q.materia)
+                      or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
+        materias.add(da_classificacao)
+        conferida = c.conferida_em is not None
+        resultado.validas += not q.anulada
+        resultado.conferidas += conferida
+        resultado.conferidas_validas += conferida and not q.anulada
+        if materia and materia not in (do_caderno, da_classificacao):
+            continue
+        if so_amostra and chave not in na_amostra:
+            continue
+        if so_abertas and conferida:
+            continue
+        if q.anulada and not com_anuladas:
+            continue
+        raizes = {r for r in (do_caderno, da_classificacao) if r}
+        opcoes = [cam for cam in caminhos
+                  if any(cam == r or cam.startswith(r + arvore.SEPARADOR) for r in raizes)]
+        resultado.itens.append(ItemDeConferencia(
+            codigo=(f"{q.banca} {q.ano} · {q.municipio or 'sem município'} · "
+                    f"{q.cargo or 'sem cargo'} · q{q.numero}"),
+            chave=chave, materia_do_caderno=q.materia, enunciado=q.enunciado,
+            alternativas=q.alternativas or {}, gabarito=q.resposta,
+            anulada=bool(q.anulada), classificacao=c, opcoes=opcoes,
+            outros_cadernos=len(mesma) - 1, na_amostra=chave in na_amostra))
+    if so_amostra:
+        # Na ordem da amostra: a mesma a cada abertura da tela.
+        ordem = {chave: i for i, chave in enumerate(escolhidas)}
+        resultado.itens.sort(key=lambda item: ordem[item.chave])
+    resultado.materias = sorted(materias)
+    return resultado
+
+
+def _amostras_do_catalogo(chaves, principais: dict, tamanho: int):
+    """A amostra de cada materia: as `tamanho` primeiras pelo hash da chave.
+
+    O hash embaralha sem sorteio: a amostra e a mesma a cada abertura da tela,
+    e corrigir uma questao nao a tira dela (a correcao guarda o
+    ERA_DO_CATALOGO). Devolve ([AmostraDoCatalogo], chaves da amostra).
+    """
+    por_materia: dict[str, list[str]] = {}
+    for chave in chaves:
+        c = principais[chave]
+        if veio_do_catalogo(c):
+            por_materia.setdefault(arvore.partes(c.conteudo)[0], []).append(chave)
+    amostras, escolhidas = [], []
+    for materia in sorted(por_materia):
+        todas = sorted(por_materia[materia],
+                       key=lambda k: hashlib.sha256(k.encode("utf-8")).hexdigest())
+        amostra = todas[:tamanho]
+        escolhidas += amostra
+        linhas = [principais[k] for k in amostra]
+        amostras.append(AmostraDoCatalogo(
+            materia=materia, propostas=len(todas), tamanho=len(amostra),
+            conferidas=sum(1 for c in linhas if c.conferida_em is not None),
+            corrigidas=sum(1 for c in linhas if c.conferida_em is not None
+                           and c.procedencia != PROCEDENCIA_DO_CATALOGO)))
+    return amostras, escolhidas
 
 
 # --- o arquivo ----------------------------------------------------------------

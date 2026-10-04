@@ -349,10 +349,13 @@ def relatorio(por_materia, validadas, lista, registros=None) -> str:
             "própria na incidência**, sempre separada da do alvo e contada em "
             "questão distinta. Parte das questões delas foi classificada por "
             "conteúdo, com procedência; o resto conta só na matéria que o "
-            "caderno declara. O que falta: a sua conferência das classificações "
-            "automáticas, por amostra; e os padrões de cobrança do "
-            "complementar (tipo de questão, pegadinha), que ainda não são "
-            "calculados - a linha dele mostra a contagem.",
+            "caderno declara. O que falta é a sua conferência das "
+            "classificações, na tela Análises > Conferência, com o filtro do "
+            "complementar aceito. A proposta automática do catálogo se confere "
+            "por amostra; a de 04/10 errou o assunto em quase metade dela, e o "
+            "lote foi refeito (decisão 87). Os padrões de cobrança do "
+            "complementar (tipo de questão, pegadinha) saem à parte dos do "
+            "alvo, só das provas com gabarito definitivo (decisão 78).",
             "",
         ]
     else:

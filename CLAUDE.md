@@ -125,32 +125,32 @@ especifico (pedido de 03/10):** feitas a 2A - o diagnostico e o simulado de
 com essa composicao (decisao 67) - e a 2B - o simulado do Qconcursos sem
 numero escrito a mao, a revisao semanal, o R+7 dos diagnosticos e a
 comparacao de 07/11 (decisoes 69 e 70) - e a 2C - cada faixa diz o assunto, o
-subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feitos o F1 - o
-"Onde estudar primeiro" e a revisao espacada leem a arvore (decisao 74) - e o
-F2 - so o complementar aceito no costume da banca, no treino e no compilado
-(decisao 75) - e o F3 - a gerada guarda a chave da questao real de base
-(decisao 77), e o `--materia` aceita o nome sem acento - e o F4 - os padroes de
-cobranca tambem do complementar, a parte e so com gabarito definitivo (decisao
-78) - e o F5 - o Meu desempenho mostra a ultima revisao de cada conteudo e a
-evolucao no assunto, contando toda resposta (decisao 79) - e o F6 - o painel
-sem conta repetida: a home de ~4 s para ~1,4 s, Analises de ~3 s para ~1 s
-(decisao 80) - e a F7 - a faixa sem `conteudo` conta no que cobre, so para a
-situacao e as datas (decisao 81).
-Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
-complementares aceitas); 775 geradas (725 do estoque ate 07/11, os 57 lotes:
-`docs/estoque_de_geradas.md`; nas Regras de Mandela a fonte e a regra, decisao
-76); banco na versao 5.
+subassunto e o elemento (decisao 71). A **secao F** (o Pedido 1) esta inteira,
+F1 a F15 (decisoes 74 a 86): o "Onde estudar primeiro" e a revisao espacada
+pela arvore, so o complementar aceito no costume e no treino, a base da gerada
+pela chave, os padroes do complementar, a ultima revisao e a evolucao no Meu
+desempenho, o painel mais leve, a faixa sem `conteudo` no que cobre, a
+revisao feita passando o 1-7-30, os termos empatados em ordem, as variacoes
+religadas, os ultimos minimos no `config/amostra.yml`, as leis de fronteira
+na ficha, os conceitos associados e o 1-7-30 da primeira resposta.
+**O lote de 04/10 (decisoes 87 a 90):** as 61 fichas e as 15 leis lidas contra
+a fonte (15 fichas corrigidas: [conferencia_das_fichas](docs/conferencia_das_fichas.md));
+a tela de conferencia do complementar, com a amostra do catalogo - que
+reprovou o lote, refeito pelo Claude Code; o `?cor=` no lugar do `?tema=` da
+cor; as geradas antigas com materia e no (7 erradas fora do sorteio); a base
+da media nos Macetes; e o leitor do caderno consertado (o lixo no fim da
+alternativa, a palavra partida, a numeracao, a ordem das secoes) com o acervo
+relido e as 21 provas que o download nunca tinha baixado.
+Acervo: 8.421 questoes (as 170 do alvo classificadas e conferidas; 169
+provas complementares aceitas); 775 geradas (7 rejeitadas); banco na versao 5.
 **Falta, de voce:** conferir as 61 fichas (a conferida tambem liga as faixas
-do tema ao Meu desempenho, decisao 81), o complementar (as automaticas, por
-amostra - B.8) e os 15 itens da lista de leis; decidir se a revisao feita
-fora do radar empurra o prazo do 1-7-30 (pendencia F); o **Ciclo 2**, depois
-do simulado de 07/11 e antes de 09/11.
-**Conferir:** a primeira noite do backup consertado (`data/logs/` ou a tela
-Mais) e o Actions de 04/10, o primeiro com a 2A, a 2B e a 2C (pendencias A e
-D); o de 03/10 foi verde.
-**Em aberto:** a media "por prova" dos Macetes sem o numero de provas, o
-`?tema=` dos Macetes, o numero de questoes das faixas (ainda o do plano; o R+7
-dos diagnosticos refaz 5 erros), os temas sem no e o Portugues sem filtro do
+do tema ao Meu desempenho, decisao 81), as 232 classificacoes do complementar
+(Analises > Conferencia, filtro "complementar aceito") e os 15 itens da lista
+de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
+**Conferir:** o Actions de 04/10 - ate o fim do lote, o GitHub nao tinha o
+commit `coleta: 2026-10-04` (pendencia D). O backup das 23h30 voltou em 03/10.
+**Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos
+diagnosticos refaz 5 erros), os temas sem no e o Portugues sem filtro do
 Qconcursos, e o resto dos achados da varredura de 03/10 (pendencia F). Ordem
 e detalhe em
 [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
@@ -163,11 +163,10 @@ herda de `Coletor`, devolve `list[ItemColetado]` e esta em `COLETORES`
 **Toda contagem de questao, acerto e erro passa pelo `servico/metricas.py`**:
 tela nenhuma refaz a conta, e template nenhum soma. **Todo minimo de amostra sai do
 `config/amostra.yml`**, pelo `radar/amostra.py`: nenhuma tela tem regua propria.
-As excecoes declaradas (pendencia F): o 3 do `servico/erros.py` (fatia de
-motivo de erro, nao acerto), o `MINIMO_PARA_EVOLUCAO` (20, `servico/metricas.py`),
-o `MINIMO_PARA_TENDENCIA` (50, `macetes.py`) e o "base pequena" de menos de 3
-provas (`PROVAS_PARA_TENDENCIA` no `servico/cartoes.py`, e o `length < 3` de
-tres templates). **A prioridade de um tema sai do `config/prioridade.yml`**,
+A unica excecao e o 3 do `servico/erros.py` (fatia de motivo de erro, nao
+acerto); a evolucao da home, a tendencia de letra no gabarito e o "base
+pequena" vieram para o arquivo em 04/10 (decisao 83). **A prioridade de um
+tema sai do `config/prioridade.yml`**,
 pelo `radar/prioridade.py`, e a ficha de estudo do `radar/fichas.py`: o tema e
 reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
 `data/fichas.json`, 🟣 com a procedencia. **O desempenho por conteudo e do
@@ -198,7 +197,9 @@ aponta para um conteudo usa o caminho do no (`data/conteudos.json`); a
 classificacao reconhece a questao pela CHAVE (enunciado + alternativas), nunca
 so pela impressao do enunciado - e a gerada aponta a sua base tambem pela chave
 (decisao 77).
-Mudanca de estrutura do banco vira passo novo em `migracoes.py`, e o
+Reler o caderno (`radar questoes --refazer`) leva a classificacao e a base
+das geradas para a chave nova, so quando o texto e o da mesma questao
+(decisao 90). Mudanca de estrutura do banco vira passo novo em `migracoes.py`, e o
 `criar_tabelas` confere o esquema uma vez por conexao (decisao 80): banco
 trocado por baixo de um processo pede `db.resetar_engine()`.
 

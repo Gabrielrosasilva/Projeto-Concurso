@@ -698,6 +698,31 @@ def preencher_origem_chave() -> int:
     return preenchidas
 
 
+def rechavear(trocas_de_chave: dict[str, set[str]],
+              trocas_de_impressao: dict[str, set[str]]) -> int:
+    """A base de cada variacao acompanha a releitura do caderno (B.7).
+
+    A gerada aponta a questao real de base pela chave e pela impressao, e as
+    duas mudam quando o leitor consertado muda o texto. Com uma chave nova so,
+    a gerada passa a ela. Com mais de uma (a mesma questao em dois cadernos,
+    lida diferente), nao ha como saber qual: a gerada fica com a antiga, como
+    a de 27/09 sem base achada (decisao 77). Devolve quantas mudaram.
+    """
+    criar_tabelas()
+    mudaram = 0
+    with sessao() as s:
+        for gerada in s.scalars(select(QuestaoGerada)):
+            novas = trocas_de_chave.get(gerada.origem_chave or "")
+            if novas and len(novas) == 1:
+                gerada.origem_chave = next(iter(novas))
+                mudaram += 1
+            novas = trocas_de_impressao.get(gerada.origem_impressao or "")
+            if novas and len(novas) == 1:
+                gerada.origem_impressao = next(iter(novas))
+                mudaram += 1
+    return mudaram
+
+
 def rejeitar(questao_id: int) -> bool:
     """Marca "essa questao esta errada". Ela sai do sorteio para sempre.
 

@@ -687,3 +687,19 @@ def test_o_json_real_das_geradas_nao_esta_vazio():
     assert all(linha.get("impressao") for linha in linhas)
     # Toda gerada tem procedencia: e a trava que existe desde o `gravar`.
     assert all(linha.get("modelo") for linha in linhas)
+
+
+def test_toda_variacao_do_registro_tem_a_base_pela_chave_menos_as_3_de_27_09():
+    """As 30 variacoes do estoque de 03/10 que tinham ficado sem a questao de
+    base (decisao 77) foram religadas pelo historico da conversa, que imprimiu
+    a base de cada pedido. So as 3 de 27/09 seguem sem: delas nao ha registro."""
+    from pathlib import Path
+
+    arquivo = (Path(__file__).resolve().parent.parent / "data"
+               / "questoes_geradas.json")
+    linhas = json.loads(arquivo.read_text(encoding="utf-8"))
+    sem_base = [linha for linha in linhas
+                if linha.get("modo") == "variacao" and not linha.get("origem_chave")]
+
+    assert len(sem_base) == 3
+    assert all("27/09/2026" in (linha.get("modelo") or "") for linha in sem_base)

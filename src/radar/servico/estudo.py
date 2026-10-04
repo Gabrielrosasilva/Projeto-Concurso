@@ -32,7 +32,9 @@ o que ele tinha agendado.
   2. **estado "precisa revisar"** - o acerto esta abaixo do corte do
      config/amostra.yml, com amostra que sustente a conta;
   3. **prazo vencido** - o 1-7-30 do `espacada.py`, contado do ultimo estudo
-     ou da ultima pratica.
+     ou da ultima pratica. Passa de etapa com o acerto no radar e com a
+     revisao feita fora dele (o R+7, o extra de revisao), no vencimento ou
+     depois (decisao 82).
 
 Um no pode disparar por mais de um; a lista guarda todos os motivos. "Questoes
 a refazer" sao as erradas no radar mais as do caderno de erros - as duas
@@ -116,6 +118,11 @@ class Situacao:
     #: que revisa - a revisao espacada e as erradas. Questao de rodada comum e
     #: pratica, nao revisao. None = nunca revisei.
     ultima_revisao: date | None = None
+    #: Os dias de revisao feita FORA do radar (a faixa de revisao, o extra de
+    #: revisao). No vencimento ou depois, cada um passa o 1-7-30 para a etapa
+    #: seguinte, como o acerto no radar (decisao 82). A rodada de revisao do
+    #: radar nao entra aqui: ela anda pelo acerto, e errar nela nao e passar.
+    revisoes_fora_do_radar: list = field(default_factory=list)
 
     minutos: int = 0
     #: O desempenho do no, quando ele tem resposta. None quando nao tem.
@@ -258,7 +265,9 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
             _situacao_e_datas(atual, linha)
 
     # --- as respostas do radar --------------------------------------------
-    for chave, _, dia in por_conteudo._questoes_respondidas(None, hoje):
+    # TODA resposta, e nao so a ultima de cada questao: a questao refeita nao
+    # pode empurrar o primeiro contato, que e a ancora do 1-7-30 (decisao 85).
+    for chave, _, dia in por_conteudo._questoes_respondidas(None, hoje, todas=True):
         caminho_da_questao = de_quem.get(chave)
         if caminho_da_questao is None:
             continue
@@ -288,16 +297,27 @@ def _situacao_e_datas(atual: Situacao, linha) -> None:
     quando. Nada de acerto aqui."""
     if linha.revisao:
         atual.ultima_revisao = _mais_nova(atual.ultima_revisao, linha.data)
+        atual.revisoes_fora_do_radar.append(linha.data)
     if linha.questoes:
         atual.praticado = True
         atual.primeira_pratica = _mais_velha(atual.primeira_pratica, linha.data)
         atual.ultima_pratica = _mais_nova(atual.ultima_pratica, linha.data)
-    else:
-        # Faixa ou extra sem questao: foi leitura. E isto que faz o
-        # conteudo "estudado".
+    elif _e_estudo(linha):
+        # Faixa de estudo ou extra de teoria ou de lei seca: foi leitura, e
+        # e isto que faz o conteudo "estudado" (decisao 20). A revisao sem
+        # questao fica de fora: contar como estudo reiniciaria o 1-7-30, em
+        # vez de passar de etapa.
         atual.estudado = True
         atual.primeiro_estudo = _mais_velha(atual.primeiro_estudo, linha.data)
         atual.ultimo_estudo = _mais_nova(atual.ultimo_estudo, linha.data)
+
+
+def _e_estudo(linha) -> bool:
+    """A linha sem questao e estudo? So a faixa de ESTUDO e o extra de teoria
+    ou de lei seca (decisao 20): a correcao, o Anki e a revisao nao sao."""
+    if linha.origem == metricas.FAIXA:
+        return linha.tipo in TIPOS_DE_ESTUDO
+    return linha.tipo in EXTRA_DE_ESTUDO
 
 
 def _o_que_a_faixa_cobre(faixa, escritas, arvore_inteira) -> set[str]:
@@ -371,15 +391,16 @@ def estudados_ou_praticados(todas: dict[str, Situacao],
 
 # --- a revisao ------------------------------------------------------------------
 
-def _etapa_e_vencimento(desde: date, respostas_certas: list[date],
+def _etapa_e_vencimento(desde: date, revisoes_feitas: list[date],
                         hoje: date) -> tuple[int, date]:
     """A etapa do 1-7-30 e quando ela vence, contando de `desde`.
 
-    A mesma regra do `espacada.py`: acertar NA data do vencimento ou depois
-    passa para a proxima etapa; acertar antes e treino, nao revisao.
+    A mesma regra do `espacada.py`: revisar NA data do vencimento ou depois
+    passa para a proxima etapa; antes e treino, nao revisao. Revisao feita e
+    o acerto no radar, ou a revisao marcada fora dele (decisao 82).
     """
     etapa, vence = 1, desde + timedelta(days=INTERVALOS[0])
-    for dia in sorted(respostas_certas):
+    for dia in sorted(revisoes_feitas):
         if dia >= vence and etapa < len(INTERVALOS):
             etapa += 1
             vence = dia + timedelta(days=INTERVALOS[etapa - 1])
@@ -426,8 +447,9 @@ def para_revisar(plano=None, hoje: date | None = None,
         # recomeca) ou, sem estudo nenhum, o PRIMEIRO contato pratico.
         desde = atual.ultimo_estudo or atual.primeira_pratica
         if desde is not None:
-            certas = acertos_por_no.get(caminho, [])
-            etapa, vence_em = _etapa_e_vencimento(desde, certas, hoje)
+            # O R+7 e o extra de revisao andam como o acerto no radar.
+            feitas = acertos_por_no.get(caminho, []) + atual.revisoes_fora_do_radar
+            etapa, vence_em = _etapa_e_vencimento(desde, feitas, hoje)
             if vence_em <= hoje:
                 motivos.append(f"{POR_PRAZO} ({INTERVALOS[etapa - 1]} dia(s))")
             else:

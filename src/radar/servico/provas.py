@@ -15,8 +15,10 @@ o `radar.provas`, que aqui entra como `arquivos_de_prova` para nao se
 confundir com o proprio modulo.
 """
 import logging
+import re
 from dataclasses import dataclass
 from datetime import datetime
+from difflib import SequenceMatcher
 from pathlib import Path
 
 from sqlalchemy import func, select
@@ -222,6 +224,8 @@ def montar_acervo(
 
     registros = arquivos_de_prova.carregar_manifesto()
     conhecidos = {r.get("url") for r in registros}
+    # O caminho de cada arquivo ja no disco, e de que url ele e (B.9).
+    ocupados = {r["caminho"]: r.get("url") for r in registros if r.get("caminho")}
     buscador = Buscador()
 
     for concurso in escolhidos:
@@ -239,13 +243,14 @@ def montar_acervo(
             documento.municipio = concurso.municipio
             documento.ano = _ano_do_concurso(concurso)
 
-            baixado = arquivos_de_prova.baixar(documento, buscador)
+            baixado = arquivos_de_prova.baixar(documento, buscador, ocupados=ocupados)
             if baixado is None:
                 resultado.falhas += 1
                 continue
 
             registros.append(arquivos_de_prova.para_registro(baixado))
             conhecidos.add(baixado.url)
+            ocupados.setdefault(baixado.caminho, baixado.url)
 
             if baixado.tipo == arquivos_de_prova.PROVA:
                 resultado.provas += 1
@@ -283,12 +288,15 @@ def baixar_do_manifesto(forcar: bool = False) -> dict[str, int]:
             for campo in ("tipo", "url", "arquivo", "cargo", "concurso_url",
                           "banca", "orgao", "municipio", "ano")
         })
-        caminho = arquivos_de_prova.destino(documento)
+        # O caminho que o manifesto gravou, e nao o recalculado: o da prova
+        # que dividia o nome com outra tem o hotsite na frente (B.9).
+        caminho = (config.diretorio_dados() / registro["caminho"]
+                   if registro.get("caminho") else arquivos_de_prova.destino(documento))
         if caminho.exists() and not forcar:
             contagem["ja_tinha"] += 1
             continue
 
-        if arquivos_de_prova.baixar(documento, buscador, forcar=forcar):
+        if arquivos_de_prova.baixar(documento, buscador, forcar=forcar, caminho=caminho):
             contagem["baixados"] += 1
         else:
             contagem["falhas"] += 1
@@ -305,6 +313,12 @@ class ResultadoExtracao:
     atualizadas: int = 0
     repetidas: int = 0
     vazias: int = 0
+    #: Questoes cujo texto mudou na releitura, e o que acompanhou a mudanca.
+    texto_mudou: int = 0
+    classificacoes_levadas: int = 0
+    geradas_religadas: int = 0
+    #: O numero passou a ser de OUTRA questao: a classificacao nao vai junto.
+    conteudo_trocado: int = 0
 
     def __str__(self) -> str:
         if not self.provas:
@@ -312,6 +326,13 @@ class ResultadoExtracao:
         texto = f"{self.provas} prova(s) lida(s), {self.questoes} questao(oes)"
         if self.atualizadas:
             texto += f", {self.atualizadas} atualizada(s)"
+        if self.texto_mudou:
+            texto += (f", {self.texto_mudou} com o texto mudado "
+                      f"({self.classificacoes_levadas} classificacao(oes) levada(s) "
+                      f"para a chave nova, {self.geradas_religadas} gerada(s) religada(s))")
+        if self.conteudo_trocado:
+            texto += (f", {self.conteudo_trocado} com outra questao no mesmo numero "
+                      f"(a classificacao ficou na chave antiga)")
         if self.repetidas:
             texto += f", {self.repetidas} ja vista(s) em outra prova"
         if self.vazias:
@@ -482,6 +503,10 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
     # o acervo inteiro, o banco ja tem todas: comparar com ele acusaria as 5021
     # como repetidas de si mesmas. Ai a conta e so entre as provas da rodada.
     conhecidas: set[str] | None = set() if refazer else None
+    # O texto que mudou na releitura muda a chave e a impressao: a
+    # classificacao e a base das geradas vao junto, no fim (B.7).
+    trocas_de_chave: dict[str, set[str]] = {}
+    trocas_de_impressao: dict[str, set[str]] = {}
 
     for registro in pendentes:
         caminho = config.diretorio_dados() / registro["caminho"]
@@ -514,6 +539,11 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
                 destino = existente or QuestaoDeProva(
                     prova_url=registro["url"], numero=questao.numero
                 )
+                if existente is not None:
+                    chave_antiga = leitor_de_questoes.chave_da_questao(existente.enunciado,
+                                                    existente.alternativas)
+                    impressao_antiga = existente.impressao
+                    texto_antigo = _texto_inteiro(existente.enunciado, existente.alternativas)
                 destino.concurso_url = registro.get("concurso_url")
                 destino.banca = registro.get("banca")
                 destino.ano = registro.get("ano")
@@ -531,12 +561,62 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
                     resultado.questoes += 1
                 else:
                     resultado.atualizadas += 1
+                    chave_nova = leitor_de_questoes.chave_da_questao(destino.enunciado, destino.alternativas)
+                    if chave_nova != chave_antiga and not _mesma_questao(
+                            texto_antigo, _texto_inteiro(destino.enunciado, destino.alternativas)):
+                        # O leitor consertado pos OUTRA questao neste numero:
+                        # levar a classificacao seria classificar a questao errada.
+                        resultado.conteudo_trocado += 1
+                        continue
+                    if chave_nova != chave_antiga:
+                        trocas_de_chave.setdefault(chave_antiga, set()).add(chave_nova)
+                        resultado.texto_mudou += 1
+                    if destino.impressao != impressao_antiga:
+                        trocas_de_impressao.setdefault(impressao_antiga, set()).add(
+                            destino.impressao)
 
     # Questao nova nasce sem evidencia: a regra unica a preenche, com as
     # outras, agora que o caderno esta no banco.
     from radar.servico import evidencia
     evidencia.atualizar()
+    if trocas_de_chave or trocas_de_impressao:
+        _acompanhar_a_releitura(resultado, trocas_de_chave, trocas_de_impressao)
     return resultado
+
+
+def _texto_inteiro(enunciado: str | None, alternativas: dict | None) -> str:
+    """O enunciado e as alternativas num texto so, sem acento, caixa nem pontuacao."""
+    partes = [enunciado or ""] + [str(t or "") for _, t in sorted((alternativas or {}).items())]
+    texto = leitor_de_questoes._sem_acento(" ".join(partes)).lower()
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", texto).split())
+
+
+def _mesma_questao(antes: str, depois: str) -> bool:
+    """O texto relido e o da mesma questao, so limpo ou completado?
+
+    Limpar (tirar o titulo grudado) deixa um texto dentro do outro; completar
+    (a palavra partida que voltou) muda pouco. Questao trocada no numero muda
+    quase tudo.
+    """
+    return (antes in depois or depois in antes
+            or SequenceMatcher(None, antes, depois).ratio() >= 0.8)
+
+
+def _acompanhar_a_releitura(resultado: ResultadoExtracao, trocas_de_chave: dict,
+                            trocas_de_impressao: dict) -> None:
+    """Leva a classificacao e a base das geradas para o texto relido, e grava
+    os dois arquivos versionados de onde o banco e reconstruido."""
+    from radar import acervo
+    from radar.servico import classificacoes, geradas
+
+    with sessao() as s:
+        em_uso = {leitor_de_questoes.chave_da_questao(q.enunciado, q.alternativas)
+                  for q in s.scalars(select(QuestaoDeProva))}
+    levadas = classificacoes.rechavear(trocas_de_chave, em_uso)
+    resultado.classificacoes_levadas = levadas["levadas"] + levadas["juntadas"]
+    resultado.geradas_religadas = geradas.rechavear(trocas_de_chave, trocas_de_impressao)
+    if resultado.geradas_religadas:
+        acervo.exportar_geradas()
 
 
 def incidencia_por_materia(

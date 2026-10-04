@@ -33,7 +33,6 @@ from radar.servico.comum import cargo_parecido as _cargo_parecido
 # Os nomes continuam aqui porque a fachada `servico` e a home os leem daqui.
 from radar.servico.metricas import (     # noqa: F401 - reexportados
     DIAS_DA_EVOLUCAO,
-    MINIMO_PARA_EVOLUCAO,
     DesempenhoDaMateria,
     Evolucao,
     desempenho,

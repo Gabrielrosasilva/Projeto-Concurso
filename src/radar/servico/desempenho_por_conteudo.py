@@ -211,27 +211,32 @@ def _janela(recorte: str, plano=None, hoje: date | None = None):
     return plano.inicio, fim
 
 
-def _questoes_respondidas(inicio: date | None, fim: date):
+def _questoes_respondidas(inicio: date | None, fim: date, todas: bool = False):
     """As ultimas respostas reais, com a chave da questao e o dia.
 
     [(chave, acertou, dia)]. Questao de IA fica fora; rodada nao terminada
-    fica fora (o `metricas` ja filtra as duas coisas).
+    fica fora (o `metricas` ja filtra as duas coisas). Com `todas`, cada
+    resposta, e nao so a ultima de cada questao (decisao 85).
     """
     criar_tabelas()
     with sessao() as s:
-        ultimas = metricas.ultimas_respostas_reais(s)
-        if not ultimas:
+        if todas:
+            respostas = metricas.respostas_reais(s)
+        else:
+            respostas = list(metricas.ultimas_respostas_reais(s).values())
+        if not respostas:
             return []
         questoes = {q.id: q for q in s.scalars(
-            select(QuestaoDeProva).where(QuestaoDeProva.id.in_(list(ultimas)))
+            select(QuestaoDeProva).where(QuestaoDeProva.id.in_(
+                {r.questao_id for r in respostas}))
         )}
 
     from radar.servico.classificacoes import chave_de
     from radar.util import para_local
 
     saida = []
-    for questao_id, resposta in ultimas.items():
-        questao = questoes.get(questao_id)
+    for resposta in respostas:
+        questao = questoes.get(resposta.questao_id)
         if questao is None or questao.anulada:
             # Anulada nao mede nada: a banca desfez a pergunta.
             continue

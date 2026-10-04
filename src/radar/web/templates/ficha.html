@@ -26,7 +26,7 @@
 <body class="ds">
 
 {% from "_topo.html" import barra, abas_de_hoje with context %}
-{% from "_componentes.html" import selo, legenda_dos_selos %}
+{% from "_componentes.html" import selo, legenda_dos_selos, aviso_lei %}
 {{ barra('hoje') }}
 
 {# O selo de cada parte. A origem vem do DADO (radar/fichas.py); o template so
@@ -71,6 +71,13 @@
       {% if f.fonte.nota %}<p class="ds-aviso-lei">⚠ {{ f.fonte.nota }}</p>{% endif %}
     {% else %}
       <p class="frase-padrao">Sem fonte oficial cadastrada no config/leis.yml para este assunto.</p>
+    {% endif %}
+    {% if f.leis_mudadas %}
+      {# Os casos de fronteira (decisao 84): a lei mudou depois das provas,
+         num ponto que nenhuma questao cobra. A questao nao tem aviso; o
+         tema tem. #}
+      <p class="subtitulo">A lei mudou depois das provas, num ponto que elas não cobraram</p>
+      {% for mud in f.leis_mudadas %}{{ aviso_lei(mud, '') }}{% endfor %}
     {% endif %}
 
     <p class="subtitulo">Ler exatamente {{ s(f.origens.ler_exatamente) }}</p>

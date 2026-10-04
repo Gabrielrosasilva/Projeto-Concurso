@@ -98,7 +98,7 @@
             <p class="motivo">{{ p.motivo }}</p>
             <p class="anos">
               Base: {{ p.anos | length }} concurso{{ 's' if p.anos | length != 1 }}
-              conhecido{{ 's' if p.anos | length != 1 }} ({{ p.anos | join(', ') }}){% if p.anos | length < 3 %} ·
+              conhecido{{ 's' if p.anos | length != 1 }} ({{ p.anos | join(', ') }}){% if p.anos | length < PROVAS_PARA_TENDENCIA %} ·
               <b>base pequena</b>{% endif %}
             </p>
           </div>

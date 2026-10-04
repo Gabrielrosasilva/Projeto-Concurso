@@ -275,7 +275,20 @@ MOBILIA_DE_PAGINA = (
 MOBILIA_NO_MEIO = re.compile(
     r"\s*(?:P[aá]gina\s+\d+"
     r"|P[aá]gina\s+em\s+Branco"
-    r"|\(rascunho\)).*$",
+    r"|\(rascunho\)"
+    # O fim do caderno da FEPESE grudava na "e" da ultima questao (B.7): a
+    # grade de respostas (os numeros de 1 em diante, com ou sem o titulo), o
+    # rodape com o endereco da fundacao e a coluna em branco.
+    r"|\b1\s+2\s+3\s+4\s+5\s+6\s+7\s+8\s+9\s+10\b"
+    r"|(?:\.\s+)?Utilize\s+a\s+grade\s+ao\s+lado"
+    r"|GRADE\s+DE\s+RESPOSTAS"
+    # O titulo de bloco entre parenteses, como o de 2013: "Conhecimentos
+    # Especificos (40 questoes)". O PADRAO_SECAO nao o le como secao.
+    r"|(?-i:[A-ZÁÉÍÓÚÂÊÔÃÕÇ]\w*(?:\s+\w+){0,6})\s*\(\s*\d{1,3}\s+quest[oõ]es\s*\)"
+    r"|FEPESE\s*•\s*Funda[çc][ãa]o\s+de\s+Estudos"
+    r"|Campus\s+Universit[áa]rio\s*•\s*UFSC"
+    r"|Coluna\s+em\s+Branco"
+    r").*$",
     re.IGNORECASE | re.DOTALL,
 )
 
@@ -330,13 +343,26 @@ def _linhas_repetidas(texto: str, minimo: int = 3) -> set[str]:
 
 
 def limpar_mobilia(texto: str) -> str:
-    """Tira cabecalho e rodape de pagina, que se repetem no caderno inteiro."""
+    """Tira cabecalho e rodape de pagina, que se repetem no caderno inteiro.
+
+    Menos a linha que continua a palavra quebrada por hifen na linha de cima.
+    Em 2019, "De acordo com o Codigo Penal Brasileiro, e cor-" / "reto
+    afirmar:" abre quatro questoes, a segunda metade se repetia e era apagada
+    como cabecalho, e o enunciado acabava em "e cor-" (B.7). Cabecalho de
+    pagina nunca continua palavra, e nunca comeca em minuscula.
+    """
     repetidas = _linhas_repetidas(texto)
-    return "\n".join(
-        linha for linha in texto.splitlines()
-        if linha.strip() not in repetidas
-        and not any(padrao.match(linha) for padrao in MOBILIA_DE_PAGINA)
-    )
+    mantidas: list[str] = []
+    for linha in texto.splitlines():
+        if any(padrao.match(linha) for padrao in MOBILIA_DE_PAGINA):
+            continue
+        enxuta = linha.strip()
+        continua_palavra = (enxuta[:1].islower() and mantidas
+                            and re.search(r"\w-$", mantidas[-1].rstrip()))
+        if enxuta in repetidas and not continua_palavra:
+            continue
+        mantidas.append(linha)
+    return "\n".join(mantidas)
 
 
 def achar_secoes(texto: str) -> list[tuple[int, str, int]]:
@@ -353,7 +379,38 @@ def achar_secoes(texto: str) -> list[tuple[int, str, int]]:
     return secoes
 
 
-def materias_por_numero(secoes: list[tuple[int, str, int]]) -> dict[int, str]:
+def _na_ordem_do_caderno(secoes: list[tuple[int, str, int]],
+                         texto: str) -> list[tuple[int, str, int]] | None:
+    """As secoes na ordem do caderno, e nao na do texto extraido.
+
+    O extrator le as duas colunas na ordem dele, e um titulo pode sair depois
+    do da secao seguinte: no Socioeducativo de 2013 e de 2016, o de Direito
+    Processual Penal (questoes 49 e 50) vinha depois do de Legislacao
+    Estadual (51 a 60), e a conta pela ordem do texto trocava quatro questoes
+    de materia em cada caderno (B.10). A pista e a primeira questao depois de
+    cada titulo: ordenadas por ela, as secoes somam as faixas de novo.
+
+    A pista nao e a fronteira - em Portugues o texto de apoio vem antes, e a
+    primeira numerada pode ser a 3. Por isso ela so vale se cair dentro da
+    faixa que a secao ganha; se alguma nao cair, devolve None e fica a ordem
+    do texto, a de sempre.
+    """
+    pistas = []
+    for indice, secao in enumerate(secoes):
+        achado = PADRAO_QUESTAO.search(texto, secao[0])
+        if not achado:
+            return None
+        pistas.append((int(achado.group(1)), indice))
+    proximo = 1
+    for numero, indice in sorted(pistas):
+        if not proximo <= numero < proximo + secoes[indice][2]:
+            return None
+        proximo += secoes[indice][2]
+    return [secoes[indice] for _, indice in sorted(pistas)]
+
+
+def materias_por_numero(secoes: list[tuple[int, str, int]],
+                        texto: str | None = None) -> dict[int, str]:
     """{numero da questao: materia}, montado pelas faixas que a banca declara.
 
     Cada cabecalho diz quantas questoes a secao tem ("Conhecimentos Gerais 10
@@ -364,14 +421,28 @@ def materias_por_numero(secoes: list[tuple[int, str, int]]) -> dict[int, str]:
     porque a ordem do texto e embaralhada pelas duas colunas do caderno - as
     questoes 21 e 22 aparecem antes das 16 a 20. Usar posicao colocava meia
     prova na materia errada.
+
+    Com o `texto`, a ORDEM das secoes tambem sai do caderno, e nao do texto
+    (`_na_ordem_do_caderno`).
     """
     mapa: dict[int, str] = {}
     proximo = 1
-    for _, nome, quantas in secoes:
+    ordem = (_na_ordem_do_caderno(secoes, texto) if texto else None) or secoes
+    for _, nome, quantas in ordem:
         for numero in range(proximo, proximo + quantas):
             mapa[numero] = nome
         proximo += quantas
     return mapa
+
+
+def _inicio_do_titulo(texto: str, achado: re.Match) -> int:
+    """Onde comeca o titulo de secao achado: a linha dele, ou a de cima
+    quando o titulo quebrou em duas (o criterio de `_juntar_com_a_linha_de_cima`)."""
+    nome = re.split(r"\s{2,}|•", _limpar(achado.group(1)))[-1].strip()
+    if _juntar_com_a_linha_de_cima(texto, achado.start(), nome) == nome:
+        return achado.start()
+    anterior = texto.rfind("\n", 0, achado.start())
+    return texto.rfind("\n", 0, anterior) + 1
 
 
 def _blocos_de_alternativas(texto: str) -> list[list[re.Match]]:
@@ -397,7 +468,7 @@ def _blocos_de_alternativas(texto: str) -> list[list[re.Match]]:
 
 
 def _ler_alternativas(
-    rodada: list[re.Match], texto: str, fim: int
+    rodada: list[re.Match], texto: str, fim: int, proxima: int | None = None
 ) -> tuple[dict[str, str], str | None]:
     """O texto de cada alternativa da rodada.
 
@@ -415,15 +486,55 @@ def _ler_alternativas(
             limite = rodada[indice + 1].start()
         else:
             limite = fim
-            proxima = PADRAO_QUESTAO.search(texto, achado.end(), fim)
-            if proxima:
-                limite = proxima.start()
+            if proxima is not None and achado.end() <= proxima <= fim:
+                # O numero que a proxima questao ganhou (`_marcador_da_questao`):
+                # a lista numerada de dentro desta alternativa nao a corta.
+                limite = proxima
+            else:
+                seguinte = PADRAO_QUESTAO.search(texto, achado.end(), fim)
+                if seguinte:
+                    limite = seguinte.start()
+            # Entre a ultima alternativa e a proxima questao pode estar o
+            # titulo da secao seguinte ("Direitos Humanos 10 questoes"), as
+            # vezes com o texto de apoio das questoes de baixo. Sem cortar
+            # nele, os dois grudavam no fim da "e" (B.7).
+            secao = PADRAO_SECAO.search(texto, achado.end(), limite)
+            if secao:
+                limite = _inicio_do_titulo(texto, secao)
 
         alternativas[letra] = cortar_mobilia(_limpar(texto[achado.end():limite]))
         if _e_a_marcada(achado.group(2)):
             resposta = letra
 
     return alternativas, resposta
+
+
+def _marcador_da_questao(regiao: str, anterior: int) -> re.Match | None:
+    """O "N." que numera a questao: o primeiro da regiao, em regra.
+
+    A regiao comeca logo depois do "e." da questao anterior, no texto da
+    alternativa dela - e esse texto pode ser uma lista numerada ("1. silepse •
+    2. comparacao •" / "3. eufemismo • 4. catacrese"). Ai o primeiro marcador e
+    da lista: a questao 20 de Florianopolis 2023 virava a "1", batia com a 1
+    de verdade e sumia (B.9, 26 cadernos). Marcador logo no comeco da regiao
+    e sempre o texto da alternativa; os "N." da lista seguem em sequencia, e o
+    numero da questao e o primeiro marcador de comeco de linha que vem depois
+    dela. Fora disso, o primeiro - o caso de sempre, inclusive a ordem
+    embaralhada pelas duas colunas.
+    """
+    achados = list(PADRAO_QUESTAO.finditer(regiao))
+    if not achados:
+        return None
+    primeiro = achados[0]
+    if primeiro.start() != 0 or int(primeiro.group(1)) > anterior:
+        return primeiro
+    esperado, fim_da_lista = int(primeiro.group(1)), 0
+    for item in re.finditer(r"(?<![\w.])(\d{1,3})\.(?=[ \t\xa0])", regiao):
+        if int(item.group(1)) != esperado:
+            break
+        esperado += 1
+        fim_da_lista = item.end()
+    return next((a for a in achados[1:] if a.start() >= fim_da_lista), primeiro)
 
 
 def dividir_em_questoes(texto: str) -> list[Questao]:
@@ -444,32 +555,42 @@ def dividir_em_questoes(texto: str) -> list[Questao]:
     """
     texto = limpar_mobilia(texto)
     secoes = achar_secoes(texto)
-    materias = materias_por_numero(secoes)
+    materias = materias_por_numero(secoes, texto)
     rodadas = _blocos_de_alternativas(texto)
 
-    questoes: list[Questao] = []
-    fim_anterior = 0
-
-    for indice, rodada in enumerate(rodadas):
-        inicio_alternativas = rodada[0].start()
-        fim_rodada = (rodadas[indice + 1][0].start()
-                      if indice + 1 < len(rodadas) else len(texto))
-
-        regiao = texto[fim_anterior:inicio_alternativas]
-        marcador = PADRAO_QUESTAO.search(regiao)
+    # Primeiro o numero de cada questao, e so depois o texto: a ultima
+    # alternativa de uma termina no marcador da seguinte.
+    marcadores: list[int | None] = []      # onde comeca o "N.", no texto
+    numeros: list[int | None] = []
+    fim_anterior = anterior = 0
+    for rodada in rodadas:
+        regiao = texto[fim_anterior:rodada[0].start()]
+        achado = _marcador_da_questao(regiao, anterior)
+        marcadores.append(fim_anterior + achado.start() if achado else None)
+        numeros.append(int(achado.group(1)) if achado else None)
         # O ponteiro avanca ate a ULTIMA alternativa desta rodada, e nao ate o
         # inicio da proxima: e entre um ponto e outro que mora o numero e o
         # enunciado da questao seguinte.
         fim_anterior = rodada[-1].end()
+        if achado:
+            anterior = numeros[-1]
 
-        if not marcador:
+    questoes: list[Questao] = []
+    for indice, rodada in enumerate(rodadas):
+        if marcadores[indice] is None:
             continue
+        inicio_alternativas = rodada[0].start()
+        fim_rodada = (rodadas[indice + 1][0].start()
+                      if indice + 1 < len(rodadas) else len(texto))
+        proxima = marcadores[indice + 1] if indice + 1 < len(marcadores) else None
 
-        numero = int(marcador.group(1))
+        numero = numeros[indice]
         enunciado = _limpar(marcar_lacunas(
-            re.sub(r"^[ \t]*\d{1,2}\.[ \t]*", "", regiao[marcador.start():])
+            # Tres digitos: com dois, o "100." ficava dentro do enunciado (B.7).
+            re.sub(r"^[ \t]*\d{1,3}\.[ \t]*", "",
+                   texto[marcadores[indice]:inicio_alternativas])
         ))
-        alternativas, resposta = _ler_alternativas(rodada, texto, fim_rodada)
+        alternativas, resposta = _ler_alternativas(rodada, texto, fim_rodada, proxima)
 
         questoes.append(Questao(
             numero=numero,

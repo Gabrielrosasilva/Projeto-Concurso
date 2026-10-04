@@ -28,7 +28,7 @@ import re
 import unicodedata
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 
@@ -282,8 +282,16 @@ def _nome_seguro(texto: str) -> str:
     return limpo or "sem-nome"
 
 
-def destino(documento: Documento) -> Path:
-    """data/provas/<banca>/<ano>/<municipio>/<arquivo>"""
+def destino(documento: Documento, ocupados: dict[str, str] | None = None) -> Path:
+    """data/provas/<banca>/<ano>/<municipio>/<arquivo>
+
+    Dois hotsites do mesmo municipio e ano podem ter arquivo de mesmo nome: a
+    FEPESE chama de S07.pdf provas de cargos diferentes em concursos
+    diferentes de Palhoca, em 2024. Com `ocupados` ({caminho: url}, do
+    manifesto), o caminho que ja e de OUTRA url ganha o nome do hotsite na
+    frente. Sem isso o segundo arquivo nunca era baixado - o primeiro ja
+    estava la -, e a prova dele apontava para o PDF do outro concurso (B.9).
+    """
     partes = [
         _nome_seguro(documento.banca or "sem-banca"),
         str(documento.ano or "sem-ano"),
@@ -291,7 +299,18 @@ def destino(documento: Documento) -> Path:
     ]
     pasta = diretorio_provas().joinpath(*partes)
     pasta.mkdir(parents=True, exist_ok=True)
-    return pasta / _nome_seguro(documento.arquivo).replace("-pdf", ".pdf")
+    caminho = pasta / _nome_seguro(documento.arquivo).replace("-pdf", ".pdf")
+    dono = (ocupados or {}).get(_caminho_relativo(caminho))
+    if dono and dono != documento.url:
+        caminho = pasta / f"{_nome_do_hotsite(documento.url)}-{caminho.name}"
+    return caminho
+
+
+def _nome_do_hotsite(url: str) -> str:
+    """"2024pseducapalhoca" de https://2024pseducapalhoca.fepese.org.br/..."""
+    host = urlparse(url or "").hostname or ""
+    return _nome_seguro(host.split(".")[0] if host else hashlib.sha256(
+        (url or "").encode()).hexdigest()[:12])
 
 
 def _caminho_relativo(caminho: Path) -> str:
@@ -333,13 +352,17 @@ def gravar_manifesto(registros: list[dict]) -> int:
     return len(ordenados)
 
 
-def baixar(documento: Documento, buscador, forcar: bool = False) -> Documento | None:
+def baixar(documento: Documento, buscador, forcar: bool = False,
+           ocupados: dict[str, str] | None = None,
+           caminho: Path | None = None) -> Documento | None:
     """Salva o PDF no disco e preenche hash, caminho e tamanho.
 
     Arquivo que ja existe nao e baixado de novo - o acervo cresce sem repetir
     requisicao. `forcar` serve para reconferir um arquivo suspeito.
+    `ocupados` evita gravar por cima do arquivo de outra url (`destino`), e
+    `caminho` usa o que o manifesto ja gravou.
     """
-    caminho = destino(documento)
+    caminho = caminho or destino(documento, ocupados)
 
     if caminho.exists() and not forcar:
         documento.caminho = _caminho_relativo(caminho)

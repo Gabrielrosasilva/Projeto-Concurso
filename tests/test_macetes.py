@@ -228,6 +228,18 @@ def test_palavra_repetida_no_mesmo_enunciado_conta_uma_vez():
     assert termos["crase"] == 1
 
 
+def test_empate_sai_em_ordem_alfabetica_sem_olhar_acento():
+    """As empatadas saiam numa ordem que o Python sorteia a cada processo, e
+    no corte ate a palavra mostrada mudava. Agora o empate e alfabetico, sem
+    olhar acento: "época" entre "direito" e "zona", e nao no fim."""
+    termos = [t.palavra for t in macetes.termos_frequentes([
+        _questao(1, enunciado="Zona, direito e época na mesma questão."),
+        _questao(2, enunciado="Época, zona e direito outra vez."),
+    ])]
+
+    assert termos[:3] == ["direito", "época", "zona"]
+
+
 # --- a busca ----------------------------------------------------------------
 
 def test_busca_por_tema_livre_olha_o_enunciado(banco_temporario):
@@ -489,6 +501,7 @@ def test_quantas_questoes_de_cada_materia_caem_por_caderno():
 
     assert fatia.materia == "Lingua Portuguesa"
     assert fatia.por_caderno == 3
+    assert fatia.cadernos == 2            # a base da media
 
 
 def test_materia_que_nao_cai_em_todo_caderno_nao_e_diluida():
@@ -626,9 +639,11 @@ def test_o_numero_por_prova_acompanha_a_fatia():
     """A fatia e a participacao no total; o numero ao lado e quanto a materia
     cai por prova. Os dois nao andam juntos porque nem toda materia cai em
     todo cargo."""
-    fatias = macetes.fatias([("Portugues", 1000)], extras={"Portugues": 9.0})
+    fatias = macetes.fatias([("Portugues", 1000)], extras={"Portugues": 9.0},
+                            provas={"Portugues": 12})
 
     assert fatias[0].por_caderno == 9.0
+    assert fatias[0].provas == 12
 
 
 def test_a_tela_desenha_a_pizza(cliente):
@@ -642,6 +657,8 @@ def test_a_tela_desenha_a_pizza(cliente):
 
     assert "conic-gradient" in texto
     assert "legenda-pizza" in texto
+    # A media diz em quantas provas foi tirada (regra inviolavel 3).
+    assert "/prova em 3" in " ".join(texto.split())
 
 
 # --- so o complementar aceito (decisao 75) ------------------------------------
