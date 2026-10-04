@@ -284,9 +284,6 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 - 🟡 **O painel ficou ~1 s mais lento com o F1** (decisao 74): a tela Analises
   abre em ~3 s e a home em ~4 s. O custo e ler as ocorrencias do complementar
   (0,9 s) e o desempenho por no (0,5 s);
-- 🔴 **Os padroes de cobranca do complementar nunca sao calculados**: o
-  `entra_nos_padroes` da validacao so aparece nos relatorios, e a linha
-  complementar da incidencia mostra so a contagem;
 - 🟡 **33 variacoes geradas sem a questao real de base identificada** (F3,
   decisao 77): 30 do estoque de 03/10 e 3 de 27/09. A base delas tem um
   enunciado que se repete no acervo com alternativas diferentes, e elas foram

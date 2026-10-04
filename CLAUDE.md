@@ -129,7 +129,9 @@ subassunto e o elemento (decisao 71). Da secao F (o Pedido 1), feitos o F1 - o
 "Onde estudar primeiro" e a revisao espacada leem a arvore (decisao 74) - e o
 F2 - so o complementar aceito no costume da banca, no treino e no compilado
 (decisao 75) - e o F3 - a gerada guarda a chave da questao real de base
-(decisao 77), e o `--materia` aceita o nome sem acento.
+(decisao 77), e o `--materia` aceita o nome sem acento - e o F4 - os padroes de
+cobranca tambem do complementar, a parte e so com gabarito definitivo (decisao
+78).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 775 geradas (725 do estoque ate 07/11, os 57 lotes:
 `docs/estoque_de_geradas.md`; nas Regras de Mandela a fonte e a regra, decisao

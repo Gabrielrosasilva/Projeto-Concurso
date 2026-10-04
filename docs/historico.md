@@ -1965,3 +1965,13 @@ acento.
 passo 5 da migracao preenchendo as antigas onde nao ha duvida - 206 de 239; as
 33 ambiguas ficaram sem base, e a tela diz isso em vez de "escrita do zero". O
 filtro de materia passou a ignorar acento e caixa.
+
+## Os padroes de cobranca do complementar, F4 (03/10)
+
+**O que faltava:** a secao 13 pede padroes de cobranca com a amostra e a
+origem; so o alvo tinha os seus, e o complementar aparecia so como contagem.
+
+**O F4:** os mesmos padroes passaram a ser contados no complementar, so das
+provas com gabarito definitivo e em questao distinta, ao lado dos do alvo e
+nunca somados (decisao 78). Tipo de questao e pegadinha esperam a conferencia
+da classificacao do complementar. Em Portugues, 45 questoes em 22 provas.

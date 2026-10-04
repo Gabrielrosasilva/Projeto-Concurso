@@ -2883,6 +2883,24 @@ def _mostrar_ficha(f) -> None:
                 console.print("     termos frequentes: " + escape(", ".join(
                     t.palavra for t in padroes.termos)))
         item("acervo", f"{f.linha_complementar.frase} (linha separada, nunca somada à do alvo)")
+        complementares = f.padroes_complementares
+        item("acervo", f"Padrões no acervo complementar FEPESE: {complementares.amostra}")
+        if not complementares.suficiente:
+            console.print(f"     {complementares.frase}")
+        else:
+            if complementares.comandos:
+                console.print("     forma de perguntar: " + escape(", ".join(
+                    f"{c.nome} ({c.quantas})" for c in complementares.comandos)))
+            if complementares.gabarito:
+                console.print("     gabarito: " + escape(" · ".join(
+                    f"{letra}: {n}" for letra, n, _pct in complementares.gabarito)))
+            if complementares.termos:
+                console.print("     termos frequentes: " + escape(", ".join(
+                    t.palavra for t in complementares.termos)))
+            if complementares.tipos:
+                console.print("     tipo de questão: " + escape(", ".join(
+                    f"{t} ({n})" for t, n in complementares.tipos)))
+            console.print(f"     {escape(complementares.nota)}")
 
     titulo("Questões reais relacionadas")
     if f.questoes_reais:
@@ -3021,7 +3039,12 @@ def incidencia(
     minimos = regra.carregar_minimos()
     # A linha do acervo complementar anda ao lado da do alvo, e nunca somada
     # a ela (secao 4 do pedido).
-    complementares = servico.incidencia.linhas_complementares()
+    do_complementar = servico.incidencia.ocorrencias_complementares()
+    complementares = servico.incidencia.linhas_complementares(do_complementar)
+    # Os padroes do complementar: so das provas com gabarito definitivo, e a
+    # parte dos do alvo (decisao 78).
+    dos_padroes = (servico.incidencia.ocorrencias_dos_padroes(do_complementar)
+                   if padroes else [])
     for m in mapas:
         tabela = Table(title=f"{m.materia} — {m.topo.amostra} · {m.topo.rotulo}",
                        title_justify="left")
@@ -3060,6 +3083,28 @@ def incidencia(
             if abaixo:
                 console.print(f"   {abaixo} no(s) abaixo do minimo ({minimos.questoes} questoes "
                               f"em {minimos.provas} provas): {regra.FRASE_SEM_EVIDENCIA}")
+            abaixo = 0
+            for linha in m.linhas:
+                p = regra.padroes_complementares(linha.caminho, dos_padroes, minimos)
+                if not p.suficiente:
+                    abaixo += 1
+                    continue
+                console.print(f"   [bold]{escape(linha.nome)}[/] (complementar): "
+                              f"{escape(p.amostra)}")
+                if p.comandos:
+                    console.print("     comando: " + escape(", ".join(
+                        f"{c.nome} ({c.quantas})" for c in p.comandos)))
+                if p.gabarito:
+                    console.print("     gabarito: " + escape(" · ".join(
+                        f"{letra}: {n}" for letra, n, _pct in p.gabarito)))
+                if p.termos:
+                    console.print("     termos: " + escape(", ".join(t.palavra for t in p.termos)))
+                if p.tipos:
+                    console.print("     tipo: " + escape(", ".join(f"{t} ({n})" for t, n in p.tipos)))
+                console.print(f"     [dim]{escape(p.nota)}[/]")
+            if abaixo:
+                console.print(f"   complementar: {abaixo} no(s) abaixo do minimo: "
+                              f"{regra.FRASE_SEM_EVIDENCIA}")
         console.print()
 
 

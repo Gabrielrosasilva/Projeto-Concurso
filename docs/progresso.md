@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1, F2 e F3 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave e a matéria sem acento); falta o resto da seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1, F2, F3 e F4 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento e os padrões do complementar); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 
 ---
@@ -2263,3 +2263,37 @@ incidencia --materia "lei de execucao penal"` mostra a LEP.
 | Suíte inteira, 1ª rodada | 2439 passed, 1 failed (a varredura das telas proíbe "com certeza", e a frase nova dizia "não identifica com certeza"; passou a "não consegue identificar") |
 | `test_varredura_das_telas.py` e `test_gerador.py`, com a frase nova | 53 passed |
 | Suíte inteira, 2ª rodada | **2440 passed** (2430 de antes + 10 novos), 0 failed, 25 min |
+
+### F4 — os padrões de cobrança do acervo complementar ✅
+
+**O que mudou** (decisão 78):
+- `src/radar/incidencia.py`: os padrões do complementar
+  (`padroes_complementares`, e `padroes_complementares_do_escopo` para a
+  ficha), com as regras da linha complementar, em questão distinta, e o tipo e
+  a pegadinha só da classificação conferida (a `nota` diz isso);
+- `src/radar/servico/complementar.py`: `provas_dos_padroes`, as aceitas com
+  gabarito definitivo; `src/radar/servico/incidencia.py`:
+  `ocorrencias_dos_padroes` e `padroes_complementares`, e a leitura do
+  complementar passa a ser feita uma vez por tela;
+- a tela de Incidência (`app.py` e `incidencia.html`): o bloco de padrões da
+  matéria tem dois blocos, Polícia Penal SC e Acervo complementar FEPESE;
+- a ficha (`fichas.py`, `servico/fichas.py`, `ficha.html`) e o terminal
+  (`radar incidencia --padroes`, `radar fichas`): os padrões do complementar
+  ao lado dos do alvo.
+
+**Com o banco real:** 22 das 122 provas aceitas têm gabarito definitivo (940
+questões). Português: 45 questões em 22 provas, gabarito a 8 · b 10 · c 10 ·
+d 9 · e 8; Interpretação, 12 questões em 3 provas. Nenhuma classificação do
+complementar foi conferida, então o tipo e a pegadinha não aparecem, e a nota
+diz isso. A página de Incidência leva 1,25 s (a leitura do complementar era
+feita duas vezes; com uma, caiu de 2,1 s).
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_incidencia.py` (7 novos: questão distinta e origem, só a classificação conferida, a regra abaixo da matéria, a frase abaixo do mínimo, só o gabarito definitivo, o alvo intacto, a página e o terminal) | 17 passed |
+| `test_fichas.py` (1 novo), `test_origem.py`, `test_complementar.py` | 146 passed |
+| `test_aceite.py` e `test_varredura_das_telas.py` | 29 passed |
+| `test_incidencia.py`, `test_fichas.py`, `test_complementar.py`, depois da leitura única | 127 passed |
+| Suíte inteira, PC (uma vez) | **2448 passed** (2440 de antes + 8 novos), 0 failed, 25 min |

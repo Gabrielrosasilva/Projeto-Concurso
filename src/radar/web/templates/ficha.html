@@ -134,6 +134,21 @@
         </ul>
       {% endif %}
       <p>{{ s(f.origens.linha_complementar) }} {{ f.linha_complementar.frase }} <span class="ds-suave">(linha separada: as duas nunca se somam)</span></p>
+      {# Os padroes do complementar: so das provas com gabarito definitivo, e a
+         parte dos do alvo (decisao 78). #}
+      {% set pc = f.padroes_complementares %}
+      <p>{{ s(f.origens.padroes_complementares) }} <b>Padrões no acervo complementar FEPESE:</b> <span class="ds-suave">{{ pc.amostra }}</span></p>
+      {% if not pc.suficiente %}
+        <p class="frase-padrao">{{ pc.frase }}</p>
+      {% else %}
+        <ul class="marcas">
+          {% if pc.tipos %}<li>Tipo de questão: {% for t, n in pc.tipos %}{{ t }} ({{ n }}){% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+          {% if pc.comandos %}<li>Forma de perguntar: {% for c in pc.comandos %}{{ c.nome }} ({{ c.quantas }}){% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+          {% if pc.gabarito %}<li>Gabarito: {% for letra, n, pct in pc.gabarito %}{{ letra }}: {{ n }}{% if not loop.last %} · {% endif %}{% endfor %}</li>{% endif %}
+          {% if pc.termos %}<li>Termos frequentes: {% for t in pc.termos %}{{ t.palavra }}{% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+        </ul>
+        <p class="ds-suave">{{ pc.nota }}</p>
+      {% endif %}
     {% endif %}
   </section>
 

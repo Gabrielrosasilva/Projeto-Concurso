@@ -192,3 +192,121 @@ def test_a_pagina_e_o_terminal_mostram_a_amostra_e_nao_preveem(alvo):
     assert "2 questões · 2 provas" in saida.output
     assert "Não há evidência suficiente no acervo para afirmar isso." in saida.output
     assert not PREVISAO.search(saida.output)
+
+
+# --- os padroes do acervo complementar (F4, decisao 78) -----------------------------
+
+COMPLEMENTARES = [
+    _oc("2021", MENORIDADE, impressao="x1",
+        enunciado="Analise as afirmativas abaixo sobre a menoridade penal."),
+    # A mesma questao em outro caderno: uma questao so.
+    _oc("2022", MENORIDADE, impressao="x1",
+        enunciado="Analise as afirmativas abaixo sobre a menoridade penal."),
+    _oc("2022", MENORIDADE, impressao="x2", resposta="b"),
+    _oc("2023", MENORIDADE, impressao="x3", resposta="c", tipo_de_questao="conceito",
+        pegadinha="troca a idade da maioridade"),
+]
+
+
+def test_os_padroes_do_complementar_contam_questao_distinta_e_dizem_a_origem():
+    p = incidencia.padroes_complementares(MENORIDADE, COMPLEMENTARES, incidencia.Minimos())
+
+    assert p.suficiente
+    assert p.amostra == ("padrão identificado no acervo analisado: 3 questões · 3 provas · "
+                         "acervo complementar FEPESE, só das provas com gabarito definitivo")
+    # A questao repetida entra uma vez so no gabarito.
+    assert sum(n for _, n, _ in p.gabarito) == 3
+    assert not PREVISAO.search(p.amostra + p.nota)
+
+
+def test_tipo_e_pegadinha_do_complementar_so_da_classificacao_conferida():
+    """A classificacao do complementar e automatica e ninguem a conferiu:
+    texto que ninguem conferiu nao vira padrao do acervo."""
+    sem_conferir = incidencia.padroes_complementares(
+        MENORIDADE, COMPLEMENTARES, incidencia.Minimos())
+    assert (sem_conferir.tipos, sem_conferir.pegadinhas) == ([], [])
+    assert "nenhuma questão deste conteúdo foi conferida ainda" in sem_conferir.nota
+
+    conferida = COMPLEMENTARES[:3] + [
+        _oc("2023", MENORIDADE, impressao="x3", resposta="c", tipo_de_questao="conceito",
+            pegadinha="troca a idade da maioridade", conferida=True)]
+    com = incidencia.padroes_complementares(MENORIDADE, conferida, incidencia.Minimos())
+    assert com.tipos == [("conceito", 1)]
+    assert com.pegadinhas == ["troca a idade da maioridade"]
+    assert "só da 1 questão com classificação conferida (de 3)" in com.nota
+
+
+def test_abaixo_da_materia_o_padrao_do_complementar_so_conta_a_classificada():
+    """Na materia conta a questao que o caderno poe nela; abaixo, so a
+    classificada - as mesmas regras da linha complementar."""
+    ocorrencias = COMPLEMENTARES + [_oc("2024", MENORIDADE, status="pendente", impressao="x4")]
+
+    no_subassunto = incidencia.padroes_complementares(MENORIDADE, ocorrencias,
+                                                      incidencia.Minimos())
+    na_materia = incidencia.padroes_complementares("Direito Penal", ocorrencias,
+                                                   incidencia.Minimos())
+
+    assert "3 questões · 3 provas" in no_subassunto.amostra
+    assert "4 questões · 4 provas" in na_materia.amostra
+
+
+def test_abaixo_do_minimo_o_padrao_do_complementar_diz_a_frase_exata():
+    # A mesma questao em dois cadernos: 1 questao, abaixo do minimo de 3.
+    p = incidencia.padroes_complementares(MENORIDADE, COMPLEMENTARES[:2], incidencia.Minimos())
+
+    assert not p.suficiente
+    assert p.frase == "Não há evidência suficiente no acervo para afirmar isso."
+
+
+def _complementares_no_banco(*provas_e_padrao):
+    """Grava uma questao por prova complementar e o registro da 3B."""
+    import json
+
+    from radar.servico import complementar
+
+    with sessao() as s:
+        for numero, (url, _) in enumerate(provas_e_padrao, start=1):
+            s.add(QuestaoDeProva(
+                prova_url=url, banca="FEPESE", ano=2024, numero=numero,
+                materia="Direito Penal", enunciado=f"Questão complementar {numero}?",
+                alternativas={"a": "x", "b": "y"}, resposta="a",
+                impressao=f"comp{numero}", evidencia="complementar"))
+    complementar.caminho_do_registro().write_text(json.dumps({"provas": [
+        {"prova_url": url, "aceita": True, "entra_nos_padroes": padrao}
+        for url, padrao in provas_e_padrao]}), encoding="utf-8")
+
+
+def test_so_as_provas_com_gabarito_definitivo_entram_nos_padroes(alvo):
+    """A 3B: o gabarito provisorio serve para classificar, mas o padrao se mede
+    sobre a letra certa, que muda depois dos recursos."""
+    _complementares_no_banco(("https://fepese.test/definitivo.pdf", True),
+                             ("https://fepese.test/provisorio.pdf", False))
+
+    provas = {o.prova for o in servico_da_incidencia.ocorrencias_dos_padroes()}
+
+    assert provas == {"https://fepese.test/definitivo.pdf"}
+
+
+def test_prova_complementar_nova_nao_muda_os_padroes_do_alvo(alvo):
+    """Secao 4: os numeros do alvo nao mudam quando entra prova complementar."""
+    minimos = incidencia.carregar_minimos()
+    antes = {l.caminho: incidencia.padroes(l, minimos)
+             for m in servico_da_incidencia.mapa() for l in m.linhas}
+
+    _complementares_no_banco(*((f"https://fepese.test/c{n}.pdf", True) for n in range(4)))
+
+    depois = {l.caminho: incidencia.padroes(l, minimos)
+              for m in servico_da_incidencia.mapa() for l in m.linhas}
+    assert depois == antes
+
+
+def test_a_pagina_e_o_terminal_mostram_os_padroes_do_complementar_a_parte(alvo):
+    texto = TestClient(app).get("/analises/incidencia").text
+    assert "Acervo complementar FEPESE" in texto
+    assert "acervo complementar FEPESE, só das provas com gabarito definitivo" in texto
+    assert "Os dois blocos nunca se somam" in texto
+    assert not PREVISAO.search(texto)
+
+    saida = CliRunner().invoke(cli, ["incidencia", "--padroes"], env={"COLUMNS": "200"})
+    assert saida.exit_code == 0, saida.output
+    assert "complementar:" in saida.output

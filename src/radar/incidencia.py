@@ -13,6 +13,8 @@ Ficam FORA da conta, e aparecem a parte com o numero:
 - a questao pendente (sem classificacao segura nao ha no onde contar).
 
 O complementar nao entra aqui: este mapa e so do alvo (regra inviolavel 1).
+A linha e os padroes do complementar tem funcoes proprias, mais abaixo, e
+nunca se somam aos do alvo (decisao 78).
 """
 from collections import Counter
 from dataclasses import dataclass, field
@@ -259,6 +261,9 @@ class Padroes:
     termos: list = field(default_factory=list)
     tipos: list = field(default_factory=list)
     pegadinhas: list[str] = field(default_factory=list)
+    #: O que a tela precisa saber da classificacao por tras do tipo de questao
+    #: e das pegadinhas. Vazio no alvo, que foi todo conferido (02/10).
+    nota: str = ""
 
 
 def padroes(linha: LinhaDoMapa, minimos: Minimos) -> Padroes:
@@ -280,4 +285,84 @@ def padroes(linha: LinhaDoMapa, minimos: Minimos) -> Padroes:
         termos=macetes.termos_frequentes(unicas, 8),
         tipos=linha.tipos,
         pegadinhas=[o.pegadinha for o in questoes if o.pegadinha],
+    )
+
+
+# --- os padroes do acervo complementar (secao 13: a origem dita) -----------------
+#
+# "Todo padrao deve indicar em quantas questoes e em quantas provas ele foi
+# observado, e se veio do concurso-alvo ou do acervo complementar." Os padroes
+# do complementar sao os MESMOS do alvo, contados a parte e nunca somados. Quem
+# chama passa so as questoes das provas com gabarito DEFINITIVO (o
+# `entra_nos_padroes` da validacao da Etapa 3B): padrao de cobranca se mede
+# sobre a letra certa, e o gabarito provisorio muda depois dos recursos.
+
+def padroes_complementares(caminho: str, ocorrencias: list[Ocorrencia],
+                           minimos: Minimos) -> Padroes:
+    """Os padroes de um no no acervo complementar FEPESE.
+
+    As mesmas regras da linha complementar do no: na materia conta a questao
+    que o caderno poe nela, mesmo sem classificar; abaixo da materia, so a
+    classificada.
+    """
+    na_materia = len(arvore.partes(caminho)) == 1
+    return _padroes_do_complementar(
+        [o for o in ocorrencias
+         if not o.anulada and _debaixo(o.conteudo, caminho)
+         and (na_materia or o.status != "pendente")],
+        minimos)
+
+
+def padroes_complementares_do_escopo(dentro, ocorrencias: list[Ocorrencia],
+                                     minimos: Minimos) -> Padroes:
+    """Os mesmos padroes para o escopo de uma ficha (uma lista de nos): so a
+    questao classificada, como no `complementar_do_escopo`."""
+    return _padroes_do_complementar(
+        [o for o in ocorrencias
+         if not o.anulada and o.conteudo and o.status != "pendente"
+         and dentro(o.conteudo)],
+        minimos)
+
+
+def _padroes_do_complementar(contam: list[Ocorrencia], minimos: Minimos) -> Padroes:
+    """A conta e em questao DISTINTA, pela chave: a FEPESE repete o mesmo
+    caderno em dezenas de cargos, e contar a repeticao inflaria o acervo e
+    puxaria o gabarito para a letra da questao repetida.
+
+    Forma de perguntar, gabarito e termos saem do texto do caderno e do
+    gabarito oficial. Tipo de questao e pegadinha saem da CLASSIFICACAO, e so
+    da conferida: a do complementar e automatica e ainda nao foi conferida
+    (decisao 78), e texto que ninguem conferiu nao vira padrao do acervo.
+    """
+    from radar import macetes
+
+    unicas = macetes.uma_por_enunciado(contam)
+    provas = len({o.prova for o in contam})
+    texto_da_amostra = (f"padrão identificado no acervo analisado: "
+                        f"{amostra(len(unicas), provas)} · acervo complementar FEPESE, "
+                        f"só das provas com gabarito definitivo")
+    if len(unicas) < minimos.questoes or provas < minimos.provas:
+        return Padroes(suficiente=False, amostra=texto_da_amostra, frase=FRASE_SEM_EVIDENCIA)
+
+    conferidas = [o for o in unicas if o.conferida]
+    classificadas = sum(1 for o in unicas if o.status != "pendente")
+    if conferidas:
+        quantas = (f"da {len(conferidas)} questão" if len(conferidas) == 1
+                   else f"das {len(conferidas)} questões")
+        nota = (f"Tipo de questão e pegadinhas: só {quantas} com classificação "
+                f"conferida (de {len(unicas)}).")
+    else:
+        nota = (f"Tipo de questão e pegadinhas: só da classificação conferida, e "
+                f"nenhuma questão deste conteúdo foi conferida ainda "
+                f"({classificadas} de {len(unicas)} classificadas automaticamente).")
+    gabarito, _ = macetes.distribuicao_do_gabarito(unicas)
+    return Padroes(
+        suficiente=True, amostra=texto_da_amostra,
+        comandos=macetes.contar_comandos(unicas),
+        gabarito=gabarito,
+        termos=macetes.termos_frequentes(unicas, 8),
+        tipos=Counter(o.tipo_de_questao for o in conferidas
+                      if o.tipo_de_questao).most_common(),
+        pegadinhas=[o.pegadinha for o in conferidas if o.pegadinha],
+        nota=nota,
     )

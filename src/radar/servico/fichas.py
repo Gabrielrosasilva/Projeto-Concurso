@@ -100,6 +100,7 @@ def arvore_das_faixas(blocos, escritas: list[fichas.FichaEscrita] | None = None)
 def contexto(hoje: date | None = None, plano=None,
              escritas: list[fichas.FichaEscrita] | None = None) -> fichas.Contexto:
     """Tudo o que as fichas precisam, contado uma vez so."""
+    from radar.servico import complementar as servico_complementar
     from radar.servico import conteudos as servico_conteudos
     from radar.servico import cronograma as diario
     from radar.servico import desempenho_por_conteudo as por_conteudo
@@ -143,6 +144,7 @@ def contexto(hoje: date | None = None, plano=None,
         dia_montado=dia_montado,
         refazer=lambda dentro: estudo.refazer_do_escopo(dentro, hoje),
         escritas=carregar() if escritas is None else escritas,
+        provas_dos_padroes=servico_complementar.provas_dos_padroes(),
     )
 
 

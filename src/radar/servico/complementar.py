@@ -235,6 +235,14 @@ def provas_aceitas() -> set[str]:
     return {url for url, r in carregar_registro().items() if r.get("aceita")}
 
 
+def provas_dos_padroes() -> set[str]:
+    """Os cadernos que entram nos padroes de cobranca: os aceitos com gabarito
+    DEFINITIVO (`entra_nos_padroes`). O provisorio serve para classificar, mas
+    muda depois dos recursos, e o padrao se mede sobre a letra certa."""
+    return {url for url, r in carregar_registro().items()
+            if r.get("aceita") and r.get("entra_nos_padroes")}
+
+
 # --- o relatorio ------------------------------------------------------------
 
 def _tabela_das_materias(por_materia) -> list[str]:

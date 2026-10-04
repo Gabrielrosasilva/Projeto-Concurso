@@ -3482,3 +3482,23 @@ mede (7A); commit e push por subetapa (8A).
       nao foi.
     No banco de 03/10: 206 das 239 variacoes ganharam a chave; 33 ficaram sem
     (30 do estoque de 03/10, 3 de 27/09).
+
+78. **os padroes de cobranca tambem do acervo complementar, a parte e so com
+    gabarito definitivo** (F4). A secao 13 pede que todo padrao diga em
+    quantas questoes e em quantas provas foi observado, e se veio do alvo ou do
+    complementar; ate aqui os padroes so eram calculados para o alvo, e o
+    `entra_nos_padroes` da 3B so aparecia nos relatorios. Agora:
+    - os mesmos padroes (forma de perguntar, gabarito, termos) sao contados no
+      complementar, so das provas aceitas com gabarito DEFINITIVO - o
+      provisorio muda depois dos recursos, e o padrao se mede sobre a letra
+      certa - e em questao distinta, pela chave;
+    - dentro de um no, as regras da linha complementar: na materia conta a
+      questao que o caderno poe nela; abaixo, so a classificada;
+    - tipo de questao e pegadinha saem so da classificacao CONFERIDA. A do
+      complementar e automatica e ninguem a conferiu ainda (B.8), entao hoje
+      nao aparecem, e a tela diz por que;
+    - aparecem na Incidencia (o bloco da materia), na ficha e no terminal,
+      ao lado dos do alvo, com a amostra "· acervo complementar FEPESE", e
+      nunca somados.
+    No banco de 03/10: 22 das 122 provas aceitas tem gabarito definitivo (940
+    questoes); em Portugues, 45 questoes em 22 provas.

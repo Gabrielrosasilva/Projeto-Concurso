@@ -117,6 +117,32 @@ def ocorrencias_complementares() -> list[incidencia.Ocorrencia]:
     return resultado
 
 
-def linhas_complementares() -> dict:
-    """{caminho do no: LinhaComplementar}. Nunca somada a do alvo."""
-    return incidencia.complementar_por_no(conteudos.nos(), ocorrencias_complementares())
+def linhas_complementares(ocorrencias: list | None = None) -> dict:
+    """{caminho do no: LinhaComplementar}. Nunca somada a do alvo.
+
+    `ocorrencias` e para quem ja leu o complementar (a leitura e a parte cara
+    da tela) nao ler de novo."""
+    if ocorrencias is None:
+        ocorrencias = ocorrencias_complementares()
+    return incidencia.complementar_por_no(conteudos.nos(), ocorrencias)
+
+
+def ocorrencias_dos_padroes(ocorrencias: list | None = None) -> list[incidencia.Ocorrencia]:
+    """As ocorrencias complementares que entram nos padroes de cobranca: so as
+    das provas aceitas com gabarito DEFINITIVO (Etapa 3B, decisao 78)."""
+    from radar.servico import complementar as acervo
+
+    das_provas = acervo.provas_dos_padroes()
+    if ocorrencias is None:
+        ocorrencias = ocorrencias_complementares()
+    return [o for o in ocorrencias if o.prova in das_provas]
+
+
+def padroes_complementares(mapas: list[incidencia.MapaDaMateria],
+                           minimos: incidencia.Minimos,
+                           ocorrencias: list | None = None) -> dict:
+    """{caminho do no: Padroes} do acervo complementar, para as linhas dos
+    mapas pedidos. Separados dos do alvo, e nunca somados a eles."""
+    dos_padroes = ocorrencias_dos_padroes(ocorrencias)
+    return {l.caminho: incidencia.padroes_complementares(l.caminho, dos_padroes, minimos)
+            for m in mapas for l in m.linhas}

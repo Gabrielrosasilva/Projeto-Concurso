@@ -1081,7 +1081,10 @@ nas provas analisadas"). Anuladas e pendentes ficam fora da conta e aparecem a
 parte. Os padroes de cobranca (forma de perguntar, gabarito, termos, tipo de
 questao, pegadinhas) so aparecem com a amostra minima do `config/amostra.yml`;
 abaixo dela, a tela diz "Nao ha evidencia suficiente no acervo para afirmar
-isso."
+isso." Os mesmos padroes aparecem, num bloco a parte e nunca somados, para o
+acervo complementar FEPESE: so das provas com gabarito definitivo, em questao
+distinta, e com o tipo de questao e as pegadinhas so da classificacao ja
+conferida (decisao 78).
 
 **O acervo complementar FEPESE (Etapa 3B).** `radar complementar` consulta o
 que ja esta no banco e escreve `docs/complementar.md`: por materia do meu

@@ -83,6 +83,7 @@ ORIGEM_DO_CAMPO = {
     "como_pesquisar": IA, "entender": IA, "memorizar": IA,
     "pegadinhas_do_acervo": ACERVO, "pegadinhas_escritas": IA,
     "padroes_do_alvo": ACERVO, "linha_complementar": ACERVO,
+    "padroes_complementares": ACERVO,
     "questoes_reais": ACERVO,
     "meta_de_questoes": PLANO,
     "quando_revisar": AUTOMATICO, "refazer": AUTOMATICO,
@@ -572,6 +573,9 @@ class Contexto:
     #: dentro -> estudo.Refazer (as erradas no radar e o caderno do escopo).
     refazer: object
     escritas: list = field(default_factory=list)
+    #: Os cadernos complementares que entram nos padroes de cobranca: os
+    #: aceitos com gabarito definitivo (decisao 78). Vazio, nenhum entra.
+    provas_dos_padroes: set = field(default_factory=set)
 
 
 @dataclass
@@ -604,6 +608,8 @@ class FichaDeEstudo:
     linha_do_alvo: object
     padroes_do_alvo: object
     linha_complementar: object
+    #: Os mesmos padroes no acervo complementar, a parte e nunca somados.
+    padroes_complementares: object
     questoes_reais: list
     meta_de_questoes: list
     quando_revisar: list
@@ -905,6 +911,10 @@ def montar(escrita: FichaEscrita, ctx: Contexto, data: date | None = None,
     padroes = incidencia.padroes(linha_do_alvo, ctx.minimos_acervo)
     complementar = incidencia.complementar_do_escopo(
         escrita.id, dentro, ctx.ocorrencias_complementares)
+    padroes_complementares = incidencia.padroes_complementares_do_escopo(
+        dentro, [o for o in ctx.ocorrencias_complementares
+                 if o.prova in ctx.provas_dos_padroes],
+        ctx.minimos_acervo)
     reais = _questoes_reais(dentro, ctx)
     desempenho, estado = _desempenho(escrita, dentro, ctx)
     prioridade = prioridade or prioridade_de(escrita, ctx)
@@ -933,6 +943,7 @@ def montar(escrita: FichaEscrita, ctx: Contexto, data: date | None = None,
         pegadinhas_escritas=list(escrita.pegadinhas),
         linha_do_alvo=linha_do_alvo, padroes_do_alvo=padroes,
         linha_complementar=complementar,
+        padroes_complementares=padroes_complementares,
         questoes_reais=reais,
         meta_de_questoes=_praticas(faixas, ctx),
         quando_revisar=motivos_de_revisao, revisoes_do_plano=revisoes,

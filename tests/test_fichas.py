@@ -266,6 +266,26 @@ def test_prova_complementar_nova_nao_muda_nada_do_alvo():
     assert depois.linha_complementar.questoes > antes.linha_complementar.questoes
 
 
+def test_os_padroes_do_complementar_so_com_gabarito_definitivo_e_a_parte():
+    """F4 (decisao 78): os mesmos padroes do alvo, contados no complementar,
+    so das provas com gabarito definitivo - e nunca somados aos do alvo."""
+    nova = COMPLEMENTAR + [_oc(f"pref{n}", 2025, n, INTIMIDADE, conferida=False)
+                           for n in range(3)]
+
+    sem = _montar(ocorrencias_complementares=nova)
+    assert not sem.padroes_complementares.suficiente
+    assert sem.padroes_complementares.frase == fichas.FRASE_SEM_EVIDENCIA
+
+    com = _montar(ocorrencias_complementares=nova,
+                  provas_dos_padroes={"am2024", "pref0", "pref1", "pref2"})
+    p = com.padroes_complementares
+    assert p.suficiente
+    assert "4 questões · 4 provas · acervo complementar FEPESE" in p.amostra
+    # Classificacao sem conferir: nem tipo nem pegadinha viram padrao.
+    assert (p.tipos, p.pegadinhas) == ([], [])
+    assert com.padroes_do_alvo == sem.padroes_do_alvo
+
+
 def test_as_questoes_reais_alvo_primeiro_sem_anulada_nem_pendente():
     ficha = _montar()
     codigos = [(q.codigo, q.evidencia) for q in ficha.questoes_reais]

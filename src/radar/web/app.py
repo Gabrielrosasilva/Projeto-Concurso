@@ -1470,15 +1470,22 @@ def analises_incidencia(request: Request, materia: str = ""):
 
     mapas = servico.incidencia.mapa(materia or None)
     minimos = regra.carregar_minimos()
+    # Lido uma vez so: a linha e os padroes do complementar saem da mesma
+    # leitura, que e a parte cara desta tela.
+    do_complementar = servico.incidencia.ocorrencias_complementares()
     return templates.TemplateResponse(
         request=request, name="incidencia.html",
         context={
             "mapas": mapas, "materia": materia, "minimos": minimos,
             # A linha do acervo complementar, SEMPRE separada da do alvo.
-            "complementar": servico.incidencia.linhas_complementares(),
+            "complementar": servico.incidencia.linhas_complementares(do_complementar),
             "padroes": {l.caminho: regra.padroes(l, minimos)
                         for m in mapas for l in m.linhas},
-            "todas": [m.materia for m in servico.incidencia.mapa()] if materia else
+            # Os do acervo complementar, so das provas com gabarito
+            # definitivo, ao lado dos do alvo e nunca somados (decisao 78).
+            "padroes_complementares": servico.incidencia.padroes_complementares(
+                mapas, minimos, do_complementar),
+            "todas":[m.materia for m in servico.incidencia.mapa()] if materia else
                      [m.materia for m in mapas],
         },
     )

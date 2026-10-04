@@ -91,21 +91,27 @@
           </tbody>
         </table>
       </div>
-      {% set p = padroes[m.materia] %}
       <details class="padroes">
         <summary>Padrões de cobrança da matéria</summary>
-        <p class="ds-suave">{{ p.amostra }}</p>
-        {% if not p.suficiente %}
-          <p>{{ p.frase }}</p>
-        {% else %}
-          <dl>
-            {% if p.tipos %}<dt>Tipo de questão</dt><dd>{% for t, n in p.tipos %}{{ t }} ({{ n }}){% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
-            {% if p.comandos %}<dt>Forma de perguntar</dt><dd>{% for c in p.comandos %}{{ c.nome }} ({{ c.quantas }}){% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
-            {% if p.gabarito %}<dt>Gabarito</dt><dd>{% for letra, n, pct in p.gabarito %}{{ letra }}: {{ n }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>{% endif %}
-            {% if p.termos %}<dt>Termos frequentes</dt><dd>{% for t in p.termos %}{{ t.palavra }}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
-            {% if p.pegadinhas %}<dt>Pegadinhas apontadas</dt><dd><ul>{% for x in p.pegadinhas %}<li>{{ x }}</li>{% endfor %}</ul></dd>{% endif %}
-          </dl>
-        {% endif %}
+        {# Dois blocos, um por evidencia, e nunca somados (secao 4 e 13). #}
+        {% for rotulo_do_bloco, p in [('Polícia Penal SC', padroes[m.materia]),
+                                      ('Acervo complementar FEPESE', padroes_complementares[m.materia])] %}
+          <h3 class="ds-cartao__titulo">{{ rotulo_do_bloco }}</h3>
+          <p class="ds-suave">{{ p.amostra }}</p>
+          {% if not p.suficiente %}
+            <p>{{ p.frase }}</p>
+          {% else %}
+            <dl>
+              {% if p.tipos %}<dt>Tipo de questão</dt><dd>{% for t, n in p.tipos %}{{ t }} ({{ n }}){% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+              {% if p.comandos %}<dt>Forma de perguntar</dt><dd>{% for c in p.comandos %}{{ c.nome }} ({{ c.quantas }}){% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+              {% if p.gabarito %}<dt>Gabarito</dt><dd>{% for letra, n, pct in p.gabarito %}{{ letra }}: {{ n }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>{% endif %}
+              {% if p.termos %}<dt>Termos frequentes</dt><dd>{% for t in p.termos %}{{ t.palavra }}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+              {% if p.pegadinhas %}<dt>Pegadinhas apontadas</dt><dd><ul>{% for x in p.pegadinhas %}<li>{{ x }}</li>{% endfor %}</ul></dd>{% endif %}
+            </dl>
+            {% if p.nota %}<p class="ds-suave">{{ p.nota }}</p>{% endif %}
+          {% endif %}
+        {% endfor %}
+        <p class="ds-suave">Os dois blocos nunca se somam: cada um diz de que provas veio.</p>
       </details>
     </section>
   {% else %}
