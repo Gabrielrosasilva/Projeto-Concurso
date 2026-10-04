@@ -26,6 +26,7 @@ import logging
 import re
 import unicodedata
 from dataclasses import dataclass, field
+from functools import cache
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -90,6 +91,10 @@ def _sem_acento(texto: str) -> str:
     return "".join(c for c in normal if not unicodedata.combining(c))
 
 
+# Guardada em memoria: o mesmo texto da sempre a mesma impressao, e uma pagina
+# do painel tira a chave das ~5 mil questoes do complementar - refazer a conta
+# custava ~1 s por abertura. O que fica guardado e o acervo, que cabe folgado.
+@cache
 def impressao_de(enunciado: str) -> str:
     """Hash do enunciado, para achar questao repetida entre provas.
 

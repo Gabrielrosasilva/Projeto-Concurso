@@ -585,3 +585,11 @@ def test_etapa_sem_nome_ou_sem_foco_e_recusada(tmp_path, campo, erro):
     del mapa[0][campo]
     with pytest.raises(cronograma.ErroNoCronograma, match=erro):
         cronograma.carregar(_com_mapa(tmp_path, mapa))
+
+
+def test_o_leitor_rapido_le_o_plano_igual_ao_leitor_em_python():
+    """O cronograma e lido com a libyaml quando ela existe (F6): o resultado
+    tem de ser o mesmo do leitor em Python."""
+    texto = MINI.read_text(encoding="utf-8")
+
+    assert yaml.load(texto, Loader=cronograma.LEITOR_DO_YAML) == yaml.safe_load(texto)

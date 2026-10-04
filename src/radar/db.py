@@ -23,6 +23,10 @@ _Sessao: sessionmaker[Session] | None = None
 # vez so: `criar_tabelas` e chamado a cada consulta, e os proprios passos da
 # migracao o chamam de novo.
 _versao_conferida = False
+# Se as tabelas e as colunas ja foram conferidas nesta conexao, pelo mesmo
+# motivo: uma pagina do painel chama `criar_tabelas` umas 40 vezes, e olhar as
+# colunas de todas as tabelas a cada vez custava ~0,3 s por abertura.
+_esquema_conferido = False
 
 
 def _registrar_sem_acento(engine: Engine) -> None:
@@ -67,12 +71,13 @@ def get_engine() -> Engine:
 
 def resetar_engine() -> None:
     """Descarta a conexao atual. Usado pelos testes entre um caso e outro."""
-    global _engine, _Sessao, _versao_conferida
+    global _engine, _Sessao, _versao_conferida, _esquema_conferido
     if _engine is not None:
         _engine.dispose()
     _engine = None
     _Sessao = None
     _versao_conferida = False
+    _esquema_conferido = False
 
 
 def criar_tabelas() -> None:
@@ -83,15 +88,18 @@ def criar_tabelas() -> None:
     Lembrar de rodar um comando depois do `git pull` nao pode ser requisito
     para o radar funcionar - o mesmo motivo das colunas novas, abaixo.
     """
-    global _versao_conferida
+    global _versao_conferida, _esquema_conferido
     engine = get_engine()
     if not _versao_conferida:
         # Marcado ANTES de migrar: os passos da migracao chamam esta funcao.
         _versao_conferida = True
         from radar import migracoes
         migracoes.preparar(engine)
+    if _esquema_conferido:
+        return
     Base.metadata.create_all(engine)
     _adicionar_colunas_novas(engine)
+    _esquema_conferido = True
 
 
 def _adicionar_colunas_novas(engine: Engine) -> None:

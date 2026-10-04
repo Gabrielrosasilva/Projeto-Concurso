@@ -11,7 +11,7 @@ coluna sozinho. Lembrar de apagar arquivo na mao nao pode ser requisito.
 from sqlalchemy import inspect, text
 
 from radar import servico
-from radar.db import criar_tabelas, get_engine, sessao
+from radar.db import criar_tabelas, get_engine, resetar_engine, sessao
 from radar.models import Concurso
 
 # A tabela como ela era na fase 1: sem tipo, sem relevancia, sem salario.
@@ -41,6 +41,10 @@ def _criar_banco_antigo():
                 "'edital_publicado')"
             )
         )
+    # O banco antigo chega num processo NOVO (o radar depois do `git pull`),
+    # e a conexao nova e que confere as colunas: a mesma conexao ja as deu por
+    # conferidas, e nao olha de novo a cada consulta.
+    resetar_engine()
 
 
 def test_colunas_novas_sao_criadas_sozinhas(banco_temporario):
@@ -92,3 +96,23 @@ def test_reclassificar_conserta_o_registro_antigo(banco_temporario):
     assert concurso.relevancia == "nucleo"        # Palhoca e Grande Floripa
     assert concurso.municipio == "Palhoça"
     assert "Palhoça" in concurso.motivo_relevancia
+
+
+def test_a_mesma_conexao_confere_as_colunas_uma_vez_so(banco_temporario, monkeypatch):
+    """Uma pagina chama `criar_tabelas` dezenas de vezes: as colunas sao
+    conferidas na primeira, e de novo so numa conexao nova (F6)."""
+    from radar import db
+
+    vezes = []
+    original = db._adicionar_colunas_novas
+    monkeypatch.setattr(db, "_adicionar_colunas_novas",
+                        lambda engine: vezes.append(1) or original(engine))
+
+    criar_tabelas()
+    criar_tabelas()
+    assert vezes == []                  # o `banco_temporario` ja conferiu
+
+    resetar_engine()
+    criar_tabelas()
+    criar_tabelas()
+    assert vezes == [1]

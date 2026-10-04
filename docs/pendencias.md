@@ -242,7 +242,7 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 - 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A, a 2B e a 2C estao
   feitas (as faixas que medem, o simulado do Qconcursos, o sabado e o assunto
   na propria faixa: decisoes 67, 69, 70 e 71). Da **secao F** (o Pedido 1),
-  feitas a F1 a F5 (decisoes 74, 75, 77, 78 e 79); falta o resto dela, em
+  feitas a F1 a F6 (decisoes 74, 75, 77, 78, 79 e 80); falta o resto dela, em
   subetapas;
 - ⚪ **O R+7 dos diagnosticos refaz 5 erros** (decisao 70): e o numero do
   plano. Com mais erros, os outros ficam para a rodada "So meus erros" da
@@ -282,9 +282,11 @@ A varredura dos docs contra o codigo e o banco achou estes pontos, que nenhuma
 etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 (decisoes 63 a 66 e a limpeza dos docs); estes ficam:
 
-- 🟡 **O painel ficou ~1 s mais lento com o F1** (decisao 74): a tela Analises
-  abre em ~3 s e a home em ~4 s. O custo e ler as ocorrencias do complementar
-  (0,9 s) e o desempenho por no (0,5 s);
+- ⚪ **Os termos frequentes empatados mudam de ordem a cada vez que o radar
+  sobe** (achado do F6): na Incidencia e nos Macetes, as palavras com a mesma
+  contagem saem numa ordem que o Python sorteia por processo, e no corte
+  (as 8 primeiras) ate a palavra mostrada pode trocar. Desempatar em ordem
+  alfabetica resolve;
 - 🟡 **33 variacoes geradas sem a questao real de base identificada** (F3,
   decisao 77): 30 do estoque de 03/10 e 3 de 27/09. A base delas tem um
   enunciado que se repete no acervo com alternativas diferentes, e elas foram

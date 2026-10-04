@@ -100,7 +100,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (03/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (04/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -132,7 +132,9 @@ F2 - so o complementar aceito no costume da banca, no treino e no compilado
 (decisao 77), e o `--materia` aceita o nome sem acento - e o F4 - os padroes de
 cobranca tambem do complementar, a parte e so com gabarito definitivo (decisao
 78) - e o F5 - o Meu desempenho mostra a ultima revisao de cada conteudo e a
-evolucao no assunto, contando toda resposta (decisao 79).
+evolucao no assunto, contando toda resposta (decisao 79) - e o F6 - o painel
+sem conta repetida: a home de ~4 s para ~1,4 s, Analises de ~3 s para ~1 s
+(decisao 80).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 775 geradas (725 do estoque ate 07/11, os 57 lotes:
 `docs/estoque_de_geradas.md`; nas Regras de Mandela a fonte e a regra, decisao
@@ -192,7 +194,9 @@ aponta para um conteudo usa o caminho do no (`data/conteudos.json`); a
 classificacao reconhece a questao pela CHAVE (enunciado + alternativas), nunca
 so pela impressao do enunciado - e a gerada aponta a sua base tambem pela chave
 (decisao 77).
-Mudanca de estrutura do banco vira passo novo em `migracoes.py`.
+Mudanca de estrutura do banco vira passo novo em `migracoes.py`, e o
+`criar_tabelas` confere o esquema uma vez por conexao (decisao 80): banco
+trocado por baixo de um processo pede `db.resetar_engine()`.
 
 ## Fontes de dados
 

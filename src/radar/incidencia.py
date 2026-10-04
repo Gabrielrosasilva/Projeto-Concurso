@@ -200,10 +200,25 @@ def complementar_por_no(nos: list[arvore.No], ocorrencias: list[Ocorrencia]) -> 
 
     Anulada continua fora: a banca desfez a pergunta.
     """
-    sem_anulada = [o for o in ocorrencias if not o.anulada and o.conteudo]
-    return {no.caminho: _linha_complementar(
-                no.caminho, [o for o in sem_anulada if _debaixo(o.conteudo, no.caminho)])
+    # Cada questao entra direto no no dela e nos de cima, na ordem em que
+    # veio. Perguntar a cada no da arvore se cada questao esta debaixo dele
+    # eram 770 mil comparacoes por pagina, para o mesmo resultado.
+    debaixo_de: dict[str, list[Ocorrencia]] = {}
+    for o in ocorrencias:
+        if o.anulada or not o.conteudo:
+            continue
+        for caminho in _o_no_e_os_de_cima(o.conteudo):
+            debaixo_de.setdefault(caminho, []).append(o)
+    return {no.caminho: _linha_complementar(no.caminho, debaixo_de.get(no.caminho, []))
             for no in nos}
+
+
+def _o_no_e_os_de_cima(caminho: str) -> list[str]:
+    """"A > B > C" da ["A", "A > B", "A > B > C"]: exatamente os nos para os
+    quais `_debaixo(caminho, no)` e verdade."""
+    cortes = [i for i in range(len(caminho))
+              if caminho.startswith(arvore.SEPARADOR, i)]
+    return [caminho[:i] for i in cortes] + [caminho]
 
 
 def _linha_complementar(caminho: str, debaixo: list[Ocorrencia]):

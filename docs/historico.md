@@ -1989,3 +1989,16 @@ conta do `metricas`, com a semana abaixo do minimo em cinza (decisao 79). A
 tela ganhou a secao "Quando eu estudei e revisei cada conteudo". O achado do
 caminho: quase nenhuma faixa do plano chega a arvore - nenhum R+7 tem a chave
 `conteudo` -, e o que fazer com isso ficou nas pendencias, para voce decidir.
+
+## O painel mais leve, F6 (04/10)
+
+**O que estava lento:** a home levava ~4 s e Analises ~3 s. O perfil mostrou
+a mesma conta feita varias vezes por pagina: o cronograma interpretado 6 vezes,
+a chave das ~5 mil questoes do complementar refeita a cada abertura, as colunas
+do banco conferidas ~40 vezes, e cada questao comparada com cada no da arvore.
+
+**O F6:** o leitor em C do YAML, a impressao guardada em memoria, o esquema
+conferido uma vez por conexao e a linha complementar montada direto (decisao
+80). A home caiu para ~1,4 s e Analises para ~1 s, com as paginas iguais byte a
+byte. No caminho, um achado antigo: os termos frequentes empatados trocam de
+ordem a cada vez que o radar sobe - ficou nas pendencias.

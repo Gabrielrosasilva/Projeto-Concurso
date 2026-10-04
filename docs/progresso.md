@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 a F5 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento, os padrões do complementar e a última revisão e a evolução no Meu desempenho); falta o resto da seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 a F6 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento, os padrões do complementar, a última revisão e a evolução no Meu desempenho, e o painel mais leve); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 
 ---
@@ -2331,3 +2331,44 @@ as situações são montadas uma vez.
 | `test_cronograma.py`, `test_desempenho.py`, `test_estudo_extra.py`, `test_fichas.py`, `test_materias_na_tela.py`, `test_metricas.py`, `test_registro_estudo.py`, `test_semanas.py`, `test_tela_hoje.py`, `test_varredura_das_telas.py` | 338 passed |
 | Suíte inteira, PC (uma vez) | **2466 passed** (2448 de antes + 18 novos), 0 failed, 25 min |
 | `test_estudo.py`, `test_desempenho.py` e `test_varredura_das_telas.py`, com o texto final da tela | 75 passed |
+
+### F6 — o painel mais leve ✅
+
+**O que mudou** (decisão 80), sem mudar o que as telas mostram:
+- `src/radar/cronograma.py`: o plano é lido pelo leitor em C do PyYAML
+  (`LEITOR_DO_YAML`), com o leitor em Python de reserva;
+- `src/radar/questoes.py`: a impressão fica guardada em memória
+  (`functools.cache`) - o mesmo texto dá sempre o mesmo resultado;
+- `src/radar/db.py`: o `criar_tabelas` confere tabelas e colunas uma vez por
+  conexão (`_esquema_conferido`, zerado pelo `resetar_engine`);
+- `src/radar/incidencia.py`: a linha complementar põe cada questão direto no
+  nó dela e nos de cima (`_o_no_e_os_de_cima`), em vez de comparar cada
+  questão com cada nó;
+- `tests/test_migracao.py`: o banco antigo do teste chega numa conexão nova,
+  como chega de verdade depois de um `git pull`.
+
+**Com o banco real** (a mesma página, antes → depois):
+
+| Página | Antes | Depois |
+|---|---|---|
+| Home | 4,2 s | 1,4 s (a primeira abertura depois de ligar o servidor, ~2 s) |
+| Análises | 3,0 s | 0,9 a 1,3 s |
+| Hoje | 3,0 s | 1,1 s |
+| Fichas | 2,3 s | 0,8 s |
+| Meu desempenho | 1,6 s | 0,4 s |
+| Incidência | 1,3 s | 0,4 s |
+| Semanas | 0,5 s | 0,1 s |
+
+As 25 páginas conferidas saíram iguais byte a byte antes e depois, com o
+`PYTHONHASHSEED` fixo, tirando o relógio da Hoje e a estimativa de custo da
+/geradas (ela sorteia as questões de base: em 25 aberturas, 24 deram R$ 0,77 e
+uma R$ 0,78). Sem a semente fixa, os termos frequentes empatados trocam de
+ordem a cada processo, antes e depois - ficou nas pendências.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_backup_simulados.py`, `test_classificacao.py`, `test_classificador.py`, `test_complementar.py`, `test_cronograma.py`, `test_fichas.py`, `test_incidencia.py`, `test_migracao.py`, `test_migracoes.py`, `test_questoes.py`, `test_questoes_ieses.py` | 359 passed |
+| `test_incidencia.py` (4 novos: o nó e os de cima contra a regra antiga), `test_migracao.py` (1 novo: as colunas uma vez por conexão), `test_cronograma.py` (1 novo: o leitor em C lê igual) | 97 passed |
+| Suíte inteira, PC (uma vez) | **2472 passed** (2466 de antes + 6 novos), 0 failed, 22 min (eram 25: as colunas conferidas uma vez por conexão também aceleram os testes) |

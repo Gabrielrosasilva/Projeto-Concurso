@@ -3530,3 +3530,31 @@ mede (7A); commit e push por subetapa (8A).
     Com o banco de 03/10, 10 nos de Portugues praticados no radar, todos com
     "nunca" na revisao: nenhuma rodada de revisao foi feita, e nenhuma faixa
     do plano chega a conteudo (pendencias, secao F).
+
+80. **o painel deixou de refazer a mesma conta varias vezes por pagina**
+    (F6). A home levava ~4 s e Analises ~3 s, e o perfil mostrou de onde:
+    - o `config/cronograma.yml` (180 mil caracteres) era interpretado 6 vezes
+      por abertura da home. Passou a ser lido pelo leitor em C do PyYAML (a
+      libyaml), que da o mesmo resultado ~8 vezes mais rapido; sem ela
+      instalada, fica o leitor em Python;
+    - a chave de cada uma das ~5 mil questoes do complementar era refeita a
+      cada pagina. A impressao (`questoes.impressao_de`) e funcao pura - o
+      mesmo texto da sempre o mesmo resultado - e agora fica guardada em
+      memoria (`functools.cache`);
+    - o `criar_tabelas` olhava as colunas de todas as tabelas a cada chamada,
+      ~40 por pagina. Agora confere uma vez por conexao, como ja fazia com a
+      versao do banco. **Consequencia:** um banco trocado por baixo de um
+      processo que ja esta rodando so e conferido numa conexao nova
+      (`db.resetar_engine()`, ou o radar aberto de novo) - e assim que o banco
+      antigo chega depois de um `git pull`, e o `_restaurar` da migracao ja
+      solta a conexao antes;
+    - a linha complementar de cada no perguntava, para cada no da arvore, se
+      cada questao estava debaixo dele (770 mil comparacoes). Agora cada
+      questao entra direto no no dela e nos de cima, na mesma ordem.
+    Com o banco de 03/10: a home de ~4,2 s para ~1,4 s (a primeira abertura
+    depois de ligar o servidor, ~2 s, porque faz a conta das chaves uma vez),
+    Analises de ~3 s para ~1 s, o Meu desempenho de 1,6 s para 0,4 s, a
+    Incidencia de 1,3 s para 0,4 s e a Hoje de 3 s para 1,1 s. As 25 paginas
+    conferidas sairam iguais byte a byte antes e depois (com o
+    `PYTHONHASHSEED` fixo), tirando o relogio da Hoje e a estimativa de custo
+    da /geradas, que sorteia as questoes de base a cada abertura.

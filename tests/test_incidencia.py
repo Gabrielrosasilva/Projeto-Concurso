@@ -310,3 +310,26 @@ def test_a_pagina_e_o_terminal_mostram_os_padroes_do_complementar_a_parte(alvo):
     saida = CliRunner().invoke(cli, ["incidencia", "--padroes"], env={"COLUMNS": "200"})
     assert saida.exit_code == 0, saida.output
     assert "complementar:" in saida.output
+
+
+# --- a conta por no sem comparar cada questao com cada no (F6) ------------------
+
+@pytest.mark.parametrize("caminho", [
+    "Direito Penal",
+    "Direito Penal > Aplicação da lei penal",
+    "Direito Penal > Aplicação da lei penal > Lei penal no tempo",
+    "Direito Penal Militar > Crimes militares",
+])
+def test_o_no_e_os_de_cima_sao_exatamente_os_nos_de_debaixo(caminho):
+    """A lista nova tem de dar o MESMO que a pergunta antiga, no por no -
+    inclusive para "Direito Penal Militar", que comeca com "Direito Penal" e
+    nao esta debaixo dele."""
+    nos = ["Direito Penal", "Direito Penal > Aplicação da lei penal",
+           "Direito Penal > Aplicação da lei penal > Lei penal no tempo",
+           "Direito Penal > Aplicação", "Direito Penal Militar",
+           "Direito Penal Militar > Crimes militares", "Língua Portuguesa"]
+
+    de_cima = incidencia._o_no_e_os_de_cima(caminho)
+
+    for no in nos:
+        assert incidencia._debaixo(caminho, no) == (no in de_cima), no

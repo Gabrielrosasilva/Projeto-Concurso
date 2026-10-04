@@ -654,10 +654,17 @@ def _conferir_conteudos_das_faixas(dias: list[Dia]) -> None:
                 )
 
 
+# O cronograma.yml tem uns 180 mil caracteres, e uma pagina do painel o le
+# varias vezes. O leitor em C do PyYAML (a libyaml) le o mesmo arquivo uns 8
+# vezes mais rapido, com o mesmo resultado; sem ela, fica o leitor em Python.
+LEITOR_DO_YAML = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+
+
 def carregar(caminho: Path | None = None) -> Plano:
     """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma."""
     arquivo = caminho or (config.diretorio_config() / "cronograma.yml")
-    dados = yaml.safe_load(Path(arquivo).read_text(encoding="utf-8")) or {}
+    dados = yaml.load(Path(arquivo).read_text(encoding="utf-8"),
+                      Loader=LEITOR_DO_YAML) or {}
 
     blocos = {}
     for chave in BLOCOS:
