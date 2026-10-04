@@ -879,11 +879,11 @@ contra a linha de base está na seção R15.
 - **186 requisitos analisados** (bloco A: 123; bloco B: 63). A Fase 1 dizia
   188 por erro de soma meu (os critérios de etapa são 41, não 43); nenhum
   item da lista ficou de fora da matriz (conferido por script).
-- **Por status:** ✅ 150 · ⚠️ 18 · 🐛 12 · ❌ 0 · 🔍 1 · ⏭️ 2 · 🔁 3. Bloco A:
-  ✅ 98 · 🐛 10 · ⚠️ 10 · 🔁 3 · 🔍 1 · ⏭️ 1. Bloco B: ✅ 52 · ⚠️ 8 · 🐛 2 ·
+- **Por status:** ✅ 151 · ⚠️ 18 · 🐛 12 · ❌ 0 · 🔍 0 · ⏭️ 2 · 🔁 3. Bloco A:
+  ✅ 99 · 🐛 10 · ⚠️ 10 · 🔁 3 · ⏭️ 1. Bloco B: ✅ 52 · ⚠️ 8 · 🐛 2 ·
   ⏭️ 1. Em 13 linhas há 🧑 (pronto, mas falta a sua conferência).
-- **Por nível de evidência:** executei (E ou E+T) 175 · só teste (T) 8 · só
-  leitura (L) 3. Nenhum ✅ ficou só com L.
+- **Por nível de evidência:** executei (E ou E+T) 176 · só teste (T) 8 · só
+  leitura (L) 2. Nenhum ✅ ficou só com L.
 - **Suíte:** 2.553 passed, 0 failed, 0 skipped, 23 min 01 s (Windows).
 - **Defeitos confirmados por execução: 8** (BUG-1 a BUG-8), além de 12
   achados menores.
@@ -932,7 +932,7 @@ Evidência: E = executei; T = teste que passou nesta execução; L = só li.
 | C23-18 | §23 | Nenhuma estatística sem amostra | ✅ | Macetes corrigido ("/prova em N provas"); varredura | E | os docs ainda dizem que falta (7.4) | — |
 | C23-19 | §23 | Nenhuma gerada como oficial | ✅ | ver RI-5 | E,T | — | — |
 | R-1A-1 | roteiro 1A | `pytest -q` verde | ✅ | 2553 passed | E | — | — |
-| R-1A-2 | roteiro 1A | Actions verde | 🔍 | último `coleta:` local: 03/10 14:10 | L | sem `gh` e sem rede não vejo o GitHub | o BUG-8 o deixa vermelho a partir de 01/11 |
+| R-1A-2 | roteiro 1A | Actions verde | ✅ | no push do fim da auditoria, o `git fetch` trouxe `ea86683 coleta: 2026-10-04` (radar-bot, 04/10): o job só commita depois do `pytest -q` verde no Linux, com o código do `b811a15` | E | — | o BUG-8 o deixa vermelho a partir de 01/11; as decisões 91-95 só sobem agora |
 | R-1A-3 | roteiro 1A | A1 fora das pendências | ✅ | `pendencias.md`, seção A | E | — | — |
 | R-1A-4 | roteiro 1A / CLAUDE | Testes sem depender da data | 🐛 | relógio simulado em 20/11/2026: 1 falha | E | BUG-8 (`test_eventos.py:429`) | ver 7.7 |
 | R-1B-1 | roteiro 1B | Eventos em frases | ✅ | varredura sem "inscricoes_abertas" nem "->" nas telas; `test_eventos` | E,T | — | — |
@@ -1278,9 +1278,10 @@ não executei.
 
 ## R13. O que NÃO consegui verificar, e o que depende de você
 
-- **Actions (R-1A-2):** sem `gh` e sem rede. Cole o resultado dos últimos 5
-  runs do `coleta.yml` (data, ✅/❌ e o commit). Conferir também que o run de
-  04/10 fez o `coleta: 2026-10-04`.
+- **Actions (R-1A-2):** resolvido no push final — o `coleta: 2026-10-04` do
+  radar-bot existe no GitHub (verde em 04/10). Falta ver o primeiro run com
+  as decisões 91-95 (o de 05/10) e, principalmente, corrigir o BUG-8 antes
+  de 01/11.
 - **Telas no navegador, nos dois temas:** conferi tokens e HTML, não a
   aparência.
 - **Se o texto escrito pela IA está certo** (fichas, macetes, explicações,
@@ -1328,10 +1329,10 @@ pedido, vieram o commit e o push (ver o fim desta seção).
 **Pergunta final — "Tudo o que foi solicitado foi implementado, está
 estruturado como solicitado, integrado e funciona corretamente?"**
 
-**PARCIALMENTE.** De 186 requisitos, 150 estão implementados e comprovados
-(✅, 175 com execução), 18 parcialmente (⚠️), 12 com problema (🐛), 0 sem
-implementação; 2 ainda não são desta etapa (Ciclo 2) e 1 não dá para ver daqui
-(Actions). O núcleo funciona com o dado real: contagem igual em todas as
+**PARCIALMENTE.** De 186 requisitos, 151 estão implementados e comprovados
+(✅, 176 com execução), 18 parcialmente (⚠️), 12 com problema (🐛), 0 sem
+implementação; 2 ainda não são desta etapa (Ciclo 2) e 3 mudaram por decisão
+registrada (🔁). O núcleo funciona com o dado real: contagem igual em todas as
 telas, incidência do alvo recalculada à mão igual, alvo intacto com prova
 complementar nova, ANKI religável, 2.553 testes verdes, 8 de 8 mutações
 críticas detectadas. Mas 8 defeitos confirmados quebram regras do pedido: a
@@ -1369,7 +1370,15 @@ sinônimo de matéria fora dos filtros.
       só no fim, a seu pedido;
 - [x] suíte completa rodada uma vez (2.553 passed, 23 min 01 s);
 - [x] todo ✅ tem evidência E ou T;
-- [x] o que não deu para verificar está marcado (🔍) com o motivo (R13);
+- [x] o que não deu para verificar está dito, com o motivo (R13); o único 🔍
+      (Actions) foi resolvido pelo `git fetch` do push final;
 - [x] caminhos das cópias informados (R1);
 - [x] resumo e resposta PARCIALMENTE entregues;
 - [x] não corrigi nada no projeto.
+
+**Commit e push (pedido seu, no fim):** `584b0bb` (as decisões 91 a 95, que
+estavam só no disco — os mesmos 49 arquivos da linha de base) e `ad64f71`
+(este relatório), postos em cima de `ea86683 coleta: 2026-10-04` do
+radar-bot por `git rebase origin/main` (o robô só mexe em
+`data/concursos.json` e `data/eventos.json`; nenhum conflito) e enviados
+para `origin/main`. Este último ajuste (R-1A-2) vai num commit à parte.
