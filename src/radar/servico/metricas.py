@@ -44,8 +44,10 @@ from radar.models import (
     QuestaoDeProva,
     QuestaoGerada,
     RespostaDeSimulado,
+    Simulado,
     agora,
 )
+from radar.questoes import chave_da_questao
 from radar.servico import cronograma as diario
 from radar.origem import AUTOMATICO, IA
 from radar.servico import extra as estudo_extra
@@ -208,6 +210,21 @@ class Lancamento:
     conteudo: str | None = None
     #: Para a mensagem de erro dizer onde a conta nao fecha.
     descricao: str = ""
+    #: Foi uma REVISAO: faixa de revisao do plano, estudo extra de revisao, ou
+    #: resposta numa rodada que revisa (`rodada_que_revisa`). Nao muda conta
+    #: nenhuma; da a data da ultima revisao de cada no (decisao 79).
+    revisao: bool = False
+    #: A chave da questao REAL respondida no radar (enunciado + alternativas).
+    #: A linha do radar nao tem `conteudo` - nao fui eu que escolhi o no -, e
+    #: e por esta chave que ela chega a ele, pela classificacao da questao.
+    chave: str | None = None
+
+
+def rodada_que_revisa(filtros: dict | None) -> bool:
+    """A rodada do radar e uma revisao? A revisao espacada grava `revisao`;
+    o "Refazer as erradas" e a revisao do sabado gravam `erros`."""
+    filtros = filtros or {}
+    return bool(filtros.get("revisao") or filtros.get("erros"))
 
 
 def janela_do_dia(inicio: date, fim: date | None = None) -> tuple[datetime, datetime]:
@@ -271,6 +288,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
                 materia=feita.materia, assunto=feita.assunto,
                 conteudo=feita.conteudo,
                 descricao=f"{data:%d/%m/%Y}, faixa {feita.titulo!r}",
+                revisao=feita.tipo in plano_de_estudo.TIPOS_DE_REVISAO,
             ))
 
     # --- o estudo extra ----------------------------------------------------
@@ -282,6 +300,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
             materia=extra.materia, assunto=extra.assunto,
             conteudo=extra.conteudo,
             descricao=f"{extra.data:%d/%m/%Y}, estudo extra #{extra.id}",
+            revisao=extra.o_que == "revisao",
         ))
 
     # --- o que eu respondi dentro do radar ------------------------------------
@@ -300,9 +319,14 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
         de_ia = {q.id: q for q in s.scalars(
             select(QuestaoGerada).where(QuestaoGerada.id.in_(
                 [r.questao_id for r in respostas if r.gerada] or [0])))}
+        que_revisam = {sid for sid, filtros in s.execute(
+            select(Simulado.id, Simulado.filtros).where(Simulado.id.in_(
+                {r.simulado_id for r in respostas} or {0})))
+            if rodada_que_revisa(filtros)}
 
     for resposta in respostas:
         questao = (de_ia if resposta.gerada else reais).get(resposta.questao_id)
+        real = questao is not None and not resposta.gerada
         linhas.append(Lancamento(
             data=para_local(resposta.respondida_em).date(), origem=RADAR,
             questoes=1, acertos=1 if resposta.acertou else 0,
@@ -310,6 +334,9 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
             consulta=False, gerada=bool(resposta.gerada),
             materia=getattr(questao, "materia", None),
             assunto=getattr(questao, "assunto", None),
+            revisao=resposta.simulado_id in que_revisam,
+            chave=(chave_da_questao(questao.enunciado, questao.alternativas)
+                   if real else None),
         ))
     return linhas
 

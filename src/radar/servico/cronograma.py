@@ -450,6 +450,9 @@ class FaixaFeita:
     #: que eu fiz conta no dia e em no nenhum (Etapa 4).
     conteudo: str | None = None
     do_plano: bool = False
+    #: O tipo da faixa no plano (teoria, questoes, revisao...): e ele que diz
+    #: se o que eu fiz ali foi uma revisao.
+    tipo: str = ""
 
     @property
     def porcentagem(self) -> int | None:
@@ -494,6 +497,7 @@ def valores_das_faixas(dia, estado: EstadoDoDia | None) -> dict:
             assunto=check.get("assunto") or faixa.titulo,
             conteudo=check.get("conteudo") or faixa.conteudo,
             do_plano=antigo,
+            tipo=faixa.tipo,
         )
     return valores
 

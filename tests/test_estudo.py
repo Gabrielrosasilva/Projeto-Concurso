@@ -7,20 +7,30 @@ O que estes testes seguram:
   * os tres gatilhos de revisao, e qual deles disparou;
   * revisar o que eu nunca estudei nao entra na fila;
   * a lista de refazer: as erradas no radar e o caderno, nunca somadas;
-  * a evolucao semanal com as mesmas contas da tela Semanas.
+  * a evolucao semanal com as mesmas contas da tela Semanas - toda resposta,
+    e nao so a ultima de cada questao -, e a semana abaixo do minimo marcada;
+  * a data da ultima revisao (decisao 79): so o que e revisao, nunca a
+    pratica comum.
 
 As datas sao fixas e o cronograma e o mini: nada aqui depende do dia em que o
 teste roda.
 """
-from datetime import date
+import re
+from datetime import date, datetime, timedelta
 
 import pytest
+from sqlalchemy import select
 
 from radar import amostra as regua
+from radar.db import sessao
+from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
+from radar.servico import desempenho_por_conteudo as por_conteudo
 from radar.servico import erros as caderno
 from radar.servico import estudo
 from radar.servico import extra as estudo_extra
+from radar.servico import metricas
 from radar.servico import semanas as tela_de_semanas
+from radar.util import fuso_local
 
 from tests.test_desempenho import (  # noqa: F401 - fixtures e ajudantes
     APLICACAO, HOJE, NO_TEMPO, PENAL, PORTUGUES, SEG, TER, _anotar, _responder,
@@ -125,7 +135,7 @@ def test_a_evolucao_semanal_usa_as_contas_da_tela_semanas(plano):
 
     situacao = estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO]
 
-    assert situacao.semanal == [(1, 75, 16)]     # 12 de 16
+    assert situacao.semanal == [estudo.Semana(1, 75, 16, suficiente=True)]  # 12 de 16
     # E o total da semana na tela Semanas inclui essas mesmas 16.
     (ciclo,) = tela_de_semanas.montar(plano=plano, hoje=HOJE)
     assert ciclo.semanas[0].numeros.questoes >= 16
@@ -135,6 +145,171 @@ def test_o_que_teve_consulta_fica_fora_da_evolucao(plano):
     _anotar(plano, "noite", 0, 15, 15, consulta=True, conteudo=NO_TEMPO)
 
     assert estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO].semanal == []
+
+
+def _responder_de_novo(numero: int, acertou: bool, quando: date, filtros: dict) -> None:
+    """Mais uma resposta a questao `numero`, numa rodada nova com estes
+    filtros: e o filtro da rodada que diz se ela revisa."""
+    with sessao() as s:
+        questao = s.scalar(select(QuestaoDeProva).where(QuestaoDeProva.numero == numero))
+        simulado = Simulado(filtros=filtros)
+        s.add(simulado)
+        s.flush()
+        s.add(RespostaDeSimulado(
+            simulado_id=simulado.id, questao_id=questao.id, ordem=1,
+            escolhida="a" if acertou else "b", acertou=acertou,
+            respondida_em=datetime.combine(quando, datetime.min.time(),
+                                           tzinfo=fuso_local()) + timedelta(hours=21),
+        ))
+
+
+def test_a_evolucao_conta_toda_resposta_e_nao_so_a_ultima(plano):
+    """Errei em 28/09 e acertei a mesma questao em 29/09: a semana tem as duas
+    respostas, como a tela Semanas. So a ultima daria 100% em 1, e apagaria o
+    erro que a evolucao existe para mostrar."""
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _responder_de_novo(1, True, TER, filtros={})
+
+    (semana,) = estudo.situacoes(plano=plano, hoje=HOJE)[APLICACAO].semanal
+
+    assert (semana.numero, semana.porcentagem, semana.respostas) == (1, 50, 2)
+
+
+def test_a_semana_abaixo_do_minimo_do_assunto_aparece_marcada(plano):
+    """O numero aparece, mas a semana diz que nao chegou ao minimo do
+    config/amostra.yml - lido de la, e nao repetido aqui."""
+    minimo = regua.carregar().do_nivel("assunto")
+    _anotar(plano, "noite", 0, minimo - 1, minimo - 1, conteudo=APLICACAO)
+
+    (semana,) = estudo.situacoes(plano=plano, hoje=HOJE)[APLICACAO].semanal
+
+    assert (semana.porcentagem, semana.respostas) == (100, minimo - 1)
+    assert not semana.suficiente
+
+
+def test_a_semana_que_chega_ao_minimo_do_assunto_vale(plano):
+    minimo = regua.carregar().do_nivel("assunto")
+    _anotar(plano, "noite", 0, minimo, minimo, conteudo=APLICACAO)
+
+    (semana,) = estudo.situacoes(plano=plano, hoje=HOJE)[APLICACAO].semanal
+
+    assert semana.suficiente
+
+
+def test_questao_de_ia_nao_entra_na_evolucao(plano):
+    _responder(1, True, SEG, gerada=True, classificar_em=NO_TEMPO)
+
+    assert estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO].semanal == []
+
+
+# --- a data da ultima revisao (decisao 79) --------------------------------------
+
+def test_praticar_nao_e_revisar(plano):
+    """Faixa de questoes e rodada comum sao pratica: a revisao fica vazia."""
+    _anotar(plano, "noite", 0, 15, 11, conteudo=NO_TEMPO)
+    _responder(1, True, TER, classificar_em=NO_TEMPO)
+
+    situacao = estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO]
+
+    assert situacao.ultima_pratica == TER
+    assert situacao.ultima_revisao is None
+
+
+def test_a_faixa_de_revisao_anotada_no_no_e_a_ultima_revisao(plano):
+    """O R+7 de 29/09 do cronograma mini, anotado no subassunto: e revisao
+    dele e dos nos de cima, e de mais nenhum."""
+    _anotar(plano, "noite", 0, 10, 8, data=TER, conteudo=NO_TEMPO)
+
+    todas = estudo.situacoes(plano=plano, hoje=HOJE)
+
+    for caminho in (NO_TEMPO, APLICACAO, PENAL):
+        assert todas[caminho].ultima_revisao == TER
+    assert todas[PORTUGUES].ultima_revisao is None
+
+
+def test_o_estudo_extra_de_revisao_e_revisao(plano):
+    estudo_extra.anotar(data=TER, o_que="revisao", minutos=30,
+                        conteudo=NO_TEMPO, plano=plano, hoje=HOJE)
+
+    assert estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO].ultima_revisao == TER
+
+
+def test_a_rodada_que_revisa_no_radar_e_revisao(plano):
+    """Errada numa rodada comum em 28/09, refeita numa rodada so de erradas
+    em 29/09: a revisao e a de 29/09."""
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _responder_de_novo(1, True, TER, filtros={"quantidade": 1, "erros": True})
+
+    situacao = estudo.situacoes(plano=plano, hoje=HOJE)[NO_TEMPO]
+
+    assert situacao.ultima_revisao == TER
+    assert situacao.ultima_pratica == TER
+
+
+@pytest.mark.parametrize("filtros, revisa", [
+    ({"revisao": [{"materia": PENAL, "assunto": None, "etapa": 1}]}, True),  # a espacada
+    ({"quantidade": 5, "erros": True}, True),                       # Refazer as erradas
+    ({"erros": True, "rodada": "erros_das_rodadas"}, True),         # a do sabado
+    ({"quantidade": 10, "materia": PENAL}, False),                  # rodada comum
+    ({"rodada": "composta"}, False),                                # diagnostico, simulado
+    ({}, False),
+    (None, False),
+])
+def test_quais_rodadas_revisam(filtros, revisa):
+    assert metricas.rodada_que_revisa(filtros) is revisa
+
+
+# --- a secao da tela ------------------------------------------------------------
+
+def test_estudados_ou_praticados_vem_na_ordem_da_arvore_e_filtram_a_materia(plano):
+    _responder(1, True, SEG, classificar_em=NO_TEMPO)
+    _responder(2, True, SEG, materia=PORTUGUES, classificar_em=PORTUGUES)
+    todas = estudo.situacoes(plano=plano, hoje=HOJE)
+
+    assert [s.caminho for s in estudo.estudados_ou_praticados(todas)] == [
+        PENAL, APLICACAO, NO_TEMPO, PORTUGUES]
+    # Sem acento e sem caixa, como o filtro do resto da tela.
+    assert [s.caminho for s in estudo.estudados_ou_praticados(
+        todas, "lingua portuguesa")] == [PORTUGUES]
+
+
+def test_a_fila_e_os_nao_estudados_aceitam_as_situacoes_ja_montadas(plano):
+    """A tela monta as situacoes uma vez so, e o resultado nao muda."""
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    todas = estudo.situacoes(recorte=por_conteudo.CICLO, plano=plano, hoje=HOJE)
+
+    def caminhos(lista):
+        return [item.caminho for item in lista]
+
+    assert caminhos(estudo.para_revisar(plano, HOJE, todas=todas)) == caminhos(
+        estudo.para_revisar(plano, HOJE))
+    assert caminhos(estudo.nao_estudados(todas=todas)) == caminhos(
+        estudo.nao_estudados(plano=plano, hoje=HOJE))
+
+
+def test_a_tela_mostra_a_ultima_revisao_e_a_evolucao_no_assunto(plano, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    monkeypatch.setattr("radar.cronograma.carregar", lambda *a, **k: plano)
+    _anotar(plano, "noite", 0, 5, 4, data=TER, conteudo=NO_TEMPO)      # o R+7
+    _responder(1, True, HOJE, classificar_em=APLICACAO)
+    _responder(2, True, SEG, materia=PORTUGUES, classificar_em=PORTUGUES)
+
+    pagina = TestClient(app).get("/analises/desempenho").text
+    secao = re.search(r"Quando eu estudei e revisei cada conteúdo</h2>(.*?)</section>",
+                      pagina, re.S).group(1)
+    texto = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", secao))
+
+    # Ultima vez 03/10 (a resposta do radar), ultima revisao 29/09 (o R+7), e
+    # a semana do assunto: 4 de 5 anotadas + 1 de 1 no radar = 83% em 6.
+    assert "Aplicação da lei penal praticado 03/10 29/09 semana 1: 83% em 6" in texto
+    assert "Lei penal no tempo praticado 29/09 29/09 —" in texto
+    assert "Língua Portuguesa praticado 28/09 nunca —" in texto
+    # 6 respostas e menos que o minimo do assunto: a semana vem marcada.
+    assert regua.carregar().do_nivel("assunto") > 6
+    assert 'class="semana abaixo">semana 1: 83% em 6<' in secao
 
 
 # --- os tres gatilhos de revisao ------------------------------------------------

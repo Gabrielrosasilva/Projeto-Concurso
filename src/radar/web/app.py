@@ -1433,7 +1433,8 @@ def ficha_conferir(ident: str, data: str = Form("")):
 @app.get("/analises/desempenho", response_class=HTMLResponse)
 def analises_desempenho(request: Request, materia: str = "", recorte: str = ""):
     """O meu desempenho por NO da arvore, com o estado e a amostra de cada um,
-    mais o que voltou para revisao, o que eu nunca estudei e o que refazer.
+    quando eu estudei e revisei cada no (com a evolucao no assunto), o que
+    voltou para revisao, o que eu nunca estudei e o que refazer.
 
     Toda a conta mora no `servico.desempenho_por_conteudo` e no
     `servico.estudo`; aqui so entra o que e de tela.
@@ -1442,6 +1443,9 @@ def analises_desempenho(request: Request, materia: str = "", recorte: str = ""):
 
     escolhido = recorte if recorte in (por_conteudo.CICLO, por_conteudo.SEMPRE)         else por_conteudo.CICLO
     linhas = por_conteudo.tela(escolhido, materia or None)
+    # Montadas uma vez so: a fila, os nao estudados e a ultima revisao saem
+    # das mesmas situacoes.
+    todas = servico.estudo.situacoes(recorte=escolhido)
     return templates.TemplateResponse(
         request=request, name="desempenho.html",
         context={
@@ -1454,8 +1458,9 @@ def analises_desempenho(request: Request, materia: str = "", recorte: str = ""):
             # esta vazia.
             "materias": sorted({no.nome for no in servico.conteudos.nos()
                                 if no.nivel == "materia"}),
-            "fila": servico.estudo.para_revisar(recorte=escolhido),
-            "nao_estudados": servico.estudo.nao_estudados(),
+            "fila": servico.estudo.para_revisar(recorte=escolhido, todas=todas),
+            "nao_estudados": servico.estudo.nao_estudados(todas=todas),
+            "vistos": servico.estudo.estudados_ou_praticados(todas, materia or None),
             "refazer": servico.estudo.refazer(),
         },
     )

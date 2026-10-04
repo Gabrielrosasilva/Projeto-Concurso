@@ -1049,7 +1049,8 @@ so por materia. Duas origens, **nunca somadas num numero so**: *radar* e questao
 real respondida aqui dentro, pela ultima resposta de cada, ligada ao no pela
 classificacao; *anotado* e o que eu digitei nas faixas e nos extras, no conteudo
 que eu escolhi ao anotar - e para isso que os formularios da faixa, do estudo
-extra e do caderno de erros tem o seletor de conteudo. So o respondido **sem
+extra e do caderno de erros tem o seletor de conteudo (o da faixa so aparece
+quando o plano da a ela a chave `conteudo`). So o respondido **sem
 consulta** conta para o estado; questao escrita por IA nunca entra.
 
 Os cinco estados (Amostra insuficiente, Precisa revisar, Em aprendizado,
@@ -1058,11 +1059,15 @@ cada nivel ficam no **`config/amostra.yml`**, secao `desempenho` - mude o numero
 la e toda tela muda com ele. Abaixo do minimo o numero aparece e **nao entra em
 ordenacao nem em projecao**.
 
-A mesma tela faz o que o ANKI fazia: **o que eu ainda nao estudei**, **o que
-voltou para revisao** (por erro recente, por desempenho abaixo do corte, ou pelo
-prazo 1-7-30 vencido - a linha diz qual) e **as questoes a refazer** (as erradas
-no radar e as do caderno de erros, em duas listas que nunca se somam). Nada
-disso e gravado em tabela: sai do historico.
+A mesma tela faz o que o ANKI fazia: **quando eu estudei e revisei cada
+conteudo** (a ultima vez, a ultima revisao - so faixa de revisao, extra de
+revisao ou rodada que revisa no radar; pratica nao conta - e, no assunto, o
+acerto semana a semana, com toda resposta e a semana abaixo do minimo em
+cinza), **o que eu ainda nao estudei**, **o que voltou para revisao** (por erro
+recente, por desempenho abaixo do corte, ou pelo prazo 1-7-30 vencido - a linha
+diz qual) e **as questoes a refazer** (as erradas no radar e as do caderno de
+erros, em duas listas que nunca se somam). Nada disso e gravado em tabela: sai
+do historico.
 
 **Classificacao e incidencia do alvo (Etapa 3A).** As 170 questoes de 2013 e
 2019 sao classificadas pelo Claude Code: `radar classificar --pedido` escreve

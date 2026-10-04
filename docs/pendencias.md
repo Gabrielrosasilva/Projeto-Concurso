@@ -241,8 +241,9 @@ ou corrigir a materia dessas 8 no banco com copia antes e "antes x depois".
 
 - 🟡 **O ciclo 1 especifico (pedido de 03/10)**: a 2A, a 2B e a 2C estao
   feitas (as faixas que medem, o simulado do Qconcursos, o sabado e o assunto
-  na propria faixa: decisoes 67, 69, 70 e 71). Falta a **secao F** inteira (o
-  Pedido 1), em subetapas, comecando pelo "Onde estudar" lendo a arvore;
+  na propria faixa: decisoes 67, 69, 70 e 71). Da **secao F** (o Pedido 1),
+  feitas a F1 a F5 (decisoes 74, 75, 77, 78 e 79); falta o resto dela, em
+  subetapas;
 - ⚪ **O R+7 dos diagnosticos refaz 5 erros** (decisao 70): e o numero do
   plano. Com mais erros, os outros ficam para a rodada "So meus erros" da
   home. Se quiser refazer todos, e trocar o `questoes: 5` da faixa de 10/10 -
@@ -291,9 +292,28 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
   consegue identificar. As 30 do estoque podem ser religadas pelos pedidos
   que ficaram no historico da conversa de 03/10 (o texto de cada questao de
   base foi impresso la); as 3 de 27/09 nao tem registro. Decisao sua;
-- 🟡 **§19 do novo.md**: a tela Meu desempenho nao mostra a data da ultima
-  revisao de cada conteudo nem a evolucao por assunto (o servico ja guarda a
-  ultima data do anotado);
+- 🟡 **As faixas do plano quase nao chegam a arvore** (achado do F5, decisao
+  79): a faixa so conta num no pela chave `conteudo` do
+  `config/cronograma.yml`, e so 6 faixas a tem. Ate 07/11, das 45 faixas de
+  revisao nenhuma tem (38 so tem no pela ficha, que e da IA e esta por
+  conferir); das 95 de estudo, 3. Sem ela, a tela Hoje nem mostra o seletor
+  de conteudo, e o R+7, a teoria e a lei seca contam no dia e em no nenhum:
+  o Meu desempenho nao ve o que eu estudei nas faixas, e a ultima revisao
+  so vem das rodadas de revisao do radar e do estudo extra. Decisao sua:
+  (a) deixar assim; (b) a faixa sem `conteudo` conta no no que ela cobre
+  (`fichas.onde_na_arvore`) para o "estudado" e para as datas, nunca para o
+  acerto - pelos `nos` do plano ja, e pela ficha so depois de voce
+  conferi-la; (c) eu proponho a chave `conteudo` de cada faixa a partir das
+  fichas, e voce confere antes de entrar no plano;
+- ⚪ **O "estudado" do codigo e mais largo que a decisao 20**: qualquer faixa
+  ou extra SEM questao deixa o no estudado (as constantes `TIPOS_DE_ESTUDO` e
+  `EXTRA_DE_ESTUDO` de `servico/estudo.py` estao declaradas e sem uso). Hoje
+  so o extra de revisao sem questao cai nisso; com a (b) ou a (c) acima, a
+  faixa de correcao marcada tambem cairia;
+- ⚪ **O 1-7-30 sem estudo conta da ULTIMA resposta de cada questao**
+  (`estudo.situacoes`, `primeira_pratica`): questao refeita empurra o
+  "primeiro contato" para a data da refeita. A evolucao ja conta toda
+  resposta (decisao 79); a ancora da revisao ficou como estava;
 - 🟡 **§14, item 7 do novo.md ("quais conceitos aparecem associados")**: as
   402 classificacoes sao todas principais; nenhuma questao tem conteudo
   associado, e a pergunta nao tem resposta;

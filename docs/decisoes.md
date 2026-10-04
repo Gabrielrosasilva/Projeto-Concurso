@@ -3502,3 +3502,31 @@ mede (7A); commit e push por subetapa (8A).
       nunca somados.
     No banco de 03/10: 22 das 122 provas aceitas tem gabarito definitivo (940
     questoes); em Portugues, 45 questoes em 22 provas.
+
+79. **a ultima revisao de um conteudo e so o que e revisao, e a evolucao
+    conta toda resposta** (F5, secao 19 do novo.md). O Meu desempenho ganhou
+    a secao "Quando eu estudei e revisei cada conteudo": cada no em que eu ja
+    encostei, com a ultima vez, a ultima revisao e, no assunto, o acerto
+    semana a semana. As regras:
+    - **revisao** e a faixa de revisao do plano (`revisao`, `revisao_semanal`)
+      ou o estudo extra de revisao anotados no no, ou questao dele respondida
+      numa rodada que revisa - a revisao espacada (`revisao` nos filtros) e
+      as rodadas so de erradas (`erros`: o "Refazer as erradas" e a do
+      sabado). Questao de faixa de questoes ou de rodada comum e pratica, e
+      nao muda a data. Quem marca e o `Lancamento.revisao` do `metricas`, e
+      o `ultima_revisao`, que existia desde a Etapa 4 e nunca era preenchido,
+      passou a ser;
+    - **a evolucao conta TODA resposta**, cada uma na semana em que foi dada,
+      pela conta do `metricas` (o acerto sem consulta, em questao real): as
+      mesmas contas da tela Semanas, como a Etapa 4 ja prometia. Antes a
+      parte do radar contava so a ultima resposta de cada questao - errar em
+      28/09 e acertar em 29/09 dava "100% em 1", e o erro sumia. A resposta
+      do radar chega ao no pela chave da questao (`Lancamento.chave`);
+    - **a semana abaixo do minimo do no** (`config/amostra.yml`: 10 no
+      assunto) aparece em cinza, com o numero: e pouco para dizer se eu
+      melhorei. Nenhuma tendencia e calculada;
+    - a fila, os nao estudados e a secao nova saem das mesmas situacoes,
+      montadas uma vez por tela.
+    Com o banco de 03/10, 10 nos de Portugues praticados no radar, todos com
+    "nunca" na revisao: nenhuma rodada de revisao foi feita, e nenhuma faixa
+    do plano chega a conteudo (pendencias, secao F).

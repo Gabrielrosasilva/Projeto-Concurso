@@ -39,6 +39,7 @@ from datetime import date, timedelta
 from radar import amostra as regua
 from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
+from radar.regioes import normalizar
 from radar.servico import conteudos as servico_conteudos
 from radar.servico import desempenho_por_conteudo as por_conteudo
 from radar.servico import erros as caderno
@@ -67,6 +68,20 @@ ESTUDADO = "estudado"
 PRATICADO = "praticado"
 
 
+@dataclass(frozen=True)
+class Semana:
+    """Uma semana da evolucao de um no (a "evolucao por assunto" da secao 19)."""
+
+    numero: int
+    #: O acerto sem consulta, em questao real: as contas da tela Semanas.
+    porcentagem: int
+    #: Quantas respostas mediram esse acerto.
+    respostas: int
+    #: Chegou ao minimo do nivel do no no config/amostra.yml? Abaixo dele o
+    #: numero aparece, mas e pouco para dizer se eu melhorei.
+    suficiente: bool
+
+
 @dataclass
 class Situacao:
     """Em que pe esta um no: o que eu fiz nele e quando."""
@@ -89,15 +104,17 @@ class Situacao:
     #: questao, e a etapa nunca andaria.
     primeira_pratica: date | None = None
     ultima_pratica: date | None = None
-    #: A ultima revisao: faixa de tipo `revisao`, estudo extra de revisao, ou
-    #: uma rodada de revisao do `espacada`. None = nunca revisei.
+    #: A ultima revisao (decisao 79): faixa de revisao do plano ou estudo
+    #: extra de revisao anotados no no, ou questao dele respondida numa rodada
+    #: que revisa - a revisao espacada e as erradas. Questao de rodada comum e
+    #: pratica, nao revisao. None = nunca revisei.
     ultima_revisao: date | None = None
 
     minutos: int = 0
     #: O desempenho do no, quando ele tem resposta. None quando nao tem.
     desempenho: object = None
     estado: regua.Estado | None = None
-    #: [(semana, porcentagem|None, respostas)] - as mesmas contas da Semanas.
+    #: [Semana], da mais velha a mais nova - as mesmas contas da Semanas.
     semanal: list = field(default_factory=list)
 
     @property
@@ -192,17 +209,33 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
         for no in servico_conteudos.nos()
     }
 
-    # --- as faixas e o estudo extra, pelo que eu marquei -------------------
+    # --- o historico: as faixas, o estudo extra e as respostas do radar -----
+    # A faixa e o extra chegam ao no que eu escolhi ao anotar; a resposta do
+    # radar, ao no da classificacao da questao.
+    de_quem = por_conteudo.nos_das_questoes()
     inicio = plano.inicio
     fim = min(plano.fim, hoje) if plano.fim else hoje
-    semanal: dict[str, dict[int, list]] = {}
+    por_semana: dict[str, dict[int, list]] = {}
     for linha in metricas.lancamentos(inicio, fim, plano):
-        if linha.origem == metricas.RADAR or not linha.conteudo:
+        if linha.origem == metricas.RADAR:
+            onde = de_quem.get(linha.chave) if linha.chave else None
+        else:
+            onde = linha.conteudo
+        if not onde:
             continue
-        for caminho in _ancestrais(linha.conteudo):
+        semana = _semana_de(plano, linha.data)
+        for caminho in _ancestrais(onde):
             atual = situacao.get(caminho)
             if atual is None:
                 continue
+            if linha.revisao:
+                atual.ultima_revisao = _mais_nova(atual.ultima_revisao, linha.data)
+            if semana is not None:
+                # TODA resposta, e nao so a ultima de cada questao: a evolucao
+                # e o historico - errar e depois acertar e o que ela mostra.
+                por_semana.setdefault(caminho, {}).setdefault(semana, []).append(linha)
+            if linha.origem == metricas.RADAR:
+                continue      # o "praticado" do radar sai das ultimas respostas, abaixo
             atual.minutos += linha.minutos
             if linha.questoes:
                 atual.praticado = True
@@ -214,16 +247,9 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
                 atual.estudado = True
                 atual.primeiro_estudo = _mais_velha(atual.primeiro_estudo, linha.data)
                 atual.ultimo_estudo = _mais_nova(atual.ultimo_estudo, linha.data)
-            if linha.questoes and linha.acertos is not None and not linha.consulta:
-                semana = _semana_de(plano, linha.data)
-                if semana is not None:
-                    semanal.setdefault(caminho, {}).setdefault(semana, [0, 0])
-                    semanal[caminho][semana][0] += linha.questoes
-                    semanal[caminho][semana][1] += linha.acertos
 
     # --- as respostas do radar --------------------------------------------
-    de_quem = por_conteudo.nos_das_questoes()
-    for chave, acertou, dia in por_conteudo._questoes_respondidas(None, hoje):
+    for chave, _, dia in por_conteudo._questoes_respondidas(None, hoje):
         caminho_da_questao = de_quem.get(chave)
         if caminho_da_questao is None:
             continue
@@ -234,13 +260,8 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
             atual.praticado = True
             atual.primeira_pratica = _mais_velha(atual.primeira_pratica, dia)
             atual.ultima_pratica = _mais_nova(atual.ultima_pratica, dia)
-            semana = _semana_de(plano, dia)
-            if semana is not None:
-                semanal.setdefault(caminho, {}).setdefault(semana, [0, 0])
-                semanal[caminho][semana][0] += 1
-                semanal[caminho][semana][1] += 1 if acertou else 0
 
-    # --- o desempenho e o estado ------------------------------------------
+    # --- o desempenho, o estado e a evolucao ------------------------------
     minimos = regua.carregar()
     medido = por_conteudo.por_no(recorte, plano, hoje)
     for caminho, atual in situacao.items():
@@ -248,12 +269,22 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
         if no is not None:
             atual.desempenho = no
             atual.estado = no.estado(minimos)
-        semanas = semanal.get(caminho, {})
-        atual.semanal = [
-            (semana, (round(100 * acertos / questoes) if questoes else None), questoes)
-            for semana, (questoes, acertos) in sorted(semanas.items())
-        ]
+        atual.semanal = _evolucao(por_semana.get(caminho, {}),
+                                  minimos.do_nivel(atual.nivel))
     return situacao
+
+
+def _evolucao(por_semana: dict[int, list], minimo: int) -> list[Semana]:
+    """As semanas de um no, pela conta do `metricas` - a mesma da tela
+    Semanas. Semana em que nada mede o acerto (so consulta, ou sem acerto
+    anotado) nao entra."""
+    saida = []
+    for numero, linhas in sorted(por_semana.items()):
+        conta = metricas.contar(linhas).sem_consulta
+        if conta.medidas:
+            saida.append(Semana(numero, conta.porcentagem, conta.medidas,
+                                suficiente=conta.medidas >= minimo))
+    return saida
 
 
 def _mais_nova(atual: date | None, nova: date) -> date:
@@ -264,19 +295,35 @@ def _mais_velha(atual: date | None, nova: date) -> date:
     return nova if atual is None or nova < atual else atual
 
 
-def nao_estudados(plano=None, hoje: date | None = None) -> list[Situacao]:
+def nao_estudados(plano=None, hoje: date | None = None,
+                  todas: dict | None = None) -> list[Situacao]:
     """Os nos em que eu nunca encostei, de cima para baixo na arvore.
 
     Materia inteira nao estudada aparece como materia: listar os 20 assuntos
     dela um por um nao e informacao, e lista telefonica. Por isso o filho de
     um nao estudado nao entra.
+
+    `todas` sao as situacoes ja montadas, para a tela que tambem as mostra
+    nao montar tudo de novo.
     """
-    todas = situacoes(plano=plano, hoje=hoje)
+    if todas is None:
+        todas = situacoes(plano=plano, hoje=hoje)
     virgens = {c for c, s in todas.items()
                if not s.estudado and not s.praticado}
     saida = [todas[c] for c in sorted(virgens)
              if not any(pai in virgens for pai in _ancestrais(c)[:-1])]
     return saida
+
+
+def estudados_ou_praticados(todas: dict[str, Situacao],
+                            materia: str | None = None) -> list[Situacao]:
+    """Os nos em que eu ja encostei, na ordem da arvore: as linhas de "Quando
+    eu estudei e revisei" no Meu desempenho. A materia vale sem acento e sem
+    caixa, como no resto da tela."""
+    procurada = normalizar(materia) if materia else None
+    return [s for _, s in sorted(todas.items())
+            if (s.estudado or s.praticado)
+            and (procurada is None or normalizar(s.materia) == procurada)]
 
 
 # --- a revisao ------------------------------------------------------------------
@@ -297,15 +344,20 @@ def _etapa_e_vencimento(desde: date, respostas_certas: list[date],
 
 
 def para_revisar(plano=None, hoje: date | None = None,
-                 recorte: str = por_conteudo.CICLO) -> list[ParaRevisar]:
+                 recorte: str = por_conteudo.CICLO,
+                 todas: dict | None = None) -> list[ParaRevisar]:
     """Os nos que voltaram para a fila hoje, do mais atrasado ao mais novo.
 
     So no que eu ja estudei ou pratiquei entra: "revisar" o que eu nunca vi
     nao e revisao, e a lista de nao estudados existe para isso.
+
+    `todas` sao as situacoes ja montadas COM O MESMO RECORTE, para a tela que
+    tambem as mostra nao montar tudo de novo.
     """
     plano = plano or plano_de_estudo.carregar()
     hoje = hoje or date.today()
-    todas = situacoes(recorte=recorte, plano=plano, hoje=hoje)
+    if todas is None:
+        todas = situacoes(recorte=recorte, plano=plano, hoje=hoje)
     erradas_por_no = _erradas_por_no()
     caderno_por_no = _caderno_por_no(hoje)
     # Os dias de acerto por no, calculados UMA vez: dentro do laco isto seria

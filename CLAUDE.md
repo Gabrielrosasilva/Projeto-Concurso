@@ -131,14 +131,16 @@ F2 - so o complementar aceito no costume da banca, no treino e no compilado
 (decisao 75) - e o F3 - a gerada guarda a chave da questao real de base
 (decisao 77), e o `--materia` aceita o nome sem acento - e o F4 - os padroes de
 cobranca tambem do complementar, a parte e so com gabarito definitivo (decisao
-78).
+78) - e o F5 - o Meu desempenho mostra a ultima revisao de cada conteudo e a
+evolucao no assunto, contando toda resposta (decisao 79).
 Acervo: 8.433 questoes (as 170 do alvo classificadas e conferidas; 122 provas
 complementares aceitas); 775 geradas (725 do estoque ate 07/11, os 57 lotes:
 `docs/estoque_de_geradas.md`; nas Regras de Mandela a fonte e a regra, decisao
 76); banco na versao 5.
 **Falta, de voce:** conferir as 61 fichas, o complementar (as automaticas,
-por amostra - B.8) e os 15 itens da lista de leis; o **Ciclo 2**, depois do
-simulado de 07/11 e antes de 09/11.
+por amostra - B.8) e os 15 itens da lista de leis; decidir como as faixas do
+plano chegam a arvore (so 6 tem a chave `conteudo`, e nenhum R+7: pendencia
+F); o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
 **Conferir:** a primeira noite do backup consertado (`data/logs/` ou a tela
 Mais) e o Actions de 04/10, o primeiro com a 2A, a 2B e a 2C (pendencias A e
 D); o de 03/10 foi verde.
@@ -169,7 +171,9 @@ reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
 anotado - **nunca sao somados na tela**, so no estado da amostra. **O assunto
 do "Onde estudar primeiro" e da revisao espacada e o no da arvore** em que a
 questao foi classificada (decisao 74), e nao o catalogo nem a coluna
-`assunto`.
+`assunto`. **A ultima revisao de um no sai do `Lancamento.revisao`** do
+`metricas` (decisao 79) - faixa de revisao, extra de revisao, rodada que
+revisa; pratica nao e revisao -, e a evolucao semanal conta toda resposta.
 **Os selos moram no `radar/origem.py`**, e quem escolhe a cor e o dado: o
 servico grava a origem (`origem`, ou `origens` quando junta partes) e o
 template so desenha; `--selo-*` so no `design.css`, e a meta do dia tem as

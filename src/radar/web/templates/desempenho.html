@@ -25,6 +25,8 @@
     .fila .porque{display:block;color:var(--cor-texto-suave);font-size:var(--tam-xs)}
     .estado{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .divisao{display:block;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .semana{white-space:nowrap}
+    .semana.abaixo{color:var(--cor-texto-suave)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -126,6 +128,64 @@
       <p class="convite">Ainda não respondi nada neste recorte, ou o que eu
         respondi não está classificado em conteúdo nenhum. A classificação das
         questões está em <a href="/analises/conferencia">Conferência</a>.</p>
+    {% endif %}
+  </section>
+
+  <section class="ds-cartao">
+    <h2>Quando eu estudei e revisei cada conteúdo</h2>
+    <p class="miudo">Cada conteúdo em que eu já encostei: a última vez que eu
+      estudei ou pratiquei, a última <b>revisão</b> e, no assunto, o acerto
+      semana a semana. Não depende do período escolhido acima: quando eu
+      revisei é sobre a minha vida, e não sobre o ciclo.</p>
+    {% if vistos %}
+      <div class="rolagem">
+        <table class="mapa">
+          <thead>
+            <tr>
+              <th>Conteúdo</th>
+              <th>O que eu fiz</th>
+              <th class="n">Última vez</th>
+              <th class="n">Última revisão</th>
+              <th>Evolução no assunto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in vistos %}
+              <tr class="nivel-{{ s.nivel }}">
+                <td class="nome recuo-{{ s.profundidade }}">{{ s.nome }}</td>
+                <td>{{ s.rotulo }}</td>
+                <td class="n">{{ s.ultima_vez.strftime('%d/%m') if s.ultima_vez else '—' }}</td>
+                <td class="n">{{ s.ultima_revisao.strftime('%d/%m') if s.ultima_revisao else 'nunca' }}</td>
+                <td>
+                  {%- if s.nivel == 'assunto' and s.semanal -%}
+                    {%- for p in s.semanal -%}
+                      <span class="semana {{ 'abaixo' if not p.suficiente }}">semana {{ p.numero }}: {{ p.porcentagem }}% em {{ p.respostas }}</span>
+                      {{- ' · ' if not loop.last -}}
+                    {%- endfor -%}
+                  {%- else -%}—{%- endif -%}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="miudo">
+        {{ selo('automatico') }} <b>Revisão</b> é a faixa de revisão do plano
+        (o R+7) ou o estudo extra de revisão anotados no conteúdo, ou questão
+        dele respondida numa rodada que revisa: a revisão espaçada e as
+        rodadas só de erradas. Questão de rodada comum é prática, não revisão;
+        e a faixa do plano só chega a um conteúdo quando tem a chave
+        <code>conteudo</code> no <code>config/cronograma.yml</code>. A
+        evolução usa as contas da tela Semanas - toda resposta sem consulta, e
+        não só a última de cada questão. A semana em cinza teve menos de
+        {{ minimos.do_nivel('assunto') }} respostas no assunto (o mínimo do
+        <code>config/amostra.yml</code>): o número aparece, mas é pouco para
+        dizer se eu melhorei.
+      </p>
+    {% else %}
+      <p class="convite">Ainda não estudei nem pratiquei nenhum conteúdo da
+        árvore{{ ' nesta matéria' if materia }}. Faixa sem a chave
+        <code>conteudo</code> no plano conta no dia, e em conteúdo nenhum.</p>
     {% endif %}
   </section>
 

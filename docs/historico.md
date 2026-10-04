@@ -1975,3 +1975,17 @@ origem; so o alvo tinha os seus, e o complementar aparecia so como contagem.
 provas com gabarito definitivo e em questao distinta, ao lado dos do alvo e
 nunca somados (decisao 78). Tipo de questao e pegadinha esperam a conferencia
 da classificacao do complementar. Em Portugues, 45 questoes em 22 provas.
+
+## A ultima revisao e a evolucao no Meu desempenho, F5 (03/10)
+
+**O que faltava:** a secao 19 pede a data da ultima revisao de cada conteudo
+e a evolucao por assunto. O servico tinha o campo da revisao desde a Etapa 4,
+mas nunca o preenchia; e a evolucao semanal contava so a ultima resposta de
+cada questao do radar, nao todas, como a tela Semanas.
+
+**O F5:** revisao passou a ser so o que e revisao - faixa de revisao, extra de
+revisao, rodada que revisa no radar -, e a evolucao conta toda resposta pela
+conta do `metricas`, com a semana abaixo do minimo em cinza (decisao 79). A
+tela ganhou a secao "Quando eu estudei e revisei cada conteudo". O achado do
+caminho: quase nenhuma faixa do plano chega a arvore - nenhum R+7 tem a chave
+`conteudo` -, e o que fazer com isso ficou nas pendencias, para voce decidir.

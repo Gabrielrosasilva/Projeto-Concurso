@@ -61,6 +61,10 @@ ICONE_DO_TIPO = {
 # erros da semana", sem numero de questoes proprio.
 TIPOS_COM_ACERTO = {"questoes", "revisao", "simulado", "diagnostico", "bonus"}
 
+# As faixas que REVISAM o que ja foi estudado. Marcadas num conteudo, sao elas
+# que dao a data da ultima revisao dele no Meu desempenho (decisao 79).
+TIPOS_DE_REVISAO = {"revisao", "revisao_semanal"}
+
 
 def tem_acerto(faixa) -> bool:
     """Esta faixa guarda acerto? E a pergunta que decide o formulario na tela."""

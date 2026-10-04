@@ -22,7 +22,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 13 | 7B — As 6 telas no design system | ✅ |
 | 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; falta a sua conferência da lista de leis e conferir a primeira noite do backup |
-| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C, F1, F2, F3 e F4 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento e os padrões do complementar); falta o resto da seção F |
+| 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | 🔄 2A, 2B, 2C e F1 a F5 feitas (as faixas que medem, o simulado do Qconcursos, o sábado, o assunto na faixa, o "Onde estudar" pela árvore, o complementar aceito no costume e no treino, a base da gerada pela chave, a matéria sem acento, os padrões do complementar e a última revisão e a evolução no Meu desempenho); falta o resto da seção F |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 
 ---
@@ -2297,3 +2297,37 @@ feita duas vezes; com uma, caiu de 2,1 s).
 | `test_aceite.py` e `test_varredura_das_telas.py` | 29 passed |
 | `test_incidencia.py`, `test_fichas.py`, `test_complementar.py`, depois da leitura única | 127 passed |
 | Suíte inteira, PC (uma vez) | **2448 passed** (2440 de antes + 8 novos), 0 failed, 25 min |
+
+### F5 — a última revisão e a evolução por assunto no Meu desempenho ✅
+
+**O que mudou** (decisão 79):
+- `src/radar/servico/metricas.py`: o `Lancamento` diz se a linha foi uma
+  revisão (`revisao`) e, na resposta do radar, a chave da questão real
+  (`chave`); `rodada_que_revisa` diz quais rodadas revisam (a espaçada e as
+  só de erradas). O tipo da faixa chega pelo `FaixaFeita.tipo`
+  (`servico/cronograma.py`), e as faixas que revisam são as do
+  `TIPOS_DE_REVISAO` (`cronograma.py`);
+- `src/radar/servico/estudo.py`: o `ultima_revisao` passa a ser preenchido; a
+  evolução (`Semana`) conta toda resposta pela conta do `metricas`, e marca a
+  semana abaixo do mínimo do nível; `estudados_ou_praticados` dá as linhas da
+  tela; a fila e os não estudados aceitam as situações já montadas;
+- a tela (`app.py` e `desempenho.html`): a seção "Quando eu estudei e revisei
+  cada conteúdo", com a última vez, a última revisão e a evolução no assunto,
+  e a regra escrita embaixo, com o selo 🟡.
+
+**Com o banco real:** 10 nós de Português praticados no radar, todos com a
+revisão "nunca" (nenhuma rodada de revisão foi feita, e nenhuma faixa do plano
+chega a conteúdo: das 45 faixas de revisão até 07/11, nenhuma tem a chave
+`conteudo` - está nas pendências como decisão sua). Os assuntos mostram a
+semana 1, toda abaixo do mínimo de 10. A fila e os não estudados saem iguais
+aos de antes (10 e 24), e o serviço da tela caiu de ~1,7 s para ~1,5 s, porque
+as situações são montadas uma vez.
+
+**Testes.**
+
+| Rodada | Resultado |
+|---|---|
+| `test_estudo.py` (18 novos: toda resposta na evolução, a semana abaixo e acima do mínimo, a IA fora, a prática que não é revisão, a faixa de revisão, o extra de revisão, a rodada que revisa, as 7 rodadas que revisam ou não, a ordem e o filtro da tela, as situações já montadas e a página) | 40 passed |
+| `test_cronograma.py`, `test_desempenho.py`, `test_estudo_extra.py`, `test_fichas.py`, `test_materias_na_tela.py`, `test_metricas.py`, `test_registro_estudo.py`, `test_semanas.py`, `test_tela_hoje.py`, `test_varredura_das_telas.py` | 338 passed |
+| Suíte inteira, PC (uma vez) | **2466 passed** (2448 de antes + 18 novos), 0 failed, 25 min |
+| `test_estudo.py`, `test_desempenho.py` e `test_varredura_das_telas.py`, com o texto final da tela | 75 passed |
