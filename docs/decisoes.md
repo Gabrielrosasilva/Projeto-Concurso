@@ -3964,3 +3964,39 @@ em vez de traceback (BUG-6).
      consertada trocaria a questao respondida. A linha exportada ganha a
      `chave`, e a importacao procura por ela no mesmo caderno antes do par
      prova + numero, que continua valendo para o arquivo antigo.
+
+## O pedido de 05/10/2026 (depois das Rodadas 3 e 4)
+
+104. **a classificacao do complementar que uma segunda leitura as cegas pos
+     no MESMO no conta como conferida - pelo Claude Code, e a tela diz
+     isso.** Muda a regra de que conferir e so seu (decisao 16), a seu
+     pedido: as 232 classificacoes do complementar tomariam um tempo de
+     estudo. As 215 questoes distintas sem conferencia foram classificadas
+     de novo por 5 leituras independentes, que nao viram a classificacao de
+     antes. No igual, com confianca alta ou media: 176, marcadas com
+     `conferida_por = "Claude Code, reanálise às cegas"` (coluna nova; nula
+     com `conferida_em` = conferida por voce). As outras 39 - no igual com
+     confianca baixa (4), o mesmo assunto num nivel acima ou abaixo (21) e
+     outro subassunto (14) - ficam para voce, com as duas leituras lado a
+     lado em `docs/reanalise_do_complementar.md`. A conferida por voce nunca
+     e tocada, e a sua conferencia de uma marcada pelo Claude Code apaga a
+     marca dele. Os 109 conceitos associados do alvo e as fichas continuam
+     so seus.
+
+105. **os diagnosticos passam de 03/10 para 10/10, e o R+7 deles refaz
+     TODOS os erros em 17/10.** Os diagnosticos de 03/10 nao foram feitos
+     (nenhuma rodada no banco), e voce quer comecar a medir nesta semana.
+     Em 10/10: o de Raciocinio Logico de manha, no lugar do R+7, e o de
+     Portugues a noite, no lugar das 10 questoes de contagem. Em 17/10: o
+     R+7 "refazer os erros dos diagnosticos" com `questoes: 40` - o maximo
+     dos dois somados, para a faixa refazer todos (a regra de dividir pelo
+     assunto continua no codigo, para faixa que pedir menos que os erros) -,
+     com o motivo de cada erro no caderno. A comparacao de 07/11, que decide
+     o Ciclo 2, passa a ser com 10/10. O dia 03/10 fica como estava: passado
+     nao se reescreve.
+
+Junto, sem decisao nova: os 3 pares parecidos foram juntados (decisao 99:
+Accountability, Brasileiros natos, Progressao funcional - os tres no nome
+mais curto, que cobre a questao do outro) e as 2 geradas antigas da decisao
+89 foram rejeitadas (a do "conjuge" e a do "art. 76" da LEP; a 10 e a 12, do
+mesmo lote, ja estavam).

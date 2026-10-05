@@ -1326,14 +1326,13 @@ dias:
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
       que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
-  - tipo: revisao
-    rotulo: R+7
-    questoes: 5
-    materia: Diagnósticos
-    origem: '2026-10-03'
-    titulo: 'R+7: refazer os erros dos diagnósticos'
-    detalhe: 'Refaça, no radar, as questões que você ERROU nos diagnósticos de 03/10: a lista está abaixo, e a
-      rodada sai pelo botão "Criar a rodada com os erros".'
+  - tipo: diagnostico
+    questoes: 20
+    materia: Raciocínio Lógico
+    titulo: Diagnóstico de Raciocínio Lógico
+    detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
+      "Criar a rodada com esta composição". É o diagnóstico de 03/10, que passou para hoje (decisão 105).'
+    cronometrado: true
     onde: radar
   noite:
   - tipo: simulado
@@ -1353,16 +1352,19 @@ dias:
   - tipo: pausa
     duracao: 10
     titulo: Pausa
-  - tipo: questoes
-    questoes: 10
-    materia: Raciocínio Lógico
-    titulo: 'Raciocínio Lógico: princípios de contagem'
-    detalhe: Questões da FEPESE do assunto da manhã.
-    onde: qconcursos
+  - tipo: diagnostico
+    questoes: 20
+    materia: Língua Portuguesa
+    titulo: Diagnóstico de Português
+    detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
+      "Criar a rodada com esta composição". É o diagnóstico de 03/10, que passou para hoje (decisão 105).'
+    cronometrado: true
+    onde: radar
   - tipo: correcao
     duracao: 30
-    titulo: Correção do simulado
-    detalhe: Anote a nota e os erros por matéria.
+    titulo: Correção do simulado e dos diagnósticos
+    detalhe: Anote a nota e os erros por matéria. Cada erro dos diagnósticos vai para o caderno de erros com o
+      motivo.
   pos22:
   - tipo: anki
     duracao: 10
@@ -1994,6 +1996,16 @@ dias:
     titulo: 'R+7: princípios de contagem'
     detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
     onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 40
+    materia: Diagnósticos
+    origem: '2026-10-10'
+    titulo: 'R+7: refazer os erros dos diagnósticos'
+    detalhe: 'Refaça, no radar, TODAS as questões que você ERROU nos diagnósticos de 10/10 (40 é o máximo: os
+      dois diagnósticos têm 20 cada), e anote no caderno de erros o motivo de cada uma. A lista está abaixo, e a
+      rodada sai pelo botão "Criar a rodada com os erros".'
+    onde: radar
   noite:
   - tipo: simulado
     questoes: 30
@@ -4075,7 +4087,7 @@ dias:
     min_por_questao: 3
     titulo: Simulado de fechamento do Ciclo 1
     detalhe: 'Questões reais da FEPESE das seis matérias do ciclo, sem consulta e sem pausa: o peso do edital divide
-      entre as matérias, e dentro de cada uma vale a mesma regra do diagnóstico de 03/10. Crie a rodada pelo botão
+      entre as matérias, e dentro de cada uma vale a mesma regra do diagnóstico de 10/10. Crie a rodada pelo botão
       "Criar a rodada com esta composição".'
     materias_da_rodada:
     - Língua Portuguesa
@@ -4089,9 +4101,9 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: Compare o acerto por matéria com o diagnóstico de 03/10, na tabela abaixo. É esse número que decide
+    detalhe: Compare o acerto por matéria com o diagnóstico de 10/10, na tabela abaixo. É esse número que decide
       o Ciclo 2.
-    compara_com: '2026-10-03'
+    compara_com: '2026-10-10'
   pos22:
   - tipo: anki
     duracao: 10

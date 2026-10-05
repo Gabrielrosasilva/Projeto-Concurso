@@ -38,7 +38,8 @@ PENDENTE = "pendente"
 
 CAMPOS_DO_ARQUIVO = ("chave", "conteudo", "principal", "status", "trecho",
                      "item_do_edital", "dispositivo", "tipo_de_questao",
-                     "pegadinha", "procedencia", "classificada_em", "conferida_em")
+                     "pegadinha", "procedencia", "classificada_em", "conferida_em",
+                     "conferida_por")
 
 
 class ClassificacaoInvalida(ValueError):
@@ -79,7 +80,8 @@ def classificar(chave: str, conteudo: str, procedencia: str | None, *,
                 dispositivo: str | None = None,
                 tipo_de_questao: str | None = None, pegadinha: str | None = None,
                 classificada_em: datetime | None = None,
-                conferida_em: datetime | None = None) -> Classificacao:
+                conferida_em: datetime | None = None,
+                conferida_por: str | None = None) -> Classificacao:
     """Grava (ou corrige) a ligacao da questao a um no.
 
     `status` so pode ser dado como "pendente" - quando quem classifica nao
@@ -132,6 +134,7 @@ def classificar(chave: str, conteudo: str, procedencia: str | None, *,
         linha.procedencia = procedencia.strip()
         linha.classificada_em = classificada_em or agora()
         linha.conferida_em = conferida_em
+        linha.conferida_por = conferida_por if conferida_em else None
     return linha
 
 
@@ -531,7 +534,35 @@ def conferir(chave: str, *, corrigir_para: str | None = None,
     with sessao() as s:
         linha = s.get(Classificacao, atual.id)
         linha.conferida_em = quando
+        linha.conferida_por = None
     return linha
+
+
+#: Quem confere na reanalise as cegas (decisao 104).
+REANALISE = "Claude Code, reanálise às cegas"
+
+
+def confirmar_pela_reanalise(chave: str, no_da_reanalise: str,
+                             quem: str = REANALISE) -> bool:
+    """Marca como conferida a classificacao que uma segunda leitura, feita sem
+    ver a primeira, pôs EXATAMENTE no mesmo no (decisao 104).
+
+    Voce pediu em 05/10 para nao conferir a mao o que duas leituras
+    independentes ja concordam. No diferente - outro assunto, outro
+    subassunto, ou o mesmo assunto num nivel acima ou abaixo - fica sem marca,
+    para voce. A conferida (por voce ou antes) nao e tocada. Devolve se marcou.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        atual = s.scalar(select(Classificacao)
+                         .where(Classificacao.chave == chave)
+                         .where(Classificacao.principal.is_(True)))
+        if (atual is None or atual.status == PENDENTE or atual.conferida_em is not None
+                or atual.conteudo != no_da_reanalise):
+            return False
+        atual.conferida_em = agora()
+        atual.conferida_por = quem
+        return True
 
 
 # --- quando a releitura do caderno muda o texto ------------------------------------
@@ -540,7 +571,7 @@ def conferir(chave: str, *, corrigir_para: str | None = None,
 CAMPOS_QUE_MUDAM_DE_CHAVE = ("conteudo", "principal", "status", "trecho",
                              "item_do_edital", "dispositivo", "tipo_de_questao",
                              "pegadinha", "procedencia", "classificada_em",
-                             "conferida_em")
+                             "conferida_em", "conferida_por")
 
 
 def rechavear(trocas: dict[str, set[str]], em_uso: set[str]) -> dict[str, int]:
@@ -928,4 +959,5 @@ def _classificar_da_linha(linha: dict) -> Classificacao:
                        dispositivo=linha.get("dispositivo"),
                        tipo_de_questao=linha.get("tipo_de_questao"),
                        pegadinha=linha.get("pegadinha"),
-                       classificada_em=quando, conferida_em=conferida)
+                       classificada_em=quando, conferida_em=conferida,
+                       conferida_por=linha.get("conferida_por"))

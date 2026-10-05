@@ -243,14 +243,16 @@ TITULOS = {
                    ("noite", ["Diagnóstico de Português", "Pausa",
                               "Mini-simulado da semana", "Correção"]),
                    ("pos22", ["Anki: só os vencidos"])],
+    # Os diagnosticos de 03/10 passaram para 10/10, e o R+7 deles para 17/10
+    # (decisao 105).
     "2026-10-10": [("manha", ["Princípios de contagem", "Pausa", "Revisão semanal",
-                              "R+7: refazer os erros dos diagnósticos"]),
-                   ("noite", ["Simulado da semana", "Pausa",
-                              "Raciocínio Lógico: princípios de contagem",
-                              "Correção do simulado"]),
+                              "Diagnóstico de Raciocínio Lógico"]),
+                   ("noite", ["Simulado da semana", "Pausa", "Diagnóstico de Português",
+                              "Correção do simulado e dos diagnósticos"]),
                    ("pos22", ["Anki: só os vencidos"])],
     "2026-10-17": [("manha", ["Probabilidade", "Pausa", "Revisão semanal",
-                              "R+7: princípios de contagem"]),
+                              "R+7: princípios de contagem",
+                              "R+7: refazer os erros dos diagnósticos"]),
                    ("noite", ["Simulado da semana", "Pausa", "Raciocínio Lógico: probabilidade",
                               "Correção do simulado"]),
                    ("pos22", ["Anki: só os vencidos"])],
@@ -296,6 +298,8 @@ def test_o_cronograma_real_tem_as_tres_faixas_que_medem_e_sem_numero_a_mao():
     assert [(d.isoformat(), f.titulo) for d, f in medem] == [
         ("2026-10-03", "Diagnóstico de Raciocínio Lógico"),
         ("2026-10-03", "Diagnóstico de Português"),
+        ("2026-10-10", "Diagnóstico de Raciocínio Lógico"),
+        ("2026-10-10", "Diagnóstico de Português"),
         ("2026-11-07", "Simulado de fechamento do Ciclo 1")]
     for _, faixa in medem:
         assert "Radar > Simulado" not in (faixa.detalhe or "")

@@ -2162,3 +2162,15 @@ que apontava para eles, e a classificacao passa a recusar o nome parecido
 (99). O modo revisao continua aceitando o no so praticado, agora de
 proposito e dizendo quantos sao (101). Junto, os menores da auditoria e as 4
 fichas de Portugues da primeira semana, que nunca tinham sido escritas.
+
+## O pedido de 05/10: a reanalise, os diagnosticos e a nuvem
+
+Para nao gastar tempo de estudo conferindo 232 classificacoes, a conferencia
+do complementar passou a aceitar uma segunda leitura as cegas: 5 leituras
+independentes classificaram de novo as 215 questoes, e onde caiu no mesmo no
+a classificacao ficou conferida pelo Claude Code, com a marca na tela
+(decisao 104). Sobraram 39. Os diagnosticos de 03/10, que nao tinham sido
+feitos, passaram para 10/10, e o R+7 deles refaz todos os erros (decisao
+105). Os 3 pares parecidos foram juntados e as 2 geradas erradas saíram.
+Ficou levantado o que falta classificar (so Portugues e Raciocinio Logico, no
+edital) e escrito o roteiro para levar o radar a nuvem com login.

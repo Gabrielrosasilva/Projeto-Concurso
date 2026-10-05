@@ -91,7 +91,7 @@ nao lista "aplicacao da lei penal".
 
 ### B.8 🟡 Classificacao do acervo complementar (Etapa 3B, passo 4)
 
-As 169 provas aceitas no `data/acervo_complementar.json` estao no acervo
+As 172 provas aceitas no `data/acervo_complementar.json` estao no acervo
 (eram 122 ate 04/10: o leitor consertado e as 21 provas baixadas fizeram
 entrar 47, decisao 90).
 **Feito (02/10):** as 80 do Socioeducativo 2013 e 2016 (lote 1), com 62
@@ -108,13 +108,12 @@ classificacao ainda" em Portugues):
    uma: o lote 4 (decisao 87).
 
 **O que sobra na B.8:**
-- **a sua conferencia**, uma a uma, das 232 classificadas do complementar
-  aceito: as 124 do Claude Code de 02/10 (lotes 1 e 2) e as 108 refeitas em
-  04/10 (lote 4). A tela existe desde 04/10 (decisao 87): Analises >
-  Conferencia, filtro "complementar aceito". O Claude Code releu as 44 do lote
-  2 no mesmo dia: todas no no certo; um dispositivo que nao existe (CPP, art.
-  282, § 7º) virou o art. 282, § 5º, e o art. 316, paragrafo unico. Proposta
-  nova do catalogo, se ele rodar de novo, se confere pela amostra da tela;
+- **a sua conferencia das 39 que a reanalise deixou** (decisao 104): das
+  215 questoes classificadas e nao conferidas, 176 tiveram o mesmo no numa
+  segunda leitura as cegas e ficaram conferidas pelo Claude Code; as 39 que
+  sobram estao em [reanalise_do_complementar.md](reanalise_do_complementar.md),
+  com as duas leituras lado a lado. Tela: Analises > Conferencia, filtro
+  "complementar aceito" e "so as nao conferidas";
 - **a sua conferencia dos 109 conceitos associados** do alvo (decisoes 86 e
   94): Analises > Conferencia, evidencia "alvo", caixa "so com associado por
   conferir" - 72 questoes, cada associado com Confirmar ou Tirar;
@@ -201,28 +200,30 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
-- ⚪ **O R+7 dos diagnosticos refaz 5 erros** (decisao 70): e o numero do
-  plano. Com mais erros, os outros ficam para a rodada "So meus erros" da
-  home. Se quiser refazer todos, e trocar o `questoes: 5` da faixa de 10/10 -
-  decisao sua;
-- ⚪ **Temas sem no e Portugues sem filtro** (achados da 2B): as fichas de LEP e de
-  Portugues sem no (30 faixas de 03/10 a 07/11) deixam o tema, no simulado do
-  Qconcursos, sem incidencia contada - e a faixa diz "a ficha nao aponta no da
-  arvore" (2C); e as faixas de Portugues nao tem `filtro` do
-  Qconcursos. Dar no a uma ficha e mexer no texto da IA (precisa da sua
-  conferencia); o filtro, so com o caminho exato do Qconcursos, que eu nao
-  sei - me passe se quiser;
-
+- 🔴 **Classificar o que falta do acervo, para o treino e a geracao terem
+  precisao** (pedido de 05/10): das materias do edital de 2019, so faltam
+  **Portugues** (159 questoes distintas sem classificacao e 3 pendentes, de
+  251 do complementar aceito) e **Raciocinio Logico** (30 de 45). As outras -
+  Constitucional, Administrativo, Penal, Processo Penal, Direitos Humanos,
+  Legislacao Estadual - estao todas classificadas; LEP, Legislacao Especial,
+  Administracao Publica e Sociologia so tem questao no alvo, e as 170 do alvo
+  estao feitas. Fora do edital, de proposito: Nocoes de Informatica (76, so
+  em 2013), Conhecimentos Gerais (149), Conhecimentos Especificos (2.353,
+  conteudo de outros cargos), ECA e Sinase. Proposta: o mesmo caminho da
+  reanalise (decisao 104) - uma classificacao, uma segunda leitura as cegas,
+  e voce so confere onde as duas discordam. Antes, a arvore de Portugues
+  precisa de no para o que a FEPESE cobra e o edital nao nomeia: regencia
+  (verbal e nominal), fonologia, o verbo "haver" nas lacunas a/a/ha. Feito
+  isso, as faixas de Portugues podem treinar no radar, so FEPESE, no lugar
+  do Qconcursos (as fichas de LEP e Portugues sem no continuam um ponto a
+  ver);
 - ⚪ **A gerada e unica pelo enunciado** (`QuestaoGerada.impressao`): dois
   comandos genericos iguais com alternativas diferentes viram uma so, e a
   importacao conta a segunda como repetida. Por desenho; no estoque, cada
   enunciado foi escrito com o que cobra;
-- ⚪ **Duas geradas antigas para voce olhar** (decisao 89): a de genero do
-  substantivo de 28/09 da "conjuge" como comum de dois generos, e a gramatica
-  tradicional o da como sobrecomum ("o conjuge"); e a do diretor de
-  estabelecimento de 27/09 cita o "art. 76" da LEP, e o requisito e do art.
-  75. As duas ficaram no sorteio: o botao "essa questao esta errada" do
-  /geradas tira, se voce concordar;
+- 🔴 **Levar o radar para a nuvem, com login e dois perfis** (pedido de
+  05/10): o plano, as opcoes, os custos e as perguntas que voce precisa
+  responder antes estao em [roteiro_nuvem.md](roteiro_nuvem.md);
 
 ## E. Cancelado
 
@@ -251,11 +252,15 @@ a 4 e no lote de 05/10 (decisões 96 a 103; o resumo está no
 
 - 🔴 **A 2013-q53 (abolitio criminis) continua pendente:** a classificação é
   conferida por você, e só você muda o nó dela;
-- ⚪ **3 pares parecidos que não foram juntados** (decisão 99), porque não
-  são o mesmo conceito com certeza: "Accountability" × "Accountability
-  horizontal…", "Brasileiros natos" × "Brasileiros natos e naturalizados" e,
-  na LC 675, "Progressão funcional" × "Progressão funcional e estágio
-  probatório". Se forem o mesmo, `radar conteudos --juntar … --em …`;
+- ⚪ **Mais nós repetidos, achados na reanálise de 05/10** (os 3 pares da
+  decisão 99 já foram juntados): em Direitos Humanos, "Declaração Universal de
+  1948", "Declaração Universal dos Direitos Humanos (1948)" e "Conteúdo da
+  Declaração Universal dos Direitos Humanos"; "Conferência de Viena (1993)" e
+  "Declaração e Programa de Ação de Viena (1993)"; no Estatuto do Servidor de
+  SC, "Posse e exercício", "Provimento: nomeação e posse" e "Jornada, serviço
+  extraordinário e posse"; e o nó de abuso de autoridade tem o nome da Lei
+  4.898/1965, revogada pela 13.869/2019, que é a que as questões cobram.
+  Juntar ou renomear é com você (`radar conteudos --juntar`);
 - ⚪ **O `compilado.mesma_materia` (comparação difusa, 0,85)** continua: casa
   o nome do quadro do edital com o do caderno (decisão 97);
 - ⚪ **CL-2 da auditoria:** o `provas.py` e o `provas_ieses.py` sabem ler os

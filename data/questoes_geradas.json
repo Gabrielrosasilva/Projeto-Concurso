@@ -11644,7 +11644,7 @@
     "modo_do_pedido": null,
     "origem_chave": "2321633d3c77e80c69509d91d93cfa0f",
     "origem_impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
-    "rejeitada": false,
+    "rejeitada": true,
     "resposta": "b"
   },
   {
@@ -20068,7 +20068,7 @@
     "modo_do_pedido": null,
     "origem_chave": null,
     "origem_impressao": null,
-    "rejeitada": false,
+    "rejeitada": true,
     "resposta": "a"
   },
   {

@@ -756,6 +756,9 @@ class Classificacao(Base):
     classificada_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
     #: Quando EU conferi. Nula = ainda nao conferida.
     conferida_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
+    #: Quem conferiu, quando nao fui eu: a reanalise as cegas do Claude Code
+    #: (decisao 104). Nula com `conferida_em` = conferida por mim.
+    conferida_por: Mapped[str | None] = mapped_column(String(120), nullable=True)
 
     def __repr__(self) -> str:
         return f"<Classificacao {self.chave} {self.status} {self.conteudo!r}>"

@@ -28,6 +28,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 19 | Auditoria independente de 04/10 e a Rodada 1 das correções | ✅ a auditoria ([auditoria_independente](auditoria_independente.md): 186 requisitos, 8 defeitos) e a Rodada 1 (BUG-1, BUG-2, BUG-6 e BUG-8; decisão 96); as rodadas 2 a 4 estão na pendência G |
 | 20 | Rodada 2 das correções da auditoria | ✅ 2563 passed; o sinônimo de matéria nos filtros e no acerto por matéria (decisão 97) e o `radar padrao` por evidência (decisão 98) |
 | 21 | Rodadas 3 e 4 e o resto da auditoria | ✅ 2574 passed; a migração sem perder JSON (102), os simulados pela chave (103), 12 nós juntados e a recusa do parecido (99), o "praticado" (101), o ADD COLUMN (100), os menores e as 4 fichas que faltavam (65) |
+| 22 | O pedido de 05/10 (pares, geradas, reanálise, diagnósticos, nuvem) | ✅ 2576 passed; 3 pares juntados, 2 geradas rejeitadas, 176 de 215 classificações do complementar conferidas pela reanálise às cegas (104), os diagnósticos em 10/10 e o R+7 com todos os erros em 17/10 (105), o levantamento do que falta classificar e o [roteiro da nuvem](roteiro_nuvem.md) |
 
 ---
 
@@ -2864,3 +2865,44 @@ código de antes.
 **Comandos reais:** `radar conteudos --juntar` nos 12 pares; `radar fichas
 --importar` (4 gravadas, procedência de 05/10); `radar complementar` (sem
 `--aplicar`: 172 provas entrariam, as mesmas aceitas).
+
+## 22 — O pedido de 05/10 (depois das Rodadas 3 e 4)
+
+- **Os 3 pares parecidos** foram juntados pelo `radar conteudos --juntar`
+  (com cópia antes), cada um no nome mais curto: Accountability, Brasileiros
+  natos e Progressão funcional (a do alvo). A árvore foi a 405 nós.
+- **As 2 geradas erradas** (a do "cônjuge", id 43, e a do "art. 76", id 11)
+  rejeitadas pelo `servico.geradas.rejeitar`: saem do sorteio e as respostas
+  delas saem do acerto.
+- **A reanálise do complementar (decisão 104):** `models.py`
+  (`Classificacao.conferida_por`, coluna nova criada sozinha pelo `db.py`),
+  `servico/classificacoes.py` (`confirmar_pela_reanalise`, `REANALISE`, o
+  campo no arquivo e na troca de chave; a sua conferência apaga a marca) e
+  `conferencia.html` ("✓ conferida pelo Claude Code, reanálise às cegas").
+  As 215 questões distintas sem conferência foram classificadas de novo por 5
+  leituras independentes (sem ver a classificação de antes): 180 no mesmo nó
+  (176 com confiança alta ou média, marcadas), 21 no mesmo assunto em outro
+  nível, 14 em outro subassunto, nenhuma em outra matéria. As 39 que ficam
+  para você estão em [reanalise_do_complementar.md](reanalise_do_complementar.md).
+- **Os diagnósticos (decisão 105):** `config/cronograma.yml` (10/10 com os
+  dois diagnósticos, 17/10 com o R+7 de 40, 07/11 comparando com 10/10).
+- **O levantamento do que falta classificar:** na pendência D (Português e
+  Raciocínio; o resto do edital está feito).
+- **O roteiro da nuvem:** [roteiro_nuvem.md](roteiro_nuvem.md), etapas N0 a N6
+  e as perguntas antes da N1.
+
+**Testes:** novo, `test_a_reanalise_so_confirma_o_mesmo_no_e_diz_quem_conferiu`
+(`test_classificacao`); `test_o_r7_do_plano_refaz_todos_os_erros`
+(`test_sabado`). Ajustados às datas novas: os do sábado
+(`test_sabado`), os títulos dos sábados e as faixas que medem
+(`test_composicao`) e o total de questões do plano, 2054 → 2119
+(`test_cronograma`).
+
+| Rodada | Resultado |
+|---|---|
+| Os arquivos tocados (`test_sabado`, `test_cronograma`, `test_estudo`, `test_composicao`, `test_classificacao`, `test_associados`) | 133 + 160 + 41 passed, depois dos ajustes |
+| Suíte inteira, PC (uma vez, no fim) | **2576 passed** (2574 + 2 novos), 0 failed, 24 min 5 s; os `data/*.json` e `config/*.yml` intactos pela suíte |
+
+**Comandos reais:** `radar conteudos --juntar` (3 vezes), `radar hoje --data
+2026-10-10` e `--data 2026-10-17` (os diagnósticos e o R+7 de 40 nos
+lugares), a marcação das 176 e o `exportar` das classificações (511 linhas).

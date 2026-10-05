@@ -128,7 +128,7 @@
         <h3>{{ q.codigo }} · {{ q.materia_do_caderno or 'sem matéria' }}
           {% if q.anulada %}<span class="ds-selo">anulada pela banca</span>{% endif %}
           {% if q.na_amostra %}<span class="ds-selo">🟡 na amostra</span>{% endif %}
-          {% if q.conferida %}<span class="ds-selo">✓ conferida</span>{% endif %}
+          {% if q.conferida %}<span class="ds-selo">✓ conferida{% if c.conferida_por %} pelo {{ c.conferida_por }}{% endif %}</span>{% endif %}
         </h3>
         {% if q.outros_cadernos %}
           <p class="ds-suave">A mesma questão está em mais {{ q.outros_cadernos }}

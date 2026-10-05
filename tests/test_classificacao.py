@@ -257,6 +257,33 @@ def test_conferir_confirma_corrige_ou_deixa_pendente(alvo):
     assert "não sei se é de Penal" in c.trecho
 
 
+def test_a_reanalise_so_confirma_o_mesmo_no_e_diz_quem_conferiu(alvo, tmp_path):
+    """Decisao 104: a segunda leitura as cegas confirma so o no IGUAL; outro
+    no, ou o mesmo assunto num nivel acima, fica para voce. A marca diz quem
+    conferiu e vai e volta pelo arquivo."""
+    caminho = "Direito Penal > " + IMPUTABILIDADE
+    for codigo in ("2019-51", "2019-52", "2013-11"):
+        classificacoes.classificar(_k(codigo), caminho, "Claude Code")
+    classificacoes.conferir(_k("2013-11"))
+
+    assert classificacoes.confirmar_pela_reanalise(_k("2019-51"), caminho)
+    assert not classificacoes.confirmar_pela_reanalise(_k("2019-52"), "Direito Penal")
+    assert not classificacoes.confirmar_pela_reanalise(_k("2013-11"), caminho)
+
+    c = _principal("2019-51")
+    assert c.conferida_em is not None and c.conferida_por == classificacoes.REANALISE
+    assert _principal("2019-52").conferida_em is None
+    assert _principal("2013-11").conferida_por is None        # a sua fica sua
+
+    arquivo = tmp_path / "classificacoes.json"
+    classificacoes.exportar(arquivo)
+    with sessao() as s:
+        s.query(Classificacao).delete()
+    classificacoes.importar(arquivo)
+    assert _principal("2019-51").conferida_por == classificacoes.REANALISE
+    assert _principal("2013-11").conferida_por is None
+
+
 # --- a tela ---------------------------------------------------------------------
 
 def test_a_tela_mostra_a_proposta_e_grava_a_decisao(alvo):

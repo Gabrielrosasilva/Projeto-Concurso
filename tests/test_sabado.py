@@ -5,13 +5,15 @@ O que estes testes seguram:
   - a revisao semanal diz os temas da semana do plano, os erros anotados nela
     (por tema) e os artigos-chave dos dias;
   - o R+7 dos diagnosticos refaz so as questoes reais que eu errei nas rodadas
-    de 03/10, no maximo o numero do plano, e nao recria a rodada;
+    de 10/10 - todas: o plano pede 40, o maximo dos dois diagnosticos (decisao
+    105) -, e nao recria a rodada;
   - a comparacao de 07/11 mostra o diagnostico, o fechamento e o ciclo
     separados - nunca somados -, com "Amostra insuficiente" abaixo do minimo.
 
 Nenhum teste depende da data de hoje: o botao de criar rodada so aparece no
 dia da faixa, e por isso a tela e conferida pelo que nao muda com a data.
 """
+from dataclasses import replace
 from datetime import date
 
 import pytest
@@ -27,7 +29,10 @@ from radar.servico import simulado as servico_simulado
 from radar.web.app import app
 from tests.test_composicao import CONFIG, PESOS_DO_EDITAL, acervo  # noqa: F401 - fixture
 
-R7 = date(2026, 10, 10)
+# Os diagnosticos passaram de 03/10 para 10/10, e o R+7 deles para 17/10
+# (decisao 105).
+DIAGNOSTICO = date(2026, 10, 10)
+R7 = date(2026, 10, 17)
 FECHAMENTO = date(2026, 11, 7)
 
 
@@ -55,10 +60,15 @@ def _responder(simulado_id: int, errar: int) -> list[int]:
 
 
 def _diagnosticos(errar_rl: int, errar_pt: int) -> list[int]:
-    """As duas rodadas de 03/10, criadas como o botao cria e respondidas. No
+    """As duas rodadas de 10/10, criadas como o botao cria e respondidas. No
     acervo do teste, Raciocinio tem 2 questoes e Portugues 7."""
-    rl = composicao.criar_rodada_do_dia(date(2026, 10, 3), "manha", 0)
-    pt = composicao.criar_rodada_do_dia(date(2026, 10, 3), "noite", 0)
+    dia = cronograma.carregar(CONFIG / "cronograma.yml").dia(DIAGNOSTICO)
+
+    def a_que_mede(bloco):
+        return next(i for i, f in enumerate(getattr(dia, bloco)) if composicao.mede(f))
+
+    rl = composicao.criar_rodada_do_dia(DIAGNOSTICO, "manha", a_que_mede("manha"))
+    pt = composicao.criar_rodada_do_dia(DIAGNOSTICO, "noite", a_que_mede("noite"))
     return _responder(rl.id, errar_rl) + _responder(pt.id, errar_pt)
 
 
@@ -118,14 +128,25 @@ def test_o_r7_refaz_so_os_erros_reais_dos_diagnosticos(acervo, plano):
 
     assert len(r.rodadas) == 2
     assert sorted(e.questao_id for e in r.erros) == sorted(erradas)
-    assert len(r.escolhidos) == 3          # 3 erros, o plano pede 5: refaz todos
+    assert len(r.escolhidos) == 3          # 3 erros, o plano pede 40: refaz todos
 
 
-def test_o_r7_refaz_no_maximo_o_numero_do_plano_pelo_assunto_com_mais_erro(acervo, plano):
-    """9 erros (2 de conjuntos, 4 de interpretacao, 2 de crase, 1 de
-    ortografia) para 5 questoes: o assunto em que mais errei volta mais."""
+def test_o_r7_do_plano_refaz_todos_os_erros(plano):
+    """Decisao 105: o R+7 refaz TODOS os erros dos diagnosticos. O numero do
+    plano e o maximo possivel - os dois diagnosticos somados."""
+    _indice, faixa = _faixa_do_r7(plano)
+    diagnosticos = [f for f in plano.dia(DIAGNOSTICO).faixas() if composicao.mede(f)]
+    assert len(diagnosticos) == 2
+    assert faixa.questoes == sum(f.questoes for f in diagnosticos) == 40
+
+
+def test_o_r7_com_menos_que_os_erros_volta_o_assunto_com_mais_erro(acervo, plano):
+    """Uma faixa que pedisse 5 para 9 erros (2 de conjuntos, 4 de
+    interpretacao, 2 de crase, 1 de ortografia): o assunto em que mais errei
+    volta mais. O plano de hoje nao tem essa faixa; a regra continua."""
     _diagnosticos(errar_rl=2, errar_pt=7)
     indice, faixa = _faixa_do_r7(plano)
+    faixa = replace(faixa, questoes=5)
 
     r = sabado.erros_das_rodadas(R7, "manha", indice, faixa, plano)
 
@@ -152,7 +173,7 @@ def test_a_rodada_do_r7_so_tem_os_erros_e_nao_e_recriada(acervo, plano):
     assert sorted(r.questao_id for r in respostas) == sorted(erradas)
     assert all(not r.gerada for r in respostas)            # so questao real
     assert simulado.filtros["erros"] is True
-    assert simulado.filtros["origem"]["dia"] == "2026-10-03"
+    assert simulado.filtros["origem"]["dia"] == "2026-10-10"
     assert sabado.erros_das_rodadas(R7, "manha", indice, faixa, plano).rodada_id == rodada.id
 
 
@@ -180,7 +201,7 @@ def test_a_comparacao_separa_diagnostico_e_fechamento_e_marca_a_amostra(
 
     c = sabado.comparacao(FECHAMENTO, correcao, plano)
 
-    assert c.com == date(2026, 10, 3) and c.minimo == 20
+    assert c.com == DIAGNOSTICO and c.minimo == 20
     assert len(c.linhas) == 6
     linhas = {linha.materia: linha for linha in c.linhas}
     rl = linhas["Raciocínio Lógico"]
@@ -192,14 +213,14 @@ def test_a_comparacao_separa_diagnostico_e_fechamento_e_marca_a_amostra(
 
 # --- a tela ---------------------------------------------------------------------------
 
-def test_o_sabado_10_10_mostra_a_revisao_e_os_erros_dos_diagnosticos(acervo, monkeypatch):
+def test_o_sabado_17_10_mostra_a_revisao_e_os_erros_dos_diagnosticos(acervo, monkeypatch):
     monkeypatch.setattr(composicao, "_pesos_do_edital", lambda materias: PESOS_DO_EDITAL)
     _diagnosticos(errar_rl=1, errar_pt=2)
-    pagina = TestClient(app).get("/hoje?data=2026-10-10").text
+    pagina = TestClient(app).get("/hoje?data=2026-10-17").text
 
-    assert "A semana de 05/10 a 09/10." in pagina
+    assert "A semana de 12/10 a 16/10." in pagina
     assert "(3) Os artigos-chave da semana" in pagina
-    assert "3 erros nos diagnósticos de 03/10." in pagina
+    assert "3 erros nos diagnósticos de 10/10." in pagina
     assert "Esta faixa refaz todos." in pagina
 
 
@@ -215,7 +236,7 @@ def test_o_botao_do_r7_cria_a_rodada_e_a_faixa_passa_a_abrir_ela(acervo, plano, 
 
     assert resposta.status_code == 303
     assert resposta.headers["location"].startswith("/simulado/")
-    assert "Abrir a rodada desta faixa" in cliente.get("/hoje?data=2026-10-10").text
+    assert "Abrir a rodada desta faixa" in cliente.get("/hoje?data=2026-10-17").text
 
 
 def test_o_07_11_mostra_a_tabela_da_comparacao(acervo, monkeypatch):
@@ -224,7 +245,7 @@ def test_o_07_11_mostra_a_tabela_da_comparacao(acervo, monkeypatch):
     _diagnosticos(errar_rl=1, errar_pt=0)
     pagina = TestClient(app).get("/hoje?data=2026-11-07").text
 
-    assert "Diagnóstico de 03/10" in pagina and "Fechamento de 07/11" in pagina
+    assert "Diagnóstico de 10/10" in pagina and "Fechamento de 07/11" in pagina
     assert "1 de 2 · 50%" in pagina
     assert "Amostra insuficiente" in pagina
     assert "sem diagnóstico" in pagina                 # Direitos Humanos
