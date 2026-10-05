@@ -108,7 +108,7 @@ classificacao ainda" em Portugues):
    uma: o lote 4 (decisao 87).
 
 **O que sobra na B.8:**
-- **a sua conferencia das 46 classificacoes abertas e das 32 pendentes**
+- **a sua conferencia das 46 classificacoes abertas e das 29 pendentes**
   (decisoes 104 e 106): o que as duas leituras as cegas nao fecharam, na
   reanalise e na classificacao de Portugues e Raciocinio. Lista unica, com a
   segunda leitura ao lado: [conferir_classificacoes.md](conferir_classificacoes.md).

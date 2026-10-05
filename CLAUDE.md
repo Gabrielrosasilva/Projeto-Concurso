@@ -154,7 +154,7 @@ Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
 provas complementares aceitas); 775 geradas (7 rejeitadas); banco na versao 5.
 **Falta, de voce:** conferir as 65 fichas (a conferida tambem liga as faixas
 do tema ao Meu desempenho, decisao 81), as 46 classificacoes abertas do
-complementar e as 32 pendentes (decisoes 104 e 106: o resto ficou conferido
+complementar e as 29 pendentes (decisoes 104 e 106: o resto ficou conferido
 pela segunda leitura as cegas; lista unica em [conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
 associados (o mesmo lugar, "so com associado por conferir") e os 15 itens da
 lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.

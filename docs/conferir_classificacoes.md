@@ -1,9 +1,10 @@
 # Classificações do complementar para conferir
 
-Estado de 05/10/2026: **46 classificações abertas** e **32 pendentes**, no
-complementar aceito. É a lista única: junta o que sobrou da reanálise
-(decisão 104) e da classificação de Português e Raciocínio (decisão 106).
-As outras já estão conferidas, por você ou pela segunda leitura às cegas.
+Estado de 05/10/2026: **46 classificações abertas** e **29 pendentes** ainda
+não vistas por você, no complementar aceito. É a lista única: junta o que
+sobrou da reanálise (decisão 104) e da classificação de Português e
+Raciocínio (decisão 106). As outras já estão conferidas, por você ou pela
+segunda leitura às cegas.
 
 Tela: Análises > Conferência, filtro "complementar aceito" e "só as não
 conferidas". Para cada uma: confirmar a de hoje, ou corrigir para a da
@@ -253,15 +254,13 @@ segunda leitura (ou para outra).
   - segunda leitura (media): Raciocínio Lógico > Proposições simples e compostas
   - por quê: Conceito de proposição (itens 1-3) e nomenclatura da condicional (item 4, invertida).
 
-## As pendentes (32)
+## As pendentes (29)
 
 Sem nó, com o motivo: tema que o edital de 2019 não lista, ou enunciado cortado na leitura do PDF.
 
 - **q48 de 2016secjustica · AS.pdf** (Direito Penal) — pendente: crime de tortura (Lei 9.455/1997): no edital de 2019 isso é Legislação Especial, e o bloco do caderno diz Direito Penal; trocar de matéria s
 - **q27 de 2016secjustica · AS.pdf** (Direitos Humanos) — pendente: instrumento de proteção da criança (Convenção da ONU de 1989): conteúdo do concurso socioeducativo, sem assunto correspondente no programa d
 - **q30 de 2016secjustica · AS.pdf** (Direitos Humanos) — pendente: Regras de Beijing (administração da justiça da infância e da juventude): tema do concurso socioeducativo, fora do programa de Direitos Human
-- **q51 de secjustica · AS.pdf** (Legislação Estadual) — pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto corresponden
-- **q52 de secjustica · AS.pdf** (Legislação Estadual) — pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto corresponden
 - **q53 de secjustica · AS.pdf** (Legislação Estadual) — pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto corresponden
 - **q54 de secjustica · AS.pdf** (Legislação Estadual) — pendente: Lei Complementar estadual 472/2009 (carreira do sistema socioeducativo): o edital de 2019 cobra a LC 675/2016, e não há assunto corresponden
 - **q56 de 2016secjustica · AS.pdf** (Legislação Estadual) — pendente: Constituição do Estado de Santa Catarina de 1989: o programa de Legislação Estadual do edital de 2019 lista só a Lei 6.745, a LC 675 e a LC 
@@ -279,7 +278,6 @@ Sem nó, com o motivo: tema que o edital de 2019 não lista, ou enunciado cortad
 - **q5 de 2023bcseletivoadm · FP.pdf** (Língua Portuguesa) — pendente: Questão de 'norma padrão' que mistura pontos sem um dominante: regência ('de que se tem notícia'), 'há' x 'a' de tempo, conjugação ('tu diss
 - **q13 de substitutos2024 · AS.pdf** (Língua Portuguesa) — pendente: Variação linguística (variantes léxico-semânticas, fonético-fonológicas e morfossintáticas) não consta dos assuntos do edital de Língua Port
 - **q19 de substitutos2024 · AS.pdf** (Língua Portuguesa) — pendente: Questão de 'norma padrão' que mistura pontos sem um dominante: frase fragmentada, 'onde' x 'aonde', concordância de 'é permitido', pronome r
-- **q2 de secjustica · AS.pdf** (Língua Portuguesa) — pendente: nao e de linguia portuguesa essa questao
 - **q5 de 2016secjustica · AS.pdf** (Língua Portuguesa) — pendente: Enunciado truncado: só aparecem os três trechos do texto; as afirmativas V/F que decidem o gabarito não estão no texto recebido, então não d
 - **q6 de 2016secjustica · AS.pdf** (Língua Portuguesa) — pendente: Enunciado truncado: só a afirmativa 1 (sobre as formas verbais 'sejam' e 'esquecem') aparece; as afirmativas 2 a 5, que decidem o gabarito (
 - **q5 de 2024emergencialpalhoca · S01.pdf** (Língua Portuguesa) — pendente: O texto ('Português de Menas') e as afirmativas 1, 2 e 3 estão truncados: não aparecem as afirmativas avaliadas, só as alternativas de combi
