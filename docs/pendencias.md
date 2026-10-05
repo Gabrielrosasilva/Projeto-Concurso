@@ -200,23 +200,15 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
-- 🔴 **Classificar o que falta do acervo, para o treino e a geracao terem
-  precisao** (pedido de 05/10): das materias do edital de 2019, so faltam
-  **Portugues** (159 questoes distintas sem classificacao e 3 pendentes, de
-  251 do complementar aceito) e **Raciocinio Logico** (30 de 45). As outras -
-  Constitucional, Administrativo, Penal, Processo Penal, Direitos Humanos,
-  Legislacao Estadual - estao todas classificadas; LEP, Legislacao Especial,
-  Administracao Publica e Sociologia so tem questao no alvo, e as 170 do alvo
-  estao feitas. Fora do edital, de proposito: Nocoes de Informatica (76, so
-  em 2013), Conhecimentos Gerais (149), Conhecimentos Especificos (2.353,
-  conteudo de outros cargos), ECA e Sinase. Proposta: o mesmo caminho da
-  reanalise (decisao 104) - uma classificacao, uma segunda leitura as cegas,
-  e voce so confere onde as duas discordam. Antes, a arvore de Portugues
-  precisa de no para o que a FEPESE cobra e o edital nao nomeia: regencia
-  (verbal e nominal), fonologia, o verbo "haver" nas lacunas a/a/ha. Feito
-  isso, as faixas de Portugues podem treinar no radar, so FEPESE, no lugar
-  do Qconcursos (as fichas de LEP e Portugues sem no continuam um ponto a
-  ver);
+- 🔴 **Conferir as 24 de Portugues e Raciocinio que as duas leituras nao
+  fecharam** (decisao 106): 11 no mesmo no com confianca baixa, 8 no mesmo
+  assunto em outro nivel, 4 em outro subassunto e 1 que a segunda deixou
+  pendente; mais as 19 pendentes (temas fora do edital e enunciados cortados).
+  Tudo em [classificacao_pt_rl.md](classificacao_pt_rl.md). Junto, **dois
+  gabaritos de Raciocinio para conferir**: a 2024-q21 (a conta da 50%, o
+  gabarito diz 24% a 26%) e a 2023-q10-533 (enunciado cortado). Com a
+  classificacao feita, as faixas de Portugues ja podem treinar no radar, so
+  FEPESE, no lugar do Qconcursos - e mudar o cronograma, decisao sua;
 - ⚪ **A gerada e unica pelo enunciado** (`QuestaoGerada.impressao`): dois
   comandos genericos iguais com alternativas diferentes viram uma so, e a
   importacao conta a segunda como repetida. Por desenho; no estoque, cada

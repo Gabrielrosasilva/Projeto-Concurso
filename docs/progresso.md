@@ -29,6 +29,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 20 | Rodada 2 das correções da auditoria | ✅ 2563 passed; o sinônimo de matéria nos filtros e no acerto por matéria (decisão 97) e o `radar padrao` por evidência (decisão 98) |
 | 21 | Rodadas 3 e 4 e o resto da auditoria | ✅ 2574 passed; a migração sem perder JSON (102), os simulados pela chave (103), 12 nós juntados e a recusa do parecido (99), o "praticado" (101), o ADD COLUMN (100), os menores e as 4 fichas que faltavam (65) |
 | 22 | O pedido de 05/10 (pares, geradas, reanálise, diagnósticos, nuvem) | ✅ 2576 passed; 3 pares juntados, 2 geradas rejeitadas, 176 de 215 classificações do complementar conferidas pela reanálise às cegas (104), os diagnósticos em 10/10 e o R+7 com todos os erros em 17/10 (105), o levantamento do que falta classificar e o [roteiro da nuvem](roteiro_nuvem.md) |
+| 23 | Português e Raciocínio Lógico classificados | ✅ 2576 passed; 3 nós criados à mão e 21 pela classificação, 204 questões em duas leituras, 161 conferidas pelo Claude Code, 24 para você (decisão 106) |
 
 ---
 
@@ -2906,3 +2907,33 @@ código de antes.
 **Comandos reais:** `radar conteudos --juntar` (3 vezes), `radar hoje --data
 2026-10-10` e `--data 2026-10-17` (os diagnósticos e o R+7 de 40 nos
 lugares), a marcação das 176 e o `exportar` das classificações (511 linhas).
+
+## 23 — Português e Raciocínio Lógico classificados (05/10/2026)
+
+O item 4 da conversa de 05/10: a árvore antes, depois as duas leituras.
+
+- **A árvore:** 3 subassuntos criados pelo `servico.conteudos.adicionar`
+  (Regência verbal e nominal, Fonologia, Lacunas com a, à e há) e 21 nós que
+  a classificação propôs debaixo dos assuntos do edital (Figuras de
+  linguagem, Significação das palavras, Concordância nominal, Hífen,
+  Redação Oficial, e em Raciocínio: Tautologia e contradição, MMC e MDC,
+  Conceito de proposição...). Árvore: 405 → 429 nós.
+- **A primeira leitura:** `radar classificar --pedido --evidencia
+  complementar --materia "Língua Portuguesa" --materia "Raciocínio Lógico"`
+  (204 questões), 5 agentes no formato do pedido, os nomes de subassunto
+  novo unificados, `radar classificar --importar` (204 gravadas, nenhuma
+  recusa; cópia do banco antes em `data/copias/classificar-pt-rl-2026-10-05`).
+- **A segunda leitura:** 5 agentes às cegas, só com o caminho; 172 no mesmo
+  nó, 161 com confiança alta ou média, confirmadas por
+  `classificacoes.confirmar_pela_reanalise`.
+- **O que fica para você:** [classificacao_pt_rl.md](classificacao_pt_rl.md).
+
+Sem código novo nesta parte: os caminhos já existiam (decisões 99 e 104).
+
+| Rodada | Resultado |
+|---|---|
+| Suíte inteira, PC | **2576 passed**, 0 failed, 24 min 2 s; os `data/*.json` e `config/*.yml` intactos pela suíte |
+
+**Comandos reais:** os de cima, e a recontagem: Português 251 distintas (210
+conferidas, 22 a conferir, 19 pendentes, 0 sem classificação); Raciocínio 45
+(43, 2, 0, 0).

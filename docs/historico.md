@@ -2174,3 +2174,12 @@ feitos, passaram para 10/10, e o R+7 deles refaz todos os erros (decisao
 105). Os 3 pares parecidos foram juntados e as 2 geradas erradas saíram.
 Ficou levantado o que falta classificar (so Portugues e Raciocinio Logico, no
 edital) e escrito o roteiro para levar o radar a nuvem com login.
+
+## Portugues e Raciocinio Logico classificados (05/10)
+
+A arvore de Portugues ganhou, debaixo dos assuntos do edital, o que a FEPESE
+cobra e o edital nao nomeia (regencia, fonologia, o "ha" das lacunas, figuras
+de linguagem). As 204 questoes do complementar sem classificacao passaram
+por duas leituras independentes; onde caiu no mesmo no, ficou conferida pelo
+Claude Code (161). Sobraram 24 para conferir e 19 pendentes, quase todas de
+tema que o edital nao lista (decisao 106).

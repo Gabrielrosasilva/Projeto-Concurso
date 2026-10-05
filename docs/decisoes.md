@@ -4000,3 +4000,27 @@ Accountability, Brasileiros natos, Progressao funcional - os tres no nome
 mais curto, que cobre a questao do outro) e as 2 geradas antigas da decisao
 89 foram rejeitadas (a do "conjuge" e a do "art. 76" da LEP; a 10 e a 12, do
 mesmo lote, ja estavam).
+
+106. **Portugues e Raciocinio Logico do complementar classificados em duas
+     leituras independentes; a arvore ganha, DEBAIXO dos assuntos do edital,
+     o que a FEPESE cobra e o edital nao nomeia.** Antes de classificar, tres
+     subassuntos criados a mao: "Regencia verbal e nominal" (em Termos
+     integrantes - a regencia e a relacao do verbo e do nome com o
+     complemento), "Fonologia: fonema, silaba, encontros vocalicos e
+     digrafos" (em Acentuacao grafica, que depende dela) e "Lacunas com a, a
+     e ha" (em Emprego da crase). Figura de linguagem e parte da
+     interpretacao de texto (a lista de tipos de elemento ja a previa): vira
+     subassunto de Compreensao e interpretacao. O que o edital de 2019 nao
+     lista em lugar nenhum - formacao de palavras, tipos de sujeito (termo
+     essencial; o edital so traz os integrantes), variacao linguistica,
+     funcoes da linguagem - fica pendente, com o motivo: o assunto continua
+     sendo so do edital. As 204 questoes sem classificacao (173 + 31): a
+     primeira leitura no formato do `radar classificar --importar`, com os
+     nomes de subassunto novo unificados antes de importar (cinco agentes
+     deram nomes diferentes ao mesmo conceito); a segunda as cegas, so com o
+     caminho. No igual com confianca alta ou media: 161 conferidas pelo
+     Claude Code (a regra da decisao 104). Ficam para voce 24, mais as 19
+     pendentes (18 em que as duas leituras concordaram), em
+     `docs/classificacao_pt_rl.md`. Com isso, o complementar aceito de
+     Portugues (251 questoes distintas) e de Raciocinio (45) nao tem mais
+     questao sem classificacao.

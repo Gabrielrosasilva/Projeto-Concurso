@@ -52,6 +52,45 @@
     "referencia": null
   },
   {
+    "caminho": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem",
+    "pai": "Língua Portuguesa > Compreensão e interpretação de texto (s)",
+    "nivel": "subassunto",
+    "nome": "Figuras de linguagem",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem > Catacrese",
+    "pai": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem",
+    "nivel": "elemento",
+    "nome": "Catacrese",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "figura de linguagem",
+    "referencia": "Figuras de linguagem: catacrese"
+  },
+  {
+    "caminho": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação",
+    "pai": "Língua Portuguesa > Compreensão e interpretação de texto (s)",
+    "nivel": "subassunto",
+    "nome": "Significação das palavras: sinonímia, antonímia, denotação e conotação",
+    "ordem": 3,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
     "caminho": "Língua Portuguesa > Ortografia oficial",
     "pai": "Língua Portuguesa",
     "nivel": "assunto",
@@ -74,6 +113,19 @@
     "texto_do_edital": null,
     "fora_do_edital": false,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Ortografia oficial > Hífen em prefixos e palavras compostas",
+    "pai": "Língua Portuguesa > Ortografia oficial",
+    "nivel": "subassunto",
+    "nome": "Hífen em prefixos e palavras compostas",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
     "tipo_elemento": null,
     "referencia": null
   },
@@ -104,6 +156,19 @@
     "referencia": null
   },
   {
+    "caminho": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos",
+    "pai": "Língua Portuguesa > Acentuação gráfica",
+    "nivel": "subassunto",
+    "nome": "Fonologia: fonema, sílaba, encontros vocálicos e dígrafos",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, em 05/10/2026: o que a FEPESE cobra e o edital não nomeia (decisão 106)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
     "caminho": "Língua Portuguesa > Flexão nominal e verbal",
     "pai": "Língua Portuguesa",
     "nivel": "assunto",
@@ -126,6 +191,45 @@
     "texto_do_edital": null,
     "fora_do_edital": false,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Flexão nominal e verbal > Conjugação de verbos irregulares",
+    "pai": "Língua Portuguesa > Flexão nominal e verbal",
+    "nivel": "subassunto",
+    "nome": "Conjugação de verbos irregulares",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Flexão nominal e verbal > Particípio regular e irregular",
+    "pai": "Língua Portuguesa > Flexão nominal e verbal",
+    "nivel": "subassunto",
+    "nome": "Particípio regular e irregular",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Flexão nominal e verbal > Flexão de número: regras de plural",
+    "pai": "Língua Portuguesa > Flexão nominal e verbal",
+    "nivel": "subassunto",
+    "nome": "Flexão de número: regras de plural",
+    "ordem": 3,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
     "tipo_elemento": null,
     "referencia": null
   },
@@ -260,6 +364,19 @@
     "referencia": null
   },
   {
+    "caminho": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "pai": "Língua Portuguesa > Concordância nominal e verbal",
+    "nivel": "subassunto",
+    "nome": "Concordância nominal",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
     "caminho": "Língua Portuguesa > Emprego da crase",
     "pai": "Língua Portuguesa",
     "nivel": "assunto",
@@ -282,6 +399,32 @@
     "texto_do_edital": null,
     "fora_do_edital": false,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "pai": "Língua Portuguesa > Emprego da crase",
+    "nivel": "subassunto",
+    "nome": "Lacunas com a, à e há",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, em 05/10/2026: o que a FEPESE cobra e o edital não nomeia (decisão 106)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "pai": "Língua Portuguesa > Emprego da crase",
+    "nivel": "subassunto",
+    "nome": "Casos obrigatórios e proibidos de crase",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
     "tipo_elemento": null,
     "referencia": null
   },
@@ -377,6 +520,19 @@
     "referencia": null
   },
   {
+    "caminho": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal",
+    "pai": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
+    "nivel": "subassunto",
+    "nome": "Regência verbal e nominal",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, em 05/10/2026: o que a FEPESE cobra e o edital não nomeia (decisão 106)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
     "caminho": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial",
     "pai": "Língua Portuguesa",
     "nivel": "assunto",
@@ -412,6 +568,32 @@
     "texto_do_edital": null,
     "fora_do_edital": false,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Espécies de documentos oficiais",
+    "pai": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial",
+    "nivel": "subassunto",
+    "nome": "Espécies de documentos oficiais",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Conceito e atributos da redação oficial",
+    "pai": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial",
+    "nivel": "subassunto",
+    "nome": "Conceito e atributos da redação oficial",
+    "ordem": 3,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
     "tipo_elemento": null,
     "referencia": null
   },
@@ -468,6 +650,32 @@
     "referencia": null
   },
   {
+    "caminho": "Raciocínio Lógico > Lógica de argumentação: analogias, inferências, deduções e conclusões > Tipos de raciocínio",
+    "pai": "Raciocínio Lógico > Lógica de argumentação: analogias, inferências, deduções e conclusões",
+    "nivel": "subassunto",
+    "nome": "Tipos de raciocínio",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Raciocínio Lógico > Lógica de argumentação: analogias, inferências, deduções e conclusões > Tipos de raciocínio > Raciocínio indutivo",
+    "pai": "Raciocínio Lógico > Lógica de argumentação: analogias, inferências, deduções e conclusões > Tipos de raciocínio",
+    "nivel": "elemento",
+    "nome": "Raciocínio indutivo",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "conceito lógico",
+    "referencia": "Indução x dedução x abdução"
+  },
+  {
     "caminho": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
     "pai": "Raciocínio Lógico",
     "nivel": "assunto",
@@ -494,6 +702,32 @@
     "referencia": null
   },
   {
+    "caminho": "Raciocínio Lógico > Proposições simples e compostas > Conceito de proposição",
+    "pai": "Raciocínio Lógico > Proposições simples e compostas",
+    "nivel": "subassunto",
+    "nome": "Conceito de proposição",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Raciocínio Lógico > Proposições simples e compostas > Conceito de proposição > Sentença aberta e sentença fechada",
+    "pai": "Raciocínio Lógico > Proposições simples e compostas > Conceito de proposição",
+    "nivel": "elemento",
+    "nome": "Sentença aberta e sentença fechada",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "diferença entre conceitos",
+    "referencia": "Sentença aberta: contém variável e não tem valor lógico; fechada: é proposição (V ou F)"
+  },
+  {
     "caminho": "Raciocínio Lógico > Tabelas-verdade",
     "pai": "Raciocínio Lógico",
     "nivel": "assunto",
@@ -505,6 +739,32 @@
     "procedencia": "edital de 2019 (anexo de programas)",
     "tipo_elemento": null,
     "referencia": null
+  },
+  {
+    "caminho": "Raciocínio Lógico > Tabelas-verdade > Tautologia e contradição",
+    "pai": "Raciocínio Lógico > Tabelas-verdade",
+    "nivel": "subassunto",
+    "nome": "Tautologia e contradição",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Raciocínio Lógico > Tabelas-verdade > Tautologia e contradição > Tautologia",
+    "pai": "Raciocínio Lógico > Tabelas-verdade > Tautologia e contradição",
+    "nivel": "elemento",
+    "nome": "Tautologia",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "conceito lógico",
+    "referencia": "Proposição composta verdadeira em todas as linhas da tabela-verdade"
   },
   {
     "caminho": "Raciocínio Lógico > Equivalências",
@@ -598,6 +858,19 @@
     "referencia": null
   },
   {
+    "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade > Probabilidade > Probabilidade da união de eventos",
+    "pai": "Raciocínio Lógico > Princípios de contagem e probabilidade > Probabilidade",
+    "nivel": "elemento",
+    "nome": "Probabilidade da união de eventos",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "propriedade",
+    "referencia": "P(A∪B) = P(A) + P(B) - P(A∩B)"
+  },
+  {
     "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade > Permutações e ordenação",
     "pai": "Raciocínio Lógico > Princípios de contagem e probabilidade",
     "nivel": "subassunto",
@@ -611,6 +884,19 @@
     "referencia": null
   },
   {
+    "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade > Permutações e ordenação > Arranjo simples",
+    "pai": "Raciocínio Lógico > Princípios de contagem e probabilidade > Permutações e ordenação",
+    "nivel": "elemento",
+    "nome": "Arranjo simples",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "análise combinatória",
+    "referencia": "A(n,p) = n!/(n-p)!"
+  },
+  {
     "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade > Combinações",
     "pai": "Raciocínio Lógico > Princípios de contagem e probabilidade",
     "nivel": "subassunto",
@@ -622,6 +908,19 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": null,
     "referencia": null
+  },
+  {
+    "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade > Combinações > Combinação com repetição",
+    "pai": "Raciocínio Lógico > Princípios de contagem e probabilidade > Combinações",
+    "nivel": "elemento",
+    "nome": "Combinação com repetição",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
+    "tipo_elemento": "análise combinatória",
+    "referencia": "CR(n,p) = C(n+p-1, p)"
   },
   {
     "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade > Princípio multiplicativo",
@@ -672,6 +971,19 @@
     "texto_do_edital": "Raciocínio lógico envolvendo problemas aritméticos e geométricos",
     "fora_do_edital": false,
     "procedencia": "edital de 2019 (anexo de programas)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Raciocínio Lógico > Raciocínio lógico envolvendo problemas aritméticos e geométricos > MMC e MDC",
+    "pai": "Raciocínio Lógico > Raciocínio lógico envolvendo problemas aritméticos e geométricos",
+    "nivel": "subassunto",
+    "nome": "MMC e MDC",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
     "tipo_elemento": null,
     "referencia": null
   },

@@ -173,8 +173,11 @@ sobra a 2013-q53, na pendencia G. **Depois (05/10, decisoes 104 e 105):** os
 3 pares juntados, as 2 geradas erradas rejeitadas, a reanalise do
 complementar e os diagnosticos de 03/10 (nao feitos) passados para 10/10, com
 o R+7 deles refazendo todos os erros em 17/10 e a comparacao de 07/11 contra
-10/10. **Proximo:** classificar o que falta (Portugues 162, Raciocinio 30) e
-o roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md)).
+10/10. E Portugues e Raciocinio Logico classificados (decisao 106): duas
+leituras, 161 de 204 conferidas pelo Claude Code, 24 para voce
+([classificacao_pt_rl](docs/classificacao_pt_rl.md)); o complementar aceito
+das materias do edital nao tem mais questao sem classificacao. **Proximo:** o
+roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md)).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
 **Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos
