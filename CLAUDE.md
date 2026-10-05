@@ -156,8 +156,15 @@ do tema ao Meu desempenho, decisao 81), as 232 classificacoes do complementar
 (Analises > Conferencia, filtro "complementar aceito"), os 109 conceitos
 associados (o mesmo lugar, "so com associado por conferir") e os 15 itens da
 lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
-**Conferir:** o Actions de 04/10 - ate o fim do lote, o GitHub nao tinha o
-commit `coleta: 2026-10-04` (pendencia D). O backup das 23h30 voltou em 03/10.
+**A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
+186 requisitos, resposta PARCIALMENTE, 8 defeitos. A Rodada 1 consertou 4
+(decisao 96): o teste que pararia o Actions em 01/11, a importacao de geradas
+que aceitava no inventado e o elemento vizinho, e o traceback do modo revisao.
+As rodadas 2 a 4 (sinonimo de materia, `radar padrao`, migracao que regrava os
+JSON, simulados pela chave, nos duplicados) e a decisao do "praticado" estao na
+pendencia G, com a recomendacao de cada uma.
+**Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
+das 23h30 voltou em 03/10.
 **Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos
 diagnosticos refaz 5 erros), os temas sem no e o Portugues sem filtro do
 Qconcursos, e o resto dos achados da varredura de 03/10 (pendencia F). Ordem

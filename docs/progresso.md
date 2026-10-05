@@ -25,6 +25,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | ✅ 2A, 2B, 2C e a seção F inteira, F1 a F15 (decisões 67 a 86) |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 | 18 | O lote de 04/10 (as conferências e os abertos) | ✅ as 61 fichas e as 15 leis conferidas contra a fonte (a marca de conferida continua sua), a tela de conferência do complementar e o lote do catálogo refeito, o `?cor=`, as geradas antigas, a base da média nos Macetes, e o leitor do caderno consertado com a releitura (B.7, B.9, B.10; decisões 87 a 90) |
+| 19 | Auditoria independente de 04/10 e a Rodada 1 das correções | ✅ a auditoria ([auditoria_independente](auditoria_independente.md): 186 requisitos, 8 defeitos) e a Rodada 1 (BUG-1, BUG-2, BUG-6 e BUG-8; decisão 96); as rodadas 2 a 4 estão na pendência G |
 
 ---
 
@@ -2729,3 +2730,46 @@ teste saíram de `data/copias/`; o `ultima_copia()` escolhe pela hora.
 | `test_associados.py` (3 novos), `test_migracoes.py` (1 novo) | 28 + 12 passed |
 | `test_texto_base.py` (novo, 3), `test_marca_minuscula.py` (novo, 1), `test_questoes.py`, `test_releitura.py` | 67 passed |
 | Suíte inteira, PC (uma vez, no fim) | **2553 passed**, 0 failed, 23 min |
+
+## 19 — Auditoria independente e a Rodada 1 das correções (04/10/2026)
+
+**A auditoria** (pedido de 04/10, somente leitura, em cópias fora do
+repositório): 186 requisitos, 151 atendem, 18 em parte, 12 com defeito;
+2.553 testes verdes; 8 de 8 mutações críticas detectadas; 8 defeitos
+confirmados. Tudo em [auditoria_independente](auditoria_independente.md), com
+o plano de correção em rodadas (R14).
+
+**A Rodada 1** (aprovada por você: "pode"), sem decisão pendente:
+
+- **BUG-8 — o teste preso a 31/10/2026:** `tests/test_eventos.py`, o
+  `test_prazo_e_retificacao_saem_com_acento` usa um prazo 30 dias à frente de
+  `agora()`. Com o `FECHA` fixo ele quebraria em 01/11 e pararia o Actions;
+- **BUG-1 e BUG-2 — a importação de geradas** (decisão 96):
+  `servico/manual.py` (`_fora_do_escopo` com os elementos pedidos e a árvore;
+  `_importar_questoes` lê a árvore uma vez; a instrução com elemento lista o
+  caminho de cada elemento); `docs/estoque_de_geradas.md` (o texto que se cola
+  no Claude Code diz o que fazer com mais de um caminho);
+- **BUG-6 — o traceback do `radar gerar --modo revisao`:** `src/radar/cli.py`
+  trata o `ValueError` (e o `EscopoInvalido`) no caminho da simulação, com a
+  frase do `--pedido`.
+
+**Testes novos (5, em `tests/test_geracao_por_conteudo.py`):** nó inexistente
+recusado; elemento irmão recusado mesmo citando o número pedido; elemento que
+não é artigo recusa o irmão; a instrução com elemento dá o caminho do
+elemento; o comando de revisão sem nada estudado explica e não quebra. Os 5
+**falham no código de antes** (rodados na cópia da auditoria) e passam no
+novo.
+
+| Rodada | Resultado |
+|---|---|
+| `test_eventos.py` com o relógio de hoje, em 01/11/2026 e em 15/03/2027 | 48 passed nos três |
+| `test_geracao_por_conteudo`, `test_ia_manual`, `test_gerador`, `test_aceite`, `test_eventos`, `test_treinar_pelo_no` | 208 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2558 passed** (2553 + 5 novos), 0 failed, 23 min 39 s; os `data/*.json` intactos |
+
+**Comando real (banco real, sem gravar):** `radar gerar --modo revisao
+--materia "Direito Penal" --quantas 5` → "Eu ainda não estudei nenhum
+conteúdo de 'Direito Penal', então não há o que revisar…", saída 1, sem
+traceback; o pedido do art. 26 da LEP montado pela função (sem salvar, para
+não sobrescrever o seu `data/pedido_ia.json`) escreve "CONTEUDO (um destes
+caminhos): … > LEP, art. 26"; as 775 geradas do banco: 0 em nó inexistente, 0
+fora do escopo gravado.

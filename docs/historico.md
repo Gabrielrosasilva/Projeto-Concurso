@@ -2121,3 +2121,23 @@ dois consertos, e com a ultima alternativa parando no texto-base, os 3
 cadernos fecharam e 9 outros perderam o texto-base grudado na "e" - inclusive
 duas questoes da prova de 2019 do alvo. O acervo foi relido (ensaiado antes
 numa copia), sem perder classificacao nenhuma (decisao 95).
+
+## A auditoria independente e a Rodada 1 das correcoes (04/10)
+
+**A auditoria** conferiu, em copias fora do repositorio e sem mudar nada, os
+186 requisitos do pedido de evolucao, das regras invioláveis as regras do
+CLAUDE.md: a contagem igual em todas as telas, a incidencia recalculada a mao,
+o alvo intacto com uma prova complementar nova, o ANKI religavel, a migracao
+desfeita, a suite com a rede bloqueada e com o relogio em 2026 e 2027, e 12
+mutacoes do codigo. Resposta: PARCIALMENTE, com 8 defeitos e o plano em
+rodadas (`docs/auditoria_independente.md`).
+
+**A Rodada 1** consertou os quatro que nao pediam decisao: o teste que
+quebraria o Actions em 01/11 (a data de fechamento fixa em 31/10/2026); a
+importacao de geradas, que aceitava no inventado e o elemento vizinho do
+pedido (decisao 96); e o traceback do modo revisao na simulacao. O resto esta
+na pendencia G.
+
+O Actions de 04/10, que a pendencia D mandava conferir, foi verde: o
+`coleta: 2026-10-04` do radar-bot chegou ao GitHub (visto no push do fim da
+auditoria), e o job so commita depois do `pytest -q` passar no Linux.

@@ -912,7 +912,13 @@ def gerar(
         return
 
     limite = gerador.TETO_PADRAO if teto is None else teto
-    plano = servico.geradas.preparar(materia, quantas, escopo=escopo, modo=modo)
+    try:
+        plano = servico.geradas.preparar(materia, quantas, escopo=escopo, modo=modo)
+    except ValueError as erro:
+        # O modo revisao sem nada estudado (EscopoInvalido, que e ValueError) e
+        # o modo que nao existe: a mesma frase do --pedido, e nao o traceback.
+        console.print(f"[red]{escape(str(erro))}[/]")
+        raise typer.Exit(code=1) from erro
 
     if not plano["pedidos"]:
         console.print(

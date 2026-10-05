@@ -279,6 +279,25 @@ def test_revisao_sem_nada_estudado_para_em_vez_de_alargar(arvore_de_teste,
         geradas.escopo_da_revisao(LEP)
 
 
+def test_o_comando_de_revisao_sem_nada_estudado_explica_e_nao_quebra(
+        arvore_de_teste, monkeypatch):
+    """BUG-6 da auditoria de 04/10: sem --pedido (a simulacao, o padrao), o
+    `radar gerar --modo revisao` terminava em traceback; com --pedido ele ja
+    dava a frase. Os dois caminhos tem de dar a frase."""
+    from typer.testing import CliRunner
+
+    from radar.cli import app
+
+    monkeypatch.setattr(geradas, "nos_estudados", lambda materia=None: [])
+    resultado = CliRunner().invoke(
+        app, ["gerar", "--modo", "revisao", "--materia", LEP, "--quantas", "5"])
+
+    assert resultado.exit_code == 1
+    # O terminal quebra a linha: compara sem as quebras.
+    assert "não há o que revisar" in " ".join(resultado.output.split())
+    assert resultado.exception is None or isinstance(resultado.exception, SystemExit)
+
+
 def test_o_plano_leva_o_modo_e_o_escopo(arvore_de_teste):
     _gravar(_questao(1), ART_112)
 
@@ -439,6 +458,76 @@ def test_com_dispositivo_pedido_o_artigo_citado_tem_de_bater(arvore_de_teste,
 
     assert resultado["gravadas"] == 1
     assert "nao e nenhum dos pedidos" in resultado["recusas"][0]
+
+
+def test_no_que_nao_existe_na_arvore_e_recusado(arvore_de_teste, tmp_path):
+    """Achado da auditoria de 04/10 (BUG-1): o caminho comecava dentro do
+    escopo e terminava num no inventado, e a questao entrava pendurada nele."""
+    lote = manual.pedido_de_questoes(quantas=3, escopo=_resolver(
+        LEP, "Regimes de cumprimento da pena"))
+
+    resultado = _importar(tmp_path, lote, [
+        _item(conteudo=f"{ART_112} > No inventado pela IA",
+              enunciado="Inventado: o no desta questao nao existe na arvore?"),
+        _item(conteudo=ART_112, enunciado="Existe: o art. 112 trata da progressão?"),
+    ])
+
+    assert resultado["gravadas"] == 1
+    assert "nao existe na arvore" in resultado["recusas"][0]
+    with sessao() as s:
+        assert [g.conteudo for g in s.scalars(select_geradas())] == [ART_112]
+
+
+def test_com_elemento_pedido_o_irmao_e_recusado_mesmo_citando_o_numero(
+        arvore_de_teste, tmp_path):
+    """BUG-2 da auditoria: pedi o art. 112 e a questao declarou o art. 119,
+    irmao dele, citando o 112. O numero bate, o no nao: fica fora."""
+    lote = manual.pedido_de_questoes(quantas=3, escopo=_resolver(
+        LEP, "Regimes de cumprimento da pena", elementos=["LEP, art. 112"]))
+
+    resultado = _importar(tmp_path, lote, [
+        _item(conteudo=ART_119, artigo="LEP, art. 112",
+              enunciado="Irmão: o art. 119 fala de que, afinal?"),
+        _item(conteudo=REGIMES, artigo="LEP, art. 112",
+              enunciado="De cima: o subassunto inteiro, e não o elemento?"),
+    ])
+
+    assert resultado["gravadas"] == 0
+    assert all("nenhum dos elementos pedidos: LEP, art. 112" in r
+               for r in resultado["recusas"])
+
+
+def test_elemento_que_nao_e_artigo_tambem_recusa_o_irmao(arvore_de_teste, tmp_path):
+    """Para regra, tratado ou tipo de problema nao ha numero de artigo para
+    conferir: so o no declarado separa o pedido do vizinho."""
+    pedido_no = f"{REGIMES} > Regra do pedido"
+    vizinho = f"{REGIMES} > Regra vizinha"
+    with sessao() as s:
+        for caminho in (pedido_no, vizinho):
+            s.add(Conteudo(caminho=caminho, pai=REGIMES, nivel="subassunto",
+                           nome=arvore.partes(caminho)[-1], origem="edital",
+                           procedencia="teste"))
+    lote = manual.pedido_de_questoes(quantas=3, escopo=_resolver(
+        LEP, "Regimes de cumprimento da pena", elementos=["Regra do pedido"]))
+
+    resultado = _importar(tmp_path, lote, [
+        _item(conteudo=pedido_no, enunciado="Pedida: o que diz a regra do pedido?"),
+        _item(conteudo=vizinho, enunciado="Vizinha: o que diz a regra vizinha?"),
+    ])
+
+    assert resultado["gravadas"] == 1
+    assert "nenhum dos elementos pedidos: Regra do pedido" in resultado["recusas"][0]
+
+
+def test_com_elemento_pedido_a_instrucao_da_o_caminho_do_elemento(arvore_de_teste):
+    """A IA copia o CONTEUDO da instrucao. Com elemento pedido ele tem de ser o
+    caminho do elemento - o do subassunto, copiado, seria recusado."""
+    lote = manual.pedido_de_questoes(quantas=3, escopo=_resolver(
+        LEP, "Regimes de cumprimento da pena", elementos=["LEP, art. 112"]))
+
+    instrucao = lote["pedidos"][0]["instrucao"]
+    assert f"  {ART_112}" in instrucao
+    assert f"CONTEUDO: {REGIMES}" not in instrucao
 
 
 def test_o_artigo_bate_escrito_de_outra_forma(arvore_de_teste, tmp_path):

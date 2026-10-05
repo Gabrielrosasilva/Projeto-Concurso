@@ -24,7 +24,7 @@ vazio, e a limpeza o apagou). Nada quebrado agora.
 Veio do primeiro dia do Ciclo 1 (28/09) e foi registrado em
 [decisoes.md](decisoes.md) como **direcao**. As etapas 2 a 6B transformaram a
 maior parte em codigo - o que foi feito de cada sugestao esta marcado abaixo;
-o que sobra esta nos itens 🟡 e nas B.7 a B.10.
+o que sobra esta nos itens 🟡 e nas B.8 e B.9.
 
 O que foi observado em 28/09:
 
@@ -190,11 +190,6 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   assunto). Prazo: antes de 09/11;
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
-- ⚪ **Conferir o Actions de 04/10**: o primeiro `coleta:` do radar-bot com o
-  codigo da 2A, da 2B e da 2C. O de 03/10 foi verde (o commit `coleta: 2026-10-03`
-  e a prova: o job roda o `pytest -q` antes de coletar). No fim do lote de
-  04/10 o GitHub ainda nao tinha o `coleta: 2026-10-04` (o `gh` nao esta
-  instalado aqui; vi pelo `git fetch`), e o proximo ja roda com o lote;
 - ⚪ **O que ficou sem acento de proposito** (decisao 93): a descricao de
   cada comando no `radar --help` (e a docstring da funcao, e o codigo segue
   sem acento), os valores que eu digito (`--anel proximo`, `--modo revisao`,
@@ -243,3 +238,43 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
   diferentes, e nao ha registro do pedido. O selo diz que o acervo nao
   consegue identificar. As 30 do estoque de 03/10 foram religadas em 04/10
   pelo historico da conversa (F10);
+
+## G. Achados da auditoria independente de 04/10
+
+Detalhe, reprodução e plano em [auditoria_independente.md](auditoria_independente.md)
+(R7 e R14). Feitos na Rodada 1 (decisão 96): o teste preso a 31/10/2026
+(BUG-8), o no inexistente e o elemento irmão aceitos na importação de geradas
+(BUG-1 e BUG-2) e o traceback do `radar gerar --modo revisao` (BUG-6). Sobram,
+em rodadas, cada uma com a recomendação já dita:
+
+- 🔴 **Rodada 2 — sinônimo de matéria (BUG-4):** "Direito Processo Penal"
+  (2013) fica fora da geração e do simulado de Processual Penal; os filtros
+  usam a coluna crua (`servico/geradas.py:55`, `simulado.py:98`,
+  `espacada.py:168`, `complementar.py:427`). Proposta: uma regra só de nome
+  de matéria, pelos sinônimos do `config/taxonomia.yml`.
+- 🔴 **Rodada 2 — `radar padrao` soma alvo, complementar e IESES** (regra 1).
+  Decisão sua; recomendação: três blocos, cada um com a amostra.
+- 🔴 **Rodada 3 — migrar um banco antigo sobrescreve os JSON versionados
+  (BUG-5):** os passos 1, 4 e 5 exportam o banco que está sendo migrado.
+  Recomendação: só o `radar sincronizar` exporta.
+- 🔴 **Rodada 3 — `simulados.json` aponta a questão por (prova, número)**, e
+  não pela chave. Sem dano hoje (0 de 50).
+- 🔴 **Rodada 4 — conceitos duplicados na árvore (BUG-3):** ~10 pares criados
+  pela classificação do complementar ao lado dos nós do alvo (Características
+  dos direitos humanos, Sistema interamericano, Maria da Penha, CPP art. 306,
+  segurança pública, tortura...). Recomendação: manter o nó do alvo e levar as
+  classificações do complementar; a importação passa a recusar nome parecido.
+  Junto, a 2013-q53 (abolitio criminis) pendente — conferida por você.
+- 🔴 **Decisão avulsa — o modo revisão conta "praticado" como "estudado"
+  (BUG-7),** contra a decisão 20. Recomendação: aceitar de propósito, registrar
+  e dizer na saída quantos são só praticados.
+- ⚪ **Menores:** "sem materia" no `/simulado` e "· materia" no Meu
+  desempenho; "1 acertos + 1 erros"; `radar previsao` no terminal com "->" e
+  sem "Atrasado"; 4 contas em template e a recontagem da IA em
+  `conferencia.py:259`; duas filas de revisão com números diferentes (home 6,
+  Meu desempenho 12); o ADD COLUMN automático do `db.py`; `complementar.md`
+  (pergunta 4 sem a classificação, pergunta 1 em ocorrências); README sem o
+  `radar conferir-dias`; "18 de 19" no CLAUDE.md e no `auditoria_final.md`
+  (o item 18 já atende); os cabeçalhos do `config/regioes.yml` e do
+  `config/amostra.yml`; 8 concursos com `escolaridade` mudada na releitura de
+  04/10, sem registro na decisão 93.

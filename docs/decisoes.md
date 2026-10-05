@@ -3854,3 +3854,30 @@ mede (7A); commit e push por subetapa (8A).
     conferidas, nenhuma orfa) e as 236 geradas com base continuam com ela. A
     auditoria do alvo segue sem suspeita, e o complementar aceito foi de 169
     para 172 provas - das 11 fora, nenhuma mais pela numeracao.
+
+## A auditoria independente de 04/10/2026 e a Rodada 1 das correcoes
+
+A auditoria (`docs/auditoria_independente.md`) conferiu 186 requisitos e achou
+8 defeitos (BUG-1 a BUG-8); o plano de correcao esta na secao R14 dela, em
+rodadas. A Rodada 1 (sem decisao sua pendente) consertou quatro:
+
+96. **com elemento pedido, o escopo da importacao sao os ELEMENTOS, e o no
+    declarado tem de existir na arvore** (BUG-1 e BUG-2). A importacao de
+    geradas conferia so o prefixo do subassunto: aceitava um caminho que
+    comecava certo e terminava num no inventado, e aceitava a questao do
+    elemento irmao (pedi o art. 26, entrava o art. 24 citando o numero 26;
+    pedi o Protocolo de San Salvador, entrava o Pacto de San Jose - para
+    elemento que nao e artigo, nada separava os dois). Agora
+    `manual._fora_do_escopo` usa a regra do `Escopo.dentro` (com elemento,
+    so os elementos e o que houver abaixo deles) e recusa no que nao esta na
+    arvore. Junto, a instrucao do pedido com elemento passa a listar o
+    CAMINHO de cada elemento em "CONTEUDO (um destes caminhos)", e nao o do
+    subassunto - copiar o subassunto, como a instrucao antiga mandava, seria
+    recusado. As 775 geradas do registro nao caem em nenhuma das recusas
+    novas (conferido no banco real).
+
+Os outros dois consertos da rodada nao mudam regra: o
+`test_prazo_e_retificacao_saem_com_acento` deixou de depender de
+31/10/2026 (quebraria o Actions em 01/11, BUG-8), e o `radar gerar --modo
+revisao` sem nada estudado, sem `--pedido`, da a mesma frase do `--pedido`
+em vez de traceback (BUG-6).

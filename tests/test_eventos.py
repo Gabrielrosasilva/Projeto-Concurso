@@ -420,13 +420,17 @@ def test_o_apareceu_diz_a_situacao_com_nome_de_gente(banco_temporario):
 
 
 def test_prazo_e_retificacao_saem_com_acento(banco_temporario):
+    # O primeiro prazo tem de estar no FUTURO: passado, a frase vira "já
+    # encerrado". Com o FECHA fixo (31/10/2026) o teste quebrava em 01/11 e
+    # parava o Actions - por isso a data sai de agora().
+    ainda_aberto = agora() + timedelta(days=30)
     with sessao() as s:
-        eventos.registrar_prazo(s, URL, None, FECHA)
+        eventos.registrar_prazo(s, URL, None, ainda_aberto)
         eventos.registrar_prazo(s, URL, ABRE, agora() - timedelta(days=1))
         eventos.registrar_retificacao(s, URL, "edital.pdf")
 
     textos = [eventos.para_tela(e.descricao) for e in _eventos()]
-    assert textos[0] == f"Prazo de inscrição: até {formatar_data(FECHA)}"
+    assert textos[0] == f"Prazo de inscrição: até {formatar_data(ainda_aberto)}"
     assert textos[1].startswith("Prazo de inscrição, já encerrado: de ")
     assert textos[2] == ("Edital retificado: edital.pdf. Retificação muda "
                          "prazo, vaga e requisito - vale reler.")

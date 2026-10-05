@@ -371,7 +371,8 @@ ESCOPO FECHADO - a regra mais importante deste pedido:
   vizinho, nem de um tema mais amplo que contenha este;
 - se o escopo listar DISPOSITIVOS, cada questao tem de cobrar um deles;
 - em cada questao, responda tambem:
-    "conteudo": o caminho do conteudo, copiado igual ao que esta em CONTEUDO;
+    "conteudo": o caminho do conteudo, copiado igual ao que esta em CONTEUDO
+                (se CONTEUDO listar mais de um caminho, copie o da questao);
     "artigo":   o dispositivo em que ela se apoia ("LEP, art. 112"), ou "" se
                 voce nao tiver certeza - artigo inventado e pior que nenhum;
 - se voce nao conseguir escrever a quantidade pedida SEM sair do escopo,
@@ -382,12 +383,18 @@ ESCOPO FECHADO - a regra mais importante deste pedido:
 
 def _instrucao_com_escopo(instrucao: str, escopo, lei=None) -> str:
     """A instrucao original mais o escopo, o dispositivo e o link oficial."""
-    linhas = [instrucao, INSTRUCAO_DO_ESCOPO, f"CONTEUDO: {escopo.no}"]
     if escopo.elementos:
         from radar import conteudos as arvore
 
+        # Com elemento pedido, o conteudo de cada questao e um dos elementos,
+        # e nao o no de cima: a importacao recusa o subassunto e o irmao.
+        linhas = [instrucao, INSTRUCAO_DO_ESCOPO,
+                  "CONTEUDO (um destes caminhos):",
+                  *[f"  {e}" for e in escopo.elementos]]
         nomes = [arvore.partes(e)[-1] for e in escopo.elementos]
         linhas.append(f"DISPOSITIVOS: {'; '.join(nomes)}")
+    else:
+        linhas = [instrucao, INSTRUCAO_DO_ESCOPO, f"CONTEUDO: {escopo.no}"]
     if lei is not None:
         linhas.append(f"FONTE OFICIAL: {lei.titulo}")
         if lei.url:
@@ -936,14 +943,22 @@ def _ler_json(texto: str) -> dict:
         raise ValueError(f"a resposta nao e um JSON valido ({erro})") from erro
 
 
-def _fora_do_escopo(pedido: dict, item: dict, conferida: dict) -> str | None:
+def _fora_do_escopo(pedido: dict, item: dict, conferida: dict,
+                    caminhos: set[str] | None = None) -> str | None:
     """Por que esta questao nao entra. None quando ela esta dentro.
 
-    Quatro recusas, todas do roteiro da Etapa 5:
+    As recusas do roteiro da Etapa 5, e as duas da auditoria de 04/10:
 
       * **o no declarado nao esta dentro do escopo pedido.** E a recusa
         principal: ela e o que faz a §8 ("nenhuma questao fora do escopo") ser
-        verificavel, e nao uma promessa;
+        verificavel, e nao uma promessa. **Com elemento pedido, o escopo sao
+        os elementos**, e nao o subassunto de cima: pedi o art. 26 e a
+        questao declara o art. 24, irmao dele, esta fora - mesmo citando o
+        numero 26. Para elemento que nao e artigo (regra, tratado), e so isto
+        que separa o pedido do vizinho;
+      * **o no declarado tem de existir na arvore** (`caminhos`). Um caminho
+        que comeca certo e termina num no inventado gravaria um vinculo que
+        nao existe (regra inviolavel 9);
       * **com dispositivo pedido, o artigo citado tem de bater.** Pedi o art.
         119 e a questao cita o 112: nao serve, ainda que o assunto seja o mesmo;
       * **`origem_impressao` so se a questao real estava no pedido** - a §9
@@ -974,12 +989,21 @@ def _fora_do_escopo(pedido: dict, item: dict, conferida: dict) -> str | None:
     declarado = " ".join((item.get("conteudo") or "").split())
     if not declarado:
         return "a questao nao declarou o conteudo dela"
-    dentro = (declarado == escopo
-              or declarado.startswith(escopo + arvore.SEPARADOR))
-    if not dentro:
-        return f"o conteudo declarado {declarado!r} esta fora de {escopo!r}"
-
     dispositivos = pedido.get("escopo_dispositivos") or []
+    # A mesma regra do `Escopo.dentro`: com elemento pedido valem os
+    # elementos (e o que houver abaixo deles); sem elemento, o no e tudo abaixo.
+    alvos = dispositivos or [escopo]
+    dentro = any(declarado == alvo or declarado.startswith(alvo + arvore.SEPARADOR)
+                 for alvo in alvos)
+    if not dentro:
+        if dispositivos:
+            nomes = "; ".join(arvore.partes(d)[-1] for d in dispositivos)
+            return (f"o conteudo declarado {declarado!r} nao e nenhum dos "
+                    f"elementos pedidos: {nomes}")
+        return f"o conteudo declarado {declarado!r} esta fora de {escopo!r}"
+    if caminhos is not None and declarado not in caminhos:
+        return f"o conteudo declarado {declarado!r} nao existe na arvore"
+
     if dispositivos:
         citado = normalizar(conferida.get("artigo") or "")
         nomes = [arvore.partes(d)[-1] for d in dispositivos]
@@ -1016,6 +1040,11 @@ def _mesmo_dispositivo(pedido: str, citado: str) -> bool:
 def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
     por_id = {p["id"]: p for p in lote["pedidos"]}
     aceitas, recusas = [], []
+    from radar.servico import conteudos as servico_conteudos
+
+    # A arvore, lida uma vez: so e preciso quando algum pedido fechou escopo.
+    caminhos = (set(servico_conteudos.caminhos())
+                if any(p.get("escopo") for p in lote["pedidos"]) else None)
 
     for resposta in respostas:
         pedido = por_id.get(resposta.get("id"))
@@ -1040,7 +1069,7 @@ def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
             # DECLARA o no e o dispositivo, e aqui se confere o que ela
             # declarou. Nada e corrigido para caber - o que saiu do escopo e
             # recusado e contado na saida.
-            fora = _fora_do_escopo(pedido, item, conferida)
+            fora = _fora_do_escopo(pedido, item, conferida, caminhos)
             if fora:
                 recusas.append(f"{onde}: {fora}")
                 continue
