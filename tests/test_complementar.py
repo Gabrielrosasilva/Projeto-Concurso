@@ -800,3 +800,20 @@ def test_o_padrao_da_banca_separa_alvo_complementar_aceito_e_outra_banca(acervo)
     assert por_evidencia["fora"].questoes == 1
     # As 2 da Guarda 2024 (recusada na validacao) nao entram em bloco nenhum.
     assert recusadas == 2
+
+
+def test_a_resposta_da_secao_5_diz_o_que_a_classificacao_achou():
+    """Auditoria de 04/10: a resposta 4 dizia "34 indícios" de Sociologia sem
+    dizer que a classificação, questão a questão, não achou nenhuma. Com o
+    resultado da classificação, a linha da matéria diz quantas viraram."""
+    caderno = complementar.Caderno(
+        prova_url="https://fepese.test/guarda.pdf", cargo="Guarda Municipal", ano=2024,
+        sha256="g", gabarito=complementar.PROVISORIO,
+        questoes=[_generica(1, "Sobre a execução penal no regime aberto...")])
+    por_materia = list(_levantar([caderno]).values())
+
+    respostas = {r.pergunta[:2]: r.resposta for r in complementar.responder(
+        por_materia, {"Direito Penal": 2})}
+
+    # A LEP tem 1 indício por termo; a classificação não achou nenhuma.
+    assert "questão a questão, do acervo aceito: 0 questão(ões)" in respostas["3."]

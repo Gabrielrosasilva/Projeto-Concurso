@@ -190,3 +190,35 @@ def test_importar_completa_sem_apagar(banco_temporario):
         resposta[:3] for rodada in _o_que_eu_respondi() for resposta in rodada[3]
     ]
     assert escolhas == [(1, 7, "a"), (2, 8, "c"), (1, "gerada", "b")]
+
+
+def test_a_resposta_volta_para_a_mesma_questao_mesmo_com_o_numero_trocado(
+        banco_temporario, tmp_path, monkeypatch):
+    """Auditoria de 04/10: o arquivo ligava a resposta por prova + numero, e a
+    releitura de um caderno pode trocar o numero (a decisao 95 viu 26
+    casos). Refeito o banco com os numeros 7 e 8 trocados, a resposta tem de
+    voltar para a MESMA questao - a do texto -, e nao para a do numero."""
+    _questoes()
+    _rodada()
+    assert acervo.exportar_simulados() == 2
+    arquivo = json.loads(acervo.caminho_dos_simulados().read_text(encoding="utf-8"))
+    assert all(r.get("chave") for sim in arquivo for r in sim["respostas"]
+               if not r["gerada"])
+
+    _banco_novo(tmp_path, monkeypatch, "relido.db")
+    with sessao() as s:
+        # A releitura trocou os numeros: o texto "questao 7" agora e o n. 8.
+        for numero, texto in ((7, "questao 8"), (8, "questao 7")):
+            s.add(QuestaoDeProva(prova_url=CADERNO, numero=numero,
+                                 materia="Direito Penal", enunciado=texto,
+                                 resposta="a", impressao=f"imp-{texto}"))
+        s.add(QuestaoGerada(modo="variacao", enunciado="gerada", resposta="b",
+                            impressao="gerada1", modelo="claude-teste"))
+
+    assert acervo.importar_simulados() == (2, 0)
+    with sessao() as s:
+        por_texto = {
+            s.get(QuestaoDeProva, r.questao_id).enunciado: (r.escolhida, r.acertou)
+            for r in s.scalars(select(RespostaDeSimulado)
+                               .where(RespostaDeSimulado.gerada.is_(False)))}
+    assert por_texto == {"questao 7": ("a", True), "questao 8": ("c", False)}

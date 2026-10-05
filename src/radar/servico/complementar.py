@@ -390,7 +390,12 @@ def relatorio(por_materia, validadas, lista, registros=None) -> str:
                "Respondidas **só com o que o acervo tem**. \"Não há prova com "
                "LEP no acervo\" é diferente de \"a FEPESE nunca cobrou LEP\": "
                "o relatório nunca diz a segunda coisa.", ""]
-    for r in complementar.responder(por_materia):
+    from radar.servico import incidencia as servico_incidencia
+
+    linhas_por_no = servico_incidencia.linhas_complementares() if registros else {}
+    classificadas = {caminho: linha.classificadas for caminho, linha in linhas_por_no.items()
+                     if " > " not in caminho}
+    for r in complementar.responder(por_materia, classificadas if registros else None):
         linhas += [f"**{r.pergunta}**", "", r.resposta, ""]
     return "\n".join(linhas)
 

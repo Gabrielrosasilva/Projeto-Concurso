@@ -339,7 +339,7 @@
         <div class="pizza-caixa">
           <div class="pizza" style="background:conic-gradient({% for f in fatias_do_caderno %}{{ f.cor }} {{ '%.2f'|format(f.inicio) }}% {{ '%.2f'|format(f.fim) }}%{{ ', ' if not loop.last }}{% endfor %})">
             <div class="furo">
-              <span class="n">{{ composicao | sum(attribute='total') }}</span>
+              <span class="n">{{ total_da_composicao }}</span>
               <span class="rot">questões<br>da banca</span>
             </div>
           </div>

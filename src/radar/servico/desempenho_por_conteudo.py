@@ -140,6 +140,12 @@ class Desempenho:
         return self.radar.sem_resultado + self.anotado.sem_resultado
 
     @property
+    def fora_do_estado(self) -> int:
+        """O que eu fiz e nao entra no estado: com consulta ou sem acerto
+        anotado. A conta e daqui, e a tela so escreve (CLAUDE.md)."""
+        return self.com_consulta + self.sem_resultado
+
+    @property
     def volume(self) -> int:
         return self.radar.volume + self.anotado.volume
 

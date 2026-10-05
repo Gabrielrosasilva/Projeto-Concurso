@@ -354,3 +354,22 @@ def test_a_tela_mostra_o_atraso_em_vez_do_ano_passado(cliente, em_2026):
     assert "Atrasado: era esperado em 2025" in texto
     assert "Previsto para 2025" not in texto
     assert "ano(s)" not in texto
+
+
+def test_o_terminal_escreve_a_mesma_frase_da_tela(monkeypatch):
+    """Auditoria de 04/10: o `radar previsao` escrevia "Tijucas -> 2025", sem
+    o "Atrasado" que a tela ganhou na Etapa 1B."""
+    from typer.testing import CliRunner
+
+    from radar import servico
+    from radar.cli import app
+    from radar.servico import previsao
+
+    monkeypatch.setattr(previsao, "_este_ano", lambda: 2026)
+    tijucas = previsao._prever("Tijucas", {2011, 2015, 2017, 2021})
+    monkeypatch.setattr(servico, "previsao_de_abertura", lambda: [tijucas])
+
+    saida = CliRunner().invoke(app, ["previsao"]).output
+
+    assert "Atrasado: era esperado em 2025" in saida
+    assert "->" not in saida

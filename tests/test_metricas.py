@@ -415,3 +415,27 @@ def test_meu_foco_e_home_leem_o_mesmo_acumulado(banco_temporario,
     assert (meu_foco.respondidas, meu_foco.acertos) == (25, 10)
     assert home.revisar.respondidas == metricas.acumulado().respondidas == 25
     assert ("Direito Penal", 40.0, 25) in home.revisar.materias_fracas
+
+
+def test_nenhum_template_soma_contagem():
+    """CLAUDE.md: "template nenhum soma". A auditoria de 04/10 achou quatro
+    contas em template (Meu desempenho, Macetes, a rodada compilada e a
+    ficha); foram para o Python. Este teste nao deixa voltar: nada de
+    `| sum(` e nada de `set x = contagem + contagem` num template."""
+    import re
+    from pathlib import Path
+
+    pasta = Path(__file__).resolve().parents[1] / "src" / "radar" / "web" / "templates"
+    contagem = r"(questoes|acertos|erros|respondidas|total|com_consulta|sem_resultado|pedidas|entregues)"
+    proibido = [
+        re.compile(r"\|\s*sum\("),
+        re.compile(r"\{%-?\s*set\s+\w+\s*=[^%]*\b" + contagem + r"\b[^%~]*\s[-+]\s"),
+        # Subtrair tamanhos de listas de QUESTOES; "e mais N assuntos" na tela
+        # e apresentacao de lista, e nao contagem de questao.
+        re.compile(r"questoes\w*\s*\|\s*length\s*\)?\s*[-+]\s"),
+    ]
+    achados = [f"{arquivo.name}:{n}: {linha.strip()[:90]}"
+               for arquivo in sorted(pasta.glob("*.html"))
+               for n, linha in enumerate(arquivo.read_text(encoding="utf-8").splitlines(), 1)
+               if any(p.search(linha) for p in proibido)]
+    assert achados == []

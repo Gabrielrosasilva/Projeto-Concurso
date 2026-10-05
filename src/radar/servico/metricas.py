@@ -170,12 +170,18 @@ def frase_da_conta(numeros: Numeros) -> str:
     Uma funcao so para a tela e o terminal escreverem a mesma linha. So
     aparece o estado que existe: "+ 0 sem acerto anotado" e ruido.
     """
-    partes = [f"{numeros.acertos} acertos", f"{numeros.erros} erros"]
+    partes = [_contado(numeros.acertos, "acerto", "acertos"),
+              _contado(numeros.erros, "erro", "erros")]
     if numeros.sem_resultado:
         partes.append(f"{numeros.sem_resultado} sem acerto anotado")
     if numeros.ia:
         partes.append(f"{numeros.ia} de treino de IA")
-    return f"{numeros.questoes} questões = " + " + ".join(partes)
+    return _contado(numeros.questoes, "questão", "questões") + " = " + " + ".join(partes)
+
+
+def _contado(n: int, um: str, varios: str) -> str:
+    """"1 acerto", "2 acertos", "0 acertos": o plural que a frase pedia."""
+    return f"{n} {um if n == 1 else varios}"
 
 
 def frase_da_ia(numeros: Numeros) -> str | None:

@@ -100,7 +100,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (04/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (05/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -111,10 +111,11 @@ caderno de erros, Semanas, Minhas materias; automacao no Windows). E o
 arvore de conteudos (materia > assunto > subassunto > elemento) com alvo,
 complementar e fora separados, a incidencia e os padroes, o desempenho por
 conteudo com a amostra, a geracao com escopo fechado, a ficha de estudo de
-cada tema (61 em `data/fichas.json`), os selos do novo.md (🟢 oficial, 🔵
+cada tema (65 em `data/fichas.json`), os selos do novo.md (🟢 oficial, 🔵
 acervo, 🟡 automatico, 🟣 IA) gravados no dado, e o site inteiro no design
 system. A **auditoria final** ([auditoria_final](docs/auditoria_final.md))
-confere a §23 do novo.md: **18 de 19 itens atendem com o dado real**.
+confere a §23 do novo.md: **19 de 19 itens atendem com o dado real** (o 18,
+a media "por prova" dos Macetes, foi corrigido no lote de 04/10).
 **Correcoes depois da auditoria (03/10, decisoes 63 a 66):** o "Onde estudar
 primeiro" nao soma mais o alvo e o complementar; o backup das 23h30, que
 falhava desde 27/09, roda com a pasta suja; a lista de leis alteradas depois
@@ -151,7 +152,7 @@ texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
 provas complementares aceitas); 775 geradas (7 rejeitadas); banco na versao 5.
-**Falta, de voce:** conferir as 61 fichas (a conferida tambem liga as faixas
+**Falta, de voce:** conferir as 65 fichas (a conferida tambem liga as faixas
 do tema ao Meu desempenho, decisao 81), as 232 classificacoes do complementar
 (Analises > Conferencia, filtro "complementar aceito"), os 109 conceitos
 associados (o mesmo lugar, "so com associado por conferir") e os 15 itens da
@@ -162,8 +163,12 @@ lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
 que aceitava no inventado e o elemento vizinho, e o traceback do modo revisao.
 A Rodada 2 (decisoes 97 e 98): o sinonimo de materia vale em todo filtro e no
 acerto por materia, e o `radar padrao` mostra um bloco por evidencia. As
-rodadas 3 e 4 (migracao que regrava os JSON, simulados pela chave, nos
-duplicados) e a decisao do "praticado" estao na pendencia G.
+Rodadas 3 e 4 e o resto (05/10, decisoes 99 a 103): migrar banco antigo nao
+regrava o JSON com mais linhas, o simulado volta pela chave, 12 nos
+duplicados juntados (`radar conteudos --juntar`) e a classificacao recusa o
+subassunto parecido, o modo revisao diz quantos nos sao so praticados, os
+menores e as 4 fichas de Portugues de 28/09 a 01/10. Os 8 defeitos sairam;
+sobra a 2013-q53 e 3 pares parecidos, na pendencia G.
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
 **Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos

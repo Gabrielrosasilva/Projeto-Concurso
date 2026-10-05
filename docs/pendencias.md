@@ -154,8 +154,11 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   tambem foram conferidos (decisao 84). Falta so o seu `conferida: true` em
   cada um - e o que tira o 🟣 -, comecando pelas 5 em que o gabarito oficial
   ficou errado: 2013 q64 e q66, 2019 q46, q71 e q75;
-- 🔴 **Conferir as 61 fichas da 6B** (Hoje > Fichas, botao "Conferi esta
-  ficha", ou `radar fichas --conferir <tema>`), comecando pelas da semana. Na
+- 🔴 **Conferir as 65 fichas** (Hoje > Fichas, botao "Conferi esta
+  ficha", ou `radar fichas --conferir <tema>`), comecando pelas da semana.
+  As 4 de Portugues de 28/09 a 01/10 (substantivo e adjetivo; artigo,
+  numeral e pronome; Verbo 1; Interpretacao 1) foram escritas pelo Claude
+  Code em 05/10 e sao gramatica, sem lei para ler contra. Na
   conferencia, vale olhar os nos de cada uma: 13 ficaram sem no (decisao 43).
   O Claude Code leu as 61 contra a fonte em 04/10 - LEP, CF, CP e CPP no texto
   compilado de 03/10, Mandela no texto da ONU: 15 corrigidas (um erro de
@@ -242,34 +245,19 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 ## G. Achados da auditoria independente de 04/10
 
 Detalhe, reprodução e plano em [auditoria_independente.md](auditoria_independente.md)
-(R7 e R14). Feitos na Rodada 1 (decisão 96): o teste preso a 31/10/2026
-(BUG-8), o no inexistente e o elemento irmão aceitos na importação de geradas
-(BUG-1 e BUG-2) e o traceback do `radar gerar --modo revisao` (BUG-6). Na
-Rodada 2 (decisões 97 e 98): o sinônimo de matéria nos filtros (BUG-4) e o
-`radar padrao` por evidência. Sobram,
-em rodadas, cada uma com a recomendação já dita:
+(R7 e R14). Os 8 defeitos (BUG-1 a BUG-8) e os menores saíram nas Rodadas 1
+a 4 e no lote de 05/10 (decisões 96 a 103; o resumo está no
+[historico](historico.md)). Ficam, de propósito:
 
-- 🔴 **Rodada 3 — migrar um banco antigo sobrescreve os JSON versionados
-  (BUG-5):** os passos 1, 4 e 5 exportam o banco que está sendo migrado.
-  Recomendação: só o `radar sincronizar` exporta.
-- 🔴 **Rodada 3 — `simulados.json` aponta a questão por (prova, número)**, e
-  não pela chave. Sem dano hoje (0 de 50).
-- 🔴 **Rodada 4 — conceitos duplicados na árvore (BUG-3):** ~10 pares criados
-  pela classificação do complementar ao lado dos nós do alvo (Características
-  dos direitos humanos, Sistema interamericano, Maria da Penha, CPP art. 306,
-  segurança pública, tortura...). Recomendação: manter o nó do alvo e levar as
-  classificações do complementar; a importação passa a recusar nome parecido.
-  Junto, a 2013-q53 (abolitio criminis) pendente — conferida por você.
-- 🔴 **Decisão avulsa — o modo revisão conta "praticado" como "estudado"
-  (BUG-7),** contra a decisão 20. Recomendação: aceitar de propósito, registrar
-  e dizer na saída quantos são só praticados.
-- ⚪ **Menores:** "· materia" no Meu desempenho ("sem matéria" do `/simulado`
-  saiu na Rodada 2); "1 acertos + 1 erros"; `radar previsao` no terminal com "->" e
-  sem "Atrasado"; 4 contas em template e a recontagem da IA em
-  `conferencia.py:259`; duas filas de revisão com números diferentes (home 6,
-  Meu desempenho 12); o ADD COLUMN automático do `db.py`; `complementar.md`
-  (pergunta 4 sem a classificação, pergunta 1 em ocorrências); README sem o
-  `radar conferir-dias`; "18 de 19" no CLAUDE.md e no `auditoria_final.md`
-  (o item 18 já atende); os cabeçalhos do `config/regioes.yml` e do
-  `config/amostra.yml`; 8 concursos com `escolaridade` mudada na releitura de
-  04/10, sem registro na decisão 93.
+- 🔴 **A 2013-q53 (abolitio criminis) continua pendente:** a classificação é
+  conferida por você, e só você muda o nó dela;
+- ⚪ **3 pares parecidos que não foram juntados** (decisão 99), porque não
+  são o mesmo conceito com certeza: "Accountability" × "Accountability
+  horizontal…", "Brasileiros natos" × "Brasileiros natos e naturalizados" e,
+  na LC 675, "Progressão funcional" × "Progressão funcional e estágio
+  probatório". Se forem o mesmo, `radar conteudos --juntar … --em …`;
+- ⚪ **O `compilado.mesma_materia` (comparação difusa, 0,85)** continua: casa
+  o nome do quadro do edital com o do caderno (decisão 97);
+- ⚪ **CL-2 da auditoria:** o `provas.py` e o `provas_ieses.py` sabem ler os
+  hotsites das bancas, fora de `collectors/`; é anterior à evolução e não foi
+  mexido.

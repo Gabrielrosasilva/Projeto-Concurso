@@ -449,3 +449,22 @@ def test_a_tela_do_complementar_volta_para_o_mesmo_recorte(alvo):
     assert resposta.headers["location"] == (
         f"/analises/conferencia?evidencia=complementar&amostra=1#q-{chave}")
     assert _linha(chave).conferida_em is not None
+
+
+def test_subassunto_parecido_com_um_que_ja_existe_e_recusado(alvo, tmp_path):
+    """Auditoria de 04/10 (BUG-3): a classificacao do complementar criou
+    "Formas de violencia domestica" ao lado de "... e familiar", e o mesmo
+    conceito ficou em dois nos. Agora o nome parecido e recusado e aponta o
+    no que ja existe - e nenhum no novo e criado."""
+    lote, penal = _pedido("Direito Penal")
+    _importar(tmp_path, lote, [{"id": penal["id"], "classificacoes": [_boa("2019-q51")]}])
+
+    resultado = _importar(tmp_path, lote, [{"id": penal["id"], "classificacoes": [
+        _boa("2019-q52", subassunto="Menoridade penal", elemento="CP, art. 28",
+             referencia="CP, art. 28")]}])
+
+    assert resultado["gravadas"] == 0
+    (recusa,) = resultado["recusas"]
+    assert "parece o que já existe" in recusa and "Menoridade" in recusa
+    with sessao() as s:
+        assert s.scalar(select(Conteudo).where(Conteudo.nome == "Menoridade penal")) is None

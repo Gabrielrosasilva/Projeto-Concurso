@@ -537,8 +537,7 @@
     "tipo_elemento": "contexto histórico",
     "nos": [
       "Direitos Humanos > Afirmação histórica dos direitos humanos",
-      "Direitos Humanos > Teoria geral dos direitos humanos > Gerações (dimensões) de direitos",
-      "Direitos Humanos > Teoria geral dos direitos humanos > Gerações (dimensões) dos direitos humanos"
+      "Direitos Humanos > Teoria geral dos direitos humanos > Gerações (dimensões) de direitos"
     ],
     "por_que_estes_nos": "O assunto 'Afirmação histórica dos direitos humanos' é a metade histórica do tema: as 3 questões do alvo nele são da DUDH de 1948 e da Conferência de Viena de 1993, e as do complementar, de marcos e da internacionalização no pós-guerra. A metade das dimensões está nos dois subassuntos de gerações, que a classificação pôs sob 'Teoria geral' (2 questões do alvo e 1 do complementar); o resto da teoria geral fica na ficha dela.",
     "ler_exatamente": "Os marcos em ordem: Magna Carta (1215), Petition of Rights (1628), Habeas Corpus Act (1679), Bill of Rights (1689), Declaração de Virgínia e Independência dos EUA (1776), Declaração dos Direitos do Homem e do Cidadão (1789), Constituições do México (1917) e de Weimar (1919), Carta da ONU (1945), DUDH (1948) e Declaração e Programa de Ação de Viena (1993); depois, as gerações de Karel Vasak (1979) e as 4ª e 5ª dimensões de Paulo Bonavides. Leia o preâmbulo e os arts. 1º a 3º da DUDH.",
@@ -585,7 +584,6 @@
       "Direitos Humanos > Direitos humanos na Constituição Federal",
       "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados",
       "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada",
-      "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Tratados equivalentes a emenda constitucional (EC 45/2004)",
       "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Audiência de custódia"
     ],
     "por_que_estes_nos": "O tema junta dois itens do programa. 'Direitos humanos na Constituição Federal' entra inteiro (5 questões do alvo: prevalência, direitos e garantias fundamentais, algemas, direitos do preso e intervenção federal). De 'A Constituição brasileira e os tratados', entram a incorporação e a hierarquia (2 do alvo e 2 do complementar) e a audiência de custódia, norma de tratado aplicada no Brasil (1 do alvo); o subassunto 'Sistema interamericano de proteção' fica na ficha dos sistemas.",
@@ -721,11 +719,10 @@
     "elemento": "Sistema global (ONU), sistema interamericano e responsabilidade do Estado",
     "tipo_elemento": "tratado",
     "nos": [
-      "Direitos Humanos > Teoria geral dos direitos humanos > Sistema interamericano de proteção",
+      "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Sistema interamericano de proteção",
       "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos",
       "Direitos Humanos > Teoria geral dos direitos humanos > Sistema global e sistemas regionais de proteção",
       "Direitos Humanos > Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José)",
-      "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Sistema interamericano de proteção",
       "Direitos Humanos > Direitos humanos e responsabilidade do Estado"
     ],
     "por_que_estes_nos": "Os sistemas de proteção estão espalhados na árvore: sob 'Teoria geral', os subassuntos do sistema interamericano, da Corte Interamericana, dos sistemas global e regionais e do Pacto de San José (só complementar); sob 'A Constituição brasileira e os tratados', o subassunto 'Sistema interamericano de proteção' (3 questões do alvo: denominação do Pacto, Protocolo de San Salvador e a Corte). A responsabilidade do Estado é o assunto inteiro de mesmo nome (1 do alvo, de erro judiciário e prisão além do tempo).",
@@ -1373,6 +1370,49 @@
     "conferida_em": null
   },
   {
+    "tema": "Artigo, numeral e pronome (classificação)",
+    "materia": "Língua Portuguesa",
+    "assunto": "Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo",
+    "subassunto": "Classificação morfológica",
+    "elemento": "Classificação do artigo, do numeral e do pronome",
+    "tipo_elemento": "classificação",
+    "nos": [
+      "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    ],
+    "por_que_estes_nos": "O subassunto 'Classificação morfológica' (1 questão do alvo, de 2013, e 2 do complementar) é a classificação das classes variáveis, que é o tema. O emprego e a colocação dos pronomes ficam nas fichas de Pronomes 1 a 3, e 'Substantivo e adjetivo' na ficha da flexão nominal.",
+    "ler_exatamente": "Na fonte sugerida, os capítulos de artigo, numeral e pronome: o artigo definido e o indefinido (e as combinações e contrações com preposição); os numerais cardinais, ordinais, multiplicativos e fracionários; e os seis tipos de pronome - pessoais (retos, oblíquos e de tratamento), possessivos, demonstrativos, indefinidos, relativos e interrogativos.",
+    "como_pesquisar": [
+      "classificação dos pronomes pessoais possessivos demonstrativos indefinidos relativos interrogativos",
+      "numeral cardinal ordinal multiplicativo e fracionário exemplos",
+      "artigo definido e indefinido contração com preposição"
+    ],
+    "entender": [
+      "O artigo determina o substantivo: o definido (o, a, os, as) individualiza; o indefinido (um, uma, uns, umas) generaliza. Ele se junta à preposição: do, na, pelo, num.",
+      "Qualquer palavra com artigo antes vira substantivo (substantivação): 'o sim', 'o porquê', 'o andar'.",
+      "Numeral: cardinal (dois), ordinal (segundo), multiplicativo (dobro, triplo) e fracionário (meio, terço). 'Um' é numeral quando conta e artigo quando indetermina.",
+      "Os pronomes pessoais retos (eu, tu, ele...) fazem o papel de sujeito; os oblíquos átonos (me, te, se, o, a, lhe...) e os tônicos (mim, ti, si, conosco...) são complementos.",
+      "Os demonstrativos situam no espaço e no texto: 'este' (perto de quem fala; o que vai ser dito), 'esse' (perto de quem ouve; o que já foi dito) e 'aquele' (longe dos dois).",
+      "Os relativos (que, o qual, quem, cujo, onde) retomam um termo anterior e começam uma oração; os interrogativos (que, quem, qual, quanto) fazem pergunta."
+    ],
+    "memorizar": [
+      "'Cujo' indica posse, concorda com a coisa possuída e não aceita artigo depois: 'o livro cujas páginas', nunca 'cujas as páginas'.",
+      "'Onde' só para lugar físico: 'a cidade onde moro'; para tempo ou situação, 'em que'.",
+      "Multiplicativo: dobro, triplo, quádruplo; fracionário: meio, terço, quarto; ordinal de mil: milésimo.",
+      "Pronome de tratamento (Vossa Senhoria, Vossa Excelência) leva o verbo e o possessivo para a 3ª pessoa.",
+      "O plural de 'qualquer' é 'quaisquer'."
+    ],
+    "pegadinhas": [
+      "Chamar de artigo o 'um' que conta: em 'comprei um livro, e não dois', 'um' é numeral.",
+      "Classificar todo 'que' como pronome relativo: ele também é conjunção ('disse que viria'); o teste é trocar por 'o qual'.",
+      "Usar 'cujo' com artigo depois ('cujo o') ou fora da ideia de posse.",
+      "Trocar 'este' e 'esse' na referência ao texto: 'este' anuncia o que vem, 'esse' retoma o que já foi dito."
+    ],
+    "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulos de artigo, numeral e pronome.",
+    "modelo": "Claude Code, importado manualmente, em 05/10/2026",
+    "criado_em": "2026-10-05T03:21:32.980956+00:00",
+    "conferida_em": null
+  },
+  {
     "tema": "Concordância nominal",
     "materia": "Língua Portuguesa",
     "assunto": "Concordância nominal e verbal",
@@ -1584,6 +1624,45 @@
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulo de crase.",
     "modelo": "Claude Code, importado manualmente, em 02/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
+    "conferida_em": null
+  },
+  {
+    "tema": "Interpretação 1: o método",
+    "materia": "Língua Portuguesa",
+    "assunto": "Compreensão e interpretação de texto (s)",
+    "subassunto": null,
+    "elemento": "Método de leitura: o comando, a localização do trecho e a paráfrase",
+    "tipo_elemento": "padrão de interpretação",
+    "nos": [],
+    "por_que_estes_nos": "O método vale para toda a interpretação: o assunto inteiro já está na ficha da bateria (Interpretação 6), e os subassuntos nas fichas 2 e 3 (tipologia e relações de sentido). Pôr o assunto aqui contaria as mesmas questões em duas fichas.",
+    "ler_exatamente": "Em 'Para Entender o Texto', as lições sobre a leitura e a compreensão do texto e sobre os implícitos (pressupostos e subentendidos). Depois, faça 5 questões de interpretação do acervo seguindo o método: ler o comando, achar no texto o trecho que responde e comparar alternativa por alternativa com ele.",
+    "como_pesquisar": [
+      "como resolver questões de interpretação de texto método",
+      "paráfrase extrapolação redução e contradição interpretação de texto",
+      "pressuposto e subentendido interpretação de texto"
+    ],
+    "entender": [
+      "Leia o comando antes do texto: ele diz o que procurar (a ideia central, o sentido de uma palavra, o que o texto não afirma) e se a questão pede a correta ou a incorreta.",
+      "Toda resposta tem de estar no texto: marque o trecho que justifica a alternativa antes de escolher.",
+      "Paráfrase diz o mesmo com outras palavras, e é a alternativa certa. Extrapolação vai além do texto, redução toma a parte pelo todo e contradição diz o oposto: as três são erradas.",
+      "Compreender é saber o que o texto diz; interpretar é o que se conclui dele com segurança. A conclusão que precisa de informação de fora do texto é extrapolação.",
+      "Palavras absolutas ('sempre', 'nunca', 'somente', 'todos') costumam deixar a alternativa mais ampla que o texto: confira se o texto diz tanto."
+    ],
+    "memorizar": [
+      "A ordem: 1) o comando; 2) o texto; 3) o trecho que responde; 4) cada alternativa comparada com o trecho.",
+      "Os três erros de alternativa: extrapolação (vai além), redução (a parte pelo todo) e contradição (o oposto).",
+      "Em 'é INCORRETO afirmar' ou 'EXCETO', a resposta é a alternativa que o texto NÃO sustenta.",
+      "Pressuposto vem marcado na frase ('parou de fumar' pressupõe que fumava); subentendido é insinuação e depende do contexto."
+    ],
+    "pegadinhas": [
+      "Alternativa verdadeira no mundo, mas que o texto não diz: é extrapolação.",
+      "Alternativa com uma palavra trocada ('alguns' virou 'todos'): a ideia parece a mesma, mas ficou mais ampla que o texto.",
+      "Responder pela própria opinião, e não pelo que o autor afirma.",
+      "Não ver o 'INCORRETA' ou o 'EXCETO' do comando."
+    ],
+    "fonte_sugerida": "Para Entender o Texto: Leitura e Redação (José Luiz Fiorin e Francisco Platão Savioli, Ática).",
+    "modelo": "Claude Code, importado manualmente, em 05/10/2026",
+    "criado_em": "2026-10-05T03:21:32.980956+00:00",
     "conferida_em": null
   },
   {
@@ -2272,6 +2351,49 @@
     "conferida_em": null
   },
   {
+    "tema": "Substantivo e adjetivo (flexão nominal)",
+    "materia": "Língua Portuguesa",
+    "assunto": "Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo",
+    "subassunto": "Substantivo e adjetivo",
+    "elemento": "Flexão de gênero, número e grau do substantivo e do adjetivo",
+    "tipo_elemento": "regra gramatical",
+    "nos": [
+      "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo",
+      "Língua Portuguesa > Flexão nominal e verbal > Plural dos substantivos terminados em -ão"
+    ],
+    "por_que_estes_nos": "O subassunto 'Substantivo e adjetivo' (2 questões do complementar) é o tema; o 'Plural dos substantivos terminados em -ão' (1 questão do alvo, de 2019) é a flexão de número do substantivo. O resto de 'Flexão nominal e verbal' é verbo e fica na ficha de Verbo 1.",
+    "ler_exatamente": "Na fonte sugerida, os capítulos de substantivo e de adjetivo: a flexão de gênero (biformes e uniformes: epicenos, sobrecomuns e comuns de dois gêneros), a de número (plural dos simples e dos compostos) e a de grau (aumentativo e diminutivo; comparativo e superlativo). Depois, a diferença entre substantivo e adjetivo pela função da palavra na frase.",
+    "como_pesquisar": [
+      "flexão do substantivo gênero número e grau resumo para concurso",
+      "plural dos substantivos compostos regras",
+      "substantivo epiceno sobrecomum e comum de dois gêneros diferença"
+    ],
+    "entender": [
+      "Substantivo nomeia os seres; adjetivo caracteriza o substantivo. A classe se decide pela função na frase: em 'o jovem chegou', 'jovem' é substantivo; em 'o rapaz jovem chegou', é adjetivo.",
+      "Gênero: os biformes têm uma forma para cada gênero (aluno, aluna); os uniformes têm uma só - o epiceno (a cobra macho, a cobra fêmea), o sobrecomum (a criança, a vítima) e o comum de dois gêneros, em que só o artigo marca o gênero (o estudante, a estudante).",
+      "Plural dos simples: o -ão faz -ões, -ães ou -ãos (limões, pães, cidadãos); os terminados em -r, -s ou -z (oxítonos ou monossílabos) acrescentam -es (mares, meses, luzes); -al, -el, -ol e -ul trocam o l por -is (animais, papéis, anzóis, azuis); a paroxítona em -s não muda (o lápis, os lápis).",
+      "Plural dos compostos: variam as palavras variáveis (substantivo, adjetivo, numeral) - couves-flores, guardas-noturnos; o verbo e o advérbio não variam - guarda-chuvas, beija-flores; com preposição, só o primeiro elemento varia - pés de moleque.",
+      "Grau do adjetivo: comparativo (de superioridade, de igualdade, de inferioridade) e superlativo - relativo (o mais alto de todos) e absoluto, analítico (muito alto) ou sintético (altíssimo)."
+    ],
+    "memorizar": [
+      "Sobrecomum: um só gênero para os dois sexos (a criança, a testemunha, a vítima, o indivíduo).",
+      "Comum de dois gêneros: o artigo muda e a palavra não (o/a jovem, o/a colega, o/a estudante).",
+      "Epiceno: nome de animal com macho ou fêmea depois (a onça macho, o jacaré fêmea).",
+      "Composto com 'guarda': guarda substantivo varia (guardas-noturnos); guarda verbo não varia (guarda-roupas).",
+      "Superlativos sintéticos eruditos: fácil → facílimo; difícil → dificílimo; amigo → amicíssimo; pobre → paupérrimo."
+    ],
+    "pegadinhas": [
+      "Classificar a palavra fora da frase: 'brasileiro' é adjetivo em 'o povo brasileiro' e substantivo em 'o brasileiro trabalha'.",
+      "Pôr no plural o verbo do composto: 'guardas-chuvas', em vez de 'guarda-chuvas'.",
+      "Fazer todo plural de -ão em -ões: cidadãos, irmãos, pães e capitães não seguem essa regra.",
+      "Tomar o sobrecomum por comum de dois gêneros: 'a criança' vale para menino e menina, e não existe 'o criança'."
+    ],
+    "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulos de substantivo e de adjetivo.",
+    "modelo": "Claude Code, importado manualmente, em 05/10/2026",
+    "criado_em": "2026-10-05T03:21:32.980956+00:00",
+    "conferida_em": null
+  },
+  {
     "tema": "Termos integrantes 1: objeto direto e indireto",
     "materia": "Língua Portuguesa",
     "assunto": "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
@@ -2353,6 +2475,47 @@
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulos de termos integrantes e acessórios.",
     "modelo": "Claude Code, importado manualmente, em 02/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
+    "conferida_em": null
+  },
+  {
+    "tema": "Verbo 1: estrutura e flexão verbal",
+    "materia": "Língua Portuguesa",
+    "assunto": "Flexão nominal e verbal",
+    "subassunto": null,
+    "elemento": "Estrutura do verbo e flexão de número, pessoa, modo e tempo",
+    "tipo_elemento": "regra gramatical",
+    "nos": [],
+    "por_que_estes_nos": "A árvore não tem subassunto de flexão verbal: o assunto 'Flexão nominal e verbal' só tem o plural em -ão, que está na ficha de substantivo e adjetivo, e pôr o assunto aqui contaria a mesma questão nas duas fichas. O emprego dos tempos e modos fica na ficha de Verbo 2.",
+    "ler_exatamente": "Na fonte sugerida, o capítulo de verbo, a parte de estrutura e flexão: radical, vogal temática e desinências (modo-temporal e número-pessoal); as três conjugações; os modos (indicativo, subjuntivo e imperativo) e os tempos simples; os verbos regulares, irregulares, anômalos, defectivos e abundantes. Depois, conjugue no papel ter, vir, pôr e ver no presente do indicativo, no pretérito perfeito e no futuro do subjuntivo.",
+    "como_pesquisar": [
+      "estrutura do verbo radical vogal temática e desinência",
+      "verbos irregulares defectivos e abundantes diferença",
+      "futuro do subjuntivo dos verbos ver vir e pôr"
+    ],
+    "entender": [
+      "Estrutura: o radical carrega o sentido (cant-), a vogal temática diz a conjugação (canta-), a desinência modo-temporal marca modo e tempo (cantá-va-mos) e a número-pessoal, número e pessoa (cantáva-mos).",
+      "Três conjugações: 1ª em -ar, 2ª em -er e 3ª em -ir; 'pôr' e os derivados (compor, depor, repor) são da 2ª, porque vêm do antigo 'poer'.",
+      "Regular segue o modelo da conjugação; irregular muda o radical ou as desinências (fazer: faço, fiz); anômalo muda tanto que o radical some (ser, ir); defectivo não tem todas as formas (abolir, precaver-se, reaver); abundante tem duas formas, quase sempre no particípio (aceitado e aceito, imprimido e impresso).",
+      "Modos: o indicativo exprime certeza; o subjuntivo, hipótese ou desejo; o imperativo, ordem ou pedido.",
+      "O verbo flexiona em número (singular e plural), pessoa (1ª, 2ª e 3ª), modo, tempo e voz."
+    ],
+    "memorizar": [
+      "Futuro do subjuntivo: ver → quando eu vir; vir → quando eu vier; pôr → quando eu puser; ter → quando eu tiver; fazer → quando eu fizer.",
+      "Ter e vir no presente, 3ª do plural com o acento diferencial: eles têm, eles vêm; nos derivados, ele detém e eles detêm, ele intervém e eles intervêm.",
+      "Particípio duplo: o regular vai com ter e haver (tinha aceitado), o irregular com ser e estar (foi aceito).",
+      "Reaver só se conjuga nas formas em que 'haver' tem a letra v: nós reavemos, eu reouve; não existe 'eu reavejo'.",
+      "Intervir segue vir (ele interveio) e manter segue ter (ele manteve)."
+    ],
+    "pegadinhas": [
+      "Trocar o futuro do subjuntivo de ver e vir: o certo é 'quando eu vir' (ver) e 'quando eu vier' (vir), e não 'quando eu ver'.",
+      "Esquecer o circunflexo do plural de ter e vir: 'eles tem' e 'eles vem' estão errados.",
+      "Escrever 'interviu' por 'interveio' e 'manteu' por 'manteve'.",
+      "Conjugar o defectivo na forma que não existe ('eu reavejo', 'eu abolo').",
+      "Pôr 'pôr' na 3ª conjugação: ele é da 2ª."
+    ],
+    "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulo de verbo (estrutura, conjugações e flexão).",
+    "modelo": "Claude Code, importado manualmente, em 05/10/2026",
+    "criado_em": "2026-10-05T03:21:32.980956+00:00",
     "conferida_em": null
   },
   {

@@ -41,13 +41,55 @@ PREFIXO_DA_COPIA = "migracao"
 HORA_DA_COPIA = re.compile(r"\d{4}-\d{2}-\d{2}-\d{6}$")
 
 
+def _exportar_sem_perder(qual: str) -> None:
+    """Leva uma tabela do banco para o JSON versionado - menos quando o banco
+    tem MENOS linhas que o arquivo.
+
+    O arquivo e o registro de onde o banco se refaz. Migrar um banco ANTIGO
+    (depois de um `radar migrar --desfazer`, ou de uma copia velha) e
+    exportar em seguida trocava o arquivo novo pelo velho: na auditoria de
+    04/10, as 779 geradas do `questoes_geradas.json` viraram 50 (BUG-5).
+    Com menos linhas no banco, o arquivo fica como esta e o log diz por que;
+    o `radar importar` traz o arquivo para o banco, e o `radar exportar` faz
+    o contrario de proposito (decisao 102).
+    """
+    import json
+
+    from radar import acervo
+    from radar.db import criar_tabelas, sessao
+    from radar.models import ErroAnotado, EstudoExtra, QuestaoGerada
+
+    tabela, caminho, exportar = {
+        "geradas": (QuestaoGerada, acervo.caminho_das_geradas, acervo.exportar_geradas),
+        "erros": (ErroAnotado, acervo.caminho_dos_erros, acervo.exportar_erros),
+        "extras": (EstudoExtra, acervo.caminho_dos_extras, acervo.exportar_extras),
+    }[qual]
+    arquivo = caminho()
+    no_arquivo = 0
+    if arquivo.exists():
+        try:
+            dados = json.loads(arquivo.read_text(encoding="utf-8"))
+            no_arquivo = len(dados) if isinstance(dados, list) else 0
+        except ValueError:
+            no_arquivo = 0
+    criar_tabelas()
+    with sessao() as s:
+        no_banco = s.scalar(select(func.count()).select_from(tabela))
+    if no_banco < no_arquivo:
+        log.warning(
+            "migração: %s não exportado - o banco tem %d e %s tem %d. O arquivo "
+            "ficou como estava; `radar importar` traz ele para o banco.",
+            qual, no_banco, arquivo.name, no_arquivo)
+        return
+    exportar()
+
+
 def _passo_1() -> None:
     """Etapa 2: a evidencia de cada questao, a arvore e as ligacoes antigas.
 
     Importado aqui dentro de proposito: o `servico` usa o `db`, e o `db` chama
     esta migracao - importar no topo faria um ciclo.
     """
-    from radar import acervo
     from radar.servico import conteudos, evidencia
 
     conteudos.semear()
@@ -55,9 +97,9 @@ def _passo_1() -> None:
     conteudos.ligar_textos_antigos()
     # A ligacao nova vai para os arquivos versionados ja: o `sincronizar` nao
     # exporta as geradas, e o banco e reconstruivel.
-    acervo.exportar_geradas()
-    acervo.exportar_erros()
-    acervo.exportar_extras()
+    _exportar_sem_perder("geradas")
+    _exportar_sem_perder("erros")
+    _exportar_sem_perder("extras")
 
 
 def _passo_2() -> None:
@@ -108,9 +150,7 @@ def _passo_4() -> None:
     levar as colunas novas para o arquivo versionado - o banco e reconstruivel
     a partir dele, e sem isto a reconstrucao perderia os campos.
     """
-    from radar import acervo
-
-    acervo.exportar_geradas()
+    _exportar_sem_perder("geradas")
 
 
 def _passo_5() -> None:
@@ -122,11 +162,10 @@ def _passo_5() -> None:
     chave fica nula - chutar uma seria o erro que o passo corrige. Depois leva
     a coluna para o arquivo versionado, de onde o banco e reconstruido.
     """
-    from radar import acervo
     from radar.servico import geradas
 
     geradas.preencher_origem_chave()
-    acervo.exportar_geradas()
+    _exportar_sem_perder("geradas")
 
 
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado

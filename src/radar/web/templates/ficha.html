@@ -181,9 +181,8 @@
         {% endfor %}
       </ul>
     {% else %}<p class="frase-padrao">O cronograma não tem faixa de questões deste tema.</p>{% endif %}
-    {% set do_alvo = f.questoes_reais | selectattr('evidencia', 'equalto', 'alvo') | list %}
     {% if f.questoes_reais %}
-      <p>{{ s(f.origens.questoes_reais) }} No radar há {{ f.questoes_reais | length }} questão(ões) real(is) exatamente deste conteúdo ({{ do_alvo | length }} do alvo, {{ (f.questoes_reais | length) - (do_alvo | length) }} do complementar): comece por elas.</p>
+      <p>{{ s(f.origens.questoes_reais) }} No radar há {{ f.questoes_reais | length }} questão(ões) real(is) exatamente deste conteúdo ({{ f.reais_do_alvo }} do alvo, {{ f.reais_do_complementar }} do complementar): comece por elas.</p>
     {% endif %}
     <p class="subtitulo">{{ s(f.origens.geradas) }} Questões geradas por IA neste conteúdo. {{ FRASE_DA_QUESTAO_DE_IA }}</p>
     {% if f.geradas %}

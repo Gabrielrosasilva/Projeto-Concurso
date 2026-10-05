@@ -112,6 +112,7 @@
     "respostas": [
       {
         "acertou": false,
+        "chave": "240f07ca83a02314bd1a3ac87ce59ce6",
         "escolhida": "e",
         "gerada": false,
         "numero": 3,
@@ -121,6 +122,7 @@
       },
       {
         "acertou": false,
+        "chave": "96c23c93f4f8004854195645bb6535ea",
         "escolhida": "a",
         "gerada": false,
         "numero": 2,
@@ -130,6 +132,7 @@
       },
       {
         "acertou": null,
+        "chave": "bd506fa857bbfa587b177b22bf12e729",
         "escolhida": null,
         "gerada": false,
         "numero": 9,
@@ -139,6 +142,7 @@
       },
       {
         "acertou": null,
+        "chave": "5573eaf791415c179871867e9727624e",
         "escolhida": null,
         "gerada": false,
         "numero": 13,
@@ -148,6 +152,7 @@
       },
       {
         "acertou": null,
+        "chave": "0f6c919682aaf7c7b494b5d72ff823bb",
         "escolhida": null,
         "gerada": false,
         "numero": 10,
@@ -157,6 +162,7 @@
       },
       {
         "acertou": null,
+        "chave": "b1ffda2f3ce3a67ea1da048c4af34b76",
         "escolhida": null,
         "gerada": false,
         "numero": 14,
@@ -166,6 +172,7 @@
       },
       {
         "acertou": null,
+        "chave": "4c3e426d29f88b0cb35e6a2c6487ec5b",
         "escolhida": null,
         "gerada": false,
         "numero": 1,
@@ -175,6 +182,7 @@
       },
       {
         "acertou": null,
+        "chave": "b7cc62c6256e4bf2b9ef9b829a14102c",
         "escolhida": null,
         "gerada": false,
         "numero": 15,
@@ -184,6 +192,7 @@
       },
       {
         "acertou": null,
+        "chave": "7a24388068b82fef41236996ffa1857e",
         "escolhida": null,
         "gerada": false,
         "numero": 5,
@@ -193,6 +202,7 @@
       },
       {
         "acertou": null,
+        "chave": "a5749314dc3412ebcb1e4ca3561a2c79",
         "escolhida": null,
         "gerada": false,
         "numero": 4,
@@ -202,6 +212,7 @@
       },
       {
         "acertou": null,
+        "chave": "feaa43f301778191630be4c227206a06",
         "escolhida": null,
         "gerada": false,
         "numero": 4,
@@ -211,6 +222,7 @@
       },
       {
         "acertou": null,
+        "chave": "025d05fa8918420a91bf6486da58ea2c",
         "escolhida": null,
         "gerada": false,
         "numero": 1,
@@ -220,6 +232,7 @@
       },
       {
         "acertou": null,
+        "chave": "eb8e5bd81478afb8e4bfe34764939bf9",
         "escolhida": null,
         "gerada": false,
         "numero": 8,
@@ -229,6 +242,7 @@
       },
       {
         "acertou": null,
+        "chave": "93fa648f8ba447c65faacba716196778",
         "escolhida": null,
         "gerada": false,
         "numero": 8,
@@ -238,6 +252,7 @@
       },
       {
         "acertou": null,
+        "chave": "e74f064966d1e351f0783ee02f86334f",
         "escolhida": null,
         "gerada": false,
         "numero": 7,
@@ -247,6 +262,7 @@
       },
       {
         "acertou": null,
+        "chave": "5127729f687917a30764119bf4e40aa6",
         "escolhida": null,
         "gerada": false,
         "numero": 10,
@@ -256,6 +272,7 @@
       },
       {
         "acertou": null,
+        "chave": "ddad5053d1d401fdda20f8cd092c1771",
         "escolhida": null,
         "gerada": false,
         "numero": 5,
@@ -265,6 +282,7 @@
       },
       {
         "acertou": null,
+        "chave": "cd8b517ef812aab800e90661babf3841",
         "escolhida": null,
         "gerada": false,
         "numero": 9,
@@ -274,6 +292,7 @@
       },
       {
         "acertou": null,
+        "chave": "5910957069ae82e1922bb58d28c02ada",
         "escolhida": null,
         "gerada": false,
         "numero": 12,
@@ -283,6 +302,7 @@
       },
       {
         "acertou": null,
+        "chave": "9f5be8ca59c016860fee9dbd31bd6696",
         "escolhida": null,
         "gerada": false,
         "numero": 2,
@@ -292,6 +312,7 @@
       },
       {
         "acertou": null,
+        "chave": "f36c430428191d942d9eead29cbcfaaa",
         "escolhida": null,
         "gerada": false,
         "numero": 7,
@@ -301,6 +322,7 @@
       },
       {
         "acertou": null,
+        "chave": "15628c69642cc66d8e0d3c2c1a06866f",
         "escolhida": null,
         "gerada": false,
         "numero": 6,
@@ -310,6 +332,7 @@
       },
       {
         "acertou": null,
+        "chave": "386ceac9971222255af8e2d688a92bcc",
         "escolhida": null,
         "gerada": false,
         "numero": 3,
@@ -319,6 +342,7 @@
       },
       {
         "acertou": null,
+        "chave": "5ca6e0274d8eec63253d878608dd2e2b",
         "escolhida": null,
         "gerada": false,
         "numero": 1,
@@ -328,6 +352,7 @@
       },
       {
         "acertou": null,
+        "chave": "fc28c2cc8cafa20f52753ff81ea4f654",
         "escolhida": null,
         "gerada": false,
         "numero": 18,
@@ -337,6 +362,7 @@
       },
       {
         "acertou": null,
+        "chave": "ee2e9c750b6c79f59496a72e91cfa778",
         "escolhida": null,
         "gerada": false,
         "numero": 19,
@@ -346,6 +372,7 @@
       },
       {
         "acertou": null,
+        "chave": "016a66c1b969459ab76932f3c46bd2ff",
         "escolhida": null,
         "gerada": false,
         "numero": 14,
@@ -355,6 +382,7 @@
       },
       {
         "acertou": null,
+        "chave": "69421e8a1f46f0e146550c9129c24398",
         "escolhida": null,
         "gerada": false,
         "numero": 15,
@@ -364,6 +392,7 @@
       },
       {
         "acertou": null,
+        "chave": "b1fe793fe2fc52f52775b0d156b47aef",
         "escolhida": null,
         "gerada": false,
         "numero": 3,
@@ -373,6 +402,7 @@
       },
       {
         "acertou": null,
+        "chave": "e05eb943f38fdc37610e0fcc29f507dd",
         "escolhida": null,
         "gerada": false,
         "numero": 6,
@@ -382,6 +412,7 @@
       },
       {
         "acertou": null,
+        "chave": "fd65b528b4fd2c2debc1b68b59685aa1",
         "escolhida": null,
         "gerada": false,
         "numero": 10,
@@ -391,6 +422,7 @@
       },
       {
         "acertou": null,
+        "chave": "ff21f5fc71f4d73343983a14268b23b9",
         "escolhida": null,
         "gerada": false,
         "numero": 2,
@@ -400,6 +432,7 @@
       },
       {
         "acertou": null,
+        "chave": "af714da4d191ba9c36a20104e21427f4",
         "escolhida": null,
         "gerada": false,
         "numero": 13,
@@ -409,6 +442,7 @@
       },
       {
         "acertou": null,
+        "chave": "b4566e890e18f58b9ba059f92b56d0da",
         "escolhida": null,
         "gerada": false,
         "numero": 5,
@@ -418,6 +452,7 @@
       },
       {
         "acertou": null,
+        "chave": "8a5183eade0d224a58bae12ca1b3d4a6",
         "escolhida": null,
         "gerada": false,
         "numero": 9,
@@ -427,6 +462,7 @@
       },
       {
         "acertou": null,
+        "chave": "44cb3925c3760d07b4ac84e4ef8296eb",
         "escolhida": null,
         "gerada": false,
         "numero": 1,
@@ -436,6 +472,7 @@
       },
       {
         "acertou": null,
+        "chave": "82b010f596149f8a86a63642d4cf9c98",
         "escolhida": null,
         "gerada": false,
         "numero": 2,
@@ -445,6 +482,7 @@
       },
       {
         "acertou": null,
+        "chave": "e17fc81e3ae79f16c4e219c8fd0f3422",
         "escolhida": null,
         "gerada": false,
         "numero": 1,
@@ -454,6 +492,7 @@
       },
       {
         "acertou": null,
+        "chave": "5ddcd6d0fbc5d4dfa15f6f168c89aa4d",
         "escolhida": null,
         "gerada": false,
         "numero": 2,
@@ -463,6 +502,7 @@
       },
       {
         "acertou": null,
+        "chave": "f16afe46fbd21de433c3bf396ad9482a",
         "escolhida": null,
         "gerada": false,
         "numero": 1,
@@ -485,6 +525,7 @@
     "respostas": [
       {
         "acertou": false,
+        "chave": "47579bcc68b9d7d718397b75ea15e0d5",
         "escolhida": "a",
         "gerada": false,
         "numero": 4,
@@ -494,6 +535,7 @@
       },
       {
         "acertou": false,
+        "chave": "738d7529b4e8f1d9369a724f4512ab21",
         "escolhida": "b",
         "gerada": false,
         "numero": 5,
@@ -503,6 +545,7 @@
       },
       {
         "acertou": false,
+        "chave": "806f91efee6692299856c0994a43e3f0",
         "escolhida": "a",
         "gerada": false,
         "numero": 5,
@@ -512,6 +555,7 @@
       },
       {
         "acertou": true,
+        "chave": "f16afe46fbd21de433c3bf396ad9482a",
         "escolhida": "d",
         "gerada": false,
         "numero": 1,
@@ -521,6 +565,7 @@
       },
       {
         "acertou": false,
+        "chave": "82529b64d8f6bcc34e8752b9e6bb1de4",
         "escolhida": "a",
         "gerada": false,
         "numero": 8,
@@ -530,6 +575,7 @@
       },
       {
         "acertou": false,
+        "chave": "02a90b75b5bde04a54c4292d890f8d77",
         "escolhida": "a",
         "gerada": false,
         "numero": 5,
@@ -539,6 +585,7 @@
       },
       {
         "acertou": false,
+        "chave": "78619fa933ab077c161f73146ed4fa73",
         "escolhida": "c",
         "gerada": false,
         "numero": 16,
@@ -548,6 +595,7 @@
       },
       {
         "acertou": false,
+        "chave": "15628c69642cc66d8e0d3c2c1a06866f",
         "escolhida": "b",
         "gerada": false,
         "numero": 6,
@@ -557,6 +605,7 @@
       },
       {
         "acertou": true,
+        "chave": "5127729f687917a30764119bf4e40aa6",
         "escolhida": "e",
         "gerada": false,
         "numero": 10,
@@ -566,6 +615,7 @@
       },
       {
         "acertou": false,
+        "chave": "5510c1e6145484f96bb9ccbcb1cb6143",
         "escolhida": "d",
         "gerada": false,
         "numero": 1,

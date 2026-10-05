@@ -404,13 +404,15 @@ def previsao() -> None:
         return
 
     cores = {"atrasado": "red", "esperado": "yellow", "em_dia": "green"}
-    rotulos = {"atrasado": "ATRASADO", "esperado": "JANELA  ", "em_dia": "em dia  "}
+    rotulos = {"atrasado": "atrasado", "esperado": "na janela", "em_dia": "em dia"}
 
     for p in previsoes:
         cor = cores[p.situacao]
+        # A mesma frase da tela (`p.quando`, Etapa 1B): "Atrasado: era
+        # esperado em 2025", e nao o ano solto com uma seta.
         console.print(
-            f"[{cor}]{rotulos[p.situacao]}[/] [bold]{p.municipio}[/] "
-            f"[dim]-> {p.proximo_previsto}[/]"
+            f"[{cor}]{rotulos[p.situacao]:<9}[/] [bold]{p.municipio}[/] "
+            f"[dim]· {p.quando}[/]"
         )
         console.print(f"          [dim]{p.motivo}[/]")
 
@@ -1047,9 +1049,16 @@ def _mostrar_o_escopo(lote: dict) -> None:
             # No modo revisao a lista NAO e de dispositivos: sao os conteudos
             # que eu ja estudei, e chama-los de dispositivo seria mentir sobre
             # o que o escopo tem dentro.
-            rotulo = ("Só os conteúdos que eu já estudei"
+            rotulo = ("Só os conteúdos que eu já estudei ou pratiquei"
                       if modo == "revisao" else "Só estes dispositivos")
             console.print(f"[dim]{rotulo}: {escape('; '.join(nomes))}[/]")
+            if modo == "revisao":
+                estudados, praticados = servico.geradas.nos_da_revisao(
+                    escopo.split(" > ")[0])
+                console.print(
+                    f"[dim]{len(estudados)} estudado(s) (faixa de estudo ou extra de "
+                    f"teoria) · {len(praticados)} só praticado(s) (com resposta, sem "
+                    f"estudo registrado) - decisão 101[/]")
     else:
         console.print(f"Modo [bold]{modo}[/]: abrangência ampla, pelo edital e "
                       f"pelo peso das matérias. [dim]Não é treino específico - "
@@ -3275,12 +3284,49 @@ def conteudos(
         False, "--pendentes", help="Lista as questões sem classificação, por prova"),
     semear: bool = typer.Option(
         False, "--semear", help="Põe na árvore o que o edital tem e ela ainda não"),
+    juntar: str = typer.Option(
+        None, "--juntar",
+        help="Caminho do nó duplicado, que some (com --em). Grava, com cópia antes"),
+    em: str = typer.Option(None, "--em", help="Com --juntar: o caminho do nó que fica"),
 ) -> None:
-    """A árvore de conteúdos: matéria > assunto > subassunto > elemento."""
+    """A árvore de conteúdos: matéria > assunto > subassunto > elemento.
+
+    --juntar DUPLICADO --em MANTIDO leva o no duplicado, o que esta abaixo
+    dele, as classificacoes, as geradas, os erros, os extras e as fichas para
+    o no mantido (o mesmo conceito em dois nos). Copia o banco antes.
+    """
     from rich.tree import Tree
 
     from radar import conteudos as arvore_de_conteudos
     from radar import foco
+
+    if juntar or em:
+        if not (juntar and em):
+            console.print("[red]--juntar e --em andam juntos.[/]")
+            raise typer.Exit(code=1)
+        from radar import acervo, migracoes
+
+        copia = migracoes.copiar_banco("juntar-nos")
+        try:
+            feito = servico.conteudos.juntar(juntar, em)
+        except arvore_de_conteudos.ConteudoInvalido as erro:
+            console.print(f"[red]{escape(str(erro))}[/]")
+            raise typer.Exit(code=1) from erro
+        servico.conteudos.exportar()
+        servico.classificacoes.exportar()
+        acervo.exportar_geradas()
+        acervo.exportar_erros()
+        acervo.exportar_extras()
+        fichas_mudadas = servico.fichas.levar_no(juntar, em)
+        console.print(f"[green]Juntado[/] em {escape(em)}")
+        console.print(
+            f"   {len(feito.nos_apagados)} nó(s) que saíram, {len(feito.nos_movidos)} "
+            f"movido(s); {feito.classificacoes_movidas} classificação(ões) levada(s) e "
+            f"{feito.classificacoes_juntadas} juntada(s) com a que já estava; "
+            f"{feito.geradas} gerada(s), {feito.erros} erro(s), {feito.extras} "
+            f"extra(s) e {fichas_mudadas} ficha(s) apontando o nó novo")
+        console.print(f"[dim]Cópia do banco antes: {copia}[/]")
+        return
 
     if semear:
         entraram = servico.conteudos.semear(programa=foco.programa_do_alvo())

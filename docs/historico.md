@@ -2151,3 +2151,14 @@ numa linha (decisao 97). E o `radar padrao`, o comando mais antigo das
 provas, deixou de somar o alvo, o complementar e a IESES: sao tres blocos,
 cada um com a sua amostra, e a prova recusada fica de fora com a conta dela
 (decisao 98).
+
+## As Rodadas 3 e 4 e o resto da auditoria (05/10)
+
+Os oito defeitos da auditoria sairam. Migrar uma copia velha do banco nao
+apaga mais as geradas do JSON (decisao 102), e a resposta do simulado volta
+para a questao pela chave (103). Os 12 conceitos que a classificacao do
+complementar tinha criado em dobro foram juntados no no do alvo, com tudo o
+que apontava para eles, e a classificacao passa a recusar o nome parecido
+(99). O modo revisao continua aceitando o no so praticado, agora de
+proposito e dizendo quantos sao (101). Junto, os menores da auditoria e as 4
+fichas de Portugues da primeira semana, que nunca tinham sido escritas.

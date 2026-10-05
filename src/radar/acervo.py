@@ -21,6 +21,7 @@ from sqlalchemy import select
 
 from radar import config
 from radar.db import criar_tabelas, sessao
+from radar.questoes import chave_da_questao
 from radar.models import (
     Concurso,
     DataHoraUTC,
@@ -559,6 +560,12 @@ def _resposta_como_linha(resposta: RespostaDeSimulado, s) -> dict:
         questao = s.get(QuestaoDeProva, resposta.questao_id)
         linha["prova_url"] = questao.prova_url if questao else None
         linha["numero"] = questao.numero if questao else None
+        # A chave (enunciado + alternativas) e quem diz QUAL questao foi: o
+        # numero muda quando o caderno e relido (decisao 95 viu 26 casos), e
+        # refazer o banco ligaria a resposta a outra questao (auditoria de
+        # 04/10). O par prova + numero fica de reserva, para arquivo antigo.
+        linha["chave"] = (chave_da_questao(questao.enunciado, questao.alternativas)
+                          if questao else None)
     return linha
 
 
@@ -613,6 +620,19 @@ def _id_da_questao(s, linha: dict) -> int | None:
             select(QuestaoGerada.id)
             .where(QuestaoGerada.impressao == linha.get("impressao"))
         )
+    chave = linha.get("chave")
+    if chave:
+        # Pela chave (decisao 103), primeiro no mesmo caderno: a mesma
+        # questao reaparece em cadernos de outros cargos, e a resposta foi
+        # dada neste.
+        mesmo_caderno = s.scalars(
+            select(QuestaoDeProva)
+            .where(QuestaoDeProva.prova_url == linha.get("prova_url")))
+        for questao in mesmo_caderno:
+            if chave_da_questao(questao.enunciado, questao.alternativas) == chave:
+                return questao.id
+    # Arquivo de antes da chave, ou texto relido depois da exportacao: o par
+    # prova + numero, como sempre foi.
     return s.scalar(
         select(QuestaoDeProva.id)
         .where(QuestaoDeProva.prova_url == linha.get("prova_url"))

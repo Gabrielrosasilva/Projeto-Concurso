@@ -306,3 +306,129 @@ def pendentes() -> Pendentes:
         ((ev, ano, cargo, n) for (ev, ano, cargo), n in por_prova.items()),
         key=lambda linha: (ordem[linha[0]], -(linha[1] or 0), linha[2] or ""))
     return resultado
+
+
+# --- juntar dois nos que sao o mesmo conceito --------------------------------------
+
+@dataclass
+class Juncao:
+    """O que a junção de um no em outro mudou, para o "antes x depois"."""
+    duplicado: str
+    mantido: str
+    nos_apagados: list = field(default_factory=list)
+    nos_movidos: dict = field(default_factory=dict)
+    classificacoes_movidas: int = 0
+    classificacoes_juntadas: int = 0
+    geradas: int = 0
+    erros: int = 0
+    extras: int = 0
+
+
+def novo_caminho(caminho: str | None, duplicado: str, mantido: str) -> str | None:
+    """O caminho depois da juncao: o duplicado, e o que esta abaixo dele, passam
+    para baixo do mantido. O resto fica igual."""
+    if caminho == duplicado:
+        return mantido
+    if caminho and caminho.startswith(duplicado + arvore.SEPARADOR):
+        return mantido + caminho[len(duplicado):]
+    return caminho
+
+
+def juntar(duplicado: str, mantido: str) -> Juncao:
+    """Leva o no `duplicado` - e tudo abaixo dele - para o no `mantido`.
+
+    Existe pelos nos que a classificacao do complementar (02/10) criou ao lado
+    dos do alvo (01/10) para o mesmo conceito: "Caracteristicas dos direitos
+    humanos" em dois assuntos, tres nos de "formas de violencia domestica"
+    (auditoria de 04/10, BUG-3). Com o conceito em dois nos, a linha
+    complementar do no do alvo saia "—" para um conteudo que o complementar
+    tem. O que se faz, no banco:
+
+    - os nos abaixo do duplicado passam para baixo do mantido; o que ja existe
+      la (o mesmo artigo nos dois lados) e um no so;
+    - cada classificacao vai junto. A mesma questao nos dois nos fica uma
+      vez - e, se uma das duas era a principal, ela continua principal;
+    - o status (completa / parcial) e refeito pela arvore nova;
+    - a gerada, o erro anotado e o estudo extra que apontavam o duplicado
+      passam a apontar o mantido.
+
+    Os dois nos tem de ser da mesma materia e do mesmo nivel: juntar niveis
+    diferentes mudaria o que o no quer dizer, e nao so o nome. Os arquivos
+    (conteudos, classificacoes, geradas, erros, extras e fichas) sao
+    exportados por quem chama.
+    """
+    from radar.servico import classificacoes as servico_classificacoes
+
+    criar_tabelas()
+    resultado = Juncao(duplicado=duplicado, mantido=mantido)
+    with sessao() as s:
+        de = s.scalar(select(Conteudo).where(Conteudo.caminho == duplicado))
+        para = s.scalar(select(Conteudo).where(Conteudo.caminho == mantido))
+        if de is None or para is None:
+            raise arvore.ConteudoInvalido(
+                f"Nó que não existe: {duplicado if de is None else mantido!r}")
+        if duplicado == mantido or mantido.startswith(duplicado + arvore.SEPARADOR):
+            raise arvore.ConteudoInvalido("O nó mantido não pode estar dentro do duplicado.")
+        if (arvore.partes(duplicado)[0] != arvore.partes(mantido)[0]
+                or de.nivel != para.nivel):
+            raise arvore.ConteudoInvalido(
+                "Só se juntam nós da mesma matéria e do mesmo nível.")
+
+        # Os nos de baixo, de cima para baixo: o pai novo existe antes do filho.
+        abaixo = sorted(
+            s.scalars(select(Conteudo).where(
+                Conteudo.caminho.like(duplicado + arvore.SEPARADOR + "%"))),
+            key=lambda c: len(arvore.partes(c.caminho)))
+        existentes = set(s.scalars(select(Conteudo.caminho)))
+        for no in abaixo:
+            novo = novo_caminho(no.caminho, duplicado, mantido)
+            if novo in existentes:
+                resultado.nos_apagados.append(no.caminho)
+                s.delete(no)
+            else:
+                resultado.nos_movidos[no.caminho] = novo
+                no.caminho = novo
+                no.pai = novo_caminho(no.pai, duplicado, mantido)
+                existentes.add(novo)
+        resultado.nos_apagados.insert(0, duplicado)
+        s.delete(de)
+        s.flush()
+
+        # As classificacoes: a mesma questao nos dois lados vira uma linha so.
+        afetadas = list(s.scalars(select(Classificacao).where(
+            (Classificacao.conteudo == duplicado)
+            | Classificacao.conteudo.like(duplicado + arvore.SEPARADOR + "%"))))
+        for linha in afetadas:
+            novo = novo_caminho(linha.conteudo, duplicado, mantido)
+            ja = s.scalar(select(Classificacao).where(
+                Classificacao.chave == linha.chave, Classificacao.conteudo == novo))
+            if ja is not None:
+                if linha.principal and not ja.principal:
+                    ja.principal = True
+                    ja.status = linha.status
+                s.delete(linha)
+                resultado.classificacoes_juntadas += 1
+            else:
+                linha.conteudo = novo
+                resultado.classificacoes_movidas += 1
+        s.flush()
+        # O status sai da arvore: o mantido pode ter ganhado filho.
+        for linha in s.scalars(select(Classificacao).where(
+                (Classificacao.conteudo == mantido)
+                | Classificacao.conteudo.like(mantido + arvore.SEPARADOR + "%"))):
+            if linha.status != "pendente":
+                no = s.scalar(select(Conteudo).where(Conteudo.caminho == linha.conteudo))
+                linha.status = servico_classificacoes._status_do_no(s, no)
+
+        for tabela, campo in ((QuestaoGerada, "geradas"), (ErroAnotado, "erros"),
+                              (EstudoExtra, "extras")):
+            for linha in s.scalars(select(tabela).where(
+                    (tabela.conteudo == duplicado)
+                    | tabela.conteudo.like(duplicado + arvore.SEPARADOR + "%"))):
+                linha.conteudo = novo_caminho(linha.conteudo, duplicado, mantido)
+                setattr(resultado, campo, getattr(resultado, campo) + 1)
+        for gerada in s.scalars(select(QuestaoGerada).where(
+                (QuestaoGerada.escopo == duplicado)
+                | QuestaoGerada.escopo.like(duplicado + arvore.SEPARADOR + "%"))):
+            gerada.escopo = novo_caminho(gerada.escopo, duplicado, mantido)
+    return resultado

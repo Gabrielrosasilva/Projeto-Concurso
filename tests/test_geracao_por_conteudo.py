@@ -833,3 +833,25 @@ def test_o_acerto_por_materia_junta_as_duas_grafias(arvore_de_teste):
     assert nome(DPP_2013) == DPP
     assert nome(DPP) == DPP
     assert nome(None) == metricas.SEM_MATERIA == "sem matéria"
+
+
+def test_a_revisao_separa_o_estudado_do_so_praticado(monkeypatch):
+    """Decisao 101: o modo revisao aceita o no so praticado (com resposta, sem
+    faixa de estudo), e diz quantos sao de cada tipo. O no nem estudado nem
+    praticado fica de fora, e a materia de outro filtro tambem."""
+    from types import SimpleNamespace
+
+    from radar.servico import estudo
+
+    def situacao(materia, estudado, praticado):
+        return SimpleNamespace(materia=materia, estudado=estudado, praticado=praticado)
+
+    monkeypatch.setattr(estudo, "situacoes", lambda: {
+        f"{LEP} > Lido": situacao(LEP, True, True),
+        f"{LEP} > Respondido": situacao(LEP, False, True),
+        f"{LEP} > Nunca visto": situacao(LEP, False, False),
+        f"{PENAL} > Lido": situacao(PENAL, True, False),
+    })
+
+    assert geradas.nos_da_revisao(LEP) == ([f"{LEP} > Lido"], [f"{LEP} > Respondido"])
+    assert geradas.nos_estudados(LEP) == [f"{LEP} > Lido", f"{LEP} > Respondido"]

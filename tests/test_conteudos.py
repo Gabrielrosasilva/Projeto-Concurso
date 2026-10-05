@@ -370,3 +370,100 @@ def test_as_grafias_juntam_o_nome_do_edital_e_o_da_prova_antiga():
     # Materia sem sinonimo fica so com o proprio nome, sem pegar vizinha.
     assert taxonomia.grafias("Direito Penal") == ["Direito Penal"]
     assert taxonomia.nome_do_edital("Direito Penal") == "Direito Penal"
+
+
+# --- juntar dois nos que sao o mesmo conceito (auditoria de 04/10, BUG-3) --------
+
+def _arvore_com_duplicado():
+    """Direito Penal, com o mesmo conceito em dois assuntos: o "Dolo" do alvo
+    e o "Dolo e culpa" que o complementar criou, cada um com o art. 18; o
+    duplicado tem tambem o art. 19, que o mantido nao tem."""
+    conteudos.adicionar(None, "Direito Penal", origem="edital")
+    for assunto in ("Crime", "Teoria do crime"):
+        conteudos.adicionar("Direito Penal", assunto, origem="edital")
+    conteudos.adicionar("Direito Penal > Crime", "Dolo", origem="classificacao",
+                        procedencia="teste")
+    conteudos.adicionar("Direito Penal > Teoria do crime", "Dolo e culpa",
+                        origem="classificacao", procedencia="teste")
+    for pai, artigo in (("Direito Penal > Crime > Dolo", "CP, art. 18"),
+                        ("Direito Penal > Teoria do crime > Dolo e culpa", "CP, art. 18"),
+                        ("Direito Penal > Teoria do crime > Dolo e culpa", "CP, art. 19")):
+        conteudos.adicionar(pai, artigo, origem="classificacao", procedencia="teste",
+                            tipo_elemento="artigo")
+
+
+MANTIDO = "Direito Penal > Crime > Dolo"
+DUPLICADO = "Direito Penal > Teoria do crime > Dolo e culpa"
+
+
+def test_juntar_leva_nos_classificacoes_geradas_erros_e_fichas(banco_temporario, tmp_path):
+    from radar.servico import fichas as servico_fichas
+
+    _arvore_com_duplicado()
+    classificacoes.classificar("alvo1", f"{MANTIDO} > CP, art. 18", "teste")
+    classificacoes.classificar("compl1", f"{DUPLICADO} > CP, art. 18", "teste")
+    classificacoes.classificar("compl2", f"{DUPLICADO} > CP, art. 19", "teste")
+    # A mesma questao nos dois lados: principal no duplicado, associada no mantido.
+    classificacoes.classificar("dupla", f"{DUPLICADO} > CP, art. 18", "teste")
+    classificacoes.classificar("dupla", f"{MANTIDO} > CP, art. 18", "teste", principal=False)
+    with sessao() as s:
+        s.add(QuestaoGerada(modo="do_zero", enunciado="?", alternativas={"a": "x"},
+                            resposta="a", impressao="g1", modelo="m",
+                            conteudo=f"{DUPLICADO} > CP, art. 19", escopo=DUPLICADO))
+        s.add(ErroAnotado(data_estudo=date(2026, 10, 1), materia="Direito Penal",
+                          motivo="nao_sabia", regra="A regra.", conteudo=DUPLICADO))
+    (tmp_path / "fichas.json").write_text(json.dumps([{
+        "tema": "Dolo", "materia": "Direito Penal", "nos": [MANTIDO, DUPLICADO],
+        "modelo": "teste", "criado_em": "2026-10-02"}]), encoding="utf-8")
+
+    feito = conteudos.juntar(DUPLICADO, MANTIDO)
+
+    assert feito.nos_apagados == [DUPLICADO, f"{DUPLICADO} > CP, art. 18"]
+    assert feito.nos_movidos == {f"{DUPLICADO} > CP, art. 19": f"{MANTIDO} > CP, art. 19"}
+    caminhos = set(conteudos.caminhos())
+    assert DUPLICADO not in caminhos and f"{MANTIDO} > CP, art. 19" in caminhos
+    with sessao() as s:
+        linhas = {(c.chave, c.conteudo, c.principal) for c in s.scalars(select(Classificacao))}
+        gerada = s.scalar(select(QuestaoGerada))
+        erro = s.scalar(select(ErroAnotado))
+    assert linhas == {("alvo1", f"{MANTIDO} > CP, art. 18", True),
+                      ("compl1", f"{MANTIDO} > CP, art. 18", True),
+                      ("compl2", f"{MANTIDO} > CP, art. 19", True),
+                      ("dupla", f"{MANTIDO} > CP, art. 18", True)}   # uma linha, principal
+    assert (gerada.conteudo, gerada.escopo) == (f"{MANTIDO} > CP, art. 19", MANTIDO)
+    assert erro.conteudo == MANTIDO
+
+    assert servico_fichas.levar_no(DUPLICADO, MANTIDO) == 1
+    assert servico_fichas.carregar()[0].nos == [MANTIDO]                # sem repetir
+
+
+def test_juntar_recusa_materia_ou_nivel_diferente(banco_temporario):
+    _arvore_com_duplicado()
+    with pytest.raises(arvore.ConteudoInvalido, match="mesmo nível"):
+        conteudos.juntar(f"{DUPLICADO} > CP, art. 19", MANTIDO)
+    with pytest.raises(arvore.ConteudoInvalido, match="não existe"):
+        conteudos.juntar("Direito Penal > Nada", MANTIDO)
+
+
+def test_no_parecido_pega_o_mesmo_conceito_e_deixa_o_vizinho():
+    no = lambda caminho, nivel="subassunto": arvore.No(
+        caminho=caminho, pai=caminho.rsplit(" > ", 1)[0], nivel=nivel,
+        nome=caminho.rsplit(" > ", 1)[1], ordem=0, origem="classificacao")
+    nos = [no("Legislação Especial > Maria da Penha > Formas de violência doméstica e familiar"),
+           no("Direito Penal > Administração > Crimes praticados por particular contra a administração em geral"),
+           no("Direitos Humanos > Teoria geral > Características dos direitos humanos")]
+
+    assert arvore.no_parecido(nos, "Legislação Especial", "subassunto",
+                              "Formas de violência doméstica") == nos[0].caminho
+    # O mesmo nome noutro assunto da materia, sem acento: e o mesmo conceito.
+    assert arvore.no_parecido(nos, "Direitos Humanos", "subassunto",
+                              "Caracteristicas dos Direitos Humanos") == nos[2].caminho
+    # Vizinho de nome parecido, mas outro conceito: fica.
+    assert arvore.no_parecido(nos, "Direito Penal", "subassunto",
+                              "Crimes praticados por funcionário público contra a "
+                              "administração em geral") is None
+    # Outra materia, ou outro nivel: nao conta.
+    assert arvore.no_parecido(nos, "Direito Penal", "subassunto",
+                              "Formas de violência doméstica") is None
+    assert arvore.no_parecido(nos, "Legislação Especial", "elemento",
+                              "Formas de violência doméstica") is None

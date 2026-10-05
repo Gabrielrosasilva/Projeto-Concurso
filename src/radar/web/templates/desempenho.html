@@ -103,7 +103,7 @@
                   {%- if not l.estado.suficiente %} · faltam {{ l.estado.falta_para_o_minimo }}{% endif -%}
                 </td>
                 <td class="n">
-                  {%- set fora = l.desempenho.com_consulta + l.desempenho.sem_resultado -%}
+                  {%- set fora = l.desempenho.fora_do_estado -%}
                   {%- if fora -%}
                     {{ fora }}
                     {%- if l.desempenho.com_consulta %} com consulta{% endif -%}
@@ -231,7 +231,7 @@
     {% if nao_estudados %}
       <ul class="fila">
         {% for s in nao_estudados %}
-          <li><b>{{ s.nome }}</b> <span class="porque">{{ s.caminho }} · {{ s.nivel }}</span></li>
+          <li><b>{{ s.nome }}</b> <span class="porque">{{ s.caminho }} · {{ NOME_DO_NIVEL.get(s.nivel, s.nivel) }}</span></li>
         {% endfor %}
       </ul>
     {% else %}

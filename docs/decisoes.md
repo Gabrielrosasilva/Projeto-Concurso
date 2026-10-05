@@ -3820,6 +3820,12 @@ mede (7A); commit e push por subetapa (8A).
     minima`), as chaves gravadas, os prompts de IA e os nomes de assunto do
     `macetes.py`.
 
+    *Nota da auditoria independente (04/10):* a releitura dos 37 editais
+    mudou tambem o campo `escolaridade` de 8 concursos (ex.: "Fundamental"
+    vira "superior, fundamental", quando o edital tem vagas dos dois
+    niveis); o veredito de elegibilidade de nenhum mudou. O `concursos.json`
+    com os valores novos subiu no backup das 23h30 de 04/10.
+
 94. **os conceitos associados se conferem na Analises > Conferencia**
     (decisao 86). Cada questao do alvo mostra os associados dela, com o
     trecho, o selo 🟣 "por conferir" ou ✓ e dois botoes: Confirmar (grava a
@@ -3907,3 +3913,54 @@ em vez de traceback (BUG-6).
     ocorrencias ao lado quando a banca repete caderno (decisao 14 da 3B); a
     prova complementar recusada na validacao fica de fora e e contada no
     rodape. O `incidencia_por_materia`, que so este comando usava, saiu.
+
+## As Rodadas 3 e 4 e o resto da auditoria (05/10/2026)
+
+99. **o mesmo conceito em dois nos vira um so, e a classificacao recusa o
+    subassunto novo parecido com um que ja existe** (BUG-3). A classificacao
+    do complementar criou, ao lado dos nos do alvo, 12 subassuntos que eram
+    o mesmo conceito com outro nome (Sistema interamericano, Geracoes dos
+    direitos humanos, Caracteristicas dos direitos humanos, tratados com
+    forca de emenda, direitos dos trabalhadores, orgaos e atribuicoes da
+    seguranca publica, direito a educacao, CPP art. 306, a pena da tortura,
+    as formas de violencia da Maria da Penha): a incidencia e o desempenho
+    contavam o mesmo assunto em dois lugares. O `radar conteudos --juntar
+    <duplicado> --em <mantido>` (com copia antes) leva os nos de baixo, as
+    classificacoes (a principal fica uma so), as geradas (conteudo e
+    escopo), o caderno de erros, o estudo extra e os `nos` das fichas para
+    o no mantido - sempre o do alvo -, e apaga o duplicado. Os 12 foram
+    juntados em 05/10 (arvore 426 → 408 nos). Para nao voltar:
+    `conteudos.no_parecido` (o mesmo nome sem acento, um nome inteiro dentro
+    do outro por palavra, ou 90% de semelhanca) faz a classificacao recusar
+    o subassunto novo e dizer qual usar. Tres pares parecidos NAO foram
+    juntados, porque nao sao o mesmo conceito com certeza (pendencia G).
+
+100. **o `db.py` so cria a coluna nova; dado levado do antigo e passo do
+     `migracoes.py`**. O recado do ADD COLUMN automatico mandava rodar
+     `radar reclassificar`, que so serve as colunas da coleta. Agora diz que
+     a coluna nasce vazia nas linhas antigas e que o que precisa de dado vem
+     dos passos de `radar migrar` (que rodam em seguida, decisao 80).
+
+101. **o modo revisao da geracao aceita o no so praticado, e diz quantos sao**
+     (BUG-7, contra a letra da decisao 20). O `nos_estudados` juntava o no
+     com estudo registrado e o no que so tem resposta; o certo pela decisao
+     20 seria so o primeiro, mas o no respondido tambem ja foi visto, e
+     revisar o que se errou praticando e o objetivo da revisao. Fica aceito
+     de proposito: `servico.geradas.nos_da_revisao` devolve os dois grupos
+     separados, e o `radar gerar --modo revisao` mostra "N estudado(s) · M so
+     praticado(s)".
+
+102. **migrar um banco antigo nao sobrescreve o JSON versionado que tem mais
+     linhas** (BUG-5). Os passos 1, 4 e 5 da migracao exportavam o banco que
+     estava sendo migrado: migrar uma copia velha trocava as 779 geradas do
+     `questoes_geradas.json` por 50. Agora `migracoes._exportar_sem_perder`
+     compara: com menos linhas no banco que no arquivo, o arquivo fica e o
+     log diz por que. O `radar exportar` continua sobrescrevendo, porque e
+     pedido de proposito.
+
+103. **a resposta do simulado volta para a questao pela CHAVE** (a mesma
+     regra da classificacao, decisao 77). O `simulados.json` apontava a
+     questao so por (prova, numero): reler o caderno com a numeracao
+     consertada trocaria a questao respondida. A linha exportada ganha a
+     `chave`, e a importacao procura por ela no mesmo caderno antes do par
+     prova + numero, que continua valendo para o arquivo antigo.

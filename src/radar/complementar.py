@@ -413,11 +413,17 @@ class Resposta:
     resposta: str
 
 
-def responder(levantamento: list[MateriaComplementar]) -> list[Resposta]:
+def responder(levantamento: list[MateriaComplementar],
+              classificadas: dict[str, int] | None = None) -> list[Resposta]:
     """As 6 perguntas da secao 5, respondidas SO com o que o acervo tem.
 
     Nenhuma delas afirma o que nao esta no acervo: "nao ha prova com LEP" e
     diferente de "a FEPESE nunca cobrou LEP", e o texto diz isso.
+
+    `classificadas` ({materia: questoes distintas classificadas nela}) e o
+    resultado da classificacao, questao a questao, do complementar aceito. Com
+    ela a resposta diz o que o indicio por termo virou - na auditoria de 04/10,
+    os 34 "indicios" de Sociologia Aplicada nao viraram nenhuma questao.
     """
     por_materia = {m.materia: m for m in levantamento}
     com_nome = sorted((m for m in levantamento if m.pelo_nome),
@@ -433,13 +439,20 @@ def responder(levantamento: list[MateriaComplementar]) -> list[Resposta]:
             return (f"Nenhuma questão de {materia} no acervo complementar — nem pelo "
                     f"nome da matéria, nem por termo no texto. Isso diz o que o ACERVO "
                     f"tem, e não o que a FEPESE já cobrou: {FRASE_SEM_EVIDENCIA}")
-        return f"{materia}: {m.amostra()}."
+        texto = f"{materia}: {m.amostra()}."
+        if classificadas is not None:
+            n = classificadas.get(materia, 0)
+            texto += (f" Depois da classificação, questão a questão, do acervo "
+                      f"aceito: {n} questão(ões) distinta(s) nesta matéria.")
+        return texto
 
     respostas = [
         Resposta(
             "1. Quais matérias da Polícia Penal têm boa quantidade de provas "
             "FEPESE complementares?",
-            ("Pelo nome da matéria no caderno, da maior para a menor: "
+            ("Pelo nome da matéria no caderno, da maior para a menor, em "
+             "ocorrências (a mesma questão em cadernos de vários cargos conta "
+             "em cada um; a Incidência conta a questão distinta): "
              + "; ".join(f"{m.materia} ({m.pelo_nome} em {_provas(m.provas_pelo_nome)})"
                          for m in com_nome) + "."
              if com_nome else

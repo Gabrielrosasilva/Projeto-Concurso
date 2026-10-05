@@ -575,6 +575,9 @@ radar hoje --data 2026-10-28            # outro dia
 radar hoje --marcar ideal --feitas 25 --acertos 18
 radar hoje --marcar minima --data 2026-10-12 --anotacao "feriado"
 radar hoje --plano-b 30                 # so mostra o Plano B do dia (30 ou 60)
+radar conferir-dias                     # confere os dias gravados contra a regra
+                                        # de contagem; so le (Etapa 1D)
+radar conferir-dias --aplicar           # corrige o aprovado, com copia antes
 ```
 
 `--marcar` aceita `ideal`, `reduzida`, `minima` ou `nao_fiz`. Marcar de novo o
@@ -1173,6 +1176,9 @@ codigo pelo git: o proximo comando do radar novo migraria de novo).
 ```bash
 radar migrar                # leva o banco a versao atual, com copia antes
 radar migrar --desfazer     # devolve o banco a copia da ultima migracao
+radar conteudos --juntar "<no duplicado>" --em "<no que fica>"
+                            # o mesmo conceito em dois nos vira um so, com copia
+                            # antes (decisao 99)
 ```
 
 **Avisos e calendario**

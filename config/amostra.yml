@@ -1,4 +1,5 @@
-# Os minimos de amostra do radar, num lugar so. Lido por src/radar/incidencia.py.
+# Os minimos de amostra do radar, num lugar so. Lido por src/radar/amostra.py,
+# de onde a incidencia, o desempenho e as telas tiram a regua.
 #
 # Abaixo do minimo, a tela nao tira conclusao: escreve exatamente "Nao ha
 # evidencia suficiente no acervo para afirmar isso." (regra inviolavel 4).

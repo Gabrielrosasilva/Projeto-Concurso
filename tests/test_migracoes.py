@@ -277,3 +277,35 @@ def test_a_ultima_copia_e_pela_hora_e_tem_o_banco(banco_antigo):
         (copias / nome / arquivo).write_bytes(b"")
 
     assert migracoes.ultima_copia().name == "migracao-v0-para-v4-2026-10-02-120000"
+
+
+# --- a migracao nao troca o registro novo pelo banco velho (BUG-5) ---------------
+
+def test_migrar_banco_velho_nao_sobrescreve_o_json_com_mais_linhas(banco_antigo):
+    """Auditoria de 04/10: migrar um banco antigo exportava o banco por cima do
+    JSON versionado - as 779 geradas do arquivo viraram as 50 do banco. Com
+    menos linhas no banco, o arquivo fica como esta."""
+    import json
+
+    arquivo = banco_antigo.parent / "questoes_geradas.json"
+    registro = [{"impressao": f"g{n}", "modo": "do_zero", "enunciado": f"q{n}?",
+                 "alternativas": {"a": "x"}, "resposta": "a", "modelo": "m"}
+                for n in range(1, 6)]
+    arquivo.write_text(json.dumps(registro), encoding="utf-8")   # 5 no arquivo, 2 no banco
+
+    migracoes.migrar()
+
+    assert json.loads(arquivo.read_text(encoding="utf-8")) == registro
+
+
+def test_migrar_com_o_banco_em_dia_ainda_exporta(banco_antigo):
+    """O caso normal continua: banco com tanto ou mais que o arquivo, o passo
+    leva as colunas novas para o arquivo versionado."""
+    import json
+
+    migracoes.migrar()
+
+    exportadas = json.loads(
+        (banco_antigo.parent / "questoes_geradas.json").read_text(encoding="utf-8"))
+    assert len(exportadas) == 2
+    assert all("modo_do_pedido" in g for g in exportadas)

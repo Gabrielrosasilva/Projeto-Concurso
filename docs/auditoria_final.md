@@ -220,3 +220,11 @@ que está acima:
 3. **O backup das 23h30** foi consertado (decisão 64).
 4. **A lista de leis alteradas** foi gravada, por conferir (decisão 65,
    `docs/leis_alteradas.md`).
+
+## O item 18 atende (04/10/2026)
+
+A média "por prova" do gráfico dos Macetes, que deixava o item 18 em ⚠️,
+ganhou a base no lote de 04/10 ("18.8/prova em 170 provas", "8.6/prova em 172
+provas"). A auditoria independente de 04/10 refez a varredura das telas com o
+banco real e não achou porcentagem real sem a amostra por perto. **A §23 fica
+com 19 de 19 itens atendidos.**

@@ -1,8 +1,8 @@
 # Aneis de distancia a partir de Florianopolis.
 #
-# AINDA NAO E LIDO POR CODIGO NENHUM: o classificador que usa este arquivo e a
-# fase 1.5. Ele ja esta aqui para voce revisar e corrigir as listas antes de a
-# gente escrever o codigo em cima delas.
+# Lido por src/radar/regioes.py: e daqui que o classificador tira o anel de
+# cada municipio (o cabecalho antigo dizia que ninguem lia este arquivo; a
+# fase 1.5 ja ligou ele, e a auditoria de 04/10 achou a frase velha).
 #
 # Regra: um concurso de SC e classificado pelo municipio do orgao. Concurso
 # federal ou de outro estado fica `indefinida` ate alguem ler o edital e achar

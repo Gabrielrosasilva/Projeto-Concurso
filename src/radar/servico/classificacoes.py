@@ -388,6 +388,20 @@ def aplicar_proposta(item: dict, pedido: dict, procedencia: str) -> str:
                                          item.get("tipo_elemento"))
             except arvore.ConteudoInvalido as erro:
                 raise PropostaRecusada(f"{codigo}: {erro}") from erro
+        if subassunto:
+            # Subassunto novo com o nome de um que ja existe na materia (igual,
+            # contido ou quase igual): e o mesmo conceito em outro galho, como
+            # o complementar fez em 02/10 (auditoria de 04/10, BUG-3). Recusa e
+            # aponta o que existe, em vez de criar o paralelo.
+            novo = arvore.caminho(caminho_do_assunto, subassunto)
+            if _no(s, novo) is None:
+                parecido = arvore.no_parecido(
+                    s.scalars(select(Conteudo)), arvore.partes(caminho_do_assunto)[0],
+                    "subassunto", subassunto)
+                if parecido is not None:
+                    raise PropostaRecusada(
+                        f"{codigo}: o subassunto {subassunto!r} parece o que já existe "
+                        f"em {parecido!r}; use esse caminho")
 
     # Conferido tudo: agora os nos que faltam, e a classificacao.
     origem = {"origem": "classificacao", "procedencia": procedencia}

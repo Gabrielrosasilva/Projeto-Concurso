@@ -99,6 +99,13 @@ class Plano:
         return sum(l.faltaram for l in self.linhas)
 
 
+def faltaram_na_rodada(filtros: dict | None) -> int:
+    """Quantas questoes o acervo nao teve para o compilado desta rodada, pela
+    distribuicao gravada nos filtros. A conta e daqui; a tela so escreve."""
+    return sum(max(0, (d.get("pedidas") or 0) - (d.get("entregues") or 0))
+               for d in (filtros or {}).get("distribuicao") or [])
+
+
 def _pesos(escolhidas: list[str] | None) -> tuple[dict[str, int], foco.EditalLido, str | None]:
     edital, arquivo = foco.quadro_do_edital()
     pesos = {m.nome: m.questoes for m in edital.materias}

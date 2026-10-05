@@ -20,9 +20,11 @@ from radar import foco as foco_do_alvo
 from radar import auditoria
 from radar import automacao
 from radar import config
+from radar import conteudos as arvore_de_conteudos
 from radar import cronograma
 from radar import fichas as fichas_puras
 from radar import leis
+from radar import macetes as macetes_puros
 from radar import onde_estudar
 from radar import origem
 from radar import regioes
@@ -119,6 +121,8 @@ templates.env.filters["tipo_do_evento"] = linha_do_tempo.rotulo_do_tipo
 # fonte unica: a tela e o `radar hoje` escrevem a mesma frase.
 templates.env.globals["frase_da_conta"] = servico.metricas.frase_da_conta
 templates.env.globals["frase_da_ia"] = servico.metricas.frase_da_ia
+templates.env.globals["faltaram_no_compilado"] = servico.compilado.faltaram_na_rodada
+templates.env.globals["NOME_DO_NIVEL"] = arvore_de_conteudos.NOME_DO_NIVEL
 # Numero com virgula, como se escreve em portugues. A mesma funcao que monta a
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.
@@ -1922,6 +1926,7 @@ def macetes(
             "parecidas": parecidas,
             "recado_do_cargo": recado,
             "composicao": composicao,
+            "total_da_composicao": macetes_puros.total_da_composicao(composicao),
             "fatias_do_caderno": fatias_do_caderno,
             "fatias_de_assunto": fatias_de_assunto,
             "bancas": servico.bancas_com_questao(),

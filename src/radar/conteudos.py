@@ -17,7 +17,9 @@ de programas, inclusive os defeitos dele (o `edital_programa` explica por
 que). Nada aqui inventa no para caber uma classificacao: o que nao casa fica
 pendente (regra inviolavel 9).
 """
+import re
 from dataclasses import dataclass
+from difflib import SequenceMatcher
 from pathlib import Path
 
 import yaml
@@ -26,6 +28,9 @@ from radar import config
 from radar.regioes import normalizar
 
 NIVEIS = ("materia", "assunto", "subassunto", "elemento")
+#: O nivel como a tela escreve: o valor gravado e chave, sem acento.
+NOME_DO_NIVEL = {"materia": "matéria", "assunto": "assunto",
+                 "subassunto": "subassunto", "elemento": "elemento"}
 SEPARADOR = " > "
 
 ORIGENS = ("edital", "classificacao", "manual")
@@ -127,6 +132,40 @@ class Taxonomia:
         alvo = normalizar(edital)
         return [edital] + [antigo for antigo, novo in self.sinonimos_de_materia.items()
                            if normalizar(novo) == alvo]
+
+
+#: Acima disto, dois nomes do mesmo nivel e da mesma materia sao o mesmo
+#: conceito escrito de outro jeito ("Geracoes (dimensoes) de direitos" e
+#: "... dos direitos humanos" ficam abaixo: o nome sozinho nao prova).
+PARECIDO_O_BASTANTE = 0.9
+
+
+def _palavras(nome: str) -> str:
+    return " ".join(re.findall(r"\w+", normalizar(nome)))
+
+
+def no_parecido(nos, materia: str, nivel: str, nome: str) -> str | None:
+    """O caminho de um no que ja existe e parece o `nome` novo, ou None.
+
+    Mesma materia e mesmo nivel; parecido e o nome igual (sem acento nem
+    caixa), um contido no outro por palavra inteira ("Formas de violencia
+    domestica" e "... e familiar"), ou quase igual. Existe porque a
+    classificacao do complementar criou nos paralelos aos do alvo para o
+    mesmo conceito (auditoria de 04/10, BUG-3): com isto ela e recusada e
+    aponta o no que ja existe, em vez de criar outro.
+    """
+    novo = _palavras(nome)
+    if not novo:
+        return None
+    for no in nos:
+        if no.nivel != nivel or partes(no.caminho)[0] != materia:
+            continue
+        existente = _palavras(no.nome)
+        if (existente == novo or f" {novo} " in f" {existente} "
+                or f" {existente} " in f" {novo} "
+                or SequenceMatcher(None, existente, novo).ratio() >= PARECIDO_O_BASTANTE):
+            return no.caminho
+    return None
 
 
 def grafias_da_materia(materia: str) -> list[str]:

@@ -445,7 +445,7 @@ fronteira:
     lei: Lei 15.384/2026
     o_que_mudou: o art. 7º ganhou o inciso VI, a violência vicária
     materias: [Legislação Especial]
-    nos: ["Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica e familiar", "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Conceito e formas de violência doméstica", "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica"]
+    nos: ["Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica e familiar"]   # os outros dois nós foram juntados neste em 05/10 (decisão 99)
     marcas: [maria da penha, violencia domestica]
     fonte: https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm
     procedencia: Claude Code (claude-opus-5-5), 03/10/2026, conferido na lista de leis alteradas (docs/leis_alteradas.md)

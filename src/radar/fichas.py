@@ -636,6 +636,14 @@ class FichaDeEstudo:
         return bool(self.escrita.conferida_em)
 
     @property
+    def reais_do_alvo(self) -> int:
+        return sum(1 for q in self.questoes_reais if q.evidencia == "alvo")
+
+    @property
+    def reais_do_complementar(self) -> int:
+        return len(self.questoes_reais) - self.reais_do_alvo
+
+    @property
     def origens(self) -> dict[str, str]:
         """A origem de cada campo, para a tela desenhar o selo dela (7A)."""
         return ORIGEM_DO_CAMPO

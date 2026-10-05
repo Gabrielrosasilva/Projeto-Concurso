@@ -10,8 +10,11 @@ da execução das Fases 2 e 3 (seção 7) e o relatório final (R1 a R15). Respo
 
 **Depois da auditoria (04/10):** a Rodada 1 do plano (R14, grupos 1, 4 e a
 parte do traceback do 5) consertou o BUG-8, o BUG-1, o BUG-2 e o BUG-6
-(decisão 96); o resto está na pendência G do `pendencias.md`. O texto abaixo
-continua como a auditoria encontrou o sistema.
+(decisão 96); a Rodada 2, o BUG-4 e o `radar padrao` por evidência (decisões
+97 e 98); e as Rodadas 3 e 4, em 05/10, o BUG-5, o BUG-3, o BUG-7, os simulados
+pela chave, os menores e as 4 fichas que faltavam (decisões 99 a 103). **Os 8
+defeitos estão consertados**; o que ficou de propósito está na pendência G do
+`pendencias.md`. O texto abaixo continua como a auditoria encontrou o sistema.
 
 ---
 

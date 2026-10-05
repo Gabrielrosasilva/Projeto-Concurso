@@ -68,7 +68,7 @@
     {% elif f.get('erros') %}
       Revisão: só as questões que eu errei
     {% elif f.get('compilado') %}
-      {% set faltaram = (f.get('distribuicao') or []) | sum(attribute='pedidas') - (f.get('distribuicao') or []) | sum(attribute='entregues') %}
+      {% set faltaram = faltaram_no_compilado(f) %}
       Compilado de {{ f.get('compilado') }} pelo quadro do edital {{ f.get('ano_do_edital') or '' }}
       ({{ f.get('edital') or 'edital' }}){% if faltaram %} - faltaram {{ faltaram }}: o acervo não tinha o bastante{% endif %}.
       Só questões reais.

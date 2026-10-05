@@ -17,16 +17,17 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 8 | 3B — Acervo complementar FEPESE | 🟡 169 provas aceitas (eram 122: o leitor consertado e as 21 provas baixadas em 04/10); 4 lotes classificados (o do catálogo refeito); a conferência tem tela; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
 | 10 | 5 — Geração de questões | ✅ |
-| 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; as 61 fichas revistas pelo Claude Code em 04/10 contra a fonte (15 corrigidas: [conferencia_das_fichas](conferencia_das_fichas.md)); falta a sua conferência e o Ciclo 2, depois do simulado de 07/11 |
+| 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; 65 fichas (as 4 de Português de 28/09 a 01/10 escritas em 05/10); as 61 de antes revistas pelo Claude Code em 04/10 contra a fonte (15 corrigidas: [conferencia_das_fichas](conferencia_das_fichas.md)); falta a sua conferência e o Ciclo 2, depois do simulado de 07/11 |
 | 12 | 7A — Selos e marcação de IA | ✅ |
 | 13 | 7B — As 6 telas no design system | ✅ |
-| 14 | 8 — Auditoria final integrada | 🟡 18 de 19 itens da §23 atendem com o dado real (eram 17: o item 13 foi corrigido em 03/10); 1 virou pendência |
+| 14 | 8 — Auditoria final integrada | ✅ 19 de 19 itens da §23 atendem com o dado real (o 13 corrigido em 03/10; o 18, a média "por prova" dos Macetes, no lote de 04/10 — "18.8/prova em 170 provas", conferido pela auditoria independente) |
 | 15 | Correções depois da auditoria (5 itens) | ✅ os cinco feitos; o backup voltou na noite de 03/10; falta a sua conferência da lista de leis (reconferida pelo Claude Code em 04/10) |
 | 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | ✅ 2A, 2B, 2C e a seção F inteira, F1 a F15 (decisões 67 a 86) |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 | 18 | O lote de 04/10 (as conferências e os abertos) | ✅ as 61 fichas e as 15 leis conferidas contra a fonte (a marca de conferida continua sua), a tela de conferência do complementar e o lote do catálogo refeito, o `?cor=`, as geradas antigas, a base da média nos Macetes, e o leitor do caderno consertado com a releitura (B.7, B.9, B.10; decisões 87 a 90) |
 | 19 | Auditoria independente de 04/10 e a Rodada 1 das correções | ✅ a auditoria ([auditoria_independente](auditoria_independente.md): 186 requisitos, 8 defeitos) e a Rodada 1 (BUG-1, BUG-2, BUG-6 e BUG-8; decisão 96); as rodadas 2 a 4 estão na pendência G |
 | 20 | Rodada 2 das correções da auditoria | ✅ 2563 passed; o sinônimo de matéria nos filtros e no acerto por matéria (decisão 97) e o `radar padrao` por evidência (decisão 98) |
+| 21 | Rodadas 3 e 4 e o resto da auditoria | ✅ 2574 passed; a migração sem perder JSON (102), os simulados pela chave (103), 12 nós juntados e a recusa do parecido (99), o "praticado" (101), o ADD COLUMN (100), os menores e as 4 fichas que faltavam (65) |
 
 ---
 
@@ -2809,3 +2810,57 @@ aceitas) — 3106 questões · 172 provas (7023 ocorrências em cadernos
 diferentes)", "Outras bancas — 738 questões · 31 provas (907 ocorrências)" e
 "Ficaram de fora 360 questões de provas complementares que a validação
 recusou".
+
+## 21 — As Rodadas 3 e 4 e o resto da auditoria (05/10/2026)
+
+Pedido por você para terminar tudo sem perguntar e fechar com um commit só.
+
+- **A migração sem perder o JSON (BUG-5, decisão 102):** `migracoes.py`
+  (`_exportar_sem_perder`, usado nos passos 1, 4 e 5).
+- **Os simulados pela chave (decisão 103):** `acervo.py` (`chave` na linha
+  exportada; `_id_da_questao` procura pela chave no mesmo caderno antes de
+  prova + número). O `data/simulados.json` foi reexportado: as 50 respostas
+  reais ganharam a chave (as 15 geradas continuam pela impressão).
+- **Os nós duplicados (BUG-3, decisão 99):** `servico/conteudos.py`
+  (`juntar`, `novo_caminho`), `servico/fichas.py` (`levar_no`), `cli.py`
+  (`radar conteudos --juntar … --em …`), `conteudos.py` (`no_parecido`,
+  `NOME_DO_NIVEL`) e `servico/classificacoes.py` (a recusa do subassunto
+  parecido). Os 12 pares foram juntados no banco real, com cópia antes: a
+  árvore foi de 426 a 408 nós, e mudaram `conteudos.json`,
+  `classificacoes.json`, `questoes_geradas.json`, `fichas.json` (3 fichas) e
+  a fronteira da Maria da Penha no `config/leis.yml`.
+- **O "praticado" no modo revisão (BUG-7, decisão 101):**
+  `servico/geradas.py` (`nos_da_revisao`) e a saída do `radar gerar --modo
+  revisao`.
+- **O ADD COLUMN (decisão 100):** a mensagem do `db.py`.
+- **Os menores:** o plural de "1 acerto + 1 erro" (`metricas._contado`); a
+  frase de fora do estado no Meu desempenho; o nome do nível sem a chave
+  crua; as contas que estavam em template (Macetes, questão, ficha) foram
+  para o serviço, e um teste vigia (`test_nenhum_template_soma_contagem`); a
+  recontagem da IA da conferência pelo `metricas`; a home aponta a fila de
+  revisão do Meu desempenho; o `radar previsao` com "Atrasado" e sem "->";
+  o `complementar.md` com a classificação na seção 5 e "em ocorrências" na
+  pergunta 1 (regerado); README com o `radar conferir-dias`; os cabeçalhos do
+  `config/regioes.yml` e do `config/amostra.yml`; "19 de 19" no CLAUDE.md e
+  no `auditoria_final.md`; a escolaridade dos 8 concursos na decisão 93.
+- **As 4 fichas que faltavam:** Substantivo e adjetivo; Artigo, numeral e
+  pronome; Verbo 1; Interpretação 1 — 🟣 escritas pelo Claude Code e
+  importadas pelo `radar fichas --importar` (65 no `data/fichas.json`).
+
+**Testes novos (11):** a migração que não regrava o JSON maior e a que ainda
+exporta (`test_migracoes`); a resposta que volta pela chave com o número
+trocado (`test_backup_simulados`); juntar nós (2) e o nome parecido
+(`test_conteudos`); a recusa do subassunto parecido (`test_classificacao`);
+estudado × praticado (`test_geracao_por_conteudo`); a frase do terminal
+(`test_previsao`); nenhum template soma (`test_metricas`); a seção 5 com a
+classificação (`test_complementar`). Os que testam comportamento falham no
+código de antes.
+
+| Rodada | Resultado |
+|---|---|
+| Os 9 arquivos tocados (`test_migracoes`, `test_backup_simulados`, `test_conteudos`, `test_classificacao`, `test_geracao_por_conteudo`, `test_previsao`, `test_metricas`, `test_complementar`, `test_fichas`) | 290 passed |
+| Suíte inteira, PC (uma vez, no fim) | **2574 passed** (2563 + 11 novos), 0 failed, 23 min 34 s; os `data/*.json` e `config/*.yml` intactos pela suíte |
+
+**Comandos reais:** `radar conteudos --juntar` nos 12 pares; `radar fichas
+--importar` (4 gravadas, procedência de 05/10); `radar complementar` (sem
+`--aplicar`: 172 provas entrariam, as mesmas aceitas).

@@ -483,6 +483,12 @@ class FatiaDoCaderno:
     cadernos: int = 0
 
 
+def total_da_composicao(fatias: list[FatiaDoCaderno]) -> int:
+    """Quantas questoes da banca o grafico conta: a soma das fatias. Fica
+    aqui, e nao no template, que so escreve numero."""
+    return sum(f.total for f in fatias)
+
+
 def composicao_do_caderno(questoes: list) -> list[FatiaDoCaderno]:
     """Quantas questoes de cada materia caem num caderno tipico desta banca.
 

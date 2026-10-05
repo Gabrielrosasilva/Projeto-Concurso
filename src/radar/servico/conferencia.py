@@ -256,7 +256,9 @@ def conferir(inicio: date | None = None, fim: date | None = None, *,
 
         de_ia = [linha for linha in linhas if linha.gerada]
         if de_ia:
-            certas = sum(1 for linha in de_ia if linha.acertos)
+            # A conta e a do `metricas` (o treino de IA dele), e nao uma
+            # recontagem aqui: resposta do radar nunca tem conta inconsistente.
+            certas = metricas.contar(de_ia).treino_ia.ia_acertos
             dia.achados.append(Achado(
                 TREINO_IA,
                 gravado=f"{len(de_ia)} respostas a questão de IA ({certas} certas)",

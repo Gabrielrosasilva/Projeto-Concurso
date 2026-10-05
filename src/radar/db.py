@@ -149,9 +149,12 @@ def _adicionar_colunas_novas(engine: Engine) -> None:
 
                 log.info("coluna %s.%s criada no banco", tabela.name, coluna.name)
 
+        # O recado antigo mandava rodar `radar reclassificar`, que so serve
+        # para colunas da coleta. Coluna que precisa de dado levado do antigo
+        # e passo do `migracoes.py`, que roda em seguida (decisao 100).
         log.info(
-            "Banco atualizado com %d coluna(s) nova(s). Rode `radar "
-            "reclassificar` para preencher os registros antigos.",
+            "Banco atualizado com %d coluna(s) nova(s), vazias nas linhas antigas; "
+            "o que precisa de dado vem dos passos de `radar migrar`.",
             len(faltando),
         )
 

@@ -193,6 +193,11 @@
         <div>
           <span class="numero-grande">{{ h.revisoes_de_hoje | length }}</span>
           <span class="ds-pequeno">revisão(ões) para hoje (1, 7 e 30 dias)</span>
+          {# Esta e a revisao espacada do RADAR: o assunto que eu errei numa
+             rodada. A fila do Meu desempenho e outra conta (o no da arvore,
+             com prazo, erro no caderno e acerto baixo) e da outro numero -
+             a auditoria de 04/10 achou as duas lado a lado sem dizer isso. #}
+          <p class="miudo">Do que errei no radar, por assunto. A fila completa (prazo, caderno de erros e acerto baixo) está em <a href="/analises/desempenho">Meu desempenho</a>.</p>
         </div>
         <ul class="fracas">
           {% for r in h.revisoes_de_hoje[:3] %}

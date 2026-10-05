@@ -132,22 +132,34 @@ def reais_do_escopo(escopo) -> list[tuple[QuestaoDeProva, str]]:
         return saida
 
 
-def nos_estudados(materia: str | None = None) -> list[str]:
-    """Os nos que eu JA ESTUDEI, para o modo revisao (decisao 20).
+def nos_da_revisao(materia: str | None = None) -> tuple[list[str], list[str]]:
+    """(estudados, so praticados): os nos que o modo revisao pode revisar.
 
-    Vem do `servico.estudo`, e nao de uma conta nova: "estudado" tem uma
-    definicao so, e ela mora la.
+    Os dois rotulos sao os da decisao 20 e vem do `servico.estudo` - nada de
+    conta nova. O modo revisao aceita os dois de proposito (decisao 101): o
+    "estudado" pede faixa de estudo ou extra de teoria ligados ao no, e quase
+    nenhuma faixa do plano aponta no; so com ele, a revisao ficaria vazia
+    mesmo do que eu ja respondi. Revisar o que eu ja respondi tambem e
+    revisao - e a saida diz quantos sao de cada tipo.
     """
     from radar.servico import estudo
 
-    saida = []
+    estudados, praticados = [], []
     for caminho, situacao in estudo.situacoes().items():
-        if not (situacao.estudado or situacao.praticado):
-            continue
         if materia and situacao.materia != materia:
             continue
-        saida.append(caminho)
-    return sorted(saida)
+        if situacao.estudado:
+            estudados.append(caminho)
+        elif situacao.praticado:
+            praticados.append(caminho)
+    return sorted(estudados), sorted(praticados)
+
+
+def nos_estudados(materia: str | None = None) -> list[str]:
+    """Os nos do modo revisao: os estudados E os so praticados (decisao 101;
+    `nos_da_revisao` separa os dois)."""
+    estudados, praticados = nos_da_revisao(materia)
+    return sorted(estudados + praticados)
 
 
 def escopo_da_revisao(materia: str) -> object:

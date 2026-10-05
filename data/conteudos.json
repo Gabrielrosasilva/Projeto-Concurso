@@ -988,45 +988,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direitos Humanos > Teoria geral dos direitos humanos > Sistema interamericano de proteção",
-    "pai": "Direitos Humanos > Teoria geral dos direitos humanos",
-    "nivel": "subassunto",
-    "nome": "Sistema interamericano de proteção",
-    "ordem": 3,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direitos Humanos > Teoria geral dos direitos humanos > Sistema interamericano de proteção > Protocolo de San Salvador",
-    "pai": "Direitos Humanos > Teoria geral dos direitos humanos > Sistema interamericano de proteção",
-    "nivel": "elemento",
-    "nome": "Protocolo de San Salvador",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "tratado",
-    "referencia": "Protocolo Adicional à Convenção Americana em matéria de Direitos Econômicos, Sociais e Culturais"
-  },
-  {
-    "caminho": "Direitos Humanos > Teoria geral dos direitos humanos > Gerações (dimensões) dos direitos humanos",
-    "pai": "Direitos Humanos > Teoria geral dos direitos humanos",
-    "nivel": "subassunto",
-    "nome": "Gerações (dimensões) dos direitos humanos",
-    "ordem": 4,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
     "caminho": "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos",
     "pai": "Direitos Humanos > Teoria geral dos direitos humanos",
     "nivel": "subassunto",
@@ -1123,19 +1084,6 @@
     "nivel": "subassunto",
     "nome": "Dignidade da pessoa humana como fundamento",
     "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Características dos direitos humanos",
-    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
-    "nivel": "subassunto",
-    "nome": "Características dos direitos humanos",
-    "ordem": 2,
     "origem": "classificacao",
     "texto_do_edital": null,
     "fora_do_edital": false,
@@ -1558,32 +1506,6 @@
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Tratados equivalentes a emenda constitucional (EC 45/2004)",
-    "pai": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos",
-    "nivel": "subassunto",
-    "nome": "Tratados equivalentes a emenda constitucional (EC 45/2004)",
-    "ordem": 4,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Tratados equivalentes a emenda constitucional (EC 45/2004) > CF, art. 5º, § 3º",
-    "pai": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Tratados equivalentes a emenda constitucional (EC 45/2004)",
-    "nivel": "elemento",
-    "nome": "CF, art. 5º, § 3º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "art. 5º, § 3º, da Constituição Federal"
   },
   {
     "caminho": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas",
@@ -2067,6 +1989,19 @@
     "referencia": null
   },
   {
+    "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XV",
+    "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais",
+    "nivel": "elemento",
+    "nome": "CF, art. 7º, XV",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "tipo_elemento": "inciso",
+    "referencia": "art. 7º, XV, da Constituição Federal"
+  },
+  {
     "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XXVIII",
     "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais",
     "nivel": "elemento",
@@ -2093,34 +2028,8 @@
     "referencia": "art. 7º, XXX, da Constituição Federal"
   },
   {
-    "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores",
-    "pai": "Direito Constitucional > direitos sociais",
-    "nivel": "subassunto",
-    "nome": "Direitos dos trabalhadores",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores > CF, art. 7º, XV",
-    "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores",
-    "nivel": "elemento",
-    "nome": "CF, art. 7º, XV",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "inciso",
-    "referencia": "art. 7º, XV, da Constituição Federal"
-  },
-  {
-    "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores > CF, art. 7º, XXXIV",
-    "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores",
+    "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XXXIV",
+    "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais",
     "nivel": "elemento",
     "nome": "CF, art. 7º, XXXIV",
     "ordem": 1,
@@ -2457,58 +2366,6 @@
     "referencia": "art. 144, § 6º, da Constituição Federal"
   },
   {
-    "caminho": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública",
-    "pai": "Direito Constitucional > organização da segurança pública",
-    "nivel": "subassunto",
-    "nome": "Órgãos da segurança pública",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública > CF, art. 144",
-    "pai": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública",
-    "nivel": "elemento",
-    "nome": "CF, art. 144",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "art. 144 da Constituição Federal"
-  },
-  {
-    "caminho": "Direito Constitucional > organização da segurança pública > Atribuições de cada órgão",
-    "pai": "Direito Constitucional > organização da segurança pública",
-    "nivel": "subassunto",
-    "nome": "Atribuições de cada órgão",
-    "ordem": 3,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direito Constitucional > organização da segurança pública > Atribuições de cada órgão > CF, art. 144, § 4º",
-    "pai": "Direito Constitucional > organização da segurança pública > Atribuições de cada órgão",
-    "nivel": "elemento",
-    "nome": "CF, art. 144, § 4º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "parágrafo",
-    "referencia": "art. 144, § 4º, da Constituição Federal"
-  },
-  {
     "caminho": "Direito Constitucional > Ordem social: base e objetivos da ordem social",
     "pai": "Direito Constitucional",
     "nivel": "assunto",
@@ -2730,21 +2587,8 @@
     "referencia": null
   },
   {
-    "caminho": "Direito Constitucional > educação, cultura e desporto > Direito à educação",
-    "pai": "Direito Constitucional > educação, cultura e desporto",
-    "nivel": "subassunto",
-    "nome": "Direito à educação",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direito Constitucional > educação, cultura e desporto > Direito à educação > CF, art. 208, § 1º",
-    "pai": "Direito Constitucional > educação, cultura e desporto > Direito à educação",
+    "caminho": "Direito Constitucional > educação, cultura e desporto > Educação > CF, art. 208, § 1º",
+    "pai": "Direito Constitucional > educação, cultura e desporto > Educação",
     "nivel": "elemento",
     "nome": "CF, art. 208, § 1º",
     "ordem": 0,
@@ -3978,32 +3822,6 @@
     "referencia": "CPP, art. 306"
   },
   {
-    "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Comunicação da prisão e audiência de custódia",
-    "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
-    "nivel": "subassunto",
-    "nome": "Comunicação da prisão e audiência de custódia",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Comunicação da prisão e audiência de custódia > CPP, art. 306",
-    "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Comunicação da prisão e audiência de custódia",
-    "nivel": "elemento",
-    "nome": "CPP, art. 306",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "art. 306 do Código de Processo Penal"
-  },
-  {
     "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Revisão periódica das medidas cautelares",
     "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
     "nivel": "subassunto",
@@ -4602,32 +4420,6 @@
     "referencia": "Lei 9.455/1997, art. 1º"
   },
   {
-    "caminho": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Pena, regime inicial e causas de aumento",
-    "pai": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997)",
-    "nivel": "subassunto",
-    "nome": "Pena, regime inicial e causas de aumento",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Pena, regime inicial e causas de aumento > Lei 9.455/1997, art. 1º",
-    "pai": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Pena, regime inicial e causas de aumento",
-    "nivel": "elemento",
-    "nome": "Lei 9.455/1997, art. 1º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "art. 1º da Lei de Tortura"
-  },
-  {
     "caminho": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD)",
     "pai": "Legislação Especial",
     "nivel": "assunto",
@@ -4758,6 +4550,19 @@
     "referencia": "Lei 11.340/2006, art. 7º"
   },
   {
+    "caminho": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica e familiar > Lei 11.340/2006, arts. 5º e 6º",
+    "pai": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica e familiar",
+    "nivel": "elemento",
+    "nome": "Lei 11.340/2006, arts. 5º e 6º",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "arts. 5º e 6º da Lei Maria da Penha"
+  },
+  {
     "caminho": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Disposições processuais e vedações",
     "pai": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006)",
     "nivel": "subassunto",
@@ -4782,45 +4587,6 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "Lei 11.340/2006, art. 17"
-  },
-  {
-    "caminho": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Conceito e formas de violência doméstica",
-    "pai": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006)",
-    "nivel": "subassunto",
-    "nome": "Conceito e formas de violência doméstica",
-    "ordem": 3,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
-  },
-  {
-    "caminho": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Conceito e formas de violência doméstica > Lei 11.340/2006, arts. 5º e 6º",
-    "pai": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Conceito e formas de violência doméstica",
-    "nivel": "elemento",
-    "nome": "Lei 11.340/2006, arts. 5º e 6º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "arts. 5º e 6º da Lei Maria da Penha"
-  },
-  {
-    "caminho": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica",
-    "pai": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006)",
-    "nivel": "subassunto",
-    "nome": "Formas de violência doméstica",
-    "ordem": 4,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "tipo_elemento": null,
-    "referencia": null
   },
   {
     "caminho": "Lei de Execução Penal",

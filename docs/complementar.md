@@ -10,7 +10,7 @@ No acervo de hoje: **183 provas complementares**, 7385 questões. Delas, **22** 
 
 ## Onde isto está
 
-O levantamento já virou acervo (Etapa 3B): **169 provas** estão aceitas no `data/acervo_complementar.json` e têm a **linha própria na incidência**, sempre separada da do alvo e contada em questão distinta. Parte das questões delas foi classificada por conteúdo, com procedência; o resto conta só na matéria que o caderno declara. O que falta é a sua conferência das classificações, na tela Análises > Conferência, com o filtro do complementar aceito. A proposta automática do catálogo se confere por amostra; a de 04/10 errou o assunto em quase metade dela, e o lote foi refeito (decisão 87). Os padrões de cobrança do complementar (tipo de questão, pegadinha) saem à parte dos do alvo, só das provas com gabarito definitivo (decisão 78).
+O levantamento já virou acervo (Etapa 3B): **172 provas** estão aceitas no `data/acervo_complementar.json` e têm a **linha própria na incidência**, sempre separada da do alvo e contada em questão distinta. Parte das questões delas foi classificada por conteúdo, com procedência; o resto conta só na matéria que o caderno declara. O que falta é a sua conferência das classificações, na tela Análises > Conferência, com o filtro do complementar aceito. A proposta automática do catálogo se confere por amostra; a de 04/10 errou o assunto em quase metade dela, e o lote foi refeito (decisão 87). Os padrões de cobrança do complementar (tipo de questão, pegadinha) saem à parte dos do alvo, só das provas com gabarito definitivo (decisão 78).
 
 ## Quem entra no acervo, pela regra do edital de 2019
 
@@ -234,7 +234,7 @@ Respondidas **só com o que o acervo tem**. "Não há prova com LEP no acervo" �
 
 **1. Quais matérias da Polícia Penal têm boa quantidade de provas FEPESE complementares?**
 
-Pelo nome da matéria no caderno, da maior para a menor: Língua Portuguesa (1506 em 175 provas); Noções de Informática (334 em 63 provas); Raciocínio Lógico (300 em 60 provas); Direitos Humanos (20 em 2 provas); Direito Constitucional (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas).
+Pelo nome da matéria no caderno, da maior para a menor, em ocorrências (a mesma questão em cadernos de vários cargos conta em cada um; a Incidência conta a questão distinta): Língua Portuguesa (1506 em 175 provas); Noções de Informática (334 em 63 provas); Raciocínio Lógico (300 em 60 provas); Direitos Humanos (20 em 2 provas); Direito Constitucional (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas).
 
 **2. Quais têm pouco ou nenhum material complementar?**
 
@@ -246,11 +246,11 @@ Nenhuma questão de Lei de Execução Penal no acervo complementar — nem pelo 
 
 **4. Existem provas FEPESE com Sociologia Aplicada?**
 
-Sociologia Aplicada: 34 indício(s) por termo em 30 provas.
+Sociologia Aplicada: 34 indício(s) por termo em 30 provas. Depois da classificação, questão a questão, do acervo aceito: 0 questão(ões) distinta(s) nesta matéria.
 
 **5. Existem provas FEPESE com legislação estadual específica do sistema prisional de SC?**
 
-Legislação Estadual: 20 questões · 2 provas pelo nome da matéria · 1 indício(s) por termo em 1 prova. Atenção: esta linha é a da matéria Legislação Estadual inteira. Se o que caiu ali é lei do sistema PRISIONAL ou de outra área do Estado, só a classificação, questão a questão, diz — o levantamento não sabe.
+Legislação Estadual: 20 questões · 2 provas pelo nome da matéria · 1 indício(s) por termo em 1 prova. Depois da classificação, questão a questão, do acervo aceito: 12 questão(ões) distinta(s) nesta matéria. Atenção: esta linha é a da matéria Legislação Estadual inteira. Se o que caiu ali é lei do sistema PRISIONAL ou de outra área do Estado, só a classificação, questão a questão, diz — o levantamento não sabe.
 
 **6. Quais outras matérias têm acervo suficiente para servir de reforço?**
 

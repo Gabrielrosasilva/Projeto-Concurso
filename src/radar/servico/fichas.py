@@ -295,3 +295,26 @@ def importar_respostas(pedidos: list[dict], respostas: list[dict], modelo: str) 
         gravar(list(por_tema.values()))
     return {"gravadas": gravadas, "repetidas": 0, "substituidas": substituidas,
             "recusas": recusas}
+
+
+def levar_no(duplicado: str, mantido: str) -> int:
+    """Depois de `servico.conteudos.juntar`: a ficha que apontava o no
+    duplicado (ou um no abaixo dele) passa a apontar o mantido, sem repetir
+    no. Devolve quantas fichas mudaram. O texto escrito nao muda: so o
+    caminho, que e o vinculo, e a ficha continua por conferir como estava."""
+    from radar.servico.conteudos import novo_caminho
+
+    escritas = carregar()
+    mudaram = 0
+    for escrita in escritas:
+        novos = []
+        for no in escrita.nos:
+            caminho = novo_caminho(no, duplicado, mantido)
+            if caminho not in novos:
+                novos.append(caminho)
+        if novos != escrita.nos:
+            escrita.nos = novos
+            mudaram += 1
+    if mudaram:
+        gravar(escritas)
+    return mudaram
