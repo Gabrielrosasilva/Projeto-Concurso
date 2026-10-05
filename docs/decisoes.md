@@ -4024,3 +4024,20 @@ mesmo lote, ja estavam).
      `docs/classificacao_pt_rl.md`. Com isso, o complementar aceito de
      Portugues (251 questoes distintas) e de Raciocinio (45) nao tem mais
      questao sem classificacao.
+
+107. **a faixa de questoes de Portugues comeca pelas do radar e termina no
+     Qconcursos** (pedido de 05/10, a opcao recomendada). O complementar
+     aceito tem 251 questoes distintas de Portugues da FEPESE, e o dia pede
+     21 de um tema so (6 de manha, 15 a noite): varios temas tem 1 a 3. Por
+     isso a faixa NAO foi trocada para o radar: ela continua no Qconcursos,
+     e ganha na tela Hoje o botao "Comecar pelas N do radar" - as questoes
+     reais do tema (os nos da ficha, ou o que ela escreveu, ou os do plano;
+     o mesmo caminho do `fichas.onde_na_arvore`), do alvo primeiro e depois
+     do complementar aceito, uma por chave, sem anulada, que eu ainda nao
+     respondi e que nao estao noutra faixa (a manha e a noite do mesmo tema
+     nao repetem). O resto, a tela diz quantas, no Qconcursos. As do radar
+     contam sozinhas no desempenho por tema e no 1-7-30; o "fiz X, acertei
+     Y" da faixa fica so para as do Qconcursos. A rodada nao mede: nao entra
+     na comparacao do fechamento. Mora no `servico/faixa_no_radar.py`; so
+     Portugues por enquanto (`MATERIAS`), a materia que o complementar
+     cobre inteira.

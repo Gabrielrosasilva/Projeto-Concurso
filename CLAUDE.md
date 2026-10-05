@@ -175,8 +175,10 @@ complementar e os diagnosticos de 03/10 (nao feitos) passados para 10/10, com
 o R+7 deles refazendo todos os erros em 17/10 e a comparacao de 07/11 contra
 10/10. E Portugues e Raciocinio Logico classificados (decisao 106): duas
 leituras, 161 de 204 conferidas pelo Claude Code; o complementar aceito
-das materias do edital nao tem mais questao sem classificacao. **Proximo:** o
-roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md)).
+das materias do edital nao tem mais questao sem classificacao. E a faixa de
+Portugues comeca pelas questoes reais do tema que o radar tem, e termina no
+Qconcursos (decisao 107: o acervo nao tem questao para o dia inteiro).
+**Proximo:** o roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md)).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
 **Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos
@@ -215,7 +217,8 @@ do `servico/composicao.py`** (decisao 67): so questao real da FEPESE, do alvo e
 do complementar aceito, e gravada na rodada; a do simulado do Qconcursos
 tambem, por tema estudado (decisao 69). **O sabado** - a revisao semanal, o
 R+7 dos diagnosticos e a comparacao de 07/11 - **sai do `servico/sabado.py`**
-(decisao 70). **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
+(decisao 70). **A faixa de Portugues que comeca no radar** sai do
+`servico/faixa_no_radar.py` (decisao 107). **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
 (decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. Para o
 estudado e as datas, a faixa sem `conteudo` conta nos `nos` do plano e na
 ficha CONFERIDA, nunca no acerto (decisao 81). **Alvo,

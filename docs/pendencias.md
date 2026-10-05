@@ -204,11 +204,11 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   50%, o gabarito diz 24% a 26%) e a 2023-q10-533 (enunciado cortado). As 24
   classificacoes abertas de Portugues e Raciocinio estao na lista unica da
   B.8;
-- ⚪ **Portugues no radar em vez do Qconcursos: nao da para trocar inteiro.**
-  O complementar aceito tem 251 questoes distintas de Portugues; por tema,
-  poucas: Vozes do verbo 3, Crase 2 uma, Termos integrantes 1 uma, Pronomes 3
-  tres, Redacao oficial 1 uma, Interpretacao 5 uma, Pontuacao 6 a 7 - e o dia
-  pede 21 do tema (6 de manha, 15 a noite). Opcoes levadas a voce em 05/10;
+- ⚪ **Portugues no radar: so o comeco da faixa** (decisao 107): o acervo
+  nao tem questao para trocar o Qconcursos inteiro (varios temas tem 1 a 3),
+  entao a faixa comeca pelas do radar e termina la. Para ter mais, so mais
+  provas da FEPESE no acervo (o `radar baixar-provas` e a validacao do
+  complementar); estender a outras materias e trocar o `MATERIAS`;
 - ⚪ **A gerada e unica pelo enunciado** (`QuestaoGerada.impressao`): dois
   comandos genericos iguais com alternativas diferentes viram uma so, e a
   importacao conta a segunda como repetida. Por desenho; no estoque, cada

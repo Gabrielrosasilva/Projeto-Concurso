@@ -289,6 +289,17 @@ def _estoque(materias: list[str] | None = None) -> dict[str, list[Candidata]]:
             for assunto, por_chave in estoque.items()}
 
 
+def estoque_real(materias: list[str] | None = None) -> dict[str, list[Candidata]]:
+    """O mesmo estoque, para quem escolhe questao real fora da composicao: a
+    faixa de Portugues que comeca no radar (decisao 107)."""
+    return _estoque(materias)
+
+
+def ja_respondidas() -> set[str]:
+    """As impressoes das questoes reais que eu ja respondi."""
+    return _respondidas()
+
+
 def _pesos_do_edital(materias: list[str]) -> dict[str, int]:
     pesos, _edital, _arquivo = compilado._pesos(materias)
     return pesos
@@ -719,6 +730,10 @@ def criar_rodada_do_dia(data: date, bloco: str, indice: int) -> Simulado | None:
             # origem: a rodada dele sai do servico do sabado.
             if sabado.refaz_rodadas(faixa):
                 return sabado.criar_rodada_dos_erros(data, bloco, indice, faixa, tela.plano)
+            # A faixa de Portugues comeca pelas do radar (decisao 107).
+            from radar.servico import faixa_no_radar
+            if faixa_no_radar.aceita(faixa):
+                return faixa_no_radar.criar_rodada(data, bloco, indice, faixa)
             return criar_rodada(data, bloco, indice, faixa)
     return None
 

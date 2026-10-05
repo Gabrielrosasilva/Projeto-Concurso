@@ -2183,3 +2183,11 @@ de linguagem). As 204 questoes do complementar sem classificacao passaram
 por duas leituras independentes; onde caiu no mesmo no, ficou conferida pelo
 Claude Code (161). Sobraram 24 para conferir e 19 pendentes, quase todas de
 tema que o edital nao lista (decisao 106).
+
+## A faixa de Portugues comeca no radar (05/10)
+
+Com Portugues classificado, a ideia era fazer as faixas de Portugues no radar
+em vez do Qconcursos. A conta mostrou que nao da: o acervo tem 251 questoes
+distintas, e varios temas tem uma so. A faixa ficou mista: comeca pelas
+questoes reais do tema que o radar tem e eu nao respondi, e termina no
+Qconcursos (decisao 107).

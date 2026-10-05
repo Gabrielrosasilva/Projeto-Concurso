@@ -1027,6 +1027,8 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # A revisao semanal, o R+7 dos diagnosticos e a comparacao do
             # fechamento (decisao 70). So conta no sabado.
             "do_sabado": servico.sabado.das_faixas(tela.blocos, tela.data, tela.plano),
+            # A faixa de Portugues que comeca pelas do radar (decisao 107).
+            "no_radar": servico.faixa_no_radar.das_faixas(tela.blocos, tela.data),
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,

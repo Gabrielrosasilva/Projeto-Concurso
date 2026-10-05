@@ -1044,6 +1044,38 @@
                   </div>
                 {% endif %}
 
+                {# A faixa de Portugues comeca pelas do radar (decisao 107): as
+                   questoes reais da FEPESE do tema que eu ainda nao respondi;
+                   o resto continua no Qconcursos. #}
+                {% set nr = no_radar.get((b.chave, loop.index0)) if no_radar else none %}
+                {% if nr %}
+                  <div class="composicao no-radar">
+                    {% if nr.rodada_id %}
+                      <p>{{ selo('acervo', curto=True) }} <b>{{ nr.do_radar }} {{ 'questão' if nr.do_radar == 1 else 'questões' }} no radar</b>{% if nr.no_qconcursos %} e {{ nr.no_qconcursos }} no Qconcursos{% endif %}.</p>
+                      <p class="links"><a class="botao-anotar" href="/simulado/{{ nr.rodada_id }}"><span aria-hidden="true">▶</span> Abrir a rodada do radar</a></p>
+                    {% elif nr.do_radar %}
+                      <p>{{ selo('acervo', curto=True) }} Comece pelas <b>{{ nr.do_radar }}</b> {{ 'questão real' if nr.do_radar == 1 else 'questões reais' }} da FEPESE deste tema que o radar tem e você ainda não respondeu ({{ nr.nomes | join('; ') }}{% if nr.proprias %}; {{ nr.proprias }} das provas do cargo{% endif %}){% if nr.no_qconcursos %}; as outras {{ nr.no_qconcursos }} no Qconcursos{% endif %}.</p>
+                      {% if not t.futuro or t.e_hoje %}
+                        <form method="post" action="/hoje/rodada">
+                          <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                          <input type="hidden" name="bloco" value="{{ b.chave }}">
+                          <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                          <button type="submit" class="ds-botao ds-botao--secundario">Começar pelas {{ nr.do_radar }} do radar</button>
+                        </form>
+                      {% else %}
+                        <p class="sub">O botão aparece no dia da faixa.</p>
+                      {% endif %}
+                    {% elif not nr.nos %}
+                      <p class="sub">A faixa não aponta nó da árvore: tudo no Qconcursos.</p>
+                    {% elif nr.no_acervo %}
+                      <p class="sub">As {{ nr.no_acervo }} do radar deste tema já foram respondidas ou estão na outra faixa do dia: tudo no Qconcursos.</p>
+                    {% else %}
+                      <p class="sub">O radar não tem questão da FEPESE classificada neste tema: tudo no Qconcursos.</p>
+                    {% endif %}
+                    {% if nr.do_radar %}<p class="regra">As do radar contam sozinhas no seu desempenho e na revisão 1-7-30: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>{% endif %}
+                  </div>
+                {% endif %}
+
                 {# O sabado (decisao 70): a revisao semanal, o R+7 dos
                    diagnosticos e a comparacao do fechamento, com o que ja esta
                    gravado - o plano, o caderno e as rodadas. #}

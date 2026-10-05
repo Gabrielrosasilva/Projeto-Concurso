@@ -30,6 +30,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 21 | Rodadas 3 e 4 e o resto da auditoria | ✅ 2574 passed; a migração sem perder JSON (102), os simulados pela chave (103), 12 nós juntados e a recusa do parecido (99), o "praticado" (101), o ADD COLUMN (100), os menores e as 4 fichas que faltavam (65) |
 | 22 | O pedido de 05/10 (pares, geradas, reanálise, diagnósticos, nuvem) | ✅ 2576 passed; 3 pares juntados, 2 geradas rejeitadas, 176 de 215 classificações do complementar conferidas pela reanálise às cegas (104), os diagnósticos em 10/10 e o R+7 com todos os erros em 17/10 (105), o levantamento do que falta classificar e o [roteiro da nuvem](roteiro_nuvem.md) |
 | 23 | Português e Raciocínio Lógico classificados | ✅ 2576 passed; 3 nós criados à mão e 21 pela classificação, 204 questões em duas leituras, 161 conferidas pelo Claude Code, 24 para você (decisão 106) |
+| 24 | A faixa de Português começa pelas do radar | ✅ 2582 passed; o botão "Começar pelas N do radar" na tela Hoje, o resto no Qconcursos (decisão 107) |
 
 ---
 
@@ -2937,3 +2938,33 @@ Sem código novo nesta parte: os caminhos já existiam (decisões 99 e 104).
 **Comandos reais:** os de cima, e a recontagem: Português 251 distintas (210
 conferidas, 22 a conferir, 19 pendentes, 0 sem classificação); Raciocínio 45
 (43, 2, 0, 0).
+
+## 24 — A faixa de Português começa pelas do radar (05/10/2026)
+
+A opção recomendada, depois de contar o acervo por tema: trocar a faixa
+inteira deixaria metade dos dias com 1 a 3 questões.
+
+- `src/radar/servico/faixa_no_radar.py` (novo): `aceita`, `nos_da_faixa`,
+  `candidatas` (do alvo primeiro, uma por chave, sem as respondidas e sem as
+  que já estão noutra rodada de faixa), `planejar`, `das_faixas` (em ordem: a
+  noite planeja com o que a manhã deixou) e `criar_rodada`.
+- `servico/composicao.py`: `estoque_real` e `ja_respondidas` (o estoque e as
+  respondidas, públicos) e o desvio no `criar_rodada_do_dia`.
+- `servico/__init__.py`, `web/app.py` (`no_radar` no contexto da tela Hoje) e
+  `hoje.html` (o bloco da faixa: quantas no radar, quantas no Qconcursos, o
+  botão, e o aviso de anotar só as do Qconcursos).
+
+**Testes novos (6, `test_faixa_no_radar`):** só a faixa de Português no
+Qconcursos; a rodada com as reais do tema, do alvo primeiro, sem anulada e
+sem recriar; no máximo o número do plano; a manhã e a noite não repetem; a
+respondida não volta; a tela diz quantas no radar e no Qconcursos.
+
+| Rodada | Resultado |
+|---|---|
+| `test_faixa_no_radar`, `test_composicao`, `test_sabado`, `test_faixas_do_dia`, `test_tela_hoje`, `test_estudo` | 160 passed |
+| Suíte inteira, PC | **2582 passed** (2576 + 6 novos), 0 failed, 24 min 14 s; os `data/*.json` e `config/*.yml` intactos pela suíte |
+
+**Comando real:** a tela Hoje no banco real: 05/10, a manhã de Vozes do verbo
+com "Começar pelas 3 do radar" e a noite toda no Qconcursos; 06/10,
+Concordância verbal 1 com 6 de manhã e 7 + 3 no Qconcursos à noite; 13/10,
+Crase 2 com 1 no radar.
