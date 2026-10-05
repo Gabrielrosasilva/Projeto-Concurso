@@ -1,5 +1,8 @@
 # Reanálise do complementar (05/10/2026)
 
+> **Lista desatualizada:** o que ainda está aberto, junto com a outra rodada, está na lista única
+> [conferir_classificacoes.md](conferir_classificacoes.md). Este arquivo fica como registro.
+
 As 215 questões do complementar aceito que tinham classificação e ainda não
 estavam conferidas foram classificadas de novo, às cegas: 5 leituras
 independentes do Claude Code, sem ver a classificação de antes (decisão 104).

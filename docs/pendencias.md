@@ -108,12 +108,12 @@ classificacao ainda" em Portugues):
    uma: o lote 4 (decisao 87).
 
 **O que sobra na B.8:**
-- **a sua conferencia das 39 que a reanalise deixou** (decisao 104): das
-  215 questoes classificadas e nao conferidas, 176 tiveram o mesmo no numa
-  segunda leitura as cegas e ficaram conferidas pelo Claude Code; as 39 que
-  sobram estao em [reanalise_do_complementar.md](reanalise_do_complementar.md),
-  com as duas leituras lado a lado. Tela: Analises > Conferencia, filtro
-  "complementar aceito" e "so as nao conferidas";
+- **a sua conferencia das 46 classificacoes abertas e das 32 pendentes**
+  (decisoes 104 e 106): o que as duas leituras as cegas nao fecharam, na
+  reanalise e na classificacao de Portugues e Raciocinio. Lista unica, com a
+  segunda leitura ao lado: [conferir_classificacoes.md](conferir_classificacoes.md).
+  Tela: Analises > Conferencia, filtro "complementar aceito" e "so as nao
+  conferidas";
 - **a sua conferencia dos 109 conceitos associados** do alvo (decisoes 86 e
   94): Analises > Conferencia, evidencia "alvo", caixa "so com associado por
   conferir" - 72 questoes, cada associado com Confirmar ou Tirar;
@@ -200,15 +200,15 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
 - ⚪ **Token do Telegram**: foi revogado depois de colado numa conversa.
   Confirmar que o novo esta so em variavel de ambiente / Secrets do GitHub.
 
-- 🔴 **Conferir as 24 de Portugues e Raciocinio que as duas leituras nao
-  fecharam** (decisao 106): 11 no mesmo no com confianca baixa, 8 no mesmo
-  assunto em outro nivel, 4 em outro subassunto e 1 que a segunda deixou
-  pendente; mais as 19 pendentes (temas fora do edital e enunciados cortados).
-  Tudo em [classificacao_pt_rl.md](classificacao_pt_rl.md). Junto, **dois
-  gabaritos de Raciocinio para conferir**: a 2024-q21 (a conta da 50%, o
-  gabarito diz 24% a 26%) e a 2023-q10-533 (enunciado cortado). Com a
-  classificacao feita, as faixas de Portugues ja podem treinar no radar, so
-  FEPESE, no lugar do Qconcursos - e mudar o cronograma, decisao sua;
+- 🔴 **Dois gabaritos de Raciocinio para conferir**: a 2024-q21 (a conta da
+  50%, o gabarito diz 24% a 26%) e a 2023-q10-533 (enunciado cortado). As 24
+  classificacoes abertas de Portugues e Raciocinio estao na lista unica da
+  B.8;
+- ⚪ **Portugues no radar em vez do Qconcursos: nao da para trocar inteiro.**
+  O complementar aceito tem 251 questoes distintas de Portugues; por tema,
+  poucas: Vozes do verbo 3, Crase 2 uma, Termos integrantes 1 uma, Pronomes 3
+  tres, Redacao oficial 1 uma, Interpretacao 5 uma, Pontuacao 6 a 7 - e o dia
+  pede 21 do tema (6 de manha, 15 a noite). Opcoes levadas a voce em 05/10;
 - ⚪ **A gerada e unica pelo enunciado** (`QuestaoGerada.impressao`): dois
   comandos genericos iguais com alternativas diferentes viram uma so, e a
   importacao conta a segunda como repetida. Por desenho; no estoque, cada

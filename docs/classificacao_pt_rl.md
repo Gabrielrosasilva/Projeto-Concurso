@@ -1,5 +1,8 @@
 # Classificação de Português e Raciocínio Lógico (05/10/2026)
 
+> **Lista desatualizada:** o que ainda está aberto, junto com a outra rodada, está na lista única
+> [conferir_classificacoes.md](conferir_classificacoes.md). Este arquivo fica como registro.
+
 As 204 questões do complementar aceito sem classificação (173 de Português e
 31 de Raciocínio Lógico) foram classificadas em duas leituras independentes do
 Claude Code: a primeira no formato do `radar classificar --importar` (com

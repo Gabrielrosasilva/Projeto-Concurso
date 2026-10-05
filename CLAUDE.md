@@ -153,9 +153,9 @@ cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
 provas complementares aceitas); 775 geradas (7 rejeitadas); banco na versao 5.
 **Falta, de voce:** conferir as 65 fichas (a conferida tambem liga as faixas
-do tema ao Meu desempenho, decisao 81), as 39 classificacoes do complementar
-que a reanalise as cegas deixou (decisao 104: 176 das 215 ficaram conferidas
-pelo Claude Code; a lista em [reanalise_do_complementar](docs/reanalise_do_complementar.md)), os 109 conceitos
+do tema ao Meu desempenho, decisao 81), as 46 classificacoes abertas do
+complementar e as 32 pendentes (decisoes 104 e 106: o resto ficou conferido
+pela segunda leitura as cegas; lista unica em [conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
 associados (o mesmo lugar, "so com associado por conferir") e os 15 itens da
 lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
@@ -174,8 +174,7 @@ sobra a 2013-q53, na pendencia G. **Depois (05/10, decisoes 104 e 105):** os
 complementar e os diagnosticos de 03/10 (nao feitos) passados para 10/10, com
 o R+7 deles refazendo todos os erros em 17/10 e a comparacao de 07/11 contra
 10/10. E Portugues e Raciocinio Logico classificados (decisao 106): duas
-leituras, 161 de 204 conferidas pelo Claude Code, 24 para voce
-([classificacao_pt_rl](docs/classificacao_pt_rl.md)); o complementar aceito
+leituras, 161 de 204 conferidas pelo Claude Code; o complementar aceito
 das materias do edital nao tem mais questao sem classificacao. **Proximo:** o
 roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md)).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
