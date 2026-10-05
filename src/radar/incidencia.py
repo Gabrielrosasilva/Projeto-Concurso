@@ -16,6 +16,7 @@ O complementar nao entra aqui: este mapa e so do alvo (regra inviolavel 1).
 A linha e os padroes do complementar tem funcoes proprias, mais abaixo, e
 nunca se somam aos do alvo (decisao 78).
 """
+import re
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -24,6 +25,7 @@ import yaml
 
 from radar import config
 from radar import conteudos as arvore
+from radar.regioes import normalizar
 # A frase da regra inviolavel 4 mora no origem.py, a mesma em todo lugar.
 from radar.origem import FRASE_SEM_EVIDENCIA
 
@@ -54,6 +56,19 @@ class Ocorrencia:
     #: Os outros nos que a questao tambem cobra - as classificacoes
     #: associadas (§14, item 7; decisao 86). Nunca contam na incidencia.
     associados: tuple = ()
+    #: O exemplo real da ficha mostra a questao inteira (R1, 05/10): as
+    #: alternativas como estao no caderno, {"a": "...", ...}.
+    alternativas: dict = field(default_factory=dict)
+    #: O dispositivo que a classificacao gravou ("art. 8º do Código Penal").
+    #: E por ele que a pendente e a ficha sem no chegam ao tema.
+    dispositivo: str | None = None
+    #: O no da materia que o CADERNO declara. A de 2013 que foi para um
+    #: assunto de 2019 conta noutra materia, mas o caderno diz se a materia
+    #: existia naquela prova ("—").
+    materia_do_caderno: str | None = None
+    #: A impressao do ENUNCIADO (QuestaoDeProva.impressao), por onde a
+    #: explicacao escrita (data/explicacoes.json) acha a questao.
+    impressao_do_enunciado: str = ""
 
 
 @dataclass
@@ -426,3 +441,266 @@ def _padroes_do_complementar(contam: list[Ocorrencia], minimos: Minimos) -> Padr
         pegadinhas=[o.pegadinha for o in conferidas if o.pegadinha],
         nota=nota,
     )
+
+
+# --- caiu ou nao caiu: o tema nas provas do alvo, prova a prova (R1, 05/10) -------
+#
+# A pergunta da ficha, da faixa e da aba Fichas: "este tema caiu?". Uma conta
+# so, aqui, para as tres telas e para a redistribuicao do Ciclo 1 dizerem a
+# mesma coisa. Tres fontes, nesta ordem, e nunca aproximadas:
+#
+#   1. a questao classificada num no do tema (a mesma regra do mapa);
+#   2. sem no na ficha, a questao classificada na materia cujo ARTIGO gravado
+#      (o `dispositivo` da classificacao) cai na faixa de artigos do tema
+#      ("LEP, arts. 28 a 37") - e a lei do artigo tem de ser a do tema;
+#   3. a questao PENDENTE da materia com o artigo na faixa do tema. Ela caiu,
+#      mas nao tem no onde contar (o tema esta fora do programa de 2019): vai
+#      a parte, com o aviso, e nunca entra no mapa do no.
+#
+# A anulada continua fora da conta e aparece a parte.
+
+#: A classe do tema na redistribuicao do Ciclo 1 (decisoes da R1):
+#: caiu nas provas que bastam (o minimo do config/amostra.yml) = cheio;
+#: caiu numa so = normal; nao caiu, com a materia em provas que bastam e
+#: com o tema contado = basico. Sem contagem, ou com uma prova so, o tema
+#: NAO e rebaixado: sem evidencia nao se rebaixa ninguem.
+CHEIO, NORMAL, BASICO = "cheio", "normal", "basico"
+
+#: Como o dispositivo cita a lei de cada materia, sem acento e sem caixa. So
+#: serve para a ficha chegar a questao pelo artigo; lei que nao esta aqui nao
+#: e reconhecida, e nada e contado por ela.
+LEI_DO_DISPOSITIVO = {
+    "CP": ("codigo penal",),
+    "CPP": ("codigo de processo penal",),
+    "CF": ("constituicao federal",),
+    "LEP": ("7.210", "execucao penal"),
+}
+
+#: A lei da materia, quando a ficha nao diz a sigla no elemento.
+LEI_DA_MATERIA = {
+    "Direito Penal": "CP",
+    "Direito Processual Penal": "CPP",
+    "Direito Constitucional": "CF",
+    "Lei de Execução Penal": "LEP",
+}
+
+_NUMERO = r"(\d+)\s*[ºo°]?(?:\s*-\s*([A-Z]))?"
+_FAIXA_DE_ARTIGOS = re.compile(
+    r"\b[Aa]rts?\.\s*" + _NUMERO + r"(?:\s*(?:a|até)\s*" + _NUMERO + r")?")
+_SIGLA = re.compile(r"^\s*(CPP|CP|CF|LEP)\b")
+_INICIO_DE_ARTIGO = re.compile(r"\b[Aa]rts?\.\s*")
+# Onde a lista de artigos de um dispositivo acaba: no paragrafo, na lei
+# ("da Lei", "do Código") ou no parentese.
+_FIM_DA_LISTA = re.compile(r"§|\bd[ao]s?\b|\(|;")
+_ARTIGO = re.compile(_NUMERO)
+
+
+@dataclass(frozen=True)
+class FaixaDeArtigos:
+    """"LEP, arts. 28 a 37" -> lei LEP, do (28, "") ao (37, "")."""
+
+    lei: str
+    inicio: tuple
+    fim: tuple
+
+    def contem(self, artigo: tuple) -> bool:
+        return self.inicio <= artigo <= self.fim
+
+
+def _artigo(numero: str, letra: str | None) -> tuple:
+    return (int(numero), (letra or "").upper())
+
+
+def faixa_de_artigos(texto: str | None, materia: str | None = None) -> FaixaDeArtigos | None:
+    """A faixa de artigos de um tema, pelo elemento ou pelo titulo da ficha.
+
+    A lei sai da sigla do comeco ("LEP, arts. ...") ou, sem ela, da materia
+    (LEI_DA_MATERIA). Sem faixa no texto, ou sem lei conhecida, None: o tema
+    nao chega a questao pelo artigo.
+    """
+    if not texto:
+        return None
+    achado = _FAIXA_DE_ARTIGOS.search(texto)
+    if achado is None:
+        return None
+    sigla = _SIGLA.match(texto)
+    lei = sigla.group(1) if sigla else LEI_DA_MATERIA.get(materia or "")
+    if lei not in LEI_DO_DISPOSITIVO:
+        return None
+    inicio = _artigo(achado.group(1), achado.group(2))
+    fim = _artigo(achado.group(3), achado.group(4)) if achado.group(3) else inicio
+    return FaixaDeArtigos(lei, inicio, fim)
+
+
+def artigos_do_dispositivo(dispositivo: str | None) -> list[tuple]:
+    """Os artigos que o dispositivo cita: "art. 8º do Código Penal (alternativas
+    também dos arts. 2º, 3º e 4º)" -> [(8,""), (2,""), (3,""), (4,"")]. Numero
+    de paragrafo e de inciso nao entram."""
+    artigos = []
+    for inicio in _INICIO_DE_ARTIGO.finditer(dispositivo or ""):
+        resto = dispositivo[inicio.end():]
+        fim = _FIM_DA_LISTA.search(resto)
+        trecho = resto[:fim.start()] if fim else resto
+        artigos += [_artigo(n, l) for n, l in _ARTIGO.findall(trecho)]
+    return artigos
+
+
+def no_tema_pelo_artigo(o: Ocorrencia, faixa: FaixaDeArtigos | None) -> bool:
+    """A questao cita, no dispositivo gravado, um artigo da faixa e a lei dela?"""
+    if faixa is None or not o.dispositivo:
+        return False
+    texto = normalizar(o.dispositivo)
+    if not any(marca in texto for marca in LEI_DO_DISPOSITIVO[faixa.lei]):
+        return False
+    return any(faixa.contem(a) for a in artigos_do_dispositivo(o.dispositivo))
+
+
+@dataclass(frozen=True)
+class ProvaDoAlvo:
+    """Uma prova do alvo, vista de um tema."""
+
+    ano: int | None
+    #: O caderno daquele ano tinha a materia? Sem ela, a tela escreve "—".
+    tinha_a_materia: bool
+    contadas: tuple = ()      # "2013-q7"
+    pendentes: tuple = ()
+
+    @property
+    def total(self) -> int:
+        return len(self.contadas) + len(self.pendentes)
+
+
+def _codigo_da(o: Ocorrencia) -> str:
+    return f"{o.ano}-q{o.numero}" if o.numero else str(o.ano)
+
+
+@dataclass
+class CaiuNoAlvo:
+    """O que as provas do alvo dizem de um tema, prova a prova."""
+
+    provas: list                      # [ProvaDoAlvo], do ano mais velho ao mais novo
+    contadas: list                    # [Ocorrencia] que contam (no, ou artigo)
+    pendentes: list                   # [Ocorrencia] pendentes com o artigo do tema
+    anuladas: list                    # [Ocorrencia] a parte, fora da conta
+    pelo_artigo: bool                 # as contadas sairam do artigo, e nao do no
+    sem_contagem: bool                # sem no e sem faixa de artigos: nada contado
+    minimo_provas: int = 2
+
+    @property
+    def provas_com(self) -> int:
+        return len({o.prova for o in self.contadas + self.pendentes})
+
+    @property
+    def provas_da_materia(self) -> int:
+        return sum(1 for p in self.provas if p.tinha_a_materia)
+
+    @property
+    def questoes(self) -> int:
+        return len(self.contadas) + len(self.pendentes)
+
+    @property
+    def amostra(self) -> str:
+        return amostra(self.questoes, self.provas_com)
+
+    @property
+    def caiu(self) -> bool:
+        return self.questoes > 0
+
+    @property
+    def classe(self) -> str:
+        if self.provas_com >= self.minimo_provas:
+            return CHEIO
+        if self.provas_com:
+            return NORMAL
+        if self.sem_contagem or self.provas_da_materia < self.minimo_provas:
+            return NORMAL
+        return BASICO
+
+    @property
+    def por_prova(self) -> str:
+        """"2013: — · 2019: 1": cada prova com o seu numero, nunca somadas."""
+        partes = []
+        for p in self.provas:
+            if not p.tinha_a_materia and not p.total:
+                partes.append(f"{p.ano}: —")
+            else:
+                partes.append(f"{p.ano}: {p.total}")
+        return " · ".join(partes)
+
+    @property
+    def frase(self) -> str:
+        """A frase da tela, sem previsao: o que aconteceu nas provas."""
+        if self.sem_contagem:
+            return ("O tema não tem nó na árvore nem faixa de artigos: o acervo "
+                    "não foi contado para ele.")
+        com = [p for p in self.provas if p.total]
+        if com:
+            anos = " e ".join(str(p.ano) for p in com)
+            texto = f"Caiu em {anos}: {self.amostra}"
+            if self.provas_da_materia == 1:
+                texto += ", a única prova que cobrava a matéria"
+            return texto + "."
+        tinham = [str(p.ano) for p in self.provas if p.tinha_a_materia]
+        if len(tinham) >= self.minimo_provas:
+            return (f"Não apareceu nas provas de {' e '.join(tinham)} analisadas: "
+                    f"prioridade baixa, estude o básico.")
+        if tinham:
+            return f"Não apareceu na prova de {tinham[0]}, a única que cobrava a matéria."
+        return "A matéria não estava nas provas do alvo analisadas."
+
+    @property
+    def notas(self) -> list[str]:
+        """O que a frase precisa ter ao lado para ser honesta."""
+        saida = []
+        if self.pendentes:
+            codigos = ", ".join(_codigo_da(o) for o in self.pendentes)
+            saida.append(f"{len(self.pendentes)} com classificação pendente ({codigos}): "
+                         f"o artigo gravado é do tema, mas não há nó onde contar "
+                         f"(fora do programa de 2019, ou classificação insegura).")
+        if self.pelo_artigo and self.contadas:
+            saida.append("Contadas pelo artigo gravado na classificação: a ficha não "
+                         "aponta nó da árvore.")
+        if (not self.caiu and not self.sem_contagem
+                and self.provas_da_materia < self.minimo_provas):
+            saida.append(f"Base de uma prova só, e o tema não é rebaixado: "
+                         f"{FRASE_SEM_EVIDENCIA}")
+        if self.anuladas:
+            codigos = ", ".join(_codigo_da(o) for o in self.anuladas)
+            saida.append(f"Fora da conta: anulada(s) {codigos}.")
+        return saida
+
+
+def caiu_no_alvo(ocorrencias: list[Ocorrencia], *, materia: str, dentro,
+                 tem_no: bool, faixa: FaixaDeArtigos | None = None,
+                 minimo_provas: int = 2) -> CaiuNoAlvo:
+    """O tema nas provas do alvo. `dentro(caminho)` e o escopo da ficha (os
+    nos); `tem_no` falso quando a ficha nao aponta no. `faixa` e a faixa de
+    artigos do tema, ou None."""
+    pelo_artigo = not tem_no and faixa is not None
+    if tem_no:
+        contadas = [o for o in validas(ocorrencias) if dentro(o.conteudo)]
+    elif faixa is not None:
+        contadas = [o for o in validas(ocorrencias)
+                    if o.materia == materia and no_tema_pelo_artigo(o, faixa)]
+    else:
+        contadas = []
+    pendentes = [o for o in ocorrencias
+                 if not o.anulada and o.status == "pendente" and o.materia == materia
+                 and no_tema_pelo_artigo(o, faixa)]
+    anuladas = [o for o in ocorrencias if o.anulada and (
+        (tem_no and dentro(o.conteudo))
+        or (o.materia == materia and no_tema_pelo_artigo(o, faixa)))]
+
+    provas = []
+    for prova, ano in sorted({(o.prova, o.ano) for o in ocorrencias},
+                             key=lambda p: (p[1] or 0, p[0])):
+        tinha = any(o.prova == prova and (o.materia_do_caderno or o.materia) == materia
+                    for o in ocorrencias)
+        provas.append(ProvaDoAlvo(
+            ano=ano, tinha_a_materia=tinha,
+            contadas=tuple(_codigo_da(o) for o in contadas if o.prova == prova),
+            pendentes=tuple(_codigo_da(o) for o in pendentes if o.prova == prova)))
+    return CaiuNoAlvo(provas=provas, contadas=contadas, pendentes=pendentes,
+                      anuladas=anuladas, pelo_artigo=pelo_artigo,
+                      sem_contagem=not tem_no and faixa is None,
+                      minimo_provas=minimo_provas)

@@ -801,6 +801,102 @@ def conteudos_para_treinar() -> list[tuple[str, int, int]]:
             for partes, n in sorted(quantas.items())]
 
 
+def contagem_por_no(nos) -> dict[str, int]:
+    """{no: quantas geradas valem nele e abaixo dele} - as mesmas que o
+    "Treinar com as que ja tenho" sorteia (nao rejeitada, com resposta), em
+    qualquer nivel, inclusive o elemento. E a conta que a faixa e a tela de
+    gerar mostram: o template so desenha (R6)."""
+    from radar.conteudos import SEPARADOR
+
+    nos = list(dict.fromkeys(nos))
+    if not nos:
+        return {}
+    criar_tabelas()
+    with sessao() as s:
+        conteudos = s.scalars(
+            select(QuestaoGerada.conteudo)
+            .where(QuestaoGerada.rejeitada.is_(False))
+            .where(QuestaoGerada.resposta.is_not(None))
+            .where(QuestaoGerada.conteudo.is_not(None))).all()
+    return {no: sum(1 for c in conteudos if c == no or c.startswith(no + SEPARADOR))
+            for no in nos}
+
+
+#: As faixas em que se fazem questoes de treino: e nelas que a faixa diz das
+#: geradas (R6). Diagnostico e simulado medem, e ficam de fora.
+TIPOS_COM_GERADAS = ("questoes", "revisao", "bonus")
+
+
+def _faixa_de_treino(faixa, plano) -> bool:
+    return (not getattr(faixa, "desligada", False) and faixa.tipo in TIPOS_COM_GERADAS
+            and bool(faixa.materia) and not plano.e_mista(faixa.materia))
+
+
+def das_faixas(blocos, plano=None) -> dict:
+    """{(bloco, indice): fichas.GeradasDaFaixa} das faixas de treino do dia:
+    o tema, o no, quantas geradas ha nele e os passos para gerar o que falta."""
+    from radar import cronograma as plano_de_estudo
+    from radar import fichas
+    from radar.servico import fichas as servico_fichas
+
+    plano = plano or plano_de_estudo.carregar()
+    escritas = servico_fichas.carregar()
+    do_dia = [f for bloco in blocos for f in bloco.faixas]
+    candidatas = []
+    for bloco in blocos:
+        for indice, faixa in enumerate(bloco.faixas):
+            if _faixa_de_treino(faixa, plano):
+                escrita = fichas.da_faixa_no_dia(faixa, do_dia, escritas)
+                candidatas.append(((bloco.chave, indice), faixa, escrita))
+    if not candidatas:
+        return {}
+    sem_ja = {chave: fichas.geradas_da_faixa(faixa, escrita, {})
+              for chave, faixa, escrita in candidatas}
+    ja = contagem_por_no(n.no for g in sem_ja.values() for n in g.nos)
+    return {chave: fichas.geradas_da_faixa(faixa, escrita, ja)
+            for chave, faixa, escrita in candidatas}
+
+
+def nos_do_cronograma(hoje=None, plano=None, dias_a_frente: int = 7) -> list:
+    """Os nos das faixas de treino do cronograma, do comeco do plano ate
+    `dias_a_frente` dias depois de hoje - os com zero gerada tambem (R6). Um
+    por no, com a maior cota que uma faixa pede dele e os temas que o usam."""
+    from datetime import timedelta
+
+    from radar import cronograma as plano_de_estudo
+    from radar import fichas
+    from radar.servico import cronograma as diario
+    from radar.servico import fichas as servico_fichas
+
+    hoje = hoje or diario.hoje_local()
+    plano = plano or plano_de_estudo.carregar()
+    escritas = servico_fichas.carregar()
+    limite = hoje + timedelta(days=dias_a_frente)
+    por_no: dict[str, dict] = {}
+    for dia in plano.dias:
+        if dia.data > limite:
+            continue
+        do_dia = dia.faixas()
+        for faixa in do_dia:
+            if not _faixa_de_treino(faixa, plano):
+                continue
+            g = fichas.geradas_da_faixa(
+                faixa, fichas.da_faixa_no_dia(faixa, do_dia, escritas), {})
+            for n in g.nos:
+                linha = por_no.setdefault(n.no, {"cota": 0, "temas": [], "ultimo": dia.data})
+                linha["cota"] = max(linha["cota"], n.cota)
+                linha["ultimo"] = max(linha["ultimo"], dia.data)
+                if g.tema not in linha["temas"]:
+                    linha["temas"].append(g.tema)
+    ja = contagem_por_no(por_no)
+    saida = []
+    for no, linha in por_no.items():
+        [item] = fichas.geradas_por_no(linha["cota"], [no], ja)
+        saida.append({"geradas": item, "temas": linha["temas"], "ultimo": linha["ultimo"]})
+    saida.sort(key=lambda x: (x["geradas"].geradas > 0, x["geradas"].no))
+    return saida
+
+
 def _sortear(
     quantidade: int,
     materia: str | None = None,

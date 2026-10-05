@@ -14,7 +14,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 5 | 6A — Rotina nova do Ciclo 1 e ANKI desativado | ✅ |
 | 6 | 2 — Estrutura de conteúdos | ✅ |
 | 7 | 3A — Classificação do alvo e incidência | ✅ |
-| 8 | 3B — Acervo complementar FEPESE | 🟡 169 provas aceitas (eram 122: o leitor consertado e as 21 provas baixadas em 04/10); 4 lotes classificados (o do catálogo refeito); a conferência tem tela; falta a sua conferência |
+| 8 | 3B — Acervo complementar FEPESE | 🟡 172 provas aceitas (eram 122; 169 em 04/10 e 172 com os 3 cadernos da decisão 95: o leitor consertado e as 21 provas baixadas em 04/10); 4 lotes classificados (o do catálogo refeito); a conferência tem tela; falta a sua conferência |
 | 9 | 4 — Amostra, desempenho e controle de estudo | ✅ |
 | 10 | 5 — Geração de questões | ✅ |
 | 11 | 6B — Cronograma operacional | 🟡 fichas e prioridade prontas; 65 fichas (as 4 de Português de 28/09 a 01/10 escritas em 05/10); as 61 de antes revistas pelo Claude Code em 04/10 contra a fonte (15 corrigidas: [conferencia_das_fichas](conferencia_das_fichas.md)); falta a sua conferência e o Ciclo 2, depois do simulado de 07/11 |
@@ -25,7 +25,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 16 | O ciclo 1 específico (pedido de 03/10): 2A, 2B, 2C e a seção F | ✅ 2A, 2B, 2C e a seção F inteira, F1 a F15 (decisões 67 a 86) |
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 | 18 | O lote de 04/10 (as conferências e os abertos) | ✅ as 61 fichas e as 15 leis conferidas contra a fonte (a marca de conferida continua sua), a tela de conferência do complementar e o lote do catálogo refeito, o `?cor=`, as geradas antigas, a base da média nos Macetes, e o leitor do caderno consertado com a releitura (B.7, B.9, B.10; decisões 87 a 90) |
-| 19 | Auditoria independente de 04/10 e a Rodada 1 das correções | ✅ a auditoria ([auditoria_independente](auditoria_independente.md): 186 requisitos, 8 defeitos) e a Rodada 1 (BUG-1, BUG-2, BUG-6 e BUG-8; decisão 96); as rodadas 2 a 4 estão na pendência G |
+| 19 | Auditoria independente de 04/10 e a Rodada 1 das correções | ✅ a auditoria ([auditoria_independente](auditoria_independente.md): 186 requisitos, 8 defeitos) e a Rodada 1 (BUG-1, BUG-2, BUG-6 e BUG-8; decisão 96); as rodadas 2 a 4 vieram depois (linhas 20 e 21) |
 | 20 | Rodada 2 das correções da auditoria | ✅ 2563 passed; o sinônimo de matéria nos filtros e no acerto por matéria (decisão 97) e o `radar padrao` por evidência (decisão 98) |
 | 21 | Rodadas 3 e 4 e o resto da auditoria | ✅ 2574 passed; a migração sem perder JSON (102), os simulados pela chave (103), 12 nós juntados e a recusa do parecido (99), o "praticado" (101), o ADD COLUMN (100), os menores e as 4 fichas que faltavam (65) |
 | 22 | O pedido de 05/10 (pares, geradas, reanálise, diagnósticos, nuvem) | ✅ 2576 passed; 3 pares juntados, 2 geradas rejeitadas, 176 de 215 classificações do complementar conferidas pela reanálise às cegas (104), os diagnósticos em 10/10 e o R+7 com todos os erros em 17/10 (105), o levantamento do que falta classificar e o [roteiro da nuvem](roteiro_nuvem.md) |
@@ -2968,3 +2968,220 @@ respondida não volta; a tela diz quantas no radar e no Qconcursos.
 com "Começar pelas 3 do radar" e a noite toda no Qconcursos; 06/10,
 Concordância verbal 1 com 6 de manhã e 7 + 3 no Qconcursos à noite; 13/10,
 Crase 2 com 1 no radar.
+
+## 25 — Revisão final do estudo: Fase 1 e R1 (05/10/2026)
+
+**Fase 1 (só leitura):** a análise e o plano, aprovados com as 16 respostas
+recomendadas. Ordem combinada: R1 → R6 → R3 → R2 → R4 → R5 → R7. Commit e
+push **só no fim da R7, com a autorização do usuário**.
+
+**R1 — "caiu ou não caiu", exemplos reais, macetes e a aba por dia ✅**
+
+- `src/radar/incidencia.py`: a `Ocorrencia` ganha `alternativas`,
+  `dispositivo`, `materia_do_caderno` e `impressao_do_enunciado`; novos
+  `faixa_de_artigos`, `artigos_do_dispositivo`, `no_tema_pelo_artigo`,
+  `CaiuNoAlvo` e `caiu_no_alvo` (decisão 108).
+- `src/radar/servico/incidencia.py`: preenche os campos novos (alvo e
+  complementar).
+- `src/radar/fichas.py`: `QuestaoReal` inteira (alternativas, explicação,
+  aviso de lei, como chegou), `Contexto` com explicações, macetes e o mínimo
+  de provas, `caiu_do_tema`, `faixa_do_tema`, os exemplos e os macetes na
+  `FichaDeEstudo`, `da_faixa_no_dia` (a lei seca, decisão 110).
+- `src/radar/servico/fichas.py`: o contexto lê explicações, macetes e leis;
+  `caiu_das_faixas`; `do_dia` (a aba por bloco) e o "caiu" na lista do ciclo.
+- `src/radar/web/app.py`, `templates/fichas.html` (o dia por bloco; a lista
+  em `?ver=todas`), `templates/ficha.html` ("Caiu ou não caiu", a questão
+  inteira, os macetes), `templates/hoje.html` (a linha na faixa) e
+  `src/radar/cli.py` (a ficha no terminal e o 📋 na lei seca).
+
+**Testes novos:** 8 em `test_incidencia.py` (a faixa de artigos, o
+dispositivo, cheio, pendente pelo artigo, básico, uma prova só, sem nó pelo
+artigo, sem contagem) e 5 em `test_fichas.py` (a questão inteira e o macete
+pela questão, a lei seca, o dia por bloco, a tela da aba, a linha da Hoje);
+ajustado o da lista do ciclo (`?ver=todas`) e o título da seção de questões.
+
+| Rodada | Resultado |
+|---|---|
+| `test_incidencia`, `test_fichas` | 95 passed |
+| `test_tela_hoje`, `test_varredura_das_telas`, `test_aceite`, `test_cli`, `test_design`, `test_telas_no_design_system`, `test_onde_na_arvore`, `test_origem`, `test_faixas_do_dia`, `test_plano_b`, `test_blocos_dobraveis`, `test_central_de_macetes`, `test_leis`, `test_complementar`, `test_prioridade` | 361 passed (1 falha corrigida: o título "Questões reais relacionadas" do aceite) |
+| `test_composicao`, `test_sabado`, `test_estudo`, `test_faixa_no_radar`, `test_home`, `test_treinar_pelo_no`, `test_desempenho`, `test_onde_estudar`, `test_associados` | 179 passed |
+| Suíte inteira | fica para o fim da R7 (combinado) |
+
+**Critério, com o dado real (`radar fichas --tema`, a tela):**
+- caiu nas duas — *Afirmação histórica e dimensões*: "Caiu em 2013 e 2019:
+  5 questões · 2 provas" (2013: 4 · 2019: 1);
+- caiu em uma — *Vozes do verbo*: "Caiu em 2013: 1 questão · 1 prova"
+  (2013: 1 · 2019: 0), exemplo 2013-q7 inteiro e o macete que o cita;
+- não caiu — *Fato típico e nexo causal (art. 13)*: "Não apareceu nas
+  provas de 2013 e 2019 analisadas: prioridade baixa, estude o básico."
+  (2013: 0 · 2019: 0);
+- pendente — *Aplicação da lei penal*: "Caiu em 2013 e 2019: 4 questões ·
+  2 provas", as 4 pendentes à parte, com a questão inteira;
+- a aba de 05/10: Manhã (art. 13 com Teoria · Fixação · Lei seca; Vozes do
+  verbo), Noite (R+7 da Aplicação; art. 13 Aprendizagem; Vozes do verbo) e
+  Depois das 22h (o bônus, "Ficha ainda não escrita").
+
+**O que fica para as próximas:** a explicação escrita das questões reais do
+alvo (a seção mostra "Explicação ainda não escrita") é gerada junto com os
+resumos, na R2, pelo mesmo fluxo de pedido e importação.
+
+**R6 — as questões da faixa ✅**
+
+- `src/radar/fichas.py`: `comando_de_gerar` com o `.venv\Scripts\radar.exe`
+  (e as constantes dos passos 2 e 3 e do aviso); `GeradasDoNo`,
+  `geradas_por_no` (a divisão e o mínimo de 5), `GeradasDaFaixa` e
+  `geradas_da_faixa` (decisões 113 e 114).
+- `src/radar/servico/geradas.py`: `contagem_por_no`, `das_faixas` e
+  `nos_do_cronograma` (decisões 112 e 115).
+- `src/radar/web/app.py` (o contexto da Hoje e da Gerar, e os textos dos
+  passos como globais), `templates/hoje.html` (o bloco na faixa),
+  `templates/geradas.html` ("Os assuntos do cronograma"),
+  `templates/ficha.html` (os passos 2 e 3 junto do comando) e
+  `src/radar/cli.py` (o `radar hoje` diz o nó e os passos; o `gerar
+  --pedido` escreve o importar com o mesmo texto).
+
+**Testes:** novo `tests/test_geradas_da_faixa.py` (12): zero gerada com os 3
+passos e o N certo; o mínimo de 5; gerada suficiente só com o botão; vários
+nós divididos; título diferente do nó; ficha sem nó sem comando; sem ficha
+pelos `nos` ou pelo `conteudo`; o `--elemento` só no elemento; nenhum
+`--valendo`; a contagem por nó até o elemento; a tela Hoje (o nó, os
+passos, "sem nó na árvore"); a tela de gerar com o nó de zero. Ajustado o
+`test_o_comando_de_gerar_e_um_por_no_e_em_modo_treino` (o `radar.exe`).
+
+| Rodada | Resultado |
+|---|---|
+| `test_geradas_da_faixa` | 12 passed |
+| `test_fichas`, `test_tela_hoje`, `test_varredura_das_telas`, `test_aceite`, `test_cli`, `test_geracao_por_conteudo`, `test_treinar_pelo_no`, `test_ia_manual`, `test_gerador`, `test_web`, `test_design`, `test_telas_no_design_system`, `test_faixa_no_radar`, `test_faixas_do_dia`, `test_plano_b`, `test_cronometro`, `test_blocos_dobraveis` | 470 passed + 1 ajustado (o texto do comando) |
+| `test_ia_manual`, `test_cli`, `test_geracao_por_conteudo` (depois do texto do importar) | 87 passed |
+
+**Rodado de verdade:** `radar hoje --data 2026-10-05` (a fixação do art. 13
+diz "na árvore: Direito Penal > Infração penal: elementos, espécies" e os 3
+passos com `--quantas 8`; a aprendizagem, `--quantas 15` no nível 1); a tela
+Hoje e a de Gerar no banco real; e o passo 1 copiado da tela, no PowerShell:
+`data/pedido_ia.json` com 3 pedidos (3 + 3 + 2) do escopo "Direito Penal >
+Infração penal: elementos, espécies", modo treino, nada gasto. O pedido não
+foi respondido nem importado (é com você); o `pedido_ia.json` anterior está
+copiado no scratchpad da sessão.
+
+**R3 — as correções das fichas ✅**
+
+- `data/fichas.json`: 14 trechos em 7 fichas (Aplicação da lei penal,
+  Execução da pena, Teoria geral, Regras de Mandela 1 e 2, Vozes do verbo,
+  Crase 1); a pegadinha da regra 40 que contradizia o CNJ saiu. Cópia antes em
+  `data/copias/fichas-antes-da-r3-2026-10-05/fichas.json`; 65 fichas antes e
+  depois, só as 7 mudaram; a procedência de cada uma ganhou a correção, com o
+  modelo (decisões 116 e 117).
+- `docs/conferencia_das_fichas.md`: a segunda leitura de 05/10 (as 10
+  fichas, frase por frase) e o antes × depois.
+
+| Rodada | Resultado |
+|---|---|
+| `test_fichas`, `test_aceite`, `test_leis` (as fichas reais passam de novo pela conferência contra a árvore real) | 113 passed |
+
+**R2 — o resumo de cada tema e as explicações ✅**
+
+- `src/radar/fichas.py`: o campo `resumo` na `FichaEscrita` (fora do JSON
+  quando vazio), `PARTES_DO_RESUMO`, `conferir_resumo`, `codigo_citavel` e o
+  prefixo `FEPESE-`.
+- `src/radar/servico/fichas.py`: `codigos_do_tema`, `exigencias_do_resumo`,
+  `importar_resumos`, `conferir_resumo`, `verificar_resumos`, e a tela:
+  `ResumoNaTela`, `ResumosDoDia`, `resumos_do_dia` (o que cada faixa abre) e
+  os resumos do dia na aba Fichas.
+- `src/radar/servico/manual.py`: `INSTRUCAO_RESUMO`, o lote "resumos"
+  (`pedido_de_resumos`, `como_responder`, formato, importação),
+  `procedencia` com o modelo declarado, `INSTRUCAO_EXPLICACAO_DO_TEMA`,
+  `pedido_de_explicacoes_dos_temas` e o "§ N" no `CITA_ARTIGO`.
+- `src/radar/cli.py`: `radar fichas --pedido --resumos [--id ...]`,
+  `--pedido --explicacoes`, `--conferir-resumo`, `--verificar-resumos`.
+- `src/radar/web/`: `templates/_resumo.html` (o botão e as janelas),
+  `hoje.html`, `fichas.html`, `ficha.html` (o resumo inteiro e "Conferi este
+  resumo"), `app.py` (o contexto e `POST /fichas/{id}/resumo/conferir`),
+  `static/design.css` (`.ds-janela`).
+- `data/fichas.json`: os 65 temas do Ciclo 1 com resumo (7 lotes; cópia
+  antes em `data/copias/fichas-antes-da-r2-2026-10-05/`); `data/explicacoes.json`:
+  6 → 70 (64 novas; cópia antes na mesma pasta).
+
+**Testes:** novo `tests/test_resumo.py` (24): o resumo certo; 9 recusas; a
+frase de evidência insuficiente e o básico; Português sem artigo; o "§" e a
+"regra N" como dispositivo; a procedência com o modelo; a importação, a
+conferência e o lote pelo manual; o que cada faixa abre (lei seca, pausa,
+correção, sem ficha) e a revisão semanal; a janela só com CSS e a Noite em
+"como cobra"; a ficha que confere; o pedido de resumo e o de explicação; a
+fonte por parágrafo.
+
+| Rodada | Resultado |
+|---|---|
+| `test_resumo` | 24 passed |
+| os vizinhos (`test_fichas`, `test_tela_hoje`, `test_varredura_das_telas`, `test_aceite`, `test_cli`, `test_design`, `test_telas_no_design_system`, `test_ia_manual`, `test_geradas_da_faixa`, `test_blocos_dobraveis`, `test_cronometro`, `test_faixas_do_dia`, `test_plano_b`, `test_sabado`, `test_composicao`, `test_classificacao`, `test_central_de_macetes`) | 402 passed |
+| depois das explicações (`test_fichas`, `test_aceite`, `test_relatorio`, `test_simulado`, `test_varredura_das_telas`, `test_tela_hoje`) | 170 passed |
+
+**Critério:** os resumos do art. 13 e de Vozes do verbo abrem pelo botão na
+Hoje de 05/10, de manhã e à noite (à noite, em "como a banca cobra"); o 10/10
+tem três faixas que abrem a lista; os 65 resumos dizem "Claude Code
+(claude-opus-5-5), importado manualmente, em 05/10/2026", e o
+`radar fichas --verificar-resumos` não acha problema em nenhum.
+
+**R4 — a redistribuição do Ciclo 1 ✅**
+
+- `src/radar/cronograma.py`: as chaves `teto` e `sobra_da_rampa` na faixa
+  (lidas, conferidas no carregamento e aplicadas no `montar_dia`).
+- `src/radar/fichas.py`: o prefixo "Extra: " no `PREFIXOS_DO_TEMA`.
+- `config/cronograma.yml`: os 7 dias (cópia antes em
+  `data/copias/cronograma-antes-da-r4-2026-10-05/`), por um script de uma vez
+  só (no scratchpad da sessão) que edita o texto faixa por faixa, sem perder
+  os comentários, e confere a cópia antes de gravar.
+- `tests/fixtures/cronograma_antes_da_r4.json`: a fotografia de antes.
+
+**Testes:** novo `tests/test_redistribuicao.py` (10): o teto e a sobra
+dividem a rampa sem mudar o total (teto 10 e 14, níveis 1 a 4); a sobra sem
+faixa com teto é recusada; o prefixo Extra; e, no arquivo real, os dias até
+05/10 idênticos (hash), nenhum título nem data de tema mudou, os minutos de
+cada dia não aumentaram (níveis 1 a 6), R+7 e R+30 apontam o tema da
+origem, a Extra é de tema da mesma matéria estudado antes, e a faixa
+redistribuída tem o botão do resumo. Ajustados, com o motivo escrito: o
+total de questões do plano (2119 → 2133) em `test_cronograma` e a manhã e a
+lei seca dos dias redistribuídos em `test_rotina_sem_anki`.
+
+| Rodada | Resultado |
+|---|---|
+| os que leem o cronograma real (`test_cronograma`, `test_composicao`, `test_sabado`, `test_faixas_do_dia`, `test_tela_hoje`, `test_estudo`, `test_fichas`, `test_rotina_sem_anki`, `test_plano_b`, `test_conferencia_dos_dias`, `test_onde_na_arvore`, `test_faixa_no_radar`, `test_geradas_da_faixa`, `test_resumo`, `test_semanas`, `test_espacada`) | 447 passed + 3 ajustados |
+| `test_cronograma`, `test_rotina_sem_anki`, `test_redistribuicao` | 96 passed |
+
+**Rodado de verdade:** `radar hoje --data` em 20/10 (a Extra de 12 de manhã;
+a aprendizagem 14 + a Extra 11 = 25 no nível 4), 07/10 (Português 8 + Extra
+2 = 10 no nível 1) e 12/10 (o R+7 do art. 13 com 6 e a Extra de 4).
+
+**R5 — o saldo do estoque ✅**
+
+- `docs/estoque_de_geradas.md`: a seção "O saldo de 05/10, com o plano
+  redistribuído", com o quadro por nó (86 nós: geradas válidas, a maior cota
+  de uma faixa, quantas faixas, falta e sobra).
+- Nada foi gerado: `data/questoes_geradas.json` com o mesmo md5 antes e
+  depois (`71dfd734...`), sem linha perdida (decisão 125).
+
+Sem código novo: o quadro sai do `servico.geradas.das_faixas` da R6.
+
+**R7 — documentação e pendências ✅**
+
+- `docs/indice.md` (novo): para que serve cada documento e qual ler primeiro.
+- As incoerências da Fase 1, corrigidas: `README.md` (o estado, a lista dos
+  docs pelo índice, os diagnósticos em 10/10 e o R+7 de 40, os comandos novos
+  das fichas e do Windows, a árvore do código com os módulos que faltavam),
+  `CLAUDE.md` (o "Estado atual" mais curto e com os números de hoje; a nuvem
+  com login como decisão 126), `docs/pendencias.md` (os itens resolvidos que
+  continuavam abertos, os números, e a seção H como a lista única),
+  `docs/decisoes.md` (a 126 e a nota na 47), `progresso.md` (172 provas, as
+  rodadas), `auditoria_final.md` (o item 18), `conferencia_das_fichas.md`,
+  `estoque_de_geradas.md`, `especificacao.md` e `roteiro.md`.
+- Os pequenos consertos: `data/questoes_geradas.json` com a 10ª rejeitada
+  (775 linhas, 10 rejeitadas, exportado do banco) e `data/macetes.json` com
+  "Direito Processual Penal" nos 2 de 2013 (cópias antes em
+  `data/copias/r7-2026-10-05/`).
+
+**A suíte inteira (uma vez, no fim da série, como combinado):** 2.640 passed e
+1 failed em 35 min 20 s; os `data/*.json` e `config/*.yml` com o mesmo md5
+antes e depois. A falha: `test_a_frase_padrao_mora_num_arquivo_so` - a
+instrução do resumo (`manual.INSTRUCAO_RESUMO`) copiava a frase de evidência
+insuficiente, que só pode morar no `origem.py`. Consertado (a instrução usa a
+constante) e rodados de novo `test_origem`, `test_resumo` e `test_ia_manual`:
+87 passed.

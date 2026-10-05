@@ -19626,7 +19626,7 @@
     "modo_do_pedido": "treino",
     "origem_chave": null,
     "origem_impressao": null,
-    "rejeitada": false,
+    "rejeitada": true,
     "resposta": "c"
   },
   {

@@ -192,7 +192,10 @@ def test_arquivo_real_total_de_questoes(real):
     # de 02/10 (8 de fixacao + 6 de Portugues): 1690 + 26 x 14 = 2054. Os
     # diagnosticos em 10/10 e o R+7 deles em 17/10 (decisao 105): -5 do R+7
     # e -10 de contagem em 10/10, +20 +20 dos diagnosticos, +40 do R+7.
-    assert total == 2119
+    # A redistribuicao da R4 (decisao 124): a teoria e a lei seca que sairam
+    # dos temas que nao cairam viraram questoes de revisao - +2 em 07, 13 e
+    # 21/10 e +8 em 20/10. Os minutos do dia nao mudaram. 2119 + 14 = 2133.
+    assert total == 2133
 
 
 def test_arquivo_real_horarios_conferidos(real):

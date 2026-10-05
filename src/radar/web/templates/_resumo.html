@@ -1,0 +1,73 @@
+{# O resumo do tema (R2): o botao da faixa e a janela por cima da pagina, so
+   com HTML e CSS (.ds-janela, no design.css). A parte 1 - caiu ou nao caiu -
+   e calculada na hora (🔵); as outras sao texto de IA (🟣), cada frase com o
+   que a sustenta. A conta e a escolha dos temas moram no servico. #}
+{% from "_componentes.html" import selo %}
+
+{# O botao: um tema abre o resumo dele (na Noite, ja em "como a banca
+   cobra"); varios temas abrem a lista. #}
+{% macro botao(itens, chave, indice, noite=False, classe='botao-anotar botao-resumo') -%}
+  {%- if itens | length == 1 -%}
+    {%- set r = itens[0] -%}
+    <a class="{{ classe }}" href="#{{ r.id }}{% if noite and r.escrito %}-cobra{% endif %}"><span aria-hidden="true">📝</span> Resumo</a>
+  {%- elif itens -%}
+    <a class="{{ classe }}" href="#lista-{{ chave }}-{{ indice }}"><span aria-hidden="true">📝</span> Resumos ({{ itens | length }})</a>
+  {%- endif -%}
+{%- endmacro %}
+
+{# Uma janela por tema, e uma por faixa de varios temas (a lista). #}
+{% macro janelas(resumos, volta='#fechado') %}
+  {% for r in resumos.temas.values() %}
+    <div class="ds-janela" id="{{ r.id }}" role="dialog" aria-label="Resumo: {{ r.tema }}">
+      <div class="ds-janela__caixa">
+        <div class="ds-janela__topo">
+          <h2>📝 {{ r.tema }}</h2>
+          <a class="ds-link-acao" href="{{ volta }}">Fechar ✕</a>
+        </div>
+        <p class="ds-suave">{{ r.materia }}</p>
+        {% if not r.tem_ficha %}
+          <p class="ds-vazio">Resumo ainda não escrito para este tema.</p>
+        {% else %}
+          <h3>1. Caiu ou não caiu</h3>
+          <p>{{ selo('acervo', curto=True) }} <b>Polícia Penal SC (2013 e 2019):</b> {{ r.caiu.frase }}
+            {% if not r.caiu.sem_contagem %}<span class="ds-janela__fontes">prova a prova: {{ r.caiu.por_prova }}</span>{% endif %}</p>
+          {% for n in r.caiu.notas %}<p class="ds-suave">{{ n }}</p>{% endfor %}
+          <p>{{ selo('acervo', curto=True) }} <b>Outras provas FEPESE (complementar aceito):</b>
+            {% if r.complementar %}{{ r.complementar | replace('Acervo complementar FEPESE: ', '') }}{% else %}o tema não tem nó: não contado{% endif %}</p>
+          {% if r.escrito %}
+            {% for chave, nome, frases in r.partes %}
+              <section id="{{ r.id }}-{{ 'cobra' if chave == 'como_cobra' else chave }}">
+                <h3>{{ loop.index + 1 }}. {{ nome }} {{ selo('ia', curto=True) }}</h3>
+                <ul>
+                  {% for f in frases %}
+                    <li>{{ f.texto }}<span class="ds-janela__fontes">Fonte: {{ f.fontes | join('; ') }}</span></li>
+                  {% endfor %}
+                </ul>
+              </section>
+            {% endfor %}
+            <p class="ds-janela__fontes">{{ selo('ia', curto=True) }} Texto escrito por {{ r.procedencia }}.
+              {% if r.conferido %}Conferido por você em {{ r.conferido }}.{% else %}Ainda não conferido por você.{% endif %}</p>
+          {% else %}
+            <p class="ds-vazio">Resumo ainda não escrito para este tema.</p>
+          {% endif %}
+          <p><a class="ds-link-acao" href="/fichas/{{ r.ficha_id }}">Ficha completa</a></p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  {% for (chave, indice), ids in resumos.por_faixa.items() if ids | length > 1 %}
+    <div class="ds-janela" id="lista-{{ chave }}-{{ indice }}" role="dialog" aria-label="Resumos da faixa">
+      <div class="ds-janela__caixa">
+        <div class="ds-janela__topo">
+          <h2>📝 Os temas desta faixa</h2>
+          <a class="ds-link-acao" href="{{ volta }}">Fechar ✕</a>
+        </div>
+        <ul>
+          {% for i in ids %}{% set r = resumos.temas[i] %}
+            <li><a href="#{{ r.id }}">{{ r.tema }}</a> <span class="ds-suave">· {{ r.materia }}{% if not r.escrito %} · resumo ainda não escrito{% endif %}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+{% endmacro %}

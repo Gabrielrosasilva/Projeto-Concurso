@@ -117,6 +117,12 @@
     .faixa .na-arvore{margin:var(--esp-1) 0 0;font-size:var(--tam-sm)}
     .faixa .na-arvore p{margin:2px 0}
     .faixa .na-arvore .sub{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .faixa .caiu-na-faixa{margin:var(--esp-1) 0 0;font-size:var(--tam-sm)}
+    .faixa .caiu-na-faixa .sub{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .faixa .geradas-da-faixa code{overflow-wrap:anywhere;font-size:var(--tam-xs)}
+    .faixa .geradas-da-faixa .passos-de-gerar{margin:var(--esp-1) 0 0;padding-left:var(--esp-5)}
+    .faixa .geradas-da-faixa .treinar-no-radar{display:flex;flex-wrap:wrap;gap:var(--esp-2);
+      align-items:center;margin:var(--esp-1) 0 0}
 
     /* A composicao da faixa que mede (decisao 67): de quais assuntos e
        subassuntos sao as questoes, e de onde saiu cada numero. */
@@ -431,6 +437,7 @@
 
 {% from "_topo.html" import barra, abas_de_hoje with context %}
 {% from "_componentes.html" import selo %}
+{% import "_resumo.html" as resumo_ui %}
 {{ barra('hoje') }}
 
 {%- macro link_do_dia(d) -%}
@@ -933,6 +940,11 @@
                     {% if onde.sem_no %}<p class="sub">A ficha não aponta nó da árvore: o assunto é o que ela escreveu.</p>{% endif %}
                   </div>
                 {% endif %}
+                {# Caiu ou nao caiu (R1): a mesma conta da ficha, prova a prova. #}
+                {% set caiu = caiu_das_faixas.get((b.chave, loop.index0)) if caiu_das_faixas else none %}
+                {% if caiu %}
+                  <p class="caiu-na-faixa">{{ selo('acervo', curto=True) }} {{ caiu.frase }}{% if not caiu.sem_contagem %} <span class="sub">({{ caiu.por_prova }})</span>{% endif %}</p>
+                {% endif %}
 
                 {% if f.origem %}<p class="detalhe ds-suave">volta do dia {{ f.origem | dia_mes }}</p>{% endif %}
 
@@ -962,6 +974,10 @@
                   <p class="links"><a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if cor %}&amp;cor={{ cor }}{% endif %}">
                     <span aria-hidden="true">📋</span> Ficha de estudo</a></p>
                 {% endif %}
+                {# O resumo do tema (R2): toda faixa ligada a materia, menos a
+                   pausa; a de varios temas abre a lista. Janela so com CSS. #}
+                {% set res = resumos.da_faixa(b.chave, loop.index0) if resumos else [] %}
+                {% if res %}<p class="links">{{ resumo_ui.botao(res, b.chave, loop.index0, b.chave == 'noite') }}</p>{% endif %}
 
                 {# A faixa que MEDE (diagnostico e simulado no radar): so
                    questao real da FEPESE, na composicao da decisao 67, e o
@@ -1073,6 +1089,45 @@
                       <p class="sub">O radar não tem questão da FEPESE classificada neste tema: tudo no Qconcursos.</p>
                     {% endif %}
                     {% if nr.do_radar %}<p class="regra">As do radar contam sozinhas no seu desempenho e na revisão 1-7-30: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>{% endif %}
+                  </div>
+                {% endif %}
+
+                {# As geradas da faixa (R6): primeiro as reais no Qconcursos, que
+                   medem; depois, se eu quiser, as geradas do radar, que so
+                   treinam. A contagem e o comando vem do servico; aqui so se
+                   desenha. Nada de --valendo nem do botao da API. #}
+                {% set gf = geradas_das_faixas.get((b.chave, loop.index0)) if geradas_das_faixas else none %}
+                {% if gf %}
+                  <div class="composicao geradas-da-faixa">
+                    <p>Você estudou: <b>{{ gf.tema }}</b>; na árvore:
+                      {% if gf.sem_no %}<b>sem nó na árvore</b>{% else %}{% for n in gf.nos %}<b>{{ n.no }}</b>{% if not loop.last %}; {% endif %}{% endfor %}{% endif %}</p>
+                    <p><b>1º No Qconcursos</b> (são as que medem):
+                      {% if gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
+                    <p><b>2º Se quiser mais, no radar</b> {{ selo('ia', curto=True) }} (só treinam; o acerto é um segundo número, nunca somado ao da faixa).</p>
+                    {% if gf.sem_no %}
+                      <p class="sub">Não há como gerar questão deste tema: a árvore não tem nó para ele (pendência).</p>
+                    {% else %}
+                      {% for n in gf.nos %}
+                        {% if n.geradas %}
+                          <form class="treinar-no-radar" method="post" action="/geradas/treinar">
+                            <input type="hidden" name="conteudo" value="{{ n.no }}">
+                            <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
+                            <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}</span>
+                            <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar no radar</button>
+                          </form>
+                        {% else %}
+                          <p class="sub">Não há questão gerada deste assunto ainda{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}.</p>
+                        {% endif %}
+                      {% endfor %}
+                      {% if gf.precisa_gerar %}
+                        <ol class="passos-de-gerar">
+                          <li>No terminal:{% for n in gf.nos if n.comando %}<br><code>{{ n.comando }}</code>{% endfor %}</li>
+                          <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
+                          <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
+                        </ol>
+                        <p class="regra">{{ AVISO_DO_PEDIDO }}{% if gf.nos | selectattr('comando') | list | length > 1 %} Aqui são vários nós: um pedido de cada vez, cada um com os 3 passos.{% endif %}</p>
+                      {% endif %}
+                    {% endif %}
                   </div>
                 {% endif %}
 
@@ -1398,6 +1453,10 @@
 
   </main>
 </div>
+
+{# As janelas do resumo (R2): fora dos blocos que dobram, escondidas ate o
+   link do botao apontar para elas. So HTML e CSS. #}
+{% if resumos %}{{ resumo_ui.janelas(resumos) }}{% endif %}
 
 {# O aviso de fim de faixa. Escondido; so o cronometro.js mostra. #}
 <div class="aviso-cheio" id="aviso-cheio" hidden role="alertdialog" aria-modal="true" aria-labelledby="aviso-titulo">

@@ -17,7 +17,8 @@ nesta pasta. Curto de proposito. O que nao cabe aqui:
 ## O que e
 
 Sistema **pessoal** (um unico usuario) para acompanhar concursos publicos que
-valem a pena para mim. Nao e produto, nao tem login, nao vai para producao.
+valem a pena para mim. Nao e produto, nao tem login, nao vai para producao
+(a nuvem com login e dois perfis esta so planejada: decisao 126).
 Prioridade: funcionar e ser facil de manter sozinho.
 
 ## Quem mantem
@@ -151,40 +152,40 @@ conceitos associados na Analises > Conferencia; e o leitor entende o
 texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
-provas complementares aceitas); 775 geradas (7 rejeitadas); banco na versao 5.
-**Falta, de voce:** conferir as 65 fichas (a conferida tambem liga as faixas
-do tema ao Meu desempenho, decisao 81), as 46 classificacoes abertas do
-complementar e as 29 pendentes (decisoes 104 e 106: o resto ficou conferido
-pela segunda leitura as cegas; lista unica em [conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
-associados (o mesmo lugar, "so com associado por conferir") e os 15 itens da
-lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
+provas complementares aceitas); 775 geradas (10 rejeitadas); arvore com 429
+nos; banco na versao 5.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
-186 requisitos, resposta PARCIALMENTE, 8 defeitos. A Rodada 1 consertou 4
-(decisao 96): o teste que pararia o Actions em 01/11, a importacao de geradas
-que aceitava no inventado e o elemento vizinho, e o traceback do modo revisao.
-A Rodada 2 (decisoes 97 e 98): o sinonimo de materia vale em todo filtro e no
-acerto por materia, e o `radar padrao` mostra um bloco por evidencia. As
-Rodadas 3 e 4 e o resto (05/10, decisoes 99 a 103): migrar banco antigo nao
-regrava o JSON com mais linhas, o simulado volta pela chave, 12 nos
-duplicados juntados (`radar conteudos --juntar`) e a classificacao recusa o
-subassunto parecido, o modo revisao diz quantos nos sao so praticados, os
-menores e as 4 fichas de Portugues de 28/09 a 01/10. Os 8 defeitos sairam;
-sobra a 2013-q53, na pendencia G. **Depois (05/10, decisoes 104 e 105):** os
-3 pares juntados, as 2 geradas erradas rejeitadas, a reanalise do
-complementar e os diagnosticos de 03/10 (nao feitos) passados para 10/10, com
-o R+7 deles refazendo todos os erros em 17/10 e a comparacao de 07/11 contra
-10/10. E Portugues e Raciocinio Logico classificados (decisao 106): duas
-leituras, 161 de 204 conferidas pelo Claude Code; o complementar aceito
-das materias do edital nao tem mais questao sem classificacao. E a faixa de
-Portugues comeca pelas questoes reais do tema que o radar tem, e termina no
-Qconcursos (decisao 107: o acervo nao tem questao para o dia inteiro).
-**Proximo:** o roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md)).
+186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
+a 103); sobra a 2013-q53, so com voce (pendencia G). **O pedido de 05/10**
+(decisoes 104 a 107): a reanalise as cegas do complementar, os diagnosticos
+passados para 10/10 (R+7 de todos os erros em 17/10; a comparacao de 07/11
+contra 10/10), Portugues e Raciocinio classificados, e a faixa de Portugues
+que comeca pelas questoes do radar.
+**A revisao final do estudo (05/10, decisoes 108 a 126):** o "caiu ou nao
+caiu" de cada tema, prova a prova, com as pendentes e o artigo gravado; a
+questao real inteira, a explicacao e os macetes na ficha; a aba Fichas por
+dia; a faixa de questoes que diz o no, manda ao Qconcursos e da os 3 passos
+para gerar (pelo `.venv\Scripts\radar.exe`); 14 trechos de 7 fichas
+corrigidos (Mandela pela letra do CNJ); o RESUMO dos 65 temas no botao de toda
+faixa (janela so com CSS) e 64 explicacoes das questoes reais do alvo; o
+Ciclo 1 redistribuido pela classe de cada tema em 7 dias (minutos iguais); o
+saldo do estoque de geradas (sob demanda); e os docs com o
+[indice](docs/indice.md). A procedencia de texto de IA novo diz o modelo.
+**Falta, de voce:** conferir as 65 fichas e os 65 resumos (a ficha conferida
+tambem liga as faixas do tema ao Meu desempenho, decisao 81); as
+classificacoes abertas e pendentes do complementar (lista unica em
+[conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
+associados e os itens da lista de leis; os pontos da pendencia H (gabaritos a
+olhar, faixas sem no); e o **Ciclo 2**, depois do simulado de 07/11 e antes de
+09/11, ja com as fichas, os resumos e as explicacoes dos temas novos
+(decisao 123).
+**Proximo:** o roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
-**Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos
-diagnosticos refaz 5 erros), os temas sem no e o Portugues sem filtro do
-Qconcursos, e o resto dos achados da varredura de 03/10 (pendencia F). Ordem
-e detalhe em
+**Em aberto:** a falta do estoque de geradas (sob demanda), as faixas sem no
+na arvore, o Portugues sem filtro do Qconcursos, o texto local das leis (o
+verificador ainda nao confere se o artigo citado existe) e o resto dos
+achados da varredura de 03/10 (pendencia F). Ordem e detalhe em
 [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
 banco em `data/radar.db`.
 
@@ -197,7 +198,12 @@ tela nenhuma refaz a conta, e template nenhum soma. **Todo minimo de amostra sai
 `config/amostra.yml`**, pelo `radar/amostra.py`: nenhuma tela tem regua propria.
 A unica excecao e o 3 do `servico/erros.py` (fatia de motivo de erro, nao
 acerto); a evolucao da home, a tendencia de letra no gabarito e o "base
-pequena" vieram para o arquivo em 04/10 (decisao 83). **A prioridade de um
+pequena" vieram para o arquivo em 04/10 (decisao 83). **Se um tema caiu nas provas do
+alvo sai do `incidencia.caiu_no_alvo`** (decisao 108), por `fichas.caiu_do_tema`:
+ficha, faixa, aba e redistribuicao nao refazem a conta. **O resumo do tema
+mora na ficha** (`resumo`), cada frase com a fonte, conferido pelo
+`fichas.conferir_resumo` na importacao e no `--verificar-resumos`; a parte
+"caiu ou nao caiu" e calculada na hora, nunca gravada. **A prioridade de um
 tema sai do `config/prioridade.yml`**,
 pelo `radar/prioridade.py`, e a ficha de estudo do `radar/fichas.py`: o tema e
 reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em

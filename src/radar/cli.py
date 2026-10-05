@@ -1138,10 +1138,12 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
     )
     _mostrar_o_escopo(lote)
     console.print(f"[dim]Lote {lote['lote']}. Nada foi gasto.[/]")
+    # O mesmo texto da faixa, da ficha e da tela de gerar (R6).
     console.print(
         "Responda pelo Claude Code: peça para ele ler o arquivo e seguir o "
         "campo [bold]como_responder[/]. Depois:\n"
-        "  [bold]radar gerar --importar data/resposta_ia.json[/]"
+        f"  [bold]{escape(fichas_puras.COMANDO_DE_IMPORTAR)}[/]",
+        soft_wrap=True,
     )
     console.print(
         "[dim]Um pedido novo substitui o anterior: resposta de lote velho é "
@@ -1163,7 +1165,8 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
     o_que = {"macetes": "macete(s)", "explicacoes": "explicação(ões)",
              "classificacao": "classificação(ões)",
              "associados": "conceito(s) associado(s)",
-             "fichas": "ficha(s)"}.get(resultado["tipo"], "questão(ões)")
+             "fichas": "ficha(s)", "resumos": "resumo(s)"}.get(resultado["tipo"],
+                                                               "questão(ões)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
     console.print(f"[dim]Procedência: {resultado['modelo']}[/]")
     if resultado["repetidas"]:
@@ -1190,6 +1193,10 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
     elif resultado["tipo"] == "fichas":
         console.print("[dim]Em data/fichas.json (versionado). Confira cada uma em "
                       "radar web, Hoje > Fichas, ou com radar fichas --tema.[/]")
+    elif resultado["tipo"] == "resumos":
+        console.print("[dim]Dentro de cada ficha, em data/fichas.json (versionado). "
+                      "Aparecem no botão Resumo de cada faixa; confira com radar "
+                      "fichas --conferir-resumo.[/]")
     elif resultado["tipo"] == "macetes":
         console.print("[dim]Em data/macetes.json (versionado).[/]")
     elif resultado["tipo"] == "explicacoes":
@@ -2495,6 +2502,10 @@ def hoje(
     # saida diz como abrir. So le o data/fichas.json - nao conta nada.
     escritas = servico.fichas.carregar()
     fichas_do_dia: dict = {}
+    # As geradas de cada faixa de treino (R6): o no e os passos para gerar.
+    from types import SimpleNamespace
+    geradas_do_dia = servico.geradas.das_faixas(
+        [SimpleNamespace(chave=c, faixas=getattr(dia, c)) for c in cronograma.BLOCOS], plano)
 
     for chave in cronograma.BLOCOS:
         faixas = getattr(dia, chave)
@@ -2505,7 +2516,7 @@ def hoje(
             if faixa.desligada:
                 console.print(f"[dim]{cronograma.FRASE_DO_ANKI_DESATIVADO}[/]")
                 continue
-            ficha_da_faixa = fichas_puras.da_faixa(faixa, escritas)
+            ficha_da_faixa = fichas_puras.da_faixa_no_dia(faixa, dia.faixas(), escritas)
             if ficha_da_faixa is not None:
                 fichas_do_dia.setdefault(ficha_da_faixa.id, ficha_da_faixa)
             partes = [cronograma.TIPO_LEGIVEL[faixa.tipo]]
@@ -2540,6 +2551,9 @@ def hoje(
                         resultado += " · com consulta"
                     linha += f"  [green]{escape(resultado)}[/]"
             console.print(linha)
+            gf = geradas_do_dia.get((chave, indice))
+            if gf is not None:
+                _mostrar_geradas_da_faixa(gf)
 
     console.print(f"\nTotal do dia: [bold]{dia.total_questoes} questões[/] "
                   f"e {dia.minutos_de_estudo} min de estudo de manhã")
@@ -2769,6 +2783,19 @@ def fichas(
         None, "--importar", help="Lê a resposta (data/resposta_ia.json) e grava"),
     conferir: str = typer.Option(
         None, "--conferir", help="Marca como conferida por mim a ficha deste tema"),
+    resumos: bool = typer.Option(
+        False, "--resumos",
+        help="Com --pedido: pede o RESUMO dos temas (todo o ciclo, ou os --id)"),
+    ids: list[str] = typer.Option(
+        None, "--id", help="Com --pedido --resumos: só este tema (repita para mais)"),
+    conferir_resumo: str = typer.Option(
+        None, "--conferir-resumo", help="Marca como conferido por mim o resumo deste tema"),
+    verificar_resumos: bool = typer.Option(
+        False, "--verificar-resumos",
+        help="Confere de novo cada resumo gravado contra o acervo de hoje"),
+    explicacoes: bool = typer.Option(
+        False, "--explicacoes",
+        help="Com --pedido: explicação de cada questão real do alvo que é exemplo de tema"),
 ) -> None:
     """A ficha de estudo de cada tema do cronograma (Etapa 6B, secao 11).
 
@@ -2792,6 +2819,52 @@ def fichas(
 
     if importar is not None:
         _importar_resposta_da_ia(importar)
+        return
+    if verificar_resumos:
+        problemas = servico.fichas.verificar_resumos()
+        com = sum(1 for e in servico.fichas.carregar() if e.resumo)
+        if not problemas:
+            console.print(f"[green]{com} resumo(s) conferido(s) contra o acervo de hoje:[/] "
+                          f"nenhum problema.")
+            return
+        console.print(f"[red]{len(problemas)} resumo(s) com problema[/] (de {com}):")
+        for tema_, problema in problemas:
+            console.print(f"  {escape(tema_)}: {escape(problema)}")
+        raise typer.Exit(code=1)
+    if conferir_resumo:
+        try:
+            escrita = servico.fichas.conferir_resumo(conferir_resumo)
+        except LookupError as erro:
+            console.print(f"[red]{escape(str(erro))}[/]")
+            raise typer.Exit(code=1)
+        console.print(f"[green]Resumo conferido:[/] {escape(escrita.tema)} "
+                      f"({escrita.resumo['conferido_em']}). Continua marcado como escrito "
+                      f"por IA, com a procedência dele.")
+        return
+    if pedido and explicacoes:
+        lote = servico.manual.pedido_de_explicacoes_dos_temas(_data(desde, "Data"))
+        if not lote["pedidos"]:
+            console.print("[yellow]Nada a pedir:[/] toda questão real dos temas já tem "
+                          "explicação.")
+            return
+        destino = servico.manual.salvar_pedido(lote)
+        console.print(f"[green]{len(lote['pedidos'])} pedido(s) de explicação[/] em {destino}")
+        console.print(f"[dim]Lote {lote['lote']}. Responda pelo Claude Code e rode "
+                      f"{escape(fichas_puras.RADAR_NO_WINDOWS)} fichas --importar "
+                      f"data/resposta_ia.json[/]", soft_wrap=True)
+        return
+    if pedido and resumos:
+        lote = servico.manual.pedido_de_resumos(ids or None, _data(desde, "Data"), refazer)
+        if not lote["pedidos"]:
+            console.print("[yellow]Nada a pedir:[/] os temas escolhidos já têm resumo.")
+            return
+        destino = servico.manual.salvar_pedido(lote)
+        console.print(f"[green]{len(lote['pedidos'])} pedido(s) de resumo[/] em {destino}")
+        for p in lote["pedidos"]:
+            console.print(f"  {p['id']}: {escape(p['materia'])} · {escape(p['tema'])}")
+        console.print(f"[dim]Lote {lote['lote']}. Responda pelo Claude Code e rode "
+                      f"{escape(fichas_puras.RADAR_NO_WINDOWS)} fichas --importar "
+                      f"data/resposta_ia.json[/]", soft_wrap=True)
         return
     if conferir:
         try:
@@ -2855,6 +2928,33 @@ def _selo(origem: str) -> str:
     return SELOS[origem].emoji
 
 
+def _mostrar_geradas_da_faixa(gf) -> None:
+    """O que a faixa de treino diz das geradas (R6), recuado embaixo dela.
+    Os comandos saem inteiros, numa linha so: sao para copiar e colar."""
+    onde = ("sem nó na árvore" if gf.sem_no
+            else "; ".join(n.no for n in gf.nos))
+    console.print(f"     [dim]Você estudou: {escape(gf.tema)}; na árvore: {escape(onde)}[/]")
+    qconcursos = gf.filtro or f'procure pelo nome do tema: "{gf.tema}"'
+    console.print(f"     [dim]1º No Qconcursos (as que medem): {escape(qconcursos)}[/]")
+    if gf.sem_no:
+        console.print("     [dim]2º Não há como gerar questão deste tema: a árvore não tem "
+                      "nó para ele.[/]")
+        return
+    for n in gf.nos:
+        if n.geradas:
+            console.print(f"     [dim]2º {n.geradas} questões geradas de {escape(n.nome)}: "
+                          f"Gerar questões > treinar (só treinam; acerto à parte)[/]")
+        else:
+            console.print(f"     [dim]2º Não há questão gerada de {escape(n.nome)} ainda.[/]")
+    if gf.precisa_gerar:
+        for comando in gf.passos[:-2]:
+            console.print(f"     1) {escape(comando)}", soft_wrap=True)
+        console.print(f'     2) no Claude Code do VS Code: "{fichas_puras.PASSO_NO_CLAUDE_CODE}"',
+                      soft_wrap=True)
+        console.print(f"     3) {escape(fichas_puras.COMANDO_DE_IMPORTAR)}", soft_wrap=True)
+        console.print(f"     [dim]{fichas_puras.AVISO_DO_PEDIDO}[/]")
+
+
 def _mostrar_ficha(f) -> None:
     """A ficha no terminal, na ordem da secao 11, cada parte com o selo."""
     def titulo(texto: str) -> None:
@@ -2869,6 +2969,18 @@ def _mostrar_ficha(f) -> None:
               else f"ainda não conferida por você (radar fichas --conferir {f.id})")
     console.print(f"[dim]{_selo('ia')} texto escrito por {escape(f.procedencia)} · "
                   f"{estado}[/]")
+
+    # R1: caiu ou nao caiu, prova a prova - a mesma conta da tela.
+    titulo("Caiu ou não caiu")
+    caiu = f.caiu
+    item("acervo", f"Polícia Penal SC (2013 e 2019): {caiu.frase}")
+    if not caiu.sem_contagem:
+        console.print(f"     prova a prova: {caiu.por_prova}")
+    for nota in caiu.notas:
+        console.print(f"     {escape(nota)}")
+    complementar = ("o tema não tem nó: não contado" if f.sem_no
+                    else f.linha_complementar.frase.replace("Acervo complementar FEPESE: ", ""))
+    item("acervo", f"Outras provas FEPESE (complementar aceito): {complementar}")
 
     titulo("Por que agora")
     for motivo in f.por_que_agora:
@@ -2962,6 +3074,14 @@ def _mostrar_ficha(f) -> None:
             item("acervo", f"{q.codigo} · {q.onde} · gabarito {(q.resposta or '?').upper()} · {q.no}")
     else:
         item("acervo", f.vazio("questoes_reais"))
+    for q in f.exemplos:
+        if q.como == "pendente":
+            item("oficial", f"{q.codigo} · Polícia Penal SC · gabarito "
+                 f"{(q.resposta or '?').upper()} · classificação pendente "
+                 f"(o artigo gravado é do tema)")
+        elif q.como == "artigo":
+            item("oficial", f"{q.codigo} · Polícia Penal SC · gabarito "
+                 f"{(q.resposta or '?').upper()} · pelo artigo gravado na classificação")
 
     titulo("Quantas questões fazer")
     if f.meta_de_questoes:

@@ -92,6 +92,9 @@ Calendário e Previsão; Mais tem as fontes e evidências.
 
 ## Home — só 5 blocos, nada além disso
 
+> Revisto na fase 2 (25/09): ficaram **3 blocos cheios e 2 faixas**, e não 5
+> blocos (ver `decisoes.md`, "Navegacao nova e a home de 3 blocos").
+
 1. **🎯 Polícia Penal SC**: status do concurso (edital aberto? previsão?).
 2. **📚 O que estudar agora**: as 3 matérias prioritárias + botão **[Começar treino]**.
 3. **📊 Sua evolução**: % geral de acerto e a variação nos últimos 30 dias.

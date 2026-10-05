@@ -66,7 +66,11 @@ def ocorrencias() -> list[incidencia.Ocorrencia]:
             pegadinha=c.pegadinha if c else None,
             enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave,
             numero=q.numero, conferida=bool(c and c.conferida_em),
-            associados=tuple(sorted(associados.get(chave, [])))))
+            associados=tuple(sorted(associados.get(chave, []))),
+            alternativas=dict(q.alternativas or {}),
+            dispositivo=c.dispositivo if c else None,
+            materia_do_caderno=do_caderno(q.materia),
+            impressao_do_enunciado=q.impressao or ""))
     return resultado
 
 
@@ -130,7 +134,11 @@ def ocorrencias_complementares() -> list[incidencia.Ocorrencia]:
             tipo_de_questao=c.tipo_de_questao if c else None,
             pegadinha=c.pegadinha if c else None,
             enunciado=q.enunciado or "", resposta=q.resposta, impressao=chave,
-            numero=q.numero, conferida=bool(c and c.conferida_em)))
+            numero=q.numero, conferida=bool(c and c.conferida_em),
+            alternativas=dict(q.alternativas or {}),
+            dispositivo=c.dispositivo if c else None,
+            materia_do_caderno=do_caderno(q.materia),
+            impressao_do_enunciado=q.impressao or ""))
     return resultado
 
 

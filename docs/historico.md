@@ -2191,3 +2191,83 @@ em vez do Qconcursos. A conta mostrou que nao da: o acervo tem 251 questoes
 distintas, e varios temas tem uma so. A faixa ficou mista: comeca pelas
 questoes reais do tema que o radar tem e eu nao respondi, e termina no
 Qconcursos (decisao 107).
+
+## A revisao final do estudo: a Fase 1 e a R1 (05/10)
+
+O pedido "revisao final do estudo" comecou por uma analise so de leitura: a
+matriz edital 2019 x provas x Ciclo 1, o inventario do que a ficha e a faixa
+mostram, a conferencia de 10 fichas contra o texto vigente (12 imprecisoes,
+nenhum erro de fundo, e a regra 40 de Mandela a rever contra a traducao do
+CNJ), a coerencia dos documentos (30 achados) e o saldo do estoque de
+geradas. Duas descobertas mudaram o desenho: a "Aplicacao da lei penal"
+aparecia como "nao caiu" com 4 questoes que cairam (pendentes), e
+`python -m radar` nao funciona neste projeto (o comando e `radar.exe`). As 16
+perguntas de decisao foram respondidas com as recomendadas.
+
+Na R1, o "caiu ou nao caiu" virou uma conta so, prova a prova, com as
+pendentes e o artigo gravado (decisao 108); a ficha passou a mostrar a
+questao real inteira e os macetes ligados pela questao (decisao 109); a lei
+seca ficou com o tema da teoria (decisao 110); e a aba Fichas abre no dia,
+por bloco (decisao 111).
+
+## R6: as questoes da faixa (05/10)
+
+A faixa do art. 13 mandava fazer 8 questoes no Qconcursos e nao dizia nada do
+radar, e o assunto sem gerada sumia da tela de gerar. Agora cada faixa de
+questoes diz o tema e o no, manda primeiro ao Qconcursos e, se eu quiser
+mais, as geradas: o botao quando ha, os 3 passos com o comando exato quando
+nao ha (decisoes 112 a 115). O comando e o `radar.exe` do venv, que funciona
+no Windows; o passo 1, copiado da tela, gerou o pedido do no certo.
+
+## R3: as correcoes das fichas (05/10)
+
+A segunda leitura de 10 fichas, agora com a traducao do CNJ das Regras de
+Mandela e a compilacao da Camara pelo normas.leg.br, achou 12 imprecisoes e
+nenhum erro de fundo. As 12 foram corrigidas, e a regra 40 de Mandela voltou
+a letra do CNJ (decisao 117): 14 trechos em 7 fichas, com copia antes, o antes
+x depois em `docs/conferencia_das_fichas.md` e a procedencia com o modelo
+(decisao 116). As fichas continuam por conferir.
+
+## R2: o resumo de cada tema e as explicacoes (05/10)
+
+Cada tema do Ciclo 1 ganhou o resumo de uma tela para o caderno, dentro da
+ficha: a parte "caiu ou nao caiu" sai na hora, e as outras sao texto de IA em
+que cada frase diz a fonte (decisoes 118 e 119). O botao "Resumo" abre uma
+janela por cima da pagina, so com CSS, em toda faixa com materia, e a de
+varios temas abre a lista (decisao 120). O lote 1 (5 temas) foi aprovado; os
+outros 60 vieram em 6 lotes escritos em paralelo e passaram pela mesma
+conferencia. Depois, 64 das 76 questoes reais do alvo dos temas ganharam a
+explicacao de onde estava a pegadinha; 12 ficaram de fora, sem fonte segura
+(o texto-base da prova que o radar nao guarda, o sublinhado perdido, ou so
+doutrina). A procedencia passou a dizer o modelo (decisoes 121 e 122).
+
+## R4: o Ciclo 1 pela classe de cada tema (05/10)
+
+O tempo de um tema que nao caiu nas duas provas virou revisao de um tema que
+caiu, no mesmo dia e da mesma materia. Duas chaves novas no cronograma
+fazem isso sem alongar o dia em nivel nenhum: o `teto` na faixa de rampa e a
+`sobra_da_rampa` na faixa "Extra". Mudaram 7 dias de 06/10 a 07/11; os
+minutos ficaram iguais e as questoes subiram um pouco onde a teoria virou
+questao (decisao 124). O ensaio, feito numa copia carregada pelo proprio
+radar, mostrou dois ajustes a proposta da Fase 1 (o teto par e as questoes),
+que voce aprovou antes da gravacao.
+
+## R5: o saldo do estoque de geradas (05/10)
+
+Com o plano redistribuido, o saldo foi calculado pela mesma conta da faixa:
+24 nos sem gerada, falta de 231 questoes contra a maior cota de uma faixa,
+sobra de 410. Nada foi gerado: a falta se completa sob demanda, pelos 3 passos
+de cada faixa (decisao 125).
+
+## R7: os documentos (05/10)
+
+O `docs/indice.md` diz para que serve cada documento e qual ler primeiro. As
+incoerencias que a Fase 1 achou foram corrigidas: o diagnostico de 03/10 que
+virou 10/10 no README e nas pendencias, os numeros velhos (8.433 questoes, 169
+provas, 13 fichas sem no, 7 geradas rejeitadas), o "18 de 19" da auditoria
+final, os itens resolvidos que continuavam abertos, a decisao 47 revista pela
+116, e a nuvem com login, que virou a decisao 126. O "Estado atual" do
+CLAUDE.md ficou mais curto. A secao H das pendencias e a lista unica do que
+sobra, separada entre o que depende de voce e o que a IA pode fazer. Junto, a
+10ª gerada rejeitada foi exportada para o JSON e os macetes de "Direito
+Processo Penal" passaram ao nome do edital.

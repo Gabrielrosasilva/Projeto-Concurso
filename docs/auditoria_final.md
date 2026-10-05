@@ -34,7 +34,7 @@ existe código".
 | 15 | Incidência do alvo não muda por prova complementar | ✅ atende | teste `a_incidencia_do_alvo_nao_muda...`; real (numa cópia): 426 linhas iguais com 0 ou 122 provas complementares. **A auditoria conferiu só a incidência**: o "Onde estudar primeiro" somava o complementar nas questões esperadas - corrigido em 03/10 (decisão 63) |
 | 16 | Nenhum dado antigo perdido | ✅ atende | teste `nenhum_dado_antigo_e_perdido_na_migracao`; real: contagens contra a cópia de antes da Etapa 2 |
 | 17 | ANKI desativado, mas reativável | ✅ atende | teste `o_anki_esta_desativado_e_religa...`; real: `radar hoje` com a config e com uma cópia religada |
-| 18 | Nenhuma estatística sem amostra | ⚠️ atende, **com 1 lugar sem a amostra completa** | teste `nenhuma_estatistica_aparece_sem_amostra`; real: 31 aberturas de tela, 114 porcentagens (abaixo) |
+| 18 | Nenhuma estatística sem amostra | ✅ atende (corrigido em 04/10: estava ⚠️, ver o fim deste documento) | teste `nenhuma_estatistica_aparece_sem_amostra`; real: 31 aberturas de tela, 114 porcentagens (abaixo) |
 | 19 | Nenhuma questão gerada como oficial | ✅ atende | teste `nenhuma_questao_gerada_aparece_como_oficial`; real: as 2 rodadas de IA |
 
 E o roteiro da etapa, além da §23:

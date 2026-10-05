@@ -185,6 +185,12 @@ class Faixa:
     # fechamento de 07/11 compara com o diagnostico de 03/10). AAAA-MM-DD,
     # como a `origem`; quem compara e o `servico/sabado.py`.
     compara_com: str | None = None
+    # A redistribuicao do Ciclo 1 (R4, decisao 108): a faixa de rampa de um
+    # tema que nao caiu fica com no maximo `teto` questoes, e a faixa com
+    # `sobra_da_rampa` (a "Extra" de um tema que caiu) recebe o resto - a
+    # rampa do nivel menos o teto. O total do dia nao muda em nivel nenhum.
+    teto: int | None = None
+    sobra_da_rampa: str | None = None
     # A faixa do Anki com `anki: desativado`. Ela continua na lista, na mesma
     # posicao: os checks sao reconhecidos por bloco e posicao, e tira-la
     # mudaria a posicao do Bonus que vem depois. Desligada, ela nao tem
@@ -401,7 +407,8 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
     tipo = bruta.get("tipo")
     if tipo not in TIPOS:
         raise ErroNoCronograma(f"{onde}: tipo desconhecido {tipo!r}")
-    if bruta.get("duracao") is None and bruta.get("questoes") is None:
+    sobra = bruta.get("sobra_da_rampa")
+    if bruta.get("duracao") is None and bruta.get("questoes") is None and not sobra:
         raise ErroNoCronograma(
             f"{onde}: a faixa {bruta.get('titulo')!r} nao tem duracao nem questoes"
         )
@@ -411,6 +418,11 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
             f"{onde}: rampa {rampa!r} nao existe (conheco: "
             f"{', '.join(sorted(chaves_da_rampa))})"
         )
+    if sobra is not None and sobra not in chaves_da_rampa:
+        raise ErroNoCronograma(f"{onde}: sobra_da_rampa {sobra!r} nao e chave da rampa")
+    teto = bruta.get("teto")
+    if teto is not None and (not isinstance(teto, int) or teto <= 0 or not rampa):
+        raise ErroNoCronograma(f"{onde}: `teto` e um inteiro positivo, so em faixa de rampa")
     return Faixa(
         bloco=bloco,
         tipo=tipo,
@@ -438,6 +450,8 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
         # da tela sem aviso nenhum.
         compara_com=(_data(bruta["compara_com"], f"{onde}, compara_com").isoformat()
                      if bruta.get("compara_com") else None),
+        teto=teto,
+        sobra_da_rampa=sobra,
     )
 
 
@@ -718,6 +732,12 @@ def carregar(caminho: Path | None = None) -> Plano:
             if not anki:
                 faixas = [_sem_anki(f) for f in faixas]
             setattr(dia, chave, faixas)
+        for faixa in dia.faixas():
+            if faixa.sobra_da_rampa and _faixa_com_teto(dia, faixa.sobra_da_rampa) is None:
+                raise ErroNoCronograma(
+                    f"Dia {data.isoformat()}: a faixa {faixa.titulo!r} recebe a sobra da "
+                    f"rampa {faixa.sobra_da_rampa!r}, mas o dia nao tem faixa dessa "
+                    f"rampa com `teto`")
         if (MARCA_DO_DIREITO in (dia.reduzida or "")
                 and _faixa_do_direito(dia) is None):
             raise ErroNoCronograma(
@@ -782,6 +802,11 @@ def _faixa_do_direito(dia: Dia) -> Faixa | None:
     return next((f for f in dia.faixas() if f.rampa == "direito"), None)
 
 
+def _faixa_com_teto(dia: Dia, chave: str) -> Faixa | None:
+    """A faixa da rampa `chave` que tem `teto` (a do tema que nao caiu)."""
+    return next((f for f in dia.faixas() if f.rampa == chave and f.teto), None)
+
+
 def montar_dia(plano: Plano, data: date, nivel: int | None = None) -> Dia | None:
     """O dia com o horario de cada faixa. None em domingo e fora do plano.
 
@@ -800,6 +825,13 @@ def montar_dia(plano: Plano, data: date, nivel: int | None = None) -> Dia | None
         )
 
     dia = replace(gravado)
+
+    def da_rampa(faixa: Faixa) -> int:
+        """O numero da rampa no nivel; sem nivel, o que o arquivo grava."""
+        if nivel is not None and faixa.rampa:
+            return plano.rampa[nivel][faixa.rampa]
+        return faixa.questoes or 0
+
     for chave in BLOCOS:
         # datetime, e nao time, para a soma poder passar da meia-noite sem erro.
         relogio = datetime.combine(data, plano.blocos[chave].inicio)
@@ -814,6 +846,11 @@ def montar_dia(plano: Plano, data: date, nivel: int | None = None) -> Dia | None
             questoes = faixa.questoes
             if nivel is not None and faixa.rampa:
                 questoes = plano.rampa[nivel][faixa.rampa]
+            if faixa.teto:
+                questoes = min(da_rampa(faixa), faixa.teto)
+            if faixa.sobra_da_rampa:
+                com_teto = _faixa_com_teto(gravado, faixa.sobra_da_rampa)
+                questoes = max(da_rampa(com_teto) - com_teto.teto, 0)
             duracao = faixa.duracao
             if duracao is None:
                 duracao = duracao_de_questoes(

@@ -1,5 +1,14 @@
 [
   {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A Convenção Americana diz que são competentes para conhecer dos assuntos relativos ao cumprimento dos compromissos dos Estados Partes a Comissão e a Corte Interamericana - ou seja, a Corte integra o sistema interamericano de proteção. A pegadinha é a a: a sede da Corte é em San José, na Costa Rica, e não em Brasília. O Brasil aderiu à Convenção em 1992 e reconheceu a competência contenciosa da Corte em 1998, o que derruba a d e a e.",
+    "fonte": "art. 33 da Convenção Americana sobre Direitos Humanos (Decreto 678/1992) e art. 3º do Estatuto da Corte Interamericana de Direitos Humanos",
+    "impressao": "00ec7c239bca271706bbd4aa09db95cc",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
     "correta": "c",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Discriminado é especificado, detalhado item por item, e vultosos é de grande vulto - os dois bem empregados em (c). Na (a), tempo decorrido pede Há cerca de; na (b), finalidade é a fim de (afim é o que tem afinidade); na (d), o certo é infestam e despercebidos (desapercebido é desprevenido); na (e), rodas abaixadas são arriadas (arrear é pôr arreios).",
@@ -7,6 +16,177 @@
     "impressao": "02877624608dbeb9d091c5018f5261ab",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Na classificação em gerações (dimensões), a 1ª é das liberdades civis e políticas, a 2ª dos direitos sociais (igualdade), a 3ª dos de fraternidade/solidariedade (paz, desenvolvimento, meio ambiente) e a 4ª, na lição de Paulo Bonavides, dos direitos à democracia, à informação e ao pluralismo, ligados à globalização e ao avanço tecnológico - por isso a e está correta. A pegadinha é trocar as gerações de lugar: os avanços sociais (a) e a igualdade (c) são da 2ª, as liberdades (b) da 1ª, e a fraternidade (d) da 3ª. O direito à informação está na Constituição como direito fundamental.",
+    "fonte": "Paulo Bonavides, Curso de Direito Constitucional (gerações de direitos); art. 5º, XIV e XXXIII, da Constituição Federal (direito à informação)",
+    "impressao": "09558abfaeeb47650efed17e359ef091",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Cabe ao Conselho Nacional de Política Criminal e Penitenciária estimular e promover a pesquisa criminológica (art. 64, IV, da LEP). A pegadinha é o Conselho Penitenciário (c), que é órgão consultivo e fiscalizador da execução (parecer sobre indulto, inspeção de estabelecimentos, art. 70), e não de pesquisa. O nome parecido dos dois conselhos é o que confunde.",
+    "fonte": "art. 64, IV, da Lei 7.210/1984",
+    "impressao": "0a5b7fd80e02f0bc3cdf522f9e7984d5",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A pena cumprida no estrangeiro atenua a pena imposta no Brasil pelo mesmo crime, quando diversas, ou nela é computada, quando idênticas - a b traz a primeira parte da regra. A pegadinha é a c: a soberania não impede o cômputo; a lei manda considerar a pena já cumprida para evitar a dupla punição. Não há conversão em restritiva de direitos (a) nem novo julgamento obrigatório (e).",
+    "fonte": "art. 8º do Código Penal",
+    "impressao": "0fedf13ea9ca2c592e8832f3473a63d1",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Os direitos de terceira dimensão são os de solidariedade (fraternidade), de titularidade difusa da coletividade: paz, desenvolvimento, meio ambiente equilibrado; a CF ilustra isso no art. 225, que dá o meio ambiente a todos, inclusive às futuras gerações. A pegadinha é a troca de dimensões: os civis e políticos (liberdades negativas) são de primeira, e não de segunda, como diz a; os econômicos, sociais e culturais (igualdade) são de segunda, e não de primeira, como diz e. Democracia e informação são, na classificação de Bonavides, de quarta dimensão, e não de quinta.",
+    "fonte": "art. 225 da Constituição Federal; classificação das dimensões de Karel Vasak e Paulo Bonavides",
+    "impressao": "1788f0f43e1a04b11be4cd879328560a",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A Convenção Americana sobre Direitos Humanos foi assinada em San José da Costa Rica, em 22/11/1969, e por isso é chamada Pacto de San José da Costa Rica; o Brasil a promulgou em 1992. As outras são distratores com nomes de lugares: Rio 92 foi a conferência da ONU sobre meio ambiente, e o Protocolo de Olivos trata da solução de controvérsias no Mercosul. A pegadinha é confundir o nome do tratado com outros documentos latino-americanos, como os de Lima ou de Viña del Mar.",
+    "fonte": "art. 1º do Decreto 678/1992 (promulga a Convenção Americana sobre Direitos Humanos - Pacto de São José da Costa Rica)",
+    "impressao": "18b0502b81be7339852051869ba1dad0",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Tire as mulheres dos totais: homens na internet = 380 - 150 = 230; homens que caminham = 308 - 100 = 208; homens nas duas = 250 - 50 = 200. Homens em pelo menos uma = 230 + 208 - 200 = 238, e os que não fazem nenhuma são 300 - 238 = 62, entre 60 e 65. A pegadinha é fazer a conta com os 600 funcionários (600 - 438 = 162) em vez de só com os 300 homens.",
+    "fonte": "princípio da inclusão-exclusão em diagramas de Venn - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "1aac6b2938dfff4f48a11098b7f34edd",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "As quatro estão no art. 41 da LEP: audiência especial com o diretor (XIII), chamamento nominal (XI), atribuição de trabalho e sua remuneração (II) com proporcionalidade do tempo para trabalho, descanso e recreação (V), e representação e petição a qualquer autoridade em defesa de direito (XIV). A pegadinha é a 3, que junta dois incisos numa frase só e parece inventada, mas está toda na lei. Atenção ao texto vigente: depois da Lei 14.994/2024, o juiz pode suspender ou restringir por ato motivado os incisos V, X e XV (§ 1º), o que não muda o gabarito.",
+    "fonte": "art. 41, II, V, XI, XIII e XIV, da Lei 7.210/1984",
+    "impressao": "1caa127a7bb47bdfaedb84899576d42f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Todas da a seguem a regra: 'vírus' e 'ônix' são paroxítonas terminadas em -us e -x, 'há' é monossílabo tônico terminado em -a, e 'anéis' tem o ditongo aberto 'éi' em oxítona. A pegadinha é a b: 'pólen' e 'anzóis' estão certas, mas 'itens' não leva acento (paroxítona terminada em -ens) e 'rubrica' é paroxítona sem acento. Nas demais também há erros como 'urubus' (oxítona em -u não se acentua), 'juízes' sem acento e 'avaro' com acento indevido.",
+    "fonte": "regras de acentuação das oxítonas, paroxítonas e ditongos abertos - Acordo Ortográfico de 1990, Bases VIII e IX",
+    "impressao": "1ec4eb764df6762668aa006cd69c0ada",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Na lista decrescente, a posição é 1 + quantos números são maiores que 869057. Começando com 9: 5! = 120; com 8 e segundo algarismo 9 ou 7: 2 x 4! = 48; com 869 e quarto algarismo 5 ou 7: 2 x 2! = 4; com 8690 e quinto algarismo 7: 1 (869075). São 120 + 48 + 4 + 1 = 173 maiores, então 869057 é o 174º, entre 170 e 175. A pegadinha é esquecer que o zero também pode abrir o número e contar a lista em ordem crescente.",
+    "fonte": "princípio fundamental da contagem e permutação simples - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "1ec96412634ffde888d9073a04083177",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Em regra, o tratado incorporado entra no ordenamento abaixo da Constituição: o comum, com força de lei ordinária, e o de direitos humanos aprovado pelo rito comum, com status supralegal (STF, RE 466.343) - os dois são normas infraconstitucionais, como diz a e. A pegadinha é a a: só equivale a emenda constitucional o tratado de direitos humanos aprovado em cada Casa do Congresso, em dois turnos, por três quintos dos votos - não qualquer tratado 'devidamente aprovado'. Também não é o tratado que vira decreto legislativo (b): o Congresso o aprova por decreto legislativo, e o Presidente o ratifica e promulga por decreto, sem 'regulamentá-lo' (c).",
+    "fonte": "art. 5º, § 3º, da Constituição Federal e arts. 49, I, e 84, VIII, da Constituição Federal",
+    "impressao": "215c3c1ebb1ae806f9d616ed754e3b5b",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Em b, todas fazem o plural em -ões: satisfações, cordões, limões, paixões, razões. As outras misturam terminações: em a, alemães e tabeliães (-ães) com grãos e pagãos (-ãos); em c, capitães e artesãos ao lado de ações; em d, escrivães e charlatães destoam de situações e botões. A pegadinha é achar que todo -ão vira -ões: o plural de cada palavra tem de ser conferido uma a uma.",
+    "fonte": "plural dos substantivos terminados em -ão - Cegalla, Novíssima Gramática da Língua Portuguesa",
+    "impressao": "2ad52c464b4c016f26586fd7bd717424",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A casa é asilo inviolável, e só se entra nela sem consentimento do morador em flagrante delito, desastre ou para prestar socorro (a qualquer hora) ou, durante o dia, por determinação judicial - então só a 3 é correta. A pegadinha é a 2: com ordem judicial a polícia só pode entrar durante o dia, nunca à noite sem consentimento. A 1 é falsa porque a regra é a inviolabilidade; não há ingresso 'a qualquer momento' por vontade da autoridade policial.",
+    "fonte": "art. 5º, XI, da Constituição Federal",
+    "impressao": "2f0859a50a0d288efb1b4a0854aad7ff",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Os menores de dezoito anos são penalmente inimputáveis, e a imputabilidade é elemento da culpabilidade - por isso a menoridade exclui a culpabilidade, e não o fato típico e ilícito, e o menor responde pela legislação especial (ECA). A pegadinha é a d: a atenuante da menoridade vale para o agente que tinha menos de 21 anos na data do fato, ou seja, já imputável (entre 18 e 21), e não para o menor de 18.",
+    "fonte": "art. 27 do Código Penal, art. 228 da Constituição Federal e art. 65, I, do Código Penal",
+    "impressao": "3256bde30b82e56be32597a08692aae7",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Em 'Para cuidar da nossa vida' há ideia de finalidade (oração reduzida de infinitivo com 'para'), e em 'assim como o faz também qualquer outra espécie' há comparação - é a c. A pegadinha é a a: a conjunção concessiva 'embora' exige o subjuntivo ('deixem', 'seja'), então trocar por 'deixam' e 'é' seria desvio da norma culta. Na b, 'isto é' e 'ou seja' são expressões explicativas equivalentes e podem ser trocadas entre si; na e, 'podem' indica possibilidade, e não necessidade.",
+    "fonte": "orações subordinadas adverbiais finais, comparativas e concessivas (subjuntivo com 'embora') - Cegalla, Novíssima Gramática da Língua Portuguesa",
+    "impressao": "343799d423e593407ec20b51ad12d220",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Às polícias civis, dirigidas por delegados de carreira, incumbem as funções de polícia judiciária e a apuração de infrações penais, exceto as militares (na esfera da União, isso cabe à Polícia Federal). A pegadinha é a b: à polícia militar cabem a polícia ostensiva e a preservação da ordem pública, não a polícia judiciária. As polícias rodoviária e ferroviária federais fazem patrulhamento ostensivo, e a guarda municipal protege bens, serviços e instalações do município.",
+    "fonte": "art. 144, §§ 1º, IV, 4º e 5º, da Constituição Federal",
+    "impressao": "412a723595cfba18f6b261b203c5cbfc",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "As quatro estão no art. 39 da LEP: submissão à sanção disciplinar imposta (VI), indenização à vítima ou aos seus sucessores (VII), higiene pessoal e asseio da cela ou alojamento (IX) e conservação dos objetos de uso pessoal (X). A pegadinha é a 4: indenizar a vítima parece assunto civil, fora da execução, mas é dever expresso do condenado na lei.",
+    "fonte": "art. 39, VI, VII, IX e X, da Lei 7.210/1984",
+    "impressao": "42c41a2c6fd9b93a1e0e18ede43f2e9e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Age em legítima defesa quem, usando moderadamente dos meios necessários, repele injusta agressão, atual ou iminente, a direito seu ou de outrem - o uso moderado é requisito, como diz a a. A pegadinha é a e: o excesso doloso ou culposo é punível. Também cabe defender direito de terceiro (b), não cabe contra agressão passada (c, isso é vingança) nem contra o servidor que age no exercício legal da função (d), porque a conduta dele não é agressão injusta.",
+    "fonte": "arts. 23, parágrafo único, e 25 do Código Penal",
+    "impressao": "509675416908e41803d60c982889c7f8",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O art. 34, VII, b, da CF autoriza a intervenção da União nos Estados para assegurar a observância dos direitos da pessoa humana, que é princípio constitucional sensível. A pegadinha é o estado de defesa ou de sítio (a e b): eles servem para grave perturbação da ordem, calamidade, comoção grave ou guerra (arts. 136 e 137), e não para a violação de direitos humanos. A intervenção nesse caso depende de representação do Procurador-Geral da República provida pelo STF (art. 36, III).",
+    "fonte": "art. 34, VII, b, e art. 36, III, da Constituição Federal",
+    "impressao": "51aa2e4c3349a3f13476a88a2ca0729b",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Os dois tratados exigem que o preso seja levado sem demora à presença de um juiz: é a audiência de custódia, hoje prevista no art. 310 do CPP, em até 24 horas da prisão. A pegadinha é a audiência preliminar (a), que é a fase de conciliação dos Juizados Especiais Criminais, e não a apresentação do preso ao juiz. Instrução e julgamento (c) é o fim do processo, e audiência admonitória (d) é a de advertência das condições do sursis ou do regime aberto.",
+    "fonte": "art. 7.5 da Convenção Americana sobre Direitos Humanos; art. 9.3 do Pacto Internacional sobre Direitos Civis e Políticos; art. 310 do Código de Processo Penal",
+    "impressao": "525f56c7f3f3a030e82ab88cd49d6ff1",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
     "correta": "a",
@@ -18,6 +198,42 @@
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
   },
   {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Em 1, a correlação é pretérito imperfeito do subjuntivo (estivessem) com futuro do pretérito (seriam); trocando por futuro do subjuntivo (estiverem) e futuro do presente (serão), a correlação continua correta, só passa de hipótese irreal para possibilidade futura. A pegadinha está em d: tem se mostrado (pretérito perfeito composto) indica fato que se repete até agora, e mostrou-se (pretérito perfeito simples) indica fato concluído, o que muda o valor temporal. Em a, o pronome elas retoma as pessoas, e não vítimas.",
+    "fonte": "correlação modo-temporal nas orações condicionais - Bechara, Moderna Gramática Portuguesa",
+    "impressao": "5b69ed1e94753cd2f68b470a08f34ea9",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O estado de sítio pode ser decretado em dois casos: comoção grave de repercussão nacional ou ineficácia do estado de defesa, e declaração de estado de guerra ou resposta a agressão armada estrangeira - esta é a c. A pegadinha é a a: calamidade de grandes proporções na natureza é hipótese de estado de defesa, e não de sítio. As demais (impossibilidade do exército, conflito entre Estados, falta de efetivo policial) não estão na Constituição como causas de sítio.",
+    "fonte": "arts. 136 e 137 da Constituição Federal",
+    "impressao": "5d2805c35a154b2defe3e98641b4df25",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O art. 75 da LEP exige diploma de nível superior de Direito, Psicologia, Ciências Sociais, Pedagogia ou Serviços Sociais (I), experiência administrativa na área (II) e idoneidade moral e reconhecida aptidão (III). Só a 3 reproduz a lei: a 1 é a pegadinha, porque fala em qualquer diploma superior, quando a lei restringe a cinco cursos, e a 2 troca 'experiência administrativa na área' por 'gestão de administração pública'. A idade mínima de trinta e cinco anos (4) não existe na lei.",
+    "fonte": "art. 75, I, II e III, da Lei 7.210/1984",
+    "impressao": "5fabe1fd8bb303e6da0ae6c2cab0f815",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Augusto não recebe na caixa principal em dois casos que se excluem: José não envia (1 - 7/10 = 0,3) ou envia e a mensagem cai no spam (0,7 x 0,6 = 0,42). Somando, 0,3 + 0,42 = 0,72, ou 72%, entre 70% e 75%. A pegadinha é ficar só com o spam (60% ou 42%) e esquecer a chance de a mensagem nem ser enviada.",
+    "fonte": "probabilidade de eventos mutuamente exclusivos (soma) e da interseção (produto) - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "600dc0892b24ee4032547534e99f840a",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
     "correta": "e",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Perigo iminente é o que está prestes a acontecer; eminente é o elevado, ilustre - e é a troca mais tentadora. Mandato é a delegação de poderes para alguém agir em nome de outro (como a autorização para movimentar as contas); mandado é uma ordem, sobretudo judicial (mandado de prisão). Deferiu é atendeu, concedeu a solicitação; diferiu seria adiou.",
@@ -27,6 +243,132 @@
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
   },
   {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Para os Chefes de Poder, entre eles o Presidente da República, o vocativo é 'Excelentíssimo Senhor', seguido do cargo ('Excelentíssimo Senhor Presidente da República,'). A pegadinha é a e: 'A Sua Excelência o Senhor' é a forma do endereçamento (no envelope ou no cabeçalho do destinatário), não o vocativo. 'Vossa Senhoria' é tratamento de outras autoridades e de particulares, e 'Atenciosamente'/'Respeitosamente' são fechos, não vocativos.",
+    "fonte": "pronomes de tratamento, vocativo e endereçamento - Manual de Redação da Presidência da República, 3ª edição (2018)",
+    "impressao": "7377b2dd470e419f202601959c6bedf9",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A alternativa d reproduz a Súmula Vinculante 11 do STF: só é lícito o uso de algemas em caso de resistência, fundado receio de fuga ou perigo à integridade física, justificada a excepcionalidade por escrito, sob pena de responsabilidade do agente e de nulidade da prisão ou do ato. A pegadinha está em c e e, que copiam o texto da súmula mas trocam 'só é lícito' por 'é desautorizado', invertendo a regra. A e b erram por proibir de forma absoluta: a algema é exceção, não vedação total (no júri, o art. 474, § 3º, do CPP também a admite em caso de absoluta necessidade).",
+    "fonte": "Súmula Vinculante 11 do STF; art. 5º, III, da Constituição Federal",
+    "impressao": "763c843f06638e70a18ba4b6be666061",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Eficácia horizontal é a aplicação dos direitos fundamentais nas relações entre particulares, que estão no mesmo plano; o STF a reconheceu no RE 201.819, ao exigir ampla defesa na exclusão de sócio de associação privada. A pegadinha é a alternativa e: a relação entre poder público e particular é a eficácia vertical, a clássica, do Estado (em cima) diante do indivíduo. A base constitucional é a aplicação imediata das normas de direitos fundamentais.",
+    "fonte": "art. 5º, § 1º, da Constituição Federal; STF, RE 201.819/RJ",
+    "impressao": "7ab4ccd096598e858b6b39492809a3b8",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Em 1993, a Conferência Mundial sobre Direitos Humanos aprovou em Viena a Declaração e Programa de Ação, cujo preâmbulo reafirma o compromisso com a Carta da ONU e com a Declaração Universal de 1948, tratada como fonte de inspiração dos demais instrumentos. Foi lá também que se afirmou que todos os direitos humanos são universais, indivisíveis, interdependentes e inter-relacionados. As outras alternativas são documentos inventados com nomes de cidades (Roma, Bruxelas, Ohio, Havana) - a pegadinha é só reconhecer o nome e a data de Viena.",
+    "fonte": "preâmbulo e § 5 da Declaração e Programa de Ação de Viena (1993)",
+    "impressao": "84e1faf35b321204574866db441ca174",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Quando a lei nova deixa de considerar o fato crime (abolitio criminis), cessam a execução e os efeitos penais da sentença condenatória, mesmo depois do trânsito em julgado - então o condenado preso é posto em liberdade. A pegadinha é a d: a lei mais benéfica retroage e alcança também os casos já julgados. Não há novo julgamento (b) nem redução pela metade (e); só os efeitos civis, como o dever de indenizar, permanecem.",
+    "fonte": "art. 2º do Código Penal e art. 5º, XL, da Constituição Federal",
+    "impressao": "864d1b19db3f5323e6e64e8d1ce318f3",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Estão certas a 1 (guardas municipais, art. 144, § 8º), a 2 (remuneração por subsídio, § 9º, que remete ao art. 39, § 4º) e a 4 (polícia marítima, aeroportuária e de fronteiras é da polícia federal, § 1º, III). A pegadinha é a 3: polícia ostensiva e preservação da ordem pública são das polícias militares (§ 5º); às polícias civis cabem a polícia judiciária e a apuração das infrações penais (§ 4º).",
+    "fonte": "art. 144, §§ 1º, III, 4º, 5º, 8º e 9º, da Constituição Federal",
+    "impressao": "8c0d560a3821f59f31e9a2ff6a83dbf3",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Só a interdependência é característica dos direitos humanos: a Declaração de Viena afirma que todos são universais, indivisíveis, interdependentes e inter-relacionados. A pegadinha está no prefixo: as características verdadeiras são a INdisponibilidade e a IRrenunciabilidade - o titular não pode dispor nem abrir mão deles -, e a questão trouxe as duas pelo avesso ('disponibilidade' e 'renunciabilidade').",
+    "fonte": "§ 5 da Declaração e Programa de Ação de Viena (1993)",
+    "impressao": "957cee90f9ef58e9f0b61178df34d76e",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Pelo art. 26 da LEP, egresso é só o liberado definitivo, pelo prazo de um ano a contar da saída do estabelecimento (I), e o liberado condicional, durante o período de prova (II). A pegadinha é a 1: o preso em regime aberto ainda cumpre pena, não é egresso. A 4 também não está na lei: quem teve a prisão ilegal relaxada nunca foi condenado.",
+    "fonte": "art. 26, I e II, da Lei 7.210/1984",
+    "impressao": "97c396dc273e56728692e8dd2f1b914f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Escolhem-se 2 nomes de 30 sem reposição: C(14,2)/C(30,2) = 91/435, ou (14/30) x (13/29), aproximadamente 20,9%. Fica entre 20% e 22,5%. A pegadinha é pensar só em 14/30 (cerca de 46,7%) ou esquecer que o segundo nome sai de 29, e não de 30.",
+    "fonte": "probabilidade com combinação simples, sem reposição - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "97cbdaf146e8554e1d3188d2bd771abc",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O preso será informado de seus direitos, entre eles o de permanecer calado, sendo-lhe assegurada a assistência da família e de advogado - é a b. A pegadinha é a e: a ordem escrita e fundamentada tem de ser de autoridade JUDICIÁRIA competente, não policial (salvo flagrante e transgressão militar). O direito ao silêncio vale para todo preso, não só no flagrante (a), a prisão e o local são comunicados imediatamente ao juiz e à família (c), e o preso tem direito de saber quem o prendeu (d).",
+    "fonte": "art. 5º, LXI, LXII, LXIII e LXIV, da Constituição Federal",
+    "impressao": "9de47d8bcca8217a5140aa52813f1e27",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A alternativa a é a letra do art. 24, § 2º, da LEP: nenhum preso ou internado poderá ser obrigado a participar de atividade religiosa. A pegadinha é b: o local para cultos não fica a critério do gestor, pois o § 1º diz que no estabelecimento HAVERÁ local apropriado. D erra porque o caput permite a posse de livros de instrução religiosa, sem restringir ao local de culto, e c e e erram por tornar a religião critério de progressão ou atividade obrigatória.",
+    "fonte": "art. 24, caput, §§ 1º e 2º, da Lei 7.210/1984",
+    "impressao": "a0dc14e30c89c102f7a236e41fe1297a",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A afirmativa 1 é correta: em A e em C a primeira frase é a fala do personagem (discurso direto) e a segunda a relata com 'disse que'/'ordenou que' (indireto); e a 5 também: em B, 'gosto' está no presente e 'disse' no passado. A 2 é falsa porque as duas frases de B são discurso direto (só muda a posição do verbo de elocução), e a 3, porque D não tem fala de ninguém, só a inversão da ordem. A pegadinha é a 4: 'Faça' está no imperativo e 'fizesse' no subjuntivo, então nem todas estão no indicativo.",
+    "fonte": "discurso direto e indireto e modos verbais - Cegalla, Novíssima Gramática da Língua Portuguesa",
+    "impressao": "a5de09d0a1a56a4b791a0f616044de53",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "As frases dadas no enunciado sustentam a b: em 1 o mundo é 'constituído pela ação', e em 3 a pluralidade cria 'um âmbito de ação' em que cada um se revela numa esfera 'que se estabelece entre as pessoas'. A pegadinha é a e: 'no qual' pode ser trocado por 'em que', sem acento - 'quê' só leva acento quando é tônico, em fim de frase ou substantivado. Na c, as vírgulas de 2 não seguem uma regra só: a primeira separa a oração reduzida de finalidade anteposta, e as outras isolam termos intercalados ('por exemplo', 'em seguida').",
+    "fonte": "pronome relativo e acentuação do 'quê' tônico; emprego da vírgula - Bechara, Moderna Gramática Portuguesa",
+    "impressao": "a90e02c6dcc29ccca62a30ba2d221ffa",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "As normas de direitos e garantias fundamentais têm aplicação imediata (art. 5º, § 1º), e os direitos expressos na CF não excluem os dos tratados de que o Brasil seja parte (§ 2º), daí a alternativa e. A pegadinha está em b: o rito com status de emenda exige aprovação em cada Casa do Congresso (Câmara e Senado), em dois turnos, por três quintos dos votos (§ 3º), não só no Senado; a troca por três turnos e dois quintos, em a, também está errada. Em c e d, a assinatura pelo Presidente não basta: cabe ao Congresso resolver definitivamente sobre tratados (art. 49, I).",
+    "fonte": "art. 5º, §§ 1º, 2º e 3º, e art. 49, I, da Constituição Federal",
+    "impressao": "a9f001e9bfee1a4b286755a7513c94ad",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
     "correta": "c",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Na frase 1, sujeito ligado por ou com ideia de exclusão (só um ganha) leva o verbo ao singular. Na frase 4, fazer indicando tempo decorrido é impessoal e fica no singular (Faz dez minutos). Na frase 3, o verbo ser concorda com o numeral: Foram sete quilômetros. A frase 2 é o ponto delicado: com porcentagem, a banca exigiu a concordância com o numeral (1% votou), embora parte dos gramáticos aceite também o plural com o especificador (dos eleitores) - vale saber que a FEPESE cobrou assim.",
@@ -34,6 +376,33 @@
     "impressao": "b2a32ca7ef623fd700bbf3d260bb84da",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Na b, a vírgula depois de 'o servidor' marca a omissão do verbo 'foi recebido' (zeugma), e por isso está correta. A mais tentadora é a c: a expressão intercalada 'na visão deste Tribunal' teria de vir entre duas vírgulas ('que, na visão deste Tribunal, é caso encerrado'), e lá só tem a de depois. Na a falta a vírgula antes do 'mas' adversativo; na d e na e as vírgulas separam termos que não se separam (o verbo do complemento, 'quando' do resto da oração).",
+    "fonte": "emprego da vírgula na elipse do verbo (zeugma) e nos termos intercalados - Bechara, Moderna Gramática Portuguesa",
+    "impressao": "b604977a08b47d7fc5919d395585fb94",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A alternativa c é a cópia do art. 5º, LXXV, da CF: o Estado indenizará o condenado por erro judiciário e o que ficar preso além do tempo fixado na sentença. A pegadinha é b: a responsabilidade do Estado é objetiva (art. 37, § 6º), e a culpa só é discutida na ação de regresso contra o agente, o que derruba também d, já que o agente responde se agiu com dolo ou culpa. A e também erra: o STF (RE 580.252) obriga o Estado a indenizar o preso por danos morais causados por condições degradantes do sistema prisional.",
+    "fonte": "art. 5º, LXXV, e art. 37, § 6º, da Constituição Federal",
+    "impressao": "babd1501f58e74d157b9705589d5f831",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A regra 2.2 manda que as administrações prisionais levem em conta as necessidades INDIVIDUAIS dos presos, particularmente dos que estão em situação de maior vulnerabilidade; a alternativa b troca por 'necessidades coletivas', e esse é o erro. A pegadinha é d, que parece rígida demais, mas está certa: as celas de descanso noturno não devem ser ocupadas por mais de um preso e, na exceção, não é recomendável alojar dois numa mesma cela (regra 12.1). As demais reproduzem as regras 3, 4.1 e 19.3.",
+    "fonte": "Regras de Mandela, regra 2.2; Regras de Mandela, regra 12.1",
+    "impressao": "bb3000300f5b08c04a3fcd90780d9d1b",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
     "correta": "d",
@@ -46,11 +415,218 @@
   },
   {
     "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Em e, convivência, espécies, relevância, presídio e carcerário são todas paroxítonas terminadas em ditongo crescente (-ia, -ie, -io), acentuadas pela mesma regra. A pegadinha está em c: existência, sobrevivência e ciências seguem essa regra, mas âmbito é proparoxítona real e têm leva o circunflexo que marca o plural de ter. Em b, construído quebra a sequência (acento do hiato com i tônico), e em a ficará e haverá são oxítonas terminadas em a.",
+    "fonte": "regras de acentuação: paroxítonas terminadas em ditongo crescente (Acordo Ortográfico de 1990, Base XI) - Bechara, Moderna Gramática Portuguesa",
+    "impressao": "bcf34856b9115db627216ac27ff64377",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O alistamento eleitoral e o voto são obrigatórios para os maiores de dezoito anos. A pegadinha é a c: entre dezesseis e dezoito anos eles são facultativos, assim como para os analfabetos e os maiores de setenta. Os índios não têm regra própria nesse ponto da Constituição, e 21 anos é idade mínima para alguns cargos, não para votar.",
+    "fonte": "art. 14, § 1º, da Constituição Federal",
+    "impressao": "c0af9616d8039f0c3ecba70ec6d1d9c7",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Entre os cargos privativos de brasileiro nato está o de Ministro de Estado da Defesa, ao lado de Presidente e Vice, Presidentes da Câmara e do Senado, Ministro do STF, carreira diplomática e oficial das Forças Armadas. A pegadinha é a d: só o Ministro do Supremo Tribunal Federal precisa ser nato; Ministro de Tribunal Superior (STJ, TST etc.) pode ser naturalizado. Senador, Deputado Federal e Governador também podem ser naturalizados - nato só os que presidem as Casas.",
+    "fonte": "art. 12, § 3º, da Constituição Federal",
+    "impressao": "c6a2689004d7a9eddf66215b0d469dd4",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Com sujeito composto posposto ao verbo, o verbo pode ir ao plural (ou concordar com o núcleo mais próximo), então 'Subiram de preço a mão de obra e o material' está correta. A pegadinha mais tentadora é a d: 'Os Estados Unidos', com artigo no plural, leva o verbo ao plural - 'têm', com acento. Na a, 'eu' com 'ele' pede a 1ª pessoa do plural (faltamos); na c, a passiva sintética concorda com o sujeito (Louvem-se os esforços); na e, 'fazer' indicando tempo é impessoal (Poderá fazer).",
+    "fonte": "regra de concordância verbal com sujeito composto posposto e voz passiva sintética - Cegalla, Novíssima Gramática da Língua Portuguesa",
+    "impressao": "cc471337d14fdc2b8b894b98cb53124c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O art. 5º, LXIII, da CF garante ao preso o direito de permanecer calado, que é a expressão do princípio de que ninguém é obrigado a produzir prova contra si mesmo (nemo tenetur se detegere). A pegadinha é a: calar é um DIREITO, não uma obrigação, e o silêncio não pode ser interpretado em prejuízo da defesa (art. 186, parágrafo único, do CPP). A e inverte o ônus: quem tem de provar a culpa é a acusação, não o preso a inocência.",
+    "fonte": "art. 5º, LXIII, da Constituição Federal; art. 186, parágrafo único, do Código de Processo Penal",
+    "impressao": "ce346cd3b9bf22f36fff8d4eb7d95cad",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Com 12 pontos haveria C(12,2) = 66 retas, mas os 4 pontos de cada lado são colineares: as C(4,2) = 6 retas de cada lado são a mesma reta. Então 66 - 3 x 6 + 3 = 51 retas, mais que 50. A pegadinha é tirar as 18 e esquecer de devolver as 3 retas dos lados, chegando a 48 (alternativa d).",
+    "fonte": "combinação simples com pontos colineares - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "d17fd0b3848fe01bd30017a2b303d8ec",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Ficam sujeitos à lei brasileira, mesmo cometidos no estrangeiro e sem nenhuma condição (extraterritorialidade incondicionada), os crimes contra a administração pública por quem está a seu serviço - é a ideia da e, embora a alternativa, como transcrita, embaralhe a redação da lei ('contra a administração pública, por quem está a seu serviço'). A pegadinha é a a: o crime contra brasileiro cometido fora do país só fica sujeito à lei brasileira se cumpridas as condições da lei (entrada no território, dupla tipicidade, requisição do Ministro da Justiça etc.), e não automaticamente. Também não basta o crime estar previsto no Código (c) ou ser contra qualquer agente público (d).",
+    "fonte": "art. 7º, I, 'c', e § 3º, do Código Penal",
+    "impressao": "d2485a56f6d805e2f5cad2674e70501b",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A Declaração Universal dos Direitos Humanos foi proclamada pela Assembleia Geral da Organização das Nações Unidas em 10/12/1948 (Resolução 217 A (III)), a partir do projeto da Comissão de Direitos Humanos criada pelo Conselho Econômico e Social da ONU. A pegadinha é a e: a OEA aprovou, no mesmo ano, a Declaração Americana dos Direitos e Deveres do Homem, que é outro documento. Mercosul, Comunidade Europeia e OTAN não têm relação com a Declaração Universal.",
+    "fonte": "arts. 13, 1, 'b', e 68 da Carta das Nações Unidas (Decreto 19.841/1945) e Resolução 217 A (III) da Assembleia Geral da ONU (1948)",
+    "impressao": "d2a78fd885d85043554c598210d50718",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A alternativa b é a letra do art. 8º do CP: a pena cumprida no estrangeiro atenua a imposta no Brasil quando diversas e é computada quando idênticas. A pegadinha é d: a lei excepcional ou temporária é ultra-ativa e continua se aplicando ao fato praticado durante sua vigência, mesmo depois de expirada (art. 3º). C erra porque a abolitio criminis faz cessar a execução e os efeitos penais da condenação (art. 2º), e e erra porque a lei mais benéfica alcança até a sentença transitada em julgado (art. 2º, parágrafo único); a, porque o crime se considera praticado no momento da ação ou omissão (art. 4º).",
+    "fonte": "art. 8º do Código Penal; arts. 2º, 3º e 4º do Código Penal",
+    "impressao": "d2e234e1c835df3d4ec7c1284c7d9901",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A regra 78.1 diz que, NA MEDIDA DO POSSÍVEL, a equipe deve incluir número suficiente de especialistas (psiquiatras, psicólogos, assistentes sociais, professores e instrutores técnicos); a alternativa d troca isso por 'sempre', e por isso é a incorreta. A pegadinha é que o resto do texto está igual ao da regra, só o advérbio mudou. As demais reproduzem as regras 74.1, 74.2, 75.3 e 77.",
+    "fonte": "Regras de Mandela, regra 78.1",
+    "impressao": "d9195a4b6daff3a0e583b6e0150017ec",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Só a 3 está certa: o alistamento e o voto são obrigatórios para os maiores de dezoito e facultativos para os analfabetos (art. 14, § 1º). A 1 erra porque os estrangeiros não podem alistar-se (§ 2º); a 2 é a pegadinha, pois vinte e um anos é a idade de deputado e prefeito, e para vereador bastam dezoito (§ 3º, VI, d). A 4 erra porque a reeleição é para um único período subsequente (§ 5º).",
+    "fonte": "art. 14, §§ 1º, 2º, 3º, VI, e 5º, da Constituição Federal",
+    "impressao": "d9d759565313c682164498c83c06774a",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Na passiva analítica 'Os presídios foram reformados', o sujeito é 'Os presídios'; na sintética ele continua sujeito, agora posposto, e o verbo concorda com ele: 'Reformaram-se os presídios'. A pegadinha é a a: a transposição está certa na ideia, mas 'Soltou-se os presos' erra a concordância - o certo é 'Soltaram-se os presos'. A b, a d e a e não fazem passiva sintética: trocam para a voz ativa ou fazem o caminho contrário, da ativa para a analítica.",
+    "fonte": "voz passiva sintética (verbo transitivo direto + se, concordando com o sujeito) - Cegalla, Novíssima Gramática da Língua Portuguesa",
+    "impressao": "d9e2f2bcddd9f98b0362165a36ed4fb3",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O art. 119 da LEP diz que a legislação LOCAL poderá estabelecer normas complementares para o cumprimento da pena em regime aberto. A pegadinha é b ou c, que soam mais 'oficiais': a LEP, que já é a lei federal, deixa esse complemento para o ente local, que é quem mantém a casa do albergado.",
+    "fonte": "art. 119 da Lei 7.210/1984",
+    "impressao": "dd187bad3bf4639a3f2c8dfd13831b00",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Usaram ônibus ou táxi: 80 + 46 - 22 = 104 pessoas. Não usaram nenhum dos dois: 200 - 104 = 96, entre 95 e 100. A pegadinha é não descontar as 22 que usaram os dois e chegar a 200 - 126 = 74.",
+    "fonte": "princípio da inclusão-exclusão: n(A ou B) = n(A) + n(B) - n(A e B) - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "e2e3321c04df09af7f0c10196da73c46",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O art. 126, caput, permite remir por trabalho ou estudo no regime fechado e no semiaberto, e o § 6º estende a remição pelo estudo (frequência a curso de ensino regular ou de educação profissional) a quem está no regime aberto e no livramento condicional; daí 1, 2 e 3. A pegadinha é b (só 2 e 3), de quem lê apenas o caput: no regime aberto também se pode remir, mas só pelo estudo, não pelo trabalho. Pena restritiva de direitos não está prevista na LEP para remição. A mudança de 2026 (§ 9º, Lei 15.402/2026: o regime domiciliar não impede a remição) não altera o gabarito.",
+    "fonte": "art. 126, caput e § 6º, da Lei 7.210/1984",
+    "impressao": "e30d026c5a17eb3079fb7e564a11065f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A Declaração Universal foi proclamada pela Assembleia Geral da ONU em 10/12/1948 como 'ideal comum a ser atingido por todos os povos', a realizar também por medidas de caráter nacional, e por isso seus princípios passaram aos catálogos de direitos das constituições posteriores - a de 1988 inclusive, que põe a prevalência dos direitos humanos entre os princípios do Brasil nas relações internacionais. A pegadinha é a c: ela não é da OEA nem do pós-Primeira Guerra, e sim da ONU, depois da Segunda Guerra. Também não é de caráter econômico (a) nem marca o fim da Guerra Fria (e), que só terminou em 1989-1991.",
+    "fonte": "preâmbulo da Declaração Universal dos Direitos Humanos (Resolução 217 A (III) da Assembleia Geral da ONU, 1948) e art. 4º, II, da Constituição Federal",
+    "impressao": "e3616d8f492e501b964f390b5b0421b8",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Cada senha tem 3 algarismos distintos escolhidos entre 5, com ordem: 5 x 4 x 3 = 60 senhas. Como as duas senhas são testadas ao mesmo tempo e só abre se ambas estiverem certas, as tentativas são 60 x 60 = 3.600, mais de 575. A pegadinha é somar as senhas (60 + 60 = 120) em vez de multiplicar, ou usar combinação, como se a ordem dos algarismos não importasse.",
+    "fonte": "princípio fundamental da contagem (arranjo simples) - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "eb3195c3995b8f78af8e63423b67eca5",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "Solicitar ou receber, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão dela, vantagem indevida, ou aceitar promessa de tal vantagem, é corrupção passiva. A pegadinha é a b: corrupção ativa é crime do particular contra a administração, que OFERECE ou PROMETE a vantagem ao funcionário. Peculato é apropriar-se ou desviar bem de que tem a posse em razão do cargo, e advocacia administrativa é patrocinar interesse privado perante a administração.",
+    "fonte": "arts. 312, 317, 321 e 333 do Código Penal",
+    "impressao": "ed3425edb4aefe63cba8ee0cd903cedc",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O crime é doloso quando o agente quis o resultado (dolo direto) ou assumiu o risco de produzi-lo (dolo eventual) - a e descreve o dolo eventual, ainda que diga 'ato' em vez de 'resultado'. A pegadinha é a d: imperícia, como imprudência e negligência, é modalidade de CULPA. A embriaguez (a) e a emoção (c) não definem o dolo, e a impossibilidade de consumar (b) é crime impossível.",
+    "fonte": "art. 18, I e II, do Código Penal",
+    "impressao": "edc02a547b44a55d9ed970f98ef13f16",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "São 45 mulheres e, entre os 60 homens, 75% são atenciosos, ou seja, 45. Mulheres ou atenciosos = todas as mulheres (45) + os homens atenciosos (45) = 90. A pegadinha é somar as 27 mulheres atenciosas de novo, contando duas vezes quem já está no grupo das mulheres.",
+    "fonte": "princípio da inclusão-exclusão: n(A ou B) = n(A) + n(B) - n(A e B) - Carvalho e Campos, Raciocínio Lógico Simplificado",
+    "impressao": "ee280736279cae2dc41df0768774eedd",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A Constituição diz que constitui crime inafiançável e imprescritível a ação de grupos armados, civis ou militares, contra a ordem constitucional e o Estado Democrático. A pegadinha é misturar com o inciso anterior: insuscetíveis de graça ou anistia (e inafiançáveis) são a tortura, o tráfico, o terrorismo e os hediondos, que NÃO são imprescritíveis. Imprescritíveis na Constituição são só dois: o racismo e a ação de grupos armados.",
+    "fonte": "art. 5º, XLII, XLIII e XLIV, da Constituição Federal",
+    "impressao": "f807269a1c6ccf7f12e01fc95c3b59cf",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Em (e), consigo é reflexivo e se refere ao próprio sujeito (os voluntários), e ajudá-los usa o oblíquo -los depois do infinitivo, como manda a norma. A (b) e a (d) erram pela falta de uniformidade de tratamento: misturam você (3ª pessoa) com te/teu (2ª). A (c) mistura o tu (deves, concentra, joga) com o se de 3ª pessoa: seria concentra-te. A (a) erra duas vezes: informar alguém de algo pede informe-o de que, e com nós vira conosco quando não há reforço (como nós dois, nós mesmos).",
     "fonte": "uniformidade de tratamento e emprego dos pronomes oblíquos (gramática normativa)",
     "impressao": "f8982d6f04e1efea305b3dde354b2014",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "O Protocolo Adicional à Convenção Americana sobre Direitos Humanos em matéria de direitos econômicos, sociais e culturais (Protocolo de San Salvador, 1988) garante o direito a um meio ambiente sadio e diz que os Estados Partes promoverão a proteção, a preservação e o melhoramento do meio ambiente. A pegadinha é a b: o Pacto de San José (1969) trata sobretudo de direitos civis e políticos e não tem dispositivo sobre meio ambiente - foi preciso o protocolo adicional para isso. Rio+20 é conferência da ONU, e os 'protocolos' de Cruz Alta e de Assunção sobre direitos humanos são distratores.",
+    "fonte": "art. 11 do Protocolo de San Salvador (Decreto 3.321/1999)",
+    "impressao": "fa45d2b5625fc39076085ffe178a1e8f",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-05T21:56:25.538774+00:00",
+    "explicacao": "A distinção clássica (Rui Barbosa) é essa: direitos são as normas declaratórias que reconhecem os bens da pessoa, e garantias são as assecuratórias, que protegem o exercício deles (o habeas corpus garante a liberdade de locomoção). A errada mais tentadora é d: os direitos e garantias individuais são cláusula pétrea, e nem emenda tendente a aboli-los pode ser deliberada (art. 60, § 4º, IV). Também erram b (o art. 5º, § 2º, admite direitos decorrentes de princípios e tratados), c (o rito de emenda do § 3º é opcional) e a (estado de defesa e de sítio restringem direitos, arts. 136 e 139).",
+    "fonte": "art. 5º, §§ 2º e 3º, e art. 60, § 4º, IV, da Constituição Federal",
+    "impressao": "fc78140d4664c443cf561e047b67971d",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   }
 ]

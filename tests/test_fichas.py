@@ -381,8 +381,9 @@ def test_as_geradas_do_escopo_aparecem_e_as_de_fora_nao():
 
 
 def test_o_comando_de_gerar_e_um_por_no_e_em_modo_treino():
+    # Como se chama no Windows (R6): `python -m radar` nao funciona aqui.
     assert fichas.comando_de_gerar(CASA_XI) == (
-        'radar gerar --pedido --modo treino --materia "Direito Constitucional" '
+        r'.venv\Scripts\radar.exe gerar --pedido --modo treino --materia "Direito Constitucional" '
         '--assunto "Direitos e garantias fundamentais: direitos e garantias individuais '
         'e coletivos" --subassunto "Inviolabilidade do domicílio" --elemento "CF, art. 5º, '
         'XI" --quantas 10')
@@ -666,7 +667,8 @@ def test_a_lista_das_fichas_mostra_quem_tem_e_quem_falta(com_ficha_real, monkeyp
     from radar.servico import cronograma as diario
 
     monkeypatch.setattr(diario, "hoje_local", lambda: date(2026, 10, 2))
-    html = TestClient(app).get("/fichas").text
+    # A lista do ciclo continua, em ?ver=todas (R1: a aba abre no dia).
+    html = TestClient(app).get("/fichas?ver=todas").text
     assert TEMA in html
     assert "sem ficha" in html            # os outros temas do cronograma real
     assert "Polícia Penal SC:" in html
@@ -740,3 +742,81 @@ def test_todo_tema_do_resto_do_ciclo_1_tem_ficha():
     com_ficha = {(e.chave, e.materia) for e in _reais()}
     faltam = [t.tema for t in temas if (fichas.chave_do_tema(t.tema), t.materia) not in com_ficha]
     assert not faltam, faltam
+
+
+# --- R1 (05/10): caiu ou nao caiu, exemplos reais, macetes e a aba por dia ----------
+
+def test_a_ficha_diz_se_caiu_prova_a_prova_e_mostra_a_questao_inteira():
+    alvo = [
+        incidencia.Ocorrencia(
+            prova="ap2013", ano=2013, materia=DC, conteudo=CASA_XI, status="completa",
+            enunciado="A casa é asilo inviolável, salvo:", resposta="c", numero=15,
+            impressao="k15", conferida=True, pegadinha="ordem judicial só de dia",
+            alternativas={"a": "à noite, por ordem judicial", "c": "em flagrante delito"},
+            impressao_do_enunciado="e15", materia_do_caderno=DC),
+        incidencia.Ocorrencia(prova="ap2019", ano=2019, materia=DC, conteudo=REMEDIOS,
+                              status="completa", numero=40, impressao="k40",
+                              materia_do_caderno=DC),
+    ]
+    explicacao = {"e15": {"explicacao": "O XI só admite a ordem judicial de dia.",
+                          "fonte": "CF, art. 5º, XI", "modelo": "Claude Code, em 04/10/2026"}}
+    macetes = [{"regra": "Casa: de dia, só com ordem judicial.", "fonte": "CF, art. 5º, XI",
+                "modelo": "m", "questoes": [{"prova_url": "ap2013", "numero": 15}]},
+               {"regra": "Macete de outro tema.", "fonte": "f", "modelo": "m",
+                "questoes": [{"prova_url": "ap2019", "numero": 99}]}]
+    ficha = _montar(ocorrencias_alvo=alvo, explicacoes=explicacao, macetes=macetes)
+
+    assert ficha.caiu.frase == "Caiu em 2013: 1 questão · 1 prova."
+    assert ficha.caiu.por_prova == "2013: 1 · 2019: 0"
+    assert fichas.ORIGEM_DO_CAMPO["caiu"] == fichas.ACERVO
+    assert fichas.ORIGEM_DO_CAMPO["exemplos"] == fichas.OFICIAL
+    exemplo = ficha.exemplos[0]
+    assert exemplo.codigo == "2013-q15" and exemplo.resposta == "c"
+    assert dict(exemplo.alternativas)["a"] == "à noite, por ordem judicial"
+    assert exemplo.explicacao["fonte"] == "CF, art. 5º, XI"
+    # O macete entra pela questao real que ele cita, e so ela.
+    assert [m["regra"] for m in ficha.macetes] == ["Casa: de dia, só com ordem judicial."]
+    assert ficha.macetes[0]["do_tema"] == ["2013-q15"]
+
+
+def test_a_lei_seca_leva_a_ficha_da_teoria_do_mesmo_dia_e_da_mesma_materia():
+    teoria = SimpleNamespace(tipo="teoria", materia=DC, titulo=TEMA, desligada=False)
+    lei_seca = SimpleNamespace(tipo="lei_seca", materia=DC, desligada=False,
+                               titulo="Lei seca dirigida: CF art. 5º, XI")
+    de_outra = SimpleNamespace(tipo="lei_seca", materia="Direito Penal", desligada=False,
+                               titulo="Lei seca dirigida: CP art. 13")
+    escritas = [_escrita()]
+    assert fichas.da_faixa(lei_seca, escritas) is None
+    assert fichas.da_faixa_no_dia(lei_seca, [teoria, lei_seca], escritas).tema == TEMA
+    assert fichas.da_faixa_no_dia(de_outra, [teoria, de_outra], escritas) is None
+
+
+def test_a_aba_fichas_separa_o_dia_por_bloco_e_repete_o_cartao(arvore_no_banco):
+    """29/09 na fixture: o Art. 5º de manha (teoria e fixacao) e a noite
+    (aprendizagem), um cartao por bloco; Vozes do verbo sem ficha."""
+    ctx = _contexto(hoje=date(2026, 9, 29))
+    dia = servico_fichas.do_dia(date(2026, 9, 29), ctx)
+    por_bloco = {b.chave: b for b in dia.blocos}
+    manha, noite = por_bloco["manha"], por_bloco["noite"]
+    assert [c.escrita.tema for c in manha.cartoes] == [TEMA]
+    assert manha.cartoes[0].rotulos == ["Teoria", "Fixação"]
+    assert [c.escrita.tema for c in noite.cartoes] == [TEMA]
+    assert ("Português", "Vozes do verbo") in manha.sem_ficha
+    assert manha.cartoes[0].caiu.frase.startswith("Caiu em 2013")
+
+
+def test_a_tela_da_aba_fichas_abre_no_dia_com_manha_e_noite(com_ficha_real):
+    html = TestClient(app).get("/fichas?data=2026-10-06").text
+    assert "Fichas de terça-feira, 6 de outubro de 2026" in html
+    assert "Manhã — estudo" in html and "Noite — questões" in html
+    assert TEMA in html                     # o R+7 da noite
+    assert "Polícia Penal SC (2013 e 2019):" in html
+    assert "Outras provas FEPESE (complementar aceito):" in html
+    assert "Ficha ainda não escrita para este tema" in html   # a teoria do dia
+    assert "/fichas?data=2026-10-05" in html and "todos os temas do ciclo" in html
+    assert "<script" not in html and not PREVISAO.search(html)
+
+
+def test_a_faixa_da_hoje_diz_se_caiu(com_ficha_real):
+    html = TestClient(app).get("/hoje?data=2026-10-06").text
+    assert 'class="caiu-na-faixa"' in html

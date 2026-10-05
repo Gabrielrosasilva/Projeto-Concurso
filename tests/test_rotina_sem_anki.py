@@ -184,10 +184,19 @@ def test_toda_manha_de_dia_util_tem_questoes(real):
     assert len(uteis) == 26
     for data in uteis:
         manha = cronograma.montar_dia(real, data, 1).manha
-        assert sum(f.questoes or 0 for f in manha) == 14, data
         fixacao, portugues = [f for f in manha if f.tipo == "questoes"]
-        assert fixacao.questoes == 8 and cronograma.consulta_por_padrao(fixacao), data
-        assert portugues.questoes == 6 and not cronograma.consulta_por_padrao(portugues), data
+        extras = [f for f in manha if f.rotulo == "Extra"]
+        assert cronograma.consulta_por_padrao(fixacao), data
+        assert not cronograma.consulta_por_padrao(portugues), data
+        if not extras:
+            assert sum(f.questoes or 0 for f in manha) == 14, data
+            assert fixacao.questoes == 8 and portugues.questoes == 6, data
+        else:
+            # A redistribuicao da R4 (decisao 124): o tema que nao caiu tem a
+            # fixacao de 4, e a manha ganha a Extra de um tema que caiu - as
+            # questoes nao diminuem.
+            assert sum(f.questoes or 0 for f in manha) >= 14, data
+            assert 4 in (fixacao.questoes, portugues.questoes), data
 
 
 def test_o_dia_util_nao_cresceu(real):
@@ -197,7 +206,11 @@ def test_o_dia_util_nao_cresceu(real):
         assert sum(f.duracao for f in dia.manha) == 135, data
         assert sum(f.duracao for f in dia.pos22 if not f.opcional) == 0, data
         lei = next(f for f in dia.manha if f.tipo == "lei_seca")
-        assert lei.duracao == 20
+        # 10 min no dia em que o tema de Direito nao caiu (R4, decisao 124): os
+        # 10 que sairam estao na Extra da manha, e a manha continua 135.
+        direito_basico = any(f.rotulo == "Extra" and f.materia == lei.materia
+                             for f in dia.manha)
+        assert lei.duracao == (10 if direito_basico else 20), data
         assert all(a.artigos in lei.titulo for a in dia.essencial.chave), data
 
 

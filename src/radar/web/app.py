@@ -148,6 +148,12 @@ templates.env.globals["ESTA_PARA_REVER"] = servico.erros.esta_para_rever
 templates.env.globals["SELOS"] = origem.SELOS
 templates.env.globals["FRASE_SEM_EVIDENCIA"] = origem.FRASE_SEM_EVIDENCIA
 templates.env.globals["FRASE_DA_QUESTAO_DE_IA"] = origem.FRASE_DA_QUESTAO_DE_IA
+# Os passos de gerar pelo Claude Code (R6): os textos moram no radar.fichas, e
+# a faixa, a ficha e a tela de gerar mostram os mesmos.
+templates.env.globals["PASSO_NO_CLAUDE_CODE"] = fichas_puras.PASSO_NO_CLAUDE_CODE
+templates.env.globals["COMANDO_DE_IMPORTAR"] = fichas_puras.COMANDO_DE_IMPORTAR
+templates.env.globals["AVISO_DO_PEDIDO"] = fichas_puras.AVISO_DO_PEDIDO
+templates.env.globals["PARTES_DO_RESUMO"] = fichas_puras.PARTES_DO_RESUMO
 templates.env.globals["AMOSTRA_INSUFICIENTE"] = amostra.INSUFICIENTE
 
 
@@ -887,6 +893,9 @@ def geradas(
             "subassuntos": _filhos_na_tela(escolhida, assunto.strip() or None),
             "materias": servico.geradas.materias_para_gerar(),
             "para_treinar": servico.geradas.conteudos_para_treinar(),
+            # Os nos das faixas do cronograma (dias passados e os proximos 7),
+            # os com zero gerada tambem, com os 3 passos (R6).
+            "nos_do_cronograma": servico.geradas.nos_do_cronograma(),
             "treinar": treinar.strip(),
             "resumo": servico.geradas.contar(),
             "materia": escolhida,
@@ -1021,6 +1030,11 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # O assunto, o subassunto e o elemento de cada faixa, na propria
             # faixa (decisao 71): pela ficha, ou pelos nos do plano.
             "arvore_das_faixas": servico.fichas.arvore_das_faixas(tela.blocos),
+            # Caiu ou nao caiu, na propria faixa (R1): a mesma conta da ficha.
+            "caiu_das_faixas": servico.fichas.caiu_das_faixas(tela.blocos),
+            # O resumo de cada faixa (R2): o tema, ou a lista de varios.
+            "resumos": (servico.fichas.resumos_do_dia(tela.blocos, tela.data, tela.plano)
+                        if tela.blocos and tela.plano else None),
             # A composicao das faixas que medem (decisao 67) e a do simulado do
             # Qconcursos (decisao 69). So conta quando o dia tem uma delas.
             "composicoes": servico.composicao.das_faixas(tela.blocos, tela.data, tela.plano),
@@ -1029,6 +1043,10 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             "do_sabado": servico.sabado.das_faixas(tela.blocos, tela.data, tela.plano),
             # A faixa de Portugues que comeca pelas do radar (decisao 107).
             "no_radar": servico.faixa_no_radar.das_faixas(tela.blocos, tela.data),
+            # As geradas de cada faixa de treino (R6): o no, quantas ha e os
+            # passos para gerar o que falta.
+            "geradas_das_faixas": (servico.geradas.das_faixas(tela.blocos, tela.plano)
+                                   if tela.blocos else {}),
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,
@@ -1420,13 +1438,24 @@ def analises_materias(request: Request):
 
 
 @app.get("/fichas", response_class=HTMLResponse)
-def fichas_do_cronograma(request: Request):
-    """Os temas do cronograma de hoje em diante, com a ficha de cada um, a
-    prioridade e o que ainda falta escrever."""
+def fichas_do_cronograma(request: Request, data: str = "", ver: str = ""):
+    """As fichas do DIA, por bloco (Manha, Noite, Depois das 22h), um cartao
+    por tema (R1). `?ver=todas` mostra a lista do ciclo de hoje em diante, com
+    a prioridade e o que falta escrever - a tela de antes, que continua."""
+    hoje = servico.cronograma.hoje_local()
+    if ver == "todas":
+        return templates.TemplateResponse(
+            request=request, name="fichas.html",
+            context={"todas": True, "linhas": servico.fichas.lista(), "hoje": hoje},
+        )
+    try:
+        quando = date.fromisoformat(data) if data else hoje
+    except ValueError:
+        quando = hoje
     return templates.TemplateResponse(
         request=request, name="fichas.html",
-        context={"linhas": servico.fichas.lista(),
-                 "hoje": servico.cronograma.hoje_local()},
+        context={"todas": False, "dia": servico.fichas.do_dia(quando), "hoje": hoje,
+                 "por_extenso": cronograma.data_por_extenso(quando)},
     )
 
 
@@ -1449,6 +1478,17 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
         context={"f": ficha, "data": quando,
                  "comando_de_gerar": fichas_puras.comando_de_gerar},
     )
+
+
+@app.post("/fichas/{ident}/resumo/conferir")
+def ficha_conferir_resumo(ident: str, data: str = Form("")):
+    """Marca o resumo do tema como conferido por mim, e volta para a ficha."""
+    try:
+        escrita = servico.fichas.conferir_resumo(ident)
+    except LookupError:
+        return RedirectResponse("/fichas", status_code=303)
+    volta = f"/fichas/{escrita.id}" + (f"?data={data}" if data else "") + "#resumo"
+    return RedirectResponse(volta, status_code=303)
 
 
 @app.post("/fichas/{ident}/conferir")

@@ -17,6 +17,10 @@
     .custo{margin:var(--esp-3) 0;font-size:var(--tam-sm)}
     .custo b{font-size:var(--tam-md)}
     .custo .dica{display:inline}
+    .nos-do-cronograma{list-style:none;padding:0;margin:var(--esp-2) 0 0}
+    .nos-do-cronograma li{padding:var(--esp-2) 0;border-bottom:1px solid var(--cor-borda);font-size:var(--tam-sm)}
+    .nos-do-cronograma .sem-gerada{color:var(--cor-ambar);font-weight:var(--peso-forte)}
+    .passos-de-gerar code{overflow-wrap:anywhere;font-size:var(--tam-xs)}
     /* O aviso que a etapa inteira existe para sustentar. Fica no topo, e nao
        no rodape: e a primeira coisa que eu preciso lembrar ao abrir a tela. */
     .aviso-ia{margin:0 0 var(--esp-4)}
@@ -224,6 +228,43 @@
       <div class="ds-vazio">
         <p>Ainda não há questão gerada.</p>
       </div>
+    {% endif %}
+  </section>
+
+  {# ------------------------------------- os nos do cronograma (R6) --- #}
+  <section class="ds-cartao cartao-geradas" id="do-cronograma">
+    <h2 class="ds-cartao__titulo">Os assuntos do cronograma</h2>
+    <p class="ds-cartao__meta">Os nós das faixas de questões dos dias que já passaram e dos
+      próximos 7, também os que ainda não têm questão gerada. As geradas só treinam: as
+      reais, no Qconcursos, vêm primeiro. Gerar é pelo arquivo de pedido, com o Claude Code.</p>
+    {% if nos_do_cronograma %}
+      <ul class="nos-do-cronograma">
+        {% for item in nos_do_cronograma %}
+          {% set n = item.geradas %}
+          <li>
+            <b>{{ n.no }}</b>
+            <span class="ds-suave">— {{ item.temas | join('; ') }}</span><br>
+            {% if n.geradas %}
+              {{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }}
+              · <a class="ds-link-acao" href="/geradas?treinar={{ n.no | urlencode }}#treinar">treinar</a>
+            {% else %}
+              <span class="sem-gerada">sem questão gerada</span>
+            {% endif %}
+            {% if n.comando %}
+              <details><summary>como gerar {{ n.pedir }}</summary>
+                <ol class="passos-de-gerar">
+                  <li>No terminal: <code>{{ n.comando }}</code></li>
+                  <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
+                  <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
+                </ol>
+                <p class="dica">{{ AVISO_DO_PEDIDO }}</p>
+              </details>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="ds-vazio"><p>Nenhuma faixa de questões com nó na árvore até os próximos 7 dias.</p></div>
     {% endif %}
   </section>
 

@@ -55,6 +55,46 @@
 
   {{ legenda_dos_selos(('plano', 'oficial', 'acervo', 'automatico', 'ia')) }}
 
+  {# R1: caiu ou nao caiu, prova a prova, e o complementar em linha separada.
+     A conta e uma so (incidencia.caiu_no_alvo); a tela so desenha. #}
+  {% set k = f.caiu %}
+  <section class="ds-cartao">
+    <h2>Caiu ou não caiu</h2>
+    <p>{{ s(f.origens.caiu) }} <b>Polícia Penal SC (2013 e 2019):</b> {{ k.frase }}</p>
+    {% if not k.sem_contagem %}<p class="ds-suave">Prova a prova: {{ k.por_prova }} <span class="ds-suave">("—" = a matéria não estava no edital daquele ano)</span></p>{% endif %}
+    {% for n in k.notas %}<p class="frase-padrao">{{ n }}</p>{% endfor %}
+    <p>{{ s(f.origens.linha_complementar) }} <b>Outras provas FEPESE (complementar aceito):</b>
+      {% if f.sem_no %}o tema não tem nó: não contado.{% else %}{{ f.linha_complementar.frase | replace('Acervo complementar FEPESE: ', '') }}{% endif %}
+      <span class="ds-suave">(nunca somado ao alvo)</span></p>
+  </section>
+
+  {# R2: o resumo do tema, para o caderno. Texto de IA, cada frase com a fonte. #}
+  {% set rs = f.escrita.resumo %}
+  <section class="ds-cartao" id="resumo">
+    <h2>Resumo {{ s('ia') }}</h2>
+    {% if rs and rs.partes %}
+      {% for chave, nome in PARTES_DO_RESUMO if rs.partes.get(chave) %}
+        <p class="subtitulo">{{ loop.index + 1 }}. {{ nome }}</p>
+        <ul class="marcas">
+          {% for fr in rs.partes[chave] %}<li>{{ fr.texto }} <span class="ds-suave">— {{ fr.fontes | join('; ') }}</span></li>{% endfor %}
+        </ul>
+      {% endfor %}
+      <div class="procedencia">
+        <span>{{ s('ia') }} Texto escrito por {{ rs.modelo }}.</span>
+        {% if rs.conferido_em %}
+          <span class="ds-suave">Resumo conferido por você em {{ rs.conferido_em }}.</span>
+        {% else %}
+          <form method="post" action="/fichas/{{ f.id }}/resumo/conferir">
+            <input type="hidden" name="data" value="{{ data.isoformat() }}">
+            <button class="ds-botao ds-botao--pequeno" type="submit">✓ Conferi este resumo</button>
+          </form>
+        {% endif %}
+      </div>
+    {% else %}
+      <p class="frase-padrao">Resumo ainda não escrito para este tema.</p>
+    {% endif %}
+  </section>
+
   <section class="ds-cartao">
     <h2>Por que agora</h2>
     <ul class="lista">
@@ -159,17 +199,61 @@
     {% endif %}
   </section>
 
+  {# A questao inteira (R1): enunciado, alternativas e gabarito oficial,
+     recolhida e aberta no clique; a explicacao (IA, quando ha) e a lei que
+     mudou depois da prova. #}
+  {% macro questao_inteira(q) %}
+    <details><summary>ver a questão inteira</summary>
+      <p class="enunciado">{{ q.enunciado }}</p>
+      {% if q.alternativas %}<ul class="marcas">{% for letra, texto in q.alternativas %}<li>{% if letra == (q.resposta or '') | lower %}<b>({{ letra }}) {{ texto }}</b> ✓{% else %}({{ letra }}) {{ texto }}{% endif %}</li>{% endfor %}</ul>{% endif %}
+      <p>{{ s('oficial') }} Gabarito oficial: <b>{{ (q.resposta or '?') | upper }}</b></p>
+      {% for mud in q.mudancas %}{{ aviso_lei(mud) }}{% endfor %}
+      {% if q.pegadinha %}<p>{{ s(f.origens.pegadinhas_do_acervo) }} Onde estava a pegadinha (classificação{% if not q.conferida %}, não conferida{% endif %}): {{ q.pegadinha }}</p>{% endif %}
+      {% if q.explicacao %}<p>{{ s(f.origens.explicacao) }} Explicação: {{ q.explicacao.explicacao }} <span class="ds-suave">Fonte: {{ q.explicacao.fonte }} · {{ q.explicacao.modelo }}</span></p>
+      {% else %}<p class="frase-padrao">Explicação ainda não escrita para esta questão.</p>{% endif %}
+    </details>
+  {% endmacro %}
+
   <section class="ds-cartao">
     <h2>Questões reais relacionadas</h2>
-    {% if f.questoes_reais %}
+    <p class="subtitulo">{{ s(f.origens.exemplos) }} Exemplos reais — Polícia Penal SC (2013 e 2019)</p>
+    {% if f.exemplos %}
       <ul class="lista">
-        {% for q in f.questoes_reais %}
-          <li>{{ s(f.origens.questoes_reais) }} <b>{{ q.codigo }}</b> · {{ q.onde }} · gabarito {{ (q.resposta or '?') | upper }} · {{ q.no }}
-            <details><summary>ver o enunciado</summary><p class="enunciado">{{ q.enunciado }}</p></details>
+        {% for q in f.exemplos %}
+          <li>{{ s(f.origens.exemplos) }} <b>{{ q.codigo }}</b> · gabarito {{ (q.resposta or '?') | upper }}
+            {% if q.como == 'pendente' %}· <span class="ds-suave">classificação pendente: o artigo gravado é do tema</span>
+            {% elif q.como == 'artigo' %}· <span class="ds-suave">pelo artigo gravado na classificação</span>
+            {% else %}· {{ q.no }}{% endif %}
+            {{ questao_inteira(q) }}
           </li>
         {% endfor %}
       </ul>
     {% else %}<p class="frase-padrao">{{ f.vazio('questoes_reais') }}</p>{% endif %}
+    {% set compl = f.questoes_reais | selectattr('evidencia', 'equalto', 'complementar') | list %}
+    <p class="subtitulo">{{ s(f.origens.questoes_reais) }} Outras provas FEPESE (complementar aceito)</p>
+    {% if compl %}
+      <ul class="lista">
+        {% for q in compl %}
+          <li><b>{{ q.codigo }}</b> · {{ q.onde }} · gabarito {{ (q.resposta or '?') | upper }} · {{ q.no }}
+            {{ questao_inteira(q) }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}<p class="frase-padrao">{{ f.vazio('questoes_reais') }}</p>{% endif %}
+  </section>
+
+  <section class="ds-cartao">
+    <h2>Macetes deste tema</h2>
+    {% if f.macetes %}
+      <ul class="lista">
+        {% for m in f.macetes %}
+          <li>{{ s(f.origens.macetes) }} {{ m.regra }}
+            {% if m.pegadinha %}<br><span class="ds-suave">Pegadinha: {{ m.pegadinha }}</span>{% endif %}
+            <br><span class="ds-suave">Questões reais que o sustentam: {{ m.do_tema | join(', ') }} · fonte: {{ m.fonte }} · {{ m.modelo }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}<p class="frase-padrao">Nenhum macete escrito cita questão real deste tema.</p>{% endif %}
   </section>
 
   <section class="ds-cartao">
@@ -197,6 +281,10 @@
       <p class="frase-padrao">Nenhuma questão gerada neste conteúdo ainda. Para gerar, um pedido por nó (o escopo fechado da Etapa 5):</p>
     {% endif %}
     {% for no in f.nos %}<p class="comando">{{ comando_de_gerar(no) }}</p>{% endfor %}
+    {% if f.nos %}
+      <p class="comando">Depois, no Claude Code do VS Code: "{{ PASSO_NO_CLAUDE_CODE }}"; e no terminal: {{ COMANDO_DE_IMPORTAR }}</p>
+      <p class="frase-padrao">{{ AVISO_DO_PEDIDO }}</p>
+    {% endif %}
   </section>
 
   <section class="ds-cartao">

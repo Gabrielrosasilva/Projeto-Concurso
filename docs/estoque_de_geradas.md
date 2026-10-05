@@ -449,9 +449,117 @@ Qconcursos, como o plano manda.
 
 - **Leia as questões ao treinar.** Elas são material auxiliar (🟣); a que estiver
   errada, marque no treino com "essa questão está errada" - ela sai do sorteio.
-- **As 20 geradas de 28/09** estão com a matéria "Aplicação da lei penal (arts.
-  1º a 12)" e não aparecem no treino de Direito Penal; e as 50 antigas têm só a
-  matéria no `conteudo`, então nenhuma ficha as mostra. Está nas pendências.
-- **A ajuda do `radar gerar`** ainda diz que o do zero "só entra quando não
-  existe questão real na matéria"; desde a decisão 35 ele completa dentro do
-  nó. É só o texto.
+- ~~As 20 geradas de 28/09 com a matéria "Aplicação da lei penal"~~: resolvido
+  em 04/10 (decisão 89) - viraram "Direito Penal", e as 50 antigas ganharam o
+  nó.
+- **A ajuda do `radar gerar`** já foi corrigida na docstring (o do zero completa
+  dentro do nó, decisão 35); sobra só a mensagem do console no `cli.py`.
+
+## O saldo de 05/10, com o plano redistribuído (R5)
+
+Calculado pela mesma conta que a faixa de questões mostra
+(`servico.geradas.das_faixas`, decisões 112 e 113), nas faixas de treino de
+06/10 a 07/11 já redistribuídas (decisão 124), com os números do arquivo (sem
+a rampa do nível). **Nada foi gerado nem apagado:** o estoque é por nó, e
+fica. Pela sua escolha na Fase 1, a falta se gera **sob demanda**, pelos 3
+passos da própria faixa (`radar gerar --pedido` / `--importar`, com os seus
+créditos, nunca `--valendo`).
+
+- 171 faixas de treino; 86 nós; **24 nós com zero gerada**;
+- **falta 231** questões contra a maior cota que uma faixa pede de cada nó
+  (259 com o pedido mínimo de 5); **sobra 410** - fica guardada para revisão
+  e para os próximos ciclos;
+- 13 temas (30 faixas) **sem nó na árvore**: a faixa não dá comando de gerar
+  (pendência H).
+
+"Maior cota" é o que a faixa que mais pede deste nó pede dele (as questões da
+faixa divididas entre os nós dela). "Falta" e "sobra" são contra ela.
+
+| Nó | Temas | Geradas válidas | Maior cota de uma faixa | Faixas | Falta | Sobra |
+|---|---|---|---|---|---|---|
+| Imputabilidade penal | Imputabilidade e concurso de pessoas (arts. 26 a 31) | 0 | 25 | 3 | 25 | — |
+| Acentuação gráfica | Acentuação gráfica; Revisão ativa 3: ortografia, acentuação e redação oficial | 0 | 15 | 4 | 15 | — |
+| Ortografia oficial | Ortografia oficial; Revisão ativa 3: ortografia, acentuação e redação oficial | 0 | 15 | 4 | 15 | — |
+| direitos sociais | Direitos sociais (arts. 6º a 11) | 0 | 14 | 3 | 14 | — |
+| Defesa do Estado e das instituições democráticas: segurança pública | Defesa do Estado e segurança pública (arts. 136 a 144) | 0 | 13 | 2 | 13 | — |
+| organização da segurança pública | Defesa do Estado e segurança pública (arts. 136 a 144) | 0 | 12 | 2 | 12 | — |
+| Afirmação histórica dos direitos humanos | Afirmação histórica e dimensões (gerações) | 0 | 10 | 4 | 10 | — |
+| nacionalidade | Nacionalidade e direitos políticos (arts. 12 a 17) | 0 | 9 | 3 | 9 | — |
+| Vozes do verbo | Revisão ativa 2: pronomes, verbos e termos integrantes; Vozes do verbo | 0 | 9 | 3 | 9 | — |
+| Direitos humanos na Constituição Federal | Na Constituição e o status dos tratados | 0 | 7 | 3 | 7 | — |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75 | Órgãos da execução penal (arts. 61 a 81-B) | 5 | 12 | 3 | 7 | — |
+| Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica | Artigo, numeral e pronome (classificação) | 0 | 7 | 2 | 7 | — |
+| Infração penal: elementos, espécies | Fato típico e nexo causal (art. 13) | 0 | 6 | 2 | 6 | — |
+| Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude | Coação, obediência e excludentes de ilicitude (arts. 22 a 25) | 20 | 25 | 3 | 5 | — |
+| Regras mínimas da ONU para o tratamento de pessoas presas > Pessoal do estabelecimento prisional | Regras de Mandela - parte 2 (regras 36 em diante) | 20 | 25 | 2 | 5 | — |
+| Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral | Regras de Mandela - parte 1 (regras 1 a 35) | 20 | 25 | 3 | 5 | — |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica | Livramento condicional, monitoração e penas alternativas (arts. 131 a 170) | 20 | 25 | 2 | 5 | — |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena | Execução da pena, regimes e progressão (arts. 105 a 119) | 20 | 25 | 3 | 5 | — |
+| Compreensão e interpretação de texto (s) | Interpretação 6: bateria cronometrada; Interpretação de texto (cronometrada) | 10 | 15 | 6 | 5 | — |
+| Diagramas lógicos | Conjuntos e diagramas lógicos | 0 | 5 | 2 | 5 | — |
+| Lógica de argumentação: analogias, inferências, deduções e conclusões | Argumentação e quantificadores | 0 | 5 | 2 | 5 | — |
+| Lógica de primeira ordem | Argumentação e quantificadores | 0 | 5 | 2 | 5 | — |
+| Operações com conjuntos | Conjuntos e diagramas lógicos | 0 | 5 | 2 | 5 | — |
+| Direitos humanos e responsabilidade do Estado | Sistemas de proteção e responsabilidade do Estado | 0 | 4 | 3 | 4 | — |
+| Emprego de tempos e modos verbais | Revisão ativa 2: pronomes, verbos e termos integrantes; Verbo 2: emprego dos tempos e modos | 0 | 4 | 3 | 4 | — |
+| Lógica proposicional (ou sentencial) | Bônus: lógica proposicional | 0 | 4 | 24 | 4 | — |
+| direito à vida, à liberdade, à igualdade, à segurança e à propriedade | Art. 5º, caput e incisos I a XVI | 0 | 3 | 4 | 3 | — |
+| Conceito, terminologia, estrutura normativa, fundamentação | Teoria geral | 0 | 3 | 2 | 3 | — |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição | Permissão de saída, saída temporária e remição (arts. 120 a 130) | 22 | 25 | 3 | 3 | — |
+| Equivalências | Bônus: lógica proposicional | 0 | 3 | 24 | 3 | — |
+| Tabelas-verdade | Bônus: lógica proposicional | 0 | 3 | 24 | 3 | — |
+| Flexão nominal e verbal > Plural dos substantivos terminados em -ão | Substantivo e adjetivo (flexão nominal) | 0 | 2 | 1 | 2 | — |
+| Compreensão e interpretação de texto (s) > Relações de sentido e conectivos | Interpretação 3: coesão e referência | 5 | 6 | 1 | 1 | — |
+| Compreensão e interpretação de texto (s) > Tipologia e gênero textual | Interpretação 2: tipos de texto | 5 | 6 | 1 | 1 | — |
+| Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Discurso direto e indireto | Interpretação 5: tipos de discurso | 5 | 6 | 1 | 1 | — |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis | Art. 5º, incisos XVII a XLIX | 11 | 5 | 5 | — | 6 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal | Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios) | 9 | 5 | 3 | — | 4 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Direitos do preso | Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios) | 9 | 5 | 3 | — | 4 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Gratuidades constitucionais aos reconhecidamente pobres | Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios) | 9 | 5 | 3 | — | 4 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Intimidade, vida privada, honra e imagem | Art. 5º, caput e incisos I a XVI | 6 | 3 | 4 | — | 3 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Inviolabilidade do domicílio | Art. 5º, caput e incisos I a XVI | 6 | 3 | 4 | — | 3 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação | Art. 5º, incisos XVII a XLIX | 11 | 5 | 5 | — | 6 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de consciência, crença e assistência religiosa | Art. 5º, caput e incisos I a XVI | 6 | 3 | 4 | — | 3 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais | Art. 5º, incisos XVII a XLIX | 11 | 5 | 5 | — | 6 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais | Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios) | 9 | 5 | 3 | — | 4 |
+| Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Tribunal do júri | Art. 5º, incisos XVII a XLIX | 11 | 5 | 5 | — | 6 |
+| cidadania e direitos políticos > Alistamento eleitoral e voto | Nacionalidade e direitos políticos (arts. 12 a 17) | 19 | 8 | 3 | — | 11 |
+| cidadania e direitos políticos > Voto facultativo e obrigatório | Nacionalidade e direitos políticos (arts. 12 a 17) | 19 | 8 | 3 | — | 11 |
+| Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral | Crimes do funcionário público contra a Administração (arts. 312 a 327) | 16 | 13 | 2 | — | 3 |
+| Crimes contra a Administração Pública > Peculato | Crimes do funcionário público contra a Administração (arts. 312 a 327) | 16 | 12 | 2 | — | 4 |
+| Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis | Aplicação da lei penal (arts. 1º a 12) | 21 | 10 | 2 | — | 11 |
+| Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa | Tentativa, dolo, culpa e erro (arts. 14 a 21) | 17 | 10 | 4 | — | 7 |
+| Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível | Tentativa, dolo, culpa e erro (arts. 14 a 21) | 18 | 10 | 4 | — | 8 |
+| A Constituição brasileira e os tratados internacionais de direitos humanos > Audiência de custódia | Na Constituição e o status dos tratados | 9 | 6 | 3 | — | 3 |
+| A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada | Na Constituição e o status dos tratados | 9 | 6 | 3 | — | 3 |
+| A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados | Na Constituição e o status dos tratados | 18 | 6 | 3 | — | 12 |
+| A Constituição brasileira e os tratados internacionais de direitos humanos > Sistema interamericano de proteção | Sistemas de proteção e responsabilidade do Estado | 12 | 4 | 3 | — | 8 |
+| Teoria geral dos direitos humanos > Características dos direitos humanos | Teoria geral | 6 | 4 | 2 | — | 2 |
+| Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José) | Sistemas de proteção e responsabilidade do Estado | 6 | 4 | 3 | — | 2 |
+| Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos | Sistemas de proteção e responsabilidade do Estado | 6 | 4 | 3 | — | 2 |
+| Teoria geral dos direitos humanos > Eficácia horizontal | Teoria geral | 6 | 3 | 2 | — | 3 |
+| Teoria geral dos direitos humanos > Gerações (dimensões) de direitos | Afirmação histórica e dimensões (gerações) | 36 | 10 | 4 | — | 26 |
+| Teoria geral dos direitos humanos > Sistema global e sistemas regionais de proteção | Sistemas de proteção e responsabilidade do Estado | 6 | 4 | 3 | — | 2 |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Assistência ao preso e ao egresso | Assistência ao preso e ao egresso (arts. 10 a 27) | 20 | 10 | 2 | — | 10 |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Deveres do condenado | Deveres e direitos do preso (arts. 38 a 43) | 19 | 10 | 3 | — | 9 |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Direitos do preso | Deveres e direitos do preso (arts. 38 a 43) | 21 | 10 | 3 | — | 11 |
+| Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal | Órgãos da execução penal (arts. 61 a 81-B) | 23 | 13 | 3 | — | 10 |
+| Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo | Substantivo e adjetivo (flexão nominal) | 8 | 2 | 1 | — | 6 |
+| Concordância nominal e verbal | Revisão ativa 1: concordância, crase e pontuação | 31 | 5 | 2 | — | 26 |
+| Concordância nominal e verbal > Concordância do verbo haver impessoal | Concordância verbal 2: casos especiais | 15 | 8 | 2 | — | 7 |
+| Concordância nominal e verbal > Concordância verbal | Concordância verbal 1: regra geral | 15 | 10 | 3 | — | 5 |
+| Emprego da crase | Revisão ativa 1: concordância, crase e pontuação | 20 | 5 | 2 | — | 15 |
+| Emprego da crase > Crase diante de substantivo feminino sem artigo | Crase 2: proibida, facultativa e casos especiais | 20 | 6 | 2 | — | 14 |
+| Pontuação | Revisão ativa 1: concordância, crase e pontuação | 20 | 5 | 2 | — | 15 |
+| Pontuação > Emprego da vírgula | Pontuação 1: vírgula entre termos | 20 | 15 | 2 | — | 5 |
+| Pronomes: emprego, forma de tratamento e colocação | Revisão ativa 2: pronomes, verbos e termos integrantes | 40 | 4 | 2 | — | 36 |
+| Pronomes: emprego, forma de tratamento e colocação > Colocação e emprego dos pronomes | Pronomes 2: colocação pronominal | 20 | 15 | 2 | — | 5 |
+| Pronomes: emprego, forma de tratamento e colocação > Uniformidade de tratamento | Pronomes 3: formas de tratamento | 20 | 8 | 2 | — | 12 |
+| Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial | Revisão ativa 3: ortografia, acentuação e redação oficial | 25 | 5 | 2 | — | 20 |
+| Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento | Redação oficial 1: atributos e tratamento | 20 | 15 | 2 | — | 5 |
+| Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal | Revisão ativa 2: pronomes, verbos e termos integrantes | 20 | 3 | 2 | — | 17 |
+| Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto | Termos integrantes 1: objeto direto e indireto | 20 | 15 | 2 | — | 5 |
+| Princípios de contagem e probabilidade > Combinações | Princípios de contagem | 4 | 1 | 1 | — | 3 |
+| Princípios de contagem e probabilidade > Permutações e ordenação | Princípios de contagem | 4 | 2 | 1 | — | 2 |
+| Princípios de contagem e probabilidade > Princípio multiplicativo | Princípios de contagem | 4 | 2 | 1 | — | 2 |
+| Princípios de contagem e probabilidade > Probabilidade | Probabilidade | 13 | 10 | 2 | — | 3 |

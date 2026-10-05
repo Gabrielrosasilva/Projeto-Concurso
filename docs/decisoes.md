@@ -2960,7 +2960,9 @@ pontos foram decididos por voce antes de qualquer linha de codigo:
     (`--conferir` ou o botao) grava a data e NAO apaga a procedencia; a ficha
     conferida nao e sobrescrita por importacao nova, e `--pedido --refazer`
     pede de novo so as nao conferidas. As 61 de 02/10 estao todas por
-    conferir.
+    conferir. *Revista em 05/10/2026 pelas decisoes 116 e 121: o texto de IA
+    novo diz o modelo ("Claude Code (claude-opus-5-5), ..."), quando a
+    resposta o declara; o que ja estava gravado nao mudou.*
 
 48. **texto de lei na ficha e o texto VIGENTE, conferido na compilacao da
     Camara.** O Planalto recusa a conexao do Claude Code; a norma atualizada
@@ -4041,3 +4043,217 @@ mesmo lote, ja estavam).
      na comparacao do fechamento. Mora no `servico/faixa_no_radar.py`; so
      Portugues por enquanto (`MATERIAS`), a materia que o complementar
      cobre inteira.
+
+## A revisao final do estudo, subetapa R1 (05/10/2026)
+
+A Fase 1 do pedido de 05/10 ("revisao final do estudo") foi aprovada com as
+16 respostas recomendadas; cada uma vira decisao na subetapa em que e
+aplicada. Na R1:
+
+108. **"Caiu ou nao caiu" e uma conta so, prova a prova**
+     (`incidencia.caiu_no_alvo`), usada pela ficha, pela faixa da tela Hoje,
+     pela aba Fichas e, na R4, pela redistribuicao. Tres fontes, nunca
+     aproximadas:
+     - a questao classificada num no do tema (a regra do mapa);
+     - **sem no na ficha**, a questao classificada na mesma materia cujo
+       ARTIGO gravado (`dispositivo`) cai na faixa de artigos do tema ("LEP,
+       arts. 28 a 37"), e so da mesma lei (`LEI_DO_DISPOSITIVO`: CP, CPP, CF,
+       LEP). A questao de Sociologia que cita a LEP nao conta na LEP;
+     - a questao **PENDENTE** da materia com o artigo do tema: caiu, e vai a
+       parte, com o aviso. Motivo: a "Aplicacao da lei penal" dizia "0
+       questoes · 0 provas", e cairam 4 (2013 q50, q51, q53; 2019 q51),
+       pendentes porque o tema nao esta no programa de 2019. A incidencia do
+       NO continua sem elas.
+     O "—" de cada ano sai do CADERNO daquele ano (a materia que ele
+     declara), e nao da classificacao: as 4 de Direito Administrativo de
+     2013 que foram para Administracao Publica nao fazem a materia "existir"
+     em 2013. A classe do tema (para a R4): **cheio** quando caiu nas provas
+     que bastam (o `minimo_provas` do `config/amostra.yml`, 2); **normal**
+     quando caiu numa; **basico** quando nao caiu, com a materia nas 2
+     provas e o tema contado. Tema sem contagem (sem no e sem faixa de
+     artigos) ou de materia de uma prova so (LEP, Raciocinio, Legislacao
+     Especial, Sociologia) **nao e rebaixado**, e a tela diz "Base de uma
+     prova so, e o tema nao e rebaixado: Nao ha evidencia suficiente no
+     acervo para afirmar isso.";
+109. **o exemplo real e a questao inteira**: enunciado, alternativas e o
+     gabarito oficial (🟢, a questao tirada da prova), recolhidos num
+     `<details>`; a pegadinha da classificacao (🔵), a explicacao escrita
+     quando existe (🟣, `data/explicacoes.json`, pela impressao do
+     enunciado) e o aviso da lei que mudou depois da prova. Os **macetes**
+     entram na ficha pela questao real que citam (prova e numero), e nunca
+     pelo nome do assunto: macete sem questao do tema nao aparece. O titulo
+     "Questoes reais relacionadas" fica (§11 e o aceite);
+110. **a lei seca dirigida e do tema da teoria do mesmo dia e da mesma
+     materia** (`fichas.da_faixa_no_dia`), so para a tela: o botao da
+     ficha (e o do resumo, na R2) e o "onde na arvore". O "estudado" da
+     Etapa 4 nao muda: so conta a faixa com ficha propria;
+111. **a aba Fichas abre no DIA, por bloco** (Manha, Noite, Depois das
+     22h), um cartao por tema em cada bloco em que ele aparece, com o
+     caminho na arvore, as faixas do bloco, "Policia Penal SC (2013 e
+     2019)" prova a prova e "Outras provas FEPESE (complementar aceito)" em
+     linha separada. Faixa com materia sem ficha (o bonus) aparece como
+     "Ficha ainda nao escrita para este tema". A lista do ciclo inteiro
+     continua em `/fichas?ver=todas`, agora com o mesmo "caiu".
+     **O defeito relatado (o art. 13 sumido na aba) nao se reproduziu** com
+     o codigo e o dado de 05/10, nem no servidor que estava no ar: a lista
+     antiga o tinha na 2a linha. A causa provavel era a lista do ciclo
+     inteiro sem manha e noite; o dia por bloco resolve de qualquer jeito.
+
+## A revisao final do estudo, subetapa R6 (05/10/2026)
+
+112. **a faixa de questoes diz onde fazer, nesta ordem** (as decisoes suas da
+     Fase 1, item 10): "Voce estudou: <tema>; na arvore: <no>"; **1º no
+     Qconcursos**, que mede (o filtro da faixa, ou "procure pelo nome do
+     tema"); **2º, se quiser mais, as geradas do radar**, que so treinam e
+     cujo acerto e um segundo numero. Com gerada no no: "N questoes geradas
+     deste assunto" e o botao "Treinar no radar" (form POST para
+     `/geradas/treinar`, sem JavaScript). Sem gerada: "Nao ha questao gerada
+     deste assunto ainda." e os 3 passos. O check da faixa continua guardando
+     so o que eu fiz no Qconcursos. Vale para as faixas `questoes`, `revisao`
+     e `bonus` com materia; diagnostico e simulado medem e ficam de fora;
+113. **o N do pedido**: as questoes da faixa divididas entre os nos dela por
+     igual (o resto para os primeiros), menos as geradas validas que cada no
+     ja tem (nele e abaixo, `servico.geradas.contagem_por_no`), **no minimo
+     5** (`fichas.PEDIDO_MINIMO_DE_GERADAS`). No com o bastante nao pede.
+     A ficha SEM no fica "sem no na arvore", sem comando: o assunto que ela
+     escreve pode ser a lei inteira (na LEP, 150 geradas), e contar as
+     geradas dele seria aproximar. Sem ficha, valem os `nos` do plano ou o
+     `conteudo`;
+114. **o comando e `.venv\Scripts\radar.exe`**, e sai de uma funcao so
+     (`fichas.comando_de_gerar`, com `RADAR_NO_WINDOWS`), como os passos 2 e
+     3 (`PASSO_NO_CLAUDE_CODE`, `COMANDO_DE_IMPORTAR`, `AVISO_DO_PEDIDO`):
+     a faixa, a ficha, a tela de gerar e o `radar hoje` mostram o mesmo
+     texto. `python -m radar` nao funciona (o pacote nao tem `__main__.py`).
+     O `--elemento` so vai quando o proprio no e um elemento da arvore.
+     Nenhum comando mostrado tem `--valendo`, e o botao da API nao aparece;
+115. **a tela Gerar questoes lista os nos do cronograma**, das faixas de
+     treino do comeco do plano ate 7 dias depois de hoje, os com zero
+     tambem ("sem questao gerada"), cada um com os 3 passos num `<details>`
+     e o N pela maior cota que uma faixa pede dele (`servico.geradas.
+     nos_do_cronograma`). O "Treinar com as que ja tenho" nao mudou.
+
+## A revisao final do estudo, subetapa R3 (05/10/2026)
+
+116. **a procedencia do texto de IA passa a dizer o modelo** (revisa a
+     decisao 47, a seu pedido na Fase 1): "Claude Code (claude-opus-5-5),
+     <o que fez>, em <data>". A 47 tirava o modelo porque o importador nao
+     sabe quem respondeu; quem escreve sabe, e o CLAUDE.md e a decisao 65 ja
+     pediam "modelo e data". **O que ja esta gravado nao muda** - nenhuma
+     procedencia antiga e reescrita. Na R3, a correcao a mao das 7 fichas
+     acrescentou "; corrigida pelo Claude Code (claude-opus-5-5) em
+     05/10/2026 (R3)" ao campo `modelo`. A importacao (`manual.procedencia`)
+     passa a usar o modelo na R2, quando a resposta disser qual foi;
+117. **nas Regras de Mandela, a ficha da a letra da traducao do CNJ (2016),
+     com a nota do original em ingles quando os dois diferem** (sua escolha
+     na Fase 1). A ficha manda ler o CNJ, e a prova tende a copiar a
+     traducao oficial. Nas regras 12 (o ingles condiciona ao alojamento em
+     celas individuais) e 40 (o ingles diz "in any disciplinary capacity"; o
+     CNJ, "em cumprimento a qualquer medida disciplinar"), a correcao de
+     04/10, que seguia o ingles, foi revista; e a pegadinha que contradizia
+     a letra do CNJ saiu.
+
+## A revisao final do estudo, subetapa R2 (05/10/2026)
+
+118. **o resumo do tema mora na ficha** (`resumo` no `data/fichas.json`, sem
+     estrutura paralela; a ficha sem resumo fica no arquivo como era). A
+     **parte 1 ("caiu ou nao caiu") e calculada na hora** (🔵, o
+     `incidencia.caiu_no_alvo`), e nao texto gravado: o numero acompanha
+     qualquer reclassificacao. As partes 2 a 6 (dominar, artigos, como a
+     banca cobra, pegadinhas, o basico) sao texto de IA (🟣), e **cada frase
+     tem as fontes**. A importacao (e o `radar fichas --verificar-resumos`,
+     que confere de novo contra o acervo do dia - o item 4e) recusa: frase
+     sem fonte; questao fora do tema ou com o gabarito trocado; "como a
+     banca cobra" sem questao real (sem nenhuma, so a frase exata de
+     evidencia insuficiente); pegadinha sem questao e sem a marca "sem
+     questão real"; artigo sem dispositivo nas materias de lei; o basico
+     quando o tema caiu, ou faltando quando e da classe basica; e previsao.
+     O resumo conferido por mim nao e sobrescrito;
+119. **a questao de outra prova se cita com o prefixo `FEPESE-`**
+     ("FEPESE-2024-q8"): o mesmo ano e numero pode ser de outra prova, e
+     "2013-q6" do complementar se confundia com a prova de 2013 do cargo;
+120. **o botao "Resumo" fica em toda faixa ligada a materia, menos a pausa,
+     e na aba Fichas**; abre uma janela por cima da pagina SO com CSS
+     (`.ds-janela`, `:target`/`:has(:target)`, no `design.css`), com
+     "Fechar"; na Noite, ja em "como a banca cobra". A lei seca abre o da
+     teoria do dia (decisao 110). Faixa de varios temas abre a lista: a
+     correcao, os temas do dia; a revisao semanal, os estudados de segunda
+     ate o dia; o simulado e o diagnostico, os das materias deles estudados
+     ate o dia; o R+7 dos diagnosticos, os das materias dos diagnosticos do
+     dia de origem. Faixa com materia e sem ficha: "Resumo ainda nao escrito
+     para este tema". Nenhum JavaScript novo;
+121. **a procedencia com o modelo vale na importacao** (aplica a 116): a
+     resposta declara o `modelo` ("claude-opus-5-5"), e a procedencia fica
+     "Claude Code (claude-opus-5-5), importado manualmente, em <data>"; sem a
+     declaracao (ou com texto que nao e nome de modelo), o texto de antes;
+122. **a explicacao das questoes reais do alvo que sao exemplo de tema**
+     (`radar fichas --pedido --explicacoes`): o mesmo lote "explicacoes" e a
+     mesma importacao do `--explicacoes` (o gabarito oficial manda, a fonte
+     e obrigatoria), com a instrucao propria ("onde estava a pegadinha", e
+     nao "eu errei"). A fonte por paragrafo ("§ 5 da Declaracao de Viena")
+     passou a servir, como a "regra 12" de Mandela (decisao 76): chamar o §
+     de "art." para passar na trava seria citar errado;
+123. **montar um ciclo novo inclui escrever as fichas e os resumos dos temas
+     dele**, pelo mesmo fluxo (`radar fichas --pedido`, depois `--pedido
+     --resumos` e `--pedido --explicacoes`), antes do primeiro dia do ciclo.
+     Esta registrado na pendencia do Ciclo 2.
+
+## A revisao final do estudo, subetapa R4 (05/10/2026)
+
+124. **o Ciclo 1 foi redistribuido pela classe de cada tema** (decisao 108),
+     de 06/10 a 07/11, aprovado por voce com o ensaio dia a dia:
+     - tema **basico** (nao caiu nas 2 provas, com no ou faixa de artigos,
+       sem pendente do tema): Direito - teoria 40→30, fixacao 8→4, lei seca
+       20→10, aprendizagem com `teto` 10 (14 quando o complementar tem
+       amostra); Portugues - teoria 20→15, fixacao 6→4, noite com `teto` 6
+       (8 com complementar); R+7/R+30 de tema basico - 10→6;
+     - o tempo que sai vira a faixa **"Extra: <tema>"** (`tipo: revisao`,
+       `rotulo: Extra`, sem consulta), no mesmo dia, de um tema que CAIU, da
+       MESMA materia, ja estudado, o de contato mais antigo no plano (empate:
+       mais questoes no alvo). A da noite usa `sobra_da_rampa`: a rampa do
+       nivel menos o teto, e o total do dia fica igual em todo nivel. O
+       prefixo "Extra: " entrou no `PREFIXOS_DO_TEMA`: a faixa tem ficha,
+       resumo e geradas do tema dela;
+     - **o teto com complementar e 14, e nao os 15 da Fase 1**: o
+       arredondamento de 5 em 5 min so fecha com teto par (com 15, o dia do
+       nivel 2 ficaria 5 min mais longo);
+     - **os minutos de cada dia ficaram iguais nos niveis 1 a 6; as questoes
+       subiram** onde a teoria e a lei seca viraram questao: +2 em 07, 13 e
+       21/10 e +8 em 20/10 (2119 → 2133 no plano). Na Fase 1 eu tinha
+       escrito que as questoes tambem ficavam iguais, e estava errado;
+     - mudaram 7 dias: 07/10 (Concordancia verbal 2), 12/10 (R+7 do art. 13),
+       13/10 (Crase 2), 20/10 (Direitos sociais), 21/10 (Pronomes 3), 27/10
+       (R+7 de Direitos sociais) e 04/11 (R+30 do art. 13). A LEP e o
+       Raciocinio (uma prova so) e os temas sem contagem nao rebaixaram, e o
+       R+30 da Aplicacao da lei penal (28/10) tambem nao: as 4 pendentes dele
+       cairam nas 2 provas. Os dias ate 05/10, os titulos e as datas dos temas
+       nao mudaram; a fotografia de antes esta em
+       `tests/fixtures/cronograma_antes_da_r4.json`.
+     A mesma regra vale para montar o Ciclo 2 (decisao 123).
+
+## A revisao final do estudo, subetapa R5 (05/10/2026)
+
+125. **o estoque de geradas se completa sob demanda** (sua escolha na Fase
+     1): com o Qconcursos primeiro e as geradas so como treino a mais
+     (decisao 112), nao se gera a falta inteira de uma vez. O saldo por no
+     (falta 231, sobra 410, 24 nos com zero) esta no
+     `docs/estoque_de_geradas.md`; cada faixa diz quanto falta no no dela e
+     da os 3 passos, e o estoque - por no, e nao por dia - nunca e refeito
+     nem apagado.
+
+## A revisao final do estudo, subetapa R7 (05/10/2026)
+
+126. **(registro atrasado, pedido de 05/10) o radar vai para a nuvem com
+     login e dois perfis - planejado, e nao comecado.** O CLAUDE.md dizia
+     "nao tem login, nao vai para producao", e a decisao de 26/09 (o `radar
+     web --rede`) tambem; o pedido de 05/10 abriu o roteiro
+     ([roteiro_nuvem.md](roteiro_nuvem.md), etapas N0 a N6), com as perguntas
+     que voce responde antes da N1. Ate la, vale o sistema local de sempre.
+     Achado na conferencia dos docs da Fase 1, que viu o roteiro sem a
+     decisao.
+
+Junto, sem decisao nova: a decisao 47 ("nunca o nome de um modelo" na
+procedencia) foi revista pela 116 e pela 121 - o texto de IA novo diz o
+modelo, e o antigo continua como esta; a 10ª gerada rejeitada, que so estava
+no banco, foi exportada para o `questoes_geradas.json` (775 linhas, 10
+rejeitadas); e os 2 macetes de "Direito Processo Penal" (o nome do caderno de
+2013) passaram ao nome do edital, "Direito Processual Penal".

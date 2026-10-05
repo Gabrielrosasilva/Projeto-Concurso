@@ -30,13 +30,14 @@ from pathlib import Path
 from radar import config, gerador, leis
 from radar.db import criar_tabelas, sessao
 from radar.models import agora
-from radar.origem import IA
+from radar.origem import FRASE_SEM_EVIDENCIA, IA
 from radar.questoes import chave_da_questao
 from radar.regioes import normalizar
 from radar.servico import geradas
 from radar.util import fuso_local
 
-TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas", "associados")
+TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas", "associados",
+         "resumos")
 
 # Quantos macetes por materia. Tres cabe numa resposta so e obriga a IA a
 # escolher o que mais cai, em vez de listar tudo.
@@ -55,9 +56,15 @@ def caminho_das_explicacoes() -> Path:
     return config.diretorio_dados() / "explicacoes.json"
 
 
-def procedencia(quando: datetime | None = None) -> str:
-    """O que vai no campo `modelo`. Diz o caminho, e nao um modelo que eu nao
-    sei qual foi.
+#: O nome de modelo que a resposta pode declarar: letras, numeros, ponto,
+#: hifen e sublinhado ("claude-opus-5-5"). Outra coisa nao entra no texto.
+MODELO_DECLARADO = re.compile(r"^[A-Za-z0-9._-]{3,60}$")
+
+
+def procedencia(quando: datetime | None = None, modelo_ia: str | None = None) -> str:
+    """O que vai no campo `modelo`: o caminho e, quando a resposta diz, o
+    modelo que escreveu (decisao 116, revisa a 47). O importador nao sabe
+    quem respondeu; quem escreve sabe, e declara no `modelo` da resposta.
 
     A data e a do relogio de Florianopolis: o `agora()` e UTC, e uma
     importacao depois das 21h saia com o dia seguinte (as 61 fichas de
@@ -65,7 +72,10 @@ def procedencia(quando: datetime | None = None) -> str:
     momento = quando or agora()
     if momento.tzinfo is not None:
         momento = momento.astimezone(fuso_local())
-    return f"Claude Code, importado manualmente, em {momento:%d/%m/%Y}"
+    quem = "Claude Code"
+    if modelo_ia and MODELO_DECLARADO.match(modelo_ia.strip()):
+        quem = f"Claude Code ({modelo_ia.strip()})"
+    return f"{quem}, importado manualmente, em {momento:%d/%m/%Y}"
 
 
 # --- as instrucoes ----------------------------------------------------------
@@ -104,6 +114,26 @@ Regras:
 - a lei pode ter mudado depois da prova: se o texto vigente mudou o gabarito,
   diga isso na explicacao;
 - diga tambem por que a alternativa errada mais tentadora esta errada;
+- curto: no maximo 5 frases.
+
+Responda SOMENTE um JSON, no formato:
+{"correta": "c", "explicacao": "...", "fonte": "art. 112 da Lei 7.210/1984"}"""
+
+
+# A explicacao da questao real que e EXEMPLO de um tema do cronograma (R2): o
+# "onde estava a pegadinha" do exemplo da ficha. Eu nao errei estas.
+INSTRUCAO_EXPLICACAO_DO_TEMA = """Voce recebe UMA questao real da prova do meu cargo (Policia Penal / Agente Penitenciario de SC, banca FEPESE), com o gabarito oficial ja conferido. Ela e exemplo de um tema do meu cronograma.
+
+Explique onde estava a pegadinha: por que a alternativa do gabarito oficial e a correta, e por que a errada mais tentadora esta errada.
+
+Regras:
+- o gabarito oficial manda: explique a alternativa dele, e repita a letra dele
+  no campo "correta". Se voce discordar do gabarito, NAO responda este pedido;
+- diga a FONTE: o artigo da lei, assim: "art. 112 da Lei 7.210/1984"; nas
+  Regras de Mandela, "Regras de Mandela, regra 12.1"; fora de Direito, a regra
+  gramatical ou logica. Sem fonte segura, nao responda;
+- a lei pode ter mudado depois da prova: se o texto vigente mudou o gabarito,
+  diga isso na explicacao;
 - curto: no maximo 5 frases.
 
 Responda SOMENTE um JSON, no formato:
@@ -227,8 +257,46 @@ Responda SOMENTE um JSON, no formato:
 {"ficha": {"tema": "...", "assunto": "...", "subassunto": "", "elemento": "...", "tipo_elemento": "...", "nos": ["..."], "por_que_estes_nos": "...", "ler_exatamente": "...", "como_pesquisar": ["..."], "entender": ["..."], "memorizar": ["..."], "pegadinhas": ["..."], "fonte_sugerida": ""}}"""
 
 
+# O resumo do tema (R2, revisao final do estudo): o texto de uma tela para o
+# caderno. A parte 1 (caiu ou nao caiu) o radar calcula na hora; a IA escreve
+# as outras, e cada frase diz o que a sustenta.
+INSTRUCAO_RESUMO = """Voce recebe UM tema do meu cronograma de estudo para a Policia Penal SC (banca FEPESE), com a ficha de estudo dele, o que as provas do meu cargo (2013 e 2019) mostram desse tema, as questoes reais do tema (com as alternativas e o gabarito oficial) e as de outras provas da FEPESE, separadas.
+
+Escreva o RESUMO do tema: um texto curto, que caiba numa tela, para eu passar para o caderno antes da videoaula. Partes, nesta ordem:
+- `dominar`: o que eu preciso dominar (3 a 6 frases curtas);
+- `artigos`: os artigos ou regras-chave (2 a 6), cada um com o que ele diz;
+- `como_cobra`: como a banca cobrou ESTE tema, so a partir das questoes reais do pedido, cada frase citando o codigo da questao ("2019-q51" nas provas do meu cargo; "FEPESE-2024-q8" nas outras provas da FEPESE, sempre com o prefixo, e dizendo que sao de outro concurso). Sem questao real no pedido, a parte e EXATAMENTE uma frase com o texto "{frase_sem_evidencia}" (com os acentos, igual) e a fonte "acervo";
+- `pegadinhas`: as pegadinhas, cada uma com o codigo da questao real em que aparece; a confusao comum que nao vem de questao real leva a fonte "sem questão real";
+- `basico`: SO quando o pedido diz que o tema NAO caiu: o basico do tema (2 a 4 frases). Quando caiu, nao escreva esta parte.
+
+Regras:
+- CADA frase tem `texto` e `fontes`: a lista do que a sustenta - o dispositivo ("CP, art. 13, § 2º"; "Regras de Mandela, regra 12.1"), a regra gramatical com a obra ("regra de concordancia - Pestana"), ou o codigo da questao real ("2013-q7"). Frase sem fonte sera RECUSADA;
+- so cite questao que esta no pedido; ao citar o gabarito, escreva "2013-q7 (gabarito B)" e use a letra do gabarito oficial do pedido;
+- escreva pelo texto VIGENTE da lei; se ela mudou depois da prova, diga isso na frase;
+- nada de previsao ("vai cair", "certamente", "a FEPESE sempre..."): sera RECUSADO. O que a banca fez e o que as questoes do pedido mostram, e so;
+- sem seguranca sobre um artigo, uma regra ou um numero, nao escreva a frase.
+
+Responda SOMENTE um JSON, no formato:
+{"resumo": {"dominar": [{"texto": "...", "fontes": ["..."]}], "artigos": [...], "como_cobra": [...], "pegadinhas": [...], "basico": [...]}}"""
+# A frase do acervo mora so no origem.py (o teste dela vigia): entra aqui.
+INSTRUCAO_RESUMO = INSTRUCAO_RESUMO.replace("{frase_sem_evidencia}", FRASE_SEM_EVIDENCIA)
+
+
 def _como_responder(tipo: str) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
+    if tipo == "resumos":
+        return (
+            "Este arquivo foi gerado por `radar fichas --pedido --resumos`. Para "
+            "cada item de `pedidos`, siga a `instrucao` usando o texto de `pedido` "
+            "e as listas do proprio item. Responda TODOS num unico arquivo JSON, "
+            "no formato de `formato_da_resposta`: o mesmo `lote`, o `modelo` que "
+            "escreveu (ex.: \"claude-opus-5-5\") e o `id` de cada pedido com o "
+            "objeto `resumo` dele. Salve como data/resposta_ia.json e rode "
+            "`radar fichas --importar data/resposta_ia.json`. Frase sem fonte, "
+            "questao que nao esta no pedido, gabarito diferente do oficial, "
+            "'como a banca cobra' sem questao real ou texto de previsao sera "
+            "RECUSADO."
+        )
     if tipo == "fichas":
         return (
             "Este arquivo foi gerado por `radar fichas --pedido`. Para cada item "
@@ -302,6 +370,12 @@ def _como_responder(tipo: str) -> str:
 
 
 def _formato(tipo: str) -> dict:
+    if tipo == "resumos":
+        frase = {"texto": "...", "fontes": ["CP, art. 13, § 2º", "2019-q51 (gabarito C)"]}
+        item = {"dominar": [frase], "artigos": [frase], "como_cobra": [frase],
+                "pegadinhas": [frase], "basico": []}
+        return {"lote": "<o lote deste arquivo>", "modelo": "<o modelo que escreveu>",
+                "respostas": [{"id": "r1", "resumo": item}]}
     if tipo == "fichas":
         item = {"tema": "<o tema do pedido>", "assunto": "...", "subassunto": "",
                 "elemento": "...", "tipo_elemento": "...", "nos": ["..."],
@@ -527,6 +601,50 @@ def pedido_de_explicacoes() -> dict:
                 "pedido": (f"MATERIA: {q.materia or 'nao informada'}\n\n"
                            f"QUESTAO ({q.banca or 'FEPESE'} {q.ano or ''})\n\n"
                            f"{gerador._questao_por_extenso(q)}"),
+            })
+    return _novo_lote("explicacoes", pedidos)
+
+
+def pedido_de_explicacoes_dos_temas(desde=None) -> dict:
+    """Um pedido por questao real do ALVO que e exemplo de um tema do
+    cronograma (as que a ficha conta e as pendentes do tema), de `desde`
+    (padrao: o comeco do plano) em diante, e que ainda nao tem explicacao
+    (R2). E o mesmo lote "explicacoes", com a mesma importacao: o gabarito
+    oficial manda e a fonte e obrigatoria."""
+    from sqlalchemy import select
+
+    from radar import fichas
+    from radar.models import QuestaoDeProva
+    from radar.servico import fichas as servico_fichas
+
+    ctx = servico_fichas.contexto()
+    ja_explicadas = set(carregar_explicacoes())
+    temas_por_questao: dict[tuple, list[str]] = {}
+    for tema in fichas.temas_do_plano(ctx.plano, desde or ctx.plano.inicio):
+        escrita = next((e for e in ctx.escritas if e.chave == fichas.chave_do_tema(tema.tema)
+                        and e.materia == tema.materia), None)
+        if escrita is None:
+            continue
+        for q in fichas.montar(escrita, ctx).exemplos:
+            temas_por_questao.setdefault((q.prova, q.numero), []).append(escrita.tema)
+    criar_tabelas()
+    pedidos = []
+    with sessao() as s:
+        for (prova, numero), temas in sorted(temas_por_questao.items(),
+                                             key=lambda x: (x[0][0], x[0][1] or 0)):
+            q = s.scalar(select(QuestaoDeProva).where(QuestaoDeProva.prova_url == prova)
+                         .where(QuestaoDeProva.numero == numero))
+            if q is None or not q.resposta or q.anulada or q.impressao in ja_explicadas:
+                continue
+            ja_explicadas.add(q.impressao)
+            pedidos.append({
+                "id": f"e{len(pedidos) + 1}", "materia": q.materia,
+                "impressao": q.impressao, "gabarito": q.resposta,
+                "codigo": f"{q.ano}-q{q.numero}", "temas": temas,
+                "instrucao": INSTRUCAO_EXPLICACAO_DO_TEMA,
+                "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {q.materia or 'nao informada'}"
+                           f"\n\nQUESTAO {q.ano}-q{q.numero} ({q.banca or 'FEPESE'} {q.ano or ''})"
+                           f"\n\n{gerador._questao_por_extenso(q)}"),
             })
     return _novo_lote("explicacoes", pedidos)
 
@@ -777,6 +895,106 @@ def pedido_de_fichas(materia: str | None = None, desde=None,
     return _novo_lote("fichas", pedidos)
 
 
+#: Quantas questoes do complementar vao no pedido do resumo: bastam para
+#: mostrar o jeito da banca, e o pedido continua lendo-se de uma vez.
+COMPLEMENTARES_NO_RESUMO = 8
+
+
+def pedido_de_resumos(ids: list[str] | None = None, desde=None,
+                      refazer: bool = False) -> dict:
+    """Um pedido de RESUMO por tema (R2). Sem `ids`, os temas do cronograma
+    de `desde` (padrao: o comeco do plano) em diante que ainda nao tem
+    resumo; `refazer` inclui o que tem resumo que eu ainda nao conferi.
+
+    O pedido leva o que o resumo precisa para nao inventar: a ficha, o que as
+    provas do alvo mostram do tema (a frase e prova a prova), as questoes
+    reais do tema inteiras, com o gabarito oficial, e as do complementar,
+    separadas; os artigos-chave do dia; e a lista dos codigos que o resumo
+    pode citar - que a importacao confere.
+    """
+    from radar import fichas
+    from radar.servico import fichas as servico_fichas
+
+    ctx = servico_fichas.contexto()
+    plano = ctx.plano
+    if ids:
+        escolhidas = [e for e in (servico_fichas.achar(i, ctx.escritas) for i in ids) if e]
+    else:
+        desde = desde or plano.inicio
+        temas = fichas.temas_do_plano(plano, desde)
+        por_chave = {(e.chave, e.materia): e for e in ctx.escritas}
+        escolhidas = [por_chave[(fichas.chave_do_tema(t.tema), t.materia)] for t in temas
+                      if (fichas.chave_do_tema(t.tema), t.materia) in por_chave]
+    if not refazer:
+        escolhidas = [e for e in escolhidas if not e.resumo]
+    else:
+        escolhidas = [e for e in escolhidas
+                      if not (e.resumo and e.resumo.get("conferido_em"))]
+
+    def questao(q) -> str:
+        alternativas = "\n".join(f"   ({letra}) {texto}" for letra, texto in q.alternativas)
+        extra = ""
+        if q.como == "pendente":
+            extra = " [classificação pendente: o artigo gravado é do tema]"
+        elif q.como == "artigo":
+            extra = " [contada pelo artigo gravado na classificação]"
+        partes = [f"- {fichas.codigo_citavel(q)}{extra} · gabarito oficial: "
+                  f"{(q.resposta or '?').upper()}",
+                  f"   {q.enunciado}", alternativas]
+        if q.pegadinha:
+            partes.append(f"   pegadinha (classificação): {q.pegadinha}")
+        for mud in q.mudancas:
+            partes.append(f"   a lei mudou depois desta prova: {mud.tema} ({mud.lei})")
+        return "\n".join(p for p in partes if p)
+
+    pedidos = []
+    for numero, escrita in enumerate(escolhidas, start=1):
+        ficha = fichas.montar(escrita, ctx)
+        exige = servico_fichas.exigencias_do_resumo(ficha)
+        compl = [q for q in ficha.questoes_reais if q.evidencia == "complementar"
+                 and fichas.codigo_citavel(q) in exige["codigos"]][:COMPLEMENTARES_NO_RESUMO]
+        citaveis = {fichas.codigo_citavel(q): exige["codigos"][fichas.codigo_citavel(q)]
+                    for q in list(ficha.exemplos) + compl
+                    if fichas.codigo_citavel(q) in exige["codigos"]}
+        caiu = ficha.caiu
+        corpo = [f"TEMA: {escrita.tema}", f"MATERIA: {escrita.materia}",
+                 "CAMINHO: " + " > ".join(ficha.caminho_exibido), "",
+                 "AS PROVAS DO MEU CARGO (Polícia Penal SC, 2013 e 2019)",
+                 f"- {caiu.frase}"]
+        if not caiu.sem_contagem:
+            corpo.append(f"- prova a prova: {caiu.por_prova}")
+        corpo += [f"- {n}" for n in caiu.notas]
+        corpo.append("- O TEMA " + ("CAIU: não escreva 'basico'." if exige["caiu"] else
+                                    ("NÃO CAIU nas provas que bastam: escreva 'basico'."
+                                     if exige["basico_obrigatorio"] else
+                                     "não tem base para dizer que caiu ou não: "
+                                     "'basico' é opcional.")))
+        corpo += ["", "A FICHA (texto de IA, por conferir)",
+                  f"- ler exatamente: {escrita.ler_exatamente}"]
+        corpo += [f"- entender: {t}" for t in escrita.entender]
+        corpo += [f"- memorizar: {t}" for t in escrita.memorizar]
+        corpo += [f"- confusão comum: {t}" for t in escrita.pegadinhas]
+        if ficha.artigos_chave:
+            corpo += ["", "ARTIGOS-CHAVE DO DIA (seleção do plano)"]
+            corpo += [f"- {a.artigos}: {a.porque}" for a in ficha.artigos_chave]
+        corpo += ["", "QUESTÕES REAIS DO TEMA — Polícia Penal SC"]
+        corpo += [questao(q) for q in ficha.exemplos] or ["- nenhuma"]
+        corpo += ["", "QUESTÕES DE OUTRAS PROVAS DA FEPESE (complementar aceito; "
+                  "nunca somadas às do meu cargo)"]
+        corpo += [questao(q) for q in compl] or ["- nenhuma"]
+        corpo += ["", "CÓDIGOS QUE O RESUMO PODE CITAR: "
+                  + (", ".join(citaveis) or "nenhum (o tema não tem questão real: "
+                     "'como_cobra' é a frase de evidência insuficiente)")]
+        pedidos.append({
+            "id": f"r{numero}", "tema": escrita.tema, "materia": escrita.materia,
+            "ficha": escrita.id, "codigos": citaveis, "caiu": exige["caiu"],
+            "basico_obrigatorio": exige["basico_obrigatorio"],
+            "exige_artigo": exige["exige_artigo"],
+            "instrucao": INSTRUCAO_RESUMO, "pedido": "\n".join(corpo),
+        })
+    return _novo_lote("resumos", pedidos)
+
+
 def _importar_fichas(lote: dict, respostas: list[dict], modelo: str) -> dict:
     from radar.servico import fichas as servico_fichas
 
@@ -922,7 +1140,10 @@ def salvar_pedido(lote: dict, caminho: Path | None = None) -> Path:
 # 12.1": as Regras de Mandela, que o edital cobra em Direitos Humanos, nao tem
 # artigo, e se citam pela regra (decisao 76). Sem o numero, nao serve: "conforme
 # as Regras de Mandela" continua recusado, como "conforme a doutrina".
-CITA_ARTIGO = re.compile(r"(?i)\bart(?:igo)?s?\.?\s*\d|\bs[uú]mula\b|\bregras?\s+\d")
+# "§ 5" sozinho tambem cita: a Declaracao de Viena (1993) e numerada por
+# paragrafo, e nao por artigo - chamar o § 5 de "art. 5º" para passar aqui
+# seria citar errado (R2, a mesma ideia da "regra 12" de Mandela, decisao 76).
+CITA_ARTIGO = re.compile(r"(?i)\bart(?:igo)?s?\.?\s*\d|\bs[uú]mula\b|\bregras?\s+\d|§\s*\d")
 
 
 def fonte_serve(fonte: str | None, materia: str | None) -> bool:
@@ -1280,9 +1501,14 @@ def importar(resposta: Path, pedido: Path | None = None,
             f"{lote.get('lote')!r}"
         )
     respostas = [r for r in corpo.get("respostas") or [] if isinstance(r, dict)]
-    modelo = procedencia(quando)
+    modelo = procedencia(quando, corpo.get("modelo") if isinstance(corpo.get("modelo"), str)
+                         else None)
 
-    if lote.get("tipo") == "classificacao":
+    if lote.get("tipo") == "resumos":
+        from radar.servico import fichas as servico_fichas
+
+        resultado = servico_fichas.importar_resumos(lote["pedidos"], respostas, modelo)
+    elif lote.get("tipo") == "classificacao":
         resultado = _importar_classificacao(lote, respostas, modelo)
     elif lote.get("tipo") == "associados":
         resultado = _importar_associados(lote, respostas, modelo)

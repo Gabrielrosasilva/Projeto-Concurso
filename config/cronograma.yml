@@ -1011,17 +1011,25 @@ dias:
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 20
+    duracao: 15
     materia: Língua Portuguesa
     titulo: 'Concordância verbal 2: casos especiais'
     detalhe: HAVER e FAZER impessoais (sempre no singular); verbo + SE (passiva sintética concorda; índice de indeterminação
       fica no singular); 'que' e 'quem'; 'a maioria de'; porcentagem; verbo SER.
     onde: videoaula
   - tipo: questoes
-    questoes: 6
+    questoes: 4
     materia: Língua Portuguesa
     titulo: 'Fixação: Concordância verbal 2: casos especiais'
     detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 4
+    materia: "Língua Portuguesa"
+    origem: '2026-09-28'
+    titulo: "Extra: Substantivo e adjetivo (flexão nominal)"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 0 · 2019: 1), no tempo liberado de “Concordância verbal 2: casos especiais”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
     onde: qconcursos
   noite:
   - tipo: revisao
@@ -1048,10 +1056,19 @@ dias:
     titulo: Pausa
   - tipo: questoes
     rampa: portugues
+    teto: 8
     questoes: 10
     materia: Língua Portuguesa
     titulo: 'Concordância verbal 2: casos especiais'
     detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    sobra_da_rampa: portugues
+    materia: "Língua Portuguesa"
+    origem: '2026-09-29'
+    titulo: "Extra: Artigo, numeral e pronome (classificação)"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Concordância verbal 2: casos especiais”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
     onde: qconcursos
   - tipo: correcao
     duracao: 25
@@ -1443,13 +1460,21 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 6
     materia: Direito Penal
     origem: '2026-10-05'
     titulo: 'R+7: Fato típico e nexo causal (art. 13)'
-    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português:
-      vozes do verbo.'
+    detalhe: "3 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português: vozes do verbo."
     filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 4
+    materia: "Direito Penal"
+    origem: '2026-09-28'
+    titulo: "Extra: Aplicação da lei penal (arts. 1º a 12)"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 3 · 2019: 1), no tempo liberado de “Fato típico e nexo causal (art. 13)”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
+    filtro: "Direito Penal > aplicação da lei penal (lei penal no tempo e no espaço)"
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -1550,17 +1575,25 @@ dias:
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 20
+    duracao: 15
     materia: Língua Portuguesa
     titulo: 'Crase 2: proibida, facultativa e casos especiais'
     detalhe: NUNCA antes de masculino, verbo, pronome pessoal e 'a' singular antes de plural; FACULTATIVA antes
       de possessivo feminino, nome de mulher e depois de 'até'; CASA, TERRA e DISTÂNCIA.
     onde: videoaula
   - tipo: questoes
-    questoes: 6
+    questoes: 4
     materia: Língua Portuguesa
     titulo: 'Fixação: Crase 2: proibida, facultativa e casos especiais'
     detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 4
+    materia: "Língua Portuguesa"
+    origem: '2026-10-02'
+    titulo: "Extra: Verbo 2: emprego dos tempos e modos"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 0 · 2019: 1), no tempo liberado de “Crase 2: proibida, facultativa e casos especiais”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
     onde: qconcursos
   noite:
   - tipo: revisao
@@ -1587,10 +1620,19 @@ dias:
     titulo: Pausa
   - tipo: questoes
     rampa: portugues
+    teto: 6
     questoes: 15
     materia: Língua Portuguesa
     titulo: 'Crase 2: proibida, facultativa e casos especiais'
     detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    sobra_da_rampa: portugues
+    materia: "Língua Portuguesa"
+    origem: '2026-10-05'
+    titulo: "Extra: Vozes do verbo"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Crase 2: proibida, facultativa e casos especiais”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
     onde: qconcursos
   - tipo: correcao
     duracao: 30
@@ -2179,7 +2221,7 @@ dias:
       porque: Sindicato sem autorização do Estado; ninguém é obrigado a se filiar.
   manha:
   - tipo: teoria
-    duracao: 40
+    duracao: 30
     materia: Direito Constitucional
     titulo: Direitos sociais (arts. 6º a 11)
     detalhe: 'Teto de 40 min, uma fonte só: passou do tempo, siga para a fixação. Rol do art. 6º e a renda básica
@@ -2192,7 +2234,7 @@ dias:
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
     baralho: '[2] Constitucional'
   - tipo: questoes
-    questoes: 8
+    questoes: 4
     materia: Direito Constitucional
     titulo: 'Fixação: Direitos sociais (arts. 6º a 11)'
     detalhe: '8 questões do tema que você acabou de ler, com a lei aberta: fixam, não medem, e ficam fora da comparação
@@ -2205,13 +2247,22 @@ dias:
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
   - tipo: lei_seca
-    duracao: 20
+    duracao: 10
     materia: Direito Constitucional
     titulo: 'Lei seca dirigida: CF art. 6º; CF art. 7º, XXXIII; CF art. 9º'
     detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
       ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
       não é o que a banca mais cobra.'
     link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 12
+    materia: "Direito Constitucional"
+    origem: '2026-09-29'
+    titulo: "Extra: Art. 5º, caput e incisos I a XVI"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Direitos sociais (arts. 6º a 11)”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
+    filtro: "Direito Constitucional > direitos e deveres individuais e coletivos"
+    onde: qconcursos
   - tipo: pausa
     duracao: 10
     titulo: Pausa
@@ -2241,12 +2292,22 @@ dias:
     onde: qconcursos
   - tipo: questoes
     rampa: direito
+    teto: 14
     questoes: 25
     materia: Direito Constitucional
     titulo: 'Aprendizagem: Direitos sociais (arts. 6º a 11)'
     detalhe: Questões do tema da manhã. PODE consultar a lei. Se acabarem as da FEPESE, complete com outras bancas
       (sempre múltipla escolha).
     filtro: Direito Constitucional > direitos sociais
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    sobra_da_rampa: direito
+    materia: "Direito Constitucional"
+    origem: '2026-10-06'
+    titulo: "Extra: Art. 5º, incisos XVII a XLIX"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Direitos sociais (arts. 6º a 11)”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
+    filtro: "Direito Constitucional > direitos e deveres individuais e coletivos"
     onde: qconcursos
   - tipo: pausa
     duracao: 10
@@ -2336,17 +2397,25 @@ dias:
     duracao: 10
     titulo: Pausa
   - tipo: portugues
-    duracao: 20
+    duracao: 15
     materia: Língua Portuguesa
     titulo: 'Pronomes 3: formas de tratamento'
     detalhe: Vossa Excelência, Vossa Senhoria, Vossa Magnificência; verbo e possessivo na 3ª PESSOA ('Vossa Excelência
       sabe que seu...'); VOSSA (falando com) x SUA (falando de).
     onde: videoaula
   - tipo: questoes
-    questoes: 6
+    questoes: 4
     materia: Língua Portuguesa
     titulo: 'Fixação: Pronomes 3: formas de tratamento'
     detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 4
+    materia: "Língua Portuguesa"
+    origem: '2026-10-06'
+    titulo: "Extra: Concordância verbal 1: regra geral"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Pronomes 3: formas de tratamento”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
     onde: qconcursos
   noite:
   - tipo: revisao
@@ -2373,10 +2442,19 @@ dias:
     titulo: Pausa
   - tipo: questoes
     rampa: portugues
+    teto: 8
     questoes: 15
     materia: Língua Portuguesa
     titulo: 'Pronomes 3: formas de tratamento'
     detalhe: Questões da FEPESE do tema de Português da manhã.
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    sobra_da_rampa: portugues
+    materia: "Língua Portuguesa"
+    origem: '2026-09-29'
+    titulo: "Extra: Artigo, numeral e pronome (classificação)"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Pronomes 3: formas de tratamento”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
     onde: qconcursos
   - tipo: correcao
     duracao: 30
@@ -2886,13 +2964,21 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 6
     materia: Direito Constitucional
     origem: '2026-10-20'
     titulo: 'R+7: Direitos sociais (arts. 6º a 11)'
-    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 20/10, sem consulta, + 3 de
-      Português: pronomes 2: colocação pronominal.'
+    detalhe: "3 questões NOVAS de Direito Constitucional sobre o que você estudou em 20/10, sem consulta, + 3 de Português: pronomes 2: colocação pronominal."
     filtro: Direito Constitucional > direitos sociais
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 4
+    materia: "Direito Constitucional"
+    origem: '2026-09-29'
+    titulo: "Extra: Art. 5º, caput e incisos I a XVI"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 0), no tempo liberado de “Direitos sociais (arts. 6º a 11)”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
+    filtro: "Direito Constitucional > direitos e deveres individuais e coletivos"
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -3740,13 +3826,21 @@ dias:
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 6
     materia: Direito Penal
     origem: '2026-10-05'
     titulo: 'R+30: Fato típico e nexo causal (art. 13)'
-    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português:
-      vozes do verbo.'
+    detalhe: "3 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português: vozes do verbo."
     filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: Extra
+    questoes: 4
+    materia: "Direito Penal"
+    origem: '2026-10-12'
+    titulo: "Extra: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+    detalhe: "Revisão de um tema que caiu nas provas do cargo (2013: 1 · 2019: 2), no tempo liberado de “Fato típico e nexo causal (art. 13)”, que não apareceu nas provas de 2013 e 2019 (redistribuição do Ciclo 1). Questões novas, sem consulta."
+    filtro: "Direito Penal > iter criminis, tentativa, dolo e culpa, erro de tipo e de proibição"
     onde: qconcursos
   - tipo: questoes
     rampa: direito

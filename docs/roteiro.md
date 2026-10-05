@@ -829,7 +829,8 @@ antecipada para a 6A.
 **Arquivos envolvidos.**
 - `config/amostra.yml` (a seção do desempenho);
 - `src/radar/servico/metricas.py`;
-- `src/radar/servico/desempenho.py` (novo: desempenho e estado por nó);
+- `src/radar/servico/desempenho.py` (novo: desempenho e estado por nó; saiu
+  com o nome `desempenho_por_conteudo.py`, decisão 25);
 - `src/radar/servico/estudo.py` (novo: estudado, revisar, refazer), que reusa
   `servico/espacada.py` e `servico/erros.py` em vez de criar fila paralela;
 - `onde_estudar.py`, `foco.py`, `servico/materias.py`, `servico/inicio.py`;

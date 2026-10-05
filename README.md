@@ -8,14 +8,16 @@ O alvo principal e **Policia Penal SC**, e depois dele as outras carreiras de
 seguranca publica. Para o resto, o filtro que importa e **onde a prova e
 aplicada** — Grande Florianopolis e arredores.
 
-**Estado (03/10/2026):** o radar (fases 1 a 15), a especificacao e o pedido de
+**Estado (05/10/2026):** o radar (fases 1 a 15), a especificacao e o pedido de
 evolucao (etapas 1A a 8) prontos, e o Ciclo 1 de estudo rodando desde 28/09.
-Tres fontes coletando, 8.433 questoes no acervo (as 170 do alvo classificadas
-e conferidas), simulado, geracao de questoes com escopo fechado, ficha de
-estudo de cada tema, a tela Hoje e as analises. O que falta esta no "Estado
+Tres fontes coletando, 8.462 questoes no acervo (as 170 do alvo classificadas
+e conferidas), simulado, geracao de questoes com escopo fechado, ficha e
+resumo de cada tema (com "caiu ou nao caiu" prova a prova), a tela Hoje e as
+analises. O que falta esta no "Estado
 atual" do [CLAUDE.md](CLAUDE.md) e em [docs/pendencias.md](docs/pendencias.md).
 
-Os outros documentos do projeto:
+Os outros documentos do projeto - a lista completa, e qual ler primeiro, esta
+no **[docs/indice.md](docs/indice.md)**:
 
 - **[CLAUDE.md](CLAUDE.md)** — contexto permanente, para trabalhar no codigo;
 - **[docs/novo.md](docs/novo.md)** — o pedido de evolucao e as regras que nao
@@ -529,7 +531,7 @@ e a interpretacao cronometrada usam essa chave.
 
 ### As faixas que medem: o diagnostico e o simulado no radar
 
-O diagnostico (03/10) e o simulado de fechamento (07/11) **medem**, e por isso
+Os diagnosticos (10/10; eram de 03/10, decisao 105) e o simulado de fechamento (07/11) **medem**, e por isso
 nao tem ficha: a faixa diz **"Só questões: não há o que estudar nesta faixa."**
 e mostra a **composicao** - de quais assuntos e subassuntos sao as questoes, e
 de onde saiu cada numero -, com o botao **Criar a rodada com esta composição**.
@@ -560,10 +562,11 @@ composicao gravada e o link **Abrir a rodada desta faixa**.
   mais recente primeiro;
 - **a revisao semanal** mostra os temas da semana, os erros anotados no
   caderno por tema, onde mais errou e os artigos-chave dos dias (decisao 70);
-- **o R+7 dos diagnosticos** (10/10) lista os erros das rodadas de 03/10 e
-  cria uma rodada so com eles - no maximo o numero do plano, pelos assuntos
-  com mais erro - pelo botao **Criar a rodada com os erros**;
-- **a correcao de 07/11** mostra, por materia, o diagnostico de 03/10, o
+- **o R+7 dos diagnosticos** (17/10) lista os erros das rodadas de 10/10 e
+  cria uma rodada so com eles - o plano pede 40, para refazer todos (decisao
+  105); faixa que pedir menos que os erros divide pelos assuntos com mais
+  erro - pelo botao **Criar a rodada com os erros**;
+- **a correcao de 07/11** mostra, por materia, o diagnostico de 10/10, o
   fechamento de 07/11 e o acumulado do ciclo sem consulta, lado a lado e sem
   somar, com "Amostra insuficiente" abaixo do minimo da materia.
 
@@ -1039,7 +1042,30 @@ radar fichas --tema "Art. 5º, caput e incisos I a XVI" --data 2026-10-06
 radar fichas --pedido       # pede ao Claude Code as fichas dos temas sem ficha
 radar fichas --importar data/resposta_ia.json   # grava as que passam na conferencia
 radar fichas --conferir art-5o-caput-e-incisos-i-a-xvi   # marca como lida por mim
+radar fichas --pedido --resumos [--id vozes-do-verbo]   # pede os RESUMOS dos temas
+radar fichas --pedido --explicacoes   # explicacao das questoes reais do alvo de cada tema
+radar fichas --conferir-resumo vozes-do-verbo   # marca o resumo como lido por mim
+radar fichas --verificar-resumos      # confere cada resumo de novo contra o acervo de hoje
 ```
+
+**No Windows, o comando inteiro e `.venv\Scripts\radar.exe ...`** (ou
+`.\radar.bat ...` no PowerShell): `python -m radar` NAO funciona, porque o
+pacote nao tem `__main__.py`. E esta a forma que a faixa, a ficha e a tela de
+gerar escrevem nos 3 passos para gerar questao (decisao 114).
+
+**O resumo de cada tema e a aba Fichas (revisao final do estudo, 05/10).** A
+aba **Hoje > Fichas** abre no dia, por bloco (Manha, Noite, Depois das 22h),
+um cartao por tema, com **"caiu ou nao caiu"** prova a prova (2013 e 2019,
+"—" quando a materia nao estava no edital daquele ano; as pendentes e as
+questoes pelo artigo gravado, a parte) e a linha das outras provas da FEPESE,
+nunca somada; a lista do ciclo inteiro continua em `/fichas?ver=todas`. O
+botao **📝 Resumo** - em toda faixa com materia e no cartao - abre o resumo
+numa janela por cima da pagina (so CSS): a parte 1 sai na hora, e as outras
+(dominar, artigos, como a banca cobra, pegadinhas, o basico quando nao caiu)
+sao texto de IA em que cada frase diz a fonte. Na Noite, ele abre ja em "como
+a banca cobra". A faixa de questoes diz o no e manda primeiro ao Qconcursos;
+as geradas vem depois, com o botao "Treinar no radar" ou os 3 passos para
+gerar. Decisoes 108 a 125.
 
 **A ficha de estudo e a prioridade (Etapa 6B).** `radar fichas --tema` mostra
 a mesma ficha da tela (ver [A ficha de estudo de cada tema](#a-ficha-de-estudo-de-cada-tema)).
@@ -1888,7 +1914,23 @@ src/radar/
 │   ├── conteudos.py  a arvore no banco: semear, JSON, textos antigos, pendentes
 │   ├── classificacoes.py a questao ligada a um no, com status e procedencia
 │   ├── incidencia.py o mapa do alvo a partir do banco
+│   ├── complementar.py o acervo complementar FEPESE: levantar, validar, aceitar
+│   ├── desempenho_por_conteudo.py o meu acerto por no (radar e anotado, a parte)
+│   ├── estudo.py     estudado, praticado, a fila de revisao e o que refazer
+│   ├── espacada.py   a revisao espacada 1-7-30 da home
+│   ├── fichas.py     as fichas e os resumos: arquivo, contexto, aba por dia,
+│   │                 o que o botao Resumo de cada faixa abre
+│   ├── composicao.py a composicao das rodadas que medem (decisao 67)
+│   ├── sabado.py     a revisao semanal, o R+7 dos diagnosticos e a comparacao
+│   ├── faixa_no_radar.py a faixa de Portugues que comeca pelas do radar
+│   ├── compilado.py  o simulado compilado e a divisao pelo quadro do edital
+│   ├── inicio.py     a pagina inicial
 │   └── comum.py      o pouco que mais de um assunto usa
+├── amostra.py      le config/amostra.yml: os minimos de amostra, num lugar so
+├── prioridade.py   le config/prioridade.yml: a prioridade de cada tema
+├── fichas.py       a ficha de estudo, o resumo, o "caiu" de cada tema e as
+│                   geradas da faixa (puro)
+├── complementar.py a linha complementar e a validacao do caderno (puro)
 ├── regioes.py      le config/regioes.yml: anel e grafia canonica do municipio
 ├── alvo.py         le config/alvo.yml: e o cargo que eu quero?
 ├── gabarito.py     o gabarito definitivo, e as questoes anuladas

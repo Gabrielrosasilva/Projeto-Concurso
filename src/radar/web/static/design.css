@@ -461,3 +461,39 @@ body.ds {
 .ds-campo input:focus,
 .ds-botao:focus-visible,
 a:focus-visible { outline: 2px solid var(--cor-acao); outline-offset: 2px; }
+
+/* --- janela por cima da pagina, so com CSS (R2: o resumo do tema) ---
+   Abre pelo link com a ancora (#id) e fecha pelo link "Fechar" para uma
+   ancora que nao existe: nenhum JavaScript. `:has(:target)` deixa abrir
+   ja numa parte de dentro (a Noite abre em "como a banca cobra"). */
+.ds-janela {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: auto;
+  padding: var(--esp-4);
+  background: var(--cor-veu);
+}
+.ds-janela:target,
+.ds-janela:has(:target) { display: block; }
+.ds-janela__caixa {
+  max-width: 46rem;
+  margin: var(--esp-5) auto;
+  padding: var(--esp-4) var(--esp-5);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-alta);
+}
+.ds-janela__topo { display: flex; justify-content: space-between; gap: var(--esp-3); align-items: start; }
+.ds-janela__topo h2 { margin: 0; font-size: var(--tam-lg); }
+.ds-janela h3 { margin: var(--esp-4) 0 var(--esp-1); font-size: var(--tam-md); }
+.ds-janela ul { margin: var(--esp-1) 0 0; padding-left: var(--esp-5); }
+.ds-janela li { margin: var(--esp-1) 0; }
+.ds-janela .ds-janela__fontes { display: block; font-size: var(--tam-xs); color: var(--cor-texto-suave); }
+@media (max-width: 40rem) {
+  .ds-janela { padding: var(--esp-2); }
+  .ds-janela__caixa { margin: var(--esp-2) auto; padding: var(--esp-3) var(--esp-4); }
+}

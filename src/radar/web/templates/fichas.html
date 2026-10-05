@@ -14,19 +14,92 @@
     .temas td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
     .temas tr.sem-ficha td{color:var(--cor-texto-suave)}
     .pequena{display:block;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    /* O dia, por bloco (R1): um cartao por tema, o mesmo em todo bloco. */
+    .navega-dia{display:flex;flex-wrap:wrap;gap:var(--esp-2);align-items:center;
+      margin:var(--esp-2) 0 0;font-size:var(--tam-sm)}
+    .bloco-do-dia{margin:var(--esp-5) 0 0}
+    .bloco-do-dia>h2{font-size:var(--tam-md);margin:0 0 var(--esp-2)}
+    .cartao-tema{display:flex;flex-direction:column;gap:var(--esp-2)}
+    .cartao-tema h3{margin:0;font-size:var(--tam-md);line-height:1.3}
+    .cartao-tema p{margin:0}
+    .cartao-tema .caminho{font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .cartao-tema .faixas{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .cartao-tema .caiu{font-size:var(--tam-sm)}
+    .cartao-tema .por-prova{font-variant-numeric:tabular-nums}
+    .cartao-tema .nota{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .cartao-tema .acoes{display:flex;flex-wrap:wrap;gap:var(--esp-2);margin-top:auto}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
 <body class="ds">
 
 {% from "_topo.html" import barra, abas_de_hoje with context %}
+{% from "_componentes.html" import selo %}
+{% import "_resumo.html" as resumo_ui %}
 {{ barra('hoje') }}
 
 <main class="ds-pagina">
   {{ abas_de_hoje('fichas') }}
 
+{% if not todas %}
   <header class="ds-cabeca">
-    <h1>Fichas de estudo</h1>
+    <h1>Fichas de {{ por_extenso }}</h1>
+    <p>
+      Os temas do dia, por bloco, cada um uma vez. "Caiu ou não caiu" é o que as
+      provas do alvo mostram, prova a prova, com a amostra; as outras provas da
+      FEPESE vêm em linha separada e nunca se somam. O texto da ficha é escrito
+      por IA (🟣) e espera a sua conferência.
+    </p>
+    <nav class="navega-dia" aria-label="Outro dia">
+      {% if dia.anterior %}<a class="ds-link-acao" href="/fichas?data={{ dia.anterior.isoformat() }}">← {{ dia.anterior | dia_mes }}</a>{% endif %}
+      {% if dia.data != hoje %}<a class="ds-link-acao" href="/fichas">hoje</a>{% endif %}
+      {% if dia.proximo %}<a class="ds-link-acao" href="/fichas?data={{ dia.proximo.isoformat() }}">{{ dia.proximo | dia_mes }} →</a>{% endif %}
+      <a class="ds-link-acao" href="/fichas?ver=todas">todos os temas do ciclo</a>
+    </nav>
+  </header>
+
+  {% if dia.vazio %}
+    <p class="ds-vazio">Nenhum tema de estudo no cronograma deste dia.</p>
+  {% endif %}
+
+  {% for b in dia.blocos if b.cartoes or b.sem_ficha %}
+    <section class="bloco-do-dia" aria-label="{{ b.nome }}">
+      <h2>{{ b.nome }}</h2>
+      <div class="ds-grade">
+        {% for c in b.cartoes %}
+          {% set k = c.caiu %}
+          <article class="ds-cartao cartao-tema">
+            <p class="caminho">{{ c.escrita.materia }}{% if c.onde %}{% for a in c.onde.assuntos %} → {{ a.nome }}{% if a.subassuntos %} → {{ a.subassuntos | join('; ') }}{% endif %}{% endfor %}{% elif c.escrita.assunto %} → {{ c.escrita.assunto }}{% endif %}{% if c.escrita.elemento %} · {{ c.escrita.elemento }}{% endif %}</p>
+            <h3>{{ c.escrita.tema }}</h3>
+            <p class="faixas">Neste bloco: {{ c.rotulos | join(' · ') }}</p>
+            <p class="caiu">{{ selo('acervo', curto=True) }} <b>Polícia Penal SC (2013 e 2019):</b> {{ k.frase }}
+              {% if not k.sem_contagem %}<br><span class="por-prova">{{ k.por_prova }}</span>{% endif %}</p>
+            {% for n in k.notas %}<p class="nota">{{ n }}</p>{% endfor %}
+            <p class="caiu">{{ selo('acervo', curto=True) }} <b>Outras provas FEPESE (complementar aceito):</b>
+              {% if c.escrita.nos %}{{ c.complementar.frase | replace('Acervo complementar FEPESE: ', '') }}{% else %}o tema não tem nó: não contado{% endif %}</p>
+            <p class="acoes">
+              {{ resumo_ui.botao(dia.resumo_do(c.escrita), b.chave, loop.index0, b.chave == 'noite',
+                                 'ds-botao ds-botao--pequeno') }}
+              <a class="ds-botao ds-botao--secundario ds-botao--pequeno" href="/fichas/{{ c.escrita.id }}?data={{ dia.data.isoformat() }}">Ficha completa</a>
+            </p>
+          </article>
+        {% endfor %}
+        {% for rotulo, titulo in b.sem_ficha %}
+          <article class="ds-cartao cartao-tema">
+            <p class="caminho">{{ rotulo }}</p>
+            <h3>{{ titulo }}</h3>
+            <p class="nota">Ficha ainda não escrita para este tema (radar fichas --pedido).</p>
+            <p class="nota">Resumo ainda não escrito para este tema.</p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+  {% if dia.resumos %}{{ resumo_ui.janelas(dia.resumos) }}{% endif %}
+
+{% else %}
+  <header class="ds-cabeca">
+    <h1>Todos os temas do ciclo</h1>
     <p>
       Uma ficha por tema do cronograma, de hoje em diante: o que ler, como
       pesquisar, o que entender e memorizar (🟣 texto escrito por IA, para eu
@@ -35,6 +108,7 @@
       revisar. A <b>prioridade</b> é regra de priorização (config/prioridade.yml),
       não previsão de prova.
     </p>
+    <p><a class="ds-link-acao" href="/fichas">← as fichas de hoje</a></p>
   </header>
 
   <section class="ds-cartao">
@@ -62,7 +136,8 @@
                 </td>
                 <td>
                   {% if l.tem_ficha %}
-                    🔵 Polícia Penal SC: {{ l.alvo.amostra }}
+                    🔵 Polícia Penal SC: {{ l.caiu.frase }}
+                    {% if not l.caiu.sem_contagem %}<span class="pequena">{{ l.caiu.por_prova }}</span>{% endif %}
                     <span class="pequena">🔵 {{ l.complementar.frase }}</span>
                   {% else %}—{% endif %}
                 </td>
@@ -79,6 +154,7 @@
       <p class="ds-vazio">Nenhum tema de estudo no cronograma de hoje em diante.</p>
     {% endif %}
   </section>
+{% endif %}
 </main>
 </body>
 </html>

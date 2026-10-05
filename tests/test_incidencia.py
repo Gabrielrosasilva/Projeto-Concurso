@@ -333,3 +333,126 @@ def test_o_no_e_os_de_cima_sao_exatamente_os_nos_de_debaixo(caminho):
 
     for no in nos:
         assert incidencia._debaixo(caminho, no) == (no in de_cima), no
+
+
+# --- caiu ou nao caiu: o tema prova a prova (R1, 05/10) ----------------------------
+
+LEP = "Lei de Execução Penal"
+LEP_NO = f"{LEP} > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)"
+PENAL = "Direito Penal"
+TENTATIVA = f"{PENAL} > Tipicidade > Tentativa"
+
+
+def _q(prova, ano, numero, materia, conteudo=None, *, status="completa", anulada=False,
+       dispositivo=None, caderno=None):
+    return incidencia.Ocorrencia(
+        prova=prova, ano=ano, materia=materia, conteudo=conteudo or materia,
+        status=status, anulada=anulada, numero=numero, impressao=f"{prova}-{numero}",
+        dispositivo=dispositivo, materia_do_caderno=caderno or materia)
+
+
+# 2013 nao tinha LEP; 2019 tinha. Direito Penal nas duas.
+PROVAS_DO_ALVO = [
+    _q("ap2013", 2013, 47, PENAL, TENTATIVA, dispositivo="art. 14 do Código Penal"),
+    _q("ap2013", 2013, 50, PENAL, status="pendente", dispositivo="art. 8º do Código Penal"),
+    _q("ap2013", 2013, 60, PENAL, TENTATIVA, anulada=True),
+    _q("ap2019", 2019, 53, PENAL, TENTATIVA, dispositivo="art. 17 do Código Penal"),
+    _q("ap2019", 2019, 51, PENAL, status="pendente",
+       dispositivo="art. 8º do Código Penal (alternativas também dos arts. 2º, 3º e 4º)"),
+    _q("ap2019", 2019, 81, LEP, f"{LEP_NO} > Deveres", dispositivo="art. 39 da Lei 7.210/1984"),
+    _q("ap2019", 2019, 99, "Sociologia Aplicada", dispositivo="arts. 1º, 10 e 24 da Lei 7.210/1984"),
+]
+
+
+def _dentro(*nos):
+    return lambda c: bool(c) and any(c == n or c.startswith(n + " > ") for n in nos)
+
+
+def test_a_faixa_de_artigos_sai_do_elemento_com_a_lei_da_sigla_ou_da_materia():
+    lep = incidencia.faixa_de_artigos("LEP, arts. 1º a 9º-A", LEP)
+    assert (lep.lei, lep.inicio, lep.fim) == ("LEP", (1, ""), (9, "A"))
+    assert lep.contem((9, "")) and lep.contem((9, "A")) and not lep.contem((10, ""))
+    so_um = incidencia.faixa_de_artigos("CP, art. 13 (relação de causalidade)", PENAL)
+    assert (so_um.lei, so_um.inicio, so_um.fim) == ("CP", (13, ""), (13, ""))
+    pelo_titulo = incidencia.faixa_de_artigos("Execução da pena (arts. 105 a 119-A)", LEP)
+    assert (pelo_titulo.lei, pelo_titulo.fim) == ("LEP", (119, "A"))
+    assert incidencia.faixa_de_artigos("Vozes do verbo", "Língua Portuguesa") is None
+    # Sem sigla e sem lei conhecida da materia: nao chega a questao pelo artigo.
+    assert incidencia.faixa_de_artigos("arts. 1º a 5º", "Sociologia Aplicada") is None
+
+
+def test_os_artigos_do_dispositivo_sem_paragrafo_nem_inciso():
+    assert incidencia.artigos_do_dispositivo(
+        "art. 8º do Código Penal (alternativas também dos arts. 2º, 3º e 4º)") == [
+        (8, ""), (2, ""), (3, ""), (4, "")]
+    assert incidencia.artigos_do_dispositivo(
+        "art. 1º, §§ 4º, 6º e 7º, da Lei 9.455/1997") == [(1, "")]
+    assert incidencia.artigos_do_dispositivo("art. 146-B da Lei 7.210/1984") == [(146, "B")]
+    assert incidencia.artigos_do_dispositivo("doutrina (gerações de direitos)") == []
+
+
+def test_caiu_nas_duas_provas_e_cheio_e_a_anulada_fica_fora():
+    k = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia=PENAL, dentro=_dentro(TENTATIVA),
+                                tem_no=True)
+    assert k.classe == incidencia.CHEIO
+    assert k.frase == "Caiu em 2013 e 2019: 2 questões · 2 provas."
+    assert k.por_prova == "2013: 1 · 2019: 1"
+    assert any("anulada(s) 2013-q60" in n for n in k.notas)
+
+
+def test_a_pendente_com_o_artigo_do_tema_caiu_e_vai_a_parte():
+    """A Aplicacao da lei penal: as 4 questoes estao pendentes (fora do
+    programa de 2019), e o tema nao pode dizer "nao apareceu"."""
+    faixa = incidencia.faixa_de_artigos("CP, arts. 1º a 12", PENAL)
+    k = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia=PENAL, dentro=_dentro(f"{PENAL} > Abolitio"),
+                                tem_no=True, faixa=faixa)
+    assert [o.numero for o in k.contadas] == []
+    assert sorted(o.numero for o in k.pendentes) == [50, 51]
+    assert k.classe == incidencia.CHEIO and k.caiu
+    assert k.frase == "Caiu em 2013 e 2019: 2 questões · 2 provas."
+    assert any("classificação pendente" in n for n in k.notas)
+
+
+def test_nao_caiu_nas_duas_provas_e_basico():
+    faixa = incidencia.faixa_de_artigos("CP, art. 13", PENAL)
+    k = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia=PENAL,
+                                dentro=_dentro(f"{PENAL} > Infração penal"), tem_no=True, faixa=faixa)
+    assert k.classe == incidencia.BASICO
+    assert k.frase == ("Não apareceu nas provas de 2013 e 2019 analisadas: "
+                       "prioridade baixa, estude o básico.")
+    assert k.por_prova == "2013: 0 · 2019: 0"
+
+
+def test_materia_de_uma_prova_so_nao_rebaixa_e_diz_a_frase_padrao():
+    """A LEP so caiu em 2019: o '—' em 2013, e nao rebaixar sem base."""
+    faixa = incidencia.faixa_de_artigos("LEP, arts. 28 a 37", LEP)
+    k = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia=LEP, dentro=_dentro(),
+                                tem_no=False, faixa=faixa)
+    assert k.classe == incidencia.NORMAL
+    assert k.por_prova == "2013: — · 2019: 0"
+    assert k.frase == "Não apareceu na prova de 2019, a única que cobrava a matéria."
+    assert any(incidencia.FRASE_SEM_EVIDENCIA in n for n in k.notas)
+
+
+def test_sem_no_conta_pelo_artigo_so_da_mesma_materia_e_da_mesma_lei():
+    """O art. 39 da LEP e do tema dos arts. 38 a 43; a questao de Sociologia
+    que cita a LEP nao conta na LEP."""
+    deveres = incidencia.caiu_no_alvo(
+        PROVAS_DO_ALVO, materia=LEP, dentro=_dentro(), tem_no=False,
+        faixa=incidencia.faixa_de_artigos("LEP, arts. 38 a 43", LEP))
+    assert [o.numero for o in deveres.contadas] == [81]
+    assert deveres.pelo_artigo
+    assert deveres.frase == ("Caiu em 2019: 1 questão · 1 prova, a única prova que "
+                             "cobrava a matéria.")
+    objeto = incidencia.caiu_no_alvo(
+        PROVAS_DO_ALVO, materia=LEP, dentro=_dentro(), tem_no=False,
+        faixa=incidencia.faixa_de_artigos("LEP, arts. 1º a 9º-A", LEP))
+    assert objeto.contadas == []
+
+
+def test_sem_no_e_sem_faixa_de_artigos_nada_e_contado_e_nao_rebaixa():
+    k = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia="Língua Portuguesa",
+                                dentro=_dentro(), tem_no=False)
+    assert k.sem_contagem and k.classe == incidencia.NORMAL
+    assert "não foi contado" in k.frase
+    assert not PREVISAO.search(k.frase)
