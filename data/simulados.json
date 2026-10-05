@@ -574,5 +574,57 @@
         "respondida_em": "2026-09-29T21:29:54.484327+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-04T21:15:29.192208+00:00",
+    "filtros": {
+      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Gratuidades constitucionais aos reconhecidamente pobres",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 5
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "3140a12ae5bf2b71b9b761fe6e6e6242",
+        "ordem": 1,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "c5ddbc44af1b513603a076e4e0bb1669",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "6c117405f221b5f8689380a197dc1666",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "5842d2d4bf8cc6a2b641e40fd12ca2f3",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "400e978bb897c8c78c52235f47bbbbc3",
+        "ordem": 5,
+        "respondida_em": null
+      }
+    ]
   }
 ]
