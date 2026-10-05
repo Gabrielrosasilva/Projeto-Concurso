@@ -882,7 +882,10 @@ Ciclo 2", pelo mapa do ano.
 
 Os nomes casam pela regra que o radar ja usa (`compilado.mesma_materia`): o
 caderno de 2013 escreve "Direito Processo Penal" e o edital de 2019 "Direito
-Processual Penal", e os dois sao a mesma materia. A conta inteira mora em
+Processual Penal", e os dois sao a mesma materia. Os filtros por materia (a
+geracao, o simulado, a revisao espacada) e o acerto por materia do
+`servico/metricas.py` juntam as duas grafias pelo `sinonimos_de_materia` do
+`config/taxonomia.yml` (decisao 97). A conta inteira mora em
 `servico/materias.py`; a tela so mostra.
 
 ### Backup
@@ -1005,7 +1008,9 @@ radar retificacoes          # acusa edital que mudou (--avisar manda no Telegram
 radar questoes              # separa os cadernos do acervo em questoes
 radar questoes --refazer    # passa o parser novo por cima do acervo inteiro;
                             # o texto que muda leva a classificacao junto
-radar padrao                # o que a banca mais cobra, por materia
+radar padrao                # o que a banca mais cobra, por materia: um bloco
+                            # por evidencia (provas do cargo, complementar
+                            # aceito, outras bancas), nunca somados
 radar padrao --cargo Guarda
 radar repetidas             # as questoes que a banca mais reaproveita
 radar parecidas "Guarda Municipal" --banca FEPESE

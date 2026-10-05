@@ -244,16 +244,11 @@ etapa tinha registrado. Os cinco que ela mandou corrigir na hora ja sairam
 Detalhe, reprodução e plano em [auditoria_independente.md](auditoria_independente.md)
 (R7 e R14). Feitos na Rodada 1 (decisão 96): o teste preso a 31/10/2026
 (BUG-8), o no inexistente e o elemento irmão aceitos na importação de geradas
-(BUG-1 e BUG-2) e o traceback do `radar gerar --modo revisao` (BUG-6). Sobram,
+(BUG-1 e BUG-2) e o traceback do `radar gerar --modo revisao` (BUG-6). Na
+Rodada 2 (decisões 97 e 98): o sinônimo de matéria nos filtros (BUG-4) e o
+`radar padrao` por evidência. Sobram,
 em rodadas, cada uma com a recomendação já dita:
 
-- 🔴 **Rodada 2 — sinônimo de matéria (BUG-4):** "Direito Processo Penal"
-  (2013) fica fora da geração e do simulado de Processual Penal; os filtros
-  usam a coluna crua (`servico/geradas.py:55`, `simulado.py:98`,
-  `espacada.py:168`, `complementar.py:427`). Proposta: uma regra só de nome
-  de matéria, pelos sinônimos do `config/taxonomia.yml`.
-- 🔴 **Rodada 2 — `radar padrao` soma alvo, complementar e IESES** (regra 1).
-  Decisão sua; recomendação: três blocos, cada um com a amostra.
 - 🔴 **Rodada 3 — migrar um banco antigo sobrescreve os JSON versionados
   (BUG-5):** os passos 1, 4 e 5 exportam o banco que está sendo migrado.
   Recomendação: só o `radar sincronizar` exporta.
@@ -268,8 +263,8 @@ em rodadas, cada uma com a recomendação já dita:
 - 🔴 **Decisão avulsa — o modo revisão conta "praticado" como "estudado"
   (BUG-7),** contra a decisão 20. Recomendação: aceitar de propósito, registrar
   e dizer na saída quantos são só praticados.
-- ⚪ **Menores:** "sem materia" no `/simulado` e "· materia" no Meu
-  desempenho; "1 acertos + 1 erros"; `radar previsao` no terminal com "->" e
+- ⚪ **Menores:** "· materia" no Meu desempenho ("sem matéria" do `/simulado`
+  saiu na Rodada 2); "1 acertos + 1 erros"; `radar previsao` no terminal com "->" e
   sem "Atrasado"; 4 contas em template e a recontagem da IA em
   `conferencia.py:259`; duas filas de revisão com números diferentes (home 6,
   Meu desempenho 12); o ADD COLUMN automático do `db.py`; `complementar.md`

@@ -160,9 +160,10 @@ lista de leis; o **Ciclo 2**, depois do simulado de 07/11 e antes de 09/11.
 186 requisitos, resposta PARCIALMENTE, 8 defeitos. A Rodada 1 consertou 4
 (decisao 96): o teste que pararia o Actions em 01/11, a importacao de geradas
 que aceitava no inventado e o elemento vizinho, e o traceback do modo revisao.
-As rodadas 2 a 4 (sinonimo de materia, `radar padrao`, migracao que regrava os
-JSON, simulados pela chave, nos duplicados) e a decisao do "praticado" estao na
-pendencia G, com a recomendacao de cada uma.
+A Rodada 2 (decisoes 97 e 98): o sinonimo de materia vale em todo filtro e no
+acerto por materia, e o `radar padrao` mostra um bloco por evidencia. As
+rodadas 3 e 4 (migracao que regrava os JSON, simulados pela chave, nos
+duplicados) e a decisao do "praticado" estao na pendencia G.
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
 **Em aberto:** o numero de questoes das faixas (ainda o do plano; o R+7 dos

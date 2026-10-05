@@ -147,6 +147,8 @@ def criar_simulado_de_revisao(hoje: date | None = None) -> Simulado | None:
     questoes reais do mesmo assunto que eu ainda nao respondi - e a mesma
     pergunta de novo nao testa se o assunto ficou, testa se a letra ficou.
     """
+    from radar import conteudos as arvore
+
     vencidas = pendentes(hoje)
     if not vencidas:
         return None
@@ -165,7 +167,8 @@ def criar_simulado_de_revisao(hoje: date | None = None) -> Simulado | None:
             if len(do_assunto) < POR_ASSUNTO:
                 candidatas = list(s.scalars(
                     select(QuestaoDeProva)
-                    .where(QuestaoDeProva.materia == r.materia)
+                    .where(QuestaoDeProva.materia.in_(
+                        arvore.grafias_da_materia(r.materia)))
                     .where(QuestaoDeProva.resposta.is_not(None))
                     .where(QuestaoDeProva.anulada.is_not(True))
                 ))

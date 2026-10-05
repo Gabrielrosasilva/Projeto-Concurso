@@ -619,22 +619,44 @@ def _acompanhar_a_releitura(resultado: ResultadoExtracao, trocas_de_chave: dict,
         acervo.exportar_geradas()
 
 
-def incidencia_por_materia(
-    cargo: str | None = None, banca: str | None = None, ano: int | None = None
-) -> list[tuple[str, int]]:
-    """Quantas questoes de cada materia, da mais cobrada para a menos.
+@dataclass
+class IncidenciaDaEvidencia:
+    """O que uma evidencia cobra por materia: o alvo, o complementar aceito ou
+    outra banca. Uma nunca e somada a outra (regra inviolavel 1)."""
 
-    E a resposta para "o que a banca mais cobra", que e o motivo de o acervo
-    existir.
+    evidencia: str
+    #: [(materia pelo nome do edital, questoes distintas)], da mais cobrada.
+    linhas: list
+    #: Questoes distintas: a mesma questao em cadernos de varios cargos do
+    #: mesmo concurso e uma so (decisao 14 da 3B).
+    questoes: int
+    #: Linhas no banco, contando cada caderno. Igual a `questoes` quando a
+    #: banca nao repete caderno.
+    ocorrencias: int
+    provas: int
+
+
+def incidencia_por_evidencia(
+    cargo: str | None = None, banca: str | None = None, ano: int | None = None
+) -> tuple[list[IncidenciaDaEvidencia], int]:
+    """O que a banca cobra, por materia, separado por evidencia.
+
+    Devolve ([alvo, complementar, fora] - so as que tem questao - e quantas
+    questoes de provas complementares RECUSADAS ficaram de fora). Antes era um
+    numero so, com o alvo, o complementar, as provas recusadas e a IESES juntos
+    (auditoria de 04/10): a regra inviolavel 1 proibe. Anulada nao conta: a
+    banca desfez a pergunta. A materia sai pelo nome do edital, entao "Direito
+    Processo Penal" (2013) e "Direito Processual Penal" sao uma linha.
     """
+    from radar import conteudos as arvore
+    from radar.servico import complementar, evidencia
+
     criar_tabelas()
     consulta = (
-        select(QuestaoDeProva.materia, func.count())
-        # Questao anulada nao conta como questao cobrada: a propria banca
-        # desfez a pergunta depois dos recursos.
+        select(QuestaoDeProva.materia, QuestaoDeProva.prova_url,
+               QuestaoDeProva.evidencia, QuestaoDeProva.enunciado,
+               QuestaoDeProva.alternativas)
         .where(QuestaoDeProva.anulada.is_not(True))
-        .group_by(QuestaoDeProva.materia)
-        .order_by(func.count().desc())
     )
     if cargo:
         consulta = consulta.where(_cargo_parecido(cargo))
@@ -642,9 +664,40 @@ def incidencia_por_materia(
         consulta = consulta.where(QuestaoDeProva.banca.ilike(f"%{banca}%"))
     if ano:
         consulta = consulta.where(QuestaoDeProva.ano == ano)
-
     with sessao() as s:
-        return [(materia or "sem materia", n) for materia, n in s.execute(consulta)]
+        linhas = s.execute(consulta).all()
+
+    taxonomia = arvore.carregar_taxonomia()
+    aceitas = complementar.provas_aceitas()
+    recusadas = 0
+    por_evidencia: dict[str, dict] = {}
+    for materia, prova, qual, enunciado, alternativas in linhas:
+        if qual == evidencia.COMPLEMENTAR and prova not in aceitas:
+            # Prova que a validacao da 3B recusou nao entra em estatistica.
+            recusadas += 1
+            continue
+        bloco = por_evidencia.setdefault(
+            qual or evidencia.FORA,
+            {"chaves": {}, "todas": set(), "ocorrencias": 0, "provas": set()})
+        nome = taxonomia.nome_do_edital(materia) or "sem matéria"
+        chave = leitor_de_questoes.chave_da_questao(enunciado, alternativas)
+        bloco["chaves"].setdefault(nome, set()).add(chave)
+        bloco["todas"].add(chave)
+        bloco["ocorrencias"] += 1
+        bloco["provas"].add(prova)
+
+    saida = []
+    for qual in evidencia.EVIDENCIAS:
+        bloco = por_evidencia.get(qual)
+        if not bloco:
+            continue
+        contagem = sorted(((nome, len(chaves)) for nome, chaves in bloco["chaves"].items()),
+                          key=lambda par: (-par[1], par[0]))
+        saida.append(IncidenciaDaEvidencia(
+            evidencia=qual, linhas=contagem,
+            questoes=len(bloco["todas"]),
+            ocorrencias=bloco["ocorrencias"], provas=len(bloco["provas"])))
+    return saida, recusadas
 
 
 def questoes_repetidas(minimo: int = 2) -> list[tuple[str, int, str]]:

@@ -111,6 +111,28 @@ class Taxonomia:
                 return novo
         return None
 
+    def nome_do_edital(self, materia: str | None) -> str | None:
+        """O nome do edital para qualquer grafia: o do sinonimo, ou o proprio."""
+        return self.materia_do_texto(materia) or materia
+
+    def grafias(self, materia: str) -> list[str]:
+        """Todas as grafias que valem como esta materia nas provas: o nome do
+        edital e os nomes antigos que o `sinonimos_de_materia` liga a ele.
+
+        E por aqui que um filtro pela coluna `materia` das questoes acha as
+        duas provas: a de 2013 grava "Direito Processo Penal", a de 2019
+        "Direito Processual Penal" (auditoria de 04/10, BUG-4).
+        """
+        edital = self.nome_do_edital(materia)
+        alvo = normalizar(edital)
+        return [edital] + [antigo for antigo, novo in self.sinonimos_de_materia.items()
+                           if normalizar(novo) == alvo]
+
+
+def grafias_da_materia(materia: str) -> list[str]:
+    """`Taxonomia.grafias`, com a taxonomia do config/. Para filtro de banco."""
+    return carregar_taxonomia().grafias(materia)
+
 
 def carregar_taxonomia(caminho_do_arquivo: Path | None = None) -> Taxonomia:
     arquivo = caminho_do_arquivo or (config.diretorio_config() / "taxonomia.yml")

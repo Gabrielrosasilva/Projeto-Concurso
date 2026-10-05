@@ -52,7 +52,11 @@ def _reais_do_alvo(s, materia: str | None = None) -> list[QuestaoDeProva]:
         .where(QuestaoDeProva.anulada.is_not(True))
     )
     if materia:
-        consulta = consulta.where(QuestaoDeProva.materia == materia)
+        from radar import conteudos as arvore
+
+        # Todas as grafias: a prova de 2013 escreve "Direito Processo Penal".
+        consulta = consulta.where(
+            QuestaoDeProva.materia.in_(arvore.grafias_da_materia(materia)))
 
     # Uma por enunciado: a mesma pergunta aparece em mais de um caderno, e
     # variar as duas copias daria as mesmas variacoes duas vezes.

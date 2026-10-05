@@ -230,7 +230,20 @@ def test_incidencia_por_materia(banco_temporario, tmp_path, monkeypatch):
     )
     servico.extrair_questoes(limite=5)
 
-    linhas = dict(servico.incidencia_por_materia())
+    # A prova de teste e da FEPESE e nao e do cargo: complementar. Aceita no
+    # acervo, como as reais estao; sem isso a validacao a deixaria de fora.
+    from radar.servico import complementar
+    from radar.models import QuestaoDeProva
+    from radar.db import sessao
+
+    with sessao() as s:
+        provas = {url for (url,) in s.query(QuestaoDeProva.prova_url).distinct()}
+    monkeypatch.setattr(complementar, "provas_aceitas", lambda: provas)
+
+    blocos, recusadas = servico.incidencia_por_evidencia()
+    assert recusadas == 0
+    assert [b.evidencia for b in blocos] == ["complementar"]
+    linhas = dict(blocos[0].linhas)
     assert linhas["Conhecimentos Específicos"] == 20
     assert linhas["Língua Portuguesa"] == 10
 
@@ -244,8 +257,17 @@ def test_incidencia_filtra_por_cargo(banco_temporario, tmp_path, monkeypatch):
     )
     servico.extrair_questoes(limite=5)
 
-    assert servico.incidencia_por_materia(cargo="Guarda")
-    assert servico.incidencia_por_materia(cargo="Nao existe") == []
+    from radar.db import sessao
+    from radar.models import QuestaoDeProva
+    from radar.servico import complementar
+
+    with sessao() as s:
+        provas = {url for (url,) in s.query(QuestaoDeProva.prova_url).distinct()}
+    monkeypatch.setattr(complementar, "provas_aceitas", lambda: provas)
+
+    blocos, recusadas = servico.incidencia_por_evidencia(cargo="Guarda")
+    assert [b.evidencia for b in blocos] == ["complementar"] and recusadas == 0
+    assert servico.incidencia_por_evidencia(cargo="Nao existe") == ([], 0)
 
 
 def test_questao_repetida_entre_provas_e_encontrada(banco_temporario, tmp_path, monkeypatch):

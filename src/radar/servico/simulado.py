@@ -18,6 +18,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import func, select
 
 from radar import alvo as alvos
+from radar import conteudos as arvore
 from radar import macetes, regioes
 from radar.db import criar_tabelas, sessao
 from radar.models import (
@@ -95,7 +96,9 @@ def _sortear_questoes(
     consulta = select(QuestaoDeProva).where(QuestaoDeProva.resposta.is_not(None))
 
     if materia:
-        consulta = consulta.where(QuestaoDeProva.materia == materia)
+        # Todas as grafias: a prova de 2013 escreve "Direito Processo Penal".
+        consulta = consulta.where(
+            QuestaoDeProva.materia.in_(arvore.grafias_da_materia(materia)))
     elif universais:
         consulta = consulta.where(QuestaoDeProva.materia.in_(materias_universais()))
     if cargo:

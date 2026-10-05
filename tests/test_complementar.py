@@ -771,3 +771,32 @@ def test_a_mesma_questao_em_varios_cadernos_conta_uma_vez(acervo):
     linha = servico_da_incidencia.linhas_complementares()["Direito Penal"]
     assert linha.ocorrencias == linha.questoes + 1
     assert "ocorrências em cadernos diferentes" in linha.frase
+
+
+# --- o `radar padrao`: um bloco por evidencia (auditoria de 04/10) ----------------
+
+def test_o_padrao_da_banca_separa_alvo_complementar_aceito_e_outra_banca(acervo):
+    """O `radar padrao` somava o alvo, o complementar, as provas recusadas e a
+    outra banca num numero so, chamado "incidencia" - o que a regra
+    inviolavel 1 proibe. Agora cada evidencia e um bloco com a sua amostra, a
+    prova recusada fica de fora e e contada."""
+    from radar import servico as fachada
+
+    with sessao() as s:
+        s.add(QuestaoDeProva(
+            prova_url="https://ieses.test/prova.pdf", banca="IESES", ano=2020,
+            cargo="Agente", numero=1, materia="Língua Portuguesa",
+            enunciado="Pergunta da outra banca?", alternativas=dict(ALTERNATIVAS),
+            resposta="a", impressao="ieses-1", evidencia="fora"))
+    servico.aplicar(hoje=date(2026, 10, 1))   # aceita o 2016; recusa a Guarda
+
+    blocos, recusadas = fachada.incidencia_por_evidencia()
+
+    por_evidencia = {b.evidencia: b for b in blocos}
+    assert list(por_evidencia) == ["alvo", "complementar", "fora"]
+    assert (por_evidencia["alvo"].questoes, por_evidencia["alvo"].provas) == (2, 2)
+    assert dict(por_evidencia["complementar"].linhas) == {"Direito Penal": 2,
+                                                          "Direitos Humanos": 1}
+    assert por_evidencia["fora"].questoes == 1
+    # As 2 da Guarda 2024 (recusada na validacao) nao entram em bloco nenhum.
+    assert recusadas == 2

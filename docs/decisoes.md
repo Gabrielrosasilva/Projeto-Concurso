@@ -3881,3 +3881,29 @@ Os outros dois consertos da rodada nao mudam regra: o
 31/10/2026 (quebraria o Actions em 01/11, BUG-8), e o `radar gerar --modo
 revisao` sem nada estudado, sem `--pedido`, da a mesma frase do `--pedido`
 em vez de traceback (BUG-6).
+
+## A Rodada 2 das correcoes da auditoria (04/10/2026)
+
+97. **a materia de uma prova antiga vale pelo nome do edital em todo filtro
+    e em todo acerto por materia** (BUG-4). O `config/taxonomia.yml` ja
+    dizia que "Direito Processo Penal" (2013) e "Direito Processual Penal";
+    a incidencia usava isso, mas a geracao, o simulado por materia, a
+    revisao espacada e o catalogo do complementar filtravam pela coluna crua
+    e so achavam 2019. Agora a taxonomia responde as duas perguntas -
+    `grafias(materia)` (todas as grafias que valem como ela) e
+    `nome_do_edital(grafia)` - e os quatro filtros usam `grafias`; o acerto
+    por materia do `metricas` agrupa por `nome_do_edital`, e a questao sem
+    materia se chama "sem matéria". O dado gravado nao muda. A comparacao
+    difusa do `compilado.mesma_materia` (0,85) continua onde estava: ela
+    casa o nome do quadro do edital com o do caderno, e trocá-la e outra
+    conversa.
+
+98. **o `radar padrao` mostra um bloco por evidencia** (regra inviolavel 1).
+    O comando antigo somava as provas do cargo, o complementar - aceito e
+    recusado - e a IESES num numero so, chamado "Incidencia por materia".
+    Agora `servico.incidencia_por_evidencia` devolve tres blocos (Policia
+    Penal SC, acervo complementar FEPESE aceito, outras bancas), cada um com
+    "N questoes · M provas", contando questao DISTINTA (pela chave) e as
+    ocorrencias ao lado quando a banca repete caderno (decisao 14 da 3B); a
+    prova complementar recusada na validacao fica de fora e e contada no
+    rodape. O `incidencia_por_materia`, que so este comando usava, saiu.

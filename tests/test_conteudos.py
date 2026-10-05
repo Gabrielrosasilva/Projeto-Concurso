@@ -353,3 +353,20 @@ def test_o_json_antigo_pela_impressao_vira_chave(semeada):
         assert (c.conteudo, c.status) == (PENAL, "pendente")
         assert "ambígua" in c.trecho
 
+
+
+# --- as grafias de uma materia (auditoria de 04/10, BUG-4) ----------------------
+
+def test_as_grafias_juntam_o_nome_do_edital_e_o_da_prova_antiga():
+    """A prova de 2013 escreve "Direito Processo Penal"; o edital de agora,
+    "Direito Processual Penal". Filtro pela coluna `materia` tem de achar as
+    duas, venha o pedido por qualquer um dos nomes."""
+    taxonomia = arvore.carregar_taxonomia()
+
+    esperado = ["Direito Processual Penal", "Direito Processo Penal"]
+    assert taxonomia.grafias("Direito Processual Penal") == esperado
+    assert taxonomia.grafias("Direito Processo Penal") == esperado
+    assert taxonomia.nome_do_edital("Direito Processo Penal") == "Direito Processual Penal"
+    # Materia sem sinonimo fica so com o proprio nome, sem pegar vizinha.
+    assert taxonomia.grafias("Direito Penal") == ["Direito Penal"]
+    assert taxonomia.nome_do_edital("Direito Penal") == "Direito Penal"

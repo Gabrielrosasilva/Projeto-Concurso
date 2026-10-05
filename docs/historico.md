@@ -2141,3 +2141,13 @@ na pendencia G.
 O Actions de 04/10, que a pendencia D mandava conferir, foi verde: o
 `coleta: 2026-10-04` do radar-bot chegou ao GitHub (visto no push do fim da
 auditoria), e o job so commita depois do `pytest -q` passar no Linux.
+
+## A Rodada 2 das correcoes da auditoria (04/10)
+
+O "Direito Processo Penal" de 2013 voltou para a geracao, o simulado por
+materia e a revisao espacada: os filtros passaram a pedir todas as grafias
+da materia ao `config/taxonomia.yml`, e o acerto por materia junta as duas
+numa linha (decisao 97). E o `radar padrao`, o comando mais antigo das
+provas, deixou de somar o alvo, o complementar e a IESES: sao tres blocos,
+cada um com a sua amostra, e a prova recusada fica de fora com a conta dela
+(decisao 98).

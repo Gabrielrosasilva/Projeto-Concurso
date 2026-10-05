@@ -424,7 +424,7 @@ def classificar_pelo_catalogo(materia: str):
             select(QuestaoDeProva)
             .where(QuestaoDeProva.evidencia == evidencia.COMPLEMENTAR,
                    QuestaoDeProva.prova_url.in_(aceitas),
-                   QuestaoDeProva.materia == materia)))
+                   QuestaoDeProva.materia.in_(arvore.grafias_da_materia(materia)))))
     # Uma por CHAVE: a mesma questao em dois cadernos e uma so.
     por_chave = {classificacoes.chave_de(q): (q.enunciado or "") for q in questoes}
     return classificacoes.propor_pelo_catalogo(materia, por_chave)

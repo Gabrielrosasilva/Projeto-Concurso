@@ -26,6 +26,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 17 | O estoque de geradas até 07/11 (pedido de 03/10) | ✅ os 57 lotes (725 questões; banco e JSON 50 → 775); os 2 das Regras de Mandela depois da decisão 76 |
 | 18 | O lote de 04/10 (as conferências e os abertos) | ✅ as 61 fichas e as 15 leis conferidas contra a fonte (a marca de conferida continua sua), a tela de conferência do complementar e o lote do catálogo refeito, o `?cor=`, as geradas antigas, a base da média nos Macetes, e o leitor do caderno consertado com a releitura (B.7, B.9, B.10; decisões 87 a 90) |
 | 19 | Auditoria independente de 04/10 e a Rodada 1 das correções | ✅ a auditoria ([auditoria_independente](auditoria_independente.md): 186 requisitos, 8 defeitos) e a Rodada 1 (BUG-1, BUG-2, BUG-6 e BUG-8; decisão 96); as rodadas 2 a 4 estão na pendência G |
+| 20 | Rodada 2 das correções da auditoria | ✅ 2563 passed; o sinônimo de matéria nos filtros e no acerto por matéria (decisão 97) e o `radar padrao` por evidência (decisão 98) |
 
 ---
 
@@ -2773,3 +2774,38 @@ traceback; o pedido do art. 26 da LEP montado pela função (sem salvar, para
 não sobrescrever o seu `data/pedido_ia.json`) escreve "CONTEUDO (um destes
 caminhos): … > LEP, art. 26"; as 775 geradas do banco: 0 em nó inexistente, 0
 fora do escopo gravado.
+
+## 20 — A Rodada 2 das correções da auditoria (04/10/2026)
+
+Aprovada por você ("pode"), com a recomendação do `radar padrao` (três blocos).
+
+- **O sinônimo de matéria (BUG-4, decisão 97):** `src/radar/conteudos.py`
+  (`Taxonomia.grafias`, `nome_do_edital`, `grafias_da_materia`); os filtros de
+  `servico/geradas.py`, `servico/simulado.py`, `servico/espacada.py` e
+  `servico/complementar.py` passam a usar as grafias; `servico/metricas.py`
+  agrupa o acerto por matéria pelo nome do edital (`_nome_da_materia`,
+  `SEM_MATERIA = "sem matéria"`).
+- **O `radar padrao` (decisão 98):** `servico/provas.py`
+  (`IncidenciaDaEvidencia`, `incidencia_por_evidencia`, no lugar do
+  `incidencia_por_materia`), `servico/__init__.py` (a fachada) e `cli.py`
+  (`padrao`, `NOME_DA_EVIDENCIA`); README.
+
+**Testes novos (5):** as grafias pela taxonomia real (`test_conteudos`); a
+base da gerada, o simulado por matéria e o acerto por matéria com as duas
+grafias (`test_geracao_por_conteudo`); os três blocos com a recusada de fora
+(`test_complementar`). Os 5 falham no código de antes. Ajustados: os dois de
+`test_questoes.py` e o de `test_gerador.py` que usavam o serviço antigo (a
+prova de teste da FEPESE passa a ser registrada como aceita, como as reais).
+
+| Rodada | Resultado |
+|---|---|
+| Os 10 arquivos tocados (`test_questoes`, `test_gerador`, `test_complementar`, `test_conteudos`, `test_geracao_por_conteudo`, `test_espacada`, `test_metricas`, `test_cli`, `test_relatorio`, `test_materias_na_tela`), 1ª rodada | 301 passed, 2 failed (os dois de `test_questoes`: a prova de teste não estava aceita; ajustados) |
+| Suíte inteira, PC (uma vez, no fim) | **2563 passed** (2558 + 5 novos), 0 failed, 23 min 44 s; os `data/*.json` intactos |
+
+**Comando real (banco real, só leitura):** `radar padrao` → "Polícia Penal SC
+(as provas do meu cargo) — 162 questões · 2 provas" (Direito Processual
+Penal com 10, 2013 e 2019 juntos), "Acervo complementar FEPESE (provas
+aceitas) — 3106 questões · 172 provas (7023 ocorrências em cadernos
+diferentes)", "Outras bancas — 738 questões · 31 provas (907 ocorrências)" e
+"Ficaram de fora 360 questões de provas complementares que a validação
+recusou".

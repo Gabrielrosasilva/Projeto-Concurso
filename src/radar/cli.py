@@ -1226,40 +1226,52 @@ def padrao(
     banca: str = typer.Option(None, help="Filtra por banca, ex: FEPESE"),
     ano: int = typer.Option(None, help="Filtra por ano"),
 ) -> None:
-    """O que a banca mais cobra: incidencia por materia.
+    """O que a banca mais cobra, por materia - um bloco por evidencia.
 
-    E a resposta que motivou montar o acervo.
+    As provas do meu cargo, o acervo complementar FEPESE aceito e as outras
+    bancas, cada um com a sua amostra, e nunca somados (regra inviolavel 1).
     """
-    linhas = servico.incidencia_por_materia(cargo=cargo, banca=banca, ano=ano)
+    blocos, recusadas = servico.incidencia_por_evidencia(
+        cargo=cargo, banca=banca, ano=ano)
 
-    if not linhas:
+    if not blocos:
         console.print(
             "[yellow]Sem questão no banco com esses filtros.[/] "
             "Rode [bold]radar provas[/] e depois [bold]radar questoes[/]."
         )
         return
 
-    total = sum(n for _, n in linhas)
-    titulo = "Incidência por matéria"
-    if cargo:
-        titulo += f" - cargo contendo \"{cargo}\""
+    for bloco in blocos:
+        titulo = NOME_DA_EVIDENCIA[bloco.evidencia]
+        if cargo:
+            titulo += f" - cargo contendo \"{cargo}\""
+        amostra = f"{bloco.questoes} questões · {bloco.provas} provas"
+        if bloco.ocorrencias != bloco.questoes:
+            amostra += f" ({bloco.ocorrencias} ocorrências em cadernos diferentes)"
+        tabela = Table(title=f"{titulo} — {amostra}")
+        tabela.add_column("Matéria")
+        tabela.add_column("Questões", justify="right")
+        tabela.add_column("Peso", justify="right")
+        tabela.add_column("", width=22)
+        for materia, quantas in bloco.linhas:
+            fatia = quantas / bloco.questoes
+            tabela.add_row(materia, str(quantas), f"{fatia*100:.1f}%",
+                           "#" * max(1, round(fatia * 20)))
+        console.print(tabela)
 
-    tabela = Table(title=f"{titulo} ({total} questões)")
-    tabela.add_column("Matéria")
-    tabela.add_column("Questões", justify="right")
-    tabela.add_column("Peso", justify="right")
-    tabela.add_column("", width=22)
+    console.print("[dim]Os blocos nunca se somam: cada um é uma evidência. "
+                  "Questão anulada não conta.[/]")
+    if recusadas:
+        console.print(f"[dim]Ficaram de fora {recusadas} questões de provas "
+                      "complementares que a validação recusou (Etapa 3B).[/]")
 
-    for materia, quantas in linhas:
-        fatia = quantas / total
-        tabela.add_row(
-            materia,
-            str(quantas),
-            f"{fatia*100:.1f}%",
-            "#" * max(1, round(fatia * 20)),
-        )
 
-    console.print(tabela)
+#: O titulo de cada bloco do `radar padrao`, uma evidencia por bloco.
+NOME_DA_EVIDENCIA = {
+    "alvo": "Polícia Penal SC (as provas do meu cargo)",
+    "complementar": "Acervo complementar FEPESE (provas aceitas)",
+    "fora": "Outras bancas",
+}
 
 
 @app.command()

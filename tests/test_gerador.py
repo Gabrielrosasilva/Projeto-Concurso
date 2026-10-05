@@ -495,8 +495,8 @@ def test_questao_gerada_nao_entra_em_nada_que_meca(banco_temporario):
     assert servico.contar_questoes() == 1
 
     # a incidencia por materia nao ve a gerada
-    incidencia = servico.incidencia_por_materia()
-    assert sum(quantas for _materia, quantas in incidencia) == 1
+    blocos, _recusadas = servico.incidencia_por_evidencia()
+    assert sum(bloco.questoes for bloco in blocos) == 1
 
     # e o simulado comum nao sorteia gerada
     with sessao() as s:

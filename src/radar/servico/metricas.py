@@ -501,10 +501,25 @@ def acumulado_por(chaves_da_questao, materias: list[str] | None = None) -> dict:
     return conta
 
 
+#: O rotulo da questao sem materia gravada, como a tela escreve.
+SEM_MATERIA = "sem matéria"
+
+
+def _nome_da_materia():
+    """A materia de uma questao pelo nome do EDITAL: a grafia antiga de uma
+    prova ("Direito Processo Penal", 2013) conta na mesma linha da nova
+    (auditoria de 04/10, BUG-4). A taxonomia e lida uma vez por conta."""
+    from radar import conteudos as arvore
+
+    taxonomia = arvore.carregar_taxonomia()
+    return lambda materia: taxonomia.nome_do_edital(materia) or SEM_MATERIA
+
+
 def acumulado_por_materia() -> list[DesempenhoDaMateria]:
     """Acerto por materia no acumulado, pior primeiro. Questao que saiu do
     acervo fica fora: nao ha materia para ela."""
-    por_materia = acumulado_por(lambda q: [q.materia or "sem materia"])
+    nome = _nome_da_materia()
+    por_materia = acumulado_por(lambda q: [nome(q.materia)])
     return _pior_primeiro([
         DesempenhoDaMateria(nome, numeros.medidas, numeros.acertos)
         for nome, numeros in por_materia.items()
@@ -541,9 +556,10 @@ def _por_materia_das_respostas(tabela, gerada: bool, simulado_id: int | None,
     with sessao() as s:
         linhas = s.execute(consulta).all()
 
+    nome = _nome_da_materia()
     por_materia: dict[str, list] = {}
     for materia, resposta in linhas:
-        por_materia.setdefault(materia or "sem materia", []).append(resposta)
+        por_materia.setdefault(nome(materia), []).append(resposta)
     return _pior_primeiro([
         DesempenhoDaMateria(nome, *placar(respostas), origem=IA if gerada else AUTOMATICO)
         for nome, respostas in por_materia.items()

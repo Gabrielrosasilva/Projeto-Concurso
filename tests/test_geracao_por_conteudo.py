@@ -792,3 +792,44 @@ def test_toda_variacao_do_registro_tem_a_base_pela_chave_menos_as_3_de_27_09():
 
     assert len(sem_base) == 3
     assert all("27/09/2026" in (linha.get("modelo") or "") for linha in sem_base)
+
+
+# --- a materia pela grafia antiga (auditoria de 04/10, BUG-4) ---------------------
+
+DPP, DPP_2013 = "Direito Processual Penal", "Direito Processo Penal"
+
+
+def test_a_base_da_gerada_pega_a_grafia_antiga_da_materia(arvore_de_teste):
+    """O `radar gerar --materia "Direito Processual Penal"` so achava 2019: a
+    prova de 2013 grava "Direito Processo Penal"."""
+    _gravar(_questao(1, materia=DPP), None)
+    _gravar(_questao(2, materia=DPP_2013), None)
+
+    with sessao() as s:
+        pelo_edital = sorted(q.numero for q in geradas._reais_do_alvo(s, DPP))
+        pela_antiga = sorted(q.numero for q in geradas._reais_do_alvo(s, DPP_2013))
+
+    assert pelo_edital == pela_antiga == [1, 2]
+
+
+def test_o_simulado_por_materia_pega_a_grafia_antiga(arvore_de_teste):
+    from radar.servico import simulado
+
+    _gravar(_questao(1, materia=DPP), None)
+    _gravar(_questao(2, materia=DPP_2013), None)
+    _gravar(_questao(3, materia="Direito Penal"), None)
+
+    ids = simulado._sortear_questoes(10, materia=DPP)
+
+    with sessao() as s:
+        materias = sorted(s.get(QuestaoDeProva, i).materia for i in ids)
+    assert materias == [DPP_2013, DPP]
+
+
+def test_o_acerto_por_materia_junta_as_duas_grafias(arvore_de_teste):
+    from radar.servico import metricas
+
+    nome = metricas._nome_da_materia()
+    assert nome(DPP_2013) == DPP
+    assert nome(DPP) == DPP
+    assert nome(None) == metricas.SEM_MATERIA == "sem matéria"
