@@ -389,11 +389,14 @@ número ou prepara 10/10, 17/10 e 07/11.
   assuntos (o da faixa do Art. 5º, XVII a XLIX) e ver se os 3 aparecem no
   filtro do site: nenhum teste confere isso, só o de um assunto. (2) A lista da
   disciplina **Redação Oficial**, para as 2 faixas que ficaram sem link. (3)
-  Para o Ciclo 2, refazer duas listas em `C:\qconcursos`: a do Direito Penal
-  terminou em "40.13 Lei de Tóxicos", sem a Maria da Penha (talvez não rolou
-  até o fim), e a da Legislação Estadual veio com buracos (24.1, 24.4,
-  24.6...) e sem a LC 529/2011, que teve 7 questões em 2019 - a busca rápida
-  devia estar preenchida.
+  Para o Ciclo 2: achar onde o site põe a **Maria da Penha** (Lei 11.340, 2
+  questões em 2019) - no Direito Penal não está; a lista dele acaba mesmo no
+  "40.13 Lei de Tóxicos". Já achado em `C:\qconcursos`, para o Ciclo 2: a LC
+  529/2011 (7 questões em 2019) é o assunto 23303 da disciplina Regimento
+  Interno (92); o Estatuto do Servidor de SC (Lei 6.745) é o 9371 da
+  Legislação Estadual (61, a lista filtrada por SC de propósito); as LCs 472 e
+  675 não apareceram. A legislação de Florianópolis (disciplina 600) é da
+  Guarda Municipal (`de_olho`), não do alvo.
 
 ### Depois de 07/11 (I3)
 
