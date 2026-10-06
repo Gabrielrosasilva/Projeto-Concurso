@@ -573,7 +573,9 @@ class ResumosDoDia:
 
 
 #: As faixas sem materia que cobrem varios temas, e de onde vem a lista.
-TIPOS_DE_VARIOS_TEMAS = ("correcao", "revisao_semanal", "simulado", "diagnostico")
+TIPOS_DE_VARIOS_TEMAS = ("correcao", "revisao_semanal")
+#: As faixas que medem sem consulta: nao tem botao de resumo (decisao 136).
+TIPOS_SEM_CONSULTA = ("simulado", "diagnostico")
 
 
 def _id_na_tela(texto: str) -> str:
@@ -586,9 +588,10 @@ def resumos_do_dia(blocos, data: date, plano=None, escritas=None,
     - faixa de um tema (teoria, lei seca, Portugues, Raciocinio, questoes,
       R+7, R+30, bonus com tema): o resumo daquele tema;
     - a correcao: os temas das faixas do dia; a revisao semanal: os temas
-      estudados de segunda ate o dia; o simulado e o diagnostico: os temas das
-      materias dele estudados ate o dia; a revisao mista (o R+7 dos
+      estudados de segunda ate o dia; a revisao mista (o R+7 dos
       diagnosticos): os das materias dos diagnosticos do dia de origem;
+    - o simulado e o diagnostico nao tem botao: medem sem consulta, e o
+      resumo cita a questao real com o gabarito (decisao 136);
     - a pausa nao tem botao; faixa com materia e sem ficha diz que o resumo
       nao foi escrito.
     """
@@ -643,6 +646,8 @@ def resumos_do_dia(blocos, data: date, plano=None, escritas=None,
         for indice, faixa in enumerate(bloco.faixas):
             if getattr(faixa, "desligada", False) or faixa.tipo == "pausa":
                 continue
+            if faixa.tipo in TIPOS_SEM_CONSULTA:
+                continue
             mista = bool(faixa.materia) and plano.e_mista(faixa.materia)
             if faixa.tipo in TIPOS_DE_VARIOS_TEMAS or mista:
                 varios.append((bloco.chave, indice, faixa, mista))
@@ -659,14 +664,10 @@ def resumos_do_dia(blocos, data: date, plano=None, escritas=None,
             lista = list(ids_do_dia)
         elif faixa.tipo == "revisao_semanal":
             lista = estudados_em(data - timedelta(days=data.weekday()), data)
-        elif mista:
+        else:
             origem = plano.dia(date.fromisoformat(str(faixa.origem))) if faixa.origem else None
             materias = {f.materia for f in (origem.faixas() if origem else [])
                         if f.tipo == "diagnostico" and f.materia}
-            lista = estudados_em(inicio, data, materias or None)
-        else:
-            materias = set(faixa.materias_da_rodada or ()) or (
-                {faixa.materia} if faixa.materia else set())
             lista = estudados_em(inicio, data, materias or None)
         por_faixa[(chave, indice)] = list(dict.fromkeys(lista))
     return ResumosDoDia(por_faixa=por_faixa, temas=temas)

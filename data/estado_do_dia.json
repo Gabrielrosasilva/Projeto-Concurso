@@ -73,7 +73,7 @@
     "plano_b": null
   },
   {
-    "atualizado_em": "2026-10-01T17:39:28.322122+00:00",
+    "atualizado_em": "2026-10-06T13:13:57.822357+00:00",
     "data": "2026-09-29",
     "faixas_feitas": [
       {
@@ -130,17 +130,6 @@
         "minutos": 20,
         "questoes": null,
         "titulo": "Correção"
-      },
-      {
-        "acertos": 2,
-        "assunto": "Artigo, numeral e pronome (classificação)",
-        "bloco": "noite",
-        "consulta": false,
-        "indice": 2,
-        "materia": "Língua Portuguesa",
-        "minutos": 25,
-        "questoes": 10,
-        "titulo": "Artigo, numeral e pronome (classificação)"
       }
     ],
     "plano_b": null

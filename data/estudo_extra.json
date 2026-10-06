@@ -43,5 +43,20 @@
     "o_que": "revisao",
     "onde": "radar",
     "questoes": null
+  },
+  {
+    "acertos": null,
+    "anotacao": "Correcao de 06/10 (auditoria de uso, P02): as questoes desta faixa foram respondidas no radar (rodada 4) e ja contam la; a faixa anotada repetia os mesmos numeros.",
+    "assunto": "Artigo, numeral e pronome (classificação)",
+    "atualizado_em": "2026-10-06T13:13:57.890313+00:00",
+    "consulta": false,
+    "conteudo": null,
+    "criado_em": "2026-10-06T13:13:57.890309+00:00",
+    "data": "2026-09-29",
+    "materia": "Língua Portuguesa",
+    "minutos": 25,
+    "o_que": "questoes",
+    "onde": "radar",
+    "questoes": null
   }
 ]

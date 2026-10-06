@@ -45,7 +45,7 @@
     "fonte_sugerida": null,
     "modelo": "Claude Code, importado manualmente, em 02/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
-    "conferida_em": null,
+    "conferida_em": "2026-10-06",
     "resumo": {
       "partes": {
         "dominar": [
@@ -1246,7 +1246,7 @@
     "fonte_sugerida": null,
     "modelo": "Claude Code, importado manualmente, em 02/10/2026; corrigida pelo Claude Code (claude-opus-5-5) em 05/10/2026 (R3)",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
-    "conferida_em": null,
+    "conferida_em": "2026-10-06",
     "resumo": {
       "partes": {
         "dominar": [
@@ -1766,7 +1766,7 @@
     "fonte_sugerida": null,
     "modelo": "Claude Code, importado manualmente, em 02/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
-    "conferida_em": null,
+    "conferida_em": "2026-10-06",
     "resumo": {
       "partes": {
         "dominar": [
@@ -5795,7 +5795,7 @@
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulos de artigo, numeral e pronome.",
     "modelo": "Claude Code, importado manualmente, em 05/10/2026",
     "criado_em": "2026-10-05T03:21:32.980956+00:00",
-    "conferida_em": null,
+    "conferida_em": "2026-10-06",
     "resumo": {
       "partes": {
         "dominar": [
@@ -9782,7 +9782,7 @@
     "fonte_sugerida": "A Gramática para Concursos Públicos (Fernando Pestana, Método) - capítulos de substantivo e de adjetivo.",
     "modelo": "Claude Code, importado manualmente, em 05/10/2026",
     "criado_em": "2026-10-05T03:21:32.980956+00:00",
-    "conferida_em": null,
+    "conferida_em": "2026-10-06",
     "resumo": {
       "partes": {
         "dominar": [

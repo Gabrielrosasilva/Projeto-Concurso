@@ -244,10 +244,10 @@ TITULOS = {
                               "Mini-simulado da semana", "Correção"]),
                    ("pos22", ["Anki: só os vencidos"])],
     # Os diagnosticos de 03/10 passaram para 10/10, e o R+7 deles para 17/10
-    # (decisao 105).
-    "2026-10-10": [("manha", ["Princípios de contagem", "Pausa", "Revisão semanal",
-                              "Diagnóstico de Raciocínio Lógico"]),
-                   ("noite", ["Simulado da semana", "Pausa", "Diagnóstico de Português",
+    # (decisao 105); em 10/10 eles abrem a manha e a noite (decisao 134).
+    "2026-10-10": [("manha", ["Diagnóstico de Raciocínio Lógico", "Pausa",
+                              "Princípios de contagem", "Revisão semanal"]),
+                   ("noite", ["Diagnóstico de Português", "Pausa", "Simulado da semana",
                               "Correção do simulado e dos diagnósticos"]),
                    ("pos22", ["Anki: só os vencidos"])],
     "2026-10-17": [("manha", ["Probabilidade", "Pausa", "Revisão semanal",

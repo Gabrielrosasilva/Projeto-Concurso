@@ -2,6 +2,8 @@
 
 Pedido de 06/10: auditar o uso do radar com o banco real, sem mudar nada, e propor melhorias. **Nenhum código, template, configuração ou dado foi alterado**; este é o único arquivo novo. Auditado: o commit `f58faa1` com uma foto da pasta `data/` de 06/10, 00:37. Cada item escolhido vira uma subetapa própria.
 
+> **Andamento (06/10):** aprovada a ordem da seção "Apêndice B" e a regra do I3. Feitos o lote 1 (I1, P14, U02, P06 e os textos do I4 e do I6; decisões 134 a 137), a correção do 29/09 (P02) e as 5 fichas do I5. O P08 ficou como está (sem evidência). Os próximos lotes estão na pendência I do [pendencias.md](pendencias.md).
+
 ## Para ler primeiro
 
 **Em três linhas.** Os números estão quase todos certos: a fonte única funciona e as regras do novo.md estão de pé (seção 1). Mas há **8 problemas críticos de precisão** que me fazem estudar ou medir errado, ou apagam dado, vários ligados ao sábado 10/10 e à comparação de 07/11, que decide o Ciclo 2 (seção 3). E as telas do dia têm muito mais texto do que precisam: o Hoje tem 2.104 palavras visíveis e 52 botões; o desenho da seção 8, medido num protótipo com a mesma régua, cai para 441 palavras e 8 botões (~450 com os enxertos, estimativa à mão), sem tirar nenhuma regra.

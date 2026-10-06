@@ -818,6 +818,11 @@
           </details>
         {% endif %}
       </div>
+    {% elif t.faixas_que_medem and t.dia and not t.futuro %}
+      {# Dia de medir: o Plano B trocaria a linha de base (decisao 135). #}
+      <div class="plano-b-controle">
+        <p class="ds-pequeno ds-suave">🩺 Hoje mede ({{ t.faixas_que_medem | join(' · ') }}): sem Plano B. Se o dia apertar, faça só estas.</p>
+      </div>
     {% endif %}
   </section>
 

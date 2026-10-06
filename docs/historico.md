@@ -2288,3 +2288,17 @@ banco, lido do caderno por colunas, e vai na tela, na ficha e no pedido - o
 que destravou 10 das 12 explicacoes que faltavam. **As questoes do
 complementar que os resumos citam** (133) ganharam 125 explicacoes. A suite
 inteira nao foi rodada, a seu pedido: so os testes de cada item.
+
+A auditoria de uso de 06/10 (so leitura, `docs/proposta_de_melhorias.md`):
+31 telas medidas com uma regua unica numa copia do banco, 57 problemas de
+precisao conferidos por verificador independente (8 criticos), 64 melhorias,
+9 ideias e o rascunho do Hoje e do Meu foco. Voce aprovou a ordem: ate 07/11
+so entra o que corrige numero ou prepara os sabados que medem. **O lote 1**
+(decisoes 134 a 137) saiu no mesmo dia: os diagnosticos de 10/10 abrem a
+manha e a noite; o dia que mede nao tem Plano B, e a Reduzida guarda a
+medicao; o Resumo saiu das faixas que medem sem consulta; a Conferencia nao
+apaga mais o artigo da questao; e os textos da Correcao pedem uma regra por
+tema. Junto, o 29/09 foi corrigido (as 10 de Portugues anotadas eram as do
+radar: o dia foi de 37 para 27 questoes, a semana 1 de 68 para 58) e voce
+conferiu as 5 fichas dos temas ja estudados, o que pos Penal e
+Constitucional na fila de revisao (de 8 para 17 pontas).

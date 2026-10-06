@@ -509,6 +509,10 @@ def conferir(chave: str, *, corrigir_para: str | None = None,
 
     Confirmar so marca a data. Corrigir troca o no e a procedencia vira
     "manual". Pendente guarda o meu motivo. Os tres marcam como conferida.
+    Corrigir e pendente levam o artigo (`dispositivo`) e o item do edital da
+    classificacao antiga: sao da questao, e nao do no, e e o artigo que leva
+    a pendente ao tema no "caiu ou nao caiu" (decisao 108). Corrigir para o
+    MESMO no e confirmar: o seletor ja vem nele (decisao 137).
     """
     criar_tabelas()
     with sessao() as s:
@@ -517,20 +521,22 @@ def conferir(chave: str, *, corrigir_para: str | None = None,
                          .where(Classificacao.principal.is_(True)))
     if atual is None and corrigir_para is None:
         raise ClassificacaoInvalida("Essa questão ainda não tem classificação.")
+    if atual is not None and corrigir_para is not None and corrigir_para == atual.conteudo:
+        corrigir_para = None
     quando = agora()
     rastro = f"; {ERA_DO_CATALOGO}" if atual is not None and veio_do_catalogo(atual) else ""
+    da_questao = ({"item_do_edital": atual.item_do_edital, "dispositivo": atual.dispositivo,
+                   "tipo_de_questao": atual.tipo_de_questao, "pegadinha": atual.pegadinha}
+                  if atual is not None else {})
     if corrigir_para is not None:
         return classificar(chave, corrigir_para, "manual",
                            trecho="corrigida na conferência" + rastro,
-                           tipo_de_questao=atual.tipo_de_questao if atual else None,
-                           pegadinha=atual.pegadinha if atual else None,
-                           conferida_em=quando)
+                           conferida_em=quando, **da_questao)
     if pendente is not None:
         materia = arvore.partes(atual.conteudo)[0]
         return classificar(chave, materia, "manual", status=PENDENTE,
                            trecho=f"pendente: {pendente.strip() or 'sem motivo escrito'}{rastro}",
-                           tipo_de_questao=atual.tipo_de_questao,
-                           pegadinha=atual.pegadinha, conferida_em=quando)
+                           conferida_em=quando, **da_questao)
     with sessao() as s:
         linha = s.get(Classificacao, atual.id)
         linha.conferida_em = quando

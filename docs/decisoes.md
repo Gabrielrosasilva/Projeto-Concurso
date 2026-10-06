@@ -4401,3 +4401,80 @@ para as fichas) deixava a ficha com um no e outro dentro dele quando o no
 levado caia sob um no que ela ja tinha - foi o caso do art. 75, que a ficha
 dos Orgaos passou a ter duas vezes. Agora fica so o de cima, como a conferencia
 da ficha exige; o dado foi corrigido.
+
+## O lote 1 da proposta de melhorias: o sabado que mede (06/10/2026)
+
+A auditoria de uso de 06/10 (`docs/proposta_de_melhorias.md`) propos; voce
+aprovou o lote 1, o que tem de estar pronto antes dos diagnosticos de 10/10.
+
+134. **em 10/10 os diagnosticos abrem a manha e a noite** (I1). Manha:
+     Diagnostico de Raciocinio Logico, Pausa, Principios de contagem, Revisao
+     semanal; noite: Diagnostico de Portugues, Pausa, Simulado da semana,
+     Correcao. O diagnostico de RL vinha depois de 50 min de teoria de
+     contagem e de 60 de revisao semanal, e o de Portugues depois de 90 min
+     de simulado: a linha de base que e comparada com 07/11 media o assunto
+     recem-estudado e o cansaco. Revisa a decisao 105 so na posicao; o dia,
+     o R+7 de 17/10 e a comparacao de 07/11 ficam. As rodadas ainda nao
+     existiam, entao a composicao (a semente e a posicao da faixa) mudou sem
+     perda nenhuma.
+
+135. **dia que mede nao tem Plano B, e a Reduzida guarda a medicao** (P14).
+     `servico.cronograma.faixas_que_medem`: o diagnostico e o simulado no
+     radar (`composicao.mede`) e o R+7 que refaz os erros deles
+     (`sabado.refaz_rodadas`). Com elas, o `ativar_plano_b` recusa e diz
+     quais medem, e a tela troca o botao por "Hoje mede (...): sem Plano B.
+     Se o dia apertar, faca so estas." Vale para 10/10, 17/10 e 07/11. O
+     Plano B de sabado trocava o dia inteiro por "refazer as erradas" no
+     Qconcursos e apagava a linha de base; ele nao podia so manter as faixas
+     que medem, porque a rodada e reconhecida pela posicao no bloco do dia, e
+     o Plano B e outro bloco. A Reduzida de 10/10 passou a "Faca so os dois
+     diagnosticos no radar; o simulado da semana fica de fora", a de 17/10 a
+     "Faca so o R+7 dos diagnosticos no radar...", e a Minima, a "ao menos um
+     dos diagnosticos" e "ao menos o R+7 dos diagnosticos".
+
+136. **as faixas que medem sem consulta nao tem botao de Resumo** (U02;
+     revisa a decisao 120). O diagnostico e o simulado (tipos `diagnostico` e
+     `simulado`, no radar ou no Qconcursos) sao cronometrados e sem consulta,
+     e o resumo cita a questao real com a letra do gabarito: o botao a um
+     clique desfazia o "sem consulta". O resumo continua na Correcao, no R+7
+     (o dos diagnosticos tambem) e na ficha. De quebra, o 07/11 deixa de
+     carregar os 65 resumos escondidos.
+
+137. **a conferencia nao apaga mais o artigo nem o item do edital** (P06). O
+     seletor "Corrigir para" vem no no atual, e o `classificacoes.conferir`
+     chamava o `classificar` sem `dispositivo` e `item_do_edital`, que eram
+     gravados vazios - no mesmo no, por cima da propria linha. Agora corrigir
+     para o mesmo no e confirmar, e corrigir para outro no ou deixar pendente
+     levam o artigo, o item do edital, o tipo e a pegadinha da classificacao
+     antiga: sao da questao, e e o artigo que leva a pendente ao tema
+     (decisao 108). Ja tinha acontecido em 05/10 com a chave `ae5ac356...`
+     (2013 q2 do complementar): o valor antigo esta no commit `1bc222e`. Nao
+     foi restaurado: fica com voce (pendencias, H).
+
+Junto, sem decisao nova:
+- **os textos do plano (I4 e I6).** A Correcao de 07/10 em diante (23 dias)
+  diz "Antes de ler o comentario de cada erro, diga para si por que a certa e
+  certa. No caderno de erros, UMA regra por tema que voce errou hoje", no
+  lugar de copiar TODO erro; a de 10/10 manda ler a explicacao de cada erro
+  dos diagnosticos e pedir as que faltam ate 16/10; o R+7 de 17/10 refaz cada
+  erro antes de reler a explicacao e pede uma regra por assunto, e nao o
+  motivo de cada um dos 40.
+- **o 29/09 foi corrigido a seu pedido (P02).** Voce confirmou que as 10 de
+  Portugues anotadas na faixa "Artigo, numeral e pronome" (10/2) eram as
+  mesmas 10 da rodada 4 do radar. A faixa foi desmarcada e os 25 min viraram
+  estudo extra "Onde: Radar", como no 05/10 (decisao 127). O 29/09 passou de
+  37 para 27 questoes (2 acertos + 10 erros + 15 sem acerto anotado), a
+  semana 1 de 68 para 58 (sem consulta 15 de 33, 45%), Portugues sem
+  consulta de 13 de 35 para 11 de 25, e a projecao de ~6 para ~7. O registro
+  do dia (37/4) e a copia guardada da 1D e nao aparece. Copia antes em
+  `data/copias/correcao-2026-09-29-101355/`.
+- **o 28/09 (P08) fica como esta.** Voce nao sabe dizer se as 10 foram do
+  Qconcursos ou as geradas da rodada 2, e a decisao 3 da Etapa 0 registrou
+  Qconcursos: sem evidencia, o dado nao se reescreve (regra inviolavel 9).
+- **as 5 fichas dos temas ja estudados foram conferidas por voce** (I5):
+  Aplicacao da lei penal; Art. 5o, caput e incisos I a XVI; Fato tipico e
+  nexo causal; Substantivo e adjetivo; Artigo, numeral e pronome. Pela
+  decisao 81, as faixas desses temas passam a contar para o "estudado" e as
+  datas de revisao (nunca para o acerto): os nos estudados ou praticados
+  foram de 16 (todos de Portugues) para 31, e a fila de revisao da home de 8
+  para 17 pontas, ja com Penal e Constitucional (era o P09).

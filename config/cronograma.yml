@@ -1073,7 +1073,8 @@ dias:
   - tipo: correcao
     duracao: 25
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1187,7 +1188,8 @@ dias:
   - tipo: correcao
     duracao: 25
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1307,7 +1309,8 @@ dias:
   - tipo: correcao
     duracao: 25
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1325,9 +1328,21 @@ dias:
     - Raciocínio Lógico > Equivalências
 - data: '2026-10-10'
   semana: 2
-  reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana.
+  reduzida: Faça só os dois diagnósticos no radar; o simulado da semana fica de fora.
+  minima: Faça ao menos um dos diagnósticos no radar.
   manha:
+  - tipo: diagnostico
+    questoes: 20
+    materia: Raciocínio Lógico
+    titulo: Diagnóstico de Raciocínio Lógico
+    detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
+      "Criar a rodada com esta composição". Abre a manhã: mede o que você sabe antes da teoria de contagem e sem
+      cansaço.'
+    cronometrado: true
+    onde: radar
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
   - tipo: raciocinio
     duracao: 50
     materia: Raciocínio Lógico
@@ -1335,23 +1350,23 @@ dias:
     detalhe: Princípio fundamental da contagem (multiplicativo e aditivo); arranjo; permutação simples e com repetição
       (anagramas); combinação; o teste 'a ordem importa?'. Vídeo + 5 exemplos resolvidos no papel.
     onde: videoaula
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: revisao_semanal
     duracao: 60
     titulo: Revisão semanal
     detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
       que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
+  noite:
   - tipo: diagnostico
     questoes: 20
-    materia: Raciocínio Lógico
-    titulo: Diagnóstico de Raciocínio Lógico
+    materia: Língua Portuguesa
+    titulo: Diagnóstico de Português
     detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
-      "Criar a rodada com esta composição". É o diagnóstico de 03/10, que passou para hoje (decisão 105).'
+      "Criar a rodada com esta composição". Abre a noite, antes do simulado, para medir sem cansaço.'
     cronometrado: true
     onde: radar
-  noite:
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
   - tipo: simulado
     questoes: 30
     min_por_questao: 3
@@ -1366,22 +1381,12 @@ dias:
     - Língua Portuguesa
     cronometrado: true
     onde: qconcursos
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: diagnostico
-    questoes: 20
-    materia: Língua Portuguesa
-    titulo: Diagnóstico de Português
-    detalhe: 'Questões reais da FEPESE, cronometradas e sem consulta, na composição abaixo: crie a rodada pelo botão
-      "Criar a rodada com esta composição". É o diagnóstico de 03/10, que passou para hoje (decisão 105).'
-    cronometrado: true
-    onde: radar
   - tipo: correcao
     duracao: 30
     titulo: Correção do simulado e dos diagnósticos
-    detalhe: Anote a nota e os erros por matéria. Cada erro dos diagnósticos vai para o caderno de erros com o
-      motivo.
+    detalhe: Anote a nota do simulado. Abra o resultado de cada diagnóstico e leia a explicação de cada erro, com a
+      fonte; os erros sem explicação, peça até 16/10 pelos 3 passos de Estudar > Gerar questões. No caderno de
+      erros, UMA regra por assunto que você errou, e não o motivo de cada erro.
   pos22:
   - tipo: anki
     duracao: 10
@@ -1498,7 +1503,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1637,7 +1643,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1757,7 +1764,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1875,7 +1883,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -1993,7 +2002,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -2012,8 +2022,8 @@ dias:
     - Raciocínio Lógico > Equivalências
 - data: '2026-10-17'
   semana: 3
-  reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana.
+  reduzida: Faça só o R+7 dos diagnósticos no radar; o simulado da semana fica de fora.
+  minima: Faça ao menos o R+7 dos diagnósticos no radar.
   manha:
   - tipo: raciocinio
     duracao: 50
@@ -2045,8 +2055,8 @@ dias:
     origem: '2026-10-10'
     titulo: 'R+7: refazer os erros dos diagnósticos'
     detalhe: 'Refaça, no radar, TODAS as questões que você ERROU nos diagnósticos de 10/10 (40 é o máximo: os
-      dois diagnósticos têm 20 cada), e anote no caderno de erros o motivo de cada uma. A lista está abaixo, e a
-      rodada sai pelo botão "Criar a rodada com os erros".'
+      dois diagnósticos têm 20 cada), cada uma antes de reler a explicação. No caderno de erros, UMA regra por
+      assunto que você ainda errou. A lista está abaixo, e a rodada sai pelo botão "Criar a rodada com os erros".'
     onde: radar
   noite:
   - tipo: simulado
@@ -2183,7 +2193,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -2322,7 +2333,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -2459,7 +2471,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -2577,7 +2590,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -2696,7 +2710,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -2875,7 +2890,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3003,7 +3019,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3138,7 +3155,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3267,7 +3285,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3401,7 +3420,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3607,7 +3627,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3728,7 +3749,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3864,7 +3886,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -3993,7 +4016,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15
@@ -4120,7 +4144,8 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: 'Leia o comentário de TODO erro e copie no caderno de erros: a questão, por que errou e a regra certa.'
+    detalhe: Antes de ler o comentário de cada erro, diga para si por que a certa é certa. No caderno de erros,
+      UMA regra por tema que você errou hoje.
   pos22:
   - tipo: anki
     duracao: 15

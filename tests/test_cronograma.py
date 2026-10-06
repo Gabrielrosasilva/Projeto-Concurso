@@ -201,9 +201,13 @@ def test_arquivo_real_total_de_questoes(real):
 def test_arquivo_real_horarios_conferidos(real):
     assert cronograma.montar_dia(real, date(2026, 9, 28)).noite[-1].fim == time(19, 35)
     assert cronograma.montar_dia(real, date(2026, 10, 28)).noite[-1].fim == time(21, 15)
-    simulado = cronograma.montar_dia(real, date(2026, 10, 10)).noite[0]
-    assert simulado.tipo == "simulado"
-    assert (simulado.inicio, simulado.fim) == (time(18, 0), time(19, 30))
+    # Em 10/10 o diagnostico de Portugues abre a noite, antes do simulado
+    # (decisao 134): a medicao sem o cansaco de 90 minutos de prova.
+    noite = cronograma.montar_dia(real, date(2026, 10, 10)).noite
+    assert noite[0].tipo == "diagnostico"
+    assert (noite[0].inicio, noite[0].fim) == (time(18, 0), time(18, 50))
+    assert noite[2].tipo == "simulado"
+    assert (noite[2].inicio, noite[2].fim) == (time(19, 0), time(20, 30))
 
 
 # --- o comando ---------------------------------------------------------------

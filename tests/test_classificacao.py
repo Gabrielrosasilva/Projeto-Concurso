@@ -257,6 +257,34 @@ def test_conferir_confirma_corrige_ou_deixa_pendente(alvo):
     assert "não sei se é de Penal" in c.trecho
 
 
+def test_conferir_nao_apaga_o_artigo_nem_o_item_do_edital(alvo):
+    """Decisao 137: o seletor "Corrigir para" vem no no atual, e corrigir ou
+    deixar pendente regravava a classificacao sem o artigo (o caso de 05/10,
+    no complementar). O artigo e da questao, e e ele que leva a pendente ao
+    tema no "caiu ou nao caiu"."""
+    caminho = "Direito Penal > " + IMPUTABILIDADE
+    for codigo in ("2019-51", "2019-52", "2013-11"):
+        classificacoes.classificar(_k(codigo), caminho, "Claude Code",
+                                   dispositivo="art. 26 do CP", item_do_edital="Imputabilidade",
+                                   trecho="o trecho da classificação")
+
+    # Corrigir para o MESMO no e confirmar: nada muda alem da data.
+    classificacoes.conferir(_k("2019-51"), corrigir_para=caminho)
+    c = _principal("2019-51")
+    assert (c.dispositivo, c.item_do_edital, c.procedencia) == (
+        "art. 26 do CP", "Imputabilidade", "Claude Code")
+    assert c.trecho == "o trecho da classificação" and c.conferida_em is not None
+
+    classificacoes.conferir(_k("2019-52"), corrigir_para="Direito Penal > Crimes contra a Administração Pública")
+    c = _principal("2019-52")
+    assert (c.dispositivo, c.item_do_edital) == ("art. 26 do CP", "Imputabilidade")
+
+    classificacoes.conferir(_k("2013-11"), pendente="não sei se é de Penal")
+    c = _principal("2013-11")
+    assert c.status == "pendente"
+    assert (c.dispositivo, c.item_do_edital) == ("art. 26 do CP", "Imputabilidade")
+
+
 def test_a_reanalise_so_confirma_o_mesmo_no_e_diz_quem_conferiu(alvo, tmp_path):
     """Decisao 104: a segunda leitura as cegas confirma so o no IGUAL; outro
     no, ou o mesmo assunto num nivel acima, fica para voce. A marca diz quem

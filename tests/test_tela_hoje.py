@@ -60,7 +60,8 @@ def test_revisao_diz_de_que_dia_volta_e_feriado_ganha_chip(cliente):
 def test_simulado_mostra_cronometrado(cliente):
     texto = cliente.get("/hoje?data=2026-10-10").text
     assert "⏱ cronometrado" in texto
-    assert "18:00 – 19:30" in texto
+    # O diagnostico de Portugues abre a noite (decisao 134): o simulado vem depois.
+    assert "19:00 – 20:30" in texto
 
 
 def test_domingo_e_descanso(cliente):

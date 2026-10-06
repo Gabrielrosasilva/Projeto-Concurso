@@ -96,7 +96,13 @@ def test_os_dias_ate_05_10_estao_identicos(plano_real):
 def test_nenhum_titulo_nem_data_de_tema_mudou(plano_real):
     for dia in plano_real.dias:
         titulos = [f.titulo for b in pl.BLOCOS for f in getattr(dia, b) if f.rotulo != "Extra"]
-        assert titulos == ANTES["dias"][dia.data.isoformat()]["titulos"], dia.data
+        antes = ANTES["dias"][dia.data.isoformat()]["titulos"]
+        if dia.data == date(2026, 10, 10):
+            # Decisao 134: os diagnosticos passaram a abrir a manha e a noite.
+            # Os titulos sao os mesmos; so a ordem mudou.
+            assert sorted(titulos) == sorted(antes), dia.data
+            continue
+        assert titulos == antes, dia.data
     estudo = {f"{t.materia} | {t.tema}": t.estudo().data.isoformat()
               for t in fichas.temas_do_plano(plano_real) if t.estudo()}
     assert estudo == ANTES["estudo_dos_temas"]

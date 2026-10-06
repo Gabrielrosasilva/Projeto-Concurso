@@ -181,7 +181,14 @@ questoes do complementar que os resumos citam (+10 do alvo). Rodados so os
 testes tocados, a seu pedido. A decisao 127 (o treino de IA no "Fiz hoje")
 e a 130 (a faixa avisa o que ja foi respondido no radar) vieram de outra
 conversa.
-**Falta, de voce:** conferir as 65 fichas e os 65 resumos (a ficha conferida
+**A auditoria de uso de 06/10** ([proposta_de_melhorias](docs/proposta_de_melhorias.md),
+so leitura): 57 problemas de precisao (8 criticos), 64 melhorias e 9 ideias,
+com codigos P, U e I. Voce aprovou a ordem: **ate 07/11 so entra o que
+corrige numero ou prepara os sabados que medem** (I3). Feito o **lote 1**
+(decisoes 134 a 137): os diagnosticos abrem o 10/10, o dia que mede nao tem
+Plano B, o Resumo saiu das faixas que medem, a Conferencia nao apaga mais o
+artigo; e o 29/09 corrigido (37 para 27 questoes) e 5 fichas conferidas.
+**Falta, de voce:** conferir as outras 60 fichas e os 65 resumos (a ficha conferida
 tambem liga as faixas do tema ao Meu desempenho, decisao 81); as
 classificacoes abertas e pendentes do complementar (lista unica em
 [conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
@@ -189,7 +196,11 @@ associados e os itens da lista de leis; os pontos da pendencia H (gabaritos a
 olhar, os 9 nos novos ao conferir as fichas); e o **Ciclo 2**, depois do simulado de 07/11 e antes de
 09/11, ja com as fichas, os resumos e as explicacoes dos temas novos
 (decisao 123).
-**Proximo:** o roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
+**Proximo:** os lotes 2 a 4 da proposta de melhorias (pendencia I: o "fiz"
+vazio nas faixas com rodada, o R+7 com Portugues dividido, a composicao que
+nao repete o diagnostico e a regra do anotado), um por conversa, ate 07/11;
+depois de 07/11, o redesenho das telas e a nuvem
+([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
 **Em aberto:** a falta do estoque de geradas de 13/10 em diante (sob demanda),

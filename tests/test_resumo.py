@@ -351,3 +351,19 @@ def test_o_pedido_de_explicacao_do_complementar_vai_pelas_citadas_nos_resumos(vo
     assert p["instrucao"] == manual.INSTRUCAO_EXPLICACAO_DO_COMPLEMENTAR
     assert "OUTRA prova da FEPESE" in p["instrucao"] and "meu cargo" not in p["instrucao"]
     assert "alternativa e da questão 3" in p["pedido"]          # inteira, sem corte
+
+
+def test_a_faixa_que_mede_sem_consulta_nao_tem_resumo(banco_temporario):
+    """Decisao 136: o diagnostico e o simulado medem sem consulta, e o resumo
+    cita a questao real com o gabarito - o botao saiu dessas faixas."""
+    from radar import cronograma
+
+    plano = cronograma.carregar()
+    escrita = _ficha_gravada()
+    diagnostico = _faixa("diagnostico", "Diagnóstico de Raciocínio Lógico", "Raciocínio Lógico")
+    simulado = _faixa("simulado", "Simulado da semana", None, materias_da_rodada=(PENAL,))
+    correcao = _faixa("correcao", "Correção")
+    blocos = [SimpleNamespace(chave="noite", faixas=[diagnostico, simulado, correcao])]
+    r = servico_fichas.resumos_do_dia(blocos, date(2026, 10, 10), plano, [escrita], [], [])
+    assert ("noite", 0) not in r.por_faixa and ("noite", 1) not in r.por_faixa
+    assert ("noite", 2) in r.por_faixa                   # a correcao continua com o seu

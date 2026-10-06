@@ -33,6 +33,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 24 | A faixa de Português começa pelas do radar | ✅ 2582 passed; o botão "Começar pelas N do radar" na tela Hoje, o resto no Qconcursos (decisão 107) |
 | 25 | Revisão final do estudo (Fase 1 e R1 a R7) | ✅ 2.640 passed e 1 failed, consertado (decisões 108 a 126) |
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
+| 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
 
@@ -3262,3 +3263,32 @@ texto-base, migração, leitor, telas): 708 passed.
 questoes --textos-base`, `radar fichas --verificar-resumos` (65 sem
 problema), e as telas `/`, `/hoje`, `/fichas`, `/analises/desempenho` e
 `/geradas` com o banco real.
+
+## 27 — A auditoria de uso e o lote 1 da proposta (06/10/2026)
+
+**A auditoria** (só leitura): `docs/proposta_de_melhorias.md`, commit
+`3da971e`. **O lote 1**, aprovado por você com a ordem do Apêndice B e a regra
+do I3 (até 07/11, só o que corrige número ou prepara os sábados que medem):
+
+- **I1 (decisão 134):** `config/cronograma.yml`, 10/10 - os diagnósticos abrem
+  a manhã e a noite. Testes: `test_composicao` (os títulos de 10/10),
+  `test_cronograma` (os horários), `test_redistribuicao` e `test_tela_hoje`
+  (a ordem e o horário do simulado).
+- **P14 (decisão 135):** `servico.cronograma.faixas_que_medem`; o
+  `ativar_plano_b` recusa no dia que mede; a tela troca o botão por "Hoje
+  mede (...): sem Plano B"; a Reduzida e a Mínima de 10/10 e 17/10. Testes:
+  `test_plano_b` (2 novos).
+- **U02 (decisão 136):** `servico.fichas.resumos_do_dia` - sem botão de
+  Resumo no diagnóstico e no simulado. Teste: `test_resumo` (1 novo).
+- **P06 (decisão 137):** `servico.classificacoes.conferir` leva o artigo e o
+  item do edital; corrigir para o mesmo nó é confirmar. Teste:
+  `test_classificacao` (1 novo).
+- **I4 e I6:** os textos da Correção de 07/10 em diante (23 dias), da
+  Correção de 10/10 e do R+7 de 17/10.
+- **Dado:** o 29/09 corrigido (P02, com cópia em `data/copias/`), as 5 fichas
+  do I5 conferidas por você; o P08 fica como está.
+
+**Rodado de verdade:** `radar fichas --conferir` (5), `radar conferir-dias`,
+`radar exportar`, `radar hoje --data 2026-10-10`, e a tela Hoje de 10/10 com
+o banco real e o relógio parado (só GET): a ordem nova, "Hoje mede" no lugar
+do Plano B e nenhum botão de Resumo nas faixas que medem.

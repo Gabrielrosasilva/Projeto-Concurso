@@ -274,15 +274,14 @@ de prioridade, separado entre o que depende de você e o que a IA pode fazer.
 
 ### Depende de você
 
-1. 🔴 **Commit e push dos itens 2, 3, 4 e 5**, com a sua autorização (o da
-   série R1 a R7 foi feito em 05/10, `e40d3c8`; o item 8 entrou no
-   `f58faa1`, feito pela outra conversa junto com as decisões 127 e 130
-   dela).
-2. 🔴 **Conferir as fichas e os resumos dos temas da semana** (Hoje > Fichas,
+2. 🟡 **Conferir as fichas e os resumos dos temas da semana** (Hoje > Fichas,
    "Ficha completa": "Conferi esta ficha" e "Conferi este resumo"; ou
-   `radar fichas --conferir` / `--conferir-resumo`). São 65 de cada; a ficha
-   conferida liga as faixas do tema ao Meu desempenho (decisão 81). Tamanho:
-   grande, aos poucos.
+   `radar fichas --conferir` / `--conferir-resumo`). Em 06/10 você conferiu
+   as 5 fichas dos temas já estudados (as que ligavam 9 faixas feitas: a fila
+   de revisão passou a ter Penal e Constitucional); faltam 60 fichas e os 65
+   resumos. A ficha conferida liga as faixas do tema ao Meu desempenho
+   (decisão 81). Tamanho: grande, aos poucos - a do tema do dia, com a lei
+   aberta.
 3. 🔴 **Os gabaritos que a escrita dos resumos levantou** (pequeno):
    - 2019-q87: o gabarito oficial (E) dá como certo "atribuição de trabalho,
      remuneração e horário de lazer"; o art. 41, II, da LEP não fala em
@@ -350,3 +349,46 @@ de prioridade, separado entre o que depende de você e o que a IA pode fazer.
    do texto-base contornou (decisão 132). Consertar é cortar a alternativa no
    começo de um texto de apoio e reler o caderno de 2019 (`--refazer`, que
    leva a classificação junto). Pequeno.
+
+## I. A proposta de melhorias de 06/10 (o que ainda não foi feito)
+
+A auditoria de uso está em [proposta_de_melhorias.md](proposta_de_melhorias.md),
+com os códigos P (precisão), U (tela) e I (ideia). **Feito em 06/10** (decisões
+134 a 137): o lote 1 - I1, P14 (o Plano B e a Reduzida dos sábados que medem),
+U02, P06 e os textos do I4 e do I6 -, a correção do 29/09 (P02) e as 5 fichas
+do I5. A regra de trabalho até 07/11 (I3, aprovada): só entra o que corrige
+número ou prepara 10/10, 17/10 e 07/11.
+
+### Próximos lotes, já aprovados (um por conversa)
+
+1. 🔴 **Lote 2, o "fiz" (P03 · U03)** - até 09/10 se couber, senão até 17/10.
+   O "fiz" vem sempre vazio nas faixas com rodada no radar (escolha sua), e a
+   faixa feita toda no radar fecha com a própria rodada, gravando só o tempo.
+   Muda a regra 1 da 1D e estende a decisão 130. Até lá: apagar o número que
+   vem no "fiz" das faixas "Comece pelas N do radar" e das faixas de sábado.
+2. 🔴 **Lote 3, até 16/10**: P04 (o R+7/R+30 com "+ 3 de Português" vira duas
+   linhas no plano, nas 32 faixas de 07/10 em diante; até lá, anotar no "fiz"
+   só as de Direito) e U21 · P36 (o erro anotado chega ligado ao nó; o R+7 de
+   17/10 não preenche a matéria "Diagnósticos").
+3. 🔴 **Lote 4, até 06/11**: P07 (as rodadas que medem não repetem questão:
+   o fechamento de 07/11 repetiria as 8 de RL de 10/10; muda a decisão 67),
+   P01 + P09 (o anotado sem conteúdo conta no nó da matéria, escolha sua;
+   muda a decisão 81), P05 (a ficha esconde o gabarito da questão ainda não
+   respondida; muda as decisões 109 e 118), P10, P11 · U18 e P30.
+
+### Depende de você
+
+- ⚪ **28/09 (P08):** você não soube dizer se as 10 de Português foram do
+  Qconcursos ou as 10 geradas da rodada 2; ficou como está (decisão 3 da
+  Etapa 0). Se lembrar, a correção é a mesma do 29/09.
+- ⚪ **A chave `ae5ac356...` (2013 q2 do complementar)** perdeu o artigo e o
+  item do edital na conferência de 05/10 (decisão 137); o valor antigo está
+  no commit `1bc222e`. Restaurar ou deixar.
+
+### Depois de 07/11 (I3)
+
+O redesenho do Hoje, do Meu foco e das Semanas (seção 8 da proposta),
+começando pelo I8 (o teste que segura a limpeza); depois as telas de análise
+e de consulta; por fim a coerência de nomes, botões e componentes (U52 a U54,
+U59, U60, U64), a coluna BAIXA da tabela 6 e a nuvem (decisão 126). A
+legenda da Reduzida no "Como foi o dia" (U04, parte) também ficou para lá.

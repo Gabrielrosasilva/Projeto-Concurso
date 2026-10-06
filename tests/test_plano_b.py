@@ -261,3 +261,32 @@ def test_radar_hoje_plano_b(banco_temporario):
 
     recusa = CliRunner().invoke(cli, ["hoje", "--data", "2026-10-28", "--plano-b", "45"])
     assert recusa.exit_code == 1
+
+
+# --- o dia que mede nao tem Plano B (decisao 135) ---------------------------------
+
+DIAGNOSTICOS = date(2026, 10, 10)   # os dois diagnosticos no radar
+R7_DOS_DIAGNOSTICOS = date(2026, 10, 17)
+
+
+def test_o_dia_que_mede_recusa_o_plano_b(banco_temporario, plano):
+    with pytest.raises(RegistroInvalido, match="dia de medir"):
+        ativar_plano_b(DIAGNOSTICOS, 30, plano=plano, hoje=DEPOIS)
+    with pytest.raises(RegistroInvalido, match=r"R\+7: refazer os erros dos diagnósticos"):
+        ativar_plano_b(R7_DOS_DIAGNOSTICOS, 60, plano=plano, hoje=DEPOIS)
+    assert estado_do_dia(DIAGNOSTICOS) is None
+    # O sabado que nao mede continua com o Plano B de sempre.
+    ativar_plano_b(SABADO, 30, plano=plano, hoje=DEPOIS)
+    assert estado_do_dia(SABADO).plano_b == 30
+
+
+def test_a_tela_do_dia_que_mede_diz_por_que_nao_ha_plano_b(banco_temporario, monkeypatch):
+    momento = datetime(2026, 10, 10, 8, 0, tzinfo=fuso_local())
+    monkeypatch.setattr(servico.cronograma, "agora_local", lambda: momento)
+    tela = servico.cronograma.tela_do_dia(DIAGNOSTICOS)
+    assert tela.faixas_que_medem == ["Diagnóstico de Raciocínio Lógico",
+                                     "Diagnóstico de Português"]
+    assert not tela.pode_ativar_plano_b
+    texto = TestClient(app).get("/hoje").text
+    assert "🆘 Ativar Plano B" not in texto
+    assert "Hoje mede (Diagnóstico de Raciocínio Lógico · Diagnóstico de Português): sem Plano B." in texto

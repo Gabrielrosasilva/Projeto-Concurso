@@ -553,6 +553,19 @@ def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
 
 # --- o Plano B ---------------------------------------------------------------
 
+def faixas_que_medem(dia) -> list[str]:
+    """Os titulos das faixas do dia que medem: o diagnostico e o simulado no
+    radar (`composicao.mede`) e o R+7 que refaz os erros deles
+    (`sabado.refaz_rodadas`). Sao a linha de base que decide o Ciclo 2, e por
+    isso o Plano B nao as troca (decisao 135)."""
+    # Import aqui: composicao e sabado leem o cronograma do servico.
+    from radar.servico import composicao, sabado
+    if dia is None:
+        return []
+    return [f.titulo for f in dia.faixas()
+            if composicao.mede(f) or sabado.refaz_rodadas(f)]
+
+
 def ativar_plano_b(
     data: date,
     minutos: int | None,
@@ -581,6 +594,11 @@ def ativar_plano_b(
             raise RegistroInvalido("Domingo é descanso: não tem Plano B.")
         if plano.dia(data) is None:
             raise RegistroInvalido(f"{data:%d/%m/%Y} não está no cronograma")
+        medem = faixas_que_medem(plano.dia(data))
+        if medem:
+            raise RegistroInvalido(
+                f"{data:%d/%m/%Y} é dia de medir ({', '.join(medem)}): o Plano B não "
+                f"troca as faixas que medem. Se o dia apertar, faça só elas.")
 
     criar_tabelas()
     with sessao() as s:
@@ -671,6 +689,9 @@ class TelaDoDia:
     # O Plano B ativo (30 ou 60 minutos), e as opcoes que o botao oferece.
     plano_b: int | None = None
     opcoes_do_plano_b: list[int] = field(default_factory=list)
+    # As faixas que medem no dia (diagnostico, simulado e R+7 dos diagnosticos
+    # no radar). Com elas, o dia nao tem Plano B (decisao 135).
+    faixas_que_medem: list[str] = field(default_factory=list)
     # O mapa do ano, com a etapa de hoje marcada. Vazio quando o arquivo nao
     # tem o bloco `mapa` - ai o cartao nao aparece.
     mapa: list[PontoDoMapa] = field(default_factory=list)
@@ -694,7 +715,9 @@ class TelaDoDia:
 
     @property
     def pode_ativar_plano_b(self) -> bool:
-        return bool(self.opcoes_do_plano_b) and self.dia is not None and not self.futuro
+        # Um Plano B que ja estava ativo continua podendo ser desfeito.
+        return (bool(self.opcoes_do_plano_b) and self.dia is not None and not self.futuro
+                and (not self.faixas_que_medem or bool(self.plano_b)))
 
     @property
     def e_hoje(self) -> bool:
@@ -944,6 +967,7 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
     estado = estado_do_dia(data)
     if plano.plano_b is not None:
         tela.opcoes_do_plano_b = sorted(plano.plano_b.opcoes)
+    tela.faixas_que_medem = faixas_que_medem(dia)
     if estado and estado.plano_b in tela.opcoes_do_plano_b:
         # Plano B ativo: a tela mostra SO ele. O dia vira um bloco so, e a
         # meta sugerida e sempre a Minima - e o que o Plano B e.
