@@ -361,11 +361,12 @@ número ou prepara 10/10, 17/10 e 07/11.
 
 ### Próximos lotes, já aprovados (um por conversa)
 
-1. 🔴 **Lote 2, o "fiz" (P03 · U03)** - até 09/10 se couber, senão até 17/10.
-   O "fiz" vem sempre vazio nas faixas com rodada no radar (escolha sua), e a
-   faixa feita toda no radar fecha com a própria rodada, gravando só o tempo.
-   Muda a regra 1 da 1D e estende a decisão 130. Até lá: apagar o número que
-   vem no "fiz" das faixas "Comece pelas N do radar" e das faixas de sábado.
+1. ✅ **Lote 2, o "fiz" (P03 · U03)** - feito em 06/10 (decisão 138): as
+   reais e o treino de IA em linhas próprias, o "fiz no Qconcursos" sempre
+   vazio, a faixa feita no radar com o ✓ vazio e o "Treino de IA neste tema".
+   O 06/10 foi corrigido como o 29/09. Para valer, o servidor precisa ser
+   reiniciado (`radar parar` e `radar subir`): o que estava no ar era de antes
+   da decisão 130.
 2. 🔴 **Lote 3, até 16/10**: P04 (o R+7/R+30 com "+ 3 de Português" vira duas
    linhas no plano, nas 32 faixas de 07/10 em diante; até lá, anotar no "fiz"
    só as de Direito) e U21 · P36 (o erro anotado chega ligado ao nó; o R+7 de

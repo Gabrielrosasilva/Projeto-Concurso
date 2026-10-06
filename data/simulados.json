@@ -964,5 +964,242 @@
         "respondida_em": "2026-10-06T00:49:14.073883+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-06T13:34:39.874466+00:00",
+    "filtros": {
+      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 3
+    },
+    "finalizado_em": "2026-10-06T13:40:09.046962+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "80767c5fe3276a4ab09897e14380b568",
+        "ordem": 1,
+        "respondida_em": "2026-10-06T13:38:25.142297+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "4c371b0c281e7ccdb729b403859ddde6",
+        "ordem": 2,
+        "respondida_em": "2026-10-06T13:38:48.539223+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "9be8029e39450c3870cad8bb69313a43",
+        "ordem": 3,
+        "respondida_em": "2026-10-06T13:40:09.044131+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T13:41:17.425645+00:00",
+    "filtros": {
+      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Tribunal do júri",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 3
+    },
+    "finalizado_em": "2026-10-06T13:45:10.247200+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "1f1b425f442c635a675ab3dc9bcf5cb3",
+        "ordem": 1,
+        "respondida_em": "2026-10-06T13:42:25.747946+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "dae612f46bd09b2398e8749a78184b93",
+        "ordem": 2,
+        "respondida_em": "2026-10-06T13:43:01.112060+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "1b7bef66e40dadd290c241cb79a47efa",
+        "ordem": 3,
+        "respondida_em": "2026-10-06T13:45:10.243929+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T13:46:09.807553+00:00",
+    "filtros": {
+      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 3
+    },
+    "finalizado_em": "2026-10-06T13:48:14.189122+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "108023130f4bf9816f6b8977bcbc546d",
+        "ordem": 1,
+        "respondida_em": "2026-10-06T13:47:32.719825+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "cf6ce0920e951f4a1727e80ade6009ca",
+        "ordem": 2,
+        "respondida_em": "2026-10-06T13:47:58.661570+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "7c75209c5b179e5a6e51864cfe946f29",
+        "ordem": 3,
+        "respondida_em": "2026-10-06T13:48:14.183470+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T13:48:44.150007+00:00",
+    "filtros": {
+      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 3
+    },
+    "finalizado_em": "2026-10-06T13:54:22.948836+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "42592561099ba7e26fa11dc246c760fb",
+        "ordem": 1,
+        "respondida_em": "2026-10-06T13:51:27.197721+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "760c39ddf55cd975d49a3cb55f3d3ce2",
+        "ordem": 2,
+        "respondida_em": "2026-10-06T13:54:06.035303+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "c98c095fdcb2be5f0eb3b179ca539858",
+        "ordem": 3,
+        "respondida_em": "2026-10-06T13:54:22.945316+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T14:05:23.563050+00:00",
+    "filtros": {
+      "banca": null,
+      "cargo": null,
+      "materia": "Direito Constitucional",
+      "quantidade": 8,
+      "universais": false
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "chave": "fb9e095f43c62f99d36816ff8fba3507",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 32,
+        "ordem": 1,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "a23b0334e2f181024ba164c26b226217",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 43,
+        "ordem": 2,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "413093e9fc51735872ca92ccae4b33b6",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 41,
+        "ordem": 3,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "a432aa6ceac719ce9d36c9ef2fc3a319",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 36,
+        "ordem": 4,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "3b7e9672904abac3a03c69e93cc619ea",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 33,
+        "ordem": 5,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "22c42b6e820452815f4424b2587f43c4",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 34,
+        "ordem": 6,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "07e92e5aeb3936d516e3e1934235e53c",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 37,
+        "ordem": 7,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "0b36f3dbd4d826a2db1f97cec5037c7b",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 33,
+        "ordem": 8,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": null
+      }
+    ]
   }
 ]

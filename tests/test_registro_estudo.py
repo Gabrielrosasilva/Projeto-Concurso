@@ -215,8 +215,8 @@ def test_comando_marca_e_mostra(banco_temporario, tmp_path, monkeypatch):
     assert saida.exit_code == 0, saida.output
     assert "Anotado como estudo extra." in saida.output
     assert "Marcado." in saida.output
-    # O numero digitado virou estudo extra, e o "Fiz hoje" o conta como anotado.
-    assert "Fiz hoje: 25 questões = 18 acertos + 7 erros" in saida.output
+    # O numero digitado virou estudo extra, e a linha das reais o conta como anotado.
+    assert "Questões reais (Qconcursos e provas): 25 questões = 18 acertos + 7 erros" in saida.output
     (extra,) = servico.extra.do_dia(SEG)
     assert (extra.questoes, extra.acertos, extra.minutos, extra.onde) == (
         25, 18, 50, "qconcursos")

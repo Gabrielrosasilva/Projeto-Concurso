@@ -918,6 +918,8 @@
                     <span class="resultado">{{ anotado.acertos if anotado.acertos is not none else '—' }}
                       de {{ anotado.questoes }}{% if anotado.porcentagem is not none %} ·
                       {{ anotado.porcentagem }}%{% endif %}</span>
+                  {% elif anotado and anotado.no_radar %}
+                    <span class="resultado">feita no radar</span>
                   {% endif %}
                 </p>
                 {% if f.questoes %}<p class="qtd">{{ f.questoes }} questões</p>{% endif %}
@@ -1111,6 +1113,13 @@
                     <p><b>1º No Qconcursos</b> (são as que medem):
                       {% if gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
                     <p><b>2º Se quiser mais, no radar</b> {{ selo('ia', curto=True) }} (só treinam; o acerto é um segundo número, nunca somado ao da faixa).</p>
+                    {# O sinal de que eu treino o tema (decisao 138): toda
+                       resposta a gerada dos nos dele, de qualquer dia. A conta
+                       e do metricas; nunca entra no acerto do tema. #}
+                    {% set ti = treino_ia_das_faixas.get((b.chave, loop.index0)) if treino_ia_das_faixas else none %}
+                    {% if ti and ti.ia %}
+                      <p class="sub">{{ selo('ia', curto=True) }} Treino de IA neste tema: {{ ti.ia_acertos }} de {{ ti.ia }} ({{ ti.porcentagem_ia }}%) · não entra no acerto.</p>
+                    {% endif %}
                     {% if gf.sem_no %}
                       <p class="sub">Não há como gerar questão deste tema: a árvore não tem nó para ele (pendência).</p>
                     {% else %}
@@ -1268,11 +1277,15 @@
                      So avisa: quem decide o que anotar sou eu. #}
                   {% set no_radar_f = respondidas_no_radar.get((b.chave, loop.index0, f.titulo)) if respondidas_no_radar else none %}
                   {% if no_radar_f %}
-                    <p class="regra aviso-no-radar">Você já respondeu <b>{{ no_radar_f.questoes }} {{ 'questão' if no_radar_f.questoes == 1 else 'questões' }}</b> desta faixa no radar
-                      {%- if no_radar_f.medidas and no_radar_f.ia %} ({{ no_radar_f.medidas }} {{ 'real' if no_radar_f.medidas == 1 else 'reais' }} e {{ no_radar_f.ia }} de IA)
-                      {%- elif no_radar_f.ia %} (de IA)
-                      {%- else %} ({{ 'real' if no_radar_f.medidas == 1 else 'reais' }}){% endif %}:
-                      elas já contam sozinhas no “Fiz hoje”. No “fiz X, acertei Y”, anote só as que fez fora do radar, no Qconcursos.</p>
+                    {# Decisao 138: o que eu fiz no radar conta sozinho, cada um
+                       na sua linha; no "fiz" vai so o de fora. Feita so no
+                       radar, o check vazio vale e guarda o tempo. #}
+                    <p class="regra aviso-no-radar">
+                      {%- if no_radar_f.ia and not no_radar_f.medidas %}Você treinou <b>{{ no_radar_f.ia }} de IA</b> nesta faixa ({{ no_radar_f.ia_acertos }} de {{ no_radar_f.ia }}): já contam no Treino de IA.
+                      {%- else %}Você já respondeu <b>{{ no_radar_f.questoes }} {{ 'questão' if no_radar_f.questoes == 1 else 'questões' }}</b> desta faixa no radar
+                        {%- if no_radar_f.ia %} ({{ no_radar_f.medidas }} {{ 'real' if no_radar_f.medidas == 1 else 'reais' }} e {{ no_radar_f.ia }} de IA){% endif %}: já contam sozinhas.
+                      {%- endif %}
+                      No “fiz”, só as de fora do radar; se fez só no radar, deixe vazio e marque ✓.</p>
                   {% endif %}
                   {% set marcar %}
                     <form class="fiz" method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
@@ -1280,9 +1293,13 @@
                       <input type="hidden" name="bloco" value="{{ b.chave }}">
                       <input type="hidden" name="indice" value="{{ loop.index0 }}">
                       <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                      <label>fiz
+                      {# Sempre vazio (decisao 138): o numero do plano no campo
+                         virava "fiz" com um clique, e contava de novo o que eu
+                         tinha feito no radar (05 e 06/10). #}
+                      <label>{{ 'fiz no Qconcursos' if f.onde == 'qconcursos' else 'fiz fora do radar' }}
                         <input type="number" name="questoes" min="0" inputmode="numeric"
-                               value="{{ anotado.questoes if anotado and anotado.questoes is not none else ('' if no_radar_f else (f.questoes or '')) }}">
+                               placeholder="{{ f.questoes or '' }}"
+                               value="{{ anotado.questoes if anotado and anotado.questoes else '' }}">
                       </label>
                       <label>acertei
                         <input type="number" name="acertos" min="0" inputmode="numeric"
@@ -1388,14 +1405,10 @@
        marquei, o estudo extra e o que eu respondi no radar. A linha mostra os
        estados que somam o total, para ela fechar a conta na frente de quem le. #}
     {% if tt and not tt.vazio %}
-      <p class="fiz-hoje">
-        <b>Fiz hoje:</b> {{ frase_da_conta(tt.total) }}
-        {%- if tt.minutos %} · {{ duracao(tt.minutos) }} de estudo
-          {%- if tt.faixas.minutos and tt.extra.minutos %}
-            ({{ duracao(tt.faixas.minutos) }} do plano + {{ duracao(tt.extra.minutos) }} extra)
-          {%- endif %}
-        {%- endif %}
-      </p>
+      {# Decisao 138: as reais e o treino de IA em linhas proprias, e o
+         total por ultimo. O "Fiz hoje" de antes somava o treino na mesma
+         frase, e o treino parecia questao feita (06/10). #}
+      <p class="fiz-hoje"><b>{{ frase_das_reais(tt.reais) }}</b></p>
       {% if tt.radar.medidas and tt.anotado.medidas %}
         <p class="fiz-de-onde">
           {{ selo(tt.origens.radar) }} medido no radar: {{ tt.radar.porcentagem }}% em {{ tt.radar.medidas }} ·
@@ -1405,8 +1418,16 @@
       {% if tt.total.ia %}
         {# Do tamanho do "Fiz hoje", e nao miudo: e o resultado do treino do
            dia, so que num numero a parte. #}
-        <p class="fiz-hoje fiz-ia">{{ selo(tt.origens.treino_ia) }} {{ frase_da_ia(tt.total) }}; conta no volume.</p>
+        <p class="fiz-hoje fiz-ia">{{ selo(tt.origens.treino_ia) }} {{ frase_da_ia(tt.total) }}.</p>
       {% endif %}
+      <p class="fiz-de-onde">
+        Total do dia: {{ tt.total.questoes }} {{ 'questão' if tt.total.questoes == 1 else 'questões' }}
+        {%- if tt.minutos %} · {{ duracao(tt.minutos) }} de estudo
+          {%- if tt.faixas.minutos and tt.extra.minutos %}
+            ({{ duracao(tt.faixas.minutos) }} do plano + {{ duracao(tt.extra.minutos) }} extra)
+          {%- endif %}
+        {%- endif %}
+      </p>
       {% if tt.total.erros %}
         <p class="links">
           <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, '', '', '/hoje?data=' ~ t.data.isoformat() ~ ('&cor=' ~ cor if cor else '') ~ '#como-foi') }}">

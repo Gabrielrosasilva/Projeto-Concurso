@@ -121,6 +121,7 @@ templates.env.filters["tipo_do_evento"] = linha_do_tempo.rotulo_do_tipo
 # fonte unica: a tela e o `radar hoje` escrevem a mesma frase.
 templates.env.globals["frase_da_conta"] = servico.metricas.frase_da_conta
 templates.env.globals["frase_da_ia"] = servico.metricas.frase_da_ia
+templates.env.globals["frase_das_reais"] = servico.metricas.frase_das_reais
 templates.env.globals["faltaram_no_compilado"] = servico.compilado.faltaram_na_rodada
 templates.env.globals["NOME_DO_NIVEL"] = arvore_de_conteudos.NOME_DO_NIVEL
 # Numero com virgula, como se escreve em portugues. A mesma funcao que monta a
@@ -1034,6 +1035,8 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
         except ValueError:
             erro_de_data = f"Data inválida: {data!r}. Use AAAA-MM-DD; mostrando hoje."
     tela = servico.cronograma.tela_do_dia(quando)
+    geradas_das_faixas = (servico.geradas.das_faixas(tela.blocos, tela.plano)
+                          if tela.blocos else {})
     return templates.TemplateResponse(
         request=request,
         name="hoje.html",
@@ -1061,12 +1064,16 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             "no_radar": servico.faixa_no_radar.das_faixas(tela.blocos, tela.data),
             # As geradas de cada faixa de treino (R6): o no, quantas ha e os
             # passos para gerar o que falta.
-            "geradas_das_faixas": (servico.geradas.das_faixas(tela.blocos, tela.plano)
-                                   if tela.blocos else {}),
+            "geradas_das_faixas": geradas_das_faixas,
             # O que ja foi respondido no radar em rodada aberta pela faixa:
             # conta sozinho no "Fiz hoje", e a faixa avisa para nao anotar de novo.
             "respondidas_no_radar": (servico.metricas.no_radar_por_faixa(tela.data)
                                      if tela.blocos else {}),
+            # O treino de IA de cada tema, de qualquer dia (decisao 138): o
+            # sinal de treino, num numero a parte do acerto.
+            "treino_ia_das_faixas": {
+                chave: servico.metricas.treino_ia_dos_nos(n.no for n in gf.nos)
+                for chave, gf in geradas_das_faixas.items() if gf.nos},
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,
@@ -1496,7 +1503,9 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
     return templates.TemplateResponse(
         request=request, name="ficha.html",
         context={"f": ficha, "data": quando,
-                 "comando_de_gerar": fichas_puras.comando_de_gerar},
+                 "comando_de_gerar": fichas_puras.comando_de_gerar,
+                 # O sinal de treino do tema (decisao 138), fora do acerto.
+                 "treino_ia": servico.metricas.treino_ia_dos_nos(ficha.nos)},
     )
 
 

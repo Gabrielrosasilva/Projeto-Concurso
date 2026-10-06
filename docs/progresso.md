@@ -33,6 +33,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 24 | A faixa de Português começa pelas do radar | ✅ 2582 passed; o botão "Começar pelas N do radar" na tela Hoje, o resto no Qconcursos (decisão 107) |
 | 25 | Revisão final do estudo (Fase 1 e R1 a R7) | ✅ 2.640 passed e 1 failed, consertado (decisões 108 a 126) |
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
+| 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3292,3 +3293,40 @@ do I3 (até 07/11, só o que corrige número ou prepara os sábados que medem):
 `radar exportar`, `radar hoje --data 2026-10-10`, e a tela Hoje de 10/10 com
 o banco real e o relógio parado (só GET): a ordem nova, "Hoje mede" no lugar
 do Plano B e nenhum botão de Resumo nas faixas que medem.
+
+## 28 — O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10/2026)
+
+**Situação:** ✅ feito (decisão 138). **Por quê:** em 06/10 o "Fiz hoje"
+mostrou 5 questões no meio do treino de IA (o treino somado na linha das
+reais) e 24 depois de 12 geradas (as mesmas 12 anotadas de novo na faixa
+Fixação, cujo "fiz" vinha com o número do plano).
+
+- **O dado de 06/10:** a faixa Fixação desmarcada, os 16 min do treino viram
+  estudo extra "Onde: Radar" (cópia em `data/copias/correcao-2026-10-06-111005/`).
+- **As três linhas:** `metricas.Conta.reais` e `metricas.frase_das_reais`; a
+  `frase_da_ia` diz "Treino de IA no radar ... não entra no acerto"; a tela
+  Hoje (`hoje.html`) e o `radar hoje` (`cli._totais_legiveis`) escrevem
+  reais, treino e total.
+- **O "fiz":** `hoje.html` - "fiz no Qconcursos" (ou "fiz fora do radar"),
+  sempre vazio, com o plano no placeholder; o aviso novo da faixa.
+- **O ✓ vazio:** `servico.cronograma.anotar_faixa` aceita o vazio quando a
+  faixa tem resposta numa rodada dela (`metricas.no_radar_por_faixa`) e grava
+  `no_radar`; `FaixaFeita.no_radar`; a `conferencia` não a chama de "feita
+  com 0 questões"; a faixa mostra "feita no radar".
+- **O treino do tema:** `metricas.treino_ia_dos_nos`; a faixa de treino
+  (`app._pagina_de_hoje`) e a ficha (`ficha.html`) mostram "Treino de IA
+  neste tema".
+- **Testes:** `tests/test_fiz_no_radar.py` (5 novos); as frases novas em
+  `test_metricas`, `test_acertos_do_dia`, `test_faixas_do_dia`,
+  `test_aviso_da_faixa`, `test_materias_na_tela`, `test_plano_b` e
+  `test_registro_estudo`. Rodados só os testes tocados (174, nos 9 arquivos); a suíte inteira fica para depois, a seu pedido.
+
+**Rodado de verdade:** a tela Hoje de 06/10 com o banco real (só GET):
+"Questões reais (Qconcursos e provas): nenhuma ainda", "Treino de IA no
+radar: 12 questões = 11 acertos + 1 erro (92%)", "Total do dia: 12 questões ·
+56 min", e "Treino de IA neste tema: 11 de 12" nas duas faixas do art. 5º;
+`radar hoje` no terminal.
+
+**Critério de conclusão:** ✅ o treino de IA não divide mais a linha com as
+reais; o "fiz" não vem com número; a faixa feita no radar fecha sem contar
+de novo.

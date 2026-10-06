@@ -185,19 +185,34 @@ def _contado(n: int, um: str, varios: str) -> str:
 
 
 def frase_da_ia(numeros: Numeros) -> str | None:
-    """O segundo numero: "Treino de IA: 10 questões = 7 acertos + 3 erros
-    (70%), fora do acerto real".
+    """O segundo numero: "Treino de IA no radar: 10 questões = 7 acertos + 3
+    erros (70%), não entra no acerto".
 
-    No mesmo molde do "Fiz hoje" de cima, com os erros escritos: "7 de 10"
-    deixava a conta dos erros para quem le.
+    No mesmo molde da linha das reais, com os erros escritos: "7 de 10"
+    deixava a conta dos erros para quem le. "No radar" porque e o unico lugar
+    em que se responde questao gerada.
     """
     if not numeros.ia:
         return None
     erros = numeros.ia - numeros.ia_acertos
-    return (f"Treino de IA: {_contado(numeros.ia, 'questão', 'questões')} = "
+    return (f"Treino de IA no radar: {_contado(numeros.ia, 'questão', 'questões')} = "
             f"{_contado(numeros.ia_acertos, 'acerto', 'acertos')} + "
             f"{_contado(erros, 'erro', 'erros')} "
-            f"({numeros.porcentagem_ia}%), fora do acerto real")
+            f"({numeros.porcentagem_ia}%), não entra no acerto")
+
+
+def frase_das_reais(numeros: Numeros) -> str:
+    """A linha das questoes reais do dia (decisao 138): "Questões reais
+    (Qconcursos e provas): 12 questões = 9 acertos + 3 erros".
+
+    `numeros` e o `Conta.reais`: o anotado e o respondido no radar, sem o
+    treino de IA - o "Fiz hoje" de antes somava os tres numa linha so, e o
+    treino parecia questao feita (06/10).
+    """
+    rotulo = "Questões reais (Qconcursos e provas): "
+    if not numeros.questoes:
+        return rotulo + "nenhuma ainda"
+    return rotulo + frase_da_conta(numeros)
 
 
 # --- de onde vem cada linha ----------------------------------------------------
@@ -406,8 +421,14 @@ class Conta:
         return self.faixas + self.extra
 
     @property
+    def reais(self) -> Numeros:
+        """As questoes reais: o anotado (Qconcursos, provas) e o respondido no
+        radar. O treino de IA fica de fora - ele tem a linha dele."""
+        return self.anotado + self.radar
+
+    @property
     def total(self) -> Numeros:
-        return self.anotado + self.radar + self.treino_ia
+        return self.reais + self.treino_ia
 
     @property
     def minutos(self) -> int:
@@ -657,6 +678,37 @@ def erros_das_rodadas(simulado_ids: list[int]) -> list[RespostaDeSimulado]:
             .where(RespostaDeSimulado.acertou.is_(False))))
     posicao = {simulado_id: i for i, simulado_id in enumerate(simulado_ids)}
     return sorted(respostas, key=lambda r: (posicao[r.simulado_id], r.ordem))
+
+
+def treino_ia_dos_nos(nos) -> Numeros:
+    """O treino de IA de um tema: toda resposta a questao gerada que aponta
+    para um destes nos ou para um no abaixo deles. So `ia` e `ia_acertos`.
+
+    E o sinal de que eu estou treinando o tema, na faixa e na ficha - um
+    numero a parte, que nunca entra no acerto do tema (decisao 138). Conta
+    resposta, como o volume do dia: refazer a mesma gerada conta de novo.
+    """
+    from radar.conteudos import SEPARADOR
+
+    nos = [n for n in dict.fromkeys(nos or ()) if n]
+    numeros = Numeros()
+    if not nos:
+        return numeros
+    criar_tabelas()
+    with sessao() as s:
+        linhas = s.execute(
+            select(RespostaDeSimulado.acertou, QuestaoGerada.conteudo)
+            .join(QuestaoGerada, QuestaoGerada.id == RespostaDeSimulado.questao_id)
+            .where(RespostaDeSimulado.gerada.is_(True))
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+        )
+        for acertou, conteudo in linhas:
+            # Um no dentro do outro nao conta a resposta duas vezes: basta
+            # cair em um deles.
+            if conteudo and any(conteudo == no or conteudo.startswith(no + SEPARADOR)
+                                for no in nos):
+                numeros.responder(bool(acertou), gerada=True)
+    return numeros
 
 
 def desempenho_das_geradas(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:

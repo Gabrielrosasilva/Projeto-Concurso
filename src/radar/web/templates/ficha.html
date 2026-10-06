@@ -272,6 +272,11 @@
       <p>{{ s(f.origens.questoes_reais) }} No radar há {{ f.reais }} questão(ões) real(is) exatamente deste conteúdo ({{ f.reais_do_alvo }} do alvo, {{ f.reais_do_complementar }} do complementar): comece por elas.</p>
     {% endif %}
     <p class="subtitulo">{{ s(f.origens.geradas) }} Questões geradas por IA neste conteúdo. {{ FRASE_DA_QUESTAO_DE_IA }}</p>
+    {# O sinal de treino do tema (decisao 138): a conta e do metricas, e
+       nunca entra no acerto do tema. #}
+    {% if treino_ia and treino_ia.ia %}
+      <p>{{ s(f.origens.geradas) }} Treino de IA neste tema: {{ treino_ia.ia_acertos }} de {{ treino_ia.ia }} ({{ treino_ia.porcentagem_ia }}%) · não entra no acerto.</p>
+    {% endif %}
     {% if f.geradas %}
       <ul class="marcas">
         {% for g in f.geradas %}<li>{{ g.enunciado[:140] }}{% if g.enunciado | length > 140 %}…{% endif %}</li>{% endfor %}

@@ -106,7 +106,9 @@ def _achados_das_faixas(plano, data: date, estado: EstadoDoDia) -> list[Achado]:
                 proposta="nada: fica guardado como história do dia",
             ))
             continue
-        if plano_de_estudo.tem_acerto(faixa) and not feita.questoes:
+        # A feita no radar guarda 0 de proposito (decisao 138): as questoes
+        # dela sao as respostas da rodada, e nao um numero digitado.
+        if plano_de_estudo.tem_acerto(faixa) and not feita.questoes and not feita.no_radar:
             achados.append(Achado(
                 ZERO,
                 gravado=f"{titulo}: feita, 0 questões, {feita.minutos} min",

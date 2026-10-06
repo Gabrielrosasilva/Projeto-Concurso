@@ -190,7 +190,12 @@ Plano B, o Resumo saiu das faixas que medem, a Conferencia nao apaga mais o
 artigo; e o 29/09 corrigido (37 para 27 questoes) e 5 fichas conferidas.
 Fora dos lotes, a seu pedido, cada faixa ganhou o **"Treinar geral no
 radar"** (decisao 139): as geradas de todos os nos dela, divididas por igual e
-embaralhadas, com a quantidade sua.
+embaralhadas, com a quantidade sua. E o **lote 2** (decisao 138): o "Fiz
+hoje" virou tres linhas - as questoes reais (Qconcursos e provas), o treino
+de IA e o total -, o "fiz no Qconcursos" da faixa vem sempre vazio, a faixa
+feita no radar fecha com o ✓ vazio guardando so o tempo, e a faixa e a ficha
+mostram o "Treino de IA neste tema". O 06/10 foi corrigido (as 12 geradas
+estavam anotadas de novo na Fixacao).
 **Falta, de voce:** conferir as outras 60 fichas e os 65 resumos (a ficha conferida
 tambem liga as faixas do tema ao Meu desempenho, decisao 81); as
 classificacoes abertas e pendentes do complementar (lista unica em
@@ -199,9 +204,9 @@ associados e os itens da lista de leis; os pontos da pendencia H (gabaritos a
 olhar, os 9 nos novos ao conferir as fichas); e o **Ciclo 2**, depois do simulado de 07/11 e antes de
 09/11, ja com as fichas, os resumos e as explicacoes dos temas novos
 (decisao 123).
-**Proximo:** os lotes 2 a 4 da proposta de melhorias (pendencia I: o "fiz"
-vazio nas faixas com rodada, o R+7 com Portugues dividido, a composicao que
-nao repete o diagnostico e a regra do anotado), um por conversa, ate 07/11;
+**Proximo:** os lotes 3 e 4 da proposta de melhorias (pendencia I: o R+7
+com Portugues dividido, a composicao que nao repete o diagnostico e a regra
+do anotado), um por conversa, ate 07/11;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup

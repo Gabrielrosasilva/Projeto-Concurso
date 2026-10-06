@@ -163,5 +163,23 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-06T14:10:07.420164+00:00",
+    "data": "2026-10-06",
+    "faixas_feitas": [
+      {
+        "acertos": null,
+        "assunto": "Art. 5º, incisos XVII a XLIX",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Constitucional",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Art. 5º, incisos XVII a XLIX"
+      }
+    ],
+    "plano_b": null
   }
 ]

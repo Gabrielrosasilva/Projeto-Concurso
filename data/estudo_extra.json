@@ -58,5 +58,20 @@
     "o_que": "questoes",
     "onde": "radar",
     "questoes": null
+  },
+  {
+    "acertos": null,
+    "anotacao": "Correcao de 06/10: as 12 geradas desta faixa (rodadas 11 a 14, 10:38 a 10:54) ja contam no Treino de IA; a faixa anotada repetia os mesmos numeros. A faixa fica para o Qconcursos.",
+    "assunto": "Fixação: Art. 5º, incisos XVII a XLIX",
+    "atualizado_em": "2026-10-06T14:10:07.485189+00:00",
+    "consulta": false,
+    "conteudo": null,
+    "criado_em": "2026-10-06T14:10:07.485186+00:00",
+    "data": "2026-10-06",
+    "materia": "Direito Constitucional",
+    "minutos": 16,
+    "o_que": "questoes",
+    "onde": "radar",
+    "questoes": null
   }
 ]

@@ -4479,6 +4479,43 @@ Junto, sem decisao nova:
   foram de 16 (todos de Portugues) para 31, e a fila de revisao da home de 8
   para 17 pontas, ja com Penal e Constitucional (era o P09).
 
+## O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10/2026)
+
+O caso: em 06/10 a tela mostrou "Fiz hoje: 5 questões" antes de eu fazer
+questao real, e "24" depois de 12 geradas. O 5 era o meio do treino de IA
+(entre a 5a e a 6a resposta, 10:43 a 10:45), somado na mesma linha das
+reais; o 24 eram as 12 geradas contadas duas vezes, porque o "fiz" da faixa
+Fixacao veio com numero e eu anotei nele o treino (12/11). O servidor estava
+no ar desde 00:21, antes da decisao 130, e nao mostrou o aviso. Corrigido o
+dia como o 29/09: a faixa desmarcada, e os 16 min do treino (10:38 a 10:54)
+viraram estudo extra "Onde: Radar". Copia antes em
+`data/copias/correcao-2026-10-06-111005/`.
+
+138. **as reais e o treino de IA em linhas proprias, e o "fiz" so do que eu
+     fiz fora do radar** (P03, U03; muda o texto da decisao 127 e a regra 1
+     da 1D, estende a 130). Quatro partes, aprovadas por voce:
+     - o "Fiz hoje" virou tres linhas, na tela e no `radar hoje`:
+       "Questões reais (Qconcursos e provas): N" (`metricas.frase_das_reais`
+       sobre o `Conta.reais`, o anotado mais o respondido no radar), "Treino
+       de IA no radar: N = a + e (x%), não entra no acerto" e "Total do dia: N
+       questões · tempo". O treino continua no volume do total (decisao 127);
+       so nao divide mais a linha com as reais;
+     - o campo da faixa se chama "fiz no Qconcursos" (ou "fiz fora do
+       radar", na faixa que nao e do Qconcursos) e vem SEMPRE vazio; o numero
+       do plano fica so de dica, no placeholder. Era ele que virava "fiz" com
+       um clique;
+     - a faixa feita no radar fecha com o "fiz" vazio: o check guarda 0
+       questoes, o tempo da faixa e `no_radar`, e a faixa mostra "feita no
+       radar". So vale com resposta numa rodada aberta pelo botao da faixa
+       (`metricas.no_radar_por_faixa`); sem ela, o vazio continua recusado.
+       A conferencia nao chama essa faixa de "feita com 0 questoes". O aviso
+       da faixa diz "Você treinou N de IA nesta faixa (a de N): já contam no
+       Treino de IA" e "se fez só no radar, deixe vazio e marque ✓";
+     - o sinal de treino do tema: "Treino de IA neste tema: a de N (x%) · não
+       entra no acerto", na faixa de treino e na ficha. E toda resposta a
+       gerada dos nos do tema, de qualquer dia (`metricas.treino_ia_dos_nos`),
+       nunca somada ao acerto do tema.
+
 ## O "Treinar geral no radar" da faixa (06/10/2026)
 
 139. **cada faixa de questoes ganhou um "Treinar geral no radar", ao lado

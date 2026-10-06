@@ -282,7 +282,7 @@ def test_o_formulario_sugere_e_soma_sem_marcar(cliente):
     # Sugere, mas nao marca: nenhuma das quatro opcoes vem com checked.
     assert "checked" not in texto.split('class="metas"')[1].split("</fieldset>")[0]
     # A soma e a do nivel 1 da semana 1: 15 de Direito + 10 de Portugues.
-    assert "Fiz hoje:</b> 25 questões" in texto
+    assert "Questões reais (Qconcursos e provas): 25 questões" in texto
 
 
 def test_o_registro_salvo_guarda_so_a_meta(cliente):
@@ -299,7 +299,7 @@ def test_o_registro_salvo_guarda_so_a_meta(cliente):
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert 'name="questoes_feitas"' not in texto
     assert "Gravado neste dia" not in texto
-    assert "Fiz hoje:</b> 12 questões = 9 acertos + 3 erros" in texto
+    assert "Questões reais (Qconcursos e provas): 12 questões = 9 acertos + 3 erros" in texto
 
 
 # --- o comando ---------------------------------------------------------------

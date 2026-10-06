@@ -102,7 +102,11 @@ def test_o_acerto_da_ia_e_um_segundo_numero(banco_temporario, plano):
     assert conta.total.porcentagem == 62            # 13 de 21: so as reais
     assert conta.treino_ia.ia_acertos == 7
     assert metricas.frase_da_ia(conta.total) == (
-        "Treino de IA: 10 questões = 7 acertos + 3 erros (70%), fora do acerto real")
+        "Treino de IA no radar: 10 questões = 7 acertos + 3 erros (70%), "
+        "não entra no acerto")
+    # Decisao 138: as reais numa linha, sem o treino de IA dentro.
+    assert metricas.frase_das_reais(conta.reais) == (
+        "Questões reais (Qconcursos e provas): 21 questões = 13 acertos + 8 erros")
 
 
 def _bonus_com_zero_gravado_antes_da_1d(plano):
@@ -268,14 +272,16 @@ def test_a_tela_hoje_mostra_o_28_09_fechado(banco_temporario, monkeypatch):
 
     texto = TestClient(app).get("/hoje?data=2026-09-28").text
 
-    assert ("Fiz hoje:</b> 31 questões = 13 acertos + 8 erros "
-            "+ 10 de treino de IA") in texto
-    assert ("Treino de IA: 10 questões = 7 acertos + 3 erros (70%), "
-            "fora do acerto real; conta no volume") in texto
+    assert ("<b>Questões reais (Qconcursos e provas): 21 questões = 13 acertos "
+            "+ 8 erros</b>") in texto
+    assert ("Treino de IA no radar: 10 questões = 7 acertos + 3 erros (70%), "
+            "não entra no acerto.") in texto
+    assert "Total do dia: 31 questões" in texto
+    assert "Fiz hoje:" not in texto
     # O treino de IA leva o selo da IA (Etapa 7A): e resposta a questao que
     # a IA escreveu, e ela nunca pode parecer questao da banca.
     assert ('<span aria-hidden="true">🟣</span> Gerado por IA</span> '
-            "Treino de IA: 10 questões") in texto
+            "Treino de IA no radar: 10 questões") in texto
 
 
 def test_o_selo_de_cada_linha_do_dia_sai_do_dado(banco_temporario, monkeypatch):
@@ -313,10 +319,11 @@ def test_o_radar_hoje_mostra_a_mesma_linha(banco_temporario):
                                env={"COLUMNS": "200"})
 
     assert saida.exit_code == 0, saida.output
-    assert ("Fiz hoje: 31 questões = 13 acertos + 8 erros "
-            "+ 10 de treino de IA") in saida.output
-    assert ("Treino de IA: 10 questões = 7 acertos + 3 erros (70%), "
-            "fora do acerto real; conta no volume") in saida.output
+    assert ("Questões reais (Qconcursos e provas): 21 questões = 13 acertos "
+            "+ 8 erros") in saida.output
+    assert ("Treino de IA no radar: 10 questões = 7 acertos + 3 erros (70%), "
+            "não entra no acerto") in saida.output
+    assert "Total do dia: 31 questões" in saida.output
 
 
 # --- mesmo periodo, mesmo numero, em todas as telas --------------------------------

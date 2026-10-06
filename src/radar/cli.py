@@ -2591,7 +2591,7 @@ def hoje(
 
     conta = servico.metricas.do_dia(quando, plano)
     if not conta.vazio:
-        console.print(f"\n[bold]Fiz hoje:[/] {escape(_totais_legiveis(conta))}")
+        console.print(f"\n{escape(_totais_legiveis(conta))}")
 
     registro = servico.cronograma.registros(quando, quando).get(quando)
     if registro:
@@ -2654,8 +2654,17 @@ def _extra_legivel(extra) -> str:
 
 
 def _totais_legiveis(conta) -> str:
-    """A mesma linha da tela, pelas mesmas frases do `servico.metricas`."""
-    partes = [servico.metricas.frase_da_conta(conta.total)]
+    """As mesmas linhas da tela, pelas mesmas frases do `servico.metricas`:
+    as reais, o treino de IA e o total, nunca numa linha so (decisao 138)."""
+    linha = servico.metricas.frase_das_reais(conta.reais)
+    if conta.radar.medidas and conta.anotado.medidas:
+        linha += (f"\n  medido no radar: {conta.radar.porcentagem}% em "
+                  f"{conta.radar.medidas} · anotado: "
+                  f"{conta.anotado.porcentagem}% em {conta.anotado.medidas}")
+    if conta.total.ia:
+        linha += f"\n{servico.metricas.frase_da_ia(conta.total)}"
+    questoes = conta.total.questoes
+    partes = [f"Total do dia: {questoes} {'questão' if questoes == 1 else 'questões'}"]
     if conta.minutos:
         de_onde = []
         if conta.faixas.minutos:
@@ -2666,14 +2675,7 @@ def _totais_legiveis(conta) -> str:
         if len(de_onde) > 1:
             tempo += " (" + " + ".join(de_onde) + ")"
         partes.append(tempo)
-    linha = " · ".join(partes)
-    if conta.radar.medidas and conta.anotado.medidas:
-        linha += (f"\n  medido no radar: {conta.radar.porcentagem}% em "
-                  f"{conta.radar.medidas} · anotado: "
-                  f"{conta.anotado.porcentagem}% em {conta.anotado.medidas}")
-    if conta.total.ia:
-        linha += f"\n  {servico.metricas.frase_da_ia(conta.total)}; conta no volume"
-    return linha
+    return linha + "\n" + " · ".join(partes)
 
 
 def _registro_legivel(registro) -> str:

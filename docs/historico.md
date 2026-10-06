@@ -2312,3 +2312,15 @@ embaralhadas. A rodada guarda a faixa como a do botao do no, entao o aviso e o
 treino de IA a contam sem mudanca nenhuma. So os testes do item foram rodados
 (20, com o `tests/test_treinar_geral.py` novo); a suite inteira espera a sua
 ordem.
+
+## O lote 2: o "fiz" e o "Fiz hoje" (06/10)
+
+Voce viu "Fiz hoje: 5 questões" sem ter feito questao real, e "24" depois de
+12 geradas. O 5 era o meio do treino de IA, somado na linha das reais; o 24,
+as 12 geradas contadas de novo na faixa Fixacao, cujo "fiz" vinha com numero.
+O servidor estava no ar desde antes da decisao 130, e por isso nao avisou.
+Corrigido o dia como o 29/09, e feito o lote 2 (decisao 138): o "Fiz hoje"
+virou "Questões reais (Qconcursos e provas)", "Treino de IA no radar" e
+"Total do dia"; o "fiz no Qconcursos" vem vazio; a faixa feita no radar fecha
+com o ✓ vazio e guarda so o tempo; e a faixa e a ficha mostram o treino de IA
+do tema, fora do acerto. Rodados so os testes tocados (174); a suite inteira ficou para depois, a seu pedido.

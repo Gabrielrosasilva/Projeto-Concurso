@@ -139,7 +139,7 @@ def _o_campo_fiz(texto, bloco, indice, titulo) -> str:
     achado = re.search(
         rf'name="bloco" value="{bloco}">\s*<input type="hidden" name="indice" value="{indice}">'
         rf'\s*<input type="hidden" name="titulo" value="{re.escape(str(escape(titulo)))}">'
-        rf'\s*<label>fiz\s*<input type="number" name="questoes"[^>]*?value="([^"]*)"',
+        rf'\s*<label>fiz[^<]*<input type="number" name="questoes"[^>]*?value="([^"]*)"',
         texto)
     assert achado, "o formulario da faixa nao apareceu"
     return achado.group(1)
@@ -152,16 +152,18 @@ def test_a_tela_avisa_e_o_fiz_nao_vem_com_o_numero_do_plano(banco_temporario, mo
                         lambda: datetime(2026, 9, 30, 12, 0, tzinfo=fuso_local()))
     cliente = TestClient(app)
 
-    # Sem nada no radar: sem aviso, e o "fiz" com o numero do plano, como sempre.
+    # Sem nada no radar: sem aviso, e o "fiz" vazio tambem (decisao 138): o
+    # numero do plano fica so de dica, no placeholder.
     antes = cliente.get("/hoje?data=2026-09-28").text
-    assert "desta faixa no radar" not in antes
-    assert _o_campo_fiz(antes, bloco, indice, faixa.titulo) == str(faixa.questoes)
+    assert "nesta faixa" not in antes and "desta faixa no radar" not in antes
+    assert _o_campo_fiz(antes, bloco, indice, faixa.titulo) == ""
+    assert "<label>fiz no Qconcursos" in antes
 
     _rodada({"geradas": True, "da_faixa": _identidade(bloco, indice, faixa.titulo)},
             [(True, True), (False, True)])
     depois = cliente.get("/hoje?data=2026-09-28").text
 
-    assert ("Você já respondeu <b>2 questões</b> desta faixa no radar (de IA):"
-            in depois)
-    assert "anote só as que fez fora do radar, no Qconcursos" in depois
+    assert ("Você treinou <b>2 de IA</b> nesta faixa (1 de 2): já contam no "
+            "Treino de IA." in depois)
+    assert "se fez só no radar, deixe vazio e marque ✓" in depois
     assert _o_campo_fiz(depois, bloco, indice, faixa.titulo) == ""

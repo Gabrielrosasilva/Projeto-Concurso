@@ -349,7 +349,7 @@ def test_a_tela_mostra_a_linha_do_total(cliente):
         "minutos": "30", "questoes": "20", "acertos": "16", "onde": "qconcursos"})
 
     texto = cliente.get("/hoje?data=2026-09-28").text
-    assert "Fiz hoje:</b> 35 questões = 27 acertos + 8 erros" in texto
+    assert "Questões reais (Qconcursos e provas): 35 questões = 27 acertos + 8 erros" in texto
     assert "do plano + 30 min extra" in texto
     # Com erro no dia, o atalho para o caderno da etapa E1.
     assert "anotar os erros" in texto
@@ -394,4 +394,5 @@ def test_radar_hoje_mostra_o_acerto_da_faixa(banco_temporario, plano, tmp_path,
     assert "com consulta" in saida.output
     assert "Estudo extra" in saida.output
     assert "Lei seca · Direito Penal · Art. 33 · 40 min" in saida.output
-    assert "Fiz hoje:" in saida.output
+    assert "Questões reais (Qconcursos e provas): " in saida.output
+    assert "Total do dia: 15 questões" in saida.output

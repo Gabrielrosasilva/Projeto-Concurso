@@ -341,6 +341,9 @@ def anotar_faixa(
     `acertos` vazio e normal e nao e erro: as questoes contam no VOLUME e nao
     entram em acerto nenhum. Foi o que aconteceu de verdade - eu fiz, e nao
     anotei quantas acertei.
+
+    `questoes` vazio so vale na faixa que eu fiz no radar (decisao 138): o
+    check fica com 0 questoes e o tempo, e marcado `no_radar`.
     """
     hoje = hoje or hoje_local()
     plano = plano or plano_de_estudo.carregar()
@@ -362,11 +365,22 @@ def anotar_faixa(
     if not feitas:
         # Regra da 1D: faixa de questoes sem questao nao foi feita. Aceitar o
         # 0 contava os minutos dela no dia - foi o Bonus de 28 e 29/09, 25 min
-        # cada, de um estudo que nao aconteceu.
-        raise RegistroInvalido(
-            "Faixa de questões com 0 questões não conta como feita: "
-            "se não fez nenhuma, desmarque a faixa."
-        )
+        # cada, de um estudo que nao aconteceu. A excecao e a faixa feita no
+        # radar (decisao 138): as questoes dela ja contam sozinhas, e o check
+        # guarda so o tempo. Sem ela, eu digitava um numero, e as mesmas
+        # questoes contavam duas vezes (05 e 06/10).
+        from radar.servico import metricas
+
+        no_radar = metricas.no_radar_por_faixa(data).get((bloco, indice, titulo))
+        if not (no_radar and no_radar.questoes):
+            raise RegistroInvalido(
+                "Faixa de questões com 0 questões não conta como feita: "
+                "se não fez nenhuma, desmarque a faixa. Se treinou no radar, "
+                "abra o treino pelo botão desta faixa: aí o ✓ vazio vale."
+            )
+        check = _check_da_faixa(bloco, indice, faixa, 0, None, consulta, conteudo)
+        check["no_radar"] = True
+        return _gravar_check(data, bloco, indice, titulo, check)
 
     return _gravar_check(data, bloco, indice, titulo,
                          _check_da_faixa(bloco, indice, faixa, feitas, certas,
@@ -453,6 +467,9 @@ class FaixaFeita:
     #: O tipo da faixa no plano (teoria, questoes, revisao...): e ele que diz
     #: se o que eu fiz ali foi uma revisao.
     tipo: str = ""
+    #: Feita no radar, com o "fiz" vazio (decisao 138): as questoes contam
+    #: pelas respostas, e a faixa guarda so o tempo.
+    no_radar: bool = False
 
     @property
     def porcentagem(self) -> int | None:
@@ -498,6 +515,7 @@ def valores_das_faixas(dia, estado: EstadoDoDia | None) -> dict:
             conteudo=check.get("conteudo") or faixa.conteudo,
             do_plano=antigo,
             tipo=faixa.tipo,
+            no_radar=bool(check.get("no_radar")),
         )
     return valores
 
