@@ -144,5 +144,35 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-06T01:11:20.986792+00:00",
+    "data": "2026-10-05",
+    "faixas_feitas": [
+      {
+        "acertos": null,
+        "assunto": "Fato típico e nexo causal (art. 13)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Penal",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Fato típico e nexo causal (art. 13)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Vozes do verbo",
+        "bloco": "manha",
+        "consulta": false,
+        "conteudo": "Língua Portuguesa > Vozes do verbo",
+        "indice": 5,
+        "materia": "Língua Portuguesa",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Vozes do verbo"
+      }
+    ],
+    "plano_b": null
   }
 ]

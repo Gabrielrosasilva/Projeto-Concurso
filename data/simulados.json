@@ -626,12 +626,12 @@
     ]
   },
   {
-    "criado_em": "2026-10-04T21:15:29.192208+00:00",
+    "criado_em": "2026-10-05T15:31:44.157976+00:00",
     "filtros": {
-      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Gratuidades constitucionais aos reconhecidamente pobres",
+      "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa",
       "geradas": true,
       "materia": null,
-      "quantidade": 5
+      "quantidade": 8
     },
     "finalizado_em": null,
     "respostas": [
@@ -639,7 +639,7 @@
         "acertou": null,
         "escolhida": null,
         "gerada": true,
-        "impressao": "3140a12ae5bf2b71b9b761fe6e6e6242",
+        "impressao": "34e02b6dadc936c2772b8a3faba4ac81",
         "ordem": 1,
         "respondida_em": null
       },
@@ -647,7 +647,7 @@
         "acertou": null,
         "escolhida": null,
         "gerada": true,
-        "impressao": "c5ddbc44af1b513603a076e4e0bb1669",
+        "impressao": "82d178b1b284452a69294dc99e69e0a8",
         "ordem": 2,
         "respondida_em": null
       },
@@ -655,7 +655,7 @@
         "acertou": null,
         "escolhida": null,
         "gerada": true,
-        "impressao": "6c117405f221b5f8689380a197dc1666",
+        "impressao": "3f8f794fd07b3fcfec47112fa837085b",
         "ordem": 3,
         "respondida_em": null
       },
@@ -663,7 +663,7 @@
         "acertou": null,
         "escolhida": null,
         "gerada": true,
-        "impressao": "5842d2d4bf8cc6a2b641e40fd12ca2f3",
+        "impressao": "ed8b18531150017bec9bf8c83def379a",
         "ordem": 4,
         "respondida_em": null
       },
@@ -671,9 +671,297 @@
         "acertou": null,
         "escolhida": null,
         "gerada": true,
-        "impressao": "400e978bb897c8c78c52235f47bbbbc3",
+        "impressao": "8335feb359088c126a3c63921d770c00",
         "ordem": 5,
         "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "50ded3169b44067bc430e224d9115136",
+        "ordem": 6,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "acaa0b972f877283c43fd9caa01e8d8e",
+        "ordem": 8,
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-05T15:32:40.860255+00:00",
+    "filtros": {
+      "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 8
+    },
+    "finalizado_em": "2026-10-05T16:07:32.171608+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "068e3591fdbb0e3049114abfeb65ed37",
+        "ordem": 1,
+        "respondida_em": "2026-10-05T16:03:23.032711+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "ed8b18531150017bec9bf8c83def379a",
+        "ordem": 2,
+        "respondida_em": "2026-10-05T16:04:21.882658+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "51a460cbbfe8906f6b43adc8d4e658a1",
+        "ordem": 4,
+        "respondida_em": "2026-10-05T16:05:27.470118+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "05f7bcd69d3fef0bc927dbc3aff3700e",
+        "ordem": 5,
+        "respondida_em": "2026-10-05T16:06:10.858999+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "8335feb359088c126a3c63921d770c00",
+        "ordem": 6,
+        "respondida_em": "2026-10-05T16:06:30.490235+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "82d178b1b284452a69294dc99e69e0a8",
+        "ordem": 7,
+        "respondida_em": "2026-10-05T16:06:55.812212+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "3c27dc47b7f9764a58eab9c7fcd049e3",
+        "ordem": 8,
+        "respondida_em": "2026-10-05T16:07:32.166084+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T00:28:30.880113+00:00",
+    "filtros": {
+      "da_banca": 2,
+      "do_plano": 6,
+      "faixa": {
+        "bloco": "manha",
+        "data": "2026-10-05",
+        "indice": 6,
+        "titulo": "Fixação: Vozes do verbo"
+      },
+      "nos": [
+        "Língua Portuguesa > Vozes do verbo"
+      ],
+      "proprias": 1,
+      "quantidade": 3,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-06T00:32:00.246905+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "f36c430428191d942d9eead29cbcfaaa",
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 7,
+        "ordem": 1,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-06T00:30:45.769402+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "26be18f08de347579fd7d338d875a336",
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 2,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-06T00:31:00.647817+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "48277ff3d38e1ca5912101de05419984",
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 8,
+        "ordem": 3,
+        "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ST1.pdf",
+        "respondida_em": "2026-10-06T00:32:00.240472+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T00:37:17.267376+00:00",
+    "filtros": {
+      "conteudo": "Língua Portuguesa > Vozes do verbo",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 6
+    },
+    "finalizado_em": "2026-10-06T00:41:01.697890+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "55497783b1df409971cd3a0c551f9c3a",
+        "ordem": 1,
+        "respondida_em": "2026-10-06T00:37:50.165851+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "7cc7f6099c57a10f58f818c6183e9562",
+        "ordem": 2,
+        "respondida_em": "2026-10-06T00:38:19.841805+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "390cbdf451d71921b5ae0964c9c46636",
+        "ordem": 3,
+        "respondida_em": "2026-10-06T00:38:44.864993+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "33fa263b161a7f07273c1a94fd6d4582",
+        "ordem": 4,
+        "respondida_em": "2026-10-06T00:39:37.122277+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "4e826c756b3db89bf9a3442be57041f3",
+        "ordem": 5,
+        "respondida_em": "2026-10-06T00:40:17.483997+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "080e18c562988bf2fc6f771eb1bf31e9",
+        "ordem": 6,
+        "respondida_em": "2026-10-06T00:41:01.692700+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-06T00:42:32.899971+00:00",
+    "filtros": {
+      "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 10
+    },
+    "finalizado_em": "2026-10-06T00:49:14.078877+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "434f263c61a5fdadde54ba426ad7e25b",
+        "ordem": 1,
+        "respondida_em": "2026-10-06T00:43:05.261146+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "6bb591698ef1cb9d32c0ba611691c661",
+        "ordem": 2,
+        "respondida_em": "2026-10-06T00:43:53.289900+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "3b75cd8f8abfe645dc65c71dc84619a3",
+        "ordem": 3,
+        "respondida_em": "2026-10-06T00:44:04.108225+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "da8febab48bf7da900484842f32fc060",
+        "ordem": 4,
+        "respondida_em": "2026-10-06T00:44:26.352543+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "60cb010b2fa1faf279fde0cdffb30c58",
+        "ordem": 5,
+        "respondida_em": "2026-10-06T00:44:46.969559+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "745a1c57ce9a1d814a5ba08f01e89cd4",
+        "ordem": 6,
+        "respondida_em": "2026-10-06T00:46:21.014043+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "8c9eed26839dcebe58a87e1a1aa5a64b",
+        "ordem": 7,
+        "respondida_em": "2026-10-06T00:47:14.719502+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "545a8149527df3858920bb44ed1887be",
+        "ordem": 8,
+        "respondida_em": "2026-10-06T00:48:26.713703+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "f56990c93e281f93b032d51180f02eef",
+        "ordem": 9,
+        "respondida_em": "2026-10-06T00:48:39.915842+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "1116074d19359bf3de4d49b7bcfb8f7c",
+        "ordem": 10,
+        "respondida_em": "2026-10-06T00:49:14.073883+00:00"
       }
     ]
   }

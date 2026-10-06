@@ -235,7 +235,7 @@
     "pegadinha": "usar arranjo",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "o aluno escolhe 3 cursos de 5"
   },
@@ -535,7 +535,7 @@
     "pegadinha": "Confundir metáfora ('a vida de modelo é um conto de fadas') com comparação ('como uma lesma') e catacrese ('dentes de alho') com metonímia ('três pratos', continente pelo conteúdo).",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Coluna 2 Figuras de linguagem ( ) metáfora ( ) catacrese ( ) metonímia ( ) comparação"
   },
@@ -1810,7 +1810,7 @@
     "pegadinha": "",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "dividido proporcionalmente ao tempo de trabalho"
   },
@@ -1930,7 +1930,7 @@
     "pegadinha": "somar as combinações",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "3 engenheiros de 5 e 2 arquitetos de 7"
   },
@@ -2185,7 +2185,7 @@
     "pegadinha": "'Risada gostosa' lembra metáfora ou comparação, mas junta audição (risada) e paladar (gostosa), o que é sinestesia.",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "No enunciado 'Helena tinha uma risada muito gostosa!', temos um exemplo de figura de linguagem denominada:"
   },
@@ -2215,7 +2215,7 @@
     "pegadinha": "somar 0,3 sem multiplicar o caso de envio pela probabilidade de spam",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "0,3 + 0,7 × 0,6 = 0,72"
   },
@@ -3175,7 +3175,7 @@
     "pegadinha": "38% (alternativa a) é só a menina branca (91/240); o gabarito (47%) corresponde a menina branca ou parda (113/240) - o enunciado está truncado.",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "se uma das fichas for retirada aleatoriamente do fichário, a probabilidade de a ficha corresponder a uma menina"
   },
@@ -3685,7 +3685,7 @@
     "pegadinha": "Confundir metonímia (autor pela obra: 'ler Érico Veríssimo') com catacrese ('dentes de alho') e comparação ('feito uma cobra') com metáfora.",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Coluna 2 Figuras de Linguagem ( ) metáfora ( ) comparação ( ) metonímia ( ) catacrese"
   },
@@ -3865,7 +3865,7 @@
     "pegadinha": "cada lado do triângulo ainda conta como uma reta",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "C(12,2) − 3·C(4,2) + 3 = 51 retas"
   },
@@ -3880,7 +3880,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "Considere 12 pontos distintos determinados sobre os lados de um triângulo (...) o número máximo de retas determinadas por estes pontos"
   },
@@ -4105,7 +4105,7 @@
     "pegadinha": "o zero pode vir na frente (056789 vale como número da lista)",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "posição de 869057 na lista decrescente das permutações"
   },
@@ -4570,7 +4570,7 @@
     "pegadinha": "Esquecer de excluir o 3, que é múltiplo de 3 e primo (6/20 = 30%, alternativa a).",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "múltiplo de 3 e não ser primo"
   },
@@ -4855,7 +4855,7 @@
     "pegadinha": "'olhar penetrante' (sinestesia) e 'fio de óleo' (catacrese) costumam ser trocados; 'como um indigente' é comparação, não metáfora, por ter o conectivo",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Meu irmão é fera (metáfora) / como um indigente (comparação) / ler Shakespeare (metonímia) / fio de óleo (catacrese) / olhar penetrante (sinestesia)"
   },
@@ -5410,7 +5410,7 @@
     "pegadinha": "Errar a faixa: 18/50 = 36%, entre 35% e 38%.",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "a probabilidade de a pessoa sorteada pertencer ao grupo dos 18 amigos"
   },
@@ -6160,7 +6160,7 @@
     "pegadinha": "Confundir comparação ('feito um avião') com metáfora e metonímia ('três latas de Pepsi', continente pelo conteúdo) com catacrese ('boca do fogão').",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "( ) catacrese. ( ) sinestesia. ( ) comparação. ( ) metonímia."
   },
@@ -7210,7 +7210,7 @@
     "pegadinha": "'coração partido' e 'perna da cadeira' também são sentido figurado, mas são metáfora e catacrese, não metonímia",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Para iniciar seu negócio comprou trezentas cabeças de gado."
   },
@@ -7315,7 +7315,7 @@
     "pegadinha": "",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "anagramas com vogais e consoantes intercaladas"
   },
@@ -7705,7 +7705,7 @@
     "pegadinha": "sem reposição: o segundo sorteio é sobre 29",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "14/30 × 13/29 ≈ 20,9%"
   },
@@ -7810,7 +7810,7 @@
     "pegadinha": "Contar 9 ou 11 múltiplos de 5 entre 1 e 50; são 10 (20%).",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "a probabilidade de o número no cartão ser um múltiplo de 5"
   },
@@ -8245,7 +8245,7 @@
     "pegadinha": "esquecer de permutar os blocos",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "camisetas de mesma cor juntas"
   },
@@ -8545,7 +8545,7 @@
     "pegadinha": "",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "12 operários, 10 dias, 7 horas por dia, 75% da obra"
   },
@@ -8695,7 +8695,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "Sabe-se que 60% das mulheres são atenciosas e que 25% dos homens não são atenciosos."
   },
@@ -8710,7 +8710,7 @@
     "pegadinha": "'era faca em seus ouvidos' parece eufemismo, mas é metáfora; 'sono do rosto' parece metáfora",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "“Abriu uma torneira do banheiro para lavar o sono do rosto.” – Metonímia"
   },
@@ -9100,7 +9100,7 @@
     "pegadinha": "Dividir pelas balas de outros sabores (4/14) em vez do total (4/18 ≈ 22,2%).",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "4 balas de chocolate, 6 balas de morango e 8 balas de menta"
   },
@@ -9595,7 +9595,7 @@
     "pegadinha": "Figuras vizinhas trocadas de lugar: metáfora x metonímia/comparação, gradação x polissíndeto/pleonasmo, personificação x prosopopeia/catacrese; 'enxurrada de maledicências' parece eufemismo, mas é exagero.",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 05/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Identifique a figura da linguagem das quatro frases a seguir... Assinale a alternativa que indica corretamente as figuras de linguagem das frases numeradas."
   },
