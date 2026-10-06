@@ -833,6 +833,32 @@
   },
   {
     "alternativas": {
+      "a": "Precisa-se de agentes com experiência em escolta.",
+      "b": "Os presos queixaram-se da qualidade da comida.",
+      "c": "Ainda se discutem, na Assembleia, as mudanças no regulamento do sistema prisional.",
+      "d": "No interior, vive-se com mais tranquilidade.",
+      "e": "O agente machucou-se ao fechar o portão da galeria."
+    },
+    "artigo": "Regra: há voz passiva sintética quando o SE (pronome apassivador) acompanha verbo transitivo direto e o verbo concorda com o sujeito paciente (se discutem as mudanças); com verbo transitivo indireto o",
+    "assunto": "Vozes do verbo",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Vozes do verbo",
+    "criada_em": "2026-10-06T00:35:32.389164+00:00",
+    "enunciado": "Assinale a alternativa em que o pronome SE forma a voz passiva sintética.",
+    "escopo": "Língua Portuguesa > Vozes do verbo",
+    "evidencia_da_base": "complementar",
+    "impressao": "080e18c562988bf2fc6f771eb1bf31e9",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "48277ff3d38e1ca5912101de05419984",
+    "origem_impressao": "7cc7f6099c57a10f58f818c6183e9562",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "Se você quiser, eu o acompanho até a portaria.",
       "b": "Se tu quiseres, eu te acompanho até a portaria.",
       "c": "Se você quiser, eu te acompanho até a portaria.",
@@ -4239,6 +4265,32 @@
   },
   {
     "alternativas": {
+      "a": "Foram encontradas drogas na revista. Encontraram-se drogas na revista.",
+      "b": "O alvará foi expedido. Expediram-se o alvará.",
+      "c": "As visitas foram suspensas pela direção. A direção suspendeu as visitas.",
+      "d": "As provas serão corrigidas. Corrigiram-se as provas.",
+      "e": "A defensoria orientou as famílias. As famílias foram orientadas pela defensoria."
+    },
+    "artigo": "Regra: na voz passiva sintética (verbo transitivo direto + SE apassivador), o verbo concorda com o sujeito paciente e mantém o tempo da passiva analítica (Foram encontradas drogas → Encontraram-se dro",
+    "assunto": "Vozes do verbo",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Vozes do verbo",
+    "criada_em": "2026-10-06T00:35:06.150681+00:00",
+    "enunciado": "Assinale a alternativa que apresenta a transposição correta da voz passiva analítica para a voz passiva sintética.",
+    "escopo": "Língua Portuguesa > Vozes do verbo",
+    "evidencia_da_base": "alvo",
+    "impressao": "33fa263b161a7f07273c1a94fd6d4582",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "f36c430428191d942d9eead29cbcfaaa",
+    "origem_impressao": "d9e2f2bcddd9f98b0362165a36ed4fb3",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "O juiz concedeu [o benefício] ao condenado – objeto indireto.",
       "b": "A família assistiu [à audiência] – objeto direto.",
       "c": "O agente informou [o preso] da transferência – objeto direto.",
@@ -4756,6 +4808,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "As celas foram revistadas. Revistou-se as celas.",
+      "b": "Os documentos foram assinados pelo diretor. O diretor assinou os documentos.",
+      "c": "Novas vagas foram abertas no concurso. Abriram-se novas vagas no concurso.",
+      "d": "O relatório está sendo redigido pela equipe. A equipe redigiu o relatório.",
+      "e": "O agente revistou o visitante. O visitante foi revistado pelo agente."
+    },
+    "artigo": "Regra: na voz passiva sintética (verbo transitivo direto + SE apassivador), o verbo concorda com o sujeito paciente e mantém o tempo da passiva analítica (Novas vagas foram abertas → Abriram-se novas ",
+    "assunto": "Vozes do verbo",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Vozes do verbo",
+    "criada_em": "2026-10-06T00:35:06.150674+00:00",
+    "enunciado": "Assinale a alternativa em que a frase na voz passiva analítica foi transposta corretamente para a voz passiva sintética.",
+    "escopo": "Língua Portuguesa > Vozes do verbo",
+    "evidencia_da_base": "alvo",
+    "impressao": "390cbdf451d71921b5ae0964c9c46636",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "f36c430428191d942d9eead29cbcfaaa",
+    "origem_impressao": "d9e2f2bcddd9f98b0362165a36ed4fb3",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -6501,6 +6579,32 @@
   },
   {
     "alternativas": {
+      "a": "Segundo a direção, o horário de visitas mudará a partir de novembro.",
+      "b": "Os detentos assistiram a uma palestra sobre direitos humanos.",
+      "c": "Tendo encerrado o expediente, os servidores deixaram o prédio.",
+      "d": "A polícia prendeu o suspeito depois de uma longa investigação.",
+      "e": "Os novos equipamentos de segurança estão sendo instalados por uma empresa terceirizada."
+    },
+    "artigo": "Regra: na voz passiva analítica, o sujeito sofre a ação, expressa pelo verbo auxiliar SER + particípio do verbo principal, também nas locuções (estão sendo instalados), com o agente da passiva introdu",
+    "assunto": "Vozes do verbo",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Vozes do verbo",
+    "criada_em": "2026-10-06T00:35:32.389159+00:00",
+    "enunciado": "Assinale a alternativa em que a forma verbal está na voz passiva analítica.",
+    "escopo": "Língua Portuguesa > Vozes do verbo",
+    "evidencia_da_base": "complementar",
+    "impressao": "4e826c756b3db89bf9a3442be57041f3",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "48277ff3d38e1ca5912101de05419984",
+    "origem_impressao": "7cc7f6099c57a10f58f818c6183e9562",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "A Comissão Interamericana e a Corte Interamericana de Direitos Humanos são os órgãos competentes para conhecer do cumprimento da Convenção Americana pelos Estados-Partes.",
       "b": "A Corte Interamericana integra o sistema global da ONU.",
       "c": "O Brasil não é parte da Convenção Americana.",
@@ -6784,6 +6888,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Os laudos foram entregues. Entregou-se os laudos.",
+      "b": "A audiência será marcada. Marcou-se a audiência.",
+      "c": "Os portões eram fechados às 22 horas. Os portões fechavam às 22 horas.",
+      "d": "Os servidores foram convocados pelo secretário. O secretário convocou os servidores.",
+      "e": "Serão contratados novos agentes. Contratar-se-ão novos agentes."
+    },
+    "artigo": "Regra: na voz passiva sintética (verbo transitivo direto + SE apassivador), o verbo concorda com o sujeito paciente e mantém o tempo da passiva analítica (Serão contratados novos agentes → Contratar-s",
+    "assunto": "Vozes do verbo",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Vozes do verbo",
+    "criada_em": "2026-10-06T00:35:06.150683+00:00",
+    "enunciado": "Assinale a alternativa em que a oração na voz passiva analítica foi corretamente reescrita na voz passiva sintética, sem alteração do tempo verbal.",
+    "escopo": "Língua Portuguesa > Vozes do verbo",
+    "evidencia_da_base": "alvo",
+    "impressao": "55497783b1df409971cd3a0c551f9c3a",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "f36c430428191d942d9eead29cbcfaaa",
+    "origem_impressao": "d9e2f2bcddd9f98b0362165a36ed4fb3",
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -9618,6 +9748,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Os agentes penitenciários iniciaram a revista logo depois do almoço.",
+      "b": "A rebelião foi contida pela equipe de intervenção em menos de duas horas.",
+      "c": "O juiz decidiu que o preso continuará no regime fechado.",
+      "d": "Durante a madrugada, choveu muito na região do presídio.",
+      "e": "Os familiares chegaram cedo para a visita de domingo."
+    },
+    "artigo": "Regra: na voz passiva analítica, o sujeito sofre a ação, expressa pelo verbo auxiliar SER (ou ESTAR) + particípio do verbo principal, com o agente da passiva introduzido por \"por\" (foi contida pela eq",
+    "assunto": "Vozes do verbo",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Vozes do verbo",
+    "criada_em": "2026-10-06T00:35:06.150684+00:00",
+    "enunciado": "Assinale a frase com verbo na voz passiva.",
+    "escopo": "Língua Portuguesa > Vozes do verbo",
+    "evidencia_da_base": "complementar",
+    "impressao": "7cc7f6099c57a10f58f818c6183e9562",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "48277ff3d38e1ca5912101de05419984",
+    "origem_impressao": "7cc7f6099c57a10f58f818c6183e9562",
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
