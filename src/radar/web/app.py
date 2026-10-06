@@ -945,15 +945,16 @@ def geradas_gerar(materia: str = Form(""), quantas: str = Form("5")):
 def geradas_treinar(
     materia: str = Form(""), conteudo: str = Form(""), quantidade: str = Form("5"),
     data: str = Form(""), bloco: str = Form(""), indice: str = Form(""),
-    titulo: str = Form(""),
+    titulo: str = Form(""), conteudos: list[str] = Form([]),
 ):
     """Uma rodada com o que ja foi gerado antes. Nao gasta nada.
 
     `conteudo` e o no da arvore - materia, assunto ou subassunto - e pega
     tudo que esta abaixo dele; `materia` continua valendo para quem ja
-    mandava so ela. Vinda do botao de uma faixa da Hoje, a rodada guarda a
-    faixa (data, bloco, indice e titulo), para a faixa avisar que estas ja
-    contam no "Fiz hoje".
+    mandava so ela. `conteudos` (repetido) sao varios nos misturados: o
+    "Treinar geral" da faixa. Vinda do botao de uma faixa da Hoje, a rodada
+    guarda a faixa (data, bloco, indice e titulo), para a faixa avisar que
+    estas ja contam no "Fiz hoje".
     """
     quantas = converter_valor(quantidade)
     quantas = int(quantas) if quantas and 1 <= quantas <= 30 else 5
@@ -971,6 +972,7 @@ def geradas_treinar(
     rodada = servico.geradas.criar_simulado(
         quantidade=quantas, materia=materia.strip() or None,
         conteudo=conteudo.strip() or None, da_faixa=da_faixa,
+        conteudos=[c.strip() for c in conteudos if c.strip()] or None,
     )
     if rodada is None:
         return RedirectResponse("/geradas?recado=nada_no_no", status_code=303)

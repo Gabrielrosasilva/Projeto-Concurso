@@ -1359,6 +1359,21 @@ class GeradasDaFaixa:
         return ([n.comando for n in self.nos if n.comando]
                 + [PASSO_NO_CLAUDE_CODE, COMANDO_DE_IMPORTAR])
 
+    @property
+    def nos_com_geradas(self) -> list[str]:
+        """Os nos que entram no "Treinar geral": so os que tem gerada."""
+        return [n.no for n in self.nos if n.geradas]
+
+    @property
+    def geral(self) -> int:
+        """Quantas o "Treinar geral" sugere: as do plano, sem passar das
+        geradas dos nos nem de 30. Zero com menos de 2 nos com gerada: com um
+        so, o geral seria o mesmo botao do no."""
+        if len(self.nos_com_geradas) < 2:
+            return 0
+        tem = sum(n.geradas for n in self.nos)
+        return min(tem, self.questoes or tem, 30)
+
 
 def geradas_da_faixa(faixa, escrita: "FichaEscrita | None", ja: dict) -> GeradasDaFaixa:
     """As geradas de uma faixa de questoes. Os nos sao os da ficha (decisao

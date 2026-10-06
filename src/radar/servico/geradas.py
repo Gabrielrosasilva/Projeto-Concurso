@@ -933,12 +933,33 @@ def _sortear(
     return [q.id for q in candidatas[:quantidade]]
 
 
+def _sortear_misturado(quantidade: int, conteudos: list[str]) -> list[int]:
+    """Ids de varios nos, divididos por igual e embaralhados no fim.
+
+    O sorteio numa lista so traria quase tudo do no com mais geradas; aqui
+    cada no da a sua vez, um de cada ate completar (o que acaba passa a vez
+    aos outros). O embaralhar no fim e o que faz o "Treinar geral": eu nao
+    sei de qual no vem a proxima. Um no dentro do outro nao repete questao.
+    """
+    filas = [_sortear(quantidade, conteudo=c) for c in conteudos]
+    escolhidas: list[int] = []
+    while len(escolhidas) < quantidade and any(filas):
+        for fila in filas:
+            while fila and fila[0] in escolhidas:
+                fila.pop(0)
+            if fila and len(escolhidas) < quantidade:
+                escolhidas.append(fila.pop(0))
+    random.shuffle(escolhidas)
+    return escolhidas
+
+
 def criar_simulado(
     quantidade: int = QUANTIDADE_PADRAO,
     materia: str | None = None,
     impressoes: list[str] | None = None,
     conteudo: str | None = None,
     da_faixa: dict | None = None,
+    conteudos: list[str] | None = None,
 ) -> Simulado | None:
     """Uma rodada SO de questoes geradas, na mesma tela do simulado de sempre.
 
@@ -950,10 +971,16 @@ def criar_simulado(
     radar"), para a faixa avisar que estas ja contam. Vai numa chave propria,
     e nao em `faixa`: o `composicao.rodada_da_faixa` pega a primeira rodada
     com `faixa`, e a de geradas tomaria o lugar da que mede.
+
+    `conteudos` sao os nos da faixa todos juntos (o "Treinar geral"):
+    misturados, no lugar de um `conteudo` so.
     """
     criar_tabelas()
 
-    ids = _sortear(quantidade, materia, impressoes, conteudo)
+    if conteudos:
+        ids = _sortear_misturado(quantidade, conteudos)
+    else:
+        ids = _sortear(quantidade, materia, impressoes, conteudo)
     if not ids:
         return None
 
@@ -962,6 +989,7 @@ def criar_simulado(
             "quantidade": len(ids),
             "materia": materia,
             "conteudo": conteudo,
+            **({"conteudos": list(conteudos)} if conteudos else {}),
             # E esta marca que a tela le para mostrar o selo no topo.
             "geradas": True,
             **({"da_faixa": da_faixa} if da_faixa else {}),

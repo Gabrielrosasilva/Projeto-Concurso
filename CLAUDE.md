@@ -188,6 +188,9 @@ corrige numero ou prepara os sabados que medem** (I3). Feito o **lote 1**
 (decisoes 134 a 137): os diagnosticos abrem o 10/10, o dia que mede nao tem
 Plano B, o Resumo saiu das faixas que medem, a Conferencia nao apaga mais o
 artigo; e o 29/09 corrigido (37 para 27 questoes) e 5 fichas conferidas.
+Fora dos lotes, a seu pedido, cada faixa ganhou o **"Treinar geral no
+radar"** (decisao 139): as geradas de todos os nos dela, divididas por igual e
+embaralhadas, com a quantidade sua.
 **Falta, de voce:** conferir as outras 60 fichas e os 65 resumos (a ficha conferida
 tambem liga as faixas do tema ao Meu desempenho, decisao 81); as
 classificacoes abertas e pendentes do complementar (lista unica em

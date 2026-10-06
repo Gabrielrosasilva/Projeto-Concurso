@@ -4478,3 +4478,22 @@ Junto, sem decisao nova:
   datas de revisao (nunca para o acerto): os nos estudados ou praticados
   foram de 16 (todos de Portugues) para 31, e a fila de revisao da home de 8
   para 17 pontas, ja com Penal e Constitucional (era o P09).
+
+## O "Treinar geral no radar" da faixa (06/10/2026)
+
+139. **cada faixa de questoes ganhou um "Treinar geral no radar", ao lado
+     dos botoes de cada no** (pedido seu; os de cada no ficam como estao). O
+     geral junta TODOS os nos da faixa numa rodada so de geradas, embaralhada,
+     para eu nao saber de qual assunto vem a proxima, e a quantidade e minha
+     (o campo vem com as questoes do plano, sem passar das geradas dos nos
+     nem de 30). O sorteio (`geradas._sortear_misturado`) divide por igual
+     entre os nos, um de cada ate completar, e so depois embaralha: o
+     sorteio puro numa lista so traria quase tudo do no com mais geradas. O
+     no que acaba passa a vez aos outros, e um no dentro do outro nao repete
+     questao. A rodada guarda os nos (`conteudos`) e a faixa (`da_faixa`, como
+     a do botao do no, decisao 130): conta sozinha no aviso da faixa e no
+     treino de IA, nunca no acerto. O botao so aparece com 2 nos ou mais COM
+     gerada (`GeradasDaFaixa.geral`): com um so, seria o mesmo botao do no.
+     Aparece em todo dia do plano, como os outros. No 06/10, a faixa do Art.
+     5º, incisos XVII a XLIX, ainda nao o mostra: 3 dos 4 nos dela estao sem
+     gerada.

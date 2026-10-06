@@ -2302,3 +2302,13 @@ tema. Junto, o 29/09 foi corrigido (as 10 de Portugues anotadas eram as do
 radar: o dia foi de 37 para 27 questoes, a semana 1 de 68 para 58) e voce
 conferiu as 5 fichas dos temas ja estudados, o que pos Penal e
 Constitucional na fila de revisao (de 8 para 17 pontas).
+
+## O "Treinar geral no radar" (06/10)
+
+Pedido seu, fora dos lotes da proposta: cada faixa de questoes ganhou, abaixo
+dos botoes de cada no, um campo de quantidade e o "Treinar geral no radar"
+(decisao 139) - as geradas de todos os nos da faixa, divididas por igual e
+embaralhadas. A rodada guarda a faixa como a do botao do no, entao o aviso e o
+treino de IA a contam sem mudanca nenhuma. So os testes do item foram rodados
+(20, com o `tests/test_treinar_geral.py` novo); a suite inteira espera a sua
+ordem.

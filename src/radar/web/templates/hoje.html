@@ -123,6 +123,7 @@
     .faixa .geradas-da-faixa .passos-de-gerar{margin:var(--esp-1) 0 0;padding-left:var(--esp-5)}
     .faixa .geradas-da-faixa .treinar-no-radar{display:flex;flex-wrap:wrap;gap:var(--esp-2);
       align-items:center;margin:var(--esp-1) 0 0}
+    .faixa .geradas-da-faixa .treinar-no-radar input[type=number]{width:4.5em}
 
     /* A composicao da faixa que mede (decisao 67): de quais assuntos e
        subassuntos sao as questoes, e de onde saiu cada numero. */
@@ -1133,6 +1134,21 @@
                           <p class="sub">Não há questão gerada deste assunto ainda{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}.</p>
                         {% endif %}
                       {% endfor %}
+                      {# O geral: todos os nos da faixa misturados, sem eu saber
+                         de qual vem a proxima. So com 2 nos ou mais com gerada:
+                         com um so, seria o botao de cima. #}
+                      {% if gf.geral %}
+                        <form class="treinar-no-radar" method="post" action="/geradas/treinar">
+                          {% for no in gf.nos_com_geradas %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                          <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                          <input type="hidden" name="bloco" value="{{ b.chave }}">
+                          <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
+                          <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                          <label>Geral, tudo misturado:
+                            <input type="number" name="quantidade" min="1" max="30" value="{{ gf.geral }}" aria-label="Quantas questões no treino geral"> questões</label>
+                          <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar geral no radar</button>
+                        </form>
+                      {% endif %}
                       {% if gf.precisa_gerar %}
                         <ol class="passos-de-gerar">
                           <li>No terminal:{% for n in gf.nos if n.comando %}<br><code>{{ n.comando }}</code>{% endfor %}</li>
