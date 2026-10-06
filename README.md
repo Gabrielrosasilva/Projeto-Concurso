@@ -1345,6 +1345,20 @@ nivel da arvore, os cortes dos estados e a evolucao da home: 20 respostas
 em cada metade). Mude o numero la e toda tela muda com ele - nao ha minimo
 escrito no codigo, fora o 3 do caderno de erros, que mede outra coisa.
 
+### O link do Qconcursos, em `config/qconcursos.yml`
+
+A faixa que manda ao Qconcursos tem o botao "Abrir no Qconcursos", com o
+filtro pronto: FEPESE, sem anuladas nem desatualizadas, so os assuntos do tema
+(decisao 140). O radar nao consulta o site (os termos proibem raspagem): os
+numeros dos assuntos foram copiados por mim do proprio site, uma vez. Para
+corrigir um tema, troque os numeros no arquivo. Para achar o numero de um
+assunto: no Qconcursos, escolha so a disciplina, abra a lista de Assunto e
+role ate o fim; F12 > Elements, botao direito num assunto > Inspecionar, suba
+ate o `<ul class="q-options">` e veja o `value` de cada assunto. Quando o
+assunto do site e mais largo que o tema (a LEP e um assunto so), o `aviso` do
+tema diz na faixa o que pular. Tema fora do arquivo continua com o filtro
+escrito do plano.
+
 ### A prioridade das fichas, em `config/prioridade.yml`
 
 A regra que ordena os temas e explica "por que agora" na ficha. E regra de
@@ -1933,6 +1947,7 @@ src/radar/
 │   └── comum.py      o pouco que mais de um assunto usa
 ├── amostra.py      le config/amostra.yml: os minimos de amostra, num lugar so
 ├── prioridade.py   le config/prioridade.yml: a prioridade de cada tema
+├── qconcursos.py   le config/qconcursos.yml: o link do Qconcursos de cada tema
 ├── fichas.py       a ficha de estudo, o resumo, o "caiu" de cada tema e as
 │                   geradas da faixa (puro)
 ├── complementar.py a linha complementar e a validacao do caderno (puro)
@@ -1986,6 +2001,7 @@ config/
 ├── perfil.yml      meus dados, para a elegibilidade
 ├── taxonomia.yml   os tipos de elemento por familia de materia
 ├── amostra.yml     os minimos de amostra (padroes de cobranca)
+├── qconcursos.yml  os assuntos do Qconcursos de cada tema (o link da faixa)
 └── cronograma.yml  o plano de estudo, dia a dia (dado, editavel a mao)
 ```
 

@@ -2313,6 +2313,21 @@ treino de IA a contam sem mudanca nenhuma. So os testes do item foram rodados
 (20, com o `tests/test_treinar_geral.py` novo); a suite inteira espera a sua
 ordem.
 
+## O link do Qconcursos de cada tema (06/10)
+
+Tambem a seu pedido: o filtro escrito no plano nao existia no Qconcursos, e o
+mais proximo trazia o art. 5º inteiro. Como o radar nao pode consultar o site,
+voce copiou pelo F12 a lista de assuntos de 9 disciplinas (cada assunto com o
+numero, em `C:\qconcursos`, fora do repositorio); a primeira tentativa veio
+com 14 assuntos, porque a lista so carrega ao rolar ate o fim. Os 64 temas do
+Ciclo 1 que vao ao Qconcursos foram casados aos assuntos do site, voce aprovou,
+e 62 viraram o `config/qconcursos.yml` (as 2 de Redacao oficial ficam sem: a
+disciplina nao foi baixada). A faixa ganhou o "Abrir no Qconcursos" com o
+filtro pronto e o aviso quando o site e mais largo que o tema (decisao 140).
+De passagem: a Legislacao Especial caiu em 2019 (10 questoes: Desarmamento,
+Drogas, Maria da Penha e Tortura) e, no site, fica no Direito Penal (40). So os
+testes tocados foram rodados (85); a suite inteira espera a sua ordem.
+
 ## O lote 2: o "fiz" e o "Fiz hoje" (06/10)
 
 Voce viu "Fiz hoje: 5 questões" sem ter feito questao real, e "24" depois de

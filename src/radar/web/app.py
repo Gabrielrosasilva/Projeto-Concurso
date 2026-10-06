@@ -27,6 +27,7 @@ from radar import leis
 from radar import macetes as macetes_puros
 from radar import onde_estudar
 from radar import origem
+from radar import qconcursos
 from radar import regioes
 from radar import servico
 from radar.util import (
@@ -124,6 +125,9 @@ templates.env.globals["frase_da_ia"] = servico.metricas.frase_da_ia
 templates.env.globals["frase_das_reais"] = servico.metricas.frase_das_reais
 templates.env.globals["faltaram_no_compilado"] = servico.compilado.faltaram_na_rodada
 templates.env.globals["NOME_DO_NIVEL"] = arvore_de_conteudos.NOME_DO_NIVEL
+# O link do Qconcursos do tema (decisao 140): o template so pergunta pelo tema.
+templates.env.globals["link_do_qconcursos"] = qconcursos.do_tema
+templates.env.globals["qconcursos_da_faixa"] = qconcursos.da_faixa
 # Numero com virgula, como se escreve em portugues. A mesma funcao que monta a
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.

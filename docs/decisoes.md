@@ -4534,3 +4534,29 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Aparece em todo dia do plano, como os outros. No 06/10, a faixa do Art.
      5º, incisos XVII a XLIX, ainda nao o mostra: 3 dos 4 nos dela estao sem
      gerada.
+
+## O link do Qconcursos de cada tema (06/10/2026)
+
+140. **a faixa que manda ao Qconcursos abre o filtro pronto, com os assuntos
+     do proprio site** (pedido seu). O filtro escrito no plano ("Direito
+     Constitucional > direitos e deveres individuais e coletivos") nao existe
+     no site, e o mais proximo trazia o art. 5º inteiro, com o que eu nao tinha
+     estudado. O radar NAO consulta o Qconcursos (os termos proibem raspagem):
+     voce copiou do site, uma vez, a lista de assuntos de cada disciplina (F12
+     > Elements > `<ul class="q-options">`, cada assunto com o numero), e os
+     temas foram casados aos assuntos a partir dela - o casamento aprovado por
+     voce. Ele mora no `config/qconcursos.yml` (62 temas: o tema, a
+     disciplina, os numeros com o nome do site e, quando o assunto do site e
+     mais largo que o tema, o `aviso` do que pular); o `radar/qconcursos.py`
+     so le e monta o endereco no formato que o site gera (a banca 61, a
+     FEPESE; sem anuladas nem desatualizadas; um `subject_ids[]` por
+     assunto). O tema e reconhecido pelo titulo da faixa sem o prefixo, como a
+     ficha, entao o R+7 ganha o link do tema; so a faixa com `onde:
+     qconcursos`. A faixa troca o "Filtro:" pelo botao "Abrir no Qconcursos",
+     com os assuntos e o aviso, e o simulado do Qconcursos ganha o link de cada
+     tema; sem link, fica o filtro escrito, como era. Fica largo, e a faixa
+     avisa: a LEP (um assunto so no site, o 40.3, dentro do Direito Penal), as
+     Regras de Mandela (um so, o 5.8), a concordancia verbal e nominal (um
+     so) e a crase. Sem assunto: as 2 faixas de Redacao oficial (falta a lista
+     dessa disciplina). As listas de Administracao Publica, Processo Penal,
+     Sociologia e Legislacao Estadual ficam para o Ciclo 2.

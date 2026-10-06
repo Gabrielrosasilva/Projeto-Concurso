@@ -1,0 +1,466 @@
+# O link do Qconcursos de cada tema do cronograma (decisao 140).
+#
+# O Qconcursos nao tem API e os termos dele proibem raspagem: os numeros abaixo
+# sairam das listas de assuntos que VOCE copiou do site em 06/10/2026 (F12 >
+# Elements > <ul class="q-options">), e o radar so monta o endereco. O nome ao
+# lado do numero e o do site, para conferir; quem vale e o numero.
+#
+# Para corrigir um tema: troque os numeros e o nome (da lista do site). O tema
+# e reconhecido pelo titulo da faixa sem o prefixo, sem acento e sem caixa, como
+# a ficha. Tema que nao esta aqui continua com o filtro escrito do plano.
+#
+# `aviso`: quando o assunto do site e mais largo que o tema, a faixa diz o que
+# pular - o link traz mais do que voce estudou, e isso nao pode medir calado.
+#
+# Sem assunto no site (falta a lista da disciplina Redacao Oficial):
+#   Redação oficial 1: atributos e tratamento
+#   Redação oficial 2: o padrão ofício
+
+# FEPESE (o numero do filtro Banca do site).
+banca: 61
+
+# Os numeros das disciplinas no site, para ler os temas. A LEP fica no Direito
+# Penal do site (40.3), e nao numa disciplina propria.
+disciplinas:
+  Português: 1
+  Direito Constitucional: 3
+  Raciocínio Lógico: 4
+  Direito Penal: 9
+  Direitos Humanos: 214
+
+temas:
+  - tema: "Art. 5º, caput e incisos I a XVI"
+    disciplina: 3
+    assuntos:
+      16322: "5.1 Direito à Vida"
+      16323: "5.2 Direito à Liberdade"
+      16324: "5.3 Direito à Igualdade"
+      16325: "5.4 Direito à Privacidade"
+      16328: "5.5 Direito de Resposta e de Indenização"
+    aviso: "5.2 Direito à Liberdade traz também a liberdade de associação (incisos XVII a XXI), da faixa seguinte."
+  - tema: "Art. 5º, incisos XVII a XLIX"
+    disciplina: 3
+    assuntos:
+      16323: "5.2 Direito à Liberdade"
+      16327: "5.6 Direito de Propriedade e Função Social da Propriedade"
+      16265: "6.8 Direitos Constitucionais-Penais e Garantias Constitucionais do Processo"
+    aviso: "5.2 Direito à Liberdade traz também as liberdades dos incisos I a XVI (já estudados), e o 6.8 traz garantias do processo dos incisos L em diante."
+  - tema: "Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+    disciplina: 3
+    assuntos:
+      1418: "6.1 Remédios e Garantias Constitucionais"
+      20765: "6.2 Habeas Corpus"
+      20764: "6.3 Habeas Data"
+      20763: "6.4 Mandado de Segurança"
+      20762: "6.5 Mandado de Segurança Coletivo"
+      20761: "6.6 Mandado de Injunção"
+      20760: "6.7 Ação Popular"
+      16265: "6.8 Direitos Constitucionais-Penais e Garantias Constitucionais do Processo"
+  - tema: "Direitos sociais (arts. 6º a 11)"
+    disciplina: 3
+    assuntos:
+      436: "7 Direitos Sociais"
+  - tema: "Nacionalidade e direitos políticos (arts. 12 a 17)"
+    disciplina: 3
+    assuntos:
+      438: "8 Direitos da Nacionalidade"
+      437: "9 Direitos Políticos"
+      868: "10 Partidos Políticos"
+  - tema: "Defesa do Estado e segurança pública (arts. 136 a 144)"
+    disciplina: 3
+    assuntos:
+      53: "21.1 Estado de Defesa"
+      16305: "21.2 Estado de Sítio"
+      16306: "21.3 Forças Armadas e Segurança Pública"
+  - tema: "Aplicação da lei penal (arts. 1º a 12)"
+    disciplina: 9
+    assuntos:
+      16672: "1.5 Lei penal no tempo"
+      16673: "1.6 Lei penal no espaço"
+  - tema: "Fato típico e nexo causal (art. 13)"
+    disciplina: 9
+    assuntos:
+      16677: "3.1 Conduta: ação / omissão"
+      16680: "3.5 Resultado"
+      16770: "3.6 Crimes omissivos"
+      16681: "3.7 Nexo de causalidade"
+      16771: "3.8 Causas absolutamente independentes"
+      16772: "3.9 Causas relativamente independentes"
+  - tema: "Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+    disciplina: 9
+    assuntos:
+      2216: "3.3 Tipo Penal Doloso"
+      3170: "3.4 Tipo Penal Culposo"
+      16685: "3.11 Consumação e tentativa"
+      16686: "3.12 Desistência voluntária e arrependimento eficaz"
+      16687: "3.13 Crime impossível"
+      16688: "3.14 Arrependimento posterior"
+      16773: "3.15 Crime preterdoloso"
+      16774: "3.18 Erro do tipo essencial"
+      16775: "3.19 Erro de tipo acidental"
+      16700: "5.6 Potencial conhecimento da ilicitude – Erro de proibição"
+      16778: "5.7 Descriminantes Putativas"
+  - tema: "Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+    disciplina: 9
+    assuntos:
+      17208: "4.1 Noções Gerais Antijuridicidade"
+      16693: "4.2 Legítima defesa"
+      16694: "4.3 Estado de necessidade"
+      16695: "4.4 Estrito cumprimento de dever legal e exercício regular de direito"
+      16699: "5.5 Exigibilidade de conduta diversa"
+  - tema: "Imputabilidade e concurso de pessoas (arts. 26 a 31)"
+    disciplina: 9
+    assuntos:
+      17468: "5.2 Imputabilidade penal"
+      16776: "5.3 Inimputabilidade por doença mental"
+      16777: "5.4 Inimputabilidade pela embriaguez"
+      16701: "6.1 Noções gerais de Concursos de Pessoas"
+      16702: "6.2 Autoria e coautoria"
+      17205: "6.3 Participação"
+      17206: "6.4 Punibilidade no concurso de pessoas"
+      17207: "6.5 Cooperação dolosamente distinta"
+  - tema: "Crimes do funcionário público contra a Administração (arts. 312 a 327)"
+    disciplina: 9
+    assuntos:
+      17399: "38.1 Noções Gerais de Crimes Contra a Administração Pública"
+      17400: "38.2 Peculato"
+      17401: "38.3 Peculato mediante erro de outrem"
+      17402: "38.4 Inserção de dados falsos em sistema de informações"
+      17403: "38.5 Modificação ou alteração não autorizada de sistemas de informações"
+      17404: "38.6 Extravio, sonegação ou inutilização de livro ou documento"
+      17405: "38.7 Emprego irregular de verbas ou rendas públicas"
+      17406: "38.8 Concussão e Excesso de Exação"
+      17408: "38.9 Corrupção passiva"
+      17409: "38.10 Facilitação de contrabando ou descaminho"
+      17410: "38.11 Prevaricação"
+      17411: "38.12 Condescendência criminosa"
+      17412: "38.13 Advocacia administrativa"
+      17413: "38.14 Violência arbitrária"
+      17414: "38.15 Abandono de função"
+      17415: "38.16 Exercício funcional ilegalmente antecipado ou prolongado"
+      17416: "38.17 Violação de sigilo funcional"
+      17417: "38.18 Violação de sigilo de proposta de concorrência"
+  - tema: "Objeto, classificação e exame criminológico (arts. 1º a 9º-A)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 1º a 9º-A."
+  - tema: "Assistência ao preso e ao egresso (arts. 10 a 27)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 10 a 27."
+  - tema: "Trabalho do preso (arts. 28 a 37)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 28 a 37."
+  - tema: "Deveres e direitos do preso (arts. 38 a 43)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 38 a 43."
+  - tema: "Disciplina, faltas graves e RDD (arts. 44 a 52)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+      17227: "10.14 Regime Disciplinar Diferenciado"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 44 a 52."
+  - tema: "Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 53 a 60."
+  - tema: "Órgãos da execução penal (arts. 61 a 81-B)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 61 a 81-B."
+  - tema: "Estabelecimentos penais (arts. 82 a 104)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 82 a 104."
+  - tema: "Execução da pena, regimes e progressão (arts. 105 a 119)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+      17216: "10.2 Regimes penitenciários"
+      17223: "10.10 Progressão de regime penitenciário"
+      17224: "10.11 Regressão de regime penitenciário"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 105 a 119."
+  - tema: "Permissão de saída, saída temporária e remição (arts. 120 a 130)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+      17226: "10.13 Remição de pena"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 120 a 130."
+  - tema: "Livramento condicional, monitoração e penas alternativas (arts. 131 a 170)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+      17246: "14 Livramento condicional"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 131 a 170."
+  - tema: "Medida de segurança, incidentes e disposições finais (arts. 171 a 204)"
+    disciplina: 9
+    assuntos:
+      17467: "40.3 Lei de Execução Penal – Lei nº 7.210 de 1984"
+      17239: "13 Medida de segurança"
+    aviso: "O Qconcursos não divide a LEP: o link traz a lei inteira. Faça só as dos arts. 171 a 204."
+  - tema: "Teoria geral"
+    disciplina: 214
+    assuntos:
+      18761: "1.1 Concepções doutrinárias sobre a natureza dos direitos humanos"
+      18762: "1.2 Direitos humanos, direito humanitário e direito dos refugiados"
+      18764: "1.4 Características dos direitos humanos"
+  - tema: "Afirmação histórica e dimensões (gerações)"
+    disciplina: 214
+    assuntos:
+      18763: "1.3 Evolução histórica dos direitos humanos e Declaração dos Direitos do Homem e do Cidadão"
+      18765: "1.5 Categorias e gerações dos direitos humanos"
+  - tema: "Sistemas de proteção e responsabilidade do Estado"
+    disciplina: 214
+    assuntos:
+      18767: "2.1 Assembleia Geral das Nações Unidas"
+      18768: "2.2 Conselho de Direitos Humanos"
+      18769: "2.3 Comitê dos Direitos Humanos (direitos civis e políticos)"
+      18770: "2.4 Comitê dos Direitos Econômicos, Sociais e Culturais"
+      18771: "2.5 Corte Internacional de Justiça"
+      18793: "6.1 Comissão Interamericana de Direitos Humanos"
+      18794: "6.2 Corte Interamericana de Direitos Humanos"
+  - tema: "Na Constituição e o status dos tratados"
+    disciplina: 214
+    assuntos:
+      18821: "9.1 Incorporação de tratados internacionais de direitos humanos no direito brasileiro (EC n.º 45)"
+      19051: "9.2 Incidente de Deslocamento de Competência - Federalização dos Crimes Graves contra os Direitos Humanos"
+  - tema: "Regras de Mandela - parte 1 (regras 1 a 35)"
+    disciplina: 214
+    assuntos:
+      18781: "5.8 Regras Mínimas para o Tratamento de Presos - Regras de Mandela (1955)"
+    aviso: "O Qconcursos não divide as Regras de Mandela: faça só as das regras 1 a 35."
+  - tema: "Regras de Mandela - parte 2 (regras 36 em diante)"
+    disciplina: 214
+    assuntos:
+      18781: "5.8 Regras Mínimas para o Tratamento de Presos - Regras de Mandela (1955)"
+    aviso: "O Qconcursos não divide as Regras de Mandela: faça só as das regras 36 em diante."
+  - tema: "princípios de contagem"
+    disciplina: 4
+    assuntos:
+      15455: "13 Análise Combinatória em Raciocínio Lógico"
+  - tema: "probabilidade"
+    disciplina: 4
+    assuntos:
+      16021: "14 Probabilidade"
+  - tema: "conjuntos e diagramas lógicos"
+    disciplina: 4
+    assuntos:
+      15453: "11 Diagramas de Venn (Conjuntos)"
+  - tema: "argumentação e quantificadores"
+    disciplina: 4
+    assuntos:
+      15450: "3 Lógica de Argumentação - Diagramas e Operadores Lógicos"
+      27862: "6 Proposições Categóricas"
+      15454: "12 Quantificadores"
+  - tema: "Substantivo e adjetivo (flexão nominal)"
+    disciplina: 1
+    assuntos:
+      14630: "2.5 Substantivos"
+      14631: "2.6 Adjetivos"
+  - tema: "Artigo, numeral e pronome (classificação)"
+    disciplina: 1
+    assuntos:
+      14636: "2.3 Artigos"
+      14628: "2.4 Numerais"
+      16158: "4.1 Pronomes pessoais retos"
+      16171: "4.2 Pronomes pessoais oblíquos"
+      20181: "4.3 Pronome de tratamento"
+      16159: "4.4 Pronomes possessivos"
+      16160: "4.5 Pronomes demonstrativos"
+      16161: "4.6 Pronomes relativos"
+      16187: "4.7 Pronomes Indefinidos"
+      16172: "4.8 Pronomes Interrogativos"
+  - tema: "Verbo 1: estrutura e flexão verbal"
+    disciplina: 1
+    assuntos:
+      16175: "3.1 Estrutura do verbo (radical, vogal temática, desinências)"
+      16176: "3.2 Flexão verbal de tempo (presente, pretérito, futuro)"
+      16177: "3.3 Flexão verbal de modo (indicativo, subjuntivo, imperativo)"
+      16178: "3.4 Flexão verbal de número (singular, plural)"
+      16179: "3.5 Flexão verbal de pessoa (1ª, 2ª, 3ª pessoa)"
+      16184: "3.12 Classificação dos verbos (Regulares, Irregulares, Defectivos, Abundantes, Unipessoais, Pronominais)"
+  - tema: "Interpretação de texto (cronometrada)"
+    disciplina: 1
+    assuntos:
+      19271: "15.1 Noções Gerais de Compreensão e Interpretação de Texto"
+  - tema: "Verbo 2: emprego dos tempos e modos"
+    disciplina: 1
+    assuntos:
+      16176: "3.2 Flexão verbal de tempo (presente, pretérito, futuro)"
+      16177: "3.3 Flexão verbal de modo (indicativo, subjuntivo, imperativo)"
+      16181: "3.7 Formas nominais do verbo (particípio, gerúndio, infinitivo)"
+      16182: "3.8 Formação do imperativo"
+      16185: "3.10 Emprego do infinitivo (Infinitivo impessoal, Infinitivo pessoal)"
+  - tema: "Vozes do verbo"
+    disciplina: 1
+    assuntos:
+      16180: "3.6 Flexão de voz (ativa, passiva, reflexiva)"
+  - tema: "Concordância verbal 1: regra geral"
+    disciplina: 1
+    assuntos:
+      16012: "5.7 Concordância verbal, Concordância nominal"
+    aviso: "O Qconcursos junta concordância verbal e nominal num assunto só: pule as de nominal."
+  - tema: "Concordância verbal 2: casos especiais"
+    disciplina: 1
+    assuntos:
+      16012: "5.7 Concordância verbal, Concordância nominal"
+    aviso: "O Qconcursos junta concordância verbal e nominal num assunto só: pule as de nominal."
+  - tema: "Interpretação 2: tipos de texto"
+    disciplina: 1
+    assuntos:
+      14656: "15.2 Tipologia Textual"
+      20185: "15.4 Gêneros Textuais"
+  - tema: "Concordância nominal"
+    disciplina: 1
+    assuntos:
+      16012: "5.7 Concordância verbal, Concordância nominal"
+    aviso: "O Qconcursos junta concordância verbal e nominal num assunto só: pule as de verbal."
+  - tema: "Crase 1: regra geral e casos obrigatórios"
+    disciplina: 1
+    assuntos:
+      15727: "13 Crase"
+      30912: "13.1 Crase"
+    aviso: "O Qconcursos não separa a crase em regra geral e casos especiais."
+  - tema: "Crase 2: proibida, facultativa e casos especiais"
+    disciplina: 1
+    assuntos:
+      15727: "13 Crase"
+      30912: "13.1 Crase"
+    aviso: "O Qconcursos não separa a crase em regra geral e casos especiais."
+  - tema: "Pontuação 1: vírgula entre termos"
+    disciplina: 1
+    assuntos:
+      14648: "6.1 Uso da Vírgula"
+    aviso: "O Qconcursos junta a vírgula entre termos e entre orações: pule as entre orações."
+  - tema: "Interpretação 3: coesão e referência"
+    disciplina: 1
+    assuntos:
+      14988: "15.12 Coesão e coerência"
+  - tema: "Pontuação 2: vírgula entre orações e outros sinais"
+    disciplina: 1
+    assuntos:
+      14648: "6.1 Uso da Vírgula"
+      14649: "6.2 Uso do ponto e vírgula"
+      17753: "6.3 Uso do ponto, do ponto de exclamação e do ponto de interrogação"
+      14650: "6.4 Uso dos dois-pontos"
+      14651: "6.5 Uso das reticências"
+      14652: "6.6 Uso das aspas"
+      14653: "6.7 Parênteses"
+      14654: "6.8 Travessão"
+      15724: "6.9 Orações Intercaladas"
+  - tema: "Pronomes 1: emprego"
+    disciplina: 1
+    assuntos:
+      16158: "4.1 Pronomes pessoais retos"
+      16171: "4.2 Pronomes pessoais oblíquos"
+      16160: "4.5 Pronomes demonstrativos"
+      16161: "4.6 Pronomes relativos"
+  - tema: "Pronomes 2: colocação pronominal"
+    disciplina: 1
+    assuntos:
+      16173: "4.9 Colocação Pronominal"
+  - tema: "Pronomes 3: formas de tratamento"
+    disciplina: 1
+    assuntos:
+      20181: "4.3 Pronome de tratamento"
+  - tema: "Interpretação 4: inferência e sentido das palavras"
+    disciplina: 1
+    assuntos:
+      19271: "15.1 Noções Gerais de Compreensão e Interpretação de Texto"
+      14657: "15.5 Significação Contextual de Palavras e Expressões. Sinônimos e Antônimos."
+      16331: "15.7 Denotação e Conotação"
+  - tema: "Termos integrantes 1: objeto direto e indireto"
+    disciplina: 1
+    assuntos:
+      16009: "5.3 Termos integrantes da oração: Objeto direto, Objeto indireto, Complemento nominal, Agente da Passiva"
+    aviso: "O Qconcursos junta objeto direto e indireto com complemento nominal e agente da passiva: pule estes dois."
+  - tema: "Termos integrantes 2: complemento nominal e agente da passiva"
+    disciplina: 1
+    assuntos:
+      16009: "5.3 Termos integrantes da oração: Objeto direto, Objeto indireto, Complemento nominal, Agente da Passiva"
+      16010: "5.5 Vocativo e Termos Acessórios da Oração: Adjunto Adnominal, Diferença entre Adjunto Adnominal e Complemento Nominal, Adjunto Adverbial e Aposto"
+    aviso: "O Qconcursos junta complemento nominal e agente da passiva com os objetos (já estudados)."
+  - tema: "Ortografia oficial"
+    disciplina: 1
+    assuntos:
+      14622: "1.1 Grafia e Emprego de Iniciais Maiúsculas"
+      14624: "1.2 Parônimos e Homônimos"
+      15648: "1.3 Emprego do hífen"
+  - tema: "Acentuação gráfica"
+    disciplina: 1
+    assuntos:
+      25201: "1.4 Acentuação Gráfica: Proparoxítonas, Paroxítonas, Oxítonas e Hiatos"
+      25202: "1.5 Acentuação Gráfica: acento diferencial"
+  - tema: "Interpretação 5: tipos de discurso"
+    disciplina: 1
+    assuntos:
+      27231: "15.3 Tipos de Discurso: Direto, Indireto e Indireto Livre"
+  - tema: "Revisão ativa 1: concordância, crase e pontuação"
+    disciplina: 1
+    assuntos:
+      16012: "5.7 Concordância verbal, Concordância nominal"
+      15727: "13 Crase"
+      30912: "13.1 Crase"
+      14648: "6.1 Uso da Vírgula"
+      14649: "6.2 Uso do ponto e vírgula"
+      17753: "6.3 Uso do ponto, do ponto de exclamação e do ponto de interrogação"
+      14650: "6.4 Uso dos dois-pontos"
+      14651: "6.5 Uso das reticências"
+      14652: "6.6 Uso das aspas"
+      14653: "6.7 Parênteses"
+      14654: "6.8 Travessão"
+      15724: "6.9 Orações Intercaladas"
+  - tema: "Revisão ativa 2: pronomes, verbos e termos integrantes"
+    disciplina: 1
+    assuntos:
+      16158: "4.1 Pronomes pessoais retos"
+      16171: "4.2 Pronomes pessoais oblíquos"
+      20181: "4.3 Pronome de tratamento"
+      16159: "4.4 Pronomes possessivos"
+      16160: "4.5 Pronomes demonstrativos"
+      16161: "4.6 Pronomes relativos"
+      16187: "4.7 Pronomes Indefinidos"
+      16172: "4.8 Pronomes Interrogativos"
+      16173: "4.9 Colocação Pronominal"
+      16175: "3.1 Estrutura do verbo (radical, vogal temática, desinências)"
+      16176: "3.2 Flexão verbal de tempo (presente, pretérito, futuro)"
+      16177: "3.3 Flexão verbal de modo (indicativo, subjuntivo, imperativo)"
+      16178: "3.4 Flexão verbal de número (singular, plural)"
+      16179: "3.5 Flexão verbal de pessoa (1ª, 2ª, 3ª pessoa)"
+      16180: "3.6 Flexão de voz (ativa, passiva, reflexiva)"
+      16181: "3.7 Formas nominais do verbo (particípio, gerúndio, infinitivo)"
+      16182: "3.8 Formação do imperativo"
+      16183: "3.9 Verbos auxiliares"
+      16185: "3.10 Emprego do infinitivo (Infinitivo impessoal, Infinitivo pessoal)"
+      16174: "3.11 Locução Verbal"
+      16184: "3.12 Classificação dos verbos (Regulares, Irregulares, Defectivos, Abundantes, Unipessoais, Pronominais)"
+      16009: "5.3 Termos integrantes da oração: Objeto direto, Objeto indireto, Complemento nominal, Agente da Passiva"
+      16010: "5.5 Vocativo e Termos Acessórios da Oração: Adjunto Adnominal, Diferença entre Adjunto Adnominal e Complemento Nominal, Adjunto Adverbial e Aposto"
+  - tema: "Interpretação 6: bateria cronometrada"
+    disciplina: 1
+    assuntos:
+      19271: "15.1 Noções Gerais de Compreensão e Interpretação de Texto"
+      14656: "15.2 Tipologia Textual"
+      27231: "15.3 Tipos de Discurso: Direto, Indireto e Indireto Livre"
+      20185: "15.4 Gêneros Textuais"
+      14657: "15.5 Significação Contextual de Palavras e Expressões. Sinônimos e Antônimos."
+      16331: "15.7 Denotação e Conotação"
+      14988: "15.12 Coesão e coerência"
+  - tema: "Revisão ativa 3: ortografia, acentuação e redação oficial"
+    disciplina: 1
+    assuntos:
+      14622: "1.1 Grafia e Emprego de Iniciais Maiúsculas"
+      14624: "1.2 Parônimos e Homônimos"
+      15648: "1.3 Emprego do hífen"
+      25201: "1.4 Acentuação Gráfica: Proparoxítonas, Paroxítonas, Oxítonas e Hiatos"
+      25202: "1.5 Acentuação Gráfica: acento diferencial"
+    aviso: "A redação oficial não está no Português do Qconcursos: o link traz só ortografia e acentuação."

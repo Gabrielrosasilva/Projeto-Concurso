@@ -190,7 +190,10 @@ Plano B, o Resumo saiu das faixas que medem, a Conferencia nao apaga mais o
 artigo; e o 29/09 corrigido (37 para 27 questoes) e 5 fichas conferidas.
 Fora dos lotes, a seu pedido, cada faixa ganhou o **"Treinar geral no
 radar"** (decisao 139): as geradas de todos os nos dela, divididas por igual e
-embaralhadas, com a quantidade sua. E o **lote 2** (decisao 138): o "Fiz
+embaralhadas, com a quantidade sua; e o **"Abrir no Qconcursos"** (decisao
+140): a faixa abre o filtro pronto, com os assuntos do proprio site
+(`config/qconcursos.yml`, tirado das listas que voce copiou; o radar nao
+consulta o site), e avisa quando o site e mais largo que o tema. E o **lote 2** (decisao 138): o "Fiz
 hoje" virou tres linhas - as questoes reais (Qconcursos e provas), o treino
 de IA e o total -, o "fiz no Qconcursos" da faixa vem sempre vazio, a faixa
 feita no radar fecha com o ✓ vazio guardando so o tempo, e a faixa e a ficha
@@ -213,7 +216,7 @@ depois de 07/11, o redesenho das telas e a nuvem
 das 23h30 voltou em 03/10.
 **Em aberto:** a falta do estoque de geradas de 13/10 em diante (sob demanda),
 as 11 explicacoes do complementar e as 2 do alvo que ficaram de fora, a
-alternativa da 2019-q6 com o Texto 2 colado, o Portugues sem filtro do Qconcursos, o texto local das leis (o
+alternativa da 2019-q6 com o Texto 2 colado, a Redacao oficial sem link do Qconcursos, o texto local das leis (o
 verificador ainda nao confere se o artigo citado existe) e o resto dos
 achados da varredura de 03/10 (pendencia F). Ordem e detalhe em
 [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);

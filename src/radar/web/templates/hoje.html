@@ -456,6 +456,14 @@
 
 {%- macro hm(h) -%}{{ h.strftime('%H:%M') }}{%- endmacro -%}
 
+{# O filtro de um tema do simulado do Qconcursos: o link do tema (decisao
+   140) ou, sem ele, o filtro escrito do plano. #}
+{%- macro filtro_do_tema(a) -%}
+{%- set la = link_do_qconcursos(a.nome) -%}
+{%- if la %}<br><a href="{{ la.url }}" target="_blank" rel="noopener">abrir no Qconcursos</a> <span class="sub">({{ la.nomes | join('; ') }})</span>
+{%- elif a.filtro %}<br><span class="sub">Filtro: {{ a.filtro }}</span>{% endif -%}
+{%- endmacro -%}
+
 {# Um numero da comparacao do fechamento: "X de Y · Z%", e o rotulo quando a
    amostra nao sustenta a porcentagem (config/amostra.yml). #}
 {%- macro medida_do_sabado(m, vazio) -%}
@@ -972,7 +980,15 @@
                   {% endif %}
                 {% endif %}
 
-                {% if f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
+                {# O link do Qconcursos do tema (decisao 140): o filtro pronto,
+                   com os assuntos do proprio site. Sem link, o filtro escrito
+                   do plano, como era. #}
+                {% set lq = qconcursos_da_faixa(f) %}
+                {% if lq %}
+                  <p class="links"><a class="botao-anotar" href="{{ lq.url }}" target="_blank" rel="noopener"><span aria-hidden="true">🔎</span> Abrir no Qconcursos</a></p>
+                  <p class="filtro">FEPESE, sem anuladas nem desatualizadas · {{ lq.nomes | join('; ') }}</p>
+                  {% if lq.aviso %}<p class="regra">{{ lq.aviso }}</p>{% endif %}
+                {% elif f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
                 {% if f.link %}<p class="links"><a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a></p>{% endif %}
 
                 {# A ficha de estudo do tema (Etapa 6B): o que ler, como pesquisar,
@@ -1008,11 +1024,11 @@
                       <ul>
                         {% for a in m.com_amostra if a.pedidas %}
                           <li><b>{{ a.pedidas }}</b> · {{ a.nome }} <span class="sub">(estudado em {{ a.estudado_em | dia_mes }})</span> — provas do cargo: {{ a.alvo }}{% if a.complementar %}; complementar: {{ a.complementar }}, com peso {{ c.peso_do_complementar | numero(2) }} na divisão{% endif %}
-                            {% if a.filtro %}<br><span class="sub">Filtro: {{ a.filtro }}</span>{% endif %}</li>
+                            {{ filtro_do_tema(a) }}</li>
                         {% endfor %}
                         {% for a in m.sem_amostra if a.pedidas %}
                           <li><b>{{ a.pedidas }}</b> · {{ a.nome }} <span class="sub">(estudado em {{ a.estudado_em | dia_mes }}; provas do cargo: {{ a.alvo }})</span>
-                            {% if a.filtro %}<br><span class="sub">Filtro: {{ a.filtro }}</span>{% endif %}</li>
+                            {{ filtro_do_tema(a) }}</li>
                         {% endfor %}
                       </ul>
                       {% if m.sem_amostra %}<p class="sub">Temas sem amostra nas provas do cargo: <span class="nao-sei">{{ FRASE_SEM_EVIDENCIA }}</span> Por isso, partes iguais entre eles.</p>{% endif %}
@@ -1021,7 +1037,7 @@
                     {% endfor %}
                     {% if c.fora %}<p class="sub">Fora da divisão, sem tema estudado antes deste dia: {{ c.fora | join('; ') }}.</p>{% endif %}
                     {% if not c.materias and not c.fora %}<p class="aviso-essencial">⚠️ Sem o quadro do edital lido, não há peso para dividir as questões entre as matérias.</p>{% endif %}
-                    <p class="regra">No Qconcursos: caderno novo, banca FEPESE, sem consulta, um filtro por tema, na quantidade acima. Tema sem filtro no plano: procure pelo nome do tema.</p>
+                    <p class="regra">No Qconcursos: caderno novo, banca FEPESE, sem consulta, um filtro por tema, na quantidade acima. Tema com link: o filtro já vem pronto; sem link nem filtro no plano, procure pelo nome do tema.</p>
                   </div>
                 {% elif medida %}
                   {% set c = medida.composicao %}
@@ -1111,7 +1127,7 @@
                     <p>Você estudou: <b>{{ gf.tema }}</b>; na árvore:
                       {% if gf.sem_no %}<b>sem nó na árvore</b>{% else %}{% for n in gf.nos %}<b>{{ n.no }}</b>{% if not loop.last %}; {% endif %}{% endfor %}{% endif %}</p>
                     <p><b>1º No Qconcursos</b> (são as que medem):
-                      {% if gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
+                      {% if lq %}pelo botão “Abrir no Qconcursos” acima{% elif gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
                     <p><b>2º Se quiser mais, no radar</b> {{ selo('ia', curto=True) }} (só treinam; o acerto é um segundo número, nunca somado ao da faixa).</p>
                     {# O sinal de que eu treino o tema (decisao 138): toda
                        resposta a gerada dos nos dele, de qualquer dia. A conta

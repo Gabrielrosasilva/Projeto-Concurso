@@ -437,6 +437,7 @@ def test_o_sabado_10_10_mostra_a_composicao_do_qconcursos_sem_botao(acervo, monk
     bloco = pagina[inicio:pagina.index("</div>", inicio)]
     assert "Só questões: não há o que estudar nesta faixa." in bloco
     assert "30 questões divididas entre as matérias pelo peso do edital" in bloco
-    assert "Filtro: Direito Penal &gt; fato típico" in bloco
+    # Cada tema com o link do Qconcursos (decisao 140), no lugar do filtro escrito.
+    assert "abrir no Qconcursos" in bloco and "3.7 Nexo de causalidade" in bloco
     assert FRASE_SEM_EVIDENCIA in bloco
     assert "Criar a rodada" not in bloco

@@ -385,6 +385,15 @@ número ou prepara 10/10, 17/10 e 07/11.
 - ⚪ **A chave `ae5ac356...` (2013 q2 do complementar)** perdeu o artigo e o
   item do edital na conferência de 05/10 (decisão 137); o valor antigo está
   no commit `1bc222e`. Restaurar ou deixar.
+- 🟡 **O link do Qconcursos (decisão 140).** (1) Abrir um link com vários
+  assuntos (o da faixa do Art. 5º, XVII a XLIX) e ver se os 3 aparecem no
+  filtro do site: nenhum teste confere isso, só o de um assunto. (2) A lista da
+  disciplina **Redação Oficial**, para as 2 faixas que ficaram sem link. (3)
+  Para o Ciclo 2, refazer duas listas em `C:\qconcursos`: a do Direito Penal
+  terminou em "40.13 Lei de Tóxicos", sem a Maria da Penha (talvez não rolou
+  até o fim), e a da Legislação Estadual veio com buracos (24.1, 24.4,
+  24.6...) e sem a LC 529/2011, que teve 7 questões em 2019 - a busca rápida
+  devia estar preenchida.
 
 ### Depois de 07/11 (I3)
 

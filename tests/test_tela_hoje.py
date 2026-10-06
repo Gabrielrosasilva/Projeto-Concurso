@@ -46,7 +46,8 @@ def test_o_detalhe_da_teoria_fica_aberto_e_o_das_questoes_fechado(cliente):
     texto = cliente.get("/hoje?data=2026-09-28").text
     assert "Princípios da legalidade e da anterioridade" in texto
     assert "<details><summary>ver detalhe</summary>" in texto
-    assert "Filtro: Direito Penal" in texto
+    # O filtro do Qconcursos vem pronto, com os assuntos do site (decisao 140).
+    assert "Abrir no Qconcursos" in texto and "1.5 Lei penal no tempo" in texto
     assert 'target="_blank"' in texto and "Ler no Planalto" in texto
 
 
