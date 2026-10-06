@@ -168,8 +168,11 @@ from radar.servico.avisos import (      # noqa: F401 - a fachada
     _e_novidade,
     _nao_avisados,
     avisar,
+    avisar_acompanhamentos,
     avisar_favoritos,
 )
+# A aba Concursos > Acompanhando: um cartao por carreira (decisao 141).
+from radar.servico import acompanhamentos  # noqa: F401 - usado pela web e CLI
 from radar.servico.coleta import (      # noqa: F401 - a fachada
     CAMPOS_CALCULADOS,
     _anel_da_lotacao,

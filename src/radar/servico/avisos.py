@@ -207,3 +207,32 @@ def avisar_favoritos(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
     )
 
     return ResultadoAviso(enviados=enviados, pendentes=sobraram)
+
+
+def avisar_acompanhamentos(limite: int = LIMITE_DE_AVISOS) -> ResultadoAviso:
+    """Manda os eventos CRITICOS das carreiras da aba Acompanhando (decisao 141).
+
+    Critico e o que o pedido chamou assim: banca contratada, edital,
+    inscricoes abertas, prova marcada e retificacao. O resto - noticia, item
+    novo, inscricao encerrando - fica na tela, sem tocar o celular. O teto de
+    seguranca e o mesmo dos outros avisos.
+    """
+    from radar.servico import acompanhamentos as cartoes
+
+    criar_tabelas()
+    if not config.telegram_configurado():
+        return ResultadoAviso(configurado=False)
+
+    pendentes = cartoes.eventos_a_avisar()
+    if not pendentes:
+        return ResultadoAviso()
+
+    escolhidos = pendentes[:limite]
+    saiu = mensagens.enviar_varios([
+        mensagens.formatar_evento(evento, concurso, carreira)
+        for evento, concurso, carreira in escolhidos
+    ])
+    meus_favoritos.marcar_avisados(
+        [evento.id for (evento, _, _), ok in zip(escolhidos, saiu) if ok]
+    )
+    return ResultadoAviso(enviados=sum(saiu), pendentes=len(pendentes) - len(escolhidos))

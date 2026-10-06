@@ -207,6 +207,14 @@ associados e os itens da lista de leis; os pontos da pendencia H (gabaritos a
 olhar, os 9 nos novos ao conferir as fichas); e o **Ciclo 2**, depois do simulado de 07/11 e antes de
 09/11, ja com as fichas, os resumos e as explicacoes dos temas novos
 (decisao 123).
+**A aba Acompanhando por carreira (06/10, decisao 141):** um cartao por
+carreira do `config/acompanhamentos.yml` (Policia Penal SC, Guardas de
+Florianopolis e BC, Policia Civil, PM e Bombeiros de SC; a PM entrou no
+`alvo.yml`), com situacao, marcos, 🔔 so de fato, "visto", o botao
+"Verificar atualizacoes" (a coleta agora, em thread) e a pesquisa do Claude
+Code (`radar acompanhar --pedido/--importar`, 🟣 por conferir, em
+`data/acompanhamentos.json`, nunca no banco); o Telegram so no critico. O que
+falta: pendencia J.
 **Proximo:** os lotes 3 e 4 da proposta de melhorias (pendencia I: o R+7
 com Portugues dividido, a composicao que nao repete o diagnostico e a regra
 do anotado), um por conversa, ate 07/11;

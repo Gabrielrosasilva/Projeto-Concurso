@@ -1441,6 +1441,15 @@ def avisar(
             return
         console.print(f"[green]Favoritos:[/] {mudancas}")
 
+    # As carreiras da aba Acompanhando (decisao 141): so o critico - banca,
+    # edital, inscricao aberta, prova, retificacao. Depois do favorito, que
+    # marca o que ja saiu: o mesmo evento nao vai duas vezes.
+    carreiras = servico.avisar_acompanhamentos(limite=limite)
+    if not carreiras.configurado:
+        _falta_configurar_o_telegram()
+        return
+    console.print(f"[green]Carreiras acompanhadas:[/] {carreiras}")
+
     resultado = servico.avisar(limite=limite)
 
     if not resultado.configurado:
@@ -1562,6 +1571,125 @@ CORES_DO_EVENTO = {
     "edital_retificado": "bold red",
     "prova_marcada": "bold magenta",
 }
+
+
+@app.command()
+def acompanhar(
+    verificar: bool = typer.Option(
+        False, "--verificar",
+        help="Roda a coleta agora, como o botao da tela (sem Telegram)",
+    ),
+    pedido: bool = typer.Option(
+        False, "--pedido",
+        help="Escreve data/pedido_ia.json: a pesquisa para o Claude Code do VS Code",
+    ),
+    importar: Path = typer.Option(
+        None, "--importar",
+        help="Le a resposta da pesquisa (data/resposta_ia.json) e grava o que presta",
+    ),
+    visto: str = typer.Option(
+        None, "--visto", help="Zera o sino deste cartao (o nome exato do YAML)",
+    ),
+) -> None:
+    """As carreiras da aba Concursos > Acompanhando, um cartao cada.
+
+    Sem opcao, mostra os cartoes: a situacao, os marcos (banca, edital,
+    inscricoes, prova) e as novidades que eu ainda nao vi. A lista de
+    carreiras mora em config/acompanhamentos.yml (decisao 141).
+    """
+    acompanhamentos = servico.acompanhamentos
+
+    if visto:
+        if not acompanhamentos.marcar_visto(visto):
+            console.print(f"[red]Não há carreira {visto!r} em config/acompanhamentos.yml.[/]")
+            raise typer.Exit(code=1)
+        console.print(f"[green]{visto}: marcado como visto.[/]")
+        return
+
+    if importar:
+        if not importar.exists():
+            console.print(f"[red]Não achei {importar}.[/]")
+            raise typer.Exit(code=1)
+        try:
+            resultado = servico.manual.importar(importar)
+        except ValueError as erro:
+            console.print(f"[red]Nada importado:[/] {erro}")
+            raise typer.Exit(code=1) from erro
+        if resultado["tipo"] != "novidades":
+            console.print(
+                f"[yellow]Esta resposta era de um pedido de {resultado['tipo']}, e foi "
+                f"importada como tal.[/]"
+            )
+            return
+        console.print(f"[green]{resultado['gravadas']} novidade(s) gravada(s)[/] "
+                      f"em data/acompanhamentos.json, por conferir.")
+        console.print(f"[dim]Procedência: {resultado['modelo']}[/]")
+        if resultado["rumores"]:
+            console.print(f"[dim]{resultado['rumores']} delas é(são) previsão ou rumor: "
+                          "ficam no histórico como não confirmado.[/]")
+        if resultado["repetidas"]:
+            console.print(f"[dim]{resultado['repetidas']} já conhecida(s), ignorada(s).[/]")
+        if resultado["recusas"]:
+            console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
+            for motivo in resultado["recusas"]:
+                console.print(f"  - {motivo}")
+        console.print("[dim]Confira cada uma em radar web, Concursos > Acompanhando.[/]")
+        return
+
+    if pedido:
+        lote = acompanhamentos.pedido_de_pesquisa()
+        destino = acompanhamentos.salvar_pedido(lote)
+        console.print(f"[green]{len(lote['pedidos'])} carreira(s) no pedido[/] -> {destino}")
+        console.print(
+            "Agora, no Claude Code do VS Code: [bold]Leia data/pedido_ia.json e siga o "
+            "como_responder[/]. Depois: [bold]radar acompanhar --importar "
+            "data/resposta_ia.json[/]"
+        )
+        console.print(
+            "[dim]Um pedido novo substitui o anterior: faça os 3 passos antes de "
+            "pedir outra coisa.[/]"
+        )
+        return
+
+    if verificar:
+        espera = acompanhamentos.minutos_para_liberar()
+        if espera:
+            console.print(f"[yellow]A última verificação foi há pouco: espere {espera} "
+                          f"minuto(s) (config/acompanhamentos.yml).[/]")
+            raise typer.Exit(code=1)
+        with console.status("Verificando as fontes..."):
+            situacao = acompanhamentos.iniciar_verificacao(em_segundo_plano=False)
+        if situacao != "iniciada":
+            console.print(f"[yellow]Não rodou: {situacao}.[/]")
+            raise typer.Exit(code=1)
+        ultima = acompanhamentos.verificacao()
+        for linha in ultima.get("resumo") or []:
+            console.print(f"   {linha}")
+        if ultima.get("erro"):
+            console.print(f"[red]Falhou: {ultima['erro']}[/]")
+        console.print()
+
+    for cartao in acompanhamentos.cartoes():
+        sino = f"  [bold cyan]🔔 {len(cartao.novidades)}[/]" if cartao.novidades else ""
+        console.print(f"[bold]{cartao.nome}[/]{sino}")
+        situacao = cartao.situacao
+        if cartao.referencia:
+            situacao += (f" (segundo {SELOS[cartao.referencia.selo].emoji} "
+                         f"{formatar_data(cartao.referencia.data)})")
+        console.print(f"   {situacao}")
+        console.print("   " + " · ".join(
+            f"{m.nome}: {m.valor}" + (f" {SELOS[m.selo].emoji}" if m.selo else "")
+            for m in cartao.marcos
+        ))
+        for linha in cartao.novidades[:3]:
+            estado = f" [{linha.estado}]" if linha.estado else ""
+            console.print(f"   [cyan]{formatar_data(linha.data)}[/] "
+                          f"{SELOS[linha.selo].emoji} {linha.texto}{estado}")
+            if linha.link:
+                console.print(f"     [dim]{linha.link}[/]")
+        if len(cartao.novidades) > 3:
+            console.print(f"   [dim]e mais {len(cartao.novidades) - 3} na tela[/]")
+        console.print()
 
 
 @app.command()
@@ -2260,7 +2388,7 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/estado_do_dia.json", "data/caderno_erros.json",
                      "data/estudo_extra.json", "data/notas_semana.json",
                      "data/conteudos.json", "data/classificacoes.json",
-                     "data/fichas.json")
+                     "data/fichas.json", "data/acompanhamentos.json")
 
 
 @app.command()

@@ -367,6 +367,27 @@ def _casar_secundario(texto: str, lugar: str) -> tuple[dict, str, str | None] | 
     return None
 
 
+def termos_do_bloco(nome: str) -> list[str]:
+    """Os `termos` do bloco secundario com este nome, ou [] se nao ha bloco.
+
+    Existe para o config/acompanhamentos.yml apontar um bloco daqui pelo
+    nome, em vez de repetir a lista de termos: a Policia Civil se reconhece
+    do mesmo jeito no aviso e no cartao da aba Acompanhando.
+    """
+    procurado = normalizar(nome or "")
+    for bloco in _carregar().get("secundarios") or []:
+        if normalizar(str(bloco.get("nome") or "")) == procurado:
+            return [str(t) for t in bloco.get("termos") or []]
+    return []
+
+
+def primeiro_termo(termos, titulo: str | None, resumo: str | None = None) -> str | None:
+    """O primeiro termo que aparece no titulo ou no resumo, por palavra
+    inteira e sem acento - a mesma comparacao do `marcar`. None se nenhum."""
+    texto = normalizar(GRUDADAS.sub(r"\1 \2", f"{titulo or ''} {resumo or ''}"))
+    return _primeiro(termos, texto)
+
+
 def de_olho() -> list[dict]:
     """Os pares cargo+cidade que eu mandei acompanhar de perto, na ordem do
     YAML.

@@ -252,7 +252,7 @@ Sete destinos na barra do topo, cada um com as suas paginas (desde a Etapa
 | **📚 Estudar** | **Simulado** (questoes das provas do acervo) e **Gerar questoes** (🟣, so treino) |
 | **🧠 Revisao** | o **Caderno de erros** (a regra certa e a revisao 1-7-30) e os **Macetes** (o costume da banca, por contagem) |
 | **📊 Analises** | **Edital** (o edital contra as provas e onde estudar primeiro), **Minhas materias** (o progresso, a meta e a projecao), **Meu desempenho**, **Incidencia** e **Conferencia** |
-| **🏛 Concursos** | **Todos** (a lista, com busca, atalhos e filtros), **Acompanhando** (um bloco por favorito), **Calendario** (o `.ics` dos prazos) e **Previsao** (onde vale ficar de olho agora) |
+| **🏛 Concursos** | **Todos** (a lista, com busca, atalhos e filtros), **Acompanhando** (um cartao por carreira e um bloco por favorito), **Calendario** (o `.ics` dos prazos) e **Previsao** (onde vale ficar de olho agora) |
 | **⚙ Mais** | fontes e evidencias, a auditoria e o ultimo backup |
 
 Os favoritos tem aba propria, **[Acompanhando](#como-a-tela-e-organizada)**.
@@ -364,8 +364,26 @@ e a de Balneario Camboriu - com a situacao de cada uma. A cidade que ainda nao
 tem nada no radar continua na lista, dizendo "nada no radar ainda": sumir com
 ela responderia "nao ha concurso", que e outra coisa de nao saber.
 
-**Acompanhando** e a aba dos favoritos, um bloco por concurso marcado. Cada
-bloco traz:
+**Acompanhando** comeca por um **cartao por carreira** (decisao 141): as
+carreiras de `config/acompanhamentos.yml` - Policia Penal SC, as Guardas de
+Florianopolis e de BC, Policia Civil, PM e Bombeiros de SC. Cada cartao junta
+sozinho o que a coleta trouxer da carreira e mostra a situacao, os quatro
+marcos (banca, edital, inscricoes, prova: o valor com o selo, ou
+"aguardando"), o 🔔 com os FATOS que eu ainda nao vi e o historico fechado. O
+botao **Verificar atualizacoes** roda a coleta agora (espera 30 minutos entre
+um clique e outro); o que o robo nao ve vai pela pesquisa do Claude Code:
+
+```
+radar acompanhar                 # os cartoes no terminal
+radar acompanhar --verificar     # a coleta agora, como o botao
+radar acompanhar --pedido        # escreve data/pedido_ia.json
+#   no Claude Code do VS Code: "Leia data/pedido_ia.json e siga o como_responder"
+radar acompanhar --importar data/resposta_ia.json   # entra 🟣 por conferir
+radar acompanhar --visto "Polícia Civil SC"         # zera o sino
+```
+
+Para acompanhar mais uma carreira, some um bloco no YAML. Embaixo dos cartoes
+continuam os **favoritos**, um bloco por concurso marcado. Cada bloco traz:
 
 - a **contagem de dias** — "inscricao fecha em 5 dia(s)", em vermelho quando
   falta uma semana ou menos, e "nao sei ainda" quando nao ha prazo conhecido;

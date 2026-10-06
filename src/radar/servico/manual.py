@@ -37,7 +37,7 @@ from radar.servico import geradas
 from radar.util import fuso_local
 
 TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas", "associados",
-         "resumos")
+         "resumos", "novidades")
 
 # Quantos macetes por materia. Tres cabe numa resposta so e obriga a IA a
 # escolher o que mais cai, em vez de listar tudo.
@@ -1576,7 +1576,13 @@ def importar(resposta: Path, pedido: Path | None = None,
     modelo = procedencia(quando, corpo.get("modelo") if isinstance(corpo.get("modelo"), str)
                          else None)
 
-    if lote.get("tipo") == "resumos":
+    if lote.get("tipo") == "novidades":
+        # A pesquisa das carreiras da aba Acompanhando (decisao 141): vai para
+        # data/acompanhamentos.json, e nunca para o banco.
+        from radar.servico import acompanhamentos
+
+        resultado = acompanhamentos.importar_novidades(lote, respostas, modelo)
+    elif lote.get("tipo") == "resumos":
         from radar.servico import fichas as servico_fichas
 
         resultado = servico_fichas.importar_resumos(lote["pedidos"], respostas, modelo)

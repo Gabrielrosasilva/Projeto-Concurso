@@ -405,3 +405,40 @@ começando pelo I8 (o teste que segura a limpeza); depois as telas de análise
 e de consulta; por fim a coerência de nomes, botões e componentes (U52 a U54,
 U59, U60, U64), a coluna BAIXA da tabela 6 e a nuvem (decisão 126). A
 legenda da Reduzida no "Como foi o dia" (U04, parte) também ficou para lá.
+
+## J. A aba Acompanhando por carreira (decisao 141, 06/10)
+
+Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
+"Verificar atualizacoes", a pesquisa do Claude Code (`radar acompanhar
+--pedido/--importar`), a conferencia e o Telegram so no critico. O que falta:
+
+### Depende de voce
+
+- 🔴 **Ver a aba no seu Windows, com o banco real**: `radar sincronizar`
+  (traz o YAML e a PM no alvo.yml), `radar reclassificar` (para a marca de
+  PM valer nos itens que ja estao no banco), `radar web` e um clique no
+  botao. Aqui ela foi conferida com o banco remontado dos JSON: os 7 cartoes
+  dizem "aguardando", porque nenhum concurso dessas carreiras saiu no radar
+  nos ultimos 12 meses;
+- 🟡 **A primeira pesquisa**: `radar acompanhar --pedido`, responder no
+  Claude Code do VS Code e `--importar`; depois conferir cada 🟣 na tela;
+- 🟡 **Os termos**: o `termos_extras` de cada carreira saiu do que a coleta
+  ja mostrou ("PC SC", "PMBC", "PMF") e do nome das siglas. Se um item da
+  carreira ficar fora do cartao, ou um de fora entrar, o ajuste e no
+  `config/acompanhamentos.yml`, sem codigo.
+
+### A IA pode fazer (quando voce pedir)
+
+- 🟡 **Fontes oficiais novas** (SEJURI/DPP, PCSC, PMSC, CBMSC, prefeituras de
+  Florianopolis e BC): uma por conversa, cada uma um arquivo em
+  `collectors/`, com o robots.txt conferido e teste com fixture. Precisa de
+  voce colar a pagina real - a sessao web nao tem internet;
+- 🟡 **A situacao do site de noticias e fraca**: o Concursos no Brasil marca
+  quase tudo como `edital_publicado`, e o cartao mostra isso com 🟡. O
+  marco que vier so dele poderia dizer "segundo site de noticias" por
+  extenso, ou esperar a pagina detalhada;
+- ⚪ **O botao por cartao**: a coleta e uma so para todas as fontes, entao o
+  botao e um so, no topo. A pesquisa do Claude Code por carreira (`--pedido`
+  de um cartao so) cabe numa opcao `--carreira`;
+- ⚪ **Ligar a banca definida ao estudo**: quando o cartao da Policia Penal
+  ganhar banca, apontar para Analises > Edital e o padrao dela.

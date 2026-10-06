@@ -4560,3 +4560,56 @@ viraram estudo extra "Onde: Radar". Copia antes em
      so) e a crase. Sem assunto: as 2 faixas de Redacao oficial (falta a lista
      dessa disciplina). As listas de Administracao Publica, Processo Penal,
      Sociologia e Legislacao Estadual ficam para o Ciclo 2.
+
+## A aba Acompanhando por carreira (06/10/2026)
+
+141. **a aba Concursos > Acompanhando ganhou um cartao por CARREIRA, acima
+     dos favoritos** (pedido seu, feito nesta sessao). O favorito e UM item
+     da coleta; a carreira existe antes de qualquer noticia e junta sozinha o
+     que a coleta trouxer dela. A lista mora no `config/acompanhamentos.yml`
+     (Policia Penal SC, Guarda Municipal de Florianopolis e de Balneario
+     Camboriu, Policia Civil SC, PM SC - soldado e oficial -, Oficial do
+     Corpo de Bombeiros SC e Bombeiro Militar SC), e cada uma aponta um bloco
+     do `config/alvo.yml` pelo nome: os termos sao os de la, mais os
+     `termos_extras` ("PC SC", "CBMSC"), a cidade (`local`, com a sigla da
+     FEPESE: "PMBC", "PMF") e o estado (`uf: SC`; sem UF, vale o anel, a
+     FEPESE ou "santa catarina" no texto; UF de outro estado tira o item). A
+     Policia Penal usa a marca `principal` que o classificador ja da. A **PM
+     entrou no alvo.yml** como bloco secundario, no fim (os Bombeiros casam
+     antes; "PM" sozinha nao, porque e Prefeitura Municipal na FEPESE). As
+     regras de precisao:
+     - **a situacao e os marcos** (banca, edital, inscricoes, prova) saem do
+       item mais recente que e concurso, dentro de 12 meses e sem ano velho
+       no titulo ("2019 – ..." republicado em 2024 nao conta). Sem ele, o
+       cartao diz "nenhum concurso desta carreira no radar nos ultimos 12
+       meses" e os marcos ficam "aguardando" - hoje, com o dado real, os 7;
+     - **o 🔔 e so FATO**: o evento da linha do tempo (apareceu, mudou de
+       situacao, edital, inscricao, prova, retificacao) de item que nao e
+       noticia, um por link, depois da data `novidades_desde` e do meu
+       "Marcar como visto"; ou a pesquisa do Claude Code confirmada.
+       Noticia vai para o historico (num `<details>`, fechado);
+     - **o selo diz de onde veio**: 🟢 a propria banca (FEPESE, IESES), 🟡 o
+       site de noticias (selo novo `noticia`, da familia automatica, no
+       `radar/origem.py`), 🟣 a pesquisa;
+     - **o botao "Verificar atualizacoes"** roda a mesma coleta do `radar
+       atualizar` (as fontes permitidas e a leitura das paginas novas), numa
+       thread, sem Telegram; a pagina se recarrega com `<meta refresh>`
+       (HTML, nao JS) enquanto roda, e o botao espera 30 minutos entre um
+       clique e outro (`intervalo_minimo_minutos`). Busca aberta na internet
+       ficou fora: raspar buscador fere o robots e os termos (CLAUDE.md) e
+       traz justamente o rumor e a noticia velha;
+     - **a pesquisa do Claude Code** e o caminho do que o robo nao ve
+       (comissao, autorizacao, jornal): `radar acompanhar --pedido` ->
+       Claude Code do VS Code -> `radar acompanhar --importar`, pelo mesmo
+       `manual.importar` (tipo `novidades`). Recusa sem link, sem data, data
+       futura, fato de mais de 12 meses, marco fora da lista, e ignora o que
+       o radar ja sabe; texto de previsao vira "nao confirmado" (nao acende o
+       🔔, nao se confere, nao preenche marco). O que entra fica 🟣 "por
+       conferir" em `data/acompanhamentos.json` (versionado, no sincronizar)
+       e so preenche marco depois do meu "Confere". **Nunca muda a situacao
+       de um concurso no banco**;
+     - **o Telegram so avisa o critico** das carreiras: banca contratada,
+       edital publicado, inscricoes abertas, prova marcada e retificacao, de
+       item que nao e noticia, a partir de `telegram_desde` e dos ultimos 30
+       dias, pelo mesmo `avisado_em` do favorito (sai uma vez so). Roda no
+       `radar avisar` do Actions, depois do favorito e antes do concurso novo.

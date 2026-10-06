@@ -179,3 +179,15 @@ secundarios:
       - perito oficial
       - papiloscopista
       - medico legista
+
+  # Pedido de 06/10/2026 (decisao 141): a PM de SC entrou na lista para a aba
+  # Acompanhando. Fica no FIM de proposito: "Corpo de Bombeiros" casa antes,
+  # entao um titulo que cite os dois continua sendo dos Bombeiros. A sigla
+  # "PM" sozinha nao entra - ela tambem e "Prefeitura Municipal" no titulo da
+  # FEPESE ("PMBC", "PMF").
+  - nome: Policia Militar
+    termos:
+      - policia militar
+      - policial militar
+      - policiais militares
+      - pmsc

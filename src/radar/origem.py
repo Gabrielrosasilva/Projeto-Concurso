@@ -28,6 +28,11 @@ OFICIAL, ACERVO, AUTOMATICO, IA, PLANO = "oficial", "acervo", "automatico", "ia"
 # edital, e a classificacao por palavra-chave e automatica como o desempenho.
 PROVA, CLASSIFICACAO, TENDENCIA = "prova", "classificacao", "tendencia"
 
+# O item que a coleta leu num site de NOTICIAS de concurso (decisao 141): e
+# automatico como a classificacao - o sistema leu e deduziu -, e a palavra a
+# mais diz de onde veio, porque e ela que manda conferir na fonte oficial.
+NOTICIA = "noticia"
+
 
 class Selo(NamedTuple):
     """Um selo: a origem (que da a cor), o emoji, o texto e o porque."""
@@ -51,6 +56,8 @@ SELOS = {
                         "Atribuído por palavra-chave, pelo classificador"),
     TENDENCIA: Selo(AUTOMATICO, "🟡", "Análise automática (tendência)",
                     "Leitura dos números - base pequena, confira"),
+    NOTICIA: Selo(AUTOMATICO, "🟡", "Site de notícias",
+                  "Lido automaticamente de um site de notícias de concurso - confira na fonte oficial"),
     IA: Selo(IA, "🟣", "Gerado por IA",
              "Texto de IA: material auxiliar, confira na fonte"),
     PLANO: Selo(PLANO, "📌", "Seleção do plano (cronograma)",

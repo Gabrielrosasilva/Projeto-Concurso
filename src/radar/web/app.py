@@ -34,6 +34,7 @@ from radar.util import (
     converter_valor,
     dias_ate,
     formatar_data,
+    para_local,
     separar_campos_grudados,
 )
 try:                                    # fastapi>=0.115 traz o Jinja2Templates
@@ -350,6 +351,16 @@ def _dia_mes(valor) -> str:
 
 
 templates.env.filters["dia_mes"] = _dia_mes
+
+
+def _hora(valor) -> str:
+    """datetime -> '14:32' no relogio de Florianopolis. A ultima verificacao
+    da aba Acompanhando e gravada em UTC, como todo o resto."""
+    local = para_local(valor)
+    return local.strftime("%H:%M") if local else ""
+
+
+templates.env.filters["hora"] = _hora
 
 
 def _url_base_sem(request: Request, *parametros: str) -> str:
@@ -1686,24 +1697,70 @@ def treinar_do_foco():
     return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
 
 
-@app.get("/acompanhando", response_class=HTMLResponse)
-def acompanhando(request: Request):
-    """Um bloco por favorito: o que aconteceu, e o que fazer agora.
+# O que cada recado da aba Acompanhando quer dizer. Vem pela URL porque o
+# caminho passa por um redirecionamento: sem isso o F5 clicava de novo.
+RECADOS_DO_ACOMPANHANDO = {
+    "iniciada": "Verificação iniciada. A coleta leva alguns minutos; a página "
+                "se atualiza sozinha até terminar.",
+    "rodando": "Já há uma verificação rodando.",
+    "visto": "Marcado como visto.",
+    "conferida": "Conferência anotada.",
+}
 
-    Esta tela substituiu o mural lateral. O mural cabia em qualquer aba mas
-    nao cabia nada dentro dele; aqui cada favorito tem espaco para a linha do
-    tempo inteira e para a proxima acao.
+
+@app.get("/acompanhando", response_class=HTMLResponse)
+def acompanhando(request: Request, recado: str = ""):
+    """As carreiras que eu acompanho, um cartao cada, e os favoritos embaixo.
+
+    O cartao (decisao 141) e a carreira inteira - existe antes de qualquer
+    noticia e junta sozinho o que a coleta trouxer dela. O bloco de favorito,
+    que substituiu o mural lateral, continua como era: um item que eu marquei
+    com a estrela, com a linha do tempo e a proxima acao.
     """
+    cartoes = servico.acompanhamentos.cartoes()
+    verificacao = servico.acompanhamentos.verificacao()
+    minutos = servico.acompanhamentos.minutos_para_liberar()
+    texto_do_recado = RECADOS_DO_ACOMPANHANDO.get(recado)
+    if recado == "cedo":
+        texto_do_recado = (f"A última verificação foi há pouco. O botão volta "
+                           f"em {minutos} minuto(s).")
     return templates.TemplateResponse(
         request=request,
         name="acompanhando.html",
         context={
+            "cartoes": cartoes,
+            "verificacao": verificacao,
+            "novidades_da_verificacao": servico.acompanhamentos.novidades_desde(
+                verificacao.get("inicio"), cartoes),
+            "minutos_para_liberar": minutos,
+            "recado": texto_do_recado,
             "blocos": meus_favoritos.blocos(),
             "importantes": linha_do_tempo.EVENTOS_IMPORTANTES,
             "rotulo_anel": ROTULO_DO_ANEL,
             "rotulo_situacao": SITUACAO_LEGIVEL,
         },
     )
+
+
+@app.post("/acompanhando/verificar")
+def acompanhando_verificar():
+    """O botao "Verificar atualizacoes": a coleta agora, em segundo plano."""
+    resultado = servico.acompanhamentos.iniciar_verificacao()
+    return RedirectResponse(f"/acompanhando?recado={resultado}", status_code=303)
+
+
+@app.post("/acompanhando/visto")
+def acompanhando_visto(nome: str = Form("")):
+    """Zera o 🔔 de um cartao."""
+    servico.acompanhamentos.marcar_visto(nome)
+    return RedirectResponse("/acompanhando?recado=visto", status_code=303)
+
+
+@app.post("/acompanhando/pesquisa/{pesquisa_id}")
+def acompanhando_conferir(pesquisa_id: str, confere: str = Form("")):
+    """Eu li a fonte da pesquisa: confere ou nao confere."""
+    servico.acompanhamentos.conferir(pesquisa_id, confere == "sim")
+    return RedirectResponse("/acompanhando?recado=conferida", status_code=303)
 
 
 @app.get("/estudar")

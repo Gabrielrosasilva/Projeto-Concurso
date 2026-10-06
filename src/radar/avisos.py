@@ -150,10 +150,14 @@ AVISO_DO_EVENTO = {
     "inscricoes_abertas": ("\U0001F7E2", "Inscrições abertas"),
     "inscricoes_encerradas": ("\U0001F534", "Inscrições encerradas"),
     "prova_marcada": ("\U0001F4C5", "Prova marcada"),
+    # So chega aqui a mudanca para banca contratada, que e o aviso critico das
+    # carreiras que eu acompanho (decisao 141). O resto do `mudou_situacao`
+    # nao vira mensagem.
+    "mudou_situacao": ("\U0001F3DB", "Banca contratada"),
 }
 
 
-def formatar_evento(evento, concurso) -> str:
+def formatar_evento(evento, concurso, carreira: str | None = None) -> str:
     """A mensagem de uma mudanca num concurso que eu acompanho.
 
     A estrela vem sempre: ela e o que separa este aviso do aviso de concurso
@@ -162,8 +166,11 @@ def formatar_evento(evento, concurso) -> str:
     """
     emoji, rotulo = AVISO_DO_EVENTO.get(evento.tipo, ("\U000026AA", evento.tipo))
 
+    # A estrela e do favorito; a carreira acompanhada (decisao 141) leva o
+    # nome dela no lugar, para eu saber de qual cartao veio o aviso.
+    marca = f"\u00b7 {html.escape(carreira)}" if carreira else "\u2605"
     linhas = [
-        f"{emoji} <b>{rotulo}</b> \u2605",
+        f"{emoji} <b>{rotulo}</b> {marca}",
         html.escape(concurso.titulo),
         # A descricao gravada e chave ("Situacao: a -> b"); a mensagem leva a
         # frase da tela, como a linha do tempo do site.

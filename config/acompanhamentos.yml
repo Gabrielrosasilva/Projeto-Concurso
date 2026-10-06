@@ -1,0 +1,107 @@
+# As carreiras que eu acompanho na aba Concursos > Acompanhando (decisao 141).
+#
+# Um ACOMPANHAMENTO nao e um favorito. O favorito e UM item que a coleta
+# trouxe; o acompanhamento e a carreira inteira - ele existe mesmo antes de
+# sair qualquer noticia, e junta sozinho todo item da coleta que for dela.
+# Os favoritos continuam como estao, embaixo dos cartoes.
+#
+# Para acompanhar mais uma carreira, some um bloco em `acompanhamentos`.
+# Nenhum nome de carreira fica escrito no programa.
+#
+# Como um item entra num cartao (todas as condicoes juntas):
+#   - `cargo: principal` -> o item ja esta marcado como alvo principal pelo
+#     config/alvo.yml (a Policia Penal de SC, com a regra de estado de la);
+#   - `cargo: <nome de um bloco secundario do alvo.yml>` -> o texto tem um dos
+#     `termos` daquele bloco, ou um dos `termos_extras` daqui;
+#   - `local` (quando ha) -> o municipio do item, ou o texto, tem uma destas
+#     palavras. E assim que "PMBC" (Prefeitura de Balneario Camboriu, como a
+#     FEPESE escreve) entra no cartao de BC;
+#   - `uf: SC` (quando ha) -> o item e de SC: a UF da fonte diz SC; ou, sem
+#     UF, o municipio esta num anel do config/regioes.yml, a fonte e uma das
+#     `fontes_de_sc`, ou o texto tem uma das palavras de `prova_de_sc`.
+#     UF de outro estado tira o item, sempre.
+# Acento e caixa nao importam, e a comparacao e por PALAVRA INTEIRA - a mesma
+# regra do alvo.yml.
+
+# Quanto tempo o botao "Verificar atualizacoes" espera entre um clique e
+# outro. Cada clique e uma volta nas fontes, com o atraso de cortesia do
+# Coletor: martelar o site dos outros nao traz noticia mais rapido.
+intervalo_minimo_minutos: 30
+
+# Qual item diz a SITUACAO e os marcos do cartao: o mais recente que e
+# concurso (nao noticia, nao processo seletivo) publicado nesta janela. Item
+# mais velho e de outra edicao - o concurso de 2019 nao diz nada sobre o
+# proximo -, e sem item na janela o cartao diz "aguardando", sem chutar.
+janela_da_edicao_em_dias: 365
+
+# O 🔔 so conta o que aconteceu a partir desta data. Sem isto, o primeiro
+# acesso acenderia o historico inteiro como se fosse novidade.
+novidades_desde: '2026-10-06'
+
+# O Telegram so avisa evento critico a partir desta data, pelo mesmo motivo:
+# ligar os acompanhamentos nao pode despejar o mes passado no celular.
+telegram_desde: '2026-10-06'
+
+# As fontes que sao a propria banca: o que vem delas ganha o selo 🟢. O resto
+# da coleta (o site de noticias) ganha 🟡.
+fontes_oficiais:
+  - fepese
+  - ieses
+
+# A FEPESE nao manda a UF, e organiza concurso em SC. Sem UF, vir dela conta
+# como SC. A IESES nao entra: ela faz concurso em varios estados.
+fontes_de_sc:
+  - fepese
+
+prova_de_sc:
+  - santa catarina
+
+acompanhamentos:
+  - nome: Polícia Penal SC
+    cargo: principal
+
+  - nome: Guarda Municipal de Florianópolis
+    cargo: Guarda Municipal
+    local:
+      - florianopolis
+      - pmf
+    uf: SC
+
+  - nome: Guarda Municipal de Balneário Camboriú
+    cargo: Guarda Municipal
+    local:
+      - balneario camboriu
+      - pmbc
+    uf: SC
+
+  - nome: Polícia Civil SC
+    cargo: Policia Civil
+    termos_extras:
+      - pc sc
+      - pc/sc
+      - pcsc
+    uf: SC
+
+  # Soldado e oficial, os dois (pedido de 06/10/2026).
+  - nome: Polícia Militar SC
+    cargo: Policia Militar
+    termos_extras:
+      - pm sc
+      - pm/sc
+    uf: SC
+
+  - nome: Oficial do Corpo de Bombeiros SC
+    cargo: Oficial de Bombeiros
+    termos_extras:
+      - oficial bombeiro
+      - oficiais bombeiros militares
+    uf: SC
+
+  - nome: Bombeiro Militar SC
+    cargo: Bombeiro Militar
+    termos_extras:
+      - cbmsc
+      - cbm sc
+      - cbm/sc
+      - bombeiros sc
+    uf: SC
