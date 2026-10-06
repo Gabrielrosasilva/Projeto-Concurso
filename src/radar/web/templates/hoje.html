@@ -159,6 +159,7 @@
     .fiz-de-onde{margin:0 0 var(--esp-2);font-size:var(--tam-xs);
       color:var(--cor-texto-suave);display:flex;align-items:center;gap:var(--esp-2);
       flex-wrap:wrap}
+    .fiz-ia{display:flex;align-items:center;gap:var(--esp-2);flex-wrap:wrap}
 
     /* --- o estudo extra --- */
     .lista-extras{list-style:none;margin:0 0 var(--esp-4);padding:0;display:grid;gap:var(--esp-3)}
@@ -1361,7 +1362,9 @@
         </p>
       {% endif %}
       {% if tt.total.ia %}
-        <p class="fiz-de-onde ds-suave">{{ selo(tt.origens.treino_ia) }} {{ frase_da_ia(tt.total) }}: conta no volume.</p>
+        {# Do tamanho do "Fiz hoje", e nao miudo: e o resultado do treino do
+           dia, so que num numero a parte. #}
+        <p class="fiz-hoje fiz-ia">{{ selo(tt.origens.treino_ia) }} {{ frase_da_ia(tt.total) }}; conta no volume.</p>
       {% endif %}
       {% if tt.total.erros %}
         <p class="links">

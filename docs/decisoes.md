@@ -4257,3 +4257,26 @@ modelo, e o antigo continua como esta; a 10ª gerada rejeitada, que so estava
 no banco, foi exportada para o `questoes_geradas.json` (775 linhas, 10
 rejeitadas); e os 2 macetes de "Direito Processo Penal" (o nome do caderno de
 2013) passaram ao nome do edital, "Direito Processual Penal".
+
+## O treino de IA no "Fiz hoje" (05/10/2026)
+
+127. **o segundo numero do dia diz os acertos e os erros do treino de IA, no
+     tamanho do "Fiz hoje".** Era "Treino de IA: 10 de 23 (43%), fora do
+     acerto", miudo e cinza embaixo do total: os erros ficavam para quem le
+     calcular, e a linha passava despercebida. Agora e "Treino de IA: 23
+     questoes = 10 acertos + 13 erros (43%), fora do acerto real; conta no
+     volume", no mesmo molde e no mesmo tamanho do "Fiz hoje". A frase e uma
+     so (`metricas.frase_da_ia`): a Hoje, as Minhas materias, as Semanas e o
+     `radar hoje` mudaram juntas. Continua um numero a parte, nunca somado ao
+     acerto das reais (a regra de sempre).
+
+Junto, sem decisao nova: o dia 05/10 foi corrigido a seu pedido. As 3 faixas
+de questoes (Fixacao: Fato tipico, Fixacao: Vozes do verbo e o R+7 da
+Aplicacao da lei penal) estavam anotadas com os mesmos numeros das respostas
+dadas no radar - 26 questoes contadas duas vezes, e 23 delas, de IA, entrando
+como acerto real. Pela regra da 1D (faixa de questoes com 0 nao conta como
+feita), elas foram desmarcadas, e o tempo delas (20 + 15 + 25 min) virou
+estudo extra "Onde: Radar", que guarda so o tempo. O "Fiz hoje" passou de 53
+questoes (14 + 16 + 23 de IA) para 26 (2 + 1 + 23 de IA), com as mesmas 2h.
+Fica em aberto impedir que a faixa repita o que foi respondido no radar:
+avisar ou bloquear, a sua escolha.

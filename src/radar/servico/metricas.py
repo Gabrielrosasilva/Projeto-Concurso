@@ -185,11 +185,19 @@ def _contado(n: int, um: str, varios: str) -> str:
 
 
 def frase_da_ia(numeros: Numeros) -> str | None:
-    """O segundo numero: "Treino de IA: 7 de 10 (70%), fora do acerto"."""
+    """O segundo numero: "Treino de IA: 10 questões = 7 acertos + 3 erros
+    (70%), fora do acerto real".
+
+    No mesmo molde do "Fiz hoje" de cima, com os erros escritos: "7 de 10"
+    deixava a conta dos erros para quem le.
+    """
     if not numeros.ia:
         return None
-    return (f"Treino de IA: {numeros.ia_acertos} de {numeros.ia} "
-            f"({numeros.porcentagem_ia}%), fora do acerto")
+    erros = numeros.ia - numeros.ia_acertos
+    return (f"Treino de IA: {_contado(numeros.ia, 'questão', 'questões')} = "
+            f"{_contado(numeros.ia_acertos, 'acerto', 'acertos')} + "
+            f"{_contado(erros, 'erro', 'erros')} "
+            f"({numeros.porcentagem_ia}%), fora do acerto real")
 
 
 # --- de onde vem cada linha ----------------------------------------------------

@@ -2659,7 +2659,7 @@ def _totais_legiveis(conta) -> str:
                   f"{conta.radar.medidas} · anotado: "
                   f"{conta.anotado.porcentagem}% em {conta.anotado.medidas}")
     if conta.total.ia:
-        linha += f"\n  {servico.metricas.frase_da_ia(conta.total)}: conta no volume"
+        linha += f"\n  {servico.metricas.frase_da_ia(conta.total)}; conta no volume"
     return linha
 
 
