@@ -244,19 +244,26 @@ def test_os_numeros_sao_iguais_em_todas_as_telas(banco_temporario, monkeypatch):
     responder_na_materia("Língua Portuguesa", False, _as_21h(minuto=20))
 
     cliente = TestClient(app)
-    hoje = _linha_da_conta(cliente.get("/hoje?data=2026-09-28").text)
+    hoje = _visivel(cliente.get("/hoje?data=2026-09-28").text)
     semanas = _linha_da_conta(cliente.get("/semanas").text)
     terminal = CliRunner().invoke(cli, ["hoje", "--data", "2026-09-28"], env={"COLUMNS": "200"})
     assert terminal.exit_code == 0, terminal.output
 
-    assert hoje == "32 questões = 13 acertos + 9 erros + 10 de treino de IA"
-    assert semanas == hoje
-    assert hoje in terminal.output
+    # A Hoje e o `radar hoje` escrevem as reais, o treino de IA e o total em
+    # linhas proprias (decisao 138); a Semanas e os cartoes, a conta inteira
+    # numa linha. Os numeros sao os mesmos: 22 reais + 10 de IA = 32.
+    reais = "Questões reais (Qconcursos e provas): 22 questões = 13 acertos + 9 erros"
+    treino = "Treino de IA no radar: 10 questões = 7 acertos + 3 erros (70%), não entra no acerto"
+    total = "Total do dia: 32 questões"
+    inteira = "32 questões = 13 acertos + 9 erros + 10 de treino de IA"
+    for tela in (hoje, terminal.output):
+        assert reais in tela and treino in tela and total in tela
+    assert semanas == inteira
     cartoes, _ = materias.montar(real, hoje=date(2026, 10, 1))
     soma = metricas.Numeros()
     for cartao in cartoes:
         soma = soma + cartao.geral
-    assert metricas.frase_da_conta(soma) == hoje
+    assert metricas.frase_da_conta(soma) == inteira
 
 
 # --- a incidencia do alvo nunca muda por causa de prova complementar --------
