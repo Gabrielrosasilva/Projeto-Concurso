@@ -34,9 +34,11 @@ o que ele tinha agendado.
   3. **prazo vencido** - o 1-7-30 do `espacada.py`, contado do ultimo estudo
      ou da ultima pratica. Passa de etapa com o acerto no radar e com a
      revisao feita fora dele (o R+7, o extra de revisao), no vencimento ou
-     depois (decisao 82).
+     depois (decisao 82); feita a de 30 dias, o prazo acaba.
 
-Um no pode disparar por mais de um; a lista guarda todos os motivos. "Questoes
+Um no pode disparar por mais de um; a lista guarda todos os motivos. **Esta e
+a unica fila de revisao** (decisao 128): o Meu desempenho a mostra inteira, e
+a home e a rodada de revisao, so as pontas dela (`pontas`). "Questoes
 a refazer" sao as erradas no radar mais as do caderno de erros - as duas
 listas que ja existem, nunca uma terceira.
 """
@@ -392,16 +394,20 @@ def estudados_ou_praticados(todas: dict[str, Situacao],
 # --- a revisao ------------------------------------------------------------------
 
 def _etapa_e_vencimento(desde: date, revisoes_feitas: list[date],
-                        hoje: date) -> tuple[int, date]:
+                        hoje: date) -> tuple[int, date | None]:
     """A etapa do 1-7-30 e quando ela vence, contando de `desde`.
 
-    A mesma regra do `espacada.py`: revisar NA data do vencimento ou depois
-    passa para a proxima etapa; antes e treino, nao revisao. Revisao feita e
-    o acerto no radar, ou a revisao marcada fora dele (decisao 82).
+    Revisar NA data do vencimento ou depois passa para a proxima etapa; antes
+    e treino, nao revisao. Revisao feita e o acerto no radar, ou a revisao
+    marcada fora dele (decisao 82). Feita a de 30 dias, o prazo acabou e o
+    vencimento e None: sem isso o no voltava para a fila por prazo para
+    sempre (decisao 128).
     """
     etapa, vence = 1, desde + timedelta(days=INTERVALOS[0])
     for dia in sorted(revisoes_feitas):
-        if dia >= vence and etapa < len(INTERVALOS):
+        if dia >= vence:
+            if etapa == len(INTERVALOS):
+                return etapa, None
             etapa += 1
             vence = dia + timedelta(days=INTERVALOS[etapa - 1])
     return etapa, vence
@@ -450,7 +456,7 @@ def para_revisar(plano=None, hoje: date | None = None,
             # O R+7 e o extra de revisao andam como o acerto no radar.
             feitas = acertos_por_no.get(caminho, []) + atual.revisoes_fora_do_radar
             etapa, vence_em = _etapa_e_vencimento(desde, feitas, hoje)
-            if vence_em <= hoje:
+            if vence_em is not None and vence_em <= hoje:
                 motivos.append(f"{POR_PRAZO} ({INTERVALOS[etapa - 1]} dia(s))")
             else:
                 vence_em, etapa = None, None
@@ -468,6 +474,51 @@ def para_revisar(plano=None, hoje: date | None = None,
     # Mais atrasado primeiro; depois o no mais fundo, que e o mais acionavel.
     fila.sort(key=lambda r: (-r.atraso, -len(arvore.partes(r.caminho)), r.caminho))
     return fila
+
+
+def pontas(fila: list[ParaRevisar]) -> list[ParaRevisar]:
+    """Os nos da fila sem descendente nela, na ordem da fila.
+
+    O erro num subassunto poe na fila ele, o assunto e a materia: contar os
+    tres seria contar a mesma revisao tres vezes. A home e a rodada de
+    revisao (`espacada.criar_simulado_de_revisao`) usam so a ponta, que e o
+    no mais fundo e o mais acionavel; o Meu desempenho mostra a fila inteira.
+    """
+    caminhos = [r.caminho for r in fila]
+    return [r for r in fila
+            if not any(c.startswith(r.caminho + arvore.SEPARADOR) for c in caminhos)]
+
+
+def proxima_revisao(plano=None, hoje: date | None = None,
+                    recorte: str = por_conteudo.CICLO,
+                    todas: dict | None = None) -> ParaRevisar | None:
+    """O proximo prazo do 1-7-30 que ainda nao venceu, para a home dizer
+    quando volta a ter revisao. None quando nenhum no estudado tem prazo.
+
+    A mesma conta do prazo da `para_revisar`; entre dois no mesmo dia, o no
+    mais fundo.
+    """
+    plano = plano or plano_de_estudo.carregar()
+    hoje = hoje or date.today()
+    if todas is None:
+        todas = situacoes(recorte=recorte, plano=plano, hoje=hoje)
+    acertos_por_no = _dias_de_acerto_por_no(hoje)
+
+    melhor = None
+    for caminho, atual in todas.items():
+        desde = atual.ultimo_estudo or atual.primeira_pratica
+        if not (atual.estudado or atual.praticado) or desde is None:
+            continue
+        feitas = acertos_por_no.get(caminho, []) + atual.revisoes_fora_do_radar
+        etapa, vence_em = _etapa_e_vencimento(desde, feitas, hoje)
+        if vence_em is None or vence_em <= hoje:
+            continue
+        chave = (vence_em, -len(arvore.partes(caminho)), caminho)
+        if melhor is None or chave < melhor[0]:
+            melhor = (chave, ParaRevisar(caminho=caminho, nome=atual.nome,
+                                         nivel=atual.nivel, vence_em=vence_em,
+                                         etapa=etapa))
+    return None if melhor is None else melhor[1]
 
 
 def _dias_de_acerto_por_no(hoje: date) -> dict[str, list[date]]:

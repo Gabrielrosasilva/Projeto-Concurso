@@ -833,12 +833,18 @@ class FichaDeEstudo:
         return bool(self.escrita.conferida_em)
 
     @property
+    def reais(self) -> int:
+        """Quantas questoes reais do conteudo. A conta e daqui, e nao da tela
+        (decisao 128)."""
+        return len(self.questoes_reais)
+
+    @property
     def reais_do_alvo(self) -> int:
         return sum(1 for q in self.questoes_reais if q.evidencia == "alvo")
 
     @property
     def reais_do_complementar(self) -> int:
-        return len(self.questoes_reais) - self.reais_do_alvo
+        return self.reais - self.reais_do_alvo
 
     @property
     def origens(self) -> dict[str, str]:

@@ -131,9 +131,9 @@
                 <td class="ds-n">{{ linha.peso_no_edital }}</td>
                 {% for p in planos_compilados %}
                   {% set l = p.linhas | selectattr('materia', 'equalto', linha.materia) | first %}
-                  <td class="ds-n {{ 'falta' if l.pedidas > l.disponiveis }}"
-                      title="{% if l.pedidas > l.disponiveis %}o acervo tem {{ l.disponiveis }}: faltarão {{ l.pedidas - l.disponiveis }}{% endif %}">
-                    {{ l.pedidas }}{% if l.pedidas > l.disponiveis %}*{% endif %}</td>
+                  <td class="ds-n {{ 'falta' if l.faltarao }}"
+                      title="{% if l.faltarao %}o acervo tem {{ l.disponiveis }}: faltarão {{ l.faltarao }}{% endif %}">
+                    {{ l.pedidas }}{% if l.faltarao %}*{% endif %}</td>
                 {% endfor %}
                 <td class="ds-n">{{ linha.disponiveis }}</td>
               </tr>

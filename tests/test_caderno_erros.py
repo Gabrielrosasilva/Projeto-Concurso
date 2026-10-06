@@ -335,7 +335,7 @@ def test_o_caderno_nao_entra_em_acerto_medido(banco_temporario):
         _anotar()
 
     # Nenhuma questao respondida: as contas do radar continuam vazias.
-    assert servico.espacada.pendentes() == []
+    assert servico.estudo.para_revisar() == []
     with sessao() as s:
         from radar.models import RespostaDeSimulado
         assert s.scalars(select(RespostaDeSimulado)).all() == []

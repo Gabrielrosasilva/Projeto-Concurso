@@ -82,6 +82,12 @@ class LinhaDoCompilado:
     def faltaram(self) -> int:
         return max(0, self.pedidas - self.entregues)
 
+    @property
+    def faltarao(self) -> int:
+        """Quantas o acervo nao tem para o pedido: a conta e daqui, e nao da
+        tela (decisao 128)."""
+        return max(0, self.pedidas - self.disponiveis)
+
 
 @dataclass
 class Plano:

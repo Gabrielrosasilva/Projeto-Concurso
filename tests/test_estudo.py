@@ -424,6 +424,43 @@ def test_acertar_na_data_do_vencimento_empurra_o_prazo(plano):
     assert [r.caminho for r in estudo.para_revisar(plano=plano, hoje=HOJE)] == []
 
 
+def test_feita_a_revisao_de_30_dias_o_prazo_acaba():
+    """Decisao 128: sem isto o no voltava por prazo para sempre, porque a
+    etapa 3 nunca andava e o vencimento ficava no passado."""
+    sete, trinta = date(2026, 10, 6), date(2026, 11, 5)
+
+    assert estudo._etapa_e_vencimento(SEG, [TER, sete], HOJE) == (3, trinta)
+    assert estudo._etapa_e_vencimento(SEG, [TER, sete, trinta], HOJE) == (3, None)
+
+
+def test_a_ponta_da_fila_e_o_no_sem_descendente_nela(plano):
+    """O erro no subassunto poe na fila ele, o assunto e a materia: a home e a
+    rodada contam so a ponta (decisao 128)."""
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _responder(2, False, SEG, materia=PORTUGUES, classificar_em=PORTUGUES)
+
+    fila = estudo.para_revisar(plano=plano, hoje=HOJE)
+
+    assert {r.caminho for r in fila} == {PENAL, APLICACAO, NO_TEMPO, PORTUGUES}
+    assert {r.caminho for r in estudo.pontas(fila)} == {NO_TEMPO, PORTUGUES}
+
+
+def test_a_proxima_revisao_e_o_prazo_mais_perto_ainda_nao_vencido(plano):
+    _responder(1, True, SEG, classificar_em=NO_TEMPO)         # pratica em 28/09
+    _responder(2, True, TER, classificar_em=NO_TEMPO)         # acerto em 29/09
+
+    proxima = estudo.proxima_revisao(plano=plano, hoje=HOJE)
+
+    # A de 7 dias, contada do acerto de 29/09; entre os tres nos no mesmo
+    # dia, o mais fundo.
+    assert (proxima.caminho, proxima.vence_em, proxima.etapa) == (
+        NO_TEMPO, date(2026, 10, 6), 2)
+
+
+def test_sem_nada_estudado_nao_ha_proxima_revisao(plano):
+    assert estudo.proxima_revisao(plano=plano, hoje=HOJE) is None
+
+
 def test_o_mais_atrasado_vem_primeiro(plano):
     _responder(1, False, SEG, classificar_em=NO_TEMPO)
     _responder(2, False, TER, materia=PORTUGUES, classificar_em=PORTUGUES)

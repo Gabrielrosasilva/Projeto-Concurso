@@ -4281,6 +4281,33 @@ questoes (14 + 16 + 23 de IA) para 26 (2 + 1 + 23 de IA), com as mesmas 2h.
 Fica em aberto impedir que a faixa repita o que foi respondido no radar:
 avisar ou bloquear, a sua escolha.
 
+## Uma fila de revisao so, e as ultimas contas fora dos templates (06/10/2026)
+
+128. **a home mostra a fila de revisao do Meu desempenho, e nao mais a
+     agenda do `espacada.py`.** Eram duas filas com dois numeros (a
+     auditoria de 04/10, CL-11 e N1-3): a da home, por materia e assunto,
+     so do erro no radar; a do Meu desempenho (`servico/estudo.py`), pelo no
+     da arvore, com o erro recente, o acerto abaixo do corte e o prazo 1-7-30.
+     Ficou a segunda. A home mostra so as **pontas** dela (`estudo.pontas`:
+     o no sem descendente na fila) - o erro num subassunto poe na fila ele, o
+     assunto e a materia, e contar os tres seria contar a mesma revisao tres
+     vezes -, com o motivo de cada uma e a proxima revisao quando a fila esta
+     vazia (`estudo.proxima_revisao`). O botao "Fazer as revisoes de hoje"
+     monta a rodada pelas mesmas pontas (`espacada.criar_simulado_de_revisao`):
+     primeiro as erradas do no, depois questao real do no ou de um no abaixo
+     dele que eu nunca respondi, 3 por no; no sem questao nenhuma nao vira
+     rodada vazia. A rodada grava `revisao: [{no, etapa, motivos}]`, e o
+     `metricas` continua a conta-la como revisao (decisao 79). A agenda antiga
+     (`espacada.agenda`/`pendentes`) saiu; o `espacada.py` guarda os
+     intervalos e a rodada. Junto, um defeito da fila do `estudo`: feita a
+     revisao de 30 dias, o prazo nunca acabava e o no voltava por prazo para
+     sempre; agora acaba, como acabava na agenda antiga. E as duas contas que
+     sobravam em template foram para o Python - o "faltarao" do simulado
+     (`LinhaDoCompilado.faltarao`) e o numero de questoes reais da ficha
+     (`FichaDeEstudo.reais`) -, a conferencia dos dias pede ao `metricas`
+     tambem o numero de respostas de IA, e o teste que vigia os templates
+     passou a olhar a conta dentro de `{{ }}`, que ele deixava passar.
+
 ## A faixa avisa o que ja foi respondido no radar (06/10/2026)
 
 130. **a faixa de questoes avisa quantas dela ja foram respondidas no radar,

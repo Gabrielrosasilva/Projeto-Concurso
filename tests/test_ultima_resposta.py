@@ -1,8 +1,8 @@
 """O acerto acumulado conta QUESTAO, pela ultima resposta de cada uma.
 
 Antes contava tentativa: refazer a mesma questao 4 vezes valia 4, e refazer
-questao ja decorada inflava o acerto. As tentativas continuam gravadas - e a
-revisao espacada ainda precisa do erro antigo para agendar.
+questao ja decorada inflava o acerto. As tentativas continuam gravadas: a
+evolucao semanal conta toda resposta.
 """
 from datetime import date, datetime, timezone
 
@@ -11,7 +11,6 @@ import pytest
 from radar import servico
 from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
-from radar.servico import espacada
 
 CADERNO = "https://fepese.test/ap2019.pdf"
 DIA = date(2026, 10, 1)
@@ -91,21 +90,6 @@ def test_o_relatorio_de_um_simulado_conta_as_respostas_dele(banco_temporario):
 
     (linha,) = servico.desempenho(simulado_id=primeiro)
     assert (linha.respondidas, linha.acertos) == (1, 0)
-
-
-# --- o que continua olhando o historico -------------------------------------
-
-def test_a_revisao_espacada_ainda_ve_o_erro_antigo(banco_temporario):
-    """O acumulado diz 100% (a ultima resposta acertou), mas o erro das 10h
-    agendou a revisao de 1 dia - e acertar no mesmo dia e treino, nao
-    revisao."""
-    q = _questao()
-    _simulado_com(q, False, _as(10))
-    _simulado_com(q, True, _as(14))
-
-    assert _penal() == (1, 1)
-    (revisao,) = espacada.agenda()
-    assert revisao.etapa == 1
 
 
 # --- o acerto por assunto ---------------------------------------------------

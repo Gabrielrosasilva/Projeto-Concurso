@@ -1,9 +1,11 @@
-"""Revisao espacada 1-7-30 e o fator de tempo da prioridade.
+"""A rodada da revisao espacada, a fila na home e o fator de tempo.
 
-As respostas sao gravadas com a data escolhida pelo teste: a agenda sai do
-historico, e o que se testa e a regra em cima dele - sem esperar dias.
+A fila de revisao e uma so, a do `servico/estudo.py` (decisao 128), e a regra
+dela - os gatilhos, o 1-7-30, as pontas - e testada no test_estudo.py. As
+datas sao fixas: nada aqui depende do dia em que o teste roda.
 """
 from datetime import date, datetime, timedelta, timezone
+from types import SimpleNamespace
 
 import pytest
 from sqlalchemy import select
@@ -11,8 +13,13 @@ from sqlalchemy import select
 from radar import amostra, foco, onde_estudar, servico
 from radar.db import sessao
 from radar.models import QuestaoDeProva, QuestaoGerada, RespostaDeSimulado, Simulado
-from radar.servico import espacada, inicio
+from radar.servico import classificacoes, espacada, estudo, inicio, metricas
+from radar.servico import cronograma as diario
 
+from tests.test_desempenho import (  # noqa: F401 - fixtures e ajudantes
+    APLICACAO, HOJE, NO_TEMPO, PENAL, SEG, _responder, arvore, plano,
+)
+from tests.test_desempenho import _questao as _questao_real
 from tests.test_foco import _classificar, _concurso, com_quadro_do_edital  # noqa: F401
 
 CADERNO = "https://fepese.test/ap2019.pdf"
@@ -46,97 +53,58 @@ def _respondi(questao_id: int, acertou: bool, dia: date, gerada=False):
         ))
 
 
-@pytest.fixture
-def acervo(banco_temporario):
+# --- a rodada das revisoes de hoje ------------------------------------------
+# A fila e a do `estudo` (decisao 128); a regra dela esta no test_estudo.py.
+# Aqui, so a rodada que o botao da home monta com as pontas dessa fila.
+
+def _no_acervo(numero: int, caminho: str, materia: str = PENAL) -> int:
+    """Uma questao real classificada em `caminho`, que eu nunca respondi."""
     with sessao() as s:
-        s.add(_concurso())
-    return [_questao(n) for n in range(1, 6)]
+        questao = _questao_real(numero, materia)
+        s.add(questao)
+        s.flush()
+        questao_id, chave = questao.id, classificacoes.chave_de(questao)
+    classificacoes.classificar(chave, caminho, "teste")
+    return questao_id
 
 
-# --- a agenda ---------------------------------------------------------------
-
-def test_errou_volta_amanha(acervo):
-    _respondi(acervo[0], False, DIA)
-
-    (r,) = espacada.agenda()
-    assert (r.etapa, r.vence_em) == (1, DIA + timedelta(days=1))
-    assert not r.pendente(DIA)
-    assert r.pendente(DIA + timedelta(days=1))
-
-
-def test_acertou_na_data_passa_para_7_e_depois_30(acervo):
-    _respondi(acervo[0], False, DIA)
-    _respondi(acervo[1], True, DIA + timedelta(days=1))
-    (r,) = espacada.agenda()
-    assert (r.etapa, r.vence_em) == (2, DIA + timedelta(days=8))
-
-    _respondi(acervo[2], True, DIA + timedelta(days=8))
-    (r,) = espacada.agenda()
-    assert (r.etapa, r.vence_em) == (3, DIA + timedelta(days=38))
-
-
-def test_passou_da_de_30_sai_da_agenda(acervo):
-    _respondi(acervo[0], False, DIA)
-    _respondi(acervo[1], True, DIA + timedelta(days=1))
-    _respondi(acervo[2], True, DIA + timedelta(days=8))
-    _respondi(acervo[3], True, DIA + timedelta(days=38))
-    assert espacada.agenda() == []
-
-
-def test_acertar_antes_do_vencimento_nao_conta(acervo):
-    """No mesmo dia do erro e treino, nao revisao."""
-    _respondi(acervo[0], False, DIA)
-    _respondi(acervo[1], True, DIA)
-    (r,) = espacada.agenda()
-    assert r.etapa == 1
-
-
-def test_errar_de_novo_volta_ao_comeco(acervo):
-    _respondi(acervo[0], False, DIA)
-    _respondi(acervo[1], True, DIA + timedelta(days=1))
-    _respondi(acervo[2], False, DIA + timedelta(days=3))
-    (r,) = espacada.agenda()
-    assert (r.etapa, r.vence_em) == (1, DIA + timedelta(days=4))
-
-
-def test_sem_assunto_revisa_a_materia(acervo):
-    """Toda questao de Direito esta sem assunto hoje: agenda a materia."""
-    _respondi(acervo[0], False, DIA)
-    (r,) = espacada.agenda()
-    assert r.assunto is None and r.nome == "Direito Penal (sem assunto)"
-
-
-def test_gerada_e_anulada_nao_agendam(acervo):
+def _questoes_da_rodada(rodada) -> list[int]:
     with sessao() as s:
-        s.add(QuestaoGerada(modo="variacao", enunciado="gerada?", resposta="a",
-                            impressao="g1", modelo="teste", materia="Direito Penal"))
-    _respondi(1, False, DIA, gerada=True)
-    anulada = _questao(99, anulada=True)
-    _respondi(anulada, False, DIA)
-    assert espacada.agenda() == []
-
-
-def test_descartar_limpa_a_agenda(acervo):
-    """A agenda sai das respostas: apagou a rodada, apagou o agendamento."""
-    _respondi(acervo[0], False, DIA)
-    assert espacada.agenda()
-    servico.descartar_todos()
-    assert espacada.agenda() == []
-
-
-def test_a_rodada_de_revisao_comeca_pelo_erro(acervo):
-    _respondi(acervo[0], False, DIA)
-    assert espacada.criar_simulado_de_revisao(DIA) is None     # ainda nao venceu
-
-    rodada = espacada.criar_simulado_de_revisao(DIA + timedelta(days=1))
-
-    with sessao() as s:
-        ids = [r.questao_id for r in s.scalars(
+        return [r.questao_id for r in s.scalars(
             select(RespostaDeSimulado).where(RespostaDeSimulado.simulado_id == rodada.id)
             .order_by(RespostaDeSimulado.ordem))]
-    assert ids[0] == acervo[0]
-    assert len(ids) == espacada.POR_ASSUNTO
-    assert rodada.filtros["revisao"][0]["etapa"] == 1
+
+
+def test_a_rodada_vai_pela_ponta_da_fila_e_comeca_pelo_erro(plano):
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    do_no = {_no_acervo(2, NO_TEMPO), _no_acervo(3, NO_TEMPO)}
+    do_pai = _no_acervo(4, APLICACAO)
+
+    rodada = espacada.criar_simulado_de_revisao(HOJE, plano=plano)
+
+    ids = _questoes_da_rodada(rodada)
+    with sessao() as s:
+        errada = s.scalars(select(QuestaoDeProva.id).where(QuestaoDeProva.numero == 1)).one()
+    assert ids[0] == errada
+    assert set(ids[1:]) == do_no and do_pai not in ids
+    # A ponta, e nao o assunto e a materia acima dela: e a mesma revisao.
+    (revisao,) = rodada.filtros["revisao"]
+    assert (revisao["no"], revisao["etapa"]) == (NO_TEMPO, 1)
+    # E o `metricas` a conta como revisao (decisao 79).
+    assert metricas.rodada_que_revisa(rodada.filtros)
+
+
+def test_sem_nada_vencido_nao_ha_rodada(plano):
+    assert espacada.criar_simulado_de_revisao(HOJE, plano=plano) is None
+
+
+def test_no_vencido_sem_questao_no_acervo_nao_vira_rodada_vazia(plano):
+    """Estudei a teoria e o prazo venceu, mas o acervo nao tem questao do no."""
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano, hoje=HOJE)
+
+    assert estudo.pontas(estudo.para_revisar(plano=plano, hoje=HOJE))
+    assert espacada.criar_simulado_de_revisao(HOJE, plano=plano) is None
 
 
 # --- o fator de tempo -------------------------------------------------------
@@ -198,16 +166,63 @@ def test_resposta_de_gerada_nao_conta_no_acerto_do_assunto(banco_temporario,
     assert por_conteudo.por_no(por_conteudo.SEMPRE, hoje=DIA) == {}
 
 
-def test_a_home_mostra_a_revisao_vencida_com_o_botao(acervo, com_quadro_do_edital):
+def test_a_home_mostra_as_pontas_da_fila_do_meu_desempenho(banco_temporario,
+                                                         com_quadro_do_edital,
+                                                         monkeypatch):
+    """A home e o Meu desempenho mostram a mesma fila (decisao 128); a home,
+    so as pontas. A fila e fixa aqui: a regra dela esta no test_estudo.py."""
     from fastapi.testclient import TestClient
 
     from radar.web.app import app
 
-    _respondi(acervo[0], False, date.today() - timedelta(days=1))
-    cliente = TestClient(app)
-    texto = cliente.get("/").text
+    with sessao() as s:
+        s.add(_concurso())
+    fila = [
+        estudo.ParaRevisar(NO_TEMPO, "Lei penal no tempo", "subassunto",
+                           motivos=[estudo.POR_ERRO]),
+        estudo.ParaRevisar(APLICACAO, "Aplicação da lei penal", "assunto",
+                           motivos=[estudo.POR_ERRO]),
+    ]
+    monkeypatch.setattr(inicio.estudo, "situacoes", lambda **_: {})
+    monkeypatch.setattr(inicio.estudo, "para_revisar", lambda **_: fila)
+    monkeypatch.setattr(inicio.estudo, "proxima_revisao", lambda **_: None)
 
-    assert "revisão(ões) para hoje" in texto
-    assert "Direito Penal (sem assunto)" in texto
-    resposta = cliente.post("/revisao/hoje", follow_redirects=False)
-    assert resposta.headers["location"].startswith("/simulado/")
+    texto = TestClient(app).get("/").text
+
+    assert "conteúdo(s) para revisar hoje" in texto
+    assert "Lei penal no tempo · erro recente" in texto
+    assert "Aplicação da lei penal ·" not in texto        # o assunto acima dela
+
+
+def test_a_home_diz_a_proxima_revisao_com_a_fila_vazia(banco_temporario,
+                                                       com_quadro_do_edital,
+                                                       monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    with sessao() as s:
+        s.add(_concurso())
+    proxima = estudo.ParaRevisar(NO_TEMPO, "Lei penal no tempo", "subassunto",
+                                 vence_em=date(2026, 10, 6), etapa=2)
+    monkeypatch.setattr(inicio.estudo, "situacoes", lambda **_: {})
+    monkeypatch.setattr(inicio.estudo, "para_revisar", lambda **_: [])
+    monkeypatch.setattr(inicio.estudo, "proxima_revisao", lambda **_: proxima)
+
+    texto = TestClient(app).get("/").text
+
+    assert "Próxima revisão: <b>Lei penal no tempo</b> em 06/10." in texto
+
+
+@pytest.mark.parametrize("rodada, destino", [
+    (SimpleNamespace(id=7), "/simulado/7"),
+    (None, "/"),
+])
+def test_o_botao_da_home_abre_a_rodada(banco_temporario, monkeypatch, rodada, destino):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    monkeypatch.setattr(espacada, "criar_simulado_de_revisao", lambda: rodada)
+    resposta = TestClient(app).post("/revisao/hoje", follow_redirects=False)
+    assert resposta.headers["location"] == destino

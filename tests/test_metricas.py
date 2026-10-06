@@ -423,15 +423,22 @@ def test_nenhum_template_soma_contagem():
     """CLAUDE.md: "template nenhum soma". A auditoria de 04/10 achou quatro
     contas em template (Meu desempenho, Macetes, a rodada compilada e a
     ficha); foram para o Python. Este teste nao deixa voltar: nada de
-    `| sum(` e nada de `set x = contagem + contagem` num template."""
+    `| sum(`, nada de `set x = contagem + contagem` e nada de
+    `{{ contagem - contagem }}` num template - a ultima escapou ate a
+    decisao 128 (o "faltarão" do simulado), porque so o `set` era olhado."""
     import re
     from pathlib import Path
 
     pasta = Path(__file__).resolve().parents[1] / "src" / "radar" / "web" / "templates"
-    contagem = r"(questoes|acertos|erros|respondidas|total|com_consulta|sem_resultado|pedidas|entregues)"
+    contagem = (r"(questoes|acertos|erros|respondidas|total|com_consulta|"
+                r"sem_resultado|pedidas|entregues|disponiveis|reais)")
     proibido = [
         re.compile(r"\|\s*sum\("),
         re.compile(r"\{%-?\s*set\s+\w+\s*=[^%]*\b" + contagem + r"\b[^%~]*\s[-+]\s"),
+        re.compile(r"\{\{[^}]*\b" + contagem + r"\b\s*[-+]\s*[\w(]"),
+        re.compile(r"\{\{[^}]*[\w)]\s*[-+]\s*[\w.]*\b" + contagem + r"\b"),
+        # A ficha contava as questoes reais pelo tamanho da lista.
+        re.compile(r"questoes_reais\s*\|\s*length"),
         # Subtrair tamanhos de listas de QUESTOES; "e mais N assuntos" na tela
         # e apresentacao de lista, e nao contagem de questao.
         re.compile(r"questoes\w*\s*\|\s*length\s*\)?\s*[-+]\s"),

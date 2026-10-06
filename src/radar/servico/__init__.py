@@ -123,7 +123,8 @@ from radar.servico import sabado        # noqa: F401 - usado pela web
 # A faixa de Portugues que comeca pelas do radar (decisao 107).
 # `servico.faixa_no_radar.das_faixas(...)`.
 from radar.servico import faixa_no_radar  # noqa: F401 - usado pela web
-# A revisao espacada, 1-7-30 dias. `servico.espacada.pendentes()`.
+# A rodada da revisao espacada, 1-7-30 dias, com os nos da fila do `estudo`
+# (decisao 128). `servico.espacada.criar_simulado_de_revisao()`.
 from radar.servico import espacada      # noqa: F401 - usado pela web e CLI
 # O diario do cronograma. `servico.cronograma.registrar(...)`.
 from radar.servico import cronograma    # noqa: F401 - usado pela CLI

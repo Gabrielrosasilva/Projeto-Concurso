@@ -258,10 +258,11 @@ def conferir(inicio: date | None = None, fim: date | None = None, *,
         if de_ia:
             # A conta e a do `metricas` (o treino de IA dele), e nao uma
             # recontagem aqui: resposta do radar nunca tem conta inconsistente.
-            certas = metricas.contar(de_ia).treino_ia.ia_acertos
+            treino_ia = metricas.contar(de_ia).treino_ia
             dia.achados.append(Achado(
                 TREINO_IA,
-                gravado=f"{len(de_ia)} respostas a questão de IA ({certas} certas)",
+                gravado=(f"{treino_ia.ia} respostas a questão de IA "
+                         f"({treino_ia.ia_acertos} certas)"),
                 regra="conta no volume, nunca no acerto",
                 proposta="nada",
             ))

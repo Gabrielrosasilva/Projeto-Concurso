@@ -35,7 +35,7 @@ from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado
 from radar.regioes import normalizar
 from radar.origem import AUTOMATICO
-from radar.servico import espacada
+from radar.servico import estudo
 from radar.servico import metricas
 from radar.servico import simulado as treino
 from radar.util import para_local
@@ -101,7 +101,8 @@ class Home:
     painel: foco.Painel
     prioridades: list[Prioridade] = field(default_factory=list)
     revisar: Revisar = field(default_factory=Revisar)
-    #: As revisoes espacadas que vencem hoje ou ja venceram, e a proxima.
+    #: As pontas da fila de revisao do `estudo` (a do Meu desempenho, decisao
+    #: 128), e o proximo prazo quando ela esta vazia.
     revisoes_de_hoje: list = field(default_factory=list)
     proxima_revisao: object = None
     evolucao: treino.Evolucao = field(default_factory=treino.Evolucao)
@@ -197,14 +198,15 @@ def _revisar(painel: foco.Painel | None = None) -> Revisar:
 
 def montar() -> Home:
     painel = foco.montar()
+    # Montadas uma vez: a fila e o proximo prazo saem das mesmas situacoes, no
+    # recorte padrao do Meu desempenho (o ciclo).
+    todas = estudo.situacoes(recorte=estudo.por_conteudo.CICLO)
     return Home(
         painel=painel,
         prioridades=prioridades(painel),
         revisar=_revisar(painel),
-        revisoes_de_hoje=espacada.pendentes(),
-        proxima_revisao=next(
-            (r for r in espacada.agenda() if not r.pendente(date.today())), None
-        ),
+        revisoes_de_hoje=estudo.pontas(estudo.para_revisar(todas=todas)),
+        proxima_revisao=estudo.proxima_revisao(todas=todas),
         evolucao=treino.evolucao(),
         novidade=painel.sinais[0] if painel.sinais else None,
         questoes_para_treinar=painel.questoes_para_treinar,
