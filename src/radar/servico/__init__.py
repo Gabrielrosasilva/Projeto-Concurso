@@ -60,6 +60,7 @@ from radar.servico.provas import (      # noqa: F401 - a fachada
     composicao_do_caderno,
     contar_questoes,
     extrair_questoes,
+    guardar_textos_base,
     gravar_assuntos,
     IncidenciaDaEvidencia,
     incidencia_por_evidencia,

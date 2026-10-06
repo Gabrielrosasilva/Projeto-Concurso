@@ -563,3 +563,11 @@ faixa divididas entre os nós dela). "Falta" e "sobra" são contra ela.
 | Princípios de contagem e probabilidade > Permutações e ordenação | Princípios de contagem | 4 | 2 | 1 | — | 2 |
 | Princípios de contagem e probabilidade > Princípio multiplicativo | Princípios de contagem | 4 | 2 | 1 | — | 2 |
 | Princípios de contagem e probabilidade > Probabilidade | Probabilidade | 13 | 10 | 2 | — | 3 |
+
+## 06/10: a semana de 06 a 12/10 completada
+
+A falta das faixas de 06 a 12/10 foi escrita de uma vez (decisao 131): 90
+questoes em 15 nos, inclusive os 4 nos novos da decisao 129 que essa semana
+usa, lidas uma a uma contra a fonte antes da importacao. A conta da faixa
+(`fichas.geradas_por_no`) da falta zero nessa semana; de 13/10 em diante
+continua sob demanda.

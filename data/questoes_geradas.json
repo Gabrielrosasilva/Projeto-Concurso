@@ -391,6 +391,32 @@
   },
   {
     "alternativas": {
+      "a": "É vedado utilizar o produto da remuneração pelo trabalho para o ressarcimento ao Estado das despesas realizadas com a manutenção do condenado.",
+      "b": "O ressarcimento ao Estado das despesas realizadas com a manutenção do condenado será atendido em proporção a ser fixada e sem prejuízo da indenização dos danos causados pelo crime, da assistência à família e das pequenas despesas pessoais.",
+      "c": "O ressarcimento ao Estado das despesas com a manutenção do condenado tem prioridade sobre a assistência à família e sobre a indenização dos danos causados pelo crime.",
+      "d": "O ressarcimento ao Estado das despesas com a manutenção do condenado consumirá a integralidade da remuneração enquanto ele permanecer no estabelecimento.",
+      "e": "O ressarcimento ao Estado das despesas com a manutenção do condenado somente poderá ocorrer após a entrega do pecúlio ao condenado posto em liberdade."
+    },
+    "artigo": "art. 29, § 1º, alínea d, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215764+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a destinação do produto da remuneração pelo trabalho do preso, assinale a alternativa correta.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "047898039d47c776dde9139f3a4d4ef8",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "Os presos provisórios, isto é, ainda não condenados, ficam em ala separada.",
       "b": "Os presos provisórios ficam, em ala separada.",
       "c": "Os presos, provisórios ficam em ala separada.",
@@ -755,6 +781,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 32, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215767+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, na atribuição do trabalho ao preso deverão ser levadas em conta: 1. a habilitação do preso. 2. a gravidade do crime praticado. 3. a condição pessoal e as necessidades futuras do preso. 4. as oportunidades oferecidas pelo mercado.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "075c88b89b48ce579d5b320a51218cf0",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "São corretas apenas as afirmativas 1 e 2.",
       "c": "São corretas apenas as afirmativas 1 e 3.",
@@ -989,6 +1041,32 @@
   },
   {
     "alternativas": {
+      "a": "Se Marta é escrivã ou não é escrivã, então Lucas é agente.",
+      "b": "Se Marta é escrivã, então Lucas é agente e Marta não é escrivã.",
+      "c": "Se Lucas é agente e Marta é escrivã, então Marta não é escrivã.",
+      "d": "Se Lucas é agente, então Marta é escrivã ou Marta não é escrivã.",
+      "e": "Marta não é escrivã ou Lucas é agente."
+    },
+    "artigo": "Tautologia: q → (p ∨ ~p) é sempre V, pois o consequente p ∨ ~p é V em todas as linhas",
+    "assunto": "Tabelas-verdade",
+    "base": "questao_real",
+    "conteudo": "Raciocínio Lógico > Tabelas-verdade",
+    "criada_em": "2026-10-06T03:47:44.682739+00:00",
+    "enunciado": "Assinale a alternativa que apresenta uma tautologia.",
+    "escopo": "Raciocínio Lógico > Tabelas-verdade",
+    "evidencia_da_base": "complementar",
+    "impressao": "0a6c7c82f85e9c94b6c538273639e10d",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "6b75097d7ffe6d7a028dc8bff28611ee",
+    "origem_impressao": "3e87442dc1dc3a7626fe25bc1eab50fd",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "Deus o abençoe.",
       "b": "Quanto me custou aquele erro!",
       "c": "Ele sempre me ajudou.",
@@ -1145,6 +1223,32 @@
   },
   {
     "alternativas": {
+      "a": "à • a • a • à • à • a",
+      "b": "a • à • à • a • à • à",
+      "c": "à • à • à • a • a • a",
+      "d": "à • a • à • a • à • a",
+      "e": "a • a • à • à • a • a"
+    },
+    "artigo": "Crase: devido à; dirigir-se à sala; locução prepositiva feminina (à espera de); sem crase antes de verbo (a partir) e após preposição (sobre a)",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522572+00:00",
+    "enunciado": "Complete as lacunas do texto abaixo, quanto à indicação de crase. Devido ____ forte chuva, ____ reunião foi adiada, e os participantes se dirigiram ____ sala do segundo andar ____ partir das 14 horas, ____ espera de uma decisão sobre ____ nova data. Assinale a alternativa que completa correta e sequencialmente as lacunas do texto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "0aeed2701b8e2974f4b96c53666d89a3",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "e05eb943f38fdc37610e0fcc29f507dd",
+    "origem_impressao": "5f0c9cac45d6b61f77cb800dd2e1b769",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "menor de dezoito anos ou maior de setenta, nem aplicá-la a mulher em estado de gravidez.",
       "b": "reincidente.",
       "c": "estrangeira.",
@@ -1275,6 +1379,58 @@
   },
   {
     "alternativas": {
+      "a": "uma Corte Interamericana de Direitos Humanos.",
+      "b": "uma Corte Mundial de Direitos Humanos com jurisdição obrigatória.",
+      "c": "um Conselho de Segurança específico para os direitos humanos.",
+      "d": "uma nova Declaração Universal, em substituição à de 1948.",
+      "e": "um Alto Comissário para os Direitos Humanos."
+    },
+    "artigo": "Declaração e Programa de Ação de Viena, 1993, parte II, § 18",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642963+00:00",
+    "enunciado": "Ao tratar da adaptação e do fortalecimento do sistema das Nações Unidas para os direitos humanos, a Declaração e Programa de Ação de Viena, de 1993, recomendou à Assembleia Geral que examinasse, com prioridade, a questão da criação de:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "0cb1e9fd6dd0c6423cfb563174a3b7e8",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "62e7c8dbda287708190101ab17ecca45",
+    "origem_impressao": "84e1faf35b321204574866db441ca174",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "A fiscalização deu atenção especial à saúde dos trabalhadores.",
+      "b": "Os turistas chegaram à Florianópolis de madrugada.",
+      "c": "O curso terá duração de três à quatro meses.",
+      "d": "Os adversários ficaram face à face no debate.",
+      "e": "Refiro-me à você, que chegou atrasado."
+    },
+    "artigo": "Crase obrigatória: preposição exigida pelo nome (atenção a) + artigo feminino (a saúde)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442497+00:00",
+    "enunciado": "Assinale a alternativa em que o acento indicativo de crase foi empregado corretamente.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "0cb42ef6d18fc1d708bfcd31e1b063b0",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "0059e99a70f794d87a5f5c8234f94d60",
+    "origem_impressao": "5fca2a2d69b2ba1a27e69937a25380be",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Assisti a peça de teatro ontem.",
       "b": "Vou a Bahia nas férias.",
       "c": "O documento foi entregue a cada agente do plantão.",
@@ -1298,6 +1454,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "O ônibus partiu rumo à Joinville.",
+      "b": "O atendimento será feito de terça à quinta.",
+      "c": "As candidatas entraram na sala uma à uma.",
+      "d": "Entregou o documento à ela antes da reunião.",
+      "e": "A nova lei garante proteção à mulher vítima de violência."
+    },
+    "artigo": "Crase obrigatória: preposição exigida pelo nome (proteção a) + artigo feminino (a mulher)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442498+00:00",
+    "enunciado": "Assinale a alternativa em que o uso da crase está de acordo com a norma-padrão.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "0d1bae509a2a211c9b1a188304912d20",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "0059e99a70f794d87a5f5c8234f94d60",
+    "origem_impressao": "5fca2a2d69b2ba1a27e69937a25380be",
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -1509,6 +1691,32 @@
   },
   {
     "alternativas": {
+      "a": "A • a • a • à • à • a",
+      "b": "A • à • a • à • a • à",
+      "c": "À • a • à • à • à • a",
+      "d": "A • à • a • a • à • a",
+      "e": "A • a • à • à • a • à"
+    },
+    "artigo": "Crase: em atenção à determinação; à qual (caber a); sem crase após preposição (para a), antes de pronome indefinido (a todos) e antes de sujeito (a organização)",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522553+00:00",
+    "enunciado": "Complete as lacunas do texto abaixo quanto ao uso da crase. ____ cerimônia de posse dos novos agentes, marcada para ____ próxima semana, será transmitida ____ todos os servidores, em atenção ____ determinação da secretaria, ____ qual cabe ____ organização do evento. Assinale a alternativa que completa correta e sequencialmente as lacunas do texto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "0f98dda9e42d1877c6eaeecab938ef18",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "e05eb943f38fdc37610e0fcc29f507dd",
+    "origem_impressao": "5f0c9cac45d6b61f77cb800dd2e1b769",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 2.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -1636,6 +1844,32 @@
     "origem_impressao": "82a15ac3cedd024541852f28358a2487",
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "CF, art. 4º, II; Título II; art. 34, VII, b",
+    "assunto": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+    "criada_em": "2026-10-06T03:47:16.060056+00:00",
+    "enunciado": "Analise as afirmativas abaixo sobre a terminologia dos direitos humanos. 1. A Constituição Federal de 1988 emprega a expressão \"direitos humanos\" ao enumerar os princípios que regem a República Federativa do Brasil nas suas relações internacionais. 2. A expressão \"direitos naturais\" é a mais aceita contemporaneamente, por indicar que esses direitos são imutáveis e independentes de qualquer reconhecimento histórico. 3. O Título II da Constituição Federal de 1988 é denominado \"Dos Direitos e Garantias Fundamentais\". 4. A Constituição Federal de 1988 menciona os \"direitos da pessoa humana\" entre os princípios constitucionais cuja observância a União pode assegurar mediante intervenção nos Estados e no Distrito Federal. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+    "evidencia_da_base": "alvo",
+    "impressao": "107ec42d8eac892a793a130d0ac7f07a",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "97713485d0822d3468be1b630f2bcdd4",
+    "origem_impressao": "9a43f33c3057d490fcb98d38242dc4eb",
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -1847,6 +2081,32 @@
   },
   {
     "alternativas": {
+      "a": "O secretário passou à limpo o texto do ofício.",
+      "b": "O expediente se encerra às cinco e meia.",
+      "c": "O advogado dirigiu-se à Vossa Excelência com respeito.",
+      "d": "Os alunos avançaram passo à passo na matéria.",
+      "e": "Refiro-me à esta proposta do conselho."
+    },
+    "artigo": "Crase obrigatória na indicação de hora determinada (às cinco e meia)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442502+00:00",
+    "enunciado": "Assinale a alternativa em que o acento indicativo de crase está correto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "1318c17a840de69b7983d83fdbedc39b",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "7a30a3e6db0bab4c21276f5797614784",
+    "origem_impressao": "4e94a5c953a382587f03e9235728cc87",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "abaixo da Constituição e acima das leis ordinárias.",
       "b": "acima da Constituição.",
       "c": "no mesmo nível das leis ordinárias.",
@@ -1896,6 +2156,58 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "p ∧ (~q → r)",
+      "b": "(p ∨ ~q) → r",
+      "c": "(p ∧ q) → ~r",
+      "d": "(p ∧ ~q) → r",
+      "e": "r → (p ∧ ~q)"
+    },
+    "artigo": "Tradução para a linguagem simbólica: “Se P, então Q” é P → Q; “P e Q” é P ∧ Q; “não q” é ~q",
+    "assunto": "Lógica proposicional (ou sentencial)",
+    "base": "item_do_edital",
+    "conteudo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "criada_em": "2026-10-06T03:47:16.765119+00:00",
+    "enunciado": "Considere as proposições simples p: “O agente está de plantão”; q: “O portão foi trancado”; r: “O alarme disparou”. A proposição “Se o agente está de plantão e o portão não foi trancado, então o alarme disparou” é corretamente representada, em linguagem simbólica, por:",
+    "escopo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "15a6171a319a49381131b5a7422fa54c",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 29, § 1º, alíneas a, b e c, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215763+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, o produto da remuneração pelo trabalho do preso deverá atender: 1. à indenização dos danos causados pelo crime, desde que determinados judicialmente e não reparados por outros meios. 2. à assistência à família. 3. à formação de fundo destinado ao custeio das atividades do Conselho da Comunidade. 4. a pequenas despesas pessoais.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "15e435a6713d8e6e4a2e9ce01588cdb1",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -2026,6 +2338,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "foi um tratado de natureza comercial, cujo cumprimento era condição para o ingresso dos Estados no comércio internacional.",
+      "b": "impôs aos Estados um modelo único de Constituição, aprovado pelo Conselho de Segurança da ONU.",
+      "c": "vigora apenas nos países que participaram da Segunda Guerra Mundial.",
+      "d": "foi redigida após o fim da Guerra Fria para substituir as constituições nacionais.",
+      "e": "foi proclamada como ideal comum a ser atingido por todos os povos e todas as nações, cujo reconhecimento e observância devem ser assegurados por medidas progressivas de caráter nacional e internacional."
+    },
+    "artigo": "DUDH, 1948, preâmbulo (proclamação pela Assembleia Geral da ONU); DUDH, art. 1º",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:47:15.989272+00:00",
+    "enunciado": "Ao promulgar nova Constituição, determinado país incluiu em seu texto um extenso rol de direitos fundamentais, reproduzindo princípios como o de que todos os seres humanos nascem livres e iguais em dignidade e em direitos. Essa influência é compatível com o papel histórico da Declaração Universal dos Direitos Humanos, porque ela:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "17883575870c6cd78e6acd5006265a25",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "949aa2114c601e322ac398318ef44a76",
+    "origem_impressao": "e3616d8f492e501b964f390b5b0421b8",
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -2234,6 +2572,58 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "na Inglaterra, em 1215, como limitação ao poder do rei João Sem Terra.",
+      "b": "na Inglaterra, em 1689, após a Revolução Gloriosa.",
+      "c": "nos Estados Unidos, em 1787, com a aprovação da Constituição federal.",
+      "d": "na França, em 1789, no contexto da Revolução Francesa.",
+      "e": "em Paris, em 1948, pela Assembleia Geral das Nações Unidas."
+    },
+    "artigo": "Declaração dos Direitos do Homem e do Cidadão, 1789, art. 1º",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642953+00:00",
+    "enunciado": "A declaração que afirmou, em seu art. 1º, que os homens nascem e permanecem livres e iguais em direitos, e que as distinções sociais só podem fundamentar-se na utilidade comum, foi proclamada:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "194321896056e7e3d22a56a361129f77",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "949aa2114c601e322ac398318ef44a76",
+    "origem_impressao": "e3616d8f492e501b964f390b5b0421b8",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 34, caput e § 1º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215770+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, analise as afirmativas abaixo sobre o trabalho gerenciado por fundação ou empresa pública: 1. O trabalho poderá ser gerenciado por fundação, ou empresa pública, com autonomia administrativa. 2. O trabalho assim gerenciado terá por objetivo a formação profissional do condenado. 3. Incumbirá à entidade gerenciadora promover e supervisionar a produção, com critérios e métodos empresariais, e encarregar-se de sua comercialização. 4. Incumbirá ao Estado, e não à entidade gerenciadora, suportar as despesas, inclusive o pagamento de remuneração adequada.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "1a0b9a04de44dfcec3e690a759b20d4e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -2532,7 +2922,7 @@
     "artigo": "LEP, art. 75, I e II",
     "assunto": "LEP, art. 75",
     "base": "questao_real",
-    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
     "criada_em": "2026-10-03T22:41:17.567422+00:00",
     "enunciado": "Segundo a Lei de Execução Penal, são requisitos para o cargo de diretor de estabelecimento penal: 1. diploma de nível superior em qualquer área. 2. experiência administrativa na área. 3. idade mínima de trinta anos. Assinale a alternativa que indica todas as afirmativas corretas.",
     "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais",
@@ -2754,6 +3144,32 @@
     "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "interdependentes e se reforçam mutuamente.",
+      "b": "independentes entre si, podendo o Estado priorizar o desenvolvimento econômico e adiar os direitos humanos.",
+      "c": "objetivos sucessivos: primeiro o desenvolvimento, depois a democracia e, por fim, os direitos humanos.",
+      "d": "matérias de competência exclusiva de cada Estado, alheias à comunidade internacional.",
+      "e": "incompatíveis com as particularidades nacionais e regionais."
+    },
+    "artigo": "Declaração e Programa de Ação de Viena, 1993, parte I, § 8",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642963+00:00",
+    "enunciado": "Segundo a Declaração e Programa de Ação de Viena, de 1993, a democracia, o desenvolvimento e o respeito aos direitos humanos e às liberdades fundamentais são:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "1e00736586f7557e24dd8fe933623abe",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "62e7c8dbda287708190101ab17ecca45",
+    "origem_impressao": "84e1faf35b321204574866db441ca174",
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -3017,6 +3433,32 @@
   },
   {
     "alternativas": {
+      "a": "pelo Juiz da Execução e composta, no mínimo, por dois chefes de serviço, um psiquiatra, um psicólogo e um assistente social.",
+      "b": "pelo representante do Ministério Público e composta, no mínimo, por um chefe de serviço, um médico clínico e um assistente social.",
+      "c": "pelo Diretor e composta, no mínimo, por dois chefes de serviço, um psiquiatra, um psicólogo e um assistente social.",
+      "d": "pelo Diretor e composta, no máximo, por dois chefes de serviço, um psiquiatra e um psicólogo.",
+      "e": "pelo chefe de segurança e composta, no mínimo, por três chefes de serviço, um psiquiatra e um defensor público."
+    },
+    "artigo": "art. 7º, caput, da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136279+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a Comissão Técnica de Classificação, existente em cada estabelecimento, quando se tratar de condenado à pena privativa da liberdade, será presidida:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "201da6151f97e1d767a8bc9699e3408e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "conclusão do ensino fundamental, médio ou superior durante o cumprimento da pena, certificada pelo órgão competente.",
       "b": "bom comportamento carcerário.",
       "c": "trabalho aos domingos.",
@@ -3092,6 +3534,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "Os candidatos saíram à cavalo.",
+      "b": "A reunião está marcada para às 10 horas.",
+      "c": "O júri foi retomado às 14 horas.",
+      "d": "Os pacientes foram atendidos um à um.",
+      "e": "Os documentos foram escritos à lápis."
+    },
+    "artigo": "Crase obrigatória na indicação de hora determinada (às 14 horas)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442499+00:00",
+    "enunciado": "Assinale a alternativa em que a crase foi empregada corretamente.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "21153ff9182404cc1c0e8b0ff48a8ade",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "7a6301bb1a9af28aaa690926329dc9b3",
+    "origem_impressao": "d9ebf4f4a7422ab23273e0fbed94cab7",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -3248,6 +3716,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "arts. 5º e 6º da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136278+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, analise as afirmativas abaixo sobre a classificação dos condenados: 1. Os condenados serão classificados segundo os seus antecedentes e personalidade. 2. A classificação dos condenados tem por finalidade orientar a individualização da execução penal. 3. A classificação será feita por Comissão Técnica de Classificação. 4. A Comissão Técnica de Classificação elaborará o programa individualizador da pena privativa de liberdade adequada ao condenado ou preso provisório.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "235fe16020f79b180c5a72965bbb033f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -3430,6 +3924,58 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "cidadão • cristão • órgão • irmão • grão",
+      "b": "mão • pão • chão • vão • cão",
+      "c": "alemão • capitão • tabelião • escrivão • limão",
+      "d": "botão • leão • órfão • canção • pulmão",
+      "e": "bênção • sótão • capelão • mão • acórdão"
+    },
+    "artigo": "Plural de -ão: cidadão, cristão, órgão, irmão e grão fazem o plural em -ãos",
+    "assunto": "Plural dos substantivos terminados em -ão",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Flexão nominal e verbal > Plural dos substantivos terminados em -ão",
+    "criada_em": "2026-10-06T03:47:16.619862+00:00",
+    "enunciado": "Assinale a alternativa em que todas as palavras formam o plural da mesma maneira.",
+    "escopo": "Língua Portuguesa > Flexão nominal e verbal > Plural dos substantivos terminados em -ão",
+    "evidencia_da_base": "alvo",
+    "impressao": "2522ac2445ab8cd2896600b7f95353a6",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "5910957069ae82e1922bb58d28c02ada",
+    "origem_impressao": "2ad52c464b4c016f26586fd7bd717424",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Ana é policial penal e Bruno é delegado.",
+      "b": "Se Bruno é delegado, então Caio não é perito.",
+      "c": "Ana é policial penal se e somente se Caio não é perito.",
+      "d": "Bruno é delegado ou Caio não é perito.",
+      "e": "Se Caio é perito, então Ana não é policial penal."
+    },
+    "artigo": "Condicional: p → q só é falsa quando p é V e q é F; com antecedente falso, a condicional é verdadeira",
+    "assunto": "Lógica proposicional (ou sentencial)",
+    "base": "item_do_edital",
+    "conteudo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "criada_em": "2026-10-06T03:47:16.765112+00:00",
+    "enunciado": "Sabe-se que as proposições “Ana é policial penal” e “Caio é perito” são verdadeiras e que a proposição “Bruno é delegado” é falsa. Com base nessas informações, assinale a alternativa que apresenta uma proposição composta verdadeira.",
+    "escopo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "257635c0ac475aeee137751374eca110",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -3719,6 +4265,32 @@
   },
   {
     "alternativas": {
+      "a": "A • a • à • à • a • a",
+      "b": "A • à • a • à • à • a",
+      "c": "À • à • a • a • à • à",
+      "d": "A • à • à • à • à • a",
+      "e": "A • a • a • à • à • à"
+    },
+    "artigo": "Crase: apresentar algo à diretora; dirigida à comunidade; à qual (dedicar-se a); sem crase antes de verbo (a partir) e após desde (desde a fundação)",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522549+00:00",
+    "enunciado": "Complete as lacunas do texto abaixo quanto ao emprego do acento indicativo de crase. ____ proposta apresentada ____ diretora da escola foi elaborada ____ partir de uma pesquisa dirigida ____ comunidade, ____ qual os voluntários se dedicam desde ____ fundação do projeto. Assinale a alternativa que completa correta e sequencialmente as lacunas do texto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "2924f8db5edf7834c4171825a2040fa6",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "e05eb943f38fdc37610e0fcc29f507dd",
+    "origem_impressao": "5f0c9cac45d6b61f77cb800dd2e1b769",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "ao Conselho Nacional de Política Criminal e Penitenciária.",
       "b": "ao juiz da execução.",
       "c": "ao Governador do Estado.",
@@ -3910,7 +4482,7 @@
     "artigo": "LEP, art. 75, I a III",
     "assunto": "LEP, art. 75",
     "base": "questao_real",
-    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
     "criada_em": "2026-10-03T22:41:17.567417+00:00",
     "enunciado": "De acordo com a Lei de Execução Penal, para ocupar o cargo de diretor de estabelecimento penal, o candidato deverá: 1. ser portador de diploma de nível superior de Direito, Psicologia, Ciências Sociais, Pedagogia ou Serviços Sociais. 2. possuir experiência administrativa na área. 3. ter idoneidade moral e reconhecida aptidão para o desempenho da função. 4. ter, no mínimo, dez anos de serviço público. Assinale a alternativa que indica todas as afirmativas corretas.",
     "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais",
@@ -4144,7 +4716,7 @@
     "artigo": "LEP, art. 75, I",
     "assunto": "LEP, art. 75",
     "base": "fonte_oficial",
-    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
     "criada_em": "2026-10-03T22:41:17.567424+00:00",
     "enunciado": "Segundo a Lei de Execução Penal, o diretor de estabelecimento penal deverá ser portador de diploma de nível superior em uma das seguintes áreas:",
     "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais",
@@ -4291,6 +4863,32 @@
   },
   {
     "alternativas": {
+      "a": "em qualquer atividade, pública ou privada, independentemente de cautelas contra a fuga.",
+      "b": "somente em serviço ou obras públicas realizadas por órgãos da administração direta ou indireta, ou entidades privadas, desde que tomadas as cautelas contra a fuga e em favor da disciplina.",
+      "c": "somente em serviços prestados a entidades privadas, vedado o trabalho em obras públicas.",
+      "d": "somente em obras públicas realizadas por órgãos da administração direta, vedado o trabalho para a administração indireta.",
+      "e": "somente após a progressão ao regime semiaberto, sendo vedado no regime fechado."
+    },
+    "artigo": "art. 36, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215773+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, o trabalho externo será admissível para os presos em regime fechado:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "324c08bfc5989dcc9bae60f79b090d04",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "deverá residir no estabelecimento, ou nas proximidades, e dedicará tempo integral à sua função.",
       "b": "pode acumular a função com outro cargo de tempo parcial.",
       "c": "deve residir obrigatoriamente na capital do Estado.",
@@ -4300,7 +4898,7 @@
     "artigo": "LEP, art. 75, parágrafo único",
     "assunto": "LEP, art. 75",
     "base": "fonte_oficial",
-    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
     "criada_em": "2026-10-03T22:41:17.567425+00:00",
     "enunciado": "De acordo com a Lei de Execução Penal, quanto ao diretor de estabelecimento penal, é correto afirmar que ele:",
     "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais",
@@ -5071,6 +5669,32 @@
   },
   {
     "alternativas": {
+      "a": "em cadernetas de poupança, e será entregue ao condenado quando posto em liberdade.",
+      "b": "em conta judicial vinculada ao Juízo da Execução, e será entregue mensalmente à família do condenado.",
+      "c": "em fundo penitenciário estadual, e será revertida em favor do estabelecimento penal.",
+      "d": "em cadernetas de poupança, e será entregue ao condenado quando progredir para o regime semiaberto.",
+      "e": "em conta do Conselho da Comunidade, e será destinada à vítima ao término da pena."
+    },
+    "artigo": "art. 29, § 2º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215764+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, ressalvadas outras aplicações legais, a parte restante do produto da remuneração pelo trabalho do preso será depositada para constituição do pecúlio:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3a14080f9ccd2bbdeda815ed20d22caa",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "12 horas de frequência escolar, divididas, no mínimo, em 3 dias.",
       "b": "8 horas de frequência, num único dia.",
       "c": "3 dias de frequência, sem contagem de horas.",
@@ -5432,6 +6056,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Se Bruno é sargento, então Bruno é sargento e Clara é perita.",
+      "b": "Se Bruno é sargento ou Clara é perita, então Clara é perita.",
+      "c": "Se Bruno é sargento e Clara é perita, então Bruno é sargento.",
+      "d": "Bruno é sargento ou Clara não é perita.",
+      "e": "Bruno é sargento e Bruno não é sargento."
+    },
+    "artigo": "Tautologia: (p ∧ q) → p é verdadeira em todas as linhas da tabela-verdade",
+    "assunto": "Tabelas-verdade",
+    "base": "questao_real",
+    "conteudo": "Raciocínio Lógico > Tabelas-verdade",
+    "criada_em": "2026-10-06T03:47:16.835427+00:00",
+    "enunciado": "Um exemplo de tautologia é:",
+    "escopo": "Raciocínio Lógico > Tabelas-verdade",
+    "evidencia_da_base": "complementar",
+    "impressao": "3e87442dc1dc3a7626fe25bc1eab50fd",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "6b75097d7ffe6d7a028dc8bff28611ee",
+    "origem_impressao": "3e87442dc1dc3a7626fe25bc1eab50fd",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -5799,6 +6449,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1 e 3.",
+      "c": "São corretas apenas as afirmativas 2 e 4.",
+      "d": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 28, caput, §§ 1º e 2º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215758+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, analise as afirmativas abaixo sobre o trabalho do condenado: 1. O trabalho do condenado constitui dever social e condição de dignidade humana. 2. Aplicam-se à organização e aos métodos de trabalho as precauções relativas à segurança e à higiene. 3. O trabalho do preso está sujeito ao regime da Consolidação das Leis do Trabalho. 4. O trabalho do condenado terá finalidade exclusivamente punitiva.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "425d4680eec93f04b07772c7e1acd74d",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "O preso tem direito à identificação dos responsáveis por sua prisão ou por seu interrogatório policial.",
       "b": "A identidade dos responsáveis pela prisão será mantida em sigilo até o fim da ação penal.",
       "c": "O preso será informado de seus direitos apenas depois do interrogatório.",
@@ -5900,6 +6576,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "não será inferior a seis, nem superior a oito horas, com descanso nos domingos e feriados.",
+      "b": "não será inferior a quatro, nem superior a seis horas, com descanso aos sábados e domingos.",
+      "c": "não será inferior a seis, nem superior a dez horas, com descanso apenas nos domingos.",
+      "d": "será de oito horas diárias, sem descanso nos feriados.",
+      "e": "não será inferior a oito, nem superior a doze horas, com descanso nos domingos e feriados."
+    },
+    "artigo": "art. 33, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215768+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a jornada normal de trabalho do preso:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "43c7af1d3ef6a251931092dc2f88390f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -6579,6 +7281,32 @@
   },
   {
     "alternativas": {
+      "a": "O condenado ao cumprimento de pena privativa de liberdade em regime fechado será submetido ao exame, e o condenado em regime semiaberto poderá ser submetido a ele.",
+      "b": "O exame é obrigatório para os condenados em regime fechado e semiaberto e facultativo para os condenados em regime aberto.",
+      "c": "Somente o condenado em regime semiaberto será submetido ao exame, vedada a sua realização no regime fechado.",
+      "d": "O exame é facultativo em qualquer regime, cabendo ao diretor do estabelecimento decidir sobre a sua realização.",
+      "e": "O condenado em regime fechado poderá ser submetido ao exame, e o condenado em regime semiaberto será obrigatoriamente submetido a ele."
+    },
+    "artigo": "art. 8º, caput e parágrafo único, da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136280+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, quanto ao exame criminológico para a obtenção dos elementos necessários a uma adequada classificação e com vistas à individualização da execução, é correto afirmar:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "4b660c91a9f1fd6d936b1620d13c44b1",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "dois anos.",
       "b": "três anos.",
       "c": "quatro anos.",
@@ -6602,6 +7330,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 2º, caput e parágrafo único, da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136277+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, analise as afirmativas abaixo sobre a sua aplicação: 1. A jurisdição penal dos juízes ou tribunais da justiça ordinária, em todo o território nacional, será exercida, no processo de execução, na conformidade da Lei de Execução Penal e do Código de Processo Penal. 2. A Lei de Execução Penal aplica-se igualmente ao preso provisório. 3. A Lei de Execução Penal não se aplica ao condenado pela Justiça Militar, ainda que recolhido a estabelecimento sujeito à jurisdição ordinária. 4. A Lei de Execução Penal aplica-se ao condenado pela Justiça Eleitoral, quando recolhido a estabelecimento sujeito à jurisdição ordinária.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "4bf4616eb23b8c12e84c249c1cf46b5c",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -6784,6 +7538,58 @@
     "origem_impressao": "7cc7f6099c57a10f58f818c6183e9562",
     "rejeitada": false,
     "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "Os dois lutadores se enfrentaram corpo à corpo.",
+      "b": "Não vale à pena insistir nesse assunto.",
+      "c": "Não mostrei o projeto à nenhuma colega.",
+      "d": "O treino terminou às nove e quinze.",
+      "e": "Ontem assistimos à um filme premiado."
+    },
+    "artigo": "Crase obrigatória na indicação de hora determinada (às nove e quinze)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442501+00:00",
+    "enunciado": "Assinale a alternativa em que a crase foi corretamente empregada.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "4e94a5c953a382587f03e9235728cc87",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "7a30a3e6db0bab4c21276f5797614784",
+    "origem_impressao": "4e94a5c953a382587f03e9235728cc87",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "Se o vigia não está no posto ou a câmera está gravando, então o portão não está aberto e o alarme não está desligado.",
+      "b": "Se o vigia não está no posto ou a câmera está gravando, então o portão não está aberto ou o alarme não está desligado.",
+      "c": "Se o vigia não está no posto e a câmera está gravando, então o portão não está aberto e o alarme não está desligado.",
+      "d": "Se o portão não está aberto e o alarme não está desligado, então o vigia não está no posto ou a câmera está gravando.",
+      "e": "Se o vigia está no posto e a câmera não está gravando, então o portão está aberto ou o alarme está desligado."
+    },
+    "artigo": "Equivalência contrapositiva: p → q ≡ ~q → ~p, com De Morgan: ~(r ∧ ~s) ≡ ~r ∨ s e ~(p1 ∨ p2) ≡ ~p1 ∧ ~p2",
+    "assunto": "Equivalências",
+    "base": "questao_real",
+    "conteudo": "Raciocínio Lógico > Equivalências",
+    "criada_em": "2026-10-06T03:47:16.691232+00:00",
+    "enunciado": "Assinale a alternativa logicamente equivalente à afirmação “Se o portão está aberto ou o alarme está desligado, então o vigia está no posto e a câmera não está gravando”.",
+    "escopo": "Raciocínio Lógico > Equivalências",
+    "evidencia_da_base": "alvo",
+    "impressao": "5014f59e3347b17d5a296410d75f6e36",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "072a5341364b8cf0f94a48780d946a06",
+    "origem_impressao": "d21511113f89404d4f6bf6572f32c453",
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -7125,6 +7931,58 @@
   },
   {
     "alternativas": {
+      "a": "assegurar a cada Estado soberania absoluta sobre o tratamento dado a seus nacionais, vedada qualquer cooperação internacional na matéria.",
+      "b": "instituir um tribunal internacional permanente para julgar os crimes cometidos na Segunda Guerra Mundial.",
+      "c": "proclamar desde logo a Declaração Universal dos Direitos Humanos, que integra o texto da própria Carta.",
+      "d": "promover o respeito aos direitos humanos apenas entre os membros permanentes do Conselho de Segurança.",
+      "e": "conseguir uma cooperação internacional para promover e estimular o respeito aos direitos humanos e às liberdades fundamentais para todos, sem distinção de raça, sexo, língua ou religião."
+    },
+    "artigo": "Carta das Nações Unidas, 1945, art. 1º, 3",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642964+00:00",
+    "enunciado": "Assinada em São Francisco, em 1945, a Carta das Nações Unidas inaugurou a internacionalização dos direitos humanos no pós-guerra ao incluir, entre os propósitos da Organização, o de:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "56acd8025bdf5f68a0c7b1ef75be8d60",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "f90de2f9ad77289d1e9e1cb19c479e30",
+    "origem_impressao": "d2a78fd885d85043554c598210d50718",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1 e 3.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 13, § 2º, do CP",
+    "assunto": "Infração penal: elementos, espécies",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Infração penal: elementos, espécies",
+    "criada_em": "2026-10-06T03:47:15.915672+00:00",
+    "enunciado": "Conforme o Código Penal, a omissão é penalmente relevante quando o omitente devia e podia agir para evitar o resultado. Analise as hipóteses abaixo, quanto a quem incumbe o dever de agir. 1. A quem tenha por lei obrigação de cuidado, proteção ou vigilância. 2. A quem, de outra forma, assumiu a responsabilidade de impedir o resultado. 3. A quem, com seu comportamento anterior, criou o risco da ocorrência do resultado. 4. A quem seja parente da vítima até o terceiro grau, independentemente de obrigação legal ou de ter assumido a responsabilidade de impedir o resultado. Assinale a alternativa que indica todas as hipóteses previstas no Código Penal.",
+    "escopo": "Direito Penal > Infração penal: elementos, espécies",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "56b98d16372e8cccff2adeb03d838a37",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "São corretas apenas as afirmativas 1 e 2.",
       "b": "São corretas apenas as afirmativas 1, 2 e 3.",
       "c": "São corretas apenas as afirmativas 2, 3 e 4.",
@@ -7148,6 +8006,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de decreto ou regulamento editado pelo Poder Executivo.",
+      "b": "É livre a locomoção no território nacional em qualquer tempo, inclusive durante a guerra, podendo qualquer pessoa nele entrar, permanecer ou dele sair com seus bens, independentemente de lei.",
+      "c": "Ninguém será submetido a tortura, salvo mediante autorização judicial fundamentada, nem a tratamento desumano ou degradante.",
+      "d": "É livre a manifestação do pensamento, sendo permitido o anonimato desde que o conteúdo divulgado não seja ofensivo.",
+      "e": "Homens e mulheres são iguais em direitos e obrigações, nos termos da Constituição."
+    },
+    "artigo": "art. 5º, I, da CF",
+    "assunto": "direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "criada_em": "2026-10-06T03:47:15.842951+00:00",
+    "enunciado": "Considerando os direitos à igualdade, à liberdade e à vida assegurados no art. 5º da Constituição Federal de 1988, assinale a alternativa correta.",
+    "escopo": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "578d4bb58fe05037fb706350dc5ff063",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -7671,6 +8555,32 @@
   },
   {
     "alternativas": {
+      "a": "delegaram ao Secretário-Geral o poder de editar leis internas sobre direitos humanos.",
+      "b": "comprometeram-se a respeitar os direitos humanos apenas em relação aos estrangeiros.",
+      "c": "renunciaram ao direito de legislar sobre direitos civis e políticos.",
+      "d": "comprometeram-se a agir, em conjunto ou separadamente, em cooperação com a Organização, para a realização dos propósitos do art. 55, entre os quais o respeito universal e efetivo dos direitos humanos e das liberdades fundamentais para todos.",
+      "e": "aceitaram a jurisdição obrigatória da Corte Interamericana de Direitos Humanos."
+    },
+    "artigo": "Carta das Nações Unidas, 1945, art. 55, c, e art. 56",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642965+00:00",
+    "enunciado": "A Carta das Nações Unidas, de 1945, não se limitou a enunciar propósitos gerais. Nos seus arts. 55 e 56, os Membros da Organização:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "5d6fb7392730c782bed8e0b8b3614e19",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "f90de2f9ad77289d1e9e1cb19c479e30",
+    "origem_impressao": "d2a78fd885d85043554c598210d50718",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "aplicar pena privativa de liberdade a ser cumprida nos regimes aberto ou semiaberto, ou conceder progressão para tais regimes.",
       "b": "aplicar pena a ser cumprida no regime fechado.",
       "c": "decretar prisão preventiva por crime hediondo.",
@@ -7905,6 +8815,32 @@
   },
   {
     "alternativas": {
+      "a": "da Declaração e Programa de Ação de Viena, de 1993.",
+      "b": "do Pacto Internacional sobre Direitos Civis e Políticos, de 1966.",
+      "c": "da Carta das Nações Unidas, de 1945.",
+      "d": "do Estatuto de Roma do Tribunal Penal Internacional, de 1998.",
+      "e": "da Declaração de Direitos inglesa (Bill of Rights), de 1689."
+    },
+    "artigo": "Declaração e Programa de Ação de Viena, 1993, parte I, § 5",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:47:44.599209+00:00",
+    "enunciado": "Quarenta e cinco anos depois da Declaração Universal dos Direitos Humanos, um documento internacional reafirmou os seus termos e proclamou que todos os direitos humanos são universais, indivisíveis, interdependentes e inter-relacionados. Trata-se:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "60ce094406243c0ba047b50d0cb5546c",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "62e7c8dbda287708190101ab17ecca45",
+    "origem_impressao": "84e1faf35b321204574866db441ca174",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "quando se tornar desnecessária ou inadequada, ou se o acusado ou condenado violar os deveres a que estiver sujeito ou cometer falta grave.",
       "b": "apenas a pedido do condenado.",
       "c": "somente por decisão do diretor do estabelecimento.",
@@ -7952,6 +8888,32 @@
     "modo_do_pedido": "treino",
     "origem_chave": "4ea3228a9cf9fa59bd6d23a8a75d5dbd",
     "origem_impressao": "2f0859a50a0d288efb1b4a0854aad7ff",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "a propriedade é um direito inviolável e sagrado, do qual ninguém pode ser privado.",
+      "b": "todo ser humano tem direito à instrução, que será gratuita, pelo menos nos graus elementares e fundamentais.",
+      "c": "o direito à vida, à liberdade e à segurança pessoal pertence apenas aos nacionais dos Estados-membros da ONU.",
+      "d": "a tortura é admitida em tempo de guerra declarada.",
+      "e": "os direitos sociais só passarão a existir com um tratado posterior, pois a Declaração trata apenas de liberdades individuais."
+    },
+    "artigo": "DUDH, art. 26",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642960+00:00",
+    "enunciado": "Diferentemente das declarações liberais do século XVIII, centradas nas liberdades individuais, a Declaração Universal dos Direitos Humanos, de 1948, reuniu no mesmo documento direitos civis e políticos e direitos econômicos, sociais e culturais. Exemplo dessa ampliação é a previsão, na Declaração Universal, de que:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "61ca3fcbe5c6b33f4885e47e38954640",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "949aa2114c601e322ac398318ef44a76",
+    "origem_impressao": "e3616d8f492e501b964f390b5b0421b8",
     "rejeitada": false,
     "resposta": "b"
   },
@@ -8084,6 +9046,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "à • a • à",
+      "b": "a • à • a",
+      "c": "à • à • à",
+      "d": "a • a • à",
+      "e": "a • a • a"
+    },
+    "artigo": "Crase: submetida à apreciação (preposição + artigo); sem crase no artigo isolado (a categoria) e antes de artigo indefinido (a um acordo)",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522574+00:00",
+    "enunciado": "Analise o texto abaixo: Após meses de negociação, ____ categoria dos policiais penais chegou ____ um acordo com o governo. A proposta, que será submetida ____ apreciação da Assembleia Legislativa, prevê reajuste escalonado. Assinale a alternativa que completa correta e sequencialmente as lacunas do texto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "64d504503b19c467b162c9d69c6b9aae",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "0199135a87a40fa68d42c83a1f338266",
+    "origem_impressao": "29de9751562ef1424fe7269e4222bfb4",
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -8451,6 +9439,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 3 e 4.",
+      "d": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 9º-A, §§ 1º, 2º, 3º e 8º, da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136282+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a identificação do perfil genético do condenado, analise as afirmativas abaixo: 1. A identificação do perfil genético será armazenada em banco de dados sigiloso, conforme regulamento a ser expedido pelo Poder Executivo. 2. A autoridade policial, federal ou estadual, poderá requerer ao juiz competente, no caso de inquérito instaurado, o acesso ao banco de dados de identificação de perfil genético. 3. Deve ser viabilizado ao titular de dados genéticos o acesso aos seus dados constantes nos bancos de perfis genéticos, bem como a todos os documentos da cadeia de custódia que gerou esse dado. 4. A recusa do condenado em submeter-se ao procedimento de identificação do perfil genético constitui falta média.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6b6659dcd37c034f7173b22e4b3432cd",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 3.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -8815,6 +9829,32 @@
   },
   {
     "alternativas": {
+      "a": "V • V • F • F • V",
+      "b": "F • F • V • V • F",
+      "c": "V • F • F • V • V",
+      "d": "V • F • V • F • F",
+      "e": "F • V • V • F • F"
+    },
+    "artigo": "Tipologia e gênero textual: texto expositivo com discurso direto e opinião atribuída à entrevistada; não é injuntivo, nem entrevista pergunta-resposta, nem conto",
+    "assunto": "Tipologia e gênero textual",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Tipologia e gênero textual",
+    "criada_em": "2026-10-06T03:47:16.290751+00:00",
+    "enunciado": "Leia o texto a seguir. Quem visita uma unidade prisional pela primeira vez costuma se surpreender com o silêncio dos corredores. Para a pedagoga Marta Ribeiro, que coordena há oito anos as oficinas de leitura de um presídio do interior catarinense, esse silêncio esconde uma demanda enorme. “Os internos querem ler, mas faltam livros e faltam espaços adequados”, afirma. Segundo ela, os encontros semanais mudaram a rotina de muitos participantes. Na avaliação da coordenadora, ampliar o acervo das bibliotecas prisionais deveria ser prioridade do poder público, porque a educação é o caminho mais seguro para reduzir a reincidência. Identifique abaixo as afirmativas verdadeiras ( V ) e as falsas ( F ), considerando o texto. ( ) O texto reproduz a fala da entrevistada por meio do discurso direto, marcado pelas aspas. ( ) Trata-se de um texto injuntivo, que se estrutura em ordens e orientações dirigidas ao leitor, com verbos no imperativo. ( ) Além de informar, o texto revela o posicionamento da entrevistada, como se nota no último período, em que ela defende uma prioridade. ( ) O texto está organizado no formato de perguntas e respostas, típico da entrevista pingue-pongue. ( ) Por apresentar enredo, clímax e desfecho, o texto pertence ao gênero conto. Assinale a alternativa que indica a sequência correta, de cima para baixo.",
+    "escopo": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Tipologia e gênero textual",
+    "evidencia_da_base": "alvo",
+    "impressao": "6f4e5300a467ec2bdb63e2851ebe330f",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "bd506fa857bbfa587b177b22bf12e729",
+    "origem_impressao": "b4d4023f28875a187f6b419e0382f8d4",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "estrito cumprimento de dever legal.",
       "b": "legítima defesa.",
       "c": "estado de necessidade.",
@@ -8862,6 +9902,58 @@
     "modo_do_pedido": "treino",
     "origem_chave": "4c3e426d29f88b0cb35e6a2c6487ec5b",
     "origem_impressao": "cc471337d14fdc2b8b894b98cb53124c",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "O particípio “consideradas” deveria estar no masculino plural, por se referir a dois substantivos.",
+      "b": "O adjetivo “essenciais” deveria estar no singular, para concordar com “reinserção”.",
+      "c": "A frase não apresenta desvio de concordância nominal.",
+      "d": "O adjetivo “estadual” deveria ir para o plural, para concordar com “escolas”.",
+      "e": "Há erro de concordância nominal: o particípio “oferecido” deveria estar no plural, para concordar com “programas”."
+    },
+    "artigo": "Concordância nominal: o particípio com valor de adjetivo concorda em gênero e número com o substantivo a que se refere (programas oferecidos)",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359886+00:00",
+    "enunciado": "Leia a frase: “A leitura e a escrita, consideradas ferramentas essenciais de reinserção social, ganharam espaço nos programas oferecido pelas escolas da rede estadual.” Sobre a frase, é correto afirmar:",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "6ff22f42a391161096955cb8cf78f6ab",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "3ded2c8869ae2535ad97c7c327aa4f3a",
+    "origem_impressao": "009c40d5d172191de1609206a2c867ba",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
+      "a": "Deverá ser estimulado, tanto quanto possível, o artesanato sem expressão econômica, em especial nas regiões de turismo.",
+      "b": "Os maiores de sessenta anos estão dispensados do trabalho, independentemente de solicitação.",
+      "c": "Os maiores de sessenta anos poderão solicitar ocupação adequada à sua idade.",
+      "d": "Os doentes ou deficientes físicos estão proibidos de exercer qualquer atividade de trabalho.",
+      "e": "O artesanato sem expressão econômica é vedado em qualquer região, inclusive nas regiões de turismo."
+    },
+    "artigo": "art. 32, § 2º, da Lei 7.210/1984 (alternativas também dos §§ 1º e 3º)",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215768+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a atribuição do trabalho ao preso, assinale a alternativa correta.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "6ffdab6848bd9f048dd9c2debcaaafd1",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
   },
@@ -8994,6 +10086,32 @@
     "origem_impressao": "7ab4ccd096598e858b6b39492809a3b8",
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "produção de bens destinados exclusivamente à exportação.",
+      "b": "atividades de artesanato sem expressão econômica.",
+      "c": "setores de apoio dos presídios.",
+      "d": "serviços de segurança e vigilância dos estabelecimentos penais.",
+      "e": "obras públicas realizadas fora do estabelecimento penal."
+    },
+    "artigo": "art. 34, § 2º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215771+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, os governos federal, estadual e municipal poderão celebrar convênio com a iniciativa privada para implantação de oficinas de trabalho referentes a:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "715f63cfb9aaa3df4309c1a9ef197279",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -9257,6 +10375,32 @@
   },
   {
     "alternativas": {
+      "a": "a • a • a",
+      "b": "à • a • a",
+      "c": "à • à • a",
+      "d": "a • à • à",
+      "e": "à • à • à"
+    },
+    "artigo": "Crase: recorrer à Defensoria (preposição + artigo); sem crase no artigo isolado (a prefeitura) e no a singular antes de palavra no plural (a obras)",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522573+00:00",
+    "enunciado": "Analise o texto abaixo: Insatisfeitos com o atraso das obras, os moradores do bairro recorreram ____ Defensoria Pública. Um relatório da associação comunitária mostra que ____ prefeitura deixou de cumprir prazos referentes ____ obras de drenagem e pavimentação. Assinale a alternativa que completa correta e sequencialmente as lacunas do texto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "72fbd7a5098d9a0e2550fd97c16d64c3",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "0199135a87a40fa68d42c83a1f338266",
+    "origem_impressao": "29de9751562ef1424fe7269e4222bfb4",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "primeira, segunda e terceira gerações.",
       "b": "segunda, primeira e terceira gerações.",
       "c": "primeira, terceira e segunda gerações.",
@@ -9517,6 +10661,58 @@
   },
   {
     "alternativas": {
+      "a": "A amostra biológica coletada poderá ser utilizada para práticas de fenotipagem genética, desde que autorizadas pelo juiz da execução.",
+      "b": "Uma vez identificado o perfil genético, a amostra biológica recolhida deverá ser integralmente conservada até o término do cumprimento da pena.",
+      "c": "A coleta da amostra biológica será realizada por agente público treinado e respeitará os procedimentos de cadeia de custódia definidos pela legislação em vigor e complementados pelo órgão de perícia oficial de natureza criminal.",
+      "d": "A elaboração do laudo da amostra biológica coletada será realizada por servidor da administração penitenciária designado pelo diretor do estabelecimento prisional.",
+      "e": "Nos casos dos crimes hediondos e equiparados, o processamento dos vestígios biológicos e a inclusão dos respectivos perfis genéticos no banco deverão ser realizados, se possível, em até 90 (noventa) dias contados da coleta."
+    },
+    "artigo": "art. 9º-A, § 7º, da Lei 7.210/1984 (alternativas também dos §§ 5º, 6º, 9º e 10)",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136283+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a amostra biológica coletada para a identificação do perfil genético, assinale a alternativa correta.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "76ef410c7354f59394f38d6b140411ca",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "apenas aos brasileiros natos.",
+      "b": "aos brasileiros natos e naturalizados, excluídos os estrangeiros.",
+      "c": "aos brasileiros e aos estrangeiros residentes no País.",
+      "d": "apenas aos cidadãos no pleno gozo dos direitos políticos.",
+      "e": "aos brasileiros e aos estrangeiros residentes no País, desde que maiores de dezoito anos."
+    },
+    "artigo": "art. 5º, caput, da CF",
+    "assunto": "direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "criada_em": "2026-10-06T03:47:15.842945+00:00",
+    "enunciado": "De acordo com o caput do art. 5º da Constituição Federal de 1988, a inviolabilidade do direito à vida, à liberdade, à igualdade, à segurança e à propriedade é garantida:",
+    "escopo": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "77077e97ce79f3d3b3251484f69e73cb",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "responde por peculato, pois é equiparado a funcionário público para os efeitos penais.",
       "b": "responde por apropriação indébita, pois não é servidor.",
       "c": "não comete crime.",
@@ -9595,6 +10791,32 @@
   },
   {
     "alternativas": {
+      "a": "O adjetivo “significativos” deveria estar no feminino, para concordar com “unidades”.",
+      "b": "O adjetivo “profissionalizantes” deveria estar no singular, por se referir a “oferta”.",
+      "c": "Constata-se erro de concordância nominal, pois o particípio “elaborado” deve ser empregado no plural para concordar com “relatórios”.",
+      "d": "A frase está inteiramente de acordo com a norma-padrão quanto à concordância nominal.",
+      "e": "O adjetivo “prisionais” deveria estar no singular, pois se refere a “secretaria”."
+    },
+    "artigo": "Concordância nominal: o particípio com valor de adjetivo concorda em gênero e número com o substantivo a que se refere (relatórios elaborados)",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359885+00:00",
+    "enunciado": "Analise a frase a seguir: “Os relatórios de atividades das unidades prisionais, elaborado pela equipe técnica da secretaria, revelam avanços significativos na oferta de cursos profissionalizantes.” Sobre a frase, é correto o que se afirma em:",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "789aa89f92012615bec9966db1a2f6c6",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "3ded2c8869ae2535ad97c7c327aa4f3a",
+    "origem_impressao": "009c40d5d172191de1609206a2c867ba",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 2.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -9644,6 +10866,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "cão • pão • alemão • cidadão • capitão",
+      "b": "tabelião • escrivão • irmão • capelão • pão",
+      "c": "leão • melão • mão • balão • portão",
+      "d": "capitão • alemão • tabelião • cão • escrivão",
+      "e": "cristão • órgão • chão • botão • grão"
+    },
+    "artigo": "Plural de -ão: capitão, alemão, tabelião, cão e escrivão fazem o plural em -ães",
+    "assunto": "Plural dos substantivos terminados em -ão",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Flexão nominal e verbal > Plural dos substantivos terminados em -ão",
+    "criada_em": "2026-10-06T03:47:16.619866+00:00",
+    "enunciado": "Assinale a alternativa cuja sequência de palavras apresenta o mesmo tipo de formação de plural.",
+    "escopo": "Língua Portuguesa > Flexão nominal e verbal > Plural dos substantivos terminados em -ão",
+    "evidencia_da_base": "alvo",
+    "impressao": "794d6511645549597d6eadc3c9af720e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "5910957069ae82e1922bb58d28c02ada",
+    "origem_impressao": "2ad52c464b4c016f26586fd7bd717424",
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -10375,6 +11623,32 @@
   },
   {
     "alternativas": {
+      "a": "É correta apenas a frase 3.",
+      "b": "São corretas apenas as frases 1 e 2.",
+      "c": "São corretas apenas as frases 1 e 3.",
+      "d": "São corretas apenas as frases 2 e 4.",
+      "e": "São corretas apenas as frases 1, 3 e 4."
+    },
+    "artigo": "Concordância nominal: predicativo anteposto a substantivos de gêneros diferentes concorda com o mais próximo ou vai ao masculino plural",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359883+00:00",
+    "enunciado": "Analise as frases abaixo quanto à concordância nominal, segundo a norma-padrão. 1. A comissão julgou aprovado o candidato e a candidata. 2. A comissão julgou aprovadas o candidato e a candidata. 3. A comissão julgou aprovados o candidato e a candidata. 4. A comissão julgou aprovada o candidato e a candidata. Assinale a alternativa que indica todas as frases corretas.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "8093001fda7c77676e6c5f1f826a36dd",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "fa39220de770d5e20dd75025ab0ac288",
+    "origem_impressao": "fa4ab3ff9ba43ab19b077d3b31933006",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "peculato culposo.",
       "b": "peculato doloso.",
       "c": "prevaricação.",
@@ -10580,6 +11854,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Hugo não é perito e Jonas é agente.",
+      "b": "Íris é escrivã e Jonas é agente.",
+      "c": "Hugo é perito e Jonas não é agente.",
+      "d": "Jonas é agente se e somente se Íris é escrivã.",
+      "e": "Hugo é perito e Jonas é agente."
+    },
+    "artigo": "Condicional falsa: p → q é F somente se p é V e q é F; disjunção p ∨ q com p falsa só é V se q for V",
+    "assunto": "Lógica proposicional (ou sentencial)",
+    "base": "item_do_edital",
+    "conteudo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "criada_em": "2026-10-06T03:47:16.765120+00:00",
+    "enunciado": "Sabe-se que a proposição “Se Hugo é perito, então Íris é escrivã” é falsa e que a proposição “Íris é escrivã ou Jonas é agente” é verdadeira. Logo, é correto afirmar que:",
+    "escopo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "826cf100311c51bf7a3dc1c9f80b9ab7",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -10869,6 +12169,32 @@
   },
   {
     "alternativas": {
+      "a": "não exclui a imputação em nenhuma hipótese, respondendo o agente sempre pelo resultado.",
+      "b": "exclui a imputação do resultado e, também, a dos fatos anteriores praticados pelo agente.",
+      "c": "somente exclui a imputação quando o resultado for culposo.",
+      "d": "é causa de diminuição da pena de um a dois terços.",
+      "e": "exclui a imputação quando, por si só, produziu o resultado; os fatos anteriores, entretanto, imputam-se a quem os praticou."
+    },
+    "artigo": "art. 13, § 1º, do CP",
+    "assunto": "Infração penal: elementos, espécies",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Infração penal: elementos, espécies",
+    "criada_em": "2026-10-06T03:47:15.915671+00:00",
+    "enunciado": "Nos termos do Código Penal, a superveniência de causa relativamente independente:",
+    "escopo": "Direito Penal > Infração penal: elementos, espécies",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8669984de20e7cd1e05e506e312f0095",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "A primeira geração consagra os direitos de liberdade, como os civis e políticos, que exigem do Estado uma abstenção.",
       "b": "A segunda geração consagra os direitos de fraternidade, como o direito à paz.",
       "c": "A terceira geração consagra os direitos individuais clássicos, como a liberdade de locomoção.",
@@ -10973,6 +12299,32 @@
   },
   {
     "alternativas": {
+      "a": "a ação ou omissão sem a qual o resultado não teria ocorrido.",
+      "b": "apenas a ação dolosa que, por si só, produziu o resultado.",
+      "c": "somente a conduta mais próxima, no tempo, da produção do resultado.",
+      "d": "a ação, mas nunca a omissão, ainda que o omitente devesse e pudesse agir.",
+      "e": "apenas a conduta cujo resultado o agente previu e quis produzir."
+    },
+    "artigo": "art. 13, caput, do CP",
+    "assunto": "Infração penal: elementos, espécies",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Infração penal: elementos, espécies",
+    "criada_em": "2026-10-06T03:47:15.915670+00:00",
+    "enunciado": "De acordo com o Código Penal, o resultado, de que depende a existência do crime, somente é imputável a quem lhe deu causa. Para esse fim, considera-se causa:",
+    "escopo": "Direito Penal > Infração penal: elementos, espécies",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "873d0845e292b1c847ef414c5900a137",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "objeto indireto.",
       "b": "objeto direto.",
       "c": "sujeito.",
@@ -11020,6 +12372,32 @@
     "modo_do_pedido": null,
     "origem_chave": null,
     "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Aquelas quatro testemunhas pareciam bastante nervosas durante a audiência.",
+      "b": "A juíza leu atentamente a sentença.",
+      "c": "Segue anexo à petição os dois laudos periciais deste processo.",
+      "d": "Nenhuma das cinco salas estava suficientemente iluminado.",
+      "e": "Nossos dois filhos chegaram cedo."
+    },
+    "artigo": "Concordância nominal: adjetivo, numeral e pronome adjetivo concordam com o substantivo; bastante, advérbio junto de adjetivo, é invariável",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359882+00:00",
+    "enunciado": "Na concordância nominal, adjetivos, numerais e pronomes adjetivos devem concordar com o substantivo a que se referem. Assinale a alternativa que contém a frase em que essa regra é obedecida e em que aparecem todas essas classes gramaticais.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "87803222f7bd869dd63953fb1214870a",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "96a3d8facc1d263e88021415ca9c4174",
+    "origem_impressao": "42e80ee79ddced02712000d05a5dc64b",
     "rejeitada": false,
     "resposta": "a"
   },
@@ -11126,6 +12504,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "à • a • há • à • às • a • às",
+      "b": "a • há • a • a • as • à • as",
+      "c": "à • há • a • à • as • a • as",
+      "d": "à • há • há • a • às • a • às",
+      "e": "a • a • a • à • às • à • as"
+    },
+    "artigo": "Crase e a/há: chegar à; há (tempo decorrido); daqui a (tempo futuro); apresentar à direção; sem crase após preposição (para as, entre as) e no artigo isolado",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522576+00:00",
+    "enunciado": "Assinale a alternativa que completa corretamente os espaços em branco no texto. Os novos agentes chegaram ____ unidade prisional ____ cerca de duas horas. Daqui ____ alguns dias, eles apresentarão ____ direção um relatório; a entrega está prevista para ____ dez horas de sexta-feira, e ____ expectativa é grande, sobretudo entre ____ famílias dos internos.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "8909a78cc2e5ae3d7b91ba13dbd408d8",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "cc2543fcf9b6323a15413f1ce0a26a92",
+    "origem_impressao": "074acefd270b22b7c0236e5becbe945a",
+    "rejeitada": false,
+    "resposta": "c"
   },
   {
     "alternativas": {
@@ -11493,6 +12897,32 @@
   },
   {
     "alternativas": {
+      "a": "autorizada pelo Juiz da Execução e dependerá de aptidão, disciplina e responsabilidade, além do cumprimento mínimo de um sexto da pena.",
+      "b": "autorizada pela direção do estabelecimento e dependerá de aptidão, disciplina e responsabilidade, além do cumprimento mínimo de um quarto da pena.",
+      "c": "autorizada pelo Ministério Público e dependerá de aptidão e disciplina, além do cumprimento mínimo de um terço da pena.",
+      "d": "autorizada pela direção do estabelecimento e dependerá apenas de bom comportamento carcerário, dispensado o cumprimento de tempo mínimo de pena.",
+      "e": "autorizada pela direção do estabelecimento e dependerá de aptidão, disciplina e responsabilidade, além do cumprimento mínimo de um sexto da pena."
+    },
+    "artigo": "art. 37, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215775+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a prestação de trabalho externo será:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "8ce3f677b4850e4a7a22b885352871ee",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 3.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -11831,6 +13261,32 @@
   },
   {
     "alternativas": {
+      "a": "Aquela servidora concluiu o relatório extenso.",
+      "b": "Seguem anexas duas certidões negativas que comprovam a regularidade daquela empresa.",
+      "c": "Os três candidatos chegaram cedo ao auditório.",
+      "d": "É proibido a entrada de pessoas estranhas nesta segunda sala.",
+      "e": "Ficou meia aberta a janela daquele primeiro quarto."
+    },
+    "artigo": "Concordância nominal: adjetivo, numeral e pronome adjetivo concordam com o substantivo (anexas duas certidões negativas; daquela empresa)",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359877+00:00",
+    "enunciado": "De acordo com a regra geral de concordância nominal, adjetivos, numerais e pronomes adjetivos concordam em gênero e número com o substantivo a que se referem. Assinale a alternativa cuja frase respeita essa regra e contém, ao mesmo tempo, adjetivo, numeral e pronome adjetivo.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "90257fa431da3224ce0cce2a0e18b76d",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "96a3d8facc1d263e88021415ca9c4174",
+    "origem_impressao": "42e80ee79ddced02712000d05a5dc64b",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "É correta apenas a afirmativa 1.",
       "b": "É correta apenas a afirmativa 3.",
       "c": "São corretas apenas as afirmativas 1 e 2.",
@@ -11854,6 +13310,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "à • à • a",
+      "b": "a • à • a",
+      "c": "à • a • à",
+      "d": "à • à • à",
+      "e": "a • a • a"
+    },
+    "artigo": "Crase: comparecer à audiência; em resposta à solicitação; sem crase antes de pronome indefinido (a cada)",
+    "assunto": "Lacunas com a, à e há",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "criada_em": "2026-10-06T03:47:16.522575+00:00",
+    "enunciado": "Analise o texto abaixo: O secretário compareceu ____ audiência pública na Câmara de Vereadores e, em resposta ____ solicitação da imprensa, concedeu entrevista coletiva. Ao final, entregou ____ cada vereador um resumo do plano de segurança. Assinale a alternativa que completa correta e sequencialmente as lacunas do texto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há",
+    "evidencia_da_base": "complementar",
+    "impressao": "90834c9ffb2dfac6d2100c4983203055",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "0199135a87a40fa68d42c83a1f338266",
+    "origem_impressao": "29de9751562ef1424fe7269e4222bfb4",
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -12039,6 +13521,32 @@
   },
   {
     "alternativas": {
+      "a": "da fundação ou empresa pública que gerencia o trabalho ou, na sua falta, do estabelecimento penal.",
+      "b": "do Fundo Penitenciário Nacional, em qualquer hipótese.",
+      "c": "do condenado, para constituição do pecúlio.",
+      "d": "do Conselho da Comunidade da comarca.",
+      "e": "da vítima do crime ou de seus sucessores."
+    },
+    "artigo": "art. 35, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215772+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, todas as importâncias arrecadadas com as vendas dos bens ou produtos do trabalho prisional reverterão em favor:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "915650a0daf6d2cfb555c832d5052b45",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Comprou saia e sapato importados.",
       "b": "Tinha cabelo e barba grisalha.",
       "c": "Usava calça e blusa branco.",
@@ -12088,6 +13596,84 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "direitos humanos",
+      "b": "direitos da pessoa humana",
+      "c": "direitos naturais",
+      "d": "direitos e liberdades fundamentais",
+      "e": "direitos e garantias fundamentais"
+    },
+    "artigo": "CF, art. 4º, II; art. 5º, XLI; art. 34, VII, b; e Título II",
+    "assunto": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+    "criada_em": "2026-10-06T03:47:16.060019+00:00",
+    "enunciado": "Os direitos humanos recebem diferentes denominações. Assinale a expressão que NÃO é empregada pela Constituição Federal de 1988 e que a doutrina contemporânea considera ultrapassada, por remeter à ideia de direitos inerentes à natureza humana, anteriores e alheios à história.",
+    "escopo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+    "evidencia_da_base": "alvo",
+    "impressao": "92087e974df475cf51bfdccd6f3fcbef",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "97713485d0822d3468be1b630f2bcdd4",
+    "origem_impressao": "9a43f33c3057d490fcb98d38242dc4eb",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1 e 3.",
+      "c": "São corretas apenas as afirmativas 2 e 4.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 31, caput e parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215766+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, analise as afirmativas abaixo: 1. O condenado à pena privativa de liberdade está obrigado ao trabalho na medida de suas aptidões e capacidade. 2. Para o preso provisório, o trabalho é obrigatório, nas mesmas condições impostas ao condenado. 3. O trabalho do preso provisório só poderá ser executado no interior do estabelecimento. 4. O preso provisório poderá executar trabalho externo em obras públicas, desde que autorizado pela direção do estabelecimento.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9279f1848b0b222d7e5f42572cbdf825",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "A audiência foi adiada para às 15 horas.",
+      "b": "O plantão termina à meia-noite.",
+      "c": "Ela vendeu o imóvel à prazo.",
+      "d": "O fiscal examinou os documentos página à página.",
+      "e": "O atendimento ocorre entre às 8 e às 10 horas."
+    },
+    "artigo": "Crase obrigatória na indicação de hora determinada (à meia-noite)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442500+00:00",
+    "enunciado": "Assinale a alternativa em que a crase está empregada de acordo com a norma-padrão.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "928a33c3b701774a93f947f1da175580",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "7a6301bb1a9af28aaa690926329dc9b3",
+    "origem_impressao": "d9ebf4f4a7422ab23273e0fbed94cab7",
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -12204,7 +13790,7 @@
     "artigo": "art. 76, da Lei 7.210/1984",
     "assunto": null,
     "base": null,
-    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
     "criada_em": "2026-09-27T02:55:49.123681+00:00",
     "enunciado": "Conforme a Lei de Execução Penal, são requisitos para que alguém possa ocupar cargo de diretor de estabelecimento penal: 1. idoneidade moral irretocável. 2. competência comprovada para a função. 3. vinculação ao Poder Público há no mínimo dois anos. 4. disponibilidade para realizar atividades administrativas.",
     "escopo": null,
@@ -12268,6 +13854,32 @@
     "modo_do_pedido": "treino",
     "origem_chave": null,
     "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "Há erro de concordância nominal, pois o particípio “aplicados” deve ser empregado no feminino para concordar com “medidas”.",
+      "b": "O adjetivo “socioeducativas” deveria estar no masculino, para concordar com “juízo”.",
+      "c": "O adjetivo “proporcional” deveria ir para o feminino, para concordar com “resposta”.",
+      "d": "O adjetivo “pedagógica” deveria ir para o plural, para concordar com “medidas”.",
+      "e": "Não há erro de concordância nominal na frase."
+    },
+    "artigo": "Concordância nominal: o particípio com valor de adjetivo concorda em gênero e número com o substantivo a que se refere (medidas aplicadas)",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359887+00:00",
+    "enunciado": "Considere a frase: “As medidas socioeducativas, aplicados pelo juízo da infância conforme a gravidade do ato, buscam uma resposta pedagógica e proporcional.” Sobre a frase, assinale a alternativa correta.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "947ac767de1135cf17fc46a1a9808721",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "3ded2c8869ae2535ad97c7c327aa4f3a",
+    "origem_impressao": "009c40d5d172191de1609206a2c867ba",
     "rejeitada": false,
     "resposta": "a"
   },
@@ -12400,6 +14012,58 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 37, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215776+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, revogar-se-á a autorização de trabalho externo ao preso que: 1. vier a praticar fato definido como crime. 2. for punido por falta grave. 3. for punido por falta leve. 4. tiver comportamento contrário aos requisitos de aptidão, disciplina e responsabilidade estabelecidos para o trabalho externo.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9556414c2d65898fcdba3235d9c4d743",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Todas são crimes, pois toda infração penal é crime.",
+      "b": "I e II são crimes; III e IV são contravenções.",
+      "c": "I é crime; II, III e IV são contravenções.",
+      "d": "I, II e IV são crimes; III é contravenção.",
+      "e": "Todas são contravenções, pois a todas é cominada pena privativa de liberdade."
+    },
+    "artigo": "art. 1º do Decreto-Lei 3.914/1941 (Lei de Introdução ao Código Penal)",
+    "assunto": "Infração penal: elementos, espécies",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Infração penal: elementos, espécies",
+    "criada_em": "2026-10-06T03:47:15.915673+00:00",
+    "enunciado": "Considere quatro infrações penais hipotéticas, identificadas apenas pelas penas que a lei lhes comina: I. reclusão, isoladamente. II. detenção ou multa, alternativamente. III. prisão simples, isoladamente. IV. prisão simples e multa, cumulativamente. De acordo com a Lei de Introdução ao Código Penal, assinale a alternativa correta.",
+    "escopo": "Direito Penal > Infração penal: elementos, espécies",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9586cfb79185c4be4be8f8a4bda9ed4f",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -12689,6 +14353,32 @@
   },
   {
     "alternativas": {
+      "a": "cinco por cento do total de empregados na obra.",
+      "b": "um quarto do total de empregados na obra.",
+      "c": "vinte por cento do total de empregados na obra.",
+      "d": "um terço do total de empregados na obra.",
+      "e": "dez por cento do total de empregados na obra."
+    },
+    "artigo": "art. 36, § 1º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215774+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, no trabalho externo de presos em regime fechado, o limite máximo do número de presos será de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9842b248103589a4e52898744fcb10fd",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "por seis anos, podendo ser reeleitos uma vez.",
       "b": "por quatro anos, vedada a reeleição.",
       "c": "por prazo indeterminado.",
@@ -12764,6 +14454,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "a qualquer pena privativa de liberdade, independentemente do regime inicial fixado.",
+      "b": "à pena de detenção em regime inicial semiaberto.",
+      "c": "à pena restritiva de direitos convertida em pena privativa de liberdade.",
+      "d": "à pena de reclusão em regime inicial semiaberto ou aberto.",
+      "e": "à pena de reclusão em regime inicial fechado."
+    },
+    "artigo": "art. 9º-A, caput, da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136281+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, será submetido obrigatoriamente à identificação do perfil genético, mediante extração de DNA (ácido desoxirribonucleico), por técnica adequada e indolor, por ocasião do ingresso no estabelecimento prisional, o condenado:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "9931fd04f3a8ab14e273c895637a7251",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -13729,6 +15445,58 @@
   },
   {
     "alternativas": {
+      "a": "Se Rui é inspetor ou Sônia é delegada, então Rui é inspetor e Sônia é delegada.",
+      "b": "Se Rui é inspetor e Sônia é delegada, então Rui é inspetor ou Sônia é delegada.",
+      "c": "Se Rui é inspetor, então Rui não é inspetor ou Sônia é delegada.",
+      "d": "Se Sônia é delegada, então Rui é inspetor.",
+      "e": "Rui é inspetor, Sônia é delegada e Rui não é inspetor."
+    },
+    "artigo": "Tautologia: (p ∧ q) → (p ∨ q) é verdadeira em todas as linhas da tabela-verdade",
+    "assunto": "Tabelas-verdade",
+    "base": "questao_real",
+    "conteudo": "Raciocínio Lógico > Tabelas-verdade",
+    "criada_em": "2026-10-06T03:47:44.682743+00:00",
+    "enunciado": "É uma tautologia a proposição:",
+    "escopo": "Raciocínio Lógico > Tabelas-verdade",
+    "evidencia_da_base": "complementar",
+    "impressao": "a5f0354d47fb5941b93bf181d0e76c79",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "6b75097d7ffe6d7a028dc8bff28611ee",
+    "origem_impressao": "3e87442dc1dc3a7626fe25bc1eab50fd",
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "mediante concorrência pública obrigatória, em igualdade de condições com os particulares.",
+      "b": "com dispensa de concorrência pública, em qualquer hipótese, com preferência sobre a venda a particulares.",
+      "c": "somente por meio de convênio celebrado com o Juízo da Execução.",
+      "d": "com dispensa de concorrência pública, sempre que não for possível ou recomendável realizar-se a venda a particulares.",
+      "e": "com dispensa de concorrência pública, desde que o valor da compra não ultrapasse três quartos do salário mínimo."
+    },
+    "artigo": "art. 35, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215772+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, os órgãos da administração direta ou indireta da União, Estados, Territórios, Distrito Federal e dos Municípios adquirirão os bens ou produtos do trabalho prisional:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a69597653e2e47106b435bcfec78ac7f",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "agente, pois pratica a ação verbal.",
       "b": "paciente, pois sofre a ação verbal.",
       "c": "indeterminado.",
@@ -14038,6 +15806,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 9º, I a III, da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136281+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a Comissão, no exame para a obtenção de dados reveladores da personalidade, observando a ética profissional e tendo sempre presentes peças ou informações do processo, poderá: 1. entrevistar pessoas. 2. requisitar, de repartições ou estabelecimentos privados, dados e informações a respeito do condenado. 3. decretar a interceptação das comunicações telefônicas do condenado. 4. realizar outras diligências e exames necessários.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "aa5033ed18e27907480e726a3b1b2543",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -15029,6 +16823,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as frases 1 e 2.",
+      "b": "São corretas apenas as frases 1 e 3.",
+      "c": "São corretas apenas as frases 2 e 4.",
+      "d": "São corretas apenas as frases 1, 2 e 4.",
+      "e": "São corretas as frases 1, 2, 3 e 4."
+    },
+    "artigo": "Concordância nominal: adjetivo posposto a substantivos de gêneros diferentes vai ao masculino plural ou concorda com o mais próximo",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359884+00:00",
+    "enunciado": "Considere as frases a seguir, observando a concordância do adjetivo com os substantivos a que se refere. 1. Ela pesquisa a arte e o folclore açorianos. 2. Ela pesquisa a arte e o folclore açoriano. 3. Ela pesquisa a arte e o folclore açorianas. 4. Ela pesquisa a arte e o folclore açoriana. Assinale a alternativa que indica todas as frases corretas de acordo com a norma-padrão.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "b5136697ca48b5a012933d557d148146",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "fa39220de770d5e20dd75025ab0ac288",
+    "origem_impressao": "fa4ab3ff9ba43ab19b077d3b31933006",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "O juiz poderá definir a fiscalização por meio de monitoração eletrônica ao determinar a prisão domiciliar.",
       "b": "A monitoração eletrônica é vedada no livramento condicional.",
       "c": "O próprio condenado escolhe se usará o equipamento.",
@@ -15098,6 +16918,32 @@
     "impressao": "b5a994cf20c5d99a6639444a14bcdc14",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São verdadeiras apenas as proposições 1 e 4.",
+      "b": "São verdadeiras apenas as proposições 1 e 2.",
+      "c": "São verdadeiras apenas as proposições 3 e 4.",
+      "d": "São verdadeiras apenas as proposições 2 e 3.",
+      "e": "São verdadeiras apenas as proposições 1, 3 e 4."
+    },
+    "artigo": "Valor lógico dos conectivos: p → q é F só com V → F; p ↔ q é V só com valores iguais; “ou p, ou q” (disjunção exclusiva) é V só com valores diferentes; p ∨ q é V se uma delas for V",
+    "assunto": "Lógica proposicional (ou sentencial)",
+    "base": "item_do_edital",
+    "conteudo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "criada_em": "2026-10-06T03:47:16.765121+00:00",
+    "enunciado": "Analise as proposições compostas abaixo. 1. Se 9 é um número primo, então 4 é um número ímpar. 2. 6 é um número par se e somente se 10 é divisível por 3. 3. Ou 8 é maior que 5, ou 2 é um número primo. 4. 15 é múltiplo de 5 e 7 é menor que 3, ou 12 é um número par. Assinale a alternativa que indica todas as proposições verdadeiras.",
+    "escopo": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b62cab6e6a037e5122c2acd50e92d295",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_chave": null,
@@ -15497,6 +17343,32 @@
   },
   {
     "alternativas": {
+      "a": "a Declaração Universal dos Direitos Humanos fica revogada a partir da entrada em vigor dos Pactos.",
+      "b": "somente os Estados que integravam a ONU em 1945 podem aderir aos Pactos.",
+      "c": "todos os povos têm direito à autodeterminação e, em virtude desse direito, determinam livremente seu estatuto político e asseguram livremente seu desenvolvimento econômico, social e cultural.",
+      "d": "a pena de morte fica abolida em todos os Estados-partes, inclusive em tempo de guerra.",
+      "e": "os direitos neles previstos aplicam-se apenas aos cidadãos dos Estados-partes, excluídos os estrangeiros."
+    },
+    "artigo": "Pacto Internacional dos Direitos Civis e Políticos e Pacto Internacional dos Direitos Econômicos, Sociais e Culturais, 1966, art. 1º, 1",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642962+00:00",
+    "enunciado": "Os dois Pactos Internacionais de 1966, o de Direitos Civis e Políticos e o de Direitos Econômicos, Sociais e Culturais, deram forma de tratado aos direitos proclamados em 1948. Em dispositivo de redação idêntica, o art. 1º de ambos os Pactos estabelece que:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "bbe28620cc0f545cdf3753bea5fb4990",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "62e7c8dbda287708190101ab17ecca45",
+    "origem_impressao": "84e1faf35b321204574866db441ca174",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "Os direitos e garantias expressos na Constituição não excluem outros decorrentes dos tratados internacionais em que o Brasil seja parte.",
       "b": "Os tratados de direitos humanos só valem no Brasil depois de aprovados por plebiscito.",
       "c": "Os tratados aprovados em três turnos, por dois quintos dos votos, equivalem a emendas constitucionais.",
@@ -15809,6 +17681,32 @@
   },
   {
     "alternativas": {
+      "a": "artesanato nas regiões de turismo.",
+      "b": "obras públicas realizadas por entidades privadas.",
+      "c": "oficinas de trabalho implantadas por convênio com a iniciativa privada.",
+      "d": "comercialização dos produtos do trabalho prisional.",
+      "e": "conservação e manutenção do estabelecimento penal."
+    },
+    "artigo": "art. 33, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215769+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, poderá ser atribuído horário especial de trabalho aos presos designados para os serviços de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "be9cae7410fa20f9faf6077751f97a86",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "O crime tentado reúne todos os elementos de sua definição legal.",
       "b": "Salvo disposição em contrário, pune-se a tentativa com a pena correspondente ao crime consumado, diminuída de um a dois terços.",
       "c": "A tentativa é punida com a pena do crime consumado, diminuída pela metade.",
@@ -15856,6 +17754,32 @@
     "modo_do_pedido": "treino",
     "origem_chave": "86b982c4f3f37743b886d15562a710dc",
     "origem_impressao": "eb3195c3995b8f78af8e63423b67eca5",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "Os dois técnicos repararam o equipamento rapidamente.",
+      "b": "Nossa equipe entregou o projeto ambicioso.",
+      "c": "As próprias diretoras disseram que estavam meio cansada após a terceira reunião.",
+      "d": "Estas três propostas parecem viáveis para o próximo semestre.",
+      "e": "As duas portas daquele corredor permaneceram aberto durante a noite."
+    },
+    "artigo": "Concordância nominal: adjetivo, numeral e pronome adjetivo concordam com o substantivo (estas três propostas viáveis)",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359881+00:00",
+    "enunciado": "Pela regra básica da concordância nominal, o adjetivo, o numeral e o pronome adjetivo acompanham o gênero e o número do substantivo que modificam. Assinale a alternativa em que a frase segue essa regra e apresenta as três classes gramaticais mencionadas.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "bf111c070bb46b57d532cca17a178556",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "96a3d8facc1d263e88021415ca9c4174",
+    "origem_impressao": "42e80ee79ddced02712000d05a5dc64b",
     "rejeitada": false,
     "resposta": "d"
   },
@@ -16121,6 +18045,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "c": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "d": "São corretas apenas as afirmativas 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 5º, XXII a XXVI, da CF",
+    "assunto": "direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "criada_em": "2026-10-06T03:47:15.842950+00:00",
+    "enunciado": "Analise as afirmativas abaixo a respeito do direito de propriedade, com base no art. 5º da Constituição Federal de 1988. 1. É garantido o direito de propriedade, e a propriedade atenderá a sua função social. 2. Como regra geral, a desapropriação por necessidade ou utilidade pública, ou por interesse social, será feita mediante justa e posterior indenização em títulos da dívida pública. 3. No caso de iminente perigo público, a autoridade competente poderá usar de propriedade particular, assegurada ao proprietário indenização ulterior, se houver dano. 4. A pequena propriedade rural, assim definida em lei, desde que trabalhada pela família, não será objeto de penhora para pagamento de débitos decorrentes de sua atividade produtiva. Assinale a alternativa que indica todas as afirmativas corretas.",
+    "escopo": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "c3619d5fd1c8f39addc95882d07fa0a6",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "não é cláusula pétrea, ao contrário do voto direto, secreto, universal e periódico.",
       "b": "é cláusula pétrea expressa.",
       "c": "foi abolida pela Constituição de 1988.",
@@ -16329,6 +18279,58 @@
   },
   {
     "alternativas": {
+      "a": "direitos naturais",
+      "b": "liberdades fundamentais",
+      "c": "direitos humanos",
+      "d": "direitos e garantias individuais",
+      "e": "direitos fundamentais"
+    },
+    "artigo": "Carta das Nações Unidas, art. 1º, 3; CF, art. 60, § 4º, IV",
+    "assunto": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+    "criada_em": "2026-10-06T03:47:16.060054+00:00",
+    "enunciado": "Documentos normativos designam os direitos humanos por expressões distintas: a Carta das Nações Unidas fala em \"direitos humanos e liberdades fundamentais\", e a Constituição Federal de 1988 utiliza, entre outras, \"direitos e garantias individuais\". Assinale a alternativa que contém a denominação hoje rejeitada, por expressar uma concepção superada do tema.",
+    "escopo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+    "evidencia_da_base": "alvo",
+    "impressao": "c882712730a709ec71dec007b9e3d900",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "97713485d0822d3468be1b630f2bcdd4",
+    "origem_impressao": "9a43f33c3057d490fcb98d38242dc4eb",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as frases 1 e 5.",
+      "b": "São corretas apenas as frases 2 e 3.",
+      "c": "São corretas apenas as frases 1, 2 e 5.",
+      "d": "São corretas apenas as frases 3 e 4.",
+      "e": "São corretas apenas as frases 1 e 2."
+    },
+    "artigo": "Concordância nominal: adjetivo anteposto a vários substantivos concorda com o mais próximo; posposto a gêneros diferentes, masculino plural ou o mais próximo",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359885+00:00",
+    "enunciado": "Analise as frases abaixo quanto à concordância nominal. 1. A prefeitura garantiu amplo espaço e estrutura para a feira. 2. A prefeitura garantiu ampla estrutura e espaço para a feira. 3. A prefeitura garantiu ampla espaço e estrutura para a feira. 4. A prefeitura garantiu amplo estrutura e espaço para a feira. 5. A prefeitura garantiu espaço e estrutura amplas para a feira. Assinale a alternativa que indica todas as frases corretas segundo a norma-padrão.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "c888e08e8dca3c97863420455159ab1c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "fa39220de770d5e20dd75025ab0ac288",
+    "origem_impressao": "fa4ab3ff9ba43ab19b077d3b31933006",
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "apenas dos condenados por sentença definitiva.",
       "b": "dos condenados e dos presos provisórios.",
       "c": "apenas dos presos provisórios.",
@@ -16407,6 +18409,32 @@
   },
   {
     "alternativas": {
+      "a": "um salário mínimo.",
+      "b": "metade do salário mínimo.",
+      "c": "dois terços do salário mínimo.",
+      "d": "um terço do salário mínimo.",
+      "e": "três quartos do salário mínimo."
+    },
+    "artigo": "art. 29, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215762+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, o trabalho do preso será remunerado, mediante prévia tabela, não podendo ser inferior a:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "c8d5079abcfb2f96840bdfc989e9f415",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "A recusa do preso em frequentar atividades religiosas constitui falta disciplinar grave.",
       "b": "A administração penitenciária pode proibir a posse de livros sagrados nas celas.",
       "c": "Os presos não poderão ser obrigados a participar de manifestações religiosas.",
@@ -16456,6 +18484,32 @@
     "origem_impressao": "2c437f986dba031f84df700ba79d8c7d",
     "rejeitada": false,
     "resposta": "d"
+  },
+  {
+    "alternativas": {
+      "a": "Ele aguardava na fila desde às 7 horas.",
+      "b": "Fizemos o percurso todo à pé.",
+      "c": "A campanha de vacinação foi feita porta à porta.",
+      "d": "O salário será pago à partir do dia cinco.",
+      "e": "Chegamos ao fórum às duas horas da tarde."
+    },
+    "artigo": "Crase obrigatória na indicação de hora determinada (às duas horas)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442500+00:00",
+    "enunciado": "Assinale a alternativa em que o sinal indicativo de crase foi corretamente utilizado.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "c971401303cfe9b103e95ba2bdbef349",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "7a6301bb1a9af28aaa690926329dc9b3",
+    "origem_impressao": "d9ebf4f4a7422ab23273e0fbed94cab7",
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -17395,6 +19449,32 @@
   },
   {
     "alternativas": {
+      "a": "Elas mesmo organizaram a festa de encerramento.",
+      "b": "Os alunos estão meios desanimados com o resultado.",
+      "c": "Seguem anexo as cópias dos documentos solicitados.",
+      "d": "Ela fala fluentemente os idiomas inglês e espanhol.",
+      "e": "Ficaram bastantes satisfeitos com a nova proposta."
+    },
+    "artigo": "Concordância nominal: substantivo no plural com artigo seguido de adjetivos no singular (os idiomas inglês e espanhol); mesmo e anexo variam; meio e bastante advérbios são invariáveis",
+    "assunto": "Concordância nominal",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "criada_em": "2026-10-06T03:47:16.359888+00:00",
+    "enunciado": "Assinale a alternativa em que a frase está correta quanto à concordância nominal, de acordo com a norma-padrão.",
+    "escopo": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal",
+    "evidencia_da_base": "complementar",
+    "impressao": "d44b67ffc5cbbde599806e1e80a2de31",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "db5cee99db902551f477213f5531ba39",
+    "origem_impressao": "f89b5786af6d9dd9ec1a29a48c4507bb",
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "V • V • F • V • F",
       "b": "V • V • V • V • F",
       "c": "V • F • F • V • V",
@@ -17496,6 +19576,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "tinha, por lei, obrigação de cuidado, proteção ou vigilância em relação a Paulo.",
+      "b": "assumiu, por contrato, a responsabilidade de impedir o resultado.",
+      "c": "a omissão é sempre penalmente relevante, independentemente de o omitente poder agir.",
+      "d": "com seu comportamento anterior, criou o risco da ocorrência do resultado.",
+      "e": "era a única pessoa presente no local, circunstância que, por si só, gera o dever de agir previsto no Código Penal."
+    },
+    "artigo": "art. 13, § 2º, c, do CP",
+    "assunto": "Infração penal: elementos, espécies",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Infração penal: elementos, espécies",
+    "criada_em": "2026-10-06T03:47:15.915674+00:00",
+    "enunciado": "Durante uma festa, Marcos, por brincadeira, empurrou Paulo, que não sabia nadar, para a parte funda de uma piscina. Percebendo que o colega se afogava, Marcos, que podia salvá-lo sem risco pessoal, nada fez, e Paulo morreu afogado. Considerando a relevância da omissão prevista no Código Penal, é correto afirmar que Marcos tinha o dever de agir porque:",
+    "escopo": "Direito Penal > Infração penal: elementos, espécies",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d5f02967a467f7ea67769998134949b3",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -17889,6 +19995,32 @@
   },
   {
     "alternativas": {
+      "a": "Ao condenado e ao internado serão assegurados todos os direitos não atingidos pela sentença ou pela lei.",
+      "b": "Ao condenado serão assegurados somente os direitos expressamente previstos na sentença condenatória, e ao internado, somente os previstos na decisão que aplicou a medida de segurança.",
+      "c": "Admite-se distinção de natureza social entre os condenados, desde que fundamentada pelo diretor do estabelecimento.",
+      "d": "Não haverá distinção de natureza racial ou religiosa entre os condenados, admitindo-se, porém, distinção de natureza política.",
+      "e": "É vedado ao Estado recorrer à cooperação da comunidade nas atividades de execução da pena e da medida de segurança."
+    },
+    "artigo": "art. 3º, caput e parágrafo único, e art. 4º da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136278+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa correta.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d9cb6a5800b5000a5646854901e382c9",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Faz cessar a execução da pena.",
       "b": "Faz cessar os efeitos penais da sentença condenatória.",
       "c": "Alcança fatos já decididos por sentença condenatória transitada em julgado.",
@@ -18227,6 +20359,58 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 36, §§ 2º e 3º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215775+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre o trabalho externo, analise as afirmativas abaixo: 1. Caberá ao órgão da administração, à entidade ou à empresa empreiteira a remuneração desse trabalho. 2. A remuneração do trabalho externo caberá exclusivamente ao Estado, vedado o pagamento pela empresa empreiteira. 3. A prestação de trabalho a entidade privada depende do consentimento expresso do preso. 4. A prestação de trabalho a entidade privada dispensa o consentimento do preso, bastando a autorização judicial.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "dd1a49160705110bbfbf817e8cb87e91",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Se Vítor não é soldado ou Hélio é tenente, então Renata é sargento ou Otávio não é cabo.",
+      "b": "Se Vítor não é soldado e Hélio é tenente, então Renata não é sargento ou Otávio não é cabo.",
+      "c": "Se Vítor não é soldado e Hélio é tenente, então Renata é sargento ou Otávio não é cabo.",
+      "d": "Se Vítor não é soldado e Hélio é tenente, então Renata é sargento e Otávio não é cabo.",
+      "e": "Se Renata é sargento ou Otávio não é cabo, então Vítor não é soldado e Hélio é tenente."
+    },
+    "artigo": "Equivalência contrapositiva: p → q ≡ ~q → ~p, com De Morgan: ~(r ∨ ~s) ≡ ~r ∧ s e ~(~p1 ∧ p2) ≡ p1 ∨ ~p2",
+    "assunto": "Equivalências",
+    "base": "questao_real",
+    "conteudo": "Raciocínio Lógico > Equivalências",
+    "criada_em": "2026-10-06T03:47:16.691233+00:00",
+    "enunciado": "Assinale a alternativa logicamente equivalente à afirmação “Se Renata não é sargento e Otávio é cabo, então Vítor é soldado ou Hélio não é tenente”.",
+    "escopo": "Raciocínio Lógico > Equivalências",
+    "evidencia_da_base": "alvo",
+    "impressao": "ddfd63221978e5a1fb4e856ded8c60cd",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "072a5341364b8cf0f94a48780d946a06",
+    "origem_impressao": "d21511113f89404d4f6bf6572f32c453",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "1, apenas.",
       "b": "2, apenas.",
       "c": "1 e 3, apenas.",
@@ -18279,6 +20463,32 @@
   },
   {
     "alternativas": {
+      "a": "Vamos à Curitiba no próximo feriado.",
+      "b": "O expediente vai de segunda à sexta.",
+      "c": "O excesso de velocidade representa um risco à segurança de todos.",
+      "d": "Eles ficaram frente à frente durante a audiência.",
+      "e": "Começou à chover no fim da tarde."
+    },
+    "artigo": "Crase obrigatória: preposição exigida pelo nome (risco a) + artigo feminino (a segurança)",
+    "assunto": "Casos obrigatórios e proibidos de crase",
+    "base": "questao_real",
+    "conteudo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "criada_em": "2026-10-06T03:47:16.442493+00:00",
+    "enunciado": "Assinale a alternativa em que o emprego do sinal indicativo de crase está correto.",
+    "escopo": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+    "evidencia_da_base": "complementar",
+    "impressao": "df075898533f0498e158d592d5441224",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "0059e99a70f794d87a5f5c8234f94d60",
+    "origem_impressao": "5fca2a2d69b2ba1a27e69937a25380be",
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "Menor que 15%.",
       "b": "Maior que 15% e menor que 17,5%.",
       "c": "Maior que 17,5% e menor que 20%.",
@@ -18328,6 +20538,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "serão remuneradas mediante prévia tabela, não podendo a remuneração ser inferior a três quartos do salário mínimo.",
+      "b": "serão remuneradas pela entidade beneficiada, na forma da Consolidação das Leis do Trabalho.",
+      "c": "serão remuneradas apenas quando prestadas a entidades privadas.",
+      "d": "não serão remuneradas.",
+      "e": "serão remuneradas com metade do salário mínimo, destinada integralmente ao pecúlio."
+    },
+    "artigo": "art. 30 da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-06T03:47:16.215765+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, as tarefas executadas como prestação de serviço à comunidade:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "dfaa300735413eda64eb1851b38f1dc5",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -18588,6 +20824,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "aplicar a pena cominada ao crime e garantir a retribuição proporcional ao mal causado pelo condenado.",
+      "b": "efetivar as disposições de sentença ou decisão criminal e proporcionar condições para a harmônica integração social do condenado e do internado.",
+      "c": "efetivar as disposições de sentença criminal transitada em julgado e assegurar a reparação integral do dano à vítima.",
+      "d": "proporcionar condições para a integração social exclusivamente do condenado à pena privativa de liberdade em regime fechado.",
+      "e": "efetivar as disposições de decisão criminal condenatória, vedada a sua aplicação ao internado submetido a medida de segurança."
+    },
+    "artigo": "art. 1º da Lei 7.210/1984",
+    "assunto": "Objeto e classificação do condenado",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "criada_em": "2026-10-06T03:47:16.136273+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a execução penal tem por objetivo:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e17675d0d2150b45e8f43d65db7891f4",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -19160,6 +21422,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "pena de reclusão, isoladamente ou cumulativamente com a pena de multa.",
+      "b": "pena de detenção, isoladamente, desde que não superior a um ano.",
+      "c": "pena de reclusão ou de detenção, alternativamente com a pena de multa.",
+      "d": "isoladamente, pena de prisão simples ou de multa, ou ambas, alternativa ou cumulativamente.",
+      "e": "pena de prisão simples, obrigatoriamente cumulada com pena de detenção."
+    },
+    "artigo": "art. 1º do Decreto-Lei 3.914/1941 (Lei de Introdução ao Código Penal)",
+    "assunto": "Infração penal: elementos, espécies",
+    "base": "fonte_oficial",
+    "conteudo": "Direito Penal > Infração penal: elementos, espécies",
+    "criada_em": "2026-10-06T03:47:15.915667+00:00",
+    "enunciado": "Segundo a Lei de Introdução ao Código Penal (Decreto-Lei nº 3.914/1941), considera-se contravenção a infração penal à qual a lei comina:",
+    "escopo": "Direito Penal > Infração penal: elementos, espécies",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e8892b534f0d12d79bb9bcaa1b554058",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
   },
   {
     "alternativas": {
@@ -19744,7 +22032,7 @@
     "artigo": "LEP, art. 75, I e parágrafo único",
     "assunto": "LEP, art. 75",
     "base": "questao_real",
-    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
     "criada_em": "2026-10-03T22:41:17.567423+00:00",
     "enunciado": "Considerando o que a Lei de Execução Penal exige do diretor de estabelecimento penal, analise as afirmativas: 1. O diretor deverá residir no estabelecimento, ou nas proximidades. 2. O diretor dedicará tempo integral à sua função. 3. O diretor deverá ser bacharel em Direito, exclusivamente. Assinale a alternativa que indica todas as afirmativas corretas.",
     "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais",
@@ -20307,6 +22595,32 @@
   },
   {
     "alternativas": {
+      "a": "não tem Constituição.",
+      "b": "deve ser governada pelo monarca, titular exclusivo da soberania.",
+      "c": "tem Constituição, ainda que não escrita.",
+      "d": "pode suspender os direitos naturais em tempo de paz.",
+      "e": "deve submeter-se à arbitragem das demais nações europeias."
+    },
+    "artigo": "Declaração dos Direitos do Homem e do Cidadão, 1789, art. 16",
+    "assunto": "Afirmação histórica dos direitos humanos",
+    "base": "questao_real",
+    "conteudo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "criada_em": "2026-10-06T03:50:55.642959+00:00",
+    "enunciado": "Marco do constitucionalismo liberal, a Declaração dos Direitos do Homem e do Cidadão, de 1789, afirmou que a sociedade em que não esteja assegurada a garantia dos direitos nem determinada a separação dos poderes:",
+    "escopo": "Direitos Humanos > Afirmação histórica dos direitos humanos",
+    "evidencia_da_base": "alvo",
+    "impressao": "f666d3f65ab9b1d74a01218bb66ef712",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "949aa2114c601e322ac398318ef44a76",
+    "origem_impressao": "e3616d8f492e501b964f390b5b0421b8",
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "Ninguém poderá ser compelido a associar-se ou a permanecer associado.",
       "b": "O associado só pode desligar-se da associação após cinco anos de filiação.",
       "c": "A lei pode obrigar o cidadão a associar-se a qualquer entidade.",
@@ -20694,6 +23008,32 @@
     "origem_impressao": "a5de09d0a1a56a4b791a0f616044de53",
     "rejeitada": false,
     "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "Se Fábio não é inspetor ou Elisa é agente, então Carla não é perita ou Diego não é escrivão.",
+      "b": "Se Fábio não é inspetor e Elisa é agente, então Carla não é perita e Diego não é escrivão.",
+      "c": "Se Carla não é perita ou Diego não é escrivão, então Elisa é agente e Fábio não é inspetor.",
+      "d": "Se Elisa não é agente ou Fábio é inspetor, então Carla é perita e Diego é escrivão.",
+      "e": "Se Fábio não é inspetor e Elisa é agente, então Carla não é perita ou Diego não é escrivão."
+    },
+    "artigo": "Equivalência contrapositiva: p → q ≡ ~q → ~p, com De Morgan: ~(p ∧ q) ≡ ~p ∨ ~q e ~(~r ∨ s) ≡ r ∧ ~s",
+    "assunto": "Equivalências",
+    "base": "questao_real",
+    "conteudo": "Raciocínio Lógico > Equivalências",
+    "criada_em": "2026-10-06T03:47:16.691229+00:00",
+    "enunciado": "Assinale a alternativa logicamente equivalente à afirmação “Se Carla é perita e Diego é escrivão, então Elisa não é agente ou Fábio é inspetor”.",
+    "escopo": "Raciocínio Lógico > Equivalências",
+    "evidencia_da_base": "alvo",
+    "impressao": "fc4352f84456e2f8caefeb4a56411118",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+    "modo": "variacao",
+    "modo_do_pedido": "treino",
+    "origem_chave": "072a5341364b8cf0f94a48780d946a06",
+    "origem_impressao": "d21511113f89404d4f6bf6572f32c453",
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {

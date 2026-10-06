@@ -467,3 +467,21 @@ def test_no_parecido_pega_o_mesmo_conceito_e_deixa_o_vizinho():
                               "Formas de violência doméstica") is None
     assert arvore.no_parecido(nos, "Legislação Especial", "elemento",
                               "Formas de violência doméstica") is None
+
+
+def test_levar_o_no_para_dentro_de_outro_no_da_ficha_fica_so_o_de_cima(banco_temporario):
+    """O art. 75 da LEP foi juntado num elemento de "Orgaos da execucao penal",
+    e a ficha dos Orgaos ja tinha o subassunto: ficar com os dois contaria a
+    mesma resposta duas vezes (06/10/2026)."""
+    from radar import fichas
+    from radar.servico import fichas as servico_fichas
+
+    orgaos = "Lei de Execução Penal > LEP > Órgãos da execução penal"
+    velho = "Lei de Execução Penal > LEP > Estabelecimentos penais > LEP, art. 75"
+    novo = f"{orgaos} > LEP, art. 75"
+    servico_fichas.gravar([fichas.FichaEscrita(
+        tema="Órgãos da execução penal", materia="Lei de Execução Penal",
+        nos=[orgaos, velho], modelo="m", criado_em="x")])
+
+    assert servico_fichas.levar_no(velho, novo) == 1
+    assert servico_fichas.carregar()[0].nos == [orgaos]

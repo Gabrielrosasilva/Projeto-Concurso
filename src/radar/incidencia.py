@@ -69,6 +69,9 @@ class Ocorrencia:
     #: A impressao do ENUNCIADO (QuestaoDeProva.impressao), por onde a
     #: explicacao escrita (data/explicacoes.json) acha a questao.
     impressao_do_enunciado: str = ""
+    #: O texto de apoio que a questao cita (QuestaoDeProva.texto_base): sem
+    #: ele, o exemplo de interpretacao na ficha nao se le (item 4, 06/10).
+    texto_base: str | None = None
 
 
 @dataclass

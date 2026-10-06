@@ -140,6 +140,16 @@ Responda SOMENTE um JSON, no formato:
 {"correta": "c", "explicacao": "...", "fonte": "art. 112 da Lei 7.210/1984"}"""
 
 
+INSTRUCAO_EXPLICACAO_DO_COMPLEMENTAR = INSTRUCAO_EXPLICACAO_DO_TEMA.replace(
+    "UMA questao real da prova do meu cargo (Policia Penal / Agente Penitenciario "
+    "de SC, banca FEPESE)",
+    "UMA questao real de OUTRA prova da FEPESE (o acervo complementar: outro "
+    "cargo, a mesma banca)",
+).replace("Ela e exemplo de um tema do meu cronograma.",
+          "O resumo de um tema do meu cronograma a cita como exemplo de como a "
+          "banca cobra.")
+
+
 INSTRUCAO_CLASSIFICACAO = """Voce recebe questoes reais da prova do meu cargo (Policia Penal / Agente Penitenciario de SC, banca FEPESE), com o gabarito oficial, todas da mesma materia, e a arvore de conteudos dessa materia.
 
 Classifique cada questao na arvore: materia > assunto > subassunto > elemento.
@@ -370,6 +380,15 @@ def _como_responder(tipo: str) -> str:
 
 
 def _formato(tipo: str) -> dict:
+    """O exemplo de resposta do lote, sempre com o `modelo`: e por ele que a
+    procedencia diz quem escreveu (decisao 116). So o de resumos o tinha, e as
+    82 geradas e 10 explicacoes de 06/10/2026 entraram sem o modelo."""
+    formato = _formato_das_respostas(tipo)
+    return {"lote": formato["lote"], "modelo": "<o modelo que escreveu>",
+            **{chave: valor for chave, valor in formato.items() if chave != "lote"}}
+
+
+def _formato_das_respostas(tipo: str) -> dict:
     if tipo == "resumos":
         frase = {"texto": "...", "fontes": ["CP, art. 13, § 2º", "2019-q51 (gabarito C)"]}
         item = {"dominar": [frase], "artigos": [frase], "como_cobra": [frase],
@@ -600,7 +619,7 @@ def pedido_de_explicacoes() -> dict:
                 "instrucao": INSTRUCAO_EXPLICACAO,
                 "pedido": (f"MATERIA: {q.materia or 'nao informada'}\n\n"
                            f"QUESTAO ({q.banca or 'FEPESE'} {q.ano or ''})\n\n"
-                           f"{gerador._questao_por_extenso(q)}"),
+                           f"{gerador._questao_por_extenso(q, inteira=True)}"),
             })
     return _novo_lote("explicacoes", pedidos)
 
@@ -644,7 +663,60 @@ def pedido_de_explicacoes_dos_temas(desde=None) -> dict:
                 "instrucao": INSTRUCAO_EXPLICACAO_DO_TEMA,
                 "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {q.materia or 'nao informada'}"
                            f"\n\nQUESTAO {q.ano}-q{q.numero} ({q.banca or 'FEPESE'} {q.ano or ''})"
-                           f"\n\n{gerador._questao_por_extenso(q)}"),
+                           f"\n\n{gerador._questao_por_extenso(q, inteira=True)}"),
+            })
+    return _novo_lote("explicacoes", pedidos)
+
+
+def pedido_de_explicacoes_dos_resumos() -> dict:
+    """Um pedido por questao do COMPLEMENTAR que algum resumo cita ("FEPESE-
+    2024-q3") e que ainda nao tem explicacao (item 5, 06/10/2026). O resumo
+    manda ler aquela questao como exemplo do padrao da banca; sem explicacao,
+    ela e so um gabarito. O mesmo lote "explicacoes", com a mesma importacao."""
+    from sqlalchemy import select
+
+    from radar import fichas
+    from radar.models import QuestaoDeProva
+    from radar.servico import fichas as servico_fichas
+
+    ctx = servico_fichas.contexto()
+    ja_explicadas = set(carregar_explicacoes())
+    temas_por_questao: dict[tuple, list[str]] = {}
+    codigo_da_questao: dict[tuple, str] = {}
+    for escrita in ctx.escritas:
+        if not escrita.resumo:
+            continue
+        citados = {codigo for frases in escrita.resumo.get("partes", {}).values()
+                   for frase in frases for fonte in [frase.get("texto", "")] + frase.get("fontes", [])
+                   for codigo in fichas.CODIGO_DA_QUESTAO.findall(fonte)
+                   if codigo.startswith(fichas.PREFIXO_DO_COMPLEMENTAR)}
+        if not citados:
+            continue
+        for q in fichas.montar(escrita, ctx).questoes_reais:
+            codigo = fichas.codigo_citavel(q)
+            if codigo in citados:
+                temas_por_questao.setdefault((q.prova, q.numero), []).append(escrita.tema)
+                codigo_da_questao[(q.prova, q.numero)] = codigo
+    criar_tabelas()
+    pedidos = []
+    with sessao() as s:
+        for (prova, numero), temas in sorted(temas_por_questao.items(),
+                                             key=lambda x: (x[0][0], x[0][1] or 0)):
+            q = s.scalar(select(QuestaoDeProva).where(QuestaoDeProva.prova_url == prova)
+                         .where(QuestaoDeProva.numero == numero))
+            if q is None or not q.resposta or q.anulada or q.impressao in ja_explicadas:
+                continue
+            ja_explicadas.add(q.impressao)
+            codigo = codigo_da_questao[(prova, numero)]
+            pedidos.append({
+                "id": f"e{len(pedidos) + 1}", "materia": q.materia,
+                "impressao": q.impressao, "gabarito": q.resposta,
+                "codigo": codigo, "temas": temas,
+                "instrucao": INSTRUCAO_EXPLICACAO_DO_COMPLEMENTAR,
+                "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {q.materia or 'nao informada'}"
+                           f"\n\nQUESTAO {codigo} ({q.banca or 'FEPESE'} {q.ano or ''}, "
+                           f"{q.cargo or 'outro cargo'})"
+                           f"\n\n{gerador._questao_por_extenso(q, inteira=True)}"),
             })
     return _novo_lote("explicacoes", pedidos)
 

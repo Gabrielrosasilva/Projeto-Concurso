@@ -4324,3 +4324,80 @@ avisar ou bloquear, a sua escolha.
      05/10 um clique em "Fiz" gravava o numero do plano por cima do que ja
      estava contado. As rodadas de geradas de antes desta decisao nao
      guardam a faixa, e nao entram no aviso.
+
+## As fichas sem no, a falta de geradas e o texto-base (06/10/2026)
+
+129. **as 15 fichas sem no ganharam no, com a sua aprovacao da lista.** Nove
+     nos novos (origem `manual`, procedencia com o modelo e a aprovacao): cinco
+     subassuntos da LEP pelos titulos e capitulos da Lei 7.210 (Objeto e
+     classificacao do condenado; Trabalho do preso; Disciplina, faltas
+     disciplinares e RDD; Sancoes, recompensas e procedimento disciplinar;
+     Medida de seguranca, incidentes e procedimento judicial) e quatro de
+     Portugues (Inferencia, pressupostos e subentendidos; Demais sinais de
+     pontuacao; Emprego dos pronomes pessoais, demonstrativos e relativos;
+     Complemento nominal e agente da passiva). As outras fichas foram para nos
+     que a classificacao da decisao 106 ja tinha criado (Concordancia nominal,
+     os dois de crase, Significacao das palavras, Especies de documentos
+     oficiais, Conjugacao de verbos irregulares), e a Redacao oficial 1 ganhou
+     "Conceito e atributos da redacao oficial", que nao tinha ficha. O
+     elemento "LEP, art. 75" saiu de "Estabelecimentos penais" (Titulo IV) para
+     "Orgaos da execucao penal", onde o artigo esta na lei (Titulo III, Cap.
+     VI), pelo `radar conteudos --juntar`; "Estabelecimentos penais" ficou com
+     a ficha dos arts. 82 a 104. A Interpretacao 1 (o metodo) ficou sem no de
+     proposito: o assunto inteiro e o no da Interpretacao 6. A arvore foi de
+     429 para 438 nos. Ligar a ficha mudou a classe de 5 temas de "nao contado"
+     para "nao caiu nas 2 provas", e o no trouxe questoes do complementar a 6
+     resumos: eles ganharam "o basico e isto" e o "como a banca cobra" com as
+     questoes citadas (os 65 passam no `--verificar-resumos`).
+
+131. **a falta de geradas das faixas de 06 a 12/10 foi escrita: 90 questoes em
+     15 nos.** Pelo caminho de sempre (`pedido_de_questoes` e a importacao que
+     confere), com os pedidos no scratchpad para o `data/pedido_ia.json` do
+     art. 13 ficar intacto. Cada questao foi lida contra a fonte antes de
+     entrar (a LEP pelo texto vigente da Camara, inclusive o art. 9º-A da Lei
+     15.295/2025). Fato historico sem artigo nao passa na regra da fonte: as 8
+     de "Afirmacao historica" foram reescritas sobre dispositivos (Declaracao
+     de 1789, DUDH, Carta da ONU, Pactos, Viena). Junto, dois consertos: o
+     formato de resposta de todo lote passou a pedir o `modelo` (so o de
+     resumos pedia; 82 geradas e 10 explicacoes entraram sem ele e foram
+     corrigidas para "Claude Code (claude-opus-5-5)"), e o enunciado igual
+     conta como a mesma questao na importacao - "Um exemplo de tautologia e:"
+     tres vezes virou uma.
+
+132. **o texto-base da questao de interpretacao mora no banco, nas provas do
+     alvo.** Coluna nova `questoes_de_prova.texto_base`, preenchida pelo passo
+     6 da migracao (versao 6, com copia antes) e pelo `radar questoes
+     --textos-base`: o caderno e lido de novo POR COLUNAS (a ordem do PDF pos
+     o fim do Texto 2 de 2019 antes do cabecalho dele), o texto vai do
+     "Texto N" ate a primeira questao (ou, na prova de texto unico de 2013, do
+     titulo de Portugues ate a questao 1), e a questao de Portugues recebe o
+     texto que cita ("texto 1", "textos 2 e 3"). So no banco, nunca num
+     arquivo versionado: o texto e de terceiros (BBC, artigo academico). So
+     a coluna muda: enunciado, chave e classificacao ficam. 15 questoes
+     ganharam texto. Ele aparece na tela da questao, na questao inteira da
+     ficha e no pedido da IA - e a questao que a IA tem de resolver (a
+     explicada e a base da variacao) vai agora SEM o corte de 600 caracteres
+     do exemplo de estilo, que levava metade das afirmativas de V/F. Com isso
+     sairam 10 das 12 explicacoes que faltavam no alvo; as 2 de Direitos
+     Humanos (2019-q28 e q38) continuam fora: a fonte delas e so doutrina, e a
+     regra pede dispositivo.
+
+133. **as questoes do complementar que os resumos citam ganharam explicacao:
+     125 de 136.** O pedido e o `manual.pedido_de_explicacoes_dos_resumos`
+     (`radar fichas --pedido --explicacoes --dos-resumos`): so a questao
+     `FEPESE-` que algum resumo cita, inteira, com uma instrucao propria (a
+     questao e de OUTRA prova da FEPESE, e nao do meu cargo); a importacao e
+     a de sempre (a letra do gabarito oficial, a fonte com dispositivo em
+     Direito). Ficaram 11 de fora, todas registradas na pendencia H: 6 citam
+     o texto de uma prova do complementar, que o radar nao guarda (o texto-base
+     da decisao 132 e so do alvo); 3 sao de Portugues numa materia que a regra
+     da fonte trata como Direito ("Conhecimentos Especificos"); e 2 tem o
+     gabarito discutivel (FEPESE-2023-q14, a colocacao depois de "cuja"; e a
+     FEPESE-2024-q21, a probabilidade que ja estava na lista). As explicacoes
+     foram de 80 para 205.
+
+Junto, sem decisao nova: o `servico.fichas.levar_no` (o que o `--juntar` usa
+para as fichas) deixava a ficha com um no e outro dentro dele quando o no
+levado caia sob um no que ela ja tinha - foi o caso do art. 75, que a ficha
+dos Orgaos passou a ter duas vezes. Agora fica so o de cima, como a conferencia
+da ficha exige; o dado foi corrigido.

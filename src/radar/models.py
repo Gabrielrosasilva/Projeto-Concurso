@@ -320,6 +320,13 @@ class QuestaoDeProva(Base):
     # que existe, e e por aqui que se acha.
     impressao: Mapped[str] = mapped_column(String(32), index=True)
 
+    # O texto de apoio que a questao cita ("considerando o texto 1"), lido do
+    # caderno por colunas (`questoes.textos_base`). So as provas do alvo, so
+    # Portugues, e so aqui no banco: o texto e de terceiros (BBC, artigo), e
+    # copia-lo para um arquivo versionado seria publicar o que nao e meu.
+    # Fica fora da chave da questao: ele e contexto, e nao a pergunta.
+    texto_base: Mapped[str | None] = mapped_column(Text, nullable=True)
+
     # Assunto fino dentro da materia. Quando a prova e a do meu cargo, o nome
     # vem do CONTEUDO PROGRAMATICO do edital, e por isso ele e comprido: "Lei
     # Complementar n.o 529 de 17 de dezembro de 2011 (Regimento Interno dos

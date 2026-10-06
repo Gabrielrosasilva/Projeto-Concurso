@@ -1014,6 +1014,9 @@ radar retificacoes          # acusa edital que mudou (--avisar manda no Telegram
 radar questoes              # separa os cadernos do acervo em questoes
 radar questoes --refazer    # passa o parser novo por cima do acervo inteiro;
                             # o texto que muda leva a classificacao junto
+radar questoes --textos-base  # so o texto de apoio das questoes de Portugues
+                            # do alvo ("considerando o texto 1"), lido por
+                            # colunas; mora so no banco (decisao 132)
 radar padrao                # o que a banca mais cobra, por materia: um bloco
                             # por evidencia (provas do cargo, complementar
                             # aceito, outras bancas), nunca somados
@@ -1044,6 +1047,7 @@ radar fichas --importar data/resposta_ia.json   # grava as que passam na confere
 radar fichas --conferir art-5o-caput-e-incisos-i-a-xvi   # marca como lida por mim
 radar fichas --pedido --resumos [--id vozes-do-verbo]   # pede os RESUMOS dos temas
 radar fichas --pedido --explicacoes   # explicacao das questoes reais do alvo de cada tema
+radar fichas --pedido --explicacoes --dos-resumos   # e das do complementar que os resumos citam
 radar fichas --conferir-resumo vozes-do-verbo   # marca o resumo como lido por mim
 radar fichas --verificar-resumos      # confere cada resumo de novo contra o acervo de hoje
 ```
@@ -1916,8 +1920,9 @@ src/radar/
 │   ├── incidencia.py o mapa do alvo a partir do banco
 │   ├── complementar.py o acervo complementar FEPESE: levantar, validar, aceitar
 │   ├── desempenho_por_conteudo.py o meu acerto por no (radar e anotado, a parte)
-│   ├── estudo.py     estudado, praticado, a fila de revisao e o que refazer
-│   ├── espacada.py   a revisao espacada 1-7-30 da home
+│   ├── estudo.py     estudado, praticado, a fila de revisao (a unica: o Meu
+│   │                 desempenho inteira, a home so as pontas) e o que refazer
+│   ├── espacada.py   o 1-7-30 e a rodada "Fazer as revisoes de hoje" (decisao 128)
 │   ├── fichas.py     as fichas e os resumos: arquivo, contexto, aba por dia,
 │   │                 o que o botao Resumo de cada faixa abre
 │   ├── composicao.py a composicao das rodadas que medem (decisao 67)

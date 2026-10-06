@@ -699,6 +699,8 @@ class QuestaoReal:
     #: pelo artigo (a ficha nao tem no): a tela diz como ela chegou aqui.
     como: str = "no"                  # no | artigo | pendente
     prova: str = ""
+    #: O texto de apoio que a questao cita, quando ela cita (item 4, 06/10).
+    texto_base: str | None = None
 
     @property
     def onde(self) -> str:
@@ -924,7 +926,8 @@ def _questao_real(o, evidencia: str, ctx: Contexto, como: str = "no") -> Questao
         o.enunciado, o.pegadinha, o.tipo_de_questao, o.conferida,
         alternativas=alternativas,
         explicacao=ctx.explicacoes.get(getattr(o, "impressao_do_enunciado", "") or ""),
-        mudancas=mudancas, como=como, prova=o.prova)
+        mudancas=mudancas, como=como, prova=o.prova,
+        texto_base=getattr(o, "texto_base", None))
 
 
 def _questoes_reais(dentro, ctx: Contexto) -> list[QuestaoReal]:

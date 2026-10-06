@@ -268,12 +268,16 @@ a 4 e no lote de 05/10 (decisões 96 a 103; o resumo está no
 ## H. Revisão final do estudo (pedido de 05/10)
 
 Feita inteira: a Fase 1 (a análise) e as subetapas R1 a R7 (decisões 108 a
-126; `progresso.md`, linha 25). O que sobra, numa lista só, na ordem de
-prioridade, separado entre o que depende de você e o que a IA pode fazer.
+126; `progresso.md`, linha 25), e depois os itens 8, 2, 3, 4 e 5 do pedido
+de 05/10 (decisões 128 a 133; linha 26). O que sobra, numa lista só, na ordem
+de prioridade, separado entre o que depende de você e o que a IA pode fazer.
 
 ### Depende de você
 
-1. 🔴 **Commit e push de toda a série**, no fim da R7, com a sua autorização.
+1. 🔴 **Commit e push dos itens 2, 3, 4 e 5**, com a sua autorização (o da
+   série R1 a R7 foi feito em 05/10, `e40d3c8`; o item 8 entrou no
+   `f58faa1`, feito pela outra conversa junto com as decisões 127 e 130
+   dela).
 2. 🔴 **Conferir as fichas e os resumos dos temas da semana** (Hoje > Fichas,
    "Ficha completa": "Conferi esta ficha" e "Conferi este resumo"; ou
    `radar fichas --conferir` / `--conferir-resumo`). São 65 de cada; a ficha
@@ -290,18 +294,20 @@ prioridade, separado entre o que depende de você e o que a IA pode fazer.
      pegadinha, sem dizer qual está errado;
    - FEPESE-2024-q21 (probabilidade): a conta direta dá 50%, e o gabarito
      oficial (D) diz outra faixa (já na lista dos 2 gabaritos de Raciocínio,
-     seção D).
+     seção D); a explicação dela ficou de fora pelo mesmo motivo;
+   - FEPESE-2023-q14 (colocação pronominal): o gabarito (A) põe "a cuja
+     enteada atribuem-se", e o relativo "cuja" pede a próclise ("se
+     atribuem"); a A é a menos errada, não a certa. Sem explicação;
+   - FEPESE-2023-q30 ("desdenhar"): o gabarito (A) trata "desdenha do
+     executivo" como a única regência certa, e o verbo também aceita objeto
+     direto. Sem explicação (o trecho também não veio no pedido).
 4. 🔴 **O Ciclo 2** (seção D): a proposta depois do simulado de 07/11, com a
    classe de cada tema (decisão 124) e as fichas, os resumos e as explicações
    dos temas novos antes de 09/11 (decisão 123). Tamanho: grande.
-5. ⚪ **As faixas sem nó na árvore** (até 07/11): na LEP, Objeto e
-   classificação, Trabalho do preso, Disciplina e RDD, Sanções e recompensas,
-   Estabelecimentos penais, Medida de segurança; em Português, Concordância
-   nominal, Crase 1, Pontuação 2, Pronomes 1, Interpretação 4, Termos
-   integrantes 2 e Redação oficial 2. A faixa diz "sem nó na árvore" e não
-   dá comando de gerar; nas da LEP, o "caiu" sai pelo artigo (decisão 108).
-   Resolver é escolher o nó na conferência da ficha (nenhum nó é criado sem
-   você). Médio.
+5. ✅ ~~As faixas sem nó na árvore~~: resolvido em 06/10 (decisão 129), com
+   a lista aprovada por você. Só a Interpretação 1 (o método) ficou sem nó,
+   de propósito. Na conferência das fichas, olhe os 9 nós novos e o porquê
+   de cada um ("por que estes nós").
 6. ⚪ **O pedido do art. 13 em `data/pedido_ia.json`** (8 questões, "Infração
    penal: elementos, espécies"), esperando os passos 2 e 3, se você quiser.
    O escopo é o assunto inteiro: a árvore não tem nó do art. 13.
@@ -323,14 +329,24 @@ prioridade, separado entre o que depende de você e o que a IA pode fazer.
    sabe de onde vem o dado), se o texto fica fora do git (`data/copias/`),
    e o `robots.txt` do normas.leg.br conferido (a Câmara recusou a conexão
    em 05/10). Médio.
-2. ⚪ **A falta do estoque de geradas** (R5, decisão 125): 231 questões em 24
-   nós sem gerada e alguns com pouca, no quadro do `estoque_de_geradas.md`.
-   Sob demanda, pelos 3 passos de cada faixa; ou um lote por semana, se você
-   preferir. Médio.
-3. ⚪ **12 questões reais do alvo sem explicação**, deixadas de fora por falta
-   de fonte segura: dependem do texto-base da prova, que o radar não guarda
-   inteiro (2013-q2; 2019-q1, q2, q4, q9, q13, q14), do sublinhado perdido
-   (2013-q4; 2019-q6, q7) ou são só doutrina (2019-q28, q38). Só com o texto
-   da prova à mão. Pequeno.
-4. ⚪ **Sugestão (melhoria):** a explicação das questões do complementar que
-   são exemplo de tema (hoje só as do alvo têm), pelo mesmo fluxo. Médio.
+2. ⚪ **A falta do estoque de geradas** (R5, decisão 125): as faixas de 06 a
+   12/10 foram completadas em 06/10 (90 questões, decisão 131); de 13/10 em
+   diante continua sob demanda, pelos 3 passos de cada faixa, ou uma semana
+   por vez, como esta. Médio.
+3. ⚪ **2 questões do alvo sem explicação** (2019-q28 e q38, Direitos
+   Humanos): a fonte delas é só doutrina, e a regra pede dispositivo. As
+   outras 10 saíram com o texto-base (decisão 132). Pequeno, se um dia
+   houver dispositivo.
+4. ⚪ **11 questões do complementar citadas nos resumos sem explicação**
+   (decisão 133): 6 citam o texto de uma prova do complementar (o texto-base
+   é só do alvo; guardá-lo também no complementar é a mesma decisão 132
+   estendida, se você quiser), 3 são de Português na matéria "Conhecimentos
+   Específicos", que a regra da fonte trata como Direito (pôr a matéria no
+   `sem_lei` do `config/leis.yml` resolveria), e 2 têm gabarito discutível
+   (acima, item 3 de "Depende de você"). Pequeno.
+5. ⚪ **A alternativa E da 2019-q6 leva um pedaço do Texto 2 colado no fim**
+   ("BBC News Brasil – Muitos no Brasil acham..." até "[Adaptado]"): é a
+   leitura normal do caderno, a mesma ordem trocada que a leitura por colunas
+   do texto-base contornou (decisão 132). Consertar é cortar a alternativa no
+   começo de um texto de apoio e reler o caderno de 2019 (`--refazer`, que
+   leva a classificação junto). Pequeno.

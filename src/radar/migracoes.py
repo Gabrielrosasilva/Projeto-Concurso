@@ -168,6 +168,20 @@ def _passo_5() -> None:
     _exportar_sem_perder("geradas")
 
 
+def _passo_6() -> None:
+    """Item 4 de 06/10/2026: o texto-base das questoes de interpretacao.
+
+    Uma coluna nova em `questoes_de_prova` (texto_base), que vem do modelo. O
+    passo le de novo os cadernos do alvo por colunas e preenche so ela; sem o
+    PDF na maquina (o robo do GitHub, um banco novo) nao ha o que ler, e a
+    coluna fica nula. Nao ha arquivo versionado a levar: o texto e de
+    terceiros e mora so no banco.
+    """
+    from radar.servico import provas
+
+    provas.guardar_textos_base()
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -179,6 +193,7 @@ PASSOS = {
     4: ("O escopo e a base de cada questão gerada (modo do pedido, base, evidência)",
         _passo_4),
     5: ("A chave da questão real de base de cada questão gerada", _passo_5),
+    6: ("O texto-base das questões de interpretação das provas do alvo", _passo_6),
 }
 VERSAO_ATUAL = max(PASSOS)
 

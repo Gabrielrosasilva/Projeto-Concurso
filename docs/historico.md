@@ -2271,3 +2271,20 @@ CLAUDE.md ficou mais curto. A secao H das pendencias e a lista unica do que
 sobra, separada entre o que depende de voce e o que a IA pode fazer. Junto, a
 10ª gerada rejeitada foi exportada para o JSON e os macetes de "Direito
 Processo Penal" passaram ao nome do edital.
+
+## Os itens 8, 2, 3, 4 e 5 do pedido de 05/10 (06/10)
+
+Cinco melhorias pedidas de uma vez, na ordem que voce escolheu, com uma parada
+para aprovar a lista de nos. **A fila de revisao virou uma so** (decisao 128):
+a home deixou a agenda por assunto do `espacada.py` e mostra as pontas da fila
+do Meu desempenho, e o botao revisa por elas; de passagem, o prazo 1-7-30
+passou a acabar na revisao de 30 dias, e as duas ultimas contas em template
+foram para o Python. **As 15 fichas sem no ganharam no** (129): 9 nos novos
+pela lei e pelo edital, o art. 75 no lugar dele, e 6 resumos completados.
+**A falta de geradas de 06 a 12/10 foi escrita** (131): 90 questoes lidas
+contra a fonte antes de entrar; o formato de resposta passou a pedir o
+modelo. **O texto-base das questoes de interpretacao do alvo** (132) mora no
+banco, lido do caderno por colunas, e vai na tela, na ficha e no pedido - o
+que destravou 10 das 12 explicacoes que faltavam. **As questoes do
+complementar que os resumos citam** (133) ganharam 125 explicacoes. A suite
+inteira nao foi rodada, a seu pedido: so os testes de cada item.

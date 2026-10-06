@@ -3825,11 +3825,13 @@
     "tema": "Disciplina, faltas graves e RDD (arts. 44 a 52)",
     "materia": "Lei de Execução Penal",
     "assunto": "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
-    "subassunto": null,
+    "subassunto": "Disciplina, faltas disciplinares e RDD",
     "elemento": "LEP, arts. 44 a 52",
     "tipo_elemento": "artigo",
-    "nos": [],
-    "por_que_estes_nos": "A LEP inteira é um assunto só no programa de 2019, e a árvore não tem subassunto para disciplina, faltas ou RDD (nenhuma das 10 questões do alvo em LEP foi classificada nos arts. 44 a 52, e o complementar não tem questão de LEP). Apontar para o assunto da lei contaria todas as questões de LEP como se fossem deste tema - por isso a lista fica vazia.",
+    "nos": [
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Disciplina, faltas disciplinares e RDD"
+    ],
+    "por_que_estes_nos": "Subassunto criado para os arts. 44 a 52 (Título II, Cap. IV, Seção III, subseções I e II). Nenhuma das 10 questões do alvo em LEP é destes artigos, e o complementar não tem LEP: o nó dá endereço à ficha, às geradas e ao que eu anotar, e o \"caiu ou não caiu\" continua sendo o do acervo. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "LEP, arts. 44 a 52, no texto oficial (Planalto), com atenção ao art. 50 (incisos I a IX) e ao art. 52 inteiro (caput, incisos I a VII e §§ 1º a 10). O RDD mudou depois da prova de 2019 (Lei 13.964/2019) e de novo em 2026 (Leis 15.358, 15.407 e 15.410), e o art. 50 ganhou o inciso IX em 2026. Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
     "como_pesquisar": [
       "faltas graves artigo 50 lei de execução penal",
@@ -4009,8 +4011,10 @@
     "subassunto": "Estabelecimentos penais",
     "elemento": "LEP, arts. 82 a 104",
     "tipo_elemento": "artigo",
-    "nos": [],
-    "por_que_estes_nos": "O subassunto 'Estabelecimentos penais' existe, mas a única questão nele é a do art. 75 (requisitos do diretor), que está nos arts. 75 a 77 - Título III, fora dos arts. 82 a 104 - e é contada na ficha dos órgãos da execução penal. Apontar para o subassunto contaria essa questão aqui também. Nenhum dos arts. 82 a 104 tem nó ainda, e nenhum foi criado; quando uma questão desses artigos for classificada no subassunto, vale rever esta lista.",
+    "nos": [
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais"
+    ],
+    "por_que_estes_nos": "O subassunto 'Estabelecimentos penais' é o Título IV (arts. 82 a 104). A questão do art. 75 que estava nele foi para 'Órgãos da execução penal', onde o artigo está na lei (Título III, Cap. VI). Nenhuma das 10 questões do alvo em LEP é destes artigos, e o complementar não tem LEP: o nó dá endereço à ficha, às geradas e ao que eu anotar, e o \"caiu ou não caiu\" continua sendo o do acervo. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "LEP, arts. 82 a 104, no texto oficial (Planalto): disposições gerais (82 a 86, com os arts. 83-A e 83-B), penitenciária (87 a 90), colônia (91 e 92), casa do albergado (93 a 95), centro de observação (96 a 98), hospital de custódia (99 a 101) e cadeia pública (102 a 104). Depois da prova de 2019 mudou só o art. 86 (§ 3º reescrito e §§ 4º e 5º novos, Leis 14.994/2024, 15.358/2026 e 15.410/2026). Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
     "como_pesquisar": [
       "estabelecimentos penais lei de execução penal penitenciária colônia casa do albergado cadeia pública",
@@ -4537,11 +4541,13 @@
     "tema": "Medida de segurança, incidentes e disposições finais (arts. 171 a 204)",
     "materia": "Lei de Execução Penal",
     "assunto": "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
-    "subassunto": null,
+    "subassunto": "Medida de segurança, incidentes e procedimento judicial",
     "elemento": "LEP, arts. 171 a 204",
     "tipo_elemento": "artigo",
-    "nos": [],
-    "por_que_estes_nos": "A LEP inteira é um assunto só no programa de 2019, e a árvore não tem subassunto para medida de segurança, incidentes, procedimento judicial ou disposições finais (nenhuma das 10 questões do alvo em LEP foi classificada nos arts. 171 a 204, e o complementar não tem questão de LEP). Apontar para o assunto da lei contaria todas as questões de LEP como se fossem deste tema - por isso a lista fica vazia.",
+    "nos": [
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial"
+    ],
+    "por_que_estes_nos": "Subassunto criado para os arts. 171 a 204 (Títulos VI a IX). Nenhuma das 10 questões do alvo em LEP é destes artigos, e o complementar não tem LEP: o nó dá endereço à ficha, às geradas e ao que eu anotar, e o \"caiu ou não caiu\" continua sendo o do acervo. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "LEP, arts. 171 a 204, no texto oficial (Planalto): execução da medida de segurança (171 a 174), cessação da periculosidade (175 a 179), conversões (180 a 184), excesso ou desvio (185 e 186), anistia e indulto (187 a 193), procedimento judicial (194 a 197) e disposições finais (198 a 204). Nenhum desses artigos mudou depois das provas de 2013 e 2019. Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
     "como_pesquisar": [
       "medida de segurança e cessação da periculosidade LEP artigos 171 a 179",
@@ -4705,11 +4711,13 @@
     "tema": "Objeto, classificação e exame criminológico (arts. 1º a 9º-A)",
     "materia": "Lei de Execução Penal",
     "assunto": "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
-    "subassunto": null,
+    "subassunto": "Objeto e classificação do condenado",
     "elemento": "LEP, arts. 1º a 9º-A",
     "tipo_elemento": "artigo",
-    "nos": [],
-    "por_que_estes_nos": "A LEP inteira é um assunto só no programa de 2019, e a árvore não tem subassunto para os arts. 1º a 9º-A (nenhuma questão do acervo foi classificada neles). Apontar para o assunto da lei contaria todas as questões de LEP como se fossem deste tema - por isso a lista fica vazia.",
+    "nos": [
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado"
+    ],
+    "por_que_estes_nos": "Subassunto criado para os arts. 1º a 9º-A (Título I e Título II, Cap. I). Nenhuma das 10 questões do alvo em LEP é destes artigos, e o complementar não tem LEP: o nó dá endereço à ficha, às geradas e ao que eu anotar, e o \"caiu ou não caiu\" continua sendo o do acervo. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "LEP, arts. 1º a 9º-A, no texto oficial (Planalto), com a redação da Lei 15.295/2025 no art. 9º-A (caput e §§ 5º a 10), posterior às provas de 2013 e 2019. Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
     "como_pesquisar": [
       "lei de execução penal artigos 1 a 9 objeto e classificação do condenado",
@@ -4868,8 +4876,7 @@
     "elemento": "LEP, arts. 61 a 81-B",
     "tipo_elemento": "artigo",
     "nos": [
-      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal",
-      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75"
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal"
     ],
     "por_que_estes_nos": "O subassunto 'Órgãos da execução penal' é o tema (a questão do alvo nele é a do art. 64, CNPCP). Entra também o elemento 'LEP, art. 75' (requisitos do diretor), que a classificação pôs sob 'Estabelecimentos penais', mas que está nos arts. 75 a 77 - direção e pessoal dos estabelecimentos, dentro do Título III e deste tema - e é artigo-chave do dia. O subassunto 'Estabelecimentos penais' inteiro fica fora: ele é o tema dos arts. 82 a 104.",
     "ler_exatamente": "LEP, arts. 61 a 81-B, no texto oficial (Planalto): a lista do art. 61; CNPCP (62 a 64); juiz da execução (65 e 66, a lista inteira); Ministério Público (67 e 68); Conselho Penitenciário (69 e 70); departamentos penitenciários (71 a 74); direção e pessoal (75 a 77); Patronato (78 e 79); Conselho da Comunidade (80 e 81); Defensoria (81-A e 81-B). Depois da prova de 2019 mudaram só a alínea j do art. 66, V (monitoração eletrônica, Lei 14.843/2024) e o nome do DEPEN (art. 71). Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
@@ -5239,11 +5246,13 @@
     "tema": "Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)",
     "materia": "Lei de Execução Penal",
     "assunto": "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
-    "subassunto": null,
+    "subassunto": "Sanções, recompensas e procedimento disciplinar",
     "elemento": "LEP, arts. 53 a 60",
     "tipo_elemento": "artigo",
-    "nos": [],
-    "por_que_estes_nos": "A LEP inteira é um assunto só no programa de 2019, e a árvore não tem subassunto para sanções, recompensas ou procedimento disciplinar (nenhuma das 10 questões do alvo em LEP foi classificada nos arts. 53 a 60, e o complementar não tem questão de LEP). Apontar para o assunto da lei contaria todas as questões de LEP como se fossem deste tema - por isso a lista fica vazia.",
+    "nos": [
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Sanções, recompensas e procedimento disciplinar"
+    ],
+    "por_que_estes_nos": "Subassunto criado para os arts. 53 a 60 (Título II, Cap. IV, Seção III, subseções III a V). Nenhuma das 10 questões do alvo em LEP é destes artigos, e o complementar não tem LEP: o nó dá endereço à ficha, às geradas e ao que eu anotar, e o \"caiu ou não caiu\" continua sendo o do acervo. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "LEP, arts. 53 a 60, no texto oficial (Planalto): as sanções (53), quem as aplica e o pedido de RDD (54, com os §§ 2º e 3º da Lei 15.407/2026, posteriores à prova de 2019), as recompensas (55 e 56), a aplicação (57 e 58), o procedimento (59) e o isolamento preventivo (60). Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
     "como_pesquisar": [
       "sanções disciplinares artigo 53 lei de execução penal",
@@ -5407,11 +5416,13 @@
     "tema": "Trabalho do preso (arts. 28 a 37)",
     "materia": "Lei de Execução Penal",
     "assunto": "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
-    "subassunto": null,
+    "subassunto": "Trabalho do preso",
     "elemento": "LEP, arts. 28 a 37",
     "tipo_elemento": "artigo",
-    "nos": [],
-    "por_que_estes_nos": "A LEP inteira é um assunto só no programa de 2019, e a árvore não tem subassunto para o trabalho do preso (nenhuma das 10 questões do alvo em LEP foi classificada nos arts. 28 a 37, e o complementar não tem questão de LEP). Apontar para o assunto da lei contaria todas as questões de LEP como se fossem deste tema - por isso a lista fica vazia.",
+    "nos": [
+      "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso"
+    ],
+    "por_que_estes_nos": "Subassunto criado para os arts. 28 a 37 (Título II, Cap. III). Nenhuma das 10 questões do alvo em LEP é destes artigos, e o complementar não tem LEP: o nó dá endereço à ficha, às geradas e ao que eu anotar, e o \"caiu ou não caiu\" continua sendo o do acervo. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "LEP, arts. 28 a 37, no texto oficial (Planalto): disposições gerais (28 a 30), trabalho interno (31 a 35) e trabalho externo (36 e 37); leia junto o art. 200 (crime político) e o art. 122, § 2º (trabalho externo sem vigilância direta). Os arts. 28 a 37 não mudaram depois das provas de 2013 e 2019. Ficha conferida no texto compilado com as alterações até a Lei 15.410, de 20/05/2026.",
     "como_pesquisar": [
       "trabalho do preso lei de execução penal artigos 28 a 37",
@@ -5921,11 +5932,13 @@
     "tema": "Concordância nominal",
     "materia": "Língua Portuguesa",
     "assunto": "Concordância nominal e verbal",
-    "subassunto": null,
+    "subassunto": "Concordância nominal",
     "elemento": "Concordância nominal: adjetivo com vários substantivos e palavras que variam ou não",
     "tipo_elemento": "concordância",
-    "nos": [],
-    "por_que_estes_nos": "A árvore não tem subassunto de concordância nominal: as questões do complementar sobre ela (2023 e 2024) estão classificadas só no assunto 'Concordância nominal e verbal', que também tem os subassuntos verbais das outras fichas. Apontar para o assunto contaria a concordância verbal aqui também - por isso a lista fica vazia; a revisão ativa 1 cobre o assunto inteiro.",
+    "nos": [
+      "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal"
+    ],
+    "por_que_estes_nos": "O subassunto 'Concordância nominal' nasceu da classificação do complementar (decisão 106) e tem 14 questões dele; o alvo não tem nenhuma. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, o capítulo de concordância nominal: adjetivo anteposto e posposto a vários substantivos, predicativo de sujeito e de objeto composto, anexo, incluso, obrigado, mesmo, próprio, quite, meio, bastante, menos, só, alerta e as expressões 'é proibido', 'é necessário', 'é bom'.",
     "como_pesquisar": [
       "concordância nominal adjetivo posposto a dois substantivos",
@@ -6020,9 +6033,27 @@
         ],
         "como_cobra": [
           {
-            "texto": "Não há evidência suficiente no acervo para afirmar isso.",
+            "texto": "Nas provas complementares da FEPESE (outros cargos), a concordância nominal aparece em lacunas com 'meio', 'necessário' e numeral: 'extraordinário talento e competência', 'meio-dia e meia', 'É necessário calma', 'duzentos gramas'.",
             "fontes": [
-              "acervo"
+              "FEPESE-2024-q8 (gabarito B)"
+            ]
+          },
+          {
+            "texto": "Também aparece como julgamento de frases com o adjetivo depois de dois substantivos, em que o masculino plural e a concordância com o mais próximo valem e o feminino plural não.",
+            "fontes": [
+              "FEPESE-2024-q7 (gabarito E)"
+            ]
+          },
+          {
+            "texto": "E como o erro escondido numa frase longa: 'formas ... conforme apresentada' pede 'apresentadas'.",
+            "fontes": [
+              "FEPESE-2024-q3 (gabarito D)"
+            ]
+          },
+          {
+            "texto": "A regra básica (adjetivo, numeral e pronome concordam com o substantivo) foi pedida com 'Está anexa uma observação objetiva que desfaz o primeiro equívoco'.",
+            "fontes": [
+              "FEPESE-2013-q7 (gabarito E)"
             ]
           }
         ],
@@ -6062,10 +6093,18 @@
               "regra de concordância nominal - Pestana"
             ]
           }
+        ],
+        "basico": [
+          {
+            "texto": "As provas do alvo não têm questão deste tema: o básico é o adjetivo depois de vários substantivos (concorda com o mais próximo ou vai ao plural, no masculino se houver masculino) e os casos de 'meio', 'anexo' e 'é necessário' sem determinante.",
+            "fontes": [
+              "regra de concordância nominal - Pestana"
+            ]
+          }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
-      "criado_em": "2026-10-05T21:52:06.062064+00:00",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+      "criado_em": "2026-10-06T03:29:33.940988+00:00",
       "conferido_em": null
     }
   },
@@ -6432,8 +6471,11 @@
     "subassunto": null,
     "elemento": "Crase: preposição 'a' + artigo 'a'; testes e casos obrigatórios",
     "tipo_elemento": "crase",
-    "nos": [],
-    "por_que_estes_nos": "As questões de crase do acervo estão no assunto 'Emprego da crase' (5 do complementar, de casos variados) e no subassunto 'Crase diante de substantivo feminino sem artigo', que é caso de crase proibida, da ficha da Crase 2. Apontar para o assunto contaria esse subassunto aqui também - por isso a lista fica vazia; a revisão ativa 1 cobre o assunto inteiro.",
+    "nos": [
+      "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+      "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há"
+    ],
+    "por_que_estes_nos": "Os casos obrigatórios (5 questões do complementar) e as lacunas com a, à e há (58), que testam a regra geral. A crase proibida e diante de substantivo sem artigo é da Crase 2. O alvo não tem questão de crase. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, o capítulo de crase até os casos obrigatórios: fusão da preposição 'a' com o artigo 'a(s)' e com 'aquele(s)', 'aquela(s)', 'aquilo' e 'a qual'; os testes de substituição; locuções femininas; horas; 'à moda de'.",
     "como_pesquisar": [
       "crase regra geral teste do masculino",
@@ -6528,9 +6570,17 @@
         ],
         "como_cobra": [
           {
-            "texto": "Não há evidência suficiente no acervo para afirmar isso.",
+            "texto": "Nas provas complementares da FEPESE, a crase vem em lacunas seguidas num texto, misturando o caso obrigatório ('ligada à maior', 'à custa de', 'à qual', 'foi à Justiça') com a armadilha do masculino ('ao aprimoramento', 'a parque') e do 'desde a infância'.",
             "fontes": [
-              "acervo"
+              "FEPESE-2024-q4 (gabarito E)",
+              "FEPESE-2024-q6 (gabarito D)",
+              "FEPESE-2024-q10 (gabarito C)"
+            ]
+          },
+          {
+            "texto": "Também aparece como a alternativa única com a crase certa, entre expressões fixas que soam com crase ('cara a cara', 'a pé', 'vale a pena'): a certa é 'às oito e meia'.",
+            "fontes": [
+              "FEPESE-2023-q5 (gabarito C)"
             ]
           }
         ],
@@ -6570,10 +6620,18 @@
               "regra de crase - Pestana"
             ]
           }
+        ],
+        "basico": [
+          {
+            "texto": "As provas do alvo não têm questão de crase: o básico é o teste do masculino (se aparece 'ao', há crase), as locuções femininas ('à custa de', 'às pressas') e a hora ('às oito e meia').",
+            "fontes": [
+              "regra de crase - Pestana"
+            ]
+          }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
-      "criado_em": "2026-10-05T21:52:06.062064+00:00",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+      "criado_em": "2026-10-06T03:29:33.940988+00:00",
       "conferido_em": null
     }
   },
@@ -7245,8 +7303,11 @@
     "subassunto": null,
     "elemento": "Pressupostos e subentendidos; inferência; sentido da palavra no contexto; denotação e conotação",
     "tipo_elemento": "padrão de interpretação",
-    "nos": [],
-    "por_que_estes_nos": "A árvore não tem subassunto para inferência ou sentido das palavras: as 7 questões do alvo de interpretação sem subassunto estão no assunto inteiro, que também tem os subassuntos de tipologia e de conectivos. Apontar para ele contaria tudo aqui - por isso a lista fica vazia; a bateria da Interpretação 6 cobre o assunto inteiro.",
+    "nos": [
+      "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação",
+      "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    ],
+    "por_que_estes_nos": "O sentido das palavras é o subassunto 'Significação das palavras' (34 questões do complementar); a inferência ganhou um subassunto próprio, ainda sem questão classificada (as do assunto inteiro não foram reclassificadas). (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, as lições sobre informações implícitas (pressupostos e subentendidos), inferência e significação das palavras: sentido no contexto, polissemia, sinonímia, denotação e conotação.",
     "como_pesquisar": [
       "pressuposto e subentendido diferença exemplos",
@@ -7340,9 +7401,22 @@
         ],
         "como_cobra": [
           {
-            "texto": "Não há evidência suficiente no acervo para afirmar isso.",
+            "texto": "Nas provas complementares da FEPESE, o sentido das palavras cai como o significado de uma palavra do texto ('longevidade' = vida longa).",
             "fontes": [
-              "acervo"
+              "FEPESE-2024-q1 (gabarito D)"
+            ]
+          },
+          {
+            "texto": "Cai também como sentido conotativo x denotativo, numa frase isolada ('mulher azeda') ou em sequência de C e D ('mar de rosas', 'cobra').",
+            "fontes": [
+              "FEPESE-2024-q4 (gabarito B)"
+            ]
+          },
+          {
+            "texto": "E como antônimo: 'longe' x 'perto', 'definitivo' x 'provisório', com sinônimo entre as erradas ('permanente').",
+            "fontes": [
+              "FEPESE-2024-q6 (gabarito B)",
+              "FEPESE-2024-q10 (gabarito B)"
             ]
           }
         ],
@@ -7382,10 +7456,18 @@
               "regra de leitura (informação implícita e sentido) - Fiorin e Savioli"
             ]
           }
+        ],
+        "basico": [
+          {
+            "texto": "As provas do alvo não têm questão deste tema, e a inferência (pressupostos e subentendidos) não tem questão classificada nem no complementar: o básico é a diferença entre pressuposto, que está na frase, e subentendido, que está na situação, e trocar o sinônimo na própria frase antes de marcar.",
+            "fontes": [
+              "regra de leitura (informação implícita e sentido) - Fiorin e Savioli"
+            ]
+          }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
-      "criado_em": "2026-10-05T21:52:41.715702+00:00",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+      "criado_em": "2026-10-06T03:29:33.940988+00:00",
       "conferido_em": null
     }
   },
@@ -8086,11 +8168,13 @@
     "tema": "Pontuação 2: vírgula entre orações e outros sinais",
     "materia": "Língua Portuguesa",
     "assunto": "Pontuação",
-    "subassunto": null,
+    "subassunto": "Demais sinais de pontuação",
     "elemento": "Vírgula entre orações; ponto e vírgula, dois-pontos, travessão e parênteses",
     "tipo_elemento": "regra gramatical",
-    "nos": [],
-    "por_que_estes_nos": "A árvore não tem nó para a vírgula entre orações nem para os outros sinais: o subassunto 'Emprego da vírgula' ficou na ficha da Pontuação 1, e as questões do complementar estão só no assunto 'Pontuação' - apontar para ele contaria a vírgula entre termos aqui também. Por isso a lista fica vazia; a revisão ativa 1 cobre o assunto inteiro.",
+    "nos": [
+      "Língua Portuguesa > Pontuação > Demais sinais de pontuação"
+    ],
+    "por_que_estes_nos": "Subassunto criado para os sinais além da vírgula, ainda sem questão classificada. A vírgula é o nó da Pontuação 1. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, o capítulo de pontuação, na parte da vírgula entre orações (coordenadas, adjetivas restritivas e explicativas, adverbiais e reduzidas deslocadas) e dos outros sinais: ponto e vírgula, dois-pontos, travessão, parênteses e aspas.",
     "como_pesquisar": [
       "vírgula em oração adjetiva restritiva e explicativa",
@@ -8232,11 +8316,13 @@
     "tema": "Pronomes 1: emprego",
     "materia": "Língua Portuguesa",
     "assunto": "Pronomes: emprego, forma de tratamento e colocação",
-    "subassunto": null,
+    "subassunto": "Emprego dos pronomes pessoais, demonstrativos e relativos",
     "elemento": "Emprego dos pronomes pessoais, demonstrativos e relativos",
     "tipo_elemento": "regra gramatical",
-    "nos": [],
-    "por_que_estes_nos": "No assunto 'Pronomes', o subassunto 'Colocação e emprego dos pronomes' tem só a questão do alvo de próclise (da ficha de colocação), e 'Uniformidade de tratamento' é da ficha de formas de tratamento. As questões de emprego de pronomes do complementar foram classificadas no assunto 'Classes gramaticais variáveis', junto com substantivo e adjetivo - apontar para ele traria tudo isso. Por isso a lista fica vazia; a revisão ativa 2 cobre o assunto 'Pronomes' inteiro.",
+    "nos": [
+      "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    ],
+    "por_que_estes_nos": "Subassunto criado para o emprego, separado do 'Colocação e emprego dos pronomes', que é a Pronomes 2: as geradas e o desempenho dos dois não se misturam. Ainda sem questão classificada. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, o capítulo de pronomes: pessoais retos e oblíquos ('para eu fazer' x 'para mim'), 'entre mim e ti', 'si' e 'consigo', 'o/a' x 'lhe', demonstrativos (este, esse, aquele) e relativos (que, quem, o qual, cujo, onde).",
     "como_pesquisar": [
       "para mim fazer ou para eu fazer pronome reto e oblíquo",
@@ -8770,9 +8856,10 @@
     "elemento": "Atributos da redação oficial, pronomes de tratamento, vocativo, endereçamento e fechos (Manual de Redação da Presidência, 3ª edição)",
     "tipo_elemento": "princípio",
     "nos": [
-      "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento"
+      "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Vocativos e formas de tratamento",
+      "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Conceito e atributos da redação oficial"
     ],
-    "por_que_estes_nos": "O subassunto 'Vocativos e formas de tratamento' é o tema (1 questão do alvo, de 2013: o vocativo para o Presidente da República). 'Discurso direto e indireto', do mesmo assunto, ficou na ficha da Interpretação 5.",
+    "por_que_estes_nos": "O subassunto 'Vocativos e formas de tratamento' é o tema (1 questão do alvo, de 2013: o vocativo para o Presidente da República). 'Discurso direto e indireto', do mesmo assunto, ficou na ficha da Interpretação 5. Mais o subassunto 'Conceito e atributos da redação oficial' (31 questões do complementar), que não tinha ficha. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Manual de Redação da Presidência da República, 3ª edição (2018): item 3 (atributos da redação oficial), item 4.1 (pronomes de tratamento, com a tabela de endereçamento, vocativo e tratamento), item 4.4 (vocativo) e item 5.1.7 (fechos).",
     "como_pesquisar": [
       "manual de redação da presidência 3ª edição atributos da redação oficial",
@@ -8916,11 +9003,13 @@
     "tema": "Redação oficial 2: o padrão ofício",
     "materia": "Língua Portuguesa",
     "assunto": "Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial",
-    "subassunto": null,
+    "subassunto": "Espécies de documentos oficiais",
     "elemento": "Padrão ofício: partes do documento, formatação e o e-mail como comunicação oficial",
     "tipo_elemento": "conceito",
-    "nos": [],
-    "por_que_estes_nos": "Nenhuma questão do acervo é do padrão ofício: o assunto 'Redação Oficial' tem só os subassuntos de vocativo (ficha da Redação oficial 1) e de discurso direto e indireto (ficha da Interpretação 5). Apontar para o assunto contaria os dois aqui - por isso a lista fica vazia; a revisão ativa 3 cobre o assunto inteiro.",
+    "nos": [
+      "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Espécies de documentos oficiais"
+    ],
+    "por_que_estes_nos": "O padrão ofício é das espécies de documentos oficiais: 24 questões do complementar; o alvo não tem nenhuma. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Manual de Redação da Presidência da República, 3ª edição (2018): item 5 (o padrão ofício), com as partes do documento (5.1.1 a 5.1.9) e a formatação (5.2), e o item 6.4 (correio eletrônico).",
     "como_pesquisar": [
       "padrão ofício manual de redação 3ª edição partes do documento",
@@ -9022,9 +9111,9 @@
         ],
         "como_cobra": [
           {
-            "texto": "Não há evidência suficiente no acervo para afirmar isso.",
+            "texto": "Nas provas complementares da FEPESE, o ofício cai pelo conceito do Manual: a certa é o documento de autoridades e repartições para outros órgãos ou instituições privadas, e as erradas descrevem edital, comunicação interna, ata e exposição de motivos.",
             "fontes": [
-              "acervo"
+              "FEPESE-2024-q9 (gabarito A)"
             ]
           }
         ],
@@ -9060,9 +9149,10 @@
         ],
         "basico": [
           {
-            "texto": "O acervo não tem questão deste tema: o básico é saber a ordem das partes do ofício e montar de cabeça a identificação e a data no formato do Manual.",
+            "texto": "As provas do alvo não têm questão deste tema, e o complementar tem uma só, de conceito: o básico é saber a ordem das partes do ofício e montar de cabeça a identificação e a data no formato do Manual.",
             "fontes": [
-              "Manual de Redação da Presidência da República, 3ª ed., item 5"
+              "Manual de Redação da Presidência da República, 3ª ed., item 5",
+              "FEPESE-2024-q9 (gabarito A)"
             ]
           },
           {
@@ -9073,8 +9163,8 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
-      "criado_em": "2026-10-05T21:53:43.180893+00:00",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+      "criado_em": "2026-10-06T03:29:33.940988+00:00",
       "conferido_em": null
     }
   },
@@ -9996,11 +10086,13 @@
     "tema": "Termos integrantes 2: complemento nominal e agente da passiva",
     "materia": "Língua Portuguesa",
     "assunto": "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
-    "subassunto": null,
+    "subassunto": "Complemento nominal e agente da passiva",
     "elemento": "Complemento nominal x adjunto adnominal; agente da passiva",
     "tipo_elemento": "diferença entre conceitos",
-    "nos": [],
-    "por_que_estes_nos": "A árvore não tem subassunto de complemento nominal nem de agente da passiva: a questão de complemento nominal do complementar (2013) está só no assunto, que também tem o subassunto de objetos, da ficha anterior. Apontar para o assunto contaria os objetos aqui também - por isso a lista fica vazia; a revisão ativa 2 cobre o assunto inteiro.",
+    "nos": [
+      "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Complemento nominal e agente da passiva"
+    ],
+    "por_que_estes_nos": "Subassunto criado para a outra metade do assunto do edital, ainda sem questão classificada. O objeto direto e indireto é a Termos integrantes 1. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, os termos integrantes complemento nominal e agente da passiva e, nos termos acessórios, o adjunto adnominal - com a distinção entre complemento nominal e adjunto adnominal preposicionado.",
     "como_pesquisar": [
       "complemento nominal x adjunto adnominal como diferenciar",
@@ -10136,10 +10228,24 @@
               "regra de termos integrantes e acessórios - Pestana"
             ]
           }
+        ],
+        "basico": [
+          {
+            "texto": "Nem as provas do alvo nem as do complementar têm questão classificada neste tema: o básico é separar o complemento nominal (sentido passivo, completa nome abstrato, adjetivo ou advérbio) do adjunto adnominal, e achar o agente da passiva com 'por' na passiva analítica.",
+            "fontes": [
+              "regra de termos integrantes e acessórios - Pestana"
+            ]
+          },
+          {
+            "texto": "Teste rápido: 'a invasão do presídio' (o presídio é invadido) é complemento nominal; 'a invasão dos presos' (os presos invadem) é adjunto adnominal.",
+            "fontes": [
+              "regra de termos integrantes e acessórios - Pestana"
+            ]
+          }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
-      "criado_em": "2026-10-05T21:52:41.715702+00:00",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+      "criado_em": "2026-10-06T03:29:33.940988+00:00",
       "conferido_em": null
     }
   },
@@ -10147,11 +10253,13 @@
     "tema": "Verbo 1: estrutura e flexão verbal",
     "materia": "Língua Portuguesa",
     "assunto": "Flexão nominal e verbal",
-    "subassunto": null,
+    "subassunto": "Conjugação de verbos irregulares",
     "elemento": "Estrutura do verbo e flexão de número, pessoa, modo e tempo",
     "tipo_elemento": "regra gramatical",
-    "nos": [],
-    "por_que_estes_nos": "A árvore não tem subassunto de flexão verbal: o assunto 'Flexão nominal e verbal' só tem o plural em -ão, que está na ficha de substantivo e adjetivo, e pôr o assunto aqui contaria a mesma questão nas duas fichas. O emprego dos tempos e modos fica na ficha de Verbo 2.",
+    "nos": [
+      "Língua Portuguesa > Flexão nominal e verbal > Conjugação de verbos irregulares"
+    ],
+    "por_que_estes_nos": "A flexão verbal é o subassunto 'Conjugação de verbos irregulares' (26 questões do complementar); o alvo não tem nenhuma. (Ligada em 06/10/2026, decisão 129, com a sua aprovação.)",
     "ler_exatamente": "Na fonte sugerida, o capítulo de verbo, a parte de estrutura e flexão: radical, vogal temática e desinências (modo-temporal e número-pessoal); as três conjugações; os modos (indicativo, subjuntivo e imperativo) e os tempos simples; os verbos regulares, irregulares, anômalos, defectivos e abundantes. Depois, conjugue no papel ter, vir, pôr e ver no presente do indicativo, no pretérito perfeito e no futuro do subjuntivo.",
     "como_pesquisar": [
       "estrutura do verbo radical vogal temática e desinência",
@@ -10245,9 +10353,9 @@
         ],
         "como_cobra": [
           {
-            "texto": "Não há evidência suficiente no acervo para afirmar isso.",
+            "texto": "Nas provas complementares da FEPESE, a flexão verbal cai como 'a frase com a flexão correta', com o futuro do subjuntivo trocado pelo infinitivo nas erradas ('manter', 'querer', 'intervir', 'vir' no lugar de 'mantiver', 'quiser', 'intervier', 'vier') e 'imprimida' no lugar de 'impressa'.",
             "fontes": [
-              "acervo"
+              "FEPESE-2023-q18 (gabarito D)"
             ]
           }
         ],
@@ -10280,10 +10388,18 @@
               "regra das conjugações - Cunha e Cintra"
             ]
           }
+        ],
+        "basico": [
+          {
+            "texto": "As provas do alvo não têm questão de flexão verbal: o básico é o futuro do subjuntivo dos irregulares (quando eu vir, vier, puser, tiver, fizer; se ele mantiver, quiser, intervier) e o circunflexo de 'têm' e 'vêm'.",
+            "fontes": [
+              "regra de flexão verbal - Cunha e Cintra"
+            ]
+          }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
-      "criado_em": "2026-10-05T21:51:08.529846+00:00",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026",
+      "criado_em": "2026-10-06T03:29:33.940988+00:00",
       "conferido_em": null
     }
   },

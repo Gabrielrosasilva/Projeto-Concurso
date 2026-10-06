@@ -1,5 +1,14 @@
 [
   {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D, 'apresentada' se refere às 'formas' de avaliação, que estão no plural, então deveria ser 'conforme apresentadas'. A errada mais tentadora é a C: o trecho tem quatro substantivos (interesse, formas, Avaliações, Saúde), e 'Econômicas' é adjetivo. A erra porque há mais de um pronome (isso, se); B erra porque são duas orações, a principal e 'conforme [foi] apresentada', com verbo elíptico. E erra porque 'por diversos autores' é agente da passiva e 'de forma racional e equânime' é locução adverbial, não adjetiva.",
+    "fonte": "Concordância nominal: o particípio usado como adjetivo concorda em gênero e número com o substantivo a que se refere",
+    "impressao": "009c40d5d172191de1609206a2c867ba",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A Convenção Americana diz que são competentes para conhecer dos assuntos relativos ao cumprimento dos compromissos dos Estados Partes a Comissão e a Corte Interamericana - ou seja, a Corte integra o sistema interamericano de proteção. A pegadinha é a a: a sede da Corte é em San José, na Costa Rica, e não em Brasília. O Brasil aderiu à Convenção em 1992 e reconheceu a competência contenciosa da Corte em 1998, o que derruba a d e a e.",
@@ -7,6 +16,24 @@
     "impressao": "00ec7c239bca271706bbd4aa09db95cc",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Hiato é o encontro de duas vogais em sílabas diferentes: mo-e-da, ál-co-ol, pa-ís. A errada mais tentadora é a A: pi-a-da e di-a têm hiato, mas 'pais' (plural de pai), sem acento, tem o ditongo 'ai' numa sílaba só; com acento, 'país', seria hiato. Em B, D e E aparecem ditongos (bai-xo, o-li-vei-ra, bei-jos).",
+    "fonte": "Fonologia: hiato é o encontro de vogais em sílabas separadas; ditongo é vogal + semivogal na mesma sílaba (pais x país)",
+    "impressao": "01de7c85139a8cb54a18a622a06476c0",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em B, os substantivos são cinco (pesquisas, pessoas, distúrbio, desorientação, desenvolvimento), e só 'pessoas' é núcleo do sujeito ('essas pessoas'). A errada mais tentadora é a C: 'primeiro' é numeral ordinal com função de adjetivo (adjunto adnominal de 'caso'), e o núcleo do objeto direto é 'caso'. A erra porque há três preposições (de, em, até); D erra porque 'a' é pronome oblíquo átono e objeto direto, não oblíquo tônico nem objeto indireto. E erra porque 'de quarenta e três anos' também é locução adjetiva.",
+    "fonte": "Morfossintaxe: substantivo x adjetivo (recém-identificado, topográfica são adjetivos); numeral ordinal antes do substantivo é adjunto adnominal; o, a átonos são objeto direto",
+    "impressao": "026c0131e2ea8e16071978a533bef959",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "c",
@@ -18,6 +45,24 @@
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
   },
   {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em “autarquia”, o ditongo decrescente “au” fica na mesma sílaba, o dígrafo “qu” não se separa e o “i” e o “a” finais estão em hiato, por isso ficam em sílabas diferentes: au-tar-qui-a. A errada mais tentadora é a C (au-tar-quia), que junta “i” e “a” como se fossem ditongo; como o “i” é tônico (au-tar-QUI-a), há hiato e a separação é obrigatória. As alternativas A e B quebram o ditongo “au”, e B e E ainda separam o “qu”.",
+    "fonte": "Divisão silábica (Acordo Ortográfico de 1990, Base XX): não se separam ditongos nem os dígrafos qu e gu; as vogais de hiato ficam em sílabas diferentes",
+    "impressao": "03c4d121e8b1ec243bf9cf71d5017b79",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "1ª V: o texto abre com 'O mundo, para Hannah Arendt, não é simplesmente o que nos rodeia, mas um espaço construído pelo trabalho e constituído pela ação'. 2ª F: o texto é dissertativo (expõe conceitos), não tem narrador nem sequência de acontecimentos no tempo. 3ª F: a pegadinha troca o consumo pela ação, pois o texto diz 'A ação é a atividade mais especificamente humana'. 4ª V: há 'a atividade humana que se preocupa com as necessidades vitais – o labor' e o trabalho, que 'está relacionado à mundanidade do ser humano'. 5ª V: produção e consumo servem à 'satisfação das necessidades', e o trabalho fabrica 'espaços que não se destinam ao consumo imediato' para 'construir um espaço duradouro'.",
+    "fonte": "Texto 1, 1º parágrafo: 'O mundo, para Hannah Arendt, não é simplesmente o que nos rodeia, mas um espaço construído pelo trabalho e constituído pela ação'; 2º parágrafo: 'a lógica que lhe é inerente continua sendo a mesma: a satisfação das necessidades'; 3º parágrafo: 'O trabalho, por sua vez, está relacionado à mundanidade do ser humano' e 'A ação é a atividade mais especificamente humana'; regra: tipologia textual (dissertação x narração)",
+    "impressao": "069856ea02146c06f4560729ff9ad3a1",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "e",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Na classificação em gerações (dimensões), a 1ª é das liberdades civis e políticas, a 2ª dos direitos sociais (igualdade), a 3ª dos de fraternidade/solidariedade (paz, desenvolvimento, meio ambiente) e a 4ª, na lição de Paulo Bonavides, dos direitos à democracia, à informação e ao pluralismo, ligados à globalização e ao avanço tecnológico - por isso a e está correta. A pegadinha é trocar as gerações de lugar: os avanços sociais (a) e a igualdade (c) são da 2ª, as liberdades (b) da 1ª, e a fraternidade (d) da 3ª. O direito à informação está na Constituição como direito fundamental.",
@@ -25,6 +70,15 @@
     "impressao": "09558abfaeeb47650efed17e359ef091",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Um número é divisível por 3 quando a soma dos algarismos é múltipla de 3. Dos quatro trios possíveis, só {1, 3, 5} (soma 9) e {1, 5, 9} (soma 15) servem; {1, 3, 9} soma 13 e {3, 5, 9} soma 17. Cada trio gera 3! = 6 números, então são 12, entre 10 e 15. A armadilha é contar os 4 × 3 × 2 = 24 números sem aplicar o critério de divisibilidade.",
+    "fonte": "Critério de divisibilidade por 3 e permutação simples (P3 = 3! = 6)",
+    "impressao": "0966d72f7e330e58925d09ca4dcd8c89",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "e",
@@ -36,6 +90,24 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Sobrar 5 nas contagens de 6, 8, 10 e 12 significa que N − 5 é múltiplo do MMC(6, 8, 10, 12) = 120. Os candidatos abaixo de 700 são 125, 245, 365, 485 e 605, e só 605 = 11 × 55 é divisível por 11. Logo Carlos tem 605 laranjas, entre 600 e 615. A armadilha é usar o produto ou um múltiplo comum errado (como 240) em vez do MMC.",
+    "fonte": "Mínimo múltiplo comum e divisão euclidiana (N = 120k + 5)",
+    "impressao": "0c6119ca1e99478d75013bc9b8817300",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em B, 'mim' é complemento da preposição 'para' ('para mim' = na minha opinião), e o sujeito de 'é' é 'dirigir'; por isso está certo. Em D e E, 'mim' é sujeito do infinitivo (fazer, buscar), e sujeito se expressa com pronome reto: 'para eu fazer', 'para eu buscar'. Em A e C, depois de preposição sem infinitivo, o certo é o oblíquo tônico: 'entre mim e você', 'para mim'.",
+    "fonte": "Pronomes pessoais: depois de preposição usa-se o oblíquo tônico (mim, ti); como sujeito de infinitivo usa-se o pronome reto (para eu fazer)",
+    "impressao": "0c9c26743b4f4762995e979888943cff",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A pena cumprida no estrangeiro atenua a pena imposta no Brasil pelo mesmo crime, quando diversas, ou nela é computada, quando idênticas - a b traz a primeira parte da regra. A pegadinha é a c: a soberania não impede o cômputo; a lei manda considerar a pena já cumprida para evitar a dupla punição. Não há conversão em restritiva de direitos (a) nem novo julgamento obrigatório (e).",
@@ -43,6 +115,51 @@
     "impressao": "0fedf13ea9ca2c592e8832f3473a63d1",
     "materia": "Direito Penal",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Universalidade e indivisibilidade estão escritas: a Declaração de Viena, que reafirma a DUDH, diz que todos os direitos humanos são universais, indivisíveis, interdependentes e inter-relacionados. A efetividade também conta, e é aí que está a pegadinha da D (só 1 e 3): o art. 28 da DUDH garante a toda pessoa uma ordem social e internacional em que os direitos da Declaração possam ser plenamente realizados, e a doutrina inclui a efetividade entre as características dos direitos humanos. Por isso as três afirmativas estão corretas.",
+    "fonte": "Declaração e Programa de Ação de Viena, 1993, parte I, § 5; art. 28 da Declaração Universal dos Direitos Humanos",
+    "impressao": "13a4528736518000ed608414c4556a2d",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Os direitos humanos são os direitos que protegem a dignidade de todo ser humano: a DUDH afirma, no art. 1º, que todos nascem livres e iguais em dignidade e direitos. A A e a B erram as características: pela Declaração de Viena, os direitos humanos são universais, indivisíveis, interdependentes e inter-relacionados, e o preâmbulo da DUDH os chama de inalienáveis. A errada mais tentadora é a D, que reduz os direitos humanos às obrigações do Estado com os cidadãos, quando eles pertencem a todo ser humano, cidadão ou não.",
+    "fonte": "art. 1º da Declaração Universal dos Direitos Humanos; Declaração e Programa de Ação de Viena, 1993, parte I, § 5",
+    "impressao": "14cb42f729a8c2642d3bde1e11eda26b",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "“Para eu ler”: o pronome é sujeito do infinitivo, por isso “eu”. “Para mim, aquele advogado não é confiável” e “Entre mim e você”: o pronome é só regido de preposição, por isso “mim”. “Eu não me cortei”: o oblíquo átono é “me”, e “mi” não existe na norma. A pegadinha é “Para mim, aquele advogado…”, que parece pedir “eu” por causa do “para”, mas ali não há infinitivo de que o pronome seja sujeito.",
+    "fonte": "Pronomes pessoais: eu como sujeito de infinitivo; mim como complemento de preposição; me como oblíquo átono",
+    "impressao": "1500a42256a2fce6d812d18838d37ef1",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 5º, XXXVIII, d, da CF dá ao tribunal do júri a competência para o julgamento dos crimes dolosos contra a vida. A errada mais tentadora é a E: crime doloso com violência contra a pessoa não basta, como o roubo ou a lesão corporal; só os dolosos contra a vida vão ao júri.",
+    "fonte": "art. 5º, XXXVIII, d, da CF",
+    "impressao": "15d14ef87505d9f82264aa5a0f349bac",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Frase 1 correta: haver no sentido de existir é impessoal e fica no singular (havia vários homens). Frase 2 errada: tempo decorrido se indica com o verbo haver (há uma hora), e 'há... atrás' ainda é redundante. Frase 3 errada: na indicação de horas o verbo ser concorda com o numeral (são cinco horas). Frase 4 correta: 'fizeram' concorda com o sujeito 'eles'. A pegadinha é a frase 1: o plural 'homens' puxa para 'haviam', que a norma não aceita.",
+    "fonte": "Concordância verbal: haver no sentido de existir é impessoal (3ª pessoa do singular); o verbo ser na indicação de horas concorda com o numeral",
+    "impressao": "1765a5f437b1d1fb2bdff44b1bccf5bb",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "d",
@@ -99,6 +216,15 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A voz passiva sintética se forma com verbo transitivo direto mais o pronome apassivador “se”: em “Sinalizam-se ações”, “ações” é o sujeito paciente (equivale a “ações são sinalizadas”), e por isso o verbo vai ao plural. As erradas mais tentadoras são a B e a E, que estão na voz passiva, mas na analítica, formada com “ser” + particípio (“foram relatados”, “tinha sido quebrada”). Em C o “se” é reflexivo (o próprio jovem se feriu), e D está na voz ativa.",
+    "fonte": "Vozes do verbo: passiva sintética = verbo transitivo direto + se apassivador, com o verbo concordando com o sujeito paciente; passiva analítica = ser + particípio",
+    "impressao": "210a60644cb6a2ba20d346b9d73d738e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "e",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Em regra, o tratado incorporado entra no ordenamento abaixo da Constituição: o comum, com força de lei ordinária, e o de direitos humanos aprovado pelo rito comum, com status supralegal (STF, RE 466.343) - os dois são normas infraconstitucionais, como diz a e. A pegadinha é a a: só equivale a emenda constitucional o tratado de direitos humanos aprovado em cada Casa do Congresso, em dois turnos, por três quintos dos votos - não qualquer tratado 'devidamente aprovado'. Também não é o tratado que vira decreto legislativo (b): o Congresso o aprova por decreto legislativo, e o Presidente o ratifica e promulga por decreto, sem 'regulamentá-lo' (c).",
@@ -108,6 +234,60 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "'Terapêuticos' e 'recíproca' são proparoxítonas, e toda proparoxítona é acentuada; 'saúde' leva acento no u tônico do hiato. 'Cientificamente' não tem acento: no advérbio em -mente a sílaba tônica passa a ser 'men', e o acento de 'científica' cai. A pegadinha é 'idéia' (B, D e E): o Acordo de 1990 tirou o acento do ditongo aberto 'ei' nas paroxítonas, então se escreve 'ideia'.",
+    "fonte": "Acentuação: proparoxítonas são todas acentuadas; i e u tônicos de hiato são acentuados; advérbios em -mente perdem o acento do adjetivo; Acordo Ortográfico de 1990, Base IX (sem acento no ditongo aberto ei, oi das paroxítonas)",
+    "impressao": "22897e5e03fa466a21f2fa8f2509c34d",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O total de fichas é 62 + 91 + 13 + 22 + 20 + 32 = 240. As meninas brancas ou pardas são 91 + 22 = 113, e 113 / 240 ≈ 47%. A armadilha é dividir só pelo total de meninas (113 / 145 ≈ 78%, alternativa d): o sorteio é entre todas as fichas, não só entre as das meninas.",
+    "fonte": "Probabilidade clássica: P(A) = casos favoráveis / casos possíveis",
+    "impressao": "232e77753fb20b2fdeb3443a271cae5c",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "1ª: adjetivo antes de dois substantivos concorda com o mais próximo, 'extraordinário talento e competência'. 2ª: na hora, 'meia' concorda com 'hora' subentendida, 'meio-dia e meia'. 3ª: 'é necessário calma' fica invariável porque 'calma' está sem artigo ou determinante; com determinante seria 'é necessária a calma'. 4ª: 'grama', unidade de peso, é masculino, logo 'duzentos gramas'. A pegadinha da C e da E é pôr 'duzentas' ou 'necessária' no feminino.",
+    "fonte": "Concordância nominal: adjetivo anteposto concorda com o substantivo mais próximo; é necessário/é proibido ficam invariáveis com o substantivo sem determinante; grama (peso) é masculino",
+    "impressao": "2335bd38be4f778e53324146461e6395",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O Protocolo Adicional à Convenção Americana em matéria de direitos econômicos, sociais e culturais, de 1988, é o Protocolo de San Salvador, e o art. 11 dele garante o direito a um meio ambiente sadio e manda os Estados promoverem a proteção, preservação e melhoramento do meio ambiente. A pegadinha é a E: San José da Costa Rica é o nome da própria Convenção Americana (Pacto de San José, 1969), não do protocolo adicional. A Rio+20 foi uma conferência da ONU, e Assunção e Cruz Alta não nomeiam esse protocolo.",
+    "fonte": "art. 11 do Protocolo de San Salvador (Protocolo Adicional à Convenção Americana sobre Direitos Humanos, Decreto 3.321/1999)",
+    "impressao": "27e25d2d097c7d0a2045b45fa4414ad0",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 7º, XV, da CF garante o repouso semanal remunerado, preferencialmente aos domingos. A errada mais tentadora é a D: a hora extra é remunerada com, no mínimo, cinquenta por cento a mais que a normal, e não cem por cento (XVI). A A contraria a irredutibilidade do salário, salvo convenção ou acordo coletivo (VI); a C inverte a regra, porque o trabalho noturno é que tem remuneração superior ao diurno (IX); e o FGTS (III) é direito dos trabalhadores do art. 7º, não de qualquer pessoa que trabalhe.",
+    "fonte": "art. 7º, III, VI, IX, XV e XVI, da CF",
+    "impressao": "29699fdf4e957a24fff859a152ac82fe",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "1ª lacuna: 'ir' pede a preposição 'a' e 'Justiça' aceita o artigo 'a', então 'foi à Justiça'. 2ª lacuna: 'a gestão do prefeito' é o sujeito de 'sofreu', só há artigo, sem preposição, logo sem crase. 3ª lacuna: em 'desde projetos de urbanização a parque', o 'a' é só preposição, porque 'parque' é masculino e não aceita o artigo 'a'. A pegadinha é pôr crase na última lacuna por ser uma enumeração, mas antes de palavra masculina não há crase.",
+    "fonte": "Crase: só ocorre com a fusão da preposição a com o artigo a (termo feminino); não há crase antes de palavra masculina nem em sujeito",
+    "impressao": "29de9751562ef1424fe7269e4222bfb4",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Em b, todas fazem o plural em -ões: satisfações, cordões, limões, paixões, razões. As outras misturam terminações: em a, alemães e tabeliães (-ães) com grãos e pagãos (-ãos); em c, capitães e artesãos ao lado de ações; em d, escrivães e charlatães destoam de situações e botões. A pegadinha é achar que todo -ão vira -ões: o plural de cada palavra tem de ser conferido uma a uma.",
@@ -115,6 +295,33 @@
     "impressao": "2ad52c464b4c016f26586fd7bd717424",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O feminino do adjetivo “mau” é “má” (homem mau, mulher má). A errada mais tentadora é a E, “péssima”: péssimo é o superlativo absoluto sintético de “mau”, ou seja, muda o grau, não o gênero. “Boa” é o feminino de “bom”, o antônimo; “mala” e “maua” não são formas do adjetivo.",
+    "fonte": "Flexão de gênero do adjetivo: mau faz o feminino má; péssimo é o superlativo de mau (flexão de grau, não de gênero)",
+    "impressao": "2af2a0dfb702e1d84671390589f26909",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O texto 1 é uma receita: dá instruções com verbos no imperativo (“Amasse”, “Faça”, “Coloque”) para levar o leitor a uma ação, o que caracteriza o tipo injuntivo. O texto 2 se detém em retratar a cena e a personagem (o céu plúmbeo, os fachos de luz, o pijama azul-celeste surrado, as meias encardidas), o que caracteriza o predomínio descritivo. A errada mais tentadora é a B: texto expositivo explica um assunto ao leitor, e o texto 2 não explica nada, ele mostra.",
+    "fonte": "Tipologia textual: injuntivo (instrução, verbos no imperativo) x descritivo (caracterização de seres e ambientes) x expositivo (explicação de um assunto)",
+    "impressao": "2b11180bc681df55142c8b97a4391c73",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A Declaração e Programa de Ação de Viena foi adotada pela Conferência Mundial de Direitos Humanos em 25 de junho de 1993 e, no preâmbulo e no § 1 da parte I, reafirma o compromisso com a Carta da ONU e com a Declaração Universal de 1948. As outras erram data e natureza: não é tratado do ano 2000 sobre o Oriente Médio (A), não está em elaboração (B), não é acordo comercial (C) e não tem ligação com uma ratificação africana de 1970 (E). A D é a única com a data certa, 1993, e o vínculo com a DUDH.",
+    "fonte": "Declaração e Programa de Ação de Viena, 1993, preâmbulo e parte I, §§ 1 e 5",
+    "impressao": "2b690ebd0b275dc0220e493f12cbe062",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "c",
@@ -144,6 +351,42 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Os potes do mesmo sabor são iguais e a ordem não importa, então é combinação com repetição de 3 sabores tomados 5 a 5. Pelo método das barras e estrelas, são C(5 + 3 − 1, 3 − 1) = C(7, 2) = 21 kits. A tentação é a alternativa a (15), de quem calcula 3 × 5, ou a d (25), de quem faz 5², mas nenhuma das duas conta as combinações de sabores.",
+    "fonte": "Combinação com repetição: CR(n, p) = C(n + p − 1, p)",
+    "impressao": "3507f8ce7b0bd9fbe6aae59105cf60f9",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Só a afirmativa 3 está correta: ela reproduz o art. 5º, X, da CF, que torna invioláveis a intimidade, a vida privada, a honra e a imagem, com direito a indenização. A 1 é a pegadinha mais tentadora: homens e mulheres são iguais em direitos e obrigações (art. 5º, I), sem distinção de obrigações. A 2 erra porque o anonimato é vedado (IV), a 4 porque a associação paramilitar é vedada (XVII), e a 5 porque a quebra do sigilo telefônico depende de ordem judicial (XII).",
+    "fonte": "art. 5º, I, IV, X, XII e XVII, da CF",
+    "impressao": "3902bd164a76169aad19c277807cc791",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "As palavras que caracterizam “Maria” na frase (“querida”, “inteligente” e “feliz”) são adjetivos: atribuem qualidades ao substantivo e concordam com ele (uma menina querida). A errada mais tentadora é a C, porque “Maria” e “menina” são substantivos, mas eles são os seres caracterizados, não as qualidades. “Uma” é artigo, “muito” é advérbio que intensifica o adjetivo, e “é” é o único verbo.",
+    "fonte": "Classes de palavras: adjetivo é a palavra que atribui qualidade ou estado ao substantivo e concorda com ele em gênero e número",
+    "impressao": "3a6d7144ab354d6249fefe7dd478ba5d",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "O texto relata os benefícios do projeto e traz os dois critérios: o das obras ('devem seguir critérios como contribuir para a formação intelectual do interno e não estimular a violência') e o da remição (resenha com 'média de aprovação é 6,0 (seis)', depois enviada ao juiz). A errada mais tentadora é a B: as aspas dos 4º e 5º parágrafos marcam a fala da Gerente do Deap e do titular da SAP, não a voz da autora. A A exagera o papel do juiz, que só 'concede ou não a remição de quatro dias de pena'; a C contraria a parceria entre a SAP e a SED, órgãos do Estado; e a E inventa dados sobre mercado de trabalho que o texto não traz.",
+    "fonte": "Texto 3, 2º parágrafo: 'a média de aprovação é 6,0 (seis). Se o reeducando for aprovado, o documento é encaminhado para o juiz da Vara de Execuções Penais, que concede ou não a remição de quatro dias de pena'; 3º parágrafo: 'devem seguir critérios como contribuir para a formação intelectual do interno e não estimular a violência'; regra: aspas para marcar discurso direto de outra pessoa",
+    "impressao": "3ac3d232c6f8d473f2dca5d848037b7b",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Às polícias civis, dirigidas por delegados de carreira, incumbem as funções de polícia judiciária e a apuração de infrações penais, exceto as militares (na esfera da União, isso cabe à Polícia Federal). A pegadinha é a b: à polícia militar cabem a polícia ostensiva e a preservação da ordem pública, não a polícia judiciária. As polícias rodoviária e ferroviária federais fazem patrulhamento ostensivo, e a guarda municipal protege bens, serviços e instalações do município.",
@@ -151,6 +394,15 @@
     "impressao": "412a723595cfba18f6b261b203c5cbfc",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O trabalho é medido em operário-horas: 12 × 10 × 7 = 840 fizeram 75% da obra, então os 25% restantes exigem 840 / 3 = 280. A nova equipe rende 14 × 5 = 70 operário-horas por dia, logo precisa de 280 / 70 = 4 dias. A armadilha é calcular o tempo para a obra inteira, ou para os 75%, esquecendo que só falta um quarto.",
+    "fonte": "Regra de três composta (grandezas diretamente e inversamente proporcionais)",
+    "impressao": "41bc0c0059455cdc9e03f2bf531d6cf8",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "e",
@@ -162,6 +414,60 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em E a concordância nominal está toda certa: “anexa” e “objetiva” (adjetivos) concordam com “observação”, e “primeiro” (numeral ordinal) concorda com “equívoco”. A errada mais tentadora é a C, que erra justamente a concordância: o sujeito é “as provas”, e o certo seria “Vão inclusas as provas”. D também erra (“restaram apenas duas cadeiras”), A não tem numeral e B não tem adjetivo. Ponto discutível: para enxergar em E um pronome adjetivo é preciso tratar “uma” como pronome indefinido, classificação que varia entre gramáticos (muitos o chamam de artigo indefinido).",
+    "fonte": "Concordância nominal: adjetivos, numerais e pronomes adjetivos concordam em gênero e número com o substantivo; anexo e incluso são adjetivos e concordam com o termo a que se referem",
+    "impressao": "42e80ee79ddced02712000d05a5dc64b",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D, 'aos que o visualizam' tem o pronome relativo 'que' (os que = aqueles que) e o pronome pessoal oblíquo átono 'o', que retoma 'o conteúdo manipulativo'. A errada mais tentadora é a A: 'a que estamos expostos' tem relativo, mas em 'o que devemos comprar' o 'o' é pronome demonstrativo (= aquilo), não oblíquo átono. Em E, há o oblíquo átono 'se', mas não há pronome relativo; B e C não têm nenhum dos dois. O sublinhado não aparece no texto lido, mas só a D reúne os dois pronomes.",
+    "fonte": "Pronomes: relativo (que, o qual, cujo) retoma um antecedente e inicia oração; oblíquo átono (o, a, lhe, se, me) é complemento sem preposição; o antes de que pode ser demonstrativo (= aquilo)",
+    "impressao": "44abc289cfa2d0a5ef261ff3d833373e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "“Tanto… quanto…” é uma conjunção coordenativa aditiva correlativa e liga dois termos equivalentes: “de forma global” e “divididas em componentes”. A errada mais tentadora é a B: o “que” de “componentes que, em conjunto, indicariam” retoma “componentes”, logo é pronome relativo (não conjunção integrante), e a oração é adjetiva restritiva, sem vírgula antes. “Enfatizando” é gerúndio, forma nominal do verbo (A); “componentes” não tem desinência de gênero (D); e “suas definições” retoma o termo anterior do texto, sem problema de coesão (E).",
+    "fonte": "Conjunções: tanto… quanto é coordenativa aditiva correlativa; o pronome relativo retoma antecedente e inicia oração adjetiva",
+    "impressao": "4817ee50a8dc7132bfc688bdbfc3b36c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D todas as palavras estão certas: amenizar, rebeldia, ultraje, escassez e policiamento. A errada mais tentadora é a E, que troca os parônimos: castigo se “inflige” (aplica), e “infringir” é violar uma regra; além disso, o adjetivo que acompanha “conduta” é “má”, não o advérbio “mal”. Nas outras: “pesquisa” (A), “esvaziamento” e “precaução” (B), “ajo” e “deslizes” (C).",
+    "fonte": "Ortografia oficial e parônimos: infligir (aplicar pena) x infringir (violar); mau/má (adjetivo) x mal (advérbio); grafias pesquisa, esvaziamento, precaução, ajo, deslizes",
+    "impressao": "490af63aa34ea748e26af8e44bd3e496",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pela inclusão-exclusão, os alunos de alemão, inglês ou espanhol são 109 + 203 + 162 − 25 − 28 − 41 + 5 = 385. Somando os 115 de outros idiomas, o total é 500. A armadilha é somar tudo da tabela ou esquecer de devolver os 5 da interseção tripla, que foram subtraídos três vezes nas interseções duplas.",
+    "fonte": "Princípio da inclusão-exclusão para três conjuntos: n(A ∪ B ∪ C) = n(A) + n(B) + n(C) − n(A ∩ B) − n(A ∩ C) − n(B ∩ C) + n(A ∩ B ∩ C)",
+    "impressao": "4bb34a699091c7f11befa69900b13654",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Antes da indicação de hora determinada há crase, porque se juntam a preposição e o artigo: “às oito e meia”. As erradas mais tentadoras são expressões que parecem pedir crase: “cara a cara” (palavras repetidas), “a pé” (palavra masculina), “a ninguém” (pronome indefinido, que não aceita artigo) e “vale a pena”, em que não há preposição.",
+    "fonte": "Crase: obrigatória na indicação de horas (às oito); não ocorre antes de palavra masculina, entre palavras repetidas nem antes de pronome indefinido",
+    "impressao": "4e94a5c953a382587f03e9235728cc87",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Age em legítima defesa quem, usando moderadamente dos meios necessários, repele injusta agressão, atual ou iminente, a direito seu ou de outrem - o uso moderado é requisito, como diz a a. A pegadinha é a e: o excesso doloso ou culposo é punível. Também cabe defender direito de terceiro (b), não cabe contra agressão passada (c, isso é vingança) nem contra o servidor que age no exercício legal da função (d), porque a conduta dele não é agressão injusta.",
@@ -169,6 +475,15 @@
     "impressao": "509675416908e41803d60c982889c7f8",
     "materia": "Direito Penal",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Usa-se “eu” quando o pronome é sujeito de um verbo no infinitivo, mesmo depois de preposição: “antes de eu terminar”, “para eu fazer”, “para eu pagar”. Usa-se “mim” quando o pronome é só complemento de preposição: “entre mim e você”, “confiará em mim”. A pegadinha é “entre eu e você”: com a preposição “entre”, o certo é “mim”.",
+    "fonte": "Pronomes pessoais: eu (caso reto) é sujeito, inclusive de infinitivo; mim (oblíquo tônico) vem regido de preposição e não é sujeito",
+    "impressao": "50a9443b8a115570b7d63559be12c2b7",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "c",
@@ -189,6 +504,42 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pelo art. 5º, LXVIII, da CF, concede-se habeas corpus sempre que alguém sofrer ou se achar ameaçado de sofrer violência ou coação em sua liberdade de locomoção, por ilegalidade ou abuso de poder. A errada mais tentadora é o mandado de segurança: ele protege direito líquido e certo não amparado por habeas corpus ou habeas data (art. 5º, LXIX), ou seja, não serve para a liberdade de locomoção.",
+    "fonte": "art. 5º, LXVIII e LXIX, da CF",
+    "impressao": "52f03427c14c604bd73c4100cf8858a7",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Os três da alternativa E são coletivos, isto é, substantivos que no singular nomeiam um conjunto: alcateia (de lobos), bando (de aves ou pessoas) e cardume (de peixes). As erradas mais tentadoras são a B e a C, que começam com um coletivo de verdade (ninhada, frota), mas trazem palavras que só estão no plural ou só se usam no plural, como “tênis”, “óculos”, “gatos” e “pessoas”. Plural indica mais de um ser, mas não faz da palavra um coletivo.",
+    "fonte": "Substantivo coletivo: no singular, designa um conjunto de seres da mesma espécie (alcateia, bando, cardume); plural não é coletivo",
+    "impressao": "5383e925bd40513e8dbb938431b4fcba",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Com verbo no futuro do pretérito e sem palavra que atraia o pronome, a norma culta pede a mesóclise: “Revelar-me-iam”. As erradas tentadoras têm palavra atrativa e por isso exigem próclise: “Não me recordo” (B, advérbio de negação), “que se promovam” (C, conjunção subordinativa), “Nunca se desespere” (E, advérbio). A A começa a frase com pronome oblíquo átono, o que a norma culta não admite: “Disseram-te”.",
+    "fonte": "Colocação pronominal: palavras negativas, advérbios e conjunções subordinativas atraem o pronome (próclise); com futuro do presente ou do pretérito sem atrativo usa-se a mesóclise; não se inicia frase com pronome átono",
+    "impressao": "53d38fa1195570bc7aafa12fceca778e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A A reproduz o primeiro considerando do preâmbulo da DUDH: o reconhecimento da dignidade inerente a todos os membros da família humana e de seus direitos iguais e inalienáveis é o fundamento da liberdade, da justiça e da paz no mundo. A errada mais tentadora é a B, que copia o terceiro considerando trocando o essencial: a DUDH diz que os direitos humanos devem ser protegidos pelo Estado de Direito, e não \"pela sociedade organizada\". A C erra porque a fé reafirmada é nos direitos fundamentais do homem e na dignidade da pessoa, não só nos direitos civis, e a D erra o ano, que é 1948.",
+    "fonte": "Declaração Universal dos Direitos Humanos, preâmbulo (1º, 3º e 5º considerandos) e art. 1º",
+    "impressao": "549d495d731465918a14edc505fb56cf",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Iminente é o que está prestes a acontecer (a demolição); eminente é o elevado, ilustre. Privilégio se escreve com i, e o verbo querer faz o futuro do subjuntivo com s (quiser, quisesse), nunca com z. Deferir é atender, conceder (a comissão não atendeu o pedido); diferir é adiar ou ser diferente. Vultosa é de grande vulto, volumosa; vultuosa é inchada, congestionada (termo médico) - a armadilha mais tentadora da questão.",
@@ -196,6 +547,33 @@
     "impressao": "561f6cf9c3907e723489f419f852968e",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 23, III, do Código Penal diz que não há crime quando o agente pratica o fato no exercício regular de direito, ao lado do estado de necessidade, da legítima defesa e do estrito cumprimento de dever legal. A errada mais tentadora é a menoridade: o menor de dezoito anos é penalmente inimputável (art. 27), o que afasta a culpabilidade, e não a ilicitude do fato. Emoção, paixão e embriaguez voluntária ou culposa nem sequer excluem a imputabilidade (art. 28, I e II).",
+    "fonte": "arts. 23, III, 27 e 28 do Código Penal",
+    "impressao": "562cf40fb24476d56a89f05f4500ab51",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Longevidade é a qualidade de quem vive muito: vem do latim longaevus (longo + idade), por isso equivale a 'vida longa'. A pegadinha está em A e B: 'distante' e 'distância' lembram 'longe' pelo som, mas longevidade não fala de espaço, e sim de tempo de vida. '100 anos' (C) é um exemplo de vida longa, não o significado da palavra.",
+    "fonte": "Semântica: significado lexical pela formação da palavra (longevo = que vive muito; -idade forma substantivo abstrato)",
+    "impressao": "58f4cda64e3b1122e10a7362262285b0",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em A, 'precisar' pede a preposição 'de' (precisa-se de algo), então a norma exige 'o banco de que você precisa'; a frase cortou a preposição, como em 'presentes que você gosta'. Em B, C e E, 'fazer', 'usar' e 'desejar' são transitivos diretos, e o 'que' é objeto direto sem preposição nenhuma. A D é a mais tentadora por ser um ditado, mas 'abrir' também é transitivo direto e não falta preposição ali.",
+    "fonte": "Regência verbal: o verbo precisar (necessitar) é transitivo indireto e pede a preposição de, que vai antes do pronome relativo (de que)",
+    "impressao": "5b25e22ad9f83514828346d2870a2673",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "b",
@@ -207,6 +585,24 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Qualquer distinção, exclusão, restrição ou preferência baseada em origem étnica, nacionalidade e outras características é a definição de discriminação, como a do art. 1º da Convenção Internacional sobre a Eliminação de Todas as Formas de Discriminação Racial. A errada mais tentadora é o bullying, que a Lei 13.185/2015 define como ato de violência física ou psicológica, intencional e repetitivo, para intimidar ou agredir, e não como distinção ou preferência. Prevaricação é crime de funcionário público (art. 319 do Código Penal), e cinetismo e borderline não têm relação com direitos humanos.",
+    "fonte": "art. 1º da Convenção Internacional sobre a Eliminação de Todas as Formas de Discriminação Racial (Decreto 65.810/1969); art. 1º, § 1º, da Lei 13.185/2015; art. 319 do Código Penal",
+    "impressao": "5ba8988a2e059051f54112197d007c89",
+    "materia": "Legislação e Educação",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O último algarismo tem de ser par: 4 opções (2, 4, 6 ou 8). O 7 ocupa a centena ou a dezena (2 posições), e a posição que sobra recebe um dos 7 algarismos restantes. São 4 × 2 × 7 = 56 números, entre 55 e 60. A armadilha é esquecer que o 7 pode estar em duas posições e contar só 28.",
+    "fonte": "Princípio multiplicativo da contagem",
+    "impressao": "5bc84c818f73e30a314ee09ef8f45e48",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "c",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "O estado de sítio pode ser decretado em dois casos: comoção grave de repercussão nacional ou ineficácia do estado de defesa, e declaração de estado de guerra ou resposta a agressão armada estrangeira - esta é a c. A pegadinha é a a: calamidade de grandes proporções na natureza é hipótese de estado de defesa, e não de sítio. As demais (impossibilidade do exército, conflito entre Estados, falta de efetivo policial) não estão na Constituição como causas de sítio.",
@@ -214,6 +610,15 @@
     "impressao": "5d2805c35a154b2defe3e98641b4df25",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "'A medalha' começa a frase e só tem artigo; 'entregue à atleta' tem crase porque entregar pede 'a' e a atleta (feminino) leva artigo. 'À custa de' é locução prepositiva feminina, com crase; 'dedicação à modalidade' e 'à qual se dedica' juntam a preposição pedida por 'dedicação' e 'dedicar-se' ao artigo 'a'. A pegadinha é a última lacuna: 'desde' já é preposição e não admite outro 'a', então fica 'desde a infância', sem crase.",
+    "fonte": "Crase: preposição a + artigo a; ocorre em locuções femininas (à custa de) e antes de a qual quando o verbo pede a; não ocorre depois de outra preposição (desde a)",
+    "impressao": "5f0c9cac45d6b61f77cb800dd2e1b769",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "a",
@@ -235,12 +640,120 @@
   },
   {
     "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em E, as formas com a desinência -ria (saberia, teríamos) são do futuro do pretérito do indicativo, como diz o parêntese. A errada mais tentadora é a D: 'obtiver', depois de 'se', é futuro do subjuntivo de obter; o infinitivo pessoal seria 'obter'. Em A, 'busques' (depois de 'é importante que') é presente do subjuntivo; em B, 'fizerem' é futuro do subjuntivo de fazer; em C, 'entendia' é pretérito imperfeito do indicativo. O sublinhado não aparece no texto lido, mas só a E tem a correlação certa.",
+    "fonte": "Flexão verbal: futuro do pretérito do indicativo tem a desinência -ria; futuro do subjuntivo de obter e fazer é obtiver e fizer(em); presente do subjuntivo depois de é importante que",
+    "impressao": "60b655edddefe2ffd9b70bc8cf18c6ee",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "São 18 casos favoráveis em 50 possíveis: 18 / 50 = 0,36 = 36%, entre 35% e 38%. A pegadinha está nas faixas próximas: quem divide 18 pelos 32 que não são do grupo (≈ 56%) ou erra a conta cai em outra alternativa.",
+    "fonte": "Probabilidade clássica: P(A) = casos favoráveis / casos possíveis",
+    "impressao": "6147d6301e9f107d9051688fb4874598",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Apropriar-se o funcionário público de dinheiro, valor ou qualquer outro bem móvel, público ou particular, de que tem a posse em razão do cargo, ou desviá-lo, em proveito próprio ou alheio, é o peculato do art. 312 do Código Penal. A errada mais tentadora é a concussão (art. 316), cujo núcleo é exigir vantagem indevida, e não se apropriar do que já está em sua posse. A prevaricação (art. 319) é retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal, e o excesso de exação (art. 316, § 1º) é a exigência indevida de tributo.",
+    "fonte": "arts. 312, 316 e 319 do Código Penal",
+    "impressao": "61f6a4bb1f1b178978ea93adf71954c9",
+    "materia": "Direito Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pelo Acordo Ortográfico, “voo” perdeu o circunflexo do hiato “oo” e “ideia” perdeu o acento do ditongo aberto “ei” em paroxítona. “Helicóptero” continua acentuado porque é proparoxítona, e “anéis” também, porque o ditongo aberto “éis” em oxítona mantém o acento. A errada mais tentadora é a A, que acerta “voo” e “ideia” mas tira o acento de “helicóptero”.",
+    "fonte": "Acordo Ortográfico de 1990: Base IX (sem acento no hiato oo e no ditongo aberto ei de paroxítona), Base VIII (oxítonas com ditongo aberto éi são acentuadas) e Base XI (toda proparoxítona é acentuada)",
+    "impressao": "63f0c96763fa1da1ef08593a4f277925",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "1ª C: “mar de rosas” é figurado, quer dizer vida tranquila. 2ª D: “viagem” é a viagem de fato, no sentido literal. 3ª C: “cobra” não é o animal, qualifica a mulher como maldosa. 4ª D: “doce” é o sabor do suco, no sentido próprio. A pegadinha é achar que toda palavra em frase cotidiana é literal, ou que toda expressão expressiva é figurada.",
+    "fonte": "Semântica: conotação (sentido figurado) x denotação (sentido literal, de dicionário)",
+    "impressao": "64402ab06214144c4b28c16713fceda8",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pelo art. 14, § 1º, II, da CF, o voto é facultativo para os analfabetos, os maiores de setenta anos e os maiores de dezesseis e menores de dezoito anos. A errada mais tentadora é a E: a faixa facultativa dos jovens vai até os dezoito anos, não até os vinte e um. Estrangeiros e conscritos (B e C) nem podem alistar-se como eleitores (art. 14, § 2º).",
+    "fonte": "art. 14, §§ 1º e 2º, da CF",
+    "impressao": "6594644c84f19842e5e34616021a6c27",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Perigo iminente é o que está prestes a acontecer; eminente é o elevado, ilustre - e é a troca mais tentadora. Mandato é a delegação de poderes para alguém agir em nome de outro (como a autorização para movimentar as contas); mandado é uma ordem, sobretudo judicial (mandado de prisão). Deferiu é atendeu, concedeu a solicitação; diferiu seria adiou.",
     "fonte": "parônimos (Vocabulário Ortográfico da Língua Portuguesa, ABL)",
     "impressao": "65ce2bd1d2cbcc8d74e79f25b8095932",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 5º, LXXII, b, da CF concede habeas data para a retificação de dados, quando não se prefira fazê-lo por processo sigiloso, judicial ou administrativo. A errada mais tentadora é o mandado de segurança, que protege direito líquido e certo não amparado por habeas corpus ou habeas data (LXIX), ou seja, é subsidiário a eles. \"Ação direta de informação\" não existe na Constituição.",
+    "fonte": "art. 5º, LXIX e LXXII, b, da CF",
+    "impressao": "66da5bd7f33b50e95445e746e351c8fc",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Substantivo próprio é o que nomeia um ser específico e se escreve com inicial maiúscula, como os nomes dos personagens “Garfield” e “Barney”. A pegadinha está nas alternativas com palavras que aparecem na tirinha mas são de outras classes: “eu”, “você” e “quem” são pronomes, e “sou” é verbo. “Fazenda” e “gato” são substantivos comuns, porque nomeiam qualquer ser da espécie.",
+    "fonte": "Classificação do substantivo: próprio nomeia um ser individualizado (nome de pessoa, animal, lugar); comum nomeia qualquer ser da espécie; eu, você e quem são pronomes",
+    "impressao": "6ccb784a4cf94c186305c569cd28d405",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "É brasileiro nato o nascido no estrangeiro, de pai brasileiro ou de mãe brasileira, desde que qualquer deles esteja a serviço da República Federativa do Brasil (art. 12, I, b, da CF), como diz a E. A errada mais tentadora é a A: o critério do solo vale ainda que de pais estrangeiros, desde que estes não estejam a serviço de seu país (art. 12, I, a), e a alternativa corta essa ressalva. A C também é incompleta: o filho de mãe brasileira nascido no exterior só é nato se registrado em repartição brasileira competente ou se vier a residir no Brasil e optar pela nacionalidade (art. 12, I, c).",
+    "fonte": "art. 12, I, a, b e c, e II, da CF",
+    "impressao": "6e587ea42beec0e0d7c2bee96e5d8f57",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em E, 'porque' introduz a causa (= pois, uma vez que), e a conjunção se escreve junta e sem acento. A errada mais tentadora é a A: no fim da frase o certo é 'por quê', separado e com acento ('está claro por quê'). Em B e C, precedido de artigo, o termo vira substantivo e se escreve 'o porquê'. Em D, 'que' é sujeito de 'levaram' e não cabe preposição: 'as razões que levaram'.",
+    "fonte": "Ortografia: porque (conjunção causal/explicativa), por quê (no fim de frase), porquê (substantivo, com artigo), por que (preposição + pronome)",
+    "impressao": "6eb689ee38c227dc9322068c8e32743e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O sistema global é o da ONU, cuja Carta põe entre os propósitos da organização promover o respeito aos direitos humanos de todos, e o sistema regional de que o Brasil faz parte é o interamericano, da OEA, com a Comissão e a Corte Interamericanas como órgãos da Convenção Americana. A pegadinha da A é inverter as lacunas: a OEA é regional, não global. A União Europeia (C, D e E) é de outro continente e o Brasil não faz parte dela.",
+    "fonte": "art. 1º, 3, da Carta das Nações Unidas; art. 33 da Convenção Americana sobre Direitos Humanos (Decreto 678/1992)",
+    "impressao": "6fa38b96eb21d6dd2dd20119103c5bee",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "1ª correta: artigo, substantivo, adjetivo e verbo são classes variáveis, que se flexionam. 2ª correta: o sublinhado não aparece no texto lido, mas a sequência artigo, substantivo, adjetivo, verbo e substantivo acompanha a ordem da frase ('As', 'pessoas', 'máxima', um verbo, 'prisão'). 3ª errada: 'pensar' pede a preposição 'em' (pensa-se em algo), então 'em como seria a prisão' é objeto indireto, e nessa oração não há objeto direto. 4ª correta: 'costumam' e 'pensam' estão no presente e 'seria', no futuro do pretérito. 5ª errada: 'de segurança máxima' é adjunto adnominal de 'prisões' (o objeto indireto é 'em prisões de segurança máxima'), e trocar 'em' por 'nas' particulariza as prisões e muda o sentido. Como a 3ª e a 5ª são falsas, só sobra a C, mesmo sem ver o sublinhado.",
+    "fonte": "Texto (presídios nos Estados Unidos), 2º parágrafo: 'As pessoas costumam pensar em prisões de segurança máxima quando pensam em como seria a prisão'; regra: classes de palavras variáveis; regência de 'pensar em' (objeto indireto); adjunto adnominal preposicionado; futuro do pretérito",
+    "impressao": "70901bbe23cb8ab8265ac897e3dbe2be",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "d",
@@ -252,6 +765,33 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pelo art. 61.1 da Convenção Americana, somente os Estados Partes e a Comissão Interamericana têm direito de submeter caso à decisão da Corte. A errada mais tentadora é a D: qualquer pessoa pode apresentar petição com denúncia de violação, mas à Comissão (art. 44), e não diretamente à Corte. A e B ficam incompletas, porque cada uma deixa de fora um dos dois legitimados.",
+    "fonte": "arts. 44 e 61.1 da Convenção Americana sobre Direitos Humanos (Decreto 678/1992)",
+    "impressao": "74bb05b3acf9699a76f4644d05d3cc8f",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em B, “azeda” não se refere a sabor: qualifica o humor de Margarete, e “pé na jaca” também é expressão figurada, de exagero ou descontrole. Nas demais, as palavras estão no sentido próprio, de dicionário: jogador decisivo, cachorros que fugiram, arrendatários que desistiram do contrato. A mais tentadora é a E, mas “falta de confiança” do mercado é o vocabulário usual do noticiário econômico, informativo e não figurado.",
+    "fonte": "Semântica: sentido conotativo (figurado) x denotativo (literal, de dicionário)",
+    "impressao": "7599fdb8c55664ed4fc35013f496d6c4",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A prática do racismo constitui crime inafiançável e imprescritível, sujeito à pena de reclusão (art. 5º, XLII, da CF). A errada mais tentadora é a do tráfico de drogas, e na mesma armadilha caem estupro e extorsão mediante sequestro, que são hediondos: o art. 5º, XLIII, os torna inafiançáveis e insuscetíveis de graça ou anistia, mas não imprescritíveis. Além do racismo, só a ação de grupos armados contra a ordem constitucional e o Estado democrático é imprescritível (art. 5º, XLIV).",
+    "fonte": "art. 5º, XLII, XLIII e XLIV, da CF",
+    "impressao": "75b8b3bf05bdbb8006892691542a8687",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "d",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A alternativa d reproduz a Súmula Vinculante 11 do STF: só é lícito o uso de algemas em caso de resistência, fundado receio de fuga ou perigo à integridade física, justificada a excepcionalidade por escrito, sob pena de responsabilidade do agente e de nulidade da prisão ou do ato. A pegadinha está em c e e, que copiam o texto da súmula mas trocam 'só é lícito' por 'é desautorizado', invertendo a regra. A e b erram por proibir de forma absoluta: a algema é exceção, não vedação total (no júri, o art. 474, § 3º, do CPP também a admite em caso de absoluta necessidade).",
@@ -261,6 +801,42 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A C reproduz o art. 7º, XXXIV, da CF: igualdade de direitos entre o trabalhador com vínculo empregatício permanente e o trabalhador avulso. A errada mais tentadora é a D, que mistura as idades do inciso XXXIII: o trabalho noturno, perigoso ou insalubre é proibido a menores de dezoito sem exceção, e a ressalva do aprendiz, a partir dos quatorze anos, vale para a proibição de qualquer trabalho a menores de dezesseis. A A erra a idade da creche e pré-escola (até 5 anos, XXV), a B diz \"exclusivamente\" onde a CF diz \"preferencialmente\" aos domingos (XV), e a E inventa prazos para a licença à gestante, que é de cento e vinte dias (XVIII).",
+    "fonte": "art. 7º, XV, XVIII, XXV, XXXIII e XXXIV, da CF",
+    "impressao": "76e8f1974cf5dec386c0dbcbe5ad590f",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "1: 'dentes de alho', sem hífen, porque não é nome de espécie botânica, só uma parte do alho. 2: 'de o governador': a tradição gramatical, adotada pela banca, recomenda não contrair a preposição com o artigo que inicia o sujeito de um infinitivo, embora a contração 'do' seja frequente e aceita por parte dos gramáticos. 3: 'presta' está na 2ª pessoa (tu), então o pronome é 'te'. 4: 'anexas' concorda com 'fotocópias'; 5: 'causam' concorda com o sujeito posposto 'essas decisões'. A pegadinha da A é o 'do', a forma mais comum na fala.",
+    "fonte": "Acordo Ortográfico de 1990, Base XV (hífen nos compostos que nomeiam espécies, e não em locuções); concordância nominal (anexo é adjetivo e varia); concordância verbal com sujeito posposto; uniformidade de tratamento",
+    "impressao": "78130c50b314f6c9edade8b9d988a236",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em C, a citação chama de 'armadilha histórica' o ideal que põe a mulher como responsável pela casa, pelo casamento e pelos filhos, ou seja, critica o papel que a sociedade lhe atribui, como faz Beauvoir. A errada mais tentadora é a E: ela descreve a mudança das prioridades das mulheres com o tempo, mas não critica o papel imposto, só constata. A ironiza as feministas, B e D falam da experiência pessoal do autor, sem crítica social.",
+    "fonte": "Interpretação: intertextualidade e identificação do ponto de vista do autor (crítica ao papel social x simples descrição)",
+    "impressao": "7852be6c9a21bdfacb6acadf1bf6c860",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A premissa é p → (q ∧ r), com p = \"João é pobre\", q = \"Bruno é alto\" e r = \"Joana é magra\". Como Joana não é magra, a conjunção q ∧ r é falsa, e pelo modus tollens p também é falsa: João não é pobre. A armadilha é a alternativa e, que afirma também que Bruno não é alto: a falsidade da conjunção vem de r, e sobre Bruno nada se pode concluir.",
+    "fonte": "Modus tollens: de p → q e ~q conclui-se ~p; a conjunção q ∧ r é falsa se um dos termos for falso",
+    "impressao": "78a16591fce9d67a33b4bb6dad6bfc27",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Eficácia horizontal é a aplicação dos direitos fundamentais nas relações entre particulares, que estão no mesmo plano; o STF a reconheceu no RE 201.819, ao exigir ampla defesa na exclusão de sócio de associação privada. A pegadinha é a alternativa e: a relação entre poder público e particular é a eficácia vertical, a clássica, do Estado (em cima) diante do indivíduo. A base constitucional é a aplicação imediata das normas de direitos fundamentais.",
@@ -268,6 +844,96 @@
     "impressao": "7ab4ccd096598e858b6b39492809a3b8",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D, 'tendo sido asfaltadas pela prefeitura' é voz passiva analítica: verbo ser + particípio, com agente da passiva ('pela prefeitura'), e o sujeito 'as ruas' sofre a ação. A errada mais tentadora é a E, pelo 'se': em 'se tratava de um golpe' o 'se' é índice de indeterminação do sujeito com verbo que pede preposição, não pronome apassivador. Nas demais, os verbos estão na voz ativa (pediu, cairá, construíram, roubaram).",
+    "fonte": "Vozes do verbo: voz passiva analítica = ser + particípio (com agente da passiva); tratar-se de tem se índice de indeterminação do sujeito, não passiva sintética",
+    "impressao": "7cc7f6099c57a10f58f818c6183e9562",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A C reproduz o art. 5º, XVII, da CF: é plena a liberdade de associação para fins lícitos, vedada a de caráter paramilitar. A errada mais tentadora é a D: ninguém é obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei (II), e o \"ou decreto\" foi acrescentado. A A inverte o inciso XL (a lei penal retroage para beneficiar), a B contraria o IV (o anonimato é vedado) e a E contraria o XIII (atendidas as qualificações profissionais que a lei estabelecer).",
+    "fonte": "art. 5º, II, IV, XIII, XL e XVII, da CF",
+    "impressao": "7dfdd1bc8a6d21678d35f906b8f63768",
+    "materia": "Legislação e Educação",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Quando lei posterior deixa de considerar crime um fato, ocorre a abolitio criminis: ninguém pode ser punido por esse fato, e cessam a execução e os efeitos penais da sentença condenatória (art. 2º, caput, do Código Penal). A errada mais tentadora é a retroatividade: ela é o efeito da lei nova mais benéfica, e não o nome do fenômeno; e a consequência da abolitio é a extinção da punibilidade (art. 107, III), não da culpabilidade.",
+    "fonte": "art. 2º, caput, e art. 107, III, do Código Penal",
+    "impressao": "7f6e49f0bfe30c81f0547e088a46d318",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A Corte Interamericana não age de ofício: pelo art. 61.1 da Convenção Americana, somente os Estados Partes e a Comissão Interamericana podem submeter caso à decisão dela. A errada mais tentadora é a C: qualquer pessoa pode peticionar, mas à Comissão (art. 44), nunca diretamente à Corte. As demais erram a sede (San José da Costa Rica, não Brasília), a jurisdição (só sobre Estados que a reconheceram, não universal) e o vínculo (é do sistema interamericano, da OEA, não da ONU). Ressalva: a alternativa do gabarito omite a Comissão, que também provoca a Corte, mas é a única compatível com a regra de que a Corte só age provocada.",
+    "fonte": "arts. 44, 61.1 e 62 da Convenção Americana sobre Direitos Humanos (Decreto 678/1992)",
+    "impressao": "7f7eb9f21e2711ff16c23216be9120ba",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Definitivo é o que é final, que não vai mudar; o contrário é provisório, o que vale só por um tempo. A pegadinha é a E: 'permanente' tem sentido próximo de 'definitivo', é sinônimo e não antônimo. 'Móvel', 'impossível' e 'necessário' não se opõem a definitivo.",
+    "fonte": "Semântica: antônimos são palavras de sentido oposto (definitivo x provisório); sinônimos têm sentido equivalente (definitivo e permanente)",
+    "impressao": "80a8574a7831216504f1455b61a175b2",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "1ª F: em 'o que nos rodeia' e 'espaços que não se destinam', o pronome relativo 'que' (e, no segundo, também o 'não') atrai o oblíquo para antes do verbo, e 'rodeia-nos' e 'destinam-se' seriam desvio da norma culta. 2ª F: o primeiro 'mas' corrige o que foi negado e aceita 'e sim', mas em 'mas também com aqueles que nos anteciparam' o par 'mas também' soma, e 'e sim' mudaria o sentido. 3ª V: o sublinhado não aparece no texto lido, mas os relativos desses trechos são 'que' (retoma 'o') e 'onde' (retoma 'da vida e da natureza'). 4ª F: só em 'que lhe garantem uma estabilidade' o 'lhe' é objeto indireto; em 'que lhe possam ser úteis' e 'a lógica que lhe é inerente' ele completa os adjetivos 'úteis' e 'inerente' e é complemento nominal. 5ª V: os dois-pontos do 2º parágrafo esclarecem o que vem antes, em 'na Terra: a vida' e 'a mesma: a satisfação das necessidades'.",
+    "fonte": "Texto 1, 1º parágrafo: 'não é simplesmente o que nos rodeia' e 'onde tudo aparece e desaparece'; 2º parágrafo: 'O labor corresponde a uma das condições da nossa existência na Terra: a vida' e 'a lógica que lhe é inerente continua sendo a mesma: a satisfação das necessidades'; 3º parágrafo: 'espaços que não se destinam ao consumo imediato, mas que lhe possam ser úteis e que lhe garantem uma estabilidade'; regra: próclise atraída por pronome relativo e palavra negativa; 'mas também' aditivo; 'lhe' como objeto indireto ou complemento nominal; dois-pontos explicativos",
+    "impressao": "82a15ac3cedd024541852f28358a2487",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "1ª V: gíria, pátio, área e refeitório são paroxítonas terminadas em ditongo crescente (ia, io, ea), mesma regra. 2ª F: “por” ali é preposição e não leva acento; o circunflexo diferencial vai no verbo “pôr”. 3ª F: lá e né são monossílabos tônicos, até é oxítona e aí leva acento pelo “i” tônico do hiato, regras diferentes. 4ª F: em “dar a esses jovens a rotina…”, “a esses jovens” é o objeto indireto e “a rotina de uma escola de bairro” é o objeto direto. 5ª V: “pela leitura” completa o sentido do substantivo “gosto” (gosto por algo), então é complemento nominal. A pegadinha é a 4ª, que inverte os objetos.",
+    "fonte": "Acentuação (Acordo Ortográfico de 1990, Bases VIII a X): paroxítonas terminadas em ditongo crescente, monossílabos tônicos, oxítonas e i tônico de hiato; acento diferencial de pôr; objeto direto x indireto e complemento nominal",
+    "impressao": "836f603f40f042e38b597bce828cae61",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D, 'meu gato' é aposto explicativo de 'Frajola' e fica entre vírgulas, como manda a norma. A errada mais tentadora é a C: 'Felipe' é vocativo e a vírgula deve vir logo depois dele ('Felipe, venha aqui'), não separando o verbo do adjunto. Em B, a primeira vírgula separa o verbo do objeto direto ('preferimos, vinho'), o que é proibido. Em E, o aposto 'sábado' ficou sem a vírgula de fechamento ('Ontem, sábado, passou').",
+    "fonte": "Pontuação: aposto explicativo e vocativo se isolam por vírgula; não se separa o verbo do seu complemento",
+    "impressao": "837d63c2b7dd8629a552a94135db8c85",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A E reproduz o art. 12, I, a, da CF: é brasileiro nato o nascido no Brasil, ainda que de pais estrangeiros, desde que estes não estejam a serviço de seu país. A errada mais tentadora é a D: a naturalização extraordinária exige mais de quinze anos de residência ininterrupta e ausência de condenação penal, e não dez anos (art. 12, II, b). A B troca nato por naturalizado (um ano de residência e idoneidade moral é requisito da naturalização dos originários de língua portuguesa, art. 12, II, a), e a C erra no \"sempre\", porque o nascido no estrangeiro depende de serviço ao Brasil, registro ou opção (art. 12, I, b e c).",
+    "fonte": "art. 12, I, a, b e c, e II, a e b, da CF",
+    "impressao": "8486dfc8c30d971a5b4cf51242ba371e",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "“Alface” é substantivo feminino: diz-se “a alface”, “alface fresca”. A pegadinha é que a terminação em -e não indica gênero, e por isso há quem diga “o alface”, o que a norma não aceita. “Alvará”, “frade”, “açúcar” e “caminhão” são masculinos (o alvará, o frade, o açúcar, o caminhão).",
+    "fonte": "Gênero do substantivo: alface é feminino (a alface); alvará e açúcar são masculinos, e o gênero não se deduz da terminação",
+    "impressao": "84992de38a61aabe2c39864d08eb2fa8",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "d",
@@ -288,6 +954,33 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 136 da CF permite o estado de defesa para preservar ou prontamente restabelecer, em locais restritos e determinados, a ordem pública ou a paz social atingidas por calamidades de grandes proporções na natureza, como diz a alternativa A. A errada mais tentadora é a C: comoção grave de repercussão nacional é hipótese de estado de sítio (art. 137, I). Declaração de estado de guerra e resposta a agressão armada estrangeira (B e D) também são de estado de sítio (art. 137, II).",
+    "fonte": "art. 136, caput, e art. 137, I e II, da CF",
+    "impressao": "868b49ffcdd58f07d89ea1570eb49c47",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Só dois substantivos estão no diminutivo, formado pelos sufixos -zinho e -inho: “cãozinho” (cão + -zinho) e “passarinhos” (pássaro + -inho). A pegadinha é contar “pequena casa”: ali o diminutivo é só de sentido, dado pelo adjetivo “pequena”, e o substantivo “casa” continua na forma normal. “Manhãs”, “ruas”, “vila” e “Canções” também não têm sufixo diminutivo.",
+    "fonte": "Flexão de grau do substantivo: o diminutivo sintético se forma com sufixo (-inho, -zinho); o analítico usa adjetivo (pequeno), e só o sintético deixa o substantivo no diminutivo",
+    "impressao": "86b21031caa0e64ff3700f2c22a63c05",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D, os dois “que” ligam orações que completam o verbo “falam” (falam isto: que lá dentro não é fácil): são conjunções integrantes, não pronomes relativos. Nas outras, o vocábulo retoma um antecedente e pode ser trocado por “o qual”: “área entremuros que ele habita” (A), “autor […] cujo nome” (B), “criança que repete” e “algo que escutou” (C), “noticiários que […] estão proibidos” (E). A pegadinha é que a conjunção integrante e o pronome relativo têm a mesma forma; o teste é ver se há antecedente.",
+    "fonte": "Pronome relativo x conjunção integrante: o relativo retoma um antecedente e inicia oração adjetiva (substituível por o qual); a integrante inicia oração substantiva, sem antecedente",
+    "impressao": "883baa355d6b5b153efd3761e42855ac",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Estão certas a 1 (guardas municipais, art. 144, § 8º), a 2 (remuneração por subsídio, § 9º, que remete ao art. 39, § 4º) e a 4 (polícia marítima, aeroportuária e de fronteiras é da polícia federal, § 1º, III). A pegadinha é a 3: polícia ostensiva e preservação da ordem pública são das polícias militares (§ 5º); às polícias civis cabem a polícia judiciária e a apuração das infrações penais (§ 4º).",
@@ -295,6 +988,51 @@
     "impressao": "8c0d560a3821f59f31e9a2ff6a83dbf3",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 5º, XLVII, da CF diz que não haverá penas de morte (salvo guerra declarada), de caráter perpétuo, de trabalhos forçados, de banimento e cruéis; logo as afirmativas 1 e 3 estão corretas. A pegadinha é a 2: as penas restritivas de direitos são admitidas, pois o inciso XLVI manda a lei adotar, entre outras, a prestação social alternativa e a suspensão ou interdição de direitos.",
+    "fonte": "art. 5º, XLVI e XLVII, da CF",
+    "impressao": "8dd41eb56812358f7f365d6b6baa09f0",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "O texto opõe o sentido comum da palavra ('A palavra “prisão” não é uma palavra difícil de ser entendida') ao olhar de quem a viveu ('Mas para quem já foi condenado, uma prisão é muito mais do que isso'), e é esse contraste que a E resume. A pegadinha mais tentadora é a A, que generaliza com 'Todas': a frase 'Elas são rodeadas por muros altos e cercas farpadas' fala só das prisões de segurança máxima, que abrigam 'apenas um quarto de todos os presidiários dos Estados Unidos'. A B troca o lugar do problema: vão para a segurança máxima os 'presos que podem causar problemas em prisões de menor segurança'. O sublinhado não aparece no texto lido, mas a C cai mesmo assim: a última frase não tem pronome possessivo, e o único pronome dela, 'Elas', é pessoal e retoma as prisões de segurança máxima; a D, que depende do termo sublinhado no 1º parágrafo, não dá para conferir.",
+    "fonte": "Texto (presídios nos Estados Unidos), 1º parágrafo: 'Mas para quem já foi condenado, uma prisão é muito mais do que isso'; 2º parágrafo: 'Esse tipo de prisão é reservado para infratores violentos, para quem já fugiu (ou tentou fugir) ou para presos que podem causar problemas em prisões de menor segurança. Elas são rodeadas por muros altos e cercas farpadas'; regra: leitura contra a generalização indevida e referência do pronome pessoal",
+    "impressao": "8e5e87569d43846495a89ede296ce8ce",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Escolher os engenheiros e escolher os arquitetos são etapas independentes, e a ordem não importa dentro da equipe. C(5, 3) = 10 e C(7, 2) = 21, e pelo princípio multiplicativo 10 × 21 = 210 equipes, mais de 200. A armadilha é somar as duas combinações (31) em vez de multiplicar.",
+    "fonte": "Combinação simples e princípio multiplicativo da contagem",
+    "impressao": "9050c81dba00a69df5a6f2c7490a8f6d",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 144, § 4º, da CF diz que às polícias civis, dirigidas por delegados de carreira, incumbem, ressalvada a competência da União, as funções de polícia judiciária e a apuração de infrações penais, exceto as militares. A errada mais tentadora é a polícia penal, que cuida da segurança dos estabelecimentos penais (§ 5º-A). A polícia militar faz a polícia ostensiva e a preservação da ordem pública (§ 5º), a polícia rodoviária federal faz o patrulhamento ostensivo das rodovias federais (§ 2º), e as guardas municipais protegem bens, serviços e instalações do Município (§ 8º).",
+    "fonte": "art. 144, §§ 2º, 4º, 5º, 5º-A e 8º, da CF",
+    "impressao": "93b775d090e1b7c1671bead40a594357",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "1: 'enxurrada de maledicências' é exagero, hipérbole. 2: 'a saudade é a chaga' é comparação sem conectivo, metáfora. 3: 'sem piedade, sem coração, sem nada' intensifica em sequência até o 'nada', gradação. 4: 'o vento coça as costas' atribui ação humana ao vento, personificação. A pegadinha da A é 'polissíndeto' na 3, mas polissíndeto é a repetição de conjunções, e ali se repete a preposição 'sem'.",
+    "fonte": "Figuras de linguagem: hipérbole (exagero), metáfora (comparação implícita), gradação (sequência em intensidade crescente), personificação ou prosopopeia (ação humana atribuída a ser inanimado)",
+    "impressao": "940ab93bed836f0d2e87c4baff3af910",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "a",
@@ -324,6 +1062,24 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "1ª V: 'É… que' é expressão de realce e pode ser retirada sem deixar as frases incompletas. 2ª V: em 1 e 2 os verbos estão no presente ('criam', 'recriam', 'estabelecem', 'adquire'), e em 3 há presente ('é', 'partilhamos'), pretérito perfeito ('anteciparam') e futuro do presente ('darão'). 3ª F: 'um mundo comum' e 'uma objetividade' são objetos diretos de 'estabelecem' e 'adquire', mas 'uma diversidade de pontos de vista' faz parte do sujeito ('a existência de uma diversidade de pontos de vista'). 4ª V: antes de pronome possessivo feminino singular a crase é facultativa, então 'à nossa ação' fica certo com ou sem o acento. 5ª F: o sublinhado não aparece no texto lido, mas o 'o' da frase 3 está em 'o mundo comum' (artigo) e o 'os' está em 'com os que darão continuidade', onde equivale a 'aqueles' e é pronome demonstrativo.",
+    "fonte": "Texto 1, último parágrafo: 'É com suas ações que as pessoas constantemente criam e recriam o “espaço-entre” e, assim, estabelecem um mundo comum', 'É por meio dela que a subjetividade de nossas percepções adquire uma objetividade' e 'com os que darão continuidade à nossa ação depois de nós'; regra: expressão de realce 'é... que'; tempos do indicativo; objeto direto x sujeito; crase facultativa antes de pronome possessivo; 'o/os' pronome demonstrativo (= aquele/aqueles)",
+    "impressao": "9ca3c7f8989e3be352d81d99ceb451cb",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O parágrafo abre com o 2º fragmento ('Ao analisarmos o que os professores compreendem…'), que apresenta o assunto e o referente 'os professores'. Em seguida vem o 5º, que retoma 'os professores' com 'Eles citam'; depois o 1º e o 4º, que acrescentam ideias com 'também'. Fecha o 3º ('É o momento em que a criança sai do núcleo familiar'), que desenvolve a diferença com a família citada no 4º. A pegadinha da D é abrir com o 4º, mas 'Também consideram' não pode iniciar o texto, porque não tem sujeito expresso nem ideia anterior a que se somar.",
+    "fonte": "Coesão textual: retomada por pronome (Eles) e conectivo aditivo (também) exigem um referente e uma ideia anteriores",
+    "impressao": "9cca39c6dda327e25adaba4fff4fa29c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "O preso será informado de seus direitos, entre eles o de permanecer calado, sendo-lhe assegurada a assistência da família e de advogado - é a b. A pegadinha é a e: a ordem escrita e fundamentada tem de ser de autoridade JUDICIÁRIA competente, não policial (salvo flagrante e transgressão militar). O direito ao silêncio vale para todo preso, não só no flagrante (a), a prisão e o local são comunicados imediatamente ao juiz e à família (c), e o preso tem direito de saber quem o prendeu (d).",
@@ -331,6 +1087,15 @@
     "impressao": "9de47d8bcca8217a5140aa52813f1e27",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em A, 'haver' no sentido de existir é impessoal e fica no singular ('haverá dias'), então a concordância está certa. A errada mais tentadora é a C: 'fazer' indicando tempo também é impessoal e passa essa impessoalidade ao auxiliar, logo 'deve fazer mais de vinte anos'. Em B, o sujeito '15 milhões' pede 'azeitam'; em D, o 'ou' com ideia de exclusão (só um vence o campeonato) pede o singular 'vencerá'; em E, o sujeito 'os alertas' pede 'fossem'.",
+    "fonte": "Concordância verbal: haver (existir) e fazer (tempo decorrido) são impessoais e passam a impessoalidade ao verbo auxiliar; sujeito ligado por ou com exclusão leva o verbo ao singular",
+    "impressao": "9e431afc892df3398660a50d626a1a69",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "a",
@@ -342,6 +1107,60 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "O sublinhado não aparece no texto lido, mas na frase da A o único termo que pode ser objeto indireto é 'aos seres humanos': garantir é transitivo direto e indireto, garante-se algo ('um lugar duradouro', objeto direto) a alguém ('aos seres humanos', com a preposição 'a' exigida pelo verbo). A errada mais tentadora é a D: em 'A ação é a atividade mais especificamente humana', o verbo 'ser' é de ligação, que não tem objeto direto; o termo depois dele é predicativo do sujeito. A C também falha porque 'artefatos, objetos de uso e espaços' completam o verbo 'fabrica' sem preposição, e são objeto direto, não complemento nominal.",
+    "fonte": "Texto 1, 1º parágrafo: 'Construções e artefatos garantem aos seres humanos um lugar duradouro no meio da vida e da natureza'; 3º parágrafo: 'A ação é a atividade mais especificamente humana'; regra: verbo transitivo direto e indireto (garantir algo a alguém) e predicativo do sujeito depois de verbo de ligação",
+    "impressao": "a19000121df70a8c9d48183ff18d4d71",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em D, 'fizer' é o futuro do subjuntivo de fazer, e 'deverá haver' fica no singular porque haver (existir) é impessoal e passa isso ao auxiliar. A errada mais tentadora é a C: o futuro do subjuntivo de vir é 'vier' ('quando você vier'), já que 'vir' é o futuro do subjuntivo de ver, e 'tragas' mistura tu com você. Em A, 'caso' pede presente do subjuntivo ('mantenha') e o particípio de imprimir no sentido de estampar é 'impressa'; em B, o certo é 'quiser' e 'intervier'. Em E, 'se resolveram os problemas' é passiva sintética e o verbo concorda com o sujeito plural.",
+    "fonte": "Flexão verbal: futuro do subjuntivo de vir (vier), querer (quiser), intervir (intervier), fazer (fizer); haver impessoal com auxiliar no singular",
+    "impressao": "a204ab7ae80f8491beceb199c1c4af0a",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pronome de tratamento leva o verbo e o possessivo para a 3ª pessoa (“sua família”), não admite artigo, e por isso não há crase antes de “Vossa Senhoria”; a grafia certa é “beneficente”. A errada mais tentadora é a C, que tem a grafia certa mas usa o possessivo de 2ª pessoa (“vossa família”). A e E escrevem “beneficiente”; A ainda põe crase antes de “Vossa Senhoria”, e D também usa “vossa”.",
+    "fonte": "Pronomes de tratamento: concordância em 3ª pessoa (seu, sua) e sem artigo, logo sem crase; ortografia: beneficente",
+    "impressao": "a3eff6f2b74f7f6e8402ff22a19a4c7a",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A DUDH se apoia na dignidade da pessoa humana: o primeiro considerando do preâmbulo diz que o reconhecimento da dignidade inerente a todos os membros da família humana é o fundamento da liberdade, da justiça e da paz, e o art. 1º afirma que todos nascem livres e iguais em dignidade e direitos. A errada mais tentadora é a E: embora tenha nascido como resolução, e não como tratado, a DUDH não é mero protocolo de intenções, pois a Declaração de Viena (1993) a chama de fonte de inspiração e base dos instrumentos internacionais de direitos humanos que vieram depois. A D erra porque a Declaração é universal e veda distinção fundada na condição política ou internacional do país da pessoa (art. 2º).",
+    "fonte": "Declaração Universal dos Direitos Humanos, preâmbulo e arts. 1º e 2º; Declaração e Programa de Ação de Viena, 1993, preâmbulo e parte I, § 1",
+    "impressao": "a4590c72b386acb06300c2b15b6177e3",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Quando o prefixo termina em vogal e a palavra seguinte começa com “s” ou “r”, junta-se tudo e dobra-se a consoante: “ultrassom”. A errada mais tentadora é a B, “vôo”, grafia anterior ao Acordo; hoje é “voo”, sem acento. As outras também seguem a regra antiga ou erram o acento: o certo é “assembleia”, “contrassenha” e “ciúme”.",
+    "fonte": "Acordo Ortográfico de 1990: Base XVI (prefixo terminado em vogal + palavra com s ou r: dobra-se a consoante, sem hífen) e Base IX (voo, assembleia sem acento); ciúme mantém o acento do u tônico de hiato",
+    "impressao": "a4ac2617217cb6377371cdf2631f7cbb",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O Estatuto da Corte Interamericana a define como instituição judiciária autônoma cujo objetivo é a aplicação e a interpretação da Convenção Americana, com sede em San José, na Costa Rica. As outras erram números e regras da Convenção: a Corte tem sete juízes, e não cinco (art. 52.1); a eleição é em votação secreta (art. 53.1); o mandato de seis anos admite uma reeleição (art. 54.1); e o quórum é de cinco juízes, e não quatro (art. 56). A errada mais tentadora é a B, que copia quase toda a letra do art. 52.1 e troca só o número de juízes.",
+    "fonte": "arts. 1º e 3º do Estatuto da Corte Interamericana de Direitos Humanos; arts. 52.1, 53.1, 54.1 e 56 da Convenção Americana sobre Direitos Humanos",
+    "impressao": "a5ce58ab545913743743d072297cd92d",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A afirmativa 1 é correta: em A e em C a primeira frase é a fala do personagem (discurso direto) e a segunda a relata com 'disse que'/'ordenou que' (indireto); e a 5 também: em B, 'gosto' está no presente e 'disse' no passado. A 2 é falsa porque as duas frases de B são discurso direto (só muda a posição do verbo de elocução), e a 3, porque D não tem fala de ninguém, só a inversão da ordem. A pegadinha é a 4: 'Faça' está no imperativo e 'fizesse' no subjuntivo, então nem todas estão no indicativo.",
@@ -349,6 +1168,15 @@
     "impressao": "a5de09d0a1a56a4b791a0f616044de53",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 5º, LXXVI, da CF diz que são gratuitos para os reconhecidamente pobres, na forma da lei, o registro civil de nascimento e a certidão de óbito; logo só 1 e 3. A pegadinha é a certidão de casamento: o que a CF faz gratuito é a celebração do casamento civil, para todos (art. 226, § 1º), e não a certidão. O registro de ato constitutivo de empresa não está no inciso.",
+    "fonte": "art. 5º, LXXVI, a e b, e art. 226, § 1º, da CF",
+    "impressao": "a84f92b2439d8c6a2f596e677d8bd9b5",
+    "materia": "Legislação e Educação",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "b",
@@ -369,6 +1197,42 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A divisão silábica segue a pronúncia, não a formação da palavra: em “bisavó”, o “s” do prefixo se junta à vogal seguinte (bi-sa-vó), mas em “bisneta” fica na sílaba do prefixo (bis-ne-ta). Em “coordenar”, os dois “o” estão em hiato e se separam (co-or-de-nar), e em “exceção” o “x” e o “c” ficam em sílabas diferentes (ex-ce-ção). A errada mais tentadora é a C, que separa “bis-a-vó” pelo prefixo e junta o hiato em “coor”.",
+    "fonte": "Divisão silábica (Acordo Ortográfico de 1990, Base XX): separa-se pela soletração, sem considerar os elementos de formação; vogais em hiato e as letras de xc ficam em sílabas diferentes",
+    "impressao": "aa66dd9c2de9886fb37f9d970280c959",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "As duas lacunas antes de 'gratidão' iniciam frase e só têm artigo: 'A gratidão'. 'Começar a perceber' não tem crase porque o 'a' vem antes de verbo; 'perceber as pequenas coisas' é objeto direto, só com artigo. 'Ligada à maior liberação' e 'à melhora' juntam a preposição pedida por 'ligada' ao artigo feminino, e com o masculino fica 'ao aprimoramento'. A pegadinha é 'às pequenas coisas' (C): 'perceber' é transitivo direto e não pede preposição.",
+    "fonte": "Crase: preposição a + artigo a; não há crase antes de verbo; verbo transitivo direto não pede preposição (perceber as coisas); ligado a algo",
+    "impressao": "ac54b57d75a4bcecaf6bb23662dea1b7",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Todas as palavras da C perderam o acento: alcateia e boia (ditongo aberto ei/oi em paroxítona), perdoo (hiato oo), leem (eem) e feiura (u tônico depois de ditongo em paroxítona). A errada mais tentadora é a B, que começa com “voo” e “ideia”, mas “purê” e “fusível” continuam acentuados e “rubrica” nunca teve acento. Em A, “fiéis” e “vírus” continuam acentuados, e D e E misturam palavras que mantêm o acento (almíscar, vintém, faísca, hífen) ou que nunca o tiveram.",
+    "fonte": "Acordo Ortográfico de 1990: Base IX (ditongos abertos ei e oi de paroxítonas, hiatos oo e eem sem acento) e Base X (i e u tônicos depois de ditongo em paroxítona sem acento)",
+    "impressao": "b0145677ed4bbe8a812e3eb7b5f8ec0e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 5º, § 3º, da CF diz que os tratados de direitos humanos aprovados em cada Casa do Congresso, em dois turnos, por três quintos dos votos, serão equivalentes às emendas constitucionais, isto é, têm força de norma constitucional. A errada mais tentadora é a E: força de lei federal (ordinária) é a do tratado comum, que não trata de direitos humanos, e não a do tratado aprovado pelo rito qualificado do § 3º.",
+    "fonte": "art. 5º, § 3º, da CF",
+    "impressao": "b10e74bfad75c5d4840d67caf1afce27",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "c",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Na frase 1, sujeito ligado por ou com ideia de exclusão (só um ganha) leva o verbo ao singular. Na frase 4, fazer indicando tempo decorrido é impessoal e fica no singular (Faz dez minutos). Na frase 3, o verbo ser concorda com o numeral: Foram sete quilômetros. A frase 2 é o ponto delicado: com porcentagem, a banca exigiu a concordância com o numeral (1% votou), embora parte dos gramáticos aceite também o plural com o especificador (dos eleitores) - vale saber que a FEPESE cobrou assim.",
@@ -379,12 +1243,57 @@
   },
   {
     "correta": "b",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "1ª V: é uma entrevista, alternando as perguntas da BBC News Brasil e as respostas de Grisot. 2ª F: o texto não ensina o leitor a agir; é argumentativo, a entrevistada defende uma posição. 3ª V: ela compara com outros países ('sobretudo nos Estados Unidos, onde certos Estados gastam mais com prisões do que com universidades') e se posiciona ('percebemos que a prisão não funciona'). 4ª V: o populismo penal 'quer dividir os direitos humanos', e Grisot responde que 'os direitos humanos são indivisíveis'. 5ª F: não há ambivalência, pois ela critica o modelo repressivo do começo ao fim ('Construir presídios em detrimento da educação é uma escolha infeliz') e defende a educação, não um modelo prisional repressivo.",
+    "fonte": "Texto 2, respostas de Grisot: 'O Brasil dá continuidade a uma política repressiva que fracassou, sobretudo nos Estados Unidos, onde certos Estados gastam mais com prisões do que com universidades', 'Construir presídios em detrimento da educação é uma escolha infeliz' e 'Isso faz parte de uma retórica clássica que chamamos de populismo penal que quer dividir os direitos humanos. Nós dizemos que os direitos humanos são indivisíveis'; regra: gênero entrevista e tipologia textual (argumentativo x prescritivo)",
+    "impressao": "b4d4023f28875a187f6b419e0382f8d4",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Os pronomes de tratamento se dirigem à pessoa com quem se fala, mas o verbo, os possessivos e os demais pronomes vão para a 3ª pessoa (“Vossa Senhoria está satisfeito com seu trabalho?”). A errada mais tentadora é a E: em “Nunca me dão o que eu peço”, quem dá, dá algo a alguém; “o que eu peço” é o objeto direto e “me” (= a mim) é o objeto indireto. Em A, “na qual o sono me faltou” é oração adjetiva (retoma “noite”), não adverbial consecutiva; em D, “por um serventuário da justiça” é agente da passiva e “compadre Bartolomeu” é aposto, nenhum é objeto indireto.",
+    "fonte": "Pronomes de tratamento: concordância verbal e pronominal em 3ª pessoa; função sintática do pronome oblíquo me como objeto indireto",
+    "impressao": "b572ac51f329923f3b572bb62b86852e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Na b, a vírgula depois de 'o servidor' marca a omissão do verbo 'foi recebido' (zeugma), e por isso está correta. A mais tentadora é a c: a expressão intercalada 'na visão deste Tribunal' teria de vir entre duas vírgulas ('que, na visão deste Tribunal, é caso encerrado'), e lá só tem a de depois. Na a falta a vírgula antes do 'mas' adversativo; na d e na e as vírgulas separam termos que não se separam (o verbo do complemento, 'quando' do resto da oração).",
     "fonte": "emprego da vírgula na elipse do verbo (zeugma) e nos termos intercalados - Bechara, Moderna Gramática Portuguesa",
     "impressao": "b604977a08b47d7fc5919d395585fb94",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O gabarito se apoia no art. 5º, § 3º, da CF: o tratado de direitos humanos aprovado em cada Casa do Congresso, em dois turnos, por três quintos dos votos, equivale a emenda constitucional, isto é, tem hierarquia de norma constitucional. A errada mais tentadora é a B: o decreto legislativo é o ato com que o Congresso aprova o tratado (art. 49, I, da CF), e não a hierarquia que a norma ganha depois de incorporada. Atenção: a resposta só vale para o tratado de direitos humanos aprovado pelo rito do § 3º; fora dele, o STF dá ao tratado de direitos humanos status supralegal e aos demais tratados, força de lei ordinária, opção que nem aparece nas alternativas.",
+    "fonte": "art. 5º, § 3º, da CF; art. 49, I, da CF",
+    "impressao": "b6b7a8c666f2bcac1e742c9a6419a5ee",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 144 da CF lista como órgãos da segurança pública a polícia federal (I) e as polícias militares e corpos de bombeiros militares (V), entre outros; logo 1 e 3 estão corretas. A pegadinha é a defesa civil: ela é uma atividade que o § 5º do art. 144 atribui aos corpos de bombeiros militares, e não um órgão da lista.",
+    "fonte": "art. 144, caput, I e V, e § 5º, da CF",
+    "impressao": "b7e5c60e4ea2c6f69aabfbd0c4590388",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 6º da CF lista como direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social, a proteção à maternidade e à infância e a assistência aos desamparados; a evangelização não está na lista. A pegadinha é a segurança, que muitos associam só ao art. 5º ou ao art. 144, mas que também é direito social expresso no art. 6º.",
+    "fonte": "art. 6º da CF",
+    "impressao": "b84333a406c800960212ccb5f8ad76ee",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "c",
@@ -405,6 +1314,15 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O menor valor ser maior que 4 exige que os dois lançamentos deem 5 ou 6. São 2 × 2 = 4 casos favoráveis em 6 × 6 = 36, ou seja, 4 / 36 ≈ 11,1%, entre 11% e 12%. A armadilha é ler \"maior que 4\" como \"maior ou igual a 4\" (9 / 36 = 25%) ou exigir só um dos dados acima de 4.",
+    "fonte": "Probabilidade clássica com o princípio multiplicativo (eventos independentes)",
+    "impressao": "bb75b43177341bf60eaf4a19096e356a",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "d",
     "criado_em": "2026-10-04T17:15:01.597948+00:00",
     "explicacao": "Na frase 1, também chamada de cidade luz é um aposto explicativo e vai entre vírgulas (a questão julga só a vírgula, não o fato de a cidade luz ser Paris). Na frase 2, a vírgula separa o adjunto adverbial anteposto (Em 2028) e o termo explicativo nos Estados Unidos. Na frase 3, a vírgula separa da Olimpíada do seu adjunto de 2032, o que a norma não admite, e na Austrália, explicativo, deveria vir entre vírgulas. Por isso só 1 e 2 estão corretas.",
@@ -421,6 +1339,15 @@
     "impressao": "bcf34856b9115db627216ac27ff64377",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Paráfrase reescreve a mesma ideia com outras palavras; em B, a gíria 'quebram o pau' vira 'fator de atrito', e a ideia de conflito familiar por causa da sexualidade de um filho se mantém em registro técnico. A errada mais tentadora é a C: o segundo texto acrescenta uma explicação (a sensibilidade não adaptada à complexidade automotiva) que o primeiro não traz. Em A o sentido muda (amor vira inveja), em D 'caiu duro' vira 'ficou sem dinheiro', e em E o segundo texto fala de outro assunto (o arquifonema do plural).",
+    "fonte": "Interpretação: paráfrase é a reescrita que preserva o sentido do original, aqui com mudança do registro informal para o formal",
+    "impressao": "c090b12bef977b8b847800b1e878dcf8",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "d",
@@ -442,12 +1369,57 @@
   },
   {
     "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Substantivos e pronomes substantivos são as classes que ocupam o núcleo do sujeito e dos complementos verbais (objeto direto e indireto). A errada mais tentadora é a A: em “elegeram-na deputada federal”, “na” é objeto direto e “deputada federal” é predicativo do objeto, não do sujeito. D está errada porque quem vem depois de preposição é o pronome oblíquo tônico (para mim), não o átono; e E chama de flexão pares que são palavras diferentes (homem/mulher, macho/fêmea) e inclui pares inexistentes.",
+    "fonte": "Morfossintaxe: o substantivo e o pronome substantivo exercem as funções de sujeito e complemento; predicativo do objeto; pronomes oblíquos átonos não são regidos de preposição",
+    "impressao": "c8676404c39aacebafe75585708caf44",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em E, 'pareciam-lhe' está em ênclise sem palavra atrativa antes, 'calculá-las' tem o pronome junto ao infinitivo e 'que lhe apresentei' tem próclise exigida pelo pronome relativo. Em A, a negação atrai o pronome: 'não só me deram'. Em B, 'sempre' atrai: 'sempre me pedia'. Em C, o indefinido 'ninguém' atrai: 'ninguém nos socorreu'. Em D, o relativo atrai ('que me remeteram') e não se põe pronome depois de particípio ('havia-lhes prometido').",
+    "fonte": "Colocação pronominal: palavras de sentido negativo, advérbios, pronomes indefinidos e relativos atraem o pronome átono (próclise); não há ênclise a particípio",
+    "impressao": "c9e513c697cce60d998d26205cf9a5de",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "1ª V: o texto 3 relata um projeto concreto ('o programa estimula a reinserção social do interno por meio da literatura'), e o texto 2 só argumenta, sem apresentar projeto pedagógico. 2ª V: os dois defendem a educação, o texto 2 porque 'apostar na educação significa fechar prisões' e o texto 3 porque 'é possível notar uma mudança no seu comportamento para melhor'. 3ª F: nenhum texto diz que as universidades públicas pouco contribuem ou se destinam a privilegiados; o texto 3 até registra que '160 internos estão cursando o ensino superior'. 4ª F: nenhum dos textos fala em produção de artefatos manuais, e o texto 2 não trata de projetos dentro da prisão. 5ª F: só o texto 2 fala em penas alternativas ('elas seriam favoráveis a penas alternativas'); o texto 3 não toca no assunto.",
+    "fonte": "Texto 2: 'Se as pessoas realmente estivessem ao lado das vítimas, elas seriam favoráveis a penas alternativas' e 'apostar na educação significa fechar prisões'; Texto 3, 1º parágrafo: 'o programa estimula a reinserção social do interno por meio da literatura', 3º parágrafo: '160 internos estão cursando o ensino superior', e 4º parágrafo: 'é possível notar uma mudança no seu comportamento para melhor'; regra: leitura comparativa de textos - só vale o que os textos afirmam",
+    "impressao": "caf00ec8cad59197c229c689981f3d4c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Com sujeito composto posposto ao verbo, o verbo pode ir ao plural (ou concordar com o núcleo mais próximo), então 'Subiram de preço a mão de obra e o material' está correta. A pegadinha mais tentadora é a d: 'Os Estados Unidos', com artigo no plural, leva o verbo ao plural - 'têm', com acento. Na a, 'eu' com 'ele' pede a 1ª pessoa do plural (faltamos); na c, a passiva sintética concorda com o sujeito (Louvem-se os esforços); na e, 'fazer' indicando tempo é impessoal (Poderá fazer).",
     "fonte": "regra de concordância verbal com sujeito composto posposto e voz passiva sintética - Cegalla, Novíssima Gramática da Língua Portuguesa",
     "impressao": "cc471337d14fdc2b8b894b98cb53124c",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em B, o sentido do original se mantém, só com os regionalismos explicados: 'soldo' vira 'remuneração', 'morocha' vira 'moça morena', 'gambitos' viram 'pernas finas' e as 'canelas' viram 'membros inferiores'. A errada mais tentadora é a E, que parece fiel mas troca a comparação ('rama de taleira' por 'manivas de aipim') e a 'morocha' por 'mulata', mudando o texto. A troca pernas por 'braços' e canelas por 'melenas'; C e D trocam a moça por animais ('potranca', 'égua').",
+    "fonte": "Interpretação: paráfrase é a reescrita que preserva o sentido do original, mudando só a forma",
+    "impressao": "cc58874bfc02e11ba4ddce7b142992c9",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Com n participantes, n/2 bebem água, 30 bebem suco e n/4 bebem os dois; como todos bebem pelo menos um, n = n/2 + 30 − n/4. Daí 3n/4 = 30 e n = 40, menor que 41. A armadilha é somar n/2 + 30 sem descontar quem bebe os dois, o que daria n = 60.",
+    "fonte": "Princípio da inclusão-exclusão: n(A ∪ B) = n(A) + n(B) − n(A ∩ B)",
+    "impressao": "cd3ea89ace92a8f23993eb953834135e",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "d",
@@ -457,6 +1429,24 @@
     "impressao": "ce346cd3b9bf22f36fff8d4eb7d95cad",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A DUDH foi proclamada pela Assembleia Geral da ONU na Resolução 217 A (III), de 10 de dezembro de 1948, e a Carta da ONU dá à Assembleia Geral o poder de fazer recomendações, inclusive para favorecer o pleno gozo dos direitos humanos. A errada mais tentadora é a A: a DUDH não é tratado, porque não foi assinada nem ratificada pelos Estados; os tratados que deram força obrigatória aos seus direitos vieram depois, como os Pactos de 1966. A E erra ao ligá-la à OTAN e a D, ao falar em acordos multilaterais.",
+    "fonte": "Resolução 217 A (III) da Assembleia Geral da ONU, de 10/12/1948; arts. 10 e 13, 1, b, da Carta das Nações Unidas",
+    "impressao": "ceb64b824208914d6d488f09541b4376",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "'Longe' e 'perto' têm sentidos opostos, por isso são antônimos. A errada mais tentadora é a A: 'rir' e 'sorrir' são parecidos em sentido, não opostos. Em C, D e E os pares são sinônimos (estudante/aluno, abundante/farto, acalmar/tranquilizar).",
+    "fonte": "Semântica: antônimos têm sentido oposto (longe x perto); sinônimos têm sentido equivalente",
+    "impressao": "cf4bd5dfc38998f84f8b714ec27b9cd4",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "e",
@@ -496,6 +1486,24 @@
   },
   {
     "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Ninguém será privado da liberdade ou de seus bens sem o devido processo legal (art. 5º, LIV, da CF), letra da alternativa D. A errada mais tentadora é a A: o inciso LXVII veda a prisão civil por dívida, salvo a do devedor de alimentos e a do depositário infiel, então a vedação não é absoluta. A E troca o sujeito: o direito de ficar com os filhos durante a amamentação é das presidiárias (art. 5º, L), e a B e a C contrariam a proibição de tribunal de exceção (XXXVII) e a retroatividade só em benefício do réu (XL).",
+    "fonte": "art. 5º, XXXVII, XL, L, LIV e LXVII, da CF",
+    "impressao": "d6ab85d4d6d252088a0865c1d2441518",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Como todos se matricularam em pelo menos uma opção, 70 + 50 − 100 = 20 alunos fazem as duas. Só Inglês são 70 − 20 = 50 alunos, ou seja, 50% de 100. A armadilha é a alternativa d (70%), que conta todos os que escolheram Inglês, inclusive os 20 que também fazem Espanhol.",
+    "fonte": "Princípio da inclusão-exclusão: n(A ∪ B) = n(A) + n(B) − n(A ∩ B)",
+    "impressao": "d8a9bd6fa55a1d5d64954d1be1ef2a69",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A regra 78.1 diz que, NA MEDIDA DO POSSÍVEL, a equipe deve incluir número suficiente de especialistas (psiquiatras, psicólogos, assistentes sociais, professores e instrutores técnicos); a alternativa d troca isso por 'sempre', e por isso é a incorreta. A pegadinha é que o resto do texto está igual ao da regra, só o advérbio mudou. As demais reproduzem as regras 74.1, 74.2, 75.3 e 77.",
     "fonte": "Regras de Mandela, regra 78.1",
@@ -522,6 +1530,33 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O texto fala do nazismo e do pós-guerra: a internacionalização dos direitos humanos nasce com a Carta da ONU, de 1945, que põe entre os propósitos da organização promover o respeito aos direitos humanos, e com a DUDH, de 1948, cujo preâmbulo lembra os atos bárbaros que ultrajaram a consciência da humanidade. A errada mais tentadora é a D: depois da Primeira Guerra houve precedentes, como a Liga das Nações e a OIT, mas a reconstrução dos direitos humanos como paradigma ético, em resposta às atrocidades do nazismo, é do fim da Segunda Guerra Mundial.",
+    "fonte": "art. 1º, 3, da Carta das Nações Unidas (1945); preâmbulo da Declaração Universal dos Direitos Humanos (1948)",
+    "impressao": "d9f28922135c00eed77c4e079327a410",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A ordem em que o aluno escolhe os cursos não muda o pacote, então é combinação de 5 tomados 3 a 3. C(5, 3) = 5! / (3! · 2!) = 10. A armadilha é multiplicar 5 × 3 = 15 (alternativa e) ou usar o arranjo 5 × 4 × 3 = 60, que conta a mesma escolha em ordens diferentes como pacotes distintos.",
+    "fonte": "Combinação simples: C(n, p) = n! / (p! · (n − p)!)",
+    "impressao": "da35a0de79ad2f8ead5a4c4af2635b3c",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:49:15.476870+00:00",
+    "explicacao": "Todos os termos da D saem dos parágrafos sobre a ação: 'A ação diz respeito à convivência entre seres humanos', 'O que nos impele a agir é a condição da pluralidade dos seres humanos', 'cada um pode se revelar em atos e palavras' e as pessoas 'estabelecem um mundo comum'. A pegadinha é misturar o mundo humano com o labor, que o texto separa: o labor é 'a atividade humana que se preocupa com as necessidades vitais'. Por isso a C cai ao incluir 'sobrevivência' e 'vida', e a A e a E caem ao incluir necessidades e consumo, que pertencem ao ciclo de 'produção e consumo' do labor.",
+    "fonte": "Texto 1, 2º parágrafo: 'Arendt distingue entre a atividade humana que se preocupa com as necessidades vitais – o labor – e as atividades que dizem respeito ao mundo humano – o trabalho, a ação e o pensamento'; 3º e 4º parágrafos: 'A ação diz respeito à convivência entre seres humanos' e 'cada um pode se revelar em atos e palavras'; regra: leitura - identificar a qual conceito cada termo é associado no texto",
+    "impressao": "dbdc5c71e08dbd49f99ceca134e92a22",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "O art. 119 da LEP diz que a legislação LOCAL poderá estabelecer normas complementares para o cumprimento da pena em regime aberto. A pegadinha é b ou c, que soam mais 'oficiais': a LEP, que já é a lei federal, deixa esse complemento para o ente local, que é quem mantém a casa do albergado.",
@@ -529,6 +1564,24 @@
     "impressao": "dd187bad3bf4639a3f2c8dfd13831b00",
     "materia": "Lei de Execução Penal",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A prática do racismo constitui crime inafiançável e imprescritível, sujeito à pena de reclusão (art. 5º, XLII, da CF). A errada mais tentadora é a D: a pena de morte é admitida em caso de guerra declarada (art. 5º, XLVII, a). As outras também caem na letra da lei: a multa é pena (XLVI, c), o banimento é vedado (XLVII, d) e nenhuma pena passa da pessoa do condenado (XLV).",
+    "fonte": "art. 5º, XLII, XLV, XLVI e XLVII, da CF",
+    "impressao": "dda179a70ee9ffa0894feb6b14cb7dd6",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "As tarefas são idênticas e uma equipe pode ficar sem nenhuma, então é contar as soluções inteiras não negativas de x + y + z = 5. Pelo método das barras e estrelas, são C(5 + 3 − 1, 2) = C(7, 2) = 21. A armadilha é exigir pelo menos uma tarefa por equipe, o que dá só C(4, 2) = 6, ou tratar as tarefas como distintas (3⁵ = 243).",
+    "fonte": "Combinação com repetição (soluções inteiras não negativas de x1 + ... + xn = p: C(p + n − 1, n − 1))",
+    "impressao": "e073c9f1ec576bacc091e902ba1e82ed",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "d",
@@ -549,6 +1602,15 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O seguro contra acidentes de trabalho, a cargo do empregador, é direito do art. 7º, XXVIII, da CF. A errada mais tentadora é a D: o aviso prévio é proporcional ao tempo de serviço, com no mínimo trinta dias, e não dez (art. 7º, XXI). As outras invertem a regra: o noturno é que tem remuneração superior ao diurno (IX), a Constituição dá proteção em face da automação, e não incentivo a ela (XXVII), e o repouso é preferencialmente aos domingos (XV).",
+    "fonte": "art. 7º, IX, XV, XXI, XXVII e XXVIII, da CF",
+    "impressao": "e3272c54786d35bf1bba3496c406f790",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "d",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A Declaração Universal foi proclamada pela Assembleia Geral da ONU em 10/12/1948 como 'ideal comum a ser atingido por todos os povos', a realizar também por medidas de caráter nacional, e por isso seus princípios passaram aos catálogos de direitos das constituições posteriores - a de 1988 inclusive, que põe a prevalência dos direitos humanos entre os princípios do Brasil nas relações internacionais. A pegadinha é a c: ela não é da OEA nem do pós-Primeira Guerra, e sim da ONU, depois da Segunda Guerra. Também não é de caráter econômico (a) nem marca o fim da Guerra Fria (e), que só terminou em 1989-1991.",
@@ -558,6 +1620,33 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A C está correta: os dois-pontos introduzem a enumeração das áreas e a concordância está certa. A errada mais tentadora é a B: “informações” e “íntegra” são femininos, então o particípio da passiva deveria ser “conhecidas”. Em A, a vírgula separa o verbo do sujeito posposto (“a cidade paranaense de Toledo”), e em D a frase começa com pronome oblíquo átono (“Anima-nos”). Em E, “permite” fica sem sujeito com que concordar, pois o sujeito de “foram considerados” é “281 indicadores”.",
+    "fonte": "Concordância nominal (particípio da passiva concorda com o sujeito); pontuação (não se separa sujeito de verbo por vírgula); colocação pronominal (não se inicia frase com pronome átono)",
+    "impressao": "e40241df9e1433c0e46aa81fc9d28c87",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A divisão é diretamente proporcional aos dias: 10 + 15 + 20 = 45 dias, e cada dia vale 3.000 / 45 ≈ R$ 66,67. A terceira recebe 20 × 66,67 ≈ R$ 1.333,33, entre 1.330 e 1.360. A armadilha é dividir em partes iguais (R$ 1.000) ou errar a soma dos dias e cair na faixa vizinha.",
+    "fonte": "Divisão em partes diretamente proporcionais",
+    "impressao": "e4aba8ab964360aaf373658970a0c69a",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O número tem de ser par, então o último algarismo é 2, 4 ou 6: 3 opções. As outras três posições recebem, em ordem, algarismos distintos dentre os 4 que sobraram: 4 × 3 × 2 = 24. São 3 × 24 = 72 senhas, entre 70 e 75. A armadilha é ignorar a paridade e contar 5 × 4 × 3 × 2 = 120, ou supor que metade delas é par (60), quando 3 dos 5 algarismos são pares.",
+    "fonte": "Princípio multiplicativo da contagem, começando pela posição com restrição",
+    "impressao": "e6b4c02f98341c8f8dfe221ebb7a11ef",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "e",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Cada senha tem 3 algarismos distintos escolhidos entre 5, com ordem: 5 x 4 x 3 = 60 senhas. Como as duas senhas são testadas ao mesmo tempo e só abre se ambas estiverem certas, as tentativas são 60 x 60 = 3.600, mais de 575. A pegadinha é somar as senhas (60 + 60 = 120) em vez de multiplicar, ou usar combinação, como se a ordem dos algarismos não importasse.",
@@ -565,6 +1654,24 @@
     "impressao": "eb3195c3995b8f78af8e63423b67eca5",
     "materia": "Raciocínio Lógico",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Sinestesia é a figura que mistura sensações de sentidos diferentes: a risada é percebida pela audição e “gostosa” é sensação do paladar. A errada mais tentadora é a metáfora, porque há sentido figurado; mas o que caracteriza a frase é justamente o cruzamento de sentidos, e não uma comparação implícita entre dois seres.",
+    "fonte": "Figuras de linguagem: sinestesia é o cruzamento de sensações de sentidos diferentes (audição + paladar)",
+    "impressao": "ebe30d6b9fa062d79a6f235f2f6b1a8f",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 5º, VI, da CF diz que é inviolável a liberdade de consciência e de crença, e o inciso VII assegura a assistência religiosa nas entidades civis e militares de internação coletiva. A errada mais tentadora é a A, porque liberdade de expressão também é direito fundamental, mas está em outro inciso (IX) e não é a que acompanha a crença no inciso VI; e \"confessionais\" troca as entidades civis por entidades religiosas.",
+    "fonte": "art. 5º, VI, VII e IX, da CF",
+    "impressao": "ec99ac4bc1aa71eefc6dc34223b33fec",
+    "materia": "Conhecimentos Específicos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
     "correta": "c",
@@ -594,6 +1701,78 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A alternativa C reproduz o art. 5.2 da Convenção Americana: ninguém deve ser submetido a torturas, nem a penas ou tratos cruéis, desumanos ou degradantes, e toda pessoa privada da liberdade deve ser tratada com o respeito devido à dignidade inerente ao ser humano. A errada mais tentadora é a E, que começa com a letra do art. 4.1, mas a Convenção não proíbe a pena de morte em hipótese alguma: nos países que não a aboliram, ela é admitida só para os delitos mais graves (art. 4.2), e não pode ser restabelecida onde foi abolida (art. 4.3). A A erra porque a Convenção só admite a prisão por dívida alimentar (art. 7.7).",
+    "fonte": "arts. 4º, 5.2 e 7.7 da Convenção Americana sobre Direitos Humanos (Decreto 678/1992)",
+    "impressao": "ef3ad94f5e5ab292f2e36b408eb97fc0",
+    "materia": "Direitos Humanos",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O trecho parte de casos particulares observados (os cachorros que eu conheci) e generaliza para todos os cachorros: isso é raciocínio indutivo. A conclusão é provável, não necessária, porque basta um cachorro manso para derrubá-la. A tentação é a dedução, mas ela faz o caminho inverso: parte de uma premissa geral para chegar a um caso particular, com conclusão garantida pelas premissas.",
+    "fonte": "Indução: generalização a partir de casos particulares (a dedução vai do geral ao particular)",
+    "impressao": "ef45c52afcaa8873dd628b0abed36ab2",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em A, com o pronome 'quem' o verbo pode ficar na 3ª pessoa do singular, concordando com 'quem' ('Sou eu quem fala'); 'quem falo' também é aceito. A errada mais tentadora é a C: 'mais de um' leva o verbo ao singular, mas com ideia de reciprocidade vai ao plural ('se abraçaram'). Em B, 'bater' com horas concorda com o número de horas ('Bateram sete horas'). Em D, o aposto resumidor 'nada' manda no verbo ('nada nos separa'), e em E o nome próprio plural com artigo pede plural ('Os Estados Unidos foram').",
+    "fonte": "Concordância verbal: com o pronome quem, verbo na 3ª pessoa do singular; mais de um com reciprocidade vai ao plural; dar/bater/soar concordam com as horas; aposto resumidor (nada, tudo) determina a concordância",
+    "impressao": "ef4971ac0657540aa5ac81a7132ac623",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em A, 'é necessário persistência' fica no masculino singular porque 'persistência' está sem artigo ou determinante. A errada mais tentadora é a D: com Vossa Senhoria o adjetivo concorda com o sexo da pessoa, e o coordenador é homem, então 'muito estimado'. Em B, o certo é 'meio-dia e meia' (hora); em C, o predicativo concorda com o objeto plural ('ter presentes os seguintes princípios'); em E, 'grama' (peso) é masculino ('duzentos gramas').",
+    "fonte": "Concordância nominal: é necessário/é bom/é proibido ficam invariáveis com substantivo sem determinante; com pronome de tratamento o adjetivo concorda com o sexo da pessoa",
+    "impressao": "f011de8f8ed50bb65f3d8bf6a8b10535",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em B, a vírgula separa duas orações coordenadas sem conjunção ('Vão-se as rosas', 'ficam os espinhos'), que é o uso correto. Em A e C, a vírgula separa o sujeito ('Cavalo bom', 'Rei desarmado') do verbo, o que a norma proíbe. A D é a mais tentadora: 'como as rosas' é uma intercalação e precisa de vírgula também depois ('As verdades, como as rosas, têm espinhos'). Em E, a vírgula também separa o sujeito do verbo ('O espírito, atrai').",
+    "fonte": "Pontuação: não se separa por vírgula o sujeito do verbo; orações coordenadas assindéticas se separam por vírgula; termo intercalado fica entre duas vírgulas",
+    "impressao": "f2507574d240398fa802b1dbde397383",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Em A, “adequar-se” e “destinar-se” regem a preposição “a”, que se funde com o artigo de “finalidade” e com “a qual”: “adequar à finalidade à qual se destina”. A errada mais tentadora é a B: “semelhante” rege “a”, então é “semelhante àquele”, e “precisar” rege “de”: “de que precisei”. Faltam crases obrigatórias em C (“às regras”) e D (“devido às restrições”), e E erra ao pôr crase antes de plural com “a” singular (o certo é “a duras exigências”) e ao omitir a de “à saúde”.",
+    "fonte": "Regência e crase: adequar-se a, destinar-se a, semelhante a, subordinar-se a, devido a; precisar de; não há crase em “a” singular antes de palavra no plural",
+    "impressao": "f46ad098e27a63a7a081d52cc3d3bc9d",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "'Arranha-céu' é composto de verbo + substantivo e leva hífen; 'subterrânea' não leva, porque o prefixo sub- só pede hífen antes de b, h e r. 'Autossustentável' junta o prefixo ao radical e dobra o s, já que auto- termina em vogal e o segundo elemento começa por s. A errada mais tentadora é a D, que só difere da C em 'terra-firme': o gabarito grafa 'terra firme' sem hífen, como substantivo seguido de adjetivo. A, B e E caem em 'arranhacéus', 'sub-terrânea' ou 'auto-sustentável', grafias contrárias ao Acordo Ortográfico.",
+    "fonte": "Acordo Ortográfico de 1990, Base XV (hífen em compostos como arranha-céu) e Base XVI (prefixos: sub- com hífen só antes de b, h e r; prefixo terminado em vogal diante de s dobra o s: autossustentável)",
+    "impressao": "f4eb0db2a21ce313c7a20006739e6d18",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "d",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "O art. 144, § 6º, da CF chama de forças auxiliares e reserva do Exército as polícias militares e os corpos de bombeiros militares. A pegadinha é a polícia civil: o mesmo § 6º a subordina ao Governador junto com as PMs e os bombeiros, mas ela não é força auxiliar do Exército. Por isso só as afirmativas 2 e 3 estão corretas.",
+    "fonte": "art. 144, § 6º, da CF",
+    "impressao": "f5d09bd825aa5ac2fad094537f685d0f",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A Constituição diz que constitui crime inafiançável e imprescritível a ação de grupos armados, civis ou militares, contra a ordem constitucional e o Estado Democrático. A pegadinha é misturar com o inciso anterior: insuscetíveis de graça ou anistia (e inafiançáveis) são a tortura, o tráfico, o terrorismo e os hediondos, que NÃO são imprescritíveis. Imprescritíveis na Constituição são só dois: o racismo e a ação de grupos armados.",
@@ -612,6 +1791,15 @@
     "modelo": "Claude Code, importado manualmente, em 04/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "'Era para eu falar': 'eu' é sujeito do infinitivo, e sujeito se expressa com pronome reto, nunca com 'mim' (por isso C, D e E caem). 'Contigo' e 'te' mantêm o tratamento na 2ª pessoa (tu) do começo ao fim. A errada mais tentadora é a B: 'consigo' é reflexivo (refere-se ao próprio sujeito) e não equivale a 'com você', e 'encontrar' é transitivo direto, não aceita 'lhe'.",
+    "fonte": "Pronomes pessoais: sujeito de infinitivo usa pronome reto (para eu falar); uniformidade de tratamento; consigo é reflexivo; verbo transitivo direto pede o, a, não lhe",
+    "impressao": "f9bb18d7bae1f88c6302fa95fb638120",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
     "correta": "c",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "O Protocolo Adicional à Convenção Americana sobre Direitos Humanos em matéria de direitos econômicos, sociais e culturais (Protocolo de San Salvador, 1988) garante o direito a um meio ambiente sadio e diz que os Estados Partes promoverão a proteção, a preservação e o melhoramento do meio ambiente. A pegadinha é a b: o Pacto de San José (1969) trata sobretudo de direitos civis e políticos e não tem dispositivo sobre meio ambiente - foi preciso o protocolo adicional para isso. Rio+20 é conferência da ONU, e os 'protocolos' de Cruz Alta e de Assunção sobre direitos humanos são distratores.",
@@ -622,11 +1810,38 @@
   },
   {
     "correta": "e",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Nas frases, o adjetivo (predicativo) vem antes de dois substantivos de gêneros diferentes, 'a funcionária e o funcionário'. Nesse caso ele pode concordar com o substantivo mais próximo (culpada, na frase 3; culpado, quando o mais próximo é o masculino, na frase 2) ou ir para o masculino plural (culpados, na frase 4). A frase 1 é a única errada: 'culpadas' nunca serve, porque com gêneros misturados o plural vai para o masculino. Observação: as frases 1, 2 e 4 chegaram cortadas no caderno lido, mas a regra resolve a questão.",
+    "fonte": "Concordância nominal: adjetivo anteposto a dois substantivos concorda com o mais próximo ou vai para o plural; com gêneros diferentes, o plural é masculino",
+    "impressao": "fa4ab3ff9ba43ab19b077d3b31933006",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "Pelo Manual de Redação da Presidência da República, o ofício é a comunicação oficial expedida por autoridades para tratar de assuntos oficiais com outros órgãos públicos e também com particulares, que é o que diz a A. A errada mais tentadora é a C, que descreve a comunicação interna entre setores, papel do antigo memorando. B descreve o edital, D descreve a ata, e E, um documento de justificativa, que não é o ofício.",
+    "fonte": "Manual de Redação da Presidência da República, 3ª ed. (2018), capítulo das comunicações oficiais, padrão ofício",
+    "impressao": "fa98db1bb8531dfa8469e19c9bb7c79c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "e",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "A distinção clássica (Rui Barbosa) é essa: direitos são as normas declaratórias que reconhecem os bens da pessoa, e garantias são as assecuratórias, que protegem o exercício deles (o habeas corpus garante a liberdade de locomoção). A errada mais tentadora é d: os direitos e garantias individuais são cláusula pétrea, e nem emenda tendente a aboli-los pode ser deliberada (art. 60, § 4º, IV). Também erram b (o art. 5º, § 2º, admite direitos decorrentes de princípios e tratados), c (o rito de emenda do § 3º é opcional) e a (estado de defesa e de sítio restringem direitos, arts. 136 e 139).",
     "fonte": "art. 5º, §§ 2º e 3º, e art. 60, § 4º, IV, da Constituição Federal",
     "impressao": "fc78140d4664c443cf561e047b67971d",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-06T03:58:16.946173+00:00",
+    "explicacao": "A B reproduz o art. 7º, XXX, da CF: proibição de diferença de salários, de exercício de funções e de critério de admissão por motivo de sexo, idade, cor ou estado civil. A errada mais tentadora é a A: a Constituição proíbe qualquer trabalho a menores de dezesseis anos, salvo como aprendiz a partir dos quatorze, e o trabalho noturno, perigoso ou insalubre a menores de dezoito (art. 7º, XXXIII), mas não todo trabalho até os dezoito. A C inverte o inciso XXXII, que proíbe a distinção entre trabalho manual, técnico e intelectual; a D contraria o XXVIII, pelo qual o seguro não exclui a indenização por dolo ou culpa; e a E contraria o XXXI, que proíbe discriminação salarial do trabalhador com deficiência.",
+    "fonte": "art. 7º, XXVIII, XXX, XXXI, XXXII e XXXIII, da CF",
+    "impressao": "fd15efeb08cccd4ae97bca26dc7099a1",
+    "materia": "Direito Constitucional",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   }
 ]

@@ -374,6 +374,9 @@ def questoes(
     refazer: bool = typer.Option(
         False, "--refazer", help="Lê de novo os cadernos que já viraram questão"
     ),
+    textos_base: bool = typer.Option(
+        False, "--textos-base",
+        help="Só guarda o texto de apoio das questões de Português do alvo"),
 ) -> None:
     """Separa os cadernos do acervo em questoes, com materia e gabarito.
 
@@ -381,7 +384,17 @@ def questoes(
 
     Use --refazer depois de melhorar a leitura do caderno: as questoes sao
     atualizadas no lugar, sem perder o id que o simulado guarda.
+
+    --textos-base le de novo, por colunas, so os cadernos do alvo e grava o
+    texto que cada questao de Portugues cita ("considerando o texto 1"). O
+    resto da questao nao muda.
     """
+    if textos_base:
+        with console.status("Lendo os textos dos cadernos do alvo..."):
+            feito = servico.guardar_textos_base()
+        console.print(f"[green]{feito.questoes} questão(ões) com texto-base[/], "
+                      f"de {feito.provas} prova(s) do alvo.")
+        return
     with console.status("Lendo os cadernos..."):
         resultado = servico.extrair_questoes(limite=limite, refazer=refazer)
 
@@ -2796,6 +2809,9 @@ def fichas(
     explicacoes: bool = typer.Option(
         False, "--explicacoes",
         help="Com --pedido: explicação de cada questão real do alvo que é exemplo de tema"),
+    dos_resumos: bool = typer.Option(
+        False, "--dos-resumos",
+        help="Com --pedido --explicacoes: as questões do complementar que os resumos citam"),
 ) -> None:
     """A ficha de estudo de cada tema do cronograma (Etapa 6B, secao 11).
 
@@ -2842,7 +2858,8 @@ def fichas(
                       f"por IA, com a procedência dele.")
         return
     if pedido and explicacoes:
-        lote = servico.manual.pedido_de_explicacoes_dos_temas(_data(desde, "Data"))
+        lote = (servico.manual.pedido_de_explicacoes_dos_resumos() if dos_resumos
+                else servico.manual.pedido_de_explicacoes_dos_temas(_data(desde, "Data")))
         if not lote["pedidos"]:
             console.print("[yellow]Nada a pedir:[/] toda questão real dos temas já tem "
                           "explicação.")

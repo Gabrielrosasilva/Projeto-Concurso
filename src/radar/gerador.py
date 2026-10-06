@@ -199,16 +199,33 @@ def _encurtar(texto: str, limite: int = LIMITE_DO_EXEMPLO) -> str:
     return " ".join((texto or "")[:limite].split())
 
 
-def _questao_por_extenso(questao, com_gabarito: bool = True) -> str:
+def _questao_por_extenso(questao, com_gabarito: bool = True, inteira: bool = False) -> str:
     """A questao real do jeito que ela vai no pedido.
 
     As alternativas vao junto, ao contrario do `radar assuntos`: la bastava o
     enunciado para dizer o assunto, e aqui a IA precisa ver a alternativa
     certa - e ela que carrega a regra juridica que a variacao tem que manter.
+
+    `inteira` e para a questao que a IA tem de RESOLVER - a explicada e a base
+    da variacao: sem corte, e com o texto-base que ela cita. O corte de
+    `LIMITE_DO_EXEMPLO` e para o exemplo de estilo; na questao de V/F ele
+    levava metade das afirmativas, e a explicacao nao tinha o que explicar
+    (06/10/2026).
     """
-    linhas = [_encurtar(questao.enunciado)]
-    for letra, texto in (questao.alternativas or {}).items():
-        linhas.append(f"{letra}) {_encurtar(texto, 300)}")
+    if not inteira:
+        linhas = [_encurtar(questao.enunciado)]
+        for letra, texto in (questao.alternativas or {}).items():
+            linhas.append(f"{letra}) {_encurtar(texto, 300)}")
+    else:
+        linhas = [" ".join((questao.enunciado or "").split())]
+        for letra, texto in (questao.alternativas or {}).items():
+            linhas.append(f"{letra}) {' '.join(str(texto or '').split())}")
+        # A questao de interpretacao sem o texto que ela cita nao se explica
+        # nem se varia (item 4 de 06/10/2026). O texto vai inteiro: encurtar e
+        # cortar justamente o trecho que a alternativa cita.
+        texto_base = getattr(questao, "texto_base", None)
+        if texto_base:
+            linhas = [f"TEXTO-BASE (do caderno da prova):\n{texto_base}\n"] + linhas
     if com_gabarito and questao.resposta:
         linhas.append(f"GABARITO OFICIAL: {questao.resposta}")
     return "\n".join(linhas)
@@ -220,7 +237,7 @@ def _montar_pedido_variacao(questao, quantas: int = VARIACOES_POR_QUESTAO) -> st
         cabecalho += f"\nASSUNTO: {questao.assunto}"
     return (
         f"{cabecalho}\n\nQUESTAO ORIGINAL\n\n"
-        f"{_questao_por_extenso(questao)}\n\n"
+        f"{_questao_por_extenso(questao, inteira=True)}\n\n"
         f"Escreva {quantas} variacoes."
     )
 

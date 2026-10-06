@@ -581,6 +581,51 @@ def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtrac
     evidencia.atualizar()
     if trocas_de_chave or trocas_de_impressao:
         _acompanhar_a_releitura(resultado, trocas_de_chave, trocas_de_impressao)
+    # Caderno do alvo que entrou agora (ou foi relido) ganha o texto-base. Sao
+    # dois PDFs, e reler os dois e mais simples do que saber qual mudou.
+    guardar_textos_base()
+    return resultado
+
+
+@dataclass
+class TextosBase:
+    provas: int = 0
+    #: Quantas questoes ficaram com texto-base (as que citam um texto).
+    questoes: int = 0
+
+
+def guardar_textos_base() -> TextosBase:
+    """O texto de apoio de cada questao de Portugues das provas do ALVO.
+
+    So o alvo, por escolha (06/10/2026): e onde a explicacao da questao de
+    interpretacao precisa do texto, e onde ele cabe conferir. O caderno e lido
+    de novo por colunas, e so a coluna `texto_base` muda: enunciado,
+    alternativas, chave e classificacao ficam como estao. Prova sem o PDF na
+    maquina e pulada.
+    """
+    from radar.regioes import normalizar
+    from radar.servico import evidencia
+
+    criar_tabelas()
+    resultado = TextosBase()
+    with sessao() as s:
+        do_alvo = evidencia.provas(s, evidencia.ALVO)
+    for registro in arquivos_de_prova.carregar_manifesto():
+        if registro.get("url") not in do_alvo:
+            continue
+        caminho = _caminho(registro)
+        if caminho is None:
+            continue
+        textos = leitor_de_questoes.textos_base(leitor_de_questoes.extrair_por_colunas(caminho))
+        resultado.provas += 1
+        with sessao() as s:
+            for questao in s.scalars(
+                    select(QuestaoDeProva).where(QuestaoDeProva.prova_url == registro["url"])):
+                de_portugues = "portugu" in normalizar(questao.materia or "")
+                questao.texto_base = (leitor_de_questoes.texto_da_questao(questao.enunciado, textos)
+                                      if de_portugues else None)
+                if questao.texto_base:
+                    resultado.questoes += 1
     return resultado
 
 

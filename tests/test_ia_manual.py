@@ -283,3 +283,14 @@ def test_a_cli_conta_as_recusas_em_voz_alta(acervo_do_alvo, tmp_path):
     assert "1 questão(ões) gravado(s)" in resultado.output
     assert "1 recusada(s)" in resultado.output
     assert "importado manualmente" in resultado.output
+
+
+@pytest.mark.parametrize("tipo", ["questoes", "explicacoes", "macetes", "fichas",
+                                  "classificacao", "associados", "resumos"])
+def test_todo_formato_de_resposta_pede_o_modelo(tipo):
+    """Decisao 116: quem responde declara o modelo. Sem o campo no exemplo, a
+    resposta vinha sem ele e a procedencia nao dizia quem escreveu."""
+    formato = manual._formato(tipo)
+
+    assert list(formato)[:2] == ["lote", "modelo"]
+    assert formato["respostas"]

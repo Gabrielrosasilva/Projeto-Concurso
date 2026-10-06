@@ -91,6 +91,19 @@
     "referencia": null
   },
   {
+    "caminho": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos",
+    "pai": "Língua Portuguesa > Compreensão e interpretação de texto (s)",
+    "nivel": "subassunto",
+    "nome": "Inferência, pressupostos e subentendidos",
+    "ordem": 4,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): a parte da ficha Interpretação 4 que a árvore não tinha",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
     "caminho": "Língua Portuguesa > Ortografia oficial",
     "pai": "Língua Portuguesa",
     "nivel": "assunto",
@@ -269,6 +282,19 @@
     "texto_do_edital": null,
     "fora_do_edital": false,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos",
+    "pai": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação",
+    "nivel": "subassunto",
+    "nome": "Emprego dos pronomes pessoais, demonstrativos e relativos",
+    "ordem": 2,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): separado da colocação, que é a ficha Pronomes 2",
     "tipo_elemento": null,
     "referencia": null
   },
@@ -455,6 +481,19 @@
     "referencia": null
   },
   {
+    "caminho": "Língua Portuguesa > Pontuação > Demais sinais de pontuação",
+    "pai": "Língua Portuguesa > Pontuação",
+    "nivel": "subassunto",
+    "nome": "Demais sinais de pontuação",
+    "ordem": 1,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): ponto e vírgula, dois-pontos, travessão, parênteses e os sinais de fim de frase",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
     "caminho": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo",
     "pai": "Língua Portuguesa",
     "nivel": "assunto",
@@ -529,6 +568,19 @@
     "texto_do_edital": null,
     "fora_do_edital": false,
     "procedencia": "Claude Code, em 05/10/2026: o que a FEPESE cobra e o edital não nomeia (decisão 106)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Complemento nominal e agente da passiva",
+    "pai": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
+    "nivel": "subassunto",
+    "nome": "Complemento nominal e agente da passiva",
+    "ordem": 2,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): a outra metade do assunto do edital; o objeto é a Termos integrantes 1",
     "tipo_elemento": null,
     "referencia": null
   },
@@ -5018,6 +5070,19 @@
     "referencia": "LEP, art. 64"
   },
   {
+    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75",
+    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal",
+    "nivel": "elemento",
+    "nome": "LEP, art. 75",
+    "ordem": 1,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): o art. 75 é do Título III, Cap. VI (arts. 75 a 77), e não dos estabelecimentos penais",
+    "tipo_elemento": "artigo",
+    "referencia": "LEP, art. 75"
+  },
+  {
     "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Direitos do preso",
     "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
     "nivel": "subassunto",
@@ -5055,19 +5120,6 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais > LEP, art. 75",
-    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Estabelecimentos penais",
-    "nivel": "elemento",
-    "nome": "LEP, art. 75",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "LEP, art. 75"
   },
   {
     "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Monitoração eletrônica",
@@ -5120,6 +5172,71 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "LEP, art. 119"
+  },
+  {
+    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
+    "nivel": "subassunto",
+    "nome": "Objeto e classificação do condenado",
+    "ordem": 8,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): pela Lei 7.210: Título I e Título II, Cap. I (arts. 1º a 9º-A)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
+    "nivel": "subassunto",
+    "nome": "Trabalho do preso",
+    "ordem": 9,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): pela Lei 7.210: Título II, Cap. III (arts. 28 a 37)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Disciplina, faltas disciplinares e RDD",
+    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
+    "nivel": "subassunto",
+    "nome": "Disciplina, faltas disciplinares e RDD",
+    "ordem": 10,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): pela Lei 7.210: Título II, Cap. IV, Seção III, subseções I e II (arts. 44 a 52)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Sanções, recompensas e procedimento disciplinar",
+    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
+    "nivel": "subassunto",
+    "nome": "Sanções, recompensas e procedimento disciplinar",
+    "ordem": 11,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): pela Lei 7.210: Título II, Cap. IV, Seção III, subseções III a V (arts. 53 a 60)",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial",
+    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
+    "nivel": "subassunto",
+    "nome": "Medida de segurança, incidentes e procedimento judicial",
+    "ordem": 12,
+    "origem": "manual",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): pela Lei 7.210: Títulos VI a IX (arts. 171 a 204)",
+    "tipo_elemento": null,
+    "referencia": null
   },
   {
     "caminho": "Noções de Informática",

@@ -637,6 +637,128 @@ def dividir_em_questoes(texto: str) -> list[Questao]:
     return [melhores[numero] for numero in sorted(melhores)]
 
 
+# --- o texto-base das questoes de interpretacao -----------------------------
+
+# "Texto 2" sozinho na linha: o cabecalho do texto de apoio da prova.
+PADRAO_CABECALHO_DO_TEXTO = re.compile(r"^[ \t]*Texto[ \t]+(\d{1,2})[ \t]*$",
+                                       re.MULTILINE | re.IGNORECASE)
+# "texto 1", "textos 2 e 3", "textos 1, 2 e 3" no enunciado.
+PADRAO_TEXTO_CITADO = re.compile(r"\btextos?\s+(\d{1,2}(?:\s*(?:,|e)\s*\d{1,2})*)",
+                                 re.IGNORECASE)
+# Rotulo do texto da prova que nao numera os textos (2013: um texto so).
+TEXTO_UNICO = "unico"
+# Menos linhas que isso entre o titulo da secao e a questao 1 nao e texto:
+# e sobra de cabecalho.
+LINHAS_MINIMAS_DO_TEXTO = 5
+
+
+def extrair_por_colunas(caminho: Path) -> str:
+    """O PDF lido coluna por coluna: a esquerda inteira, depois a direita.
+
+    O `extrair_texto` segue a ordem em que o PDF guardou os trechos, e no
+    caderno de 2019 isso pos o fim do "Texto 2" (a fonte, a ultima resposta da
+    entrevista) antes do cabecalho dele, no meio das alternativas da questao 6.
+    Para as questoes isso nao importa; para o texto-base, que precisa sair
+    inteiro e na ordem, a posicao de cada trecho na pagina resolve.
+    """
+    from pypdf import PdfReader
+
+    for ruidoso in ("pypdf", "pypdf._cmap", "pypdf._reader", "pypdf.generic"):
+        logging.getLogger(ruidoso).setLevel(logging.ERROR)
+
+    paginas = []
+    for pagina in PdfReader(str(caminho)).pages:
+        meio = float(pagina.mediabox.width) / 2
+        trechos: list[tuple[int, int, float, str]] = []
+
+        def guardar(texto, cm, tm, _fonte, _tamanho):
+            if texto.strip():
+                x = tm[4] * cm[0] + tm[5] * cm[2] + cm[4]
+                y = tm[4] * cm[1] + tm[5] * cm[3] + cm[5]
+                trechos.append((0 if x < meio else 1, -round(y), x, texto))
+
+        pagina.extract_text(visitor_text=guardar)
+        linhas: list[str] = []
+        anterior = None
+        for coluna, altura, _x, texto in sorted(trechos):
+            if (coluna, altura) != anterior:
+                linhas.append("")
+                anterior = (coluna, altura)
+            linhas[-1] += texto
+        paginas.append("\n".join(linha.rstrip() for linha in linhas))
+    return _tirar_simbolo_sem_desenho("\n".join(paginas))
+
+
+def _desfazer_quebras(linhas: list[str]) -> str:
+    """As linhas da coluna viram paragrafos: a palavra partida por hifen volta
+    inteira, e o paragrafo termina na linha curta que fecha frase."""
+    largura = max((len(linha) for linha in linhas), default=0)
+    texto = ""
+    for linha in linhas:
+        enxuta = linha.strip()
+        if not enxuta:
+            continue
+        if not texto:
+            texto = enxuta
+        elif texto.endswith("\n"):
+            texto += enxuta
+        elif re.search(r"\w-$", texto) and enxuta[:1].islower():
+            texto = texto[:-1] + enxuta
+        else:
+            texto += " " + enxuta
+        if len(enxuta) < 0.8 * largura and re.search(r"[.!?:”\"\]]$", enxuta):
+            texto += "\n"
+    return texto.strip()
+
+
+def textos_base(texto: str) -> dict[str, str]:
+    """{rotulo: texto} dos textos de apoio do caderno ja lido por colunas.
+
+    O texto comeca no cabecalho "Texto N" e vai ate a primeira questao depois
+    dele. A prova que nao numera os textos (2013) tem um so, entre o titulo da
+    secao de Lingua Portuguesa e a questao 1: ele vira o `TEXTO_UNICO`.
+    """
+    limpo = limpar_mobilia(texto)
+    textos: dict[str, str] = {}
+    for cabecalho in PADRAO_CABECALHO_DO_TEXTO.finditer(limpo):
+        fim = PADRAO_QUESTAO.search(limpo, cabecalho.end())
+        corpo = limpo[cabecalho.end(): fim.start() if fim else len(limpo)]
+        textos.setdefault(cabecalho.group(1), _desfazer_quebras(corpo.splitlines()))
+    if textos:
+        return textos
+
+    for secao in PADRAO_SECAO.finditer(limpo):
+        if "portugu" not in _sem_acento(secao.group(1)).lower():
+            continue
+        fim = PADRAO_QUESTAO.search(limpo, secao.end())
+        linhas = [l for l in limpo[secao.end(): fim.start() if fim else len(limpo)]
+                  .splitlines() if l.strip()]
+        if len(linhas) >= LINHAS_MINIMAS_DO_TEXTO:
+            textos[TEXTO_UNICO] = _desfazer_quebras(linhas)
+        break
+    return textos
+
+
+def texto_da_questao(enunciado: str, textos: dict[str, str]) -> str | None:
+    """O texto-base que a questao cita, com o rotulo; None quando ela nao cita.
+
+    "considerando o texto 1" leva o Texto 1; "de acordo com os textos 2 e 3",
+    os dois. Na prova de texto unico, basta o enunciado falar em "texto".
+    Quem chama garante que a questao e da secao de Portugues: em Direito,
+    "o texto da lei" nao e texto de apoio.
+    """
+    citados: list[str] = []
+    for achado in PADRAO_TEXTO_CITADO.finditer(enunciado or ""):
+        for numero in re.findall(r"\d{1,2}", achado.group(1)):
+            if numero in textos and numero not in citados:
+                citados.append(numero)
+    if citados:
+        return "\n\n".join(f"Texto {n}\n{textos[n]}" for n in citados)
+    if TEXTO_UNICO in textos and re.search(r"\btexto\b", enunciado or "", re.IGNORECASE):
+        return textos[TEXTO_UNICO]
+    return None
+
+
 def ler_prova(caminho: Path) -> list[Questao]:
     """Abre o PDF e devolve as questoes. Erro de leitura devolve lista vazia."""
     try:

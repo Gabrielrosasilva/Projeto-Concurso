@@ -19,6 +19,8 @@
     .comando{font-family:var(--fonte-numero, ui-monospace, Consolas, monospace);font-size:var(--tam-xs);
       overflow-wrap:anywhere;color:var(--cor-texto-suave)}
     .enunciado{margin:var(--esp-1) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave);white-space:pre-line}
+    .texto-base{margin:var(--esp-1) 0 0;font-size:var(--tam-xs);white-space:pre-line;
+      border-left:3px solid var(--cor-borda);padding-left:var(--esp-3)}
     .frase-padrao{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
   </style>
   {% include "_topo_estilo.html" %}
@@ -204,6 +206,7 @@
      mudou depois da prova. #}
   {% macro questao_inteira(q) %}
     <details><summary>ver a questão inteira</summary>
+      {% if q.texto_base %}<p class="texto-base">{{ s('oficial') }} Texto-base (do caderno da prova):<br>{{ q.texto_base }}</p>{% endif %}
       <p class="enunciado">{{ q.enunciado }}</p>
       {% if q.alternativas %}<ul class="marcas">{% for letra, texto in q.alternativas %}<li>{% if letra == (q.resposta or '') | lower %}<b>({{ letra }}) {{ texto }}</b> ✓{% else %}({{ letra }}) {{ texto }}{% endif %}</li>{% endfor %}</ul>{% endif %}
       <p>{{ s('oficial') }} Gabarito oficial: <b>{{ (q.resposta or '?') | upper }}</b></p>

@@ -312,3 +312,42 @@ def test_a_fonte_por_paragrafo_serve_e_o_texto_solto_nao():
     assert manual.fonte_serve("§ 5 da Declaração e Programa de Ação de Viena (1993)", dh)
     assert manual.fonte_serve("Regras de Mandela, regra 12.1", dh)
     assert not manual.fonte_serve("doutrina (gerações de direitos)", dh)
+
+
+def test_o_pedido_de_explicacao_do_complementar_vai_pelas_citadas_nos_resumos(vozes_no_banco):
+    """Item 5 (06/10/2026): a questao de outra prova da FEPESE que o resumo
+    cita ganha pedido de explicacao; a do mesmo no que ele nao cita, nao."""
+    from radar.db import sessao
+    from radar.models import Classificacao, QuestaoDeProva
+    from radar.questoes import chave_da_questao
+
+    from tests.test_treino_do_alvo import _aceitar
+
+    vozes = "Língua Portuguesa > Vozes do verbo"
+    questoes = []
+    with sessao() as s:
+        for numero, resposta in ((3, "b"), (4, "d")):
+            alternativas = {l: f"alternativa {l} da questão {numero}" for l in "abcde"}
+            enunciado = f"Questão {numero} de vozes de outra prova da FEPESE."
+            q = QuestaoDeProva(prova_url="outra2024", ano=2024, numero=numero, banca="FEPESE",
+                               materia="Língua Portuguesa", enunciado=enunciado,
+                               alternativas=alternativas, resposta=resposta,
+                               impressao=f"imp-c{numero}", evidencia="complementar")
+            s.add(q)
+            s.add(Classificacao(chave=chave_da_questao(enunciado, alternativas), conteudo=vozes,
+                                principal=True, status="completa", procedencia="teste"))
+            questoes.append(q)
+    _aceitar(questoes)
+    escritas = servico_fichas.carregar()
+    escritas[0].resumo = {"partes": {"como_cobra": [_f(
+        "Outra prova pediu a passiva sintética.", "FEPESE-2024-q3 (gabarito B)")]},
+        "modelo": "m", "criado_em": "x", "conferido_em": None}
+    servico_fichas.gravar(escritas)
+
+    lote = manual.pedido_de_explicacoes_dos_resumos()
+
+    (p,) = lote["pedidos"]
+    assert (p["codigo"], p["gabarito"], p["impressao"]) == ("FEPESE-2024-q3", "b", "imp-c3")
+    assert p["instrucao"] == manual.INSTRUCAO_EXPLICACAO_DO_COMPLEMENTAR
+    assert "OUTRA prova da FEPESE" in p["instrucao"] and "meu cargo" not in p["instrucao"]
+    assert "alternativa e da questão 3" in p["pedido"]          # inteira, sem corte

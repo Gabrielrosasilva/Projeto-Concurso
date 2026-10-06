@@ -31,6 +31,8 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 22 | O pedido de 05/10 (pares, geradas, reanálise, diagnósticos, nuvem) | ✅ 2576 passed; 3 pares juntados, 2 geradas rejeitadas, 176 de 215 classificações do complementar conferidas pela reanálise às cegas (104), os diagnósticos em 10/10 e o R+7 com todos os erros em 17/10 (105), o levantamento do que falta classificar e o [roteiro da nuvem](roteiro_nuvem.md) |
 | 23 | Português e Raciocínio Lógico classificados | ✅ 2576 passed; 3 nós criados à mão e 21 pela classificação, 204 questões em duas leituras, 161 conferidas pelo Claude Code, 24 para você (decisão 106) |
 | 24 | A faixa de Português começa pelas do radar | ✅ 2582 passed; o botão "Começar pelas N do radar" na tela Hoje, o resto no Qconcursos (decisão 107) |
+| 25 | Revisão final do estudo (Fase 1 e R1 a R7) | ✅ 2.640 passed e 1 failed, consertado (decisões 108 a 126) |
+| 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 
 ---
 
@@ -3185,3 +3187,78 @@ instrução do resumo (`manual.INSTRUCAO_RESUMO`) copiava a frase de evidência
 insuficiente, que só pode morar no `origem.py`. Consertado (a instrução usa a
 constante) e rodados de novo `test_origem`, `test_resumo` e `test_ia_manual`:
 87 passed.
+
+
+---
+
+## 26 — Os itens 8, 2, 3, 4 e 5 (06/10/2026)
+
+O pedido: "faz as etapas 2, 3, 4, 5, 8 e 10", na ordem 8 → 2 → 3 → 4 → 5, com
+a lista de nós do item 2 aprovada antes de aplicar, commit único no fim e,
+depois, "nao e para executar a suite inteira" (o item 10 ficou nos testes
+tocados).
+
+**Antes de começar:** havia no disco trabalho de outra conversa, sem commit (a
+decisão 127, o treino de IA no "Fiz hoje"). Nada foi desfeito. No meio da
+etapa, a outra conversa fez commit e push da 127, de uma 130 dela (a faixa
+avisa o que já foi respondido no radar) e do item 8 desta etapa (`f58faa1`,
+decisão 128); as daqui foram renumeradas para 129, 131, 132 e 133.
+
+**Item 8 — a fila de revisão única ✅** (decisão 128)
+- Três das quatro contas em template e a recontagem do `conferencia.py` já
+  tinham sido consertadas na Rodada 3; sobravam o "faltarão" do simulado e o
+  número de questões reais da ficha, que foram para o Python
+  (`LinhaDoCompilado.faltarao`, `FichaDeEstudo.reais`). O teste que vigia os
+  templates passou a olhar a conta dentro de `{{ }}`.
+- A home mostra a fila do `estudo.py`, só as pontas (`estudo.pontas`), e o
+  próximo prazo (`estudo.proxima_revisao`); o botão monta a rodada pelas
+  mesmas pontas. A agenda antiga do `espacada.py` saiu. O prazo passou a
+  acabar depois da revisão de 30 dias.
+- Testes: `test_espacada` (reescrito), `test_estudo` (+4), `test_metricas`,
+  `test_ultima_resposta`, `test_caderno_erros`, `test_home`,
+  `test_conferencia`, `test_fichas`, `test_compilado`, `test_simulado`: 283
+  passed. Com o banco real, a home mostra 8 pontas (o Meu desempenho, 16 nós).
+
+**Item 2 — os nós das fichas ✅** (decisão 129)
+- Cópias antes em `data/copias/item2-nos-2026-10-06/` (conteudos,
+  fichas, classificacoes, geradas e o banco) e a do `--juntar`.
+- 9 nós novos e o elemento do art. 75 movido; a árvore de 429 para 438 nós,
+  sem outro nó mudado. 15 fichas ligadas (a Interpretação 1 fica sem nó) e a
+  Redação oficial 1 com o nó dos atributos. 6 resumos completados pelo
+  caminho da importação; os 65 passam no `--verificar-resumos`.
+
+**Item 3 — a falta de geradas de 06 a 12/10 ✅** (decisão 131)
+- 14 pedidos no scratchpad (o `data/pedido_ia.json` do art. 13 com o mesmo
+  md5 do começo ao fim), escritos por 4 agentes e lidos um a um contra a
+  fonte antes de importar. 90 questões: o arquivo de 811 para 901 linhas,
+  sem linha perdida; a falta das faixas de 06 a 12/10 zerou.
+- O formato de resposta de todo lote passou a pedir o `modelo`; as 82 geradas
+  e as 10 explicações que entraram sem ele foram corrigidas.
+
+**Item 4 — o texto-base ✅** (decisão 132)
+- `migracoes.py` passo 6 (`radar migrar`: v5 → v6, nenhuma linha perdida,
+  cópia em `data/copias/migracao-v5-para-v6-...`), `questoes.extrair_por_colunas`,
+  `textos_base` e `texto_da_questao`, `servico.provas.guardar_textos_base`,
+  `radar questoes --textos-base` (15 questões de 2 provas do alvo). O texto
+  aparece na tela da questão, na ficha e no pedido da IA; a questão a
+  resolver vai sem o corte de 600 caracteres.
+- 10 das 12 explicações do alvo que faltavam (as 2 de DH só têm doutrina).
+- Testes: `test_texto_base_da_questao` (novo, 14, com fixtures inventadas),
+  `test_gerador`, `test_ia_manual`, `test_migracoes` e os do leitor.
+
+**Item 5 — as explicações do complementar ✅** (decisão 133)
+- `manual.pedido_de_explicacoes_dos_resumos` e `radar fichas --pedido
+  --explicacoes --dos-resumos`; 136 pedidos, 125 explicações (4 agentes,
+  conferidas por script e lidas: as de Direito todas, as de Português por
+  amostra). As explicações de 80 para 205.
+
+**Item 10:** a suíte inteira não foi rodada, a seu pedido. Rodados os testes
+tocados por item (acima) e, no fim, `test_conteudos` e `test_fichas` de novo
+depois do conserto do `levar_no`: 93 passed. No fim, uma leva só com os 26
+arquivos de teste que a etapa tocou (fila, árvore, fichas, resumos, pedidos,
+texto-base, migração, leitor, telas): 708 passed.
+
+**Rodado de verdade:** `radar migrar`, `radar conteudos --juntar`, `radar
+questoes --textos-base`, `radar fichas --verificar-resumos` (65 sem
+problema), e as telas `/`, `/hoje`, `/fichas`, `/analises/desempenho` e
+`/geradas` com o banco real.

@@ -24,6 +24,9 @@
       gap:var(--esp-2);flex-wrap:wrap;margin-bottom:var(--esp-3)}
     .materia{font-size:var(--tam-xs);font-weight:var(--peso-medio);text-transform:uppercase;
       letter-spacing:.04em;color:var(--cor-texto-suave)}
+    .texto-base{margin:0 0 var(--esp-4);font-size:var(--tam-sm)}
+    .texto-base p{white-space:pre-line;line-height:1.6;max-height:28rem;overflow-y:auto;
+      border-left:3px solid var(--cor-borda);padding-left:var(--esp-3)}
     .enunciado{font-size:var(--tam-md);line-height:1.65;margin:0 0 var(--esp-5);
       white-space:pre-line}
     .alternativas{display:grid;gap:var(--esp-2)}
@@ -111,6 +114,12 @@
       <div style="height:var(--esp-4)"></div>
     {% endif %}
 
+    {# A questao de interpretacao cita o texto do caderno; sem ele nao se
+       responde (item 4, 06/10). So a questao real tem; a gerada, nao. #}
+    {% if questao.texto_base is defined and questao.texto_base %}
+      <details class="texto-base" open><summary>Texto-base (do caderno da prova)</summary>
+        <p>{{ questao.texto_base }}</p></details>
+    {% endif %}
     <p class="enunciado">{{ questao.enunciado }}</p>
 
     <div class="alternativas">

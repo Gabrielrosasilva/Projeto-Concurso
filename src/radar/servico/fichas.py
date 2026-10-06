@@ -687,6 +687,11 @@ def levar_no(duplicado: str, mantido: str) -> int:
             caminho = novo_caminho(no, duplicado, mantido)
             if caminho not in novos:
                 novos.append(caminho)
+        # O no levado pode cair dentro de outro no da mesma ficha (o art. 75,
+        # que foi para "Orgaos da execucao penal", ficha que ja tinha o
+        # subassunto): fica so o de cima, senao a resposta conta duas vezes.
+        novos = [no for no in novos
+                 if not any(no.startswith(outro + " > ") for outro in novos)]
         if novos != escrita.nos:
             escrita.nos = novos
             mudaram += 1

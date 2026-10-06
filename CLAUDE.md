@@ -101,7 +101,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (05/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (06/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -152,8 +152,8 @@ conceitos associados na Analises > Conferencia; e o leitor entende o
 texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
-provas complementares aceitas); 775 geradas (10 rejeitadas); arvore com 429
-nos; banco na versao 5.
+provas complementares aceitas); 901 geradas (10 rejeitadas); 205
+explicacoes; arvore com 438 nos; banco na versao 6.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
 186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
 a 103); sobra a 2013-q53, so com voce (pendencia G). **O pedido de 05/10**
@@ -171,19 +171,30 @@ faixa (janela so com CSS) e 64 explicacoes das questoes reais do alvo; o
 Ciclo 1 redistribuido pela classe de cada tema em 7 dias (minutos iguais); o
 saldo do estoque de geradas (sob demanda); e os docs com o
 [indice](docs/indice.md). A procedencia de texto de IA novo diz o modelo.
+**Os itens 8, 2, 3, 4 e 5 (06/10, decisoes 128 a 133):** uma fila de revisao
+so (a home mostra as pontas da do Meu desempenho, e o prazo acaba na de 30
+dias); as 15 fichas sem no ligadas (9 nos novos, aprovados por voce; o art.
+75 no lugar dele); a falta de geradas de 06 a 12/10 escrita (90); o
+texto-base das questoes de interpretacao do alvo no banco (`texto_base`, lido
+por colunas; na tela, na ficha e no pedido, sem corte); e 125 explicacoes das
+questoes do complementar que os resumos citam (+10 do alvo). Rodados so os
+testes tocados, a seu pedido. A decisao 127 (o treino de IA no "Fiz hoje")
+e a 130 (a faixa avisa o que ja foi respondido no radar) vieram de outra
+conversa.
 **Falta, de voce:** conferir as 65 fichas e os 65 resumos (a ficha conferida
 tambem liga as faixas do tema ao Meu desempenho, decisao 81); as
 classificacoes abertas e pendentes do complementar (lista unica em
 [conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
 associados e os itens da lista de leis; os pontos da pendencia H (gabaritos a
-olhar, faixas sem no); e o **Ciclo 2**, depois do simulado de 07/11 e antes de
+olhar, os 9 nos novos ao conferir as fichas); e o **Ciclo 2**, depois do simulado de 07/11 e antes de
 09/11, ja com as fichas, os resumos e as explicacoes dos temas novos
 (decisao 123).
 **Proximo:** o roteiro da nuvem com login ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
-**Em aberto:** a falta do estoque de geradas (sob demanda), as faixas sem no
-na arvore, o Portugues sem filtro do Qconcursos, o texto local das leis (o
+**Em aberto:** a falta do estoque de geradas de 13/10 em diante (sob demanda),
+as 11 explicacoes do complementar e as 2 do alvo que ficaram de fora, a
+alternativa da 2019-q6 com o Texto 2 colado, o Portugues sem filtro do Qconcursos, o texto local das leis (o
 verificador ainda nao confere se o artigo citado existe) e o resto dos
 achados da varredura de 03/10 (pendencia F). Ordem e detalhe em
 [docs/pendencias.md](docs/pendencias.md); arvore no [README](README.md);
@@ -212,7 +223,11 @@ reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em
 anotado - **nunca sao somados na tela**, so no estado da amostra. **O assunto
 do "Onde estudar primeiro" e da revisao espacada e o no da arvore** em que a
 questao foi classificada (decisao 74), e nao o catalogo nem a coluna
-`assunto`. **A ultima revisao de um no sai do `Lancamento.revisao`** do
+`assunto`. **A fila de revisao e uma so, a do `servico/estudo.py`**
+(decisao 128): o Meu desempenho a mostra inteira, a home e a rodada de
+revisao so as pontas (`estudo.pontas`). **O texto-base da questao mora so no
+banco** (`texto_base`, decisao 132): e de terceiros, e nunca vai para arquivo
+versionado. **A ultima revisao de um no sai do `Lancamento.revisao`** do
 `metricas` (decisao 79) - faixa de revisao, extra de revisao, rodada que
 revisa; pratica nao e revisao -, e a evolucao semanal conta toda resposta.
 **Os selos moram no `radar/origem.py`**, e quem escolhe a cor e o dado: o
