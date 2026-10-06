@@ -944,19 +944,33 @@ def geradas_gerar(materia: str = Form(""), quantas: str = Form("5")):
 @app.post("/geradas/treinar")
 def geradas_treinar(
     materia: str = Form(""), conteudo: str = Form(""), quantidade: str = Form("5"),
+    data: str = Form(""), bloco: str = Form(""), indice: str = Form(""),
+    titulo: str = Form(""),
 ):
     """Uma rodada com o que ja foi gerado antes. Nao gasta nada.
 
     `conteudo` e o no da arvore - materia, assunto ou subassunto - e pega
     tudo que esta abaixo dele; `materia` continua valendo para quem ja
-    mandava so ela.
+    mandava so ela. Vinda do botao de uma faixa da Hoje, a rodada guarda a
+    faixa (data, bloco, indice e titulo), para a faixa avisar que estas ja
+    contam no "Fiz hoje".
     """
     quantas = converter_valor(quantidade)
     quantas = int(quantas) if quantas and 1 <= quantas <= 30 else 5
 
+    da_faixa = None
+    try:
+        dia = date.fromisoformat(data) if data else None
+    except ValueError:
+        dia = None
+    if dia and bloco and titulo and indice.strip().isdigit():
+        # A mesma identidade do `composicao.identidade_da_faixa`.
+        da_faixa = {"data": dia.isoformat(), "bloco": bloco,
+                    "indice": int(indice), "titulo": titulo}
+
     rodada = servico.geradas.criar_simulado(
         quantidade=quantas, materia=materia.strip() or None,
-        conteudo=conteudo.strip() or None,
+        conteudo=conteudo.strip() or None, da_faixa=da_faixa,
     )
     if rodada is None:
         return RedirectResponse("/geradas?recado=nada_no_no", status_code=303)
@@ -1047,6 +1061,10 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # passos para gerar o que falta.
             "geradas_das_faixas": (servico.geradas.das_faixas(tela.blocos, tela.plano)
                                    if tela.blocos else {}),
+            # O que ja foi respondido no radar em rodada aberta pela faixa:
+            # conta sozinho no "Fiz hoje", e a faixa avisa para nao anotar de novo.
+            "respondidas_no_radar": (servico.metricas.no_radar_por_faixa(tela.data)
+                                     if tela.blocos else {}),
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,

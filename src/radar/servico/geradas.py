@@ -938,12 +938,18 @@ def criar_simulado(
     materia: str | None = None,
     impressoes: list[str] | None = None,
     conteudo: str | None = None,
+    da_faixa: dict | None = None,
 ) -> Simulado | None:
     """Uma rodada SO de questoes geradas, na mesma tela do simulado de sempre.
 
     Rodada so de geradas, e nunca misturada com as reais: assim o resultado
     daquela rodada ja e um dos dois numeros que a tela mostra separados, sem
     ninguem precisar separar depois.
+
+    `da_faixa` e a faixa do dia que abriu a rodada (o botao "Treinar no
+    radar"), para a faixa avisar que estas ja contam. Vai numa chave propria,
+    e nao em `faixa`: o `composicao.rodada_da_faixa` pega a primeira rodada
+    com `faixa`, e a de geradas tomaria o lugar da que mede.
     """
     criar_tabelas()
 
@@ -958,6 +964,7 @@ def criar_simulado(
             "conteudo": conteudo,
             # E esta marca que a tela le para mostrar o selo no topo.
             "geradas": True,
+            **({"da_faixa": da_faixa} if da_faixa else {}),
         })
         s.add(simulado)
         s.flush()

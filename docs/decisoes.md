@@ -4280,3 +4280,20 @@ estudo extra "Onde: Radar", que guarda so o tempo. O "Fiz hoje" passou de 53
 questoes (14 + 16 + 23 de IA) para 26 (2 + 1 + 23 de IA), com as mesmas 2h.
 Fica em aberto impedir que a faixa repita o que foi respondido no radar:
 avisar ou bloquear, a sua escolha.
+
+## A faixa avisa o que ja foi respondido no radar (06/10/2026)
+
+130. **a faixa de questoes avisa quantas dela ja foram respondidas no radar,
+     e o "fiz" deixa de vir com o numero do plano - so avisa, nao bloqueia**
+     (sua escolha, fechando o que a decisao 127 deixou em aberto). O
+     `metricas.no_radar_por_faixa` conta, por faixa (bloco, indice e
+     titulo), o que foi respondido nas rodadas que ela abriu: a das reais
+     (`faixa`, decisoes 67 e 107) e a de geradas aberta pelo botao "Treinar
+     no radar", que passou a guardar a faixa em `da_faixa` - chave propria,
+     porque o `composicao.rodada_da_faixa` pega a primeira rodada com
+     `faixa`, e a de geradas tomaria o lugar da que mede. Com resposta no
+     radar, a faixa diz "Voce ja respondeu N desta faixa no radar (X reais e
+     Y de IA): elas ja contam sozinhas no Fiz hoje", e o "fiz" vem vazio: no
+     05/10 um clique em "Fiz" gravava o numero do plano por cima do que ja
+     estava contado. As rodadas de geradas de antes desta decisao nao
+     guardam a faixa, e nao entram no aviso.

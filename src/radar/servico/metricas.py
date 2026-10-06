@@ -430,6 +430,39 @@ def do_dia(data: date, plano=None) -> Conta:
     return contar(lancamentos(data, data, plano))
 
 
+def no_radar_por_faixa(data: date) -> dict[tuple[str, int, str], Numeros]:
+    """O que eu respondi no radar em rodada aberta por uma faixa do dia, pela
+    chave (bloco, indice, titulo) - a mesma que reconhece o check da faixa.
+
+    A rodada guarda de onde veio: `faixa` (a das reais de Portugues e a que
+    mede, decisoes 67 e 107) ou `da_faixa` (a de geradas aberta pelo botao da
+    faixa). Essas respostas ja contam sozinhas no "Fiz hoje"; anota-las de
+    novo no "fiz X, acertei Y" conta a mesma questao duas vezes - foi o
+    05/10. E isto que a faixa mostra para avisar.
+    """
+    criar_tabelas()
+    dia = data.isoformat()
+    por_faixa: dict[tuple[str, int, str], Numeros] = {}
+    with sessao() as s:
+        rodadas = {}
+        for simulado_id, filtros in s.execute(select(Simulado.id, Simulado.filtros)):
+            origem = (filtros or {}).get("faixa") or (filtros or {}).get("da_faixa")
+            if isinstance(origem, dict) and origem.get("data") == dia:
+                rodadas[simulado_id] = (origem.get("bloco"), origem.get("indice"),
+                                        origem.get("titulo"))
+        if not rodadas:
+            return {}
+        respostas = s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id.in_(rodadas))
+            .where(RespostaDeSimulado.respondida_em.is_not(None))
+        )
+        for resposta in respostas:
+            numeros = por_faixa.setdefault(rodadas[resposta.simulado_id], Numeros())
+            numeros.responder(bool(resposta.acertou), gerada=bool(resposta.gerada))
+    return por_faixa
+
+
 # --- questoes: o acumulado, pela ultima resposta -----------------------------------
 #
 # O Meu foco, o Onde estudar e a home respondem "quanto eu sei hoje", e no

@@ -1108,10 +1108,18 @@
                     {% if gf.sem_no %}
                       <p class="sub">Não há como gerar questão deste tema: a árvore não tem nó para ele (pendência).</p>
                     {% else %}
+                      {# O indice da faixa antes do for de dentro: la, `loop` e o dos nos. #}
+                      {% set indice_da_faixa = loop.index0 %}
                       {% for n in gf.nos %}
                         {% if n.geradas %}
                           <form class="treinar-no-radar" method="post" action="/geradas/treinar">
                             <input type="hidden" name="conteudo" value="{{ n.no }}">
+                            {# A rodada guarda a faixa: e assim que a faixa sabe
+                               avisar que estas ja contam no "Fiz hoje". #}
+                            <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                            <input type="hidden" name="bloco" value="{{ b.chave }}">
+                            <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
+                            <input type="hidden" name="titulo" value="{{ f.titulo }}">
                             <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
                             <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}</span>
                             <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar no radar</button>
@@ -1233,6 +1241,18 @@
                    formulario recolhe num <details> para corrigir, e ganha o
                    botao de desmarcar ao lado. Sem JavaScript, como o resto. #}
                 {% if not t.futuro and TEM_ACERTO(f) %}
+                  {# O que ja foi respondido no radar pela faixa conta sozinho no
+                     "Fiz hoje": a faixa avisa, e o "fiz" nao vem com o numero do
+                     plano - um clique em "Fiz" contava tudo de novo (05/10).
+                     So avisa: quem decide o que anotar sou eu. #}
+                  {% set no_radar_f = respondidas_no_radar.get((b.chave, loop.index0, f.titulo)) if respondidas_no_radar else none %}
+                  {% if no_radar_f %}
+                    <p class="regra aviso-no-radar">Você já respondeu <b>{{ no_radar_f.questoes }} {{ 'questão' if no_radar_f.questoes == 1 else 'questões' }}</b> desta faixa no radar
+                      {%- if no_radar_f.medidas and no_radar_f.ia %} ({{ no_radar_f.medidas }} {{ 'real' if no_radar_f.medidas == 1 else 'reais' }} e {{ no_radar_f.ia }} de IA)
+                      {%- elif no_radar_f.ia %} (de IA)
+                      {%- else %} ({{ 'real' if no_radar_f.medidas == 1 else 'reais' }}){% endif %}:
+                      elas já contam sozinhas no “Fiz hoje”. No “fiz X, acertei Y”, anote só as que fez fora do radar, no Qconcursos.</p>
+                  {% endif %}
                   {% set marcar %}
                     <form class="fiz" method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
                       <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
@@ -1241,7 +1261,7 @@
                       <input type="hidden" name="titulo" value="{{ f.titulo }}">
                       <label>fiz
                         <input type="number" name="questoes" min="0" inputmode="numeric"
-                               value="{{ anotado.questoes if anotado and anotado.questoes is not none else (f.questoes or '') }}">
+                               value="{{ anotado.questoes if anotado and anotado.questoes is not none else ('' if no_radar_f else (f.questoes or '')) }}">
                       </label>
                       <label>acertei
                         <input type="number" name="acertos" min="0" inputmode="numeric"
