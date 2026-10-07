@@ -417,6 +417,32 @@
   },
   {
     "alternativas": {
+      "a": "à pena privativa de liberdade em regime fechado.",
+      "b": "por crime político.",
+      "c": "reincidente em crime doloso.",
+      "d": "à pena privativa de liberdade em regime semiaberto.",
+      "e": "por crime hediondo."
+    },
+    "artigo": "art. 200 da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246787+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, NÃO está obrigado ao trabalho o condenado:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "0492762f55a33c62a002887ec9142d0e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "Os presos provisórios, isto é, ainda não condenados, ficam em ala separada.",
       "b": "Os presos provisórios ficam, em ala separada.",
       "c": "Os presos, provisórios ficam em ala separada.",
@@ -486,6 +512,32 @@
     "impressao": "04cfc0449d41488a7486e15c2f1f524c",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "educativa e produtiva.",
+      "b": "punitiva e retributiva.",
+      "c": "educativa e disciplinar.",
+      "d": "produtiva e indenizatória.",
+      "e": "retributiva e ressocializadora."
+    },
+    "artigo": "art. 28, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246789+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, o trabalho do condenado, como dever social e condição de dignidade humana, terá finalidade:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "051a47aab85f150e8bb977084c6b804a",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_chave": null,
@@ -6059,6 +6111,32 @@
   },
   {
     "alternativas": {
+      "a": "A prestação de trabalho externo será autorizada pela direção do estabelecimento.",
+      "b": "A prestação de trabalho externo dependerá do cumprimento mínimo de 1/6 (um sexto) da pena.",
+      "c": "A prestação de trabalho à entidade privada depende do consentimento expresso do preso.",
+      "d": "O limite máximo do número de presos será de 10% (dez por cento) do total de empregados na obra.",
+      "e": "O trabalho externo para os presos em regime fechado é vedado em obras realizadas por entidades privadas."
+    },
+    "artigo": "art. 36, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246785+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa INCORRETA sobre o trabalho externo.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "3de436519938f41aa3775c938c1b01c5",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
+  },
+  {
+    "alternativas": {
       "a": "Se Bruno é sargento, então Bruno é sargento e Clara é perita.",
       "b": "Se Bruno é sargento ou Clara é perita, então Clara é perita.",
       "c": "Se Bruno é sargento e Clara é perita, então Bruno é sargento.",
@@ -6394,6 +6472,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "do estabelecimento penal.",
+      "b": "do Fundo Penitenciário Nacional.",
+      "c": "do Tesouro estadual.",
+      "d": "do Conselho da Comunidade.",
+      "e": "dos próprios presos, em partes iguais."
+    },
+    "artigo": "art. 35, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246791+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, na falta de fundação ou empresa pública gerenciadora do trabalho, as importâncias arrecadadas com as vendas dos produtos do trabalho prisional reverterão em favor:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "41e863a8260c8c1a04876dcd355b483e",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
   },
   {
     "alternativas": {
@@ -8659,6 +8763,32 @@
   },
   {
     "alternativas": {
+      "a": "é obrigatório, na medida de suas aptidões e capacidade.",
+      "b": "não é obrigatório e só poderá ser executado no interior do estabelecimento.",
+      "c": "não é obrigatório e poderá ser executado no interior ou no exterior do estabelecimento, a critério da direção.",
+      "d": "é obrigatório, mas só poderá ser executado no interior do estabelecimento.",
+      "e": "é vedado até o trânsito em julgado da sentença condenatória."
+    },
+    "artigo": "art. 31, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246781+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, para o preso provisório, o trabalho:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "5f8d6015138b9c5c83bfecef2fadaef2",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "será prestada com liberdade de culto, permitindo-se aos presos e internados a participação nos serviços organizados no estabelecimento penal.",
       "b": "depende de autorização judicial para cada culto.",
       "c": "será prestada apenas aos presos provisórios.",
@@ -8682,6 +8812,32 @@
     "origem_impressao": "a0dc14e30c89c102f7a236e41fe1297a",
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "a habilitação do preso.",
+      "b": "a condição pessoal do preso.",
+      "c": "as necessidades futuras do preso.",
+      "d": "as oportunidades oferecidas pelo mercado.",
+      "e": "a natureza do crime praticado."
+    },
+    "artigo": "art. 32, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246788+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, na atribuição do trabalho ao preso deverão ser levados em conta todos os fatores abaixo, EXCETO:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "5fc848f3ddbf79a370ca2ee53ad97495",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -10756,6 +10912,32 @@
     "impressao": "78218e4099fe4264bae669844d4cd1d1",
     "materia": "Direitos Humanos",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "poderá ser atribuído horário especial de trabalho.",
+      "b": "não será devida remuneração.",
+      "c": "não se aplica, em nenhuma hipótese, o descanso nos domingos e feriados.",
+      "d": "será imposta jornada mínima de 8 (oito) horas.",
+      "e": "a jornada será fixada pelo juiz da execução."
+    },
+    "artigo": "art. 33, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246788+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, aos presos designados para os serviços de conservação e manutenção do estabelecimento penal:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "7839ad357654da671528d426ec027ffd",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_chave": null,
@@ -14379,6 +14561,32 @@
   },
   {
     "alternativas": {
+      "a": "a autorização de trabalho externo será revogada.",
+      "b": "a autorização somente poderá ser revogada se o fato também constituir crime.",
+      "c": "a autorização será suspensa por 30 (trinta) dias e restabelecida automaticamente.",
+      "d": "a autorização permanecerá válida, pois depende apenas do cumprimento mínimo de 1/6 (um sexto) da pena.",
+      "e": "a revogação dependerá do consentimento expresso do preso."
+    },
+    "artigo": "art. 37, parágrafo único, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246785+00:00",
+    "enunciado": "Um preso em regime fechado obteve autorização para trabalho externo em obra pública. Durante o período, foi punido por falta grave. De acordo com a Lei de Execução Penal:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "985c381bb97fa758fe33477088d06d21",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "por seis anos, podendo ser reeleitos uma vez.",
       "b": "por quatro anos, vedada a reeleição.",
       "c": "por prazo indeterminado.",
@@ -15315,6 +15523,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 3.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 29, caput e §§ 1º e 2º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246786+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a remuneração do trabalho do preso: 1. Não poderá ser inferior a 3/4 (três quartos) do salário mínimo. 2. Deverá atender ao ressarcimento ao Estado das despesas com a manutenção do condenado, em proporção a ser fixada e sem prejuízo das demais destinações previstas. 3. Ressalvadas outras aplicações legais, a parte restante será depositada em caderneta de poupança, para constituição do pecúlio, entregue ao condenado quando posto em liberdade. 4. Deverá atender à indenização dos danos causados pelo crime, independentemente de determinação judicial.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "a4b7adc0d011c6c2e1a20b5d6952f211",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "Pacto de San José da Costa Rica.",
       "b": "Protocolo de San Salvador.",
       "c": "Carta da OEA.",
@@ -15965,6 +16199,32 @@
   },
   {
     "alternativas": {
+      "a": "O trabalho poderá ser gerenciado por fundação ou empresa pública, com autonomia administrativa, e terá por objetivo a formação profissional do condenado.",
+      "b": "O trabalho gerenciado por fundação ou empresa pública terá por objetivo exclusivo o ressarcimento ao Estado das despesas com a manutenção do condenado.",
+      "c": "Na hipótese de gerenciamento por fundação ou empresa pública, a remuneração do preso será suportada pelo estabelecimento penal.",
+      "d": "As importâncias arrecadadas com as vendas dos produtos do trabalho prisional reverterão em favor do Fundo Penitenciário Nacional.",
+      "e": "Somente o governo federal poderá celebrar convênio com a iniciativa privada para implantação de oficinas de trabalho referentes a setores de apoio dos presídios."
+    },
+    "artigo": "art. 34, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246784+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa correta sobre o trabalho gerenciado por fundação ou empresa pública.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "ac9e2d9199377ec3ebc2d7d3883a4c91",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
       "a": "imprudência.",
       "b": "negligência.",
       "c": "imperícia.",
@@ -16361,6 +16621,32 @@
       "d": "São corretas apenas as afirmativas 2, 3 e 4.",
       "e": "São corretas as afirmativas 1, 2, 3 e 4."
     },
+    "artigo": "art. 34, § 1º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246790+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, quando o trabalho for gerenciado por fundação ou empresa pública, incumbirá à entidade gerenciadora: 1. promover e supervisionar a produção, com critérios e métodos empresariais. 2. encarregar-se da comercialização da produção. 3. suportar despesas, inclusive o pagamento de remuneração adequada. 4. fixar a jornada de trabalho acima de 8 (oito) horas, quando necessário à produção.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b01bd477da9e681bb2efa164b6c7c6c8",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
     "artigo": "LEP, art. 39, I, III, V e VIII",
     "assunto": "Deveres do condenado",
     "base": "questao_real",
@@ -16638,6 +16924,32 @@
     "origem_impressao": "d2e234e1c835df3d4ec7c1284c7d9901",
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "10 presos.",
+      "b": "20 presos.",
+      "c": "30 presos.",
+      "d": "40 presos.",
+      "e": "50 presos."
+    },
+    "artigo": "art. 36, § 1º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246778+00:00",
+    "enunciado": "Um preso em regime fechado foi selecionado para trabalho externo em obra pública realizada por órgão da Administração Direta, na qual trabalham 200 empregados. De acordo com a Lei de Execução Penal, o número máximo de presos que poderão trabalhar nessa obra é de:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b37f07554165aa8027023e95e69f2752",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -17187,6 +17499,32 @@
   },
   {
     "alternativas": {
+      "a": "tem direito a férias e décimo terceiro salário, por força da Consolidação das Leis do Trabalho.",
+      "b": "deve receber remuneração, fixada mediante prévia tabela, não inferior a 3/4 (três quartos) do salário mínimo.",
+      "c": "não deve ser remunerado, por se tratar de serviço de manutenção do estabelecimento.",
+      "d": "deve receber remuneração não inferior a um salário mínimo.",
+      "e": "só poderá trabalhar se manifestar consentimento expresso."
+    },
+    "artigo": "art. 29, caput, e art. 28, § 2º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246791+00:00",
+    "enunciado": "Um condenado em regime fechado trabalha na cozinha do estabelecimento penal. De acordo com a Lei de Execução Penal, é correto afirmar que ele:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "b9d6b5d7c3d81421e5ed83ec1b073224",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
       "a": "A participação em atividade religiosa é obrigatória para os presos condenados.",
       "b": "No estabelecimento haverá local apropriado para os cultos religiosos.",
       "c": "A posse de livros de instrução religiosa é proibida.",
@@ -17626,6 +17964,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "1 ano da pena.",
+      "b": "2 anos da pena.",
+      "c": "3 anos da pena.",
+      "d": "4 anos da pena.",
+      "e": "6 anos da pena."
+    },
+    "artigo": "art. 37, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246792+00:00",
+    "enunciado": "Uma condenada a 12 anos de reclusão, em regime fechado, pretende obter autorização para trabalho externo. De acordo com a Lei de Execução Penal, além de aptidão, disciplina e responsabilidade, ela deverá ter cumprido, no mínimo:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "be25d6790c594789e3e727575e60e853",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
   },
   {
     "alternativas": {
@@ -18669,6 +19033,32 @@
   },
   {
     "alternativas": {
+      "a": "O trabalho do condenado, como dever social e condição de dignidade humana, terá finalidade educativa e produtiva.",
+      "b": "Aplicam-se à organização e aos métodos de trabalho as precauções relativas à segurança e à higiene.",
+      "c": "O trabalho do preso está sujeito ao regime da Consolidação das Leis do Trabalho.",
+      "d": "O trabalho do preso será remunerado, mediante prévia tabela.",
+      "e": "As tarefas executadas como prestação de serviço à comunidade não serão remuneradas."
+    },
+    "artigo": "art. 28, § 2º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246773+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa INCORRETA sobre o trabalho do condenado.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "cb6bfe43323fac96995a2c69a9ec9623",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "narrativo.",
       "b": "descritivo.",
       "c": "injuntivo.",
@@ -19024,6 +19414,32 @@
     "impressao": "cf2b89bd2aa678ae22f0c4d91eeccb62",
     "materia": "Lei de Execução Penal",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "na medida de suas aptidões e capacidade.",
+      "b": "independentemente de suas aptidões e capacidade.",
+      "c": "somente se manifestar consentimento expresso.",
+      "d": "somente após o cumprimento mínimo de 1/6 (um sexto) da pena.",
+      "e": "somente no regime semiaberto."
+    },
+    "artigo": "art. 31, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246793+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, o condenado à pena privativa de liberdade está obrigado ao trabalho:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "cf5f09edd6e0f7e33c2957a4b1139784",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_chave": null,
@@ -19969,6 +20385,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 2 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 2, 3 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 32, §§ 1º a 3º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246783+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, sobre a atribuição do trabalho ao preso: 1. Deverá ser limitado, tanto quanto possível, o artesanato sem expressão econômica, salvo nas regiões de turismo. 2. Os maiores de 60 (sessenta) anos poderão solicitar ocupação adequada à sua idade. 3. Os doentes ou deficientes físicos somente exercerão atividades apropriadas ao seu estado. 4. Os maiores de 70 (setenta) anos ficam dispensados do trabalho.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "d99e3cfb7fe82ccf19aaf0840488697d",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "c"
+  },
+  {
+    "alternativas": {
       "a": "maiores de dezoito e menores de setenta anos.",
       "b": "servidores públicos.",
       "c": "analfabetos.",
@@ -20541,6 +20983,32 @@
   },
   {
     "alternativas": {
+      "a": "São corretas apenas as afirmativas 1 e 2.",
+      "b": "São corretas apenas as afirmativas 3 e 4.",
+      "c": "São corretas apenas as afirmativas 1, 2 e 3.",
+      "d": "São corretas apenas as afirmativas 1, 2 e 4.",
+      "e": "São corretas as afirmativas 1, 2, 3 e 4."
+    },
+    "artigo": "art. 37, caput, e art. 36, § 3º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246780+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, a prestação de trabalho externo depende de: 1. aptidão, disciplina e responsabilidade. 2. cumprimento mínimo de 1/6 (um sexto) da pena. 3. autorização do juiz da execução. 4. consentimento expresso do preso, quando o trabalho for prestado a entidade privada.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "df845439170c875372f393339e7bde8d",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "d"
+  },
+  {
+    "alternativas": {
       "a": "serão remuneradas mediante prévia tabela, não podendo a remuneração ser inferior a três quartos do salário mínimo.",
       "b": "serão remuneradas pela entidade beneficiada, na forma da Consolidação das Leis do Trabalho.",
       "c": "serão remuneradas apenas quando prestadas a entidades privadas.",
@@ -20720,6 +21188,32 @@
     "origem_impressao": null,
     "rejeitada": false,
     "resposta": "a"
+  },
+  {
+    "alternativas": {
+      "a": "à indenização dos danos causados pelo crime, desde que determinados judicialmente e não reparados por outros meios.",
+      "b": "à assistência à família.",
+      "c": "a pequenas despesas pessoais.",
+      "d": "ao ressarcimento ao Estado das despesas realizadas com a manutenção do condenado.",
+      "e": "à formação de fundo destinado à construção de estabelecimentos penais."
+    },
+    "artigo": "art. 29, § 1º, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246782+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, o produto da remuneração pelo trabalho do preso deverá atender a todas as finalidades abaixo, EXCETO:",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e0c09baa0423a9ae4a3a7d3f125337c4",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "e"
   },
   {
     "alternativas": {
@@ -21286,6 +21780,32 @@
     "impressao": "e6533511402ff312bbc693f5289bd243",
     "materia": "Direito Constitucional",
     "modelo": "Claude Code, importado manualmente, em 03/10/2026",
+    "modo": "do_zero",
+    "modo_do_pedido": "treino",
+    "origem_chave": null,
+    "origem_impressao": null,
+    "rejeitada": false,
+    "resposta": "b"
+  },
+  {
+    "alternativas": {
+      "a": "5 horas diárias, com descanso nos domingos e feriados.",
+      "b": "7 horas diárias, com descanso nos domingos e feriados.",
+      "c": "9 horas diárias, com descanso nos domingos e feriados.",
+      "d": "8 horas diárias, com descanso apenas nos domingos.",
+      "e": "10 horas diárias, com descanso nos domingos e feriados."
+    },
+    "artigo": "art. 33, caput, da Lei 7.210/1984",
+    "assunto": "Trabalho do preso",
+    "base": "fonte_oficial",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "criada_em": "2026-10-07T16:34:38.246782+00:00",
+    "enunciado": "De acordo com a Lei de Execução Penal, assinale a alternativa que indica uma jornada normal de trabalho do preso compatível com a lei.",
+    "escopo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+    "evidencia_da_base": "nenhuma",
+    "impressao": "e67628e961df327b7412265f076a4397",
+    "materia": "Lei de Execução Penal",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
     "modo": "do_zero",
     "modo_do_pedido": "treino",
     "origem_chave": null,
