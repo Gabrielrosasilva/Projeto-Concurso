@@ -1042,94 +1042,769 @@
     ]
   },
   {
-    "criado_em": "2026-10-06T14:05:23.563050+00:00",
+    "criado_em": "2026-10-07T14:07:18.295252+00:00",
     "filtros": {
       "banca": null,
       "cargo": null,
-      "materia": "Direito Constitucional",
-      "quantidade": 8,
+      "materia": "Lei de Execução Penal",
+      "quantidade": 10,
       "universais": false
+    },
+    "finalizado_em": "2026-10-07T14:16:07.554470+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "2a6de290febcd92a6d65935b45971c57",
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 86,
+        "ordem": 1,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:09:37.723674+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "55c6055d920995abe92156daa659a951",
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 90,
+        "ordem": 2,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:11:10.524782+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "1d11cd40cbec0824c105cebc5152a2df",
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 84,
+        "ordem": 3,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:12:25.217859+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "3a1aea489f51ec6a59df8bcd949a66ed",
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 87,
+        "ordem": 4,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:13:57.535558+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "f7fdf6050348dd946ebeb522e10f9a0e",
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 82,
+        "ordem": 5,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:14:28.208972+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "2321633d3c77e80c69509d91d93cfa0f",
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 88,
+        "ordem": 6,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:14:51.642850+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "03a592eea647b1a15c67f9adcd37b150",
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 83,
+        "ordem": 7,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:15:31.066527+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "af0f03851f778adf2f96537ea612bc6a",
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 81,
+        "ordem": 8,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-07T14:16:07.551108+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T14:24:21.281957+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-07",
+        "indice": 1,
+        "titulo": "Fixação: Trabalho do preso (arts. 28 a 37)"
+      },
+      "geradas": true,
+      "materia": null,
+      "quantidade": 8
     },
     "finalizado_em": null,
     "respostas": [
       {
         "acertou": null,
-        "chave": "fb9e095f43c62f99d36816ff8fba3507",
         "escolhida": null,
-        "gerada": false,
-        "numero": 32,
+        "gerada": true,
+        "impressao": "1a0b9a04de44dfcec3e690a759b20d4e",
         "ordem": 1,
-        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "a23b0334e2f181024ba164c26b226217",
         "escolhida": null,
-        "gerada": false,
-        "numero": 43,
+        "gerada": true,
+        "impressao": "43c7af1d3ef6a251931092dc2f88390f",
         "ordem": 2,
-        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "413093e9fc51735872ca92ccae4b33b6",
         "escolhida": null,
-        "gerada": false,
-        "numero": 41,
+        "gerada": true,
+        "impressao": "047898039d47c776dde9139f3a4d4ef8",
         "ordem": 3,
-        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "a432aa6ceac719ce9d36c9ef2fc3a319",
         "escolhida": null,
-        "gerada": false,
-        "numero": 36,
+        "gerada": true,
+        "impressao": "075c88b89b48ce579d5b320a51218cf0",
         "ordem": 4,
-        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "3b7e9672904abac3a03c69e93cc619ea",
         "escolhida": null,
-        "gerada": false,
-        "numero": 33,
+        "gerada": true,
+        "impressao": "8ce3f677b4850e4a7a22b885352871ee",
         "ordem": 5,
-        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "22c42b6e820452815f4424b2587f43c4",
         "escolhida": null,
-        "gerada": false,
-        "numero": 34,
+        "gerada": true,
+        "impressao": "915650a0daf6d2cfb555c832d5052b45",
         "ordem": 6,
-        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "07e92e5aeb3936d516e3e1934235e53c",
         "escolhida": null,
-        "gerada": false,
-        "numero": 37,
+        "gerada": true,
+        "impressao": "9556414c2d65898fcdba3235d9c4d743",
         "ordem": 7,
-        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
         "respondida_em": null
       },
       {
         "acertou": null,
-        "chave": "0b36f3dbd4d826a2db1f97cec5037c7b",
         "escolhida": null,
+        "gerada": true,
+        "impressao": "dd1a49160705110bbfbf817e8cb87e91",
+        "ordem": 8,
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T14:26:27.587661+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-07",
+        "indice": 1,
+        "titulo": "Fixação: Trabalho do preso (arts. 28 a 37)"
+      },
+      "geradas": true,
+      "materia": null,
+      "quantidade": 8
+    },
+    "finalizado_em": "2026-10-07T14:35:23.771570+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "a69597653e2e47106b435bcfec78ac7f",
+        "ordem": 1,
+        "respondida_em": "2026-10-07T14:27:30.458583+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "324c08bfc5989dcc9bae60f79b090d04",
+        "ordem": 2,
+        "respondida_em": "2026-10-07T14:28:40.960275+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "425d4680eec93f04b07772c7e1acd74d",
+        "ordem": 3,
+        "respondida_em": "2026-10-07T14:29:18.703354+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "1a0b9a04de44dfcec3e690a759b20d4e",
+        "ordem": 4,
+        "respondida_em": "2026-10-07T14:30:25.266207+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "be9cae7410fa20f9faf6077751f97a86",
+        "ordem": 5,
+        "respondida_em": "2026-10-07T14:31:20.685923+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "43c7af1d3ef6a251931092dc2f88390f",
+        "ordem": 6,
+        "respondida_em": "2026-10-07T14:31:33.645430+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "715f63cfb9aaa3df4309c1a9ef197279",
+        "ordem": 7,
+        "respondida_em": "2026-10-07T14:32:45.263427+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "15e435a6713d8e6e4a2e9ce01588cdb1",
+        "ordem": 8,
+        "respondida_em": "2026-10-07T14:35:23.768650+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T15:02:03.270776+00:00",
+    "filtros": {
+      "da_banca": 3,
+      "do_plano": 4,
+      "faixa": {
+        "bloco": "manha",
+        "data": "2026-10-07",
+        "indice": 6,
+        "titulo": "Fixação: Concordância verbal 2: casos especiais"
+      },
+      "nos": [
+        "Língua Portuguesa > Concordância nominal e verbal > Concordância do verbo haver impessoal"
+      ],
+      "proprias": 0,
+      "quantidade": 3,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-07T15:03:28.071876+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "ce70cdd6a76821b544f31c90c344efe3",
+        "escolhida": "a",
         "gerada": false,
         "numero": 33,
+        "ordem": 1,
+        "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E07.pdf",
+        "respondida_em": "2026-10-07T15:02:37.200104+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "ed1ec9c55e7ad34edeb781a92cc29836",
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 8,
+        "ordem": 2,
+        "prova_url": "https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
+        "respondida_em": "2026-10-07T15:03:00.806243+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "f3ed2680fe76056973ea9a0d3971cb95",
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 8,
+        "ordem": 3,
+        "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=F1.pdf",
+        "respondida_em": "2026-10-07T15:03:28.068254+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T16:39:27.623920+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 5
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "5fc848f3ddbf79a370ca2ee53ad97495",
+        "ordem": 1,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "1a0b9a04de44dfcec3e690a759b20d4e",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "43c7af1d3ef6a251931092dc2f88390f",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "a4b7adc0d011c6c2e1a20b5d6952f211",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "3a14080f9ccd2bbdeda815ed20d22caa",
+        "ordem": 5,
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T21:37:08.013149+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-07",
+        "indice": 0,
+        "titulo": "R+7: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)"
+      },
+      "geradas": true,
+      "materia": null,
+      "quantidade": 10
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "6b6659dcd37c034f7173b22e4b3432cd",
+        "ordem": 1,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "e17675d0d2150b45e8f43d65db7891f4",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "235fe16020f79b180c5a72965bbb033f",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "9931fd04f3a8ab14e273c895637a7251",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "201da6151f97e1d767a8bc9699e3408e",
+        "ordem": 5,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "aa5033ed18e27907480e726a3b1b2543",
+        "ordem": 6,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "d9cb6a5800b5000a5646854901e382c9",
+        "ordem": 7,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "4b660c91a9f1fd6d936b1620d13c44b1",
         "ordem": 8,
-        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "4bf4616eb23b8c12e84c249c1cf46b5c",
+        "ordem": 9,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "76ef410c7354f59394f38d6b140411ca",
+        "ordem": 10,
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T21:38:39.424713+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Objeto e classificação do condenado",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 3
+    },
+    "finalizado_em": "2026-10-07T21:40:56.040012+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "9931fd04f3a8ab14e273c895637a7251",
+        "ordem": 1,
+        "respondida_em": "2026-10-07T21:39:04.149743+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "4bf4616eb23b8c12e84c249c1cf46b5c",
+        "ordem": 2,
+        "respondida_em": "2026-10-07T21:40:00.373967+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "d9cb6a5800b5000a5646854901e382c9",
+        "ordem": 3,
+        "respondida_em": "2026-10-07T21:40:56.036320+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-07T21:49:17.175448+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-07",
+        "indice": 1,
+        "titulo": "Aprendizagem: Trabalho do preso (arts. 28 a 37)"
+      },
+      "geradas": true,
+      "materia": null,
+      "quantidade": 15
+    },
+    "finalizado_em": "2026-10-07T22:06:55.604746+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "047898039d47c776dde9139f3a4d4ef8",
+        "ordem": 1,
+        "respondida_em": "2026-10-07T21:52:13.941663+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "cf5f09edd6e0f7e33c2957a4b1139784",
+        "ordem": 2,
+        "respondida_em": "2026-10-07T21:53:50.109621+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "ac9e2d9199377ec3ebc2d7d3883a4c91",
+        "ordem": 3,
+        "respondida_em": "2026-10-07T21:55:11.572438+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "43c7af1d3ef6a251931092dc2f88390f",
+        "ordem": 4,
+        "respondida_em": "2026-10-07T21:55:19.670138+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "5f8d6015138b9c5c83bfecef2fadaef2",
+        "ordem": 5,
+        "respondida_em": "2026-10-07T21:56:59.342358+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "8ce3f677b4850e4a7a22b885352871ee",
+        "ordem": 6,
+        "respondida_em": "2026-10-07T21:57:46.175012+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "425d4680eec93f04b07772c7e1acd74d",
+        "ordem": 7,
+        "respondida_em": "2026-10-07T22:00:58.409405+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "715f63cfb9aaa3df4309c1a9ef197279",
+        "ordem": 8,
+        "respondida_em": "2026-10-07T22:01:30.945954+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "324c08bfc5989dcc9bae60f79b090d04",
+        "ordem": 9,
+        "respondida_em": "2026-10-07T22:02:39.676221+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "b01bd477da9e681bb2efa164b6c7c6c8",
+        "ordem": 10,
+        "respondida_em": "2026-10-07T22:04:21.242561+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "6ffdab6848bd9f048dd9c2debcaaafd1",
+        "ordem": 11,
+        "respondida_em": "2026-10-07T22:05:10.821212+00:00"
+      },
+      {
+        "acertou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "e0c09baa0423a9ae4a3a7d3f125337c4",
+        "ordem": 12,
+        "respondida_em": "2026-10-07T22:05:36.477500+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "3de436519938f41aa3775c938c1b01c5",
+        "ordem": 13,
+        "respondida_em": "2026-10-07T22:05:50.751946+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "0492762f55a33c62a002887ec9142d0e",
+        "ordem": 14,
+        "respondida_em": "2026-10-07T22:06:04.621303+00:00"
+      },
+      {
+        "acertou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "a69597653e2e47106b435bcfec78ac7f",
+        "ordem": 15,
+        "respondida_em": "2026-10-07T22:06:55.599152+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-08T02:05:16.014964+00:00",
+    "filtros": {
+      "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Tribunal do júri",
+      "geradas": true,
+      "materia": null,
+      "quantidade": 5
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "b267a9194580d0e15b6307784fb88860",
+        "ordem": 1,
+        "respondida_em": "2026-10-08T02:05:24.593160+00:00"
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "e8265e9aa34300be0a3ce40cfb3b6e4b",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "cc7748d00af1d86bc7b60cb93eb542bd",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "9d39b1f00ab6455c3e12464dfd6e7298",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "4a5f93e8c5ad6fc352a8888082974ffb",
+        "ordem": 5,
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-08T02:12:28.415230+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso",
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-07",
+        "indice": 1,
+        "titulo": "Fixação: Trabalho do preso (arts. 28 a 37)"
+      },
+      "geradas": true,
+      "materia": null,
+      "quantidade": 8
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "e67628e961df327b7412265f076a4397",
+        "ordem": 1,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "a4b7adc0d011c6c2e1a20b5d6952f211",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "c8d5079abcfb2f96840bdfc989e9f415",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "9279f1848b0b222d7e5f42572cbdf825",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "d99e3cfb7fe82ccf19aaf0840488697d",
+        "ordem": 5,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "3a14080f9ccd2bbdeda815ed20d22caa",
+        "ordem": 6,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "9842b248103589a4e52898744fcb10fd",
+        "ordem": 7,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "915650a0daf6d2cfb555c832d5052b45",
+        "ordem": 8,
         "respondida_em": null
       }
     ]

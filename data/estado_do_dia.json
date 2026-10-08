@@ -236,5 +236,133 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-07T22:26:25.368087+00:00",
+    "data": "2026-10-07",
+    "faixas_feitas": [
+      {
+        "acertos": null,
+        "assunto": "Trabalho do preso (arts. 28 a 37)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Lei de Execução Penal",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Trabalho do preso (arts. 28 a 37)"
+      },
+      {
+        "acertos": 7,
+        "assunto": "Fixação: Trabalho do preso (arts. 28 a 37)",
+        "bloco": "manha",
+        "consulta": true,
+        "indice": 1,
+        "materia": "Lei de Execução Penal",
+        "minutos": 20,
+        "questoes": 9,
+        "titulo": "Fixação: Trabalho do preso (arts. 28 a 37)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Lei seca dirigida: LEP art. 29; LEP art. 31; LEP art. 33; LEP art. 37",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Lei de Execução Penal",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Lei seca dirigida: LEP art. 29; LEP art. 31; LEP art. 33; LEP art. 37"
+      },
+      {
+        "acertos": 1,
+        "assunto": "Fixação: Concordância verbal 2: casos especiais",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 6,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 4,
+        "titulo": "Fixação: Concordância verbal 2: casos especiais"
+      },
+      {
+        "acertos": null,
+        "assunto": "Concordância verbal 2: casos especiais",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 5,
+        "materia": "Língua Portuguesa",
+        "minutos": 15,
+        "questoes": null,
+        "titulo": "Concordância verbal 2: casos especiais"
+      },
+      {
+        "acertos": 6,
+        "assunto": "Extra: Substantivo e adjetivo (flexão nominal)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 7,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 10,
+        "titulo": "Extra: Substantivo e adjetivo (flexão nominal)"
+      },
+      {
+        "acertos": 3,
+        "assunto": "R+7: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Lei de Execução Penal",
+        "minutos": 25,
+        "questoes": 10,
+        "titulo": "R+7: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)"
+      },
+      {
+        "acertos": 1,
+        "assunto": "Aprendizagem: Trabalho do preso (arts. 28 a 37)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Lei de Execução Penal",
+        "minutos": 40,
+        "questoes": 3,
+        "titulo": "Aprendizagem: Trabalho do preso (arts. 28 a 37)"
+      },
+      {
+        "acertos": 4,
+        "assunto": "Concordância verbal 2: casos especiais",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Língua Portuguesa",
+        "minutos": 20,
+        "questoes": 8,
+        "titulo": "Concordância verbal 2: casos especiais"
+      },
+      {
+        "acertos": 1,
+        "assunto": "Extra: Artigo, numeral e pronome (classificação)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 5,
+        "questoes": 2,
+        "titulo": "Extra: Artigo, numeral e pronome (classificação)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Correção",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 5,
+        "materia": null,
+        "minutos": 25,
+        "questoes": null,
+        "titulo": "Correção"
+      }
+    ],
+    "plano_b": null
   }
 ]
