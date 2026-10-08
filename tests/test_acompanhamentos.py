@@ -412,6 +412,89 @@ def test_conferida_preenche_o_marco_com_o_selo_da_ia(ambiente):
     assert banca.valor == "FEPESE" and banca.selo == IA
 
 
+# --- a banca do alvo principal liga ao estudo (pendencia J) --------------------
+
+PENAL = "Polícia Penal SC"
+
+
+def _pesquisa_da_penal(banca="Instituto AOCP"):
+    """Uma pesquisa de banca da Policia Penal, importada e ainda por conferir."""
+    lote = cartoes.pedido_de_pesquisa([PENAL])
+    cartoes.importar_novidades(
+        lote, [{"id": _id_no_lote(lote, PENAL), "novidades": [
+            _novidade(valor=banca, descricao=f"A SAP contratou o {banca}.")]}],
+        "Claude Code, em teste", hoje=date.today())
+    return _cartao(PENAL).novidades[0].pesquisa
+
+
+def test_banca_do_item_liga_o_cartao_da_principal_ao_estudo(ambiente):
+    _semear(_item("https://x.test/pp", "Concurso Polícia Penal SC: banca definida",
+                  alvo="principal", situacao="banca_definida", banca="FGV"))
+
+    banca = _cartao(PENAL).banca_para_estudar
+
+    assert banca is not None and banca.valor == "FGV"
+    # O item veio do site de noticias: a ressalva do marco vai junto.
+    assert banca.ressalva == "segundo site de notícias"
+
+
+def test_so_a_pesquisa_conferida_liga(ambiente):
+    pesquisa = _pesquisa_da_penal()
+    assert _cartao(PENAL).banca_para_estudar is None
+
+    cartoes.conferir(pesquisa, confere=True)
+
+    banca = _cartao(PENAL).banca_para_estudar
+    assert banca.valor == "Instituto AOCP" and banca.selo == IA
+
+
+def test_outra_carreira_com_banca_nao_liga(ambiente):
+    _semear(_item("https://fepese.test/pc", "2026 – Concurso Polícia Civil SC",
+                  fonte="fepese", situacao="edital_publicado", banca="FEPESE"))
+    assert _cartao("Polícia Civil SC").banca_para_estudar is None
+    assert _cartao(PENAL).banca_para_estudar is None
+
+
+def test_banca_com_prova_no_acervo_ganha_o_link_do_padrao(ambiente):
+    """O marco por extenso acha a banca do acervo pelo nome curto."""
+    from tests.test_simulado import _questao, _semear as _semear_questoes
+
+    _semear_questoes(_questao(1, banca="FEPESE"))
+    cartoes.conferir(_pesquisa_da_penal(
+        "Fundação de Estudos e Pesquisas Sócio-Econômicos (FEPESE)"), confere=True)
+
+    assert _cartao(PENAL).banca_no_acervo == "FEPESE"
+    pagina = TestClient(app).get("/acompanhando").text
+    assert "📚 Estudar a banca" in pagina
+    assert 'href="/analises">Análises &gt; Edital</a>' in pagina
+    assert 'href="/macetes?banca=FEPESE">Padrão da FEPESE</a>' in pagina
+
+
+def test_banca_sem_prova_no_acervo_diz_isso_em_vez_do_link(ambiente):
+    from tests.test_simulado import _questao, _semear as _semear_questoes
+
+    _semear_questoes(_questao(1, banca="FEPESE"))
+    cartoes.conferir(_pesquisa_da_penal("Instituto AOCP"), confere=True)
+
+    assert _cartao(PENAL).banca_no_acervo is None
+    pagina = TestClient(app).get("/acompanhando").text
+    assert 'href="/analises">Análises &gt; Edital</a>' in pagina
+    assert "/macetes?banca=" not in pagina
+    assert "o acervo ainda não tem prova dessa banca" in pagina
+
+
+def test_a_banca_casa_por_palavra_inteira(ambiente):
+    from tests.test_simulado import _questao, _semear as _semear_questoes
+
+    _semear_questoes(_questao(1, banca="IBFC"))
+    assert cartoes.banca_no_acervo("Instituto Brasileiro de Formação (IBFC)") == "IBFC"
+    assert cartoes.banca_no_acervo("IBFCX Consultoria") is None
+
+
+def test_sem_banca_o_cartao_nao_manda_estudar(ambiente):
+    assert "Estudar a banca" not in TestClient(app).get("/acompanhando").text
+
+
 def test_nao_confere_sai_do_sino(ambiente):
     _importar(_novidade())
     pesquisa = _cartao("Polícia Civil SC").novidades[0].pesquisa

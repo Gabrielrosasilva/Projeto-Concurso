@@ -445,5 +445,7 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
 - ✅ **A pesquisa por carreira** (feito em 08/10): `radar acompanhar
   --pedido --carreira "<nome>"` (decisao 141). O botao continua um so, no
   topo: a coleta e uma para todas as fontes;
-- ⚪ **Ligar a banca definida ao estudo**: quando o cartao da Policia Penal
-  ganhar banca, apontar para Analises > Edital e o padrao dela.
+- ✅ **Ligar a banca definida ao estudo** (feito em 08/10): com banca, o
+  cartao da Policia Penal aponta para Analises > Edital e o padrao dela; sem
+  prova da banca no acervo, diz isso (decisao 141). Incluir a banca no
+  acervo e outra conversa: um coletor de provas por banca.

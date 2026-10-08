@@ -4643,6 +4643,16 @@ viraram estudo extra "Onde: Radar". Copia antes em
        ignorar nome desconhecido em silencio. `--carreira` sem `--pedido` e
        erro. O botao da tela continua um so: a coleta e uma para todas as
        fontes.
+     - **a banca do alvo principal liga ao estudo** (08/10, pendencia J): o
+       cartao da carreira `cargo: principal` (a Policia Penal SC, sem nome no
+       codigo), com o marco Banca preenchido - pelo item, ou por pesquisa
+       CONFERIDA; a por conferir nao liga -, ganha "📚 Estudar a banca", com
+       o link para Analises > Edital e o "Padrao da <banca>" (`/macetes`).
+       O link do padrao usa o nome da banca no acervo, achado como palavra
+       inteira no marco (a pesquisa escreve "Fundação ... (FEPESE)"); banca
+       sem prova no acervo nao ganha o link, e o cartao diz "o acervo ainda
+       nao tem prova dessa banca" - a tela de padrao abria vazia, sem dizer.
+       Outra carreira com banca nao liga nada: o estudo e so do alvo.
 
 ## A correcao na hora, as geradas nunca feitas e a nota da faixa (07/10/2026)
 

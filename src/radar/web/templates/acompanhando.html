@@ -27,6 +27,8 @@
       border-radius:var(--raio-sm);background:var(--cor-acao-fundo)}
     .ds .novidade a,.ds .tempo a,.ds .marcos a{color:var(--cor-texto)}
     .marcos .ressalva{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .estudar-banca{margin:0 0 var(--esp-3);font-size:var(--tam-sm)}
+    .estudar-banca .ressalva{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .marcos{list-style:none;margin:0 0 var(--esp-3);padding:0;display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-1) var(--esp-3);font-size:var(--tam-sm)}
     .marcos .rot{display:block;font-size:var(--tam-xs);text-transform:uppercase;letter-spacing:.06em;
@@ -216,6 +218,17 @@
             </li>
           {% endfor %}
         </ul>
+
+        {# A banca do alvo principal saiu (pendencia J): e a hora de estudar o
+           padrao dela. So aparece com o marco Banca preenchido pelo item ou
+           por pesquisa conferida; quem decide e o servico. #}
+        {% set bp = c.banca_para_estudar %}
+        {% if bp %}
+          <p class="estudar-banca">📚 Estudar a banca {{ selo(bp.selo, curto=True) }} <b>{{ bp.valor }}</b>{% if bp.ressalva %} <span class="ressalva">· {{ bp.ressalva }}</span>{% endif %}:
+            <a href="/analises">Análises &gt; Edital</a>
+            {%- if c.banca_no_acervo %} · <a href="/macetes?banca={{ c.banca_no_acervo | urlencode }}">Padrão da {{ c.banca_no_acervo }}</a>
+            {%- else %} · <span class="ds-suave">o acervo ainda não tem prova dessa banca: o padrão dela não dá para ver aqui</span>{% endif %}</p>
+        {% endif %}
 
         <div class="rodape">
           {% if c.novidades %}

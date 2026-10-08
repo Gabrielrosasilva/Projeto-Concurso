@@ -194,6 +194,15 @@ class Cartao:
     historico: list[Linha] = field(default_factory=list)
     itens: int = 0
     visto_em: datetime | None = None
+    #: A banca do alvo principal, quando se sabe (pendencia J): o cartao
+    #: aponta para Analises > Edital e para o padrao dela. So na carreira
+    #: `cargo: principal`, e so com o marco Banca preenchido - pelo item, ou
+    #: pela pesquisa que eu ja conferi; a por conferir nao liga nada.
+    banca_para_estudar: Marco | None = None
+    #: O nome dessa banca no acervo de provas, para o link do padrao dela;
+    #: None quando o acervo nao tem prova dela - e o cartao diz isso, em vez
+    #: de levar a uma tela de padrao vazia.
+    banca_no_acervo: str | None = None
 
 
 def _selo_do_item(concurso: Concurso) -> str:
@@ -391,20 +400,43 @@ def cartoes(hoje: date | None = None) -> list[Cartao]:
                 situacao = f"nenhum concurso desta carreira no radar nos últimos {meses} meses"
                 referencia = None
 
+            principal = acompanhamento.cargo == carreiras.PRINCIPAL
+            marcos = _marcos(ref, minhas)
+            banca = next(m for m in marcos if m.nome == "Banca")
             cartao = Cartao(
                 nome=acompanhamento.nome,
                 situacao=situacao,
                 referencia=referencia,
-                marcos=_marcos(ref, minhas),
+                marcos=marcos,
                 novidades=novidades,
                 historico=sorted(linhas, key=lambda x: x.data, reverse=True)[:LINHAS_NO_HISTORICO],
                 itens=len(itens),
                 visto_em=visto,
+                banca_para_estudar=banca if principal and banca.sabido else None,
             )
-            principal = acompanhamento.cargo == carreiras.PRINCIPAL
+            if cartao.banca_para_estudar:
+                cartao.banca_no_acervo = banca_no_acervo(banca.valor)
             montados.append(((0 if principal else 1, 0 if novidades else 1, ordem), cartao))
 
     return [cartao for _, cartao in sorted(montados, key=lambda par: par[0])]
+
+
+def banca_no_acervo(nome: str) -> str | None:
+    """A banca do acervo de provas que este nome diz, ou None.
+
+    O marco pode vir por extenso ("Fundação de Estudos e Pesquisas
+    Sócio-Econômicos (FEPESE)"): vale a banca do acervo que aparece nele como
+    palavra inteira, sem acento nem caixa. Banca sem prova aqui nao tem padrao
+    para mostrar.
+    """
+    from radar.servico.provas import bancas_com_questao
+
+    texto = f" {re.sub(r'[^a-z0-9]+', ' ', normalizar(nome or ''))} "
+    for banca in bancas_com_questao():
+        palavra = re.sub(r"[^a-z0-9]+", " ", normalizar(banca)).strip()
+        if palavra and f" {palavra} " in texto:
+            return banca
+    return None
 
 
 def marcar_visto(nome: str, quando: datetime | None = None) -> bool:
