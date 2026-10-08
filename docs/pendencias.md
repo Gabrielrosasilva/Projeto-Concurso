@@ -437,6 +437,11 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   que vem so do Concursos no Brasil diz "segundo site de notícias" por
   extenso, no cartao e no `radar acompanhar` (decisao 141). Esperar a pagina
   detalhada continua possivel, se um dia valer;
+- ✅ **"Oficial" que nao era** (feito em 08/10): a pesquisa de 07/10 trouxe
+  2 novidades "oficial" com link no CDN de um curso. O tipo agora sai do
+  dominio do link (governo ou `dominios_oficiais` do YAML), o importar conta
+  as rebaixadas, e as 2 foram regravadas como noticia (decisao 141). Banca
+  nova que entrar no radar: somar o dominio dela no `dominios_oficiais`;
 - ✅ **A pesquisa por carreira** (feito em 08/10): `radar acompanhar
   --pedido --carreira "<nome>"` (decisao 141). O botao continua um so, no
   topo: a coleta e uma para todas as fontes;

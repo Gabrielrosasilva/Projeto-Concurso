@@ -48,6 +48,15 @@ fontes_oficiais:
   - fepese
   - ieses
 
+# Os sites das bancas, para a pesquisa do Claude Code: a novidade so fica
+# como "oficial" quando o link e de governo (.gov.br, .leg.br, .jus.br, .mp.br)
+# ou de um destes dominios (vale o subdominio: sap.fepese.org.br). O resto -
+# inclusive a copia do Diario Oficial no site de um curso - vira "noticia".
+# Banca nova: some o dominio dela aqui.
+dominios_oficiais:
+  - fepese.org.br
+  - ieses.org
+
 # A FEPESE nao manda a UF, e organiza concurso em SC. Sem UF, vir dela conta
 # como SC. A IESES nao entra: ela faz concurso em varios estados.
 fontes_de_sc:

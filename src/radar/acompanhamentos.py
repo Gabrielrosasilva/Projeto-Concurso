@@ -52,6 +52,7 @@ class Regras:
     novidades_desde: date | None = None
     telegram_desde: date | None = None
     fontes_oficiais: tuple[str, ...] = ()
+    dominios_oficiais: tuple[str, ...] = ()
     fontes_de_sc: tuple[str, ...] = ()
     prova_de_sc: tuple[str, ...] = field(default=("santa catarina",))
 
@@ -122,6 +123,8 @@ def regras() -> Regras:
         novidades_desde=_data(dados.get("novidades_desde"), "novidades_desde"),
         telegram_desde=_data(dados.get("telegram_desde"), "telegram_desde"),
         fontes_oficiais=tuple(f.lower() for f in _lista(dados.get("fontes_oficiais"))),
+        dominios_oficiais=tuple(d.lower().strip(".") for d in
+                                _lista(dados.get("dominios_oficiais"))),
         fontes_de_sc=tuple(f.lower() for f in _lista(dados.get("fontes_de_sc"))),
         prova_de_sc=_lista(dados.get("prova_de_sc")) or ("santa catarina",),
     )

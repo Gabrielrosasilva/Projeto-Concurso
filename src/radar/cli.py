@@ -1633,6 +1633,11 @@ def acompanhar(
                           "ficam no histórico como não confirmado.[/]")
         if resultado["repetidas"]:
             console.print(f"[dim]{resultado['repetidas']} já conhecida(s), ignorada(s).[/]")
+        if resultado["rebaixadas"]:
+            console.print(f"[yellow]{len(resultado['rebaixadas'])} declarada(s) oficial "
+                          "virou(viraram) notícia, pelo domínio do link:[/]")
+            for motivo in resultado["rebaixadas"]:
+                console.print(f"  - {escape(motivo)}")
         if resultado["recusas"]:
             console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
             for motivo in resultado["recusas"]:

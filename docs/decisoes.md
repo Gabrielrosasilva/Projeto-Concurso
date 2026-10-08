@@ -4619,6 +4619,22 @@ viraram estudo extra "Onde: Radar". Copia antes em
        `Marco.ressalva`. O 🟡 sozinho passava batido, e o Concursos no Brasil
        marca quase tudo como edital publicado. Marco da banca (🟢), da
        pesquisa conferida (🟣) e o "aguardando" nao levam.
+     - **"oficial" na pesquisa e o DOMINIO do link, nao o que a IA declara**
+       (08/10, pendencia J). Na pesquisa de 07/10, a copia do Diario Oficial
+       no `cdn.direcaoconcursos.com.br` (site de curso) entrou como
+       `tipo_de_fonte: oficial`. Agora o `importar_novidades` so mantem
+       "oficial" quando o link termina em `.gov.br`, `.leg.br`, `.jus.br` ou
+       `.mp.br` (fixos no codigo: so orgao publico registra) ou num dominio de
+       banca da chave nova `dominios_oficiais` do `config/acompanhamentos.yml`
+       (`fepese.org.br`, `ieses.org`; vale o subdominio, e a comparacao e pelo
+       fim do nome com o ponto antes - `gov.br.qualquer.com` nao passa). O
+       resto vira "noticia" e entra assim mesmo (nao e recusa: o fato pode
+       ser bom, so a fonte e de segunda mao); o importar devolve
+       `rebaixadas`, uma linha com o dominio e o motivo, e o `radar acompanhar
+       --importar` as mostra. "noticia" nunca sobe a "oficial". A instrucao
+       da pesquisa diz a regra. Das 20 pesquisas ja gravadas, 2 mudaram (os
+       editais do CFO e do CFP de 27/01, no CDN do curso); a da FEPESE e a da
+       Camara de Florianopolis ficaram, com sua aprovacao.
      - **a pesquisa de uma carreira so** (08/10, pendencia J): `radar
        acompanhar --pedido --carreira "<nome>"`. O nome e o do
        `config/acompanhamentos.yml`, sem diferenciar acento nem caixa (o

@@ -1,0 +1,45 @@
+{
+  "_sobre": "As 4 novidades que a pesquisa de 07/10/2026 declarou 'oficial' (data/acompanhamentos.json): duas com link no CDN de um curso, que o dominio rebaixa a noticia, e duas que ficam (FEPESE e .gov.br).",
+  "novidades": [
+    {
+      "data": "2026-09-30",
+      "marco": "outro",
+      "descricao": "O concurso de 2019 da SAP (FEPESE) ainda publica atos: convocou candidatos sub judice para a avaliação psicológica. Não é concurso novo.",
+      "valor": "convocação sub judice",
+      "link": "https://sap.fepese.org.br",
+      "fonte": "FEPESE",
+      "tipo_de_fonte": "oficial",
+      "confirmado": true
+    },
+    {
+      "data": "2026-05-13",
+      "marco": "outro",
+      "descricao": "Sancionada a Lei Complementar 788/2026, que altera o plano de cargos e salários da Guarda Municipal de Florianópolis.",
+      "valor": "LC 788/2026",
+      "link": "https://www.cmf.sc.gov.br/assinatura/assinado/2026/05/2605131752095CC176.pdf?vh=e33c312",
+      "fonte": "Câmara Municipal de Florianópolis",
+      "tipo_de_fonte": "oficial",
+      "confirmado": true
+    },
+    {
+      "data": "2026-01-27",
+      "marco": "edital",
+      "descricao": "Publicado no Diário Oficial de SC o edital do Curso de Formação de Oficiais (Cadete BM): 10 vagas e 10 de cadastro reserva, nível superior.",
+      "valor": "10 vagas",
+      "link": "https://cdn.direcaoconcursos.com.br/uploads/2026/01/diarioOficial-2-58-77.pdf",
+      "fonte": "Diário Oficial de SC nº 22684 (cópia na Direção Concursos)",
+      "tipo_de_fonte": "oficial",
+      "confirmado": true
+    },
+    {
+      "data": "2026-01-27",
+      "marco": "edital",
+      "descricao": "Publicado no Diário Oficial de SC o edital do Curso de Formação de Praças (Soldado BM): 100 vagas e 10 de cadastro reserva, nível superior.",
+      "valor": "100 vagas",
+      "link": "https://cdn.direcaoconcursos.com.br/uploads/2026/01/diarioOficial-2-40-57.pdf",
+      "fonte": "Diário Oficial de SC nº 22684 (cópia na Direção Concursos)",
+      "tipo_de_fonte": "oficial",
+      "confirmado": true
+    }
+  ]
+}

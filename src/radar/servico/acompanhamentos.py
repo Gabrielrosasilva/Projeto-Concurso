@@ -30,6 +30,7 @@ import threading
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
+from urllib.parse import urlparse
 
 from sqlalchemy import select
 
@@ -504,6 +505,33 @@ MARCOS = ("autorizacao", "comissao", "banca", "edital", "inscricoes", "prova",
           "retificacao", "outro")
 TIPOS_DE_FONTE = ("oficial", "noticia")
 
+#: Sufixos que so orgao publico registra no registro.br. A banca nao tem
+#: sufixo proprio: ela vem do `dominios_oficiais` do YAML.
+SUFIXOS_DE_GOVERNO = ("gov.br", "leg.br", "jus.br", "mp.br")
+
+
+def _dominio(link: str) -> str:
+    return (urlparse(link).hostname or "").rstrip(".")
+
+
+def link_oficial(link: str) -> bool:
+    """O link e do governo ou de uma banca do YAML? Compara pelo FIM do nome,
+    com o ponto antes: `sap.fepese.org.br` passa, `gov.br.qualquer.com` e
+    `cdn.direcaoconcursos.com.br` nao."""
+    dominio = _dominio(link)
+    aceitos = SUFIXOS_DE_GOVERNO + carreiras.regras().dominios_oficiais
+    return any(dominio == d or dominio.endswith("." + d) for d in aceitos)
+
+
+def tipo_de_fonte_pelo_link(declarado: str, link: str) -> tuple[str, str | None]:
+    """O tipo que vale e, quando a IA disse "oficial" e o link nao e, o motivo
+    do rebaixamento. A IA declara; quem decide e o dominio - na pesquisa de
+    07/10 a copia do Diario Oficial no CDN de um curso entrou como oficial."""
+    if declarado != "oficial" or link_oficial(link):
+        return declarado, None
+    return "noticia", (f"o domínio {_dominio(link) or '(nenhum)'} não é de governo "
+                       f"nem de banca do dominios_oficiais")
+
 #: Palavra de quem ainda nao sabe. Fato com ela vira "nao confirmado".
 ESPECULACAO = re.compile(
     r"\b(deve|devem|devera|deverao|pode|podem|podera|poderao|previsao|previsto|"
@@ -518,6 +546,7 @@ Pesquise na internet o que aconteceu de NOVO com o concurso desta carreira, de S
 Regras - a resposta que fugir delas e recusada:
 - So FATO com data e link: o ato publicado, a pagina da banca, o diario oficial, a noticia que relata um fato. Nunca invente link: copie a URL que voce abriu.
 - Prefira a fonte oficial (diario oficial do estado ou do municipio, site do orgao, site da banca). Noticia de site de concurso vale, com tipo_de_fonte "noticia".
+- tipo_de_fonte "oficial" so quando o LINK e do proprio orgao (.gov.br, .leg.br, .jus.br, .mp.br) ou da banca. A copia do diario oficial no site de um curso e "noticia": o radar confere pelo dominio e rebaixa.
 - Previsao, expectativa, "deve sair", "pode abrir", promessa de politico: e RUMOR. Se mesmo assim valer registrar, ponha "confirmado": false.
 - Nao repita o que esta em `ja_sei` (os links e os fatos que o radar ja tem).
 - So o que aconteceu nos ultimos 12 meses. Concurso de outro estado nao entra.
@@ -613,8 +642,10 @@ def importar_novidades(lote: dict, respostas: list[dict], modelo: str,
                        hoje: date | None = None) -> dict:
     """Confere a resposta e grava o que presta em data/acompanhamentos.json.
 
-    Devolve {"gravadas", "repetidas", "rumores", "recusas"}. Nada aqui toca o
-    banco: a pesquisa nunca muda a situacao de um concurso.
+    Devolve {"gravadas", "repetidas", "rumores", "recusas", "rebaixadas"}:
+    `rebaixadas` diz, uma por linha, a "oficial" que o dominio do link fez
+    virar "noticia". Nada aqui toca o banco: a pesquisa nunca muda a situacao
+    de um concurso.
     """
     hoje = hoje or agora().astimezone(fuso_local()).date()
     mais_velha = hoje - timedelta(days=carreiras.regras().janela_da_edicao_em_dias)
@@ -628,7 +659,7 @@ def importar_novidades(lote: dict, respostas: list[dict], modelo: str,
          normalizar(p.get("descricao") or "")) for p in existentes
     }
 
-    novas, recusas, repetidas, rumores = [], [], 0, 0
+    novas, recusas, rebaixadas, repetidas, rumores = [], [], [], 0, 0
     criado_em = agora().isoformat()
 
     for resposta in respostas:
@@ -678,6 +709,10 @@ def importar_novidades(lote: dict, respostas: list[dict], modelo: str,
                 repetidas += 1
                 continue
 
+            tipo_de_fonte, motivo = tipo_de_fonte_pelo_link(tipo_de_fonte, link)
+            if motivo:
+                rebaixadas.append(_recusa(pedido["id"], f"{motivo} ({link})"))
+
             confirmado = item.get("confirmado") is True
             if confirmado and ESPECULACAO.search(normalizar(descricao)):
                 # A IA disse que e fato e escreveu como previsao: vale o texto.
@@ -707,7 +742,7 @@ def importar_novidades(lote: dict, respostas: list[dict], modelo: str,
     if novas:
         _alterar(lambda dados: dados.setdefault("pesquisas", []).extend(novas))
     return {"gravadas": len(novas), "repetidas": repetidas, "rumores": rumores,
-            "recusas": recusas}
+            "recusas": recusas, "rebaixadas": rebaixadas}
 
 
 def conferir(pesquisa_id: str, confere: bool) -> bool:

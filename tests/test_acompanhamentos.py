@@ -13,6 +13,7 @@ passado distante, para nenhum teste depender do dia de hoje.
 """
 import json
 import shutil
+from pathlib import Path
 from datetime import date, timedelta
 
 import pytest
@@ -33,6 +34,7 @@ janela_da_edicao_em_dias: 365
 novidades_desde: '2000-01-01'
 telegram_desde: '2000-01-01'
 fontes_oficiais: [fepese, ieses]
+dominios_oficiais: [fepese.org.br, ieses.org]
 fontes_de_sc: [fepese]
 prova_de_sc: [santa catarina]
 acompanhamentos:
@@ -431,6 +433,69 @@ def test_novidade_torta_e_recusada_e_contada(ambiente, mudanca, motivo):
     resultado = _importar(_novidade(**mudanca))
     assert resultado["gravadas"] == 0
     assert motivo in resultado["recusas"][0]
+
+
+@pytest.mark.parametrize("link, oficial", [
+    ("https://doe.sc.gov.br/ato-1", True),
+    ("https://www.cmf.sc.gov.br/lei.pdf", True),
+    ("https://www.alesc.sc.leg.br/x", True),
+    ("https://www.tjsc.jus.br/x", True),
+    ("https://www.mpsc.mp.br/x", True),
+    ("https://sap.fepese.org.br", True),
+    ("https://FEPESE.org.br./edital", True),
+    ("https://www.ieses.org/x", True),
+    ("https://cdn.direcaoconcursos.com.br/uploads/diarioOficial.pdf", False),
+    ("https://gov.br.qualquer.com/x", False),
+    ("https://naofepese.org.br/x", False),
+    ("https://ieses.org.falso.com/x", False),
+])
+def test_oficial_e_o_dominio_do_link(ambiente, link, oficial):
+    assert cartoes.link_oficial(link) is oficial
+
+
+def test_oficial_com_link_de_curso_vira_noticia_e_e_contada(ambiente):
+    """A pesquisa de 07/10: a copia do Diario Oficial no CDN de um curso veio
+    como "oficial". Entra, mas como noticia, e o importar diz por que."""
+    fixture = Path(__file__).parent / "fixtures" / "acompanhamentos_oficiais_0710.json"
+    novidades = json.loads(fixture.read_text(encoding="utf-8"))["novidades"]
+
+    resultado = _importar(*novidades, hoje=date(2026, 10, 7))
+
+    assert resultado["gravadas"] == 4 and not resultado["recusas"]
+    assert len(resultado["rebaixadas"]) == 2
+    assert all("cdn.direcaoconcursos.com.br" in r for r in resultado["rebaixadas"])
+    gravadas = json.loads(cartoes.caminho().read_text(encoding="utf-8"))["pesquisas"]
+    tipos = {p["link"].split("/")[2]: p["tipo_de_fonte"] for p in gravadas}
+    assert tipos == {"sap.fepese.org.br": "oficial", "www.cmf.sc.gov.br": "oficial",
+                     "cdn.direcaoconcursos.com.br": "noticia"}
+
+
+def test_noticia_nunca_sobe_a_oficial(ambiente):
+    resultado = _importar(_novidade(tipo_de_fonte="noticia"))
+    assert resultado["gravadas"] == 1 and resultado["rebaixadas"] == []
+    gravada = json.loads(cartoes.caminho().read_text(encoding="utf-8"))["pesquisas"][0]
+    assert gravada["tipo_de_fonte"] == "noticia"
+
+
+def test_o_comando_diz_quantas_rebaixou(ambiente):
+    from typer.testing import CliRunner
+
+    from radar.cli import app as cli
+    from radar.servico import manual
+
+    lote = cartoes.pedido_de_pesquisa()
+    manual.salvar_pedido(lote)
+    resposta = ambiente.parent / "resposta.json"
+    resposta.write_text(json.dumps({
+        "lote": lote["lote"], "modelo": "Claude Code, em teste",
+        "respostas": _resposta(lote, _novidade(link="https://cdn.curso.com.br/doe.pdf")),
+    }), encoding="utf-8")
+
+    saida = CliRunner().invoke(cli, ["acompanhar", "--importar", str(resposta)])
+
+    texto = " ".join(saida.output.split())
+    assert saida.exit_code == 0, saida.output
+    assert "1 declarada(s) oficial" in texto and "cdn.curso.com.br" in texto
 
 
 def test_data_no_futuro_e_fato_antigo_sao_recusados(ambiente):
