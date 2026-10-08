@@ -4613,6 +4613,12 @@ viraram estudo extra "Onde: Radar". Copia antes em
        item que nao e noticia, a partir de `telegram_desde` e dos ultimos 30
        dias, pelo mesmo `avisado_em` do favorito (sai uma vez so). Roda no
        `radar avisar` do Actions, depois do favorito e antes do concurso novo.
+     - **o marco que veio so do site de noticias diz isso por extenso**
+       (08/10, pendencia J): "· segundo site de notícias" no cartao e
+       "(segundo site de notícias)" no `radar acompanhar`, pelo
+       `Marco.ressalva`. O 🟡 sozinho passava batido, e o Concursos no Brasil
+       marca quase tudo como edital publicado. Marco da banca (🟢), da
+       pesquisa conferida (🟣) e o "aguardando" nao levam.
 
 ## A correcao na hora, as geradas nunca feitas e a nota da faixa (07/10/2026)
 

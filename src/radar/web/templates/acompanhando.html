@@ -26,6 +26,7 @@
     .novidade{font-size:var(--tam-sm);margin:0 0 var(--esp-2);padding:var(--esp-2) var(--esp-3);
       border-radius:var(--raio-sm);background:var(--cor-acao-fundo)}
     .ds .novidade a,.ds .tempo a,.ds .marcos a{color:var(--cor-texto)}
+    .marcos .ressalva{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .marcos{list-style:none;margin:0 0 var(--esp-3);padding:0;display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-1) var(--esp-3);font-size:var(--tam-sm)}
     .marcos .rot{display:block;font-size:var(--tam-xs);text-transform:uppercase;letter-spacing:.06em;
@@ -210,6 +211,7 @@
               {% if m.sabido %}
                 {{ selo(m.selo, curto=True) }}
                 {% if m.link %}<a href="{{ m.link }}" target="_blank" rel="noopener">{{ m.valor }}</a>{% else %}{{ m.valor }}{% endif %}
+                {% if m.ressalva %}<span class="ressalva">· {{ m.ressalva }}</span>{% endif %}
               {% else %}<span class="ds-suave">aguardando</span>{% endif %}
             </li>
           {% endfor %}

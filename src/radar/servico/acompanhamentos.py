@@ -167,6 +167,18 @@ class Marco:
     def sabido(self) -> bool:
         return self.selo is not None
 
+    @property
+    def ressalva(self) -> str | None:
+        """O que o 🟡 sozinho nao diz: o marco que veio SO do site de
+        noticias vem com "segundo site de noticias" por extenso (pendencia J).
+        O Concursos no Brasil marca quase tudo como edital publicado, e o
+        emoji passa batido; a banca (🟢) e a pesquisa conferida (🟣) nao."""
+        return FRASE_DO_SITE_DE_NOTICIAS if self.selo == NOTICIA else None
+
+
+#: A ressalva do marco que veio so do site de noticias.
+FRASE_DO_SITE_DE_NOTICIAS = "segundo site de notícias"
+
 
 @dataclass
 class Cartao:

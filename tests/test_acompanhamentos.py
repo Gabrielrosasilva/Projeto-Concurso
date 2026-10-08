@@ -198,6 +198,42 @@ def test_noticia_nao_diz_situacao(ambiente):
     assert _cartao("Polícia Civil SC").referencia is None
 
 
+def test_marco_so_do_site_de_noticias_diz_por_extenso(ambiente):
+    """Pendencia J: o 🟡 sozinho passa batido, e o site de noticias marca
+    quase tudo como edital publicado. A banca e a pesquisa nao levam."""
+    _semear(_item("https://x.test/pc", "Concurso PC SC tem edital publicado",
+                  situacao="edital_publicado", banca="FGV"))
+    marcos = {m.nome: m for m in _cartao("Polícia Civil SC").marcos}
+
+    assert marcos["Edital"].selo == NOTICIA
+    assert marcos["Edital"].ressalva == "segundo site de notícias"
+    assert marcos["Banca"].ressalva == "segundo site de notícias"
+    # O que ainda nao se sabe nao tem de quem ser "segundo".
+    assert marcos["Prova"].ressalva is None
+
+
+def test_marco_da_banca_e_da_pesquisa_nao_tem_ressalva(ambiente):
+    _semear(_item("https://fepese.test/pc", "2026 – Concurso Polícia Civil SC",
+                  fonte="fepese", situacao="edital_publicado", banca="FEPESE"))
+    marcos = {m.nome: m for m in _cartao("Polícia Civil SC").marcos}
+    assert marcos["Edital"].selo == OFICIAL and marcos["Edital"].ressalva is None
+    assert cartoes.Marco("Banca", "IBFC", IA).ressalva is None
+
+
+def test_a_ressalva_sai_no_cartao_e_no_terminal(ambiente):
+    from typer.testing import CliRunner
+
+    from radar.cli import app as cli
+
+    _semear(_item("https://x.test/pc", "Concurso PC SC tem edital publicado",
+                  situacao="edital_publicado"))
+
+    assert "· segundo site de notícias" in TestClient(app).get("/acompanhando").text
+    # O Rich quebra a linha na largura do terminal: compara sem as quebras.
+    saida = " ".join(CliRunner().invoke(cli, ["acompanhar"]).output.split())
+    assert "🟡 (segundo site de notícias)" in saida
+
+
 # --- o sino: so fato, e some quando eu marco visto ------------------------------
 
 def test_fato_acende_o_sino_e_o_visto_apaga(ambiente):

@@ -1679,6 +1679,7 @@ def acompanhar(
         console.print(f"   {situacao}")
         console.print("   " + " · ".join(
             f"{m.nome}: {m.valor}" + (f" {SELOS[m.selo].emoji}" if m.selo else "")
+            + (f" ({m.ressalva})" if m.ressalva else "")
             for m in cartao.marcos
         ))
         for linha in cartao.novidades[:3]:

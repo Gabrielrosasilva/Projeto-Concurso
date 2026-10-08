@@ -433,10 +433,10 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   Florianopolis e BC): uma por conversa, cada uma um arquivo em
   `collectors/`, com o robots.txt conferido e teste com fixture. Precisa de
   voce colar a pagina real - a sessao web nao tem internet;
-- 🟡 **A situacao do site de noticias e fraca**: o Concursos no Brasil marca
-  quase tudo como `edital_publicado`, e o cartao mostra isso com 🟡. O
-  marco que vier so dele poderia dizer "segundo site de noticias" por
-  extenso, ou esperar a pagina detalhada;
+- ✅ **A situacao do site de noticias e fraca** (feito em 08/10): o marco
+  que vem so do Concursos no Brasil diz "segundo site de notícias" por
+  extenso, no cartao e no `radar acompanhar` (decisao 141). Esperar a pagina
+  detalhada continua possivel, se um dia valer;
 - ⚪ **O botao por cartao**: a coleta e uma so para todas as fontes, entao o
   botao e um so, no topo. A pesquisa do Claude Code por carreira (`--pedido`
   de um cartao so) cabe numa opcao `--carreira`;
