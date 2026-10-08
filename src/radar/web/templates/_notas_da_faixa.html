@@ -1,0 +1,21 @@
+{# As notas de um tema (decisao 142): o "como foi" que eu escrevi em cada
+   faixa, da mais nova para a mais velha. A ficha e o Meu desempenho mostram
+   o mesmo; a conta (a soma dos chutes, o ultimo "entendi") vem do servico. #}
+{% macro notas_do_tema(g, com_tema=False) %}
+<div class="notas-do-tema">
+  {% if com_tema %}<p class="notas-cabeca"><b>{{ g.tema }}</b> <span class="ds-suave">· {{ g.materia }}</span></p>{% endif %}
+  <p class="ds-pequeno">
+    {% if g.entendi %}Por último: <b>{{ g.entendi | lower }}</b>{% endif %}
+    {%- if g.chutes is not none %}{{ ' · ' if g.entendi }}🎲 {{ g.chutes }} chutada{{ 's' if g.chutes != 1 }} fora do radar{% endif %}
+    {%- if g.ainda_nao_entendi %} · <b>fica no Ciclo 2</b>{% endif %}
+  </p>
+  <ul class="notas-lista">
+    {% for n in g.notas %}
+      <li><span class="ds-suave">{{ n.data.strftime('%d/%m') }} · {{ n.titulo }}</span>
+        {%- if n.entendi_texto %} · {{ n.entendi_texto }}{% endif %}
+        {%- if n.chutes is not none %} · {{ n.chutes }} no chute{% endif %}
+        {% if n.nota %}<br>“{{ n.nota }}”{% endif %}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endmacro %}

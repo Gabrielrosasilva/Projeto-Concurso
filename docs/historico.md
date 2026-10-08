@@ -2339,3 +2339,19 @@ virou "Questões reais (Qconcursos e provas)", "Treino de IA no radar" e
 "Total do dia"; o "fiz no Qconcursos" vem vazio; a faixa feita no radar fecha
 com o ✓ vazio e guarda so o tempo; e a faixa e a ficha mostram o treino de IA
 do tema, fora do acerto. Rodados so os testes tocados (174); a suite inteira ficou para depois, a seu pedido.
+
+## A correcao na hora, as geradas nunca feitas e a nota da faixa (07/10)
+
+Tres pedidos seus, de uma vez (decisao 142). No treino, a questao volta
+corrigida depois da letra: a certa em verde, a marcada em vermelho, a
+explicacao e os macetes, as bolinhas da rodada, o "🔥 N seguidas" e o
+"Proxima ->"; no erro, o caderno de erros abre preenchido. O diagnostico, o
+simulado no radar e o R+7 continuam so no fim. A caixa "vou no chute",
+marcada antes da letra, grava o chute ao lado do acerto. O sorteio das
+geradas poe as nunca feitas primeiro (depois as erradas, depois as mais
+antigas), e a faixa avisa com metade e com todas feitas, ja com os 3 passos
+de gerar - no dado real, o no de Substantivo e adjetivo ja estava todo feito.
+E cada faixa da tela Hoje ganhou o "📝 Como foi" (chutes fora do radar,
+entendi, nota), separado do check, relido na ficha do tema e no Meu
+desempenho, com o que eu nao entendi na frente: a lista do Ciclo 2. O banco
+foi para a versao 7 (copia em `data/copias/migracao-v6-para-v7-...`).

@@ -408,6 +408,11 @@ class RespostaDeSimulado(Base):
     acertou: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
     respondida_em: Mapped[datetime | None] = mapped_column(DataHoraUTC, nullable=True)
 
+    # O "vou no chute" marcado ANTES de escolher a letra (decisao 142). Nulo
+    # nas respostas de antes dele: ali nao se sabe, e nao e o mesmo que "nao".
+    # Nao muda o acerto: e um numero a mais ao lado dele, nunca dentro.
+    chutou: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+
     def __repr__(self) -> str:
         return f"<Resposta q{self.questao_id} = {self.escolhida}>"
 
@@ -561,6 +566,11 @@ class EstadoDoDia(Base):
     faixas_feitas: Mapped[list[Any]] = mapped_column(JSON, default=list)
     # 30 ou 60 (minutos): o Plano B que escolhi no dia. None = nenhum.
     plano_b: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Lista de {bloco, indice, titulo, materia, chutes, entendi, nota}: o que
+    # eu disse de como foi cada faixa (decisao 142). Fora do `faixas_feitas`
+    # de proposito: desmarcar a faixa nao apaga a nota, e da para escrever
+    # antes de marcar. Nula nos dias de antes dela.
+    notas_das_faixas: Mapped[list[Any] | None] = mapped_column(JSON, nullable=True)
     atualizado_em: Mapped[datetime] = mapped_column(DataHoraUTC, default=agora)
 
     def __repr__(self) -> str:

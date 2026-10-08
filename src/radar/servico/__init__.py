@@ -82,6 +82,7 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     _sortear_questoes,
     buscar_simulado,
     contar_questoes_do_alvo,
+    corrige_na_hora,
     criar_simulado,
     criar_simulado_do_alvo,
     criar_simulado_de_erros,
@@ -95,6 +96,7 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     materias_disponiveis,
     materias_universais,
     questao_atual,
+    questao_respondida,
     questoes_erradas,
     evolucao,
     responder,
@@ -173,6 +175,8 @@ from radar.servico.avisos import (      # noqa: F401 - a fachada
 )
 # A aba Concursos > Acompanhando: um cartao por carreira (decisao 141).
 from radar.servico import acompanhamentos  # noqa: F401 - usado pela web e CLI
+# A nota de cada faixa: como fui, quantas chutei, se entendi (decisao 142).
+from radar.servico import notas_da_faixa  # noqa: F401 - usado pela web
 from radar.servico.coleta import (      # noqa: F401 - a fachada
     CAMPOS_CALCULADOS,
     _anel_da_lotacao,

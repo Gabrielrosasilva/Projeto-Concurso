@@ -22,6 +22,11 @@
     .texto-base{margin:var(--esp-1) 0 0;font-size:var(--tam-xs);white-space:pre-line;
       border-left:3px solid var(--cor-borda);padding-left:var(--esp-3)}
     .frase-padrao{margin:var(--esp-2) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .notas-do-tema{margin:var(--esp-3) 0;padding-top:var(--esp-2);border-top:1px solid var(--cor-borda)}
+    .notas-do-tema:first-of-type{border-top:0}
+    .notas-do-tema p{margin:var(--esp-1) 0}
+    .notas-lista{margin:var(--esp-1) 0;padding-left:var(--esp-5);font-size:var(--tam-sm)}
+    .notas-lista li{margin:var(--esp-1) 0}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -311,6 +316,16 @@
       {% for m in f.quando_revisar %}<li>{{ s(m.origem) }} {{ m.texto }}</li>{% endfor %}
     </ul>
   </section>
+
+  {# O que eu escrevi nas faixas deste tema (decisao 142): diario, como o
+     caderno de erros - nao entra em acerto nenhum. #}
+  {% if notas %}
+  {% from "_notas_da_faixa.html" import notas_do_tema %}
+  <section class="ds-cartao" id="como-fui">
+    <h2>Como eu disse que fui</h2>
+    {{ notas_do_tema(notas) }}
+  </section>
+  {% endif %}
 
   <section class="ds-cartao">
     <h2>Meu desempenho neste conteúdo</h2>

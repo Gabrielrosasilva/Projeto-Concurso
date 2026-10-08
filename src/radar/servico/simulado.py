@@ -376,10 +376,14 @@ def questao_atual(
         return resposta, s.get(_tabela_da_resposta(resposta), resposta.questao_id)
 
 
-def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
+def responder(simulado_id: int, questao_id: int, letra: str,
+              chutou: bool = False) -> bool | None:
     """Grava a resposta e devolve se acertou. None se a questao nao e desta
     rodada, ou se ja foi respondida - recarregar a pagina nao pode contar
-    duas vezes."""
+    duas vezes.
+
+    `chutou` e o "vou no chute" marcado antes da letra (decisao 142): fica ao
+    lado do acerto, e o acerto continua o mesmo."""
     criar_tabelas()
     letra = (letra or "").strip().lower()[:1]
 
@@ -399,6 +403,7 @@ def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
         resposta.escolhida = letra
         resposta.acertou = letra == questao.resposta
         resposta.respondida_em = agora()
+        resposta.chutou = bool(chutou)
 
         # acabou? marca o fim da rodada
         faltam = s.scalar(
@@ -412,6 +417,41 @@ def responder(simulado_id: int, questao_id: int, letra: str) -> bool | None:
                 simulado.finalizado_em = agora()
 
         return resposta.acertou
+
+
+#: As rodadas que MEDEM e por isso so mostram o resultado no fim, como na
+#: prova (decisao 142): o diagnostico e o simulado no radar ("composta",
+#: decisao 67) e o R+7 dos erros deles ("erros_das_rodadas", decisao 70). Ver
+#: a correta no meio mudaria o que elas medem.
+RODADAS_QUE_MEDEM = ("composta", "erros_das_rodadas")
+
+
+def corrige_na_hora(simulado: Simulado) -> bool:
+    """A rodada mostra o certo e o errado logo depois de cada questao?
+
+    Todas, menos as que medem: no treino, ver o erro na hora e o que ensina.
+    """
+    return (simulado.filtros or {}).get("rodada") not in RODADAS_QUE_MEDEM
+
+
+def questao_respondida(
+    simulado_id: int, questao_id: int,
+) -> tuple[RespostaDeSimulado, QuestaoDeProva | QuestaoGerada] | None:
+    """A resposta ja dada a uma questao da rodada, e a questao. None se a
+    questao nao e desta rodada ou ainda nao foi respondida - a correcao so
+    aparece depois da letra gravada, e nunca no lugar dela."""
+    criar_tabelas()
+    with sessao() as s:
+        resposta = s.scalar(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.questao_id == questao_id)
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+        )
+        if resposta is None:
+            return None
+        questao = s.get(_tabela_da_resposta(resposta), questao_id)
+        return (resposta, questao) if questao is not None else None
 
 
 def simulados_recentes(limite: int = 10) -> list[Simulado]:
@@ -450,6 +490,8 @@ class ItemDeRevisao:
     numero: int | None = None
     ano: int | None = None
     banca: str | None = None
+    #: O "vou no chute" marcado antes da letra (decisao 142).
+    chutou: bool = False
 
     @property
     def origem(self) -> str:
@@ -503,6 +545,7 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             numero=getattr(questao, "numero", None),
             ano=getattr(questao, "ano", None),
             banca=getattr(questao, "banca", None),
+            chutou=bool(resposta.chutou),
         ))
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)

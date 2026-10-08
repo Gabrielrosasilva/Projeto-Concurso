@@ -25,6 +25,7 @@ from radar.models import (
     Simulado,
 )
 from radar.questoes import chave_da_questao
+from radar.servico import metricas
 
 log = logging.getLogger(__name__)
 
@@ -852,9 +853,27 @@ def das_faixas(blocos, plano=None) -> dict:
         return {}
     sem_ja = {chave: fichas.geradas_da_faixa(faixa, escrita, {})
               for chave, faixa, escrita in candidatas}
-    ja = contagem_por_no(n.no for g in sem_ja.values() for n in g.nos)
-    return {chave: fichas.geradas_da_faixa(faixa, escrita, ja)
+    nos = [n.no for g in sem_ja.values() for n in g.nos]
+    ja = contagem_por_no(nos)
+    feitas = metricas.geradas_feitas_por_no(nos)
+    return {chave: fichas.geradas_da_faixa(faixa, escrita, ja, feitas)
             for chave, faixa, escrita in candidatas}
+
+
+def estoque_da_rodada(simulado) -> list:
+    """[fichas.GeradasDoNo] dos nos de uma rodada de geradas: quantas o no
+    tem, quantas eu ja fiz e, com metade ou todas feitas, o aviso e o pedido
+    para gerar mais (decisao 142). Vazio na rodada sem no (a das novas, a
+    so de materia): ali nao ha estoque a dizer."""
+    from radar import fichas
+
+    filtros = simulado.filtros or {}
+    nos = list(filtros.get("conteudos") or []) or (
+        [filtros["conteudo"]] if filtros.get("conteudo") else [])
+    if not nos:
+        return []
+    return fichas.geradas_por_no(filtros.get("quantidade") or 0, nos,
+                                 contagem_por_no(nos), metricas.geradas_feitas_por_no(nos))
 
 
 def nos_do_cronograma(hoje=None, plano=None, dias_a_frente: int = 7) -> list:
@@ -929,8 +948,27 @@ def _sortear(
     with sessao() as s:
         candidatas = list(s.scalars(consulta))
 
+    return [q.id for q in _na_ordem_de_treino(candidatas)[:quantidade]]
+
+
+def _na_ordem_de_treino(candidatas: list[QuestaoGerada]) -> list[QuestaoGerada]:
+    """Primeiro as que eu nunca fiz; so depois as repetidas (decisao 142).
+
+    Das repetidas, a que eu errei da ultima vez vem antes da que acertei, e a
+    mais antiga antes da mais nova: repetir serve para rever o que nao ficou.
+    Dentro de cada grupo a ordem e sorteada - o que pesa e o grupo.
+    """
     random.shuffle(candidatas)
-    return [q.id for q in candidatas[:quantidade]]
+    ultimas = metricas.ultimas_das_geradas()
+    nunca = [q for q in candidatas if q.id not in ultimas]
+    repetidas = [q for q in candidatas if q.id in ultimas]
+
+    def peso(q):
+        r = ultimas[q.id]
+        return (bool(r.acertou), r.respondida_em is not None, r.respondida_em or 0)
+
+    # `sorted` e estavel: dentro do mesmo peso fica a ordem sorteada.
+    return nunca + sorted(repetidas, key=peso)
 
 
 def _sortear_misturado(quantidade: int, conteudos: list[str]) -> list[int]:
@@ -981,6 +1019,9 @@ def criar_simulado(
         ids = _sortear_misturado(quantidade, conteudos)
     else:
         ids = _sortear(quantidade, materia, impressoes, conteudo)
+        # O sorteio devolve na ordem de prioridade (as nunca feitas na
+        # frente); na rodada, a ordem e embaralhada como sempre foi.
+        random.shuffle(ids)
     if not ids:
         return None
 

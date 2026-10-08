@@ -551,6 +551,10 @@ def _resposta_como_linha(resposta: RespostaDeSimulado, s) -> dict:
         "acertou": resposta.acertou,
         "respondida_em": _serializar(resposta.respondida_em),
     }
+    # So quando ha o que dizer: a chave em toda linha mudaria o arquivo
+    # inteiro, e a resposta antiga nao tem "nao chutei" - tem "nao se sabe".
+    if resposta.chutou is not None:
+        linha["chutou"] = resposta.chutou
     if resposta.gerada:
         linha["impressao"] = s.scalar(
             select(QuestaoGerada.impressao)
@@ -713,6 +717,8 @@ def importar_simulados(caminho: Path | None = None) -> tuple[int, int]:
                     minha.respondida_em = _desserializar(
                         "respondida_em", r.get("respondida_em"), datas
                     )
+                if minha.chutou is None and r.get("chutou") is not None:
+                    minha.chutou = r["chutou"]
 
     if de_fora:
         log.warning(
@@ -870,12 +876,17 @@ def caminho_dos_estados() -> Path:
 
 
 def _estado_como_linha(estado: EstadoDoDia) -> dict:
-    return {
+    linha = {
         "data": estado.data.isoformat(),
         "faixas_feitas": list(estado.faixas_feitas or []),
         "plano_b": estado.plano_b,
         "atualizado_em": _serializar(estado.atualizado_em),
     }
+    # So no dia que tem nota (decisao 142): a chave vazia em todo dia mudaria
+    # o arquivo inteiro sem nada novo nele.
+    if estado.notas_das_faixas:
+        linha["notas_das_faixas"] = list(estado.notas_das_faixas)
+    return linha
 
 
 def exportar_estados(caminho: Path | None = None) -> int:
@@ -920,6 +931,7 @@ def importar_estados(caminho: Path | None = None) -> int:
                 estado = EstadoDoDia(data=data)
                 s.add(estado)
             estado.faixas_feitas = list(linha.get("faixas_feitas") or [])
+            estado.notas_das_faixas = list(linha.get("notas_das_faixas") or []) or None
             estado.plano_b = linha.get("plano_b")
             estado.atualizado_em = atualizado_em
             mudaram += 1

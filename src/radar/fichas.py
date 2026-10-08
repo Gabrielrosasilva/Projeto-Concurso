@@ -33,7 +33,7 @@ que no edital e outro assunto. Ficha cujo tema nao tem no que sirva fica com a
 lista vazia - e diz isso -, em vez de ganhar um no inventado (regra 9).
 """
 import re
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import date
 
 from radar import conteudos as arvore
@@ -1295,6 +1295,12 @@ def comando_de_gerar(no: str, quantas: int = 10) -> str:
 # somado ao da faixa). A faixa diz quantas geradas ha em cada no dela e, se
 # faltam, o pedido para gerar - sem criar no e sem aproximar.
 
+#: O que a faixa diz quando o estoque de geradas do no esta acabando
+#: (decisao 142), com as palavras do pedido. Os 3 passos vem junto.
+FRASE_FEZ_TODAS = "Você já fez todas as questões deste tema: está na hora de criar mais."
+FRASE_FEZ_METADE = "Você já tem metade das questões feitas: vamos fazer mais algumas."
+
+
 @dataclass(frozen=True)
 class GeradasDoNo:
     """Um no da faixa: quantas geradas ele tem e quantas pedir."""
@@ -1303,8 +1309,26 @@ class GeradasDoNo:
     geradas: int
     #: A parte das questoes da faixa que cabe a este no.
     cota: int
-    #: Quantas pedir (0 = ja ha o bastante).
+    #: Quantas pedir (0 = ja ha o bastante). Pede tambem quando eu ja fiz
+    #: metade ou todas (decisao 142): o estoque que eu ja vi nao e estoque.
     pedir: int
+    #: Quantas geradas DIFERENTES deste no eu ja fiz.
+    feitas: int = 0
+
+    @property
+    def aviso(self) -> str | None:
+        """"todas", "metade" ou None: o quanto do estoque eu ja fiz."""
+        if not self.geradas:
+            return None
+        if self.feitas >= self.geradas:
+            return "todas"
+        if self.feitas * 2 >= self.geradas:
+            return "metade"
+        return None
+
+    @property
+    def frase_do_aviso(self) -> str | None:
+        return {"todas": FRASE_FEZ_TODAS, "metade": FRASE_FEZ_METADE}.get(self.aviso)
 
     @property
     def comando(self) -> str | None:
@@ -1316,13 +1340,16 @@ class GeradasDoNo:
         return arvore.SEPARADOR.join(arvore.partes(self.no)[1:]) or self.no
 
 
-def geradas_por_no(questoes: int, nos: list[str], ja: dict) -> list[GeradasDoNo]:
+def geradas_por_no(questoes: int, nos: list[str], ja: dict,
+                   feitas: dict | None = None) -> list[GeradasDoNo]:
     """As questoes da faixa divididas entre os nos dela, por igual (o resto
     vai para os primeiros), e quantas pedir em cada um: a cota menos as
     geradas que o no ja tem, no minimo PEDIDO_MINIMO_DE_GERADAS. No com o
-    bastante nao pede nada."""
+    bastante nao pede nada - a nao ser que eu ja tenha feito metade ou todas
+    (`feitas`, decisao 142): ai pede a cota, no minimo o mesmo piso."""
     if not nos:
         return []
+    feitas = feitas or {}
     base, resto = divmod(max(questoes or 0, 0), len(nos))
     saida = []
     for posicao, no in enumerate(nos):
@@ -1330,7 +1357,11 @@ def geradas_por_no(questoes: int, nos: list[str], ja: dict) -> list[GeradasDoNo]
         geradas = int(ja.get(no, 0))
         falta = max(cota - geradas, 0)
         pedir = max(falta, PEDIDO_MINIMO_DE_GERADAS) if falta else 0
-        saida.append(GeradasDoNo(no=no, geradas=geradas, cota=cota, pedir=pedir))
+        item = GeradasDoNo(no=no, geradas=geradas, cota=cota, pedir=pedir,
+                           feitas=min(int(feitas.get(no, 0)), geradas))
+        if not pedir and item.aviso:
+            item = replace(item, pedir=max(cota, PEDIDO_MINIMO_DE_GERADAS))
+        saida.append(item)
     return saida
 
 
@@ -1375,7 +1406,8 @@ class GeradasDaFaixa:
         return min(tem, self.questoes or tem, 30)
 
 
-def geradas_da_faixa(faixa, escrita: "FichaEscrita | None", ja: dict) -> GeradasDaFaixa:
+def geradas_da_faixa(faixa, escrita: "FichaEscrita | None", ja: dict,
+                     feitas: dict | None = None) -> GeradasDaFaixa:
     """As geradas de uma faixa de questoes. Os nos sao os da ficha (decisao
     71); sem ficha, os `nos` do plano ou o `conteudo`. A ficha SEM no fica sem
     no - o assunto que ela escreve pode ser a lei inteira, e contar as geradas
@@ -1392,4 +1424,4 @@ def geradas_da_faixa(faixa, escrita: "FichaEscrita | None", ja: dict) -> Geradas
     return GeradasDaFaixa(
         tema=tema, materia=materia, questoes=questoes,
         filtro=getattr(faixa, "filtro", None),
-        nos=tuple(geradas_por_no(questoes, nos, ja)), sem_no=not nos)
+        nos=tuple(geradas_por_no(questoes, nos, ja, feitas)), sem_no=not nos)

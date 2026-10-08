@@ -4613,3 +4613,56 @@ viraram estudo extra "Onde: Radar". Copia antes em
        item que nao e noticia, a partir de `telegram_desde` e dos ultimos 30
        dias, pelo mesmo `avisado_em` do favorito (sai uma vez so). Roda no
        `radar avisar` do Actions, depois do favorito e antes do concurso novo.
+
+## A correcao na hora, as geradas nunca feitas e a nota da faixa (07/10/2026)
+
+142. **tres pedidos seus de 07/10, fora dos lotes da proposta de melhorias**
+     (a regra "ate 07/11 so o que corrige numero ou prepara o sabado" ficou
+     de lado a seu pedido, para estes tres). Banco na versao 7: o passo 7
+     cria `respostas_de_simulado.chutou` e `estados_do_dia.notas_das_faixas`,
+     as duas nulas nas linhas antigas.
+     - **a correcao na hora, no treino.** Depois da letra, a tela da questao
+       volta com ela corrigida (`/simulado/{id}?ver={questao}`): a marcada
+       em vermelho, a certa em verde, a explicacao e os macetes que o
+       relatorio do fim ja mostrava, o "Proxima ->" (ou "Ver o resultado")
+       e, no erro, "Anotar no caderno de erros" com materia, assunto, fonte
+       (radar), referencia e o motivo "chutei" ja preenchidos. Em cima, uma
+       bolinha por questao (verde, vermelha, vazia), os acertos e "🔥 N
+       seguidas" a partir de 3. A letra nao muda depois (o servico ja recusava
+       a segunda). Sem JavaScript: um formulario so, com a letra no botao.
+       **A rodada que mede nao corrige na hora** (`simulado.RODADAS_QUE_MEDEM`:
+       "composta" - diagnostico e simulado no radar - e "erros_das_rodadas",
+       o R+7): la o `ver` e ignorado e a bolinha da respondida fica cinza; o
+       certo e o errado so no relatorio, como na prova.
+     - **o "vou no chute"**, marcado ANTES da letra (marcar depois de ver o
+       resultado seria marcar so quando erro), em toda rodada, inclusive a
+       que mede. Fica em `chutou`, ao lado do acerto e nunca dentro: o
+       resumo da rodada ganha `chutes` e `acertos_no_chute`, o relatorio diz
+       "🎲 N no chute", a faixa diz os chutes do que respondi no radar por
+       ela (`Numeros.chutes`, que nao entra em `questoes` nem no acerto). A
+       resposta antiga fica nula ("nao se sabe", e nao "nao"); o backup so
+       leva a chave quando ha valor.
+     - **as geradas nunca feitas primeiro.** O sorteio (`geradas._sortear`,
+       e por ele o "Treinar geral") poe na frente as que eu nunca respondi;
+       acabadas, repete a errada da ultima vez antes da acertada, e a mais
+       antiga antes da mais nova (`metricas.ultimas_das_geradas`). A faixa
+       diz "voce ja fez X" (geradas DIFERENTES, `metricas.geradas_feitas_por_no`)
+       e, com metade feita, "Voce ja tem metade das questoes feitas: vamos
+       fazer mais algumas"; com todas, "Voce ja fez todas as questoes deste
+       tema: esta na hora de criar mais" - **e nos dois casos os 3 passos de
+       gerar vem junto** (o no que tinha o bastante passa a pedir a cota, no
+       minimo 5). O relatorio da rodada de geradas mostra o mesmo, por no.
+       A tela de gerar (`nos_do_cronograma`) continua contando so o estoque.
+     - **a nota da faixa ("📝 Como foi")**, em toda faixa da tela Hoje que
+       nao e pausa nem do futuro: quantas chutei fora do radar (so na faixa de
+       questoes, como o "fiz"), "entendi o assunto?" (sim, mais ou menos,
+       nao) e a nota livre (2000 caracteres). Mora em
+       `estados_do_dia.notas_das_faixas`, FORA do `faixas_feitas`: escrevo
+       antes ou depois de marcar, e desmarcar nao apaga; tudo vazio tira.
+       Reconhecida por bloco + indice + titulo, como o check. E diario, como
+       o caderno de erros: nao entra em acerto nenhum. O servico e o
+       `servico/notas_da_faixa.py`; a ficha do tema ("Como eu disse que fui")
+       e o Meu desempenho ("Como eu disse que fui (para o Ciclo 2)") releem,
+       por tema, com o que eu ainda nao entendi (ou entendi mais ou menos) na
+       frente, marcado "fica no Ciclo 2". Vai no `data/estado_do_dia.json`
+       so nos dias que tem nota.

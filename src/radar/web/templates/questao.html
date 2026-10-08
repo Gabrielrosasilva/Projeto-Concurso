@@ -6,7 +6,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Questão {{ resposta.ordem }} de {{ resumo.total }} &middot; Radar</title>
   {# Uma questao por vez, sem distracao: sem a barra de navegacao, sem
-     tabela, sem numero de acerto. So a saida, o progresso e a questao. #}
+     tabela. So a saida, o progresso e a questao. No treino, depois da letra,
+     a mesma tela volta corrigida, com o "Proxima" (decisao 142); na rodada
+     que mede, o certo e o errado so aparecem no relatorio do fim. #}
   <link rel="stylesheet" href="/estatico/design.css">
   <style>
     .foco{max-width:760px;margin:0 auto;padding:var(--esp-4) var(--esp-4) var(--esp-7)}
@@ -14,9 +16,18 @@
       font-size:var(--tam-sm);color:var(--cor-texto-suave);margin-bottom:var(--esp-2)}
     .topo-foco a{text-decoration:none;color:var(--cor-texto-suave)}
     .topo-foco a:hover{color:var(--cor-acao)}
-    .progresso{height:4px;border-radius:2px;background:var(--cor-borda);overflow:hidden;
-      margin-bottom:var(--esp-2)}
-    .progresso span{display:block;height:100%;background:var(--cor-acao)}
+    .placar{display:flex;gap:var(--esp-2);align-items:center;flex-wrap:wrap}
+    .fogo{font-weight:var(--peso-forte);color:var(--cor-texto)}
+
+    {# Uma bolinha por questao: verde, vermelha, ou vazia. Na rodada que mede
+       a respondida fica cinza - a cor ali entregaria o resultado. #}
+    .bolinhas{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 var(--esp-2);padding:0;list-style:none}
+    .bolinhas li{width:12px;height:12px;border-radius:50%;border:2px solid var(--cor-borda);
+      background:transparent}
+    .bolinhas li.certa{background:var(--cor-verde);border-color:var(--cor-verde)}
+    .bolinhas li.errada{background:var(--cor-vermelho);border-color:var(--cor-vermelho)}
+    .bolinhas li.feita{background:var(--cor-texto-suave);border-color:var(--cor-texto-suave)}
+    .bolinhas li.agora{border-color:var(--cor-acao);box-shadow:0 0 0 2px var(--cor-acao-fundo)}
     .origem{font-size:var(--tam-xs);color:var(--cor-texto-suave);margin:0 0 var(--esp-4)}
 
     .questao{padding:var(--esp-5)}
@@ -29,20 +40,46 @@
       border-left:3px solid var(--cor-borda);padding-left:var(--esp-3)}
     .enunciado{font-size:var(--tam-md);line-height:1.65;margin:0 0 var(--esp-5);
       white-space:pre-line}
-    .alternativas{display:grid;gap:var(--esp-2)}
-    .alternativas form{margin:0}
-    .alternativas button{display:grid;grid-template-columns:2rem 1fr;gap:var(--esp-2);
-      width:100%;text-align:left;padding:var(--esp-3) var(--esp-4);
+    .alternativas{display:grid;gap:var(--esp-2);margin:0}
+    .alternativas button,.alternativas .alt{display:grid;grid-template-columns:2rem 1fr auto;
+      gap:var(--esp-2);width:100%;text-align:left;padding:var(--esp-3) var(--esp-4);
       border:1px solid var(--cor-borda);border-radius:var(--raio-sm);
       background:var(--cor-superficie);color:var(--cor-texto);font:inherit;
-      font-size:var(--tam-base);line-height:1.5;cursor:pointer}
+      font-size:var(--tam-base);line-height:1.5;box-sizing:border-box}
+    .alternativas button{cursor:pointer}
     .alternativas button:hover{border-color:var(--cor-acao);background:var(--cor-acao-fundo)}
     .alternativas .letra{font-weight:var(--peso-forte);color:var(--cor-acao)}
+    .alternativas .alt.apagada{opacity:.6}
+    .alternativas .alt.certa{border:2px solid var(--cor-verde);background:var(--cor-verde-fundo);opacity:1}
+    .alternativas .alt.certa .letra{color:var(--cor-verde)}
+    .alternativas .alt.errada{border:2px solid var(--cor-vermelho);background:var(--cor-vermelho-fundo);opacity:1}
+    .alternativas .alt.errada .letra{color:var(--cor-vermelho)}
+    .alternativas .marca{font-size:var(--tam-xs);font-weight:var(--peso-medio);white-space:nowrap;
+      align-self:center}
+    .alt.certa .marca{color:var(--cor-verde)}
+    .alt.errada .marca{color:var(--cor-vermelho)}
+
+    .chute{display:flex;align-items:center;gap:var(--esp-2);margin:0 0 var(--esp-3);
+      font-size:var(--tam-sm);color:var(--cor-texto-suave);cursor:pointer;width:max-content}
+    .chute input{width:1.05rem;height:1.05rem;accent-color:var(--cor-acao)}
+
+    .veredito{display:flex;align-items:baseline;gap:var(--esp-3);flex-wrap:wrap;
+      padding:var(--esp-3) var(--esp-4);border-radius:var(--raio-sm);margin:0 0 var(--esp-4)}
+    .veredito b{font-size:1.5rem;line-height:1.2}
+    .veredito.acertou{background:var(--cor-verde-fundo);color:var(--cor-verde)}
+    .veredito.errou{background:var(--cor-vermelho-fundo);color:var(--cor-vermelho)}
+    .veredito .nota-chute{font-size:var(--tam-sm);color:var(--cor-texto)}
+    .depois{display:grid;gap:var(--esp-3);margin-top:var(--esp-4)}
+    .depois p{margin:var(--esp-1) 0}
+    .convite{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
+    .seguir{display:flex;gap:var(--esp-3);align-items:center;flex-wrap:wrap;margin-top:var(--esp-5)}
+    .seguir .proxima{font-size:var(--tam-md);padding:var(--esp-3) var(--esp-6)}
+    .seguir a.secundario{font-size:var(--tam-sm);color:var(--cor-texto-suave)}
     .fonte-q{margin:var(--esp-4) 0 0;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
 
     .aviso-ia p{margin:var(--esp-1) 0}
     .aviso-ia form{margin-top:var(--esp-2)}
-    .errada{background:transparent;border:1px solid var(--cor-vermelho);color:var(--cor-vermelho);
+    .errada-ia{background:transparent;border:1px solid var(--cor-vermelho);color:var(--cor-vermelho);
       border-radius:var(--raio-sm);padding:var(--esp-1) var(--esp-3);font:inherit;
       font-size:var(--tam-xs);cursor:pointer}
   </style>
@@ -53,9 +90,20 @@
 <main class="foco">
   <div class="topo-foco">
     <a href="/simulado" title="A rodada fica guardada: dá para voltar depois">&larr; sair da rodada</a>
-    <span class="ds-numero">Questão {{ resposta.ordem }} de {{ resumo.total }}</span>
+    <span class="placar">
+      {# Os numeros vem prontos do servico.metricas: o template so mostra. #}
+      {% if na_hora and andamento.seguidas >= 3 %}<span class="fogo" title="Acertos seguidos">🔥 {{ andamento.seguidas }} seguidas</span> &middot;{% endif %}
+      <span class="ds-numero">Questão {{ resposta.ordem }} de {{ resumo.total }}</span>
+      {% if na_hora and resumo.respondidas %}&middot; <span class="ds-numero">{{ resumo.acertos }} acerto{{ 's' if resumo.acertos != 1 }}</span>{% endif %}
+    </span>
   </div>
-  <div class="progresso"><span style="width:{{ (resumo.respondidas / resumo.total * 100)|round if resumo.total else 0 }}%"></span></div>
+  <ol class="bolinhas" aria-label="Andamento da rodada">
+    {% for marca in andamento.marcas %}
+      {% set classe = (marca if na_hora else 'feita') if marca else '' %}
+      <li class="{{ classe }}{{ ' agora' if loop.index == resposta.ordem }}"
+          title="Questão {{ loop.index }}{% if marca and na_hora %}: {{ 'acertei' if marca == 'certa' else 'errei' }}{% elif marca %}: respondida{% endif %}"></li>
+    {% endfor %}
+  </ol>
 
   {# De onde a rodada saiu muda o que ela mede - mas cabe numa linha. #}
   {% set f = simulado.filtros or {} %}
@@ -78,6 +126,7 @@
     {% else %}
       Questões reais, tiradas das provas do acervo
     {% endif %}
+    {% if not na_hora %} &middot; rodada que mede: o certo e o errado aparecem no fim{% endif %}
   </p>
 
   <article class="ds-cartao questao">
@@ -107,30 +156,88 @@
           {% endif %}
           <form method="post" action="/geradas/{{ questao.id }}/errada">
             <input type="hidden" name="voltar" value="/simulado/{{ simulado.id }}">
-            <button class="errada" type="submit">Essa questão está errada</button>
+            <button class="errada-ia" type="submit">Essa questão está errada</button>
           </form>
         </div>
       {% endcall %}
       <div style="height:var(--esp-4)"></div>
     {% endif %}
 
+    {% if corrigida %}
+      {% set certa = resposta.acertou %}
+      <div class="veredito {{ 'acertou' if certa else 'errou' }}" role="status">
+        <b>{% if certa %}✓ Acertou!{% else %}✗ Errou: a certa é {{ questao.resposta | upper }}){% endif %}</b>
+        {% if resposta.chutou %}
+          <span class="nota-chute">{% if certa %}Foi no chute: o acerto conta, mas vale rever o porquê.{% else %}Foi no chute.{% endif %}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
     {# A questao de interpretacao cita o texto do caderno; sem ele nao se
        responde (item 4, 06/10). So a questao real tem; a gerada, nao. #}
     {% if questao.texto_base is defined and questao.texto_base %}
-      <details class="texto-base" open><summary>Texto-base (do caderno da prova)</summary>
+      <details class="texto-base" {{ '' if corrigida else 'open' }}><summary>Texto-base (do caderno da prova)</summary>
         <p>{{ questao.texto_base }}</p></details>
     {% endif %}
     <p class="enunciado">{{ questao.enunciado }}</p>
 
-    <div class="alternativas">
-      {% for letra, texto in questao.alternativas.items() %}
-        <form method="post" action="/simulado/{{ simulado.id }}/responder">
-          <input type="hidden" name="questao_id" value="{{ questao.id }}">
-          <input type="hidden" name="letra" value="{{ letra }}">
-          <button type="submit"><span class="letra">{{ letra }})</span><span>{{ texto }}</span></button>
-        </form>
-      {% endfor %}
-    </div>
+    {% if corrigida %}
+      <div class="alternativas">
+        {% for letra, texto in questao.alternativas.items() %}
+          {% set e_certa = letra == questao.resposta %}
+          {% set marquei = letra == resposta.escolhida %}
+          <div class="alt {{ 'certa' if e_certa else ('errada' if marquei else 'apagada') }}">
+            <span class="letra">{{ letra }})</span><span>{{ texto }}</span>
+            <span class="marca">{% if e_certa and marquei %}✓ sua resposta{% elif e_certa %}✓ {{ 'resposta da IA' if resposta.gerada else 'gabarito' }}{% elif marquei %}✗ sua resposta{% endif %}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="depois">
+        {% if resposta.gerada %}
+          {% if questao.artigo %}<p class="ds-suave ds-pequeno">A IA disse se apoiar em {{ questao.artigo }}{% if lei %} · <a href="{{ lei.url }}" target="_blank" rel="noopener">ler a lei</a>{% endif %}.</p>{% endif %}
+        {% elif explicacao %}
+          {% call bloco(explicacao.origem, 'Explicação (IA)') %}
+            <p>{{ explicacao.explicacao }}</p>
+            <p class="ds-suave">Fonte citada: {{ explicacao.fonte }}{% if lei %} · <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a>{% endif %}</p>
+            <p class="convite">{{ explicacao.modelo }} · confira na fonte antes de confiar</p>
+          {% endcall %}
+        {% else %}
+          <p class="convite">
+            Explicação ainda não pedida.
+            {% if lei %}Enquanto isso: <a href="{{ lei.url }}" target="_blank" rel="noopener">ler {{ lei.titulo }}</a> {{ selo(lei.origem) }}{% endif %}
+          </p>
+        {% endif %}
+
+        {% for m in macetes %}
+          {% call bloco(m.origem, 'Macete relacionado') %}
+            <p>{{ m.regra }}</p>
+            {% if m.pegadinha %}<p><b>⚠ Pegadinha:</b> {{ m.pegadinha }}</p>{% endif %}
+            <p class="convite">Fonte citada: {{ m.fonte }} · <a href="/macetes/{{ m.impressao }}/questoes">ver as questões reais</a></p>
+          {% endcall %}
+        {% endfor %}
+      </div>
+
+      <div class="seguir">
+        <a class="ds-botao proxima" href="/simulado/{{ simulado.id }}" autofocus>
+          {% if ainda_falta %}Próxima &rarr;{% else %}Ver o resultado &rarr;{% endif %}
+        </a>
+        {% if not resposta.acertou %}
+          <a class="secundario" href="{{ anotar_erro }}">Anotar no caderno de erros</a>
+        {% endif %}
+      </div>
+    {% else %}
+      {# Um formulario so, com a letra no botao: e assim que o "vou no chute"
+         vai junto com a letra, sem JavaScript. Marcar DEPOIS de ver o
+         resultado seria marcar so quando erro (decisao 142). #}
+      <form class="alternativas" method="post" action="/simulado/{{ simulado.id }}/responder">
+        <input type="hidden" name="questao_id" value="{{ questao.id }}">
+        <label class="chute"><input type="checkbox" name="chutei" value="1"> Vou no chute nesta</label>
+        {% for letra, texto in questao.alternativas.items() %}
+          <button type="submit" name="letra" value="{{ letra }}"><span class="letra">{{ letra }})</span><span>{{ texto }}</span><span></span></button>
+        {% endfor %}
+      </form>
+    {% endif %}
 
     <p class="fonte-q">
       {% if de_ia %}

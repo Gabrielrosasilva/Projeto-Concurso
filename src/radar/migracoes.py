@@ -182,6 +182,16 @@ def _passo_6() -> None:
     provas.guardar_textos_base()
 
 
+def _passo_7() -> None:
+    """Decisao 142 (07/10/2026): o "vou no chute" e a nota de cada faixa.
+
+    Duas colunas novas, que vem do modelo e o `_criar_estrutura` ja criou
+    antes dos passos: `respostas_de_simulado.chutou` e
+    `estados_do_dia.notas_das_faixas`. As linhas antigas ficam nulas: ninguem
+    marcou nada nelas, e preencher com "nao" seria inventar.
+    """
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -194,6 +204,7 @@ PASSOS = {
         _passo_4),
     5: ("A chave da questão real de base de cada questão gerada", _passo_5),
     6: ("O texto-base das questões de interpretação das provas do alvo", _passo_6),
+    7: ("O \"vou no chute\" de cada resposta e a nota de cada faixa", _passo_7),
 }
 VERSAO_ATUAL = max(PASSOS)
 

@@ -120,6 +120,16 @@
     .faixa .caiu-na-faixa{margin:var(--esp-1) 0 0;font-size:var(--tam-sm)}
     .faixa .caiu-na-faixa .sub{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
     .faixa .geradas-da-faixa code{overflow-wrap:anywhere;font-size:var(--tam-xs)}
+    .faixa .nota-da-faixa{margin-top:var(--esp-2);font-size:var(--tam-sm)}
+    .faixa .nota-da-faixa summary{cursor:pointer;color:var(--cor-texto-suave)}
+    .faixa .nota-da-faixa.tem-nota summary{color:var(--cor-texto);font-weight:var(--peso-medio)}
+    .faixa .nota-da-faixa form{display:grid;gap:var(--esp-2);margin-top:var(--esp-2)}
+    .faixa .nota-da-faixa .entendi{display:flex;flex-wrap:wrap;gap:var(--esp-3);border:0;padding:0;margin:0}
+    .faixa .nota-da-faixa .entendi legend{padding:0;margin-bottom:var(--esp-1)}
+    .faixa .nota-da-faixa textarea{width:100%;box-sizing:border-box;font:inherit;display:block;margin-top:var(--esp-1)}
+    .faixa .nota-da-faixa button{justify-self:start}
+    .faixa .geradas-da-faixa .estoque-de-geradas{margin:var(--esp-1) 0;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
+    .faixa .geradas-da-faixa .estoque-todas{color:var(--cor-vermelho)}
     .faixa .geradas-da-faixa .passos-de-gerar{margin:var(--esp-1) 0 0;padding-left:var(--esp-5)}
     .faixa .geradas-da-faixa .treinar-no-radar{display:flex;flex-wrap:wrap;gap:var(--esp-2);
       align-items:center;margin:var(--esp-1) 0 0}
@@ -1152,9 +1162,13 @@
                             <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
                             <input type="hidden" name="titulo" value="{{ f.titulo }}">
                             <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
-                            <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}</span>
+                            <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}{% if n.feitas %}, você já fez {{ n.feitas }}{% endif %}</span>
                             <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar no radar</button>
                           </form>
+                          {# O estoque que eu ja vi (decisao 142): o sorteio poe as
+                             nunca feitas na frente, e com metade ou todas feitas a
+                             faixa avisa e os 3 passos aparecem logo abaixo. #}
+                          {% if n.aviso %}<p class="estoque-de-geradas estoque-{{ n.aviso }}">{{ '🔁' if n.aviso == 'todas' else '⏳' }} {{ n.frase_do_aviso }}{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}</p>{% endif %}
                         {% else %}
                           <p class="sub">Não há questão gerada deste assunto ainda{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}.</p>
                         {% endif %}
@@ -1301,6 +1315,7 @@
                       {%- else %}Você já respondeu <b>{{ no_radar_f.questoes }} {{ 'questão' if no_radar_f.questoes == 1 else 'questões' }}</b> desta faixa no radar
                         {%- if no_radar_f.ia %} ({{ no_radar_f.medidas }} {{ 'real' if no_radar_f.medidas == 1 else 'reais' }} e {{ no_radar_f.ia }} de IA){% endif %}: já contam sozinhas.
                       {%- endif %}
+                      {%- if no_radar_f.chutes %} 🎲 {{ no_radar_f.chutes }} no chute.{% endif %}
                       No “fiz”, só as de fora do radar; se fez só no radar, deixe vazio e marque ✓.</p>
                   {% endif %}
                   {% set marcar %}
@@ -1365,6 +1380,43 @@
                   {% else %}
                     {{ marcar }}
                   {% endif %}
+                {% endif %}
+
+                {# O "como foi" (decisao 142): a nota, quantas chutei fora do
+                   radar e se entendi. Separado do check: escrevo antes ou
+                   depois de marcar, e desmarcar nao apaga. E o que o Ciclo 2
+                   le para saber o tema que o acerto sozinho esconde. #}
+                {% if not t.futuro %}
+                  {% set nf = notas_das_faixas.get((b.chave, loop.index0, f.titulo)) if notas_das_faixas else none %}
+                  <details class="nota-da-faixa{{ ' tem-nota' if nf }}">
+                    <summary>📝 Como foi{% if nf %}:
+                      {%- if nf.entendi_texto %} {{ nf.entendi_texto | lower }}{% endif %}
+                      {%- if nf.chutes is not none %}{{ ',' if nf.entendi_texto }} {{ nf.chutes }} no chute{% endif %}
+                      {%- if nf.nota %}{{ ',' if nf.entendi_texto or nf.chutes is not none }} com nota{% endif %}
+                    {%- else %} <span class="sub">(anotar)</span>{% endif %}</summary>
+                    <form method="post" action="/hoje/faixa/nota{% if cor %}?cor={{ cor }}{% endif %}">
+                      <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                      <input type="hidden" name="bloco" value="{{ b.chave }}">
+                      <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                      <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                      {% if TEM_ACERTO(f) %}
+                        <label>quantas chutei {{ 'no Qconcursos' if f.onde == 'qconcursos' else 'fora do radar' }}
+                          <input type="number" name="chutes" min="0" inputmode="numeric" placeholder="—"
+                                 value="{{ nf.chutes if nf and nf.chutes is not none else '' }}"></label>
+                      {% endif %}
+                      <fieldset class="entendi">
+                        <legend>Entendi o assunto?</legend>
+                        {% for chave, rotulo in ENTENDI.items() %}
+                          <label><input type="radio" name="entendi" value="{{ chave }}" {{ 'checked' if nf and nf.entendi == chave }}> {{ rotulo }}</label>
+                        {% endfor %}
+                      </fieldset>
+                      <label class="texto-da-nota">Como eu fui
+                        <textarea name="nota" maxlength="2000" rows="3"
+                                  placeholder="Ex.: chutei as de concordância com sujeito composto; ainda não entendi, mas o chute foi bom.">{{ nf.nota if nf else '' }}</textarea></label>
+                      <button class="ds-botao ds-botao--pequeno" type="submit">Salvar a nota</button>
+                      {% if nf %}<span class="sub">Para apagar, esvazie tudo e salve.</span>{% endif %}
+                    </form>
+                  </details>
                 {% endif %}
               </div>
               {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito.

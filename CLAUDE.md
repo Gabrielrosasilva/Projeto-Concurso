@@ -101,7 +101,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (06/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (07/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -153,7 +153,7 @@ texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
 provas complementares aceitas); 901 geradas (10 rejeitadas); 205
-explicacoes; arvore com 438 nos; banco na versao 6.
+explicacoes; arvore com 438 nos; banco na versao 7.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
 186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
 a 103); sobra a 2013-q53, so com voce (pendencia G). **O pedido de 05/10**
@@ -215,6 +215,13 @@ Florianopolis e BC, Policia Civil, PM e Bombeiros de SC; a PM entrou no
 Code (`radar acompanhar --pedido/--importar`, 🟣 por conferir, em
 `data/acompanhamentos.json`, nunca no banco); o Telegram so no critico. O que
 falta: pendencia J.
+**Os tres pedidos de 07/10 (decisao 142):** no treino a questao volta
+corrigida depois da letra, com a explicacao, o "Proxima" e as bolinhas (a
+rodada que mede continua so no fim); o "vou no chute" antes da letra, ao lado
+do acerto e nunca dentro; as geradas nunca feitas saem primeiro, e a faixa
+avisa com metade e com todas feitas, ja com os 3 passos; e o "📝 Como foi" de
+cada faixa (chutes fora do radar, entendi, nota), relido na ficha e no Meu
+desempenho para o Ciclo 2.
 **Proximo:** os lotes 3 e 4 da proposta de melhorias (pendencia I: o R+7
 com Portugues dividido, a composicao que nao repete o diagnostico e a regra
 do anotado), um por conversa, ate 07/11;

@@ -105,6 +105,9 @@ class Numeros:
     #: O acerto nessas de IA - o segundo numero, que nunca entra no primeiro.
     ia_acertos: int = 0
     minutos: int = 0
+    #: Respostas do radar marcadas "vou no chute" (decisao 142): ao lado das
+    #: outras contas, nunca dentro - nao mudam acerto, erro nem total.
+    chutes: int = 0
 
     @property
     def questoes(self) -> int:
@@ -135,6 +138,7 @@ class Numeros:
             ia=self.ia + outro.ia,
             ia_acertos=self.ia_acertos + outro.ia_acertos,
             minutos=self.minutos + outro.minutos,
+            chutes=self.chutes + outro.chutes,
         )
 
     def anotar(self, questoes: int | None, acertos: int | None,
@@ -153,8 +157,10 @@ class Numeros:
         self.acertos += acertos
         self.erros += questoes - acertos
 
-    def responder(self, acertou: bool, gerada: bool = False) -> None:
+    def responder(self, acertou: bool, gerada: bool = False,
+                  chutou: bool = False) -> None:
         """Soma uma resposta dada dentro do radar."""
+        self.chutes += 1 if chutou else 0
         if gerada:
             self.ia += 1
             self.ia_acertos += 1 if acertou else 0
@@ -480,7 +486,8 @@ def no_radar_por_faixa(data: date) -> dict[tuple[str, int, str], Numeros]:
         )
         for resposta in respostas:
             numeros = por_faixa.setdefault(rodadas[resposta.simulado_id], Numeros())
-            numeros.responder(bool(resposta.acertou), gerada=bool(resposta.gerada))
+            numeros.responder(bool(resposta.acertou), gerada=bool(resposta.gerada),
+                              chutou=bool(resposta.chutou))
     return por_faixa
 
 
@@ -711,6 +718,49 @@ def treino_ia_dos_nos(nos) -> Numeros:
     return numeros
 
 
+def ultimas_das_geradas() -> dict[int, RespostaDeSimulado]:
+    """{id da gerada: a ultima resposta que eu dei a ela}.
+
+    E o que o sorteio das geradas olha (decisao 142): a que nao esta aqui eu
+    nunca fiz, e vem primeiro; das repetidas, a errada da ultima vez vem antes
+    da acertada, e a mais antiga antes da mais nova.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        respostas = s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.gerada.is_(True))
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id))
+        # Em ordem de quando respondi: a ultima de cada uma fica por cima.
+        return {r.questao_id: r for r in respostas}
+
+
+def geradas_feitas_por_no(nos) -> dict[str, int]:
+    """{no: quantas geradas DIFERENTES dele (e de baixo dele) eu ja fiz}.
+
+    Questao, e nao resposta: refazer a mesma nao conta de novo - e o "ja fiz
+    X das Y" da faixa, contra as mesmas Y do `geradas.contagem_por_no` (nao
+    rejeitada, com resposta, com no).
+    """
+    from radar.conteudos import SEPARADOR
+
+    nos = list(dict.fromkeys(n for n in (nos or ()) if n))
+    if not nos:
+        return {}
+    feitas = set(ultimas_das_geradas())
+    criar_tabelas()
+    with sessao() as s:
+        linhas = s.execute(
+            select(QuestaoGerada.id, QuestaoGerada.conteudo)
+            .where(QuestaoGerada.rejeitada.is_(False))
+            .where(QuestaoGerada.resposta.is_not(None))
+            .where(QuestaoGerada.conteudo.is_not(None))).all()
+    do_no = [conteudo for gerada_id, conteudo in linhas if gerada_id in feitas]
+    return {no: sum(1 for c in do_no if c == no or c.startswith(no + SEPARADOR))
+            for no in nos}
+
+
 def desempenho_das_geradas(simulado_id: int | None = None) -> list[DesempenhoDaMateria]:
     """O mesmo, para as questoes escritas pela IA. Sempre um numero a parte.
 
@@ -730,6 +780,7 @@ def resumo_do_simulado(simulado_id: int) -> dict:
             select(RespostaDeSimulado).where(RespostaDeSimulado.simulado_id == simulado_id)
         ))
     respondidas, acertos = placar(respostas)
+    no_chute = [r for r in respostas if r.escolhida is not None and r.chutou]
     return {
         # O resultado da rodada de questao gerada leva o selo da IA.
         "origem": IA if any(r.gerada for r in respostas) else AUTOMATICO,
@@ -740,7 +791,34 @@ def resumo_do_simulado(simulado_id: int) -> dict:
         # Sobre o total da rodada: a que nao respondi conta como nao acertada.
         "porcentagem": acertos / len(respostas) * 100 if respostas else 0.0,
         "terminou": bool(respostas) and respondidas == len(respostas),
+        # O "vou no chute" (decisao 142): ao lado do acerto, nunca dentro dele.
+        "chutes": len(no_chute),
+        "acertos_no_chute": sum(1 for r in no_chute if r.acertou),
     }
+
+
+def andamento_da_rodada(simulado_id: int) -> dict:
+    """A fileira da tela da questao: uma marca por questao, na ordem, e
+    quantos acertos seguidos terminam na ultima respondida.
+
+    Marca: "certa", "errada" ou None (falta responder). A sequencia para no
+    primeiro erro para tras, e a que ainda nao respondi nao a quebra.
+    """
+    criar_tabelas()
+    with sessao() as s:
+        respostas = list(s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .order_by(RespostaDeSimulado.ordem)
+        ))
+    marcas = [None if r.escolhida is None else ("certa" if r.acertou else "errada")
+              for r in respostas]
+    seguidas = 0
+    for marca in reversed([m for m in marcas if m is not None]):
+        if marca != "certa":
+            break
+        seguidas += 1
+    return {"marcas": marcas, "seguidas": seguidas}
 
 
 @dataclass

@@ -27,6 +27,11 @@
     .divisao{display:block;font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .semana{white-space:nowrap}
     .semana.abaixo{color:var(--cor-texto-suave)}
+    .notas-do-tema{margin:var(--esp-3) 0;padding-top:var(--esp-2);border-top:1px solid var(--cor-borda)}
+    .notas-do-tema:first-of-type{border-top:0}
+    .notas-do-tema p{margin:var(--esp-1) 0}
+    .notas-lista{margin:var(--esp-1) 0;padding-left:var(--esp-5);font-size:var(--tam-sm)}
+    .notas-lista li{margin:var(--esp-1) 0}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -256,6 +261,21 @@
       <p><b>{{ refazer.do_caderno | length }}</b> no caderno de erros
         {% if refazer.do_caderno %}<a href="/erros">— abrir o caderno</a>{% endif %}</p>
     </div>
+  </section>
+
+  {# O "como foi" de cada faixa (decisao 142), por tema: a lista que o Ciclo 2
+     le. O que eu escrevi fica ao lado do acerto, e nunca entra nele. #}
+  {% from "_notas_da_faixa.html" import notas_do_tema %}
+  <section class="ds-cartao" id="como-fui">
+    <h2>Como eu disse que fui (para o Ciclo 2)</h2>
+    <p class="miudo">O que eu escrevi no “📝 Como foi” de cada faixa da tela
+      Hoje: se entendi, quantas chutei fora do radar e a nota. Primeiro os
+      temas que eu ainda não entendi. Os chutes no radar ficam em cada rodada.</p>
+    {% for g in notas_por_tema %}
+      {{ notas_do_tema(g, com_tema=True) }}
+    {% else %}
+      <p class="convite">Nenhuma nota ainda: escreva no “📝 Como foi” da faixa, na tela Hoje.</p>
+    {% endfor %}
   </section>
 </main>
 </body>

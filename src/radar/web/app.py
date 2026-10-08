@@ -729,15 +729,26 @@ def simulado_novo(
 
 
 @app.get("/simulado/{simulado_id}", response_class=HTMLResponse)
-def simulado_questao(request: Request, simulado_id: int):
-    """A proxima questao sem resposta, ou o resultado quando acabou."""
+def simulado_questao(request: Request, simulado_id: int, ver: int | None = None):
+    """A proxima questao sem resposta, ou o resultado quando acabou.
+
+    `ver` e a questao que acabei de responder: no treino a tela volta com ela
+    corrigida e o "Proxima" (decisao 142). Na rodada que mede, nao - la o
+    resultado so aparece no fim, e o `ver` e ignorado.
+    """
     simulado = servico.buscar_simulado(simulado_id)
     if simulado is None:
         return RedirectResponse("/simulado", status_code=303)
 
     resumo = servico.resumo_do_simulado(simulado_id)
-    atual = servico.questao_atual(simulado_id)
     de_ia = bool((simulado.filtros or {}).get("geradas"))
+
+    if ver is not None and servico.corrige_na_hora(simulado):
+        respondida = servico.questao_respondida(simulado_id, ver)
+        if respondida is not None:
+            return _questao_corrigida(request, simulado, resumo, de_ia, *respondida)
+
+    atual = servico.questao_atual(simulado_id)
 
     if atual is None:
         # Rodada de questao gerada tem o acerto medido pelo outro lado: o
@@ -757,6 +768,9 @@ def simulado_questao(request: Request, simulado_id: int):
                 "de_ia": de_ia,
                 "desempenho_da_rodada": da_rodada,
                 "revisao": revisao,
+                # Quanto do estoque de geradas dos nos eu ja fiz, e o pedido
+                # de mais quando esta acabando (decisao 142).
+                "estoque": servico.geradas.estoque_da_rodada(simulado) if de_ia else [],
                 # O 🟣 de cada erro: a explicacao importada pelo caminho sem
                 # API, e o macete que cita aquela questao.
                 "explicacoes": servico.manual.carregar_explicacoes(),
@@ -777,11 +791,57 @@ def simulado_questao(request: Request, simulado_id: int):
             "questao": questao,
             "resumo": resumo,
             "de_ia": de_ia,
+            "na_hora": servico.corrige_na_hora(simulado),
+            "andamento": servico.metricas.andamento_da_rodada(simulado.id),
             # O selo precisa dos dois: em que questao real ela se baseia, e
             # onde eu leio o artigo que ela diz estar cobrando.
             "origem": servico.geradas.origem_de(questao) if de_ia else None,
             "lei": (leis.do_assunto(questao.materia, questao.assunto)
                     if de_ia else None),
+        },
+    )
+
+
+def _questao_corrigida(request: Request, simulado, resumo: dict, de_ia: bool,
+                       resposta, questao):
+    """A mesma tela da questao, agora com a letra gravada: o verde, o
+    vermelho, a explicacao e os macetes que o relatorio do fim ja mostra, e o
+    "Proxima". A letra nao muda mais - o servico recusa a segunda."""
+    gerada = bool(resposta.gerada)
+    chave = f"{getattr(questao, 'prova_url', None)}#{getattr(questao, 'numero', None)}"
+    if gerada:
+        referencia = "questão criada por IA"
+    else:
+        referencia = f"{questao.banca} {questao.ano}, questão {questao.numero}"
+    return templates.TemplateResponse(
+        request=request,
+        name="questao.html",
+        context={
+            "simulado": simulado,
+            "resposta": resposta,
+            "questao": questao,
+            "resumo": resumo,
+            "de_ia": de_ia,
+            "na_hora": True,
+            "corrigida": True,
+            "andamento": servico.metricas.andamento_da_rodada(simulado.id),
+            "ainda_falta": servico.questao_atual(simulado.id) is not None,
+            "origem": servico.geradas.origem_de(questao) if gerada else None,
+            "lei": (leis.do_assunto(questao.materia, questao.assunto) if gerada
+                    else leis.da_materia(questao.materia)),
+            "explicacao": (None if gerada else
+                           servico.manual.carregar_explicacoes().get(questao.impressao)),
+            "macetes": [] if gerada else _macetes_por_questao().get(chave, []),
+            # O caderno de erros ja abre com o que a tela sabe: errar e anotar
+            # na mesma hora, sem digitar de novo.
+            "anotar_erro": "/erros/novo?" + urlencode({
+                "materia": questao.materia or "",
+                "assunto": questao.assunto or "",
+                "fonte": "radar",
+                "referencia": referencia,
+                "motivo": "chutei" if resposta.chutou else "",
+                "volta": f"/simulado/{simulado.id}",
+            }),
         },
     )
 
@@ -806,13 +866,19 @@ def simulado_responder(
     simulado_id: int,
     questao_id: int = Form(...),
     letra: str = Form(...),
+    chutei: str = Form(""),
 ):
     """Grava a resposta e volta para a mesma URL.
 
     O redirecionamento 303 e o que impede o F5 de responder de novo - alem da
-    trava no servico, que ignora questao ja respondida.
+    trava no servico, que ignora questao ja respondida. No treino a volta leva
+    o `ver`, e a tela mostra a correcao antes da proxima (decisao 142).
     """
-    servico.responder(simulado_id, questao_id, letra)
+    servico.responder(simulado_id, questao_id, letra, chutou=bool(chutei))
+    simulado = servico.buscar_simulado(simulado_id)
+    if simulado is not None and servico.corrige_na_hora(simulado):
+        return RedirectResponse(f"/simulado/{simulado_id}?ver={questao_id}",
+                                status_code=303)
     return RedirectResponse(f"/simulado/{simulado_id}", status_code=303)
 
 
@@ -1089,6 +1155,10 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             "treino_ia_das_faixas": {
                 chave: servico.metricas.treino_ia_dos_nos(n.no for n in gf.nos)
                 for chave, gf in geradas_das_faixas.items() if gf.nos},
+            # O "como foi" de cada faixa (decisao 142), pela chave do check.
+            "notas_das_faixas": (servico.notas_da_faixa.do_dia(
+                servico.cronograma.estado_do_dia(tela.data)) if tela.blocos else {}),
+            "ENTENDI": servico.notas_da_faixa.ENTENDI,
             "erro": erro,
             "erro_de_data": erro_de_data,
             "form": form,
@@ -1237,6 +1307,39 @@ def hoje_faixa_questoes(
                 questoes=questoes, acertos=acertos, consulta=bool(consulta),
                 conteudo=conteudo,
             )
+    except servico.cronograma.RegistroInvalido as erro:
+        return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
+
+    cor = request.query_params.get(PARAMETRO_DA_COR)
+    destino = (f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
+               + f"#faixa-{bloco}-{posicao}")
+    return RedirectResponse(destino, status_code=303)
+
+
+@app.post("/hoje/faixa/nota")
+def hoje_faixa_nota(
+    request: Request,
+    data: str = Form(""),
+    bloco: str = Form(""),
+    indice: str = Form(""),
+    titulo: str = Form(""),
+    chutes: str = Form(""),
+    entendi: str = Form(""),
+    nota: str = Form(""),
+):
+    """O "como foi" de uma faixa (decisao 142): a nota, os chutes e o
+    entendi. Tudo vazio tira a nota. Volta para a mesma faixa, como o "fiz"."""
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return _pagina_de_hoje(request, None, erro_da_faixa=f"Data inválida: {data!r}.",
+                               status=400)
+    try:
+        posicao = _inteiro(indice, "A faixa")
+        if posicao is None:
+            raise servico.cronograma.RegistroInvalido("Faltou dizer qual faixa anotar.")
+        servico.notas_da_faixa.anotar(quando, bloco, posicao, titulo,
+                                      chutes=chutes, entendi=entendi, nota=nota)
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
 
@@ -1520,7 +1623,9 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
         context={"f": ficha, "data": quando,
                  "comando_de_gerar": fichas_puras.comando_de_gerar,
                  # O sinal de treino do tema (decisao 138), fora do acerto.
-                 "treino_ia": servico.metricas.treino_ia_dos_nos(ficha.nos)},
+                 "treino_ia": servico.metricas.treino_ia_dos_nos(ficha.nos),
+                 # O "como foi" das faixas deste tema (decisao 142).
+                 "notas": servico.notas_da_faixa.do_tema(ficha.tema)},
     )
 
 
@@ -1578,6 +1683,9 @@ def analises_desempenho(request: Request, materia: str = "", recorte: str = ""):
             "nao_estudados": servico.estudo.nao_estudados(todas=todas),
             "vistos": servico.estudo.estudados_ou_praticados(todas, materia or None),
             "refazer": servico.estudo.refazer(),
+            # O "como foi" de cada faixa, por tema (decisao 142): a lista que
+            # o Ciclo 2 le. Os que eu ainda nao entendi vem primeiro.
+            "notas_por_tema": servico.notas_da_faixa.por_tema(),
         },
     )
 
@@ -1852,6 +1960,9 @@ def erro_novo(
     materia: str | None = None,
     assunto: str | None = None,
     volta: str | None = None,
+    fonte: str | None = None,
+    referencia: str | None = None,
+    motivo: str | None = None,
 ):
     """O formulario, aceitando tudo pre-preenchido pelo endereco.
 
@@ -1865,7 +1976,11 @@ def erro_novo(
         request,
         form={"data_estudo": (quando or servico.cronograma.hoje_local()).isoformat(),
               "materia": (materia or "").strip(),
-              "assunto": (assunto or "").strip()},
+              "assunto": (assunto or "").strip(),
+              # A questao do radar que eu acabei de errar (decisao 142).
+              **({"fonte": fonte} if fonte in servico.erros.FONTES else {}),
+              **({"motivo": motivo} if motivo in servico.erros.MOTIVOS else {}),
+              **({"referencia": referencia.strip()} if referencia else {})},
         volta=volta,
         aviso=aviso,
     )

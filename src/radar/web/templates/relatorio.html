@@ -75,6 +75,10 @@
       <span class="valor {{ 'bom' if porcento >= 60 else 'ruim' }}">{{ '%.0f'|format(porcento) }}%</span>
       <span>{{ resumo.acertos }} de {{ resumo.total }} questões desta rodada</span>
     </div>
+    {% if resumo.chutes %}
+      {# Ao lado do acerto, e nao dentro: o acerto continua o mesmo (decisao 142). #}
+      <p class="ds-pequeno" style="margin-bottom:0">🎲 {{ resumo.chutes }} no chute, {{ resumo.acertos_no_chute }} acertada{{ 's' if resumo.acertos_no_chute != 1 }} - acerto no chute não é saber: vale rever.</p>
+    {% endif %}
     <p class="ds-suave ds-pequeno" style="margin-bottom:0">
       Sem nota de corte: ela só aparece quando houver resultado oficial
       publicado para servir de fonte, e o acervo não tem nenhum.
@@ -126,7 +130,7 @@
     <article class="ds-cartao erro" style="margin-top:var(--esp-3)">
       <div class="ds-cartao__cabeca">
         <span class="ds-pequeno ds-suave">
-          {{ item.materia or 'sem matéria' }}{% if not item.gerada and item.numero %} · questão {{ item.numero }}, {{ item.banca }} {{ item.ano }}{% endif %}
+          {{ item.materia or 'sem matéria' }}{% if not item.gerada and item.numero %} · questão {{ item.numero }}, {{ item.banca }} {{ item.ano }}{% endif %}{% if item.chutou %} · 🎲 no chute{% endif %}
         </span>
         {{ selo(item.origem, 'criada por IA' if item.gerada else None) }}
       </div>
@@ -175,10 +179,34 @@
       <summary>{{ resumo.acertos }} acerto(s)</summary>
       <ul>
         {% for item in acertos %}
-          <li>{% if item.gerada %}{{ selo(item.origem, 'criada por IA') }} {% endif %}{{ item.materia }} - {{ item.enunciado[:120] }}{% if item.enunciado | length > 120 %}...{% endif %}</li>
+          <li>{% if item.gerada %}{{ selo(item.origem, 'criada por IA') }} {% endif %}{% if item.chutou %}🎲 no chute · {% endif %}{{ item.materia }} - {{ item.enunciado[:120] }}{% if item.enunciado | length > 120 %}...{% endif %}</li>
         {% endfor %}
       </ul>
     </details>
+  {% endif %}
+
+  {# O estoque de geradas dos nos desta rodada (decisao 142): o sorteio poe
+     as nunca feitas na frente; com metade ou todas feitas, o aviso e os 3
+     passos para gerar mais. A conta vem do servico. #}
+  {% if estoque %}
+    <section class="ds-cartao" style="margin-top:var(--esp-4)">
+      <div class="ds-cartao__cabeca">
+        <h2 class="ds-cartao__titulo">Questões geradas deste tema</h2>
+        {{ selo('ia', curto=True) }}
+      </div>
+      {% for n in estoque %}
+        <p class="ds-pequeno">{{ n.nome }}: você já fez {{ n.feitas }} de {{ n.geradas }}.
+          {% if n.aviso %}<b>{{ n.frase_do_aviso }}</b>{% endif %}</p>
+      {% endfor %}
+      {% if estoque | selectattr('comando') | list %}
+        <ol class="ds-pequeno">
+          <li>No terminal:{% for n in estoque if n.comando %}<br><code>{{ n.comando }}</code>{% endfor %}</li>
+          <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
+          <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
+        </ol>
+        <p class="convite">{{ AVISO_DO_PEDIDO }}</p>
+      {% endif %}
+    </section>
   {% endif %}
 
   <div class="acoes">
