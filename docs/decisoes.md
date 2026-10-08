@@ -4619,6 +4619,14 @@ viraram estudo extra "Onde: Radar". Copia antes em
        `Marco.ressalva`. O 🟡 sozinho passava batido, e o Concursos no Brasil
        marca quase tudo como edital publicado. Marco da banca (🟢), da
        pesquisa conferida (🟣) e o "aguardando" nao levam.
+     - **a pesquisa de uma carreira so** (08/10, pendencia J): `radar
+       acompanhar --pedido --carreira "<nome>"`. O nome e o do
+       `config/acompanhamentos.yml`, sem diferenciar acento nem caixa (o
+       terminal do Windows come o acento); nome que nao existe e recusado com
+       a lista dos sete, e nada e gravado - o `pedido_de_pesquisa` deixou de
+       ignorar nome desconhecido em silencio. `--carreira` sem `--pedido` e
+       erro. O botao da tela continua um so: a coleta e uma para todas as
+       fontes.
 
 ## A correcao na hora, as geradas nunca feitas e a nota da faixa (07/10/2026)
 

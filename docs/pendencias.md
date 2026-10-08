@@ -437,8 +437,8 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   que vem so do Concursos no Brasil diz "segundo site de notícias" por
   extenso, no cartao e no `radar acompanhar` (decisao 141). Esperar a pagina
   detalhada continua possivel, se um dia valer;
-- ⚪ **O botao por cartao**: a coleta e uma so para todas as fontes, entao o
-  botao e um so, no topo. A pesquisa do Claude Code por carreira (`--pedido`
-  de um cartao so) cabe numa opcao `--carreira`;
+- ✅ **A pesquisa por carreira** (feito em 08/10): `radar acompanhar
+  --pedido --carreira "<nome>"` (decisao 141). O botao continua um so, no
+  topo: a coleta e uma para todas as fontes;
 - ⚪ **Ligar a banca definida ao estudo**: quando o cartao da Policia Penal
   ganhar banca, apontar para Analises > Edital e o padrao dela.

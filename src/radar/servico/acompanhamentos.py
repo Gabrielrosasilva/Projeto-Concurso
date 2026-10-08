@@ -535,9 +535,29 @@ def _ja_sei(cartao: Cartao) -> dict:
     }
 
 
+class CarreiraDesconhecida(ValueError):
+    """O nome pedido nao esta no config/acompanhamentos.yml."""
+
+
+def achar_carreira(nome: str) -> str:
+    """O nome da carreira como o YAML escreve, sem diferenciar acento nem
+    caixa: o terminal do Windows as vezes come o acento ("Policia Penal SC").
+    Nome que nao existe e recusado com a lista dos que existem - pesquisar a
+    carreira errada em silencio seria pior que nao pesquisar."""
+    procurado = normalizar(nome or "")
+    for acompanhamento in carreiras.todos():
+        if normalizar(acompanhamento.nome) == procurado:
+            return acompanhamento.nome
+    validos = "; ".join(a.nome for a in carreiras.todos())
+    raise CarreiraDesconhecida(
+        f"Não há carreira {nome!r} em config/acompanhamentos.yml. As que existem: {validos}.")
+
+
 def pedido_de_pesquisa(nomes: list[str] | None = None) -> dict:
-    """O lote para o Claude Code do VS Code: um pedido por carreira."""
-    escolhidos = [c for c in cartoes() if not nomes or c.nome in nomes]
+    """O lote para o Claude Code do VS Code: um pedido por carreira, ou so as
+    de `nomes` (o `--carreira`). Nome desconhecido: `CarreiraDesconhecida`."""
+    escolhidas = {achar_carreira(n) for n in nomes} if nomes else None
+    escolhidos = [c for c in cartoes() if escolhidas is None or c.nome in escolhidas]
     pedidos = [
         {"id": f"a{numero}", "acompanhamento": cartao.nome,
          "instrucao": INSTRUCAO_DA_PESQUISA, "ja_sei": _ja_sei(cartao)}

@@ -348,6 +348,49 @@ def test_o_pedido_leva_uma_carreira_por_item_e_o_que_ja_sei(ambiente):
     assert "Nunca invente link" in lote["pedidos"][0]["instrucao"]
 
 
+def test_o_pedido_de_uma_carreira_so_acha_o_nome_sem_acento(ambiente):
+    lote = cartoes.pedido_de_pesquisa(["policia civil sc"])
+    assert [p["acompanhamento"] for p in lote["pedidos"]] == ["Polícia Civil SC"]
+    assert [p["id"] for p in lote["pedidos"]] == ["a1"]
+
+
+def test_carreira_que_nao_existe_e_recusada_com_a_lista(ambiente):
+    with pytest.raises(cartoes.CarreiraDesconhecida) as erro:
+        cartoes.pedido_de_pesquisa(["Polícia Rodoviária SC"])
+    assert "Polícia Rodoviária SC" in str(erro.value)
+    assert "Polícia Penal SC" in str(erro.value) and "Polícia Militar SC" in str(erro.value)
+
+
+def test_o_comando_pede_uma_carreira_so(ambiente):
+    from typer.testing import CliRunner
+
+    from radar.cli import app as cli
+    from radar.servico import manual
+
+    saida = CliRunner().invoke(cli, ["acompanhar", "--pedido", "--carreira",
+                                     "Policia Penal SC"])
+
+    assert saida.exit_code == 0, saida.output
+    lote = json.loads(manual.caminho_do_pedido().read_text(encoding="utf-8"))
+    assert [p["acompanhamento"] for p in lote["pedidos"]] == ["Polícia Penal SC"]
+
+
+def test_o_comando_recusa_carreira_desconhecida_sem_gravar(ambiente):
+    from typer.testing import CliRunner
+
+    from radar.cli import app as cli
+    from radar.servico import manual
+
+    runner = CliRunner()
+    sem_pedido = runner.invoke(cli, ["acompanhar", "--carreira", "Polícia Civil SC"])
+    errada = runner.invoke(cli, ["acompanhar", "--pedido", "--carreira", "Guarda de Itajaí"])
+
+    assert sem_pedido.exit_code == 1 and "--pedido" in sem_pedido.output
+    assert errada.exit_code == 1
+    assert "Não há carreira" in " ".join(errada.output.split())
+    assert not manual.caminho_do_pedido().exists()
+
+
 def test_novidade_boa_entra_por_conferir_e_acende_o_sino(ambiente):
     resultado = _importar(_novidade())
     assert resultado["gravadas"] == 1 and not resultado["recusas"]

@@ -1590,6 +1590,10 @@ def acompanhar(
     visto: str = typer.Option(
         None, "--visto", help="Zera o sino deste cartao (o nome exato do YAML)",
     ),
+    carreira: str = typer.Option(
+        None, "--carreira",
+        help="Com --pedido: pesquisa so esta carreira (o nome do YAML, acento opcional)",
+    ),
 ) -> None:
     """As carreiras da aba Concursos > Acompanhando, um cartao cada.
 
@@ -1636,8 +1640,18 @@ def acompanhar(
         console.print("[dim]Confira cada uma em radar web, Concursos > Acompanhando.[/]")
         return
 
+    if carreira and not pedido:
+        console.print("[red]--carreira só vale com --pedido:[/] radar acompanhar "
+                      "--pedido --carreira \"<nome>\"")
+        raise typer.Exit(code=1)
+
     if pedido:
-        lote = acompanhamentos.pedido_de_pesquisa()
+        try:
+            lote = acompanhamentos.pedido_de_pesquisa([carreira] if carreira else None)
+        except acompanhamentos.CarreiraDesconhecida as erro:
+            # Nada e gravado: o pedido anterior continua valendo.
+            console.print(f"[red]{escape(str(erro))}[/]")
+            raise typer.Exit(code=1)
         destino = acompanhamentos.salvar_pedido(lote)
         console.print(f"[green]{len(lote['pedidos'])} carreira(s) no pedido[/] -> {destino}")
         console.print(

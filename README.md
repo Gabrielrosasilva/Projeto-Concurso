@@ -377,6 +377,7 @@ um clique e outro); o que o robo nao ve vai pela pesquisa do Claude Code:
 radar acompanhar                 # os cartoes no terminal
 radar acompanhar --verificar     # a coleta agora, como o botao
 radar acompanhar --pedido        # escreve data/pedido_ia.json
+radar acompanhar --pedido --carreira "Polícia Penal SC"   # so uma carreira
 #   no Claude Code do VS Code: "Leia data/pedido_ia.json e siga o como_responder"
 radar acompanhar --importar data/resposta_ia.json   # entra 🟣 por conferir
 radar acompanhar --visto "Polícia Civil SC"         # zera o sino
