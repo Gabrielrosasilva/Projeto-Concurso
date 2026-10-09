@@ -4910,3 +4910,15 @@ viraram estudo extra "Onde: Radar". Copia antes em
        com ⚠.
      A classe (cheio, normal, basico) e a conta nao mudaram: a redistribuicao
      da R4 e o resumo continuam iguais.
+
+150. **"estou evoluindo?" so com base** (P11, U18; completa a E3, que nao
+     definia minimo). As Semanas mostravam "67% ↑ +27% de acerto" e "1 ↓ −25
+     erros" na semana em andamento, com 3 respostas, e Minhas materias
+     desenhava LP de 34% (em 32) para 67% (em 3) sem n nenhum. Agora:
+     - a semana em andamento nao tem seta nenhuma: os numeros sao parciais;
+     - o acerto e os erros so ganham seta com o minimo de respostas medidas
+       de cada lado - a `evolucao` do `config/amostra.yml` (20), a mesma da
+       home; o volume (questoes, minutos, dias) continua comparando;
+     - o cartao da semana diz "de acerto em N", e o grafico de Minhas
+       materias ganhou a linha "sem. 1: 41% em 22 · sem. 2: 49% em 35", com a
+       semana abaixo do minimo em cinza (so CSS).

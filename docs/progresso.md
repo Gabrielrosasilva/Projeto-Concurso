@@ -35,7 +35,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 | 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
 | 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | ✅ P04 (decisão 143) e U21 · P36 (decisão 144); a suíte inteira no fim |
-| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | 🟡 P07, P30, P01 + P09, P05 e P10 feitos (decisões 145 a 149); P11 + U18 a seguir |
+| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | ✅ P07, P30, P01 + P09, P05, P10 e P11 + U18 (decisões 145 a 150); a suíte inteira no fim |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3459,3 +3459,23 @@ estude o básico" com 2 provas, e a faixa não mostrava as notas.
 de 07/10 - "Não apareceu na prova de 2019..." com "⚠ Base de uma prova só";
 a ficha dos Direitos sociais (arts. 6º a 11) - "· base pequena: 2 provas" e
 a prioridade baixa no "Por que agora".
+
+**P11 + U18 (decisão 150).** As Semanas e Minhas matérias respondiam
+"estou evoluindo?" com 3 respostas.
+
+- **O código:** `servico/semanas._comparar` (sem seta na semana em
+  andamento; acerto e erros só com a `evolucao` de cada lado);
+  `materias.PontoDaSemana.medidas`; `semanas.html` ("de acerto em N") e
+  `materias.html` (o n de cada ponto, cinza abaixo do mínimo);
+  `MINIMO_DA_EVOLUCAO` no `app.py`.
+- **Testes:** `test_semanas` (2 novos) e `test_materias_na_tela` (1 novo):
+  72 nos dois.
+
+**Rodado de verdade** (banco real, só GET): as Semanas - "45% de acerto em
+33" e "53% de acerto em 98", sem seta na semana 2 (em andamento); Minhas
+matérias - "sem. 1: 41% em 22 · sem. 2: 49% em 35".
+
+**Critério de conclusão:** ✅ o fechamento de 07/11 não repete o
+diagnóstico; o plano e a tela dizem o que decide o Ciclo 2; o anotado tem
+uma regra só; a ficha não entrega o gabarito antes da resposta; o "caiu" não
+afirma além da base; a seta só sai com amostra.

@@ -426,6 +426,17 @@ def test_a_tela_desenha_o_grafico_sem_javascript(cliente, plano):
     assert "<script" not in texto.lower()
 
 
+def test_cada_ponto_do_grafico_diz_o_n_e_o_de_pouca_base_e_cinza(cliente, plano):
+    """P11 (decisao 150): "34% para 67%" sem o n respondia "estou melhorando?"
+    com 3 questoes."""
+    _anotar(plano, SEG, "Direito Penal", 20, 10)
+    _anotar(plano, date(2026, 10, 5), "Direito Penal", 3, 2)
+    texto = cliente.get("/analises/materias").text
+
+    assert '<span>sem. 1: 50% em 20</span>' in texto
+    assert '<span class="abaixo">sem. 2: 67% em 3</span>' in texto
+
+
 def test_a_tela_mostra_a_materia_cinza_com_o_ciclo(cliente):
     texto = cliente.get("/analises/materias").text
     assert "Ainda não estudei" in texto

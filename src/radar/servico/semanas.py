@@ -22,6 +22,7 @@ from datetime import date, timedelta
 
 from sqlalchemy import select
 
+from radar import amostra as regua
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
 from radar.models import EstadoDoDia, NotaDaSemana, agora
@@ -193,15 +194,20 @@ def _estados(inicio: date, fim: date) -> dict[date, EstadoDoDia]:
         return {e.data: e for e in achados}
 
 
-def _comparar(agora_: SemanaNaTela, antes: SemanaNaTela) -> dict:
+def _comparar(agora_: SemanaNaTela, antes: SemanaNaTela, minimo: int = 20) -> dict:
     """As setas do cartao: quanto mudou da semana anterior.
 
     Acerto compara PONTO a ponto (72% para 68% e -4), e nao a razao entre eles:
     e assim que eu leio "caiu 4 pontos". Semana sem acerto medido nao compara
     acerto nenhum - comparar com o nada daria uma flecha inventada.
+
+    A semana em andamento nao tem seta nenhuma (U18): os numeros dela sao
+    parciais. E o acerto e os erros so comparam com `minimo` respostas
+    medidas de cada lado (P11, decisao 150; a `evolucao` do
+    config/amostra.yml): "67% ↑ +27" com 3 respostas era sorteio.
     """
     setas = {}
-    if antes is None:
+    if antes is None or agora_.em_andamento:
         return setas
 
     def por(nome, valor, anterior, mais_e_melhor=True):
@@ -213,10 +219,11 @@ def _comparar(agora_: SemanaNaTela, antes: SemanaNaTela) -> dict:
                                      diferenca > 0 if mais_e_melhor else diferenca < 0)
 
     por("questoes", agora_.numeros.questoes, antes.numeros.questoes)
-    por("acerto", agora_.numeros.porcentagem, antes.numeros.porcentagem)
     por("minutos", agora_.minutos, antes.minutos)
     por("dias", agora_.dias_completos, antes.dias_completos)
-    por("erros", agora_.numeros.erros, antes.numeros.erros, mais_e_melhor=False)
+    if min(agora_.numeros.medidas, antes.numeros.medidas) >= minimo:
+        por("acerto", agora_.numeros.porcentagem, antes.numeros.porcentagem)
+        por("erros", agora_.numeros.erros, antes.numeros.erros, mais_e_melhor=False)
     return setas
 
 
@@ -349,9 +356,10 @@ def _agrupar(plano, semanas: list[SemanaNaTela], hoje: date) -> list[CicloNaTela
 def _ciclo(nome: str, semanas: list[SemanaNaTela], etapa=None, atual: bool = False,
            terminou: bool = False) -> CicloNaTela:
     semanas = sorted(semanas, key=lambda s: s.inicio)
+    minimo = regua.carregar().evolucao
     anterior = None
     for semana in semanas:
-        semana.comparacao = _comparar(semana, anterior)
+        semana.comparacao = _comparar(semana, anterior, minimo)
         anterior = semana
     _melhor(semanas)
 

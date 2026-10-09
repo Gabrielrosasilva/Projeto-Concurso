@@ -352,6 +352,7 @@ templates.env.globals.update(
     linha_do_grafico=servico.materias.linha_do_grafico,
     GRAFICO_LARGURA=servico.materias.LARGURA,
     GRAFICO_ALTURA=servico.materias.ALTURA,
+    MINIMO_DA_EVOLUCAO=amostra.carregar().evolucao,
     O_QUE_DO_EXTRA=servico.extra.O_QUE, ONDE_DO_EXTRA=servico.extra.ONDE,
     ONDE_SEM_QUESTOES=servico.extra.ONDE_SEM_QUESTOES,
     TEM_ACERTO=cronograma.tem_acerto,

@@ -132,7 +132,8 @@
     {% if s.numeros.medidas %}
       {{ numero(s.numeros.acertos, 'acertos') }}
       {{ numero(s.numeros.erros, 'erros', s.comparacao.get('erros')) }}
-      {{ numero(s.numeros.porcentagem, 'de acerto', s.comparacao.get('acerto'), '%',
+      {# O n da porcentagem sempre a vista (P11): a seta so vem com o minimo. #}
+      {{ numero(s.numeros.porcentagem, 'de acerto em ' ~ s.numeros.medidas, s.comparacao.get('acerto'), '%',
                 ('sem consulta: ' ~ s.sem_consulta.porcentagem ~ '%') if s.sem_consulta.medidas else 'sem consulta: —') }}
     {% else %}
       {{ numero('—', 'de acerto', none, '', 'nenhum acerto anotado') }}

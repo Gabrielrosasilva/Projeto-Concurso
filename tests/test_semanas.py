@@ -271,6 +271,29 @@ def test_semana_sem_acerto_medido_nao_compara_acerto(banco_temporario, plano):
     assert semana2.comparacao["questoes"].diferenca == 10
 
 
+def test_acerto_com_menos_que_o_minimo_nao_ganha_seta(banco_temporario, plano):
+    """P11 (decisao 150): "67% ↑ +27" com 3 respostas era sorteio. O acerto e
+    os erros so comparam com 20 medidas (a `evolucao` do amostra.yml) de cada
+    lado; o volume continua comparando."""
+    _anotar_faixa(plano, S1, 20, 8)           # 40% em 20
+    _anotar_faixa(plano, S2, 3, 2)            # 67% em 3
+
+    semana2 = _por_numero(_ciclo1(plano, hoje=S3))[2]
+    assert "acerto" not in semana2.comparacao
+    assert "erros" not in semana2.comparacao
+    assert semana2.comparacao["questoes"].diferenca == -17
+
+
+def test_a_semana_em_andamento_nao_tem_seta(banco_temporario, plano):
+    """U18: os numeros da semana em andamento sao parciais."""
+    _anotar_faixa(plano, S1, 20, 16)
+    _anotar_faixa(plano, S2, 55, 42)
+
+    semana2 = _por_numero(_ciclo1(plano, hoje=S2))[2]
+    assert semana2.em_andamento
+    assert semana2.comparacao == {}
+
+
 # --- a melhor semana ----------------------------------------------------------
 
 def test_a_melhor_semana_e_a_de_mais_dias_completos(banco_temporario, plano):

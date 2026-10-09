@@ -398,7 +398,11 @@ número ou prepara 10/10, 17/10 e 07/11.
    e a pegadinha da questão só aparecem depois de você responder no radar, na
    ficha e no resumo; o dado continua com a letra); ✅ P10 em 09/10 (decisão
    149: o "não apareceu" diz a base pequena, a prioridade baixa foi para o
-   "Por que agora", e a faixa mostra as notas do "caiu").
+   "Por que agora", e a faixa mostra as notas do "caiu"); ✅ P11 + U18 em
+   09/10 (decisão 150: a seta do acerto só com 20 respostas de cada lado, e
+   nenhuma na semana em andamento; o n de cada ponto). **Lote 4 feito.**
+   Para valer na tela, o servidor precisa ser reiniciado (`radar parar` e
+   `radar subir`).
 
 ### Depende de você
 

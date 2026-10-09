@@ -43,6 +43,8 @@
     .tendencia polyline{fill:none;stroke:var(--cor-acao);stroke-width:2;
       stroke-linejoin:round;stroke-linecap:round}
     .tendencia .base{stroke:var(--cor-borda);stroke-width:1}
+    .pontos{margin:0;font-size:var(--tam-xs);color:var(--cor-texto)}
+    .pontos .abaixo{color:var(--cor-texto-suave)}
 
     /* --- os assuntos --- */
     .assuntos{list-style:none;margin:0;padding:0;display:grid;gap:var(--esp-1);
@@ -77,6 +79,9 @@
       <polyline points="{{ pontos }}"></polyline>
     </svg>
     <p class="de-onde">acerto sem consulta, semana a semana</p>
+    {# O n de cada ponto (P11): abaixo do minimo, cinza - e sorteio, nao
+       evolucao. #}
+    <p class="pontos">{% for p in m.semanal if p.porcentagem is not none %}<span{% if p.medidas < MINIMO_DA_EVOLUCAO %} class="abaixo"{% endif %}>sem. {{ p.semana }}: {{ p.porcentagem }}% em {{ p.medidas }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</p>
   {% endif %}
 {%- endmacro -%}
 

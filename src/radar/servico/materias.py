@@ -78,6 +78,8 @@ class PontoDaSemana:
     semana: int
     porcentagem: int | None
     questoes: int
+    #: As respostas com acerto (a base da porcentagem): o n do ponto (P11).
+    medidas: int = 0
 
 
 @dataclass
@@ -306,7 +308,8 @@ def montar(plano=None, hoje: date | None = None) -> tuple[list[MateriaNaTela], P
         cartao.semanal = [
             PontoDaSemana(semana,
                           semanal[semana].porcentagem if semana in semanal else None,
-                          semanal[semana].questoes if semana in semanal else 0)
+                          semanal[semana].questoes if semana in semanal else 0,
+                          semanal[semana].medidas if semana in semanal else 0)
             for semana in semanas_do_ciclo
         ]
 
