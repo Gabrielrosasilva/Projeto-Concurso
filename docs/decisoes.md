@@ -4395,6 +4395,17 @@ avisar ou bloquear, a sua escolha.
      gabarito discutivel (FEPESE-2023-q14, a colocacao depois de "cuja"; e a
      FEPESE-2024-q21, a probabilidade que ja estava na lista). As explicacoes
      foram de 80 para 205.
+     **Em 09/10, a seu pedido, saem mais 5:** a regra da fonte passa a olhar
+     a materia da FICHA (a da arvore) no pedido de explicacao dos temas e dos
+     resumos, e nao a materia escrita no caderno - o complementar chama
+     Portugues de "Conhecimentos Especificos", e por ela a explicacao de crase
+     exigia artigo de lei. O pedido diz as duas ("Lingua Portuguesa (na
+     prova: Conhecimentos Especificos)"). E as de gabarito discutivel
+     (FEPESE-2023-q14, 2023-q30 e 2024-q21) foram escritas com a letra
+     oficial, dizendo na explicacao por que ela e discutivel - a instrucao
+     manda nao responder quando discorda, e aqui a escolha foi sua: o
+     gabarito oficial manda no campo `correta`, e a duvida fica a vista.
+     Explicacoes: 210.
 
 Junto, sem decisao nova: o `servico.fichas.levar_no` (o que o `--juntar` usa
 para as fichas) deixava a ficha com um no e outro dentro dele quando o no

@@ -293,13 +293,15 @@ de prioridade, separado entre o que depende de você e o que a IA pode fazer.
      pegadinha, sem dizer qual está errado;
    - FEPESE-2024-q21 (probabilidade): a conta direta dá 50%, e o gabarito
      oficial (D) diz outra faixa (já na lista dos 2 gabaritos de Raciocínio,
-     seção D); a explicação dela ficou de fora pelo mesmo motivo;
+     seção D). Explicada em 09/10, a seu pedido, com a letra oficial e a conta
+     que dá 50% (decisão 133);
    - FEPESE-2023-q14 (colocação pronominal): o gabarito (A) põe "a cuja
      enteada atribuem-se", e o relativo "cuja" pede a próclise ("se
-     atribuem"); a A é a menos errada, não a certa. Sem explicação;
+     atribuem"); a A é a menos errada, não a certa. Explicada em 09/10,
+     dizendo isso;
    - FEPESE-2023-q30 ("desdenhar"): o gabarito (A) trata "desdenha do
      executivo" como a única regência certa, e o verbo também aceita objeto
-     direto. Sem explicação (o trecho também não veio no pedido).
+     direto. Explicada em 09/10, dizendo isso: a afirmativa 2 traz o trecho.
 4. 🔴 **O Ciclo 2** (seção D): a proposta depois do simulado de 07/11, com a
    classe de cada tema (decisão 124) e as fichas, os resumos e as explicações
    dos temas novos antes de 09/11 (decisão 123). Tamanho: grande.
@@ -336,13 +338,11 @@ de prioridade, separado entre o que depende de você e o que a IA pode fazer.
    Humanos): a fonte delas é só doutrina, e a regra pede dispositivo. As
    outras 10 saíram com o texto-base (decisão 132). Pequeno, se um dia
    houver dispositivo.
-4. ⚪ **11 questões do complementar citadas nos resumos sem explicação**
-   (decisão 133): 6 citam o texto de uma prova do complementar (o texto-base
-   é só do alvo; guardá-lo também no complementar é a mesma decisão 132
-   estendida, se você quiser), 3 são de Português na matéria "Conhecimentos
-   Específicos", que a regra da fonte trata como Direito (pôr a matéria no
-   `sem_lei` do `config/leis.yml` resolveria), e 2 têm gabarito discutível
-   (acima, item 3 de "Depende de você"). Pequeno.
+4. ⚪ **6 questões do complementar citadas nos resumos sem explicação**
+   (decisão 133): as 6 citam o texto de uma prova do complementar, e o
+   texto-base é só do alvo (guardá-lo também no complementar é a decisão 132
+   estendida, aprovada em 09/10). As 3 de Português de "Conhecimentos
+   Específicos" e as 2 de gabarito discutível foram explicadas em 09/10.
 5. ⚪ **A alternativa E da 2019-q6 leva um pedaço do Texto 2 colado no fim**
    ("BBC News Brasil – Muitos no Brasil acham..." até "[Adaptado]"): é a
    leitura normal do caderno, a mesma ordem trocada que a leitura por colunas

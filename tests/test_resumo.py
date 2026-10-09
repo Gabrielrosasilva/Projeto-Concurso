@@ -353,6 +353,46 @@ def test_o_pedido_de_explicacao_do_complementar_vai_pelas_citadas_nos_resumos(vo
     assert "alternativa e da questão 3" in p["pedido"]          # inteira, sem corte
 
 
+def test_portugues_na_materia_da_prova_de_direito_nao_exige_artigo(vozes_no_banco):
+    """Decisao 133, as 3 que ficaram de fora: o caderno do complementar chama
+    Portugues de "Conhecimentos Especificos", e pela prova a explicacao de
+    vozes exigiria artigo de lei. Vale a materia da FICHA (a da arvore)."""
+    from radar.db import sessao
+    from radar.models import Classificacao, QuestaoDeProva
+    from radar.questoes import chave_da_questao
+
+    from tests.test_treino_do_alvo import _aceitar
+
+    vozes = "Língua Portuguesa > Vozes do verbo"
+    alternativas = {l: f"alternativa {l} da questão 9" for l in "abcde"}
+    enunciado = "Questão 9 de vozes num caderno de Conhecimentos Específicos."
+    with sessao() as s:
+        q = QuestaoDeProva(prova_url="outra2023", ano=2023, numero=9, banca="FEPESE",
+                           materia="Conhecimentos Específicos", enunciado=enunciado,
+                           alternativas=alternativas, resposta="a",
+                           impressao="imp-ce9", evidencia="complementar")
+        s.add(q)
+        s.add(Classificacao(chave=chave_da_questao(enunciado, alternativas), conteudo=vozes,
+                            principal=True, status="completa", procedencia="teste"))
+    _aceitar([q])
+    escritas = servico_fichas.carregar()
+    escritas[0].resumo = {"partes": {"como_cobra": [_f(
+        "Outra prova pediu a voz passiva.", "FEPESE-2023-q9 (gabarito A)")]},
+        "modelo": "m", "criado_em": "x", "conferido_em": None}
+    servico_fichas.gravar(escritas)
+
+    lote = manual.pedido_de_explicacoes_dos_resumos()
+    (p,) = lote["pedidos"]
+    assert p["materia"] == "Língua Portuguesa"
+    assert "MATERIA: Língua Portuguesa (na prova: Conhecimentos Específicos)" in p["pedido"]
+
+    resultado = manual._importar_explicacoes(lote, [{"id": p["id"], "explicacao": {
+        "correta": "a", "fonte": "regra da voz passiva sintética - Bechara",
+        "explicacao": "A passiva sintética pede VTD + se, e o verbo concorda com o sujeito."}}],
+        "Claude Code, em teste")
+    assert resultado["gravadas"] == 1, resultado["recusas"]
+
+
 def test_a_faixa_que_mede_sem_consulta_nao_tem_resumo(banco_temporario):
     """Decisao 136: o diagnostico e o simulado medem sem consulta, e o resumo
     cita a questao real com o gabarito - o botao saiu dessas faixas."""

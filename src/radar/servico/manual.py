@@ -639,6 +639,7 @@ def pedido_de_explicacoes_dos_temas(desde=None) -> dict:
     ctx = servico_fichas.contexto()
     ja_explicadas = set(carregar_explicacoes())
     temas_por_questao: dict[tuple, list[str]] = {}
+    materia_da_ficha: dict[tuple, str] = {}
     for tema in fichas.temas_do_plano(ctx.plano, desde or ctx.plano.inicio):
         escrita = next((e for e in ctx.escritas if e.chave == fichas.chave_do_tema(tema.tema)
                         and e.materia == tema.materia), None)
@@ -646,6 +647,7 @@ def pedido_de_explicacoes_dos_temas(desde=None) -> dict:
             continue
         for q in fichas.montar(escrita, ctx).exemplos:
             temas_por_questao.setdefault((q.prova, q.numero), []).append(escrita.tema)
+            materia_da_ficha.setdefault((q.prova, q.numero), escrita.materia)
     criar_tabelas()
     pedidos = []
     with sessao() as s:
@@ -656,16 +658,30 @@ def pedido_de_explicacoes_dos_temas(desde=None) -> dict:
             if q is None or not q.resposta or q.anulada or q.impressao in ja_explicadas:
                 continue
             ja_explicadas.add(q.impressao)
+            materia = materia_da_ficha.get((prova, numero)) or q.materia
             pedidos.append({
-                "id": f"e{len(pedidos) + 1}", "materia": q.materia,
+                "id": f"e{len(pedidos) + 1}", "materia": materia,
                 "impressao": q.impressao, "gabarito": q.resposta,
                 "codigo": f"{q.ano}-q{q.numero}", "temas": temas,
                 "instrucao": INSTRUCAO_EXPLICACAO_DO_TEMA,
-                "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {q.materia or 'nao informada'}"
+                "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {_materia_no_pedido(materia, q)}"
                            f"\n\nQUESTAO {q.ano}-q{q.numero} ({q.banca or 'FEPESE'} {q.ano or ''})"
                            f"\n\n{gerador._questao_por_extenso(q, inteira=True)}"),
             })
     return _novo_lote("explicacoes", pedidos)
+
+
+def _materia_no_pedido(materia: str | None, q) -> str:
+    """A materia da ficha, e a da prova quando o caderno escreve outra.
+
+    A regra da fonte (`fonte_serve`) olha a materia do pedido, e o caderno do
+    complementar chama Portugues de "Conhecimentos Especificos" (decisao 133):
+    pela prova, a explicacao de crase exigiria artigo de lei. A ficha sabe a
+    materia pela arvore; a da prova vai junto so para quem le o pedido.
+    """
+    if q.materia and q.materia != materia:
+        return f"{materia or 'nao informada'} (na prova: {q.materia})"
+    return materia or "nao informada"
 
 
 def pedido_de_explicacoes_dos_resumos() -> dict:
@@ -683,6 +699,7 @@ def pedido_de_explicacoes_dos_resumos() -> dict:
     ja_explicadas = set(carregar_explicacoes())
     temas_por_questao: dict[tuple, list[str]] = {}
     codigo_da_questao: dict[tuple, str] = {}
+    materia_da_ficha: dict[tuple, str] = {}
     for escrita in ctx.escritas:
         if not escrita.resumo:
             continue
@@ -697,6 +714,7 @@ def pedido_de_explicacoes_dos_resumos() -> dict:
             if codigo in citados:
                 temas_por_questao.setdefault((q.prova, q.numero), []).append(escrita.tema)
                 codigo_da_questao[(q.prova, q.numero)] = codigo
+                materia_da_ficha.setdefault((q.prova, q.numero), escrita.materia)
     criar_tabelas()
     pedidos = []
     with sessao() as s:
@@ -708,12 +726,13 @@ def pedido_de_explicacoes_dos_resumos() -> dict:
                 continue
             ja_explicadas.add(q.impressao)
             codigo = codigo_da_questao[(prova, numero)]
+            materia = materia_da_ficha.get((prova, numero)) or q.materia
             pedidos.append({
-                "id": f"e{len(pedidos) + 1}", "materia": q.materia,
+                "id": f"e{len(pedidos) + 1}", "materia": materia,
                 "impressao": q.impressao, "gabarito": q.resposta,
                 "codigo": codigo, "temas": temas,
                 "instrucao": INSTRUCAO_EXPLICACAO_DO_COMPLEMENTAR,
-                "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {q.materia or 'nao informada'}"
+                "pedido": (f"TEMA: {'; '.join(temas)}\nMATERIA: {_materia_no_pedido(materia, q)}"
                            f"\n\nQUESTAO {codigo} ({q.banca or 'FEPESE'} {q.ano or ''}, "
                            f"{q.cargo or 'outro cargo'})"
                            f"\n\n{gerador._questao_por_extenso(q, inteira=True)}"),

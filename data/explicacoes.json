@@ -63,6 +63,15 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
   },
   {
+    "correta": "a",
+    "criado_em": "2026-10-09T15:49:00.937741+00:00",
+    "explicacao": "A A está certa porque 'você' é pronome de tratamento e leva os pronomes de 3ª pessoa: 'lhe' combina com 'você', e o texto mantém a uniformidade de tratamento. A B erra ao trocar para 'por que': no fim da frase, a forma é 'por quê', com acento. A C erra a palavra que pede a preposição: quem rege 'a' é 'ode' (uma ode à perseverança), não 'resiliência'. A D também erra: sem o 'até', a correlação vira 'desde o primeiro salto à aterrissagem', e aí a crase aparece.",
+    "fonte": "regra da uniformidade de tratamento (pronomes de tratamento levam 3ª pessoa), emprego de 'por quê' em final de frase e regra da crase na correlação 'de... a'",
+    "impressao": "0819e262e190b42d11493fee6956921f",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
+  },
+  {
     "correta": "e",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Na classificação em gerações (dimensões), a 1ª é das liberdades civis e políticas, a 2ª dos direitos sociais (igualdade), a 3ª dos de fraternidade/solidariedade (paz, desenvolvimento, meio ambiente) e a 4ª, na lição de Paulo Bonavides, dos direitos à democracia, à informação e ao pluralismo, ligados à globalização e ao avanço tecnológico - por isso a e está correta. A pegadinha é trocar as gerações de lugar: os avanços sociais (a) e a igualdade (c) são da 2ª, as liberdades (b) da 1ª, e a fraternidade (d) da 3ª. O direito à informação está na Constituição como direito fundamental.",
@@ -216,6 +225,15 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "d",
+    "criado_em": "2026-10-09T15:49:00.937741+00:00",
+    "explicacao": "O gabarito oficial é D (entre 24% e 26%), mas a conta não chega lá: cada lançamento dá par com probabilidade 1/2, e 'pelo menos dois pares em três' soma exatamente dois (3 × 1/8 = 3/8) com três (1/8), o que dá 1/2, ou seja, 50%, que cairia na E. Nenhuma leitura comum do enunciado leva a 25%, e por isso este gabarito é discutível. A lição que vale para a prova é o método: em 'pelo menos k', some os casos de k em diante, ou use o complementar.",
+    "fonte": "regra da probabilidade binomial: P(k sucessos em n) = C(n,k) · p^k · (1−p)^(n−k), com n = 3 e p = 1/2",
+    "impressao": "20595bf7fe90f1f138c7c673f9f5187c",
+    "materia": "Raciocínio Lógico",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
+  },
+  {
     "correta": "a",
     "criado_em": "2026-10-06T03:58:16.946173+00:00",
     "explicacao": "A voz passiva sintética se forma com verbo transitivo direto mais o pronome apassivador “se”: em “Sinalizam-se ações”, “ações” é o sujeito paciente (equivale a “ações são sinalizadas”), e por isso o verbo vai ao plural. As erradas mais tentadoras são a B e a E, que estão na voz passiva, mas na analítica, formada com “ser” + particípio (“foram relatados”, “tinha sido quebrada”). Em C o “se” é reflexivo (o próprio jovem se feriu), e D está na voz ativa.",
@@ -367,6 +385,15 @@
     "impressao": "3902bd164a76169aad19c277807cc791",
     "materia": "Conhecimentos Específicos",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-09T15:49:00.937741+00:00",
+    "explicacao": "A 1 está certa: 'haver' no sentido de existir é impessoal, não tem sujeito e fica sempre no singular, então a forma do texto no plural é desvio. A 3 também: 'assistir' no sentido de ver é transitivo indireto e pede a preposição 'a', o que dá 'assistir à televisão', com crase. A 2 é a falsa: pelo gabarito, no trecho o verbo 'ter' concorda com sujeito no plural, e a 3ª pessoa do plural leva o acento diferencial ('eles têm').",
+    "fonte": "regra de concordância do verbo 'haver' impessoal, regência de 'assistir' (ver = assistir a) e acento diferencial de 'têm' (3ª pessoa do plural)",
+    "impressao": "3a4fcf48ea2463476f68120394e2e87b",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
   },
   {
     "correta": "b",
@@ -889,6 +916,15 @@
     "impressao": "80a8574a7831216504f1455b61a175b2",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-09T15:49:00.937741+00:00",
+    "explicacao": "O gabarito oficial é A, a única sem erro de tratamento, de regência ou de caso do pronome. A B mistura 'troque' (você, 3ª pessoa) com 'te' (2ª); a C usa 'eu' depois de preposição ('sem vocês e mim') e mistura 'vos' com 'vocês'; a D erra 'lhe consultar' (consultar é direto: 'consultá-la') e 'consigo' no lugar de 'com você'; a E erra 'incomodar-lhe' ('incomodá-lo'), 'para mim resolver' ('para eu resolver') e 'era' ('eram'). Mesmo a A é discutível: o relativo 'cuja' atrai o pronome, e a norma pede 'a cuja enteada se atribuem'. A banca a deu como certa por ser a menos errada.",
+    "fonte": "regras de colocação pronominal (o pronome relativo atrai a próclise), uniformidade de tratamento, regência de 'consultar' e 'incomodar' (transitivos diretos) e uso de 'eu' como sujeito de infinitivo",
+    "impressao": "80e70022b9b734741f7cdc58d8fa71c1",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
   },
   {
     "correta": "e",
@@ -1636,6 +1672,15 @@
     "impressao": "e4aba8ab964360aaf373658970a0c69a",
     "materia": "Raciocínio Lógico",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "a",
+    "criado_em": "2026-10-09T15:49:00.937741+00:00",
+    "explicacao": "A afirmativa 1 está certa: sem o artigo 'uma', 'vai a + a reunião' vira 'vai à reunião', e a crase aparece. A 3 está errada: 'odiar' é transitivo direto, e o pronome certo é 'o' ('que ele o odeie'), nunca 'lhe'. O gabarito oficial (A) também dá a 2 como errada, mas isso é discutível: 'desdenhar' aceita objeto direto ('desdenhar alguém') além do 'desdenhar de', e por esse uso 'e o desdenha' estaria certo e a resposta seria C. Na prova da FEPESE, o que valeu foi tratar 'desdenhar' como transitivo indireto.",
+    "fonte": "regra de crase (preposição 'a' + artigo 'a') e regência dos verbos 'odiar' (transitivo direto) e 'desdenhar' (direto ou indireto, conforme os dicionários de regência)",
+    "impressao": "e4ebbb772502635de21e227ba263b3d3",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
   },
   {
     "correta": "c",
