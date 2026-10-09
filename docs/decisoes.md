@@ -4745,3 +4745,28 @@ viraram estudo extra "Onde: Radar". Copia antes em
      - a duracao sai do arredondamento de sempre (7 questoes = 20 min, 3 = 10
        min): +5 min em cada noite dividida, sem duracao escrita a mao.
      O teste `test_revisao_nao_mistura_portugues_com_direito` le o plano real.
+
+144. **o erro anotado chega ligado ao no, e a faixa mista nao preenche a
+     materia** (U21, P36; escolhas suas de 09/10). O "Anotar erro" mandava so
+     a materia e o titulo da faixa: o erro ficava sem no (e nao voltava na
+     revisao do assunto), e o R+7 dos diagnosticos de 17/10 mandaria anotar ate
+     40 erros na "materia" Diagnosticos, que o caderno e Minhas materias nao
+     acham. Agora:
+     - **cada erro do relatorio da rodada** tem o seu "📓 Anotar erro", com a
+       materia, o assunto, a referencia, o chute e o NO DA QUESTAO: o da
+       classificacao principal, na real (a mesma regra da decisao 74), e o
+       `conteudo`, na gerada (`simulado.no_da_questao`, `ItemDeRevisao.conteudo`).
+       A correcao na hora (decisao 142) leva o mesmo no. Questao sem
+       classificacao vai sem no, e o relatorio diz;
+     - **o "Anotar erro" da faixa** leva o no que EU dei a ela
+       (`estudo.nos_do_erro`): o `conteudo`, ou o que ela cobre pela regra da
+       decisao 81 - os `nos` do plano e a ficha CONFERIDA. A ficha por
+       conferir nao entra. O no de cima sai quando o de baixo esta na lista;
+     - **o formulario** recebe os nos pelo endereco (`no=`, repetido),
+       conferidos contra a arvore (o de fora e ignorado): com um so, ja vem
+       marcado; com varios, ficam no topo do seletor ("Desta faixa"), nenhum
+       marcado;
+     - **a faixa mista** (`materias_mistas`, os Diagnosticos) abre o
+       formulario sem materia: a materia certa vem de cada erro do relatorio.
+     Com o plano de hoje, so 10 das 168 faixas de questoes de 09/10 a 07/11
+     tem no dado por mim; as outras ganham o no quando eu conferir a ficha.

@@ -34,7 +34,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 25 | Revisão final do estudo (Fase 1 e R1 a R7) | ✅ 2.640 passed e 1 failed, consertado (decisões 108 a 126) |
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 | 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
-| 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | 🟡 P04 feito (decisão 143); U21 · P36 a seguir |
+| 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | ✅ P04 (decisão 143) e U21 · P36 (decisão 144); a suíte inteira no fim |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3350,3 +3350,30 @@ questões na matéria de Direito.
 Execução Penal ... 7 questões" e "18:20-18:30 R+7 · Língua Portuguesa · R+7:
 Verbo 2: emprego dos tempos e modos 3 questões", com o nó da árvore; o 07/10
 continua com o ✓ 3/10.
+
+**U21 · P36 (decisão 144).** O erro anotado não chegava ao nó, e o R+7 de
+17/10 mandaria anotar os erros na "matéria" Diagnósticos.
+
+- **O relatório:** `ItemDeRevisao.conteudo` e `.referencia`
+  (`servico/simulado.py`, pelo `desempenho_por_conteudo.nos_das_questoes`) e
+  `simulado.no_da_questao` para a correção na hora; `relatorio.html` ganhou o
+  "📓 Anotar erro" em cada erro (`app.link_de_anotar_erro_da_questao`).
+- **A faixa:** `estudo.nos_do_erro` e `estudo.nos_do_erro_das_faixas` (a regra
+  da decisão 81); `app.link_de_anotar_erro` manda os nós e tira a matéria
+  mista; `hoje.html` passa os dois.
+- **O formulário:** `GET /erros/novo` aceita `no=` (repetido), conferido
+  contra a árvore; `erro_novo.html` põe os da faixa no topo ("Desta faixa").
+- **Testes:** `tests/test_erro_ligado_ao_no.py` (11 novos); rodados os
+  arquivos tocados (`test_caderno_erros`, `test_correcao_na_hora`,
+  `test_relatorio`, `test_tela_hoje`, `test_estudo`, `test_simulado`,
+  `test_faixas_do_dia`: 221).
+
+**Rodado de verdade** (banco real, só GET): a tela Hoje de 17/10 - o R+7 dos
+diagnósticos e o simulado abrem o formulário sem matéria, o R+7 de RL com a
+dele; o relatório da rodada 19 - 2 erros, cada um com a referência ("FEPESE
+2024, questão 33") e o nó ("Língua Portuguesa > Concordância nominal e verbal
+> Concordância do verbo haver impessoal"); `radar hoje --data 2026-10-17`.
+
+**Critério de conclusão:** ✅ as 3 de Português do R+7 não entram mais no
+acerto de Direito; o erro do relatório chega ligado ao nó; o 17/10 não
+preenche "Diagnósticos".

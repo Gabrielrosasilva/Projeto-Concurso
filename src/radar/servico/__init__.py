@@ -95,6 +95,7 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     desempenho_das_geradas,
     materias_disponiveis,
     materias_universais,
+    no_da_questao,
     questao_atual,
     questao_respondida,
     questoes_erradas,

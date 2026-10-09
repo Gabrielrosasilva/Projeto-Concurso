@@ -1286,7 +1286,7 @@
                      um parametro chamado "amp;tema". #}
                   {% set aqui = '/hoje?data=' ~ t.data.isoformat() ~ ('&cor=' ~ cor if cor else '') ~ '#faixa-' ~ b.chave ~ '-' ~ loop.index0 %}
                   <p class="links">
-                    <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, f.materia, f.titulo, aqui) }}">
+                    <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, f.materia, f.titulo, aqui, (nos_do_erro or {}).get((b.chave, loop.index0), []), t.plano) }}">
                       <span aria-hidden="true">📓</span> Anotar erro</a>
                   </p>
                 {% elif f.tipo == 'revisao_semanal' %}

@@ -65,9 +65,19 @@
     <label class="ds-campo">Conteúdo <span class="ds-dica">(opcional, liga o erro ao conteúdo)</span>
       <select name="conteudo">
         <option value="">— nenhum —</option>
+        {# Os nos da faixa (U21) vem primeiro; com um so, ja vem marcado. #}
+        {% if form.nos_da_faixa %}
+          <optgroup label="Desta faixa">
+            {% for caminho in form.nos_da_faixa %}
+              <option value="{{ caminho }}" {{ 'selected' if caminho == (form.conteudo or '') }}>{{ caminho }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="A árvore inteira">
+        {% endif %}
         {% for caminho, rotulo in OPCOES_DE_CONTEUDO() %}
-          <option value="{{ caminho }}" {{ 'selected' if caminho == (form.conteudo or '') }}>{{ rotulo }}</option>
+          <option value="{{ caminho }}" {{ 'selected' if caminho == (form.conteudo or '') and caminho not in (form.nos_da_faixa or []) }}>{{ rotulo }}</option>
         {% endfor %}
+        {% if form.nos_da_faixa %}</optgroup>{% endif %}
       </select>
     </label>
 

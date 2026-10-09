@@ -9,7 +9,7 @@ from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
 
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI, Form, Query, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
@@ -249,18 +249,41 @@ def tempo_do_plano_b(minutos: int) -> str:
 TIPOS_QUE_ANOTAM = {"questoes", "revisao", "simulado", "diagnostico"}
 
 
-def link_de_anotar_erro(data, materia, assunto, volta: str) -> str:
+def link_de_anotar_erro(data, materia, assunto, volta: str, nos=(), plano=None) -> str:
     """O endereco do formulario com a faixa ja preenchida, e a volta para ela.
 
     Monta com urlencode de proposito: titulo de faixa tem "&", ":" e acento, e
     colar isso na mao no endereco quebra o pre-preenchimento em silencio.
+
+    `nos` sao os nos da faixa (`estudo.nos_do_erro`, U21): com um so, o erro
+    ja chega ligado a ele. A faixa mista (os Diagnosticos) nao preenche a
+    materia: "Diagnósticos" nao e materia, e o caderno nao a acharia (P36) -
+    a materia certa vem de cada erro do relatorio da rodada.
     """
-    return "/erros/novo?" + urlencode({
-        "data": data.isoformat(),
-        "materia": materia or "",
-        "assunto": assunto or "",
-        "volta": volta,
-    })
+    if plano is not None and materia and plano.e_mista(materia):
+        materia = ""
+    return "/erros/novo?" + urlencode([
+        ("data", data.isoformat()),
+        ("materia", materia or ""),
+        ("assunto", assunto or ""),
+        *(("no", no) for no in nos),
+        ("volta", volta),
+    ])
+
+
+def link_de_anotar_erro_da_questao(simulado_id: int, materia, assunto, referencia: str,
+                                   chutou: bool, conteudo: str | None) -> str:
+    """O "Anotar erro" de uma questao da rodada: na correcao na hora (decisao
+    142) e em cada erro do relatorio (U21), com o no da questao."""
+    return "/erros/novo?" + urlencode([
+        ("materia", materia or ""),
+        ("assunto", assunto or ""),
+        ("fonte", "radar"),
+        ("referencia", referencia),
+        ("motivo", "chutei" if chutou else ""),
+        *([("no", conteudo)] if conteudo else []),
+        ("volta", f"/simulado/{simulado_id}"),
+    ])
 
 
 def _filhos_na_tela(materia: str | None, assunto: str | None = None) -> list[str]:
@@ -340,6 +363,7 @@ templates.env.globals.update(
     tempo_do_plano_b=tempo_do_plano_b,
     TIPOS_QUE_ANOTAM=TIPOS_QUE_ANOTAM,
     link_de_anotar_erro=link_de_anotar_erro,
+    link_de_anotar_erro_da_questao=link_de_anotar_erro_da_questao,
 )
 
 
@@ -833,15 +857,10 @@ def _questao_corrigida(request: Request, simulado, resumo: dict, de_ia: bool,
                            servico.manual.carregar_explicacoes().get(questao.impressao)),
             "macetes": [] if gerada else _macetes_por_questao().get(chave, []),
             # O caderno de erros ja abre com o que a tela sabe: errar e anotar
-            # na mesma hora, sem digitar de novo.
-            "anotar_erro": "/erros/novo?" + urlencode({
-                "materia": questao.materia or "",
-                "assunto": questao.assunto or "",
-                "fonte": "radar",
-                "referencia": referencia,
-                "motivo": "chutei" if resposta.chutou else "",
-                "volta": f"/simulado/{simulado.id}",
-            }),
+            # na mesma hora, sem digitar de novo - com o no da questao (U21).
+            "anotar_erro": link_de_anotar_erro_da_questao(
+                simulado.id, questao.materia, questao.assunto, referencia,
+                resposta.chutou, servico.no_da_questao(questao, gerada)),
         },
     )
 
@@ -1130,6 +1149,9 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # O assunto, o subassunto e o elemento de cada faixa, na propria
             # faixa (decisao 71): pela ficha, ou pelos nos do plano.
             "arvore_das_faixas": servico.fichas.arvore_das_faixas(tela.blocos),
+            # O no a que o "Anotar erro" liga o erro (U21): so o dado meu,
+            # a regra da decisao 81.
+            "nos_do_erro": servico.estudo.nos_do_erro_das_faixas(tela.blocos),
             # Caiu ou nao caiu, na propria faixa (R1): a mesma conta da ficha.
             "caiu_das_faixas": servico.fichas.caiu_das_faixas(tela.blocos),
             # O resumo de cada faixa (R2): o tema, ou a lista de varios.
@@ -1967,6 +1989,7 @@ def erro_novo(
     fonte: str | None = None,
     referencia: str | None = None,
     motivo: str | None = None,
+    no: list[str] = Query(default=[]),
 ):
     """O formulario, aceitando tudo pre-preenchido pelo endereco.
 
@@ -1976,11 +1999,19 @@ def erro_novo(
     digitados de novo - e erro que custa some.
     """
     quando, aviso = _erro_de_data(data)
+    # Os nos da faixa ou da questao (U21). No fora da arvore e ignorado: o
+    # endereco e texto, e o servico recusaria o erro inteiro por ele. Com um
+    # no so, o erro ja chega ligado; com varios, eles vao para o topo da
+    # lista e eu escolho.
+    arvore = set(servico.conteudos.caminhos())
+    nos = [n for n in dict.fromkeys(no) if n in arvore]
     return _formulario_de_erro(
         request,
         form={"data_estudo": (quando or servico.cronograma.hoje_local()).isoformat(),
               "materia": (materia or "").strip(),
               "assunto": (assunto or "").strip(),
+              "nos_da_faixa": nos,
+              **({"conteudo": nos[0]} if len(nos) == 1 else {}),
               # A questao do radar que eu acabei de errar (decisao 142).
               **({"fonte": fonte} if fonte in servico.erros.FONTES else {}),
               **({"motivo": motivo} if motivo in servico.erros.MOTIVOS else {}),

@@ -339,6 +339,33 @@ def _o_que_a_faixa_cobre(faixa, escritas, arvore_inteira) -> set[str]:
     return {caminho for caminho in cobertos if caminho in arvore_inteira}
 
 
+def nos_do_erro(faixa, escritas, arvore_inteira) -> list[str]:
+    """Os nos a que o erro anotado numa faixa se liga (U21): o `conteudo`
+    dela, ou o que ela cobre pela regra da decisao 81 - so o dado meu, nunca a
+    ficha por conferir. Sai o no que esta acima de outro da lista (a ficha sem
+    no da o assunto E o subassunto): o erro vai ao mais especifico."""
+    if getattr(faixa, "conteudo", None):
+        nos = {faixa.conteudo} & set(arvore_inteira)
+    else:
+        nos = _o_que_a_faixa_cobre(faixa, escritas, arvore_inteira)
+    return sorted(no for no in nos
+                  if not any(outro.startswith(no + arvore.SEPARADOR) for outro in nos))
+
+
+def nos_do_erro_das_faixas(blocos) -> dict:
+    """{(bloco, indice): [nos]} das faixas do dia que tem no para o erro.
+    Barato: le o arquivo das fichas e os caminhos da arvore, sem contar nada."""
+    escritas = servico_fichas.carregar()
+    caminhos = set(servico_conteudos.caminhos())
+    saida = {}
+    for bloco in blocos:
+        for indice, faixa in enumerate(bloco.faixas):
+            nos = nos_do_erro(faixa, escritas, caminhos)
+            if nos:
+                saida[(bloco.chave, indice)] = nos
+    return saida
+
+
 def _evolucao(por_semana: dict[int, list], minimo: int) -> list[Semana]:
     """As semanas de um no, pela conta do `metricas` - a mesma da tela
     Semanas. Semana em que nada mede o acerto (so consulta, ou sem acerto

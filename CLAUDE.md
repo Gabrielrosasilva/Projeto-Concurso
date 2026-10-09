@@ -101,7 +101,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (07/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (09/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -222,9 +222,15 @@ do acerto e nunca dentro; as geradas nunca feitas saem primeiro, e a faixa
 avisa com metade e com todas feitas, ja com os 3 passos; e o "📝 Como foi" de
 cada faixa (chutes fora do radar, entendi, nota), relido na ficha e no Meu
 desempenho para o Ciclo 2.
-**Proximo:** os lotes 3 e 4 da proposta de melhorias (pendencia I: o R+7
-com Portugues dividido, a composicao que nao repete o diagnostico e a regra
-do anotado), um por conversa, ate 07/11;
+**O lote 3 da proposta (09/10, decisoes 143 e 144):** o R+7 e o R+30 com
+"+ 3 de Portugues" viraram duas faixas no plano (31, de 08/10 em diante; o
+07/10, ja anotado, ficou como era), e o erro anotado chega ligado ao no -
+cada erro do relatorio da rodada com o no da questao, a faixa com o no que
+voce deu (`conteudo`, `nos`, ficha conferida) -, com a faixa mista
+(Diagnosticos) sem materia.
+**Proximo:** o lote 4 da proposta de melhorias (pendencia I: a composicao
+que nao repete o diagnostico, a regra do anotado, o gabarito na ficha), ate
+07/11;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup

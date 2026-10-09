@@ -22,6 +22,7 @@ from radar import conteudos as arvore
 from radar import macetes, regioes
 from radar.db import criar_tabelas, sessao
 from radar.models import (
+    Classificacao,
     QuestaoDeProva,
     QuestaoGerada,
     RespostaDeSimulado,
@@ -492,6 +493,18 @@ class ItemDeRevisao:
     banca: str | None = None
     #: O "vou no chute" marcado antes da letra (decisao 142).
     chutou: bool = False
+    #: O no da arvore: o da classificacao principal, na questao real (o mesmo
+    #: da revisao espacada, decisao 74), e o da propria gerada. E com ele que
+    #: o "Anotar erro" do relatorio liga o erro ao no (U21).
+    conteudo: str | None = None
+    assunto: str | None = None
+
+    @property
+    def referencia(self) -> str:
+        """A questao como o caderno de erros a anota."""
+        if self.gerada:
+            return "questão criada por IA"
+        return f"{self.banca} {self.ano}, questão {self.numero}"
 
     @property
     def origem(self) -> str:
@@ -502,6 +515,20 @@ class ItemDeRevisao:
     def origem_da_resposta(self) -> str:
         """A letra certa: o gabarito definitivo, ou a resposta que a IA deu."""
         return IA if self.gerada else OFICIAL
+
+
+def no_da_questao(questao, gerada: bool) -> str | None:
+    """O no de uma questao da rodada: o da classificacao principal, na real
+    (a mesma regra do `desempenho_por_conteudo.nos_das_questoes`), e o da
+    propria gerada. None quando ninguem classificou."""
+    if gerada:
+        return getattr(questao, "conteudo", None)
+    from radar.servico.classificacoes import chave_de
+    criar_tabelas()
+    with sessao() as s:
+        return s.scalar(select(Classificacao.conteudo)
+                        .where(Classificacao.chave == chave_de(questao))
+                        .where(Classificacao.principal.is_(True)))
 
 
 def revisao(simulado_id: int) -> list[ItemDeRevisao]:
@@ -525,11 +552,19 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             for resposta in respostas
         ]
 
+    # Import aqui: o desempenho_por_conteudo le o metricas, que este modulo
+    # reexporta.
+    from radar.servico.desempenho_por_conteudo import nos_das_questoes
+    from radar.servico.classificacoes import chave_de
+    nos = nos_das_questoes() if any(not r.gerada for r, _ in linhas) else {}
+
     itens = []
     for resposta, questao in linhas:
         if questao is None:
             continue
         alternativas = questao.alternativas or {}
+        no = (getattr(questao, "conteudo", None) if resposta.gerada
+              else nos.get(chave_de(questao)))
         itens.append(ItemDeRevisao(
             enunciado=questao.enunciado,
             escolhida=resposta.escolhida,
@@ -546,6 +581,8 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             ano=getattr(questao, "ano", None),
             banca=getattr(questao, "banca", None),
             chutou=bool(resposta.chutou),
+            conteudo=no,
+            assunto=questao.assunto,
         ))
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)

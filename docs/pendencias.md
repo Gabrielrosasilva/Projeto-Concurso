@@ -369,8 +369,11 @@ número ou prepara 10/10, 17/10 e 07/11.
    da decisão 130.
 2. 🔴 **Lote 3, até 16/10**: ✅ P04 em 09/10 (decisão 143: as 31 faixas de
    08/10 em diante viraram duas linhas, Direito e Português; o 07/10, já
-   anotado, ficou como era) e U21 · P36 (o erro anotado chega ligado ao nó; o
-   R+7 de 17/10 não preenche a matéria "Diagnósticos").
+   anotado, ficou como era) e ✅ U21 · P36 em 09/10 (decisão 144: cada erro
+   do relatório da rodada vai ao caderno com a matéria e o nó da questão; a
+   faixa leva o nó que você deu - `conteudo`, `nos` ou a ficha conferida -; a
+   faixa mista abre sem matéria). **Lote 3 feito.** Para valer na tela, o
+   servidor precisa ser reiniciado (`radar parar` e `radar subir`).
 3. 🔴 **Lote 4, até 06/11**: P07 (as rodadas que medem não repetem questão:
    o fechamento de 07/11 repetiria as 8 de RL de 10/10; muda a decisão 67),
    P01 + P09 (o anotado sem conteúdo conta no nó da matéria, escolha sua;
