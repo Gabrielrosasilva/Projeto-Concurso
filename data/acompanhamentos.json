@@ -355,13 +355,13 @@
   ],
   "ultima_verificacao": {
     "erro": null,
-    "fim": "2026-10-09T15:06:54.920258+00:00",
-    "inicio": "2026-10-09T15:06:21.337503+00:00",
+    "fim": "2026-10-09T17:22:27.281457+00:00",
+    "inicio": "2026-10-09T17:21:53.187463+00:00",
     "resumo": [
-      "concursosnobrasil: 15 novo(s), 0 atualizado(s)",
-      "fepese: 0 novo(s), 146 atualizado(s)",
-      "ieses: 0 novo(s), 11 atualizado(s)",
-      "Páginas lidas: 11 página(s) lida(s): 1 com prazo de inscrição, 0 com banca, 4 falharam"
+      "concursosnobrasil: 7 novo(s), 0 atualizado(s)",
+      "fepese: 0 novo(s), 101 atualizado(s)",
+      "ieses: 0 novo(s), 6 atualizado(s)",
+      "Páginas lidas: 10 página(s) lida(s): 0 com prazo de inscrição, 0 com banca, 5 falharam"
     ]
   },
   "ultimos_concursos": {
@@ -409,5 +409,8 @@
       "procedencia": "Claude Code (claude-opus-5-5), reorganizado em 09/10/2026 a partir da pesquisa de 07/10",
       "prova": null
     }
+  },
+  "visto": {
+    "Polícia Militar SC": "2026-10-09T17:29:30.909204+00:00"
   }
 }
