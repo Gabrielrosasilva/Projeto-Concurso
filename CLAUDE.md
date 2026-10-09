@@ -152,7 +152,7 @@ conceitos associados na Analises > Conferencia; e o leitor entende o
 texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
-provas complementares aceitas); 901 geradas (10 rejeitadas); 205
+provas complementares aceitas); 901 geradas (10 rejeitadas); 214
 explicacoes; arvore com 438 nos; banco na versao 7.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
 186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
@@ -236,7 +236,7 @@ depois de 07/11, o redesenho das telas e a nuvem
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
 das 23h30 voltou em 03/10.
 **Em aberto:** a falta do estoque de geradas de 13/10 em diante (sob demanda),
-as 11 explicacoes do complementar e as 2 do alvo que ficaram de fora, a
+as 2 explicacoes do complementar e as 2 do alvo que ficaram de fora, a
 alternativa da 2019-q6 com o Texto 2 colado, a Redacao oficial sem link do Qconcursos, o texto local das leis (o
 verificador ainda nao confere se o artigo citado existe) e o resto dos
 achados da varredura de 03/10 (pendencia F). Ordem e detalhe em

@@ -335,14 +335,16 @@ de prioridade, separado entre o que depende de você e o que a IA pode fazer.
    diante continua sob demanda, pelos 3 passos de cada faixa, ou uma semana
    por vez, como esta. Médio.
 3. ⚪ **2 questões do alvo sem explicação** (2019-q28 e q38, Direitos
-   Humanos): a fonte delas é só doutrina, e a regra pede dispositivo. As
+   Humanos): a fonte delas é só doutrina, e a regra pede dispositivo
+   (procurado de novo em 09/10: o § 5 de Viena e o art. 26 da Convenção
+   Americana cobrem outras alternativas, não o ponto da resposta). As
    outras 10 saíram com o texto-base (decisão 132). Pequeno, se um dia
    houver dispositivo.
-4. ⚪ **6 questões do complementar citadas nos resumos sem explicação**
-   (decisão 133): as 6 citam o texto de uma prova do complementar, e o
-   texto-base é só do alvo (guardá-lo também no complementar é a decisão 132
-   estendida, aprovada em 09/10). As 3 de Português de "Conhecimentos
-   Específicos" e as 2 de gabarito discutível foram explicadas em 09/10.
+4. ⚪ **2 questões do complementar citadas nos resumos sem explicação**
+   (decisão 133): a FEPESE-2016-q1 (o caderno não diz "texto 1", e o leitor
+   não liga o texto à questão) e a FEPESE-2023-q1 do Monitor Escolar (de
+   lacunas: uma das seis sumiu na leitura do PDF). As outras 9 saíram em
+   09/10, com o texto-base também no complementar aceito.
 5. ⚪ **A alternativa E da 2019-q6 leva um pedaço do Texto 2 colado no fim**
    ("BBC News Brasil – Muitos no Brasil acham..." até "[Adaptado]"): é a
    leitura normal do caderno, a mesma ordem trocada que a leitura por colunas

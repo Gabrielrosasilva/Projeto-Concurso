@@ -595,23 +595,27 @@ class TextosBase:
 
 
 def guardar_textos_base() -> TextosBase:
-    """O texto de apoio de cada questao de Portugues das provas do ALVO.
+    """O texto de apoio de cada questao de Portugues das provas do ALVO e das
+    do COMPLEMENTAR aceitas.
 
-    So o alvo, por escolha (06/10/2026): e onde a explicacao da questao de
-    interpretacao precisa do texto, e onde ele cabe conferir. O caderno e lido
-    de novo por colunas, e so a coluna `texto_base` muda: enunciado,
-    alternativas, chave e classificacao ficam como estao. Prova sem o PDF na
-    maquina e pulada.
+    O alvo desde 06/10/2026 (decisao 132); o complementar aceito desde 09/10,
+    porque os resumos citam questoes de interpretacao dele e a explicacao
+    precisa do texto (decisao 133). A prova complementar nao aceita fica de
+    fora, como em toda estatistica. O caderno e lido de novo por colunas, e so
+    a coluna `texto_base` muda: enunciado, alternativas, chave e
+    classificacao ficam como estao. Prova sem o PDF na maquina e pulada. O
+    texto e de terceiros: mora so no banco, nunca em arquivo versionado.
     """
     from radar.regioes import normalizar
-    from radar.servico import evidencia
+    from radar.servico import complementar, evidencia
 
     criar_tabelas()
     resultado = TextosBase()
     with sessao() as s:
         do_alvo = evidencia.provas(s, evidencia.ALVO)
+    lidas = do_alvo | complementar.provas_aceitas()
     for registro in arquivos_de_prova.carregar_manifesto():
-        if registro.get("url") not in do_alvo:
+        if registro.get("url") not in lidas:
             continue
         caminho = _caminho(registro)
         if caminho is None:

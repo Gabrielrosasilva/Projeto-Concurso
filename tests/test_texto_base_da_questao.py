@@ -144,6 +144,24 @@ def test_so_a_questao_de_portugues_do_alvo_guarda_o_texto(banco_temporario,
     assert por[(OUTRA, 1)] is None            # so o alvo
 
 
+def test_a_prova_complementar_aceita_tambem_guarda(banco_temporario, monkeypatch, tmp_path):
+    """Decisao 133 (09/10): os resumos citam questoes de interpretacao do
+    complementar, e a explicacao precisa do texto. So a prova ACEITA."""
+    from radar.servico import complementar
+
+    monkeypatch.setattr(complementar, "provas_aceitas", lambda: {OUTRA})
+    _questao(OUTRA, 1, "Língua Portuguesa", "Assinale a correta, com base no texto 1.")
+    _questao(OUTRA, 30, "Direito Penal", "Conforme o texto 1 da lei, é correto:")
+
+    feito = _guardar(monkeypatch, tmp_path)
+
+    with sessao() as s:
+        por = {(q.prova_url, q.numero): q.texto_base for q in s.query(QuestaoDeProva)}
+    assert feito.provas == 2
+    assert por[(OUTRA, 1)].startswith("Texto 1\nO farol")
+    assert por[(OUTRA, 30)] is None
+
+
 def test_guardar_o_texto_nao_muda_a_questao(banco_temporario, monkeypatch, tmp_path):
     from radar.servico.classificacoes import chave_de
 

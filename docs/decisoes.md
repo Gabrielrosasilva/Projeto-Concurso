@@ -4405,7 +4405,20 @@ avisar ou bloquear, a sua escolha.
      oficial, dizendo na explicacao por que ela e discutivel - a instrucao
      manda nao responder quando discorda, e aqui a escolha foi sua: o
      gabarito oficial manda no campo `correta`, e a duvida fica a vista.
-     Explicacoes: 210.
+     **E o texto-base passou a valer tambem no complementar aceito** (a
+     decisao 132 estendida, aprovada por voce em 09/10): o
+     `provas.guardar_textos_base` (`radar questoes --textos-base`) le os
+     cadernos do alvo e os do complementar aceito - 329 questoes com texto,
+     de 174 provas; a prova nao aceita fica de fora, e o texto continua so
+     no banco. Com ele sairam mais 4 das 6 de interpretacao. Ficaram 2: a
+     FEPESE-2016-q1, cujo caderno nao diz "texto 1" e o leitor nao liga o
+     texto a questao, e a FEPESE-2023-q1 do Monitor Escolar, de preencher
+     lacunas, em que uma das seis sumiu na leitura do PDF - explicar a sexta
+     seria chutar. As 2 do alvo de Direitos Humanos (2019-q28 e q38) seguem
+     sem: o ponto da resposta (a imprescritibilidade; "direitos naturais"
+     como termo ultrapassado) e so doutrina, e o dispositivo que existe (o §
+     5 de Viena, o art. 26 da Convencao Americana) cobre outra alternativa.
+     Explicacoes: 214.
 
 Junto, sem decisao nova: o `servico.fichas.levar_no` (o que o `--juntar` usa
 para as fichas) deixava a ficha com um no e outro dentro dele quando o no

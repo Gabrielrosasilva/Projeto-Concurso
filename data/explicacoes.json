@@ -198,6 +198,15 @@
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026"
   },
   {
+    "correta": "c",
+    "criado_em": "2026-10-09T15:56:00.377350+00:00",
+    "explicacao": "'Viável' leva acento por ser paroxítona terminada em 'l'. 'O setor tem apostado' fica no singular, porque o sujeito 'o setor' é singular ('têm', com acento, é a 3ª pessoa do plural). 'Voos' perdeu o acento com o Acordo Ortográfico, que tirou o circunflexo do hiato 'oo'. 'Seriamente' não tem acento, porque o advérbio em -mente perde o acento do adjetivo ('séria'). As alternativas com 'vôos', 'idéia' ou 'sériamente' usam a grafia anterior ao Acordo.",
+    "fonte": "regras de acentuação gráfica do Acordo Ortográfico da Língua Portuguesa (Decreto 6.583/2008): paroxítonas terminadas em l, hiato oo, ditongo aberto ei em paroxítona e advérbios em -mente; e a concordância de 'ter' (tem/têm)",
+    "impressao": "1c9ce3f55a61c62323afaaad3bd6e2f1",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
+  },
+  {
     "correta": "e",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "As quatro estão no art. 41 da LEP: audiência especial com o diretor (XIII), chamamento nominal (XI), atribuição de trabalho e sua remuneração (II) com proporcionalidade do tempo para trabalho, descanso e recreação (V), e representação e petição a qualquer autoridade em defesa de direito (XIV). A pegadinha é a 3, que junta dois incisos numa frase só e parece inventada, mas está toda na lei. Atenção ao texto vigente: depois da Lei 14.994/2024, o juiz pode suspender ou restringir por ato motivado os incisos V, X e XV (§ 1º), o que não muda o gabarito.",
@@ -304,6 +313,15 @@
     "impressao": "29de9751562ef1424fe7269e4222bfb4",
     "materia": "Língua Portuguesa",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "c",
+    "criado_em": "2026-10-09T15:56:00.377350+00:00",
+    "explicacao": "O texto 1 é uma notícia: conta quando e onde a Pronegócio começou, quem promove, quantos compradores e fabricantes, e cita a fala do presidente da entidade. O propósito é informar o leitor sobre um fato, e por isso ele é expositivo e informativo. A E é a mais tentadora, mas a expectativa otimista está na fala citada do entrevistado, e não num argumento do texto para convencer o leitor. A A seria um texto instrucional, e a D um texto de opinião.",
+    "fonte": "tipologia textual: o texto expositivo-informativo (gênero notícia) diante do argumentativo e do injuntivo",
+    "impressao": "2a1d877c28310bc43d95c9414ccb369f",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
   },
   {
     "correta": "b",
@@ -982,6 +1000,15 @@
   },
   {
     "correta": "a",
+    "criado_em": "2026-10-09T15:56:00.377350+00:00",
+    "explicacao": "O texto 1 é uma portaria: ele 'determina' a abertura do processo e manda a comissão agir, com prazo. É texto prescritivo (injuntivo), que impõe uma conduta com força de ato oficial, e por isso coercitivo. A B e a C erram porque o ato não descreve nem opina: ele ordena, em nome da administração, e não de uma pessoa física. A D (narrativa ficcional) e a E (registro de atividades de uma pessoa) não combinam com um ato normativo.",
+    "fonte": "tipologia textual: o texto prescritivo (injuntivo) e o gênero ato administrativo (portaria)",
+    "impressao": "85fb1f49f15377bfbfaaf20903ce619c",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
+  },
+  {
+    "correta": "a",
     "criado_em": "2026-10-05T21:56:25.538774+00:00",
     "explicacao": "Quando a lei nova deixa de considerar o fato crime (abolitio criminis), cessam a execução e os efeitos penais da sentença condenatória, mesmo depois do trânsito em julgado - então o condenado preso é posto em liberdade. A pegadinha é a d: a lei mais benéfica retroage e alcança também os casos já julgados. Não há novo julgamento (b) nem redução pela metade (e); só os efeitos civis, como o dever de indenizar, permanecem.",
     "fonte": "art. 2º do Código Penal e art. 5º, XL, da Constituição Federal",
@@ -1582,6 +1609,15 @@
     "impressao": "da35a0de79ad2f8ead5a4c4af2635b3c",
     "materia": "Raciocínio Lógico",
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 06/10/2026"
+  },
+  {
+    "correta": "b",
+    "criado_em": "2026-10-09T15:56:00.377350+00:00",
+    "explicacao": "A B está certa: o sujeito de 'demonstra' é 'O discurso', singular, e o verbo concorda com ele. A A acerta o plural, mas erra o motivo: 'maioria' é singular, e o plural vem da concordância com o complemento ('a maioria dos presos repetem'), que a norma aceita ao lado do singular. A E erra ao dizer que a concordância é opcional: com o pronome 'quem' como sujeito, o verbo fica na 3ª pessoa do singular ('quem está'), e 'quem estão' é erro.",
+    "fonte": "regras de concordância verbal: sujeito simples, sujeito coletivo com complemento no plural e o pronome 'quem' como sujeito",
+    "impressao": "daa60678cf2974669873a067420d610e",
+    "materia": "Língua Portuguesa",
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 09/10/2026"
   },
   {
     "correta": "d",
