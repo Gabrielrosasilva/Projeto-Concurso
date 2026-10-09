@@ -379,6 +379,12 @@ número ou prepara 10/10, 17/10 e 07/11.
    P01 + P09 (o anotado sem conteúdo conta no nó da matéria, escolha sua;
    muda a decisão 81), P05 (a ficha esconde o gabarito da questão ainda não
    respondida; muda as decisões 109 e 118), P10, P11 · U18 e P30.
+   **As escolhas, feitas por você em 09/10:** P01 + P09 = o anotado sem
+   conteúdo conta no nó da MATÉRIA (não no assunto), e as telas dizem "sem
+   acerto medido" no lugar de "não treinei"; P05 = a letra fica escondida até
+   eu responder a questão no radar (sem botão "ver gabarito"); P30 = decide o
+   acumulado do ciclo, com o fechamento ao lado, e a tela diz que os
+   simulados do Qconcursos ficam fora. P07, P10 e P11 · U18 como a proposta.
 
 ### Depende de você
 
