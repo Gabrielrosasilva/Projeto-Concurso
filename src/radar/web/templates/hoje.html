@@ -1260,15 +1260,20 @@
                 {% elif sab and sab.tipo == 'comparacao' %}
                   <div class="composicao do-sabado">
                     <p>{{ selo('automatico', 'Calculado das rodadas e do ciclo') }} O acerto por matéria, sem consulta, em três medidas separadas, que não se somam. Abaixo de {{ sab.minimo }} respostas (o mínimo da matéria no config/amostra.yml), o número leva "Amostra insuficiente" e não decide nada sozinho.</p>
+                    {# P30 (decisao 146): o fechamento sozinho nunca tem amostra
+                       (de 4 a 13 por materia), e o diagnostico so mede LP e
+                       RL. Quem decide e o acumulado; a tela diz o que ele
+                       deixa de fora. #}
+                    <p><b>O que decide o Ciclo 2 é o acumulado do ciclo</b>, com o fechamento ao lado. Os simulados de sábado feitos no Qconcursos ficam fora do acumulado: a faixa deles não tem matéria.</p>
                     <div class="ds-rolagem">
                       <table class="ds-tabela">
-                        <thead><tr><th>Matéria</th><th class="ds-n">Diagnóstico de {{ sab.com | dia_mes }}</th><th class="ds-n">Fechamento de {{ sab.dia | dia_mes }}</th><th class="ds-n">Acumulado do ciclo</th></tr></thead>
+                        <thead><tr><th>Matéria</th><th class="ds-n">Acumulado do ciclo (decide)</th><th class="ds-n">Fechamento de {{ sab.dia | dia_mes }}</th><th class="ds-n">Diagnóstico de {{ sab.com | dia_mes }}</th></tr></thead>
                         <tbody>
                           {% for l in sab.linhas %}
                             <tr><td>{{ l.materia }}</td>
-                              <td class="ds-n">{{ medida_do_sabado(l.diagnostico, 'sem diagnóstico') }}</td>
+                              <td class="ds-n">{{ medida_do_sabado(l.ciclo, 'nada sem consulta ainda') }}</td>
                               <td class="ds-n">{{ medida_do_sabado(l.fechamento, 'sem resposta ainda') }}</td>
-                              <td class="ds-n">{{ medida_do_sabado(l.ciclo, 'nada sem consulta ainda') }}</td></tr>
+                              <td class="ds-n">{{ medida_do_sabado(l.diagnostico, 'sem diagnóstico') }}</td></tr>
                           {% endfor %}
                         </tbody>
                       </table>

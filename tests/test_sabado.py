@@ -27,7 +27,8 @@ from radar.servico import composicao, sabado
 from radar.servico import erros as caderno
 from radar.servico import simulado as servico_simulado
 from radar.web.app import app
-from tests.test_composicao import CONFIG, PESOS_DO_EDITAL, acervo  # noqa: F401 - fixture
+from tests.test_composicao import (  # noqa: F401 - acervo e fixture
+    ALVO_2019, CONFIG, CONJUNTOS, PESOS_DO_EDITAL, _questao, acervo)
 
 # Os diagnosticos passaram de 03/10 para 10/10, e o R+7 deles para 17/10
 # (decisao 105).
@@ -192,11 +193,19 @@ def test_a_comparacao_separa_diagnostico_e_fechamento_e_marca_a_amostra(
     fechamento. Os dois numeros ficam lado a lado, e nenhum vira 3 de 4."""
     monkeypatch.setattr(composicao, "_pesos_do_edital", lambda materias: {
         **PESOS_DO_EDITAL, "Raciocínio Lógico": 10})
-    _diagnosticos(errar_rl=1, errar_pt=0)
+    diagnosticos = _diagnosticos(errar_rl=1, errar_pt=0)
+    # O fechamento nao repete questao do diagnostico (P07): RL ganha 2 novas.
+    _questao(13, "Raciocínio Lógico", CONJUNTOS, ALVO_2019)
+    _questao(14, "Raciocínio Lógico", CONJUNTOS, ALVO_2019)
     dia = plano.dia(FECHAMENTO)
     indice = next(i for i, f in enumerate(dia.noite) if composicao.mede(f))
     fechamento = composicao.criar_rodada(FECHAMENTO, "noite", indice, dia.noite[indice])
     _responder(fechamento.id, errar=0)
+    with sessao() as s:
+        def ids(rodada):
+            return set(s.scalars(select(RespostaDeSimulado.questao_id)
+                                 .where(RespostaDeSimulado.simulado_id == rodada)))
+        assert not ids(fechamento.id) & set().union(*(ids(r) for r in diagnosticos))
     correcao = next(f for f in dia.noite if f.compara_com)
 
     c = sabado.comparacao(FECHAMENTO, correcao, plano)
@@ -250,3 +259,8 @@ def test_o_07_11_mostra_a_tabela_da_comparacao(acervo, monkeypatch):
     assert "Amostra insuficiente" in pagina
     assert "sem diagnóstico" in pagina                 # Direitos Humanos
     assert "três medidas separadas, que não se somam" in pagina
+    # P30: o acumulado decide, vem primeiro, e a tela diz o que fica fora.
+    assert "O que decide o Ciclo 2 é o acumulado do ciclo" in pagina
+    assert "ficam fora do acumulado" in pagina
+    cabeca = pagina.split("Acumulado do ciclo (decide)")[1]
+    assert cabeca.index("Fechamento de 07/11") < cabeca.index("Diagnóstico de 10/10")

@@ -3347,6 +3347,8 @@ mede (7A); commit e push por subetapa (8A).
       `config/amostra.yml`). Com 20 questoes por materia no diagnostico e de 4
       a 13 no fechamento, o fechamento sozinho nunca tem amostra - e por isso
       o acumulado do ciclo fica do lado, como a escolha 3A+C combinou.
+    **Ajustada pela 146 (09/10):** quem decide e o acumulado, que vem
+    primeiro; o fechamento fica ao lado e o diagnostico por ultimo.
     As duas contas novas - o acerto de varias rodadas juntas e os erros delas -
     moram no `servico/metricas.py`.
 
@@ -4816,3 +4818,15 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Simulado com o banco de 09/10 (os diagnosticos como seriam criados): o
      fechamento sai com as mesmas 50 (LP 13, RL 8, DH 13, CF 4, Penal 4, LEP
      8), nenhuma repetida e nada em falta.
+
+146. **o que decide o Ciclo 2 e o acumulado do ciclo, com o fechamento ao
+     lado** (P30, escolha sua de 09/10; ajusta a 70 so na ordem e no texto).
+     O plano dizia que o numero que decide e a comparacao com o diagnostico,
+     mas o fechamento nunca tem amostra (de 4 a 13 por materia, o minimo e
+     20) e o diagnostico de 10/10 so mede LP e RL. Agora o detalhe da
+     Correcao de 07/11 e a tabela dizem o mesmo: decide o acumulado do ciclo
+     (a primeira coluna, "decide"), o fechamento vem ao lado e o diagnostico
+     por ultimo. E dizem o que fica fora: os simulados de sabado feitos no
+     Qconcursos, cuja faixa nao tem materia. As contas nao mudaram - tres
+     medidas, nunca somadas, com o "Amostra insuficiente" de sempre; repartir
+     os simulados por materia mudaria a E2 e ficou fora.

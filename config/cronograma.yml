@@ -4444,8 +4444,9 @@ dias:
   - tipo: correcao
     duracao: 30
     titulo: Correção
-    detalhe: Compare o acerto por matéria com o diagnóstico de 10/10, na tabela abaixo. É esse número que decide
-      o Ciclo 2.
+    detalhe: 'Veja o acerto por matéria na tabela abaixo. Quem decide o Ciclo 2 é o acumulado do ciclo, com o
+      fechamento ao lado e o diagnóstico de 10/10 para comparar; os simulados de sábado feitos no Qconcursos
+      ficam fora do acumulado (a faixa deles não tem matéria).'
     compara_com: '2026-10-10'
   pos22:
   - tipo: anki
