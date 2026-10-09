@@ -427,6 +427,10 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   carreira ficar fora do cartao, ou um de fora entrar, o ajuste e no
   `config/acompanhamentos.yml`, sem codigo.
 
+- ⚪ **Rodar a pesquisa de novo** (desde 09/10 ela pede o proximo concurso
+  e o ultimo): `radar acompanhar --pedido` e os 3 passos. Ela completa o
+  "Ultimo concurso" das Guardas e da PM, que ainda dizem "nao sei ainda".
+
 ### A IA pode fazer (quando voce pedir)
 
 - 🟡 **Fontes oficiais novas** (SEJURI/DPP, PCSC, PMSC, CBMSC, prefeituras de

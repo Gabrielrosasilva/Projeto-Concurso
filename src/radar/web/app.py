@@ -1866,8 +1866,12 @@ def acompanhando_visto(nome: str = Form("")):
 
 @app.post("/acompanhando/pesquisa/{pesquisa_id}")
 def acompanhando_conferir(pesquisa_id: str, confere: str = Form("")):
-    """Eu li a fonte da pesquisa: confere ou nao confere."""
-    servico.acompanhamentos.conferir(pesquisa_id, confere == "sim")
+    """Eu li a fonte da pesquisa: confere, nao confere - ou nao interessa,
+    que tira do cartao o que nao e concurso sem dizer que esta errado."""
+    if confere == "ignorar":
+        servico.acompanhamentos.nao_interessa(pesquisa_id)
+    else:
+        servico.acompanhamentos.conferir(pesquisa_id, confere == "sim")
     return RedirectResponse("/acompanhando?recado=conferida", status_code=303)
 
 

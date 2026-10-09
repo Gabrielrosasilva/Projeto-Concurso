@@ -4653,6 +4653,24 @@ viraram estudo extra "Onde: Radar". Copia antes em
        sem prova no acervo nao ganha o link, e o cartao diz "o acervo ainda
        nao tem prova dessa banca" - a tela de padrao abria vazia, sem dizer.
        Outra carreira com banca nao liga nada: o estudo e so do alvo.
+     - **a aba acompanha so o PROXIMO concurso, e diz quando foi o ultimo**
+       (09/10, pedido seu: a pesquisa de 07/10 trouxe gabarito, lei de
+       salario e convocacao). A pesquisa pede duas coisas: os passos do
+       proximo concurso (previsao, autorizacao, comissao, banca, edital,
+       inscricoes, prova, retificacao) e o `ultimo_concurso` (ano do edital,
+       banca, datas, link). O marco "outro" saiu: a importacao o recusa; a
+       "previsao" entra sempre como nao confirmada. O cartao ganhou duas
+       linhas: "Proximo concurso" (so quando marcos e fatos nao dizem:
+       "nenhuma noticia de concurso novo" ou a previsao mais nova) e "Ultimo
+       concurso" (🟣, so informacao: nao acende o 🔔 nem preenche marco;
+       edicao mais velha nao troca a mais nova). O botao **"Nao interessa"**
+       tira do 🔔 e do cartao o que nao e concurso, sem dizer que esta errado
+       (vale para previsao tambem). A frase da situacao sem item diz que e da
+       coleta automatica. A pesquisa de 07/10 foi reorganizada assim no
+       `data/acompanhamentos.json`: a edicao que ja aconteceu (Policia Penal
+       2019, PC 2025, Bombeiros 2026) virou a linha do ultimo, as leis da
+       Guarda de Florianopolis sairam, e os anuncios viraram previsao - nada
+       foi apagado: o que saiu ficou "ignorada", com o motivo.
 
 ## A correcao na hora, as geradas nunca feitas e a nota da faixa (07/10/2026)
 

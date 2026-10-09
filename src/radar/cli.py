@@ -1627,6 +1627,9 @@ def acompanhar(
             return
         console.print(f"[green]{resultado['gravadas']} novidade(s) gravada(s)[/] "
                       f"em data/acompanhamentos.json, por conferir.")
+        if resultado.get("ultimos"):
+            console.print(f"[green]{resultado['ultimos']} último(s) concurso(s)[/] "
+                          "guardado(s): a linha \"Último concurso\" do cartão.")
         console.print(f"[dim]Procedência: {resultado['modelo']}[/]")
         if resultado["rumores"]:
             console.print(f"[dim]{resultado['rumores']} delas é(são) previsão ou rumor: "
@@ -1696,6 +1699,20 @@ def acompanhar(
             situacao += (f" (segundo {SELOS[cartao.referencia.selo].emoji} "
                          f"{formatar_data(cartao.referencia.data)})")
         console.print(f"   {situacao}")
+        if cartao.proximo:
+            previsao = (f": {cartao.previsao.texto} ({cartao.previsao.link})"
+                        if cartao.previsao else "")
+            console.print(f"   Próximo concurso: {cartao.proximo}{escape(previsao)}")
+        if cartao.ultimo:
+            u = cartao.ultimo
+            partes = [str(u.ano)] + ([u.banca] if u.banca else [])
+            if u.edital:
+                partes.append(f"edital em {u.edital:%d/%m/%Y}")
+            if u.prova:
+                partes.append(f"prova em {u.prova:%d/%m/%Y}")
+            console.print(f"   Último concurso: {escape(' · '.join(partes))} 🟣")
+        else:
+            console.print("   [dim]Último concurso: não sei ainda[/]")
         console.print("   " + " · ".join(
             f"{m.nome}: {m.valor}" + (f" {SELOS[m.selo].emoji}" if m.selo else "")
             + (f" ({m.ressalva})" if m.ressalva else "")

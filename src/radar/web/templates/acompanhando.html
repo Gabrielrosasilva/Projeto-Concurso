@@ -28,6 +28,9 @@
     .ds .novidade a,.ds .tempo a,.ds .marcos a{color:var(--cor-texto)}
     .marcos .ressalva{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .estudar-banca{margin:0 0 var(--esp-3);font-size:var(--tam-sm)}
+    .linha-do-concurso{margin:0 0 var(--esp-2);font-size:var(--tam-sm)}
+    .linha-do-concurso .rot{display:inline-block;min-width:8.5rem;font-size:var(--tam-xs);
+      text-transform:uppercase;letter-spacing:.06em;color:var(--cor-texto-suave)}
     .estudar-banca .ressalva{font-size:var(--tam-xs);color:var(--cor-texto-suave)}
     .marcos{list-style:none;margin:0 0 var(--esp-3);padding:0;display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--esp-1) var(--esp-3);font-size:var(--tam-sm)}
@@ -152,22 +155,35 @@
     </form>
   </div>
 
-  {%- macro linha_do_historico(l) -%}
-    <span class="quando">{{ l.data | data }}</span>
-    <span>
-      {{ selo(l.selo, curto=True) }}
-      {% if l.link %}<a href="{{ l.link }}" target="_blank" rel="noopener">{{ l.texto }}</a>{% else %}{{ l.texto }}{% endif %}
-      {% if l.estado %}<span class="estado">{{ l.estado }}</span>{% endif %}
-      {% if l.pesquisa and l.estado == 'por conferir' %}
-        <span class="conferir">
+  {# Os botoes da pesquisa: "Confere" e "Nao confere" dizem se o LINK
+     mostra o fato; "Nao interessa" tira do cartao o que nao e concurso, sem
+     dizer que esta errado (09/10). A previsao so tem o "Nao interessa". #}
+  {%- macro botoes_da_pesquisa(l) -%}
+    {% if l.pesquisa and l.estado in ('por conferir', 'não confirmado') %}
+      <span class="conferir">
+        {% if l.estado == 'por conferir' %}
           <form method="post" action="/acompanhando/pesquisa/{{ l.pesquisa }}">
             <button class="ds-botao ds-botao--pequeno" type="submit" name="confere" value="sim">Confere</button>
           </form>
           <form method="post" action="/acompanhando/pesquisa/{{ l.pesquisa }}">
             <button class="ds-botao ds-botao--secundario ds-botao--pequeno" type="submit" name="confere" value="nao">Não confere</button>
           </form>
-        </span>
-      {% endif %}
+        {% endif %}
+        <form method="post" action="/acompanhando/pesquisa/{{ l.pesquisa }}">
+          <button class="ds-botao ds-botao--secundario ds-botao--pequeno" type="submit" name="confere" value="ignorar"
+                  title="Não é sobre concurso: sai do sino e do cartão">Não interessa</button>
+        </form>
+      </span>
+    {% endif %}
+  {%- endmacro -%}
+
+  {%- macro linha_do_historico(l) -%}
+    <span class="quando">{{ l.data | data }}</span>
+    <span>
+      {{ selo(l.selo, curto=True) }}
+      {% if l.link %}<a href="{{ l.link }}" target="_blank" rel="noopener">{{ l.texto }}</a>{% else %}{{ l.texto }}{% endif %}
+      {% if l.estado %}<span class="estado">{{ l.estado }}</span>{% endif %}
+      {{ botoes_da_pesquisa(l) }}
       {% if l.item %}<span class="item">{{ l.item | titulo }}</span>{% endif %}
     </span>
   {%- endmacro -%}
@@ -186,22 +202,32 @@
           {%- endif %}
         </p>
 
+        {# O proximo concurso, quando os marcos nao dizem, e o ultimo que ja
+           aconteceu (09/10): e a pergunta da aba - vai abrir? quando foi o
+           ultimo edital? #}
+        {% if c.proximo %}
+          <p class="linha-do-concurso"><span class="rot">Próximo concurso</span>
+            {% if c.previsao %}{{ selo(c.previsao.selo, curto=True) }}
+              <a href="{{ c.previsao.link }}" target="_blank" rel="noopener">{{ c.proximo }}: {{ c.previsao.texto }}</a>
+              <span class="ds-suave">({{ c.previsao.data | data }})</span>
+              {{ botoes_da_pesquisa(c.previsao) }}
+            {% else %}<span class="ds-suave">{{ c.proximo }}</span>{% endif %}</p>
+        {% endif %}
+        <p class="linha-do-concurso"><span class="rot">Último concurso</span>
+          {% if c.ultimo %}{{ selo(c.ultimo.selo, curto=True) }}
+            <a href="{{ c.ultimo.link }}" target="_blank" rel="noopener">{{ c.ultimo.ano }}</a>
+            {%- if c.ultimo.banca %} · {{ c.ultimo.banca }}{% endif %}
+            {%- if c.ultimo.edital %} · edital em {{ c.ultimo.edital.strftime('%d/%m/%Y') }}{% endif %}
+            {%- if c.ultimo.prova %} · prova em {{ c.ultimo.prova.strftime('%d/%m/%Y') }}{% endif %}
+          {% else %}<span class="ds-suave">não sei ainda: vem na próxima pesquisa</span>{% endif %}</p>
+
         {% if c.novidades %}
           {% set n = c.novidades[0] %}
           <p class="novidade">
             {{ n.data | data }} {{ selo(n.selo, curto=True) }}
             {% if n.link %}<a href="{{ n.link }}" target="_blank" rel="noopener">{{ n.texto }}</a>{% else %}{{ n.texto }}{% endif %}
             {% if n.estado %}<span class="estado">{{ n.estado }}</span>{% endif %}
-            {% if n.pesquisa and n.estado == 'por conferir' %}
-              <span class="conferir">
-                <form method="post" action="/acompanhando/pesquisa/{{ n.pesquisa }}">
-                  <button class="ds-botao ds-botao--pequeno" type="submit" name="confere" value="sim">Confere</button>
-                </form>
-                <form method="post" action="/acompanhando/pesquisa/{{ n.pesquisa }}">
-                  <button class="ds-botao ds-botao--secundario ds-botao--pequeno" type="submit" name="confere" value="nao">Não confere</button>
-                </form>
-              </span>
-            {% endif %}
+            {{ botoes_da_pesquisa(n) }}
             {% if c.novidades | length > 1 %}<span class="item">e mais {{ c.novidades | length - 1 }} no histórico</span>{% endif %}
           </p>
         {% endif %}

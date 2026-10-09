@@ -167,7 +167,7 @@ def test_sem_item_recente_tudo_e_aguardando(ambiente):
                   publicado_em=agora() - timedelta(days=30)))
     cartao = _cartao("Polícia Civil SC")
     # Data recente, mas o titulo diz 2019: e a pagina de outra edicao.
-    assert cartao.situacao.startswith("nenhum concurso desta carreira")
+    assert cartao.situacao.startswith("a coleta automática não achou concurso")
     assert cartao.referencia is None
     assert {m.valor for m in cartao.marcos} == {"aguardando"}
     assert cartao.itens == 1
@@ -544,13 +544,140 @@ def test_oficial_com_link_de_curso_vira_noticia_e_e_contada(ambiente):
 
     resultado = _importar(*novidades, hoje=date(2026, 10, 7))
 
-    assert resultado["gravadas"] == 4 and not resultado["recusas"]
+    # Desde 09/10 o marco "outro" nao existe: a convocacao de 2019 e a lei de
+    # salario da Guarda sao recusadas (so o proximo concurso entra).
+    assert resultado["gravadas"] == 2
+    assert len(resultado["recusas"]) == 2
+    assert all("'outro'" in r and "proximo concurso" in r for r in resultado["recusas"])
     assert len(resultado["rebaixadas"]) == 2
     assert all("cdn.direcaoconcursos.com.br" in r for r in resultado["rebaixadas"])
     gravadas = json.loads(cartoes.caminho().read_text(encoding="utf-8"))["pesquisas"]
     tipos = {p["link"].split("/")[2]: p["tipo_de_fonte"] for p in gravadas}
-    assert tipos == {"sap.fepese.org.br": "oficial", "www.cmf.sc.gov.br": "oficial",
-                     "cdn.direcaoconcursos.com.br": "noticia"}
+    assert tipos == {"cdn.direcaoconcursos.com.br": "noticia"}
+
+
+# --- so o proximo concurso, e o ultimo numa linha (09/10) ---------------------
+
+BOMBEIROS = "Polícia Militar SC"
+
+
+def _responder(nome, novidades=(), ultimo=None, hoje=None):
+    lote = cartoes.pedido_de_pesquisa([nome])
+    resposta = {"id": _id_no_lote(lote, nome), "novidades": list(novidades)}
+    if ultimo is not None:
+        resposta["ultimo_concurso"] = ultimo
+    return cartoes.importar_novidades(lote, [resposta], "Claude Code, em teste",
+                                      hoje=hoje or date.today())
+
+
+def _ultimo(**mudancas):
+    base = dict(ano=2026, banca="IDIB", edital="2026-01-27", prova="2026-03-29",
+                link="https://x.test/edital-2026", fonte="Direção Concursos")
+    base.update(mudancas)
+    return base
+
+
+def test_previsao_entra_sempre_como_nao_confirmada(ambiente):
+    resultado = _responder("Polícia Civil SC", [_novidade(
+        marco="previsao", descricao="O governador anunciou concurso para a Polícia Civil.",
+        confirmado=True)])
+    assert resultado["gravadas"] == 1 and resultado["rumores"] == 1
+    cartao = _cartao("Polícia Civil SC")
+    assert cartao.novidades == []
+    assert cartao.proximo == "só previsão, não confirmada"
+    assert "anunciou concurso" in cartao.previsao.texto
+
+
+def test_o_ultimo_concurso_vira_uma_linha_do_cartao(ambiente):
+    resultado = _responder(BOMBEIROS, ultimo=_ultimo())
+    assert resultado["ultimos"] == 1 and not resultado["recusas"]
+
+    ultimo = _cartao(BOMBEIROS).ultimo
+    assert (ultimo.ano, ultimo.banca, ultimo.prova) == (2026, "IDIB", date(2026, 3, 29))
+    assert ultimo.selo == IA
+    # So informacao: nao acende o sino nem preenche marco.
+    assert _cartao(BOMBEIROS).novidades == []
+    assert {m.valor for m in _cartao(BOMBEIROS).marcos} == {"aguardando"}
+
+
+def test_edicao_mais_velha_nao_troca_a_mais_nova(ambiente):
+    _responder(BOMBEIROS, ultimo=_ultimo())
+    _responder(BOMBEIROS, ultimo=_ultimo(ano=2017, link="https://x.test/2017"))
+    assert _cartao(BOMBEIROS).ultimo.ano == 2026
+
+
+@pytest.mark.parametrize("mudanca, motivo", [
+    ({"link": ""}, "sem link"),
+    ({"ano": "x"}, "sem ano"),
+    ({"prova": "2099-01-01"}, "proximo concurso"),
+])
+def test_ultimo_concurso_torto_e_recusado(ambiente, mudanca, motivo):
+    resultado = _responder(BOMBEIROS, ultimo=_ultimo(**mudanca))
+    assert resultado["ultimos"] == 0
+    assert any(motivo in r for r in resultado["recusas"])
+
+
+def test_sem_nada_o_cartao_diz_que_nao_ha_noticia(ambiente):
+    cartao = _cartao("Polícia Civil SC")
+    assert cartao.proximo == cartoes.SEM_NOTICIA_DO_PROXIMO
+    assert cartao.ultimo is None
+
+
+def test_com_fato_do_proximo_a_linha_some(ambiente):
+    _responder("Polícia Civil SC", [_novidade()])
+    assert _cartao("Polícia Civil SC").proximo is None
+
+
+def test_nao_interessa_tira_do_sino_e_do_cartao(ambiente):
+    _responder("Polícia Civil SC", [
+        _novidade(),
+        _novidade(marco="previsao", link="https://x.test/anuncio",
+                  descricao="O secretário anunciou um concurso para breve.")])
+    cartao = _cartao("Polícia Civil SC")
+    fato = cartao.novidades[0].pesquisa
+    previsao = next(l.pesquisa for l in cartao.historico if l.estado == "não confirmado")
+
+    assert cartoes.nao_interessa(fato) and cartoes.nao_interessa(previsao)
+
+    depois = _cartao("Polícia Civil SC")
+    assert depois.novidades == []
+    assert not any(l.pesquisa for l in depois.historico)
+    assert depois.proximo == cartoes.SEM_NOTICIA_DO_PROXIMO
+
+
+def test_a_tela_mostra_as_duas_linhas_e_o_nao_interessa(cliente):
+    _responder(BOMBEIROS, [_novidade(marco="previsao", link="https://x.test/a",
+                                     descricao="O comandante anunciou novo concurso.")],
+               ultimo=_ultimo())
+    pagina = cliente.get("/acompanhando").text
+    assert "Próximo concurso" in pagina and "só previsão, não confirmada" in pagina
+    assert "Último concurso" in pagina and "edital em 27/01/2026" in pagina
+    assert 'value="ignorar"' in pagina and "Não interessa" in pagina
+
+    previsao = _cartao(BOMBEIROS).previsao.pesquisa
+    resposta = cliente.post(f"/acompanhando/pesquisa/{previsao}", data={"confere": "ignorar"},
+                            follow_redirects=False)
+    assert resposta.status_code == 303
+    assert _cartao(BOMBEIROS).proximo == cartoes.SEM_NOTICIA_DO_PROXIMO
+
+
+def test_o_terminal_diz_o_proximo_e_o_ultimo(ambiente):
+    from typer.testing import CliRunner
+
+    from radar.cli import app as cli
+
+    _responder(BOMBEIROS, ultimo=_ultimo())
+    saida = " ".join(CliRunner().invoke(cli, ["acompanhar"]).output.split())
+    assert "Último concurso: 2026 · IDIB · edital em 27/01/2026 · prova em 29/03/2026" in saida
+    assert "Próximo concurso: nenhuma notícia de concurso novo" in saida
+
+
+def test_o_pedido_leva_o_ultimo_que_ja_sei(ambiente):
+    _responder(BOMBEIROS, ultimo=_ultimo())
+    lote = cartoes.pedido_de_pesquisa([BOMBEIROS])
+    assert lote["pedidos"][0]["ja_sei"]["ultimo_concurso"]["ano"] == 2026
+    assert "ULTIMO concurso" in lote["pedidos"][0]["instrucao"]
+    assert "outro" not in cartoes.MARCOS
 
 
 def test_noticia_nunca_sobe_a_oficial(ambiente):

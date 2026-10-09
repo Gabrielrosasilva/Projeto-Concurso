@@ -2,7 +2,8 @@
   "pesquisas": [
     {
       "acompanhamento": "Polícia Penal SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-09-30",
@@ -12,6 +13,7 @@
       "link": "https://sap.fepese.org.br",
       "lote": "novidades-20261007-233803",
       "marco": "outro",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "oficial",
       "valor": "convocação sub judice"
@@ -27,14 +29,15 @@
       "id": "4ab40ff47564",
       "link": "https://www.direcaoconcursos.com.br/noticias/concurso-guarda-florianopolis-anunciado",
       "lote": "novidades-20261007-233803",
-      "marco": "outro",
+      "marco": "previsao",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "50 a 100 vagas anunciadas"
     },
     {
       "acompanhamento": "Guarda Municipal de Florianópolis",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-05-04",
@@ -44,13 +47,15 @@
       "link": "https://ndmais.com.br/politica/reestruturacao-da-guarda-municipal-de-florianopolis-e-aprovada-e-abre-caminho-para-concurso/",
       "lote": "novidades-20261007-233803",
       "marco": "outro",
+      "motivo_da_saida": "lei ou reestruturacao, nao e concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "22 votos a favor"
     },
     {
       "acompanhamento": "Guarda Municipal de Florianópolis",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-05-13",
@@ -60,13 +65,15 @@
       "link": "https://www.cmf.sc.gov.br/assinatura/assinado/2026/05/2605131752095CC176.pdf?vh=e33c312",
       "lote": "novidades-20261007-233803",
       "marco": "outro",
+      "motivo_da_saida": "lei ou reestruturacao, nao e concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "oficial",
       "valor": "LC 788/2026"
     },
     {
       "acompanhamento": "Guarda Municipal de Balneário Camboriú",
-      "conferida": null,
+      "conferida": "ok",
+      "conferida_em": "2026-10-09T15:16:26.540121+00:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-08-04",
@@ -91,14 +98,15 @@
       "id": "d84924138219",
       "link": "https://ndmais.com.br/empregos-e-concursos/balneario-camboriu-anuncia-concurso-para-guarda-municipal-com-90-vagas-e-plano-carreira-de-ate-r-15-mil/",
       "lote": "novidades-20261007-233803",
-      "marco": "outro",
+      "marco": "previsao",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "edital até out/2026"
     },
     {
       "acompanhamento": "Polícia Civil SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2025-12-05",
@@ -108,13 +116,15 @@
       "link": "https://ceisc.com.br/blog/post/concurso-pc-sc-extrato-de-contrato-com-idecan-e-publicado-e-edital-e-iminente",
       "lote": "novidades-20261007-233803",
       "marco": "banca",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "Idecan"
     },
     {
       "acompanhamento": "Polícia Civil SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2025-12-12",
@@ -124,13 +134,15 @@
       "link": "https://ceisc.com.br/blog/post/com-300-vagas-e-iniciais-de-ate-r-9-7-mil-pc-sc-publica-edital-para-agente-e-escrivao",
       "lote": "novidades-20261007-233803",
       "marco": "edital",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "300 vagas"
     },
     {
       "acompanhamento": "Polícia Civil SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2025-12-15",
@@ -140,13 +152,15 @@
       "link": "https://ceisc.com.br/blog/post/concurso-pc-sc-edital-para-agente-e-escrivao-abre-inscricoes-nesta-segunda-15",
       "lote": "novidades-20261007-233803",
       "marco": "inscricoes",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "15/12 a 30/12/2025"
     },
     {
       "acompanhamento": "Polícia Civil SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-03-22",
@@ -156,6 +170,7 @@
       "link": "https://folha.qconcursos.com/n/concurso-pc-sc-gabaritos-2026",
       "lote": "novidades-20261007-233803",
       "marco": "prova",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "22/03/2026"
@@ -178,7 +193,8 @@
     },
     {
       "acompanhamento": "Polícia Militar SC",
-      "conferida": null,
+      "conferida": "ok",
+      "conferida_em": "2026-10-09T15:17:23.172167+00:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-07-02",
@@ -194,7 +210,8 @@
     },
     {
       "acompanhamento": "Oficial do Corpo de Bombeiros SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2025-12-18",
@@ -204,13 +221,15 @@
       "link": "https://www.proximosconcursos.com/novo-concurso-bombeiros-sc-tera-vagas-para-soldado-e-oficial-idib-e-a-banca/",
       "lote": "novidades-20261007-233803",
       "marco": "banca",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "IDIB"
     },
     {
       "acompanhamento": "Oficial do Corpo de Bombeiros SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-01-27",
@@ -220,13 +239,15 @@
       "link": "https://cdn.direcaoconcursos.com.br/uploads/2026/01/diarioOficial-2-58-77.pdf",
       "lote": "novidades-20261007-233803",
       "marco": "edital",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "10 vagas"
     },
     {
       "acompanhamento": "Oficial do Corpo de Bombeiros SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-01-28",
@@ -236,13 +257,15 @@
       "link": "https://www.direcaoconcursos.com.br/noticias/concurso-bombeiros-sc-edital-publicado-2026",
       "lote": "novidades-20261007-233803",
       "marco": "inscricoes",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "28/01 a 25/02/2026"
     },
     {
       "acompanhamento": "Oficial do Corpo de Bombeiros SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-03-29",
@@ -252,13 +275,15 @@
       "link": "https://folha.qconcursos.com/n/concurso-bombeiros-sc-gabaritos-2026",
       "lote": "novidades-20261007-233803",
       "marco": "prova",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "29/03/2026"
     },
     {
       "acompanhamento": "Bombeiro Militar SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2025-12-18",
@@ -268,13 +293,15 @@
       "link": "https://www.proximosconcursos.com/novo-concurso-bombeiros-sc-tera-vagas-para-soldado-e-oficial-idib-e-a-banca/",
       "lote": "novidades-20261007-233803",
       "marco": "banca",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "IDIB"
     },
     {
       "acompanhamento": "Bombeiro Militar SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-01-27",
@@ -284,13 +311,15 @@
       "link": "https://cdn.direcaoconcursos.com.br/uploads/2026/01/diarioOficial-2-40-57.pdf",
       "lote": "novidades-20261007-233803",
       "marco": "edital",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "100 vagas"
     },
     {
       "acompanhamento": "Bombeiro Militar SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-01-28",
@@ -300,13 +329,15 @@
       "link": "https://www.direcaoconcursos.com.br/noticias/concurso-bombeiros-sc-edital-publicado-2026",
       "lote": "novidades-20261007-233803",
       "marco": "inscricoes",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "28/01 a 25/02/2026"
     },
     {
       "acompanhamento": "Bombeiro Militar SC",
-      "conferida": null,
+      "conferida": "ignorada",
+      "conferida_em": "2026-10-09T13:00:00-03:00",
       "confirmado": true,
       "criado_em": "2026-10-07T23:43:09.261362+00:00",
       "data": "2026-03-29",
@@ -316,6 +347,7 @@
       "link": "https://folha.qconcursos.com/n/concurso-bombeiros-sc-gabaritos-2026",
       "lote": "novidades-20261007-233803",
       "marco": "prova",
+      "motivo_da_saida": "edicao que ja aconteceu: virou a linha Ultimo concurso (09/10)",
       "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 07/10/2026",
       "tipo_de_fonte": "noticia",
       "valor": "29/03/2026"
@@ -323,13 +355,59 @@
   ],
   "ultima_verificacao": {
     "erro": null,
-    "fim": "2026-10-08T02:09:10.397730+00:00",
-    "inicio": "2026-10-08T02:08:38.417570+00:00",
+    "fim": "2026-10-09T15:06:54.920258+00:00",
+    "inicio": "2026-10-09T15:06:21.337503+00:00",
     "resumo": [
       "concursosnobrasil: 15 novo(s), 0 atualizado(s)",
-      "fepese: 3 novo(s), 145 atualizado(s)",
+      "fepese: 0 novo(s), 146 atualizado(s)",
       "ieses: 0 novo(s), 11 atualizado(s)",
-      "Páginas lidas: 10 página(s) lida(s): 0 com prazo de inscrição, 0 com banca, 5 falharam"
+      "Páginas lidas: 11 página(s) lida(s): 1 com prazo de inscrição, 0 com banca, 4 falharam"
     ]
+  },
+  "ultimos_concursos": {
+    "Bombeiro Militar SC": {
+      "ano": 2026,
+      "banca": "IDIB",
+      "criado_em": "2026-10-09T13:00:00-03:00",
+      "edital": "2026-01-27",
+      "fonte": "Direção Concursos",
+      "link": "https://www.direcaoconcursos.com.br/noticias/concurso-bombeiros-sc-edital-publicado-2026",
+      "lote": "reorganizado-20261009",
+      "procedencia": "Claude Code (claude-opus-5-5), reorganizado em 09/10/2026 a partir da pesquisa de 07/10",
+      "prova": "2026-03-29"
+    },
+    "Oficial do Corpo de Bombeiros SC": {
+      "ano": 2026,
+      "banca": "IDIB",
+      "criado_em": "2026-10-09T13:00:00-03:00",
+      "edital": "2026-01-27",
+      "fonte": "Direção Concursos",
+      "link": "https://www.direcaoconcursos.com.br/noticias/concurso-bombeiros-sc-edital-publicado-2026",
+      "lote": "reorganizado-20261009",
+      "procedencia": "Claude Code (claude-opus-5-5), reorganizado em 09/10/2026 a partir da pesquisa de 07/10",
+      "prova": "2026-03-29"
+    },
+    "Polícia Civil SC": {
+      "ano": 2025,
+      "banca": "Idecan",
+      "criado_em": "2026-10-09T13:00:00-03:00",
+      "edital": "2025-12-12",
+      "fonte": "CEISC",
+      "link": "https://ceisc.com.br/blog/post/com-300-vagas-e-iniciais-de-ate-r-9-7-mil-pc-sc-publica-edital-para-agente-e-escrivao",
+      "lote": "reorganizado-20261009",
+      "procedencia": "Claude Code (claude-opus-5-5), reorganizado em 09/10/2026 a partir da pesquisa de 07/10",
+      "prova": "2026-03-22"
+    },
+    "Polícia Penal SC": {
+      "ano": 2019,
+      "banca": "FEPESE",
+      "criado_em": "2026-10-09T13:00:00-03:00",
+      "edital": null,
+      "fonte": "FEPESE",
+      "link": "https://sap.fepese.org.br",
+      "lote": "reorganizado-20261009",
+      "procedencia": "Claude Code (claude-opus-5-5), reorganizado em 09/10/2026 a partir da pesquisa de 07/10",
+      "prova": null
+    }
   }
 }
