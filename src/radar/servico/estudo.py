@@ -13,8 +13,9 @@ cada no da arvore:
 
 A faixa liga-se ao no pela chave `conteudo`. A que nao a tem conta no que
 cobre - os `nos` do plano, e os da ficha depois de conferida -, mas so para
-estudado, praticado e as datas: o acerto dela nao vai a no nenhum, porque nao
-se sabe de qual dos cobertos ele e (decisao 81).
+estudado, praticado e as datas (decisao 81); o acerto dela, e tudo o mais, vai
+ao no da MATERIA, que a faixa sabe (decisao 147). O assunto nao recebe acerto:
+nao se sabe de qual dos cobertos ele e.
 
 E, por no: a data do primeiro e do ultimo estudo, a da ultima revisao, a taxa
 de acerto (do `desempenho_por_conteudo`) e a evolucao semana a semana, com as
@@ -230,6 +231,7 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
     # radar, ao no da classificacao da questao.
     de_quem = por_conteudo.nos_das_questoes()
     escritas = servico_fichas.carregar()
+    materias = por_conteudo.materias_da_arvore()
     inicio = plano.inicio
     fim = min(plano.fim, hoje) if plano.fim else hoje
     por_semana: dict[str, dict[int, list]] = {}
@@ -237,16 +239,17 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
         if linha.origem == metricas.RADAR:
             onde = de_quem.get(linha.chave) if linha.chave else None
         else:
-            onde = linha.conteudo
-        if not onde:
-            if linha.origem == metricas.FAIXA and linha.faixa is not None:
+            onde = por_conteudo.no_do_anotado(linha, materias)
+            if (not linha.conteudo and linha.origem == metricas.FAIXA
+                    and linha.faixa is not None):
                 # Faixa sem `conteudo`: conta no que ela cobre, so para a
-                # situacao e as datas. O acerto fica fora - nao se sabe de
-                # qual dos nos cobertos ele e (decisao 81).
+                # situacao e as datas (decisao 81). A materia fica para o
+                # caminho de baixo, que e o mesmo do anotado com conteudo.
                 cobertos = _o_que_a_faixa_cobre(linha.faixa, escritas, situacao)
-                for caminho in {a for no in cobertos for a in _ancestrais(no)}:
+                for caminho in {a for no in cobertos for a in _ancestrais(no)} - {onde}:
                     if caminho in situacao:
                         _situacao_e_datas(situacao[caminho], linha)
+        if not onde:
             continue
         semana = _semana_de(plano, linha.data)
         for caminho in _ancestrais(onde):
@@ -591,12 +594,16 @@ def _erradas_por_no() -> dict[str, list[int]]:
 
 
 def _caderno_por_no(hoje: date) -> dict[str, list]:
-    """{caminho: [erros do caderno ligados ao no e ainda para rever]}."""
+    """{caminho: [erros do caderno ligados ao no e ainda para rever]}. O erro
+    sem no, mas com a materia, fica no no da materia (P09, decisao 147): sem
+    isso o erro vencido de Constitucional sumia da fila."""
     saida: dict[str, list] = {}
+    materias = por_conteudo.materias_da_arvore()
     for erro in caderno.para_rever(hoje):
-        if not erro.conteudo:
+        onde = por_conteudo.no_do_anotado(erro, materias)
+        if not onde:
             continue
-        for ancestral in _ancestrais(erro.conteudo):
+        for ancestral in _ancestrais(onde):
             saida.setdefault(ancestral, []).append(erro)
     return saida
 

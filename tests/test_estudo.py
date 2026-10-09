@@ -540,10 +540,38 @@ def test_a_faixa_sem_conteudo_conta_nos_nos_do_plano_so_para_situacao_e_datas(pl
 
     for caminho in (NO_TEMPO, APLICACAO, PENAL):
         assert todas[caminho].praticado and todas[caminho].ultima_pratica == SEG
-    # O acerto nao vai a no nenhum: nem o desempenho, nem a evolucao.
+    # O acerto nao vai aos nos cobertos: so a materia o recebe (decisao 147).
     assert todas[NO_TEMPO].semanal == [] and todas[NO_TEMPO].desempenho is None
     assert NO_TEMPO not in por_conteudo.por_no(plano=plano_com_nos, hoje=HOJE)
+    assert todas[PENAL].desempenho.anotado.respostas == 15
     assert todas[PORTUGUES].rotulo == estudo.NAO_ESTUDADO
+
+
+def test_a_faixa_sem_no_nenhum_conta_na_materia(plano):
+    """P09: sem `conteudo`, sem `nos` e sem ficha conferida (a faixa de
+    Portugues do mini), a materia ficava "nunca estudei". Agora ela e
+    praticada, tem acerto e anda no 1-7-30 (decisao 147)."""
+    _anotar(plano, "noite", 2, 10, 7)
+
+    todas = estudo.situacoes(plano=plano, hoje=HOJE)
+
+    assert todas[PORTUGUES].praticado and todas[PORTUGUES].primeira_pratica == SEG
+    assert todas[PORTUGUES].desempenho.anotado.acertos == 7
+    assert todas[PORTUGUES].rotulo != estudo.NAO_ESTUDADO
+    fila = estudo.para_revisar(plano=plano, hoje=TER, todas=None)
+    assert [r.caminho for r in fila] == [PORTUGUES]
+
+
+def test_o_erro_do_caderno_so_com_a_materia_entra_na_fila(plano):
+    """P09: o erro sem no ficava fora da fila; agora fica na materia."""
+    caderno.anotar(data_estudo=SEG, materia="direito penal", motivo="nao_sabia",
+                   regra="A lei penal nao retroage, salvo para beneficiar.", hoje=SEG)
+    _anotar(plano, "noite", 0, 15, 11)
+
+    fila = estudo.para_revisar(plano=plano, hoje=TER, todas=None)
+
+    [penal] = [r for r in fila if r.caminho == PENAL]
+    assert len(penal.erros_do_caderno) == 1
 
 
 def test_o_r7_sem_conteudo_marca_a_revisao_do_que_cobre(plano_com_nos):

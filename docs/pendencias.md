@@ -391,7 +391,10 @@ número ou prepara 10/10, 17/10 e 07/11.
    tem a questão de outra rodada que mede do ciclo; o fechamento de 07/11
    repetiria 19 das 40 de 10/10); ✅ P30 em 09/10 (decisão 146: o plano e a
    tela dizem que decide o acumulado do ciclo, com o fechamento ao lado, e
-   que os simulados do Qconcursos ficam fora).
+   que os simulados do Qconcursos ficam fora); ✅ P01 + P09 em 09/10 (decisão
+   147: o anotado sem conteúdo conta no nó da matéria, em toda tela; "sem
+   acerto medido" no lugar de "não treinei"; o erro do caderno só com a
+   matéria entra na fila).
 
 ### Depende de você
 

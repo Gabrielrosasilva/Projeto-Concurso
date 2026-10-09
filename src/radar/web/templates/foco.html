@@ -357,7 +357,9 @@
                   {{ '%.0f'|format(acerto.porcentagem) }}%
                   <span class="feitas">de {{ acerto.respondidas }}</span>
                 {%- else -%}
-                  não treinei
+                  {# "nao treinei" era falso: a faixa feita sem acerto anotado
+                     tambem cai aqui (P01, decisao 147). #}
+                  sem acerto medido
                 {%- endif -%}
                 {%- if acerto and p.divisao_por_materia.get(m.nome) %}
                   <span class="feitas">{{ p.divisao_por_materia[m.nome] }}</span>
@@ -482,7 +484,7 @@
                 {%- elif a.respondidas -%}
                   meu acerto: {{ meu }} · {{ AMOSTRA_INSUFICIENTE }}
                 {%- else -%}
-                  ainda não treinei: nenhuma resposta no radar nem anotada
+                  sem acerto medido: nenhuma resposta no radar nem acerto anotado
                 {%- endif -%}
               </span>
               {% if a.lei %}

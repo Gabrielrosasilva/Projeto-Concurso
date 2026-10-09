@@ -183,12 +183,28 @@ def test_questao_sem_classificacao_conta_em_no_nenhum(plano):
     assert por_conteudo.por_no(plano=plano, hoje=HOJE) == {}
 
 
-def test_anotacao_sem_conteudo_conta_em_no_nenhum(plano):
+def test_anotacao_sem_conteudo_conta_no_no_da_materia(plano):
     """A faixa de Portugues do mini nao tem `conteudo`: o que eu anoto nela
-    conta no dia (o `metricas` ja contou) e em no nenhum."""
+    conta no no da MATERIA, e em assunto nenhum (P01, decisao 147). Era em no
+    nenhum, e LP saia "Amostra insuficiente" numa tela e com 35 na outra."""
     _anotar(plano, "noite", 2, 10, 7)
 
-    assert por_conteudo.por_no(plano=plano, hoje=HOJE) == {}
+    por_no = por_conteudo.por_no(plano=plano, hoje=HOJE)
+    assert list(por_no) == [PORTUGUES]
+    assert (por_no[PORTUGUES].anotado.respostas, por_no[PORTUGUES].anotado.acertos) == (10, 7)
+    assert por_conteudo.anotado_por_materia(plano=plano, hoje=HOJE)[PORTUGUES].respostas == 10
+    assert por_conteudo.anotado_por_assunto(plano=plano, hoje=HOJE) == {}
+
+
+def test_materia_que_nao_e_da_arvore_nao_conta_em_no_nenhum():
+    from types import SimpleNamespace
+    materias = {"lingua portuguesa": PORTUGUES}
+    def linha(materia, conteudo=None):
+        return SimpleNamespace(materia=materia, conteudo=conteudo)
+    assert por_conteudo.no_do_anotado(linha("LÍNGUA PORTUGUESA"), materias) == PORTUGUES
+    assert por_conteudo.no_do_anotado(linha("Diagnósticos"), materias) is None
+    assert por_conteudo.no_do_anotado(linha(None), materias) is None
+    assert por_conteudo.no_do_anotado(linha(PORTUGUES, APLICACAO), materias) == APLICACAO
 
 
 def test_fiz_e_nao_anotei_quantas_acertei_e_volume_sem_acerto(plano):

@@ -282,12 +282,29 @@ class Entrada:
     sem_resultado: int = 0
 
 
+def materias_da_arvore() -> dict[str, str]:
+    """{nome da materia sem acento e sem caixa: caminho do no da materia}."""
+    return {normalizar(no.caminho): no.caminho
+            for no in servico_conteudos.nos() if no.nivel == "materia"}
+
+
+def no_do_anotado(linha, materias: dict[str, str]) -> str | None:
+    """Onde o anotado conta: o `conteudo` dele, ou, sem ele, o no da MATERIA
+    (P01, decisao 147). A faixa sabe a materia; o assunto nao se sabe, e nao
+    e aproximado. A materia que nao e raiz da arvore (os Diagnosticos, a
+    materia digitada diferente) nao conta em no nenhum."""
+    if linha.conteudo:
+        return linha.conteudo
+    return materias.get(normalizar(linha.materia)) if linha.materia else None
+
+
 def entradas(recorte: str = CICLO, plano=None,
              hoje: date | None = None) -> list[Entrada]:
     """Tudo o que eu respondi ou anotei no recorte, cada coisa no no dela.
 
-    Questao sem classificacao e anotacao sem conteudo nao entram: elas contam
-    no dia (o `metricas` ja as contou) e em no nenhum.
+    Questao sem classificacao nao entra: conta no dia (o `metricas` ja a
+    contou) e em no nenhum. O anotado sem conteudo conta no no da materia
+    (decisao 147).
     """
     plano = plano or plano_de_estudo.carregar()
     inicio, fim = _janela(recorte, plano, hoje)
@@ -303,19 +320,21 @@ def entradas(recorte: str = CICLO, plano=None,
                              acertos=1 if acertou else 0))
 
     # --- anotado (faixas e estudo extra) ----------------------------------
+    materias = materias_da_arvore()
     for linha in metricas.lancamentos(inicio or plano.inicio, fim, plano):
-        if linha.origem == metricas.RADAR or not linha.conteudo:
+        if linha.origem == metricas.RADAR or not linha.questoes:
             continue
-        if not linha.questoes:
+        onde = no_do_anotado(linha, materias)
+        if not onde:
             continue
         if linha.consulta:
-            saida.append(Entrada(linha.conteudo, ANOTADO, linha.data,
+            saida.append(Entrada(onde, ANOTADO, linha.data,
                                  com_consulta=linha.questoes))
         elif linha.acertos is None:
-            saida.append(Entrada(linha.conteudo, ANOTADO, linha.data,
+            saida.append(Entrada(onde, ANOTADO, linha.data,
                                  sem_resultado=linha.questoes))
         else:
-            saida.append(Entrada(linha.conteudo, ANOTADO, linha.data,
+            saida.append(Entrada(onde, ANOTADO, linha.data,
                                  respostas=linha.questoes, acertos=linha.acertos))
     return saida
 
@@ -454,8 +473,8 @@ def do_no(caminho: str, recorte: str = CICLO, plano=None,
 # (materia, assunto) e materia -, e nao em caminho de no: quem converte e
 # daqui, para nenhuma tela ter de saber como a arvore e escrita.
 #
-# So entra o que esta ligado a um no: anotacao sem conteudo escolhido continua
-# contando no dia e em assunto nenhum. Nada e aproximado.
+# A anotacao sem conteudo escolhido conta no no da materia (decisao 147), e em
+# assunto nenhum. Nada e aproximado.
 
 @dataclass
 class Anotado:
@@ -481,13 +500,17 @@ def _anotado(chave_do_no, recorte: str, plano=None, hoje: date | None = None) ->
     plano = plano or plano_de_estudo.carregar()
     inicio, fim = _janela(recorte, plano, hoje)
     saida: dict[object, Anotado] = {}
+    materias = materias_da_arvore()
     for linha in metricas.lancamentos(inicio or plano.inicio, fim, plano):
-        if linha.origem == metricas.RADAR or not linha.conteudo:
+        if linha.origem == metricas.RADAR:
             continue
         # Para o ESTADO e para o acerto, so o sem consulta com acerto anotado.
         if linha.consulta or not linha.questoes or linha.acertos is None:
             continue
-        chave = chave_do_no(linha.conteudo)
+        onde = no_do_anotado(linha, materias)
+        if not onde:
+            continue
+        chave = chave_do_no(onde)
         if chave is None:
             continue
         atual = saida.setdefault(chave, Anotado())

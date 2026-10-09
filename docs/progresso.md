@@ -35,7 +35,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 | 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
 | 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | ✅ P04 (decisão 143) e U21 · P36 (decisão 144); a suíte inteira no fim |
-| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | 🟡 P07 e P30 feitos (decisões 145 e 146); P01 + P09, P05, P10, P11 + U18 a seguir |
+| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | 🟡 P07, P30 e P01 + P09 feitos (decisões 145 a 147); P05, P10, P11 + U18 a seguir |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3404,8 +3404,26 @@ decide o Ciclo 2, mas o fechamento nunca tem amostra.
 - **Testes:** `test_sabado` - a frase e a ordem das colunas; e a comparação
   passou a criar 2 questões novas de RL para o fechamento, que pelo P07 não
   repete as do diagnóstico (o teste antigo contava com a repetição). 12 no
-  arquivo; `test_cronograma` 74.
+  arquivo; `test_cronograma` 72.
 
 **Rodado de verdade:** a tela Hoje de 07/11 com o banco real - "O que decide
 o Ciclo 2 é o acumulado do ciclo...", e a primeira linha "Língua Portuguesa:
 26 de 57 · 46%".
+
+**P01 + P09 (decisão 147).** O anotado sem conteúdo tinha duas regras, e
+Penal e Constitucional apareciam como "nunca estudei".
+
+- **O código:** `desempenho_por_conteudo.materias_da_arvore` e
+  `no_do_anotado`, usados em `entradas` e `_anotado`; `estudo.situacoes` e
+  `estudo._caderno_por_no` pela mesma regra; `foco.html` ("sem acerto
+  medido") e `desempenho.html` (a frase do "não estudei").
+- **Testes:** `test_desempenho` (a anotação sem conteúdo conta na matéria; a
+  matéria que não é raiz não conta), `test_estudo` (a faixa sem nó conta na
+  matéria e entra na fila; o erro só com a matéria entra na fila) e
+  `test_foco` (as frases): 161 nos três; `test_espacada`, `test_origem`,
+  `test_ultima_resposta`, `test_semanas` e `test_materias_na_tela`: 123.
+
+**Rodado de verdade** (banco real, só GET): o Edital - LP "46% de 57", Penal
+"55% · 11 de 20 · Amostra insuficiente", Constitucional "56% de 32", os
+mesmos de Minhas matérias; o Meu desempenho e a home abrem (200); LP, Penal,
+CF e LEP saíram do "nunca estudei".

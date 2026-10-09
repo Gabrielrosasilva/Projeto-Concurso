@@ -838,7 +838,7 @@ def test_a_materia_sem_treino_nao_aparece_como_zero(cliente, com_quadro_do_edita
     with sessao() as s:
         s.add(_concurso())
 
-    assert "não treinei" in cliente.get("/analises").text
+    assert "sem acerto medido" in cliente.get("/analises").text
 
 
 def test_a_pior_das_pesadas_e_destacada_na_tela(cliente, com_quadro_do_edital):
@@ -990,7 +990,7 @@ def test_o_assunto_nunca_treinado_nao_aparece_como_zero_por_cento(
 
     texto = cliente.get("/analises").text
 
-    assert "ainda não treinei: nenhuma resposta no radar nem anotada" in texto
+    assert "sem acerto medido: nenhuma resposta no radar nem acerto anotado" in texto
     assert "0% em 0" not in texto
 
 

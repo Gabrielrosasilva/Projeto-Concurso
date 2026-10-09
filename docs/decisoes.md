@@ -3580,6 +3580,8 @@ mede (7A); commit e push por subetapa (8A).
     - **o acerto nao vai a no nenhum**: nao se sabe de qual dos nos cobertos
       ele e. O desempenho, o estado e a evolucao continuam so com o radar e o
       anotado no `conteudo` (decisao 71). Nem os minutos sao espalhados;
+      **mudado pela 147 (09/10):** o acerto, os minutos e as datas vao ao no
+      da MATERIA da faixa; o assunto continua sem acerto;
     - a faixa COM `conteudo` continua como era: so o no escolhido.
     Com o banco de 04/10 nada muda ainda: nenhuma das 61 fichas esta
     conferida, e nenhuma faixa com `nos` foi feita (as primeiras sao de
@@ -4830,3 +4832,29 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Qconcursos, cuja faixa nao tem materia. As contas nao mudaram - tres
      medidas, nunca somadas, com o "Amostra insuficiente" de sempre; repartir
      os simulados por materia mudaria a E2 e ficou fora.
+
+147. **o anotado sem `conteudo` conta no no da MATERIA** (P01 e P09,
+     escolha sua de 09/10; muda a decisao 81 no nivel da materia). O anotado
+     tinha duas regras: a home, o Edital e o Meu desempenho descartavam a
+     linha sem `conteudo`, e Minhas materias e a comparacao de 07/11 somavam
+     pela materia - LP era "Amostra insuficiente" numa tela e "37% em 35" na
+     vizinha, e Penal e Constitucional apareciam como "nunca estudei". Agora
+     uma regra so (`desempenho_por_conteudo.no_do_anotado`):
+     - a faixa e o extra sem `conteudo` contam no no da materia deles, pelo
+       nome exato da raiz da arvore, sem acento e sem caixa. A materia que nao
+       e raiz (os Diagnosticos) nao conta em no nenhum. Assunto e subassunto
+       nao recebem nada: nao se sabe de qual e;
+     - vale para o acerto e a amostra (`entradas`, `anotado_por_materia`) e
+       para a situacao, as datas e a evolucao (`estudo.situacoes`). A
+       cobertura da decisao 81 (os `nos` do plano, a ficha conferida)
+       continua, so para as datas dos nos cobertos;
+     - a materia passa a ser estudada ou praticada: o 1-7-30 dela anda e ela
+       pode entrar na fila de revisao. O erro do caderno sem no, mas com a
+       materia, entra na fila no no da materia (P09);
+     - "nao treinei" virou "sem acerto medido" no Edital, e a frase do "O
+       que eu ainda nao estudei" diz que a faixa sem no conferido conta so na
+       materia. O aviso da home que o P09 propunha ficou de fora: com a
+       materia contando, ele deixou de ser verdade.
+     Com o banco de 09/10: LP 46% de 57 (radar 29% em 17, anotado 52% em
+     40), Penal 55% em 11 ("Amostra insuficiente"), Constitucional 56% em 32,
+     LEP com o anotado de 13; as quatro sairam do "nunca estudei".
