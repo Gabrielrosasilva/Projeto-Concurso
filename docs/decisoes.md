@@ -4080,7 +4080,9 @@ aplicada. Na R1:
      artigos) ou de materia de uma prova so (LEP, Raciocinio, Legislacao
      Especial, Sociologia) **nao e rebaixado**, e a tela diz "Base de uma
      prova so, e o tema nao e rebaixado: Nao ha evidencia suficiente no
-     acervo para afirmar isso.";
+     acervo para afirmar isso."; **Mudada pela 149 (09/10), so no texto:** o
+     "nao apareceu" diz so o historico e a base, e a prioridade baixa vai
+     para o "Por que agora";
 109. **o exemplo real e a questao inteira**: enunciado, alternativas e o
      gabarito oficial (🟢, a questao tirada da prova), recolhidos num
      `<details>`; a pegadinha da classificacao (🔵), a explicacao escrita
@@ -4889,3 +4891,22 @@ viraram estudo extra "Onde: Radar". Copia antes em
      nao dizem a letra de uma questao. Com o banco de 09/10: 21 codigos
      respondidos; na ficha da Concordancia verbal 1, 15 escondidas e 4 a
      mostra.
+
+149. **o "caiu ou nao caiu" diz so o que as provas mostraram, com as notas
+     na faixa** (P10; muda a decisao 108 so no texto). Sob o selo azul, 12
+     temas diziam "Nao apareceu nas provas de 2013 e 2019 analisadas:
+     prioridade baixa, estude o basico." - uma conclusao de 2 provas, sem o
+     "base pequena" (crase, que o complementar mostra em 9 questoes, era um
+     deles); e a faixa da tela Hoje mostrava so a frase, sem as notas que a
+     ficha mostra (as 4 pendentes do R+7 da "Aplicacao da lei penal", a base
+     de uma prova so do "Trabalho do preso"). Agora:
+     - a frase e "Nao apareceu nas provas de 2013 e 2019 analisadas · base
+       pequena: 2 provas." - o "base pequena" abaixo do
+       `provas_para_tendencia` do `config/amostra.yml` (3), como nos cartoes;
+     - a prioridade baixa do tema basico vai para o "Por que agora" da ficha
+       (🟡 automatico): "Prioridade baixa: ... e regra de priorizacao, nao
+       previsao de prova". So na ficha com no - a sem no ja diz que nao tem;
+     - a faixa da tela Hoje mostra as notas do "caiu" logo abaixo da frase,
+       com ⚠.
+     A classe (cheio, normal, basico) e a conta nao mudaram: a redistribuicao
+     da R4 e o resumo continuam iguais.

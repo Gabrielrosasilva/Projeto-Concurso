@@ -588,6 +588,9 @@ class CaiuNoAlvo:
     pelo_artigo: bool                 # as contadas sairam do artigo, e nao do no
     sem_contagem: bool                # sem no e sem faixa de artigos: nada contado
     minimo_provas: int = 2
+    #: Abaixo disto de provas, "nao apareceu" leva "base pequena" (P10): o
+    #: `provas_para_tendencia` do config/amostra.yml.
+    provas_para_tendencia: int = 3
 
     @property
     def provas_com(self) -> int:
@@ -645,8 +648,12 @@ class CaiuNoAlvo:
             return texto + "."
         tinham = [str(p.ano) for p in self.provas if p.tinha_a_materia]
         if len(tinham) >= self.minimo_provas:
-            return (f"Não apareceu nas provas de {' e '.join(tinham)} analisadas: "
-                    f"prioridade baixa, estude o básico.")
+            # So o historico (P10, decisao 149): a prioridade que sai disto e
+            # regra, e mora no "Por que agora" da ficha, e nao sob o selo azul.
+            texto = f"Não apareceu nas provas de {' e '.join(tinham)} analisadas"
+            if len(tinham) < self.provas_para_tendencia:
+                texto += f" · base pequena: {len(tinham)} provas"
+            return texto + "."
         if tinham:
             return f"Não apareceu na prova de {tinham[0]}, a única que cobrava a matéria."
         return "A matéria não estava nas provas do alvo analisadas."
@@ -675,7 +682,7 @@ class CaiuNoAlvo:
 
 def caiu_no_alvo(ocorrencias: list[Ocorrencia], *, materia: str, dentro,
                  tem_no: bool, faixa: FaixaDeArtigos | None = None,
-                 minimo_provas: int = 2) -> CaiuNoAlvo:
+                 minimo_provas: int = 2, provas_para_tendencia: int = 3) -> CaiuNoAlvo:
     """O tema nas provas do alvo. `dentro(caminho)` e o escopo da ficha (os
     nos); `tem_no` falso quando a ficha nao aponta no. `faixa` e a faixa de
     artigos do tema, ou None."""
@@ -706,4 +713,5 @@ def caiu_no_alvo(ocorrencias: list[Ocorrencia], *, materia: str, dentro,
     return CaiuNoAlvo(provas=provas, contadas=contadas, pendentes=pendentes,
                       anuladas=anuladas, pelo_artigo=pelo_artigo,
                       sem_contagem=not tem_no and faixa is None,
-                      minimo_provas=minimo_provas)
+                      minimo_provas=minimo_provas,
+                      provas_para_tendencia=provas_para_tendencia)

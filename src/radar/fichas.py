@@ -982,13 +982,18 @@ def faixa_do_tema(escrita: FichaEscrita):
             or incidencia.faixa_de_artigos(escrita.tema, escrita.materia))
 
 
-def caiu_do_tema(escrita: FichaEscrita, ocorrencias_alvo, minimo_provas: int = 2):
+def caiu_do_tema(escrita: FichaEscrita, ocorrencias_alvo, minimo_provas: int = 2,
+                 provas_para_tendencia: int | None = None):
     """O tema nas provas do alvo (incidencia.caiu_no_alvo): a conta unica que a
-    ficha, a faixa, a aba Fichas e a redistribuicao usam."""
+    ficha, a faixa, a aba Fichas e a redistribuicao usam. Sem
+    `provas_para_tendencia`, o do config/amostra.yml."""
+    if provas_para_tendencia is None:
+        from radar import amostra as regua
+        provas_para_tendencia = regua.carregar().provas_para_tendencia
     return incidencia.caiu_no_alvo(
         ocorrencias_alvo, materia=escrita.materia, dentro=dentro_de(escrita.nos),
         tem_no=bool(escrita.nos), faixa=faixa_do_tema(escrita),
-        minimo_provas=minimo_provas)
+        minimo_provas=minimo_provas, provas_para_tendencia=provas_para_tendencia)
 
 
 def _exemplos(caiu, ctx: Contexto) -> list[QuestaoReal]:
@@ -1219,6 +1224,14 @@ def montar(escrita: FichaEscrita, ctx: Contexto, data: date | None = None,
     motivos_de_revisao, revisoes = _quando_revisar(escrita, dentro, faixas, ctx)
 
     por_que = _motivos_do_plano(faixas, data, ctx.hoje)
+    if caiu.classe == incidencia.BASICO and escrita.nos:
+        # A prioridade que o "nao caiu" da: e regra, e fica aqui (P10,
+        # decisao 149), e nao sob o selo azul do historico.
+        por_que.append(Item(
+            "Prioridade baixa: o tema não apareceu nas provas do alvo analisadas, "
+            "e por isso o plano pede o básico. É regra de priorização, não "
+            "previsão de prova - com poucas provas, o tema pode cair na próxima.",
+            AUTOMATICO))
     por_que += [Item(f"{f.nome.capitalize()} — {f.texto}.", f.origem)
                 for f in prioridade.fatores]
     if prioridade.posicao:

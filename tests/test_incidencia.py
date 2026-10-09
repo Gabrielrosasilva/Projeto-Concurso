@@ -418,9 +418,15 @@ def test_nao_caiu_nas_duas_provas_e_basico():
     k = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia=PENAL,
                                 dentro=_dentro(f"{PENAL} > Infração penal"), tem_no=True, faixa=faixa)
     assert k.classe == incidencia.BASICO
-    assert k.frase == ("Não apareceu nas provas de 2013 e 2019 analisadas: "
-                       "prioridade baixa, estude o básico.")
+    # P10 (decisao 149): sob o selo azul, so o historico e a base; a
+    # prioridade baixa vai para o "Por que agora" da ficha.
+    assert k.frase == "Não apareceu nas provas de 2013 e 2019 analisadas · base pequena: 2 provas."
+    assert "prioridade" not in k.frase
     assert k.por_prova == "2013: 0 · 2019: 0"
+    com_base = incidencia.caiu_no_alvo(PROVAS_DO_ALVO, materia=PENAL, provas_para_tendencia=2,
+                                       dentro=_dentro(f"{PENAL} > Infração penal"),
+                                       tem_no=True, faixa=faixa)
+    assert com_base.frase == "Não apareceu nas provas de 2013 e 2019 analisadas."
 
 
 def test_materia_de_uma_prova_so_nao_rebaixa_e_diz_a_frase_padrao():

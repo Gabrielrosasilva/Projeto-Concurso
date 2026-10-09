@@ -820,3 +820,15 @@ def test_a_tela_da_aba_fichas_abre_no_dia_com_manha_e_noite(com_ficha_real):
 def test_a_faixa_da_hoje_diz_se_caiu(com_ficha_real):
     html = TestClient(app).get("/hoje?data=2026-10-06").text
     assert 'class="caiu-na-faixa"' in html
+
+
+def test_a_prioridade_baixa_sai_do_selo_azul_e_vai_para_o_por_que_agora():
+    """P10 (decisao 149): o "nao caiu" diz so o historico; a prioridade que sai
+    dele e regra, e fica no "Por que agora"."""
+    # As duas provas cobraram a materia, e nenhuma o tema.
+    fora = [_oc("ap2013", 2013, 30, REMEDIOS), _oc("ap2019", 2019, 40, REMEDIOS)]
+    ficha = _montar(ocorrencias_alvo=fora)
+    caiu = fichas.caiu_do_tema(ficha.escrita, fora, provas_para_tendencia=3)
+    assert caiu.classe == incidencia.BASICO
+    assert "prioridade" not in caiu.frase and "base pequena" in caiu.frase
+    assert any(item.texto.startswith("Prioridade baixa") for item in ficha.por_que_agora)

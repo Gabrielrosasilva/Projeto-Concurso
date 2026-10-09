@@ -970,7 +970,10 @@
                 {# Caiu ou nao caiu (R1): a mesma conta da ficha, prova a prova. #}
                 {% set caiu = caiu_das_faixas.get((b.chave, loop.index0)) if caiu_das_faixas else none %}
                 {% if caiu %}
-                  <p class="caiu-na-faixa">{{ selo('acervo', curto=True) }} {{ caiu.frase }}{% if not caiu.sem_contagem %} <span class="sub">({{ caiu.por_prova }})</span>{% endif %}</p>
+                  <p class="caiu-na-faixa">{{ selo('acervo', curto=True) }} {{ caiu.frase }}{% if not caiu.sem_contagem %} <span class="sub">({{ caiu.por_prova }})</span>{% endif %}
+                    {# As notas que a ficha mostra - pendentes, base de uma
+                       prova so - na propria faixa (P10). #}
+                    {% for n in caiu.notas %}<br><span class="sub">⚠ {{ n }}</span>{% endfor %}</p>
                 {% endif %}
 
                 {% if f.origem %}<p class="detalhe ds-suave">volta do dia {{ f.origem | dia_mes }}</p>{% endif %}

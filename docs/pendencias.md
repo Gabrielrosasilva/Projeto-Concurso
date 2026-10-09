@@ -396,7 +396,9 @@ número ou prepara 10/10, 17/10 e 07/11.
    acerto medido" no lugar de "não treinei"; o erro do caderno só com a
    matéria entra na fila); ✅ P05 em 09/10 (decisão 148: a letra, a explicação
    e a pegadinha da questão só aparecem depois de você responder no radar, na
-   ficha e no resumo; o dado continua com a letra).
+   ficha e no resumo; o dado continua com a letra); ✅ P10 em 09/10 (decisão
+   149: o "não apareceu" diz a base pequena, a prioridade baixa foi para o
+   "Por que agora", e a faixa mostra as notas do "caiu").
 
 ### Depende de você
 
