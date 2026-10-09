@@ -394,7 +394,9 @@ número ou prepara 10/10, 17/10 e 07/11.
    que os simulados do Qconcursos ficam fora); ✅ P01 + P09 em 09/10 (decisão
    147: o anotado sem conteúdo conta no nó da matéria, em toda tela; "sem
    acerto medido" no lugar de "não treinei"; o erro do caderno só com a
-   matéria entra na fila).
+   matéria entra na fila); ✅ P05 em 09/10 (decisão 148: a letra, a explicação
+   e a pegadinha da questão só aparecem depois de você responder no radar, na
+   ficha e no resumo; o dado continua com a letra).
 
 ### Depende de você
 

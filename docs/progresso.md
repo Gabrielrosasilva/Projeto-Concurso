@@ -35,7 +35,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 | 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
 | 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | ✅ P04 (decisão 143) e U21 · P36 (decisão 144); a suíte inteira no fim |
-| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | 🟡 P07, P30 e P01 + P09 feitos (decisões 145 a 147); P05, P10, P11 + U18 a seguir |
+| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | 🟡 P07, P30, P01 + P09 e P05 feitos (decisões 145 a 148); P10, P11 + U18 a seguir |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3427,3 +3427,18 @@ Penal e Constitucional apareciam como "nunca estudei".
 "55% · 11 de 20 · Amostra insuficiente", Constitucional "56% de 32", os
 mesmos de Minhas matérias; o Meu desempenho e a home abrem (200); LP, Penal,
 CF e LEP saíram do "nunca estudei".
+
+**P05 (decisão 148).** A ficha e o resumo mostravam o gabarito das questões
+que a faixa manda responder sem consulta.
+
+- **O código:** `fichas.esconder_gabarito`, `GABARITO_ESCONDIDO`,
+  `QuestaoReal.respondida` e `Contexto.respondidos`;
+  `servico.fichas.codigos_respondidos` (no contexto e no `ResumosDoDia`); o
+  filtro `sem_gabarito` e o global `GABARITO_ESCONDIDO` no `app.py`;
+  `ficha.html` e `_resumo.html`.
+- **Testes:** `tests/test_gabarito_escondido.py` (5 novos); `test_fichas`,
+  `test_resumo`, `test_aceite` e `test_tela_hoje`: 158.
+
+**Rodado de verdade** (banco real, só GET): 21 códigos respondidos; a ficha
+da Concordância verbal 1 com 15 escondidas e 4 à mostra; a tela Hoje de
+09/10 com 7 letras escondidas no resumo.

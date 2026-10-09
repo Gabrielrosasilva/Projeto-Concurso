@@ -157,9 +157,13 @@ templates.env.globals["FRASE_DA_QUESTAO_DE_IA"] = origem.FRASE_DA_QUESTAO_DE_IA
 # Os passos de gerar pelo Claude Code (R6): os textos moram no radar.fichas, e
 # a faixa, a ficha e a tela de gerar mostram os mesmos.
 templates.env.globals["PASSO_NO_CLAUDE_CODE"] = fichas_puras.PASSO_NO_CLAUDE_CODE
+# A letra da questao que eu ainda nao respondi no radar fica escondida no
+# resumo (P05, decisao 148); o dado continua com ela.
+templates.env.filters["sem_gabarito"] = fichas_puras.esconder_gabarito
 templates.env.globals["COMANDO_DE_IMPORTAR"] = fichas_puras.COMANDO_DE_IMPORTAR
 templates.env.globals["AVISO_DO_PEDIDO"] = fichas_puras.AVISO_DO_PEDIDO
 templates.env.globals["PARTES_DO_RESUMO"] = fichas_puras.PARTES_DO_RESUMO
+templates.env.globals["GABARITO_ESCONDIDO"] = fichas_puras.GABARITO_ESCONDIDO
 templates.env.globals["AMOSTRA_INSUFICIENTE"] = amostra.INSUFICIENTE
 
 
@@ -1643,6 +1647,7 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
     return templates.TemplateResponse(
         request=request, name="ficha.html",
         context={"f": ficha, "data": quando,
+                 "respondidos": servico.fichas.codigos_respondidos(),
                  "comando_de_gerar": fichas_puras.comando_de_gerar,
                  # O sinal de treino do tema (decisao 138), fora do acerto.
                  "treino_ia": servico.metricas.treino_ia_dos_nos(ficha.nos),

@@ -358,6 +358,22 @@ def codigo_citavel(q) -> str:
     if getattr(q, "evidencia", "alvo") == "complementar":
         return PREFIXO_DO_COMPLEMENTAR + q.codigo
     return q.codigo
+
+
+#: O que fica no lugar da letra da questao que eu ainda nao respondi (P05).
+GABARITO_ESCONDIDO = "gabarito depois de responder no radar"
+
+
+def esconder_gabarito(texto: str, respondidos) -> str:
+    """O texto do resumo sem a letra das questoes que eu ainda nao respondi no
+    radar (P05, decisao 148): "2019-q51 (gabarito C)" vira "2019-q51
+    (gabarito depois de responder no radar)". A letra continua no dado - e
+    com ela que a importacao confere o resumo (decisao 118)."""
+    if not texto:
+        return texto
+    return GABARITO_CITADO.sub(
+        lambda m: m.group(0) if m.group(1) in respondidos
+        else f"{m.group(1)} ({GABARITO_ESCONDIDO})", texto)
 # O "§" nao tem fronteira de palavra antes dele: fica fora do \b.
 CITA_DISPOSITIVO = re.compile(r"(?i)(\barts?\.|\bart\b|\bregras?\s+\d|\bs[úu]mula|§)")
 
@@ -701,6 +717,10 @@ class QuestaoReal:
     prova: str = ""
     #: O texto de apoio que a questao cita, quando ela cita (item 4, 06/10).
     texto_base: str | None = None
+    #: Ja respondi esta questao no radar? Sem isso, a ficha esconde a letra, a
+    #: explicacao e a pegadinha: a faixa manda responder sem consulta, e quem
+    #: leu o gabarito antes mede a memoria (P05, decisao 148).
+    respondida: bool = False
 
     @property
     def onde(self) -> str:
@@ -771,6 +791,9 @@ class Contexto:
     #: O minimo de provas do config/amostra.yml (acervo): quantas bastam para
     #: dizer que o tema "caiu nas provas" ou rebaixa-lo.
     minimo_provas: int = 2
+    #: Os codigos citaveis ("2019-q51", "FEPESE-2024-q8") das questoes reais
+    #: que eu ja respondi no radar (P05). Fora daqui, a letra fica escondida.
+    respondidos: set = field(default_factory=set)
 
 
 @dataclass
@@ -921,13 +944,14 @@ def _questao_real(o, evidencia: str, ctx: Contexto, como: str = "no") -> Questao
     if ctx.mudancas_da_questao is not None:
         texto = " ".join([o.enunciado or ""] + [v for _, v in alternativas])
         mudancas = tuple(ctx.mudancas_da_questao(o.ano, o.materia, texto) or ())
-    return QuestaoReal(
+    questao = QuestaoReal(
         _codigo(o), o.ano, o.numero, evidencia, o.conteudo or "", o.resposta,
         o.enunciado, o.pegadinha, o.tipo_de_questao, o.conferida,
         alternativas=alternativas,
         explicacao=ctx.explicacoes.get(getattr(o, "impressao_do_enunciado", "") or ""),
         mudancas=mudancas, como=como, prova=o.prova,
         texto_base=getattr(o, "texto_base", None))
+    return replace(questao, respondida=codigo_citavel(questao) in ctx.respondidos)
 
 
 def _questoes_reais(dentro, ctx: Contexto) -> list[QuestaoReal]:

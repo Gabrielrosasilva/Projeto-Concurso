@@ -40,7 +40,7 @@
                 <h3>{{ loop.index + 1 }}. {{ nome }} {{ selo('ia', curto=True) }}</h3>
                 <ul>
                   {% for f in frases %}
-                    <li>{{ f.texto }}<span class="ds-janela__fontes">Fonte: {{ f.fontes | join('; ') }}</span></li>
+                    <li>{{ f.texto | sem_gabarito(resumos.respondidos) }}<span class="ds-janela__fontes">Fonte: {{ f.fontes | join('; ') | sem_gabarito(resumos.respondidos) }}</span></li>
                   {% endfor %}
                 </ul>
               </section>

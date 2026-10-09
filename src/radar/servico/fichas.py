@@ -7,7 +7,7 @@ e se le e grava o `data/fichas.json`, o registro versionado do que foi escrito
 (o banco nao guarda ficha: ela e texto meu e do Claude Code, como o macete).
 """
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
@@ -17,7 +17,7 @@ from radar import amostra, config, fichas, incidencia, leis, prioridade
 from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
 from radar.db import criar_tabelas, sessao
-from radar.models import QuestaoGerada, agora
+from radar.models import QuestaoDeProva, QuestaoGerada, RespostaDeSimulado, agora
 
 
 def caminho_do_arquivo() -> Path:
@@ -120,6 +120,26 @@ def arvore_das_faixas(blocos, escritas: list[fichas.FichaEscrita] | None = None)
     return saida
 
 
+def codigos_respondidos() -> set[str]:
+    """Os codigos citaveis ("2019-q51", "FEPESE-2024-q8") das questoes reais
+    que eu ja respondi no radar, com qualquer letra (P05, decisao 148). A
+    gerada nao entra: ela nao tem codigo de prova."""
+    criar_tabelas()
+    with sessao() as s:
+        questoes = s.execute(
+            select(QuestaoDeProva.ano, QuestaoDeProva.numero, QuestaoDeProva.evidencia)
+            .join(RespostaDeSimulado, RespostaDeSimulado.questao_id == QuestaoDeProva.id)
+            .where(RespostaDeSimulado.gerada.is_not(True))
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .distinct()).all()
+    saida = set()
+    for ano, numero, evidencia in questoes:
+        codigo = f"{ano or 's/a'}-q{numero}" if numero else f"{ano or 's/a'}"
+        saida.add(fichas.PREFIXO_DO_COMPLEMENTAR + codigo if evidencia == "complementar"
+                  else codigo)
+    return saida
+
+
 def contexto(hoje: date | None = None, plano=None,
              escritas: list[fichas.FichaEscrita] | None = None) -> fichas.Contexto:
     """Tudo o que as fichas precisam, contado uma vez so."""
@@ -174,6 +194,7 @@ def contexto(hoje: date | None = None, plano=None,
         macetes=[m for m in manual.carregar_macetes() if cartoes._macete_aparece(m)],
         mudancas_da_questao=leis.mudancas_da_questao,
         minimo_provas=incidencia.carregar_minimos().provas,
+        respondidos=codigos_respondidos(),
     )
 
 
@@ -567,6 +588,9 @@ class ResumosDoDia:
     por_faixa: dict
     #: {id: ResumoNaTela}, cada tema uma vez, na ordem em que aparece.
     temas: dict
+    #: Os codigos das questoes reais ja respondidas no radar: a letra das
+    #: outras fica escondida na janela (P05, decisao 148).
+    respondidos: set = field(default_factory=set)
 
     def da_faixa(self, bloco: str, indice: int) -> list:
         return [self.temas[i] for i in self.por_faixa.get((bloco, indice), [])]
@@ -670,7 +694,7 @@ def resumos_do_dia(blocos, data: date, plano=None, escritas=None,
                         if f.tipo == "diagnostico" and f.materia}
             lista = estudados_em(inicio, data, materias or None)
         por_faixa[(chave, indice)] = list(dict.fromkeys(lista))
-    return ResumosDoDia(por_faixa=por_faixa, temas=temas)
+    return ResumosDoDia(por_faixa=por_faixa, temas=temas, respondidos=codigos_respondidos())
 
 
 def levar_no(duplicado: str, mantido: str) -> int:

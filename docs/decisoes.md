@@ -4088,7 +4088,9 @@ aplicada. Na R1:
      enunciado) e o aviso da lei que mudou depois da prova. Os **macetes**
      entram na ficha pela questao real que citam (prova e numero), e nunca
      pelo nome do assunto: macete sem questao do tema nao aparece. O titulo
-     "Questoes reais relacionadas" fica (§11 e o aceite);
+     "Questoes reais relacionadas" fica (§11 e o aceite). **Mudada pela 148
+     (09/10):** o gabarito, a explicacao e a pegadinha so aparecem depois que
+     eu respondo a questao no radar;
 110. **a lei seca dirigida e do tema da teoria do mesmo dia e da mesma
      materia** (`fichas.da_faixa_no_dia`), so para a tela: o botao da
      ficha (e o do resumo, na R2) e o "onde na arvore". O "estudado" da
@@ -4173,7 +4175,9 @@ aplicada. Na R1:
      evidencia insuficiente); pegadinha sem questao e sem a marca "sem
      questão real"; artigo sem dispositivo nas materias de lei; o basico
      quando o tema caiu, ou faltando quando e da classe basica; e previsao.
-     O resumo conferido por mim nao e sobrescrito;
+     O resumo conferido por mim nao e sobrescrito. **Mudada pela 148
+     (09/10):** na tela, a letra da questao que eu ainda nao respondi no radar
+     fica escondida; o dado continua com ela, e a conferencia nao mudou;
 119. **a questao de outra prova se cita com o prefixo `FEPESE-`**
      ("FEPESE-2024-q8"): o mesmo ano e numero pode ser de outra prova, e
      "2013-q6" do complementar se confundia com a prova de 2013 do cargo;
@@ -4858,3 +4862,30 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Com o banco de 09/10: LP 46% de 57 (radar 29% em 17, anotado 52% em
      40), Penal 55% em 11 ("Amostra insuficiente"), Constitucional 56% em 32,
      LEP com o anotado de 13; as quatro sairam do "nunca estudei".
+
+148. **a letra do gabarito fica escondida ate eu responder a questao no
+     radar** (P05, escolha sua de 09/10: sem botao "ver gabarito"; muda as
+     decisoes 109 e 118 na tela). A ficha e o resumo mostravam "gabarito X" e
+     a alternativa certa com ✓ das questoes que a faixa manda responder sem
+     consulta: o acerto media a memoria do gabarito. Agora:
+     - `servico.fichas.codigos_respondidos` da os codigos citaveis ("2019-q51",
+       "FEPESE-2024-q8") das questoes reais com resposta no radar (a gerada
+       nao conta: nao tem codigo de prova); a `QuestaoReal` ganhou
+       `respondida`;
+     - na ficha, a questao nao respondida vem com as alternativas sem marca,
+       sem a letra, sem a explicacao e sem a pegadinha da classificacao (as
+       tres dao a resposta), e com a frase "aparecem depois que voce responder
+       esta questao no radar"; na lista, "gabarito depois de responder no
+       radar";
+     - no resumo (na ficha e na janela da tela Hoje e da aba Fichas), o
+       filtro `sem_gabarito` (`fichas.esconder_gabarito`) troca "(gabarito C)"
+       pela mesma frase. O texto gravado continua com a letra, e e com ela que
+       a importacao e o `--verificar-resumos` conferem o resumo: nada foi
+       reescrito no `data/fichas.json`;
+     - o codigo do complementar pode repetir entre provas do mesmo ano: a
+       letra aparece quando qualquer uma delas foi respondida. Raro, e o
+       contrario (esconder para sempre) seria pior.
+     A lista "Pegadinhas do acervo" e o padrao de letras da banca continuam:
+     nao dizem a letra de uma questao. Com o banco de 09/10: 21 codigos
+     respondidos; na ficha da Concordancia verbal 1, 15 escondidas e 4 a
+     mostra.

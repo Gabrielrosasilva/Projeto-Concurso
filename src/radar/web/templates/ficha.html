@@ -83,7 +83,7 @@
       {% for chave, nome in PARTES_DO_RESUMO if rs.partes.get(chave) %}
         <p class="subtitulo">{{ loop.index + 1 }}. {{ nome }}</p>
         <ul class="marcas">
-          {% for fr in rs.partes[chave] %}<li>{{ fr.texto }} <span class="ds-suave">— {{ fr.fontes | join('; ') }}</span></li>{% endfor %}
+          {% for fr in rs.partes[chave] %}<li>{{ fr.texto | sem_gabarito(respondidos) }} <span class="ds-suave">— {{ fr.fontes | join('; ') | sem_gabarito(respondidos) }}</span></li>{% endfor %}
         </ul>
       {% endfor %}
       <div class="procedencia">
@@ -209,16 +209,27 @@
   {# A questao inteira (R1): enunciado, alternativas e gabarito oficial,
      recolhida e aberta no clique; a explicacao (IA, quando ha) e a lei que
      mudou depois da prova. #}
+  {# P05 (decisao 148): a questao que eu ainda nao respondi no radar vem sem
+     a letra, sem a explicacao e sem a pegadinha - as tres dao a resposta, e
+     a faixa manda responder sem consulta. Respondida, tudo aparece. #}
+  {% macro gabarito_curto(q) %}{% if q.respondida %}gabarito {{ (q.resposta or '?') | upper }}{% else %}{{ GABARITO_ESCONDIDO }}{% endif %}{% endmacro %}
   {% macro questao_inteira(q) %}
     <details><summary>ver a questão inteira</summary>
       {% if q.texto_base %}<p class="texto-base">{{ s('oficial') }} Texto-base (do caderno da prova):<br>{{ q.texto_base }}</p>{% endif %}
       <p class="enunciado">{{ q.enunciado }}</p>
-      {% if q.alternativas %}<ul class="marcas">{% for letra, texto in q.alternativas %}<li>{% if letra == (q.resposta or '') | lower %}<b>({{ letra }}) {{ texto }}</b> ✓{% else %}({{ letra }}) {{ texto }}{% endif %}</li>{% endfor %}</ul>{% endif %}
-      <p>{{ s('oficial') }} Gabarito oficial: <b>{{ (q.resposta or '?') | upper }}</b></p>
+      {% if q.respondida %}
+        {% if q.alternativas %}<ul class="marcas">{% for letra, texto in q.alternativas %}<li>{% if letra == (q.resposta or '') | lower %}<b>({{ letra }}) {{ texto }}</b> ✓{% else %}({{ letra }}) {{ texto }}{% endif %}</li>{% endfor %}</ul>{% endif %}
+        <p>{{ s('oficial') }} Gabarito oficial: <b>{{ (q.resposta or '?') | upper }}</b></p>
+      {% else %}
+        {% if q.alternativas %}<ul class="marcas">{% for letra, texto in q.alternativas %}<li>({{ letra }}) {{ texto }}</li>{% endfor %}</ul>{% endif %}
+        <p class="frase-padrao">O gabarito, a explicação e a pegadinha aparecem depois que você responder esta questão no radar.</p>
+      {% endif %}
       {% for mud in q.mudancas %}{{ aviso_lei(mud) }}{% endfor %}
-      {% if q.pegadinha %}<p>{{ s(f.origens.pegadinhas_do_acervo) }} Onde estava a pegadinha (classificação{% if not q.conferida %}, não conferida{% endif %}): {{ q.pegadinha }}</p>{% endif %}
-      {% if q.explicacao %}<p>{{ s(f.origens.explicacao) }} Explicação: {{ q.explicacao.explicacao }} <span class="ds-suave">Fonte: {{ q.explicacao.fonte }} · {{ q.explicacao.modelo }}</span></p>
-      {% else %}<p class="frase-padrao">Explicação ainda não escrita para esta questão.</p>{% endif %}
+      {% if q.respondida %}
+        {% if q.pegadinha %}<p>{{ s(f.origens.pegadinhas_do_acervo) }} Onde estava a pegadinha (classificação{% if not q.conferida %}, não conferida{% endif %}): {{ q.pegadinha }}</p>{% endif %}
+        {% if q.explicacao %}<p>{{ s(f.origens.explicacao) }} Explicação: {{ q.explicacao.explicacao }} <span class="ds-suave">Fonte: {{ q.explicacao.fonte }} · {{ q.explicacao.modelo }}</span></p>
+        {% else %}<p class="frase-padrao">Explicação ainda não escrita para esta questão.</p>{% endif %}
+      {% endif %}
     </details>
   {% endmacro %}
 
@@ -228,7 +239,7 @@
     {% if f.exemplos %}
       <ul class="lista">
         {% for q in f.exemplos %}
-          <li>{{ s(f.origens.exemplos) }} <b>{{ q.codigo }}</b> · gabarito {{ (q.resposta or '?') | upper }}
+          <li>{{ s(f.origens.exemplos) }} <b>{{ q.codigo }}</b> · {{ gabarito_curto(q) }}
             {% if q.como == 'pendente' %}· <span class="ds-suave">classificação pendente: o artigo gravado é do tema</span>
             {% elif q.como == 'artigo' %}· <span class="ds-suave">pelo artigo gravado na classificação</span>
             {% else %}· {{ q.no }}{% endif %}
@@ -242,7 +253,7 @@
     {% if compl %}
       <ul class="lista">
         {% for q in compl %}
-          <li><b>{{ q.codigo }}</b> · {{ q.onde }} · gabarito {{ (q.resposta or '?') | upper }} · {{ q.no }}
+          <li><b>{{ q.codigo }}</b> · {{ q.onde }} · {{ gabarito_curto(q) }} · {{ q.no }}
             {{ questao_inteira(q) }}
           </li>
         {% endfor %}
