@@ -387,6 +387,9 @@ número ou prepara 10/10, 17/10 e 07/11.
    eu responder a questão no radar (sem botão "ver gabarito"); P30 = decide o
    acumulado do ciclo, com o fechamento ao lado, e a tela diz que os
    simulados do Qconcursos ficam fora. P07, P10 e P11 · U18 como a proposta.
+   **Feito:** ✅ P07 em 09/10 (decisão 145: o estoque da rodada que mede não
+   tem a questão de outra rodada que mede do ciclo; o fechamento de 07/11
+   repetiria 19 das 40 de 10/10).
 
 ### Depende de você
 

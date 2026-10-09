@@ -21,7 +21,10 @@ A regra, na ordem:
      gabarito. Questao gerada por IA nunca entra aqui: ela treina, nao mede;
   4. assunto sem questao bastante: o que falta vai para os outros assuntos da
      materia, pelo mesmo peso. Se a materia inteira nao tiver, falta mesmo, e
-     a tela diz quanto - completar com outra materia desfiguraria o peso.
+     a tela diz quanto - completar com outra materia desfiguraria o peso;
+  5. a questao que outra rodada que mede do ciclo ja usou NAO e estoque
+     (P07, decisao 145): o fechamento de 07/11 repetiria as do diagnostico de
+     10/10, e a comparacao que decide o Ciclo 2 mediria memoria.
 
 A composicao e deterministica: os mesmos dados dao os mesmos numeros e as
 mesmas questoes (a semente e a faixa), e a rodada guarda a composicao usada em
@@ -52,7 +55,8 @@ COM_AMOSTRA, SEM_AMOSTRA = "com_amostra", "sem_amostra"
 
 #: Quem fez a regra. Vai na rodada, para eu saber depois com que regra ela foi
 #: montada - se a regra mudar, a rodada antiga continua dizendo a sua.
-REGRA = "decisão 67: incidência do alvo onde há amostra, edital onde não há"
+REGRA = ("decisões 67 e 145: incidência do alvo onde há amostra, edital onde não há, "
+         "sem questão já usada por outra rodada que mede do ciclo")
 
 #: As faixas que medem, e por isso saem por esta regra: o diagnostico e o
 #: simulado feitos NO RADAR. O simulado do Qconcursos fica de fora (ele nao
@@ -289,6 +293,43 @@ def _estoque(materias: list[str] | None = None) -> dict[str, list[Candidata]]:
             for assunto, por_chave in estoque.items()}
 
 
+def usadas_pelas_que_medem(plano=None) -> set[str]:
+    """As chaves das questoes que uma rodada que mede do ciclo ja usou: a
+    composta (diagnostico e simulado no radar) e a que refaz os erros delas.
+    O ciclo e o do plano: a rodada conta se a faixa dela cai entre o inicio e
+    o fim. Rodada sem faixa (o simulado avulso da tela Simulado) nao mede."""
+    from radar import cronograma as plano_de_estudo
+    from radar.servico.simulado import RODADAS_QUE_MEDEM
+
+    plano = plano or plano_de_estudo.carregar()
+    criar_tabelas()
+    with sessao() as s:
+        rodadas = []
+        for simulado in s.scalars(select(Simulado)):
+            filtros = simulado.filtros or {}
+            dia = (filtros.get("faixa") or {}).get("data")
+            if (filtros.get("rodada") in RODADAS_QUE_MEDEM and dia
+                    and plano.inicio <= date.fromisoformat(dia) <= plano.fim):
+                rodadas.append(simulado.id)
+        if not rodadas:
+            return set()
+        ids = set(s.scalars(
+            select(RespostaDeSimulado.questao_id)
+            .where(RespostaDeSimulado.simulado_id.in_(rodadas))
+            .where(RespostaDeSimulado.gerada.is_not(True))))
+        return {chave_de(q) for q in s.scalars(
+            select(QuestaoDeProva).where(QuestaoDeProva.id.in_(ids)))}
+
+
+def sem_as_usadas(estoque: dict[str, list[Candidata]],
+                  usadas: set[str]) -> dict[str, list[Candidata]]:
+    """O estoque sem as questoes que outra rodada que mede ja usou (P07)."""
+    if not usadas:
+        return estoque
+    return {assunto: [c for c in lista if c.chave not in usadas]
+            for assunto, lista in estoque.items()}
+
+
 def estoque_real(materias: list[str] | None = None) -> dict[str, list[Candidata]]:
     """O mesmo estoque, para quem escolhe questao real fora da composicao: a
     faixa de Portugues que comeca no radar (decisao 107)."""
@@ -329,7 +370,9 @@ class Contexto:
         return cls(
             mapas=incidencia.montar(nos, alvo),
             complementar=incidencia.complementar_por_no(nos, complementares),
-            estoque=_estoque() if com_estoque else {},
+            # O estoque de quem MEDE: sem o que outra rodada que mede ja usou.
+            estoque=(sem_as_usadas(_estoque(), usadas_pelas_que_medem())
+                     if com_estoque else {}),
             respondidas=_respondidas() if com_estoque else set(),
             nos=nos, ocorrencias=alvo, complementares=complementares)
 

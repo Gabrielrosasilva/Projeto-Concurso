@@ -23,7 +23,7 @@ import yaml
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
-from radar import cronograma, edital_programa
+from radar import cronograma, edital_programa, servico
 from radar.cronograma import Faixa
 from radar.db import sessao
 from radar.models import QuestaoDeProva, QuestaoGerada, RespostaDeSimulado, Simulado
@@ -221,6 +221,40 @@ def test_a_rodada_grava_a_composicao_e_nao_e_recriada(acervo):
     assert gravada["regra"] == composicao.REGRA
     assert sum(a["pedidas"] for m in gravada["materias"] for a in m["assuntos"]) == 4
     assert simulado.filtros["faixa"]["titulo"] == faixa.titulo
+
+
+def _ids_da_rodada(simulado) -> set[int]:
+    return {q.id for q in _rodada(simulado.id)[2]}
+
+
+def test_a_rodada_que_mede_nao_repete_a_de_outra_do_ciclo(acervo):
+    """P07: o fechamento de 07/11 nao repete o diagnostico de 10/10. O que
+    falta no assunto vai para os outros da materia; na materia inteira, falta."""
+    diagnostico = composicao.criar_rodada(date(2026, 10, 10), "noite", 0, _faixa(questoes=4))
+    fechamento = composicao.criar_rodada(date(2026, 11, 7), "noite", 0, _faixa(questoes=4))
+
+    assert not _ids_da_rodada(diagnostico) & _ids_da_rodada(fechamento)
+    # Portugues tem 7 no estoque: sobram 3 para o fechamento.
+    assert len(_ids_da_rodada(fechamento)) == 3
+    assert fechamento.filtros["composicao"]["materias"][0]["faltaram"] == 1
+    assert "145" in fechamento.filtros["composicao"]["regra"]
+
+
+def test_a_materia_esgotada_por_outra_rodada_que_mede_falta_mesmo(acervo):
+    composicao.criar_rodada(date(2026, 10, 10), "manha", 0, _faixa(RACIOCINIO, questoes=2))
+    c = composicao.compor([RACIOCINIO], 2)
+    assert c.pedidas == 0 and c.faltaram == 2
+    assert composicao.criar_rodada(date(2026, 11, 7), "noite", 0,
+                                   _faixa(RACIOCINIO, questoes=2)) is None
+
+
+def test_so_conta_a_rodada_que_mede_dentro_do_ciclo(acervo):
+    """A rodada de faixa fora do inicio e do fim do plano (outro ciclo) e o
+    simulado avulso, sem faixa, nao tiram questao do estoque."""
+    composicao.criar_rodada(date(2026, 12, 5), "noite", 0, _faixa(RACIOCINIO, questoes=2))
+    servico.criar_simulado(materia=RACIOCINIO, quantidade=2)
+    assert composicao.usadas_pelas_que_medem() == set()
+    assert composicao.compor([RACIOCINIO], 2).pedidas == 2
 
 
 def test_faixa_que_nao_mede_nao_cria_rodada(acervo):

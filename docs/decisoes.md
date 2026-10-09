@@ -3282,6 +3282,8 @@ mede (7A); commit e push por subetapa (8A).
     de Portugues, 8 de Raciocinio Logico, 13 de Direitos Humanos, 4 de
     Constitucional, 4 de Penal e 8 da LEP. A faixa so mede quando e diagnostico
     ou simulado FEITO NO RADAR; o simulado do Qconcursos fica para a 2B.
+    **Mudada pela 145 (09/10):** a questao que outra rodada que mede do
+    ciclo ja usou deixou de ser estoque.
 
 68. **o modo simulado da geracao divide as questoes pelo peso do edital**
     (item 4 da secao F das pendencias). A §8 pede que o modo 3 respeite "o
@@ -4794,3 +4796,23 @@ viraram estudo extra "Onde: Radar". Copia antes em
        formulario sem materia: a materia certa vem de cada erro do relatorio.
      Com o plano de hoje, so 10 das 168 faixas de questoes de 09/10 a 07/11
      tem no dado por mim; as outras ganham o no quando eu conferir a ficha.
+
+## O lote 4 da proposta: o que decide o Ciclo 2 (09/10/2026 em diante)
+
+145. **a rodada que mede nao repete a questao de outra rodada que mede do
+     ciclo** (P07; muda a decisao 67 no que conta como estoque). Com o banco
+     de 09/10, o fechamento de 07/11 repetiria 19 das 40 questoes dos
+     diagnosticos de 10/10 (as 8 de RL e 11 de LP): a linha de RL da
+     comparacao que decide o Ciclo 2 mediria memoria. Agora:
+     - o estoque da composicao (`Contexto.ler`) nao tem as chaves usadas por
+       uma rodada `composta` ou `erros_das_rodadas` cuja faixa cai entre o
+       inicio e o fim do plano (`composicao.usadas_pelas_que_medem`). O
+       simulado avulso, sem faixa, nao mede e nao conta; o de outro ciclo
+       tambem nao;
+     - o que falta num assunto vai para os outros da materia, pelo mesmo
+       peso, como ja era; faltou na materia inteira, falta mesmo;
+     - a rodada ja criada nao muda (nao e recriada), e a nova grava a regra
+       com o numero desta decisao.
+     Simulado com o banco de 09/10 (os diagnosticos como seriam criados): o
+     fechamento sai com as mesmas 50 (LP 13, RL 8, DH 13, CF 4, Penal 4, LEP
+     8), nenhuma repetida e nada em falta.

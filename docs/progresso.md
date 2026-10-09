@@ -35,6 +35,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 | 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
 | 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | ✅ P04 (decisão 143) e U21 · P36 (decisão 144); a suíte inteira no fim |
+| 30 | O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10) | 🟡 P07 feito (decisão 145); P30, P01 + P09, P05, P10, P11 + U18 a seguir |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3377,3 +3378,19 @@ dele; o relatório da rodada 19 - 2 erros, cada um com a referência ("FEPESE
 **Critério de conclusão:** ✅ as 3 de Português do R+7 não entram mais no
 acerto de Direito; o erro do relatório chega ligado ao nó; o 17/10 não
 preenche "Diagnósticos".
+
+## 30 — O lote 4 da proposta: o que decide o Ciclo 2 (a partir de 09/10/2026)
+
+**P07 (decisão 145).** O fechamento de 07/11 repetiria 19 das 40 questões dos
+diagnósticos de 10/10.
+
+- **O código:** `servico/composicao.py` - `usadas_pelas_que_medem` (as chaves
+  das rodadas `composta` e `erros_das_rodadas` com faixa no ciclo) e
+  `sem_as_usadas`; o `Contexto.ler` tira as duas do estoque; a `REGRA` cita a
+  145.
+- **Testes:** `test_composicao` (3 novos: não repete, a matéria esgotada
+  falta mesmo, só conta a rodada do ciclo com faixa); 29 no arquivo.
+
+**Rodado de verdade** (banco real, só leitura): os diagnósticos de 10/10 como
+seriam criados e o fechamento sem as questões deles - 50 questões, 0
+repetidas, nada em falta; a tela Hoje de 07/11 abre (200).
