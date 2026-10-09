@@ -228,9 +228,16 @@ desempenho para o Ciclo 2.
 cada erro do relatorio da rodada com o no da questao, a faixa com o no que
 voce deu (`conteudo`, `nos`, ficha conferida) -, com a faixa mista
 (Diagnosticos) sem materia.
-**Proximo:** o lote 4 da proposta de melhorias (pendencia I: a composicao
-que nao repete o diagnostico, a regra do anotado, o gabarito na ficha), ate
-07/11;
+**O lote 4 da proposta (09/10, decisoes 145 a 150):** a rodada que mede nao
+repete a questao de outra do ciclo (o fechamento de 07/11 repetiria 19 das
+40 de 10/10); o que decide o Ciclo 2 e o acumulado do ciclo, com o
+fechamento ao lado; o anotado sem `conteudo` conta no no da MATERIA (uma
+regra so em toda tela; "sem acerto medido"); a letra do gabarito, a
+explicacao e a pegadinha da questao so aparecem depois de responder no
+radar; o "caiu" diz a base pequena e as notas na faixa, e a prioridade baixa
+foi para o "Por que agora"; a seta do acerto nas Semanas so com 20 respostas
+de cada lado. **A proposta de melhorias esta feita ate 07/11.**
+**Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
