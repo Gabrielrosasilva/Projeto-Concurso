@@ -102,7 +102,7 @@ def test_o_arquivo_real_cobre_todo_tema_do_cronograma_que_vai_ao_qconcursos():
 
 def test_o_arquivo_real_tem_numero_e_nome_em_todo_assunto():
     links = qconcursos.carregar()
-    assert len(links) == 62
+    assert len(links) == 63          # 62 de 06/10 + "Interpretação 1" (P04)
     for link in links.values():
         assert link.banca == 61
         assert link.assuntos, link.tema

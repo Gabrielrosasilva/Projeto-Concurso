@@ -4706,3 +4706,24 @@ viraram estudo extra "Onde: Radar". Copia antes em
        por tema, com o que eu ainda nao entendi (ou entendi mais ou menos) na
        frente, marcado "fica no Ciclo 2". Vai no `data/estado_do_dia.json`
        so nos dias que tem nota.
+
+## O lote 3 da proposta: o R+7 dividido e o erro ligado ao no (09/10/2026)
+
+143. **o R+7 e o R+30 com "+ 3 de Portugues" viraram duas faixas no plano**
+     (P04, U09; escolhas suas de 09/10). O "fiz" grava tudo na materia da
+     faixa, e as 3 de Portugues entravam no acerto de Direito (e saiam do de
+     LP). Agora, de 08/10 em diante, as 31 faixas assim sao duas revisoes
+     seguidas, com o mesmo rotulo e a mesma `origem`:
+     - a de Direito, com 7 questoes (3 nas que tinham 6), o mesmo filtro e o
+       detalhe sem a parte de Portugues;
+     - a de Portugues: "R+7: <o tema de Portugues do dia de origem>", 3
+       questoes, materia Lingua Portuguesa, e o `conteudo` do tema quando a
+       faixa de estudo dele tem. O titulo e o do tema: a ficha, o no da arvore
+       e o link do Qconcursos saem dele, sem codigo novo. O "Interpretacao 1:
+       o metodo" ganhou link (o 15.1 do site, o mesmo da cronometrada);
+     - o **07/10 ficou como era**: era o unico dia ja anotado (o R+7 com 10
+       questoes, 3 acertos, em LEP), e a linha nova no meio da noite mudaria a
+       posicao das 4 faixas marcadas depois dele;
+     - a duracao sai do arredondamento de sempre (7 questoes = 20 min, 3 = 10
+       min): +5 min em cada noite dividida, sem duracao escrita a mao.
+     O teste `test_revisao_nao_mistura_portugues_com_direito` le o plano real.

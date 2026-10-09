@@ -34,6 +34,7 @@ Legenda: ✅ concluída · 🟡 feita, falta conferir algo · ⬜ não começada
 | 25 | Revisão final do estudo (Fase 1 e R1 a R7) | ✅ 2.640 passed e 1 failed, consertado (decisões 108 a 126) |
 | 26 | Os itens 8, 2, 3, 4 e 5 (pedido de 05/10) | ✅ só os testes tocados, por escolha sua (decisões 128 a 133): a fila de revisão única, os nós das 15 fichas, 90 geradas, o texto-base e 125 explicações do complementar |
 | 28 | O lote 2 da proposta: o "fiz" e o "Fiz hoje" (06/10) | ✅ decisão 138; o 06/10 corrigido; só os testes tocados (174); a suíte inteira fica para depois |
+| 29 | O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10) | 🟡 P04 feito (decisão 143); U21 · P36 a seguir |
 | 27 | A auditoria de uso e o lote 1 da proposta (06/10) | ✅ a proposta ([proposta_de_melhorias](proposta_de_melhorias.md)) e o lote 1 (decisões 134 a 137); a suíte inteira passa (2.201 + 484 testes, em três rodadas, depois de 2 testes da ordem antiga de 10/10 ajustados) |
 
 ---
@@ -3330,3 +3331,22 @@ radar: 12 questões = 11 acertos + 1 erro (92%)", "Total do dia: 12 questões ·
 **Critério de conclusão:** ✅ o treino de IA não divide mais a linha com as
 reais; o "fiz" não vem com número; a faixa feita no radar fecha sem contar
 de novo.
+
+## 29 — O lote 3 da proposta: o R+7 dividido e o erro ligado ao nó (09/10/2026)
+
+**P04 (decisão 143).** O R+7 e o R+30 com "+ 3 de Português" gravavam as 10
+questões na matéria de Direito.
+
+- **O plano:** em `config/cronograma.yml`, as 31 faixas de 08/10 em diante
+  viraram duas revisões seguidas (Direito com 7, ou 3; Português com 3, o
+  título do tema do dia de origem). O 07/10, já anotado, ficou como era.
+  `config/qconcursos.yml` ganhou o tema "Interpretação 1: o método".
+- **Testes:** `test_cronograma` (2 novos e o fim de 28/10, 21:25),
+  `test_redistribuicao` (a foto da R4 não conta a linha nova; +5 min por
+  divisão), `test_composicao` (os títulos de 31/10 e 07/11),
+  `test_tela_hoje` e `test_qconcursos` (63 temas).
+
+**Rodado de verdade:** `radar hoje` de 09/10 - "18:00-18:20 R+7 · Lei de
+Execução Penal ... 7 questões" e "18:20-18:30 R+7 · Língua Portuguesa · R+7:
+Verbo 2: emprego dos tempos e modos 3 questões", com o nó da árvore; o 07/10
+continua com o ✓ 3/10.

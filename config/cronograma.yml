@@ -1155,13 +1155,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-01'
     titulo: 'R+7: Teoria geral'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta, + 3 de Português:
-      interpretação 1: o método.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta."
     filtro: Direitos Humanos > teoria geral dos direitos humanos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-01'
+    titulo: "R+7: Interpretação 1: o método"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 01/10 (interpretação 1: o método), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -1279,13 +1286,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-02'
     titulo: 'R+7: Assistência ao preso e ao egresso (arts. 10 a 27)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 02/10, sem consulta, + 3 de
-      Português: verbo 2: emprego dos tempos e modos.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 02/10, sem consulta."
     filtro: Execução Penal > assistência ao preso e ao egresso
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-02'
+    titulo: "R+7: Verbo 2: emprego dos tempos e modos"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 02/10 (verbo 2: emprego dos tempos e modos), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -1465,12 +1479,21 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 6
+    questoes: 3
     materia: Direito Penal
     origem: '2026-10-05'
     titulo: 'R+7: Fato típico e nexo causal (art. 13)'
-    detalhe: "3 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português: vozes do verbo."
+    detalhe: "3 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta."
     filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-05'
+    titulo: "R+7: Vozes do verbo"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 05/10 (vozes do verbo), sem consulta."
+    conteudo: "Língua Portuguesa > Vozes do verbo"
     onde: qconcursos
   - tipo: revisao
     rotulo: Extra
@@ -1604,13 +1627,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direito Constitucional
     origem: '2026-10-06'
     titulo: 'R+7: Art. 5º, incisos XVII a XLIX'
-    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 06/10, sem consulta, + 3 de
-      Português: concordância verbal 1: regra geral.'
+    detalhe: "7 questões NOVAS de Direito Constitucional sobre o que você estudou em 06/10, sem consulta."
     filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-06'
+    titulo: "R+7: Concordância verbal 1: regra geral"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 06/10 (concordância verbal 1: regra geral), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -1734,13 +1764,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-07'
     titulo: 'R+7: Trabalho do preso (arts. 28 a 37)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 07/10, sem consulta, + 3 de
-      Português: concordância verbal 2: casos especiais.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 07/10, sem consulta."
     filtro: Execução Penal > trabalho do preso
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-07'
+    titulo: "R+7: Concordância verbal 2: casos especiais"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 07/10 (concordância verbal 2: casos especiais), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -1850,13 +1887,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-08'
     titulo: 'R+7: Afirmação histórica e dimensões (gerações)'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta, + 3 de Português:
-      interpretação 2: tipos de texto.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta."
     filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-08'
+    titulo: "R+7: Interpretação 2: tipos de texto"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 08/10 (interpretação 2: tipos de texto), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -1972,13 +2016,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-09'
     titulo: 'R+7: Deveres e direitos do preso (arts. 38 a 43)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 09/10, sem consulta, + 3 de
-      Português: concordância nominal.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 09/10, sem consulta."
     filtro: Execução Penal > deveres e direitos do preso
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-09'
+    titulo: "R+7: Concordância nominal"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 09/10 (concordância nominal), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2163,13 +2214,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direito Penal
     origem: '2026-10-12'
     titulo: 'R+7: Tentativa, dolo, culpa e erro (arts. 14 a 21)'
-    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 12/10, sem consulta, + 3 de Português:
-      crase 1: regra geral e casos obrigatórios.'
+    detalhe: "7 questões NOVAS de Direito Penal sobre o que você estudou em 12/10, sem consulta."
     filtro: Direito Penal > iter criminis, tentativa, dolo e culpa, erro de tipo e de proibição
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-12'
+    titulo: "R+7: Crase 1: regra geral e casos obrigatórios"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 12/10 (crase 1: regra geral e casos obrigatórios), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2293,13 +2351,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direito Constitucional
     origem: '2026-10-13'
     titulo: 'R+7: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)'
-    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 13/10, sem consulta, + 3 de
-      Português: crase 2: proibida, facultativa e casos especiais.'
+    detalhe: "7 questões NOVAS de Direito Constitucional sobre o que você estudou em 13/10, sem consulta."
     filtro: Direito Constitucional > remédios constitucionais e garantias processuais
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-13'
+    titulo: "R+7: Crase 2: proibida, facultativa e casos especiais"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 13/10 (crase 2: proibida, facultativa e casos especiais), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2432,13 +2497,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-14'
     titulo: 'R+7: Disciplina, faltas graves e RDD (arts. 44 a 52)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 14/10, sem consulta, + 3 de
-      Português: pontuação 1: vírgula entre termos.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 14/10, sem consulta."
     filtro: Execução Penal > disciplina, faltas disciplinares e regime disciplinar diferenciado
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-14'
+    titulo: "R+7: Pontuação 1: vírgula entre termos"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 14/10 (pontuação 1: vírgula entre termos), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2557,13 +2629,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-15'
     titulo: 'R+7: Sistemas de proteção e responsabilidade do Estado'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 15/10, sem consulta, + 3 de Português:
-      interpretação 3: coesão e referência.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 15/10, sem consulta."
     filtro: Direitos Humanos > sistema global e sistema interamericano de proteção
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-15'
+    titulo: "R+7: Interpretação 3: coesão e referência"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 15/10 (interpretação 3: coesão e referência), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2680,13 +2759,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-16'
     titulo: 'R+7: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 16/10, sem consulta, + 3 de
-      Português: pontuação 2: vírgula entre orações e outros sinais.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 16/10, sem consulta."
     filtro: Execução Penal > sanções, recompensas e procedimento disciplinar
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-16'
+    titulo: "R+7: Pontuação 2: vírgula entre orações e outros sinais"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 16/10 (pontuação 2: vírgula entre orações e outros sinais), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2860,13 +2946,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direito Penal
     origem: '2026-10-19'
     titulo: 'R+7: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)'
-    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 19/10, sem consulta, + 3 de Português:
-      pronomes 1: emprego.'
+    detalhe: "7 questões NOVAS de Direito Penal sobre o que você estudou em 19/10, sem consulta."
     filtro: Direito Penal > excludentes de ilicitude e culpabilidade
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-19'
+    titulo: "R+7: Pronomes 1: emprego"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 19/10 (pronomes 1: emprego), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -2980,12 +3073,20 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 6
+    questoes: 3
     materia: Direito Constitucional
     origem: '2026-10-20'
     titulo: 'R+7: Direitos sociais (arts. 6º a 11)'
-    detalhe: "3 questões NOVAS de Direito Constitucional sobre o que você estudou em 20/10, sem consulta, + 3 de Português: pronomes 2: colocação pronominal."
+    detalhe: "3 questões NOVAS de Direito Constitucional sobre o que você estudou em 20/10, sem consulta."
     filtro: Direito Constitucional > direitos sociais
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-20'
+    titulo: "R+7: Pronomes 2: colocação pronominal"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 20/10 (pronomes 2: colocação pronominal), sem consulta."
     onde: qconcursos
   - tipo: revisao
     rotulo: Extra
@@ -3114,23 +3215,37 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-21'
     titulo: 'R+7: Órgãos da execução penal (arts. 61 a 81-B)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 21/10, sem consulta, + 3 de
-      Português: pronomes 3: formas de tratamento.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 21/10, sem consulta."
     filtro: Execução Penal > órgãos da execução penal
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-21'
+    titulo: "R+7: Pronomes 3: formas de tratamento"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 21/10 (pronomes 3: formas de tratamento), sem consulta."
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Direito Penal
     origem: '2026-09-28'
     titulo: 'R+30: Aplicação da lei penal (arts. 1º a 12)'
-    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 28/09, sem consulta, + 3 de Português:
-      substantivo e adjetivo (flexão nominal).'
+    detalhe: "7 questões NOVAS de Direito Penal sobre o que você estudou em 28/09, sem consulta."
     filtro: Direito Penal > aplicação da lei penal (lei penal no tempo e no espaço)
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-09-28'
+    titulo: "R+30: Substantivo e adjetivo (flexão nominal)"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 28/09 (substantivo e adjetivo (flexão nominal)), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -3242,23 +3357,37 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-22'
     titulo: 'R+7: Na Constituição e o status dos tratados'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 22/10, sem consulta, + 3 de Português:
-      interpretação 4: inferência e sentido das palavras.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 22/10, sem consulta."
     filtro: Direitos Humanos > direitos humanos na Constituição e incorporacao dos tratados
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-22'
+    titulo: "R+7: Interpretação 4: inferência e sentido das palavras"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 22/10 (interpretação 4: inferência e sentido das palavras), sem consulta."
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Direito Constitucional
     origem: '2026-09-29'
     titulo: 'R+30: Art. 5º, caput e incisos I a XVI'
-    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 29/09, sem consulta, + 3 de
-      Português: artigo, numeral e pronome (classificação).'
+    detalhe: "7 questões NOVAS de Direito Constitucional sobre o que você estudou em 29/09, sem consulta."
     filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-09-29'
+    titulo: "R+30: Artigo, numeral e pronome (classificação)"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 29/09 (artigo, numeral e pronome (classificação)), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -3380,23 +3509,37 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-23'
     titulo: 'R+7: Estabelecimentos penais (arts. 82 a 104)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 23/10, sem consulta, + 3 de
-      Português: termos integrantes 1: objeto direto e indireto.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 23/10, sem consulta."
     filtro: Execução Penal > estabelecimentos penais
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-23'
+    titulo: "R+7: Termos integrantes 1: objeto direto e indireto"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 23/10 (termos integrantes 1: objeto direto e indireto), sem consulta."
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-09-30'
     titulo: 'R+30: Objeto, classificação e exame criminológico (arts. 1º a 9º-A)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/09, sem consulta, + 3 de
-      Português: verbo 1: estrutura e flexão verbal.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/09, sem consulta."
     filtro: Execução Penal > disposições gerais e classificação do condenado
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-09-30'
+    titulo: "R+30: Verbo 1: estrutura e flexão verbal"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 30/09 (verbo 1: estrutura e flexão verbal), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -3468,13 +3611,20 @@ dias:
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-01'
     titulo: 'R+30: Teoria geral'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta, + 3 de Português:
-      interpretação 1: o método.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta."
     filtro: Direitos Humanos > teoria geral dos direitos humanos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-01'
+    titulo: "R+30: Interpretação 1: o método"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 01/10 (interpretação 1: o método), sem consulta."
     onde: qconcursos
   noite:
   - tipo: simulado
@@ -3587,23 +3737,37 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direito Penal
     origem: '2026-10-26'
     titulo: 'R+7: Imputabilidade e concurso de pessoas (arts. 26 a 31)'
-    detalhe: '7 questões NOVAS de Direito Penal sobre o que você estudou em 26/10, sem consulta, + 3 de Português:
-      termos integrantes 2: complemento nominal e agente da passiva.'
+    detalhe: "7 questões NOVAS de Direito Penal sobre o que você estudou em 26/10, sem consulta."
     filtro: Direito Penal > imputabilidade penal e concurso de pessoas
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-26'
+    titulo: "R+7: Termos integrantes 2: complemento nominal e agente da passiva"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 26/10 (termos integrantes 2: complemento nominal e agente da passiva), sem consulta."
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-02'
     titulo: 'R+30: Assistência ao preso e ao egresso (arts. 10 a 27)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 02/10, sem consulta, + 3 de
-      Português: verbo 2: emprego dos tempos e modos.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 02/10, sem consulta."
     filtro: Execução Penal > assistência ao preso e ao egresso
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-02'
+    titulo: "R+30: Verbo 2: emprego dos tempos e modos"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 02/10 (verbo 2: emprego dos tempos e modos), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -3719,13 +3883,21 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direito Constitucional
     origem: '2026-10-27'
     titulo: 'R+7: Nacionalidade e direitos políticos (arts. 12 a 17)'
-    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 27/10, sem consulta, + 3 de
-      Português: ortografia oficial.'
+    detalhe: "7 questões NOVAS de Direito Constitucional sobre o que você estudou em 27/10, sem consulta."
     filtro: Direito Constitucional > nacionalidade e direitos políticos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-27'
+    titulo: "R+7: Ortografia oficial"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 27/10 (ortografia oficial), sem consulta."
+    conteudo: "Língua Portuguesa > Ortografia oficial"
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -3838,22 +4010,39 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-28'
     titulo: 'R+7: Execução da pena, regimes e progressão (arts. 105 a 119)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 28/10, sem consulta, + 3 de
-      Português: acentuação gráfica.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 28/10, sem consulta."
     filtro: Execução Penal > regimes de cumprimento, progressão e regressão
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-28'
+    titulo: "R+7: Acentuação gráfica"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 28/10 (acentuação gráfica), sem consulta."
+    conteudo: "Língua Portuguesa > Acentuação gráfica"
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 6
+    questoes: 3
     materia: Direito Penal
     origem: '2026-10-05'
     titulo: 'R+30: Fato típico e nexo causal (art. 13)'
-    detalhe: "3 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta, + 3 de Português: vozes do verbo."
+    detalhe: "3 questões NOVAS de Direito Penal sobre o que você estudou em 05/10, sem consulta."
     filtro: Direito Penal > fato típico, relação de causalidade e crimes omissivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-05'
+    titulo: "R+30: Vozes do verbo"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 05/10 (vozes do verbo), sem consulta."
+    conteudo: "Língua Portuguesa > Vozes do verbo"
     onde: qconcursos
   - tipo: revisao
     rotulo: Extra
@@ -3973,23 +4162,37 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-29'
     titulo: 'R+7: Regras de Mandela - parte 1 (regras 1 a 35)'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 29/10, sem consulta, + 3 de Português:
-      interpretação 5: tipos de discurso.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 29/10, sem consulta."
     filtro: Direitos Humanos > Regras Mínimas da ONU para o tratamento de presos (Regras de Mandela)
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-29'
+    titulo: "R+7: Interpretação 5: tipos de discurso"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 29/10 (interpretação 5: tipos de discurso), sem consulta."
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Direito Constitucional
     origem: '2026-10-06'
     titulo: 'R+30: Art. 5º, incisos XVII a XLIX'
-    detalhe: '7 questões NOVAS de Direito Constitucional sobre o que você estudou em 06/10, sem consulta, + 3 de
-      Português: concordância verbal 1: regra geral.'
+    detalhe: "7 questões NOVAS de Direito Constitucional sobre o que você estudou em 06/10, sem consulta."
     filtro: Direito Constitucional > direitos e deveres individuais e coletivos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-06'
+    titulo: "R+30: Concordância verbal 1: regra geral"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 06/10 (concordância verbal 1: regra geral), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -4104,23 +4307,37 @@ dias:
   noite:
   - tipo: revisao
     rotulo: R+7
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-30'
     titulo: 'R+7: Permissão de saída, saída temporária e remição (arts. 120 a 130)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/10, sem consulta, + 3 de
-      Português: redação oficial 1: atributos e tratamento.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/10, sem consulta."
     filtro: Execução Penal > autorizações de saída e remição
     onde: qconcursos
   - tipo: revisao
+    rotulo: R+7
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-30'
+    titulo: "R+7: Redação oficial 1: atributos e tratamento"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 30/10 (redação oficial 1: atributos e tratamento), sem consulta."
+    onde: qconcursos
+  - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Lei de Execução Penal
     origem: '2026-10-07'
     titulo: 'R+30: Trabalho do preso (arts. 28 a 37)'
-    detalhe: '7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 07/10, sem consulta, + 3 de
-      Português: concordância verbal 2: casos especiais.'
+    detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 07/10, sem consulta."
     filtro: Execução Penal > trabalho do preso
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-07'
+    titulo: "R+30: Concordância verbal 2: casos especiais"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 07/10 (concordância verbal 2: casos especiais), sem consulta."
     onde: qconcursos
   - tipo: questoes
     rampa: direito
@@ -4192,13 +4409,20 @@ dias:
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
-    questoes: 10
+    questoes: 7
     materia: Direitos Humanos
     origem: '2026-10-08'
     titulo: 'R+30: Afirmação histórica e dimensões (gerações)'
-    detalhe: '7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta, + 3 de Português:
-      interpretação 2: tipos de texto.'
+    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta."
     filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
+    onde: qconcursos
+  - tipo: revisao
+    rotulo: R+30
+    questoes: 3
+    materia: Língua Portuguesa
+    origem: '2026-10-08'
+    titulo: "R+30: Interpretação 2: tipos de texto"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 08/10 (interpretação 2: tipos de texto), sem consulta."
     onde: qconcursos
   noite:
   - tipo: simulado

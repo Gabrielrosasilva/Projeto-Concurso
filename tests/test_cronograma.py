@@ -200,7 +200,9 @@ def test_arquivo_real_total_de_questoes(real):
 
 def test_arquivo_real_horarios_conferidos(real):
     assert cronograma.montar_dia(real, date(2026, 9, 28)).noite[-1].fim == time(19, 35)
-    assert cronograma.montar_dia(real, date(2026, 10, 28)).noite[-1].fim == time(21, 15)
+    # 28/10 tem o R+7 e o R+30 divididos em Direito e Portugues (P04): as 3
+    # de Portugues arredondam para 10 min, e a noite acaba 10 min depois.
+    assert cronograma.montar_dia(real, date(2026, 10, 28)).noite[-1].fim == time(21, 25)
     # Em 10/10 o diagnostico de Portugues abre a noite, antes do simulado
     # (decisao 134): a medicao sem o cansaco de 90 minutos de prova.
     noite = cronograma.montar_dia(real, date(2026, 10, 10)).noite
@@ -208,6 +210,35 @@ def test_arquivo_real_horarios_conferidos(real):
     assert (noite[0].inicio, noite[0].fim) == (time(18, 0), time(18, 50))
     assert noite[2].tipo == "simulado"
     assert (noite[2].inicio, noite[2].fim) == (time(19, 0), time(20, 30))
+
+
+def test_revisao_nao_mistura_portugues_com_direito(real):
+    """P04: o "fiz" grava tudo na materia da faixa; as 3 de Portugues do R+7
+    e do R+30 iam para o acerto de Direito. De 08/10 em diante elas sao uma
+    faixa propria (o 07/10 ja estava anotado e ficou como era)."""
+    for dia in real.dias:
+        if dia.data < date(2026, 10, 8):
+            continue
+        for bloco in cronograma.BLOCOS:
+            faixas = getattr(dia, bloco)
+            for i, f in enumerate(faixas):
+                if f.tipo != "revisao":
+                    continue
+                assert "de Português:" not in (f.detalhe or ""), (dia.data, f.titulo)
+                if f.materia == "Língua Portuguesa" and f.rotulo in ("R+7", "R+30"):
+                    # Logo depois da de Direito, com a mesma origem.
+                    anterior = faixas[i - 1]
+                    assert anterior.rotulo == f.rotulo
+                    assert anterior.origem == f.origem
+                    assert f.questoes == 3
+
+
+def test_r7_de_09_10_tem_as_duas_linhas(real):
+    noite = cronograma.montar_dia(real, date(2026, 10, 9)).noite
+    assert (noite[0].materia, noite[0].questoes) == ("Lei de Execução Penal", 7)
+    assert (noite[1].materia, noite[1].questoes) == ("Língua Portuguesa", 3)
+    assert noite[1].titulo == "R+7: Verbo 2: emprego dos tempos e modos"
+    assert (noite[0].duracao, noite[1].duracao) == (20, 10)
 
 
 # --- o comando ---------------------------------------------------------------

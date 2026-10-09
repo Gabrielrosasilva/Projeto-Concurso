@@ -292,6 +292,12 @@ temas:
     disciplina: 1
     assuntos:
       19271: "15.1 Noções Gerais de Compreensão e Interpretação de Texto"
+  # So aparece no R+7 de 08/10 e no R+30 de 31/10 (as 3 de Portugues que viraram
+  # linha propria, P04): a teoria de 01/10 nao teve fixacao no Qconcursos.
+  - tema: "Interpretação 1: o método"
+    disciplina: 1
+    assuntos:
+      19271: "15.1 Noções Gerais de Compreensão e Interpretação de Texto"
   - tema: "Verbo 2: emprego dos tempos e modos"
     disciplina: 1
     assuntos:

@@ -93,9 +93,17 @@ def test_os_dias_ate_05_10_estao_identicos(plano_real):
             ANTES["dias"][dia.data.isoformat()]["impressao"], dia.data
 
 
+def _portugues_do_p04(dia, faixa) -> bool:
+    """As 3 de Portugues que sairam do R+7/R+30 de Direito para uma linha
+    propria (P04), de 08/10 em diante: vieram depois da R4."""
+    return (dia.data >= date(2026, 10, 8) and faixa.tipo == "revisao"
+            and faixa.rotulo in ("R+7", "R+30") and faixa.materia == "Língua Portuguesa")
+
+
 def test_nenhum_titulo_nem_data_de_tema_mudou(plano_real):
     for dia in plano_real.dias:
-        titulos = [f.titulo for b in pl.BLOCOS for f in getattr(dia, b) if f.rotulo != "Extra"]
+        titulos = [f.titulo for b in pl.BLOCOS for f in getattr(dia, b)
+                   if f.rotulo != "Extra" and not _portugues_do_p04(dia, f)]
         antes = ANTES["dias"][dia.data.isoformat()]["titulos"]
         if dia.data == date(2026, 10, 10):
             # Decisao 134: os diagnosticos passaram a abrir a manha e a noite.
@@ -114,7 +122,10 @@ def test_o_total_de_minutos_de_cada_dia_nao_aumentou(plano_real):
             montado = pl.montar_dia(plano_real, dia.data,
                                     None if nivel == "None" else int(nivel))
             depois = sum(f.duracao or 0 for f in montado.faixas() if not f.opcional)
-            assert depois <= antes, (dia.data, nivel, antes, depois)
+            # A divisao do P04 (aprovada em 09/10) arredonda 7 + 3 questoes
+            # para 20 + 10 min, onde 10 eram 25: +5 min por linha dividida.
+            divididas = sum(1 for f in montado.faixas() if _portugues_do_p04(dia, f))
+            assert depois <= antes + 5 * divididas, (dia.data, nivel, antes, depois)
 
 
 def test_r7_e_r30_apontam_o_tema_estudado_na_origem(plano_real):

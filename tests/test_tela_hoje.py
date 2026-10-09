@@ -256,7 +256,8 @@ def test_olhando_o_futuro_vale_a_carga_do_plano(cliente, monkeypatch):
     t = servico.cronograma.tela_do_dia(date(2026, 10, 28))
     assert (t.nivel.efetivo, t.nivel.situacao) == (5, "futura")
     assert t.dia.total_questoes == 74          # 60 + as 14 da manha (6A)
-    assert t.fim_do_dia.strftime("%H:%M") == "21:15"
+    # 21:25: o R+7 e o R+30 divididos em Direito e Portugues (P04), +5 min cada.
+    assert t.fim_do_dia.strftime("%H:%M") == "21:25"
     situacoes = {n.situacao for n in _niveis_vistos_de(cronograma.carregar(),
                                                         date(2026, 10, 28)).values()}
     assert not situacoes & {"ruim", "desceu"}
