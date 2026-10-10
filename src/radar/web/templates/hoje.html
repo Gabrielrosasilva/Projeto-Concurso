@@ -238,8 +238,13 @@
     .motivo{margin:var(--esp-3) 0 0;font-size:var(--tam-sm);color:var(--cor-texto-suave);display:flex;gap:var(--esp-2);align-items:baseline;flex-wrap:wrap}
 
     /* --- resumo em 3 numeros --- */
-    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:var(--esp-3);align-items:stretch}
+    /* A 4a coluna (auto) so existe com o botao do Plano B: texto comprido nela
+       toma a largura e espreme os tres numeros - por isso o aviso do dia que
+       mede fica fora da grade. */
+    .resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--esp-3);align-items:stretch}
+    .resumo.com-plano-b{grid-template-columns:repeat(3,minmax(0,1fr)) auto}
     .resumo .ds-cartao{padding:var(--esp-3) var(--esp-4)}
+    .aviso-mede{margin:var(--esp-2) 0 0}
     .grande{display:block;font-size:var(--tam-xl);font-weight:var(--peso-forte);line-height:1.1;font-variant-numeric:tabular-nums}
     .resumo small{color:var(--cor-texto-suave);font-size:var(--tam-sm)}
 
@@ -429,7 +434,7 @@
       .faixa{grid-template-columns:minmax(0,1fr) auto;gap:var(--esp-1) var(--esp-2)}
       .faixa .quando{grid-column:1 / -1}
       .faixa .quando{padding-top:0;flex-direction:row;align-items:center}
-      .resumo{gap:var(--esp-2);grid-template-columns:repeat(3,minmax(0,1fr))}
+      .resumo,.resumo.com-plano-b{gap:var(--esp-2);grid-template-columns:repeat(3,minmax(0,1fr))}
       .resumo .plano-b-controle{grid-column:1 / -1}
       .escolha-plano-b{left:0;right:auto}
       .resumo .ds-cartao{padding:var(--esp-2) var(--esp-3)}
@@ -804,7 +809,7 @@
   {% endif %}
 
   {# ============================ resumo ================================ #}
-  <section class="resumo" aria-label="O dia em três números">
+  <section class="resumo{{ ' com-plano-b' if t.pode_ativar_plano_b }}" aria-label="O dia em três números">
     {% if t.plano_b %}
       {% set pb = t.blocos | first %}
       <div class="ds-cartao"><span class="grande">~{{ tempo_do_plano_b(t.plano_b) }}</span><small>de Plano B</small></div>
@@ -840,13 +845,12 @@
           </details>
         {% endif %}
       </div>
-    {% elif t.faixas_que_medem and t.dia and not t.futuro %}
-      {# Dia de medir: o Plano B trocaria a linha de base (decisao 135). #}
-      <div class="plano-b-controle">
-        <p class="ds-pequeno ds-suave">🩺 Hoje mede ({{ t.faixas_que_medem | join(' · ') }}): sem Plano B. Se o dia apertar, faça só estas.</p>
-      </div>
     {% endif %}
   </section>
+  {% if not t.pode_ativar_plano_b and t.faixas_que_medem and t.dia and not t.futuro %}
+    {# Dia de medir: o Plano B trocaria a linha de base (decisao 135). #}
+    <p class="aviso-mede ds-pequeno ds-suave">🩺 Hoje mede ({{ t.faixas_que_medem | join(' · ') }}): sem Plano B. Se o dia apertar, faça só estas.</p>
+  {% endif %}
 
   {# ============================ os tres blocos ======================== #}
   {#
