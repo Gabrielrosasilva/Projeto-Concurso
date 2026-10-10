@@ -14,7 +14,7 @@ import random
 
 from sqlalchemy import func, or_, select
 
-from radar import config, gerador
+from radar import config, gerador, niveis
 from radar import gerador as motor
 from radar.db import criar_tabelas, sessao
 from radar.origem import TENDENCIA
@@ -403,6 +403,7 @@ def preparar(
     semente: int | None = None,
     escopo=None,
     modo: str | None = None,
+    nivel: str = niveis.MISTURADA,
 ) -> dict:
     """Monta a lista de pedidos e estima o custo. NAO gasta nada.
 
@@ -430,7 +431,8 @@ def preparar(
     # pela classificacao. Restringir o simulado as questoes ja classificadas o
     # deixaria menor do que ele e, e a §7 manda preservar a consulta ampla.
     if escopo is not None and escolhido != "simulado":
-        return _preparar_no_escopo(escopo, escolhido, quantas, semente)
+        return _com_niveis(_preparar_no_escopo(escopo, escolhido, quantas, semente),
+                           nivel)
     if escopo is not None:
         materia = escopo.materia
 
@@ -509,7 +511,7 @@ def preparar(
     entrada, saida, custo = motor.estimar(
         len(pedidos), caracteres, motor.VARIACOES_POR_QUESTAO
     )
-    return {
+    return _com_niveis({
         "pedidos": pedidos,
         "quantas": sum(p["quantas"] for p in pedidos),
         "modo": "do_zero" if sem_base and pedidos else "variacao",
@@ -525,7 +527,20 @@ def preparar(
         "custo": custo,
         # O custo e estimativa, antes de gastar (Etapa 7A).
         "origem_do_custo": TENDENCIA,
-    }
+    }, nivel)
+
+
+def _com_niveis(plano: dict, nivel: str) -> dict:
+    """O nivel de cada pedido do plano (decisao 151): a mistura e do LOTE,
+    repartida entre os pedidos, e cada um leva a sua parte em `niveis`. O
+    pedido em arquivo, a simulacao e a API leem daqui o mesmo numero."""
+    total = niveis.dividir(plano["quantas"], nivel)
+    partes = niveis.repartir([p["quantas"] for p in plano["pedidos"]], total)
+    for pedido, parte in zip(plano["pedidos"], partes):
+        pedido["niveis"] = parte
+    plano["nivel"] = nivel
+    plano["niveis"] = total
+    return plano
 
 
 def gravar(questoes: list) -> int:
@@ -568,6 +583,10 @@ def gravar(questoes: list) -> int:
                 escopo=getattr(nova, "escopo", None),
                 base=getattr(nova, "base", None),
                 evidencia_da_base=getattr(nova, "evidencia_da_base", None),
+                # O nivel que a IA declarou, com a procedencia (decisao 151).
+                nivel=getattr(nova, "nivel", None),
+                por_que_o_nivel=getattr(nova, "por_que_o_nivel", None),
+                nivel_procedencia=getattr(nova, "nivel_procedencia", None),
                 artigo=nova.artigo,
                 enunciado=nova.enunciado,
                 alternativas=nova.alternativas,
@@ -582,6 +601,7 @@ def gerar(
     materia: str | None = None,
     quantas: int = QUANTIDADE_PADRAO,
     teto_em_dolar: float = gerador.TETO_PADRAO,
+    nivel: str = niveis.MISTURADA,
 ) -> dict:
     """Gera de verdade: chama a API, grava, e exporta para o arquivo.
 
@@ -592,7 +612,7 @@ def gerar(
     if not chave:
         return {"erro": "sem chave", "geradas": 0}
 
-    plano = preparar(materia, quantas)
+    plano = preparar(materia, quantas, nivel=nivel)
     if not plano["pedidos"]:
         return {"erro": "sem base", "geradas": 0, "pedidos": 0}
 

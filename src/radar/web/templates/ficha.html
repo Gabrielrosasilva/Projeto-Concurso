@@ -307,7 +307,7 @@
     {% for no in f.nos %}<p class="comando">{{ comando_de_gerar(no) }}</p>{% endfor %}
     {% if f.nos %}
       <p class="comando">Depois, no Claude Code do VS Code: "{{ PASSO_NO_CLAUDE_CODE }}"; e no terminal: {{ COMANDO_DE_IMPORTAR }}</p>
-      <p class="frase-padrao">{{ AVISO_DO_PEDIDO }}</p>
+      <p class="frase-padrao">{{ TROQUE_O_NIVEL }} {{ AVISO_DO_PEDIDO }}</p>
     {% endif %}
   </section>
 

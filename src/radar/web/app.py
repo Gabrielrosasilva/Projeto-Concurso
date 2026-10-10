@@ -167,6 +167,9 @@ templates.env.globals["PASSO_NO_CLAUDE_CODE"] = fichas_puras.PASSO_NO_CLAUDE_COD
 templates.env.filters["sem_gabarito"] = fichas_puras.esconder_gabarito
 templates.env.globals["COMANDO_DE_IMPORTAR"] = fichas_puras.COMANDO_DE_IMPORTAR
 templates.env.globals["AVISO_DO_PEDIDO"] = fichas_puras.AVISO_DO_PEDIDO
+templates.env.globals["TROQUE_O_NIVEL"] = fichas_puras.TROQUE_O_NIVEL
+# As opcoes dos seletores de nivel, na ordem: a misturada primeiro (o padrao).
+templates.env.globals["OPCOES_DE_NIVEL"] = [(c, niveis.rotulo(c)) for c in niveis.OPCOES]
 templates.env.globals["PARTES_DO_RESUMO"] = fichas_puras.PARTES_DO_RESUMO
 templates.env.globals["GABARITO_ESCONDIDO"] = fichas_puras.GABARITO_ESCONDIDO
 templates.env.globals["AMOSTRA_INSUFICIENTE"] = amostra.INSUFICIENTE
@@ -952,6 +955,7 @@ def geradas(
     modo: str = "",
     recado: str = "",
     treinar: str = "",
+    nivel: str = niveis.MISTURADA,
 ):
     """A tela de gerar questao, com o custo antes do botao.
 
@@ -967,6 +971,7 @@ def geradas(
 
     escolhida = materia.strip() or None
     quantas = quantas if 1 <= quantas <= 30 else 5
+    nivel = nivel if nivel in niveis.OPCOES else niveis.MISTURADA
 
     escopo = erro_do_escopo = None
     try:
@@ -980,11 +985,19 @@ def geradas(
     try:
         plano = servico.geradas.preparar(
             escolhida, quantas, escopo=escopo,
-            modo=modo.strip() or None,
+            modo=modo.strip() or None, nivel=nivel,
         )
     except (arvore.EscopoInvalido, ValueError) as erro:
         erro_do_escopo = erro_do_escopo or str(erro)
-        plano = servico.geradas.preparar(escolhida, quantas)
+        plano = servico.geradas.preparar(escolhida, quantas, nivel=nivel)
+
+    # Os 3 passos sem API do topo (decisao 151): o comando sai da mesma
+    # `comando_de_gerar`, com o no escolhido - so a materia e o simulado - e
+    # o nivel do seletor. Sem materia, ou com escopo que nao existe, nada.
+    comando_do_topo = None
+    if escolhida and not erro_do_escopo:
+        no = escopo.no if escopo is not None else escolhida
+        comando_do_topo = fichas_puras.comando_de_gerar(no, quantas, nivel)
 
     real = {d.materia: d for d in servico.desempenho()}
     gerado = {d.materia: d for d in servico.desempenho_das_geradas()}
@@ -1011,6 +1024,8 @@ def geradas(
             "resumo": servico.geradas.contar(),
             "materia": escolhida,
             "quantas": quantas,
+            "nivel": nivel,
+            "comando_do_topo": comando_do_topo,
             "cambio": config.CAMBIO_DE_REFERENCIA,
             "modelo": gerador.MODELO,
             "recado": RECADOS_DAS_GERADAS.get(recado),
@@ -1024,7 +1039,8 @@ def geradas(
 
 
 @app.post("/geradas/gerar")
-def geradas_gerar(materia: str = Form(""), quantas: str = Form("5")):
+def geradas_gerar(materia: str = Form(""), quantas: str = Form("5"),
+                  nivel: str = Form(niveis.MISTURADA)):
     """Gera de verdade - isto GASTA - e cai direto na rodada com as novas.
 
     A rodada leva so o que acabou de nascer, e nao o acervo de geradas
@@ -1034,7 +1050,8 @@ def geradas_gerar(materia: str = Form(""), quantas: str = Form("5")):
     pedidas = int(pedidas) if pedidas and 1 <= pedidas <= 30 else 5
     escolhida = materia.strip() or None
 
-    resultado = servico.geradas.gerar(materia=escolhida, quantas=pedidas)
+    nivel = nivel if nivel in niveis.OPCOES else niveis.MISTURADA
+    resultado = servico.geradas.gerar(materia=escolhida, quantas=pedidas, nivel=nivel)
 
     if resultado.get("erro"):
         return RedirectResponse(

@@ -390,6 +390,7 @@ def _item(conteudo: str | None = REGIMES, artigo: str = "LEP, art. 112",
         "alternativas": {"a": "primeira", "b": "segunda", "c": "terceira",
                          "d": "quarta", "e": "quinta"},
         "resposta": "a", "artigo": artigo,
+        "nivel": "facil", "por_que_o_nivel": "a letra de um artigo so",
     }
     if conteudo is not None:
         item["conteudo"] = conteudo

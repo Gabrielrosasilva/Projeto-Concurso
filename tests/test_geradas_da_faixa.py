@@ -48,7 +48,7 @@ def test_no_com_zero_gerada_mostra_o_aviso_e_os_3_passos_com_o_n_certo():
     assert gf.precisa_gerar
     assert gf.passos == [
         r'.venv\Scripts\radar.exe gerar --pedido --modo treino --materia "Direito Penal" '
-        r'--assunto "Infração penal: elementos, espécies" --quantas 8',
+        r'--assunto "Infração penal: elementos, espécies" --quantas 8 --nivel misturada',
         fichas.PASSO_NO_CLAUDE_CODE, fichas.COMANDO_DE_IMPORTAR]
     assert fichas.COMANDO_DE_IMPORTAR == r".venv\Scripts\radar.exe gerar --importar data/resposta_ia.json"
 

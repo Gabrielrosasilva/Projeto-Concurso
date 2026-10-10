@@ -1197,6 +1197,7 @@
                           <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
                           <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
                         </ol>
+                        <p class="regra">{{ TROQUE_O_NIVEL }}</p>
                         <p class="regra">{{ AVISO_DO_PEDIDO }}{% if gf.nos | selectattr('comando') | list | length > 1 %} Aqui são vários nós: um pedido de cada vez, cada um com os 3 passos.{% endif %}</p>
                       {% endif %}
                     {% endif %}

@@ -6,7 +6,7 @@ API e sem gastar nada**. O caminho é sempre o mesmo: `radar gerar --pedido` →
 o Claude Code escreve a resposta → `radar gerar --importar`. Nunca use
 `--valendo`.
 
-As regras que não mudam (o porquê está no `decisoes.md`, 35, 36, 40, 72 e 73):
+As regras que não mudam (o porquê está no `decisoes.md`, 35, 36, 40, 72, 73 e 151):
 
 - **questão gerada treina e nunca mede.** Ela serve ao treino rápido (/geradas)
   e à lista de geradas da ficha do tema; nunca entra em diagnóstico, simulado,
@@ -18,6 +18,9 @@ As regras que não mudam (o porquê está no `decisoes.md`, 35, 36, 40, 72 e 73)
   sozinho, e nunca inventa vínculo com questão real;
 - **matéria, assunto e subassunto:** cada lote é UM nó de subassunto, e a
   gerada grava a matéria, o assunto e o caminho inteiro do nó (`conteudo`);
+- **o nível:** toda questão nova tem um nível - fácil, média ou difícil -,
+  o que a IA declara, com a linha do porquê (`por_que_o_nivel`). O comando
+  leva sempre o `--nivel`; ver "Por nível", abaixo;
 - **procedência:** a importação grava "Claude Code, importado manualmente, em
   DD/MM/AAAA" em cada questão. Em Direito, cada questão cita o dispositivo; em
   Português e Raciocínio Lógico, a regra;
@@ -46,12 +49,13 @@ velho é recusada.
 **1. Gerar o pedido** - o comando do lote, da lista abaixo. Exemplo (o lote 1):
 
 ```powershell
-.\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Abolitio criminis" --quantas 19
+.\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Abolitio criminis" --quantas 19 --nivel misturada
 ```
 
 Os parâmetros (`.\radar.bat gerar --help`): `--modo` (treino | revisao |
 simulado), `--materia`, `--assunto`, `--subassunto`, `--elemento` (repetível: um
-dispositivo, regra ou tipo de problema do nó) e `--quantas` (padrão 5). Nome que
+dispositivo, regra ou tipo de problema do nó), `--quantas` (padrão 5) e
+`--nivel` (misturada | facil | media | dificil; padrão misturada). Nome que
 a árvore não tem para o comando, com sugestões; `.\radar.bat conteudos` lista a
 árvore. A saída diz quantos pedidos foram para `data\pedido_ia.json`, o escopo
 fechado, de onde sai cada questão ("3 questão(ões) de questao_real
@@ -64,7 +68,7 @@ referência") e o número do lote.
 
 **3. No Claude Code do VS Code, cole:**
 
-> Responda o pedido do radar. Leia data\pedido_ia.json e siga o campo como_responder: para cada item de pedidos, siga a instrucao usando o texto de pedido e escreva no máximo `quantas` questões. Cada questão com enunciado, as 5 alternativas (a até e), resposta, artigo (em Direito, o dispositivo exato, como "CP, art. 2º, parágrafo único"; em Português e Raciocínio Lógico, a regra) e conteudo copiado igual ao CONTEUDO do pedido (se o CONTEUDO listar mais de um caminho, o da questão). Na variação, mantenha a regra da questão real e troque o cenário e os números; no do_zero, escreva só dentro do CONTEUDO, a partir da FONTE OFICIAL, sem vínculo com questão real. Se não tiver certeza do dispositivo, não escreva a questão. Salve tudo num único JSON, no formato de formato_da_resposta e com o mesmo lote, em data\resposta_ia.json. Não rode comandos do radar e não altere nenhum outro arquivo.
+> Responda o pedido do radar. Leia data\pedido_ia.json e siga o campo como_responder: para cada item de pedidos, siga a instrucao usando o texto de pedido e escreva no máximo `quantas` questões. Cada questão com enunciado, as 5 alternativas (a até e), resposta, artigo (em Direito, o dispositivo exato, como "CP, art. 2º, parágrafo único"; em Português e Raciocínio Lógico, a regra) e conteudo copiado igual ao CONTEUDO do pedido (se o CONTEUDO listar mais de um caminho, o da questão). Na variação, mantenha a regra da questão real e troque o cenário e os números; no do_zero, escreva só dentro do CONTEUDO, a partir da FONTE OFICIAL, sem vínculo com questão real. Cada questão também com nivel (facil, media ou dificil: o que ela É, pelo critério da instrução) e por_que_o_nivel (uma linha). Se não tiver certeza do dispositivo, não escreva a questão. Salve tudo num único JSON, no formato de formato_da_resposta e com o mesmo lote, em data\resposta_ia.json. Não rode comandos do radar e não altere nenhum outro arquivo.
 
 **4. Importar:**
 
@@ -78,12 +82,15 @@ Como ler a saída:
 - **"Procedencia: Claude Code, importado manualmente, em DD/MM/AAAA"** - o que
   ficou gravado em cada uma;
 - **"X repetida(s), ignorada(s)"** - já existiam;
+- **"Nível: pedi 3/4/3 (fácil/média/difícil), veio 5/3/2."** - a mistura que
+  veio; nada é completado sozinho. Se ficou diferente, peça o que faltou com
+  um `--nivel` só;
 - **"Y recusada(s):"**, uma linha por questão, com o motivo: sem as 5
   alternativas ou sem gabarito válido; sem o artigo em que se apoia; não
   declarou o conteúdo, ou o conteúdo está fora do escopo; o artigo citado não é
   nenhum dos pedidos (quando há `--elemento`); variação sem a questão real de
   base; do zero com vínculo a questão real ou sem a marca; questão a mais que o
-  pedido;
+  pedido; sem o nível, nível fora da lista ou sem o `por_que_o_nivel`;
 - **"Nada importado: a resposta é do lote X e o pedido é do lote Y"** - a
   resposta é de outro pedido; nada entra.
 
@@ -108,7 +115,37 @@ git push
 
 O `git pull --rebase` é porque o robô da coleta faz push todo dia.
 
+## Por nível (decisão 151)
+
+O `--nivel` vai em todo comando. **Misturada** (o padrão) são partes iguais, e
+o que sobra vai para a média: 10 = 3 fáceis, 4 médias, 3 difíceis; 19 = 6/7/6;
+5 = 1/3/1. A mistura é do lote inteiro, repartida entre os pedidos dele. Para um
+nível só, troque `misturada` por `facil`, `media` ou `dificil`:
+
+```powershell
+.\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Abolitio criminis" --quantas 10 --nivel dificil
+```
+
+Os critérios (moram no `src/radar/niveis.py`, e o pedido os leva):
+
+- **fácil:** a letra de um artigo só; as erradas são claramente erradas;
+- **média:** um caso simples, ou a letra da lei com UMA troca sutil (prazo,
+  número, "permitido" por "vedado");
+- **difícil:** junta dois dispositivos ou uma exceção ("salvo", "exceto"), um
+  caso em que um detalhe muda a resposta, e as cinco alternativas plausíveis;
+- em Português e Raciocínio Lógico, o mesmo espírito, pela regra em vez do
+  artigo.
+
+A faixa do Hoje, o resultado da rodada, a ficha, "Os assuntos do cronograma",
+o `radar hoje` e o `radar fichas --tema` mostram o comando com
+`--nivel misturada`; o topo da tela Gerar questões, com o nível do seletor. O
+nível nunca mede nada: o acerto por nível é mais um número à parte.
+
 ## Os 57 lotes, por data de uso
+
+Os comandos abaixo já levam o `--nivel misturada`. Os lotes de 03/10 foram
+feitos antes do nível; as questões deles ganham nível pela classificação da
+decisão 151.
 
 A conta de cada lote (decisão 73): o déficit do tema - as questões das faixas de
 treino de 04/10 a 07/11 menos as reais ainda não respondidas nos nós dele -
@@ -122,243 +159,243 @@ estudei (está nas pendências). Os lotes 50 e 57 entraram depois da decisão 76
 
 1. **05/10 · Penal · Aplicação da lei penal (arts. 1º a 12)** - Abolitio criminis: 19 (3 variação + 16 do zero) - **feito em 03/10 (19 questões)**
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Abolitio criminis" --quantas 19
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Abolitio criminis" --quantas 19 --nivel misturada
    ```
 2. **06/10 · Const. · Art. 5º, incisos XVII a XLIX** - Liberdade de associação: 11 (3 variação + 8 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Liberdade de associação" --quantas 11
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Liberdade de associação" --quantas 11 --nivel misturada
    ```
 3. **06/10 · Const. · Art. 5º, incisos XVII a XLIX** - Tribunal do júri: 11 (3 variação + 8 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Tribunal do júri" --quantas 11
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Tribunal do júri" --quantas 11 --nivel misturada
    ```
 4. **06/10 · Const. · Art. 5º, incisos XVII a XLIX** - Princípios constitucionais penais: 11 (9 variação + 2 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Princípios constitucionais penais" --quantas 11
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Princípios constitucionais penais" --quantas 11 --nivel misturada
    ```
 5. **06/10 · Const. · Art. 5º, incisos XVII a XLIX** - Crimes inafiançáveis e imprescritíveis: 11 (3 variação + 8 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Crimes inafiançáveis e imprescritíveis" --quantas 11
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Crimes inafiançáveis e imprescritíveis" --quantas 11 --nivel misturada
    ```
 6. **06/10 · Port. · Concordância verbal 1: regra geral** - Concordância verbal: 15 (3 variação + 12 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Concordância nominal e verbal" --subassunto "Concordância verbal" --quantas 15
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Concordância nominal e verbal" --subassunto "Concordância verbal" --quantas 15 --nivel misturada
    ```
 7. **06/10 · Const. · Art. 5º, caput e incisos I a XVI** - Liberdade de consciência, crença e assistência religiosa: 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Liberdade de consciência, crença e assistência religiosa" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Liberdade de consciência, crença e assistência religiosa" --quantas 6 --nivel misturada
    ```
 8. **06/10 · Const. · Art. 5º, caput e incisos I a XVI** - Intimidade, vida privada, honra e imagem: 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Intimidade, vida privada, honra e imagem" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Intimidade, vida privada, honra e imagem" --quantas 6 --nivel misturada
    ```
 9. **06/10 · Const. · Art. 5º, caput e incisos I a XVI** - Inviolabilidade do domicílio: 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Inviolabilidade do domicílio" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Inviolabilidade do domicílio" --quantas 6 --nivel misturada
    ```
 10. **07/10 · Port. · Concordância verbal 2: casos especiais** - Concordância do verbo haver impessoal: 15 (3 variação + 12 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Concordância nominal e verbal" --subassunto "Concordância do verbo haver impessoal" --quantas 15
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Concordância nominal e verbal" --subassunto "Concordância do verbo haver impessoal" --quantas 15 --nivel misturada
    ```
 11. **08/10 · DH · Afirmação histórica e dimensões (gerações)** - Gerações (dimensões) de direitos: 18 (6 variação + 12 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Gerações (dimensões) de direitos" --quantas 18
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Gerações (dimensões) de direitos" --quantas 18 --nivel misturada
    ```
 12. **08/10 · DH · Afirmação histórica e dimensões (gerações)** - Gerações (dimensões) dos direitos humanos: 18 (3 variação + 15 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Gerações (dimensões) dos direitos humanos" --quantas 18
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Gerações (dimensões) dos direitos humanos" --quantas 18 --nivel misturada
    ```
 13. **08/10 · Port. · Interpretação 2: tipos de texto** - Tipologia e gênero textual: 5 (3 variação + 2 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Compreensão e interpretação de texto (s)" --subassunto "Tipologia e gênero textual" --quantas 5
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Compreensão e interpretação de texto (s)" --subassunto "Tipologia e gênero textual" --quantas 5 --nivel misturada
    ```
 14. **08/10 · DH · Teoria geral** - Características dos direitos humanos: 6 (6 variação + 0 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Características dos direitos humanos" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Características dos direitos humanos" --quantas 6 --nivel misturada
    ```
 15. **08/10 · DH · Teoria geral** - Eficácia horizontal: 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Eficácia horizontal" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Eficácia horizontal" --quantas 6 --nivel misturada
    ```
 16. **09/10 · LEP · Deveres e direitos do preso (arts. 38 a 43)** - Deveres do condenado: 18 (3 variação + 15 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Deveres do condenado" --quantas 18
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Deveres do condenado" --quantas 18 --nivel misturada
    ```
 17. **09/10 · LEP · Deveres e direitos do preso (arts. 38 a 43)** - Direitos do preso: 18 (3 variação + 15 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Direitos do preso" --quantas 18
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Direitos do preso" --quantas 18 --nivel misturada
    ```
 18. **09/10 · LEP · Assistência ao preso e ao egresso (arts. 10 a 27)** - Assistência ao preso e ao egresso: 17 (9 variação + 8 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Assistência ao preso e ao egresso" --quantas 17
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Assistência ao preso e ao egresso" --quantas 17 --nivel misturada
    ```
 19. **10/10 · RL · Princípios de contagem** - Princípio multiplicativo: 4 (3 variação + 1 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Princípio multiplicativo" --quantas 4
+   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Princípio multiplicativo" --quantas 4 --nivel misturada
    ```
 20. **10/10 · RL · Princípios de contagem** - Permutações e ordenação: 4 (3 variação + 1 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Permutações e ordenação" --quantas 4
+   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Permutações e ordenação" --quantas 4 --nivel misturada
    ```
 21. **10/10 · RL · Princípios de contagem** - Combinações: 4 (3 variação + 1 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Combinações" --quantas 4
+   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Combinações" --quantas 4 --nivel misturada
    ```
 
 ### 12 a 17/10
 
 22. **12/10 · Penal · Tentativa, dolo, culpa e erro (arts. 14 a 21)** - Dolo e culpa: 18 (6 variação + 12 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Dolo e culpa" --quantas 18
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Dolo e culpa" --quantas 18 --nivel misturada
    ```
 23. **12/10 · Penal · Tentativa, dolo, culpa e erro (arts. 14 a 21)** - Tentativa e crime impossível: 18 (3 variação + 15 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Tentativa e crime impossível" --quantas 18
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Tentativa e crime impossível" --quantas 18 --nivel misturada
    ```
 24. **13/10 · Const. · Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)** - Direitos do preso: 9 (3 variação + 6 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Direitos do preso" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Direitos do preso" --quantas 9 --nivel misturada
    ```
 25. **13/10 · Const. · Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)** - Devido processo legal: 9 (3 variação + 6 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Devido processo legal" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Devido processo legal" --quantas 9 --nivel misturada
    ```
 26. **13/10 · Const. · Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)** - Remédios constitucionais: 9 (6 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Remédios constitucionais" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Remédios constitucionais" --quantas 9 --nivel misturada
    ```
 27. **13/10 · Const. · Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)** - Gratuidades constitucionais aos reconhecidamente pobres: 9 (3 variação + 6 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Gratuidades constitucionais aos reconhecidamente pobres" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos" --subassunto "Gratuidades constitucionais aos reconhecidamente pobres" --quantas 9 --nivel misturada
    ```
 28. **13/10 · Port. · Crase 2: proibida, facultativa e casos especiais** - Crase diante de substantivo feminino sem artigo: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Emprego da crase" --subassunto "Crase diante de substantivo feminino sem artigo" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Emprego da crase" --subassunto "Crase diante de substantivo feminino sem artigo" --quantas 20 --nivel misturada
    ```
 29. **14/10 · Port. · Pontuação 1: vírgula entre termos** - Emprego da vírgula: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Pontuação" --subassunto "Emprego da vírgula" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Pontuação" --subassunto "Emprego da vírgula" --quantas 20 --nivel misturada
    ```
 30. **15/10 · DH · Sistemas de proteção e responsabilidade do Estado** - Sistema interamericano de proteção: 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Sistema interamericano de proteção" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Sistema interamericano de proteção" --quantas 6 --nivel misturada
    ```
 31. **15/10 · DH · Sistemas de proteção e responsabilidade do Estado** - Corte Interamericana de Direitos Humanos: 6 (6 variação + 0 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Corte Interamericana de Direitos Humanos" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Corte Interamericana de Direitos Humanos" --quantas 6 --nivel misturada
    ```
 32. **15/10 · DH · Sistemas de proteção e responsabilidade do Estado** - Sistema global e sistemas regionais de proteção: 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Sistema global e sistemas regionais de proteção" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Sistema global e sistemas regionais de proteção" --quantas 6 --nivel misturada
    ```
 33. **15/10 · DH · Sistemas de proteção e responsabilidade do Estado** - Convenção Americana sobre Direitos Humanos (Pacto de San José): 6 (3 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Convenção Americana sobre Direitos Humanos (Pacto de San José)" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Teoria geral dos direitos humanos" --subassunto "Convenção Americana sobre Direitos Humanos (Pacto de San José)" --quantas 6 --nivel misturada
    ```
 34. **15/10 · DH · Sistemas de proteção e responsabilidade do Estado** - Sistema interamericano de proteção: 6 (6 variação + 0 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Sistema interamericano de proteção" --quantas 6
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Sistema interamericano de proteção" --quantas 6 --nivel misturada
    ```
 35. **15/10 · Port. · Interpretação 3: coesão e referência** - Relações de sentido e conectivos: 5 (3 variação + 2 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Compreensão e interpretação de texto (s)" --subassunto "Relações de sentido e conectivos" --quantas 5
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Compreensão e interpretação de texto (s)" --subassunto "Relações de sentido e conectivos" --quantas 5 --nivel misturada
    ```
 36. **17/10 · RL · Probabilidade** - Probabilidade: 13 (6 variação + 7 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Probabilidade" --quantas 13
+   .\radar.bat gerar --pedido --modo treino --materia "Raciocínio Lógico" --assunto "Princípios de contagem e probabilidade" --subassunto "Probabilidade" --quantas 13 --nivel misturada
    ```
 
 ### 19 a 24/10
 
 37. **19/10 · Penal · Coação, obediência e excludentes de ilicitude (arts. 22 a 25)** - Excludentes de ilicitude: 20 (9 variação + 11 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Excludentes de ilicitude" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade" --subassunto "Excludentes de ilicitude" --quantas 20 --nivel misturada
    ```
 38. **20/10 · Port. · Pronomes 2: colocação pronominal** - Colocação e emprego dos pronomes: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Pronomes: emprego, forma de tratamento e colocação" --subassunto "Colocação e emprego dos pronomes" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Pronomes: emprego, forma de tratamento e colocação" --subassunto "Colocação e emprego dos pronomes" --quantas 20 --nivel misturada
    ```
 39. **21/10 · LEP · Órgãos da execução penal (arts. 61 a 81-B)** - Órgãos da execução penal: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Órgãos da execução penal" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Órgãos da execução penal" --quantas 20 --nivel misturada
    ```
 40. **21/10 · LEP · Órgãos da execução penal (arts. 61 a 81-B)** - LEP, art. 75: 5 (3 variação + 2 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Estabelecimentos penais" --elemento "LEP, art. 75" --quantas 5
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Estabelecimentos penais" --elemento "LEP, art. 75" --quantas 5 --nivel misturada
    ```
 41. **21/10 · Port. · Pronomes 3: formas de tratamento** - Uniformidade de tratamento: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Pronomes: emprego, forma de tratamento e colocação" --subassunto "Uniformidade de tratamento" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Pronomes: emprego, forma de tratamento e colocação" --subassunto "Uniformidade de tratamento" --quantas 20 --nivel misturada
    ```
 42. **22/10 · DH · Na Constituição e o status dos tratados** - Incorporação e hierarquia dos tratados: 9 (6 variação + 3 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Incorporação e hierarquia dos tratados" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Incorporação e hierarquia dos tratados" --quantas 9 --nivel misturada
    ```
 43. **22/10 · DH · Na Constituição e o status dos tratados** - Hierarquia da norma internacional incorporada: 9 (3 variação + 6 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Hierarquia da norma internacional incorporada" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Hierarquia da norma internacional incorporada" --quantas 9 --nivel misturada
    ```
 44. **22/10 · DH · Na Constituição e o status dos tratados** - Tratados equivalentes a emenda constitucional (EC 45/2004): 9 (3 variação + 6 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Tratados equivalentes a emenda constitucional (EC 45/2004)" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Tratados equivalentes a emenda constitucional (EC 45/2004)" --quantas 9 --nivel misturada
    ```
 45. **22/10 · DH · Na Constituição e o status dos tratados** - Audiência de custódia: 9 (3 variação + 6 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Audiência de custódia" --quantas 9
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "A Constituição brasileira e os tratados internacionais de direitos humanos" --subassunto "Audiência de custódia" --quantas 9 --nivel misturada
    ```
 46. **23/10 · Port. · Termos integrantes 1: objeto direto e indireto** - Objeto direto e indireto: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal" --subassunto "Objeto direto e indireto" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal" --subassunto "Objeto direto e indireto" --quantas 20 --nivel misturada
    ```
 
 ### 26 a 31/10
 
 47. **27/10 · Const. · Nacionalidade e direitos políticos (arts. 12 a 17)** - Alistamento eleitoral e voto: 19 (6 variação + 13 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "cidadania e direitos políticos" --subassunto "Alistamento eleitoral e voto" --quantas 19
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "cidadania e direitos políticos" --subassunto "Alistamento eleitoral e voto" --quantas 19 --nivel misturada
    ```
 48. **27/10 · Const. · Nacionalidade e direitos políticos (arts. 12 a 17)** - Voto facultativo e obrigatório: 19 (3 variação + 16 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "cidadania e direitos políticos" --subassunto "Voto facultativo e obrigatório" --quantas 19
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Constitucional" --assunto "cidadania e direitos políticos" --subassunto "Voto facultativo e obrigatório" --quantas 19 --nivel misturada
    ```
 49. **28/10 · LEP · Execução da pena, regimes e progressão (arts. 105 a 119)** - Regimes de cumprimento da pena: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Regimes de cumprimento da pena" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Regimes de cumprimento da pena" --quantas 20 --nivel misturada
    ```
 50. **29/10 · DH · Regras de Mandela - parte 1 (regras 1 a 35)** - Regras de aplicação geral: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Regras de aplicação geral" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Regras de aplicação geral" --quantas 20 --nivel misturada
    ```
 51. **29/10 · Port. · Interpretação 5: tipos de discurso** - Discurso direto e indireto: 5 (3 variação + 2 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial" --subassunto "Discurso direto e indireto" --quantas 5
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial" --subassunto "Discurso direto e indireto" --quantas 5 --nivel misturada
    ```
 52. **30/10 · LEP · Permissão de saída, saída temporária e remição (arts. 120 a 130)** - Remição: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Remição" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Remição" --quantas 20 --nivel misturada
    ```
 53. **30/10 · Port. · Redação oficial 1: atributos e tratamento** - Vocativos e formas de tratamento: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial" --subassunto "Vocativos e formas de tratamento" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Língua Portuguesa" --assunto "Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial" --subassunto "Vocativos e formas de tratamento" --quantas 20 --nivel misturada
    ```
 
 ### 02 a 07/11
 
 54. **02/11 · Penal · Crimes do funcionário público contra a Administração (arts. 312 a 327)** - Crimes praticados por funcionário público contra a administração em geral: 16 (3 variação + 13 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Crimes contra a Administração Pública" --subassunto "Crimes praticados por funcionário público contra a administração em geral" --quantas 16
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Crimes contra a Administração Pública" --subassunto "Crimes praticados por funcionário público contra a administração em geral" --quantas 16 --nivel misturada
    ```
 55. **02/11 · Penal · Crimes do funcionário público contra a Administração (arts. 312 a 327)** - Peculato: 16 (3 variação + 13 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Crimes contra a Administração Pública" --subassunto "Peculato" --quantas 16
+   .\radar.bat gerar --pedido --modo treino --materia "Direito Penal" --assunto "Crimes contra a Administração Pública" --subassunto "Peculato" --quantas 16 --nivel misturada
    ```
 56. **04/11 · LEP · Livramento condicional, monitoração e penas alternativas (arts. 131 a 170)** - Monitoração eletrônica: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Monitoração eletrônica" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Lei de Execução Penal" --assunto "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)" --subassunto "Monitoração eletrônica" --quantas 20 --nivel misturada
    ```
 57. **05/11 · DH · Regras de Mandela - parte 2 (regras 36 em diante)** - Pessoal do estabelecimento prisional: 20 (3 variação + 17 do zero)
    ```powershell
-   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Pessoal do estabelecimento prisional" --quantas 20
+   .\radar.bat gerar --pedido --modo treino --materia "Direitos Humanos" --assunto "Regras mínimas da ONU para o tratamento de pessoas presas" --subassunto "Pessoal do estabelecimento prisional" --quantas 20 --nivel misturada
    ```
 
 ## Os 28 temas que ficam sem estoque gerado

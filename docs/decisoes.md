@@ -4950,3 +4950,31 @@ viraram estudo extra "Onde: Radar". Copia antes em
        maquina). A questao diz "🟣 Gerada por IA · Dificil" ("· sem nivel"
        enquanto nao houver), e o porque do nivel so aparece depois de
        responder: ele pode entregar a resposta, como a letra (decisao 148).
+     - **6B, gerar com nivel**: o `radar gerar --pedido` (e a simulacao, e o
+       `--valendo`) ganhou `--nivel misturada|facil|media|dificil`, padrao
+       misturada - o comando antigo, sem `--nivel`, continua e gera a
+       misturada. **Misturada sao partes iguais, a sobra na media** (10 =
+       3/4/3, 8 = 2/4/2), e a mistura e do LOTE: o `geradas.preparar` a
+       reparte entre os pedidos (`niveis.repartir`, a media primeiro na
+       volta), e cada pedido leva `niveis` e o bloco "NIVEL" na instrucao,
+       com os criterios. O `como_responder` diz o comando com o nivel e os
+       dois campos; o formato da resposta os mostra. **A importacao recusa**
+       a questao sem `nivel`, com nivel fora da lista (caixa e acento nao
+       contam: "Difícil" passa, "medio" nao) e sem `por_que_o_nivel`; e
+       **conta a mistura sem completar**: "Nivel: pedi 3/4/3, veio 5/3/2". No
+       pedido de um nivel so, a questao que declarou outro nivel entra e conta
+       na diferenca (aprovado na proposta: o nivel e o que a IA declara, e
+       recusar jogaria fora uma questao boa). Resposta de um pedido de antes do
+       nivel (sem `niveis`) continua entrando, sem nivel. A API leva o mesmo
+       bloco, pela mesma funcao (`gerador.instrucao_com_nivel`), para a
+       simulacao nao mostrar um pedido que nao e o que vai. **O comando leva o
+       nivel em todo lugar**: a `comando_de_gerar` escreve sempre o `--nivel`
+       (e, para o no que e so a materia, o `--modo simulado`); a faixa, o
+       resultado da rodada, a ficha, "Os assuntos do cronograma", o `radar
+       hoje` e o `radar fichas --tema` mostram a misturada com a linha
+       `fichas.TROQUE_O_NIVEL`; o topo da tela Gerar questoes ganhou o seletor
+       de nivel e os 3 passos sem API com o comando da escolha. A dica
+       "`radar gerar --quantas N`" saiu: ela omitia a materia e o assunto, e
+       simulava outro pedido. Um teste varre as telas e o terminal atras de
+       `gerar --pedido` sem `--nivel`, e outro proibe template de escrever o
+       comando a mao.

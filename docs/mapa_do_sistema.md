@@ -203,7 +203,8 @@ Exemplo real: a faixa de 09/10, 18:20, "R+7: Verbo 2", diz "Não há questão
 gerada" e dá os três passos.
 
 1. `.venv\Scripts\radar.exe gerar --pedido --modo treino --materia "Língua
-   Portuguesa" --assunto "Emprego de tempos e modos verbais" --quantas 5`
+   Portuguesa" --assunto "Emprego de tempos e modos verbais" --quantas 5
+   --nivel misturada` (o nível desde a decisão 151)
    grava `data/pedido_ia.json` (`servico/manual.py`, `salvar_pedido`), com o
    lote, o escopo, as regras e o "como responder". **Substitui o pedido que
    estiver lá.**

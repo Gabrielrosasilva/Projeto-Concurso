@@ -53,7 +53,9 @@ def test_o_pedido_leva_todos_os_pedidos_com_instrucao_e_formato(acervo_do_alvo):
     assert len(lote["pedidos"]) == 2          # 3 + 2, como o --valendo faria
     assert lote["como_responder"] and lote["formato_da_resposta"]
     for pedido in lote["pedidos"]:
-        assert pedido["instrucao"] == gerador.INSTRUCAO_VARIACAO
+        # A instrucao de sempre, mais o bloco do nivel (decisao 151).
+        assert pedido["instrucao"].startswith(gerador.INSTRUCAO_VARIACAO)
+        assert "NIVEL - cada questao tem um nivel" in pedido["instrucao"]
         assert "GABARITO OFICIAL" in pedido["pedido"]
 
 

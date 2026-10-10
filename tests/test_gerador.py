@@ -65,6 +65,8 @@ def _questao_boa(enunciado: str = "Sobre a execucao penal, assinale a correta.")
         "alternativas": {l: f"texto {l}" for l in "abcde"},
         "resposta": "c",
         "artigo": "art. 41, XV, da Lei 7.210/1984",
+        # O nivel que o pedido exige desde a decisao 151.
+        "nivel": "media", "por_que_o_nivel": "a letra do art. 41 com uma troca",
     }
 
 

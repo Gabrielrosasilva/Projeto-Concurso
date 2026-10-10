@@ -122,8 +122,33 @@
           Quantas questões
           <input type="number" name="quantas" value="{{ quantas }}" min="1" max="30">
         </label>
+        {# O nivel (decisao 151): misturada sao partes iguais, a sobra na media. #}
+        <label class="ds-campo">
+          Nível
+          <select name="nivel">
+            {% for chave, rotulo in OPCOES_DE_NIVEL %}
+              <option value="{{ chave }}" {{ 'selected' if chave == nivel }}>{{ rotulo }}</option>
+            {% endfor %}
+          </select>
+        </label>
         <button class="ds-botao ds-botao--secundario" type="submit">Ver o custo disto</button>
       </form>
+
+      {# Os 3 passos sem API, com o comando da escolha acima (decisao 151). O
+         comando vem do servidor, pela comando_de_gerar; aqui so se desenha. #}
+      {% if comando_do_topo %}
+        <div class="sem-api">
+          <p><b>Sem API, pelo Claude Code</b> (não gasta nada):</p>
+          <ol class="passos-de-gerar">
+            <li>No terminal: <code>{{ comando_do_topo }}</code></li>
+            <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
+            <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
+          </ol>
+          <p class="dica">{{ AVISO_DO_PEDIDO }}</p>
+        </div>
+      {% elif not materia %}
+        <p class="dica">Escolha a matéria (e o assunto, para treino) para ver o comando sem API.</p>
+      {% endif %}
 
       {% if erro_do_escopo %}
         <p class="dica" role="alert">
@@ -181,15 +206,15 @@
         <input type="hidden" name="assunto" value="{{ assunto or '' }}">
         <input type="hidden" name="subassunto" value="{{ subassunto or '' }}">
         <input type="hidden" name="quantas" value="{{ quantas }}">
+        <input type="hidden" name="nivel" value="{{ nivel }}">
         <button class="ds-botao ds-botao--ia" type="submit">
           Gerar e treinar — gasta US$ {{ '%.2f'|format(plano.custo) }}
         </button>
       </form>
 
       <p class="dica">
-        Para ver o pedido exato que vai para a IA antes de gastar, rode
-        <code>radar gerar --quantas {{ quantas }}</code> no terminal: ele simula
-        e imprime a instrução palavra por palavra.
+        O pedido exato, palavra por palavra, fica em <code>data/pedido_ia.json</code>
+        depois do 1º passo acima.
       </p>
     {% endif %}
   </section>
@@ -257,7 +282,7 @@
                   <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
                   <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
                 </ol>
-                <p class="dica">{{ AVISO_DO_PEDIDO }}</p>
+                <p class="dica">{{ TROQUE_O_NIVEL }} {{ AVISO_DO_PEDIDO }}</p>
               </details>
             {% endif %}
           </li>

@@ -1671,7 +1671,7 @@ dele esta no titulo do tema. Tambem por conferir, com o 🟣.
 #### Sem pagar: o pedido em arquivo, respondido pelo Claude Code
 
 ```bash
-radar gerar --pedido --quantas 20            # TODOS os pedidos em data/pedido_ia.json
+radar gerar --pedido --quantas 20 --nivel misturada  # TODOS os pedidos em data/pedido_ia.json
 radar gerar --pedido --macetes               # um pedido de macete por materia
 radar gerar --pedido --explicacoes           # explicacao de cada questao que errei
 radar gerar --importar data/resposta_ia.json # le a resposta, confere e grava
@@ -1684,10 +1684,10 @@ assuntos, e eu podia receber questao de conteudo que ainda nem estudei. O
 escopo fecha ate onde eu quiser, e **nada de fora dele entra**:
 
 ```bash
-radar gerar --pedido --quantas 20   --materia "Direito Penal"   --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade"   --subassunto "Abolitio criminis" --elemento "CP, art. 2º"
+radar gerar --pedido --quantas 20   --materia "Direito Penal"   --assunto "Tipicidade, ilicitude, culpabilidade, punibilidade"   --subassunto "Abolitio criminis" --elemento "CP, art. 2º" --nivel misturada
 
-radar gerar --pedido --modo revisao --materia "Lingua Portuguesa" --quantas 20
-radar gerar --pedido --modo simulado --materia "Direito Penal" --quantas 20
+radar gerar --pedido --modo revisao --materia "Lingua Portuguesa" --quantas 20 --nivel misturada
+radar gerar --pedido --modo simulado --materia "Direito Penal" --quantas 20 --nivel misturada
 ```
 
 **Os tres modos** (`--modo`), e o que cada um faz:
@@ -1701,11 +1701,18 @@ radar gerar --pedido --modo simulado --materia "Direito Penal" --quantas 20
 Sem `--modo`: **com assunto e treino, so com materia e simulado**, e a saida
 escreve qual foi - amplo e especifico nao podem se confundir.
 
+**O nivel** (`--nivel`, decisao 151): `misturada` (o padrao: partes iguais, a
+sobra na media - 10 = 3/4/3), `facil`, `media` ou `dificil`. Cada questao da
+resposta declara o `nivel` e o `por_que_o_nivel`; sem os dois ela e recusada,
+e a saida diz a mistura que veio ("pedi 3/4/3, veio 5/3/2") sem completar
+nada. Os criterios moram no `src/radar/niveis.py`. Toda tela que mostra o
+comando de gerar mostra o `--nivel`.
+
 **Nome que a arvore nao tem para o comando**, com ate cinco sugestoes, e nao
 gera nada:
 
 ```
-$ radar gerar --pedido --materia "Direito Penal" --assunto "Aplicacao da Lei Penal"
+$ radar gerar --pedido --materia "Direito Penal" --assunto "Aplicacao da Lei Penal" --nivel misturada
 O assunto 'Aplicacao da Lei Penal' nao existe em 'Direito Penal'.
 Voce quis dizer: Imputabilidade penal?
 Nada foi gerado: eu nao alargo o escopo sozinho.

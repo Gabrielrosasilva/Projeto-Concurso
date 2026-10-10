@@ -3508,3 +3508,34 @@ perdida (921 geradas antes e depois), cópia em
 `data/copias/migracao-v7-para-v8-2026-10-09-223948`; o JSON ficou com 921, as
 921 com `nivel: null`. A rodada 24 (geradas, em andamento) mostra "🟣 Gerada
 por IA · sem nível".
+
+**6B - gerar com nível.**
+
+- **O código:** `niveis.dividir`, `repartir`, `descrever`, `instrucao` e
+  `ler_da_resposta`; `geradas.preparar(..., nivel)` com `_com_niveis`, e o
+  `gravar` com as colunas do nível; `gerador.instrucao_com_nivel` e o nível na
+  API; `manual.pedido_de_questoes(..., nivel)`, o `como_responder`, o formato e
+  a importação (recusas e a mistura); `fichas.comando_de_gerar(no, quantas,
+  nivel)` e `TROQUE_O_NIVEL`; o `--nivel` do `radar gerar` (a simulação, o
+  `--pedido`, o `--valendo` e a saída da importação); `app.py` (o comando do
+  topo, o nível no botão pago); `geradas.html` (o seletor, os 3 passos, sem a
+  dica antiga), `hoje.html`, `relatorio.html`, `ficha.html`;
+  `docs/estoque_de_geradas.md` (os 57 comandos com `--nivel misturada` e a
+  seção "Por nível"), o README e o mapa do sistema.
+- **Testes:** `test_gerar_com_nivel` (23: a mistura 3/4/3 e as outras, a
+  repartição, o pedido, a importação 3/4/3 → 5/3/2, a resposta torta, o
+  pedido de antes do nível, o terminal, a simulação, o `--nivel` na faixa, na
+  tela de gerar, no topo, na ficha, no `radar hoje`, no `radar fichas --tema`
+  e no resultado da rodada, e nenhum template com o comando à mão); os
+  ajustes de texto em `test_fichas`, `test_geradas_da_faixa`, `test_ia_manual`,
+  `test_gerador` e `test_geracao_por_conteudo`. Com as telas e o terminal
+  tocados (`test_tela_hoje`, `test_relatorio`, `test_design`, `test_aceite`,
+  `test_cronograma`, `test_faixas_do_dia`, `test_treinar_*` e outros): 558
+  passed.
+
+**Rodado de verdade:** o comando da faixa de 14/10, copiado do `radar hoje`
+(LEP > Disciplina, faltas disciplinares e RDD, 8, misturada) - 3 pedidos,
+"Nível: Misturada (fácil/média/difícil: 2/4/2)", repartidos 1/1/1, 1/1/1 e
+0/2/0; e o do topo da tela Gerar questões (Direito Penal > Dolo e culpa, 6,
+difícil) - "Nível: Difícil (0/0/6)", "escreva exatamente: 3 dificil" em cada
+pedido. O `data/pedido_ia.json` ficou com este último, sem resposta.

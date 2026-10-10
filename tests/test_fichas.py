@@ -386,7 +386,7 @@ def test_o_comando_de_gerar_e_um_por_no_e_em_modo_treino():
         r'.venv\Scripts\radar.exe gerar --pedido --modo treino --materia "Direito Constitucional" '
         '--assunto "Direitos e garantias fundamentais: direitos e garantias individuais '
         'e coletivos" --subassunto "Inviolabilidade do domicílio" --elemento "CF, art. 5º, '
-        'XI" --quantas 10')
+        'XI" --quantas 10 --nivel misturada')
 
 
 def test_desempenho_do_escopo_conta_cada_resposta_uma_vez():

@@ -52,7 +52,7 @@ from dataclasses import dataclass, field
 
 import requests
 
-from radar import config
+from radar import config, niveis
 from radar.questoes import chave_da_questao, impressao_de
 
 log = logging.getLogger(__name__)
@@ -180,6 +180,13 @@ class QuestaoNova:
     base: str | None = None
     #: alvo | complementar | nenhuma.
     evidencia_da_base: str | None = None
+
+    # --- o nivel (decisao 151) ----------------------------------------------
+    #: facil | media | dificil: o que a IA declarou. None na questao sem nivel.
+    nivel: str | None = None
+    por_que_o_nivel: str | None = None
+    #: Quem declarou o nivel. Na questao gerada ja com nivel, o mesmo `modelo`.
+    nivel_procedencia: str | None = None
 
     @property
     def impressao(self) -> str:
@@ -394,15 +401,33 @@ def _chamar(
     )
 
 
+def instrucao_com_nivel(instrucao: str, contagem: dict | None) -> str:
+    """A instrucao mais o bloco do nivel, quando o pedido tem nivel. E o
+    mesmo texto no pedido em arquivo, na simulacao e na API (decisao 151)."""
+    return instrucao + "\n" + niveis.instrucao(contagem) if contagem else instrucao
+
+
+def _nivel_do_item(item: dict, contagem: dict | None) -> dict | None:
+    """Os campos do nivel da questao, {} sem nivel pedido, ou None quando o
+    pedido tinha nivel e a questao nao declarou um valido (descartada)."""
+    if not contagem:
+        return {}
+    nivel, por_que, motivo = niveis.ler_da_resposta(item)
+    if motivo:
+        return None
+    return {"nivel": nivel, "por_que_o_nivel": por_que, "nivel_procedencia": MODELO}
+
+
 def variar(
     questao,
     chave: str,
     quantas: int = VARIACOES_POR_QUESTAO,
     sessao=None,
+    contagem: dict | None = None,
 ) -> tuple[list[QuestaoNova], int, int]:
     """Variacoes de UMA questao real. Devolve (questoes, entrada, saida)."""
     cruas, entrada, saida = _chamar(
-        INSTRUCAO_VARIACAO,
+        instrucao_com_nivel(INSTRUCAO_VARIACAO, contagem),
         _montar_pedido_variacao(questao, quantas),
         chave,
         quantas,
@@ -412,7 +437,8 @@ def variar(
     novas = []
     for item in cruas[:quantas]:
         conferida = _conferir(item)
-        if conferida is None:
+        do_nivel = _nivel_do_item(item, contagem)
+        if conferida is None or do_nivel is None:
             continue
         novas.append(QuestaoNova(
             modo="variacao",
@@ -422,6 +448,7 @@ def variar(
             origem_chave=chave_da_questao(questao.enunciado, questao.alternativas),
             modelo=MODELO,
             **conferida,
+            **do_nivel,
         ))
     return novas, entrada, saida
 
@@ -433,10 +460,11 @@ def do_zero(
     chave: str,
     quantas: int = VARIACOES_POR_QUESTAO,
     sessao=None,
+    contagem: dict | None = None,
 ) -> tuple[list[QuestaoNova], int, int]:
     """Questoes ineditas de um assunto sem questao real no acervo."""
     cruas, entrada, saida = _chamar(
-        INSTRUCAO_DO_ZERO,
+        instrucao_com_nivel(INSTRUCAO_DO_ZERO, contagem),
         _montar_pedido_do_zero(materia, assunto, exemplos, quantas),
         chave,
         quantas,
@@ -446,7 +474,8 @@ def do_zero(
     novas = []
     for item in cruas[:quantas]:
         conferida = _conferir(item)
-        if conferida is None:
+        do_nivel = _nivel_do_item(item, contagem)
+        if conferida is None or do_nivel is None:
             continue
         novas.append(QuestaoNova(
             modo="do_zero",
@@ -455,6 +484,7 @@ def do_zero(
             origem_impressao=None,
             modelo=MODELO,
             **conferida,
+            **do_nivel,
         ))
     return novas, entrada, saida
 
@@ -495,10 +525,12 @@ def gerar(
                 novas, entrada, saida = do_zero(
                     pedido["materia"], pedido.get("assunto"),
                     pedido.get("exemplos") or [], chave, quantas, sessao,
+                    contagem=pedido.get("niveis"),
                 )
             else:
                 novas, entrada, saida = variar(
-                    pedido["questao"], chave, quantas, sessao
+                    pedido["questao"], chave, quantas, sessao,
+                    contagem=pedido.get("niveis"),
                 )
         except Exception as erro:  # noqa: BLE001 - API fora do ar e rotina
             log.warning("pedido falhou (%s)", type(erro).__name__)

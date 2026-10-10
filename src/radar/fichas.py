@@ -38,7 +38,7 @@ from datetime import date
 
 from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
-from radar import incidencia
+from radar import incidencia, niveis
 from radar import prioridade as regra_de_prioridade
 # As origens (secao 20), mais a do plano, e a frase da regra inviolavel 4: as
 # mesmas do resto do site, que desde a Etapa 7A moram todas no origem.py.
@@ -1300,13 +1300,16 @@ PASSO_NO_CLAUDE_CODE = ("Leia data/pedido_ia.json e siga o como_responder; "
 COMANDO_DE_IMPORTAR = RADAR_NO_WINDOWS + " gerar --importar data/resposta_ia.json"
 AVISO_DO_PEDIDO = ("Faça os 3 passos antes de pedir outro assunto: pedido novo "
                    "substitui o anterior.")
+#: Ao lado de todo comando que vem com a misturada (decisao 151).
+TROQUE_O_NIVEL = ("O comando pede a misturada (partes iguais); troque misturada por "
+                  "facil, media ou dificil para um nível só.")
 
 #: Pedido menor que isto nao vale os 3 passos (decisao da R6): faltando 2
 #: questoes num no, pede 5.
 PEDIDO_MINIMO_DE_GERADAS = 5
 
 
-def comando_de_gerar(no: str, quantas: int = 10) -> str:
+def comando_de_gerar(no: str, quantas: int = 10, nivel: str = niveis.MISTURADA) -> str:
     """O `radar gerar --pedido` de um no do escopo, em modo treino (Etapa 5).
 
     Um comando por no, e nao um para a ficha inteira: o escopo fechado da
@@ -1314,15 +1317,24 @@ def comando_de_gerar(no: str, quantas: int = 10) -> str:
     assuntos diferentes num pedido afrouxaria essa trava. O `--elemento` so
     vai quando o proprio no e um elemento da arvore. E a UNICA funcao que
     escreve este comando: a ficha, a faixa e a tela de gerar mostram o mesmo.
+
+    O `--nivel` vai sempre (decisao 151), misturada quando ninguem escolheu.
+    O no que e so a materia e o simulado amplo (`--modo simulado`): e o que a
+    tela de gerar pede quando escolho a materia e nenhum assunto.
     """
+    if nivel not in niveis.OPCOES:
+        raise ValueError(f"nível {nivel!r} não existe: use {', '.join(niveis.OPCOES)}")
     nomes = arvore.partes(no)
-    partes = [f'--materia "{nomes[0]}"', f'--assunto "{nomes[1]}"']
+    partes = [f'--materia "{nomes[0]}"']
+    if len(nomes) > 1:
+        partes.append(f'--assunto "{nomes[1]}"')
     if len(nomes) > 2:
         partes.append(f'--subassunto "{nomes[2]}"')
     if len(nomes) > 3:
         partes.append(f'--elemento "{nomes[3]}"')
-    return (f"{RADAR_NO_WINDOWS} gerar --pedido --modo treino {' '.join(partes)} "
-            f"--quantas {quantas}")
+    modo = "treino" if len(nomes) > 1 else "simulado"
+    return (f"{RADAR_NO_WINDOWS} gerar --pedido --modo {modo} {' '.join(partes)} "
+            f"--quantas {quantas} --nivel {nivel}")
 
 
 # --- as geradas da faixa de questoes (R6) -------------------------------------------

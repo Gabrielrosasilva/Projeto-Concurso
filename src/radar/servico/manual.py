@@ -27,7 +27,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from radar import config, gerador, leis
+from radar import config, gerador, leis, niveis
 from radar.db import criar_tabelas, sessao
 from radar.models import agora
 from radar.origem import FRASE_SEM_EVIDENCIA, IA
@@ -292,7 +292,7 @@ Responda SOMENTE um JSON, no formato:
 INSTRUCAO_RESUMO = INSTRUCAO_RESUMO.replace("{frase_sem_evidencia}", FRASE_SEM_EVIDENCIA)
 
 
-def _como_responder(tipo: str) -> str:
+def _como_responder(tipo: str, nivel: str | None = None) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
     if tipo == "resumos":
         return (
@@ -353,8 +353,9 @@ def _como_responder(tipo: str) -> str:
             "do gabarito oficial, ou sem `fonte`, sera RECUSADA."
         )
     campo = "questoes" if tipo == "questoes" else "macetes"
+    comando = f"radar gerar --pedido --nivel {nivel}" if nivel else "radar gerar --pedido"
     texto = (
-        "Este arquivo foi gerado por `radar gerar --pedido`. Para cada item de "
+        f"Este arquivo foi gerado por `{comando}`. Para cada item de "
         "`pedidos`, siga a `instrucao` usando o texto de `pedido`. Responda "
         "TODOS os pedidos num unico arquivo JSON, no formato de "
         "`formato_da_resposta`: o mesmo `lote` deste arquivo, e o `id` de cada "
@@ -371,6 +372,14 @@ def _como_responder(tipo: str) -> str:
             "escreva a questao: a instrucao diz para deixar vazio, mas aqui "
             "vazio e recusado. Escreva no maximo `quantas` questoes por pedido."
         )
+        if nivel:
+            texto += (
+                " Cada questao com `nivel` (facil, media ou dificil) e "
+                "`por_que_o_nivel` (uma linha, pelo criterio da instrucao): sem "
+                "os dois, ou com outro valor, ela sera RECUSADA. O pedido diz "
+                "quantas de cada nivel (`niveis`); declare o nivel que a questao "
+                "TEM, e nao o que foi pedido."
+            )
     else:
         texto += (
             "Macete sem `fonte`, ou citando em `questoes` um codigo que nao "
@@ -428,7 +437,9 @@ def _formato_das_respostas(tipo: str) -> dict:
         item = {"enunciado": "...", "alternativas": {
             "a": "...", "b": "...", "c": "...", "d": "...", "e": "..."},
             "resposta": "c", "artigo": "art. 41, XV, da Lei 7.210/1984",
-            "conteudo": "<copie o CONTEUDO do pedido, quando houver>"}
+            "conteudo": "<copie o CONTEUDO do pedido, quando houver>",
+            "nivel": "media",
+            "por_que_o_nivel": "a letra do art. 41, XV, com o prazo trocado"}
         return {"lote": "<o lote deste arquivo>",
                 "respostas": [{"id": "p1", "questoes": [item]}]}
     item = {"assunto": "...", "regra": "...", "fonte": "art. 112 da Lei 7.210/1984",
@@ -437,13 +448,14 @@ def _formato_das_respostas(tipo: str) -> dict:
             "respostas": [{"id": "m1", "macetes": [item]}]}
 
 
-def _novo_lote(tipo: str, pedidos: list[dict]) -> dict:
+def _novo_lote(tipo: str, pedidos: list[dict], nivel: str | None = None) -> dict:
     agora_ = agora()
     return {
         "lote": f"{tipo}-{agora_:%Y%m%d-%H%M%S}",
         "tipo": tipo,
         "criado_em": agora_.isoformat(),
-        "como_responder": _como_responder(tipo),
+        **({"nivel": nivel} if nivel else {}),
+        "como_responder": _como_responder(tipo, nivel),
         "formato_da_resposta": _formato(tipo),
         "pedidos": pedidos,
     }
@@ -501,14 +513,16 @@ def _instrucao_com_escopo(instrucao: str, escopo, lei=None) -> str:
 
 def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
                        semente: int | None = None, escopo=None,
-                       modo: str | None = None) -> dict:
+                       modo: str | None = None,
+                       nivel: str = niveis.MISTURADA) -> dict:
     """Os mesmos pedidos que o `--valendo` mandaria a API, todos num lote.
 
     Sai do mesmo `geradas.preparar`: a escolha da questao de base, o modo do
-    zero e a divisao em chamadas sao os de sempre. O que muda e so quem
-    responde.
+    zero, a divisao em chamadas e a parte de cada nivel sao os de sempre. O
+    que muda e so quem responde.
     """
-    plano = geradas.preparar(materia, quantas, semente, escopo=escopo, modo=modo)
+    plano = geradas.preparar(materia, quantas, semente, escopo=escopo, modo=modo,
+                             nivel=nivel)
     pedidos = []
     for numero, pedido in enumerate(plano["pedidos"], start=1):
         se_escopo = pedido.get("escopo")
@@ -536,6 +550,8 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
         if se_escopo is not None:
             instrucao = _instrucao_com_escopo(instrucao, se_escopo,
                                               pedido.get("lei"))
+        # O nivel por ultimo (decisao 151): quantas de cada, e os criterios.
+        instrucao = gerador.instrucao_com_nivel(instrucao, pedido.get("niveis"))
         pedidos.append({
             "id": f"p{numero}", "modo": pedido["modo"],
             "quantas": pedido["quantas"], **base,
@@ -548,9 +564,10 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
             "escopo_dispositivos": list(se_escopo.elementos) if se_escopo is not None else [],
             "base": pedido.get("base"),
             "evidencia_da_base": pedido.get("evidencia_da_base"),
+            "niveis": pedido.get("niveis"),
             "instrucao": instrucao, "pedido": corpo,
         })
-    return _novo_lote("questoes", pedidos)
+    return _novo_lote("questoes", pedidos, nivel)
 
 
 def _codigo(questao) -> str:
@@ -1386,6 +1403,17 @@ def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
                 recusas.append(f"{onde}: {fora}")
                 continue
 
+            # O nivel (decisao 151): so quando o pedido o tinha - a resposta
+            # de um pedido de antes dele continua entrando, sem nivel.
+            do_nivel = {}
+            if pedido.get("niveis"):
+                nivel, por_que, motivo = niveis.ler_da_resposta(item)
+                if motivo:
+                    recusas.append(f"{onde}: {motivo}")
+                    continue
+                do_nivel = {"nivel": nivel, "por_que_o_nivel": por_que,
+                            "nivel_procedencia": modelo}
+
             aceitas.append(gerador.QuestaoNova(
                 modo=pedido["modo"], materia=pedido.get("materia"),
                 assunto=pedido.get("assunto"),
@@ -1398,6 +1426,7 @@ def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
                 base=pedido.get("base"),
                 evidencia_da_base=pedido.get("evidencia_da_base"),
                 **conferida,
+                **do_nivel,
             ))
 
     # Repetida dentro da resposta, ou ja gerada antes: nao entra duas vezes.
@@ -1407,7 +1436,15 @@ def _importar_questoes(lote: dict, respostas: list[dict], modelo: str) -> dict:
         from radar import acervo
 
         acervo.exportar_geradas()
-    return {"gravadas": gravadas, "repetidas": repetidas, "recusas": recusas}
+    resultado = {"gravadas": gravadas, "repetidas": repetidas, "recusas": recusas}
+    if any(p.get("niveis") for p in lote["pedidos"]):
+        # A mistura e conferida e contada, nunca completada (decisao 151):
+        # "pedi 3/4/3, veio 5/3/2". Conta as que passaram nas recusas.
+        pedi = {chave: sum((p.get("niveis") or {}).get(chave, 0) for p in lote["pedidos"])
+                for chave in niveis.NIVEIS}
+        veio = {chave: sum(1 for q in aceitas if q.nivel == chave) for chave in niveis.NIVEIS}
+        resultado["niveis"] = {"pedi": pedi, "veio": veio}
+    return resultado
 
 
 def _impressao_do_macete(materia: str, regra: str) -> str:

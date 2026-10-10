@@ -867,6 +867,11 @@ def gerar(
              "só com matéria é simulado",
     ),
     quantas: int = typer.Option(5, help="Quantas questões gerar"),
+    nivel: str = typer.Option(
+        "misturada", "--nivel",
+        help="misturada | facil | media | dificil. Misturada são partes iguais, "
+             "a sobra na média (10 = 3/4/3)",
+    ),
     teto: float = typer.Option(
         None, help="Teto de gasto em dólar. O comando para ao chegar nele"
     ),
@@ -920,15 +925,24 @@ def gerar(
         _importar_resposta_da_ia(Path(importar))
         return
 
+    from radar import niveis
+
+    nivel = (nivel or niveis.MISTURADA).strip().lower()
+    if nivel not in niveis.OPCOES:
+        console.print(f"[red]Nível {escape(nivel)!r} não existe.[/] Use "
+                      f"{', '.join(niveis.OPCOES)}.")
+        raise typer.Exit(code=1)
+
     escopo = _escopo_do_pedido(materia, assunto, subassunto, elemento)
     if pedido:
         _salvar_pedido_da_ia(materia, quantas, macetes, explicacoes,
-                             escopo=escopo, modo=modo)
+                             escopo=escopo, modo=modo, nivel=nivel)
         return
 
     limite = gerador.TETO_PADRAO if teto is None else teto
     try:
-        plano = servico.geradas.preparar(materia, quantas, escopo=escopo, modo=modo)
+        plano = servico.geradas.preparar(materia, quantas, escopo=escopo, modo=modo,
+                                         nivel=nivel)
     except ValueError as erro:
         # O modo revisao sem nada estudado (EscopoInvalido, que e ValueError) e
         # o modo que nao existe: a mesma frase do --pedido, e nao o traceback.
@@ -973,6 +987,8 @@ def gerar(
         f"[dim](~R$ {plano['custo'] * config.CAMBIO_DE_REFERENCIA:.2f}, câmbio fixo de {config.CAMBIO_DE_REFERENCIA:.2f})[/]"
     )
     console.print(f"[dim]Modelo: {gerador.MODELO}[/]")
+    console.print(f"Nível: [bold]{escape(niveis.rotulo(nivel))}[/] "
+                  f"[dim](fácil/média/difícil: {niveis.descrever(plano['niveis'])})[/]")
 
     if simular:
         if ver_pedido:
@@ -989,6 +1005,7 @@ def gerar(
             comando += f' --materia "{materia}"'
         if quantas != 5:
             comando += f" --quantas {quantas}"
+        comando += f" --nivel {nivel}"
         console.print(f"Para valer, rode: [bold]{comando}[/]")
         return
 
@@ -1005,7 +1022,7 @@ def gerar(
     console.print(f"[dim]Teto de gasto: US$ {limite:.2f}[/]")
     with console.status("Escrevendo..."):
         resultado = servico.geradas.gerar(
-            materia=materia, quantas=quantas, teto_em_dolar=limite
+            materia=materia, quantas=quantas, teto_em_dolar=limite, nivel=nivel
         )
 
     if resultado.get("erro"):
@@ -1112,7 +1129,7 @@ def _escopo_do_pedido(materia, assunto, subassunto, elemento):
 
 def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
                          explicacoes: bool = False, escopo=None,
-                         modo: str | None = None) -> None:
+                         modo: str | None = None, nivel: str = "misturada") -> None:
     """O `--pedido`: todos os pedidos num arquivo, sem chamar a API."""
     if explicacoes:
         lote = servico.manual.pedido_de_explicacoes()
@@ -1127,7 +1144,7 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
     else:
         try:
             lote = servico.manual.pedido_de_questoes(
-                materia, quantas, escopo=escopo, modo=modo)
+                materia, quantas, escopo=escopo, modo=modo, nivel=nivel)
         except Exception as erro:
             from radar.conteudos import EscopoInvalido
 
@@ -1150,6 +1167,13 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
         f"[green]{len(lote['pedidos'])} pedido(s) de {o_que}[/] em {destino}"
     )
     _mostrar_o_escopo(lote)
+    if lote.get("nivel"):
+        from radar import niveis
+
+        total = {chave: sum((p.get("niveis") or {}).get(chave, 0) for p in lote["pedidos"])
+                 for chave in niveis.NIVEIS}
+        console.print(f"Nível: [bold]{escape(niveis.rotulo(lote['nivel']))}[/] "
+                      f"[dim](fácil/média/difícil: {niveis.descrever(total)})[/]")
     console.print(f"[dim]Lote {lote['lote']}. Nada foi gasto.[/]")
     # O mesmo texto da faixa, da ficha e da tela de gerar (R6).
     console.print(
@@ -1192,6 +1216,14 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"[dim]{len(fora)} questão(ões) de bloco genérico não são de "
                       "matéria nenhuma do meu edital: ficam sem linha, que já é o "
                       "estado de quem não tem classificação.[/]")
+    if resultado.get("niveis"):
+        # Conferida e contada, nunca completada (decisao 151).
+        from radar import niveis
+
+        pedi = niveis.descrever(resultado["niveis"]["pedi"])
+        veio = niveis.descrever(resultado["niveis"]["veio"])
+        igual = "[green](igual)[/]" if pedi == veio else "[yellow](diferente)[/]"
+        console.print(f"Nível: pedi {pedi} (fácil/média/difícil), veio {veio}. {igual}")
     if resultado["recusas"]:
         console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
         for motivo in resultado["recusas"]:
@@ -1243,6 +1275,8 @@ def _mostrar_pedido(pedido: dict) -> None:
             pedido["questao"], pedido["quantas"]
         )
 
+    # O mesmo bloco do nivel que o pedido em arquivo e a API levam.
+    instrucao = gerador.instrucao_com_nivel(instrucao, pedido.get("niveis"))
     console.print()
     console.print("[bold]O primeiro pedido, como ele sai daqui:[/]")
     console.print(Panel(instrucao, title="instrução", border_style="dim"))
@@ -3136,6 +3170,7 @@ def _mostrar_geradas_da_faixa(gf) -> None:
         console.print(f'     2) no Claude Code do VS Code: "{fichas_puras.PASSO_NO_CLAUDE_CODE}"',
                       soft_wrap=True)
         console.print(f"     3) {escape(fichas_puras.COMANDO_DE_IMPORTAR)}", soft_wrap=True)
+        console.print(f"     [dim]{fichas_puras.TROQUE_O_NIVEL}[/]")
         console.print(f"     [dim]{fichas_puras.AVISO_DO_PEDIDO}[/]")
 
 
@@ -3284,6 +3319,8 @@ def _mostrar_ficha(f) -> None:
          f"oficiais da FEPESE).")
     for no in f.nos:
         console.print(f"     {escape(fichas_puras.comando_de_gerar(no))}", soft_wrap=True)
+    if f.nos:
+        console.print(f"     [dim]{fichas_puras.TROQUE_O_NIVEL}[/]")
 
     titulo("Erros para revisar depois")
     r = f.refazer
