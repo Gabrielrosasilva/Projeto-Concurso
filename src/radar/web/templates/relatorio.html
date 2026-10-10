@@ -76,8 +76,13 @@
       <span>{{ resumo.acertos }} de {{ resumo.total }} questões desta rodada</span>
     </div>
     {% if resumo.chutes %}
-      {# Ao lado do acerto, e nao dentro: o acerto continua o mesmo (decisao 142). #}
-      <p class="ds-pequeno" style="margin-bottom:0">🎲 {{ resumo.chutes }} no chute, {{ resumo.acertos_no_chute }} acertada{{ 's' if resumo.acertos_no_chute != 1 }} - acerto no chute não é saber: vale rever.</p>
+      {# Ao lado do acerto, e nao dentro: o acerto continua o mesmo (decisao
+         142). A frase diz as duas contas inteiras - "3 no chute, 2 acertadas"
+         parecia dizer que so 2 das 7 tinham sido acertadas. #}
+      {% set chutes_certos = resumo.acertos_no_chute %}
+      {% set chutes_errados = resumo.chutes - chutes_certos %}
+      {% set sem_chute = resumo.acertos - chutes_certos %}
+      <p class="ds-pequeno" style="margin-bottom:0">🎲 Você marcou {{ resumo.chutes }} no chute: {{ chutes_certos }} {{ 'deu' if chutes_certos == 1 else 'deram' }} certo e {{ chutes_errados }} {{ 'errou' if chutes_errados == 1 else 'erraram' }}. {{ 'Do 1 acerto' if resumo.acertos == 1 else 'Dos ' ~ resumo.acertos ~ ' acertos' }}, {{ sem_chute }} {{ 'foi' if sem_chute == 1 else 'foram' }} sem chute - acerto no chute não é saber: vale rever.</p>
     {% endif %}
     <p class="ds-suave ds-pequeno" style="margin-bottom:0">
       Sem nota de corte: ela só aparece quando houver resultado oficial

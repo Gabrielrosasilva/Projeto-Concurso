@@ -163,7 +163,8 @@ def test_a_correcao_e_o_relatorio_dizem_que_foi_no_chute(cliente):
 
     assert "Foi no chute" in cliente.get(f"/simulado/{rodada}?ver={primeira}").text
     relatorio = cliente.get(f"/simulado/{rodada}").text
-    assert "1 no chute, 1 acertada" in relatorio
+    assert "Você marcou 1 no chute: 1 deu certo e 0 erraram." in relatorio
+    assert "Do 1 acerto, 0 foram sem chute" in relatorio
 
 
 def test_errar_no_chute_abre_o_caderno_com_o_motivo_chutei(cliente):
