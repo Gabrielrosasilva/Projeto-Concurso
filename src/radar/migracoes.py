@@ -192,6 +192,18 @@ def _passo_7() -> None:
     """
 
 
+def _passo_8() -> None:
+    """Decisao 151 (09/10/2026): o nivel de cada questao gerada.
+
+    Quatro colunas novas em `questoes_geradas` (nivel, por_que_o_nivel,
+    nivel_procedencia e suspeita), que vem do modelo. As linhas antigas ficam
+    nulas - "sem nivel" - ate a classificacao pelo Claude Code: preencher
+    agora diria que a IA declarou um nivel que ninguem declarou. O passo leva
+    as colunas para o arquivo versionado, de onde o banco e reconstruido.
+    """
+    _exportar_sem_perder("geradas")
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -205,6 +217,7 @@ PASSOS = {
     5: ("A chave da questão real de base de cada questão gerada", _passo_5),
     6: ("O texto-base das questões de interpretação das provas do alvo", _passo_6),
     7: ("O \"vou no chute\" de cada resposta e a nota de cada faixa", _passo_7),
+    8: ("O nível de cada questão gerada (fácil, média ou difícil)", _passo_8),
 }
 VERSAO_ATUAL = max(PASSOS)
 

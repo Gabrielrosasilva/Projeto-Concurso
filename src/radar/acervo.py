@@ -513,16 +513,51 @@ def importar_geradas(caminho: Path | None = None) -> int:
                 # e a unica outra coisa que a linha do arquivo pode trazer.
                 if linha.get("conteudo") and not ja.conteudo:
                     ja.conteudo = linha["conteudo"]
+                # O nivel tambem chega depois (decisao 151): a classificacao
+                # das antigas feita em outra maquina. So preenche o vazio.
+                if not ja.nivel:
+                    for coluna, valor in _nivel_da_linha(linha, impressao).items():
+                        if valor is not None:
+                            setattr(ja, coluna, valor)
                 continue
 
             valores = {
                 coluna: _desserializar(coluna, linha.get(coluna), DATAS_DE_GERADA)
                 for coluna in COLUNAS_DE_GERADA
             }
+            valores.update(_nivel_da_linha(linha, impressao))
             s.add(QuestaoGerada(**valores))
             novas += 1
 
     return novas
+
+
+COLUNAS_DO_NIVEL = ("nivel", "por_que_o_nivel", "nivel_procedencia", "suspeita")
+
+
+def _nivel_da_linha(linha: dict, impressao: str) -> dict:
+    """As quatro colunas do nivel, como o arquivo traz - ou todas vazias.
+
+    O JSON antigo nao tem a chave, e ai a questao fica "sem nivel". Nivel fora
+    da lista (escrito a mao no arquivo) tambem: aproximar seria inventar o que
+    a IA nao declarou. A suspeita vale sozinha, porque e sobre a questao.
+    """
+    from radar import niveis
+
+    vazio = {coluna: None for coluna in COLUNAS_DO_NIVEL}
+    vazio["suspeita"] = linha.get("suspeita") or None
+    cru = linha.get("nivel")
+    if not cru:
+        return vazio
+    chave = niveis.normalizar(cru)
+    if chave is None:
+        log.warning("questao gerada %s com nivel fora da lista (%r): fica sem nivel",
+                    impressao, cru)
+        return vazio
+    return {"nivel": chave,
+            "por_que_o_nivel": linha.get("por_que_o_nivel") or None,
+            "nivel_procedencia": linha.get("nivel_procedencia") or None,
+            "suspeita": vazio["suspeita"]}
 
 
 # --- o meu historico de treino ----------------------------------------------

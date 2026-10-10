@@ -132,7 +132,9 @@
   <article class="ds-cartao questao">
     <div class="cabeca">
       <span class="materia">{{ questao.materia or 'sem matéria' }}</span>
-      {{ selo(questao.origem) }}
+      {# A gerada diz o nivel que a IA declarou (decisao 151): "sem nivel"
+         enquanto ela nao tiver um. #}
+      {{ selo(questao.origem, rotulo_do_selo_da_gerada(questao.nivel) if de_ia else None) }}
     </div>
 
     {% if de_ia %}
@@ -153,6 +155,12 @@
             <p>Diz se apoiar em <b>{{ questao.artigo }}</b>{% if lei %} — <a href="{{ lei.url }}" target="_blank" rel="noopener">ler a lei</a>{% endif %}</p>
           {% else %}
             <p>A IA não soube dizer em que artigo se apoia.</p>
+          {% endif %}
+          {# O porque do nivel so depois de responder: ele pode entregar a
+             resposta ("o item 3 esta errado porque..."), como a letra
+             (decisao 148). #}
+          {% if corrigida and questao.nivel and questao.por_que_o_nivel %}
+            <p>Por que {{ rotulo_do_nivel(questao.nivel) | lower }}, segundo a IA: {{ questao.por_que_o_nivel }}</p>
           {% endif %}
           <form method="post" action="/geradas/{{ questao.id }}/errada">
             <input type="hidden" name="voltar" value="/simulado/{{ simulado.id }}">

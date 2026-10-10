@@ -25,6 +25,7 @@ from radar import cronograma
 from radar import fichas as fichas_puras
 from radar import leis
 from radar import macetes as macetes_puros
+from radar import niveis
 from radar import onde_estudar
 from radar import origem
 from radar import qconcursos
@@ -154,6 +155,10 @@ templates.env.globals["ESTA_PARA_REVER"] = servico.erros.esta_para_rever
 templates.env.globals["SELOS"] = origem.SELOS
 templates.env.globals["FRASE_SEM_EVIDENCIA"] = origem.FRASE_SEM_EVIDENCIA
 templates.env.globals["FRASE_DA_QUESTAO_DE_IA"] = origem.FRASE_DA_QUESTAO_DE_IA
+# O nivel da gerada (decisao 151): o texto do selo e o rotulo moram no
+# radar/niveis.py; o template so desenha.
+templates.env.globals["rotulo_do_selo_da_gerada"] = niveis.rotulo_do_selo
+templates.env.globals["rotulo_do_nivel"] = niveis.rotulo
 # Os passos de gerar pelo Claude Code (R6): os textos moram no radar.fichas, e
 # a faixa, a ficha e a tela de gerar mostram os mesmos.
 templates.env.globals["PASSO_NO_CLAUDE_CODE"] = fichas_puras.PASSO_NO_CLAUDE_CODE

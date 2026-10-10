@@ -4922,3 +4922,31 @@ viraram estudo extra "Onde: Radar". Copia antes em
      - o cartao da semana diz "de acerto em N", e o grafico de Minhas
        materias ganhou a linha "sem. 1: 41% em 22 · sem. 2: 49% em 35", com a
        semana abaixo do minimo em cinza (so CSS).
+
+## O nivel das questoes geradas (pedido de 09/10/2026)
+
+151. **toda questao gerada tem um NIVEL - facil, media ou dificil -, o que a
+     IA declara** (pedido seu, fora dos lotes da proposta de melhorias, como
+     as 139 a 142: nao corrige numero, e nao mexe em nada que mede). Feito em
+     quatro subetapas, 6A a 6D; esta entrada cresce com cada uma.
+     - **o lugar dos criterios e o `radar/niveis.py`**, constante e nao
+       YAML: as tres chaves sao contrato com o banco, o JSON e os seletores,
+       e um YAML daria a entender que cabe um quarto nivel. Os criterios sao
+       os seus: facil, a letra de um artigo so com as erradas claramente
+       erradas; media, um caso simples ou a letra com UMA troca sutil;
+       dificil, dois dispositivos ou uma excecao, um detalhe que muda a
+       resposta, e as cinco plausiveis; em Portugues e Raciocinio Logico, o
+       mesmo espirito pela regra;
+     - **6A, o campo** (banco na versao 8; o passo 8 so exporta, com a copia
+       antes): quatro colunas em `questoes_geradas` - `nivel`,
+       `por_que_o_nivel`, `nivel_procedencia` e `suspeita`. A procedencia do
+       nivel e separada do `modelo` porque as 911 antigas foram escritas num
+       dia e serao classificadas em outro; a `suspeita` (a classificacao
+       desconfiou do gabarito ou da lei) so e listada, nunca rejeita nada. As
+       antigas ficam nulas - "sem nivel" -, como na decisao 39. O JSON antigo,
+       sem as chaves, entra sem nivel; o nivel fora da lista tambem (o log
+       diz); e a gerada que ja estava no banco ganha o nivel do arquivo so
+       quando nao tem um (o `git pull` da classificacao feita em outra
+       maquina). A questao diz "🟣 Gerada por IA · Dificil" ("· sem nivel"
+       enquanto nao houver), e o porque do nivel so aparece depois de
+       responder: ele pode entregar a resposta, como a letra (decisao 148).

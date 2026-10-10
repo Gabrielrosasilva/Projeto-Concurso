@@ -3479,3 +3479,32 @@ matérias - "sem. 1: 41% em 22 · sem. 2: 49% em 35".
 diagnóstico; o plano e a tela dizem o que decide o Ciclo 2; o anotado tem
 uma regra só; a ficha não entrega o gabarito antes da resposta; o "caiu" não
 afirma além da base; a seta só sai com amostra.
+
+## O nível das questões geradas (pedido de 09/10/2026, decisão 151)
+
+**Proposta aprovada** com as quatro recomendações: no pedido de um nível só,
+a questão de outro nível entra e conta na diferença; a misturada no treino
+traz todas as do nó, de qualquer nível; o "só havia N" pede as que faltam
+com o piso de 5; e a `suspeita` fica guardada, só listada.
+
+**6A - o campo.**
+
+- **O código:** `src/radar/niveis.py` (novo: as três chaves, os rótulos, os
+  critérios, `normalizar`, `rotulo_do_selo`); `models.QuestaoGerada` com
+  `nivel`, `por_que_o_nivel`, `nivel_procedencia` e `suspeita`;
+  `migracoes._passo_8` (versão 8); `acervo.importar_geradas` com
+  `_nivel_da_linha`; `questao.html` (o rótulo e o porquê depois de
+  responder).
+- **Testes:** `test_nivel_das_geradas` (11: o módulo, a migração de um banco
+  da versão 7, o JSON antigo e o novo, o nível fora da lista, o nível que
+  chega depois, o rótulo e o porquê); com os arquivos tocados
+  (`test_migracoes`, `test_migracao`, `test_acervo`, `test_ia_manual`,
+  `test_gerador`, `test_geracao_por_conteudo`, `test_correcao_na_hora`,
+  `test_treinar_pelo_no`, `test_geradas_*`, `test_design`, `test_origem`,
+  `test_simulado`): 359 passed.
+
+**Rodado de verdade:** `radar migrar` - versão 7 para 8, nenhuma linha
+perdida (921 geradas antes e depois), cópia em
+`data/copias/migracao-v7-para-v8-2026-10-09-223948`; o JSON ficou com 921, as
+921 com `nivel: null`. A rodada 24 (geradas, em andamento) mostra "🟣 Gerada
+por IA · sem nível".

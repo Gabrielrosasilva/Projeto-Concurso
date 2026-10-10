@@ -503,6 +503,24 @@ class QuestaoGerada(Base):
     alternativas: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     resposta: Mapped[str | None] = mapped_column(String(1), nullable=True)
 
+    # --- o nivel (decisao 151) ---------------------------------------------
+    #
+    # O que a IA DECLARA, com a procedencia dela; nunca mede nada. Nulos nas
+    # geradas de antes da versao 8 do banco: o nivel delas vem de uma
+    # classificacao feita depois, e inventar um agora seria dizer que alguem
+    # o declarou.
+
+    #: facil | media | dificil, de `radar.niveis.NIVEIS`. Nulo = "sem nivel".
+    nivel: Mapped[str | None] = mapped_column(String(10), index=True, nullable=True)
+    #: A linha em que a IA justifica o nivel, pelo criterio do pedido.
+    por_que_o_nivel: Mapped[str | None] = mapped_column(Text, nullable=True)
+    #: Quem declarou o nivel e quando. Separada do `modelo` porque a questao
+    #: antiga foi escrita num dia e classificada em outro.
+    nivel_procedencia: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    #: O motivo, quando a classificacao desconfiou do gabarito ou da lei. So
+    #: e LISTADA para eu conferir: nada e rejeitado por ela.
+    suspeita: Mapped[str | None] = mapped_column(Text, nullable=True)
+
     #: Hash do enunciado, igual ao das questoes reais. E a chave do arquivo
     #: versionado, e e o que impede pagar duas vezes pela mesma questao e
     #: gerar a mesma pergunta de novo.
