@@ -93,6 +93,9 @@ class MateriaNaTela:
     radar: object = field(default_factory=metricas.Numeros)         # medido no radar
     anotado: object = field(default_factory=metricas.Numeros)       # faixas + extras
     sem_consulta: object = field(default_factory=metricas.Numeros)  # o que vale para a meta
+    # O treino de IA pela 1a vez em cada gerada (decisao 152): o NIVEL, e nao
+    # o volume do `geral`. Nunca entra no acerto da materia.
+    treino_ia: object = field(default_factory=metricas.TreinoDeIA)
     minutos: int = 0
     ultima_vez: date | None = None
     aulas_vistas: int = 0
@@ -275,6 +278,9 @@ def montar(plano=None, hoje: date | None = None) -> tuple[list[MateriaNaTela], P
 
     for nome, linhas in da_materia.items():
         cartao = cartoes[nome]
+        # A materia da gerada casa pelo mesmo `_achar` dos lancamentos.
+        cartao.treino_ia = metricas.treino_ia_de(
+            lambda _conteudo, materia, nome=nome: _achar(materia, nomes) == nome)
         conta = metricas.contar(linhas)
         cartao.geral = conta.total
         cartao.radar = conta.radar

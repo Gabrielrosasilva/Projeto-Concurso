@@ -688,20 +688,246 @@ def erros_das_rodadas(simulado_ids: list[int]) -> list[RespostaDeSimulado]:
     return sorted(respostas, key=lambda r: (posicao[r.simulado_id], r.ordem))
 
 
-def treino_ia_dos_nos(nos) -> Numeros:
-    """O treino de IA de um tema: toda resposta a questao gerada que aponta
-    para um destes nos ou para um no abaixo deles. So `ia` e `ia_acertos`.
+# --- o treino de IA honesto (decisao 152) -----------------------------------
+#
+# Duas perguntas, dois numeros. O VOLUME ("o que eu fiz": o "Fiz hoje", as
+# Semanas, a Conferencia) conta toda resposta - e o `Conta.treino_ia`, que
+# nao muda. O NIVEL ("o quanto eu sei": a faixa, a ficha, Minhas materias, o
+# Simulado e a tela de gerar) conta so a PRIMEIRA resposta de cada gerada: na
+# segunda volta eu acerto por lembrar da questao, e o numero subia sozinho. A
+# repeticao vira REVISAO, um numero ao lado; o chute fica ao lado (o
+# "firme"); e a variacao de questao real e o do zero, cada um com a sua base.
+# Nada disto entra no acerto das reais.
 
-    E o sinal de que eu estou treinando o tema, na faixa e na ficha - um
-    numero a parte, que nunca entra no acerto do tema (decisao 138). Conta
-    resposta, como o volume do dia: refazer a mesma gerada conta de novo.
+
+@dataclass(frozen=True)
+class TreinoDeIA:
+    """O treino de IA de um recorte, pela 1a vez em cada questao gerada."""
+
+    #: A 1a resposta de cada gerada: quantas geradas diferentes, e acertos.
+    respondidas: int = 0
+    acertos: int = 0
+    #: As respostas depois da 1a (refazer a mesma gerada): a revisao.
+    revisao: int = 0
+    revisao_acertos: int = 0
+    #: Das 1as, as marcadas "vou no chute" (decisao 142), e as que deram certo.
+    #: A resposta de antes de 07/10, sem o chute registrado, conta como nao
+    #: chutada: nao havia como marcar.
+    chutes: int = 0
+    chutes_certos: int = 0
+    #: As 1as, separadas: variacao de questao real e do zero.
+    variacao: int = 0
+    variacao_acertos: int = 0
+    do_zero: int = 0
+    do_zero_acertos: int = 0
+    #: O minimo de 1as respostas do `config/amostra.yml` (secao treino_ia).
+    minimo: int = 0
+    origem: str = IA
+
+    @property
+    def vazio(self) -> bool:
+        return not (self.respondidas or self.revisao)
+
+    @property
+    def porcentagem(self) -> int | None:
+        return _por_cento(self.acertos, self.respondidas)
+
+    @property
+    def suficiente(self) -> bool:
+        return self.respondidas >= self.minimo
+
+    @property
+    def firmes(self) -> int:
+        """As 1as que nao foram no chute: o chute certo e o errado saem os dois."""
+        return self.respondidas - self.chutes
+
+    @property
+    def porcentagem_firme(self) -> int | None:
+        return _por_cento(self.acertos - self.chutes_certos, self.firmes)
+
+    @property
+    def porcentagem_variacao(self) -> int | None:
+        return _por_cento(self.variacao_acertos, self.variacao)
+
+    @property
+    def porcentagem_do_zero(self) -> int | None:
+        return _por_cento(self.do_zero_acertos, self.do_zero)
+
+    @property
+    def amostra(self) -> str | None:
+        """"Amostra insuficiente" abaixo do minimo; None quando vale."""
+        return None if self.suficiente else regua.INSUFICIENTE
+
+    # --- os textos (uma funcao so para a tela e o terminal) ----------------
+
+    def _firme(self) -> str | None:
+        if not self.chutes or self.porcentagem_firme is None:
+            return None
+        chutes = "o chute" if self.chutes == 1 else f"os {self.chutes} chutes"
+        return f"firme: {self.porcentagem_firme}%, sem {chutes}"
+
+    def _revisao(self) -> str | None:
+        if not self.revisao:
+            return None
+        return f"revisão: {self.revisao_acertos} de {self.revisao}"
+
+    def _modos(self) -> str | None:
+        partes = []
+        if self.variacao:
+            partes.append(f"variação de questão real: {self.porcentagem_variacao}% "
+                          f"em {self.variacao}")
+        if self.do_zero:
+            partes.append(f"do zero: {self.porcentagem_do_zero}% em {self.do_zero}")
+        return " · ".join(partes) or None
+
+    def _primeira(self, dizer_a_vez: bool = True) -> str:
+        if not self.respondidas:
+            return "nenhuma na 1ª vez"
+        vez = " na 1ª vez" if dizer_a_vez else ""
+        base = f"{self.acertos} de {self.respondidas}{vez} ({self.porcentagem}%"
+        return base + (f", {self.amostra.lower()})" if self.amostra else ")")
+
+    def frase_da_faixa(self) -> str | None:
+        """Uma linha, para a faixa: "Treino de IA: 7 de 10 na 1ª vez (70%,
+        amostra insuficiente) · firme: 71%, sem os 3 chutes · revisão: 4 de 5
+        · fora do acerto"."""
+        if self.vazio:
+            return None
+        partes = [f"Treino de IA: {self._primeira()}", self._firme(), self._revisao(),
+                  "fora do acerto"]
+        return " · ".join(p for p in partes if p)
+
+    def linhas_da_ficha(self) -> list[str]:
+        """As linhas da ficha (e do `radar fichas --tema`), com o minimo dito."""
+        if self.vazio:
+            return []
+        primeira = ("Treino de IA neste tema, na 1ª vez em cada questão: "
+                    f"{self._primeira(dizer_a_vez=False)}")
+        if self.amostra:
+            primeira += f": o mínimo aqui é {self.minimo}"
+        linhas = [primeira + "."]
+        if self._firme():
+            linhas.append(self._firme()[0].upper() + self._firme()[1:] + ".")
+        if self._modos():
+            linhas.append(self._modos()[0].upper() + self._modos()[1:] + ".")
+        if self.revisao:
+            linhas.append(f"Revisão: {self.revisao_acertos} de {self.revisao} em questões "
+                          f"que você já tinha feito.")
+        linhas.append("Não entra no acerto.")
+        return linhas
+
+    def frase_da_materia(self) -> str | None:
+        """A linha de Minhas materias."""
+        if self.vazio:
+            return None
+        partes = [f"Treino de IA: {self._primeira()}", self._firme(), self._modos(),
+                  self._revisao(), "fora do acerto"]
+        return " · ".join(p for p in partes if p)
+
+
+def _por_cento(acertos: int, base: int) -> int | None:
+    return round(100 * acertos / base) if base else None
+
+
+def _respostas_das_geradas() -> list:
+    """Toda resposta a gerada, na ordem em que eu dei: a 1a de cada questao
+    e a que vem antes."""
+    criar_tabelas()
+    with sessao() as s:
+        return s.execute(
+            select(RespostaDeSimulado.id, RespostaDeSimulado.questao_id,
+                   RespostaDeSimulado.acertou, RespostaDeSimulado.chutou,
+                   QuestaoGerada.conteudo, QuestaoGerada.materia, QuestaoGerada.modo)
+            .join(QuestaoGerada, QuestaoGerada.id == RespostaDeSimulado.questao_id)
+            .where(RespostaDeSimulado.gerada.is_(True))
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .order_by(RespostaDeSimulado.respondida_em, RespostaDeSimulado.id)
+        ).all()
+
+
+def ids_das_primeiras() -> set[int]:
+    """Os ids das respostas que foram a 1a vez de cada gerada."""
+    vistas, primeiras = set(), set()
+    for linha in _respostas_das_geradas():
+        if linha.questao_id not in vistas:
+            primeiras.add(linha.id)
+        vistas.add(linha.questao_id)
+    return primeiras
+
+
+def _treino_das(linhas, minimo: int) -> TreinoDeIA:
+    """A conta, uma so: a 1a resposta de cada gerada vai para o nivel, as
+    seguintes para a revisao."""
+    vistas: set[int] = set()
+    n = dict(respondidas=0, acertos=0, revisao=0, revisao_acertos=0, chutes=0,
+             chutes_certos=0, variacao=0, variacao_acertos=0, do_zero=0,
+             do_zero_acertos=0)
+    for linha in linhas:
+        acertou = bool(linha.acertou)
+        if linha.questao_id in vistas:
+            n["revisao"] += 1
+            n["revisao_acertos"] += acertou
+            continue
+        vistas.add(linha.questao_id)
+        n["respondidas"] += 1
+        n["acertos"] += acertou
+        if linha.chutou:
+            n["chutes"] += 1
+            n["chutes_certos"] += acertou
+        modo = "variacao" if linha.modo == "variacao" else "do_zero"
+        n[modo] += 1
+        n[f"{modo}_acertos"] += acertou
+    return TreinoDeIA(minimo=minimo, **n)
+
+
+def _nivel_do_caminho(no: str) -> str:
+    from radar.conteudos import SEPARADOR
+
+    partes = no.count(SEPARADOR) + 1
+    return regua.NIVEIS[min(partes, len(regua.NIVEIS)) - 1]
+
+
+def treino_ia_dos_nos(nos) -> TreinoDeIA:
+    """O treino de IA de um tema (a faixa e a ficha): a 1a resposta de cada
+    gerada que aponta para um destes nos ou para um abaixo deles.
+
+    Um numero a parte, que nunca entra no acerto do tema (decisao 138). O
+    minimo e o do no mais largo entre os do tema: um assunto junto de um
+    subassunto pede o do assunto (decisao 152).
     """
     from radar.conteudos import SEPARADOR
 
     nos = [n for n in dict.fromkeys(nos or ()) if n]
-    numeros = Numeros()
     if not nos:
-        return numeros
+        return TreinoDeIA()
+    minimos = regua.carregar()
+    minimo = max(minimos.do_treino_ia(_nivel_do_caminho(no)) for no in nos)
+    # Um no dentro do outro nao conta a resposta duas vezes: basta cair em um.
+    dentro = [linha for linha in _respostas_das_geradas()
+              if linha.conteudo and any(linha.conteudo == no
+                                        or linha.conteudo.startswith(no + SEPARADOR)
+                                        for no in nos)]
+    return _treino_das(dentro, minimo)
+
+
+def treino_ia_de(pertence, nivel: str = "materia") -> TreinoDeIA:
+    """O treino de IA das geradas cuja (conteudo, materia) `pertence` aceita:
+    a linha de Minhas materias, que casa a materia pelo nome do edital."""
+    linhas = [linha for linha in _respostas_das_geradas()
+              if pertence(linha.conteudo, linha.materia)]
+    return _treino_das(linhas, regua.carregar().do_treino_ia(nivel))
+
+
+def treino_ia_por_materia() -> list[tuple[str, TreinoDeIA]]:
+    """[(materia, treino)] - o Simulado e a tela de gerar. A materia pelo
+    nome do edital, como no acerto das reais; na ordem do nome."""
+    nome = _nome_da_materia()
+    por_materia: dict[str, list] = {}
+    for linha in _respostas_das_geradas():
+        por_materia.setdefault(nome(linha.materia), []).append(linha)
+    minimo = regua.carregar().do_treino_ia("materia")
+    return [(materia, _treino_das(linhas, minimo))
+            for materia, linhas in sorted(por_materia.items())]
     criar_tabelas()
     with sessao() as s:
         linhas = s.execute(
@@ -770,6 +996,12 @@ def desempenho_das_geradas(simulado_id: int | None = None) -> list[DesempenhoDaM
     diferentes: "quanto eu acerto do que a banca cobrou" e "quanto eu acerto
     no treino que eu mandei escrever".
     """
+    if simulado_id is None:
+        # O acumulado conta a 1a vez de cada gerada (decisao 152), como o das
+        # reais conta uma vez por questao. A rodada conta o que foi feito nela.
+        return _pior_primeiro([
+            DesempenhoDaMateria(materia, treino.respondidas, treino.acertos, origem=IA)
+            for materia, treino in treino_ia_por_materia() if treino.respondidas])
     return _por_materia_das_respostas(QuestaoGerada, True, simulado_id)
 
 
@@ -794,9 +1026,10 @@ class AcertoDoNivel:
 
 def acerto_das_geradas_por_nivel(simulado_id: int) -> list[AcertoDoNivel]:
     """Facil, media, dificil e sem nivel, nessa ordem, de uma rodada: so os
-    niveis que tem resposta. Conta as respostas da rodada, como o "Por
-    materia" do relatorio."""
+    niveis que tem resposta, e so a 1a vez de cada gerada (decisao 152): a
+    que eu ja tinha feito antes e revisao, contada em `revisao_da_rodada`."""
     criar_tabelas()
+    primeiras = ids_das_primeiras()
     with sessao() as s:
         linhas = s.execute(
             select(QuestaoGerada.nivel, RespostaDeSimulado)
@@ -807,9 +1040,26 @@ def acerto_das_geradas_por_nivel(simulado_id: int) -> list[AcertoDoNivel]:
         ).all()
     por_nivel: dict[str | None, list] = {}
     for nivel, resposta in linhas:
+        if resposta.id not in primeiras:
+            continue
         por_nivel.setdefault(nivel if nivel in niveis.NIVEIS else None, []).append(resposta)
     return [AcertoDoNivel(chave, *placar(por_nivel[chave]))
             for chave in (*niveis.NIVEIS, None) if chave in por_nivel]
+
+
+def revisao_da_rodada(simulado_id: int) -> tuple[int, int]:
+    """(acertos, respondidas) das geradas desta rodada que eu ja tinha feito
+    antes: a revisao, ao lado do acerto por nivel (decisao 152)."""
+    criar_tabelas()
+    primeiras = ids_das_primeiras()
+    with sessao() as s:
+        respostas = list(s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.gerada.is_(True))
+            .where(RespostaDeSimulado.escolhida.is_not(None))))
+    refeitas = [r for r in respostas if r.id not in primeiras]
+    return sum(1 for r in refeitas if r.acertou), len(refeitas)
 
 
 def resumo_do_simulado(simulado_id: int) -> dict:

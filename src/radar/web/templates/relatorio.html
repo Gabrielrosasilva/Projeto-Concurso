@@ -126,7 +126,7 @@
       <h2 class="ds-cartao__titulo">Por nível</h2>
       {{ selo(acerto_por_nivel[0].origem) }}
     </div>
-    <p class="ds-cartao__meta">O nível que a IA declarou para cada questão. Treino: não mede o que a banca cobra.</p>
+    <p class="ds-cartao__meta">O nível que a IA declarou para cada questão, na 1ª vez em que você a fez. Treino: não mede o que a banca cobra.</p>
     <table>
       <tr><th>Nível</th><th class="n">Acerto</th><th class="n">Questões</th><th></th></tr>
       {% for n in acerto_por_nivel %}
@@ -138,7 +138,10 @@
         </tr>
       {% endfor %}
     </table>
+    {% if revisao_da_rodada[1] %}<p class="ds-pequeno">Revisão: {{ revisao_da_rodada[0] }} de {{ revisao_da_rodada[1] }} em questões que você já tinha feito (fora da tabela).</p>{% endif %}
   </section>
+  {% elif revisao_da_rodada and revisao_da_rodada[1] %}
+  <p class="ds-pequeno" style="margin-top:var(--esp-4)">{{ selo('ia', curto=True) }} Revisão: {{ revisao_da_rodada[0] }} de {{ revisao_da_rodada[1] }} em questões que você já tinha feito.</p>
   {% endif %}
 
   {# ------------------------------------------------------ os erros ----- #}

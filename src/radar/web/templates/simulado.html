@@ -217,23 +217,31 @@
 
     {# O segundo numero, e nunca somado ao primeiro: acertar uma variacao que
        a IA escreveu nao e a mesma coisa que acertar o que a banca cobrou. #}
-    {% if desempenho_das_geradas %}
+    {# O treino de IA pela 1a vez em cada gerada (decisao 152): refazer a
+       mesma questao e revisao, ao lado; variacao e do zero com a sua base.
+       As contas sao do servico.metricas; aqui so se desenha. #}
+    {% if treino_ia_por_materia %}
       <section class="ds-cartao cartao-simulado">
-        <h2 class="ds-cartao__titulo">{{ selo(desempenho_das_geradas[0].origem) }} Nas questões geradas</h2>
+        <h2 class="ds-cartao__titulo">{{ selo(treino_ia_por_materia[0][1].origem) }} Nas questões geradas</h2>
         <p class="ds-cartao__meta">
           <b>{{ FRASE_DA_QUESTAO_DE_IA }}</b> Número à parte, de propósito:
-          isto é treino, e não medida do que a FEPESE cobra.
+          isto é treino, e não medida do que a FEPESE cobra. Conta a 1ª vez em
+          cada questão; refazer a mesma é revisão, ao lado.
         </p>
+        <div class="ds-rolagem">
         <table class="ds-tabela">
-          <tr><th>Matéria</th><th class="ds-n">Acerto</th><th class="ds-n">Feitas</th></tr>
-          {% for d in desempenho_das_geradas %}
+          <tr><th>Matéria</th><th class="ds-n">1ª vez</th><th class="ds-n">Revisão</th>
+            <th>Variação · do zero</th></tr>
+          {% for materia, t in treino_ia_por_materia %}
             <tr>
-              <td>{{ d.materia }}</td>
-              <td class="ds-n">{{ '%.0f'|format(d.porcentagem) }}%</td>
-              <td class="ds-n">{{ d.respondidas }}</td>
+              <td>{{ materia }}</td>
+              <td class="ds-n">{% if t.respondidas %}{{ t.porcentagem }}% em {{ t.respondidas }}{% if t.amostra %}<br><span class="ds-suave">{{ t.amostra }}</span>{% endif %}{% else %}&mdash;{% endif %}</td>
+              <td class="ds-n">{% if t.revisao %}{{ t.revisao_acertos }} de {{ t.revisao }}{% else %}&mdash;{% endif %}</td>
+              <td>{% if t.variacao %}{{ t.porcentagem_variacao }}% em {{ t.variacao }}{% else %}&mdash;{% endif %} · {% if t.do_zero %}{{ t.porcentagem_do_zero }}% em {{ t.do_zero }}{% else %}&mdash;{% endif %}</td>
             </tr>
           {% endfor %}
         </table>
+        </div>
       </section>
     {% endif %}
 

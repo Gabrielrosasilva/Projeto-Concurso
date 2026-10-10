@@ -3209,6 +3209,12 @@ def _mostrar_geradas_da_faixa(gf) -> None:
         console.print("     [dim]2º Não há como gerar questão deste tema: a árvore não tem "
                       "nó para ele.[/]")
         return
+    # O treino de IA do tema pela 1a vez em cada gerada (decisao 152), na
+    # mesma frase da faixa da tela.
+    treino = servico.metricas.treino_ia_dos_nos(n.no for n in gf.nos)
+    if not treino.vazio:
+        console.print(f"     [dim]{_selo('ia')} {escape(treino.frase_da_faixa())}.[/]",
+                      soft_wrap=True)
     for n in gf.nos:
         if n.geradas:
             console.print(f"     [dim]2º {n.geradas} questões geradas de {escape(n.nome)}: "
@@ -3368,6 +3374,9 @@ def _mostrar_ficha(f) -> None:
              f"complementar): comece por elas.")
     item("ia", f"Geradas por IA neste conteúdo: {len(f.geradas)} (não são questões "
          f"oficiais da FEPESE).")
+    # O treino de IA do tema, pela 1a vez em cada gerada (decisao 152).
+    for linha in servico.metricas.treino_ia_dos_nos(f.nos).linhas_da_ficha():
+        console.print(f"     {escape(linha)}", soft_wrap=True)
     for no in f.nos:
         console.print(f"     {escape(fichas_puras.comando_de_gerar(no))}", soft_wrap=True)
     if f.nos:

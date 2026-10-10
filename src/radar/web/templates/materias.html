@@ -168,8 +168,9 @@
             <p class="de-onde">medido no radar: {{ m.radar.porcentagem }}% em {{ m.radar.medidas }} ·
               anotado: {{ m.anotado.porcentagem }}% em {{ m.anotado.medidas }}</p>
           {% endif %}
-          {% if m.geral.ia %}
-            <p class="de-onde">{{ frase_da_ia(m.geral) }}</p>
+          {# O treino de IA pela 1a vez em cada gerada (decisao 152). #}
+          {% if m.treino_ia and not m.treino_ia.vazio %}
+            <p class="de-onde">{{ m.treino_ia.frase_da_materia() }}</p>
           {% endif %}
 
           {# A barra: o meu acerto sem consulta contra a meta da materia. #}

@@ -290,8 +290,10 @@
     <p class="subtitulo">{{ s(f.origens.geradas) }} Questões geradas por IA neste conteúdo. {{ FRASE_DA_QUESTAO_DE_IA }}</p>
     {# O sinal de treino do tema (decisao 138): a conta e do metricas, e
        nunca entra no acerto do tema. #}
-    {% if treino_ia and treino_ia.ia %}
-      <p>{{ s(f.origens.geradas) }} Treino de IA neste tema: {{ treino_ia.ia_acertos }} de {{ treino_ia.ia }} ({{ treino_ia.porcentagem_ia }}%) · não entra no acerto.</p>
+    {# Pela 1a vez em cada gerada, com o minimo, o firme, a variacao e o do
+       zero, e a revisao (decisao 152): as linhas sao do metricas. #}
+    {% if treino_ia and not treino_ia.vazio %}
+      {% for linha in treino_ia.linhas_da_ficha() %}<p{% if not loop.first %} class="ds-pequeno"{% endif %}>{% if loop.first %}{{ s(f.origens.geradas) }} {% endif %}{{ linha }}</p>{% endfor %}
     {% endif %}
     {% if f.geradas %}
       <ul class="marcas">

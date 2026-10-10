@@ -20,6 +20,11 @@
 #              lidos por src/radar/amostra.py.
 #
 # As duas secoes nunca se somam: uma fala da banca, a outra de mim.
+#
+#   treino_ia - o que se diz sobre mim nas questoes GERADAS (decisao 152):
+#              quantas primeiras respostas (uma por gerada) cada nivel da
+#              arvore precisa para o "Treino de IA" valer. Fica separado do
+#              desempenho porque a gerada nao mede: ela treina.
 
 acervo:
   minimo_questoes: 3
@@ -76,3 +81,19 @@ desempenho:
   bom_desempenho:
     vezes_o_minimo: 2
     dias_distintos: 2
+
+treino_ia:
+  # Quantas PRIMEIRAS respostas (uma por questao gerada; refazer nao conta)
+  # cada nivel precisa para o numero do treino de IA valer. Abaixo disto ele
+  # aparece com "Amostra insuficiente" e nao tira conclusao.
+  #
+  # Mais alto que o das reais, de proposito: cada no tem umas 20 geradas no
+  # estoque, entao da para chegar la (10 no subassunto e meia volta), e a
+  # gerada e menos confiavel que a questao da banca - a maioria foi escrita
+  # do zero, sem questao da FEPESE por tras -, e precisa de mais base para
+  # dizer alguma coisa. O elemento (um artigo) pede o mesmo do subassunto.
+  minimos:
+    materia: 30
+    assunto: 15
+    subassunto: 10
+    elemento: 10

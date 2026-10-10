@@ -35,7 +35,7 @@ aqui, na mesma data.
 Modulo puro: recebe contagem e devolve estado. Quem varre o banco e o
 `servico/desempenho.py`.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
@@ -93,10 +93,23 @@ class Minimos:
     #: pendencia B.8). Tambem da secao `acervo`: fala da classificacao dele.
     amostra_do_catalogo: int = 20
 
+    #: As primeiras respostas que o treino de IA precisa em cada nivel (secao
+    #: `treino_ia`, decisao 152). Nunca se mistura com `por_nivel`: a gerada
+    #: treina, e o minimo dela e outra regua.
+    treino_ia: dict[str, int] = field(default_factory=lambda: dict(MINIMOS_DO_TREINO_IA))
+
     def do_nivel(self, nivel: str) -> int:
         """O minimo daquele nivel. Nivel que eu nao conheco usa o da materia,
         que e o mais exigente: na duvida, medir menos e nao medir errado."""
         return int(self.por_nivel.get(nivel, self.por_nivel.get("materia", 20)))
+
+    def do_treino_ia(self, nivel: str) -> int:
+        """O minimo do treino de IA naquele nivel; o da materia na duvida."""
+        return int(self.treino_ia.get(nivel, self.treino_ia.get("materia", 30)))
+
+
+#: Os valores da decisao 152, para o caso de o arquivo nao trazer a secao.
+MINIMOS_DO_TREINO_IA = {"materia": 30, "assunto": 15, "subassunto": 10, "elemento": 10}
 
 
 #: Os valores da decisao 6, para o caso de o arquivo nao existir (teste que
@@ -120,6 +133,10 @@ def carregar(caminho: Path | None = None) -> Minimos:
 
     bom = secao.get("bom_desempenho") or {}
     acervo = dados.get("acervo") or {}
+    treino_ia = dict(MINIMOS_DO_TREINO_IA)
+    for nivel, valor in ((dados.get("treino_ia") or {}).get("minimos") or {}).items():
+        if nivel in NIVEIS:
+            treino_ia[nivel] = int(valor)
     return Minimos(
         por_nivel=por_nivel,
         precisa_revisar_abaixo_de=int(
@@ -134,6 +151,7 @@ def carregar(caminho: Path | None = None) -> Minimos:
             acervo.get("provas_para_tendencia", PADRAO.provas_para_tendencia)),
         amostra_do_catalogo=int(
             acervo.get("amostra_do_catalogo", PADRAO.amostra_do_catalogo)),
+        treino_ia=treino_ia,
     )
 
 

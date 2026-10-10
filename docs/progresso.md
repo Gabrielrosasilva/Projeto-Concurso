@@ -3599,3 +3599,39 @@ Depois, o `--classificar-nivel` sem matéria não lista nenhuma: 0 sem nível.
 nível vai no comando de gerar em todo lugar; o treino escolhe o nível e
 nunca completa com outro; a misturada; o acerto por nível à parte; as 911
 classificadas, com as suspeitas listadas.
+
+## O número do treino de IA honesto (10/10/2026, decisão 152)
+
+**Proposta aprovada** inteira: os mínimos 10/15/10/30, o firme sem os chutes
+(os certos e os errados), o "Por nível" da rodada pela 1ª vez, e a linha do
+tema no `radar hoje` e no `radar fichas --tema`.
+
+- **O código:** `config/amostra.yml` (a seção `treino_ia`) e
+  `radar/amostra.py` (`MINIMOS_DO_TREINO_IA`, `Minimos.treino_ia`,
+  `do_treino_ia`); `servico/metricas.py` (`TreinoDeIA` e as frases,
+  `_respostas_das_geradas`, `ids_das_primeiras`, `_treino_das`,
+  `treino_ia_dos_nos`, `treino_ia_de`, `treino_ia_por_materia`, o
+  `desempenho_das_geradas()` sem id, o `acerto_das_geradas_por_nivel` pela
+  1ª vez e `revisao_da_rodada`); `servico/materias.py` (o `treino_ia` do
+  cartão); `app.py`; `hoje.html`, `ficha.html`, `materias.html`,
+  `simulado.html`, `geradas.html` e `relatorio.html`; `cli.py` (a faixa do
+  `radar hoje` e o `radar fichas --tema`).
+- **Testes:** `test_treino_ia_honesto` (14: a gerada respondida 3 vezes conta 1
+  no nível e 2 na revisão; o volume do dia não muda; a 1ª vez pela ordem; o
+  firme sem os chutes; sem chute, sem firme; os mínimos do config e do
+  arquivo; abaixo do mínimo, "Amostra insuficiente"; a revisão não completa o
+  mínimo; o tema de vários nós; variação e do zero separados; nada no acerto
+  das reais; o "Por nível" da rodada pela 1ª vez; o Simulado e a tela de
+  gerar); `test_fiz_no_radar` e `test_materias_na_tela` atualizados para a
+  regra nova. Com os arquivos tocados (31 de teste): 755 passed e 1 falha
+  esperada (a frase antiga de Minhas matérias), atualizada. A suíte inteira,
+  você roda no fim.
+
+**Rodado de verdade** (banco real, só GET): o `radar hoje` de 09/10 - a faixa
+"🟣 Treino de IA: 7 de 10 na 1ª vez (70%) · firme: 71%, sem os 3 chutes ·
+fora do acerto", e o "Fiz hoje" ainda "Treino de IA no radar: 10 questões"
+(volume); a ficha dos Deveres e direitos do preso e o `radar fichas --tema`
+dela, com o firme e a variação de 67% em 6 contra 75% em 4; o Simulado - a
+LEP "61% em 31", revisão "4 de 5", e as outras com "Amostra insuficiente"; a
+tela de gerar - "61% (31; revisão 4 de 5)"; Minhas matérias - "7 de 17 na 1ª
+vez (41%, amostra insuficiente)" em Penal.

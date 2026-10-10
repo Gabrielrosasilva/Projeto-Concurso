@@ -126,8 +126,8 @@ def test_o_treino_de_ia_do_tema_conta_os_nos_dele(banco_temporario):
         s.add_all([no, abaixo, fora])
         s.flush()
         quando = datetime(2026, 9, 28, 10, 0, tzinfo=fuso_local())
-        # Uma rodada por resposta: a mesma gerada respondida duas vezes conta
-        # duas, como no volume do dia.
+        # Uma rodada por resposta. A mesma gerada respondida duas vezes conta
+        # uma no tema (a 1a vez) e uma na revisao (decisao 152).
         for questao, acertou, gerada in [(no, True, True), (no, False, True),
                                          (abaixo, True, True), (fora, True, True),
                                          # Real com o mesmo id da gerada: fica fora.
@@ -140,7 +140,8 @@ def test_o_treino_de_ia_do_tema_conta_os_nos_dele(banco_temporario):
                                      acertou=acertou, respondida_em=quando))
 
     treino = metricas.treino_ia_dos_nos([NO])
-    assert (treino.ia, treino.ia_acertos, treino.medidas) == (3, 2, 0)
+    assert (treino.respondidas, treino.acertos) == (2, 2)
+    assert (treino.revisao, treino.revisao_acertos) == (1, 0)
     # O no de baixo junto com o de cima nao conta a resposta duas vezes.
-    assert metricas.treino_ia_dos_nos([NO, NO + " > Voz passiva"]).ia == 3
-    assert metricas.treino_ia_dos_nos([]).ia == 0
+    assert metricas.treino_ia_dos_nos([NO, NO + " > Voz passiva"]).respondidas == 2
+    assert metricas.treino_ia_dos_nos([]).vazio

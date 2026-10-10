@@ -253,6 +253,15 @@ responder), e o resultado da rodada tem o acerto por nivel, a parte. As 911
 antigas foram classificadas pelo `radar gerar --pedido --classificar-nivel`
 (478 faceis, 364 medias, 69 dificeis), com 8 suspeitas so listadas, por
 conferir (pendencia K).
+**O numero do treino de IA honesto (10/10, decisao 152; cabe na I3: corrige
+um numero):** o NIVEL do treino de IA (a faixa, a ficha, Minhas materias, o
+Simulado, a tela de gerar e o "Por nivel" da rodada) conta so a 1a resposta
+de cada gerada, e refazer vira REVISAO, ao lado; o VOLUME (o "Fiz hoje", as
+Semanas, a Conferencia) continua contando toda resposta. O chute fica ao lado
+no "firme", a variacao e o do zero saem separados, e abaixo do minimo da
+secao nova `treino_ia` do `config/amostra.yml` (10/15/10/30) o numero diz
+"Amostra insuficiente". Uma conta so, `metricas.treino_ia_dos_nos` e
+`treino_ia_por_materia`; nada disto entra no acerto das reais.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

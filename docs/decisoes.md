@@ -5014,3 +5014,50 @@ viraram estudo extra "Onde: Radar". Copia antes em
        dificeis, com 8 suspeitas (pendencia K). A regua variou entre as
        materias (Penal, 2 dificeis em 132; Raciocinio Logico, 14 em 35): e o
        que a IA declarou, e fica dito, em vez de "corrigido" por uma cota.
+
+## O numero do treino de IA honesto (10/10/2026)
+
+152. **o treino de IA conta a 1a tentativa de cada gerada** (complementa a
+     138 e a 142; pela I3, cabe antes de 07/11: corrige um numero). O
+     `treino_ia_dos_nos` e o acumulado das geradas contavam toda resposta, e
+     com umas 20 geradas por no a segunda volta sobe o numero sozinha, por
+     memoria da questao - no Trabalho do preso, 61% contra 56% na 1a vez,
+     porque a revisao estava em 80%. Aprovado por voce:
+     - **duas perguntas, dois numeros.** O VOLUME ("o que eu fiz") continua
+       contando toda resposta: o "Fiz hoje" da tela e do `radar hoje`, o aviso
+       da faixa, as Semanas e a Conferencia (o `Conta.treino_ia`, que nao
+       mudou). O NIVEL ("o quanto eu sei") conta so a 1a resposta de cada
+       gerada, pela ordem em que respondi: a faixa do Hoje e do `radar hoje`
+       (uma linha), a ficha e o `radar fichas --tema`, a linha de IA de
+       Minhas materias, o "Nas questoes geradas" do Simulado, a tabela da
+       tela Gerar questoes e o "Por nivel" do resultado da rodada;
+     - **a repeticao vira revisao**, um numero ao lado ("revisao: 4 de 5 em
+       questoes que voce ja tinha feito"), sem minimo e sem conclusao. No
+       resultado da rodada, a gerada que eu ja tinha feito sai do "Por nivel"
+       e vai para a linha da revisao; o "Resultado geral" e o "Por materia"
+       continuam contando a rodada inteira, que e o que aconteceu nela;
+     - **o chute ao lado, no "firme"**: o acerto das 1as respostas que nao
+       foram no chute - o chute certo e o errado saem os dois ("firme: 71%,
+       sem os 3 chutes", 5 de 7). A resposta de antes de 07/10, sem o chute
+       registrado, conta como nao chutada; o firme so aparece com chute
+       marcado;
+     - **o minimo na secao nova `treino_ia` do `config/amostra.yml`**, lida
+       pelo `radar/amostra.py` (`Minimos.do_treino_ia`): 10 primeiras
+       respostas no subassunto e no elemento, 15 no assunto, 30 na materia.
+       Acima da regua das reais (6/6/10/20) de proposito: cada no tem umas 20
+       geradas, entao da para chegar la, e a gerada e menos confiavel (a
+       maioria e do zero). No tema de varios nos vale o do mais largo. Abaixo
+       dele o numero diz "Amostra insuficiente" e nao tira conclusao; a
+       revisao nunca completa o minimo;
+     - **variacao de questao real e do zero lado a lado**, cada um com a sua
+       base ("variacao de questao real: 67% em 6 · do zero: 75% em 4");
+     - **o acerto por nivel (decisao 151) tambem pela 1a vez.**
+     Uma conta so, no `servico/metricas.py`: `TreinoDeIA` (os numeros e as
+     frases), `treino_ia_dos_nos`, `treino_ia_de` (Minhas materias, que casa
+     a materia pelo `_achar`), `treino_ia_por_materia` (Simulado e tela de
+     gerar; o `desempenho_das_geradas()` sem id passou a ser ele),
+     `ids_das_primeiras` e `revisao_da_rodada`. Nada disto entra no acerto das
+     reais, no Meu desempenho, na incidencia nem nas rodadas que medem. Com o
+     banco de 10/10: a LEP no Simulado foi de 23 de 36 (64%) para 19 de 31
+     (61%), com revisao 4 de 5; as outras materias nao mudaram (nenhuma
+     questao refeita). Direitos Humanos nao tem resposta a gerada ainda.

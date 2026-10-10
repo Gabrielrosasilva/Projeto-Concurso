@@ -312,8 +312,9 @@
         Dois números, sempre. Acertar uma variação que a IA escreveu não é a
         mesma coisa que acertar o que a banca cobrou.
         {{ selo('automatico') }} Nas reais, cada questão conta uma vez, pela
-        última resposta; nas geradas, conta cada tentativa. Entre parênteses,
-        a base de cada porcentagem.
+        última resposta; nas geradas, a 1ª resposta de cada uma - refazer a
+        mesma é revisão, contada à parte. Entre parênteses, a base de cada
+        porcentagem.
       </p>
       <div class="ds-rolagem">
         <table class="ds-tabela">
@@ -333,8 +334,9 @@
               </td>
               <td class="ds-n">
                 {% set g = desempenho_gerado.get(materia) %}
-                {% if g %}{{ '%.0f'|format(g.porcentagem) }}%
-                  <span class="dica">({{ g.respondidas }})</span>
+                {% if g and g.respondidas %}{{ g.porcentagem }}%
+                  <span class="dica">({{ g.respondidas }}{% if g.revisao %}; revisão {{ g.revisao_acertos }} de {{ g.revisao }}{% endif %})</span>
+                  {% if g.amostra %}<br><span class="dica">{{ g.amostra }}</span>{% endif %}
                 {% else %}&mdash;{% endif %}
               </td>
             </tr>

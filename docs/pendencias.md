@@ -520,3 +520,17 @@ dificeis). O que falta:
   ha botao).
 - ⚪ **Reinicie o servidor** depois do `git pull`: `radar parar` e `radar
   subir` (o banco migra sozinho para a versao 8 no primeiro comando).
+
+## L. O treino de IA honesto (decisao 152, 10/10)
+
+Feito: o nivel do treino de IA pela 1a vez em cada gerada, a revisao ao
+lado, o firme, a variacao e o do zero separados e o minimo do `treino_ia`.
+O que falta:
+
+- ⚪ **A suite inteira**, que voce roda no fim (aqui so os testes dos
+  arquivos tocados: 755 passed, mais a frase de Minhas materias atualizada).
+- ⚪ **Os minimos (10/15/10/30) sao a primeira regua.** Se, treinando, o
+  "Amostra insuficiente" ficar tempo demais na tela - ou sumir cedo demais -,
+  o ajuste e so no `config/amostra.yml`, secao `treino_ia`, sem codigo.
+- ⚪ **Direitos Humanos ainda nao tem resposta a gerada**: o numero dele
+  aparece quando houver treino.

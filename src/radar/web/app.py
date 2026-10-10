@@ -690,7 +690,9 @@ def _pagina_do_simulado(request: Request, simulado=None, **extra):
         "total_de_questoes": servico.contar_questoes(),
         "desempenho_geral": servico.desempenho(),
         # O segundo numero, sempre do lado e nunca somado ao primeiro.
-        "desempenho_das_geradas": servico.desempenho_das_geradas(),
+        # O treino de IA pela 1a vez em cada gerada, com a revisao e a
+        # amostra (decisao 152): a conta e do metricas.
+        "treino_ia_por_materia": servico.metricas.treino_ia_por_materia(),
         # As rodadas, cada uma com o botao de descartar.
         "rodadas": servico.listar_simulados(),
         # Os dois cadernos da fase 4: os meus erros, e o compilado pelos
@@ -813,6 +815,9 @@ def simulado_questao(request: Request, simulado_id: int, ver: int | None = None)
                 "falta": servico.geradas.falta_da_rodada(simulado) if de_ia else None,
                 "acerto_por_nivel": (servico.metricas.acerto_das_geradas_por_nivel(simulado_id)
                                      if de_ia else []),
+                # As que eu ja tinha feito antes: revisao, ao lado do nivel.
+                "revisao_da_rodada": (servico.metricas.revisao_da_rodada(simulado_id)
+                                      if de_ia else (0, 0)),
                 # O 🟣 de cada erro: a explicacao importada pelo caminho sem
                 # API, e o macete que cita aquela questao.
                 "explicacoes": servico.manual.carregar_explicacoes(),
@@ -1015,7 +1020,8 @@ def geradas(
                                             havia=0, nos=tuple(n for n in nos_da_falta if n))
 
     real = {d.materia: d for d in servico.desempenho()}
-    gerado = {d.materia: d for d in servico.desempenho_das_geradas()}
+    # Nas geradas, a 1a vez de cada uma (decisao 152), com a revisao ao lado.
+    gerado = dict(servico.metricas.treino_ia_por_materia())
 
     return templates.TemplateResponse(
         request=request,

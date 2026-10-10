@@ -1149,8 +1149,9 @@
                        resposta a gerada dos nos dele, de qualquer dia. A conta
                        e do metricas; nunca entra no acerto do tema. #}
                     {% set ti = treino_ia_das_faixas.get((b.chave, loop.index0)) if treino_ia_das_faixas else none %}
-                    {% if ti and ti.ia %}
-                      <p class="sub">{{ selo('ia', curto=True) }} Treino de IA neste tema: {{ ti.ia_acertos }} de {{ ti.ia }} ({{ ti.porcentagem_ia }}%) · não entra no acerto.</p>
+                    {# Pela 1a vez em cada gerada (decisao 152): a frase e do metricas. #}
+                    {% if ti and not ti.vazio %}
+                      <p class="sub">{{ selo('ia', curto=True) }} {{ ti.frase_da_faixa() }}.</p>
                     {% endif %}
                     {% if gf.sem_no %}
                       <p class="sub">Não há como gerar questão deste tema: a árvore não tem nó para ele (pendência).</p>

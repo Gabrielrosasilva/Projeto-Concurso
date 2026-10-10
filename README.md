@@ -1795,6 +1795,24 @@ geradas"; na aba Gerar questões, uma tabela com as duas colunas lado a lado. Na
 revisão do fim da rodada, cada questão gerada leva a marca "criada por IA" e o
 artigo que ela alega.
 
+**O treino de IA conta a 1ª vez de cada questão** (decisão 152). Refazer a
+mesma gerada não sobe o número: na segunda volta eu acerto por lembrar. Duas
+perguntas, dois números:
+
+- **o volume** ("o que eu fiz": o "Fiz hoje", as Semanas, a Conferência)
+  continua contando toda resposta;
+- **o nível** ("o quanto eu sei": a faixa, a ficha, Minhas matérias, o
+  Simulado, a tela Gerar questões e o "Por nível" do resultado da rodada)
+  conta só a 1ª resposta de cada gerada. A repetição vira **revisão**, ao
+  lado ("revisão: 4 de 5"); o chute fica ao lado no **firme** ("firme: 71%,
+  sem os 3 chutes"); e a variação de questão real e o do zero aparecem
+  separados, cada um com a sua base.
+
+Abaixo do mínimo do `config/amostra.yml` (seção `treino_ia`: 10 primeiras
+respostas no subassunto e no elemento, 15 no assunto, 30 na matéria), o
+número sai com "Amostra insuficiente". A conta é uma só, no
+`servico/metricas.py` (`treino_ia_dos_nos`, `treino_ia_por_materia`).
+
 ### O gabarito que vale e o definitivo
 
 O caderno de prova da FEPESE marca a alternativa certa dentro do proprio PDF, e

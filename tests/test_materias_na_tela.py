@@ -412,8 +412,9 @@ def test_a_tela_avisa_a_amostra_pequena(cliente, plano):
 def test_a_tela_mostra_o_treino_de_ia_a_parte(cliente, plano):
     _responder("Direito Penal", True, _em(SEG), gerada=True)
     texto = cliente.get("/analises/materias").text
-    assert ("Treino de IA no radar: 1 questão = 1 acerto + 0 erros (100%), "
-            "não entra no acerto") in texto
+    # O nivel, pela 1a vez em cada gerada, com a amostra (decisao 152).
+    assert ("Treino de IA: 1 de 1 na 1ª vez (100%, amostra insuficiente) · "
+            "do zero: 100% em 1 · fora do acerto") in texto
 
 
 def test_a_tela_desenha_o_grafico_sem_javascript(cliente, plano):
