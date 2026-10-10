@@ -3624,8 +3624,10 @@ tema no `radar hoje` e no `radar fichas --tema`.
   das reais; o "Por nível" da rodada pela 1ª vez; o Simulado e a tela de
   gerar); `test_fiz_no_radar` e `test_materias_na_tela` atualizados para a
   regra nova. Com os arquivos tocados (31 de teste): 755 passed e 1 falha
-  esperada (a frase antiga de Minhas matérias), atualizada. A suíte inteira,
-  você roda no fim.
+  esperada (a frase antiga de Minhas matérias), atualizada. **A suíte
+  inteira, a seu pedido: 2924 passed** (28 min). A primeira tentativa, de
+  00:54, travou sem terminar (o processo ficou parado por horas, sem saída);
+  foi encerrada e rodada de novo, inteira.
 
 **Rodado de verdade** (banco real, só GET): o `radar hoje` de 09/10 - a faixa
 "🟣 Treino de IA: 7 de 10 na 1ª vez (70%) · firme: 71%, sem os 3 chutes ·
