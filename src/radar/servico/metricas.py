@@ -834,6 +834,10 @@ def resumo_do_simulado(simulado_id: int) -> dict:
         # O "vou no chute" (decisao 142): ao lado do acerto, nunca dentro dele.
         "chutes": len(no_chute),
         "acertos_no_chute": sum(1 for r in no_chute if r.acertou),
+        # As duas contas inteiras da frase do relatorio: aqui, e nao no
+        # template (template nenhum soma).
+        "chutes_errados": sum(1 for r in no_chute if not r.acertou),
+        "acertos_sem_chute": acertos - sum(1 for r in no_chute if r.acertou),
     }
 
 
