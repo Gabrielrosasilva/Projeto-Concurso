@@ -134,6 +134,9 @@
     .faixa .geradas-da-faixa .treinar-no-radar{display:flex;flex-wrap:wrap;gap:var(--esp-2);
       align-items:center;margin:var(--esp-1) 0 0}
     .faixa .geradas-da-faixa .treinar-no-radar input[type=number]{width:4.5em}
+    /* O nivel do treino (decisao 151): na mesma linha do botao. */
+    .faixa .geradas-da-faixa .treinar-no-radar .nivel-do-treino{display:inline-block}
+    .faixa .geradas-da-faixa .treinar-no-radar .nivel-do-treino select{width:auto;padding:var(--esp-1) var(--esp-2);font-size:var(--tam-sm)}
 
     /* A composicao da faixa que mede (decisao 67): de quais assuntos e
        subassuntos sao as questoes, e de onde saiu cada numero. */
@@ -1166,6 +1169,7 @@
                             <input type="hidden" name="titulo" value="{{ f.titulo }}">
                             <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
                             <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}{% if n.feitas %}, você já fez {{ n.feitas }}{% endif %}</span>
+                            <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
                             <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar no radar</button>
                           </form>
                           {# O estoque que eu ja vi (decisao 142): o sorteio poe as
@@ -1188,6 +1192,7 @@
                           <input type="hidden" name="titulo" value="{{ f.titulo }}">
                           <label>Geral, tudo misturado:
                             <input type="number" name="quantidade" min="1" max="30" value="{{ gf.geral }}" aria-label="Quantas questões no treino geral"> questões</label>
+                          <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
                           <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar geral no radar</button>
                         </form>
                       {% endif %}

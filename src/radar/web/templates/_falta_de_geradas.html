@@ -1,0 +1,19 @@
+{# O "so havia N dificeis neste assunto" (decisao 151): a rodada veio com as
+   que ha, nunca completada com outro nivel, e os 3 passos para gerar mais
+   DAQUELE nivel. A frase e os comandos vem do servico; aqui so se desenha. #}
+{% from "_componentes.html" import selo %}
+{% macro falta_de_geradas(falta) %}
+{% if falta %}
+<div class="ds-bloco ds-bloco--ia falta-de-geradas" role="status">
+  <p>{{ selo('ia', curto=True) }} <b>{{ falta.frase }}</b>{% if falta.nivel != 'misturada' %} Nada foi completado com outro nível.{% endif %}</p>
+  {% if falta.comandos %}
+    <ol class="passos-de-gerar">
+      <li>No terminal:{% for c in falta.comandos %}<br><code>{{ c }}</code>{% endfor %}</li>
+      <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
+      <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
+    </ol>
+    <p class="ds-pequeno">{{ AVISO_DO_PEDIDO }}</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endmacro %}

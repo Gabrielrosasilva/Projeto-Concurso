@@ -4978,3 +4978,24 @@ viraram estudo extra "Onde: Radar". Copia antes em
        simulava outro pedido. Um teste varre as telas e o terminal atras de
        `gerar --pedido` sem `--nivel`, e outro proibe template de escrever o
        comando a mao.
+     - **6C, treinar por nivel**: o "Treinar com as que ja tenho" e os
+       botoes "Treinar no radar" e "Treinar geral no radar" da faixa ganharam
+       o seletor de nivel (o da faixa pequeno, na linha do botao), Misturada
+       por padrao. **Um nivel so traz as daquele nivel** - a sem nivel nao
+       entra - na ordem da decisao 142 (as nunca feitas primeiro, dentro do
+       nivel); **a misturada traz todas, de qualquer nivel, inclusive as sem
+       nivel** (aprovado na proposta: uma cota 3/4/3 no treino deixaria a
+       rodada vazia ate a classificacao das 911). **Nunca completa com outro
+       nivel**: com menos do que pedi, a rodada vem com as que ha e guarda o
+       `faltou`; a primeira questao e o resultado dizem "So havia 2 dificeis
+       neste assunto: a rodada veio com as que ha. Nada foi completado com
+       outro nivel.", com os 3 passos daquele nivel (`--nivel dificil
+       --quantas` as que faltam, no minimo 5, um pedido por no). Sem nenhuma
+       do nivel, nao ha rodada: a tela de gerar diz "Nao ha nenhuma questao
+       dificil neste assunto ainda." com os mesmos passos. A misturada tambem
+       avisa quando o no tem menos do que pedi ("So havia 3 questoes
+       geradas"). **O acerto por nivel** e o cartao "Por nivel 🟣" do
+       resultado da rodada de geradas (facil, media, dificil, sem nivel),
+       contado no `metricas.acerto_das_geradas_por_nivel`; nunca somado ao
+       das reais nem levado a outra tela. A media da rodada no "Por materia"
+       ganhou a base ("0% em 1"), que a varredura das telas pede.

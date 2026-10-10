@@ -1455,6 +1455,45 @@ class GeradasDaFaixa:
         return min(tem, self.questoes or tem, 30)
 
 
+@dataclass(frozen=True)
+class FaltaDeGeradas:
+    """O "so havia N dificeis neste assunto" (decisao 151): a rodada veio com
+    as que ha, nunca completada com outro nivel, e os 3 passos para gerar
+    mais DAQUELE nivel."""
+
+    nivel: str
+    pedidas: int
+    havia: int
+    #: Os nos da rodada. Vazio na rodada sem no ("Qualquer materia").
+    nos: tuple = ()
+
+    @property
+    def faltam(self) -> int:
+        return max(self.pedidas - self.havia, 0)
+
+    @property
+    def frase(self) -> str:
+        onde = "nestes assuntos" if len(self.nos) > 1 else "neste assunto"
+        if not self.havia:
+            if self.nivel in niveis.NIVEIS:
+                return (f"Não há nenhuma questão {niveis.rotulo(self.nivel).lower()} "
+                        f"{onde} ainda.")
+            return f"Não há questão gerada {onde} ainda."
+        return (f"Só havia {niveis.quantas_do_nivel(self.havia, self.nivel)} {onde}: "
+                f"a rodada veio com {'ela' if self.havia == 1 else 'as que há'}.")
+
+    @property
+    def comandos(self) -> list[str]:
+        """Um pedido por no, com as que faltam divididas entre eles e o piso
+        de PEDIDO_MINIMO_DE_GERADAS (aprovado na proposta)."""
+        if not self.nos or not self.faltam:
+            return []
+        base, resto = divmod(self.faltam, len(self.nos))
+        return [comando_de_gerar(no, max(base + (1 if i < resto else 0),
+                                         PEDIDO_MINIMO_DE_GERADAS), self.nivel)
+                for i, no in enumerate(self.nos)]
+
+
 def geradas_da_faixa(faixa, escrita: "FichaEscrita | None", ja: dict,
                      feitas: dict | None = None) -> GeradasDaFaixa:
     """As geradas de uma faixa de questoes. Os nos sao os da ficha (decisao

@@ -86,6 +86,7 @@
 </head>
 <body class="ds">
 {% from "_componentes.html" import selo, bloco %}
+{% from "_falta_de_geradas.html" import falta_de_geradas %}
 
 <main class="foco">
   <div class="topo-foco">
@@ -115,7 +116,7 @@
       {% if f.get('repetidas') %}{% set _ = partes.append(f.get('repetidas') ~ ' que eu já tinha respondido') %}{% endif %}
       Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
     {% elif f.get('geradas') %}
-      Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra
+      Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra{% if f.get('nivel') %} &middot; nível: {{ rotulo_do_nivel(f.get('nivel')) }}{% endif %}
     {% elif f.get('erros') %}
       Revisão: só as questões que eu errei
     {% elif f.get('compilado') %}
@@ -128,6 +129,9 @@
     {% endif %}
     {% if not na_hora %} &middot; rodada que mede: o certo e o errado aparecem no fim{% endif %}
   </p>
+
+  {# O "so havia N" (decisao 151), antes da primeira resposta. #}
+  {% if not resumo.respondidas %}{{ falta_de_geradas(falta) }}{% endif %}
 
   <article class="ds-cartao questao">
     <div class="cabeca">

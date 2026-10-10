@@ -39,6 +39,7 @@ from sqlalchemy import select
 
 from radar import amostra as regua
 from radar import cronograma as plano_de_estudo
+from radar import niveis
 from radar.db import criar_tabelas, sessao
 from radar.models import (
     EstadoDoDia,
@@ -770,6 +771,45 @@ def desempenho_das_geradas(simulado_id: int | None = None) -> list[DesempenhoDaM
     no treino que eu mandei escrever".
     """
     return _por_materia_das_respostas(QuestaoGerada, True, simulado_id)
+
+
+@dataclass(frozen=True)
+class AcertoDoNivel:
+    """O acerto de uma rodada de geradas num nivel (decisao 151). Mais um
+    numero a parte: o nivel e o que a IA declarou, e nunca mede nada."""
+
+    nivel: str | None
+    respondidas: int
+    acertos: int
+    origem: str = IA
+
+    @property
+    def rotulo(self) -> str:
+        return niveis.rotulo(self.nivel)
+
+    @property
+    def porcentagem(self) -> float:
+        return (self.acertos / self.respondidas * 100) if self.respondidas else 0.0
+
+
+def acerto_das_geradas_por_nivel(simulado_id: int) -> list[AcertoDoNivel]:
+    """Facil, media, dificil e sem nivel, nessa ordem, de uma rodada: so os
+    niveis que tem resposta. Conta as respostas da rodada, como o "Por
+    materia" do relatorio."""
+    criar_tabelas()
+    with sessao() as s:
+        linhas = s.execute(
+            select(QuestaoGerada.nivel, RespostaDeSimulado)
+            .join(QuestaoGerada, QuestaoGerada.id == RespostaDeSimulado.questao_id)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.gerada.is_(True))
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+        ).all()
+    por_nivel: dict[str | None, list] = {}
+    for nivel, resposta in linhas:
+        por_nivel.setdefault(nivel if nivel in niveis.NIVEIS else None, []).append(resposta)
+    return [AcertoDoNivel(chave, *placar(por_nivel[chave]))
+            for chave in (*niveis.NIVEIS, None) if chave in por_nivel]
 
 
 def resumo_do_simulado(simulado_id: int) -> dict:

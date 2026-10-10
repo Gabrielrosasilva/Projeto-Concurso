@@ -23,19 +23,24 @@ class Nivel:
     rotulo: str
     #: O criterio que o pedido manda a IA seguir e justificar em uma linha.
     criterio: str
+    #: "difíceis", para o "so havia N difíceis neste assunto".
+    plural: str
 
 
 #: Na ordem em que aparecem em todo lugar: seletor, saida, tabela.
 NIVEIS = {
     "facil": Nivel("facil", "Fácil",
-                   "a letra de um artigo só; as erradas são claramente erradas."),
+                   "a letra de um artigo só; as erradas são claramente erradas.",
+                   "fáceis"),
     "media": Nivel("media", "Média",
                    "um caso simples, ou a letra da lei com UMA troca sutil "
-                   "(prazo, número, \"permitido\" por \"vedado\")."),
+                   "(prazo, número, \"permitido\" por \"vedado\").",
+                   "médias"),
     "dificil": Nivel("dificil", "Difícil",
                      "junta dois dispositivos ou uma exceção (\"salvo\", "
                      "\"exceto\"), um caso em que um detalhe muda a resposta, e "
-                     "as cinco alternativas plausíveis."),
+                     "as cinco alternativas plausíveis.",
+                     "difíceis"),
 }
 
 #: Em Portugues e Raciocinio Logico nao ha artigo: vale a regra.
@@ -161,6 +166,14 @@ def rotulo(chave: str | None) -> str:
         return ROTULO_DA_MISTURADA
     nivel = NIVEIS.get(chave or "")
     return nivel.rotulo if nivel else SEM_NIVEL
+
+
+def quantas_do_nivel(n: int, chave: str) -> str:
+    """"4 difíceis", "1 difícil"; na misturada, "4 questões geradas"."""
+    nivel = NIVEIS.get(chave)
+    if nivel is None:
+        return f"{n} {'questão gerada' if n == 1 else 'questões geradas'}"
+    return f"{n} {nivel.rotulo.lower() if n == 1 else nivel.plural}"
 
 
 def rotulo_do_selo(chave: str | None) -> str:

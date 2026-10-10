@@ -896,6 +896,24 @@ def estoque_da_rodada(simulado) -> list:
                                  contagem_por_no(nos), metricas.geradas_feitas_por_no(nos))
 
 
+def falta_da_rodada(simulado):
+    """O `fichas.FaltaDeGeradas` da rodada que veio com menos do que pedi
+    (decisao 151), ou None. Os nos sao os da rodada; o so de materia vale como
+    no (o comando dela e o simulado amplo)."""
+    from radar import fichas
+
+    filtros = simulado.filtros or {}
+    faltou = filtros.get("faltou")
+    if not filtros.get("geradas") or not faltou:
+        return None
+    nos = list(filtros.get("conteudos") or []) or (
+        [filtros["conteudo"]] if filtros.get("conteudo") else
+        [filtros["materia"]] if filtros.get("materia") else [])
+    return fichas.FaltaDeGeradas(nivel=filtros.get("nivel") or niveis.MISTURADA,
+                                 pedidas=int(faltou.get("pedidas") or 0),
+                                 havia=int(faltou.get("havia") or 0), nos=tuple(nos))
+
+
 def nos_do_cronograma(hoje=None, plano=None, dias_a_frente: int = 7) -> list:
     """Os nos das faixas de treino do cronograma, do comeco do plano ate
     `dias_a_frente` dias depois de hoje - os com zero gerada tambem (R6). Um
@@ -941,8 +959,14 @@ def _sortear(
     materia: str | None = None,
     impressoes: list[str] | None = None,
     conteudo: str | None = None,
+    nivel: str | None = None,
 ) -> list[int]:
-    """Ids de questoes geradas que valem para o sorteio."""
+    """Ids de questoes geradas que valem para o sorteio.
+
+    Com um nivel (decisao 151), so as daquele nivel: a que esta sem nivel nao
+    entra, e nada e completado com outro. A misturada (ou nenhum) nao filtra:
+    traz todas, de qualquer nivel, inclusive as sem nivel.
+    """
     from radar.conteudos import SEPARADOR
 
     consulta = (
@@ -964,6 +988,8 @@ def _sortear(
         consulta = consulta.where(or_(*dentro))
     if impressoes is not None:
         consulta = consulta.where(QuestaoGerada.impressao.in_(impressoes))
+    if nivel in niveis.NIVEIS:
+        consulta = consulta.where(QuestaoGerada.nivel == nivel)
 
     with sessao() as s:
         candidatas = list(s.scalars(consulta))
@@ -991,7 +1017,8 @@ def _na_ordem_de_treino(candidatas: list[QuestaoGerada]) -> list[QuestaoGerada]:
     return nunca + sorted(repetidas, key=peso)
 
 
-def _sortear_misturado(quantidade: int, conteudos: list[str]) -> list[int]:
+def _sortear_misturado(quantidade: int, conteudos: list[str],
+                       nivel: str | None = None) -> list[int]:
     """Ids de varios nos, divididos por igual e embaralhados no fim.
 
     O sorteio numa lista so traria quase tudo do no com mais geradas; aqui
@@ -999,7 +1026,7 @@ def _sortear_misturado(quantidade: int, conteudos: list[str]) -> list[int]:
     aos outros). O embaralhar no fim e o que faz o "Treinar geral": eu nao
     sei de qual no vem a proxima. Um no dentro do outro nao repete questao.
     """
-    filas = [_sortear(quantidade, conteudo=c) for c in conteudos]
+    filas = [_sortear(quantidade, conteudo=c, nivel=nivel) for c in conteudos]
     escolhidas: list[int] = []
     while len(escolhidas) < quantidade and any(filas):
         for fila in filas:
@@ -1018,6 +1045,7 @@ def criar_simulado(
     conteudo: str | None = None,
     da_faixa: dict | None = None,
     conteudos: list[str] | None = None,
+    nivel: str = niveis.MISTURADA,
 ) -> Simulado | None:
     """Uma rodada SO de questoes geradas, na mesma tela do simulado de sempre.
 
@@ -1032,13 +1060,20 @@ def criar_simulado(
 
     `conteudos` sao os nos da faixa todos juntos (o "Treinar geral"):
     misturados, no lugar de um `conteudo` so.
+
+    `nivel` (decisao 151): facil, media ou dificil so trazem as daquele
+    nivel; a misturada traz todas. Com menos do que pedi, a rodada vem com as
+    que ha e guarda o `faltou`, para a tela dizer "so havia N" com os passos
+    de gerar mais daquele nivel. Sem nenhuma, nao ha rodada (None).
     """
     criar_tabelas()
+    nivel = nivel if nivel in niveis.OPCOES else niveis.MISTURADA
+    filtro_do_nivel = None if nivel == niveis.MISTURADA else nivel
 
     if conteudos:
-        ids = _sortear_misturado(quantidade, conteudos)
+        ids = _sortear_misturado(quantidade, conteudos, filtro_do_nivel)
     else:
-        ids = _sortear(quantidade, materia, impressoes, conteudo)
+        ids = _sortear(quantidade, materia, impressoes, conteudo, filtro_do_nivel)
         # O sorteio devolve na ordem de prioridade (as nunca feitas na
         # frente); na rodada, a ordem e embaralhada como sempre foi.
         random.shuffle(ids)
@@ -1053,6 +1088,11 @@ def criar_simulado(
             **({"conteudos": list(conteudos)} if conteudos else {}),
             # E esta marca que a tela le para mostrar o selo no topo.
             "geradas": True,
+            "nivel": nivel,
+            # A rodada da tela "treinar" pede um numero; a das recem-geradas
+            # (`impressoes`) leva as que nasceram, e nao falta nada.
+            **({"faltou": {"pedidas": quantidade, "havia": len(ids)}}
+               if len(ids) < quantidade and impressoes is None else {}),
             **({"da_faixa": da_faixa} if da_faixa else {}),
         })
         s.add(simulado)

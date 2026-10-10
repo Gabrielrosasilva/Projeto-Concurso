@@ -3539,3 +3539,27 @@ por IA · sem nível".
 0/2/0; e o do topo da tela Gerar questões (Direito Penal > Dolo e culpa, 6,
 difícil) - "Nível: Difícil (0/0/6)", "escreva exatamente: 3 dificil" em cada
 pedido. O `data/pedido_ia.json` ficou com este último, sem resposta.
+
+**6C - treinar por nível.**
+
+- **O código:** `geradas._sortear` e `_sortear_misturado` com o nível;
+  `criar_simulado(..., nivel)` com `filtros.nivel` e `faltou`;
+  `geradas.falta_da_rodada`; `fichas.FaltaDeGeradas` (a frase e os comandos);
+  `niveis.quantas_do_nivel` e o plural; `metricas.AcertoDoNivel` e
+  `acerto_das_geradas_por_nivel`; `app.py` (o nível no `/geradas/treinar`, o
+  recado `sem_do_nivel`, a falta na questão e no resultado); o
+  `_falta_de_geradas.html` (novo), `questao.html`, `relatorio.html` (o cartão
+  "Por nível" e a base da média), `geradas.html` e `hoje.html` (os
+  seletores).
+- **Testes:** `test_treinar_por_nivel` (15: o sorteio por nível, a misturada
+  com as sem nível, as nunca feitas primeiro dentro do nível, o geral, o "só
+  havia N" com o piso de 5 e no singular, a questão e o resultado, a rodada
+  vazia, os seletores, o nível da faixa chegando à rodada, o acerto por
+  nível). Com as telas e os serviços tocados (30 arquivos de teste): 595
+  passed e 2 falhas, consertadas - a média da rodada sem a base (minha: o
+  cartão novo a afastou da amostra vizinha) e o template que soma o chute
+  (de antes desta etapa, do `6f3cc47`: commit à parte).
+
+**Rodado de verdade** (banco real, só GET): a tela Hoje de 09/10 com 3
+botões de treino e 3 seletores; o seletor no "Treinar com as que já tenho";
+a rodada 25 (terminada) com o cartão "Por nível" ("sem nível").

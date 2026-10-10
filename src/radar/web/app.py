@@ -808,6 +808,11 @@ def simulado_questao(request: Request, simulado_id: int, ver: int | None = None)
                 # Quanto do estoque de geradas dos nos eu ja fiz, e o pedido
                 # de mais quando esta acabando (decisao 142).
                 "estoque": servico.geradas.estoque_da_rodada(simulado) if de_ia else [],
+                # O "so havia N" e o acerto por nivel (decisao 151): as contas
+                # sao do servico; o template so desenha.
+                "falta": servico.geradas.falta_da_rodada(simulado) if de_ia else None,
+                "acerto_por_nivel": (servico.metricas.acerto_das_geradas_por_nivel(simulado_id)
+                                     if de_ia else []),
                 # O 🟣 de cada erro: a explicacao importada pelo caminho sem
                 # API, e o macete que cita aquela questao.
                 "explicacoes": servico.manual.carregar_explicacoes(),
@@ -830,6 +835,7 @@ def simulado_questao(request: Request, simulado_id: int, ver: int | None = None)
             "de_ia": de_ia,
             "na_hora": servico.corrige_na_hora(simulado),
             "andamento": servico.metricas.andamento_da_rodada(simulado.id),
+            "falta": servico.geradas.falta_da_rodada(simulado) if de_ia else None,
             # O selo precisa dos dois: em que questao real ela se baseia, e
             # onde eu leio o artigo que ela diz estar cobrando.
             "origem": servico.geradas.origem_de(questao) if de_ia else None,
@@ -956,6 +962,8 @@ def geradas(
     recado: str = "",
     treinar: str = "",
     nivel: str = niveis.MISTURADA,
+    nos_da_falta: list[str] = Query([], alias="no"),
+    pedidas: int = 0,
 ):
     """A tela de gerar questao, com o custo antes do botao.
 
@@ -999,6 +1007,13 @@ def geradas(
         no = escopo.no if escopo is not None else escolhida
         comando_do_topo = fichas_puras.comando_de_gerar(no, quantas, nivel)
 
+    # O treino que pediu um nivel e nao achou nenhuma (decisao 151): o aviso,
+    # com os 3 passos daquele nivel, no lugar da rodada.
+    falta = None
+    if recado == "sem_do_nivel" and nivel in niveis.NIVEIS:
+        falta = fichas_puras.FaltaDeGeradas(nivel=nivel, pedidas=max(pedidas, 1),
+                                            havia=0, nos=tuple(n for n in nos_da_falta if n))
+
     real = {d.materia: d for d in servico.desempenho()}
     gerado = {d.materia: d for d in servico.desempenho_das_geradas()}
 
@@ -1026,6 +1041,7 @@ def geradas(
             "quantas": quantas,
             "nivel": nivel,
             "comando_do_topo": comando_do_topo,
+            "falta": falta,
             "cambio": config.CAMBIO_DE_REFERENCIA,
             "modelo": gerador.MODELO,
             "recado": RECADOS_DAS_GERADAS.get(recado),
@@ -1074,6 +1090,7 @@ def geradas_treinar(
     materia: str = Form(""), conteudo: str = Form(""), quantidade: str = Form("5"),
     data: str = Form(""), bloco: str = Form(""), indice: str = Form(""),
     titulo: str = Form(""), conteudos: list[str] = Form([]),
+    nivel: str = Form(niveis.MISTURADA),
 ):
     """Uma rodada com o que ja foi gerado antes. Nao gasta nada.
 
@@ -1097,12 +1114,20 @@ def geradas_treinar(
         da_faixa = {"data": dia.isoformat(), "bloco": bloco,
                     "indice": int(indice), "titulo": titulo}
 
+    nivel = nivel if nivel in niveis.OPCOES else niveis.MISTURADA
+    nos = [c.strip() for c in conteudos if c.strip()]
     rodada = servico.geradas.criar_simulado(
         quantidade=quantas, materia=materia.strip() or None,
         conteudo=conteudo.strip() or None, da_faixa=da_faixa,
-        conteudos=[c.strip() for c in conteudos if c.strip()] or None,
+        conteudos=nos or None, nivel=nivel,
     )
     if rodada is None:
+        if nivel in niveis.NIVEIS:
+            # Nenhuma daquele nivel: nunca completa com outro (decisao 151).
+            nos = nos or [n for n in (conteudo.strip(), materia.strip()) if n][:1]
+            consulta = urlencode([("recado", "sem_do_nivel"), ("nivel", nivel),
+                                  ("pedidas", quantas), *[("no", n) for n in nos]])
+            return RedirectResponse(f"/geradas?{consulta}#treinar", status_code=303)
         return RedirectResponse("/geradas?recado=nada_no_no", status_code=303)
     return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
 

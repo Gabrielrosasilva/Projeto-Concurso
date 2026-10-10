@@ -37,6 +37,7 @@
 {% from "_topo.html" import barra with context %}
 {{ barra('estudar') }}
 {% from "_componentes.html" import selo %}
+{% from "_falta_de_geradas.html" import falta_de_geradas %}
 
 <main class="ds-pagina">
 
@@ -223,6 +224,7 @@
   <section class="ds-cartao cartao-geradas" id="treinar">
     <h2 class="ds-cartao__titulo">Treinar com as que já tenho</h2>
     <p class="ds-cartao__meta">Não gasta nada: usa o que já foi gerado antes.</p>
+    {{ falta_de_geradas(falta) }}
 
     {% if resumo.valem %}
       <form class="comecar" method="post" action="/geradas/treinar">
@@ -241,6 +243,15 @@
         <label class="ds-campo">
           Quantas questões
           <input type="number" name="quantidade" value="5" min="1" max="30">
+        </label>
+        {# Um nivel so traz as daquele nivel; a misturada traz todas (decisao 151). #}
+        <label class="ds-campo">
+          Nível
+          <select name="nivel">
+            {% for chave, rotulo in OPCOES_DE_NIVEL %}
+              <option value="{{ chave }}" {{ 'selected' if chave == nivel }}>{{ rotulo }}</option>
+            {% endfor %}
+          </select>
         </label>
         <button class="ds-botao ds-botao--secundario" type="submit">Treinar</button>
       </form>

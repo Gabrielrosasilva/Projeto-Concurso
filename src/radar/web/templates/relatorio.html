@@ -47,6 +47,7 @@
 <body class="ds">
 {% from "_topo.html" import barra with context %}
 {% from "_componentes.html" import selo, bloco %}
+{% from "_falta_de_geradas.html" import falta_de_geradas %}
 {{ barra('estudar') }}
 
 {# Os numeros vem prontos do servico.metricas: o template so mostra. #}
@@ -91,6 +92,9 @@
     </p>
   </section>
 
+  {# O "so havia N" (decisao 151): a rodada veio com menos do que pedi. #}
+  {% if falta %}<div style="margin-top:var(--esp-4)">{{ falta_de_geradas(falta) }}</div>{% endif %}
+
   {# ------------------------------------------ desempenho por materia --- #}
   {% if desempenho_da_rodada %}
   <section class="ds-cartao" style="margin-top:var(--esp-4)">
@@ -98,7 +102,7 @@
       <h2 class="ds-cartao__titulo">Por matéria</h2>
       {{ selo(desempenho_da_rodada[0].origem) }}
     </div>
-    <p class="ds-cartao__meta">Em vermelho, as que ficaram abaixo da média desta rodada ({{ '%.0f'|format(porcento) }}%).</p>
+    <p class="ds-cartao__meta">Em vermelho, as que ficaram abaixo da média desta rodada ({{ '%.0f'|format(porcento) }}% em {{ resumo.total }}).</p>
     <table>
       <tr><th>Matéria</th><th class="n">Acerto</th><th class="n">Questões</th><th></th></tr>
       {% for d in desempenho_da_rodada %}
@@ -107,6 +111,30 @@
           <td class="n">{{ '%.0f'|format(d.porcentagem) }}%</td>
           <td class="n">{{ d.acertos }}/{{ d.respondidas }}</td>
           <td class="n"><span class="trilha"><span style="width:{{ d.porcentagem }}%"></span></span></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+  {# O acerto por nivel (decisao 151): o nivel e o que a IA declarou, e o
+     numero e mais um a parte, nunca somado ao das reais. A conta e do
+     servico.metricas; aqui so se desenha. #}
+  {% if acerto_por_nivel %}
+  <section class="ds-cartao" style="margin-top:var(--esp-4)">
+    <div class="ds-cartao__cabeca">
+      <h2 class="ds-cartao__titulo">Por nível</h2>
+      {{ selo(acerto_por_nivel[0].origem) }}
+    </div>
+    <p class="ds-cartao__meta">O nível que a IA declarou para cada questão. Treino: não mede o que a banca cobra.</p>
+    <table>
+      <tr><th>Nível</th><th class="n">Acerto</th><th class="n">Questões</th><th></th></tr>
+      {% for n in acerto_por_nivel %}
+        <tr>
+          <td>{{ n.rotulo }}</td>
+          <td class="n">{{ '%.0f'|format(n.porcentagem) }}%</td>
+          <td class="n">{{ n.acertos }}/{{ n.respondidas }}</td>
+          <td class="n"><span class="trilha"><span style="width:{{ n.porcentagem }}%"></span></span></td>
         </tr>
       {% endfor %}
     </table>
