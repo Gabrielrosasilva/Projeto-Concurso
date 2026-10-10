@@ -3563,3 +3563,39 @@ pedido. O `data/pedido_ia.json` ficou com este último, sem resposta.
 **Rodado de verdade** (banco real, só GET): a tela Hoje de 09/10 com 3
 botões de treino e 3 seletores; o seletor no "Treinar com as que já tenho";
 a rodada 25 (terminada) com o cartão "Por nível" ("sem nível").
+
+**6D - as 911.**
+
+- **O código:** `manual.pedido_de_niveis`, `materias_sem_nivel`,
+  `instrucao_da_classificacao_de_nivel` e `_importar_niveis` (o tipo
+  `niveis`, com o `como_responder` e o formato); `geradas.gravar_niveis`; o
+  `--classificar-nivel` do `radar gerar` e a saída da importação (a
+  distribuição e a lista das suspeitas); `docs/estoque_de_geradas.md` (como
+  classificar), pendências (K) e o "Estado atual".
+- **Testes:** `test_classificar_nivel` (8: o pedido só das sem nível e
+  valendo, os pedidos de 40, a contagem por matéria, só o nível gravado e o
+  texto intocado, a resposta torta, a suspeita só listada, a que já tem nível,
+  o terminal). **A suíte inteira, uma vez: 2910 passed** (27 min).
+
+**Rodado de verdade:** os 6 lotes pelo terminal - `radar gerar --pedido
+--classificar-nivel --materia ...` (4, 4, 5, 5, 6 e 1 pedidos), respondidos
+pelo Claude Code (claude-opus-5-5) e conferidos contra o pedido antes de
+importar (cada questão uma vez, no pedido certo), e `radar gerar --importar`
+de cada um: 911 gravados, nenhuma recusa.
+
+| Matéria | Fácil | Média | Difícil | Suspeitas |
+|---|---|---|---|---|
+| Direito Penal | 76 | 54 | 2 | 1 |
+| Direito Constitucional | 53 | 74 | 12 | 1 |
+| Lei de Execução Penal | 109 | 85 | 6 | 4 |
+| Direitos Humanos | 98 | 57 | 12 | 0 |
+| Língua Portuguesa | 134 | 81 | 23 | 2 |
+| Raciocínio Lógico | 8 | 13 | 14 | 0 |
+| **Total** | **478** | **364** | **69** | **8** |
+
+Depois, o `--classificar-nivel` sem matéria não lista nenhuma: 0 sem nível.
+
+**Critério de conclusão:** ✅ toda gerada tem nível, mostrado na questão; o
+nível vai no comando de gerar em todo lugar; o treino escolhe o nível e
+nunca completa com outro; a misturada; o acerto por nível à parte; as 911
+classificadas, com as suspeitas listadas.

@@ -341,6 +341,20 @@ def _como_responder(tipo: str, nivel: str | None = None) -> str:
             "da arvore, a materia inteira, o ramo da principal, conceito sem "
             "`trecho` ou questao que nao estava no pedido serao RECUSADOS."
         )
+    if tipo == "niveis":
+        return (
+            "Este arquivo foi gerado por `radar gerar --pedido --classificar-nivel`. "
+            "Para cada item de `pedidos`, siga a `instrucao` com as questoes da "
+            "lista `questoes` do proprio item. Responda TODOS num unico arquivo "
+            "JSON, no formato de `formato_da_resposta`: o mesmo `lote`, o `modelo` "
+            "que escreveu (ex.: \"claude-opus-5-5\") e o `id` de cada pedido com a "
+            "lista `niveis` dele, uma linha por questao, pela `questao` (a "
+            "impressao). Salve como data/resposta_ia.json e rode `radar gerar "
+            "--importar data/resposta_ia.json`. So o nivel, o porque e a suspeita: "
+            "nao reescreva enunciado, alternativa nem gabarito. Nivel fora da "
+            "lista, sem `por_que_o_nivel`, ou de questao que nao estava no pedido "
+            "sera RECUSADO."
+        )
     if tipo == "explicacoes":
         return (
             "Este arquivo foi gerado por `radar gerar --pedido --explicacoes`. "
@@ -426,6 +440,13 @@ def _formato_das_respostas(tipo: str) -> dict:
                 "nos": [{"no": "<caminho da arvore>", "trecho": "..."}]}
         return {"lote": "<o lote deste arquivo>",
                 "respostas": [{"id": "a1", "associados": [item]}]}
+    if tipo == "niveis":
+        item = {"questao": "<a impressao da questao>", "nivel": "dificil",
+                "por_que_o_nivel": "junta os arts. 39 e 41 da LEP, e as cinco "
+                                   "alternativas soam plausiveis",
+                "suspeita": ""}
+        return {"lote": "<o lote deste arquivo>", "modelo": "<o modelo que escreveu>",
+                "respostas": [{"id": "n1", "niveis": [item]}]}
     if tipo == "explicacoes":
         item = {"correta": "c", "explicacao": "...",
                 "fonte": "art. 112 da Lei 7.210/1984"}
@@ -568,6 +589,131 @@ def pedido_de_questoes(materia: str | None = None, quantas: int = 5,
             "instrucao": instrucao, "pedido": corpo,
         })
     return _novo_lote("questoes", pedidos, nivel)
+
+
+#: Quantas questoes vao num pedido da classificacao de nivel: o bastante para
+#: o lote de uma materia caber em poucos pedidos, e pouco para quem responde
+#: ler cada uma com cuidado.
+QUESTOES_POR_PEDIDO_DE_NIVEL = 40
+
+
+def instrucao_da_classificacao_de_nivel() -> str:
+    """A instrucao da classificacao das geradas que nao tem nivel (decisao
+    151): os mesmos criterios do pedido de gerar, do `radar.niveis`."""
+    criterios = "\n".join(f"- {chave}: {nivel.criterio}"
+                          for chave, nivel in niveis.NIVEIS.items())
+    return f"""Voce recebe questoes de TREINO que uma IA escreveu para um concurso publico brasileiro (banca FEPESE), com o gabarito que a propria IA deu.
+
+De a cada questao um NIVEL, pelos criterios abaixo, e justifique em uma linha.
+
+{criterios}
+{niveis.CRITERIO_FORA_DO_DIREITO}
+
+Regras:
+- so o nivel: NAO reescreva o enunciado, as alternativas nem o gabarito;
+- o nivel e o que a questao E, pelo criterio - nao o que voce acha que ela
+  deveria ser;
+- "por_que_o_nivel": uma linha, dizendo o que no criterio a pos ali (o artigo
+  so, a troca sutil, os dois dispositivos, a excecao);
+- se, ao ler, voce desconfiar do gabarito ou da lei (a alternativa marcada nao
+  e a certa, o artigo citado nao diz isso, a lei mudou), escreva o motivo em
+  "suspeita"; senao, "". A suspeita so e listada para conferir: nada e
+  apagado nem corrigido por ela.
+
+Responda SOMENTE um JSON, no formato:
+{{"niveis": [{{"questao": "<a impressao>", "nivel": "media", "por_que_o_nivel": "...", "suspeita": ""}}]}}"""
+
+
+def materias_sem_nivel() -> dict[str, int]:
+    """{materia: quantas geradas valendo ainda sem nivel}."""
+    from radar.models import QuestaoGerada
+    from sqlalchemy import func, select
+
+    criar_tabelas()
+    with sessao() as s:
+        linhas = s.execute(
+            select(QuestaoGerada.materia, func.count())
+            .where(QuestaoGerada.rejeitada.is_(False))
+            .where(QuestaoGerada.nivel.is_(None))
+            .group_by(QuestaoGerada.materia)).all()
+    return {materia or "sem materia": n for materia, n in sorted(linhas, key=lambda l: str(l[0]))}
+
+
+def pedido_de_niveis(materia: str) -> dict:
+    """A classificacao de nivel das geradas de uma materia que ainda nao tem
+    nivel (decisao 151), em pedidos de QUESTOES_POR_PEDIDO_DE_NIVEL. Rodar de
+    novo pede so as que continuam sem nivel. A rejeitada fica de fora: ela ja
+    saiu do sorteio."""
+    from radar.models import QuestaoGerada
+    from sqlalchemy import select
+
+    criar_tabelas()
+    with sessao() as s:
+        questoes = [
+            {"questao": q.impressao, "conteudo": q.conteudo, "artigo": q.artigo,
+             "enunciado": q.enunciado, "alternativas": q.alternativas,
+             "resposta": q.resposta}
+            for q in s.scalars(
+                select(QuestaoGerada)
+                .where(QuestaoGerada.materia == materia)
+                .where(QuestaoGerada.rejeitada.is_(False))
+                .where(QuestaoGerada.nivel.is_(None))
+                .order_by(QuestaoGerada.conteudo, QuestaoGerada.impressao))
+        ]
+    instrucao = instrucao_da_classificacao_de_nivel()
+    pedidos = []
+    for numero, inicio in enumerate(range(0, len(questoes), QUESTOES_POR_PEDIDO_DE_NIVEL),
+                                    start=1):
+        pedidos.append({"id": f"n{numero}", "materia": materia,
+                        "instrucao": instrucao,
+                        "questoes": questoes[inicio:inicio + QUESTOES_POR_PEDIDO_DE_NIVEL]})
+    return _novo_lote("niveis", pedidos)
+
+
+def _importar_niveis(lote: dict, respostas: list[dict], modelo: str) -> dict:
+    """Grava SO o nivel, o porque, a procedencia e a suspeita (decisao 151):
+    o enunciado, as alternativas e o gabarito nao mudam, porque o codigo nao
+    toca neles. A suspeita so e listada; nada e rejeitado por ela."""
+    por_id = {p["id"]: p for p in lote["pedidos"]}
+    aceitos, recusas, vistas = [], [], set()
+    for resposta in respostas:
+        pedido = por_id.get(resposta.get("id"))
+        if pedido is None:
+            recusas.append(f"{resposta.get('id')}: nao existe esse pedido no lote")
+            continue
+        do_pedido = {q["questao"]: q for q in pedido.get("questoes") or []}
+        for item in resposta.get("niveis") or []:
+            if not isinstance(item, dict):
+                continue
+            questao = str(item.get("questao") or "")
+            onde = f"{pedido['id']}/{questao[:8] or '?'}"
+            if questao not in do_pedido:
+                recusas.append(f"{onde}: a questao nao estava neste pedido")
+                continue
+            if questao in vistas:
+                recusas.append(f"{onde}: classificada duas vezes na resposta")
+                continue
+            vistas.add(questao)
+            nivel, por_que, motivo = niveis.ler_da_resposta(item)
+            if motivo:
+                recusas.append(f"{onde}: {motivo}")
+                continue
+            suspeita = " ".join(str(item.get("suspeita") or "").split()) or None
+            aceitos.append({"impressao": questao, "nivel": nivel,
+                            "por_que_o_nivel": por_que, "suspeita": suspeita,
+                            "conteudo": do_pedido[questao].get("conteudo")})
+    gravadas, ja_tinham = geradas.gravar_niveis(aceitos, modelo)
+    recusas += [f"{i[:8]}: ja tinha nivel, ficou o de antes" for i in ja_tinham]
+    if gravadas:
+        from radar import acervo
+
+        acervo.exportar_geradas()
+    gravados = [a for a in aceitos if a["impressao"] not in ja_tinham]
+    return {"gravadas": gravadas, "repetidas": 0, "recusas": recusas,
+            "distribuicao": {chave: sum(1 for a in gravados if a["nivel"] == chave)
+                             for chave in niveis.NIVEIS},
+            "suspeitas": [(a["impressao"], a["conteudo"], a["suspeita"])
+                          for a in gravados if a["suspeita"]]}
 
 
 def _codigo(questao) -> str:
@@ -1652,6 +1798,8 @@ def importar(resposta: Path, pedido: Path | None = None,
         resultado = _importar_macetes(lote, respostas, modelo)
     elif lote.get("tipo") == "explicacoes":
         resultado = _importar_explicacoes(lote, respostas, modelo)
+    elif lote.get("tipo") == "niveis":
+        resultado = _importar_niveis(lote, respostas, modelo)
     else:
         resultado = _importar_questoes(lote, respostas, modelo)
     return {"tipo": lote.get("tipo"), "modelo": modelo, **resultado}

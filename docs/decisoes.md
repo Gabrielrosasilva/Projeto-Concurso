@@ -4999,3 +4999,18 @@ viraram estudo extra "Onde: Radar". Copia antes em
        contado no `metricas.acerto_das_geradas_por_nivel`; nunca somado ao
        das reais nem levado a outra tela. A media da rodada no "Por materia"
        ganhou a base ("0% em 1"), que a varredura das telas pede.
+     - **6D, as 911 antigas**: `radar gerar --pedido --classificar-nivel
+       --materia "<materia>"` monta um lote por materia, so das geradas
+       valendo e sem nivel, em pedidos de 40, com os mesmos criterios e o
+       gabarito junto (e preciso para julgar o nivel e para desconfiar dele);
+       a importacao, pelo `--importar` de sempre, grava SO as quatro colunas
+       do nivel (`geradas.gravar_niveis`) - o enunciado, as alternativas e o
+       gabarito nao passam por ela -, recusa nivel fora da lista, sem o
+       porque, questao que nao estava no pedido e repetida, deixa com o dela a
+       que ja tem nivel, e LISTA a `suspeita` sem rejeitar nada. Sem
+       `--materia`, o comando para e lista quantas faltam em cada uma.
+       Respondidas pelo Claude Code (claude-opus-5-5), um lote por materia, em
+       09/10: 911 de 911, nenhuma recusa - 478 faceis, 364 medias e 69
+       dificeis, com 8 suspeitas (pendencia K). A regua variou entre as
+       materias (Penal, 2 dificeis em 132; Raciocinio Logico, 14 em 35): e o
+       que a IA declarou, e fica dito, em vez de "corrigido" por uma cota.

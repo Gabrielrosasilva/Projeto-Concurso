@@ -141,6 +141,26 @@ o `radar hoje` e o `radar fichas --tema` mostram o comando com
 `--nivel misturada`; o topo da tela Gerar questões, com o nível do seletor. O
 nível nunca mede nada: o acerto por nível é mais um número à parte.
 
+### O nível das geradas que ainda não têm um
+
+As geradas de antes do nível (e as que vierem pela API) ficam "sem nível" até
+uma classificação, pelo mesmo caminho sem API, **uma matéria por lote**:
+
+```powershell
+.\radar.bat gerar --pedido --classificar-nivel                                  # lista as matérias e quantas faltam
+.\radar.bat gerar --pedido --classificar-nivel --materia "Direito Penal"        # o pedido, em pedidos de 40
+.\radar.bat gerar --importar data\resposta_ia.json
+```
+
+No Claude Code, o passo 2 de sempre ("Leia data/pedido_ia.json e siga o
+como_responder; escreva data/resposta_ia.json"). A resposta dá **só** o nível,
+o porquê e a `suspeita`: a importação não toca no enunciado, nas alternativas
+nem no gabarito. A saída diz quantas ganharam nível, a distribuição
+(fácil/média/difícil) e a **lista das suspeitas** (a classificação desconfiou
+do gabarito ou da lei) - só para você conferir; nada é rejeitado por ela. A
+questão que já tem nível fica com o dela. Rodar de novo pede só as que
+continuam sem nível.
+
 ## Os 57 lotes, por data de uso
 
 Os comandos abaixo já levam o `--nivel misturada`. Os lotes de 03/10 foram

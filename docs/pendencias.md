@@ -480,3 +480,43 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   cartao da Policia Penal aponta para Analises > Edital e o padrao dela; sem
   prova da banca no acervo, diz isso (decisao 141). Incluir a banca no
   acervo e outra conversa: um coletor de provas por banca.
+
+## K. O nivel das geradas (decisao 151, 09/10)
+
+Feito: o campo (banco na versao 8), o `--nivel` no pedido e em todo comando,
+o treino por nivel com o "so havia N", o acerto por nivel no resultado da
+rodada e a classificacao das 911 antigas (478 faceis, 364 medias, 69
+dificeis). O que falta:
+
+### Depende de voce
+
+- 🔴 **As 8 suspeitas da classificacao** (so listadas: nenhuma saiu do
+  sorteio; o botao "Essa questao esta errada" tira, se for o caso). Cada uma
+  com o motivo gravado em `questoes_geradas.suspeita`:
+  - `d795a622` (Penal, peculato): a afirmativa 3 condiciona o bem particular
+    a posse, mas o peculato-furto (CP, art. 312, § 1º) alcanca bem particular
+    sem posse - o gabarito "e" e discutivel;
+  - `0c75cfe7` (Const., voto facultativo): a alternativa A omite os maiores
+    de 70 anos (CF, art. 14, § 1º, II, b) - e a melhor, mas incompleta;
+  - `0d586eff`, `4e2ced15` e `ca99b241` (LEP, direitos do preso): o gabarito
+    da como direito do art. 41 itens que nao sao a letra dele ("programa de
+    reabilitacao", correspondencia "sem censura previa", "tratamento
+    especializado");
+  - `5a3ee22e` (LEP, orgaos da execucao): o art. 64 nao fala em "assessorar o
+    Ministerio da Justica", e a alternativa A fica defensavel;
+  - `cc44aaaa` (Port., plural de compostos): a alternativa A tambem esta
+    certa (guarda-roupas) - duas certas;
+  - `9192cbe3` (Port., concordancia do adjetivo posposto): B, D e E tambem
+    sao aceitas pela norma culta (concordancia com o mais proximo).
+- 🟡 **A regua do nivel variou entre as materias**: Penal saiu com 2
+  dificeis em 132 e Direitos Humanos com 98 faceis em 167, contra 14
+  dificeis em 35 no Raciocinio Logico. E o que a IA declarou, por lote; se,
+  treinando, o "dificil" de uma materia parecer o "media" de outra, a
+  conferencia e por amostra (o porque de cada uma esta gravado). Dois casos
+  que contrariam a propria regra ja apareceram nos exemplos: `37bc3ced`
+  (Penal, "junta os arts. 25 e 23", deu media) e `9586cfb7` (Penal, "as
+  erradas sao claramente erradas", deu media). Reclassificar uma questao e
+  apagar o nivel dela no banco e rodar o `--classificar-nivel` de novo (nao
+  ha botao).
+- ⚪ **Reinicie o servidor** depois do `git pull`: `radar parar` e `radar
+  subir` (o banco migra sozinho para a versao 8 no primeiro comando).

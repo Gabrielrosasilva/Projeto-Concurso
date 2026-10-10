@@ -152,8 +152,8 @@ conceitos associados na Analises > Conferencia; e o leitor entende o
 texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
-provas complementares aceitas); 901 geradas (10 rejeitadas); 214
-explicacoes; arvore com 438 nos; banco na versao 7.
+provas complementares aceitas); 921 geradas (10 rejeitadas), todas com
+nivel; 214 explicacoes; arvore com 438 nos; banco na versao 8.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
 186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
 a 103); sobra a 2013-q53, so com voce (pendencia G). **O pedido de 05/10**
@@ -237,6 +237,22 @@ explicacao e a pegadinha da questao so aparecem depois de responder no
 radar; o "caiu" diz a base pequena e as notas na faixa, e a prioridade baixa
 foi para o "Por que agora"; a seta do acerto nas Semanas so com 20 respostas
 de cada lado. **A proposta de melhorias esta feita ate 07/11.**
+**O nivel das geradas (09/10, decisao 151, a seu pedido e fora dos lotes):**
+toda gerada tem um nivel - facil, media ou dificil -, o que a IA declara, com
+o porque e a procedencia (`nivel`, `por_que_o_nivel`, `nivel_procedencia`,
+`suspeita`; banco na versao 8). Os criterios moram no `radar/niveis.py`. O
+`radar gerar --pedido` leva o `--nivel misturada|facil|media|dificil`
+(misturada: partes iguais, a sobra na media, 10 = 3/4/3), e a importacao
+recusa a questao sem nivel ou sem o porque e conta a mistura ("pedi 3/4/3,
+veio 5/3/2") sem completar; a `comando_de_gerar` escreve o `--nivel` em todo
+lugar, e o topo da tela Gerar questoes da os 3 passos sem API. No treino, um
+nivel so traz as daquele nivel e nunca completa com outro ("so havia 2
+dificeis neste assunto", com os 3 passos daquele nivel); a misturada traz
+todas. A questao diz "🟣 Gerada por IA · Dificil" (o porque so depois de
+responder), e o resultado da rodada tem o acerto por nivel, a parte. As 911
+antigas foram classificadas pelo `radar gerar --pedido --classificar-nivel`
+(478 faceis, 364 medias, 69 dificeis), com 8 suspeitas so listadas, por
+conferir (pendencia K).
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

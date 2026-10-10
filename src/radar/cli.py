@@ -896,6 +896,11 @@ def gerar(
         False, "--explicacoes",
         help="Com --pedido: pede a explicação das questões que eu errei",
     ),
+    classificar_nivel: bool = typer.Option(
+        False, "--classificar-nivel",
+        help="Com --pedido e --materia: pede o nível das geradas que ainda não "
+             "têm um. Só o nível: o texto não muda",
+    ),
     importar: str = typer.Option(
         None, "--importar",
         help="Lê a resposta de um --pedido, confere e grava o que presta",
@@ -932,6 +937,10 @@ def gerar(
         console.print(f"[red]Nível {escape(nivel)!r} não existe.[/] Use "
                       f"{', '.join(niveis.OPCOES)}.")
         raise typer.Exit(code=1)
+
+    if pedido and classificar_nivel:
+        _salvar_pedido_de_niveis(materia)
+        return
 
     escopo = _escopo_do_pedido(materia, assunto, subassunto, elemento)
     if pedido:
@@ -1188,6 +1197,34 @@ def _salvar_pedido_da_ia(materia: str | None, quantas: int, macetes: bool,
     )
 
 
+def _salvar_pedido_de_niveis(materia: str | None) -> None:
+    """O `--pedido --classificar-nivel` (decisao 151): uma materia por lote."""
+    faltam = servico.manual.materias_sem_nivel()
+    if not materia or materia not in faltam:
+        if materia:
+            console.print(f"[red]Nenhuma gerada de {escape(materia)!r} está sem nível.[/]")
+        else:
+            console.print("[red]Diga a matéria[/] (--materia): um lote por matéria.")
+        if faltam:
+            console.print("[dim]Sem nível, por matéria:[/]")
+            for nome, n in faltam.items():
+                console.print(f'  [dim]{n:4d}[/]  --materia "{escape(nome)}"')
+        raise typer.Exit(code=1)
+
+    lote = servico.manual.pedido_de_niveis(materia)
+    destino = servico.manual.salvar_pedido(lote)
+    total = sum(len(p["questoes"]) for p in lote["pedidos"])
+    console.print(f"[green]{len(lote['pedidos'])} pedido(s) de nível[/] "
+                  f"({total} questões de {escape(materia)}) em {destino}")
+    console.print(f"[dim]Lote {lote['lote']}. Nada foi gasto.[/]")
+    console.print(
+        "Responda pelo Claude Code: peça para ele ler o arquivo e seguir o "
+        "campo [bold]como_responder[/]. Depois:\n"
+        f"  [bold]{escape(fichas_puras.COMANDO_DE_IMPORTAR)}[/]",
+        soft_wrap=True,
+    )
+
+
 def _importar_resposta_da_ia(arquivo: Path) -> None:
     """O `--importar`: confere a resposta e diz em voz alta o que recusou."""
     if not arquivo.exists():
@@ -1202,7 +1239,8 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
     o_que = {"macetes": "macete(s)", "explicacoes": "explicação(ões)",
              "classificacao": "classificação(ões)",
              "associados": "conceito(s) associado(s)",
-             "fichas": "ficha(s)", "resumos": "resumo(s)"}.get(resultado["tipo"],
+             "fichas": "ficha(s)", "resumos": "resumo(s)",
+             "niveis": "nível(is)"}.get(resultado["tipo"],
                                                                "questão(ões)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
     console.print(f"[dim]Procedência: {resultado['modelo']}[/]")
@@ -1228,7 +1266,20 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"[yellow]{len(resultado['recusas'])} recusada(s):[/]")
         for motivo in resultado["recusas"]:
             console.print(f"  - {motivo}")
-    if resultado["tipo"] == "classificacao":
+    if resultado["tipo"] == "niveis":
+        from radar import niveis
+
+        console.print(f"Nível: fácil/média/difícil "
+                      f"{niveis.descrever(resultado['distribuicao'])}")
+        suspeitas = resultado.get("suspeitas") or []
+        if suspeitas:
+            # So listadas, para eu conferir: nada e rejeitado por elas.
+            console.print(f"[yellow]{len(suspeitas)} suspeita(s), para conferir:[/]")
+            for impressao, conteudo, motivo in suspeitas:
+                console.print(f"  - {impressao[:8]} ({escape(conteudo or 'sem nó')}): "
+                              f"{escape(motivo)}", soft_wrap=True)
+        console.print("[dim]Em data/questoes_geradas.json (versionado).[/]")
+    elif resultado["tipo"] == "classificacao":
         console.print("[dim]Em data/classificacoes.json (versionado). Confira em "
                       "radar web, Análises > Conferência.[/]")
     elif resultado["tipo"] == "associados":

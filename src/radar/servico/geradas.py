@@ -597,6 +597,38 @@ def gravar(questoes: list) -> int:
     return gravadas
 
 
+def gravar_niveis(aceitos: list[dict], procedencia: str) -> tuple[int, list[str]]:
+    """O nivel das geradas que nao tinham um (decisao 151). Devolve (quantas
+    gravou, as impressoes que ja tinham nivel e ficaram como estavam).
+
+    So as quatro colunas do nivel: o texto, as alternativas e o gabarito nao
+    passam por aqui. Sem procedencia, nada e gravado - o nivel e dado de IA.
+    """
+    if not aceitos:
+        return 0, []
+    if not (procedencia or "").strip():
+        raise ValueError("nivel sem procedencia nao e gravado: diga de onde ele veio")
+    criar_tabelas()
+    gravadas, ja_tinham = 0, []
+    with sessao() as s:
+        por_impressao = {q.impressao: q for q in s.scalars(
+            select(QuestaoGerada).where(
+                QuestaoGerada.impressao.in_([a["impressao"] for a in aceitos])))}
+        for aceito in aceitos:
+            questao = por_impressao.get(aceito["impressao"])
+            if questao is None:
+                continue
+            if questao.nivel:
+                ja_tinham.append(aceito["impressao"])
+                continue
+            questao.nivel = aceito["nivel"]
+            questao.por_que_o_nivel = aceito["por_que_o_nivel"]
+            questao.nivel_procedencia = procedencia
+            questao.suspeita = aceito.get("suspeita")
+            gravadas += 1
+    return gravadas, ja_tinham
+
+
 def gerar(
     materia: str | None = None,
     quantas: int = QUANTIDADE_PADRAO,
