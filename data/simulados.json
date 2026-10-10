@@ -1494,5 +1494,117 @@
         "respondida_em": null
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-10T00:03:05.407983+00:00",
+    "filtros": {
+      "conteudo": null,
+      "conteudos": [
+        "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Deveres do condenado",
+        "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Direitos do preso"
+      ],
+      "da_faixa": {
+        "bloco": "plano_b",
+        "data": "2026-10-09",
+        "indice": 1,
+        "titulo": "Questões de prova: Deveres e direitos do preso (arts. 38 a 43)"
+      },
+      "geradas": true,
+      "materia": null,
+      "quantidade": 10
+    },
+    "finalizado_em": "2026-10-10T00:16:34.120011+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "58b5dc07781dc2df61c861764363edac",
+        "ordem": 1,
+        "respondida_em": "2026-10-10T00:05:13.247118+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "8c8aa2d2e3b4729091410e1ae515c951",
+        "ordem": 2,
+        "respondida_em": "2026-10-10T00:06:09.496340+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "d41af864f8fe2a09538283a038ca14f4",
+        "ordem": 3,
+        "respondida_em": "2026-10-10T00:09:04.610524+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "b03775142169ba53e43f719ea580cff9",
+        "ordem": 4,
+        "respondida_em": "2026-10-10T00:11:01.527928+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "ccb8678452451db6cc29de188f4fe0a1",
+        "ordem": 5,
+        "respondida_em": "2026-10-10T00:11:37.318228+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "d3990f8b32bc000c1d64c44111c6519d",
+        "ordem": 6,
+        "respondida_em": "2026-10-10T00:13:27.901905+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "0d586effc7ad1e2c012b0f7b557e741a",
+        "ordem": 7,
+        "respondida_em": "2026-10-10T00:13:44.650793+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "b1627356a1a44b4570a088abe19229a9",
+        "ordem": 8,
+        "respondida_em": "2026-10-10T00:14:18.954755+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "ca99b241e1e35c9450466f731e28e0a0",
+        "ordem": 9,
+        "respondida_em": "2026-10-10T00:15:36.019924+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "3834bd258f8e1764d482634cab395a24",
+        "ordem": 10,
+        "respondida_em": "2026-10-10T00:16:34.117601+00:00"
+      }
+    ]
   }
 ]

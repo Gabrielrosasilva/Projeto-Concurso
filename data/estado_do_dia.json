@@ -364,5 +364,56 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-10T00:28:06.338308+00:00",
+    "data": "2026-10-09",
+    "faixas_feitas": [
+      {
+        "acertos": null,
+        "assunto": "Artigos-chave: Deveres e direitos do preso (arts. 38 a 43)",
+        "bloco": "plano_b",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Lei de Execução Penal",
+        "minutos": 10,
+        "questoes": null,
+        "titulo": "Artigos-chave: Deveres e direitos do preso (arts. 38 a 43)"
+      },
+      {
+        "acertos": 2,
+        "assunto": "Questões de prova: Deveres e direitos do preso (arts. 38 a 43)",
+        "bloco": "plano_b",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Lei de Execução Penal",
+        "minutos": 20,
+        "questoes": 4,
+        "titulo": "Questões de prova: Deveres e direitos do preso (arts. 38 a 43)"
+      }
+    ],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-10T00:01:58.613143+00:00",
+        "bloco": "plano_b",
+        "chutes": null,
+        "entendi": "mais_ou_menos",
+        "indice": 0,
+        "materia": "Lei de Execução Penal",
+        "nota": "",
+        "titulo": "Artigos-chave: Deveres e direitos do preso (arts. 38 a 43)"
+      },
+      {
+        "anotado_em": "2026-10-10T00:27:59.140415+00:00",
+        "bloco": "plano_b",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 1,
+        "materia": "Lei de Execução Penal",
+        "nota": "nao achei queestoes no qconursos tem de outras bancas algumas e eu fiz elas mas nada muito confiavel.",
+        "titulo": "Questões de prova: Deveres e direitos do preso (arts. 38 a 43)"
+      }
+    ],
+    "plano_b": 30
   }
 ]
