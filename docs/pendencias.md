@@ -469,8 +469,10 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   - ✅ **Instituto AOCP** (`aocp`, decisao 155): os abertos e em andamento,
     com a data do edital pelo detalhe. Ligada pela carga inicial, sem aviso
     do que ja havia (34 concursos, nenhum de carreira catarinense hoje);
-  - ⚪ **Prefeitura de Balneario Camboriu**, **SEJURI** e **IDIB**, nesta
-    ordem;
+  - ✅ **Prefeitura de Balneario Camboriu** (`prefeitura_bc`, decisao 156):
+    a noticia de concurso publico; o cartao da Guarda de BC ja mostra o
+    anuncio de 04/08/2026 pela propria prefeitura (🟢);
+  - ⚪ **SEJURI** e **IDIB**, nesta ordem;
   - ⚪ **Idecan** e **Prefeitura de Florianopolis** ficam so registrados (sem
     codigo): o Idecan nao diz o estado no titulo e a pagina do concurso esta
     atras do desafio do Cloudflare; a de Florianopolis nao tem caminho

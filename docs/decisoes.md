@@ -5221,3 +5221,30 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Medido em 11/10/2026: 34 concursos (3 do alvo principal em outro estado,
      11 secundarios, nenhum de carreira catarinense - o CFP da PM SC ainda
      nao esta na lista).
+
+156. **as noticias da Prefeitura de Balneario Camboriu sao a fonte 6
+     (`collectors/prefeitura_bc.py`)** (terceira fonte do pedido de 11/10). O
+     site e uma tela em React; o JavaScript dela pede as noticias a
+     `sim.bc.sc.gov.br/portal-municipio/api/noticias`, com o filtro `titulo`
+     da busca da tela. O robots.txt desse host so proibe /public/ (fotos e
+     anexos); o do www nao existe. As regras:
+     - **so concurso publico**, como o pedido mandou: a busca por "concurso"
+       no titulo, e daqui so sai o titulo (ou o subtitulo) que diz "concurso
+       publico", "novo concurso" ou "concurso para" - o "para" colado no
+       "concurso", para "concurso de desenho para estudantes" e "Concurso
+       Educacao para o Transito" ficarem de fora. De 03/2025 a 10/2026, 1
+       das 11 noticias: o anuncio do concurso da Guarda (04/08/2026);
+     - **a lista de editais da mesma API fica de fora**: sao convocacao e
+       nomeacao dos concursos de 2022, e nao novidade;
+     - **os campos**: o link e a rota da tela (`/noticia/<id>`); o municipio
+       e a UF sao da propria prefeitura; o subtitulo e o resumo; a situacao
+       fica desconhecida e o TIPO fica para o classificador, como no site de
+       noticias (a da Guarda saiu `concurso`, anel proximo, alvo secundario
+       de olho em BC);
+     - **e oficial**: `prefeitura_bc` no `fontes_oficiais` (🟢) e
+       `bc.sc.gov.br` no `dominios_oficiais`. Uma pagina por coleta; sem
+       carga inicial (o historico e uma noticia so, de agosto: nao avisa).
+     O cartao da Guarda de BC passou de "a coleta nao achou concurso" para
+     "sem informacao (segundo 🟢 04/08/2026)". Na primeira coleta de
+     verdade o host nao resolveu no DNS (passageiro): a fonte falhou sozinha
+     e as outras gravaram, como deve.

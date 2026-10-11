@@ -1,0 +1,153 @@
+{
+ "periodoEleitoral": "Não",
+ "paginacao": {
+  "total_noticias": 11,
+  "total_paginas": 1,
+  "pagina_atual": 1
+ },
+ "noticias": [
+  {
+   "newsId": 44255,
+   "title": "Alunos do Programa Transitar são premiados no Concurso Educação para o Trânsito 2026",
+   "resume": "",
+   "subtitle": "Estudantes do CEM Ivo Silveira receberam bicicletas durante abertura da Semana Nacional de Trânsito em Balneário Camboriú",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/24497.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/24497.jpg",
+   "published": "22/09/2026 - 16:42",
+   "category": 42,
+   "highlight": true,
+   "category_name": "BC Trânsito"
+  },
+  {
+   "newsId": 44193,
+   "title": "Alunos do Programa Transitar são premiados no Concurso Educação para o Trânsito 2026",
+   "resume": "",
+   "subtitle": "Três estudantes do CEM Ivo Silveira receberão bicicletas durante ação da Semana Nacional de Trânsito e do Dia Mundial sem Carro",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/24257.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/24257.jpg",
+   "published": "17/09/2026 - 19:10",
+   "category": 42,
+   "highlight": true,
+   "category_name": "BC Trânsito"
+  },
+  {
+   "newsId": 43608,
+   "title": "Balneário Camboriú anuncia novo concurso para Guarda Municipal",
+   "resume": "",
+   "subtitle": "Projeto de lei amplia 90 vagas para a corporação",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/21740.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/21740.jpg",
+   "published": "04/08/2026 - 11:54",
+   "category": 18,
+   "highlight": true,
+   "category_name": "Segurança Pública"
+  },
+  {
+   "newsId": 43091,
+   "title": "Aluna da Rede Municipal de BC vence concurso de oratória",
+   "resume": ".",
+   "subtitle": "Thamyris participará de etapa regional em agosto, na capital",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/19550.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/19550.jpg",
+   "published": "24/06/2026 - 17:01",
+   "category": 4,
+   "highlight": true,
+   "category_name": "Educação"
+  },
+  {
+   "newsId": 43049,
+   "title": "Balneário Camboriú conquista títulos em concurso interestadual de bandas e fanfarras",
+   "resume": "",
+   "subtitle": "Banda Escolar Ghislandi e Banda Municipal foram destaque no III Concurso Interestadual de Bandas e Fanfarras de Sengés",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/19393.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/19393.jpg",
+   "published": "21/06/2026 - 17:28",
+   "category": 4,
+   "highlight": true,
+   "category_name": "Educação"
+  },
+  {
+   "newsId": 40932,
+   "title": "Conselho Tutelar premia vencedores do concurso de desenhos",
+   "resume": "",
+   "subtitle": "",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/1023.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/1023.jpg",
+   "published": "04/12/2025 - 19:15",
+   "category": 5,
+   "highlight": true,
+   "category_name": "Assistência Social"
+  },
+  {
+   "newsId": 40814,
+   "title": "Conselho Tutelar de Balneário Camboriú divulga resultado do concurso de desenho",
+   "resume": "",
+   "subtitle": "",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/992.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/992.jpg",
+   "published": "26/11/2025 - 13:57",
+   "category": 5,
+   "highlight": true,
+   "category_name": "Assistência Social"
+  },
+  {
+   "newsId": 40331,
+   "title": "Conselho Tutelar e Secretaria de Educação promovem concurso de desenho para estudantes da rede municipal",
+   "resume": "",
+   "subtitle": "",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/6635.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/6635.jpg",
+   "published": "21/10/2025 - 12:13",
+   "category": 5,
+   "highlight": true,
+   "category_name": "Assistência Social"
+  },
+  {
+   "newsId": 39964,
+   "title": "LIC: inscrições para o concurso cultural do projeto BC em Traços terminam neste sábado",
+   "resume": "",
+   "subtitle": "",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/8311.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/8311.jpg",
+   "published": "19/09/2025 - 16:32",
+   "category": 15,
+   "highlight": true,
+   "category_name": "Cultura"
+  },
+  {
+   "newsId": 39346,
+   "title": "Alunos de Balneário Camboriú conquistam troféus no 37º Concurso de Bandas e Fanfarras ",
+   "resume": "",
+   "subtitle": "",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/9482.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/9482.jpg",
+   "published": "22/07/2025 - 16:53",
+   "category": 4,
+   "highlight": true,
+   "category_name": "Educação"
+  },
+  {
+   "newsId": 37971,
+   "title": "Balneário Camboriú recebe Concurso Brasileiro de Cervejas e premiação das melhores do país",
+   "resume": "",
+   "subtitle": "",
+   "description": null,
+   "img": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/original/10878.jpg",
+   "thumb": "https://sim.bc.sc.gov.br/public/portal-municipio/noticias/tn/10878.jpg",
+   "published": "06/03/2025 - 15:37",
+   "category": 7,
+   "highlight": true,
+   "category_name": "Turismo"
+  }
+ ]
+}

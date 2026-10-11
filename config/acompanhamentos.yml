@@ -49,6 +49,7 @@ fontes_oficiais:
   - ieses
   - doe_sc        # o Diario Oficial do Estado (decisao 154)
   - aocp          # o Instituto AOCP, banca da PM SC (decisao 155)
+  - prefeitura_bc # as noticias da Prefeitura de Balneario Camboriu (decisao 156)
 
 # Os sites das bancas, para a pesquisa do Claude Code: a novidade so fica
 # como "oficial" quando o link e de governo (.gov.br, .leg.br, .jus.br, .mp.br)
@@ -62,6 +63,7 @@ dominios_oficiais:
   # Os de governo ja valem pelo .gov.br; ficam aqui para a lista dizer de
   # onde vem cada fonte oficial do radar.
   - doe.sea.sc.gov.br   # o Diario Oficial do Estado (e o portal.doe...)
+  - bc.sc.gov.br        # a Prefeitura de Balneario Camboriu (e o sim.bc...)
 
 # A FEPESE nao manda a UF, e organiza concurso em SC. Sem UF, vir dela conta
 # como SC. A IESES nao entra: ela faz concurso em varios estados.
