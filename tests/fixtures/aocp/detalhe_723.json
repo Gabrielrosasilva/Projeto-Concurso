@@ -1,0 +1,21 @@
+[
+ {
+  "id": 3033,
+  "nome": "PREFEITURA MUNICIPAL DE CURITIBA",
+  "chamada": "   ",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/d1034b3c-350b-48d5-b024-eec88a6d2196.png",
+  "status": "novo",
+  "edital": "contad26",
+  "tipoProcesso": "Processo seletivo",
+  "dataInicioInscricao": "2026-10-19 09:00:00",
+  "dataFinalInscricao": "2026-11-05 23:59:59",
+  "links": [],
+  "publicacoes": [
+   {
+    "id": 249899,
+    "nome": "09/10/2026 - Edital de Abertura - PSS Prefeitura Curitiba - Contador nº 10/2026 ",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/43101a9e-25ca-4019-b1bd-0c88b769ef85.pdf"
+   }
+  ]
+ }
+]

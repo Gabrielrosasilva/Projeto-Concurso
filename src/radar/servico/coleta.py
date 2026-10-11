@@ -17,6 +17,7 @@ from sqlalchemy import select
 from radar import eventos as linha_do_tempo
 from radar import regioes
 from radar.classificador import classificar
+from radar.collectors.aocp import InstitutoAocp
 from radar.collectors.base import Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
 from radar.collectors.doe_sc import DoeSc
@@ -29,7 +30,7 @@ log = logging.getLogger(__name__)
 
 
 # Registre aqui cada coletor novo. E o unico lugar que precisa saber a lista.
-COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese, Ieses, DoeSc]
+COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese, Ieses, DoeSc, InstitutoAocp]
 
 # Campos que a coleta manda. O que NAO esta aqui e seu e nunca e sobrescrito:
 # interesse, notas, e o que voce corrigir a mao no banco.
@@ -388,9 +389,12 @@ def _marcar_historico_como_avisado(fonte: str) -> int:
     return marcados
 
 
-#: As fontes que tem historico para trazer de uma vez. A FEPESE e a IESES
-#: devolvem tudo em toda coleta; estas duas, so o recente.
-FONTES_COM_CARGA = (ConcursosNoBrasil.nome, DoeSc.nome)
+#: As fontes que tem historico para trazer de uma vez: o feed e o diario
+#: devolvem so o recente. A AOCP devolve tudo em toda coleta, mas entra aqui
+#: pelo outro motivo da carga - ligar a fonte sem despejar no celular o que
+#: ela ja tinha (decisao 155): sem municipio, o concurso de outro estado e
+#: `indefinida`, e `indefinida` avisa.
+FONTES_COM_CARGA = (ConcursosNoBrasil.nome, DoeSc.nome, InstitutoAocp.nome)
 
 
 def carga_inicial(dias: int = 90, fonte: str = ConcursosNoBrasil.nome) -> ResultadoColeta:
@@ -412,6 +416,8 @@ def carga_inicial(dias: int = 90, fonte: str = ConcursosNoBrasil.nome) -> Result
     try:
         if fonte == DoeSc.nome:
             itens = DoeSc(dias=dias).coletar()
+        elif fonte == InstitutoAocp.nome:
+            itens = InstitutoAocp().coletar()      # a lista toda; nao tem janela
         else:
             desde = agora() - timedelta(days=dias)
             paginas = min(dias * PAGINAS_POR_DIA, MAXIMO_DE_PAGINAS)

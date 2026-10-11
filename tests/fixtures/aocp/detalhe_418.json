@@ -1,0 +1,36 @@
+[
+ {
+  "id": 143,
+  "nome": "CBMGO - CORPO DE BOMBEIROS MILITAR DO ESTADO DE GOIÁS",
+  "chamada": "O Secretário de Estado da Administração de Goiás  SEAD, no uso de suas atribuições torna pública a realização de Concurso Público para provimento de vagas para o cargo de Cadete (Aluno Oficial) do Corpo de Bombeiros.",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/1654707627588.jpg",
+  "status": "andamento",
+  "edital": "cbmgocadete22",
+  "tipoProcesso": "",
+  "dataInicioInscricao": "2022-08-09 09:00:00",
+  "dataFinalInscricao": "2022-09-20 23:59:00",
+  "links": [],
+  "publicacoes": [
+   {
+    "id": 20096,
+    "nome": "26/09/2002 - Anexo Único do Deferimento das Inscrições - Pós-Recursos",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/anexo-deferimento-inscricoes-cadete-pos-recursos.pdf"
+   },
+   {
+    "id": 19380,
+    "nome": "21/07/2022 - Anexo II - Dos Conteúdos Programáticos - Edital de Abertura Concurso Público nº004/2022 - RETIFICADO",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/anexo-ii-edital-abertura-bmgo-4.pdf"
+   },
+   {
+    "id": 19379,
+    "nome": "21/07/2022 - Anexo I - Dos Requisitos e Atribuições dos Cargos - Edital de Abertura Concurso Público nº004/2022 - RETIFICADO",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/anexo-i-edital-abertura-bmgo-4.pdf"
+   },
+   {
+    "id": 19378,
+    "nome": "21/07/2022 - Edital de Abertura Concurso Público nº004/2022 - RETIFICADO",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/edital-abertura-bmgo-4.pdf"
+   }
+  ]
+ }
+]

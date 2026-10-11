@@ -1,0 +1,39 @@
+[
+ {
+  "id": 1580,
+  "nome": "SAP/SC - SECRETARIA DE ESTADO DA ADMINISTRAÇÃO PRISIONAL E SOCIOEDUCATIVA",
+  "chamada": "A Secretaria de Estado da Administração Prisional e Socioeducativa, do Estado de Santa Catarina, no uso de suas atribuições legais, TORNA PÚBLICA a realização do PROCESSO SELETIVO SIMPLIFICADO, objetivando a contratação temporária.",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/sc-arma.png",
+  "status": "andamento",
+  "edital": "sapsc2024",
+  "tipoProcesso": "",
+  "dataInicioInscricao": "2024-10-07 09:00:00",
+  "dataFinalInscricao": "2024-11-06 23:59:59",
+  "links": [
+   {
+    "nome": "Consultar resposta do recurso contra o resultado da matrícula no Curso de Formação Profissional",
+    "url": "https://link.institutoaocp.org.br/open-link?resposta=21449&idRecurso=34008&concurso=620",
+    "identificador": "",
+    "categoria": null,
+    "formularioPrincipal": false
+   }
+  ],
+  "publicacoes": [
+   {
+    "id": 115080,
+    "nome": "16/10/2024 - Anexo I - do Edital de Deferimento e Indeferimento das Solicitações de Isenção da Taxa de Inscrição - Processo Seletivo Simplificado n° 01/2024 - SAP",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/97a3c412-d227-45c5-b179-40af6d1aaa04.pdf"
+   },
+   {
+    "id": 115079,
+    "nome": "16/10/2024 - Edital de Deferimento e Indeferimento das Solicitações de Isenção da Taxa de Inscrição - Processo Seletivo Simplificado n° 01/2024 - SAP",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/5ab121c4-7b7c-4a84-83d3-2f3d7c2a8e8f.pdf"
+   },
+   {
+    "id": 113297,
+    "nome": "07/10/2024 - Edital de Abertura nº 01/2024-SAP - Processo Seletivo Simplificado - RETIFICADO",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/a1cfafda-d7e0-4f15-9e3c-70813db793f5.pdf"
+   }
+  ]
+ }
+]

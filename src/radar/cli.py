@@ -265,7 +265,8 @@ def carga_inicial(
     dias: int = typer.Option(90, help="Quantos dias de histórico buscar"),
     fonte: str = typer.Option(
         "concursosnobrasil",
-        help="De onde: concursosnobrasil (o feed) ou doe_sc (o Diario Oficial do Estado)",
+        help="De onde: concursosnobrasil (o feed), doe_sc (o Diario Oficial do "
+             "Estado) ou aocp (a lista do Instituto AOCP)",
     ),
     sim: bool = typer.Option(False, "--sim", help="Não perguntar antes de começar"),
 ) -> None:
@@ -285,7 +286,14 @@ def carga_inicial(
                       f"As que têm: {', '.join(servico.FONTES_COM_CARGA)}.")
         raise typer.Exit(code=1)
 
-    if fonte == "doe_sc":
+    if fonte == "aocp":
+        console.print(
+            "Vou ler a lista do Instituto AOCP (inscrições abertas, novos e em "
+            "andamento) e o detalhe de cada concurso, com pausa de 1,5s entre os "
+            "pedidos, e guardar tudo como histórico, sem aviso.\n"
+            "Leva cerca de 1 minuto. Ctrl+C para parar."
+        )
+    elif fonte == "doe_sc":
         console.print(
             f"Vou buscar [bold]{dias} dias[/] do Diário Oficial do Estado: três "
             f"buscas, de 100 em 100 acertos, e o texto dos poucos atos que "

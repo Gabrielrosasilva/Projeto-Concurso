@@ -5175,3 +5175,49 @@ viraram estudo extra "Onde: Radar". Copia antes em
      redirecionamento e o marca como lido: inofensivo. Na aba Acompanhando, a
      primeira carga acende o 🔔 dos atos antigos (o evento "entrou no radar"
      tem a data de hoje): e uma vez so, e o "Marcar como visto" apaga.
+
+155. **o Instituto AOCP e a fonte 5 (`collectors/aocp.py`)** (segunda fonte
+     do pedido de 11/10; a banca contratada pela PM SC, decisao 154). Pela API
+     que a pagina de concursos usa, achada no JavaScript dela: `GET
+     /api/concursos?status=` e o detalhe em
+     `link.institutoaocp.org.br/api/concursos/<id>`. Nenhum dos dois dominios
+     tem robots.txt (404). As regras:
+     - **so os abertos e em andamento**, como o pedido mandou: SUBSCRIBE ->
+       `inscricoes_abertas`, NEW (o edital saiu, a inscricao vem) e
+       IN_PROGRESS -> `edital_publicado`. Os finalizados e os com resultado
+       ficam de fora. O registro de teste da lista ("Cliente de Teste") e
+       descartado;
+     - **um detalhe por concurso** (uns 35 por coleta, ~50 s): a lista NAO
+       tem data, e sem data a regra do aviso deixa passar (decisao das
+       fontes: "nao da para afirmar que e velho"). O detalhe traz as
+       publicacoes com a data no nome, e a mais antiga e o edital de
+       abertura - a Policia Penal do PR fica com 19/02/2024, e nao vira
+       "novidade". A data mais de um ano anterior ao ano do numero do edital
+       e descartada (o CBMGO tem uma "26/09/2002" num edital de 2022). Sem o
+       detalhe, o concurso entra sem data;
+     - **a UF so quando o nome do orgao afirma**: a sigla no fim ("CASAN -
+       ... - SC") ou colada ("SAD/PE", "IGP-RS", "SEJUSP/MG"), ou o estado
+       por extenso depois de de/do/da ("DO ESTADO DO RIO DE JANEIRO", "DO
+       PARA"). "IPSM - Instituto de Previdencia..." e "PREFEITURA MUNICIPAL
+       DE CURITIBA" ficam sem UF. O municipio, so de prefeitura e camara;
+     - **o titulo nao muda a cada etapa**: o ano (do numero do edital), o
+       nome do orgao e o comeco da chamada da lista, sem o andamento
+       ("Divulgado...", "Breve...", "Concurso suspenso..."). O andamento fica
+       no `extra`, com as datas de inscricao;
+     - **o resumo e a chamada do detalhe**, que diz o que o concurso e. E com
+       ela que o `alvo.yml` separa o processo seletivo de contratacao
+       temporaria da SAP/SC de 2024 (mesma secretaria do alvo principal) do
+       concurso da Policia Penal. O `tipoProcesso` escrito pela banca vale
+       mais que o texto; vazio, vale o "processo seletivo" da chamada;
+     - **a fonte liga com a carga inicial** (`radar carga-inicial --fonte
+       aocp`, que le a lista toda e marca como avisado so o que e dela).
+       Concurso de outro estado sem municipio e `indefinida`, e `indefinida`
+       avisa: ligar a AOCP sem a carga mandaria 12 avisos no primeiro dia
+       (PMPE, CBMPE, os seletivos de Curitiba...), passando do teto de 10. A
+       regra de distancia nao mudou: daqui para frente, o concurso NOVO da
+       AOCP avisa como o de qualquer fonte;
+     - **a AOCP e oficial**: `aocp` no `fontes_oficiais` (🟢) e
+       `institutoaocp.org.br` no `dominios_oficiais`.
+     Medido em 11/10/2026: 34 concursos (3 do alvo principal em outro estado,
+     11 secundarios, nenhum de carreira catarinense - o CFP da PM SC ainda
+     nao esta na lista).

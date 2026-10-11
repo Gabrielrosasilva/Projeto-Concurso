@@ -120,7 +120,7 @@ GitHub, uma vez por dia, e ele e o unico (`--avisar` manda daqui assim mesmo):
 
 ```
 1/5 Coletando das fontes
-   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s) | doe_sc: 0 novo(s)
+   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s) | doe_sc: 0 novo(s) | aocp: 0 novo(s)
 2/5 Lendo a pagina dos concursos novos
    15 pagina(s) lida(s): 1 com prazo de inscricao, 0 com banca
 3/5 Baixando edital de concurso aberto
@@ -984,6 +984,7 @@ radar reclassificar         # reaplica a regra do anel no banco inteiro
 radar situacoes             # recalcula a fase (o tempo passa sozinho)
 radar carga-inicial --dias 90   # historico, uma vez so; --sim nao pergunta
 radar carga-inicial --fonte doe_sc --dias 365   # um ano do Diario Oficial do Estado
+radar carga-inicial --fonte aocp                 # liga a AOCP sem avisar o que ja havia
 ```
 
 **Ver**
@@ -2038,7 +2039,8 @@ src/radar/
 │   ├── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao
 │   ├── fepese.py                fonte 2: API REST do WordPress da FEPESE
 │   ├── ieses.py                 fonte 3: API JSON da listagem de projetos
-│   └── doe_sc.py                fonte 4: a busca do Diario Oficial do Estado
+│   ├── doe_sc.py                fonte 4: a busca do Diario Oficial do Estado
+│   └── aocp.py                  fonte 5: a API da lista do Instituto AOCP
 └── web/          FastAPI + Jinja2
     ├── app.py                    rotas e o contexto de cada tela
     ├── templates/_topo.html      a barra de navegacao, igual em toda pagina
@@ -2139,6 +2141,7 @@ Nao existe API oficial unica de concursos no Brasil. As que o radar usa:
 | FEPESE | os concursos da banca que mais atua em SC | API REST do WordPress |
 | IESES | a outra banca catarinense, de 2021 para ca | API JSON |
 | Diario Oficial do Estado (`doe_sc`) | o contrato da banca, a autorizacao, a comissao e o edital das carreiras do `config/alvo.yml` | a busca que a tela do portal usa (POST) |
+| Instituto AOCP (`aocp`) | os concursos abertos e em andamento da banca da PM SC, de todo o pais | a API JSON da lista e do detalhe |
 
 O Diario Oficial do Estado e o primeiro a saber da banca: o contrato da PM SC
 com o Instituto AOCP saiu la em 02/07/2026, e o resultado da dispensa um mes
@@ -2146,6 +2149,10 @@ antes. A coleta de todo dia le os ultimos 10 dias; o historico de um ano entra
 uma vez, com `radar carga-inicial --fonte doe_sc --dias 365`. O edital
 escaneado so em imagem, sem o cargo no trecho que a busca devolve, fica de
 fora (decisao 154).
+
+A AOCP e banca nacional: o que e de SC sai do nome do orgao ("... - SC") e do
+`config/alvo.yml`. A fonte foi ligada com `radar carga-inicial --fonte aocp`,
+que guarda a lista daquele dia como historico, sem aviso (decisao 155).
 
 Regras da casa para as proximas:
 

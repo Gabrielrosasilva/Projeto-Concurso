@@ -466,8 +466,11 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   - ✅ **Diario Oficial do Estado** (`doe_sc`, decisao 154): o contrato da
     banca, a autorizacao, a comissao e o edital das carreiras do
     `config/alvo.yml`. A carga de um ano trouxe 17 atos;
-  - ⚪ **Instituto AOCP**, **Prefeitura de Balneario Camboriu**, **SEJURI** e
-    **IDIB**, nesta ordem;
+  - ✅ **Instituto AOCP** (`aocp`, decisao 155): os abertos e em andamento,
+    com a data do edital pelo detalhe. Ligada pela carga inicial, sem aviso
+    do que ja havia (34 concursos, nenhum de carreira catarinense hoje);
+  - ⚪ **Prefeitura de Balneario Camboriu**, **SEJURI** e **IDIB**, nesta
+    ordem;
   - ⚪ **Idecan** e **Prefeitura de Florianopolis** ficam so registrados (sem
     codigo): o Idecan nao diz o estado no titulo e a pagina do concurso esta
     atras do desafio do Cloudflare; a de Florianopolis nao tem caminho

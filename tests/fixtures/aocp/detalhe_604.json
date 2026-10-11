@@ -1,0 +1,39 @@
+[
+ {
+  "id": 1184,
+  "nome": "PPPR - POLÍCIA PENAL DO PARANÁ",
+  "chamada": "O PRESIDENTE DA COMISSÃO DE CONCURSO DA POLÍCIA PENAL DO ESTADO DO PARANÁ, TORNA PÚBLICO o presente Edital que estabelece as instruções especiais para a realização de Concurso Público, para provimento de 07 (sete) vagas no cargo de Policial Penal.",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/1708352311487.jpg",
+  "status": "andamento",
+  "edital": "pppr2024",
+  "tipoProcesso": "",
+  "dataInicioInscricao": "2024-02-22 09:00:00",
+  "dataFinalInscricao": "2024-03-22 23:59:59",
+  "links": [
+   {
+    "nome": "Visualizar Cadernos de Questões e Gabarito Definitivo",
+    "url": "https://link.institutoaocp.org.br/open-link?identificador=722238b7-0f34-452f-ad4e-b8dab109708d",
+    "identificador": "722238b7-0f34-452f-ad4e-b8dab109708d",
+    "categoria": "Divulgação",
+    "formularioPrincipal": false
+   }
+  ],
+  "publicacoes": [
+   {
+    "id": 82838,
+    "nome": "04/03/2024 - Retificação do Edital nº 04/2024 - Policia Penal, de 27 de fevereiro de 2024",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/825ea48c-c83a-46f1-8e92-f9d914f39ccb.pdf"
+   },
+   {
+    "id": 81155,
+    "nome": "21/02/2024 - Edital nº 02/2024 - Retificação do Edital nº 04/2024 - Policia Penal, de 15 de fevereiro de 2024 - ALTERAÇÃO DO CRONOGRAMA DE EXECUÇÃO.",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/09716225-9d99-4fb4-9543-2e4f74dcaaa8.pdf"
+   },
+   {
+    "id": 80924,
+    "nome": "19/02/2024 - Edital de Abertura RETIFICADO - Concurso Público nº 04/2024 - Polícia Penal",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/1f13e593-b986-45f1-a2fc-4c73eb7b756d.pdf"
+   }
+  ]
+ }
+]

@@ -1,0 +1,39 @@
+[
+ {
+  "id": 44,
+  "nome": "CASAN - COMPANHIA CATARINENSE DE ÁGUAS E SANEAMENTO - SC",
+  "chamada": "O Diretor Presidente e a Diretora Administrativa da Companhia Catarinense de Águas e Saneamento (CASAN), no uso de suas atribuições legais, tornam pública a realização do Concurso Público para o provimento de vagas do seu quadro de pessoal, sob o regime da Consolidação das Leis do Trabalho – CLT, Edital de Abertura Nº 002/2026 - Cargos de Nível Técnico.",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/4bdeb596-99ab-4d93-84d5-7d28936b8f6a.png",
+  "status": "andamento",
+  "edital": "casan20262",
+  "tipoProcesso": "Concurso público",
+  "dataInicioInscricao": "2026-09-04 14:00:00",
+  "dataFinalInscricao": "2026-10-09 14:00:59",
+  "links": [
+   {
+    "nome": "Consultar Número e Situação da Inscrição",
+    "url": "https://link.institutoaocp.org.br/open-link?identificador=c4894944-35d2-47b1-9098-5f90814d9e44",
+    "identificador": "c4894944-35d2-47b1-9098-5f90814d9e44",
+    "categoria": "Consulta",
+    "formularioPrincipal": false
+   }
+  ],
+  "publicacoes": [
+   {
+    "id": 242684,
+    "nome": "09/09/2026 - Edital de abertura com áudio e tradução em libras",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/e7cdba77-5d90-4345-be36-adb3fdb86bad.html"
+   },
+   {
+    "id": 242382,
+    "nome": "04/09/2026 - Primeiro Termo de Retificação do Edital de Abertura Concurso para Emprego Público Nº 002/2026",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/474a6cd1-b48a-41c4-8556-1199f1d37d31.pdf"
+   },
+   {
+    "id": 242242,
+    "nome": "04/09/2026 - Concurso para Emprego Público Nº 002/2026 - Cargos de Nível Técnico - Edital de Abertura - Retificado em 04/09/2026 e 21/09/2026",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/7af05de2-6271-42f0-9d60-01252b51af18.pdf"
+   }
+  ]
+ }
+]

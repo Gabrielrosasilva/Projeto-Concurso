@@ -1,0 +1,29 @@
+[
+ {
+  "id": 3066,
+  "nome": "IPSM - Instituto de Previdência do Servidor Municipal",
+  "chamada": "O INSTITUTO DE PREVIDÊNCIA DO SERVIDOR MUNICIPAL – IPSM, de São José dos Campos/SP, torna pública a realização de CONCURSO PÚBLICO para provimento de cargos efetivos, sob o regime estatutário.",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/3ca36508-677c-4c5b-9cab-1c820c18f9e3.png",
+  "status": "inscricao",
+  "edital": "ipsm2026",
+  "tipoProcesso": "Concurso público",
+  "dataInicioInscricao": "2026-10-01 09:00:00",
+  "dataFinalInscricao": "2026-10-30 14:00:59",
+  "links": [
+   {
+    "nome": " \tFormulário de Solicitação de Inscrição (Disponível até 14h do dia 30/10/2026) ",
+    "url": "https://link.institutoaocp.org.br/open-link?identificador=c0b37084-b563-4312-841d-a54a346f29ff",
+    "identificador": "c0b37084-b563-4312-841d-a54a346f29ff",
+    "categoria": "Procedimentos",
+    "formularioPrincipal": false
+   }
+  ],
+  "publicacoes": [
+   {
+    "id": 247342,
+    "nome": "29/09/2026 - Concurso Público 01/2026 - Edital de Abertura ",
+    "url": "https://arquivos-site.institutoaocp.org.br/publicacoes/51d24a11-8294-451c-a5bf-71700825d86f.pdf"
+   }
+  ]
+ }
+]

@@ -1,0 +1,40 @@
+[
+ {
+  "id": 720,
+  "nome": "IPSM - Instituto de Previdência do Servidor Municipal",
+  "chamada": "Concurso Público nº 01/2026 - Divulgado o Edital de Abertura . Inscrições de 01/10/2026 até 30/10/2026",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/3ca36508-677c-4c5b-9cab-1c820c18f9e3.png",
+  "status": "SUBSCRIBE",
+  "edital": "ipsm2026",
+  "numeroEdital": "01/2026",
+  "escolaridades": null,
+  "remuneracao": null,
+  "vagas": null,
+  "cargos": null,
+  "dataInscricao": "30/10/2026 14:00:59",
+  "linkInscricao": null,
+  "dataProva": null,
+  "tipoProcesso": "Concurso público",
+  "ocultarDataInscricao": false,
+  "origem": "legado"
+ },
+ {
+  "id": 714,
+  "nome": "PMPE - POLÍCIA MILITAR DE PERNAMBUCO",
+  "chamada": "Concurso Público nº 001/2026 - Polícia Militar de Pernambuco (PMPE) - Divulgado o Edital de Abertura.",
+  "logo": "https://s3.amazonaws.com/arquivos-geral/institutoaocp/logomarca/1698329357032.jpg",
+  "status": "SUBSCRIBE",
+  "edital": "pmpe2026",
+  "numeroEdital": "001/2026",
+  "escolaridades": null,
+  "remuneracao": null,
+  "vagas": null,
+  "cargos": null,
+  "dataInscricao": "05/11/2026 23:59:59",
+  "linkInscricao": null,
+  "dataProva": null,
+  "tipoProcesso": "Concurso público",
+  "ocultarDataInscricao": false,
+  "origem": "legado"
+ }
+]
