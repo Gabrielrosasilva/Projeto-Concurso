@@ -270,9 +270,16 @@ fonte 4 (`collectors/doe_sc.py`, pela busca POST da tela): o contrato ou a
 dispensa da banca, a autorizacao, a comissao e o edital das carreiras do
 `config/alvo.yml`. A carga de um ano (`radar carga-inicial --fonte doe_sc`)
 trouxe 17 atos, entre eles o contrato da PM SC com o Instituto AOCP (o cartao
-da PM diz "Banca: Instituto AOCP 🟢"). Faltam o Instituto AOCP, a Prefeitura
-de BC, a SEJURI e o IDIB, nesta ordem, e so o registro do Idecan e da
-Prefeitura de Florianopolis (pendencia J).
+da PM diz "Banca: Instituto AOCP 🟢"). Depois, no mesmo dia (decisoes 155 a
+159): o Instituto AOCP (`aocp`, os abertos e em andamento, ligado pela
+`carga-inicial --fonte aocp` para nao avisar o que ja havia), as noticias da
+Prefeitura de BC (`prefeitura_bc`, o anuncio do concurso da Guarda no cartao
+de BC), os editais da SEJURI (`sejuri`) e o IDIB (`idib`, o CFO e o CFP do
+CBMSC no cartao dos Bombeiros, pelo `cbmsc` do `prova_de_sc`). O Idecan e a
+Prefeitura de Florianopolis ficaram fora, so registrados. O radar tem 8
+fontes. Abertos na pendencia J, por decidir: o marco Banca que so olha o
+item mais novo, o 🔔 de edital velho recem-chegado e o CFO no cartao do
+Oficial de Bombeiros.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
