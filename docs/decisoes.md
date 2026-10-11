@@ -4618,7 +4618,9 @@ viraram estudo extra "Onde: Radar". Copia antes em
        item mais recente que e concurso, dentro de 12 meses e sem ano velho
        no titulo ("2019 – ..." republicado em 2024 nao conta). Sem ele, o
        cartao diz "nenhum concurso desta carreira no radar nos ultimos 12
-       meses" e os marcos ficam "aguardando" - hoje, com o dado real, os 7;
+       meses" e os marcos ficam "aguardando" - hoje, com o dado real, os 7.
+       (Mudou em 11/10, decisao 160: a situacao sai do mais recente que a
+       SABE, e cada marco do item mais recente da edicao que o sabe.);
      - **o 🔔 e so FATO**: o evento da linha do tempo (apareceu, mudou de
        situacao, edital, inscricao, prova, retificacao) de item que nao e
        noticia, um por link, depois da data `novidades_desde` e do meu
@@ -5332,3 +5334,31 @@ viraram estudo extra "Onde: Radar". Copia antes em
        pode. O concurso da Guarda deve sair por banca (a FEPESE escreve
        "PMF", e ja e coletada). Reavaliar com a pagina salva da lista de
        noticias da Secretaria de Seguranca e Ordem Publica.
+
+160. **a situacao e os marcos do cartao olham a edicao inteira** (muda a
+     141; aprovado por voce em 11/10, depois das fontes oficiais novas). A
+     141 tirava a situacao e os quatro marcos de UM item, o mais recente da
+     edicao. Com a fonte que publica um ato por vez - o Diario Oficial:
+     contrato, edital, errata, retificacao -, o mais recente costuma ser o
+     que nao sabe nada: a PC SC dizia "Banca: aguardando" com o contrato do
+     Idecan no radar, e os Bombeiros "sem informacao" com o edital do IDIB.
+     As regras:
+     - **a edicao e a mesma da 141**: o que e concurso, dentro da janela do
+       YAML e sem ano velho no titulo;
+     - **cada marco vem do item mais recente da edicao que o sabe**: a Banca
+       do mais novo com banca, o Edital do mais novo com edital publicado, as
+       Inscricoes do mais novo com prazo, a Prova do mais novo com data. Cada
+       um leva o selo e o link do SEU item (a ressalva do site de noticias
+       continua por marco). Sem item que saiba, a pesquisa conferida; sem as
+       duas, "aguardando" - como antes;
+     - **a linha da situacao vem do mais recente que SABE a fase**: o item
+       "desconhecida" nao esconde a fase que outro da mesma edicao provou. Se
+       nenhum sabe, o mais recente de todos, como antes;
+     - **nada mais mudou**: o 🔔, o historico, o Telegram, a banca que liga
+       o cartao da principal ao estudo e a linha do proximo concurso.
+     Com o banco de 11/10: Bombeiro Militar SC passou a "edital publicado
+     (segundo 🟢 28/01/2026)", Banca IDIB e Edital publicado em 28/01/2026;
+     PC SC, a "banca contratada (segundo 🟢 05/12/2025)", com a banca pelo
+     nome que o DOE escreve. O Edital da PC SC segue "aguardando": o edital
+     de abertura do DOE entra como `desconhecida` (decisao 154, a regra do
+     pedido), e e por isso (pendencia J).

@@ -488,12 +488,16 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
     proibe nada. Nenhuma fonte de hoje usa curinga no que o radar pede (so a
     Prefeitura de Florianopolis, que ficou fora); se uma fonte nova usar, o
     `Coletor._robots_permite` precisa entender antes de ela entrar.
-  - 🟡 **O marco Banca nao ve o contrato quando ha ato mais novo** (achado
-    ao ligar o DOE, 11/10): os marcos do cartao saem so do item mais recente
-    da edicao (decisao 141). Na PC SC e no CBMSC o mais recente e uma
-    retificacao ou errata, sem banca, e o cartao diz "Banca: aguardando" com
-    o contrato do Idecan e do IDIB no radar. Proposta: o marco Banca procurar
-    nos itens da edicao inteira. Precisa da sua aprovacao (muda a 141);
+  - ✅ **Os marcos olham a edicao inteira** (feito em 11/10, decisao 160):
+    cada marco do item mais novo que o sabe, e a situacao do mais novo que a
+    sabe. Os Bombeiros dizem "edital publicado" com Banca IDIB; a PC SC,
+    "banca contratada" com a banca do contrato;
+  - ⚪ **O edital de abertura do DOE entra sem fase**: pela regra do pedido de
+    11/10 (decisao 154, "o resto desconhecida"), o edital de abertura da PC
+    SC (12/12/2025) nao preenche o marco Edital, e o cartao diz "banca
+    contratada". Se quiser, o edital de ABERTURA do DOE pode entrar como
+    `edital_publicado` (a errata, a retificacao e a comissao continuam sem
+    fase). Decisao sua;
   - 🟡 **O 🔔 acende para edital velho que acabou de entrar no radar** (DOE,
     SEJURI): o evento "entrou no radar" tem a data de hoje, e o 🔔 conta
     evento depois do `novidades_desde`. Os editais de 2006 a 2022 da SEJURI e

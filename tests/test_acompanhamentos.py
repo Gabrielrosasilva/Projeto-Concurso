@@ -194,6 +194,73 @@ def test_o_item_recente_diz_a_situacao_e_os_marcos(ambiente):
     assert marcos["Prova"].valor == "aguardando" and not marcos["Prova"].sabido
 
 
+def test_cada_marco_vem_do_item_da_edicao_que_o_sabe(ambiente):
+    """Decisao 160: o Diario Oficial publica um ato por vez. O contrato tem a
+    banca, o edital tem a data, e a errata mais nova nao sabe nada - e nao
+    pode esconder os outros dois."""
+    _semear(
+        _item("https://fepese.test/contrato", "2025 - POLÍCIA CIVIL - EXTRATO DE CONTRATO",
+              fonte="fepese", situacao="banca_definida", banca="IDECAN",
+              publicado_em=agora() - timedelta(days=90)),
+        _item("https://fepese.test/edital", "2025 - EDITAL DE CONCURSO PÚBLICO PC SC",
+              fonte="fepese", situacao="edital_publicado",
+              publicado_em=agora() - timedelta(days=60)),
+        _item("https://fepese.test/errata", "2026 - Edital nº 01/2025 (Retificação) PC SC",
+              fonte="fepese", situacao="desconhecida",
+              publicado_em=agora() - timedelta(days=5)),
+    )
+    cartao = _cartao("Polícia Civil SC")
+
+    # A situacao: o mais novo que SABE, e nao a errata.
+    assert cartao.situacao == "edital publicado"
+    assert cartao.referencia.link == "https://fepese.test/edital"
+    marcos = {m.nome: m for m in cartao.marcos}
+    assert marcos["Banca"].valor == "IDECAN"
+    assert marcos["Banca"].link == "https://fepese.test/contrato"
+    assert marcos["Edital"].valor.startswith("publicado em")
+    assert marcos["Edital"].link == "https://fepese.test/edital"
+    assert marcos["Prova"].valor == "aguardando"
+
+
+def test_o_marco_e_do_item_mais_novo_que_o_sabe(ambiente):
+    """Duas bancas na edicao (a primeira foi trocada): vale a mais nova."""
+    _semear(
+        _item("https://fepese.test/1", "2026 - Concurso PC SC: contrato", fonte="fepese",
+              situacao="banca_definida", banca="IDECAN", publicado_em=agora() - timedelta(days=200)),
+        _item("https://fepese.test/2", "2026 - Concurso PC SC: novo contrato", fonte="fepese",
+              situacao="banca_definida", banca="Instituto AOCP",
+              publicado_em=agora() - timedelta(days=20)),
+    )
+    assert {m.nome: m for m in _cartao("Polícia Civil SC").marcos}["Banca"].valor \
+        == "Instituto AOCP"
+
+
+def test_sem_ninguem_saber_a_fase_o_mais_novo_diz(ambiente):
+    _semear(
+        _item("https://fepese.test/a", "2026 - Concurso PC SC: comissão", fonte="fepese",
+              situacao="desconhecida", publicado_em=agora() - timedelta(days=40)),
+        _item("https://fepese.test/b", "2026 - Concurso PC SC: portaria", fonte="fepese",
+              situacao="desconhecida", publicado_em=agora() - timedelta(days=4)),
+    )
+    cartao = _cartao("Polícia Civil SC")
+    assert cartao.referencia.link == "https://fepese.test/b"
+    assert {m.valor for m in cartao.marcos} == {"aguardando"}
+
+
+def test_item_de_outra_edicao_nao_preenche_marco(ambiente):
+    """A banca de 2019 nao e a do proximo concurso, mesmo republicada agora."""
+    _semear(
+        _item("https://fepese.test/velho", "2019 – Concurso Polícia Civil SC", fonte="fepese",
+              situacao="edital_publicado", banca="FEPESE",
+              publicado_em=agora() - timedelta(days=10)),
+        _item("https://fepese.test/novo", "2026 - Concurso PC SC: portaria", fonte="fepese",
+              situacao="desconhecida", publicado_em=agora() - timedelta(days=4)),
+    )
+    marcos = {m.nome: m for m in _cartao("Polícia Civil SC").marcos}
+    assert marcos["Banca"].valor == "aguardando"
+    assert marcos["Edital"].valor == "aguardando"
+
+
 def test_noticia_nao_diz_situacao(ambiente):
     _semear(_item("https://x.test/1", "PC SC: governador fala sobre segurança",
                   tipo="noticia"))

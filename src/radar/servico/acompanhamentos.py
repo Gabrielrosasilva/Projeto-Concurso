@@ -124,6 +124,10 @@ TIPOS_SEM_SITUACAO = ("noticia", "seletivo")
 #: As situacoes em que o edital ja saiu.
 COM_EDITAL = ("edital_publicado", "inscricoes_abertas", "encerrado")
 
+#: O que a fonte grava quando nao sabe a fase: nao diz a situacao da edicao
+#: enquanto outro item dela souber.
+VALORES_SEM_SITUACAO = (None, "", "desconhecida")
+
 #: "2019 – Secretaria de Estado..." - o titulo da FEPESE comeca pelo ano do
 #: concurso, e a pagina de 2019 foi republicada em 2024. Sem olhar o ano, ela
 #: passava por edicao atual so por ter data recente.
@@ -263,23 +267,41 @@ def _edicao_antiga(concurso: Concurso, hoje: date) -> bool:
     return bool(achado) and int(achado.group(1)) < hoje.year - 1
 
 
-def _referencia(itens: list[Concurso], hoje: date) -> Concurso | None:
-    """O item que diz a situacao da edicao de agora, ou None.
+def _edicao(itens: list[Concurso], hoje: date) -> list[Concurso]:
+    """Os itens da edicao de agora: o que e concurso, dentro da janela do YAML
+    e sem ano velho no titulo.
 
-    O mais recente que e concurso, dentro da janela do YAML e sem ano velho
-    no titulo. Item mais antigo e de outra edicao: o edital de 2019 nao diz
-    nada sobre o proximo, e dizer "edital publicado" por causa dele seria
-    exatamente o chute que a tela nao pode dar.
+    Item mais antigo e de outra edicao: o edital de 2019 nao diz nada sobre o
+    proximo, e dizer "edital publicado" por causa dele seria exatamente o
+    chute que a tela nao pode dar.
     """
     janela = _inicio_do_dia(hoje) - timedelta(
         days=carreiras.regras().janela_da_edicao_em_dias)
-    candidatos = [
+    return [
         c for c in itens
         if c.tipo not in TIPOS_SEM_SITUACAO
         and _quando(c) >= janela
         and not _edicao_antiga(c, hoje)
     ]
-    return max(candidatos, key=_quando) if candidatos else None
+
+
+def _mais_novo(itens: list[Concurso], sabe) -> Concurso | None:
+    """O item mais recente que sabe o que se pergunta, ou None."""
+    que_sabem = [c for c in itens if sabe(c)]
+    return max(que_sabem, key=_quando) if que_sabem else None
+
+
+def _referencia(edicao: list[Concurso]) -> Concurso | None:
+    """O item que diz a situacao da edicao de agora, ou None.
+
+    O mais recente que SABE a situacao (decisao 160); so quando nenhum sabe,
+    o mais recente de todos. Uma retificacao "sem informacao" do Diario
+    Oficial nao esconde a fase que outro item da mesma edicao ja provou - o
+    cartao dos Bombeiros dizia "sem informacao" com o edital do IDIB no
+    radar.
+    """
+    return (_mais_novo(edicao, lambda c: c.situacao not in VALORES_SEM_SITUACAO)
+            or _mais_novo(edicao, lambda c: True))
 
 
 def _pesquisas_que_valem(pesquisas: list[dict], marco: str) -> dict | None:
@@ -297,35 +319,49 @@ def _marco_da_pesquisa(nome: str, pesquisa: dict | None) -> Marco:
     return Marco(nome, valor, IA, pesquisa.get("link"))
 
 
-def _marcos(ref: Concurso | None, pesquisas: list[dict]) -> list[Marco]:
-    """Os quatro marcos. O item de referencia manda; sem ele, a pesquisa que
-    eu ja conferi; sem as duas, "aguardando"."""
-    selo = _selo_do_item(ref) if ref else None
-    link = ref.url if ref else None
+def _marco_do_item(nome: str, item: Concurso, valor: str) -> Marco:
+    return Marco(nome, valor, _selo_do_item(item), item.url)
 
-    if ref and ref.banca:
-        banca = Marco("Banca", ref.banca, selo, link)
+
+def _marcos(edicao: list[Concurso], pesquisas: list[dict]) -> list[Marco]:
+    """Os quatro marcos, cada um do item mais recente da edicao que o sabe
+    (decisao 160); sem item que saiba, a pesquisa que eu ja conferi; sem as
+    duas, "aguardando".
+
+    Cada marco leva o selo e o link do SEU item. Ate 11/10 os quatro saiam
+    so do item mais recente, e a fonte que publica um ato por vez (o Diario
+    Oficial: contrato, edital, errata) escondia a banca atras de uma errata -
+    a PC SC dizia "Banca: aguardando" com o contrato do Idecan no radar.
+    """
+    com_banca = _mais_novo(edicao, lambda c: c.banca)
+    if com_banca:
+        banca = _marco_do_item("Banca", com_banca, com_banca.banca)
     else:
         banca = _marco_da_pesquisa("Banca", _pesquisas_que_valem(pesquisas, "banca"))
 
-    if ref and ref.situacao in COM_EDITAL:
-        quando = f" em {formatar_data(ref.publicado_em)}" if ref.publicado_em else ""
-        edital = Marco("Edital", f"publicado{quando}", selo, link)
+    com_edital = _mais_novo(edicao, lambda c: c.situacao in COM_EDITAL)
+    if com_edital:
+        quando = (f" em {formatar_data(com_edital.publicado_em)}"
+                  if com_edital.publicado_em else "")
+        edital = _marco_do_item("Edital", com_edital, f"publicado{quando}")
     else:
         edital = _marco_da_pesquisa("Edital", _pesquisas_que_valem(pesquisas, "edital"))
 
-    if ref and ref.inscricoes_ate:
-        if ref.inscricoes_de:
-            prazo = f"{formatar_data(ref.inscricoes_de)} a {formatar_data(ref.inscricoes_ate)}"
+    com_prazo = _mais_novo(edicao, lambda c: c.inscricoes_ate)
+    if com_prazo:
+        if com_prazo.inscricoes_de:
+            prazo = (f"{formatar_data(com_prazo.inscricoes_de)} a "
+                     f"{formatar_data(com_prazo.inscricoes_ate)}")
         else:
-            prazo = f"até {formatar_data(ref.inscricoes_ate)}"
-        inscricoes = Marco("Inscrições", prazo, selo, link)
+            prazo = f"até {formatar_data(com_prazo.inscricoes_ate)}"
+        inscricoes = _marco_do_item("Inscrições", com_prazo, prazo)
     else:
         inscricoes = _marco_da_pesquisa(
             "Inscrições", _pesquisas_que_valem(pesquisas, "inscricoes"))
 
-    if ref and ref.data_prova:
-        prova = Marco("Prova", formatar_data(ref.data_prova), selo, link)
+    com_prova = _mais_novo(edicao, lambda c: c.data_prova)
+    if com_prova:
+        prova = _marco_do_item("Prova", com_prova, formatar_data(com_prova.data_prova))
     else:
         prova = _marco_da_pesquisa("Prova", _pesquisas_que_valem(pesquisas, "prova"))
 
@@ -441,7 +477,8 @@ def cartoes(hoje: date | None = None) -> list[Cartao]:
                 linha for linha in linhas
                 if linha.fato and (corte is None or linha.momento_da_novidade > corte)
             ])
-            ref = _referencia(itens, hoje)
+            edicao = _edicao(itens, hoje)
+            ref = _referencia(edicao)
             if ref:
                 situacao = linha_do_tempo.NOME_DA_SITUACAO.get(ref.situacao, ref.situacao)
                 referencia = Linha(_quando(ref), ref.titulo, _selo_do_item(ref), ref.url)
@@ -452,7 +489,7 @@ def cartoes(hoje: date | None = None) -> list[Cartao]:
                 referencia = None
 
             principal = acompanhamento.cargo == carreiras.PRINCIPAL
-            marcos = _marcos(ref, minhas)
+            marcos = _marcos(edicao, minhas)
             banca = next(m for m in marcos if m.nome == "Banca")
             cartao = Cartao(
                 nome=acompanhamento.nome,
