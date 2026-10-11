@@ -182,6 +182,27 @@ class Coletor(ABC):
         corrigir_codificacao(resposta)
         return resposta
 
+    def post(self, url: str, corpo: dict) -> requests.Response:
+        """Manda JSON e devolve a resposta, com as mesmas boas maneiras do get.
+
+        Existe por causa da busca do Diario Oficial do Estado: a tela dele
+        pergunta por POST, e e essa a pergunta que o coletor repete. Nao segue
+        redirecionamento: um POST que muda de endereco e outra coisa, e o
+        robots.txt do destino nao teria sido conferido.
+        """
+        if not self._robots_permite(url):
+            raise ColetorBloqueadoPeloRobots(url)
+
+        self._esperar_a_vez(urlsplit(url).netloc)
+        resposta = self.http.post(
+            url, json=corpo, timeout=config.TIMEOUT_REQUISICAO, allow_redirects=False
+        )
+        resposta.raise_for_status()
+        if resposta.is_redirect:
+            raise requests.HTTPError(f"POST redirecionado para {resposta.headers.get('Location')}")
+        corrigir_codificacao(resposta)
+        return resposta
+
     # --- o que cada fonte precisa implementar -------------------------------
 
     @abstractmethod

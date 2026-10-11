@@ -5097,3 +5097,81 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Os testes leem o `coleta.yml` como dado (`tests/test_sincronizar.py`):
      os dois horarios, o `ref` do checkout, o manifesto no `git add` e o
      `cancel-in-progress: false`.
+
+154. **o Diario Oficial do Estado e a fonte 4 (`collectors/doe_sc.py`)**
+     (primeira fonte do pedido de 11/10). Nao e o DOM/SC: o DOE nao tem
+     robots.txt de verdade (o `/robots.txt` devolve a pagina HTML que
+     redireciona ao portal), e o portal pergunta a `POST
+     https://portal.doe.sea.sc.gov.br/apis/busca-materia` sem login - achado
+     no JavaScript da tela, como a API da IESES. As regras:
+     - **tres buscas por "concurso publico", na janela dos ultimos 10 dias**:
+       os tipos de ato de contratacao (contrato, extrato de contrato, ato e
+       edital de dispensa, extrato, licitacao, resultado de licitacao), as
+       categorias das forcas e a de Concursos, e os tipos de autorizacao (ato
+       de autorizar, autorizacao, portaria de autorizar, resolucao). Os
+       codigos sairam das listas que a mesma tela usa. A paginacao vai pelo
+       `total`, que conta ACERTOS: 100 acertos podem vir como 28 atos;
+     - **so entra o ato que e um de quatro, e de um cargo do
+       `config/alvo.yml`** (pelo `alvo.marcar`, sem lista no coletor: somar
+       carreira la traz os atos dela daqui). Contrato ou resultado da
+       dispensa cujo objeto e concurso -> `banca_definida`, com a banca como
+       o ato escreve ("Contratada: ..." ou "Item(ns): 1 - ..."); autorizacao
+       de realizar ou abrir o concurso -> `autorizado`; o ato que constitui
+       ou compoe a comissao do concurso e o edital de abertura, retificacao
+       ou errata -> `desconhecida`, como o pedido mandou (o classificador
+       ainda le o titulo). O cargo tem de estar no CABECALHO do ato (600
+       letras): o edital da Secretaria da Saude de 10/2025 fala em "delegado
+       de policia" num requisito, la pela pagina 30;
+     - **fica de fora**: o processo seletivo (o edital de militar temporario
+       do CBMSC; o contrato de 2025 da PM com o Idecan, que era de seletivo,
+       nao de concurso), a sancao, a advertencia, o aditivo e a rescisao, a
+       portaria de coordenador de prova e a assinada pelo "PRESIDENTE DA
+       COMISSAO" (a comissao so conta quando o ato a cria), a nomeacao e a
+       inclusao de quem ja passou, e o orgao fora do alvo (a CIDASC tambem
+       contratou banca). E o edital ESCANEADO so em imagem cujo trecho da
+       busca nao cita o cargo: o de abertura do CBMSC (27/01/2026) e assim,
+       e chega pelo site do IDIB. Afrouxar a peneira para ele custou 81
+       paginas por ano e nao trouxe nenhum ato a mais;
+     - **a peneira barata vem antes do texto integral**: o trecho da busca
+       tem de falar de concurso e do cargo e ja parecer um dos quatro atos
+       (ou ser, pelo tipo, edital). So entao o coletor busca o texto (o
+       `preview`, em paragrafos), que da o titulo ("PORTARIA N. 71/2026/CBMSC,
+       de 04/02/2026 - Constituir a Comissao de Concurso Publico...") e o
+       resumo. Sem o texto, o trecho segura o ato;
+     - **o resto dos campos**: `url` e o link do ato no portal (o `extrato`);
+       `uf` e SC sempre; o municipio fica para o classificador; `tipo`
+       concurso; a data e o dia da edicao a meia-noite daqui (o portal manda
+       meia-noite UTC, que seria a vespera); o titulo leva o ano na frente,
+       como o da IESES. A banca por extenso NAO vira sigla: e coisa para
+       conferir (pendencia J);
+     - **nunca `resumo: true`**: a API devolve entao um resumo GERADO POR
+       MAQUINA pelo proprio portal ("O documento e o Edital..."), e nao o
+       texto do ato;
+     - **o ato vai sem resumo**: o classificador procura a fase no titulo E
+       no resumo, e texto juridico engana - "conforme previsto no art." fez
+       do edital da Policia Cientifica e de uma errata do CBMSC concursos
+       "previstos" na primeira carga. O titulo ja diz o orgao e o cargo
+       (conferido nos 17 atos: o alvo casa so pelo titulo); o texto integral
+       fica no link do `extra` (`texto_integral`);
+     - **o historico entra uma vez**: `radar carga-inicial --fonte doe_sc
+       --dias 365` (o `carga_inicial` ganhou a fonte). A carga marca como
+       avisado SO o que e da fonte dela: em 11/10 o banco daqui tinha 750
+       concursos de outras fontes sem a marca, e a regra antiga marcava
+       todos. Vale tambem para a do Concursos no Brasil;
+     - **o `Coletor` ganhou o `post()`**, com o robots, o User-Agent e o
+       atraso do `get()`, e sem seguir redirecionamento;
+     - **o DOE e oficial**: `doe_sc` no `fontes_oficiais` (o selo 🟢) e
+       `doe.sea.sc.gov.br` no `dominios_oficiais` do
+       `config/acompanhamentos.yml` (o `.gov.br` ja valia; fica para a lista
+       dizer de onde vem cada fonte oficial).
+     Medido em 11/10/2026: a carga de um ano levou 3,7 minutos e trouxe 17
+     atos - os
+     contratos e as dispensas da PC SC (Idecan), do CBMSC (IDIB), da Policia
+     Cientifica (FEPESE) e da PM SC (Instituto AOCP, 27/05 e 02/07/2026), os
+     editais de abertura da PC SC e da Policia Cientifica, as erratas do
+     CBMSC, a comissao do CBMSC e retificacoes da PC SC. A coleta de todo dia
+     faz 3 buscas e, em media, menos de um texto. O `detalhar` abre o link do
+     ato uma vez (e a rota da tela, com `#`), nao acha nada na pagina de
+     redirecionamento e o marca como lido: inofensivo. Na aba Acompanhando, a
+     primeira carga acende o 🔔 dos atos antigos (o evento "entrou no radar"
+     tem a data de hoje): e uma vez so, e o "Marcar como visto" apaga.

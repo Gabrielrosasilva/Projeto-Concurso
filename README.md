@@ -120,7 +120,7 @@ GitHub, uma vez por dia, e ele e o unico (`--avisar` manda daqui assim mesmo):
 
 ```
 1/5 Coletando das fontes
-   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s)
+   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s) | doe_sc: 0 novo(s)
 2/5 Lendo a pagina dos concursos novos
    15 pagina(s) lida(s): 1 com prazo de inscricao, 0 com banca
 3/5 Baixando edital de concurso aberto
@@ -978,11 +978,12 @@ radar atualizar             # a rotina do dia a dia (faz quase tudo)
 **Coletar e classificar**
 
 ```bash
-radar coletar               # so a coleta das tres fontes
+radar coletar               # so a coleta das fontes
 radar detalhar              # le a pagina do post: prazo, banca, lotacao
 radar reclassificar         # reaplica a regra do anel no banco inteiro
 radar situacoes             # recalcula a fase (o tempo passa sozinho)
 radar carga-inicial --dias 90   # historico, uma vez so; --sim nao pergunta
+radar carga-inicial --fonte doe_sc --dias 365   # um ano do Diario Oficial do Estado
 ```
 
 **Ver**
@@ -2036,7 +2037,8 @@ src/radar/
 │   │                            User-Agent e atraso entre requisicoes
 │   ├── concursos_no_brasil.py   fonte 1: feed RSS, com paginacao
 │   ├── fepese.py                fonte 2: API REST do WordPress da FEPESE
-│   └── ieses.py                 fonte 3: API JSON da listagem de projetos
+│   ├── ieses.py                 fonte 3: API JSON da listagem de projetos
+│   └── doe_sc.py                fonte 4: a busca do Diario Oficial do Estado
 └── web/          FastAPI + Jinja2
     ├── app.py                    rotas e o contexto de cada tela
     ├── templates/_topo.html      a barra de navegacao, igual em toda pagina
@@ -2085,7 +2087,9 @@ Depois inclua em `COLETORES`, dentro de `servico/coleta.py`.
 
 O `self.get()` herdado ja cuida de tres coisas: checa o `robots.txt` do site,
 manda o `User-Agent` do projeto e espera o intervalo configurado entre uma
-requisicao e outra ao mesmo host.
+requisicao e outra ao mesmo host. O `self.post(url, corpo)` faz o mesmo para
+a fonte que pergunta por POST com JSON (o Diario Oficial do Estado), e nao
+segue redirecionamento.
 
 ### Quem entra no acervo
 
@@ -2127,13 +2131,21 @@ o `coleta.yml` roda a suite antes de coletar.
 
 ## Sobre as fontes
 
-Nao existe API oficial unica de concursos no Brasil. As tres que o radar usa:
+Nao existe API oficial unica de concursos no Brasil. As que o radar usa:
 
 | fonte | o que traz | como |
 |---|---|---|
 | Concursos no Brasil | concurso de todo o pais, inclusive municipal de SC | feed RSS |
 | FEPESE | os concursos da banca que mais atua em SC | API REST do WordPress |
 | IESES | a outra banca catarinense, de 2021 para ca | API JSON |
+| Diario Oficial do Estado (`doe_sc`) | o contrato da banca, a autorizacao, a comissao e o edital das carreiras do `config/alvo.yml` | a busca que a tela do portal usa (POST) |
+
+O Diario Oficial do Estado e o primeiro a saber da banca: o contrato da PM SC
+com o Instituto AOCP saiu la em 02/07/2026, e o resultado da dispensa um mes
+antes. A coleta de todo dia le os ultimos 10 dias; o historico de um ano entra
+uma vez, com `radar carga-inicial --fonte doe_sc --dias 365`. O edital
+escaneado so em imagem, sem o cargo no trecho que a busca devolve, fica de
+fora (decisao 154).
 
 Regras da casa para as proximas:
 

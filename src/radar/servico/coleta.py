@@ -19,6 +19,7 @@ from radar import regioes
 from radar.classificador import classificar
 from radar.collectors.base import Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
+from radar.collectors.doe_sc import DoeSc
 from radar.collectors.fepese import Fepese
 from radar.collectors.ieses import Ieses
 from radar.db import criar_tabelas, sessao
@@ -28,7 +29,7 @@ log = logging.getLogger(__name__)
 
 
 # Registre aqui cada coletor novo. E o unico lugar que precisa saber a lista.
-COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese, Ieses]
+COLETORES: list[type[Coletor]] = [ConcursosNoBrasil, Fepese, Ieses, DoeSc]
 
 # Campos que a coleta manda. O que NAO esta aqui e seu e nunca e sobrescrito:
 # interesse, notas, e o que voce corrigir a mao no banco.
@@ -361,7 +362,7 @@ def reclassificar() -> dict[str, int]:
 PAGINAS_POR_DIA = 3
 
 
-def _marcar_historico_como_avisado() -> int:
+def _marcar_historico_como_avisado(fonte: str) -> int:
     """Encerra a fila de avisos depois da carga inicial.
 
     Sem isto, trazer 90 dias de historico enche a fila com centenas de
@@ -371,8 +372,14 @@ def _marcar_historico_como_avisado() -> int:
 
     Carga inicial e historico, nao novidade: quem chega por ela se ve na
     pagina e na lista. A partir daqui, so a coleta diaria gera aviso.
+
+    So a fonte da carga (decisao 154): em 11/10/2026 o banco daqui tinha 750
+    concursos de outras fontes sem a marca, e a carga do Diario Oficial nao
+    tem nada que silenciar o que e delas.
     """
-    consulta = select(Concurso).where(Concurso.avisado_em.is_(None))
+    consulta = (select(Concurso)
+                .where(Concurso.avisado_em.is_(None))
+                .where(Concurso.fonte == fonte))
     marcados = 0
     with sessao() as s:
         for concurso in s.scalars(consulta):
@@ -381,32 +388,43 @@ def _marcar_historico_como_avisado() -> int:
     return marcados
 
 
-def carga_inicial(dias: int = 90) -> ResultadoColeta:
-    """Anda para tras no feed e traz o historico que a coleta diaria perdeu.
+#: As fontes que tem historico para trazer de uma vez. A FEPESE e a IESES
+#: devolvem tudo em toda coleta; estas duas, so o recente.
+FONTES_COM_CARGA = (ConcursosNoBrasil.nome, DoeSc.nome)
+
+
+def carga_inicial(dias: int = 90, fonte: str = ConcursosNoBrasil.nome) -> ResultadoColeta:
+    """Anda para tras na fonte e traz o historico que a coleta diaria perdeu.
 
     O RSS e um fluxo: ele so mostra o que e recente. Quem liga o radar hoje ve
     os concursos de hoje, e nada do que foi publicado antes. Esta funcao
-    resolve isso uma vez, lendo o feed pagina por pagina.
+    resolve isso uma vez, lendo o feed pagina por pagina. O Diario Oficial do
+    Estado e igual: a coleta de todo dia olha 10 dias, e o contrato da banca
+    de julho so entra por aqui (`fonte="doe_sc"`, decisao 154).
 
     Roda uma vez so, na mao. Nao entra na coleta diaria.
     """
+    if fonte not in FONTES_COM_CARGA:
+        raise ValueError(f"fonte sem carga inicial: {fonte} (sao {', '.join(FONTES_COM_CARGA)})")
     criar_tabelas()
 
-    desde = agora() - timedelta(days=dias)
-    paginas = min(dias * PAGINAS_POR_DIA, MAXIMO_DE_PAGINAS)
-
-    resultado = ResultadoColeta(fonte=ConcursosNoBrasil.nome)
+    resultado = ResultadoColeta(fonte=fonte)
     try:
-        itens = ConcursosNoBrasil(paginas=paginas, desde=desde).coletar()
+        if fonte == DoeSc.nome:
+            itens = DoeSc(dias=dias).coletar()
+        else:
+            desde = agora() - timedelta(days=dias)
+            paginas = min(dias * PAGINAS_POR_DIA, MAXIMO_DE_PAGINAS)
+            itens = ConcursosNoBrasil(paginas=paginas, desde=desde).coletar()
         with sessao() as s:
             for item in itens:
-                situacao = _gravar(s, item, ConcursosNoBrasil.nome)
+                situacao = _gravar(s, item, fonte)
                 if situacao == "novo":
                     resultado.novos += 1
                 elif situacao == "atualizado":
                     resultado.atualizados += 1
 
-        _marcar_historico_como_avisado()
+        _marcar_historico_como_avisado(fonte)
     except Exception as erro:  # noqa: BLE001 - de proposito: loga e segue
         log.warning("carga inicial falhou: %s", erro)
         log.debug("detalhe da falha na carga inicial", exc_info=True)

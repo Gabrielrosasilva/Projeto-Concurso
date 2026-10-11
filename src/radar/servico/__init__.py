@@ -183,6 +183,7 @@ from radar.servico.coleta import (      # noqa: F401 - a fachada
     _anel_da_lotacao,
     CAMPOS_DA_FONTE,
     COLETORES,
+    FONTES_COM_CARGA,
     PAGINAS_POR_DIA,
     VALORES_SEM_INFORMACAO,
     ResultadoColeta,

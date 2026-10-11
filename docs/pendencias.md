@@ -460,10 +460,35 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
 
 ### A IA pode fazer (quando voce pedir)
 
-- 🟡 **Fontes oficiais novas** (SEJURI/DPP, PCSC, PMSC, CBMSC, prefeituras de
-  Florianopolis e BC): uma por conversa, cada uma um arquivo em
-  `collectors/`, com o robots.txt conferido e teste com fixture. Precisa de
-  voce colar a pagina real - a sessao web nao tem internet;
+- 🟡 **Fontes oficiais novas** (pedido de 11/10: os 7 sites investigados de
+  uma vez, a ordem aprovada por voce). Uma por vez, cada uma um arquivo em
+  `collectors/`, com o robots.txt conferido e teste com fixture:
+  - ✅ **Diario Oficial do Estado** (`doe_sc`, decisao 154): o contrato da
+    banca, a autorizacao, a comissao e o edital das carreiras do
+    `config/alvo.yml`. A carga de um ano trouxe 17 atos;
+  - ⚪ **Instituto AOCP**, **Prefeitura de Balneario Camboriu**, **SEJURI** e
+    **IDIB**, nesta ordem;
+  - ⚪ **Idecan** e **Prefeitura de Florianopolis** ficam so registrados (sem
+    codigo): o Idecan nao diz o estado no titulo e a pagina do concurso esta
+    atras do desafio do Cloudflare; a de Florianopolis nao tem caminho
+    estavel e o robots dela usa curinga (`/*bet*`) que o leitor do radar
+    nao entende.
+  - 🟡 **O marco Banca nao ve o contrato quando ha ato mais novo** (achado
+    ao ligar o DOE, 11/10): os marcos do cartao saem so do item mais recente
+    da edicao (decisao 141). Na PC SC e no CBMSC o mais recente e uma
+    retificacao ou errata, sem banca, e o cartao diz "Banca: aguardando" com
+    o contrato do Idecan e do IDIB no radar. Proposta: o marco Banca procurar
+    nos itens da edicao inteira. Precisa da sua aprovacao (muda a 141);
+  - ⚪ **O CFO do CBMSC nao cai no cartao do Oficial de Bombeiros**: o DOE
+    escreve "Curso de Formacao de Oficiais (CFO)", e os termos do cartao
+    (`oficial de bombeiros`, `oficial bombeiro`...) nao casam. Somar um termo
+    ao `config/acompanhamentos.yml` e decisao sua: "formacao de oficiais"
+    sozinho pegaria tambem o CFO da PM;
+  - ⚪ **Conferir a banca por extenso**: o DOE escreve "INSTITUTO DE
+    DESENVOLVIMENTO EDUCACIONAL, CULTURAL, E ASSISTENCIAL NACIONAL" (o
+    Idecan) e "INSTITUTO DE DESENVOLVIMENTO INSTITUCIONAL BRASILEIRO" (o
+    IDIB). O coletor guarda como o ato escreve; virar sigla e uma tabela no
+    config, se um dia valer.
 - ✅ **A situacao do site de noticias e fraca** (feito em 08/10): o marco
   que vem so do Concursos no Brasil diz "segundo site de notícias" por
   extenso, no cartao e no `radar acompanhar` (decisao 141). Esperar a pagina

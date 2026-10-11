@@ -263,30 +263,48 @@ def listar(
 @app.command()
 def carga_inicial(
     dias: int = typer.Option(90, help="Quantos dias de histórico buscar"),
+    fonte: str = typer.Option(
+        "concursosnobrasil",
+        help="De onde: concursosnobrasil (o feed) ou doe_sc (o Diario Oficial do Estado)",
+    ),
     sim: bool = typer.Option(False, "--sim", help="Não perguntar antes de começar"),
 ) -> None:
     """Traz o historico que a coleta diaria nao pegou.
 
     O RSS e um fluxo: mostra so o que e recente. Quem liga o radar hoje ve os
     concursos de hoje e nada de antes. Este comando anda para tras no feed,
-    pagina por pagina, e preenche esse buraco.
+    pagina por pagina, e preenche esse buraco. Com `--fonte doe_sc`, faz o
+    mesmo no Diario Oficial do Estado, que a coleta de todo dia le so nos
+    ultimos 10 dias.
 
     Roda uma vez so, na mao. Demora alguns minutos: ha uma pausa entre as
     requisicoes para nao sobrecarregar o site.
     """
-    paginas = min(dias * servico.PAGINAS_POR_DIA, 400)
-    minutos = paginas * 1.5 / 60
+    if fonte not in servico.FONTES_COM_CARGA:
+        console.print(f"[red]Fonte sem carga inicial: {escape(fonte)}.[/] "
+                      f"As que têm: {', '.join(servico.FONTES_COM_CARGA)}.")
+        raise typer.Exit(code=1)
 
-    console.print(
-        f"Vou buscar [bold]{dias} dias[/] de histórico: até {paginas} páginas "
-        f"do feed, com pausa de 1,5s entre elas.\n"
-        f"Tempo estimado: [bold]{minutos:.0f} minuto(s)[/]. Ctrl+C para parar."
-    )
+    if fonte == "doe_sc":
+        console.print(
+            f"Vou buscar [bold]{dias} dias[/] do Diário Oficial do Estado: três "
+            f"buscas, de 100 em 100 acertos, e o texto dos poucos atos que "
+            f"interessam, com pausa de 1,5s entre os pedidos.\n"
+            f"Um ano leva uns 4 minutos. Ctrl+C para parar."
+        )
+    else:
+        paginas = min(dias * servico.PAGINAS_POR_DIA, 400)
+        minutos = paginas * 1.5 / 60
+        console.print(
+            f"Vou buscar [bold]{dias} dias[/] de histórico: até {paginas} páginas "
+            f"do feed, com pausa de 1,5s entre elas.\n"
+            f"Tempo estimado: [bold]{minutos:.0f} minuto(s)[/]. Ctrl+C para parar."
+        )
     if not sim and not typer.confirm("Comecar?", default=True):
         raise typer.Abort()
 
-    with console.status("Lendo o feed para trás..."):
-        resultado = servico.carga_inicial(dias=dias)
+    with console.status("Lendo a fonte para trás..."):
+        resultado = servico.carga_inicial(dias=dias, fonte=fonte)
 
     console.print(f"[red]{resultado}[/]" if resultado.erro else f"[green]{resultado}[/]")
 
