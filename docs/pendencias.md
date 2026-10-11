@@ -471,10 +471,14 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
     do que ja havia (34 concursos, nenhum de carreira catarinense hoje);
   - ✅ **Prefeitura de Balneario Camboriu** (`prefeitura_bc`, decisao 156):
     a noticia de concurso publico; o cartao da Guarda de BC ja mostra o
-    anuncio de 04/08/2026 pela propria prefeitura (🟢);
+    anuncio de 04/08/2026 pela propria prefeitura (🟢). Daqui, o host
+    `sim.bc.sc.gov.br` falhou no DNS em 2 das 4 coletas de 11/10 (a fonte
+    falha sozinha e as outras gravam): ver se o Actions tambem falha;
   - ✅ **SEJURI** (`sejuri`, decisao 157): os editais de concurso publico
     (2006 a 2022) e os processos seletivos; o `alvo.yml` separa;
-  - ⚪ **IDIB**;
+  - ✅ **IDIB** (`idib`, decisao 158): os abertos e em andamento; o CFO e o
+    CFP do CBMSC ja estao no cartao dos Bombeiros (pelo `cbmsc` do
+    `prova_de_sc`);
   - ⚪ **Idecan** e **Prefeitura de Florianopolis** ficam so registrados (sem
     codigo): o Idecan nao diz o estado no titulo e a pagina do concurso esta
     atras do desafio do Cloudflare; a de Florianopolis nao tem caminho

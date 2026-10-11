@@ -5277,3 +5277,32 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Policia Penal continua dizendo que nao ha concurso nos ultimos 12 meses
      - os quatro sao de edicoes velhas -, mas acende o 🔔 deles na primeira
      coleta (pendencia J).
+
+158. **o IDIB e a fonte 8 (`collectors/idib.py`)** (quinta fonte do pedido de
+     11/10; a banca do CBMSC de 2026). O robots.txt (o do Yoast) nao proibe
+     nada, e o WordPress expoe `/wp-json/wp/v2/posts`. Cada post e um
+     concurso, com o link para concurso.idib.org.br, e nao tem texto: so o
+     titulo. As regras:
+     - **so "Inscricoes Abertas" (32) e "Em andamento" (61)**, como na AOCP;
+       103 posts em 2 paginas (o `X-WP-TotalPages` diz quantas);
+     - **a UF so quando o titulo escreve**: colada no municipio
+       ("ITAREMA/CE", "ARAGUAINA-TO"), depois do travessao ("NISIA FLORESTA
+       – RN") ou o estado por extenso ("Policia Militar do Espirito Santo").
+       17 dos 103 nao escrevem, e ficam sem. O municipio, so de prefeitura e
+       camara; o ano do edital vai na frente do titulo, como nas outras;
+     - **o CBMSC prova SC pela configuracao, e nao pelo coletor**: o titulo
+       e so "EDITAL 002-2026/DP/CBMSC - CFO". Somar `cbmsc` ao `prova_de_sc`
+       do `config/acompanhamentos.yml` (como o `alvo.yml` ja faz com
+       "sap/sc" e "sejuri") pos o CFO e o CFP no cartao do Bombeiro Militar
+       SC; o coletor nao deduz estado de sigla. Tirar a linha tira os dois;
+     - **situacao pela categoria**: inscricoes abertas ou edital publicado;
+       tipo seletivo quando o titulo diz "processo seletivo"; banca IDIB;
+     - **e oficial**: `idib` no `fontes_oficiais` (🟢) e `idib.org.br` no
+       `dominios_oficiais`. Sem carga inicial: com o dado de 11/10, nenhum
+       dos 103 vira aviso (os de inscricao aberta sao prefeituras de outros
+       estados com municipio: anel remoto).
+     O cartao do Bombeiro Militar SC ganhou o CFO e o CFP; a situacao e os
+     marcos ainda saem da errata do DOE de 12/02, o item mais novo (a mesma
+     pendencia do marco Banca). O CFO nao cai no cartao do Oficial de
+     Bombeiros: os termos dele nao casam "FORMACAO DE OFICIAIS" (pendencia
+     J, decisao sua).

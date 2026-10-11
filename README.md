@@ -120,7 +120,7 @@ GitHub, uma vez por dia, e ele e o unico (`--avisar` manda daqui assim mesmo):
 
 ```
 1/5 Coletando das fontes
-   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s) | doe_sc: 0 novo(s) | aocp: 0 novo(s) | prefeitura_bc: 0 novo(s) | sejuri: 0 novo(s)
+   concursosnobrasil: 2 novo(s) | fepese: 0 novo(s) | ieses: 0 novo(s) | doe_sc: 0 novo(s) | aocp: 0 novo(s) | prefeitura_bc: 0 novo(s) | sejuri: 0 novo(s) | idib: 0 novo(s)
 2/5 Lendo a pagina dos concursos novos
    15 pagina(s) lida(s): 1 com prazo de inscricao, 0 com banca
 3/5 Baixando edital de concurso aberto
@@ -2042,7 +2042,8 @@ src/radar/
 │   ├── doe_sc.py                fonte 4: a busca do Diario Oficial do Estado
 │   ├── aocp.py                  fonte 5: a API da lista do Instituto AOCP
 │   ├── prefeitura_bc.py         fonte 6: as noticias da Prefeitura de BC
-│   └── sejuri.py                fonte 7: API REST do WordPress da SEJURI
+│   ├── sejuri.py                fonte 7: API REST do WordPress da SEJURI
+│   └── idib.py                  fonte 8: API REST do WordPress do IDIB
 └── web/          FastAPI + Jinja2
     ├── app.py                    rotas e o contexto de cada tela
     ├── templates/_topo.html      a barra de navegacao, igual em toda pagina
@@ -2146,6 +2147,7 @@ Nao existe API oficial unica de concursos no Brasil. As que o radar usa:
 | Instituto AOCP (`aocp`) | os concursos abertos e em andamento da banca da PM SC, de todo o pais | a API JSON da lista e do detalhe |
 | Prefeitura de Balneario Camboriu (`prefeitura_bc`) | a noticia de concurso publico da prefeitura (o anuncio do concurso da Guarda) | a API das noticias que a tela usa |
 | SEJURI (`sejuri`) | os editais de concurso publico e de processo seletivo do orgao do alvo principal | API REST do WordPress |
+| IDIB (`idib`) | os concursos abertos e em andamento da banca dos Bombeiros SC, de todo o pais | API REST do WordPress |
 
 O Diario Oficial do Estado e o primeiro a saber da banca: o contrato da PM SC
 com o Instituto AOCP saiu la em 02/07/2026, e o resultado da dispensa um mes

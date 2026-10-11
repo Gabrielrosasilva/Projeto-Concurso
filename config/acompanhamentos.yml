@@ -51,6 +51,7 @@ fontes_oficiais:
   - aocp          # o Instituto AOCP, banca da PM SC (decisao 155)
   - prefeitura_bc # as noticias da Prefeitura de Balneario Camboriu (decisao 156)
   - sejuri        # os editais da SEJURI, o orgao do alvo principal (decisao 157)
+  - idib          # o IDIB, banca dos Bombeiros SC (decisao 158)
 
 # Os sites das bancas, para a pesquisa do Claude Code: a novidade so fica
 # como "oficial" quando o link e de governo (.gov.br, .leg.br, .jus.br, .mp.br)
@@ -66,6 +67,7 @@ dominios_oficiais:
   - doe.sea.sc.gov.br   # o Diario Oficial do Estado (e o portal.doe...)
   - bc.sc.gov.br        # a Prefeitura de Balneario Camboriu (e o sim.bc...)
   - sejuri.sc.gov.br    # a SEJURI
+  - idib.org.br
 
 # A FEPESE nao manda a UF, e organiza concurso em SC. Sem UF, vir dela conta
 # como SC. A IESES nao entra: ela faz concurso em varios estados.
@@ -74,6 +76,10 @@ fontes_de_sc:
 
 prova_de_sc:
   - santa catarina
+  # A sigla do Corpo de Bombeiros de SC prova o estado: o IDIB escreve so
+  # "EDITAL 002-2026/DP/CBMSC - CFO", sem "SC" nem "Santa Catarina" (decisao
+  # 158). Tirar daqui tira o concurso do IDIB do cartao dos Bombeiros.
+  - cbmsc
 
 acompanhamentos:
   - nome: Polícia Penal SC

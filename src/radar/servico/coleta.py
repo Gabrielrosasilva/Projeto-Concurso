@@ -22,6 +22,7 @@ from radar.collectors.base import Coletor, ItemColetado
 from radar.collectors.concursos_no_brasil import MAXIMO_DE_PAGINAS, ConcursosNoBrasil
 from radar.collectors.doe_sc import DoeSc
 from radar.collectors.fepese import Fepese
+from radar.collectors.idib import Idib
 from radar.collectors.ieses import Ieses
 from radar.collectors.prefeitura_bc import PrefeituraBc
 from radar.collectors.sejuri import Sejuri
@@ -33,7 +34,7 @@ log = logging.getLogger(__name__)
 
 # Registre aqui cada coletor novo. E o unico lugar que precisa saber a lista.
 COLETORES: list[type[Coletor]] = [
-    ConcursosNoBrasil, Fepese, Ieses, DoeSc, InstitutoAocp, PrefeituraBc, Sejuri,
+    ConcursosNoBrasil, Fepese, Ieses, DoeSc, InstitutoAocp, PrefeituraBc, Sejuri, Idib,
 ]
 
 # Campos que a coleta manda. O que NAO esta aqui e seu e nunca e sobrescrito:
