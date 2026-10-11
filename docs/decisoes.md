@@ -5248,3 +5248,32 @@ viraram estudo extra "Onde: Radar". Copia antes em
      "sem informacao (segundo 🟢 04/08/2026)". Na primeira coleta de
      verdade o host nao resolveu no DNS (passageiro): a fonte falhou sozinha
      e as outras gravaram, como deve.
+
+157. **os editais da SEJURI sao a fonte 7 (`collectors/sejuri.py`)** (quarta
+     fonte do pedido de 11/10). O orgao do alvo principal; o robots.txt so
+     proibe /wp-admin/, e o WordPress expoe `/wp-json/wp/v2/posts`, como o da
+     FEPESE. As regras:
+     - **as categorias "Concurso Publico" (43) e "Processo Seletivo" (65, a
+       mae das de cada ano)**, 16 posts numa pagina. O seletivo entra de
+       proposito: separar o temporario (enfermagem, socioeducativo) do meu
+       concurso e do `config/alvo.yml` (`orgao_exclui`), nao do coletor, como
+       o pedido mandou. O concurso interno de remocao, os cursos, o
+       credenciamento e o chamamento ficam de fora;
+     - **o titulo como a FEPESE escreve o mesmo orgao**: o ano do edital, a
+       secretaria e o titulo do post ("2019 - Secretaria de Estado de Justica
+       e Reintegracao Social - CONCURSO PUBLICO EDITAL 001/SAP/2019 - AGENTE
+       PENITENCIARIO"). O ano e o do numero do edital, e nao o do post: o do
+       concurso de 2022 foi republicado em 27/01/2025, e e pelo ano na frente
+       que o cartao nao o toma pela edicao de agora. A secretaria faz o
+       classificador reconhecer o orgao estadual (anel `estadual`);
+     - **os campos**: tipo pela categoria (concurso ou seletivo), UF SC,
+       situacao desconhecida, o resumo do post como resumo, sem banca;
+     - **e oficial**: `sejuri` no `fontes_oficiais` (🟢) e `sejuri.sc.gov.br`
+       no `dominios_oficiais`. Sem carga inicial: o unico post recente e o
+       PSS 006/2026 (15/09), que avisa como qualquer seletivo estadual novo.
+     Com o dado real: os editais de 2013, 2019 e 2022 (e o de 2006, pela
+     regra do orgao + "concurso publico") ganham a marca do alvo principal; o
+     de Agente Socioeducativo de 2016 e os seletivos, nao. O cartao da
+     Policia Penal continua dizendo que nao ha concurso nos ultimos 12 meses
+     - os quatro sao de edicoes velhas -, mas acende o 🔔 deles na primeira
+     coleta (pendencia J).

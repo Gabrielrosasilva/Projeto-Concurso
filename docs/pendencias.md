@@ -472,7 +472,9 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   - ✅ **Prefeitura de Balneario Camboriu** (`prefeitura_bc`, decisao 156):
     a noticia de concurso publico; o cartao da Guarda de BC ja mostra o
     anuncio de 04/08/2026 pela propria prefeitura (🟢);
-  - ⚪ **SEJURI** e **IDIB**, nesta ordem;
+  - ✅ **SEJURI** (`sejuri`, decisao 157): os editais de concurso publico
+    (2006 a 2022) e os processos seletivos; o `alvo.yml` separa;
+  - ⚪ **IDIB**;
   - ⚪ **Idecan** e **Prefeitura de Florianopolis** ficam so registrados (sem
     codigo): o Idecan nao diz o estado no titulo e a pagina do concurso esta
     atras do desafio do Cloudflare; a de Florianopolis nao tem caminho
@@ -484,6 +486,12 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
     retificacao ou errata, sem banca, e o cartao diz "Banca: aguardando" com
     o contrato do Idecan e do IDIB no radar. Proposta: o marco Banca procurar
     nos itens da edicao inteira. Precisa da sua aprovacao (muda a 141);
+  - 🟡 **O 🔔 acende para edital velho que acabou de entrar no radar** (DOE,
+    SEJURI): o evento "entrou no radar" tem a data de hoje, e o 🔔 conta
+    evento depois do `novidades_desde`. Os editais de 2006 a 2022 da SEJURI e
+    os atos de 2025 do DOE acenderam o sino na primeira coleta. Por ora, o
+    "Marcar como visto" apaga. Proposta: no 🔔, o "entrou no radar" valer
+    pela data de publicacao do item. Precisa da sua aprovacao (mexe na 141);
   - ⚪ **O CFO do CBMSC nao cai no cartao do Oficial de Bombeiros**: o DOE
     escreve "Curso de Formacao de Oficiais (CFO)", e os termos do cartao
     (`oficial de bombeiros`, `oficial bombeiro`...) nao casam. Somar um termo
