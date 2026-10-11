@@ -415,5 +415,23 @@
       }
     ],
     "plano_b": 30
+  },
+  {
+    "atualizado_em": "2026-10-10T16:02:03.865923+00:00",
+    "data": "2026-10-10",
+    "faixas_feitas": [],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-10T16:02:03.865367+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": null,
+        "indice": 0,
+        "materia": "Raciocínio Lógico",
+        "nota": "preciso da uma relembrada em algumas coisas",
+        "titulo": "Diagnóstico de Raciocínio Lógico"
+      }
+    ],
+    "plano_b": null
   }
 ]

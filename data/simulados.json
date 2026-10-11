@@ -1606,5 +1606,400 @@
         "respondida_em": "2026-10-10T00:16:34.117601+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-10T14:15:13.842960+00:00",
+    "filtros": {
+      "composicao": {
+        "materias": [
+          {
+            "alvo": "9 questões · 1 prova",
+            "assuntos": [
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Compreensão de estruturas lógicas",
+                "complementar": "1 questão · 2 provas",
+                "estoque": 1,
+                "grupo": "sem_amostra",
+                "pedidas": 1,
+                "peso": 1.0,
+                "subassuntos": {
+                  "": 1
+                }
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Lógica de argumentação: analogias, inferências, deduções e conclusões",
+                "complementar": "2 questões · 3 provas",
+                "estoque": 2,
+                "grupo": "sem_amostra",
+                "pedidas": 2,
+                "peso": 1.0,
+                "subassuntos": {
+                  "Dedução (modus tollens)": 1,
+                  "Tipos de raciocínio": 1
+                }
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Lógica proposicional (ou sentencial)",
+                "complementar": null,
+                "estoque": 0,
+                "grupo": "sem_amostra",
+                "pedidas": 0,
+                "peso": 1.0,
+                "subassuntos": {}
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Proposições simples e compostas",
+                "complementar": "3 questões · 19 provas",
+                "estoque": 3,
+                "grupo": "sem_amostra",
+                "pedidas": 3,
+                "peso": 1.0,
+                "subassuntos": {
+                  "Conceito de proposição": 3
+                }
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Tabelas-verdade",
+                "complementar": "1 questão · 13 provas",
+                "estoque": 1,
+                "grupo": "sem_amostra",
+                "pedidas": 1,
+                "peso": 1.0,
+                "subassuntos": {
+                  "Tautologia e contradição": 1
+                }
+              },
+              {
+                "alvo": "1 questão · 1 prova",
+                "caminho": "Raciocínio Lógico > Equivalências",
+                "complementar": null,
+                "estoque": 1,
+                "grupo": "sem_amostra",
+                "pedidas": 1,
+                "peso": 1.0,
+                "subassuntos": {
+                  "Contrapositiva": 1
+                }
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Leis de Morgan",
+                "complementar": "2 questões · 17 provas",
+                "estoque": 2,
+                "grupo": "sem_amostra",
+                "pedidas": 2,
+                "peso": 1.0,
+                "subassuntos": {
+                  "": 2
+                }
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Diagramas lógicos",
+                "complementar": null,
+                "estoque": 0,
+                "grupo": "sem_amostra",
+                "pedidas": 0,
+                "peso": 1.0,
+                "subassuntos": {}
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Lógica de primeira ordem",
+                "complementar": null,
+                "estoque": 0,
+                "grupo": "sem_amostra",
+                "pedidas": 0,
+                "peso": 1.0,
+                "subassuntos": {}
+              },
+              {
+                "alvo": "5 questões · 1 prova",
+                "caminho": "Raciocínio Lógico > Princípios de contagem e probabilidade",
+                "complementar": "25 questões · 60 provas",
+                "estoque": 30,
+                "grupo": "sem_amostra",
+                "pedidas": 4,
+                "peso": 1.0,
+                "subassuntos": {
+                  "Permutações e ordenação": 1,
+                  "Princípio multiplicativo": 1,
+                  "Probabilidade": 2
+                }
+              },
+              {
+                "alvo": "3 questões · 1 prova",
+                "caminho": "Raciocínio Lógico > Operações com conjuntos",
+                "complementar": "8 questões · 59 provas",
+                "estoque": 11,
+                "grupo": "sem_amostra",
+                "pedidas": 3,
+                "peso": 1.0,
+                "subassuntos": {
+                  "União e interseção de conjuntos": 3
+                }
+              },
+              {
+                "alvo": "0 questões · 0 provas",
+                "caminho": "Raciocínio Lógico > Raciocínio lógico envolvendo problemas aritméticos e geométricos",
+                "complementar": "3 questões · 1 prova",
+                "estoque": 3,
+                "grupo": "sem_amostra",
+                "pedidas": 3,
+                "peso": 1.0,
+                "subassuntos": {
+                  "": 2,
+                  "MMC e MDC": 1
+                }
+              }
+            ],
+            "faltaram": 0,
+            "materia": "Raciocínio Lógico",
+            "total": 20
+          }
+        ],
+        "peso_do_complementar": 0.25,
+        "regra": "decisões 67 e 145: incidência do alvo onde há amostra, edital onde não há, sem questão já usada por outra rodada que mede do ciclo",
+        "total": 20
+      },
+      "da_banca": 12,
+      "faixa": {
+        "bloco": "manha",
+        "data": "2026-10-10",
+        "indice": 0,
+        "titulo": "Diagnóstico de Raciocínio Lógico"
+      },
+      "proprias": 8,
+      "quantidade": 20,
+      "rodada": "composta"
+    },
+    "finalizado_em": "2026-10-10T16:00:46.500650+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "71061dbd3ac5ac27f44060c37473cee6",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 9,
+        "ordem": 1,
+        "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ME2.pdf",
+        "respondida_em": "2026-10-10T14:19:37.913551+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "3a6c82c69d1ca443de948d2599447357",
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 16,
+        "ordem": 2,
+        "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ST1.pdf",
+        "respondida_em": "2026-10-10T14:25:16.731706+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "2eee9bb2c219005b4000252a71aca6a9",
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 3,
+        "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ME2.pdf",
+        "respondida_em": "2026-10-10T14:25:50.321804+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "c634370ce594df5594de09148d0b5381",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 9,
+        "ordem": 4,
+        "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
+        "respondida_em": "2026-10-10T14:27:42.740138+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "2367f5170bf994964447a12ff7203f0f",
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 7,
+        "ordem": 5,
+        "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
+        "respondida_em": "2026-10-10T14:30:31.334468+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "f870964ca30781dc94a9bd0d6ef0b18a",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 7,
+        "ordem": 6,
+        "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ME2.pdf",
+        "respondida_em": "2026-10-10T14:32:12.755810+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "6b75097d7ffe6d7a028dc8bff28611ee",
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 21,
+        "ordem": 7,
+        "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=SS01.pdf",
+        "respondida_em": "2026-10-10T14:35:49.624167+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "072a5341364b8cf0f94a48780d946a06",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 23,
+        "ordem": 8,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T14:54:00.090426+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "6dc3860db4a75e7a87e9b70e7b6d8a81",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 19,
+        "ordem": 9,
+        "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AM1.pdf",
+        "respondida_em": "2026-10-10T14:54:54.785161+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "e788703c11ac62795d5192a1f26f8574",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 23,
+        "ordem": 10,
+        "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS01.pdf",
+        "respondida_em": "2026-10-10T14:58:28.280745+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "67745a6df6d7276031a5d3a4ad0c12b9",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 17,
+        "ordem": 11,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:17:49.222691+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "34f58f6c3b657b44048e600f1af06ae5",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 16,
+        "ordem": 12,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:21:51.078420+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "b8cf02176b5a264b32a07700192280a5",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 21,
+        "ordem": 13,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:28:54.449287+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "86b982c4f3f37743b886d15562a710dc",
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 24,
+        "ordem": 14,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:30:14.887061+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "26d10b4c319ac0661150dfcfff965fb7",
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 19,
+        "ordem": 15,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:34:27.838512+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "8dde9e809854a66b46017da3ae030174",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 25,
+        "ordem": 16,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:38:51.981208+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "d6ae691d8cc9fcd69a9b9b617d696fb6",
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 18,
+        "ordem": 17,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-10T15:50:35.012747+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "cf439697f184e46a186717e9e7d04e50",
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 14,
+        "ordem": 18,
+        "prova_url": "https://2024gmpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=GM.pdf",
+        "respondida_em": "2026-10-10T15:55:03.684751+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "2b019b1881715e62e36c9616d2469900",
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 11,
+        "ordem": 19,
+        "prova_url": "https://2024gmpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=GM.pdf",
+        "respondida_em": "2026-10-10T16:00:31.222978+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "2f50023a04d48343a86c62e8e9c95546",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 15,
+        "ordem": 20,
+        "prova_url": "https://2024gmpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=GM.pdf",
+        "respondida_em": "2026-10-10T16:00:46.496211+00:00"
+      }
+    ]
   }
 ]
