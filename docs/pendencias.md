@@ -479,11 +479,15 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   - ✅ **IDIB** (`idib`, decisao 158): os abertos e em andamento; o CFO e o
     CFP do CBMSC ja estao no cartao dos Bombeiros (pelo `cbmsc` do
     `prova_de_sc`);
-  - ⚪ **Idecan** e **Prefeitura de Florianopolis** ficam so registrados (sem
-    codigo): o Idecan nao diz o estado no titulo e a pagina do concurso esta
-    atras do desafio do Cloudflare; a de Florianopolis nao tem caminho
-    estavel e o robots dela usa curinga (`/*bet*`) que o leitor do radar
-    nao entende.
+  - ✅ **Idecan** e **Prefeitura de Florianopolis**: registrados, sem codigo
+    (decisao 159). Reavaliar o Idecan se ele ganhar concurso municipal da
+    Grande Florianopolis; a de Florianopolis, se voce salvar a pagina da
+    lista de noticias da Secretaria de Seguranca e Ordem Publica;
+  - ⚪ **O leitor de robots do radar nao entende curinga** (`*` e `$`, da
+    RFC 9309): o `urllib.robotparser` le `/*bet*` ao pe da letra e nao
+    proibe nada. Nenhuma fonte de hoje usa curinga no que o radar pede (so a
+    Prefeitura de Florianopolis, que ficou fora); se uma fonte nova usar, o
+    `Coletor._robots_permite` precisa entender antes de ela entrar.
   - 🟡 **O marco Banca nao ve o contrato quando ha ato mais novo** (achado
     ao ligar o DOE, 11/10): os marcos do cartao saem so do item mais recente
     da edicao (decisao 141). Na PC SC e no CBMSC o mais recente e uma

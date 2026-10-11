@@ -5306,3 +5306,29 @@ viraram estudo extra "Onde: Radar". Copia antes em
      pendencia do marco Banca). O CFO nao cai no cartao do Oficial de
      Bombeiros: os termos dele nao casam "FORMACAO DE OFICIAIS" (pendencia
      J, decisao sua).
+
+159. **o Idecan e a Prefeitura de Florianopolis ficam fora, so registrados**
+     (os dois ultimos do pedido de 11/10; nenhum por robots.txt - o
+     caminho e que nao serve). Sem codigo:
+     - **Idecan** (idecan.org.br): o robots.txt so proibe /wp-admin/ e a API
+       do WordPress responde, mas o post nao tem texto (o resumo e o conteudo
+       vem vazios) e o titulo do concurso da PC SC nao diz o estado
+       ("CONCURSO PUBLICO AGENTE DE POLICIA CIVIL EDITAL N. 01/2025"). A
+       pagina do concurso (concurso.idecan.org.br) devolve 403 "Just a
+       moment..." - o desafio do Cloudflare para robo -, e contornar isso
+       esta fora de questao. Sem estado, o item nao entraria no cartao da PC
+       SC e viraria ruido de Policia Civil de outros estados; o que importa
+       dele (o contrato, os editais e as retificacoes da PC SC) ja chega pelo
+       Diario Oficial do Estado, com UF certa (decisao 154). Reavaliar se o
+       Idecan ganhar concurso municipal da Grande Florianopolis;
+     - **Prefeitura de Florianopolis** (pmf.sc.gov.br): PHP antigo, sem RSS
+       nem API. A busca de noticias ignora o periodo pedido, "guarda" trouxe
+       3 noticias de 2026 e nenhuma e o anuncio do concurso da Guarda (02/2026
+       - nao o achei pelo site), e a lista de ultimas noticias vem vazia no
+       HTML sem escolher a secretaria. O robots.txt usa curinga (`/file*/`,
+       `/*bet*`): pela norma (RFC 9309), `/*bet*` proibe qualquer endereco
+       com "bet" (uma noticia de "alfabetizacao"), e o leitor de robots do
+       radar, o do Python, nao entende curinga - acharia que pode quando nao
+       pode. O concurso da Guarda deve sair por banca (a FEPESE escreve
+       "PMF", e ja e coletada). Reavaliar com a pagina salva da lista de
+       noticias da Secretaria de Seguranca e Ordem Publica.

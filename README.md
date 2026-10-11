@@ -2172,6 +2172,10 @@ Regras da casa para as proximas:
 
 O que ja foi avaliado e ficou de fora, com o motivo de cada um, esta no
 [historico](docs/historico.md#fase-17-fontes-federais-e-diarios-o-que-foi-avaliado-e-ficou-de-fora).
+Em 11/10/2026 ficaram de fora tambem o Idecan (o post nao diz o estado e a
+pagina do concurso esta atras do desafio do Cloudflare) e a Prefeitura de
+Florianopolis (sem caminho estavel, e o robots.txt dela usa curinga que o
+leitor do radar nao entende) - decisao 159.
 
 ## Nota sobre dependencias
 
