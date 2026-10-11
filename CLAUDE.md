@@ -262,6 +262,17 @@ no "firme", a variacao e o do zero saem separados, e abaixo do minimo da
 secao nova `treino_ia` do `config/amostra.yml` (10/15/10/30) o numero diz
 "Amostra insuficiente". Uma conta so, `metricas.treino_ia_dos_nos` e
 `treino_ia_por_materia`; nada disto entra no acerto das reais.
+**As fontes oficiais novas (11/10, decisoes 153 e 154; os 7 sites
+investigados de uma vez):** o robo roda as 05:17 e a reserva as 08:47, parte
+da ponta do branch (sem repetir aviso) e commita o manifesto `provas.json`
+(a retificacao nao e mais avisada todo dia); e o Diario Oficial do Estado e a
+fonte 4 (`collectors/doe_sc.py`, pela busca POST da tela): o contrato ou a
+dispensa da banca, a autorizacao, a comissao e o edital das carreiras do
+`config/alvo.yml`. A carga de um ano (`radar carga-inicial --fonte doe_sc`)
+trouxe 17 atos, entre eles o contrato da PM SC com o Instituto AOCP (o cartao
+da PM diz "Banca: Instituto AOCP 🟢"). Faltam o Instituto AOCP, a Prefeitura
+de BC, a SEJURI e o IDIB, nesta ordem, e so o registro do Idecan e da
+Prefeitura de Florianopolis (pendencia J).
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
