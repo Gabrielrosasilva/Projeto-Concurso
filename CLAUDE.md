@@ -277,9 +277,11 @@ Prefeitura de BC (`prefeitura_bc`, o anuncio do concurso da Guarda no cartao
 de BC), os editais da SEJURI (`sejuri`) e o IDIB (`idib`, o CFO e o CFP do
 CBMSC no cartao dos Bombeiros, pelo `cbmsc` do `prova_de_sc`). O Idecan e a
 Prefeitura de Florianopolis ficaram fora, so registrados. O radar tem 8
-fontes. Abertos na pendencia J, por decidir: o marco Banca que so olha o
-item mais novo, o 🔔 de edital velho recem-chegado e o CFO no cartao do
-Oficial de Bombeiros.
+fontes. E, aprovada por voce, a decisao 160 (muda a 141): a situacao e os
+marcos do cartao olham a edicao inteira - cada marco do item mais novo que o
+sabe -, e os Bombeiros passaram a "edital publicado" com Banca IDIB. Abertos
+na pendencia J, por decidir: o 🔔 de edital velho recem-chegado, o CFO no
+cartao do Oficial de Bombeiros e o edital de abertura do DOE sem fase.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
