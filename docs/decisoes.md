@@ -5061,3 +5061,39 @@ viraram estudo extra "Onde: Radar". Copia antes em
      banco de 10/10: a LEP no Simulado foi de 23 de 36 (64%) para 19 de 31
      (61%), com revisao 4 de 5; as outras materias nao mudaram (nenhuma
      questao refeita). Direitos Humanos nao tem resposta a gerada ainda.
+
+## O horario do robo e as fontes oficiais novas (11/10/2026)
+
+153. **o robo roda as 05:17 e de novo as 08:47, e commita o manifesto**
+     (subetapa 0 do pedido das fontes oficiais; fecha o N5 do
+     `docs/mapa_do_sistema.md`). Marcado para as 06:00 (`0 9 * * *`), o
+     `coleta.yml` terminava entre 10h29 e 13h01 (os commits `coleta:` de
+     24/09 a 11/10): o GitHub atrasa mais o que esta na hora cheia. As
+     regras:
+     - **dois horarios fora da hora cheia**: `17 8 * * *` (05:17) e a
+       reserva `47 11 * * *` (08:47), para o dia em que o GitHub pula ou
+       atrasa demais a primeira. O repositorio e publico: o minuto do Actions
+       nao custa nada, entao a reserva roda inteira (suite e coleta), sem
+       trava de "a primeira ja rodou";
+     - **a reserva nao repete aviso**: o `avisado_em` do concurso novo, do
+       favorito e da carreira vai no `concursos.json` e no `eventos.json` que
+       a primeira commitou, e o `radar importar` o traz de volta. Para isso
+       a reserva tem de partir DESSE commit: o `actions/checkout` sem `ref`
+       usa o commit de quando a execucao foi criada (conferido no
+       `input-helper.ts` da v4), e a reserva que esperou na fila do
+       `concurrency` partiria do JSON de antes da primeira. Com `ref: ${{
+       github.ref }}` ele pega a ponta do branch na hora em que comeca;
+     - **o `data/provas.json` entra no commit do robo e no `sincronizar`**
+       (`ARQUIVOS_DO_RADAR`). E o manifesto do acervo: ao achar edital
+       retificado, o passo de retificacao grava nele o sha novo. Sem o
+       commit, a execucao seguinte conferia contra o sha velho e avisava a
+       mesma retificacao de novo (todo dia; com a reserva, duas vezes no
+       dia). Latente ate aqui: nenhum caso. No `sincronizar` porque o `radar
+       atualizar` daqui tambem o grava (o acervo dos abertos e a
+       retificacao), e o robo deve partir do manifesto atualizado. Se um dia
+       o robo achar retificacao no mesmo dia em que o daqui ficou mudado sem
+       commit, o `merge --ff-only` do backup recusa sem tocar em nada (como
+       ja faz com o `eventos.json`): commitar e rodar de novo.
+     Os testes leem o `coleta.yml` como dado (`tests/test_sincronizar.py`):
+     os dois horarios, o `ref` do checkout, o manifesto no `git add` e o
+     `cancel-in-progress: false`.

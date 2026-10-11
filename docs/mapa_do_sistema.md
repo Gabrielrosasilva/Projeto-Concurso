@@ -55,7 +55,7 @@ passos que você roda à mão.
    grava. Um `--pedido` novo **apaga** o que estava esperando, sem cópia: o
    pedido do art. 13 que a pendência H.6 ainda cita já foi substituído em
    09/10.
-5. **Telegram.** O robô "das 06:00" sai, na prática, entre 11h e 13h. Ele
+5. **Telegram.** O robô "das 06:00" saía, na prática, entre 11h e 13h (desde 11/10: 05:17 e reserva às 08:47, decisão 153). Ele
    avisa concurso novo perto ou da sua carreira e os marcos críticos das 7
    carreiras da aba Acompanhando. **Favorito não avisa nada porque você tem
    0 favoritos** - quem acompanha a Polícia Penal SC é a aba Acompanhando.
@@ -132,7 +132,7 @@ texto-base, que se refazem dos PDFs.
 ### (a) Um edital que sai na FEPESE, até o cartão e o Telegram
 
 1. O robô do GitHub (`.github/workflows/coleta.yml`, cron 09:00 UTC, na
-   prática entre 11h e 13h) roda o `pytest -q` (se falhar, para), refaz o
+   prática entre 11h e 13h; desde 11/10, 08:17 e 11:47 UTC, decisão 153) roda o `pytest -q` (se falhar, para), refaz o
    banco dos JSON (`radar importar`) e roda `radar coletar`.
 2. O coletor da FEPESE (`collectors/fepese.py`) lê a API WordPress do site,
    com o `robots.txt`, 1,5 s entre requisições e o User-Agent da classe
@@ -510,7 +510,7 @@ Sem repetir a proposta: só a situação de cada código, conferida no código.
 | N2 | Meu desempenho, Edital, home | A decisão 21, o README:1106 e o cabeçalho do `desempenho.html:49` dizem "nunca somadas num número só"; a coluna Acerto e o "Meu acerto" mostram a soma | Escrever o que a tela faz: "o número é o do estado (radar + anotado, sem consulta); a divisão ao lado". **Muda a decisão 21**, que hoje proíbe a soma na tela, e cumpre o que o P01 já pediu | A regra escrita volta a valer | Média | Depois de 07/11 |
 | N3 | `classificador.py:87-92`, `:135-143` | 3 dos 10 "banca definida" são falsos (frase negativa, concurso já aberto); o estágio de Barra Velha virou "Estadual SC" | Exigir a afirmação ("a banca será", "contratou") e recusar negação; órgão estadual não vale em título de estágio ou prefeitura | O sinal de 2 a 4 meses antes do edital volta a ser confiável; nada de 🔔 falso de carreira | Alta | Depois de 07/11 |
 | N4 | `acervo.py:74`, `eventos.py:73-80` | O mesmo fato vira dois eventos quando o robô e o notebook o registram em horas diferentes: 8 pares no `eventos.json`, inclusive "apareceu" duas vezes | Chave do evento sem a hora (concurso + tipo + dia, ou + descrição) | Linha do tempo limpa; sem risco de aviso de carreira em dobro | Média | Depois de 07/11 |
-| N5 | `coleta.yml:82`, `ARQUIVOS_DO_RADAR` (`cli.py:2419`) | O robô atualiza `data/provas.json` ao achar retificação e não o commita: a mesma retificação seria avisada e gravada todo dia | Pôr `data/provas.json` no commit do robô e no `sincronizar` | Um aviso por retificação | Média | Depois de 07/11 (latente: 0 casos) |
+| N5 | `coleta.yml:82`, `ARQUIVOS_DO_RADAR` (`cli.py:2419`) | O robô atualiza `data/provas.json` ao achar retificação e não o commita: a mesma retificação seria avisada e gravada todo dia | Pôr `data/provas.json` no commit do robô e no `sincronizar` | Um aviso por retificação | Média | ✅ Feito em 11/10 (decisão 153) |
 | N6 | `servico/manual.py:1219` | Um `--pedido` apaga o que estava esperando, sem cópia (o do art. 13 se perdeu; a pendência H.6 ainda o cita) | Guardar o pedido anterior em `data/copias/`, ou recusar se o lote anterior não foi importado | Nenhum pedido some | Média | Depois de 07/11 |
 | N7 | `servico/manual.py:64-78` | A importação aceita resposta sem `modelo`; o CLAUDE.md pede modelo e data | Recusar a resposta sem `modelo`. **Muda a decisão 116** ("quando a resposta diz") | A procedência completa em todo texto novo | Média | Depois de 07/11 |
 | N8 | `collectors/base.py:159-167` | `robots.txt` com erro 5xx ou sem rede libera a coleta; a RFC 9309, que o próprio código cita, manda supor proibição | 4xx libera (como hoje); 5xx e erro de rede pulam aquele site naquela coleta | Cumpre o "sem exceção" do CLAUDE.md | Baixa | Depois de 07/11 |

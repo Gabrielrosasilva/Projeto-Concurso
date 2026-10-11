@@ -488,3 +488,58 @@ def test_a_coleta_que_cai_num_arquivo_mudado_aqui_nao_passa_por_cima(repos):
     assert "data/eventos.json" in resultado.output
     assert (repos.local / "data" / "eventos.json").read_text(encoding="utf-8") \
         == "[]\n\n"
+
+
+# --- o robo do GitHub (.github/workflows/coleta.yml, decisao 153) ------------
+#
+# Le o arquivo do workflow como dado: o que importa nele e o que o GitHub vai
+# fazer, e isso nao da para rodar aqui.
+
+WORKFLOW = Path(__file__).resolve().parents[1] / ".github" / "workflows" / "coleta.yml"
+
+
+def _workflow() -> dict:
+    import yaml
+
+    return yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))
+
+
+def _gatilhos(workflow: dict) -> dict:
+    # O YAML 1.1 do PyYAML le a chave `on` como o booleano True.
+    return workflow.get("on") or workflow.get(True)
+
+
+def test_o_manifesto_entra_no_sincronizar():
+    assert "data/provas.json" in cli.ARQUIVOS_DO_RADAR
+
+
+def test_o_robo_roda_duas_vezes_e_fora_da_hora_cheia():
+    horarios = [g["cron"] for g in _gatilhos(_workflow())["schedule"]]
+
+    assert horarios == ["17 8 * * *", "47 11 * * *"]
+    # Minuto zero e o que o GitHub mais atrasa.
+    assert all(not h.startswith("0 ") for h in horarios)
+
+
+def test_a_reserva_parte_do_commit_da_primeira():
+    """Sem `ref`, o checkout usa o commit de quando a execucao foi criada, e a
+    reserva que esperou na fila repetiria os avisos da primeira."""
+    passos = _workflow()["jobs"]["coletar"]["steps"]
+    checkout = next(p for p in passos if str(p.get("uses", "")).startswith("actions/checkout"))
+
+    assert checkout["with"]["ref"] == "${{ github.ref }}"
+
+
+def test_o_robo_commita_o_manifesto_junto_com_a_coleta():
+    passos = _workflow()["jobs"]["coletar"]["steps"]
+    commit = next(p for p in passos if p.get("name") == "Commitar o resultado")
+
+    adicao = next(linha for linha in commit["run"].splitlines() if "git add" in linha)
+    assert "data/provas.json" in adicao
+    assert "data/concursos.json" in adicao and "data/eventos.json" in adicao
+
+
+def test_as_duas_execucoes_nunca_rodam_juntas():
+    concorrencia = _workflow()["concurrency"]
+
+    assert concorrencia["cancel-in-progress"] is False

@@ -2,9 +2,19 @@ name: Coleta diaria
 
 on:
   schedule:
-    # 09:00 UTC = 06:00 em Florianopolis. O Brasil nao tem mais horario de
-    # verao, entao UTC-3 vale o ano inteiro.
-    - cron: "0 9 * * *"
+    # Horario em UTC; Florianopolis e UTC-3 o ano inteiro (sem horario de
+    # verao). Marcado para as 06:00 ("0 9"), o robo terminava entre 10h30 e
+    # 13h: o GitHub atrasa mais o que esta na hora cheia, quando todo mundo
+    # agenda. Por isso o minuto quebrado.
+    #
+    # 08:17 UTC = 05:17, o horario de verdade.
+    - cron: "17 8 * * *"
+    # 11:47 UTC = 08:47, a reserva para o dia em que o GitHub pula ou atrasa
+    # demais a primeira. Rodar duas vezes nao repete aviso: o que saiu fica
+    # marcado (`avisado_em`) no JSON que a primeira commitou, e o
+    # `concurrency` abaixo poe uma atras da outra. O repositorio e publico,
+    # entao o minuto do Actions nao custa nada.
+    - cron: "47 11 * * *"
   workflow_dispatch: {}    # botao "Run workflow" na aba Actions
 
 # Sem isto o GITHUB_TOKEN entra somente-leitura na maioria dos repositorios e
@@ -22,7 +32,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Sem `ref`, o checkout pega o commit de quando a execucao foi CRIADA,
+      # nao de quando comecou. A reserva das 08:47 que esperou na fila do
+      # `concurrency` atras da primeira partiria do JSON de antes dela - sem
+      # as marcas de avisado - e repetiria os avisos. Com o `ref`, ele pega a
+      # ponta do branch na hora: ja com o commit da primeira.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v5
         with:
@@ -79,7 +96,11 @@ jobs:
         run: |
           git config user.name "radar-bot"
           git config user.email "radar-bot@users.noreply.github.com"
-          git add data/concursos.json data/eventos.json
+          # O data/provas.json e o manifesto: ao achar edital retificado, o
+          # passo de retificacao grava nele o sha novo. Sem commit, a proxima
+          # execucao partia do sha velho e avisava a MESMA retificacao de novo
+          # - todo dia, e duas vezes no dia com a reserva.
+          git add data/concursos.json data/eventos.json data/provas.json
 
           if git diff --staged --quiet; then
             echo "Nenhum concurso novo hoje."

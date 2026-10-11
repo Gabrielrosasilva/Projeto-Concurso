@@ -2510,7 +2510,12 @@ ARQUIVOS_DO_RADAR = ("data/concursos.json", "data/eventos.json",
                      "data/estado_do_dia.json", "data/caderno_erros.json",
                      "data/estudo_extra.json", "data/notas_semana.json",
                      "data/conteudos.json", "data/classificacoes.json",
-                     "data/fichas.json", "data/acompanhamentos.json")
+                     "data/fichas.json", "data/acompanhamentos.json",
+                     # O manifesto do acervo: o robo tambem o commita quando
+                     # acha retificacao (decisao 153). Mudado aqui e nunca
+                     # subido, ele ficava sujo na pasta e o robo conferia
+                     # contra um sha velho.
+                     "data/provas.json")
 
 
 @app.command()

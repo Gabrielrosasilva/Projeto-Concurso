@@ -1850,12 +1850,16 @@ pagar boleto.
 
 ## Automacao
 
-`.github/workflows/coleta.yml` roda a coleta todo dia as 6h de Florianopolis,
-no GitHub Actions, e commita o resultado. Tambem da para disparar na mao pela
-aba Actions.
+`.github/workflows/coleta.yml` roda a coleta todo dia as 05:17 de
+Florianopolis, e de novo as 08:47 (a reserva, para o dia em que o GitHub pula
+ou atrasa a primeira), no GitHub Actions, e commita o resultado - o
+`concursos.json`, o `eventos.json` e o manifesto `provas.json`. Tambem da para
+disparar na mao pela aba Actions. O minuto quebrado e de proposito: o horario
+cheio (o antigo `0 9`, 06:00) saia entre 10h30 e 13h. A reserva nao repete
+aviso: ela parte do commit da primeira, com o que ja foi avisado marcado
+(decisao 153).
 
-Actions e gratuito em repositorio privado ate 2.000 minutos por mes; a coleta
-gasta uns 3 minutos por dia.
+O repositorio e publico, e Actions em repositorio publico nao gasta minuto.
 
 ### Deixar tudo automatico
 
