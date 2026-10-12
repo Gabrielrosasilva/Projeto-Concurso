@@ -34,6 +34,7 @@
 
 {% from "_topo.html" import barra, abas_de_hoje with context %}
 {% from "_componentes.html" import selo, legenda_dos_selos, aviso_lei %}
+{% import "_resumo.html" as resumo_ui %}
 {{ barra('hoje') }}
 
 {# O selo de cada parte. A origem vem do DADO (radar/fichas.py); o template so
@@ -75,17 +76,13 @@
       <span class="ds-suave">(nunca somado ao alvo)</span></p>
   </section>
 
-  {# R2: o resumo do tema, para o caderno. Texto de IA, cada frase com a fonte. #}
+  {# R2: o resumo do tema, para o caderno. Texto de IA, cada frase com a fonte.
+     Enxuto (decisao 161): o mesmo corpo da janela da tela Hoje. #}
   {% set rs = f.escrita.resumo %}
   <section class="ds-cartao" id="resumo">
     <h2>Resumo {{ s('ia') }}</h2>
     {% if rs and rs.partes %}
-      {% for chave, nome in PARTES_DO_RESUMO if rs.partes.get(chave) %}
-        <p class="subtitulo">{{ loop.index + 1 }}. {{ nome }}</p>
-        <ul class="marcas">
-          {% for fr in rs.partes[chave] %}<li>{{ fr.texto | sem_gabarito(respondidos) }} <span class="ds-suave">— {{ fr.fontes | join('; ') | sem_gabarito(respondidos) }}</span></li>{% endfor %}
-        </ul>
-      {% endfor %}
+      {{ resumo_ui.corpo(enxuto, respondidos, 'resumo') }}
       <div class="procedencia">
         <span>{{ s('ia') }} Texto escrito por {{ rs.modelo }}.</span>
         {% if rs.conferido_em %}

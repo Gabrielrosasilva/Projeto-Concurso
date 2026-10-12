@@ -87,6 +87,12 @@ def _padrao(termo: str) -> re.Pattern:
     return re.compile(rf"\b{re.escape(normalizar(termo))}\b")
 
 
+#: O mesmo casamento para quem esta fora daqui (decisao 161): a lei citada
+#: na fonte, o termo do glossario e o palavrao casam como o alvo.yml - texto
+#: normalizado (sem acento e sem caixa), palavra inteira.
+palavra_inteira = _padrao
+
+
 # O titulo da FEPESE gruda a lista de cargos no fim do nome do orgao:
 # "Secretaria de Estado da Justica e CidadaniaAgente Penitenciario
 # (masculino)Agente Penitenciario (feminino)...". Sem separar isso, nem o

@@ -497,3 +497,23 @@ a:focus-visible { outline: 2px solid var(--cor-acao); outline-offset: 2px; }
   .ds-janela { padding: var(--esp-2); }
   .ds-janela__caixa { margin: var(--esp-2) auto; padding: var(--esp-3) var(--esp-4); }
 }
+
+/* --- o resumo enxuto (decisao 161), na janela e na ficha ---
+   Os artigos abertos, um bloco por artigo; o resto dobrado num <details>.
+   O link com a ancora de dentro de um <details> fechado o abre sozinho (o
+   navegador revela o que a ancora aponta): a Noite cai em "como a banca
+   cobra" aberta, sem JavaScript. */
+.ds-resumo h3 { margin: var(--esp-4) 0 var(--esp-1); font-size: var(--tam-md); }
+.ds-resumo h4 { margin: 0; font-size: var(--tam-sm); font-weight: var(--peso-forte); }
+.ds-resumo ul { margin: var(--esp-1) 0 0; padding-left: var(--esp-5); }
+.ds-resumo li { margin: var(--esp-1) 0; }
+.ds-resumo__fonte { display: block; font-size: var(--tam-xs); color: var(--cor-texto-suave); }
+.ds-resumo__bloco { padding: var(--esp-2) 0; border-top: 1px solid var(--cor-borda); }
+.ds-resumo__bloco:first-of-type { border-top: 0; }
+.ds-resumo__dobra {
+  margin: var(--esp-3) 0 0;
+  padding: var(--esp-2) var(--esp-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+}
+.ds-resumo__dobra > summary { cursor: pointer; font-weight: var(--peso-medio); }

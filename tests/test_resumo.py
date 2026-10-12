@@ -227,7 +227,9 @@ def test_o_botao_abre_a_janela_so_com_css_e_na_noite_em_como_cobra(com_resumo):
     assert f'href="#{ident}"' in html                 # de manha
     assert f'href="#{ident}-cobra"' in html           # a noite, em como a banca cobra
     assert f'<div class="ds-janela" id="{ident}"' in html
-    assert f'<section id="{ident}-cobra">' in html
+    # Enxuto (decisao 161): "como a banca cobra" fica num <details>, com a
+    # ancora dentro, que o navegador abre pelo link.
+    assert f'<div id="{ident}-cobra">' in html
     assert "Claude Code (claude-opus-5-5), em teste" in html
     assert "Fonte: CP, art. 13, § 2º" in html
     # O bonus (sem ficha) diz que o resumo nao foi escrito.

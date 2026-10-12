@@ -1702,6 +1702,9 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
         request=request, name="ficha.html",
         context={"f": ficha, "data": quando,
                  "respondidos": servico.fichas.codigos_respondidos(),
+                 # O resumo arrumado para a tela (decisao 161): o mesmo da janela.
+                 "enxuto": servico.fichas.enxuto_da_ficha(ficha.escrita.resumo,
+                                                          ficha.materia),
                  "comando_de_gerar": fichas_puras.comando_de_gerar,
                  # O sinal de treino do tema (decisao 138), fora do acerto.
                  "treino_ia": servico.metricas.treino_ia_dos_nos(ficha.nos),

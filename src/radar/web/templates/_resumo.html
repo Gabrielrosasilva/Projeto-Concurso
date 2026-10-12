@@ -15,6 +15,64 @@
   {%- endif -%}
 {%- endmacro %}
 
+{# Uma frase: o texto em trechos (o servico corta), e a fonte embaixo. A
+   letra da questao ainda nao respondida fica escondida (decisao 148). #}
+{% macro frase(fr, respondidos) -%}
+  {%- for t in fr.trechos -%}{{ t.texto | sem_gabarito(respondidos) }}{%- endfor -%}
+  <span class="ds-resumo__fonte">Fonte: {{ fr.fontes | join('; ') | sem_gabarito(respondidos) }}</span>
+{%- endmacro %}
+
+{% macro lista(frases, respondidos) %}
+  <ul>{% for fr in frases %}<li>{{ frase(fr, respondidos) }}</li>{% endfor %}</ul>
+{% endmacro %}
+
+{# O resumo enxuto (decisao 161), o mesmo na janela e na pagina da ficha. De
+   cima para baixo: os artigos (abertos, um bloco por artigo), o basico, o que
+   mais derruba e, dobrados num <details>, o resto. `prefixo` faz as ancoras:
+   o link da Noite cai em "{prefixo}-cobra", e o navegador abre o <details>
+   que tem a ancora dentro. #}
+{% macro corpo(e, respondidos, prefixo) %}
+  <div class="ds-resumo">
+    {% if e.blocos %}
+      <section id="{{ prefixo }}-artigos">
+        <h3>📜 Os artigos {{ selo('ia', curto=True) }}</h3>
+        {% for b in e.blocos %}
+          <div class="ds-resumo__bloco">
+            <h4>{{ b.rotulo }}</h4>
+            {{ lista(b.frases, respondidos) }}
+          </div>
+        {% endfor %}
+      </section>
+    {% elif e.regras_chave %}
+      <section id="{{ prefixo }}-artigos">
+        <h3>📜 As regras-chave {{ selo('ia', curto=True) }}</h3>
+        {{ lista(e.regras_chave, respondidos) }}
+      </section>
+    {% endif %}
+    {% if e.basico %}
+      <section id="{{ prefixo }}-basico">
+        <h3>O básico é isto {{ selo('ia', curto=True) }}</h3>
+        {{ lista(e.basico, respondidos) }}
+      </section>
+    {% endif %}
+    {% if e.derruba %}
+      <section id="{{ prefixo }}-derruba">
+        <h3>⚠ O que mais derruba {{ selo('ia', curto=True) }}</h3>
+        {{ lista(e.derruba, respondidos) }}
+      </section>
+    {% endif %}
+    {% for chave, nome, frases in (('dominar', 'O que eu preciso dominar', e.dominar),
+                                    ('cobra', 'Como a banca cobra', e.como_cobra),
+                                    ('outras', 'As outras pegadinhas', e.outras_pegadinhas))
+          if frases %}
+      <details class="ds-resumo__dobra">
+        <summary>{{ nome }} {{ selo('ia', curto=True) }}</summary>
+        <div id="{{ prefixo }}-{{ chave }}">{{ lista(frases, respondidos) }}</div>
+      </details>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
 {# Uma janela por tema, e uma por faixa de varios temas (a lista). #}
 {% macro janelas(resumos, volta='#fechado') %}
   {% for r in resumos.temas.values() %}
@@ -35,16 +93,7 @@
           <p>{{ selo('acervo', curto=True) }} <b>Outras provas FEPESE (complementar aceito):</b>
             {% if r.complementar %}{{ r.complementar | replace('Acervo complementar FEPESE: ', '') }}{% else %}o tema não tem nó: não contado{% endif %}</p>
           {% if r.escrito %}
-            {% for chave, nome, frases in r.partes %}
-              <section id="{{ r.id }}-{{ 'cobra' if chave == 'como_cobra' else chave }}">
-                <h3>{{ loop.index + 1 }}. {{ nome }} {{ selo('ia', curto=True) }}</h3>
-                <ul>
-                  {% for f in frases %}
-                    <li>{{ f.texto | sem_gabarito(resumos.respondidos) }}<span class="ds-janela__fontes">Fonte: {{ f.fontes | join('; ') | sem_gabarito(resumos.respondidos) }}</span></li>
-                  {% endfor %}
-                </ul>
-              </section>
-            {% endfor %}
+            {{ corpo(r.enxuto, resumos.respondidos, r.id) }}
             <p class="ds-janela__fontes">{{ selo('ia', curto=True) }} Texto escrito por {{ r.procedencia }}.
               {% if r.conferido %}Conferido por você em {{ r.conferido }}.{% else %}Ainda não conferido por você.{% endif %}</p>
           {% else %}

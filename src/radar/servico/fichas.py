@@ -549,6 +549,11 @@ def verificar_resumos(ctx: fichas.Contexto | None = None) -> list[tuple[str, str
 
 # --- o botao "Resumo" das faixas (R2) -------------------------------------------------
 
+def enxuto_da_ficha(resumo: dict | None, materia: str) -> fichas.ResumoEnxuto:
+    """O resumo enxuto de uma ficha, o mesmo na janela e na pagina da ficha."""
+    return fichas.resumo_enxuto((resumo or {}).get("partes"), materia)
+
+
 @dataclass
 class ResumoNaTela:
     """O resumo de um tema, como a janela por cima da pagina mostra."""
@@ -575,11 +580,10 @@ class ResumoNaTela:
         return (self.resumo or {}).get("modelo") or ""
 
     @property
-    def partes(self) -> list:
-        """[(chave, nome, frases)], na ordem da tela, so as que tem frase."""
-        escritas = (self.resumo or {}).get("partes") or {}
-        return [(chave, nome, escritas[chave]) for chave, nome in fichas.PARTES_DO_RESUMO
-                if escritas.get(chave)]
+    def enxuto(self) -> fichas.ResumoEnxuto:
+        """As partes arrumadas para a tela (decisao 161): os artigos abertos,
+        um bloco por artigo, e o resto dobrado. O texto e o gravado."""
+        return enxuto_da_ficha(self.resumo, self.materia)
 
 
 @dataclass

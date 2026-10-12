@@ -1,0 +1,161 @@
+{
+  "tema": "Tentativa, dolo, culpa e erro (arts. 14 a 21)",
+  "materia": "Direito Penal",
+  "partes": {
+    "dominar": [
+      {
+        "texto": "Consumado é o crime que reúne todos os elementos da definição legal; tentado é o que, iniciada a execução, não se consuma por circunstâncias alheias à vontade do agente.",
+        "fontes": [
+          "CP, art. 14, I e II"
+        ]
+      },
+      {
+        "texto": "Desistência voluntária e arrependimento eficaz não são tentativa: o agente só responde pelos atos já praticados.",
+        "fontes": [
+          "CP, art. 15"
+        ]
+      },
+      {
+        "texto": "Dolo: o agente quis o resultado (direto) ou assumiu o risco de produzi-lo (eventual). Culpa: deu causa ao resultado por imprudência, negligência ou imperícia.",
+        "fontes": [
+          "CP, art. 18, I e II"
+        ]
+      },
+      {
+        "texto": "Salvo os casos expressos em lei, só se pune o crime doloso; pelo resultado que agrava a pena só responde quem o causou ao menos culposamente.",
+        "fontes": [
+          "CP, art. 18, parágrafo único",
+          "CP, art. 19"
+        ]
+      },
+      {
+        "texto": "Erro sobre elemento do tipo exclui o dolo (permite o culposo, se previsto em lei); erro sobre a ilicitude, se inevitável, isenta de pena, e se evitável pode diminuí-la de 1/6 a 1/3.",
+        "fontes": [
+          "CP, art. 20, caput",
+          "CP, art. 21"
+        ]
+      }
+    ],
+    "artigos": [
+      {
+        "texto": "Art. 14, parágrafo único: salvo disposição em contrário, a tentativa é punida com a pena do consumado diminuída de um a dois terços.",
+        "fontes": [
+          "CP, art. 14, parágrafo único"
+        ]
+      },
+      {
+        "texto": "Art. 16: arrependimento posterior - crime sem violência ou grave ameaça à pessoa, dano reparado ou coisa restituída até o recebimento da denúncia ou da queixa, por ato voluntário: pena reduzida de um a dois terços.",
+        "fontes": [
+          "CP, art. 16"
+        ]
+      },
+      {
+        "texto": "Art. 17: crime impossível - não se pune a tentativa quando, por ineficácia absoluta do meio ou absoluta impropriedade do objeto, é impossível consumar o crime.",
+        "fontes": [
+          "CP, art. 17"
+        ]
+      },
+      {
+        "texto": "Art. 19: pelo resultado que agrava especialmente a pena, só responde o agente que o houver causado ao menos culposamente.",
+        "fontes": [
+          "CP, art. 19"
+        ]
+      },
+      {
+        "texto": "Art. 20, § 3º: no erro sobre a pessoa, consideram-se as condições da vítima que o agente queria atingir, não as da atingida.",
+        "fontes": [
+          "CP, art. 20, § 3º"
+        ]
+      },
+      {
+        "texto": "Art. 21: o desconhecimento da lei é inescusável; o erro sobre a ilicitude do fato inevitável isenta de pena, o evitável pode diminuí-la de um sexto a um terço.",
+        "fontes": [
+          "CP, art. 21"
+        ]
+      }
+    ],
+    "como_cobra": [
+      {
+        "texto": "Na prova do cargo (2013), pediu quando ocorre crime doloso: a certa foi 'assumiu o risco de produzir' (art. 18, I), contra embriaguez, emoção, crime impossível e imperícia.",
+        "fontes": [
+          "2013-q49 (gabarito E)",
+          "CP, art. 18, I"
+        ]
+      },
+      {
+        "texto": "Em 2019, pediu a afirmativa correta sobre dolo e culpa: a certa reproduzia a letra do art. 19 (resultado que agrava, ao menos culposamente).",
+        "fontes": [
+          "2019-q53 (gabarito D)",
+          "CP, art. 19"
+        ]
+      },
+      {
+        "texto": "Em 2019, fez o mesmo com a tentativa: a certa era a letra do art. 17 (crime impossível), e as erradas mexiam na fração da pena, na definição de tentado e na desistência voluntária.",
+        "fontes": [
+          "2019-q55 (gabarito E)",
+          "CP, art. 17"
+        ]
+      }
+    ],
+    "pegadinhas": [
+      {
+        "texto": "Em outro concurso da FEPESE, trocou a tentativa pela desistência.",
+        "fontes": [
+          "FEPESE-2016-q21",
+          "CP, art. 15"
+        ]
+      },
+      {
+        "texto": "Assumir o risco de produzir o resultado é dolo eventual, não culpa consciente.",
+        "fontes": [
+          "2019-q53",
+          "CP, art. 18, I"
+        ]
+      },
+      {
+        "texto": "Imperícia é modalidade de culpa, nunca de dolo.",
+        "fontes": [
+          "2013-q49",
+          "2019-q53",
+          "CP, art. 18, II"
+        ]
+      },
+      {
+        "texto": "Tentativa 'diminuída pela metade' está errado: a redução é de um a dois terços.",
+        "fontes": [
+          "2019-q55",
+          "CP, art. 14, parágrafo único"
+        ]
+      },
+      {
+        "texto": "Desistência voluntária não é tentativa: o agente responde só pelos atos já praticados.",
+        "fontes": [
+          "2019-q55",
+          "CP, art. 15"
+        ]
+      },
+      {
+        "texto": "'Basta iniciar a execução' para haver tentativa: falta a não consumação por circunstâncias alheias à vontade do agente.",
+        "fontes": [
+          "2019-q55",
+          "CP, art. 14, II"
+        ]
+      },
+      {
+        "texto": "Quem não pode ser punido pelo doloso não é 'enquadrado na conduta culposa similar': o culposo só se pune quando a lei o prevê expressamente.",
+        "fontes": [
+          "2019-q53",
+          "CP, art. 18, parágrafo único"
+        ]
+      },
+      {
+        "texto": "Trocar desistência voluntária por arrependimento posterior: na desistência o crime não se consuma; no arrependimento posterior ele já se consumou.",
+        "fontes": [
+          "sem questão real",
+          "CP, art. 15",
+          "CP, art. 16"
+        ]
+      }
+    ]
+  }
+}

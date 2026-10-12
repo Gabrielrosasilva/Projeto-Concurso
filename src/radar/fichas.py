@@ -36,9 +36,10 @@ import re
 from dataclasses import asdict, dataclass, field, replace
 from datetime import date
 
+from radar import artigos
 from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
-from radar import incidencia, niveis
+from radar import incidencia, leis, niveis
 from radar import prioridade as regra_de_prioridade
 # As origens (secao 20), mais a do plano, e a frase da regra inviolavel 4: as
 # mesmas do resto do site, que desde a Etapa 7A moram todas no origem.py.
@@ -471,6 +472,127 @@ def conferir_resumo(bruto, *, codigos: dict, caiu: bool, exige_artigo: bool,
             if not any(CITA_DISPOSITIVO.search(f) for f in frase["fontes"]):
                 raise FichaRecusada(f"artigos, frase {numero}: sem o dispositivo na fonte")
     return {chave: frases for chave, frases in partes.items() if frases}
+
+
+# --- o resumo enxuto (decisao 161) ----------------------------------------------------
+#
+# A mesma frase gravada, so arrumada de outro jeito na tela: os artigos
+# abertos, um bloco por artigo, e o resto dobrado. Nenhum texto muda, e cada
+# frase aparece UMA vez. A conta e o agrupamento moram aqui; o template so
+# desenha.
+
+#: Quantas pegadinhas ficam abertas em "O que mais derruba". Tres cabem numa
+#: olhada antes das questoes; o resto fica a um clique, em "As outras
+#: pegadinhas". As de questao real vem primeiro - o alvo antes do
+#: complementar -, porque sao as que a banca de fato usou.
+PEGADINHAS_EM_DESTAQUE = 3
+
+
+@dataclass
+class Trecho:
+    """Um pedaco do texto de uma frase. Com `significado`, e um termo do
+    glossario (decisao 161, T3): a tela o sublinha e mostra o significado."""
+
+    texto: str
+    termo: str | None = None
+    significado: str | None = None
+
+
+@dataclass
+class FraseNaTela:
+    texto: str
+    fontes: list
+    trechos: list            # [Trecho], o texto cortado no servico
+
+
+@dataclass
+class BlocoDoArtigo:
+    """As frases que citam SO este artigo (qualquer paragrafo ou inciso dele)."""
+
+    artigo: artigos.Artigo
+    frases: list             # [FraseNaTela]
+
+    @property
+    def rotulo(self) -> str:
+        return self.artigo.rotulo
+
+
+@dataclass
+class ResumoEnxuto:
+    """O resumo como a janela e a ficha mostram: de cima para baixo, os
+    artigos (ou as regras-chave, na materia sem lei), o basico, o que mais
+    derruba e, dobrados, o resto do dominar, como a banca cobra e as outras
+    pegadinhas."""
+
+    de_lei: bool
+    blocos: list             # [BlocoDoArtigo], em ordem de lei e de numero
+    regras_chave: list       # [FraseNaTela]: a parte "artigos" na materia sem lei
+    basico: list
+    derruba: list            # as PEGADINHAS_EM_DESTAQUE primeiras
+    dominar: list            # so as frases que nao foram para um bloco
+    como_cobra: list
+    outras_pegadinhas: list
+
+
+def _frase_na_tela(frase: dict) -> FraseNaTela:
+    return FraseNaTela(texto=frase["texto"], fontes=list(frase["fontes"]),
+                       trechos=[Trecho(frase["texto"])])
+
+
+def artigo_da_frase(frase: dict) -> "artigos.Artigo | None":
+    """O artigo que a frase cita pelas fontes, se cita um so. A questao, a
+    sumula e a doutrina nao sao artigo e nao contam; dois artigos, nenhum."""
+    return artigos.unico([f for fonte in frase.get("fontes") or []
+                          for f in artigos.citados(fonte)])
+
+
+def _peso_da_pegadinha(frase: dict) -> int:
+    """0 = questao do alvo, 1 = so do complementar, 2 = sem questao real."""
+    codigos = CODIGO_DA_QUESTAO.findall(" ".join([frase["texto"]] + frase["fontes"]))
+    if any(not c.startswith(PREFIXO_DO_COMPLEMENTAR) for c in codigos):
+        return 0
+    return 1 if codigos else 2
+
+
+def resumo_enxuto(partes: dict | None, materia: str | None) -> ResumoEnxuto:
+    """As partes gravadas do resumo, arrumadas para a tela (decisao 161).
+
+    Na materia de lei (o config/leis.yml), a frase de "artigos" ou de
+    "dominar" que cita SO um artigo vai para o bloco dele; a que cita varios,
+    ou nenhum (doutrina, sumula), fica em "O que eu preciso dominar". Na
+    materia sem lei, "artigos" e "dominar" ficam como estao.
+    """
+    partes = partes or {}
+    de_lei = leis.exige_artigo(materia)
+    blocos: dict = {}
+    ordem_das_leis: list[str] = []
+    sobra = []
+    regras_chave = []
+    for chave in ("dominar", "artigos"):
+        for frase in partes.get(chave) or []:
+            artigo = artigo_da_frase(frase) if de_lei else None
+            if artigo is None:
+                if chave == "artigos" and not de_lei:
+                    regras_chave.append(_frase_na_tela(frase))
+                else:
+                    sobra.append(_frase_na_tela(frase))
+                continue
+            if artigo.lei not in ordem_das_leis:
+                ordem_das_leis.append(artigo.lei)
+            blocos.setdefault(artigo, BlocoDoArtigo(artigo, [])).frases.append(
+                _frase_na_tela(frase))
+    pegadinhas = sorted(partes.get("pegadinhas") or [], key=_peso_da_pegadinha)
+    return ResumoEnxuto(
+        de_lei=de_lei,
+        blocos=sorted(blocos.values(), key=lambda b: (
+            ordem_das_leis.index(b.artigo.lei), b.artigo.posicao)),
+        regras_chave=regras_chave,
+        basico=[_frase_na_tela(f) for f in partes.get("basico") or []],
+        derruba=[_frase_na_tela(f) for f in pegadinhas[:PEGADINHAS_EM_DESTAQUE]],
+        dominar=sobra,
+        como_cobra=[_frase_na_tela(f) for f in partes.get("como_cobra") or []],
+        outras_pegadinhas=[_frase_na_tela(f) for f in pegadinhas[PEGADINHAS_EM_DESTAQUE:]],
+    )
 
 
 # --- as faixas de um tema no cronograma -------------------------------------------
