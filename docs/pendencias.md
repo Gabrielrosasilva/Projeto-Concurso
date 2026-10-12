@@ -193,7 +193,8 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   assunto). **Montar o ciclo inclui escrever, antes do primeiro dia, as
   fichas e os resumos dos temas novos e a explicacao das questoes reais
   deles** (decisao 123): `radar fichas --pedido`, depois `--pedido
-  --resumos` e `--pedido --explicacoes`, cada um com o `--importar`, e o
+  --resumos`, `--pedido --explicacoes` e, nas fichas de lei, `--pedido
+  --traducoes` (decisao 161), cada um com o `--importar`, e o
   `radar fichas --verificar-resumos` no fim. A redistribuicao pela classe
   de cada tema (decisao 108) vale tambem para ele. Prazo: antes de 09/11;
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
@@ -582,3 +583,38 @@ O que falta:
   o ajuste e so no `config/amostra.yml`, secao `treino_ia`, sem codigo.
 - ⚪ **Direitos Humanos ainda nao tem resposta a gerada**: o numero dele
   aparece quando houver treino.
+
+## M. O resumo enxuto e a traducao dos artigos (decisao 161, 12/10)
+
+Feito: o resumo enxuto nas 65 fichas (os artigos abertos, o resto dobrado),
+o `config/linguagem.yml`, o `radar fichas --pedido --traducoes`, a tela da
+traducao com o glossario e as 30 fichas de lei traduzidas (197 artigos, 130
+linhas de "nao confunda", 213 termos). O que falta:
+
+### Depende de voce
+
+- 🔴 **Conferir as 30 traducoes** (Hoje > Fichas > "Ficha completa", no
+  "🗣 Traduz pra mim" de cada artigo, e o botao **"✓ Conferi a traducao"**).
+  A conferida nao e mais sobrescrita pela importacao. Aos poucos, a do tema
+  do dia. Achou algo errado numa nao conferida: `radar fichas --pedido
+  --traducoes --tema "<o tema>" --refazer`, os passos 2 e 3 de sempre, e
+  `radar fichas --importar data/resposta_ia.json`;
+- ⚪ **Olhar o glossario** (`data/glossario.json`, 213 termos, 🟣): nao ha
+  botao de conferencia por termo. O termo errado se corrige a mao no arquivo
+  (o primeiro escrito vale: a importacao nao sobrescreve). Alguns significados
+  vem de doutrina, e a fonte diz isso ("doutrina (...)");
+- ⚪ **Tres blocos de Direitos Humanos ficaram sem traducao**, pela regra do
+  artigo do tema (titulo e "ler exatamente"): Viena, § 5 na Afirmacao
+  historica; CF, art. 1º na Teoria geral; Protocolo de San Salvador, art. 11
+  nos Sistemas de protecao. Se quiser, a regra pode passar a contar tambem o
+  artigo que tem bloco no resumo - decisao sua;
+- ⚪ **Reinicie o servidor** depois do `git pull`: `radar parar` e `radar
+  subir` (os templates e o CSS mudaram).
+
+### A IA pode fazer (quando voce pedir)
+
+- ⚪ **O texto oficial de Viena** nao se leu daqui (o site do Alto
+  Comissariado da ONU nao respondeu ao curl): a traducao do § 5, na Teoria
+  geral, fica no que o resumo ja dizia. Conferir quando o site responder;
+- ⚪ **A traducao dos temas do Ciclo 2**: montar o ciclo (decisao 123) passa a
+  incluir o `--pedido --traducoes` das fichas de lei novas, depois do resumo.

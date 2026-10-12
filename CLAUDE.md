@@ -101,7 +101,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (09/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (12/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -199,7 +199,8 @@ de IA e o total -, o "fiz no Qconcursos" da faixa vem sempre vazio, a faixa
 feita no radar fecha com o ✓ vazio guardando so o tempo, e a faixa e a ficha
 mostram o "Treino de IA neste tema". O 06/10 foi corrigido (as 12 geradas
 estavam anotadas de novo na Fixacao).
-**Falta, de voce:** conferir as outras 60 fichas e os 65 resumos (a ficha conferida
+**Falta, de voce:** conferir as outras 60 fichas, os 65 resumos e as 30
+traducoes dos artigos (pendencia M) (a ficha conferida
 tambem liga as faixas do tema ao Meu desempenho, decisao 81); as
 classificacoes abertas e pendentes do complementar (lista unica em
 [conferir_classificacoes](docs/conferir_classificacoes.md)), os 109 conceitos
@@ -282,6 +283,18 @@ marcos do cartao olham a edicao inteira - cada marco do item mais novo que o
 sabe -, e os Bombeiros passaram a "edital publicado" com Banca IDIB. Abertos
 na pendencia J, por decidir: o 🔔 de edital velho recem-chegado, o CFO no
 cartao do Oficial de Bombeiros e o edital de abertura do DOE sem fase.
+**O resumo enxuto e o "🗣 Traduz pra mim" (12/10, decisao 161, a seu pedido e
+fora dos lotes; nao mexe em numero):** na janela e na ficha, os artigos
+abertos, um bloco por artigo (as frases que citam so ele, pela fonte), o
+basico, as 3 pegadinhas que mais derrubam e o resto dobrado; o link da Noite
+cai em "Como a banca cobra" aberta. Nas fichas de lei, cada bloco tem a
+traducao (na real, exemplo, na prova; 🟣), o tema tem o "⚖️ Nao confunda" e a
+1a vez de cada palavra do `data/glossario.json` fica sublinhada, com o
+significado no `:hover`/`:focus`, sem JS (so nas materias de lei). O jeito de
+escrever mora no `config/linguagem.yml`; a traducao, na ficha (`traducao`),
+com procedencia e "✓ Conferi a traducao" proprios: `radar fichas --pedido
+--traducoes [--tema] [--materia] [--refazer]`. Traduzidas as 30 fichas de lei:
+197 artigos, 130 linhas de "nao confunda", 213 termos (pendencia M).
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
@@ -309,7 +322,11 @@ alvo sai do `incidencia.caiu_no_alvo`** (decisao 108), por `fichas.caiu_do_tema`
 ficha, faixa, aba e redistribuicao nao refazem a conta. **O resumo do tema
 mora na ficha** (`resumo`), cada frase com a fonte, conferido pelo
 `fichas.conferir_resumo` na importacao e no `--verificar-resumos`; a parte
-"caiu ou nao caiu" e calculada na hora, nunca gravada. **A prioridade de um
+"caiu ou nao caiu" e calculada na hora, nunca gravada. **A tela o mostra
+enxuto** (`fichas.resumo_enxuto`, decisao 161): o artigo de cada frase sai do
+`radar/artigos.py`, a traducao de cada artigo mora na ficha (`traducao`) e e
+conferida pelo `radar/traducao.py`, e o glossario corta o texto no servico
+(`radar/glossario.py`); o template so desenha. **A prioridade de um
 tema sai do `config/prioridade.yml`**,
 pelo `radar/prioridade.py`, e a ficha de estudo do `radar/fichas.py`: o tema e
 reconhecido pelo titulo da faixa, sem o prefixo, e o texto escrito mora em

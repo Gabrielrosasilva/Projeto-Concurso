@@ -5362,3 +5362,80 @@ viraram estudo extra "Onde: Radar". Copia antes em
      nome que o DOE escreve. O Edital da PC SC segue "aguardando": o edital
      de abertura do DOE entra como `desconhecida` (decisao 154, a regra do
      pedido), e e por isso (pendencia J).
+
+## O resumo enxuto e a traducao de cada artigo (pedido de 12/10/2026)
+
+161. **o resumo fica enxuto e cada artigo ganha o "🗣 Traduz pra mim"** (pedido
+     de 12/10, fora dos lotes, a seu pedido, como as 139, 140 e 151; nao mexe
+     em numero nenhum). O texto dos artigos, como esta no resumo, nao mudou:
+     a traducao e a mais, e fica escondida ate o clique. As regras:
+     - **T1, o resumo enxuto (so tela):** na janela e na ficha, o mesmo corpo
+       (`_resumo.html`, macro `corpo`): o "1. Caiu ou nao caiu" como estava;
+       **📜 Os artigos** abertos, um bloco por artigo, com as frases de
+       "artigos" e de "dominar" que citam SO aquele artigo - pela FONTE da
+       frase, lida pelo `radar/artigos.py` ("CP, art. 14, I e II" e "CP, art.
+       14, paragrafo unico" sao o art. 14; "CF, arts. 10 e 11" sao dois). O
+       texto da frase nao conta: as frases da LEP citam a lei que mudou o
+       artigo ("Lei 14.994/2024"), e o leitor as tiraria do bloco. Os blocos
+       saem em ordem de lei (a primeira que aparece) e de numero; dentro do
+       bloco, o "dominar" antes do "artigos", a ordem de antes. Na materia
+       sem lei, as "regras-chave" como estao. Depois: o basico (aberto); **⚠ O
+       que mais derruba** com `fichas.PEGADINHAS_EM_DESTAQUE` = 3, as de
+       questao do alvo antes das do complementar e das sem questao; e, cada um
+       num `<details>`, o resto do dominar (varios artigos e doutrina), como a
+       banca cobra e as outras pegadinhas. Cada frase aparece uma vez. O link
+       da Noite continua "#...-cobra": a ancora fica DENTRO do `<details>`, e
+       o navegador o abre ao seguir o link (conferido no Edge, com print);
+     - **T2, o perfil e o pedido:** `config/linguagem.yml` (editado a mao): o
+       jeito (futebol e dia a dia, giria leve, frases curtas, sem palavrao),
+       as tres linhas, o tom aprovado (para o tom, nao para copiar) e a lista
+       curta de palavroes. A traducao mora na ficha, chave `traducao`: `itens`
+       (artigo, na_real, exemplo, na_prova, cada linha com texto e fontes),
+       `nao_confunda` (situacao, o_que_e, o_que_acontece, fontes), `modelo`,
+       `criado_em`, `conferido_em` e `artigos_do_resumo` (o que o resumo
+       citava na importacao). `radar fichas --pedido --traducoes [--tema]
+       [--materia] [--refazer]`, so materias de lei, com o perfil, as frases
+       por artigo, os artigos do tema (titulo e "ler exatamente", lidos pelo
+       `artigos.do_tema`: a lei logo depois da lista vence, depois a ultima
+       nomeada, depois a da materia), como a banca cobrou, as pegadinhas, os
+       codigos citaveis e os termos ja no glossario. A importacao recusa a
+       traducao inteira, com o motivo: linha sem texto ou sem fonte; "na real"
+       ou "exemplo" com fonte que nao e o proprio artigo (ou com questao no
+       texto); artigo que nao e do tema, ou que nao e um dispositivo so;
+       artigo repetido; no "na prova" e no "nao confunda", fonte que nao e
+       artigo do tema, sumula ou questao real do tema; questao fora do tema ou
+       gabarito trocado (a conferencia da 118); palavrao (palavra inteira, sem
+       acento: "disputa" nao e "puta"); e previsao. A conferida nao e
+       sobrescrita;
+     - **a traducao orfa:** o item cujo artigo deixou de ser do tema, ou que
+       o resumo citava na importacao e o resumo refeito perdeu, nao aparece, e
+       o `--verificar-resumos` avisa. O artigo que o resumo nunca citou nao e
+       orfao: ganha o bloco so com o numero e a traducao;
+     - **T3, a tela e o glossario:** em cada bloco, "🗣 Traduz pra mim"
+       fechado (Na real, Exemplo, Na prova, no `.ds-bloco--ia`, com o selo e a
+       procedencia); "⚖️ Nao confunda" fechado, logo depois dos artigos; na
+       ficha, "✓ Conferi a traducao", separado do resumo. `data/glossario.json`
+       (🟣, procedencia por termo; a importacao junta os novos sem duplicar,
+       pelo termo e pelas variantes). O servico corta o texto em trechos
+       (`glossario.trechos`): a 1a vez de cada termo em cada bloco (um artigo
+       com a sua traducao, ou uma parte) fica sublinhada, o termo mais
+       comprido vence no mesmo ponto, o casamento e o do alvo.yml
+       (`alvo.palavra_inteira`), nunca na fonte, e o "2019-q51 (gabarito C)"
+       nao e cortado (o `sem_gabarito` continua). A dica abre no `:hover` e no
+       `:focus` (`tabindex="0"` para o toque; no celular, no pe da tela), sem
+       JavaScript. **So nas materias de lei:** Portugues e Raciocinio ficam
+       com o resumo enxuto, e so (sem isso, o "iminente" de um exemplo de
+       paronimos ganhava a dica juridica);
+     - **T4, o que foi traduzido** (Claude Code, claude-opus-5-5, 12/10,
+       cada artigo conferido antes no texto oficial: CP, CF e LEP na
+       compilacao da Camara; o Decreto 678/1992; a DUDH na traducao da UNICEF
+       Brasil; as Regras de Mandela no original da UNODC, com a regra 40 pela
+       letra do CNJ e a nota do ingles, a 117): **as 30 fichas de lei, 197
+       artigos** (Constitucional 17, Penal 39, Direitos Humanos 43, LEP 98),
+       **130 linhas de "nao confunda" e 213 termos no glossario**. Ficam sem
+       traducao, pela regra do artigo do tema, tres blocos de Direitos
+       Humanos que o resumo tem e o titulo e o "ler exatamente" nao citam:
+       Viena, § 5 (Afirmacao historica), CF, art. 1º (Teoria geral) e
+       Protocolo de San Salvador, art. 11 (Sistemas). O texto oficial de Viena
+       nao se leu daqui (o site do Alto Comissariado da ONU nao respondeu): a
+       traducao do § 5 fica no que o resumo ja diz.

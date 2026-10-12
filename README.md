@@ -1074,6 +1074,7 @@ radar fichas --pedido --explicacoes   # explicacao das questoes reais do alvo de
 radar fichas --pedido --explicacoes --dos-resumos   # e das do complementar que os resumos citam
 radar fichas --conferir-resumo vozes-do-verbo   # marca o resumo como lido por mim
 radar fichas --verificar-resumos      # confere cada resumo de novo contra o acervo de hoje
+radar fichas --pedido --traducoes [--tema "..."] [--materia "..."] [--refazer]   # a TRADUCAO dos artigos (so materias de lei)
 ```
 
 **No Windows, o comando inteiro e `.venv\Scripts\radar.exe ...`** (ou
@@ -1094,6 +1095,24 @@ sao texto de IA em que cada frase diz a fonte. Na Noite, ele abre ja em "como
 a banca cobra". A faixa de questoes diz o no e manda primeiro ao Qconcursos;
 as geradas vem depois, com o botao "Treinar no radar" ou os 3 passos para
 gerar. Decisoes 108 a 125.
+
+**O resumo enxuto e o "🗣 Traduz pra mim" (decisao 161, 12/10).** Na janela e
+na ficha, o resumo mostra primeiro **📜 Os artigos**, abertos, um bloco por
+artigo (as frases que citam so aquele artigo, com o texto e a fonte como
+estao), depois o basico, o **⚠ O que mais derruba** (3 pegadinhas, as de
+questao real primeiro) e, dobrados, o resto do dominar, como a banca cobra e
+as outras pegadinhas. Nas materias de lei, cada bloco tem o **🗣 Traduz pra
+mim** fechado - Na real, Exemplo e Na prova, 🟣 com a procedencia -, o tema
+pode ter o **⚖️ Nao confunda**, e a 1a vez de cada palavra dificil do
+glossario (`data/glossario.json`) fica sublinhada, com o significado ao passar
+o mouse ou tocar. O jeito de escrever mora no **`config/linguagem.yml`**
+(exemplos de futebol e do dia a dia, giria leve, frases curtas, a lista de
+palavroes que a importacao recusa), que eu edito a mao. A traducao mora na
+ficha (`traducao`), com procedencia e data proprias; o "na real" e o
+"exemplo" citam so o proprio artigo. Para refazer a de um tema que eu ainda
+nao conferi: `radar fichas --pedido --traducoes --tema "<o tema>" --refazer`,
+responder no Claude Code e `radar fichas --importar data/resposta_ia.json`.
+Na ficha, **✓ Conferi a traducao** marca a minha leitura.
 
 **A ficha de estudo e a prioridade (Etapa 6B).** `radar fichas --tema` mostra
 a mesma ficha da tela (ver [A ficha de estudo de cada tema](#a-ficha-de-estudo-de-cada-tema)).
