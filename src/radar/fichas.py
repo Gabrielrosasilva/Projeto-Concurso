@@ -604,9 +604,12 @@ def resumo_enxuto(partes: dict | None, materia: str | None, traducao: dict | Non
     (um artigo, ou uma parte) e marcada.
     """
     partes = partes or {}
-    termos = termos or []
     traducao = traducao or {}
     de_lei = leis.exige_artigo(materia)
+    # O glossario e da traducao, e a traducao e so das materias de lei:
+    # Portugues e Raciocinio ficam so com o resumo enxuto (pedido de 12/10).
+    # Sem isto, o "iminente" de um exemplo de paronimos ganhava a dica da lei.
+    termos = (termos or []) if de_lei else []
     do_artigo: dict = {}
     ordem_das_leis: list[str] = []
     sobra, regras_chave = [], []

@@ -104,9 +104,12 @@ def test_o_artigo_traduzido_sem_frase_ganha_o_bloco_so_com_a_traducao():
     assert e.blocos[0] is bloco                              # em ordem de numero
 
 
-def test_a_materia_sem_lei_nao_mostra_traducao():
-    e = fichas.resumo_enxuto(RESUMO["partes"], "Língua Portuguesa", TRADUCAO, [])
+def test_a_materia_sem_lei_nao_mostra_traducao_nem_glossario():
+    e = fichas.resumo_enxuto(RESUMO["partes"], "Língua Portuguesa", TRADUCAO, TERMOS)
     assert not e.blocos and not e.nao_confunda and not e.traduzido
+    # O glossario e da traducao: Portugues fica so com o resumo enxuto.
+    secoes = e.regras_chave + e.dominar + e.derruba + e.como_cobra + e.outras_pegadinhas
+    assert not [t for f in secoes for t in f.trechos if t.significado]
 
 
 # --- a tela ------------------------------------------------------------------------------
