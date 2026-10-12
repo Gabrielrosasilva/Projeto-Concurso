@@ -62,6 +62,41 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "audiência de custódia",
+    "variantes": [],
+    "significado": "O preso é levado logo a um juiz, que confere se a prisão foi legal e se ele sofreu maus-tratos.",
+    "fontes": [
+      "Convenção Americana, art. 7.5",
+      "CPP, art. 310, caput"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "autoadministração",
+    "variantes": [],
+    "significado": "Grupos de presos que, com supervisão, cuidam de atividades sociais, educativas ou esportivas.",
+    "fontes": [
+      "Regras de Mandela, regra 40"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "autoincriminação",
+    "variantes": [
+      "autoincriminar",
+      "não autoincriminação"
+    ],
+    "significado": "Produzir prova contra si mesmo: ninguém é obrigado a isso.",
+    "fontes": [
+      "CF, art. 5º, LXIII",
+      "doutrina (direito ao silêncio)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "base territorial",
     "variantes": [],
     "significado": "A área que um sindicato representa; não pode ser menor que um município.",
@@ -96,6 +131,18 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "castigos coletivos",
+    "variantes": [
+      "castigo coletivo"
+    ],
+    "significado": "Punir um grupo inteiro pela falta de alguns.",
+    "fontes": [
+      "Regras de Mandela, regra 43"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "causa superveniente relativamente independente",
     "variantes": [
       "superveniência de causa relativamente independente",
@@ -119,6 +166,18 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "cláusula pétrea",
+    "variantes": [
+      "cláusulas pétreas"
+    ],
+    "significado": "A parte da Constituição que nenhuma emenda pode abolir.",
+    "fontes": [
+      "CF, art. 60, § 4º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "coação irresistível",
     "variantes": [],
     "significado": "Ser forçado de um jeito que não dava para resistir.",
@@ -127,6 +186,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "Comissão Interamericana",
+    "variantes": [],
+    "significado": "O órgão do sistema interamericano que recebe as denúncias contra os países e pode levar o caso à Corte.",
+    "fontes": [
+      "Convenção Americana, art. 44"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "comoção grave",
@@ -167,6 +236,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "confinamento solitário",
+    "variantes": [],
+    "significado": "Ficar 22 horas ou mais por dia isolado, sem contato humano significativo.",
+    "fontes": [
+      "Regras de Mandela, regra 44"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "conscritos",
@@ -220,6 +299,17 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "Corte Interamericana",
+    "variantes": [],
+    "significado": "O tribunal do sistema interamericano: julga os países, e a decisão não tem recurso.",
+    "fontes": [
+      "Convenção Americana, art. 61",
+      "Convenção Americana, art. 67"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "crimes hediondos",
     "variantes": [
       "hediondos"
@@ -268,6 +358,18 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "degradante",
+    "variantes": [
+      "degradantes"
+    ],
+    "significado": "Que humilha, que rebaixa a pessoa.",
+    "fontes": [
+      "Regras de Mandela, regra 1"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "denúncia",
     "variantes": [
       "queixa"
@@ -291,6 +393,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "deslocamento de competência",
+    "variantes": [],
+    "significado": "Tirar o caso de uma Justiça e mandar para outra; aqui, da estadual para a federal.",
+    "fontes": [
+      "CF, art. 109, § 5º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "direito líquido e certo",
     "variantes": [],
     "significado": "Direito comprovado de cara, com documento, sem precisar de outras provas.",
@@ -310,6 +422,37 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "eficácia diagonal",
+    "variantes": [],
+    "significado": "Os direitos valendo entre particulares em posição desigual, como empregado e patrão.",
+    "fontes": [
+      "doutrina (eficácia dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "eficácia horizontal",
+    "variantes": [],
+    "significado": "Os direitos valendo também entre particulares, e não só contra o Estado.",
+    "fontes": [
+      "doutrina (eficácia dos direitos humanos)",
+      "2019-q30"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "eficácia vertical",
+    "variantes": [],
+    "significado": "Os direitos valendo na relação entre o Estado e a pessoa.",
+    "fontes": [
+      "doutrina (eficácia dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "elementares",
@@ -357,6 +500,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "esgotados os recursos internos",
+    "variantes": [
+      "esgotamento dos recursos internos"
+    ],
+    "significado": "Antes de ir à Comissão, usar todos os recursos da Justiça do próprio país.",
+    "fontes": [
+      "Convenção Americana, art. 46"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "estado de necessidade",
@@ -466,6 +621,18 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "gerações",
+    "variantes": [
+      "geração"
+    ],
+    "significado": "As fases em que os direitos humanos foram reconhecidos: liberdade (1ª), igualdade (2ª), fraternidade (3ª).",
+    "fontes": [
+      "doutrina (classificação de Karel Vasak)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "habeas corpus",
     "variantes": [],
     "significado": "A ação para proteger quem está preso ilegalmente, ou ameaçado de ser: protege a liberdade de ir e vir.",
@@ -484,6 +651,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "historicidade",
+    "variantes": [],
+    "significado": "Os direitos surgem e mudam ao longo da história.",
+    "fontes": [
+      "doutrina (características dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "idoneidade moral",
@@ -516,6 +693,19 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "imobilizadores",
+    "variantes": [
+      "instrumentos de restrição",
+      "instrumentos de imobilização"
+    ],
+    "significado": "Algemas, correntes e afins, que prendem os movimentos da pessoa.",
+    "fontes": [
+      "Regras de Mandela, regras 47 e 48"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "imperícia",
     "variantes": [],
     "significado": "Falta de habilidade técnica de quem devia saber fazer: o profissional que erra no próprio ofício.",
@@ -525,6 +715,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "imprescritibilidade",
+    "variantes": [],
+    "significado": "O direito não se perde com o passar do tempo sem uso.",
+    "fontes": [
+      "doutrina (características dos direitos humanos)",
+      "2019-q28"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "imprescritível",
@@ -587,6 +788,18 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "inalienáveis",
+    "variantes": [
+      "inalienabilidade"
+    ],
+    "significado": "Não se vendem nem se passam adiante.",
+    "fontes": [
+      "doutrina (características dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "inalistáveis",
     "variantes": [],
     "significado": "Quem não pode tirar o título de eleitor, como o estrangeiro e o conscrito.",
@@ -598,6 +811,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "inapelável",
+    "variantes": [],
+    "significado": "Que não admite recurso.",
+    "fontes": [
+      "Convenção Americana, art. 67"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "incomunicabilidade",
     "variantes": [],
     "significado": "Deixar o preso sem falar com ninguém. No estado de defesa, isso é proibido.",
@@ -606,6 +829,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "indivisíveis",
+    "variantes": [
+      "indivisibilidade"
+    ],
+    "significado": "Os direitos formam um conjunto: não dá para garantir só uma parte deles.",
+    "fontes": [
+      "Declaração de Viena (1993), § 5"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "indulgência",
@@ -675,6 +910,40 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "interdependentes",
+    "variantes": [
+      "interdependência"
+    ],
+    "significado": "Um direito depende do outro para funcionar.",
+    "fontes": [
+      "Declaração de Viena (1993), § 5"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "internacionalização",
+    "variantes": [],
+    "significado": "Os direitos humanos deixarem de ser assunto só de cada país e passarem a ser cuidados também pela comunidade internacional.",
+    "fontes": [
+      "doutrina (Piovesan)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "intervenção federal",
+    "variantes": [
+      "intervenção da União"
+    ],
+    "significado": "A União assumir por um tempo parte do governo de um Estado, nos casos que a Constituição permite.",
+    "fontes": [
+      "CF, art. 34"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "irredutibilidade",
     "variantes": [],
     "significado": "O salário não pode ser diminuído, salvo por convenção ou acordo coletivo.",
@@ -683,6 +952,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "irrenunciáveis",
+    "variantes": [
+      "irrenunciabilidade"
+    ],
+    "significado": "Não dá para abrir mão deles; dá, no máximo, para deixar de exercê-los.",
+    "fontes": [
+      "doutrina (características dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "isenta de pena",
@@ -696,6 +977,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "jurisdição",
+    "variantes": [],
+    "significado": "O território e as pessoas sobre os quais uma autoridade manda e julga.",
+    "fontes": [
+      "Convenção Americana, art. 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "legislação especial",
@@ -759,6 +1050,18 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "não vinculante",
+    "variantes": [
+      "caráter não vinculante"
+    ],
+    "significado": "Que não obriga juridicamente: é orientação, e não lei.",
+    "fontes": [
+      "Resolução 70/175 da Assembleia Geral da ONU, item 8"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "negligência",
     "variantes": [],
     "significado": "Deixar de tomar um cuidado que devia, como não conferir se a arma estava carregada.",
@@ -803,6 +1106,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "Pacto de San José da Costa Rica",
+    "variantes": [
+      "Pacto de San José"
+    ],
+    "significado": "O outro nome da Convenção Americana sobre Direitos Humanos, de 1969.",
+    "fontes": [
+      "Convenção Americana sobre Direitos Humanos"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "paramilitar",
@@ -857,6 +1172,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "ponderação",
+    "variantes": [],
+    "significado": "Pesar os dois direitos em conflito para ver qual cede, e quanto, naquele caso.",
+    "fontes": [
+      "doutrina (relatividade dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "prestação alternativa",
     "variantes": [],
     "significado": "Uma tarefa que a lei põe no lugar da obrigação, para quem a recusa por crença ou convicção.",
@@ -877,6 +1202,19 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "preventivos",
+    "variantes": [
+      "presos preventivos",
+      "presos provisórios"
+    ],
+    "significado": "Presos que ainda não foram julgados de vez.",
+    "fontes": [
+      "Regras de Mandela, regra 11"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "prisão civil",
     "variantes": [],
     "significado": "Prisão que não é castigo por crime, mas um jeito de forçar o pagamento de uma dívida. Hoje, só a do devedor de pensão alimentícia.",
@@ -886,6 +1224,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "proibição de retrocesso",
+    "variantes": [],
+    "significado": "Direito conquistado não pode ser tirado ou diminuído depois.",
+    "fontes": [
+      "doutrina (características dos direitos humanos)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "punibilidade",
@@ -907,6 +1255,58 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "regresso",
+    "variantes": [
+      "direito de regresso"
+    ],
+    "significado": "O Estado, depois de indenizar a vítima, cobrar do agente que agiu com dolo ou culpa.",
+    "fontes": [
+      "CF, art. 37, § 6º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "reincidência",
+    "variantes": [],
+    "significado": "Voltar a cometer crime depois de já ter sido condenado.",
+    "fontes": [
+      "Regras de Mandela, regra 4.1"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "reintegração",
+    "variantes": [],
+    "significado": "Voltar a viver em sociedade, dentro da lei, depois da prisão.",
+    "fontes": [
+      "Regras de Mandela, regra 4.1"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "resistência passiva",
+    "variantes": [],
+    "significado": "Recusar-se a obedecer sem atacar: deitar no chão, não se mexer.",
+    "fontes": [
+      "Regras de Mandela, regra 82.1"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "resolução",
+    "variantes": [],
+    "significado": "Uma decisão da Assembleia Geral da ONU. Diferente do tratado, não passa pela assinatura e ratificação de cada país.",
+    "fontes": [
+      "Resolução 217 A (III) da Assembleia Geral da ONU, de 10/12/1948"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "retroatividade",
@@ -964,6 +1364,20 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "supralegal",
+    "variantes": [
+      "supralegais",
+      "supralegalidade"
+    ],
+    "significado": "Abaixo da Constituição e acima das leis comuns.",
+    "fontes": [
+      "CF, art. 5º, § 2º",
+      "Súmula Vinculante 25"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
     "termo": "teoria monista",
     "variantes": [],
     "significado": "Todos os que participam do crime respondem pelo mesmo crime.",
@@ -973,6 +1387,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "titularidade coletiva",
+    "variantes": [],
+    "significado": "O direito é de um grupo, ou de todos, e não de uma pessoa só.",
+    "fontes": [
+      "doutrina (classificação de Karel Vasak)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
     "termo": "trabalhador avulso",

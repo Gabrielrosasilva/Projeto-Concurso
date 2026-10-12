@@ -5014,6 +5014,131 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "DUDH, art. 1º",
+          "na_real": {
+            "texto": "Todo mundo já nasce livre, com a mesma dignidade e os mesmos direitos. E, como tem razão e consciência, cada um deve tratar o outro como irmão.",
+            "fontes": [
+              "DUDH, art. 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O filho do jogador milionário e o filho do gandula nascem com a mesma dignidade e os mesmos direitos: a conta bancária não muda isso.",
+            "fontes": [
+              "DUDH, art. 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "'Nascem livres e iguais em DIGNIDADE e DIREITOS', com espírito de FRATERNIDADE. A DUDH é de 1948, proclamada pela Assembleia Geral da ONU como resolução, e não é tratado.",
+            "fontes": [
+              "DUDH, art. 1º",
+              "2013-q21 (gabarito D)",
+              "FEPESE-2013-q29 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "DUDH, art. 2º",
+          "na_real": {
+            "texto": "Os direitos da Declaração valem para todos, sem distinção nenhuma: raça, cor, sexo, língua, religião, opinião, origem, dinheiro, nascimento ou qualquer outra condição. Também não importa a situação política do país ou território de onde a pessoa vem.",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma pessoa vinda de um território sem governo próprio tem os mesmos direitos da Declaração que o cidadão de qualquer país.",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "A lista termina em 'ou QUALQUER OUTRA CONDIÇÃO': não é fechada. E o item 2 proíbe distinguir pela condição política, jurídica ou internacional do país ou território da pessoa.",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "DUDH, art. 3º",
+          "na_real": {
+            "texto": "Três coisas básicas para todo ser humano: estar vivo, ser livre e estar seguro.",
+            "fontes": [
+              "DUDH, art. 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O torcedor visitante tem o mesmo direito à vida, à liberdade e à segurança que o torcedor da casa, dentro ou fora do estádio.",
+            "fontes": [
+              "DUDH, art. 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "A trinca do art. 3º é VIDA, LIBERDADE e SEGURANÇA PESSOAL; 'igualdade' e 'propriedade' não estão nele.",
+            "fontes": [
+              "DUDH, art. 3º"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Liberdade: votar, falar, ir e vir",
+          "o_que_e": "1ª geração (direitos civis e políticos)",
+          "o_que_acontece": "Ligada à liberdade",
+          "fontes": [
+            "2013-q26 (gabarito E)",
+            "2019-q26 (gabarito D)"
+          ]
+        },
+        {
+          "situacao": "Igualdade: saúde, educação, trabalho",
+          "o_que_e": "2ª geração (direitos econômicos, sociais e culturais)",
+          "o_que_acontece": "Ligada à igualdade",
+          "fontes": [
+            "2013-q26",
+            "2019-q26"
+          ]
+        },
+        {
+          "situacao": "Fraternidade: paz, desenvolvimento, meio ambiente",
+          "o_que_e": "3ª geração (solidariedade)",
+          "o_que_acontece": "Ligada à fraternidade; o direito é de todos, e não de uma pessoa só",
+          "fontes": [
+            "2013-q26",
+            "2019-q26"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "Declaração de Viena (1993)",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "DUDH",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -5252,6 +5377,242 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 1º",
+          "na_real": {
+            "texto": "A Constituição diz em que a República se apoia, e um dos pilares é a dignidade da pessoa humana: toda pessoa vale por ser pessoa.",
+            "fontes": [
+              "CF, art. 1º, III"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um preso, mesmo condenado por crime grave, não perde a dignidade: o Estado não pode tratá-lo como coisa.",
+            "fontes": [
+              "CF, art. 1º, III"
+            ]
+          },
+          "na_prova": {
+            "texto": "Dignidade da pessoa humana é FUNDAMENTO da República (art. 1º, III); prevalência dos direitos humanos é PRINCÍPIO das relações internacionais (art. 4º, II). Não troque um pelo outro.",
+            "fontes": [
+              "CF, art. 1º, III",
+              "CF, art. 4º, II",
+              "2013-q30 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 4º",
+          "na_real": {
+            "texto": "Nas relações com outros países, o Brasil se guia por princípios, e um deles é dar prevalência aos direitos humanos.",
+            "fontes": [
+              "CF, art. 4º, II"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ao votar numa resolução internacional contra a tortura, o Brasil se guia pela prevalência dos direitos humanos.",
+            "fontes": [
+              "CF, art. 4º, II"
+            ]
+          },
+          "na_prova": {
+            "texto": "Prevalência dos direitos humanos está no art. 4º, II, entre os princípios das RELAÇÕES INTERNACIONAIS; o fundamento da República é a dignidade (art. 1º, III).",
+            "fontes": [
+              "CF, art. 4º, II",
+              "CF, art. 1º, III"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 5º",
+          "na_real": {
+            "texto": "Os direitos do art. 5º não são uma lista fechada: entram também os que vêm dos tratados de que o Brasil é parte, e eles valem desde já. Tratado de direitos humanos aprovado com o quórum de emenda vira emenda constitucional.",
+            "fontes": [
+              "CF, art. 5º, § 1º",
+              "CF, art. 5º, § 2º",
+              "CF, art. 5º, § 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Imagine um tratado de direitos humanos aprovado na Câmara e no Senado, em dois turnos em cada um, com três quintos dos votos: ele passa a valer como emenda constitucional. Aprovado de outro jeito, não vira emenda.",
+            "fontes": [
+              "CF, art. 5º, § 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Rito do § 3º: em CADA Casa, em DOIS turnos, por TRÊS QUINTOS = emenda. Fora desse rito, o tratado de direitos humanos é supralegal: por isso a prisão do depositário infiel é ilícita, e a do devedor de alimentos continua.",
+            "fontes": [
+              "CF, art. 5º, § 3º",
+              "CF, art. 5º, LXVII",
+              "Súmula Vinculante 25",
+              "2019-q29 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 34",
+          "na_real": {
+            "texto": "A União pode intervir num Estado para garantir que ele respeite os direitos da pessoa humana.",
+            "fontes": [
+              "CF, art. 34, VII, b"
+            ]
+          },
+          "exemplo": {
+            "texto": "Se um Estado desrespeita os direitos da pessoa humana e não corrige, esse é um dos casos em que a Constituição admite a intervenção federal.",
+            "fontes": [
+              "CF, art. 34, VII, b"
+            ]
+          },
+          "na_prova": {
+            "texto": "Violação dos direitos da pessoa humana leva à INTERVENÇÃO FEDERAL (art. 34, VII, b), e não a estado de sítio ou de defesa.",
+            "fontes": [
+              "CF, art. 34, VII, b",
+              "2019-q40 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 60",
+          "na_real": {
+            "texto": "Algumas partes da Constituição não podem ser abolidas nem por emenda; entre elas, os direitos e garantias individuais. São as cláusulas pétreas.",
+            "fontes": [
+              "CF, art. 60, § 4º, IV"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma proposta de emenda que acabasse com o direito de ficar calado na prisão nem poderia ser votada: é garantia individual, e garantia individual é cláusula pétrea.",
+            "fontes": [
+              "CF, art. 60, § 4º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Não será objeto nem de DELIBERAÇÃO a emenda TENDENTE A ABOLIR os direitos e garantias individuais. 'Emenda pode suprimir direito fundamental' está errado.",
+            "fontes": [
+              "CF, art. 60, § 4º, IV",
+              "2019-q27 (gabarito E)"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Tratado de direitos humanos aprovado em cada Casa, em dois turnos, por três quintos",
+          "o_que_e": "Equivalente a emenda (art. 5º, § 3º)",
+          "o_que_acontece": "Fica no nível da Constituição",
+          "fontes": [
+            "CF, art. 5º, § 3º"
+          ]
+        },
+        {
+          "situacao": "Tratado de direitos humanos aprovado fora desse rito",
+          "o_que_e": "Supralegal",
+          "o_que_acontece": "Abaixo da Constituição e acima das leis",
+          "fontes": [
+            "CF, art. 5º, § 2º",
+            "Súmula Vinculante 25"
+          ]
+        },
+        {
+          "situacao": "Devedor de pensão alimentícia que deixa de pagar por vontade própria",
+          "o_que_e": "Prisão civil admitida (art. 5º, LXVII)",
+          "o_que_acontece": "Pode ser preso",
+          "fontes": [
+            "CF, art. 5º, LXVII"
+          ]
+        },
+        {
+          "situacao": "Depositário infiel",
+          "o_que_e": "Prisão civil ilícita (Súmula Vinculante 25)",
+          "o_que_acontece": "Não pode ser preso",
+          "fontes": [
+            "Súmula Vinculante 25"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            4,
+            ""
+          ],
+          "fim": [
+            4,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            34,
+            ""
+          ],
+          "fim": [
+            34,
+            ""
+          ]
+        },
+        {
+          "lei": "CPP",
+          "inicio": [
+            310,
+            ""
+          ],
+          "fim": [
+            310,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            7,
+            ""
+          ],
+          "fim": [
+            7,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            60,
+            ""
+          ],
+          "fim": [
+            60,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -5433,6 +5794,409 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "Regras de Mandela, regra 1",
+          "na_real": {
+            "texto": "Todo preso deve ser tratado com o respeito devido à dignidade de ser humano. Tortura e tratamento cruel, desumano ou degradante são proibidos, e nenhuma desculpa justifica.",
+            "fontes": [
+              "Regras de Mandela, regra 1"
+            ]
+          },
+          "exemplo": {
+            "texto": "Mesmo depois de uma rebelião, a equipe não pode castigar os presos com espancamento: nenhuma circunstância justifica a tortura.",
+            "fontes": [
+              "Regras de Mandela, regra 1"
+            ]
+          },
+          "na_prova": {
+            "texto": "Em NENHUMA circunstância a tortura se justifica: não há exceção. E a regra 1 manda garantir sempre a segurança dos presos, dos funcionários, dos prestadores de serviço e dos visitantes.",
+            "fontes": [
+              "Regras de Mandela, regra 1"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 2",
+          "na_real": {
+            "texto": "As regras valem para todos, sem discriminação. E tratar diferente quem precisa de mais cuidado não é discriminar: é cumprir a regra.",
+            "fontes": [
+              "Regras de Mandela, regra 2"
+            ]
+          },
+          "exemplo": {
+            "texto": "Dar cadeira de rodas e cela adaptada ao preso com deficiência não é privilégio: é medida para quem tem necessidade especial, e não é discriminatória.",
+            "fontes": [
+              "Regras de Mandela, regra 2.2"
+            ]
+          },
+          "na_prova": {
+            "texto": "A palavra é necessidades INDIVIDUAIS, e não 'coletivas'; e as medidas para quem tem necessidade especial NÃO são discriminatórias. Foi aí o erro na prova de 2019.",
+            "fontes": [
+              "Regras de Mandela, regra 2.2",
+              "2019-q32 (gabarito B)"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 3",
+          "na_real": {
+            "texto": "Perder a liberdade já é a punição. A prisão não deve aumentar esse sofrimento, a não ser no necessário para separar presos ou manter a disciplina.",
+            "fontes": [
+              "Regras de Mandela, regra 3"
+            ]
+          },
+          "exemplo": {
+            "texto": "Cortar o banho de sol do preso só para ele 'sofrer mais' agrava o sofrimento sem motivo: vai contra a regra 3.",
+            "fontes": [
+              "Regras de Mandela, regra 3"
+            ]
+          },
+          "na_prova": {
+            "texto": "Exceções do texto: separação JUSTIFICÁVEL e manutenção da DISCIPLINA. Fora disso, não se agrava o sofrimento inerente à prisão.",
+            "fontes": [
+              "Regras de Mandela, regra 3",
+              "2019-q32"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 4",
+          "na_real": {
+            "texto": "A pena serve para proteger a sociedade do crime e diminuir a reincidência. E isso só funciona se o tempo de prisão for usado para a pessoa voltar à sociedade capaz de viver dentro da lei e de se sustentar.",
+            "fontes": [
+              "Regras de Mandela, regra 4.1"
+            ]
+          },
+          "exemplo": {
+            "texto": "A unidade oferece escola, curso profissionalizante e trabalho ao preso: são os meios que a regra 4 indica para a reintegração.",
+            "fontes": [
+              "Regras de Mandela, regra 4.2"
+            ]
+          },
+          "na_prova": {
+            "texto": "Objetivos: PROTEGER a sociedade e REDUZIR A REINCIDÊNCIA, o que só se alcança com a REINTEGRAÇÃO. Educação, formação profissional e trabalho são os meios.",
+            "fontes": [
+              "Regras de Mandela, regra 4.1",
+              "Regras de Mandela, regra 4.2",
+              "2019-q32"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 11",
+          "na_real": {
+            "texto": "Os presos ficam separados por categoria: homens e mulheres (sempre que possível, em unidades diferentes), presos provisórios e condenados, presos civis e criminais, jovens e adultos.",
+            "fontes": [
+              "Regras de Mandela, regra 11"
+            ]
+          },
+          "exemplo": {
+            "texto": "Numa unidade que recebe homens e mulheres, toda a ala feminina fica inteiramente separada da masculina.",
+            "fontes": [
+              "Regras de Mandela, regra 11"
+            ]
+          },
+          "na_prova": {
+            "texto": "Homens e mulheres: 'SEMPRE QUE POSSÍVEL' em unidades separadas; na unidade mista, a ala feminina TOTALMENTE separada. Provisório longe do condenado; civil longe do criminal; jovem longe do adulto.",
+            "fontes": [
+              "Regras de Mandela, regra 11"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 12",
+          "na_real": {
+            "texto": "Onde há celas individuais, cada preso dorme sozinho. Se faltar vaga por motivo especial, como superlotação temporária, ainda assim não é recomendável pôr dois na mesma cela.",
+            "fontes": [
+              "Regras de Mandela, regra 12.1"
+            ]
+          },
+          "exemplo": {
+            "texto": "Numa unidade de celas individuais, cada preso passa a noite sozinho na sua cela.",
+            "fontes": [
+              "Regras de Mandela, regra 12.1"
+            ]
+          },
+          "na_prova": {
+            "texto": "A tradução do CNJ diz 'NÃO É RECOMENDÁVEL' dois presos na mesma cela; a da prova de 2019 dizia 'deve evitar-se'. As duas dizem o mesmo, e a alternativa estava certa.",
+            "fontes": [
+              "Regras de Mandela, regra 12.1",
+              "2019-q32"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 16",
+          "na_real": {
+            "texto": "Tem de haver chuveiro ou banheira para o preso tomar banho, numa temperatura adequada ao clima, tantas vezes quanto a higiene pedir; no clima temperado, pelo menos uma vez por semana.",
+            "fontes": [
+              "Regras de Mandela, regra 16"
+            ]
+          },
+          "exemplo": {
+            "texto": "No clima temperado, o mínimo é um banho por semana; no calor, a higiene pede mais vezes, e a unidade tem de permitir.",
+            "fontes": [
+              "Regras de Mandela, regra 16"
+            ]
+          },
+          "na_prova": {
+            "texto": "O número é 'PELO MENOS UMA VEZ POR SEMANA' em clima TEMPERADO; e o preso pode ser obrigado a tomar banho.",
+            "fontes": [
+              "Regras de Mandela, regra 16"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 19",
+          "na_real": {
+            "texto": "Se o preso não pode usar a própria roupa, recebe uma adequada ao clima, que não seja humilhante, limpa e bem cuidada. Quando sai da unidade com autorização, pode usar a própria roupa ou outra discreta.",
+            "fontes": [
+              "Regras de Mandela, regra 19"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso é levado ao velório da mãe, com autorização: em vez do uniforme, pode ir com a própria roupa ou outra discreta.",
+            "fontes": [
+              "Regras de Mandela, regra 19.3"
+            ]
+          },
+          "na_prova": {
+            "texto": "'Em circunstâncias EXCEPCIONAIS', na saída AUTORIZADA, roupa PRÓPRIA ou DISCRETA. A roupa da unidade nunca pode ser degradante ou humilhante.",
+            "fontes": [
+              "Regras de Mandela, regra 19.3",
+              "Regras de Mandela, regra 19.1",
+              "2019-q32"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 22",
+          "na_real": {
+            "texto": "O preso recebe comida nos horários de costume, nutritiva, de boa qualidade e bem preparada; e água potável sempre que precisar.",
+            "fontes": [
+              "Regras de Mandela, regra 22"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso pede água no meio da tarde: tem direito a água potável sempre que precisar, e não só na hora da refeição.",
+            "fontes": [
+              "Regras de Mandela, regra 22.2"
+            ]
+          },
+          "na_prova": {
+            "texto": "Água potável: SEMPRE QUE PRECISAR. Comida: nos horários de costume, com valor nutritivo adequado à saúde e à força.",
+            "fontes": [
+              "Regras de Mandela, regra 22"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 23",
+          "na_real": {
+            "texto": "Quem não trabalha ao ar livre tem direito a pelo menos uma hora por dia de exercício ao ar livre, se o tempo deixar. Os jovens recebem educação física e recreação.",
+            "fontes": [
+              "Regras de Mandela, regra 23"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que trabalha na cozinha, lá dentro, tem a sua hora diária de sol e exercício; o que trabalha na horta, ao ar livre, não entra nessa regra.",
+            "fontes": [
+              "Regras de Mandela, regra 23.1"
+            ]
+          },
+          "na_prova": {
+            "texto": "'PELO MENOS UMA HORA' por dia, para quem NÃO trabalha a céu aberto, SE O CLIMA PERMITIR. Não é para todo preso nem sem condição.",
+            "fontes": [
+              "Regras de Mandela, regra 23.1",
+              "2019-q32"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 24",
+          "na_real": {
+            "texto": "Cuidar da saúde do preso é responsabilidade do Estado, no mesmo padrão que existe para a comunidade, gratuitamente e sem discriminação pela situação jurídica dele.",
+            "fontes": [
+              "Regras de Mandela, regra 24.1"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso com tuberculose recebe o mesmo tratamento que teria no posto de saúde do bairro, sem pagar nada, e a unidade garante que o tratamento continue.",
+            "fontes": [
+              "Regras de Mandela, regra 24"
+            ]
+          },
+          "na_prova": {
+            "texto": "Saúde é RESPONSABILIDADE DO ESTADO, com o MESMO PADRÃO da comunidade, e os serviços necessários são GRATUITOS.",
+            "fontes": [
+              "Regras de Mandela, regra 24.1"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Homens e mulheres",
+          "o_que_e": "Separação por sexo (regra 11, a)",
+          "o_que_acontece": "Sempre que possível em unidades separadas; na unidade mista, ala feminina totalmente separada",
+          "fontes": [
+            "Regras de Mandela, regra 11"
+          ]
+        },
+        {
+          "situacao": "Provisórios e condenados",
+          "o_que_e": "Separação pela situação no processo (regra 11, b)",
+          "o_que_acontece": "Ficam separados",
+          "fontes": [
+            "Regras de Mandela, regra 11"
+          ]
+        },
+        {
+          "situacao": "Presos por dívida e presos por crime",
+          "o_que_e": "Separação civil x criminal (regra 11, c)",
+          "o_que_acontece": "Ficam separados",
+          "fontes": [
+            "Regras de Mandela, regra 11"
+          ]
+        },
+        {
+          "situacao": "Jovens e adultos",
+          "o_que_e": "Separação por idade (regra 11, d)",
+          "o_que_acontece": "Ficam separados",
+          "fontes": [
+            "Regras de Mandela, regra 11"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            2,
+            ""
+          ],
+          "fim": [
+            2,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            3,
+            ""
+          ],
+          "fim": [
+            3,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            4,
+            ""
+          ],
+          "fim": [
+            4,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            24,
+            ""
+          ],
+          "fim": [
+            24,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            11,
+            ""
+          ],
+          "fim": [
+            11,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            12,
+            ""
+          ],
+          "fim": [
+            12,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            19,
+            ""
+          ],
+          "fim": [
+            19,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            23,
+            ""
+          ],
+          "fim": [
+            23,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            16,
+            ""
+          ],
+          "fim": [
+            16,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            22,
+            ""
+          ],
+          "fim": [
+            22,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -5614,6 +6378,460 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "Regras de Mandela, regra 40",
+          "na_real": {
+            "texto": "Pela letra do CNJ, nenhum preso deve trabalhar para a unidade em cumprimento de medida disciplinar. Isso não impede grupos de presos que, com supervisão, cuidam de atividades sociais, educativas ou esportivas.",
+            "fontes": [
+              "Regras de Mandela, regra 40"
+            ]
+          },
+          "exemplo": {
+            "texto": "Os presos montam, com supervisão, a comissão que organiza o campeonato de futebol da unidade: é autoadministração supervisionada, e a regra 40 permite.",
+            "fontes": [
+              "Regras de Mandela, regra 40.2"
+            ]
+          },
+          "na_prova": {
+            "texto": "A letra do CNJ diz 'em cumprimento a qualquer medida disciplinar'; o original em inglês, 'in any disciplinary capacity': preso não exerce função disciplinar. Os sistemas de autoadministração SUPERVISIONADOS continuam permitidos.",
+            "fontes": [
+              "Regras de Mandela, regra 40"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 43",
+          "na_real": {
+            "texto": "Nenhuma sanção pode virar tortura ou tratamento cruel. Proibidos: solitária por tempo indefinido ou prolongado, cela escura ou com luz o tempo todo, castigo físico, cortar comida ou água e castigo coletivo. E o contato com a família não pode ser proibido: no máximo, restringido por pouco tempo.",
+            "fontes": [
+              "Regras de Mandela, regra 43"
+            ]
+          },
+          "exemplo": {
+            "texto": "Depois de uma briga no pátio, sem saber quem brigou, a direção corta o banho de sol da ala inteira: é castigo coletivo, e é proibido.",
+            "fontes": [
+              "Regras de Mandela, regra 43.1"
+            ]
+          },
+          "na_prova": {
+            "texto": "Instrumentos de imobilização NUNCA como sanção disciplinar. Contato com a família: pode ser RESTRINGIDO, por prazo limitado e só se estritamente necessário, mas NUNCA PROIBIDO.",
+            "fontes": [
+              "Regras de Mandela, regra 43.2",
+              "Regras de Mandela, regra 43.3"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 44",
+          "na_real": {
+            "texto": "Solitária, para as regras, é ficar 22 horas ou mais por dia sem contato humano significativo. Prolongada é a de mais de 15 dias seguidos.",
+            "fontes": [
+              "Regras de Mandela, regra 44"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso fica 23 horas por dia sozinho na cela, sem conversar com ninguém, por 20 dias seguidos: é confinamento solitário prolongado.",
+            "fontes": [
+              "Regras de Mandela, regra 44"
+            ]
+          },
+          "na_prova": {
+            "texto": "Os números: 22 HORAS ou mais por dia; prolongado = mais de 15 DIAS CONSECUTIVOS. E o prolongado é proibido (regra 43).",
+            "fontes": [
+              "Regras de Mandela, regra 44",
+              "Regras de Mandela, regra 43"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 45",
+          "na_real": {
+            "texto": "Solitária só em caso excepcional, como último recurso, pelo menor tempo possível, com revisão independente e autorização de autoridade competente. Nunca como parte da sentença.",
+            "fontes": [
+              "Regras de Mandela, regra 45.1"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso com transtorno mental grave, que pioraria isolado, não deve ser posto na solitária.",
+            "fontes": [
+              "Regras de Mandela, regra 45.2"
+            ]
+          },
+          "na_prova": {
+            "texto": "ÚLTIMO RECURSO, MENOR TEMPO, REVISÃO INDEPENDENTE, AUTORIZAÇÃO de autoridade competente; NÃO pode ser imposta pela sentença; proibida para quem tem deficiência mental ou física que pioraria com ela.",
+            "fontes": [
+              "Regras de Mandela, regra 45"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 48",
+          "na_real": {
+            "texto": "Algema e outros instrumentos de restrição só quando nada mais leve funciona, do jeito menos invasivo e pelo tempo necessário. E nunca em mulher em trabalho de parto, no parto ou logo depois.",
+            "fontes": [
+              "Regras de Mandela, regra 48"
+            ]
+          },
+          "exemplo": {
+            "texto": "A presa entra em trabalho de parto e é levada ao hospital: não pode ficar algemada, nem durante nem logo depois do parto.",
+            "fontes": [
+              "Regras de Mandela, regra 48.2"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três critérios: só se NENHUM controle mais leve funcionar; o método MENOS INVASIVO; só pelo TEMPO NECESSÁRIO. E NUNCA em mulher no trabalho de parto, no parto e logo após.",
+            "fontes": [
+              "Regras de Mandela, regra 48"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 74",
+          "na_real": {
+            "texto": "O pessoal da prisão é escolhido com cuidado, porque o bom funcionamento depende da integridade e da capacidade dele. Trabalha em tempo integral, como servidor público com estabilidade, e com salário que atraia e segure gente boa.",
+            "fontes": [
+              "Regras de Mandela, regra 74"
+            ]
+          },
+          "exemplo": {
+            "texto": "A carreira de policial penal com seleção rigorosa, cargo de servidor e estabilidade é o modelo que a regra 74 descreve.",
+            "fontes": [
+              "Regras de Mandela, regra 74"
+            ]
+          },
+          "na_prova": {
+            "texto": "Seleção CUIDADOSA; tempo INTEGRAL; SERVIDOR PÚBLICO com ESTABILIDADE, que só depende de boa conduta, eficiência e aptidão física. As alternativas certas de 2019 copiavam estas regras.",
+            "fontes": [
+              "Regras de Mandela, regra 74",
+              "2019-q37"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 78",
+          "na_real": {
+            "texto": "Na medida do possível, a equipe tem especialistas em número suficiente: psiquiatras, psicólogos, assistentes sociais, professores e instrutores de ofícios.",
+            "fontes": [
+              "Regras de Mandela, regra 78.1"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma unidade pequena pode não ter psiquiatra fixo, porque a regra diz 'na medida do possível'. Já os assistentes sociais, professores e instrutores devem ser garantidos em caráter permanente.",
+            "fontes": [
+              "Regras de Mandela, regra 78"
+            ]
+          },
+          "na_prova": {
+            "texto": "A expressão é 'NA MEDIDA DO POSSÍVEL'. Em 2019, a alternativa errada trocou por 'sempre deve incluir-se'.",
+            "fontes": [
+              "Regras de Mandela, regra 78.1",
+              "2019-q37 (gabarito D)"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 81",
+          "na_real": {
+            "texto": "Na unidade mista, a ala feminina fica sob a autoridade de uma funcionária, que guarda as chaves. Homem da equipe só entra acompanhado de uma funcionária, e as presas são atendidas e vigiadas só por mulheres.",
+            "fontes": [
+              "Regras de Mandela, regra 81"
+            ]
+          },
+          "exemplo": {
+            "texto": "O agente precisa levar um documento à ala feminina: só entra junto com uma agente. Já o médico pode atender as presas, porque está no exercício da profissão.",
+            "fontes": [
+              "Regras de Mandela, regra 81"
+            ]
+          },
+          "na_prova": {
+            "texto": "Chaves da ala feminina com uma FUNCIONÁRIA; homem da equipe só entra ACOMPANHADO de funcionária; médicos e professores homens podem exercer a profissão lá.",
+            "fontes": [
+              "Regras de Mandela, regra 81"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 82",
+          "na_real": {
+            "texto": "O agente só usa a força em legítima defesa, em tentativa de fuga ou contra resistência física, ativa ou passiva, a uma ordem legal. E só o estritamente necessário, avisando o diretor na hora.",
+            "fontes": [
+              "Regras de Mandela, regra 82.1"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso deita no chão e se recusa a voltar para a cela depois do banho de sol: é resistência passiva a ordem legal, e o agente pode usar a força estritamente necessária, relatando o caso ao diretor na hora.",
+            "fontes": [
+              "Regras de Mandela, regra 82.1"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três hipóteses: AUTODEFESA, TENTATIVA DE FUGA e RESISTÊNCIA ativa ou PASSIVA a ordem legal. Força ESTRITAMENTE necessária e RELATO IMEDIATO ao diretor. Quem trabalha em contato direto com o preso, salvo circunstância especial, não anda armado.",
+            "fontes": [
+              "Regras de Mandela, regra 82"
+            ]
+          }
+        },
+        {
+          "artigo": "Regras de Mandela, regra 116",
+          "na_real": {
+            "texto": "O preso que ainda não foi julgado deve ter sempre a chance de trabalhar, mas não pode ser obrigado. Se trabalhar, recebe por isso.",
+            "fontes": [
+              "Regras de Mandela, regra 116"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso provisório se oferece para trabalhar na lavanderia da unidade: pode, e é remunerado. Se não quiser, ninguém pode obrigá-lo.",
+            "fontes": [
+              "Regras de Mandela, regra 116"
+            ]
+          },
+          "na_prova": {
+            "texto": "Para o preso NÃO JULGADO: oportunidade SEMPRE oferecida, trabalho NÃO obrigatório e REMUNERADO.",
+            "fontes": [
+              "Regras de Mandela, regra 116"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "22 horas ou mais por dia sem contato humano significativo, até 15 dias",
+          "o_que_e": "Confinamento solitário (regra 44)",
+          "o_que_acontece": "Só em caso excepcional, como último recurso (regra 45)",
+          "fontes": [
+            "Regras de Mandela, regra 44",
+            "Regras de Mandela, regra 45"
+          ]
+        },
+        {
+          "situacao": "Solitária por mais de 15 dias seguidos",
+          "o_que_e": "Confinamento solitário prolongado (regra 44)",
+          "o_que_acontece": "Proibido (regra 43)",
+          "fontes": [
+            "Regras de Mandela, regra 43",
+            "Regras de Mandela, regra 44"
+          ]
+        },
+        {
+          "situacao": "Solitária sem prazo para acabar",
+          "o_que_e": "Confinamento solitário indefinido",
+          "o_que_acontece": "Proibido (regra 43)",
+          "fontes": [
+            "Regras de Mandela, regra 43"
+          ]
+        },
+        {
+          "situacao": "Limitar por um tempo o contato com a família",
+          "o_que_e": "Restrição (regra 43.3)",
+          "o_que_acontece": "Só por prazo limitado e se estritamente necessário para a segurança e a ordem",
+          "fontes": [
+            "Regras de Mandela, regra 43.3"
+          ]
+        },
+        {
+          "situacao": "Cortar de vez o contato com a família como sanção",
+          "o_que_e": "Proibição do contato",
+          "o_que_acontece": "Nunca pode ser sanção",
+          "fontes": [
+            "Regras de Mandela, regra 43.3"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            36,
+            ""
+          ],
+          "fim": [
+            36,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            37,
+            ""
+          ],
+          "fim": [
+            37,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            39,
+            ""
+          ],
+          "fim": [
+            39,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            41,
+            ""
+          ],
+          "fim": [
+            41,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            43,
+            ""
+          ],
+          "fim": [
+            43,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            44,
+            ""
+          ],
+          "fim": [
+            44,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            74,
+            ""
+          ],
+          "fim": [
+            74,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            75,
+            ""
+          ],
+          "fim": [
+            75,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            82,
+            ""
+          ],
+          "fim": [
+            82,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            40,
+            ""
+          ],
+          "fim": [
+            40,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            45,
+            ""
+          ],
+          "fim": [
+            45,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            47,
+            ""
+          ],
+          "fim": [
+            47,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            48,
+            ""
+          ],
+          "fim": [
+            48,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            78,
+            ""
+          ],
+          "fim": [
+            78,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            81,
+            ""
+          ],
+          "fim": [
+            81,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            77,
+            ""
+          ],
+          "fim": [
+            77,
+            ""
+          ]
+        },
+        {
+          "lei": "Regras de Mandela",
+          "inicio": [
+            116,
+            ""
+          ],
+          "fim": [
+            116,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -5844,6 +7062,463 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 5º",
+          "na_real": {
+            "texto": "Se a Justiça condena alguém por erro, ou deixa a pessoa presa além do tempo da sentença, o Estado tem de indenizar.",
+            "fontes": [
+              "CF, art. 5º, LXXV"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso termina de cumprir a pena em março, mas só é solto em junho porque ninguém conferiu a data: o Estado deve indenizá-lo pelos meses a mais.",
+            "fontes": [
+              "CF, art. 5º, LXXV"
+            ]
+          },
+          "na_prova": {
+            "texto": "Duas hipóteses: ERRO JUDICIÁRIO e PRISÃO ALÉM DO TEMPO fixado na sentença. Em 2019, a alternativa certa era esta.",
+            "fontes": [
+              "CF, art. 5º, LXXV",
+              "2019-q35 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 37",
+          "na_real": {
+            "texto": "Quando um agente público, no serviço, causa dano a alguém, quem indeniza é o Estado, ou a empresa privada que presta o serviço público. Depois, ele cobra do agente, se o agente agiu com dolo ou culpa.",
+            "fontes": [
+              "CF, art. 37, § 6º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um preso é agredido dentro da cela porque a vigilância falhou: o Estado indeniza, e depois pode cobrar do agente que agiu com dolo ou culpa.",
+            "fontes": [
+              "CF, art. 37, § 6º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Para a vítima, a responsabilidade é OBJETIVA; o REGRESSO contra o agente exige DOLO ou CULPA. 'Responsabilidade subjetiva', 'agente livre do regresso' ou 'Estado que não responde por dano moral ao preso' estão errados.",
+            "fontes": [
+              "CF, art. 37, § 6º",
+              "2019-q35"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 109",
+          "na_real": {
+            "texto": "Em grave violação de direitos humanos, o Procurador-Geral da República pode pedir ao STJ que o caso vá para a Justiça Federal, para o Brasil cumprir os tratados que assinou.",
+            "fontes": [
+              "CF, art. 109, V-A",
+              "CF, art. 109, § 5º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Numa chacina com suspeita de participação de agentes do Estado, o PGR pode pedir ao STJ, em qualquer fase do inquérito ou do processo, que o caso passe para a Justiça Federal.",
+            "fontes": [
+              "CF, art. 109, § 5º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem pede: o PGR. Para quem: o STJ, e não o STF. Quando: em QUALQUER FASE do inquérito ou do processo. Para onde: a Justiça FEDERAL.",
+            "fontes": [
+              "CF, art. 109, § 5º"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 1º",
+          "na_real": {
+            "texto": "Os países que assinaram a Convenção se comprometem a respeitar os direitos dela e a garanti-los a todas as pessoas sob a sua jurisdição, sem discriminação.",
+            "fontes": [
+              "Convenção Americana, art. 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O estrangeiro preso em Santa Catarina tem os direitos da Convenção garantidos pelo Brasil: ele está sob a jurisdição brasileira.",
+            "fontes": [
+              "Convenção Americana, art. 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Duas obrigações: RESPEITAR e GARANTIR o livre e pleno exercício dos direitos, a TODA PESSOA sujeita à jurisdição, e não só aos nacionais.",
+            "fontes": [
+              "Convenção Americana, art. 1º"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 5º",
+          "na_real": {
+            "texto": "Toda pessoa tem direito a que respeitem a sua integridade física, psíquica e moral. Ninguém é torturado; a pena não passa do condenado; o processado fica separado do condenado; e a prisão serve para reformar e readaptar o preso.",
+            "fontes": [
+              "Convenção Americana, art. 5º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O adolescente que pode ser processado fica separado dos adultos e vai para um tribunal especializado, o mais rápido possível.",
+            "fontes": [
+              "Convenção Americana, art. 5.5"
+            ]
+          },
+          "na_prova": {
+            "texto": "A pessoa privada da liberdade é tratada com o RESPEITO DEVIDO À DIGNIDADE inerente ao ser humano. A finalidade ESSENCIAL das penas privativas de liberdade é a REFORMA e a READAPTAÇÃO SOCIAL dos condenados.",
+            "fontes": [
+              "Convenção Americana, art. 5.2",
+              "Convenção Americana, art. 5.6",
+              "FEPESE-2016-q24 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 7º",
+          "na_real": {
+            "texto": "Ninguém é preso de forma arbitrária. O preso tem de saber o motivo, ser levado sem demora a um juiz e ser julgado em prazo razoável, ou solto. E ninguém é preso por dívida, a não ser o devedor de pensão alimentícia.",
+            "fontes": [
+              "Convenção Americana, art. 7º",
+              "Convenção Americana, art. 7.5",
+              "Convenção Americana, art. 7.7"
+            ]
+          },
+          "exemplo": {
+            "texto": "Preso em flagrante numa sexta à noite, ele é levado sem demora ao juiz, que confere a prisão: é a audiência de custódia, que vem do art. 7.5.",
+            "fontes": [
+              "Convenção Americana, art. 7.5"
+            ]
+          },
+          "na_prova": {
+            "texto": "'Conduzida SEM DEMORA à presença de um JUIZ' (art. 7.5) é a base da audiência de custódia. Prisão por dívida: só por inadimplemento de obrigação ALIMENTAR (art. 7.7).",
+            "fontes": [
+              "Convenção Americana, art. 7.5",
+              "Convenção Americana, art. 7.7",
+              "FEPESE-2016-q24"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 44",
+          "na_real": {
+            "texto": "Qualquer pessoa, grupo de pessoas ou ONG reconhecida pode denunciar à Comissão Interamericana um país que violou a Convenção.",
+            "fontes": [
+              "Convenção Americana, art. 44"
+            ]
+          },
+          "exemplo": {
+            "texto": "A família de um preso morto sob custódia apresenta uma petição à Comissão Interamericana contra o Brasil.",
+            "fontes": [
+              "Convenção Americana, art. 44"
+            ]
+          },
+          "na_prova": {
+            "texto": "A pessoa peticiona à COMISSÃO, nunca direto à Corte. Podem: qualquer PESSOA, GRUPO de pessoas ou ENTIDADE NÃO GOVERNAMENTAL legalmente reconhecida.",
+            "fontes": [
+              "Convenção Americana, art. 44",
+              "Convenção Americana, art. 61",
+              "FEPESE-2016-q25 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 46",
+          "na_real": {
+            "texto": "Para a Comissão aceitar a petição: esgotar os recursos da Justiça do próprio país, apresentar em até 6 meses da notificação da decisão definitiva e não ter o mesmo caso em outro processo internacional.",
+            "fontes": [
+              "Convenção Americana, art. 46"
+            ]
+          },
+          "exemplo": {
+            "texto": "A decisão definitiva foi notificada em janeiro e a petição só chegou em outubro: passou dos 6 meses, e a Comissão não admite.",
+            "fontes": [
+              "Convenção Americana, art. 46"
+            ]
+          },
+          "na_prova": {
+            "texto": "ESGOTAMENTO dos recursos internos; 6 MESES da notificação da decisão definitiva; nada pendente em outro processo internacional. As duas primeiras exigências caem se não houver devido processo legal, se o acesso aos recursos for negado ou se houver demora injustificada.",
+            "fontes": [
+              "Convenção Americana, art. 46"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 61",
+          "na_real": {
+            "texto": "Só os países que fazem parte da Convenção e a Comissão podem levar um caso à Corte Interamericana. E antes ele tem de passar pelo procedimento na Comissão.",
+            "fontes": [
+              "Convenção Americana, art. 61"
+            ]
+          },
+          "exemplo": {
+            "texto": "A Comissão termina o procedimento sobre o caso do preso e decide submetê-lo à Corte: a família, sozinha, não poderia.",
+            "fontes": [
+              "Convenção Americana, art. 61"
+            ]
+          },
+          "na_prova": {
+            "texto": "SOMENTE os ESTADOS-PARTES e a COMISSÃO submetem caso à Corte. A Corte tem 7 juízes, com mandato de 6 anos e uma reeleição, e a sede é em San José, na Costa Rica.",
+            "fontes": [
+              "Convenção Americana, art. 61",
+              "Convenção Americana, art. 52",
+              "Convenção Americana, art. 54",
+              "2013-q23 (gabarito B)",
+              "FEPESE-2016-q23 (gabarito A)"
+            ]
+          }
+        },
+        {
+          "artigo": "Convenção Americana, art. 67",
+          "na_real": {
+            "texto": "A decisão da Corte é definitiva e não tem recurso. Se houver dúvida sobre o que ela quis dizer, a Corte explica, a pedido de uma das partes, em até 90 dias da notificação.",
+            "fontes": [
+              "Convenção Americana, art. 67"
+            ]
+          },
+          "exemplo": {
+            "texto": "A Corte condena o Brasil num caso de violência em presídio: não cabe recurso nenhum contra a decisão.",
+            "fontes": [
+              "Convenção Americana, art. 67"
+            ]
+          },
+          "na_prova": {
+            "texto": "Sentença DEFINITIVA e INAPELÁVEL; pedido de interpretação em até 90 DIAS; os Estados-Partes se COMPROMETEM a cumprir, e a indenização se executa pelo processo interno (art. 68).",
+            "fontes": [
+              "Convenção Americana, art. 67",
+              "Convenção Americana, art. 68"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Quem recebe a denúncia de qualquer pessoa",
+          "o_que_e": "Comissão Interamericana (art. 44)",
+          "o_que_acontece": "Analisa a petição contra o Estado",
+          "fontes": [
+            "Convenção Americana, art. 44"
+          ]
+        },
+        {
+          "situacao": "Quem julga e condena o Estado",
+          "o_que_e": "Corte Interamericana (art. 61)",
+          "o_que_acontece": "Só recebe caso de Estado-Parte ou da Comissão; a sentença é definitiva e inapelável",
+          "fontes": [
+            "Convenção Americana, art. 61",
+            "Convenção Americana, art. 67"
+          ]
+        },
+        {
+          "situacao": "Dano causado por agente público no serviço",
+          "o_que_e": "Responsabilidade do Estado (CF, art. 37, § 6º)",
+          "o_que_acontece": "O Estado indeniza; regresso contra o agente com dolo ou culpa",
+          "fontes": [
+            "CF, art. 37, § 6º"
+          ]
+        },
+        {
+          "situacao": "Grave violação de direitos humanos",
+          "o_que_e": "Deslocamento de competência (CF, art. 109, § 5º)",
+          "o_que_acontece": "O PGR pede ao STJ; o caso vai para a Justiça Federal",
+          "fontes": [
+            "CF, art. 109, § 5º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "Protocolo de San Salvador",
+          "inicio": [
+            11,
+            ""
+          ],
+          "fim": [
+            11,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            44,
+            ""
+          ],
+          "fim": [
+            44,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            61,
+            ""
+          ],
+          "fim": [
+            61,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            37,
+            ""
+          ],
+          "fim": [
+            37,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            109,
+            ""
+          ],
+          "fim": [
+            109,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            46,
+            ""
+          ],
+          "fim": [
+            46,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            67,
+            ""
+          ],
+          "fim": [
+            67,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            68,
+            ""
+          ],
+          "fim": [
+            68,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            34,
+            ""
+          ],
+          "fim": [
+            34,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            37,
+            ""
+          ],
+          "fim": [
+            37,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            52,
+            ""
+          ],
+          "fim": [
+            52,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            54,
+            ""
+          ],
+          "fim": [
+            54,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            53,
+            ""
+          ],
+          "fim": [
+            53,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            56,
+            ""
+          ],
+          "fim": [
+            56,
+            ""
+          ]
+        },
+        {
+          "lei": "Convenção Americana",
+          "inicio": [
+            7,
+            ""
+          ],
+          "fim": [
+            7,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -6052,6 +7727,201 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "Declaração de Viena (1993), § 5",
+          "na_real": {
+            "texto": "Todos os direitos humanos andam juntos: valem para todos (universais), não dá para separar um do outro (indivisíveis) e um depende do outro (interdependentes e inter-relacionados).",
+            "fontes": [
+              "Declaração de Viena (1993), § 5"
+            ]
+          },
+          "exemplo": {
+            "texto": "Não adianta garantir o voto e deixar a pessoa sem saúde e sem escola: os direitos são um pacote só.",
+            "fontes": [
+              "Declaração de Viena (1993), § 5"
+            ]
+          },
+          "na_prova": {
+            "texto": "As 4 palavras de Viena: UNIVERSAIS, INDIVISÍVEIS, INTERDEPENDENTES e INTER-RELACIONADOS. 'Divisíveis', 'disponíveis' ou 'renunciáveis' estão errados.",
+            "fontes": [
+              "Declaração de Viena (1993), § 5",
+              "2013-q25 (gabarito A)",
+              "FEPESE-2024-q46 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "DUDH, art. 1º",
+          "na_real": {
+            "texto": "Todo ser humano nasce livre, com a mesma dignidade e os mesmos direitos. É o ponto de partida de tudo: a dignidade da pessoa.",
+            "fontes": [
+              "DUDH, art. 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso, o policial e o juiz têm a mesma dignidade: ninguém vale menos como pessoa por causa do que fez ou do cargo que ocupa.",
+            "fontes": [
+              "DUDH, art. 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "LIVRES e IGUAIS em DIGNIDADE e DIREITOS. A dignidade é o FUNDAMENTO da Declaração.",
+            "fontes": [
+              "DUDH, art. 1º",
+              "FEPESE-2013-q22 (gabarito B)"
+            ]
+          }
+        },
+        {
+          "artigo": "DUDH, art. 2º",
+          "na_real": {
+            "texto": "Os direitos da Declaração são de todo mundo, sem nenhuma distinção: raça, cor, sexo, língua, religião, opinião, origem, dinheiro, nascimento ou qualquer outra condição.",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Negar atendimento a alguém por causa da religião ou da cor é exatamente a distinção que o art. 2º proíbe.",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "É a UNIVERSALIDADE: toda pessoa é titular, sem distinção. A lista acaba em 'qualquer outra condição', e não é fechada.",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "DUDH, art. 5º",
+          "na_real": {
+            "texto": "Ninguém pode ser torturado, nem sofrer tratamento ou castigo cruel, desumano ou degradante.",
+            "fontes": [
+              "DUDH, art. 5º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Pendurar um preso de cabeça para baixo para ele 'confessar' é tortura: proibida contra qualquer pessoa.",
+            "fontes": [
+              "DUDH, art. 5º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Ao lado da tortura, três palavras: CRUEL, DESUMANO ou DEGRADANTE, no tratamento ou no castigo.",
+            "fontes": [
+              "DUDH, art. 5º"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Toda pessoa é titular dos direitos",
+          "o_que_e": "Universalidade",
+          "o_que_acontece": "Ninguém fica de fora",
+          "fontes": [
+            "Declaração de Viena (1993), § 5",
+            "DUDH, art. 2º"
+          ]
+        },
+        {
+          "situacao": "Não dá para garantir só uma parte dos direitos",
+          "o_que_e": "Indivisibilidade",
+          "o_que_acontece": "Os direitos formam um conjunto",
+          "fontes": [
+            "Declaração de Viena (1993), § 5"
+          ]
+        },
+        {
+          "situacao": "Um direito depende do outro para funcionar",
+          "o_que_e": "Interdependência",
+          "o_que_acontece": "Violar um enfraquece os outros",
+          "fontes": [
+            "Declaração de Viena (1993), § 5",
+            "2013-q25 (gabarito A)"
+          ]
+        },
+        {
+          "situacao": "O direito não se perde com o tempo sem uso",
+          "o_que_e": "Imprescritibilidade",
+          "o_que_acontece": "Pode ser exercido a qualquer tempo",
+          "fontes": [
+            "2019-q28 (gabarito C)"
+          ]
+        },
+        {
+          "situacao": "Ninguém pode vender ou passar adiante o direito",
+          "o_que_e": "Inalienabilidade",
+          "o_que_acontece": "O direito não se transfere",
+          "fontes": [
+            "2019-q28"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "Declaração de Viena (1993)",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        },
+        {
+          "lei": "DUDH",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        },
+        {
+          "lei": "DUDH",
+          "inicio": [
+            2,
+            ""
+          ],
+          "fim": [
+            2,
+            ""
+          ]
+        },
+        {
+          "lei": "DUDH",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
