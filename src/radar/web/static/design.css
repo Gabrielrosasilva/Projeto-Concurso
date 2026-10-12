@@ -517,3 +517,52 @@ a:focus-visible { outline: 2px solid var(--cor-acao); outline-offset: 2px; }
   border-radius: var(--raio-sm);
 }
 .ds-resumo__dobra > summary { cursor: pointer; font-weight: var(--peso-medio); }
+
+/* O "🗣 Traduz pra mim" de cada artigo: fechado, dentro do bloco. */
+.ds-resumo__traduz { margin: var(--esp-2) 0 0; }
+.ds-resumo__traduz > summary { cursor: pointer; font-size: var(--tam-sm); font-weight: var(--peso-medio); }
+/* A cor e a do .ds-bloco--ia: a traducao e texto de IA, e quem pinta e a origem. */
+.ds-resumo__traduz dl { margin: var(--esp-2) 0 0; }
+.ds-resumo__traduz dt { font-size: var(--tam-xs); font-weight: var(--peso-forte); color: var(--cor-texto-suave); }
+.ds-resumo__traduz dd { margin: 0 0 var(--esp-2); }
+.ds-resumo__traduz dd:last-child { margin-bottom: 0; }
+.ds-resumo__confunda { margin-top: var(--esp-2); }
+.ds-resumo__confunda td { vertical-align: top; font-size: var(--tam-sm); }
+
+/* A palavra dificil: a 1a vez em cada bloco fica sublinhada, e o significado
+   aparece ao passar o mouse ou tocar (o tabindex deixa focar no celular). So
+   CSS. No celular a dica vai para o pe da tela, para nao sair pela borda. */
+.ds-termo {
+  position: relative;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+.ds-termo:focus { outline: 2px solid var(--cor-acao); outline-offset: 1px; border-radius: 2px; }
+.ds-termo__dica {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 60;
+  width: max-content;
+  max-width: min(22rem, 80vw);
+  margin-top: var(--esp-1);
+  padding: var(--esp-2) var(--esp-3);
+  font-size: var(--tam-sm);
+  font-weight: var(--peso-normal);
+  line-height: var(--linha);
+  color: var(--cor-texto);
+  background: var(--cor-superficie-2);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+  box-shadow: var(--sombra-alta);
+  text-decoration: none;
+  white-space: normal;
+}
+.ds-termo:hover .ds-termo__dica,
+.ds-termo:focus .ds-termo__dica { display: block; }
+@media (max-width: 40rem) {
+  .ds-termo__dica { position: fixed; left: 16px; right: 16px; top: auto; bottom: 16px;
+    width: auto; max-width: none; }
+}

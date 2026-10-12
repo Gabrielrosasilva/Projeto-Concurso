@@ -1703,8 +1703,7 @@ def ficha_de_estudo(request: Request, ident: str, data: str = ""):
         context={"f": ficha, "data": quando,
                  "respondidos": servico.fichas.codigos_respondidos(),
                  # O resumo arrumado para a tela (decisao 161): o mesmo da janela.
-                 "enxuto": servico.fichas.enxuto_da_ficha(ficha.escrita.resumo,
-                                                          ficha.materia),
+                 "enxuto": servico.fichas.enxuto_da_ficha(ficha.escrita),
                  "comando_de_gerar": fichas_puras.comando_de_gerar,
                  # O sinal de treino do tema (decisao 138), fora do acerto.
                  "treino_ia": servico.metricas.treino_ia_dos_nos(ficha.nos),
@@ -1718,6 +1717,17 @@ def ficha_conferir_resumo(ident: str, data: str = Form("")):
     """Marca o resumo do tema como conferido por mim, e volta para a ficha."""
     try:
         escrita = servico.fichas.conferir_resumo(ident)
+    except LookupError:
+        return RedirectResponse("/fichas", status_code=303)
+    volta = f"/fichas/{escrita.id}" + (f"?data={data}" if data else "") + "#resumo"
+    return RedirectResponse(volta, status_code=303)
+
+
+@app.post("/fichas/{ident}/traducao/conferir")
+def ficha_conferir_traducao(ident: str, data: str = Form("")):
+    """Marca a traducao dos artigos como conferida por mim (decisao 161)."""
+    try:
+        escrita = servico.fichas.conferir_traducao(ident)
     except LookupError:
         return RedirectResponse("/fichas", status_code=303)
     volta = f"/fichas/{escrita.id}" + (f"?data={data}" if data else "") + "#resumo"

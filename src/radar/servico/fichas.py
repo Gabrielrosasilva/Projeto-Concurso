@@ -528,6 +528,22 @@ def conferir_resumo(id_ou_tema: str, quando: date | None = None) -> fichas.Ficha
     return escrita
 
 
+def conferir_traducao(id_ou_tema: str, quando: date | None = None) -> fichas.FichaEscrita:
+    """Marca a traducao do tema como conferida por mim (decisao 161). O
+    `modelo` nao muda, e a conferida nao e mais sobrescrita pela importacao."""
+    from radar.servico import cronograma as diario
+
+    escritas = carregar()
+    escrita = achar(id_ou_tema, escritas)
+    if escrita is None:
+        raise LookupError(f"não há ficha para {id_ou_tema!r}")
+    if not escrita.traducao:
+        raise LookupError(f"o tema {escrita.tema!r} ainda não tem tradução")
+    escrita.traducao["conferido_em"] = (quando or diario.hoje_local()).isoformat()
+    gravar(escritas)
+    return escrita
+
+
 def verificar_resumos(ctx: fichas.Contexto | None = None) -> list[tuple[str, str]]:
     """O verificador automatico (item 4e): cada resumo gravado passa de NOVO
     pela conferencia, contra o acervo de hoje - a questao citada ainda e do
@@ -657,9 +673,19 @@ def importar_traducoes(pedidos: list[dict], respostas: list[dict], modelo: str) 
 
 # --- o botao "Resumo" das faixas (R2) -------------------------------------------------
 
-def enxuto_da_ficha(resumo: dict | None, materia: str) -> fichas.ResumoEnxuto:
-    """O resumo enxuto de uma ficha, o mesmo na janela e na pagina da ficha."""
-    return fichas.resumo_enxuto((resumo or {}).get("partes"), materia)
+def enxuto_da_ficha(escrita: fichas.FichaEscrita,
+                    termos: list | None = None) -> fichas.ResumoEnxuto:
+    """O resumo enxuto de uma ficha, o mesmo na janela e na pagina da ficha:
+    com a traducao que aparece (a orfa fica de fora, `traducao.visiveis`) e
+    os termos do glossario."""
+    from radar import traducao as traducao_dos_artigos
+
+    visivel = None
+    if escrita.traducao:
+        visivel = {**escrita.traducao, "itens": traducao_dos_artigos.visiveis(
+            escrita.traducao, escrita.resumo, artigos_do_tema(escrita))}
+    return fichas.resumo_enxuto((escrita.resumo or {}).get("partes"), escrita.materia,
+                                visivel, carregar_glossario() if termos is None else termos)
 
 
 @dataclass
@@ -687,11 +713,19 @@ class ResumoNaTela:
     def procedencia(self) -> str:
         return (self.resumo or {}).get("modelo") or ""
 
+    #: A ficha inteira, para a traducao e os artigos do tema (decisao 161).
+    escrita: object = None
+    #: O glossario, lido uma vez por tela.
+    termos: list = field(default_factory=list)
+
     @property
     def enxuto(self) -> fichas.ResumoEnxuto:
         """As partes arrumadas para a tela (decisao 161): os artigos abertos,
-        um bloco por artigo, e o resto dobrado. O texto e o gravado."""
-        return enxuto_da_ficha(self.resumo, self.materia)
+        um bloco por artigo, cada um com a traducao, e o resto dobrado. O
+        texto e o gravado."""
+        if self.escrita is not None:
+            return enxuto_da_ficha(self.escrita, self.termos)
+        return fichas.resumo_enxuto((self.resumo or {}).get("partes"), self.materia)
 
 
 @dataclass
@@ -743,13 +777,14 @@ def resumos_do_dia(blocos, data: date, plano=None, escritas=None,
         complementares = servico_incidencia.ocorrencias_complementares()
     minimo = incidencia.carregar_minimos().provas
     temas: dict[str, ResumoNaTela] = {}
+    termos = carregar_glossario()
 
     def do_tema(escrita) -> str:
         ident = _id_na_tela(escrita.id)
         if ident not in temas:
             temas[ident] = ResumoNaTela(
                 id=ident, tema=escrita.tema, materia=escrita.materia,
-                resumo=escrita.resumo, ficha_id=escrita.id,
+                resumo=escrita.resumo, ficha_id=escrita.id, escrita=escrita, termos=termos,
                 caiu=fichas.caiu_do_tema(escrita, ocorrencias, minimo),
                 complementar=(incidencia.complementar_do_escopo(
                     escrita.id, fichas.dentro_de(escrita.nos), complementares).frase

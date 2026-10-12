@@ -21,12 +21,13 @@ import yaml
 
 from radar import artigos, config
 from radar.alvo import palavra_inteira
-from radar.fichas import (CODIGO_DA_QUESTAO, GABARITO_CITADO, PREVISAO,
+from radar.fichas import (CODIGO_DA_QUESTAO, GABARITO_CITADO, LINHAS_DA_TRADUCAO, PREVISAO,
                           TEXTO_MINIMO_DA_FRASE, FichaRecusada, _lista, _texto)
 from radar.regioes import normalizar
 
-#: As tres linhas de cada artigo, na ordem da tela, com o nome que a tela da.
-LINHAS = (("na_real", "Na real"), ("exemplo", "Exemplo"), ("na_prova", "Na prova"))
+#: As tres linhas de cada artigo, na ordem da tela, com o nome que a tela da:
+#: as mesmas do resumo enxuto, que as desenha.
+LINHAS = LINHAS_DA_TRADUCAO
 NOME_DA_LINHA = dict(LINHAS)
 
 #: As linhas que citam so o proprio artigo. O "na prova" fica de fora: ele

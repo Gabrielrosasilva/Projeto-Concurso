@@ -94,6 +94,22 @@
           </form>
         {% endif %}
       </div>
+      {% if enxuto.traduzido %}
+        {# A traducao dos artigos (decisao 161): procedencia e conferencia
+           proprias, separadas das do resumo. #}
+        <div class="procedencia">
+          <span>{{ s('ia') }} Tradução escrita por {{ enxuto.traducao_procedencia }}.</span>
+          {% if enxuto.traducao_conferida %}
+            <span class="ds-suave">Tradução conferida por você em {{ enxuto.traducao_conferida }}.</span>
+          {% else %}
+            <form method="post" action="/fichas/{{ f.id }}/traducao/conferir">
+              <input type="hidden" name="data" value="{{ data.isoformat() }}">
+              <button class="ds-botao ds-botao--pequeno" type="submit">✓ Conferi a tradução</button>
+            </form>
+            <span class="ds-suave">Ainda não conferida por você.</span>
+          {% endif %}
+        </div>
+      {% endif %}
     {% else %}
       <p class="frase-padrao">Resumo ainda não escrito para este tema.</p>
     {% endif %}

@@ -15,10 +15,21 @@
   {%- endif -%}
 {%- endmacro %}
 
-{# Uma frase: o texto em trechos (o servico corta), e a fonte embaixo. A
-   letra da questao ainda nao respondida fica escondida (decisao 148). #}
+{# O texto em trechos (o servico corta). O termo do glossario fica
+   sublinhado, e o significado aparece ao passar o mouse ou tocar: :hover e
+   :focus no design.css, e o tabindex deixa tocar no celular. A letra da
+   questao ainda nao respondida fica escondida (decisao 148). #}
+{% macro trechos(lista, respondidos) -%}
+  {%- for t in lista -%}
+    {%- if t.significado -%}
+      <span class="ds-termo" tabindex="0">{{ t.texto | sem_gabarito(respondidos) }}<span class="ds-termo__dica" role="tooltip"><b>{{ t.termo }}:</b> {{ t.significado }}</span></span>
+    {%- else -%}{{ t.texto | sem_gabarito(respondidos) }}{%- endif -%}
+  {%- endfor -%}
+{%- endmacro %}
+
+{# Uma frase: o texto e a fonte embaixo (a fonte nunca ganha termo). #}
 {% macro frase(fr, respondidos) -%}
-  {%- for t in fr.trechos -%}{{ t.texto | sem_gabarito(respondidos) }}{%- endfor -%}
+  {{- trechos(fr.trechos, respondidos) -}}
   <span class="ds-resumo__fonte">Fonte: {{ fr.fontes | join('; ') | sem_gabarito(respondidos) }}</span>
 {%- endmacro %}
 
@@ -39,10 +50,39 @@
         {% for b in e.blocos %}
           <div class="ds-resumo__bloco">
             <h4>{{ b.rotulo }}</h4>
-            {{ lista(b.frases, respondidos) }}
+            {% if b.frases %}{{ lista(b.frases, respondidos) }}{% endif %}
+            {% if b.traducao %}
+              <details class="ds-resumo__traduz">
+                <summary>🗣 Traduz pra mim {{ selo('ia', curto=True) }}</summary>
+                <dl class="ds-bloco ds-bloco--ia">
+                  {% for nome, linha in b.traducao %}
+                    <dt>{{ nome }}</dt><dd>{{ frase(linha, respondidos) }}</dd>
+                  {% endfor %}
+                </dl>
+                <p class="ds-resumo__fonte">{{ selo('ia', curto=True) }} Tradução escrita por {{ e.traducao_procedencia }}.</p>
+              </details>
+            {% endif %}
           </div>
         {% endfor %}
       </section>
+      {% if e.nao_confunda %}
+        <details class="ds-resumo__dobra" id="{{ prefixo }}-confunda">
+          <summary>⚖️ Não confunda {{ selo('ia', curto=True) }}</summary>
+          <table class="ds-tabela ds-resumo__confunda">
+            <thead><tr><th>Situação</th><th>O que é</th><th>O que acontece</th></tr></thead>
+            <tbody>
+              {% for l in e.nao_confunda %}
+                <tr>
+                  <td>{{ trechos(l.situacao, respondidos) }}</td>
+                  <td>{{ trechos(l.o_que_e, respondidos) }}</td>
+                  <td>{{ trechos(l.o_que_acontece, respondidos) }}<span class="ds-resumo__fonte">Fonte: {{ l.fontes | join('; ') | sem_gabarito(respondidos) }}</span></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <p class="ds-resumo__fonte">{{ selo('ia', curto=True) }} Tradução escrita por {{ e.traducao_procedencia }}.</p>
+        </details>
+      {% endif %}
     {% elif e.regras_chave %}
       <section id="{{ prefixo }}-artigos">
         <h3>📜 As regras-chave {{ selo('ia', curto=True) }}</h3>

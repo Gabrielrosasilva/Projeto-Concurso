@@ -36,13 +36,14 @@ import re
 from dataclasses import asdict, dataclass, field, replace
 from datetime import date
 
-from radar import artigos
+from radar import artigos, glossario
 from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
 from radar import incidencia, leis, niveis
 from radar import prioridade as regra_de_prioridade
 # As origens (secao 20), mais a do plano, e a frase da regra inviolavel 4: as
 # mesmas do resto do site, que desde a Etapa 7A moram todas no origem.py.
+from radar.glossario import Trecho  # noqa: F401 - o trecho da frase na tela
 from radar.origem import ACERVO, AUTOMATICO, FRASE_SEM_EVIDENCIA, IA, OFICIAL, PLANO
 from radar.regioes import normalizar
 
@@ -495,29 +496,27 @@ def conferir_resumo(bruto, *, codigos: dict, caiu: bool, exige_artigo: bool,
 PEGADINHAS_EM_DESTAQUE = 3
 
 
-@dataclass
-class Trecho:
-    """Um pedaco do texto de uma frase. Com `significado`, e um termo do
-    glossario (decisao 161, T3): a tela o sublinha e mostra o significado."""
-
-    texto: str
-    termo: str | None = None
-    significado: str | None = None
+#: As tres linhas da traducao de cada artigo, na ordem da tela, com o nome que
+#: a tela da (decisao 161). O radar.traducao confere; aqui so se desenha.
+LINHAS_DA_TRADUCAO = (("na_real", "Na real"), ("exemplo", "Exemplo"),
+                      ("na_prova", "Na prova"))
 
 
 @dataclass
 class FraseNaTela:
     texto: str
     fontes: list
-    trechos: list            # [Trecho], o texto cortado no servico
+    trechos: list            # [glossario.Trecho], o texto cortado aqui
 
 
 @dataclass
 class BlocoDoArtigo:
-    """As frases que citam SO este artigo (qualquer paragrafo ou inciso dele)."""
+    """As frases que citam SO este artigo (qualquer paragrafo ou inciso dele)
+    e, quando ha, a traducao dele: [(nome da linha, FraseNaTela)]."""
 
     artigo: artigos.Artigo
     frases: list             # [FraseNaTela]
+    traducao: list = field(default_factory=list)
 
     @property
     def rotulo(self) -> str:
@@ -525,11 +524,21 @@ class BlocoDoArtigo:
 
 
 @dataclass
+class LinhaNaoConfunda:
+    """Uma linha do "Nao confunda": cada coluna ja cortada em trechos."""
+
+    situacao: list
+    o_que_e: list
+    o_que_acontece: list
+    fontes: list
+
+
+@dataclass
 class ResumoEnxuto:
     """O resumo como a janela e a ficha mostram: de cima para baixo, os
-    artigos (ou as regras-chave, na materia sem lei), o basico, o que mais
-    derruba e, dobrados, o resto do dominar, como a banca cobra e as outras
-    pegadinhas."""
+    artigos (ou as regras-chave, na materia sem lei), o "Nao confunda", o
+    basico, o que mais derruba e, dobrados, o resto do dominar, como a banca
+    cobra e as outras pegadinhas."""
 
     de_lei: bool
     blocos: list             # [BlocoDoArtigo], em ordem de lei e de numero
@@ -539,11 +548,29 @@ class ResumoEnxuto:
     dominar: list            # so as frases que nao foram para um bloco
     como_cobra: list
     outras_pegadinhas: list
+    nao_confunda: list = field(default_factory=list)     # [LinhaNaoConfunda]
+    #: A procedencia da traducao (a do resumo mora no proprio resumo).
+    traducao_procedencia: str = ""
+    traducao_conferida: str | None = None
+
+    @property
+    def traduzido(self) -> bool:
+        return any(b.traducao for b in self.blocos) or bool(self.nao_confunda)
 
 
-def _frase_na_tela(frase: dict) -> FraseNaTela:
+def _na_tela(frase: dict, termos, vistos: set) -> FraseNaTela:
+    """A frase com o texto cortado nos termos do glossario: so o texto, nunca
+    a fonte, e sem cortar o "2019-q51 (gabarito C)" que o `sem_gabarito`
+    esconde."""
     return FraseNaTela(texto=frase["texto"], fontes=list(frase["fontes"]),
-                       trechos=[Trecho(frase["texto"])])
+                       trechos=glossario.trechos(frase["texto"], termos, vistos,
+                                                 GABARITO_CITADO))
+
+
+def _secao(frases, termos) -> list[FraseNaTela]:
+    """Uma parte do resumo e um bloco so: o termo marcado uma vez nela."""
+    vistos: set = set()
+    return [_na_tela(f, termos, vistos) for f in frases]
 
 
 def artigo_da_frase(frase: dict) -> "artigos.Artigo | None":
@@ -561,44 +588,76 @@ def _peso_da_pegadinha(frase: dict) -> int:
     return 1 if codigos else 2
 
 
-def resumo_enxuto(partes: dict | None, materia: str | None) -> ResumoEnxuto:
+def resumo_enxuto(partes: dict | None, materia: str | None, traducao: dict | None = None,
+                  termos: list | None = None) -> ResumoEnxuto:
     """As partes gravadas do resumo, arrumadas para a tela (decisao 161).
 
     Na materia de lei (o config/leis.yml), a frase de "artigos" ou de
     "dominar" que cita SO um artigo vai para o bloco dele; a que cita varios,
     ou nenhum (doutrina, sumula), fica em "O que eu preciso dominar". Na
     materia sem lei, "artigos" e "dominar" ficam como estao.
+
+    `traducao` e a da ficha, so com os itens que a tela mostra (o servico
+    tira os orfaos, `traducao.visiveis`): cada item vai para o bloco do seu
+    artigo, e o artigo traduzido sem frase ganha o bloco so com o numero e a
+    traducao. `termos` e o glossario: a 1a vez de cada termo em cada bloco
+    (um artigo, ou uma parte) e marcada.
     """
     partes = partes or {}
+    termos = termos or []
+    traducao = traducao or {}
     de_lei = leis.exige_artigo(materia)
-    blocos: dict = {}
+    do_artigo: dict = {}
     ordem_das_leis: list[str] = []
-    sobra = []
-    regras_chave = []
+    sobra, regras_chave = [], []
     for chave in ("dominar", "artigos"):
         for frase in partes.get(chave) or []:
             artigo = artigo_da_frase(frase) if de_lei else None
             if artigo is None:
-                if chave == "artigos" and not de_lei:
-                    regras_chave.append(_frase_na_tela(frase))
-                else:
-                    sobra.append(_frase_na_tela(frase))
+                (regras_chave if chave == "artigos" and not de_lei else sobra).append(frase)
                 continue
             if artigo.lei not in ordem_das_leis:
                 ordem_das_leis.append(artigo.lei)
-            blocos.setdefault(artigo, BlocoDoArtigo(artigo, [])).frases.append(
-                _frase_na_tela(frase))
+            do_artigo.setdefault(artigo, []).append(frase)
+    traduzidos = {}
+    for item in traducao.get("itens") or [] if de_lei else []:
+        artigo = artigos.da_fonte(item.get("artigo"))
+        if artigo is None:
+            continue
+        traduzidos[artigo] = item
+        do_artigo.setdefault(artigo, [])
+        if artigo.lei not in ordem_das_leis:
+            ordem_das_leis.append(artigo.lei)
+
+    blocos = []
+    for artigo in sorted(do_artigo, key=lambda a: (ordem_das_leis.index(a.lei), a.posicao)):
+        vistos: set = set()
+        frases = [_na_tela(f, termos, vistos) for f in do_artigo[artigo]]
+        item = traduzidos.get(artigo)
+        linhas = ([(nome, _na_tela(item[chave], termos, vistos))
+                   for chave, nome in LINHAS_DA_TRADUCAO if item.get(chave)]
+                  if item else [])
+        blocos.append(BlocoDoArtigo(artigo, frases, linhas))
+
+    vistos_nc: set = set()
+    nao_confunda = [LinhaNaoConfunda(
+        *(glossario.trechos(linha.get(coluna) or "", termos, vistos_nc, GABARITO_CITADO)
+          for coluna in ("situacao", "o_que_e", "o_que_acontece")),
+        fontes=list(linha.get("fontes") or []))
+        for linha in (traducao.get("nao_confunda") or [] if de_lei else [])]
+
     pegadinhas = sorted(partes.get("pegadinhas") or [], key=_peso_da_pegadinha)
     return ResumoEnxuto(
-        de_lei=de_lei,
-        blocos=sorted(blocos.values(), key=lambda b: (
-            ordem_das_leis.index(b.artigo.lei), b.artigo.posicao)),
-        regras_chave=regras_chave,
-        basico=[_frase_na_tela(f) for f in partes.get("basico") or []],
-        derruba=[_frase_na_tela(f) for f in pegadinhas[:PEGADINHAS_EM_DESTAQUE]],
-        dominar=sobra,
-        como_cobra=[_frase_na_tela(f) for f in partes.get("como_cobra") or []],
-        outras_pegadinhas=[_frase_na_tela(f) for f in pegadinhas[PEGADINHAS_EM_DESTAQUE:]],
+        de_lei=de_lei, blocos=blocos,
+        regras_chave=_secao(regras_chave, termos),
+        basico=_secao(partes.get("basico") or [], termos),
+        derruba=_secao(pegadinhas[:PEGADINHAS_EM_DESTAQUE], termos),
+        dominar=_secao(sobra, termos),
+        como_cobra=_secao(partes.get("como_cobra") or [], termos),
+        outras_pegadinhas=_secao(pegadinhas[PEGADINHAS_EM_DESTAQUE:], termos),
+        nao_confunda=nao_confunda,
+        traducao_procedencia=traducao.get("modelo") or "",
+        traducao_conferida=traducao.get("conferido_em"),
     )
 
 
