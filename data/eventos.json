@@ -1,6 +1,510 @@
 [
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=265",
+    "data": "2026-10-11T18:11:26.029797+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=265",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=266",
+    "data": "2026-10-11T18:11:26.028687+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=266",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=267",
+    "data": "2026-10-11T18:11:26.027657+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=267",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=269",
+    "data": "2026-10-11T18:11:26.026545+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=269",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=270",
+    "data": "2026-10-11T18:11:26.024900+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=270",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=271",
+    "data": "2026-10-11T18:11:26.018044+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=271",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=272",
+    "data": "2026-10-11T18:11:26.023032+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=272",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=274",
+    "data": "2026-10-11T18:11:26.020572+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=274",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=276",
+    "data": "2026-10-11T18:11:26.021705+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=276",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=278",
+    "data": "2026-10-11T18:11:26.019564+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=278",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=281",
+    "data": "2026-10-11T18:11:26.016822+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=281",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=282",
+    "data": "2026-10-11T18:11:26.015776+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=282",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=284",
+    "data": "2026-10-11T18:11:26.014456+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=284",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=285",
+    "data": "2026-10-11T18:11:26.012713+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=285",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=286",
+    "data": "2026-10-11T18:11:26.011722+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=286",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=287",
+    "data": "2026-10-11T18:11:26.008721+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=287",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=288",
+    "data": "2026-10-11T18:11:26.009685+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=288",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=289",
+    "data": "2026-10-11T18:11:26.010676+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=289",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=292",
+    "data": "2026-10-11T18:11:26.007668+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=292",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=293",
+    "data": "2026-10-11T18:11:26.006172+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=293",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=294",
+    "data": "2026-10-11T18:11:26.005052+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=294",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=320",
+    "data": "2026-10-11T18:11:26.003951+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=320",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=321",
+    "data": "2026-10-11T18:11:26.001995+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=321",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=322",
+    "data": "2026-10-11T18:11:26.000808+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=322",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=323",
+    "data": "2026-10-11T18:11:26.002981+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=323",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=325",
+    "data": "2026-10-11T18:11:25.997235+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=325",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=326",
+    "data": "2026-10-11T18:11:25.998352+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=326",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=327",
+    "data": "2026-10-11T18:11:25.995943+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=327",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=328",
+    "data": "2026-10-11T18:11:25.991480+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=328",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=329",
+    "data": "2026-10-11T18:11:25.999681+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=329",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=330",
+    "data": "2026-10-11T18:11:25.993757+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=330",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=331",
+    "data": "2026-10-11T18:11:25.992675+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=331",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=332",
+    "data": "2026-10-11T18:11:25.990042+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=332",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=333",
+    "data": "2026-10-11T18:11:25.989020+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=333",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=334",
+    "data": "2026-10-11T18:11:25.994946+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=334",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=335",
+    "data": "2026-10-11T18:11:25.988008+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=335",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=336",
+    "data": "2026-10-11T18:11:25.986766+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=336",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=338",
+    "data": "2026-10-11T18:11:25.985507+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=338",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=339",
+    "data": "2026-10-11T18:11:25.984520+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=339",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=340",
+    "data": "2026-10-11T18:11:25.983528+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=340",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=341",
+    "data": "2026-10-11T18:11:25.980716+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=341",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=342",
+    "data": "2026-10-11T18:11:25.978529+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=342",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=343",
+    "data": "2026-10-11T18:11:25.977277+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=343",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=344",
+    "data": "2026-10-11T18:11:25.981925+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=344",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=347",
+    "data": "2026-10-11T18:11:25.975926+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=347",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=348",
+    "data": "2026-10-11T18:11:25.974818+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=348",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=349",
+    "data": "2026-10-11T18:11:25.969047+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=349",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=350",
+    "data": "2026-10-11T18:11:25.970744+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=350",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=351",
+    "data": "2026-10-11T18:11:25.972458+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=351",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=352",
+    "data": "2026-10-11T18:11:25.973702+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=352",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=354",
+    "data": "2026-10-11T18:11:25.968015+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=354",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=355",
+    "data": "2026-10-11T18:11:25.966447+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=355",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=359",
+    "data": "2026-10-11T18:11:25.959173+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=359",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=361",
+    "data": "2026-10-11T18:11:25.960789+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=361",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=362",
+    "data": "2026-10-11T18:11:25.965404+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=362",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=363",
+    "data": "2026-10-11T18:11:25.956504+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=363",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=364",
+    "data": "2026-10-11T18:11:25.963714+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=364",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=365",
+    "data": "2026-10-11T18:11:25.962427+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=365",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=366",
+    "data": "2026-10-11T18:11:25.958156+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=366",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=367",
+    "data": "2026-10-11T18:11:25.955396+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=367",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
+    "data": "2026-10-11T18:11:25.952083+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
+    "data": "2026-10-11T18:11:25.953915+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=370",
+    "data": "2026-10-11T18:11:25.943486+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=370",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/beneficios-sociais/2026/10/09/calendario-bolsa-familia-de-outubro-sera-antecipado-2/",
     "data": "2026-10-09T17:21:54.923540+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
@@ -11,6 +515,14 @@
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/beneficios-sociais/2026/10/10/valor-do-bolsa-familia-de-outubro-confirmado-pelo-governo/",
     "data": "2026-10-11T15:16:48.397071+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
+    "link": "https://concursosnobrasil.com/beneficios-sociais/2026/10/10/valor-do-bolsa-familia-de-outubro-confirmado-pelo-governo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/beneficios-sociais/2026/10/10/valor-do-bolsa-familia-de-outubro-confirmado-pelo-governo/",
+    "data": "2026-10-11T16:40:20.419762+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
     "link": "https://concursosnobrasil.com/beneficios-sociais/2026/10/10/valor-do-bolsa-familia-de-outubro-confirmado-pelo-governo/",
     "tipo": "apareceu"
@@ -147,6 +659,14 @@
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/ce/2026/10/10/prefeitura-de-sobral-ce-abre-seletivo-para-professores-temporarios/",
     "data": "2026-10-11T15:16:48.389913+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/ce/2026/10/10/prefeitura-de-sobral-ce-abre-seletivo-para-professores-temporarios/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/ce/2026/10/10/prefeitura-de-sobral-ce-abre-seletivo-para-professores-temporarios/",
+    "data": "2026-10-11T16:40:20.402676+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/ce/2026/10/10/prefeitura-de-sobral-ce-abre-seletivo-para-professores-temporarios/",
     "tipo": "apareceu"
@@ -1361,6 +1881,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/10/camara-de-ituporanga-sc-abre-seletivo-com-remuneracao-de-r-11-580/",
+    "data": "2026-10-11T16:40:20.417143+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/10/camara-de-ituporanga-sc-abre-seletivo-com-remuneracao-de-r-11-580/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/09/22/etec-de-jau-sp-publica-edital-de-seletivo-para-auxiliar-de-docente/",
     "data": "2026-09-23T00:34:33.177306+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -1726,5 +2254,869 @@
     "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
     "link": "https://fepese.org.br/concurso/2026-prefeitura-municipal-de-sao-jose-processo-seletivo-magisterio/",
     "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/camara-municipal-de-conceicao-pb/",
+    "data": "2026-10-11T18:11:26.041226+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/camara-municipal-de-conceicao-pb/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/camara-municipal-de-condado-pe/",
+    "data": "2026-10-11T18:11:26.057530+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/camara-municipal-de-condado-pe/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/camara-municipal-de-gravata-pe/",
+    "data": "2026-10-11T18:11:26.072203+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/camara-municipal-de-gravata-pe/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/camara-municipal-de-mamanguape-pb/",
+    "data": "2026-10-11T18:11:26.064098+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/camara-municipal-de-mamanguape-pb/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/camara-municipal-de-ouricuri-pe/",
+    "data": "2026-10-11T18:11:26.056559+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/camara-municipal-de-ouricuri-pe/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/camara-municipal-de-pentecoste-ce/",
+    "data": "2026-10-11T18:11:26.042211+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/camara-municipal-de-pentecoste-ce/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/concurso-publico-01-2025-prefeitura-municipal-de-moraujo-ce-cargos-gerais/",
+    "data": "2026-10-11T18:11:26.031094+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/concurso-publico-01-2025-prefeitura-municipal-de-moraujo-ce-cargos-gerais/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/conselho-regional-de-enfermagem-do-tocantins/",
+    "data": "2026-10-11T18:11:26.034509+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/conselho-regional-de-enfermagem-do-tocantins/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/conselho-regional-de-farmacia-do-mato-grosso-do-sul/",
+    "data": "2026-10-11T18:11:26.054546+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/conselho-regional-de-farmacia-do-mato-grosso-do-sul/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/conselho-regional-de-medicina-de-pernambuco/",
+    "data": "2026-10-11T18:11:26.053534+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/conselho-regional-de-medicina-de-pernambuco/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/conselho-regional-de-medicina-do-mato-grosso/",
+    "data": "2026-10-11T18:11:26.058531+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/conselho-regional-de-medicina-do-mato-grosso/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/conselho-regional-de-medicina-rj/",
+    "data": "2026-10-11T18:11:26.078132+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/conselho-regional-de-medicina-rj/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/conselho-regional-de-odontologia-de-pernambuco/",
+    "data": "2026-10-11T18:11:26.055551+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/conselho-regional-de-odontologia-de-pernambuco/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/consorcio-publico-de-saude-micro-regiao-de-quixada-cpsmq/",
+    "data": "2026-10-11T18:11:26.046178+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/consorcio-publico-de-saude-micro-regiao-de-quixada-cpsmq/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/creci-ce-15a-regiao/",
+    "data": "2026-10-11T18:11:26.051362+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/creci-ce-15a-regiao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/creci-pe-7a-regiao-edital-001/",
+    "data": "2026-10-11T18:11:26.050251+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/creci-pe-7a-regiao-edital-001/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/creci-pe-7a-regiao-edital-002/",
+    "data": "2026-10-11T18:11:26.049164+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/creci-pe-7a-regiao-edital-002/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/curso-de-habilitacao-de-sargentos-chs-2025-policia-militar-es/",
+    "data": "2026-10-11T18:11:26.038074+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/curso-de-habilitacao-de-sargentos-chs-2025-policia-militar-es/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/curso-de-habilitacao-de-sargentos-do-estado-do-espirito-santo/",
+    "data": "2026-10-11T18:11:26.052438+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/curso-de-habilitacao-de-sargentos-do-estado-do-espirito-santo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-aquiraz-ce/",
+    "data": "2026-10-11T18:11:26.073205+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-aquiraz-ce/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-araguaina-to-2/",
+    "data": "2026-10-11T18:11:26.067617+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-araguaina-to-2/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-araguaina-to/",
+    "data": "2026-10-11T18:11:26.069246+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-araguaina-to/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-colinas-do-tocantins/",
+    "data": "2026-10-11T18:11:26.074183+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-colinas-do-tocantins/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-formosa-go/",
+    "data": "2026-10-11T18:11:26.070262+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-formosa-go/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-goiana-pe-2/",
+    "data": "2026-10-11T18:11:26.066610+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-goiana-pe-2/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-goiana-pe/",
+    "data": "2026-10-11T18:11:26.071238+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-goiana-pe/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-groairas-ce/",
+    "data": "2026-10-11T18:11:26.059511+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-groairas-ce/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-jaguaribe-ce/",
+    "data": "2026-10-11T18:11:26.061469+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-jaguaribe-ce/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-jambeiro-ba/",
+    "data": "2026-10-11T18:11:26.065551+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-jambeiro-ba/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-juazeiro-2/",
+    "data": "2026-10-11T18:11:26.045181+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-juazeiro-2/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-pentecoste-ce-2/",
+    "data": "2026-10-11T18:11:26.047997+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-pentecoste-ce-2/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-salgueiro-pe/",
+    "data": "2026-10-11T18:11:26.062441+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-salgueiro-pe/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-seabra-ba-copy/",
+    "data": "2026-10-11T18:11:26.076116+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-seabra-ba-copy/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-seabra-ba/",
+    "data": "2026-10-11T18:11:26.077087+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-seabra-ba/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-de-xinguara-pa/",
+    "data": "2026-10-11T18:11:26.060485+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-de-xinguara-pa/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-municipal-de-juazeiro-ba/",
+    "data": "2026-10-11T18:11:26.043203+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-municipal-de-juazeiro-ba/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-municipal-de-machado-mg/",
+    "data": "2026-10-11T18:11:26.040155+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-municipal-de-machado-mg/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/prefeitura-municipal-de-moraujo-ce-procurador-juridico-assistente/",
+    "data": "2026-10-11T18:11:26.033244+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/prefeitura-municipal-de-moraujo-ce-procurador-juridico-assistente/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/saae-ambiental-de-juazeiro-ba/",
+    "data": "2026-10-11T18:11:26.044201+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/saae-ambiental-de-juazeiro-ba/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://idib.org.br/trt-ba-5a-regiao/",
+    "data": "2026-10-11T18:11:26.075140+00:00",
+    "descricao": "Entrou no radar pela fonte idib, como edital_publicado",
+    "link": "https://idib.org.br/trt-ba-5a-regiao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4259/materia/1137461",
+    "data": "2026-10-11T16:47:31.781393+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4259/materia/1137461",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4370/materia/1141207",
+    "data": "2026-10-11T16:47:31.784158+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4370/materia/1141207",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4375/materia/1142741",
+    "data": "2026-10-11T16:47:31.770974+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4375/materia/1142741",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143884",
+    "data": "2026-10-11T16:47:31.796801+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143884",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143887",
+    "data": "2026-10-11T16:47:31.798562+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143887",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4381/materia/1143883",
+    "data": "2026-10-11T16:47:31.786386+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4381/materia/1143883",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4381/materia/1143885",
+    "data": "2026-10-11T16:47:31.787618+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4381/materia/1143885",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4385/materia/1145115",
+    "data": "2026-10-11T16:47:31.783019+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4385/materia/1145115",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4402/materia/1149079",
+    "data": "2026-10-11T16:47:31.788757+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4402/materia/1149079",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4423/materia/1154234",
+    "data": "2026-10-11T16:47:31.792511+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4423/materia/1154234",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4430/materia/1155941",
+    "data": "2026-10-11T16:47:31.790863+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4430/materia/1155941",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4435/materia/1157303",
+    "data": "2026-10-11T16:47:31.794102+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4435/materia/1157303",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4436/materia/1157685",
+    "data": "2026-10-11T16:47:31.795551+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4436/materia/1157685",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4539/materia/1190736",
+    "data": "2026-10-11T16:47:31.779878+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4539/materia/1190736",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4556/materia/1196597",
+    "data": "2026-10-11T16:47:31.801188+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4556/materia/1196597",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4556/materia/1196599",
+    "data": "2026-10-11T16:47:31.799870+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4556/materia/1196599",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4580/materia/1203313",
+    "data": "2026-10-11T16:47:31.785204+00:00",
+    "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4580/materia/1203313",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.bc.sc.gov.br/noticia/43608",
+    "data": "2026-10-11T17:57:50.936145+00:00",
+    "descricao": "Entrou no radar pela fonte prefeitura_bc, como desconhecida",
+    "link": "https://www.bc.sc.gov.br/noticia/43608",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/259",
+    "data": "2026-10-11T17:49:01.886968+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/259",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/26",
+    "data": "2026-10-11T17:49:01.889082+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/26",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/396",
+    "data": "2026-10-11T17:49:01.885773+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/396",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/400",
+    "data": "2026-10-11T17:49:01.884139+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/400",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/418",
+    "data": "2026-10-11T17:49:01.882233+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/418",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/425",
+    "data": "2026-10-11T17:49:01.880821+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/425",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/604",
+    "data": "2026-10-11T17:49:01.879438+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/604",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/616",
+    "data": "2026-10-11T17:49:01.878354+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/616",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/620",
+    "data": "2026-10-11T17:49:01.876616+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/620",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/628",
+    "data": "2026-10-11T17:49:01.874743+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/628",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/632",
+    "data": "2026-10-11T17:49:01.872899+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/632",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/635",
+    "data": "2026-10-11T17:49:01.871569+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/635",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/664",
+    "data": "2026-10-11T17:49:01.869927+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/664",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/669",
+    "data": "2026-10-11T17:49:01.868714+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/669",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/672",
+    "data": "2026-10-11T17:49:01.867482+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/672",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/690",
+    "data": "2026-10-11T17:49:01.866346+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/690",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/693",
+    "data": "2026-10-11T17:49:01.852427+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/693",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/699",
+    "data": "2026-10-11T17:49:01.864942+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/699",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/701",
+    "data": "2026-10-11T17:49:01.846686+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/701",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/706",
+    "data": "2026-10-11T17:49:01.863461+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/706",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/708",
+    "data": "2026-10-11T17:49:01.861979+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/708",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/709",
+    "data": "2026-10-11T17:49:01.859860+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/709",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/711",
+    "data": "2026-10-11T17:49:01.857815+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/711",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/712",
+    "data": "2026-10-11T17:49:01.854899+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/712",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/713",
+    "data": "2026-10-11T17:49:01.844925+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/713",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/714",
+    "data": "2026-10-11T17:49:01.842872+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/714",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/715",
+    "data": "2026-10-11T17:49:01.841137+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/715",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/717",
+    "data": "2026-10-11T17:49:01.839212+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/717",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/718",
+    "data": "2026-10-11T17:49:01.837686+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/718",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/719",
+    "data": "2026-10-11T17:49:01.836177+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/719",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/720",
+    "data": "2026-10-11T17:49:01.818857+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como inscricoes_abertas",
+    "link": "https://www.institutoaocp.org.br/concursos/720",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/721",
+    "data": "2026-10-11T17:49:01.851121+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/721",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/722",
+    "data": "2026-10-11T17:49:01.849957+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/722",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/723",
+    "data": "2026-10-11T17:49:01.848160+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/723",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/concurso-2019/",
+    "data": "2026-10-11T18:04:08.066088+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/concurso-2019/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/concurso-publico-001-sap-2022-tecnicos/",
+    "data": "2026-10-11T18:04:08.060133+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/concurso-publico-001-sap-2022-tecnicos/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/concurso-publico-edital-001-sjc-2013-agente-penitenciario/",
+    "data": "2026-10-11T18:04:08.071773+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/concurso-publico-edital-001-sjc-2013-agente-penitenciario/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/concurso-publico-edital-001-sjc-2016-agente-de-seguranca-socioeducativo/",
+    "data": "2026-10-11T18:04:08.069761+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/concurso-publico-edital-001-sjc-2016-agente-de-seguranca-socioeducativo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/concurso-publico-edital-n-001-sea-ssp-2006/",
+    "data": "2026-10-11T18:04:08.073257+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/concurso-publico-edital-n-001-sea-ssp-2006/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/edital-de-processo-seletivo-simplificado-no-002-2026/",
+    "data": "2026-10-11T18:04:08.052486+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/edital-de-processo-seletivo-simplificado-no-002-2026/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-001-2026/",
+    "data": "2026-10-11T18:04:08.054006+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-001-2026/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-002-2024/",
+    "data": "2026-10-11T18:04:08.062341+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-002-2024/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-edital-no-005-2026/",
+    "data": "2026-10-11T18:04:08.044926+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-edital-no-005-2026/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-edital-no-006-2026/",
+    "data": "2026-10-11T18:04:08.036513+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-edital-no-006-2026/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-001-2025/",
+    "data": "2026-10-11T18:04:08.058761+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-001-2025/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-002-2025/",
+    "data": "2026-10-11T18:04:08.057179+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-002-2025/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-003-2025/",
+    "data": "2026-10-11T18:04:08.055696+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-003-2025/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-003-2026/",
+    "data": "2026-10-11T18:04:08.050402+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-003-2026/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-004-2026/",
+    "data": "2026-10-11T18:04:08.048343+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-no-004-2026/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-pss-no-001-2024-dease/",
+    "data": "2026-10-11T18:04:08.064325+00:00",
+    "descricao": "Entrou no radar pela fonte sejuri, como desconhecida",
+    "link": "https://www.sejuri.sc.gov.br/processo-seletivo-simplificado-pss-no-001-2024-dease/",
+    "tipo": "apareceu"
   }
 ]
