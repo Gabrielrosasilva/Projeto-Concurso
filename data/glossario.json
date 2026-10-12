@@ -10,6 +10,48 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "ação popular",
+    "variantes": [],
+    "significado": "A ação que qualquer cidadão pode propor para anular ato que lesa o patrimônio público, a moralidade, o meio ambiente ou o patrimônio histórico e cultural.",
+    "fontes": [
+      "CF, art. 5º, LXXIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "anonimato",
+    "variantes": [],
+    "significado": "Falar ou publicar sem se identificar. A Constituição deixa falar, mas não escondido.",
+    "fontes": [
+      "CF, art. 5º, IV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "apatridia",
+    "variantes": [
+      "apátrida"
+    ],
+    "significado": "Ficar sem nacionalidade nenhuma, sem pátria.",
+    "fontes": [
+      "CF, art. 12, § 4º, II"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "base territorial",
+    "variantes": [],
+    "significado": "A área que um sindicato representa; não pode ser menor que um município.",
+    "fontes": [
+      "CF, art. 8º, II"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
     "termo": "circunstâncias alheias à vontade do agente",
     "variantes": [],
     "significado": "Coisas de fora, que não dependem de quem está cometendo o crime: a polícia chegou, a vítima fugiu, a arma travou.",
@@ -18,6 +60,28 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "comoção grave",
+    "variantes": [],
+    "significado": "Uma desordem enorme, que abala o país inteiro.",
+    "fontes": [
+      "CF, art. 137, I"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "conscritos",
+    "variantes": [
+      "conscrito"
+    ],
+    "significado": "Os jovens que estão prestando o serviço militar obrigatório.",
+    "fontes": [
+      "CF, art. 14, § 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
     "termo": "consumado",
@@ -31,6 +95,34 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "convenção ou acordo coletivo",
+    "variantes": [
+      "acordo coletivo",
+      "convenção coletiva",
+      "negociação coletiva"
+    ],
+    "significado": "O trato fechado pelo sindicato dos trabalhadores com as empresas (acordo) ou com o sindicato dos patrões (convenção).",
+    "fontes": [
+      "CF, art. 7º, VI",
+      "CF, art. 7º, XXVI",
+      "doutrina (direito do trabalho)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "crimes hediondos",
+    "variantes": [
+      "hediondos"
+    ],
+    "significado": "Os crimes que uma lei marca como os mais graves, com regras mais duras.",
+    "fontes": [
+      "CF, art. 5º, XLIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
     "termo": "culpa consciente",
@@ -70,6 +162,28 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "depositário infiel",
+    "variantes": [],
+    "significado": "Quem recebeu um bem para guardar e não o devolve. O texto ainda cita a prisão dele, mas ela não é mais permitida.",
+    "fontes": [
+      "CF, art. 5º, LXVII",
+      "Súmula Vinculante 25"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "direito líquido e certo",
+    "variantes": [],
+    "significado": "Direito comprovado de cara, com documento, sem precisar de outras provas.",
+    "fontes": [
+      "CF, art. 5º, LXIX",
+      "doutrina (mandado de segurança)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
     "termo": "dolo eventual",
     "variantes": [],
     "significado": "Quando a pessoa não quer exatamente o resultado, mas topa o risco de ele acontecer.",
@@ -93,6 +207,58 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "flagrante delito",
+    "variantes": [
+      "flagrante"
+    ],
+    "significado": "Pegar a pessoa cometendo o crime, ou logo depois dele.",
+    "fontes": [
+      "CF, art. 5º, XI"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "forças auxiliares e reserva do Exército",
+    "variantes": [],
+    "significado": "A PM e os bombeiros militares: em caso de necessidade, ajudam o Exército e podem ser chamados por ele.",
+    "fontes": [
+      "CF, art. 144, § 6º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "habeas corpus",
+    "variantes": [],
+    "significado": "A ação para proteger quem está preso ilegalmente, ou ameaçado de ser: protege a liberdade de ir e vir.",
+    "fontes": [
+      "CF, art. 5º, LXVIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "habeas data",
+    "variantes": [],
+    "significado": "A ação para saber o que um cadastro público guarda sobre você, ou para corrigir o que está errado.",
+    "fontes": [
+      "CF, art. 5º, LXXII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "idoneidade moral",
+    "variantes": [],
+    "significado": "Ter boa conduta, uma ficha sem nada que desabone.",
+    "fontes": [
+      "CF, art. 12, II, a"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
     "termo": "ilicitude",
     "variantes": [],
     "significado": "O fato ser contra a lei, proibido.",
@@ -114,6 +280,19 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "imprescritível",
+    "variantes": [
+      "imprescritíveis"
+    ],
+    "significado": "Não prescreve: o Estado pode punir a qualquer tempo, por mais anos que passem.",
+    "fontes": [
+      "CF, art. 5º, XLII",
+      "CF, art. 5º, XLIV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
     "termo": "imprudência",
     "variantes": [],
     "significado": "Fazer algo arriscado sem o cuidado devido, como correr demais com o carro.",
@@ -123,6 +302,40 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "inafiançável",
+    "variantes": [
+      "inafiançáveis"
+    ],
+    "significado": "Não admite fiança: não dá para pagar um valor para sair da prisão.",
+    "fontes": [
+      "CF, art. 5º, XLII",
+      "CF, art. 5º, XLIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "inalistáveis",
+    "variantes": [],
+    "significado": "Quem não pode tirar o título de eleitor, como o estrangeiro e o conscrito.",
+    "fontes": [
+      "CF, art. 14, § 2º",
+      "CF, art. 14, § 4º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "incomunicabilidade",
+    "variantes": [],
+    "significado": "Deixar o preso sem falar com ninguém. No estado de defesa, isso é proibido.",
+    "fontes": [
+      "CF, art. 136, § 3º, IV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
     "termo": "ineficácia absoluta do meio",
@@ -145,6 +358,29 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "insuscetíveis de graça ou anistia",
+    "variantes": [
+      "graça ou anistia"
+    ],
+    "significado": "Sem perdão: graça é o perdão individual dado pelo Presidente; anistia é o perdão do crime dado por lei.",
+    "fontes": [
+      "CF, art. 5º, XLIII",
+      "doutrina (graça e anistia)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "irredutibilidade",
+    "variantes": [],
+    "significado": "O salário não pode ser diminuído, salvo por convenção ou acordo coletivo.",
+    "fontes": [
+      "CF, art. 7º, VI"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
     "termo": "isenta de pena",
     "variantes": [
       "isento de pena",
@@ -158,6 +394,26 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "mandado de injunção",
+    "variantes": [],
+    "significado": "A ação para quando a lei que faria um direito da Constituição funcionar nunca foi feita.",
+    "fontes": [
+      "CF, art. 5º, LXXI"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "mandado de segurança",
+    "variantes": [],
+    "significado": "A ação contra a autoridade que fere um direito claro e comprovado de cara, quando não cabe habeas corpus nem habeas data.",
+    "fontes": [
+      "CF, art. 5º, LXIX"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
     "termo": "negligência",
     "variantes": [],
     "significado": "Deixar de tomar um cuidado que devia, como não conferir se a arma estava carregada.",
@@ -167,5 +423,150 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "ônus da sucumbência",
+    "variantes": [
+      "sucumbência"
+    ],
+    "significado": "Pagar as despesas do processo e o advogado do outro lado quando se perde a ação.",
+    "fontes": [
+      "CF, art. 5º, LXXIII",
+      "doutrina (processo civil)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "paramilitar",
+    "variantes": [],
+    "significado": "Grupo organizado como se fosse força militar, sem ser do Estado: é proibido.",
+    "fontes": [
+      "CF, art. 5º, XVII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "plebiscito",
+    "variantes": [],
+    "significado": "O povo é consultado ANTES de a decisão ser tomada.",
+    "fontes": [
+      "CF, art. 14, I",
+      "doutrina (Lei 9.709/1998)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "polícia judiciária",
+    "variantes": [],
+    "significado": "A polícia que investiga o crime depois que ele aconteceu e reúne as provas para o processo.",
+    "fontes": [
+      "CF, art. 144, § 1º",
+      "CF, art. 144, § 4º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "polícia ostensiva",
+    "variantes": [],
+    "significado": "A polícia fardada, que aparece na rua para prevenir o crime.",
+    "fontes": [
+      "CF, art. 144, § 5º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "prestação alternativa",
+    "variantes": [],
+    "significado": "Uma tarefa que a lei põe no lugar da obrigação, para quem a recusa por crença ou convicção.",
+    "fontes": [
+      "CF, art. 5º, VIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "prisão civil",
+    "variantes": [],
+    "significado": "Prisão que não é castigo por crime, mas um jeito de forçar o pagamento de uma dívida. Hoje, só a do devedor de pensão alimentícia.",
+    "fontes": [
+      "CF, art. 5º, LXVII",
+      "Súmula Vinculante 25"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "referendo",
+    "variantes": [],
+    "significado": "O povo confirma ou rejeita DEPOIS que a decisão foi tomada.",
+    "fontes": [
+      "CF, art. 14, II",
+      "doutrina (Lei 9.709/1998)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "soberania dos veredictos",
+    "variantes": [],
+    "significado": "A decisão dos jurados vale: o tribunal não pode trocá-la por outra; no máximo, manda fazer novo júri.",
+    "fontes": [
+      "CF, art. 5º, XXXVIII",
+      "doutrina (júri)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "subsídio",
+    "variantes": [],
+    "significado": "A remuneração em parcela única, sem somar gratificações e adicionais.",
+    "fontes": [
+      "CF, art. 144, § 9º",
+      "doutrina (art. 39, § 4º)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "trabalhador avulso",
+    "variantes": [
+      "avulso"
+    ],
+    "significado": "Quem presta serviço a várias empresas sem vínculo de emprego com nenhuma, como o trabalhador do porto.",
+    "fontes": [
+      "CF, art. 7º, XXXIV",
+      "doutrina (direito do trabalho)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "trânsito em julgado",
+    "variantes": [
+      "transitada em julgado",
+      "transitado em julgado"
+    ],
+    "significado": "Quando não cabe mais recurso nenhum: a decisão virou definitiva.",
+    "fontes": [
+      "CF, art. 5º, LVII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "turnos ininterruptos de revezamento",
+    "variantes": [],
+    "significado": "Escala em que a equipe troca de horário (manhã, tarde, noite) para o serviço não parar.",
+    "fontes": [
+      "CF, art. 7º, XIV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:22:43.211132+00:00"
   }
 ]

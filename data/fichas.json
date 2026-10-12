@@ -200,6 +200,93 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 5º",
+          "na_real": {
+            "texto": "O art. 5º é a lista das proteções de cada pessoa. Nesta parte: todos iguais, homem e mulher também; ninguém é obrigado a nada que a lei não mande; falar é livre, mas sem se esconder no anonimato; a casa e a vida privada são invioláveis; reunir é livre, só avisando antes.",
+            "fontes": [
+              "CF, art. 5º, caput",
+              "CF, art. 5º, I",
+              "CF, art. 5º, II",
+              "CF, art. 5º, IV",
+              "CF, art. 5º, X",
+              "CF, art. 5º, XI",
+              "CF, art. 5º, XVI"
+            ]
+          },
+          "exemplo": {
+            "texto": "O juiz manda fazer busca na casa de um suspeito, e a equipe chega às 23h. Sem flagrante, desastre ou pedido de socorro, e sem o morador deixar, a ordem judicial só vale de dia: a equipe espera amanhecer.",
+            "fontes": [
+              "CF, art. 5º, XI"
+            ]
+          },
+          "na_prova": {
+            "texto": "A casa: flagrante, desastre e socorro valem a qualquer hora; ordem judicial, SÓ DE DIA. Anonimato é VEDADO. Reunião não pede AUTORIZAÇÃO, só AVISO prévio. O sigilo telefônico só cai por ORDEM JUDICIAL, para investigação criminal ou instrução processual penal.",
+            "fontes": [
+              "CF, art. 5º, XI",
+              "CF, art. 5º, IV",
+              "CF, art. 5º, XVI",
+              "CF, art. 5º, XII",
+              "2013-q31 (gabarito C)",
+              "FEPESE-2024-q24 (gabarito A)"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "O morador deixa entrar",
+          "o_que_e": "Consentimento (art. 5º, XI)",
+          "o_que_acontece": "Pode entrar, a qualquer hora",
+          "fontes": [
+            "CF, art. 5º, XI"
+          ]
+        },
+        {
+          "situacao": "Crime acontecendo lá dentro",
+          "o_que_e": "Flagrante delito (art. 5º, XI)",
+          "o_que_acontece": "Pode entrar sem ordem, de dia ou de noite",
+          "fontes": [
+            "CF, art. 5º, XI"
+          ]
+        },
+        {
+          "situacao": "Incêndio, desabamento ou alguém pedindo ajuda",
+          "o_que_e": "Desastre ou socorro (art. 5º, XI)",
+          "o_que_acontece": "Pode entrar sem ordem, de dia ou de noite",
+          "fontes": [
+            "CF, art. 5º, XI"
+          ]
+        },
+        {
+          "situacao": "O juiz mandou fazer a busca",
+          "o_que_e": "Determinação judicial (art. 5º, XI)",
+          "o_que_acontece": "Só durante o dia",
+          "fontes": [
+            "CF, art. 5º, XI",
+            "2013-q31"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:22:43.211132+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -408,6 +495,103 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:06.062064+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 5º",
+          "na_real": {
+            "texto": "Esta parte é o kit de defesa de quem é preso ou processado: só vai preso em flagrante ou com ordem escrita do juiz; avisam o juiz e a família na hora; o preso pode ficar calado e ter advogado; e ninguém é culpado antes de acabar o último recurso. E traz os remédios: as ações para consertar o abuso.",
+            "fontes": [
+              "CF, art. 5º, LXI",
+              "CF, art. 5º, LXII",
+              "CF, art. 5º, LXIII",
+              "CF, art. 5º, LVII",
+              "CF, art. 5º, LXVIII a LXXIII"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um torcedor é detido na saída do estádio sem estar em flagrante e sem ordem escrita do juiz. A família entra com habeas corpus, que é gratuito, para soltá-lo. Se o problema fosse um cadastro público com um dado errado sobre ele, o caminho seria o habeas data.",
+            "fontes": [
+              "CF, art. 5º, LXI",
+              "CF, art. 5º, LXVIII",
+              "CF, art. 5º, LXXII",
+              "CF, art. 5º, LXXVII"
+            ]
+          },
+          "na_prova": {
+            "texto": "A ordem de prisão é de autoridade JUDICIÁRIA, nunca policial. Ficar calado é direito de todo preso, não só do preso em flagrante. Prisão civil por dívida: só a do devedor de alimentos; a do depositário infiel é ilícita. Tratado de direitos humanos vira emenda com 3/5, em DOIS turnos, em CADA Casa.",
+            "fontes": [
+              "CF, art. 5º, LXI",
+              "CF, art. 5º, LXIII",
+              "CF, art. 5º, LXVII",
+              "Súmula Vinculante 25",
+              "CF, art. 5º, § 3º",
+              "2013-q40 (gabarito B)"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Preso ou ameaçado de prisão ilegal",
+          "o_que_e": "Habeas corpus (art. 5º, LXVIII)",
+          "o_que_acontece": "Protege a liberdade de ir e vir; a ação é gratuita",
+          "fontes": [
+            "CF, art. 5º, LXVIII",
+            "CF, art. 5º, LXXVII"
+          ]
+        },
+        {
+          "situacao": "Quer saber ou corrigir os seus dados num cadastro público",
+          "o_que_e": "Habeas data (art. 5º, LXXII)",
+          "o_que_acontece": "Dá acesso às informações ou retifica os dados; a ação é gratuita",
+          "fontes": [
+            "CF, art. 5º, LXXII",
+            "CF, art. 5º, LXXVII"
+          ]
+        },
+        {
+          "situacao": "Uma autoridade feriu um direito comprovado de cara, e não é caso de HC nem de HD",
+          "o_que_e": "Mandado de segurança (art. 5º, LXIX)",
+          "o_que_acontece": "Protege o direito líquido e certo",
+          "fontes": [
+            "CF, art. 5º, LXIX"
+          ]
+        },
+        {
+          "situacao": "O direito está na Constituição, mas a lei que o faria funcionar nunca saiu",
+          "o_que_e": "Mandado de injunção (art. 5º, LXXI)",
+          "o_que_acontece": "Ataca a falta da norma regulamentadora que impede o direito",
+          "fontes": [
+            "CF, art. 5º, LXXI"
+          ]
+        },
+        {
+          "situacao": "Ato que lesa o patrimônio público, a moralidade administrativa, o meio ambiente ou o patrimônio histórico e cultural",
+          "o_que_e": "Ação popular (art. 5º, LXXIII)",
+          "o_que_acontece": "Qualquer cidadão propõe; sem custas nem sucumbência, salvo má-fé",
+          "fontes": [
+            "CF, art. 5º, LXXIII"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:22:43.211132+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -607,6 +791,85 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 5º",
+          "na_real": {
+            "texto": "Esta parte junta duas coisas. A liberdade de se associar: livre para fins lícitos, nunca paramilitar, e só o juiz fecha uma associação. E as regras do crime e da pena: não há crime sem lei anterior, a lei penal só volta no tempo para ajudar o réu, a pena não passa do condenado e algumas penas são proibidas.",
+            "fontes": [
+              "CF, art. 5º, XVII",
+              "CF, art. 5º, XIX",
+              "CF, art. 5º, XXXIX",
+              "CF, art. 5º, XL",
+              "CF, art. 5º, XLV",
+              "CF, art. 5º, XLVII"
+            ]
+          },
+          "exemplo": {
+            "texto": "O pai é condenado e morre na prisão. O filho não cumpre a pena dele; mas a obrigação de reparar o dano pode ser cobrada do filho, só até o valor da herança que recebeu.",
+            "fontes": [
+              "CF, art. 5º, XLV"
+            ]
+          },
+          "na_prova": {
+            "texto": "Imprescritível só tem dois: RACISMO e AÇÃO DE GRUPOS ARMADOS contra a ordem constitucional. Tortura, tráfico, terrorismo e hediondos são inafiançáveis e insuscetíveis de graça ou anistia, mas NÃO são imprescritíveis. Júri só para crimes DOLOSOS contra a vida. Pena de morte tem uma exceção: guerra declarada.",
+            "fontes": [
+              "CF, art. 5º, XLII",
+              "CF, art. 5º, XLIII",
+              "CF, art. 5º, XLIV",
+              "CF, art. 5º, XXXVIII",
+              "CF, art. 5º, XLVII",
+              "2013-q32 (gabarito A)",
+              "FEPESE-2016-q33 (gabarito C)"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Racismo",
+          "o_que_e": "Inafiançável e imprescritível (art. 5º, XLII)",
+          "o_que_acontece": "Sem fiança, pode ser punido a qualquer tempo, e a pena é de reclusão",
+          "fontes": [
+            "CF, art. 5º, XLII"
+          ]
+        },
+        {
+          "situacao": "Ação de grupos armados, civis ou militares, contra a ordem constitucional e o Estado Democrático",
+          "o_que_e": "Inafiançável e imprescritível (art. 5º, XLIV)",
+          "o_que_acontece": "Sem fiança, e pode ser punido a qualquer tempo",
+          "fontes": [
+            "CF, art. 5º, XLIV",
+            "2013-q32"
+          ]
+        },
+        {
+          "situacao": "Tortura, tráfico de drogas, terrorismo e crimes hediondos",
+          "o_que_e": "Inafiançáveis e insuscetíveis de graça ou anistia (art. 5º, XLIII)",
+          "o_que_acontece": "Sem fiança, sem graça nem anistia, mas não imprescritíveis; respondem mandantes, executores e quem podia evitar e se omitiu",
+          "fontes": [
+            "CF, art. 5º, XLIII"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:22:43.211132+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -797,6 +1060,215 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 136",
+          "na_real": {
+            "texto": "Estado de defesa é o freio de emergência num lugar específico. O Presidente decreta, depois de ouvir dois conselhos, para segurar a ordem pública ameaçada por grave instabilidade ou atingida por uma calamidade natural grande. Depois, o Congresso confirma ou derruba.",
+            "fontes": [
+              "CF, art. 136, caput",
+              "CF, art. 136, § 4º",
+              "CF, art. 136, § 7º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma enchente gigante destrói várias cidades de uma região, e começam os saques. O Presidente decreta estado de defesa só naquela área, por até 30 dias, e manda o decreto ao Congresso em 24 horas.",
+            "fontes": [
+              "CF, art. 136, caput",
+              "CF, art. 136, § 2º",
+              "CF, art. 136, § 4º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Números: até 30 DIAS, prorrogável UMA vez por igual período; o decreto vai ao Congresso em 24 HORAS, que decide por maioria absoluta; prisão por crime contra o Estado até 10 DIAS, salvo autorização do Judiciário; incomunicabilidade do preso é PROIBIDA. Calamidade natural é defesa; guerra é sítio.",
+            "fontes": [
+              "CF, art. 136, § 2º",
+              "CF, art. 136, § 3º",
+              "CF, art. 136, § 4º",
+              "CF, art. 137, II",
+              "FEPESE-2013-q32 (gabarito A)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 137",
+          "na_real": {
+            "texto": "Estado de sítio é o freio mais forte. Aqui o Presidente não decreta sozinho: primeiro pede autorização ao Congresso. Vale para comoção grave de repercussão nacional, para quando o estado de defesa não deu conta, ou para guerra e agressão armada estrangeira.",
+            "fontes": [
+              "CF, art. 137, caput",
+              "CF, art. 137, I",
+              "CF, art. 137, II"
+            ]
+          },
+          "exemplo": {
+            "texto": "O país sofre uma agressão armada de outro. O Presidente pede ao Congresso, que autoriza por maioria absoluta, e só então decreta o estado de sítio.",
+            "fontes": [
+              "CF, art. 137, II",
+              "CF, art. 137, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "Defesa: o Presidente DECRETA e depois o Congresso aprecia. Sítio: o Presidente PEDE AUTORIZAÇÃO antes. A banca troca as hipóteses: calamidade natural não é caso de sítio.",
+            "fontes": [
+              "CF, art. 137, caput",
+              "CF, art. 136, caput",
+              "CF, art. 136, § 4º",
+              "2013-q37 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 138",
+          "na_real": {
+            "texto": "O decreto do sítio diz quanto tempo dura, como vai funcionar e que garantias ficam suspensas. Por comoção grave, até 30 dias de cada vez; por guerra, enquanto a guerra durar.",
+            "fontes": [
+              "CF, art. 138, caput",
+              "CF, art. 138, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma comoção grave toma o país e o sítio é decretado por 30 dias. Se o problema continua, ele pode ser prorrogado, mas cada prorrogação também não passa de 30 dias.",
+            "fontes": [
+              "CF, art. 138, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Sítio por comoção: até 30 dias, prorrogável de cada vez por prazo NÃO SUPERIOR, sem limite de vezes no texto. Defesa: 30 dias e UMA prorrogação só. Sítio por guerra: o tempo que durar a guerra ou a agressão armada.",
+            "fontes": [
+              "CF, art. 138, § 1º",
+              "CF, art. 136, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 144",
+          "na_real": {
+            "texto": "A segurança pública é dever do Estado e responsabilidade de todos. Cada polícia tem o seu papel: a civil investiga (polícia judiciária), a militar patrulha a rua (polícia ostensiva), os bombeiros cuidam da defesa civil, e a polícia penal cuida da segurança dos presídios.",
+            "fontes": [
+              "CF, art. 144, caput",
+              "CF, art. 144, § 4º",
+              "CF, art. 144, § 5º",
+              "CF, art. 144, § 5º-A"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um assalto na rua: a PM chega primeiro e prende em flagrante; a Polícia Civil investiga e reúne as provas; condenado, o preso vai para a penitenciária, onde quem cuida da segurança é a Polícia Penal.",
+            "fontes": [
+              "CF, art. 144, § 4º",
+              "CF, art. 144, § 5º",
+              "CF, art. 144, § 5º-A"
+            ]
+          },
+          "na_prova": {
+            "texto": "Polícia judiciária é da CIVIL (na União, da PF), nunca da PM nem da penal. Forças auxiliares e reserva do Exército são só a PM e os BOMBEIROS militares. Polícia penal (EC 104/2019): segurança dos ESTABELECIMENTOS PENAIS. Guarda municipal: proteção de bens, serviços e instalações do município.",
+            "fontes": [
+              "CF, art. 144, § 1º",
+              "CF, art. 144, § 4º",
+              "CF, art. 144, § 5º-A",
+              "CF, art. 144, § 6º",
+              "CF, art. 144, § 8º",
+              "2013-q35 (gabarito A)",
+              "2019-q44 (gabarito B)"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Calamidade natural grande ou grave instabilidade, num lugar determinado",
+          "o_que_e": "Estado de defesa (art. 136)",
+          "o_que_acontece": "O Presidente decreta e manda ao Congresso em 24 horas; até 30 dias, mais uma prorrogação",
+          "fontes": [
+            "CF, art. 136, caput",
+            "CF, art. 136, § 2º",
+            "CF, art. 136, § 4º"
+          ]
+        },
+        {
+          "situacao": "Comoção grave nacional, defesa que não deu conta, guerra ou agressão armada estrangeira",
+          "o_que_e": "Estado de sítio (art. 137)",
+          "o_que_acontece": "O Presidente só decreta depois da autorização do Congresso, por maioria absoluta",
+          "fontes": [
+            "CF, art. 137"
+          ]
+        },
+        {
+          "situacao": "Investigar o crime que já aconteceu",
+          "o_que_e": "Polícia civil (art. 144, § 4º); na União, a PF",
+          "o_que_acontece": "Polícia judiciária e apuração das infrações penais, exceto as militares",
+          "fontes": [
+            "CF, art. 144, § 4º",
+            "CF, art. 144, § 1º"
+          ]
+        },
+        {
+          "situacao": "Patrulhar a rua e preservar a ordem",
+          "o_que_e": "Polícia militar (art. 144, § 5º)",
+          "o_que_acontece": "Polícia ostensiva e preservação da ordem pública",
+          "fontes": [
+            "CF, art. 144, § 5º"
+          ]
+        },
+        {
+          "situacao": "Segurança do presídio",
+          "o_que_e": "Polícia penal (art. 144, § 5º-A)",
+          "o_que_acontece": "Segurança dos estabelecimentos penais",
+          "fontes": [
+            "CF, art. 144, § 5º-A"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:22:43.211132+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            136,
+            ""
+          ],
+          "fim": [
+            136,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            137,
+            ""
+          ],
+          "fim": [
+            137,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            144,
+            ""
+          ],
+          "fim": [
+            144,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            138,
+            ""
+          ],
+          "fim": [
+            138,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -997,6 +1469,256 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 6º",
+          "na_real": {
+            "texto": "É a lista dos direitos sociais: educação, saúde, alimentação, trabalho, moradia, transporte, lazer, segurança, previdência, proteção à mãe e à criança e ajuda a quem está desamparado. E quem está em vulnerabilidade tem direito a uma renda básica familiar.",
+            "fontes": [
+              "CF, art. 6º",
+              "CF, art. 6º, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma família em situação de vulnerabilidade recebe uma renda básica do poder público, num programa permanente de transferência de renda: é o parágrafo único do art. 6º funcionando.",
+            "fontes": [
+              "CF, art. 6º, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "A banca enfia um intruso na lista ('evangelização') e pergunta o que NÃO é direito social. Decore os 11: educação, saúde, alimentação, trabalho, moradia, transporte, lazer, segurança, previdência social, proteção à maternidade e à infância, assistência aos desamparados.",
+            "fontes": [
+              "CF, art. 6º",
+              "FEPESE-2013-q35 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 7º",
+          "na_real": {
+            "texto": "É o contrato mínimo de todo trabalhador, urbano ou rural: salário mínimo, 13º, férias com um terço a mais, hora extra paga a mais, jornada limitada, licença à gestante, aviso prévio e proteção ao menor.",
+            "fontes": [
+              "CF, art. 7º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O atendente trabalha 8 horas por dia e 44 por semana; se faz hora extra, recebe no mínimo 50% a mais; folga um dia na semana, de preferência no domingo; tira férias recebendo um terço a mais.",
+            "fontes": [
+              "CF, art. 7º, XIII",
+              "CF, art. 7º, XV",
+              "CF, art. 7º, XVI",
+              "CF, art. 7º, XVII"
+            ]
+          },
+          "na_prova": {
+            "texto": "Números que a banca troca: hora extra MÍNIMO 50%; férias mais 1/3; gestante 120 DIAS; aviso prévio MÍNIMO 30 dias; creche até 5 ANOS; turno de revezamento 6 HORAS. Repouso PREFERENCIALMENTE aos domingos, e não 'exclusivamente'. O noturno ganha MAIS que o diurno.",
+            "fontes": [
+              "CF, art. 7º, IX",
+              "CF, art. 7º, XIV",
+              "CF, art. 7º, XV",
+              "CF, art. 7º, XVI",
+              "CF, art. 7º, XVII",
+              "CF, art. 7º, XVIII",
+              "CF, art. 7º, XXI",
+              "CF, art. 7º, XXV",
+              "FEPESE-2024-q35 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 8º",
+          "na_real": {
+            "texto": "Criar sindicato não depende de autorização do governo, basta o registro, e o governo não pode se meter nele. Só pode haver um sindicato da mesma categoria na mesma área, que não pode ser menor que um município. E ninguém é obrigado a se filiar.",
+            "fontes": [
+              "CF, art. 8º, I",
+              "CF, art. 8º, II",
+              "CF, art. 8º, V"
+            ]
+          },
+          "exemplo": {
+            "texto": "O vigilante se candidata a diretor do sindicato e é eleito suplente. Desde o registro da candidatura até um ano depois do fim do mandato, a empresa não pode demiti-lo, a não ser por falta grave.",
+            "fontes": [
+              "CF, art. 8º, VIII"
+            ]
+          },
+          "na_prova": {
+            "texto": "UM sindicato por categoria na mesma base territorial, de no mínimo um MUNICÍPIO. Estabilidade do dirigente: do REGISTRO da candidatura até UM ANO após o mandato, mesmo suplente. Filiação é LIVRE.",
+            "fontes": [
+              "CF, art. 8º, II",
+              "CF, art. 8º, V",
+              "CF, art. 8º, VIII"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 9º",
+          "na_real": {
+            "texto": "Greve é direito: os próprios trabalhadores decidem quando fazer e por qual causa. A lei diz quais serviços são essenciais e como atender o que a população não pode esperar. Quem abusa responde.",
+            "fontes": [
+              "CF, art. 9º",
+              "CF, art. 9º, § 1º",
+              "CF, art. 9º, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Os trabalhadores de uma fábrica decidem em assembleia parar por aumento: quem escolhe a hora e o motivo da greve são eles. Se alguém quebra as máquinas durante a greve, responde pelo abuso.",
+            "fontes": [
+              "CF, art. 9º",
+              "CF, art. 9º, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem decide a OPORTUNIDADE e os INTERESSES da greve são os TRABALHADORES. A lei define os serviços ESSENCIAIS e o atendimento das necessidades inadiáveis. Abuso sujeita às penas da lei.",
+            "fontes": [
+              "CF, art. 9º",
+              "CF, art. 9º, § 1º",
+              "CF, art. 9º, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 10",
+          "na_real": {
+            "texto": "Quando um órgão público discute algo que mexe com o trabalho ou a aposentadoria das pessoas, trabalhadores e patrões têm lugar à mesa.",
+            "fontes": [
+              "CF, art. 10"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um conselho de um órgão público vai decidir regras da previdência: representantes dos trabalhadores e dos empregadores participam da discussão e da decisão.",
+            "fontes": [
+              "CF, art. 10"
+            ]
+          },
+          "na_prova": {
+            "texto": "Participação nos COLEGIADOS de órgãos públicos, quando o assunto é interesse PROFISSIONAL ou PREVIDENCIÁRIO; vale para trabalhadores E empregadores.",
+            "fontes": [
+              "CF, art. 10"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 11",
+          "na_real": {
+            "texto": "Empresa com mais de 200 empregados: eles elegem um representante para conversar direto com o patrão.",
+            "fontes": [
+              "CF, art. 11"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma fábrica com 250 funcionários: eles escolhem um colega para levar os problemas direto à direção.",
+            "fontes": [
+              "CF, art. 11"
+            ]
+          },
+          "na_prova": {
+            "texto": "O número é MAIS DE DUZENTOS empregados; o representante é UM, eleito por eles, com a finalidade EXCLUSIVA de promover o entendimento direto com os empregadores.",
+            "fontes": [
+              "CF, art. 11"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Menor de 14 anos",
+          "o_que_e": "Nenhum trabalho (art. 7º, XXXIII)",
+          "o_que_acontece": "Proibido, nem como aprendiz",
+          "fontes": [
+            "CF, art. 7º, XXXIII"
+          ]
+        },
+        {
+          "situacao": "A partir de 14 e menor de 16 anos",
+          "o_que_e": "Só como aprendiz (art. 7º, XXXIII)",
+          "o_que_acontece": "Pode trabalhar na condição de aprendiz",
+          "fontes": [
+            "CF, art. 7º, XXXIII"
+          ]
+        },
+        {
+          "situacao": "A partir de 16 e menor de 18 anos",
+          "o_que_e": "Trabalho com limites (art. 7º, XXXIII)",
+          "o_que_acontece": "Pode trabalhar, mas não à noite nem em serviço perigoso ou insalubre",
+          "fontes": [
+            "CF, art. 7º, XXXIII",
+            "FEPESE-2024-q35"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:22:43.211132+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            6,
+            ""
+          ],
+          "fim": [
+            6,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            7,
+            ""
+          ],
+          "fim": [
+            7,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            8,
+            ""
+          ],
+          "fim": [
+            8,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            9,
+            ""
+          ],
+          "fim": [
+            9,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            10,
+            ""
+          ],
+          "fim": [
+            10,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            11,
+            ""
+          ],
+          "fim": [
+            11,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -1203,6 +1925,203 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CF, art. 12",
+          "na_real": {
+            "texto": "Nato é quem já nasce brasileiro: nasceu aqui, se os pais estrangeiros não estavam a serviço do país deles; ou nasceu fora, filho de brasileiro a serviço do Brasil, registrado em repartição brasileira, ou que vem morar aqui e opta. Naturalizado é quem vira brasileiro depois, a pedido. A lei não pode tratar os dois diferente, salvo onde a própria Constituição trata.",
+            "fontes": [
+              "CF, art. 12, I",
+              "CF, art. 12, II",
+              "CF, art. 12, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Filho de turistas argentinos nasce em Florianópolis: é brasileiro nato. Filho de diplomatas argentinos a serviço da Argentina, nascido aqui: não é. Um angolano que mora aqui há um ano ininterrupto, com idoneidade moral, pode se naturalizar.",
+            "fontes": [
+              "CF, art. 12, I, a",
+              "CF, art. 12, II, a"
+            ]
+          },
+          "na_prova": {
+            "texto": "Privativos de NATO (7): Presidente e Vice, Presidente da Câmara, Presidente do Senado, Ministro do STF, carreira diplomática, oficial das Forças Armadas e Ministro da DEFESA. Senador, Governador e Ministro de outro tribunal NÃO. Língua portuguesa: 1 ano de residência; os outros estrangeiros: mais de 15 anos e sem condenação penal.",
+            "fontes": [
+              "CF, art. 12, § 3º",
+              "CF, art. 12, II",
+              "2013-q34 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 14",
+          "na_real": {
+            "texto": "O povo manda pelo voto direto, secreto e de igual valor, e também por plebiscito, referendo e iniciativa popular. Votar é obrigatório dos 18 anos em diante; é opcional para analfabetos, maiores de 70 e jovens de 16 e 17. Para ser candidato há condições, como a idade mínima de cada cargo.",
+            "fontes": [
+              "CF, art. 14, caput",
+              "CF, art. 14, § 1º",
+              "CF, art. 14, § 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "A jovem de 16 anos pode tirar o título e votar, se quiser. O avô de 72 também vota só se quiser. O recruta, no período do serviço militar obrigatório, não pode nem se alistar como eleitor.",
+            "fontes": [
+              "CF, art. 14, § 1º",
+              "CF, art. 14, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Idades: 35 Presidente, Vice e SENADOR; 30 Governador e Vice; 21 Deputado, Prefeito, Vice-Prefeito e juiz de paz; 18 VEREADOR. Estrangeiro e conscrito NÃO se alistam: não é caso de voto facultativo. Reeleição: UM único período subsequente.",
+            "fontes": [
+              "CF, art. 14, § 3º, VI",
+              "CF, art. 14, § 2º",
+              "CF, art. 14, § 5º",
+              "2019-q43 (gabarito A)",
+              "FEPESE-2013-q40 (gabarito D)"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 15",
+          "na_real": {
+            "texto": "Cassar direitos políticos é proibido. A pessoa só os perde, ou fica com eles suspensos, em cinco casos: naturalização cancelada, incapacidade civil absoluta, condenação criminal definitiva (enquanto durarem os efeitos), recusa de obrigação a todos imposta e improbidade administrativa.",
+            "fontes": [
+              "CF, art. 15"
+            ]
+          },
+          "exemplo": {
+            "texto": "O condenado com sentença definitiva fica com os direitos políticos suspensos enquanto durarem os efeitos da condenação: no dia da eleição, não vota.",
+            "fontes": [
+              "CF, art. 15, III"
+            ]
+          },
+          "na_prova": {
+            "texto": "A CF PROÍBE a cassação; admite só PERDA ou SUSPENSÃO, nos cinco casos. A condenação criminal precisa ter TRANSITADO EM JULGADO e suspende enquanto durarem os seus EFEITOS.",
+            "fontes": [
+              "CF, art. 15",
+              "CF, art. 15, III"
+            ]
+          }
+        },
+        {
+          "artigo": "CF, art. 16",
+          "na_real": {
+            "texto": "Lei que muda as regras da eleição vale desde que é publicada, mas não pega a eleição que acontecer em menos de um ano. É para ninguém mudar a regra com o jogo em andamento.",
+            "fontes": [
+              "CF, art. 16"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma lei eleitoral nova é publicada em março, e a eleição é em outubro do mesmo ano: ela já está em vigor, mas não se aplica a essa eleição.",
+            "fontes": [
+              "CF, art. 16"
+            ]
+          },
+          "na_prova": {
+            "texto": "A lei entra em VIGOR na publicação; o que espera um ano é a APLICAÇÃO à eleição. A banca troca: 'só entra em vigor um ano depois'.",
+            "fontes": [
+              "CF, art. 16"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Nasceu no Brasil (pais estrangeiros fora do serviço do país deles), ou fora, filho de brasileiro a serviço do Brasil, registrado ou que veio morar e optou",
+          "o_que_e": "Brasileiro nato (art. 12, I)",
+          "o_que_acontece": "Pode ocupar todos os cargos, inclusive os privativos de nato",
+          "fontes": [
+            "CF, art. 12, I",
+            "CF, art. 12, § 3º"
+          ]
+        },
+        {
+          "situacao": "Estrangeiro que pediu e virou brasileiro",
+          "o_que_e": "Brasileiro naturalizado (art. 12, II)",
+          "o_que_acontece": "Mesmos direitos, salvo os casos da própria Constituição, como os cargos privativos de nato",
+          "fontes": [
+            "CF, art. 12, II",
+            "CF, art. 12, § 2º",
+            "CF, art. 12, § 3º"
+          ]
+        },
+        {
+          "situacao": "Maiores de 18 anos",
+          "o_que_e": "Voto obrigatório (art. 14, § 1º, I)",
+          "o_que_acontece": "Têm de se alistar e votar",
+          "fontes": [
+            "CF, art. 14, § 1º, I"
+          ]
+        },
+        {
+          "situacao": "Analfabetos, maiores de 70 e quem tem 16 ou 17 anos",
+          "o_que_e": "Voto facultativo (art. 14, § 1º, II)",
+          "o_que_acontece": "Votam se quiserem",
+          "fontes": [
+            "CF, art. 14, § 1º, II",
+            "FEPESE-2013-q40"
+          ]
+        },
+        {
+          "situacao": "Estrangeiros e conscritos",
+          "o_que_e": "Inalistáveis (art. 14, § 2º)",
+          "o_que_acontece": "Não podem se alistar como eleitores",
+          "fontes": [
+            "CF, art. 14, § 2º",
+            "2019-q43"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:22:43.211132+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CF",
+          "inicio": [
+            12,
+            ""
+          ],
+          "fim": [
+            12,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            14,
+            ""
+          ],
+          "fim": [
+            14,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            15,
+            ""
+          ],
+          "fim": [
+            15,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            16,
+            ""
+          ],
+          "fim": [
+            16,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
