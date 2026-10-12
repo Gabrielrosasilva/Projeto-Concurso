@@ -1325,8 +1325,8 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print(f"{resultado.get('termos_novos', 0)} termo(s) novo(s) no glossário "
                       f"(data/glossario.json).")
         console.print("[dim]Dentro de cada ficha, em data/fichas.json (versionado). "
-                      "Aparecem no \"🗣 Traduz pra mim\" de cada artigo do Resumo; "
-                      "confira na ficha, em \"✓ Conferi a tradução\".[/]")
+                      "Aparecem no \"Traduz pra mim\" de cada artigo do Resumo; "
+                      "confira na ficha, em \"Conferi a tradução\".[/]")
     elif resultado["tipo"] == "macetes":
         console.print("[dim]Em data/macetes.json (versionado).[/]")
     elif resultado["tipo"] == "explicacoes":

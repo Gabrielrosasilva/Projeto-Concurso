@@ -2240,6 +2240,348 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:06.062064+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CP, art. 14",
+          "na_real": {
+            "texto": "Crime consumado é o gol que entrou: aconteceu tudo o que a lei descreve. Tentado é a bola na trave: a execução começou, mas algo de fora impediu o final.",
+            "fontes": [
+              "CP, art. 14, I e II"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ele mira no rival e atira para matar, mas a vítima se abaixa e a bala pega na parede. Homicídio tentado: ele queria terminar, quem não deixou foi o acaso.",
+            "fontes": [
+              "CP, art. 14, II"
+            ]
+          },
+          "na_prova": {
+            "texto": "A pena da tentativa é a do crime consumado diminuída de UM A DOIS TERÇOS. A banca troca por 'pela metade'. E 'basta iniciar a execução' está incompleto: falta não consumar por circunstância alheia à vontade do agente.",
+            "fontes": [
+              "CP, art. 14, parágrafo único",
+              "CP, art. 14, II",
+              "2019-q55"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 15",
+          "na_real": {
+            "texto": "Duas saídas de emergência: parar no meio porque decidiu parar (desistência voluntária), ou terminar tudo e depois agir para o resultado não acontecer, e conseguir (arrependimento eficaz). Nas duas, o crime planejado sai da conta: fica só o que já foi feito.",
+            "fontes": [
+              "CP, art. 15"
+            ]
+          },
+          "exemplo": {
+            "texto": "Na saída do jogo, quebra o vidro do carro do torcedor rival para levar o som, se arrepende e vai embora sem levar nada. Não responde por furto tentado: só pelo vidro quebrado.",
+            "fontes": [
+              "CP, art. 15"
+            ]
+          },
+          "na_prova": {
+            "texto": "Pergunte: quem parou foi ele ou foi o acaso? Se foi ele, é o art. 15 e responde só pelos atos já praticados. Se foi o acaso, é tentativa (art. 14, II). A banca chama a desistência de 'tentativa' para derrubar: desistência voluntária NÃO é tentativa.",
+            "fontes": [
+              "CP, art. 15",
+              "CP, art. 14, II",
+              "2019-q55"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 16",
+          "na_real": {
+            "texto": "O crime já aconteceu, mas a pessoa devolve a coisa ou paga o prejuízo por vontade própria, antes de o juiz receber a denúncia: a pena cai de um a dois terços. Só vale para crime sem violência ou grave ameaça à pessoa.",
+            "fontes": [
+              "CP, art. 16"
+            ]
+          },
+          "exemplo": {
+            "texto": "Pegou escondido a chuteira do colega no vestiário e, arrependido, devolveu antes de o juiz receber a denúncia. O furto aconteceu, mas a pena diminui.",
+            "fontes": [
+              "CP, art. 16"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três travas que a banca mexe: sem violência ou grave ameaça À PESSOA; até o RECEBIMENTO da denúncia ou da queixa; redução de UM A DOIS TERÇOS. E aqui o crime já se consumou: não confunda com a desistência do art. 15.",
+            "fontes": [
+              "CP, art. 16",
+              "CP, art. 15"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 17",
+          "na_real": {
+            "texto": "Se o meio não funciona de jeito nenhum, ou o alvo não serve para aquele crime, não existe nem tentativa: ninguém é punido por um crime que era impossível de acontecer.",
+            "fontes": [
+              "CP, art. 17"
+            ]
+          },
+          "exemplo": {
+            "texto": "Tenta matar o desafeto com uma arma de brinquedo, ou 'atira' em alguém que já estava morto. Crime impossível: não se pune nem a tentativa.",
+            "fontes": [
+              "CP, art. 17"
+            ]
+          },
+          "na_prova": {
+            "texto": "A palavra que derruba é ABSOLUTA: ineficácia absoluta do meio ou absoluta impropriedade do objeto. Em 2019, a alternativa certa era a letra deste artigo, contra a fração da pena e a desistência trocadas.",
+            "fontes": [
+              "CP, art. 17",
+              "2019-q55 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 18",
+          "na_real": {
+            "texto": "Dolo é querer o resultado, ou topar o risco de que ele aconteça. Culpa é causar o resultado sem querer, por descuido: imprudência, negligência ou imperícia. Se a lei não prevê a forma culposa, só há crime com dolo.",
+            "fontes": [
+              "CP, art. 18, I e II",
+              "CP, art. 18, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Atirar no rival para matar: dolo. Atirar para o alto na festa lotada, sabendo que pode acertar alguém, e não estar nem aí: também é dolo, porque assumiu o risco. Limpar a arma sem ver se estava carregada e ela disparar no vizinho: culpa.",
+            "fontes": [
+              "CP, art. 18, I e II"
+            ]
+          },
+          "na_prova": {
+            "texto": "'Assumiu o risco de produzir o resultado' é DOLO, e não culpa consciente: a banca troca as duas. Imprudência, negligência e imperícia são sempre CULPA, nunca dolo. E o culposo só se pune quando a lei prevê expressamente.",
+            "fontes": [
+              "CP, art. 18, I",
+              "CP, art. 18, II",
+              "CP, art. 18, parágrafo único",
+              "2013-q49 (gabarito E)",
+              "2019-q53"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 19",
+          "na_real": {
+            "texto": "O resultado mais grave que aumenta a pena só entra na conta de quem o causou pelo menos com culpa. Sem dolo e sem culpa nesse resultado, o aumento não vale.",
+            "fontes": [
+              "CP, art. 19"
+            ]
+          },
+          "exemplo": {
+            "texto": "Deu um soco no adversário para machucar; ele caiu, bateu a cabeça no meio-fio e morreu. A morte só pesa na pena se o agressor teve ao menos culpa nela.",
+            "fontes": [
+              "CP, art. 19"
+            ]
+          },
+          "na_prova": {
+            "texto": "A expressão é 'AO MENOS CULPOSAMENTE'. Em 2019, a alternativa certa era a letra deste artigo; as erradas punham imperícia como dolo e 'assumir o risco' como culpa.",
+            "fontes": [
+              "CP, art. 19",
+              "2019-q53 (gabarito D)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 20",
+          "na_real": {
+            "texto": "Erro de tipo é errar sobre o FATO: a pessoa não sabe que está fazendo aquilo que a lei descreve. Isso tira o dolo; se a lei tiver a forma culposa, ainda pode responder por culpa.",
+            "fontes": [
+              "CP, art. 20, caput"
+            ]
+          },
+          "exemplo": {
+            "texto": "Sai do vestiário com a mochila do colega achando que era a sua, porque eram iguaizinhas: o dolo de furtar cai. Já quem quer agredir o juiz e acerta o bandeirinha responde como se tivesse acertado o juiz.",
+            "fontes": [
+              "CP, art. 20, caput",
+              "CP, art. 20, § 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Erro sobre a PESSOA não isenta de pena: valem as condições de quem ele queria atingir, e não as da vítima atingida. E o erro de tipo exclui o DOLO; quem isenta de pena, se inevitável, é o erro sobre a ilicitude (art. 21).",
+            "fontes": [
+              "CP, art. 20, caput",
+              "CP, art. 20, § 3º",
+              "CP, art. 21"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 21",
+          "na_real": {
+            "texto": "Ninguém se livra dizendo 'eu não conhecia a lei'. Outra coisa é achar, por engano, que aquilo era permitido: se não tinha como perceber, fica isento de pena; se tinha, a pena pode cair.",
+            "fontes": [
+              "CP, art. 21"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um torcedor estrangeiro entra no estádio com um sinalizador achando que é permitido, porque na terra dele é. Se nada ali deixava perceber a proibição, fica isento; se havia aviso na entrada, a pena pode cair de um sexto a um terço.",
+            "fontes": [
+              "CP, art. 21",
+              "CP, art. 21, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "As frações: erro sobre a ilicitude evitável, UM SEXTO A UM TERÇO; tentativa e arrependimento posterior, UM A DOIS TERÇOS. A banca troca uma pela outra. E desconhecer a lei nunca desculpa: é inescusável.",
+            "fontes": [
+              "CP, art. 21",
+              "CP, art. 14, parágrafo único",
+              "CP, art. 16"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Começou, e algo de fora impediu de terminar",
+          "o_que_e": "Tentativa (art. 14, II)",
+          "o_que_acontece": "Pena do crime consumado diminuída de um a dois terços",
+          "fontes": [
+            "CP, art. 14, II",
+            "CP, art. 14, parágrafo único"
+          ]
+        },
+        {
+          "situacao": "Começou e parou porque quis",
+          "o_que_e": "Desistência voluntária (art. 15)",
+          "o_que_acontece": "Responde só pelos atos já praticados",
+          "fontes": [
+            "CP, art. 15"
+          ]
+        },
+        {
+          "situacao": "Fez tudo, mas agiu e impediu o resultado",
+          "o_que_e": "Arrependimento eficaz (art. 15)",
+          "o_que_acontece": "Responde só pelos atos já praticados",
+          "fontes": [
+            "CP, art. 15"
+          ]
+        },
+        {
+          "situacao": "O crime já aconteceu; devolveu ou reparou por vontade própria, antes de o juiz receber a denúncia, sem violência ou grave ameaça à pessoa",
+          "o_que_e": "Arrependimento posterior (art. 16)",
+          "o_que_acontece": "Pena reduzida de um a dois terços",
+          "fontes": [
+            "CP, art. 16"
+          ]
+        },
+        {
+          "situacao": "O meio não funciona de jeito nenhum, ou o alvo não serve para o crime",
+          "o_que_e": "Crime impossível (art. 17)",
+          "o_que_acontece": "Não se pune nem a tentativa",
+          "fontes": [
+            "CP, art. 17"
+          ]
+        },
+        {
+          "situacao": "Errou sobre o fato: não sabia que fazia o que a lei descreve",
+          "o_que_e": "Erro de tipo (art. 20)",
+          "o_que_acontece": "Exclui o dolo; pode responder por culpa, se a lei prevê a forma culposa",
+          "fontes": [
+            "CP, art. 20, caput"
+          ]
+        },
+        {
+          "situacao": "Sabia o que fazia, mas achou que era permitido",
+          "o_que_e": "Erro sobre a ilicitude do fato, o erro de proibição (art. 21)",
+          "o_que_acontece": "Inevitável: isento de pena. Evitável: a pena pode cair de um sexto a um terço",
+          "fontes": [
+            "CP, art. 21"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T16:53:28.152970+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CP",
+          "inicio": [
+            14,
+            ""
+          ],
+          "fim": [
+            14,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            15,
+            ""
+          ],
+          "fim": [
+            15,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            18,
+            ""
+          ],
+          "fim": [
+            18,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            19,
+            ""
+          ],
+          "fim": [
+            19,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            20,
+            ""
+          ],
+          "fim": [
+            20,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            21,
+            ""
+          ],
+          "fim": [
+            21,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            16,
+            ""
+          ],
+          "fim": [
+            16,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            17,
+            ""
+          ],
+          "fim": [
+            17,
+            ""
+          ]
+        }
+      ]
     }
   },
   {

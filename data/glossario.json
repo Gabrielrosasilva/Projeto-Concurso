@@ -1,0 +1,171 @@
+[
+  {
+    "termo": "absoluta impropriedade do objeto",
+    "variantes": [],
+    "significado": "O alvo não serve para o crime: não dá para matar quem já estava morto.",
+    "fontes": [
+      "CP, art. 17"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "circunstâncias alheias à vontade do agente",
+    "variantes": [],
+    "significado": "Coisas de fora, que não dependem de quem está cometendo o crime: a polícia chegou, a vítima fugiu, a arma travou.",
+    "fontes": [
+      "CP, art. 14, II"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "consumado",
+    "variantes": [
+      "consuma",
+      "consumar"
+    ],
+    "significado": "O crime completo: aconteceu tudo o que a lei descreve.",
+    "fontes": [
+      "CP, art. 14, I"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "culpa consciente",
+    "variantes": [],
+    "significado": "Quando a pessoa vê o risco, mas acredita de verdade que o resultado não vai acontecer. É culpa, e não dolo.",
+    "fontes": [
+      "CP, art. 18, II",
+      "doutrina (dolo eventual x culpa consciente)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "culposamente",
+    "variantes": [
+      "culposo",
+      "culposa"
+    ],
+    "significado": "Por culpa: sem querer o resultado, por descuido.",
+    "fontes": [
+      "CP, art. 18, II",
+      "CP, art. 19"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "denúncia",
+    "variantes": [
+      "queixa"
+    ],
+    "significado": "A acusação formal entregue ao juiz: a denúncia é do Ministério Público; a queixa, da própria vítima, nos crimes em que é ela quem acusa.",
+    "fontes": [
+      "CP, art. 16"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "dolo eventual",
+    "variantes": [],
+    "significado": "Quando a pessoa não quer exatamente o resultado, mas topa o risco de ele acontecer.",
+    "fontes": [
+      "CP, art. 18, I"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "elemento do tipo",
+    "variantes": [
+      "elementos do tipo",
+      "elemento constitutivo do tipo"
+    ],
+    "significado": "O tipo é a descrição do crime na lei; cada pedaço dessa descrição é um elemento dele.",
+    "fontes": [
+      "CP, art. 20, caput"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "ilicitude",
+    "variantes": [],
+    "significado": "O fato ser contra a lei, proibido.",
+    "fontes": [
+      "CP, art. 21"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "imperícia",
+    "variantes": [],
+    "significado": "Falta de habilidade técnica de quem devia saber fazer: o profissional que erra no próprio ofício.",
+    "fontes": [
+      "CP, art. 18, II",
+      "doutrina (modalidades de culpa)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "imprudência",
+    "variantes": [],
+    "significado": "Fazer algo arriscado sem o cuidado devido, como correr demais com o carro.",
+    "fontes": [
+      "CP, art. 18, II",
+      "doutrina (modalidades de culpa)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "ineficácia absoluta do meio",
+    "variantes": [],
+    "significado": "O meio usado não funciona de jeito nenhum para aquele crime, como uma arma de brinquedo para matar.",
+    "fontes": [
+      "CP, art. 17"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "inescusável",
+    "variantes": [],
+    "significado": "Que não tem desculpa: dizer 'eu não sabia que era crime' não livra ninguém.",
+    "fontes": [
+      "CP, art. 21"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "isenta de pena",
+    "variantes": [
+      "isento de pena",
+      "isenção de pena"
+    ],
+    "significado": "A pessoa não recebe pena nenhuma.",
+    "fontes": [
+      "CP, art. 21"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "negligência",
+    "variantes": [],
+    "significado": "Deixar de tomar um cuidado que devia, como não conferir se a arma estava carregada.",
+    "fontes": [
+      "CP, art. 18, II",
+      "doutrina (modalidades de culpa)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  }
+]
