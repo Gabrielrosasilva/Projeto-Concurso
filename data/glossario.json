@@ -1,5 +1,15 @@
 [
   {
+    "termo": "abolitio criminis",
+    "variantes": [],
+    "significado": "Quando uma lei nova deixa de considerar o fato crime.",
+    "fontes": [
+      "CP, art. 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "absoluta impropriedade do objeto",
     "variantes": [],
     "significado": "O alvo não serve para o crime: não dá para matar quem já estava morto.",
@@ -42,6 +52,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "ato de ofício",
+    "variantes": [],
+    "significado": "Um ato que faz parte do serviço do cargo.",
+    "fontes": [
+      "CP, art. 319"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "base territorial",
     "variantes": [],
     "significado": "A área que um sindicato representa; não pode ser menor que um município.",
@@ -50,6 +70,43 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "cargo em comissão",
+    "variantes": [
+      "cargos em comissão"
+    ],
+    "significado": "Cargo de confiança, ocupado por nomeação livre, sem concurso.",
+    "fontes": [
+      "CP, art. 327, § 2º",
+      "doutrina (direito administrativo)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "caso fortuito ou força maior",
+    "variantes": [],
+    "significado": "Algo imprevisível ou que não dava para evitar: a pessoa não teve culpa naquilo.",
+    "fontes": [
+      "CP, art. 28, § 1º",
+      "doutrina (direito civil)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "causa superveniente relativamente independente",
+    "variantes": [
+      "superveniência de causa relativamente independente",
+      "causa superveniente"
+    ],
+    "significado": "Uma causa que aparece depois da conduta, ligada a ela, mas que segue um rumo próprio até o resultado.",
+    "fontes": [
+      "CP, art. 13, § 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "circunstâncias alheias à vontade do agente",
@@ -62,6 +119,16 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "coação irresistível",
+    "variantes": [],
+    "significado": "Ser forçado de um jeito que não dava para resistir.",
+    "fontes": [
+      "CP, art. 22"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "comoção grave",
     "variantes": [],
     "significado": "Uma desordem enorme, que abala o país inteiro.",
@@ -70,6 +137,36 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "cômputo",
+    "variantes": [],
+    "significado": "A conta, a contagem.",
+    "fontes": [
+      "CP, art. 10"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "concussão",
+    "variantes": [],
+    "significado": "O servidor exigir uma vantagem que não lhe é devida, usando a função.",
+    "fontes": [
+      "CP, art. 316"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "condescendência criminosa",
+    "variantes": [],
+    "significado": "O chefe deixar de punir, por tolerância, o subordinado que errou no cargo.",
+    "fontes": [
+      "CP, art. 320"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "conscritos",
@@ -113,6 +210,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "corrupção passiva",
+    "variantes": [],
+    "significado": "O servidor pedir, receber ou aceitar promessa de vantagem indevida por causa da função.",
+    "fontes": [
+      "CP, art. 317"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "crimes hediondos",
     "variantes": [
       "hediondos"
@@ -134,6 +241,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "culpabilidade",
+    "variantes": [],
+    "significado": "A reprovação da pessoa pelo que fez: dá para culpá-la por aquilo?",
+    "fontes": [
+      "CP, art. 22",
+      "doutrina (conceito analítico de crime)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "culposamente",
@@ -194,6 +312,18 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "elementares",
+    "variantes": [
+      "elementar"
+    ],
+    "significado": "As partes que formam a definição do crime: sem elas, não é aquele crime.",
+    "fontes": [
+      "CP, art. 30"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "elemento do tipo",
     "variantes": [
       "elementos do tipo",
@@ -205,6 +335,102 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "entidade paraestatal",
+    "variantes": [],
+    "significado": "Entidade que não é órgão do governo, mas atua ao lado dele com dinheiro ou função pública.",
+    "fontes": [
+      "CP, art. 327, § 1º",
+      "doutrina (direito administrativo)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "equivalência dos antecedentes",
+    "variantes": [],
+    "significado": "Tudo o que veio antes e sem o qual o resultado não aconteceria é causa.",
+    "fontes": [
+      "CP, art. 13, caput",
+      "doutrina (teoria da equivalência dos antecedentes)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "estado de necessidade",
+    "variantes": [],
+    "significado": "Sacrificar um direito para salvar outro de um perigo atual que a pessoa não criou e não podia evitar de outro jeito.",
+    "fontes": [
+      "CP, art. 24"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "estrito cumprimento de dever legal",
+    "variantes": [],
+    "significado": "Fazer exatamente o que a lei manda fazer, como o policial que prende em flagrante.",
+    "fontes": [
+      "CP, art. 23, III"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "excesso de exação",
+    "variantes": [],
+    "significado": "Cobrar tributo que se sabe indevido, ou cobrar o devido de um jeito humilhante que a lei não autoriza.",
+    "fontes": [
+      "CP, art. 316, § 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "excludentes de ilicitude",
+    "variantes": [
+      "excludente de ilicitude",
+      "exclusão de ilicitude"
+    ],
+    "significado": "As situações em que o fato deixa de ser crime: o art. 23 lista quatro.",
+    "fontes": [
+      "CP, art. 23"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "exercício regular de direito",
+    "variantes": [],
+    "significado": "Usar um direito que a lei dá, dentro dos limites dele, como o lutador dentro das regras do esporte.",
+    "fontes": [
+      "CP, art. 23, III"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "extraterritorialidade",
+    "variantes": [],
+    "significado": "A lei brasileira valendo para crime cometido fora do país.",
+    "fontes": [
+      "CP, art. 7º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "fé pública",
+    "variantes": [],
+    "significado": "A confiança que todos depositam em documentos, moedas e sinais oficiais.",
+    "fontes": [
+      "CP, art. 7º, I, b",
+      "doutrina (crimes contra a fé pública)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "flagrante delito",
@@ -227,6 +453,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "garantidor",
+    "variantes": [],
+    "significado": "Quem tem o dever de evitar o resultado: por lei, por ter assumido essa responsabilidade, ou por ter criado o risco.",
+    "fontes": [
+      "CP, art. 13, § 2º",
+      "doutrina (crime omissivo impróprio)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "habeas corpus",
@@ -269,6 +506,16 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "iminente",
+    "variantes": [],
+    "significado": "Que está prestes a acontecer.",
+    "fontes": [
+      "CP, art. 25"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "imperícia",
     "variantes": [],
     "significado": "Falta de habilidade técnica de quem devia saber fazer: o profissional que erra no próprio ofício.",
@@ -302,6 +549,29 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "imputabilidade",
+    "variantes": [],
+    "significado": "A capacidade de responder pelo crime: entender que é errado e se controlar.",
+    "fontes": [
+      "CP, art. 26",
+      "CP, art. 28"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "imputação",
+    "variantes": [
+      "imputados"
+    ],
+    "significado": "Atribuir o resultado a alguém: dizer que é obra dele.",
+    "fontes": [
+      "CP, art. 13"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "inafiançável",
@@ -338,6 +608,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "indulgência",
+    "variantes": [],
+    "significado": "Tolerância, passar a mão na cabeça.",
+    "fontes": [
+      "CP, art. 320"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "ineficácia absoluta do meio",
     "variantes": [],
     "significado": "O meio usado não funciona de jeito nenhum para aquele crime, como uma arma de brinquedo para matar.",
@@ -356,6 +636,30 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "inimputável",
+    "variantes": [
+      "inimputáveis"
+    ],
+    "significado": "Quem não pode responder pelo crime, por doença mental ou por ser menor de 18.",
+    "fontes": [
+      "CP, art. 26",
+      "CP, art. 27"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "instigação",
+    "variantes": [],
+    "significado": "Reforçar a ideia que a pessoa já tinha de cometer o crime.",
+    "fontes": [
+      "CP, art. 31",
+      "doutrina (concurso de pessoas)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "insuscetíveis de graça ou anistia",
@@ -394,6 +698,27 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "legislação especial",
+    "variantes": [],
+    "significado": "Lei própria, fora do Código Penal. Para o menor de 18, é o Estatuto da Criança e do Adolescente.",
+    "fontes": [
+      "CP, art. 27",
+      "doutrina (Lei 8.069/1990)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "legítima defesa",
+    "variantes": [],
+    "significado": "Reagir com moderação a uma agressão injusta, atual ou iminente, contra si ou contra outra pessoa.",
+    "fontes": [
+      "CP, art. 25"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "mandado de injunção",
     "variantes": [],
     "significado": "A ação para quando a lei que faria um direito da Constituição funcionar nunca foi feita.",
@@ -414,6 +739,26 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "manifestamente ilegal",
+    "variantes": [],
+    "significado": "Claramente ilegal, de um jeito que qualquer um percebe.",
+    "fontes": [
+      "CP, art. 22"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "medida de segurança",
+    "variantes": [],
+    "significado": "O tratamento, internação ou acompanhamento, aplicado ao inimputável no lugar da pena.",
+    "fontes": [
+      "CP, art. 97"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "negligência",
     "variantes": [],
     "significado": "Deixar de tomar um cuidado que devia, como não conferir se a arma estava carregada.",
@@ -423,6 +768,28 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "omissivo impróprio",
+    "variantes": [],
+    "significado": "O crime do garantidor que fica parado: ele responde pelo resultado, como se o tivesse causado.",
+    "fontes": [
+      "CP, art. 13, § 2º",
+      "doutrina (crime omissivo impróprio)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "omissivo próprio",
+    "variantes": [],
+    "significado": "O crime que é o próprio deixar de fazer, descrito na lei, como a omissão de socorro.",
+    "fontes": [
+      "CP, art. 135",
+      "doutrina (crime omissivo próprio)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "ônus da sucumbência",
@@ -446,6 +813,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "peculato",
+    "variantes": [],
+    "significado": "O servidor ficar com, ou desviar, o que tinha nas mãos por causa do cargo.",
+    "fontes": [
+      "CP, art. 312"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "plebiscito",
@@ -490,6 +867,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "prevaricação",
+    "variantes": [],
+    "significado": "O servidor atrasar, deixar de fazer ou fazer contra a lei o seu serviço para satisfazer interesse ou sentimento pessoal.",
+    "fontes": [
+      "CP, art. 319"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "prisão civil",
     "variantes": [],
     "significado": "Prisão que não é castigo por crime, mas um jeito de forçar o pagamento de uma dívida. Hoje, só a do devedor de pensão alimentícia.",
@@ -501,6 +888,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "punibilidade",
+    "variantes": [],
+    "significado": "A possibilidade de o Estado punir. Extinta a punibilidade, não há mais pena.",
+    "fontes": [
+      "CP, art. 312, § 3º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
     "termo": "referendo",
     "variantes": [],
     "significado": "O povo confirma ou rejeita DEPOIS que a decisão foi tomada.",
@@ -510,6 +907,39 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "retroatividade",
+    "variantes": [
+      "retroage",
+      "retroagir"
+    ],
+    "significado": "A lei nova voltar no tempo e valer para fatos de antes dela. No penal, só para ajudar o réu.",
+    "fontes": [
+      "CP, art. 2º, parágrafo único"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "semi-imputável",
+    "variantes": [],
+    "significado": "Quem entendia só em parte o que fazia: responde, mas com pena menor.",
+    "fontes": [
+      "CP, art. 26, parágrafo único"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "sentença irrecorrível",
+    "variantes": [],
+    "significado": "Decisão da qual não cabe mais recurso.",
+    "fontes": [
+      "CP, art. 312, § 3º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "soberania dos veredictos",
@@ -532,6 +962,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "teoria monista",
+    "variantes": [],
+    "significado": "Todos os que participam do crime respondem pelo mesmo crime.",
+    "fontes": [
+      "CP, art. 29",
+      "doutrina (concurso de pessoas)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
     "termo": "trabalhador avulso",
@@ -568,5 +1009,40 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "ubiquidade",
+    "variantes": [],
+    "significado": "Estar em todo lugar: o crime é do lugar da ação e também do lugar do resultado.",
+    "fontes": [
+      "CP, art. 6º",
+      "doutrina (teoria da ubiquidade)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "ultratividade",
+    "variantes": [
+      "ultrativa",
+      "ultra-atividade"
+    ],
+    "significado": "A lei continua valendo para os fatos do tempo dela, mesmo depois de acabar.",
+    "fontes": [
+      "CP, art. 3º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "vantagem indevida",
+    "variantes": [],
+    "significado": "Qualquer benefício que o servidor não tem direito de receber: dinheiro, presente, favor.",
+    "fontes": [
+      "CP, art. 316",
+      "CP, art. 317"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:28:51.237709+00:00"
   }
 ]

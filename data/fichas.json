@@ -2290,6 +2290,363 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CP, art. 1º",
+          "na_real": {
+            "texto": "Só é crime o que uma lei anterior descreve como crime, e só existe a pena que a lei já previa antes. Sem lei antes do fato, não tem crime nem pena.",
+            "fontes": [
+              "CP, art. 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma conduta da internet vira crime por uma lei publicada em junho. Quem fez a mesma coisa em maio não responde: quando agiu, ainda não havia a lei.",
+            "fontes": [
+              "CP, art. 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Dois pedidos juntos: LEI ANTERIOR que defina o crime e pena com PRÉVIA cominação legal. Cuidado com a alternativa que troca 'lei' por 'decreto' ou por ato da administração.",
+            "fontes": [
+              "CP, art. 1º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 2º",
+          "na_real": {
+            "texto": "Se uma lei nova deixa de considerar o fato crime, acabou: para a execução da pena e somem os efeitos penais da condenação. E qualquer lei nova que ajude o réu volta no tempo, mesmo depois da condenação definitiva.",
+            "fontes": [
+              "CP, art. 2º",
+              "CP, art. 2º, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O cara cumpre pena por uma conduta que uma lei nova deixou de considerar crime: ele é solto, e a condenação deixa de produzir efeitos penais.",
+            "fontes": [
+              "CP, art. 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Abolitio criminis: cessam a EXECUÇÃO e os EFEITOS PENAIS; não há novo julgamento nem só redução de pena. A lei mais benéfica retroage AINDA QUE haja sentença transitada em julgado.",
+            "fontes": [
+              "CP, art. 2º",
+              "CP, art. 2º, parágrafo único",
+              "2013-q53 (gabarito A)",
+              "2019-q51 (gabarito B)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 3º",
+          "na_real": {
+            "texto": "Lei feita para um período (temporária) ou para uma emergência (excepcional) continua valendo para quem agiu enquanto ela vigorava, mesmo depois que ela acaba.",
+            "fontes": [
+              "CP, art. 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Imagine uma lei que, só durante uma epidemia, pune quem vende álcool em gel acima de certo preço. A lei acaba em dezembro; quem cometeu o crime em agosto continua respondendo.",
+            "fontes": [
+              "CP, art. 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "A lei excepcional ou temporária é ULTRATIVA: aplica-se ao fato praticado na sua vigência, mesmo DEPOIS de expirada. Errado dizer que ela 'deixa de valer' para esses fatos.",
+            "fontes": [
+              "CP, art. 3º",
+              "2019-q51"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 4º",
+          "na_real": {
+            "texto": "O crime acontece na hora da ação ou da omissão, mesmo que o resultado venha depois.",
+            "fontes": [
+              "CP, art. 4º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Aos 17 anos, ele atira na vítima; ela morre um mês depois, quando ele já fez 18. Vale a hora do tiro: ele era menor.",
+            "fontes": [
+              "CP, art. 4º"
+            ]
+          },
+          "na_prova": {
+            "texto": "TEMPO do crime = momento da AÇÃO ou OMISSÃO (atividade). LUGAR do crime = ação OU resultado (ubiquidade, art. 6º). A banca troca um pelo outro.",
+            "fontes": [
+              "CP, art. 4º",
+              "CP, art. 6º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 5º",
+          "na_real": {
+            "texto": "Crime cometido no Brasil segue a lei brasileira. Navio e avião públicos brasileiros são 'pedaço do Brasil' onde estiverem; os privados brasileiros, em alto-mar ou no espaço aéreo correspondente.",
+            "fontes": [
+              "CP, art. 5º",
+              "CP, art. 5º, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um furto dentro de um navio da Marinha brasileira atracado num porto estrangeiro: para a lei penal, aconteceu no Brasil.",
+            "fontes": [
+              "CP, art. 5º, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Embarcação ou aeronave PÚBLICA, ou a serviço do governo: território brasileiro ONDE QUER QUE ESTEJA. PRIVADA brasileira: só em alto-mar ou no espaço aéreo correspondente. A estrangeira privada, pousada ou em porto no Brasil, também segue a lei brasileira.",
+            "fontes": [
+              "CP, art. 5º, § 1º",
+              "CP, art. 5º, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 6º",
+          "na_real": {
+            "texto": "O crime é considerado praticado tanto onde a pessoa agiu quanto onde o resultado aconteceu, ou deveria acontecer.",
+            "fontes": [
+              "CP, art. 6º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Da cidade argentina na fronteira, ele atira em alguém do lado brasileiro: o crime também é considerado praticado no Brasil, onde veio o resultado.",
+            "fontes": [
+              "CP, art. 6º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Lugar = AÇÃO ou RESULTADO, no todo ou em parte (ubiquidade). Não confunda com o TEMPO (art. 4º), que é só a ação.",
+            "fontes": [
+              "CP, art. 6º",
+              "CP, art. 4º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 7º",
+          "na_real": {
+            "texto": "Alguns crimes cometidos fora do país seguem a lei brasileira mesmo assim. Nos do inciso I, ela vale sempre, mesmo que a pessoa já tenha sido absolvida ou condenada lá fora; nos do inciso II, só se cumpridas as condições do § 2º.",
+            "fontes": [
+              "CP, art. 7º, I",
+              "CP, art. 7º, II",
+              "CP, art. 7º, § 1º",
+              "CP, art. 7º, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um servidor brasileiro desvia dinheiro da embaixada no exterior: é crime contra a administração pública por quem está a seu serviço. A lei brasileira se aplica, ainda que ele seja julgado lá.",
+            "fontes": [
+              "CP, art. 7º, I, c",
+              "CP, art. 7º, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Inciso I, sem condição: vida ou liberdade do PRESIDENTE; patrimônio ou fé pública dos entes públicos; administração pública por quem está a seu serviço; GENOCÍDIO com agente brasileiro ou domiciliado aqui. Os do inciso II dependem das condições do § 2º.",
+            "fontes": [
+              "CP, art. 7º, I",
+              "CP, art. 7º, II",
+              "CP, art. 7º, § 2º",
+              "2013-q51 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 8º",
+          "na_real": {
+            "texto": "Se a pessoa já cumpriu pena lá fora pelo mesmo crime, isso conta aqui: se as penas são de tipos diferentes, a daqui fica menor; se são iguais, desconta-se o que já cumpriu.",
+            "fontes": [
+              "CP, art. 8º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado aqui a 6 anos de prisão, ele já tinha cumprido 2 anos de prisão no exterior pelo mesmo crime: restam 4.",
+            "fontes": [
+              "CP, art. 8º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Penas DIVERSAS: ATENUA. Penas IDÊNTICAS: COMPUTA. A banca troca por 'converte em restritiva de direitos' ou por 'novo julgamento'.",
+            "fontes": [
+              "CP, art. 8º",
+              "2013-q50 (gabarito B)",
+              "2019-q51"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 10",
+          "na_real": {
+            "texto": "No prazo penal, o primeiro dia já conta, e se usa o calendário comum: mês é mês, ano é ano, não importa quantos dias tem.",
+            "fontes": [
+              "CP, art. 10"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma pena de 1 mês que começa no dia 10 de março termina no dia 9 de abril: o dia 10 já contou.",
+            "fontes": [
+              "CP, art. 10"
+            ]
+          },
+          "na_prova": {
+            "texto": "O dia do COMEÇO entra na conta. Contam-se dias, meses e anos pelo CALENDÁRIO COMUM, e não por 30 dias fixos.",
+            "fontes": [
+              "CP, art. 10"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Lei nova deixa de considerar o fato crime",
+          "o_que_e": "Abolitio criminis (art. 2º)",
+          "o_que_acontece": "Cessam a execução e os efeitos penais da sentença",
+          "fontes": [
+            "CP, art. 2º"
+          ]
+        },
+        {
+          "situacao": "Lei nova que favorece o réu de outro jeito",
+          "o_que_e": "Retroatividade benéfica (art. 2º, parágrafo único)",
+          "o_que_acontece": "Aplica-se aos fatos anteriores, mesmo com sentença transitada em julgado",
+          "fontes": [
+            "CP, art. 2º, parágrafo único"
+          ]
+        },
+        {
+          "situacao": "Lei feita para um período ou uma emergência, que já acabou",
+          "o_que_e": "Lei temporária ou excepcional (art. 3º)",
+          "o_que_acontece": "Continua valendo para os fatos praticados durante a vigência dela",
+          "fontes": [
+            "CP, art. 3º"
+          ]
+        },
+        {
+          "situacao": "Quando o crime aconteceu?",
+          "o_que_e": "Tempo do crime (art. 4º)",
+          "o_que_acontece": "No momento da ação ou da omissão",
+          "fontes": [
+            "CP, art. 4º"
+          ]
+        },
+        {
+          "situacao": "Onde o crime aconteceu?",
+          "o_que_e": "Lugar do crime (art. 6º)",
+          "o_que_acontece": "Onde houve a ação ou omissão, ou onde veio, ou deveria vir, o resultado",
+          "fontes": [
+            "CP, art. 6º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:28:51.237709+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CP",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            2,
+            ""
+          ],
+          "fim": [
+            2,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            3,
+            ""
+          ],
+          "fim": [
+            3,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            4,
+            ""
+          ],
+          "fim": [
+            4,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            6,
+            ""
+          ],
+          "fim": [
+            6,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            8,
+            ""
+          ],
+          "fim": [
+            8,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            7,
+            ""
+          ],
+          "fim": [
+            7,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            10,
+            ""
+          ],
+          "fim": [
+            10,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -2470,6 +2827,212 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CP, art. 22",
+          "na_real": {
+            "texto": "Se alguém foi forçado de um jeito que não dava para resistir, ou cumpriu ordem do chefe que não era claramente ilegal, quem responde é quem forçou ou quem mandou.",
+            "fontes": [
+              "CP, art. 22"
+            ]
+          },
+          "exemplo": {
+            "texto": "Bandidos sequestram a família do gerente e o obrigam a abrir o cofre do banco: responde quem coagiu, e não o gerente.",
+            "fontes": [
+              "CP, art. 22"
+            ]
+          },
+          "na_prova": {
+            "texto": "A ordem tem de ser NÃO MANIFESTAMENTE ilegal, e a coação, IRRESISTÍVEL. Se a ordem era claramente ilegal, o art. 22 não protege o subordinado. Punível é o AUTOR da coação ou da ordem.",
+            "fontes": [
+              "CP, art. 22"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 23",
+          "na_real": {
+            "texto": "Quatro situações tiram o crime do fato: estado de necessidade, legítima defesa, estrito cumprimento de dever legal e exercício regular de direito. Mas quem passa do ponto responde pelo excesso.",
+            "fontes": [
+              "CP, art. 23",
+              "CP, art. 23, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O lutador de MMA acerta um soco no adversário dentro das regras da luta: exercício regular de direito, não há crime. Se continua batendo depois que o juiz encerra a luta, responde pelo excesso.",
+            "fontes": [
+              "CP, art. 23, III",
+              "CP, art. 23, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "O art. 23 diz 'NÃO HÁ CRIME'; a banca troca por 'é isento de pena'. E o excesso é punido, seja DOLOSO, seja CULPOSO. Emoção, paixão e embriaguez não estão nesta lista.",
+            "fontes": [
+              "CP, art. 23",
+              "CP, art. 23, parágrafo único",
+              "2019-q52 (gabarito E)",
+              "FEPESE-2013-q48 (gabarito D)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 24",
+          "na_real": {
+            "texto": "Estado de necessidade é sacrificar um direito para salvar outro de um perigo que está acontecendo agora, que a pessoa não criou de propósito e não tinha outro jeito de evitar.",
+            "fontes": [
+              "CP, art. 24"
+            ]
+          },
+          "exemplo": {
+            "texto": "No incêndio do prédio, ele arromba a porta do vizinho para fugir pela escada de lá: o dano à porta não é crime. Já o bombeiro não pode fugir alegando o perigo: ele tem o dever legal de enfrentá-lo.",
+            "fontes": [
+              "CP, art. 24",
+              "CP, art. 24, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Perigo ATUAL (o 'atual ou iminente' é da legítima defesa), não provocado POR SUA VONTADE, sem outro modo de evitar. Quem tem DEVER LEGAL de enfrentar o perigo não alega. Se era razoável sacrificar o direito, só reduz a pena de 1/3 a 2/3.",
+            "fontes": [
+              "CP, art. 24",
+              "CP, art. 24, § 1º",
+              "CP, art. 24, § 2º",
+              "CP, art. 25",
+              "2019-q52 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 25",
+          "na_real": {
+            "texto": "Legítima defesa é reagir a uma agressão injusta que está acontecendo ou prestes a acontecer, contra você ou contra outra pessoa, usando com moderação os meios necessários. O agente de segurança que age para proteger um refém durante um crime também está em legítima defesa.",
+            "fontes": [
+              "CP, art. 25",
+              "CP, art. 25, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Na saída do jogo, um torcedor parte para cima de outro com uma barra de ferro; um terceiro segura e derruba o agressor e para por aí: legítima defesa de terceiro.",
+            "fontes": [
+              "CP, art. 25"
+            ]
+          },
+          "na_prova": {
+            "texto": "Agressão INJUSTA, ATUAL ou IMINENTE (contra ato que já passou não cabe), a direito SEU ou DE OUTREM, com uso MODERADO dos meios NECESSÁRIOS. O excesso, doloso ou culposo, é punido.",
+            "fontes": [
+              "CP, art. 25",
+              "CP, art. 23, parágrafo único",
+              "2013-q48 (gabarito A)"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Perigo atual, que a pessoa não criou: um direito é sacrificado para salvar outro",
+          "o_que_e": "Estado de necessidade (art. 24)",
+          "o_que_acontece": "Não há crime",
+          "fontes": [
+            "CP, art. 24",
+            "CP, art. 23, I"
+          ]
+        },
+        {
+          "situacao": "Agressão injusta, atual ou iminente, repelida com moderação",
+          "o_que_e": "Legítima defesa (art. 25)",
+          "o_que_acontece": "Não há crime",
+          "fontes": [
+            "CP, art. 25",
+            "CP, art. 23, II"
+          ]
+        },
+        {
+          "situacao": "O policial que prende em flagrante usando a força necessária",
+          "o_que_e": "Estrito cumprimento de dever legal (art. 23, III)",
+          "o_que_acontece": "Não há crime",
+          "fontes": [
+            "CP, art. 23, III"
+          ]
+        },
+        {
+          "situacao": "O lutador que golpeia dentro das regras do esporte",
+          "o_que_e": "Exercício regular de direito (art. 23, III)",
+          "o_que_acontece": "Não há crime",
+          "fontes": [
+            "CP, art. 23, III",
+            "FEPESE-2013-q48"
+          ]
+        },
+        {
+          "situacao": "Forçado sem poder resistir, ou cumprindo ordem do chefe que não era claramente ilegal",
+          "o_que_e": "Coação irresistível ou obediência hierárquica (art. 22)",
+          "o_que_acontece": "Só responde quem coagiu ou quem deu a ordem",
+          "fontes": [
+            "CP, art. 22"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:28:51.237709+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CP",
+          "inicio": [
+            22,
+            ""
+          ],
+          "fim": [
+            22,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            23,
+            ""
+          ],
+          "fim": [
+            23,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            24,
+            ""
+          ],
+          "fim": [
+            24,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            25,
+            ""
+          ],
+          "fim": [
+            25,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            28,
+            ""
+          ],
+          "fim": [
+            28,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -2645,6 +3208,400 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CP, art. 312",
+          "na_real": {
+            "texto": "Peculato é o servidor ficar com o que tinha nas mãos por causa do cargo, ou desviar isso, seja coisa pública ou particular. Se não tinha a posse, mas usou a facilidade do cargo para subtrair, também é peculato.",
+            "fontes": [
+              "CP, art. 312, caput",
+              "CP, art. 312, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O policial penal guarda os pertences do preso no setor de custódia e leva o relógio dele para casa: peculato. Se, por descuido, deixa a sala aberta e outro furta, é peculato culposo; e, se ele repara o dano antes da sentença irrecorrível, a punibilidade se extingue.",
+            "fontes": [
+              "CP, art. 312, caput",
+              "CP, art. 312, § 2º",
+              "CP, art. 312, § 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "APROPRIAR-SE ou DESVIAR o que tem a POSSE em razão do cargo é peculato; EXIGIR é concussão (art. 316). Reparação do dano no CULPOSO: antes da sentença irrecorrível extingue a punibilidade; depois, reduz a pena pela METADE. No doloso, o § 3º não vale.",
+            "fontes": [
+              "CP, art. 312",
+              "CP, art. 312, § 3º",
+              "CP, art. 316",
+              "FEPESE-2013-q47 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 313",
+          "na_real": {
+            "texto": "Recebeu por engano de alguém, no exercício do cargo, e ficou com aquilo: é o peculato mediante erro de outrem.",
+            "fontes": [
+              "CP, art. 313"
+            ]
+          },
+          "exemplo": {
+            "texto": "O cidadão paga uma taxa duas vezes por engano no balcão, e o servidor percebe e embolsa a segunda: peculato mediante erro de outrem.",
+            "fontes": [
+              "CP, art. 313"
+            ]
+          },
+          "na_prova": {
+            "texto": "Aqui o dinheiro chega por ERRO DE OUTREM; no peculato do art. 312, o servidor já tinha a posse em razão do cargo. Pena: reclusão de 1 a 4 anos, e multa.",
+            "fontes": [
+              "CP, art. 313",
+              "CP, art. 312"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 316",
+          "na_real": {
+            "texto": "Concussão é o servidor EXIGIR vantagem indevida por causa da função, mesmo fora dela ou antes de assumi-la.",
+            "fontes": [
+              "CP, art. 316"
+            ]
+          },
+          "exemplo": {
+            "texto": "O fiscal diz ao dono do bar: 'ou me paga mil reais, ou eu interdito o seu bar'. Ele exigiu: é concussão.",
+            "fontes": [
+              "CP, art. 316"
+            ]
+          },
+          "na_prova": {
+            "texto": "O verbo é EXIGIR. SOLICITAR, RECEBER ou ACEITAR PROMESSA é corrupção passiva (art. 317). Cobrar tributo que sabe indevido, ou cobrar com meio vexatório, é o excesso de exação (§ 1º).",
+            "fontes": [
+              "CP, art. 316",
+              "CP, art. 316, § 1º",
+              "CP, art. 317"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 317",
+          "na_real": {
+            "texto": "Corrupção passiva é o servidor pedir, receber ou aceitar promessa de vantagem indevida por causa da função, mesmo fora dela ou antes de assumi-la.",
+            "fontes": [
+              "CP, art. 317"
+            ]
+          },
+          "exemplo": {
+            "texto": "O policial penal aceita 500 reais de um parente de preso para deixar entrar um celular na visita: corrupção passiva. Se de fato deixa de cumprir o dever por causa do dinheiro, a pena aumenta de um terço.",
+            "fontes": [
+              "CP, art. 317",
+              "CP, art. 317, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Verbos: SOLICITAR, RECEBER ou ACEITAR PROMESSA. Basta pedir: não precisa receber. Quem OFERECE é o particular, em outro crime. Em 2013, a banca transcreveu este tipo e pediu o nome.",
+            "fontes": [
+              "CP, art. 317",
+              "2013-q54 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 319",
+          "na_real": {
+            "texto": "Prevaricação é o servidor atrasar, deixar de fazer, ou fazer contra a lei, um ato do seu serviço para satisfazer um interesse ou sentimento pessoal.",
+            "fontes": [
+              "CP, art. 319"
+            ]
+          },
+          "exemplo": {
+            "texto": "O agente deixa de registrar a falta disciplinar do preso porque torce para o mesmo time que ele: prevaricação.",
+            "fontes": [
+              "CP, art. 319"
+            ]
+          },
+          "na_prova": {
+            "texto": "O motivo é INTERESSE ou SENTIMENTO PESSOAL. Se é por vantagem indevida, é corrupção passiva (art. 317); se é por ceder a pedido ou influência de outrem, é o § 2º do art. 317.",
+            "fontes": [
+              "CP, art. 319",
+              "CP, art. 317",
+              "CP, art. 317, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 319-A",
+          "na_real": {
+            "texto": "O diretor do presídio ou o agente que não cumpre o dever de impedir que o preso tenha celular, rádio ou aparelho parecido comete crime.",
+            "fontes": [
+              "CP, art. 319-A"
+            ]
+          },
+          "exemplo": {
+            "texto": "O agente vê o preso com um celular na cela e finge que não viu: art. 319-A.",
+            "fontes": [
+              "CP, art. 319-A"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem responde é o DIRETOR ou o AGENTE PÚBLICO que deixa de vedar o acesso, e não o preso. Pena: detenção de 3 MESES a 1 ANO.",
+            "fontes": [
+              "CP, art. 319-A"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 320",
+          "na_real": {
+            "texto": "Condescendência criminosa é o chefe, por tolerância, deixar de responsabilizar o subordinado que cometeu infração no cargo; ou, se não tem competência para punir, não levar o caso a quem tem.",
+            "fontes": [
+              "CP, art. 320"
+            ]
+          },
+          "exemplo": {
+            "texto": "O chefe de plantão descobre que um agente falsificou o livro de ponto e deixa para lá porque 'é gente boa': condescendência criminosa.",
+            "fontes": [
+              "CP, art. 320"
+            ]
+          },
+          "na_prova": {
+            "texto": "O motivo é INDULGÊNCIA. Sem competência para punir, o crime é NÃO LEVAR o fato à autoridade competente. Pena: detenção de 15 dias a 1 mês, ou multa.",
+            "fontes": [
+              "CP, art. 320"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 321",
+          "na_real": {
+            "texto": "Advocacia administrativa é o servidor usar a posição para defender interesse particular dentro da administração.",
+            "fontes": [
+              "CP, art. 321"
+            ]
+          },
+          "exemplo": {
+            "texto": "O servidor da secretaria fica 'empurrando' o processo de licença da empresa do cunhado, usando a amizade com os colegas: advocacia administrativa.",
+            "fontes": [
+              "CP, art. 321"
+            ]
+          },
+          "na_prova": {
+            "texto": "Patrocinar INTERESSE PRIVADO perante a administração, VALENDO-SE da qualidade de funcionário. Se o interesse é ILEGÍTIMO, a pena aumenta: detenção de 3 meses a 1 ano, além da multa.",
+            "fontes": [
+              "CP, art. 321",
+              "CP, art. 321, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 323",
+          "na_real": {
+            "texto": "Abandonar o cargo público fora dos casos permitidos em lei é crime.",
+            "fontes": [
+              "CP, art. 323"
+            ]
+          },
+          "exemplo": {
+            "texto": "O agente larga o posto e some, sem licença nem exoneração: abandono de função. Se isso causa prejuízo público, a pena aumenta.",
+            "fontes": [
+              "CP, art. 323",
+              "CP, art. 323, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "A pena cresce se resulta PREJUÍZO PÚBLICO (§ 1º) e mais ainda na FAIXA DE FRONTEIRA (§ 2º: detenção de 1 a 3 anos, e multa).",
+            "fontes": [
+              "CP, art. 323, § 1º",
+              "CP, art. 323, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 325",
+          "na_real": {
+            "texto": "Contar um segredo que se sabe por causa do cargo, ou facilitar que alguém o descubra, é violação de sigilo funcional. Emprestar a senha do sistema a quem não pode acessar também entra.",
+            "fontes": [
+              "CP, art. 325",
+              "CP, art. 325, § 1º, I"
+            ]
+          },
+          "exemplo": {
+            "texto": "O servidor passa para um amigo a data da transferência de um preso, que era sigilosa: violação de sigilo funcional.",
+            "fontes": [
+              "CP, art. 325"
+            ]
+          },
+          "na_prova": {
+            "texto": "Revelar ou FACILITAR a revelação. Também comete quem permite ou facilita, até emprestando a SENHA, o acesso de não autorizados aos sistemas, e quem usa indevidamente o acesso restrito. Se resulta DANO, vira reclusão de 2 a 6 anos.",
+            "fontes": [
+              "CP, art. 325",
+              "CP, art. 325, § 1º",
+              "CP, art. 325, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 327",
+          "na_real": {
+            "texto": "Para o Direito Penal, funcionário público é qualquer um que exerce cargo, emprego ou função pública, mesmo por pouco tempo ou sem receber nada. E quem trabalha em empresa contratada ou conveniada para atividade típica da administração conta como se fosse.",
+            "fontes": [
+              "CP, art. 327, caput",
+              "CP, art. 327, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O mesário da eleição, sem salário e só por um dia, é funcionário público para fins penais. O médico de hospital particular conveniado, atendendo pelo SUS, também é equiparado.",
+            "fontes": [
+              "CP, art. 327, caput",
+              "CP, art. 327, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Vale ainda que TRANSITORIAMENTE ou SEM REMUNERAÇÃO. Equiparados: entidade PARAESTATAL e empresa CONTRATADA ou CONVENIADA para atividade típica da administração. Cargo em comissão ou função de direção ou assessoramento: pena aumentada da TERÇA PARTE.",
+            "fontes": [
+              "CP, art. 327",
+              "CP, art. 327, § 1º",
+              "CP, art. 327, § 2º"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Fica com o que tem a posse por causa do cargo, ou desvia",
+          "o_que_e": "Peculato (art. 312)",
+          "o_que_acontece": "Reclusão de 2 a 12 anos, e multa",
+          "fontes": [
+            "CP, art. 312"
+          ]
+        },
+        {
+          "situacao": "Exige vantagem indevida",
+          "o_que_e": "Concussão (art. 316)",
+          "o_que_acontece": "Reclusão de 2 a 12 anos, e multa",
+          "fontes": [
+            "CP, art. 316"
+          ]
+        },
+        {
+          "situacao": "Pede, recebe ou aceita promessa de vantagem indevida",
+          "o_que_e": "Corrupção passiva (art. 317)",
+          "o_que_acontece": "Reclusão de 2 a 12 anos, e multa",
+          "fontes": [
+            "CP, art. 317",
+            "2013-q54"
+          ]
+        },
+        {
+          "situacao": "Atrasa ou deixa de fazer o serviço por interesse ou sentimento pessoal",
+          "o_que_e": "Prevaricação (art. 319)",
+          "o_que_acontece": "Detenção de 3 meses a 1 ano, e multa",
+          "fontes": [
+            "CP, art. 319"
+          ]
+        },
+        {
+          "situacao": "Deixa de punir o subordinado por indulgência",
+          "o_que_e": "Condescendência criminosa (art. 320)",
+          "o_que_acontece": "Detenção de 15 dias a 1 mês, ou multa",
+          "fontes": [
+            "CP, art. 320"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:28:51.237709+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CP",
+          "inicio": [
+            327,
+            ""
+          ],
+          "fim": [
+            327,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            316,
+            ""
+          ],
+          "fim": [
+            316,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            317,
+            ""
+          ],
+          "fim": [
+            317,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            333,
+            ""
+          ],
+          "fim": [
+            333,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            312,
+            ""
+          ],
+          "fim": [
+            312,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            319,
+            ""
+          ],
+          "fim": [
+            319,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            319,
+            "A"
+          ],
+          "fim": [
+            319,
+            "A"
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            320,
+            ""
+          ],
+          "fim": [
+            320,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -2785,6 +3742,99 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CP, art. 13",
+          "na_real": {
+            "texto": "Só responde pelo resultado quem lhe deu causa, e causa é tudo aquilo sem o qual o resultado não teria acontecido. Se no meio do caminho aparece outra causa que, sozinha, produz o resultado, quem agiu antes responde só pelo que fez. E quem devia e podia agir, e ficou parado, responde como se tivesse causado.",
+            "fontes": [
+              "CP, art. 13, caput",
+              "CP, art. 13, § 1º",
+              "CP, art. 13, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ele dá um tiro na perna da vítima; a ambulância capota a caminho do hospital e a vítima morre no acidente. A morte veio de uma causa que, por si só, produziu o resultado: ele responde pelo tiro, e não pela morte. Já a salva-vidas contratada que vê a criança se afogando e não faz nada responde pelo resultado.",
+            "fontes": [
+              "CP, art. 13, § 1º",
+              "CP, art. 13, § 2º, b"
+            ]
+          },
+          "na_prova": {
+            "texto": "Dever de agir: 'DEVIA E PODIA', as duas juntas. Quem deve agir: quem tem por LEI obrigação de cuidado, proteção ou vigilância; quem ASSUMIU a responsabilidade; quem CRIOU o risco com o comportamento anterior. A causa superveniente RELATIVAMENTE independente que POR SI SÓ produz o resultado exclui a imputação.",
+            "fontes": [
+              "CP, art. 13, § 2º",
+              "CP, art. 13, § 1º"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Sem a ação, o resultado não teria acontecido",
+          "o_que_e": "Causa (art. 13, caput)",
+          "o_que_acontece": "O resultado é imputado a quem agiu",
+          "fontes": [
+            "CP, art. 13, caput"
+          ]
+        },
+        {
+          "situacao": "Outra causa entra no meio e, por si só, produz o resultado",
+          "o_que_e": "Causa superveniente relativamente independente (art. 13, § 1º)",
+          "o_que_acontece": "Exclui a imputação do resultado; os fatos anteriores continuam imputados a quem os praticou",
+          "fontes": [
+            "CP, art. 13, § 1º"
+          ]
+        },
+        {
+          "situacao": "Devia e podia agir para evitar o resultado, e não agiu",
+          "o_que_e": "Omissão penalmente relevante (art. 13, § 2º)",
+          "o_que_acontece": "Responde pelo resultado",
+          "fontes": [
+            "CP, art. 13, § 2º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:28:51.237709+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CP",
+          "inicio": [
+            13,
+            ""
+          ],
+          "fim": [
+            13,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            135,
+            ""
+          ],
+          "fim": [
+            135,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            144,
+            ""
+          ],
+          "fim": [
+            144,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -2960,6 +4010,307 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "CP, art. 26",
+          "na_real": {
+            "texto": "Quem, por doença mental ou desenvolvimento mental incompleto ou retardado, não conseguia de jeito nenhum entender que aquilo era errado, ou se controlar, é isento de pena. Se conseguia em parte, a pena só diminui.",
+            "fontes": [
+              "CP, art. 26",
+              "CP, art. 26, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Em surto psicótico, sem nenhuma noção do que fazia, ele quebra a vitrine de uma loja: isento de pena. Se tinha uma perturbação que só diminuía o seu entendimento, a pena cai de um a dois terços.",
+            "fontes": [
+              "CP, art. 26",
+              "CP, art. 26, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "INTEIRAMENTE incapaz: ISENTO de pena. NÃO inteiramente capaz (semi-imputável): pena REDUZIDA de 1/3 a 2/3. A banca troca essa fração com a da participação de menor importância (1/6 a 1/3).",
+            "fontes": [
+              "CP, art. 26",
+              "CP, art. 26, parágrafo único",
+              "CP, art. 29, § 1º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 27",
+          "na_real": {
+            "texto": "Menor de 18 anos não responde pelo Código Penal: segue a legislação especial.",
+            "fontes": [
+              "CP, art. 27"
+            ]
+          },
+          "exemplo": {
+            "texto": "Aos 17 anos e 11 meses, ele comete um roubo: não responde pelo Código Penal, e sim pelas regras da legislação especial.",
+            "fontes": [
+              "CP, art. 27"
+            ]
+          },
+          "na_prova": {
+            "texto": "O critério é só a IDADE: menor de 18, inimputável. Na prova do cargo, a resposta oficial chamou a menoridade de causa que exclui a CULPABILIDADE.",
+            "fontes": [
+              "CP, art. 27",
+              "2013-q47 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 28",
+          "na_real": {
+            "texto": "Emoção, paixão e embriaguez de quem bebeu porque quis, ou porque se descuidou, não livram ninguém. Só a embriaguez completa por acidente (caso fortuito ou força maior) isenta de pena; a incompleta, pelo mesmo motivo, reduz.",
+            "fontes": [
+              "CP, art. 28, I e II",
+              "CP, art. 28, § 1º",
+              "CP, art. 28, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ele bebe a noite toda no churrasco depois do jogo e agride alguém: responde normalmente. Já quem tomou, sem saber, uma bebida batizada com droga e ficou completamente fora de si é isento de pena.",
+            "fontes": [
+              "CP, art. 28, II",
+              "CP, art. 28, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Emoção e paixão NÃO excluem a imputabilidade. Embriaguez VOLUNTÁRIA ou CULPOSA também não. COMPLETA por caso fortuito ou força maior: ISENTA; INCOMPLETA pela mesma causa: reduz de 1/3 a 2/3.",
+            "fontes": [
+              "CP, art. 28",
+              "CP, art. 28, § 1º",
+              "CP, art. 28, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 29",
+          "na_real": {
+            "texto": "Todo mundo que colabora para o crime responde por ele, cada um na medida da sua culpabilidade. Quem teve um papel pequeno tem a pena diminuída; quem quis participar de um crime mais leve leva a pena desse crime.",
+            "fontes": [
+              "CP, art. 29",
+              "CP, art. 29, § 1º",
+              "CP, art. 29, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Dois combinam um furto numa casa vazia; lá dentro, um deles encontra o morador e o agride para levar o dinheiro. O que só quis o furto responde por furto; se a violência era previsível, a pena dele aumenta até a metade.",
+            "fontes": [
+              "CP, art. 29, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Participação de MENOR IMPORTÂNCIA: diminui de 1/6 a 1/3. Quis crime MENOS GRAVE: pena deste, aumentada ATÉ A METADE se o mais grave era PREVISÍVEL.",
+            "fontes": [
+              "CP, art. 29, § 1º",
+              "CP, art. 29, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 30",
+          "na_real": {
+            "texto": "O que é pessoal de um não passa para o outro, salvo quando faz parte da própria definição do crime.",
+            "fontes": [
+              "CP, art. 30"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um servidor e um amigo dele, que não é servidor, desviam juntos o dinheiro da repartição: o amigo também responde pelo crime do servidor, porque 'ser funcionário público' faz parte da definição desse crime.",
+            "fontes": [
+              "CP, art. 30"
+            ]
+          },
+          "na_prova": {
+            "texto": "Condição PESSOAL não se comunica, SALVO quando ELEMENTAR do crime. Cuidado com o 'nunca se comunica'.",
+            "fontes": [
+              "CP, art. 30"
+            ]
+          }
+        },
+        {
+          "artigo": "CP, art. 31",
+          "na_real": {
+            "texto": "Combinar, mandar, incentivar ou ajudar não é punido se o crime nem chegou a ser tentado, salvo quando a lei disser o contrário.",
+            "fontes": [
+              "CP, art. 31"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ele incentiva o amigo a matar um desafeto, mas o amigo desiste antes de começar: ninguém responde por homicídio.",
+            "fontes": [
+              "CP, art. 31"
+            ]
+          },
+          "na_prova": {
+            "texto": "A linha é a TENTATIVA: se o crime não chega PELO MENOS a ser tentado, ajuste, determinação, instigação e auxílio não são puníveis, SALVO disposição expressa em contrário.",
+            "fontes": [
+              "CP, art. 31"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Doença mental: inteiramente incapaz de entender ou de se controlar",
+          "o_que_e": "Inimputável (art. 26)",
+          "o_que_acontece": "Isento de pena",
+          "fontes": [
+            "CP, art. 26"
+          ]
+        },
+        {
+          "situacao": "Perturbação que só diminui o entendimento",
+          "o_que_e": "Semi-imputável (art. 26, parágrafo único)",
+          "o_que_acontece": "Pena reduzida de 1/3 a 2/3",
+          "fontes": [
+            "CP, art. 26, parágrafo único"
+          ]
+        },
+        {
+          "situacao": "Menor de 18 anos",
+          "o_que_e": "Inimputável pela idade (art. 27)",
+          "o_que_acontece": "Segue a legislação especial",
+          "fontes": [
+            "CP, art. 27",
+            "2013-q47"
+          ]
+        },
+        {
+          "situacao": "Bebeu porque quis ou por descuido",
+          "o_que_e": "Embriaguez voluntária ou culposa (art. 28, II)",
+          "o_que_acontece": "Responde normalmente",
+          "fontes": [
+            "CP, art. 28, II"
+          ]
+        },
+        {
+          "situacao": "Embriaguez completa por caso fortuito ou força maior",
+          "o_que_e": "Embriaguez fortuita completa (art. 28, § 1º)",
+          "o_que_acontece": "Isento de pena",
+          "fontes": [
+            "CP, art. 28, § 1º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:28:51.237709+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "CP",
+          "inicio": [
+            26,
+            ""
+          ],
+          "fim": [
+            26,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            97,
+            ""
+          ],
+          "fim": [
+            97,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            27,
+            ""
+          ],
+          "fim": [
+            27,
+            ""
+          ]
+        },
+        {
+          "lei": "CF",
+          "inicio": [
+            228,
+            ""
+          ],
+          "fim": [
+            228,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            28,
+            ""
+          ],
+          "fim": [
+            28,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            29,
+            ""
+          ],
+          "fim": [
+            29,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            30,
+            ""
+          ],
+          "fim": [
+            30,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            31,
+            ""
+          ],
+          "fim": [
+            31,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            65,
+            ""
+          ],
+          "fim": [
+            65,
+            ""
+          ]
+        },
+        {
+          "lei": "CP",
+          "inicio": [
+            312,
+            ""
+          ],
+          "fim": [
+            312,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
