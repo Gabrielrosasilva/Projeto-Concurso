@@ -37,7 +37,7 @@ from radar.servico import geradas
 from radar.util import fuso_local
 
 TIPOS = ("questoes", "macetes", "explicacoes", "classificacao", "fichas", "associados",
-         "resumos", "novidades")
+         "resumos", "novidades", "traducoes")
 
 # Quantos macetes por materia. Tres cabe numa resposta so e obriga a IA a
 # escolher o que mais cai, em vez de listar tudo.
@@ -292,8 +292,70 @@ Responda SOMENTE um JSON, no formato:
 INSTRUCAO_RESUMO = INSTRUCAO_RESUMO.replace("{frase_sem_evidencia}", FRASE_SEM_EVIDENCIA)
 
 
+# A traducao dos artigos "do meu jeito" (decisao 161, pedido de 12/10). O
+# perfil (o jeito, as tres linhas, o tom) vem do config/linguagem.yml e entra
+# no lugar de {perfil}; a regra de nao dizer o que o artigo nao diz e do
+# radar, e fica aqui.
+INSTRUCAO_TRADUCAO = """Voce recebe UM tema do meu cronograma de estudo para a Policia Penal SC (banca FEPESE): os artigos que o tema cobre, as frases do resumo de cada artigo (o texto que eu ja tenho, e que NAO muda), como a banca cobrou o tema e as pegadinhas, os codigos das questoes reais do tema e os termos que ja estao no meu glossario.
+
+Eu estudei esses artigos e nao entendi a linguagem. Escreva a TRADUCAO de cada artigo, do meu jeito:
+
+{perfil}
+
+Partes:
+- `itens`: um por artigo. Traduza CADA artigo da lista "AS FRASES DO RESUMO, POR ARTIGO"; outro artigo do tema (da lista "OS ARTIGOS QUE O TEMA COBRE") so se a ficha manda ler e ele ajuda a entender o tema. Cada item tem `artigo` (o dispositivo, do jeito "CP, art. 15"; "Regras de Mandela, regra 12"; "Declaracao de Viena (1993), § 5") e as TRES linhas, sempre as tres:
+  - `na_real`: o artigo em uma frase do dia a dia;
+  - `exemplo`: uma cena concreta;
+  - `na_prova`: o numero ou a palavra que a banca troca para derrubar.
+- `nao_confunda`: SO quando o tema tem coisas parecidas que se confundem (ex.: tentativa, desistencia, arrependimento eficaz, arrependimento posterior, crime impossivel). Uma linha por coisa: `situacao` (a cena, curta), `o_que_e` (o nome e o artigo), `o_que_acontece` (a consequencia) e `fontes`. Sem coisas parecidas, responda "nao_confunda": [];
+- `glossario`: os termos dificeis que aparecem nas frases dos artigos e que um leigo nao entende (ex.: "inescusavel", "dolo eventual"), um por termo: `termo` (como aparece no texto), `variantes` (plural ou outra forma que aparece no texto), `significado` (uma frase do dia a dia, no mesmo jeito) e `fontes`. NAO repita os termos da lista "TERMOS JA NO GLOSSARIO".
+
+Regras - a traducao nunca diz o que o artigo nao diz:
+- CADA linha tem `texto` e `fontes`. Linha sem texto ou sem fonte sera RECUSADA;
+- o `na_real` e o `exemplo` citam SO o proprio artigo: as fontes deles sao o dispositivo do item ("CP, art. 15", ou um paragrafo ou inciso dele, "CP, art. 15, caput"), e nada mais - nem outro artigo, nem questao, nem sumula. Sera RECUSADO;
+- o `na_prova` (e o `nao_confunda`) pode citar outro artigo DO TEMA, sumula, ou questao real da lista "QUESTOES QUE O NA PROVA PODE CITAR"; ao citar o gabarito, escreva "2019-q55 (gabarito E)" com a letra oficial da lista. Artigo de fora do tema, questao de fora da lista ou gabarito trocado serao RECUSADOS;
+- so artigos do tema; um item por artigo;
+- escreva pelo texto VIGENTE da lei; sem seguranca sobre um artigo, um numero ou um prazo, nao escreva a linha - um prazo errado ensina errado;
+- sem palavrao (a lista do perfil e conferida) e sem previsao ("vai cair", "certamente", "a FEPESE sempre..."): sera RECUSADO.
+
+Responda SOMENTE um JSON, no formato:
+{"traducao": {"itens": [{"artigo": "CP, art. 15", "na_real": {"texto": "...", "fontes": ["CP, art. 15"]}, "exemplo": {"texto": "...", "fontes": ["CP, art. 15"]}, "na_prova": {"texto": "...", "fontes": ["CP, art. 15", "CP, art. 14, II"]}}], "nao_confunda": [{"situacao": "...", "o_que_e": "...", "o_que_acontece": "...", "fontes": ["..."]}], "glossario": [{"termo": "...", "variantes": [], "significado": "...", "fontes": ["..."]}]}}"""
+
+
+def texto_do_perfil(perfil: dict) -> str:
+    """O perfil do config/linguagem.yml como vai para a instrucao."""
+    linhas = ["O JEITO (config/linguagem.yml, que eu edito):"]
+    linhas += [f"- {j}" for j in perfil.get("jeito") or []]
+    nomes = {"na_real": "Na real", "exemplo": "Exemplo", "na_prova": "Na prova"}
+    tres = perfil.get("linhas") or {}
+    if tres:
+        linhas.append("- sempre tres linhas por artigo: "
+                      + "; ".join(f"{nomes.get(c, c)}: {t}" for c, t in tres.items()))
+    if perfil.get("tom_aprovado"):
+        linhas.append("- o TOM que eu aprovei (escreva o seu, NAO copie este): "
+                      + " ".join(str(perfil["tom_aprovado"]).split()))
+    if perfil.get("palavroes"):
+        linhas.append("- palavras proibidas (a importacao confere): "
+                      + ", ".join(str(p) for p in perfil["palavroes"]))
+    return "\n".join(linhas)
+
+
 def _como_responder(tipo: str, nivel: str | None = None) -> str:
     """O recado para quem responde. Vai dentro do arquivo, no topo."""
+    if tipo == "traducoes":
+        return (
+            "Este arquivo foi gerado por `radar fichas --pedido --traducoes`. Para "
+            "cada item de `pedidos`, siga a `instrucao` usando o texto de `pedido`. "
+            "Antes de escrever, confira cada artigo no texto oficial da lei. "
+            "Responda TODOS num unico arquivo JSON, no formato de "
+            "`formato_da_resposta`: o mesmo `lote`, o `modelo` que escreveu (ex.: "
+            "\"claude-opus-5-5\") e o `id` de cada pedido com o objeto `traducao` "
+            "dele. Salve como data/resposta_ia.json e rode `radar fichas --importar "
+            "data/resposta_ia.json`. Linha sem texto ou sem fonte, 'na real' ou "
+            "'exemplo' com fonte que nao e o proprio artigo, artigo que nao e do "
+            "tema, questao fora da lista ou com gabarito trocado, palavrao ou "
+            "previsao sera RECUSADO."
+        )
     if tipo == "resumos":
         return (
             "Este arquivo foi gerado por `radar fichas --pedido --resumos`. Para "
@@ -412,6 +474,17 @@ def _formato(tipo: str) -> dict:
 
 
 def _formato_das_respostas(tipo: str) -> dict:
+    if tipo == "traducoes":
+        linha = {"texto": "...", "fontes": ["CP, art. 15"]}
+        item = {"itens": [{"artigo": "CP, art. 15", "na_real": linha, "exemplo": linha,
+                           "na_prova": {"texto": "...",
+                                        "fontes": ["CP, art. 15", "2019-q55 (gabarito E)"]}}],
+                "nao_confunda": [{"situacao": "...", "o_que_e": "...",
+                                  "o_que_acontece": "...", "fontes": ["CP, art. 15"]}],
+                "glossario": [{"termo": "...", "variantes": [], "significado": "...",
+                               "fontes": ["CP, art. 21"]}]}
+        return {"lote": "<o lote deste arquivo>", "modelo": "<o modelo que escreveu>",
+                "respostas": [{"id": "t1", "traducao": item}]}
     if tipo == "resumos":
         frase = {"texto": "...", "fontes": ["CP, art. 13, § 2º", "2019-q51 (gabarito C)"]}
         item = {"dominar": [frase], "artigos": [frase], "como_cobra": [frase],
@@ -1249,6 +1322,84 @@ def pedido_de_resumos(ids: list[str] | None = None, desde=None,
     return _novo_lote("resumos", pedidos)
 
 
+def pedido_de_traducoes(tema: str | None = None, materia: str | None = None,
+                        refazer: bool = False) -> dict:
+    """Um pedido de TRADUCAO por ficha de materia de lei (decisao 161): as que
+    o config/leis.yml nao poe em `sem_lei` e que ja tem resumo. Sem `tema` nem
+    `materia`, todas as que ainda nao tem traducao; `refazer` inclui a que tem
+    traducao que eu ainda nao conferi (a conferida nunca e sobrescrita).
+
+    O pedido leva o perfil do config/linguagem.yml (na instrucao); por ficha,
+    as frases de cada artigo como estao, os artigos que o tema cobre (titulo e
+    "ler exatamente"), como a banca cobrou e as pegadinhas, para o "na prova"
+    mirar no que a banca troca; os codigos que o "na prova" pode citar; e os
+    termos que o glossario ja tem, para nao repetir.
+    """
+    from radar import fichas, leis, traducao
+    from radar.regioes import normalizar
+    from radar.servico import fichas as servico_fichas
+
+    ctx = servico_fichas.contexto()
+    escolhidas = [e for e in ctx.escritas if leis.exige_artigo(e.materia) and e.resumo]
+    if tema:
+        achada = servico_fichas.achar(tema, ctx.escritas)
+        escolhidas = [e for e in escolhidas if achada is not None and e.id == achada.id]
+    if materia:
+        escolhidas = [e for e in escolhidas if normalizar(e.materia) == normalizar(materia)]
+    if refazer:
+        escolhidas = [e for e in escolhidas
+                      if not (e.traducao and e.traducao.get("conferido_em"))]
+    else:
+        escolhidas = [e for e in escolhidas if not e.traducao]
+
+    instrucao = INSTRUCAO_TRADUCAO.replace("{perfil}", texto_do_perfil(traducao.perfil()))
+    no_glossario = [t["termo"] for t in servico_fichas.carregar_glossario()]
+
+    def frase(f: dict) -> str:
+        return f"  - {f['texto']} [fonte: {'; '.join(f['fontes'])}]"
+
+    pedidos = []
+    for escrita in escolhidas:
+        cobre = servico_fichas.artigos_do_tema(escrita)
+        if not cobre:
+            continue          # sem artigo do tema, nao ha o que traduzir
+        ficha = fichas.montar(escrita, ctx)
+        codigos = servico_fichas.exigencias_do_resumo(ficha)["codigos"]
+        enxuto = fichas.resumo_enxuto(escrita.resumo.get("partes"), escrita.materia)
+        partes = escrita.resumo.get("partes") or {}
+        faixas = traducao.faixas_para_o_pedido(cobre)
+        corpo = [f"TEMA: {escrita.tema}", f"MATERIA: {escrita.materia}",
+                 f"LER EXATAMENTE (a ficha): {escrita.ler_exatamente}",
+                 "OS ARTIGOS QUE O TEMA COBRE (pelo titulo e pelo 'ler exatamente'): "
+                 # As faixas sem repetir (o titulo e o "ler" dizem a mesma).
+                 + "; ".join(f.rotulo for f in traducao.faixas_do_pedido(faixas)),
+                 "", "AS FRASES DO RESUMO, POR ARTIGO (como estao; traduza cada um destes "
+                     "artigos)"]
+        for bloco in enxuto.blocos:
+            corpo.append(bloco.rotulo)
+            corpo += [frase({"texto": f.texto, "fontes": f.fontes}) for f in bloco.frases]
+        if not enxuto.blocos:
+            corpo.append("  - nenhum artigo tem frase só dele no resumo")
+        corpo += ["", "AS FRASES QUE CITAM VARIOS ARTIGOS, OU DOUTRINA (contexto)"]
+        corpo += [frase({"texto": f.texto, "fontes": f.fontes}) for f in enxuto.dominar] \
+            or ["  - nenhuma"]
+        corpo += ["", "COMO A BANCA COBROU (para o 'na prova' mirar no que a banca troca)"]
+        corpo += [frase(f) for f in partes.get("como_cobra") or []] or ["  - nada"]
+        corpo += ["", "AS PEGADINHAS"]
+        corpo += [frase(f) for f in partes.get("pegadinhas") or []] or ["  - nenhuma"]
+        corpo += ["", "QUESTOES QUE O NA PROVA PODE CITAR (codigo e gabarito oficial): "
+                  + ("; ".join(f"{c} (gabarito {l.upper()})" for c, l in codigos.items())
+                     or "nenhuma - o 'na prova' cita so artigo do tema ou sumula"),
+                  "", "TERMOS JA NO GLOSSARIO (nao repita): "
+                  + (", ".join(no_glossario) or "nenhum ainda")]
+        pedidos.append({
+            "id": f"t{len(pedidos) + 1}", "tema": escrita.tema, "materia": escrita.materia,
+            "ficha": escrita.id, "codigos": codigos, "artigos_do_tema": faixas,
+            "instrucao": instrucao, "pedido": "\n".join(corpo),
+        })
+    return _novo_lote("traducoes", pedidos)
+
+
 def _importar_fichas(lote: dict, respostas: list[dict], modelo: str) -> dict:
     from radar.servico import fichas as servico_fichas
 
@@ -1788,6 +1939,10 @@ def importar(resposta: Path, pedido: Path | None = None,
         from radar.servico import fichas as servico_fichas
 
         resultado = servico_fichas.importar_resumos(lote["pedidos"], respostas, modelo)
+    elif lote.get("tipo") == "traducoes":
+        from radar.servico import fichas as servico_fichas
+
+        resultado = servico_fichas.importar_traducoes(lote["pedidos"], respostas, modelo)
     elif lote.get("tipo") == "classificacao":
         resultado = _importar_classificacao(lote, respostas, modelo)
     elif lote.get("tipo") == "associados":

@@ -193,6 +193,12 @@ class FichaEscrita:
     #: "conferido_em"}. A parte 1 ("caiu ou nao caiu") nao mora aqui: e
     #: estatistica, e sai na hora do `incidencia.caiu_no_alvo`.
     resumo: dict | None = None
+    #: A TRADUCAO dos artigos (decisao 161): {"itens": [{"artigo", "na_real",
+    #: "exemplo", "na_prova"}], "nao_confunda": [...], "modelo", "criado_em",
+    #: "conferido_em", "artigos_do_resumo"}. Fora do `resumo` porque tem
+    #: procedencia e data proprias; o `artigos_do_resumo` e o que o resumo
+    #: citava na importacao (para achar a traducao orfa, `traducao.orfas`).
+    traducao: dict | None = None
 
     @property
     def id(self) -> str:
@@ -204,10 +210,11 @@ class FichaEscrita:
 
     def para_dict(self) -> dict:
         dados = asdict(self)
-        # Sem resumo, a chave nao vai: as fichas sem resumo ficam no arquivo
-        # exatamente como eram.
-        if dados.get("resumo") is None:
-            dados.pop("resumo", None)
+        # Sem resumo (ou sem traducao), a chave nao vai: as fichas sem ela
+        # ficam no arquivo exatamente como eram.
+        for chave in ("resumo", "traducao"):
+            if dados.get(chave) is None:
+                dados.pop(chave, None)
         return dados
 
     @classmethod

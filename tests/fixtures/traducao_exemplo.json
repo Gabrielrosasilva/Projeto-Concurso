@@ -1,0 +1,24 @@
+{
+  "itens": [
+    {
+      "artigo": "CP, art. 14",
+      "na_real": {"texto": "Começou o crime e não terminou porque algo de fora atrapalhou: é tentativa.", "fontes": ["CP, art. 14, II"]},
+      "exemplo": {"texto": "Puxou a carteira do bolso do torcedor, o segurança segurou o braço dele: furto tentado.", "fontes": ["CP, art. 14"]},
+      "na_prova": {"texto": "A pena cai de um a dois terços; 'pela metade' está errado.", "fontes": ["CP, art. 14, parágrafo único", "2019-q55 (gabarito E)"]}
+    },
+    {
+      "artigo": "CP, art. 15",
+      "na_real": {"texto": "Parou porque quis, ou desfez a tempo: responde só pelo que já fez.", "fontes": ["CP, art. 15"]},
+      "exemplo": {"texto": "Ia furtar o carro, desistiu no meio, mas já tinha quebrado o vidro: responde pelo vidro.", "fontes": ["CP, art. 15"]},
+      "na_prova": {"texto": "'Posso, mas não quero' é desistência; 'quero, mas não posso' é tentativa.", "fontes": ["CP, art. 15", "CP, art. 14, II"]}
+    }
+  ],
+  "nao_confunda": [
+    {"situacao": "Começou e foi impedido", "o_que_e": "Tentativa (art. 14, II)", "o_que_acontece": "Pena do consumado menos um a dois terços", "fontes": ["CP, art. 14"]},
+    {"situacao": "Começou e parou porque quis", "o_que_e": "Desistência voluntária (art. 15)", "o_que_acontece": "Responde só pelos atos já praticados", "fontes": ["CP, art. 15"]}
+  ],
+  "glossario": [
+    {"termo": "tentativa", "variantes": ["tentado"], "significado": "O crime que começou e não terminou por causa de algo de fora.", "fontes": ["CP, art. 14, II"]},
+    {"termo": "atos já praticados", "variantes": [], "significado": "O estrago que a pessoa já fez antes de parar.", "fontes": ["CP, art. 15"]}
+  ]
+}

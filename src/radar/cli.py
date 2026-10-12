@@ -1266,6 +1266,7 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
              "classificacao": "classificação(ões)",
              "associados": "conceito(s) associado(s)",
              "fichas": "ficha(s)", "resumos": "resumo(s)",
+             "traducoes": "tradução(ões)",
              "niveis": "nível(is)"}.get(resultado["tipo"],
                                                                "questão(ões)")
     console.print(f"[green]{resultado['gravadas']} {o_que} gravado(s)[/]")
@@ -1319,6 +1320,13 @@ def _importar_resposta_da_ia(arquivo: Path) -> None:
         console.print("[dim]Dentro de cada ficha, em data/fichas.json (versionado). "
                       "Aparecem no botão Resumo de cada faixa; confira com radar "
                       "fichas --conferir-resumo.[/]")
+    elif resultado["tipo"] == "traducoes":
+        # A traducao mora na ficha; os termos novos, no glossario (decisao 161).
+        console.print(f"{resultado.get('termos_novos', 0)} termo(s) novo(s) no glossário "
+                      f"(data/glossario.json).")
+        console.print("[dim]Dentro de cada ficha, em data/fichas.json (versionado). "
+                      "Aparecem no \"🗣 Traduz pra mim\" de cada artigo do Resumo; "
+                      "confira na ficha, em \"✓ Conferi a tradução\".[/]")
     elif resultado["tipo"] == "macetes":
         console.print("[dim]Em data/macetes.json (versionado).[/]")
     elif resultado["tipo"] == "explicacoes":
@@ -3095,6 +3103,9 @@ def fichas(
     dos_resumos: bool = typer.Option(
         False, "--dos-resumos",
         help="Com --pedido --explicacoes: as questões do complementar que os resumos citam"),
+    traducoes: bool = typer.Option(
+        False, "--traducoes",
+        help="Com --pedido: a TRADUÇÃO dos artigos (só matérias de lei; --tema, --materia)"),
 ) -> None:
     """A ficha de estudo de cada tema do cronograma (Etapa 6B, secao 11).
 
@@ -3106,6 +3117,8 @@ def fichas(
 
     --pedido e --importar sao o caminho sem API (o texto e escrito pelo Claude
     Code e marcado como gerado por IA); --conferir marca a ficha como lida.
+    --pedido --traducoes pede a traducao de cada artigo "do meu jeito" (decisao
+    161), so nas materias de lei, pelo perfil do config/linguagem.yml.
     """
     def _data(texto: str | None, nome: str) -> date | None:
         if not texto:
@@ -3121,10 +3134,12 @@ def fichas(
         return
     if verificar_resumos:
         problemas = servico.fichas.verificar_resumos()
-        com = sum(1 for e in servico.fichas.carregar() if e.resumo)
+        escritas_ = servico.fichas.carregar()
+        com = sum(1 for e in escritas_ if e.resumo)
+        traduzidas = sum(1 for e in escritas_ if e.traducao)
         if not problemas:
-            console.print(f"[green]{com} resumo(s) conferido(s) contra o acervo de hoje:[/] "
-                          f"nenhum problema.")
+            console.print(f"[green]{com} resumo(s) e {traduzidas} tradução(ões) conferido(s) "
+                          f"contra o acervo de hoje:[/] nenhum problema.")
             return
         console.print(f"[red]{len(problemas)} resumo(s) com problema[/] (de {com}):")
         for tema_, problema in problemas:
@@ -3149,6 +3164,20 @@ def fichas(
             return
         destino = servico.manual.salvar_pedido(lote)
         console.print(f"[green]{len(lote['pedidos'])} pedido(s) de explicação[/] em {destino}")
+        console.print(f"[dim]Lote {lote['lote']}. Responda pelo Claude Code e rode "
+                      f"{escape(fichas_puras.RADAR_NO_WINDOWS)} fichas --importar "
+                      f"data/resposta_ia.json[/]", soft_wrap=True)
+        return
+    if pedido and traducoes:
+        lote = servico.manual.pedido_de_traducoes(tema, materia, refazer)
+        if not lote["pedidos"]:
+            console.print("[yellow]Nada a pedir:[/] as fichas de lei escolhidas já têm "
+                          "tradução (use --refazer para pedir de novo a não conferida).")
+            return
+        destino = servico.manual.salvar_pedido(lote)
+        console.print(f"[green]{len(lote['pedidos'])} pedido(s) de tradução[/] em {destino}")
+        for p in lote["pedidos"]:
+            console.print(f"  {p['id']}: {escape(p['materia'])} · {escape(p['tema'])}")
         console.print(f"[dim]Lote {lote['lote']}. Responda pelo Claude Code e rode "
                       f"{escape(fichas_puras.RADAR_NO_WINDOWS)} fichas --importar "
                       f"data/resposta_ia.json[/]", soft_wrap=True)

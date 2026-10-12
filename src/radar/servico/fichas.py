@@ -532,19 +532,127 @@ def verificar_resumos(ctx: fichas.Contexto | None = None) -> list[tuple[str, str
     """O verificador automatico (item 4e): cada resumo gravado passa de NOVO
     pela conferencia, contra o acervo de hoje - a questao citada ainda e do
     tema e tem o mesmo gabarito, o padrao ainda cita questao, o basico ainda
-    vale. Devolve [(tema, problema)]; vazio, nenhum."""
+    vale. A traducao tambem (decisao 161): a orfa (o artigo saiu do tema, ou
+    o resumo refeito o perdeu) e avisada, e a que aparece passa de novo pela
+    conferencia. Devolve [(tema, problema)]; vazio, nenhum."""
+    from radar import traducao
+
     ctx = ctx or contexto()
     problemas = []
     for escrita in ctx.escritas:
-        if not escrita.resumo:
+        if not escrita.resumo and not escrita.traducao:
             continue
         montada = fichas.montar(escrita, ctx)
         exige = exigencias_do_resumo(montada)
+        if escrita.resumo:
+            try:
+                fichas.conferir_resumo({"partes": escrita.resumo.get("partes") or {}}, **exige)
+            except fichas.FichaRecusada as erro:
+                problemas.append((escrita.tema, str(erro)))
+        if not escrita.traducao:
+            continue
+        tema = artigos_do_tema(escrita)
+        for orfa in traducao.orfas(escrita.traducao, escrita.resumo, tema):
+            problemas.append((escrita.tema, f"tradução órfã de {orfa.artigo}: {orfa.motivo} "
+                                            f"(não aparece na tela)"))
+        visiveis = traducao.visiveis(escrita.traducao, escrita.resumo, tema)
+        if not visiveis:
+            continue
         try:
-            fichas.conferir_resumo({"partes": escrita.resumo.get("partes") or {}}, **exige)
+            traducao.conferir_traducao(
+                {"itens": visiveis, "nao_confunda": escrita.traducao.get("nao_confunda")},
+                tema=tema, codigos=exige["codigos"], lista_de_palavroes=traducao.palavroes())
         except fichas.FichaRecusada as erro:
-            problemas.append((escrita.tema, str(erro)))
+            problemas.append((escrita.tema, f"tradução: {erro}"))
     return problemas
+
+
+# --- a traducao dos artigos e o glossario (decisao 161) -----------------------------
+
+def artigos_do_tema(escrita: fichas.FichaEscrita) -> list:
+    """As faixas de artigos que o tema cobre: o titulo e o "ler exatamente"."""
+    from radar import artigos
+
+    return artigos.do_tema(escrita.tema, escrita.ler_exatamente, escrita.materia)
+
+
+def caminho_do_glossario() -> Path:
+    return config.diretorio_dados() / "glossario.json"
+
+
+def carregar_glossario(caminho: Path | None = None) -> list[dict]:
+    """Os termos do glossario. O que nao diz de onde veio (`modelo` e
+    `criado_em`) nao e lido: a mesma trava das fichas."""
+    arquivo = caminho or caminho_do_glossario()
+    if not arquivo.exists():
+        return []
+    brutos = json.loads(arquivo.read_text(encoding="utf-8")) or []
+    return [t for t in brutos if isinstance(t, dict) and (t.get("modelo") or "").strip()
+            and t.get("criado_em") and t.get("termo") and t.get("significado")]
+
+
+def gravar_glossario(termos: list[dict], caminho: Path | None = None) -> Path:
+    destino = caminho or caminho_do_glossario()
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(json.dumps(termos, ensure_ascii=False, indent=2) + "\n",
+                       encoding="utf-8")
+    return destino
+
+
+def importar_traducoes(pedidos: list[dict], respostas: list[dict], modelo: str) -> dict:
+    """Confere cada traducao contra o pedido e grava a que presta, dentro da
+    ficha do tema; os termos novos vao para o data/glossario.json, sem
+    duplicar os que ja estao la. Recusa (e conta): pedido que nao existe,
+    resposta repetida, ficha que sumiu, a traducao que eu ja conferi, e tudo
+    o que o `traducao.conferir_traducao` recusa."""
+    from radar import glossario, traducao
+
+    por_id = {p["id"]: p for p in pedidos}
+    escritas = carregar()
+    por_ficha = {e.id: e for e in escritas}
+    quando = agora().isoformat()
+    proibidas = traducao.palavroes()
+    gravadas, recusas, vistas, termos = 0, [], set(), []
+    for resposta in respostas:
+        pedido = por_id.get(resposta.get("id"))
+        if pedido is None:
+            recusas.append(f"{resposta.get('id')}: não existe esse pedido no lote")
+            continue
+        onde = f"{pedido['id']} ({pedido['tema']})"
+        if pedido["id"] in vistas:
+            recusas.append(f"{onde}: respondido duas vezes")
+            continue
+        vistas.add(pedido["id"])
+        escrita = por_ficha.get(pedido["ficha"])
+        if escrita is None:
+            recusas.append(f"{onde}: a ficha do tema não existe mais")
+            continue
+        if escrita.traducao and escrita.traducao.get("conferido_em"):
+            recusas.append(f"{onde}: você já conferiu esta tradução em "
+                           f"{escrita.traducao['conferido_em']}; ela não é sobrescrita")
+            continue
+        try:
+            partes, novos = traducao.conferir_traducao(
+                resposta.get("traducao"),
+                tema=traducao.faixas_do_pedido(pedido["artigos_do_tema"]),
+                codigos=pedido["codigos"], lista_de_palavroes=proibidas)
+        except fichas.FichaRecusada as erro:
+            recusas.append(f"{onde}: {erro}")
+            continue
+        escrita.traducao = {
+            **partes, "modelo": modelo, "criado_em": quando, "conferido_em": None,
+            "artigos_do_resumo": traducao.faixas_para_o_pedido(
+                traducao.citados_no_resumo(escrita.resumo))}
+        termos += novos
+        gravadas += 1
+    entraram = 0
+    if gravadas:
+        gravar(escritas)
+        junto, entraram = glossario.juntar(carregar_glossario(), termos, modelo, quando)
+        if entraram:
+            gravar_glossario(junto)
+    return {"gravadas": gravadas, "repetidas": 0, "recusas": recusas,
+            "termos_novos": entraram}
 
 
 # --- o botao "Resumo" das faixas (R2) -------------------------------------------------

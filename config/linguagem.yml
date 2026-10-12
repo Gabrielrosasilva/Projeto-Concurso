@@ -1,0 +1,52 @@
+# Como a IA escreve a traducao dos artigos para mim (decisao 161). Lido por
+# src/radar/traducao.py.
+#
+# Eu edito este arquivo a mao. O `radar fichas --pedido --traducoes` copia o
+# perfil inteiro para o data/pedido_ia.json (a IA escreve do jeito daqui), e a
+# importacao confere a lista de palavroes: a traducao que tiver um deles e
+# recusada.
+#
+# A traducao nunca diz o que o artigo nao diz: o "na real" e o "exemplo"
+# citam so o proprio artigo, e o "na prova" pode citar sumula ou questao real
+# do tema. Isso e regra do radar, e nao do perfil - nao muda aqui.
+
+# O jeito de escrever. Vai para o pedido como esta, linha a linha.
+jeito:
+  - exemplos de futebol e do dia a dia
+  - giria leve, sem exagero, porque eu preciso entender
+  - sem palavrao
+  - frases curtas
+
+# As tres linhas de cada artigo: sempre as tres, nesta ordem.
+linhas:
+  na_real: o artigo em uma frase do dia a dia
+  exemplo: uma cena concreta
+  na_prova: o numero ou a palavra que a banca troca para derrubar
+
+# O tom que eu aprovei, de um artigo so. Serve para mostrar o TOM: a IA
+# escreve a dela, e nao copia esta.
+tom_aprovado: >-
+  Art. 15 - Na real: comecou o crime e parou porque quis, ou fez tudo e correu
+  para desfazer, e conseguiu? Nao responde pela tentativa do crime grande, so
+  pelo estrago que ja fez. Exemplo: foi matar, deu uma facada, se arrependeu e
+  levou a vitima ao hospital, e ela sobreviveu; responde so por lesao
+  corporal. Na prova: "posso, mas nao quero" e desistencia; "quero, mas nao
+  posso" e tentativa (art. 14, II).
+
+# A importacao recusa a traducao (e o termo do glossario) que tiver uma
+# destas palavras: palavra inteira, sem acento e sem caixa ("puta" nao pega
+# "disputa"). Lista curta de proposito: e trava, e nao filtro de estilo.
+palavroes:
+  - porra
+  - caralho
+  - merda
+  - puta
+  - puto
+  - foda
+  - foder
+  - fodido
+  - buceta
+  - cacete
+  - bosta
+  - cuzao
+  - arrombado

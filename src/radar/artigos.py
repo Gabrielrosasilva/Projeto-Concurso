@@ -69,15 +69,23 @@ class Artigo:
 
     @property
     def rotulo(self) -> str:
-        unidade = _POR_SIGLA[self.lei].unidade if self.lei in _POR_SIGLA else "art"
+        return f"{self.lei}, {_UNIDADE_ESCRITA[_unidade_da(self.lei)][0]} {self.numero_escrito}"
+
+    @property
+    def numero_escrito(self) -> str:
         sufixo = f"-{self.sufixo}" if self.sufixo else ""
-        if unidade == "regra":
-            return f"{self.lei}, regra {self.numero}{sufixo}"
-        if unidade == "§":
-            return f"{self.lei}, § {self.numero}{sufixo}"
         # O ordinal ate o nono, como a lei escreve: "art. 9º-A", "art. 10".
-        ordinal = "º" if self.numero < 10 else ""
-        return f"{self.lei}, art. {self.numero}{ordinal}{sufixo}"
+        # A regra de Mandela e o paragrafo de Viena nao levam.
+        ordinal = "º" if self.numero < 10 and _unidade_da(self.lei) == "art" else ""
+        return f"{self.numero}{ordinal}{sufixo}"
+
+
+#: Como cada unidade se escreve: no singular e no plural.
+_UNIDADE_ESCRITA = {"art": ("art.", "arts."), "regra": ("regra", "regras"), "§": ("§", "§§")}
+
+
+def _unidade_da(sigla: str) -> str:
+    return _POR_SIGLA[sigla].unidade if sigla in _POR_SIGLA else "art"
 
 
 @dataclass(frozen=True)
@@ -95,6 +103,15 @@ class Faixa:
     @property
     def unico(self) -> Artigo | None:
         return Artigo(self.lei, *self.inicio) if self.inicio == self.fim else None
+
+    @property
+    def rotulo(self) -> str:
+        """ "CP, art. 15" ou "CP, arts. 14 a 21"."""
+        if self.unico is not None:
+            return self.unico.rotulo
+        primeiro, ultimo = Artigo(self.lei, *self.inicio), Artigo(self.lei, *self.fim)
+        plural = _UNIDADE_ESCRITA[_unidade_da(self.lei)][1]
+        return f"{self.lei}, {plural} {primeiro.numero_escrito} a {ultimo.numero_escrito}"
 
 
 # A unidade e o numero, no texto normalizado: "art. 15", "arts. 14 a 21",
