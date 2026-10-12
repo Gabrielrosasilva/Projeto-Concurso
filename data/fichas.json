@@ -8117,6 +8117,457 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 10",
+          "na_real": {
+            "texto": "Dar assistência ao preso é obrigação do Estado, para evitar que ele volte ao crime e ajudar na volta à vida em sociedade. E isso continua depois que ele sai: vale também para o egresso.",
+            "fontes": [
+              "LEP, art. 10",
+              "LEP, art. 10, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que sai da cadeia continua com direito a apoio do Estado para recomeçar: é a assistência ao egresso.",
+            "fontes": [
+              "LEP, art. 10, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "A assistência é DEVER DO ESTADO, com dois objetivos: PREVENIR o crime e ORIENTAR o retorno à convivência em sociedade. Alcança o preso, o internado e o EGRESSO.",
+            "fontes": [
+              "LEP, art. 10"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 11",
+          "na_real": {
+            "texto": "São seis tipos de assistência: material, à saúde, jurídica, educacional, social e religiosa.",
+            "fontes": [
+              "LEP, art. 11"
+            ]
+          },
+          "exemplo": {
+            "texto": "Comida e roupa, médico e dentista, defensor, escola, assistente social e culto: as seis assistências num dia de unidade.",
+            "fontes": [
+              "LEP, art. 11"
+            ]
+          },
+          "na_prova": {
+            "texto": "Decore as SEIS: MATERIAL, SAÚDE, JURÍDICA, EDUCACIONAL, SOCIAL e RELIGIOSA. Cuidado com intrusa na lista, como 'esportiva' ou 'financeira'.",
+            "fontes": [
+              "LEP, art. 11"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 12",
+          "na_real": {
+            "texto": "Assistência material é o básico do dia a dia: comida, roupa e instalações higiênicas.",
+            "fontes": [
+              "LEP, art. 12"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uniforme limpo, as refeições do dia e banheiro em condições: é a assistência material.",
+            "fontes": [
+              "LEP, art. 12"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três itens: ALIMENTAÇÃO, VESTUÁRIO e INSTALAÇÕES HIGIÊNICAS. O que a unidade não fornece pode ser vendido em local próprio (art. 13).",
+            "fontes": [
+              "LEP, art. 12",
+              "LEP, art. 13"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 14",
+          "na_real": {
+            "texto": "A saúde do preso inclui médico, farmácia e dentista, para prevenir e para tratar. Se a unidade não tem estrutura, o atendimento é feito fora, com autorização da direção. E a mulher tem acompanhamento no pré-natal e no pós-parto, que se estende ao bebê.",
+            "fontes": [
+              "LEP, art. 14",
+              "LEP, art. 14, § 2º",
+              "LEP, art. 14, § 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso quebra um dente e a unidade não tem dentista: ele é levado para atendimento em outro local, com autorização da direção.",
+            "fontes": [
+              "LEP, art. 14, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três atendimentos: MÉDICO, FARMACÊUTICO e ODONTOLÓGICO, preventivo e curativo. Fora da unidade, quem AUTORIZA é a DIREÇÃO do estabelecimento. A grávida tem tratamento humanitário no pré-parto, no parto e no puerpério (§ 4º).",
+            "fontes": [
+              "LEP, art. 14",
+              "LEP, art. 14, § 2º",
+              "LEP, art. 14, § 4º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 15",
+          "na_real": {
+            "texto": "Quem está preso e não tem dinheiro para pagar advogado tem direito a assistência jurídica.",
+            "fontes": [
+              "LEP, art. 15"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso sem dinheiro para advogado quer pedir a progressão de regime: tem direito a assistência jurídica para isso.",
+            "fontes": [
+              "LEP, art. 15"
+            ]
+          },
+          "na_prova": {
+            "texto": "É para quem NÃO TEM RECURSOS para constituir advogado, prestada pela DEFENSORIA PÚBLICA, integral e gratuita, dentro e fora dos estabelecimentos (art. 16).",
+            "fontes": [
+              "LEP, art. 15",
+              "LEP, art. 16"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 18",
+          "na_real": {
+            "texto": "O ensino fundamental (o antigo primeiro grau) é obrigatório para o preso e faz parte da rede de ensino do Estado.",
+            "fontes": [
+              "LEP, art. 18"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que não terminou o fundamental entra na escola da unidade, ligada à rede estadual de ensino.",
+            "fontes": [
+              "LEP, art. 18"
+            ]
+          },
+          "na_prova": {
+            "texto": "O OBRIGATÓRIO é o ensino de PRIMEIRO GRAU (hoje, fundamental), integrado ao sistema escolar da unidade federativa. O ensino médio vem no art. 18-A.",
+            "fontes": [
+              "LEP, art. 18",
+              "LEP, art. 18-A"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 19",
+          "na_real": {
+            "texto": "O ensino profissional pode ser de iniciação, para quem está começando, ou de aperfeiçoamento técnico, para quem já sabe. E a mulher tem ensino profissional adequado à sua condição.",
+            "fontes": [
+              "LEP, art. 19",
+              "LEP, art. 19, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um curso básico de eletricista para quem nunca pegou num fio é iniciação; um curso avançado para quem já é eletricista é aperfeiçoamento técnico.",
+            "fontes": [
+              "LEP, art. 19"
+            ]
+          },
+          "na_prova": {
+            "texto": "Os dois níveis: INICIAÇÃO ou APERFEIÇOAMENTO TÉCNICO. Em 2019, a alternativa certa era esta letra; e o art. 20 admite convênio com entidades públicas ou PARTICULARES.",
+            "fontes": [
+              "LEP, art. 19",
+              "LEP, art. 20",
+              "2019-q85 (gabarito C)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 24",
+          "na_real": {
+            "texto": "O preso tem liberdade de culto: pode participar dos serviços religiosos da unidade e ter livros religiosos. Tem de haver local apropriado para os cultos, e ninguém é obrigado a participar.",
+            "fontes": [
+              "LEP, art. 24",
+              "LEP, art. 24, § 1º",
+              "LEP, art. 24, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso pode guardar a Bíblia na cela e ir ao culto de domingo; o colega de cela, que não tem religião, não é obrigado a ir.",
+            "fontes": [
+              "LEP, art. 24",
+              "LEP, art. 24, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "'HAVERÁ local apropriado', e não 'a critério do gestor'; a POSSE de livros de instrução religiosa é permitida; NINGUÉM é obrigado a participar.",
+            "fontes": [
+              "LEP, art. 24, § 1º",
+              "LEP, art. 24, § 2º",
+              "2019-q83 (gabarito A)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 25",
+          "na_real": {
+            "texto": "Ao egresso, o Estado dá orientação e apoio para a volta à vida livre e, se precisar, casa e comida em lugar adequado por 2 meses, prazo que pode ser prorrogado uma vez se ele provar que está procurando emprego.",
+            "fontes": [
+              "LEP, art. 25",
+              "LEP, art. 25, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O egresso sai sem ter para onde ir: fica 2 meses num alojamento; com declaração da assistente social de que está procurando emprego, ganha uma prorrogação, e só uma.",
+            "fontes": [
+              "LEP, art. 25",
+              "LEP, art. 25, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "2 MESES, prorrogáveis UMA ÚNICA VEZ, comprovado o EMPENHO em obter emprego por DECLARAÇÃO DO ASSISTENTE SOCIAL.",
+            "fontes": [
+              "LEP, art. 25, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 26",
+          "na_real": {
+            "texto": "Egresso é quem saiu da prisão: o liberado definitivo, por 1 ano contado da saída, e o liberado condicional, enquanto durar o período de prova.",
+            "fontes": [
+              "LEP, art. 26"
+            ]
+          },
+          "exemplo": {
+            "texto": "Cumpriu a pena e saiu em março de 2026: é egresso até março de 2027. Saiu em livramento condicional: é egresso durante todo o período de prova.",
+            "fontes": [
+              "LEP, art. 26"
+            ]
+          },
+          "na_prova": {
+            "texto": "Só DOIS são egressos: o liberado DEFINITIVO (1 ANO a contar da saída) e o liberado CONDICIONAL (durante o PERÍODO DE PROVA). Preso em regime aberto ou acusado com prisão relaxada NÃO.",
+            "fontes": [
+              "LEP, art. 26",
+              "2019-q86 (gabarito B)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 27",
+          "na_real": {
+            "texto": "O serviço de assistência social ajuda o egresso a conseguir trabalho.",
+            "fontes": [
+              "LEP, art. 27"
+            ]
+          },
+          "exemplo": {
+            "texto": "A assistente social encaminha o egresso para entrevistas de emprego.",
+            "fontes": [
+              "LEP, art. 27"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem COLABORA com o egresso na obtenção de TRABALHO é o SERVIÇO DE ASSISTÊNCIA SOCIAL.",
+            "fontes": [
+              "LEP, art. 27"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Liberado definitivo",
+          "o_que_e": "Egresso por 1 ano (art. 26, I)",
+          "o_que_acontece": "O ano conta da saída do estabelecimento",
+          "fontes": [
+            "LEP, art. 26"
+          ]
+        },
+        {
+          "situacao": "Liberado condicional",
+          "o_que_e": "Egresso no período de prova (art. 26, II)",
+          "o_que_acontece": "Enquanto durar o período de prova",
+          "fontes": [
+            "LEP, art. 26"
+          ]
+        },
+        {
+          "situacao": "Preso no regime aberto",
+          "o_que_e": "Não é egresso",
+          "o_que_acontece": "Ainda está cumprindo a pena",
+          "fontes": [
+            "LEP, art. 26",
+            "2019-q86"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            10,
+            ""
+          ],
+          "fim": [
+            10,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            11,
+            ""
+          ],
+          "fim": [
+            11,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            14,
+            ""
+          ],
+          "fim": [
+            14,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            17,
+            ""
+          ],
+          "fim": [
+            17,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            18,
+            ""
+          ],
+          "fim": [
+            18,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            18,
+            "A"
+          ],
+          "fim": [
+            18,
+            "A"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            24,
+            ""
+          ],
+          "fim": [
+            24,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            26,
+            ""
+          ],
+          "fim": [
+            26,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            12,
+            ""
+          ],
+          "fim": [
+            12,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            15,
+            ""
+          ],
+          "fim": [
+            15,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            16,
+            ""
+          ],
+          "fim": [
+            16,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            19,
+            ""
+          ],
+          "fim": [
+            19,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            20,
+            ""
+          ],
+          "fim": [
+            20,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            25,
+            ""
+          ],
+          "fim": [
+            25,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            27,
+            ""
+          ],
+          "fim": [
+            27,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -8301,6 +8752,230 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:06.062064+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 39",
+          "na_real": {
+            "texto": "São os dez deveres do condenado: se comportar e cumprir a sentença, obedecer ao servidor, respeitar os outros presos, não entrar em fuga ou motim, trabalhar e cumprir ordens, aceitar a sanção, indenizar a vítima e, quando der, o Estado, cuidar da higiene e da cela e conservar os seus objetos.",
+            "fontes": [
+              "LEP, art. 39"
+            ]
+          },
+          "exemplo": {
+            "texto": "Arrumar a cela, cuidar do uniforme e obedecer ao agente na contagem: tudo isso é dever do art. 39.",
+            "fontes": [
+              "LEP, art. 39, II",
+              "LEP, art. 39, IX",
+              "LEP, art. 39, X"
+            ]
+          },
+          "na_prova": {
+            "texto": "HIGIENE e ASSEIO da cela e CONSERVAÇÃO dos objetos de uso pessoal são DEVERES (art. 39); chamamento nominal e audiência com o diretor são DIREITOS (art. 41). Os deveres valem, no que couber, para o preso provisório.",
+            "fontes": [
+              "LEP, art. 39",
+              "LEP, art. 39, parágrafo único",
+              "LEP, art. 41",
+              "2019-q81 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 40",
+          "na_real": {
+            "texto": "Toda autoridade tem de respeitar a integridade física e moral do condenado e do preso provisório.",
+            "fontes": [
+              "LEP, art. 40"
+            ]
+          },
+          "exemplo": {
+            "texto": "Humilhar o preso na frente dos outros ou agredi-lo na revista fere a integridade moral e física que o art. 40 manda respeitar.",
+            "fontes": [
+              "LEP, art. 40"
+            ]
+          },
+          "na_prova": {
+            "texto": "Vale para TODAS as autoridades e protege o condenado E o preso PROVISÓRIO: integridade FÍSICA e MORAL.",
+            "fontes": [
+              "LEP, art. 40"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 41",
+          "na_real": {
+            "texto": "São os 16 direitos do preso: comida e roupa, trabalho pago, previdência, pecúlio, tempo dividido entre trabalho, descanso e recreação, as assistências, proteção contra sensacionalismo, advogado em reservado, visitas, ser chamado pelo nome, igualdade, falar com o diretor, fazer pedidos às autoridades, contato com o mundo exterior e atestado anual de pena. Só três podem ser suspensos ou restringidos, e pelo juiz.",
+            "fontes": [
+              "LEP, art. 41",
+              "LEP, art. 41, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso pede para falar com o diretor sobre a comida: é a audiência especial do inciso XIII, um direito. E todo ano ele recebe o atestado de quanto falta cumprir.",
+            "fontes": [
+              "LEP, art. 41, XIII",
+              "LEP, art. 41, XVI"
+            ]
+          },
+          "na_prova": {
+            "texto": "Suspensíveis: só os incisos V (tempo de trabalho, descanso e recreação), X (visitas) e XV (contato com o mundo exterior), por ato motivado do JUIZ da execução, e não mais do diretor (Lei 14.994/2024). O condenado por crime contra a mulher por razões da condição do sexo feminino não tem visita íntima ou conjugal (§ 2º).",
+            "fontes": [
+              "LEP, art. 41, § 1º",
+              "LEP, art. 41, § 2º",
+              "2019-q87 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 41-A",
+          "na_real": {
+            "texto": "Os encontros no parlatório ou por vídeo de presos ligados a organizações criminosas ultraviolentas, grupos paramilitares ou milícias podem ser gravados, em áudio e imagem.",
+            "fontes": [
+              "LEP, art. 41-A"
+            ]
+          },
+          "exemplo": {
+            "texto": "O chefe de uma milícia recebe a visita do irmão no parlatório: a conversa pode ser filmada e gravada, a pedido do delegado, do Ministério Público ou da administração penitenciária.",
+            "fontes": [
+              "LEP, art. 41-A",
+              "LEP, art. 41-A, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem PODE PEDIR o monitoramento: DELEGADO, MINISTÉRIO PÚBLICO ou ADMINISTRAÇÃO PENITENCIÁRIA. Vale para presos ligados a organização criminosa ULTRAVIOLENTA, grupo PARAMILITAR ou MILÍCIA PRIVADA (Lei 15.358/2026).",
+            "fontes": [
+              "LEP, art. 41-A",
+              "LEP, art. 41-A, § 1º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 42",
+          "na_real": {
+            "texto": "Os deveres e os direitos valem também, no que couber, para o preso provisório e para quem cumpre medida de segurança.",
+            "fontes": [
+              "LEP, art. 42"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que ainda espera julgamento também tem direito a visitas e a falar com o advogado em reservado.",
+            "fontes": [
+              "LEP, art. 42"
+            ]
+          },
+          "na_prova": {
+            "texto": "A expressão é 'NO QUE COUBER', e alcança o PROVISÓRIO e o submetido a MEDIDA DE SEGURANÇA.",
+            "fontes": [
+              "LEP, art. 42"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Higiene pessoal e asseio da cela",
+          "o_que_e": "Dever (art. 39, IX)",
+          "o_que_acontece": "O preso tem de cumprir",
+          "fontes": [
+            "LEP, art. 39",
+            "2019-q81"
+          ]
+        },
+        {
+          "situacao": "Conservar os objetos de uso pessoal",
+          "o_que_e": "Dever (art. 39, X)",
+          "o_que_acontece": "O preso tem de cumprir",
+          "fontes": [
+            "LEP, art. 39"
+          ]
+        },
+        {
+          "situacao": "Ser chamado pelo nome",
+          "o_que_e": "Direito (art. 41, XI)",
+          "o_que_acontece": "O Estado tem de garantir",
+          "fontes": [
+            "LEP, art. 41",
+            "2019-q87"
+          ]
+        },
+        {
+          "situacao": "Falar com o diretor",
+          "o_que_e": "Direito (art. 41, XIII)",
+          "o_que_acontece": "O Estado tem de garantir",
+          "fontes": [
+            "LEP, art. 41"
+          ]
+        },
+        {
+          "situacao": "Tempo de recreação, visitas e contato com o mundo exterior",
+          "o_que_e": "Direitos suspensíveis (art. 41, § 1º)",
+          "o_que_acontece": "O juiz da execução pode suspender ou restringir, por ato motivado",
+          "fontes": [
+            "LEP, art. 41, § 1º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            39,
+            ""
+          ],
+          "fim": [
+            39,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            41,
+            ""
+          ],
+          "fim": [
+            41,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            40,
+            ""
+          ],
+          "fim": [
+            40,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            42,
+            ""
+          ],
+          "fim": [
+            42,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            41,
+            "A"
+          ],
+          "fim": [
+            41,
+            "A"
+          ]
+        }
+      ]
     }
   },
   {
@@ -8484,6 +9159,256 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 44",
+          "na_real": {
+            "texto": "Disciplina é colaborar com a ordem, obedecer às autoridades e seus agentes e trabalhar. Vale para o condenado, à prisão ou a pena alternativa, e para o preso provisório.",
+            "fontes": [
+              "LEP, art. 44",
+              "LEP, art. 44, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Cumprir a contagem, voltar à cela quando o agente manda e ir ao trabalho na hora: é a disciplina do art. 44.",
+            "fontes": [
+              "LEP, art. 44"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três elementos: COLABORAÇÃO com a ordem, OBEDIÊNCIA às determinações e DESEMPENHO DO TRABALHO. Sujeitos: condenado à privativa OU à restritiva de direitos, e o PROVISÓRIO.",
+            "fontes": [
+              "LEP, art. 44"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 45",
+          "na_real": {
+            "texto": "Não existe falta nem castigo disciplinar sem estar escrito antes em lei ou regulamento. E a sanção não pode pôr em risco a integridade do preso; cela escura e castigo coletivo são proibidos.",
+            "fontes": [
+              "LEP, art. 45"
+            ]
+          },
+          "exemplo": {
+            "texto": "A direção quer punir o preso por algo que nenhuma norma diz que é falta: não pode. E punir a galeria inteira pela briga de dois também não.",
+            "fontes": [
+              "LEP, art. 45",
+              "LEP, art. 45, § 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "LEGALIDADE: prévia previsão LEGAL ou REGULAMENTAR. Proibidas: CELA ESCURA e SANÇÕES COLETIVAS.",
+            "fontes": [
+              "LEP, art. 45",
+              "LEP, art. 45, § 2º",
+              "LEP, art. 45, § 3º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 49",
+          "na_real": {
+            "texto": "As faltas são leves, médias e graves. As leves e médias, e os castigos delas, quem define é a legislação local; as graves estão na própria LEP. E tentar já é punido como se tivesse conseguido.",
+            "fontes": [
+              "LEP, art. 49",
+              "LEP, art. 49, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso tenta fugir, mas é pego em cima do muro: recebe a mesma sanção de quem fugiu de fato.",
+            "fontes": [
+              "LEP, art. 49, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "LEVES e MÉDIAS: LEGISLAÇÃO LOCAL. GRAVES: a LEP (arts. 50 a 52). A TENTATIVA tem a sanção da falta CONSUMADA.",
+            "fontes": [
+              "LEP, art. 49",
+              "LEP, art. 50"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 50",
+          "na_real": {
+            "texto": "É a lista das faltas graves de quem cumpre pena de prisão: incitar motim, fugir, ter objeto que fere, provocar acidente de trabalho, descumprir as condições do aberto, desobedecer ou não trabalhar, ter ou usar celular, recusar o DNA e se aproximar da vítima de violência doméstica com medida protetiva.",
+            "fontes": [
+              "LEP, art. 50"
+            ]
+          },
+          "exemplo": {
+            "texto": "Acharam um celular escondido no colchão do preso: falta grave, mesmo que ele nunca tenha ligado. Basta ter.",
+            "fontes": [
+              "LEP, art. 50, VII"
+            ]
+          },
+          "na_prova": {
+            "texto": "Celular: basta TER EM SUA POSSE, UTILIZAR ou FORNECER. Recusar o perfil genético é falta grave (VIII). Desde 2026, aproximar-se da vítima de violência doméstica com medida protetiva também (IX). Vale para o provisório, no que couber.",
+            "fontes": [
+              "LEP, art. 50, VII",
+              "LEP, art. 50, VIII",
+              "LEP, art. 50, IX",
+              "LEP, art. 50, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 51",
+          "na_real": {
+            "texto": "Quem cumpre pena alternativa comete falta grave se descumprir ou atrasar, sem justificativa, o que foi imposto, ou se desobedecer ou não fizer o trabalho.",
+            "fontes": [
+              "LEP, art. 51"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado a prestar serviços à comunidade, ele falta semanas seguidas sem justificativa: falta grave.",
+            "fontes": [
+              "LEP, art. 51"
+            ]
+          },
+          "na_prova": {
+            "texto": "Na restritiva de direitos: DESCUMPRIR ou RETARDAR, INJUSTIFICADAMENTE, a restrição ou a obrigação, e inobservar os deveres do art. 39, II e V.",
+            "fontes": [
+              "LEP, art. 51"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 52",
+          "na_real": {
+            "texto": "Crime doloso é falta grave; se causar desordem ou quebra da disciplina, leva ao RDD, o regime mais duro da prisão. O RDD também vale para o preso de alto risco ou suspeito de facção, mesmo sem falta. Dura até 2 anos, em cela individual, com visita quinzenal sem contato físico e 2 horas de banho de sol.",
+            "fontes": [
+              "LEP, art. 52",
+              "LEP, art. 52, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um líder de facção, mesmo sem cometer falta, pode ir para o RDD por fundada suspeita de envolvimento com organização criminosa; se atua em 2 ou mais Estados, vai obrigatoriamente para presídio federal.",
+            "fontes": [
+              "LEP, art. 52, § 1º, II",
+              "LEP, art. 52, § 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Números do RDD: até 2 ANOS; visitas QUINZENAIS, de 2 PESSOAS, por 2 HORAS, sem contato físico; banho de sol de 2 HORAS, em grupos de até 4. Prorrogação por períodos de 1 ANO. Liderança ou atuação em 2 ou mais Estados: presídio FEDERAL. A tabela antiga (360 dias, visita semanal) não vale mais.",
+            "fontes": [
+              "LEP, art. 52, I",
+              "LEP, art. 52, III",
+              "LEP, art. 52, IV",
+              "LEP, art. 52, § 3º",
+              "LEP, art. 52, § 4º"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Faltas leves e médias",
+          "o_que_e": "Legislação local (art. 49)",
+          "o_que_acontece": "O Estado define a falta e a sanção",
+          "fontes": [
+            "LEP, art. 49"
+          ]
+        },
+        {
+          "situacao": "Falta grave de quem cumpre prisão",
+          "o_que_e": "Art. 50",
+          "o_que_acontece": "Está na lista da própria LEP",
+          "fontes": [
+            "LEP, art. 50"
+          ]
+        },
+        {
+          "situacao": "Falta grave de quem cumpre pena alternativa",
+          "o_que_e": "Art. 51",
+          "o_que_acontece": "Descumprir ou retardar sem justificativa, ou desobedecer",
+          "fontes": [
+            "LEP, art. 51"
+          ]
+        },
+        {
+          "situacao": "Crime doloso que subverte a ordem, alto risco ou suspeita de facção",
+          "o_que_e": "RDD (art. 52)",
+          "o_que_acontece": "Até 2 anos, cela individual e regras mais duras",
+          "fontes": [
+            "LEP, art. 52"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            44,
+            ""
+          ],
+          "fim": [
+            44,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            45,
+            ""
+          ],
+          "fim": [
+            45,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            49,
+            ""
+          ],
+          "fim": [
+            49,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            52,
+            ""
+          ],
+          "fim": [
+            52,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            50,
+            ""
+          ],
+          "fim": [
+            50,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            51,
+            ""
+          ],
+          "fim": [
+            51,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -8655,6 +9580,548 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 82",
+          "na_real": {
+            "texto": "Os estabelecimentos penais recebem o condenado, quem cumpre medida de segurança, o preso provisório e o egresso. A mulher e o maior de 60 anos ficam, cada um, em estabelecimento próprio, adequado à sua condição.",
+            "fontes": [
+              "LEP, art. 82",
+              "LEP, art. 82, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um condenado de 65 anos vai para estabelecimento próprio para a sua idade, separado; a mulher também vai para estabelecimento próprio.",
+            "fontes": [
+              "LEP, art. 82, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Estabelecimento próprio: a MULHER e o MAIOR DE 60 ANOS, separadamente. Não confunda com o MAIOR DE 70, que pode ficar em casa no regime aberto (art. 117).",
+            "fontes": [
+              "LEP, art. 82, § 1º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 83",
+          "na_real": {
+            "texto": "Todo estabelecimento tem de ter espaço para assistência, educação, trabalho, recreação e esporte. O de mulheres tem berçário para a presa amamentar até, no mínimo, 6 meses, e só mulheres fazem a segurança interna.",
+            "fontes": [
+              "LEP, art. 83",
+              "LEP, art. 83, § 2º",
+              "LEP, art. 83, § 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "A presa dá à luz e fica com o bebê no berçário da unidade, amamentando, pelo menos até os 6 meses.",
+            "fontes": [
+              "LEP, art. 83, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Berçário: amamentação até, NO MÍNIMO, 6 MESES. Segurança interna: EXCLUSIVAMENTE agentes do sexo FEMININO. Tem de haver sala de aula e espaço para a Defensoria.",
+            "fontes": [
+              "LEP, art. 83, § 2º",
+              "LEP, art. 83, § 3º",
+              "LEP, art. 83, § 4º",
+              "LEP, art. 83, § 5º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 83-B",
+          "na_real": {
+            "texto": "Algumas funções do presídio não podem ser passadas para empresa privada: direção, chefia, coordenação e tudo que exige poder de polícia, como classificar presos, aplicar sanção, controlar rebelião e transportar presos.",
+            "fontes": [
+              "LEP, art. 83-B"
+            ]
+          },
+          "exemplo": {
+            "texto": "A empresa contratada pode cuidar da limpeza e da lavanderia, mas não pode levar o preso até o fórum: transporte de presos é indelegável.",
+            "fontes": [
+              "LEP, art. 83-B, IV"
+            ]
+          },
+          "na_prova": {
+            "texto": "INDELEGÁVEIS: direção, chefia, coordenação e PODER DE POLÍCIA, como a CLASSIFICAÇÃO de condenados, as SANÇÕES disciplinares, o controle de REBELIÕES e o TRANSPORTE de presos. Limpeza, lavanderia e manutenção podem ser terceirizadas (art. 83-A).",
+            "fontes": [
+              "LEP, art. 83-B",
+              "LEP, art. 83-A"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 84",
+          "na_real": {
+            "texto": "O preso provisório fica separado do condenado definitivo. E cada grupo se divide pela gravidade do crime: hediondo, com violência ou grave ameaça, e os demais.",
+            "fontes": [
+              "LEP, art. 84",
+              "LEP, art. 84, § 1º",
+              "LEP, art. 84, § 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Quem era funcionário da Justiça Criminal na época do fato fica em dependência separada; e o preso ameaçado pelos outros fica em local próprio.",
+            "fontes": [
+              "LEP, art. 84, § 2º",
+              "LEP, art. 84, § 4º"
+            ]
+          },
+          "na_prova": {
+            "texto": "PROVISÓRIOS em 3 grupos (hediondo; violência ou grave ameaça; demais). CONDENADOS em 4 (hediondo; REINCIDENTE com violência; PRIMÁRIO com violência; demais).",
+            "fontes": [
+              "LEP, art. 84, § 1º",
+              "LEP, art. 84, § 3º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 86",
+          "na_real": {
+            "texto": "A pena dada num Estado pode ser cumprida em outro, ou em presídio da União. O juiz define em 24 horas onde o preso fica, a pedido da administração. E, em motim ou rebelião, a administração transfere na hora e avisa o juiz, que decide em 24 horas.",
+            "fontes": [
+              "LEP, art. 86",
+              "LEP, art. 86, § 3º",
+              "LEP, art. 86, § 5º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso por violência doméstica continua ameaçando a ex-mulher de dentro da cadeia: ele é transferido para presídio de outro Estado.",
+            "fontes": [
+              "LEP, art. 86, § 4º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Prazos de 24 HORAS: o juiz define o estabelecimento (§ 3º) e decide sobre a transferência de emergência (§ 5º). Violência doméstica com ameaça à vítima: OUTRA UNIDADE FEDERATIVA (§ 4º). Tudo isso mudou depois da prova de 2019.",
+            "fontes": [
+              "LEP, art. 86, § 3º",
+              "LEP, art. 86, § 4º",
+              "LEP, art. 86, § 5º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 87",
+          "na_real": {
+            "texto": "A penitenciária é o lugar de quem foi condenado à reclusão em regime fechado.",
+            "fontes": [
+              "LEP, art. 87"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado a 10 anos de reclusão em regime fechado: vai para a penitenciária.",
+            "fontes": [
+              "LEP, art. 87"
+            ]
+          },
+          "na_prova": {
+            "texto": "PENITENCIÁRIA = RECLUSÃO + regime FECHADO. Pode haver penitenciária só para presos em RDD (parágrafo único).",
+            "fontes": [
+              "LEP, art. 87",
+              "LEP, art. 87, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 88",
+          "na_real": {
+            "texto": "Na penitenciária, cada condenado fica em cela individual, com dormitório, vaso sanitário e pia, num ambiente saudável e com pelo menos 6 metros quadrados.",
+            "fontes": [
+              "LEP, art. 88"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma cela de 4 metros quadrados para um preso não cumpre a LEP: o mínimo são 6.",
+            "fontes": [
+              "LEP, art. 88, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "Cela INDIVIDUAL, com DORMITÓRIO, APARELHO SANITÁRIO e LAVATÓRIO; área mínima de 6 M². O alojamento coletivo é o da COLÔNIA (art. 92).",
+            "fontes": [
+              "LEP, art. 88",
+              "LEP, art. 92"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 89",
+          "na_real": {
+            "texto": "A penitenciária feminina tem seção para gestante e parturiente e creche para crianças de mais de 6 meses e menos de 7 anos cuja responsável está presa.",
+            "fontes": [
+              "LEP, art. 89"
+            ]
+          },
+          "exemplo": {
+            "texto": "O filho de 3 anos da presa, sem ninguém para cuidar dele lá fora, fica na creche da penitenciária.",
+            "fontes": [
+              "LEP, art. 89"
+            ]
+          },
+          "na_prova": {
+            "texto": "Idades: berçário até no MÍNIMO 6 MESES (art. 83, § 2º); creche para MAIORES DE 6 MESES e MENORES DE 7 ANOS (art. 89).",
+            "fontes": [
+              "LEP, art. 89",
+              "LEP, art. 83, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 91",
+          "na_real": {
+            "texto": "A colônia agrícola, industrial ou parecida é o lugar do regime semiaberto.",
+            "fontes": [
+              "LEP, art. 91"
+            ]
+          },
+          "exemplo": {
+            "texto": "O condenado progride do fechado para o semiaberto e vai trabalhar numa colônia agrícola.",
+            "fontes": [
+              "LEP, art. 91"
+            ]
+          },
+          "na_prova": {
+            "texto": "COLÔNIA = SEMIABERTO, e ali pode haver alojamento COLETIVO (art. 92).",
+            "fontes": [
+              "LEP, art. 91",
+              "LEP, art. 92"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 93",
+          "na_real": {
+            "texto": "A casa do albergado é o lugar do regime aberto e da pena de limitação de fim de semana.",
+            "fontes": [
+              "LEP, art. 93"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado à limitação de fim de semana, ele cumpre as horas de sábado e domingo na casa do albergado.",
+            "fontes": [
+              "LEP, art. 93"
+            ]
+          },
+          "na_prova": {
+            "texto": "CASA DO ALBERGADO = ABERTO + LIMITAÇÃO DE FIM DE SEMANA. Fica EM centro urbano, sem obstáculos físicos contra a fuga (art. 94); pelo menos uma por região (art. 95).",
+            "fontes": [
+              "LEP, art. 93",
+              "LEP, art. 94",
+              "LEP, art. 95"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 99",
+          "na_real": {
+            "texto": "O hospital de custódia e tratamento psiquiátrico recebe os inimputáveis e os semi-imputáveis do Código Penal.",
+            "fontes": [
+              "LEP, art. 99"
+            ]
+          },
+          "exemplo": {
+            "texto": "Quem cometeu o crime em surto, sem entender o que fazia, vai para o hospital de custódia, e não para a penitenciária.",
+            "fontes": [
+              "LEP, art. 99"
+            ]
+          },
+          "na_prova": {
+            "texto": "HOSPITAL DE CUSTÓDIA = INIMPUTÁVEIS e SEMI-IMPUTÁVEIS do art. 26 do CP. O exame psiquiátrico é obrigatório para todos os internados (art. 100).",
+            "fontes": [
+              "LEP, art. 99",
+              "LEP, art. 100"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 102",
+          "na_real": {
+            "texto": "A cadeia pública é o lugar do preso provisório, o que ainda não foi condenado de vez.",
+            "fontes": [
+              "LEP, art. 102"
+            ]
+          },
+          "exemplo": {
+            "texto": "Preso em flagrante e à espera do julgamento, ele fica na cadeia pública da comarca.",
+            "fontes": [
+              "LEP, art. 102"
+            ]
+          },
+          "na_prova": {
+            "texto": "CADEIA PÚBLICA = PRESO PROVISÓRIO; pelo menos UMA POR COMARCA (art. 103), PRÓXIMA de centro urbano (art. 104).",
+            "fontes": [
+              "LEP, art. 102",
+              "LEP, art. 103",
+              "LEP, art. 104"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Reclusão em regime fechado",
+          "o_que_e": "Penitenciária (art. 87)",
+          "o_que_acontece": "Cela individual de no mínimo 6 m²; a masculina, afastada do centro urbano",
+          "fontes": [
+            "LEP, art. 87",
+            "LEP, art. 88",
+            "LEP, art. 90"
+          ]
+        },
+        {
+          "situacao": "Regime semiaberto",
+          "o_que_e": "Colônia agrícola, industrial ou similar (art. 91)",
+          "o_que_acontece": "Pode ter alojamento coletivo",
+          "fontes": [
+            "LEP, art. 91",
+            "LEP, art. 92"
+          ]
+        },
+        {
+          "situacao": "Regime aberto e limitação de fim de semana",
+          "o_que_e": "Casa do albergado (art. 93)",
+          "o_que_acontece": "Em centro urbano, sem obstáculos contra a fuga",
+          "fontes": [
+            "LEP, art. 93",
+            "LEP, art. 94"
+          ]
+        },
+        {
+          "situacao": "Preso provisório",
+          "o_que_e": "Cadeia pública (art. 102)",
+          "o_que_acontece": "Pelo menos uma por comarca, perto de centro urbano",
+          "fontes": [
+            "LEP, art. 102",
+            "LEP, art. 103",
+            "LEP, art. 104"
+          ]
+        },
+        {
+          "situacao": "Inimputável e semi-imputável",
+          "o_que_e": "Hospital de custódia (art. 99)",
+          "o_que_acontece": "Cumpre medida de segurança",
+          "fontes": [
+            "LEP, art. 99"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            87,
+            ""
+          ],
+          "fim": [
+            87,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            91,
+            ""
+          ],
+          "fim": [
+            91,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            93,
+            ""
+          ],
+          "fim": [
+            93,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            102,
+            ""
+          ],
+          "fim": [
+            102,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            96,
+            ""
+          ],
+          "fim": [
+            96,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            99,
+            ""
+          ],
+          "fim": [
+            99,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            82,
+            ""
+          ],
+          "fim": [
+            82,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            84,
+            ""
+          ],
+          "fim": [
+            84,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            83,
+            "A"
+          ],
+          "fim": [
+            83,
+            "A"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            83,
+            "B"
+          ],
+          "fim": [
+            83,
+            "B"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            88,
+            ""
+          ],
+          "fim": [
+            88,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            83,
+            ""
+          ],
+          "fim": [
+            83,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            89,
+            ""
+          ],
+          "fim": [
+            89,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            90,
+            ""
+          ],
+          "fim": [
+            90,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            94,
+            ""
+          ],
+          "fim": [
+            94,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            103,
+            ""
+          ],
+          "fim": [
+            103,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            104,
+            ""
+          ],
+          "fim": [
+            104,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            86,
+            ""
+          ],
+          "fim": [
+            86,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            92,
+            ""
+          ],
+          "fim": [
+            92,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -8841,6 +10308,361 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 105",
+          "na_real": {
+            "texto": "Com a condenação definitiva à prisão, o juiz manda expedir a guia de recolhimento: o 'documento de entrada' do preso na execução.",
+            "fontes": [
+              "LEP, art. 105"
+            ]
+          },
+          "exemplo": {
+            "texto": "A sentença transita em julgado e o réu já está preso: o juiz expede a guia, e a execução começa.",
+            "fontes": [
+              "LEP, art. 105"
+            ]
+          },
+          "na_prova": {
+            "texto": "Sem a GUIA expedida pela autoridade JUDICIÁRIA, ninguém é recolhido para cumprir pena (art. 107); o Ministério Público tem ciência dela (art. 106, § 1º).",
+            "fontes": [
+              "LEP, art. 105",
+              "LEP, art. 106, § 1º",
+              "LEP, art. 107"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 110",
+          "na_real": {
+            "texto": "Na sentença, o juiz diz em que regime o condenado começa a cumprir a pena, seguindo as regras do Código Penal.",
+            "fontes": [
+              "LEP, art. 110"
+            ]
+          },
+          "exemplo": {
+            "texto": "O juiz condena a 6 anos e fixa o regime inicial semiaberto, conforme o art. 33 do Código Penal.",
+            "fontes": [
+              "LEP, art. 110"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem fixa o regime INICIAL é o JUIZ, NA SENTENÇA. Com mais de um crime, vale a SOMA ou UNIFICAÇÃO das penas, observada a detração ou a remição (art. 111).",
+            "fontes": [
+              "LEP, art. 110",
+              "LEP, art. 111"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 112",
+          "na_real": {
+            "texto": "A pena anda em escada: do fechado para o semiaberto e daí para o aberto. Para subir um degrau, é preciso cumprir um pedaço da pena no regime em que está (regra geral, 1/6; mais nos crimes graves), ter boa conduta atestada pelo diretor e passar pelo exame criminológico.",
+            "fontes": [
+              "LEP, art. 112",
+              "LEP, art. 112, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado primário a 12 anos por um crime sem violência, ele precisa cumprir 2 anos (1/6) no fechado, ter boa conduta e o exame criminológico para ir ao semiaberto.",
+            "fontes": [
+              "LEP, art. 112",
+              "LEP, art. 112, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Tabela de HOJE (Leis 15.358/2026 e 15.402/2026): regra 1/6; reincidente em crime sem violência 20%; primário com violência 25%; reincidente com violência 30%; hediondo primário 70%; hediondo com morte de primário, comando de organização ultraviolenta, milícia e feminicídio de primário 75%; reincidente em hediondo 80%; reincidente em hediondo com morte 85%. Falta grave INTERROMPE o prazo. A tabela do Pacote Anticrime (16% a 70%) não vale mais.",
+            "fontes": [
+              "LEP, art. 112",
+              "LEP, art. 112, § 6º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 114",
+          "na_real": {
+            "texto": "Só vai para o aberto quem está trabalhando, ou pode começar a trabalhar na hora, e mostra pelos antecedentes e pelo exame criminológico que vai se ajustar ao regime.",
+            "fontes": [
+              "LEP, art. 114"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso consegue uma carta de emprego de uma oficina: cumpre o primeiro requisito do aberto, que é trabalhar ou provar que pode trabalhar de imediato.",
+            "fontes": [
+              "LEP, art. 114, I"
+            ]
+          },
+          "na_prova": {
+            "texto": "Dois requisitos: TRABALHO (atual ou imediato) e FUNDADOS INDÍCIOS de que vai se ajustar, pelos ANTECEDENTES e pelo EXAME CRIMINOLÓGICO. Os do art. 117 podem ser dispensados do trabalho.",
+            "fontes": [
+              "LEP, art. 114",
+              "LEP, art. 114, parágrafo único",
+              "LEP, art. 117"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 117",
+          "na_real": {
+            "texto": "No regime aberto, cumprir em casa só é permitido para quatro: maior de 70 anos, quem tem doença grave, mãe de filho menor ou com deficiência e gestante.",
+            "fontes": [
+              "LEP, art. 117"
+            ]
+          },
+          "exemplo": {
+            "texto": "A condenada no regime aberto está grávida: pode cumprir a pena em casa.",
+            "fontes": [
+              "LEP, art. 117, IV"
+            ]
+          },
+          "na_prova": {
+            "texto": "Domiciliar no ABERTO: maior de 70 ANOS; DOENÇA GRAVE; condenada com FILHO MENOR ou DEFICIENTE; GESTANTE. O maior de 60 é outra regra: estabelecimento próprio.",
+            "fontes": [
+              "LEP, art. 117"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 118",
+          "na_real": {
+            "texto": "A pena também anda para trás: o preso pode voltar para qualquer regime mais rigoroso se cometer crime doloso ou falta grave, ou se uma condenação antiga, somada, não couber no regime atual.",
+            "fontes": [
+              "LEP, art. 118"
+            ]
+          },
+          "exemplo": {
+            "texto": "No semiaberto, o preso foge e é recapturado: pode regredir para o fechado.",
+            "fontes": [
+              "LEP, art. 118, I"
+            ]
+          },
+          "na_prova": {
+            "texto": "Regressão para QUALQUER dos regimes mais rigorosos: pode pular etapa. No ABERTO, também por FRUSTRAR os fins da execução ou NÃO PAGAR, podendo, a multa. O condenado é ouvido antes, nos casos do inciso I e do § 1º.",
+            "fontes": [
+              "LEP, art. 118",
+              "LEP, art. 118, § 1º",
+              "LEP, art. 118, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 119",
+          "na_real": {
+            "texto": "A lei local pode criar normas complementares para o cumprimento da pena no regime aberto.",
+            "fontes": [
+              "LEP, art. 119"
+            ]
+          },
+          "exemplo": {
+            "texto": "Santa Catarina pode fazer uma lei com regras extras para quem cumpre pena no regime aberto no Estado.",
+            "fontes": [
+              "LEP, art. 119"
+            ]
+          },
+          "na_prova": {
+            "texto": "A palavra é LEGISLAÇÃO LOCAL, e não federal, nacional ou internacional. Em 2019, a questão pedia exatamente esta palavra.",
+            "fontes": [
+              "LEP, art. 119",
+              "2019-q90 (gabarito A)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 119-A",
+          "na_real": {
+            "texto": "O condenado por crime contra a dignidade sexual só progride, ou só ganha benefício que o deixe sair, se o exame criminológico indicar que ele não vai repetir esse tipo de crime.",
+            "fontes": [
+              "LEP, art. 119-A"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado por estupro, ele cumpre o tempo para progredir, mas o exame criminológico não aponta indícios de que não voltará ao crime: não progride.",
+            "fontes": [
+              "LEP, art. 119-A"
+            ]
+          },
+          "na_prova": {
+            "texto": "Novo (Lei 15.280/2025): nos CRIMES CONTRA A DIGNIDADE SEXUAL, o EXAME CRIMINOLÓGICO precisa afirmar indícios de que NÃO VOLTARÁ a cometer crime da mesma natureza, para progredir ou sair.",
+            "fontes": [
+              "LEP, art. 119-A"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Subir de regime",
+          "o_que_e": "Progressão (art. 112)",
+          "o_que_acontece": "Fração da pena, boa conduta e exame criminológico",
+          "fontes": [
+            "LEP, art. 112",
+            "LEP, art. 112, § 1º"
+          ]
+        },
+        {
+          "situacao": "Voltar para regime mais rigoroso",
+          "o_que_e": "Regressão (art. 118)",
+          "o_que_acontece": "Para qualquer regime mais rigoroso",
+          "fontes": [
+            "LEP, art. 118"
+          ]
+        },
+        {
+          "situacao": "Gestante, mãe ou responsável por criança ou pessoa com deficiência",
+          "o_que_e": "Progressão especial (art. 112, § 3º)",
+          "o_que_acontece": "Com 1/8 da pena, cumpridos todos os requisitos",
+          "fontes": [
+            "LEP, art. 112, § 3º"
+          ]
+        },
+        {
+          "situacao": "Falta grave no meio do caminho",
+          "o_que_e": "Interrupção (art. 112, § 6º)",
+          "o_que_acontece": "O prazo recomeça, contado da pena que falta",
+          "fontes": [
+            "LEP, art. 112, § 6º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            105,
+            ""
+          ],
+          "fim": [
+            105,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            106,
+            ""
+          ],
+          "fim": [
+            106,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            107,
+            ""
+          ],
+          "fim": [
+            107,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            110,
+            ""
+          ],
+          "fim": [
+            110,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            111,
+            ""
+          ],
+          "fim": [
+            111,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            112,
+            ""
+          ],
+          "fim": [
+            112,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            118,
+            ""
+          ],
+          "fim": [
+            118,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            114,
+            ""
+          ],
+          "fim": [
+            114,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            117,
+            ""
+          ],
+          "fim": [
+            117,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            119,
+            ""
+          ],
+          "fim": [
+            119,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            119,
+            "A"
+          ],
+          "fim": [
+            119,
+            "A"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            82,
+            ""
+          ],
+          "fim": [
+            82,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -9017,6 +10839,394 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 131",
+          "na_real": {
+            "texto": "O livramento condicional é sair antes do fim da pena, com condições. Quem concede é o juiz da execução, se o preso preenche os requisitos do Código Penal, depois de ouvir o Ministério Público e o Conselho Penitenciário.",
+            "fontes": [
+              "LEP, art. 131"
+            ]
+          },
+          "exemplo": {
+            "texto": "Cumprida a parte da pena que o Código Penal exige, o preso pede o livramento; o juiz ouve o MP e o Conselho Penitenciário e concede.",
+            "fontes": [
+              "LEP, art. 131"
+            ]
+          },
+          "na_prova": {
+            "texto": "Concede o JUIZ DA EXECUÇÃO, com os requisitos do ART. 83 DO CP, ouvidos o MP e o CONSELHO PENITENCIÁRIO.",
+            "fontes": [
+              "LEP, art. 131",
+              "CP, art. 83"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 132",
+          "na_real": {
+            "texto": "Solta em livramento, a pessoa tem obrigações certas: arrumar trabalho lícito, se puder trabalhar; avisar o juiz da ocupação; e não se mudar da comarca sem autorização. O juiz pode somar outras, como recolher-se em hora fixada ou usar tornozeleira.",
+            "fontes": [
+              "LEP, art. 132",
+              "LEP, art. 132, § 1º",
+              "LEP, art. 132, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O liberado quer se mudar para outra cidade: precisa de autorização do juiz antes, porque não pode deixar a comarca sem ela.",
+            "fontes": [
+              "LEP, art. 132, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "SEMPRE impostas: ocupação LÍCITA, comunicar a ocupação e não MUDAR DA COMARCA sem autorização. PODEM ser impostas: não mudar de RESIDÊNCIA sem avisar, RECOLHER-SE em hora fixada, não FREQUENTAR certos lugares e MONITORAÇÃO eletrônica.",
+            "fontes": [
+              "LEP, art. 132, § 1º",
+              "LEP, art. 132, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 146-B",
+          "na_real": {
+            "texto": "O juiz pode mandar usar tornozeleira na saída temporária do semiaberto, na prisão domiciliar, nos regimes aberto e semiaberto, na pena alternativa que proíbe frequentar certos lugares e no livramento condicional.",
+            "fontes": [
+              "LEP, art. 146-B"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso do semiaberto ganha a saída para estudar fora: o juiz pode determinar que ele use tornozeleira.",
+            "fontes": [
+              "LEP, art. 146-B, II"
+            ]
+          },
+          "na_prova": {
+            "texto": "O verbo é 'PODERÁ': é faculdade do juiz, não obrigação. A lista cresceu em 2024 (Lei 14.843): regimes aberto e semiaberto, restritiva com limitação de frequência e livramento condicional. Em 2019, a certa era a da saída temporária no semiaberto.",
+            "fontes": [
+              "LEP, art. 146-B",
+              "2019-q89 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 146-C",
+          "na_real": {
+            "texto": "Quem usa tornozeleira tem de receber o servidor, atender aos contatos, seguir as orientações e não mexer no aparelho. Se violar esses deveres, o juiz pode aplicar consequências, da advertência à regressão.",
+            "fontes": [
+              "LEP, art. 146-C",
+              "LEP, art. 146-C, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O monitorado corta a tornozeleira: o juiz, ouvidos o MP e a defesa, pode revogar o benefício ou fazê-lo regredir de regime.",
+            "fontes": [
+              "LEP, art. 146-C, II",
+              "LEP, art. 146-C, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "A violação 'PODERÁ acarretar', a CRITÉRIO DO JUIZ, ouvidos o MP e a defesa: regressão, revogação de saída, de domiciliar ou de livramento, conversão da restritiva ou ADVERTÊNCIA por escrito. 'Obrigatoriamente' está errado.",
+            "fontes": [
+              "LEP, art. 146-C, parágrafo único",
+              "2019-q89"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 146-D",
+          "na_real": {
+            "texto": "A tornozeleira pode ser retirada quando deixa de ser necessária ou adequada, ou como consequência se a pessoa violar os deveres ou cometer falta grave.",
+            "fontes": [
+              "LEP, art. 146-D"
+            ]
+          },
+          "exemplo": {
+            "texto": "O liberado cumpre tudo certinho há meses e o juiz entende que a tornozeleira não é mais necessária: a monitoração é revogada.",
+            "fontes": [
+              "LEP, art. 146-D, I"
+            ]
+          },
+          "na_prova": {
+            "texto": "Duas causas: quando se torna DESNECESSÁRIA ou INADEQUADA; ou por VIOLAÇÃO DOS DEVERES ou FALTA GRAVE. 'Somente por falta grave' está errado.",
+            "fontes": [
+              "LEP, art. 146-D",
+              "2019-q89"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 146-E",
+          "na_real": {
+            "texto": "Quem foi condenado por feminicídio ou por crime contra a dignidade sexual, sempre que sai da prisão por algum benefício, usa tornozeleira, obrigatoriamente.",
+            "fontes": [
+              "LEP, art. 146-E"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado por estupro, ele ganha uma saída autorizada: sai com tornozeleira, sem escolha.",
+            "fontes": [
+              "LEP, art. 146-E"
+            ]
+          },
+          "na_prova": {
+            "texto": "Aqui NÃO é faculdade: o condenado por crime contra a mulher por razões da condição do sexo feminino ou contra a DIGNIDADE SEXUAL SERÁ monitorado em qualquer saída (Leis 14.994/2024 e 15.280/2025).",
+            "fontes": [
+              "LEP, art. 146-E"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 149",
+          "na_real": {
+            "texto": "Na prestação de serviços à comunidade, o juiz escolhe a entidade, e o condenado trabalha sem receber, 8 horas por semana, aos sábados, domingos e feriados, ou em dias úteis sem atrapalhar o emprego. A pena começa a contar do primeiro dia em que ele comparece.",
+            "fontes": [
+              "LEP, art. 149",
+              "LEP, art. 149, § 1º",
+              "LEP, art. 149, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado a prestar serviços, ele trabalha 8 horas todo sábado num asilo da cidade, sem receber, e a pena conta desde o primeiro sábado em que apareceu.",
+            "fontes": [
+              "LEP, art. 149, § 1º",
+              "LEP, art. 149, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "8 HORAS SEMANAIS; sábados, domingos e feriados OU dias úteis sem prejudicar a jornada; início no PRIMEIRO COMPARECIMENTO; trabalho GRATUITO, conforme as aptidões.",
+            "fontes": [
+              "LEP, art. 149",
+              "LEP, art. 149, § 1º",
+              "LEP, art. 149, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 156",
+          "na_real": {
+            "texto": "No sursis, o juiz suspende a pena de prisão de até 2 anos por um período de 2 a 4 anos: a pessoa não vai presa, mas cumpre condições.",
+            "fontes": [
+              "LEP, art. 156"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado a 1 ano e meio de prisão, ele recebe o sursis por 3 anos: não entra na cadeia, mas tem de cumprir as condições nesse período.",
+            "fontes": [
+              "LEP, art. 156"
+            ]
+          },
+          "na_prova": {
+            "texto": "Pena NÃO SUPERIOR A 2 ANOS; suspensão por 2 A 4 ANOS. Faltar sem justificativa à audiência admonitória deixa a suspensão SEM EFEITO (art. 161).",
+            "fontes": [
+              "LEP, art. 156",
+              "LEP, art. 161"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Ocupação lícita, comunicá-la e não se mudar da comarca",
+          "o_que_e": "Condições obrigatórias (art. 132, § 1º)",
+          "o_que_acontece": "Sempre impostas",
+          "fontes": [
+            "LEP, art. 132, § 1º"
+          ]
+        },
+        {
+          "situacao": "Não mudar de residência sem avisar, recolher-se em hora fixada, não frequentar lugares, tornozeleira",
+          "o_que_e": "Condições facultativas (art. 132, § 2º)",
+          "o_que_acontece": "O juiz pode impor",
+          "fontes": [
+            "LEP, art. 132, § 2º"
+          ]
+        },
+        {
+          "situacao": "Livramento revogado por crime anterior a ele",
+          "o_que_e": "Art. 141",
+          "o_que_acontece": "O período de prova conta como pena, e cabe novo livramento",
+          "fontes": [
+            "LEP, art. 141"
+          ]
+        },
+        {
+          "situacao": "Livramento revogado por outro motivo",
+          "o_que_e": "Art. 142",
+          "o_que_acontece": "O tempo solto não conta, e não há novo livramento pela mesma pena",
+          "fontes": [
+            "LEP, art. 142"
+          ]
+        },
+        {
+          "situacao": "Condenado por feminicídio ou crime sexual saindo por benefício",
+          "o_que_e": "Monitoração obrigatória (art. 146-E)",
+          "o_que_acontece": "Tornozeleira em qualquer saída",
+          "fontes": [
+            "LEP, art. 146-E"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            131,
+            ""
+          ],
+          "fim": [
+            131,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            132,
+            ""
+          ],
+          "fim": [
+            132,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            146,
+            "B"
+          ],
+          "fim": [
+            146,
+            "B"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            146,
+            "C"
+          ],
+          "fim": [
+            146,
+            "C"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            141,
+            ""
+          ],
+          "fim": [
+            141,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            142,
+            ""
+          ],
+          "fim": [
+            142,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            156,
+            ""
+          ],
+          "fim": [
+            156,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            160,
+            ""
+          ],
+          "fim": [
+            160,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            161,
+            ""
+          ],
+          "fim": [
+            161,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            146,
+            "D"
+          ],
+          "fim": [
+            146,
+            "D"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            146,
+            "E"
+          ],
+          "fim": [
+            146,
+            "E"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            149,
+            ""
+          ],
+          "fim": [
+            149,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            164,
+            ""
+          ],
+          "fim": [
+            164,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            168,
+            ""
+          ],
+          "fim": [
+            168,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -9187,6 +11397,368 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 171",
+          "na_real": {
+            "texto": "Com a decisão definitiva que aplica medida de segurança, expede-se a guia para a execução.",
+            "fontes": [
+              "LEP, art. 171"
+            ]
+          },
+          "exemplo": {
+            "texto": "O inimputável recebe medida de segurança; depois do trânsito em julgado, o juiz expede a guia para a internação.",
+            "fontes": [
+              "LEP, art. 171"
+            ]
+          },
+          "na_prova": {
+            "texto": "Sem a GUIA expedida pela autoridade JUDICIÁRIA, ninguém é internado nem posto em tratamento ambulatorial (art. 172).",
+            "fontes": [
+              "LEP, art. 171",
+              "LEP, art. 172"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 175",
+          "na_real": {
+            "texto": "No fim do prazo mínimo da medida de segurança, verifica-se se a pessoa ainda é perigosa: a direção manda relatório com laudo psiquiátrico, o MP e a defesa falam, e o juiz decide.",
+            "fontes": [
+              "LEP, art. 175"
+            ]
+          },
+          "exemplo": {
+            "texto": "O prazo mínimo da internação termina em dezembro: até novembro, a direção manda ao juiz o relatório com o laudo psiquiátrico.",
+            "fontes": [
+              "LEP, art. 175, I",
+              "LEP, art. 175, II"
+            ]
+          },
+          "na_prova": {
+            "texto": "Prazos: relatório até 1 MÊS antes do fim do prazo mínimo; MP e curador ou defensor, 3 DIAS cada; decisão em 5 DIAS. Mas o exame pode ser pedido A QUALQUER TEMPO (art. 176).",
+            "fontes": [
+              "LEP, art. 175",
+              "LEP, art. 176"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 176",
+          "na_real": {
+            "texto": "Mesmo antes do fim do prazo mínimo, o juiz pode mandar examinar se a periculosidade acabou, a pedido fundamentado do MP ou do interessado.",
+            "fontes": [
+              "LEP, art. 176"
+            ]
+          },
+          "exemplo": {
+            "texto": "A família mostra que o internado melhorou muito com o tratamento e pede o exame antes do prazo: o juiz pode ordenar.",
+            "fontes": [
+              "LEP, art. 176"
+            ]
+          },
+          "na_prova": {
+            "texto": "'EM QUALQUER TEMPO', ainda no decorrer do prazo mínimo, a requerimento FUNDAMENTADO do MP ou do interessado.",
+            "fontes": [
+              "LEP, art. 176"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 180",
+          "na_real": {
+            "texto": "A pena de prisão de até 2 anos pode virar pena alternativa, se o condenado está no aberto, já cumpriu 1/4 e o histórico dele recomenda.",
+            "fontes": [
+              "LEP, art. 180"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado a 2 anos no regime aberto, depois de cumprir 6 meses e com bom histórico, ele pode ter a pena convertida em restritiva de direitos.",
+            "fontes": [
+              "LEP, art. 180"
+            ]
+          },
+          "na_prova": {
+            "texto": "Requisitos: pena NÃO SUPERIOR A 2 ANOS, regime ABERTO, 1/4 cumprido, e antecedentes e personalidade favoráveis.",
+            "fontes": [
+              "LEP, art. 180"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 183",
+          "na_real": {
+            "texto": "Se o preso adoece mentalmente durante a pena, o juiz pode trocar a pena por medida de segurança.",
+            "fontes": [
+              "LEP, art. 183"
+            ]
+          },
+          "exemplo": {
+            "texto": "No meio da pena, o preso desenvolve uma doença mental grave: o juiz, a pedido da Defensoria, substitui a pena por medida de segurança.",
+            "fontes": [
+              "LEP, art. 183"
+            ]
+          },
+          "na_prova": {
+            "texto": "Pode ser de OFÍCIO ou a requerimento do MP, da DEFENSORIA ou da AUTORIDADE ADMINISTRATIVA. E o tratamento ambulatorial pode virar internação, com prazo mínimo de 1 ANO (art. 184).",
+            "fontes": [
+              "LEP, art. 183",
+              "LEP, art. 184"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 185",
+          "na_real": {
+            "texto": "Excesso ou desvio é quando a execução vai além do que a sentença, a lei ou o regulamento permitem.",
+            "fontes": [
+              "LEP, art. 185"
+            ]
+          },
+          "exemplo": {
+            "texto": "A sentença fixou o semiaberto, e o preso é mantido no fechado sem motivo legal: é excesso de execução.",
+            "fontes": [
+              "LEP, art. 185"
+            ]
+          },
+          "na_prova": {
+            "texto": "Quem pode SUSCITAR: o MP, o CONSELHO PENITENCIÁRIO, o próprio SENTENCIADO e qualquer outro órgão da execução (art. 186).",
+            "fontes": [
+              "LEP, art. 185",
+              "LEP, art. 186"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 197",
+          "na_real": {
+            "texto": "Contra as decisões do juiz da execução cabe agravo, e o recurso não trava a decisão.",
+            "fontes": [
+              "LEP, art. 197"
+            ]
+          },
+          "exemplo": {
+            "texto": "O juiz concede a progressão e o MP recorre: o preso vai para o semiaberto mesmo assim, porque o agravo não tem efeito suspensivo.",
+            "fontes": [
+              "LEP, art. 197"
+            ]
+          },
+          "na_prova": {
+            "texto": "O recurso é o AGRAVO, SEM EFEITO SUSPENSIVO. O prazo de 5 dias é da Súmula 700 do STF.",
+            "fontes": [
+              "LEP, art. 197",
+              "Súmula 700 do STF"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Prazo mínimo da medida terminando",
+          "o_que_e": "Exame do art. 175",
+          "o_que_acontece": "Relatório, laudo, MP e defesa; decisão em 5 dias",
+          "fontes": [
+            "LEP, art. 175"
+          ]
+        },
+        {
+          "situacao": "Pedido de exame antes do prazo mínimo",
+          "o_que_e": "Exame do art. 176",
+          "o_que_acontece": "Cabe a qualquer tempo, com requerimento fundamentado",
+          "fontes": [
+            "LEP, art. 176"
+          ]
+        },
+        {
+          "situacao": "Doença mental durante a pena",
+          "o_que_e": "Substituição por medida de segurança (art. 183)",
+          "o_que_acontece": "O juiz pode substituir a pena",
+          "fontes": [
+            "LEP, art. 183"
+          ]
+        },
+        {
+          "situacao": "Execução além dos limites da sentença ou da lei",
+          "o_que_e": "Excesso ou desvio (art. 185)",
+          "o_que_acontece": "Incidente suscitado por quem o art. 186 lista",
+          "fontes": [
+            "LEP, art. 185",
+            "LEP, art. 186"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            171,
+            ""
+          ],
+          "fim": [
+            171,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            172,
+            ""
+          ],
+          "fim": [
+            172,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            175,
+            ""
+          ],
+          "fim": [
+            175,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            176,
+            ""
+          ],
+          "fim": [
+            176,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            185,
+            ""
+          ],
+          "fim": [
+            185,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            186,
+            ""
+          ],
+          "fim": [
+            186,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            194,
+            ""
+          ],
+          "fim": [
+            194,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            197,
+            ""
+          ],
+          "fim": [
+            197,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            180,
+            ""
+          ],
+          "fim": [
+            180,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            183,
+            ""
+          ],
+          "fim": [
+            183,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            184,
+            ""
+          ],
+          "fim": [
+            184,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            187,
+            ""
+          ],
+          "fim": [
+            192,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            198,
+            ""
+          ],
+          "fim": [
+            198,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            199,
+            ""
+          ],
+          "fim": [
+            199,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            202,
+            ""
+          ],
+          "fim": [
+            202,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -9348,6 +11920,385 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 1º",
+          "na_real": {
+            "texto": "A execução da pena tem dois objetivos: cumprir o que a sentença mandou e dar condições para o condenado e o internado voltarem a viver bem em sociedade.",
+            "fontes": [
+              "LEP, art. 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Além de manter o preso o tempo da pena, a unidade oferece escola e trabalho para ele sair preparado.",
+            "fontes": [
+              "LEP, art. 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Dois objetivos: EFETIVAR a sentença e proporcionar a HARMÔNICA INTEGRAÇÃO SOCIAL do condenado E do INTERNADO.",
+            "fontes": [
+              "LEP, art. 1º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 2º",
+          "na_real": {
+            "texto": "A LEP vale em todo o país e também para o preso provisório e para o condenado pela Justiça Eleitoral ou Militar que esteja num presídio comum.",
+            "fontes": [
+              "LEP, art. 2º",
+              "LEP, art. 2º, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um militar condenado pela Justiça Militar que cumpre pena numa penitenciária estadual segue a LEP.",
+            "fontes": [
+              "LEP, art. 2º, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "A LEP vale IGUALMENTE para o PROVISÓRIO e para o condenado pela Justiça ELEITORAL ou MILITAR recolhido a estabelecimento da justiça ORDINÁRIA.",
+            "fontes": [
+              "LEP, art. 2º, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 3º",
+          "na_real": {
+            "texto": "O preso perde só o que a sentença ou a lei tiram dele; o resto dos direitos continua. E não pode haver distinção por raça, classe social, religião ou política.",
+            "fontes": [
+              "LEP, art. 3º",
+              "LEP, art. 3º, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso perde a liberdade de ir e vir, mas não perde o direito à saúde ou ao estudo.",
+            "fontes": [
+              "LEP, art. 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Assegurados TODOS os direitos NÃO ATINGIDOS pela sentença ou pela lei; sem distinção RACIAL, SOCIAL, RELIGIOSA ou POLÍTICA.",
+            "fontes": [
+              "LEP, art. 3º",
+              "LEP, art. 3º, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 4º",
+          "na_real": {
+            "texto": "O Estado deve buscar a ajuda da comunidade na execução da pena e da medida de segurança.",
+            "fontes": [
+              "LEP, art. 4º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Igrejas, empresas e ONGs da cidade que oferecem cursos e vagas de trabalho aos presos: é a cooperação da comunidade.",
+            "fontes": [
+              "LEP, art. 4º"
+            ]
+          },
+          "na_prova": {
+            "texto": "O Estado DEVERÁ recorrer à COOPERAÇÃO DA COMUNIDADE, na pena E na medida de segurança.",
+            "fontes": [
+              "LEP, art. 4º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 5º",
+          "na_real": {
+            "texto": "Os condenados são classificados pelos antecedentes e pela personalidade, para que a execução da pena seja feita sob medida para cada um.",
+            "fontes": [
+              "LEP, art. 5º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Dois presos pelo mesmo crime podem ter planos diferentes na unidade, porque têm antecedentes e personalidades diferentes.",
+            "fontes": [
+              "LEP, art. 5º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Critérios da classificação: ANTECEDENTES e PERSONALIDADE. Finalidade: a INDIVIDUALIZAÇÃO da execução.",
+            "fontes": [
+              "LEP, art. 5º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 6º",
+          "na_real": {
+            "texto": "Quem faz a classificação é a Comissão Técnica de Classificação, que monta o programa individual da pena de cada preso.",
+            "fontes": [
+              "LEP, art. 6º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ao chegar, o preso passa pela Comissão Técnica, que define o plano dele: trabalho, estudo e acompanhamento.",
+            "fontes": [
+              "LEP, art. 6º"
+            ]
+          },
+          "na_prova": {
+            "texto": "A COMISSÃO TÉCNICA DE CLASSIFICAÇÃO elabora o PROGRAMA INDIVIDUALIZADOR da pena privativa de liberdade, para o condenado ou o PRESO PROVISÓRIO.",
+            "fontes": [
+              "LEP, art. 6º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 7º",
+          "na_real": {
+            "texto": "Cada estabelecimento tem a sua Comissão Técnica de Classificação, presidida pelo diretor e com, no mínimo, 2 chefes de serviço, 1 psiquiatra, 1 psicólogo e 1 assistente social.",
+            "fontes": [
+              "LEP, art. 7º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Na reunião da Comissão, quem preside é o diretor da penitenciária, e não o juiz.",
+            "fontes": [
+              "LEP, art. 7º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Presidida pelo DIRETOR; no mínimo 2 CHEFES DE SERVIÇO, 1 PSIQUIATRA, 1 PSICÓLOGO e 1 ASSISTENTE SOCIAL. Nos demais casos, atua junto ao Juízo da Execução, com fiscais do Serviço Social.",
+            "fontes": [
+              "LEP, art. 7º",
+              "LEP, art. 7º, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 8º",
+          "na_real": {
+            "texto": "O condenado ao regime fechado passa obrigatoriamente pelo exame criminológico, para ser classificado; o do semiaberto pode passar.",
+            "fontes": [
+              "LEP, art. 8º",
+              "LEP, art. 8º, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado ao fechado, ele faz o exame criminológico; o colega condenado ao semiaberto pode fazer ou não.",
+            "fontes": [
+              "LEP, art. 8º",
+              "LEP, art. 8º, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "FECHADO: 'SERÁ submetido', obrigatório. SEMIABERTO: 'PODERÁ ser submetido', facultativo.",
+            "fontes": [
+              "LEP, art. 8º",
+              "LEP, art. 8º, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 9º",
+          "na_real": {
+            "texto": "Para conhecer o condenado, a Comissão pode conversar com pessoas, pedir informações a repartições ou empresas e fazer outras diligências e exames.",
+            "fontes": [
+              "LEP, art. 9º"
+            ]
+          },
+          "exemplo": {
+            "texto": "A Comissão entrevista a mãe do preso e pede ao antigo empregador informações sobre ele.",
+            "fontes": [
+              "LEP, art. 9º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três poderes: ENTREVISTAR pessoas, REQUISITAR dados de repartições ou estabelecimentos PRIVADOS e realizar outras DILIGÊNCIAS e EXAMES, com ética profissional.",
+            "fontes": [
+              "LEP, art. 9º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 9º-A",
+          "na_real": {
+            "texto": "Todo condenado à reclusão em regime inicial fechado tem o DNA coletado ao entrar no presídio, por técnica sem dor, para um banco de dados sigiloso. Recusar é falta grave.",
+            "fontes": [
+              "LEP, art. 9º-A",
+              "LEP, art. 9º-A, § 1º",
+              "LEP, art. 9º-A, § 8º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Ao chegar à penitenciária para cumprir pena em regime fechado, o condenado passa pela coleta, indolor, para o perfil genético; se recusar, comete falta grave.",
+            "fontes": [
+              "LEP, art. 9º-A",
+              "LEP, art. 9º-A, § 8º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Hoje (Lei 15.295/2025) vale para TODO condenado à RECLUSÃO em regime INICIAL FECHADO, e não só para crimes violentos ou hediondos. A amostra só serve para IDENTIFICAÇÃO; a fenotipagem é proibida. RECUSA = FALTA GRAVE.",
+            "fontes": [
+              "LEP, art. 9º-A",
+              "LEP, art. 9º-A, § 5º",
+              "LEP, art. 9º-A, § 8º"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Condenado ao regime fechado",
+          "o_que_e": "Exame criminológico obrigatório (art. 8º)",
+          "o_que_acontece": "'Será submetido'",
+          "fontes": [
+            "LEP, art. 8º"
+          ]
+        },
+        {
+          "situacao": "Condenado ao regime semiaberto",
+          "o_que_e": "Exame criminológico facultativo (art. 8º, parágrafo único)",
+          "o_que_acontece": "'Poderá ser submetido'",
+          "fontes": [
+            "LEP, art. 8º, parágrafo único"
+          ]
+        },
+        {
+          "situacao": "Condenado à reclusão em regime inicial fechado",
+          "o_que_e": "Perfil genético obrigatório (art. 9º-A)",
+          "o_que_acontece": "Coleta de DNA ao entrar; recusar é falta grave",
+          "fontes": [
+            "LEP, art. 9º-A",
+            "LEP, art. 9º-A, § 8º"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            1,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            2,
+            ""
+          ],
+          "fim": [
+            2,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            3,
+            ""
+          ],
+          "fim": [
+            3,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            5,
+            ""
+          ],
+          "fim": [
+            5,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            6,
+            ""
+          ],
+          "fim": [
+            6,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            8,
+            ""
+          ],
+          "fim": [
+            8,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            4,
+            ""
+          ],
+          "fim": [
+            4,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            7,
+            ""
+          ],
+          "fim": [
+            7,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            9,
+            ""
+          ],
+          "fim": [
+            9,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            9,
+            "A"
+          ],
+          "fim": [
+            9,
+            "A"
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            1,
+            ""
+          ],
+          "fim": [
+            9,
+            "A"
+          ]
+        }
+      ]
     }
   },
   {
@@ -9544,6 +12495,400 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 61",
+          "na_real": {
+            "texto": "São oito os órgãos da execução penal: o CNPCP, o juiz da execução, o Ministério Público, o Conselho Penitenciário, os Departamentos Penitenciários, o Patronato, o Conselho da Comunidade e a Defensoria Pública.",
+            "fontes": [
+              "LEP, art. 61"
+            ]
+          },
+          "exemplo": {
+            "texto": "No mesmo mês, podem aparecer na penitenciária o juiz, o promotor e o Conselho da Comunidade: todos são órgãos da execução.",
+            "fontes": [
+              "LEP, art. 61"
+            ]
+          },
+          "na_prova": {
+            "texto": "São OITO, e a DEFENSORIA PÚBLICA está entre eles (inciso VIII). Polícia e OAB NÃO.",
+            "fontes": [
+              "LEP, art. 61"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 63",
+          "na_real": {
+            "texto": "O CNPCP tem 13 membros, escolhidos pelo Ministério da Justiça entre professores e profissionais da área penal e representantes da comunidade e dos ministérios da área social, com mandato de 2 anos.",
+            "fontes": [
+              "LEP, art. 63"
+            ]
+          },
+          "exemplo": {
+            "texto": "A cada ano, um terço dos membros do CNPCP é renovado.",
+            "fontes": [
+              "LEP, art. 63, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "CNPCP: 13 MEMBROS, mandato de 2 ANOS, renovado 1/3 a cada ano; sede na CAPITAL DA REPÚBLICA, subordinado ao MINISTÉRIO DA JUSTIÇA (art. 62).",
+            "fontes": [
+              "LEP, art. 63",
+              "LEP, art. 62"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 64",
+          "na_real": {
+            "texto": "O CNPCP é o 'cérebro' da política penitenciária: propõe diretrizes, avalia o sistema, estimula a pesquisa criminológica, faz regras de arquitetura de presídios e inspeciona os estabelecimentos.",
+            "fontes": [
+              "LEP, art. 64"
+            ]
+          },
+          "exemplo": {
+            "texto": "O projeto de um presídio novo segue as regras de arquitetura e construção estabelecidas pelo CNPCP.",
+            "fontes": [
+              "LEP, art. 64, VI"
+            ]
+          },
+          "na_prova": {
+            "texto": "ESTIMULAR e PROMOVER a PESQUISA CRIMINOLÓGICA é do CNPCP, e não do Conselho Penitenciário, do juiz ou do MP. Foi a resposta em 2019.",
+            "fontes": [
+              "LEP, art. 64, IV",
+              "2019-q84 (gabarito E)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 65",
+          "na_real": {
+            "texto": "A execução fica com o juiz que a lei de organização judiciária indicar; se não indicar, com o juiz que deu a sentença.",
+            "fontes": [
+              "LEP, art. 65"
+            ]
+          },
+          "exemplo": {
+            "texto": "Na comarca que tem vara de execuções penais, é o juiz dela; onde não tem, a execução segue com o juiz que condenou.",
+            "fontes": [
+              "LEP, art. 65"
+            ]
+          },
+          "na_prova": {
+            "texto": "Regra: o juiz indicado na LEI LOCAL de organização judiciária; NA AUSÊNCIA, o DA SENTENÇA.",
+            "fontes": [
+              "LEP, art. 65"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 66",
+          "na_real": {
+            "texto": "O juiz da execução decide o que muda a pena: progressão, regressão, remição, livramento, saídas temporárias, lei mais benéfica e extinção da punibilidade. E inspeciona os presídios todo mês.",
+            "fontes": [
+              "LEP, art. 66"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso quer que os dias trabalhados abatam a pena: quem decide a remição é o juiz da execução.",
+            "fontes": [
+              "LEP, art. 66, III, c"
+            ]
+          },
+          "na_prova": {
+            "texto": "Inspeção MENSAL dos estabelecimentos; pode INTERDITAR o que funciona mal; emite o ATESTADO ANUAL de pena; desde 2024, determina a MONITORAÇÃO ELETRÔNICA (V, j). Quem AUTORIZA SAÍDA TEMPORÁRIA é o juiz; a permissão de saída é do diretor.",
+            "fontes": [
+              "LEP, art. 66, IV",
+              "LEP, art. 66, V, j",
+              "LEP, art. 66, VII",
+              "LEP, art. 66, VIII",
+              "LEP, art. 66, X"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 69",
+          "na_real": {
+            "texto": "O Conselho Penitenciário dá parecer e fiscaliza a execução da pena; os membros são nomeados pelo Governador, com mandato de 4 anos.",
+            "fontes": [
+              "LEP, art. 69",
+              "LEP, art. 69, § 1º",
+              "LEP, art. 69, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Os membros do Conselho Penitenciário de Santa Catarina são nomeados pelo Governador, para mandato de 4 anos.",
+            "fontes": [
+              "LEP, art. 69, § 1º",
+              "LEP, art. 69, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Órgão CONSULTIVO e FISCALIZADOR; nomeação pelo GOVERNADOR; mandato de 4 ANOS (o do CNPCP é de 2). Pesquisa criminológica é do CNPCP.",
+            "fontes": [
+              "LEP, art. 69",
+              "LEP, art. 63, parágrafo único",
+              "LEP, art. 64, IV"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 70",
+          "na_real": {
+            "texto": "O Conselho Penitenciário dá parecer sobre indulto e comutação, inspeciona os presídios, manda relatório anual ao CNPCP e supervisiona os patronatos e a assistência aos egressos.",
+            "fontes": [
+              "LEP, art. 70"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso pede indulto por estar com doença grave: nesse caso, o Conselho Penitenciário não precisa dar parecer.",
+            "fontes": [
+              "LEP, art. 70, I"
+            ]
+          },
+          "na_prova": {
+            "texto": "Parecer sobre INDULTO e COMUTAÇÃO, EXCETO no indulto pedido com base no ESTADO DE SAÚDE do preso. Relatório ao CNPCP no PRIMEIRO TRIMESTRE de cada ano.",
+            "fontes": [
+              "LEP, art. 70, I",
+              "LEP, art. 70, III"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 75",
+          "na_real": {
+            "texto": "Para ser diretor de presídio: diploma superior em Direito, Psicologia, Ciências Sociais, Pedagogia ou Serviços Sociais, experiência administrativa na área, idoneidade moral e aptidão. E ele mora no estabelecimento ou perto, com dedicação integral.",
+            "fontes": [
+              "LEP, art. 75",
+              "LEP, art. 75, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um engenheiro, mesmo experiente em gestão, não cumpre o requisito de diploma do art. 75: a área dele não está na lista.",
+            "fontes": [
+              "LEP, art. 75, I"
+            ]
+          },
+          "na_prova": {
+            "texto": "Diploma SÓ nas áreas listadas (Direito, Psicologia, Ciências Sociais, Pedagogia, Serviços Sociais); experiência administrativa NA ÁREA; IDONEIDADE moral e APTIDÃO. Não há requisito de IDADE.",
+            "fontes": [
+              "LEP, art. 75",
+              "2019-q88 (gabarito A)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 81",
+          "na_real": {
+            "texto": "O Conselho da Comunidade visita os presídios da comarca pelo menos uma vez por mês, entrevista presos, manda relatórios mensais ao juiz e ao Conselho Penitenciário e busca recursos para melhorar a assistência.",
+            "fontes": [
+              "LEP, art. 81"
+            ]
+          },
+          "exemplo": {
+            "texto": "Os membros do Conselho da Comunidade visitam a cadeia da cidade todo mês e conversam com os presos.",
+            "fontes": [
+              "LEP, art. 81"
+            ]
+          },
+          "na_prova": {
+            "texto": "Um Conselho da Comunidade EM CADA COMARCA (art. 80); visita PELO MENOS MENSALMENTE; RELATÓRIOS MENSAIS ao JUIZ e ao CONSELHO PENITENCIÁRIO.",
+            "fontes": [
+              "LEP, art. 81",
+              "LEP, art. 80"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Pesquisa criminológica, diretrizes da política criminal, regras de arquitetura",
+          "o_que_e": "CNPCP (art. 64)",
+          "o_que_acontece": "13 membros, mandato de 2 anos",
+          "fontes": [
+            "LEP, art. 64",
+            "LEP, art. 63",
+            "2019-q84"
+          ]
+        },
+        {
+          "situacao": "Parecer sobre indulto e comutação, e fiscalização",
+          "o_que_e": "Conselho Penitenciário (arts. 69 e 70)",
+          "o_que_acontece": "Membros nomeados pelo Governador, mandato de 4 anos",
+          "fontes": [
+            "LEP, art. 69",
+            "LEP, art. 70"
+          ]
+        },
+        {
+          "situacao": "Visitas mensais e relatórios ao juiz",
+          "o_que_e": "Conselho da Comunidade (art. 81)",
+          "o_que_acontece": "Um em cada comarca",
+          "fontes": [
+            "LEP, art. 80",
+            "LEP, art. 81"
+          ]
+        },
+        {
+          "situacao": "Decidir progressão, regressão, remição e livramento",
+          "o_que_e": "Juiz da execução (art. 66)",
+          "o_que_acontece": "Também inspeciona os presídios todo mês",
+          "fontes": [
+            "LEP, art. 66"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            61,
+            ""
+          ],
+          "fim": [
+            61,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            62,
+            ""
+          ],
+          "fim": [
+            64,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            69,
+            ""
+          ],
+          "fim": [
+            69,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            70,
+            ""
+          ],
+          "fim": [
+            70,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            65,
+            ""
+          ],
+          "fim": [
+            65,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            66,
+            ""
+          ],
+          "fim": [
+            66,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            75,
+            ""
+          ],
+          "fim": [
+            75,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            64,
+            ""
+          ],
+          "fim": [
+            64,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            80,
+            ""
+          ],
+          "fim": [
+            80,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            81,
+            ""
+          ],
+          "fim": [
+            81,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            63,
+            ""
+          ],
+          "fim": [
+            63,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            68,
+            ""
+          ],
+          "fim": [
+            68,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            81,
+            "B"
+          ],
+          "fim": [
+            81,
+            "B"
+          ]
+        }
+      ]
     }
   },
   {
@@ -9722,6 +13067,313 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 120",
+          "na_real": {
+            "texto": "Em caso de morte ou doença grave de parente próximo, ou para tratamento médico, o preso do fechado, do semiaberto ou provisório pode sair escoltado. Quem autoriza é o diretor.",
+            "fontes": [
+              "LEP, art. 120"
+            ]
+          },
+          "exemplo": {
+            "texto": "A mãe do preso morre: ele vai ao velório escoltado, com autorização do diretor da unidade.",
+            "fontes": [
+              "LEP, art. 120"
+            ]
+          },
+          "na_prova": {
+            "texto": "PERMISSÃO de saída: COM ESCOLTA, dada pelo DIRETOR, nos regimes FECHADO e SEMIABERTO e ao PROVISÓRIO. Parentes: cônjuge, companheira, ascendente, descendente ou IRMÃO. Dura o necessário à finalidade (art. 121).",
+            "fontes": [
+              "LEP, art. 120",
+              "LEP, art. 121"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 122",
+          "na_real": {
+            "texto": "A saída temporária é sair sem escolta, só no semiaberto, e hoje só para estudar: curso supletivo profissionalizante, de ensino médio ou superior, na comarca do juiz da execução. O juiz pode mandar usar tornozeleira.",
+            "fontes": [
+              "LEP, art. 122",
+              "LEP, art. 122, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso do semiaberto faz faculdade à noite na cidade: sai para as aulas sem escolta, pelo tempo necessário, e pode ter de usar tornozeleira.",
+            "fontes": [
+              "LEP, art. 122, II",
+              "LEP, art. 122, § 1º",
+              "LEP, art. 122, § 3º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Desde 2024 (Lei 14.843), acabaram a saída para VISITAR A FAMÍLIA e para atividades de retorno ao convívio social: sobrou só o ESTUDO. E não tem saída temporária nem trabalho externo sem vigilância direta o condenado por crime HEDIONDO ou com VIOLÊNCIA ou GRAVE AMEAÇA (§ 2º).",
+            "fontes": [
+              "LEP, art. 122",
+              "LEP, art. 122, § 2º",
+              "LEP, art. 124"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 123",
+          "na_real": {
+            "texto": "Quem autoriza a saída temporária é o juiz da execução, por decisão motivada, ouvindo o MP e a administração. Precisa de bom comportamento, 1/6 da pena cumprido se primário ou 1/4 se reincidente, e que o benefício combine com os objetivos da pena.",
+            "fontes": [
+              "LEP, art. 123"
+            ]
+          },
+          "exemplo": {
+            "texto": "Reincidente condenado a 8 anos: precisa ter cumprido 2 anos (1/4) para pedir a saída temporária.",
+            "fontes": [
+              "LEP, art. 123, II"
+            ]
+          },
+          "na_prova": {
+            "texto": "Frações: 1/6 PRIMÁRIO, 1/4 REINCIDENTE. Concede o JUIZ, ouvidos o MP e a ADMINISTRAÇÃO PENITENCIÁRIA. Na permissão de saída, é o diretor (art. 120).",
+            "fontes": [
+              "LEP, art. 123",
+              "LEP, art. 120"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 125",
+          "na_real": {
+            "texto": "A saída temporária cai automaticamente se o preso comete crime doloso, é punido por falta grave, descumpre as condições ou vai mal no curso. Para recuperar, precisa ser absolvido, ter a punição cancelada ou mostrar merecimento.",
+            "fontes": [
+              "LEP, art. 125",
+              "LEP, art. 125, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso sai para a faculdade, mas reprova por falta em todas as matérias: o benefício é revogado automaticamente por baixo aproveitamento.",
+            "fontes": [
+              "LEP, art. 125"
+            ]
+          },
+          "na_prova": {
+            "texto": "Revogação AUTOMÁTICA: CRIME DOLOSO, FALTA GRAVE, DESATENDER as condições ou BAIXO APROVEITAMENTO do curso.",
+            "fontes": [
+              "LEP, art. 125"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 126",
+          "na_real": {
+            "texto": "Remição é diminuir a pena trabalhando ou estudando. No fechado e no semiaberto, por trabalho ou estudo; no aberto e no livramento condicional, só pelo estudo. A conta: 1 dia a menos a cada 12 horas de estudo, divididas em pelo menos 3 dias, ou a cada 3 dias de trabalho.",
+            "fontes": [
+              "LEP, art. 126",
+              "LEP, art. 126, § 1º",
+              "LEP, art. 126, § 6º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Em 30 dias de trabalho, o preso abate 10 dias da pena. Se termina o ensino médio estudando na unidade, o tempo remido pelo estudo ganha mais 1/3.",
+            "fontes": [
+              "LEP, art. 126, § 1º",
+              "LEP, art. 126, § 5º"
+            ]
+          },
+          "na_prova": {
+            "texto": "REMIÇÃO (resgate da pena) não é REMISSÃO (perdão). Cabe no fechado, no semiaberto e no aberto (no aberto, só estudo); a restritiva de direitos ficou de fora em 2019. Vale na prisão cautelar e, desde 2026, na domiciliar.",
+            "fontes": [
+              "LEP, art. 126",
+              "LEP, art. 126, § 6º",
+              "LEP, art. 126, § 7º",
+              "LEP, art. 126, § 9º",
+              "2019-q82 (gabarito D)"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 127",
+          "na_real": {
+            "texto": "Se o preso comete falta grave, o juiz pode tirar até 1/3 dos dias que ele já tinha remido, e a contagem recomeça da data da falta.",
+            "fontes": [
+              "LEP, art. 127"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso tinha 90 dias remidos e é pego com celular: o juiz pode cortar até 30 desses dias.",
+            "fontes": [
+              "LEP, art. 127"
+            ]
+          },
+          "na_prova": {
+            "texto": "Perde ATÉ 1/3 do tempo remido, e não tudo. A contagem RECOMEÇA da DATA DA INFRAÇÃO.",
+            "fontes": [
+              "LEP, art. 127"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 128",
+          "na_real": {
+            "texto": "O tempo remido conta como pena cumprida para tudo.",
+            "fontes": [
+              "LEP, art. 128"
+            ]
+          },
+          "exemplo": {
+            "texto": "Os dias remidos entram na conta da progressão e do livramento como se o preso tivesse cumprido esse tempo.",
+            "fontes": [
+              "LEP, art. 128"
+            ]
+          },
+          "na_prova": {
+            "texto": "Remido = pena CUMPRIDA, PARA TODOS OS EFEITOS. E atestar falsamente trabalho para remição é o crime do art. 299 do CP (art. 130).",
+            "fontes": [
+              "LEP, art. 128",
+              "LEP, art. 130"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Morte ou doença grave na família, ou tratamento médico",
+          "o_que_e": "Permissão de saída (art. 120)",
+          "o_que_acontece": "Com escolta; concede o diretor; fechado, semiaberto e provisório",
+          "fontes": [
+            "LEP, art. 120"
+          ]
+        },
+        {
+          "situacao": "Estudar fora, no semiaberto",
+          "o_que_e": "Saída temporária (art. 122)",
+          "o_que_acontece": "Sem vigilância direta; concede o juiz",
+          "fontes": [
+            "LEP, art. 122",
+            "LEP, art. 123"
+          ]
+        },
+        {
+          "situacao": "Trabalhar ou estudar para diminuir a pena",
+          "o_que_e": "Remição (art. 126)",
+          "o_que_acontece": "1 dia a cada 3 de trabalho ou a cada 12 horas de estudo",
+          "fontes": [
+            "LEP, art. 126",
+            "2019-q82"
+          ]
+        },
+        {
+          "situacao": "Perdão",
+          "o_que_e": "Remissão",
+          "o_que_acontece": "Não é remição: a prova de 2019 usou a palavra errada",
+          "fontes": [
+            "2019-q82"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            120,
+            ""
+          ],
+          "fim": [
+            120,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            122,
+            ""
+          ],
+          "fim": [
+            122,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            126,
+            ""
+          ],
+          "fim": [
+            126,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            123,
+            ""
+          ],
+          "fim": [
+            123,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            125,
+            ""
+          ],
+          "fim": [
+            125,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            127,
+            ""
+          ],
+          "fim": [
+            127,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            128,
+            ""
+          ],
+          "fim": [
+            128,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            130,
+            ""
+          ],
+          "fim": [
+            130,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            124,
+            ""
+          ],
+          "fim": [
+            124,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -9892,6 +13544,335 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 53",
+          "na_real": {
+            "texto": "São cinco as sanções disciplinares, da mais leve à mais dura: advertência verbal, repreensão, suspensão ou restrição de direitos, isolamento e inclusão no RDD.",
+            "fontes": [
+              "LEP, art. 53"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso responde mal ao agente pela primeira vez: pode levar uma advertência verbal. Se arruma uma briga feia, pode ir para o isolamento.",
+            "fontes": [
+              "LEP, art. 53"
+            ]
+          },
+          "na_prova": {
+            "texto": "CINCO: ADVERTÊNCIA verbal, REPREENSÃO, SUSPENSÃO ou RESTRIÇÃO de direitos, ISOLAMENTO e RDD. Elogio e regalias são recompensas, e não sanções (art. 56).",
+            "fontes": [
+              "LEP, art. 53",
+              "LEP, art. 56"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 54",
+          "na_real": {
+            "texto": "As quatro primeiras sanções são do diretor, por ato motivado. O RDD só com decisão prévia e fundamentada do juiz, a pedido detalhado do diretor ou de outra autoridade administrativa.",
+            "fontes": [
+              "LEP, art. 54",
+              "LEP, art. 54, § 1º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O diretor quer mandar um preso para o RDD: faz um requerimento circunstanciado ao juiz, que decide liminarmente e dá a decisão final em até 15 dias.",
+            "fontes": [
+              "LEP, art. 54, § 1º",
+              "LEP, art. 54, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Sanções I a IV: DIRETOR. RDD: JUIZ, por despacho PRÉVIO e FUNDAMENTADO. Decisão final em no máximo 15 DIAS, depois da manifestação do MP e da defesa, e a falta delas não impede a decisão (Lei 15.407/2026).",
+            "fontes": [
+              "LEP, art. 54",
+              "LEP, art. 54, § 2º",
+              "LEP, art. 54, § 3º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 55",
+          "na_real": {
+            "texto": "As recompensas premiam o bom comportamento, a colaboração com a disciplina e a dedicação ao trabalho.",
+            "fontes": [
+              "LEP, art. 55"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que trabalha com dedicação na cozinha e nunca se envolve em confusão pode ser recompensado.",
+            "fontes": [
+              "LEP, art. 55"
+            ]
+          },
+          "na_prova": {
+            "texto": "Três motivos: BOM COMPORTAMENTO, COLABORAÇÃO com a disciplina e DEDICAÇÃO AO TRABALHO.",
+            "fontes": [
+              "LEP, art. 55"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 56",
+          "na_real": {
+            "texto": "São duas as recompensas: elogio e regalias. Quais regalias e como se concedem, quem define é a legislação local e os regulamentos.",
+            "fontes": [
+              "LEP, art. 56",
+              "LEP, art. 56, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso exemplar recebe um elogio e, se o regulamento do Estado prever, alguma regalia.",
+            "fontes": [
+              "LEP, art. 56"
+            ]
+          },
+          "na_prova": {
+            "texto": "Recompensas: ELOGIO e REGALIAS. A natureza e a forma das regalias são da LEGISLAÇÃO LOCAL e dos REGULAMENTOS.",
+            "fontes": [
+              "LEP, art. 56",
+              "LEP, art. 56, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 57",
+          "na_real": {
+            "texto": "Para escolher a sanção, conta tudo: a natureza, os motivos, as circunstâncias e as consequências do fato, quem é o preso e há quanto tempo está preso. Nas faltas graves, só as três sanções mais duras.",
+            "fontes": [
+              "LEP, art. 57",
+              "LEP, art. 57, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso comete falta grave: advertência verbal ou repreensão não servem; a sanção tem de ser suspensão de direitos, isolamento ou RDD.",
+            "fontes": [
+              "LEP, art. 57, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "Falta GRAVE: só as sanções III a V (suspensão ou restrição, ISOLAMENTO e RDD).",
+            "fontes": [
+              "LEP, art. 57, parágrafo único",
+              "LEP, art. 53"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 58",
+          "na_real": {
+            "texto": "Isolamento, suspensão e restrição de direitos não passam de 30 dias, a não ser no RDD. E todo isolamento é comunicado ao juiz.",
+            "fontes": [
+              "LEP, art. 58"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso pega isolamento por briga: no máximo 30 dias, e o juiz é avisado.",
+            "fontes": [
+              "LEP, art. 58"
+            ]
+          },
+          "na_prova": {
+            "texto": "Teto de 30 DIAS para ISOLAMENTO, SUSPENSÃO e RESTRIÇÃO, RESSALVADO o RDD. O isolamento é SEMPRE comunicado ao JUIZ da execução.",
+            "fontes": [
+              "LEP, art. 58",
+              "LEP, art. 58, parágrafo único"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 59",
+          "na_real": {
+            "texto": "Toda falta exige um procedimento para apurá-la, com direito de defesa, e a decisão tem de ser motivada.",
+            "fontes": [
+              "LEP, art. 59"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso é acusado de esconder um celular: antes da sanção, abre-se o procedimento e ele pode se defender.",
+            "fontes": [
+              "LEP, art. 59"
+            ]
+          },
+          "na_prova": {
+            "texto": "Procedimento CONFORME REGULAMENTO, com DIREITO DE DEFESA, e decisão MOTIVADA.",
+            "fontes": [
+              "LEP, art. 59"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 60",
+          "na_real": {
+            "texto": "Enquanto apura a falta, a autoridade administrativa pode isolar o preso por até 10 dias. Já pôr no RDD de forma preventiva depende do juiz. Esse tempo é descontado da sanção.",
+            "fontes": [
+              "LEP, art. 60"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso suspeito de liderar a briga fica isolado preventivamente por 7 dias; se depois pegar 20 dias de isolamento, os 7 já contam.",
+            "fontes": [
+              "LEP, art. 60",
+              "LEP, art. 60, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "Isolamento PREVENTIVO: até 10 DIAS, pela AUTORIDADE ADMINISTRATIVA. RDD preventivo: DESPACHO DO JUIZ. O tempo é COMPUTADO na sanção.",
+            "fontes": [
+              "LEP, art. 60"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Advertência verbal, repreensão, suspensão de direitos, isolamento",
+          "o_que_e": "Sanções I a IV (art. 54)",
+          "o_que_acontece": "Aplica o diretor, por ato motivado",
+          "fontes": [
+            "LEP, art. 54"
+          ]
+        },
+        {
+          "situacao": "Inclusão no RDD",
+          "o_que_e": "Sanção V (art. 54)",
+          "o_que_acontece": "Só o juiz, por despacho prévio e fundamentado",
+          "fontes": [
+            "LEP, art. 54"
+          ]
+        },
+        {
+          "situacao": "Isolamento, suspensão ou restrição como sanção",
+          "o_que_e": "Teto do art. 58",
+          "o_que_acontece": "Até 30 dias",
+          "fontes": [
+            "LEP, art. 58"
+          ]
+        },
+        {
+          "situacao": "Isolamento enquanto se apura a falta",
+          "o_que_e": "Isolamento preventivo (art. 60)",
+          "o_que_acontece": "Até 10 dias, pela autoridade administrativa",
+          "fontes": [
+            "LEP, art. 60"
+          ]
+        },
+        {
+          "situacao": "Elogio e regalias",
+          "o_que_e": "Recompensas (art. 56)",
+          "o_que_acontece": "Prêmio, e não sanção",
+          "fontes": [
+            "LEP, art. 56"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            53,
+            ""
+          ],
+          "fim": [
+            53,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            54,
+            ""
+          ],
+          "fim": [
+            54,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            57,
+            ""
+          ],
+          "fim": [
+            57,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            59,
+            ""
+          ],
+          "fim": [
+            59,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            55,
+            ""
+          ],
+          "fim": [
+            55,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            56,
+            ""
+          ],
+          "fim": [
+            56,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            58,
+            ""
+          ],
+          "fim": [
+            58,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            60,
+            ""
+          ],
+          "fim": [
+            60,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            52,
+            ""
+          ],
+          "fim": [
+            52,
+            ""
+          ]
+        }
+      ]
     }
   },
   {
@@ -10035,6 +14016,294 @@
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": "2026-10-07"
+    },
+    "traducao": {
+      "itens": [
+        {
+          "artigo": "LEP, art. 28",
+          "na_real": {
+            "texto": "Trabalhar é dever social do condenado e condição de dignidade, e serve para educar e produzir. O trabalho segue regras de segurança e higiene, mas não é emprego com carteira assinada: não segue a CLT.",
+            "fontes": [
+              "LEP, art. 28",
+              "LEP, art. 28, § 1º",
+              "LEP, art. 28, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que trabalha na marcenaria da unidade não tem carteira assinada nem as regras da CLT, mas tem de ter equipamento de segurança.",
+            "fontes": [
+              "LEP, art. 28, § 1º",
+              "LEP, art. 28, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "DEVER SOCIAL e CONDIÇÃO DE DIGNIDADE HUMANA, com finalidade EDUCATIVA e PRODUTIVA. NÃO está sujeito à CLT.",
+            "fontes": [
+              "LEP, art. 28",
+              "LEP, art. 28, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 29",
+          "na_real": {
+            "texto": "O trabalho do preso é pago, por uma tabela feita antes, e nunca menos que 3/4 do salário mínimo. O dinheiro vai para indenizar a vítima, ajudar a família, pequenas despesas e ressarcir o Estado; o que sobra vira pecúlio, uma poupança entregue quando ele sai.",
+            "fontes": [
+              "LEP, art. 29",
+              "LEP, art. 29, § 1º",
+              "LEP, art. 29, § 2º"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso não pode receber menos que três quartos do salário mínimo; parte do valor vai para a família, e o que sobra fica na poupança para quando ele sair.",
+            "fontes": [
+              "LEP, art. 29",
+              "LEP, art. 29, § 2º"
+            ]
+          },
+          "na_prova": {
+            "texto": "Mínimo: 3/4 DO SALÁRIO MÍNIMO, por PRÉVIA TABELA. O que sobra vira PECÚLIO, em caderneta de poupança, entregue na LIBERDADE. Serviço à comunidade NÃO é remunerado (art. 30).",
+            "fontes": [
+              "LEP, art. 29",
+              "LEP, art. 29, § 2º",
+              "LEP, art. 30"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 31",
+          "na_real": {
+            "texto": "O condenado à prisão é obrigado a trabalhar, na medida do que consegue fazer. O preso provisório não é obrigado e, se trabalhar, é só dentro da unidade.",
+            "fontes": [
+              "LEP, art. 31",
+              "LEP, art. 31, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso provisório quer trabalhar numa horta fora da unidade: não pode; para ele, o trabalho é só dentro do estabelecimento.",
+            "fontes": [
+              "LEP, art. 31, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "CONDENADO à privativa: OBRIGADO. PROVISÓRIO: NÃO obrigado, e só no INTERIOR do estabelecimento. Condenado por CRIME POLÍTICO não é obrigado (art. 200).",
+            "fontes": [
+              "LEP, art. 31",
+              "LEP, art. 31, parágrafo único",
+              "LEP, art. 200"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 33",
+          "na_real": {
+            "texto": "A jornada do preso é de 6 a 8 horas por dia, com descanso aos domingos e feriados. Quem faz a conservação e a manutenção da unidade pode ter horário especial.",
+            "fontes": [
+              "LEP, art. 33",
+              "LEP, art. 33, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "O preso que faz a manutenção elétrica da unidade pode ter horário especial de trabalho.",
+            "fontes": [
+              "LEP, art. 33, parágrafo único"
+            ]
+          },
+          "na_prova": {
+            "texto": "Jornada: NÃO INFERIOR A 6 nem SUPERIOR A 8 HORAS; DESCANSO aos DOMINGOS e FERIADOS.",
+            "fontes": [
+              "LEP, art. 33"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 36",
+          "na_real": {
+            "texto": "No regime fechado, trabalho fora só em serviço ou obra pública, feita por órgão público ou por entidade privada, com cuidados contra a fuga. No máximo 10% dos trabalhadores da obra podem ser presos, e para trabalhar para entidade privada o preso tem de concordar.",
+            "fontes": [
+              "LEP, art. 36",
+              "LEP, art. 36, § 1º",
+              "LEP, art. 36, § 3º"
+            ]
+          },
+          "exemplo": {
+            "texto": "Numa obra pública com 200 trabalhadores, no máximo 20 podem ser presos do regime fechado.",
+            "fontes": [
+              "LEP, art. 36, § 1º"
+            ]
+          },
+          "na_prova": {
+            "texto": "FECHADO: trabalho externo SOMENTE em SERVIÇO ou OBRAS PÚBLICAS; LIMITE de 10% dos empregados da obra; quem PAGA é o órgão, a entidade ou a empreiteira; entidade PRIVADA exige o CONSENTIMENTO EXPRESSO do preso.",
+            "fontes": [
+              "LEP, art. 36",
+              "LEP, art. 36, § 1º",
+              "LEP, art. 36, § 2º",
+              "LEP, art. 36, § 3º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 37",
+          "na_real": {
+            "texto": "Quem autoriza o trabalho externo é a direção do presídio, se o preso tem aptidão, disciplina e responsabilidade e já cumpriu 1/6 da pena. A autorização cai se ele comete crime, falta grave ou deixa de ter esses requisitos.",
+            "fontes": [
+              "LEP, art. 37",
+              "LEP, art. 37, parágrafo único"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado a 12 anos, depois de cumprir 2 anos (1/6) e com bom comportamento, ele pode ser autorizado pelo diretor a trabalhar fora.",
+            "fontes": [
+              "LEP, art. 37"
+            ]
+          },
+          "na_prova": {
+            "texto": "Autoriza a DIREÇÃO do estabelecimento, e NÃO o juiz. Requisitos: APTIDÃO, DISCIPLINA, RESPONSABILIDADE e 1/6 DA PENA. Condenado por crime HEDIONDO ou com VIOLÊNCIA não tem trabalho externo SEM VIGILÂNCIA DIRETA (art. 122, § 2º).",
+            "fontes": [
+              "LEP, art. 37",
+              "LEP, art. 122, § 2º"
+            ]
+          }
+        },
+        {
+          "artigo": "LEP, art. 200",
+          "na_real": {
+            "texto": "Quem foi condenado por crime político não é obrigado a trabalhar.",
+            "fontes": [
+              "LEP, art. 200"
+            ]
+          },
+          "exemplo": {
+            "texto": "Condenado por crime político, ele não é obrigado a trabalhar na unidade, ao contrário dos outros condenados.",
+            "fontes": [
+              "LEP, art. 200"
+            ]
+          },
+          "na_prova": {
+            "texto": "A EXCEÇÃO à obrigação de trabalhar está no art. 200: CRIME POLÍTICO. O provisório também não é obrigado (art. 31, parágrafo único).",
+            "fontes": [
+              "LEP, art. 200",
+              "LEP, art. 31, parágrafo único"
+            ]
+          }
+        }
+      ],
+      "nao_confunda": [
+        {
+          "situacao": "Condenado à pena privativa de liberdade",
+          "o_que_e": "Trabalho obrigatório (art. 31)",
+          "o_que_acontece": "Na medida das aptidões e da capacidade",
+          "fontes": [
+            "LEP, art. 31"
+          ]
+        },
+        {
+          "situacao": "Preso provisório",
+          "o_que_e": "Trabalho facultativo (art. 31, parágrafo único)",
+          "o_que_acontece": "Só dentro do estabelecimento",
+          "fontes": [
+            "LEP, art. 31, parágrafo único"
+          ]
+        },
+        {
+          "situacao": "Condenado por crime político",
+          "o_que_e": "Sem obrigação de trabalhar (art. 200)",
+          "o_que_acontece": "Não é obrigado",
+          "fontes": [
+            "LEP, art. 200"
+          ]
+        },
+        {
+          "situacao": "Trabalho externo no regime fechado",
+          "o_que_e": "Art. 36",
+          "o_que_acontece": "Só em serviço ou obra pública; até 10% da obra",
+          "fontes": [
+            "LEP, art. 36"
+          ]
+        }
+      ],
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "criado_em": "2026-10-12T17:48:54.523099+00:00",
+      "conferido_em": null,
+      "artigos_do_resumo": [
+        {
+          "lei": "LEP",
+          "inicio": [
+            28,
+            ""
+          ],
+          "fim": [
+            28,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            31,
+            ""
+          ],
+          "fim": [
+            31,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            36,
+            ""
+          ],
+          "fim": [
+            36,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            29,
+            ""
+          ],
+          "fim": [
+            29,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            33,
+            ""
+          ],
+          "fim": [
+            33,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            37,
+            ""
+          ],
+          "fim": [
+            37,
+            ""
+          ]
+        },
+        {
+          "lei": "LEP",
+          "inicio": [
+            28,
+            ""
+          ],
+          "fim": [
+            37,
+            ""
+          ]
+        }
+      ]
     }
   },
   {

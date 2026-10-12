@@ -30,6 +30,28 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "advertência verbal",
+    "variantes": [],
+    "significado": "Uma bronca falada: a sanção mais leve.",
+    "fontes": [
+      "LEP, art. 53, I"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "agravo",
+    "variantes": [
+      "agravo em execução"
+    ],
+    "significado": "O recurso contra as decisões do juiz da execução.",
+    "fontes": [
+      "LEP, art. 197"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "anonimato",
     "variantes": [],
     "significado": "Falar ou publicar sem se identificar. A Constituição deixa falar, mas não escondido.",
@@ -60,6 +82,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "audiência admonitória",
+    "variantes": [],
+    "significado": "A audiência em que o juiz lê a condenação e avisa as condições e o que acontece se descumpri-las.",
+    "fontes": [
+      "LEP, art. 160",
+      "LEP, art. 161"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "audiência de custódia",
@@ -107,6 +140,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "cadeia pública",
+    "variantes": [],
+    "significado": "O estabelecimento do preso provisório.",
+    "fontes": [
+      "LEP, art. 102"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "cargo em comissão",
     "variantes": [
       "cargos em comissão"
@@ -118,6 +161,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "casa do albergado",
+    "variantes": [],
+    "significado": "O estabelecimento do regime aberto: a pessoa trabalha fora de dia e se recolhe lá à noite e nas folgas.",
+    "fontes": [
+      "LEP, art. 93"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "caso fortuito ou força maior",
@@ -156,6 +209,16 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "chamamento nominal",
+    "variantes": [],
+    "significado": "Ser chamado pelo nome, e não por número ou apelido.",
+    "fontes": [
+      "LEP, art. 41, XI"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "circunstâncias alheias à vontade do agente",
     "variantes": [],
     "significado": "Coisas de fora, que não dependem de quem está cometendo o crime: a polícia chegou, a vítima fugiu, a arma travou.",
@@ -178,6 +241,30 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "CLT",
+    "variantes": [
+      "Consolidação das Leis do Trabalho"
+    ],
+    "significado": "As leis do emprego com carteira assinada; não valem para o trabalho do preso.",
+    "fontes": [
+      "LEP, art. 28, § 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "CNPCP",
+    "variantes": [
+      "Conselho Nacional de Política Criminal e Penitenciária"
+    ],
+    "significado": "O conselho nacional que faz a política criminal e penitenciária do país.",
+    "fontes": [
+      "LEP, art. 62"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "coação irresistível",
     "variantes": [],
     "significado": "Ser forçado de um jeito que não dava para resistir.",
@@ -188,6 +275,29 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "colônia agrícola",
+    "variantes": [
+      "colônia agrícola, industrial ou similar"
+    ],
+    "significado": "O estabelecimento do regime semiaberto, com trabalho no campo ou na indústria.",
+    "fontes": [
+      "LEP, art. 91"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "comarca",
+    "variantes": [],
+    "significado": "A área de atuação de um juiz: uma cidade ou um grupo de cidades.",
+    "fontes": [
+      "LEP, art. 132, § 1º",
+      "doutrina (organização judiciária)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "Comissão Interamericana",
     "variantes": [],
     "significado": "O órgão do sistema interamericano que recebe as denúncias contra os países e pode levar o caso à Corte.",
@@ -196,6 +306,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "Comissão Técnica de Classificação",
+    "variantes": [],
+    "significado": "A equipe do presídio, presidida pelo diretor, que classifica o preso e faz o plano da pena dele.",
+    "fontes": [
+      "LEP, art. 6º",
+      "LEP, art. 7º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "comoção grave",
@@ -216,6 +337,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "comutação",
+    "variantes": [],
+    "significado": "Troca da pena por outra menor: um indulto parcial.",
+    "fontes": [
+      "LEP, art. 192"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "concussão",
@@ -258,6 +389,27 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "Conselho da Comunidade",
+    "variantes": [],
+    "significado": "Representantes da sociedade local que visitam os presídios e acompanham a execução.",
+    "fontes": [
+      "LEP, art. 80",
+      "LEP, art. 81"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "Conselho Penitenciário",
+    "variantes": [],
+    "significado": "O órgão estadual que dá parecer sobre indulto e fiscaliza a execução da pena.",
+    "fontes": [
+      "LEP, art. 69"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "consumado",
@@ -310,6 +462,17 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "crime político",
+    "variantes": [],
+    "significado": "Crime contra a segurança do Estado e a ordem política, com motivação política.",
+    "fontes": [
+      "LEP, art. 200",
+      "doutrina (crime político)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "crimes hediondos",
     "variantes": [
       "hediondos"
@@ -358,6 +521,16 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "curador",
+    "variantes": [],
+    "significado": "Quem representa e defende os interesses de quem não pode fazer isso sozinho.",
+    "fontes": [
+      "LEP, art. 175, III"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "degradante",
     "variantes": [
       "degradantes"
@@ -403,6 +576,27 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "detração",
+    "variantes": [],
+    "significado": "Descontar da pena o tempo que a pessoa ficou presa antes da condenação.",
+    "fontes": [
+      "LEP, art. 111",
+      "doutrina (CP, art. 42)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "diligências",
+    "variantes": [],
+    "significado": "Providências para descobrir informações.",
+    "fontes": [
+      "LEP, art. 9º, III"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "direito líquido e certo",
     "variantes": [],
     "significado": "Direito comprovado de cara, com documento, sem precisar de outras provas.",
@@ -422,6 +616,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
+  },
+  {
+    "termo": "efeito suspensivo",
+    "variantes": [],
+    "significado": "Quando o recurso trava a decisão até ser julgado; o agravo não trava.",
+    "fontes": [
+      "LEP, art. 197"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "eficácia diagonal",
@@ -455,6 +659,16 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "egresso",
+    "variantes": [],
+    "significado": "Quem saiu da prisão: o liberado definitivo, por 1 ano, e o liberado condicional, no período de prova.",
+    "fontes": [
+      "LEP, art. 26"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "elementares",
     "variantes": [
       "elementar"
@@ -480,6 +694,16 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "empreiteira",
+    "variantes": [],
+    "significado": "A empresa contratada para tocar a obra.",
+    "fontes": [
+      "LEP, art. 36, § 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "entidade paraestatal",
     "variantes": [],
     "significado": "Entidade que não é órgão do governo, mas atua ao lado dele com dinheiro ou função pública.",
@@ -500,6 +724,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "escolta",
+    "variantes": [],
+    "significado": "Os agentes que acompanham o preso quando ele sai.",
+    "fontes": [
+      "LEP, art. 120"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "esgotados os recursos internos",
@@ -534,6 +768,17 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "exame criminológico",
+    "variantes": [],
+    "significado": "A avaliação, por especialistas, da personalidade e do risco do condenado.",
+    "fontes": [
+      "LEP, art. 8º",
+      "LEP, art. 112, § 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "excesso de exação",
     "variantes": [],
     "significado": "Cobrar tributo que se sabe indevido, ou cobrar o devido de um jeito humilhante que a lei não autoriza.",
@@ -542,6 +787,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "excesso ou desvio",
+    "variantes": [],
+    "significado": "A execução que passa dos limites da sentença, da lei ou do regulamento.",
+    "fontes": [
+      "LEP, art. 185"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "excludentes de ilicitude",
@@ -555,6 +810,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "execução indireta",
+    "variantes": [],
+    "significado": "Serviço feito por empresa contratada, sob fiscalização do poder público: a terceirização.",
+    "fontes": [
+      "LEP, art. 83-A"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "exercício regular de direito",
@@ -577,6 +842,18 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "falta grave",
+    "variantes": [
+      "faltas graves"
+    ],
+    "significado": "A infração disciplinar mais séria, com as sanções mais duras.",
+    "fontes": [
+      "LEP, art. 50"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "fé pública",
     "variantes": [],
     "significado": "A confiança que todos depositam em documentos, moedas e sinais oficiais.",
@@ -586,6 +863,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "fenotipagem",
+    "variantes": [
+      "fenotipagem genética"
+    ],
+    "significado": "Usar o DNA para descobrir características físicas da pessoa, como a cor dos olhos: proibido no banco da LEP.",
+    "fontes": [
+      "LEP, art. 9º-A, § 5º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "flagrante delito",
@@ -598,6 +887,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "folha corrida",
+    "variantes": [],
+    "significado": "A certidão de antecedentes criminais.",
+    "fontes": [
+      "LEP, art. 202"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "forças auxiliares e reserva do Exército",
@@ -633,6 +932,17 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "guia de recolhimento",
+    "variantes": [],
+    "significado": "O documento do juiz que manda iniciar a execução da pena: sem ele, ninguém é recolhido.",
+    "fontes": [
+      "LEP, art. 105",
+      "LEP, art. 107"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "habeas corpus",
     "variantes": [],
     "significado": "A ação para proteger quem está preso ilegalmente, ou ameaçado de ser: protege a liberdade de ir e vir.",
@@ -653,6 +963,16 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "harmônica integração social",
+    "variantes": [],
+    "significado": "Voltar a conviver bem em sociedade.",
+    "fontes": [
+      "LEP, art. 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "historicidade",
     "variantes": [],
     "significado": "Os direitos surgem e mudam ao longo da história.",
@@ -661,6 +981,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "hospital de custódia",
+    "variantes": [
+      "hospital de custódia e tratamento psiquiátrico"
+    ],
+    "significado": "O hospital onde o inimputável e o semi-imputável cumprem medida de segurança.",
+    "fontes": [
+      "LEP, art. 99"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "idoneidade moral",
@@ -831,6 +1163,30 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "indelegáveis",
+    "variantes": [
+      "indelegável"
+    ],
+    "significado": "Que não podem ser passadas para particular: só o Estado faz.",
+    "fontes": [
+      "LEP, art. 83-B"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "individualização",
+    "variantes": [
+      "individualização da execução"
+    ],
+    "significado": "Fazer a execução da pena sob medida para cada preso.",
+    "fontes": [
+      "LEP, art. 5º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "indivisíveis",
     "variantes": [
       "indivisibilidade"
@@ -851,6 +1207,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "indulto",
+    "variantes": [],
+    "significado": "Perdão da pena dado pelo Presidente da República, por decreto.",
+    "fontes": [
+      "LEP, art. 192",
+      "doutrina (CF, art. 84, XII)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "ineficácia absoluta do meio",
@@ -922,6 +1289,18 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "interditar",
+    "variantes": [
+      "interdição"
+    ],
+    "significado": "Fechar, total ou parcialmente, um estabelecimento que funciona mal.",
+    "fontes": [
+      "LEP, art. 66, VIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "internacionalização",
     "variantes": [],
     "significado": "Os direitos humanos deixarem de ser assunto só de cada país e passarem a ser cuidados também pela comunidade internacional.",
@@ -930,6 +1309,19 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "internado",
+    "variantes": [
+      "internados"
+    ],
+    "significado": "Quem cumpre medida de segurança em hospital de custódia.",
+    "fontes": [
+      "LEP, art. 10",
+      "doutrina (execução penal)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "intervenção federal",
@@ -979,6 +1371,16 @@
     "criado_em": "2026-10-12T16:53:09.811479+00:00"
   },
   {
+    "termo": "isolamento",
+    "variantes": [],
+    "significado": "Ficar na própria cela, ou em local adequado, separado dos outros presos.",
+    "fontes": [
+      "LEP, art. 53, IV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "jurisdição",
     "variantes": [],
     "significado": "O território e as pessoas sobre os quais uma autoridade manda e julga.",
@@ -987,6 +1389,18 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "jurisdição ordinária",
+    "variantes": [
+      "justiça ordinária"
+    ],
+    "significado": "A Justiça comum, que não é a eleitoral nem a militar.",
+    "fontes": [
+      "LEP, art. 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "legislação especial",
@@ -1008,6 +1422,47 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "liberado condicional",
+    "variantes": [],
+    "significado": "Quem saiu antes do fim da pena, em livramento condicional, cumprindo condições.",
+    "fontes": [
+      "LEP, art. 26, II"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "liminarmente",
+    "variantes": [],
+    "significado": "Logo de início, antes da decisão final.",
+    "fontes": [
+      "LEP, art. 54, § 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "limitação de fim de semana",
+    "variantes": [],
+    "significado": "Pena de passar algumas horas do sábado e do domingo na casa do albergado, em cursos e atividades.",
+    "fontes": [
+      "LEP, art. 93",
+      "doutrina (CP, art. 48)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "livramento condicional",
+    "variantes": [],
+    "significado": "Sair antes do fim da pena, cumprindo condições durante o período de prova.",
+    "fontes": [
+      "LEP, art. 131"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "mandado de injunção",
@@ -1048,6 +1503,45 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "medida protetiva",
+    "variantes": [
+      "medidas protetivas"
+    ],
+    "significado": "Ordem do juiz para proteger a vítima de violência doméstica, como manter distância dela.",
+    "fontes": [
+      "LEP, art. 50, IX",
+      "doutrina (Lei 11.340/2006)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "milícia privada",
+    "variantes": [
+      "milícias privadas"
+    ],
+    "significado": "Grupo armado que domina território e cobra 'proteção', fora da lei.",
+    "fontes": [
+      "LEP, art. 41-A",
+      "doutrina (CP, art. 288-A)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "monitoração eletrônica",
+    "variantes": [
+      "tornozeleira",
+      "tornozeleira eletrônica"
+    ],
+    "significado": "A tornozeleira que mostra onde a pessoa está.",
+    "fontes": [
+      "LEP, art. 146-B"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "não vinculante",
@@ -1130,6 +1624,37 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "parlatório",
+    "variantes": [],
+    "significado": "A sala onde o preso conversa com o visitante, separado por vidro ou grade.",
+    "fontes": [
+      "LEP, art. 41-A"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "parturiente",
+    "variantes": [],
+    "significado": "A mulher que está dando à luz ou acabou de dar.",
+    "fontes": [
+      "LEP, art. 89"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "Patronato",
+    "variantes": [],
+    "significado": "O órgão que dá assistência aos albergados e aos egressos.",
+    "fontes": [
+      "LEP, art. 61",
+      "doutrina (LEP, art. 78)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "peculato",
     "variantes": [],
     "significado": "O servidor ficar com, ou desviar, o que tinha nas mãos por causa do cargo.",
@@ -1138,6 +1663,68 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "pecúlio",
+    "variantes": [],
+    "significado": "A parte do dinheiro do trabalho do preso guardada na poupança, entregue quando ele sai.",
+    "fontes": [
+      "LEP, art. 29, § 2º",
+      "LEP, art. 41, IV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "perfil genético",
+    "variantes": [],
+    "significado": "O 'código' do DNA da pessoa, que serve para identificá-la.",
+    "fontes": [
+      "LEP, art. 9º-A",
+      "LEP, art. 50, VIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "periculosidade",
+    "variantes": [],
+    "significado": "O risco de a pessoa voltar a fazer mal aos outros.",
+    "fontes": [
+      "LEP, art. 175"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "período de prova",
+    "variantes": [],
+    "significado": "O tempo em que a pessoa precisa cumprir as condições para não perder o benefício.",
+    "fontes": [
+      "LEP, art. 26, II"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "permissão de saída",
+    "variantes": [],
+    "significado": "Sair com escolta, em caso de morte ou doença grave na família ou de tratamento médico.",
+    "fontes": [
+      "LEP, art. 120"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "pesquisa criminológica",
+    "variantes": [],
+    "significado": "O estudo das causas do crime e de como tratá-lo.",
+    "fontes": [
+      "LEP, art. 64, IV"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "plebiscito",
@@ -1149,6 +1736,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "poder de polícia",
+    "variantes": [],
+    "significado": "O poder do Estado de limitar, fiscalizar e, se preciso, usar a força.",
+    "fontes": [
+      "LEP, art. 83-B",
+      "doutrina (direito administrativo)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "polícia judiciária",
@@ -1215,6 +1813,40 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "prévia tabela",
+    "variantes": [],
+    "significado": "A tabela de pagamento definida antes.",
+    "fontes": [
+      "LEP, art. 29"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "primário",
+    "variantes": [
+      "primária",
+      "primários"
+    ],
+    "significado": "Quem não é reincidente.",
+    "fontes": [
+      "LEP, art. 112",
+      "doutrina (CP, art. 63)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "prisão cautelar",
+    "variantes": [],
+    "significado": "Prisão antes da condenação definitiva, como a preventiva.",
+    "fontes": [
+      "LEP, art. 126, § 7º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "prisão civil",
     "variantes": [],
     "significado": "Prisão que não é castigo por crime, mas um jeito de forçar o pagamento de uma dívida. Hoje, só a do devedor de pensão alimentícia.",
@@ -1226,6 +1858,18 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "progressão",
+    "variantes": [
+      "progressão de regime"
+    ],
+    "significado": "Passar para um regime mais leve.",
+    "fontes": [
+      "LEP, art. 112"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "proibição de retrocesso",
     "variantes": [],
     "significado": "Direito conquistado não pode ser tirado ou diminuído depois.",
@@ -1234,6 +1878,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "puerpério",
+    "variantes": [],
+    "significado": "O período logo depois do parto, em que o corpo da mulher se recupera.",
+    "fontes": [
+      "LEP, art. 14, § 4º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "punibilidade",
@@ -1255,6 +1909,38 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "regalias",
+    "variantes": [],
+    "significado": "Vantagens extras dadas ao preso de bom comportamento, conforme o regulamento local.",
+    "fontes": [
+      "LEP, art. 56"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "regime disciplinar diferenciado",
+    "variantes": [
+      "RDD"
+    ],
+    "significado": "O jeito mais duro de cumprir pena, com cela individual e contato restrito.",
+    "fontes": [
+      "LEP, art. 52"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "regressão",
+    "variantes": [],
+    "significado": "Voltar para um regime mais duro.",
+    "fontes": [
+      "LEP, art. 118"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "regresso",
@@ -1279,6 +1965,19 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "reincidente",
+    "variantes": [
+      "reincidentes"
+    ],
+    "significado": "Quem comete novo crime depois de já condenado de vez por outro.",
+    "fontes": [
+      "LEP, art. 112",
+      "doutrina (CP, art. 63)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "reintegração",
     "variantes": [],
     "significado": "Voltar a viver em sociedade, dentro da lei, depois da prisão.",
@@ -1287,6 +1986,47 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "remição",
+    "variantes": [],
+    "significado": "Diminuir a pena trabalhando ou estudando.",
+    "fontes": [
+      "LEP, art. 126"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "remissão",
+    "variantes": [],
+    "significado": "Perdão. Não confunda com remição, que é abater pena.",
+    "fontes": [
+      "2019-q82"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "repreensão",
+    "variantes": [],
+    "significado": "Uma bronca formal, registrada por escrito.",
+    "fontes": [
+      "LEP, art. 53, II",
+      "doutrina (execução penal)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "requerimento circunstanciado",
+    "variantes": [],
+    "significado": "Pedido detalhado, com os fatos e as razões.",
+    "fontes": [
+      "LEP, art. 54, § 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "resistência passiva",
@@ -1309,6 +2049,21 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "restritiva de direitos",
+    "variantes": [
+      "restritivas de direitos",
+      "pena restritiva de direitos",
+      "penas restritivas de direitos"
+    ],
+    "significado": "As penas que não são prisão: serviço à comunidade, limitação de fim de semana, prestação em dinheiro e outras.",
+    "fontes": [
+      "LEP, art. 147",
+      "doutrina (CP, art. 43)"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "retroatividade",
     "variantes": [
       "retroage",
@@ -1322,6 +2077,16 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "saída temporária",
+    "variantes": [],
+    "significado": "Sair sem escolta, no semiaberto, para estudar.",
+    "fontes": [
+      "LEP, art. 122"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "semi-imputável",
     "variantes": [],
     "significado": "Quem entendia só em parte o que fazia: responde, mas com pena menor.",
@@ -1330,6 +2095,16 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "sensacionalismo",
+    "variantes": [],
+    "significado": "Exposição exagerada para chamar atenção, como foto do preso na TV.",
+    "fontes": [
+      "LEP, art. 41, VIII"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "sentença irrecorrível",
@@ -1364,6 +2139,19 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "subverter",
+    "variantes": [
+      "subversão"
+    ],
+    "significado": "Virar de cabeça para baixo a ordem: motim, rebelião.",
+    "fontes": [
+      "LEP, art. 50, I",
+      "LEP, art. 52"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "supralegal",
     "variantes": [
       "supralegais",
@@ -1376,6 +2164,32 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "sursis",
+    "variantes": [
+      "suspensão condicional da pena"
+    ],
+    "significado": "Suspensão da pena de prisão curta: a pessoa não vai presa se cumprir as condições.",
+    "fontes": [
+      "LEP, art. 156"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "tempo remido",
+    "variantes": [
+      "remido",
+      "remir"
+    ],
+    "significado": "Os dias de pena abatidos pelo trabalho ou pelo estudo.",
+    "fontes": [
+      "LEP, art. 126",
+      "LEP, art. 128"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "teoria monista",
@@ -1399,6 +2213,18 @@
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
   },
   {
+    "termo": "título executivo",
+    "variantes": [
+      "título executivo judicial"
+    ],
+    "significado": "Documento que permite cobrar direto na Justiça, sem precisar provar a dívida de novo.",
+    "fontes": [
+      "LEP, art. 164"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "trabalhador avulso",
     "variantes": [
       "avulso"
@@ -1412,6 +2238,17 @@
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
   },
   {
+    "termo": "trabalho externo",
+    "variantes": [],
+    "significado": "Trabalho fora do presídio.",
+    "fontes": [
+      "LEP, art. 36",
+      "LEP, art. 37"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "trânsito em julgado",
     "variantes": [
       "transitada em julgado",
@@ -1423,6 +2260,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:22:43.211132+00:00"
+  },
+  {
+    "termo": "tratamento ambulatorial",
+    "variantes": [],
+    "significado": "Tratamento sem internação: a pessoa vai às consultas e volta para casa.",
+    "fontes": [
+      "LEP, art. 172",
+      "LEP, art. 184"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
     "termo": "turnos ininterruptos de revezamento",
@@ -1459,6 +2307,16 @@
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
   },
   {
+    "termo": "urbanidade",
+    "variantes": [],
+    "significado": "Educação e cortesia no trato com os outros.",
+    "fontes": [
+      "LEP, art. 39, III"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
     "termo": "vantagem indevida",
     "variantes": [],
     "significado": "Qualquer benefício que o servidor não tem direito de receber: dinheiro, presente, favor.",
@@ -1468,5 +2326,27 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:28:51.237709+00:00"
+  },
+  {
+    "termo": "vigilância direta",
+    "variantes": [],
+    "significado": "Agente acompanhando de perto; sem ela, o preso sai sozinho.",
+    "fontes": [
+      "LEP, art. 122"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
+  },
+  {
+    "termo": "visita íntima",
+    "variantes": [
+      "visita íntima ou conjugal"
+    ],
+    "significado": "O encontro reservado do preso com o cônjuge ou companheira.",
+    "fontes": [
+      "LEP, art. 41, § 2º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-12T17:48:54.523099+00:00"
   }
 ]
