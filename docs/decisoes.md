@@ -5536,3 +5536,13 @@ viraram estudo extra "Onde: Radar". Copia antes em
        lacunas desta questao" - com o link do caderno; a gerada nunca avisa,
        porque nao vem de caderno. Das 287 questoes de lacuna do alvo e do
        complementar aceito, 6 avisam (pendencia N).
+     - **a Crase 2 aponta para o assunto inteiro "Emprego da crase"** (muda
+       o no que a ficha tinha, como na 129). So com o subassunto "Crase
+       diante de substantivo feminino sem artigo", o treino da Crase 2 tinha
+       1 questao real e 29 geradas, quase nenhuma de lacuna; as de lacuna
+       estao no subassunto "Lacunas com a, à e há" e no proprio assunto. A
+       ficha nao aceita no dentro de outro no, entao o assunto entra sozinho
+       e cobre os tres: 24 questoes reais (uma por chave, todas do
+       complementar) e 63 geradas. A ficha continua conferida (13/10), e a
+       Crase 1 nao mudou - as duas dividem as questoes de lacuna, como a
+       Revisao ativa 1, que ja apontava para o assunto.
