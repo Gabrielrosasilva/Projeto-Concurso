@@ -5508,3 +5508,31 @@ viraram estudo extra "Onde: Radar". Copia antes em
      coleta nao achou concurso" a "edital publicado (segundo 🟢 28/01/2026)",
      com Banca IDIB e o edital, e o sino traz o CFO do IDIB e as duas
      erratas do CFO no DOE.
+
+165. **a crase do jeito da banca: a lacuna do texto-base aparece, e a tela
+     avisa a que a leitura perdeu** (pedido de 13/10, fora dos lotes, a seu
+     pedido; nao mexe em numero nenhum). Voce mostrou as questoes de crase da
+     FEPESE no Qconcursos - o texto com lacunas e "a • à • há" nas
+     alternativas - e o radar mostrava o texto dessas questoes sem as
+     lacunas: "Santa Catarina 130 anos", "pertenceram Blumenau". A FEPESE
+     desenha o tracinho como figura, e a leitura por colunas (decisao 132)
+     devolvia so espaco: no meio da linha um espaco duplo, que a tela junta
+     num so; no comeco da linha um espaco, que o `strip` tirava. As regras:
+     - **so o texto com 2 espacos duplos ou mais no meio da linha e texto de
+       lacunas** (`questoes._marcar_lacunas_do_texto`), e nele o espaco duplo
+       e o espaco do comeco da linha viram `____`. O texto sem lacunas fica
+       como estava: o recuo de paragrafo tambem comeca a linha com espaco
+       (2024, Sao Jose). Medido em 13/10 nos textos do alvo e do complementar
+       aceito: os 129 sem lacuna tem no maximo 1 espaco duplo (2019,
+       "francesa  Prison Insider"); os de lacuna, de 3 a 6. Releitura com
+       `radar questoes --textos-base`: 85 questoes ganharam as lacunas, os
+       paragrafos nao mudaram, e so a coluna `texto_base` muda;
+     - **a questao de completar sabe quantas lacunas a leitura nao mostra**
+       (`questoes.lacunas_perdidas`): os itens da alternativa ("a • à • há",
+       ou "a – à" em 2016) contra as lacunas que se veem no enunciado e no
+       texto-base (o `____`, a numerada "(1)", o pontilhado; as reticencias
+       nao, que no texto de 2024 eram do autor). A tela da questao e a
+       questao inteira da ficha avisam - "A leitura do caderno nao mostra N
+       lacunas desta questao" - com o link do caderno; a gerada nunca avisa,
+       porque nao vem de caderno. Das 287 questoes de lacuna do alvo e do
+       complementar aceito, 6 avisam (pendencia N).

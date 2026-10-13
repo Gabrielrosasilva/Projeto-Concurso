@@ -41,6 +41,7 @@ from radar import conteudos as arvore
 from radar import cronograma as plano_de_estudo
 from radar import incidencia, leis, niveis
 from radar import prioridade as regra_de_prioridade
+from radar import questoes as leitor_de_questoes
 # As origens (secao 20), mais a do plano, e a frase da regra inviolavel 4: as
 # mesmas do resto do site, que desde a Etapa 7A moram todas no origem.py.
 from radar.glossario import Trecho  # noqa: F401 - o trecho da frase na tela
@@ -912,6 +913,13 @@ class QuestaoReal:
     #: explicacao e a pegadinha: a faixa manda responder sem consulta, e quem
     #: leu o gabarito antes mede a memoria (P05, decisao 148).
     respondida: bool = False
+
+    @property
+    def lacunas_perdidas(self) -> int:
+        """Quantas lacunas a leitura do caderno nao mostra: a tela avisa e
+        manda ao caderno (decisao 165)."""
+        return leitor_de_questoes.lacunas_perdidas(self.enunciado, dict(self.alternativas),
+                                                   self.texto_base)
 
     @property
     def onde(self) -> str:

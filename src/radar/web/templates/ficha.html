@@ -229,6 +229,7 @@
   {% macro questao_inteira(q) %}
     <details><summary>ver a questão inteira</summary>
       {% if q.texto_base %}<p class="texto-base">{{ s('oficial') }} Texto-base (do caderno da prova):<br>{{ q.texto_base }}</p>{% endif %}
+      {% if q.lacunas_perdidas %}<p class="ds-alerta">⚠ A leitura do caderno não mostra {{ q.lacunas_perdidas }} {{ 'lacuna' if q.lacunas_perdidas == 1 else 'lacunas' }} desta questão. Confira no <a href="{{ q.prova }}" target="_blank" rel="noopener">caderno da prova</a>.</p>{% endif %}
       <p class="enunciado">{{ q.enunciado }}</p>
       {% if q.respondida %}
         {% if q.alternativas %}<ul class="marcas">{% for letra, texto in q.alternativas %}<li>{% if letra == (q.resposta or '') | lower %}<b>({{ letra }}) {{ texto }}</b> ✓{% else %}({{ letra }}) {{ texto }}{% endif %}</li>{% endfor %}</ul>{% endif %}

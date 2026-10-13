@@ -609,3 +609,19 @@ resumo e do tema (decisao 161). O que falta:
   Library da Universidade de Minnesota. Conferir no oficial quando der;
 - ⚪ **A traducao dos temas do Ciclo 2**: montar o ciclo (decisao 123) passa a
   incluir o `--pedido --traducoes` das fichas de lei novas, depois do resumo.
+
+## N. A crase do jeito da banca (decisao 165, 13/10)
+
+Feito: o texto-base das questoes de lacuna mostra o `____` (85 questoes
+relidas), e a tela avisa, com o link do caderno, a questao em que a leitura
+perdeu alguma lacuna. O que falta:
+
+### A IA pode fazer (quando voce pedir)
+
+- ⚪ **As 6 questoes de lacuna que a tela avisa.** Quatro ficam sem texto:
+  dizem "lacunas do texto" sem o numero, e o caderno numera os textos (2024:
+  P09 e P13, q1 - 5 lacunas cada; S1, q1), ou o texto nao foi lido (2016, AS,
+  q1, a de "a – à" nas alternativas). Duas mostram uma lacuna a menos (2024,
+  os dois M1, q1): a leitura nao achou sinal nenhum dela. O conserto das
+  quatro seria ligar a questao ao unico texto antes dela; ate la, o aviso
+  manda ao caderno.

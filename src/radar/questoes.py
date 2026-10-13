@@ -711,6 +711,28 @@ def _desfazer_quebras(linhas: list[str]) -> str:
     return texto.strip()
 
 
+# Lido por colunas, o tracinho da lacuna some de outro jeito que no
+# `marcar_lacunas`: no meio da linha sobra um espaco duplo ("Catarina  130
+# anos") e, quando a lacuna abre a linha, um espaco no comeco (" Blumenau.").
+# Os dois sinais tambem aparecem sem lacuna - o recuo de paragrafo comeca a
+# linha com espaco (2024, Sao Jose) -, entao so o texto com 2 espacos duplos
+# ou mais no meio da linha e texto de lacunas. Conferido em 13/10/2026 nos
+# textos do alvo e do complementar aceito: os 129 sem lacuna tem no maximo 1
+# (2019: "francesa  Prison Insider"), e os de lacuna tem de 3 a 6.
+ESPACOS_DUPLOS_DO_TEXTO_DE_LACUNAS = 2
+_ESPACO_DUPLO = re.compile(r"(?<=\S) {2,}(?=\S)")
+_ESPACO_NO_COMECO = re.compile(r"^ +(?=\S)")
+
+
+def _marcar_lacunas_do_texto(linhas: list[str]) -> list[str]:
+    """As linhas com ____ no lugar da lacuna, se o texto for de lacunas."""
+    duplos = sum(len(_ESPACO_DUPLO.findall(linha)) for linha in linhas)
+    if duplos < ESPACOS_DUPLOS_DO_TEXTO_DE_LACUNAS:
+        return linhas
+    return [_ESPACO_NO_COMECO.sub(f"{LACUNA} ", _ESPACO_DUPLO.sub(f" {LACUNA} ", linha))
+            for linha in linhas]
+
+
 def textos_base(texto: str) -> dict[str, str]:
     """{rotulo: texto} dos textos de apoio do caderno ja lido por colunas.
 
@@ -723,7 +745,8 @@ def textos_base(texto: str) -> dict[str, str]:
     for cabecalho in PADRAO_CABECALHO_DO_TEXTO.finditer(limpo):
         fim = PADRAO_QUESTAO.search(limpo, cabecalho.end())
         corpo = limpo[cabecalho.end(): fim.start() if fim else len(limpo)]
-        textos.setdefault(cabecalho.group(1), _desfazer_quebras(corpo.splitlines()))
+        textos.setdefault(cabecalho.group(1),
+                          _desfazer_quebras(_marcar_lacunas_do_texto(corpo.splitlines())))
     if textos:
         return textos
 
@@ -734,9 +757,41 @@ def textos_base(texto: str) -> dict[str, str]:
         linhas = [l for l in limpo[secao.end(): fim.start() if fim else len(limpo)]
                   .splitlines() if l.strip()]
         if len(linhas) >= LINHAS_MINIMAS_DO_TEXTO:
-            textos[TEXTO_UNICO] = _desfazer_quebras(linhas)
+            textos[TEXTO_UNICO] = _desfazer_quebras(_marcar_lacunas_do_texto(linhas))
         break
     return textos
+
+
+# "Assinale a alternativa que completa corretamente as lacunas do texto."
+PADRAO_PEDE_LACUNAS = re.compile(r"\blacunas?\b|espa[cç]os? em branco", re.IGNORECASE)
+# A lacuna que se ve: a numerada ("aprendizagens (1) que"), com o ____ que a
+# segue ou nao; o ____ do leitor; o pontilhado que o caderno escreveu como
+# texto. As reticencias ficam de fora: no texto de 2024 (M1) eram do autor.
+PADRAO_LACUNA_VISIVEL = re.compile(r"\(\d{1,2}\)(?:\s*_{3,})?|_{3,}|\.{4,}")
+# Os itens da alternativa: "a • à • há" desde 2017; "a – à – a" em 2016.
+SEPARADORES_DOS_ITENS = ("•", " – ")
+
+
+def lacunas_perdidas(enunciado: str | None, alternativas: dict | None,
+                     texto_base: str | None) -> int:
+    """Quantas lacunas a questao de completar pede e a leitura nao mostra.
+
+    A alternativa diz quantas sao ("a • à • há • a • à": 5), e o enunciado e o
+    texto-base, quantas a leitura marcou. 0 quando a questao nao e de lacunas
+    ou a alternativa nao separa os itens - ai nao ha como contar.
+    """
+    if not PADRAO_PEDE_LACUNAS.search(enunciado or ""):
+        return 0
+    pedidas = 0
+    for texto in (alternativas or {}).values():
+        texto = str(texto)
+        separador = next((sep for sep in SEPARADORES_DOS_ITENS if sep in texto), None)
+        if separador:
+            pedidas = max(pedidas, len([item for item in texto.split(separador) if item.strip()]))
+    if pedidas < 2:
+        return 0
+    vistas = len(PADRAO_LACUNA_VISIVEL.findall(f"{enunciado or ''}\n{texto_base or ''}"))
+    return max(0, pedidas - vistas)
 
 
 def texto_da_questao(enunciado: str, textos: dict[str, str]) -> str | None:

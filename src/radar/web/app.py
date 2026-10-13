@@ -29,6 +29,7 @@ from radar import niveis
 from radar import onde_estudar
 from radar import origem
 from radar import qconcursos
+from radar import questoes as leitor_de_questoes
 from radar import regioes
 from radar import servico
 from radar.util import (
@@ -846,8 +847,18 @@ def simulado_questao(request: Request, simulado_id: int, ver: int | None = None)
             "origem": servico.geradas.origem_de(questao) if de_ia else None,
             "lei": (leis.do_assunto(questao.materia, questao.assunto)
                     if de_ia else None),
+            "lacunas_perdidas": _lacunas_perdidas(resposta, questao),
         },
     )
+
+
+def _lacunas_perdidas(resposta, questao) -> int:
+    """Quantas lacunas a leitura do caderno nao mostra (decisao 165). A gerada
+    nao vem de caderno: o texto dela e o que a IA escreveu."""
+    if resposta.gerada:
+        return 0
+    return leitor_de_questoes.lacunas_perdidas(questao.enunciado, questao.alternativas,
+                                               getattr(questao, "texto_base", None))
 
 
 def _questao_corrigida(request: Request, simulado, resumo: dict, de_ia: bool,
@@ -880,6 +891,7 @@ def _questao_corrigida(request: Request, simulado, resumo: dict, de_ia: bool,
             "explicacao": (None if gerada else
                            servico.manual.carregar_explicacoes().get(questao.impressao)),
             "macetes": [] if gerada else _macetes_por_questao().get(chave, []),
+            "lacunas_perdidas": _lacunas_perdidas(resposta, questao),
             # O caderno de erros ja abre com o que a tela sabe: errar e anotar
             # na mesma hora, sem digitar de novo - com o no da questao (U21).
             "anotar_erro": link_de_anotar_erro_da_questao(

@@ -191,6 +191,12 @@
       <details class="texto-base" {{ '' if corrigida else 'open' }}><summary>Texto-base (do caderno da prova)</summary>
         <p>{{ questao.texto_base }}</p></details>
     {% endif %}
+    {# A FEPESE desenha o tracinho da lacuna como figura, e a leitura do caderno
+       pode perder algum (decisao 165): a tela diz quantos e manda ao caderno,
+       em vez de mostrar o texto como se estivesse inteiro. #}
+    {% if lacunas_perdidas %}
+      <p class="ds-alerta">⚠ A leitura do caderno não mostra {{ lacunas_perdidas }} {{ 'lacuna' if lacunas_perdidas == 1 else 'lacunas' }} desta questão. Confira no <a href="{{ questao.prova_url }}" target="_blank" rel="noopener">caderno da prova</a> antes de responder.</p>
+    {% endif %}
     <p class="enunciado">{{ questao.enunciado }}</p>
 
     {% if corrigida %}
