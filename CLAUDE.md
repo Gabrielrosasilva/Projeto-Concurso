@@ -280,9 +280,13 @@ CBMSC no cartao dos Bombeiros, pelo `cbmsc` do `prova_de_sc`). O Idecan e a
 Prefeitura de Florianopolis ficaram fora, so registrados. O radar tem 8
 fontes. E, aprovada por voce, a decisao 160 (muda a 141): a situacao e os
 marcos do cartao olham a edicao inteira - cada marco do item mais novo que o
-sabe -, e os Bombeiros passaram a "edital publicado" com Banca IDIB. Abertos
-na pendencia J, por decidir: o 🔔 de edital velho recem-chegado, o CFO no
-cartao do Oficial de Bombeiros e o edital de abertura do DOE sem fase.
+sabe -, e os Bombeiros passaram a "edital publicado" com Banca IDIB. Em
+12/10, aprovadas por voce: o edital de ABERTURA do DOE entra como "edital
+publicado" e a carga inicial marca tambem os eventos da fonte (decisao 162;
+a PC SC mostra o edital de 12/12/2025); o 🔔 so acende para item da edicao de
+agora (163; a Policia Penal perdeu os sinos dos editais de 2006 a 2022); e o
+termo do cartao aceita "todas as partes" - `cbmsc + formacao de oficiais`
+poe o CFO do CBMSC no cartao do Oficial de Bombeiros (164).
 **O resumo enxuto e o "🗣 Traduz pra mim" (12/10, decisao 161, a seu pedido e
 fora dos lotes; nao mexe em numero):** na janela e na ficha, os artigos
 abertos, um bloco por artigo (as frases que citam so ele, pela fonte), o
