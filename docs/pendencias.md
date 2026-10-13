@@ -493,12 +493,9 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
     cada marco do item mais novo que o sabe, e a situacao do mais novo que a
     sabe. Os Bombeiros dizem "edital publicado" com Banca IDIB; a PC SC,
     "banca contratada" com a banca do contrato;
-  - ⚪ **O edital de abertura do DOE entra sem fase**: pela regra do pedido de
-    11/10 (decisao 154, "o resto desconhecida"), o edital de abertura da PC
-    SC (12/12/2025) nao preenche o marco Edital, e o cartao diz "banca
-    contratada". Se quiser, o edital de ABERTURA do DOE pode entrar como
-    `edital_publicado` (a errata, a retificacao e a comissao continuam sem
-    fase). Decisao sua;
+  - ✅ **O edital de abertura do DOE entra como "edital publicado"** (feito
+    em 12/10, decisao 162): a errata, a retificacao e a comissao continuam
+    sem fase, e refazer a carga nao avisa o passado;
   - 🟡 **O 🔔 acende para edital velho que acabou de entrar no radar** (DOE,
     SEJURI): o evento "entrou no radar" tem a data de hoje, e o 🔔 conta
     evento depois do `novidades_desde`. Os editais de 2006 a 2022 da SEJURI e

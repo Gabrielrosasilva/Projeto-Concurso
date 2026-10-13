@@ -76,6 +76,12 @@ RETIFICACAO_PC = (
     "DE SANTA CATARINA , no uso de suas atribuições legais, torna pública a "
     "retificação do Edital de Concurso Público"
 )
+# A errata diz que e errata depois de quase 200 letras de orgao e de curso.
+ERRATA_CBMSC = (
+    "GOVERNO DO ESTADO DE SANTA CATARINA CORPO DE BOMBEIROS MILITAR DO ESTADO DE "
+    "SANTA CATARINA CONCURSO PÚBLICO PARA O PREENCHIMENTO DE VAGAS NO CURSO DE "
+    "FORMAÇÃO DE OFICIAIS EDITAL 002-2026/DP/CBMSC - CFO ERRATA Nº 1"
+)
 NOMEACAO = (
     "PORTARIA Nº 08/PMSC/2026, de 08/01/2026. INCLUO no serviço ativo da Polícia "
     "Militar do Estado de Santa Catarina, como Cadete, os candidatos partícipe do "
@@ -88,7 +94,8 @@ NOMEACAO = (
     (RESULTADO_DA_DISPENSA_PM, "LICITAÇÃO", doe_sc.CONTRATO),
     (COMISSAO, "PORTARIA DE RESOLVE", doe_sc.COMISSAO),
     (EDITAL_PC, "EDITAL", doe_sc.EDITAL),
-    (RETIFICACAO_PC, "EDITAL", doe_sc.EDITAL),
+    (RETIFICACAO_PC, "EDITAL", doe_sc.RETIFICACAO),
+    (ERRATA_CBMSC, "ERRATA", doe_sc.RETIFICACAO),
 ])
 def test_o_ato_que_entra(texto, assunto, ato):
     assert doe_sc.que_ato_e(texto, assunto) == ato
@@ -345,12 +352,21 @@ def test_o_resultado_da_dispensa_ja_define_a_banca(coletor):
     assert item.titulo == "2026 - POLÍCIA MILITAR DO ESTADO DE SANTA CATARINA - EXTRATO DO RESULTADO"
 
 
-def test_o_edital_e_a_comissao_ficam_desconhecida_e_sem_banca(coletor):
+def test_a_situacao_de_cada_ato():
+    """Decisao 162: o edital de abertura e fato; a correcao e a comissao nao
+    dizem a fase."""
+    assert doe_sc.SITUACAO_DO_ATO[doe_sc.EDITAL] == "edital_publicado"
+    assert doe_sc.SITUACAO_DO_ATO[doe_sc.RETIFICACAO] == "desconhecida"
+    assert doe_sc.SITUACAO_DO_ATO[doe_sc.COMISSAO] == "desconhecida"
+
+
+def test_o_edital_de_abertura_e_publicado_e_a_comissao_nao_diz_a_fase(coletor):
     itens = _por_codigo(coletor.coletar())
 
     edital = itens[1143884]
-    assert edital.situacao == "desconhecida"
+    assert edital.situacao == "edital_publicado"
     assert edital.banca is None
+    assert itens[1149079].situacao == "edital_publicado"    # "Abrem-se inscricoes"
     assert edital.titulo == (
         "2025 - EDITAL DE CONCURSO PÚBLICO N. 01/2025 - ABERTURA DE CONCURSO PÚBLICO "
         "PARA PROVIMENTO DE VAGAS NA CARREIRA DE AGENTE DE POLÍCIA CIVIL"
@@ -486,6 +502,37 @@ def test_a_carga_inicial_traz_o_ano_e_nao_enche_a_fila_de_avisos(
         do_doe = list(s.scalars(select(Concurso).where(Concurso.fonte == "doe_sc")))
     assert len(do_doe) == 5
     assert all(c.avisado_em is not None for c in do_doe)
+
+
+def test_refazer_a_carga_nao_avisa_a_fase_que_mudou(banco_temporario, coletor, monkeypatch):
+    """O edital da PC SC entrou em 11/10 como "desconhecida"; refeita a carga,
+    vira "edital publicado". O evento da mudanca e de hoje, mas o edital e de
+    dezembro: nao pode ir para o Telegram das carreiras (decisao 162)."""
+    from sqlalchemy import select
+
+    from radar import servico
+    from radar.collectors.base import ItemColetado
+    from radar import eventos as linha_do_tempo
+    from radar.db import sessao
+    from radar.models import Evento
+
+    url = "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143884"
+    with sessao() as s:
+        servico._gravar(s, ItemColetado(
+            titulo="2025 - EDITAL DE CONCURSO PÚBLICO N. 01/2025 - AGENTE DE POLÍCIA CIVIL",
+            url=url, uf="SC", tipo="concurso", situacao="desconhecida",
+        ), fonte="doe_sc")
+
+    original = doe_sc.DoeSc.__init__
+    monkeypatch.setattr(doe_sc.DoeSc, "__init__",
+                        lambda self, dias=10, hoje=None: original(self, dias, date(2026, 10, 11)))
+    servico.carga_inicial(dias=365, fonte="doe_sc")
+
+    with sessao() as s:
+        eventos = list(s.scalars(select(Evento).where(Evento.concurso_url == url)))
+    publicou = [e for e in eventos if e.tipo == linha_do_tempo.EDITAL_PUBLICADO]
+    assert publicou, [e.tipo for e in eventos]
+    assert all(e.avisado_em is not None for e in eventos)
 
 
 def test_a_carga_so_marca_como_avisado_o_que_e_dela(banco_temporario, coletor, monkeypatch):

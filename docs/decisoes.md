@@ -5121,7 +5121,8 @@ viraram estudo extra "Onde: Radar". Copia antes em
        de realizar ou abrir o concurso -> `autorizado`; o ato que constitui
        ou compoe a comissao do concurso e o edital de abertura, retificacao
        ou errata -> `desconhecida`, como o pedido mandou (o classificador
-       ainda le o titulo). O cargo tem de estar no CABECALHO do ato (600
+       ainda le o titulo; desde 12/10, decisao 162, o edital de ABERTURA e
+       `edital_publicado`). O cargo tem de estar no CABECALHO do ato (600
        letras): o edital da Secretaria da Saude de 10/2025 fala em "delegado
        de policia" num requisito, la pela pagina 30;
      - **fica de fora**: o processo seletivo (o edital de militar temporario
@@ -5439,3 +5440,26 @@ viraram estudo extra "Onde: Radar". Copia antes em
        Protocolo de San Salvador, art. 11 (Sistemas). O texto oficial de Viena
        nao se leu daqui (o site do Alto Comissariado da ONU nao respondeu): a
        traducao do § 5 fica no que o resumo ja diz.
+
+162. **o edital de abertura do Diario Oficial entra como `edital_publicado`**
+     (muda a 154; aprovado por voce em 12/10). A 154 deixava todo edital do
+     DOE sem fase, pela regra do pedido ("o resto desconhecida"), e com os
+     marcos pela edicao (decisao 160) o cartao da PC SC dizia "banca
+     contratada" e "Edital: aguardando" - com o edital de 12/12/2025 no
+     radar e a prova de 22/03/2026 na linha do ultimo concurso. As regras:
+     - **o edital de abertura e fato, e nao interpretacao**: o ato que ABRE
+       o concurso ("ABERTURA DE CONCURSO PUBLICO", "Abrem-se inscricoes para
+       o Concurso Publico") vira `edital_publicado`;
+     - **a correcao continua sem fase**: a errata e a retificacao (o tipo de
+       ato do portal, ou "retificacao", "errata" e "alteracao" nas 400
+       primeiras letras - a "ERRATA N. 1" do CBMSC vem depois de quase 200
+       letras de orgao e de curso) viram um ato proprio, `retificacao`, com
+       `desconhecida`. A comissao tambem. A correcao vence a abertura: a "4a
+       Retificacao" do edital da PC SC cita a abertura e e retificacao;
+     - **refazer a carga nao avisa o passado**: a carga inicial passou a
+       marcar como avisados tambem os EVENTOS da fonte dela. Sem isso, o
+       edital de dezembro que muda de fase hoje iria para o Telegram das
+       carreiras como "edital publicado" de hoje.
+     Nos 17 atos de 11/10: os 3 editais de abertura (PC SC 01 e 02/2025,
+     Policia Cientifica 001/2025) viraram `edital_publicado`; as 3 erratas do
+     CBMSC e as 2 retificacoes da PC SC ficaram `desconhecida`.

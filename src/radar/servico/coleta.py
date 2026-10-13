@@ -27,7 +27,7 @@ from radar.collectors.ieses import Ieses
 from radar.collectors.prefeitura_bc import PrefeituraBc
 from radar.collectors.sejuri import Sejuri
 from radar.db import criar_tabelas, sessao
-from radar.models import Concurso, agora
+from radar.models import Concurso, Evento, agora
 
 log = logging.getLogger(__name__)
 
@@ -382,15 +382,27 @@ def _marcar_historico_como_avisado(fonte: str) -> int:
     So a fonte da carga (decisao 154): em 11/10/2026 o banco daqui tinha 750
     concursos de outras fontes sem a marca, e a carga do Diario Oficial nao
     tem nada que silenciar o que e delas.
+
+    Os EVENTOS da fonte tambem (decisao 162): refazer a carga muda a fase de
+    item que ja estava no banco - o edital de 12/12/2025 da PC SC virou
+    "edital publicado" -, e o evento da mudanca, com a data de hoje, iria
+    para o Telegram das carreiras como se o edital tivesse saido agora.
     """
-    consulta = (select(Concurso)
-                .where(Concurso.avisado_em.is_(None))
-                .where(Concurso.fonte == fonte))
+    momento = agora()
     marcados = 0
     with sessao() as s:
+        consulta = (select(Concurso)
+                    .where(Concurso.avisado_em.is_(None))
+                    .where(Concurso.fonte == fonte))
         for concurso in s.scalars(consulta):
-            concurso.avisado_em = agora()
+            concurso.avisado_em = momento
             marcados += 1
+        da_fonte = select(Concurso.url).where(Concurso.fonte == fonte)
+        eventos = (select(Evento)
+                   .where(Evento.avisado_em.is_(None))
+                   .where(Evento.concurso_url.in_(da_fonte)))
+        for evento in s.scalars(eventos):
+            evento.avisado_em = momento
     return marcados
 
 

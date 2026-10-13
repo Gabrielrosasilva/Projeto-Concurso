@@ -26,7 +26,8 @@ Daqui so sai o ato que e um destes quatro, e que fala de um cargo do
      o ato escreve;
   2. **a autorizacao** para realizar ou abrir o concurso -> `autorizado`;
   3. **a comissao** do concurso -> `desconhecida`;
-  4. **o edital** de abertura, a retificacao ou a errata -> `desconhecida`.
+  4. **o edital de abertura** -> `edital_publicado` (decisao 162: e fato, e
+     nao interpretacao); **a retificacao e a errata** -> `desconhecida`.
 
 O "resto desconhecida" e de proposito: o diario diz o que o ato e, e nao em
 que pe o concurso esta. O classificador ainda le o titulo.
@@ -94,13 +95,18 @@ CABECALHO_DO_ALVO = 600
 #
 # Tudo comparado no texto normalizado (sem acento, minusculo, um espaco so).
 
-CONTRATO, AUTORIZACAO, COMISSAO, EDITAL = "contrato", "autorizacao", "comissao", "edital"
+CONTRATO, AUTORIZACAO, COMISSAO = "contrato", "autorizacao", "comissao"
+EDITAL, RETIFICACAO = "edital", "retificacao"
 
 SITUACAO_DO_ATO = {
     CONTRATO: "banca_definida",
     AUTORIZACAO: "autorizado",
     COMISSAO: "desconhecida",
-    EDITAL: "desconhecida",
+    # O edital de abertura publicado e o fato que o nome diz (decisao 162): o
+    # da PC SC de 12/12/2025 deixava o cartao em "Edital: aguardando".
+    EDITAL: "edital_publicado",
+    # A errata e a retificacao corrigem um edital: nao dizem a fase.
+    RETIFICACAO: "desconhecida",
 }
 
 # Ato de contratacao: o extrato do contrato ("Contratada: ...") ou o
@@ -134,7 +140,15 @@ COMISSAO_DO_CONCURSO = re.compile(
 
 # O cabecalho do edital que interessa: abertura, retificacao, errata.
 EDITAL_NO_CABECALHO = re.compile(r"\b(?:edital|errata|retificacao)\b")
-EDITAL_QUE_INTERESSA = re.compile(r"\b(?:abertura|retifica\w*|errata|alteracao)\b")
+# O que diz que o ato CORRIGE um edital, e nao o abre.
+CORRIGE = re.compile(r"\b(?:retifica\w*|errata|alteracao)\b")
+# O que diz que o ato ABRE o concurso: "ABERTURA DE CONCURSO PUBLICO" (PC SC),
+# "Abrem-se inscricoes para o Concurso Publico" (Policia Cientifica).
+ABRE = re.compile(r"\b(?:abertura|abrem-se|ficam abertas|estarao abertas)\b")
+# A correcao se diz cedo: a "ERRATA N. 1" do CBMSC vem depois de quase 200
+# letras de orgao e de nome do curso.
+CABECALHO_DA_CORRECAO = 400
+ASSUNTOS_DE_CORRECAO = {"errata", "ato de retificar", "termo de retificar"}
 # Edital de quem ja passou, ou de etapa: nao e novidade de concurso.
 EDITAL_DE_ETAPA = re.compile(
     r"\b(?:convoca\w*|resultado|homologa\w*|classifica\w*|nomea\w*|gabarito|"
@@ -167,7 +181,8 @@ def _limpar(texto: str) -> str:
 
 
 def que_ato_e(texto: str, assunto: str | None = None) -> str | None:
-    """contrato, autorizacao, comissao, edital - ou None, que fica de fora.
+    """contrato, autorizacao, comissao, edital (de abertura), retificacao -
+    ou None, que fica de fora.
 
     `texto` e o comeco do ato; `assunto` e o tipo de ato que o portal da.
     A ordem importa: o extrato do contrato cita o concurso e o edital, e e
@@ -191,10 +206,18 @@ def que_ato_e(texto: str, assunto: str | None = None) -> str | None:
     cabecalho = t[:CABECALHO]
     eh_edital = (EDITAL_NO_CABECALHO.search(cabecalho)
                  or normalizar(assunto) in ASSUNTOS_DE_EDITAL)
-    if (eh_edital and "concurso publico" in t
-            and EDITAL_QUE_INTERESSA.search(t[:INICIO])
+    if not (eh_edital and "concurso publico" in t
             and not EDITAL_DE_ETAPA.search(cabecalho)):
+        return None
+    # A correcao vence: "Edital n. 01/2025 (4a Retificacao)" tambem cita a
+    # abertura, e e retificacao que ele e.
+    if (normalizar(assunto) in ASSUNTOS_DE_CORRECAO
+            or CORRIGE.search(t[:CABECALHO_DA_CORRECAO])):
+        return RETIFICACAO
+    if ABRE.search(t[:INICIO]):
         return EDITAL
+    if CORRIGE.search(t[:INICIO]):
+        return RETIFICACAO
     return None
 
 
