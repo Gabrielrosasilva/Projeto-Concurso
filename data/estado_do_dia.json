@@ -433,5 +433,46 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-12T15:36:31.794998+00:00",
+    "data": "2026-10-12",
+    "faixas_feitas": [
+      {
+        "acertos": 3,
+        "assunto": "Questões de prova: Tentativa, dolo, culpa e erro (arts. 14 a 21)",
+        "bloco": "plano_b",
+        "consulta": true,
+        "indice": 1,
+        "materia": "Direito Penal",
+        "minutos": 40,
+        "questoes": 10,
+        "titulo": "Questões de prova: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Artigos-chave: Tentativa, dolo, culpa e erro (arts. 14 a 21)",
+        "bloco": "plano_b",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Penal",
+        "minutos": 15,
+        "questoes": null,
+        "titulo": "Artigos-chave: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      }
+    ],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-12T15:05:49.185057+00:00",
+        "bloco": "plano_b",
+        "chutes": 3,
+        "entendi": "nao",
+        "indice": 1,
+        "materia": "Direito Penal",
+        "nota": "preciso estudar e ler mais as leis achei meio confuso",
+        "titulo": "Questões de prova: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      }
+    ],
+    "plano_b": 60
   }
 ]

@@ -2001,5 +2001,163 @@
         "respondida_em": "2026-10-10T16:00:46.496211+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-12T15:21:06.378171+00:00",
+    "filtros": {
+      "conteudo": null,
+      "conteudos": [
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa",
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
+      ],
+      "da_faixa": {
+        "bloco": "plano_b",
+        "data": "2026-10-12",
+        "indice": 1,
+        "titulo": "Questões de prova: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 15
+    },
+    "finalizado_em": "2026-10-12T15:35:47.057681+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "b8b037720d540f290279b6f126488be3",
+        "ordem": 1,
+        "respondida_em": "2026-10-12T15:23:13.242533+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "ee25e626f5621d3a6903f69fea086836",
+        "ordem": 2,
+        "respondida_em": "2026-10-12T15:24:15.087603+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "293303af253661fb903e1c45c4986859",
+        "ordem": 3,
+        "respondida_em": "2026-10-12T15:25:30.127648+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "ca7b2079413c0ce934db12f52b2510a0",
+        "ordem": 4,
+        "respondida_em": "2026-10-12T15:27:02.254864+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "acaa0b972f877283c43fd9caa01e8d8e",
+        "ordem": 5,
+        "respondida_em": "2026-10-12T15:27:59.823127+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "b298bbf67f6e3358547a60a95cb59961",
+        "ordem": 6,
+        "respondida_em": "2026-10-12T15:29:09.812296+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "86148e50265186e3de57f5fcae9f6d5f",
+        "ordem": 7,
+        "respondida_em": "2026-10-12T15:30:09.704326+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "3f8f794fd07b3fcfec47112fa837085b",
+        "ordem": 8,
+        "respondida_em": "2026-10-12T15:30:32.066949+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "150916336e8b9b6a8aa08a3a07ea69d1",
+        "ordem": 9,
+        "respondida_em": "2026-10-12T15:32:28.622143+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "01cf68ebf6286e3e1f4bb94d50bdd8e2",
+        "ordem": 10,
+        "respondida_em": "2026-10-12T15:32:49.819869+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "72d20a5cee0d33a45b67817ebd75287a",
+        "ordem": 11,
+        "respondida_em": "2026-10-12T15:33:31.127778+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "08f9b23d2d2c3bc6fa6419051aa3cdbb",
+        "ordem": 12,
+        "respondida_em": "2026-10-12T15:34:04.339218+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "50ded3169b44067bc430e224d9115136",
+        "ordem": 13,
+        "respondida_em": "2026-10-12T15:35:00.287764+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "b2d576121f779bb75ec1cd5b4f5726db",
+        "ordem": 14,
+        "respondida_em": "2026-10-12T15:35:21.400317+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "d2e234e1c835df3d4ec7c1284c7d9901",
+        "ordem": 15,
+        "respondida_em": "2026-10-12T15:35:47.053226+00:00"
+      }
+    ]
   }
 ]

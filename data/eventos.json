@@ -1857,6 +1857,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "data": "2026-10-12T14:00:10.944560+00:00",
+    "descricao": "Prazo de inscricao: de 09/10/2026 a 08/11/2026",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "data": "2026-10-12T14:00:28.417818+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-urussanga-sc-divulga-edital-com-salarios-de-ate-r-23-mil/",
     "data": "2026-10-09T15:06:22.616753+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -2576,7 +2592,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4259/materia/1137461",
     "data": "2026-10-11T16:47:31.781393+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2584,7 +2600,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4370/materia/1141207",
     "data": "2026-10-11T16:47:31.784158+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2592,7 +2608,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4375/materia/1142741",
     "data": "2026-10-11T16:47:31.770974+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2600,7 +2616,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143884",
     "data": "2026-10-11T16:47:31.796801+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2608,7 +2624,15 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143884",
+    "data": "2026-10-13T00:28:05.264059+00:00",
+    "descricao": "Situacao: desconhecida -> edital_publicado",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143884",
+    "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143887",
     "data": "2026-10-11T16:47:31.798562+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2616,7 +2640,15 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143887",
+    "data": "2026-10-13T00:28:05.267318+00:00",
+    "descricao": "Situacao: desconhecida -> edital_publicado",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4379/materia/1143887",
+    "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4381/materia/1143883",
     "data": "2026-10-11T16:47:31.786386+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2624,7 +2656,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4381/materia/1143885",
     "data": "2026-10-11T16:47:31.787618+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2632,7 +2664,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4385/materia/1145115",
     "data": "2026-10-11T16:47:31.783019+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2640,7 +2672,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4402/materia/1149079",
     "data": "2026-10-11T16:47:31.788757+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2648,7 +2680,15 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
+    "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4402/materia/1149079",
+    "data": "2026-10-13T00:28:05.231073+00:00",
+    "descricao": "Situacao: desconhecida -> edital_publicado",
+    "link": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4402/materia/1149079",
+    "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4423/materia/1154234",
     "data": "2026-10-11T16:47:31.792511+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2656,7 +2696,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4430/materia/1155941",
     "data": "2026-10-11T16:47:31.790863+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2664,7 +2704,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4435/materia/1157303",
     "data": "2026-10-11T16:47:31.794102+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2672,7 +2712,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4436/materia/1157685",
     "data": "2026-10-11T16:47:31.795551+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2680,7 +2720,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4539/materia/1190736",
     "data": "2026-10-11T16:47:31.779878+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
@@ -2688,7 +2728,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4556/materia/1196597",
     "data": "2026-10-11T16:47:31.801188+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2696,7 +2736,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4556/materia/1196599",
     "data": "2026-10-11T16:47:31.799870+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como desconhecida",
@@ -2704,7 +2744,7 @@
     "tipo": "apareceu"
   },
   {
-    "avisado_em": null,
+    "avisado_em": "2026-10-13T00:28:05.305039+00:00",
     "concurso_url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4580/materia/1203313",
     "data": "2026-10-11T16:47:31.785204+00:00",
     "descricao": "Entrou no radar pela fonte doe_sc, como banca_definida",
