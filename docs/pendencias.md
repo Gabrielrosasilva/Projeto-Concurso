@@ -499,11 +499,9 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   - ✅ **O 🔔 so acende para item da edicao de agora** (feito em 12/10,
     decisao 163): os editais de 2006 a 2022 da SEJURI sairam do sino da
     Policia Penal; o ato de 2025 que e da edicao de agora continua acendendo;
-  - ⚪ **O CFO do CBMSC nao cai no cartao do Oficial de Bombeiros**: o DOE
-    escreve "Curso de Formacao de Oficiais (CFO)", e os termos do cartao
-    (`oficial de bombeiros`, `oficial bombeiro`...) nao casam. Somar um termo
-    ao `config/acompanhamentos.yml` e decisao sua: "formacao de oficiais"
-    sozinho pegaria tambem o CFO da PM;
+  - ✅ **O CFO do CBMSC cai no cartao do Oficial de Bombeiros** (feito em
+    12/10, decisao 164): o termo `cbmsc + formacao de oficiais`, que pede as
+    duas partes; o CFO da PM fica so no cartao da PM;
   - ⚪ **Conferir a banca por extenso**: o DOE escreve "INSTITUTO DE
     DESENVOLVIMENTO EDUCACIONAL, CULTURAL, E ASSISTENCIAL NACIONAL" (o
     Idecan) e "INSTITUTO DE DESENVOLVIMENTO INSTITUCIONAL BRASILEIRO" (o
@@ -582,8 +580,11 @@ O que falta:
 
 Feito: o resumo enxuto nas 65 fichas (os artigos abertos, o resto dobrado),
 o `config/linguagem.yml`, o `radar fichas --pedido --traducoes`, a tela da
-traducao com o glossario e as 30 fichas de lei traduzidas (197 artigos, 130
-linhas de "nao confunda", 213 termos). O que falta:
+traducao com o glossario e as 30 fichas de lei traduzidas (200 artigos, 130
+linhas de "nao confunda", 215 termos). Os tres blocos de Direitos Humanos que
+tinham ficado de fora (Viena, § 5; CF, art. 1º; Protocolo de San Salvador,
+art. 11) entraram em 12/10, com a regra nova: o artigo com bloco proprio no
+resumo e do tema (decisao 161). O que falta:
 
 ### Depende de voce
 
@@ -593,22 +594,18 @@ linhas de "nao confunda", 213 termos). O que falta:
   do dia. Achou algo errado numa nao conferida: `radar fichas --pedido
   --traducoes --tema "<o tema>" --refazer`, os passos 2 e 3 de sempre, e
   `radar fichas --importar data/resposta_ia.json`;
-- ⚪ **Olhar o glossario** (`data/glossario.json`, 213 termos, 🟣): nao ha
+- ⚪ **Olhar o glossario** (`data/glossario.json`, 215 termos, 🟣): nao ha
   botao de conferencia por termo. O termo errado se corrige a mao no arquivo
   (o primeiro escrito vale: a importacao nao sobrescreve). Alguns significados
   vem de doutrina, e a fonte diz isso ("doutrina (...)");
-- ⚪ **Tres blocos de Direitos Humanos ficaram sem traducao**, pela regra do
-  artigo do tema (titulo e "ler exatamente"): Viena, § 5 na Afirmacao
-  historica; CF, art. 1º na Teoria geral; Protocolo de San Salvador, art. 11
-  nos Sistemas de protecao. Se quiser, a regra pode passar a contar tambem o
-  artigo que tem bloco no resumo - decisao sua;
 - ⚪ **Reinicie o servidor** depois do `git pull`: `radar parar` e `radar
   subir` (os templates e o CSS mudaram).
 
 ### A IA pode fazer (quando voce pedir)
 
-- ⚪ **O texto oficial de Viena** nao se leu daqui (o site do Alto
-  Comissariado da ONU nao respondeu ao curl): a traducao do § 5, na Teoria
-  geral, fica no que o resumo ja dizia. Conferir quando o site responder;
+- ⚪ **O texto oficial de Viena** nao se le daqui (o site do Alto
+  Comissariado da ONU responde 403, e o sistema de documentos da ONU so
+  entrega o visualizador): o § 5 foi conferido na copia da Human Rights
+  Library da Universidade de Minnesota. Conferir no oficial quando der;
 - ⚪ **A traducao dos temas do Ciclo 2**: montar o ciclo (decisao 123) passa a
   incluir o `--pedido --traducoes` das fichas de lei novas, depois do resumo.

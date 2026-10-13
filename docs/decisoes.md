@@ -5431,15 +5431,21 @@ viraram estudo extra "Onde: Radar". Copia antes em
        cada artigo conferido antes no texto oficial: CP, CF e LEP na
        compilacao da Camara; o Decreto 678/1992; a DUDH na traducao da UNICEF
        Brasil; as Regras de Mandela no original da UNODC, com a regra 40 pela
-       letra do CNJ e a nota do ingles, a 117): **as 30 fichas de lei, 197
-       artigos** (Constitucional 17, Penal 39, Direitos Humanos 43, LEP 98),
-       **130 linhas de "nao confunda" e 213 termos no glossario**. Ficam sem
-       traducao, pela regra do artigo do tema, tres blocos de Direitos
-       Humanos que o resumo tem e o titulo e o "ler exatamente" nao citam:
-       Viena, § 5 (Afirmacao historica), CF, art. 1º (Teoria geral) e
-       Protocolo de San Salvador, art. 11 (Sistemas). O texto oficial de Viena
-       nao se leu daqui (o site do Alto Comissariado da ONU nao respondeu): a
-       traducao do § 5 fica no que o resumo ja diz.
+       letra do CNJ e a nota do ingles, a 117): **as 30 fichas de lei, 200
+       artigos** (Constitucional 17, Penal 39, Direitos Humanos 46, LEP 98),
+       **130 linhas de "nao confunda" e 215 termos no glossario**;
+     - **o artigo com bloco proprio no resumo e do tema** (aprovado por voce
+       em 12/10, depois da primeira leva): o artigo do tema era so o do
+       titulo e o do "ler exatamente", e tres blocos de Direitos Humanos que
+       o resumo tem ficaram sem traducao - Viena, § 5 (Afirmacao historica),
+       CF, art. 1º (Teoria geral) e Protocolo de San Salvador, art. 11
+       (Sistemas). Agora `servico.fichas.artigos_do_tema` soma o artigo que
+       tem bloco no resumo (a frase de dois artigos nao conta: nao e bloco),
+       para o pedido, a importacao, a orfa e o verificador; vale tambem para
+       as fichas futuras. As tres ganharam o artigo, com os itens de antes
+       iguais. O Protocolo foi conferido no Decreto 3.321/1999 (Camara); o §
+       5 de Viena, que o site da ONU nao entrega daqui (403), na copia da
+       Human Rights Library da Universidade de Minnesota.
 
 162. **o edital de abertura do Diario Oficial entra como `edital_publicado`**
      (muda a 154; aprovado por voce em 12/10). A 154 deixava todo edital do
@@ -5482,3 +5488,23 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Com o banco de 12/10: a Policia Penal SC perdeu os 4 sinos dos editais
      antigos da SEJURI; a PC SC (6) e os Bombeiros (8) mantem os deles, que
      sao atos da edicao de agora que eu ainda nao vi.
+
+164. **o termo do cartao aceita "todas as partes", e o CFO do CBMSC cai no
+     cartao do Oficial de Bombeiros** (aprovado por voce em 12/10, a opcao
+     "3b"). O IDIB e o Diario Oficial escrevem "CONCURSO PUBLICO PARA
+     FORMACAO DE OFICIAIS EDITAL 002-2026/DP/CBMSC - CFO", e nenhum termo do
+     cartao (`oficial de bombeiros`, `oficial bombeiro`...) casava. So
+     "formacao de oficiais" pegaria tambem o CFO da PM SC, que tem o mesmo
+     nome. As regras:
+     - **um termo com " + " pede TODAS as partes no texto**, cada uma por
+       palavra inteira (`_tem_termo`, no `radar/acompanhamentos.py`); o termo
+       simples continua como era. Vale para os termos do cartao (os do bloco
+       do `alvo.yml` e os `termos_extras`); o `alvo.yml` nao mudou;
+     - **o cartao do Oficial de Bombeiros SC ganhou `cbmsc + formacao de
+       oficiais`** no `config/acompanhamentos.yml`. O CFO do CBMSC fica nos
+       dois cartoes de bombeiro; o CFP (pracas) so no do Bombeiro Militar; o
+       CFO da PM, so no da PM.
+     Com o banco de 12/10: o cartao do Oficial de Bombeiros SC passou de "a
+     coleta nao achou concurso" a "edital publicado (segundo 🟢 28/01/2026)",
+     com Banca IDIB e o edital, e o sino traz o CFO do IDIB e as duas
+     erratas do CFO no DOE.

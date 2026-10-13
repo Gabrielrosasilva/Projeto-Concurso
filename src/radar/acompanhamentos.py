@@ -172,6 +172,22 @@ def _no_local(acompanhamento: Acompanhamento, concurso) -> bool:
                                      getattr(concurso, "resumo", None)))
 
 
+#: O "e" de um termo composto: "cbmsc + formacao de oficiais" so casa com as
+#: duas partes no texto (decisao 164).
+JUNTOS = "+"
+
+
+def _tem_termo(termos, titulo: str | None, resumo: str | None) -> bool:
+    """Algum termo aparece? O termo com "+" pede TODAS as partes, cada uma
+    por palavra inteira: o CFO do CBMSC e "Curso de Formacao de Oficiais",
+    o da PM tambem, e so o "cbmsc" separa os dois."""
+    for termo in termos:
+        partes = [p.strip() for p in str(termo).split(JUNTOS) if p.strip()]
+        if partes and all(alvos.primeiro_termo([p], titulo, resumo) for p in partes):
+            return True
+    return False
+
+
 def casa(acompanhamento: Acompanhamento, concurso) -> bool:
     """Este item da coleta e desta carreira?"""
     if acompanhamento.cargo == PRINCIPAL:
@@ -180,8 +196,8 @@ def casa(acompanhamento: Acompanhamento, concurso) -> bool:
         # podia discordar do primeiro.
         if getattr(concurso, "alvo", None) != alvos.PRINCIPAL:
             return False
-    elif not alvos.primeiro_termo(acompanhamento.termos, concurso.titulo,
-                                  getattr(concurso, "resumo", None)):
+    elif not _tem_termo(acompanhamento.termos, concurso.titulo,
+                        getattr(concurso, "resumo", None)):
         return False
 
     if acompanhamento.local and not _no_local(acompanhamento, concurso):

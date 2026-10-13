@@ -107,6 +107,36 @@ def test_o_yaml_de_verdade_carrega_as_sete_carreiras(monkeypatch):
     carreiras.recarregar()
 
 
+def test_termo_composto_pede_todas_as_partes():
+    """Decisao 164: "cbmsc + formacao de oficiais" so casa com as duas."""
+    termos = ["cbmsc + formacao de oficiais"]
+    assert carreiras._tem_termo(
+        termos, "CONCURSO PÚBLICO PARA FORMAÇÃO DE OFICIAIS EDITAL 002-2026/DP/CBMSC – CFO", None)
+    assert not carreiras._tem_termo(
+        termos, "Concurso PM SC: Curso de Formação de Oficiais (CFO)", None)
+    assert not carreiras._tem_termo(
+        termos, "CONCURSO PÚBLICO PARA FORMAÇÃO DE PRAÇAS EDITAL 001-2026/DP/CBMSC – CFP", None)
+    # termo simples continua como era
+    assert carreiras._tem_termo(["cbmsc"], "EDITAL 001-2026/DP/CBMSC – CFP", None)
+
+
+def test_o_cfo_do_cbmsc_cai_no_cartao_do_oficial_e_o_da_pm_nao(monkeypatch):
+    """Com o config de verdade: o CFO dos Bombeiros e dos dois cartoes de
+    bombeiro; o CFO da PM, so do da PM."""
+    monkeypatch.delenv("RADAR_CONFIG_DIR", raising=False)
+    carreiras.recarregar()
+    try:
+        cfo_bombeiros = _item("https://concurso.idib.org.br/Concurso.aspx?ID=336",
+                              "2026 - CONCURSO PÚBLICO PARA FORMAÇÃO DE OFICIAIS "
+                              "EDITAL 002-2026/DP/CBMSC – CFO", uf=None, fonte="idib")
+        cfo_pm = _item("https://x.test/pm", "Concurso PMSC: Curso de Formação de Oficiais (CFO)")
+        assert {a.nome for a in carreiras.de_quais(cfo_bombeiros)} == {
+            "Oficial do Corpo de Bombeiros SC", "Bombeiro Militar SC"}
+        assert [a.nome for a in carreiras.de_quais(cfo_pm)] == ["Polícia Militar SC"]
+    finally:
+        carreiras.recarregar()
+
+
 def test_cargo_que_nao_existe_no_alvo_para_com_erro(ambiente):
     (ambiente / "acompanhamentos.yml").write_text(
         "acompanhamentos:\n  - nome: X\n    cargo: Policia Rodoviaria\n", encoding="utf-8")

@@ -374,7 +374,9 @@ Cada marco vem do item mais recente da edicao que o sabe - o contrato da
 banca, o edital, a errata podem ser itens diferentes - e a situacao, do mais
 recente que sabe a fase (decisao 160). O 🔔 so conta fato de item da edicao
 de agora: o edital de 2019 que chega hoje vai para o historico, como "edicao
-antiga" (decisao 163). O
+antiga" (decisao 163). Os termos de cada carreira moram no
+`config/acompanhamentos.yml`; um termo com " + " pede todas as partes no
+texto (`cbmsc + formacao de oficiais`, decisao 164). O
 botao **Verificar atualizacoes** roda a coleta agora (espera 30 minutos entre
 um clique e outro); o que o robo nao ve vai pela pesquisa do Claude Code:
 

@@ -21,7 +21,8 @@
 #     `fontes_de_sc`, ou o texto tem uma das palavras de `prova_de_sc`.
 #     UF de outro estado tira o item, sempre.
 # Acento e caixa nao importam, e a comparacao e por PALAVRA INTEIRA - a mesma
-# regra do alvo.yml.
+# regra do alvo.yml. Um termo com " + " pede TODAS as partes no texto
+# ("cbmsc + formacao de oficiais").
 
 # Quanto tempo o botao "Verificar atualizacoes" espera entre um clique e
 # outro. Cada clique e uma volta nas fontes, com o atraso de cortesia do
@@ -120,6 +121,10 @@ acompanhamentos:
     termos_extras:
       - oficial bombeiro
       - oficiais bombeiros militares
+      # O CFO do CBMSC: o IDIB e o Diario Oficial escrevem "Curso de Formacao
+      # de Oficiais ... CBMSC". O "+" pede as duas partes (decisao 164): so
+      # "formacao de oficiais" pegaria tambem o CFO da PM.
+      - cbmsc + formacao de oficiais
     uf: SC
 
   - nome: Bombeiro Militar SC
