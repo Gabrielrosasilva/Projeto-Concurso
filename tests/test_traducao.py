@@ -189,8 +189,8 @@ def test_o_pedido_so_sai_para_materia_de_lei_e_leva_o_que_a_traducao_precisa(
     (p,) = lote["pedidos"]
     assert lote["tipo"] == "traducoes" and p["ficha"] == penal.id
     assert p["artigos_do_tema"] == [{"lei": "CP", "inicio": [14, ""], "fim": [21, ""]}]
-    assert "OS ARTIGOS QUE O TEMA COBRE (pelo titulo e pelo 'ler exatamente'): " \
-           "CP, arts. 14 a 21" in p["pedido"]
+    assert ("OS ARTIGOS QUE O TEMA COBRE (pelo titulo, pelo 'ler exatamente' e pelos "
+            "blocos do resumo): CP, arts. 14 a 21") in p["pedido"]
     assert "\nCP, art. 15\n  - Desistência voluntária" in p["pedido"]
     assert "COMO A BANCA COBROU" in p["pedido"] and "AS PEGADINHAS" in p["pedido"]
     assert "TERMOS JA NO GLOSSARIO (nao repita): nenhum ainda" in p["pedido"]
@@ -243,3 +243,32 @@ def test_o_artigo_que_o_resumo_nunca_citou_nao_e_orfao():
     fora = {"itens": [{"artigo": "CP, art. 30"}], "artigos_do_resumo": []}
     (orfa,) = traducao.orfas(fora, resumo, DO_TEMA)
     assert "não é mais do tema" in orfa.motivo
+
+
+def test_o_artigo_com_bloco_proprio_no_resumo_e_do_tema(banco_temporario):
+    """Aprovado em 12/10 (decisao 161): o artigo que tem bloco proprio no
+    resumo conta como do tema, mesmo fora do titulo e do "ler exatamente" -
+    o caso de Viena, § 5, na Afirmacao historica. A frase de dois artigos
+    nao e bloco, e nao conta."""
+    partes = copy.deepcopy(RESUMO["partes"])
+    partes["artigos"].append({"texto": "Art. 22: coação irresistível e obediência.",
+                              "fontes": ["CP, art. 22"]})
+    partes["dominar"].append({"texto": "Arts. 23 e 24: duas excludentes de ilicitude.",
+                              "fontes": ["CP, art. 23", "CP, art. 24"]})
+    escrita = _ficha(partes)
+    cobre = servico_fichas.artigos_do_tema(escrita)
+    assert artigos.do_tema_contem(cobre, artigos.Artigo("CP", 22))
+    assert not artigos.do_tema_contem(cobre, artigos.Artigo("CP", 23))
+    item = copy.deepcopy(BOA["itens"][1])
+    item["artigo"] = "CP, art. 22"
+    for chave in ("na_real", "exemplo"):
+        item[chave]["fontes"] = ["CP, art. 22"]
+    item["na_prova"]["fontes"] = ["CP, art. 22"]
+    pedido = _pedido(escrita)
+    pedido[0]["artigos_do_tema"] = traducao.faixas_para_o_pedido(cobre)
+    resultado = servico_fichas.importar_traducoes(
+        pedido, [{"id": "t1", "traducao": {**BOA, "itens": BOA["itens"] + [item]}}], "m")
+    assert resultado["gravadas"] == 1, resultado["recusas"]
+    # O pedido diz os artigos do tema sem repetir o que a faixa ja cobre.
+    lote = manual.pedido_de_traducoes(tema=TEMA, refazer=True)
+    assert "CP, arts. 14 a 21; CP, art. 22" in lote["pedidos"][0]["pedido"]

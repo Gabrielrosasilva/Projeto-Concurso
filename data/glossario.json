@@ -587,6 +587,17 @@
     "criado_em": "2026-10-12T17:48:54.523099+00:00"
   },
   {
+    "termo": "dignidade da pessoa humana",
+    "variantes": [],
+    "significado": "O valor que toda pessoa tem só por ser pessoa: ninguém pode ser tratado como coisa.",
+    "fontes": [
+      "CF, art. 1º, III",
+      "DUDH, art. 1º"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-13T00:29:49.071230+00:00"
+  },
+  {
     "termo": "diligências",
     "variantes": [],
     "significado": "Providências para descobrir informações.",
@@ -1878,6 +1889,17 @@
     ],
     "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
     "criado_em": "2026-10-12T17:36:54.341566+00:00"
+  },
+  {
+    "termo": "Protocolo de San Salvador",
+    "variantes": [],
+    "significado": "O Protocolo Adicional à Convenção Americana sobre os direitos econômicos, sociais e culturais, de 1988, que inclui o meio ambiente sadio.",
+    "fontes": [
+      "Protocolo de San Salvador, art. 11",
+      "Decreto 3.321/1999"
+    ],
+    "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+    "criado_em": "2026-10-13T00:29:49.071230+00:00"
   },
   {
     "termo": "puerpério",

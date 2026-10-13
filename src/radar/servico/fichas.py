@@ -586,10 +586,21 @@ def verificar_resumos(ctx: fichas.Contexto | None = None) -> list[tuple[str, str
 # --- a traducao dos artigos e o glossario (decisao 161) -----------------------------
 
 def artigos_do_tema(escrita: fichas.FichaEscrita) -> list:
-    """As faixas de artigos que o tema cobre: o titulo e o "ler exatamente"."""
+    """As faixas de artigos que o tema cobre: o titulo, o "ler exatamente" e,
+    desde a sua aprovacao de 12/10 (decisao 161), o artigo que tem bloco
+    proprio no resumo - o resumo, ja conferido na importacao, o cita como do
+    tema. Sem isto, Viena, § 5 (Afirmacao historica), CF, art. 1º (Teoria
+    geral) e Protocolo de San Salvador, art. 11 (Sistemas) ficavam sem
+    traducao. A frase de dois artigos nao conta: ela nao e bloco."""
     from radar import artigos
 
-    return artigos.do_tema(escrita.tema, escrita.ler_exatamente, escrita.materia)
+    faixas = artigos.do_tema(escrita.tema, escrita.ler_exatamente, escrita.materia)
+    for chave in ("dominar", "artigos"):
+        for frase in ((escrita.resumo or {}).get("partes") or {}).get(chave) or []:
+            artigo = fichas.artigo_da_frase(frase)
+            if artigo is not None and not artigos.do_tema_contem(faixas, artigo):
+                faixas.append(artigos.Faixa(artigo.lei, artigo.posicao, artigo.posicao))
+    return faixas
 
 
 def caminho_do_glossario() -> Path:

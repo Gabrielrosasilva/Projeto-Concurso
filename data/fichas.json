@@ -5081,6 +5081,29 @@
               "DUDH, art. 3º"
             ]
           }
+        },
+        {
+          "artigo": "Declaração de Viena (1993), § 5",
+          "na_real": {
+            "texto": "Em Viena, em 1993, ficou escrito: os direitos humanos valem para todos, não se separam e um depende do outro. E cada Estado tem o dever de proteger todos eles, seja qual for o seu sistema político, econômico ou cultural; as particularidades de cada país contam, mas não tiram esse dever.",
+            "fontes": [
+              "Declaração de Viena (1993), § 5"
+            ]
+          },
+          "exemplo": {
+            "texto": "Um país diz que, pela sua cultura, pode deixar de lado os direitos das mulheres: pelo § 5 de Viena, a tradição local é levada em conta, mas o dever de proteger todos os direitos continua.",
+            "fontes": [
+              "Declaração de Viena (1993), § 5"
+            ]
+          },
+          "na_prova": {
+            "texto": "Viena é de 1993, e o § 5 traz as quatro palavras: UNIVERSAIS, INDIVISÍVEIS, INTERDEPENDENTES e INTER-RELACIONADOS. Em 2013, a banca cobrou a Declaração de Viena pelo nome, entre documentos inventados; e data falsa para ela também já apareceu.",
+            "fontes": [
+              "Declaração de Viena (1993), § 5",
+              "2013-q24 (gabarito D)",
+              "FEPESE-2013-q30 (gabarito D)"
+            ]
+          }
         }
       ],
       "nao_confunda": [
@@ -5113,7 +5136,7 @@
         }
       ],
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
-      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "criado_em": "2026-10-13T00:29:49.071230+00:00",
       "conferido_em": null,
       "artigos_do_resumo": [
         {
@@ -7290,6 +7313,29 @@
               "Convenção Americana, art. 68"
             ]
           }
+        },
+        {
+          "artigo": "Protocolo de San Salvador, art. 11",
+          "na_real": {
+            "texto": "Toda pessoa tem direito a viver num meio ambiente sadio e a ter os serviços públicos básicos. E os países se comprometem a proteger, preservar e melhorar o meio ambiente.",
+            "fontes": [
+              "Protocolo de San Salvador, art. 11"
+            ]
+          },
+          "exemplo": {
+            "texto": "Uma comunidade sem água tratada nem coleta de esgoto, ao lado de um lixão, está longe do que o art. 11 promete: meio ambiente sadio e serviços públicos básicos.",
+            "fontes": [
+              "Protocolo de San Salvador, art. 11"
+            ]
+          },
+          "na_prova": {
+            "texto": "O Protocolo de San Salvador (1988; no Brasil, Decreto 3.321/1999) é o Protocolo Adicional à Convenção Americana sobre direitos econômicos, sociais e culturais, e o seu art. 11 é o do MEIO AMBIENTE SADIO. A banca troca o nome por tratados inventados ou de outros temas (Cruz Alta, Assunção, Olivos).",
+            "fontes": [
+              "Protocolo de San Salvador, art. 11",
+              "2013-q29 (gabarito C)",
+              "FEPESE-2013-q23 (gabarito D)"
+            ]
+          }
         }
       ],
       "nao_confunda": [
@@ -7328,7 +7374,7 @@
         }
       ],
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
-      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "criado_em": "2026-10-13T00:29:49.071230+00:00",
       "conferido_em": null,
       "artigos_do_resumo": [
         {
@@ -7816,6 +7862,29 @@
               "DUDH, art. 5º"
             ]
           }
+        },
+        {
+          "artigo": "CF, art. 1º",
+          "na_real": {
+            "texto": "A dignidade da pessoa humana é um dos fundamentos em que a República se apoia: toda pessoa vale por ser pessoa.",
+            "fontes": [
+              "CF, art. 1º, III"
+            ]
+          },
+          "exemplo": {
+            "texto": "Revistar a visita do preso deixando-a nua na frente de todos fere a dignidade da pessoa humana, um dos fundamentos da República.",
+            "fontes": [
+              "CF, art. 1º, III"
+            ]
+          },
+          "na_prova": {
+            "texto": "A dignidade da pessoa humana é FUNDAMENTO da República (CF, art. 1º, III) e o fundamento central dos direitos humanos, ponto de partida também da DUDH (art. 1º).",
+            "fontes": [
+              "CF, art. 1º, III",
+              "DUDH, art. 1º",
+              "FEPESE-2013-q22 (gabarito B)"
+            ]
+          }
         }
       ],
       "nao_confunda": [
@@ -7863,7 +7932,7 @@
         }
       ],
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
-      "criado_em": "2026-10-12T17:36:54.341566+00:00",
+      "criado_em": "2026-10-13T00:29:49.071230+00:00",
       "conferido_em": null,
       "artigos_do_resumo": [
         {

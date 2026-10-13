@@ -1370,7 +1370,8 @@ def pedido_de_traducoes(tema: str | None = None, materia: str | None = None,
         faixas = traducao.faixas_para_o_pedido(cobre)
         corpo = [f"TEMA: {escrita.tema}", f"MATERIA: {escrita.materia}",
                  f"LER EXATAMENTE (a ficha): {escrita.ler_exatamente}",
-                 "OS ARTIGOS QUE O TEMA COBRE (pelo titulo e pelo 'ler exatamente'): "
+                 "OS ARTIGOS QUE O TEMA COBRE (pelo titulo, pelo 'ler exatamente' e pelos "
+                 "blocos do resumo): "
                  # As faixas sem repetir (o titulo e o "ler" dizem a mesma).
                  + "; ".join(f.rotulo for f in traducao.faixas_do_pedido(faixas)),
                  "", "AS FRASES DO RESUMO, POR ARTIGO (como estao; traduza cada um destes "

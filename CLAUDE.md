@@ -294,7 +294,8 @@ significado no `:hover`/`:focus`, sem JS (so nas materias de lei). O jeito de
 escrever mora no `config/linguagem.yml`; a traducao, na ficha (`traducao`),
 com procedencia e "✓ Conferi a traducao" proprios: `radar fichas --pedido
 --traducoes [--tema] [--materia] [--refazer]`. Traduzidas as 30 fichas de lei:
-197 artigos, 130 linhas de "nao confunda", 213 termos (pendencia M).
+200 artigos, 130 linhas de "nao confunda", 215 termos (pendencia M); o artigo
+com bloco proprio no resumo conta como do tema (`servico.fichas.artigos_do_tema`).
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
