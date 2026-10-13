@@ -496,12 +496,9 @@ Feito nesta sessao: o cartao por carreira, o 🔔 de fato, o "visto", o botao
   - ✅ **O edital de abertura do DOE entra como "edital publicado"** (feito
     em 12/10, decisao 162): a errata, a retificacao e a comissao continuam
     sem fase, e refazer a carga nao avisa o passado;
-  - 🟡 **O 🔔 acende para edital velho que acabou de entrar no radar** (DOE,
-    SEJURI): o evento "entrou no radar" tem a data de hoje, e o 🔔 conta
-    evento depois do `novidades_desde`. Os editais de 2006 a 2022 da SEJURI e
-    os atos de 2025 do DOE acenderam o sino na primeira coleta. Por ora, o
-    "Marcar como visto" apaga. Proposta: no 🔔, o "entrou no radar" valer
-    pela data de publicacao do item. Precisa da sua aprovacao (mexe na 141);
+  - ✅ **O 🔔 so acende para item da edicao de agora** (feito em 12/10,
+    decisao 163): os editais de 2006 a 2022 da SEJURI sairam do sino da
+    Policia Penal; o ato de 2025 que e da edicao de agora continua acendendo;
   - ⚪ **O CFO do CBMSC nao cai no cartao do Oficial de Bombeiros**: o DOE
     escreve "Curso de Formacao de Oficiais (CFO)", e os termos do cartao
     (`oficial de bombeiros`, `oficial bombeiro`...) nao casam. Somar um termo

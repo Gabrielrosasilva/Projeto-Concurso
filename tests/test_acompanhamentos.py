@@ -325,6 +325,34 @@ def test_noticia_vai_para_o_historico_sem_sino(ambiente):
     assert [linha.estado for linha in cartao.historico] == ["notícia"]
 
 
+def test_edital_de_edicao_antiga_que_acabou_de_chegar_nao_acende_o_sino(ambiente):
+    """Decisao 163: o edital de 2019 que a SEJURI tem no site entrou no radar
+    hoje; o evento e de hoje, mas a edicao e velha. Vai para o historico."""
+    _semear(_item("https://x.test/2019", "2019 – Concurso Polícia Civil SC", fonte="fepese",
+                  publicado_em=agora() - timedelta(days=10)))
+    _evento("https://x.test/2019", linha_do_tempo.APARECEU,
+            "Entrou no radar pela fonte fepese, como edital_publicado")
+    cartao = _cartao("Polícia Civil SC")
+    assert cartao.novidades == []
+    assert [linha.estado for linha in cartao.historico] == ["edição antiga"]
+
+
+def test_item_fora_da_janela_que_acabou_de_chegar_nao_acende_o_sino(ambiente):
+    _semear(_item("https://x.test/velho", "Concurso PC SC: contrato da banca",
+                  publicado_em=agora() - timedelta(days=400)))
+    _evento("https://x.test/velho", linha_do_tempo.APARECEU, "Entrou no radar")
+    assert _cartao("Polícia Civil SC").novidades == []
+
+
+def test_ato_antigo_da_edicao_de_agora_ainda_acende(ambiente):
+    """O contrato da PM SC com a AOCP e de julho e o radar so soube em 11/10:
+    e da edicao de agora, e e novidade para mim."""
+    _semear(_item("https://x.test/contrato", "2026 - Concurso PC SC: contrato da banca",
+                  publicado_em=agora() - timedelta(days=100)))
+    _evento("https://x.test/contrato", linha_do_tempo.APARECEU, "Entrou no radar")
+    assert len(_cartao("Polícia Civil SC").novidades) == 1
+
+
 def test_tres_eventos_do_mesmo_item_sao_uma_novidade(ambiente):
     _semear(_item("https://x.test/1", "Concurso PC SC tem edital publicado"))
     for tipo, texto in [(linha_do_tempo.APARECEU, "Entrou no radar"),

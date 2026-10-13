@@ -5463,3 +5463,22 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Nos 17 atos de 11/10: os 3 editais de abertura (PC SC 01 e 02/2025,
      Policia Cientifica 001/2025) viraram `edital_publicado`; as 3 erratas do
      CBMSC e as 2 retificacoes da PC SC ficaram `desconhecida`.
+
+163. **o 🔔 so acende para item da edicao de agora** (muda a 141; aprovado
+     por voce em 12/10). O evento "entrou no radar" tem a data do dia em que
+     o radar soube, e o 🔔 conta evento depois do `novidades_desde` e do
+     "visto": os editais de 2006 a 2022 que a SEJURI tem no site acenderam o
+     sino da Policia Penal em 11/10 como se fossem novidade. As regras:
+     - **so e FATO o evento de item da edicao de agora**: dentro da janela do
+       YAML (365 dias) e sem ano velho no titulo - o mesmo tempo da edicao
+       dos marcos (decisao 160), sem olhar o tipo. O de fora vai para o
+       historico, com a etiqueta "edicao antiga";
+     - **contar pela data de publicacao foi descartado**: apagaria o que e
+       novidade de verdade - o contrato da PM SC com a AOCP e de julho, e o
+       radar so soube em 11/10. Esse continua acendendo, porque e da edicao
+       de agora;
+     - **nada mais mudou**: noticia continua sem sino, o seletivo continua
+       como estava, e o Telegram das carreiras nao passa por aqui.
+     Com o banco de 12/10: a Policia Penal SC perdeu os 4 sinos dos editais
+     antigos da SEJURI; a PC SC (6) e os Bombeiros (8) mantem os deles, que
+     sao atos da edicao de agora que eu ainda nao vi.

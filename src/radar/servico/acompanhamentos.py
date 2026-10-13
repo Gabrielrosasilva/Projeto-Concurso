@@ -275,14 +275,17 @@ def _edicao(itens: list[Concurso], hoje: date) -> list[Concurso]:
     proximo, e dizer "edital publicado" por causa dele seria exatamente o
     chute que a tela nao pode dar.
     """
+    return [c for c in itens
+            if c.tipo not in TIPOS_SEM_SITUACAO and _e_da_edicao_de_agora(c, hoje)]
+
+
+def _e_da_edicao_de_agora(concurso: Concurso, hoje: date) -> bool:
+    """Dentro da janela do YAML e sem ano velho no titulo - o tempo da edicao,
+    sem olhar o tipo. E o que decide os marcos (com o tipo) e o 🔔 (decisao
+    163)."""
     janela = _inicio_do_dia(hoje) - timedelta(
         days=carreiras.regras().janela_da_edicao_em_dias)
-    return [
-        c for c in itens
-        if c.tipo not in TIPOS_SEM_SITUACAO
-        and _quando(c) >= janela
-        and not _edicao_antiga(c, hoje)
-    ]
+    return _quando(concurso) >= janela and not _edicao_antiga(concurso, hoje)
 
 
 def _mais_novo(itens: list[Concurso], sabe) -> Concurso | None:
@@ -368,8 +371,21 @@ def _marcos(edicao: list[Concurso], pesquisas: list[dict]) -> list[Marco]:
     return [banca, edital, inscricoes, prova]
 
 
-def _linha_do_evento(evento: Evento, concurso: Concurso) -> Linha:
-    fato = (evento.tipo in FATOS and concurso.tipo != "noticia")
+#: A etiqueta do fato de item que nao e da edicao de agora (decisao 163).
+EDICAO_ANTIGA = "edição antiga"
+
+
+def _linha_do_evento(evento: Evento, concurso: Concurso, da_edicao: bool = True) -> Linha:
+    """A linha de um evento. So e FATO (acende o 🔔) o evento de concurso da
+    edicao de agora (decisao 163): o edital de 2019 que a SEJURI tem no site
+    "entrou no radar" em 11/10, e o sino acendia como se fosse novidade. O de
+    fora da edicao vai para o historico, com a etiqueta "edicao antiga"."""
+    fato_de_concurso = evento.tipo in FATOS and concurso.tipo != "noticia"
+    fato = fato_de_concurso and da_edicao
+    if fato:
+        estado = None
+    else:
+        estado = EDICAO_ANTIGA if fato_de_concurso else "notícia"
     return Linha(
         data=evento.data,
         texto=linha_do_tempo.para_tela(evento.descricao) or evento.descricao,
@@ -377,7 +393,7 @@ def _linha_do_evento(evento: Evento, concurso: Concurso) -> Linha:
         link=evento.link or concurso.url,
         item=concurso.titulo,
         fato=fato,
-        estado=None if fato else "notícia",
+        estado=estado,
     )
 
 
@@ -469,8 +485,9 @@ def cartoes(hoje: date | None = None) -> list[Cartao]:
                         data=_quando(concurso), texto=texto,
                         selo=_selo_do_item(concurso), link=concurso.url,
                         item=concurso.titulo, fato=False))
+                da_edicao = _e_da_edicao_de_agora(concurso, hoje)
                 for evento in eventos:
-                    linhas.append(_linha_do_evento(evento, concurso))
+                    linhas.append(_linha_do_evento(evento, concurso, da_edicao))
             linhas += [_linha_da_pesquisa(p) for p in minhas]
 
             novidades = _sem_repetir([

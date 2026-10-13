@@ -372,7 +372,9 @@ marcos (banca, edital, inscricoes, prova: o valor com o selo, ou
 "aguardando"), o 🔔 com os FATOS que eu ainda nao vi e o historico fechado.
 Cada marco vem do item mais recente da edicao que o sabe - o contrato da
 banca, o edital, a errata podem ser itens diferentes - e a situacao, do mais
-recente que sabe a fase (decisao 160). O
+recente que sabe a fase (decisao 160). O 🔔 so conta fato de item da edicao
+de agora: o edital de 2019 que chega hoje vai para o historico, como "edicao
+antiga" (decisao 163). O
 botao **Verificar atualizacoes** roda a coleta agora (espera 30 minutos entre
 um clique e outro); o que o robo nao ve vai pela pesquisa do Claude Code:
 
