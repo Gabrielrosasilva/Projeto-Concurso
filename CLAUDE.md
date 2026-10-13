@@ -101,7 +101,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (12/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (13/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -152,8 +152,8 @@ conceitos associados na Analises > Conferencia; e o leitor entende o
 texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
-provas complementares aceitas); 921 geradas (10 rejeitadas), todas com
-nivel; 214 explicacoes; arvore com 438 nos; banco na versao 8.
+provas complementares aceitas); 1.709 geradas (10 rejeitadas), as aceitas
+todas com nivel; 214 explicacoes; arvore com 438 nos; banco na versao 8.
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
 186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
 a 103); sobra a 2013-q53, so com voce (pendencia G). **O pedido de 05/10**
@@ -300,6 +300,16 @@ com procedencia e "✓ Conferi a traducao" proprios: `radar fichas --pedido
 --traducoes [--tema] [--materia] [--refazer]`. Traduzidas as 30 fichas de lei:
 200 artigos, 130 linhas de "nao confunda", 215 termos (pendencia M); o artigo
 com bloco proprio no resumo conta como do tema (`servico.fichas.artigos_do_tema`).
+**A crase do jeito da banca (13/10, decisao 165, a seu pedido e fora dos
+lotes; nao mexe em numero):** o texto-base das questoes de lacuna mostra o
+`____` - lido por colunas, o tracinho virava espaco duplo, ou espaco no
+comeco da linha -, so no texto com 2 espacos duplos ou mais (85 questoes
+relidas pelo `radar questoes --textos-base`); a tela da questao e a ficha
+avisam, com o link do caderno, quando a leitura nao mostra todas as lacunas
+que a alternativa pede (6 de 287, pendencia N); a Crase 2 aponta para o
+assunto "Emprego da crase" (24 reais e 83 geradas, antes 1 e 29); e 20
+geradas novas nos dois formatos que voce mostrou - 10 de texto com "a • à •
+há", 10 de crase e regencia verbal, sempre pela preposicao "a".
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

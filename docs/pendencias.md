@@ -614,9 +614,24 @@ resumo e do tema (decisao 161). O que falta:
 
 Feito: o texto-base das questoes de lacuna mostra o `____` (85 questoes
 relidas), e a tela avisa, com o link do caderno, a questao em que a leitura
-perdeu alguma lacuna. O que falta:
+perdeu alguma lacuna; a Crase 2 aponta para o assunto "Emprego da crase"
+(24 reais, 83 geradas); e 20 geradas novas nos formatos da banca (10 de
+lacunas com a, à e há; 10 de crase e regencia). O que falta:
+
+### Depende de voce
+
+- ⚪ **Reinicie o servidor** depois do `git pull`: `radar parar` e `radar
+  subir` (a tela da questao e a ficha ganharam o aviso de lacuna).
 
 ### A IA pode fazer (quando voce pedir)
+
+- ⚪ **Lacunas com outra preposicao** ("com • a • à • aos", a sua 2a imagem
+  de 13/10): sao de regencia, e o lugar delas e o no "Regencia verbal e
+  nominal": `radar gerar --pedido --modo treino --materia "Língua
+  Portuguesa" --assunto "Termos integrantes da oração: objeto direto e
+  indireto, agente da passiva e complemento nominal" --subassunto "Regência
+  verbal e nominal" --quantas 10 --nivel misturada`, os passos de sempre e o
+  `--importar`. Nao entrou porque a Crase 2 nao cobre esse no.
 
 - ⚪ **As 6 questoes de lacuna que a tela avisa.** Quatro ficam sem texto:
   dizem "lacunas do texto" sem o numero, e o caderno numera os textos (2024:

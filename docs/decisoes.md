@@ -5546,3 +5546,14 @@ viraram estudo extra "Onde: Radar". Copia antes em
        complementar) e 63 geradas. A ficha continua conferida (13/10), e a
        Crase 1 nao mudou - as duas dividem as questoes de lacuna, como a
        Revisao ativa 1, que ja apontava para o assunto.
+     - **20 geradas novas nos dois formatos que voce mostrou**, pelo caminho
+       sem API, variando questoes reais do complementar (3/4/3 cada lote):
+       10 de texto com lacunas e "a • à • há" nas alternativas, no
+       subassunto "Lacunas com a, à e há"; e 10 de crase e regencia verbal
+       ("Assinale a alternativa correta quanto ao uso da crase e da regencia
+       verbal" e lacunas com a, à, ao, aos e às), no assunto. **A lacuna com
+       outra preposicao ("com", "de", "em") ficou de fora**: e regencia pura,
+       de outro no ("Regencia verbal e nominal"), e o escopo fechado nao deixa
+       a questao de crase cobrar outro assunto; em toda questao, a lacuna e o
+       erro dependem da preposicao "a" que o verbo pede ou dispensa. A Crase 2
+       chega a 24 reais e 83 geradas.
