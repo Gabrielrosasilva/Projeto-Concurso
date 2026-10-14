@@ -355,10 +355,10 @@
   ],
   "ultima_verificacao": {
     "erro": null,
-    "fim": "2026-10-12T14:00:28.438436+00:00",
-    "inicio": "2026-10-12T13:58:52.571903+00:00",
+    "fim": "2026-10-13T15:29:53.778773+00:00",
+    "inicio": "2026-10-13T15:28:16.968173+00:00",
     "resumo": [
-      "concursosnobrasil: 0 novo(s), 2 atualizado(s)",
+      "concursosnobrasil: 14 novo(s), 0 atualizado(s)",
       "fepese: 0 novo(s), 146 atualizado(s)",
       "ieses: 0 novo(s), 11 atualizado(s)",
       "doe_sc: 0 novo(s), 0 atualizado(s)",
@@ -366,7 +366,7 @@
       "prefeitura_bc: 0 novo(s), 0 atualizado(s)",
       "sejuri: 0 novo(s), 0 atualizado(s)",
       "idib: 0 novo(s), 19 atualizado(s)",
-      "Páginas lidas: 11 página(s) lida(s): 1 com prazo de inscrição, 0 com banca, 4 falharam"
+      "Páginas lidas: 11 página(s) lida(s): 2 com prazo de inscrição, 0 com banca, 4 falharam"
     ]
   },
   "ultimos_concursos": {
@@ -416,6 +416,10 @@
     }
   },
   "visto": {
-    "Polícia Militar SC": "2026-10-09T17:29:30.909204+00:00"
+    "Bombeiro Militar SC": "2026-10-13T15:29:18.103881+00:00",
+    "Guarda Municipal de Balneário Camboriú": "2026-10-13T15:29:36.095974+00:00",
+    "Oficial do Corpo de Bombeiros SC": "2026-10-13T15:29:18.792995+00:00",
+    "Polícia Civil SC": "2026-10-13T15:28:36.330050+00:00",
+    "Polícia Militar SC": "2026-10-13T15:29:19.709772+00:00"
   }
 }
