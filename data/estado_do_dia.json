@@ -474,5 +474,206 @@
       }
     ],
     "plano_b": 60
+  },
+  {
+    "atualizado_em": "2026-10-14T00:29:45.191279+00:00",
+    "data": "2026-10-13",
+    "faixas_feitas": [
+      {
+        "acertos": 9,
+        "assunto": "Fixação: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Direito Constitucional",
+        "minutos": 20,
+        "questoes": 10,
+        "titulo": "Fixação: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Constitucional",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Lei seca dirigida: CF art. 5º, LXI; CF art. 5º, LXII a LXIV; CF art. 5º, LXVIII",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Direito Constitucional",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Lei seca dirigida: CF art. 5º, LXI; CF art. 5º, LXII a LXIV; CF art. 5º, LXVIII"
+      },
+      {
+        "acertos": null,
+        "assunto": "Crase 2: proibida, facultativa e casos especiais",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 5,
+        "materia": "Língua Portuguesa",
+        "minutos": 15,
+        "questoes": null,
+        "titulo": "Crase 2: proibida, facultativa e casos especiais"
+      },
+      {
+        "acertos": 9,
+        "assunto": "Fixação: Crase 2: proibida, facultativa e casos especiais",
+        "bloco": "manha",
+        "consulta": true,
+        "indice": 6,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 11,
+        "titulo": "Fixação: Crase 2: proibida, facultativa e casos especiais"
+      },
+      {
+        "acertos": 2,
+        "assunto": "Extra: Verbo 2: emprego dos tempos e modos",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 7,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 2,
+        "titulo": "Extra: Verbo 2: emprego dos tempos e modos"
+      },
+      {
+        "acertos": 7,
+        "assunto": "R+7: Art. 5º, incisos XVII a XLIX",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Constitucional",
+        "minutos": 20,
+        "questoes": 10,
+        "titulo": "R+7: Art. 5º, incisos XVII a XLIX"
+      },
+      {
+        "acertos": 1,
+        "assunto": "R+7: Concordância verbal 1: regra geral",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 4,
+        "titulo": "R+7: Concordância verbal 1: regra geral"
+      },
+      {
+        "acertos": 6,
+        "assunto": "Aprendizagem: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 2,
+        "materia": "Direito Constitucional",
+        "minutos": 40,
+        "questoes": 10,
+        "titulo": "Aprendizagem: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+      },
+      {
+        "acertos": 2,
+        "assunto": "Crase 2: proibida, facultativa e casos especiais",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 15,
+        "questoes": 5,
+        "titulo": "Crase 2: proibida, facultativa e casos especiais"
+      },
+      {
+        "acertos": null,
+        "assunto": "Extra: Vozes do verbo",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 5,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 1,
+        "titulo": "Extra: Vozes do verbo"
+      },
+      {
+        "acertos": null,
+        "assunto": "Correção",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 6,
+        "materia": null,
+        "minutos": 30,
+        "questoes": null,
+        "titulo": "Correção"
+      }
+    ],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-13T12:12:00.422242+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "mais_ou_menos",
+        "indice": 0,
+        "materia": "Direito Constitucional",
+        "nota": "Nao dei tanta enfase pois no ultimo concurso nao caiu esse conteudo.",
+        "titulo": "Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+      },
+      {
+        "anotado_em": "2026-10-13T12:27:11.452095+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "mais_ou_menos",
+        "indice": 1,
+        "materia": "Direito Constitucional",
+        "nota": "Fui bem ja tinha um leve conhecimento",
+        "titulo": "Fixação: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+      },
+      {
+        "anotado_em": "2026-10-13T13:36:58.447701+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 6,
+        "materia": "Língua Portuguesa",
+        "nota": "entendi bem a materia",
+        "titulo": "Fixação: Crase 2: proibida, facultativa e casos especiais"
+      },
+      {
+        "anotado_em": "2026-10-13T13:38:09.116663+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 5,
+        "materia": "Língua Portuguesa",
+        "nota": "",
+        "titulo": "Crase 2: proibida, facultativa e casos especiais"
+      },
+      {
+        "anotado_em": "2026-10-13T15:06:01.336723+00:00",
+        "bloco": "noite",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 0,
+        "materia": "Direito Constitucional",
+        "nota": "",
+        "titulo": "R+7: Art. 5º, incisos XVII a XLIX"
+      },
+      {
+        "anotado_em": "2026-10-14T00:11:00.792840+00:00",
+        "bloco": "noite",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 2,
+        "materia": "Direito Constitucional",
+        "nota": "",
+        "titulo": "Aprendizagem: Art. 5º, incisos L a LXXVIII e § 1º a 4º (remédios)"
+      }
+    ],
+    "plano_b": null
   }
 ]

@@ -2159,5 +2159,293 @@
         "respondida_em": "2026-10-12T15:35:47.053226+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-13T13:38:50.927998+00:00",
+    "filtros": {
+      "conteudo": "Língua Portuguesa > Emprego da crase > Crase diante de substantivo feminino sem artigo",
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-13",
+        "indice": 6,
+        "titulo": "Fixação: Crase 2: proibida, facultativa e casos especiais"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 4
+    },
+    "finalizado_em": "2026-10-13T13:58:54.253233+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "cdc09309fb10f700a8752f64308abd46",
+        "ordem": 1,
+        "respondida_em": "2026-10-13T13:40:52.600548+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "89f1942855d50fd2e1a83cdae1bb3cf9",
+        "ordem": 2,
+        "respondida_em": "2026-10-13T13:42:27.191904+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "5222f4162992118cf48351a098391b7d",
+        "ordem": 3,
+        "respondida_em": "2026-10-13T13:44:42.280779+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "e9521e9921aab070fbe986312d93a768",
+        "ordem": 4,
+        "respondida_em": "2026-10-13T13:58:54.249783+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-13T14:00:53.781075+00:00",
+    "filtros": {
+      "da_banca": 1,
+      "do_plano": 4,
+      "faixa": {
+        "bloco": "manha",
+        "data": "2026-10-13",
+        "indice": 7,
+        "titulo": "Extra: Verbo 2: emprego dos tempos e modos"
+      },
+      "nos": [
+        "Língua Portuguesa > Emprego de tempos e modos verbais"
+      ],
+      "proprias": 1,
+      "quantidade": 2,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-13T14:32:02.883777+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "b7cc62c6256e4bf2b9ef9b829a14102c",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 15,
+        "ordem": 1,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-13T14:26:07.761560+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "af714da4d191ba9c36a20104e21427f4",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 13,
+        "ordem": 2,
+        "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=AE.pdf",
+        "respondida_em": "2026-10-13T14:32:02.876637+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-13T15:06:17.578906+00:00",
+    "filtros": {
+      "conteudo": null,
+      "conteudos": [
+        "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação",
+        "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Tribunal do júri",
+        "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais",
+        "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis"
+      ],
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-13",
+        "indice": 0,
+        "titulo": "R+7: Art. 5º, incisos XVII a XLIX"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 7
+    },
+    "finalizado_em": "2026-10-13T15:17:31.606556+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "2ec351b435787e4642b513b17a2e5c72",
+        "ordem": 1,
+        "respondida_em": "2026-10-13T15:08:32.837975+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "d2ad3715d6f7ae3628ee412baba69882",
+        "ordem": 2,
+        "respondida_em": "2026-10-13T15:09:29.259998+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "f8bc0a1c8c2100a3a7f52d69962e37e4",
+        "ordem": 3,
+        "respondida_em": "2026-10-13T15:12:28.959496+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "d8ac77059f7304671703409591e34e0b",
+        "ordem": 4,
+        "respondida_em": "2026-10-13T15:14:00.091039+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "ad591e5b8db92cc9b2ba0d2ae99101f0",
+        "ordem": 5,
+        "respondida_em": "2026-10-13T15:15:19.994871+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "c71cd13a36580c4befe635ba06fef385",
+        "ordem": 6,
+        "respondida_em": "2026-10-13T15:16:56.072436+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "9d39b1f00ab6455c3e12464dfd6e7298",
+        "ordem": 7,
+        "respondida_em": "2026-10-13T15:17:31.601056+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-13T15:20:11.013897+00:00",
+    "filtros": {
+      "conteudo": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal",
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-13",
+        "indice": 1,
+        "titulo": "R+7: Concordância verbal 1: regra geral"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 3
+    },
+    "finalizado_em": "2026-10-13T15:22:52.537166+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "af618ae85076ed6470c3319c9ca4fbd5",
+        "ordem": 1,
+        "respondida_em": "2026-10-13T15:20:44.435629+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "0d82e1611c510ca2d34f0c2b747a6037",
+        "ordem": 2,
+        "respondida_em": "2026-10-13T15:22:11.060622+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "dc2c997badfa63fde51d2e3b058775b1",
+        "ordem": 3,
+        "respondida_em": "2026-10-13T15:22:52.534070+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-13T15:23:08.783291+00:00",
+    "filtros": {
+      "da_banca": 2,
+      "do_plano": 3,
+      "faixa": {
+        "bloco": "noite",
+        "data": "2026-10-13",
+        "indice": 1,
+        "titulo": "R+7: Concordância verbal 1: regra geral"
+      },
+      "nos": [
+        "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+      ],
+      "proprias": 1,
+      "quantidade": 3,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-13T15:27:03.181309+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "4c3e426d29f88b0cb35e6a2c6487ec5b",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 1,
+        "ordem": 1,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-13T15:24:18.038177+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "24eea720ffeda2720f317747fd3bef22",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 2,
+        "prova_url": "https://2024sas-sj.fepese.org.br/?go=download&path=2&inline=1&arquivo=S1.pdf",
+        "respondida_em": "2026-10-13T15:25:36.179669+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "16b90681f25f88fc070a02aad579d81e",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 7,
+        "ordem": 3,
+        "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E01.pdf",
+        "respondida_em": "2026-10-13T15:27:03.177491+00:00"
+      }
+    ]
   }
 ]

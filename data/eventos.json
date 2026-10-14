@@ -426,6 +426,14 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=359",
+    "data": "2026-10-13T15:29:34.894564+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=359",
+    "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=359",
     "data": "2026-10-13T16:05:54.658219+00:00",
     "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
     "link": "https://concurso.idib.org.br/Concurso.aspx?ID=359",
@@ -446,6 +454,14 @@
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
     "link": "https://concurso.idib.org.br/Concurso.aspx?ID=361",
     "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=361",
+    "data": "2026-10-13T15:29:34.896473+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=361",
+    "tipo": "edital_publicado"
   },
   {
     "avisado_em": null,
@@ -502,6 +518,14 @@
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
     "link": "https://concurso.idib.org.br/Concurso.aspx?ID=365",
     "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=365",
+    "data": "2026-10-13T15:29:34.897667+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=365",
+    "tipo": "edital_publicado"
   },
   {
     "avisado_em": null,
@@ -765,6 +789,14 @@
     "data": "2026-10-11T16:40:20.402676+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/ce/2026/10/10/prefeitura-de-sobral-ce-abre-seletivo-para-professores-temporarios/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/ce/2026/10/13/processo-seletivo-ifce-abre-vagas-para-professores-com-salarios-de-ate-r-83-mil/",
+    "data": "2026-10-13T15:28:20.713174+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/ce/2026/10/13/processo-seletivo-ifce-abre-vagas-para-professores-com-salarios-de-ate-r-83-mil/",
     "tipo": "apareceu"
   },
   {
@@ -1034,6 +1066,14 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/13/concurso-camara-de-capela-nova-mg-abre-vagas-em-novo-edital/",
+    "data": "2026-10-13T15:28:20.706719+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/13/concurso-camara-de-capela-nova-mg-abre-vagas-em-novo-edital/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/13/concurso-camara-de-capela-nova-mg-abre-vagas-em-novo-edital/",
     "data": "2026-10-13T16:04:34.967159+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/mg/2026/10/13/concurso-camara-de-capela-nova-mg-abre-vagas-em-novo-edital/",
@@ -1162,6 +1202,14 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/pe/2026/10/13/prefeitura-de-goiana-pe-abre-selecao-com-251-vagas-e-ganhos-de-ate-r-89-mil/",
+    "data": "2026-10-13T15:28:20.572523+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pe/2026/10/13/prefeitura-de-goiana-pe-abre-selecao-com-251-vagas-e-ganhos-de-ate-r-89-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pe/2026/10/13/prefeitura-de-goiana-pe-abre-selecao-com-251-vagas-e-ganhos-de-ate-r-89-mil/",
     "data": "2026-10-13T16:04:34.962851+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/pe/2026/10/13/prefeitura-de-goiana-pe-abre-selecao-com-251-vagas-e-ganhos-de-ate-r-89-mil/",
@@ -1277,6 +1325,14 @@
     "data": "2026-10-14T13:49:08.206287+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/pr/2026/10/13/prefeitura-de-curitiba-pr-divulga-seletivos-com-243-vagas-e-ganhos-de-ate-r-104-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pr/2026/10/13/prefeitura-de-teixeira-soares-pr-publica-edital-com-salarios-de-ate-r-49-mil/",
+    "data": "2026-10-13T15:28:19.954725+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pr/2026/10/13/prefeitura-de-teixeira-soares-pr-publica-edital-com-salarios-de-ate-r-49-mil/",
     "tipo": "apareceu"
   },
   {
@@ -1642,9 +1698,25 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-alvorada-rs-abre-24-vagas-de-estagio-com-bolsa-de-r-12-mil/",
+    "data": "2026-10-13T15:28:19.830547+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-alvorada-rs-abre-24-vagas-de-estagio-com-bolsa-de-r-12-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-alvorada-rs-abre-24-vagas-de-estagio-com-bolsa-de-r-12-mil/",
     "data": "2026-10-13T16:04:34.956269+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-alvorada-rs-abre-24-vagas-de-estagio-com-bolsa-de-r-12-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-erechim-rs-anuncia-edital-com-salarios-de-ate-r-211-mil/",
+    "data": "2026-10-13T15:28:20.710009+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-erechim-rs-anuncia-edital-com-salarios-de-ate-r-211-mil/",
     "tipo": "apareceu"
   },
   {
@@ -1653,6 +1725,14 @@
     "data": "2026-10-13T16:04:34.950165+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-osorio-rs-remunera-ate-r-115-mil-em-dois-seletivos/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-torres-rs-divulga-editais-na-educacao-com-salarios-de-ate-r-43-mil/",
+    "data": "2026-10-13T15:28:20.204290+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/13/prefeitura-de-torres-rs-divulga-editais-na-educacao-com-salarios-de-ate-r-43-mil/",
     "tipo": "apareceu"
   },
   {
@@ -2153,6 +2233,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "data": "2026-10-13T15:29:39.734944+00:00",
+    "descricao": "Prazo de inscricao: de 09/10/2026 a 08/11/2026",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "data": "2026-10-13T15:29:53.767080+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-sao-joao-batista-sc-lanca-editais-com-ganhos-de-ate-r-68-mil/",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/09/prefeitura-de-urussanga-sc-divulga-edital-com-salarios-de-ate-r-23-mil/",
     "data": "2026-10-09T15:06:22.616753+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -2210,9 +2306,33 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/concurso-prefeitura-de-tijucas-sc-abre-250-vagas-em-edital/",
+    "data": "2026-10-13T15:28:19.577524+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/concurso-prefeitura-de-tijucas-sc-abre-250-vagas-em-edital/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/concurso-prefeitura-de-tijucas-sc-abre-250-vagas-em-edital/",
+    "data": "2026-10-13T15:29:35.177153+00:00",
+    "descricao": "Prazo de inscricao: de 15/10/2026 a 13/11/2026",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/concurso-prefeitura-de-tijucas-sc-abre-250-vagas-em-edital/",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/concurso-prefeitura-de-tijucas-sc-abre-250-vagas-em-edital/",
     "data": "2026-10-13T16:04:34.954972+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/concurso-prefeitura-de-tijucas-sc-abre-250-vagas-em-edital/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/fundacao-catarinense-de-cultura-sc-abre-edital-com-vagas-para-contador/",
+    "data": "2026-10-13T15:28:20.694600+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/fundacao-catarinense-de-cultura-sc-abre-edital-com-vagas-para-contador/",
     "tipo": "apareceu"
   },
   {
@@ -2226,6 +2346,14 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-agrolandia-sc-lanca-edital-com-salarios-de-ate-r-49-mil/",
+    "data": "2026-10-13T15:28:20.349958+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-agrolandia-sc-lanca-edital-com-salarios-de-ate-r-49-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-agrolandia-sc-lanca-edital-com-salarios-de-ate-r-49-mil/",
     "data": "2026-10-13T16:04:34.961797+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-agrolandia-sc-lanca-edital-com-salarios-de-ate-r-49-mil/",
@@ -2234,9 +2362,25 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-sao-domingos-sc-oferta-iniciais-de-ate-r-53-mil-em-seletivo/",
+    "data": "2026-10-13T15:28:20.636573+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-sao-domingos-sc-oferta-iniciais-de-ate-r-53-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-sao-domingos-sc-oferta-iniciais-de-ate-r-53-mil-em-seletivo/",
     "data": "2026-10-13T16:04:34.963952+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/prefeitura-de-sao-domingos-sc-oferta-iniciais-de-ate-r-53-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/13/udesc-sc-abre-seletivo-com-146-vagas-para-professores-substitutos/",
+    "data": "2026-10-13T15:28:20.692971+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/13/udesc-sc-abre-seletivo-com-146-vagas-para-professores-substitutos/",
     "tipo": "apareceu"
   },
   {
@@ -2530,9 +2674,25 @@
   {
     "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/13/prefeitura-de-guzolandia-sp-abre-vagas-em-edital-de-seletivo/",
+    "data": "2026-10-13T15:28:20.082651+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/13/prefeitura-de-guzolandia-sp-abre-vagas-em-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/13/prefeitura-de-guzolandia-sp-abre-vagas-em-edital-de-seletivo/",
     "data": "2026-10-13T16:04:34.958556+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sp/2026/10/13/prefeitura-de-guzolandia-sp-abre-vagas-em-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/13/prefeitura-de-maua-sp-abre-vagas-em-edital-na-area-da-saude/",
+    "data": "2026-10-13T15:28:20.206194+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/13/prefeitura-de-maua-sp-abre-vagas-em-edital-na-area-da-saude/",
     "tipo": "apareceu"
   },
   {
