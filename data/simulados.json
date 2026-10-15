@@ -2447,5 +2447,88 @@
         "respondida_em": "2026-10-13T15:27:03.177491+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-14T23:56:55.307774+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Disciplina, faltas disciplinares e RDD",
+      "da_faixa": {
+        "bloco": "plano_b",
+        "data": "2026-10-14",
+        "indice": 1,
+        "titulo": "Questões de prova: Disciplina, faltas graves e RDD (arts. 44 a 52)"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 8
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "ff7d64204105a4ec790a737038d61693",
+        "ordem": 1,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "763320b86d66d5751b23b891dbcae6f0",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "513da49d484788114b97df45cf3276c4",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "725822630d44d59544e1271a002398ae",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "668ab7dce278a661037a9d4bcb8a6cfd",
+        "ordem": 5,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "b97a390a5b848856ccfb0dd7a9a29d37",
+        "ordem": 6,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "5b16ba9661c9b4c7c0b288516280bcd9",
+        "ordem": 7,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "a3804c2655f03fac17fae629a0daadfd",
+        "ordem": 8,
+        "respondida_em": null
+      }
+    ]
   }
 ]
