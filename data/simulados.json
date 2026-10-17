@@ -2447,5 +2447,96 @@
         "respondida_em": "2026-10-13T15:27:03.177491+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-16T16:12:10.497844+00:00",
+    "filtros": {
+      "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Sanções, recompensas e procedimento disciplinar",
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-16",
+        "indice": 1,
+        "titulo": "Fixação: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 8
+    },
+    "finalizado_em": "2026-10-16T16:18:27.140752+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "aac9c76b8426fd2f04113938dfe36b19",
+        "ordem": 1,
+        "respondida_em": "2026-10-16T16:12:39.487260+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "6ffd615661686d814ab1256faa175ca0",
+        "ordem": 2,
+        "respondida_em": "2026-10-16T16:15:18.743006+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": true,
+        "impressao": "998acd632f00addaa5523f39cc936896",
+        "ordem": 3,
+        "respondida_em": "2026-10-16T16:15:35.852971+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": true,
+        "impressao": "b3e784b80a25853cc8b21b63240a3c98",
+        "ordem": 4,
+        "respondida_em": "2026-10-16T16:16:10.887661+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": true,
+        "impressao": "46ecd5c635d5209aec2b686f36eb0e8b",
+        "ordem": 5,
+        "respondida_em": "2026-10-16T16:16:42.385017+00:00"
+      },
+      {
+        "acertou": false,
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "e29ab3289f49c3c0db9f5aa842946b1a",
+        "ordem": 6,
+        "respondida_em": "2026-10-16T16:17:49.370163+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": true,
+        "impressao": "699db1fba6e04f524f01def4fcff30c6",
+        "ordem": 7,
+        "respondida_em": "2026-10-16T16:18:03.645967+00:00"
+      },
+      {
+        "acertou": true,
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": true,
+        "impressao": "e64b8ef2878922349ce353e0cc5bdf90",
+        "ordem": 8,
+        "respondida_em": "2026-10-16T16:18:27.136757+00:00"
+      }
+    ]
   }
 ]

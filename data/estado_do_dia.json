@@ -681,5 +681,144 @@
     "data": "2026-10-14",
     "faixas_feitas": [],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-16T23:16:24.891771+00:00",
+    "data": "2026-10-16",
+    "faixas_feitas": [
+      {
+        "acertos": 11,
+        "assunto": "Fixação: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Lei de Execução Penal",
+        "minutos": 20,
+        "questoes": 13,
+        "titulo": "Fixação: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Lei de Execução Penal",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)"
+      },
+      {
+        "acertos": 4,
+        "assunto": "Fixação: Pontuação 2: vírgula entre orações e outros sinais",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 6,
+        "materia": "Língua Portuguesa",
+        "minutos": 15,
+        "questoes": 6,
+        "titulo": "Fixação: Pontuação 2: vírgula entre orações e outros sinais"
+      },
+      {
+        "acertos": 3,
+        "assunto": "R+7: Deveres e direitos do preso (arts. 38 a 43)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Lei de Execução Penal",
+        "minutos": 20,
+        "questoes": 10,
+        "titulo": "R+7: Deveres e direitos do preso (arts. 38 a 43)"
+      },
+      {
+        "acertos": 0,
+        "assunto": "R+7: Concordância nominal",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 3,
+        "titulo": "R+7: Concordância nominal"
+      },
+      {
+        "acertos": 4,
+        "assunto": "Aprendizagem: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 2,
+        "materia": "Lei de Execução Penal",
+        "minutos": 40,
+        "questoes": 7,
+        "titulo": "Aprendizagem: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)"
+      },
+      {
+        "acertos": 4,
+        "assunto": "Pontuação 2: vírgula entre orações e outros sinais",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 25,
+        "questoes": 6,
+        "titulo": "Pontuação 2: vírgula entre orações e outros sinais"
+      },
+      {
+        "acertos": null,
+        "assunto": "Correção",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 5,
+        "materia": null,
+        "minutos": 30,
+        "questoes": null,
+        "titulo": "Correção"
+      },
+      {
+        "acertos": null,
+        "assunto": "Lei seca dirigida: LEP art. 53; LEP art. 54; LEP arts. 58 e 60",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Lei de Execução Penal",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Lei seca dirigida: LEP art. 53; LEP art. 54; LEP arts. 58 e 60"
+      },
+      {
+        "acertos": null,
+        "assunto": "Pontuação 2: vírgula entre orações e outros sinais",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 5,
+        "materia": "Língua Portuguesa",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Pontuação 2: vírgula entre orações e outros sinais"
+      }
+    ],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-16T16:07:20.525699+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 1,
+        "materia": "Lei de Execução Penal",
+        "nota": "nao tinham questoes da minha banca precisei fazer questoes de diversas bancas filtrando no qconcursos por: repreensão ou advertência verbal (as sanções, art. 53)\r\nregalias ou elogio (as recompensas, arts. 55 e 56)\r\nisolamento preventivo (art. 60)\r\nprocedimento disciplinar (art. 59)",
+        "titulo": "Fixação: Sanções, recompensas e procedimento disciplinar (arts. 53 a 60)"
+      },
+      {
+        "anotado_em": "2026-10-16T16:58:51.592072+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "mais_ou_menos",
+        "indice": 6,
+        "materia": "Língua Portuguesa",
+        "nota": "Fui no achismo",
+        "titulo": "Fixação: Pontuação 2: vírgula entre orações e outros sinais"
+      }
+    ],
+    "plano_b": null
   }
 ]

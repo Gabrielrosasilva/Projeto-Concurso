@@ -355,18 +355,18 @@
   ],
   "ultima_verificacao": {
     "erro": null,
-    "fim": "2026-10-13T15:29:53.778773+00:00",
-    "inicio": "2026-10-13T15:28:16.968173+00:00",
+    "fim": "2026-10-16T14:52:02.311864+00:00",
+    "inicio": "2026-10-16T14:50:27.904162+00:00",
     "resumo": [
-      "concursosnobrasil: 14 novo(s), 0 atualizado(s)",
-      "fepese: 0 novo(s), 146 atualizado(s)",
+      "concursosnobrasil: 5 novo(s), 0 atualizado(s)",
+      "fepese: 0 novo(s), 147 atualizado(s)",
       "ieses: 0 novo(s), 11 atualizado(s)",
       "doe_sc: 0 novo(s), 0 atualizado(s)",
-      "aocp: 0 novo(s), 1 atualizado(s)",
+      "aocp: 0 novo(s), 6 atualizado(s)",
       "prefeitura_bc: 0 novo(s), 0 atualizado(s)",
       "sejuri: 0 novo(s), 0 atualizado(s)",
       "idib: 0 novo(s), 19 atualizado(s)",
-      "Páginas lidas: 11 página(s) lida(s): 2 com prazo de inscrição, 0 com banca, 4 falharam"
+      "Páginas lidas: 11 página(s) lida(s): 3 com prazo de inscrição, 0 com banca, 4 falharam"
     ]
   },
   "ultimos_concursos": {
