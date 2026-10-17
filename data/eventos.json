@@ -585,11 +585,27 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
+    "data": "2026-10-17T12:18:39.014377+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
+    "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
     "data": "2026-10-11T18:11:25.953915+00:00",
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
     "link": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
     "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
+    "data": "2026-10-17T12:18:39.015692+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
+    "tipo": "edital_publicado"
   },
   {
     "avisado_em": null,
@@ -629,6 +645,22 @@
     "data": "2026-10-02T15:13:13.126605+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/2026/10/02/concurso-trt-8a-regiao-tem-edital-publicado-com-iniciais-de-ate-r-16-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/2026/10/16/concurso-banestes-es-abre-936-vagas-com-ganhos-de-ate-r-56-mil/",
+    "data": "2026-10-17T12:17:19.888356+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/2026/10/16/concurso-banestes-es-abre-936-vagas-com-ganhos-de-ate-r-56-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/2026/10/16/processo-seletivo-mgs-mg-abre-643-vagas-e-oferece-remuneracao-de-ate-r-39-mil/",
+    "data": "2026-10-17T12:17:19.884444+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/2026/10/16/processo-seletivo-mgs-mg-abre-643-vagas-e-oferece-remuneracao-de-ate-r-39-mil/",
     "tipo": "apareceu"
   },
   {
@@ -742,6 +774,14 @@
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/ba/2026/10/14/prefeitura-de-firmino-alves-ba-oferta-mais-de-300-vagas-em-co/",
     "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/br/2026/08/18/agsus-anuncia-dois-editais-de-seletivo-com-salarios-de-ate-r-10-mil/",
+    "data": "2026-10-17T12:18:39.055253+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> encerrado",
+    "link": "https://concursosnobrasil.com/concursos/br/2026/08/18/agsus-anuncia-dois-editais-de-seletivo-com-salarios-de-ate-r-10-mil/",
+    "tipo": "inscricoes_encerradas"
   },
   {
     "avisado_em": null,
@@ -1333,6 +1373,14 @@
     "data": "2026-10-15T13:32:42.669887+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/mt/2026/10/14/prefeitura-de-varzea-grande-mt-abre-mais-de-51-mil-vagas-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mt/2026/10/16/prefeitura-de-juara-mt-abre-selecao-para-apoio-administrativo/",
+    "data": "2026-10-17T12:17:19.883672+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mt/2026/10/16/prefeitura-de-juara-mt-abre-selecao-para-apoio-administrativo/",
     "tipo": "apareceu"
   },
   {
@@ -2017,6 +2065,30 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/16/concurso-prefeitura-de-novo-cabrais-rs-oferece-vagas-com-salarios-de-ate-r-19-mil/",
+    "data": "2026-10-17T12:17:19.882053+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/16/concurso-prefeitura-de-novo-cabrais-rs-oferece-vagas-com-salarios-de-ate-r-19-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/16/prefeitura-de-andre-da-rocha-rs-abre-edital-de-nivel-superior-de-ate-r-41-mil/",
+    "data": "2026-10-17T12:17:19.886029+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/16/prefeitura-de-andre-da-rocha-rs-abre-edital-de-nivel-superior-de-ate-r-41-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/16/prefeitura-de-campo-bom-rs-abre-selecao-para-a-area-da-construcao-civil/",
+    "data": "2026-10-17T12:17:19.885205+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/16/prefeitura-de-campo-bom-rs-abre-selecao-para-a-area-da-construcao-civil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/16/prefeitura-de-sinimbu-rs-abre-vaga-em-seletivo-da-educacao/",
     "data": "2026-10-16T15:42:23.131659+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -2157,6 +2229,14 @@
     "data": "2026-09-26T13:29:18.431810+00:00",
     "descricao": "Situacao: inscricoes_abertas -> encerrado",
     "link": "https://concursosnobrasil.com/concursos/sc/2026/09/15/processo-seletivo-ses-sc-paga-ate-r-105-mil-em-novos-editais/",
+    "tipo": "inscricoes_encerradas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/09/17/concurso-prefeitura-de-sao-jose-sc-abre-300-vagas-em-edital/",
+    "data": "2026-10-17T12:18:39.055356+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> encerrado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/09/17/concurso-prefeitura-de-sao-jose-sc-abre-300-vagas-em-edital/",
     "tipo": "inscricoes_encerradas"
   },
   {
@@ -2761,6 +2841,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/16/concurso-rio-negrinho-sc-tem-4-editais-e-salario-de-ate-r-18-538/",
+    "data": "2026-10-17T12:17:19.875693+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/16/concurso-rio-negrinho-sc-tem-4-editais-e-salario-de-ate-r-18-538/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/16/prefeitura-de-zortea-sc-oferta-iniciais-de-ate-r-53-mil-em-seletivo/",
+    "data": "2026-10-17T12:17:19.890635+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/16/prefeitura-de-zortea-sc-oferta-iniciais-de-ate-r-53-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/09/22/etec-de-jau-sp-publica-edital-de-seletivo-para-auxiliar-de-docente/",
     "data": "2026-09-23T00:34:33.177306+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -3137,6 +3233,30 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/16/concurso-louveira-sp-abre-19-vagas-cr-com-salario-ate-r-87-mil/",
+    "data": "2026-10-17T12:17:19.881213+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/16/concurso-louveira-sp-abre-19-vagas-cr-com-salario-ate-r-87-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/16/concurso-prefeitura-de-matao-sp-abre-28-vagas-de-ate-r-97-mil/",
+    "data": "2026-10-17T12:17:19.886818+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/16/concurso-prefeitura-de-matao-sp-abre-28-vagas-de-ate-r-97-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/16/concurso-prefeitura-de-votorantim-sp-abre-37-vagas-e-tem-mensais-ate-r-8-377/",
+    "data": "2026-10-17T12:17:19.880315+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/16/concurso-prefeitura-de-votorantim-sp-abre-37-vagas-e-tem-mensais-ate-r-8-377/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/16/famesp-promove-selecao-com-11-editais-e-paga-ate-r-121-mil/",
     "data": "2026-10-16T14:50:29.210439+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -3157,6 +3277,22 @@
     "data": "2026-10-16T13:22:03.729141+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sp/2026/10/16/prefeitura-de-boituva-sp-abre-vagas-em-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/16/prefeitura-de-conchal-sp-abre-vagas-em-seletivo-para-ace-e-acs/",
+    "data": "2026-10-17T12:17:19.887575+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/16/prefeitura-de-conchal-sp-abre-vagas-em-seletivo-para-ace-e-acs/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/16/processo-seletivo-prefeitura-de-orlandia-sp-tem-salario-de-ate-r-42-mil/",
+    "data": "2026-10-17T12:17:19.882894+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/16/processo-seletivo-prefeitura-de-orlandia-sp-tem-salario-de-ate-r-42-mil/",
     "tipo": "apareceu"
   },
   {
