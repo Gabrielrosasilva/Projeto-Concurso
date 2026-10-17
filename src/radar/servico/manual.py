@@ -216,6 +216,24 @@ INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR = INSTRUCAO_CLASSIFICACAO.replace(
     '"status": "pendente" com o motivo - nao force.')
 
 
+# As outras bancas (decisao 166): a mesma tarefa, e a prova e de outra banca.
+# O numero daqui mede o MEU acerto no no e nunca o que a FEPESE cobra. A lei
+# de outro estado ou de um municipio nao tem no na arvore: fica pendente.
+INSTRUCAO_CLASSIFICACAO_OUTRAS_BANCAS = INSTRUCAO_CLASSIFICACAO.replace(
+    "Voce recebe questoes reais da prova do meu cargo (Policia Penal / Agente "
+    "Penitenciario de SC, banca FEPESE), com o gabarito oficial, todas da mesma "
+    "materia, e a arvore de conteudos dessa materia.",
+    "Voce recebe questoes reais de OUTRA BANCA (nao e a FEPESE, e nao e a prova "
+    "do meu cargo), com o gabarito, todas da mesma materia, e a arvore de "
+    "conteudos dessa materia - a do MEU edital, que e onde elas serao "
+    "penduradas. "
+    "Isto serve para eu treinar e medir o meu acerto em cada assunto, e NUNCA "
+    "entra no que a FEPESE cobra. Se o conteudo cobrado nao couber em nenhum "
+    "assunto do meu edital - inclusive lei de outro estado ou de um municipio "
+    "(estatuto, lei organica, regimento) -, responda "
+    '"status": "pendente" com o motivo - nao force.')
+
+
 # No bloco generico a MATERIA tambem e pergunta: o caderno so diz
 # "Conhecimentos Especificos", e a questao pode nem ser de materia minha.
 INSTRUCAO_CLASSIFICACAO_GENERICA = """Voce recebe questoes reais de OUTRO concurso da FEPESE (o acervo complementar: nao e a prova do meu cargo), com o gabarito. O caderno NAO diz a materia delas: o bloco se chama "Conhecimentos Especificos" ou parecido. O nome do lote e so a suspeita que um termo levantou, e pode estar errado.
@@ -1007,10 +1025,11 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
     """Um pedido por materia, com as questoes e a arvore dela.
 
     `de_evidencia` diz de onde vem a questao: `alvo` (o padrao: as 170 de
-    2013 e 2019) ou `complementar` (as provas FEPESE aceitas no
-    `data/acervo_complementar.json`; prova nao aceita nao e classificada).
-    As duas nunca se misturam num lote, e o que a classificacao do
-    complementar produz nunca entra na conta do alvo.
+    2013 e 2019), `complementar` (as provas FEPESE aceitas no
+    `data/acervo_complementar.json`; prova nao aceita nao e classificada) ou
+    `fora` (as outras bancas, decisao 166: so treinam e medem o meu acerto).
+    As tres nunca se misturam num lote, e o que a classificacao do
+    complementar ou das outras bancas produz nunca entra na conta do alvo.
 
     Vao todas, anuladas inclusive (marcadas). Fica de fora so a que eu ja
     conferi - a conferencia e minha e nao se refaz por cima. A materia do
@@ -1032,8 +1051,8 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
     from radar.servico import evidencia
 
     de_evidencia = de_evidencia or evidencia.ALVO
-    if de_evidencia not in (evidencia.ALVO, evidencia.COMPLEMENTAR):
-        raise ValueError(f"evidência {de_evidencia!r}: use alvo ou complementar")
+    if de_evidencia not in evidencia.EVIDENCIAS:
+        raise ValueError(f"evidência {de_evidencia!r}: use alvo, complementar ou fora")
     so_estas = ([materia] if isinstance(materia, str) else list(materia or [])) or None
 
     taxonomia = arvore.carregar_taxonomia()
@@ -1104,6 +1123,12 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
             # ambigua: um sufixo da prova desempata.
             if codigo in codigos:
                 codigo = f"{codigo}-{sum(map(ord, q.prova_url)) % 1000:03d}"
+            # Duas provas com o mesmo sufixo (as outras bancas tem dezenas de
+            # cadernos no mesmo ano): um contador desempata, e o codigo nunca
+            # aponta para duas questoes.
+            base, extra = codigo, 2
+            while codigo in codigos:
+                codigo, extra = f"{base}-{extra}", extra + 1
             codigos[codigo] = chave
             marca = " (ANULADA pela banca: classifique assim mesmo)" if q.anulada else ""
             blocos.append(f"[{codigo}]{marca}\n{gerador._questao_por_extenso(q)}")
@@ -1120,6 +1145,8 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
             "instrucao": (INSTRUCAO_CLASSIFICACAO_GENERICA if genericos else
                           INSTRUCAO_CLASSIFICACAO
                           if de_evidencia == evidencia.ALVO
+                          else INSTRUCAO_CLASSIFICACAO_OUTRAS_BANCAS
+                          if de_evidencia == evidencia.FORA
                           else INSTRUCAO_CLASSIFICACAO_COMPLEMENTAR),
             "pedido": f"MATERIA: {no}\n\nQUESTOES\n\n" + "\n\n".join(blocos),
         }

@@ -41,7 +41,9 @@ arquivos: em **portugues** — o codigo ja segue isso.
 nao importa: e concurso estadual, e eu presto onde for. **A de outro estado
 tambem avisa, e so avisa** (marca `principal_fora`): o **estudo** — Meu foco,
 incidencia, treino, acervo — le so as provas de SC, porque fora daqui e outra
-banca e outra lei estadual.
+banca e outra lei estadual. **A excecao e o meu acerto** (decisao 166): a
+questao de outra banca treina no radar e mede o meu desempenho no no, com a
+origem ao lado, e nunca entra no que a FEPESE cobra.
 
 Depois dele, nesta ordem: Guarda Municipal · Policia Civil · Oficial de
 Bombeiros · e as demais carreiras de seguranca publica (Policia Penal Federal,
@@ -315,9 +317,16 @@ a I3):** o Qconcursos e o TEC Concursos ficam fora (os termos dos dois
 proibem robo, mesmo acionado por voce), e as provas de outras bancas entram
 pelo site oficial de cada uma. Elas medem o seu acerto por no, com a origem
 ao lado, e nunca o que a FEPESE cobra; Certo/Errado so treina; o fechamento
-de 07/11 continua so FEPESE. Feito so o levantamento de 9 bancas
-([levantamento_de_bancas](docs/levantamento_de_bancas.md)): Cebraspe, ACAFE
-e IDIB entram com ressalva. As etapas A a D estao na pendencia O.
+de 07/11 continua so FEPESE. O levantamento de 9 bancas
+([levantamento_de_bancas](docs/levantamento_de_bancas.md)) deu Cebraspe, ACAFE
+e IDIB com ressalva. **Feita a etapa A** (o mecanismo): `radar classificar
+--pedido --evidencia fora`, o leitor da IESES consertado (a alternativa d
+levava a questao seguinte) e relido so nela (`radar questoes --refazer
+--banca IESES`), o "Treinar com outras bancas no radar" na faixa e "(N FEPESE,
+M de outras bancas)" no Meu desempenho; a mesma questao em outro caderno e
+uma so (`outras_bancas.mesma_questao`). No dado de hoje, 41 questoes de
+Portugues da IESES (38 classificadas). Faltam as etapas B (Cebraspe), C
+(ACAFE) e D (IDIB): pendencia O.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
@@ -374,7 +383,9 @@ do complementar aceito, e gravada na rodada; a do simulado do Qconcursos
 tambem, por tema estudado (decisao 69). **O sabado** - a revisao semanal, o
 R+7 dos diagnosticos e a comparacao de 07/11 - **sai do `servico/sabado.py`**
 (decisao 70). **A faixa de Portugues que comeca no radar** sai do
-`servico/faixa_no_radar.py` (decisao 107). **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
+`servico/faixa_no_radar.py` (decisao 107). **O treino com outras bancas** sai
+do `servico/outras_bancas.py` (decisao 166): so evidencia `fora`, e nunca
+entra na incidencia nem nas rodadas que medem. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
 (decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. Para o
 estudado e as datas, a faixa sem `conteudo` conta nos `nos` do plano e na
 ficha CONFERIDA, nunca no acerto (decisao 81). **Alvo,

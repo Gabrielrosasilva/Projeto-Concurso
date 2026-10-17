@@ -117,6 +117,8 @@
       Treino de {{ f.get('alvo') }}: {{ partes|join(', ') }}
     {% elif f.get('geradas') %}
       Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra{% if f.get('nivel') %} &middot; nível: {{ rotulo_do_nivel(f.get('nivel')) }}{% endif %}
+    {% elif f.get('rodada') == 'outras_bancas' %}
+      Treino com questões reais de <b>outras bancas</b>{% if f.get('bancas') %} ({{ f.get('bancas') | join(', ') }}){% endif %} — medem o seu acerto no tema, e nunca o que a FEPESE cobra
     {% elif f.get('erros') %}
       Revisão: só as questões que eu errei
     {% elif f.get('compilado') %}

@@ -403,6 +403,8 @@ def questoes(
     textos_base: bool = typer.Option(
         False, "--textos-base",
         help="Só guarda o texto de apoio das questões de Português do alvo e do complementar aceito"),
+    banca: str = typer.Option(
+        None, "--banca", help="Só os cadernos desta banca (ex.: IESES)"),
 ) -> None:
     """Separa os cadernos do acervo em questoes, com materia e gabarito.
 
@@ -422,7 +424,7 @@ def questoes(
                       f"de {feito.provas} prova(s) do alvo e do complementar aceito.")
         return
     with console.status("Lendo os cadernos..."):
-        resultado = servico.extrair_questoes(limite=limite, refazer=refazer)
+        resultado = servico.extrair_questoes(limite=limite, refazer=refazer, banca=banca)
 
     console.print(f"[green]{resultado}[/]")
     total = servico.contar_questoes()
@@ -2985,7 +2987,7 @@ def classificar(
     materia: list[str] = typer.Option(
         None, help="Só estas matérias, pelo caminho do nó (pode repetir)"),
     evidencia: str = typer.Option(
-        "alvo", help="De onde vem a questão: alvo ou complementar"),
+        "alvo", help="De onde vem a questão: alvo, complementar ou fora (outras bancas)"),
     catalogo: bool = typer.Option(
         False, "--catalogo",
         help="No complementar: propõe o assunto pelo catálogo de palavras-chave "
@@ -3010,6 +3012,9 @@ def classificar(
     --evidencia complementar pede as provas FEPESE aceitas no acervo
     complementar, em vez das do alvo. Prova fora do acervo nao e classificada,
     e o que sai dai nunca entra na incidencia da Policia Penal.
+
+    --evidencia fora pede as provas de OUTRAS BANCAS (decisao 166): elas
+    treinam e medem o meu acerto no no, e nunca o que a FEPESE cobra.
     """
     if importar is not None:
         _importar_resposta_da_ia(importar)

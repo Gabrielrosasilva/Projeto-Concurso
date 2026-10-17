@@ -643,26 +643,51 @@ lacunas com a, à e há; 10 de crase e regencia). O que falta:
 
 ## O. Outras bancas no treino e na medida (decisao 166, 17/10)
 
-Feito: o levantamento das 9 bancas, so leitura
-([levantamento_de_bancas](levantamento_de_bancas.md)). O que falta vai nesta
-ordem, uma etapa por conversa:
+Feito:
+- o levantamento das 9 bancas, so leitura
+  ([levantamento_de_bancas](levantamento_de_bancas.md));
+- **a etapa A** (17/10): a classificacao das outras bancas (`--evidencia
+  fora`), o leitor da IESES consertado e relido so nela (`--banca`), o
+  "Treinar com outras bancas no radar" nas faixas e a origem ao lado no Meu
+  desempenho. No dado de hoje: 41 questoes de Portugues da IESES, 38
+  classificadas, em 13 nos; o botao aparece em 13 dias ate 07/11.
 
-### A IA pode fazer (uma etapa por conversa)
+O que falta vai nesta ordem, uma etapa por conversa.
 
-- 🔴 **A. O mecanismo** (os itens 1 e 2 do pedido):
-  - as questoes `fora` classificadas nos nos da arvore (pela chave, com
-    procedencia); o que nao cabe fica sem classificacao;
-  - o treino "outras bancas" por no, dentro do radar;
-  - o acerto delas no desempenho por no, com a origem ao lado e o C/E a
-    parte.
-  Testado com as da IESES que ja estao no banco: 252 de Portugues, 117 de
-  Raciocinio e 63 de Atualidades, e nada de Direito (sao de concursos
-  municipais de educacao). Nao mexe na incidencia, nos padroes nem nas
-  rodadas que medem;
+### Depende de voce (da etapa A)
+
+- ⚪ **Reinicie o servidor** depois do `git pull`: `radar parar` e `radar
+  subir` (a tela Hoje, a questao e o Meu desempenho mudaram);
+- ⚪ **Conferir a classificacao da IESES** na Analises > Conferencia (a
+  conferencia e sua; a do Claude Code nao vale como conferida). Dois pontos
+  que a leitura levantou:
+  - a 2024-q6 (2 versoes): o gabarito deu "tufao e furacao sao substantivos
+    concretos" e nao aceitou "civilizacao e substantivo abstrato", que pela
+    gramatica tradicional tambem parece certa; a ressalva esta na pegadinha;
+  - a 2024-q7 (17 versoes, o nucleo do sujeito "Eu") foi para Classes
+    gramaticais > Classificacao morfologica, e nao para pendente.
+
+### A IA pode fazer (quando voce pedir)
+
+- ⚪ **O resto da IESES**: Raciocinio (84 chaves, no caderno "Matematica e
+  Raciocinio Logico"), Informatica (53) e Etica no Servico Publico (74) nao
+  casam com materia da arvore, e nao foram pedidos. O de Raciocinio pede o
+  sinonimo no `config/taxonomia.yml` antes; a matematica pura fica pendente;
+- ⚪ **A palavra partida da IESES** ("senti do", "par a") continua no texto:
+  o treino ja trata as versoes como uma questao so, mas a tela mostra a
+  palavra partida;
+- ⚪ **As 18 pendentes da IESES**: 17 sao a mesma questao mista (acentuacao,
+  pontuacao e sinonimo nos itens I a III), e 1 cobra o sujeito, que e termo
+  essencial e nao esta no edital.
+
+### As proximas etapas
+
 - 🔴 **B. O Cebraspe**:
   - o coletor das provas pela API, com nova tentativa no 404 do CDN;
   - o leitor do caderno de multipla escolha e o do Certo/Errado (que so
-    treina), comecando pelos de seguranca publica;
+    treina), comecando pelos de seguranca publica. O C/E precisa de um
+    acerto a parte: hoje o treino de outras bancas so aceita questao com
+    quatro alternativas ou mais, e por isso o C/E ainda nao entra em nada;
   - antes de tudo, contar quantos dos ~50 de seguranca sao de multipla
     escolha;
 - 🔴 **C. A ACAFE**:

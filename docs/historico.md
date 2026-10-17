@@ -2355,3 +2355,20 @@ E cada faixa da tela Hoje ganhou o "📝 Como foi" (chutes fora do radar,
 entendi, nota), separado do check, relido na ficha do tema e no Meu
 desempenho, com o que eu nao entendi na frente: a lista do Ciclo 2. O banco
 foi para a versao 7 (copia em `data/copias/migracao-v6-para-v7-...`).
+
+## Outras bancas: o levantamento e a etapa A (17/10)
+
+O simulado da semana mandava fazer questoes que voce nao achava no
+Qconcursos, e a FEPESE nao tinha mais questao em varios temas. O Qconcursos e
+o TEC Concursos ficaram fora: os termos dos dois proibem robo, mesmo acionado
+por voce. O levantamento de 9 bancas, so leitura, achou o Cebraspe, a ACAFE e
+o IDIB com prova aberta, cada um com uma ressalva (decisao 166). Voce decidiu
+que a outra banca mede o seu acerto no no, com a origem ao lado; que
+Certo/Errado so treina; e que o fechamento de 07/11 continua so FEPESE. A
+etapa A montou o mecanismo com as provas da IESES que ja estavam no banco: a
+classificacao com `--evidencia fora`, o botao "Treinar com outras bancas no
+radar" na faixa e "(N FEPESE, M de outras bancas)" no Meu desempenho. No
+caminho, o leitor da IESES colava o enunciado da questao seguinte na
+alternativa d (177 de 183): consertado, e relido so nos cadernos dela, com o
+`--banca` novo. As 252 questoes de Portugues da IESES sao 41 de verdade,
+embaralhadas entre os cargos; o treino conta cada uma uma vez so.

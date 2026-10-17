@@ -206,6 +206,20 @@ def test_grava_as_questoes_no_banco(banco_temporario, tmp_path, monkeypatch):
     assert servico.contar_questoes() == 40
 
 
+def test_com_banca_le_so_os_cadernos_dela(banco_temporario, tmp_path, monkeypatch):
+    """O leitor de uma banca consertado relê so os cadernos dela: os da
+    FEPESE nao sao tocados (decisao 166)."""
+    from radar import servico
+
+    _prova_falsa(tmp_path, "uma.pdf")
+    monkeypatch.setattr(
+        questoes, "extrair_texto", lambda caminho: FIXTURE.read_text(encoding="utf-8")
+    )
+
+    assert servico.extrair_questoes(limite=5, banca="IESES").provas == 0
+    assert servico.extrair_questoes(limite=5, banca="fepese").provas == 1
+
+
 def test_nao_le_a_mesma_prova_duas_vezes(banco_temporario, tmp_path, monkeypatch):
     from radar import servico
 

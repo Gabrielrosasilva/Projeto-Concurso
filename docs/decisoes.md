@@ -5580,7 +5580,8 @@ viraram estudo extra "Onde: Radar". Copia antes em
        regra inviolavel 1 do novo.md, porque o desempenho ja e a terceira
        coisa, separada das duas incidencias;
      - **e nunca entra no que a FEPESE cobra**: incidencia, padroes, "caiu ou
-       nao caiu" (decisao 108), "Onde estudar primeiro", prioridade. O
+       nao caiu" (decisao 108), a incidencia do "Onde estudar primeiro",
+       prioridade. O
        `servico/evidencia.py` ja poe toda banca que nao e a FEPESE em `fora`,
        e a regra fica como esta;
      - **Certo/Errado so treina**: o chute acerta 50%, e 60% em C/E nao e 60%
@@ -5602,3 +5603,40 @@ viraram estudo extra "Onde: Radar". Copia antes em
      proibe o servidor dos PDFs), IBFC e Consulplan (o caderno nao e
      publicado, ou sai do ar), FUNDATEC (o desafio de robo do AWS WAF) e
      IOBV (sem site oficial). A ordem das etapas esta na pendencia O.
+
+     **A etapa A (17/10): o "responda esta questao" dentro do radar.**
+     - **a classificacao:** `radar classificar --pedido --evidencia fora`,
+       com a instrucao propria (outra banca; lei de outro estado ou de
+       municipio fica pendente) e o `--importar` de sempre. As 183 chaves de
+       Portugues da IESES foram classificadas pelo Claude Code (claude-opus-5-5):
+       165 classificadas, 18 pendentes, nenhum no novo. No mesmo lote o
+       codigo da questao ganhou um contador: com dezenas de cadernos no mesmo
+       ano, o sufixo da prova repetia, e um codigo apontaria para duas
+       questoes;
+     - **o leitor da IESES consertado:** a alternativa d levava o enunciado
+       da questao seguinte (177 das 183), e agora acaba no numero dela
+       (`questoes_ieses._fim_da_ultima`). O `radar questoes` ganhou o
+       `--banca`, e a releitura foi so dos 31 cadernos da IESES (`--refazer
+       --banca IESES`): 765 questoes com o texto mudado, as 177
+       classificacoes levadas para a chave nova (decisao 90), e a FEPESE
+       intocada;
+     - **o treino** (`servico/outras_bancas.py`): a faixa de treino cujo
+       tema tem questao de outra banca ganha o "Treinar com outras bancas no
+       radar", com quantas ha, de quais bancas e quantas eu ja fiz; a faixa
+       sem nenhuma nao ganha linha. A rodada (`rodada: outras_bancas`) corrige
+       na hora, guarda a faixa (`da_faixa`, e o "Fiz hoje" ja conta) e poe as
+       nunca feitas primeiro. So entra questao com gabarito entre as
+       alternativas, sem anulada e com quatro alternativas ou mais - menos
+       que isso e caderno mal lido, ou Certo/Errado, que so treina e e da
+       etapa B. O estoque e so de `fora`: as reais da FEPESE continuam para a
+       faixa de Portugues do radar e para as rodadas que medem;
+     - **a mesma questao em outro caderno e uma so** (`mesma_questao`): a
+       IESES embaralha as alternativas entre os cargos e o PDF parte a
+       palavra em lugares diferentes ("senti do"), e cada versao era uma
+       chave. As 252 questoes de Portugues da IESES sao 182 chaves e 41
+       questoes; 38 classificadas, em 13 nos;
+     - **a medida:** o Meu desempenho (e a ficha, e o Meu foco, que leem a
+       mesma divisao) escreve "radar 50% em 2 (1 FEPESE, 1 de outras
+       bancas)" quando ha resposta de outra banca, e a frase de sempre quando
+       nao ha. O "Onde estudar primeiro" usa o meu desempenho, e por ele a
+       outra banca entra; a incidencia que ele pesa continua so do alvo.

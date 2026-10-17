@@ -1042,6 +1042,7 @@ radar retificacoes          # acusa edital que mudou (--avisar manda no Telegram
 radar questoes              # separa os cadernos do acervo em questoes
 radar questoes --refazer    # passa o parser novo por cima do acervo inteiro;
                             # o texto que muda leva a classificacao junto
+radar questoes --refazer --banca IESES --limite 1000  # so os cadernos de uma banca
 radar questoes --textos-base  # so o texto de apoio das questoes de Portugues
                             # do alvo ("considerando o texto 1"), lido por
                             # colunas; mora so no banco (decisao 132)
@@ -1060,6 +1061,7 @@ radar conteudos --pendentes # as questoes sem classificacao, alvo prova a prova
 radar conteudos --semear    # poe na arvore o que o edital tem e ela nao
 radar classificar --pedido  # pede ao Claude Code a classificacao do alvo
 radar classificar --pedido --evidencia complementar --materia "Direito Penal"
+radar classificar --pedido --evidencia fora --materia "Língua Portuguesa"  # outras bancas
 radar classificar --importar data/resposta_ia.json   # grava o que presta
 radar incidencia            # o mapa do alvo por no, com a amostra
 radar incidencia --materia "Direito Penal" --padroes
@@ -1203,7 +1205,15 @@ sobre a letra certa.
 As questoes das provas aceitas sao classificadas pelo mesmo fluxo do alvo,
 com `--evidencia complementar` (prova recusada na validacao nao e
 classificada). O lote nunca mistura as duas evidencias, e o que sai dai nunca
-entra na incidencia da Policia Penal. Quando o caderno nao diz a materia
+entra na incidencia da Policia Penal.
+
+As provas de **outras bancas** (evidencia `fora`, decisao 166) entram pelo
+mesmo fluxo, com `--evidencia fora`: classificadas no no, elas abrem o botao
+"Treinar com outras bancas no radar" na faixa do tema (tela Hoje), e o que eu
+respondo ali mede o meu acerto no no - o Meu desempenho diz quantas das
+respostas sao de outras bancas -, e nunca o que a FEPESE cobra: a incidencia,
+os padroes e as rodadas que medem so leem o alvo e o complementar aceito. Lei
+de outro estado ou de municipio fica pendente: nao tem no na arvore. Quando o caderno nao diz a materia
 ("Conhecimentos Especificos"), `--genericos` monta o pedido em que a MATERIA
 tambem e resposta, agrupado pela materia que um termo do
 `config/complementar.yml` sugere - e so uma suspeita. Para Portugues e
@@ -2018,6 +2028,7 @@ src/radar/
 │   ├── composicao.py a composicao das rodadas que medem (decisao 67)
 │   ├── sabado.py     a revisao semanal, o R+7 dos diagnosticos e a comparacao
 │   ├── faixa_no_radar.py a faixa de Portugues que comeca pelas do radar
+│   ├── outras_bancas.py o treino com questoes reais de outras bancas (decisao 166)
 │   ├── compilado.py  o simulado compilado e a divisao pelo quadro do edital
 │   ├── inicio.py     a pagina inicial
 │   └── comum.py      o pouco que mais de um assunto usa

@@ -1137,6 +1137,27 @@
                   </div>
                 {% endif %}
 
+                {# As questoes reais de outras bancas do tema (decisao 166):
+                   medem o meu acerto no no, com a origem ao lado, e nunca o
+                   que a FEPESE cobra. A conta e do servico; aqui so se desenha. #}
+                {% set ob = outras_bancas_das_faixas.get((b.chave, loop.index0)) if outras_bancas_das_faixas else none %}
+                {% if ob %}
+                  {% set indice_de_outras = loop.index0 %}
+                  <div class="composicao outras-bancas">
+                    <p>{{ selo('prova', curto=True) }} <b>{{ ob.no_acervo }} {{ 'questão real' if ob.no_acervo == 1 else 'questões reais' }} de outras bancas</b> deste tema no radar ({{ ob.bancas | join(', ') }}){% if ob.feitas %}; você já fez {{ ob.feitas }}{% endif %}.</p>
+                    <form class="treinar-no-radar" method="post" action="/outras-bancas/treinar">
+                      {% for no in ob.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                      <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                      <input type="hidden" name="bloco" value="{{ b.chave }}">
+                      <input type="hidden" name="indice" value="{{ indice_de_outras }}">
+                      <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                      <label><input type="number" name="quantidade" min="1" max="30" value="{{ ob.sugeridas }}" aria-label="Quantas questões de outras bancas"> questões</label>
+                      <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar com outras bancas no radar</button>
+                    </form>
+                    <p class="regra">Medem o seu acerto neste tema, com a origem ao lado, e não entram no que a FEPESE cobra. As do radar contam sozinhas: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>
+                  </div>
+                {% endif %}
+
                 {# As geradas da faixa (R6): primeiro as reais no Qconcursos, que
                    medem; depois, se eu quiser, as geradas do radar, que so
                    treinam. A contagem e o comando vem do servico; aqui so se

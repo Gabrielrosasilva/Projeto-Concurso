@@ -55,7 +55,7 @@ from radar.models import Classificacao, QuestaoDeProva
 from radar.origem import AUTOMATICO
 from radar.regioes import normalizar
 from radar.servico import conteudos as servico_conteudos
-from radar.servico import metricas
+from radar.servico import evidencia, metricas
 
 #: Os nomes dos dois recortes, como a tela escreve. Os mesmos da decisao 4.
 NO_RADAR = "medido no radar"
@@ -79,6 +79,9 @@ class Metade:
     sem_resultado: int = 0
     #: Em quantos dias diferentes eu respondi. Pesa no estado mais alto.
     dias: set = field(default_factory=set)
+    #: Das `respostas`, quantas sao de outra banca (decisao 166): medem como
+    #: as da FEPESE, e a tela diz a origem ao lado.
+    de_outras_bancas: int = 0
 
     @property
     def porcentagem(self) -> int | None:
@@ -171,7 +174,13 @@ class Desempenho:
         def lado(nome: str, metade: Metade) -> str:
             if metade.porcentagem is None:
                 return f"{nome} —"
-            return f"{nome} {metade.porcentagem}% em {metade.respostas}"
+            frase = f"{nome} {metade.porcentagem}% em {metade.respostas}"
+            if metade.de_outras_bancas:
+                # A origem ao lado (decisao 166): a outra banca mede, e a tela
+                # nunca esconde quanto do numero veio dela.
+                da_fepese = metade.respostas - metade.de_outras_bancas
+                frase += f" ({da_fepese} FEPESE, {metade.de_outras_bancas} de outras bancas)"
+            return frase
 
         return f"{lado('radar', self.radar)} · {lado('anotado', self.anotado)}"
 
@@ -217,12 +226,15 @@ def _janela(recorte: str, plano=None, hoje: date | None = None):
     return plano.inicio, fim
 
 
-def _questoes_respondidas(inicio: date | None, fim: date, todas: bool = False):
+def _questoes_respondidas(inicio: date | None, fim: date, todas: bool = False,
+                          com_evidencia: bool = False):
     """As ultimas respostas reais, com a chave da questao e o dia.
 
     [(chave, acertou, dia)]. Questao de IA fica fora; rodada nao terminada
     fica fora (o `metricas` ja filtra as duas coisas). Com `todas`, cada
-    resposta, e nao so a ultima de cada questao (decisao 85).
+    resposta, e nao so a ultima de cada questao (decisao 85). Com
+    `com_evidencia`, a evidencia da questao vem no fim da tupla: e ela que diz
+    se a resposta e de outra banca (decisao 166).
     """
     criar_tabelas()
     with sessao() as s:
@@ -251,7 +263,8 @@ def _questoes_respondidas(inicio: date | None, fim: date, todas: bool = False):
             continue
         if dia > fim:
             continue
-        saida.append((chave_de(questao), bool(resposta.acertou), dia))
+        linha = (chave_de(questao), bool(resposta.acertou), dia)
+        saida.append(linha + (questao.evidencia,) if com_evidencia else linha)
     return saida
 
 
@@ -280,6 +293,8 @@ class Entrada:
     acertos: int = 0
     com_consulta: int = 0
     sem_resultado: int = 0
+    #: Das `respostas`, quantas sao de questao de outra banca (decisao 166).
+    de_outras_bancas: int = 0
 
 
 def materias_da_arvore() -> dict[str, str]:
@@ -312,12 +327,14 @@ def entradas(recorte: str = CICLO, plano=None,
 
     # --- medido no radar ---------------------------------------------------
     de_quem = nos_das_questoes()
-    for chave, acertou, dia in _questoes_respondidas(inicio, fim):
+    for chave, acertou, dia, de_onde in _questoes_respondidas(inicio, fim,
+                                                              com_evidencia=True):
         caminho = de_quem.get(chave)
         if caminho is None:
             continue
         saida.append(Entrada(caminho, NO_RADAR, dia, respostas=1,
-                             acertos=1 if acertou else 0))
+                             acertos=1 if acertou else 0,
+                             de_outras_bancas=1 if de_onde == evidencia.FORA else 0))
 
     # --- anotado (faixas e estudo extra) ----------------------------------
     materias = materias_da_arvore()
@@ -344,6 +361,7 @@ def _somar(destino: Desempenho, entrada: Entrada) -> None:
     metade.somar(entrada.respostas, entrada.acertos, entrada.dia)
     metade.com_consulta += entrada.com_consulta
     metade.sem_resultado += entrada.sem_resultado
+    metade.de_outras_bancas += entrada.de_outras_bancas
 
 
 def por_no(recorte: str = CICLO, plano=None,

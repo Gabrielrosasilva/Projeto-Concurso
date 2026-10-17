@@ -97,6 +97,17 @@ def test_sem_gabarito_a_questao_fica_sem_resposta(caderno):
     assert all(q.resposta is None for q in questoes_ieses.dividir_em_questoes(caderno))
 
 
+def test_a_ultima_alternativa_nao_leva_a_questao_seguinte(caderno):
+    """A alternativa d acaba onde comeca o numero da proxima questao: o
+    enunciado dela vinha colado ("... nao ver nada. 2. Como a percepcao")."""
+    lidas = questoes_ieses.dividir_em_questoes(caderno)
+    primeira = lidas[0]
+    assert primeira.alternativas["d"].endswith("prefere não ver nada.")
+    assert "Como a percepção" in lidas[1].enunciado
+    for questao, seguinte in zip(lidas, lidas[1:]):
+        assert f"{seguinte.numero}. " not in questao.alternativas["d"], questao.numero
+
+
 def test_enunciado_com_lista_numerada_nao_quebra_a_questao(caderno):
     """A questao 8 tem "I.", "II.", "III." dentro do enunciado."""
     oitava = next(q for q in questoes_ieses.dividir_em_questoes(caderno)

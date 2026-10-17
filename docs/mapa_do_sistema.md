@@ -345,7 +345,7 @@ código traz um passo novo em `migracoes.py` - o primeiro comando depois de um
 - `cronograma.py` (ler e montar o dia) + `servico/cronograma.py` (a tela e o que se marca).
 - `servico/metricas.py` - **a fonte única das contas**; `amostra.py` + `config/amostra.yml` - os mínimos.
 - `servico/desempenho_por_conteudo.py`, `servico/estudo.py` (a fila única), `servico/espacada.py`, `servico/erros.py`, `servico/semanas.py`, `servico/materias.py`, `servico/inicio.py` (home), `foco.py` + `onde_estudar.py` (Edital).
-- `servico/simulado.py`, `servico/compilado.py`, `servico/composicao.py` (rodadas que medem), `servico/sabado.py`, `servico/faixa_no_radar.py`, `servico/extra.py`, `servico/notas_da_faixa.py`.
+- `servico/simulado.py`, `servico/compilado.py`, `servico/composicao.py` (rodadas que medem), `servico/sabado.py`, `servico/faixa_no_radar.py`, `servico/outras_bancas.py` (treino com outras bancas, decisão 166), `servico/extra.py`, `servico/notas_da_faixa.py`.
 - `fichas.py` + `servico/fichas.py`; `incidencia.py` + `servico/incidencia.py`; `prioridade.py` + `config/prioridade.yml`; `macetes.py` + `servico/cartoes.py`; `qconcursos.py` + `config/qconcursos.yml`; `origem.py` (os selos).
 
 **Acervo e IA**

@@ -106,6 +106,19 @@ def _blocos_de_alternativas(texto: str) -> list[list[re.Match]]:
     return rodadas
 
 
+def _fim_da_ultima(texto: str, rodada: list[re.Match], fim: int, numero: int) -> int:
+    """Onde a ultima alternativa acaba: no numero da questao seguinte.
+
+    A rodada termina onde comeca a proxima rodada de alternativas, e entre as
+    duas esta o ENUNCIADO da questao seguinte: sem este corte, ele vinha colado
+    na alternativa d ("... prefere nao ver nada. 2. Como a percepcao..."), e
+    a mesma questao virava uma chave diferente em cada caderno (decisao 166).
+    """
+    seguinte = re.compile(rf"(?m)^\s*{numero + 1}\.\s")
+    achado = seguinte.search(texto, rodada[-1].end(), fim)
+    return achado.start() if achado else fim
+
+
 def _ler_alternativas(rodada: list[re.Match], texto: str, fim: int) -> dict[str, str]:
     alternativas: dict[str, str] = {}
     for indice, marca in enumerate(rodada):
@@ -143,7 +156,8 @@ def dividir_em_questoes(texto: str, materias: dict[int, str] | None = None,
         enunciado = _limpar(marcar_lacunas(
             re.sub(r"^\s*\d{1,2}\.\s*", "", regiao[marcador.start():])
         ))
-        alternativas = _ler_alternativas(rodada, texto, fim_rodada)
+        alternativas = _ler_alternativas(
+            rodada, texto, _fim_da_ultima(texto, rodada, fim_rodada, numero))
         if not enunciado or len(alternativas) < 2:
             continue
 

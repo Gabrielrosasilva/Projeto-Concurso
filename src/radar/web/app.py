@@ -1150,6 +1150,35 @@ def geradas_treinar(
     return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
 
 
+@app.post("/outras-bancas/treinar")
+def outras_bancas_treinar(
+    conteudos: list[str] = Form([]), quantidade: str = Form("10"),
+    data: str = Form(""), bloco: str = Form(""), indice: str = Form(""),
+    titulo: str = Form(""),
+):
+    """Uma rodada com questoes reais de outras bancas dos nos da faixa
+    (decisao 166). Mede o meu acerto no no; nunca o que a FEPESE cobra."""
+    quantas = converter_valor(quantidade)
+    quantas = int(quantas) if quantas and 1 <= quantas <= 30 else 10
+
+    da_faixa = None
+    try:
+        dia = date.fromisoformat(data) if data else None
+    except ValueError:
+        dia = None
+    if dia and bloco and titulo and indice.strip().isdigit():
+        # A mesma identidade do `composicao.identidade_da_faixa`.
+        da_faixa = {"data": dia.isoformat(), "bloco": bloco,
+                    "indice": int(indice), "titulo": titulo}
+
+    nos = [c.strip() for c in conteudos if c.strip()]
+    rodada = servico.outras_bancas.criar_rodada(nos, quantas, da_faixa)
+    if rodada is None:
+        destino = f"/hoje?data={dia.isoformat()}" if dia else "/hoje"
+        return RedirectResponse(destino, status_code=303)
+    return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
+
+
 @app.post("/geradas/{questao_id}/errada")
 def geradas_errada(questao_id: int, voltar: str = Form("/geradas")):
     """Um clique: a questao sai do sorteio para sempre.
@@ -1238,6 +1267,9 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # As geradas de cada faixa de treino (R6): o no, quantas ha e os
             # passos para gerar o que falta.
             "geradas_das_faixas": geradas_das_faixas,
+            # As questoes reais de outras bancas dos mesmos nos (decisao 166):
+            # so a faixa cujo tema tem alguma ganha a linha.
+            "outras_bancas_das_faixas": servico.outras_bancas.das_faixas(geradas_das_faixas),
             # O que ja foi respondido no radar em rodada aberta pela faixa:
             # conta sozinho no "Fiz hoje", e a faixa avisa para nao anotar de novo.
             "respondidas_no_radar": (servico.metricas.no_radar_por_faixa(tela.data)

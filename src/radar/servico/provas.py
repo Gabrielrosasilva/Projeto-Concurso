@@ -340,11 +340,13 @@ class ResultadoExtracao:
         return texto
 
 
-def _provas_por_ler(limite: int, refazer: bool = False) -> list[dict]:
+def _provas_por_ler(limite: int, refazer: bool = False,
+                    banca: str | None = None) -> list[dict]:
     """Provas do manifesto que ainda nao viraram questao no banco.
 
     Com `refazer`, devolve todas de novo: e o que permite passar um parser
-    melhorado por cima do acervo inteiro.
+    melhorado por cima do acervo inteiro. Com `banca`, so as dela: o leitor de
+    uma banca consertado nao precisa reler o caderno das outras.
     """
     with sessao() as s:
         ja_lidas = (
@@ -357,6 +359,7 @@ def _provas_por_ler(limite: int, refazer: bool = False) -> list[dict]:
         if registro.get("tipo") == arquivos_de_prova.PROVA
         and registro.get("caminho")
         and registro["url"] not in ja_lidas
+        and (banca is None or (registro.get("banca") or "").upper() == banca.upper())
     ]
     return pendentes[:limite]
 
@@ -487,15 +490,17 @@ def _ler_caderno(registro: dict, caminho: Path) -> list:
     return lidas
 
 
-def extrair_questoes(limite: int = 30, refazer: bool = False) -> ResultadoExtracao:
+def extrair_questoes(limite: int = 30, refazer: bool = False,
+                     banca: str | None = None) -> ResultadoExtracao:
     """Le os cadernos do acervo e guarda as questoes.
 
     Nao vai a internet: trabalha em cima dos PDFs que `radar provas` ja baixou.
+    `banca` limita aos cadernos dela.
     """
     criar_tabelas()
     resultado = ResultadoExtracao()
 
-    pendentes = _provas_por_ler(limite, refazer)
+    pendentes = _provas_por_ler(limite, refazer, banca)
     if not pendentes:
         return resultado
 

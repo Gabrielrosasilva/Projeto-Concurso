@@ -559,8 +559,10 @@ def test_o_pedido_do_alvo_continua_so_com_o_alvo(acervo):
 def test_evidencia_que_nao_existe_e_recusada(acervo):
     from radar.servico import manual
 
-    with pytest.raises(ValueError, match="alvo ou complementar"):
-        manual.pedido_de_classificacao(de_evidencia="fora")
+    # `fora` (outras bancas) passou a valer na decisao 166; o que nao e
+    # evidencia nenhuma continua recusado.
+    with pytest.raises(ValueError, match="alvo, complementar ou fora"):
+        manual.pedido_de_classificacao(de_evidencia="qconcursos")
 
 
 def test_classificar_o_complementar_nao_mexe_na_conta_do_alvo(acervo):
