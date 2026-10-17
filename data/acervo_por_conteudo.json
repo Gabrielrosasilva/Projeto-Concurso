@@ -1,0 +1,772 @@
+{
+ "concursos": {
+  "https://fepese.org.br/concurso/2006-jucesc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2007-concurso-publico-da-secretaria-municipal-de-administracao-sao-jose/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2008-residencia-medica-hospital-municipal-sao-jose-01-2008/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2009-assembleia-legislativa-do-estado-de-santa-catarina/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-balneario-camboriu-camara-de-vereadores-edital-no-01-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 2
+  },
+  "https://fepese.org.br/concurso/2010-biguacu-processo-seletivo-saude-edital-001-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-crc-sc-conselho-regional-de-contabilidade-de-santa-catarina-edital-no-01-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-deter-sc-agente-fiscal-de-transporte-classe-iv-edital-no-007-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-palhoca-concurso-publico-educacao-edital-001-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-palhoca-processo-seletivo-educacao-edital-002-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-brusque-agente-de-autoridade-de-transito-edital-no-01-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-florianopolis-edital-no-08-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-florianopolis-processo-seletivo-de-professores-substitutos-edital-no-11-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-01-2010-poder-executivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-02-2010-poder-executivo-cargos-com-prova-pratica/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-03-2010-fundacao-municipal-de-esportes-e-lazer-fme/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-04-2010-fme-zelador-de-patrimonio/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-05-2010-educacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-06-2010-sanefrai/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-fraiburgo-edital-no-07-2010-sanefrai-cargos-com-prova-pratica/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pm-sao-jose-secretaria-de-assistencia-social-edital-no-001-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-pmbc-guarda-municipal-edital-no-001-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2010-sao-jose-processo-seletivo-saude-estrategia-de-saude-da-familia-edital-001-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-sao-jose-processo-seletivo-saude-farmacia-popular-de-sao-jose-edital-002-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-sef-analista-financeiro-do-tesouro-estadual-edital-no-002-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-sef-auditor-fiscal-da-receita-estadual-afre-edital-001-2010/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2010-udesc-tecnico-universitario-edital-001-2009/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2011-cia-de-desenvolvimento-e-urbanizacao-de-balneario-camboriu-edital-001-2011/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2011-concurso-publico-fundacao-do-meio-ambiente-de-criciuma-famcri/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2011-concurso-publico-uffs/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-balneario-camboriu-proceso-seletivo-edital-04-2011/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-tijucas-editais-001-2011-002-2011-003-2011-e-004-2011/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-tubarao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2011-prefeitura-municpal-de-joinvile-hospital-municipal-sao-jose/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2011-uffs-processo-seletivo-professor-de-magisterio-superior-substituto/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2012-concurso-prefeitura-municipal-de-balneario-camboriu/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2012-concurso-publico-floram/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2012-fatma-advogados/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2012-projeto-forca-tur/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-concurso-celesc-edital-002-2013/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-concurso-publico-cau-edital-001-2013/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2013-concurso-publico-iprev-edital-001-2013/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2013-emasa-concurso-publiconivel-medio-tecnicoassistente-administrativomotoristaoperador-de-estacaotecnico-em-agrimensuratecnico-em-edificacaotecnico-de-laboratoriotecnico-em-saneamentonivel-supe/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2013-palhoca-concurso-de-relotacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-palhoca-processo-seletivo-agente-de-servicos-gerais-e-merendeira/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-palhoca-processo-seletivo-magisterio/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-processo-seletivo-para-professores-balneario-camboriu-temporario/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-processo-seletivo-para-professores-lages-temporario/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2013-sao-jose-concurso-de-relotacao-e-alteracao-de-carga-horaria/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-concurso-celesc-edital-001-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-concurso-deinfra-edital-001-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2014-concurso-publico-da-prefeitura-municipal-de-videiraedital-02-nivel-administracaoedital-03-nivel-educacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-concurso-publico-do-scpar-porto-de-imbituba-s-a-edital-001-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2014-concurso-publico-e-processo-seletivo-da-prefeitura-municipal-de-icaraedital-06-administracaoedital-07-educacaoedital-08-fundacao-do-meio-ambienteedital-09-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-concurso-publico-pmf-edital-003-2014-auditor-fiscal/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-epagri-processo-seletivo-jovem-aprendiz-edital-001-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-pmbc-guarda-municipal-concurso-publico-edital-001-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-processo-seletivo-de-substitutos-secretaria-municipal-de-educacao-de-florianopolis-edital-011-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-processo-seletivo-para-formacao-de-consultores-ad-hoc-sedsc-edital-017-sed-2014/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2014-residencia-medica-em-medicina-de-familia-sms-florianopolis/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-camara-municipal-de-sao-jose-concurso-publico-edital-001-2015/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-concurso-publico-da-camara-municipal-de-balneario-camboriuedital-01-administracaoedital-02-oficial-de-manutencao-predial/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-concurso-publico-da-camara-municipal-de-palhoca-edital-001-2015/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-pmf-guarda-municipal-secretaria-municipal-de-administracao-concurso-publico-edital-010-2015/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-pmsj-secretaria-municipal-de-educacao-concurso-publico-edital-004-2015-sme/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-pmsj-secretaria-municipal-de-educacao-processo-seletivo-publico-edital-008-2015-sme/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-pmsj-secretaria-municipal-de-saude-concurso-publicoedital-03-prefeitura-municipal-de-sao-jose-saudeedital-04-tecnico-em-radiologia-e-imagem/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-edital-004-2015/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-prefeitura-municipal-de-palhoca-secretaria-municipal-da-educacao-processo-seletivoedital-003-sme-2015-prefeitura-municipal-de-palhoca-magisterioedital-004-sme-2015-age/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2015-prefeitura-municipal-de-tijucas-processo-seletivoedital-001-2015-prefeitura-municipal-de-tijucas-magisterioedital-002-2015-secretarias-da-saude-sotsp-e-acao-social/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-concurso-celesc-edital-001-2016/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-fcee-fundacao-catarinense-de-educacao-especial-processo-seletivo-publico-edital-003-2016-fcee/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-florianopolis-secretaria-municipal-de-administracao-concurso-publico-edital-012-2016/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-florianopolis-secretaria-municipal-de-educacao-processo-seletivo-de-substitutos-edital-011-2016/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-fraiburgo-processo-seletivo-edital-028-2016-professor-auxiliar-educacional-agente-de-servicos-gerais-auxiliar-de-alimentacao-e-nutricaoprocesso-seletivo-edital/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-lages-concurso-publico-edital-001-2016-municipio-de-lages-geralconcurso-publico-edital-002-2016-magisterio-publico-educacaoconcurso-publico-edital-003-2016-ag/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-lages-processo-seletivo-edital-001-2016-educacao-professorprocesso-seletivo-edital-002-2016-agente-comunitario-de-saude/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-sao-jose-assistencia-socialconcurso-publico-edital-001-2016-gab/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-tijucas-monitor-de-creche-edital-001-2016/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2016-processo-seletivo-emergencial-de-substitutos-da-secretaria-municipal-de-educacao-de-florianopolis-edital-004-2016/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2017-companhia-aguas-de-joinville-caj-concurso-publico-edital-001-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2017-concurso-publico-da-prefeitura-municipal-de-criciuma-edital-001-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-chapeco-processo-seletivo-edital-004-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-concordia-concurso-publico-concurso-publico-edital-001-2018-quadro-geral-e-fmecconcurso-publico-edital-002-2018-educacaoconcurso-publico-edital-003-2018-clt-conc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2017-prefeitura-municipal-de-fraiburgo-concurso-publico-concurso-publico-edital-001-2017-fme-fundacao-municipal-de-esportesconcurso-publico-edital-002-2017-pmf-magisterio-publico-processo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2017-processo-seletivo-para-formacao-de-consultores-ad-hoc-sedsc-edital-2745-sed-sc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2017-teste-abepro-edicao-de-janeiro-de-2017-edital-001-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2017-teste-abepro-edicao-de-outubro-de-2017-edital-005-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-celesc-edital-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2018-cis-amosc-concurso-publico-concurso-publico-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-coreme-ufsc-processo-seletivoprocesso-seletivo-edital-001-2018-residencia-medica/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-coremu-ufsc-processo-seletivo-processo-seletivo-edital-002-2018-residencia-integrada-multiprofissional-em-saudeprocesso-seletivo-edital-002-2018-residencia-multiprofissional-em-sau/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-departamento-estadual-de-infraestrutura-deinfra-concurso-publico-concurso-publico-edital-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico-concurso-publico-edital-001-2018-quadro-funcionalconcurso-publico-edital-002-2018-magisterio/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo-processo-seletivo-edital-001-2018-geralprocesso-seletivo-edital-002-2018-magisterio/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-chapeco-processo-seletivo-processo-seletivo-edital-001-2018-magisterio/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-florianopolis-processo-seletivo-processo-seletivo-edital-004-2018-contratacao-de-substitutos/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-pinhalzinho-concurso-publico-concurso-publico-edital-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-pinhalzinho-processo-seletivo-processo-seletivo-edital-001-2018-agente-educativo-e-professor/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-prefeitura-municipal-de-sao-jose-concurso-publico-concurso-de-relotacao-e-alteracao-da-carga-horaria-edital-012-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-teste-abepro-edicao-de-fevereiro-de-2018-edital-006-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-teste-abepro-edicao-de-junho-de-2018-edital-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2018-teste-abepro-edicao-de-outubro-de-2018-edital-002-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-celesc-concurso-publico-concurso-publico-edital-001-2019/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-celesc-concurso-publico-concurso-publico-edital-002-2019/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-comissao-de-residencia-multiprofissional-em-saude-coremu-ufsc-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-consorcio-interfederativo-de-santa-catarina-cincatarina-concurso-publico-concurso-publico-edital-001-2019/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2019-consorcio-intermunicipal-de-saude-cis-amures-processo-seletivo-processo-seletivo-edital-001-2019/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-municipio-de-florianopolis-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-aguas-de-chapeco-concurso-publico/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-prefeitura-municipal-de-balneario-camboriu-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2019-secretaria-de-estado-da-saude-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2021-fundacao-catarinense-de-educacao-especial-processo-seletivo-magisterio-e-civil/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-florianopolis-processo-seletivo-contratacao-de-substitutos/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-florianopolis-procurador-municipal-classe-inicial/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-guatambu-concurso-publico/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-pinhalzinho-concurso-publico-2021/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-tijucas-concurso-publico-2021/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-companhia-catarinense-de-aguas-e-saneamento-casan/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-companhia-integrada-de-desenvolvimento-agricola-de-santa-catarina-cidasc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-consorcio-interfederativo-santa-catarina-cincatarina/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-empresa-de-pesquisa-agropecuaria-e-extensao-rural-de-santa-catarina-epagri/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-fundacao-de-amparo-a-pesquisa-e-inovacao-do-estado-de-santa-catarina-fapesc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-aguas-de-chapeco-processo-seletivo-simplificado/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-autarquia-municipal-de-transito/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-bcprevi/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-cp-adm/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-cp-saude/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-educabc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-fundacao-cultural/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-procurador/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-biguacu-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-chapeco-concursos/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-concordia-concurso-publico-educacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-concordia-concurso-publico-executivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-criciuma/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-florianopolis-processo-seletivo-simplificado/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-florianopolis-substitutos-ano-letivo-2023/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-pinhalzinho-fmec/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-pinhalzinho-processo-seletivo-educacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-pinhalzinho/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-carlos-executivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-carlos-fcsc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose-2-relotacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose-processo-seletivo-ano-letivo-2023/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose-processo-seletivo-sme/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-sao-jose/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-videira-edital-026/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-videira-magisterio/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2022-universidade-do-estado-de-santa-catarina-udesc-concurso-publico/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-camara-municipal-de-sao-carlos/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-camara-municipal-de-videira/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-centrais-de-abastecimento-do-estado-de-santa-catarina-ceasa-sc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-concurso-publico-companhia-aguas-de-joinville/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2023-concurso-publico-prefeitura-municipal-de-chapeco/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-conselho-regional-de-enfermagem-de-santa-catarina-coren-sc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-fundacao-catarinense-de-educacao-especial/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-guarda-municipal-de-sao-jose/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-balneario-camboriu-emasa/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-balneario-camboriu-processo-seletivo-educa/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-caxambu-do-sul-concurso-publico/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-caxambu-do-sul-processo-seletivo/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-concordia/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-cunha-pora-concurso-edital-2/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-cunha-pora/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-autarquia-de-melhoramentos-da-capital-comcap/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis-monitor-escolar/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-florianopolis/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-paraiso-do-tocantins/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-pinhalzinho/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-sao-jose-processo-seletivo-publico-emergencial/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2024-companhia-integrada-de-desenvolvimento-agricola-de-santa-catarina-cidasc/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2024-consorcio-interfederativo-santa-catarina-cincatarina/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-cacador/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 2
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-chapeco/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-concordia-ps-educacao/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-concordia-ps-saude-2/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-concordia-ps-saude/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-mafra/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 2
+  },
+  "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-pinhalzinho/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/cimcatarina-consorcio-intermunicipal-catarinense-processo-seletivo-simplificado-edital-001-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/concurso-de-relotacao-e-alteracao-de-sj/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/concurso-publico-2022-prefeitura-municipal-de-balneario-camboriu-meio-ambiente/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/cp-2024-prefeitura-municipal-de-concordia/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 1
+  },
+  "https://fepese.org.br/concurso/jucesc-junta-comercial-do-estado-de-santa-catarina-concurso-publico-edital-006-jucesc-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/processo-seletivo-2022-prefeitura-municipal-de-chapeco/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/processo-seletivo-para-residencias-multiprofissionais-e-uniprofissionais-em-saude-coremu-edital-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/processos-seletivos-bc-editais-01-2012-e-05-2012/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/residencia-integrada-multiprofissional-em-sauderesidencia-multiprofissional-em-saude-da-familiaprocesso-seletivo-edital-001-2018/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  },
+  "https://fepese.org.br/concurso/sanefrai-autarquia-municipal-de-saneamento-de-fraiburgo-processo-seletivo-edital-005-2017/": {
+   "lido_em": "2026-10-17",
+   "cadernos": 0
+  }
+ }
+}

@@ -6,7 +6,7 @@
 
 Complementar é toda prova de uma banca do alvo (a FEPESE) que **não** é do meu cargo no meu estado. Ela serve para entender o estilo da banca — e **nunca** entra na incidência da Polícia Penal SC. Os dois números vivem em linhas separadas e jamais são somados (regra inviolável 1): a incidência do alvo continua sendo só 2013 e 2019, e adicionar prova complementar não muda nenhum número dela.
 
-No acervo de hoje: **183 provas complementares**, 7385 questões. Delas, **22** passam na validação inteira (extração sem defeito e gabarito definitivo), **158** servem para classificar mas ficam fora dos padrões de cobrança, e **3** são recusadas.
+No acervo de hoje: **216 provas complementares**, 8839 questões. Delas, **39** passam na validação inteira (extração sem defeito e gabarito definitivo), **173** servem para classificar mas ficam fora dos padrões de cobrança, e **4** são recusadas.
 
 ## Onde isto está
 
@@ -16,7 +16,7 @@ O levantamento já virou acervo (Etapa 3B): **172 provas** estão aceitas no `da
 
 Entra a prova que tem **ao menos uma matéria do edital de 2019** pelo nome no caderno e que passa na validação mínima. Matéria que não está no edital de agora (Noções de Informática, Direito Administrativo, Temas de Educação) **não serve de motivo** para a prova entrar. A decisão de cada prova, com a data de inclusão e o hash, fica em `data/acervo_complementar.json`, gravado por `radar complementar --aplicar`.
 
-Hoje: **172 provas no acervo**, de 183.
+Hoje: **197 provas no acervo**, de 216.
 
 ## O que o acervo complementar tem de cada matéria do meu edital
 
@@ -24,19 +24,19 @@ Duas colunas, **que nunca se somam**: *pelo nome* é o que o caderno chama com o
 
 | Matéria | Pelo nome | Provas | Por termo 🟡 | Provas |
 |---|---|---|---|---|
-| Língua Portuguesa | 1506 | 175 | 8 | 5 |
-| Raciocínio Lógico | 300 | 60 | 2 | 2 |
-| Sociologia Aplicada | 0 | 0 | 34 | 30 |
-| Direitos Humanos | 20 | 2 | 36 | 24 |
-| Direito Constitucional | 20 | 2 | 57 | 40 |
-| Administração Pública | 0 | 0 | 58 | 25 |
-| Direito Penal | 4 | 2 | 3 | 2 |
-| Direito Processual Penal | 4 | 2 | 6 | 5 |
+| Língua Portuguesa | 1694 | 196 | 21 | 14 |
+| Raciocínio Lógico | 357 | 70 | 3 | 3 |
+| Sociologia Aplicada | 0 | 0 | 36 | 32 |
+| Direitos Humanos | 20 | 2 | 45 | 30 |
+| Direito Constitucional | 35 | 4 | 151 | 70 |
+| Administração Pública | 0 | 0 | 150 | 52 |
+| Direito Penal | 4 | 2 | 28 | 17 |
+| Direito Processual Penal | 4 | 2 | 12 | 9 |
 | Legislação Estadual | 20 | 2 | 1 | 1 |
-| Legislação Especial | 0 | 0 | 6 | 5 |
-| Lei de Execução Penal | 0 | 0 | 0 | 0 |
-| Noções de Informática | 334 | 63 | 13 | 6 |
-| Direito Administrativo | 12 | 2 | 8 | 5 |
+| Legislação Especial | 0 | 0 | 18 | 9 |
+| Lei de Execução Penal | 0 | 0 | 2 | 2 |
+| Noções de Informática | 382 | 73 | 27 | 14 |
+| Direito Administrativo | 32 | 4 | 35 | 22 |
 
 ## As provas que interessam, e o que cada uma permite
 
@@ -46,28 +46,50 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 |---|---|---|---|---|---|---|
 | 2016 | Agente de Segurança Socioeducativo (AS) | 61 (Língua Portuguesa (10); Direitos Humanos (10); Direito Constitucional (11); Direito Penal (2); Direito Processual Penal (2); Legislação Estadual (10); Noções de Informática (10); Direito Administrativo (6)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2013 | Agente de Segurança Socioeducativo | 60 (Língua Portuguesa (10); Direitos Humanos (10); Direito Constitucional (10); Direito Penal (2); Direito Processual Penal (2); Legislação Estadual (10); Noções de Informática (10); Direito Administrativo (6)) | definitivo | validada | sim, desde 2026-10-01 | — |
+| 2023 | Guarda Municipal | 37 (Língua Portuguesa (5); Raciocínio Lógico (5); Direitos Humanos (3); Direito Constitucional (4); Administração Pública (3); Direito Penal (3); Legislação Especial (9); Noções de Informática (5)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2022 | Procurador do Município (8PM) | 34 (Direito Constitucional (15); Administração Pública (5); Direito Penal (3); Direito Administrativo (11)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Guarda Municipal | 31 (Língua Portuguesa (5); Raciocínio Lógico (5); Direito Constitucional (8); Direito Penal (2); Direito Processual Penal (2); Legislação Estadual (1); Legislação Especial (2); Noções de Informática (5); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2022 | Procurador Municipal (S88) | 27 (Língua Portuguesa (10); Raciocínio Lógico (10); Direitos Humanos (1); Direito Constitucional (1); Administração Pública (4); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2024 | Advogado II | 27 (Língua Portuguesa (15); Direitos Humanos (1); Direito Constitucional (2); Administração Pública (3); Noções de Informática (5); Direito Administrativo (1)) | definitivo | validada | sim, desde 2026-10-17 | — |
 | 2024 | Administrador | 27 (Língua Portuguesa (7); Raciocínio Lógico (5); Sociologia Aplicada (2); Administração Pública (7); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Contador | 27 (Língua Portuguesa (7); Raciocínio Lógico (5); Direito Constitucional (2); Administração Pública (5); Direito Penal (1); Noções de Informática (6); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2024 | Advogado | 26 (Língua Portuguesa (15); Raciocínio Lógico (1); Direito Constitucional (4); Administração Pública (1); Noções de Informática (5)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2022 | Advogado (6S01) | 25 (Língua Portuguesa (10); Direito Constitucional (3); Administração Pública (9); Direito Administrativo (3)) | definitivo | validada | sim, desde 2026-10-17 | — |
 | 2024 | Agente de Fiscalização | 25 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (1); Administração Pública (5); Direito Administrativo (4)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Assistente Social | 25 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (2); Direito Constitucional (1); Administração Pública (3); Direito Processual Penal (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2014 | Advogado Autárquico | 24 (Língua Portuguesa (2); Direito Constitucional (6); Administração Pública (3); Direito Penal (1); Direito Processual Penal (1); Noções de Informática (1); Direito Administrativo (10)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2022 | Analista Técnico IV Função: Advogado (S02) | 24 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (1); Administração Pública (1); Direito Penal (2); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Orientador Social | 24 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (3); Administração Pública (2); Direito Processual Penal (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Psicólogo | 24 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (3); Administração Pública (2); Direito Processual Penal (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2010 | Assessor Jurídico | 23 (Língua Portuguesa (9); Direito Constitucional (1); Administração Pública (6); Direito Penal (1); Noções de Informática (2); Direito Administrativo (4)) | definitivo | validada | sim, desde 2026-10-17 | — |
 | 2024 | Analista de Gestão Pública | 23 (Língua Portuguesa (10); Raciocínio Lógico (5); Sociologia Aplicada (2); Direito Constitucional (1); Administração Pública (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2024 | Procurador Municipal | 23 (Língua Portuguesa (10); Raciocínio Lógico (5); Sociologia Aplicada (1); Direitos Humanos (1); Direito Constitucional (1); Administração Pública (4); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2022 | Procurador Municipal (S26) | 22 (Língua Portuguesa (5); Direitos Humanos (1); Direito Constitucional (3); Administração Pública (2); Direito Penal (5); Direito Processual Penal (2); Legislação Especial (1); Lei de Execução Penal (1); Noções de Informática (2)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2024 | Analista Técnico IV - Função Advogado | 22 (Língua Portuguesa (10); Direito Constitucional (3); Administração Pública (3); Direito Penal (1); Noções de Informática (5)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2024 | Procurador | 22 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (2); Administração Pública (2); Direito Penal (1); Direito Processual Penal (1); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Monitor | 22 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (1); Administração Pública (2); Legislação Especial (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Profissional de Educação Física | 22 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (1); Administração Pública (2); Direito Processual Penal (1); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Agente de Fiscalização de Vigilância Sanitária | 21 (Língua Portuguesa (10); Raciocínio Lógico (5); Sociologia Aplicada (1); Direito Constitucional (1); Administração Pública (3); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Cuidador | 21 (Língua Portuguesa (7); Raciocínio Lógico (5); Direitos Humanos (1); Administração Pública (2); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2012 | Advogado Fundacional | 20 (Direito Constitucional (6); Administração Pública (7); Direito Penal (1); Direito Processual Penal (2); Direito Administrativo (4)) | definitivo | validada | não | — |
+| 2023 | Advogado(a) (1S1) | 20 (Língua Portuguesa (10); Sociologia Aplicada (1); Direito Constitucional (3); Administração Pública (1); Noções de Informática (5)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2024 | Advogado do CREAS | 20 (Língua Portuguesa (10); Raciocínio Lógico (5); Direitos Humanos (2); Direito Constitucional (1); Administração Pública (2)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Procurador do Município | 20 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (3); Administração Pública (1); Legislação Especial (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Intérprete de Libras | 20 (Língua Portuguesa (7); Raciocínio Lógico (5); Administração Pública (2); Noções de Informática (6)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2021 | Procurador do Município (1S14) | 19 (Língua Portuguesa (5); Raciocínio Lógico (5); Direito Constitucional (2); Direito Penal (1); Noções de Informática (5); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Agente Administrativo | 19 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (3); Noções de Informática (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Assistente Administrativo | 19 (Língua Portuguesa (10); Administração Pública (4); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Técnico em Informática | 19 (Língua Portuguesa (10); Raciocínio Lógico (5); Noções de Informática (4)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2013 | ADVOGADO AUTÁRQUICO | 18 (Língua Portuguesa (3); Direito Constitucional (8); Administração Pública (5); Direito Penal (1); Direito Administrativo (1)) | definitivo | validada | não | — |
+| 2013 | Analista Jurídico | 18 (Língua Portuguesa (1); Direito Constitucional (8); Administração Pública (4); Direito Penal (1); Noções de Informática (3); Direito Administrativo (1)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2017 | Advogado(a) (S01) | 18 (Língua Portuguesa (10); Direito Constitucional (1); Administração Pública (3); Direito Penal (2); Noções de Informática (1); Direito Administrativo (1)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2021 | Advogado (S01) | 18 (Língua Portuguesa (10); Direito Constitucional (4); Administração Pública (2); Direito Administrativo (2)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Professor de Anos Finais - Língua Portuguesa/EJA | 18 (Língua Portuguesa (12); Sociologia Aplicada (1); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Auditor Fiscal Tributário | 18 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (1); Administração Pública (1); Direito Administrativo (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Contador | 18 (Língua Portuguesa (10); Raciocínio Lógico (5); Administração Pública (3)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Monitor | 18 (Língua Portuguesa (10); Raciocínio Lógico (5); Noções de Informática (3)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Professor de Anos Finais - Ensino Religioso | 18 (Língua Portuguesa (10); Sociologia Aplicada (2); Direitos Humanos (1); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2019 | Analista Técnico IV / Advogado (C01) | 17 (Língua Portuguesa (10); Raciocínio Lógico (5); Direito Constitucional (2)) | definitivo | validada | sim, desde 2026-10-17 | — |
 | 2024 | Professor de Anos Finais - Língua Portuguesa | 17 (Língua Portuguesa (12); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Professor de Anos Finais - Língua Portuguesa | 17 (Língua Portuguesa (12); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Analista de Informática | 17 (Língua Portuguesa (10); Raciocínio Lógico (5); Noções de Informática (2)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -100,6 +122,9 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2024 | Psicólogo | 16 (Língua Portuguesa (10); Direito Constitucional (1); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Psicólogo | 16 (Língua Portuguesa (10); Raciocínio Lógico (5); Direitos Humanos (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Terapeuta Ocupacional | 16 (Língua Portuguesa (10); Raciocínio Lógico (5); Direitos Humanos (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2010 | ADVOGADO | 15 (Direito Constitucional (5); Administração Pública (6); Legislação Especial (1); Noções de Informática (3)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2013 | Procurador Autárquico | 15 (Língua Portuguesa (1); Direito Constitucional (4); Administração Pública (4); Noções de Informática (5); Direito Administrativo (1)) | definitivo | recusada | não | 39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 5) |
+| 2021 | Advogado (1S01) | 15 (Língua Portuguesa (5); Direito Constitucional (4); Direito Penal (1); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Professor de Ensino Religioso | 15 (Língua Portuguesa (5); Raciocínio Lógico (5); Direitos Humanos (3); Direito Constitucional (2)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Arte Educador (Dança) | 15 (Língua Portuguesa (10); Raciocínio Lógico (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Assistente Social | 15 (Língua Portuguesa (10); Raciocínio Lógico (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -139,6 +164,8 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2024 | Professor de Sala de Informática Pedagógica | 15 (Língua Portuguesa (10); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Supervisor Escolar | 15 (Língua Portuguesa (10); Noções de Informática (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Técnico em Radiologia | 15 (Língua Portuguesa (10); Noções de Informática (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2022 | Advogado (S02) | 14 (Língua Portuguesa (10); Direito Constitucional (2); Administração Pública (1); Noções de Informática (1)) | definitivo | validada | sim, desde 2026-10-17 | — |
+| 2023 | Analista Técnico Jurídico II (S04) | 14 (Língua Portuguesa (1); Raciocínio Lógico (7); Direito Constitucional (2); Administração Pública (4)) | definitivo | validada | sim, desde 2026-10-17 | — |
 | 2023 | Monitor Escolar (ME) | 13 (Língua Portuguesa (10); Direitos Humanos (1); Direito Constitucional (2)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Monitor Escolar III (Informática) | 13 (Língua Portuguesa (5); Raciocínio Lógico (5); Legislação Especial (1); Noções de Informática (2)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Professor de Língua Portuguesa | 12 (Língua Portuguesa (6); Raciocínio Lógico (5); Direito Constitucional (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -165,6 +192,8 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2023 | Professor de Matemática | 11 (Língua Portuguesa (5); Raciocínio Lógico (5); Direito Constitucional (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Psicólogo Educacional | 11 (Língua Portuguesa (5); Raciocínio Lógico (5); Direito Constitucional (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Professor de Ensino Religioso | 11 (Língua Portuguesa (5); Sociologia Aplicada (1); Direitos Humanos (2); Direito Constitucional (3)) | definitivo | validada | sim, desde 2026-10-01 | — |
+| 2011 | Advogado | 10 (Língua Portuguesa (1); Direito Constitucional (6); Administração Pública (1); Noções de Informática (1); Direito Administrativo (1)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2014 | Analista Portuário - Jurídica (S12) | 10 (Língua Portuguesa (1); Direito Constitucional (3); Administração Pública (4); Lei de Execução Penal (1); Direito Administrativo (1)) | definitivo | validada | não | — |
 | 2023 | Orientador Educacional (OE) | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Professor Auxiliar Intérprete Educacional (PA6) | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Professor Auxiliar de Atividades de Ciências (PA1) | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -186,6 +215,7 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2023 | Professor de Português (P16) | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Professor de Português e Inglês (P17) | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Supervisor Escolar (SE) | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2023 | Advogado (SS01) | 10 (Língua Portuguesa (5); Raciocínio Lógico (5)) | provisório | só para classificar | sim, desde 2026-10-17 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Agente de Serviços Operacionais | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Agente de Serviços Operacionais | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Artífice | 10 (Língua Portuguesa (10)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
@@ -200,9 +230,12 @@ A validação é a mínima da seção 5 do pedido, feita **sem reler o PDF**: nu
 | 2025 | Gari de Limpeza Pública - 07/09/2025 | 9 (Língua Portuguesa (8); Administração Pública (1)) | provisório | recusada | não | o mesmo PDF já está no acervo em http://2025seletivocomcap.fepese.org.br/?go=download&path=9&inline=1&arquivo=prova_gari_limpeza_publica.pdf |
 | 2025 | Motorista - 07/09/2025 | 9 (Língua Portuguesa (8); Administração Pública (1)) | provisório | recusada | não | o mesmo PDF já está no acervo em http://2025seletivocomcap.fepese.org.br/?go=download&path=9&inline=1&arquivo=prova_motorista.pdf |
 | 2024 | Agente Social | 8 (Língua Portuguesa (5); Sociologia Aplicada (2); Direito Constitucional (1)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2016 | Procurador (1S10) | 7 (Língua Portuguesa (2); Administração Pública (2); Direito Penal (1); Direito Administrativo (2)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
+| 2010 | Guarda Patrimonial | 6 (Língua Portuguesa (5); Legislação Especial (1)) | definitivo | validada | sim, desde 2026-10-17 | — |
 | 2024 | Professor Anos Iniciais (1° ao 5° ano do Ensino fundamental) - 20h | 6 (Língua Portuguesa (6)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Especialista em Educação: Orientador Educacional | 6 (Língua Portuguesa (5); Direitos Humanos (1)) | definitivo | validada | sim, desde 2026-10-01 | — |
 | 2024 | Professor de Educação Física | 6 (Língua Portuguesa (5); Sociologia Aplicada (1)) | definitivo | validada | sim, desde 2026-10-01 | — |
+| 2010 | GUARDA MUNICIPAL FEMININO DE 3� CLASSE | 5 (Direito Constitucional (2); Noções de Informática (3)) | provisório | só para classificar | não | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Fiscal de Posturas (FP) | 5 (Língua Portuguesa (5)) | provisório | só para classificar | sim, desde 2026-10-01 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2023 | Monitor Escolar I (PMUTE) | 5 (Língua Portuguesa (5)) | provisório | só para classificar | sim, desde 2026-10-04 | gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa |
 | 2024 | Especialista em Educação: Administrador Escolar | 5 (Língua Portuguesa (5)) | definitivo | validada | sim, desde 2026-10-01 | — |
@@ -234,19 +267,19 @@ Respondidas **só com o que o acervo tem**. "Não há prova com LEP no acervo" �
 
 **1. Quais matérias da Polícia Penal têm boa quantidade de provas FEPESE complementares?**
 
-Pelo nome da matéria no caderno, da maior para a menor, em ocorrências (a mesma questão em cadernos de vários cargos conta em cada um; a Incidência conta a questão distinta): Língua Portuguesa (1506 em 175 provas); Noções de Informática (334 em 63 provas); Raciocínio Lógico (300 em 60 provas); Direitos Humanos (20 em 2 provas); Direito Constitucional (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas).
+Pelo nome da matéria no caderno, da maior para a menor, em ocorrências (a mesma questão em cadernos de vários cargos conta em cada um; a Incidência conta a questão distinta): Língua Portuguesa (1694 em 196 provas); Noções de Informática (382 em 73 provas); Raciocínio Lógico (357 em 70 provas); Direito Constitucional (35 em 4 provas); Direito Administrativo (32 em 4 provas); Direitos Humanos (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas).
 
 **2. Quais têm pouco ou nenhum material complementar?**
 
-Sem nada no acervo: Lei de Execução Penal. Só com indício por termo, a confirmar na classificação: Sociologia Aplicada (34); Administração Pública (58); Legislação Especial (6).
+Sem nada no acervo: nenhuma. Só com indício por termo, a confirmar na classificação: Sociologia Aplicada (36); Administração Pública (150); Legislação Especial (18); Lei de Execução Penal (2).
 
 **3. Existem provas FEPESE anteriores com LEP?**
 
-Nenhuma questão de Lei de Execução Penal no acervo complementar — nem pelo nome da matéria, nem por termo no texto. Isso diz o que o ACERVO tem, e não o que a FEPESE já cobrou: Não há evidência suficiente no acervo para afirmar isso.
+Lei de Execução Penal: 2 indício(s) por termo em 2 provas. Depois da classificação, questão a questão, do acervo aceito: 0 questão(ões) distinta(s) nesta matéria.
 
 **4. Existem provas FEPESE com Sociologia Aplicada?**
 
-Sociologia Aplicada: 34 indício(s) por termo em 30 provas. Depois da classificação, questão a questão, do acervo aceito: 0 questão(ões) distinta(s) nesta matéria.
+Sociologia Aplicada: 36 indício(s) por termo em 32 provas. Depois da classificação, questão a questão, do acervo aceito: 0 questão(ões) distinta(s) nesta matéria.
 
 **5. Existem provas FEPESE com legislação estadual específica do sistema prisional de SC?**
 
@@ -254,4 +287,4 @@ Legislação Estadual: 20 questões · 2 provas pelo nome da matéria · 1 indí
 
 **6. Quais outras matérias têm acervo suficiente para servir de reforço?**
 
-Com prova validada (extração inteira e gabarito definitivo): Língua Portuguesa (130 em 22 provas); Noções de Informática (30 em 4 provas); Direitos Humanos (20 em 2 provas); Direito Constitucional (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas). As demais dependem de você aprovar a prova e de ela passar na validação.
+Com prova validada (extração inteira e gabarito definitivo): Língua Portuguesa (243 em 34 provas); Noções de Informática (58 em 10 provas); Raciocínio Lógico (17 em 3 provas); Direito Constitucional (20 em 2 provas); Direito Administrativo (12 em 2 provas); Direitos Humanos (20 em 2 provas); Legislação Estadual (20 em 2 provas); Direito Penal (4 em 2 provas); Direito Processual Penal (4 em 2 provas). As demais dependem de você aprovar a prova e de ela passar na validação.

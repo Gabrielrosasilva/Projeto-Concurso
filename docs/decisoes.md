@@ -5724,3 +5724,47 @@ viraram estudo extra "Onde: Radar". Copia antes em
        pedido de 17/10: a FEPESE ja tem bastante). E o texto de leitura de
        Portugues fica colado na ultima alternativa em varios cadernos: sem
        classificacao, ele nunca chega ao treino.
+
+     **O que aconteceu na primeira leitura pelo conteudo (17/10, a noite):**
+     o firewall da FEPESE bloqueou os hotsites (`*.fepese.org.br`
+     redireciona para uma busca "[acesso bloqueado] regra de url") depois de
+     uns 1.000 pedidos; o site principal continuou respondendo. A rodada leu
+     418 concursos: 32 com caderno de cargo com Direito, 35 cadernos (quase
+     todos de Advogado e Procurador, mais as Guardas de Sao Jose 2023 e de
+     Balneario Camboriu 2010), e 760 falhas. A PC SC 2017 (`ssp.fepese.org.br`)
+     saiu do ar; a Policia Cientifica 2022 e o IGP 2021 ficaram atras do
+     bloqueio, sem ler. Daqui em diante:
+     - **5 hotsites seguidos sem resposta param a rodada**
+       (`servico.provas.SEGUIDOS_SEM_RESPOSTA`), com o aviso "o site pode ter
+       bloqueado o acesso; espere dias antes de tentar de novo";
+     - **a leitura pelo conteudo vai devagar**: `--limite 20` por dia, e so
+       depois de alguns dias sem bloqueio. O que nao respondeu nao esta em
+       `data/acervo_por_conteudo.json` e volta sozinho na proxima rodada.
+     Dos 33 cadernos novos lidos (1.454 questoes), 25 provas entraram no
+     acervo complementar pela validacao de sempre (`radar complementar
+     --aplicar`): ele foi de 172 para 197 provas aceitas.
+
+     **A classificacao das provas novas (17/10, a noite)**, pelo Claude Code
+     (claude-opus-5-5), por conferir:
+     - **FEPESE, bloco generico** ("Conhecimentos Especificos" dos cadernos de
+       Advogado, Procurador e Guarda): 276 pedidas, 52 classificadas; as 224
+       outras sao conteudo do cargo daquele concurso (Civil, Tributario,
+       licitacao, lei municipal) e ficam sem linha;
+     - **FEPESE, pelo nome da materia**: 35, 24 classificadas;
+     - **outras bancas (NC-UFPR e Selecon), so Direito**: 145, 88
+       classificadas. As 7 de LEP da SEJUSP/MG estavam no bloco de Direitos
+       Humanos e no de Legislacao Especial da capa, e o pedido nao deixa
+       trocar de materia dentro do edital: a faixa da prova no config foi
+       corrigida lendo as questoes (37 a 40, 44, 54 e 55 sao LEP), o caderno
+       relido, e as 7 classificadas na LEP. As pendentes cobram tema que o
+       programa de 2019 nao lista (crimes contra o patrimonio, hediondos,
+       recursos, competencia) ou lei de Minas Gerais;
+     - **a arvore foi de 438 para 561 nos**: os subassuntos e artigos que as
+       classificacoes propuseram (seis assuntos novos debaixo de Direito
+       Administrativo, que e materia fora do edital), todos com origem
+       "classificacao".
+     No banco de 17/10, o treino tem, livres da reserva de 07/11, da FEPESE
+     e de outras bancas: Constitucional 65 e 14, Penal 11 e 16, Processo
+     Penal 13 e 7, Legislacao Especial 21 e 14, Direitos Humanos 32 e 11, LEP
+     2 e 7. Nas faixas de 18/10 a 07/11 aparecem 59 "Gerar questao real" e
+     59 "Gerar questoes outras bancas".

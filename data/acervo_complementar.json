@@ -129,6 +129,63 @@
    "incluida_em": "2026-10-01"
   },
   {
+   "prova_url": "https://2024mafra.fepese.org.br/?go=download&path=2&inline=1&arquivo=S02.pdf",
+   "cargo": "Advogado",
+   "ano": 2024,
+   "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-mafra/",
+   "arquivo": "S02.pdf",
+   "sha256": "47b1d57df2f7526ff65b1e8d55d0707b1e54fcef2c667d3394d11f70d89fcdee",
+   "questoes": 50,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2024mafra.fepese.org.br/?go=download&path=2&inline=1&arquivo=S03.pdf",
+   "cargo": "Advogado II",
+   "ano": 2024,
+   "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-mafra/",
+   "arquivo": "S03.pdf",
+   "sha256": "87bffeebba615a39bfee6b0e853ae1f3dabfd1d8f11aad7605241dfe9f51a057",
+   "questoes": 50,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2024concursocacador.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S01.pdf",
+   "cargo": "Advogado do CREAS",
+   "ano": 2024,
+   "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-cacador/",
+   "arquivo": "1S01.pdf",
+   "sha256": "2510411cdb5e692913a4ed77a37cbf3f59530916da764d4750a46656ddc6e9ea",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
    "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AM1.pdf",
    "cargo": "Agente Administrativo",
    "ano": 2024,
@@ -238,6 +295,25 @@
    "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
    "incluida_em": "2026-10-04"
+  },
+  {
+   "prova_url": "https://2024cincatarina.fepese.org.br/?go=download&path=2&inline=1&arquivo=AT41.pdf",
+   "cargo": "Analista Técnico IV - Função Advogado",
+   "ano": 2024,
+   "concurso_url": "https://fepese.org.br/concurso/2024-consorcio-interfederativo-santa-catarina-cincatarina/",
+   "arquivo": "AT41.pdf",
+   "sha256": "b316b2eeac6ca9117267094e745e61bbc4bcfafbdae84ccb01a7544c7754ee95",
+   "questoes": 40,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
   },
   {
    "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS03.pdf",
@@ -1149,6 +1225,44 @@
    "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
    "incluida_em": "2026-10-01"
+  },
+  {
+   "prova_url": "https://2024concursoconcordia.fepese.org.br/?go=download&path=2&inline=1&arquivo=1VS07.pdf",
+   "cargo": "Procurador",
+   "ano": 2024,
+   "concurso_url": "https://fepese.org.br/concurso/cp-2024-prefeitura-municipal-de-concordia/",
+   "arquivo": "1VS07.pdf",
+   "sha256": "cf6ef343791349f39e6836942aa5ddfc1d4cbcdaeb32ee7cefba357574055048",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2024concursocacador.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S20.pdf",
+   "cargo": "Procurador Municipal",
+   "ano": 2024,
+   "concurso_url": "https://fepese.org.br/concurso/2024-prefeitura-municipal-de-cacador/",
+   "arquivo": "1S20.pdf",
+   "sha256": "cddf6a18ec17107d25ea6ed42447fa27f2ffb462bcc18abd572dabbfa6743b01",
+   "questoes": 40,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
   },
   {
    "prova_url": "https://2024admbrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS13.pdf",
@@ -2481,6 +2595,62 @@
    "incluida_em": "2026-10-04"
   },
   {
+   "prova_url": "https://2023caxambusulps.fepese.org.br/?go=download&path=2&inline=1&arquivo=SS01.pdf",
+   "cargo": "Advogado (SS01)",
+   "ano": 2023,
+   "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-caxambu-do-sul-processo-seletivo/",
+   "arquivo": "SS01.pdf",
+   "sha256": "a0ead470296f2c7470cb8f51e1a83556210dbc23fb9e5c2ce3c1600cfa781400",
+   "questoes": 25,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://aguasjoinville.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S1.pdf",
+   "cargo": "Advogado(a) (1S1)",
+   "ano": 2023,
+   "concurso_url": "https://fepese.org.br/concurso/2023-concurso-publico-companhia-aguas-de-joinville/",
+   "arquivo": "1S1.pdf",
+   "sha256": "901d0efce334ff8abbade509c21f83302f38158a4f713e1c810a57367be959a5",
+   "questoes": 45,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://paraisotocantins.fepese.org.br/?go=download&path=2&inline=1&arquivo=S04.pdf",
+   "cargo": "Analista Técnico Jurídico II (S04)",
+   "ano": 2023,
+   "concurso_url": "https://fepese.org.br/concurso/2023-prefeitura-municipal-de-paraiso-do-tocantins/",
+   "arquivo": "S04.pdf",
+   "sha256": "c68b827a2aa8dd251c715eed67c99129d215f76260abc2addee7650ba8348967",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
    "prova_url": "https://2023educabrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
    "cargo": "Assistente Social Educacional",
    "ano": 2023,
@@ -2553,6 +2723,26 @@
    "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
    "entra_nos_padroes": false,
    "incluida_em": "2026-10-01"
+  },
+  {
+   "prova_url": "https://2023gmsj.fepese.org.br/?go=download&path=2&inline=1&arquivo=GM.pdf",
+   "cargo": "Guarda Municipal",
+   "ano": 2023,
+   "concurso_url": "https://fepese.org.br/concurso/2023-guarda-municipal-de-sao-jose/",
+   "arquivo": "GM.pdf",
+   "sha256": "2a58bd0941c4cdf56f96c47979bbd41639d747f97f260aafbb4cfbba529a56bb",
+   "questoes": 70,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico",
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
   },
   {
    "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=ME.pdf",
@@ -3364,6 +3554,212 @@
    "incluida_em": "2026-10-04"
   },
   {
+   "prova_url": "https://2022bcadm.fepese.org.br/?go=download&path=2&inline=1&arquivo=6S01.pdf",
+   "cargo": "Advogado (6S01)",
+   "ano": 2022,
+   "concurso_url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-cp-adm/",
+   "arquivo": "6S01.pdf",
+   "sha256": "c8c3507f1fea17a1f34210e0bdcdae1ba0cc5b0a6a0bd032d103d13b354b941d",
+   "questoes": 40,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2022casan.fepese.org.br/?go=download&path=2&inline=1&arquivo=S02.pdf",
+   "cargo": "Advogado (S02)",
+   "ano": 2022,
+   "concurso_url": "https://fepese.org.br/concurso/2022-companhia-catarinense-de-aguas-e-saneamento-casan/",
+   "arquivo": "S02.pdf",
+   "sha256": "3634c0609f4f2853e06758ca6a140f35903a81c0ad94648f942f3f8c9de9d157",
+   "questoes": 50,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2022cincatarina.fepese.org.br/?go=download&path=2&inline=1&arquivo=S02.pdf",
+   "cargo": "Analista Técnico IV Função: Advogado (S02)",
+   "ano": 2022,
+   "concurso_url": "https://fepese.org.br/concurso/2022-consorcio-interfederativo-santa-catarina-cincatarina/",
+   "arquivo": "S02.pdf",
+   "sha256": "b8fb54a321dccdf2e03b8709ce738bbdba2ec2afd2cdd8000cdb16968aff712e",
+   "questoes": 40,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico",
+    "Noções de Informática"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://videira2022.fepese.org.br/?go=download&path=2&inline=1&arquivo=S26.pdf",
+   "cargo": "Procurador Municipal (S26)",
+   "ano": 2022,
+   "concurso_url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-videira-edital-026/",
+   "arquivo": "S26.pdf",
+   "sha256": "f9d48970c880779eb45b3646a657a95456c76cce4a5b83f59f5560f58cf71f93",
+   "questoes": 40,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2022chapeco.fepese.org.br/?go=download&path=2&inline=1&arquivo=S88.pdf",
+   "cargo": "Procurador Municipal (S88)",
+   "ano": 2022,
+   "concurso_url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-chapeco-concursos/",
+   "arquivo": "S88.pdf",
+   "sha256": "146192f63ce6c93b6f75a10003a3e80d66b38a8178e08dbb6637127658b9b51c",
+   "questoes": 60,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2022bcprocurador.fepese.org.br/?go=download&path=2&inline=1&arquivo=8PM.pdf",
+   "cargo": "Procurador do Município (8PM)",
+   "ano": 2022,
+   "concurso_url": "https://fepese.org.br/concurso/2022-prefeitura-municipal-de-balneario-camboriu-procurador/",
+   "arquivo": "8PM.pdf",
+   "sha256": "14af739e959a3313aca6785b8b800b523ec71e1dcef2ad824a7806a60f9d8e0c",
+   "questoes": 80,
+   "materias_do_edital": [
+    "Direito Constitucional",
+    "Direito Administrativo"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://pinhalzinho.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S01.pdf",
+   "cargo": "Advogado (1S01)",
+   "ano": 2021,
+   "concurso_url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-pinhalzinho-concurso-publico-2021/",
+   "arquivo": "1S01.pdf",
+   "sha256": "3a9dd198aba283c7039feabe522b4672a60a6c2eebae5d857bd04620cd45995a",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Noções de Informática"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://2021tijucas.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
+   "cargo": "Advogado (S01)",
+   "ano": 2021,
+   "concurso_url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-tijucas-concurso-publico-2021/",
+   "arquivo": "S01.pdf",
+   "sha256": "2c3ded63f8ce000092978d07d560c2595fa4236f9d7681b9f9ddb9a60e270a91",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://guatambu.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S14.pdf",
+   "cargo": "Procurador do Município (1S14)",
+   "ano": 2021,
+   "concurso_url": "https://fepese.org.br/concurso/2021-prefeitura-municipal-de-guatambu-concurso-publico/",
+   "arquivo": "1S14.pdf",
+   "sha256": "c9853f4dfa5b2b7d1e2373a9c3377a6e34992f03546c04e7168ed71ce16030bd",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico",
+    "Noções de Informática"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "http://concursocincatarina.fepese.org.br/?go=download&path=2&inline=1&arquivo=C01.pdf",
+   "cargo": "Analista Técnico IV / Advogado (C01)",
+   "ano": 2019,
+   "concurso_url": "https://fepese.org.br/concurso/2019-consorcio-interfederativo-de-santa-catarina-cincatarina-concurso-publico-concurso-publico-edital-001-2019/",
+   "arquivo": "C01.pdf",
+   "sha256": "f33beeca972c9faae5da8db28eebe55681c913cfcddf2d4b792883a061262b37",
+   "questoes": 35,
+   "materias_do_edital": [
+    "Língua Portuguesa",
+    "Raciocínio Lógico"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "http://aguasdejoinville.fepese.org.br/?go=download&path=2&arquivo=S01.pdf",
+   "cargo": "Advogado(a) (S01)",
+   "ano": 2017,
+   "concurso_url": "https://fepese.org.br/concurso/2017-companhia-aguas-de-joinville-caj-concurso-publico-edital-001-2017/",
+   "arquivo": "S01.pdf",
+   "sha256": "2b67c89dd24d9409a5866d94b73ea821adb0e6d13bba0811fbf9b340ccb504e6",
+   "questoes": 45,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
    "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
    "cargo": "Agente de Segurança Socioeducativo (AS)",
    "ano": 2016,
@@ -3389,6 +3785,73 @@
    "incluida_em": "2026-10-01"
   },
   {
+   "prova_url": "http://concursolages.fepese.org.br/?go=download&path=2&arquivo=1S10.pdf",
+   "cargo": "Procurador (1S10)",
+   "ano": 2016,
+   "concurso_url": "https://fepese.org.br/concurso/2016-prefeitura-municipal-de-lages-concurso-publico-edital-001-2016-municipio-de-lages-geralconcurso-publico-edital-002-2016-magisterio-publico-educacaoconcurso-publico-edital-003-2016-ag/",
+   "arquivo": "1S10.pdf",
+   "sha256": "bbbec3f7094d32e648c2fb2d70a69ffdaf196f7c6ee9e1c7528f0a3bb14b650c",
+   "questoes": 35,
+   "materias_do_edital": [],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://deinfra.fepese.org.br/?go=download&path=2&arquivo=adv_1.pdf",
+   "cargo": "Advogado Autárquico",
+   "ano": 2014,
+   "concurso_url": "https://fepese.org.br/concurso/2014-concurso-deinfra-edital-001-2014/",
+   "arquivo": "adv_1.pdf",
+   "sha256": "e425f5ae3d0aa862cb2f8305610c982e50a2c3192ab70f6f205ff7c52982b3ca",
+   "questoes": 60,
+   "materias_do_edital": [
+    "Direito Constitucional",
+    "Direito Administrativo"
+   ],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "gabarito provisório: serve para classificar, mas fica fora dos padrões de cobrança, que se medem sobre a letra certa",
+   "entra_nos_padroes": false,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "https://scpar.fepese.org.br/?go=download&path=2&arquivo=S12.pdf",
+   "cargo": "Analista Portuário - Jurídica (S12)",
+   "ano": 2014,
+   "concurso_url": "https://fepese.org.br/concurso/2014-concurso-publico-do-scpar-porto-de-imbituba-s-a-edital-001-2014/",
+   "arquivo": "S12.pdf",
+   "sha256": "b1da1c5cd036c65e748d3637e7d38454dd492b966b45f780e0763e1eaf105ca0",
+   "questoes": 40,
+   "materias_do_edital": [],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://iprev.fepese.org.br/?go=download&path=2&arquivo=AA.pdf",
+   "cargo": "ADVOGADO AUTÁRQUICO",
+   "ano": 2013,
+   "concurso_url": "https://fepese.org.br/concurso/2013-concurso-publico-iprev-edital-001-2013/",
+   "arquivo": "AA.pdf",
+   "sha256": "6930669d970f4dbb4cbe19c5a78c6443403254aad6426cb4801954494d74e842",
+   "questoes": 60,
+   "materias_do_edital": [],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
    "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
    "cargo": "Agente de Segurança Socioeducativo",
    "ano": 2013,
@@ -3412,6 +3875,142 @@
    "motivo": "",
    "entra_nos_padroes": true,
    "incluida_em": "2026-10-01"
+  },
+  {
+   "prova_url": "http://causc.fepese.org.br/?go=download&path=2&arquivo=S4.pdf",
+   "cargo": "Analista Jurídico",
+   "ano": 2013,
+   "concurso_url": "https://fepese.org.br/concurso/2013-concurso-publico-cau-edital-001-2013/",
+   "arquivo": "S4.pdf",
+   "sha256": "58f293895489f81f654ad827ba6e8a98d293376422987bc89707e1046f1a57c0",
+   "questoes": 50,
+   "materias_do_edital": [
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "http://emasa.fepese.org.br/?go=download&path=2&arquivo=S6.pdf",
+   "cargo": "Procurador Autárquico",
+   "ano": 2013,
+   "concurso_url": "https://fepese.org.br/concurso/2013-emasa-concurso-publiconivel-medio-tecnicoassistente-administrativomotoristaoperador-de-estacaotecnico-em-agrimensuratecnico-em-edificacaotecnico-de-laboratoriotecnico-em-saneamentonivel-supe/",
+   "arquivo": "S6.pdf",
+   "sha256": "f16863ecb866ed2370a0384a6bd37a4e0ada31facf82502524be920e87663224",
+   "questoes": 39,
+   "materias_do_edital": [
+    "Noções de Informática"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "39 questões extraídas, e o caderno vai até a 40: a numeração não fecha (falta 5)",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://advfatma.fepese.org.br/?go=download&path=2&arquivo=P1_Advogado_Fundacional.pdf",
+   "cargo": "Advogado Fundacional",
+   "ano": 2012,
+   "concurso_url": "https://fepese.org.br/concurso/2012-fatma-advogados/",
+   "arquivo": "P1_Advogado_Fundacional.pdf",
+   "sha256": "56d66c012866eac036643e77b170ec4997368f7b898e408421e3df0b40ee6265",
+   "questoes": 60,
+   "materias_do_edital": [],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://tijucas.fepese.org.br/?go=download&path=2&arquivo=E1S01.pdf",
+   "cargo": "Advogado",
+   "ano": 2011,
+   "concurso_url": "https://fepese.org.br/concurso/2011-prefeitura-municipal-de-tijucas-editais-001-2011-002-2011-003-2011-e-004-2011/",
+   "arquivo": "E1S01.pdf",
+   "sha256": "75c092727f7f385684bcc73bcc1eb3540551ba0e26eb0bf1b2a3089dab1d2eb3",
+   "questoes": 40,
+   "materias_do_edital": [],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://udesc.fepese.org.br/pages/arquivos/provas/S02.pdf",
+   "cargo": "ADVOGADO",
+   "ano": 2010,
+   "concurso_url": "https://fepese.org.br/concurso/2010-udesc-tecnico-universitario-edital-001-2009/",
+   "arquivo": "S02.pdf",
+   "sha256": "0be4883840d0a567dc3f4110f430ca1bee0389b78f49c0fb3b65f3218bffa985",
+   "questoes": 50,
+   "materias_do_edital": [],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://camarabalneario.fepese.org.br/?go=download&path=2&arquivo=S3.pdf",
+   "cargo": "Assessor Jurídico",
+   "ano": 2010,
+   "concurso_url": "https://fepese.org.br/concurso/2010-balneario-camboriu-camara-de-vereadores-edital-no-01-2010/",
+   "arquivo": "S3.pdf",
+   "sha256": "02ab49ca734f951adcc452b25000465262ec825e03f2c55d28b5ce0d4c978c43",
+   "questoes": 40,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
+  },
+  {
+   "prova_url": "http://gmpmbc.fepese.org.br/?go=download&path=2&arquivo=GM.pdf",
+   "cargo": "GUARDA MUNICIPAL FEMININO DE 3� CLASSE",
+   "ano": 2010,
+   "concurso_url": "https://fepese.org.br/concurso/2010-pmbc-guarda-municipal-edital-no-001-2010/",
+   "arquivo": "GM.pdf",
+   "sha256": "b6c63d4567b263d96feb27292f3899af239e1fbf1fe968fb19030cbd4bfb5a7f",
+   "questoes": 40,
+   "materias_do_edital": [],
+   "gabarito": "provisório",
+   "quadro_do_edital": "não lido",
+   "aceita": false,
+   "motivo": "nenhuma matéria do edital de 2019 neste caderno",
+   "entra_nos_padroes": false,
+   "incluida_em": null
+  },
+  {
+   "prova_url": "http://camarabalneario.fepese.org.br/?go=download&path=2&arquivo=F2.pdf",
+   "cargo": "Guarda Patrimonial",
+   "ano": 2010,
+   "concurso_url": "https://fepese.org.br/concurso/2010-balneario-camboriu-camara-de-vereadores-edital-no-01-2010/",
+   "arquivo": "F2.pdf",
+   "sha256": "11d97b57073a2c6f2a71e617977a3dcfe6ad6b50376c56755cd64c13dd2bd4f3",
+   "questoes": 20,
+   "materias_do_edital": [
+    "Língua Portuguesa"
+   ],
+   "gabarito": "definitivo",
+   "quadro_do_edital": "não lido",
+   "aceita": true,
+   "motivo": "",
+   "entra_nos_padroes": true,
+   "incluida_em": "2026-10-17"
   }
  ]
 }

@@ -2372,3 +2372,20 @@ caminho, o leitor da IESES colava o enunciado da questao seguinte na
 alternativa d (177 de 183): consertado, e relido so nos cadernos dela, com o
 `--banca` novo. As 252 questoes de Portugues da IESES sao 41 de verdade,
 embaralhadas entre os cargos; o treino conta cada uma uma vez so.
+
+## Os tres botoes, a FEPESE pelo conteudo e as bancas novas (17/10, a noite)
+
+Voce pediu tres botoes em cada faixa - a questao real da FEPESE, a de outra
+banca e o treino da IA - e o maximo de questoes de lei de outras bancas
+(decisoes 167 e 168). Os botoes vieram com a reserva do fechamento de 07/11:
+o treino nunca usa as 50 questoes que ele escolheria. A FEPESE passou a ser
+lida pelo cargo, e nao pela distancia, e na primeira leitura o firewall dela
+bloqueou os hotsites: 32 concursos com caderno de Direito entraram, o resto
+volta devagar, e o radar agora para sozinho depois de 5 hotsites sem
+resposta. Um segundo levantamento olhou 12 bancas de concurso policial: o
+NC-UFPR (Policia Civil PR 2020) e a Selecon (SEJUSP/MG 2021, Policial Penal)
+entraram pelo robo, com leitor proprio cada uma, e o Cebraspe ficou listado
+prova a prova para a proxima etapa. A FGV, o Idecan e outras so dao a mao, e
+o IBADE espera a sua decisao sobre os termos. As provas novas foram
+classificadas so no Direito, e a LEP, que nao tinha questao de outra banca,
+ganhou 7 da SEJUSP/MG.

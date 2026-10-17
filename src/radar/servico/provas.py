@@ -59,6 +59,8 @@ class ResultadoAcervo:
     gabaritos: int = 0
     editais: int = 0
     falhas: int = 0
+    #: A rodada parou porque varios hotsites seguidos nao responderam.
+    parou_sem_resposta: bool = False
 
     @property
     def documentos(self) -> int:
@@ -67,11 +69,21 @@ class ResultadoAcervo:
     def __str__(self) -> str:
         if not self.concursos:
             return "Nada novo para o acervo."
-        return (
+        texto = (
             f"{self.concursos} concurso(s) lido(s): {self.provas} prova(s), "
             f"{self.gabaritos} gabarito(s), {self.editais} edital(is)"
             + (f", {self.falhas} falha(s)" if self.falhas else "")
         )
+        if self.parou_sem_resposta:
+            texto += (f". Parou: {SEGUIDOS_SEM_RESPOSTA} concursos seguidos sem resposta "
+                      "(o site pode ter bloqueado o acesso; espere dias antes de tentar de novo)")
+        return texto
+
+
+#: Quantos hotsites seguidos sem resposta param a rodada. Em 17/10 o firewall
+#: da FEPESE bloqueou os hotsites depois de ~1.000 pedidos da leitura pelo
+#: conteudo, e a rodada seguiu batendo neles: 760 falhas, todas inuteis.
+SEGUIDOS_SEM_RESPOSTA = 5
 
 
 def _hotsite(concurso: Concurso) -> str | None:
@@ -411,11 +423,19 @@ def montar_acervo(
     ocupados = {r["caminho"]: r.get("url") for r in registros if r.get("caminho")}
     buscador = Buscador()
 
+    sem_resposta = 0
     for concurso in escolhidos:
         hotsite = _hotsite(concurso).rstrip("/")
         falhas_antes = resultado.falhas
         encontrados = _documentos_do_hotsite(concurso, hotsite, buscador, resultado)
         resultado.concursos += 1
+        # O hotsite que falhou inteiro, varias vezes seguidas, e o site que
+        # parou de responder (ou bloqueou): insistir so piora.
+        sem_resposta = sem_resposta + 1 if (resultado.falhas > falhas_antes
+                                            and not encontrados) else 0
+        if sem_resposta >= SEGUIDOS_SEM_RESPOSTA:
+            resultado.parou_sem_resposta = True
+            break
         if por_conteudo:
             encontrados = _so_os_de_direito(encontrados, termos)
             # So se marca como lido o hotsite que respondeu inteiro: o que

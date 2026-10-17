@@ -325,8 +325,21 @@ levava a questao seguinte) e relido so nela (`radar questoes --refazer
 --banca IESES`), o "Treinar com outras bancas no radar" na faixa e "(N FEPESE,
 M de outras bancas)" no Meu desempenho; a mesma questao em outro caderno e
 uma so (`outras_bancas.mesma_questao`). No dado de hoje, 41 questoes de
-Portugues da IESES (38 classificadas). Faltam as etapas B (Cebraspe), C
-(ACAFE) e D (IDIB): pendencia O.
+Portugues da IESES (38 classificadas).
+**Os tres botoes e as bancas novas (17/10, decisoes 167 e 168):** cada faixa
+de treino tem "Gerar questao real" (as reais da FEPESE do no, em toda
+materia; `servico/fepese_no_radar.py`), "Gerar questoes outras bancas" (com
+"ainda nao ha") e "Gerar treino" (as geradas). O treino com questao real da
+FEPESE nunca usa o que uma rodada que mede ainda vai usar
+(`composicao.reserva_das_que_medem`: o fechamento de 07/11 guarda 50). A
+FEPESE entra tambem pelo cargo (`radar provas --por-conteudo`; o firewall
+dela bloqueou os hotsites na primeira leitura, e o radar para depois de 5
+sem resposta: ir devagar). Outras bancas entram por lista conferida
+(`config/provas_de_outras_bancas.yml`, `radar provas --outras-bancas`), com
+leitor por banca: NC-UFPR (PC-PR 2020) e Selecon (SEJUSP/MG 2021, Policial
+Penal). Classificado so o Direito; a arvore foi a 561 nos. Faltam o
+Cebraspe (a lista esta no levantamento), a ACAFE, o IDIB e as decisoes suas
+sobre o IBADE e o que so da a mao: pendencia O.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

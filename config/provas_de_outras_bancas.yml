@@ -59,7 +59,10 @@ provas:
 # Selecon: o gabarito e um PDF a parte, e as colunas embaralham a ordem das
 # questoes. A materia sai da faixa da capa, copiada aqui em `materias`; o
 # bloco "Nocoes de Direito Constitucional e Penal" (21 a 30) foi dividido
-# lendo as questoes (21 a 25 sao de Constitucional, 26 a 30 de Penal).
+# lendo as questoes (21 a 25 sao de Constitucional, 26 a 30 de Penal). E a
+# capa poe LEP dentro de "Direitos Humanos" (37 a 40: os conselhos da LEP) e
+# de "Legislacao Especial" (44, 54 e 55: direitos, trabalho e egresso), que no
+# meu edital e materia propria: lido questao a questao em 17/10.
 - banca: Selecon
   ano: 2022
   orgao: Secretaria de Estado de Justiça e Segurança Pública de Minas Gerais (SEJUSP)
@@ -74,5 +77,10 @@ provas:
     16-20: Informática
     21-25: Direito Constitucional
     26-30: Direito Penal
-    31-40: Direitos Humanos
-    41-60: Legislação Especial
+    31-36: Direitos Humanos
+    37-40: Lei de Execução Penal
+    41-43: Legislação Especial
+    44-44: Lei de Execução Penal
+    45-53: Legislação Especial
+    54-55: Lei de Execução Penal
+    56-60: Legislação Especial

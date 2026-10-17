@@ -117,3 +117,30 @@ Pedido seu, depois da etapa A: todas as bancas que fazem ou fizeram concurso pol
 - **Access**: `https://concursos.access.org.br/informacoes/69/`, `/86/`, `/135/`.
 
 Baixado à mão, o PDF ainda precisa de um leitor do caderno daquela banca e de uma entrada no radar para PDF que não veio pelo robô (pendência O).
+
+## O Cebraspe, prova a prova (17/10)
+
+A lista exata, montada pela API pública do Cebraspe (nenhum 404 desta vez; um caderno veio cortado com HTTP 200, e por isso o download precisa conferir o tamanho). A matéria foi contada lendo o começo de cada enunciado, porque o caderno só divide em "Conhecimentos Básicos/Gerais/Específicos": a fronteira pode errar por uma ou duas questões. Todo PDF fica em `https://cdn.cebraspe.org.br/concursos/<EVENTO>/arquivos/`.
+
+**Múltipla escolha (medem):**
+
+| Evento | Órgão / cargo | Formato | Questões de Direito |
+|---|---|---|---|
+| SERES_PE_21 | **Policial Penal PE** | A–E, 60 | **43** (Administrativo, Constitucional, Penal, Processo Penal, Legislação Especial, LEP, DH) |
+| PC_RJ_21_DELEGADO | Delegado PC RJ | A–E, 100 | **80** (Penal, Processo Penal, Administrativo, Constitucional) |
+| PM_RO_22 | Oficial PM RO | A–E, 100 | **60** |
+| PC_PB_21 | Agente de Investigação PC PB | A–E, 80 | **42** |
+| CBM_RO_22 | Oficial Bombeiro RO | A–E, 100 | 35 |
+| PREF_SAO_CRISTOVAO_SE_23 | Guarda Municipal | A–D, 100 | ~34 |
+| PM_SC_23_OFICIAL | Oficial PM SC | A–E, 80 | 28 |
+| PM_PA_23_CFP / CFO | Praça e Oficial PM PA | A–E, 60 | 27 e 25 |
+| PC_PE_23 | Agente PC PE | A–E, 60 | 20 |
+| POLITEC_RO_22 | Agente de Criminalística | A–E, 100 | 11 |
+| PM_TO_20_QPPM, PREF_BARRA_COQUEIROS_20_SE | Soldado PM TO, Guarda | A–E | 10 cada |
+| CBM_PA_23_CFP / CFO | Bombeiros PA | A–E, 60 | 8 cada |
+
+**Certo/Errado (só treinam, decisão 166):** DEPEN_20 (Agente Federal de Execução Penal), SERIS_AL_21 (Agente Penitenciário AL), PC_AL_21, PC_SE_21, PC_DF_20_AGENTE (o caderno básico é imagem), PC_DF_19_ESCRIVAO, PC_AL_22_DELEGADO, PM_AL_21, CBM_AL_21, POLC_AL_22, PREF_CACHOEIRO_24_GUARDA, PF_21, PRF_21.
+
+**Como o caderno se lê:** "Questão N" numa linha sozinha; alternativas "A " a "E " no começo da linha, sem parêntese; o caderno "com justificativas" traz depois de cada questão a parte `||JUSTIFICATIVAS||` (ou `JUSTIFICATIVAS`), com o item do edital — que diz a matéria — e CORRETA/INCORRETA, CERTO/ERRADO em cada alternativa; a anulada só sai no gabarito definitivo (X). O gabarito vem em fileiras: uma de números (às vezes colados: "1 23456789 1 0") e uma de letras coladas ("E CDXACBDDEE…", 20 por fileira).
+
+**Cuidado com o SERES_PE_21:** o gabarito definitivo publicado é do tipo 01, e o caderno "com justificativas" é de outra versão: em 42 das 60 a letra diverge. Para esse caderno, o gabarito seguro é a alternativa que a justificativa marca CERTO, com as anuladas do documento de alterações (18, 19 e 41).

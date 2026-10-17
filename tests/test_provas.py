@@ -600,3 +600,28 @@ def test_o_hotsite_que_caiu_nao_fica_marcado_como_lido(banco_temporario, monkeyp
     monkeypatch.setattr(servico.provas, "Buscador", BuscadorFora)
     servico.montar_acervo(limite=10, por_conteudo=True)
     assert servico.provas.carregar_lidos_por_conteudo() == {}
+
+
+def test_varios_hotsites_seguidos_sem_resposta_param_a_rodada(banco_temporario, monkeypatch):
+    """Em 17/10 o firewall da FEPESE bloqueou os hotsites e a rodada seguiu
+    batendo neles. Agora, 5 seguidos sem resposta param tudo."""
+    from radar import servico
+    from radar.db import sessao
+
+    with sessao() as s:
+        for i in range(1, 9):
+            s.add(_concurso_fepese(i))
+    pedidos = []
+
+    class BuscadorBloqueado:
+        def get(self, url):
+            pedidos.append(url)
+            raise ConnectionError("acesso bloqueado")
+
+    monkeypatch.setattr(servico.provas, "Buscador", BuscadorBloqueado)
+    resultado = servico.montar_acervo(limite=10, por_conteudo=True)
+
+    assert resultado.parou_sem_resposta
+    assert resultado.concursos == servico.provas.SEGUIDOS_SEM_RESPOSTA
+    assert len(pedidos) == 3 * servico.provas.SEGUIDOS_SEM_RESPOSTA
+    assert "Parou" in str(resultado)

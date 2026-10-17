@@ -693,6 +693,21 @@ O que falta vai nesta ordem, uma etapa por conversa.
 
 ### Depende de voce (decisoes 167 e 168)
 
+- ⚪ **Reinicie o servidor** depois do `git pull` (a tela Hoje mudou de novo);
+- ⚪ **Conferir a classificacao das provas novas** (Analises > Conferencia):
+  414 de 17/10, todas do Claude Code, e os nos que elas criaram (a arvore
+  foi de 438 para 561). Gabaritos que a leitura achou discutiveis:
+  - FEPESE 2014, Advogado Autarquico, q22 (Direito Administrativo): a
+    afirmativa 1 diz "ato vinculado" onde o certo seria "discricionario" -
+    olhar o caderno;
+  - FEPESE 2017, Advogado, q40: o gabarito conta "cargo exclusivamente em
+    comissao" como certo;
+  - SEJUSP/MG 2022 (Selecon), q43 (Lei de Drogas): a d) tambem parece certa
+    (Lei 11.343, art. 23-A, § 6º);
+  - PC-PR 2021 Delegado (NC-UFPR), q4 (Administrativo): a b) tambem parece
+    certa (STF, ADI 1.642 e 2.225);
+  - PC-PR 2021 Investigador (NC-UFPR), q13 (posse de droga): o STF (RE
+    635.659, 2024) mudou o entendimento depois da prova;
 - ⚪ **A clausula 5 do IBADE**: "nao podendo ser copiado, reproduzido,
   distribuido ou utilizado sem autorizacao expressa do IBADE". O IBADE tem o
   Agente Socioeducativo AC 2021 e o Inspetor Penitenciario ES 2023, e o robo
@@ -707,11 +722,20 @@ O que falta vai nesta ordem, uma etapa por conversa.
 
 ### As proximas etapas
 
+- 🔴 **O resto da FEPESE pelo conteudo, devagar**: o firewall dela bloqueou
+  os hotsites em 17/10 (decisao 167). Esperar alguns dias e rodar `radar
+  provas --por-conteudo --limite 20` por dia; o que nao respondeu volta
+  sozinho. A Policia Cientifica 2022 e o IGP 2021 estao entre eles; a PC SC
+  2017 saiu do ar;
 - 🔴 **As Guardas da Selecon** (Niterói 2019, Boa Vista 2019, Campo Grande
   2020, Sao Goncalo 2020, Sao Luis 2022): os links estao conferidos; falta
   baixar, ler a faixa de materias da capa de cada uma e por na lista;
-- 🔴 **B. O Cebraspe**:
-  - o coletor das provas pela API, com nova tentativa no 404 do CDN;
+- 🔴 **B. O Cebraspe**: a lista prova a prova ja esta no
+  [levantamento_de_bancas](levantamento_de_bancas.md) (13 de multipla
+  escolha, com a Policial Penal PE 2021 e o Delegado PC RJ 2021; 13 de C/E).
+  Falta:
+  - a entrada delas no `config/provas_de_outras_bancas.yml` (o download ja
+    existe), conferindo o tamanho do PDF (um veio cortado com 200);
   - o leitor do caderno de multipla escolha e o do Certo/Errado (que so
     treina), comecando pelos de seguranca publica. O C/E precisa de um
     acerto a parte: hoje o treino de outras bancas so aceita questao com
