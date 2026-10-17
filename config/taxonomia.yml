@@ -125,3 +125,12 @@ materias_fora_do_edital:
 
 sinonimos_de_materia:
   Direito Processo Penal: Direito Processual Penal
+  # O NC-UFPR (Policia Civil PR 2020, decisao 168) escreve "Nocoes de ..." e
+  # "Legislacao Penal Especial". Nenhuma prova da FEPESE usava estes nomes
+  # em 17/10: ligar nao mudou numero nenhum que ja existia.
+  Noções de Direito Penal: Direito Penal
+  Noções de Direito Processual Penal: Direito Processual Penal
+  Noções de Legislação Penal Especial: Legislação Especial
+  Legislação Penal Especial: Legislação Especial
+  Noções de Direito Administrativo: Direito Administrativo
+  Noções de Direito Constitucional: Direito Constitucional

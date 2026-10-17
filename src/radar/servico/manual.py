@@ -1021,7 +1021,8 @@ def _materia_sugerida_por_termo():
 
 def pedido_de_classificacao(materia: str | list[str] | None = None,
                             de_evidencia: str | None = None,
-                            genericos: bool = False) -> dict:
+                            genericos: bool = False,
+                            so_novas: bool = False) -> dict:
     """Um pedido por materia, com as questoes e a arvore dela.
 
     `de_evidencia` diz de onde vem a questao: `alvo` (o padrao: as 170 de
@@ -1035,6 +1036,10 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
     conferi - a conferencia e minha e nao se refaz por cima. A materia do
     caderno encontra o no pela regra dos textos antigos (igual, ou pelo
     sinonimo do config/taxonomia.yml).
+
+    `so_novas` pede so a questao sem classificacao principal nenhuma: as
+    provas novas do acervo (decisao 167), sem refazer o que ja foi
+    classificado e ainda espera a minha conferencia.
 
     `genericos` inverte a seleção no complementar: em vez das questoes cujo
     caderno declara uma materia minha, pede as de BLOCO GENERICO - o caderno
@@ -1063,6 +1068,9 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
             select(Classificacao.chave)
             .where(Classificacao.principal.is_(True))
             .where(Classificacao.conferida_em.is_not(None))))
+        if so_novas:
+            conferidas |= set(s.scalars(
+                select(Classificacao.chave).where(Classificacao.principal.is_(True))))
         consulta = (select(QuestaoDeProva)
                     .where(QuestaoDeProva.evidencia == de_evidencia)
                     .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero))

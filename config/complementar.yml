@@ -140,3 +140,37 @@ catalogo_para_edital:
     Problemas com valores e idades: Raciocínio lógico envolvendo problemas aritméticos e geométricos
     Regra de tres e proporcao: Raciocínio lógico envolvendo problemas aritméticos e geométricos
     Sequencias e padroes: Raciocínio lógico envolvendo problemas aritméticos e geométricos
+
+# O ACERVO PELO CONTEUDO (decisao 167)
+#
+# `radar provas --por-conteudo` le a pagina de provas de TODO concurso
+# encerrado da FEPESE, perto ou longe, e baixa so o caderno cujo CARGO casa
+# com um destes pedacos de nome (sem acento e sem caixa, em qualquer lugar do
+# nome: "guarda" casa "Guarda Municipal" e "Guarda Civil"). O acervo de
+# sempre escolhe pela distancia, e e por isso que a Policia Civil SC 2017 e a
+# Policia Cientifica ficaram de fora: para estudar, o que importa e o cargo
+# ter Direito, e nao onde a prova foi.
+#
+# Escreva o pedaco que identifica o cargo, e nao a materia: o nome da materia
+# so aparece dentro do caderno. "seguranca" sozinho casaria "Tecnico em
+# Seguranca do Trabalho", por isso vai "seguranca publica".
+cargos_com_direito:
+- guarda
+- policia
+- policial
+- escrivao
+- delegado
+- investigador
+- perito
+- papiloscop
+- penitenciari
+- prisional
+- socioeducativ
+- seguranca publica
+- agente de seguranca
+- procurador
+- advogad
+- juridic
+- oficial de justica
+- defensor
+- promotor

@@ -1031,6 +1031,8 @@ eles apareceram, e inventar a data seria pior que nao ter.
 radar provas --limite 20    # le os hotsites e baixa edital, prova e gabarito
                             # comeca pelo alvo principal, onde quer que ele esteja
 radar provas --abertos      # o edital de quem ainda esta em andamento
+radar provas --por-conteudo --limite 500  # toda FEPESE encerrada, so caderno de cargo com Direito
+radar provas --outras-bancas  # os cadernos de config/provas_de_outras_bancas.yml
 radar baixar-provas         # reconstroi o acervo a partir do manifesto
 radar elegibilidade         # le o edital: escolaridade, idade, CNH, teste fisico
 radar retificacoes          # acusa edital que mudou (--avisar manda no Telegram)
@@ -1062,6 +1064,7 @@ radar conteudos --semear    # poe na arvore o que o edital tem e ela nao
 radar classificar --pedido  # pede ao Claude Code a classificacao do alvo
 radar classificar --pedido --evidencia complementar --materia "Direito Penal"
 radar classificar --pedido --evidencia fora --materia "Língua Portuguesa"  # outras bancas
+radar classificar --pedido --evidencia complementar --so-novas --materia "Direito Penal"  # so as sem classificacao
 radar classificar --importar data/resposta_ia.json   # grava o que presta
 radar incidencia            # o mapa do alvo por no, com a amostra
 radar incidencia --materia "Direito Penal" --padroes
@@ -2029,6 +2032,7 @@ src/radar/
 │   ├── sabado.py     a revisao semanal, o R+7 dos diagnosticos e a comparacao
 │   ├── faixa_no_radar.py a faixa de Portugues que comeca pelas do radar
 │   ├── outras_bancas.py o treino com questoes reais de outras bancas (decisao 166)
+│   ├── fepese_no_radar.py o "Gerar questao real" da faixa, sem o reservado (decisao 167)
 │   ├── compilado.py  o simulado compilado e a divisao pelo quadro do edital
 │   ├── inicio.py     a pagina inicial
 │   └── comum.py      o pouco que mais de um assunto usa
@@ -2058,6 +2062,8 @@ src/radar/
 ├── provas_ieses.py como achar os documentos no hotsite da IESES
 ├── questoes.py     separa o caderno da FEPESE em questoes
 ├── questoes_ieses.py  o mesmo para a IESES: 4 alternativas, gabarito a parte
+├── questoes_ncufpr.py o mesmo para o NC-UFPR: a certa marcada com ► (decisao 168)
+├── questoes_selecon.py o mesmo para a Selecon: colunas fora de ordem, gabarito a parte
 ├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
 ├── assuntos.py     assunto fino pela API da Claude (a primeira parte paga)
 ├── gerador.py      escreve questao nova pela API, para treinar (a segunda)

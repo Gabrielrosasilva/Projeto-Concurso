@@ -335,6 +335,15 @@ def provas(
         False, "--revisitar",
         help="Lê de novo hotsite que já está no acervo, atrás de documento novo",
     ),
+    por_conteudo: bool = typer.Option(
+        False, "--por-conteudo",
+        help="Todo concurso encerrado da FEPESE, perto ou longe, e só o caderno "
+             "de cargo com Direito (config/complementar.yml)",
+    ),
+    outras_bancas: bool = typer.Option(
+        False, "--outras-bancas",
+        help="Os cadernos de outras bancas da lista config/provas_de_outras_bancas.yml",
+    ),
 ) -> None:
     """Monta o acervo: le os hotsites e baixa edital, prova e gabarito.
 
@@ -342,9 +351,23 @@ def provas(
     Depois vem o concurso ja encerrado perto de casa - os que tem prova
     publicada e mostram o padrao da banca na minha regiao.
 
+    --por-conteudo troca a distancia pelo cargo (decisao 167): le a pagina de
+    provas de todo concurso encerrado da FEPESE e baixa so o caderno cujo cargo
+    tem Direito (Guarda, Policia, Perito, Procurador...), e o gabarito dele. O
+    que ja foi varrido fica em data/acervo_por_conteudo.json.
+
     Os PDFs ficam em data/provas/ e NAO vao para o git. O que e versionado e o
     manifesto data/provas.json, com o sha256 de cada arquivo.
+
+    --outras-bancas baixa os cadernos da lista config/provas_de_outras_bancas.yml
+    (decisao 168), so das bancas que o radar sabe ler. Depois, `radar questoes
+    --banca <banca>` le os cadernos.
     """
+    if outras_bancas:
+        with console.status("Baixando os cadernos das outras bancas..."):
+            resultado = servico.montar_acervo_de_outras_bancas()
+        console.print(f"[green]{resultado}[/]")
+        return
     console.print(
         f"Vou ler até [bold]{limite}[/] concurso(s). Cada um custa 3 páginas "
         f"mais os PDFs, com pausa de 1,5s entre as requisições."
@@ -357,7 +380,8 @@ def provas(
 
     with console.status("Montando o acervo..."):
         resultado = servico.montar_acervo(
-            limite=limite, abertos=abertos, revisitar=revisitar
+            limite=limite, abertos=abertos, revisitar=revisitar,
+            por_conteudo=por_conteudo,
         )
 
     console.print(f"[green]{resultado}[/]")
@@ -2996,6 +3020,9 @@ def classificar(
         False, "--genericos",
         help="No complementar: as questões de bloco genérico (Conhecimentos "
              "Específicos), agrupadas pela matéria que o termo sugere"),
+    so_novas: bool = typer.Option(
+        False, "--so-novas",
+        help="Só as questões sem classificação nenhuma (as provas novas do acervo)"),
     associados: bool = typer.Option(
         False, "--associados",
         help="Com --pedido: os OUTROS conceitos que cada questão do alvo cobra "
@@ -3053,7 +3080,7 @@ def classificar(
         return
     try:
         lote = servico.manual.pedido_de_classificacao(
-            list(materia or []), evidencia, genericos=genericos)
+            list(materia or []), evidencia, genericos=genericos, so_novas=so_novas)
     except ValueError as erro:
         console.print(f"[red]{erro}[/]")
         raise typer.Exit(code=1)

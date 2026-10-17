@@ -1,0 +1,441 @@
+5
+SECRETARIA DE ESTADO DE JUSTIÇA E SEGURANÇA PÚBLICA - SEJUSP
+AGENTE DE SEGURANÇA PENITENCIÁRIO / POLICIAL PENAL
+INFORMÁTICA BÁSICA
+15. A	 respeito	 de	 um	 grupo	 formado	 por	 610	 agentes	
+penitenciários	é	verdade	que:
+-		107	agentes	são	doadores	de	sangue,	não	usam	óculos	e	
+não	nasceram	em	Minas	Gerais;
+-		55	agentes	usam	óculos,	não	são	doadores	de	sangue	e	
+não	nasceram	em	Minas	Gerais;
+-		52	agentes	nasceram	em	Minas	Gerais,	não	são	doadores	
+e	não	usam	óculos;
+-		140	agentes	são	doadores	de	sangue	e	usam	óculos;
+-		158	agentes	são	doadores	de	sangue	e	nasceram	em	Minas	
+Gerais;
+-		173	agentes	usam	óculos	e	nasceram	em	Minas	Gerais;
+-		75	agentes	não	são	doadores	de	sangue,	não	usam	óculos	
+e	não	nasceram	em	Minas	Gerais.
+Com	base	nos	dados	acima,	conclui-se	corretamente	que	a	
+soma	 dos	 algarismos	 do	 número	 de	 agentes	 penitenciários	
+doadores	de	sangue	que	usam	óculos	e	nasceram	em	Minas	
+Gerais	é	igual	a:
+A)	 10
+B)	 11
+C)	 12
+D)	 13
+16. 	No	que	diz	respeito	ao	sistema	operacional	Windows
+®
+,	
+versão	10,	instalado	no	idioma	Português	do	Brasil,	um	ícone,	
+localizado	na	Área	de	Notificação,	tem	uma	finalidade	específica.	
+O	ícone	e	a	finalidade	descrita	ao	seu	lado	são,	respectivamente:	
+A)	
+ 		e	acessar	e	ocultar	a	janela	do	Painel	de	Controle
+B)	
+ 	e	remover	tudo	que	esteja		armazenado	na	pasta
+C)	  
+ 	e	remover	o	hardware 	e	ejetar	mídia	com	segurança
+D)	
+ 		e	acessar	e	ocultar	a	janela	do	Painel	de	Controle
+17. No	que	diz	respeito	à	internet,	são	caracterizados	conceitos	
+e	recursos	a	seguir.
+I.	 Existe	 um	 termo	 que	 define	 um	 tipo	 de	 rede	 de	
+computadores	 utilizado	 para	 comunicação	 interna	 da	
+equipe	de	uma	corporação.	Ao	acessar	essa	rede,	os	
+funcionários	recebem	comunicados,	trocam	informações	
+com	outros	departamentos	e	consultam	dados	necessários	
+para	o	desempenho	de	suas	atividades.
+II.	 O	tipo	de	acesso	a	sites é	feito	por	softwares com	o	Google	
+Chrome,	o	Firefox	Mozilla	e	o	Edge.
+Nessas	condições,	o	termo	referenciado	em	I	e	o	tipo	de	
+software referenciado	em	II	são,	respectivamente:			
+A)	 intranet,	navegador
+B)	 internet,	utilitário
+C)	 intranet,	sistema	operacional
+D)	 internet,	aplicativo
+18. No	uso	dos	recursos	do	processador	de	textos	Word	do	
+pacote	 MS	 Office	 2019,	 instalado	 no	 idioma	 Português	 do	
+Brasil,	um	funcionário	da	SEJUSP	realizou	os	procedimentos	
+descritos	a	seguir,		após	a	digitação	de	um	texto,	inicialmente	
+com	alinhamento	justificado.
+I.	 Aplicou	um	triplo	clique	em	uma	posição	dentro	do	primeiro	
+parágrafo	do	texto	digitado.
+II.	 Posicionou	o	cursor	em	uma	palavra	no	segundo	parágrafo	
+e	aplicou	um	duplo	clique	nessa	palavra.
+Os	procedimentos	elaborados	pelo	funcionário	em	l	e	ll	são,	
+respectivamente:
+A)	 selecionou	o	parágrafo	inteiro;	selecionou	a	palavra	inteira
+B)	 selecionou	a	palavra	na	posição	do	cursor;	selecionou	o	
+parágrafo	inteiro
+C)	 centralizou	o	parágrafo	inteiro;	selecionou	a	palavra	inteira
+D)	 mudou	o	formato	do	parágrafo	para	duas	colunas;	excluiu	
+a	palavra	inteira
+19.		A	planilha	da	figura		abaixo	foi	criada	no	Excel	do	pacote	MS	
+Office	2019,	instalado	no	idioma	Português	do	Brasil,	tendo	sido	
+realizados	os	procedimentos:
+I.	 Nas	 células	 F7,	 F8,	 F9,	 F10	 e	 F11,	 foram	 inseridas	
+expressões	usando	uma	função	para	determinar	o	menor	
+valor	entre	as	cotações	dos		 fornecedores	indicadas	nas	
+colunas	C,	D	e	E.		
+II.	 Nas	 células	 G7,	 G8,	 G9,	 G10	 e	 G11,	foram	 inseridas	
+expressões	usando	a	função	SE	para	mostrar	o	fornecedor	
+que	venceu	a	licitação	para	o	item	considerado,	com	base	
+na	menor	cotação.	
+Nessas	condições,	as	expressões	inseridas	nas	células	G9	e	
+F11	são,	respectivamente:
+A)	 =SE(F9=C9;&C&6;SE(F9=D9;&D&6;&E&6))	e	
+=MENOR(C11:E11)
+B)	 =SE(F9=C9;$C$6;SE(F9=D9;$D$6;$E$6))			e	
+=MENOR(C11:E11)
+C)	 =SE(F9=C9;&C&6;SE(F9=D9;&D&6;&E&6))	e	
+=MINIMOA(C11:E11)
+D)	 =SE(F9=C9;$C$6;SE(F9=D9;$D$6;$E$6))			e	
+=MINIMOA(C11:E11)
+6
+SECRETARIA DE ESTADO DE JUSTIÇA E SEGURANÇA PÚBLICA - SEJUSP
+AGENTE DE SEGURANÇA PENITENCIÁRIO / POLICIAL PENAL
+26. Quincas	é	policial	penal	e	amigo	de	Vanda,	advogada	do	
+apenado	Martim,	o	qual	cumpre	pena	privativa	de	liberdade	no	
+mesmo	estabelecimento	em	que	trabalha	Quincas.	Cedendo	a	
+pedido	de	Vanda,	a	fim	de	beneficiar	Martim,	Quincas	pratica	
+indevidamente	 um	ato	de	ofício.	 Nesse	 contexto,	 é	correto	
+afirmar	que	Quincas	praticou	crime	de:
+A)	 corrupção	passiva	privilegiada
+B)	 prevaricação
+C)	 advocacia	administrativa
+D)	 tráfico	de	influência
+27. No	REsp	672.225-RS,	julgado	em	07.08.2008,	a	Sexta	
+Turma	do	Superior	Tribunal	de	Justiça	julgou	o	caso	de	uma	
+contadora,	que	recebeu	de	uma	cliente	a	quantia	de	R$	500,00	
+para	quitar	contribuições	em	atraso	junto	ao	INSS	e	protocolar	
+pedido	administrativo	para	a	concessão	de	auxílio-doença,	não	
+fazendo	nem	uma	coisa,	nem	outra.	Denunciada	por	apropriação	
+indébita	 majorada	 pelo	 Ministério	 Público,	 a	 contadora	 foi	
+absolvida	pelo	Tribunal	de	Justiça.	A	absolvição	foi	confirmada	
+pelo	STJ.	Em	seu	voto-vista,	o	Ministro	Nilson	Naves	sustentou	
+que	“as	relações	aqui	descritas	bem	podem	ser	resolvidas	na	
+esfera	cível	(...)”		(Fonte	Informativo	STJ	nº	0362)
+A	decisão	do	STJ,	tal	como	descrita,	é	amparada	no	princípio	da:
+A)	 legalidade
+B)	 culpabilidade
+C)	 insignificância
+D)	 subsidiariedade
+23.	João,	brasileiro,	66	anos	de	idade,	analfabeto,	aposentado,	
+e	seu	neto,	Rodrigo,	brasileiro,	17	anos	de	idade,	aluno	do	
+ensino	médio,	estudam	sobre	pré-candidatos	 aos	cargos	de	
+Senador	da	República	e	Deputado	Federal.	André,	brasileiro,	43	
+anos,	engenheiro,	pretende	se	candidatar	ao	cargo	de	Senador	
+e	Bernardo,	espanhol,	22	anos,	advogado,	para	o	de	Deputado	
+Federal.	Diante	disso,	no	tocante	à	capacidade	eleitoral	ativa	e	
+passiva,	é	correto	afirmar	que:	
+A)	 o	voto	para	João	é	obrigatório
+B)	 Bernardo	não	pode	se	candidatar	ao	cargo	de	Deputado	
+Federal
+C)	 Rodrigo		tem	idade	obrigatória	para	votar
+D)	 André	não	tem	condições	de	se	candidatar	ao	cargo	de	
+Senador
+24.	A	propriedade	é	direito	fundamental	e	permite	o	uso,	o	
+gozo	e	a	fruição	da	coisa	pelo	seu	titular.	Entretanto,	existem	
+hipóteses	de	limitação.	Dentre	as	assertivas	abaixo,	aquela	que	
+tem	amparo	constitucional	é:
+A)	 O	direito	de	propriedade	se	sobrepõe	aos	demais	direitos	
+constitucionais	em	observância	à	sua	função	social.
+B)	 A	requisição	de	bem	particular	não	é	ato	autoexecutável	da	
+autoridade	administrativa	competente.
+C)	 As	 glebas	 em	 que	 há	 cultura	 de	 plantas	 psicotrópicas	
+podem	ser	expropriadas	sem	direito	à	indenização.
+D)	 A	desapropriação	pressupõe	indenização	posterior.
+25.	O	detento	André	foi	processado	e	julgado	criminalmente	
+sob	a	alegação	de	ter	causado	dano	ao	patrimônio	público.	
+Durante	o	curso	 do	processo,	 o	promotor	 de	justiça	 juntou	
+aos	autos	prova	documental	da	qual	o	juízo	criminal	não	deu	
+ciência	à	defesa	antes	da	prolação	da	sentença.	Nesse	caso,	o	
+princípio	violado	foi:
+A)	 do	juiz	natural
+B)	 do	direito	de	permanecer	em	silêncio
+C)	 da	presunção	de	não	culpabilidade
+D)	 do	contraditório
+NOÇÕES DE DIREITO 
+CONSTITUCIONAL E PENAL
+22.	Antônio	teve	crédito	negado	perante	um	estabelecimento	
+comercial,	sob	a	justificativa	de	que	seu	nome	estava	inserido	
+no	Serviço	de	Proteção	ao	Crédito.	Ao	pedir	certidão,	constatou	
+que	existia	restrição	equivocadamente	atribuída	ao	seu	nome.	
+A	instituição	negou-se	a	retificar	o	seu	cadastro.	O	remédio	
+constitucional	apto	a	amparar	o	seu	direito	é:
+A)	 o habeas data
+B)	 o	mandado	de	segurança
+C)	 o habeas corpus
+D)	 a	ação	popular
+21.	Acerca	do	direito	à	vida,	previsto	na	Constituição	Federal,	
+é	correto	afirmar	que:		
+A)	 há	 vedação	 absoluta	 à	 pena	 de	 morte	 em	 nosso	
+ordenamento	jurídico
+B)	 os	crimes	culposos	contra	a	vida	são	julgados	perante	o	
+tribunal	do	júri
+C)	 a	criança	e	o	adolescente	têm	absoluta	prioridade	ao	direito	
+à	vida
+D)	 a	interrupção	do	processo	gestacional	de	fetos	anencéfalos	
+foi	proibida	pelo	Supremo	Tribunal	Federal
+28. Caíque,	comerciante,	adultera	em	sua	casa	uma	carteira	
+profissional	de	advogado,	expedida	pela	Ordem	dos	Advogados	
+do	Brasil	(OAB),	a	fim	de	visitar	seu	primo	Clóvis,	que	está	
+preso.	 Para	 tanto,	 substitui	 dados	 do	 documento	 original,	
+trocando	o	nome	ali	regularmente	grafado	pelo	seu.	Chegando	
+ao	presídio,	ao	sair	do	carro,	deixa	a	carteira	acidentalmente	
+cair	de	seu	bolso,	perdendo-a.	O	documento	é	encontrado	pelo	
+policial	penal	César	que,	a	fim	de	devolvê-lo	ao	proprietário,	
+consulta	o	número	de	inscrição	do	suposto	advogado	em	bases	
+de	dados,	descobrindo	que	aquela	inscrição	é	pertencente	a	
+outrem.	Considerando	o	caso	concreto,	é	correto	afirmar	que	
+Caíque	praticou	crime	de:
+A)	 falsificação	material	de	documento	público
+B)	 falsificação	material	de	documento	particular
+C)	 falsidade	ideológica	sobre	documento	público
+D)	 falsidade	ideológica	sobre	documento	particular
+20.	No	que	diz	respeito	ao	Powerpoint do	pacote	MS	Office	2019,	
+instalado	no	idioma	Português	do	Brasil,	duas	características	
+são	pertinentes	ao	uso	deste	software.
+I.	 Por	padrão	(default),	as	apresentações	salvas	na	opção	
+“Salvar”	 neste	 software	 no	 formato	 “Apresentação	 do	
+Powerpoint”	geram	arquivos	cujos	nomes	possuem	uma	
+extensão	específica.
+II.	 Existe	um	recurso	que	concentra	todas	as	características	 	
+da	apresentação	em	um	 slide,	tais	como	fontes,	estilos,	
+animações,	 possibilitando	 que	 o	 usuário	 herde	 essas	
+características	de	aparência	para	todos	os	 slides	da	sua	
+apresentação.
+ 
+A	extensão	e	o	nome	desse	recurso	são,	respectivamente:
+A)	 ppt;	guias		
+B)	 odp;	classificação	de	slides 
+C)	 sldx;	ajustar	à	janela	
+D)	 pptx;	slide	mestre
+7
+SECRETARIA DE ESTADO DE JUSTIÇA E SEGURANÇA PÚBLICA - SEJUSP
+AGENTE DE SEGURANÇA PENITENCIÁRIO / POLICIAL PENAL
+ DIREITOS HUMANOS E PARTICIPAÇÃO SOCIAL
+31.	“Em	pleno	século	21,	há	notícias	de	resgate	de	trabalhadores	
+que	se	sujeitam	a	trabalhos	forçados	e	condições	degradantes	
+em	razão	da	precariedade	da	situação	econômica	e	social	que	
+alcança	esse	grupo	de	trabalhadores.”	
+ (Disponível	em	https://noticias.uol.com.br/colunas/leonardo-
+sakamoto/2021/10/07/resgates-de-escravizados-ja-batem-os-de-2020-
+e-ganham-a-cara-da-pandemia.htm?cmpid=copiaecola.	Acesso	em	
+29/11/2021).	
+Nesse	passo,	os	países	signatários	da	Declaração	Universal	
+dos	Direitos	Humanos	-	Resolução	217-	A	(III),	da	Assembleia	
+Geral	das	Nações	Unidas	de	1948,	ao	permitirem	a	sujeição	do	
+ser	humano	a	trabalhos	forçados	e	condições	degradantes:	
+A)	 contrariam	 regras	 e/ou	 recomendações	 previstas	 na	
+respectiva	Declaração
+B)	 não	 contrariam	 regras	 e/ou	 recomendações	 previstas	
+na	 respectiva	 Declaração	 pela	 ausência	 da	 totalidade	
+de	 anuência	 dos	 países	 membros	 signatários	 desse	
+documento
+C)	 podem	contrariar	regras	e/ou	recomendações	previstas	
+na	 respectiva	 Declaração	 no	 caso	 de	 declaração	 de	
+guerra	envolvendo	os	países	membros	signatários	desse	
+documento
+D)	 não	contrariam	regras	e/ou	recomendações	previstas	na	
+respectiva	Declaração	 em	razão	da	vigência	temporária	
+dessa	Declaração	limitada	ao	período	do	pós-guerra	
+34.	 “O	 Observatório	 Sírio	 para	 os	 Direitos	 Humanos,	 um	
+grupo	de	monitoramento	com	base	no	Reino	Unido	e	uma	rede	
+de	fontes	na	Síria,	registrou	a	morte	de	387.118	pessoas	até	
+dezembro	de	2020,	entre	elas	116.911	civis.
+O	 número	 de	 mortos	 não	 incluiu	 as	 205.300	 pessoas	 que	
+estavam	desaparecidas	e	presumidamente	mortas,	entre	eles	
+88	mil	civis	que	teriam	morrido	em	prisões	administradas	pelo	
+governo	onde	se	praticava	entre	eles	tortura.”
+(Disponível	em	https://www.bbc.com/portuguese/
+internacional-56378202	-	adaptado)
+Com	relação	aos	países	membros	signatários	da	Declaração	
+Universal	dos	Direitos	Humanos	-	Resolução	217-	A	(III)	da	
+Assembleia	Geral	das	Nações	Unidas	de	1948,	a	prática	de	
+tortura,	de	penas	ou	de	tratamentos	degradantes	em	seres	
+humanos,	com	base	nas	regras	e/ou	recomendações	contidas	
+nessa	Declaração,	é:	
+A)	 vedada	em	qualquer	hipótese
+B)	 permitida	apenas	na	hipótese	de	guerra	civil
+C)	 permitida	apenas	na	hipótese	de	calamidade	pública
+D)	 permitida	 apenas	 na	 hipótese	 de	 mudança	 de	 regime	
+político32.	À	luz	das	Regras	Mínimas	da	ONU	para	o	Tratamento	
+de	 Pessoas	 Presas	 para	 os	 países	 delas	 signatários,	 os	
+estabelecimentos	 prisionais,	 com	 base	 nas	 diferentes	
+categorias	de	presos,	sempre	que	possível,	devem	assegurar	a	
+permanência	de:
+A)	 homens	e	mulheres	detidos	em	unidades	conjuntas	com	
+compartilhamento	de	recintos	em	comum
+B)	 presos	preventivos	juntos	com	os	presos	condenados	
+C)	 indivíduos	presos	por	dívidas	junto	com	indivíduos	presos	
+por	infrações	criminais
+D)	 jovens	presos	separados	dos	adultos
+35.	No	Brasil,	a	“Garantia	dos	direitos	das	vítimas	de	crimes	
+e	de	proteção	das	pessoas	ameaçadas”	é	uma	das	diretrizes	
+previstas	no	Programa	Nacional	de	Direitos	Humanos,	instituído	
+pelo	 Decreto	 nº	 7.037/2009,	 	vinculada	 ao	 eixo	 orientador	
+relativo	a:
+A)	 Interação	Democrática	entre	Estado	e	Sociedade	Civil
+B)	 Desenvolvimento	e	Direitos	Humanos
+C)	 Saúde	e	Previdência	Social	
+D)	 Segurança	Pública,	Acesso	à	Justiça	e	Combate	à	Violência
+33.	Um	princípio	básico	contido	nas	regras	de	aplicação	geral	
+relativas	às	Regras	Mínimas	da	ONU	para	o	Tratamento	de	
+Pessoas	Presas,	conhecidas	como	Regras	de	Mandela	para	os	
+países	delas	signatários,	é	no	sentido	de	que	os	“objetivos	de	
+uma	sentença	de	encarceramento	ou	de	medida	similar	restritiva	
+de	 liberdade	 são,	 prioritariamente,	 de	 proteger	 a	 sociedade	
+contra	a	criminalidade	e	de	reduzir	a	reincidência”.	
+Tais	 propósitos	 podem	 ser	 viabilizados	 se	 o	 período	 de	
+encarceramento	 for	 utilizado	 para	 assegurar	 a	 reintegração	
+de	tais	indivíduos	à	sociedade	após	sua	soltura	a	fim	de	que	
+possam	levar	uma	vida	autossuficiente,	com	respeito	às	leis.	
+Para	tanto,	as	administrações	prisionais	e	demais	autoridades	
+competentes,	na	medida	do	possível,	com	base	nessas	Regras	
+de	Mandela,	devem	oferecer:	
+A)	 formação	profissional	e	trabalho	por	meio	de	programas	
+em	 consonância	 com	 as	 necessidades	 individuais	 de	
+tratamento	dos	presos
+B)	 formação	profissional	e	trabalho	por	meio	de	programas	em	
+consonância	com	as	necessidades	coletivas	de	tratamento	
+dos	presos
+C)	 formação	profissional	e	trabalho	por	meio	de	programas	
+em	consonância	com	a	opinião	política	e	a	origem	nacional	
+ou	social	dos	presos
+D)	 formação	profissional	e	trabalho	por	meio	de	programas	
+em	consonância	com	as	crenças	religiosas	e	os	preceitos	
+morais	dos	presos	
+29. Maristela,	 integrante	 do	 Conselho	 Penitenciário,	 é	
+espancada	por	Roberval,		 parente	de	um	detento,	em	virtude	
+da	função	pública	por	ela	exercida.	No	evento,	a	vítima	perde	a	
+visão	de	um	dos	olhos,	mantendo-se	íntegra	a	visão	do	outro.	É	
+correto	afirmar	que	Roberval	praticou	crime	de:
+A)	 lesão	corporal	grave
+B)	 lesão	corporal	gravíssima
+C)	 lesão	corporal	grave	majorada
+D)	 lesão	corporal	gravíssima	majorada
+30. Tibúrcio,	funcionário	público,	usa	documentos	falsos	com	
+a	exclusiva	finalidade	de	desviar	para	si	verbas	públicas,	das	
+quais	tinha	a	posse	em	razão	do	cargo.	É	correto	falar	que	
+Tibúrcio	praticou:
+A)	 crime	de	estelionato
+B)	 crime	de	peculato
+C)	 crimes	de	estelionato	e	uso	de	documento	falso
+D)	 crimes	de	peculato	e	uso	de	documento	falso
+9
+SECRETARIA DE ESTADO DE JUSTIÇA E SEGURANÇA PÚBLICA - SEJUSP
+AGENTE DE SEGURANÇA PENITENCIÁRIO / POLICIAL PENAL
+46.	Carlos,	brasileiro,	está	preso	nos	Estados	Unidos	pela	
+prática	 de	 um	 crime	 em	 solo	 americano.	 Por	 ser	 negro,	 é	
+submetido	a	grave	sofrimento	mental	–	mas	não	a	sofrimento	
+físico	–	imposto	por	funcionários	da	penitenciária	americana	
+na	 qual	 se	 encontra	 custodiado.	 Nesse	 contexto,	 é	 correto	
+afirmar	que	o	comportamento	praticado	pelos	funcionários	da	
+penitenciária	configura	–	pela	lei	brasileira	–	crime	de:
+A)	 tortura,	que	não	poderá	ser	julgado	no	Brasil
+B)	 tortura,	que	poderá	ser	julgado	no	Brasil
+C)	 abuso	de	autoridade,	que	não	poderá	ser	julgado	no	Brasil
+D)	 abuso	de	autoridade,	que	poderá	ser	julgado	no	Brasil
+44.	No	que	tange	aos	direitos	e	deveres	do	preso,	de	acordo	
+com	a	Lei	de	Execução	Penal	(Lei	nº	7.210,	de	11	de	julho	de	
+1984),	considera-se	correta	a	afirmativa:
+A)	 Distribuir	 proporcionalmente	 o	 tempo	 entre	 trabalho,	
+descanso	e	recreação	é	um	dever	do	preso.
+B)	 Ao	preso,	é	garantido	o	direito	de	representação	e	petição	
+a	qualquer	autoridade	e	assistência	jurídica.
+C)	 A	higiene	pessoal,	o	asseio	da	cela	ou	do	alojamento	e	a	
+conservação	dos	objetos	de	uso	pessoal	são	direitos	do	
+condenado.
+D)	 Opor-se	aos	movimentos	individuais	ou	coletivos	de	fuga	
+ou	de	subversão	à	ordem	ou	à	disciplina	é	um	direito	do	
+condenado.
+45.		A	respeito	da	carreira	de	policial	penal,	a	Lei	Estadual	nº	
+14.695,	de	30	de	julho	de	2003,	estabelece	que:
+A)	 O	cargo	de	Agente	de	Segurança	Penitenciário	é	exercido	
+em	regime	de	dedicação	exclusiva	e,	por	necessidade	do	
+serviço,	 seu	 ocupante	 pode	 ser	 convocado	 a	qualquer	
+momento.
+B)	 A	 avaliação	 de	 desempenho	 para	 fins	 de	 promoção	
+será	 realizada	 com	 base	 em	 quatro	 critérios,	 quais	
+sejam,	qualidade	do	trabalho,	produtividade	no	trabalho,	
+assiduidade	e	pontualidade.
+C)	 A	carreira	de	Agente	de	Segurança	Penitenciário	integra	o	
+Grupo	de	Atividades	de	Defesa	Social	do	Poder	Judiciário.
+D)	 A	 promoção	 na	 carreira	 de	 Agente	 de	 Segurança	
+Penitenciário	ocorre	a	cada	dois	anos,	desde	que	o	servidor	
+não	tenha	sofrido	punição	disciplinar	no	período.
+50. Com	 base	 na	Lei	nº	13.675/2018,	responsável	 pela	
+organização	 e	 funcionamento	 dos	 órgãos	 responsáveis	
+pela	 segurança	 pública,	 criação	 da	 Política	 Nacional	 de	
+Segurança	Pública	e	Defesa	Social	e	do	Sistema	Único	de	
+Segurança	Pública,	são,	respectivamente,	um	princípio	e	um	
+objetivo	da	Política	Nacional	de	Segurança	Pública	e	Defesa	
+Social	(PNSPDS):
+A)	 promoção	 da	 participação	 social	 nos	 Conselhos	 de	
+segurança	pública;	proteção	da	vida,	do	patrimônio	e	do	
+meio	ambiente
+B)	 atendimento	imediato	ao	cidadão;	eficiência	na	repressão	e	
+na	apuração	das	infrações	penais
+C)	 integração	 entre	 os	 Poderes	 Legislativo,	 Executivo	 e	
+Judiciário	no	aprimoramento	e	na	aplicação	da	legislação	
+penal;	fomento	de	políticas	públicas	voltadas	à	reinserção	
+social	dos	egressos	do	sistema	prisional
+D)	 uso	comedido	e	proporcional	da	força;	fomento	de	ações	
+permanentes	 para	o	combate	 ao	crime	 organizado	 e	à	
+corrupção
+47. De	acordo	 com	a	Lei	nº	13.869,	de	5	de	setembro	
+de	2019,	em	relação	aos	sujeitos	do	crime	de	abuso	de	
+autoridade,	é	correto	afirmar:
+A)	 O	sujeito	ativo	do	crime	de	abuso	de	autoridade	é	todo	
+agente	público	que	exerça	mandato,	cargo,	emprego	ou	
+função	pública,	em	caráter	permanente	e	remunerado.
+B)	 A	inabilitação	para	o	exercício	de	cargo,	mandato	ou	função	
+pública,	pelo	período	de	cinco	a	dez	anos	é	uma	das	penas	
+restritivas	de	direitos	a	quem	comete	crime	de	abuso	de	
+autoridade.
+C)	 Membros	do	Poder	Legislativo,	Executivo	e	Judiciário	são	
+sujeitos	ativos	do	crime	de	abuso	de	autoridade	e	podem	
+perder	cargo,	mandato	e	função	pública	como	efeito	da	
+condenação	desde	que	reincidentes	em	crime	de	abuso	de	
+autoridade.
+D)	 A	 suspensão	 do	 exercício	 do	 cargo,	 da	 função	 ou	 do	
+mandato,	pelo	prazo	de	um	a	dois	anos,	com	a	perda	dos	
+vencimentos	e	vantagens,	é	um	dos	efeitos	da	condenação	
+por	crime	de	abuso	de	autoridade.
+48. Acerca	dos	crimes	de	abuso	de	autoridade,	a	Lei	nº	
+13.869,	de	5	de	setembro	de	2019,	em	seu	artigo	18,	dispõe	
+que:
+A)	 Submeter	o	preso	a	interrogatório	policial	durante	o	período	
+de	repouso	noturno,	salvo	se	capturado	em	flagrante	delito	
+ou	se	ele,	devidamente	 assistido,	 consentir	 em	prestar	
+declarações,	é	crime,	com	pena	de	seis	meses	a	dois	anos	
+de	detenção	e	multa.
+B)	 É	aplicada	pena	de	detenção	de	um	a	quatro	anos	ao	
+agente	que	mantiver	presos	de	ambos	os	sexos	na	mesma	
+cela,	e	o	dobro	da	pena	àquele	que	mantiver	criança	ou	
+adolescente	em	ambiente	inadequado	ou	na	companhia	de	
+maior	de	idade.
+C)	 Imputa-se	pena	de	detenção	de	seis	meses	a	dois	anos	e	
+multa	a	quem	não	se	identifica	ao	preso,	seja	durante	sua	
+captura,	detenção	ou	prisão,	e	o	dobro	àquele	que	atribuir	
+a	si	mesmo	falsa	identidade,	cargo	ou	função.
+D)	 Impedir,	sem	justa	causa,	a	entrevista	pessoal	e	reservada	
+do	preso	com	seu	advogado	gera	pena	de	detenção	de	
+um	a	quatro	anos	e	multa	e,	na	mesma	pena,	incorrerá	o	
+magistrado	que,	ciente	do	impedimento	ou	demora,	deixar	
+de	tomar	providências.
+49. No	tocante	aos	crimes	de	tortura	previstos	na	Lei	nº	
+9.455,	de	7	de	abril	de	1997,	é	correto	afirmar	que:
+A)	 o	início	do	cumprimento	da	pena	será	em	regime	fechado	
+para	o	agente	que	se	omitir	em	face	do	sofrimento	físico	
+e	mental	de	pessoa	presa	provocado	por	outrem,	quando	
+tinha	o	dever	de	evitá-lo	ou	apurá-lo
+B)	 o	crime	de	tortura	é	inafiançável	e	insuscetível	de	graça	ou	
+anistia	e	sua	pena	é	reclusão	de	quatro	a	dez	anos
+C)	 haverá	aumento	de	pena	em	um	sexto	até	um	terço	se	o	
+crime	for	cometido	mediante	sequestro	
+D)	 a	condenação	pelo	crime	de	tortura	acarretará	a	perda	do	
+cargo,	função	ou	emprego	público	e	a	interdição	para	seu	
+exercício	pela	metade	do	prazo	da	pena	aplicada

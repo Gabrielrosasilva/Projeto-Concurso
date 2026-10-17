@@ -5640,3 +5640,87 @@ viraram estudo extra "Onde: Radar". Copia antes em
        bancas)" quando ha resposta de outra banca, e a frase de sempre quando
        nao ha. O "Onde estudar primeiro" usa o meu desempenho, e por ele a
        outra banca entra; a incidencia que ele pesa continua so do alvo.
+
+## Os tres botoes da faixa e a FEPESE pelo conteudo (pedido de 17/10/2026)
+
+167. **cada faixa de treino tem tres botoes - "Gerar questao real",
+     "Gerar questoes outras bancas" e "Gerar treino" -, o fechamento de 07/11
+     fica protegido, e a FEPESE entra no acervo pelo cargo, e nao pela
+     distancia** (pedido de 17/10, depois da etapa A; aprovado por voce). As
+     regras:
+     - **"Gerar questao real"** (`servico/fepese_no_radar.py`): as questoes
+       reais da FEPESE dos nos da faixa - alvo e complementar aceito, uma por
+       chave, sem anulada, com gabarito -, em toda materia, para responder no
+       radar; o acerto mede. A faixa de Portugues no Qconcursos continua com
+       o bloco dela (decisao 107), e la o botao novo nao aparece;
+     - **"Gerar questoes outras bancas"**: o botao da etapa A, com o nome
+       novo. A faixa sem questao de outra banca diz "Ainda nao ha questao de
+       outra banca deste tema no radar", em vez de ficar sem linha;
+     - **"Gerar treino"** (e "Gerar treino geral"): os botoes das geradas,
+       com o nome novo. Continuam so treinando, num numero a parte. O
+       "Abrir no Qconcursos" (decisao 140) fica onde estava;
+     - **a reserva das rodadas que medem** (`composicao.reserva_das_que_medem`):
+       o treino com questao real da FEPESE - o botao novo e a faixa de
+       Portugues da decisao 107 - nunca usa a questao que uma rodada que mede
+       ainda vai usar: a nao respondida de uma rodada que mede ja criada, e a
+       que a faixa que mede ainda sem rodada escolheria hoje. A composicao
+       escolhe as nunca respondidas primeiro, pela semente da faixa; como o
+       treino nao toca nas que ela escolheria, ela continua achando questao
+       nunca vista quando a rodada for criada, e a prova nova que entrar no
+       acervo continua podendo entrar nela. No banco de 17/10 o fechamento de
+       07/11 guarda 50: Portugues 13, Direitos Humanos 13, LEP 8, Raciocinio
+       8, Constitucional 4 e Penal 4 (a LEP fica com 2 livres das 10). A
+       faixa diz quantas ficaram guardadas, e para que dia. A conta custa uns
+       2 s na abertura da tela Hoje;
+     - **a FEPESE pelo conteudo** (`radar provas --por-conteudo`): le a
+       pagina de provas de todo concurso encerrado da FEPESE, perto ou longe,
+       e baixa so o caderno cujo CARGO casa com a lista `cargos_com_direito`
+       do `config/complementar.yml` (guarda, policia, escrivao, perito,
+       procurador...), e o gabarito do concurso. O que ja foi varrido fica em
+       `data/acervo_por_conteudo.json`, e o hotsite que caiu no meio volta na
+       proxima rodada. O acervo de sempre (pela distancia) nao mudou. O radar
+       conhecia 525 concursos da FEPESE, e 489 nunca tinham tido a prova
+       baixada - entre eles a Policia Civil SC 2017 e a Policia Cientifica SC;
+     - **`radar classificar --pedido --so-novas`** pede so a questao sem
+       classificacao nenhuma: as provas novas entram sem refazer o que ja foi
+       classificado e espera a sua conferencia.
+     O segundo levantamento (12 bancas de concurso policial de 2019 a 2026)
+     esta no [levantamento_de_bancas](levantamento_de_bancas.md): o NC-UFPR
+     (Policia Civil PR 2020) e a Selecon (SEJUSP/MG 2021, Policial Penal)
+     entram pelo robo; a FGV (SEAP-BA 2024, PC SC 2023), o Idecan, a FCC e o
+     Access, so a mao; o IBADE depende da sua decisao sobre a clausula 5 dos
+     termos; o IADES nao entra (o caderno vem trancado contra copia).
+
+168. **as provas de outras bancas entram por uma lista no config, uma por
+     caderno conferido, e cada banca tem o seu leitor** (pedido de 17/10, a
+     continuacao da 166). As regras:
+     - **a lista** e o `config/provas_de_outras_bancas.yml`: a banca, o ano, o
+       orgao, o cargo, a pagina oficial do concurso, o link do caderno e,
+       quando e um PDF a parte, o do gabarito. Nao ha raspador: cada caderno
+       foi conferido no levantamento (o robots.txt, os termos e a leitura), e
+       a lista diz exatamente o que entra, com o link original;
+     - **`radar provas --outras-bancas`** baixa a lista pelo Buscador (o
+       robots.txt, o atraso e o User-Agent da `Coletor`), e **`radar questoes
+       --banca <banca>`** le so os cadernos dela. Entra so a banca cujo
+       leitor existe (`servico.provas.LEITORES_DE_OUTRAS_BANCAS`);
+     - **o NC-UFPR** (`radar/questoes_ncufpr.py`): o caderno "definitivo"
+       marca a certa com "►" e a anulada com asterisco, a materia e o titulo
+       em maiusculas, e as palavras vem separadas por TAB. Na lista: a
+       Policia Civil PR 2020 (Delegado e Investigador/Papiloscopista) e tres
+       Guardas do Parana (Colombo 2022, Almirante Tamandare 2023 e Campo Magro
+       2024). Lidos: o Investigador com 50 de 50 e o Delegado com 99 de 100;
+     - **a Selecon** (`radar/questoes_selecon.py`): as colunas embaralham a
+       ordem (a leitura vai pelas rodadas de A) a D) e ordena pelo numero), o
+       gabarito e um PDF a parte, em fileiras, e a materia sai da faixa da
+       capa, copiada na entrada da prova (`materias`). Na lista: a SEJUSP/MG
+       2021, Agente de Seguranca Penitenciario / Policial Penal, lida com 60
+       de 60. O bloco "Nocoes de Direito Constitucional e Penal" (21 a 30) foi
+       dividido lendo as questoes: 21 a 25 Constitucional, 26 a 30 Penal;
+     - **os nomes de materia do NC-UFPR** ("Nocoes de Direito Penal",
+       "Legislacao Penal Especial") ligam ao edital pelo `sinonimos_de_materia`
+       do `config/taxonomia.yml`. Nenhuma prova da FEPESE usava esses nomes:
+       ligar nao mudou numero nenhum que ja existia;
+     - **Portugues e Raciocinio de outra banca nao sao classificados** (o seu
+       pedido de 17/10: a FEPESE ja tem bastante). E o texto de leitura de
+       Portugues fica colado na ultima alternativa em varios cadernos: sem
+       classificacao, ele nunca chega ao treino.

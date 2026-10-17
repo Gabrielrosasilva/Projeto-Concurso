@@ -680,8 +680,36 @@ O que falta vai nesta ordem, uma etapa por conversa.
   pontuacao e sinonimo nos itens I a III), e 1 cobra o sujeito, que e termo
   essencial e nao esta no edital.
 
+### Feito depois da etapa A (17/10, decisoes 167 e 168)
+
+- os tres botoes da faixa ("Gerar questao real", "Gerar questoes outras
+  bancas", "Gerar treino"), a reserva do fechamento de 07/11 e o "ainda nao
+  ha" das outras bancas;
+- a FEPESE pelo conteudo (`radar provas --por-conteudo`), o `--so-novas` do
+  classificar e o `--banca` do `radar questoes`;
+- a lista de provas de outras bancas (`config/provas_de_outras_bancas.yml`)
+  e os leitores do NC-UFPR (Policia Civil PR 2020, tres Guardas do PR) e da
+  Selecon (SEJUSP/MG 2021, Policial Penal).
+
+### Depende de voce (decisoes 167 e 168)
+
+- ⚪ **A clausula 5 do IBADE**: "nao podendo ser copiado, reproduzido,
+  distribuido ou utilizado sem autorizacao expressa do IBADE". O IBADE tem o
+  Agente Socioeducativo AC 2021 e o Inspetor Penitenciario ES 2023, e o robo
+  pode ler. Entra ou nao e escolha sua;
+- ⚪ **Os PDFs que so dao a mao** (a lista com os links esta no
+  [levantamento_de_bancas](levantamento_de_bancas.md)): FGV (SEAP-BA 2024,
+  PC SC 2023), Idecan (PC-CE e PEFOCE 2021), Selecon na plataforma nova (PM SE
+  e SENAPPEN 2024), FCC e Access. Os termos da FGV proibem robo e tambem
+  "reproduzir, duplicar, copiar": baixar a mao para estudo pessoal e zona
+  cinzenta, e a decisao e sua. Para os que entrarem, falta a entrada de PDF
+  baixado a mao e o leitor de cada banca.
+
 ### As proximas etapas
 
+- 🔴 **As Guardas da Selecon** (Niterói 2019, Boa Vista 2019, Campo Grande
+  2020, Sao Goncalo 2020, Sao Luis 2022): os links estao conferidos; falta
+  baixar, ler a faixa de materias da capa de cada uma e por na lista;
 - 🔴 **B. O Cebraspe**:
   - o coletor das provas pela API, com nova tentativa no 404 do CDN;
   - o leitor do caderno de multipla escolha e o do Certo/Errado (que so

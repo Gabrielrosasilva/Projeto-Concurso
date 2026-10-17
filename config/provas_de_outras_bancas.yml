@@ -1,0 +1,78 @@
+# As provas de OUTRAS BANCAS que entram no acervo (decisao 168).
+# Lido por src/radar/servico/provas.py: `radar provas --outras-bancas` baixa
+# cada caderno (e o gabarito, quando e um PDF a parte) pelo Buscador, que
+# respeita o robots.txt e espera entre um pedido e outro; depois
+# `radar questoes --banca <banca>` le os cadernos com o leitor da banca.
+#
+# POR QUE UMA LISTA, E NAO UM RASPADOR
+#
+# Cada banca publica de um jeito, e o levantamento de 17/10
+# (docs/levantamento_de_bancas.md) conferiu caderno por caderno: o robots.txt,
+# os termos e a leitura. Uma lista diz exatamente o que entra, e o link de
+# cada um - o radar guarda sempre o link original, nunca uma copia de site.
+#
+# SO ENTRA BANCA CUJO LEITOR EXISTE (`radar/questoes_<banca>.py`) e cujo site
+# o robo pode ler. Prova que so da para baixar a mao fica para a entrada de
+# PDF baixado a mao (pendencia O).
+#
+# Campos: banca, ano (o da prova), orgao, uf, cargo, pagina (onde a banca
+# lista o concurso; sem ela, o proprio link do caderno), caderno (o PDF) e,
+# quando o gabarito e um PDF a parte, gabarito.
+
+provas:
+# NC-UFPR: o caderno "definitivo" traz a resposta certa marcada (►) e a
+# anulada com asterisco - o gabarito vem dentro. As tres versoes (A, B, C) da
+# Policia Civil sao a mesma prova em outra ordem: entra uma so.
+- banca: NC-UFPR
+  ano: 2021
+  orgao: Polícia Civil do Paraná
+  uf: PR
+  cargo: Delegado de Polícia
+  pagina: https://servicos.nc.ufpr.br/PortalNC/Concurso?concurso=PCPR2020
+  caderno: https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf
+- banca: NC-UFPR
+  ano: 2021
+  orgao: Polícia Civil do Paraná
+  uf: PR
+  cargo: Investigador de Polícia / Papiloscopista
+  pagina: https://servicos.nc.ufpr.br/PortalNC/Concurso?concurso=PCPR2020
+  caderno: https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/304A.pdf
+- banca: NC-UFPR
+  ano: 2022
+  orgao: Prefeitura Municipal de Colombo
+  uf: PR
+  cargo: Guarda Municipal
+  caderno: https://servicos.nc.ufpr.br/documentos/pmcol2022/provas/definitivo/305.pdf
+- banca: NC-UFPR
+  ano: 2023
+  orgao: Prefeitura Municipal de Almirante Tamandaré
+  uf: PR
+  cargo: Guarda Municipal
+  caderno: https://servicos.nc.ufpr.br/documentos/pmat2023/provas/definitivo/208.pdf
+- banca: NC-UFPR
+  ano: 2024
+  orgao: Prefeitura Municipal de Campo Magro
+  uf: PR
+  cargo: Guarda Municipal
+  caderno: https://servicos.nc.ufpr.br/documentos/pmcm2024/provas/definitivo/105.pdf
+
+# Selecon: o gabarito e um PDF a parte, e as colunas embaralham a ordem das
+# questoes. A materia sai da faixa da capa, copiada aqui em `materias`; o
+# bloco "Nocoes de Direito Constitucional e Penal" (21 a 30) foi dividido
+# lendo as questoes (21 a 25 sao de Constitucional, 26 a 30 de Penal).
+- banca: Selecon
+  ano: 2022
+  orgao: Secretaria de Estado de Justiça e Segurança Pública de Minas Gerais (SEJUSP)
+  uf: MG
+  cargo: Agente de Segurança Penitenciário / Policial Penal
+  pagina: https://selecon.org.br/concursos/sejuspmg/
+  caderno: https://selecon.org.br/wp-content/uploads/2022/01/Prova-A-AGENTE-DE-SEGURANCA-PENITENCIARIO_-POLICIAL-PENAL.pdf
+  gabarito: https://selecon.org.br/wp-content/uploads/2022/01/GABARITO-OFICIAL-PROVA-A.pdf
+  materias:
+    1-10: Língua Portuguesa
+    11-15: Raciocínio Lógico
+    16-20: Informática
+    21-25: Direito Constitucional
+    26-30: Direito Penal
+    31-40: Direitos Humanos
+    41-60: Legislação Especial

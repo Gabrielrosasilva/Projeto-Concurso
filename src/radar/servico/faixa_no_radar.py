@@ -13,6 +13,10 @@ nao entra na comparacao do fechamento, que so le diagnostico e simulado.
 O tema e o no da arvore: os `nos` da ficha, ou o assunto e o subassunto que
 ela escreveu, ou os `nos` do plano - a mesma ordem do `fichas.onde_na_arvore`
 (decisao 71).
+
+A questao que uma rodada que mede ainda vai usar - a do fechamento de 07/11 -
+nao entra aqui (decisao 167): o treino nao pode gastar a questao nunca vista
+que a rodada que mede precisa.
 """
 from __future__ import annotations
 
@@ -140,7 +144,14 @@ def planejar(data: date, bloco: str, indice: int, faixa, escrita, estoque: dict,
                         nomes=[arvore.partes(n)[-1] for n in nos])
 
 
-def das_faixas(blocos, data: date) -> dict:
+def _sem_as_reservadas(data: date, reserva=None) -> dict:
+    """O estoque de Portugues sem o que uma rodada que mede ainda vai usar: o
+    fechamento de 07/11 vem antes do treino (decisao 167)."""
+    reserva = reserva if reserva is not None else composicao.reserva_das_que_medem(data)
+    return composicao.sem_as_usadas(composicao.estoque_real(list(MATERIAS)), reserva.chaves)
+
+
+def das_faixas(blocos, data: date, reserva=None) -> dict:
     """{(bloco, indice): FaixaNoRadar} das faixas de Portugues do dia. Dia sem
     elas nao le nada."""
     aceitas = [(bloco.chave, indice, faixa) for bloco in blocos
@@ -148,7 +159,7 @@ def das_faixas(blocos, data: date) -> dict:
     if not aceitas:
         return {}
     escritas = servico_fichas.carregar()
-    estoque = composicao.estoque_real(list(MATERIAS))
+    estoque = _sem_as_reservadas(data, reserva)
     respondidas = composicao.ja_respondidas()
     # Na ordem do dia: a faixa da noite planeja com o que a da manha deixou.
     fora = _ja_postas()
@@ -172,7 +183,7 @@ def criar_rodada(data: date, bloco: str, indice: int, faixa) -> Simulado | None:
     nos = nos_da_faixa(faixa, fichas.da_faixa(faixa, servico_fichas.carregar()))
     if not nos:
         return None
-    escolhidas = candidatas(nos, composicao.estoque_real(list(MATERIAS)),
+    escolhidas = candidatas(nos, _sem_as_reservadas(data),
                             composicao.ja_respondidas(),
                             composicao._semente(data, bloco, indice),
                             _ja_postas())[:faixa.questoes]

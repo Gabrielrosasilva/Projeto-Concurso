@@ -14,6 +14,7 @@ aparece em qualquer dia, e nao pelo botao.
 """
 from datetime import date
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
@@ -27,6 +28,17 @@ from tests.test_composicao import (CRASE, INTERPRETACAO, PORTUGUES,  # noqa: F40
                                    RACIOCINIO, acervo)
 
 DIA = date(2026, 10, 6)
+
+
+@pytest.fixture(autouse=True)
+def sem_reserva(monkeypatch):
+    """O fechamento de 07/11 do plano real guardaria as poucas questoes deste
+    banco de teste (decisao 167). Aqui se testa a faixa da decisao 107; a
+    reserva tem os testes dela no test_fepese_no_radar."""
+    from radar.servico import composicao
+
+    monkeypatch.setattr(composicao, "reserva_das_que_medem",
+                        lambda data, plano=None: composicao.Reserva())
 
 
 def _faixa(nos, questoes=6, bloco="manha", titulo="Questões de teste", **mais):

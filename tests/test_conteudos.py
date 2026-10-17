@@ -363,12 +363,14 @@ def test_as_grafias_juntam_o_nome_do_edital_e_o_da_prova_antiga():
     duas, venha o pedido por qualquer um dos nomes."""
     taxonomia = arvore.carregar_taxonomia()
 
-    esperado = ["Direito Processual Penal", "Direito Processo Penal"]
+    # O "Nocoes de ..." e o nome do NC-UFPR (decisao 168).
+    esperado = ["Direito Processual Penal", "Direito Processo Penal",
+                "Noções de Direito Processual Penal"]
     assert taxonomia.grafias("Direito Processual Penal") == esperado
     assert taxonomia.grafias("Direito Processo Penal") == esperado
     assert taxonomia.nome_do_edital("Direito Processo Penal") == "Direito Processual Penal"
-    # Materia sem sinonimo fica so com o proprio nome, sem pegar vizinha.
-    assert taxonomia.grafias("Direito Penal") == ["Direito Penal"]
+    # A materia fica com os nomes dela, sem pegar a vizinha.
+    assert taxonomia.grafias("Direito Penal") == ["Direito Penal", "Noções de Direito Penal"]
     assert taxonomia.nome_do_edital("Direito Penal") == "Direito Penal"
 
 

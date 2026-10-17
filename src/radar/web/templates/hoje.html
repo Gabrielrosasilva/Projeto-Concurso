@@ -1140,22 +1140,56 @@
                 {# As questoes reais de outras bancas do tema (decisao 166):
                    medem o meu acerto no no, com a origem ao lado, e nunca o
                    que a FEPESE cobra. A conta e do servico; aqui so se desenha. #}
+                {# As questoes reais da FEPESE do tema, em toda materia (decisao
+                   167): o "Gerar questao real". A faixa de Portugues no
+                   Qconcursos tem o bloco dela, acima. O que a rodada que mede
+                   ainda vai usar fica guardado, e a faixa diz para quando. #}
+                {% set fp = fepese_das_faixas.get((b.chave, loop.index0)) if fepese_das_faixas else none %}
+                {% if fp %}
+                  {% set indice_da_fepese = loop.index0 %}
+                  {% set para_quando = fp.dias_da_reserva | map('dia_mes') | join(' e ') %}
+                  <div class="composicao fepese-no-radar">
+                    {% if fp.disponiveis %}
+                      <p>{{ selo('prova', curto=True) }} <b>{{ fp.disponiveis }} {{ 'questão real' if fp.disponiveis == 1 else 'questões reais' }} da FEPESE</b> deste tema no radar{% if fp.do_alvo %} ({{ fp.do_alvo }} das provas do cargo){% endif %}{% if fp.feitas %}; você já fez {{ fp.feitas }}{% endif %}.{% if fp.reservadas %} Outras {{ fp.reservadas }} ficam guardadas para a rodada que mede de {{ para_quando }}.{% endif %}</p>
+                      <form class="treinar-no-radar real" method="post" action="/fepese/treinar">
+                        {% for no in fp.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ indice_da_fepese }}">
+                        <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                        <label><input type="number" name="quantidade" min="1" max="30" value="{{ fp.sugeridas }}" aria-label="Quantas questões reais da FEPESE"> questões</label>
+                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar questão real</button>
+                      </form>
+                    {% elif fp.reservadas %}
+                      <p class="sub">{{ selo('prova', curto=True) }} As {{ fp.reservadas }} {{ 'questão' if fp.reservadas == 1 else 'questões' }} da FEPESE deste tema ficam guardadas para a rodada que mede de {{ para_quando }}: o treino não as usa.</p>
+                    {% else %}
+                      <p class="sub">{{ selo('prova', curto=True) }} O radar ainda não tem questão da FEPESE classificada neste tema.</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
                 {% set ob = outras_bancas_das_faixas.get((b.chave, loop.index0)) if outras_bancas_das_faixas else none %}
                 {% if ob %}
                   {% set indice_de_outras = loop.index0 %}
                   <div class="composicao outras-bancas">
-                    <p>{{ selo('prova', curto=True) }} <b>{{ ob.no_acervo }} {{ 'questão real' if ob.no_acervo == 1 else 'questões reais' }} de outras bancas</b> deste tema no radar ({{ ob.bancas | join(', ') }}){% if ob.feitas %}; você já fez {{ ob.feitas }}{% endif %}.</p>
-                    <form class="treinar-no-radar" method="post" action="/outras-bancas/treinar">
-                      {% for no in ob.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
-                      <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
-                      <input type="hidden" name="bloco" value="{{ b.chave }}">
-                      <input type="hidden" name="indice" value="{{ indice_de_outras }}">
-                      <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                      <label><input type="number" name="quantidade" min="1" max="30" value="{{ ob.sugeridas }}" aria-label="Quantas questões de outras bancas"> questões</label>
-                      <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar com outras bancas no radar</button>
-                    </form>
-                    <p class="regra">Medem o seu acerto neste tema, com a origem ao lado, e não entram no que a FEPESE cobra. As do radar contam sozinhas: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>
+                    {% if ob.no_acervo %}
+                      <p>{{ selo('prova', curto=True) }} <b>{{ ob.no_acervo }} {{ 'questão real' if ob.no_acervo == 1 else 'questões reais' }} de outras bancas</b> deste tema no radar ({{ ob.bancas | join(', ') }}){% if ob.feitas %}; você já fez {{ ob.feitas }}{% endif %}.</p>
+                      <form class="treinar-no-radar real" method="post" action="/outras-bancas/treinar">
+                        {% for no in ob.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ indice_de_outras }}">
+                        <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                        <label><input type="number" name="quantidade" min="1" max="30" value="{{ ob.sugeridas }}" aria-label="Quantas questões de outras bancas"> questões</label>
+                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar questões outras bancas</button>
+                      </form>
+                    {% else %}
+                      <p class="sub">{{ selo('prova', curto=True) }} Ainda não há questão de outra banca deste tema no radar.</p>
+                    {% endif %}
                   </div>
+                {% endif %}
+                {% if fp or ob %}
+                  <p class="regra">As questões reais (da FEPESE e de outras bancas) medem o seu acerto neste tema, com a origem ao lado; as de outra banca nunca entram no que a FEPESE cobra. As do radar contam sozinhas: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>
                 {% endif %}
 
                 {# As geradas da faixa (R6): primeiro as reais no Qconcursos, que
@@ -1167,9 +1201,9 @@
                   <div class="composicao geradas-da-faixa">
                     <p>Você estudou: <b>{{ gf.tema }}</b>; na árvore:
                       {% if gf.sem_no %}<b>sem nó na árvore</b>{% else %}{% for n in gf.nos %}<b>{{ n.no }}</b>{% if not loop.last %}; {% endif %}{% endfor %}{% endif %}</p>
-                    <p><b>1º No Qconcursos</b> (são as que medem):
+                    <p><b>No Qconcursos</b> (também medem):
                       {% if lq %}pelo botão “Abrir no Qconcursos” acima{% elif gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
-                    <p><b>2º Se quiser mais, no radar</b> {{ selo('ia', curto=True) }} (só treinam; o acerto é um segundo número, nunca somado ao da faixa).</p>
+                    <p><b>Gerar treino</b> {{ selo('ia', curto=True) }}: as questões escritas pela IA só treinam; o acerto delas é um segundo número, nunca somado ao da faixa.</p>
                     {# O sinal de que eu treino o tema (decisao 138): toda
                        resposta a gerada dos nos dele, de qualquer dia. A conta
                        e do metricas; nunca entra no acerto do tema. #}
@@ -1196,7 +1230,7 @@
                             <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
                             <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}{% if n.feitas %}, você já fez {{ n.feitas }}{% endif %}</span>
                             <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
-                            <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar no radar</button>
+                            <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar treino</button>
                           </form>
                           {# O estoque que eu ja vi (decisao 142): o sorteio poe as
                              nunca feitas na frente, e com metade ou todas feitas a
@@ -1219,7 +1253,7 @@
                           <label>Geral, tudo misturado:
                             <input type="number" name="quantidade" min="1" max="30" value="{{ gf.geral }}" aria-label="Quantas questões no treino geral"> questões</label>
                           <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
-                          <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Treinar geral no radar</button>
+                          <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar treino geral</button>
                         </form>
                       {% endif %}
                       {% if gf.precisa_gerar %}

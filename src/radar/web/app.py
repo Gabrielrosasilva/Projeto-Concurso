@@ -1150,6 +1150,33 @@ def geradas_treinar(
     return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
 
 
+@app.post("/fepese/treinar")
+def fepese_treinar(
+    conteudos: list[str] = Form([]), quantidade: str = Form("10"),
+    data: str = Form(""), bloco: str = Form(""), indice: str = Form(""),
+    titulo: str = Form(""),
+):
+    """O "Gerar questao real" da faixa (decisao 167): as questoes reais da
+    FEPESE do tema, sem as que a rodada que mede ainda vai usar."""
+    quantas = converter_valor(quantidade)
+    quantas = int(quantas) if quantas and 1 <= quantas <= 30 else 10
+    try:
+        dia = date.fromisoformat(data) if data else None
+    except ValueError:
+        dia = None
+    da_faixa = None
+    if dia and bloco and titulo and indice.strip().isdigit():
+        da_faixa = {"data": dia.isoformat(), "bloco": bloco,
+                    "indice": int(indice), "titulo": titulo}
+    nos = [c.strip() for c in conteudos if c.strip()]
+    rodada = servico.fepese_no_radar.criar_rodada(
+        nos, quantas, dia or servico.cronograma.hoje_local(), da_faixa)
+    if rodada is None:
+        destino = f"/hoje?data={dia.isoformat()}" if dia else "/hoje"
+        return RedirectResponse(destino, status_code=303)
+    return RedirectResponse(f"/simulado/{rodada.id}", status_code=303)
+
+
 @app.post("/outras-bancas/treinar")
 def outras_bancas_treinar(
     conteudos: list[str] = Form([]), quantidade: str = Form("10"),
@@ -1236,6 +1263,12 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
     tela = servico.cronograma.tela_do_dia(quando)
     geradas_das_faixas = (servico.geradas.das_faixas(tela.blocos, tela.plano)
                           if tela.blocos else {})
+    # O que uma rodada que mede ainda vai usar (decisao 167): contado uma vez,
+    # e nenhum treino com questao real da FEPESE toca nele.
+    reserva = (servico.composicao.reserva_das_que_medem(tela.data, tela.plano)
+               if tela.blocos and tela.plano else None)
+    no_radar = (servico.faixa_no_radar.das_faixas(tela.blocos, tela.data, reserva)
+                if tela.blocos else {})
     return templates.TemplateResponse(
         request=request,
         name="hoje.html",
@@ -1263,7 +1296,12 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # fechamento (decisao 70). So conta no sabado.
             "do_sabado": servico.sabado.das_faixas(tela.blocos, tela.data, tela.plano),
             # A faixa de Portugues que comeca pelas do radar (decisao 107).
-            "no_radar": servico.faixa_no_radar.das_faixas(tela.blocos, tela.data),
+            "no_radar": no_radar,
+            # O "Gerar questao real" das outras materias (decisao 167): as reais
+            # da FEPESE do tema, sem as reservadas para a rodada que mede.
+            "fepese_das_faixas": (servico.fepese_no_radar.das_faixas(
+                geradas_das_faixas, tela.data, reserva, fora=set(no_radar))
+                if reserva is not None else {}),
             # As geradas de cada faixa de treino (R6): o no, quantas ha e os
             # passos para gerar o que falta.
             "geradas_das_faixas": geradas_das_faixas,

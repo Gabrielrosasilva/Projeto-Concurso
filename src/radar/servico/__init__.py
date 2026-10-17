@@ -65,6 +65,7 @@ from radar.servico.provas import (      # noqa: F401 - a fachada
     IncidenciaDaEvidencia,
     incidencia_por_evidencia,
     montar_acervo,
+    montar_acervo_de_outras_bancas,
     provas_parecidas,
     questoes_repetidas,
     questoes_sem_assunto,
@@ -130,6 +131,8 @@ from radar.servico import faixa_no_radar  # noqa: F401 - usado pela web
 # O treino com questoes reais de outras bancas (decisao 166).
 # `servico.outras_bancas.das_faixas(...)`.
 from radar.servico import outras_bancas  # noqa: F401 - usado pela web
+# O treino com questoes reais da FEPESE do tema, em toda materia (decisao 167).
+from radar.servico import fepese_no_radar  # noqa: F401 - usado pela web
 # A rodada da revisao espacada, 1-7-30 dias, com os nos da fila do `estudo`
 # (decisao 128). `servico.espacada.criar_simulado_de_revisao()`.
 from radar.servico import espacada      # noqa: F401 - usado pela web e CLI

@@ -177,12 +177,13 @@ class OutrasBancasDaFaixa:
 
 
 def da_faixa(nos: list[str], questoes_da_faixa: int | None = None,
-             feitas_antes: set[str] | None = None) -> OutrasBancasDaFaixa | None:
-    """O resumo de uma faixa, ou None quando o tema nao tem questao de outra
-    banca: a faixa nao ganha linha nenhuma - so ruido."""
+             feitas_antes: set[str] | None = None) -> OutrasBancasDaFaixa:
+    """O resumo de uma faixa. O tema sem questao de outra banca tambem volta,
+    com zero: a faixa diz "ainda nao ha" (pedido de 17/10)."""
     candidatas = estoque(nos)
     if not candidatas:
-        return None
+        return OutrasBancasDaFaixa(nos=list(nos), no_acervo=0, feitas=0,
+                                   questoes_da_faixa=questoes_da_faixa)
     if feitas_antes is None:
         feitas_antes = respondidas()
     return OutrasBancasDaFaixa(
@@ -200,12 +201,8 @@ def das_faixas(geradas_das_faixas: dict) -> dict:
     if not com_nos:
         return {}
     feitas_antes = respondidas()
-    saida = {}
-    for chave, gf in com_nos.items():
-        resumo = da_faixa([n.no for n in gf.nos], gf.questoes, feitas_antes)
-        if resumo is not None:
-            saida[chave] = resumo
-    return saida
+    return {chave: da_faixa([n.no for n in gf.nos], gf.questoes, feitas_antes)
+            for chave, gf in com_nos.items()}
 
 
 def criar_rodada(nos: list[str], quantidade: int, da_faixa_do_dia: dict | None = None,

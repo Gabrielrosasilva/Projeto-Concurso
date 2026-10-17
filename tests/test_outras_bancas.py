@@ -231,14 +231,17 @@ def test_evidencia_desconhecida_e_recusada(banco_temporario):
 
 # --- a tela --------------------------------------------------------------------
 
-def test_das_faixas_so_a_faixa_com_questao_de_outra_banca(acervo):
+def test_das_faixas_toda_faixa_com_no_e_a_sem_estoque_com_zero(acervo):
+    """A faixa sem questao de outra banca tambem volta, com zero, e a tela
+    diz "ainda nao ha" (pedido de 17/10); a sem no, nao."""
     com = SimpleNamespace(sem_no=False, questoes=6, nos=(SimpleNamespace(no=INTERPRETACAO),))
     sem = SimpleNamespace(sem_no=False, questoes=6,
                           nos=(SimpleNamespace(no=f"{PORTUGUES} > Emprego da crase"),))
     sem_no = SimpleNamespace(sem_no=True, questoes=6, nos=())
     resumo = outras_bancas.das_faixas({("manha", 0): com, ("manha", 1): sem,
                                        ("noite", 0): sem_no})
-    assert list(resumo) == [("manha", 0)]
+    assert sorted(resumo) == [("manha", 0), ("manha", 1)]
+    assert resumo[("manha", 1)].no_acervo == 0
     assert resumo[("manha", 0)].no_acervo == 3
     assert resumo[("manha", 0)].sugeridas == 3
     assert resumo[("manha", 0)].bancas == ["IESES"]
@@ -266,7 +269,7 @@ def test_a_tela_hoje_mostra_o_botao_e_o_botao_abre_a_rodada(em_05_10):
 
     cliente = TestClient(app)
     html = cliente.get("/hoje?data=2026-10-05").text
-    assert "Treinar com outras bancas no radar" in html
+    assert "Gerar questões outras bancas" in html
     assert "1 questão real</b>" in html or "1 questão real de outras bancas" in html
     assert "(IESES)" in html
 
@@ -285,3 +288,17 @@ def test_o_botao_sem_estoque_volta_para_o_dia(acervo):
         follow_redirects=False)
     assert resposta.status_code == 303
     assert resposta.headers["location"] == "/hoje?data=2026-10-05"
+
+
+def test_so_novas_pede_so_a_questao_sem_classificacao(acervo):
+    """As provas novas do acervo (decisao 167) se pedem sem refazer o que ja
+    foi classificado e espera a minha conferencia."""
+    with sessao() as s:
+        s.add(QuestaoDeProva(
+            prova_url=PROVA_IESES.format(77), banca="IESES", ano=2024, numero=1,
+            materia=PORTUGUES, enunciado="Questão nova, ainda sem classificação?",
+            alternativas=dict(QUATRO), resposta="a", impressao="nova-1", evidencia="fora"))
+    (todas,) = manual.pedido_de_classificacao(None, "fora")["pedidos"]
+    (novas,) = manual.pedido_de_classificacao(None, "fora", so_novas=True)["pedidos"]
+    assert len(todas["questoes"]) == 9
+    assert len(novas["questoes"]) == 1

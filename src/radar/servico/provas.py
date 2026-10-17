@@ -17,10 +17,13 @@ confundir com o proprio modulo.
 import logging
 import re
 from dataclasses import dataclass
-from datetime import datetime
+import json
+import time
+from datetime import date, datetime
 from difflib import SequenceMatcher
 from pathlib import Path
 
+import yaml
 from sqlalchemy import func, select
 
 from radar import alvo as alvos
@@ -31,7 +34,7 @@ from radar import gabarito as gabarito_oficial
 from radar import provas as arquivos_de_prova
 from radar import provas_ieses
 from radar import questoes as leitor_de_questoes
-from radar import questoes_ieses
+from radar import questoes_ieses, questoes_ncufpr, questoes_selecon
 from radar.collectors.base import Buscador
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso, QuestaoDeProva, agora
@@ -157,6 +160,177 @@ def _concursos_com_prova(
     return escolhidos
 
 
+# --- o acervo pelo conteudo (decisao 167) -----------------------------------
+#
+# O acervo de sempre escolhe o concurso pela distancia, e a Policia Civil SC
+# 2017, a Policia Cientifica e as Guardas de longe nunca entraram nele. Para
+# estudar, o que vale e o cargo ter Direito: `--por-conteudo` le a pagina de
+# provas de todo concurso encerrado da FEPESE e baixa so o caderno cujo cargo
+# esta no `config/complementar.yml` (`cargos_com_direito`).
+
+def caminho_dos_lidos_por_conteudo() -> Path:
+    """O registro do que a leitura pelo conteudo ja varreu. Sem ele, o
+    concurso sem cargo de Direito voltaria em toda rodada - ele nao entra no
+    manifesto, que so guarda documento baixado."""
+    return config.diretorio_dados() / "acervo_por_conteudo.json"
+
+
+def carregar_lidos_por_conteudo() -> dict[str, dict]:
+    caminho = caminho_dos_lidos_por_conteudo()
+    if not caminho.exists():
+        return {}
+    return json.loads(caminho.read_text(encoding="utf-8")).get("concursos", {})
+
+
+def gravar_lidos_por_conteudo(lidos: dict[str, dict]) -> None:
+    caminho = caminho_dos_lidos_por_conteudo()
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+    corpo = json.dumps({"concursos": dict(sorted(lidos.items()))},
+                       ensure_ascii=False, indent=1) + "\n"
+    # No Windows a gravacao seguida do mesmo arquivo falhou uma vez com
+    # "Invalid argument" (17/10, no 28o concurso): outro programa segurava o
+    # arquivo por um instante. Mais duas tentativas, e so entao desiste.
+    for tentativa in range(3):
+        try:
+            caminho.write_text(corpo, encoding="utf-8")
+            return
+        except OSError:
+            if tentativa == 2:
+                raise
+            time.sleep(1)
+
+
+def cargos_com_direito(caminho: Path | None = None) -> list[str]:
+    """Os pedacos de nome de cargo cujo caderno tem Direito, ja sem acento."""
+    arquivo = caminho or (config.diretorio_config() / "complementar.yml")
+    if not Path(arquivo).exists():
+        return []
+    dados = yaml.safe_load(Path(arquivo).read_text(encoding="utf-8")) or {}
+    return [arquivos_de_prova._normalizar(str(t))
+            for t in (dados.get("cargos_com_direito") or []) if str(t).strip()]
+
+
+def cargo_com_direito(cargo: str | None, termos: list[str]) -> bool:
+    texto = arquivos_de_prova._normalizar(cargo or "")
+    return bool(texto) and any(termo in texto for termo in termos)
+
+
+def _concursos_por_conteudo(limite: int, revisitar: bool = False) -> list[Concurso]:
+    """Todo concurso encerrado da FEPESE que ainda nao foi lido, perto ou
+    longe, do mais novo para o mais velho."""
+    ja_lidos = set() if revisitar else (
+        {r.get("concurso_url") for r in arquivos_de_prova.carregar_manifesto()}
+        | set(carregar_lidos_por_conteudo()))
+    escolhidos: list[Concurso] = []
+    with sessao() as s:
+        consulta = (select(Concurso)
+                    .where(Concurso.fonte == "fepese")
+                    .where(Concurso.situacao == "encerrado")
+                    .order_by(Concurso.publicado_em.desc().nullslast()))
+        for concurso in s.scalars(consulta):
+            if len(escolhidos) >= limite:
+                break
+            if concurso.url in ja_lidos or not _hotsite(concurso):
+                continue
+            escolhidos.append(concurso)
+    return escolhidos
+
+
+def _so_os_de_direito(encontrados: list, termos: list[str]) -> list:
+    """Os cadernos dos cargos de Direito e, se houver algum, os gabaritos do
+    concurso (o definitivo traz as anuladas). Sem caderno de interesse, nada:
+    o gabarito sozinho nao vira questao."""
+    cadernos = [d for d in encontrados if d.tipo == arquivos_de_prova.PROVA
+                and cargo_com_direito(d.cargo, termos)]
+    if not cadernos:
+        return []
+    gabaritos = [d for d in encontrados if d.tipo in (
+        arquivos_de_prova.GABARITO, arquivos_de_prova.GABARITO_DEFINITIVO)]
+    return cadernos + gabaritos
+
+
+# --- as provas de outras bancas (decisao 168) --------------------------------
+
+def _ler_ncufpr(caminho: Path, prova: dict, gabarito: Path | None) -> list:
+    # O caderno "definitivo" traz o gabarito dentro.
+    return questoes_ncufpr.ler_prova(caminho)
+
+
+def _ler_selecon(caminho: Path, prova: dict, gabarito: Path | None) -> list:
+    # O gabarito e um PDF a parte, e a materia sai da faixa da capa (config).
+    return questoes_selecon.ler_prova(
+        caminho, gabarito, questoes_selecon.faixas_do_config(prova.get("materias")))
+
+
+#: As bancas cujo caderno o radar sabe ler, e o leitor de cada uma. Cada
+#: leitor recebe o PDF, a entrada da prova no config e o gabarito a parte.
+LEITORES_DE_OUTRAS_BANCAS = {"NC-UFPR": _ler_ncufpr, "SELECON": _ler_selecon}
+
+
+def _ler_de_outra_banca(registro: dict, caminho: Path, leitor) -> list:
+    """O caderno de outra banca, com o que o config diz dele e o gabarito que
+    o manifesto baixou."""
+    prova = next((p for p in carregar_provas_de_outras_bancas()
+                  if p.get("caderno") == registro.get("url")), {})
+    gabarito = None
+    if prova.get("gabarito"):
+        do_gabarito = next((r for r in arquivos_de_prova.carregar_manifesto()
+                            if r.get("url") == prova["gabarito"]), None)
+        gabarito = _caminho(do_gabarito)
+    return leitor(caminho, prova, gabarito)
+
+
+def carregar_provas_de_outras_bancas(caminho: Path | None = None) -> list[dict]:
+    """A lista do `config/provas_de_outras_bancas.yml`, so das bancas que o
+    radar sabe ler."""
+    arquivo = caminho or (config.diretorio_config() / "provas_de_outras_bancas.yml")
+    if not Path(arquivo).exists():
+        return []
+    dados = yaml.safe_load(Path(arquivo).read_text(encoding="utf-8")) or {}
+    return [p for p in (dados.get("provas") or [])
+            if p.get("caderno") and (p.get("banca") or "").upper() in LEITORES_DE_OUTRAS_BANCAS]
+
+
+def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
+    """Baixa os cadernos (e os gabaritos a parte) da lista. O que ja esta no
+    manifesto nao e baixado de novo."""
+    resultado = ResultadoAcervo()
+    lista = carregar_provas_de_outras_bancas()
+    if not lista:
+        return resultado
+    registros = arquivos_de_prova.carregar_manifesto()
+    conhecidos = {r.get("url") for r in registros}
+    ocupados = {r["caminho"]: r.get("url") for r in registros if r.get("caminho")}
+    buscador = Buscador()
+    for prova in lista:
+        resultado.concursos += 1
+        documentos = [(arquivos_de_prova.PROVA, prova["caderno"])]
+        if prova.get("gabarito"):
+            documentos.append((arquivos_de_prova.GABARITO, prova["gabarito"]))
+        for tipo, url in documentos:
+            if url in conhecidos:
+                continue
+            documento = arquivos_de_prova.Documento(
+                tipo=tipo, url=url, arquivo=url.rsplit("/", 1)[-1],
+                cargo=prova.get("cargo") if tipo == arquivos_de_prova.PROVA else None,
+                concurso_url=prova.get("pagina") or prova["caderno"],
+                banca=prova["banca"], orgao=prova.get("orgao"),
+                municipio=prova.get("municipio"), ano=prova.get("ano"))
+            baixado = arquivos_de_prova.baixar(documento, buscador, ocupados=ocupados)
+            if baixado is None:
+                resultado.falhas += 1
+                continue
+            registros.append(arquivos_de_prova.para_registro(baixado))
+            conhecidos.add(baixado.url)
+            ocupados.setdefault(baixado.caminho, baixado.url)
+            if tipo == arquivos_de_prova.PROVA:
+                resultado.provas += 1
+            else:
+                resultado.gabaritos += 1
+        arquivos_de_prova.gravar_manifesto(registros)
+    return resultado
+
+
 def _documentos_do_hotsite(
     concurso: Concurso, hotsite: str, buscador, resultado
 ) -> list[arquivos_de_prova.Documento]:
@@ -207,18 +381,27 @@ def _documentos_do_hotsite(
 
 
 def montar_acervo(
-    limite: int = 20, abertos: bool = False, revisitar: bool = False
+    limite: int = 20, abertos: bool = False, revisitar: bool = False,
+    por_conteudo: bool = False,
 ) -> ResultadoAcervo:
     """Le os hotsites e baixa edital, prova e gabarito.
 
     Uma requisicao por pagina do hotsite e uma por PDF, todas com a pausa da
     classe Coletor. Por isso o limite: ler os 520 concursos de uma vez levaria
     horas e a maior parte nao interessa.
+
+    `por_conteudo` troca a distancia pelo cargo (decisao 167): todo concurso
+    encerrado da FEPESE, e dele so o caderno de cargo com Direito.
     """
     criar_tabelas()
     resultado = ResultadoAcervo()
 
-    escolhidos = _concursos_com_prova(limite, abertos, revisitar)
+    if por_conteudo:
+        escolhidos = _concursos_por_conteudo(limite, revisitar)
+        termos = cargos_com_direito()
+        lidos = carregar_lidos_por_conteudo()
+    else:
+        escolhidos = _concursos_com_prova(limite, abertos, revisitar)
     if not escolhidos:
         return resultado
 
@@ -230,8 +413,18 @@ def montar_acervo(
 
     for concurso in escolhidos:
         hotsite = _hotsite(concurso).rstrip("/")
+        falhas_antes = resultado.falhas
         encontrados = _documentos_do_hotsite(concurso, hotsite, buscador, resultado)
         resultado.concursos += 1
+        if por_conteudo:
+            encontrados = _so_os_de_direito(encontrados, termos)
+            # So se marca como lido o hotsite que respondeu inteiro: o que
+            # caiu no meio volta na proxima rodada.
+            if resultado.falhas == falhas_antes:
+                lidos[concurso.url] = {
+                    "lido_em": date.today().isoformat(),
+                    "cadernos": sum(1 for d in encontrados
+                                    if d.tipo == arquivos_de_prova.PROVA)}
 
         for documento in encontrados:
             if documento.url in conhecidos:
@@ -265,6 +458,8 @@ def montar_acervo(
         # desligando - o que ja foi baixado fica catalogado, e a proxima
         # rodada continua de onde parou em vez de recomecar.
         arquivos_de_prova.gravar_manifesto(registros)
+        if por_conteudo:
+            gravar_lidos_por_conteudo(lidos)
 
     return resultado
 
@@ -458,6 +653,9 @@ def _aplicar_gabarito_definitivo(registro: dict, lidas: list) -> None:
 
 def _ler_caderno(registro: dict, caminho: Path) -> list:
     """As questoes de um caderno. Cada banca imprime o dela de um jeito."""
+    leitor = LEITORES_DE_OUTRAS_BANCAS.get((registro.get("banca") or "").upper())
+    if leitor is not None:
+        return _ler_de_outra_banca(registro, caminho, leitor)
     if (registro.get("banca") or "").upper() != "IESES":
         lidas = leitor_de_questoes.ler_prova(caminho)
         if lidas:

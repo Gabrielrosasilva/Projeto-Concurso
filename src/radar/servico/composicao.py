@@ -330,6 +330,84 @@ def sem_as_usadas(estoque: dict[str, list[Candidata]],
             for assunto, lista in estoque.items()}
 
 
+@dataclass
+class Reserva:
+    """As questoes que uma rodada que mede ainda vai usar (decisao 167)."""
+
+    chaves: set[str] = field(default_factory=set)
+    #: Os dias das rodadas que reservam, para a tela dizer "do fechamento de 07/11".
+    dias: list[date] = field(default_factory=list)
+    #: O dia da rodada que reserva cada chave: a faixa diz o dia das SUAS.
+    dia_de: dict[str, date] = field(default_factory=dict)
+
+    def dias_das(self, chaves) -> list[date]:
+        return sorted({self.dia_de[c] for c in chaves if c in self.dia_de})
+
+
+def reserva_das_que_medem(data: date, plano=None) -> Reserva:
+    """O que o treino com questao real da FEPESE nao pode usar a partir de `data`.
+
+    Duas coisas: a questao ainda nao respondida de uma rodada que mede ja
+    criada no ciclo, e a que a faixa que mede de `data` em diante, ainda sem
+    rodada, escolheria hoje. A segunda e a do fechamento de 07/11. A
+    composicao escolhe as nunca respondidas primeiro, pela semente da faixa:
+    como o treino nunca toca nas que ela escolheria, ela continua achando
+    questao nunca vista quando a rodada for criada - e a prova nova que entrar
+    no acervo continua podendo entrar nela.
+    """
+    from radar import cronograma as plano_de_estudo
+    from radar.servico import cronograma as servico_cronograma
+    from radar.servico.simulado import RODADAS_QUE_MEDEM
+
+    plano = plano or plano_de_estudo.carregar()
+    reserva = Reserva()
+    criar_tabelas()
+    with sessao() as s:
+        rodadas: dict[int, date] = {}
+        for simulado in s.scalars(select(Simulado)):
+            filtros = simulado.filtros or {}
+            dia = (filtros.get("faixa") or {}).get("data")
+            if (filtros.get("rodada") in RODADAS_QUE_MEDEM and dia
+                    and plano.inicio <= date.fromisoformat(dia) <= plano.fim):
+                rodadas[simulado.id] = date.fromisoformat(dia)
+        if rodadas:
+            pendentes = s.execute(
+                select(RespostaDeSimulado.simulado_id, QuestaoDeProva)
+                .join(QuestaoDeProva, QuestaoDeProva.id == RespostaDeSimulado.questao_id)
+                .where(RespostaDeSimulado.simulado_id.in_(list(rodadas)))
+                .where(RespostaDeSimulado.gerada.is_not(True))
+                .where(RespostaDeSimulado.respondida_em.is_(None))).all()
+            for simulado_id, questao in pendentes:
+                chave = chave_de(questao)
+                reserva.chaves.add(chave)
+                reserva.dia_de.setdefault(chave, rodadas[simulado_id])
+                if rodadas[simulado_id] not in reserva.dias:
+                    reserva.dias.append(rodadas[simulado_id])
+
+    dias_que_medem = [dia.data for dia in plano.dias if dia.data >= data
+                      and any(mede(f) for f in dia.faixas())]
+    contexto = None
+    for dia in dias_que_medem:
+        tela = servico_cronograma.tela_do_dia(dia)
+        for bloco in tela.blocos or []:
+            for indice, faixa in enumerate(bloco.faixas):
+                if not mede(faixa) or rodada_da_faixa(dia, bloco.chave, indice, faixa):
+                    continue
+                contexto = contexto or Contexto.ler()
+                composicao = compor(materias_da_faixa(faixa), faixa.questoes,
+                                    contexto=contexto)
+                escolhidas = escolher(composicao, contexto.estoque,
+                                      _semente(dia, bloco.chave, indice),
+                                      contexto.respondidas)
+                for c in escolhidas:
+                    reserva.chaves.add(c.chave)
+                    reserva.dia_de.setdefault(c.chave, dia)
+                if escolhidas and dia not in reserva.dias:
+                    reserva.dias.append(dia)
+    reserva.dias.sort()
+    return reserva
+
+
 def estoque_real(materias: list[str] | None = None) -> dict[str, list[Candidata]]:
     """O mesmo estoque, para quem escolhe questao real fora da composicao: a
     faixa de Portugues que comeca no radar (decisao 107)."""

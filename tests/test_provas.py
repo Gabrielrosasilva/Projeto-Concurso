@@ -497,3 +497,106 @@ def test_o_gabarito_de_outra_fase_fica_de_fora():
 
 def test_capa_sem_gabarito_definitivo_nao_inventa():
     assert provas.ler_pagina_inicial("<html><body>nada aqui</body></html>", SAP) == []
+
+
+# --- o acervo pelo conteudo (decisao 167) -----------------------------------
+
+TERMOS = ["guarda", "policia", "escrivao", "procurador"]
+
+
+def test_o_cargo_de_direito_casa_sem_acento_e_sem_caixa():
+    from radar.servico import provas as servico_provas
+
+    assert servico_provas.cargo_com_direito("Escrivão de Polícia Civil", TERMOS)
+    assert servico_provas.cargo_com_direito("GUARDA MUNICIPAL", TERMOS)
+    assert not servico_provas.cargo_com_direito("Professor de Matemática", TERMOS)
+    assert not servico_provas.cargo_com_direito(None, TERMOS)
+
+
+def test_a_lista_de_cargos_vem_do_config():
+    from radar.servico import provas as servico_provas
+
+    termos = servico_provas.cargos_com_direito()
+    assert "guarda" in termos and "escrivao" in termos
+    # "seguranca" sozinho casaria Tecnico em Seguranca do Trabalho.
+    assert "seguranca" not in termos
+
+
+def _concurso_fepese(i, relevancia="remoto", situacao="encerrado"):
+    from radar.models import Concurso
+
+    return Concurso(
+        url=f"https://fepese.org.br/concurso/{i}", fonte="fepese",
+        titulo=f"2022 - Prefeitura Municipal {i}", relevancia=relevancia,
+        situacao=situacao, tipo="concurso", extra={"hotsite": f"https://h{i}.test"})
+
+
+class BuscadorDoHotsite:
+    """A pagina de provas de cada hotsite, e um PDF em todo download."""
+
+    def __init__(self, paginas):
+        self.paginas = paginas
+        self.pedidos = []
+
+    def get(self, url):
+        self.pedidos.append(url)
+        texto = ""
+        if "go=provas" in url:
+            texto = next((p for h, p in self.paginas.items() if h in url), "")
+
+        class Resposta:
+            pass
+
+        resposta = Resposta()
+        resposta.text = texto
+        resposta.content = b"%PDF-1.4 x"
+        return resposta
+
+
+def test_por_conteudo_le_o_longe_e_baixa_so_o_caderno_de_direito(banco_temporario,
+                                                                 monkeypatch):
+    from radar import servico
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_concurso_fepese(1))                     # remoto: o de sempre nao leria
+        s.add(_concurso_fepese(2))
+        s.add(_concurso_fepese(3, situacao="edital_publicado"))  # sem prova ainda
+    buscador = BuscadorDoHotsite({
+        "h1.test": ('<a href="?go=download&arquivo=G1.pdf">Guarda Municipal</a>'
+                    '<a href="?go=download&arquivo=P1.pdf">Professor de Artes</a>'
+                    '<a href="?go=download&arquivo=gab.pdf">Gabarito</a>'),
+        "h2.test": '<a href="?go=download&arquivo=P2.pdf">Professor de Artes</a>',
+    })
+    monkeypatch.setattr(servico.provas, "Buscador", lambda: buscador)
+
+    resultado = servico.montar_acervo(limite=10, por_conteudo=True)
+
+    registros = provas.carregar_manifesto()
+    assert resultado.concursos == 2
+    assert [r.get("cargo") for r in registros if r["tipo"] == "prova"] == ["Guarda Municipal"]
+    assert any(r["tipo"] == "gabarito" for r in registros)
+    lidos = servico.provas.carregar_lidos_por_conteudo()
+    assert lidos["https://fepese.org.br/concurso/1"]["cadernos"] == 1
+    assert lidos["https://fepese.org.br/concurso/2"]["cadernos"] == 0
+
+    # A segunda rodada nao bate de novo em quem ja foi varrido.
+    antes = len(buscador.pedidos)
+    assert servico.montar_acervo(limite=10, por_conteudo=True).concursos == 0
+    assert len(buscador.pedidos) == antes
+
+
+def test_o_hotsite_que_caiu_nao_fica_marcado_como_lido(banco_temporario, monkeypatch):
+    from radar import servico
+    from radar.db import sessao
+
+    with sessao() as s:
+        s.add(_concurso_fepese(1))
+
+    class BuscadorFora:
+        def get(self, url):
+            raise ConnectionError("fora do ar")
+
+    monkeypatch.setattr(servico.provas, "Buscador", BuscadorFora)
+    servico.montar_acervo(limite=10, por_conteudo=True)
+    assert servico.provas.carregar_lidos_por_conteudo() == {}

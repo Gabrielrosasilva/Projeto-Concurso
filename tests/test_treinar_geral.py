@@ -145,13 +145,13 @@ def test_a_tela_mostra_o_geral_em_cada_faixa_com_dois_nos(banco_temporario, monk
     # Um no so com gerada: so os botoes de cada no.
     _geradas(nos[0], 3, materia=faixa.materia)
     antes = cliente.get(f"/hoje?data={data.isoformat()}").text
-    assert "Treinar no radar" in antes
+    assert "Gerar treino" in antes
 
     _geradas(nos[1], 3, materia=faixa.materia)
     depois = cliente.get(f"/hoje?data={data.isoformat()}").text
 
-    assert "Treinar geral no radar" in depois
+    assert "Gerar treino geral" in depois
     for no in nos[:2]:
         assert f'name="conteudos" value="{escape(no)}"' in depois
     # Mesma faixa, os dois estados: o geral so aparece com o segundo no.
-    assert depois.count("Treinar geral no radar") > antes.count("Treinar geral no radar")
+    assert depois.count("Gerar treino geral") > antes.count("Gerar treino geral")

@@ -89,3 +89,31 @@ Quatro bancas, uma por uma:
 - **AOCP, FURB:** o robots.txt proíbe o servidor dos PDFs. **IBFC, Consulplan:** o caderno não é publicado, ou sai do ar.
 - **FUNDATEC:** não deu nem para ler o robots.txt. Daria só baixando à mão no navegador e importando de uma pasta local, mas os termos dela não foram lidos, e isso não está planejado.
 - **AOCP:** é a banca da PM SC. Se o caderno da PM SC sair numa página pública, vale olhar de novo.
+
+## Segundo levantamento: as bancas de concurso policial de 2019 a 2026 (17/10)
+
+Pedido seu, depois da etapa A: todas as bancas que fazem ou fizeram concurso policial de 2019 a 2026, com as matérias de lei do edital da Polícia Penal (Português e Raciocínio ficam de fora: a FEPESE já tem bastante). Doze bancas, com as mesmas regras do primeiro. Em cada uma, o pesquisador também anotou o que o robô não pode e uma pessoa pode baixar à mão no navegador, como você se ofereceu para fazer.
+
+| Banca | O que tem de policial, 2019–2026 | Robô | Termos | Recomendação |
+|---|---|---|---|---|
+| **NC-UFPR** | **Polícia Civil PR 2020**: Delegado (~100 de Direito) e Investigador/Papiloscopista (25); Guardas de Colombo 2022, Alm. Tamandaré 2023 e Campo Magro 2024. A–E, com a resposta certa marcada (►) no próprio caderno | pode | sem termos; caderno sem cláusula | **entra pelo robô** |
+| **Selecon** (site principal) | **SEJUSP/MG 2021, Policial Penal** (40 de 60 de Direito, com LEP); Guardas de Niterói 2019, Boa Vista 2019, Campo Grande 2020, São Gonçalo 2020 e São Luís 2022. A–D | pode | sem termos | **entra pelo robô** |
+| **IBADE** | **Agente Socioeducativo AC 2021** (~55 de 60 de Direito), **Inspetor Penitenciário ES 2023** (25 de 60), PC/ES 2025, peritos BA 2022, GCM SP 2022 e outras. A–E | pode | **a cláusula 5 proíbe**: o conteúdo "não pode ser copiado, reproduzido, distribuído ou utilizado sem autorização expressa do IBADE" | **decisão sua** |
+| **FGV** | **SEAP-BA 2024, Agente Penitenciário** (50 de 80 de Direito, A–E); a lista traz ainda a **Polícia Civil SC 2023**, PCs de MG, PI, PR, RJ, RN e AM, Guardas e PMs | o robots.txt deixa, **os termos não**: "Não utilizar ferramentas automatizadas" | proíbem robô e "reproduzir, duplicar, copiar" | **só à mão**, e com a mesma decisão sobre reprodução |
+| **Idecan** | Polícia Civil CE 2021, Perícia Forense CE 2021, Bombeiros RR | o site inteiro atrás de um desafio anti-robô | não achados | **só à mão** |
+| **FUMARC** | PC MG 2022 (Analista e Técnico Assistente), ALMG Policial Legislativo, TRT3 Polícia Judicial; os cadernos da PC MG 2021 nunca foram publicados | pode | sem termos | pelo robô, **prioridade baixa** (pouco Direito, muita lei mineira) |
+| **Access** | Guardas de Ribeirão Preto 2023, Cariacica 2023, Apiaí 2024; Bombeiros PB internos 2025 | o servidor dos PDFs proíbe | não achados | **só à mão**, prioridade baixa |
+| **Vunesp** | não deu para saber | bloqueia o robô já no robots.txt | não lidos | conferir no navegador |
+| **FCC** | PMs e Bombeiros de BA, AP e PI; nenhuma Polícia Penal | o robots.txt barra as páginas de concurso e os PDFs | não achados | **só à mão**, prioridade baixa |
+| **IADES** | Agente de Segurança Prisional GO 2019, PM-PA 2020, Polícia Técnico-Científica GO 2023 | pode | não achados | **não entra**: os cadernos vêm trancados pela banca (copiar e imprimir proibidos), e abrir o texto seria furar a trava |
+| **Instituto Mais** | só Guardas, com o caderno na área do candidato inscrito | — | — | **não entra** |
+| **Quadrix** | nenhum concurso policial | — | — | **não entra** |
+
+**O que só dá à mão** (páginas públicas, sem login, no navegador):
+- **FGV**: `https://conhecimento.fgv.br/concursos/seapba24` (SEAP-BA 2024; basta o Tipo 1 e o "Gabarito Oficial Definitivo"), `/concursos/pcsc23` (PC SC 2023) e as outras Polícias Civis da lista;
+- **Idecan**: `https://concurso.idecan.org.br/`, nos concursos realizados: PC-CE 2021 e PEFOCE 2021;
+- **Selecon** (plataforma nova): `https://selecon.selecao.net.br/informacoes/45/` e `/46/` (PM SE 2024), `/48/` (SENAPPEN 2024), `/52/` (GCM Niterói 2024);
+- **FCC**: `https://www.concursosfcc.com.br/concursos/govba222/index.html` (PM e Bombeiros BA 2022) e as do AP e PI;
+- **Access**: `https://concursos.access.org.br/informacoes/69/`, `/86/`, `/135/`.
+
+Baixado à mão, o PDF ainda precisa de um leitor do caderno daquela banca e de uma entrada no radar para PDF que não veio pelo robô (pendência O).
