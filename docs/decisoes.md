@@ -5557,3 +5557,48 @@ viraram estudo extra "Onde: Radar". Copia antes em
        a questao de crase cobrar outro assunto; em toda questao, a lacuna e o
        erro dependem da preposicao "a" que o verbo pede ou dispensa. A Crase 2
        chega a 24 reais e 83 geradas.
+
+## Outras bancas no treino e na medida (pedido de 17/10/2026)
+
+166. **as provas de outras bancas entram pelo site oficial de cada uma, e
+     medem o seu acerto por no - nunca o que a FEPESE cobra** (pedido de
+     17/10, a seu pedido; fura a I3, aprovado por voce). O simulado da semana
+     manda fazer questoes que voce nao acha no Qconcursos, e varias materias
+     (a aplicacao da lei penal, por exemplo) nao tem mais questao da FEPESE.
+     As regras:
+     - **o Qconcursos e o TEC Concursos ficam fora**: os termos dos dois
+       proibem robo, e os do TEC (clausula 18, itens 8.1 e 8.2) dizem que a
+       proibicao vale "inclusive quando a ferramenta for acionada diretamente
+       pelo proprio usuario"; o robots.txt do TEC bloqueia questoes e
+       cadernos. As questoes deles sao as provas das bancas: o caminho e o
+       site oficial de cada banca, com um coletor e um leitor de caderno por
+       banca (como `provas_ieses.py` e `questoes_ieses.py`), e o robots.txt,
+       o atraso e o User-Agent da `Coletor`;
+     - **a questao de outra banca mede o SEU DESEMPENHO**: o acerto por no
+       do `metricas` e do `desempenho_por_conteudo`, com a origem ao lado
+       ("62% · 40 questoes (12 FEPESE, 28 outras bancas)"). Isso nao quebra a
+       regra inviolavel 1 do novo.md, porque o desempenho ja e a terceira
+       coisa, separada das duas incidencias;
+     - **e nunca entra no que a FEPESE cobra**: incidencia, padroes, "caiu ou
+       nao caiu" (decisao 108), "Onde estudar primeiro", prioridade. O
+       `servico/evidencia.py` ja poe toda banca que nao e a FEPESE em `fora`,
+       e a regra fica como esta;
+     - **Certo/Errado so treina**: o chute acerta 50%, e 60% em C/E nao e 60%
+       em cinco alternativas, que e o formato da FEPESE. O acerto dele fica a
+       parte, como o do treino de IA;
+     - **o fechamento de 07/11 continua so FEPESE** (a composicao da decisao
+       67, nas rodadas que medem): ele e comparado com o diagnostico de 10/10
+       (decisao 105), e outra composicao quebraria a comparacao;
+     - **questao de lei estadual de outro estado** (estatuto, lei organica)
+       fica sem classificacao: nao tem no na arvore (regra inviolavel 9).
+     O que muda quando a etapa A entrar: o CLAUDE.md diz que o estudo "le so
+     as provas de SC"; o desempenho passa a ler tambem as de outras bancas e
+     estados, e a incidencia continua so de SC.
+     O levantamento de 9 bancas ([levantamento_de_bancas](levantamento_de_bancas.md))
+     deu tres com ressalva e seis fora. As tres: o Cebraspe (o maior volume,
+     a maioria C/E; o caderno diz "permitida a reproducao ... para fins
+     didaticos, desde que citada a fonte"), a ACAFE (a PC SC de 2010 e 2014) e
+     o IDIB (so na janela do recurso). As seis: AOCP e FURB (o robots.txt
+     proibe o servidor dos PDFs), IBFC e Consulplan (o caderno nao e
+     publicado, ou sai do ar), FUNDATEC (o desafio de robo do AWS WAF) e
+     IOBV (sem site oficial). A ordem das etapas esta na pendencia O.

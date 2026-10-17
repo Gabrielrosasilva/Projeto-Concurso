@@ -640,3 +640,46 @@ lacunas com a, à e há; 10 de crase e regencia). O que falta:
   os dois M1, q1): a leitura nao achou sinal nenhum dela. O conserto das
   quatro seria ligar a questao ao unico texto antes dela; ate la, o aviso
   manda ao caderno.
+
+## O. Outras bancas no treino e na medida (decisao 166, 17/10)
+
+Feito: o levantamento das 9 bancas, so leitura
+([levantamento_de_bancas](levantamento_de_bancas.md)). O que falta vai nesta
+ordem, uma etapa por conversa:
+
+### A IA pode fazer (uma etapa por conversa)
+
+- 🔴 **A. O mecanismo** (os itens 1 e 2 do pedido):
+  - as questoes `fora` classificadas nos nos da arvore (pela chave, com
+    procedencia); o que nao cabe fica sem classificacao;
+  - o treino "outras bancas" por no, dentro do radar;
+  - o acerto delas no desempenho por no, com a origem ao lado e o C/E a
+    parte.
+  Testado com as da IESES que ja estao no banco: 252 de Portugues, 117 de
+  Raciocinio e 63 de Atualidades, e nada de Direito (sao de concursos
+  municipais de educacao). Nao mexe na incidencia, nos padroes nem nas
+  rodadas que medem;
+- 🔴 **B. O Cebraspe**:
+  - o coletor das provas pela API, com nova tentativa no 404 do CDN;
+  - o leitor do caderno de multipla escolha e o do Certo/Errado (que so
+    treina), comecando pelos de seguranca publica;
+  - antes de tudo, contar quantos dos ~50 de seguranca sao de multipla
+    escolha;
+- 🔴 **C. A ACAFE**:
+  - a lista fixa dos cadernos da PC SC 2010 e do Delegado 2014;
+  - o leitor com a limpeza: o glifo, o espaco no meio da palavra, o hifen;
+  - o Agente 2014 fica fora, porque e escaneado;
+  - as questoes de antes de 2019 conferidas contra a lei de hoje, como na
+    [lista de leis alteradas](leis_alteradas.md);
+- 🔴 **D. O IDIB**:
+  - guardar o caderno durante a janela do recurso, na coleta do IDIB que o
+    radar ja faz;
+  - o leitor com os tipos A, B e C no mesmo PDF.
+
+### Depende de voce
+
+- ⚪ **O Referer do IDIB** (antes da etapa D): o download pede o cabecalho da
+  pagina oficial ("Download disponivel apenas atraves do site oficial"). E
+  trava contra link direto, nao login, e mandar ou nao e escolha sua;
+- ⚪ **O simulado da semana** continua no Qconcursos (decisao 69) ate a
+  etapa A. Depois dela, fica para voce decidir se ele passa para o radar.

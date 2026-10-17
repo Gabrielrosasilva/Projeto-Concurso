@@ -48,6 +48,7 @@ os que viraram história ficam, marcados como tal.
 | [reanalise_do_complementar.md](reanalise_do_complementar.md) | A reanálise às cegas do complementar (decisão 104). Registro do dia; a lista do que falta conferir está na lista única. |
 | [classificacao_pt_rl.md](classificacao_pt_rl.md) | As duas leituras de Português e Raciocínio Lógico (decisão 106). Registro do dia, como o de cima. |
 | [conferir_classificacoes.md](conferir_classificacoes.md) | **A lista única** do que você ainda confere na classificação do complementar. |
+| [levantamento_de_bancas.md](levantamento_de_bancas.md) | Onde estão as provas de outras bancas (17/10, decisão 166): 9 bancas, o robots.txt, os termos e a leitura do caderno de cada uma. Registro do dia. |
 
 ## Fora de docs/
 

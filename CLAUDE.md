@@ -310,6 +310,14 @@ que a alternativa pede (6 de 287, pendencia N); a Crase 2 aponta para o
 assunto "Emprego da crase" (24 reais e 83 geradas, antes 1 e 29); e 20
 geradas novas nos dois formatos que voce mostrou - 10 de texto com "a • à •
 há", 10 de crase e regencia verbal, sempre pela preposicao "a".
+**Outras bancas no treino e na medida (17/10, decisao 166, a seu pedido; fura
+a I3):** o Qconcursos e o TEC Concursos ficam fora (os termos dos dois
+proibem robo, mesmo acionado por voce), e as provas de outras bancas entram
+pelo site oficial de cada uma. Elas medem o seu acerto por no, com a origem
+ao lado, e nunca o que a FEPESE cobra; Certo/Errado so treina; o fechamento
+de 07/11 continua so FEPESE. Feito so o levantamento de 9 bancas
+([levantamento_de_bancas](docs/levantamento_de_bancas.md)): Cebraspe, ACAFE
+e IDIB entram com ressalva. As etapas A a D estao na pendencia O.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
