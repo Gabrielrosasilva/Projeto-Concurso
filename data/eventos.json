@@ -577,6 +577,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=367",
+    "data": "2026-10-17T14:33:04.926802+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=367",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
     "data": "2026-10-11T18:11:25.952083+00:00",
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
@@ -593,6 +601,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
+    "data": "2026-10-17T14:33:04.922905+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=368",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
     "data": "2026-10-11T18:11:25.953915+00:00",
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
@@ -606,6 +622,14 @@
     "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
     "link": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
     "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
+    "data": "2026-10-17T14:33:04.925895+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=369",
+    "tipo": "inscricoes_abertas"
   },
   {
     "avisado_em": null,
