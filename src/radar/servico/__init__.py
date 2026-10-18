@@ -133,6 +133,9 @@ from radar.servico import faixa_no_radar  # noqa: F401 - usado pela web
 from radar.servico import outras_bancas  # noqa: F401 - usado pela web
 # O treino com questoes reais da FEPESE do tema, em toda materia (decisao 167).
 from radar.servico import fepese_no_radar  # noqa: F401 - usado pela web
+# O Simulado da semana dos sabados leves: treina, nao mede (decisao 170).
+# `servico.simulado_da_semana.das_faixas(...)`.
+from radar.servico import simulado_da_semana  # noqa: F401 - usado pela web e CLI
 # A rodada da revisao espacada, 1-7-30 dias, com os nos da fila do `estudo`
 # (decisao 128). `servico.espacada.criar_simulado_de_revisao()`.
 from radar.servico import espacada      # noqa: F401 - usado pela web e CLI

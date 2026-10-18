@@ -2882,6 +2882,9 @@ def hoje(
             gf = geradas_do_dia.get((chave, indice))
             if gf is not None:
                 _mostrar_geradas_da_faixa(gf)
+            if servico.simulado_da_semana.aceita(faixa):
+                _mostrar_simulado_da_semana(servico.simulado_da_semana.planejar(
+                    quando, chave, indice, faixa, plano))
 
     console.print(f"\nTotal do dia: [bold]{dia.total_questoes} questões[/] "
                   f"e {dia.minutos_de_estudo} min de estudo de manhã")
@@ -3291,6 +3294,37 @@ def fichas(
 
 def _selo(origem: str) -> str:
     return SELOS[origem].emoji
+
+
+def _mostrar_simulado_da_semana(sds) -> None:
+    """O Simulado da semana (decisao 170), recuado embaixo da faixa: quantas
+    de cada tema, quantas o radar tem e o que vai para o Qconcursos."""
+    partes = f"{sds.da_parte_da_semana} dos temas de {sds.inicio_da_semana:%d/%m} a {sds.fim_da_semana:%d/%m}"
+    if sds.anteriores:
+        partes += f" e {sds.anteriores} de semanas anteriores"
+    console.print(f"     {_selo('automatico')} {escape(partes)}: [bold]{sds.do_radar} no radar[/], "
+                  f"{sds.no_qconcursos} no Qconcursos. Treina, não mede.")
+    for titulo, temas in (("Da semana", sds.da_semana), ("De semanas anteriores", sds.de_antes)):
+        if not temas:
+            continue
+        console.print(f"     [dim]{titulo}:[/]")
+        for t in temas:
+            onde = []
+            if t.do_radar:
+                origem = f" ({t.fepese} FEPESE, {t.outras} de outras bancas)" if t.outras else ""
+                onde.append(f"radar {t.do_radar}{origem}")
+            if t.no_qconcursos:
+                como =("o tema não tem nó na árvore" if t.sem_no
+                        else (t.filtro or f'procure pelo nome do tema: "{t.tema}"'))
+                onde.append(f"Qconcursos {t.no_qconcursos} ({como})")
+            estudado = f", {t.estudado_em:%d/%m}" if t.estudado_em else ""
+            console.print(f"       {t.pedidas} · {escape(t.tema)} [dim]({escape(t.materia)}{estudado})[/]: "
+                          f"{escape(' · '.join(onde))}", soft_wrap=True)
+    if sds.rodada_id:
+        console.print(f"     Rodada criada: /simulado/{sds.rodada_id}")
+    elif sds.escolhidas:
+        console.print('     [dim]Crie a rodada na tela Hoje, no dia: "Criar a rodada com as '
+                      f'{sds.do_radar} do radar". O link do Qconcursos de cada tema também está lá.[/]')
 
 
 def _mostrar_geradas_da_faixa(gf) -> None:

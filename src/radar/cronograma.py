@@ -191,6 +191,12 @@ class Faixa:
     # rampa do nivel menos o teto. O total do dia nao muda em nivel nenhum.
     teto: int | None = None
     sobra_da_rampa: str | None = None
+    # O simulado que TREINA e nao mede (o Simulado da semana dos sabados
+    # leves, decisao 170): mesmo no radar, nunca vira rodada que mede - o
+    # `composicao.mede` recusa. `anteriores` e quantas das questoes dele saem
+    # dos temas de semanas anteriores; o resto e da semana.
+    treino: bool = False
+    anteriores: int | None = None
     # A faixa do Anki com `anki: desativado`. Ela continua na lista, na mesma
     # posicao: os checks sao reconhecidos por bloco e posicao, e tira-la
     # mudaria a posicao do Bonus que vem depois. Desligada, ela nao tem
@@ -423,6 +429,16 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
     teto = bruta.get("teto")
     if teto is not None and (not isinstance(teto, int) or teto <= 0 or not rampa):
         raise ErroNoCronograma(f"{onde}: `teto` e um inteiro positivo, so em faixa de rampa")
+    treino = bool(bruta.get("treino"))
+    if treino and tipo != "simulado":
+        raise ErroNoCronograma(f"{onde}: `treino` so vale em faixa de simulado")
+    anteriores = bruta.get("anteriores")
+    if anteriores is not None and (
+            not treino or not isinstance(anteriores, int)
+            or not 0 <= anteriores < (bruta.get("questoes") or 0)):
+        raise ErroNoCronograma(
+            f"{onde}: `anteriores` e um inteiro de 0 ate menos que as questoes, so "
+            f"em simulado com `treino`")
     return Faixa(
         bloco=bloco,
         tipo=tipo,
@@ -452,6 +468,8 @@ def _faixa(bruta: dict, bloco: str, data: date, chaves_da_rampa: set) -> Faixa:
                      if bruta.get("compara_com") else None),
         teto=teto,
         sobra_da_rampa=sobra,
+        treino=treino,
+        anteriores=anteriores,
     )
 
 

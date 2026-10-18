@@ -1292,6 +1292,10 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # A composicao das faixas que medem (decisao 67) e a do simulado do
             # Qconcursos (decisao 69). So conta quando o dia tem uma delas.
             "composicoes": servico.composicao.das_faixas(tela.blocos, tela.data, tela.plano),
+            # O Simulado da semana dos sabados leves (decisao 170): a regra da
+            # 69 em duas partes, cada tema primeiro do radar. Treina, nao mede.
+            "simulados_da_semana": servico.simulado_da_semana.das_faixas(
+                tela.blocos, tela.data, tela.plano),
             # A revisao semanal, o R+7 dos diagnosticos e a comparacao do
             # fechamento (decisao 70). So conta no sabado.
             "do_sabado": servico.sabado.das_faixas(tela.blocos, tela.data, tela.plano),

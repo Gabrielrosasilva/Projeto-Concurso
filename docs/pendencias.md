@@ -196,7 +196,21 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   --resumos`, `--pedido --explicacoes` e, nas fichas de lei, `--pedido
   --traducoes` (decisao 161), cada um com o `--importar`, e o
   `radar fichas --verificar-resumos` no fim. A redistribuicao pela classe
-  de cada tema (decisao 108) vale tambem para ele. Prazo: antes de 09/11;
+  de cada tema (decisao 108) vale tambem para ele. Prazo: antes de 09/11.
+  **O que os sabados leves (decisao 170) mandaram para o Ciclo 2**, e que
+  ele precisa encaixar:
+  - os temas de Portugues **Termos integrantes 2** (complemento nominal e
+    agente da passiva), **Redacao oficial 2** (o padrao oficio) e **Revisao
+    ativa 3** (ortografia, acentuacao e redacao oficial) - as fichas dos tres
+    continuam no `data/fichas.json`, e a "Revisao ativa 2" de 04/11 so cobriu
+    a parte 1 dos termos integrantes;
+  - em **09/11**: a R+7 de Redacao oficial 1 (estudada em 02/11), a R+7 de
+    Argumentacao e quantificadores (30/10), a R+30 de Afirmacao historica e
+    dimensoes (08/10) e a R+30 de Interpretacao 2 (08/10) - as tres ultimas
+    sairam de 07/11, que ficou so com o fechamento;
+  - em **13/11**: a R+7 de Problemas aritmeticos e geometricos (06/11);
+  - e decidir se o sabado de 2 horas e o Raciocinio na sexta continuam no
+    Ciclo 2 (a decisao 170 vale ate 07/11);
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
 - ⚪ **O que ficou sem acento de proposito** (decisao 93): a descricao de

@@ -1105,6 +1105,43 @@
                   </div>
                 {% endif %}
 
+                {# O Simulado da semana (decisao 170): a regra da 69 em duas
+                   partes, a semana e as de antes; cada tema primeiro do radar,
+                   so questao real, e o que faltar no Qconcursos. Treina, nao
+                   mede: nao reserva questao nem entra na comparacao. #}
+                {% set sds = simulados_da_semana.get((b.chave, loop.index0)) if simulados_da_semana else none %}
+                {% if sds %}
+                  <div class="composicao simulado-da-semana">
+                    <p class="so-questoes">Só questões: não há o que estudar nesta faixa.</p>
+                    <p>{{ selo('automatico', 'Composição calculada') }}
+                      {{ sds.da_parte_da_semana }} dos temas da semana ({{ sds.inicio_da_semana | dia_mes }} a {{ sds.fim_da_semana | dia_mes }}){% if sds.anteriores %} e {{ sds.anteriores }} dos temas de semanas anteriores{% endif %}:
+                      entre as matérias pelo peso do edital {{ selo('oficial', curto=True) }}, e dentro de cada uma pela incidência nas provas do cargo quando o tema tem amostra, e por igual quando não tem, o tema mais recente primeiro.</p>
+                    <p><b>{{ sds.do_radar }} no radar</b>{% if sds.no_qconcursos %} e <b>{{ sds.no_qconcursos }} no Qconcursos</b>{% endif %}.</p>
+                    {% for titulo, temas in [('Da semana', sds.da_semana), ('De semanas anteriores', sds.de_antes)] if temas %}
+                      <p class="materia-da-rodada"><b>{{ titulo }}</b></p>
+                      <ul>
+                        {% for tm in temas %}
+                          <li><b>{{ tm.pedidas }}</b> · {{ tm.tema }} <span class="sub">({{ tm.materia }}{% if tm.estudado_em %}, estudado em {{ tm.estudado_em | dia_mes }}{% endif %})</span> —
+                            {% if tm.do_radar %}radar {{ tm.do_radar }}{% if tm.outras %} <span class="sub">({{ tm.fepese }} FEPESE, {{ tm.outras }} de outras bancas)</span>{% endif %}{% endif %}{% if tm.do_radar and tm.no_qconcursos %} · {% endif %}{% if tm.no_qconcursos %}Qconcursos {{ tm.no_qconcursos }}{% if tm.sem_no %} <span class="sub">(o tema não tem nó na árvore)</span>{% endif %}{% set la = link_do_qconcursos(tm.tema) %}{% if la %} · <a href="{{ la.url }}" target="_blank" rel="noopener">abrir no Qconcursos</a>{% elif tm.filtro %} · <span class="sub">Filtro: {{ tm.filtro }}</span>{% else %} · <span class="sub">procure pelo nome do tema</span>{% endif %}{% endif %}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endfor %}
+                    <p class="regra">Só questões reais: da FEPESE fora da reserva das rodadas que medem, depois de outras bancas, as nunca feitas primeiro. Questão gerada por IA não entra. Treina, não mede: o acerto do radar conta no seu desempenho, com a origem ao lado; a parte do Qconcursos fica fora do acumulado (a faixa não tem matéria).</p>
+                    {% if sds.rodada_id %}
+                      <p class="links"><a class="botao-anotar" href="/simulado/{{ sds.rodada_id }}"><span aria-hidden="true">▶</span> Abrir a rodada desta faixa</a></p>
+                    {% elif sds.escolhidas and (not t.futuro or t.e_hoje) %}
+                      <form method="post" action="/hoje/rodada">
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                        <button type="submit" class="ds-botao ds-botao--secundario">Criar a rodada com as {{ sds.do_radar }} do radar</button>
+                      </form>
+                    {% elif sds.escolhidas %}
+                      <p class="sub">O botão de criar a rodada aparece no dia da faixa.</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
                 {# A faixa de Portugues comeca pelas do radar (decisao 107): as
                    questoes reais da FEPESE do tema que eu ainda nao respondi;
                    o resto continua no Qconcursos. #}
@@ -1276,7 +1313,7 @@
                 {% if sab and sab.tipo == 'revisao_semanal' %}
                   <div class="composicao do-sabado">
                     <p>{{ selo('automatico', 'Calculado do plano e do caderno') }} A semana de {{ sab.inicio | dia_mes }} a {{ sab.fim | dia_mes }}.</p>
-                    <p class="materia-da-rodada"><b>(1) Os erros anotados na semana: {{ sab.erros }}</b></p>
+                    <p class="materia-da-rodada"><b>{% if not sab.rapida %}(1) {% endif %}Os erros anotados na semana: {{ sab.erros }}</b></p>
                     {% if sab.erros %}
                       <ul>
                         {% for tema in sab.temas if tema.erros %}<li><b>{{ tema.erros }}</b> · {{ tema.tema }} <span class="sub">({{ tema.materia }})</span></li>{% endfor %}
@@ -1285,12 +1322,14 @@
                     {% else %}
                       <p class="sub">Nenhum erro anotado no caderno nesta semana: anote os erros das correções antes de revisar.</p>
                     {% endif %}
-                    {% if sab.mais_erros %}
+                    {# A Revisao rapida (decisao 170) e so refazer as erradas: sem
+                       as regras para escrever e sem os artigos-chave. #}
+                    {% if sab.mais_erros and not sab.rapida %}
                       <p class="materia-da-rodada"><b>(2) Onde mais errou</b>: as regras para escrever no caderno saem destes temas.</p>
                       <ul>{% for tema in sab.mais_erros %}<li>{{ tema.tema }} · {{ tema.erros }} {{ 'erro' if tema.erros == 1 else 'erros' }}</li>{% endfor %}</ul>
                       {% if sab.motivos %}<p class="sub">Por motivo: {% for m in sab.motivos %}{{ m.nome }} {{ m.quantos }}{{ ' · ' if not loop.last }}{% endfor %}.</p>{% endif %}
                     {% endif %}
-                    {% if sab.artigos %}
+                    {% if sab.artigos and not sab.rapida %}
                       <p class="materia-da-rodada"><b>(3) Os artigos-chave da semana</b></p>
                       <ul class="artigos">{% for a in sab.artigos %}<li>{{ a.data | dia_mes }} · <b>{{ a.artigos }}</b> — {{ a.porque }}</li>{% endfor %}</ul>
                     {% endif %}

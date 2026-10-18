@@ -31,6 +31,11 @@ from radar.servico.classificacoes import chave_de
 
 # --- a revisao semanal -----------------------------------------------------------
 
+#: O titulo da revisao semanal dos sabados leves, de 24/10 em diante (decisao
+#: 170): so refazer as erradas da semana. E pelo titulo que a faixa e
+#: reconhecida, como os checks e as fichas.
+TITULO_DA_REVISAO_RAPIDA = "Revisão rápida"
+
 
 @dataclass
 class TemaDaSemana:
@@ -68,6 +73,9 @@ class RevisaoDaSemana:
     sem_tema: int
     motivos: list                 # [erros.Contagem], o motivo mais comum primeiro
     artigos: list[ArtigoDaSemana]
+    #: A Revisao rapida dos sabados leves (decisao 170): so refazer os erros da
+    #: semana. A tela nao mostra as "5 regras" nem os artigos-chave.
+    rapida: bool = False
 
     @property
     def mais_erros(self) -> list[TemaDaSemana]:
@@ -405,6 +413,8 @@ def das_faixas(blocos, data: date, plano) -> dict:
         for indice, faixa in enumerate(bloco.faixas):
             if faixa.tipo == "revisao_semanal":
                 item = revisao_da_semana(data, plano)
+                if item is not None:
+                    item.rapida = faixa.titulo == TITULO_DA_REVISAO_RAPIDA
             elif refaz_rodadas(faixa):
                 item = erros_das_rodadas(data, bloco.chave, indice, faixa, plano)
             elif getattr(faixa, "compara_com", None):

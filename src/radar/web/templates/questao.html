@@ -119,6 +119,8 @@
       Treino com questões <b>escritas por IA</b> — não medem o que a banca cobra{% if f.get('nivel') %} &middot; nível: {{ rotulo_do_nivel(f.get('nivel')) }}{% endif %}
     {% elif f.get('rodada') == 'outras_bancas' %}
       Treino com questões reais de <b>outras bancas</b>{% if f.get('bancas') %} ({{ f.get('bancas') | join(', ') }}){% endif %} — medem o seu acerto no tema, e nunca o que a FEPESE cobra
+    {% elif f.get('rodada') == 'simulado_da_semana' %}
+      <b>Simulado da semana</b>: questões reais{% if f.get('outras') %}, {{ f.get('outras') }} de outras bancas{% if f.get('bancas') %} ({{ f.get('bancas') | join(', ') }}){% endif %}{% endif %} — treina, não mede; o acerto conta no seu desempenho, com a origem ao lado
     {% elif f.get('erros') %}
       Revisão: só as questões que eu errei
     {% elif f.get('compilado') %}
@@ -129,7 +131,8 @@
     {% else %}
       Questões reais, tiradas das provas do acervo
     {% endif %}
-    {% if not na_hora %} &middot; rodada que mede: o certo e o errado aparecem no fim{% endif %}
+    {% if not na_hora and f.get('rodada') == 'simulado_da_semana' %} &middot; sem consulta: o certo e o errado aparecem no fim
+    {%- elif not na_hora %} &middot; rodada que mede: o certo e o errado aparecem no fim{% endif %}
   </p>
 
   {# O "so havia N" (decisao 151), antes da primeira resposta. #}

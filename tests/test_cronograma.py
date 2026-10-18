@@ -195,7 +195,10 @@ def test_arquivo_real_total_de_questoes(real):
     # A redistribuicao da R4 (decisao 124): a teoria e a lei seca que sairam
     # dos temas que nao cairam viraram questoes de revisao - +2 em 07, 13 e
     # 21/10 e +8 em 20/10. Os minutos do dia nao mudaram. 2119 + 14 = 2133.
-    assert total == 2133
+    # Os sabados leves (decisao 170): 23/10 -5 (15 de Portugues viram 10 de
+    # RL), 24/10 -20, 30/10 e 06/11 -8 (e a R+7 de Portugues que mudou de dia),
+    # 31/10 -27, 07/11 -15. 2133 - 83 = 2050.
+    assert total == 2050
 
 
 def test_arquivo_real_horarios_conferidos(real):

@@ -426,13 +426,19 @@ def responder(simulado_id: int, questao_id: int, letra: str,
 #: a correta no meio mudaria o que elas medem.
 RODADAS_QUE_MEDEM = ("composta", "erros_das_rodadas")
 
+#: As que mostram o resultado so no fim: as que medem e o Simulado da semana
+#: (decisao 170), que treina mas e simulado sem consulta - a correcao dele e a
+#: faixa seguinte do plano.
+RODADAS_CORRIGIDAS_NO_FIM = RODADAS_QUE_MEDEM + ("simulado_da_semana",)
+
 
 def corrige_na_hora(simulado: Simulado) -> bool:
     """A rodada mostra o certo e o errado logo depois de cada questao?
 
-    Todas, menos as que medem: no treino, ver o erro na hora e o que ensina.
+    Todas, menos as que medem e o Simulado da semana: no treino, ver o erro
+    na hora e o que ensina.
     """
-    return (simulado.filtros or {}).get("rodada") not in RODADAS_QUE_MEDEM
+    return (simulado.filtros or {}).get("rodada") not in RODADAS_CORRIGIDAS_NO_FIM
 
 
 def questao_respondida(

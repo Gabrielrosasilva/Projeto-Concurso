@@ -90,6 +90,9 @@ class AssuntoNaComposicao:
     #: e o dia em que o tema foi estudado.
     filtro: str | None = None
     estudado_em: date | None = None
+    #: So na composicao por tema: os nos da ficha do tema - e por eles que o
+    #: Simulado da semana acha as questoes reais do radar (decisao 170).
+    nos: list = field(default_factory=list)
 
 
 @dataclass
@@ -601,21 +604,26 @@ def _filtro_do_tema(tema) -> str | None:
     return next((f.faixa.filtro for f in tema.faixas if f.faixa.filtro), None)
 
 
-def _estudados(temas, materia: str, data: date) -> list[tuple]:
-    """[(tema, faixa de estudo)] da materia estudados antes de `data`, o mais
-    recente primeiro."""
+def _estudados(temas, materia: str, data: date, desde: date | None = None) -> list[tuple]:
+    """[(tema, faixa de estudo)] da materia estudados antes de `data` (e de
+    `desde` em diante, quando dado), o mais recente primeiro."""
     estudados = [(tema, tema.estudo()) for tema in temas
                  if compilado.mesma_materia(materia, tema.materia)]
     estudados = [(tema, estudo) for tema, estudo in estudados
-                 if estudo is not None and estudo.data < data]
+                 if estudo is not None and estudo.data < data
+                 and (desde is None or estudo.data >= desde)]
     estudados.sort(key=lambda par: (par[1].data, par[0].tema), reverse=True)
     return estudados
 
 
 def compor_por_tema(data: date, materias: list[str], total: int, plano, *,
                     pesos: dict[str, int] | None = None,
-                    contexto: "Contexto | None" = None) -> Composicao:
+                    contexto: "Contexto | None" = None,
+                    desde: date | None = None) -> Composicao:
     """A composicao do simulado do Qconcursos de `data`.
+
+    Com `desde`, so os temas estudados de `desde` ate antes de `data`: e a
+    parte "da semana" do Simulado da semana (decisao 170).
 
     As materias se dividem pelo quadro do edital, e cada materia pelos temas
     estudados ANTES de `data` (a faixa de estudo do tema veio antes): o tema
@@ -636,7 +644,7 @@ def compor_por_tema(data: date, materias: list[str], total: int, plano, *,
     regra = regra_da_prioridade.carregar()
     minimos = incidencia.carregar_minimos()
     temas = fichas.temas_do_plano(plano)
-    com_tema = [m for m in materias if _estudados(temas, m, data)]
+    com_tema = [m for m in materias if _estudados(temas, m, data, desde)]
     fora = [m for m in materias if m not in com_tema]
     if len(com_tema) == 1:
         por_materia = {com_tema[0]: total}
@@ -662,7 +670,7 @@ def compor_por_tema(data: date, materias: list[str], total: int, plano, *,
         classificadas_c = linha_c.classificadas if linha_c else 0
 
         assuntos, alvo_com = [], 0
-        for ordem, (tema, estudo) in enumerate(_estudados(temas, materia, data)):
+        for ordem, (tema, estudo) in enumerate(_estudados(temas, materia, data, desde)):
             escrita = fichas.da_faixa(estudo.faixa, escritas)
             nos = escrita.nos if escrita else []
             if nos:
@@ -690,7 +698,7 @@ def compor_por_tema(data: date, materias: list[str], total: int, plano, *,
                 alvo=amostra,
                 complementar=lc.amostra if lc and lc.classificadas else None,
                 estoque=SEM_LIMITE, filtro=_filtro_do_tema(tema),
-                estudado_em=estudo.data))
+                estudado_em=estudo.data, nos=list(nos)))
 
         dividir(materia, n, assuntos, alvo_com, max(total_alvo - alvo_com, 0))
         com = sorted((a for a in assuntos if a.grupo == COM_AMOSTRA),
@@ -716,9 +724,13 @@ class FaixaDoQconcursos:
 # --- a faixa do cronograma --------------------------------------------------------
 
 def mede(faixa) -> bool:
-    """A faixa sai por esta regra? So diagnostico e simulado feitos no radar."""
+    """A faixa sai por esta regra? So diagnostico e simulado feitos no radar.
+
+    O simulado com `treino` (o Simulado da semana, decisao 170) fica de fora
+    mesmo no radar: medir aqui tiraria questao do fechamento de 07/11."""
     return (faixa is not None and faixa.tipo in TIPOS_QUE_MEDEM
             and faixa.onde == "radar" and bool(faixa.questoes)
+            and not getattr(faixa, "treino", False)
             and bool(materias_da_faixa(faixa)))
 
 
@@ -851,6 +863,10 @@ def criar_rodada_do_dia(data: date, bloco: str, indice: int) -> Simulado | None:
             # origem: a rodada dele sai do servico do sabado.
             if sabado.refaz_rodadas(faixa):
                 return sabado.criar_rodada_dos_erros(data, bloco, indice, faixa, tela.plano)
+            # O Simulado da semana treina: a rodada dele nao mede (decisao 170).
+            from radar.servico import simulado_da_semana
+            if simulado_da_semana.aceita(faixa):
+                return simulado_da_semana.criar_rodada(data, bloco, indice, faixa, tela.plano)
             # A faixa de Portugues comeca pelas do radar (decisao 107).
             from radar.servico import faixa_no_radar
             if faixa_no_radar.aceita(faixa):

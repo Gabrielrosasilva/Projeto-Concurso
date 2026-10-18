@@ -103,7 +103,7 @@ O radar acompanha desde antes do edital. Campo `situacao`: `prevista` →
 `encerrado`. `banca_definida` e o sinal mais valioso: a contratacao da banca
 sai **2 a 4 meses antes do edital**, e da tempo de estudar o padrao dela.
 
-## Estado atual (13/10/2026; detalhe no [historico](docs/historico.md))
+## Estado atual (18/10/2026; detalhe no [historico](docs/historico.md))
 
 **Pronto:** o radar (fases 1-15), a especificacao e o **Ciclo 1 de estudo,
 rodando desde 28/09** (`config/cronograma.yml`: tela Hoje - o cronometro e a
@@ -347,7 +347,23 @@ treino, de outras bancas: Constitucional 73, Penal 44, Legislacao Especial
 39, Processo Penal 29, Direitos Humanos 26, LEP 15. Faltam a ACAFE, o IDIB,
 o IBADE (liberado por voce), as Guardas da Selecon e os PDFs que so dao a
 mao (voce baixa; falta a entrada de PDF local): pendencia O.
-**Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
+**Os sabados leves e o Raciocinio na sexta (pedido de 18/10, decisao 170, a
+seu pedido e fora dos lotes; nao mexe na medicao):** de 23/10 a 07/11 o
+sabado tem umas 2 horas, num bloco so - as revisoes do dia (ate 5 questoes
+cada), a "Revisao rapida" (so as erradas da semana), o Simulado da semana de
+25 e a correcao das erradas: 24/10 com 2h15, 31/10 com 2h35. O Simulado da
+semana e a regra da 69 em duas partes (20 dos temas de segunda a sexta, 5 dos
+de antes, com o Raciocinio Logico), cada tema primeiro do radar - a FEPESE
+fora da reserva de 07/11, depois outras bancas, as nunca feitas primeiro -, e
+so o que falta no Qconcursos; treina e nunca mede (`treino: true`, recusado
+pelo `composicao.mede`; a rodada `simulado_da_semana` corrige no fim). O 07/11
+ficou so com o fechamento e a correcao, na mesma posicao da noite (a semente
+das 50 nao mudou). Nas sextas a aula de Raciocinio do sabado entra no lugar da
+lei seca e do Portugues (10 de RL a noite), e o Portugues da sexta foi para a
+segunda seguinte; Termos integrantes 2, Redacao oficial 2, a Revisao ativa 3 e
+cinco revisoes foram para o Ciclo 2 (pendencia D). O Ciclo 1 foi de 2133 para
+2050 questoes.
+**Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
 **Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
@@ -405,7 +421,9 @@ R+7 dos diagnosticos e a comparacao de 07/11 - **sai do `servico/sabado.py`**
 (decisao 70). **A faixa de Portugues que comeca no radar** sai do
 `servico/faixa_no_radar.py` (decisao 107). **O treino com outras bancas** sai
 do `servico/outras_bancas.py` (decisao 166): so evidencia `fora`, e nunca
-entra na incidencia nem nas rodadas que medem. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
+entra na incidencia nem nas rodadas que medem. **O Simulado da semana** sai
+do `servico/simulado_da_semana.py` (decisao 170): faixa com `treino`, que o
+`composicao.mede` recusa - treina, nunca mede nem reserva questao. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
 (decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. Para o
 estudado e as datas, a faixa sem `conteudo` conta nos `nos` do plano e na
 ficha CONFERIDA, nunca no acerto (decisao 81). **Alvo,

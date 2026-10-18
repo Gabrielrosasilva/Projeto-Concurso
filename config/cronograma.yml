@@ -36,6 +36,14 @@
 #                 simulado), as materias da rodada quando sao mais de uma. A
 #                 composicao das questoes nao e escrita aqui: sai do
 #                 src/radar/servico/composicao.py (decisao 67).
+#   treino      - true = o simulado TREINA e nao mede (o Simulado da semana
+#                 dos sabados leves, decisao 170): mesmo com `onde: radar`, ele
+#                 nunca vira rodada que mede, nao reserva questao e nao entra
+#                 na comparacao. Cada tema sai primeiro do radar, so questao
+#                 real; o que faltar vai para o Qconcursos. So em `simulado`.
+#   anteriores  - no simulado com `treino`, quantas questoes saem dos temas de
+#                 semanas anteriores; o resto e dos temas da semana (segunda a
+#                 sexta). A composicao de cada parte e a da decisao 69.
 #   conteudo    - o no da arvore de conteudos, pelo caminho ("Lingua
 #                 Portuguesa > Vozes do verbo"). Opcional; conferido contra
 #                 data/conteudos.json (`radar conteudos`). So entra quando o
@@ -2732,29 +2740,18 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP art. 82, § 1º; LEP art. 84; LEP arts. 87 e 88; LEP art. 102'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: portugues
-    duracao: 20
-    materia: Língua Portuguesa
-    titulo: 'Termos integrantes 1: objeto direto e indireto'
-    detalhe: Transitividade verbal (VTD, VTI, VTDI, VI); objeto direto, direto preposicionado e pleonástico; objeto
-      indireto; pronome oblíquo como objeto (o, a, lhe).
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Conjuntos e diagramas lógicos
+    detalhe: União, interseção, diferença e complementar; problemas com 2 e 3 conjuntos no diagrama de Venn; diagramas
+      lógicos com 'todo', 'algum' e 'nenhum'. Vídeo + 5 exemplos resolvidos no papel.
     onde: videoaula
   - tipo: questoes
     questoes: 6
-    materia: Língua Portuguesa
-    titulo: 'Fixação: Termos integrantes 1: objeto direto e indireto'
-    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    materia: Raciocínio Lógico
+    titulo: 'Fixação: Conjuntos e diagramas lógicos'
+    detalhe: 6 questões da FEPESE do tema de Raciocínio Lógico que você acabou de ver, sem consulta.
     onde: qconcursos
   noite:
   - tipo: revisao
@@ -2787,11 +2784,10 @@ dias:
     duracao: 10
     titulo: Pausa
   - tipo: questoes
-    rampa: portugues
-    questoes: 15
-    materia: Língua Portuguesa
-    titulo: 'Termos integrantes 1: objeto direto e indireto'
-    detalhe: Questões da FEPESE do tema de Português da manhã.
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: conjuntos e diagramas lógicos'
+    detalhe: Questões da FEPESE do assunto da manhã.
     onde: qconcursos
   - tipo: correcao
     duracao: 30
@@ -2815,24 +2811,9 @@ dias:
     - Raciocínio Lógico > Equivalências
 - data: '2026-10-24'
   semana: 4
-  reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana.
+  reduzida: Faça só as revisões do dia e a revisão rápida.
+  minima: Refaça 10 questões erradas da semana.
   manha:
-  - tipo: raciocinio
-    duracao: 50
-    materia: Raciocínio Lógico
-    titulo: Conjuntos e diagramas lógicos
-    detalhe: União, interseção, diferença e complementar; problemas com 2 e 3 conjuntos no diagrama de Venn; diagramas
-      lógicos com 'todo', 'algum' e 'nenhum'. Vídeo + 5 exemplos resolvidos no papel.
-    onde: videoaula
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: revisao_semanal
-    duracao: 60
-    titulo: Revisão semanal
-    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5
@@ -2841,34 +2822,39 @@ dias:
     titulo: 'R+7: probabilidade'
     detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
     onde: qconcursos
-  noite:
+  - tipo: revisao_semanal
+    duracao: 15
+    titulo: Revisão rápida
+    detalhe: Refaça as questões que você errou de segunda a sexta, só questões, até completar uns 30 minutos
+      junto com as revisões do dia.
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
   - tipo: simulado
-    questoes: 35
+    questoes: 25
     min_por_questao: 3
     titulo: Simulado da semana
-    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já
-      estudado, na quantidade calculada para cada um.'
+    detalhe: 'Sem consulta, na composição abaixo: a maior parte entre os temas desta semana (de segunda a sexta),
+      o resto entre os de semanas anteriores. Cada tema sai primeiro do radar, só questão real (a FEPESE fora da
+      reserva do fechamento, depois outras bancas, as nunca feitas primeiro); o que faltar, no Qconcursos, pelo
+      "Abrir no Qconcursos" do tema. Treina, não mede.'
     materias_da_rodada:
     - Direito Penal
     - Direito Constitucional
     - Lei de Execução Penal
     - Direitos Humanos
     - Língua Portuguesa
+    - Raciocínio Lógico
     cronometrado: true
-    onde: qconcursos
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: questoes
-    questoes: 10
-    materia: Raciocínio Lógico
-    titulo: 'Raciocínio Lógico: conjuntos e diagramas lógicos'
-    detalhe: Questões da FEPESE do assunto da manhã.
-    onde: qconcursos
+    onde: radar
+    treino: true
+    anteriores: 5
   - tipo: correcao
-    duracao: 30
+    duracao: 20
     titulo: Correção do simulado
-    detalhe: Anote a nota e os erros por matéria.
+    detalhe: Só as erradas. Antes de ler o comentário, diga para si por que a certa é certa; no caderno de erros,
+      UMA regra por tema que você errou.
+  noite: []
   pos22:
   - tipo: anki
     duracao: 10
@@ -2933,14 +2919,14 @@ dias:
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
-    titulo: 'Termos integrantes 2: complemento nominal e agente da passiva'
-    detalhe: 'Complemento nominal (completa nome; sentido PASSIVO: ''a leitura do livro'') x adjunto adnominal (sentido
-      ATIVO/posse: ''a leitura do aluno''); agente da passiva.'
+    titulo: 'Termos integrantes 1: objeto direto e indireto'
+    detalhe: Transitividade verbal (VTD, VTI, VTDI, VI); objeto direto, direto preposicionado e pleonástico; objeto
+      indireto; pronome oblíquo como objeto (o, a, lhe).
     onde: videoaula
   - tipo: questoes
     questoes: 6
     materia: Língua Portuguesa
-    titulo: 'Fixação: Termos integrantes 2: complemento nominal e agente da passiva'
+    titulo: 'Fixação: Termos integrantes 1: objeto direto e indireto'
     detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
     onde: qconcursos
   noite:
@@ -2977,7 +2963,7 @@ dias:
     rampa: portugues
     questoes: 15
     materia: Língua Portuguesa
-    titulo: 'Termos integrantes 2: complemento nominal e agente da passiva'
+    titulo: 'Termos integrantes 1: objeto direto e indireto'
     detalhe: Questões da FEPESE do tema de Português da manhã.
     onde: qconcursos
   - tipo: correcao
@@ -3481,30 +3467,18 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP arts. 120 e 121; LEP art. 122; LEP art. 126'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: portugues
-    duracao: 20
-    materia: Língua Portuguesa
-    titulo: 'Redação oficial 1: atributos e tratamento'
-    detalhe: 'Manual de Redação da Presidência (3ª edição, 2018): clareza, precisão, objetividade, concisão, coesão,
-      impessoalidade, formalidade e padrão culto; pronomes de tratamento e vocativos; fechos RESPEITOSAMENTE (autoridade
-      superior) e ATENCIOSAMENTE (mesma hierarquia ou inferior).'
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Argumentação e quantificadores
+    detalhe: Argumento válido x verdadeiro; silogismo; analogias e inferências; quantificadores e suas NEGAÇÕES
+      ('todo' -> 'algum não'; 'nenhum' -> 'algum'). Vídeo + 5 exemplos resolvidos no papel.
     onde: videoaula
   - tipo: questoes
     questoes: 6
-    materia: Língua Portuguesa
-    titulo: 'Fixação: Redação oficial 1: atributos e tratamento'
-    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    materia: Raciocínio Lógico
+    titulo: 'Fixação: Argumentação e quantificadores'
+    detalhe: 6 questões da FEPESE do tema de Raciocínio Lógico que você acabou de ver, sem consulta.
     onde: qconcursos
   noite:
   - tipo: revisao
@@ -3515,14 +3489,6 @@ dias:
     titulo: 'R+7: Estabelecimentos penais (arts. 82 a 104)'
     detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 23/10, sem consulta."
     filtro: Execução Penal > estabelecimentos penais
-    onde: qconcursos
-  - tipo: revisao
-    rotulo: R+7
-    questoes: 3
-    materia: Língua Portuguesa
-    origem: '2026-10-23'
-    titulo: "R+7: Termos integrantes 1: objeto direto e indireto"
-    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 23/10 (termos integrantes 1: objeto direto e indireto), sem consulta."
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
@@ -3554,11 +3520,10 @@ dias:
     duracao: 10
     titulo: Pausa
   - tipo: questoes
-    rampa: portugues
-    questoes: 15
-    materia: Língua Portuguesa
-    titulo: 'Redação oficial 1: atributos e tratamento'
-    detalhe: Questões da FEPESE do tema de Português da manhã.
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: argumentação e quantificadores'
+    detalhe: Questões da FEPESE do assunto da manhã.
     onde: qconcursos
   - tipo: correcao
     duracao: 30
@@ -3583,39 +3548,24 @@ dias:
     - Raciocínio Lógico > Equivalências
 - data: '2026-10-31'
   semana: 5
-  reduzida: Faça só o simulado da noite.
-  minima: Refaça 20 questões erradas da semana.
+  reduzida: Faça só as revisões do dia e a revisão rápida.
+  minima: Refaça 10 questões erradas da semana.
   manha:
-  - tipo: raciocinio
-    duracao: 50
-    materia: Raciocínio Lógico
-    titulo: Argumentação e quantificadores
-    detalhe: Argumento válido x verdadeiro; silogismo; analogias e inferências; quantificadores e suas NEGAÇÕES
-      ('todo' -> 'algum não'; 'nenhum' -> 'algum'). Vídeo + 5 exemplos resolvidos no papel.
-    onde: videoaula
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: revisao_semanal
-    duracao: 60
-    titulo: Revisão semanal
-    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
   - tipo: revisao
     rotulo: R+7
     questoes: 5
     materia: Raciocínio Lógico
-    origem: '2026-10-24'
+    origem: '2026-10-23'
     titulo: 'R+7: conjuntos e diagramas lógicos'
     detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
-    questoes: 7
+    questoes: 5
     materia: Direitos Humanos
     origem: '2026-10-01'
     titulo: 'R+30: Teoria geral'
-    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta."
+    detalhe: "5 questões NOVAS de Direitos Humanos sobre o que você estudou em 01/10, sem consulta."
     filtro: Direitos Humanos > teoria geral dos direitos humanos
     onde: qconcursos
   - tipo: revisao
@@ -3626,34 +3576,39 @@ dias:
     titulo: "R+30: Interpretação 1: o método"
     detalhe: "3 questões NOVAS de Português sobre o que você estudou em 01/10 (interpretação 1: o método), sem consulta."
     onde: qconcursos
-  noite:
+  - tipo: revisao_semanal
+    duracao: 10
+    titulo: Revisão rápida
+    detalhe: Refaça as questões que você errou de segunda a sexta, só questões, até completar uns 30 minutos
+      junto com as revisões do dia.
+  - tipo: pausa
+    duracao: 10
+    titulo: Pausa
   - tipo: simulado
-    questoes: 40
+    questoes: 25
     min_por_questao: 3
     titulo: Simulado da semana
-    detalhe: 'Qconcursos, caderno novo, banca FEPESE, sem consulta, na composição abaixo: um filtro por tema já
-      estudado, na quantidade calculada para cada um.'
+    detalhe: 'Sem consulta, na composição abaixo: a maior parte entre os temas desta semana (de segunda a sexta),
+      o resto entre os de semanas anteriores. Cada tema sai primeiro do radar, só questão real (a FEPESE fora da
+      reserva do fechamento, depois outras bancas, as nunca feitas primeiro); o que faltar, no Qconcursos, pelo
+      "Abrir no Qconcursos" do tema. Treina, não mede.'
     materias_da_rodada:
     - Direito Penal
     - Direito Constitucional
     - Lei de Execução Penal
     - Direitos Humanos
     - Língua Portuguesa
+    - Raciocínio Lógico
     cronometrado: true
-    onde: qconcursos
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: questoes
-    questoes: 10
-    materia: Raciocínio Lógico
-    titulo: 'Raciocínio Lógico: argumentação e quantificadores'
-    detalhe: Questões da FEPESE do assunto da manhã.
-    onde: qconcursos
+    onde: radar
+    treino: true
+    anteriores: 5
   - tipo: correcao
-    duracao: 30
+    duracao: 20
     titulo: Correção do simulado
-    detalhe: Anote a nota e os erros por matéria.
+    detalhe: Só as erradas. Antes de ler o comentário, diga para si por que a certa é certa; no caderno de erros,
+      UMA regra por tema que você errou.
+  noite: []
   pos22:
   - tipo: anki
     duracao: 10
@@ -3724,14 +3679,15 @@ dias:
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
-    titulo: 'Redação oficial 2: o padrão ofício'
-    detalhe: Partes do documento no padrão ofício (cabeçalho, identificação, local e data, endereçamento, assunto,
-      texto, fecho, assinatura); a 3ª edição unificou ofício, aviso e memorando num padrão só; e-mail oficial.
+    titulo: 'Redação oficial 1: atributos e tratamento'
+    detalhe: 'Manual de Redação da Presidência (3ª edição, 2018): clareza, precisão, objetividade, concisão, coesão,
+      impessoalidade, formalidade e padrão culto; pronomes de tratamento e vocativos; fechos RESPEITOSAMENTE (autoridade
+      superior) e ATENCIOSAMENTE (mesma hierarquia ou inferior).'
     onde: videoaula
   - tipo: questoes
     questoes: 6
     materia: Língua Portuguesa
-    titulo: 'Fixação: Redação oficial 2: o padrão ofício'
+    titulo: 'Fixação: Redação oficial 1: atributos e tratamento'
     detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
     onde: qconcursos
   noite:
@@ -3749,8 +3705,8 @@ dias:
     questoes: 3
     materia: Língua Portuguesa
     origem: '2026-10-26'
-    titulo: "R+7: Termos integrantes 2: complemento nominal e agente da passiva"
-    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 26/10 (termos integrantes 2: complemento nominal e agente da passiva), sem consulta."
+    titulo: "R+7: Termos integrantes 1: objeto direto e indireto"
+    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 26/10 (termos integrantes 1: objeto direto e indireto), sem consulta."
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
@@ -3785,7 +3741,7 @@ dias:
     rampa: portugues
     questoes: 15
     materia: Língua Portuguesa
-    titulo: 'Redação oficial 2: o padrão ofício'
+    titulo: 'Redação oficial 1: atributos e tratamento'
     detalhe: Questões da FEPESE do tema de Português da manhã.
     onde: qconcursos
   - tipo: correcao
@@ -3999,7 +3955,8 @@ dias:
     materia: Língua Portuguesa
     titulo: 'Revisão ativa 2: pronomes, verbos e termos integrantes'
     detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
-      ainda erra.'
+      ainda erra. Dos termos integrantes, só a parte 1 (objeto direto e indireto, de 26/10): a parte 2 foi
+      para o Ciclo 2.'
     onde: videoaula
   - tipo: questoes
     questoes: 6
@@ -4280,29 +4237,18 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP art. 185; LEP art. 197; LEP art. 199'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: portugues
-    duracao: 20
-    materia: Língua Portuguesa
-    titulo: 'Revisão ativa 3: ortografia, acentuação e redação oficial'
-    detalhe: 'SEM teoria nova: refazer as questões do caderno de erros desses 3 temas e anotar a regra que você
-      ainda erra.'
+  - tipo: raciocinio
+    duracao: 50
+    materia: Raciocínio Lógico
+    titulo: Problemas aritméticos e geométricos
+    detalhe: Razão e proporção; regra de três simples e composta; porcentagem e aumentos sucessivos; perímetro e
+      área das figuras planas; teorema de Pitágoras. Vídeo + 5 exemplos resolvidos no papel.
     onde: videoaula
   - tipo: questoes
     questoes: 6
-    materia: Língua Portuguesa
-    titulo: 'Fixação: Revisão ativa 3: ortografia, acentuação e redação oficial'
-    detalhe: 6 questões da FEPESE do tema de Português que você acabou de ver, sem consulta.
+    materia: Raciocínio Lógico
+    titulo: 'Fixação: Problemas aritméticos e geométricos'
+    detalhe: 6 questões da FEPESE do tema de Raciocínio Lógico que você acabou de ver, sem consulta.
     onde: qconcursos
   noite:
   - tipo: revisao
@@ -4313,14 +4259,6 @@ dias:
     titulo: 'R+7: Permissão de saída, saída temporária e remição (arts. 120 a 130)'
     detalhe: "7 questões NOVAS de Lei de Execução Penal sobre o que você estudou em 30/10, sem consulta."
     filtro: Execução Penal > autorizações de saída e remição
-    onde: qconcursos
-  - tipo: revisao
-    rotulo: R+7
-    questoes: 3
-    materia: Língua Portuguesa
-    origem: '2026-10-30'
-    titulo: "R+7: Redação oficial 1: atributos e tratamento"
-    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 30/10 (redação oficial 1: atributos e tratamento), sem consulta."
     onde: qconcursos
   - tipo: revisao
     rotulo: R+30
@@ -4352,11 +4290,10 @@ dias:
     duracao: 10
     titulo: Pausa
   - tipo: questoes
-    rampa: portugues
-    questoes: 15
-    materia: Língua Portuguesa
-    titulo: 'Revisão ativa 3: ortografia, acentuação e redação oficial'
-    detalhe: Questões da FEPESE do tema de Português da manhã.
+    questoes: 10
+    materia: Raciocínio Lógico
+    titulo: 'Raciocínio Lógico: problemas aritméticos e geométricos'
+    detalhe: Questões da FEPESE do assunto da manhã.
     onde: qconcursos
   - tipo: correcao
     duracao: 30
@@ -4383,47 +4320,7 @@ dias:
   semana: 6
   reduzida: Faça só o simulado da noite.
   minima: Refaça 20 questões erradas da semana.
-  manha:
-  - tipo: raciocinio
-    duracao: 50
-    materia: Raciocínio Lógico
-    titulo: Problemas aritméticos e geométricos
-    detalhe: Razão e proporção; regra de três simples e composta; porcentagem e aumentos sucessivos; perímetro e
-      área das figuras planas; teorema de Pitágoras. Vídeo + 5 exemplos resolvidos no papel.
-    onde: videoaula
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
-  - tipo: revisao_semanal
-    duracao: 60
-    titulo: Revisão semanal
-    detalhe: (1) Refaça TODAS as questões que você errou de segunda a sexta; (2) escreva no caderno as 5 regras
-      que mais te derrubaram; (3) releia os artigos-chave da semana (os da lei seca dirigida).
-  - tipo: revisao
-    rotulo: R+7
-    questoes: 5
-    materia: Raciocínio Lógico
-    origem: '2026-10-31'
-    titulo: 'R+7: argumentação e quantificadores'
-    detalhe: 5 questões NOVAS da FEPESE desse assunto, sem consulta.
-    onde: qconcursos
-  - tipo: revisao
-    rotulo: R+30
-    questoes: 7
-    materia: Direitos Humanos
-    origem: '2026-10-08'
-    titulo: 'R+30: Afirmação histórica e dimensões (gerações)'
-    detalhe: "7 questões NOVAS de Direitos Humanos sobre o que você estudou em 08/10, sem consulta."
-    filtro: Direitos Humanos > afirmação histórica e gerações (dimensões) de direitos
-    onde: qconcursos
-  - tipo: revisao
-    rotulo: R+30
-    questoes: 3
-    materia: Língua Portuguesa
-    origem: '2026-10-08'
-    titulo: "R+30: Interpretação 2: tipos de texto"
-    detalhe: "3 questões NOVAS de Português sobre o que você estudou em 08/10 (interpretação 2: tipos de texto), sem consulta."
-    onde: qconcursos
+  manha: []
   noite:
   - tipo: simulado
     questoes: 50
@@ -4445,8 +4342,9 @@ dias:
     duracao: 30
     titulo: Correção
     detalhe: 'Veja o acerto por matéria na tabela abaixo. Quem decide o Ciclo 2 é o acumulado do ciclo, com o
-      fechamento ao lado e o diagnóstico de 10/10 para comparar; os simulados de sábado feitos no Qconcursos
-      ficam fora do acumulado (a faixa deles não tem matéria).'
+      fechamento ao lado e o diagnóstico de 10/10 para comparar. Dos simulados de sábado, a parte feita no
+      radar conta no acumulado, como qualquer questão real; a feita no Qconcursos fica fora (a faixa não tem
+      matéria).'
     compara_com: '2026-10-10'
   pos22:
   - tipo: anki

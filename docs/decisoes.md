@@ -3325,6 +3325,9 @@ mede (7A); commit e push por subetapa (8A).
     3 de Penal e 6 da LEP. As faixas de Portugues nao tem `filtro` no plano, e
     a tela manda procurar pelo nome do tema - filtro do Qconcursos nao se
     inventa.
+    **Mudada pela 170 (18/10):** em 24/10 e 31/10 o simulado da semana tem
+    25, em duas partes (a semana e as de antes), cada tema primeiro do radar;
+    so o que falta vai para o Qconcursos. A regra de dividir continua esta.
 
 70. **o sabado diz o que revisar com o que ja esta gravado**
     (`servico/sabado.py`, subetapa 2B):
@@ -3349,6 +3352,9 @@ mede (7A); commit e push por subetapa (8A).
       o acumulado do ciclo fica do lado, como a escolha 3A+C combinou.
     **Ajustada pela 146 (09/10):** quem decide e o acumulado, que vem
     primeiro; o fechamento fica ao lado e o diagnostico por ultimo.
+    **Ajustada pela 170 (18/10):** em 24/10 e 31/10 a revisao semanal vira a
+    "Revisao rapida" (so os erros da semana, sem as regras e os
+    artigos-chave), e 07/11 nao tem mais revisao semanal.
     As duas contas novas - o acerto de varias rodadas juntas e os erros delas -
     moram no `servico/metricas.py`.
 
@@ -5830,3 +5836,83 @@ viraram estudo extra "Onde: Radar". Copia antes em
        outras bancas: Constitucional 73, Administracao Publica 48, Penal
        44, Legislacao Especial 39, Processo Penal 29, Direitos Humanos 26,
        LEP 15.
+
+## Os sabados leves e o Raciocinio na sexta (pedido de 18/10/2026)
+
+170. **de 23/10 a 07/11 o sabado tem umas 2 horas, num bloco so; o Simulado
+     da semana sai primeiro do radar e treina, sem medir; o Raciocinio Logico
+     vai para a sexta, e o Portugues da sexta para a segunda** (pedido de
+     18/10, a seu pedido e fora dos lotes; aprovado "com as recomendadas").
+     O sabado tinha aula nova, revisao semanal de 60 min, R+7/R+30, simulado
+     de 35 a 40 a noite e correcao - de 4h45 a 6h -, e voce trabalha de
+     madrugada e nao ha edital nem previsao. Os dias ate 22/10 nao mudaram (os
+     checks sao reconhecidos por bloco, posicao e titulo), e o Anki desativado
+     ficou onde estava. As regras:
+     - **sabados 24/10 e 31/10**, um bloco so (o da manha; a hora e
+       referencia): as R+7 e R+30 do dia, ate 5 questoes cada (a R+30 de
+       Teoria geral foi de 7 para 5); a **Revisao rapida** (a revisao semanal
+       sem as "5 regras" e os artigos-chave: so refazer as erradas de segunda
+       a sexta, `sabado.TITULO_DA_REVISAO_RAPIDA`), 15 min em 24/10 e 10 em
+       31/10; pausa; o **Simulado da semana** de 25, a 3 min por questao (o
+       ritmo de todo simulado do plano, inclusive o fechamento); e a correcao
+       de 20, so das erradas. Sairam a noite inteira (o simulado de 35/40, as
+       10 de Raciocinio e a correcao de 30) e a aula de Raciocinio. Reduzida:
+       as revisoes do dia e a revisao rapida; Minima: 10 erradas da semana. O
+       botao Plano B de sabado continua o geral (20 erradas). 24/10 ficou com
+       2h15 e 30 questoes (era 5h05 e 50); 31/10 com 2h35 e 38 (era 5h50 e
+       65): as tres revisoes ja dao 40 min, e a revisao rapida nao cabe nos
+       "30 min junto" - escolha sua, ficou assim;
+     - **o Simulado da semana** (`servico/simulado_da_semana.py`): a
+       composicao da decisao 69 em duas partes - `questoes - anteriores` (20)
+       entre os temas de segunda a sexta da semana do plano, e `anteriores`
+       (5) entre os de antes (`compor_por_tema` ganhou o `desde`). No empate
+       continua o tema mais recente (a 69, escolha sua). O Raciocinio Logico
+       entrou nas materias da rodada: a aula agora e na sexta, e e tema da
+       semana. Cada tema sai primeiro do radar, so questao real: as da FEPESE
+       fora da reserva das rodadas que medem (decisao 167), depois as de
+       outras bancas (166) - as nunca feitas primeiro em todas, e so entao as
+       ja feitas; uma questao uma vez so no simulado, mesmo com dois temas no
+       mesmo no. Questao gerada nao entra. O que faltar vai para o
+       Qconcursos, pelo "Abrir no Qconcursos" do tema (decisao 140). A faixa
+       mostra quantas de cada tema, quantas do radar e quantas no site, e o
+       botao "Criar a rodada com as N do radar"; o `radar hoje` mostra o
+       mesmo. Com o banco de 17/10: 24/10 teria 22 do radar e 3 no Qconcursos
+       (Estabelecimentos penais nao tem questao real livre), 31/10, 19 e 6;
+     - **ele TREINA, e nao mede**: a faixa tem `onde: radar` e a chave nova
+       `treino: true`, e o `composicao.mede` recusa a faixa com `treino`. A
+       rodada (`simulado_da_semana`) nao esta nas `RODADAS_QUE_MEDEM`: nao
+       reserva questao, nao entra no estoque usado (decisao 145), nao entra na
+       comparacao, e o sabado continua com Plano B. Ela guarda a faixa (o "Fiz
+       hoje" conta sozinho) e nao e recriada. As respostas contam no acumulado
+       do ciclo como qualquer questao real respondida no radar, com a origem
+       ao lado; a parte do Qconcursos continua fora (decisao 146). Corrige no
+       fim, como simulado sem consulta (`RODADAS_CORRIGIDAS_NO_FIM`), e a
+       questao diz "Simulado da semana ... treina, nao mede";
+     - **07/11**: so o fechamento de 50 e a correcao com a comparacao. Ficou
+       no bloco da NOITE, na mesma posicao: a semente da composicao e a faixa
+       (data, bloco e posicao), e mudar de bloco sortearia outras 50 e mexeria
+       na reserva que o "Gerar questao real" ja respeita (escolha sua). Nada
+       da medicao mudou. Sairam a aula de Raciocinio (para 06/11), a Revisao
+       semanal (as erradas continuam na fila de revisao) e as tres revisoes do
+       dia; o detalhe da correcao passou a dizer que a parte do simulado de
+       sabado feita no radar conta no acumulado. 3h e 50 questoes (era 5h45
+       e 65);
+     - **sextas 23/10, 30/10 e 06/11**: a aula de Raciocinio do sabado
+       seguinte (Conjuntos e diagramas logicos; Argumentacao e
+       quantificadores; Problemas aritmeticos e geometricos), 50 min, e 6
+       questoes dela sem consulta, no tempo da lei seca, da 2a pausa e do
+       Portugues da manha - a manha continua das 10:15 as 12:30. A noite, as
+       15 de Portugues viram 10 de Raciocinio do mesmo tema. As R+7 de
+       Raciocinio continuam no sabado seguinte (a de conjuntos, em 31/10,
+       com origem 23/10). 23/10: 59 questoes e 4h55 (era 64 e 5h10); 30/10 e
+       06/11: 66 e 5h15 (era 74 e 5h40);
+     - **o Portugues da sexta vai para a segunda seguinte**, no lugar da
+       continuacao, que vai para o Ciclo 2 - nenhuma "parte 2" antes da parte
+       1: Termos integrantes 1 em 26/10 (no lugar do 2), Redacao oficial 1 em
+       02/11 (no lugar do 2); a Revisao ativa 3 (06/11) foi para o Ciclo 2. As
+       revisoes andaram junto: a R+7 de Termos integrantes 1 saiu de 30/10 e
+       entrou em 02/11, no lugar da do 2; a de Redacao oficial 1 saiu de 06/11
+       e vai para 09/11. A "Revisao ativa 2" de 04/11 cita os termos
+       integrantes: o detalhe diz que so a parte 1 entra.
+     O total do Ciclo 1 foi de 2133 para 2050 questoes. O que foi para o
+     Ciclo 2 esta na pendencia dele (secao D).

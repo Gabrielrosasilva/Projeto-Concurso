@@ -290,24 +290,20 @@ TITULOS = {
                    ("noite", ["Simulado da semana", "Pausa", "Raciocínio Lógico: probabilidade",
                               "Correção do simulado"]),
                    ("pos22", ["Anki: só os vencidos"])],
-    "2026-10-24": [("manha", ["Conjuntos e diagramas lógicos", "Pausa", "Revisão semanal",
-                              "R+7: probabilidade"]),
-                   ("noite", ["Simulado da semana", "Pausa",
-                              "Raciocínio Lógico: conjuntos e diagramas lógicos",
-                              "Correção do simulado"]),
+    # Os sabados leves (decisao 170): um bloco so, e a aula de Raciocinio foi
+    # para a sexta.
+    "2026-10-24": [("manha", ["R+7: probabilidade", "Revisão rápida", "Pausa",
+                              "Simulado da semana", "Correção do simulado"]),
+                   ("noite", []),
                    ("pos22", ["Anki: só os vencidos"])],
-    "2026-10-31": [("manha", ["Argumentação e quantificadores", "Pausa", "Revisão semanal",
-                              "R+7: conjuntos e diagramas lógicos", "R+30: Teoria geral",
+    "2026-10-31": [("manha", ["R+7: conjuntos e diagramas lógicos", "R+30: Teoria geral",
                               # P04: as 3 de Portugues do R+30 em linha propria.
-                              "R+30: Interpretação 1: o método"]),
-                   ("noite", ["Simulado da semana", "Pausa",
-                              "Raciocínio Lógico: argumentação e quantificadores",
-                              "Correção do simulado"]),
+                              "R+30: Interpretação 1: o método", "Revisão rápida", "Pausa",
+                              "Simulado da semana", "Correção do simulado"]),
+                   ("noite", []),
                    ("pos22", ["Anki: só os vencidos"])],
-    "2026-11-07": [("manha", ["Problemas aritméticos e geométricos", "Pausa",
-                              "Revisão semanal", "R+7: argumentação e quantificadores",
-                              "R+30: Afirmação histórica e dimensões (gerações)",
-                              "R+30: Interpretação 2: tipos de texto"]),
+    # O fechamento fica na noite, na mesma posicao: ela e a semente das 50.
+    "2026-11-07": [("manha", []),
                    ("noite", ["Simulado de fechamento do Ciclo 1", "Correção"]),
                    ("pos22", ["Anki: só os vencidos"])],
 }
@@ -460,10 +456,22 @@ def test_a_composicao_do_qconcursos_e_deterministica(acervo, plano):
 def test_os_simulados_de_sabado_nao_tem_numero_escrito_a_mao(plano):
     no_site = [(d.data, f) for d in plano.dias for f in d.faixas()
                if f.tipo == "simulado" and f.onde == "qconcursos"]
-    assert [d.isoformat() for d, _ in no_site] == [
-        "2026-10-03", "2026-10-10", "2026-10-17", "2026-10-24", "2026-10-31"]
+    assert [d.isoformat() for d, _ in no_site] == ["2026-10-03", "2026-10-10", "2026-10-17"]
     for _, faixa in no_site:
         assert composicao.no_qconcursos(faixa)
+        assert not any(c.isdigit() for c in faixa.detalhe), faixa.detalhe
+
+
+def test_o_simulado_da_semana_treina_e_nunca_mede(plano):
+    """Decisao 170: de 24/10 em diante o simulado de sabado e no radar, mas com
+    `treino` - nunca rodada que mede, que tiraria questao do fechamento."""
+    treino = [(d.data, f) for d in plano.dias for f in d.faixas() if f.treino]
+    assert [d.isoformat() for d, _ in treino] == ["2026-10-24", "2026-10-31"]
+    for _, faixa in treino:
+        assert faixa.tipo == "simulado" and faixa.onde == "radar"
+        assert not composicao.mede(faixa) and not composicao.no_qconcursos(faixa)
+        assert (faixa.questoes, faixa.anteriores) == (25, 5)
+        assert "Raciocínio Lógico" in faixa.materias_da_rodada
         assert not any(c.isdigit() for c in faixa.detalhe), faixa.detalhe
 
 
