@@ -214,6 +214,17 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   - e se o Ciclo 2 tera lei seca: ela saiu do Ciclo 1 de 19/10 em diante,
     sem nada no lugar, porque voce nao a faz (decisao 175). O padrao, se
     nada for dito, e montar o Ciclo 2 sem ela;
+  - **a proposta de 18/10 para aprender melhor (por decidir)**, pelas
+    tecnicas de mais evidencia (testar-se em vez de reler, espacar, misturar
+    na revisao, o sono que consolida, a correcao na hora): de manha, 3
+    questoes antes da aula (5 min), a teoria, 5 min de "folha em branco"
+    (escrever sem olhar o que lembra, depois conferir) e a fixacao SEM
+    consulta, com a correcao logo depois; a noite, as questoes de Direito do
+    tema da manha e o Portugues; na manha seguinte, um R+1 de 3 questoes do
+    tema de ontem (5 min). Uns 15 min a mais por dia, depois dos 30 que a
+    lei seca liberou. A rotina combinada (6A) e as duas materias nos dois
+    turnos; separar uma materia por turno perde a volta do tema da manha a
+    noite, que e o que mais fixa;
   **A minha conferencia das provas novas** (decisao 173) entra no Ciclo 2
   como **faixa de uns 20 minutos por semana, ate acabar**: a amostra dos
   quatro grupos (FEPESE, NC-UFPR e Selecon, Cebraspe, IESES; 10 por grupo,
