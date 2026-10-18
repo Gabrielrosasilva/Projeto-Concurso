@@ -722,6 +722,25 @@ mudancas:
     procedencia: Claude Code (claude-opus-5-5), 18/10/2026, pela compilação da Câmara
     conferida: false
 
+  # --- As provas baixadas a mao de 18/10 (decisao 172, aprovado por voce) ------
+  #
+  # Guarda de Ribeirao Preto 2023, q24; Guarda de Cariacica 2024, q45. As duas
+  # cobram a letra do art. 144 (as guardas fora dos incisos; o § 8o so com a
+  # protecao de bens, servicos e instalacoes), e pela letra o gabarito vale.
+  # O aviso diz que o STF mudou o entendimento (a ADPF 995 e depois da prova
+  # de Ribeirao Preto, 16/04/2023; o Tema 656, depois das duas).
+  - tema: "Guardas municipais na segurança pública (CF, art. 144, § 8º)"
+    lei: "STF, ADPF 995 (25/08/2023) e RE 608.588 (Tema 656 da repercussão geral, 20/02/2025)"
+    o_que_mudou: "o STF afastou as interpretações que excluíam as guardas municipais do Sistema de Segurança Pública (ADPF 995) e declarou constitucional o exercício de ações de segurança urbana por elas, inclusive policiamento ostensivo e comunitário e prisão em flagrante, sem atividade de polícia judiciária (Tema 656); a letra do art. 144, que as duas questões cobram, não mudou"
+    anos: [2023, 2024]
+    marcas: ["guardas municipais"]
+    provas:
+      - https://anexos.cdn.selecao.net.br/uploads/422/concursos/69/anexos/IR7IsjDF6zVygTOUti3I1mgK5KXBdmPXZG2TkIFA.pdf
+      - https://anexos.cdn.selecao.net.br/uploads/422/concursos/86/anexos/VU4tyBV8101pc0EVKa1UGC33pI9MA9Z7ohHfCktQ.pdf
+    fonte: https://noticias.stf.jus.br/postsnoticias/guardas-municipais-integram-o-sistema-de-seguranca-publica-decide-stf/
+    procedencia: Claude Code (claude-opus-5-5), 18/10/2026, pelas notícias do STF (ADPF 995, 28/08/2023; Tema 656, 20/02/2025), sem o acórdão
+    conferida: false
+
 # --- O que mudou num ponto que nenhuma questao cobra ---------------------------
 #
 # Os "casos de fronteira" do docs/leis_alteradas.md: o artigo mudou depois da

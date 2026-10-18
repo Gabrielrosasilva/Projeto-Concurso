@@ -818,13 +818,12 @@ O que falta vai nesta ordem, uma etapa por conversa.
     que nao veio para a pasta; o gabarito definitivo que voce baixou ja tem
     o bloco do Delegado. Se quiser (e quase todo de Direito): baixar e
     salvar em `data\provas\manual\`;
-  - ⚪ **os gabaritos discutiveis das baixadas a mao** (lista na Parte do
-    passo 2, acima, e mais): Delegado PC SC 2024, q71 (Protocolo de Palermo
-    exige a finalidade de exploracao tambem com a crianca) e q46
-    (reconhecimento fotografico como "prova irritual"); Escrivao PC SC 2026,
-    q25 (a certa traz "ou dele se beneficia...", trecho que a Lei
-    14.230/2021 tirou do art. 3º da Lei 8.429). Decidir se saem do treino,
-    como as seis de 17/10 no passo 2 da 171;
+  - ✅ **os gabaritos discutiveis das baixadas a mao** (aprovado por voce em
+    18/10; lista no [leis_alteradas](leis_alteradas.md)): sairam do treino a
+    PM SE Oficial q39, a Guarda de Niteroi q12 e o Delegado PC SC q71; a
+    Guarda de Ribeirao Preto q24 e a de Cariacica q45 ganharam o aviso do STF
+    (ADPF 995 e Tema 656; o item no `config/leis.yml` esta por conferir); as
+    outras quatro ficaram como estao. Estoque de lei no treino: 427;
   - ⚪ **a palavra partida nas baixadas a mao**, como na IESES: "p ara", "c
     om", "L ei", "policia l", e a ligadura "ﬁ m" da Selecon - FGV 55 de 160
     questoes, Selecon 12, Access 10, Idecan 3. Nao muda o gabarito; a

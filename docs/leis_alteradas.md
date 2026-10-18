@@ -322,3 +322,19 @@ As 449 questões de Direito das provas que entraram em 17/10 (FEPESE pelo conte�
 | NC-UFPR 2022, Guarda de Colombo, q26 | gabarito discutível: o STF (ADC 38, fev/2021) derrubou o limite de população antes da prova |
 | Cebraspe 2023, Guarda de São Cristóvão, q82 | gabarito discutível: uma alternativa repete a Súmula Vinculante 6 |
 | FEPESE 2014, DEINFRA, q22 | gabarito discutível: depende do texto do caderno ("vinculado" ou "discricionário"), que não está no disco |
+
+## As provas baixadas à mão de 18/10 (decisão 172, aprovado por você)
+
+Os gabaritos discutíveis que a classificação levantou nas 11 provas baixadas à mão foram lidos de novo pelo Claude Code (claude-opus-5-5) com a questão inteira, e você aprovou em 18/10: 3 saem do treino e 2 ganham o aviso. As outras 4 ficaram como estão: a SEAP-BA q30 (certa pela Lei 14.857/2024, anterior à prova), a SEAP-BA q77 (o item II é jurisprudência da Corte Interamericana, caso Villagrán Morales), o Delegado PC SC q46 (a banca cobrou a diferença entre prova irritual e atípica) e o Escrivão PC SC 2026 q25 (a certa traz um trecho que a Lei 14.230/2021 tirou, mas as outras quatro estão erradas).
+
+| Item | Norma | O que mudou | Questões | Conferido em |
+|---|---|---|---|---|
+| Guardas municipais na segurança pública (CF, art. 144, § 8º) | STF, ADPF 995 (25/08/2023) e RE 608.588 (Tema 656 da repercussão geral, 20/02/2025) | O STF afastou as interpretações que excluíam as guardas municipais do Sistema de Segurança Pública (ADPF 995) e declarou constitucional o exercício de ações de segurança urbana por elas, inclusive policiamento ostensivo e comunitário e prisão em flagrante, sem atividade de polícia judiciária (Tema 656); a letra do art. 144, que as duas questões cobram, não mudou | Access 2023, Guarda de Ribeirão Preto, q24; Access 2024, Guarda de Cariacica, q45 | pelas notícias do STF (sem o acórdão) |
+
+### As 3 que saíram do treino
+
+| Questão | Por quê |
+|---|---|
+| Selecon 2024, PM SE Oficial, q39 | gabarito discutível: a a) (adicional noturno pago a inativo) não tem base clara, e a d) (nome de autoridade na publicidade oficial) é vedada pela letra do art. 37, § 1º |
+| Selecon 2024, Guarda de Niterói, q12 | gabarito discutível: além da verdade sabida, a prova emprestada (faculdade, Súmula 591 do STJ) também é "dispensável" |
+| FGV 2024, Delegado PC SC, q71 | gabarito discutível: o Protocolo de Palermo exige a finalidade de exploração também com a criança, e o texto descreve a filha livre |

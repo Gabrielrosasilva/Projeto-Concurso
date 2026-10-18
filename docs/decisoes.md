@@ -6215,3 +6215,11 @@ da FEPESE: 75% ate o elemento, 21% no subassunto e 3% no assunto (FEPESE:
 24%, 59% e 15%). No treino de outras bancas: Constitucional 110, Penal 72,
 Administracao Publica 72, Processo Penal 60, Legislacao Especial 53,
 Direitos Humanos 41, LEP 22 - 430 de lei.
+Depois, os gabaritos discutiveis do lote, aprovados por voce em 18/10: a
+PM SE Oficial q39, a Guarda de Niteroi q12 e o Delegado PC SC q71 sairam do
+treino (`classificacoes.fora_do_treino`, a regra do passo 2 da 171: duas
+alternativas defensaveis, ou o gabarito supoe o que o texto nao da); as
+Guardas de Ribeirao Preto q24 e Cariacica q45, que cobram a letra do art.
+144, ganharam o aviso do STF (ADPF 995 e Tema 656) no `config/leis.yml`,
+com os dois cadernos em `provas`. As outras quatro ficaram. Estoque de lei
+no treino: 427.

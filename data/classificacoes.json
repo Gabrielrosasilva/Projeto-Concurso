@@ -361,18 +361,18 @@
   },
   {
     "chave": "03f7c256c239e2302dd9e028ecb477fb",
-    "classificada_em": "2026-10-18T05:06:34.602461+00:00",
-    "conferida_em": "2026-10-18T05:11:07.031188+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Protocolo de Palermo sobre tráfico de pessoas (ONU, 2000) > Protocolo de Palermo, art. 3º",
+    "classificada_em": "2026-10-18T13:53:22.831669+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direitos Humanos",
     "dispositivo": "Protocolo de Palermo (Decreto 5.017/2004), art. 3º, a a d",
     "item_do_edital": "A Constituição brasileira e os tratados internacionais de direitos humanos",
     "pegadinha": "O consentimento da vítima é irrelevante quando houve engano ou abuso (art. 3º, b), e o recrutamento e o transporte de criança (menor de 18) para exploração são tráfico mesmo sem esses meios (art. 3º, c); a remuneração ou a duração do trabalho não afastam o tráfico.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), gabaritos discutíveis aprovados por você, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "caso prático",
-    "trecho": "ainda que haja consentimento por sua parte e receba remuneração pelos serviços, se caracteriza o tráfico de pessoas"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: Delegado PC SC 2024 (FGV), q71 - o Protocolo de Palermo (art. 3º, c) exige a finalidade de exploração também com a criança, e o texto descreve a filha livre, morando com família e estudando; pela letra, a resposta seria a b)"
   },
   {
     "chave": "0407d1eced9628d20757c2d1be0754e0",
@@ -21931,18 +21931,18 @@
   },
   {
     "chave": "f6b16f634f972ebae59b9704837e9004",
-    "classificada_em": "2026-10-18T03:50:03.249425+00:00",
-    "conferida_em": "2026-10-18T03:50:03.241683+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
-    "conteudo": "Administração Pública > Princípios administrativos > Alcance de cada princípio",
+    "classificada_em": "2026-10-18T13:53:22.786011+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Administração Pública",
     "dispositivo": "CF, art. 37, caput (moralidade); adicional noturno é vantagem pelo serviço prestado, que não se estende ao inativo",
     "item_do_edital": "Princípios administrativos",
     "pegadinha": "b) a nomeação de cônjuge para cargo político (Secretário Municipal) em regra não é nepotismo (STF, Rcl 6.650; Súmula Vinculante 13); d) a publicidade só não pode ter nomes, símbolos ou imagens que caracterizem PROMOÇÃO PESSOAL de autoridades (art. 37, § 1º); a resposta da banca é o adicional noturno, vantagem de quem trabalha à noite, pago a quem está inativo",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
-    "status": "parcial",
+    "procedencia": "Claude Code (claude-opus-5-5), gabaritos discutíveis aprovados por você, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "caso prático",
-    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Administração Pública > Princípios administrativos > Alcance de cada princípio; segunda, às cegas, Administração Pública > Princípios administrativos > Alcance de cada princípio > CF, art. 37, § 1º"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: PM SE 2024 Oficial (Selecon), q39 - o gabarito a) (adicional noturno pago a inativo) não tem base clara, e a d) (nome de autoridade na publicidade oficial) é vedada pela letra do art. 37, § 1º, da CF: duas defensáveis"
   },
   {
     "chave": "f72db8c5dff15686f830dd92327bed0a",
@@ -22756,18 +22756,18 @@
   },
   {
     "chave": "fd17eaa4f7eda9a02b5744d75540d012",
-    "classificada_em": "2026-10-18T03:44:11.207762+00:00",
-    "conferida_em": "2026-10-18T03:50:03.829044+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Administração Pública > Poderes e deveres dos administradores públicos > Poder disciplinar",
+    "classificada_em": "2026-10-18T13:53:22.811913+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Administração Pública",
     "dispositivo": "CF, art. 5º, LV; Súmula 591 do STJ",
     "item_do_edital": "Poderes e deveres dos administradores públicos",
     "pegadinha": "a 'verdade sabida' (punir sem processo porque a autoridade presenciou a falta) não foi recepcionada pela CF (art. 5º, LV): é a que se dispensa, porque é vedada; devido processo, contraditório, ampla defesa e proporcionalidade são obrigatórios; a prova emprestada é permitida (Súmula 591 do STJ)",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), gabaritos discutíveis aprovados por você, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "exceção ou pegadinha",
-    "trecho": "Ao exercer esse poder, é dispensável ao administrador"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: Guarda de Niterói 2024 (Selecon), q12 - além da b) (verdade sabida), a d) (prova emprestada, faculdade pela Súmula 591 do STJ) também é dispensável: enunciado ambíguo"
   },
   {
     "chave": "fd24f1a97bb4f693df6c9e8eed63a741",
