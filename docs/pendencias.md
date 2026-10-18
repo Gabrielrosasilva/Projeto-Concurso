@@ -242,6 +242,16 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
 - 🔴 **Levar o radar para a nuvem, com login e dois perfis** (pedido de
   05/10): o plano, as opcoes, os custos e as perguntas que voce precisa
   responder antes estao em [roteiro_nuvem.md](roteiro_nuvem.md);
+- 🔴 **O Historico** (depois de 08/11). **Feita a parte 1** (decisao 174, 18/10):
+  o motivo de cada erro num clique, na resposta do radar e no "📝 Como foi" da
+  faixa, ja juntando o dado; a conta pronta e testada
+  (`metricas.motivos_dos_erros`, por origem, com o erro bobo), sem tela. Falta
+  a tela do Historico, que le essa conta. Os 4 erros do caderno que vieram do
+  radar antes da 174 ficam fora dela (nao casam com uma resposta so);
+  - ⚪ **reinicie o servidor** depois do `git pull` (`radar parar` e `radar
+    subir`): a questao, o relatorio, a tela Hoje e o caderno mudaram, e o
+    banco foi para a versao 9 (a copia de antes esta em
+    `data\copias\migracao-v8-para-v9-2026-10-18-112540`);
 
 ## E. Cancelado
 

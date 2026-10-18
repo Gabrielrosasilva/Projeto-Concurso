@@ -590,6 +590,9 @@ def _resposta_como_linha(resposta: RespostaDeSimulado, s) -> dict:
     # inteiro, e a resposta antiga nao tem "nao chutei" - tem "nao se sabe".
     if resposta.chutou is not None:
         linha["chutou"] = resposta.chutou
+    # O motivo do erro (decisao 174), pela mesma regra: so quando eu disse.
+    if resposta.motivo is not None:
+        linha["motivo"] = resposta.motivo
     if resposta.gerada:
         linha["impressao"] = s.scalar(
             select(QuestaoGerada.impressao)
@@ -754,6 +757,10 @@ def importar_simulados(caminho: Path | None = None) -> tuple[int, int]:
                     )
                 if minha.chutou is None and r.get("chutou") is not None:
                     minha.chutou = r["chutou"]
+                # O arquivo antigo nao tem a chave, e a resposta fica sem
+                # motivo; o banco que ja tem um nao e trocado pelo arquivo.
+                if minha.motivo is None and r.get("motivo"):
+                    minha.motivo = r["motivo"]
 
     if de_fora:
         log.warning(

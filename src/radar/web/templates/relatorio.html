@@ -41,6 +41,10 @@
       color:var(--cor-texto)}
     details.acertos summary{cursor:pointer;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
     details.acertos li{font-size:var(--tam-xs);margin:var(--esp-1) 0}
+    .motivo-do-erro{display:flex;flex-wrap:wrap;gap:var(--esp-1);align-items:center;
+      margin-top:var(--esp-3)}
+    .motivo-do-erro form{display:inline}
+    .motivo-do-erro__rotulo{font-weight:var(--peso-forte);margin-right:var(--esp-1)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -48,6 +52,7 @@
 {% from "_topo.html" import barra with context %}
 {% from "_componentes.html" import selo, bloco %}
 {% from "_falta_de_geradas.html" import falta_de_geradas %}
+{% from "_motivo.html" import botoes_do_motivo %}
 {{ barra('estudar') }}
 
 {# Os numeros vem prontos do servico.metricas: o template so mostra. #}
@@ -163,7 +168,7 @@
     {% set explicacao = explicacoes.get(item.impressao) if not item.gerada else none %}
     {% set relacionados = macetes_da_questao.get((item.prova_url ~ '#' ~ item.numero)) or [] %}
     {% set lei = leis_das_materias.get(item.materia) %}
-    <article class="ds-cartao erro" style="margin-top:var(--esp-3)">
+    <article class="ds-cartao erro" id="erro-{{ loop.index }}" style="margin-top:var(--esp-3)">
       <div class="ds-cartao__cabeca">
         <span class="ds-pequeno ds-suave">
           {{ item.materia or 'sem matéria' }}{% if not item.gerada and item.numero %} · questão {{ item.numero }}, {{ item.banca }} {{ item.ano }}{% endif %}{% if item.chutou %} · 🎲 no chute{% endif %}
@@ -208,8 +213,14 @@
 
       {# Cada erro vai ao caderno com a materia e o no DA QUESTAO (U21): no
          R+7 dos diagnosticos a faixa nao tem materia, e cada erro e de uma. #}
+      {# O "por que errei" (decisao 174): na rodada que corrige no fim, e so
+         aqui, depois da ultima; na de treino, da para trocar aqui tambem. #}
+      {% if item.questao_id %}
+        {{ botoes_do_motivo(simulado.id, item.questao_id, item.motivo,
+                            '/simulado/' ~ simulado.id ~ '#erro-' ~ loop.index) }}
+      {% endif %}
       <p class="ds-pequeno" style="margin-top:var(--esp-3)">
-        <a href="{{ link_de_anotar_erro_da_questao(simulado.id, item.materia, item.assunto, item.referencia, item.chutou, item.conteudo) }}">📓 Anotar erro</a>
+        <a href="{{ link_de_anotar_erro_da_questao(simulado.id, item.materia, item.assunto, item.referencia, item.motivo, item.conteudo, item.questao_id) }}">📓 Anotar erro</a>
         <span class="ds-suave">· {{ item.conteudo or 'questão sem nó na árvore: escolha no formulário' }}</span>
       </p>
     </article>

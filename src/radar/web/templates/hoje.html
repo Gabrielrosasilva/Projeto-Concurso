@@ -126,6 +126,10 @@
     .faixa .nota-da-faixa form{display:grid;gap:var(--esp-2);margin-top:var(--esp-2)}
     .faixa .nota-da-faixa .entendi{display:flex;flex-wrap:wrap;gap:var(--esp-3);border:0;padding:0;margin:0}
     .faixa .nota-da-faixa .entendi legend{padding:0;margin-bottom:var(--esp-1)}
+    .faixa .nota-da-faixa .motivos-da-nota{display:flex;flex-wrap:wrap;gap:var(--esp-2);border:0;padding:0;margin:0}
+    .faixa .nota-da-faixa .motivos-da-nota legend{padding:0;margin-bottom:var(--esp-1)}
+    .faixa .nota-da-faixa .motivos-da-nota input{width:4.5em}
+    .faixa .nota-da-faixa .motivos-da-nota p{flex-basis:100%;margin:0}
     .faixa .nota-da-faixa textarea{width:100%;box-sizing:border-box;font:inherit;display:block;margin-top:var(--esp-1)}
     .faixa .nota-da-faixa button{justify-self:start}
     .faixa .geradas-da-faixa .estoque-de-geradas{margin:var(--esp-1) 0;font-size:var(--tam-sm);font-weight:var(--peso-medio)}
@@ -1505,7 +1509,8 @@
                     <summary>📝 Como foi{% if nf %}:
                       {%- if nf.entendi_texto %} {{ nf.entendi_texto | lower }}{% endif %}
                       {%- if nf.chutes is not none %}{{ ',' if nf.entendi_texto }} {{ nf.chutes }} no chute{% endif %}
-                      {%- if nf.nota %}{{ ',' if nf.entendi_texto or nf.chutes is not none }} com nota{% endif %}
+                      {%- if nf.motivos %}{{ ',' if nf.entendi_texto or nf.chutes is not none }} motivo de {{ nf.soma_dos_motivos }}{% if nf.erros_do_fiz is not none %} dos {{ nf.erros_do_fiz }}{% endif %} erros{% endif %}
+                      {%- if nf.nota %}{{ ',' if nf.entendi_texto or nf.chutes is not none or nf.motivos }} com nota{% endif %}
                     {%- else %} <span class="sub">(anotar)</span>{% endif %}</summary>
                     <form method="post" action="/hoje/faixa/nota{% if cor %}?cor={{ cor }}{% endif %}">
                       <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
@@ -1516,6 +1521,24 @@
                         <label>quantas chutei {{ 'no Qconcursos' if f.onde == 'qconcursos' else 'fora do radar' }}
                           <input type="number" name="chutes" min="0" inputmode="numeric" placeholder="—"
                                  value="{{ nf.chutes if nf and nf.chutes is not none else '' }}"></label>
+                        {# Os erros de fora do radar por motivo (decisao 174), so em
+                           numeros: a soma nao passa dos erros do "fiz". #}
+                        <fieldset class="motivos-da-nota">
+                          <legend>Por que errei{% if nf and nf.erros_do_fiz is not none %} (dos {{ nf.erros_do_fiz }} erros do “fiz”){% endif %}</legend>
+                          {% for chave, nome in MOTIVOS_DO_ERRO.items() %}
+                            <label>{{ nome }}
+                              <input type="number" name="motivo_{{ chave }}" min="0" inputmode="numeric" placeholder="—"
+                                     value="{{ nf.motivos.get(chave, '') if nf else '' }}"></label>
+                          {% endfor %}
+                          {% if nf and nf.motivos %}
+                            <p class="sub">Dos {{ nf.erros_do_fiz if nf.erros_do_fiz is not none else nf.soma_dos_motivos }} erros: {{ nf.motivos_texto }}{% if nf.sem_motivo %} ({{ nf.sem_motivo }} sem motivo){% endif %}</p>
+                          {% endif %}
+                          {% if nf and nf.motivos_passam %}
+                            <p class="regra">⚠ Os motivos ({{ nf.soma_dos_motivos }}) passam dos {{ nf.teto_dos_motivos }} erros do “fiz”: corrija um dos dois. Até lá eles ficam fora da conta.</p>
+                          {% elif nf and nf.motivos and nf.teto_dos_motivos is none %}
+                            <p class="sub">A soma será conferida quando você anotar o “fiz”.</p>
+                          {% endif %}
+                        </fieldset>
                       {% endif %}
                       <fieldset class="entendi">
                         <legend>Entendi o assunto?</legend>

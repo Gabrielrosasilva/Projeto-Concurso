@@ -155,7 +155,7 @@ texto-base compartilhado ("Caso 3") e a marca "square" minuscula - os 3
 cadernos que sobravam fecharam, e o acervo foi relido.
 Acervo: 8.462 questoes (as 170 do alvo classificadas e conferidas; 172
 provas complementares aceitas); 1.709 geradas (10 rejeitadas), as aceitas
-todas com nivel; 214 explicacoes; arvore com 438 nos; banco na versao 8.
+todas com nivel; 214 explicacoes; arvore com 438 nos; banco na versao 8 (9 desde 18/10, decisao 174).
 **A auditoria independente de 04/10** ([auditoria_independente](docs/auditoria_independente.md)):
 186 requisitos e 8 defeitos, todos consertados nas Rodadas 1 a 4 (decisoes 96
 a 103); sobra a 2013-q53, so com voce (pendencia G). **O pedido de 05/10**
@@ -411,6 +411,17 @@ questao nao respondida no radar vem sem a letra, o dispositivo, a pegadinha
 e o trecho, e o "Responder no radar" abre so ela, como treino; a guardada para
 uma rodada que mede (38 do alvo e 12 do complementar) nao aparece. A sua
 conferencia entra no Ciclo 2, uns 20 minutos por semana (pendencia D).
+**O motivo de cada erro, num clique (18/10, decisao 174, a seu pedido; nao
+mexe em numero):** toda resposta errada no radar tem cinco botoes - Nao
+sabia, Confundi, Li errado, Pegadinha, Chutei - e o clique grava o motivo na
+propria resposta (`respostas_de_simulado.motivo`, banco na versao 9; vale o
+ultimo). No treino, na correcao; na rodada que corrige no fim, so no
+relatorio. O "vou no chute" ja marca o Chutei (`erros.motivo_do_erro`, sem
+gravar nada), o caderno aberto pelo radar leva o motivo de volta para a
+resposta, e o "📝 Como foi" da faixa ganha os erros de fora do radar por
+motivo, com a soma presa aos erros do "fiz". A conta do Historico (parte 1)
+esta pronta, sem tela: `metricas.motivos_dos_erros`, por origem, nunca
+somadas, cada erro uma vez, com o erro bobo (`erros.ERRO_BOBO`).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
@@ -475,7 +486,10 @@ do `servico/simulado_da_semana.py` (decisao 170): faixa com `treino`, que o
 do lote** sai do `servico/conferencia_do_lote.py` (decisao 173): o lote e a
 lista de chaves do `data/lotes_de_classificacao.json`, e a conferencia nunca
 mostra a letra da questao que eu nao respondi no radar nem a guardada para uma
-rodada que mede. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
+rodada que mede. **O motivo do erro** sai do `erros.motivo_do_erro` (decisao
+174), e a conta dos motivos do `metricas.motivos_dos_erros`: o caderno com
+fonte "radar" nunca conta (o erro conta pela resposta), e nada disso entra em
+acerto, erro ou volume. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
 (decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. Para o
 estudado e as datas, a faixa sem `conteudo` conta nos `nos` do plano e na
 ficha CONFERIDA, nunca no acerto (decisao 81). **Alvo,

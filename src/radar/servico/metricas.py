@@ -1211,3 +1211,123 @@ def evolucao() -> Evolucao:
     resultado.recente = taxa(recentes)
     resultado.anterior = taxa(antigas)
     return resultado
+
+
+# --- o motivo de cada erro (decisao 174) ------------------------------------------
+
+#: As origens do motivo do erro, na ordem da tela. Nunca somadas: a questao real
+#: da FEPESE mede o que a banca cobra, a de outra banca so o meu acerto no no
+#: (decisao 166), a gerada treina (decisao 152), e a de fora do radar fui eu
+#: que contei.
+ORIGENS_DO_ERRO = {
+    "fepese": "Questões reais da FEPESE, no radar",
+    "outras_bancas": "Questões de outras bancas, no radar",
+    "geradas": "Questões geradas por IA",
+    "fora_do_radar": "Fora do radar (Qconcursos)",
+}
+
+
+@dataclass
+class MotivosDosErros:
+    """Os erros de uma origem, por motivo. E um dado a mais, para o Historico:
+    nao entra em acerto, erro nem volume de nada que ja existe."""
+
+    origem: str
+    erros: int = 0
+    #: {chave dos MOTIVOS do servico/erros.py: quantos}.
+    por_motivo: dict = field(default_factory=dict)
+
+    @property
+    def com_motivo(self) -> int:
+        return sum(self.por_motivo.values())
+
+    @property
+    def sem_motivo(self) -> int:
+        return max(0, self.erros - self.com_motivo)
+
+    @property
+    def bobos(self) -> int:
+        """Li errado + Confundi (`erros.ERRO_BOBO`)."""
+        from radar.servico.erros import ERRO_BOBO
+
+        return sum(self.por_motivo.get(motivo, 0) for motivo in ERRO_BOBO)
+
+    def somar(self, motivo: str | None, quantos: int = 1) -> None:
+        if motivo:
+            self.por_motivo[motivo] = self.por_motivo.get(motivo, 0) + quantos
+
+
+def motivos_dos_erros(desde: date | None = None,
+                      ate: date | None = None) -> dict[str, MotivosDosErros]:
+    """Os erros por motivo, cada um contado UMA vez, por origem (decisao 174).
+
+    - **no radar**, cada resposta errada e um erro, como no volume: errar de
+      novo a mesma questao e outro erro, com o seu motivo. O motivo e o do
+      `erros.motivo_do_erro` (o "vou no chute" vale "chutei");
+    - **o caderno com fonte "radar" nunca conta**: o erro ja conta pela
+      resposta, e o caderno aberto pelo radar leva o motivo a ela;
+    - **fora do radar, por faixa e dia**: a nota com motivos e o total da faixa
+      e vale sozinha; sem ela, contam os erros do caderno daquela faixa (o
+      mesmo dia e o assunto igual ao titulo). A nota cujos motivos passam do
+      "fiz" fica de fora ate eu corrigir. O erro do caderno que nao e de
+      faixa nenhuma (estudo extra, outro) conta sozinho;
+    - **os erros de fora do radar** sao os do "fiz" com os acertos; da faixa
+      sem os acertos, so os erros a que eu dei motivo.
+    """
+    from radar.models import ErroAnotado
+    from radar.servico import erros as caderno
+    from radar.servico import notas_da_faixa
+
+    def no_periodo(dia: date) -> bool:
+        return (desde is None or dia >= desde) and (ate is None or dia <= ate)
+
+    contas = {origem: MotivosDosErros(origem) for origem in ORIGENS_DO_ERRO}
+    criar_tabelas()
+    with sessao() as s:
+        erradas = list(s.scalars(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.escolhida.is_not(None))
+            .where(RespostaDeSimulado.acertou.is_(False))))
+        de_outra_banca = set(s.scalars(
+            select(QuestaoDeProva.id).where(QuestaoDeProva.evidencia == evidencia.FORA)))
+        estados = list(s.scalars(select(EstadoDoDia)))
+        do_caderno = list(s.scalars(select(ErroAnotado).where(ErroAnotado.fonte != "radar")))
+
+    for resposta in erradas:
+        if resposta.respondida_em is None or not no_periodo(
+                para_local(resposta.respondida_em).date()):
+            continue
+        origem = ("geradas" if resposta.gerada else
+                  "outras_bancas" if resposta.questao_id in de_outra_banca else "fepese")
+        contas[origem].erros += 1
+        contas[origem].somar(caderno.motivo_do_erro(resposta))
+
+    fora = contas["fora_do_radar"]
+    com_erros_no_fiz, com_nota = set(), set()
+    for estado in estados:
+        if not no_periodo(estado.data):
+            continue
+        for check in estado.faixas_feitas or []:
+            if check.get("questoes") is not None and check.get("acertos") is not None:
+                fora.erros += check["questoes"] - check["acertos"]
+                com_erros_no_fiz.add((estado.data, check.get("titulo")))
+        for nota in notas_da_faixa.do_dia(estado).values():
+            if not nota.motivos or nota.motivos_passam:
+                continue
+            com_nota.add((estado.data, nota.titulo))
+            for motivo, quantos in nota.motivos.items():
+                fora.somar(motivo, quantos)
+            if nota.erros_do_fiz is None:
+                # O "fiz" nao diz os erros (ou ainda nao existe): contam os
+                # que eu disse.
+                fora.erros += nota.soma_dos_motivos
+    for erro in do_caderno:
+        if not no_periodo(erro.data_estudo):
+            continue
+        da_faixa = (erro.data_estudo, erro.assunto)
+        if da_faixa in com_nota:
+            continue
+        fora.somar(erro.motivo)
+        if da_faixa not in com_erros_no_fiz:
+            fora.erros += 1
+    return contas

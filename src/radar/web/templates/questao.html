@@ -82,11 +82,16 @@
     .errada-ia{background:transparent;border:1px solid var(--cor-vermelho);color:var(--cor-vermelho);
       border-radius:var(--raio-sm);padding:var(--esp-1) var(--esp-3);font:inherit;
       font-size:var(--tam-xs);cursor:pointer}
+    .motivo-do-erro{display:flex;flex-wrap:wrap;gap:var(--esp-1);align-items:center;
+      margin-top:var(--esp-3)}
+    .motivo-do-erro form{display:inline}
+    .motivo-do-erro__rotulo{font-weight:var(--peso-forte);margin-right:var(--esp-1)}
   </style>
 </head>
 <body class="ds">
 {% from "_componentes.html" import selo, bloco, aviso_lei %}
 {% from "_falta_de_geradas.html" import falta_de_geradas %}
+{% from "_motivo.html" import botoes_do_motivo %}
 
 <main class="foco">
   <div class="topo-foco">
@@ -245,6 +250,12 @@
           {% endcall %}
         {% endfor %}
       </div>
+
+      {# O "por que errei" (decisao 174): so na errada, logo depois do erro. #}
+      {% if not resposta.acertou %}
+        {{ botoes_do_motivo(simulado.id, questao.id, motivo_do_erro,
+                            '/simulado/' ~ simulado.id ~ '?ver=' ~ questao.id) }}
+      {% endif %}
 
       <div class="seguir">
         <a class="ds-botao proxima" href="/simulado/{{ simulado.id }}" autofocus>

@@ -976,6 +976,24 @@ nele **nao entra em acerto medido nenhum** do radar (Meu foco, Onde estudar,
 home, compilado). La so conta o que eu respondi dentro do radar, questao por
 questao.
 
+## O motivo de cada erro, num clique
+
+Toda questao que eu erro no radar ganha cinco botoes pequenos - **Nao sabia ·
+Confundi · Li errado · Pegadinha · Chutei** - e o clique grava o motivo na
+propria resposta (clicar em outro troca; vale o ultimo). No treino eles
+aparecem na correcao, logo depois do erro; na rodada que corrige so no fim (as
+que medem e o Simulado da semana), so no relatorio, uma linha por errada. Se eu
+marquei o "vou no chute" e errei, o **Chutei** ja vem marcado. O **📓 Anotar no
+caderno** abre com o motivo escolhido, e o motivo que eu trocar la volta para a
+resposta. No **📝 Como foi** de cada faixa, os erros de fora do radar por motivo,
+so em numeros ("Dos 9 erros: Nao sabia 3 · Confundi 2"): a soma nao passa dos
+erros do "fiz".
+
+E a preparacao do Historico: nao muda acerto, erro nem volume. A conta fica em
+`servico.metricas.motivos_dos_erros()`, separada por origem (questao real da
+FEPESE, outra banca, gerada e fora do radar, nunca somadas), com o **erro bobo**
+(li errado + confundi, `servico/erros.py`).
+
 ## Os comandos
 
 ```bash

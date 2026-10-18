@@ -285,16 +285,20 @@ def link_de_anotar_erro(data, materia, assunto, volta: str, nos=(), plano=None) 
 
 
 def link_de_anotar_erro_da_questao(simulado_id: int, materia, assunto, referencia: str,
-                                   chutou: bool, conteudo: str | None) -> str:
+                                   motivo: str | None, conteudo: str | None,
+                                   questao_id: int | None = None) -> str:
     """O "Anotar erro" de uma questao da rodada: na correcao na hora (decisao
-    142) e em cada erro do relatorio (U21), com o no da questao."""
+    142) e em cada erro do relatorio (U21), com o no da questao e o motivo do
+    erro ja escolhido (decisao 174). A rodada e a questao vao junto: o motivo
+    que eu trocar no caderno volta para a resposta, e o erro tem um motivo so."""
     return "/erros/novo?" + urlencode([
         ("materia", materia or ""),
         ("assunto", assunto or ""),
         ("fonte", "radar"),
         ("referencia", referencia),
-        ("motivo", "chutei" if chutou else ""),
+        ("motivo", motivo or ""),
         *([("no", conteudo)] if conteudo else []),
+        *([("simulado", simulado_id), ("questao", questao_id)] if questao_id else []),
         ("volta", f"/simulado/{simulado_id}"),
     ])
 
@@ -903,7 +907,11 @@ def _questao_corrigida(request: Request, simulado, resumo: dict, de_ia: bool,
             # na mesma hora, sem digitar de novo - com o no da questao (U21).
             "anotar_erro": link_de_anotar_erro_da_questao(
                 simulado.id, questao.materia, questao.assunto, referencia,
-                resposta.chutou, servico.no_da_questao(questao, gerada)),
+                servico.erros.motivo_do_erro(resposta), servico.no_da_questao(questao, gerada),
+                questao.id),
+            # Os botoes do "por que errei" (decisao 174): o marcado e o meu,
+            # ou "Chutei" pelo "vou no chute".
+            "motivo_do_erro": servico.erros.motivo_do_erro(resposta),
         },
     )
 
@@ -921,6 +929,24 @@ def _macetes_por_questao() -> dict[str, list]:
             chave = f"{q.get('prova_url')}#{q.get('numero')}"
             por_questao.setdefault(chave, []).append({**m, "origem": origem.IA})
     return por_questao
+
+
+@app.post("/simulado/{simulado_id}/motivo")
+def simulado_motivo(
+    simulado_id: int,
+    questao_id: int = Form(...),
+    motivo: str = Form(""),
+    volta: str = Form(""),
+):
+    """Um dos cinco botoes do "por que errei" (decisao 174): grava o motivo na
+    resposta errada e volta para onde eu estava - a correcao da questao ou o
+    relatorio. Clicar em outro troca; nao muda acerto nenhum."""
+    try:
+        servico.marcar_motivo(simulado_id, questao_id, motivo)
+    except servico.MotivoRecusado as recusa:
+        return HTMLResponse(f"<p>Não gravei: {escape(str(recusa))}</p>", status_code=400)
+    return RedirectResponse(
+        _volta_interna(volta or f"/simulado/{simulado_id}?ver={questao_id}"), status_code=303)
 
 
 @app.post("/simulado/{simulado_id}/responder")
@@ -1499,9 +1525,15 @@ def hoje_faixa_nota(
     chutes: str = Form(""),
     entendi: str = Form(""),
     nota: str = Form(""),
+    motivo_nao_sabia: str = Form(""),
+    motivo_confundi: str = Form(""),
+    motivo_li_errado: str = Form(""),
+    motivo_pegadinha: str = Form(""),
+    motivo_chutei: str = Form(""),
 ):
-    """O "como foi" de uma faixa (decisao 142): a nota, os chutes e o
-    entendi. Tudo vazio tira a nota. Volta para a mesma faixa, como o "fiz"."""
+    """O "como foi" de uma faixa (decisao 142): a nota, os chutes, o entendi
+    e os erros de fora do radar por motivo (decisao 174). Tudo vazio tira a
+    nota. Volta para a mesma faixa, como o "fiz"."""
     try:
         quando = date.fromisoformat(data)
     except ValueError:
@@ -1511,8 +1543,11 @@ def hoje_faixa_nota(
         posicao = _inteiro(indice, "A faixa")
         if posicao is None:
             raise servico.cronograma.RegistroInvalido("Faltou dizer qual faixa anotar.")
-        servico.notas_da_faixa.anotar(quando, bloco, posicao, titulo,
-                                      chutes=chutes, entendi=entendi, nota=nota)
+        servico.notas_da_faixa.anotar(
+            quando, bloco, posicao, titulo, chutes=chutes, entendi=entendi, nota=nota,
+            motivos={"nao_sabia": motivo_nao_sabia, "confundi": motivo_confundi,
+                     "li_errado": motivo_li_errado, "pegadinha": motivo_pegadinha,
+                     "chutei": motivo_chutei})
     except servico.cronograma.RegistroInvalido as erro:
         return _pagina_de_hoje(request, data, erro_da_faixa=str(erro), status=400)
 
@@ -2192,6 +2227,8 @@ def erro_novo(
     referencia: str | None = None,
     motivo: str | None = None,
     no: list[str] = Query(default=[]),
+    simulado: int | None = None,
+    questao: int | None = None,
 ):
     """O formulario, aceitando tudo pre-preenchido pelo endereco.
 
@@ -2217,7 +2254,11 @@ def erro_novo(
               # A questao do radar que eu acabei de errar (decisao 142).
               **({"fonte": fonte} if fonte in servico.erros.FONTES else {}),
               **({"motivo": motivo} if motivo in servico.erros.MOTIVOS else {}),
-              **({"referencia": referencia.strip()} if referencia else {})},
+              **({"referencia": referencia.strip()} if referencia else {}),
+              # A resposta do radar que eu errei (decisao 174): o motivo que
+              # eu gravar aqui volta para ela.
+              **({"simulado": simulado, "questao": questao}
+                 if simulado and questao else {})},
         volta=volta,
         aviso=aviso,
     )
@@ -2256,11 +2297,14 @@ def erro_gravar(
     referencia: str = Form(""),
     conteudo: str = Form(""),
     volta: str = Form(""),
+    simulado: str = Form(""),
+    questao: str = Form(""),
 ):
     """Grava o erro e volta para onde eu estava. Recusa aparece na tela."""
     form = {"data_estudo": data_estudo, "materia": materia, "assunto": assunto,
             "motivo": motivo, "regra": regra, "fonte": fonte,
-            "referencia": referencia, "conteudo": conteudo}
+            "referencia": referencia, "conteudo": conteudo,
+            "simulado": simulado, "questao": questao}
     quando, aviso = _erro_de_data(data_estudo)
     if aviso:
         return _formulario_de_erro(request, form, volta, erro=aviso, status=400)
@@ -2272,6 +2316,15 @@ def erro_gravar(
     except servico.erros.ErroInvalido as recusa:
         return _formulario_de_erro(request, form, volta, erro=str(recusa), status=400)
 
+    # Veio de uma questao do radar (decisao 174): o motivo do caderno vale
+    # tambem na resposta - vale o ultimo, e o erro tem um motivo so. O erro
+    # ja esta gravado; se a resposta nao aceita (acertada, rodada que mede
+    # ainda aberta), o caderno fica como esta.
+    if simulado.isdigit() and questao.isdigit():
+        try:
+            servico.marcar_motivo(int(simulado), int(questao), motivo)
+        except servico.MotivoRecusado:
+            pass
     return RedirectResponse(_volta_interna(volta or "/erros"), status_code=303)
 
 

@@ -413,6 +413,12 @@ class RespostaDeSimulado(Base):
     # Nao muda o acerto: e um numero a mais ao lado dele, nunca dentro.
     chutou: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
 
+    # Por que eu errei (decisao 174): uma chave dos MOTIVOS do servico/erros.py,
+    # dada num clique depois do erro. Nulo e "nao disse" - e, com o `chutou`
+    # marcado, conta como "chutei" (`erros.motivo_do_erro`). So a errada tem;
+    # nao muda acerto, erro nem volume: e o dado que o Historico vai ler.
+    motivo: Mapped[str | None] = mapped_column(String(20), nullable=True)
+
     def __repr__(self) -> str:
         return f"<Resposta q{self.questao_id} = {self.escolhida}>"
 

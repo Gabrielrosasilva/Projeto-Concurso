@@ -6223,3 +6223,64 @@ Guardas de Ribeirao Preto q24 e Cariacica q45, que cobram a letra do art.
 144, ganharam o aviso do STF (ADPF 995 e Tema 656) no `config/leis.yml`,
 com os dois cadernos em `provas`. As outras quatro ficaram. Estoque de lei
 no treino: 427.
+
+## O motivo de cada erro, num clique (pedido de 11/10, revisto em 18/10)
+
+174. **toda resposta errada no radar pode ter um motivo, gravado nela num
+     clique, e a conta dos motivos fica pronta para o Historico** (pedido de
+     11/10, revisto em 18/10; pela regra I3, entra a seu pedido; aprovado "com
+     as recomendadas"). Nao muda acerto, erro, volume nem numero nenhum que ja
+     existia: e um dado a mais. As regras:
+     - **o campo** `respostas_de_simulado.motivo` (banco na versao 9, passo 9
+       do `migracoes.py`, com a copia antes): uma chave dos `MOTIVOS` do
+       `servico/erros.py`. Nulo e "nao disse". O passado nao foi preenchido:
+       dos 4 erros do caderno que vieram do radar, so 1 casava com uma unica
+       resposta errada (mesmo dia, materia e assunto), e escolher entre as
+       outras seria chutar. O `data/simulados.json` leva a chave so quando ha
+       valor, como o `chutou`; o importar le o arquivo novo e o antigo, e o
+       banco que ja tem motivo nao e trocado pelo arquivo;
+     - **o motivo do erro** sai de um lugar so, `erros.motivo_do_erro`: o que
+       eu dei, ou "chutei" quando marquei o "vou no chute" e nao disse outro.
+       Por isso o botao ja vem marcado sem gravar nada, e as 16 erradas
+       antigas com chute ja contam como "Chutei";
+     - **os botoes** (`_motivo.html`, um formulario POST por botao, sem JS;
+       `POST /simulado/{id}/motivo`, `simulado.marcar_motivo`): so na errada;
+       clicar em outro troca (vale o ultimo). No treino, na correcao, logo
+       depois do erro; na rodada que corrige no fim (`RODADAS_CORRIGIDAS_NO_FIM`:
+       as que medem e o Simulado da semana), nada durante ela - o servico
+       recusa - e os botoes no relatorio, uma linha por errada. O relatorio do
+       treino tambem os mostra, para trocar depois. Vale em toda rodada:
+       geradas, "Gerar questao real", outras bancas, a faixa de Portugues, as
+       revisoes e o "Responder no radar" da conferencia;
+     - **o caderno aberto pelo radar** ("📓 Anotar") ja vem com o motivo, e
+       leva a rodada e a questao num campo escondido: o motivo que eu gravar la
+       volta para a resposta, e o erro tem um motivo so. O caderno continua com
+       o motivo obrigatorio;
+     - **o "📝 Como foi" da faixa** ganha os erros de fora do radar por motivo,
+       so em numeros (`notas_das_faixas[].motivos`, so os maiores que zero). A
+       soma nao passa dos erros do "fiz" (questoes - acertos), ou das questoes
+       quando o "fiz" nao tem os acertos; o "Chutei" nao passa dos chutes que
+       eu disse. **Sem o "fiz"**, a nota grava e a tela avisa que a soma espera
+       por ele; se o "fiz" chega depois com menos erros, ele grava assim mesmo
+       - o numero que conta nao espera a nota - e a nota fica marcada ("os
+       motivos passam dos erros do fiz: corrija"), fora da conta ate eu
+       corrigir. Na faixa feita so no radar o "fiz" tem 0 questoes, e o motivo
+       e o da resposta;
+     - **o erro bobo** e `erros.ERRO_BOBO = ("li_errado", "confundi")`, ao lado
+       dos `MOTIVOS`, para o Historico ler dali;
+     - **a conta** e `metricas.motivos_dos_erros(desde, ate)`, uma por origem,
+       nunca somadas: questao real da FEPESE no radar, de outra banca (decisao
+       166), gerada e fora do radar. **Cada erro conta uma vez:** no radar,
+       cada resposta errada e um erro, como no volume (errar de novo a mesma
+       questao e outro erro); o caderno com fonte "radar" nunca conta, porque o
+       erro ja conta pela resposta; fora do radar, por faixa e dia, a nota com
+       motivos e o total da faixa e vale sozinha - os erros do caderno da
+       mesma faixa (mesmo dia, assunto igual ao titulo) nao contam de novo -,
+       sem ela contam os do caderno, e o do caderno que nao e de faixa nenhuma
+       conta sozinho. Os erros de fora do radar sao os do "fiz" com os
+       acertos; da faixa sem os acertos, so os que eu dei motivo.
+     No banco de 18/10: FEPESE 23 erros (Chutei 4, pelo "vou no chute"; 19 sem
+     motivo), outras bancas 0, geradas 51 (Chutei 12; 39 sem motivo), fora do
+     radar 104 (103 dos "fiz" com acertos e 1 do caderno, Chutei, numa faixa
+     sem acertos); erro bobo 0 em todas. A rodada de teste foi numa copia do
+     banco (`RADAR_DATABASE_URL`), e o `data/radar.db` ficou com o mesmo hash.

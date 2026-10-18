@@ -39,6 +39,24 @@ MOTIVOS = {
     "chutei": "Chutei",
 }
 
+# O "erro bobo" (decisao 174): o que eu sabia e errei mesmo assim. Mora aqui,
+# ao lado dos MOTIVOS, para o Historico ler de um lugar so.
+ERRO_BOBO = ("li_errado", "confundi")
+
+
+def motivo_do_erro(resposta) -> str | None:
+    """O motivo de uma resposta errada do radar, ou None (decisao 174).
+
+    O que eu dei num clique; sem ele, o "vou no chute" marcado antes da letra
+    vale "chutei" - e por isso o botao ja vem marcado, sem gravar nada. A
+    acertada e a ainda sem resposta nao tem motivo."""
+    if resposta.acertou is not False:
+        return None
+    if resposta.motivo in MOTIVOS:
+        return resposta.motivo
+    return "chutei" if resposta.chutou else None
+
+
 # De onde veio a questao. O radar e o simulado sao separados porque so o
 # segundo tem rodada gravada; "outro" e o PDF solto, o caderno de papel.
 FONTES = {

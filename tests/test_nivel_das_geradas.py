@@ -47,7 +47,7 @@ def test_o_rotulo_do_selo_diz_o_nivel_ou_sem_nivel():
 # --- a migracao ----------------------------------------------------------------
 
 def test_o_banco_da_versao_7_ganha_o_nivel_vazio(banco_temporario):
-    """Um banco de antes (sem as quatro colunas) migra para a 8: a gerada
+    """Um banco de antes (sem as quatro colunas) migra ate a versao atual: a gerada
     antiga fica sem nivel, e o arquivo versionado ganha as chaves."""
     _gerada(1, DOLO, modelo="Claude Code, importado manualmente, em 03/10/2026")
     arquivo = db.get_engine().url.database
@@ -61,7 +61,7 @@ def test_o_banco_da_versao_7_ganha_o_nivel_vazio(banco_temporario):
 
     relatorio = migracoes.migrar()
 
-    assert (relatorio.de, relatorio.para) == (7, 8)
+    assert (relatorio.de, relatorio.para) == (7, migracoes.VERSAO_ATUAL)
     assert relatorio.copia is not None          # a copia antes, como todo passo
     with sessao() as s:
         gerada = s.scalar(select(QuestaoGerada))

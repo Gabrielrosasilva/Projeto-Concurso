@@ -441,6 +441,42 @@ def corrige_na_hora(simulado: Simulado) -> bool:
     return (simulado.filtros or {}).get("rodada") not in RODADAS_CORRIGIDAS_NO_FIM
 
 
+class MotivoRecusado(ValueError):
+    """O motivo do erro nao vale para esta resposta (decisao 174)."""
+
+
+def marcar_motivo(simulado_id: int, questao_id: int, motivo: str) -> RespostaDeSimulado:
+    """Grava (ou troca) por que eu errei uma questao da rodada (decisao 174).
+
+    Vale o ultimo clique. Recusa, em voz alta: o motivo que nao existe, a
+    questao de outra rodada, a ainda sem resposta, a acertada - e a rodada que
+    corrige no fim enquanto nao terminou: durante ela eu nao sei o que errei,
+    e o botao diria. Nao toca no acerto, na letra nem no "vou no chute"."""
+    from radar.servico.erros import MOTIVOS
+
+    if motivo not in MOTIVOS:
+        raise MotivoRecusado(
+            f"Motivo desconhecido: {motivo!r}. Escolha um destes: {', '.join(MOTIVOS)}.")
+    criar_tabelas()
+    with sessao() as s:
+        resposta = s.scalar(
+            select(RespostaDeSimulado)
+            .where(RespostaDeSimulado.simulado_id == simulado_id)
+            .where(RespostaDeSimulado.questao_id == questao_id))
+        if resposta is None:
+            raise MotivoRecusado("Essa questão não é desta rodada.")
+        if resposta.escolhida is None:
+            raise MotivoRecusado("Responda a questão antes de dizer por que errou.")
+        if resposta.acertou is not False:
+            raise MotivoRecusado("Você acertou esta questão: motivo só na errada.")
+        simulado = s.get(Simulado, simulado_id)
+        if not corrige_na_hora(simulado) and simulado.finalizado_em is None:
+            raise MotivoRecusado(
+                "Esta rodada só corrige no fim: o motivo vai no relatório, depois da última.")
+        resposta.motivo = motivo
+        return resposta
+
+
 def questao_respondida(
     simulado_id: int, questao_id: int,
 ) -> tuple[RespostaDeSimulado, QuestaoDeProva | QuestaoGerada] | None:
@@ -504,6 +540,10 @@ class ItemDeRevisao:
     #: o "Anotar erro" do relatorio liga o erro ao no (U21).
     conteudo: str | None = None
     assunto: str | None = None
+    #: Para os botoes do motivo e o caderno (decisao 174): a questao na
+    #: rodada e o motivo do erro (o meu, ou "chutei" pelo "vou no chute").
+    questao_id: int | None = None
+    motivo: str | None = None
 
     @property
     def referencia(self) -> str:
@@ -562,6 +602,7 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
     # reexporta.
     from radar.servico.desempenho_por_conteudo import nos_das_questoes
     from radar.servico.classificacoes import chave_de
+    from radar.servico.erros import motivo_do_erro
     nos = nos_das_questoes() if any(not r.gerada for r, _ in linhas) else {}
 
     itens = []
@@ -589,6 +630,8 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             chutou=bool(resposta.chutou),
             conteudo=no,
             assunto=questao.assunto,
+            questao_id=resposta.questao_id,
+            motivo=motivo_do_erro(resposta),
         ))
     # errado primeiro: e o que eu preciso rever
     itens.sort(key=lambda i: i.acertou)

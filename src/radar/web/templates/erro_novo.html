@@ -39,6 +39,12 @@
 
   <form class="form-erro ds-cartao" method="post" action="/erros/novo">
     <input type="hidden" name="volta" value="{{ volta }}">
+    {# A resposta do radar de onde o erro veio (decisao 174): o motivo
+       escolhido aqui volta para ela. #}
+    {% if form.simulado and form.questao %}
+      <input type="hidden" name="simulado" value="{{ form.simulado }}">
+      <input type="hidden" name="questao" value="{{ form.questao }}">
+    {% endif %}
 
     <div class="dupla">
       <label class="ds-campo">Dia do estudo

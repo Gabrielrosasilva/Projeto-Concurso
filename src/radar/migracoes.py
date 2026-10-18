@@ -204,6 +204,18 @@ def _passo_8() -> None:
     _exportar_sem_perder("geradas")
 
 
+def _passo_9() -> None:
+    """Decisao 174 (18/10/2026): o motivo de cada resposta errada.
+
+    Uma coluna nova, `respostas_de_simulado.motivo`, que vem do modelo. As
+    linhas antigas ficam nulas - "nao disse" -, e o passado nao e preenchido:
+    dos 4 erros do caderno que vieram do radar, so 1 casava com uma unica
+    resposta errada, e escolher entre as outras seria chutar. O "vou no
+    chute" das respostas antigas ja conta como "chutei" pela regra do
+    `erros.motivo_do_erro`, sem gravar nada.
+    """
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -218,6 +230,7 @@ PASSOS = {
     6: ("O texto-base das questões de interpretação das provas do alvo", _passo_6),
     7: ("O \"vou no chute\" de cada resposta e a nota de cada faixa", _passo_7),
     8: ("O nível de cada questão gerada (fácil, média ou difícil)", _passo_8),
+    9: ("O motivo de cada resposta errada (num clique, depois do erro)", _passo_9),
 }
 VERSAO_ATUAL = max(PASSOS)
 

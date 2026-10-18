@@ -1,0 +1,19 @@
+{# Os cinco botoes do "por que errei" (decisao 174). Um formulario por botao,
+   sem JavaScript: clicar grava o motivo na resposta, e clicar em outro troca
+   (vale o ultimo). O marcado e o motivo do erro - o meu, ou "Chutei" quando
+   marquei o "vou no chute" e nao disse outro. So na errada. #}
+{% macro botoes_do_motivo(simulado_id, questao_id, atual, volta) %}
+  <div class="motivo-do-erro" role="group" aria-label="Por que errei">
+    <span class="motivo-do-erro__rotulo">Por que errei?</span>
+    {% for chave, nome in MOTIVOS_DO_ERRO.items() %}
+      <form method="post" action="/simulado/{{ simulado_id }}/motivo">
+        <input type="hidden" name="questao_id" value="{{ questao_id }}">
+        <input type="hidden" name="motivo" value="{{ chave }}">
+        <input type="hidden" name="volta" value="{{ volta }}">
+        <button class="ds-botao ds-botao--pequeno{{ '' if chave == atual else ' ds-botao--secundario' }}"
+                aria-pressed="{{ 'true' if chave == atual else 'false' }}">{{ '✓ ' if chave == atual }}{{ nome }}</button>
+      </form>
+    {% endfor %}
+    {% if atual %}<span class="ds-suave">clique em outro para trocar</span>{% endif %}
+  </div>
+{% endmacro %}
