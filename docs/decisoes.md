@@ -6221,7 +6221,14 @@ treino (`classificacoes.fora_do_treino`, a regra do passo 2 da 171: duas
 alternativas defensaveis, ou o gabarito supoe o que o texto nao da); as
 Guardas de Ribeirao Preto q24 e Cariacica q45 ganharam o aviso do STF (ADPF 995 e Tema 656) no `config/leis.yml`,
 com os dois cadernos em `provas`. As outras quatro ficaram. Estoque de lei
-no treino: 427.
+no treino: 427. Depois, no mesmo dia e tambem aprovadas por voce, sairam do
+treino mais tres: o Escrivao PC SC 2026 q25 (o enunciado pede o texto
+expresso do art. 3º da Lei 8.429, e nenhuma alternativa traz a redacao em
+vigor desde a Lei 14.230/2021), o Delegado PC SC q46 (a propria FGV mudou de
+lado entre o gabarito preliminar e o definitivo) e a Guarda de Cariacica q45
+(a prova, de 21/01/2024, e posterior a ADPF 995; o aviso do STF continua no
+`config/leis.yml`, para se ela voltar depois da sua conferencia). Ficaram as
+duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
 
 ## O motivo de cada erro, num clique (pedido de 11/10, revisto em 18/10)
 

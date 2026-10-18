@@ -828,10 +828,12 @@ O que falta vai nesta ordem, uma etapa por conversa.
     salvar em `data\provas\manual\`;
   - ✅ **os gabaritos discutiveis das baixadas a mao** (aprovado por voce em
     18/10; lista no [leis_alteradas](leis_alteradas.md)): sairam do treino a
-    PM SE Oficial q39, a Guarda de Niteroi q12 e o Delegado PC SC q71; a
-    Guarda de Ribeirao Preto q24 e a de Cariacica q45 ganharam o aviso do STF
-    (ADPF 995 e Tema 656; o item no `config/leis.yml` esta por conferir); as
-    outras quatro ficaram como estao. Estoque de lei no treino: 427;
+    PM SE Oficial q39, a Guarda de Niteroi q12 e o Delegado PC SC q71, e
+    depois o Escrivao PC SC 2026 q25, o Delegado PC SC q46 e a Guarda de
+    Cariacica q45; a Guarda de Ribeirao Preto q24 ganhou o aviso do STF (ADPF
+    995 e Tema 656; o item no `config/leis.yml` esta por conferir, e cobre
+    tambem a de Cariacica, se ela voltar); as duas da SEAP-BA ficaram como
+    estao. Estoque de lei no treino: 424;
   - ⚪ **a palavra partida nas baixadas a mao**, como na IESES: "p ara", "c
     om", "L ei", "policia l", e a ligadura "ﬁ m" da Selecon - FGV 55 de 160
     questoes, Selecon 12, Access 10, Idecan 3. Nao muda o gabarito; a

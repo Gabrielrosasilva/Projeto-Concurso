@@ -2986,18 +2986,18 @@
   },
   {
     "chave": "1fbd074d26a28ec9df0420404367d7a2",
-    "classificada_em": "2026-10-18T05:05:23.822080+00:00",
-    "conferida_em": "2026-10-18T05:11:06.407074+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 3º",
+    "classificada_em": "2026-10-18T15:34:40.637364+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Administração Pública",
     "dispositivo": "Lei 8.429/1992, art. 3º (redação da Lei 14.230/2021)",
     "item_do_edital": "Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992",
     "pegadinha": "O terceiro não agente responde se induzir ou concorrer DOLOSAMENTE (art. 3º); não precisa de vínculo nem de condenação criminal do agente. Atenção: o 'ou dele se beneficia sob qualquer forma direta ou indireta' da alternativa certa é do texto ANTERIOR à Lei 14.230/2021; ela continua a única defensável.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), gabaritos discutíveis aprovados por você, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
-    "trecho": "no que se refere à responsabilização do terceiro que induz ou concorre para a prática do ato de improbidade administrativa"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: Escrivão PC SC 2026 (Idecan), q25 - o enunciado pede o texto expresso do art. 3º da Lei 8.429, e nenhuma alternativa traz a redação em vigor desde a Lei 14.230/2021"
   },
   {
     "chave": "1feca0cd0567327bc59583681b5005bd",
@@ -13366,18 +13366,18 @@
   },
   {
     "chave": "91586f4ddae2e0a33ff6dc44c75008de",
-    "classificada_em": "2026-10-18T05:06:33.703067+00:00",
-    "conferida_em": "2026-10-18T05:11:06.856975+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direito Processual Penal > Prova > Reconhecimento de pessoas e coisas > CPP, art. 226",
+    "classificada_em": "2026-10-18T15:34:40.701257+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Processual Penal",
     "dispositivo": "CPP, arts. 200 e 226; Resolução CNJ 484/2022",
     "item_do_edital": "Prova",
     "pegadinha": "Para a banca, o 1º item é falso (o reconhecimento fotográfico é tratado como prova atípica, não como prova 'irritual'); a confissão é divisível e retratável (art. 200); e o STJ trata o reconhecimento de pessoas como prova irrepetível, por isso o rito do art. 226 tem de ser cumprido.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), gabaritos discutíveis aprovados por você, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "conceito",
-    "trecho": "o Conselho Nacional de Justiça, por meio da Resolução nº 484, de 19 de dezembro de 2022"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: Delegado PC SC 2024 (FGV), q46 - uma das afirmativas é uma classificação que a doutrina disputa (prova irritual ou prova atípica), e a própria FGV mudou de lado entre o gabarito preliminar (30/01/2024) e o definitivo (20/02/2024)"
   },
   {
     "chave": "915c4d140f6be1d3ab9f6c92eaab2134",
@@ -19021,18 +19021,18 @@
   },
   {
     "chave": "d3656e87c6995d4c692d72e25d5adf5d",
-    "classificada_em": "2026-10-18T03:44:06.886700+00:00",
-    "conferida_em": "2026-10-18T03:50:02.469912+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 8º",
+    "classificada_em": "2026-10-18T15:34:40.768387+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
     "dispositivo": "CF, art. 144, § 8º (e §§ 6º, 7º e 10 nas corretas)",
     "item_do_edital": "organização da segurança pública",
     "pegadinha": "Pelo texto do § 8º, as guardas municipais se destinam à proteção dos bens, serviços e instalações do município; a alternativa acrescenta 'à segurança pública'. As demais são os §§ 6º, 7º e 10.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), gabaritos discutíveis aprovados por você, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "exceção ou pegadinha",
-    "trecho": "Os Municípios poderão constituir guardas municipais destinadas à segurança pública e à proteção de seus bens, serviços e instalações, conforme dispuser a lei."
+    "trecho": "fora do treino (decisão 171): gabarito discutível: Guarda de Cariacica 2024 (Access), q45 - a prova (21/01/2024) é posterior à ADPF 995 (25/08/2023, efeito vinculante), e o gabarito segue a letra do art. 144 contra o sentido que o STF deu ao dispositivo, reforçado depois no Tema 656"
   },
   {
     "chave": "d37428375962f46a8b57bdfc26a2465d",

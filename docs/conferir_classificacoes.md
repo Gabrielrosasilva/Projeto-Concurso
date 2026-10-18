@@ -6,7 +6,7 @@
   data da prova, e a amostra do que a segunda leitura decidiu sozinha (10 por
   grupo, decisão 173), a conferir no Ciclo 2;
 - **as provas baixadas à mão de 18/10** (decisão 172): 11 pendentes (5 do primeiro
-  lote e 6 do segundo) e 3 fora do treino pelo gabarito discutível (lista no
+  lote e 6 do segundo) e 6 fora do treino pelo gabarito discutível (lista no
   [leis_alteradas](leis_alteradas.md)), também só depois de 07/11;
 - **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
   pendentes, o que sobrou da reanálise (decisão 104) e da classificação de

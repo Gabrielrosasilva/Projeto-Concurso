@@ -325,16 +325,19 @@ As 449 questões de Direito das provas que entraram em 17/10 (FEPESE pelo conte�
 
 ## As provas baixadas à mão de 18/10 (decisão 172, aprovado por você)
 
-Os gabaritos discutíveis que a classificação levantou nas 11 provas baixadas à mão foram lidos de novo pelo Claude Code (claude-opus-5-5) com a questão inteira, e você aprovou em 18/10: 3 saem do treino e 2 ganham o aviso. As outras 4 ficaram como estão: a SEAP-BA q30 e q77, o Delegado PC SC q46 e o Escrivão PC SC 2026 q25. Os motivos não dizem a letra nem a alternativa certa: você ainda vai responder estas questões.
+Os gabaritos discutíveis que a classificação levantou nas 11 provas baixadas à mão foram lidos de novo pelo Claude Code (claude-opus-5-5) com a questão inteira, e você aprovou em 18/10: 3 saem do treino e 2 ganham o aviso. Depois, no mesmo dia, você aprovou mais 3 fora do treino (o Escrivão PC SC 2026 q25, o Delegado PC SC q46 e a Guarda de Cariacica q45, que tinha ganhado o aviso). Ficaram como estão só a SEAP-BA q30 e q77. Os motivos não dizem a letra nem a alternativa certa: você ainda vai responder estas questões.
 
 | Item | Norma | O que mudou | Questões | Conferido em |
 |---|---|---|---|---|
 | Guardas municipais na segurança pública (CF, art. 144, § 8º) | STF, ADPF 995 (25/08/2023) e RE 608.588 (Tema 656 da repercussão geral, 20/02/2025) | O STF afastou as interpretações que excluíam as guardas municipais do Sistema de Segurança Pública (ADPF 995) e declarou constitucional o exercício de ações de segurança urbana por elas, inclusive policiamento ostensivo e comunitário e prisão em flagrante, sem atividade de polícia judiciária (Tema 656); a letra do art. 144 não mudou | Access 2023, Guarda de Ribeirão Preto, q24; Access 2024, Guarda de Cariacica, q45 | pelas notícias do STF (sem o acórdão) |
 
-### As 3 que saíram do treino
+### As 6 que saíram do treino
 
 | Questão | Por quê |
 |---|---|
 | Selecon 2024, PM SE Oficial, q39 | gabarito discutível: duas alternativas defensáveis (princípio da moralidade, CF art. 37) |
 | Selecon 2024, Guarda de Niterói, q12 | gabarito discutível: enunciado ambíguo, mais de uma alternativa cabe (poder disciplinar) |
 | FGV 2024, Delegado PC SC, q71 | gabarito discutível: a resposta oficial supõe um fato que o enunciado não dá (Protocolo de Palermo) |
+| Idecan 2026, Escrivão PC SC, q25 | gabarito discutível: o enunciado pede o texto expresso do art. 3º da Lei 8.429, e nenhuma alternativa traz a redação em vigor desde a Lei 14.230/2021 |
+| FGV 2024, Delegado PC SC, q46 | gabarito discutível: a classificação cobrada é disputada na doutrina, e a própria FGV mudou de lado entre o gabarito preliminar (30/01/2024) e o definitivo (20/02/2024) |
+| Access 2024, Guarda de Cariacica, q45 | gabarito discutível: a prova (21/01/2024) é posterior à ADPF 995, de efeito vinculante, e a resposta oficial segue a leitura que o STF afastou |

@@ -394,8 +394,9 @@ a PC SC 2023 Delegado e a PC RN 2021, da FGV), 417 questoes, 194 no edital,
 relidas as cegas pela regra da 171 (159 no mesmo no, 24 no no em comum, 11
 pendentes). O `caderno` e o link de onde veio (ate espelho, como o
 Qconcursos), e o `radar baixar-provas` nunca busca o que veio a mao.
-Dos gabaritos discutiveis, 3 sairam do treino e 2 ganharam o aviso do STF
-(aprovado por voce). Outras bancas no treino: 427 de lei. Falta o Delegado
+Dos gabaritos discutiveis, 6 sairam do treino (3 depois, tambem aprovados
+por voce em 18/10: Escrivao q25, Delegado q46 e Cariacica q45) e a de Ribeirao
+Preto ganhou o aviso do STF. Outras bancas no treino: 424 de lei. Falta o Delegado
 da PC RN, se voce quiser (pendencia O).
 **A tela da amostra das provas novas (18/10, decisao 173, a seu pedido):** a
 conferencia ganhou dois recortes, nunca juntos com o alvo e o complementar -
