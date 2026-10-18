@@ -5768,3 +5768,65 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Penal 13 e 7, Legislacao Especial 21 e 14, Direitos Humanos 32 e 11, LEP
      2 e 7. Nas faixas de 18/10 a 07/11 aparecem 59 "Gerar questao real" e
      59 "Gerar questoes outras bancas".
+
+## O Cebraspe (pedido de 17/10/2026, a etapa B)
+
+169. **o Cebraspe entra pela lista do config, com leitor proprio, e a
+     materia de cada questao e pergunta da classificacao** (a etapa B da
+     decisao 166). O caderno autoriza "a reproducao deste material apenas para
+     fins didaticos, desde que citada a fonte", e a fonte e o link de cada um.
+     As regras:
+     - **o leitor** (`radar/questoes_cebraspe.py`): "Questao N" numa linha
+       sozinha abre a questao; as alternativas sao "A " a "E " no comeco da
+       linha, sem parentese, e o enunciado tambem pode comecar assim ("A
+       partir das ideias...") - vale a ULTIMA sequencia completa de A a E; a
+       justificativa do caderno "com justificativas" nunca entra no texto; o
+       rodape que o pypdf cola no fim da linha sai; o texto de apoio
+       ("Situacao hipotetica 1A3-I") vira o texto-base de quem o cita, so no
+       banco (decisao 132). O limpador de linha repetida dos outros cadernos
+       nao serve aqui: ele apagava o "JUSTIFICATIVAS" de toda questao;
+     - **o gabarito** e um PDF a parte, em fileiras: a linha de numeros diz
+       onde a fileira comeca, e a de letras coladas da uma por questao, com X
+       na anulada e o enchimento de zeros tirado do fim. Na SERES/PE 2021 o
+       gabarito definitivo publicado e de outra versao do caderno (42 de 60
+       letras divergem): a resposta sai da justificativa (a alternativa
+       CERTO), com as anuladas do documento de alteracoes (18, 19 e 41);
+     - **a lista** (`config/provas_de_outras_bancas.yml`): 14 cadernos de
+       multipla escolha de 2019 a 2026 - Policial Penal PE, Delegado PC RJ,
+       Agente PC PB, Agente PC PE, Oficiais PM SC, PM RO, PM PA e Bombeiros RO
+       e PA, pracas da PM PA e do CBM PA, Soldado PM TO, Agente de
+       Criminalistica RO, Guarda de Sao Cristovao (A a D) -, cada um com `ler`:
+       so as questoes de lei, contadas no levantamento. Lidas 422, com as
+       anuladas do definitivo. **A PC PB 2022 fica sem gabarito** (as 36
+       sem resposta, logo fora do treino e da medida): o definitivo
+       publicado tem o mesmo codigo do caderno (629_PC_PB_003_01), mas erra
+       a 24, 38, 40, 41, 50, 51, 60, 61 e 63 pela lei e pela Informatica, e
+       acerta a 21 a 23 - o caderno deve ser de outra versao, e este nao
+       tem justificativa para dar a certa. Conferido pela imagem dos dois
+       PDFs, e nao so pelo texto. Nada foi apagado: o caderno continua na
+       lista e no manifesto. Certo/Errado fica de fora (so
+       treinaria, e nao tem o acerto a parte); a Guarda de Barra dos
+       Coqueiros 2020 usa outro formato e ficou de fora;
+     - **o download confere o PDF inteiro**: o CDN do Cebraspe ja entregou um
+       caderno pela metade com status 200, e da 404 de vez em quando para
+       arquivo que existe. Sem o `%%EOF` no fim, ou com falha, tenta de novo,
+       ate 3 vezes (`servico.provas.TENTATIVAS_DO_PDF`);
+     - **a classificacao pelo bloco generico**: o caderno nao diz a materia
+       (so "Conhecimentos Basicos/Especificos"), e copiar faixas erraria na
+       fronteira. `radar classificar --pedido --evidencia fora --genericos`
+       faz um pedido por CADERNO, com todas as materias do edital, e a
+       resposta diz a materia de cada questao; Portugues, Raciocinio, lei de
+       outro estado e legislacao da corporacao ficam pendentes. O pedido ganhou
+       o `--banca` (a IESES tem 900 questoes de educacao sem materia, que nao
+       interessam). Em 17/10 (claude-opus-5-5): das 422, **220
+       classificadas** e 202 fora das materias do edital (homicidio e
+       crimes contra o patrimonio, Lei 12.850, atos administrativos e Lei
+       8.112, lei e estatuto de outro estado, processo legislativo e
+       Poderes). Uma regra so para a lei que nao esta no edital, em todo
+       caderno: a interceptacao (Lei 9.296) fica pendente, e nao em Prova.
+       O mesmo pedido generico, no NC-UFPR (as Guardas do PR e os blocos
+       sem materia da PC PR), deu 6 classificadas e 73 fora (Matematica,
+       Informatica, Civil, Medicina Legal, norma municipal). No treino, de
+       outras bancas: Constitucional 73, Administracao Publica 48, Penal
+       44, Legislacao Especial 39, Processo Penal 29, Direitos Humanos 26,
+       LEP 15.

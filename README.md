@@ -1065,6 +1065,7 @@ radar classificar --pedido  # pede ao Claude Code a classificacao do alvo
 radar classificar --pedido --evidencia complementar --materia "Direito Penal"
 radar classificar --pedido --evidencia fora --materia "Língua Portuguesa"  # outras bancas
 radar classificar --pedido --evidencia complementar --so-novas --materia "Direito Penal"  # so as sem classificacao
+radar classificar --pedido --evidencia fora --genericos --banca Cebraspe  # caderno sem materia: a materia e resposta
 radar classificar --importar data/resposta_ia.json   # grava o que presta
 radar incidencia            # o mapa do alvo por no, com a amostra
 radar incidencia --materia "Direito Penal" --padroes
@@ -2064,6 +2065,7 @@ src/radar/
 ├── questoes_ieses.py  o mesmo para a IESES: 4 alternativas, gabarito a parte
 ├── questoes_ncufpr.py o mesmo para o NC-UFPR: a certa marcada com ► (decisao 168)
 ├── questoes_selecon.py o mesmo para a Selecon: colunas fora de ordem, gabarito a parte
+├── questoes_cebraspe.py o mesmo para o Cebraspe: "Questao N", justificativas, gabarito em fileiras
 ├── edital_ieses.py de que materia e cada questao, pelos anexos II e IV
 ├── assuntos.py     assunto fino pela API da Claude (a primeira parte paga)
 ├── gerador.py      escreve questao nova pela API, para treinar (a segunda)

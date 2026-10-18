@@ -3019,7 +3019,10 @@ def classificar(
     genericos: bool = typer.Option(
         False, "--genericos",
         help="No complementar: as questões de bloco genérico (Conhecimentos "
-             "Específicos), agrupadas pela matéria que o termo sugere"),
+             "Específicos), agrupadas pela matéria que o termo sugere. Nas outras "
+             "bancas (--evidencia fora): o caderno sem matéria, um pedido por caderno"),
+    banca: str = typer.Option(
+        None, "--banca", help="Só as questões desta banca (ex.: Cebraspe)"),
     so_novas: bool = typer.Option(
         False, "--so-novas",
         help="Só as questões sem classificação nenhuma (as provas novas do acervo)"),
@@ -3080,7 +3083,8 @@ def classificar(
         return
     try:
         lote = servico.manual.pedido_de_classificacao(
-            list(materia or []), evidencia, genericos=genericos, so_novas=so_novas)
+            list(materia or []), evidencia, genericos=genericos, so_novas=so_novas,
+            banca=banca)
     except ValueError as erro:
         console.print(f"[red]{erro}[/]")
         raise typer.Exit(code=1)

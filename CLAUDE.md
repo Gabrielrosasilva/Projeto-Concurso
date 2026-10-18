@@ -337,9 +337,16 @@ dela bloqueou os hotsites na primeira leitura, e o radar para depois de 5
 sem resposta: ir devagar). Outras bancas entram por lista conferida
 (`config/provas_de_outras_bancas.yml`, `radar provas --outras-bancas`), com
 leitor por banca: NC-UFPR (PC-PR 2020) e Selecon (SEJUSP/MG 2021, Policial
-Penal). Classificado so o Direito; a arvore foi a 561 nos. Faltam o
-Cebraspe (a lista esta no levantamento), a ACAFE, o IDIB e as decisoes suas
-sobre o IBADE e o que so da a mao: pendencia O.
+Penal). Classificado so o Direito; a arvore foi a 561 nos.
+**O Cebraspe (17/10, decisao 169):** 14 cadernos de multipla escolha de
+2019 a 2026 (`radar/questoes_cebraspe.py`; o download confere o `%%EOF`),
+422 questoes de lei, 220 no edital pelo pedido generico (um por caderno, a
+materia e resposta da classificacao); a PC PB 2022 fica sem gabarito (o
+definitivo nao confere com o caderno publicado). A arvore foi a 682 nos. No
+treino, de outras bancas: Constitucional 73, Penal 44, Legislacao Especial
+39, Processo Penal 29, Direitos Humanos 26, LEP 15. Faltam a ACAFE, o IDIB,
+o IBADE (liberado por voce), as Guardas da Selecon e os PDFs que so dao a
+mao (voce baixa; falta a entrada de PDF local): pendencia O.
 **Proximo:** os sabados que medem (10/10, 17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

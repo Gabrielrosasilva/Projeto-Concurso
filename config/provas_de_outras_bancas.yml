@@ -84,3 +84,149 @@ provas:
     45-53: Legislação Especial
     54-55: Lei de Execução Penal
     56-60: Legislação Especial
+
+# Cebraspe (decisao 169): o caderno autoriza "a reproducao deste material
+# apenas para fins didaticos, desde que citada a fonte" - a fonte e o link de
+# cada um, guardado no manifesto. O caderno nao diz a materia: `ler` diz so
+# QUAIS questoes sao de lei (contadas lendo o comeco de cada enunciado, no
+# levantamento de 17/10), e a classificacao escolhe a materia de cada uma
+# (`radar classificar --pedido --evidencia fora --genericos`). Certo/Errado
+# fica de fora: so treinaria, e ainda nao tem o acerto a parte.
+- banca: Cebraspe
+  ano: 2022
+  orgao: Secretaria Executiva de Ressocialização de Pernambuco (SERES/PE)
+  uf: PE
+  cargo: Policial Penal
+  pagina: https://www.cebraspe.org.br/concursos/SERES_PE_21
+  caderno: https://cdn.cebraspe.org.br/concursos/SERES_PE_21/arquivos/671_SERESPE_NS_COM_JUSTIFICATIVA.PDF
+  ler: ["21-60"]
+  # O gabarito definitivo publicado e do tipo 01, e este caderno e outra
+  # versao: em 42 das 60 a letra diverge. A resposta sai da justificativa
+  # (a alternativa CERTO), com as anuladas do documento de alteracoes.
+  resposta: justificativas
+  anuladas: [18, 19, 41]
+- banca: Cebraspe
+  ano: 2022
+  orgao: Polícia Civil do Rio de Janeiro
+  uf: RJ
+  cargo: Delegado de Polícia
+  pagina: https://www.cebraspe.org.br/concursos/PC_RJ_21_DELEGADO
+  caderno: https://cdn.cebraspe.org.br/concursos/PC_RJ_21_DELEGADO/arquivos/662_PCRJ_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PC_RJ_21_DELEGADO/arquivos/GAB_DEFINITIVO_662_PCRJ_001_01.PDF
+  ler: ["1-80"]
+- banca: Cebraspe
+  ano: 2022
+  orgao: Polícia Militar de Rondônia
+  uf: RO
+  cargo: Oficial Combatente
+  pagina: https://www.cebraspe.org.br/concursos/PM_RO_22
+  caderno: https://cdn.cebraspe.org.br/concursos/PM_RO_22/arquivos/731_SESDEC_PM_RO_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PM_RO_22/arquivos/GAB_DEFINITIVO_731_SESDEC_PM_RO_001_01.PDF
+  ler: ["1-60"]
+# A Policia Civil da Paraiba 2022 fica SEM GABARITO de proposito: o
+# definitivo (GAB_DEFINITIVO_629_PC_PB_003_01_VF.PDF) nao confere com o
+# caderno publicado, mesmo com o mesmo codigo - a 24, 38, 40, 41, 50, 51, 60,
+# 61 e 63 dao letra errada pela lei e pela Informatica, e as 21 a 23 batem. O
+# caderno deve ser de outra versao, embaralhada; sem a justificativa, nao ha
+# como saber a certa. Sem gabarito, a questao fica sem resposta, e o treino
+# de outras bancas so usa questao com gabarito: nao treina nem mede.
+# Conferido pela imagem dos dois PDFs em 17/10.
+- banca: Cebraspe
+  ano: 2022
+  orgao: Polícia Civil da Paraíba
+  uf: PB
+  cargo: Agente de Investigação
+  pagina: https://www.cebraspe.org.br/concursos/PC_PB_21
+  caderno: https://cdn.cebraspe.org.br/concursos/PC_PB_21/arquivos/629_PC_PB_003_01.PDF
+  ler: ["21-56"]
+- banca: Cebraspe
+  ano: 2022
+  orgao: Corpo de Bombeiros Militar de Rondônia
+  uf: RO
+  cargo: Oficial Combatente
+  pagina: https://www.cebraspe.org.br/concursos/CBM_RO_22
+  caderno: https://cdn.cebraspe.org.br/concursos/CBM_RO_22/arquivos/734_CBM_RO_OFICIAL_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/CBM_RO_22/arquivos/GAB_DEFINITIVO_734_CBM_RO_OFICIAL_001_01.PDF
+  ler: ["26-35", "41-55", "65-74"]
+- banca: Cebraspe
+  ano: 2023
+  orgao: Polícia Militar de Santa Catarina
+  uf: SC
+  cargo: Oficial
+  pagina: https://www.cebraspe.org.br/concursos/PM_SC_23_OFICIAL
+  caderno: https://cdn.cebraspe.org.br/concursos/PM_SC_23_OFICIAL/arquivos/860_PMSC_OFICIAL_OBJ_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PM_SC_23_OFICIAL/arquivos/GAB_DEFINITIVO_860_PMSC_OFICIAL_OBJ_001_01.PDF
+  ler: ["1-28"]
+- banca: Cebraspe
+  ano: 2023
+  orgao: Polícia Militar do Pará
+  uf: PA
+  cargo: Praça (CFP)
+  pagina: https://www.cebraspe.org.br/concursos/PM_PA_23_CFP
+  caderno: https://cdn.cebraspe.org.br/concursos/PM_PA_23_CFP/arquivos/916_PMPA_CFP_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PM_PA_23_CFP/arquivos/GAB_DEFINITIVO_916_PMPA_CFP_001_01.PDF
+  ler: ["21-37", "48-52", "56-60"]
+- banca: Cebraspe
+  ano: 2023
+  orgao: Polícia Militar do Pará
+  uf: PA
+  cargo: Oficial (CFO)
+  pagina: https://www.cebraspe.org.br/concursos/PM_PA_23_CFO
+  caderno: https://cdn.cebraspe.org.br/concursos/PM_PA_23_CFO/arquivos/915_PMPA_CFO_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PM_PA_23_CFO/arquivos/GAB_DEFINITIVO_915_PMPA_CFO_001_01.PDF
+  ler: ["24-43", "56-60"]
+- banca: Cebraspe
+  ano: 2024
+  orgao: Polícia Civil de Pernambuco
+  uf: PE
+  cargo: Agente de Polícia
+  pagina: https://www.cebraspe.org.br/concursos/PC_PE_23
+  caderno: https://cdn.cebraspe.org.br/concursos/PC_PE_23/arquivos/MATRIZ_954PC_PECB1_00_COM_JUSTIFICATIVA.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PC_PE_23/arquivos/GAB_DEFINITIVO_MATRIZ_954PC_PECB1_00.PDF
+  ler: ["1-20"]
+- banca: Cebraspe
+  ano: 2022
+  orgao: Polícia Técnico-Científica de Rondônia (POLITEC)
+  uf: RO
+  cargo: Agente de Criminalística
+  pagina: https://www.cebraspe.org.br/concursos/POLITEC_RO_22
+  caderno: https://cdn.cebraspe.org.br/concursos/POLITEC_RO_22/arquivos/698_POLITEC_AGENTE_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/POLITEC_RO_22/arquivos/GAB_DEFINITIVO_698_POLITEC_AGENTE_001_01.PDF
+  ler: ["10-20"]
+- banca: Cebraspe
+  ano: 2021
+  orgao: Polícia Militar do Tocantins
+  uf: TO
+  cargo: Aluno-Soldado (QPPM)
+  pagina: https://www.cebraspe.org.br/concursos/PM_TO_20_QPPM
+  caderno: https://cdn.cebraspe.org.br/concursos/PM_TO_20_QPPM/arquivos/MATRIZ_573PMTO001.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PM_TO_20_QPPM/arquivos/GAB_DEFINITIVO_MATRIZ_573PMTO001.PDF
+  ler: ["36-45"]
+- banca: Cebraspe
+  ano: 2023
+  orgao: Prefeitura de São Cristóvão (SE)
+  uf: SE
+  cargo: Guarda Municipal
+  pagina: https://www.cebraspe.org.br/concursos/PREF_SAO_CRISTOVAO_SE_23
+  caderno: https://cdn.cebraspe.org.br/concursos/PREF_SAO_CRISTOVAO_SE_23/arquivos/823_PREF_SAO_CRISTOVAO_007_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/PREF_SAO_CRISTOVAO_SE_23/arquivos/GAB_DEFINITIVO_823_PREF_SAO_CRISTOVAO_007_01.PDF
+  alternativas: 4
+  ler: ["31-42", "50-52", "75-92", "100"]
+- banca: Cebraspe
+  ano: 2023
+  orgao: Corpo de Bombeiros Militar do Pará
+  uf: PA
+  cargo: Praça (CFP)
+  pagina: https://www.cebraspe.org.br/concursos/CBM_PA_23_CFP
+  caderno: https://cdn.cebraspe.org.br/concursos/CBM_PA_23_CFP/arquivos/928_CBM_PA_CFP_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/CBM_PA_23_CFP/arquivos/GAB_DEFINITIVO_928_CBM_PA_CFP_001_01.PDF
+  ler: ["51-57", "60"]
+- banca: Cebraspe
+  ano: 2023
+  orgao: Corpo de Bombeiros Militar do Pará
+  uf: PA
+  cargo: Oficial (CFO)
+  pagina: https://www.cebraspe.org.br/concursos/CBM_PA_23_CFO
+  caderno: https://cdn.cebraspe.org.br/concursos/CBM_PA_23_CFO/arquivos/927_CBM_PA_CFO_001_01.PDF
+  gabarito: https://cdn.cebraspe.org.br/concursos/CBM_PA_23_CFO/arquivos/GAB_DEFINITIVO_927_CBM_PA_CFO_001_01.PDF
+  ler: ["47-54"]

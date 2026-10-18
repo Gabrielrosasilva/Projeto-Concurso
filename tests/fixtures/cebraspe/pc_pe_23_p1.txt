@@ -1,0 +1,303 @@
+ 
+  CEBRASPE – PCPE – Edital: 2023
+ 
+ 
+     
+• Nas questões a seguir, marque, para cada uma, a única opção correta, de acordo com o respectivo comando. Para as devidas 
+marcações, use a Folha de Respostas, único documento válido para a correção das suas respostas. 
+• Nas questões que avaliarem conhecimentos de informática  e(ou) tecnologia da informação , a menos que seja explicitamente 
+informado o contrário, considere que todos os programas mencionados estão em configuração-padrão e que não há restrições de 
+proteção, de funcionamento e de uso em relação aos programas, arquivos, diretórios, recursos e equipamentos mencionados. 
+• Eventuais espaços livres — identificados ou não pela expressão “ Espaço livre ” — que constarem deste caderno de provas 
+poderão ser utilizados para rascunho. 
+ 
+-- PROVAS OBJETIVAS -- 
+ 
+-- NOÇÕES DE DIREITO -- 
+ 
+ 
+ Questão 1
+  
+De acordo com a Constituição do Estado de Pernambuco, os 
+municípios 
+A deverão constituir guardas municipais destinadas à 
+preservação da ordem pública. 
+B deverão constituir guardas municipais destinadas ao 
+policiamento ostensivo. 
+C deverão constituir guardas municipais destinadas à 
+preservação de seus bens. 
+D poderão constituir guardas municipais destinadas à 
+preservação da ordem pública. 
+E poderão constituir guardas municipais destinadas à 
+preservação de seus bens. 
+||JUSTIFICATIVAS|| 
+||A|| - 1 Constituição do Estado de Pernambuco (artigos 101 a 
+105-B)_INCORRETA. D e acordo com o artigo 105 -B da 
+Constituição do Estado de Pernambuco, os municípios poderão 
+constituir guardas municipais destinadas à prevenção, proteção e 
+preservação de seus bens, serviços e instalações, observados os 
+preceitos da lei federal.*/ 
+||B|| - 1 Constituição do Estado de Pernambuco (artigos 101 a 
+105-B)_INCORRETA. De acordo com o artigo 105-B da 
+Constituição do Estado de Pernambuco, os municípios poderão 
+constituir guardas municipais destinadas à prevenção, proteção e 
+preservação de seus bens, serviços e instalações, observados os 
+preceitos da lei federal.*/ 
+||C|| - 11 Constituição do Estado de Pernambuco (artigos 101 a 
+105-B)_INCORRETA. De acordo com o artigo 105- B da 
+Constituição do Estado de Pernambuco, os municípios poderão 
+constituir guardas municipais destinadas à prevenção, proteção e 
+preservação de seus bens, serviços e instalações, observados os 
+preceitos da lei federal.*/ 
+||D|| - 11 Constituição do Estado de Pernambuco (artigos 101 a 
+105-B)_INCORRETA. D e acordo com o artigo 105 -B da 
+Constituição do Estado de Pernambuco, os municípios poderão 
+constituir guardas municipais destinadas à prevenção, proteção e 
+preservação de seus bens, serviços e instalações, observados os 
+preceitos da lei federal.*/ 
+||E|| - 1 Constituição do Estado de Pernambuco (artigos 101 a 
+105-B)_CORRETA. D e acordo com o artigo 105 -B da 
+Constituição do Estado de Pernambuco, os municípios poderão 
+constituir guardas municipais destinadas à prevenção, proteção e 
+preservação de seus bens, serviços e instalações, observados os 
+preceitos da lei federal.*/ 
+ 
+ 
+ Questão 2
+  
+  Carlos, Gabriel e Juan são policiais civis do estado de 
+Pernambuco e estão respondendo a processo disciplinar pelas 
+seguintes razões: Carlos abandonou o cargo; Gabriel aplicou 
+irregularmente dinheiro público no exercício da função; e Juan 
+participou de manifestações contra atos da administração pública 
+em geral. Nenhum dos três é reincidente nas citadas condutas. 
+Nessa situação hipotética, conforme as disposições da 
+Lei n.º 6.425/1972 (Estatuto do Policial Civil), a pena de 
+demissão é aplicável a 
+A Carlos, Gabriel e Juan. 
+B Carlos e Juan, somente. 
+C Gabriel e Carlos, somente. 
+D Gabriel, somente. 
+E Juan, somente. 
+||JUSTIFICATIVAS|| 
+||A|| - 2 Lei n.º 6.425/1972 - Estatuto do Policial 
+Civil_INCORRETA. Somente Gabriel e Carlos estarão sujeitos a 
+pena de demissão, nos termos da Lei n.º 6.425/1972: “Art. 49. A 
+pena de demissão será aplicada nos casos de: (...) III – abandono 
+do cargo; (...) VI – aplicação irregular de dinheiros públicos; (...) 
+XII – prática das transgressões disciplinares previstas nos itens I, 
+VI, VII, VIII, XII, XIII, XXI, XXIII, XXXI, XXXIV, XXXV, 
+XXXVI, XL, XLIII e XLVIII, do artigo 31 deste Estatuto”.*/ 
+||B|| - 2 Lei n.º 6.425/1972 - Estatuto do Policial 
+Civil_INCORRETA. Somente Gabriel e Carlos estarão sujeitos a 
+pena de demissão, nos termos da Lei n.º 6.425/1972: “Art. 49. A 
+pena de demissão será aplicada nos casos de: (...) III – abandono 
+do cargo; (...) VI – aplicação irregular de dinheiros públicos; (...) 
+XII – prática das transgressões disciplinares previstas nos itens I, 
+VI, VII, VIII, XII, XIII, XXI, XXIII, XXXI, XXXIV, XXXV, 
+XXXVI, XL, XLIII e XLVIII, do artigo 31 deste Estatuto”.*/ 
+||C|| - 2 Lei n.º 6.425/1972 - Estatuto do Policial 
+Civil_CORRETA. Somente Gabriel e Carlos estarão sujeitos a 
+pena de demissão, nos termos da Lei n.º 6.425/1972: “Art. 49. A 
+pena de demissão será aplicada nos casos de: (...) III – abandono 
+do cargo; (...) VI – aplicação irregular de dinheiros públicos; (...) 
+XII – prática das transgressões disciplinares previstas nos itens I, 
+VI, VII, VIII, XII, XIII, XXI, XXIII, XXXI, XXXIV, XXXV, 
+XXXVI, XL, XLIII e XLVIII, do artigo 31 deste Estatuto”.*/ 
+||D|| - 2 Lei n.º 6.425/1972 - Estatuto do Policial 
+Civil_INCORRETA. Somente Gabriel e Carlos estarão sujeitos a 
+pena de demissão, nos termos da Lei n.º 6.425/1972: “Art. 49. A 
+pena de demissão será aplicada nos casos de: (...) III – abandono 
+do cargo; (...) VI – aplicação irregular de dinheiros públicos; (...) 
+XII – prática das transgressões disciplinares previstas nos itens I, 
+VI, VII, VIII, XII, XIII, XXI, XXIII, XXXI, XXXIV, XXXV, 
+XXXVI, XL, XLIII e XLVIII, do artigo 31 deste Estatuto”.*/ 
+||E|| - 2 Lei n.º 6.425/1972 - Estatuto do Policial 
+Civil_INCORRETA. Somente Gabriel e Carlos estarão sujeitos a 
+pena de demissão, nos termos da Lei n.º 6.425/1972: “Art. 49. A 
+pena de demissão será aplicada nos casos de: (...) III – abandono 
+do cargo; (...) VI – aplicação irregular de dinheiros públicos; (...) 
+XII – prática das transgressões disciplinares previstas nos itens I, 
+VI, VII, VIII, XII, XIII, XXI, XXIII, XXXI, XXXIV, XXXV, 
+XXXVI, XL, XLIII e XLVIII, do artigo 31 deste Estatuto”.*/ 
+ 
+  CEBRASPE – PCPE – Edital: 2023
+ 
+ 
+     
+ 
+ 
+ Questão 3
+  
+Suponha que um funcionário público civil do estado de 
+Pernambuco tenha sido demitido ilegalmente do serviço público 
+e, por decisão judicial, reingressado no serviço público. Nessa 
+situação hipotética, o seu reingresso denomina-se 
+A reversão, fazendo ele jus ao ressarcimento das vantagens 
+ligadas ao cargo. 
+B reversão, não fazendo ele jus ao ressarcimento das vantagens 
+ligadas ao cargo. 
+C reintegração, não fazendo ele jus ao ressarcimento das 
+vantagens ligadas ao cargo. 
+D reintegração, fazendo ele jus ao ressarcimento das vantagens 
+ligadas ao cargo. 
+E recondução, não fazendo ele jus ao ressarcimento das 
+vantagens ligadas ao cargo. 
+||JUSTIFICATIVAS|| 
+||A|| - 3 Lei n.º 6.123/1968 - Estatuto do Servidor do Estado de 
+Pernambuco _INCORRETA . Segundo o artigo 66 da Lei n.º 
+6.123/1968, reintegração é o ato pelo qual o funcionário demitido 
+ou exonerado ilegalmente reingressa no serviço público com o 
+ressarcimento das vantagens ligadas ao cargo.*/ 
+||B|| - 3 Lei n.º 6.123/1968 - Estatuto do Servidor do Estado de 
+Pernambuco _INCORRETA . Segundo o artigo 66 da Lei n.º 
+6.123/1968, reintegração é o ato pelo qual o funcionário demitido 
+ou exonerado ilegalmente reingressa no serviço público com o 
+ressarcimento das vantagens ligadas ao cargo.*/ 
+||C|| - 3 Lei n.º 6.123/1968 - Estatuto do Servidor do Estado de 
+Pernambuco _INCORRETA . Segundo o artigo 66 da Lei n.º 
+6.123/1968, reintegração é o ato pelo qual o funcionário demitido 
+ou exonerado ilegalmente reingressa no serviço público com o 
+ressarcimento das vantagens ligadas ao cargo.*/ 
+||D|| - 3 Lei n.º 6.123/1968 - Estatuto do Servidor do Estado de 
+Pernambuco _CORRETA . Segundo o artigo 66 da Lei n.º 
+6.123/1968, reintegração é o ato pelo qual o funcionário demitido 
+ou exonerado ilegalmente reingressa no serviço público com o 
+ressarcimento das vantagens ligadas ao cargo.*/ 
+||E|| - 3 Lei n.º 6.123/1968 - Estatuto do Servidor do Estado de 
+Pernambuco _INCORRETA . Segundo o artigo 66 da Lei n.º 
+6.123/1968, reintegração é o ato pelo qual o funcionário demitido 
+ou exonerado ilegalmente reingressa no serviço público com o 
+ressarcimento das vantagens ligadas ao cargo.*/ 
+ 
+ 
+ Questão 4
+  
+De acordo com a Lei Complementar n.º 137/2008, que institui o 
+Plano de Cargos, Carreiras e Vencimentos para os integrantes do 
+quadro próprio de pessoal da Polícia Civil de Pernambuco, está 
+impedido de concorrer à progressão o servidor que 
+A tiver sido acusado de infração disciplinar. 
+B não possuir o curso de formação exigido para o cargo. 
+C estiver há menos de cinco anos no exercício do cargo. 
+D tiver cumprido pena por condenação na esfera criminal. 
+E tiver sido punido com pena disciplinar de repreensão. 
+||JUSTIFICATIVAS|| 
+||A|| - 4 Lei Complementar nº 137/2008._INCORRETA. A mera 
+acusação não está prevista como condição que impede a 
+progressão. Lei Complementar n.º 137/2008: “Art. 15. Não 
+concorrerá à progressão o servidor: (...) V – que tiver sido 
+condenado criminalmente por sentença transitada em julgado ou 
+punido disciplinarmente com pena de suspensão. Parágrafo 
+único. No caso do inciso V, o servidor só poderá concorrer à 
+progressão, após decorrido o cumprimento da pena ou da punição 
+disciplinar imputada.”.*/ 
+||B|| - 4 Lei Complementar nº 137/2008._CORRETA. Lei 
+Complementar n.º 137/2008: “Art. 15. Não concorrerá à 
+progressão o servidor: (...) II – que não possuir o curso de 
+formação exigido para o cargo;”.*/ 
+||C|| - 4 Lei Complementar nº 137/2008._INCORRETA. Não há 
+tal impedimento entre os incisos do art. 15 da Lei Complementar 
+n.º 137/2008. O estágio probatório, condição impeditiva 
+estabelecida no inc. I do art. 15 da citada lei, é cumprido em 3 
+anos. */ 
+||D|| - 4 Lei Complementar nº 137/2008._INCORRETA. O 
+cumprimento da pena é condição que autoriza o servidor a voltar 
+a concorrer à progressão. Lei Complementar n.º 137/2008: “Art. 
+15. Não concorrerá à progressão o servidor: (...) V – que tiver 
+sido condenado criminalmente por sentença transitada em 
+julgado ou punido disciplinarmente com pena de suspensão. 
+Parágrafo único. No caso do inciso V, o servidor só poderá 
+concorrer à progressão, após decorrido o cumprimento da pena 
+ou da punição disciplinar imputada.”.*/ 
+||E|| - 4 Lei Complementar nº 137/2008._INCORRETA. A Lei 
+Complementar n.º 137/2008 indica a pena de suspensão, e não a 
+de repreensão: “Art. 15. Não concorrerá à progressão o servidor: 
+(...) V – que tiver sido condenado criminalmente por sentença 
+transitada em julgado ou punido disciplinarmente com pena de 
+suspensão.”.*/ 
+ 
+ 
+ Questão 5
+  
+Com fundamento na Constituição Federal de 1988 (CF) e na 
+doutrina majoritária em matéria constitucional, julgue os itens a 
+seguir. 
+I A dignidade da pessoa humana e a promoção do bem de 
+todos, sem preconceitos de origem, raça, sexo, cor, idade e 
+quaisquer outras formas de discriminação, são princípios 
+fundamentais previstos na CF. 
+II O poder constituinte originário é caracterizado pela 
+momentaneidade, já que se exaure após estabelecida a 
+Constituição de um país. 
+III A norma constitucional que dispõe sobre a identificação 
+criminal do civilmente identificado tem aplicabilidade 
+indireta, mediata e reduzida. 
+IV A CF veda, expressa e integralmente, a retroatividade da lei 
+penal. 
+V Será declarada a perda da nacionalidade do brasileiro que 
+fizer pedido expresso nesse sentido perante autoridade 
+brasileira competente, ressalvadas situações que acarretem 
+apatridia. 
+Assinale a opção correta. 
+A Apenas os itens I e V estão certos. 
+B Apenas os itens II e IV estão certos. 
+C Apenas os itens I, III e V estão certos. 
+D Apenas os itens II, III e IV estão certos. 
+E Todos os itens estão certos. 
+||JUSTIFICATIVAS|| 
+||A|| - 1 Constituição da República Federativa do Brasil de 1988. 
+1.1 Princípios fundamentais. 1.2 Poderes Constituintes 
+Originário, Derivado e Decorrente. 
+2 Aplicabilidade das normas constitucionais. 
+3 Direitos e garantias fundamentais. _CORRETA. O item I está 
+certo, pois os princípios fundamentais estão previstos nos arts. de 
+1.º a 4.º da CF, entre eles: a dignidade da pessoa humana (art. 1.º, 
+III) e a promoção do bem de todos, sem preconceitos de origem, 
+raça, sexo, cor, idade e quaisquer outras formas de discriminação 
+(art. 3.º, IV). O item II está errado, pois o poder constituinte 
+originário é caracterizado por ser permanente (ou perene), pois 
+não se exaure após estabelecer a Constituição de um país. O item 
+III está errado, pois o civilmente identificado não será submetido 
+a identificação criminal, salvo nas hipóteses previstas em lei (CF, 
+art. 5.º, LVIII). Trata-se, portanto, de norma de eficácia contida, 
+porquanto está apta a produzir todos os seus efeitos desde a 
+ 
+  CEBRASPE – PCPE – Edital: 2023
+ 
+ 
+     
+promulgação do texto constitucional, mas pode sofrer limitações 
+ou restrições pelo legislador. Logo, tem aplicabilidade direta, 
+imediata, mas possivelmente não integral. O item IV está errado, 
+pois a lei penal não retroagirá, salvo para beneficiar o réu (CF, 
+art. 5.º, XL). O item V está certo, pois será declarada a perda da 
+nacionalidade do brasileiro que fizer pedido expresso nesse 
+sentido perante autoridade brasileira competente, ressalvadas 
+situações que acarretem apatridia (CF, art. 12, § 4.º, II).*/ 
+||B|| - 1 Constituição da República Federativa do Brasil de 1988. 
+1.1 Princípios fundamentais. 1.2 Poderes Constituintes 
+Originário, Derivado e Decorrente. 
+2 Aplicabilidade das normas constitucionais. 
+3 Direitos e garantias fundamentais. _INCORRETA. Apenas os 
+itens I e V estão certos.*/ 
+||C|| - 1 Constituição da República Federativa do Brasil de 1988. 
+1.1 Princípios fundamentais. 1.2 Poderes Constituintes 
+Originário, Derivado e Decorrente. 
+2 Aplicabilidade das normas constitucionais. 
+3 Direitos e garantias fundamentais._INCORRETA. Apenas os 
+itens I e V estão certos.*/ 
+||D|| - 1 Constituição da República Federativa do Brasil de 1988. 
+1.1 Princípios fundamentais. 1.2 Poderes Constituintes 
+Originário, Derivado e Decorrente. 
+2 Aplicabilidade das normas constitucionais. 
+3 Direitos e garantias fundamentais._INCORRETA. Apenas os 
+itens I e V estão certos.*/ 
+||E|| - 1 Constituição da República Federativa do Brasil de 1988. 
+1.1 Princípios fundamentais. 1.2 Poderes Constituintes 
+Originário, Derivado e Decorrente. 
+2 Aplicabilidade das normas constitucionais. 
+3 Direitos e garantias fundamentais._INCORRETA. Apenas os 
+itens I e V estão certos.*/ 
+ 
+ 

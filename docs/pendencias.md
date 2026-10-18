@@ -696,7 +696,8 @@ O que falta vai nesta ordem, uma etapa por conversa.
 - ⚪ **Reinicie o servidor** depois do `git pull` (a tela Hoje mudou de novo);
 - ⚪ **Conferir a classificacao das provas novas** (Analises > Conferencia):
   414 de 17/10, todas do Claude Code, e os nos que elas criaram (a arvore
-  foi de 438 para 561). Gabaritos que a leitura achou discutiveis:
+  foi de 438 para 561); e, na mesma noite, 220 do Cebraspe e 6 do NC-UFPR
+  (a arvore a 682). Gabaritos que a leitura achou discutiveis:
   - FEPESE 2014, Advogado Autarquico, q22 (Direito Administrativo): a
     afirmativa 1 diz "ato vinculado" onde o certo seria "discricionario" -
     olhar o caderno;
@@ -708,6 +709,21 @@ O que falta vai nesta ordem, uma etapa por conversa.
     certa (STF, ADI 1.642 e 2.225);
   - PC-PR 2021 Investigador (NC-UFPR), q13 (posse de droga): o STF (RE
     635.659, 2024) mudou o entendimento depois da prova;
+  - Guarda de Colombo 2022 (NC-UFPR), q26 (porte da guarda): o gabarito e
+    a letra do art. 6º do Estatuto do Desarmamento, mas o STF (ADC 38, ADIs
+    5.538 e 5.948, 2021) derrubou o limite de populacao - a e) tambem se
+    defende. A 2021-q96 e a 2021-q99 da PC-PR (Informatica) e a 2023-q22
+    das Guardas vieram com o texto estragado, mas estao fora do edital;
+  - Delegado PC RJ 2022 (Cebraspe), q40: o gabarito deixa o delegado dar
+    fianca no furto qualificado tentado, mas a pena maxima, com a menor
+    reducao da tentativa, passa de 4 anos (CPP, art. 322); a q39 usa a
+    regra de antes da Lei 12.403/2011 (detencao, e nao os 4 anos);
+  - Guarda de Sao Cristovao 2023 (Cebraspe), q82: a b) repete a Sumula
+    Vinculante 6 e tambem parece certa; a q34 estava certa em 2023, mas o
+    STF (Tema 656, 2025) admitiu o policiamento ostensivo das guardas;
+  - Soldado PM TO 2021 (Cebraspe), q44: a Declaracao Universal como
+    "recomendacao" e a visao formal; ha quem a trate como costume, que
+    obriga;
 - ⚪ **A clausula 5 do IBADE**: "nao podendo ser copiado, reproduzido,
   distribuido ou utilizado sem autorizacao expressa do IBADE". O IBADE tem o
   Agente Socioeducativo AC 2021 e o Inspetor Penitenciario ES 2023, e o robo
@@ -730,10 +746,28 @@ O que falta vai nesta ordem, uma etapa por conversa.
 - 🔴 **As Guardas da Selecon** (Niterói 2019, Boa Vista 2019, Campo Grande
   2020, Sao Goncalo 2020, Sao Luis 2022): os links estao conferidos; falta
   baixar, ler a faixa de materias da capa de cada uma e por na lista;
-- 🔴 **B. O Cebraspe**: a lista prova a prova ja esta no
-  [levantamento_de_bancas](levantamento_de_bancas.md) (13 de multipla
-  escolha, com a Policial Penal PE 2021 e o Delegado PC RJ 2021; 13 de C/E).
-  Falta:
+- ✅ **B. O Cebraspe de multipla escolha** (decisao 169): 14 cadernos, 422
+  questoes de lei, classificadas pelo bloco generico (220 no edital, 202
+  fora). A PC PB 2022 ficou sem gabarito: o definitivo nao confere com o
+  caderno publicado. Sobra:
+  - ⚪ **a PC PB 2022 com a versao certa**: se o Cebraspe tiver o caderno
+    do mesmo codigo com justificativas, ou o gabarito da versao publicada,
+    as 36 voltam (18 ja classificadas). Hoje a pagina do concurso so
+    mostra este par;
+  - o **Certo/Errado** (13 provas, entre elas o DEPEN 2020 e a SERIS/AL):
+    so treina, e precisa do acerto a parte antes de entrar;
+  - a **Guarda de Barra dos Coqueiros 2020**, de outro formato (10 questoes);
+- 🔴 **O IBADE** (voce liberou em 17/10): o Agente Socioeducativo AC 2021, o
+  Inspetor Penitenciario ES 2023, a PC/ES 2025 e os peritos BA. O leitor e a
+  lista; a fixture de teste com texto inventado (a clausula 5 proibe
+  reproduzir, e o repositorio e publico);
+- 🔴 **Os PDFs que voce vai baixar a mao** (a lista com os links diretos
+  esta na pagina "Provas para baixar" de 17/10, na conversa e no
+  levantamento): salvar em
+  `data\provas\manual\` e me avisar. Falta a entrada de PDF local na lista
+  (`arquivo` no lugar de `caderno`) e os leitores da FGV e do Access; o da
+  Selecon ja existe;
+- ⚪ **O Cebraspe (registro antigo do plano)**:
   - a entrada delas no `config/provas_de_outras_bancas.yml` (o download ja
     existe), conferindo o tamanho do PDF (um veio cortado com 200);
   - o leitor do caderno de multipla escolha e o do Certo/Errado (que so

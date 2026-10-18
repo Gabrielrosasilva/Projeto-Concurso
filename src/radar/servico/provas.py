@@ -34,7 +34,7 @@ from radar import gabarito as gabarito_oficial
 from radar import provas as arquivos_de_prova
 from radar import provas_ieses
 from radar import questoes as leitor_de_questoes
-from radar import questoes_ieses, questoes_ncufpr, questoes_selecon
+from radar import questoes_cebraspe, questoes_ieses, questoes_ncufpr, questoes_selecon
 from radar.collectors.base import Buscador
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso, QuestaoDeProva, agora
@@ -274,9 +274,20 @@ def _ler_selecon(caminho: Path, prova: dict, gabarito: Path | None) -> list:
         caminho, gabarito, questoes_selecon.faixas_do_config(prova.get("materias")))
 
 
+def _ler_cebraspe(caminho: Path, prova: dict, gabarito: Path | None) -> list:
+    # So as questoes de lei (`ler`); a resposta do gabarito definitivo, ou da
+    # justificativa quando o definitivo e de outra versao do caderno.
+    return questoes_cebraspe.ler_prova(
+        caminho, gabarito, ler=prova.get("ler"),
+        letras="ABCD" if prova.get("alternativas") == 4 else "ABCDE",
+        resposta_das_justificativas=prova.get("resposta") == "justificativas",
+        anuladas=prova.get("anuladas"))
+
+
 #: As bancas cujo caderno o radar sabe ler, e o leitor de cada uma. Cada
 #: leitor recebe o PDF, a entrada da prova no config e o gabarito a parte.
-LEITORES_DE_OUTRAS_BANCAS = {"NC-UFPR": _ler_ncufpr, "SELECON": _ler_selecon}
+LEITORES_DE_OUTRAS_BANCAS = {"NC-UFPR": _ler_ncufpr, "SELECON": _ler_selecon,
+                             "CEBRASPE": _ler_cebraspe}
 
 
 def _ler_de_outra_banca(registro: dict, caminho: Path, leitor) -> list:
@@ -301,6 +312,34 @@ def carregar_provas_de_outras_bancas(caminho: Path | None = None) -> list[dict]:
     dados = yaml.safe_load(Path(arquivo).read_text(encoding="utf-8")) or {}
     return [p for p in (dados.get("provas") or [])
             if p.get("caderno") and (p.get("banca") or "").upper() in LEITORES_DE_OUTRAS_BANCAS]
+
+
+#: Quantas vezes tentar o PDF que veio cortado ou que falhou.
+TENTATIVAS_DO_PDF = 3
+
+
+def _pdf_inteiro(caminho: Path) -> bool:
+    """O PDF termina com %%EOF? O CDN do Cebraspe ja entregou um caderno pela
+    metade com status 200 (17/10): 64 KB de 850 KB."""
+    with open(caminho, "rb") as arquivo:
+        arquivo.seek(0, 2)
+        tamanho = arquivo.tell()
+        arquivo.seek(max(tamanho - 2048, 0))
+        return b"%%EOF" in arquivo.read()
+
+
+def _baixar_inteiro(documento, buscador, ocupados):
+    """Baixa e confere; o que falhou ou veio cortado e tentado de novo. O CDN
+    do Cebraspe da 404 de vez em quando para arquivo que existe."""
+    for tentativa in range(TENTATIVAS_DO_PDF):
+        baixado = arquivos_de_prova.baixar(documento, buscador, ocupados=ocupados,
+                                           forcar=tentativa > 0)
+        if baixado is not None:
+            caminho = config.diretorio_dados() / baixado.caminho
+            if _pdf_inteiro(caminho):
+                return baixado
+            caminho.unlink(missing_ok=True)
+    return None
 
 
 def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
@@ -328,7 +367,7 @@ def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
                 concurso_url=prova.get("pagina") or prova["caderno"],
                 banca=prova["banca"], orgao=prova.get("orgao"),
                 municipio=prova.get("municipio"), ano=prova.get("ano"))
-            baixado = arquivos_de_prova.baixar(documento, buscador, ocupados=ocupados)
+            baixado = _baixar_inteiro(documento, buscador, ocupados)
             if baixado is None:
                 resultado.falhas += 1
                 continue
@@ -778,6 +817,11 @@ def extrair_questoes(limite: int = 30, refazer: bool = False,
                 destino.resposta = questao.resposta
                 destino.anulada = questao.anulada
                 destino.impressao = questao.impressao
+                # O leitor que acha o texto de apoio o entrega (o Cebraspe);
+                # os outros deixam como estava - na FEPESE quem preenche e o
+                # `radar questoes --textos-base`.
+                if getattr(questao, "texto_base", None):
+                    destino.texto_base = questao.texto_base
 
                 if existente is None:
                     s.add(destino)

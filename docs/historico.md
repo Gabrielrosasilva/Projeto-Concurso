@@ -2389,3 +2389,19 @@ prova a prova para a proxima etapa. A FGV, o Idecan e outras so dao a mao, e
 o IBADE espera a sua decisao sobre os termos. As provas novas foram
 classificadas so no Direito, e a LEP, que nao tinha questao de outra banca,
 ganhou 7 da SEJUSP/MG.
+
+## O Cebraspe de multipla escolha (17/10, mais tarde)
+
+Voce liberou o Cebraspe (decisao 169). Entraram 14 cadernos de multipla
+escolha de 2019 a 2026 - Policial Penal PE, Delegado PC RJ, Agente PC PE,
+oficiais e pracas de PM e Bombeiros de RO, PA, TO e SC, Criminalistica RO e
+a Guarda de Sao Cristovao -, so as questoes de lei, com um leitor proprio. O
+CDN entregou um caderno pela metade com status 200, e o download passou a
+conferir o fim do PDF. O caderno nao diz a materia, e a classificacao a
+decidiu, um pedido por caderno: 220 das 422 cairam no edital, e o resto e
+homicidio, crime contra o patrimonio, atos administrativos, Lei 12.850 ou
+lei de outro estado. A PC PB 2022 ficou sem gabarito: o definitivo
+publicado erra 9 questoes do caderno publicado, de lei e de Informatica,
+conferidas pela imagem dos dois PDFs - o par deve ser de versoes
+diferentes. A arvore foi a 682 nos. E, para os PDFs que so dao a mao, ficou
+uma pagina com os links diretos de cada caderno e gabarito.

@@ -152,6 +152,10 @@ class Questao:
     #: A banca anulou esta questao depois dos recursos. Quem liga e o
     #: `radar.gabarito`, lendo o gabarito definitivo - o caderno nunca sabe.
     anulada: bool = False
+    #: O texto de apoio que a questao cita, quando o leitor da banca o acha
+    #: (o Cebraspe, decisao 169). Vai so para o banco, nunca para arquivo
+    #: versionado (decisao 132); na FEPESE quem preenche e o `--textos-base`.
+    texto_base: str | None = None
 
     @property
     def impressao(self) -> str:

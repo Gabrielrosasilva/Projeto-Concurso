@@ -259,6 +259,25 @@ Responda SOMENTE um JSON, no formato:
 {"classificacoes": [{"questao": "2024-q31", "status": "classificada", "materia": "Direito Penal", "assunto": "...", "subassunto": "...", "tipo_de_questao": "conceito", "pegadinha": "...", "trecho": "...", "item_do_edital": "...", "dispositivo": "..."}]}"""
 
 
+# As outras bancas sem materia no caderno (o Cebraspe, decisao 169): a
+# materia e resposta, e o Portugues e o Raciocinio de outra banca ficam de
+# fora (o seu pedido de 17/10).
+INSTRUCAO_CLASSIFICACAO_GENERICA_OUTRAS_BANCAS = INSTRUCAO_CLASSIFICACAO_GENERICA.replace(
+    'Voce recebe questoes reais de OUTRO concurso da FEPESE (o acervo complementar: '
+    'nao e a prova do meu cargo), com o gabarito. O caderno NAO diz a materia delas: '
+    'o bloco se chama "Conhecimentos Especificos" ou parecido. O nome do lote e so a '
+    'suspeita que um termo levantou, e pode estar errado.',
+    'Voce recebe questoes reais de OUTRA BANCA (nao e a FEPESE, e nao e a prova do '
+    'meu cargo), com o gabarito, todas de um mesmo caderno. O caderno NAO diz a '
+    'materia delas: so "Conhecimentos Basicos" ou "Especificos". Isto serve para eu '
+    'treinar e medir o meu acerto em cada assunto, e NUNCA entra no que a FEPESE '
+    'cobra. Portugues e Raciocinio Logico de outra banca nao interessam: responda '
+    'pendente. Lei de outro estado ou de municipio, Direito Penal Militar, Civil, '
+    'Tributario e legislacao da corporacao: pendente.').replace(
+    "O numero daqui vive numa linha separada e NUNCA e somado a incidencia da "
+    "Policia Penal SC.\n\n", "")
+
+
 # A ficha de estudo (Etapa 6B, secao 11): o texto que o cronograma nao tem -
 # o que ler, como pesquisar, o que entender e memorizar - e os nos da arvore
 # que o tema cobre. O resto da ficha (incidencia, padroes, questoes reais,
@@ -1019,10 +1038,86 @@ def _materia_sugerida_por_termo():
     return sugerir
 
 
+def _blocos_do_pedido(lista) -> tuple[list[str], dict[str, str]]:
+    """O texto de cada questao no pedido e {codigo: chave}, uma por chave."""
+    from radar.servico.classificacoes import chave_de
+
+    blocos, codigos, ja_no_lote = [], {}, set()
+    for q in lista:
+        chave = chave_de(q)
+        # A MESMA questao em dois cadernos (a FEPESE reaproveita) e uma
+        # questao so para a classificacao, que trabalha por chave:
+        # mandar as duas seria pedir o mesmo trabalho duas vezes.
+        if chave in ja_no_lote:
+            continue
+        ja_no_lote.add(chave)
+        codigo = _codigo(q)
+        # Duas provas do mesmo ano no mesmo lote (acontece no
+        # complementar) dariam o mesmo codigo, e a resposta ficaria
+        # ambigua: um sufixo da prova desempata.
+        if codigo in codigos:
+            codigo = f"{codigo}-{sum(map(ord, q.prova_url)) % 1000:03d}"
+        # Duas provas com o mesmo sufixo (as outras bancas tem dezenas de
+        # cadernos no mesmo ano): um contador desempata, e o codigo nunca
+        # aponta para duas questoes.
+        base, extra = codigo, 2
+        while codigo in codigos:
+            codigo, extra = f"{base}-{extra}", extra + 1
+        codigos[codigo] = chave
+        marca = " (ANULADA pela banca: classifique assim mesmo)" if q.anulada else ""
+        blocos.append(f"[{codigo}]{marca}\n{gerador._questao_por_extenso(q)}")
+    return blocos, codigos
+
+
+def _pedido_generico_de_outras_bancas(questoes, conferidas, caminhos, do_edital,
+                                      taxonomia) -> dict:
+    """Outras bancas cujo caderno nao diz a materia (o Cebraspe, decisao 169).
+
+    Um pedido por CADERNO, com a arvore de todas as materias do edital: a
+    materia e resposta, como no bloco generico da FEPESE. Sem o termo para
+    sugerir lote - aqui o caderno ja vem so com as questoes de lei (a entrada
+    no config le so elas).
+    """
+    from radar import conteudos as arvore
+    from radar.servico import evidencia
+    from radar.servico.classificacoes import chave_de
+
+    por_prova: dict[str, list] = {}
+    for q in questoes:
+        if chave_de(q) in conferidas:
+            continue
+        no = (arvore.achar(caminhos, q.materia)
+              or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
+        if no is None:
+            por_prova.setdefault(q.prova_url, []).append(q)
+
+    materias = sorted(do_edital)
+    dela = [c for c in caminhos
+            if any(c == m or c.startswith(m + arvore.SEPARADOR) for m in materias)]
+    elementos = list(dict.fromkeys(e for m in materias
+                                   for e in taxonomia.elementos_da_materia(m)))
+    pedidos = []
+    for numero, (_prova, lista) in enumerate(por_prova.items(), start=1):
+        blocos, codigos = _blocos_do_pedido(lista)
+        rotulo = f"{lista[0].banca} {lista[0].ano} - {lista[0].cargo or 'sem cargo'}"
+        pedidos.append({
+            "id": f"c{numero}", "materia": rotulo, "fora_do_edital": False,
+            "questoes": codigos, "assuntos_do_edital": [], "arvore": dela,
+            "elementos": elementos, "tipos_de_questao": taxonomia.tipos_de_questao,
+            "evidencia": evidencia.FORA, "bloco_generico": True,
+            "outras_materias_do_edital": do_edital,
+            "instrucao": INSTRUCAO_CLASSIFICACAO_GENERICA_OUTRAS_BANCAS,
+            "pedido": (f"CADERNO: {rotulo} (o caderno nao diz a materia)\n\n"
+                       "QUESTOES\n\n" + "\n\n".join(blocos)),
+        })
+    return _novo_lote("classificacao", pedidos)
+
+
 def pedido_de_classificacao(materia: str | list[str] | None = None,
                             de_evidencia: str | None = None,
                             genericos: bool = False,
-                            so_novas: bool = False) -> dict:
+                            so_novas: bool = False,
+                            banca: str | None = None) -> dict:
     """Um pedido por materia, com as questoes e a arvore dela.
 
     `de_evidencia` diz de onde vem a questao: `alvo` (o padrao: as 170 de
@@ -1036,6 +1131,9 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
     conferi - a conferencia e minha e nao se refaz por cima. A materia do
     caderno encontra o no pela regra dos textos antigos (igual, ou pelo
     sinonimo do config/taxonomia.yml).
+
+    `banca` limita as questoes as daquela banca (as outras bancas: o Cebraspe
+    sem a IESES, decisao 169).
 
     `so_novas` pede so a questao sem classificacao principal nenhuma: as
     provas novas do acervo (decisao 167), sem refazer o que ja foi
@@ -1074,6 +1172,8 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
         consulta = (select(QuestaoDeProva)
                     .where(QuestaoDeProva.evidencia == de_evidencia)
                     .order_by(QuestaoDeProva.ano, QuestaoDeProva.numero))
+        if banca:
+            consulta = consulta.where(QuestaoDeProva.banca.ilike(banca))
         if de_evidencia == evidencia.COMPLEMENTAR:
             # Prova fora do acervo nao e classificada: seria dar a ela um
             # lugar na estatistica que a validacao negou.
@@ -1081,14 +1181,17 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
                 QuestaoDeProva.prova_url.in_(acervo.provas_aceitas()))
         questoes = list(s.scalars(consulta))
 
-    if genericos and de_evidencia != evidencia.COMPLEMENTAR:
-        raise ValueError("bloco genérico só existe no acervo complementar")
+    if genericos and de_evidencia == evidencia.ALVO:
+        raise ValueError("bloco genérico só existe no complementar e nas outras bancas")
 
     caminhos = [n.caminho for n in nos]
     fora = {n.caminho for n in nos if n.nivel == "materia" and n.fora_do_edital}
     do_edital = {n.caminho: [x.nome for x in nos
                              if x.pai == n.caminho and x.origem == "edital"]
                  for n in nos if n.nivel == "materia" and not n.fora_do_edital}
+    if genericos and de_evidencia == evidencia.FORA:
+        return _pedido_generico_de_outras_bancas(questoes, conferidas, caminhos,
+                                                 do_edital, taxonomia)
 
     from radar.servico.classificacoes import chave_de
 
@@ -1116,30 +1219,7 @@ def pedido_de_classificacao(materia: str | list[str] | None = None,
 
     pedidos = []
     for numero, (no, lista) in enumerate(por_materia.items(), start=1):
-        blocos, codigos, ja_no_lote = [], {}, set()
-        for q in lista:
-            chave = chave_de(q)
-            # A MESMA questao em dois cadernos (a FEPESE reaproveita) e uma
-            # questao so para a classificacao, que trabalha por chave:
-            # mandar as duas seria pedir o mesmo trabalho duas vezes.
-            if chave in ja_no_lote:
-                continue
-            ja_no_lote.add(chave)
-            codigo = _codigo(q)
-            # Duas provas do mesmo ano no mesmo lote (acontece no
-            # complementar) dariam o mesmo codigo, e a resposta ficaria
-            # ambigua: um sufixo da prova desempata.
-            if codigo in codigos:
-                codigo = f"{codigo}-{sum(map(ord, q.prova_url)) % 1000:03d}"
-            # Duas provas com o mesmo sufixo (as outras bancas tem dezenas de
-            # cadernos no mesmo ano): um contador desempata, e o codigo nunca
-            # aponta para duas questoes.
-            base, extra = codigo, 2
-            while codigo in codigos:
-                codigo, extra = f"{base}-{extra}", extra + 1
-            codigos[codigo] = chave
-            marca = " (ANULADA pela banca: classifique assim mesmo)" if q.anulada else ""
-            blocos.append(f"[{codigo}]{marca}\n{gerador._questao_por_extenso(q)}")
+        blocos, codigos = _blocos_do_pedido(lista)
         dela = [c for c in caminhos if c == no or c.startswith(no + arvore.SEPARADOR)]
         item = {
             "id": f"c{numero}", "materia": no, "fora_do_edital": no in fora,

@@ -302,3 +302,60 @@ def test_so_novas_pede_so_a_questao_sem_classificacao(acervo):
     (novas,) = manual.pedido_de_classificacao(None, "fora", so_novas=True)["pedidos"]
     assert len(todas["questoes"]) == 9
     assert len(novas["questoes"]) == 1
+
+
+def test_o_caderno_sem_materia_vira_um_pedido_generico_por_caderno(acervo):
+    """O Cebraspe nao diz a materia (decisao 169): um pedido por caderno, com
+    todas as materias do edital, e a materia e resposta."""
+    with sessao() as s:
+        for numero, caderno in ((1, "x"), (2, "x"), (1, "y")):
+            s.add(QuestaoDeProva(
+                prova_url=f"https://cdn.cebraspe.test/{caderno}.PDF", banca="Cebraspe",
+                ano=2022, numero=numero, materia=None,
+                enunciado=f"Questão de lei {numero}{caderno}?",
+                alternativas={"a": "1", "b": "2", "c": "3", "d": "4", "e": "5"},
+                resposta="a", impressao=f"ceb-{numero}{caderno}", evidencia="fora"))
+    lote = manual.pedido_de_classificacao(None, "fora", genericos=True)
+    assert len(lote["pedidos"]) == 2
+    primeiro = lote["pedidos"][0]
+    assert primeiro["bloco_generico"] and primeiro["evidencia"] == "fora"
+    assert primeiro["instrucao"] == manual.INSTRUCAO_CLASSIFICACAO_GENERICA_OUTRAS_BANCAS
+    assert "Portugues e Raciocinio Logico de outra banca" in primeiro["instrucao"]
+    assert PORTUGUES in primeiro["outras_materias_do_edital"]
+    assert sum(len(p["questoes"]) for p in lote["pedidos"]) == 3
+    # A da IESES tem materia no caderno: fica no pedido de sempre.
+    assert all("ieses" not in q for p in lote["pedidos"] for q in p["questoes"])
+
+    # A resposta diz a materia, e a importacao pendura la.
+    codigo, chave = next(iter(primeiro["questoes"].items()))
+    classificacoes.aplicar_proposta({
+        "questao": codigo, "status": "classificada", "materia": PORTUGUES,
+        "assunto": "Compreensão e interpretação de texto (s)",
+        "tipo_de_questao": "interpretação de texto", "trecho": "lei",
+        "item_do_edital": "Compreensão e interpretação de texto (s)",
+        "dispositivo": "-", "pegadinha": ""}, primeiro, "manual")
+    with sessao() as s:
+        from radar.models import Classificacao
+        linha = s.scalar(select(Classificacao).where(Classificacao.chave == chave))
+    assert linha.conteudo == INTERPRETACAO
+
+
+def test_bloco_generico_nao_existe_no_alvo(banco_temporario):
+    with pytest.raises(ValueError):
+        manual.pedido_de_classificacao(None, "alvo", genericos=True)
+
+
+def test_o_pedido_filtra_pela_banca(acervo):
+    with sessao() as s:
+        s.add(QuestaoDeProva(
+            prova_url="https://cdn.cebraspe.test/z.PDF", banca="Cebraspe", ano=2022,
+            numero=1, materia=None, enunciado="Questão de lei do Cebraspe?",
+            alternativas={"a": "1", "b": "2", "c": "3", "d": "4", "e": "5"},
+            resposta="a", impressao="ceb-z", evidencia="fora"))
+        s.add(QuestaoDeProva(
+            prova_url="https://ieses.test/educ.pdf", banca="IESES", ano=2024,
+            numero=1, materia="Conhecimentos Específicos", enunciado="Pedagogia?",
+            alternativas=dict(QUATRO), resposta="a", impressao="ieses-ped", evidencia="fora"))
+    lote = manual.pedido_de_classificacao(None, "fora", genericos=True, banca="cebraspe")
+    assert len(lote["pedidos"]) == 1
+    assert lote["pedidos"][0]["materia"].startswith("Cebraspe")
