@@ -387,12 +387,15 @@ na `versao` da lista: as paginas dela (`radar/questoes_por_rodada.py`, um
 leitor para a FGV, a Access, a Idecan e a Selecon nova) e o bloco dela no
 gabarito (`radar/gabarito_por_versao.py`), ou nada entra - o "PROVA A" da PM
 de Sergipe trazia a Prova B junto. A anulada fica de fora de toda conta e
-treino, como sempre; o gabarito preliminar nao entra. Entraram 7 provas (SEAP-BA,
-SENAPPEN, PM SE Soldado e Oficial, Guardas de Niteroi, Ribeirao Preto e
-Cariacica), 231 questoes, 107 no edital, relidas as cegas pela regra da 171
-(90 no mesmo no, 12 no no em comum, 5 pendentes). Outras bancas no treino:
-358 de lei. As duas da PC SC 2026 (Idecan) esperam o link; a PC SC 2023 e a
-PC RN 2021 (FGV), o gabarito definitivo (pendencia O).
+treino, como sempre; o gabarito preliminar nao entra. Entraram 11 provas
+(SEAP-BA, SENAPPEN, PM SE Soldado e Oficial, Guardas de Niteroi, Ribeirao
+Preto e Cariacica; e, no adendo, a PC SC 2026 da Idecan, Escrivao e Agente,
+a PC SC 2023 Delegado e a PC RN 2021, da FGV), 417 questoes, 194 no edital,
+relidas as cegas pela regra da 171 (159 no mesmo no, 24 no no em comum, 11
+pendentes). O `caderno` e o link de onde veio (ate espelho, como o
+Qconcursos), e o `radar baixar-provas` nunca busca o que veio a mao.
+Outras bancas no treino: 430 de lei. Falta o Delegado da PC RN, se voce
+quiser, e decidir os gabaritos discutiveis (pendencia O).
 **A tela da amostra das provas novas (18/10, decisao 173, a seu pedido):** a
 conferencia ganhou dois recortes, nunca juntos com o alvo e o complementar -
 "outras bancas" (com a banca, o ano e o cargo) e "provas novas de 17/10". O

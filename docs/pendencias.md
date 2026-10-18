@@ -694,7 +694,10 @@ O que falta vai nesta ordem, uma etapa por conversa.
   sinonimo no `config/taxonomia.yml` antes; a matematica pura fica pendente;
 - ⚪ **A palavra partida da IESES** ("senti do", "par a") continua no texto:
   o treino ja trata as versoes como uma questao so, mas a tela mostra a
-  palavra partida;
+  palavra partida (a das baixadas a mao vai junto, na secao de baixo). Nos
+  cadernos de educacao de Biguacu 2024, 8 questoes tem a letra certa fora
+  das alternativas (a leitura cortou alternativa) e 4 tem "Pagina 4" colado
+  no texto - nenhuma classificada, e o treino ja recusa as primeiras;
 - ⚪ **As 18 pendentes da IESES**: 17 sao a mesma questao mista (acentuacao,
   pontuacao e sinonimo nos itens I a III), e 1 cobra o sujeito, que e termo
   essencial e nao esta no edital.
@@ -804,15 +807,34 @@ O que falta vai nesta ordem, uma etapa por conversa.
   nos gemeos que o lote criou ("Direito de reuniao" / "Liberdade de
   reuniao"; "Manifestacao do pensamento..." / "Liberdade de manifestacao do
   pensamento...") vao para o passo 3 da Parte 2. Sobra:
-  - 🔴 **as duas da PC SC 2026 (Idecan, Escrivao e Agente, Tipo A)**: lidas
-    100 de 100 cada, com o gabarito definitivo (24 e 96 anuladas no
-    Escrivao, 60 no Agente; a 64 do Agente trocada no definitivo). Falta o
-    LINK de onde voce baixou os dois PDFs e os dois gabaritos (o radar
-    guarda e mostra o link original); com ele, e so por na lista;
-  - ⚪ **a PC SC 2023 (Delegado) e a PC RN 2021 (Agente e Escrivao), da
-    FGV**: o gabarito que voce baixou e o PRELIMINAR, sem as anuladas nem
-    as trocas. Falta o "Gabarito Oficial Definitivo" de cada uma (e o link
-    do caderno da PC RN);
+  - ✅ **o segundo lote (18/10, adendo da 172)**: a PC SC 2026 (Idecan,
+    Escrivao e Agente, Tipo A), a PC SC 2023 (Delegado, FGV, Tipo 1) e a PC
+    RN 2021 (Agente e Escrivao, FGV, Tipo 1, com o `cargo_no_gabarito`),
+    com os gabaritos definitivos: 186 questoes de lei, 87 no edital, e a
+    segunda leitura as cegas conferiu 81 e deixou 6 pendentes. No treino de
+    outras bancas: 430 questoes de lei;
+  - ⚪ **o Delegado da PC RN 2021 (FGV)**: o link que voce mandou e o deste
+    caderno (`pcrn-delegado-de-policia-civil-substituto-deleg-01-tipo-1.pdf`),
+    que nao veio para a pasta; o gabarito definitivo que voce baixou ja tem
+    o bloco do Delegado. Se quiser (e quase todo de Direito): baixar e
+    salvar em `data\provas\manual\`;
+  - ⚪ **os gabaritos discutiveis das baixadas a mao** (lista na Parte do
+    passo 2, acima, e mais): Delegado PC SC 2024, q71 (Protocolo de Palermo
+    exige a finalidade de exploracao tambem com a crianca) e q46
+    (reconhecimento fotografico como "prova irritual"); Escrivao PC SC 2026,
+    q25 (a certa traz "ou dele se beneficia...", trecho que a Lei
+    14.230/2021 tirou do art. 3º da Lei 8.429). Decidir se saem do treino,
+    como as seis de 17/10 no passo 2 da 171;
+  - ⚪ **a palavra partida nas baixadas a mao**, como na IESES: "p ara", "c
+    om", "L ei", "policia l", e a ligadura "ﬁ m" da Selecon - FGV 55 de 160
+    questoes, Selecon 12, Access 10, Idecan 3. Nao muda o gabarito; a
+    correcao muda a chave (releitura com o `--refazer`, que leva a
+    classificacao) e precisa de regra que nao junte o que e letra de
+    verdade (incisos I, V, X; "A, B, C e D"). Uma etapa so, com a da IESES;
+  - ⚪ **o no vazio e os gemeos do lote de 18/10**: "Liberdade de reuniao"
+    ficou sem questao (a sua subiu para o no em comum); "Manifestacao do
+    pensamento e acesso a informacao" (4) e "Liberdade de manifestacao do
+    pensamento e de expressao" (1) cobrem o mesmo. Vao com o passo 3;
   - ⚪ **a Idecan da PC-CE e da PEFOCE 2021**, que estavam na lista e nao
     vieram;
 - ⚪ **O Cebraspe (registro antigo do plano)**:

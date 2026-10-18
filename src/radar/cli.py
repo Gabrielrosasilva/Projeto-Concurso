@@ -416,6 +416,11 @@ def baixar_provas(
         f"{contagem['ja_tinha']} já estava(m) no disco"
         + (f", [red]{contagem['falhas']}[/] falhou/falharam" if contagem["falhas"] else "")
     )
+    if contagem.get("a_mao"):
+        console.print(
+            f"[yellow]{contagem['a_mao']}[/] PDF(s) baixado(s) à mão faltam em "
+            "data/provas/manual/: o robô não os busca. Baixe de novo pelo link da "
+            "lista (config/provas_de_outras_bancas.yml).")
 
 
 @app.command()

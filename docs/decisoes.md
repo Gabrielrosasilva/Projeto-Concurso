@@ -6183,3 +6183,35 @@ viraram estudo extra "Onde: Radar". Copia antes em
      estao neste lote: aparecem no recorte das outras bancas, com "so as nao
      conferidas". Nos testes a reserva e trocada (`conferencia_do_lote.reservadas`):
      ela depende do dia e do plano real.
+
+**Adendo a 172 (18/10, de madrugada): o segundo lote baixado a mao.** Voce
+mandou os gabaritos definitivos que faltavam e os links. Quatro regras novas:
+- **o link de onde veio**: as duas da PC SC 2026 vieram de espelhos (o
+  Qconcursos e um blog), e o PDF e o da propria Idecan. O `caderno` e o link
+  de onde voce baixou, a `pagina` e a da banca, e o robo nunca vai a nenhum
+  dos dois. Sem o link direto (FGV), o `caderno` e a pagina do concurso;
+- **o gabarito sem link** fica com o do caderno e "#gabarito"
+  (`servico.provas.url_do_gabarito`): e so o nome dele no manifesto, e
+  nenhum endereco e inventado;
+- **o `radar baixar-provas` nunca busca o que veio a mao** (os termos da FGV
+  e do Qconcursos proibem robo; o robots.txt do CDN da Selecon e da Access
+  tambem): o que falta em `data/provas/manual/` so e contado e avisado;
+- **o gabarito que junta cargos pelo nome da versao** (a PC RN: "Agente de
+  Policia Civil Substituto - Tipo 1", depois o Escrivao e o Delegado) le so
+  o bloco do `cargo_no_gabarito`: o bloco do cargo acaba na linha que traz
+  outra versao com o nome de outro cargo. O Tipo 1 do Agente e o do Escrivao
+  sao iguais (o caderno e um so para os dois), e o do Delegado e outra prova.
+Entraram a PC SC 2026 (Idecan, Escrivao e Agente, Tipo A), a PC SC 2023
+(Delegado, FGV, Tipo 1; anuladas 18, 20, 21, 42 e 96) e a PC RN 2021 (Agente
+e Escrivao, FGV, Tipo 1): 186 questoes de lei, 87 no edital pela primeira
+leitura, e a segunda, as cegas: 69 no mesmo no, 12 no no em comum, 6
+pendentes. A auditoria das 11 baixadas a mao (18/10): a versao do caderno e
+a do gabarito batem; as anuladas do gabarito sao as do banco; toda faixa foi
+lida inteira, com o numero de alternativas da prova; nenhum enunciado
+repetido (sinal de versoes misturadas); o Tipo 1 e o Tipo 4 de Cariacica
+conferidos tambem pela imagem do gabarito. As 183 classificadas tem item do
+edital, tipo, trecho, dispositivo e pegadinha (100%), e descem mais que as
+da FEPESE: 75% ate o elemento, 21% no subassunto e 3% no assunto (FEPESE:
+24%, 59% e 15%). No treino de outras bancas: Constitucional 110, Penal 72,
+Administracao Publica 72, Processo Penal 60, Legislacao Especial 53,
+Direitos Humanos 41, LEP 22 - 430 de lei.

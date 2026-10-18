@@ -2422,3 +2422,16 @@ Access). Entraram 7 provas e 231 questoes de lei; a classificacao seguiu a
 regra da segunda leitura as cegas que outra conversa tinha acabado de criar
 (decisao 171). Os gabaritos da PC SC 2023 e da PC RN 2021 eram preliminares
 e ficaram de fora; as duas da PC SC 2026, da Idecan, esperam o link.
+
+## O segundo lote baixado a mao e a auditoria (18/10, de madrugada)
+
+Voce mandou os gabaritos definitivos que faltavam e de onde tinha baixado
+as duas da PC SC 2026 - um espelho no Qconcursos e um blog. O PDF e o da
+propria Idecan; o radar guarda o link de onde veio e nunca vai a ele, e o
+`radar baixar-provas` passou a nunca buscar o que veio a mao. O gabarito da
+PC RN juntava Agente, Escrivao e Delegado, cada um com os seus Tipos 1 a 4,
+e o bloco do cargo passou a acabar no nome do cargo seguinte. A auditoria
+das 11 provas confirmou a versao, as anuladas, as faixas e o texto, e as
+classificadas desceram mais na arvore que as da FEPESE. Ficaram anotados a
+palavra partida da FGV ("p ara", "L ei"), dois nos gemeos e os gabaritos
+discutiveis, para voce decidir.

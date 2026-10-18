@@ -289,8 +289,12 @@ def _ler_por_rodada(caminho: Path, prova: dict, gabarito: Path | None,
     if not versao or gabarito is None:
         log.warning("%s: falta a versao ou o gabarito na lista", caminho.name)
         return []
+    # O gabarito pode chamar o cargo de outro jeito: o caderno da PC RN e o
+    # "AGENTE E ESCRIVAO", e o gabarito tem um bloco do "Agente de Policia
+    # Civil Substituto", outro do Escrivao e outro do Delegado.
+    cargo_do_gabarito = prova.get("cargo_no_gabarito") or cargo
     try:
-        respostas = gabarito_por_versao.da_versao(gabarito, versao, cargo)
+        respostas = gabarito_por_versao.da_versao(gabarito, versao, cargo_do_gabarito)
         return questoes_por_rodada.ler_prova(
             caminho, respostas, versao=versao, cargo=cargo, marca=marca,
             alternativa=alternativa, ler=prova.get("ler"),
@@ -338,11 +342,22 @@ def _ler_de_outra_banca(registro: dict, caminho: Path, leitor) -> list:
     prova = next((p for p in carregar_provas_de_outras_bancas()
                   if p.get("caderno") == registro.get("url")), {})
     gabarito = None
-    if prova.get("gabarito"):
+    if url_do_gabarito(prova):
         do_gabarito = next((r for r in arquivos_de_prova.carregar_manifesto()
-                            if r.get("url") == prova["gabarito"]), None)
+                            if r.get("url") == url_do_gabarito(prova)), None)
         gabarito = _caminho(do_gabarito)
     return leitor(caminho, prova, gabarito)
+
+
+def url_do_gabarito(prova: dict) -> str | None:
+    """O link do gabarito na lista. O baixado a mao sem link conhecido (voce
+    nao lembra de onde veio) fica com o do caderno e "#gabarito": e so o nome
+    dele no manifesto, e nenhum endereco e inventado."""
+    if prova.get("gabarito"):
+        return prova["gabarito"]
+    if prova.get("arquivo_do_gabarito") and prova.get("caderno"):
+        return prova["caderno"] + "#gabarito"
+    return None
 
 
 def carregar_provas_de_outras_bancas(caminho: Path | None = None) -> list[dict]:
@@ -419,8 +434,8 @@ def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
     for prova in lista:
         resultado.concursos += 1
         documentos = [(arquivos_de_prova.PROVA, prova["caderno"], prova.get("arquivo"))]
-        if prova.get("gabarito"):
-            documentos.append((arquivos_de_prova.GABARITO, prova["gabarito"],
+        if url_do_gabarito(prova):
+            documentos.append((arquivos_de_prova.GABARITO, url_do_gabarito(prova),
                                prova.get("arquivo_do_gabarito")))
         for tipo, url, a_mao in documentos:
             if url in conhecidos:
@@ -598,12 +613,22 @@ def baixar_do_manifesto(forcar: bool = False) -> dict[str, int]:
     """
     registros = arquivos_de_prova.carregar_manifesto()
     if not registros:
-        return {"total": 0, "baixados": 0, "ja_tinha": 0, "falhas": 0}
+        return {"total": 0, "baixados": 0, "ja_tinha": 0, "falhas": 0, "a_mao": 0}
 
     buscador = Buscador()
-    contagem = {"total": len(registros), "baixados": 0, "ja_tinha": 0, "falhas": 0}
+    contagem = {"total": len(registros), "baixados": 0, "ja_tinha": 0, "falhas": 0,
+                "a_mao": 0}
 
     for registro in registros:
+        if (registro.get("caminho") or "").startswith("provas/manual/"):
+            # O que voce baixou a mao o robo nunca busca (decisao 172): os
+            # termos da FGV e do Qconcursos proibem robo, e o robots.txt do CDN
+            # da Selecon e da Access tambem. Faltando, so avisa.
+            if (config.diretorio_dados() / registro["caminho"]).exists():
+                contagem["ja_tinha"] += 1
+            else:
+                contagem["a_mao"] += 1
+            continue
         documento = arquivos_de_prova.Documento(**{
             campo: registro.get(campo)
             for campo in ("tipo", "url", "arquivo", "cargo", "concurso_url",

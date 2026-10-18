@@ -73,20 +73,18 @@ def test_a_lista_do_config_so_traz_banca_que_o_radar_sabe_ler(tmp_path):
 
     lista = servico_provas.carregar_provas_de_outras_bancas()
     assert lista and {p["banca"] for p in lista} == {"NC-UFPR", "Selecon", "Cebraspe",
-                                                      "FGV", "Access"}
-    # Sempre o link do site oficial da banca.
+                                                      "FGV", "Access", "Idecan"}
+    # O robo so baixa do site oficial da banca.
+    robo = [p for p in lista if not p.get("arquivo")]
     assert all(p["caderno"].startswith(("https://servicos.nc.ufpr.br/",
                                         "https://selecon.org.br/",
-                                        "https://cdn.cebraspe.org.br/",
-                                        "https://conhecimento.fgv.br/",
-                                        "https://anexos.cdn.selecao.net.br/")) for p in lista)
-    # O que o robo nao pode baixar (os termos da FGV, o robots.txt do CDN da
-    # Selecon e da Access) so entra baixado a mao, e com a versao do caderno
-    # (decisao 172).
-    a_mao = [p for p in lista if p["caderno"].startswith(
-        ("https://conhecimento.fgv.br/", "https://anexos.cdn.selecao.net.br/"))]
-    assert a_mao and all(p.get("arquivo") and p.get("arquivo_do_gabarito") and p.get("versao")
-                         for p in a_mao)
+                                        "https://cdn.cebraspe.org.br/")) for p in robo)
+    # O que o robo nao pode baixar (os termos da FGV e do Qconcursos, o
+    # robots.txt do CDN da Selecon e da Access) so entra baixado a mao, com a
+    # versao do caderno e o gabarito (decisao 172).
+    a_mao = [p for p in lista if p.get("arquivo")]
+    assert a_mao and all(p.get("arquivo_do_gabarito") and p.get("versao") for p in a_mao)
+    assert all(p["caderno"].startswith("https://") and p.get("pagina") for p in a_mao)
     # O Cebraspe diz quais questoes sao de lei; a SERES responde pela justificativa.
     seres = next(p for p in lista if "SERES_PE_21" in p["caderno"])
     assert seres["ler"] == ["21-60"] and seres["resposta"] == "justificativas"

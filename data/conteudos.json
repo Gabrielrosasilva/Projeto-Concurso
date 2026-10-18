@@ -1521,6 +1521,19 @@
     "referencia": "Declaração Universal dos Direitos Humanos, art. 5º"
   },
   {
+    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 6º",
+    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
+    "nivel": "elemento",
+    "nome": "Declaração Universal, art. 6º",
+    "ordem": 4,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Declaração Universal, art. 6º"
+  },
+  {
     "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 9º",
     "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
     "nivel": "elemento",
@@ -1545,6 +1558,32 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "Declaração Universal, art. 1º"
+  },
+  {
+    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 2º",
+    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
+    "nivel": "elemento",
+    "nome": "Declaração Universal, art. 2º",
+    "ordem": 5,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Declaração Universal, art. 2º"
+  },
+  {
+    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 17",
+    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
+    "nivel": "elemento",
+    "nome": "Declaração Universal, art. 17",
+    "ordem": 6,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Declaração Universal, art. 17"
   },
   {
     "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 3º",
@@ -2054,6 +2093,19 @@
     "referencia": null
   },
   {
+    "caminho": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Convenção contra a Tortura (ONU, 1984) > Convenção contra a Tortura, art. 1º",
+    "pai": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Convenção contra a Tortura (ONU, 1984)",
+    "nivel": "elemento",
+    "nome": "Convenção contra a Tortura, art. 1º",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Convenção contra a Tortura, art. 1º"
+  },
+  {
     "caminho": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Pacto Internacional dos Direitos Civis e Políticos",
     "pai": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos",
     "nivel": "subassunto",
@@ -2130,6 +2182,32 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "CEDAW, art. 2º"
+  },
+  {
+    "caminho": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Protocolo de Palermo sobre tráfico de pessoas (ONU, 2000)",
+    "pai": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos",
+    "nivel": "subassunto",
+    "nome": "Protocolo de Palermo sobre tráfico de pessoas (ONU, 2000)",
+    "ordem": 8,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Protocolo de Palermo sobre tráfico de pessoas (ONU, 2000) > Protocolo de Palermo, art. 3º",
+    "pai": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Protocolo de Palermo sobre tráfico de pessoas (ONU, 2000)",
+    "nivel": "elemento",
+    "nome": "Protocolo de Palermo, art. 3º",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Protocolo de Palermo, art. 3º"
   },
   {
     "caminho": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas",
@@ -2873,6 +2951,19 @@
     "referencia": "art. 5º, XIV, da Constituição Federal"
   },
   {
+    "caminho": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Manifestação do pensamento e acesso à informação > CF, art. 5º, XXXIII",
+    "pai": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Manifestação do pensamento e acesso à informação",
+    "nivel": "elemento",
+    "nome": "CF, art. 5º, XXXIII",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "inciso",
+    "referencia": "CF, art. 5º, XXXIII"
+  },
+  {
     "caminho": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de manifestação do pensamento e de expressão",
     "pai": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
     "nivel": "subassunto",
@@ -2897,6 +2988,32 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
     "tipo_elemento": "inciso",
     "referencia": "art. 5º, IX, da Constituição Federal"
+  },
+  {
+    "caminho": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Extradição",
+    "pai": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "nivel": "subassunto",
+    "nome": "Extradição",
+    "ordem": 17,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Extradição > CF, art. 5º, LI",
+    "pai": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Extradição",
+    "nivel": "elemento",
+    "nome": "CF, art. 5º, LI",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "inciso",
+    "referencia": "CF, art. 5º, LI"
   },
   {
     "caminho": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade",
@@ -3406,6 +3523,19 @@
     "referencia": null
   },
   {
+    "caminho": "Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos > CF, art. 15, I",
+    "pai": "Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos",
+    "nivel": "elemento",
+    "nome": "CF, art. 15, I",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "inciso",
+    "referencia": "CF, art. 15, I"
+  },
+  {
     "caminho": "Direito Constitucional > cidadania e direitos políticos > Soberania popular e democracia semidireta",
     "pai": "Direito Constitucional > cidadania e direitos políticos",
     "nivel": "subassunto",
@@ -3430,6 +3560,45 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
     "tipo_elemento": "parágrafo",
     "referencia": "art. 1º, parágrafo único, da Constituição Federal"
+  },
+  {
+    "caminho": "Direito Constitucional > cidadania e direitos políticos > Soberania popular e democracia semidireta > CF, art. 14, § 13",
+    "pai": "Direito Constitucional > cidadania e direitos políticos > Soberania popular e democracia semidireta",
+    "nivel": "elemento",
+    "nome": "CF, art. 14, § 13",
+    "ordem": 1,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "parágrafo",
+    "referencia": "CF, art. 14, § 13"
+  },
+  {
+    "caminho": "Direito Constitucional > cidadania e direitos políticos > Cidadania como fundamento da República",
+    "pai": "Direito Constitucional > cidadania e direitos políticos",
+    "nivel": "subassunto",
+    "nome": "Cidadania como fundamento da República",
+    "ordem": 6,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Direito Constitucional > cidadania e direitos políticos > Cidadania como fundamento da República > CF, art. 1º, II",
+    "pai": "Direito Constitucional > cidadania e direitos políticos > Cidadania como fundamento da República",
+    "nivel": "elemento",
+    "nome": "CF, art. 1º, II",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "inciso",
+    "referencia": "CF, art. 1º, II"
   },
   {
     "caminho": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública",
@@ -3690,6 +3859,19 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
+  },
+  {
+    "caminho": "Direito Constitucional > organização da segurança pública > Carreiras da segurança pública > CF, art. 144, § 9º",
+    "pai": "Direito Constitucional > organização da segurança pública > Carreiras da segurança pública",
+    "nivel": "elemento",
+    "nome": "CF, art. 144, § 9º",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "parágrafo",
+    "referencia": "CF, art. 144, § 9º"
   },
   {
     "caminho": "Direito Constitucional > organização da segurança pública > Competências federativas em segurança pública",
@@ -4134,6 +4316,19 @@
     "referencia": "art. 225, § 1º, VI, da Constituição Federal"
   },
   {
+    "caminho": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente > CF, art. 225, § 5º",
+    "pai": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente",
+    "nivel": "elemento",
+    "nome": "CF, art. 225, § 5º",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "parágrafo",
+    "referencia": "CF, art. 225, § 5º"
+  },
+  {
     "caminho": "Direito Constitucional > meio ambiente > Estudo prévio de impacto ambiental",
     "pai": "Direito Constitucional > meio ambiente",
     "nivel": "subassunto",
@@ -4262,6 +4457,19 @@
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
     "tipo_elemento": null,
     "referencia": null
+  },
+  {
+    "caminho": "Administração Pública > Noções de Administração Pública > Controle da administração pública > CF, art. 71",
+    "pai": "Administração Pública > Noções de Administração Pública > Controle da administração pública",
+    "nivel": "elemento",
+    "nome": "CF, art. 71",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CF, art. 71"
   },
   {
     "caminho": "Administração Pública > Fundamentos conceituais em gestão no setor público",
@@ -4784,6 +4992,19 @@
     "referencia": null
   },
   {
+    "caminho": "Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico > Lei 9.784/1999, art. 15",
+    "pai": "Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico",
+    "nivel": "elemento",
+    "nome": "Lei 9.784/1999, art. 15",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Lei 9.784/1999, art. 15"
+  },
+  {
     "caminho": "Administração Pública > Poderes e deveres dos administradores públicos > Poder disciplinar",
     "pai": "Administração Pública > Poderes e deveres dos administradores públicos",
     "nivel": "subassunto",
@@ -4899,6 +5120,19 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "parágrafo",
     "referencia": "Lei 8.429/1992, art. 1º, § 1º"
+  },
+  {
+    "caminho": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 3º",
+    "pai": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas",
+    "nivel": "elemento",
+    "nome": "Lei 8.429/1992, art. 3º",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "Lei 8.429/1992, art. 3º"
   },
   {
     "caminho": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Declaração de bens do agente público",
@@ -5317,6 +5551,19 @@
     "referencia": "art. 14, II, do Código Penal"
   },
   {
+    "caminho": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 16",
+    "pai": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível",
+    "nivel": "elemento",
+    "nome": "CP, art. 16",
+    "ordem": 4,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CP, art. 16"
+  },
+  {
     "caminho": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis",
     "pai": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade",
     "nivel": "subassunto",
@@ -5497,6 +5744,19 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
+  },
+  {
+    "caminho": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de culpabilidade > CP, art. 22",
+    "pai": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de culpabilidade",
+    "nivel": "elemento",
+    "nome": "CP, art. 22",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CP, art. 22"
   },
   {
     "caminho": "Direito Penal > Imputabilidade penal",
@@ -5718,6 +5978,19 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "CP, art. 320"
+  },
+  {
+    "caminho": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 316",
+    "pai": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+    "nivel": "elemento",
+    "nome": "CP, art. 316",
+    "ordem": 6,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CP, art. 316"
   },
   {
     "caminho": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 327, § 1º",
@@ -5980,6 +6253,45 @@
     "referencia": "Súmula 714 do STF"
   },
   {
+    "caminho": "Direito Processual Penal > Ação penal > Representação do ofendido > CPP, art. 25",
+    "pai": "Direito Processual Penal > Ação penal > Representação do ofendido",
+    "nivel": "elemento",
+    "nome": "CPP, art. 25",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 25"
+  },
+  {
+    "caminho": "Direito Processual Penal > Ação penal > Representação do ofendido > CPP, art. 24",
+    "pai": "Direito Processual Penal > Ação penal > Representação do ofendido",
+    "nivel": "elemento",
+    "nome": "CPP, art. 24",
+    "ordem": 3,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 24"
+  },
+  {
+    "caminho": "Direito Processual Penal > Ação penal > Representação do ofendido > CP, art. 145, parágrafo único",
+    "pai": "Direito Processual Penal > Ação penal > Representação do ofendido",
+    "nivel": "elemento",
+    "nome": "CP, art. 145, parágrafo único",
+    "ordem": 4,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "parágrafo",
+    "referencia": "CP, art. 145, parágrafo único"
+  },
+  {
     "caminho": "Direito Processual Penal > Ação penal > Decadência do direito de queixa",
     "pai": "Direito Processual Penal > Ação penal",
     "nivel": "subassunto",
@@ -6058,6 +6370,45 @@
     "referencia": null
   },
   {
+    "caminho": "Direito Processual Penal > Ação penal > Ação penal privada > CPP, art. 49",
+    "pai": "Direito Processual Penal > Ação penal > Ação penal privada",
+    "nivel": "elemento",
+    "nome": "CPP, art. 49",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 49"
+  },
+  {
+    "caminho": "Direito Processual Penal > Ação penal > Requisitos da denúncia e da queixa",
+    "pai": "Direito Processual Penal > Ação penal",
+    "nivel": "subassunto",
+    "nome": "Requisitos da denúncia e da queixa",
+    "ordem": 6,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": null,
+    "referencia": null
+  },
+  {
+    "caminho": "Direito Processual Penal > Ação penal > Requisitos da denúncia e da queixa > CPP, art. 41",
+    "pai": "Direito Processual Penal > Ação penal > Requisitos da denúncia e da queixa",
+    "nivel": "elemento",
+    "nome": "CPP, art. 41",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 41"
+  },
+  {
     "caminho": "Direito Processual Penal > espécies",
     "pai": "Direito Processual Penal",
     "nivel": "assunto",
@@ -6123,6 +6474,45 @@
     "referencia": "CPP, art. 158-A"
   },
   {
+    "caminho": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-B",
+    "pai": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
+    "nivel": "elemento",
+    "nome": "CPP, art. 158-B",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 158-B"
+  },
+  {
+    "caminho": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 167",
+    "pai": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
+    "nivel": "elemento",
+    "nome": "CPP, art. 167",
+    "ordem": 3,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 167"
+  },
+  {
+    "caminho": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-D",
+    "pai": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
+    "nivel": "elemento",
+    "nome": "CPP, art. 158-D",
+    "ordem": 4,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 158-D"
+  },
+  {
     "caminho": "Direito Processual Penal > Prova > Interrogatório e testemunhas",
     "pai": "Direito Processual Penal > Prova",
     "nivel": "subassunto",
@@ -6134,6 +6524,19 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": null,
     "referencia": null
+  },
+  {
+    "caminho": "Direito Processual Penal > Prova > Interrogatório e testemunhas > CPP, art. 186",
+    "pai": "Direito Processual Penal > Prova > Interrogatório e testemunhas",
+    "nivel": "elemento",
+    "nome": "CPP, art. 186",
+    "ordem": 0,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 186"
   },
   {
     "caminho": "Direito Processual Penal > Prova > Busca e apreensão",
@@ -6186,6 +6589,32 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "art. 248 do Código de Processo Penal"
+  },
+  {
+    "caminho": "Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 245",
+    "pai": "Direito Processual Penal > Prova > Busca e apreensão",
+    "nivel": "elemento",
+    "nome": "CPP, art. 245",
+    "ordem": 3,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 245"
+  },
+  {
+    "caminho": "Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 244",
+    "pai": "Direito Processual Penal > Prova > Busca e apreensão",
+    "nivel": "elemento",
+    "nome": "CPP, art. 244",
+    "ordem": 4,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 244"
   },
   {
     "caminho": "Direito Processual Penal > Prova > Ônus da prova",
@@ -6459,6 +6888,19 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "CPP, art. 311"
+  },
+  {
+    "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 313",
+    "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva",
+    "nivel": "elemento",
+    "nome": "CPP, art. 313",
+    "ordem": 2,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "artigo",
+    "referencia": "CPP, art. 313"
   },
   {
     "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 316",
@@ -7863,6 +8305,19 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "art. 41 da Lei 11.340/2006"
+  },
+  {
+    "caminho": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Disposições processuais e vedações > Súmula 542 do STJ",
+    "pai": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Disposições processuais e vedações",
+    "nivel": "elemento",
+    "nome": "Súmula 542 do STJ",
+    "ordem": 4,
+    "origem": "classificacao",
+    "texto_do_edital": null,
+    "fora_do_edital": false,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "tipo_elemento": "súmula",
+    "referencia": "Súmula 542 do STJ"
   },
   {
     "caminho": "Lei de Execução Penal",

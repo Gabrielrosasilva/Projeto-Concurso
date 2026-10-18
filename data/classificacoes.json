@@ -270,6 +270,21 @@
     "trecho": "quanto ao uso da vírgula"
   },
   {
+    "chave": "02b1216ac96f914d32bece5b3de71322",
+    "classificada_em": "2026-10-18T05:11:06.992691+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
+    "dispositivo": "CF, art. 5º, XXXIII (Lei 12.527/2011)",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "O sigilo é exceção e não pode ser imposto de modo genérico: cada restrição precisa de motivação concreta, objetiva, específica e formal; a e mantém o sigilo sem essa motivação, e a d erra ao dizer que nunca cabe sigilo.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "caso prático",
+    "trecho": "pendente até a sua conferência (decisão 171): outra matéria. Primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Manifestação do pensamento e acesso à informação > CF, art. 5º, XXXIII. Segunda, às cegas (alta): Direito Administrativo > Acesso à informação > Lei de Acesso à Informação (Lei 12.527/2011) - Sigilo genérico de processos e inquéritos é inviável: a restrição de acesso tem de ser justificada caso a caso (publicidade como regra, LAI)."
+  },
+  {
     "chave": "02bd9d5721cf7b76057c657ef37496a8",
     "classificada_em": "2026-10-04T12:45:10.441396+00:00",
     "conferida_em": "2026-10-05T14:02:35.931052+00:00",
@@ -300,6 +315,21 @@
     "trecho": "pendente: teoria da Constituição (classificação das constituições, preâmbulo, limites ao poder de reforma, controle de emendas): o programa de Direito Constitucional do edital não lista o tema"
   },
   {
+    "chave": "035c1a7cfab00d52b824b8f28fbbf3c2",
+    "classificada_em": "2026-10-18T05:06:33.122551+00:00",
+    "conferida_em": "2026-10-18T05:11:06.663728+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos > CF, art. 15, I",
+    "dispositivo": "CF, art. 15, I (e art. 12, § 4º, I)",
+    "item_do_edital": "cidadania e direitos políticos",
+    "pegadinha": "O cancelamento da naturalização por sentença transitada em julgado é PERDA dos direitos políticos (art. 15, I), não suspensão; a Constituição veda a cassação; a fraude no processo de naturalização é causa expressa de cancelamento (art. 12, § 4º, I, na redação da EC 131/2023).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Marco foi condenado, por sentença judicial transitada em julgado, em virtude de fraude relacionada ao seu processo de naturalização"
+  },
+  {
     "chave": "03a592eea647b1a15c67f9adcd37b150",
     "classificada_em": "2026-10-04T05:44:55.320199+00:00",
     "conferida_em": null,
@@ -328,6 +358,36 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "nenhum preso ou internado poderá ser obrigado a participar de atividade religiosa"
+  },
+  {
+    "chave": "03f7c256c239e2302dd9e028ecb477fb",
+    "classificada_em": "2026-10-18T05:06:34.602461+00:00",
+    "conferida_em": "2026-10-18T05:11:07.031188+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Protocolo de Palermo sobre tráfico de pessoas (ONU, 2000) > Protocolo de Palermo, art. 3º",
+    "dispositivo": "Protocolo de Palermo (Decreto 5.017/2004), art. 3º, a a d",
+    "item_do_edital": "A Constituição brasileira e os tratados internacionais de direitos humanos",
+    "pegadinha": "O consentimento da vítima é irrelevante quando houve engano ou abuso (art. 3º, b), e o recrutamento e o transporte de criança (menor de 18) para exploração são tráfico mesmo sem esses meios (art. 3º, c); a remuneração ou a duração do trabalho não afastam o tráfico.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "ainda que haja consentimento por sua parte e receba remuneração pelos serviços, se caracteriza o tráfico de pessoas"
+  },
+  {
+    "chave": "0407d1eced9628d20757c2d1be0754e0",
+    "classificada_em": "2026-10-18T05:05:24.034100+00:00",
+    "conferida_em": "2026-10-18T05:11:07.054016+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Erro de tipo e erro de proibição > CP, art. 20",
+    "dispositivo": "CP, art. 20 (e art. 21 nas erradas)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Achar que o pó é farinha é erro sobre elemento do tipo (droga): erro de tipo (art. 20), que, escusável, afasta dolo e culpa; inescusável, permite a culpa se houver tipo culposo. Erro de proibição (art. 21) é sobre a ilicitude do fato, e a redução de 1/6 a 1/3 é do erro de proibição evitável.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Simone, acreditando tratarse de brincadeira com farinha, recebe o pó branco"
   },
   {
     "chave": "041861045257ac6ff4747f9886f5856e",
@@ -585,6 +645,21 @@
     "trecho": "Em breve, deverá haver algumas propostas"
   },
   {
+    "chave": "076ecd60438d1ed2835627b01342e409",
+    "classificada_em": "2026-10-18T05:05:23.214407+00:00",
+    "conferida_em": "2026-10-18T05:11:06.283615+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 316",
+    "dispositivo": "CP, art. 316 (e arts. 317 e 333 nas erradas)",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "O policial EXIGE a vantagem: é concussão (art. 316), não corrupção passiva, que é solicitar ou receber (art. 317). Quem paga sob exigência é vítima e não comete corrupção ativa (art. 333).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "exige o pagamento imediato de cinco mil reais para a liberação de Vinícius"
+  },
+  {
     "chave": "077e7004ed67cf64032d3ae03ec74ba9",
     "classificada_em": "2026-10-05T14:40:26.596238+00:00",
     "conferida_em": "2026-10-05T14:43:02.986839+00:00",
@@ -703,6 +778,21 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "a segurança pública é composta pelos seguintes órgãos: Bombeiro militar, Polícia federal"
+  },
+  {
+    "chave": "07eefd8f90640c71c600b0d0434e14c8",
+    "classificada_em": "2026-10-18T05:05:23.122315+00:00",
+    "conferida_em": "2026-10-18T05:11:06.275530+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Imputabilidade penal > Menoridade penal > CP, art. 27",
+    "dispositivo": "CP, arts. 27 e 4º",
+    "item_do_edital": "Imputabilidade penal",
+    "pegadinha": "O tempo do crime é o da ação (teoria da atividade, art. 4º): Rogério tinha 17 anos ao dar os golpes e é inimputável (art. 27), mesmo que a vítima morra quando ele já tem 18. A e cita a teoria certa com a conclusão errada; a ubiquidade (d) é do lugar do crime (art. 6º).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Rogério, três dias antes de completar dezoito anos de idade"
   },
   {
     "chave": "0810742ebea53cdd979ac9977ddc0a23",
@@ -825,6 +915,21 @@
     "trecho": "Neom é uma parcela da cidade planejada The Line (F)"
   },
   {
+    "chave": "089e4ef7e55256e0d591e8a21794b9ed",
+    "classificada_em": "2026-10-18T05:06:34.397160+00:00",
+    "conferida_em": "2026-10-18T05:11:06.979183+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > organização da segurança pública > Carreiras da segurança pública > CF, art. 144, § 9º",
+    "dispositivo": "CF, art. 144, § 9º (e art. 37, X, XI, XV e § 12 nas erradas)",
+    "item_do_edital": "organização da segurança pública",
+    "pegadinha": "A remuneração dos policiais do art. 144 é por subsídio (§ 9º, que remete ao art. 39, § 4º). Nas erradas: remuneração só por lei (art. 37, X), irredutibilidade também do servidor (art. 37, XV), o teto do Executivo pode ser o subteto único do § 12 do art. 37, e não há regime jurídico único editado pela União para os Estados.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "a remuneração dos servidores policiais integrantes dos órgãos da segurança pública previstos na Constituição deverá ser fixada na forma de subsídio"
+  },
+  {
     "chave": "08a9bb23f0d2d78051ffd081e67f487c",
     "classificada_em": "2026-10-18T03:24:21.138674+00:00",
     "conferida_em": "2026-10-18T03:24:21.133567+00:00",
@@ -945,6 +1050,21 @@
     "trecho": "O final da tirinha sugere que desconectar-se do celular pode ser mais relaxante do que se manter conectado"
   },
   {
+    "chave": "09b9e4ee68f8248f6b265bab1d38c38b",
+    "classificada_em": "2026-10-18T05:05:24.426940+00:00",
+    "conferida_em": "2026-10-18T05:11:07.123262+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 167",
+    "dispositivo": "CPP, art. 167 (e arts. 158 e 159 nas erradas)",
+    "item_do_edital": "Prova",
+    "pegadinha": "Desaparecidos os vestígios, a prova TESTEMUNHAL pode suprir o exame de corpo de delito (art. 167); a confissão é que não pode (art. 158). A perícia é feita por UM perito oficial (art. 159).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "a Delegada de Polícia identifica que os vestígios já teriam desaparecidos"
+  },
+  {
     "chave": "09bb20589c6519b0347c023ef492b594",
     "classificada_em": "2026-10-17T23:30:34.896737+00:00",
     "conferida_em": null,
@@ -973,6 +1093,21 @@
     "status": "completa",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "O Conselho Federal de Odontologia (caçou / cassou) o registro do cirurgião-dentista."
+  },
+  {
+    "chave": "0a9f69aabd13cbc78a34eec8881bdce5",
+    "classificada_em": "2026-10-18T05:11:06.705452+00:00",
+    "conferida_em": "2026-10-18T05:11:06.702212+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Constitucional > educação, cultura e desporto > Educação",
+    "dispositivo": "CF, art. 208, IV e § 1º; STF, RE 1.008.166 (Tema 548)",
+    "item_do_edital": "educação, cultura e desporto",
+    "pegadinha": "Anulada pela banca: a b (norma autoexecutável) e a c (absoluta prioridade, art. 227) dão ambas a demanda por provida. O STF (Tema 548) diz que o acesso à educação básica é direito fundamental de aplicação direta e imediata, exigível na Justiça; não depende de lei nem é escolha discricionária do Executivo.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Constitucional > educação, cultura e desporto > Educação > CF, art. 208, § 1º; segunda, às cegas, Direito Constitucional > educação, cultura e desporto > Educação"
   },
   {
     "chave": "0ab7ffd164643d4f2d55dc0c38189545",
@@ -1063,6 +1198,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "( ) As palavras gíria, pátio, área e refeitório seguem a mesma regra de acentuação gráfica. ( ) As palavras lá, né, até e aí seguem a mesma regra"
+  },
+  {
+    "chave": "0b8a204f751e611001baf9fbd9589ffe",
+    "classificada_em": "2026-10-18T05:05:23.490731+00:00",
+    "conferida_em": "2026-10-18T05:11:06.355267+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 311",
+    "dispositivo": "CPP, arts. 3º-A, 310, II, e 311",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Depois da Lei 13.964/2019 (art. 3º-A e art. 311), o juiz não decreta preventiva de ofício nem converte o flagrante em preventiva sem pedido do MP ou representação do delegado (STF e STJ). A c atrai separando conversão e decretação, e a b e a d chamam o sistema de inquisitório.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "O Delegado de Polícia não representa pela conversão da prisão em flagrante delito em prisão preventiva."
   },
   {
     "chave": "0c034f52a081472a7909855fce5fe815",
@@ -1170,6 +1320,21 @@
     "trecho": "ameaçou e agrediu um oficial de justiça"
   },
   {
+    "chave": "0e39d7eb9396d44be7d03d8acf43124c",
+    "classificada_em": "2026-10-18T05:05:24.853262+00:00",
+    "conferida_em": "2026-10-18T05:11:07.207247+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 17",
+    "dispositivo": "Declaração Universal dos Direitos Humanos, art. 17",
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "Toda pessoa tem direito à propriedade, só ou em sociedade com outros, e ninguém será arbitrariamente privado dela (art. 17): a propriedade em comum é expressamente admitida, e o direito não é só dos nacionais.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "no que se refere ao direito de propriedade"
+  },
+  {
     "chave": "0e3c18d74e1fba2971afa1c835875658",
     "classificada_em": "2026-10-17T23:30:37.593546+00:00",
     "conferida_em": null,
@@ -1228,6 +1393,21 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "são isentas de contribuição para a seguridade social as entidades beneficentes de assistência social"
+  },
+  {
+    "chave": "0ec35d47107059302f2af46ebd6127c1",
+    "classificada_em": "2026-10-18T05:06:33.881054+00:00",
+    "conferida_em": "2026-10-18T05:11:06.904065+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Valoração da prova e elementos informativos > CPP, art. 155",
+    "dispositivo": "CPP, art. 155; CF, art. 93, IX",
+    "item_do_edital": "Prova",
+    "pegadinha": "O sistema do CPP é o da persuasão racional (livre convencimento motivado), não a íntima convicção, que só sobrevive no voto dos jurados; o juiz não pode se fundar só nos elementos do inquérito, salvo as provas cautelares, não repetíveis e antecipadas (art. 155).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "Quanto ao sistema geral de avaliação das provas aplicado ao processo penal"
   },
   {
     "chave": "0f059a0bc79f5441c88186f989abe8b8",
@@ -1875,6 +2055,21 @@
     "trecho": "b) propor à autoridade competente as progressões e regressões dos regimes, bem como as conversões."
   },
   {
+    "chave": "157e6a54e5ae98aad80c5261e75982e1",
+    "classificada_em": "2026-10-18T05:11:07.153046+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
+    "dispositivo": "CF, art. 5º, XI; CPP, art. 245",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "Mandado judicial só se cumpre na casa DURANTE O DIA (art. 5º, XI; CPP, art. 245); às 23 horas, sem consentimento do morador, a busca é ilícita. Nem a gravidade do crime nem a presença da delegada suprem o horário.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "caso prático",
+    "trecho": "pendente até a sua conferência (decisão 171): outra matéria. Primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Inviolabilidade do domicílio > CF, art. 5º, XI. Segunda, às cegas (alta): Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 245 - Busca domiciliar às 23h sem consentimento do morador é ilícita, mesmo com mandado (art. 245; CF art. 5º, XI)."
+  },
+  {
     "chave": "159f94fa8be8063784fc805bcb485470",
     "classificada_em": "2026-10-01T21:56:12.876258+00:00",
     "conferida_em": "2026-10-02T16:01:44.834182+00:00",
@@ -1933,6 +2128,21 @@
     "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "existem dois, e somente dois, professores que não podem ser escolhidos juntos"
+  },
+  {
+    "chave": "15f7964d2582d0bc160ffd65c77c26ed",
+    "classificada_em": "2026-10-18T05:06:33.847798+00:00",
+    "conferida_em": "2026-10-18T05:11:06.895662+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXVIII",
+    "dispositivo": "CF, art. 5º, LXVIII; CPP, arts. 647, 648 e 662",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "Cabe habeas corpus mesmo com o réu solto, quando o processo ou o ato ameaça a liberdade (denúncia sem justa causa, exame grafotécnico, inquérito sem a requisição do ofendido na ação privada); o item IV é falso: o pedido de informações é facultativo também nos tribunais (CPP, art. 662, 'se necessário').",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "o habeas corpus é instrumento jurídico que possui contornos específicos no sistema processual penal"
   },
   {
     "chave": "160469e0d368c048fdbf173dea7aba58",
@@ -2085,6 +2295,21 @@
     "trecho": "pode-se afirmar que a palavra civilização é:"
   },
   {
+    "chave": "180a58f6feac094c8ae125319092de07",
+    "classificada_em": "2026-10-18T05:06:34.316905+00:00",
+    "conferida_em": "2026-10-18T05:11:06.972046+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico > Lei 9.784/1999, art. 15",
+    "dispositivo": "Lei 9.784/1999, art. 15",
+    "item_do_edital": "Poderes e deveres dos administradores públicos",
+    "pegadinha": "A avocação temporária é manifestação da hierarquia; o embargo de obra e a licença são poder de polícia, a multa à concessionária decorre do contrato, e o recurso da autarquia à administração direta é recurso hierárquico impróprio (tutela, sem hierarquia).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "existem diversas manifestações do poder hierárquico"
+  },
+  {
     "chave": "182228a2471dcc5803c822137f61e22b",
     "classificada_em": "2026-10-17T23:18:44.946867+00:00",
     "conferida_em": "2026-10-18T03:24:15.521384+00:00",
@@ -2098,6 +2323,36 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "Sua Senhoria se equivocou, em relação a seus subordinados."
+  },
+  {
+    "chave": "183cbd0e0c43c7c2e9ec80c8ca54d7aa",
+    "classificada_em": "2026-10-18T05:06:32.755842+00:00",
+    "conferida_em": "2026-10-18T05:11:06.588437+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 167",
+    "dispositivo": "CPP, art. 167 (e arts. 158, 159, caput e §§ 1º e 3º, e 182 nas erradas)",
+    "item_do_edital": "Prova",
+    "pegadinha": "Desaparecidos os vestígios, a prova testemunhal pode suprir o exame (art. 167), mas a confissão nunca o supre (art. 158). Basta UM perito oficial e, na falta dele, duas pessoas idôneas com curso superior (art. 159, caput e § 1º); as partes podem formular quesitos (art. 159, § 3º); e o juiz não fica adstrito ao laudo (art. 182).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "acerca do exame de corpo de delito, é correto afirmar que"
+  },
+  {
+    "chave": "18928e74e163c9481ad71741fa4c3b69",
+    "classificada_em": "2026-10-18T05:06:33.674826+00:00",
+    "conferida_em": "2026-10-18T05:11:06.850006+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Ação penal > Ação penal privada > CPP, art. 49",
+    "dispositivo": "CPP, arts. 48, 49 e 51",
+    "item_do_edital": "Ação penal",
+    "pegadinha": "Pela indivisibilidade, a renúncia a um dos autores se estende a todos (art. 49) e não depende de aceitação; só o perdão pode ser recusado (art. 51), e perdão só há depois de proposta a ação, nunca em sede policial.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "importa em renúncia tácita ao direito de querela"
   },
   {
     "chave": "18a00d7ce456f4977d6b358b41d9b5b3",
@@ -2143,6 +2398,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "Norma internacional incorporada ao sistema jurídico brasileiro tem hierarquia de qual espécie normativa"
+  },
+  {
+    "chave": "18eb0dc482dbc1ad9d337a7bffded733",
+    "classificada_em": "2026-10-18T05:05:23.966113+00:00",
+    "conferida_em": "2026-10-18T05:11:06.431708+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 9º",
+    "dispositivo": "Declaração Universal dos Direitos Humanos, art. 9º",
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "A Declaração é categórica: ninguém será arbitrariamente preso, detido ou exilado (art. 9º); as erradas abrem exceções (decisão administrativa, ordem pública, lei genérica, só em tempo de paz) que o texto não tem.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "no que concerne à prisão, detenção ou exílio"
   },
   {
     "chave": "192cd4e6068b7b62f3bf636eac546d49",
@@ -2715,6 +2985,21 @@
     "trecho": "O pintor de quem necessitamos bastante faltou ao serviço."
   },
   {
+    "chave": "1fbd074d26a28ec9df0420404367d7a2",
+    "classificada_em": "2026-10-18T05:05:23.822080+00:00",
+    "conferida_em": "2026-10-18T05:11:06.407074+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 3º",
+    "dispositivo": "Lei 8.429/1992, art. 3º (redação da Lei 14.230/2021)",
+    "item_do_edital": "Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992",
+    "pegadinha": "O terceiro não agente responde se induzir ou concorrer DOLOSAMENTE (art. 3º); não precisa de vínculo nem de condenação criminal do agente. Atenção: o 'ou dele se beneficia sob qualquer forma direta ou indireta' da alternativa certa é do texto ANTERIOR à Lei 14.230/2021; ela continua a única defensável.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "no que se refere à responsabilização do terceiro que induz ou concorre para a prática do ato de improbidade administrativa"
+  },
+  {
     "chave": "1feca0cd0567327bc59583681b5005bd",
     "classificada_em": "2026-10-18T03:44:06.741886+00:00",
     "conferida_em": "2026-10-18T03:50:02.328580+00:00",
@@ -3165,6 +3450,21 @@
     "trecho": "Sou eu quem fala agora."
   },
   {
+    "chave": "24f6e75318783274ac9970e8533034ca",
+    "classificada_em": "2026-10-18T05:05:23.855226+00:00",
+    "conferida_em": "2026-10-18T05:11:06.414846+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Sanções por ato de improbidade (art. 12) > Lei 8.429/1992, art. 12",
+    "dispositivo": "Lei 8.429/1992, art. 12, caput",
+    "item_do_edital": "Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992",
+    "pegadinha": "As sanções podem ser aplicadas isolada ou cumulativamente, de acordo com a gravidade do fato (art. 12, caput); não há aplicação automática nem obrigatoriamente cumulativa.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "no que se refere à aplicação das sanções por ato de improbidade administrativa"
+  },
+  {
     "chave": "25178cbb0f82981a2ba9d1522d0feadb",
     "classificada_em": "2026-10-17T20:42:34.364329+00:00",
     "conferida_em": "2026-10-18T03:24:23.603299+00:00",
@@ -3405,6 +3705,21 @@
     "trecho": "O que o eu lírico sugere sobre a comunicação entre as almas?"
   },
   {
+    "chave": "277756916da6b0d804bdf971e73c0a1b",
+    "classificada_em": "2026-10-18T05:05:23.462044+00:00",
+    "conferida_em": "2026-10-18T05:11:06.346294+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante > CPP, art. 302",
+    "dispositivo": "CPP, art. 302, III (e art. 290, § 1º)",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Perseguição iniciada logo após o crime e sem interrupção mantém o flagrante impróprio (art. 302, III), sem limite de horas; o 'prazo de 24 ou 48 horas' e o contato visual permanente são mitos. Quem lavra o auto é a autoridade policial.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "De modo ininterrupto, após 72 horas do cometimento do crime, Mauro Ribeiro é encontrado e capturado pelos policiais militares."
+  },
+  {
     "chave": "27f2ed47282f2a3728a15a5d79c76d96",
     "classificada_em": "2026-10-04T11:47:08.624767+00:00",
     "conferida_em": "2026-10-05T14:02:35.001326+00:00",
@@ -3418,6 +3733,21 @@
     "status": "completa",
     "tipo_de_questao": "cálculo",
     "trecho": "a união possui 145 elementos e a intersecção 43"
+  },
+  {
+    "chave": "2807d8b5f3f704ee7234e7ad1da1fe1e",
+    "classificada_em": "2026-10-18T05:05:23.683296+00:00",
+    "conferida_em": "2026-10-18T05:11:06.364260+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Cidadania como fundamento da República > CF, art. 1º, II",
+    "dispositivo": "CF, art. 1º, II",
+    "item_do_edital": "cidadania e direitos políticos",
+    "pegadinha": "O complexo de direitos do indivíduo perante o Estado e a capacidade de exercê-los é a CIDADANIA (art. 1º, II); a dignidade é o valor da pessoa, a soberania é do Estado e o pluralismo é político.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "O complexo de direitos do indivíduo perante o Estado, e a capacidade de cada pessoa de exercê-los e defendê-los"
   },
   {
     "chave": "28355e9dc8a02b5f3424a9d040684035",
@@ -3840,6 +4170,21 @@
     "trecho": "As pessoas jurídicas podem ser titulares de direitos fundamentais"
   },
   {
+    "chave": "2bf98ef5469ed20a89374b08e81df15a",
+    "classificada_em": "2026-10-18T05:05:23.010378+00:00",
+    "conferida_em": "2026-10-18T05:11:06.257979+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 17",
+    "dispositivo": "CP, art. 17",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Arma sem projéteis é ineficácia ABSOLUTA do meio: crime impossível, e a tentativa não se pune (art. 17). Não importa que Waldir não soubesse; a d fala em ineficácia relativa (que manteria a tentativa) e a e em desistência voluntária, que exige abandono por vontade própria.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "retira os projéteis da arma de fogo do irmão, deixando-a no mesmo lugar"
+  },
+  {
     "chave": "2c5f8fadfad90fa8e8e49b3801a3daef",
     "classificada_em": "2026-10-17T20:42:34.171508+00:00",
     "conferida_em": "2026-10-18T03:24:23.460358+00:00",
@@ -3883,6 +4228,36 @@
     "status": "completa",
     "tipo_de_questao": "caso prático",
     "trecho": "tortura, que poderá ser julgado no Brasil"
+  },
+  {
+    "chave": "2d32b6f8fd79f1b443100038d98f824b",
+    "classificada_em": "2026-10-18T05:06:33.403189+00:00",
+    "conferida_em": "2026-10-18T05:11:06.737147+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Erro de tipo e erro de proibição > CP, art. 20, § 1º",
+    "dispositivo": "CP, art. 20, § 1º",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Não há agressão real (Heitor entrou por engano): é legítima defesa putativa, descriminante putativa por erro de tipo plenamente justificado, que isenta de pena; não é excesso, nem erro de proibição, nem inexigibilidade de conduta diversa.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "descriminante putativa por erro de tipo inevitável"
+  },
+  {
+    "chave": "2d7fa827557e131e2c464caf3c222c75",
+    "classificada_em": "2026-10-18T05:05:24.454859+00:00",
+    "conferida_em": "2026-10-18T05:11:07.131938+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXVIII",
+    "dispositivo": "CF, art. 5º, LXVIII; Súmula 693 do STF",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "Crime punido só com multa não ameaça a liberdade de locomoção: não cabe habeas corpus (art. 5º, LXVIII; Súmula 693 do STF), mesmo havendo ilegalidade no processo.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "cuja pena cominada é a de multa"
   },
   {
     "chave": "2d836451c2c8d33a9176fad049b18979",
@@ -4110,6 +4485,21 @@
     "trecho": "fragmentos dos dois textos: injuntivo e descritivo"
   },
   {
+    "chave": "2fac5ed6e1a94d7cef77a6dadc76d098",
+    "classificada_em": "2026-10-18T05:11:06.796012+00:00",
+    "conferida_em": "2026-10-18T05:11:06.792494+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública",
+    "dispositivo": "CP, art. 357 (e arts. 317, 319, 321 e 332 nas erradas)",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "Solicitar vantagem a pretexto de influir em juiz é exploração de prestígio (art. 357), crime contra a administração da justiça, que é especial em relação ao tráfico de influência (art. 332); não é corrupção passiva, porque a vantagem não é por ato do próprio ofício.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Penal > Crimes contra a Administração Pública > Crimes contra a administração da justiça > CP, art. 357; segunda, às cegas, Direito Penal > Crimes contra a Administração Pública"
+  },
+  {
     "chave": "2fd32becde075d51b750d5919c363fb5",
     "classificada_em": "2026-10-17T20:42:36.164697+00:00",
     "conferida_em": "2026-10-18T03:24:26.018685+00:00",
@@ -4123,6 +4513,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "tufão e furacão são exemplos de substantivos concretos"
+  },
+  {
+    "chave": "302ba2e4cb62284d0d5285f4d04a4d55",
+    "classificada_em": "2026-10-18T05:06:32.318761+00:00",
+    "conferida_em": "2026-10-18T05:11:06.496760+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Extradição > CF, art. 5º, LI",
+    "dispositivo": "CF, art. 5º, LI",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "O brasileiro nato nunca é extraditado, qualquer que seja o crime. O naturalizado só em dois casos: crime comum praticado antes da naturalização, ou comprovado envolvimento em tráfico ilícito de entorpecentes, na forma da lei, este mesmo depois dela. A c esquece o tráfico.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "foram acusados e condenados pela prática de um crime no País Beta, que solicitou a extradição de ambos ao Estado brasileiro"
   },
   {
     "chave": "30600cd9269ad84e8ba6b210211839ce",
@@ -4455,6 +4860,21 @@
     "trecho": "Metade dos funcionários recebe o presente do tipo A, cinquenta e oito recebem o presente do tipo B ... doze recebem tanto"
   },
   {
+    "chave": "330c590293a5f038dbbc87031230444d",
+    "classificada_em": "2026-10-18T05:05:24.568650+00:00",
+    "conferida_em": "2026-10-18T05:11:07.176986+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 1º, § 1º",
+    "dispositivo": "Lei 8.429/1992, art. 1º, §§ 1º e 2º",
+    "item_do_edital": "Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992",
+    "pegadinha": "Depois da Lei 14.230/2021 só há improbidade DOLOSA (art. 1º, §§ 1º e 2º), ressalvados tipos de leis especiais; culpa grave e erro grosseiro não bastam, nem para o dano ao erário.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "após as alterações introduzidas pela Lei nº 14.230/2021, considera-se ato de improbidade administrativa aquele que"
+  },
+  {
     "chave": "331450ba62520178e748a898993d4b9c",
     "classificada_em": "2026-10-01T21:56:11.897527+00:00",
     "conferida_em": "2026-10-02T16:02:51.399906+00:00",
@@ -4558,6 +4978,21 @@
     "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 15; segunda, às cegas, Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
+  },
+  {
+    "chave": "344ae14d7366b4f26086da95423d5e61",
+    "classificada_em": "2026-10-18T05:05:24.007719+00:00",
+    "conferida_em": "2026-10-18T05:11:07.046689+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Princípio da insignificância",
+    "dispositivo": "doutrina e STF (HC 84.412); CP, art. 155",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "A insignificância exclui a tipicidade MATERIAL (STF: mínima ofensividade, nenhuma periculosidade, reduzido grau de reprovabilidade, lesão inexpressiva); a formal continua (a conduta cabe no art. 155). Não exclui a ilicitude.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "subtraiu, para si, uma caixa de chocolate, avaliada em R$ 30 (trinta) reais"
   },
   {
     "chave": "3482766f78ce325ca8a46322b080dd62",
@@ -4678,6 +5113,21 @@
     "status": "parcial",
     "tipo_de_questao": "cálculo",
     "trecho": "0,3 + 0,7 × 0,6 = 0,72"
+  },
+  {
+    "chave": "356b99a7117f60eecd3797b0b0eab5e0",
+    "classificada_em": "2026-10-18T05:11:07.014701+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Administração Pública",
+    "dispositivo": "STF, RE 1.083.955 (deferência às decisões do CADE); CF, art. 5º, XXXV",
+    "item_do_edital": "Noções de Administração Pública",
+    "pegadinha": "O Judiciário controla a legalidade, mas não substitui a escolha técnica do regulador: o STF pede deferência às decisões regulatórias, prospectivas e multipolares. Também não pode se eximir do controle, nem aplicar a sanção que achar melhor.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "caso prático",
+    "trecho": "pendente até a sua conferência (decisão 171): outra matéria. Primeira leitura: Administração Pública > Noções de Administração Pública > Controle da administração pública. Segunda, às cegas (media): Direito Administrativo > Atos administrativos > Quem pratica e controle judicial - Controle judicial de sanção regulatória do CADE e o dever de deferência às escolhas técnicas (jurisprudência do STF); poderia ir para o assunto Controle da administração pública."
   },
   {
     "chave": "3576d43d73c34b7c1bfc47ec4f9e860b",
@@ -4935,6 +5385,36 @@
     "trecho": "Qual é a visão do eu lírico sobre a interpretação da realidade, conforme expresso no poema?"
   },
   {
+    "chave": "38024587ec59593d9aae9340e3c2fb42",
+    "classificada_em": "2026-10-18T05:06:32.932049+00:00",
+    "conferida_em": "2026-10-18T05:11:06.637322+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Noções de Administração Pública > Controle da administração pública > CF, art. 71",
+    "dispositivo": "CF, arts. 70, 71, caput e III, e 75",
+    "item_do_edital": "Noções de Administração Pública",
+    "pegadinha": "O controle externo é do Poder Legislativo com o auxílio do Tribunal de Contas (CF, arts. 70 e 71, aplicados aos estados pelo art. 75): no estado, a Assembleia Legislativa e o TCE. Apreciar, para registro, a admissão de pessoal é do Tribunal de Contas (art. 71, III); Judiciário, Controladoria, Procuradoria e MP não exercem esse controle.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "é exercida, mediante controle externo, por excelência"
+  },
+  {
+    "chave": "3803000f7054ef3561295fffdd198931",
+    "classificada_em": "2026-10-18T05:11:06.939718+00:00",
+    "conferida_em": "2026-10-18T05:11:06.936472+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
+    "dispositivo": "CPP, arts. 158-D, § 5º, 167 e 182",
+    "item_do_edital": "Prova",
+    "pegadinha": "O juiz não fica adstrito ao laudo, mesmo com a cadeia de custódia íntegra (art. 182); desaparecidos os vestígios, outras provas suprem o exame (art. 167); o lacre rompido vai dentro do novo recipiente (art. 158-D, § 5º).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-D; segunda, às cegas, Direito Processual Penal > Prova > Exame de corpo de delito e perícias"
+  },
+  {
     "chave": "38149aa8281f8f812660e2f598f56e67",
     "classificada_em": "2026-10-18T00:39:27.089757+00:00",
     "conferida_em": "2026-10-18T03:24:23.052777+00:00",
@@ -5070,6 +5550,21 @@
     "trecho": "Para mim, dirigir é sempre um prazer."
   },
   {
+    "chave": "38cd678564847a746302b3395dbf42d9",
+    "classificada_em": "2026-10-18T05:05:24.350113+00:00",
+    "conferida_em": "2026-10-18T05:11:07.114474+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 2º",
+    "dispositivo": "Lei 7.960/1989, art. 2º",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "A temporária é decretada pelo juiz em face da representação do delegado ou do requerimento do MP (art. 2º): nunca de ofício, seja qual for a gravidade do crime. Ela é própria da investigação.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "decreta de ofício a prisão temporária de Gabriel"
+  },
+  {
     "chave": "38eb1a0c815446031eeb31605fe589b8",
     "classificada_em": "2026-10-05T14:40:27.057403+00:00",
     "conferida_em": null,
@@ -5128,6 +5623,21 @@
     "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "pendente: aplicação da lei penal (CP, arts. 1º a 12): o programa de Direito Penal de 2019 não lista o tema"
+  },
+  {
+    "chave": "3a10844652753c591b8bb3db7c7d60c9",
+    "classificada_em": "2026-10-18T05:06:32.398764+00:00",
+    "conferida_em": "2026-10-18T05:11:06.504657+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente > CF, art. 225, § 5º",
+    "dispositivo": "CF, art. 225, § 5º",
+    "item_do_edital": "meio ambiente",
+    "pegadinha": "Terra pública sem destinação é devoluta; as devolutas, ou arrecadadas por ação discriminatória, necessárias à proteção dos ecossistemas naturais são INDISPONÍVEIS pela própria Constituição (art. 225, § 5º), sem depender de averbação, de afetação ou de desafetação.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "uma extensa área de terras públicas, pertencente ao Estado Alfa e sem destinação específica"
   },
   {
     "chave": "3a171a2e7048051d1ddbb249becc93a3",
@@ -5323,6 +5833,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "O princípio da impessoalidade compreende a igualdade de tratamento que a administração deve dispensar"
+  },
+  {
+    "chave": "3c4e85847191e47ae27aec04370bf49d",
+    "classificada_em": "2026-10-18T05:05:24.120449+00:00",
+    "conferida_em": "2026-10-18T05:11:07.075097+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 317",
+    "dispositivo": "CP, art. 317 (e art. 333 nas erradas)",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "Funcionário que SOLICITA vantagem comete corrupção passiva, e o crime é formal: consuma-se com a solicitação, ainda que nada seja pago (art. 317). Corrupção ativa é do particular que oferece (art. 333).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "solicita cinco mil reais para liberá-lo"
   },
   {
     "chave": "3c9547c8217971d823fa0389daed30e8",
@@ -5565,6 +6090,21 @@
     "trecho": "a) Os direitos e garantias fundamentais (...) não podem ser relativizados pela atuação do Estado para suspender ou restringir as suas eficácias."
   },
   {
+    "chave": "3ff17a4d9d1d099b28bd5e74cf7cc613",
+    "classificada_em": "2026-10-18T05:06:32.654583+00:00",
+    "conferida_em": "2026-10-18T05:11:06.572779+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 311",
+    "dispositivo": "CPP, arts. 311 e 312 (redação da Lei 13.964/2019)",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Sem flagrante (o crime foi apurado na investigação), cabe a preventiva para assegurar a aplicação da lei penal (art. 312), decretada só pelo juiz e, desde a Lei 13.964/2019, nunca de ofício (art. 311). A temporária também não sai de ofício (Lei 7.960/1989, art. 2º), e a autoridade policial não decreta prisão: representa por ela.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o agente planejava fugir do país para evitar responder pelo crime"
+  },
+  {
     "chave": "40182f154123cc6c81ee694fa74adf7f",
     "classificada_em": "2026-10-18T00:39:25.489831+00:00",
     "conferida_em": "2026-10-18T03:24:21.213866+00:00",
@@ -5593,6 +6133,21 @@
     "status": "completa",
     "tipo_de_questao": "caso prático",
     "trecho": "permitiu que o seu pai utilizasse, em uma obra particular, veículos pertencentes ao Poder Público"
+  },
+  {
+    "chave": "407e256de5a004099c01e374cf152da8",
+    "classificada_em": "2026-10-18T05:11:06.816660+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
+    "dispositivo": "princípio do ne bis in idem (vedação da dupla valoração); CF, art. 5º, XLV e XLVII nas erradas",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "As erradas trocam os conteúdos: intranscendência é a pena não passar do condenado (art. 5º, XLV), que a b dá à fragmentariedade; lesividade (ofensividade) é a exigência de lesão ao bem jurídico, que a a dá à intranscendência; a vedação das penas cruéis é a humanidade (art. 5º, XLVII); e a insignificância afasta a tipicidade MATERIAL, não a formal.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "pendente até a sua conferência (decisão 171): a confiança baixa. Primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais. Segunda, às cegas (baixa): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais - Pergunta sobre princípios penais (intranscendência, fragmentariedade, insignificância, ne bis in idem, ofensividade); a certa é o ne bis in idem, que não tem nó próprio, e a árvore de Direito Penal só tem a insignificância (pode ser pendente)."
   },
   {
     "chave": "408490f3bc3890b22f85bff687564596",
@@ -5878,6 +6433,21 @@
     "status": "completa",
     "tipo_de_questao": "interpretação de texto",
     "trecho": "O emprego do pronome lhe, no final do primeiro parágrafo, está alinhado com a expressão de tratamento você"
+  },
+  {
+    "chave": "43eef5a66afb9192f715ee97fb8a89c6",
+    "classificada_em": "2026-10-18T05:05:24.636362+00:00",
+    "conferida_em": "2026-10-18T05:11:07.192624+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 1º",
+    "dispositivo": "Declaração Universal dos Direitos Humanos, art. 1º",
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "O fundamento é o art. 1º: todos nascem livres e iguais em dignidade e em direitos e devem agir com espírito de fraternidade. As erradas restringem a titularidade (Estados, maiores de idade) ou deixam o Estado retirar os direitos.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "tem como fundamento básico o reconhecimento de que"
   },
   {
     "chave": "440be5ef6396a77e54caef1541723f1e",
@@ -6268,6 +6838,21 @@
     "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "pendente: Decreto 9.489/2018 (Sistema Nacional de Informações e Gestão de Segurança Pública): o programa de Legislação Especial do edital não lista o decreto"
+  },
+  {
+    "chave": "49f2b4c31dd752057a489c7db09fd078",
+    "classificada_em": "2026-10-18T05:05:23.938158+00:00",
+    "conferida_em": "2026-10-18T05:11:06.423759+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 6º",
+    "dispositivo": "Declaração Universal dos Direitos Humanos, art. 6º",
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "Todo ser humano tem direito, em todos os lugares, ao reconhecimento como pessoa perante a lei (art. 6º): o reconhecimento não depende de nacionalidade, território nem de exercer direitos políticos.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "no que se refere ao reconhecimento da personalidade jurídica"
   },
   {
     "chave": "49fb53b311abe444854bb0abc58c6ed2",
@@ -7020,6 +7605,21 @@
     "trecho": "Considere as afirmativas abaixo sobre o texto. 1. Trata-se de um texto narrativo, escrito em primeira pessoa..."
   },
   {
+    "chave": "53d9ac73f684cb786eb24521fd69315c",
+    "classificada_em": "2026-10-18T05:11:06.684461+00:00",
+    "conferida_em": "2026-10-18T05:11:06.680681+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições",
+    "dispositivo": "CF, art. 144, §§ 4º, 5º-A e 6º; STF, ARE 654.432 (Tema 541)",
+    "item_do_edital": "organização da segurança pública",
+    "pegadinha": "Só o item I está certo (STF, ARE 654.432: greve vedada a todas as carreiras policiais). A segurança dos estabelecimentos prisionais é da polícia penal (§ 5º-A), não da polícia civil (§ 4º); as polícias militares subordinam-se aos Governadores, não ao Presidente (§ 6º).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144; segunda, às cegas, Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições"
+  },
+  {
     "chave": "540db597f366afe8942d7a17ce3ab5fa",
     "classificada_em": "2026-10-17T20:42:37.090137+00:00",
     "conferida_em": "2026-10-18T03:24:26.129460+00:00",
@@ -7348,6 +7948,21 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "a iniciativa popular de projetos de lei de interesse específico do Município deverá ocorrer através de manifestação de, pelo menos, 5% do eleitorado"
+  },
+  {
+    "chave": "571edf95865a13d4669929692fdbd58d",
+    "classificada_em": "2026-10-18T05:11:06.772643+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
+    "dispositivo": "CF, art. 5º, XL; CP, art. 2º",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "A Lei A é abolitio criminis (não é novatio in mellius); a Lei B é mais grave e não retroage, então a lei anterior, mais benéfica, continua a reger os fatos passados (ultratividade); a Lei C não cria crime novo.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "caso prático",
+    "trecho": "pendente até a sua conferência (decisão 171): outra matéria. Primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais > CF, art. 5º, XL. Segunda, às cegas (media): Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis > CP, art. 2º - Lei penal no tempo: abolitio criminis (lei A), lei mais grave que não retroage e ultratividade da anterior (lei B); o art. 2º é o nó mais próximo, o CF art. 5º, XL seria a alternativa."
   },
   {
     "chave": "5734365aa5f93b4d4e5598269e2d2a98",
@@ -7843,6 +8458,21 @@
     "status": "completa",
     "tipo_de_questao": "cálculo",
     "trecho": "alemão, inglês e espanhol, com as interseções"
+  },
+  {
+    "chave": "5d8fa7c8f84692c1cd4cf8cdffe1e99d",
+    "classificada_em": "2026-10-18T05:11:06.916826+00:00",
+    "conferida_em": "2026-10-18T05:11:06.912914+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Processual Penal > Prova > Interrogatório e testemunhas",
+    "dispositivo": "CPP, arts. 6º, V, 185 e 186, parágrafo único",
+    "item_do_edital": "Prova",
+    "pegadinha": "O silêncio não importa confissão nem pode prejudicar a defesa (art. 186, parágrafo único), por isso a advertência do 4º item é ilegal; o interrogatório é indispensável, e dispensá-lo gera nulidade; no inquérito, o indiciado é ouvido pelas regras do interrogatório (art. 6º, V).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Prova > Interrogatório e testemunhas > CPP, art. 186; segunda, às cegas, Direito Processual Penal > Prova > Interrogatório e testemunhas"
   },
   {
     "chave": "5da8b82e8b3f7e519795d283b6f04b4f",
@@ -8805,6 +9435,21 @@
     "trecho": "colocação de pronome oblíquo de acordo com a norma culta"
   },
   {
+    "chave": "680212d1064789c101a868d0b2b358ca",
+    "classificada_em": "2026-10-18T05:11:06.601421+00:00",
+    "conferida_em": "2026-10-18T05:11:06.597486+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante",
+    "dispositivo": "CPP, arts. 301 e 302, III e IV (e art. 306, § 2º, nas erradas); CF, art. 5º, LXII",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Perseguido logo após o crime e achado com o celular, Alberto está em flagrante (art. 302, III e IV). A polícia DEVE prender e qualquer do povo PODE (art. 301). Furto não depende de representação, e a nota de culpa (art. 306, § 2º) e a comunicação à família (CF, art. 5º, LXII) valem também no flagrante.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante > CPP, art. 301; segunda, às cegas, Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante"
+  },
+  {
     "chave": "6814625d0a6152d5aa043808e2b92738",
     "classificada_em": "2026-10-17T23:30:35.609137+00:00",
     "conferida_em": null,
@@ -8983,6 +9628,21 @@
     "status": "pendente",
     "tipo_de_questao": null,
     "trecho": "pendente: questão mista: o item I cobra tonicidade (suscetível é paroxítona, não proparoxítona - Acentuação gráfica), o II cobra pontuação (a vírgula antes de 'porque' não separa coordenada aditiva - Pontuação) e o III cobra sinonímia (suscetível = passível - Compreensão e interpretação de texto (s)); o gabarito (apenas III) depende dos três, e o pedido aceita um assunto só"
+  },
+  {
+    "chave": "68ead2a1bbf4fbb1bfb7d1a2b67ac5fb",
+    "classificada_em": "2026-10-18T05:05:24.295790+00:00",
+    "conferida_em": "2026-10-18T05:11:07.098858+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Disposições processuais e vedações > Súmula 542 do STJ",
+    "dispositivo": "Súmula 542 do STJ; Lei 11.340/2006, art. 41; STF, ADI 4.424",
+    "item_do_edital": "Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006)",
+    "pegadinha": "Lesão corporal leve em violência doméstica contra a mulher é de ação penal pública INCONDICIONADA (Súmula 542 do STJ; STF, ADI 4.424), porque a Lei 9.099/1995 não se aplica (art. 41 da Lei 11.340/2006): a representação não é exigida.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "agride fisicamente a mulher causando-lhe lesão corporal leve"
   },
   {
     "chave": "68eb77fcdf1b990df156e189608ad757",
@@ -9300,6 +9960,21 @@
     "trecho": "o voto é facultativo para os maiores de 70 anos"
   },
   {
+    "chave": "6d7bc219e906c0456110ce28ed4ff5b9",
+    "classificada_em": "2026-10-18T05:05:24.323299+00:00",
+    "conferida_em": "2026-10-18T05:11:07.106647+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 313",
+    "dispositivo": "CPP, arts. 311 e 313, I",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Preventiva só cabe em crime DOLOSO (art. 313, I); homicídio culposo não a admite, por mais grave que seja o resultado ou a repercussão. Ela cabe também no inquérito (art. 311), o que derruba a b.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "pela suposta prática do crime de homicídio culposo no trânsito"
+  },
+  {
     "chave": "6d9aa3effc91f2005e90c2ce5b85c867",
     "classificada_em": "2026-10-01T21:56:11.031942+00:00",
     "conferida_em": "2026-10-02T16:04:15.922766+00:00",
@@ -9538,6 +10213,21 @@
     "status": "completa",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "Meu avô foi uma eminente figura no meio político do nosso estado."
+  },
+  {
+    "chave": "6f567860920a5983dc934b8e8d01e252",
+    "classificada_em": "2026-10-18T05:05:24.758040+00:00",
+    "conferida_em": "2026-10-18T05:11:07.199950+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 2º",
+    "dispositivo": "Declaração Universal dos Direitos Humanos, art. 2º (e art. 7º nas erradas)",
+    "item_do_edital": "Conceito, terminologia, estrutura normativa, fundamentação",
+    "pegadinha": "Os direitos da Declaração valem sem distinção alguma de raça, cor, sexo, língua, religião, opinião, origem, fortuna ou nascimento (art. 2º), e a igual proteção da lei inclui a proteção contra a discriminação (art. 7º).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "De acordo com a Declaração Universal dos Direitos Humanos, é correto afirmar que:"
   },
   {
     "chave": "6f7366ee78511bfa90d699318d3da954",
@@ -10665,6 +11355,21 @@
     "trecho": "pendente: Cobra tipos de sujeito (oculto, inexistente, indeterminado); sujeito é termo essencial da oração e o edital só traz os termos integrantes."
   },
   {
+    "chave": "7b22111903f24d90eb0e30dc1f0ccccd",
+    "classificada_em": "2026-10-18T05:06:34.205234+00:00",
+    "conferida_em": "2026-10-18T05:11:06.956723+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Ação penal > Requisitos da denúncia e da queixa > CPP, art. 41",
+    "dispositivo": "CPP, arts. 41 e 395, I",
+    "item_do_edital": "Ação penal",
+    "pegadinha": "A denúncia tem de descrever o fato com todas as circunstâncias (art. 41): invocar só a condição de sócio, sem descrever a conduta, a torna inepta, mas no crime societário basta a descrição mínima que permita a defesa. O recebimento é decisão interlocutória simples, e a rejeição por inépcia faz só coisa julgada formal: todos os itens são verdadeiros.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "A peça acusatória não descreveu quais teriam sido os atos concretos praticados ou omitidos pelos réus"
+  },
+  {
     "chave": "7b6e3e0b10221c236f7b941c25ec37c1",
     "classificada_em": "2026-10-04T11:47:07.646668+00:00",
     "conferida_em": "2026-10-05T14:02:34.076534+00:00",
@@ -10738,6 +11443,21 @@
     "status": "parcial",
     "tipo_de_questao": "interpretação de texto",
     "trecho": "O eu lírico defende que a busca por significados profundos é a melhor maneira de se relacionar com a realidade"
+  },
+  {
+    "chave": "7bc17092f373e64524ba079c301ccf15",
+    "classificada_em": "2026-10-18T05:05:23.719240+00:00",
+    "conferida_em": "2026-10-18T05:11:06.372697+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXVIII",
+    "dispositivo": "CF, art. 5º, LXVIII; Súmula 693 do STF",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "Habeas corpus protege a liberdade de locomoção (art. 5º, LXVIII): no crime do art. 28 da Lei 11.343/2006, que não tem pena de prisão, não há risco à locomoção e o HC não cabe, por mais que haja ilegalidade (Súmula 693 do STF, por analogia).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o qual não possui pena privativa de liberdade"
   },
   {
     "chave": "7bcc1848157dcf88d6e3821511dfa251",
@@ -10978,6 +11698,21 @@
     "status": "completa",
     "tipo_de_questao": "interpretação de texto",
     "trecho": "A partir dessa afirmação, o eu lírico sugere que"
+  },
+  {
+    "chave": "7e6e3eb7727a306744906c71f46cd46e",
+    "classificada_em": "2026-10-18T05:05:23.324577+00:00",
+    "conferida_em": "2026-10-18T05:11:06.299852+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Ação penal > Representação do ofendido > CPP, art. 25",
+    "dispositivo": "CPP, art. 25; CP, art. 102",
+    "item_do_edital": "Ação penal",
+    "pegadinha": "A representação é retratável até o OFERECIMENTO da denúncia (CPP, art. 25; CP, art. 102); a b troca por 'recebimento'. A representação é condição de procedibilidade, não de punibilidade (d).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "tendo em vista que a representação é retratável até o oferecimento da denúncia"
   },
   {
     "chave": "7e704ad3579ffcb72bd82c915b8af095",
@@ -11730,6 +12465,21 @@
     "trecho": "João tem 65 (sessenta e cincos) anos de idade; ii) Caio está acometido de doença grave"
   },
   {
+    "chave": "875acdd35b873a8cf8487762746cfb52",
+    "classificada_em": "2026-10-18T05:05:23.091433+00:00",
+    "conferida_em": "2026-10-18T05:11:06.267243+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 16",
+    "dispositivo": "CP, art. 16 (e art. 15 nas erradas)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Reparar o dano depois da consumação, sem violência ou grave ameaça e até o RECEBIMENTO da denúncia, é arrependimento posterior: reduz a pena de um a dois terços (art. 16). Arrependimento eficaz e desistência voluntária (art. 15) são antes da consumação e fazem responder só pelos atos já praticados.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "comparação entre conceitos",
+    "trecho": "Após o oferecimento da denúncia e antes do recebimento da inicial acusatória, Guilherme comparece à Empresa de energia elétrica e efetua o pagamento dos valores"
+  },
+  {
     "chave": "87682dae3194132dda2a6a18a3862b8f",
     "classificada_em": "2026-10-17T23:30:32.835436+00:00",
     "conferida_em": "2026-10-18T03:24:17.068700+00:00",
@@ -12060,6 +12810,21 @@
     "trecho": "no interior de sua residência, pratica crime de porte ilegal de arma de fogo"
   },
   {
+    "chave": "8b629672aa29074ea8c631aea2716374",
+    "classificada_em": "2026-10-18T05:06:34.682284+00:00",
+    "conferida_em": "2026-10-18T05:11:07.039087+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Convenção contra a Tortura (ONU, 1984) > Convenção contra a Tortura, art. 1º",
+    "dispositivo": "Convenção contra a Tortura (Decreto 40/1991), art. 1º",
+    "item_do_edital": "A Constituição brasileira e os tratados internacionais de direitos humanos",
+    "pegadinha": "Pela Convenção da ONU, tortura é a dor ou o sofrimento infligidos por agente público ou com o seu consentimento ou aquiescência: o ato da milícia, sozinha, não é tortura para a Convenção (seria pela Lei 9.455/1997), e o dos policiais militares é.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "a milícia Alfa não praticou tortura e os policiais militares praticaram tortura"
+  },
+  {
     "chave": "8baf514e8ade29e0a283d97050c775a6",
     "classificada_em": "2026-10-18T00:39:27.627727+00:00",
     "conferida_em": "2026-10-18T03:24:19.725241+00:00",
@@ -12103,6 +12868,21 @@
     "status": "parcial",
     "tipo_de_questao": "interpretação de texto",
     "trecho": "De acordo com o texto, é correto afirmar"
+  },
+  {
+    "chave": "8bfc97cdb1f70bbac59318f8cf69bada",
+    "classificada_em": "2026-10-18T05:11:06.387184+00:00",
+    "conferida_em": "2026-10-18T05:11:06.382888+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio",
+    "dispositivo": "CF, arts. 137, parágrafo único, 138, §§ 1º e 2º, e 139, parágrafo único",
+    "item_do_edital": "Defesa do Estado e das instituições democráticas: segurança pública",
+    "pegadinha": "Anulada: nenhuma alternativa está certa. A decisão é por maioria absoluta (art. 137, parágrafo único); no recesso, o Congresso se reúne em cinco dias (art. 138, § 2º); na comoção grave o sítio é de até 30 dias por vez (art. 138, § 1º); o pronunciamento de parlamentar liberado pela Mesa não sofre restrição (art. 139, parágrafo único); e o sítio depende de autorização prévia do Congresso.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio > CF, art. 137; segunda, às cegas, Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio"
   },
   {
     "chave": "8c32e215ab6ed73e269945c6f5b2f03c",
@@ -12253,6 +13033,21 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "comunicada imediatamente ao juiz, ao Ministério Público e à família do preso"
+  },
+  {
+    "chave": "8dbbaf21d62f9d78dffe2f0abfd33673",
+    "classificada_em": "2026-10-18T05:06:32.059977+00:00",
+    "conferida_em": "2026-10-18T05:11:06.440077+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > família, criança, adolescente e idoso > Medida privativa de liberdade ao adolescente > CF, art. 227, § 3º, V",
+    "dispositivo": "CF, arts. 227, § 3º, V, e 228; CP, art. 27",
+    "item_do_edital": "família, criança, adolescente e idoso",
+    "pegadinha": "A idade se mede pelo critério biológico: com 17 anos, 11 meses e 29 dias, João é penalmente inimputável (CF, art. 228; CP, art. 27), não importa o desenvolvimento físico nem a consciência, e responde por ato infracional. A medida privativa de liberdade obedece à brevidade e à excepcionalidade (CF, art. 227, § 3º, V); não existe 'princípio da paridade' com a pena do crime.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "João, com 17 anos, 11 meses e 29 dias de idade, fisicamente desenvolvido e plenamente consciente dos seus atos"
   },
   {
     "chave": "8dd52fa261938b596c405ee017533480",
@@ -12568,6 +13363,21 @@
     "status": "parcial",
     "tipo_de_questao": "interpretação de texto",
     "trecho": "Qual é a visão do eu lírico sobre a interpretação da realidade, conforme expresso no poema?"
+  },
+  {
+    "chave": "91586f4ddae2e0a33ff6dc44c75008de",
+    "classificada_em": "2026-10-18T05:06:33.703067+00:00",
+    "conferida_em": "2026-10-18T05:11:06.856975+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Reconhecimento de pessoas e coisas > CPP, art. 226",
+    "dispositivo": "CPP, arts. 200 e 226; Resolução CNJ 484/2022",
+    "item_do_edital": "Prova",
+    "pegadinha": "Para a banca, o 1º item é falso (o reconhecimento fotográfico é tratado como prova atípica, não como prova 'irritual'); a confissão é divisível e retratável (art. 200); e o STJ trata o reconhecimento de pessoas como prova irrepetível, por isso o rito do art. 226 tem de ser cumprido.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "conceito",
+    "trecho": "o Conselho Nacional de Justiça, por meio da Resolução nº 484, de 19 de dezembro de 2022"
   },
   {
     "chave": "915c4d140f6be1d3ab9f6c92eaab2134",
@@ -13515,6 +14325,36 @@
     "trecho": "Considerando as normas aplicáveis às testemunhas"
   },
   {
+    "chave": "9ad16834e37dee25c19b4d232cd7d4de",
+    "classificada_em": "2026-10-18T05:11:06.749560+00:00",
+    "conferida_em": "2026-10-18T05:11:06.745882+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa",
+    "dispositivo": "CP, art. 18, I e parágrafo único (receptação, art. 180)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Comprou pelo preço de mercado, por indicação de amigo, sem saber da origem: falta o dolo da receptação, e a conduta é atípica. As outras teses (obediência hierárquica, coação, insignificância, exercício regular de direito) não têm nenhum apoio nos fatos.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa > CP, art. 18; segunda, às cegas, Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa"
+  },
+  {
+    "chave": "9ad24e183f5a29a1955a0edf45afae90",
+    "classificada_em": "2026-10-18T05:06:33.372209+00:00",
+    "conferida_em": "2026-10-18T05:11:06.730214+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Ação penal > Representação do ofendido > CP, art. 145, parágrafo único",
+    "dispositivo": "CP, arts. 140, § 3º, 145, parágrafo único, e 147, parágrafo único; CPP, art. 24",
+    "item_do_edital": "Ação penal",
+    "pegadinha": "A injúria contra pessoa idosa é a qualificada do art. 140, § 3º, que é de ação pública condicionada à representação (art. 145, parágrafo único), e não privada; a ameaça também é condicionada. Com a representação de Hugo, o MP denuncia os dois crimes; a idade da vítima não torna a ação incondicionada.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Hugo compareceu à delegacia de polícia e registrou ocorrência pelos crimes de injúria e ameaça, manifestando o desejo de representar criminalmente contra Túlio"
+  },
+  {
     "chave": "9aed85a6a6d3a1ff7f72ba08ad444753",
     "classificada_em": "2026-10-17T20:42:34.906662+00:00",
     "conferida_em": "2026-10-18T03:24:23.996151+00:00",
@@ -13528,6 +14368,21 @@
     "status": "completa",
     "tipo_de_questao": "interpretação de texto",
     "trecho": "A partir dessa afirmação, o eu lírico sugere que"
+  },
+  {
+    "chave": "9b691cecbf3d8411d1a898f89fe235cb",
+    "classificada_em": "2026-10-18T05:06:33.560074+00:00",
+    "conferida_em": "2026-10-18T05:11:06.835607+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena > LEP, art. 112",
+    "dispositivo": "LEP, art. 112, III, e § 3º; CP, art. 64, I",
+    "item_do_edital": "Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
+    "pegadinha": "Roubo tem grave ameaça: 25% para a primária (art. 112, III). Os 30% (inciso IV) são do reincidente em crime com violência, e a condenação antiga era por furto, cumprida há mais de 5 anos (CP, art. 64, I). As filhas têm 13 anos e o crime é violento, então não cabe a fração da mãe (§ 3º); a progressão não exige reparar o dano.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "para progredir de regime prisional, Dalva deverá obrigatoriamente"
   },
   {
     "chave": "9b9ac12ae96e0a089979fc52fd2d8a57",
@@ -13708,6 +14563,21 @@
     "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "o nó em comum das duas leituras (decisão 171): primeira Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia; segunda, às cegas, Administração Pública > Poderes e deveres dos administradores públicos > Uso e abuso de poder"
+  },
+  {
+    "chave": "9e3a88c46d21a0649f483654017fdc06",
+    "classificada_em": "2026-10-18T05:05:22.979454+00:00",
+    "conferida_em": "2026-10-18T05:11:06.246224+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de culpabilidade > CP, art. 22",
+    "dispositivo": "CP, art. 22 (Lei 9.455/1997, art. 1º, no crime cometido)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "A obediência hierárquica só exclui a culpabilidade do subordinado quando a ordem NÃO é manifestamente ilegal (art. 22); ordem para torturar é manifestamente ilegal, e os dois respondem. A b chama a causa de excludente da tipicidade, e a e troca pela inexigibilidade de conduta diversa genérica.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "recebe ordem de seu superior hierárquico para auxiliá-lo na prática de atos de tortura contra Ricardo"
   },
   {
     "chave": "9e423c20502b74a2f92d59698eea308f",
@@ -14038,6 +14908,21 @@
     "status": "pendente",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "fora do treino (decisão 171): gabarito discutível: no texto do banco a afirmativa chama de vinculado o ato discricionário, e nenhuma alternativa fecha - olhar o caderno"
+  },
+  {
+    "chave": "a2556f638b9f835dfc5485a2f8277efd",
+    "classificada_em": "2026-10-18T05:06:33.300077+00:00",
+    "conferida_em": "2026-10-18T05:11:06.722214+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXIX",
+    "dispositivo": "CF, art. 5º, LXIX (e XXXIII; LXXII nas erradas)",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "A informação pedida não é sobre a própria empresa, por isso não cabe habeas data (art. 5º, LXXII); o direito líquido e certo à informação (art. 5º, XXXIII) negado por ato arbitrário pede mandado de segurança individual, e não coletivo, ação popular ou ação civil pública.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "O acesso a tais informações fora negado de forma arbitrária à empresa."
   },
   {
     "chave": "a299695ee3fa37446f3e597275cb0651",
@@ -15570,6 +16455,21 @@
     "trecho": "A Lei das Medidas Cautelares, que prevê a monitoração eletrônica"
   },
   {
+    "chave": "b5bf3c1cff6cebc739b3b2a1d7df4552",
+    "classificada_em": "2026-10-18T05:05:24.190976+00:00",
+    "conferida_em": "2026-10-18T05:11:07.082580+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-B",
+    "dispositivo": "CPP, art. 158-B, II (e IV, VII, IX e X nas erradas)",
+    "item_do_edital": "Prova",
+    "pegadinha": "As etapas da cadeia de custódia vêm com as definições trocadas: recolher o vestígio é COLETA (não fixação), o ato formal de transferência da posse é RECEBIMENTO (não armazenamento), a guarda é ARMAZENAMENTO (não descarte) e a liberação é DESCARTE (não reconhecimento). Só o isolamento está certo (art. 158-B, II).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Com base no tema cadeia de custódia e no Código de Processo Penal, marque a afirmativa correta."
+  },
+  {
     "chave": "b5c8f557cc52977741472f7db4087e94",
     "classificada_em": "2026-10-02T02:52:55.028088+00:00",
     "conferida_em": "2026-10-05T15:20:27.475210+00:00",
@@ -15613,6 +16513,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "O núcleo do sujeito é um pronome pessoal do caso reto."
+  },
+  {
+    "chave": "b63c3b695e54a7bb8ee0a4c127a8c095",
+    "classificada_em": "2026-10-18T05:06:32.962752+00:00",
+    "conferida_em": "2026-10-18T05:11:06.645871+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 3º",
+    "dispositivo": "Lei 8.429/1992, arts. 3º, 9º, I, e 12, I",
+    "item_do_edital": "Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992",
+    "pegadinha": "Receber vantagem de quem tem interesse na atuação do agente é enriquecimento ilícito (art. 9º, I), que não exige dano ao erário. O particular que induz ou concorre dolosamente para o ato também responde (art. 3º): não perde função que não tem, mas sofre as demais sanções, entre elas a suspensão dos direitos políticos (art. 12, I).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "a quantia de cinquenta mil reais de Alessandro, indiciado em determinado inquérito policial"
   },
   {
     "chave": "b6412e80c2de2474740a35d520fea80c",
@@ -15733,6 +16648,21 @@
     "status": "completa",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "terceira geração: titularidade coletiva, solidariedade, paz, desenvolvimento, meio ambiente"
+  },
+  {
+    "chave": "b74265feb24e92660523602466f981b8",
+    "classificada_em": "2026-10-18T05:05:24.482702+00:00",
+    "conferida_em": "2026-10-18T05:11:07.140479+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXIX",
+    "dispositivo": "CF, art. 5º, LXIX (e LXVIII e LXXII nas erradas)",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "Eliminação ilegal em concurso fere direito líquido e certo que não é de locomoção nem de informação pessoal: mandado de segurança (art. 5º, LXIX). Habeas corpus é para a liberdade de ir e vir; habeas data, para dados da pessoa.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "é desclassificada antes da realização da etapa da prova oral"
   },
   {
     "chave": "b742c19d20f8cc5d4b7f3a6abc6dbba9",
@@ -15945,6 +16875,21 @@
     "trecho": "ser compulsoriamente dissolvida, somente por decisão judicial"
   },
   {
+    "chave": "b9801175a3f7674bc5b3eaf73736a6b9",
+    "classificada_em": "2026-10-18T05:05:23.429135+00:00",
+    "conferida_em": "2026-10-18T05:11:06.337140+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 313",
+    "dispositivo": "CPP, art. 313, I e III",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "O art. 313 só admite preventiva em CRIME doloso; contravenção (vias de fato) não a admite, nem no contexto de violência doméstica (inciso III). A b atrai porque também nega, mas pelo fundamento errado; c e e trazem os prazos da temporária, que a preventiva não tem.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Murilo comete contravenção penal de vias de fato contra Roberta, sua esposa"
+  },
+  {
     "chave": "b9f926c2fc031717cf963a996fce7dcd",
     "classificada_em": "2026-10-18T03:44:12.542439+00:00",
     "conferida_em": "2026-10-18T03:50:02.757441+00:00",
@@ -16003,6 +16948,21 @@
     "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "b) quando for impossível consumar o crime."
+  },
+  {
+    "chave": "ba14739499012efd2c16a848e930af8f",
+    "classificada_em": "2026-10-18T05:11:06.517758+00:00",
+    "conferida_em": "2026-10-18T05:11:06.513665+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível",
+    "dispositivo": "CP, art. 14, II (e art. 15 nas erradas)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Cássio parou porque viu os policiais: a execução foi interrompida por circunstância alheia à vontade dele, e isso é tentativa (art. 14, II). Desistência voluntária e arrependimento eficaz (art. 15) pedem que o agente pare ou impeça o resultado por vontade própria, e não dão 'diminuição de pena': ele responde só pelos atos já praticados.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 14, II; segunda, às cegas, Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
   },
   {
     "chave": "ba310a855246e2a6028bce39f7a0a4e6",
@@ -16078,6 +17038,21 @@
     "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "A perda do cargo, do mandato ou da função pública é condicionada à ocorrência de reincidência em crime de abuso de autoridade e não é automática"
+  },
+  {
+    "chave": "bb1aec041ae913db9261e3c6f667304d",
+    "classificada_em": "2026-10-18T05:05:24.092687+00:00",
+    "conferida_em": "2026-10-18T05:11:07.068298+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 312",
+    "dispositivo": "CP, arts. 312 e 30 (e art. 29 nas erradas)",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "A condição de funcionário público é elementar do peculato e se comunica ao particular que sabe dela e concorre para o crime (art. 30): Marcelo responde por peculato, não por furto (b). A d chama a teoria do art. 29 de pluralista (é monista), e a e dá 1/6 até a metade na participação de menor importância (é 1/6 a 1/3).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "se apropriam do computador institucional de que Américo tem a posse em razão do cargo"
   },
   {
     "chave": "bb37e480709347728de7edf1412d850f",
@@ -16455,6 +17430,21 @@
     "trecho": "A palavra místico no poema"
   },
   {
+    "chave": "bfca651d0e959868fd5317a601f0c302",
+    "classificada_em": "2026-10-18T05:06:33.045002+00:00",
+    "conferida_em": "2026-10-18T05:11:06.654444+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > cidadania e direitos políticos > Soberania popular e democracia semidireta > CF, art. 14, § 13",
+    "dispositivo": "CF, art. 14, § 13 (e § 12 na alternativa c)",
+    "item_do_edital": "cidadania e direitos políticos",
+    "pegadinha": "As consultas populares municipais concomitantes às eleições (EC 111/2021) vão à Justiça Eleitoral até 90 dias antes, não 60; as manifestações favoráveis e contrárias são livres na campanha, só sem a propaganda gratuita no rádio e na TV.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "consultas populares sobre questões de relevância para as respectivas populações locais, a serem realizadas concomitantemente às eleições municipais de 2024"
+  },
+  {
     "chave": "bff66187cc9b0516461725cab4c5208e",
     "classificada_em": "2026-10-01T21:56:10.229188+00:00",
     "conferida_em": "2026-10-02T16:05:35.379744+00:00",
@@ -16588,6 +17578,21 @@
     "status": "completa",
     "tipo_de_questao": "caso prático",
     "trecho": "juntou aos autos prova documental da qual o juízo criminal não deu ciência à defesa antes da prolação da sentença"
+  },
+  {
+    "chave": "c1a8e43cc659d027d21aa8ae3a8e703d",
+    "classificada_em": "2026-10-18T05:06:33.202666+00:00",
+    "conferida_em": "2026-10-18T05:11:06.672134+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Manifestação do pensamento e acesso à informação > CF, art. 5º, XXXIII",
+    "dispositivo": "CF, art. 5º, XXXIII",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "A publicidade é a regra e o sigilo, a exceção: o ato que restringe o acesso tem de ser justificado objetiva, específica e formalmente; o sigilo genérico de tudo que o órgão policial guarda viola o art. 5º, XXXIII (item II falso).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "A Portaria XXX/2021 viola a liberdade de informação do Art. 5º, inciso XXXIII, da CF/88, que estabelece como regra a publicidade das informações mantidas por órgãos do Estado"
   },
   {
     "chave": "c1d0230ad950ecc4937b75608dcbb2ce",
@@ -17175,6 +18180,21 @@
     "trecho": "A prática de nepotismo não restará configurada caso a pessoa nomeada para o exercício de função comissionada possua um parente no órgão e esse parente não tenha influência hierárquica sobre a nomeação"
   },
   {
+    "chave": "c8adedd69d101ad18d1ae6b194b1d686",
+    "classificada_em": "2026-10-18T05:11:06.556022+00:00",
+    "conferida_em": "2026-10-18T05:11:06.552343+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Processual Penal > Ação penal",
+    "dispositivo": "CP, arts. 163, parágrafo único, I e III, e 167; CPP, arts. 24 e 5º, § 4º",
+    "item_do_edital": "Ação penal",
+    "pegadinha": "Dano com grave ameaça e contra o patrimônio público é dano qualificado (CP, art. 163, parágrafo único, I e III), de ação penal pública INCONDICIONADA: só o dano simples e o do inciso IV dependem de queixa (CP, art. 167). A vontade de Arthur não conta, renúncia e perdão não se aplicam, e o flagrante vale para os dois.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Ação penal > Representação do ofendido > CPP, art. 24; segunda, às cegas, Direito Processual Penal > Ação penal"
+  },
+  {
     "chave": "c8c3b0fae427ebe329a3785b3bc516ec",
     "classificada_em": "2026-10-05T14:40:27.401417+00:00",
     "conferida_em": null,
@@ -17233,6 +18253,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "o ato pelo qual o nomeado para um cargo público manifesta, pessoal e expressamente, a sua vontade de aceitar a nomeação"
+  },
+  {
+    "chave": "c9b7161e860934cfc2e4acc5749a84a5",
+    "classificada_em": "2026-10-18T05:05:24.065118+00:00",
+    "conferida_em": "2026-10-18T05:11:07.061483+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 15",
+    "dispositivo": "CP, art. 15 (e art. 16 nas erradas)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Depois de esgotar os atos de execução (os dez disparos), impedir o resultado é arrependimento EFICAZ; desistência voluntária é parar no meio da execução. Nos dois, responde só pelos atos já praticados: lesão corporal (art. 15). O arrependimento posterior (art. 16) é depois da consumação.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Mário é tomado por uma sensação divina e, de imediato, coloca André em seu carro e o leva até o hospital mais próximo"
   },
   {
     "chave": "ca0060296877f55b6e718644a0cd5dca",
@@ -18045,6 +19080,51 @@
     "trecho": "o nó em comum das duas leituras (decisão 171): primeira Língua Portuguesa > Ortografia oficial > Parônimos e grafia; segunda, às cegas, Língua Portuguesa > Ortografia oficial"
   },
   {
+    "chave": "d46184c904ad8513dfb8199e79dbd8ac",
+    "classificada_em": "2026-10-18T05:06:32.816462+00:00",
+    "conferida_em": "2026-10-18T05:11:06.620922+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 322",
+    "dispositivo": "CPP, art. 322, caput e parágrafo único (e arts. 325, § 1º, I, e 350 nas erradas)",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "O delegado só concede fiança quando a pena MÁXIMA não passa de 4 anos (art. 322); com máxima de 5, só o juiz (art. 322, parágrafo único). A pena mínima não importa; lesão grave não é hedionda nem inafiançável; e o juiz pode dispensar a fiança do pobre (arts. 325, § 1º, I, e 350).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "com pena de reclusão de 1 a 5 anos"
+  },
+  {
+    "chave": "d474c807b0cf6baa3066564ddb1d5434",
+    "classificada_em": "2026-10-18T05:06:33.785471+00:00",
+    "conferida_em": "2026-10-18T05:11:06.865230+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 244",
+    "dispositivo": "CPP, arts. 240, § 2º, e 244",
+    "item_do_edital": "Prova",
+    "pegadinha": "A busca pessoal é das autoridades e seus agentes (CPP, art. 244); agente de segurança privada não tem esse poder, e a prova é ilícita (STJ). Qualquer do povo pode prender em flagrante (art. 301), não revistar; e a Constituição não fala em revista na presença de três pessoas.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "os agentes fizeram uma busca pessoal e encontraram na mochila dois pacotes de Cannabis sativa (maconha)"
+  },
+  {
+    "chave": "d4a2ac7e6e06698957c6848c4f84a7ca",
+    "classificada_em": "2026-10-18T05:05:24.604178+00:00",
+    "conferida_em": "2026-10-18T05:11:07.185242+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Atos de improbidade em espécie (arts. 9º, 10 e 11) > Lei 8.429/1992, art. 10",
+    "dispositivo": "Lei 8.429/1992, art. 10, caput (e art. 1º, § 2º)",
+    "item_do_edital": "Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992",
+    "pegadinha": "O dano ao erário exige ação ou omissão DOLOSA que cause, efetiva e comprovadamente, perda patrimonial, desvio, apropriação, malbaratamento ou dilapidação (art. 10, caput); não há dano presumido nem modalidade culposa desde a Lei 14.230/2021.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "no que se refere aos atos de improbidade administrativa que causam prejuízo ao erário"
+  },
+  {
     "chave": "d4ad2702ee04e6b9def7c73cdfcd202d",
     "classificada_em": "2026-10-18T00:39:22.648860+00:00",
     "conferida_em": "2026-10-18T03:24:20.261503+00:00",
@@ -18058,6 +19138,36 @@
     "status": "parcial",
     "tipo_de_questao": "caso prático",
     "trecho": "Caberá ação de ressarcimento de danos ao erário, a qualquer tempo, desde que comprovado o ato ímprobo doloso"
+  },
+  {
+    "chave": "d4e49927c8389778d146def41ee59809",
+    "classificada_em": "2026-10-18T05:11:06.876378+00:00",
+    "conferida_em": "2026-10-18T05:11:06.873001+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência",
+    "dispositivo": "Lei 11.340/2006, arts. 12-C, II, e 19, §§ 1º e 4º; CPP, art. 282, § 1º",
+    "item_do_edital": "Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006)",
+    "pegadinha": "As cautelares do CPP também se aplicam cumuladas (art. 282, § 1º), por isso o 1º item é falso; o delegado afasta o agressor quando o município não é sede de comarca (art. 12-C, II); a medida sai em cognição sumária pelo depoimento da ofendida (art. 19, § 4º) e de imediato, sem audiência, com o MP comunicado (art. 19, § 1º).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência > Lei 11.340/2006, art. 19; segunda, às cegas, Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência"
+  },
+  {
+    "chave": "d4f9355f194d2147d8bb5338d2806fd7",
+    "classificada_em": "2026-10-18T05:06:32.848798+00:00",
+    "conferida_em": "2026-10-18T05:11:06.629036+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico",
+    "dispositivo": "doutrina (poder hierárquico x disciplinar x de polícia; atos ordinatórios)",
+    "item_do_edital": "Poderes e deveres dos administradores públicos",
+    "pegadinha": "Distribuir e ordenar o serviço interno dos subordinados por ordem de serviço é poder hierárquico. O disciplinar é o de punir a falta funcional, não o de editar normas, e o de polícia limita a liberdade e a propriedade do particular, não organiza a repartição.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "editou uma ordem de serviço, com a finalidade de distribuir e ordenar o serviço interno da DP"
   },
   {
     "chave": "d51d5bd0a8629b8e650ebecd48a2705e",
@@ -18163,6 +19273,21 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "A liberdade de expressão é um direito protegido de maneira reforçada na Constituição Brasileira"
+  },
+  {
+    "chave": "d66e38f5384949db3de0ea520fe22555",
+    "classificada_em": "2026-10-18T05:06:34.234294+00:00",
+    "conferida_em": "2026-10-18T05:11:06.964261+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 316",
+    "dispositivo": "CPP, arts. 312 e 316",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "A ameaça às testemunhas é fundamento de conveniência da instrução criminal, não de garantia da aplicação da lei penal (item I); o juiz pode decretar de novo a preventiva revogada quando sobrevêm razões (art. 316), sem depender de recurso da acusação.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Ainda durante a instrução, testemunhas arroladas pela acusação passaram a receber ameaças do acusado"
   },
   {
     "chave": "d6822523d2746446883a817739c3ab5f",
@@ -18705,6 +19830,21 @@
     "trecho": "Desligue, Guarde e Esqueça. Esses verbos estão conjugados no modo"
   },
   {
+    "chave": "db04539780710afbbdb45518f73f1baa",
+    "classificada_em": "2026-10-18T05:11:06.315147+00:00",
+    "conferida_em": "2026-10-18T05:11:06.308241+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas: o nó em comum",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária",
+    "dispositivo": "Lei 7.960/1989, art. 2º; Lei 8.072/1990, art. 2º, § 4º",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Os 5 + 5 dias do art. 2º da Lei 7.960/1989 são a regra geral; no tráfico, equiparado a hediondo, a temporária é de 30 dias prorrogáveis por mais 30 (Lei 8.072/1990, art. 2º, § 4º).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "parcial",
+    "tipo_de_questao": "caso prático",
+    "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 2º; segunda, às cegas, Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária"
+  },
+  {
     "chave": "db5625da75208933793dd188280fd699",
     "classificada_em": "2026-10-17T20:42:35.640201+00:00",
     "conferida_em": "2026-10-18T03:24:24.441593+00:00",
@@ -18763,6 +19903,21 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "O direito à vida figura no rol dos Direitos e Garantias fundamentais"
+  },
+  {
+    "chave": "dbdcc56649860bf9a195a98e8febb0b4",
+    "classificada_em": "2026-10-18T05:06:33.591478+00:00",
+    "conferida_em": "2026-10-18T05:11:06.842940+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 2º",
+    "dispositivo": "Lei 7.960/1989, art. 2º, § 7º; Lei 8.072/1990, art. 2º, § 4º",
+    "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
+    "pegadinha": "Furto qualificado por explosivo é hediondo, e a temporária nos hediondos é de 30 dias prorrogáveis por mais 30 (Lei 8.072/1990, art. 2º, § 4º), não 5 mais 5; vencido o prazo, o preso é solto de imediato, sem nova ordem, e o delegado não prorroga a prisão.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "O delegado de polícia indiciou e representou pela prisão temporária de Dorival Silva"
   },
   {
     "chave": "dc39ab65d36e2ba2a5e8ab198ee8dfb3",
@@ -18868,6 +20023,21 @@
     "status": "completa",
     "tipo_de_questao": "conceito",
     "trecho": "a vírgula marca a elipse do verbo (zeugma)"
+  },
+  {
+    "chave": "ddb28b9b04cbac563e38e77ebc5b0fae",
+    "classificada_em": "2026-10-18T05:06:32.147881+00:00",
+    "conferida_em": "2026-10-18T05:11:06.480220+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXXIII",
+    "dispositivo": "CF, art. 5º, LXXIII",
+    "item_do_edital": "Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+    "pegadinha": "Qualquer cidadão (a vereadora também é) pode propor ação popular contra ato lesivo ao meio ambiente (art. 5º, LXXIII). A ação civil pública não é dada ao cidadão isolado, e o mandado de segurança, o de injunção e a reclamação servem a outras coisas.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Maria poderá ajuizar uma ação de natureza constitucional para impedir o desmatamento da área."
   },
   {
     "chave": "ddd755528b96eadc1df99134d52e4be3",
@@ -19380,6 +20550,21 @@
     "trecho": "Considerando as características do regime disciplinar diferenciado"
   },
   {
+    "chave": "e713fb752a821fca952e2d06e53bf828",
+    "classificada_em": "2026-10-18T05:11:06.452667+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
+    "dispositivo": "CF, art. 14, §§ 2º, 3º, I, e 4º (e art. 5º, caput, nos direitos fundamentais)",
+    "item_do_edital": "cidadania e direitos políticos",
+    "pegadinha": "Direito político pede nacionalidade brasileira: o estrangeiro não se alista (art. 14, § 2º) nem se elege (art. 14, § 3º, I, e § 4º). Os direitos fundamentais, ao contrário, valem para o estrangeiro no que forem compatíveis com a condição dele (art. 5º, caput); por isso a c, a d e a e erram ao condicioná-los à nacionalidade ou à cidadania.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
+    "status": "pendente",
+    "tipo_de_questao": "caso prático",
+    "trecho": "pendente até a sua conferência (decisão 171): outro assunto. Primeira leitura: Direito Constitucional > cidadania e direitos políticos > Elegibilidade e inelegibilidades > CF, art. 14, § 3º. Segunda, às cegas (media): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Titularidade dos direitos fundamentais - A estrangeira tem os direitos fundamentais compatíveis com sua condição, mas não direitos políticos; divide com a inalistabilidade do estrangeiro (art. 14, § 2º), que a árvore não tem como nó."
+  },
+  {
     "chave": "e734940038e13be75cb6f5e4f7781b75",
     "classificada_em": "2026-10-17T20:42:36.290487+00:00",
     "conferida_em": "2026-10-18T03:24:24.965393+00:00",
@@ -19618,6 +20803,36 @@
     "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "No Brasil, adota-se o critério formal de administração pública"
+  },
+  {
+    "chave": "e98ae186574904e211a59636da68b34e",
+    "classificada_em": "2026-10-18T05:06:32.499031+00:00",
+    "conferida_em": "2026-10-18T05:11:06.543839+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 312, § 1º",
+    "dispositivo": "CP, art. 312, § 1º, e art. 30",
+    "item_do_edital": "Crimes contra a Administração Pública",
+    "pegadinha": "Subtrair sem ter a posse, valendo-se da facilidade do cargo, é peculato-furto (art. 312, § 1º). A condição de funcionário público é elementar do crime e se comunica ao particular que a conhece (art. 30): o primo desempregado também responde por peculato, não por furto.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "tendo a dupla se aproveitado das facilidades decorrentes do cargo exercido por Jonas"
+  },
+  {
+    "chave": "ea8b6a710dc7a34112de4d6da0453994",
+    "classificada_em": "2026-10-18T05:05:24.219310+00:00",
+    "conferida_em": "2026-10-18T05:11:07.090699+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Ação penal > Representação do ofendido > CPP, art. 25",
+    "dispositivo": "CPP, art. 25",
+    "item_do_edital": "Ação penal",
+    "pegadinha": "A representação fica irretratável depois de OFERECIDA a denúncia (art. 25); a troca por 'recebimento' é a pegadinha clássica. Ela é condição de procedibilidade, não de punibilidade.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "A representação é irretratável após o oferecimento da denúncia."
   },
   {
     "chave": "eacad57196a4712d2288739c97d39527",
@@ -19905,6 +21120,21 @@
     "trecho": "prevalência dos direitos humanos nas relações internacionais"
   },
   {
+    "chave": "ed8b081a3247db53804dfefc6c3623cf",
+    "classificada_em": "2026-10-18T05:06:32.467597+00:00",
+    "conferida_em": "2026-10-18T05:11:06.536719+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 24",
+    "dispositivo": "CP, arts. 23, I, e 24 (e art. 25 nas erradas)",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "Ataque espontâneo de animal não é 'agressão injusta', que só vem de pessoa: quem mata o cão para salvar a criança age em estado de necessidade de terceiro (art. 24), e não em legítima defesa (seria, se alguém atiçasse o animal). As duas excludentes afastam a ILICITUDE (art. 23), não a tipicidade nem a culpabilidade.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "Com o objetivo de proteger a criança, Joana atirou uma pedra na cabeça do animal"
+  },
+  {
     "chave": "edeae08df23893db25eec7ef60ea9cb0",
     "classificada_em": "2026-10-17T23:30:32.303186+00:00",
     "conferida_em": "2026-10-18T03:24:16.946441+00:00",
@@ -19978,6 +21208,21 @@
     "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Identifique a figura da linguagem das quatro frases a seguir... Assinale a alternativa que indica corretamente as figuras de linguagem das frases numeradas."
+  },
+  {
+    "chave": "ee34e0e317df49429b2f454a06e67d9b",
+    "classificada_em": "2026-10-18T05:05:23.243318+00:00",
+    "conferida_em": "2026-10-18T05:11:06.291719+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 14",
+    "dispositivo": "CP, art. 14, parágrafo único",
+    "item_do_edital": "Tipicidade, ilicitude, culpabilidade, punibilidade",
+    "pegadinha": "A redução da tentativa é de UM a DOIS terços, com a ressalva 'salvo disposição em contrário' (art. 14, parágrafo único); as erradas trocam a fração (um terço a metade, um sexto a dois terços) ou tiram a ressalva.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Pune-se a tentativa, salvo disposição em contrário, com pena correspondente ao crime consumado diminuída de um terço a dois terços."
   },
   {
     "chave": "ee4edda8e9af3e65950ec0fc01e6d9eb",
@@ -20143,6 +21388,36 @@
     "status": "completa",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "deverá dispor de serviço de saúde pediátrico, com triagem médica"
+  },
+  {
+    "chave": "f0beb8fc07fdacc142288e73d6d8cce6",
+    "classificada_em": "2026-10-18T05:05:24.539669+00:00",
+    "conferida_em": "2026-10-18T05:11:07.170046+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de defesa > CF, art. 136",
+    "dispositivo": "CF, art. 136, § 4º (e § 3º, III e IV, §§ 5º e 6º nas erradas)",
+    "item_do_edital": "Defesa do Estado e das instituições democráticas: segurança pública",
+    "pegadinha": "Decretado o estado de defesa, o Presidente o submete ao Congresso em 24 horas, que decide por maioria absoluta (art. 136, § 4º). As erradas mexem nos prazos: a prisão é de até DEZ dias (§ 3º, III), o Congresso em recesso se reúne em CINCO dias (§ 5º) e aprecia o decreto em DEZ (§ 6º); e a incomunicabilidade do preso é vedada (§ 3º, IV).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "No tocante ao tema Estado de Defesa, assinale a alternativa correta."
+  },
+  {
+    "chave": "f0f2fb14bd2f93eb1924da84c6e53899",
+    "classificada_em": "2026-10-18T05:06:32.181283+00:00",
+    "conferida_em": "2026-10-18T05:11:06.489258+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > seguridade social > Objetivos da seguridade social > CF, art. 194",
+    "dispositivo": "CF, art. 194, caput",
+    "item_do_edital": "seguridade social",
+    "pegadinha": "A seguridade social é o tripé saúde, previdência social e assistência social (art. 194, caput). A educação é direito social, mas fica fora da seguridade (art. 205), e a segurança pública também (art. 144).",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "priorizasse, na proposta orçamentária para o próximo exercício financeiro, as áreas de atuação afetas à seguridade social"
   },
   {
     "chave": "f0f2fd5470955d72bd1a98dd524cb75f",
@@ -20638,6 +21913,21 @@
     "status": "pendente",
     "tipo_de_questao": "conceito",
     "trecho": "pendente: competências legislativas dos entes: o programa de Direito Constitucional do edital não lista o tema"
+  },
+  {
+    "chave": "f69f01600343cbb4c469504ffd4a5607",
+    "classificada_em": "2026-10-18T05:06:32.119558+00:00",
+    "conferida_em": "2026-10-18T05:11:06.471866+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 5º-A",
+    "dispositivo": "CF, art. 144, VI, e § 5º-A (EC 104/2019)",
+    "item_do_edital": "organização da segurança pública",
+    "pegadinha": "A segurança dos estabelecimentos penais é da polícia penal (EC 104/2019), não da militar nem da civil, e ela é vinculada ao órgão administrador do sistema penal do estado: por isso o pedido vai ao Secretário de Administração Penitenciária, e não ao de Segurança Pública.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "caso prático",
+    "trecho": "solicitando a designação de agentes da área de segurança pública para realizarem a segurança da unidade"
   },
   {
     "chave": "f6b16f634f972ebae59b9704837e9004",
@@ -21538,6 +22828,21 @@
     "status": "completa",
     "tipo_de_questao": "caso prático",
     "trecho": "Essas decisões são imorais e esdrúxulas, pois foram feitas com o intuito de auferir lucro ilegal."
+  },
+  {
+    "chave": "fdc5331f6197cb7a91c17be0f42af2b6",
+    "classificada_em": "2026-10-18T05:06:32.728411+00:00",
+    "conferida_em": "2026-10-18T05:11:06.579984+00:00",
+    "conferida_por": "Claude Code, reanálise às cegas",
+    "conteudo": "Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 245",
+    "dispositivo": "CPP, art. 245, caput (e §§ 4º e 6º e art. 243, II, nas erradas); CF, art. 5º, XI",
+    "item_do_edital": "Prova",
+    "pegadinha": "A busca domiciliar é de dia; à noite, só com o consentimento do morador (CPP, art. 245; CF, art. 5º, XI). Ela cabe no inquérito, sem ação penal; a ausência do morador não a impede (art. 245, § 4º); a coisa apreendida fica sob custódia da autoridade (art. 245, § 6º); e o mandado diz o motivo e os fins da diligência (art. 243, II). A certa traz 'no período no turno', erro de digitação de 'noturno'.",
+    "principal": true,
+    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
+    "status": "completa",
+    "tipo_de_questao": "literalidade da lei",
+    "trecho": "Sobre a busca e apreensão domiciliar do veículo, é correto afirmar que"
   },
   {
     "chave": "fddc5bf2abe4873cc3ef79a173169287",

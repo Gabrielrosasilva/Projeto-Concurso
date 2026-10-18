@@ -57,16 +57,28 @@ def _letra(marca: str) -> str | None:
     return None if marca in ("x", "*", "anulada") else marca
 
 
+def _de_outro_cargo(linha: str, cargo: str) -> bool:
+    """A linha abre o bloco de OUTRO cargo: "502 - ANALISTA..." (Selecon),
+    ou o nome da versao junto do nome de outro cargo, "Escrivao de Policia
+    Civil Substituto - Tipo 1" (FGV). "PROVA A" sozinho e do mesmo cargo."""
+    if cargo.lower() in linha.lower():
+        return False
+    if PADRAO_CARGO.match(linha):
+        return True
+    sem_a_versao = PADRAO_PROVA.sub("", PADRAO_TIPO.sub("", linha))
+    return bool(nome_da_versao(linha)) and len(re.findall(r"[A-Za-zÀ-ÿ]{3,}", sem_a_versao)) >= 2
+
+
 def _so_do_cargo(texto: str, cargo: str | None) -> str:
     """O pedaco do gabarito de um cargo so, quando o PDF junta varios: da
-    linha que cita o cargo ate o cabecalho do proximo."""
+    linha que cita o cargo ate a que abre o bloco de outro."""
     if not cargo:
         return texto
     linhas = texto.splitlines()
     inicio = next((i for i, linha in enumerate(linhas) if cargo.lower() in linha.lower()), None)
     if inicio is None:
         return ""
-    fim = next((i for i in range(inicio + 1, len(linhas)) if PADRAO_CARGO.match(linhas[i])),
+    fim = next((i for i in range(inicio + 1, len(linhas)) if _de_outro_cargo(linhas[i], cargo)),
                len(linhas))
     return "\n".join(linhas[inicio:fim])
 

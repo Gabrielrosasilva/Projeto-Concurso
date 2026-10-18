@@ -5319,6 +5319,31 @@
     "url": "https://anexos.cdn.selecao.net.br/uploads/746/concursos/52/anexos/857ba46a-5826-4de5-a42b-b1d0f498d065.pdf"
   },
   {
+    "ano": 2026,
+    "arquivo": "idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf",
+    "banca": "Idecan",
+    "caminho": "provas/manual/idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf",
+    "cargo": "Escrivão de Polícia Civil",
+    "concurso_url": "https://www.idecan.org.br",
+    "orgao": "Polícia Civil de Santa Catarina",
+    "sha256": "e916660d9db78f11de7c5c1153264291454e845113519ccba03e3f79eecf3600",
+    "tamanho": 742696,
+    "tipo": "prova",
+    "url": "https://arquivos.qconcursos.com/prova/arquivo_prova/148512/idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf"
+  },
+  {
+    "ano": 2026,
+    "arquivo": "idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf#gabarito",
+    "banca": "Idecan",
+    "caminho": "provas/manual/GABARIITO_idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf",
+    "concurso_url": "https://www.idecan.org.br",
+    "orgao": "Polícia Civil de Santa Catarina",
+    "sha256": "dfb80fdb55ac07b191a131b6e0a6995cd747444eb7136fac227c13488f03ad6e",
+    "tamanho": 427452,
+    "tipo": "gabarito",
+    "url": "https://arquivos.qconcursos.com/prova/arquivo_prova/148512/idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf#gabarito"
+  },
+  {
     "ano": 2023,
     "arquivo": "927_CBM_PA_CFO_001_01.PDF",
     "banca": "Cebraspe",
@@ -5657,6 +5682,56 @@
     "url": "https://cdn.cebraspe.org.br/concursos/SERES_PE_21/arquivos/671_SERESPE_NS_COM_JUSTIFICATIVA.PDF"
   },
   {
+    "ano": 2021,
+    "arquivo": "pcrn20",
+    "banca": "FGV",
+    "caminho": "provas/manual/AGENTE E ESCRIVÃO DE POLÍCIA - TIPO 1.pdf",
+    "cargo": "Agente e Escrivão de Polícia Civil Substituto",
+    "concurso_url": "https://conhecimento.fgv.br/concursos/pcrn20",
+    "orgao": "Polícia Civil do Rio Grande do Norte",
+    "sha256": "f719aa6b53254996e80d043dfe6e753b4a4b390809843b1e7a7005338b281175",
+    "tamanho": 792185,
+    "tipo": "prova",
+    "url": "https://conhecimento.fgv.br/concursos/pcrn20"
+  },
+  {
+    "ano": 2021,
+    "arquivo": "pcrn20#gabarito",
+    "banca": "FGV",
+    "caminho": "provas/manual/pcrn_gabarito_definitivo.pdf",
+    "concurso_url": "https://conhecimento.fgv.br/concursos/pcrn20",
+    "orgao": "Polícia Civil do Rio Grande do Norte",
+    "sha256": "c80dcd8fd2d207e556ef1c0cd9ea8ac0ddb644b0f8f68d49ae73a36a38424f2e",
+    "tamanho": 668502,
+    "tipo": "gabarito",
+    "url": "https://conhecimento.fgv.br/concursos/pcrn20#gabarito"
+  },
+  {
+    "ano": 2024,
+    "arquivo": "pcsc23",
+    "banca": "FGV",
+    "caminho": "provas/manual/delegado-objetivacns100-tipo-1.pdf",
+    "cargo": "Delegado de Polícia Substituto",
+    "concurso_url": "https://conhecimento.fgv.br/concursos/pcsc23",
+    "orgao": "Polícia Civil de Santa Catarina",
+    "sha256": "8dc6b30dcf3cc415cae4d486cfbef8d11bf5312abe68e694fd1e8742b4850e6d",
+    "tamanho": 1213772,
+    "tipo": "prova",
+    "url": "https://conhecimento.fgv.br/concursos/pcsc23"
+  },
+  {
+    "ano": 2024,
+    "arquivo": "pcsc23#gabarito",
+    "banca": "FGV",
+    "caminho": "provas/manual/pcscdelegado2024_gabarito_definitivo_20240220.pdf",
+    "concurso_url": "https://conhecimento.fgv.br/concursos/pcsc23",
+    "orgao": "Polícia Civil de Santa Catarina",
+    "sha256": "f634b847fa4c0b754c2d4259fc19fa9b03a465594c23274282c07a0f58073d5c",
+    "tamanho": 561780,
+    "tipo": "gabarito",
+    "url": "https://conhecimento.fgv.br/concursos/pcsc23#gabarito"
+  },
+  {
     "ano": 2024,
     "arquivo": "agente-penitenciariocnm-tipo-1.pdf",
     "banca": "FGV",
@@ -5680,6 +5755,31 @@
     "tamanho": 203583,
     "tipo": "gabarito",
     "url": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito_definitivo_seapba.pdf"
+  },
+  {
+    "ano": 2026,
+    "arquivo": "prova-agente.pdf",
+    "banca": "Idecan",
+    "caminho": "provas/manual/prova-agente.pdf",
+    "cargo": "Agente de Polícia Civil",
+    "concurso_url": "https://www.idecan.org.br",
+    "orgao": "Polícia Civil de Santa Catarina",
+    "sha256": "7e59cf69a17bc129b77a9a07f19e55d49a369345a212af582dc0995cb6e20d10",
+    "tamanho": 296032,
+    "tipo": "prova",
+    "url": "https://dsoconcursos.com.br/wp-content/uploads/2026/03/prova-agente.pdf"
+  },
+  {
+    "ano": 2026,
+    "arquivo": "prova-agente.pdf#gabarito",
+    "banca": "Idecan",
+    "caminho": "provas/manual/gabarito_prova-agente.pdf",
+    "concurso_url": "https://www.idecan.org.br",
+    "orgao": "Polícia Civil de Santa Catarina",
+    "sha256": "f470a95ec82c545e85859cd4ff10ae46eea8aea022761ef319c5be0b4297e432",
+    "tamanho": 113975,
+    "tipo": "gabarito",
+    "url": "https://dsoconcursos.com.br/wp-content/uploads/2026/03/prova-agente.pdf#gabarito"
   },
   {
     "ano": 2024,

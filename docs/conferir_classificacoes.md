@@ -5,8 +5,8 @@
 - **as provas novas de 17/10** (decisão 171): 29 pendentes e 8 fora do treino pela
   data da prova, e a amostra do que a segunda leitura decidiu sozinha (10 por
   grupo, decisão 173), a conferir no Ciclo 2;
-- **as provas baixadas à mão de 18/10** (decisão 172): 5 pendentes, também só
-  depois de 07/11;
+- **as provas baixadas à mão de 18/10** (decisão 172): 11 pendentes (5 do primeiro
+  lote e 6 do segundo), também só depois de 07/11;
 - **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
   pendentes, o que sobrou da reanálise (decisão 104) e da classificação de
   Português e Raciocínio (decisão 106).
@@ -201,7 +201,7 @@ de 07/11. O relatório inteiro está no [leis_alteradas](leis_alteradas.md).
 - **q82 de PREF_SAO_CRISTOVAO_SE_23** (Cebraspe 2023) — gabarito discutível: uma alternativa repete a Súmula Vinculante 6.
 - **q22 de deinfra · adv_1.pdf** (FEPESE 2014) — gabarito discutível: confira no caderno se a afirmativa 1 diz "vinculado" ou "discricionário".
 
-## As provas baixadas à mão de 18/10: 5 pendentes até a sua conferência (decisões 171 e 172)
+## As provas baixadas à mão de 18/10: 11 pendentes até a sua conferência (decisões 171 e 172)
 
 **Confira só depois de 07/11**, pelo mesmo motivo de cima. As 107 classificações das
 7 provas baixadas à mão (FGV, Access e Selecon) foram lidas de novo às cegas, em duas
@@ -234,6 +234,41 @@ Declaração Universal em dois assuntos), que o passo 3 da Parte 2 vai juntar.
   - primeira leitura: Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 1º
   - segunda, às cegas (media): Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)
   - por que ficou: outro assunto
+
+### O segundo lote: PC SC 2026 (Idecan), PC SC 2023 e PC RN 2021 (FGV) (6)
+
+As 87 classificações do segundo lote, lidas de novo às cegas: 69 no mesmo nó, 12 no nó
+em comum, e estas 6 discordam (uma caiu no mesmo nó, mas com a confiança baixa).
+
+- **q63 de Polícia Civil do Rio Grande do Norte - Agente e Escrivão de Polícia Civil Substituto** (FGV 2021) — Marie, integrante de uma tradicional família francesa, nascida e criada em Paris, deseja viver no Brasil e seguir a carreira política. Para…
+  - primeira leitura: Direito Constitucional > cidadania e direitos políticos > Elegibilidade e inelegibilidades > CF, art. 14, § 3º
+  - segunda, às cegas (media): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Titularidade dos direitos fundamentais
+  - por que ficou: outro assunto
+
+- **q32 de Polícia Civil de Santa Catarina - Delegado de Polícia Substituto** (FGV 2024) — Um pacote legislativo resultou na aprovação de três novas leis penais no Congresso Nacional. A Lei A revogou o crime previsto no art. 28 da…
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais > CF, art. 5º, XL
+  - segunda, às cegas (media): Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Abolitio criminis > CP, art. 2º
+  - por que ficou: outra matéria
+
+- **q36 de Polícia Civil de Santa Catarina - Delegado de Polícia Substituto** (FGV 2024) — Acerca dos princípios penais, assinale a afirmativa correta.
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais
+  - segunda, às cegas (baixa): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais
+  - por que ficou: a confiança baixa
+
+- **q66 de Polícia Civil de Santa Catarina - Delegado de Polícia Substituto** (FGV 2024) — Imagine que logo após ser investido no cargo de delegado de polícia de certo Estado da federação, Dionísio tome conhecimento de que há uma d…
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Manifestação do pensamento e acesso à informação > CF, art. 5º, XXXIII
+  - segunda, às cegas (alta): Direito Administrativo > Acesso à informação > Lei de Acesso à Informação (Lei 12.527/2011)
+  - por que ficou: outra matéria
+
+- **q68 de Polícia Civil de Santa Catarina - Delegado de Polícia Substituto** (FGV 2024) — Ao realizar a sua atividade regulatória, o Conselho Administrativo de Defesa Econômica – CADE, após o devido processo legal, aplicou sanção…
+  - primeira leitura: Administração Pública > Noções de Administração Pública > Controle da administração pública
+  - segunda, às cegas (media): Direito Administrativo > Atos administrativos > Quem pratica e controle judicial
+  - por que ficou: outra matéria
+
+- **q22 de Polícia Civil de Santa Catarina - Agente de Polícia Civil** (Idecan 2026) — João Bosco, 32 anos de idade, está sendo investigado pela suposta prática dos crimes de tráfico de pessoas e lavagem de dinheiro. Durante o…
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Inviolabilidade do domicílio > CF, art. 5º, XI
+  - segunda, às cegas (alta): Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 245
+  - por que ficou: outra matéria
 
 ## O complementar aceito (estado de 05/10)
 

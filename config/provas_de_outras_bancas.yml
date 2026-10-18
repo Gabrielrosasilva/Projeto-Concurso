@@ -340,3 +340,63 @@ provas:
   versao: TIPO 1
   alternativas: 4
   ler: ["41-70"]
+# Segundo lote (18/10, adendo da decisao 172). As duas da Idecan voce baixou
+# de espelhos (o Qconcursos e um blog), e o PDF e o da propria banca ("fornecido
+# pelo IDECAN"): o `caderno` e de onde veio, a `pagina` e a da banca, e o robo
+# nunca vai a nenhum dos dois. Sem o link do gabarito, ele fica com o do
+# caderno e "#gabarito" (`servico.provas.url_do_gabarito`).
+- banca: Idecan
+  ano: 2026
+  orgao: Polícia Civil de Santa Catarina
+  uf: SC
+  cargo: Escrivão de Polícia Civil
+  pagina: https://www.idecan.org.br
+  caderno: https://arquivos.qconcursos.com/prova/arquivo_prova/148512/idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf
+  arquivo: idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf
+  arquivo_do_gabarito: GABARIITO_idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf
+  versao: TIPO A
+  # 39-56 e 59-63 sao de Informatica e Contabilidade; 64-100, Administracao,
+  # Portugues e Raciocinio. A 57 e a 58 sao de crime digital e Marco Civil.
+  ler: ["1-38", "57-58"]
+- banca: Idecan
+  ano: 2026
+  orgao: Polícia Civil de Santa Catarina
+  uf: SC
+  cargo: Agente de Polícia Civil
+  pagina: https://www.idecan.org.br
+  caderno: https://dsoconcursos.com.br/wp-content/uploads/2026/03/prova-agente.pdf
+  arquivo: prova-agente.pdf
+  arquivo_do_gabarito: gabarito_prova-agente.pdf
+  versao: TIPO A
+  ler: ["1-39", "58-59"]
+# As duas da FGV: o `caderno` e a pagina do concurso, onde o PDF esta - o link
+# direto deste caderno nao veio.
+- banca: FGV
+  ano: 2024
+  orgao: Polícia Civil de Santa Catarina
+  uf: SC
+  cargo: Delegado de Polícia Substituto
+  pagina: https://conhecimento.fgv.br/concursos/pcsc23
+  caderno: https://conhecimento.fgv.br/concursos/pcsc23
+  arquivo: delegado-objetivacns100-tipo-1.pdf
+  arquivo_do_gabarito: pcscdelegado2024_gabarito_definitivo_20240220.pdf
+  versao: TIPO 1
+  # 1-10 Portugues; 76-80 Civil; 86-100 Criminologia, Medicina Legal e
+  # Tecnologia.
+  ler: ["11-75", "81-85"]
+- banca: FGV
+  ano: 2021
+  orgao: Polícia Civil do Rio Grande do Norte
+  uf: RN
+  cargo: Agente e Escrivão de Polícia Civil Substituto
+  pagina: https://conhecimento.fgv.br/concursos/pcrn20
+  caderno: https://conhecimento.fgv.br/concursos/pcrn20
+  arquivo: AGENTE E ESCRIVÃO DE POLÍCIA - TIPO 1.pdf
+  arquivo_do_gabarito: pcrn_gabarito_definitivo.pdf
+  versao: TIPO 1
+  # O caderno e um so para os dois cargos (o Tipo 1 do Agente e o do Escrivao
+  # sao iguais no gabarito); o gabarito tambem tem o do Delegado, outra prova.
+  cargo_no_gabarito: Agente de Polícia Civil Substituto
+  # 1-60 Portugues, Raciocinio, Informatica, Administracao e Contabilidade;
+  # 96-100 Medicina Legal.
+  ler: ["61-95"]

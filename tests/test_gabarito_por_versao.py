@@ -86,6 +86,20 @@ def test_so_o_bloco_do_cargo_quando_o_gabarito_junta_varios():
     assert g.bloco_da_versao([texto], "PROVA A", "EM ADMINISTRAÇÃO") == {1: "b", 2: "b"}
 
 
+def test_o_cargo_da_fgv_vem_no_nome_da_versao():
+    """A PC RN: um bloco "Tipo 1" por cargo. Sem o cargo, tres blocos com o
+    mesmo nome - o gabarito e recusado; com ele, so o do Agente."""
+    texto = ("GABARITO DEFINITIVO\nAgente de Polícia Civil Substituto – Tipo 1\n1 2 3\nC C E\n"
+             "Agente de Polícia Civil Substituto – Tipo 2\n1 2 3\nE C C\n"
+             "Escrivão de Polícia Civil Substituto – Tipo 1\n1 2 3\nC C E\n"
+             "Delegado de Polícia Civil Substituto – Tipo 1\n1 2 3\nA B *\n")
+    with pytest.raises(ValueError):
+        g.bloco_da_versao([texto], "TIPO 1")
+    agente = g.bloco_da_versao([texto], "TIPO 1", "Agente de Polícia Civil Substituto")
+    assert agente == {1: "c", 2: "c", 3: "e"}
+    assert g.bloco_da_versao([texto], "TIPO 1", "Delegado de Polícia")[3] is None
+
+
 def test_o_codigo_do_cargo_nao_vira_resposta():
     """ "02100 – ESCRIVÃO": o 100 nao e a questao 100 com letra E."""
     texto = "PROVA TIPO A\n02100 – ESCRIVÃO DE POLÍCIA CIVIL\n01: C 02: D\n"
