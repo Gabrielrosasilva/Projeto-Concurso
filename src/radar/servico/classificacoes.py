@@ -664,6 +664,24 @@ def pendente_pela_reanalise(chave: str, procedencia: str, motivo: str) -> Classi
                    trecho=f"pendente até a sua conferência (decisão 171): {motivo}")
 
 
+def fora_do_treino(chave: str, procedencia: str, motivo: str) -> Classificacao | None:
+    """A questao sai do treino (decisao 171, passo 2): a lei mudou e o
+    gabarito ficou errado, ou o gabarito ja era discutivel. Vira pendente na
+    materia, com o motivo ("a lei mudou: ..."). A que ja era pendente ganha o
+    motivo AO LADO do que tinha - as duas leituras do passo 1 nao se perdem.
+    None sem principal que se possa tocar."""
+    criar_tabelas()
+    with sessao() as s:
+        atual = _principal_que_se_toca(s, chave)
+        if atual is None:
+            return None
+        materia = arvore.partes(atual.conteudo)[0]
+        antes = atual.trecho if atual.status == PENDENTE and atual.trecho else ""
+    trecho = f"{antes} | {motivo}" if antes else f"fora do treino (decisão 171): {motivo}"
+    return _trocar(chave, materia, procedencia, status=PENDENTE, conferida=False,
+                   trecho=trecho)
+
+
 # --- quando a releitura do caderno muda o texto ------------------------------------
 
 #: O que uma classificacao leva consigo quando muda de chave.

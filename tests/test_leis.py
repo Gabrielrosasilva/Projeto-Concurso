@@ -177,8 +177,10 @@ def test_so_existem_planalto_e_alesc_no_arquivo():
 ANOS_DAS_PROVAS = {2013, 2019}
 
 # Onde cada mudanca da lista foi conferida: a compilacao da Camara (o Planalto
-# recusa a conexao daqui) e a ALESC. Nao e link de "ler a lei".
-FONTES_DA_CONFERENCIA = ("www2.camara.leg.br", "leis.alesc.sc.gov.br")
+# recusa a conexao daqui) e a ALESC; a decisao do STF, no portal dele; e a lei
+# que a Camara nao abriu, no Senado (decisao 171). Nao e link de "ler a lei".
+FONTES_DA_CONFERENCIA = ("www2.camara.leg.br", "leis.alesc.sc.gov.br", "portal.stf.jus.br",
+                         "www.stf.jus.br", "noticias.stf.jus.br", "legis.senado.leg.br")
 
 
 def _mudancas() -> list[dict]:
@@ -189,7 +191,12 @@ def test_a_lista_de_leis_alteradas_existe_e_tem_o_que_o_aviso_le():
     assert _mudancas(), "a lista existe desde 03/10/2026"
     for item in _mudancas():
         assert item.get("tema") and item.get("lei") and item.get("o_que_mudou"), item
-        assert item.get("anos") and set(item["anos"]) <= ANOS_DAS_PROVAS, item
+        if item.get("provas"):
+            # As provas novas (decisao 171): o ano de cada caderno da lista.
+            assert item.get("anos") and all(2010 <= ano <= 2026 for ano in item["anos"]), item
+            assert all(urlparse(str(p)).scheme in ("http", "https") for p in item["provas"]), item
+        else:
+            assert item.get("anos") and set(item["anos"]) <= ANOS_DAS_PROVAS, item
         # Marca que o YAML leu como numero (8.429 sem aspas vira float) nunca
         # bateria no texto da questao.
         assert item.get("marcas") and all(
@@ -203,7 +210,9 @@ def test_item_escrito_por_ia_diz_quem_escreveu_e_onde_conferiu():
             continue
         assert "Claude Code" in str(item.get("procedencia")), item
         assert "2026" in str(item.get("procedencia")), item
-        assert urlparse(str(item.get("fonte"))).netloc in FONTES_DA_CONFERENCIA, item
+        # A decisao conferida so pela noticia diz isso na procedencia.
+        assert (urlparse(str(item.get("fonte"))).netloc in FONTES_DA_CONFERENCIA
+                or "notícia" in str(item.get("procedencia"))), item
 
 
 def test_a_lista_reconhece_a_questao_pelo_texto_dela():
@@ -218,6 +227,65 @@ def test_a_lista_reconhece_a_questao_pelo_texto_dela():
     assert "310" in mudanca.tema
     assert not mudanca.conferida
     assert leis.mudancas_da_questao(2019, "Direito Penal", texto) == []
+
+
+PC_RJ = "https://cdn.cebraspe.org.br/concursos/PC_RJ_21_DELEGADO/arquivos/662_PCRJ_001_01.PDF"
+
+
+def test_a_chave_provas_restringe_o_aviso_ao_caderno():
+    """Decisao 171: o item com `provas` so avisa nos cadernos dele. A Lei
+    14.365 e de junho de 2022; a prova de Colombo, de outubro, nao avisa."""
+    texto = "A busca no escritório do advogado Orozimbo e a inviolabilidade relativa."
+    (mudanca,) = leis.mudancas_da_questao(2022, "Direito Processual Penal", texto, PC_RJ)
+    assert "escritório de advocacia" in mudanca.tema and not mudanca.conferida
+    colombo = "https://servicos.nc.ufpr.br/documentos/pmcol2022/provas/definitivo/305.pdf"
+    assert leis.mudancas_da_questao(2022, "Direito Processual Penal", texto, colombo) == []
+    assert leis.mudancas_da_questao(2022, "Direito Processual Penal", texto) == []
+
+
+def test_o_item_sem_provas_continua_valendo_para_todo_caderno_do_ano(monkeypatch):
+    monkeypatch.setattr(leis, "_arquivo", lambda: {"mudancas": [
+        {"tema": "T", "lei": "L", "anos": [2019], "marcas": ["fiança"]},
+        {"tema": "U", "lei": "M", "anos": [2019], "marcas": ["fiança"], "provas": ["https://a.pdf"]},
+    ]})
+    assert [m.tema for m in leis.mudancas_da_questao(2019, None, "a fiança", "https://b.pdf")] == ["T"]
+    assert [m.tema for m in leis.mudancas_da_questao(2019, None, "a fiança", "https://a.pdf")] == ["T", "U"]
+
+
+def test_a_tela_da_questao_avisa_so_depois_da_resposta(banco_temporario, monkeypatch):
+    """O aviso aparece na correcao, depois da letra - como o gabarito
+    (decisao 148) -, e e o unico lugar em que a questao de outra banca o
+    mostra."""
+    from fastapi.testclient import TestClient
+
+    from radar.db import sessao
+    from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
+    from radar.web.app import app
+
+    monkeypatch.setattr(leis, "_arquivo", lambda: {"mudancas": [{
+        "tema": "Busca em escritório de advocacia", "lei": "Lei 14.365/2022",
+        "o_que_mudou": "a busca virou medida excepcional", "anos": [2022],
+        "marcas": ["escritório do advogado"], "provas": [PC_RJ],
+        "procedencia": "Claude Code (teste), 18/10/2026", "conferida": False}]})
+    with sessao() as s:
+        q = QuestaoDeProva(prova_url=PC_RJ, banca="Cebraspe", ano=2022, numero=37,
+                           materia="Direito Processual Penal",
+                           enunciado="A busca no escritório do advogado é possível?",
+                           alternativas={"a": "sim", "b": "não", "c": "talvez", "d": "nunca"},
+                           resposta="a", impressao="pcrj-37", evidencia="fora")
+        s.add(q)
+        s.flush()
+        rodada = Simulado(filtros={"rodada": "outras_bancas", "quantidade": 1})
+        s.add(rodada)
+        s.flush()
+        s.add(RespostaDeSimulado(simulado_id=rodada.id, questao_id=q.id, ordem=1))
+        rodada_id, questao_id = rodada.id, q.id
+    cliente = TestClient(app)
+    antes = cliente.get(f"/simulado/{rodada_id}").text
+    assert "A lei mudou depois desta prova" not in antes
+    cliente.post(f"/simulado/{rodada_id}/responder", data={"questao_id": questao_id, "letra": "b"})
+    depois = cliente.get(f"/simulado/{rodada_id}?ver={questao_id}").text
+    assert "A lei mudou depois desta prova" in depois and "Lei 14.365/2022" in depois
 
 
 # --- o que mudou num ponto que nenhuma questao cobra (decisao 84) -------------

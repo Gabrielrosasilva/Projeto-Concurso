@@ -1142,7 +1142,7 @@ def _questao_real(o, evidencia: str, ctx: Contexto, como: str = "no") -> Questao
     mudancas = ()
     if ctx.mudancas_da_questao is not None:
         texto = " ".join([o.enunciado or ""] + [v for _, v in alternativas])
-        mudancas = tuple(ctx.mudancas_da_questao(o.ano, o.materia, texto) or ())
+        mudancas = tuple(ctx.mudancas_da_questao(o.ano, o.materia, texto, o.prova) or ())
     questao = QuestaoReal(
         _codigo(o), o.ano, o.numero, evidencia, o.conteudo or "", o.resposta,
         o.enunciado, o.pegadinha, o.tipo_de_questao, o.conferida,

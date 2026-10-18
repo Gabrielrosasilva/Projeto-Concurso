@@ -891,6 +891,13 @@ def _questao_corrigida(request: Request, simulado, resumo: dict, de_ia: bool,
             "explicacao": (None if gerada else
                            servico.manual.carregar_explicacoes().get(questao.impressao)),
             "macetes": [] if gerada else _macetes_por_questao().get(chave, []),
+            # A lei que mudou depois da prova (decisao 171): so depois da
+            # resposta, como o gabarito (decisao 148). A questao de outra banca
+            # so aparece aqui - a ficha e os Macetes mostram so a FEPESE.
+            "mudancas": [] if gerada else leis.mudancas_da_questao(
+                questao.ano, questao.materia,
+                " ".join([questao.enunciado or ""] + list((questao.alternativas or {}).values())),
+                questao.prova_url),
             "lacunas_perdidas": _lacunas_perdidas(resposta, questao),
             # O caderno de erros ja abre com o que a tela sabe: errar e anotar
             # na mesma hora, sem digitar de novo - com o no da questao (U21).

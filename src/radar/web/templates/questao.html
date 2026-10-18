@@ -85,7 +85,7 @@
   </style>
 </head>
 <body class="ds">
-{% from "_componentes.html" import selo, bloco %}
+{% from "_componentes.html" import selo, bloco, aviso_lei %}
 {% from "_falta_de_geradas.html" import falta_de_geradas %}
 
 <main class="foco">
@@ -217,6 +217,9 @@
       </div>
 
       <div class="depois">
+        {# A lei que mudou depois desta prova (decisao 171): so depois da
+           resposta, como o gabarito. A conta e do `leis`; aqui so se desenha. #}
+        {% for mud in mudancas or [] %}{{ aviso_lei(mud) }}{% endfor %}
         {% if resposta.gerada %}
           {% if questao.artigo %}<p class="ds-suave ds-pequeno">A IA disse se apoiar em {{ questao.artigo }}{% if lei %} · <a href="{{ lei.url }}" target="_blank" rel="noopener">ler a lei</a>{% endif %}.</p>{% endif %}
         {% elif explicacao %}

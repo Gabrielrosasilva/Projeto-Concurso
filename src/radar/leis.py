@@ -140,8 +140,13 @@ def do_assunto(materia: str | None, assunto: str | None) -> Lei | None:
 #                                 # dia da prova, so o ano
 #     marcas: [progressao]        # procuradas no enunciado e nas alternativas
 #     materias: [Lei de Execucao Penal]   # opcional: so nestas materias
+#     provas: [<link do caderno>]  # opcional: so nestes cadernos (decisao 171)
 #     procedencia: Claude Code (...), 03/10/2026, pela compilacao da Camara
 #     conferida: false
+#
+# `provas` existe porque o `anos` pega toda prova do mesmo ano que tenha a
+# marca - inclusive a feita DEPOIS da mudanca, quando a lei e do meio do ano
+# (a Lei 14.365 e de junho de 2022, e a prova de Colombo, de outubro).
 #
 # O item que eu escrevo nao precisa de procedencia: ele e meu. O que uma IA
 # escreveu leva a `procedencia` (regra do projeto: dado de IA so entra com
@@ -179,20 +184,24 @@ def mudancas_por_conferir() -> int:
 
 
 def mudancas_da_questao(
-    ano: int | None, materia: str | None, texto: str | None
+    ano: int | None, materia: str | None, texto: str | None,
+    prova_url: str | None = None,
 ) -> list[Mudanca]:
     """As leis posteriores que afetam esta questao, pela lista do YAML.
 
-    Tres condicoes, e as tres por escrito no YAML: o ano da prova esta em
-    `anos`, a materia esta em `materias` (quando o item restringe), e alguma
-    `marca` aparece no texto. Nada e deduzido: sem o item conferido, nenhuma
-    questao ganha aviso - aviso inventado seria pior que aviso nenhum.
+    As condicoes, todas por escrito no YAML: o ano da prova esta em `anos`, o
+    caderno esta em `provas` (quando o item restringe), a materia esta em
+    `materias` (quando o item restringe), e alguma `marca` aparece no texto.
+    Nada e deduzido: sem o item, nenhuma questao ganha aviso - aviso inventado
+    seria pior que aviso nenhum.
     """
     procurado = normalizar(texto or "")
     da_materia = normalizar(materia or "")
     achadas = []
     for item in _arquivo().get("mudancas") or []:
         if ano not in (item.get("anos") or []):
+            continue
+        if item.get("provas") and prova_url not in item["provas"]:
             continue
         materias = [normalizar(str(m)) for m in item.get("materias") or []]
         if materias and da_materia not in materias:

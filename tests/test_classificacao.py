@@ -367,6 +367,24 @@ def test_a_regra_c_vira_pendente_com_as_duas_leituras(alvo):
     assert len(todas) == 1
 
 
+def test_fora_do_treino_vira_pendente_e_a_pendente_guarda_o_que_tinha(alvo):
+    """Decisao 171, passo 2: a lei mudou (ou o gabarito ja era discutivel).
+    A classificada vira pendente com o motivo; a que ja era pendente ganha o
+    motivo ao lado das duas leituras do passo 1."""
+    assunto = "Direito Penal > " + IMPUTABILIDADE
+    classificacoes.classificar(_k("2019-51"), assunto, "Claude Code", dispositivo="art. 26 do CP")
+    classificacoes.fora_do_treino(_k("2019-51"), "Claude Code (teste)", "a lei mudou: Lei X")
+    c = _principal("2019-51")
+    assert (c.conteudo, c.status) == ("Direito Penal", "pendente")
+    assert "a lei mudou: Lei X" in c.trecho and c.dispositivo == "art. 26 do CP"
+
+    classificacoes.classificar(_k("2019-52"), "Direito Penal", "Claude Code", status="pendente",
+                               trecho="pendente até a sua conferência (decisão 171): duas leituras")
+    classificacoes.fora_do_treino(_k("2019-52"), "Claude Code (teste)", "gabarito discutível: Y")
+    c = _principal("2019-52")
+    assert "duas leituras" in c.trecho and "gabarito discutível: Y" in c.trecho
+
+
 # --- a tela ---------------------------------------------------------------------
 
 def test_a_tela_mostra_a_proposta_e_grava_a_decisao(alvo):

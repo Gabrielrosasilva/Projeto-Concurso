@@ -85,7 +85,8 @@ def _texto(questao) -> str:
 
 
 def mudancas_da(questao) -> list:
-    return leis.mudancas_da_questao(questao.ano, questao.materia, _texto(questao))
+    return leis.mudancas_da_questao(questao.ano, questao.materia, _texto(questao),
+                                    questao.prova_url)
 
 
 def _questoes_do_alvo() -> list[QuestaoDeProva]:
