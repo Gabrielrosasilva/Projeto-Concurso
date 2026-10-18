@@ -1912,22 +1912,60 @@ def analises_incidencia(request: Request, materia: str = ""):
 @app.get("/analises/conferencia", response_class=HTMLResponse)
 def analises_conferencia(request: Request, materia: str = "", abertas: str = "",
                          anuladas: str = "", evidencia: str = "", amostra: str = "",
-                         associados: str = ""):
-    """A conferencia da classificacao: enunciado, alternativas, gabarito e a
-    proposta lado a lado, com confirmar / corrigir / pendente. O alvo por
-    padrao; o complementar aceito pelo filtro, com a amostra do catalogo."""
-    recorte = "complementar" if evidencia == "complementar" else "alvo"
+                         associados: str = "", parte: str = "", aviso: str = ""):
+    """A conferencia da classificacao: enunciado, alternativas e a proposta
+    lado a lado, com confirmar / corrigir / pendente. O alvo por padrao; o
+    complementar aceito, as outras bancas e o lote das provas novas pelo
+    filtro (decisao 173), nunca juntos. A letra do gabarito so aparece na
+    questao que eu ja respondi no radar."""
+    recorte = evidencia if evidencia in RECORTES_DA_CONFERENCIA else "alvo"
     tela = servico.classificacoes.conferencia(
         materia or None, so_abertas=bool(abertas), com_anuladas=bool(anuladas),
         evidencia_escolhida=recorte, so_amostra=bool(amostra),
-        so_associados_abertos=bool(associados) and recorte == "alvo")
+        so_associados_abertos=bool(associados) and recorte == "alvo",
+        parte=parte)
     return templates.TemplateResponse(
         request=request, name="conferencia.html",
         context={"t": tela, "materia": materia, "abertas": bool(abertas),
                  "anuladas": bool(anuladas), "evidencia": recorte,
                  "amostra": bool(amostra) and recorte == "complementar",
-                 "associados": bool(associados) and recorte == "alvo"},
+                 "associados": bool(associados) and recorte == "alvo",
+                 "parte": tela.parte if recorte == "lote" else "",
+                 "aviso": aviso},
     )
+
+
+#: Os recortes da conferencia: o alvo, o complementar aceito, as outras
+#: bancas e o lote das provas novas de 17/10 (decisao 173).
+RECORTES_DA_CONFERENCIA = ("alvo", "complementar", "fora", "lote")
+
+
+def _volta_da_conferencia(chave: str, **filtros) -> str:
+    """O endereco da conferencia com os mesmos filtros, na mesma questao."""
+    volta = "/analises/conferencia?" + urlencode({k: v for k, v in filtros.items() if v})
+    return f"{volta}#q-{chave}" if chave else volta
+
+
+@app.post("/analises/conferencia/responder")
+def analises_conferencia_responder(
+    chave: str = Form(""),
+    materia: str = Form(""),
+    abertas: str = Form(""),
+    evidencia: str = Form(""),
+    parte: str = Form(""),
+):
+    """O "Responder no radar" (decisao 173): uma rodada so com esta questao,
+    como treino - a letra aparece depois de eu responder. A questao guardada
+    para uma rodada que mede nao abre."""
+    try:
+        simulado = servico.conferencia_do_lote.criar_rodada_da_questao(chave)
+    except servico.conferencia_do_lote.QuestaoGuardada as erro:
+        return RedirectResponse(_volta_da_conferencia(
+            "", materia=materia, abertas=abertas, evidencia=evidencia, parte=parte,
+            aviso=str(erro)), status_code=303)
+    if simulado is None:
+        return HTMLResponse("<p>Essa questão não está no acervo.</p>", status_code=404)
+    return RedirectResponse(f"/simulado/{simulado.id}", status_code=303)
 
 
 @app.post("/analises/conferencia")
@@ -1941,6 +1979,7 @@ def analises_conferir(
     evidencia: str = Form(""),
     amostra: str = Form(""),
     associados: str = Form(""),
+    parte: str = Form(""),
 ):
     """Grava a minha decisao sobre UMA questao e volta para o mesmo lugar.
 
@@ -1962,11 +2001,9 @@ def analises_conferir(
     except servico.classificacoes.ClassificacaoInvalida as erro:
         return HTMLResponse(f"<p>Não gravei: {escape(str(erro))}</p>", status_code=400)
     servico.classificacoes.exportar()
-    volta = "/analises/conferencia?" + urlencode(
-        {k: v for k, v in (("materia", materia), ("abertas", abertas),
-                           ("evidencia", evidencia), ("amostra", amostra),
-                           ("associados", associados)) if v})
-    return RedirectResponse(f"{volta}#q-{chave}", status_code=303)
+    return RedirectResponse(_volta_da_conferencia(
+        chave, materia=materia, abertas=abertas, evidencia=evidencia, amostra=amostra,
+        associados=associados, parte=parte), status_code=303)
 
 
 @app.get("/foco")

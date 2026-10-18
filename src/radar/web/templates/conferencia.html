@@ -34,6 +34,8 @@
     .associados ul{margin:0;padding-left:0;list-style:none}
     .associados li{padding:var(--esp-1) 0}
     .associados form{display:inline-flex;gap:var(--esp-1)}
+    .escondida{color:var(--cor-texto-suave);font-size:var(--tam-xs)}
+    .volta{margin:var(--esp-1) 0 0;font-size:var(--tam-sm)}
   </style>
   {% include "_topo_estilo.html" %}
 </head>
@@ -41,6 +43,15 @@
 
 {% from "_topo.html" import barra, abas_de_analises with context %}
 {{ barra('analises') }}
+
+{% macro filtros_ocultos() %}
+  <input type="hidden" name="materia" value="{{ materia }}">
+  <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
+  <input type="hidden" name="evidencia" value="{{ evidencia }}">
+  <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
+  <input type="hidden" name="associados" value="{{ '1' if associados }}">
+  <input type="hidden" name="parte" value="{{ parte }}">
+{% endmacro %}
 
 <main class="ds-pagina">
   {{ abas_de_analises('conferencia') }}
@@ -56,6 +67,27 @@
       catálogo (🟡) se confere por amostra, {{ t.tamanho_da_amostra }} por
       matéria; a do Claude Code, uma a uma.
     </p>
+    {% elif t.evidencia == 'fora' %}
+    <p>
+      As questões de <b>outras bancas</b> (evidência fora) que já têm
+      classificação, uma linha por classificação, com a banca, o ano e o cargo.
+      Elas medem o seu acerto por nó, com a origem ao lado, e nunca o que a
+      FEPESE cobra (decisão 166). Alvo, complementar e outras bancas nunca se
+      misturam nesta tela.
+    </p>
+    {% elif t.evidencia == 'lote' %}
+    <p>
+      <b>{{ t.lote or 'O lote das provas novas' }}</b> (decisão 173). A segunda
+      leitura às cegas decidiu sozinha a maior parte das classificações: você
+      confere uma <b>amostra</b> de cada grupo, sempre as mesmas questões, na
+      ordem do hash da chave (decisão 87). As 10 primeiras: nenhum erro, o grupo
+      passa; 2 ou mais, volta; 1, confira as 10 seguintes, e o grupo só passa se
+      não houver outro. Erro é o nó que muda a faixa de treino (outro assunto ou
+      outro subassunto), a pendente que tinha lugar no programa de 2019, ou o
+      contrário; descer no mesmo ramo (do subassunto para o artigo) é ajuste:
+      corrija, e não conta como erro. As <b>pendentes</b> (as duas leituras
+      discordaram, ou a lei mudou depois da prova) você confere uma a uma.
+    </p>
     {% else %}
     <p>
       As questões do alvo (Polícia Penal SC, 2013 e 2019) com a classificação
@@ -63,9 +95,25 @@
       conferida</b>: confirmar, corrigir para outro nó ou deixar pendente.
     </p>
     {% endif %}
+    <p class="ds-suave">
+      Na questão que você ainda não respondeu no radar, a letra do gabarito, o
+      dispositivo, a pegadinha e o trecho ficam escondidos (decisão 148). Se
+      precisar da letra para decidir, <b>Responder no radar</b> abre só aquela
+      questão, como treino; depois de responder, a letra aparece aqui.
+    </p>
   </header>
 
+  {% if aviso %}
+    <div class="ds-cartao"><p class="ds-nota">{{ aviso }}</p></div>
+  {% endif %}
+
   <section class="ds-cartao">
+    {% if t.evidencia == 'lote' %}
+    <div class="contador">
+      <span class="n">{{ t.conferidas }} de {{ t.total }}</span>
+      <span>{{ 'pendentes' if t.parte == 'pendentes' else 'da amostra' }} conferidas por você</span>
+    </div>
+    {% else %}
     <div class="contador">
       <span class="n">{{ t.conferidas_validas }} de {{ t.validas }}</span>
       <span>válidas conferidas</span>
@@ -73,6 +121,31 @@
         que ficam fora da lista: a banca desfez a pergunta, e elas não entram em
         conta nenhuma</span>
     </div>
+    {% endif %}
+    {% if t.fora_por_reserva %}
+    <p class="ds-suave">{{ t.fora_por_reserva }} questã{{ 'o ficou' if t.fora_por_reserva == 1 else 'es ficaram' }}
+      fora desta lista por estar{{ 'em' if t.fora_por_reserva > 1 }} guardada{{ 's' if t.fora_por_reserva > 1 }}
+      para uma rodada que mede: volta{{ 'm' if t.fora_por_reserva > 1 }} depois que a rodada for feita.</p>
+    {% endif %}
+    {% if t.grupos %}
+    <table class="amostras">
+      <caption class="ds-suave">A amostra de cada grupo: sempre as mesmas questões, uma por
+        questão (a mesma em vários cadernos conta uma vez).</caption>
+      <thead><tr><th>Grupo</th><th>Decididas pela 2ª leitura</th><th>Na amostra</th>
+        <th>Fora por reserva</th><th>Conferidas</th><th>Ajustes</th><th>Erros</th><th>Resultado</th></tr></thead>
+      <tbody>
+        {% for g in t.grupos %}
+        <tr><td>{{ g.grupo }}</td><td>{{ g.conferidas_pelo_claude_code }}</td><td>{{ g.chaves|length }}</td>
+          <td>{{ g.fora_por_reserva }}</td><td>{{ g.conferidas }} de {{ g.chaves|length }}</td>
+          <td>{{ g.ajustes }}</td><td>{{ g.erros }}</td>
+          <td>{{ g.resultado.texto }}
+            {% if g.volta %}<p class="volta">O grupo volta: num pedido seu, depois, o Claude Code
+              classifica de novo o grupo inteiro, uma a uma, com as suas correções como exemplo do
+              que deu errado, e você confere a mesma amostra outra vez (decisão 87).</p>{% endif %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
     {% if t.associados %}
     <p class="ds-suave">{{ t.associados_conferidos }} de {{ t.associados }} conceitos associados
       conferidos. O associado é outro nó que a questão também cobra: nunca entra
@@ -96,8 +169,18 @@
         <select name="evidencia">
           <option value="alvo" {{ 'selected' if evidencia == 'alvo' }}>alvo</option>
           <option value="complementar" {{ 'selected' if evidencia == 'complementar' }}>complementar aceito</option>
+          <option value="fora" {{ 'selected' if evidencia == 'fora' }}>outras bancas</option>
+          <option value="lote" {{ 'selected' if evidencia == 'lote' }}>provas novas de 17/10</option>
         </select>
       </label>
+      {% if evidencia == 'lote' %}
+      <label class="ds-campo">Parte
+        <select name="parte">
+          <option value="amostra" {{ 'selected' if parte != 'pendentes' }}>a amostra do lote</option>
+          <option value="pendentes" {{ 'selected' if parte == 'pendentes' }}>as pendentes</option>
+        </select>
+      </label>
+      {% else %}
       <label class="ds-campo">Matéria
         <select name="materia">
           <option value="">todas</option>
@@ -106,11 +189,14 @@
           {% endfor %}
         </select>
       </label>
+      {% endif %}
       <label class="ds-campo caixa"><input type="checkbox" name="abertas" value="1" {{ 'checked' if abertas }}> só as não conferidas</label>
+      {% if evidencia != 'lote' %}
       <label class="ds-campo caixa"><input type="checkbox" name="anuladas" value="1" {{ 'checked' if anuladas }}> mostrar as anuladas</label>
+      {% endif %}
       {% if evidencia == 'complementar' %}
       <label class="ds-campo caixa"><input type="checkbox" name="amostra" value="1" {{ 'checked' if amostra }}> só a amostra do catálogo</label>
-      {% else %}
+      {% elif evidencia == 'alvo' %}
       <label class="ds-campo caixa"><input type="checkbox" name="associados" value="1" {{ 'checked' if associados }}> só com associado por conferir</label>
       {% endif %}
       <button class="ds-botao" type="submit">Filtrar</button>
@@ -125,9 +211,12 @@
     {% set c = q.classificacao %}
     <article class="ds-cartao questao {{ 'conferida' if q.conferida }}" id="q-{{ q.chave }}">
       <div>
-        <h3>{{ q.codigo }} · {{ q.materia_do_caderno or 'sem matéria' }}
+        <h3>{% if q.grupo %}<span class="ds-selo">{{ q.grupo }}</span> {% endif %}{{ q.codigo }} · {{ q.materia_do_caderno or 'sem matéria' }}
           {% if q.anulada %}<span class="ds-selo">anulada pela banca</span>{% endif %}
           {% if q.na_amostra %}<span class="ds-selo">🟡 na amostra</span>{% endif %}
+          {% if q.tipo == 'confirmada' %}<span class="ds-selo">✓ confirmada</span>
+          {% elif q.tipo == 'ajuste' %}<span class="ds-selo">ajuste (não conta como erro)</span>
+          {% elif q.tipo == 'erro' %}<span class="ds-selo">✗ erro da 2ª leitura</span>{% endif %}
           {% if q.conferida %}<span class="ds-selo">✓ conferida{% if c.conferida_por %} pelo {{ c.conferida_por }}{% endif %}</span>{% endif %}
         </h3>
         {% if q.outros_cadernos %}
@@ -137,20 +226,55 @@
         <p class="enunciado">{{ q.enunciado }}</p>
         <ul class="alternativas">
           {% for letra, texto in q.alternativas.items() %}
+            {% if q.respondida %}
             <li class="{{ 'certa' if letra == q.gabarito }}">{{ letra }}) {{ texto }}{% if letra == q.gabarito %} ← gabarito{% endif %}</li>
+            {% else %}
+            <li>{{ letra }}) {{ texto }}</li>
+            {% endif %}
           {% endfor %}
         </ul>
+        {% if not q.respondida %}
+          <p class="escondida">Letra do gabarito escondida: você ainda não respondeu esta questão no radar.</p>
+          {% if q.gabarito and not q.anulada %}
+          <form method="post" action="/analises/conferencia/responder">
+            <input type="hidden" name="chave" value="{{ q.chave }}">
+            {{ filtros_ocultos() }}
+            <button class="ds-botao ds-botao--secundario">Responder no radar</button>
+          </form>
+          {% endif %}
+        {% endif %}
       </div>
       <div class="proposta">
         {% if c %}
           <dl>
             <dt>Nó</dt><dd class="caminho">{{ c.conteudo }}</dd>
             <dt>Status</dt><dd>{{ c.status }}</dd>
+            {% set l = q.do_lote %}
+            {% if l %}
+              {% if l.categoria in ('a', 'b') %}
+              <dt>2ª leitura</dt><dd>conferiu {{ l.no_conferido }}</dd>
+              {% elif l.categoria == 'pendente nas duas' %}
+              <dt>2ª leitura</dt><dd>pendente nas duas leituras: sem lugar no programa de 2019</dd>
+              {% endif %}
+              {% if l.categoria == 'c' or l.primeira or l.segunda %}
+              <dt>1ª leitura</dt><dd>{{ l.primeira or 'pendente' }}</dd>
+              <dt>2ª, às cegas</dt><dd>{{ l.segunda or 'pendente' }}{% if l.confianca %} ({{ l.confianca }}){% endif %}</dd>
+              {% endif %}
+              {% if l.categoria == 'fora do treino' %}
+              <dt>Fora do treino</dt><dd>{{ l.motivo }}</dd>
+              {% endif %}
+            {% endif %}
             {% if c.tipo_de_questao %}<dt>Tipo</dt><dd>{{ c.tipo_de_questao }}</dd>{% endif %}
+            {% if q.respondida %}
             {% if c.pegadinha %}<dt>Pegadinha</dt><dd>{{ c.pegadinha }}</dd>{% endif %}
             {% if c.trecho %}<dt>Trecho</dt><dd>{{ c.trecho }}</dd>{% endif %}
+            {% endif %}
             {% if c.item_do_edital %}<dt>Item do edital</dt><dd>{{ c.item_do_edital }}</dd>{% endif %}
+            {% if q.respondida %}
             {% if c.dispositivo %}<dt>Dispositivo</dt><dd>{{ c.dispositivo }}</dd>{% endif %}
+            {% elif c.pegadinha or c.trecho or c.dispositivo %}
+            <dt>Escondido</dt><dd class="escondida">o dispositivo, a pegadinha e o trecho, até você responder</dd>
+            {% endif %}
             <dt>Quem</dt><dd>{{ c.procedencia }}{% if 'catálogo automático' in (c.procedencia or '') %}
               <br><span class="ds-suave">🟡 classificação automática, conferida por amostra:
               confira {{ t.tamanho_da_amostra }} por matéria; se a taxa de erro for alta, o lote volta.</span>{% endif %}</dd>
@@ -163,21 +287,13 @@
           {% if c %}
             <form method="post" action="/analises/conferencia">
               <input type="hidden" name="chave" value="{{ q.chave }}">
-              <input type="hidden" name="materia" value="{{ materia }}">
-              <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
-              <input type="hidden" name="evidencia" value="{{ evidencia }}">
-              <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
-              <input type="hidden" name="associados" value="{{ '1' if associados }}">
+              {{ filtros_ocultos() }}
               <button class="ds-botao" name="acao" value="confirmar">Confirmar</button>
             </form>
           {% endif %}
           <form method="post" action="/analises/conferencia">
             <input type="hidden" name="chave" value="{{ q.chave }}">
-            <input type="hidden" name="materia" value="{{ materia }}">
-            <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
-            <input type="hidden" name="evidencia" value="{{ evidencia }}">
-            <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
-              <input type="hidden" name="associados" value="{{ '1' if associados }}">
+            {{ filtros_ocultos() }}
             <select name="conteudo" aria-label="Corrigir para">
               {% for opcao in q.opcoes %}
                 <option value="{{ opcao }}" {{ 'selected' if c and opcao == c.conteudo }}>{{ opcao }}</option>
@@ -188,11 +304,7 @@
           {% if c %}
             <form method="post" action="/analises/conferencia">
               <input type="hidden" name="chave" value="{{ q.chave }}">
-              <input type="hidden" name="materia" value="{{ materia }}">
-              <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
-              <input type="hidden" name="evidencia" value="{{ evidencia }}">
-              <input type="hidden" name="amostra" value="{{ '1' if amostra }}">
-              <input type="hidden" name="associados" value="{{ '1' if associados }}">
+              {{ filtros_ocultos() }}
               <input type="text" name="motivo" placeholder="por que fica pendente" aria-label="Motivo da pendência">
               <button class="ds-botao ds-botao--secundario" name="acao" value="pendente">Pendente</button>
             </form>
@@ -212,10 +324,7 @@
               <form method="post" action="/analises/conferencia">
                 <input type="hidden" name="chave" value="{{ q.chave }}">
                 <input type="hidden" name="conteudo" value="{{ a.conteudo }}">
-                <input type="hidden" name="materia" value="{{ materia }}">
-                <input type="hidden" name="abertas" value="{{ '1' if abertas }}">
-                <input type="hidden" name="evidencia" value="{{ evidencia }}">
-                <input type="hidden" name="associados" value="{{ '1' if associados }}">
+                {{ filtros_ocultos() }}
                 {% if not a.conferida_em %}<button class="ds-botao" name="acao" value="associado_confirmar">Confirmar</button>{% endif %}
                 <button class="ds-botao ds-botao--secundario" name="acao" value="associado_tirar">Tirar</button>
               </form>

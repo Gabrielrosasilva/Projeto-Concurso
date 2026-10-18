@@ -23,6 +23,14 @@ PROGRAMA = edital_programa.ler_programa(
 IMPUTABILIDADE = "Imputabilidade penal"
 
 
+@pytest.fixture(autouse=True)
+def _nada_guardado(monkeypatch):
+    """A reserva das rodadas que medem depende do dia e do plano real: aqui
+    nada esta guardado, e a conferencia lista tudo (decisao 173)."""
+    from radar.servico import conferencia_do_lote
+    monkeypatch.setattr(conferencia_do_lote, "reservadas", lambda hoje=None: set())
+
+
 def _questao(ano, numero, materia, anulada=False):
     return QuestaoDeProva(
         prova_url=f"https://fepese.test/{ano}.pdf", banca="FEPESE", ano=ano,
@@ -398,7 +406,9 @@ def test_a_tela_mostra_a_proposta_e_grava_a_decisao(alvo):
 
     texto = cliente.get("/analises/conferencia?materia=Direito+Penal").text
     assert "Questão 51 de 2019 sobre Direito Penal?" in texto
-    assert "← gabarito" in texto and "Direito Penal &gt; Imputabilidade penal" in texto
+    assert "Direito Penal &gt; Imputabilidade penal" in texto
+    # Ainda nao respondi no radar: a letra fica escondida (decisao 173).
+    assert "← gabarito" not in texto and "Responder no radar" in texto
     assert "0 de 5" in texto                      # 6 do alvo, 1 anulada
     assert "2013-q11" not in texto                # o filtro da materia
 

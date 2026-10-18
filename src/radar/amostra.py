@@ -93,6 +93,11 @@ class Minimos:
     #: pendencia B.8). Tambem da secao `acervo`: fala da classificacao dele.
     amostra_do_catalogo: int = 20
 
+    #: A amostra do que a segunda leitura conferiu num lote, por grupo, e as
+    #: seguintes que um erro pede (decisao 173). Tambem da secao `acervo`.
+    amostra_do_lote: int = 10
+    amostra_do_lote_extra: int = 10
+
     #: As primeiras respostas que o treino de IA precisa em cada nivel (secao
     #: `treino_ia`, decisao 152). Nunca se mistura com `por_nivel`: a gerada
     #: treina, e o minimo dela e outra regua.
@@ -151,6 +156,9 @@ def carregar(caminho: Path | None = None) -> Minimos:
             acervo.get("provas_para_tendencia", PADRAO.provas_para_tendencia)),
         amostra_do_catalogo=int(
             acervo.get("amostra_do_catalogo", PADRAO.amostra_do_catalogo)),
+        amostra_do_lote=int(acervo.get("amostra_do_lote", PADRAO.amostra_do_lote)),
+        amostra_do_lote_extra=int(
+            acervo.get("amostra_do_lote_extra", PADRAO.amostra_do_lote_extra)),
         treino_ia=treino_ia,
     )
 

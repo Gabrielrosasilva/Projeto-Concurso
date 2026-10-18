@@ -6110,3 +6110,76 @@ viraram estudo extra "Onde: Radar". Copia antes em
      Publica 64, Penal 55, Legislacao Especial 53, Processo Penal 36,
      Direitos Humanos 34, LEP 21. As duas da PC SC 2026 (Idecan, Escrivao e
      Agente, Tipo A, lidas 100 de 100 cada) esperam o link original.
+
+## A tela da amostra das provas novas (pedido de 18/10/2026)
+
+173. **a classificacao das provas novas se confere por amostra, um grupo de
+     cada vez, na tela de conferencia, e a letra do gabarito so aparece na
+     questao que eu ja respondi no radar** (pedido de 18/10, "A tela da
+     amostra das provas novas"). As regras:
+     - **quatro recortes, nunca juntos** (Analises > Conferencia, filtro da
+       evidencia): o alvo, o complementar aceito, as **outras bancas**
+       (evidencia `fora`, uma linha por classificacao, com a banca, o ano e o
+       cargo de cada questao) e as **provas novas de 17/10**;
+     - **o lote e uma lista de chaves** (`data/lotes_de_classificacao.json`), e
+       nao a procedencia: a regra b da 171 trocou a procedencia das que foram
+       para o no em comum, e o lote de 18/10 (decisao 172) usou a mesma da
+       reanalise. Cada item guarda o grupo, a categoria da 171 e o no que a
+       segunda leitura conferiu (`no_conferido`): e contra ele que se mede o
+       erro, mesmo depois que eu corrijo;
+     - **a amostra** de cada grupo (FEPESE, NC-UFPR e Selecon, Cebraspe, IESES)
+       sai do que a segunda leitura decidiu sozinha: o mesmo no (regra a), o no
+       em comum (regra b) e a pendente nas duas leituras. A pendente entra
+       porque o pedido conta como erro "a pendente que tinha lugar no programa
+       de 2019": sem ela, essa metade da regra nunca seria testada. A ordem e a
+       do hash da chave, sempre a mesma (decisao 87), uma por questao
+       (`outras_bancas.mesma_questao`: a IESES poe a mesma questao em ate 17
+       cadernos), e os tamanhos sao os do `config/amostra.yml`
+       (`amostra_do_lote: 10`, `amostra_do_lote_extra: 10`);
+     - **a regra** (`conferencia_do_lote.resultado_do_grupo`): nas 10
+       primeiras, nenhum erro e o grupo passa; 2 erros e ele volta, mesmo antes
+       de acabar as 10; 1 erro e a tela abre as 10 seguintes, e o grupo so
+       passa se nao houver outro. **Erro** e o no que muda a faixa de treino
+       (outra materia, outro assunto, outro subassunto), a pendente que eu
+       classifico e a classificada que eu deixo pendente. **Ajuste** (eu
+       corrijo, e nao conta como erro) e descer no mesmo ramo a partir do
+       assunto - do assunto para o subassunto, do subassunto para o artigo - e
+       subir sem sair do subassunto (do artigo para ele); subir do subassunto
+       para o assunto e erro, porque a questao sai da faixa do subassunto.
+       **Conferida, aqui, e por mim**: a marca da segunda leitura
+       (`conferida_por`) nao conta, e confirmar, corrigir ou deixar pendente a
+       apaga;
+     - **o grupo que volta**: a tela diz, no grupo, que num pedido seu, depois,
+       o Claude Code classifica de novo o grupo inteiro, uma a uma, com as suas
+       correcoes como exemplo do que deu errado, e voce confere a mesma
+       amostra outra vez (decisao 87). Nada disso roda sozinho;
+     - **as pendentes do lote** - as 29 em que as leituras discordam (regra c)
+       e as 8 fora do treino pela data da prova, a lista unica do
+       [conferir_classificacoes](conferir_classificacoes.md) - aparecem na
+       mesma tela (Parte: as pendentes), com as duas leituras, a confianca e o
+       motivo, e o filtro "so as nao conferidas"; corrigir pode ir para a
+       materia de qualquer das leituras;
+     - **a letra escondida** (a regra da 148, em todo recorte): na questao que
+       eu ainda nao respondi no radar, a tela nao mostra a letra do gabarito, o
+       dispositivo, a pegadinha nem o trecho (o trecho da classificacao
+       costuma dizer qual e a certa). O **"Responder no radar"** abre uma
+       rodada so com aquela questao (`rodada: conferencia`), como treino: ela
+       corrige na hora e conta como resposta real, como qualquer treino com
+       questao real; depois de responder, a letra aparece na conferencia. A
+       mesma questao em outro caderno conta como respondida;
+     - **a questao guardada para uma rodada que mede**
+       (`composicao.reserva_das_que_medem`) nao aparece em recorte nenhum nem
+       abre no "Responder no radar" enquanto a rodada nao for feita: a amostra
+       pula a guardada e pega a seguinte, e a tela diz quantas ficaram de fora
+       por isso. No dado de 18/10: 38 do alvo e 12 do complementar (as 50 do
+       fechamento de 07/11), nenhuma do lote;
+     - **no Ciclo 2**: a minha conferencia (a amostra dos quatro grupos e as
+       pendentes) entra como faixa de uns 20 minutos por semana, ate acabar
+       (pendencia D).
+     No dado de 18/10 a segunda leitura decidiu sozinha 603 das 640: FEPESE
+     79, NC-UFPR e Selecon 136, Cebraspe 206 e IESES 182 (41 questoes); a
+     amostra mostra 40 (10 por grupo, ainda sem nenhuma conferida), e as
+     pendentes sao 37. As 5 pendentes do lote de 18/10 (decisao 172) nao
+     estao neste lote: aparecem no recorte das outras bancas, com "so as nao
+     conferidas". Nos testes a reserva e trocada (`conferencia_do_lote.reservadas`):
+     ela depende do dia e do plano real.

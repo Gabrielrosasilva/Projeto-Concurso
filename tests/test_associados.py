@@ -30,6 +30,14 @@ PROGRAMA = edital_programa.ler_programa(
 PENAL = "Direito Penal"
 
 
+@pytest.fixture(autouse=True)
+def _nada_guardado(monkeypatch):
+    """A reserva das rodadas que medem depende do dia e do plano real: aqui
+    nada esta guardado, e a conferencia lista tudo (decisao 173)."""
+    from radar.servico import conferencia_do_lote
+    monkeypatch.setattr(conferencia_do_lote, "reservadas", lambda hoje=None: set())
+
+
 def _questao(numero):
     return QuestaoDeProva(
         prova_url="https://fepese.test/2019.pdf", banca="FEPESE", ano=2019,

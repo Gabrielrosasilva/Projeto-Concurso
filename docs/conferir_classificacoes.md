@@ -3,7 +3,8 @@
 É a lista única do que espera a sua conferência, em três partes:
 
 - **as provas novas de 17/10** (decisão 171): 29 pendentes e 8 fora do treino pela
-  data da prova, a conferir só depois de 07/11;
+  data da prova, e a amostra do que a segunda leitura decidiu sozinha (10 por
+  grupo, decisão 173), a conferir no Ciclo 2;
 - **as provas baixadas à mão de 18/10** (decisão 172): 5 pendentes, também só
   depois de 07/11;
 - **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
@@ -12,16 +13,20 @@
 
 As outras já estão conferidas, por você ou pela segunda leitura às cegas.
 
-Tela: Análises > Conferência, filtro da evidência e "só as não conferidas".
-Para cada uma: confirmar a de hoje, ou corrigir para a da segunda leitura (ou
-para outra).
+Tela: Análises > Conferência, filtro da evidência e "só as não conferidas". As
+de 17/10 têm a evidência própria, "provas novas de 17/10", com a amostra de cada
+grupo e as pendentes (decisão 173); as de 18/10 ficam em "outras bancas". Para
+cada uma: confirmar a de hoje, ou corrigir para a da segunda leitura (ou para
+outra).
 
 ## As provas novas de 17/10: 29 pendentes até a sua conferência (decisão 171)
 
-**Confira só depois de 07/11**: a tela de conferência mostra a letra do gabarito,
-e estas são questões que você ainda vai responder. Por isso esta lista não traz a
-justificativa das leituras (ela costuma dizer qual é a certa); a tela traz. Até lá
-elas ficam pendentes: não treinam nem entram no fechamento.
+**Confira no Ciclo 2**, uns 20 minutos por semana (decisão 173): estas são
+questões que você ainda vai responder, e por isso a tela de conferência esconde a
+letra do gabarito, o dispositivo e a pegadinha até você responder no radar (o
+botão "Responder no radar" abre só aquela questão, como treino). Pelo mesmo
+motivo esta lista não traz a justificativa das leituras (ela costuma dizer qual é
+a certa). Até lá elas ficam pendentes: não treinam nem entram no fechamento.
 
 As 640 classificações das provas novas foram lidas de novo às cegas, em 11 leituras
 independentes, só com os caminhos da árvore: 435 caíram no mesmo nó (conferidas pelo

@@ -136,6 +136,9 @@ from radar.servico import fepese_no_radar  # noqa: F401 - usado pela web
 # O Simulado da semana dos sabados leves: treina, nao mede (decisao 170).
 # `servico.simulado_da_semana.das_faixas(...)`.
 from radar.servico import simulado_da_semana  # noqa: F401 - usado pela web e CLI
+# A amostra do lote das provas novas e o "Responder no radar" da conferencia
+# (decisao 173). `servico.conferencia_do_lote.criar_rodada_da_questao(...)`.
+from radar.servico import conferencia_do_lote  # noqa: F401 - usado pela web
 # A rodada da revisao espacada, 1-7-30 dias, com os nos da fila do `estudo`
 # (decisao 128). `servico.espacada.criar_simulado_de_revisao()`.
 from radar.servico import espacada      # noqa: F401 - usado pela web e CLI

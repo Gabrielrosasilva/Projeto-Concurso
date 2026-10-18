@@ -46,6 +46,11 @@ acervo:
   # Analises > Conferencia. Se a taxa de erro da amostra for alta, o lote
   # volta (pendencia B.8).
   amostra_do_catalogo: 20
+  # A amostra do que a segunda leitura as cegas conferiu num lote (as provas
+  # novas de 17/10, decisao 173), por grupo: confiro as primeiras; com 1 erro,
+  # mais estas. Nenhum erro, o grupo passa; 2 ou mais, volta.
+  amostra_do_lote: 10
+  amostra_do_lote_extra: 10
 
 desempenho:
   # Quantas respostas SEM CONSULTA cada nivel da arvore precisa ter para o

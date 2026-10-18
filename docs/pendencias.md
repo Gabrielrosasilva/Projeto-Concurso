@@ -211,6 +211,11 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   - em **13/11**: a R+7 de Problemas aritmeticos e geometricos (06/11);
   - e decidir se o sabado de 2 horas e o Raciocinio na sexta continuam no
     Ciclo 2 (a decisao 170 vale ate 07/11);
+  **A minha conferencia das provas novas** (decisao 173) entra no Ciclo 2
+  como **faixa de uns 20 minutos por semana, ate acabar**: a amostra dos
+  quatro grupos (FEPESE, NC-UFPR e Selecon, Cebraspe, IESES; 10 por grupo,
+  mais 10 no grupo com 1 erro) e as pendentes da regra c com as 8 fora do
+  treino (37), na Analises > Conferencia, evidencia "provas novas de 17/10";
 - 🟡 **Notificacao do Windows**: funciona (teste de 10 s e configuracoes do
   Windows conferidas), mas falta liberar a permissao no navegador;
 - ⚪ **O que ficou sem acento de proposito** (decisao 93): a descricao de
@@ -708,8 +713,15 @@ O que falta vai nesta ordem, uma etapa por conversa.
 ### Depende de voce (decisoes 167 e 168)
 
 - ⚪ **Reinicie o servidor** depois do `git pull` (a tela Hoje mudou de novo);
-- ⚪ **Conferir a classificacao das provas novas** (Analises > Conferencia),
-  **so depois de 07/11** (a tela mostra o gabarito): das 640 de 17/10, a
+- ⚪ **Conferir a classificacao das provas novas** (Analises > Conferencia,
+  evidencia "provas novas de 17/10", decisao 173), **no Ciclo 2**, uns 20
+  minutos por semana (pendencia D). A tela mostra a amostra de cada grupo e
+  a conta (conferidas, ajustes, erros e se o grupo passa ou volta), e as
+  pendentes na Parte "as pendentes"; a letra do gabarito, o dispositivo e a
+  pegadinha so aparecem depois do "Responder no radar", e a questao guardada
+  para o fechamento de 07/11 fica de fora. Grupo que volta: peca ao Claude
+  Code que classifique de novo o grupo inteiro, com as suas correcoes como
+  exemplo, e confira a mesma amostra outra vez. Das 640 de 17/10, a
   segunda leitura as cegas de 18/10 (decisao 171) conferiu 532 - 435 no
   mesmo no e 97 no no em comum das duas leituras. Ficam 108 pendentes, que
   nao treinam nem medem: as 29 em que as leituras discordam estao na lista
@@ -746,6 +758,13 @@ O que falta vai nesta ordem, uma etapa por conversa.
   distribuido ou utilizado sem autorizacao expressa do IBADE". O IBADE tem o
   Agente Socioeducativo AC 2021 e o Inspetor Penitenciario ES 2023, e o robo
   pode ler. Entra ou nao e escolha sua;
+- ✅ **A tela da amostra das provas novas** (decisao 173, 18/10): os recortes
+  "outras bancas" e "provas novas de 17/10" na conferencia, a amostra por
+  grupo com a regra (10, e mais 10 com 1 erro; os tamanhos no
+  `config/amostra.yml`), as pendentes no mesmo lugar, a letra escondida ate o
+  "Responder no radar" e a guardada para uma rodada que mede fora da lista.
+  As 5 pendentes do lote de 18/10 ficam no recorte "outras bancas", com "so
+  as nao conferidas";
 - ✅ **Os PDFs que so dao a mao**: voce os baixou em 17/10 (decisao 172).
   Os termos da FGV proibem robo e "reproduzir, duplicar, copiar": o PDF fica
   so na sua maquina (`data\provas\manual\`, fora do git), e os testes usam

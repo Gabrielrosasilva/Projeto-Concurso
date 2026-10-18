@@ -781,6 +781,16 @@ class ItemDeConferencia:
     na_amostra: bool = False
     #: Os conceitos associados (classificacoes NAO principais), com o trecho.
     associados: list = field(default_factory=list)
+    #: Ja respondi esta questao no radar? Sem isso, a tela nao mostra a letra
+    #: do gabarito, o dispositivo, a pegadinha nem o trecho (decisao 173, a
+    #: regra da 148): eu veria a resposta de questao que ainda vou responder.
+    respondida: bool = False
+    #: No lote (decisao 173): o grupo, o que a segunda leitura conferiu ou as
+    #: duas leituras (`conferencia_do_lote.ItemDoLote`), e o que a minha
+    #: conferencia foi - confirmada, ajuste ou erro.
+    grupo: str | None = None
+    do_lote: object = None
+    tipo: str | None = None
 
     @property
     def associados_abertos(self) -> int:
@@ -788,6 +798,12 @@ class ItemDeConferencia:
 
     @property
     def conferida(self) -> bool:
+        if self.do_lote is not None:
+            # No lote, conferida e por MIM: a marca da segunda leitura e o
+            # que a amostra confere (decisao 173).
+            from radar.servico.conferencia_do_lote import conferida_por_mim
+
+            return conferida_por_mim(self.classificacao)
         return self.classificacao is not None and self.classificacao.conferida_em is not None
 
 
@@ -817,12 +833,35 @@ class Conferencia:
     #: Os conceitos associados do recorte inteiro, e quantos ja conferi.
     associados: int = 0
     associados_conferidos: int = 0
+    #: As questoes que uma rodada que mede ainda vai usar: nao aparecem
+    #: (decisao 173), e a tela diz quantas.
+    fora_por_reserva: int = 0
+    #: No lote: os grupos da amostra, o nome do lote e a parte mostrada.
+    grupos: list = field(default_factory=list)
+    lote: str | None = None
+    parte: str = "amostra"
+
+
+@dataclass
+class _Contexto:
+    """O que toda conferencia precisa saber para esconder e para pular."""
+
+    respondidas: set
+    reservadas: set
+
+    @classmethod
+    def ler(cls) -> "_Contexto":
+        from radar.servico import conferencia_do_lote
+
+        return cls(respondidas=conferencia_do_lote.chaves_respondidas(),
+                   reservadas=conferencia_do_lote.reservadas())
 
 
 def conferencia(materia: str | None = None, so_abertas: bool = False,
                 com_anuladas: bool = False, evidencia_escolhida: str = "alvo",
                 so_amostra: bool = False,
-                so_associados_abertos: bool = False) -> Conferencia:
+                so_associados_abertos: bool = False,
+                parte: str = "amostra", contexto: _Contexto | None = None) -> Conferencia:
     """As questoes com a proposta ao lado, para eu conferir uma a uma.
 
     `materia` filtra pelo no da materia (o do caderno ou o da classificacao);
@@ -832,16 +871,27 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
     Os totais sao sempre do recorte inteiro, com e sem as anuladas: e eles que
     dizem quanto falta.
 
-    `evidencia_escolhida` e o recorte: o alvo (o padrao) ou o complementar
-    aceito, nunca os dois juntos (regra inviolavel 1). `so_amostra` so vale no
-    complementar: a amostra das propostas do catalogo. `so_associados_abertos`
-    deixa so as questoes do alvo com conceito associado por conferir.
+    `evidencia_escolhida` e o recorte: o alvo (o padrao), o complementar
+    aceito, as outras bancas ("fora") ou o lote das provas novas ("lote"),
+    nunca juntos (regra inviolavel 1). `so_amostra` so vale no complementar: a
+    amostra das propostas do catalogo. `so_associados_abertos` deixa so as
+    questoes do alvo com conceito associado por conferir. `parte`, no lote: a
+    amostra ou as pendentes.
+
+    Em todo recorte (decisao 173): a questao que uma rodada que mede ainda vai
+    usar nao aparece, e a que eu nao respondi no radar vem sem a letra.
     """
     from radar import amostra as regua
     from radar.servico import evidencia
 
+    contexto = contexto or _Contexto.ler()
+    if evidencia_escolhida == "lote":
+        return _conferencia_do_lote(so_abertas, parte, contexto)
+    if evidencia_escolhida == evidencia.FORA:
+        return _conferencia_de_outras_bancas(materia, so_abertas, com_anuladas, contexto)
     if evidencia_escolhida == evidencia.COMPLEMENTAR:
-        return _conferencia_do_complementar(materia, so_abertas, com_anuladas, so_amostra)
+        return _conferencia_do_complementar(materia, so_abertas, com_anuladas, so_amostra,
+                                            contexto)
 
     taxonomia = arvore.carregar_taxonomia()
     criar_tabelas()
@@ -861,9 +911,9 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
                             tamanho_da_amostra=regua.carregar().amostra_do_catalogo)
     materias = set()
     for q in questoes:
-        c = principais.get(chave_de(q))
-        do_caderno = (arvore.achar(caminhos, q.materia)
-                      or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
+        chave = chave_de(q)
+        c = principais.get(chave)
+        do_caderno = _materia_do_caderno(caminhos, taxonomia, q)
         da_classificacao = arvore.partes(c.conteudo)[0] if c else None
         raiz = da_classificacao or do_caderno
         if raiz:
@@ -872,34 +922,47 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
         resultado.validas += not q.anulada
         resultado.conferidas += conferida
         resultado.conferidas_validas += conferida and not q.anulada
-        dela = associados.get(chave_de(q), [])
+        dela = associados.get(chave, [])
         resultado.associados += len(dela)
         resultado.associados_conferidos += sum(1 for a in dela if a.conferida_em)
         if materia and materia not in (do_caderno, da_classificacao):
+            continue
+        if q.anulada and not com_anuladas:
+            continue
+        if chave in contexto.reservadas:
+            resultado.fora_por_reserva += 1
             continue
         if so_abertas and conferida:
             continue
         if so_associados_abertos and not any(a.conferida_em is None for a in dela):
             continue
-        if q.anulada and not com_anuladas:
-            continue
         # A materia do caderno e a da classificacao (quando a de 2013 foi para
         # um assunto de 2019): corrigir pode ir para qualquer uma das duas.
-        raizes = {r for r in (do_caderno, da_classificacao) if r}
-        opcoes = [cam for cam in caminhos
-                  if any(cam == r or cam.startswith(r + arvore.SEPARADOR) for r in raizes)]
         resultado.itens.append(ItemDeConferencia(
-            codigo=f"{q.ano}-q{q.numero}", chave=chave_de(q),
+            codigo=f"{q.ano}-q{q.numero}", chave=chave,
             materia_do_caderno=q.materia, enunciado=q.enunciado,
             alternativas=q.alternativas or {}, gabarito=q.resposta,
-            anulada=bool(q.anulada), classificacao=c, opcoes=opcoes,
-            associados=dela))
+            anulada=bool(q.anulada), classificacao=c,
+            opcoes=_opcoes(caminhos, (do_caderno, da_classificacao)),
+            associados=dela, respondida=chave in contexto.respondidas))
     resultado.materias = sorted(materias)
     return resultado
 
 
+def _opcoes(caminhos: list[str], raizes) -> list[str]:
+    """Os nos para onde corrigir: cada raiz dada e tudo abaixo dela."""
+    raizes = {r for r in raizes if r}
+    return [cam for cam in caminhos
+            if any(cam == r or cam.startswith(r + arvore.SEPARADOR) for r in raizes)]
+
+
+def _materia_do_caderno(caminhos, taxonomia, q) -> str | None:
+    return (arvore.achar(caminhos, q.materia)
+            or arvore.achar(caminhos, taxonomia.materia_do_texto(q.materia)))
+
+
 def _conferencia_do_complementar(materia, so_abertas, com_anuladas,
-                                 so_amostra) -> Conferencia:
+                                 so_amostra, contexto: _Contexto) -> Conferencia:
     """O complementar ACEITO, uma linha por classificacao.
 
     A mesma questao aparece em varios cadernos do mesmo concurso (um por
@@ -951,25 +1014,165 @@ def _conferencia_do_complementar(materia, so_abertas, com_anuladas,
             continue
         if so_amostra and chave not in na_amostra:
             continue
-        if so_abertas and conferida:
-            continue
         if q.anulada and not com_anuladas:
             continue
-        raizes = {r for r in (do_caderno, da_classificacao) if r}
-        opcoes = [cam for cam in caminhos
-                  if any(cam == r or cam.startswith(r + arvore.SEPARADOR) for r in raizes)]
+        if chave in contexto.reservadas:
+            resultado.fora_por_reserva += 1
+            continue
+        if so_abertas and conferida:
+            continue
         resultado.itens.append(ItemDeConferencia(
             codigo=(f"{q.banca} {q.ano} · {q.municipio or 'sem município'} · "
                     f"{q.cargo or 'sem cargo'} · q{q.numero}"),
             chave=chave, materia_do_caderno=q.materia, enunciado=q.enunciado,
             alternativas=q.alternativas or {}, gabarito=q.resposta,
-            anulada=bool(q.anulada), classificacao=c, opcoes=opcoes,
-            outros_cadernos=len(mesma) - 1, na_amostra=chave in na_amostra))
+            anulada=bool(q.anulada), classificacao=c,
+            opcoes=_opcoes(caminhos, (do_caderno, da_classificacao)),
+            outros_cadernos=len(mesma) - 1, na_amostra=chave in na_amostra,
+            respondida=chave in contexto.respondidas))
     if so_amostra:
         # Na ordem da amostra: a mesma a cada abertura da tela.
         ordem = {chave: i for i, chave in enumerate(escolhidas)}
         resultado.itens.sort(key=lambda item: ordem[item.chave])
     resultado.materias = sorted(materias)
+    return resultado
+
+
+def _questoes_por_chave(s, chaves: set[str] | None = None,
+                        evidencia_de: str | None = None) -> dict[str, list]:
+    """{chave: [questoes]} - a mesma chave pode estar em varios cadernos."""
+    consulta = select(QuestaoDeProva).order_by(QuestaoDeProva.banca, QuestaoDeProva.ano,
+                                               QuestaoDeProva.cargo, QuestaoDeProva.numero)
+    if evidencia_de:
+        consulta = consulta.where(QuestaoDeProva.evidencia == evidencia_de)
+    por_chave: dict[str, list] = {}
+    for q in s.scalars(consulta):
+        chave = chave_de(q)
+        if chaves is None or chave in chaves:
+            por_chave.setdefault(chave, []).append(q)
+    return por_chave
+
+
+def _codigo_de_outra_banca(q) -> str:
+    """A banca, o ano e o cargo: o que a tela de outras bancas pede (decisao 173)."""
+    return f"{q.banca or 'sem banca'} {q.ano or ''} · {q.cargo or 'sem cargo'} · q{q.numero}"
+
+
+def _respondidas_pela_identidade(por_chave: dict, respondidas: set[str]) -> set[str]:
+    """As chaves respondidas, e as das outras versoes da mesma questao: quem
+    respondeu um caderno da IESES respondeu a questao em todos."""
+    from radar.servico import outras_bancas
+
+    identidade = {chave: outras_bancas.mesma_questao(qs[0]) for chave, qs in por_chave.items()}
+    feitas = {identidade[chave] for chave in por_chave if chave in respondidas}
+    return {chave for chave, ident in identidade.items() if ident in feitas}
+
+
+def _conferencia_de_outras_bancas(materia, so_abertas, com_anuladas,
+                                  contexto: _Contexto) -> Conferencia:
+    """As outras bancas (evidencia `fora`), uma linha por classificacao, com a
+    banca, o ano e o cargo. Nunca junto do alvo nem do complementar."""
+    from radar.servico import evidencia
+
+    taxonomia = arvore.carregar_taxonomia()
+    criar_tabelas()
+    with sessao() as s:
+        caminhos = list(s.scalars(select(Conteudo.caminho)))
+        principais = {c.chave: c for c in s.scalars(
+            select(Classificacao).where(Classificacao.principal.is_(True)))}
+        por_chave = {chave: qs for chave, qs in
+                     _questoes_por_chave(s, evidencia_de=evidencia.FORA).items()
+                     if chave in principais}
+    respondidas = _respondidas_pela_identidade(por_chave, contexto.respondidas)
+    resultado = Conferencia(itens=[], total=len(por_chave), evidencia=evidencia.FORA)
+    materias = set()
+    for chave, mesma in por_chave.items():
+        q, c = mesma[0], principais[chave]
+        da_classificacao = arvore.partes(c.conteudo)[0]
+        do_caderno = _materia_do_caderno(caminhos, taxonomia, q)
+        materias.add(da_classificacao)
+        conferida = c.conferida_em is not None
+        resultado.validas += not q.anulada
+        resultado.conferidas += conferida
+        resultado.conferidas_validas += conferida and not q.anulada
+        if materia and materia not in (do_caderno, da_classificacao):
+            continue
+        if q.anulada and not com_anuladas:
+            continue
+        if chave in contexto.reservadas:
+            resultado.fora_por_reserva += 1
+            continue
+        if so_abertas and conferida:
+            continue
+        resultado.itens.append(ItemDeConferencia(
+            codigo=_codigo_de_outra_banca(q), chave=chave, materia_do_caderno=q.materia,
+            enunciado=q.enunciado, alternativas=q.alternativas or {}, gabarito=q.resposta,
+            anulada=bool(q.anulada), classificacao=c,
+            opcoes=_opcoes(caminhos, (do_caderno, da_classificacao)),
+            outros_cadernos=len(mesma) - 1, respondida=chave in respondidas))
+    resultado.materias = sorted(materias)
+    return resultado
+
+
+def _conferencia_do_lote(so_abertas: bool, parte: str, contexto: _Contexto) -> Conferencia:
+    """O lote das provas novas de 17/10 (decisao 173): a amostra de cada grupo,
+    ou as pendentes que esperam a minha conferencia uma a uma (`parte`).
+
+    Conferida, aqui, e conferida por MIM: a marca da segunda leitura e o que a
+    amostra confere."""
+    from radar.servico import conferencia_do_lote as do_lote
+    from radar.servico import outras_bancas
+
+    resultado = Conferencia(itens=[], evidencia="lote",
+                            parte="pendentes" if parte == "pendentes" else "amostra")
+    lote = do_lote.carregar()
+    if lote is None:
+        return resultado
+    resultado.lote = lote.nome
+    taxonomia = arvore.carregar_taxonomia()
+    criar_tabelas()
+    with sessao() as s:
+        caminhos = list(s.scalars(select(Conteudo.caminho)))
+        principais = {c.chave: c for c in s.scalars(
+            select(Classificacao).where(Classificacao.principal.is_(True))
+            .where(Classificacao.chave.in_([i.chave for i in lote.itens])))}
+        por_chave = _questoes_por_chave(s, chaves={i.chave for i in lote.itens})
+    mesma_de = {chave: outras_bancas.mesma_questao(qs[0]) for chave, qs in por_chave.items()}
+    respondidas = _respondidas_pela_identidade(por_chave, contexto.respondidas)
+    resultado.grupos = do_lote.amostra(lote, principais, contexto.reservadas, mesma_de)
+
+    if resultado.parte == "pendentes":
+        ordem = {g: n for n, g in enumerate(lote.grupos)}
+        itens = sorted((i for i in lote.itens if i.categoria in do_lote.PENDENTES_DO_LOTE),
+                       key=lambda i: (ordem.get(i.grupo, len(ordem)), do_lote.por_hash(i.chave)))
+        reservados = [i for i in itens if i.chave in contexto.reservadas]
+        resultado.fora_por_reserva = len(reservados)
+        itens = [i for i in itens if i.chave not in contexto.reservadas]
+    else:
+        itens = [lote.item(chave) for g in resultado.grupos for chave in g.chaves]
+        resultado.fora_por_reserva = sum(g.fora_por_reserva for g in resultado.grupos)
+
+    resultado.total = resultado.validas = len(itens)
+    for item in itens:
+        mesma = por_chave.get(item.chave)
+        if not mesma:
+            continue
+        q, c = mesma[0], principais.get(item.chave)
+        minha = do_lote.conferida_por_mim(c)
+        resultado.conferidas += minha
+        resultado.conferidas_validas += minha
+        if so_abertas and minha:
+            continue
+        leituras = [n for n in (item.no_conferido, item.primeira, item.segunda) if n]
+        raizes = [_materia_do_caderno(caminhos, taxonomia, q)]
+        raizes += [arvore.partes(n)[0] for n in leituras + ([c.conteudo] if c else [])]
+        resultado.itens.append(ItemDeConferencia(
+            codigo=_codigo_de_outra_banca(q), chave=item.chave, materia_do_caderno=q.materia,
+            enunciado=q.enunciado, alternativas=q.alternativas or {}, gabarito=q.resposta,
+            anulada=bool(q.anulada), classificacao=c, opcoes=_opcoes(caminhos, raizes),
+            outros_cadernos=len(mesma) - 1, respondida=item.chave in respondidas,
+            grupo=item.grupo, do_lote=item,
+            tipo=do_lote.tipo_da_conferencia(item.no_conferido, c)))
     return resultado
 
 

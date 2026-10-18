@@ -393,6 +393,20 @@ Cariacica), 231 questoes, 107 no edital, relidas as cegas pela regra da 171
 (90 no mesmo no, 12 no no em comum, 5 pendentes). Outras bancas no treino:
 358 de lei. As duas da PC SC 2026 (Idecan) esperam o link; a PC SC 2023 e a
 PC RN 2021 (FGV), o gabarito definitivo (pendencia O).
+**A tela da amostra das provas novas (18/10, decisao 173, a seu pedido):** a
+conferencia ganhou dois recortes, nunca juntos com o alvo e o complementar -
+"outras bancas" (com a banca, o ano e o cargo) e "provas novas de 17/10". O
+lote e a lista de chaves do `data/lotes_de_classificacao.json` (a procedencia
+nao bastava), e a amostra de cada grupo (FEPESE, NC-UFPR e Selecon, Cebraspe,
+IESES) sai do que a segunda leitura decidiu sozinha - o mesmo no, o no em
+comum e a pendente nas duas -, pelo hash da chave, uma por questao: nas 10
+primeiras, nenhum erro passa, 2 voltam, 1 abre as 10 seguintes (os tamanhos
+no `config/amostra.yml`); descer no mesmo ramo e ajuste, e nao erro. As 37
+pendentes (regra c e fora do treino) ficam na mesma tela. Em todo recorte a
+questao nao respondida no radar vem sem a letra, o dispositivo, a pegadinha
+e o trecho, e o "Responder no radar" abre so ela, como treino; a guardada para
+uma rodada que mede (38 do alvo e 12 do complementar) nao aparece. A sua
+conferencia entra no Ciclo 2, uns 20 minutos por semana (pendencia D).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
@@ -453,7 +467,11 @@ R+7 dos diagnosticos e a comparacao de 07/11 - **sai do `servico/sabado.py`**
 do `servico/outras_bancas.py` (decisao 166): so evidencia `fora`, e nunca
 entra na incidencia nem nas rodadas que medem. **O Simulado da semana** sai
 do `servico/simulado_da_semana.py` (decisao 170): faixa com `treino`, que o
-`composicao.mede` recusa - treina, nunca mede nem reserva questao. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
+`composicao.mede` recusa - treina, nunca mede nem reserva questao. **A amostra
+do lote** sai do `servico/conferencia_do_lote.py` (decisao 173): o lote e a
+lista de chaves do `data/lotes_de_classificacao.json`, e a conferencia nunca
+mostra a letra da questao que eu nao respondi no radar nem a guardada para uma
+rodada que mede. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`
 (decisao 71): a ficha, ou a chave `nos` do plano; nenhum no e criado. Para o
 estudado e as datas, a faixa sem `conteudo` conta nos `nos` do plano e na
 ficha CONFERIDA, nunca no acerto (decisao 81). **Alvo,

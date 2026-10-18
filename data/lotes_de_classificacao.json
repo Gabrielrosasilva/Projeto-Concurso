@@ -1,0 +1,3849 @@
+{
+ "lotes": [
+  {
+   "id": "2026-10-17",
+   "nome": "As provas novas de 17/10",
+   "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
+   "decisoes": [
+    171,
+    173
+   ],
+   "por_que": "A procedencia nao basta para reconhecer o lote: a regra b da decisao 171 a trocou nas que foram para o no em comum, e o lote de 18/10 (decisao 172) usou a mesma da reanalise. O no_conferido e o que o Claude Code conferiu: e contra ele que a amostra mede o erro.",
+   "grupos": [
+    "FEPESE",
+    "NC-UFPR e Selecon",
+    "Cebraspe",
+    "IESES"
+   ],
+   "itens": [
+    {
+     "chave": "04cdd66938c56d202340b15a43fcd436",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante > CPP, art. 302"
+    },
+    {
+     "chave": "04e089394d29aba092a0ffe6d74163c2",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Competências federativas em segurança pública"
+    },
+    {
+     "chave": "05c1e2aefe97bfa003691f5656db37e9",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142) > CF, art. 142, § 3º"
+    },
+    {
+     "chave": "070026e2a8ae78831db68c2d4c8fc7e7",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 1º, § 1º"
+    },
+    {
+     "chave": "08a9bb23f0d2d78051ffd081e67f487c",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Administração Pública > Princípios administrativos"
+    },
+    {
+     "chave": "0ab7ffd164643d4f2d55dc0c38189545",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Rol dos direitos sociais > CF, art. 6º"
+    },
+    {
+     "chave": "0c25e4ecce6d83bda811f42d3a664ba9",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Princípio da insignificância"
+    },
+    {
+     "chave": "0d8656a13ffb0aa7137377ebc965eca9",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prova > Busca e apreensão"
+    },
+    {
+     "chave": "0da57b0b5b71eb279cc07a70b6ebc14b",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por particular contra a administração em geral > CP, art. 329"
+    },
+    {
+     "chave": "11f06d8b17e08cd275b3449918adb256",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 15"
+    },
+    {
+     "chave": "11f96ea5f0e24619e50ac5610d3393ba",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Penas e efeitos da condenação"
+    },
+    {
+     "chave": "12a94297f3192a434c8e610fcdbbab26",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 5º"
+    },
+    {
+     "chave": "140af8ad8e8ad81bfc139c29aeb1600c",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > Afirmação histórica dos direitos humanos"
+    },
+    {
+     "chave": "15d40982837bf8ab8decff53f6dcaf30",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Causas de extinção da punibilidade > CP, art. 107",
+     "segunda": "Direito Processual Penal > Ação penal > Perdão do ofendido",
+     "confianca": "media"
+    },
+    {
+     "chave": "160469e0d368c048fdbf173dea7aba58",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 322"
+    },
+    {
+     "chave": "19684e9f154ad987b8b538af7b7f0d0a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória"
+    },
+    {
+     "chave": "1a59fd9e0b5bd0315fb20d1a22d1f09d",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante"
+    },
+    {
+     "chave": "1a658b626b3d6de3d1504270051ba844",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 319-A"
+    },
+    {
+     "chave": "1bcaef70ff1dad2ea7057fab9019d291",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo"
+    },
+    {
+     "chave": "1c6fe5290b546e64132f421ed7970e10",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Direitos humanos e responsabilidade do Estado > Estado de coisas inconstitucional"
+    },
+    {
+     "chave": "1cc1cc8bf4e7e38400b76d32129eebdb",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Princípio da eficiência"
+    },
+    {
+     "chave": "1deca69a49a8a2c0d8774926e4d8d087",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Polícias militares e corpos de bombeiros como forças auxiliares > CF, art. 144, § 6º"
+    },
+    {
+     "chave": "1f22844d109f82c5b92ef46e2351d547",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos"
+    },
+    {
+     "chave": "22ede5228fcb625b4f79e0bc6adc6c1e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio > CF, art. 137"
+    },
+    {
+     "chave": "237c61b971106de5532500cf595bdfe1",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto"
+    },
+    {
+     "chave": "24a679ec121e3b5c2b1bbe10f2ae9bae",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa"
+    },
+    {
+     "chave": "256349dc31eeb63a252d73f98b43a9e9",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 312"
+    },
+    {
+     "chave": "25bfe97073e0edda47fc07e1cc5738da",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal > CF, art. 5º, LIII"
+    },
+    {
+     "chave": "25db40fe18fd6d6d0a2d61b08d6c6cc0",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "296839ee8237acc4760ea4396f78bcbc",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral"
+    },
+    {
+     "chave": "2b29b64e46fdfa3fc4304e89e6a0110b",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Teoria geral dos direitos humanos > Liberdade de expressão e direitos comunicativos"
+    },
+    {
+     "chave": "2b862e1814f744237e001c806a62e2ab",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos"
+    },
+    {
+     "chave": "2d84bca0dd46cb072cf78f05c416b354",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Uso e abuso de poder"
+    },
+    {
+     "chave": "2d9572debc7e4ebca47f543a1230cd59",
+     "grupo": "Cebraspe",
+     "categoria": "fora do treino",
+     "motivo": "gabarito discutível: a fiança pela regra de antes da Lei 12.403/2011 (CPP, art. 322)",
+     "no_conferido_antes": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 322"
+    },
+    {
+     "chave": "2e08cbe4373739f69eac1c49c2ac05da",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Procedimento penal > Lei 11.343/2006, art. 53"
+    },
+    {
+     "chave": "30ddbdd6b52013aae32a615d15b931ec",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio > CF, art. 137"
+    },
+    {
+     "chave": "31964e43fcd560b54497ce529227d782",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Procedimento penal > Lei 11.343/2006, art. 48"
+    },
+    {
+     "chave": "319faee1134d76f32279bc3a425f581a",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)"
+    },
+    {
+     "chave": "3222495ca02d3273615276212fca5260",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Constitucional > família, criança, adolescente e idoso > Proteção à família, ao jovem e ao idoso > CF, art. 227",
+     "segunda": null,
+     "confianca": "media"
+    },
+    {
+     "chave": "3243fbd61ae310f5a019d8cf8d893d20",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "32a3d1b8459e2b2d2202d49024a5a9eb",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Direitos humanos na Constituição Federal > Princípios das relações internacionais > CF, art. 4º"
+    },
+    {
+     "chave": "32bb09b9c071e8806bb2571fd0659c42",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Ação penal > Perdão do ofendido"
+    },
+    {
+     "chave": "335fe7da72a2769dee6aa448f247d7d4",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Direitos do preso > CF, art. 5º, LXIV"
+    },
+    {
+     "chave": "3381fb678b1e99d7f1278aa75b623f60",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Prescrição > CP, art. 116"
+    },
+    {
+     "chave": "34b8223975185625d4c8fe527201fc12",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração > Sentidos da expressão administração pública"
+    },
+    {
+     "chave": "34e4b823b1181bf357b43c260a0ee19a",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa"
+    },
+    {
+     "chave": "34f10e02d055d68214cdada75ff9eae0",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "3576d43d73c34b7c1bfc47ec4f9e860b",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Ação penal > Ação penal privada"
+    },
+    {
+     "chave": "3601127deb202c2487897f31039f5baf",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica e familiar"
+    },
+    {
+     "chave": "364df8351292f975dba7e0f4cb798031",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Programa Nacional de Direitos Humanos (PNHD-3), Decreto º 7.037/2009 e alterações > Eixos orientadores e diretrizes"
+    },
+    {
+     "chave": "371dbea3cc2ce0cad8411a00a923f7b8",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis > CF, art. 5º, XLII"
+    },
+    {
+     "chave": "3796038e9b23d0e13e2bf31513e37fce",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Causas de extinção da punibilidade"
+    },
+    {
+     "chave": "38149aa8281f8f812660e2f598f56e67",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 320"
+    },
+    {
+     "chave": "39bfa6f13735dd2a99179599a701810b",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Princípios implícitos"
+    },
+    {
+     "chave": "3ac21c152b75ae015f96db008c172979",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 24"
+    },
+    {
+     "chave": "3c9547c8217971d823fa0389daed30e8",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Posse de droga para consumo pessoal > Lei 11.343/2006, art. 28"
+    },
+    {
+     "chave": "3cc373c1042d7738ce585b5074fa85b9",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > cidadania e direitos políticos > Elegibilidade e inelegibilidades"
+    },
+    {
+     "chave": "3dbd701c451d15c3044296353207731e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Oferta de droga para consumo conjunto > Lei 11.343/2006, art. 33, § 3º"
+    },
+    {
+     "chave": "3f510a171b3565812bc2ebc8f7a3208f",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-A",
+     "segunda": "Direito Processual Penal > Prova",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "40182f154123cc6c81ee694fa74adf7f",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 25"
+    },
+    {
+     "chave": "408490f3bc3890b22f85bff687564596",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Entendimentos do STF sobre direitos fundamentais",
+     "segunda": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Discriminação",
+     "confianca": "media"
+    },
+    {
+     "chave": "42170338b3b5bf1221cad2ccb9a49b98",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 311"
+    },
+    {
+     "chave": "42763b5451ebe95ee022db14031d76c0",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes em licitações e contratos administrativos > CP, art. 337-G"
+    },
+    {
+     "chave": "442d3b34beac0b581d03b4da6050b025",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144"
+    },
+    {
+     "chave": "47d05a53d12d5237225cdf65e2f97e6a",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Autorizações de saída: permissão de saída e saída temporária"
+    },
+    {
+     "chave": "47fe838b5fcc4dee8a9daa31982a964a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "48024620f8933ad932636301529669bc",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Imputabilidade penal > Causas de inimputabilidade > CP, art. 28, § 1º"
+    },
+    {
+     "chave": "4a4b1c8da7f20215672908a098a5c5d0",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude",
+     "segunda": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "4aecde6077d5f21a796203f8b4d25759",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Noções de Administração Pública > Controle da administração pública"
+    },
+    {
+     "chave": "4c108235df76f69c0725f5e4aa97850c",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Empresas públicas e sociedades de economia mista"
+    },
+    {
+     "chave": "4d8353700baf0da132474b3bdd1258ee",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD)"
+    },
+    {
+     "chave": "523418a11d453ce8b31dfdffcef2e4a5",
+     "grupo": "Cebraspe",
+     "categoria": "fora do treino",
+     "motivo": "a lei mudou: STF, Tema 656 (RE 608.588, 20/02/2025) - o policiamento ostensivo das guardas municipais ficou defensável ao lado do gabarito (confiança média; conferido pela notícia, sem o texto oficial)",
+     "no_conferido_antes": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 8º"
+    },
+    {
+     "chave": "527feb392e3dbcc1247169bf3c654788",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Ação penal > Representação do ofendido > Súmula 714 do STF"
+    },
+    {
+     "chave": "52f01c6cb80743c4b71bf57d9ed2699d",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 5º-A"
+    },
+    {
+     "chave": "53358ce2e1534de1517f4750f18424a5",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Medidas cautelares diversas da prisão"
+    },
+    {
+     "chave": "54909380bcd9b66f2a310ea6a880af0a",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio"
+    },
+    {
+     "chave": "5520b47f254d5d2289fc1e888ce136ee",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Tráfico privilegiado"
+    },
+    {
+     "chave": "552e04311ed70a60b971bf6b91d043a7",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXXIII"
+    },
+    {
+     "chave": "58e6e68a5258fc211c667d2200231607",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > ciência e tecnologia > Promoção e incentivo à ciência, tecnologia e inovação"
+    },
+    {
+     "chave": "5afa0a615da0fc0661fd313477672650",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Autarquia"
+    },
+    {
+     "chave": "5bbcfd5dff3626ea3dba0d7b37f6deb8",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível > CP, art. 14"
+    },
+    {
+     "chave": "5cd1f57495c441b28aa9e78f29f3e424",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Disciplina, faltas disciplinares e RDD > LEP, art. 52"
+    },
+    {
+     "chave": "5f6c03a21e864f6f45880e18ea25789b",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXIX"
+    },
+    {
+     "chave": "62751fbf2cf2564a996eda1ab57a9f53",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 1º"
+    },
+    {
+     "chave": "62bb60158ed29bd9200002c5e0b26b46",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 320"
+    },
+    {
+     "chave": "63004054ab872dd6a8194e6ddcad287a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Tratamento e internação do usuário ou dependente > Lei 11.343/2006, art. 23-A"
+    },
+    {
+     "chave": "641cb58fb198ebaf8c10edc95532b1f7",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 2º"
+    },
+    {
+     "chave": "658ac6cde8468225aa50905dbedc48ba",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração",
+     "segunda": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "658f0a2b24d6a7850ac1cb3b7a3c2f96",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Rol dos direitos sociais > CF, art. 6º"
+    },
+    {
+     "chave": "666909f5d71ad75865633d1d2245ff25",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória"
+    },
+    {
+     "chave": "687a541b8d2b176af29e2d634aef6ce2",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder regulamentar > CF, art. 84, VI"
+    },
+    {
+     "chave": "68869acf404ea610c559732545205365",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Regimes de cumprimento da pena > LEP, art. 112"
+    },
+    {
+     "chave": "68aec563a3cb18af9bab7d2976af6117",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração > Classificação dos agentes públicos"
+    },
+    {
+     "chave": "700199ba2d74b9e7e6a6da9f8a1eb6f2",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação"
+    },
+    {
+     "chave": "7226d7b1a7a37e9ec8c64a3dc397408b",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos"
+    },
+    {
+     "chave": "72be036b5fd0b8c9363b291b5e4e330f",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 312"
+    },
+    {
+     "chave": "76764758a0176c61a707f40b69ad3a7a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Formas de violência doméstica e familiar > Lei 11.340/2006, arts. 5º e 6º"
+    },
+    {
+     "chave": "76eee61b56ff17785e2bef83e5465eee",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições"
+    },
+    {
+     "chave": "785ce1a5e46caf8971be03dacf3431e5",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Alcance de cada princípio > CF, art. 37, § 1º"
+    },
+    {
+     "chave": "7d122d780b4ed603b646a0b32c27107e",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis"
+    },
+    {
+     "chave": "7dfaad9f40f3f3710298d48d458dd4b0",
+     "grupo": "Cebraspe",
+     "categoria": "fora do treino",
+     "motivo": "gabarito discutível: a fiança pela regra de antes da Lei 12.403/2011 (CPP, art. 322)",
+     "no_conferido_antes": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 322"
+    },
+    {
+     "chave": "7fc69773378b474d3137c05e32b2175d",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 311"
+    },
+    {
+     "chave": "80437e7ad0397d0dc6ed8b995ba45015",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prova > Reconhecimento de pessoas e coisas > CPP, art. 226"
+    },
+    {
+     "chave": "8056e1bceb1000cd085e0774121a4cff",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral"
+    },
+    {
+     "chave": "81240c6f75c02106e3423975579a5f02",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "82b6bd1ec3072133a2407dba73166c54",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas"
+    },
+    {
+     "chave": "83bf59535f7d810452b9103bf1ce6d2d",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direitos Humanos > Direitos humanos na Constituição Federal > Direitos e garantias fundamentais: conceito e distinção",
+     "segunda": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+     "confianca": "media"
+    },
+    {
+     "chave": "83c446a8f3c4585348fbc44e482127f1",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Princípio da eficiência"
+    },
+    {
+     "chave": "8477ad8a5e396260d2c21e7bae94a030",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Intimidade, vida privada, honra e imagem"
+    },
+    {
+     "chave": "849284696e944e62cd7a493a710e9f60",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Atos de improbidade em espécie (arts. 9º, 10 e 11) > Lei 8.429/1992, art. 9º"
+    },
+    {
+     "chave": "87d3f90c8dbb0451549a94e9ed224d84",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Imputabilidade penal > Causas de inimputabilidade > CP, art. 26"
+    },
+    {
+     "chave": "8856955bb64531ef26444e2b398438a5",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 70"
+    },
+    {
+     "chave": "888e0fe1741251673344e71d51f396da",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes em licitações e contratos administrativos"
+    },
+    {
+     "chave": "892826d1df0a62cbc945328cf06e9891",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Princípios implícitos"
+    },
+    {
+     "chave": "8a671c0b6d0a349ed6204c5a672134e8",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública"
+    },
+    {
+     "chave": "8b0f23363c5ad57516c1a065f930cb7b",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto"
+    },
+    {
+     "chave": "8baf514e8ade29e0a283d97050c775a6",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 317"
+    },
+    {
+     "chave": "8bc2bdb4e7df2ccd20c9be75453441d8",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva"
+    },
+    {
+     "chave": "8c32e215ab6ed73e269945c6f5b2f03c",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante > CPP, art. 302"
+    },
+    {
+     "chave": "8d4406d87380f8f8d6ba131a1409e7fe",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)"
+    },
+    {
+     "chave": "8f7a29308642c3ae37b0778018669f1b",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória"
+    },
+    {
+     "chave": "8ff328ae218b7a19ef4e25fdc63edbac",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência > Lei 11.340/2006, art. 22"
+    },
+    {
+     "chave": "90a91cee7a1d815365180e43ed0af260",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo"
+    },
+    {
+     "chave": "915cdc2415c1c87f9f7bbcea8c1aa2e7",
+     "grupo": "Cebraspe",
+     "categoria": "fora do treino",
+     "motivo": "gabarito discutível: o STF (ADC 38 e ADIs 5.538 e 5.948, 26/02/2021) derrubou o limite de população para o porte das guardas antes da prova (16/10/2022) - duas alternativas certas",
+     "no_conferido_antes": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Porte de arma de fogo > Lei 10.826/2003, art. 6º"
+    },
+    {
+     "chave": "930f8f28382c78a007971c999c1351bb",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Porte de arma de fogo > Lei 10.826/2003, art. 6º"
+    },
+    {
+     "chave": "938982cec99973b7b7f16bfbd05783c5",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Polícias militares e corpos de bombeiros como forças auxiliares > CF, art. 144, § 6º"
+    },
+    {
+     "chave": "93c35130759b67c261fb48d601da9e88",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes contra a administração da justiça > CP, art. 349"
+    },
+    {
+     "chave": "93ef4ad3248b5e4a28ed951bc039ebe4",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 9º"
+    },
+    {
+     "chave": "93f600ca0e9acf5b4857e023405b11e2",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > Direitos humanos na Constituição Federal > Princípios das relações internacionais"
+    },
+    {
+     "chave": "94ca9dc69f2468f197335682b6a7ec84",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Cumprimento do mandado de prisão > CPP, art. 287"
+    },
+    {
+     "chave": "95cea8d14aea074c12407d09bdec46a0",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prova > Acareação > CPP, art. 229"
+    },
+    {
+     "chave": "96c45d2593052a659a1a5da54b26872a",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 142, § 2º",
+     "segunda": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)",
+     "confianca": "media"
+    },
+    {
+     "chave": "9799748f527669f2d11ad2d73970ac04",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Medidas cautelares diversas da prisão > CPP, art. 319"
+    },
+    {
+     "chave": "9810bf04d99ed28eb0348aeb7a771b9a",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos"
+    },
+    {
+     "chave": "99b7e070ac6b95997a6bec12ca8f2f54",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Erro de tipo e erro de proibição"
+    },
+    {
+     "chave": "9b9ac12ae96e0a089979fc52fd2d8a57",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Crimes de abuso de autoridade em espécie > Lei 13.869/2019, art. 9º"
+    },
+    {
+     "chave": "9c81f65db00e8288149c18633381d488",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração"
+    },
+    {
+     "chave": "9ffcc4628d8515534ec4cadfd8bc1a59",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prova"
+    },
+    {
+     "chave": "a03d30f5bc8aa3c85679aa5b1b4e036c",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência > Lei 11.340/2006, art. 12-C"
+    },
+    {
+     "chave": "a0509a4e596e53d119a90d2c5f76ba57",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Entidades da administração indireta"
+    },
+    {
+     "chave": "a12769d98596199b60a89a992d3c0a47",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142) > CF, art. 142, § 3º"
+    },
+    {
+     "chave": "a1c20d354c0034752aa80d79eafac689",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Registro de arma de fogo > Lei 10.826/2003, art. 5º"
+    },
+    {
+     "chave": "a2305dff903e1500721d8dd766335f57",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos"
+    },
+    {
+     "chave": "a23d7cb5fd13880eaef3d0fdf30ade19",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Direitos do preso"
+    },
+    {
+     "chave": "a2f65fcc4b516b9c0aaee5f9615d1198",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência > Lei 11.340/2006, art. 24-A"
+    },
+    {
+     "chave": "a38d4fef9b29b3cffd84a41d4661ea0d",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de consciência, crença e assistência religiosa"
+    },
+    {
+     "chave": "a3a1abb223d9322160b2df3b2fb296a9",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de culpabilidade"
+    },
+    {
+     "chave": "a77eb4e108750a0bada2aeebd963dca8",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Atos de improbidade em espécie (arts. 9º, 10 e 11) > Lei 8.429/1992, art. 11"
+    },
+    {
+     "chave": "a7fd3bbf33a69492f08da648709fd7af",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito à igualdade"
+    },
+    {
+     "chave": "a89f5fdd136b05cee52ad2e09c6ca5d4",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral"
+    },
+    {
+     "chave": "a90137a0a1b4c4d9a5a5bbc8e1413c4e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 10"
+    },
+    {
+     "chave": "a92df9fa73711e46b930814895153c36",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "ac32b7522b84f0664a5916630405fb38",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais > CF, art. 5º, XXXIX"
+    },
+    {
+     "chave": "ad3950e27bbbff08736628937b9ba1c9",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Conceito, finalidade e princípios do Sisnad"
+    },
+    {
+     "chave": "ad5acdba1bc01bf6938d159245b072da",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Causas de extinção da punibilidade"
+    },
+    {
+     "chave": "ae7dc0f6fdf59da3003a665af3cc162e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142) > CF, art. 142, § 3º"
+    },
+    {
+     "chave": "ae8a7b8fc5506b932ce272dc0804ed9c",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Entidades da administração indireta > CF, art. 37, XIX"
+    },
+    {
+     "chave": "afcf67e799932a59004ee3942a0c4583",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito à igualdade > CF, art. 5º, I",
+     "segunda": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito à igualdade > CF, art. 5º, I",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "b176cc297c8f607e9882c71cfef260fc",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > cidadania e direitos políticos > Elegibilidade e inelegibilidades > CF, art. 14, § 8º"
+    },
+    {
+     "chave": "b186fb21be406aad7030ea4c04731940",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão domiciliar > CPP, art. 318"
+    },
+    {
+     "chave": "b1c38d53daf75fe43923c86445eac03d",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos"
+    },
+    {
+     "chave": "b512b1a5a671cfe4180b237cb5997a1d",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo > Lei 13.869/2019, art. 2º"
+    },
+    {
+     "chave": "b742c19d20f8cc5d4b7f3a6abc6dbba9",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prova"
+    },
+    {
+     "chave": "b9219d6733467b38708f614f239792e4",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Consentimento do ofendido"
+    },
+    {
+     "chave": "b924239ce19cf5e759479c8b2b47666c",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Sanções por ato de improbidade (art. 12) > Lei 8.429/1992, art. 12"
+    },
+    {
+     "chave": "b97fb6a15097d39fc3169acf43739fe6",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação > CF, art. 5º, XIX"
+    },
+    {
+     "chave": "ba96bbc0e9d5b6ac21f4c57a37336a0a",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais"
+    },
+    {
+     "chave": "baaf15695beeaaca37b1e166254735c9",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Inviolabilidade do domicílio > CF, art. 5º, XI"
+    },
+    {
+     "chave": "bb687df23b3ad9d9c019086aede4d100",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 1º, II"
+    },
+    {
+     "chave": "c028a3842cc7694d895212016abbbb04",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Ação penal"
+    },
+    {
+     "chave": "c0b74be6e1f34bd941661970fc5a31f6",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Sanções, recompensas e procedimento disciplinar"
+    },
+    {
+     "chave": "c2ebbaf69dbf4d6b4332c69425de2e7c",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação > CF, art. 5º, XIX"
+    },
+    {
+     "chave": "c38489e2079ed526c9bd0b62ad0cc504",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Constitucional > comunicação social > Liberdade de informação jornalística",
+     "segunda": "Direito Constitucional > comunicação social > Liberdade de informação jornalística",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "c3ead931202edfef45e9597d38dfb766",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Convenção sobre os Direitos das Pessoas com Deficiência (ONU, 2007) > CDPD, art. 4º"
+    },
+    {
+     "chave": "c53687f78e33dcd8b2383afc9834e1f6",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 1º, II"
+    },
+    {
+     "chave": "c5e14aa9e5be6a9b296a6a9ce8e0e969",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Polícias militares e corpos de bombeiros como forças auxiliares"
+    },
+    {
+     "chave": "c6224d19d4537a763802f02f7b700b7a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Noções de Administração Pública > Controle da administração pública"
+    },
+    {
+     "chave": "c73f2e6cfc5bd301dbc08f5e23b9d147",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direitos Humanos > Teoria geral dos direitos humanos > Características dos direitos humanos",
+     "segunda": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação",
+     "confianca": "media"
+    },
+    {
+     "chave": "c79c90b5fc7f25a8e0b918944e88c894",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Carreiras da segurança pública"
+    },
+    {
+     "chave": "cae6a5d13c49df158ef4f78bcd2b5583",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder disciplinar"
+    },
+    {
+     "chave": "cc4d9d7ff735d5519a9469fd313a50e3",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Atuação vinculada e discricionária"
+    },
+    {
+     "chave": "cceea27cfe74fdb4d8807b60a409e582",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Sujeito ativo e sujeito passivo da infração penal > Crimes plurissubjetivos (concurso necessário)"
+    },
+    {
+     "chave": "cdf283f742e55afd8990d2caee8e1e66",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
+    },
+    {
+     "chave": "ced755900fd49f8ac41918219365278f",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Competências federativas em segurança pública"
+    },
+    {
+     "chave": "d1a6f6c57a6e874bfb0015421649afeb",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Titularidade dos direitos fundamentais"
+    },
+    {
+     "chave": "d1b649a1ed96fdc4c65b03d18d81c96f",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Administração Pública > Princípios administrativos"
+    },
+    {
+     "chave": "d1f434bddba7d081e80b03acd8b18826",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente"
+    },
+    {
+     "chave": "d2905ca12b2ed86b106a5464d7630adb",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração > Função administrativa"
+    },
+    {
+     "chave": "d4ad2702ee04e6b9def7c73cdfcd202d",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Ação de improbidade: acordo e prescrição"
+    },
+    {
+     "chave": "d51d5bd0a8629b8e650ebecd48a2705e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Medidas protetivas de urgência > Lei 11.340/2006, art. 19"
+    },
+    {
+     "chave": "d5a0f6faf328fd3131ce4fa01a0d6d86",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prova > Busca e apreensão > Lei 8.906/1994, art. 7º, § 6º"
+    },
+    {
+     "chave": "d5ebb4336292edde30051c5518de5f2f",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias"
+    },
+    {
+     "chave": "d736693dcca9e73a5da5fc87b7a6fafd",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Constitucional > organização da segurança pública > Carreiras da segurança pública",
+     "segunda": null,
+     "confianca": "media"
+    },
+    {
+     "chave": "d93195b41e0fe5697682d7245b72d7db",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > nacionalidade"
+    },
+    {
+     "chave": "d9391b15555fdc563d53e1692bd49cf6",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Administração Pública > Princípios administrativos > Alcance de cada princípio",
+     "segunda": "Direito Administrativo > Acesso à informação > Lei de Acesso à Informação (Lei 12.527/2011)",
+     "confianca": "media"
+    },
+    {
+     "chave": "dad3bfd7cc5a673b86e8260dacc68034",
+     "grupo": "Cebraspe",
+     "categoria": "fora do treino",
+     "motivo": "gabarito discutível: a alternativa que repete a Súmula Vinculante 6 também está certa",
+     "no_conferido_antes": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, IV"
+    },
+    {
+     "chave": "dd830f386f0510c87528e8558b761e43",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo > Lei 13.869/2019, art. 1º, § 1º"
+    },
+    {
+     "chave": "ddd755528b96eadc1df99134d52e4be3",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Empresas públicas e sociedades de economia mista"
+    },
+    {
+     "chave": "e26132377643b77b20ed2463cc21478f",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prova > Interrogatório e testemunhas"
+    },
+    {
+     "chave": "e42bc8022e201b76882313606d07ecbb",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 313",
+     "segunda": "Direito Penal > Crimes contra a Administração Pública > Peculato",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "e47d273c03ab68d3ee24eda213c68802",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais"
+    },
+    {
+     "chave": "e58d5eb95ba2b6673b00ff97eec8483e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "e58fcecff12902c399ef485f370deabf",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Modalidades do crime de tortura"
+    },
+    {
+     "chave": "e618547582dc9e271d020263a4991172",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Uso e abuso de poder"
+    },
+    {
+     "chave": "e646c24d707a588574a975699a1fd20a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 310"
+    },
+    {
+     "chave": "e865658964e29bd869d6b5b2145b3848",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Autarquia"
+    },
+    {
+     "chave": "e88dbae3f135546b1f7af2f4fb547928",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos"
+    },
+    {
+     "chave": "e9389962b0955873c93c62468f48e4d2",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração"
+    },
+    {
+     "chave": "ec2ead82748de23a6cbcdc7b87db1edf",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos"
+    },
+    {
+     "chave": "eca78616bf4aae6ce49eae864cdead1d",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Administração Pública > Princípios administrativos"
+    },
+    {
+     "chave": "edfdeebf66331d213f3829bc3508f666",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003)"
+    },
+    {
+     "chave": "edfef0a2ecc044cbdc83aa05d69db3fb",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 4º"
+    },
+    {
+     "chave": "ee6cf98f86727540f74d4c4c9d5dabae",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial"
+    },
+    {
+     "chave": "f08460052e404bba89e00c7602c693c6",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Remição > LEP, art. 126"
+    },
+    {
+     "chave": "f0be520bbd05c1ba89e5f06c0d6b3531",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral"
+    },
+    {
+     "chave": "f0f2fd5470955d72bd1a98dd524cb75f",
+     "grupo": "Cebraspe",
+     "categoria": "c",
+     "primeira": "Direitos Humanos > Teoria geral dos direitos humanos > Características dos direitos humanos",
+     "segunda": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos",
+     "confianca": "baixa"
+    },
+    {
+     "chave": "f20f85078c819a0a8ac4c642070eaefd",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD)"
+    },
+    {
+     "chave": "f81b540720b5e2c9d62ce2fc5b54e9ab",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "f872299a10ee511201ef2179f68085dc",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral"
+    },
+    {
+     "chave": "f8898b3ddf4300ffa2cbb6efdeca4e60",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prova > Valoração da prova e elementos informativos > CPP, art. 155"
+    },
+    {
+     "chave": "f990196df32f2f7e73c80370f91bc9f9",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições"
+    },
+    {
+     "chave": "fa3ac2e9d539a1353d8e1e58c2230dc7",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto"
+    },
+    {
+     "chave": "fddc5bf2abe4873cc3ef79a173169287",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 63"
+    },
+    {
+     "chave": "fe4ed37127e81e3c36b3d7fbf7b4ca6a",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Personalidade jurídica das entidades da administração"
+    },
+    {
+     "chave": "ff7449344050856e8cca906da5086723",
+     "grupo": "Cebraspe",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD)"
+    },
+    {
+     "chave": "ff8259148ba9c932c6ce12bc6014506e",
+     "grupo": "Cebraspe",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Programa Nacional de Direitos Humanos (PNHD-3), Decreto º 7.037/2009 e alterações > Eixos orientadores e diretrizes"
+    },
+    {
+     "chave": "02f9ca3a9f4ea13005a9adb7550474d6",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "08ef046b4d6a056adcecb3bef6310f03",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Ação de improbidade: acordo e prescrição > Lei 8.429/1992, art. 17-B, § 7º"
+    },
+    {
+     "chave": "10b95fe4feeaf521b66382f0fe3e6bc7",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Responsabilidade civil do Estado > Responsabilidade objetiva e ação de regresso"
+    },
+    {
+     "chave": "1127c368cd3f5b01030479eb5b3d7ea2",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Licitações e contratos administrativos > Disposições gerais da Lei 14.133/2021"
+    },
+    {
+     "chave": "113b1ded4b2dfcfe1a034157b3599efc",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Alcance de cada princípio"
+    },
+    {
+     "chave": "13d44444b6152e415055bf8443b42184",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Direito Administrativo > Servidores públicos > Remuneração e vantagens",
+     "confianca": "media"
+    },
+    {
+     "chave": "14dc80d174231311907dbf67b8205700",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Empresas públicas e sociedades de economia mista"
+    },
+    {
+     "chave": "182228a2471dcc5803c822137f61e22b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Uniformidade de tratamento"
+    },
+    {
+     "chave": "194828bad519f4ee450c48d2667b8001",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XXVIII"
+    },
+    {
+     "chave": "1bb2b3e077bbf55a50e2b1720e77bde6",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Empresas públicas e sociedades de economia mista > Lei 13.303/2016, art. 22"
+    },
+    {
+     "chave": "1bdd743a3ca3d8d12aa15283f6ac8896",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Processo administrativo > Princípios e instauração (Lei 9.784/1999)"
+    },
+    {
+     "chave": "1c040d0a063ffa10fa45aa8bce35c020",
+     "grupo": "FEPESE",
+     "categoria": "fora do treino",
+     "motivo": "a lei mudou: EC 136/2025 (10/09/2025) trocou a data do art. 100, § 5º, da CF (precatórios), e nenhuma alternativa traz a de hoje"
+    },
+    {
+     "chave": "1eb8debbe97f96b93fad1497ec122ad7",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Alcance de cada princípio"
+    },
+    {
+     "chave": "23ed5beef671da9c4f6a167c4b4bd757",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta"
+    },
+    {
+     "chave": "25445178c850e78347d736a5ea840d53",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Serviços públicos > Concessão e permissão"
+    },
+    {
+     "chave": "2bc7c0080ead1957c2524c96cd131af3",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997)"
+    },
+    {
+     "chave": "2bf6587b497f9ef71d6aa536415bad97",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Titularidade dos direitos fundamentais"
+    },
+    {
+     "chave": "30600cd9269ad84e8ba6b210211839ce",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, parágrafo único"
+    },
+    {
+     "chave": "32194ffa3e14575ec38f2f43c2187dda",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Licenças"
+    },
+    {
+     "chave": "349823e01e4f9dd016d8c4dd9992f05d",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > cidadania e direitos políticos > Elegibilidade e inelegibilidades > CF, art. 14, § 4º"
+    },
+    {
+     "chave": "35d61335671b55fc2362de5f4f69efea",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Atos administrativos > Anulação e revogação > Lei 9.784/1999, art. 54"
+    },
+    {
+     "chave": "41091e1df2e35404e64ba8c7c7552fc9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Intervenção do Estado na propriedade > Desapropriação > Decreto-Lei 3.365/1941, art. 32"
+    },
+    {
+     "chave": "423e6de4d0d715e1c5a376a3ee9416d4",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > cidadania e direitos políticos"
+    },
+    {
+     "chave": "4bb5807b659d5e446c47c2d6cf8d95e5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Disposições gerais: dolo, sujeitos e entidades protegidas > Lei 8.429/1992, art. 1º, § 4º"
+    },
+    {
+     "chave": "4c0eb7d2d1abd3824c4fd47ca10efc74",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Penas, aumentos e efeitos > Lei 9.455/1997, art. 1º"
+    },
+    {
+     "chave": "53c8082df117457ac4955b580d527a03",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Direito Administrativo > Servidores públicos > Acumulação remunerada de cargos > CF, art. 37, XVI",
+     "confianca": "alta"
+    },
+    {
+     "chave": "56d03e2eb2a311a08487a213e9d85c6c",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965)"
+    },
+    {
+     "chave": "5d2a3f597146d1adf9dd6ec33a94852f",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Direito Administrativo > Serviços públicos > Concessão e permissão"
+    },
+    {
+     "chave": "5d6afff05ec6c22ab1face16fecf1383",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder regulamentar"
+    },
+    {
+     "chave": "5f32e345641a1ea04569c9fbb24b82f5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "6052be218000db96a9589845f0279fe9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Serviços públicos > Concessão e permissão > Lei 8.987/1995, art. 27"
+    },
+    {
+     "chave": "6478ac59a18502066ef1e06568ab3206",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)"
+    },
+    {
+     "chave": "647fb484a51c67c86a7a622e848b316b",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Direito Administrativo > Controle da administração pública > Controle externo e Tribunais de Contas > CF, art. 71, § 4º",
+     "segunda": "Administração Pública > Noções de Administração Pública > Controle da administração pública",
+     "confianca": "media"
+    },
+    {
+     "chave": "66c87dd2813fafc5691e4105b9ab5e98",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
+     "segunda": "Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)",
+     "confianca": "media"
+    },
+    {
+     "chave": "68bf5c17d0005376fd23bf2c0ffe4d3e",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "68febaeac0fd868400f71d836502754f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Acesso à informação > Lei de Acesso à Informação (Lei 12.527/2011) > Lei 12.527/2011, art. 10"
+    },
+    {
+     "chave": "6f1439592e455cbdfc8f48d15a446600",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 327"
+    },
+    {
+     "chave": "70a9c19149c2f4359e059984ee60cac2",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Crase facultativa"
+    },
+    {
+     "chave": "719476666d4aac463505d01bd7e03571",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "71fae56c8e72efac43d47c3e6f772de3",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "7440e213d6f58bbce267ad7072382fa3",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "74bb031c2d24faff8bfbbcf44f70267a",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "801939c8d1467d89932b28e735eba39b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+    },
+    {
+     "chave": "859b12919161b6f08d31a32bb0afcbbb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Penas, aumentos e efeitos > Lei 9.455/1997, art. 1º"
+    },
+    {
+     "chave": "85a31ea72e8e12db7cc77bfad2e6dbd4",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Espécies de documentos oficiais"
+    },
+    {
+     "chave": "85aafe238176e2e41969cf553b0a5029",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Legislação Estadual > Lei n.º 6.745, de 28 de dezembro de 1985 (Estatuto do Servidor do Estado de Santa Catarina) > Estágio probatório"
+    },
+    {
+     "chave": "8695424bf4f747e6fe7a7d1b8e343b15",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)"
+    },
+    {
+     "chave": "88d468620540886f34a480136bf97c3c",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Administração Pública > Princípios administrativos > Alcance de cada princípio",
+     "segunda": "Direito Administrativo > Atos administrativos > Atributos, vícios e motivação",
+     "confianca": "media"
+    },
+    {
+     "chave": "8a5c01323ef51ada0728cee1663ee50c",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente > CF, art. 225, § 4º"
+    },
+    {
+     "chave": "8adbfdfd4e75f7c10158b612e4e327ea",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder disciplinar"
+    },
+    {
+     "chave": "94507792ba753c7a840399017904262d",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "96e5e9a7fc333d019937b6b0e96c4403",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Liberdade e organização sindical > CF, art. 8º"
+    },
+    {
+     "chave": "9d9ab17017033afe558812fef4a1be49",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos"
+    },
+    {
+     "chave": "a24efab647cc9577941c536999ed56e9",
+     "grupo": "FEPESE",
+     "categoria": "fora do treino",
+     "motivo": "gabarito discutível: no texto do banco a afirmativa chama de vinculado o ato discricionário, e nenhuma alternativa fecha - olhar o caderno",
+     "no_conferido_antes": "Administração Pública > Poderes e deveres dos administradores públicos > Espécies de poderes administrativos"
+    },
+    {
+     "chave": "a5c63fba144a2000e726c4ad7bd154e6",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos"
+    },
+    {
+     "chave": "a60d0b6050d9d511673426a98675dafb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > família, criança, adolescente e idoso > Proteção à família, ao jovem e ao idoso"
+    },
+    {
+     "chave": "a76f3ce992b22d21776d4f4258bebc19",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Licitações e contratos administrativos > Reajuste e equilíbrio econômico-financeiro > Lei 8.666/1993, art. 65"
+    },
+    {
+     "chave": "a93aae2f101089b5a09aec5f2ba31198",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Liberdade e organização sindical > CF, art. 8º"
+    },
+    {
+     "chave": "aadd0c3291f2e1ab4ba40dab6d669c4e",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Atos administrativos > Atributos, vícios e motivação"
+    },
+    {
+     "chave": "b4d5df8179bba7364d227f17695a9211",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Alcance de cada princípio"
+    },
+    {
+     "chave": "bec388439f0bd4292cc502561f38dc26",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > educação, cultura e desporto > Educação > CF, art. 208, § 3º"
+    },
+    {
+     "chave": "c05c4ce94f764b795361928e638b3f2b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Liberdade de associação > CF, art. 5º, XVIII"
+    },
+    {
+     "chave": "c824bc6fce5b4e51d81acd76ad052d92",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Direitos do preso > CF, art. 5º, L"
+    },
+    {
+     "chave": "caf1e777195e536d86189fe33281792d",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Natureza e função dos direitos sociais"
+    },
+    {
+     "chave": "cb8c445794106a12c7280bd019a889b7",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 1º, IV"
+    },
+    {
+     "chave": "cce2ce5b3bc73f3bb86a22de4dc3257f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, V"
+    },
+    {
+     "chave": "cd8c4fe1b2cc9673a7418c8da16cdcc3",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "ce997f0f02869f40867b8f6a41d05593",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "d52764eb8479c0d592e18d14dd1e0b17",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Intervenção do Estado na propriedade > Desapropriação > Decreto-Lei 3.365/1941, art. 9º"
+    },
+    {
+     "chave": "d57679e37aa5b20b9425bfe18aad18a0",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "d972f15ac86f0c1785a61c6cf9f0324b",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Direito Administrativo > Licitações e contratos administrativos > Anulação da licitação e nulidade do contrato"
+    },
+    {
+     "chave": "d9f85ad413803fcc7dbe3f009bc5ea46",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Ação penal e perda do cargo"
+    },
+    {
+     "chave": "da5b0c0bd91b68890b45b342ae6908bc",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "e0495a9a7c293a2e44632e19ef837909",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 241"
+    },
+    {
+     "chave": "e1173d9752672a59763c1939ab006baa",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico",
+     "segunda": "Direito Administrativo > Processo administrativo",
+     "confianca": "media"
+    },
+    {
+     "chave": "e1c7805fa206ac623f40f539d8141012",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal > CF, art. 5º, LX"
+    },
+    {
+     "chave": "e66f5a01283a6c2e8e5bde95daa8c81b",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo"
+    },
+    {
+     "chave": "e74cc531628bd102bf0f36c08b3a5ad0",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > ciência e tecnologia > Promoção e incentivo à ciência, tecnologia e inovação > CF, art. 218, § 5º"
+    },
+    {
+     "chave": "e8259f152e8e99c74b7867c72e8c8f03",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 321"
+    },
+    {
+     "chave": "efbec2ff530d402cc569346a6ce9d846",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo"
+    },
+    {
+     "chave": "f115a1453873a6486a9ea7a8b8208636",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial > Espécies de documentos oficiais"
+    },
+    {
+     "chave": "f2f0d5be094ef72bf6758701913d1dc4",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente"
+    },
+    {
+     "chave": "f72db8c5dff15686f830dd92327bed0a",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Improbidade Administrativa Lei nº 8.429, de 2 de junho de 1992 > Declaração de bens do agente público > Lei 8.429/1992, art. 13"
+    },
+    {
+     "chave": "f734b44c4893f6701877d4182862ea9d",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração > Descentralização por serviço"
+    },
+    {
+     "chave": "f8bb600f513e40bf7491c78004d25e51",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Proteção de dados pessoais > Lei Geral de Proteção de Dados (Lei 13.709/2018) > Lei 13.709/2018, art. 33"
+    },
+    {
+     "chave": "f8e308ad619d1204b2a3378be3ed76e1",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > meio ambiente > Proteção constitucional do meio ambiente > CF, art. 225, § 1º, VI"
+    },
+    {
+     "chave": "f8fc87e09fe8f787bbb098ff4f527b3c",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "002f87c6a83e12ad0028a2c9c707bbbd",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego de tempos e modos verbais"
+    },
+    {
+     "chave": "00b44dc6accebe13bfbd1b00b57a031e",
+     "grupo": "IESES",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "0141bd683015f59e7313e299bd48c4c0",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos"
+    },
+    {
+     "chave": "018b1f4680ce354460685f8115344ea9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "0208a44cad4ff7e82e4ff31a08518c28",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "0489d562a5cb556dec8b1db612d48470",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "069fb2b798a80cf5d349cc0b24ebe395",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "06f58aa682b595c5ce758f9183660cfa",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "07b1b3f2d4f2b1f219ebfe9b47a48f58",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "099269bcc094fb69961eacf06762eb9d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "0b7267403c2b42f60b10da57ebfb13c3",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "0f72e7b9e3afc2c5c6ab65a0e0a02ae2",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "10e424e9f83dcb9ad3802d1bc43d6cf8",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "12f1021e5180a4986d3f8530d7543da9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "13ef7e39023515528a1c39d404f592cc",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "1463b1dff302ab54e079d428b687bf3d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "1653682721f25d15301208929acdf3c0",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "173d532d8e25cf442e4cce0d89434bf0",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos"
+    },
+    {
+     "chave": "194af8d3b546a695a190160a7f628ea6",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "1a44b9d14b5cb2050cafe17a9844afae",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "1adceed33ade996d729100fe3cc503be",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "1bb1fdece3ad41abc5218bdb597c349a",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "1c434f6ffe3ec13790686431164f03e4",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "1e6131c1df9decf582de95e2f76a99fd",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    },
+    {
+     "chave": "1f87c99802ac49e07ff3f919d395cc77",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "2150ce68865f10bc593a042b94fddbda",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "218910d3706107324dc687a7a0bc0eea",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "21b60f59998259b89d84df05bbafddba",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "23296afd27c0afda7b668981acf8258c",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "25178cbb0f82981a2ba9d1522d0feadb",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "255b6c8aeed17ff9f8392d93100313b9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "27468e5c6c3deceb4f4e0adef249b22b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "2751011263bb5b785d4b213b8d61044d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "28355e9dc8a02b5f3424a9d040684035",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "2ab8f7296103d75b7d7e69f19b760afd",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "2c5f8fadfad90fa8e8e49b3801a3daef",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "2da4efde91dfcb396eec1f25125b0745",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego de tempos e modos verbais"
+    },
+    {
+     "chave": "2fd32becde075d51b750d5919c363fb5",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo"
+    },
+    {
+     "chave": "3353da2cd688e2707be101d01ec1567d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "34af015f92bd83dbbc8fa48130b52949",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "35e1403380015227b202c4815124b379",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "377ccd7ac0e13f9240a9bb95120e9f5d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos"
+    },
+    {
+     "chave": "37e55f673f092af0c0c8f6c8d14cd175",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "38160025af7f62e887cd52629c68d17a",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "387d9d7d5a4cda8cdd85b88d16d25062",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Vozes do verbo > Voz passiva analítica e sintética"
+    },
+    {
+     "chave": "389199c5e9737591f2e245f65ce28c88",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "3a171a2e7048051d1ddbb249becc93a3",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "3ed52755ecabfdf8f064bc05737448a1",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "4348dc621910efd58bc3be2f930cd877",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "448f1d40cb9fffc49d6abfc335f4173d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "44a20e6d7d437acb919aae6ebe509cd7",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "46cc163c7382385ae49aa82056282187",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "473dd7b72a5b6a9862b95fe7dbbf41b6",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "493c9ba074b72c3765b9b2fbc247efd1",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "4cae8679790c24d668dd0a7bd88df323",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "4d15063753d23b147dda6d9067fdfbee",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "4e7a76cb7421fbdc93c218b7ae81e710",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "4f6520bd08dcbffd29d073038416fa4b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "4f80f17f4ef177b974f2d5375872479f",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "5183d79bd219aa363aee36763f676afa",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "52460d5d4f8ebea5de96a73954fa5958",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "538baeb6057d0ea46c0c9250e8a80047",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "540db597f366afe8942d7a17ce3ab5fa",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "5616de55a10b922b7bf78b0c86ace1f2",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "584c9871114d9115ff558600dc7d665c",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "58777bf4a59045ced5101c794701f66f",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "588f8476b41800979b7a3347fefd9626",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "58a55bf49428a1f0b95be5a00dcefdca",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "5933ac0a34a6326c792a6f3bfbf6d28b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "5d432a1c6de91ad59e9e0b3fc507bbdc",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "5f7c0d868676f567b4936cdf101b7eec",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "62306e5651270f1335f183b01df9777d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "627bbee78534155e9b274b0ada506f57",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "62a184c45089f67e4dbc9a2d679ed06b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "657235ae85e203c21eea82a7220255dc",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "68193d1f74298d661e70ec550fec2a34",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "683815bb50a9b461aacb4cd15fa0c5cd",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "6882b4dd880d2a1c055267be5a9c04b0",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "68e9a95d0d8bc980bc258c7a603d5b32",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "6a776bdd474bc5a229ae3b2cce58f1f1",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "6b2e151cd038b81ad21123c92ede03b8",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "6b70afa117a543f520f8d21a5e9498fa",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "6e965b36d4ec6963c2381bf558dfd75a",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "6f25e8325adb36c1a7c20979016a54af",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "7165b2c71dd443169f7821c6abbc736d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "71a6a8ac4495c7b177b918b7e03eb345",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "7534c5a0b2461aa90d822237f0c9f806",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "76e065af1bc7827bc8a76f59c62cf30b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "778b750f8d56c676c055f504c1b1d8a9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "7908b73be3012f1e1263cbe6148d43ba",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "797a6a455977e9d51e3ce5e756450ff9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "799981fd158a7e329d5f6a2b589a4c2f",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "7bb9defbbcafa865ec222c82fd06a169",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "7d6cd82766f27d9d44640c833d636884",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "7e129c77239074de9d25f395cec5015b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "7f65d4a03e6638c7abf922305660b2da",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "8066cd4b5cf4259ae0e8a14c3612c445",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "8113699861a7f85030b25ef1ea709d15",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "83615425ecd5d34a50564695e20aaece",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "83b2453631a44bdbc867df754ff2cf4b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "8613fc175dbdc72688538a2dc23a70d6",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Vozes do verbo > Voz passiva analítica e sintética"
+    },
+    {
+     "chave": "865fe029b1c22310bbdca883e0c3e65d",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "86ec0cc7bda697a68f69d48dc44d0e62",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo"
+    },
+    {
+     "chave": "873f13dee7276662581fbf3e8f783c5f",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "880fc0942a213e33cc9a787d7dc65356",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "8a0b6f5e86fc649a7c4e9fd8820fc00c",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "8dd52fa261938b596c405ee017533480",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "911d18e037bbe315bf80c4db3a973562",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "915c4d140f6be1d3ab9f6c92eaab2134",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "91ced4a08a2a2bc087f9644c8a2a79ea",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "932a027a09590fc80425ba279f373025",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "94f9f7caa9a3967208aa14248fbc8e52",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "95357abe758143826149fa1c121531a9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "971316377f224e26a44eab299d288e13",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "97834a93cbb4567e703b9f5824741295",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "986906d665925b6f9112234bd3b43211",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "98a235908587141c0c705ea6254c22b9",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "9aed85a6a6d3a1ff7f72ba08ad444753",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "9c9593e6bdbee46b2791f9373253c18a",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "9cd30183a9240a2a58cd9c0a9464406b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "9edd79e3e82c0086f317cfeb49548887",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "a16d0907f5f1096d6414e192b21138a1",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "a1a51f489b01f67c4fc0f784478b60cb",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "a5501be11c55df720d38cb7b0f717061",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "a65f3437e54a9a38f378d911a0602db7",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "a889e3005e3a34c9bad807239e439757",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "a949143c86062356e0b604e24ebc3d14",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "aac6d9282d30570cfd74e5f970c2821d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "acf4a8329f24934acca2bb2dc32a755f",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "adf21e2e964ab724d3823b95f6002fe2",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo"
+    },
+    {
+     "chave": "af62c7e726d56f1329a21324fc7fdaf7",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "b046b0965b33fd15e0bea77a8c911e27",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "b20ceefaec3aa2fcd793aec9729a1350",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "b6264e6a057af176e01a351a13b10275",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "b7f40f7db1743b88b6e1ff2a5a5484d3",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "bb89e1bcc66746631c06e08199aef23d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "bde82978b0aa4acef3f613c9f1ca4cea",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "be7c380729463874871ff8fbeb0cf21e",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "bec2a23a1c7dca4f662c34f5c7789167",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "bef25c1bd5b78d0d5e5e644daf6bb500",
+     "grupo": "IESES",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "bfbde977eeec2066e8c4b2c2b8110c17",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "c0217d6bb3ca52543be889026bbfe087",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "c28ba2687cdb4b1a4609290eb4034aff",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "c372fb2a651b1621059254e45a358d23",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "c43d211c74edc13b09314f6edaa01c0b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "c5a025b1608bb0c37f7f3ae356ae9ba1",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "c7951f7f5b94d5d6461676aaac12a338",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "c9217f26b473308f36113c22ce748f51",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "cc1c8da1e679d36277060dd174128286",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo"
+    },
+    {
+     "chave": "ce4b62eae98efd49a85930aad11fbd4f",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "cebc05825f9dbac51ec12e125c8f315d",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "cf7eaeb950f5e40fcc62ff5d5fe0eddd",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "cff8da5c0ac524fff96734da746633e6",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "d0f063629f690ed57903bfd5dad1e96f",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "d108f54b78b7c2e87fd9aabac3e18c91",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "d30b9a8789cb570bb7ca82e2b0ca708b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "d3aaf9ae5baa6d2554b7f4ddeb87b05e",
+     "grupo": "IESES",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial"
+    },
+    {
+     "chave": "d850dbf13d22f04cd7b72653a07aca49",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "d89c6214e86642bf0e66dd158d6f11a8",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "d9abe5f5ef0ecac8db5c68d0a6c907f4",
+     "grupo": "IESES",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "d9d2c2fee42db72600f3459749148d81",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "dae1cb000928d2ed661df07052dd8973",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego de tempos e modos verbais"
+    },
+    {
+     "chave": "db5625da75208933793dd188280fd699",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "db81f4b07187a0afe8de28a1ce19f1de",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "dcbe28b20d7d0fc80ab17f121ed17624",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "e2a3d6cff7a1ac054c5ea72a90cb844b",
+     "grupo": "IESES",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial"
+    },
+    {
+     "chave": "e59c222d1325f0c55abd3aa7e4cf3a37",
+     "grupo": "IESES",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial"
+    },
+    {
+     "chave": "e734940038e13be75cb6f5e4f7781b75",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "e83cba658d328961e4defa75c3a3e990",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "ec44e0ffed6b90e77791a6f6a96749a8",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "f1e144bf95e52a2a83771686449a048a",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "f225e77e50818c11f0dad48be9f45762",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "f439559adde5ae62b62819d3708c26a3",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "f43bb65a06fdc6691a324130877da242",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "f56f50f9e965de455810f816b0fad01e",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego de tempos e modos verbais"
+    },
+    {
+     "chave": "f7770aa866dd9714de94484dc9f31113",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "f793cdb60f587296178aa963bfb65a1b",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "f7afb1fd1aa3eb04f653f97aa0aad523",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Vozes do verbo > Voz passiva analítica e sintética"
+    },
+    {
+     "chave": "f7e38baff805be619156b7c7fafe5f5e",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "f81da9a20570510d2bef37e31664f425",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "f87d81412abfee111a57e3a41196057e",
+     "grupo": "IESES",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "fb7f3e34fd8579c121ef88f5304ce332",
+     "grupo": "IESES",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "041861045257ac6ff4747f9886f5856e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > Afirmação histórica dos direitos humanos"
+    },
+    {
+     "chave": "05c19715231845e448c52744d3f5d313",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "0635a4ce75e9a611b742f892b58f1059",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Ação penal > Ação penal nos crimes eleitorais > Código Eleitoral, art. 355"
+    },
+    {
+     "chave": "0845fccc55bdafa88836df5a887e8a13",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "09144efd72d9682d5444a3eeea26f7d7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Serviços públicos > Concessão e permissão"
+    },
+    {
+     "chave": "09bb20589c6519b0347c023ef492b594",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "0e3c18d74e1fba2971afa1c835875658",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "0f176d877dcd767b9ad36bb8a1aaba8b",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Concurso público"
+    },
+    {
+     "chave": "1133f7cae67aa3baed2df07a3af6fbc5",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais",
+     "confianca": "alta"
+    },
+    {
+     "chave": "113ca5830060abefcd82c025e87c8424",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Direitos do preso > LEP, art. 41"
+    },
+    {
+     "chave": "119a0f96b6dd4c654c356895bc061b62",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Hipóteses e sujeitos da prisão em flagrante > CPP, art. 301"
+    },
+    {
+     "chave": "149b545d62235491c961baec18d50380",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "15663803d50484073721aec950be0d12",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 5º"
+    },
+    {
+     "chave": "16194188306cc0cafba235473f186265",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > educação, cultura e desporto > Cultura > CF, art. 215, § 1º"
+    },
+    {
+     "chave": "1690e58be5f1c8f70f01af62808f14ad",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "192cd4e6068b7b62f3bf636eac546d49",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "1b2e7481b42667e6c98eab2e436bbf9e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Infração penal: elementos, espécies > Conceito analítico de crime"
+    },
+    {
+     "chave": "1d12c2e5c937392258f4af1ab0ffed26",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto > Lei 10.826/2003, art. 16"
+    },
+    {
+     "chave": "209ff51b463868682995ac5284b7a037",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "2392e4598e382e08ac12e43712c9947d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "2465b5bf2c4b11a14dd4d82d5a9ce692",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Princípio da insignificância"
+    },
+    {
+     "chave": "247a545d08c5788d4c50c3f71fa2620e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Pacto Internacional dos Direitos Civis e Políticos > PIDCP, art. 6º"
+    },
+    {
+     "chave": "26271a0fd3bcef8175f2393f6e94ddc9",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "29c39f507d0cabfc22d5d7cad500ab91",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "2a63d02e526e2a8468f959321180c1d4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > cidadania e direitos políticos > Elegibilidade e inelegibilidades > CF, art. 14, § 3º"
+    },
+    {
+     "chave": "2a8ac2278e89a42aa1a006674478d22d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa"
+    },
+    {
+     "chave": "2c702a58b9b25de44c101178b7f7ee2a",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Extraterritorialidade > Lei 9.455/1997, art. 2º"
+    },
+    {
+     "chave": "2dc4744da6a79d9073a4bf0bd430c875",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 2º",
+     "confianca": "media"
+    },
+    {
+     "chave": "2e9bf651a4cee03c79a719271d9f380d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias"
+    },
+    {
+     "chave": "2f1042fed79d660432cd420510cda0a4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "30647a0135dfdc5cdeb524851529fedf",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Administrativo > Atos administrativos > Anulação e revogação"
+    },
+    {
+     "chave": "31ff906ca08188b5edc67a6081db99cd",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Direitos do preso"
+    },
+    {
+     "chave": "340ffd7e3b048340a80310b80bfa1303",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
+    },
+    {
+     "chave": "35e214be64df6a7d76e73ad064cf9fb4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 312"
+    },
+    {
+     "chave": "39d245a27a41f27590a78e13f71b0408",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "3a7356af2b51d98948c9e5d8b3dff3e5",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Direitos humanos na Constituição Federal > Princípios das relações internacionais > CF, art. 4º"
+    },
+    {
+     "chave": "3e67a7f8b5a833bd84e84e810a8ef134",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Crimes de abuso de autoridade em espécie"
+    },
+    {
+     "chave": "44386f37259fbd4654161f2f637824f0",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "47990942c620d74ce2568b817a87a4b1",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Competências federativas em segurança pública"
+    },
+    {
+     "chave": "48725c879c13b8ce014a6656c7aafccf",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "49e0e6a2f5b931c4e526a242e39807a0",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "4bd5f926f45415a2a59d03546e89a0f0",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 23"
+    },
+    {
+     "chave": "4bf60df6d006cd23245bfe5f5305edc2",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Tráfico privilegiado"
+    },
+    {
+     "chave": "4c751f47745419998efc21f5b2fd412a",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Porte de arma de fogo > Lei 10.826/2003, art. 6º"
+    },
+    {
+     "chave": "4e8690ec00c19267a981054e1638c7f4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Tráfico privilegiado > Lei 11.343/2006, art. 33, § 4º"
+    },
+    {
+     "chave": "4eca3f6df6d816db57256be9c75b2848",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Regras de aplicação geral"
+    },
+    {
+     "chave": "50c7895d582494db2c864e8f79b42d39",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Convenção contra a Tortura (ONU, 1984)"
+    },
+    {
+     "chave": "5422b3b5083645e65933bbcd6cff386b",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Concurso público"
+    },
+    {
+     "chave": "548a6cc1431fc425c2ebfbb9ddfd6e89",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "567da2a8ed2f1409ae12e40046ce9cf8",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei dos Crimes contra Violência Doméstica ou “Lei Maria da Penha” (Lei nº 11.340/2006) > Disposições processuais e vedações > Súmula 589 do STJ"
+    },
+    {
+     "chave": "5734365aa5f93b4d4e5598269e2d2a98",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "5750463ca72631c8f5ce64fe21084a30",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "5968990654a1d8be68ae3ec05675b243",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Erro de tipo e erro de proibição"
+    },
+    {
+     "chave": "5c97c0ce84ab69410f7c59f20445b896",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "5e265318b7c1383b827d883619c004f8",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+     "segunda": null,
+     "confianca": "media"
+    },
+    {
+     "chave": "5fab5616614710314dcc9e2a8a0b7832",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "60057794b8926189903cb1ef6054db4d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Empresas públicas e sociedades de economia mista"
+    },
+    {
+     "chave": "60cd70cf2730224830099ea5efbfa03e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "610fb408953d14d6f16bb9905f1c583a",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito à vida"
+    },
+    {
+     "chave": "6184118342cbccb78148c7f0f60f97cb",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "619749d1a784fa629e78374deb1eb84e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "644cf1b105dad4148239c827c5bb876a",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "64d705af4345579a056868e19900f07f",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito de propriedade e suas limitações > CF, art. 243"
+    },
+    {
+     "chave": "64f52b9714d3b8fbee3ac9bfca02095d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144"
+    },
+    {
+     "chave": "6674b95b30b8a13398434c0f86e5d3ed",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder de polícia"
+    },
+    {
+     "chave": "6683d76a5aefb4c8bc60836c58d8ed99",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Posse de droga para consumo pessoal"
+    },
+    {
+     "chave": "6814625d0a6152d5aa043808e2b92738",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "685a35f38d1caf60d536066cac8b9aaf",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "6a5dbba05279880aa66951e621f05695",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Remuneração e vantagens"
+    },
+    {
+     "chave": "6bef6b3b704084d6a56f484678d10dc3",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "6e0ef4090b358aaeb160ef6577990126",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "6e4682282ce0f2177716e397879e6e31",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
+     "confianca": "media"
+    },
+    {
+     "chave": "6e5d9fb6c91e775e958fa560eaec2ca7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "71bff86a2a2c028110ad4f14dcb233f4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "73a1e063b19954e9d9907fd7dbdc2de4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "73b57dc4b2017da0fd9f7e5352d374fe",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 69"
+    },
+    {
+     "chave": "74e0f44656a977bbcc3937f769736fa4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Crimes de abuso de autoridade em espécie > Lei 13.869/2019, art. 12"
+    },
+    {
+     "chave": "75965db4c668dcb99040a7a271b09ed8",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Formas de provimento"
+    },
+    {
+     "chave": "788f630947cdc302cbb6add89af3285e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "7944a3059536519bed2a48241cb5db0a",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Responsabilidade civil do Estado > Responsabilidade por omissão"
+    },
+    {
+     "chave": "7955afce46414d39ac7d143ddce0d9a7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Responsabilidade civil do Estado > Responsabilidade objetiva e ação de regresso"
+    },
+    {
+     "chave": "82258fed236b7288bd147d7e8ed37567",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
+     "segunda": null,
+     "confianca": "media"
+    },
+    {
+     "chave": "87682dae3194132dda2a6a18a3862b8f",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico"
+    },
+    {
+     "chave": "8772277aaf85a6b50dbc42ab4e30ee73",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Programa Nacional de Direitos Humanos (PNHD-3), Decreto º 7.037/2009 e alterações > Eixos orientadores e diretrizes"
+    },
+    {
+     "chave": "882036c11b441b83e3a2e7e24b749bf7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 25"
+    },
+    {
+     "chave": "885ea9559dd73bbf3664adfb41c11453",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "91199ab059a792a3cd74abd24b2ef40f",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Ação penal > Decadência do direito de queixa > CPP, art. 38"
+    },
+    {
+     "chave": "9208d6b84ab684d7c3d9d01352f107b2",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude > CP, art. 25"
+    },
+    {
+     "chave": "93b7f7e982609f68aed46fcc189a818b",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva"
+    },
+    {
+     "chave": "9416ec299ca20e80ef360db1994cd5d5",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "9506b8ffa881de6572b010d2e77a83b7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal > CF, art. 5º, LVI"
+    },
+    {
+     "chave": "95a3c1d38b50378902c3c7ca44681a08",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "9635973daf89295f53b25bcac8089c4b",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "97778cefb8e9a4d36e0d123184d578da",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Processual Penal > Ação penal > Decadência do direito de queixa"
+    },
+    {
+     "chave": "987ff074b1d3c9f6f430e3a807108ee1",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "fora do treino",
+     "motivo": "gabarito discutível: duas alternativas certas (Lei 11.343, art. 23-A, § 6º)",
+     "no_conferido_antes": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Tratamento e internação do usuário ou dependente > Lei 11.343/2006, art. 23-A"
+    },
+    {
+     "chave": "992631820e847ca7424dd9a3f4a6ede0",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados"
+    },
+    {
+     "chave": "9a77ba2c22ee0c416067e3a5feb258e9",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "9d2f072495ec9274ba8f4b8b6c516d56",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965)"
+    },
+    {
+     "chave": "9ed5cc4287d815e83c27d6ad4e5adf96",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Imputabilidade penal"
+    },
+    {
+     "chave": "9f38fef2b0214f091f7a2f5888225ff3",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "a299695ee3fa37446f3e597275cb0651",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos"
+    },
+    {
+     "chave": "a3d2f6e5c5fe750a8044a1fd87959baa",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "a6f876564736210ddab93f422674917d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta > Autarquia"
+    },
+    {
+     "chave": "a6fa2a61eb2edb083bcce1dce05b5824",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "acafc097b9365515710a9f5bff57cccd",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "aea0ab50f0786cee959f45305df82c68",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "b2e0a90b8e34440043f7a22d5d63908b",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Regime jurídico e estabilidade"
+    },
+    {
+     "chave": "b41e95b3b370bea2c551f862c4475cde",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Direito de greve"
+    },
+    {
+     "chave": "b5f6fc9adf658c015cbe49234a3b67d8",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "b776225a0c53248b3f0d1dc5b606b7a9",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Administração Pública > Organização administrativa: administração direta e indireta"
+    },
+    {
+     "chave": "bb37e480709347728de7edf1412d850f",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "bd2744bef5e99d7d31755f518d800f32",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Crimes de abuso de autoridade em espécie > Lei 13.869/2019, art. 18"
+    },
+    {
+     "chave": "bd5c781303e8cb4051cf102f897ae973",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "bda7a6b762a2da1452258a34557d0239",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965)",
+     "confianca": "media"
+    },
+    {
+     "chave": "be9ebfabef8db86a8f888f8d982facb0",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "bf0868e67f48bf5aa7bcecdc32277a30",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": null,
+     "segunda": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
+     "confianca": "alta"
+    },
+    {
+     "chave": "c11cc995f32335b4a26fe2525d8edad2",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal > CF, art. 5º, LV"
+    },
+    {
+     "chave": "c255540c2271085fbb6466724a298803",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > organização da segurança pública > Carreiras da segurança pública"
+    },
+    {
+     "chave": "c3769a1d7fe027fa721795e93fbd9397",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > educação, cultura e desporto > Cultura > CF, art. 215, § 1º"
+    },
+    {
+     "chave": "c498fafca85eac8a3c130c552b324af8",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "c52d79885b443a06bb9011a89a86b7f7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Penas, aumentos e efeitos > Lei 9.455/1997, art. 1º"
+    },
+    {
+     "chave": "c6a0e16bdb29db3edfb210ffb323feda",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Processo administrativo disciplinar"
+    },
+    {
+     "chave": "c8abf7c31353f637590890c6ccb75911",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Administração Pública > Princípios administrativos > Vedação ao nepotismo > Súmula Vinculante 13"
+    },
+    {
+     "chave": "cbbce6e48648d0e2e5ca893c13c1e730",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 69"
+    },
+    {
+     "chave": "cc32eece9a87ad605ea8a8483a360b73",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Administrativo > Servidores públicos > Processo administrativo disciplinar > Lei 8.112/1990, art. 149"
+    },
+    {
+     "chave": "ce5b02da01d4725045c1fd48a44ddb7a",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 317"
+    },
+    {
+     "chave": "d0d0fe0bd93ec16202e46d3992e54109",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > educação, cultura e desporto > Educação > CF, art. 206, I"
+    },
+    {
+     "chave": "d37428375962f46a8b57bdfc26a2465d",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 64"
+    },
+    {
+     "chave": "da788d09fec30be7684e16ada50fbfbe",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Programa Nacional de Direitos Humanos (PNHD-3), Decreto º 7.037/2009 e alterações > Eixos orientadores e diretrizes"
+    },
+    {
+     "chave": "de2edc2efba5f25497d95cc79e234225",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "c",
+     "primeira": "Direito Administrativo > Controle da administração pública > Controle externo e Tribunais de Contas",
+     "segunda": "Administração Pública > Noções de Administração Pública > Controle da administração pública",
+     "confianca": "media"
+    },
+    {
+     "chave": "e2040750223b7f901bc525b93636b3b7",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Prescrição"
+    },
+    {
+     "chave": "e2b7c99cb3566161fe9b3d2671518c56",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "e78b3f6fbf7a9ea13af019ccc66b95c3",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXXII"
+    },
+    {
+     "chave": "ebd66734191ba3267809e88cea390621",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Assistência ao preso e ao egresso > LEP, art. 26"
+    },
+    {
+     "chave": "edeae08df23893db25eec7ef60ea9cb0",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Crimes contra a Administração Pública > Crimes em licitações e contratos administrativos > CP, art. 337-M"
+    },
+    {
+     "chave": "ee903cd42b1f743b01f002f321e2da63",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "f2f47709d019fb39a22c17a83bc6d082",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "f3737b04fce6085fcec5bf3f9eea2d9b",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Trabalho do preso"
+    },
+    {
+     "chave": "f567b3ebaec91fefd8b9d3d593ce6018",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direitos Humanos > Regras mínimas da ONU para o tratamento de pessoas presas > Separação por categorias de presos"
+    },
+    {
+     "chave": "f602c56d882c7b7c26a9506439433181",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "fa76ddd5fb6c033827534522a546be06",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Erro de tipo e erro de proibição > CP, art. 21"
+    },
+    {
+     "chave": "fabde411a3e61b9f9555150da38421f4",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 81"
+    },
+    {
+     "chave": "fc8a872aafa287c1ca80593561bfbd6e",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "a",
+     "no_conferido": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Entendimentos do STF sobre direitos fundamentais"
+    },
+    {
+     "chave": "fe0526a297722a8c146e3943101ab0e3",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Direito Processual Penal > Prova > Ônus da prova"
+    },
+    {
+     "chave": "fe0aab1f282621497af5d4bd749bb425",
+     "grupo": "NC-UFPR e Selecon",
+     "categoria": "b",
+     "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto"
+    }
+   ]
+  }
+ ]
+}
