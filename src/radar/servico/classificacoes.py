@@ -571,6 +571,99 @@ def confirmar_pela_reanalise(chave: str, no_da_reanalise: str,
         return True
 
 
+# --- a reanalise das provas novas de 17/10 (decisao 171) ---------------------------
+#
+# A 104 so confirmava o no IGUAL. Nas 640 classificacoes das provas novas, duas
+# leituras que caem no mesmo ASSUNTO, em outro subassunto ou nivel, tambem
+# decidem: a questao vai para o no mais fundo que as duas tem em comum, que as
+# duas aceitam. O resto vira pendente ate voce conferir: nada duvidoso fica
+# valendo, porque pendente nao treina nem entra no fechamento.
+
+#: Quem confere pela regra b (o no em comum).
+NO_EM_COMUM = "Claude Code, reanálise às cegas: o nó em comum"
+
+
+def no_em_comum(um: str, outro: str) -> str | None:
+    """O no mais fundo que os dois caminhos tem em comum, nunca acima do
+    assunto. None quando o assunto (ou a materia) difere."""
+    a, b = arvore.partes(um), arvore.partes(outro)
+    if len(a) < 2 or len(b) < 2 or a[:2] != b[:2]:
+        return None
+    comum = 0
+    for x, y in zip(a, b):
+        if x != y:
+            break
+        comum += 1
+    return arvore.SEPARADOR.join(a[:comum])
+
+
+def _principal_que_se_toca(s, chave: str) -> Classificacao | None:
+    """A principal da questao, se ela pode mudar: a conferida por voce nao
+    muda nunca."""
+    atual = s.scalar(select(Classificacao)
+                     .where(Classificacao.chave == chave)
+                     .where(Classificacao.principal.is_(True)))
+    if atual is None or (atual.conferida_em is not None and not atual.conferida_por):
+        return None
+    return atual
+
+
+def _trocar(chave: str, conteudo: str, procedencia: str, *, status: str | None,
+            trecho: str, conferida: bool) -> Classificacao | None:
+    """Grava a principal nova e APAGA a de antes, em vez de deixa-la como
+    associada: ela era a mesma questao lida de outro jeito, e nao outro
+    conceito que a questao tambem cobra (decisao 86)."""
+    criar_tabelas()
+    with sessao() as s:
+        atual = _principal_que_se_toca(s, chave)
+        if atual is None:
+            return None
+        antiga_id, antigo_no = atual.id, atual.conteudo
+        da_questao = {"item_do_edital": atual.item_do_edital, "dispositivo": atual.dispositivo,
+                      "tipo_de_questao": atual.tipo_de_questao, "pegadinha": atual.pegadinha}
+    quando = agora() if conferida else None
+    linha = classificar(chave, conteudo, procedencia, status=status, trecho=trecho,
+                        conferida_em=quando,
+                        conferida_por=NO_EM_COMUM if conferida else None, **da_questao)
+    if antigo_no != conteudo:
+        with sessao() as s:
+            antiga = s.get(Classificacao, antiga_id)
+            if antiga is not None and not antiga.principal:
+                s.delete(antiga)
+    return linha
+
+
+def trocar_pelo_no_em_comum(chave: str, segunda: str, procedencia: str) -> Classificacao | None:
+    """Regra b: a segunda leitura pos a questao no mesmo assunto, em outro
+    subassunto ou nivel. Ela vai para o no em comum e conta como conferida
+    pelo Claude Code, com o motivo. None se nao ha o que fazer (sem
+    principal, conferida por voce, ou outro assunto)."""
+    criar_tabelas()
+    with sessao() as s:
+        atual = _principal_que_se_toca(s, chave)
+        primeira = atual.conteudo if atual is not None else None
+    destino = no_em_comum(primeira, segunda) if primeira else None
+    if destino is None:
+        return None
+    return _trocar(chave, destino, procedencia, status=None, conferida=True,
+                   trecho=(f"o nó em comum das duas leituras (decisão 171): primeira "
+                           f"{primeira}; segunda, às cegas, {segunda}"))
+
+
+def pendente_pela_reanalise(chave: str, procedencia: str, motivo: str) -> Classificacao | None:
+    """Regra c: as duas leituras nao concordam o bastante. A questao vira
+    pendente na materia da primeira, com as duas no motivo, ate voce
+    conferir. None sem principal que se possa tocar."""
+    criar_tabelas()
+    with sessao() as s:
+        atual = _principal_que_se_toca(s, chave)
+        materia = arvore.partes(atual.conteudo)[0] if atual is not None else None
+    if materia is None:
+        return None
+    return _trocar(chave, materia, procedencia, status=PENDENTE, conferida=False,
+                   trecho=f"pendente até a sua conferência (decisão 171): {motivo}")
+
+
 # --- quando a releitura do caderno muda o texto ------------------------------------
 
 #: O que uma classificacao leva consigo quando muda de chave.

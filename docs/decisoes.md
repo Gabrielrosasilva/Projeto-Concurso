@@ -5926,3 +5926,58 @@ viraram estudo extra "Onde: Radar". Copia antes em
        integrantes: o detalhe diz que so a parte 1 entra.
      O total do Ciclo 1 foi de 2133 para 2050 questoes. O que foi para o
      Ciclo 2 esta na pendencia dele (secao D).
+
+## A conferencia das provas novas (pedido de 18/10/2026, Parte 2)
+
+171. **as 640 classificacoes das provas novas de 17/10 foram lidas de novo as
+     cegas; o mesmo no conta como conferido, o mesmo assunto vai para o no em
+     comum, e o resto vira pendente ate voce conferir** (pedido de 18/10;
+     cabe na I3: protege o fechamento de 07/11). Voce nao confere nada disto
+     antes de 07/11: a tela de conferencia mostra a letra do gabarito, e
+     voce veria a resposta de questoes que ainda vai responder. As 640 sao as
+     da procedencia "Claude Code (claude-opus-5-5), importado manualmente, em
+     17/10/2026": 87 da FEPESE (o complementar pelo conteudo), 145 de Direito
+     do NC-UFPR e da Selecon, 226 do Cebraspe (com 6 do NC-UFPR, pelo bloco
+     generico; no banco, 18/10 pelo relogio UTC) e 182 de Portugues da IESES
+     (41 questoes, cada uma em varios cadernos). As regras:
+     - **a segunda leitura** (a regra da 104): 11 leituras independentes
+       (claude-opus-5-5, 18/10), cada uma com o seu lote e a arvore inteira -
+       so os caminhos, e nunca a primeira leitura -, uma por questao (a mesma
+       questao em outro caderno e uma so). Cada leitura escolhe um no que ja
+       existe, ou "pendente", com a confianca;
+     - **a) o mesmo no, confianca alta ou media**: conferida pelo Claude Code
+       (`conferida_por = "Claude Code, reanálise às cegas"`, a marca da 104).
+       As duas pendentes ficam pendentes;
+     - **b) o mesmo assunto, confianca alta ou media, outro subassunto ou
+       nivel** (regra nova; muda a 104 so neste caso): a questao vai para o no
+       mais fundo que as duas leituras tem em comum, nunca acima do assunto,
+       e conta como conferida (`"Claude Code, reanálise às cegas: o nó em
+       comum"`), com as duas leituras no trecho (`classificacoes.trocar_pelo_no_em_comum`).
+       A classificacao de antes SAI, em vez de virar associada: era a mesma
+       questao lida mais fundo, e nao outro conceito (decisao 86);
+     - **c) o resto** (outro assunto, outra materia, confianca baixa, uma
+       pendente e a outra nao): vira pendente na materia da primeira leitura,
+       com as duas no motivo (`classificacoes.pendente_pela_reanalise`), e
+       entra lado a lado na lista unica `docs/conferir_classificacoes.md` -
+       sem a justificativa das leituras, que costuma dizer qual e a certa.
+       Pendente nao treina (`outras_bancas`, `fepese_no_radar`) nem entra no
+       fechamento (`composicao`): nada duvidoso fica valendo;
+     - a classificacao conferida por voce nunca e tocada, e nada disto roda de
+       02/11 em diante: a semana do fechamento fica parada.
+     O resultado (por chave):
+
+     | Grupo | a | as duas pendentes | b | c |
+     |---|---|---|---|---|
+     | FEPESE (87) | 61 | 9 | 11 | 6 |
+     | NC-UFPR e Selecon (145) | 68 | 52 | 17 | 8 |
+     | Cebraspe (226) | 148 | 0 | 63 | 15 |
+     | IESES (182) | 158 | 18 | 6 | 0 |
+     | Total (640) | 435 | 79 | 97 | 29 |
+
+     Na regra b, 93 subiram para o no em comum (quase sempre do artigo para o
+     subassunto) e 4 ficaram onde estavam (a segunda leitura foi mais fundo).
+     Na c: 11 com uma pendente e a outra nao, 8 de outra materia (5 entre
+     Administracao Publica e Direito Administrativo), 3 de outro assunto e 7
+     com a confianca baixa. Nenhuma das 6 da FEPESE da regra c estava entre
+     as 50 guardadas para 07/11, e a regra b nao muda o assunto, que e o que a
+     composicao divide. As pendentes das 640 foram de 86 para 108.

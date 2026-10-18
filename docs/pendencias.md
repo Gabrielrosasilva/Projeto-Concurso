@@ -708,10 +708,16 @@ O que falta vai nesta ordem, uma etapa por conversa.
 ### Depende de voce (decisoes 167 e 168)
 
 - ⚪ **Reinicie o servidor** depois do `git pull` (a tela Hoje mudou de novo);
-- ⚪ **Conferir a classificacao das provas novas** (Analises > Conferencia):
-  414 de 17/10, todas do Claude Code, e os nos que elas criaram (a arvore
-  foi de 438 para 561); e, na mesma noite, 220 do Cebraspe e 6 do NC-UFPR
-  (a arvore a 682). Gabaritos que a leitura achou discutiveis:
+- ⚪ **Conferir a classificacao das provas novas** (Analises > Conferencia),
+  **so depois de 07/11** (a tela mostra o gabarito): das 640 de 17/10, a
+  segunda leitura as cegas de 18/10 (decisao 171) conferiu 532 - 435 no
+  mesmo no e 97 no no em comum das duas leituras. Ficam 108 pendentes, que
+  nao treinam nem medem: as 29 em que as leituras discordam estao na lista
+  unica ([conferir_classificacoes](conferir_classificacoes.md)), com as
+  duas lado a lado; as outras 79 ficaram pendentes nas duas. Os nos que
+  elas criaram (a arvore foi de 438 para 682) sao o passo 3 da Parte 2.
+  Gabaritos que a leitura achou discutiveis (vao para o passo 2, a data da
+  prova):
   - FEPESE 2014, Advogado Autarquico, q22 (Direito Administrativo): a
     afirmativa 1 diz "ato vinculado" onde o certo seria "discricionario" -
     olhar o caderno;
@@ -806,5 +812,5 @@ O que falta vai nesta ordem, uma etapa por conversa.
 - ⚪ **O Referer do IDIB** (antes da etapa D): o download pede o cabecalho da
   pagina oficial ("Download disponivel apenas atraves do site oficial"). E
   trava contra link direto, nao login, e mandar ou nao e escolha sua;
-- ⚪ **O simulado da semana** continua no Qconcursos (decisao 69) ate a
-  etapa A. Depois dela, fica para voce decidir se ele passa para o radar.
+- ✅ **O simulado da semana** passou para o radar primeiro em 24/10 e 31/10
+  (decisao 170), e o que falta vai para o Qconcursos.

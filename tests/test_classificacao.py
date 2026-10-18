@@ -312,6 +312,61 @@ def test_a_reanalise_so_confirma_o_mesmo_no_e_diz_quem_conferiu(alvo, tmp_path):
     assert _principal("2013-11").conferida_por is None
 
 
+def test_o_no_em_comum_nunca_sobe_acima_do_assunto():
+    """Decisao 171, regra b: o no mais fundo que as duas leituras tem em comum."""
+    assunto = "Direito Penal > Imputabilidade penal"
+    assert classificacoes.no_em_comum(assunto + " > Menoridade > CP, art. 27",
+                                      assunto + " > Menoridade") == assunto + " > Menoridade"
+    assert classificacoes.no_em_comum(assunto + " > Menoridade", assunto + " > Embriaguez") == assunto
+    assert classificacoes.no_em_comum(assunto, assunto + " > Menoridade") == assunto
+    assert classificacoes.no_em_comum(assunto, "Direito Penal > Crimes contra a Administração Pública") is None
+    assert classificacoes.no_em_comum(assunto, "Direito Penal") is None
+
+
+def test_a_regra_b_vai_para_o_no_em_comum_e_apaga_a_de_antes(alvo):
+    """O mesmo assunto, nivel diferente: a questao sobe para o no em comum,
+    conferida pelo Claude Code, e a classificacao de antes SAI - era a mesma
+    questao lida mais fundo, e nao outro conceito associado."""
+    assunto = "Direito Penal > " + IMPUTABILIDADE
+    with sessao() as s:
+        s.add(Conteudo(caminho=assunto + " > Menoridade", pai=assunto, nivel="subassunto",
+                       nome="Menoridade", origem="classificacao", procedencia="teste"))
+    classificacoes.classificar(_k("2019-51"), assunto + " > Menoridade", "Claude Code",
+                               dispositivo="art. 27 do CP", item_do_edital=IMPUTABILIDADE)
+
+    linha = classificacoes.trocar_pelo_no_em_comum(_k("2019-51"), assunto, "Claude Code (teste)")
+    c = _principal("2019-51")
+    assert linha is not None and c.conteudo == assunto
+    assert c.conferida_em is not None and c.conferida_por == classificacoes.NO_EM_COMUM
+    assert c.dispositivo == "art. 27 do CP" and "decisão 171" in c.trecho
+    with sessao() as s:
+        todas = list(s.scalars(select(Classificacao).where(Classificacao.chave == _k("2019-51"))))
+    assert [x.conteudo for x in todas] == [assunto]
+
+    # Outro assunto nao e regra b; a conferida por voce nunca e tocada.
+    assert classificacoes.trocar_pelo_no_em_comum(
+        _k("2019-51"), "Direito Penal > Crimes contra a Administração Pública", "x") is None
+    classificacoes.classificar(_k("2019-52"), assunto + " > Menoridade", "Claude Code")
+    classificacoes.conferir(_k("2019-52"))
+    assert classificacoes.trocar_pelo_no_em_comum(_k("2019-52"), assunto, "x") is None
+    assert _principal("2019-52").conteudo == assunto + " > Menoridade"
+
+
+def test_a_regra_c_vira_pendente_com_as_duas_leituras(alvo):
+    assunto = "Direito Penal > " + IMPUTABILIDADE
+    classificacoes.classificar(_k("2019-51"), assunto, "Claude Code",
+                               dispositivo="art. 26 do CP", item_do_edital=IMPUTABILIDADE)
+    motivo = "outro assunto: primeira X; segunda Y (média)"
+    classificacoes.pendente_pela_reanalise(_k("2019-51"), "Claude Code (teste)", motivo)
+    c = _principal("2019-51")
+    assert (c.conteudo, c.status) == ("Direito Penal", "pendente")
+    assert motivo in c.trecho and c.conferida_em is None
+    assert c.dispositivo == "art. 26 do CP"
+    with sessao() as s:
+        todas = list(s.scalars(select(Classificacao).where(Classificacao.chave == _k("2019-51"))))
+    assert len(todas) == 1
+
+
 # --- a tela ---------------------------------------------------------------------
 
 def test_a_tela_mostra_a_proposta_e_grava_a_decisao(alvo):

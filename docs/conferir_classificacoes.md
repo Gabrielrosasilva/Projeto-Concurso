@@ -1,16 +1,187 @@
-# Classificações do complementar para conferir
+# Classificações para conferir
 
-Estado de 05/10/2026: **46 classificações abertas** e **29 pendentes** ainda
-não vistas por você, no complementar aceito. É a lista única: junta o que
-sobrou da reanálise (decisão 104) e da classificação de Português e
-Raciocínio (decisão 106). As outras já estão conferidas, por você ou pela
-segunda leitura às cegas.
+É a lista única do que espera a sua conferência, em duas partes:
 
-Tela: Análises > Conferência, filtro "complementar aceito" e "só as não
-conferidas". Para cada uma: confirmar a de hoje, ou corrigir para a da
-segunda leitura (ou para outra).
+- **as provas novas de 17/10** (decisão 171): 29 pendentes, a conferir só depois
+  de 07/11;
+- **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
+  pendentes, o que sobrou da reanálise (decisão 104) e da classificação de
+  Português e Raciocínio (decisão 106).
 
-## Administração Pública (3)
+As outras já estão conferidas, por você ou pela segunda leitura às cegas.
+
+Tela: Análises > Conferência, filtro da evidência e "só as não conferidas".
+Para cada uma: confirmar a de hoje, ou corrigir para a da segunda leitura (ou
+para outra).
+
+## As provas novas de 17/10: 29 pendentes até a sua conferência (decisão 171)
+
+**Confira só depois de 07/11**: a tela de conferência mostra a letra do gabarito,
+e estas são questões que você ainda vai responder. Por isso esta lista não traz a
+justificativa das leituras (ela costuma dizer qual é a certa); a tela traz. Até lá
+elas ficam pendentes: não treinam nem entram no fechamento.
+
+As 640 classificações das provas novas foram lidas de novo às cegas, em 11 leituras
+independentes, só com os caminhos da árvore: 435 caíram no mesmo nó (conferidas pelo
+Claude Code), 97 no mesmo assunto (foram para o nó que as duas têm em comum, também
+conferidas) e 79 ficaram pendentes nas duas (9 FEPESE,
+52 NC-UFPR e Selecon, 18 IESES). Estas 29 são o
+resto: escolha a primeira leitura, a segunda ou outra.
+
+### FEPESE (acervo complementar) (6)
+
+- **q10 de deinfra · adv_1.pdf** (FEPESE 2014, Advogado Autárquico) — De acordo com a Constituição da República de 1988, assinale a alternativa correta.
+  - primeira leitura: pendente
+  - segunda, às cegas (alta): Direito Administrativo > Servidores públicos > Acumulação remunerada de cargos > CF, art. 37, XVI
+  - por que ficou: uma pendente e a outra não
+
+- **q24 de 2022bcadm · 6S01.pdf** (FEPESE 2022, Advogado (6S01)) — Assinale a alternativa correta.
+  - primeira leitura: Administração Pública > Princípios administrativos > Alcance de cada princípio
+  - segunda, às cegas (media): Direito Administrativo > Atos administrativos > Atributos, vícios e motivação
+  - por que ficou: outra matéria
+
+- **q2 de 2022bcprocurador · 8PM.pdf** (FEPESE 2022, Procurador do Município (8PM)) — Assinale a alternativa correta sobre o Tribunal de Contas da União.
+  - primeira leitura: Direito Administrativo > Controle da administração pública > Controle externo e Tribunais de Contas > CF, art. 71, § 4º
+  - segunda, às cegas (media): Administração Pública > Noções de Administração Pública > Controle da administração pública
+  - por que ficou: outra matéria
+
+- **q32 de 2022bcprocurador · 8PM.pdf** (FEPESE 2022, Procurador do Município (8PM)) — Com base nas disposições da Constituição Federal de 1988, assinale a alternativa correta sobre a Administração pública.
+  - primeira leitura: pendente
+  - segunda, às cegas (media): Direito Administrativo > Servidores públicos > Remuneração e vantagens
+  - por que ficou: uma pendente e a outra não
+
+- **q28 de 2022casan · S02.pdf** (FEPESE 2022, Advogado (S02)) — Assinale a alternativa correta a respeito do processo administrativo e sua disciplina legal.
+  - primeira leitura: Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico
+  - segunda, às cegas (media): Direito Administrativo > Processo administrativo
+  - por que ficou: outra matéria
+
+- **q24 de 2023gmsj · GM.pdf** (FEPESE 2023, Guarda Municipal) — A Declaração Universal dos Direitos Humanos é um documento que determina:
+  - primeira leitura: Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos
+  - segunda, às cegas (media): Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)
+  - por que ficou: outro assunto
+
+### NC-UFPR e Selecon (8)
+
+- **q43 de pcpr2020 · 301A.pdf** (NC-UFPR 2021, Delegado de Polícia) — Sobre a necessidade de preservação da cadeia de custódia, de acordo com as alterações normativas advindas da Lei nº 13.964/2019, considere a…
+  - primeira leitura: pendente
+  - segunda, às cegas (alta): Direito Processual Penal > Prova > Exame de corpo de delito e perícias
+  - por que ficou: uma pendente e a outra não
+
+- **q51 de pcpr2020 · 301A.pdf** (NC-UFPR 2021, Delegado de Polícia) — Sobre a prisão temporária (Lei nº 7.960/1989 com alterações posteriores), assinale a alternativa correta.
+  - primeira leitura: pendente
+  - segunda, às cegas (media): Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão temporária > Lei 7.960/1989, art. 2º
+  - por que ficou: uma pendente e a outra não
+
+- **q64 de pcpr2020 · 301A.pdf** (NC-UFPR 2021, Delegado de Polícia) — A nova lei de abuso de autoridade (Lei 13.869/19) trouxe inovações consideráveis. A legislação anterior, existente desde 1965, visava exclus…
+  - primeira leitura: pendente
+  - segunda, às cegas (media): Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965)
+  - por que ficou: uma pendente e a outra não
+
+- **q82 de pcpr2020 · 301A.pdf** (NC-UFPR 2021, Delegado de Polícia) — Suponha que um sujeito se passe por policial rodoviário para abordar motoristas numa estrada pouco movimentada e assim cobrar propina para n…
+  - primeira leitura: Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q85 de pcpr2020 · 301A.pdf** (NC-UFPR 2021, Delegado de Polícia) — A Constituição da República proíbe as penas de morte (salvo em caso de guerra declarada) e as consideradas cruéis (art. 5º, inc. XLVII, alín…
+  - primeira leitura: pendente
+  - segunda, às cegas (alta): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Princípios constitucionais penais
+  - por que ficou: uma pendente e a outra não
+
+- **q1 de pcpr2020 · 304A.pdf** (NC-UFPR 2021, Investigador de Polícia / Papiloscopista) — Suponha que um sujeito se passe por agente da vigilância sanitária para abordar comerciantes e assim cobrar propina para não impor multas po…
+  - primeira leitura: Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q15 de pcpr2020 · 304A.pdf** (NC-UFPR 2021, Investigador de Polícia / Papiloscopista) — Sobre a necessidade de preservação da cadeia de custódia, de acordo com as alterações normativas advindas da Lei nº 13.964/2019, considere a…
+  - primeira leitura: pendente
+  - segunda, às cegas (media): Direito Processual Penal > Prova > Exame de corpo de delito e perícias
+  - por que ficou: uma pendente e a outra não
+
+- **q20 de pcpr2020 · 304A.pdf** (NC-UFPR 2021, Investigador de Polícia / Papiloscopista) — O controle externo da Administração Pública é exercido pelo Poder Legislativo, com o auxílio dos Tribunais de Contas. Sobre o tema, consider…
+  - primeira leitura: Direito Administrativo > Controle da administração pública > Controle externo e Tribunais de Contas
+  - segunda, às cegas (media): Administração Pública > Noções de Administração Pública > Controle da administração pública
+  - por que ficou: outra matéria
+
+### Cebraspe (com 6 do NC-UFPR pelo bloco genérico) (15)
+
+- **q51 de CBM_PA_23_CFP · 928_CBM_PA_CFP_001_01.PDF** (Cebraspe 2023, Praça (CFP)) — À luz da Constituição Federal de 1988 (CF), julgue os itens a seguir, acerca dos membros do corpo de bombeiros militar. I Não cabe habeas co…
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 142, § 2º
+  - segunda, às cegas (media): Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)
+  - por que ficou: outro assunto
+
+- **q8 de PC_PE_23 · MATRIZ_9….pdf** (Cebraspe 2024, Agente de Polícia) — Com fundamento na legislação vigente e na doutrina majoritária a respeito da administração pública, de serviços públicos e de contratos admi…
+  - primeira leitura: Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração
+  - segunda, às cegas (baixa): Administração Pública > conceito, estrutura, órgãos públicos, centralização, descentralização e desconcentração
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q5 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Bráulio, policial civil em férias, estava na DP em que trabalha esperando um inspetor de polícia amigo, com o qual havia combinado de almoça…
+  - primeira leitura: Direito Penal > Crimes contra a Administração Pública > Peculato > CP, art. 313
+  - segunda, às cegas (baixa): Direito Penal > Crimes contra a Administração Pública > Peculato
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q6 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Durante a pandemia, Tadeu descumpriu levianamente regras determinadas pelas autoridades sanitárias, tendo frequentado festas e deixado de us…
+  - primeira leitura: Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude
+  - segunda, às cegas (baixa): Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q41 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Paulo, servidor público estadual, verificou, durante pesquisas na Web, que seu contracheque encontrava-se acessível no sítio eletrônico do g…
+  - primeira leitura: Administração Pública > Princípios administrativos > Alcance de cada princípio
+  - segunda, às cegas (media): Direito Administrativo > Acesso à informação > Lei de Acesso à Informação (Lei 12.527/2011)
+  - por que ficou: outra matéria
+
+- **q70 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Com relação à teoria dos direitos fundamentais e à sua aplicação no direito constitucional brasileiro, assinale a opção correta.
+  - primeira leitura: Direitos Humanos > Teoria geral dos direitos humanos > Características dos direitos humanos
+  - segunda, às cegas (baixa): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q72 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Em conformidade com a CF e a jurisprudência do Supremo Tribunal Federal, uma constituição estadual que estabelecesse: (i) novas hipóteses de…
+  - primeira leitura: Direito Constitucional > organização da segurança pública > Carreiras da segurança pública
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q74 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Determinada empresa de mídia solicita que o governo do estado do Rio de Janeiro forneça informações relacionadas a mortes registradas pela p…
+  - primeira leitura: Direito Constitucional > comunicação social > Liberdade de informação jornalística
+  - segunda, às cegas (baixa): Direito Constitucional > comunicação social > Liberdade de informação jornalística
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q76 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — A autoridade policial, no curso de uma investigação de crime de organização criminosa do art. 2.º da Lei n.º 12.850/2013, formula requisição…
+  - primeira leitura: Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-A
+  - segunda, às cegas (baixa): Direito Processual Penal > Prova
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q78 de PC_RJ_21_DELEGADO · 662_PCRJ_001_01.PDF** (Cebraspe 2022, Delegado de Polícia) — Acerca dos direitos fundamentais, assinale a opção correta.
+  - primeira leitura: Direitos Humanos > Direitos humanos na Constituição Federal > Direitos e garantias fundamentais: conceito e distinção
+  - segunda, às cegas (media): Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos
+  - por que ficou: outra matéria
+
+- **q59 de PM_PA_23_CFO · 915_PMPA_CFO_001_01.PDF** (Cebraspe 2023, Oficial (CFO)) — Considerando a observância dos preceitos legais e dos entendimentos jurisprudenciais que dizem respeito às pessoas da comunidade LGBTQIAPN+,…
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Entendimentos do STF sobre direitos fundamentais
+  - segunda, às cegas (media): Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Discriminação
+  - por que ficou: outra matéria
+
+- **q57 de PM_PA_23_CFP · 916_PMPA_CFP_001_01.PDF** (Cebraspe 2023, Praça (CFP)) — É direito fundamental expressamente previsto na Constituição Federal
+  - primeira leitura: Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito à igualdade > CF, art. 5º, I
+  - segunda, às cegas (baixa): Direito Constitucional > direito à vida, à liberdade, à igualdade, à segurança e à propriedade > Direito à igualdade > CF, art. 5º, I
+  - por que ficou: confiança baixa na segunda leitura
+
+- **q59 de PM_PA_23_CFP · 916_PMPA_CFP_001_01.PDF** (Cebraspe 2023, Praça (CFP)) — Os direitos humanos originaram-se a partir da concepção dos direitos naturais em uma dimensão do homem racional construído nas bases do perí…
+  - primeira leitura: Direitos Humanos > Teoria geral dos direitos humanos > Características dos direitos humanos
+  - segunda, às cegas (media): Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação
+  - por que ficou: outro assunto
+
+- **q75 de PREF_SAO_CRISTOVAO_SE_23 · 823_PREF….pdf** (Cebraspe 2023, Guarda Municipal) — Conforme o Estatuto da Criança e do Adolescente, é dever da família, da comunidade, da sociedade em geral e do poder público assegurar às cr…
+  - primeira leitura: Direito Constitucional > família, criança, adolescente e idoso > Proteção à família, ao jovem e ao idoso > CF, art. 227
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q41 de SERES_PE_21 · 671_SERE….pdf** (Cebraspe 2022, Policial Penal) — Assinale a opção que corresponde à causa de extinção da punibilidade por meio da qual o ofendido, depois de iniciada a ação penal, abdica do…
+  - primeira leitura: Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Causas de extinção da punibilidade > CP, art. 107
+  - segunda, às cegas (media): Direito Processual Penal > Ação penal > Perdão do ofendido
+  - por que ficou: outra matéria
+
+## O complementar aceito (estado de 05/10)
+
+### Administração Pública (3)
 
 - **q29 de 2024admbrusque · AS01.pdf** — Assinale a alternativa correta em relação aos poderes da Administração Pública.…
   - hoje: Administração Pública > Poderes e deveres dos administradores públicos > Poder regulamentar
@@ -27,7 +198,7 @@ segunda leitura (ou para outra).
   - segunda leitura (media): Administração Pública > Princípios administrativos > Alcance de cada princípio
   - por quê: Alcance dos princípios (legalidade, impessoalidade, publicidade, implícitos).
 
-## Direito Constitucional (10)
+### Direito Constitucional (10)
 
 - **q24 de 2024admbrusque · AM1.pdf** — Analise as afirmativas abaixo considerando os direitos e deveres individuais e coletivos elencados na Constituição Federal brasileira. 1. Ho…
   - hoje: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Intimidade, vida privada, honra e imagem > CF, art. 5º, X
@@ -79,7 +250,7 @@ segunda leitura (ou para outra).
   - segunda leitura (alta): Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais
   - por quê: Direitos dos trabalhadores do art. 7º; correta: repouso semanal preferencialmente aos domingos (XV).
 
-## Direito Processual Penal (2)
+### Direito Processual Penal (2)
 
 - **q42 de 2024gmpalhoca · GM.pdf** — De acordo com o processo penal brasileiro, as medidas cautelares:…
   - hoje: Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Revisão periódica das medidas cautelares > CPP, art. 282
@@ -91,7 +262,7 @@ segunda leitura (ou para outra).
   - segunda leitura (media): Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Comunicação da prisão
   - por quê: Prazos da comunicação da prisão em flagrante e do envio dos autos ao juiz (CPP, arts. 306 e 310).
 
-## Direitos Humanos (3)
+### Direitos Humanos (3)
 
 - **q46 de 2024sas-sj · S4.pdf** — Assinale a alternativa que apresenta de forma correta o conceito de direitos humanos.…
   - hoje: Direitos Humanos > Teoria geral dos direitos humanos > Características dos direitos humanos
@@ -108,7 +279,7 @@ segunda leitura (ou para outra).
   - segunda leitura (media): Direitos Humanos > Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José)
   - por quê: Direitos protegidos na Convenção Americana (vários artigos; a correta é a integridade pessoal, art. 5º).
 
-## Legislação Especial (2)
+### Legislação Especial (2)
 
 - **q29 de 2024admbrusque · AS13.pdf** — É correto afirmar sobre os crimes de abuso de autoridade:…
   - hoje: Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Penas e efeitos da condenação
@@ -120,7 +291,7 @@ segunda leitura (ou para outra).
   - segunda leitura (media): Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Penas e efeitos da condenação
   - por quê: Penas e efeitos da condenação na Lei 13.869/2019 (perda do cargo condicionada à reincidência); o nó tem o nome da lei antiga.
 
-## Língua Portuguesa (24)
+### Língua Portuguesa (24)
 
 - **q2 de 2024admbrusque · AS01.pdf** — Assinale a frase, extraída do texto 1, que está corretamente redigida.…
   - hoje: Língua Portuguesa > Concordância nominal e verbal
@@ -242,7 +413,7 @@ segunda leitura (ou para outra).
   - segunda leitura (media): pendente
   - por quê: Silabada/prosódia (Íbero) com o enunciado cortado.
 
-## Raciocínio Lógico (2)
+### Raciocínio Lógico (2)
 
 - **q9 de 2023educabrusque · ME2.pdf** — Analise a seguinte situação: Patrícia, Janaína, Cláudia e Bruna são as únicas nadadoras que participam de uma competição profissional de nat…
   - hoje: Raciocínio Lógico > Compreensão de estruturas lógicas
@@ -254,7 +425,7 @@ segunda leitura (ou para outra).
   - segunda leitura (media): Raciocínio Lógico > Proposições simples e compostas
   - por quê: Conceito de proposição (itens 1-3) e nomenclatura da condicional (item 4, invertida).
 
-## As pendentes (29)
+### As pendentes (29)
 
 Sem nó, com o motivo: tema que o edital de 2019 não lista, ou enunciado cortado na leitura do PDF.
 
@@ -288,7 +459,7 @@ Sem nó, com o motivo: tema que o edital de 2019 não lista, ou enunciado cortad
 - **q8 de 2024emergencialpalhoca · M1.pdf** (Língua Portuguesa) — pendente: Cobra tipos de sujeito (oculto, inexistente, indeterminado); sujeito é termo essencial da oração e o edital só traz os termos integrantes.
 - **q21 de 2024sas-sj · M1.pdf** (Raciocínio Lógico) — pendente: é de Noções de Informática (MS Word): o caderno juntou a questão ao bloco de Raciocínio Lógico; não é matéria do edital de 2019
 
-## Dois gabaritos para conferir (Raciocínio Lógico)
+### Dois gabaritos para conferir (Raciocínio Lógico)
 
 - **2024-q21** (dado lançado 3 vezes): a conta dá 50%, e o gabarito oficial diz d (24% a 26%). As duas leituras chegaram a isso sozinhas.
 - **2023-q10-533**: enunciado cortado; o gabarito (47%) só fecha com "menina branca ou parda" (113/240).

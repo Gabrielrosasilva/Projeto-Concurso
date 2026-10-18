@@ -365,6 +365,14 @@ lei seca e do Portugues (10 de RL a noite), e o Portugues da sexta foi para a
 segunda seguinte; Termos integrantes 2, Redacao oficial 2, a Revisao ativa 3 e
 cinco revisoes foram para o Ciclo 2 (pendencia D). O Ciclo 1 foi de 2133 para
 2050 questoes.
+**A conferencia das provas novas (pedido de 18/10, Parte 2, decisao 171; so o
+Claude Code ate 01/11, voce depois de 07/11):** as 640 classificacoes de 17/10
+foram lidas de novo as cegas (11 leituras, so com a arvore): 435 no mesmo no
+(conferidas pelo Claude Code), 97 no mesmo assunto (foram para o no em comum,
+regra nova, tambem conferidas), 79 pendentes nas duas e 29 que discordam -
+estas viraram pendentes, lado a lado na lista unica, para conferir depois de
+07/11. Pendente nao treina nem entra no fechamento. Faltam o passo 2 (a data
+da prova contra a lei que mudou) e o 3 (os nos novos sem questao).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
