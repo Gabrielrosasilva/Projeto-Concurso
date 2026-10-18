@@ -14,7 +14,7 @@
 #
 # Sem assunto no site (falta a lista da disciplina Redacao Oficial):
 #   Redação oficial 1: atributos e tratamento
-#   Redação oficial 2: o padrão ofício
+#   Redação oficial 2: o padrão ofício (foi para o Ciclo 2, decisao 170)
 
 # FEPESE (o numero do filtro Banca do site).
 banca: 61
@@ -261,6 +261,13 @@ temas:
       15450: "3 Lógica de Argumentação - Diagramas e Operadores Lógicos"
       27862: "6 Proposições Categóricas"
       15454: "12 Quantificadores"
+  # A aula de 06/11, que saiu do sabado para a sexta com questoes (decisao 170).
+  - tema: "Problemas aritméticos e geométricos"
+    disciplina: 4
+    assuntos:
+      15459: "18 Raciocínio Matemático"
+      15461: "20 Geometria Básica"
+    aviso: "Os dois assuntos do site são mais largos que o tema: faça só as de razão e proporção, regra de três, porcentagem, perímetro e área e teorema de Pitágoras."
   - tema: "Substantivo e adjetivo (flexão nominal)"
     disciplina: 1
     assuntos:

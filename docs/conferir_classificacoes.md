@@ -2,8 +2,8 @@
 
 É a lista única do que espera a sua conferência, em três partes:
 
-- **as provas novas de 17/10** (decisão 171): 29 pendentes, a conferir só depois
-  de 07/11;
+- **as provas novas de 17/10** (decisão 171): 29 pendentes e 8 fora do treino pela
+  data da prova, a conferir só depois de 07/11;
 - **as provas baixadas à mão de 18/10** (decisão 172): 5 pendentes, também só
   depois de 07/11;
 - **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
@@ -180,6 +180,21 @@ resto: escolha a primeira leitura, a segunda ou outra.
   - primeira leitura: Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Causas de extinção da punibilidade > CP, art. 107
   - segunda, às cegas (media): Direito Processual Penal > Ação penal > Perdão do ofendido
   - por que ficou: outra matéria
+
+### Fora do treino pela data da prova (8, decisão 171, passo 2)
+
+Conferidas contra o que mudou depois da prova: a lei mudou e o gabarito ficou
+errado, ou o gabarito já era discutível. Estão pendentes, com o motivo na tela
+de conferência; o efeito em cada uma (que diz a alternativa) fica para depois
+de 07/11. O relatório inteiro está no [leis_alteradas](leis_alteradas.md).
+
+- **q36 de 2022bcprocurador · 8PM.pdf** (FEPESE 2022) — a lei mudou: EC 136/2025 (precatórios, CF art. 100, § 5º). Já era pendente pela segunda leitura.
+- **q34 de PREF_SAO_CRISTOVAO_SE_23** (Cebraspe 2023) — a lei mudou: STF, Tema 656 (2025), guardas e policiamento ostensivo; confiança média, pela notícia.
+- **q43 de SEJUSP/MG 2022** (Selecon 2022) — gabarito discutível: duas alternativas certas (Lei 11.343, art. 23-A).
+- **q39 e q40 de PC_RJ_21_DELEGADO** (Cebraspe 2022) — gabarito discutível: a fiança pela regra de antes da Lei 12.403/2011 (CPP, art. 322).
+- **q26 de pmcol2022 · 305.pdf** (NC-UFPR 2022) — gabarito discutível: o STF (ADC 38, fev/2021) derrubou o limite de população antes da prova.
+- **q82 de PREF_SAO_CRISTOVAO_SE_23** (Cebraspe 2023) — gabarito discutível: uma alternativa repete a Súmula Vinculante 6.
+- **q22 de deinfra · adv_1.pdf** (FEPESE 2014) — gabarito discutível: confira no caderno se a afirmativa 1 diz "vinculado" ou "discricionário".
 
 ## As provas baixadas à mão de 18/10: 5 pendentes até a sua conferência (decisões 171 e 172)
 

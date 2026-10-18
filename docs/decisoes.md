@@ -5926,6 +5926,13 @@ viraram estudo extra "Onde: Radar". Copia antes em
        integrantes: o detalhe diz que so a parte 1 entra.
      O total do Ciclo 1 foi de 2133 para 2050 questoes. O que foi para o
      Ciclo 2 esta na pendencia dele (secao D).
+     Depois (18/10, achado pela suite inteira da outra conversa): "Problemas
+     aritmeticos e geometricos" passou a ter questoes na sexta 06/11 e ganhou o
+     link do Qconcursos (18 Raciocinio Matematico e 20 Geometria Basica, da
+     lista que voce copiou, com o aviso de que o site e mais largo que o
+     tema); e quatro testes que liam o plano antigo foram atualizados - a
+     impressao dos dias passados agora e tirada sem os dois campos novos da
+     `Faixa`, que ficam vazios neles.
 
 ## A conferencia das provas novas (pedido de 18/10/2026, Parte 2)
 
@@ -5981,6 +5988,50 @@ viraram estudo extra "Onde: Radar". Copia antes em
      com a confianca baixa. Nenhuma das 6 da FEPESE da regra c estava entre
      as 50 guardadas para 07/11, e a regra b nao muda o assunto, que e o que a
      composicao divide. As pendentes das 640 foram de 86 para 108.
+
+     **O passo 2: a data da prova (18/10, aprovado "com as recomendadas").**
+     As 449 questoes de Direito das 640 (as 182 de Portugues da IESES e 9 de
+     Portugues da FEPESE ficam de fora) foram conferidas em 11 leituras
+     (claude-opus-5-5) contra o que mudou DEPOIS da data de cada prova, no ponto
+     que a questao cobra: lei, emenda e - a seu pedido, ao contrario da lista de
+     03/10 - decisao do STF com efeito geral (controle concentrado,
+     repercussao geral, sumula vinculante). A mudanca de lei com a anotacao do
+     texto compilado da Camara; a do STF, no portal do STF; 4 so pela noticia,
+     e o item diz isso. As regras:
+     - **o gabarito ficou errado, ou ja era discutivel: sai do treino**
+       (`classificacoes.fora_do_treino`): pendente na materia, com o motivo ("a
+       lei mudou: ..." ou "gabarito discutivel: ..."); a que ja era pendente
+       guarda as duas leituras do passo 1 e ganha o motivo ao lado. Foram 8:
+       2 pela lei (a EC 136/2025, precatorios; o Tema 656 do STF, guardas) e 6
+       pelo gabarito - seis dos nove discutiveis da pendencia O. Nenhuma estava
+       entre as 50 guardadas para 07/11;
+     - **o gabarito continua certo, mas a regra mudou: o aviso** "⚠ A lei mudou
+       depois desta prova", com 27 itens novos no `mudancas` do config/leis.yml
+       (34 questoes; 🟣 por conferir, com procedencia e fonte);
+     - **a chave `provas`** (nova, opcional) restringe o item aos cadernos
+       conferidos: o `anos` pegaria toda prova do mesmo ano com a marca,
+       inclusive a feita DEPOIS da mudanca (a Lei 14.365 e de junho de 2022, e
+       a prova de Colombo, de outubro). Os itens novos nao restringem a
+       materia (cada caderno escreve de um jeito), e as marcas que casavam com
+       outra questao dos mesmos cadernos sairam. O `leis.mudancas_da_questao`
+       recebe o link da prova; o item sem `provas` vale como antes;
+     - **o aviso aparece tambem na tela da questao, depois da resposta** - como
+       o gabarito (decisao 148). A ficha e os Macetes so mostram a FEPESE, e a
+       questao de outra banca nao o mostraria em lugar nenhum;
+     - **as datas das provas**: Colombo 16/10/2022 e Campo Magro 09/06/2024
+       (capa); PC-PR 03/10/2021 e PC RJ 13/03/2022 (fontes nao oficiais; a da
+       PC RJ esta escrita no item da Lei 14.365). Nas outras a data exata nao
+       muda nada: as mudancas sao de anos depois;
+     - **sem aviso, de proposito**: a Lei 15.438/2026 na PC-PR q10 - um
+       paragrafo novo, para um caso que a questao nao cobra (o metodo de
+       03/10: mudanca em outro inciso nao conta).
+     Os nove discutiveis da pendencia O: seis sairam (Selecon q43, PC RJ q39 e
+     q40, Colombo q26, Sao Cristovao q34 e q82, e a DEINFRA q22, que depende de
+     olhar o caderno); ficaram a FEPESE 2017 q40, a PC-PR Delegado q4 (o STF
+     mudou de posicao em 2020 e 2021, e o gabarito se sustenta) e a PM TO q44;
+     a PC-PR Investigador q13 ganhou o aviso do RE 635.659. O relatorio esta no
+     [leis_alteradas](leis_alteradas.md), sem o efeito em cada questao (que diz
+     a alternativa certa).
 
 172. **o PDF baixado a mao entra pela lista, e o caderno de mais de uma
      versao so e lido na versao da lista, com o bloco do gabarito dela**

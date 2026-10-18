@@ -83,12 +83,20 @@ def plano_real():
     return pl.carregar(RAIZ / "config" / "cronograma.yml")
 
 
+#: Campos que a `Faixa` ganhou depois da fotografia (decisao 170). Nos dias
+#: passados eles ficam vazios, e a impressao e tirada sem eles.
+CAMPOS_NOVOS = {"treino": False, "anteriores": None}
+
+
 def test_os_dias_ate_05_10_estao_identicos(plano_real):
     for dia in plano_real.dias:
         if dia.data > date(2026, 10, 5):
             continue
-        bruto = json.dumps([asdict(f) for b in pl.BLOCOS for f in getattr(dia, b)],
-                           ensure_ascii=False, sort_keys=True, default=str)
+        faixas = [asdict(f) for b in pl.BLOCOS for f in getattr(dia, b)]
+        for f in faixas:
+            for campo, vazio in CAMPOS_NOVOS.items():
+                assert f.pop(campo) == vazio, (dia.data, f["titulo"], campo)
+        bruto = json.dumps(faixas, ensure_ascii=False, sort_keys=True, default=str)
         assert hashlib.sha256(bruto.encode("utf-8")).hexdigest() == \
             ANTES["dias"][dia.data.isoformat()]["impressao"], dia.data
 
@@ -100,8 +108,29 @@ def _portugues_do_p04(dia, faixa) -> bool:
             and faixa.rotulo in ("R+7", "R+30") and faixa.materia == "Língua Portuguesa")
 
 
+#: Os sabados leves e o Raciocinio na sexta (decisao 170): estes dias mudaram
+#: de proposito, e o desenho novo esta preso no test_composicao (os titulos dos
+#: sabados) e no test_simulado_da_semana.
+DIAS_DA_170 = {date(2026, 10, 23), date(2026, 10, 24), date(2026, 10, 26), date(2026, 10, 30),
+               date(2026, 10, 31), date(2026, 11, 2), date(2026, 11, 6), date(2026, 11, 7)}
+
+#: Os temas que a decisao 170 mudou de dia; os tres ultimos foram para o Ciclo 2.
+ESTUDO_DA_170 = {
+    "Raciocínio Lógico | Conjuntos e diagramas lógicos": "2026-10-23",
+    "Raciocínio Lógico | Argumentação e quantificadores": "2026-10-30",
+    "Raciocínio Lógico | Problemas aritméticos e geométricos": "2026-11-06",
+    "Língua Portuguesa | Termos integrantes 1: objeto direto e indireto": "2026-10-26",
+    "Língua Portuguesa | Redação oficial 1: atributos e tratamento": "2026-11-02",
+    "Língua Portuguesa | Termos integrantes 2: complemento nominal e agente da passiva": None,
+    "Língua Portuguesa | Redação oficial 2: o padrão ofício": None,
+    "Língua Portuguesa | Revisão ativa 3: ortografia, acentuação e redação oficial": None,
+}
+
+
 def test_nenhum_titulo_nem_data_de_tema_mudou(plano_real):
     for dia in plano_real.dias:
+        if dia.data in DIAS_DA_170:
+            continue
         titulos = [f.titulo for b in pl.BLOCOS for f in getattr(dia, b)
                    if f.rotulo != "Extra" and not _portugues_do_p04(dia, f)]
         antes = ANTES["dias"][dia.data.isoformat()]["titulos"]
@@ -113,7 +142,13 @@ def test_nenhum_titulo_nem_data_de_tema_mudou(plano_real):
         assert titulos == antes, dia.data
     estudo = {f"{t.materia} | {t.tema}": t.estudo().data.isoformat()
               for t in fichas.temas_do_plano(plano_real) if t.estudo()}
-    assert estudo == ANTES["estudo_dos_temas"]
+    esperado = dict(ANTES["estudo_dos_temas"])
+    for tema, dia in ESTUDO_DA_170.items():
+        if dia is None:
+            esperado.pop(tema)
+        else:
+            esperado[tema] = dia
+    assert estudo == esperado
 
 
 def test_o_total_de_minutos_de_cada_dia_nao_aumentou(plano_real):

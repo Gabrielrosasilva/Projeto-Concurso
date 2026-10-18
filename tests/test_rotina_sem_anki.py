@@ -205,7 +205,12 @@ def test_o_dia_util_nao_cresceu(real):
         dia = cronograma.montar_dia(real, data, 1)
         assert sum(f.duracao for f in dia.manha) == 135, data
         assert sum(f.duracao for f in dia.pos22 if not f.opcional) == 0, data
-        lei = next(f for f in dia.manha if f.tipo == "lei_seca")
+        lei = next((f for f in dia.manha if f.tipo == "lei_seca"), None)
+        if lei is None:
+            # As sextas de 23/10 a 06/11 (decisao 170): a aula de Raciocinio
+            # entrou no lugar da lei seca e do Portugues, e a manha continua 135.
+            assert any(f.tipo == "raciocinio" for f in dia.manha), data
+            continue
         # 10 min no dia em que o tema de Direito nao caiu (R4, decisao 124): os
         # 10 que sairam estao na Extra da manha, e a manha continua 135.
         direito_basico = any(f.rotulo == "Extra" and f.materia == lei.materia

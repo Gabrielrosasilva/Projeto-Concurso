@@ -2416,7 +2416,7 @@
   },
   {
     "chave": "1c040d0a063ffa10fa45aa8bce35c020",
-    "classificada_em": "2026-10-17T23:30:28.274546+00:00",
+    "classificada_em": "2026-10-18T04:08:17.789801+00:00",
     "conferida_em": null,
     "conferida_por": null,
     "conteudo": "Direito Constitucional",
@@ -2424,10 +2424,10 @@
     "item_do_edital": null,
     "pegadinha": null,
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
     "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
-    "trecho": "pendente: precatórios (CF, art. 100), de Poder Judiciário e finanças públicas: o programa de Direito Constitucional do edital não lista o tema"
+    "trecho": "pendente: precatórios (CF, art. 100), de Poder Judiciário e finanças públicas: o programa de Direito Constitucional do edital não lista o tema | a lei mudou: EC 136/2025 (10/09/2025) trocou a data do art. 100, § 5º, da CF (precatórios), e nenhuma alternativa traz a de hoje"
   },
   {
     "chave": "1c370e278eb376f524e9e4e2b78f431c",
@@ -3916,18 +3916,18 @@
   },
   {
     "chave": "2d9572debc7e4ebca47f543a1230cd59",
-    "classificada_em": "2026-10-18T00:39:22.606472+00:00",
-    "conferida_em": "2026-10-18T03:24:20.158813+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 322",
+    "classificada_em": "2026-10-18T04:08:17.932682+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Processual Penal",
     "dispositivo": "CPP, art. 322; CP, art. 14, parágrafo único",
     "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
     "pegadinha": "Furto qualificado é afiançável, o juiz pode conceder fiança e não se exige indenizar antes; para o delegado conta a pena máxima já com a redução da tentativa (art. 322).",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "caso prático",
-    "trecho": "furto qualificado tentado, cuja pena privativa de liberdade é de 2 a 8 anos de reclusão"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: a fiança pela regra de antes da Lei 12.403/2011 (CPP, art. 322)"
   },
   {
     "chave": "2d95af50061d39c22fd0adb9a578a8c0",
@@ -6856,18 +6856,18 @@
   },
   {
     "chave": "523418a11d453ce8b31dfdffcef2e4a5",
-    "classificada_em": "2026-10-18T00:39:26.491589+00:00",
-    "conferida_em": "2026-10-18T03:24:22.757819+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direito Constitucional > organização da segurança pública > Órgãos da segurança pública e atribuições > CF, art. 144, § 8º",
+    "classificada_em": "2026-10-18T04:08:17.807977+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
     "dispositivo": "CF, art. 144, § 8º (STF, RE 608.588, Tema 656, posterior à prova)",
     "item_do_edital": "organização da segurança pública",
     "pegadinha": "Pelo texto da CF a guarda protege bens, serviços e instalações do município: não guarda presos nem apura infrações. Atenção: depois da prova, o STF (RE 608.588, Tema 656, 2025) admitiu o policiamento ostensivo e comunitário pelas guardas, o que enfraquece a b.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
-    "trecho": "Compete às guardas municipais"
+    "trecho": "fora do treino (decisão 171): a lei mudou: STF, Tema 656 (RE 608.588, 20/02/2025) - o policiamento ostensivo das guardas municipais ficou defensável ao lado do gabarito (confiança média; conferido pela notícia, sem o texto oficial)"
   },
   {
     "chave": "5236013ac4a3684c6fd52e0b790d1d0f",
@@ -10906,18 +10906,18 @@
   },
   {
     "chave": "7dfaad9f40f3f3710298d48d458dd4b0",
-    "classificada_em": "2026-10-18T00:39:22.586311+00:00",
-    "conferida_em": "2026-10-18T03:24:20.142518+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 322",
+    "classificada_em": "2026-10-18T04:08:17.882878+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Processual Penal",
     "dispositivo": "CPP, art. 322",
     "item_do_edital": "Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
     "pegadinha": "A autoridade policial não aplica medida cautelar diversa da prisão (só o juiz); para a fiança pelo delegado o critério legal hoje é a pena máxima de até 4 anos, não a espécie detenção.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "caso prático",
-    "trecho": "a autoridade policial poderá conceder fiança, por se tratar de crime punido com detenção"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: a fiança pela regra de antes da Lei 12.403/2011 (CPP, art. 322)"
   },
   {
     "chave": "7e004d85a4757372bfff652a45ce09dc",
@@ -12601,18 +12601,18 @@
   },
   {
     "chave": "915cdc2415c1c87f9f7bbcea8c1aa2e7",
-    "classificada_em": "2026-10-18T00:25:40.705566+00:00",
-    "conferida_em": "2026-10-18T03:24:18.681624+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Porte de arma de fogo > Lei 10.826/2003, art. 6º",
+    "classificada_em": "2026-10-18T04:08:17.982084+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Legislação Especial",
     "dispositivo": "Lei 10.826/2003, art. 6º, § 7º",
     "item_do_edital": "Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003)",
     "pegadinha": "a lei fala em 50 mil e 500 mil habitantes (art. 6º, III e IV), nunca em 300 mil; advogado não está no rol; as Forças Armadas têm porte (art. 6º, I). Atenção: o STF (ADC 38 e ADIs 5538 e 5948, 2021) derrubou os limites de população, e hoje todas as guardas municipais têm porte, o que deixa a e discutível",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
-    "trecho": "é autorizado aos integrantes das guardas municipais que integram regiões metropolitanas, quando em serviço"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: o STF (ADC 38 e ADIs 5.538 e 5.948, 26/02/2021) derrubou o limite de população para o porte das guardas antes da prova (16/10/2022) - duas alternativas certas"
   },
   {
     "chave": "917578dd14859ce4e1f2ca54aeba3c41",
@@ -13321,18 +13321,18 @@
   },
   {
     "chave": "987ff074b1d3c9f6f430e3a807108ee1",
-    "classificada_em": "2026-10-17T23:30:36.323561+00:00",
-    "conferida_em": "2026-10-18T03:24:18.421573+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Tratamento e internação do usuário ou dependente > Lei 11.343/2006, art. 23-A",
+    "classificada_em": "2026-10-18T04:08:17.844373+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Legislação Especial",
     "dispositivo": "Lei 11.343/2006, art. 23-A, §§ 2º e 9º",
     "item_do_edital": "Lei nº 11.343, de 23 de agosto de 2006 (SISNAD)",
     "pegadinha": "A a traz para a internação voluntária a regra da involuntária (é na involuntária que a família pede a interrupção, § 5º, IV); a b inverte a prioridade, que é do tratamento ambulatorial. Atenção: a d também repete o § 6º do art. 23-A ('a internação, em qualquer de suas modalidades, só será indicada quando os recursos extra-hospitalares se mostrarem insuficientes').",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "literalidade da lei",
-    "trecho": "sendo vedada nas comunidades terapêuticas acolhedoras"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: duas alternativas certas (Lei 11.343, art. 23-A, § 6º)"
   },
   {
     "chave": "98821a02145de4f2632e9e97193e0173",
@@ -14026,18 +14026,18 @@
   },
   {
     "chave": "a24efab647cc9577941c536999ed56e9",
-    "classificada_em": "2026-10-17T23:30:28.769067+00:00",
-    "conferida_em": "2026-10-18T03:24:15.838994+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Administração Pública > Poderes e deveres dos administradores públicos > Espécies de poderes administrativos",
+    "classificada_em": "2026-10-18T04:08:18.180906+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Administração Pública",
     "dispositivo": "doutrina (poderes administrativos); CF, art. 84, VI (decreto autônomo); Lei 9.784/1999, arts. 11 a 15",
     "item_do_edital": "Poderes e deveres dos administradores públicos",
     "pegadinha": "A afirmativa 4 atrai ao vedar o decreto autônomo, que a CF admite desde a EC 32/2001 (art. 84, VI); a 2 generaliza a discricionariedade do poder de polícia, que também pratica atos vinculados (licença). Atenção: a afirmativa 1, como está escrita ('ato vinculado' com escolha da melhor opção), descreve o ato discricionário; o gabarito a só fecha se o original disser 'discricionário'.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "comparação entre conceitos",
-    "trecho": "Por meio do poder hierárquico decorrem as prerrogativas de se delegar e avocar atribuições"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: no texto do banco a afirmativa chama de vinculado o ato discricionário, e nenhuma alternativa fecha - olhar o caderno"
   },
   {
     "chave": "a299695ee3fa37446f3e597275cb0651",
@@ -18676,18 +18676,18 @@
   },
   {
     "chave": "dad3bfd7cc5a673b86e8260dacc68034",
-    "classificada_em": "2026-10-18T00:39:26.925414+00:00",
-    "conferida_em": "2026-10-18T03:24:22.966049+00:00",
-    "conferida_por": "Claude Code, reanálise às cegas",
-    "conteudo": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, IV",
+    "classificada_em": "2026-10-18T04:08:18.113379+00:00",
+    "conferida_em": null,
+    "conferida_por": null,
+    "conteudo": "Direito Constitucional",
     "dispositivo": "CF, art. 7º, IV; Súmula Vinculante 4",
     "item_do_edital": "direitos sociais",
     "pegadinha": "O salário mínimo não serve de indexador de vantagem (SV 4); o servidor em jornada reduzida não recebe menos que o mínimo (STF, Tema 900); a pensão indenizatória pode ser fixada em salários mínimos (Súmula 490 do STF). Atenção: a b repete a Súmula Vinculante 6.",
     "principal": true,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "procedencia": "Claude Code (claude-opus-5-5), conferência da data da prova, em 18/10/2026",
+    "status": "pendente",
     "tipo_de_questao": "conceito",
-    "trecho": "O valor do salário mínimo não pode ser utilizado para o cálculo de gratificações e outras vantagens"
+    "trecho": "fora do treino (decisão 171): gabarito discutível: a alternativa que repete a Súmula Vinculante 6 também está certa"
   },
   {
     "chave": "dae1cb000928d2ed661df07052dd8973",

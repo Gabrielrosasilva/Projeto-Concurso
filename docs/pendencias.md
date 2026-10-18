@@ -716,34 +716,20 @@ O que falta vai nesta ordem, uma etapa por conversa.
   unica ([conferir_classificacoes](conferir_classificacoes.md)), com as
   duas lado a lado; as outras 79 ficaram pendentes nas duas. Os nos que
   elas criaram (a arvore foi de 438 para 682) sao o passo 3 da Parte 2.
-  Gabaritos que a leitura achou discutiveis (vao para o passo 2, a data da
-  prova):
-  - FEPESE 2014, Advogado Autarquico, q22 (Direito Administrativo): a
-    afirmativa 1 diz "ato vinculado" onde o certo seria "discricionario" -
-    olhar o caderno;
-  - FEPESE 2017, Advogado, q40: o gabarito conta "cargo exclusivamente em
-    comissao" como certo;
-  - SEJUSP/MG 2022 (Selecon), q43 (Lei de Drogas): a d) tambem parece certa
-    (Lei 11.343, art. 23-A, § 6º);
-  - PC-PR 2021 Delegado (NC-UFPR), q4 (Administrativo): a b) tambem parece
-    certa (STF, ADI 1.642 e 2.225);
-  - PC-PR 2021 Investigador (NC-UFPR), q13 (posse de droga): o STF (RE
-    635.659, 2024) mudou o entendimento depois da prova;
-  - Guarda de Colombo 2022 (NC-UFPR), q26 (porte da guarda): o gabarito e
-    a letra do art. 6º do Estatuto do Desarmamento, mas o STF (ADC 38, ADIs
-    5.538 e 5.948, 2021) derrubou o limite de populacao - a e) tambem se
-    defende. A 2021-q96 e a 2021-q99 da PC-PR (Informatica) e a 2023-q22
-    das Guardas vieram com o texto estragado, mas estao fora do edital;
-  - Delegado PC RJ 2022 (Cebraspe), q40: o gabarito deixa o delegado dar
-    fianca no furto qualificado tentado, mas a pena maxima, com a menor
-    reducao da tentativa, passa de 4 anos (CPP, art. 322); a q39 usa a
-    regra de antes da Lei 12.403/2011 (detencao, e nao os 4 anos);
-  - Guarda de Sao Cristovao 2023 (Cebraspe), q82: a b) repete a Sumula
-    Vinculante 6 e tambem parece certa; a q34 estava certa em 2023, mas o
-    STF (Tema 656, 2025) admitiu o policiamento ostensivo das guardas;
-  - Soldado PM TO 2021 (Cebraspe), q44: a Declaracao Universal como
-    "recomendacao" e a visao formal; ha quem a trate como costume, que
-    obriga;
+  **O passo 2 (a data da prova, 18/10)** tirou do treino 8 (2 pela lei e 6
+  pelo gabarito; uma ja era pendente, e as pendentes das 640 foram a 115) e
+  deu o aviso "A lei mudou depois desta prova" a 34
+  (27 itens 🟣 no config/leis.yml, por conferir, com a lista no
+  [leis_alteradas](leis_alteradas.md)). Dos nove gabaritos discutiveis de
+  17/10, seis sairam do treino (Selecon q43, PC RJ q39 e q40, Colombo q26,
+  Sao Cristovao q34 e q82, e a DEINFRA q22, que depende de olhar o caderno:
+  "vinculado" ou "discricionario"); ficaram a FEPESE 2017 q40, a PC-PR
+  Delegado q4 e a PM TO q44, e a PC-PR Investigador q13 ganhou o aviso do RE
+  635.659. **A revisar quando o STF publicar o acordao das ADIs 7.156 e
+  7.236** (prescricao da improbidade, julgadas em 01/07/2026): os dois
+  avisos sairam da noticia, e um deles (PC RJ q42) depende de o teto de 20
+  anos alcancar o ressarcimento ao erario. Gabaritos discutiveis que ainda
+  esperam:
   - das baixadas a mao de 18/10 (decisao 172): PM SE 2024 Oficial
     (Selecon), q39 - o gabarito a) (adicional noturno pago a inativo como
     ofensa a moralidade) nao tem base clara, e a d) chega perto do art. 37,

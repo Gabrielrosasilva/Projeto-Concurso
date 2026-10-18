@@ -24,7 +24,8 @@ DO_SITE = ("https://www.qconcursos.com/questoes-de-concursos/questoes?"
            "&exclude_outdated=true&per_page=20&subject_ids%5B%5D=16321")
 
 #: Os temas sem assunto no site: falta a lista da disciplina Redacao Oficial.
-SEM_ASSUNTO = {"Redação oficial 1: atributos e tratamento", "Redação oficial 2: o padrão ofício"}
+# A Redacao oficial 2 foi para o Ciclo 2 (decisao 170): so a 1 fica no plano.
+SEM_ASSUNTO = {"Redação oficial 1: atributos e tratamento"}
 
 
 def test_o_link_e_o_mesmo_que_o_site_gera():
@@ -102,7 +103,9 @@ def test_o_arquivo_real_cobre_todo_tema_do_cronograma_que_vai_ao_qconcursos():
 
 def test_o_arquivo_real_tem_numero_e_nome_em_todo_assunto():
     links = qconcursos.carregar()
-    assert len(links) == 63          # 62 de 06/10 + "Interpretação 1" (P04)
+    # 62 de 06/10 + "Interpretação 1" (P04) + "Problemas aritméticos e
+    # geométricos", que passou a ter questões na sexta (decisão 170).
+    assert len(links) == 64
     for link in links.values():
         assert link.banca == 61
         assert link.assuntos, link.tema

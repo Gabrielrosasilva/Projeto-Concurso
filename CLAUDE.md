@@ -370,8 +370,14 @@ foram lidas de novo as cegas (11 leituras, so com a arvore): 435 no mesmo no
 (conferidas pelo Claude Code), 97 no mesmo assunto (foram para o no em comum,
 regra nova, tambem conferidas), 79 pendentes nas duas e 29 que discordam -
 estas viraram pendentes, lado a lado na lista unica, para conferir depois de
-07/11. Pendente nao treina nem entra no fechamento. Faltam o passo 2 (a data
-da prova contra a lei que mudou) e o 3 (os nos novos sem questao).
+07/11. Pendente nao treina nem entra no fechamento. O passo 2 (a data da
+prova) conferiu as 449 de Direito contra o que mudou depois de cada prova -
+lei, emenda e decisao do STF com efeito geral: 8 sairam do treino (2 pela lei,
+6 pelo gabarito discutivel) e 34 ganharam o aviso "A lei mudou depois desta
+prova" (27 itens 🟣 no config/leis.yml, com a chave nova `provas`, que prende
+o item aos cadernos conferidos); o aviso aparece tambem na tela da questao,
+depois da resposta. Falta o passo 3 (os 40 nos novos que ficaram vazios saem,
+com a sua aprovacao).
 **Os PDFs baixados a mao e a versao do caderno (18/10, decisao 172, a seu
 pedido):** a lista de outras bancas aceita o PDF que voce salva em
 `data\provas\manual\` (`arquivo`, com o link original no `caderno`), e o
