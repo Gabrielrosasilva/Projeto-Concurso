@@ -728,8 +728,11 @@ O que falta vai nesta ordem, uma etapa por conversa.
   635.659. **A revisar quando o STF publicar o acordao das ADIs 7.156 e
   7.236** (prescricao da improbidade, julgadas em 01/07/2026): os dois
   avisos sairam da noticia, e um deles (PC RJ q42) depende de o teto de 20
-  anos alcancar o ressarcimento ao erario. Gabaritos discutiveis que ainda
-  esperam:
+  anos alcancar o ressarcimento ao erario. **O passo 3** apagou 31 dos 244
+  nos novos, que ficaram vazios (a arvore foi a 707); **depois da sua
+  conferencia, apague os 9 que continuarem vazios** - cada um e uma leitura
+  de questao pendente, e por isso ficou (`conteudos.apagar_vazio` recusa o
+  que ainda servir). Gabaritos discutiveis que ainda esperam:
   - das baixadas a mao de 18/10 (decisao 172): PM SE 2024 Oficial
     (Selecon), q39 - o gabarito a) (adicional noturno pago a inativo como
     ofensa a moralidade) nao tem base clara, e a d) chega perto do art. 37,

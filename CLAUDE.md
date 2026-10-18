@@ -376,8 +376,9 @@ lei, emenda e decisao do STF com efeito geral: 8 sairam do treino (2 pela lei,
 6 pelo gabarito discutivel) e 34 ganharam o aviso "A lei mudou depois desta
 prova" (27 itens 🟣 no config/leis.yml, com a chave nova `provas`, que prende
 o item aos cadernos conferidos); o aviso aparece tambem na tela da questao,
-depois da resposta. Falta o passo 3 (os 40 nos novos que ficaram vazios saem,
-com a sua aprovacao).
+depois da resposta. O passo 3 apagou 31 dos 40 nos novos que ficaram vazios
+(`conteudos.apagar_vazio`; a arvore foi a 707); os outros 9 sao leitura de
+questao pendente e saem depois da sua conferencia.
 **Os PDFs baixados a mao e a versao do caderno (18/10, decisao 172, a seu
 pedido):** a lista de outras bancas aceita o PDF que voce salva em
 `data\provas\manual\` (`arquivo`, com o link original no `caderno`), e o

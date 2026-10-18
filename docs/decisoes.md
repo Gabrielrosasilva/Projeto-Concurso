@@ -6033,6 +6033,21 @@ viraram estudo extra "Onde: Radar". Copia antes em
      [leis_alteradas](leis_alteradas.md), sem o efeito em cada questao (que diz
      a alternativa certa).
 
+     **O passo 3: os nos novos (18/10, aprovado "com as recomendadas").** Os
+     244 nos que a primeira leitura de 17/10 criou (a arvore foi de 438 para
+     682) foram contados depois dos passos 1 e 2: 204 tem questao (220, cada
+     uma no seu no), 40 ficaram vazios - quase todos artigos que a regra b
+     esvaziou, ao levar a questao para o subassunto. Sairam 31
+     (`conteudos.apagar_vazio`, que recusa, com o porque, o no com filho, com
+     classificacao, gerada, erro anotado ou estudo extra, citado numa ficha,
+     na fronteira do config/leis.yml ou no cronograma, e o no do edital; sem
+     o filho, o pai vira folha e 12 classificacoes passaram de parcial a
+     completa). **Ficaram 9 vazios de proposito:** cada um e uma das duas
+     leituras de uma questao que esta pendente (das 29 do passo 1 e das 8 do
+     passo 2), e a tela de conferencia so deixa escolher no que existe; os que
+     continuarem vazios depois da sua conferencia saem. A arvore ficou com
+     707 nos (os 56 da decisao 172 nao entraram na conta).
+
 172. **o PDF baixado a mao entra pela lista, e o caderno de mais de uma
      versao so e lido na versao da lista, com o bloco do gabarito dela**
      (pedido de 18/10: "toma cuidado... as provas normalmente tem 4 provas

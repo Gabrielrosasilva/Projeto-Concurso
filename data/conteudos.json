@@ -1508,19 +1508,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 4º",
-    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
-    "nivel": "elemento",
-    "nome": "Declaração Universal, art. 4º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Declaração Universal dos Direitos Humanos, art. 4º"
-  },
-  {
     "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 5º",
     "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
     "nivel": "elemento",
@@ -1532,32 +1519,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "Declaração Universal dos Direitos Humanos, art. 5º"
-  },
-  {
-    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 11",
-    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
-    "nivel": "elemento",
-    "nome": "Declaração Universal, art. 11",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Declaração Universal dos Direitos Humanos, art. 11, 2"
-  },
-  {
-    "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 26",
-    "pai": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos",
-    "nivel": "elemento",
-    "nome": "Declaração Universal, art. 26",
-    "ordem": 3,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Declaração Universal dos Direitos Humanos, art. 26, 1"
   },
   {
     "caminho": "Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 9º",
@@ -2351,19 +2312,6 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": "inciso",
     "referencia": "CF, art. 5º, XLIV"
-  },
-  {
-    "caminho": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis > CF, art. 5º, XLIII",
-    "pai": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis",
-    "nivel": "elemento",
-    "nome": "CF, art. 5º, XLIII",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "inciso",
-    "referencia": "CF, art. 5º, XLIII"
   },
   {
     "caminho": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Crimes inafiançáveis e imprescritíveis > CF, art. 5º, XLII",
@@ -3172,19 +3120,6 @@
     "referencia": "art. 7º, parágrafo único, da Constituição Federal"
   },
   {
-    "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, XVI",
-    "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais",
-    "nivel": "elemento",
-    "nome": "CF, art. 7º, XVI",
-    "ordem": 6,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "inciso",
-    "referencia": "CF, art. 7º, XVI"
-  },
-  {
     "caminho": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais > CF, art. 7º, IV",
     "pai": "Direito Constitucional > direitos sociais > Direitos dos trabalhadores urbanos e rurais",
     "nivel": "elemento",
@@ -3471,19 +3406,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos > CF, art. 15",
-    "pai": "Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos",
-    "nivel": "elemento",
-    "nome": "CF, art. 15",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CF, art. 15"
-  },
-  {
     "caminho": "Direito Constitucional > cidadania e direitos políticos > Soberania popular e democracia semidireta",
     "pai": "Direito Constitucional > cidadania e direitos políticos",
     "nivel": "subassunto",
@@ -3549,19 +3471,6 @@
     "referencia": "CF, art. 137"
   },
   {
-    "caminho": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio > CF, art. 139",
-    "pai": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de sítio",
-    "nivel": "elemento",
-    "nome": "CF, art. 139",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CF, art. 139"
-  },
-  {
     "caminho": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Estado de defesa",
     "pai": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública",
     "nivel": "subassunto",
@@ -3601,19 +3510,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142) > CF, art. 142, § 2º",
-    "pai": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)",
-    "nivel": "elemento",
-    "nome": "CF, art. 142, § 2º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "parágrafo",
-    "referencia": "CF, art. 142, § 2º"
-  },
-  {
     "caminho": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142) > CF, art. 142, § 3º",
     "pai": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)",
     "nivel": "elemento",
@@ -3625,19 +3521,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "parágrafo",
     "referencia": "CF, art. 142, § 3º"
-  },
-  {
-    "caminho": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142) > CF, art. 142",
-    "pai": "Direito Constitucional > Defesa do Estado e das instituições democráticas: segurança pública > Forças Armadas e militares (CF, arts. 42 e 142)",
-    "nivel": "elemento",
-    "nome": "CF, art. 142",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CF, art. 142"
   },
   {
     "caminho": "Direito Constitucional > organização da segurança pública",
@@ -5551,19 +5434,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Prescrição > CP, art. 110, § 1º",
-    "pai": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Prescrição",
-    "nivel": "elemento",
-    "nome": "CP, art. 110, § 1º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CP, art. 110, § 1º"
-  },
-  {
     "caminho": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Prescrição > CP, art. 116",
     "pai": "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Prescrição",
     "nivel": "elemento",
@@ -5822,19 +5692,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "artigo",
     "referencia": "CP, art. 327"
-  },
-  {
-    "caminho": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 316",
-    "pai": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral",
-    "nivel": "elemento",
-    "nome": "CP, art. 316",
-    "ordem": 3,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CP, art. 316"
   },
   {
     "caminho": "Direito Penal > Crimes contra a Administração Pública > Crimes praticados por funcionário público contra a administração em geral > CP, art. 319-A",
@@ -6188,19 +6045,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direito Processual Penal > Ação penal > Perdão do ofendido > CPP, art. 51",
-    "pai": "Direito Processual Penal > Ação penal > Perdão do ofendido",
-    "nivel": "elemento",
-    "nome": "CPP, art. 51",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 51"
-  },
-  {
     "caminho": "Direito Processual Penal > Ação penal > Ação penal privada",
     "pai": "Direito Processual Penal > Ação penal",
     "nivel": "subassunto",
@@ -6212,32 +6056,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Direito Processual Penal > Ação penal > Ação penal privada > CPP, art. 33",
-    "pai": "Direito Processual Penal > Ação penal > Ação penal privada",
-    "nivel": "elemento",
-    "nome": "CPP, art. 33",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 33"
-  },
-  {
-    "caminho": "Direito Processual Penal > Ação penal > Ação penal privada > CPP, art. 29",
-    "pai": "Direito Processual Penal > Ação penal > Ação penal privada",
-    "nivel": "elemento",
-    "nome": "CPP, art. 29",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 29"
   },
   {
     "caminho": "Direito Processual Penal > espécies",
@@ -6292,19 +6110,6 @@
     "referencia": "CPP, art. 159"
   },
   {
-    "caminho": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158",
-    "pai": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
-    "nivel": "elemento",
-    "nome": "CPP, art. 158",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 158"
-  },
-  {
     "caminho": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 158-A",
     "pai": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
     "nivel": "elemento",
@@ -6318,19 +6123,6 @@
     "referencia": "CPP, art. 158-A"
   },
   {
-    "caminho": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias > CPP, art. 161",
-    "pai": "Direito Processual Penal > Prova > Exame de corpo de delito e perícias",
-    "nivel": "elemento",
-    "nome": "CPP, art. 161",
-    "ordem": 3,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 161"
-  },
-  {
     "caminho": "Direito Processual Penal > Prova > Interrogatório e testemunhas",
     "pai": "Direito Processual Penal > Prova",
     "nivel": "subassunto",
@@ -6342,19 +6134,6 @@
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Direito Processual Penal > Prova > Interrogatório e testemunhas > CPP, art. 196",
-    "pai": "Direito Processual Penal > Prova > Interrogatório e testemunhas",
-    "nivel": "elemento",
-    "nome": "CPP, art. 196",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 196"
   },
   {
     "caminho": "Direito Processual Penal > Prova > Busca e apreensão",
@@ -6420,19 +6199,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Direito Processual Penal > Prova > Ônus da prova > CPP, art. 156",
-    "pai": "Direito Processual Penal > Prova > Ônus da prova",
-    "nivel": "elemento",
-    "nome": "CPP, art. 156",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 156"
   },
   {
     "caminho": "Direito Processual Penal > Prova > Reconhecimento de pessoas e coisas",
@@ -6565,19 +6331,6 @@
     "referencia": "CPP, art. 322"
   },
   {
-    "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória > CPP, art. 341",
-    "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Liberdade provisória",
-    "nivel": "elemento",
-    "nome": "CPP, art. 341",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 341, V"
-  },
-  {
     "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Comunicação da prisão",
     "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória",
     "nivel": "subassunto",
@@ -6693,19 +6446,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 312",
-    "pai": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva",
-    "nivel": "elemento",
-    "nome": "CPP, art. 312",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "CPP, art. 312"
   },
   {
     "caminho": "Direito Processual Penal > Prisão em flagrante, Prisão, Medidas Cautelares e Liberdade Provisória > Prisão preventiva > CPP, art. 311",
@@ -7306,19 +7046,6 @@
     "referencia": null
   },
   {
-    "caminho": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Ação penal e perda do cargo > Lei 13.869/2019, art. 4º",
-    "pai": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Ação penal e perda do cargo",
-    "nivel": "elemento",
-    "nome": "Lei 13.869/2019, art. 4º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 13.869/2019, art. 4º"
-  },
-  {
     "caminho": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Ação penal e perda do cargo > Lei 13.869/2019, art. 3º",
     "pai": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Ação penal e perda do cargo",
     "nivel": "elemento",
@@ -7382,19 +7109,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": "parágrafo",
     "referencia": "Lei 13.869/2019, art. 1º, § 1º"
-  },
-  {
-    "caminho": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo > Lei 13.869/2019, art. 1º",
-    "pai": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Disposições gerais e sujeito ativo",
-    "nivel": "elemento",
-    "nome": "Lei 13.869/2019, art. 1º",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 13.869/2019, art. 1º"
   },
   {
     "caminho": "Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Crimes de abuso de autoridade em espécie",
@@ -7605,19 +7319,6 @@
     "referencia": "Lei 10.826/2003, art. 16"
   },
   {
-    "caminho": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto > Lei 10.826/2003, art. 14",
-    "pai": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto",
-    "nivel": "elemento",
-    "nome": "Lei 10.826/2003, art. 14",
-    "ordem": 2,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 10.826/2003, art. 14"
-  },
-  {
     "caminho": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Registro de arma de fogo",
     "pai": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003)",
     "nivel": "subassunto",
@@ -7720,19 +7421,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Modalidades do crime de tortura > Lei 9.455/1997, art. 1º, II",
-    "pai": "Legislação Especial > Crimes de tortura (Lei nº 9.455 de 7 de abril de 1997) > Modalidades do crime de tortura",
-    "nivel": "elemento",
-    "nome": "Lei 9.455/1997, art. 1º, II",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "inciso",
-    "referencia": "Lei 9.455/1997, art. 1º, II"
   },
   {
     "caminho": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD)",
@@ -7928,19 +7616,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Conceito, finalidade e princípios do Sisnad > Lei 11.343/2006, art. 3º",
-    "pai": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Conceito, finalidade e princípios do Sisnad",
-    "nivel": "elemento",
-    "nome": "Lei 11.343/2006, art. 3º",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 11.343/2006, art. 3º, § 1º"
   },
   {
     "caminho": "Legislação Especial > Lei nº 11.343, de 23 de agosto de 2006 (SISNAD) > Conceito, finalidade e princípios do Sisnad > Lei 11.343/2006, art. 4º",
@@ -8606,19 +8281,6 @@
     "referencia": null
   },
   {
-    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Sanções, recompensas e procedimento disciplinar > LEP, art. 57",
-    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Sanções, recompensas e procedimento disciplinar",
-    "nivel": "elemento",
-    "nome": "LEP, art. 57",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "LEP, art. 57"
-  },
-  {
     "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial",
     "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984)",
     "nivel": "subassunto",
@@ -8630,19 +8292,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), aprovado por você em 06/10/2026 (decisão 129): pela Lei 7.210: Títulos VI a IX (arts. 171 a 204)",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial > LEP, art. 183",
-    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial",
-    "nivel": "elemento",
-    "nome": "LEP, art. 183",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "LEP, art. 183"
   },
   {
     "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Medida de segurança, incidentes e procedimento judicial > LEP, art. 197",
@@ -8669,19 +8318,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Autorizações de saída: permissão de saída e saída temporária > LEP, art. 122",
-    "pai": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Autorizações de saída: permissão de saída e saída temporária",
-    "nivel": "elemento",
-    "nome": "LEP, art. 122",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "LEP, art. 122"
   },
   {
     "caminho": "Noções de Informática",
@@ -9165,19 +8801,6 @@
     "referencia": null
   },
   {
-    "caminho": "Direito Administrativo > Servidores públicos > Formas de provimento > Lei 8.112/1990, art. 29",
-    "pai": "Direito Administrativo > Servidores públicos > Formas de provimento",
-    "nivel": "elemento",
-    "nome": "Lei 8.112/1990, art. 29",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 8.112/1990, art. 29"
-  },
-  {
     "caminho": "Direito Administrativo > Controle da administração pública",
     "pai": "Direito Administrativo",
     "nivel": "assunto",
@@ -9347,19 +8970,6 @@
     "referencia": "Lei 8.987/1995, art. 27"
   },
   {
-    "caminho": "Direito Administrativo > Serviços públicos > Concessão e permissão > Lei 8.987/1995, art. 31",
-    "pai": "Direito Administrativo > Serviços públicos > Concessão e permissão",
-    "nivel": "elemento",
-    "nome": "Lei 8.987/1995, art. 31",
-    "ordem": 1,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 8.987/1995, art. 31"
-  },
-  {
     "caminho": "Direito Administrativo > Licitações e contratos administrativos",
     "pai": "Direito Administrativo",
     "nivel": "assunto",
@@ -9384,19 +8994,6 @@
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
     "tipo_elemento": null,
     "referencia": null
-  },
-  {
-    "caminho": "Direito Administrativo > Licitações e contratos administrativos > Anulação da licitação e nulidade do contrato > Lei 8.666/1993, art. 59",
-    "pai": "Direito Administrativo > Licitações e contratos administrativos > Anulação da licitação e nulidade do contrato",
-    "nivel": "elemento",
-    "nome": "Lei 8.666/1993, art. 59",
-    "ordem": 0,
-    "origem": "classificacao",
-    "texto_do_edital": null,
-    "fora_do_edital": false,
-    "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "tipo_elemento": "artigo",
-    "referencia": "Lei 8.666/1993, art. 59"
   },
   {
     "caminho": "Direito Administrativo > Licitações e contratos administrativos > Reajuste e equilíbrio econômico-financeiro",

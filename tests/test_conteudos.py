@@ -130,6 +130,44 @@ def test_o_status_sai_da_arvore(semeada):
         classificacoes.classificar("q5", PENAL + " > Inventado", "manual")
 
 
+def test_apagar_vazio_so_apaga_o_que_nao_faz_falta_e_refaz_o_status(semeada):
+    """Decisao 171, passo 3: o no que a regra b esvaziou sai; o resto e
+    recusado com o porque. Sem o filho, o pai vira folha e a questao dele
+    passa de parcial a completa."""
+    sub = conteudos.adicionar(IMPUTABILIDADE, "Inimputáveis")
+    art = conteudos.adicionar(sub.caminho, "CP, art. 26", tipo_elemento="artigo",
+                              referencia="CP, art. 26")
+    assert classificacoes.classificar("q1", sub.caminho, "manual").status == "parcial"
+    with pytest.raises(arvore.ConteudoInvalido, match="tem nó abaixo"):
+        conteudos.apagar_vazio(sub.caminho)
+    with pytest.raises(arvore.ConteudoInvalido, match="é do edital"):
+        conteudos.apagar_vazio(IMPUTABILIDADE)
+
+    assert conteudos.apagar_vazio(art.caminho) == sub.caminho
+    with sessao() as s:
+        assert s.scalar(select(Conteudo).where(Conteudo.caminho == art.caminho)) is None
+        assert s.scalar(select(Classificacao).where(Classificacao.chave == "q1")).status == "completa"
+    with pytest.raises(arvore.ConteudoInvalido, match="tem questão classificada"):
+        conteudos.apagar_vazio(sub.caminho)
+
+    outro = conteudos.adicionar(IMPUTABILIDADE, "Embriaguez")
+    gerada = _gerada("g1", PENAL)
+    gerada.conteudo = outro.caminho
+    with sessao() as s:
+        s.add(gerada)
+    with pytest.raises(arvore.ConteudoInvalido, match="tem questão gerada"):
+        conteudos.apagar_vazio(outro.caminho)
+
+
+def test_apagar_vazio_recusa_o_no_citado_na_fronteira(semeada, monkeypatch):
+    from radar import leis
+
+    citado = conteudos.adicionar(IMPUTABILIDADE, "Menoridade")
+    monkeypatch.setattr(leis, "_arquivo", lambda: {"fronteira": [{"nos": [citado.caminho]}]})
+    with pytest.raises(arvore.ConteudoInvalido, match="fronteira"):
+        conteudos.apagar_vazio(citado.caminho)
+
+
 def test_uma_principal_por_questao_e_a_outra_fica_associada(semeada):
     classificacoes.classificar("q1", IMPUTABILIDADE, "manual")
     classificacoes.classificar("q1", "Direito Penal > Crimes contra a Administração Pública",

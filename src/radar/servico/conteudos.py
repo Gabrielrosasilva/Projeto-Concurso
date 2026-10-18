@@ -432,3 +432,73 @@ def juntar(duplicado: str, mantido: str) -> Juncao:
                 | QuestaoGerada.escopo.like(duplicado + arvore.SEPARADOR + "%"))):
             gerada.escopo = novo_caminho(gerada.escopo, duplicado, mantido)
     return resultado
+
+
+def _citacoes_fora_do_banco(caminho: str) -> list[str]:
+    """Onde o no e citado fora do banco: os `nos` das fichas, os da lista
+    `fronteira` do config/leis.yml e o `conteudo` ou os `nos` das faixas do
+    cronograma."""
+    from radar import leis
+    from radar.servico import fichas as servico_fichas
+
+    onde = []
+    if any(caminho in (escrita.nos or []) for escrita in servico_fichas.carregar()):
+        onde.append("uma ficha")
+    if any(caminho in (item.get("nos") or []) for item in leis._arquivo().get("fronteira") or []):
+        onde.append("a fronteira do config/leis.yml")
+    for dia in plano_de_estudo.carregar().dias:
+        for faixa in dia.faixas():
+            if faixa.conteudo == caminho or caminho in faixa.nos:
+                onde.append(f"a faixa {faixa.titulo!r} de {dia.data:%d/%m}")
+    return onde
+
+
+def apagar_vazio(caminho: str) -> str | None:
+    """Apaga um no que ficou VAZIO e devolve o caminho do pai.
+
+    Existe pelos nos que a primeira leitura das provas de 17/10 criou para um
+    artigo, e que a regra b da decisao 171 esvaziou ao levar a questao para o
+    no em comum. So apaga o que nao faz falta a nada: recusa (ConteudoInvalido,
+    com o porque) o no com filho, com classificacao (principal ou associada),
+    com gerada, erro anotado ou estudo extra, ou citado numa ficha ou no
+    cronograma. O no do edital nunca sai. Sem o filho, o pai pode virar folha:
+    a classificacao dele passa de parcial a completa. O arquivo da arvore e
+    exportado por quem chama.
+    """
+    from radar.servico import classificacoes as servico_classificacoes
+
+    criar_tabelas()
+    with sessao() as s:
+        no = s.scalar(select(Conteudo).where(Conteudo.caminho == caminho))
+        if no is None:
+            raise arvore.ConteudoInvalido(f"Nó que não existe: {caminho!r}")
+        if no.origem == "edital":
+            raise arvore.ConteudoInvalido(f"{caminho!r} é do edital: não sai.")
+        motivos = []
+        if s.scalar(select(Conteudo.id).where(Conteudo.pai == caminho).limit(1)) is not None:
+            motivos.append("tem nó abaixo")
+        if s.scalar(select(Classificacao.id).where(Classificacao.conteudo == caminho)
+                    .limit(1)) is not None:
+            motivos.append("tem questão classificada")
+        if s.scalar(select(QuestaoGerada.id).where(
+                (QuestaoGerada.conteudo == caminho) | (QuestaoGerada.escopo == caminho))
+                .limit(1)) is not None:
+            motivos.append("tem questão gerada")
+        for tabela, nome in ((ErroAnotado, "erro anotado"), (EstudoExtra, "estudo extra")):
+            if s.scalar(select(tabela.id).where(tabela.conteudo == caminho).limit(1)) is not None:
+                motivos.append(f"tem {nome}")
+    motivos += [f"é citado em {onde}" for onde in _citacoes_fora_do_banco(caminho)]
+    if motivos:
+        raise arvore.ConteudoInvalido(f"{caminho!r} não está vazio: {'; '.join(motivos)}.")
+
+    with sessao() as s:
+        no = s.scalar(select(Conteudo).where(Conteudo.caminho == caminho))
+        pai = no.pai
+        s.delete(no)
+        s.flush()
+        if pai:
+            no_pai = s.scalar(select(Conteudo).where(Conteudo.caminho == pai))
+            for linha in s.scalars(select(Classificacao).where(Classificacao.conteudo == pai)):
+                if linha.status != "pendente" and no_pai is not None:
+                    linha.status = servico_classificacoes._status_do_no(s, no_pai)
+    return pai
