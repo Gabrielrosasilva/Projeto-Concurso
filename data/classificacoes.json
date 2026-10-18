@@ -595,7 +595,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "b) Empresas públicas. (...) e) Sociedades de economia mista."
   },
@@ -610,7 +610,7 @@
     "pegadinha": "empresa pública e sociedade de economia mista são de direito privado",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "entidades autônomas, criadas por lei, de direito público, para atividades típicas: autarquias"
   },
@@ -1135,7 +1135,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "c) A manifestação do pensamento, a criação, a expressão e a informação deverão ter autorização do Estado para serem veiculadas."
   },
@@ -1375,7 +1375,7 @@
     "pegadinha": "a) o quinto princípio da EC 19/1998 é a eficiência, não a 'eficácia'; d) a vedação à promoção pessoal vem da impessoalidade (art. 37, § 1º), não da eficiência; e) 'fazer tudo o que a lei não proíbe' é a legalidade do particular: a Administração só faz o que a lei permite",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "O princípio da impessoalidade traduz a ideia de que toda a atuação da Administração deve atuar objetivando o interesse público"
   },
@@ -1690,7 +1690,7 @@
     "pegadinha": "todas as afirmativas estão certas: só a sociedade de economia mista é obrigatoriamente S.A.; o teto só alcança a estatal que recebe recursos para pessoal ou custeio; a prestadora de serviço público responde objetivamente",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "Diferentemente das sociedades de economia mista, que devem ser constituídas como sociedades anônimas, as empresas públicas podem assumir qualquer tipo societário."
   },
@@ -1900,7 +1900,7 @@
     "pegadinha": "generaliza a autoexecutoriedade para todo ato e tira da administração o poder de anular (autotutela)",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "A anulação do ato administrativo retira do mundo jurídico todos os seus efeitos desde a sua criação"
   },
@@ -2455,7 +2455,7 @@
     "pegadinha": "e) a moralidade é princípio EXPRESSO no art. 37, caput, e não implícito; d) a supremacia do interesse público não é absoluta; c) a ampla defesa vale também no processo administrativo (CF, art. 5º, LV)",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "A publicidade marca o início da produção dos efeitos do ato administrativo"
   },
@@ -2860,7 +2860,7 @@
     "pegadinha": "A b e a d atraem por misturar criação por lei (autarquia) com autorização legislativa (estatal) e por sugerir que atividade comercial dispensa lei; a c confunde o objeto da estatal com o regime, que é de direito privado (CF, art. 173, § 1º, II); a e estende à estatal a imunidade do art. 150, § 2º, que é de autarquias e fundações.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "A criação de empresa pública, de sociedade de economia mista e de suas subsidiárias, assim como a participação de qualquer delas em empresa privada dependem de autorização legislativa"
   },
@@ -4465,7 +4465,7 @@
     "pegadinha": "a Lei 14.230/2021 passou a admitir acordo e mudou a prescrição: o gabarito é o da lei em 2019",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "vedada a transação nas ações de improbidade; prazo das ações"
   },
@@ -5050,7 +5050,7 @@
     "pegadinha": "A afirmativa 1 omite a ressalva do art. 18: o interrogatório noturno do preso em flagrante não é crime; a 2 esquece que a divergência na interpretação da lei ou na avaliação das provas não configura abuso (art. 1º, § 2º).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "Retardar, injustificadamente, o envio de pleito de preso à autoridade judiciária competente"
   },
@@ -5200,7 +5200,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "c) É obrigatório aos Estados, ao Distrito Federal e aos Municípios vincular parcela de sua receita orçamentária a entidades públicas de fomento ao ensino e à pesquisa científica e tecnológica."
   },
@@ -5215,7 +5215,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "d) O prazo da concessão ou permissão para o serviço de radiodifusão sonora e de sons e imagens será de quinze anos para as emissoras de rádio e de trinta para as de televisão."
   },
@@ -5290,7 +5290,7 @@
     "pegadinha": "1) Senador não é cargo privativo de nato, só o Presidente do Senado (art. 12, § 3º, III); 4) o nascido no estrangeiro de pai ou mãe brasileira, registrado ou que opta, é NATO (art. 12, I, c)",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "O militar alistável é elegível quando contar menos de dez anos de serviço, devendo se afastar da atividade"
   },
@@ -7060,7 +7060,7 @@
     "pegadinha": "Todas as afirmativas são verdadeiras: as três primeiras repetem os arts. 20 e 21, e a 4 é a distinção doutrinária; quem desconfia da redução de um sexto a um terço (art. 21) marca uma alternativa que deixa uma certa de fora.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "O erro sobre elemento constitutivo do tipo legal de crime exclui o dolo, mas permite a punição por crime culposo, se previsto em lei"
   },
@@ -7240,7 +7240,7 @@
     "pegadinha": "as outras trocam os poderes: fiscalizar estabelecimentos e limitar direitos privados é poder de polícia; avocar e rever atos é poder hierárquico; punir o servidor é poder disciplinar",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "O chamado poder regulamentar autoriza a Administração Pública a expedir decretos e regulamentos para o fiel cumprimento e execução das leis"
   },
@@ -8020,7 +8020,7 @@
     "pegadinha": "as outras dão fins genéricos (não violência, solidariedade, boa convivência, negociação política) que não são o objeto da Declaração",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Os direitos básicos de todos os ser humanos."
   },
@@ -9040,7 +9040,7 @@
     "pegadinha": "o prazo do juiz é de 48 horas, não 5 dias; o enunciado cita a Lei 11.343 (drogas) por engano",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "auxílio da força policial a qualquer momento; separação de corpos"
   },
@@ -9085,7 +9085,7 @@
     "pegadinha": "cria hierarquia entre princípios e inventa um princípio da motivação que seria motivar o subordinado",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "A vedação da promoção pessoal de agentes ou autoridades é um desdobramento do princípio da impessoalidade"
   },
@@ -9280,7 +9280,7 @@
     "pegadinha": "estende à estatal os privilégios da Fazenda Pública e manda a Justiça Federal julgar sociedade de economia mista",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "A liberdade negocial das empresas estatais deve ser idêntica à das empresas privadas, com exceção das limitações impostas pela Constituição Federal e pelo Estatuto da Empresa Pública"
   },
@@ -11005,7 +11005,7 @@
     "pegadinha": "e) o ato sem publicidade não é nulo: falta-lhe eficácia; c) a autotutela não é princípio constitucional expresso (Súmula 473 do STF; Lei 9.784/1999, art. 53); a) a finalidade é o interesse público, não os planos do gestor",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "A motivação do ato administrativo poderá consistir em declaração de concordância com fundamentos de pareceres"
   },
@@ -12595,7 +12595,7 @@
     "pegadinha": "a afirmativa 1 restringe a liberdade religiosa aos países ocidentais e cristãos; a questão foi anulada pela banca",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "Afirma que todos os seres humanos nascem livres e iguais em dignidade e direitos"
   },
@@ -12745,7 +12745,7 @@
     "pegadinha": "Coação irresistível e obediência hierárquica também isentam de pena, por isso parecem inimputabilidade; mas excluem a culpabilidade por inexigibilidade de conduta diversa (art. 22), não por falta de imputabilidade.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "exceção ou pegadinha",
     "trecho": "sob coação irresistível ou obediência hierárquica"
   },
@@ -13240,7 +13240,7 @@
     "pegadinha": "Cada afirmativa errada troca um detalhe: a adoção por estrangeiro não é proibida, a lei estabelece casos e condições (art. 227, § 5º); o plano nacional de juventude é decenal, não quinquenal (art. 227, § 8º, II); e os programas de amparo aos idosos são executados preferencialmente nos seus lares (art. 230, § 1º).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "Os filhos maiores têm o dever de ajudar e amparar os pais na velhice, carência ou enfermidade"
   },
@@ -14275,7 +14275,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "a) As empresas públicas e as sociedades de economia mista são pessoas jurídicas de direito privado que integram a administração indireta."
   },
@@ -14290,7 +14290,7 @@
     "pegadinha": "fundações públicas são da administração indireta",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "empresas públicas e sociedades de economia mista: direito privado, administração indireta"
   },
@@ -14350,7 +14350,7 @@
     "pegadinha": "a supremacia do interesse público (e) parece a resposta, mas a banca liga 'beneficiar a coletividade' à impessoalidade, no sentido de finalidade",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "cujo objetivo é assegurar que os atos administrativos, assim como os serviços públicos, devem beneficiar a coletividade"
   },
@@ -14890,7 +14890,7 @@
     "pegadinha": "a ação penal é pública incondicionada, e a mera divergência de interpretação não configura o crime",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "A perda do cargo, do mandato ou da função pública é condicionada à ocorrência de reincidência em crime de abuso de autoridade e não é automática"
   },
@@ -15655,7 +15655,7 @@
     "pegadinha": "atribui ao poder disciplinar a delegação de competência e a multa de trânsito (que é poder de polícia)",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "O Poder regulamentar consiste na possiblidade de os Chefes do Poder Executivo editarem normas complementares à lei, permitindo sua fiel execução"
   },
@@ -17200,7 +17200,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "3. Além do poder regulamentar, destinado a explicitar o conteúdo das leis e possibilitar a sua execução"
   },
@@ -17215,7 +17215,7 @@
     "pegadinha": "a ação é pública INCONDICIONADA; a privada só cabe como subsidiária, se o Ministério Público não agir no prazo, e o prazo é de 6 meses (não 1 ano), contado de quando se esgota o prazo da denúncia",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "penal pública incondicionada • privada subsidiária • 6 meses"
   },
@@ -17920,7 +17920,7 @@
     "pegadinha": "as penas valem junto com as sanções civis e administrativas (art. 6º); a perda do cargo não é automática (art. 4º, parágrafo único); o dolo específico é prejudicar outrem, beneficiar a si ou a terceiro, ou mero capricho ou satisfação pessoal (art. 1º, § 1º); o sujeito ativo é qualquer agente público, servidor ou não (art. 2º)",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "A divergência na interpretação de lei ou na avaliação de fatos e provas não configura abuso de autoridade."
   },
@@ -18625,7 +18625,7 @@
     "pegadinha": "o rol é amplo e todas as afirmativas estão certas: servidores e militares, membros dos três Poderes, do Ministério Público e dos tribunais ou conselhos de contas",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "é sujeito ativo do crime de abuso de autoridade qualquer agente público, servidor ou não"
   },
@@ -19090,7 +19090,7 @@
     "pegadinha": "o silêncio não importa confissão (art. 186, parágrafo único)",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "testemunha, silêncio do acusado, interrogatório e perícia (alternativas)"
   },

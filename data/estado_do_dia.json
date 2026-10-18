@@ -820,5 +820,46 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-17T18:54:10.651731+00:00",
+    "data": "2026-10-17",
+    "faixas_feitas": [
+      {
+        "acertos": 1,
+        "assunto": "R+7: princípios de contagem",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Raciocínio Lógico",
+        "minutos": 15,
+        "questoes": 2,
+        "titulo": "R+7: princípios de contagem"
+      },
+      {
+        "acertos": 7,
+        "assunto": "Simulado da semana",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 0,
+        "materia": null,
+        "minutos": 90,
+        "questoes": 16,
+        "titulo": "Simulado da semana"
+      }
+    ],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-17T18:28:28.699157+00:00",
+        "bloco": "manha",
+        "chutes": 2,
+        "entendi": "nao",
+        "indice": 3,
+        "materia": "Raciocínio Lógico",
+        "nota": "",
+        "titulo": "R+7: princípios de contagem"
+      }
+    ],
+    "plano_b": null
   }
 ]
