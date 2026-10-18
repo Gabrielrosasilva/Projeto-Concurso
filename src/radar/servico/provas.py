@@ -34,7 +34,9 @@ from radar import gabarito as gabarito_oficial
 from radar import provas as arquivos_de_prova
 from radar import provas_ieses
 from radar import questoes as leitor_de_questoes
-from radar import questoes_cebraspe, questoes_ieses, questoes_ncufpr, questoes_selecon
+from radar import gabarito_por_versao
+from radar import questoes_cebraspe, questoes_ieses, questoes_ncufpr, questoes_por_rodada
+from radar import questoes_selecon
 from radar.collectors.base import Buscador
 from radar.db import criar_tabelas, sessao
 from radar.models import Concurso, QuestaoDeProva, agora
@@ -269,9 +271,48 @@ def _ler_ncufpr(caminho: Path, prova: dict, gabarito: Path | None) -> list:
 
 
 def _ler_selecon(caminho: Path, prova: dict, gabarito: Path | None) -> list:
-    # O gabarito e um PDF a parte, e a materia sai da faixa da capa (config).
+    # A Selecon nova (Prova A e Prova B no mesmo PDF) le pela versao; a da
+    # SEJUSP/MG, de versao unica, pelo leitor dela: o gabarito e um PDF a
+    # parte, e a materia sai da faixa da capa (config).
+    if prova.get("versao"):
+        return _ler_por_rodada(caminho, prova, gabarito, "ponto", "fecha")
     return questoes_selecon.ler_prova(
         caminho, gabarito, questoes_selecon.faixas_do_config(prova.get("materias")))
+
+
+def _ler_por_rodada(caminho: Path, prova: dict, gabarito: Path | None,
+                    marca: str, alternativa: str) -> list:
+    """O caderno que vem em mais de uma versao (decisao 172): so as paginas e
+    o bloco do gabarito da `versao` da lista. Sem a versao, ou sem o bloco
+    dela no gabarito, nada entra - a letra de outra versao mediria errado."""
+    versao, cargo = prova.get("versao"), prova.get("cargo_no_pdf")
+    if not versao or gabarito is None:
+        log.warning("%s: falta a versao ou o gabarito na lista", caminho.name)
+        return []
+    try:
+        respostas = gabarito_por_versao.da_versao(gabarito, versao, cargo)
+        return questoes_por_rodada.ler_prova(
+            caminho, respostas, versao=versao, cargo=cargo, marca=marca,
+            alternativa=alternativa, ler=prova.get("ler"),
+            letras="ABCD" if prova.get("alternativas") == 4 else "ABCDE")
+    except ValueError as erro:
+        log.warning("%s: %s", caminho.name, erro)
+        return []
+
+
+def _ler_fgv(caminho: Path, prova: dict, gabarito: Path | None) -> list:
+    # "41" sozinho na linha, e (A) a (E).
+    return _ler_por_rodada(caminho, prova, gabarito, "numero", "parenteses")
+
+
+def _ler_access(caminho: Path, prova: dict, gabarito: Path | None) -> list:
+    # "Questao 26" sozinho na linha, e (A) a (E) - ou (A) a (D).
+    return _ler_por_rodada(caminho, prova, gabarito, "questao", "parenteses")
+
+
+def _ler_idecan(caminho: Path, prova: dict, gabarito: Path | None) -> list:
+    # "13. Enunciado", e (A) a (E).
+    return _ler_por_rodada(caminho, prova, gabarito, "ponto", "parenteses")
 
 
 def _ler_cebraspe(caminho: Path, prova: dict, gabarito: Path | None) -> list:
@@ -287,7 +328,8 @@ def _ler_cebraspe(caminho: Path, prova: dict, gabarito: Path | None) -> list:
 #: As bancas cujo caderno o radar sabe ler, e o leitor de cada uma. Cada
 #: leitor recebe o PDF, a entrada da prova no config e o gabarito a parte.
 LEITORES_DE_OUTRAS_BANCAS = {"NC-UFPR": _ler_ncufpr, "SELECON": _ler_selecon,
-                             "CEBRASPE": _ler_cebraspe}
+                             "CEBRASPE": _ler_cebraspe, "FGV": _ler_fgv,
+                             "ACCESS": _ler_access, "IDECAN": _ler_idecan}
 
 
 def _ler_de_outra_banca(registro: dict, caminho: Path, leitor) -> list:
@@ -342,9 +384,30 @@ def _baixar_inteiro(documento, buscador, ocupados):
     return None
 
 
+def pasta_dos_baixados_a_mao() -> Path:
+    """Onde voce salva o PDF que o robo nao pode baixar (decisao 172)."""
+    return config.diretorio_dados() / "provas" / "manual"
+
+
+def _registrar_baixado_a_mao(documento, nome: str):
+    """O PDF que voce baixou a mao entra no manifesto como se o robo o
+    tivesse baixado: o link e o original (o do caderno na lista), e o arquivo
+    e o da pasta `data/provas/manual/`. Sem o arquivo, ou sem o fim do PDF,
+    nada."""
+    caminho = pasta_dos_baixados_a_mao() / nome
+    if not caminho.exists():
+        log.warning("falta %s em data/provas/manual/", nome)
+        return None
+    if not _pdf_inteiro(caminho):
+        log.warning("%s nao termina como PDF: baixe de novo", nome)
+        return None
+    return arquivos_de_prova.baixar(documento, buscador=None, caminho=caminho)
+
+
 def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
     """Baixa os cadernos (e os gabaritos a parte) da lista. O que ja esta no
-    manifesto nao e baixado de novo."""
+    manifesto nao e baixado de novo; o que tem `arquivo` foi baixado a mao, e
+    so e registrado."""
     resultado = ResultadoAcervo()
     lista = carregar_provas_de_outras_bancas()
     if not lista:
@@ -355,10 +418,11 @@ def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
     buscador = Buscador()
     for prova in lista:
         resultado.concursos += 1
-        documentos = [(arquivos_de_prova.PROVA, prova["caderno"])]
+        documentos = [(arquivos_de_prova.PROVA, prova["caderno"], prova.get("arquivo"))]
         if prova.get("gabarito"):
-            documentos.append((arquivos_de_prova.GABARITO, prova["gabarito"]))
-        for tipo, url in documentos:
+            documentos.append((arquivos_de_prova.GABARITO, prova["gabarito"],
+                               prova.get("arquivo_do_gabarito")))
+        for tipo, url, a_mao in documentos:
             if url in conhecidos:
                 continue
             documento = arquivos_de_prova.Documento(
@@ -367,7 +431,10 @@ def montar_acervo_de_outras_bancas() -> ResultadoAcervo:
                 concurso_url=prova.get("pagina") or prova["caderno"],
                 banca=prova["banca"], orgao=prova.get("orgao"),
                 municipio=prova.get("municipio"), ano=prova.get("ano"))
-            baixado = _baixar_inteiro(documento, buscador, ocupados)
+            if a_mao:
+                baixado = _registrar_baixado_a_mao(documento, a_mao)
+            else:
+                baixado = _baixar_inteiro(documento, buscador, ocupados)
             if baixado is None:
                 resultado.falhas += 1
                 continue

@@ -1,9 +1,11 @@
 # Classificações para conferir
 
-É a lista única do que espera a sua conferência, em duas partes:
+É a lista única do que espera a sua conferência, em três partes:
 
 - **as provas novas de 17/10** (decisão 171): 29 pendentes, a conferir só depois
   de 07/11;
+- **as provas baixadas à mão de 18/10** (decisão 172): 5 pendentes, também só
+  depois de 07/11;
 - **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
   pendentes, o que sobrou da reanálise (decisão 104) e da classificação de
   Português e Raciocínio (decisão 106).
@@ -178,6 +180,40 @@ resto: escolha a primeira leitura, a segunda ou outra.
   - primeira leitura: Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Causas de extinção da punibilidade > CP, art. 107
   - segunda, às cegas (media): Direito Processual Penal > Ação penal > Perdão do ofendido
   - por que ficou: outra matéria
+
+## As provas baixadas à mão de 18/10: 5 pendentes até a sua conferência (decisões 171 e 172)
+
+**Confira só depois de 07/11**, pelo mesmo motivo de cima. As 107 classificações das
+7 provas baixadas à mão (FGV, Access e Selecon) foram lidas de novo às cegas, em duas
+leituras só com os caminhos da árvore: 90 no mesmo nó, 12 no mesmo assunto (o nó em
+comum), e estas 5 discordam. Três delas caíram em nós gêmeos da árvore (o Pacto de San
+José em dois lugares; a ação popular em Constitucional e em Administrativo; a
+Declaração Universal em dois assuntos), que o passo 3 da Parte 2 vai juntar.
+
+- **q36 de Polícia Militar de Sergipe - Soldado** (Selecon 2024) — A Convenção Americana sobre Direitos Humanos, de 22 de novembro de 1969, internalizada no Brasil por meio do Decreto n.º 678/1992, estabelec…
+  - primeira leitura: Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Sistema interamericano de proteção > Pacto de San José da Costa Rica
+  - segunda, às cegas (media): Direitos Humanos > Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José)
+  - por que ficou: outro assunto
+
+- **q37 de Polícia Militar de Sergipe - Oficial Combatente** (Selecon 2024) — O controle dos atos administrativo pode ser feito em diferentes esferas. No âmbito jurisdicional, o instrumento judicial que pode ser propos…
+  - primeira leitura: Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais > CF, art. 5º, LXXIII
+  - segunda, às cegas (alta): Direito Administrativo > Controle da administração pública > Ação popular > CF, art. 5º, LXXIII
+  - por que ficou: outra matéria
+
+- **q33 de Secretaria Nacional de Políticas Penais (SENAPPEN) - Analista Técnico em Direito** (Selecon 2024) — De acordo com a norma encarregada de regular o processo administrativo no âmbito da Administração Federal direta e indireta, nos processos a…
+  - primeira leitura: Administração Pública > Princípios administrativos > Alcance de cada princípio
+  - segunda, às cegas (alta): Direito Administrativo > Processo administrativo > Princípios e instauração (Lei 9.784/1999)
+  - por que ficou: outra matéria
+
+- **q34 de Secretaria Nacional de Políticas Penais (SENAPPEN) - Analista Técnico em Direito** (Selecon 2024) — A competência de um órgão no âmbito do Direito Administrativo é irrenunciável, salvo nos casos de delegação e avocação legalmente admitidos.…
+  - primeira leitura: Administração Pública > Poderes e deveres dos administradores públicos > Poder hierárquico
+  - segunda, às cegas (media): Direito Administrativo > Processo administrativo
+  - por que ficou: outra matéria
+
+- **q75 de Secretaria de Administração Penitenciária e Ressocialização da Bahia - Agente Penitenciário** (FGV 2024) — A Declaração Universal dos Direitos Humanos (DUDH) — Resolução 217-A (III) da Assembleia Geral das Nações Unidas, 1948 constitui parâmetro m…
+  - primeira leitura: Direitos Humanos > Conceito, terminologia, estrutura normativa, fundamentação > Conteúdo da Declaração Universal dos Direitos Humanos > Declaração Universal, art. 1º
+  - segunda, às cegas (media): Direitos Humanos > Afirmação histórica dos direitos humanos > Declaração Universal dos Direitos Humanos (1948)
+  - por que ficou: outro assunto
 
 ## O complementar aceito (estado de 05/10)
 

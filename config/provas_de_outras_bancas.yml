@@ -11,9 +11,10 @@
 # os termos e a leitura. Uma lista diz exatamente o que entra, e o link de
 # cada um - o radar guarda sempre o link original, nunca uma copia de site.
 #
-# SO ENTRA BANCA CUJO LEITOR EXISTE (`radar/questoes_<banca>.py`) e cujo site
-# o robo pode ler. Prova que so da para baixar a mao fica para a entrada de
-# PDF baixado a mao (pendencia O).
+# SO ENTRA BANCA CUJO LEITOR EXISTE (`radar/questoes_<banca>.py`, ou o
+# `radar/questoes_por_rodada.py` da FGV, da Access, da Idecan e da Selecon
+# nova). Prova que o robo nao pode baixar entra pela secao BAIXADAS A MAO, no
+# fim (decisao 172).
 #
 # Campos: banca, ano (o da prova), orgao, uf, cargo, pagina (onde a banca
 # lista o concurso; sem ela, o proprio link do caderno), caderno (o PDF) e,
@@ -230,3 +231,112 @@ provas:
   caderno: https://cdn.cebraspe.org.br/concursos/CBM_PA_23_CFO/arquivos/927_CBM_PA_CFO_001_01.PDF
   gabarito: https://cdn.cebraspe.org.br/concursos/CBM_PA_23_CFO/arquivos/GAB_DEFINITIVO_927_CBM_PA_CFO_001_01.PDF
   ler: ["47-54"]
+
+# --- BAIXADAS A MAO (decisao 172) --------------------------------------------
+# O robo nao pode baixar estas (os termos ou o robots.txt proibem); voce baixa
+# no navegador e salva em data/provas/manual/. A entrada diz o link ORIGINAL
+# (`caderno`, `gabarito`: e o que o radar guarda e mostra) e o nome do arquivo
+# que voce salvou (`arquivo`, `arquivo_do_gabarito`). `radar provas
+# --outras-bancas` so registra o arquivo no manifesto.
+#
+# `versao` e a do caderno baixado: o PDF pode trazer mais de uma (o "PROVA A"
+# da PM de Sergipe tem a Prova A e a Prova B), e a letra certa de uma versao
+# nao e a da outra - nem a anulada. O radar le so as paginas e o bloco do
+# gabarito dessa versao, e recusa o caderno quando nao as acha.
+# `cargo_no_pdf`: o texto do cargo, quando o PDF junta varios (a SENAPPEN).
+# Cada versao foi conferida na capa e no gabarito em 18/10, e a leitura,
+# questao a questao.
+- banca: FGV
+  ano: 2024
+  orgao: Secretaria de Administração Penitenciária e Ressocialização da Bahia
+  uf: BA
+  cargo: Agente Penitenciário
+  pagina: https://conhecimento.fgv.br/concursos/seapba24
+  caderno: https://conhecimento.fgv.br/sites/default/files/concursos/agente-penitenciariocnm-tipo-1.pdf
+  gabarito: https://conhecimento.fgv.br/sites/default/files/concursos/gabarito_definitivo_seapba.pdf
+  arquivo: agente-penitenciariocnm-tipo-1.pdf
+  arquivo_do_gabarito: gabarito_definitivo_seapba.pdf
+  versao: TIPO 1
+  # 21-25 sao do servidor da Bahia; 26-30, igualdade racial e de genero.
+  ler: ["26-80"]
+- banca: Selecon
+  ano: 2024
+  orgao: Secretaria Nacional de Políticas Penais (SENAPPEN)
+  uf: BR
+  cargo: Analista Técnico em Direito
+  pagina: https://selecon.selecao.net.br/informacoes/48/
+  caderno: https://anexos.cdn.selecao.net.br/uploads/746/concursos/48/anexos/6c8efa54-7d4d-41dc-9d74-619aa9d9af96.pdf
+  gabarito: https://anexos.cdn.selecao.net.br/uploads/746/concursos/48/anexos/cbf9347c-5afc-40cc-858a-a6ca924867fd.pdf
+  arquivo: ANALISTA TÉCNICO EM DIREITO PROVA A SENAPPEN.pdf
+  arquivo_do_gabarito: ANALISTA TÉCNICO EM DIREITO  SENAPPEN.pdf
+  versao: PROVA A
+  # O PDF junta os cadernos dos 8 cargos; o gabarito tambem.
+  cargo_no_pdf: ANALISTA TÉCNICO EM DIREITO
+  alternativas: 4
+  ler: ["18-60"]
+- banca: Selecon
+  ano: 2024
+  orgao: Polícia Militar de Sergipe
+  uf: SE
+  cargo: Soldado
+  pagina: https://selecon.selecao.net.br/informacoes/45/
+  caderno: https://anexos.cdn.selecao.net.br/uploads/746/concursos/45/anexos/ff262f5e-57ae-4cb1-87be-eddd2a849d4e.pdf
+  gabarito: https://anexos.cdn.selecao.net.br/uploads/746/concursos/45/anexos/f72fba78-1647-47d3-9fb9-bca3675bb043.pdf
+  arquivo: GOVERNO DO ESTADO DE SERGIPE PROVA A.pdf
+  arquivo_do_gabarito: GABARITO GOVERNO DO ESTADO DE SERGIPE .pdf
+  versao: PROVA A
+  alternativas: 4
+  ler: ["36-45"]
+- banca: Selecon
+  ano: 2024
+  orgao: Polícia Militar de Sergipe
+  uf: SE
+  cargo: Oficial Combatente
+  pagina: https://selecon.selecao.net.br/informacoes/46/
+  caderno: https://anexos.cdn.selecao.net.br/uploads/746/concursos/46/anexos/c8b6ad5b-995d-4345-a363-649b86083925.pdf
+  gabarito: https://anexos.cdn.selecao.net.br/uploads/746/concursos/46/anexos/85b57b74-5899-421b-901e-6af4b86b2bc6.pdf
+  arquivo: GOVERNO DO ESTADO DE SERGIPE  PM OFICIAL PROVA A.pdf
+  arquivo_do_gabarito: gabarito_GOVERNO DO ESTADO DE SERGIPE  PM OFICIAL PROVA A.pdf
+  versao: PROVA A
+  alternativas: 4
+  # 8-14 e 22-28 sao de Direito Penal e Processual Penal MILITAR; 48-60, de
+  # Sergipe e da PM.
+  ler: ["1-7", "15-21", "29-47"]
+- banca: Selecon
+  ano: 2024
+  orgao: Prefeitura de Niterói (RJ)
+  uf: RJ
+  cargo: Guarda Civil Municipal
+  pagina: https://selecon.selecao.net.br/informacoes/52/
+  caderno: https://anexos.cdn.selecao.net.br/uploads/746/concursos/52/anexos/6d53f62a-c546-49df-8d27-eb21ad6e868d.pdf
+  gabarito: https://anexos.cdn.selecao.net.br/uploads/746/concursos/52/anexos/857ba46a-5826-4de5-a42b-b1d0f498d065.pdf
+  arquivo: GUARDA CIVIL MUNICIPAL DO MUNICÍPIO DE NITERÓI - RJ.pdf
+  arquivo_do_gabarito: gabarito_GUARDA CIVIL MUNICIPAL DO MUNICÍPIO DE NITERÓI - RJ.pdf
+  versao: PROVA A
+  # 35-39 sao de transito; 46-50, de Niteroi.
+  ler: ["1-34", "40-45"]
+- banca: Access
+  ano: 2023
+  orgao: Prefeitura de Ribeirão Preto (SP)
+  uf: SP
+  cargo: Guarda Civil Metropolitano
+  pagina: https://concursos.access.org.br/informacoes/69/
+  caderno: https://anexos.cdn.selecao.net.br/uploads/422/concursos/69/anexos/IR7IsjDF6zVygTOUti3I1mgK5KXBdmPXZG2TkIFA.pdf
+  gabarito: https://anexos.cdn.selecao.net.br/uploads/422/concursos/69/anexos/zGdTULPdlwjBwJ67pFWVafD6lC8e0vmogOrZNxvK.pdf
+  arquivo: GUARDA CIVIL metropolitano.pdf
+  arquivo_do_gabarito: gabarito_GUARDA CIVIL metropolitano.pdf
+  versao: TIPO 1
+  ler: ["21-40"]
+- banca: Access
+  ano: 2024
+  orgao: Prefeitura de Cariacica (ES)
+  uf: ES
+  cargo: Guarda Municipal
+  pagina: https://concursos.access.org.br/informacoes/86/
+  caderno: https://anexos.cdn.selecao.net.br/uploads/422/concursos/86/anexos/VU4tyBV8101pc0EVKa1UGC33pI9MA9Z7ohHfCktQ.pdf
+  gabarito: https://anexos.cdn.selecao.net.br/uploads/422/concursos/86/anexos/IfhwYzMDPqEfArdtB3PrdWiQ6k8pPuuSvdXXhEcC.pdf
+  arquivo: GUARDA MUNICIPAL CARIACICA.pdf
+  arquivo_do_gabarito: GABRITO_GUARDA MUNICIPAL CARIACICA.pdf
+  versao: TIPO 1
+  alternativas: 4
+  ler: ["41-70"]

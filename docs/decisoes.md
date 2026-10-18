@@ -5981,3 +5981,66 @@ viraram estudo extra "Onde: Radar". Copia antes em
      com a confianca baixa. Nenhuma das 6 da FEPESE da regra c estava entre
      as 50 guardadas para 07/11, e a regra b nao muda o assunto, que e o que a
      composicao divide. As pendentes das 640 foram de 86 para 108.
+
+172. **o PDF baixado a mao entra pela lista, e o caderno de mais de uma
+     versao so e lido na versao da lista, com o bloco do gabarito dela**
+     (pedido de 18/10: "toma cuidado... as provas normalmente tem 4 provas
+     diferentes, tipo 1 a 4, ou A, B, C e D... tem que ver qual e o numero que
+     esta no gabarito"; e "se encontrar alguma questao anulada ela nao entra").
+     As regras:
+     - **a entrada a mao** (`config/provas_de_outras_bancas.yml`, secao
+       BAIXADAS A MAO): o `caderno` e o `gabarito` continuam sendo o link
+       original (e o que o radar guarda e mostra como "caderno original"); o
+       `arquivo` e o `arquivo_do_gabarito` sao o nome do PDF que voce salvou
+       em `data/provas/manual/` (fora do git). `radar provas --outras-bancas`
+       so registra o arquivo no manifesto, conferindo o fim do PDF, e nunca
+       vai a internet atras dele;
+     - **a versao** (`versao: TIPO 1`, `TIPO A`, `PROVA A`): o leitor
+       (`radar/questoes_por_rodada.py`) le so as paginas dessa versao - a
+       pagina sem marca e da versao da anterior - e o gabarito
+       (`radar/gabarito_por_versao.py`) so o bloco com esse nome, lido nos
+       dois modos do pypdf (a Access poe o nome antes do bloco so no modo
+       comum, a Idecan so no layout); se os dois modos acham o bloco com
+       letras diferentes, ou nenhum o acha, ou nenhuma pagina e da versao,
+       o caderno nao entra. Achado ao conferir: o "PROVA A" da PM de Sergipe
+       traz a Prova A e, depois, a Prova B no mesmo PDF (o leitor antigo
+       dava o enunciado de uma versao a questao da outra), e o da SENAPPEN
+       junta os cadernos dos 8 cargos (`cargo_no_pdf`). A anulada tambem muda
+       de numero conforme a versao (Ribeirao Preto: 47 e 48 no Tipo 1, 45 e
+       49 no Tipo 2);
+     - **a anulada nao entra em nada**: fica no banco marcada (`anulada`),
+       como sempre, e toda conta e todo treino a deixa de fora - incidencia,
+       Meu foco, rodadas que medem, os tres botoes, revisao espacada, base
+       das geradas, cartoes (conferido em 18/10). A tela de incidencia so a
+       mostra a parte, "fora da conta";
+     - **o leitor da FGV, da Access, da Idecan e da Selecon nova** e um so: a
+       questao e a marca antes da rodada de alternativas ("41" sozinho, FGV;
+       "Questao 26", Access; "13.", Idecan e Selecon; "(A)" ou "A)"), e o
+       cabecalho de pagina so sai das PONTAS da pagina - a Access repete "(A)
+       se apenas as afirmativas I e II estiverem corretas." em metade das
+       paginas, e a Idecan "comprovada necessidade." nas cinco alternativas
+       de uma pagina. O da SEJUSP/MG (versao unica) continua o antigo;
+     - **o gabarito preliminar nao entra**: ele nao traz as anuladas nem as
+       trocas do definitivo. A PC SC 2023 (Delegado, FGV) e a PC RN 2021
+       (Agente e Escrivao, FGV) esperam o definitivo;
+     - **a classificacao** e a do bloco generico (decisao 169), seguida da
+       segunda leitura as cegas da decisao 171.
+     Em 18/10 entraram 7 provas, com a versao conferida na capa e no
+     gabarito: SEAP-BA 2024 (FGV, Tipo 1, 55 de lei), SENAPPEN 2024
+     (Selecon, Prova A, Analista em Direito, 43), PM SE 2024 Soldado (10) e
+     Oficial (33) (Selecon, Prova A), Guarda de Niteroi 2024 (Selecon, Prova
+     A, 40), Guardas de Ribeirao Preto 2023 (20) e Cariacica 2024 (30)
+     (Access, Tipo 1): 231 questoes. A primeira leitura (claude-opus-5-5)
+     classificou 107 no edital, e as outras 124 sao de materia fora dele;
+     a segunda, as cegas (duas leituras, so com os caminhos da arvore), deu
+     90 no mesmo no, 12 no mesmo assunto (o no em comum) e 5 que discordam -
+     pendentes, na lista unica ([conferir_classificacoes](conferir_classificacoes.md)).
+     A pendente da primeira leitura nao foi relida: ela continua pendente de
+     qualquer jeito, e pendente nao treina. A arvore foi a 738 nos (dois
+     pares gemeos criados no mesmo lote: "Direito de reuniao" e "Liberdade de
+     reuniao"; "Manifestacao do pensamento e acesso a informacao" e
+     "Liberdade de manifestacao do pensamento e de expressao" - passo 3 da
+     Parte 2). No treino de outras bancas: Constitucional 94, Administracao
+     Publica 64, Penal 55, Legislacao Especial 53, Processo Penal 36,
+     Direitos Humanos 34, LEP 21. As duas da PC SC 2026 (Idecan, Escrivao e
+     Agente, Tipo A, lidas 100 de 100 cada) esperam o link original.

@@ -347,8 +347,7 @@ materia e resposta da classificacao); a PC PB 2022 fica sem gabarito (o
 definitivo nao confere com o caderno publicado). A arvore foi a 682 nos. No
 treino, de outras bancas: Constitucional 73, Penal 44, Legislacao Especial
 39, Processo Penal 29, Direitos Humanos 26, LEP 15. Faltam a ACAFE, o IDIB,
-o IBADE (liberado por voce), as Guardas da Selecon e os PDFs que so dao a
-mao (voce baixa; falta a entrada de PDF local): pendencia O.
+o IBADE (liberado por voce) e as Guardas da Selecon: pendencia O.
 **Os sabados leves e o Raciocinio na sexta (pedido de 18/10, decisao 170, a
 seu pedido e fora dos lotes; nao mexe na medicao):** de 23/10 a 07/11 o
 sabado tem umas 2 horas, num bloco so - as revisoes do dia (ate 5 questoes
@@ -373,6 +372,20 @@ regra nova, tambem conferidas), 79 pendentes nas duas e 29 que discordam -
 estas viraram pendentes, lado a lado na lista unica, para conferir depois de
 07/11. Pendente nao treina nem entra no fechamento. Faltam o passo 2 (a data
 da prova contra a lei que mudou) e o 3 (os nos novos sem questao).
+**Os PDFs baixados a mao e a versao do caderno (18/10, decisao 172, a seu
+pedido):** a lista de outras bancas aceita o PDF que voce salva em
+`data\provas\manual\` (`arquivo`, com o link original no `caderno`), e o
+caderno que vem em mais de uma versao (Tipo 1 a 4, Prova A e B) so e lido
+na `versao` da lista: as paginas dela (`radar/questoes_por_rodada.py`, um
+leitor para a FGV, a Access, a Idecan e a Selecon nova) e o bloco dela no
+gabarito (`radar/gabarito_por_versao.py`), ou nada entra - o "PROVA A" da PM
+de Sergipe trazia a Prova B junto. A anulada fica de fora de toda conta e
+treino, como sempre; o gabarito preliminar nao entra. Entraram 7 provas (SEAP-BA,
+SENAPPEN, PM SE Soldado e Oficial, Guardas de Niteroi, Ribeirao Preto e
+Cariacica), 231 questoes, 107 no edital, relidas as cegas pela regra da 171
+(90 no mesmo no, 12 no no em comum, 5 pendentes). Outras bancas no treino:
+358 de lei. As duas da PC SC 2026 (Idecan) esperam o link; a PC SC 2023 e a
+PC RN 2021 (FGV), o gabarito definitivo (pendencia O).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

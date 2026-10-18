@@ -744,17 +744,23 @@ O que falta vai nesta ordem, uma etapa por conversa.
   - Soldado PM TO 2021 (Cebraspe), q44: a Declaracao Universal como
     "recomendacao" e a visao formal; ha quem a trate como costume, que
     obriga;
+  - das baixadas a mao de 18/10 (decisao 172): PM SE 2024 Oficial
+    (Selecon), q39 - o gabarito a) (adicional noturno pago a inativo como
+    ofensa a moralidade) nao tem base clara, e a d) chega perto do art. 37,
+    § 1º; Guarda de Niteroi 2024, q12 - a d) (prova emprestada) tambem e
+    dispensavel (Sumula 591 do STJ); Guardas de Ribeirao Preto 2023, q24, e
+    Cariacica 2024, q45 - o gabarito segue a letra do art. 144, e o STF (ADPF
+    995, 2023) poe as guardas na seguranca publica; SEAP-BA 2024 (FGV), q30
+    - so e certa pela Lei 14.857/2024 (art. 17-A da Maria da Penha), e a q77
+    cobra doutrina ("o direito a vida e o nucleo essencial");
 - ⚪ **A clausula 5 do IBADE**: "nao podendo ser copiado, reproduzido,
   distribuido ou utilizado sem autorizacao expressa do IBADE". O IBADE tem o
   Agente Socioeducativo AC 2021 e o Inspetor Penitenciario ES 2023, e o robo
   pode ler. Entra ou nao e escolha sua;
-- ⚪ **Os PDFs que so dao a mao** (a lista com os links esta no
-  [levantamento_de_bancas](levantamento_de_bancas.md)): FGV (SEAP-BA 2024,
-  PC SC 2023), Idecan (PC-CE e PEFOCE 2021), Selecon na plataforma nova (PM SE
-  e SENAPPEN 2024), FCC e Access. Os termos da FGV proibem robo e tambem
-  "reproduzir, duplicar, copiar": baixar a mao para estudo pessoal e zona
-  cinzenta, e a decisao e sua. Para os que entrarem, falta a entrada de PDF
-  baixado a mao e o leitor de cada banca.
+- ✅ **Os PDFs que so dao a mao**: voce os baixou em 17/10 (decisao 172).
+  Os termos da FGV proibem robo e "reproduzir, duplicar, copiar": o PDF fica
+  so na sua maquina (`data\provas\manual\`, fora do git), e os testes usam
+  texto inventado.
 
 ### As proximas etapas
 
@@ -781,12 +787,26 @@ O que falta vai nesta ordem, uma etapa por conversa.
   Inspetor Penitenciario ES 2023, a PC/ES 2025 e os peritos BA. O leitor e a
   lista; a fixture de teste com texto inventado (a clausula 5 proibe
   reproduzir, e o repositorio e publico);
-- 🔴 **Os PDFs que voce vai baixar a mao** (a lista com os links diretos
-  esta na pagina "Provas para baixar" de 17/10, na conversa e no
-  levantamento): salvar em
-  `data\provas\manual\` e me avisar. Falta a entrada de PDF local na lista
-  (`arquivo` no lugar de `caderno`) e os leitores da FGV e do Access; o da
-  Selecon ja existe;
+- ✅ **Os PDFs baixados a mao** (decisao 172, 18/10): a entrada local na
+  lista (`arquivo`, `arquivo_do_gabarito`, `versao`, `cargo_no_pdf`) e um
+  leitor so para a FGV, a Access, a Idecan e a Selecon nova, que le so a
+  versao do caderno da lista e o bloco dela no gabarito. Entraram 7 provas,
+  231 questoes de lei, 107 classificadas no edital; a segunda leitura as
+  cegas conferiu 102 e deixou 5 pendentes, na lista unica. Os dois pares de
+  nos gemeos que o lote criou ("Direito de reuniao" / "Liberdade de
+  reuniao"; "Manifestacao do pensamento..." / "Liberdade de manifestacao do
+  pensamento...") vao para o passo 3 da Parte 2. Sobra:
+  - 🔴 **as duas da PC SC 2026 (Idecan, Escrivao e Agente, Tipo A)**: lidas
+    100 de 100 cada, com o gabarito definitivo (24 e 96 anuladas no
+    Escrivao, 60 no Agente; a 64 do Agente trocada no definitivo). Falta o
+    LINK de onde voce baixou os dois PDFs e os dois gabaritos (o radar
+    guarda e mostra o link original); com ele, e so por na lista;
+  - ⚪ **a PC SC 2023 (Delegado) e a PC RN 2021 (Agente e Escrivao), da
+    FGV**: o gabarito que voce baixou e o PRELIMINAR, sem as anuladas nem
+    as trocas. Falta o "Gabarito Oficial Definitivo" de cada uma (e o link
+    do caderno da PC RN);
+  - ⚪ **a Idecan da PC-CE e da PEFOCE 2021**, que estavam na lista e nao
+    vieram;
 - ⚪ **O Cebraspe (registro antigo do plano)**:
   - a entrada delas no `config/provas_de_outras_bancas.yml` (o download ja
     existe), conferindo o tamanho do PDF (um veio cortado com 200);

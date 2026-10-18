@@ -2405,3 +2405,20 @@ publicado erra 9 questoes do caderno publicado, de lei e de Informatica,
 conferidas pela imagem dos dois PDFs - o par deve ser de versoes
 diferentes. A arvore foi a 682 nos. E, para os PDFs que so dao a mao, ficou
 uma pagina com os links diretos de cada caderno e gabarito.
+
+## As provas baixadas a mao e a versao do caderno (18/10, de madrugada)
+
+Voce baixou os PDFs da pagina "Provas para baixar" e pediu cuidado com o
+gabarito: as provas vem em ate 4 versoes, e a letra certa de uma nao e a da
+outra (decisao 172). Ao conferir cada PDF pela capa e pela imagem do
+gabarito, dois achados confirmaram o cuidado: o "PROVA A" da PM de Sergipe
+trazia a Prova B no mesmo arquivo - o leitor antigo dava o enunciado de uma
+versao a questao da outra -, e o gabarito da SENAPPEN juntava os 8 cargos.
+Um leitor so passou a servir a FGV, a Access, a Idecan e a Selecon nova,
+lendo so as paginas e o bloco do gabarito da versao da lista, e a limpeza do
+cabecalho de pagina passou a olhar so as pontas da pagina (a alternativa
+"(A) se apenas as afirmativas I e II..." se repete em metade das paginas da
+Access). Entraram 7 provas e 231 questoes de lei; a classificacao seguiu a
+regra da segunda leitura as cegas que outra conversa tinha acabado de criar
+(decisao 171). Os gabaritos da PC SC 2023 e da PC RN 2021 eram preliminares
+e ficaram de fora; as duas da PC SC 2026, da Idecan, esperam o link.
