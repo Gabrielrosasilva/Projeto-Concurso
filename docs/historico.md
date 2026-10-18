@@ -2435,3 +2435,11 @@ das 11 provas confirmou a versao, as anuladas, as faixas e o texto, e as
 classificadas desceram mais na arvore que as da FEPESE. Ficaram anotados a
 palavra partida da FGV ("p ara", "L ei"), dois nos gemeos e os gabaritos
 discutiveis, para voce decidir.
+
+## A manha sem lei seca (18/10, a tarde)
+
+Voce estranhou que a segunda 19/10 ainda tinha a lei seca: os sabados leves
+(decisao 170) so tiravam a lei seca das sextas, e so de 23/10 em diante. Como
+voce nao a faz, as 12 faixas que restavam no Ciclo 1 sairam, sem nada no
+lugar, e a manha acaba meia hora mais cedo (decisao 175). Os sabados ja
+estavam leves desde a 170; o 07/11, que mede, nao mudou.

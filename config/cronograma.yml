@@ -2195,17 +2195,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direito Penal
-    titulo: 'Lei seca dirigida: CP art. 23; CP art. 25 e parágrafo único'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -2323,14 +2312,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 10
-    materia: Direito Constitucional
-    titulo: 'Lei seca dirigida: CF art. 6º; CF art. 7º, XXXIII; CF art. 9º'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
   - tipo: revisao
     rotulo: Extra
     questoes: 12
@@ -2470,17 +2451,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP art. 61; LEP art. 66; LEP art. 68'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 15
     materia: Língua Portuguesa
@@ -2610,17 +2580,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direitos Humanos
-    titulo: 'Lei seca dirigida: CF art. 5º, § 3º; STF'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -2905,17 +2864,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direito Penal
-    titulo: 'Lei seca dirigida: CP art. 26; CP art. 27; CP art. 28'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -3031,17 +2979,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direito Constitucional
-    titulo: 'Lei seca dirigida: CF art. 12, I e II; CF art. 12, § 3º; CF art. 15, III'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -3172,17 +3109,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP art. 112; LEP art. 118'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -3317,16 +3243,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direitos Humanos
-    titulo: 'Lei seca dirigida: Regras de Mandela 1 a 5; Regra 11; Regra 23'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -3665,17 +3581,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direito Penal
-    titulo: 'Lei seca dirigida: CP art. 312; CP arts. 316 e 317; CP art. 319-A'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -3812,17 +3717,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direito Constitucional
-    titulo: 'Lei seca dirigida: CF art. 144, caput e VI; CF art. 144, § 5º-A'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -3939,17 +3833,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Lei de Execução Penal
-    titulo: 'Lei seca dirigida: LEP arts. 131 e 132; LEP art. 140; LEP arts. 146-B e 146-C'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-    link: https://www.planalto.gov.br/ccivil_03/leis/l7210.htm
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa
@@ -4094,16 +3977,6 @@ dias:
     duracao: 10
     titulo: Pausa
     detalhe: Levante, beba água, sem celular.
-  - tipo: lei_seca
-    duracao: 20
-    materia: Direitos Humanos
-    titulo: 'Lei seca dirigida: Regras de Mandela 43 e 44; Regras 47 a 49; Regras 50 a 53'
-    detalhe: 'Só os artigos do título, no texto oficial, marcando prazos, exceções e palavras como ''salvo'', ''somente'',
-      ''vedado''. O porquê de cada um está no Plano B do dia. Seleção do plano, feita a partir do texto da lei:
-      não é o que a banca mais cobra.'
-  - tipo: pausa
-    duracao: 10
-    titulo: Pausa
   - tipo: portugues
     duracao: 20
     materia: Língua Portuguesa

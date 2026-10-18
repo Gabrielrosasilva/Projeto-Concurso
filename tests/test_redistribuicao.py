@@ -127,6 +127,16 @@ ESTUDO_DA_170 = {
 }
 
 
+#: De 19/10 em diante a lei seca saiu da manha, com a pausa logo depois dela
+#: (decisao 175). Nesses dias a comparacao deixa de fora o titulo da lei seca
+#: e as pausas; os minutos estao presos no test_rotina_sem_anki.
+SEM_LEI_SECA = date(2026, 10, 19)
+
+
+def _sem_lei_seca_nem_pausa(titulos: list[str]) -> list[str]:
+    return [t for t in titulos if not t.startswith("Lei seca dirigida") and t != "Pausa"]
+
+
 def test_nenhum_titulo_nem_data_de_tema_mudou(plano_real):
     for dia in plano_real.dias:
         if dia.data in DIAS_DA_170:
@@ -134,6 +144,9 @@ def test_nenhum_titulo_nem_data_de_tema_mudou(plano_real):
         titulos = [f.titulo for b in pl.BLOCOS for f in getattr(dia, b)
                    if f.rotulo != "Extra" and not _portugues_do_p04(dia, f)]
         antes = ANTES["dias"][dia.data.isoformat()]["titulos"]
+        if dia.data >= SEM_LEI_SECA:
+            assert not any(t.startswith("Lei seca dirigida") for t in titulos), dia.data
+            titulos, antes = _sem_lei_seca_nem_pausa(titulos), _sem_lei_seca_nem_pausa(antes)
         if dia.data == date(2026, 10, 10):
             # Decisao 134: os diagnosticos passaram a abrir a manha e a noite.
             # Os titulos sao os mesmos; so a ordem mudou.

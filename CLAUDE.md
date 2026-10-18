@@ -422,6 +422,12 @@ resposta, e o "📝 Como foi" da faixa ganha os erros de fora do radar por
 motivo, com a soma presa aos erros do "fiz". A conta do Historico (parte 1)
 esta pronta, sem tela: `metricas.motivos_dos_erros`, por origem, nunca
 somadas, cada erro uma vez, com o erro bobo (`erros.ERRO_BOBO`).
+**Sem lei seca de 19/10 em diante (18/10, decisao 175, a seu pedido):** as 12
+faixas de lei seca que restavam no Ciclo 1 sairam do `config/cronograma.yml`,
+com a pausa logo depois, sem nada no lugar: a manha acaba as 12h00. As
+sextas da 170, os sabados, o 07/11 e os dias passados ficam iguais; o Plano
+B e o "Resumo" continuam com os artigos-chave. O Ciclo 2 decide se tera lei
+seca (pendencia D).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

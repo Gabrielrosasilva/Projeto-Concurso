@@ -211,6 +211,9 @@ foram baixadas -, e a numeracao furada de 28 cadernos era o leitor tomando o
   - em **13/11**: a R+7 de Problemas aritmeticos e geometricos (06/11);
   - e decidir se o sabado de 2 horas e o Raciocinio na sexta continuam no
     Ciclo 2 (a decisao 170 vale ate 07/11);
+  - e se o Ciclo 2 tera lei seca: ela saiu do Ciclo 1 de 19/10 em diante,
+    sem nada no lugar, porque voce nao a faz (decisao 175). O padrao, se
+    nada for dito, e montar o Ciclo 2 sem ela;
   **A minha conferencia das provas novas** (decisao 173) entra no Ciclo 2
   como **faixa de uns 20 minutos por semana, ate acabar**: a amostra dos
   quatro grupos (FEPESE, NC-UFPR e Selecon, Cebraspe, IESES; 10 por grupo,
@@ -758,15 +761,10 @@ O que falta vai nesta ordem, uma etapa por conversa.
   conferencia, apague os 9 que continuarem vazios** - cada um e uma leitura
   de questao pendente, e por isso ficou (`conteudos.apagar_vazio` recusa o
   que ainda servir). Gabaritos discutiveis que ainda esperam:
-  - das baixadas a mao de 18/10 (decisao 172): PM SE 2024 Oficial
-    (Selecon), q39 - o gabarito a) (adicional noturno pago a inativo como
-    ofensa a moralidade) nao tem base clara, e a d) chega perto do art. 37,
-    § 1º; Guarda de Niteroi 2024, q12 - a d) (prova emprestada) tambem e
-    dispensavel (Sumula 591 do STJ); Guardas de Ribeirao Preto 2023, q24, e
-    Cariacica 2024, q45 - o gabarito segue a letra do art. 144, e o STF (ADPF
-    995, 2023) poe as guardas na seguranca publica; SEAP-BA 2024 (FGV), q30
-    - so e certa pela Lei 14.857/2024 (art. 17-A da Maria da Penha), e a q77
-    cobra doutrina ("o direito a vida e o nucleo essencial");
+  - das baixadas a mao de 18/10 (decisao 172): decididos com voce em 18/10;
+    o que saiu do treino e o que ganhou aviso esta no
+    [leis_alteradas](leis_alteradas.md), sem a letra nem a alternativa
+    certa - voce ainda vai responder estas questoes;
 - ⚪ **A clausula 5 do IBADE**: "nao podendo ser copiado, reproduzido,
   distribuido ou utilizado sem autorizacao expressa do IBADE". O IBADE tem o
   Agente Socioeducativo AC 2021 e o Inspetor Penitenciario ES 2023, e o robo

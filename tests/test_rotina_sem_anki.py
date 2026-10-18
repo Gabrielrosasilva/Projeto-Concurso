@@ -199,18 +199,29 @@ def test_toda_manha_de_dia_util_tem_questoes(real):
             assert 4 in (fixacao.questoes, portugues.questoes), data
 
 
+#: De 19/10 em diante a lei seca saiu da manha, sem nada no lugar (decisao 175).
+SEM_LEI_SECA = date(2026, 10, 19)
+
+
 def test_o_dia_util_nao_cresceu(real):
     """Manha de 2h15 (era 2h20) e o Anki fora: 20 min a menos que antes."""
     for data in _uteis_depois(real):
         dia = cronograma.montar_dia(real, data, 1)
-        assert sum(f.duracao for f in dia.manha) == 135, data
         assert sum(f.duracao for f in dia.pos22 if not f.opcional) == 0, data
         lei = next((f for f in dia.manha if f.tipo == "lei_seca"), None)
-        if lei is None:
+        if any(f.tipo == "raciocinio" for f in dia.manha):
             # As sextas de 23/10 a 06/11 (decisao 170): a aula de Raciocinio
             # entrou no lugar da lei seca e do Portugues, e a manha continua 135.
-            assert any(f.tipo == "raciocinio" for f in dia.manha), data
+            assert lei is None and sum(f.duracao for f in dia.manha) == 135, data
             continue
+        if data >= SEM_LEI_SECA:
+            # A lei seca e a pausa depois dela sairam (decisao 175): a manha
+            # perde 30 min, ou 10 no dia em que a lei seca era de 10 e vinha
+            # antes da Extra.
+            assert lei is None, data
+            assert sum(f.duracao for f in dia.manha) in (105, 125), data
+            continue
+        assert sum(f.duracao for f in dia.manha) == 135, data
         # 10 min no dia em que o tema de Direito nao caiu (R4, decisao 124): os
         # 10 que sairam estao na Extra da manha, e a manha continua 135.
         direito_basico = any(f.rotulo == "Extra" and f.materia == lei.materia

@@ -6219,8 +6219,7 @@ Depois, os gabaritos discutiveis do lote, aprovados por voce em 18/10: a
 PM SE Oficial q39, a Guarda de Niteroi q12 e o Delegado PC SC q71 sairam do
 treino (`classificacoes.fora_do_treino`, a regra do passo 2 da 171: duas
 alternativas defensaveis, ou o gabarito supoe o que o texto nao da); as
-Guardas de Ribeirao Preto q24 e Cariacica q45, que cobram a letra do art.
-144, ganharam o aviso do STF (ADPF 995 e Tema 656) no `config/leis.yml`,
+Guardas de Ribeirao Preto q24 e Cariacica q45 ganharam o aviso do STF (ADPF 995 e Tema 656) no `config/leis.yml`,
 com os dois cadernos em `provas`. As outras quatro ficaram. Estoque de lei
 no treino: 427.
 
@@ -6284,3 +6283,19 @@ no treino: 427.
      radar 104 (103 dos "fiz" com acertos e 1 do caderno, Chutei, numa faixa
      sem acertos); erro bobo 0 em todas. A rodada de teste foi numa copia do
      banco (`RADAR_DATABASE_URL`), e o `data/radar.db` ficou com o mesmo hash.
+
+175. **de 19/10 a 05/11 a lei seca sai da manha, sem nada no lugar** (pedido
+     de 18/10: "tira a lei seca... sem mais questoes ou estudo"; voce nao a
+     faz, e a faixa que sempre fica sem check so polui o plano). As 12 faixas
+     de lei seca que restavam no Ciclo 1 (segunda a quinta de 19/10 a 05/11)
+     sairam do `config/cronograma.yml`, e com elas a pausa que vinha logo
+     depois (11 delas; em 20/10 a lei seca de 10 min vinha antes da Extra, e
+     so ela saiu). A manha passa a acabar as 12h00 (as 12h20 em 20/10): 30 min
+     a menos, ou 10. Nada entra no lugar. As sextas da decisao 170 ja nao
+     tinham lei seca; os sabados, o 07/11 e todo dia que ja passou ficam
+     iguais (conferido pelo `radar hoje`, que sai identico ao de antes nesses
+     dias). O `essencial` de cada dia e o texto do Plano B continuam: os
+     artigos-chave alimentam o Plano B, e o botao "Resumo" da faixa ja mostra
+     os artigos do tema, com o "Traduz pra mim". O total de questoes do ciclo
+     nao muda (2050): a lei seca nao tinha questao. Se o Ciclo 2 tera lei
+     seca e decisao da montagem dele (pendencia D).

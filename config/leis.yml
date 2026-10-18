@@ -724,14 +724,12 @@ mudancas:
 
   # --- As provas baixadas a mao de 18/10 (decisao 172, aprovado por voce) ------
   #
-  # Guarda de Ribeirao Preto 2023, q24; Guarda de Cariacica 2024, q45. As duas
-  # cobram a letra do art. 144 (as guardas fora dos incisos; o § 8o so com a
-  # protecao de bens, servicos e instalacoes), e pela letra o gabarito vale.
-  # O aviso diz que o STF mudou o entendimento (a ADPF 995 e depois da prova
+  # Guarda de Ribeirao Preto 2023, q24; Guarda de Cariacica 2024, q45 (sem a
+  # resposta aqui: voce ainda vai responder as duas). O aviso diz que o STF mudou o entendimento (a ADPF 995 e depois da prova
   # de Ribeirao Preto, 16/04/2023; o Tema 656, depois das duas).
   - tema: "Guardas municipais na segurança pública (CF, art. 144, § 8º)"
     lei: "STF, ADPF 995 (25/08/2023) e RE 608.588 (Tema 656 da repercussão geral, 20/02/2025)"
-    o_que_mudou: "o STF afastou as interpretações que excluíam as guardas municipais do Sistema de Segurança Pública (ADPF 995) e declarou constitucional o exercício de ações de segurança urbana por elas, inclusive policiamento ostensivo e comunitário e prisão em flagrante, sem atividade de polícia judiciária (Tema 656); a letra do art. 144, que as duas questões cobram, não mudou"
+    o_que_mudou: "o STF afastou as interpretações que excluíam as guardas municipais do Sistema de Segurança Pública (ADPF 995) e declarou constitucional o exercício de ações de segurança urbana por elas, inclusive policiamento ostensivo e comunitário e prisão em flagrante, sem atividade de polícia judiciária (Tema 656); a letra do art. 144 não mudou"
     anos: [2023, 2024]
     marcas: ["guardas municipais"]
     provas:
