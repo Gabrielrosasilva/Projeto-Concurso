@@ -51,6 +51,7 @@ from radar.models import (
 )
 from radar.questoes import chave_da_questao
 from radar.servico import cronograma as diario
+from radar.servico import evidencia
 from radar.origem import AUTOMATICO, IA
 from radar.servico import extra as estudo_extra
 from radar.util import fuso_local, para_local
@@ -109,6 +110,10 @@ class Numeros:
     #: Respostas do radar marcadas "vou no chute" (decisao 142): ao lado das
     #: outras contas, nunca dentro - nao mudam acerto, erro nem total.
     chutes: int = 0
+    #: Das respostas reais do radar, quantas sao de questao de OUTRA BANCA
+    #: (decisao 166): medem como as da FEPESE, e a tela diz a origem ao lado.
+    #: Tambem ao lado, nunca dentro.
+    de_outras_bancas: int = 0
 
     @property
     def questoes(self) -> int:
@@ -140,7 +145,12 @@ class Numeros:
             ia_acertos=self.ia_acertos + outro.ia_acertos,
             minutos=self.minutos + outro.minutos,
             chutes=self.chutes + outro.chutes,
+            de_outras_bancas=self.de_outras_bancas + outro.de_outras_bancas,
         )
+
+    def origem_ao_lado(self) -> str:
+        """"(55 FEPESE, 2 de outras bancas)", ou "" sem resposta de outra banca."""
+        return frase_da_origem(self.medidas, self.de_outras_bancas)
 
     def anotar(self, questoes: int | None, acertos: int | None,
                minutos: int | None = 0, onde: str = "") -> None:
@@ -159,16 +169,30 @@ class Numeros:
         self.erros += questoes - acertos
 
     def responder(self, acertou: bool, gerada: bool = False,
-                  chutou: bool = False) -> None:
+                  chutou: bool = False, outra_banca: bool = False) -> None:
         """Soma uma resposta dada dentro do radar."""
         self.chutes += 1 if chutou else 0
         if gerada:
             self.ia += 1
             self.ia_acertos += 1 if acertou else 0
-        elif acertou:
+            return
+        self.de_outras_bancas += 1 if outra_banca else 0
+        if acertou:
             self.acertos += 1
         else:
             self.erros += 1
+
+
+def frase_da_origem(medidas: int, de_outras_bancas: int) -> str:
+    """"(55 FEPESE, 2 de outras bancas)": a origem ao lado do acerto (decisao
+    166), a mesma frase do Meu desempenho. Vazia sem outra banca: ai o numero
+    e todo FEPESE, e a frase seria ruido.
+
+    So o radar sabe a banca de cada questao; o anotado vem do Qconcursos, cujo
+    filtro do plano e a FEPESE, e fica do lado dela."""
+    if not de_outras_bancas:
+        return ""
+    return f"({medidas - de_outras_bancas} FEPESE, {de_outras_bancas} de outras bancas)"
 
 
 def frase_da_conta(numeros: Numeros) -> str:
@@ -263,6 +287,9 @@ class Lancamento:
     #: `conteudo` chega ao que cobre - so para a situacao e as datas do no,
     #: nunca para o acerto (servico/estudo.py, decisao 81).
     faixa: object = None
+    #: A resposta do radar a questao real de outra banca (evidencia `fora`,
+    #: decisao 166). Nao muda conta nenhuma: e a origem ao lado.
+    de_outra_banca: bool = False
 
 
 def rodada_que_revisa(filtros: dict | None) -> bool:
@@ -385,6 +412,7 @@ def lancamentos(inicio: date, fim: date, plano=None) -> list[Lancamento]:
             revisao=resposta.simulado_id in que_revisam,
             chave=(chave_da_questao(questao.enunciado, questao.alternativas)
                    if real else None),
+            de_outra_banca=real and questao.evidencia == evidencia.FORA,
         ))
     return linhas
 
@@ -414,8 +442,8 @@ class Conta:
             if linha.gerada:
                 self.treino_ia.responder(acertou, gerada=True)
                 return
-            self.radar.responder(acertou)
-            self.sem_consulta.responder(acertou)
+            self.radar.responder(acertou, outra_banca=linha.de_outra_banca)
+            self.sem_consulta.responder(acertou, outra_banca=linha.de_outra_banca)
             return
         destino = self.faixas if linha.origem == FAIXA else self.extra
         destino.anotar(linha.questoes, linha.acertos, linha.minutos, linha.descricao)

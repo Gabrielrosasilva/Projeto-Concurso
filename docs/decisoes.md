@@ -5647,6 +5647,16 @@ viraram estudo extra "Onde: Radar". Copia antes em
        nao ha. O "Onde estudar primeiro" usa o meu desempenho, e por ele a
        outra banca entra; a incidencia que ele pesa continua so do alvo.
 
+     **A origem no numero que decide (pedido de 18/10, Parte 1).** O acumulado
+     sem consulta do ciclo - o numero que decide o Ciclo 2 (decisao 146) - diz
+     a origem ao lado no Minhas materias e na tabela da Correcao de 07/11,
+     com a mesma frase do Meu desempenho (`metricas.frase_da_origem`, uma
+     so). A conta nao mudou: o `metricas.Numeros` ganhou o
+     `de_outras_bancas`, ao lado e nunca dentro, como o chute. So o radar sabe
+     a banca de cada questao; o anotado vem do Qconcursos, cujo filtro do
+     plano e a FEPESE, e fica do lado dela. O fechamento e o diagnostico sao
+     so da FEPESE: a frase nao aparece neles.
+
 ## Os tres botoes da faixa e a FEPESE pelo conteudo (pedido de 17/10/2026)
 
 167. **cada faixa de treino tem tres botoes - "Gerar questao real",

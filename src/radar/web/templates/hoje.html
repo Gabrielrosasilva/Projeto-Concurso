@@ -486,7 +486,7 @@
    amostra nao sustenta a porcentagem (config/amostra.yml). #}
 {%- macro medida_do_sabado(m, vazio) -%}
   {%- if m is none -%}<span class="sub">{{ vazio }}</span>
-  {%- else -%}{{ m.acertos }} de {{ m.respondidas }} · {{ m.porcentagem }}%{% if not m.suficiente %}<br><span class="sub">Amostra insuficiente</span>{% endif %}
+  {%- else -%}{{ m.acertos }} de {{ m.respondidas }} · {{ m.porcentagem }}%{% if m.de_outras_bancas %}<br><span class="sub">{{ m.origem_ao_lado() }}</span>{% endif %}{% if not m.suficiente %}<br><span class="sub">Amostra insuficiente</span>{% endif %}
   {%- endif -%}
 {%- endmacro -%}
 

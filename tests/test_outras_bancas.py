@@ -17,24 +17,26 @@ O que estes testes seguram:
 Nada depende da data de hoje: o dia da tela e fixo, como no test_geradas_da_faixa.
 """
 import random
-from datetime import date
+from datetime import date, datetime, timezone
 from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
+from radar import cronograma
 from radar.db import sessao
 from radar.models import QuestaoDeProva, RespostaDeSimulado, Simulado
 from radar.servico import classificacoes, composicao, conteudos
 from radar.servico import cronograma as diario
 from radar.servico import desempenho_por_conteudo as por_conteudo
 from radar.servico import incidencia as servico_incidencia
-from radar.servico import manual, outras_bancas
+from radar.servico import manual, metricas, outras_bancas, sabado
+from radar.servico import materias as minhas_materias
 from radar.servico import simulado as servico_simulado
 from radar.web.app import app
-from tests.test_composicao import (ALVO_2019, INTERPRETACAO, ORTOGRAFIA,  # noqa: F401
-                                   PORTUGUES, PROGRAMA, _questao)
+from tests.test_composicao import (ALVO_2019, CONFIG, INTERPRETACAO,  # noqa: F401
+                                   ORTOGRAFIA, PORTUGUES, PROGRAMA, _questao)
 
 PROVA_IESES = "https://ieses.test/2024/caderno-{}.pdf"
 QUATRO = {"a": "um", "b": "dois", "c": "três", "d": "quatro"}
@@ -183,6 +185,63 @@ def test_sem_outra_banca_a_divisao_e_a_de_sempre(acervo):
     _responder(da_fepese, "a")
     no = por_conteudo.por_no(por_conteudo.SEMPRE)[INTERPRETACAO]
     assert no.divisao() == "radar 100% em 1 · anotado —"
+
+
+def test_a_frase_da_origem_e_uma_so_e_fica_ao_lado():
+    assert metricas.frase_da_origem(57, 0) == ""
+    assert metricas.frase_da_origem(57, 2) == "(55 FEPESE, 2 de outras bancas)"
+    uma, outra = metricas.Numeros(), metricas.Numeros()
+    uma.responder(True, outra_banca=True)
+    outra.responder(False)
+    outra.responder(True, gerada=True, outra_banca=True)    # IA nunca conta aqui
+    soma = uma + outra
+    assert (soma.medidas, soma.acertos, soma.de_outras_bancas) == (2, 1, 1)
+    assert soma.origem_ao_lado() == "(1 FEPESE, 1 de outras bancas)"
+
+
+@pytest.fixture
+def uma_de_cada_no_ciclo(acervo):
+    """Uma da FEPESE certa e uma da IESES errada, respondidas em 20/10: o dia
+    da resposta e fixo, e nada depende de hoje."""
+    with sessao() as s:
+        da_fepese = s.scalar(select(QuestaoDeProva.id).where(QuestaoDeProva.numero == 1))
+        da_ieses = s.scalar(select(QuestaoDeProva.id).where(QuestaoDeProva.numero == 11))
+    _responder(da_fepese, "a")
+    _responder(da_ieses, "b")
+    with sessao() as s:
+        for resposta in s.scalars(select(RespostaDeSimulado)):
+            resposta.respondida_em = datetime(2026, 10, 20, 15, 0, tzinfo=timezone.utc)
+
+
+def test_o_acumulado_do_ciclo_diz_a_origem_no_minhas_materias(uma_de_cada_no_ciclo,
+                                                              monkeypatch):
+    """Parte 1 do pedido de 18/10: o acumulado sem consulta, o numero que
+    decide o Ciclo 2 (decisao 146), com a origem ao lado. A conta nao muda."""
+    plano = cronograma.carregar(CONFIG / "cronograma.yml")
+    cartoes, _ = minhas_materias.montar(plano, date(2026, 10, 21))
+    lp = next(c for c in cartoes if c.nome == PORTUGUES)
+    assert (lp.sem_consulta.medidas, lp.sem_consulta.acertos) == (2, 1)
+    assert lp.sem_consulta.origem_ao_lado() == "(1 FEPESE, 1 de outras bancas)"
+
+    monkeypatch.setattr(diario, "hoje_local", lambda: date(2026, 10, 21))
+    html = TestClient(app).get("/analises/materias").text
+    assert "(1 FEPESE, 1 de outras bancas)" in html
+
+
+def test_o_acumulado_do_ciclo_diz_a_origem_na_correcao_de_07_11(uma_de_cada_no_ciclo):
+    plano = cronograma.carregar(CONFIG / "cronograma.yml")
+    fechamento = date(2026, 11, 7)
+    correcao = next(f for f in plano.dia(fechamento).faixas() if f.compara_com)
+    comparacao = sabado.comparacao(fechamento, correcao, plano)
+    lp = next(linha for linha in comparacao.linhas if linha.materia == PORTUGUES)
+    assert (lp.ciclo.respondidas, lp.ciclo.acertos) == (2, 1)
+    assert lp.ciclo.origem_ao_lado() == "(1 FEPESE, 1 de outras bancas)"
+    # O fechamento e o diagnostico sao so da FEPESE: a frase nao aparece neles.
+    assert lp.fechamento is None and lp.diagnostico is None
+
+    html = TestClient(app).get("/hoje?data=2026-11-07").text
+    tabela = html[html.index("Acumulado do ciclo (decide)"):]
+    assert "(1 FEPESE, 1 de outras bancas)" in tabela[:tabela.index("</table>")]
 
 
 def test_a_outra_banca_nunca_entra_no_que_a_fepese_cobra(acervo):

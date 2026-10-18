@@ -178,8 +178,8 @@ class Desempenho:
             if metade.de_outras_bancas:
                 # A origem ao lado (decisao 166): a outra banca mede, e a tela
                 # nunca esconde quanto do numero veio dela.
-                da_fepese = metade.respostas - metade.de_outras_bancas
-                frase += f" ({da_fepese} FEPESE, {metade.de_outras_bancas} de outras bancas)"
+                frase += " " + metricas.frase_da_origem(metade.respostas,
+                                                        metade.de_outras_bancas)
             return frase
 
         return f"{lado('radar', self.radar)} · {lado('anotado', self.anotado)}"

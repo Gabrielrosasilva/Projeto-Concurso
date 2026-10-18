@@ -183,8 +183,10 @@
                    title="meta: {{ m.meta_em_porcentagem }}%"></div>
             </div>
             <p class="legenda-meta">
+              {# A origem ao lado (decisao 166): o acumulado decide o Ciclo 2, e
+                 a tela diz quanto dele veio de outra banca. #}
               <span>sem consulta: {% if m.sem_consulta.medidas %}{{ feito }}% em
-                {{ m.sem_consulta.medidas }}{% else %}—{% endif %}</span>
+                {{ m.sem_consulta.medidas }}{% if m.sem_consulta.de_outras_bancas %} {{ m.sem_consulta.origem_ao_lado() }}{% endif %}{% else %}—{% endif %}</span>
               <span>meta {{ m.meta_em_porcentagem }}% ({{ m.meta }} de {{ m.questoes_na_prova }})</span>
             </p>
             {% if m.amostra_pequena %}

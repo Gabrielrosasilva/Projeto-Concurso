@@ -323,7 +323,9 @@ e IDIB com ressalva. **Feita a etapa A** (o mecanismo): `radar classificar
 --pedido --evidencia fora`, o leitor da IESES consertado (a alternativa d
 levava a questao seguinte) e relido so nela (`radar questoes --refazer
 --banca IESES`), o "Treinar com outras bancas no radar" na faixa e "(N FEPESE,
-M de outras bancas)" no Meu desempenho; a mesma questao em outro caderno e
+M de outras bancas)" no Meu desempenho - e, desde 18/10, no acumulado do
+Minhas materias e da tabela de 07/11, o numero que decide (a conta nao muda;
+o anotado fica do lado da FEPESE); a mesma questao em outro caderno e
 uma so (`outras_bancas.mesma_questao`). No dado de hoje, 41 questoes de
 Portugues da IESES (38 classificadas).
 **Os tres botoes e as bancas novas (17/10, decisoes 167 e 168):** cada faixa

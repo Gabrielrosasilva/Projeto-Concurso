@@ -322,6 +322,13 @@ class Medida:
     respondidas: int
     acertos: int
     minimo: int
+    #: Das respondidas, quantas de outra banca (decisao 166). So o acumulado do
+    #: ciclo tem: o fechamento e o diagnostico sao so da FEPESE.
+    de_outras_bancas: int = 0
+
+    def origem_ao_lado(self) -> str:
+        """"(55 FEPESE, 2 de outras bancas)", ou "" sem outra banca."""
+        return metricas.frase_da_origem(self.respondidas, self.de_outras_bancas)
 
     @property
     def porcentagem(self) -> int | None:
@@ -391,7 +398,7 @@ def comparacao(data: date, faixa, plano) -> Comparacao | None:
         ciclo = None
         if cartao is not None and cartao.sem_consulta.medidas:
             ciclo = Medida(cartao.sem_consulta.medidas, cartao.sem_consulta.acertos,
-                           cartao.minimo)
+                           cartao.minimo, cartao.sem_consulta.de_outras_bancas)
         linhas.append(LinhaDaComparacao(
             materia=materia,
             diagnostico=_medida(diagnostico, materia, minimo),
