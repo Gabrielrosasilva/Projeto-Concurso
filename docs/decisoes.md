@@ -6389,3 +6389,53 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
        2024 (AT41, q5) parece mal lida (duas alternativas quase iguais), e
        ficou pendente nas duas leituras, fora do treino.
      Nada de codigo mudou: so dado (`data/classificacoes.json` e o lote).
+
+## O sublinhado e o negrito do caderno (19/10/2026)
+
+178. **a questao mostra o trecho sublinhado e o negrito do caderno, em toda
+     tela** (pedido de 19/10: "Em ... no qual ..., o termo sublinhado pode ser
+     substituido por" chegava sem o sublinhado, e "tem que ser para todos";
+     fora dos lotes, a seu pedido; nao muda numero nenhum). O `pypdf` le so as
+     letras: no caderno, o sublinhado e um traco desenhado logo abaixo delas
+     (na FEPESE, uma linha ondulada fina) e o negrito e o nome da fonte
+     ("MyriadPro-Bold"). As regras:
+     - **a leitura** e o `radar/destaques.py`, com o `pdfminer.six`
+       (dependencia nova: a posicao de cada letra e os tracos da pagina, que o
+       `pypdf` nao da). O caderno do InDesign guarda o indice em dois formatos,
+       e com ele o `pdfminer` nao acha pagina nenhuma: o PDF e regravado pelo
+       `pypdf` em memoria antes. Uma letra e sublinhada quando um traco fino
+       (ate 3 pontos de altura e 2 de espessura) passa entre a linha de base e
+       metade da altura dela, e o traco acaba perto das letras que cobre (ate
+       6 pontos): a regua entre as questoes e o tachado nao contam, nem o "o"
+       elevado do ordinal ("art. 5º", "nº"), que a fonte desenha sublinhado. A
+       letra em fonte "Bold", "Black", "Heavy" ou "Semibold" e negrito;
+     - **o lugar** do trecho na questao sai do texto em volta, no bloco do
+       caderno: do mais longo ao mais curto, vale o primeiro que cai num campo
+       so - o enunciado, uma alternativa ou o texto de apoio (o mesmo texto de
+       apoio em varias questoes e um lugar so). Abaixo de 12 letras com o
+       texto em volta, so a alternativa inteira (o "ao qual" marcado). O que cai
+       em dois lugares, ou em nenhum (o numero da questao, o cabecalho), fica
+       sem marca: na duvida, o texto sai como antes;
+     - **o texto nao muda**: a marca mora na coluna nova `questoes.destaques`
+       (banco na versao 10; o passo 10 so cria a coluna), com o campo, o
+       inicio, o fim, o tipo e o trecho, fora da chave - como o texto-base, e
+       so no banco. A tela confere o trecho antes de marcar: o caderno relido
+       que mudou o texto nao sublinha a palavra errada;
+     - **quem preenche** e o `radar questoes --destaques` (o acervo inteiro,
+       uns 15 min), e a leitura de cada caderno novo dali em diante, depois do
+       texto-base (`provas.guardar_destaques`, no fim do `extrair_questoes`);
+     - **a tela**: o filtro `destacado` (`web/app.py`) desenha `<u
+       class="sublinhado">` e `<strong>` na questao do treino e da rodada,
+       antes e depois de responder, no relatorio de erros, na ficha, na
+       conferencia e nos macetes - o enunciado, as alternativas e o texto de
+       apoio. O traco fica grosso e afastado da letra (`design.css`).
+     No acervo de 19/10 (280 cadernos; testado antes numa copia do banco, e
+     o real migrado pelo `radar migrar`, com a copia em `data/copias`):
+     4.388 questoes com alguma marca, 1.236 trechos sublinhados e 5.866 em
+     negrito. Das questoes que pedem um trecho "sublinhado" ou "grifado", so 3
+     ficaram sem ele - as tres o procuram "no texto", e o radar nao guardou o
+     texto de apoio delas. A pergunta de 19/10 (CINCATARINA 2024, AT41, q2)
+     mostra o "no qual" sublinhado. Ficam por fazer: o pedido a IA
+     (classificacao, explicacao, geradas) ainda leva o texto sem a marca, e 2
+     alternativas do Cebraspe tem um trecho sublinhado que parece regua
+     (pendencia O).

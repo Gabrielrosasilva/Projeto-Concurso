@@ -72,6 +72,9 @@ class Ocorrencia:
     #: O texto de apoio que a questao cita (QuestaoDeProva.texto_base): sem
     #: ele, o exemplo de interpretacao na ficha nao se le (item 4, 06/10).
     texto_base: str | None = None
+    #: O sublinhado e o negrito do caderno (QuestaoDeProva.destaques, decisao
+    #: 178): "o termo sublinhado" da questao inteira na ficha.
+    destaques: list | None = None
 
 
 @dataclass

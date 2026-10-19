@@ -438,6 +438,14 @@ cegas pela regra da 171 (121 no mesmo no, 10 no no em comum, 12 na lista unica
 e 20 pendentes nas duas; o lote "2026-10-19"). A reserva de 07/11 manteve a
 composicao, com 21 das 50 trocadas. Ampliar o Portugues da FEPESE fica para
 depois de 07/11 (pendencia O).
+**O sublinhado e o negrito do caderno (19/10, decisao 178, a seu pedido; nao
+mexe em numero):** "o termo sublinhado" agora aparece sublinhado - na questao
+do treino e da rodada, no relatorio, na ficha, na conferencia e nos macetes.
+O `radar/destaques.py` le a posicao das letras e os tracos do caderno pelo
+`pdfminer.six` (dependencia nova), acha o trecho no campo da questao pelo
+texto em volta e grava na coluna `questoes.destaques` (banco na versao 10),
+sem mudar o texto nem a chave; `radar questoes --destaques` preenche o
+acervo, e cada caderno lido depois ja vem com as marcas.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
@@ -504,7 +512,9 @@ do `servico/simulado_da_semana.py` (decisao 170): faixa com `treino`, que o
 do lote** sai do `servico/conferencia_do_lote.py` (decisao 173): o lote e a
 lista de chaves do `data/lotes_de_classificacao.json`, e a conferencia nunca
 mostra a letra da questao que eu nao respondi no radar nem a guardada para uma
-rodada que mede. **O motivo do erro** sai do `erros.motivo_do_erro` (decisao
+rodada que mede. **O sublinhado e o negrito da questao** saem do `radar/destaques.py`
+(decisao 178), gravados em `questoes.destaques` fora da chave; a tela so
+desenha pelo filtro `destacado`. **O motivo do erro** sai do `erros.motivo_do_erro` (decisao
 174), e a conta dos motivos do `metricas.motivos_dos_erros`: o caderno com
 fonte "radar" nunca conta (o erro conta pela resposta), e nada disso entra em
 acerto, erro ou volume. **Onde a faixa esta na arvore** sai do `fichas.onde_na_arvore`

@@ -566,3 +566,13 @@ a:focus-visible { outline: 2px solid var(--cor-acao); outline-offset: 2px; }
   .ds-termo__dica { position: fixed; left: 16px; right: 16px; top: auto; bottom: 16px;
     width: auto; max-width: none; }
 }
+
+/* --- o trecho sublinhado do caderno (decisao 178) ---
+   "O termo sublinhado pode ser substituido por": o termo tem de saltar aos
+   olhos, em toda tela que mostra a questao. Traco grosso e afastado da
+   letra, para nao se confundir com o link. */
+u.sublinhado {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}

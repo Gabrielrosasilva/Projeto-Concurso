@@ -434,6 +434,9 @@ def questoes(
         help="Só guarda o texto de apoio das questões de Português do alvo e do complementar aceito"),
     banca: str = typer.Option(
         None, "--banca", help="Só os cadernos desta banca (ex.: IESES)"),
+    destaques: bool = typer.Option(
+        False, "--destaques",
+        help="Só lê o sublinhado e o negrito de cada questão, em todos os cadernos"),
 ) -> None:
     """Separa os cadernos do acervo em questoes, com materia e gabarito.
 
@@ -445,7 +448,29 @@ def questoes(
     --textos-base le de novo, por colunas, so os cadernos do alvo e do
     complementar aceito, e grava o texto que cada questao de Portugues cita
     ("considerando o texto 1"). O resto da questao nao muda.
+
+    --destaques le de novo cada caderno com a posicao das letras e grava o
+    trecho sublinhado ou em negrito de cada questao (decisao 178), para a tela
+    mostrar o "termo sublinhado" que a questao cita. O texto nao muda.
     """
+    if destaques:
+        with console.status("Lendo o sublinhado e o negrito dos cadernos (uns 2 s cada)..."):
+            feito = servico.guardar_destaques()
+        console.print(f"[green]{feito.questoes} questão(ões) com destaque[/], de "
+                      f"{feito.provas} caderno(s): {feito.sublinhados} trecho(s) "
+                      f"sublinhado(s) e {feito.negritos} em negrito.")
+        for nome, faltas in (("sublinhado (ou grifado)", feito.sem_o_sublinhado),
+                             ("destacado (ou em negrito)", feito.sem_destaque)):
+            if faltas:
+                console.print(f"[yellow]{len(faltas)} questão(ões) falam de trecho "
+                              f"{nome} e ficaram sem ele[/] (o caderno sem o traço, ou "
+                              f"o trecho que não se achou):")
+                for banca_, ano, cargo, numero, _url in faltas[:40]:
+                    console.print(f"  {escape(str(banca_))} {ano} · "
+                                  f"{escape(str(cargo or ''))} · q{numero}")
+                if len(faltas) > 40:
+                    console.print(f"  [dim]e mais {len(faltas) - 40}[/]")
+        return
     if textos_base:
         with console.status("Lendo os textos dos cadernos do alvo e do complementar..."):
             feito = servico.guardar_textos_base()

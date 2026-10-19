@@ -2467,3 +2467,14 @@ novas de 17/10, que ficou sem classificacao, foi classificado pelo processo
 da 171: 131 conferidas pela segunda leitura, 12 na lista unica para voce, 20
 pendentes nas duas (decisao 177). O no de emprego foi de 1 para 14 questoes da
 FEPESE, e a faixa de 19/10 comecou pelo radar.
+
+## O sublinhado que nao aparecia (19/10)
+
+"Em 'O grupo optou ... no qual ...', o termo sublinhado pode ser substituido
+por" chegava sem sublinhado nenhum: o `pypdf` le so as letras, e no caderno o
+sublinhado e um traco desenhado embaixo delas (na FEPESE, uma linha ondulada).
+O `pdfminer.six` da a posicao de cada letra e os tracos; o radar acha a letra
+com traco logo abaixo (sem a regua, o tachado e o "o" do ordinal) e a fonte
+em negrito, liga o trecho ao enunciado, a alternativa ou ao texto de apoio
+pelo texto em volta e grava a marca a parte, sem mudar o texto (decisao 178).
+Toda tela que mostra a questao desenha o sublinhado e o negrito.

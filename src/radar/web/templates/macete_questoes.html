@@ -65,10 +65,10 @@
         {{ selo(r.origem) }}
       </div>
       {% for mud in r.mudancas %}{{ aviso_lei(mud) }}{% endfor %}
-      <p class="enunciado">{{ q.enunciado }}</p>
+      <p class="enunciado">{{ q.enunciado | destacado(q, 'enunciado') }}</p>
       <ol class="alternativas">
         {% for letra, texto in (q.alternativas or {}).items() %}
-          <li class="{{ 'certa' if letra == q.resposta }}">{{ letra }}) {{ texto }}</li>
+          <li class="{{ 'certa' if letra == q.resposta }}">{{ letra }}) {{ texto | destacado(q, letra) }}</li>
         {% endfor %}
       </ol>
       <p class="ds-suave ds-pequeno" style="margin-bottom:0">

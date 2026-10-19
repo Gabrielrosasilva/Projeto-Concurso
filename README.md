@@ -1066,6 +1066,9 @@ radar questoes --refazer --banca IESES --limite 1000  # so os cadernos de uma ba
 radar questoes --textos-base  # so o texto de apoio das questoes de Portugues
                             # do alvo ("considerando o texto 1"), lido por
                             # colunas; mora so no banco (decisao 132)
+radar questoes --destaques  # o sublinhado e o negrito de cada questao, lidos
+                            # do caderno (uns 15 min no acervo inteiro); a
+                            # tela mostra o "termo sublinhado" (decisao 178)
 radar padrao                # o que a banca mais cobra, por materia: um bloco
                             # por evidencia (provas do cargo, complementar
                             # aceito, outras bancas), nunca somados

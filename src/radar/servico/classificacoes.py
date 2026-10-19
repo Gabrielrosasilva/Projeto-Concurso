@@ -791,6 +791,8 @@ class ItemDeConferencia:
     grupo: str | None = None
     do_lote: object = None
     tipo: str | None = None
+    #: O sublinhado e o negrito do caderno (decisao 178).
+    destaques: list | None = None
 
     @property
     def associados_abertos(self) -> int:
@@ -941,7 +943,7 @@ def conferencia(materia: str | None = None, so_abertas: bool = False,
         resultado.itens.append(ItemDeConferencia(
             codigo=f"{q.ano}-q{q.numero}", chave=chave,
             materia_do_caderno=q.materia, enunciado=q.enunciado,
-            alternativas=q.alternativas or {}, gabarito=q.resposta,
+            alternativas=q.alternativas or {}, gabarito=q.resposta, destaques=q.destaques,
             anulada=bool(q.anulada), classificacao=c,
             opcoes=_opcoes(caminhos, (do_caderno, da_classificacao)),
             associados=dela, respondida=chave in contexto.respondidas))
@@ -1025,7 +1027,7 @@ def _conferencia_do_complementar(materia, so_abertas, com_anuladas,
             codigo=(f"{q.banca} {q.ano} · {q.municipio or 'sem município'} · "
                     f"{q.cargo or 'sem cargo'} · q{q.numero}"),
             chave=chave, materia_do_caderno=q.materia, enunciado=q.enunciado,
-            alternativas=q.alternativas or {}, gabarito=q.resposta,
+            alternativas=q.alternativas or {}, gabarito=q.resposta, destaques=q.destaques,
             anulada=bool(q.anulada), classificacao=c,
             opcoes=_opcoes(caminhos, (do_caderno, da_classificacao)),
             outros_cadernos=len(mesma) - 1, na_amostra=chave in na_amostra,
@@ -1106,7 +1108,7 @@ def _conferencia_de_outras_bancas(materia, so_abertas, com_anuladas,
             continue
         resultado.itens.append(ItemDeConferencia(
             codigo=_codigo_de_outra_banca(q), chave=chave, materia_do_caderno=q.materia,
-            enunciado=q.enunciado, alternativas=q.alternativas or {}, gabarito=q.resposta,
+            enunciado=q.enunciado, alternativas=q.alternativas or {}, gabarito=q.resposta, destaques=q.destaques,
             anulada=bool(q.anulada), classificacao=c,
             opcoes=_opcoes(caminhos, (do_caderno, da_classificacao)),
             outros_cadernos=len(mesma) - 1, respondida=chave in respondidas))
@@ -1168,7 +1170,7 @@ def _conferencia_do_lote(so_abertas: bool, parte: str, contexto: _Contexto) -> C
         raizes += [arvore.partes(n)[0] for n in leituras + ([c.conteudo] if c else [])]
         resultado.itens.append(ItemDeConferencia(
             codigo=_codigo_de_outra_banca(q), chave=item.chave, materia_do_caderno=q.materia,
-            enunciado=q.enunciado, alternativas=q.alternativas or {}, gabarito=q.resposta,
+            enunciado=q.enunciado, alternativas=q.alternativas or {}, gabarito=q.resposta, destaques=q.destaques,
             anulada=bool(q.anulada), classificacao=c, opcoes=_opcoes(caminhos, raizes),
             outros_cadernos=len(mesma) - 1, respondida=item.chave in respondidas,
             grupo=item.grupo, do_lote=item,

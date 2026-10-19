@@ -16,7 +16,7 @@ confundir com o proprio modulo.
 """
 import logging
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 import time
 from datetime import date, datetime
@@ -852,6 +852,7 @@ def extrair_questoes(limite: int = 30, refazer: bool = False,
     pendentes = _provas_por_ler(limite, refazer, banca)
     if not pendentes:
         return resultado
+    lidas_agora: set[str] = set()
 
     # "Repetida" e a questao que a banca reaproveitou de outra prova. Refazendo
     # o acervo inteiro, o banco ja tem todas: comparar com ele acusaria as 5021
@@ -872,6 +873,7 @@ def extrair_questoes(limite: int = 30, refazer: bool = False,
         if not lidas:
             resultado.vazias += 1
             continue
+        lidas_agora.add(registro["url"])
 
         with sessao() as s:
             if conhecidas is None:
@@ -943,6 +945,10 @@ def extrair_questoes(limite: int = 30, refazer: bool = False,
     # Caderno do alvo que entrou agora (ou foi relido) ganha o texto-base. Sao
     # dois PDFs, e reler os dois e mais simples do que saber qual mudou.
     guardar_textos_base()
+    # O sublinhado e o negrito so dos cadernos lidos agora (decisao 178):
+    # reler todos levaria minutos. Depois do texto-base, que recebe as marcas
+    # do texto de apoio.
+    guardar_destaques(lidas_agora)
     return resultado
 
 
@@ -989,6 +995,83 @@ def guardar_textos_base() -> TextosBase:
                                       if de_portugues else None)
                 if questao.texto_base:
                     resultado.questoes += 1
+    return resultado
+
+
+#: O enunciado que fala de um trecho marcado: o que a tela tem de mostrar.
+#: "Sublinhado" e "grifado" pedem o traco; "destacado" e "em destaque" a
+#: FEPESE faz ora com o traco, ora em negrito, e qualquer um serve.
+PEDE_SUBLINHADO = re.compile(r"sublinhad|grifad", re.IGNORECASE)
+PEDE_DESTAQUE = re.compile(r"destacad|em destaque|negrit", re.IGNORECASE)
+
+
+@dataclass
+class Destaques:
+    provas: int = 0
+    #: Quantas questoes ficaram com alguma marca.
+    questoes: int = 0
+    sublinhados: int = 0
+    negritos: int = 0
+    #: As que falam de um trecho sublinhado (ou grifado) e ficaram sem ele: o
+    #: caderno sem o traco, ou o trecho que nao se achou - quase sempre no
+    #: texto de apoio que o radar nao guardou. [(banca, ano, cargo, numero, url)]
+    sem_o_sublinhado: list = field(default_factory=list)
+    #: As que falam de um trecho destacado (ou em negrito) e ficaram sem marca
+    #: nenhuma. Aqui entra tambem o "papel destacado" do texto corrido.
+    sem_destaque: list = field(default_factory=list)
+
+
+def guardar_destaques(urls: set[str] | None = None) -> Destaques:
+    """O sublinhado e o negrito de cada questao, lidos do caderno (decisao 178).
+
+    Todo caderno que ja virou questao e que esta na maquina, de qualquer
+    banca; `urls` limita aos cadernos lidos agora. So a coluna `destaques`
+    muda: enunciado, alternativas, chave e classificacao ficam como estao. O
+    texto-base precisa estar gravado antes - a marca do texto de apoio vai
+    para ele.
+    """
+    from radar import destaques
+
+    criar_tabelas()
+    resultado = Destaques()
+    with sessao() as s:
+        com_questao = set(s.scalars(select(QuestaoDeProva.prova_url).distinct()))
+    for registro in arquivos_de_prova.carregar_manifesto():
+        url = registro.get("url")
+        if url not in com_questao or (urls is not None and url not in urls):
+            continue
+        caminho = _caminho(registro)
+        if caminho is None:
+            continue
+        try:
+            blocos = destaques.ler_marcas(caminho)
+        except Exception as erro:  # o PDF que o pdfminer nao abre nao para o resto
+            log.warning("sem destaques de %s: %s", caminho.name, erro)
+            continue
+        resultado.provas += 1
+        with sessao() as s:
+            questoes = list(s.scalars(
+                select(QuestaoDeProva).where(QuestaoDeProva.prova_url == url)))
+            campos = {q.id: {destaques.ENUNCIADO: q.enunciado,
+                             destaques.TEXTO_BASE: q.texto_base,
+                             **{letra: texto for letra, texto in (q.alternativas or {}).items()}}
+                      for q in questoes}
+            achadas = destaques.localizar(blocos, campos)
+            for q in questoes:
+                marcas = achadas.get(q.id) or None
+                q.destaques = marcas
+                tipos = {m["tipo"] for m in marcas or []}
+                if marcas:
+                    resultado.questoes += 1
+                resultado.sublinhados += sum(1 for m in marcas or []
+                                             if m["tipo"] == destaques.SUBLINHADO)
+                resultado.negritos += sum(1 for m in marcas or []
+                                          if m["tipo"] == destaques.NEGRITO)
+                identidade = (q.banca, q.ano, q.cargo, q.numero, url)
+                if PEDE_SUBLINHADO.search(q.enunciado or "") and destaques.SUBLINHADO not in tipos:
+                    resultado.sem_o_sublinhado.append(identidade)
+                elif PEDE_DESTAQUE.search(q.enunciado or "") and not tipos:
+                    resultado.sem_destaque.append(identidade)
     return resultado
 
 

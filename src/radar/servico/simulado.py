@@ -544,6 +544,8 @@ class ItemDeRevisao:
     #: rodada e o motivo do erro (o meu, ou "chutei" pelo "vou no chute").
     questao_id: int | None = None
     motivo: str | None = None
+    #: O sublinhado e o negrito do caderno (decisao 178); a gerada nao tem.
+    destaques: list | None = None
 
     @property
     def referencia(self) -> str:
@@ -628,6 +630,7 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
             ano=getattr(questao, "ano", None),
             banca=getattr(questao, "banca", None),
             chutou=bool(resposta.chutou),
+            destaques=getattr(questao, "destaques", None),
             conteudo=no,
             assunto=questao.assunto,
             questao_id=resposta.questao_id,

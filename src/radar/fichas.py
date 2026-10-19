@@ -909,6 +909,9 @@ class QuestaoReal:
     prova: str = ""
     #: O texto de apoio que a questao cita, quando ela cita (item 4, 06/10).
     texto_base: str | None = None
+    #: O sublinhado e o negrito do caderno (decisao 178). Fora da comparacao:
+    #: e lista, e nao muda qual questao e.
+    destaques: list | None = field(default=None, compare=False)
     #: Ja respondi esta questao no radar? Sem isso, a ficha esconde a letra, a
     #: explicacao e a pegadinha: a faixa manda responder sem consulta, e quem
     #: leu o gabarito antes mede a memoria (P05, decisao 148).
@@ -1149,7 +1152,8 @@ def _questao_real(o, evidencia: str, ctx: Contexto, como: str = "no") -> Questao
         alternativas=alternativas,
         explicacao=ctx.explicacoes.get(getattr(o, "impressao_do_enunciado", "") or ""),
         mudancas=mudancas, como=como, prova=o.prova,
-        texto_base=getattr(o, "texto_base", None))
+        texto_base=getattr(o, "texto_base", None),
+        destaques=getattr(o, "destaques", None))
     return replace(questao, respondida=codigo_citavel(questao) in ctx.respondidos)
 
 

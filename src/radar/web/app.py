@@ -12,6 +12,7 @@ from urllib.parse import urlencode, urlparse
 from fastapi import FastAPI, Form, Query, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
+from markupsafe import Markup
 
 from radar import acompanhando as meus_favoritos
 from radar import amostra
@@ -22,6 +23,7 @@ from radar import automacao
 from radar import config
 from radar import conteudos as arvore_de_conteudos
 from radar import cronograma
+from radar import destaques
 from radar import fichas as fichas_puras
 from radar import leis
 from radar import macetes as macetes_puros
@@ -135,6 +137,30 @@ templates.env.globals["qconcursos_da_faixa"] = qconcursos.da_faixa
 # frase de conclusao do "Onde estudar primeiro", para o grafico e o texto ao
 # lado dele nunca arredondarem diferente.
 templates.env.filters["numero"] = onde_estudar.numero
+
+
+def com_destaques(texto, questao, campo: str) -> Markup:
+    """O campo da questao com o sublinhado e o negrito do caderno (decisao 178).
+
+    "O termo sublinhado pode ser substituido por" so se responde vendo o
+    termo. As marcas e os cortes saem do `radar/destaques.py`; aqui so se
+    escapa cada pedaco e se poe a marca. Questao sem marca (a gerada, o
+    caderno sem o traco) sai como o texto de sempre.
+    """
+    marcas = (questao.get("destaques") if isinstance(questao, dict)
+              else getattr(questao, "destaques", None))
+    html = []
+    for pedaco, tipos in destaques.partes(str(texto or ""), marcas, campo):
+        trecho = escape(pedaco)
+        if destaques.NEGRITO in tipos:
+            trecho = f"<strong>{trecho}</strong>"
+        if destaques.SUBLINHADO in tipos:
+            trecho = f'<u class="sublinhado">{trecho}</u>'
+        html.append(trecho)
+    return Markup("".join(html))
+
+
+templates.env.filters["destacado"] = com_destaques
 # Os minimos de resposta, para a tela dizer "2 de 20" com o mesmo numero que
 # faz a conta - e nao com um numero escrito no template. Os dois saem do
 # config/amostra.yml (Etapa 4): um lugar so para as telas e para as contas.

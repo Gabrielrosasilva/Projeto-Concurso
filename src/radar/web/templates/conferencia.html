@@ -223,13 +223,13 @@
           <p class="ds-suave">A mesma questão está em mais {{ q.outros_cadernos }}
             caderno{{ 's' if q.outros_cadernos > 1 }} do concurso: a conferência vale para todos.</p>
         {% endif %}
-        <p class="enunciado">{{ q.enunciado }}</p>
+        <p class="enunciado">{{ q.enunciado | destacado(q, 'enunciado') }}</p>
         <ul class="alternativas">
           {% for letra, texto in q.alternativas.items() %}
             {% if q.respondida %}
-            <li class="{{ 'certa' if letra == q.gabarito }}">{{ letra }}) {{ texto }}{% if letra == q.gabarito %} ← gabarito{% endif %}</li>
+            <li class="{{ 'certa' if letra == q.gabarito }}">{{ letra }}) {{ texto | destacado(q, letra) }}{% if letra == q.gabarito %} ← gabarito{% endif %}</li>
             {% else %}
-            <li>{{ letra }}) {{ texto }}</li>
+            <li>{{ letra }}) {{ texto | destacado(q, letra) }}</li>
             {% endif %}
           {% endfor %}
         </ul>

@@ -834,6 +834,27 @@ O que falta vai nesta ordem, uma etapa por conversa.
   emprego de pronome), umas 50 provas novas dariam umas 20 questoes deste
   tema, e as dos outros junto.
 
+### O sublinhado e o negrito do caderno (decisao 178, 19/10)
+
+- ✅ **Feito**: a questao mostra o trecho sublinhado e o negrito do caderno
+  em toda tela (`radar questoes --destaques`, e cada caderno lido dali em
+  diante); banco na versao 10;
+- ⚪ **Depende de voce: reinicie o servidor** (`radar subir`) e rode `pip
+  install -e ".[dev]"` na outra maquina, se houver: a dependencia nova e o
+  `pdfminer.six`;
+- ⚪ **A IA pode fazer: o pedido a IA com a marca.** A classificacao, a
+  explicacao e as geradas ainda recebem o texto sem o sublinhado; a
+  explicacao de uma questao de "termo sublinhado" escrita antes pode ter
+  adivinhado o termo. Marcar o trecho no pedido (ex.: [sublinhado: no qual])
+  e conferir as explicacoes dessas questoes;
+- ⚪ **A IA pode fazer: o texto de apoio que falta.** 3 questoes procuram o
+  trecho sublinhado "no texto" (FEPESE 2016 Procurador q12, 2013 Advogado
+  Autarquico q1, 2013 Agente Socioeducativo q8), e o radar nao guardou o
+  texto delas: o `textos_base` nao reconhece "o texto anterior";
+- ⚪ **2 alternativas do Cebraspe** (2023, q21 e q22, a alternativa e) com um
+  trecho sublinhado que comeca ou acaba no meio da palavra: parece regua, e
+  nao sublinhado. Nenhuma pede sublinhado; olhar o caderno se incomodar.
+
 ### As proximas etapas
 
 - 🔴 **O resto da FEPESE pelo conteudo, devagar**: o firewall dela bloqueou

@@ -175,16 +175,16 @@
         </span>
         {{ selo(item.origem, 'criada por IA' if item.gerada else None) }}
       </div>
-      <p class="enunciado">{{ item.enunciado }}</p>
+      <p class="enunciado">{{ item.enunciado | destacado(item, 'enunciado') }}</p>
 
       <div class="par">
         <div class="linha-resp marquei">
           <span class="ds-selo" style="color:var(--cor-vermelho);background:var(--cor-vermelho-fundo)">Você marcou {{ item.escolhida }})</span>
-          <span class="texto">{{ item.texto_escolhido }}</span>
+          <span class="texto">{{ item.texto_escolhido | destacado(item, item.escolhida or '') }}</span>
         </div>
         <div class="linha-resp">
           {{ selo(item.origem_da_resposta, ('Resposta da IA ' if item.gerada else 'Gabarito definitivo ') ~ item.correta ~ ')') }}
-          <span>{{ item.texto_correto }}</span>
+          <span>{{ item.texto_correto | destacado(item, item.correta or '') }}</span>
         </div>
       </div>
 

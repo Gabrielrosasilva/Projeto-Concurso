@@ -71,7 +71,7 @@ def ocorrencias() -> list[incidencia.Ocorrencia]:
             dispositivo=c.dispositivo if c else None,
             materia_do_caderno=do_caderno(q.materia),
             impressao_do_enunciado=q.impressao or "",
-            texto_base=q.texto_base))
+            texto_base=q.texto_base, destaques=q.destaques))
     return resultado
 
 
@@ -140,7 +140,7 @@ def ocorrencias_complementares() -> list[incidencia.Ocorrencia]:
             dispositivo=c.dispositivo if c else None,
             materia_do_caderno=do_caderno(q.materia),
             impressao_do_enunciado=q.impressao or "",
-            texto_base=q.texto_base))
+            texto_base=q.texto_base, destaques=q.destaques))
     return resultado
 
 

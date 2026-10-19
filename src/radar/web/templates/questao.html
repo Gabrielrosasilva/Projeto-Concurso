@@ -201,7 +201,7 @@
        responde (item 4, 06/10). So a questao real tem; a gerada, nao. #}
     {% if questao.texto_base is defined and questao.texto_base %}
       <details class="texto-base" {{ '' if corrigida else 'open' }}><summary>Texto-base (do caderno da prova)</summary>
-        <p>{{ questao.texto_base }}</p></details>
+        <p>{{ questao.texto_base | destacado(questao, 'texto_base') }}</p></details>
     {% endif %}
     {# A FEPESE desenha o tracinho da lacuna como figura, e a leitura do caderno
        pode perder algum (decisao 165): a tela diz quantos e manda ao caderno,
@@ -209,7 +209,9 @@
     {% if lacunas_perdidas %}
       <p class="ds-alerta">⚠ A leitura do caderno não mostra {{ lacunas_perdidas }} {{ 'lacuna' if lacunas_perdidas == 1 else 'lacunas' }} desta questão. Confira no <a href="{{ questao.prova_url }}" target="_blank" rel="noopener">caderno da prova</a> antes de responder.</p>
     {% endif %}
-    <p class="enunciado">{{ questao.enunciado }}</p>
+    {# O sublinhado e o negrito do caderno (decisao 178): "o termo sublinhado"
+       so se responde vendo o termo. #}
+    <p class="enunciado">{{ questao.enunciado | destacado(questao, 'enunciado') }}</p>
 
     {% if corrigida %}
       <div class="alternativas">
@@ -217,7 +219,7 @@
           {% set e_certa = letra == questao.resposta %}
           {% set marquei = letra == resposta.escolhida %}
           <div class="alt {{ 'certa' if e_certa else ('errada' if marquei else 'apagada') }}">
-            <span class="letra">{{ letra }})</span><span>{{ texto }}</span>
+            <span class="letra">{{ letra }})</span><span>{{ texto | destacado(questao, letra) }}</span>
             <span class="marca">{% if e_certa and marquei %}✓ sua resposta{% elif e_certa %}✓ {{ 'resposta da IA' if resposta.gerada else 'gabarito' }}{% elif marquei %}✗ sua resposta{% endif %}</span>
           </div>
         {% endfor %}
@@ -273,7 +275,7 @@
         <input type="hidden" name="questao_id" value="{{ questao.id }}">
         <label class="chute"><input type="checkbox" name="chutei" value="1"> Vou no chute nesta</label>
         {% for letra, texto in questao.alternativas.items() %}
-          <button type="submit" name="letra" value="{{ letra }}"><span class="letra">{{ letra }})</span><span>{{ texto }}</span><span></span></button>
+          <button type="submit" name="letra" value="{{ letra }}"><span class="letra">{{ letra }})</span><span>{{ texto | destacado(questao, letra) }}</span><span></span></button>
         {% endfor %}
       </form>
     {% endif %}

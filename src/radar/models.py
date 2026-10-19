@@ -327,6 +327,15 @@ class QuestaoDeProva(Base):
     # Fica fora da chave da questao: ele e contexto, e nao a pergunta.
     texto_base: Mapped[str | None] = mapped_column(Text, nullable=True)
 
+    # O sublinhado e o negrito do caderno (decisao 178), que a leitura do
+    # texto perde: [{"campo", "inicio", "fim", "tipo", "trecho"}], o campo
+    # sendo o enunciado, o texto_base ou a letra da alternativa. Sai de
+    # `destaques.ler_marcas` + `destaques.localizar`, e nao muda o texto: fica
+    # fora da chave, como o texto-base. So aqui no banco, pelo mesmo motivo.
+    # Sem marca e NULL de verdade, e nao o texto "null": "destaques IS NULL"
+    # tem de achar as questoes sem nenhuma.
+    destaques: Mapped[list | None] = mapped_column(JSON(none_as_null=True), nullable=True)
+
     # Assunto fino dentro da materia. Quando a prova e a do meu cargo, o nome
     # vem do CONTEUDO PROGRAMATICO do edital, e por isso ele e comprido: "Lei
     # Complementar n.o 529 de 17 de dezembro de 2011 (Regimento Interno dos

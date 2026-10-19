@@ -216,6 +216,17 @@ def _passo_9() -> None:
     """
 
 
+def _passo_10() -> None:
+    """Decisao 178 (19/10/2026): o sublinhado e o negrito do caderno.
+
+    Uma coluna nova, `questoes.destaques`, que vem do modelo. Ela fica nula
+    aqui: preencher e ler de novo cada caderno com a posicao das letras (uns
+    2 s por PDF, centenas de PDFs), e isso nao cabe num passo que roda dentro
+    de qualquer comando. Quem preenche e o `radar questoes --destaques`, e a
+    leitura de cada caderno novo dali em diante.
+    """
+
+
 #: versao -> (o que muda, a funcao). A ordem e a dos numeros; passo aplicado
 #: nao se edita nunca mais: mudanca nova e passo novo.
 PASSOS = {
@@ -231,6 +242,7 @@ PASSOS = {
     7: ("O \"vou no chute\" de cada resposta e a nota de cada faixa", _passo_7),
     8: ("O nível de cada questão gerada (fácil, média ou difícil)", _passo_8),
     9: ("O motivo de cada resposta errada (num clique, depois do erro)", _passo_9),
+    10: ("O sublinhado e o negrito do caderno em cada questão", _passo_10),
 }
 VERSAO_ATUAL = max(PASSOS)
 
