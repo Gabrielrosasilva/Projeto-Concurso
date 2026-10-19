@@ -432,8 +432,10 @@ seca (pendencia D).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
-**Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`). O backup
-das 23h30 voltou em 03/10.
+**Conferido:** o Actions de 04/10 foi verde (`coleta: 2026-10-04`); as duas
+coletas de 18/10 morreram no commit (o status de 20 classificacoes fora de
+sincronia), consertado em 19/10 (decisao 176). O backup das 23h30 voltou em
+03/10.
 **Em aberto:** a falta do estoque de geradas de 13/10 em diante (sob demanda),
 as 2 explicacoes do complementar e as 2 do alvo que ficaram de fora, a
 alternativa da 2019-q6 com o Texto 2 colado, a Redacao oficial sem link do Qconcursos, o texto local das leis (o

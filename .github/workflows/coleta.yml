@@ -102,6 +102,19 @@ jobs:
           # - todo dia, e duas vezes no dia com a reserva.
           git add data/concursos.json data/eventos.json data/provas.json
 
+          # O `radar exportar` grava todos os JSON, e o robo so e dono dos tres
+          # de cima: os outros (arvore, classificacoes, estudo) nascem na minha
+          # maquina. Se o banco reconstruido aqui exporta um deles diferente, o
+          # `git pull --rebase` recusa a pasta suja e o job morre com "exit code
+          # 128" - foi o que derrubou as duas coletas de 18/10. A diferenca e
+          # dado meu fora de sincronia, e nao da coleta: vira aviso no resumo
+          # da execucao, e o arquivo volta ao do commit.
+          sujos=$(git diff --name-only)
+          if [ -n "$sujos" ]; then
+            echo "::warning::O exportar mudou arquivo que nao e do robo (descartado):" $sujos
+            git checkout -- .
+          fi
+
           if git diff --staged --quiet; then
             echo "Nenhum concurso novo hoje."
             exit 0

@@ -6306,3 +6306,24 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      os artigos do tema, com o "Traduz pra mim". O total de questoes do ciclo
      nao muda (2050): a lei seca nao tinha questao. Se o Ciclo 2 tera lei
      seca e decisao da montagem dele (pendencia D).
+
+## O robo que morreu no commit (19/10/2026)
+
+176. **o robo do GitHub so commita os tres arquivos dele; o resto que o
+     `radar exportar` mudar vira aviso e volta ao do commit** (pedido de
+     19/10: o e-mail de "run failed"). As duas coletas de 18/10 morreram no
+     passo "Commitar o resultado" com "exit code 128": o `git pull --rebase`
+     recusa a pasta suja, e o `exportar` tinha reescrito o
+     `data/classificacoes.json` com 20 questoes de `completa` para `parcial`.
+     A causa: o `conteudos.adicionar` criava o filho sem refazer o status da
+     questao do pai - o espelho do que o `apagar_vazio` ja fazia -, e as
+     provas novas de 17-18/10 criaram nos debaixo de nos com questao. Este
+     banco guardava `completa`; o robo, que reconstroi tudo do JSON,
+     recalculava. Agora o `adicionar` refaz o status, e o passo do commit, se
+     o `exportar` mudar um arquivo que nao e do robo (arvore, classificacoes,
+     estudo - nascem nesta maquina), escreve `::warning::` com os nomes no
+     resumo da execucao e faz `git checkout -- .`: dado meu fora de sincronia
+     nao derruba mais a coleta nem o commit do `avisado_em` (sem ele, a
+     execucao seguinte repete os avisos). O sincronizar das 23:30 de 18/10 ja
+     tinha exportado as 20 como `parcial` (o `importar` recalcula), e a
+     reconstrucao do HEAD sai limpa.

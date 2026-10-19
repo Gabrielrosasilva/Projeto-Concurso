@@ -137,6 +137,8 @@ def adicionar(pai: str | None, nome: str, *, origem: str = "manual",
               referencia: str | None = None,
               taxonomia: arvore.Taxonomia | None = None) -> arvore.No:
     """Cria um no debaixo de `pai`. Recusa o que nao cabe na arvore."""
+    from radar.servico import classificacoes as servico_classificacoes
+
     if origem not in arvore.ORIGENS:
         raise arvore.ConteudoInvalido(f"Origem {origem!r} não existe.")
     criar_tabelas()
@@ -160,6 +162,15 @@ def adicionar(pai: str | None, nome: str, *, origem: str = "manual",
                        referencia=referencia)
         if not _gravar(s, no):
             raise arvore.ConteudoInvalido(f"{no.caminho!r} já existe.")
+        # O espelho do `apagar_vazio`: com o filho, o pai deixa de ser folha e
+        # a questao dele passa de completa a parcial. Sem isso o banco guardava
+        # "completa", o robo do GitHub - que reconstroi tudo do JSON - exportava
+        # "parcial", e o commit da coleta morria com o arquivo mudado (18/10).
+        if pai is not None:
+            s.flush()
+            for linha in s.scalars(select(Classificacao).where(Classificacao.conteudo == pai)):
+                if linha.status != "pendente":
+                    linha.status = servico_classificacoes._status_do_no(s, do_pai)
     exportar()
     return no
 

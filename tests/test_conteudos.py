@@ -130,6 +130,20 @@ def test_o_status_sai_da_arvore(semeada):
         classificacoes.classificar("q5", PENAL + " > Inventado", "manual")
 
 
+def test_o_filho_novo_passa_a_questao_do_pai_a_parcial(semeada):
+    """O espelho do apagar_vazio. Sem isso o banco ficava com "completa" e o
+    robo, que reconstroi tudo do JSON, exportava "parcial": o arquivo mudava
+    e o commit da coleta de 18/10 morreu."""
+    assert classificacoes.classificar("q1", IMPUTABILIDADE, "manual").status == "completa"
+    classificacoes.classificar("q2", IMPUTABILIDADE, "manual", status="pendente")
+
+    conteudos.adicionar(IMPUTABILIDADE, "Inimputáveis")
+
+    with sessao() as s:
+        status = dict(s.execute(select(Classificacao.chave, Classificacao.status)).all())
+    assert status == {"q1": "parcial", "q2": "pendente"}
+
+
 def test_apagar_vazio_so_apaga_o_que_nao_faz_falta_e_refaz_o_status(semeada):
     """Decisao 171, passo 3: o no que a regra b esvaziou sai; o resto e
     recusado com o porque. Sem o filho, o pai vira folha e a questao dele

@@ -2443,3 +2443,14 @@ Voce estranhou que a segunda 19/10 ainda tinha a lei seca: os sabados leves
 voce nao a faz, as 12 faixas que restavam no Ciclo 1 sairam, sem nada no
 lugar, e a manha acaba meia hora mais cedo (decisao 175). Os sabados ja
 estavam leves desde a 170; o 07/11, que mede, nao mudou.
+
+## O Actions vermelho de 18/10 (19/10)
+
+O e-mail de "run failed" era das duas coletas de 18/10, que coletaram e
+avisaram, mas morreram no commit: o `exportar` do robo reescrevia o
+`data/classificacoes.json`, e o `git pull --rebase` recusa pasta suja (exit
+128). Vinte questoes estavam `completa` neste banco e `parcial` pela arvore -
+o no novo das provas de 17-18/10 nao refazia o status do pai. O
+`conteudos.adicionar` passou a refazer, e o robo passou a descartar, com
+aviso, o arquivo que nao e dele (decisao 176). Reproduzido num clone: o
+`importar` + `exportar` de d5474aa sujava o arquivo, o do HEAD sai limpo.
