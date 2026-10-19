@@ -2454,3 +2454,16 @@ o no novo das provas de 17-18/10 nao refazia o status do pai. O
 `conteudos.adicionar` passou a refazer, e o robo passou a descartar, com
 aviso, o arquivo que nao e dele (decisao 176). Reproduzido num clone: o
 `importar` + `exportar` de d5474aa sujava o arquivo, o do HEAD sai limpo.
+
+## Os pronomes e o Portugues das provas novas (19/10)
+
+A faixa "Fixacao: Pronomes 1: emprego" mandava tudo ao Qconcursos, e voce
+achou la questoes da FEPESE do tema que o radar nao tinha. O radar nao tem
+toda prova de Portugues da FEPESE - so as que entraram pela distancia ou pelo
+cargo com Direito -, mas o defeito era outro: as questoes de emprego estavam
+no no de colocacao, de antes do no da ficha Pronomes 1. Relidas, com uma
+segunda leitura as cegas, 9 foram para o no certo. E o Portugues das provas
+novas de 17/10, que ficou sem classificacao, foi classificado pelo processo
+da 171: 131 conferidas pela segunda leitura, 12 na lista unica para voce, 20
+pendentes nas duas (decisao 177). O no de emprego foi de 1 para 14 questoes da
+FEPESE, e a faixa de 19/10 comecou pelo radar.

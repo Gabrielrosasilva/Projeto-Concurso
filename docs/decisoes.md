@@ -6327,3 +6327,65 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      execucao seguinte repete os avisos). O sincronizar das 23:30 de 18/10 ja
      tinha exportado as 20 como `parcial` (o `importar` recalcula), e a
      reconstrucao do HEAD sai limpa.
+
+## O no de emprego dos pronomes e o Portugues das provas novas (19/10/2026)
+
+177. **a questao de emprego de pronome vai para o no da ficha Pronomes 1, e o
+     Portugues das provas novas de 17/10 foi classificado pelo processo da
+     171** (pedido de 19/10; cabe na I3: corrige um numero). A faixa
+     "Fixacao: Pronomes 1: emprego" mandava tudo ao Qconcursos ("0 do
+     radar"), e la havia questoes da FEPESE do tema. Duas causas:
+     - **o no errado.** O no "Emprego dos pronomes pessoais, demonstrativos e
+       relativos" nasceu em 06/10 (decisao 129) para a ficha Pronomes 1, e as
+       questoes de emprego, lidas em 05/10, ficaram em "Colocacao e emprego
+       dos pronomes", o no da ficha Pronomes 2. As 15 principais dele foram
+       relidas (a 16a, do alvo 2019, conferida por voce, nao foi tocada): a
+       minha leitura e uma segunda, as cegas, so com a arvore. Concordaram em
+       14: 9 foram para o no de emprego (eu x mim, "entre mim e", o x lhe, o
+       "lhe" possessivo, cujo, "de quem"),
+       conferidas pela reanalise (a marca da 104), e 5 ficaram em colocacao.
+       A 15a mistura uniformidade de tratamento e emprego e foi para o no em
+       comum, o assunto Pronomes (regra b). Os dois conceitos associados do
+       alvo 2019 que tambem sao de emprego ficaram onde estavam: sao da sua
+       conferencia dos associados;
+     - **o Portugues das provas novas sem classificacao.** As provas que
+       entraram em 17/10 pelo conteudo (decisao 167) trouxeram 163 questoes
+       distintas de Portugues da FEPESE em provas aceitas, e naquele dia so o
+       Direito foi classificado. `radar classificar --pedido --evidencia
+       complementar --materia "Lingua Portuguesa" --so-novas`; a primeira
+       leitura (claude-opus-5-5, em quatro partes, com duas regras a mais:
+       so subassunto que ja existe, e sem elemento) e o `--importar`: 143
+       classificadas, 20 pendentes, nenhum no novo. A segunda leitura as
+       cegas (quatro partes, so os caminhos e as questoes com o gabarito) e as
+       regras da 171: **121 no mesmo no** (a), **10 no mesmo assunto** (b, o
+       no em comum), **12 pendentes ate a sua conferencia** (c: 9 com uma
+       pendente e a outra nao, 3 com a confianca baixa) e **20 pendentes nas
+       duas**. As pendentes sao quase todas de analise sintatica (termos
+       essenciais e acessorios, periodo composto, vocativo), que o programa
+       de 2019 nao tem: pendente e a resposta certa, e nao treinam;
+     - **o lote** e o "2026-10-19" do `data/lotes_de_classificacao.json`
+       (decisao 173), grupo FEPESE. A tela da amostra ainda le so o de 17/10
+       (pendencia O). As 12 da regra c estao na lista unica
+       ([conferir_classificacoes](conferir_classificacoes.md));
+     - **o efeito**: o no de emprego foi de 1 questao (da IESES) para 14 da
+       FEPESE, e a faixa de 19/10 passou a comecar pelo radar (manha 6 de 6,
+       noite 8 de 10), como o R+7 de 26/10. O Portugues da FEPESE aceito tem
+       449 questoes distintas: 442 com classificacao (388 fora de pendente).
+       A reserva do fechamento de 07/11 manteve a composicao (os mesmos
+       assuntos, com as mesmas quantidades), mas o estoque maior mudou o
+       sorteio, que e um so para todas as materias: 21 das 50 trocaram (5 de
+       Portugues, 6 de Raciocinio, 5 de Direitos Humanos, 2 de Constitucional,
+       2 de Penal e 1 de LEP), e as ja respondidas na reserva foram de 10 para
+       8, todas da LEP, que tem pouco estoque. E o que a 167 previa ("a prova
+       nova que entrar no acervo continua podendo entrar nela");
+     - **o que ficou de fora, de proposito**: 7 questoes do DEINFRA 2014
+       (adv_1.pdf, q51 a q56 e q60), cujo caderno chama a materia de
+       "Portugues": o `config/taxonomia.yml` nao liga esse nome a Lingua
+       Portuguesa, e ligar muda a incidencia do complementar no nivel da
+       materia (39 linhas). Fica para voce decidir (pendencia O). E dois
+       achados, sem a letra (voce ainda vai responder): o gabarito provisorio
+       de uma questao de concordancia da Chapeco 2022 (S88, q10) e
+       discutivel, e ela continua no treino ate voce decidir; e a CINCATARINA
+       2024 (AT41, q5) parece mal lida (duas alternativas quase iguais), e
+       ficou pendente nas duas leituras, fora do treino.
+     Nada de codigo mudou: so dado (`data/classificacoes.json` e o lote).

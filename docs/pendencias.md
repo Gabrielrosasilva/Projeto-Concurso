@@ -792,6 +792,48 @@ O que falta vai nesta ordem, uma etapa por conversa.
   so na sua maquina (`data\provas\manual\`, fora do git), e os testes usam
   texto inventado.
 
+### O Portugues das provas novas e o no de emprego (decisao 177, 19/10)
+
+- ✅ **Feito**: as 9 questoes de emprego de pronome que estavam no no de
+  colocacao foram para o no da ficha Pronomes 1 (a faixa de 19/10 comecou
+  pelo radar), e as 163 de Portugues da FEPESE das provas novas de 17/10
+  foram classificadas e lidas de novo as cegas: 121 no mesmo no, 10 no no em
+  comum, 12 pendentes (na lista unica) e 20 pendentes nas duas. A reserva de
+  07/11 manteve a composicao; 21 das 50 questoes trocaram;
+- ⚪ **Depende de voce**: conferir as 12 pendentes (Analises > Conferencia,
+  complementar, "so as nao conferidas"), so depois de 07/11, como as de
+  17/10;
+- ⚪ **Depende de voce: o gabarito discutivel da Chapeco 2022 (S88, q10)**,
+  de concordancia, com o gabarito provisorio: tirar do treino
+  (`classificacoes.fora_do_treino`, como os da decisao 171) ou deixar. Ate
+  voce decidir, ela treina;
+- ⚪ **Depende de voce: o nome "Portugues"** no caderno do DEINFRA 2014
+  (adv_1.pdf, 39 linhas no banco): ligar a Lingua Portuguesa no
+  `sinonimos_de_materia` do `config/taxonomia.yml` muda a incidencia do
+  complementar no nivel da materia; depois disso, as 7 questoes dele que
+  ficaram sem classificacao entram com `--so-novas`;
+- ⚪ **A IA pode fazer: a CINCATARINA 2024 (AT41, q5) mal lida** (duas
+  alternativas quase iguais): olhar o caderno e reler, se o leitor errou. Ela
+  esta pendente nas duas leituras, fora do treino;
+- ⚪ **A IA pode fazer: a tela da amostra para o lote de 19/10** (decisao
+  173): o `conferencia_do_lote` le so o "2026-10-17"; o "2026-10-19" ja esta
+  no `data/lotes_de_classificacao.json`, com as categorias. Para o Ciclo 2;
+- ⚪ **Depois de 07/11: mais Portugues da FEPESE** (proposta de 19/10, nao
+  aprovada ainda). O acervo tem 449 questoes distintas de Portugues da
+  FEPESE, de cerca de 200 cadernos que entraram pela distancia ou pelo
+  cargo com Direito; a FEPESE faz centenas de concursos, e o site dela nao
+  diz o assunto das questoes (so o Qconcursos indexa, e nao pode ser lido).
+  Dois caminhos: (1) estender o `--por-conteudo` para um caderno de
+  Portugues por concurso e nivel (os cargos do mesmo nivel repetem a prova),
+  de qualquer lugar, dos anos recentes primeiro, com o mesmo freio de 20 por
+  dia; (2) uma lista de provas que voce anota ao estudar no Qconcursos (cada
+  questao de la diz a prova), e o radar baixa o caderno do site oficial da
+  FEPESE, como a lista de outras bancas (decisao 172). E um relatorio "temas
+  com pouca questao real" (o que o plano pede contra o que o acervo tem)
+  para saber quando parar. Pela proporcao de 19/10 (uns 4% do Portugues e
+  emprego de pronome), umas 50 provas novas dariam umas 20 questoes deste
+  tema, e as dos outros junto.
+
 ### As proximas etapas
 
 - 🔴 **O resto da FEPESE pelo conteudo, devagar**: o firewall dela bloqueou

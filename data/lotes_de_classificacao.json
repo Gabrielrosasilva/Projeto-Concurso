@@ -3844,6 +3844,1015 @@
      "no_conferido": "Legislação Especial > Estatuto do Desarmamento (Lei nº 10.826 de 22 de dezembro de 2003) > Crimes do Estatuto"
     }
    ]
+  },
+  {
+   "id": "2026-10-19",
+   "nome": "O Português das provas novas de 17/10",
+   "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 19/10/2026",
+   "decisoes": [
+    171,
+    177
+   ],
+   "por_que": "As 163 questoes de Portugues da FEPESE que as provas novas de 17/10 trouxeram e que ficaram sem classificacao (naquele dia so o Direito foi classificado). Mesmo processo da decisao 171: a primeira leitura, a segunda as cegas e as regras a, b e c. A tela da amostra (decisao 173) ainda le so o lote de 17/10.",
+   "grupos": [
+    "FEPESE"
+   ],
+   "itens": [
+    {
+     "chave": "15da5f283fde56fd72a43a9c92584cc6",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "a2e34ac7cfbc1f4d0bcab1f2508fe5e6",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "ec6fff3d529e7b3bb8709e1487cf09af",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos"
+    },
+    {
+     "chave": "f962a765fe8dc69d3c1787ba7f38b3db",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "6903530bc339cd53dbc5570731bb6950",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "34ce5be9dd4c683e30d868bb33b17cf7",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "9fa5f0274b96e43aa8691e2182fb04c7",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "dea6e02d9aeda9af82138e8e9fc1c519",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "69cc423c371d95d74d46ceadab9163f6",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial"
+    },
+    {
+     "chave": "74bfc71390d79ecf31b819e85a799801",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
+     "segunda": "pendente",
+     "confianca": "media",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "e22bd4ea4b763f40d034a6e2a7aef910",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "1cb37a95820290689117a40dedfd0223",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto"
+    },
+    {
+     "chave": "24d2e4e8e60d8d0b82378a80e708a77a",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "6d2543fe358420d3d20f47e7506b7ccc",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "a003a71989e62c3e14c40d44a51147cb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "a5ad4f53818043e01128e5710f0cabc9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "324ea7dfb3691e88a3a396570f2c51c6",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "d20e7b9114b01f7adfc74462ca482414",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Hífen em prefixos e palavras compostas"
+    },
+    {
+     "chave": "cb5beb4c312f86103a6eb8c9088cde8c",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "9386980412f8dd4d5c377aa816eaf160",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo"
+    },
+    {
+     "chave": "5f8e38fc046a64d430c9c5fe7a4b76de",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo"
+    },
+    {
+     "chave": "d45136c0c2fea2a0879117028a778c53",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "f75edef88dca6a40fb5638894cb81130",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "c26df5e9f51fa07d468b3d0a4cc1c370",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "d4c16a23a71aeee2781bfc3d453bacfb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "90565c9711010cde922cee29c3e5b55e",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Relações de sentido e conectivos"
+    },
+    {
+     "chave": "846cce342e87e8fe8c4aa1c71a0f8fe3",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos"
+    },
+    {
+     "chave": "310de738729ce94bc9a5f12df2959a64",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+    },
+    {
+     "chave": "18fa6c2eee2f9638b2cc2669cb7b1291",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
+     "segunda": "pendente",
+     "confianca": "media",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "65ef2b86ab42a19d465f9e4f81875cc5",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "2bcdd2a6d920120691874e672cebf912",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "f117f7d963116bf672afe1356bdf254b",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Redação Oficial: formas de tratamento, tipos de discursos, correspondência oficial"
+    },
+    {
+     "chave": "5a149ad65d3205ca8a9c94c5adaaac27",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
+     "segunda": "Língua Portuguesa",
+     "confianca": "media",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "003bcb6b908bbabe3bfd7e654b808112",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "5ddbb8c8099a7bff879e2cee1eb2d6df",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "8c090c1b465b82970b0835aa82950e8d",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal",
+     "segunda": "pendente",
+     "confianca": "media",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "9b6afad7b48551d68ff958ed02f41d47",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "34fd41e1993a73c830a524dad42f6449",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "1a4854501ea6661e296d3f69a5705694",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "7318940345f3f2b79a023950d8be07c0",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "fabef35897006385f4dfc4ad4ce21f0d",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "f8cec862210d25918da8778147ae2109",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "8229d74f77a44aab58c95312fcc3b856",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "3625be1a820f59612fc0b0635e0aaf52",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase"
+    },
+    {
+     "chave": "00034e39ed45019a76413108b59d0c58",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "bf4f5be9e80e021e142fd533a508dfcd",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "4822e2519abdf66e1e93d86f68c27dd6",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal",
+     "segunda": "Língua Portuguesa",
+     "confianca": "media",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "d6152bc4e2465620950aa2db2fb5f4f9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    },
+    {
+     "chave": "74489b5c2ecdc09c6a1d3bad5af7c7b6",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Colocação e emprego dos pronomes"
+    },
+    {
+     "chave": "cff870129cbf8802bc1ee8df7884375f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+    },
+    {
+     "chave": "6d51158415c5693bbaa6eba2d64a01ba",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
+     "segunda": "pendente",
+     "confianca": "media",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "f42e8c1061d532acd6709f06ff83a962",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "fa3079375007aabc13b285f8683f5acc",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "a7dad89a90927fcdf587fc8e58363046",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "912ee8302057062657cb095108a8b58b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "59a8deeac08c84067058d1b9ef1c48a0",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "b638aa26bc9d00426737e8cf6cc4acb0",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "72b06946dbe6ffed2696be21e1776d74",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "35959805fed67c393dcdaf5247ef50ed",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Relações de sentido e conectivos"
+    },
+    {
+     "chave": "635d991eeb07285a73afb10f4bfef717",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego de tempos e modos verbais"
+    },
+    {
+     "chave": "dd3b60d0e15b5fae607602a3544f85c5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "27780bd6ebeaf7f06e2a895c9250f7d5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "c98b19819a6bb1bb2d609fd209ecdde2",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Tipologia e gênero textual"
+    },
+    {
+     "chave": "4d24a009d01f1134ac7cc7b14b1ea476",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "11385c02ac4bead59882db938a68f864",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "3c30fe40d1e14ffc1633bdb32d95ac17",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "37b3e48679b655b32a73ccda56dd85ce",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "88e5179eeb6b758043327fbe760f13e5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "125b42c0dabb92fba68b46d4d4c5b5a2",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Vozes do verbo > Voz passiva analítica e sintética",
+     "segunda": "Língua Portuguesa",
+     "confianca": "baixa",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "1923845c8e20f1fa8ed525dacbcbe9a4",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "90447502fa02d2e4c63208d474504274",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "1888d66956aebcd6998705b7f4c36da5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto"
+    },
+    {
+     "chave": "182b13160a94d9b3e71b8a5de4181dcc",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "99be6717d90ec4ad633aa96584059174",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "65fc784f2573ca6e6955c4dd1159ed09",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "6053b048739d4da7441e58de2e5327f5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "2d6016efc83c178a28d39db912809939",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "e36cc1f2e471f357b02c1f82dbe2b821",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "9acb70d0bca5aa4939f113a947ec671b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "17d470e05d28f10439791cb2c3796e16",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "19e43d6687f8967d282a4cc955b221eb",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem",
+     "segunda": "Língua Portuguesa",
+     "confianca": "baixa",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "3c8bf5406e8744f62a2786c1ded3b37b",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "69a5ccbbfd0f42f531c4ca67ffb10929",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal"
+    },
+    {
+     "chave": "889e32465432e6671f9961523bb51865",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "5ca2ef35fee8750adfb8573d925a23ab",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "63333de6476d4b654b35af1caad29fbb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Vozes do verbo > Voz passiva analítica e sintética"
+    },
+    {
+     "chave": "1bce2c5acd860a168acb6274936c46a9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "b153f81cdc596cd3b0f42fff74e0323b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal"
+    },
+    {
+     "chave": "f4bc92b56b6b465aae4a5de95552af75",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal"
+    },
+    {
+     "chave": "210378c071307d4c8a9b9bec4d8af5a2",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "6d83b2e809393835f6b6a0406ff22f27",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "f23f7f65f47c18f1b076f718d08c5994",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "ffbb62440f7deb234a6813cf573b248e",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "2ad82df3402ee27d1bfb9e868de561ee",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
+     "segunda": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto",
+     "confianca": "baixa",
+     "motivo": "a confiança baixa"
+    },
+    {
+     "chave": "55a846c7b81c56cff7c5e7344576ded1",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+    },
+    {
+     "chave": "a1fd4248bae3329e239093cb4859115f",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Pontuação > Emprego da vírgula",
+     "segunda": "Língua Portuguesa > Pontuação > Emprego da vírgula",
+     "confianca": "baixa",
+     "motivo": "a confiança baixa"
+    },
+    {
+     "chave": "806d4b3bc8558745c0f4192e7940ecff",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "fdf11c85a5698940aae91b522b3e642e",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal"
+    },
+    {
+     "chave": "a93464e3ec44e3c62f7e8f4a05001b67",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal",
+     "segunda": "Língua Portuguesa",
+     "confianca": "baixa",
+     "motivo": "uma pendente e a outra não"
+    },
+    {
+     "chave": "a6b2a8bb8f81d69dd436a3d4961d54c7",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "5ff8a5a3461110df0694f802d3934957",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Tipologia e gênero textual"
+    },
+    {
+     "chave": "b72820a8b9d805a59155ebd4ac4c0507",
+     "grupo": "FEPESE",
+     "categoria": "c",
+     "primeira": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal",
+     "segunda": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal",
+     "confianca": "baixa",
+     "motivo": "a confiança baixa"
+    },
+    {
+     "chave": "ee9340415958fb297b243aa37bcc08ce",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "c6b880dc4159266afd50fac869b4690d",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "3a490e5dd29a05628e4e109c035a4690",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância do verbo haver impessoal"
+    },
+    {
+     "chave": "ce1f58cda372458ad2313a4f78f41c99",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "e5283f0de632edaec4052b54e5827631",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "cd690397bfa63711a0fae385fd8c252b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "320f61ee1732a05a8fc1313e86b2a17d",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Flexão nominal e verbal > Conjugação de verbos irregulares"
+    },
+    {
+     "chave": "ed947bbebe8678494dc88da1b84f82e2",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "3596513c2ab0261e1103d07494c106a5",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "a712db646f44e197769ff38f3a4e12ee",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "52a2c940bd454250aa3904c5abb16e27",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal"
+    },
+    {
+     "chave": "5b5d847e2a8e944f06c78b1e19d96757",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "4471ea39927c044d6a516c4769306cdc",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial"
+    },
+    {
+     "chave": "62f6936154caf584046e9f94646a654e",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica"
+    },
+    {
+     "chave": "5da1ebe00da7281f66bb5070b42fb739",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "eecb8b123500d9331f47d60b508944a9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação"
+    },
+    {
+     "chave": "91808f80665f594a5838941251754449",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "c73eebd2c1ed50fe3861d6bece927469",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "b53539dbe78ce6e9463cc9b5ed63b622",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "9020b434aa6141160e67f680646a37c9",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "fa96462e8ad26f20393bef91ed278e60",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    },
+    {
+     "chave": "0f3f73f483ea92e2a669a29d77f68de4",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "9d47fc66e3d19315e377ee30e371dc9c",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "ec8b65538cdb6bb355176381e041279c",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+    },
+    {
+     "chave": "a2c2115f0b532abdaddfb1d6aaa629bc",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem"
+    },
+    {
+     "chave": "7075e64631f0c1eb66af43f264842540",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Tipologia e gênero textual"
+    },
+    {
+     "chave": "62c9ed6aee2ba3bc15f2ddc6752f0057",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "3fb7b73fc756a95b0246b4cad03678b4",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Tipologia e gênero textual"
+    },
+    {
+     "chave": "65a8994ae43a83bbe085096c25ae3bab",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação > Emprego da vírgula"
+    },
+    {
+     "chave": "bc2f31e052818b09e06b5fe4049c3ffb",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "d6bbf4982b36ce77ddb8431f45b08994",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+    },
+    {
+     "chave": "4a39f355045db1376164cf59fa41cafb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem"
+    },
+    {
+     "chave": "fdabbe69cbc43c82b339fedc51c1fe56",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "a6b6fabb88d55301c5880d748d4b8cc8",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    },
+    {
+     "chave": "89bcc699dbb7014f6af83d33d345d84e",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "c91db797c8ea01df6008f8e38df6390a",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Figuras de linguagem"
+    },
+    {
+     "chave": "f6463b174d49f80d93e453caf238f9fb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    },
+    {
+     "chave": "0472f4ef063f0b7d80d745838baa3e83",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Regras de acentuação"
+    },
+    {
+     "chave": "77963b583b6b5d9caba52f30f039e15f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal"
+    },
+    {
+     "chave": "41bac045f79ce727bae3f8e69eabef78",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação"
+    },
+    {
+     "chave": "a9435d188ff662584e22d4e21f35127f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "3f1e44b00796818ce86504046b343e77",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+    },
+    {
+     "chave": "1250ef0156c6499e1654b79b6bc7b3db",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Flexão nominal e verbal > Flexão de número: regras de plural"
+    },
+    {
+     "chave": "b5cfc40c9221137e3618ca6d5fc7715c",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Acentuação gráfica > Fonologia: fonema, sílaba, encontros vocálicos e dígrafos"
+    },
+    {
+     "chave": "241ef59a3b0dd1dff6ac1f548fa446e1",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Complemento nominal e agente da passiva"
+    },
+    {
+     "chave": "0dc19e47ab21e47615b65e6e9bebd0f8",
+     "grupo": "FEPESE",
+     "categoria": "pendente nas duas"
+    },
+    {
+     "chave": "18b45df838a120c2f1d07131ef3eb9fb",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Uniformidade de tratamento"
+    },
+    {
+     "chave": "f8d73672ac7dd4244c24c411192f63d5",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "d885894f7a79cace05952d771aecd17a",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Parônimos e grafia"
+    },
+    {
+     "chave": "e7f5e72da103946c0e5b362bf45ec420",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal"
+    },
+    {
+     "chave": "b901587326df01a3478a621a53f9f4d0",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "b721601598e1781cd634e47d6f1f9b8b",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há"
+    },
+    {
+     "chave": "18c36a1d14adb4d312a95fbcbdddd841",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "4d8c3d0790e0e8d4edce1392f8edd000",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Emprego da crase"
+    },
+    {
+     "chave": "155c010efda7694264890aad3dd54d80",
+     "grupo": "FEPESE",
+     "categoria": "b",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal"
+    },
+    {
+     "chave": "05436aaba1f013ebc1062c44b67e542f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase"
+    },
+    {
+     "chave": "4604b66c5c171a97bcd29356eac9c156",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+    },
+    {
+     "chave": "59e04747c35094ec8b9cb780eea6948f",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância nominal"
+    },
+    {
+     "chave": "7fb4a48545156ebf1919a8e6fa06930a",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Concordância nominal e verbal > Concordância verbal"
+    },
+    {
+     "chave": "1c96a80cac00f39b16462a779e81d46a",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Ortografia oficial > Hífen em prefixos e palavras compostas"
+    },
+    {
+     "chave": "ef9b74d688662e64ecd618ab19fd4cae",
+     "grupo": "FEPESE",
+     "categoria": "a",
+     "no_conferido": "Língua Portuguesa > Pontuação"
+    }
+   ]
   }
  ]
 }

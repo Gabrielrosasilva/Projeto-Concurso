@@ -1,6 +1,6 @@
 # Classificações para conferir
 
-É a lista única do que espera a sua conferência, em três partes:
+É a lista única do que espera a sua conferência, em quatro partes:
 
 - **as provas novas de 17/10** (decisão 171): 29 pendentes e 8 fora do treino pela
   data da prova, e a amostra do que a segunda leitura decidiu sozinha (10 por
@@ -8,9 +8,12 @@
 - **as provas baixadas à mão de 18/10** (decisão 172): 11 pendentes (5 do primeiro
   lote e 6 do segundo) e 6 fora do treino pelo gabarito discutível (lista no
   [leis_alteradas](leis_alteradas.md)), também só depois de 07/11;
-- **o complementar aceito** (estado de 05/10): 46 classificações abertas e 29
+- **o Português das provas novas de 17/10, classificado em 19/10** (decisão 177):
+  12 pendentes, também só depois de 07/11;
+- **o complementar aceito** (estado de 05/10): 42 classificações abertas e 29
   pendentes, o que sobrou da reanálise (decisão 104) e da classificação de
-  Português e Raciocínio (decisão 106).
+  Português e Raciocínio (decisão 106). As 4 de pronome que estavam aqui foram
+  relidas em 19/10 e conferidas pela segunda leitura (decisão 177).
 
 As outras já estão conferidas, por você ou pela segunda leitura às cegas.
 
@@ -271,6 +274,76 @@ em comum, e estas 6 discordam (uma caiu no mesmo nó, mas com a confiança baixa
   - segunda, às cegas (alta): Direito Processual Penal > Prova > Busca e apreensão > CPP, art. 245
   - por que ficou: outra matéria
 
+## O Português das provas novas de 17/10: 12 pendentes até a sua conferência (decisão 177)
+
+**Confira só depois de 07/11**, pelo mesmo motivo de cima. As 163 questões de
+Português da FEPESE que as provas novas de 17/10 trouxeram ficaram sem classificação
+naquele dia (só o Direito foi classificado). Classificadas em 19/10 e lidas de novo
+às cegas, só com os caminhos da árvore: 121 no mesmo nó, 10 no mesmo assunto (o nó
+em comum), 20 pendentes nas duas (quase todas de análise sintática, que o programa
+de 2019 não tem) e estas 12. Na tela, elas aparecem no complementar, com "só as não
+conferidas"; a amostra do lote (decisão 173) ainda não tem recorte próprio.
+
+- **q5 de camarabalneario · S3.pdf** (FEPESE 2010, Assessor Jurídico) — Relacione a classificação da coluna 1 com os termos sublinhados na coluna 2, de acordo com as funções sintáticas que desempenham no texto. Coluna 1 1.…
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q10 de concursocincatarina · C01.pdf** (FEPESE 2019, Analista Técnico IV / Advogado (C01)) — Assinale a alternativa correta.
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto
+  - segunda, às cegas (media): só a matéria (Língua Portuguesa)
+  - por que ficou: uma pendente e a outra não
+
+- **q6 de concursocincatarina · C01.pdf** (FEPESE 2019, Analista Técnico IV / Advogado (C01)) — Assinale a alternativa na qual existe uma oração subordinada substantiva objetiva direta.
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q1 de pinhalzinho · 1S01.pdf** (FEPESE 2021, Advogado (1S01)) — Assinale a alternativa que apresenta corretamente a função sintática do termo destacado.
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q5 de guatambu · 1S14.pdf** (FEPESE 2021, Procurador do Município (1S14)) — Preencha as lacunas das frases com o que está colocado entre parênteses. Informei ____ (aos/os) professores sobre o possível concurso para efetivos. M…
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal
+  - segunda, às cegas (media): só a matéria (Língua Portuguesa)
+  - por que ficou: uma pendente e a outra não
+
+- **q8 de 2021tijucas · S01.pdf** (FEPESE 2021, Advogado (S01)) — Assinale a frase na qual ocorre uma oração subordinada substantiva objetiva direta.
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto
+  - segunda, às cegas (media): pendente
+  - por que ficou: uma pendente e a outra não
+
+- **q10 de 2022casan · S02.pdf** (FEPESE 2022, Advogado (S02)) — Considere cada par de frases. 1. Não tenha medo, Camilo! / Não, tenha medo, Camilo! 2. “Para mim, passar por aquela rua parece complicado” , disse ela…
+  - primeira leitura: Pontuação > Emprego da vírgula
+  - segunda, às cegas (baixa): Pontuação > Emprego da vírgula
+  - por que ficou: a confiança baixa
+
+- **q4 de 2022bcadm · 6S01.pdf** (FEPESE 2022, Advogado (6S01)) — Assinale a alternativa correta.
+  - primeira leitura: Vozes do verbo > Voz passiva analítica e sintética
+  - segunda, às cegas (baixa): só a matéria (Língua Portuguesa)
+  - por que ficou: uma pendente e a outra não
+
+- **q6 de 2022chapeco · S88.pdf** (FEPESE 2022, Procurador Municipal (S88)) — Sobre Predicação Verbal e Colocação Nominal, assinale a alternativa que apresenta afirmação correta colocada entre parênteses.
+  - primeira leitura: Compreensão e interpretação de texto (s) > Figuras de linguagem
+  - segunda, às cegas (baixa): só a matéria (Língua Portuguesa)
+  - por que ficou: uma pendente e a outra não
+
+- **q9 de 2022cincatarina · S02.pdf** (FEPESE 2022, Analista Técnico IV Função: Advogado (S02)) — Observe a frase: “A vida é um risco, mas não a viver com intensidade é algo ainda mais perigoso, haja visto o presente ser efêmero. Assinale a alterna…
+  - primeira leitura: Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto
+  - segunda, às cegas (baixa): Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Objeto direto e indireto
+  - por que ficou: a confiança baixa
+
+- **q1 de 2023caxambusulps · SS01.pdf** (FEPESE 2023, Advogado (SS01)) — Assinale a alternativa cuja frase está escrita de acordo com a norma padrão de língua portuguesa.
+  - primeira leitura: Concordância nominal e verbal > Concordância verbal
+  - segunda, às cegas (baixa): só a matéria (Língua Portuguesa)
+  - por que ficou: uma pendente e a outra não
+
+- **q2 de 2023caxambusulps · SS01.pdf** (FEPESE 2023, Advogado (SS01)) — Analise a frase retirada do texto 1. “Contudo, com a construção da ferrovia São Paulo-Rio Grande e outras vias, como a construção de estradas, a fixaç…
+  - primeira leitura: Concordância nominal e verbal > Concordância verbal
+  - segunda, às cegas (baixa): Concordância nominal e verbal > Concordância verbal
+  - por que ficou: a confiança baixa
+
 ## O complementar aceito (estado de 05/10)
 
 ### Administração Pública (3)
@@ -383,7 +456,7 @@ em comum, e estas 6 discordam (uma caiu no mesmo nó, mas com a confiança baixa
   - segunda leitura (media): Legislação Especial > Lei de Abuso de autoridade (Lei nº 4.898 de 9 de dezembro de 1965) > Penas e efeitos da condenação
   - por quê: Penas e efeitos da condenação na Lei 13.869/2019 (perda do cargo condicionada à reincidência); o nó tem o nome da lei antiga.
 
-### Língua Portuguesa (24)
+### Língua Portuguesa (20)
 
 - **q2 de 2024admbrusque · AS01.pdf** — Assinale a frase, extraída do texto 1, que está corretamente redigida.…
   - hoje: Língua Portuguesa > Concordância nominal e verbal
@@ -410,20 +483,10 @@ em comum, e estas 6 discordam (uma caiu no mesmo nó, mas com a confiança baixa
   - segunda leitura (media): Língua Portuguesa > Concordância nominal e verbal > Concordância verbal
   - por quê: Haver impessoal correto, erradas misturam chover, haver, fazer impessoais e existir pessoal.
 
-- **q6 de 2024saudebrusque · SS01.pdf** — Assinale a alternativa em que as duas primeiras orações foram reescritas corretamente em um único período composto.…
-  - hoje: Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Colocação e emprego dos pronomes
-  - segunda leitura (media): Língua Portuguesa > Termos integrantes da oração: objeto direto e indireto, agente da passiva e complemento nominal > Regência verbal e nominal
-  - por quê: Pronome relativo regido de preposição exigida pelo verbo (necessitar de -> de quem).
-
 - **q9 de 2024saudebrusque · SS01.pdf** — A redação da frase está correta em:…
   - hoje: Língua Portuguesa > Concordância nominal e verbal > Concordância verbal
   - segunda leitura (baixa): Língua Portuguesa > Concordância nominal e verbal > Concordância verbal
   - por quê: Reescrita correta; as erradas falham sobretudo em concordância verbal (existia, corrompem, era-se/serem).
-
-- **q4 de 2024saudebrusque · ST1.pdf** — Analise a frase abaixo: Era para ____ falar ____ ontem, mas não ____ encontrei no lugar combinado. Assinale a alternativa que completa corre…
-  - hoje: Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Colocação e emprego dos pronomes
-  - segunda leitura (media): Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação
-  - por quê: Lacunas com pronome reto antes de infinitivo (eu) e uniformidade de tratamento (contigo/te).
 
 - **q9 de 2024saudebrusque · ST1.pdf** — Assinale a frase que está de acordo com as normas da língua padrão.…
   - hoje: Língua Portuguesa > Concordância nominal e verbal
@@ -484,16 +547,6 @@ em comum, e estas 6 discordam (uma caiu no mesmo nó, mas com a confiança baixa
   - hoje: Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Substantivo e adjetivo
   - segunda leitura (media): Língua Portuguesa > Classes gramaticais variáveis: substantivo, adjetivo, artigo, numeral, pronome, verbo > Classificação morfológica
   - por quê: Classificação morfológica dos termos (substantivos, preposições, numeral, adjetivo) e núcleo do sujeito.
-
-- **q16 de substitutos2024 · AE.pdf** — Assinale a alternativa correta quanto ao emprego dos pronomes.…
-  - hoje: Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Colocação e emprego dos pronomes
-  - segunda leitura (media): Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação
-  - por quê: Emprego de pronomes: consigo correto; distratores com com nós e mistura você/tu.
-
-- **q14 de substitutos2024 · AS.pdf** — Assinale a frase correta quanto ao emprego dos pronomes.…
-  - hoje: Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Colocação e emprego dos pronomes
-  - segunda leitura (media): Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação
-  - por quê: Emprego de pronomes: cuja, uniformidade de tratamento, lhe/o, consigo e mim/eu.
 
 - **q20 de substitutos2024 · AS.pdf** — Preencha as lacunas com a forma adequada sugerida entre parênteses. 1. Com dois ____ e uma couve-flor, preparou uma salada para as duas pess…
   - hoje: Língua Portuguesa > Concordância nominal e verbal

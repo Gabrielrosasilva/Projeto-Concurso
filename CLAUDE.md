@@ -429,6 +429,15 @@ com a pausa logo depois, sem nada no lugar: a manha acaba as 12h00. As
 sextas da 170, os sabados, o 07/11 e os dias passados ficam iguais; o Plano
 B e o "Resumo" continuam com os artigos-chave. O Ciclo 2 decide se tera lei
 seca (pendencia D).
+**Os pronomes e o Portugues das provas novas (19/10, decisao 177, a seu
+pedido; cabe na I3: corrige um numero):** as 9 questoes de emprego de pronome
+que estavam no no de colocacao foram para o no da ficha Pronomes 1 (a faixa
+de 19/10 dizia "0 do radar"), e as 163 de Portugues da FEPESE das provas novas
+de 17/10, sem classificacao ate ali, foram classificadas e lidas de novo as
+cegas pela regra da 171 (121 no mesmo no, 10 no no em comum, 12 na lista unica
+e 20 pendentes nas duas; o lote "2026-10-19"). A reserva de 07/11 manteve a
+composicao, com 21 das 50 trocadas. Ampliar o Portugues da FEPESE fica para
+depois de 07/11 (pendencia O).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
