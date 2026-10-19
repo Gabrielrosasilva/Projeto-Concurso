@@ -5140,7 +5140,7 @@
     "pegadinha": "Com a morte do ofendido a representação passa ao cônjuge, ascendente, descendente ou irmão (art. 24, § 1º); a ação privada é indivisível (art. 48); na subsidiária o MP pode oferecer denúncia substitutiva (art. 29); pessoa jurídica pode ser querelante (art. 37).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Ação penal > Ação penal privada > CPP, art. 33; segunda, às cegas, Direito Processual Penal > Ação penal > Ação penal privada"
   },
@@ -6940,7 +6940,7 @@
     "pegadinha": "CPI investiga, não condena; a reclamação ao STF é controle judicial, não interno; o Tribunal de Contas deve contraditório (SV 3) e fundamenta a indisponibilidade de bens.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Apenas a Constituição Federal de 1988 pode prever modalidades de controle externo"
   },
@@ -7360,7 +7360,7 @@
     "pegadinha": "A afirmativa 1 inverte o STJ: a reparação por violação de direitos fundamentais na ditadura é imprescritível (Súmula 647); a 4 dá às Nações Unidas o dever de criminalizar, que é de cada Estado-parte (art. 4º).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "A declaração prestada sob tortura não poderá ser invocada como prova em qualquer processo, exceto contra uma pessoa acusada de tortura"
   },
@@ -8560,7 +8560,7 @@
     "pegadinha": "b) o disciplinar é o de punir servidores e particulares com vínculo; distribuir e escalonar funções e ordenar a atuação dos agentes, com subordinação, é o hierárquico; d) o regulamentar edita normas para a fiel execução da lei; a) o de polícia limita a liberdade e a propriedade em favor do interesse público",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "estabelecendo a relação de subordinação entre os servidores do seu quadro de pessoal"
   },
@@ -8725,7 +8725,7 @@
     "pegadinha": "chama o Tribunal de Contas de controle judiciário e troca as definições de representação e pedido de reconsideração",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "Órgãos colegiados com representação da sociedade, ouvidorias e audiências e consultas públicas são exemplos de meios de controle social"
   },
@@ -8785,7 +8785,7 @@
     "pegadinha": "A a esquece a exceção da guerra declarada (art. 5º, XLVII, a); a b põe os crimes culposos no júri, que julga os dolosos contra a vida (XXXVIII, d); a d inverte o STF, que autorizou a interrupção da gestação de anencéfalo (ADPF 54).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "a criança e o adolescente têm absoluta prioridade ao direito à vida"
   },
@@ -12490,7 +12490,7 @@
     "pegadinha": "A afirmativa 1 atrai porque a delegação é a regra, mas a decisão de recursos administrativos é indelegável (art. 13, II).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "O ato de delegação é revogável a qualquer tempo pela autoridade delegante"
   },
@@ -14320,7 +14320,7 @@
     "pegadinha": "O depoimento é oral e não pode ser trazido por escrito, mas a testemunha PODE fazer breve consulta a apontamentos (art. 204, parágrafo único).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "Considerando as normas aplicáveis às testemunhas"
   },
@@ -14980,7 +14980,7 @@
     "pegadinha": "A inexigibilidade de conduta diversa afasta a culpabilidade (o juízo de censura), não a ilicitude; d e e são a mesma coisa (antijuridicidade = ilicitude), e por isso nenhuma pode ser a certa.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "quando inexigível conduta diversa do agente"
   },
@@ -17275,7 +17275,7 @@
     "pegadinha": "Dar ordens a subordinado é poder hierárquico; o disciplinar é o de punir a falta funcional, e o regulamentar (ou normativo) é o de editar atos gerais.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "caso prático",
     "trecho": "a expedição de ordens legais pelos superiores é uma manifestação do poder"
   },
@@ -17620,7 +17620,7 @@
     "pegadinha": "A a troca as polícias (a ostensiva é da militar, art. 144, § 5º); a b esquece que o STF proíbe a greve a todos da segurança pública (Tema 541); a c dá à polícia civil a repercussão interestadual, que é da Polícia Federal (art. 144, § 1º, I).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "A lei estadual que cria progressão vertical da carreira de investigador para a de delegado viola a Constituição"
   },
@@ -17650,7 +17650,7 @@
     "pegadinha": "inclui a renúncia definitiva de competência, que é vedada: a competência é irrenunciável",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 02/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "São decorrências desse poder: resolver conflitos de competência administrativa entre subordinados; revisar condutas dos subordinados; delegar competência de forma temporária"
   },
@@ -17965,7 +17965,7 @@
     "pegadinha": "Tutela (supervisão ministerial) é o controle finalístico sobre as entidades da administração indireta, sem hierarquia; sobre os próprios órgãos, com hierarquia, é a autotutela.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "comparação entre conceitos",
     "trecho": "justificado na hierarquia administrativa"
   },
@@ -18145,7 +18145,7 @@
     "pegadinha": "Para o STF a vedação é absoluta - não vale greve com efetivo mínimo; o interesse da segurança pública prevalece sobre o direito de greve.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 17/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "conceito",
     "trecho": "O exercício do direito de greve, sob qualquer forma ou modalidade, é vedado a todos os servidores públicos que atuem diretamente na área de segurança pública"
   },
@@ -19165,7 +19165,7 @@
     "pegadinha": "Distribuir e ordenar o serviço interno dos subordinados por ordem de serviço é poder hierárquico. O disciplinar é o de punir a falta funcional, não o de editar normas, e o de polícia limita a liberdade e a propriedade do particular, não organiza a repartição.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), importado manualmente, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "caso prático",
     "trecho": "editou uma ordem de serviço, com a finalidade de distribuir e ordenar o serviço interno da DP"
   },
@@ -19660,7 +19660,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "identificando-se com o poder de dar ordens e instruções, de controlar as atividades, decidir conflitos e rever condutas de subordinados"
   },
@@ -20275,7 +20275,7 @@
     "pegadinha": "Quem pergunta primeiro é o juiz, não a defesa; videoconferência é exceção (art. 185, § 2º); o acusado pode indicar provas (art. 189).",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Processual Penal > Prova > Interrogatório e testemunhas > CPP, art. 196; segunda, às cegas, Direito Processual Penal > Prova > Interrogatório e testemunhas"
   },
@@ -20950,7 +20950,7 @@
     "pegadinha": "Voto facultativo é para maiores de 70 anos (não 65); domicílio eleitoral é condição obrigatória de elegibilidade; estrangeiro não vota; a condenação criminal suspende (não faz perder) os direitos políticos.",
     "principal": true,
     "procedencia": "Claude Code (claude-opus-5-5), reanálise às cegas, em 18/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "o nó em comum das duas leituras (decisão 171): primeira Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos > CF, art. 15; segunda, às cegas, Direito Constitucional > cidadania e direitos políticos > Perda e suspensão dos direitos políticos"
   },
@@ -21835,7 +21835,7 @@
     "pegadinha": "o silêncio não importa confissão (art. 186, parágrafo único)",
     "principal": true,
     "procedencia": "Claude Code, importado manualmente, em 01/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": "literalidade da lei",
     "trecho": "testemunha, silêncio do acusado, interrogatório e perícia (alternativas)"
   },
@@ -22060,7 +22060,7 @@
     "pegadinha": null,
     "principal": false,
     "procedencia": "Claude Code, importado manualmente, em 04/10/2026",
-    "status": "completa",
+    "status": "parcial",
     "tipo_de_questao": null,
     "trecho": "c) A possibilidade de punição no âmbito interno administrativo caracteriza o poder hierárquico."
   },
