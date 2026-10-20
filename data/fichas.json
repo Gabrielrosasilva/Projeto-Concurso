@@ -2688,7 +2688,7 @@
     "fonte_sugerida": null,
     "modelo": "Claude Code, importado manualmente, em 02/10/2026; revista pelo Claude Code em 04/10/2026",
     "criado_em": "2026-10-03T01:18:10.073324+00:00",
-    "conferida_em": null,
+    "conferida_em": "2026-10-19",
     "resumo": {
       "partes": {
         "dominar": [
@@ -2826,7 +2826,7 @@
       },
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
-      "conferido_em": null
+      "conferido_em": "2026-10-19"
     },
     "traducao": {
       "itens": [
@@ -2975,7 +2975,7 @@
       ],
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
       "criado_em": "2026-10-12T17:28:51.237709+00:00",
-      "conferido_em": null,
+      "conferido_em": "2026-10-19",
       "artigos_do_resumo": [
         {
           "lei": "CP",
@@ -17290,7 +17290,7 @@
       },
       "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
-      "conferido_em": null
+      "conferido_em": "2026-10-19"
     }
   },
   {

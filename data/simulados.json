@@ -2538,5 +2538,496 @@
         "respondida_em": "2026-10-16T16:18:27.136757+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-19T14:25:58.057939+00:00",
+    "filtros": {
+      "da_banca": 1,
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-19",
+        "indice": 1,
+        "titulo": "Fixação: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+      },
+      "nos": [
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude"
+      ],
+      "proprias": 1,
+      "quantidade": 2,
+      "rodada": "fepese_no_radar"
+    },
+    "finalizado_em": "2026-10-19T14:27:51.056886+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "0f059a0bc79f5441c88186f989abe8b8",
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 48,
+        "ordem": 1,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-19T14:26:48.948976+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "903eb6ea44a61ccd9871004296265b8e",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 48,
+        "ordem": 2,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-19T14:27:51.052149+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-19T14:28:27.264331+00:00",
+    "filtros": {
+      "bancas": [
+        "Access",
+        "Cebraspe",
+        "FGV",
+        "NC-UFPR",
+        "Selecon"
+      ],
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-19",
+        "indice": 1,
+        "titulo": "Fixação: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+      },
+      "nos": [
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Excludentes de ilicitude"
+      ],
+      "quantidade": 6,
+      "rodada": "outras_bancas"
+    },
+    "finalizado_em": "2026-10-19T14:34:51.534030+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "40182f154123cc6c81ee694fa74adf7f",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 31,
+        "ordem": 1,
+        "prova_url": "https://cdn.cebraspe.org.br/concursos/PM_PA_23_CFP/arquivos/916_PMPA_CFP_001_01.PDF",
+        "respondida_em": "2026-10-19T14:28:47.499692+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "6cc84df8646699494cc6dac0803bc30b",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 64,
+        "ordem": 2,
+        "prova_url": "https://anexos.cdn.selecao.net.br/uploads/422/concursos/86/anexos/VU4tyBV8101pc0EVKa1UGC33pI9MA9Z7ohHfCktQ.pdf",
+        "respondida_em": "2026-10-19T14:30:09.969622+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "c3366529cace5352070de62df150ab1c",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 17,
+        "ordem": 3,
+        "prova_url": "https://anexos.cdn.selecao.net.br/uploads/746/concursos/46/anexos/c8b6ad5b-995d-4345-a363-649b86083925.pdf",
+        "respondida_em": "2026-10-19T14:30:48.871109+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "ed8b081a3247db53804dfefc6c3623cf",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 73,
+        "ordem": 4,
+        "prova_url": "https://conhecimento.fgv.br/concursos/pcrn20",
+        "respondida_em": "2026-10-19T14:31:57.542319+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "3ac21c152b75ae015f96db008c172979",
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 16,
+        "ordem": 5,
+        "prova_url": "https://cdn.cebraspe.org.br/concursos/POLITEC_RO_22/arquivos/698_POLITEC_AGENTE_001_01.PDF",
+        "respondida_em": "2026-10-19T14:32:55.313328+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "9208d6b84ab684d7c3d9d01352f107b2",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 83,
+        "ordem": 6,
+        "prova_url": "https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf",
+        "respondida_em": "2026-10-19T14:34:51.524545+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-19T14:49:49.942358+00:00",
+    "filtros": {
+      "bancas": [
+        "IESES"
+      ],
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-19",
+        "indice": 4,
+        "titulo": "Fixação: Pronomes 1: emprego"
+      },
+      "nos": [
+        "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+      ],
+      "quantidade": 1,
+      "rodada": "outras_bancas"
+    },
+    "finalizado_em": "2026-10-19T14:50:49.146184+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "1e6131c1df9decf582de95e2f76a99fd",
+        "chutou": true,
+        "escolhida": "a",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 6,
+        "ordem": 1,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/3010.pdf",
+        "respondida_em": "2026-10-19T14:50:49.141613+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-19T21:35:46.696651+00:00",
+    "filtros": {
+      "da_banca": 0,
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-19",
+        "indice": 0,
+        "titulo": "R+7: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      },
+      "nos": [
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa",
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
+      ],
+      "proprias": 1,
+      "quantidade": 1,
+      "rodada": "fepese_no_radar"
+    },
+    "finalizado_em": "2026-10-19T21:36:36.734225+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "73b8d8b6df6a53eb3ce3cce9c74dc772",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 53,
+        "ordem": 1,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-19T21:36:36.730145+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-19T21:37:12.701508+00:00",
+    "filtros": {
+      "bancas": [
+        "Cebraspe",
+        "FGV",
+        "Idecan",
+        "NC-UFPR"
+      ],
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-19",
+        "indice": 0,
+        "titulo": "R+7: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      },
+      "nos": [
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Dolo e culpa",
+        "Direito Penal > Tipicidade, ilicitude, culpabilidade, punibilidade > Tentativa e crime impossível"
+      ],
+      "quantidade": 6,
+      "rodada": "outras_bancas"
+    },
+    "finalizado_em": "2026-10-19T21:47:09.666352+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "ee34e0e317df49429b2f454a06e67d9b",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 10,
+        "ordem": 1,
+        "prova_url": "https://arquivos.qconcursos.com/prova/arquivo_prova/148512/idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf",
+        "respondida_em": "2026-10-19T21:38:27.117476+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "2bf98ef5469ed20a89374b08e81df15a",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 3,
+        "ordem": 2,
+        "prova_url": "https://arquivos.qconcursos.com/prova/arquivo_prova/148512/idecan-2026-pc-sc-escrivao-de-policia-civil-prova.pdf",
+        "respondida_em": "2026-10-19T21:41:04.897539+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "2a8ac2278e89a42aa1a006674478d22d",
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 74,
+        "ordem": 3,
+        "prova_url": "https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf",
+        "respondida_em": "2026-10-19T21:42:17.935784+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "9ad16834e37dee25c19b4d232cd7d4de",
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 29,
+        "ordem": 4,
+        "prova_url": "https://conhecimento.fgv.br/concursos/pcsc23",
+        "respondida_em": "2026-10-19T21:43:57.582832+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "340ffd7e3b048340a80310b80bfa1303",
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 79,
+        "ordem": 5,
+        "prova_url": "https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf",
+        "respondida_em": "2026-10-19T21:45:28.527693+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "cdf283f742e55afd8990d2caee8e1e66",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 34,
+        "ordem": 6,
+        "prova_url": "https://cdn.cebraspe.org.br/concursos/PM_PA_23_CFO/arquivos/915_PMPA_CFO_001_01.PDF",
+        "respondida_em": "2026-10-19T21:47:09.663882+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-19T21:47:49.675705+00:00",
+    "filtros": {
+      "da_banca": 3,
+      "do_plano": 3,
+      "faixa": {
+        "bloco": "noite",
+        "data": "2026-10-19",
+        "indice": 1,
+        "titulo": "R+7: Crase 1: regra geral e casos obrigatórios"
+      },
+      "nos": [
+        "Língua Portuguesa > Emprego da crase > Casos obrigatórios e proibidos de crase",
+        "Língua Portuguesa > Emprego da crase > Lacunas com a, à e há"
+      ],
+      "proprias": 0,
+      "quantidade": 3,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-19T21:49:54.886493+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "f8cec862210d25918da8778147ae2109",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 3,
+        "ordem": 1,
+        "prova_url": "https://pinhalzinho.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S01.pdf",
+        "respondida_em": "2026-10-19T21:48:17.999723+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "e05eb943f38fdc37610e0fcc29f507dd",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 2,
+        "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=E01.pdf",
+        "respondida_em": "2026-10-19T21:48:49.991637+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "f23f7f65f47c18f1b076f718d08c5994",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "li_errado",
+        "numero": 9,
+        "ordem": 3,
+        "prova_url": "https://2022casan.fepese.org.br/?go=download&path=2&inline=1&arquivo=S02.pdf",
+        "respondida_em": "2026-10-19T21:49:54.882826+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-19T22:41:41.827483+00:00",
+    "filtros": {
+      "da_banca": 10,
+      "do_plano": 10,
+      "faixa": {
+        "bloco": "noite",
+        "data": "2026-10-19",
+        "indice": 4,
+        "titulo": "Pronomes 1: emprego"
+      },
+      "nos": [
+        "Língua Portuguesa > Pronomes: emprego, forma de tratamento e colocação > Emprego dos pronomes pessoais, demonstrativos e relativos"
+      ],
+      "proprias": 0,
+      "quantidade": 10,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-19T22:55:55.135089+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "10bd0c6cb9c885c7b8eaa03ea4975477",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 10,
+        "ordem": 1,
+        "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=SS01.pdf",
+        "respondida_em": "2026-10-19T22:44:45.104520+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "7e704ad3579ffcb72bd82c915b8af095",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 4,
+        "ordem": 2,
+        "prova_url": "https://2024saudebrusque.fepese.org.br/?go=download&path=2&inline=1&arquivo=ST1.pdf",
+        "respondida_em": "2026-10-19T22:45:16.987561+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "18be91ad5aca4234ef79ef2c4e650942",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 5,
+        "ordem": 3,
+        "prova_url": "https://2024cpeducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
+        "respondida_em": "2026-10-19T22:46:14.675049+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "fa96462e8ad26f20393bef91ed278e60",
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 2,
+        "ordem": 4,
+        "prova_url": "https://2024cincatarina.fepese.org.br/?go=download&path=2&inline=1&arquivo=AT41.pdf",
+        "respondida_em": "2026-10-19T22:49:04.165667+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "d6152bc4e2465620950aa2db2fb5f4f9",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 5,
+        "ordem": 5,
+        "prova_url": "https://pinhalzinho.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S01.pdf",
+        "respondida_em": "2026-10-19T22:51:45.092688+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "38c95bf62061a2147c3f35f7dde1e57a",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 9,
+        "ordem": 6,
+        "prova_url": "https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
+        "respondida_em": "2026-10-19T22:53:18.300977+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "f6463b174d49f80d93e453caf238f9fb",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 7,
+        "prova_url": "https://2024cincatarina.fepese.org.br/?go=download&path=2&inline=1&arquivo=AT41.pdf",
+        "respondida_em": "2026-10-19T22:54:09.157137+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "bf26348a55c2b4f0488078794c7869d2",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 5,
+        "ordem": 8,
+        "prova_url": "https://2024bcseletivoadm.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS.pdf",
+        "respondida_em": "2026-10-19T22:55:19.033421+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "5a05fc76734217a78f2a58f5c8379ce6",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 10,
+        "ordem": 9,
+        "prova_url": "https://2024pseducapalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=F1.pdf",
+        "respondida_em": "2026-10-19T22:55:30.769033+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "a6b6fabb88d55301c5880d748d4b8cc8",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 5,
+        "ordem": 10,
+        "prova_url": "https://2024concursocacador.fepese.org.br/?go=download&path=2&inline=1&arquivo=1S01.pdf",
+        "respondida_em": "2026-10-19T22:55:55.129520+00:00"
+      }
+    ]
   }
 ]

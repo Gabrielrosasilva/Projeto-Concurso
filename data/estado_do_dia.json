@@ -861,5 +861,81 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-19T22:59:08.330248+00:00",
+    "data": "2026-10-19",
+    "faixas_feitas": [
+      {
+        "acertos": null,
+        "assunto": "Coação, obediência e excludentes de ilicitude (arts. 22 a 25)",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Penal",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Pronomes 1: emprego",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Língua Portuguesa",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Pronomes 1: emprego"
+      },
+      {
+        "acertos": 9,
+        "assunto": "Aprendizagem: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 2,
+        "materia": "Direito Penal",
+        "minutos": 40,
+        "questoes": 14,
+        "titulo": "Aprendizagem: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Correção",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 5,
+        "materia": null,
+        "minutos": 30,
+        "questoes": null,
+        "titulo": "Correção"
+      }
+    ],
+    "notas_das_faixas": [
+      {
+        "anotado_em": "2026-10-19T15:07:18.344852+00:00",
+        "bloco": "manha",
+        "chutes": null,
+        "entendi": "sim",
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "motivos": {
+          "confundi": 1
+        },
+        "nota": "",
+        "titulo": "Fixação: Pronomes 1: emprego"
+      },
+      {
+        "anotado_em": "2026-10-19T22:59:08.329706+00:00",
+        "bloco": "noite",
+        "chutes": null,
+        "entendi": "mais_ou_menos",
+        "indice": 2,
+        "materia": "Direito Penal",
+        "nota": "",
+        "titulo": "Aprendizagem: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+      }
+    ],
+    "plano_b": null
   }
 ]
