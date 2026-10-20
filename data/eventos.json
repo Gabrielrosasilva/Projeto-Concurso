@@ -505,6 +505,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=363",
+    "data": "2026-10-20T13:40:00.760708+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=363",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=364",
     "data": "2026-10-11T18:11:25.963714+00:00",
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
@@ -558,6 +566,14 @@
     "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
     "link": "https://concurso.idib.org.br/Concurso.aspx?ID=366",
     "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=366",
+    "data": "2026-10-20T13:40:00.761836+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=366",
+    "tipo": "inscricoes_abertas"
   },
   {
     "avisado_em": null,
@@ -701,6 +717,22 @@
     "data": "2026-10-09T15:44:21.495983+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/ac/2026/10/09/cref-26a-regiao-ac-publica-processo-seletivo-com-salarios-de-ate-r-37-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/ac/2026/10/20/processo-seletivo-ifac-oferta-iniciais-de-ate-r-8-mil-em-novo-edital/",
+    "data": "2026-10-20T13:38:56.269785+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/ac/2026/10/20/processo-seletivo-ifac-oferta-iniciais-de-ate-r-8-mil-em-novo-edital/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/am/2026/10/19/esudpam-abre-novo-processo-seletivo-para-contratacao-de-estagiarios/",
+    "data": "2026-10-20T13:38:56.273511+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/am/2026/10/19/esudpam-abre-novo-processo-seletivo-para-contratacao-de-estagiarios/",
     "tipo": "apareceu"
   },
   {
@@ -1313,6 +1345,38 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/20/prefeitura-de-aracuai-mg-abre-vagas-de-ate-r-51-mil-em-seletivo/",
+    "data": "2026-10-20T13:38:56.269118+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/20/prefeitura-de-aracuai-mg-abre-vagas-de-ate-r-51-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/20/prefeitura-de-confins-mg-abre-154-vagas-em-edital-de-seletivo/",
+    "data": "2026-10-20T13:38:56.267345+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/20/prefeitura-de-confins-mg-abre-154-vagas-em-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/20/prefeitura-de-sao-pedro-da-uniao-mg-abre-seletivo-para-tecnico-em-enfermagem/",
+    "data": "2026-10-20T13:38:56.271484+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/20/prefeitura-de-sao-pedro-da-uniao-mg-abre-seletivo-para-tecnico-em-enfermagem/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/20/processo-seletivo-semasa-de-carangola-mg-abre-vaga-para-pedreiro/",
+    "data": "2026-10-20T13:38:56.266660+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/20/processo-seletivo-semasa-de-carangola-mg-abre-vaga-para-pedreiro/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/ms/2026/09/25/ms-prefeitura-de-coxim-promove-edital-com-vaga-de-nivel-fundamental/",
     "data": "2026-09-26T13:29:04.530844+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -1433,6 +1497,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mt/2026/10/19/concurso-prefeitura-de-brasnorte-mt-oferece-vencimento-de-ate-r-5-771/",
+    "data": "2026-10-20T13:38:56.274019+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mt/2026/10/19/concurso-prefeitura-de-brasnorte-mt-oferece-vencimento-de-ate-r-5-771/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mt/2026/10/19/prefeitura-de-novo-horizonte-do-norte-mt-tem-edital-publicado-de-ate-r-57-mil/",
+    "data": "2026-10-20T13:38:56.274548+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mt/2026/10/19/prefeitura-de-novo-horizonte-do-norte-mt-tem-edital-publicado-de-ate-r-57-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/pb/2026/10/02/prefeitura-de-agua-branca-pb-abre-concurso-com-salario-ate-r-34-mil/",
     "data": "2026-10-03T14:09:52.261667+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -1445,6 +1525,14 @@
     "data": "2026-10-15T13:32:42.665070+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/pb/2026/10/14/prefeitura-de-pedra-lavrada-pb-abre-edital-com-vagas-para-nivel-medio/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pb/2026/10/20/concurso-tj-pb-lanca-edital-com-50-vagas-e-salarios-de-ate-r-75-mil/",
+    "data": "2026-10-20T13:38:56.268570+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pb/2026/10/20/concurso-tj-pb-lanca-edital-com-50-vagas-e-salarios-de-ate-r-75-mil/",
     "tipo": "apareceu"
   },
   {
@@ -1637,6 +1725,14 @@
     "data": "2026-10-16T13:22:03.735410+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/pr/2026/10/16/concurso-prefeitura-de-florestopolis-pr-divulga-46-vagas-com-salarios-de-ate-r-153-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pr/2026/10/20/prefeitura-de-ivai-pr-divulga-seletivo-com-remuneracoes-de-ate-r-44-mil/",
+    "data": "2026-10-20T13:38:56.270347+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pr/2026/10/20/prefeitura-de-ivai-pr-divulga-seletivo-com-remuneracoes-de-ate-r-44-mil/",
     "tipo": "apareceu"
   },
   {
@@ -2293,6 +2389,14 @@
     "data": "2026-10-09T15:44:35.170978+00:00",
     "descricao": "Situacao: inscricoes_abertas -> encerrado",
     "link": "https://concursosnobrasil.com/concursos/sc/2026/09/04/sc-municipio-de-coronel-martins-abre-vagas-de-ate-r-72-mil-na-prefeitura/",
+    "tipo": "inscricoes_encerradas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/09/08/imas-sc-anuncia-abertura-de-24-vagas-com-bolsa-de-r-4-mil-mensais/",
+    "data": "2026-10-20T13:40:00.790598+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> encerrado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/09/08/imas-sc-anuncia-abertura-de-24-vagas-com-bolsa-de-r-4-mil-mensais/",
     "tipo": "inscricoes_encerradas"
   },
   {
@@ -3009,6 +3113,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/19/concurso-iprearroio-sc-oferece-salario-mensal-de-r-5-025/",
+    "data": "2026-10-20T13:38:56.272316+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/19/concurso-iprearroio-sc-oferece-salario-mensal-de-r-5-025/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/19/concurso-pmsc-abre-500-vagas-para-soldado-e-remuneracao-inicial-de-r-8-505/",
+    "data": "2026-10-20T13:38:56.272973+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/19/concurso-pmsc-abre-500-vagas-para-soldado-e-remuneracao-inicial-de-r-8-505/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/19/prefeitura-de-itapema-sc-oferta-iniciais-de-ate-r-96-mil-em-seletivo/",
     "data": "2026-10-19T17:53:20.823922+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -3517,6 +3637,30 @@
     "data": "2026-10-19T17:53:20.831349+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sp/2026/10/19/prefeitura-de-rio-das-pedras-sp-oferta-iniciais-de-ate-r-51-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/20/concurso-camara-de-ibiuna-sp-oferta-iniciais-de-ate-r-55-mil/",
+    "data": "2026-10-20T13:38:56.270853+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/20/concurso-camara-de-ibiuna-sp-oferta-iniciais-de-ate-r-55-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/20/concurso-instituto-de-pesquisas-ambientais-sp-abre-98-vagas-com-salario-de-r-9-mil/",
+    "data": "2026-10-20T13:38:56.267941+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/20/concurso-instituto-de-pesquisas-ambientais-sp-abre-98-vagas-com-salario-de-r-9-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/20/itatinga-sp-abre-13-vagas-em-seletivo-da-prefeitura-municipal/",
+    "data": "2026-10-20T13:38:56.263170+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/20/itatinga-sp-abre-13-vagas-em-seletivo-da-prefeitura-municipal/",
     "tipo": "apareceu"
   },
   {
@@ -4446,6 +4590,14 @@
     "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
     "link": "https://www.institutoaocp.org.br/concursos/723",
     "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/proseleta-2",
+    "data": "2026-10-20T13:39:54.305272+00:00",
+    "descricao": "Entrou no radar pela fonte aocp, como edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/proseleta-2",
+    "tipo": "apareceu"
   },
   {
     "avisado_em": null,
