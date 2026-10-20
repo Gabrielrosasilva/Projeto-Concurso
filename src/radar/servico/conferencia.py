@@ -107,8 +107,10 @@ def _achados_das_faixas(plano, data: date, estado: EstadoDoDia) -> list[Achado]:
             ))
             continue
         # A feita no radar guarda 0 de proposito (decisao 138): as questoes
-        # dela sao as respostas da rodada, e nao um numero digitado.
-        if plano_de_estudo.tem_acerto(faixa) and not feita.questoes and not feita.no_radar:
+        # dela sao as respostas da rodada, e nao um numero digitado. A feita
+        # pelo circulo sem numero tambem (decisao 179): eu disse que fiz.
+        if (plano_de_estudo.tem_acerto(faixa) and not feita.questoes
+                and not feita.no_radar and not feita.sem_numero):
             achados.append(Achado(
                 ZERO,
                 gravado=f"{titulo}: feita, 0 questões, {feita.minutos} min",

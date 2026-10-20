@@ -834,6 +834,23 @@ O que falta vai nesta ordem, uma etapa por conversa.
   emprego de pronome), umas 50 provas novas dariam umas 20 questoes deste
   tema, e as dos outros junto.
 
+### O circulo em toda faixa (decisao 179, 20/10)
+
+- ✅ **Feito**: o circulo em toda faixa (a de questoes, sem numero, conta como
+  feita), a feita dobrada numa linha, e a faixa que o radar cobriu fechando
+  sozinha; o 19/10 corrigido (Ideal, 9 de 9);
+- ⚪ **Depende de voce: as outras melhorias da aba Hoje** (proposta de 20/10,
+  por ordem de impacto), uma etapa por vez quando quiser: a faixa mais enxuta
+  (primeiro o que fazer; arvore, caiu, ficha, gerar e os passos do terminal
+  num "mais" fechado; a explicacao repetida - hoje em 9 faixas - num lugar
+  so); a barra de progresso do dia e a proxima faixa no topo, com o bloco
+  inteiro feito dobrando sozinho; no celular, o plano antes da lateral (hoje
+  a lateral empurra as faixas uns 1.800 px para baixo); um cartao "Revisar
+  hoje" com os erros e as revisoes do dia; e o fechamento do dia (acerto por
+  materia, onde mais errei, o que vem amanha);
+- ⚪ **A sugestao explica a diferenca** (proposta de 19/10, nao pedida
+  ainda): quando ela nao bate com a meta marcada, dizer quais faixas faltam.
+
 ### O sublinhado e o negrito do caderno (decisao 178, 19/10)
 
 - ✅ **Feito**: a questao mostra o trecho sublinhado e o negrito do caderno

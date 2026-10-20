@@ -13,7 +13,8 @@ fechar a pagina no meio e voltar depois, e o historico serve para medir se eu
 estou melhorando.
 """
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+import logging
+from datetime import date, datetime, timedelta
 
 from sqlalchemy import func, select
 
@@ -44,6 +45,8 @@ from radar.servico.metricas import (     # noqa: F401 - reexportados
     resumo_do_simulado,
 )
 from radar.servico.metricas import ultimas_respostas_reais as _ultimas_respostas_reais
+
+log = logging.getLogger(__name__)
 
 
 # Materias que caem em QUALQUER concurso, independente do cargo. Sao as que
@@ -417,7 +420,22 @@ def responder(simulado_id: int, questao_id: int, letra: str,
             if simulado:
                 simulado.finalizado_em = agora()
 
-        return resposta.acertou
+        acertou = resposta.acertou
+        rodada = s.get(Simulado, simulado_id)
+        filtros = (rodada.filtros if rodada else None) or {}
+        origem = filtros.get("faixa") or filtros.get("da_faixa")
+    # A faixa que o radar cobriu fecha sozinha (decisao 179). Depois de gravar
+    # a resposta, e fora da sessao dela: um defeito aqui nao pode custar a
+    # resposta - fica no log, e o circulo da faixa continua valendo.
+    if isinstance(origem, dict) and origem.get("data"):
+        try:
+            from radar.servico import cronograma
+            cronograma.fechar_pelo_radar(
+                date.fromisoformat(origem["data"]), origem.get("bloco"),
+                origem.get("indice"), origem.get("titulo"))
+        except Exception as erro:  # noqa: BLE001 - a resposta ja esta gravada
+            log.warning("a faixa nao fechou pelo radar: %s", erro)
+    return acertou
 
 
 #: As rodadas que MEDEM e por isso so mostram o resultado no fim, como na

@@ -257,13 +257,12 @@ def test_dia_futuro_nao_tem_circulo_e_recusa(cliente):
     assert "ainda não chegou" in resposta.text
 
 
-def test_pausa_nao_tem_circulo(cliente):
+def test_toda_faixa_tem_circulo_menos_a_pausa(cliente):
     texto = cliente.get("/hoje?data=2026-09-28").text
-    # O circulo e das faixas SEM acerto: pausa nao tem nenhum, e as de questao
-    # tem o formulario "fiz X, acertei Y" no lugar dele (etapa E2).
+    # Decisao 179: toda faixa tem o circulo, a de questoes inclusive (ela
+    # continua com o "fiz X, acertei Y" para o numero); a pausa, nenhum.
     dia = cronograma.carregar().dia(SEG)
-    com_circulo = sum(1 for f in dia.faixas()
-                      if f.tipo != "pausa" and not cronograma.tem_acerto(f))
+    com_circulo = sum(1 for f in dia.faixas() if f.tipo != "pausa")
     assert texto.count('class="circulo"') == com_circulo
     assert texto.count('class="fiz"') == sum(
         1 for f in dia.faixas() if cronograma.tem_acerto(f))

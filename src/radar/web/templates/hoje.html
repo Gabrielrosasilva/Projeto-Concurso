@@ -343,6 +343,21 @@
     .faixa.feita .corpo{opacity:.55}
     .faixa-desligada{list-style:none;padding:var(--esp-1) 0;color:var(--cor-texto-suave);font-size:.85rem}
     .faixa.feita .titulo{text-decoration:line-through}
+    /* A dobra da faixa (decisao 179): a linha do tipo e do titulo abre e
+       fecha. Feita, nasce fechada numa linha so; o resto some ate eu abrir. */
+    .faixa .faixa-dobra{margin-top:0;font-size:inherit}
+    .faixa .faixa-dobra > summary{list-style:none;cursor:pointer;color:inherit;font-weight:inherit}
+    .faixa .faixa-dobra > summary::-webkit-details-marker{display:none}
+    .faixa .faixa-dobra > summary:focus-visible{outline:2px solid var(--cor-acao);outline-offset:2px;border-radius:var(--raio-sm)}
+    .faixa.feita .faixa-dobra:not([open]) > summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 var(--esp-3)}
+    .faixa.feita .faixa-dobra:not([open]) > summary .titulo{margin:0;font-size:var(--tam-base)}
+    .faixa.feita .faixa-dobra:not([open]) > summary::after{content:"abrir ▾";margin-left:auto;font-size:var(--tam-xs);
+      color:var(--cor-texto-suave);text-decoration:none}
+    .faixa.feita:has(.faixa-dobra:not([open])) .corpo{padding-top:var(--esp-2);padding-bottom:var(--esp-2)}
+    .faixa.feita:has(.faixa-dobra:not([open])) .marca-faixa{padding-top:var(--esp-1)}
+    /* O resultado nao e riscado com o titulo: e o que eu quero ler. O risco
+       do pai nao desce para o inline-block. */
+    .faixa.feita .titulo .resultado{display:inline-block}
 
     /* --- o Plano B --- */
     /* O botao abre a escolha do tempo num <details>: sem JavaScript. */
@@ -938,6 +953,12 @@
               <div class="corpo">{{ ICONE_DO_TIPO.pausa }} Pausa · {{ f.duracao }} min{% if f.detalhe %} · {{ f.detalhe }}{% endif %}</div>
             {% else %}
               <div class="corpo">
+                {# A faixa dobra na propria linha (decisao 179): feita, ela nasce
+                   fechada - so o tipo, o titulo e o resultado -, e clicar na
+                   linha abre de novo para corrigir. Sem JavaScript. #}
+                {% set nr = respondidas_no_radar.get((b.chave, loop.index0, f.titulo)) if respondidas_no_radar else none %}
+                <details class="faixa-dobra"{{ ' open' if not feita }}>
+                <summary class="faixa-linha" title="{{ 'Abrir a faixa' if feita else 'Recolher a faixa' }}">
                 <div class="topo">
                   <span class="tipo"><span aria-hidden="true">{{ ICONE_DO_TIPO[f.tipo] }}</span> {{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}</span>
                   {% if f.materia %}<span class="materia">{{ f.materia }}</span>{% endif %}
@@ -948,9 +969,12 @@
                       de {{ anotado.questoes }}{% if anotado.porcentagem is not none %} ·
                       {{ anotado.porcentagem }}%{% endif %}</span>
                   {% elif anotado and anotado.no_radar %}
-                    <span class="resultado">feita no radar</span>
+                    <span class="resultado">feita no radar{% if nr and nr.questoes %} · {{ nr.questoes }} {{ 'questão' if nr.questoes == 1 else 'questões' }}{% endif %}</span>
+                  {% elif anotado and anotado.sem_numero %}
+                    <span class="resultado">feita · sem número</span>
                   {% endif %}
                 </p>
+                </summary>
                 {% if f.questoes %}<p class="qtd">{{ f.questoes }} questões</p>{% endif %}
 
                 {% set no_plano_b = b.chave == 'plano_b' %}
@@ -1433,7 +1457,7 @@
                         {%- if no_radar_f.ia %} ({{ no_radar_f.medidas }} {{ 'real' if no_radar_f.medidas == 1 else 'reais' }} e {{ no_radar_f.ia }} de IA){% endif %}: já contam sozinhas.
                       {%- endif %}
                       {%- if no_radar_f.chutes %} 🎲 {{ no_radar_f.chutes }} no chute.{% endif %}
-                      No “fiz”, só as de fora do radar; se fez só no radar, deixe vazio e marque ✓.</p>
+                      No “fiz”, só as de fora do radar; se fez só no radar, é só clicar no círculo.</p>
                   {% endif %}
                   {% set marcar %}
                     <form class="fiz" method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
@@ -1483,16 +1507,9 @@
                     </form>
                   {% endset %}
                   {% if feita %}
+                    {# Desmarcar e o circulo verde (decisao 179). #}
                     <div class="fiz-feita">
                       <details><summary>corrigir os números</summary>{{ marcar }}</details>
-                      <form method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
-                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
-                        <input type="hidden" name="bloco" value="{{ b.chave }}">
-                        <input type="hidden" name="indice" value="{{ loop.index0 }}">
-                        <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                        <button class="ds-botao ds-botao--secundario ds-botao--pequeno"
-                                type="submit" name="desmarcar" value="1">desmarcar</button>
-                      </form>
                     </div>
                   {% else %}
                     {{ marcar }}
@@ -1554,11 +1571,25 @@
                     </form>
                   </details>
                 {% endif %}
+                </details>
               </div>
               {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito.
-                 Faixa de questoes nao tem circulo: tem o formulario "fiz X,
-                 acertei Y", logo abaixo do corpo. #}
-              {% if not t.futuro and not TEM_ACERTO(f) %}
+                 Toda faixa tem um (decisao 179). Na de questoes, ele marca
+                 "fiz" sem numero - ou, com resposta no radar, a feita no radar
+                 -, e o "fiz X, acertei Y" continua la dentro para o numero. #}
+              {% if not t.futuro and TEM_ACERTO(f) %}
+                <form class="marca-faixa" method="post" action="/hoje/faixa/questoes{% if cor %}?cor={{ cor }}{% endif %}">
+                  <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                  <input type="hidden" name="bloco" value="{{ b.chave }}">
+                  <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                  <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                  {% if feita %}<input type="hidden" name="desmarcar" value="1">{% endif %}
+                  <button class="circulo" type="submit"
+                          title="{{ 'Desmarcar' if feita else 'Marcar como feita (o número é opcional)' }}"
+                          aria-label="{{ 'Desmarcar' if feita else 'Marcar como feita' }}: {{ f.titulo }}"
+                          aria-pressed="{{ 'true' if feita else 'false' }}">✓</button>
+                </form>
+              {% elif not t.futuro %}
                 <form class="marca-faixa" method="post" action="/hoje/faixa{% if cor %}?cor={{ cor }}{% endif %}">
                   <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                   <input type="hidden" name="bloco" value="{{ b.chave }}">

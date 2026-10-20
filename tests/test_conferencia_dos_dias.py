@@ -208,11 +208,23 @@ def test_dia_fora_do_json_e_proposto_para_exportar(banco_temporario, plano):
 def test_a_faixa_com_zero_da_tela_e_recusada(banco_temporario, plano):
     """A regra decidida na 1D: faixa de questoes sem questao nao e feita."""
     bonus = getattr(cronograma.montar_dia(plano, SEG, 1), "pos22")[1]
-    for questoes in (0, "0", ""):
+    for questoes in (0, "0"):
         with pytest.raises(diario.RegistroInvalido, match="desmarque a faixa"):
             diario.anotar_faixa(SEG, "pos22", 1, bonus.titulo, questoes=questoes,
                                 acertos="", plano=plano, hoje=HOJE)
     assert diario.estado_do_dia(SEG) is None
+
+
+def test_a_feita_sem_numero_pelo_circulo_nao_e_a_do_zero(banco_temporario, plano):
+    """O vazio e "fiz e nao contei" (decisao 179): a faixa conta, nenhuma
+    questao e inventada, e a conferencia nao propoe desmarcar."""
+    bonus = getattr(cronograma.montar_dia(plano, SEG, 1), "pos22")[1]
+    assert diario.anotar_faixa(SEG, "pos22", 1, bonus.titulo, questoes="",
+                               acertos="", plano=plano, hoje=HOJE)
+
+    dia = _dia(_conferir(plano))
+
+    assert conferencia.ZERO not in [a.tipo for a in dia.achados]
 
 
 # --- nada muda sem --aplicar ---------------------------------------------------

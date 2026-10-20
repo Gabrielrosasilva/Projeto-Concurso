@@ -165,5 +165,5 @@ def test_a_tela_avisa_e_o_fiz_nao_vem_com_o_numero_do_plano(banco_temporario, mo
 
     assert ("Você treinou <b>2 de IA</b> nesta faixa (1 de 2): já contam no "
             "Treino de IA." in depois)
-    assert "se fez só no radar, deixe vazio e marque ✓" in depois
+    assert "se fez só no radar, é só clicar no círculo" in depois
     assert _o_campo_fiz(depois, bloco, indice, faixa.titulo) == ""

@@ -2478,3 +2478,15 @@ com traco logo abaixo (sem a regua, o tachado e o "o" do ordinal) e a fonte
 em negrito, liga o trecho ao enunciado, a alternativa ou ao texto de apoio
 pelo texto em volta e grava a marca a parte, sem mudar o texto (decisao 178).
 Toda tela que mostra a questao desenha o sublinhado e o negrito.
+
+## O circulo em toda faixa (20/10)
+
+O 19/10 foi todo feito e a tela sugeria "Minima": as faixas de questao nao
+tinham circulo, so o "fiz X, acertei Y", e as feitas no radar esperavam um
+clique que ninguem sabia que faltava. Agora toda faixa tem o circulo (a de
+questoes, sem numero, conta como feita e nao inventa questao), a feita dobra
+numa linha com o resultado, e a faixa que o radar cobriu fecha sozinha ao
+responder a ultima questao (decisao 179). Junto veio a analise da aba Hoje:
+a faixa de 10 minutos ocupava uma tela, a mesma explicacao se repetia em 9
+faixas, e o celular mostrava a lateral antes do plano - as melhorias estao
+propostas, uma etapa por vez.

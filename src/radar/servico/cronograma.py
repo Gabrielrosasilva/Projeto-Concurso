@@ -342,8 +342,11 @@ def anotar_faixa(
     entram em acerto nenhum. Foi o que aconteceu de verdade - eu fiz, e nao
     anotei quantas acertei.
 
-    `questoes` vazio so vale na faixa que eu fiz no radar (decisao 138): o
-    check fica com 0 questoes e o tempo, e marcado `no_radar`.
+    `questoes` vazio marca a faixa feita sem numero (decisao 179): com
+    resposta no radar, o check e o `no_radar` (decisao 138) - as questoes sao
+    as da rodada; sem, e o `sem_numero` - a faixa conta na meta e no tempo, e
+    nenhuma questao e inventada. O 0 DIGITADO continua recusado: e "nao fiz
+    nenhuma", e faixa de questoes sem questao nao foi feita (1D).
     """
     hoje = hoje or hoje_local()
     plano = plano or plano_de_estudo.carregar()
@@ -372,14 +375,20 @@ def anotar_faixa(
         from radar.servico import metricas
 
         no_radar = metricas.no_radar_por_faixa(data).get((bloco, indice, titulo))
-        if not (no_radar and no_radar.questoes):
+        if no_radar and no_radar.questoes:
+            check = _check_da_faixa(bloco, indice, faixa, 0, None, consulta, conteudo)
+            check["no_radar"] = True
+            return _gravar_check(data, bloco, indice, titulo, check)
+        if feitas == 0:
             raise RegistroInvalido(
                 "Faixa de questões com 0 questões não conta como feita: "
-                "se não fez nenhuma, desmarque a faixa. Se treinou no radar, "
-                "abra o treino pelo botão desta faixa: aí o ✓ vazio vale."
+                "se não fez nenhuma, desmarque a faixa. Se fez e não contou, "
+                "deixe o número vazio (ou clique no círculo)."
             )
+        # O circulo (decisao 179): fiz, e nao contei. A faixa conta na meta e
+        # no tempo; as questoes, nenhuma - o numero do plano seria inventado.
         check = _check_da_faixa(bloco, indice, faixa, 0, None, consulta, conteudo)
-        check["no_radar"] = True
+        check["sem_numero"] = True
         return _gravar_check(data, bloco, indice, titulo, check)
 
     return _gravar_check(data, bloco, indice, titulo,
@@ -401,6 +410,48 @@ def desmarcar_faixa(
     plano = plano or plano_de_estudo.carregar()
     _faixa_para_marcar(data, bloco, indice, titulo, plano, hoje)
     return _gravar_check(data, bloco, indice, titulo, None)
+
+
+def fechar_pelo_radar(data: date, bloco: str, indice: int, titulo: str, *,
+                      plano: plano_de_estudo.Plano | None = None,
+                      hoje: date | None = None) -> bool:
+    """Fecha a faixa de questoes que o radar ja cobriu (decisao 179).
+
+    Quando as respostas no radar abertas pela faixa (as reais e as de IA, a
+    mesma conta do check vazio) chegam ao numero que ela pede, a faixa fica
+    feita sozinha - o check e o `no_radar`, com `automatica`. Faixa ja feita
+    (por mim, com numero ou sem) nao e tocada; faixa sem numero de questoes,
+    dia futuro ou faixa que mudou no plano ficam como estao. Devolve se fechou.
+    """
+    from radar.servico import metricas
+
+    hoje = hoje or hoje_local()
+    plano = plano or plano_de_estudo.carregar()
+    try:
+        faixa = _faixa_para_marcar(data, bloco, indice, titulo, plano, hoje)
+    except RegistroInvalido:
+        return False
+    if not plano_de_estudo.tem_acerto(faixa) or not faixa.questoes:
+        return False
+    estado = estado_do_dia(data)
+    if any(c.get("bloco") == bloco and c.get("indice") == indice
+           and c.get("titulo") == titulo for c in (estado.faixas_feitas if estado else []) or []):
+        return False
+    no_radar = metricas.no_radar_por_faixa(data).get((bloco, indice, titulo))
+    if not no_radar or no_radar.questoes < faixa.questoes:
+        return False
+    check = _check_da_faixa(bloco, indice, faixa, 0, None)
+    check["no_radar"] = True
+    check["automatica"] = True
+    return _gravar_check(data, bloco, indice, titulo, check)
+
+
+def fechar_pelo_radar_no_dia(data: date, *, plano=None, hoje: date | None = None) -> int:
+    """Todas as faixas do dia que o radar ja cobriu. Devolve quantas fechou."""
+    from radar.servico import metricas
+
+    return sum(fechar_pelo_radar(data, bloco, indice, titulo, plano=plano, hoje=hoje)
+               for bloco, indice, titulo in metricas.no_radar_por_faixa(data))
 
 
 def _inteiro_do_check(valor, campo: str) -> int | None:
@@ -470,6 +521,12 @@ class FaixaFeita:
     #: Feita no radar, com o "fiz" vazio (decisao 138): as questoes contam
     #: pelas respostas, e a faixa guarda so o tempo.
     no_radar: bool = False
+    #: Feita sem numero, pelo circulo (decisao 179): conta na meta e no
+    #: tempo, e questao nenhuma.
+    sem_numero: bool = False
+    #: Fechada sozinha, quando as respostas no radar chegaram ao numero da
+    #: faixa (decisao 179).
+    automatica: bool = False
 
     @property
     def porcentagem(self) -> int | None:
@@ -516,6 +573,8 @@ def valores_das_faixas(dia, estado: EstadoDoDia | None) -> dict:
             do_plano=antigo,
             tipo=faixa.tipo,
             no_radar=bool(check.get("no_radar")),
+            sem_numero=bool(check.get("sem_numero")),
+            automatica=bool(check.get("automatica")),
         )
     return valores
 

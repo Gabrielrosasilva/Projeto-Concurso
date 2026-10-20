@@ -446,6 +446,12 @@ O `radar/destaques.py` le a posicao das letras e os tracos do caderno pelo
 texto em volta e grava na coluna `questoes.destaques` (banco na versao 10),
 sem mudar o texto nem a chave; `radar questoes --destaques` preenche o
 acervo, e cada caderno lido depois ja vem com as marcas.
+**O circulo em toda faixa (20/10, decisao 179, a seu pedido):** a faixa de
+questoes ganhou o circulo - sem numero, conta na meta e no tempo
+(`sem_numero`), e o 0 digitado continua recusado -, a feita dobra numa linha
+com o resultado, e a faixa que o radar cobriu fecha sozinha
+(`cronograma.fechar_pelo_radar`, depois de cada resposta). O 19/10 ficou Ideal,
+9 de 9. As outras melhorias da aba Hoje estao propostas na pendencia O.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

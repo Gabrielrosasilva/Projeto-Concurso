@@ -8,8 +8,9 @@ testes seguram o conserto:
 
   * a tela e o `radar hoje` mostram as reais, o treino de IA e o total em
     linhas proprias;
-  * a faixa feita so no radar fecha com o "fiz" vazio, e guarda so o tempo -
-    sem rodada da faixa, o vazio continua recusado (regra da 1D);
+  * a faixa feita so no radar fecha com o "fiz" vazio, e guarda so o tempo;
+    sem rodada da faixa, o vazio vira "feita sem numero" (decisao 179), e o
+    0 digitado continua recusado (regra da 1D);
   * a conferencia nao chama essa faixa de "feita com 0 questoes";
   * o treino de IA de um tema conta as respostas as geradas dos nos dele.
 
@@ -77,15 +78,18 @@ def test_a_faixa_feita_no_radar_fecha_com_o_fiz_vazio(banco_temporario, plano):
     assert feita.minutos and conta.minutos == feita.minutos
 
 
-def test_sem_rodada_da_faixa_o_fiz_vazio_continua_recusado(banco_temporario, plano):
+def test_sem_rodada_da_faixa_o_vazio_e_feita_sem_numero_e_o_zero_e_recusado(
+        banco_temporario, plano):
     bloco, indice, faixa = _primeira_faixa_de_questoes(plano)
-    # Treino da faixa de outro dia nao conta para esta.
-    with pytest.raises(diario.RegistroInvalido, match="botão desta faixa"):
-        diario.anotar_faixa(SEG, bloco, indice, faixa.titulo, questoes="",
-                            plano=plano, hoje=DEPOIS)
+    # O 0 digitado e "nao fiz nenhuma": continua recusado (1D).
     with pytest.raises(diario.RegistroInvalido, match="0 questões"):
         diario.anotar_faixa(SEG, bloco, indice, faixa.titulo, questoes="0",
                             plano=plano, hoje=DEPOIS)
+    # O vazio, sem nada no radar, e o circulo: fiz e nao contei (decisao 179).
+    assert diario.anotar_faixa(SEG, bloco, indice, faixa.titulo, questoes="",
+                               plano=plano, hoje=DEPOIS)
+    feita = diario.valores_das_faixas(plano.dia(SEG), diario.estado_do_dia(SEG))[(bloco, indice)]
+    assert (feita.questoes, feita.sem_numero, feita.no_radar) == (0, True, False)
 
 
 def test_a_conferencia_nao_chama_a_feita_no_radar_de_zero(banco_temporario, plano):
@@ -111,7 +115,7 @@ def test_a_tela_separa_as_reais_do_treino_de_ia(banco_temporario, plano, monkeyp
     assert ("Treino de IA no radar: 5 questões = 4 acertos + 1 erro (80%), "
             "não entra no acerto.") in texto
     assert "Total do dia: 5 questões" in texto
-    assert '<span class="resultado">feita no radar</span>' in texto
+    assert '<span class="resultado">feita no radar · 5 questões</span>' in texto
     assert "Fiz hoje" not in texto
 
 

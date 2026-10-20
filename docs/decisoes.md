@@ -6439,3 +6439,39 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      (classificacao, explicacao, geradas) ainda leva o texto sem a marca, e 2
      alternativas do Cebraspe tem um trecho sublinhado que parece regua
      (pendencia O).
+
+## O circulo em toda faixa (20/10/2026)
+
+179. **toda faixa tem o circulo; a de questoes, sem numero, conta como feita;
+     a feita dobra numa linha; e a que o radar cobriu fecha sozinha** (pedido
+     de 19 e 20/10; muda a 1D e a 138 so no caso do "fiz" vazio; nao mexe em
+     acerto). O 19/10 foi todo feito, a maior parte no radar pelos botoes das
+     faixas, e a sugestao dizia "Minima (4 de 9 faixas)": as faixas de
+     questao nao tinham circulo, so o "fiz X, acertei Y", e o check vazio so
+     valia com resposta no radar e com o clique. As regras:
+     - **o circulo** esta em toda faixa que nao e pausa, em dia de hoje ou
+       passado. Na de questoes, ele manda o "fiz" vazio; o "fiz X, acertei
+       Y" continua la dentro para o numero, e o circulo verde desmarca (o
+       botao "desmarcar" saiu);
+     - **o "fiz" vazio**: com resposta no radar pela faixa, e o `no_radar` de
+       sempre (decisao 138); sem, e o `sem_numero` - a faixa conta na meta e
+       no tempo, e nenhuma questao (o numero do plano seria inventado). O 0
+       DIGITADO continua recusado: e "nao fiz nenhuma" (1D). A conferencia
+       dos dias nao chama a `sem_numero` de "feita com 0 questoes";
+     - **a feita dobra**: o tipo, o titulo e o resultado ("9 de 14 · 64%",
+       "feita no radar · 8 questoes", "feita · sem numero") sao a linha de
+       um `<details>` que nasce fechado na feita e aberto na que falta;
+       clicar na linha abre de novo. Sem JavaScript; a dobra da faixa nao e
+       lembrada (a do bloco continua, pelo `dobra.js`);
+     - **o radar fecha a faixa** (`cronograma.fechar_pelo_radar`, chamado
+       depois de gravar cada resposta, fora da sessao dela): quando as
+       respostas no radar abertas pela faixa - as reais e as de IA, a mesma
+       conta do check vazio - chegam ao numero que a faixa pede, ela fica
+       feita sozinha (`no_radar` com `automatica`). Faixa ja marcada por mim
+       nao e tocada; um defeito ali vai para o log e nao custa a resposta.
+     O 19/10: o radar fechou as 4 faixas que cobriu inteiras (Fixacao de
+     Penal 8 de 8, R+7 de Penal 7, R+7 de Crase 3, Pronomes da noite 10), e a
+     Fixacao de Pronomes da manha (1 no radar, o resto no Qconcursos) foi
+     marcada como o circulo marcaria, porque voce disse que fez o dia
+     inteiro: a sugestao passou a "Ideal (9 de 9)", a mesma meta que voce
+     marcou, e o tempo do dia de 2h10 para 3h40.
