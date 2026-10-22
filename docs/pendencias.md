@@ -884,8 +884,13 @@ O que falta vai nesta ordem, uma etapa por conversa.
   tema, os mais atrasados primeiro);
 - ⚪ **Depende de voce: as outras melhorias da aba Hoje** (proposta de 20/10,
   por ordem de impacto), uma etapa por vez quando quiser: no celular, o plano antes da lateral (hoje
-  a lateral empurra as faixas uns 1.800 px para baixo); e o fechamento do dia
-  (acerto por materia, onde mais errei, o que vem amanha);
+  a lateral empurra as faixas uns 1.800 px para baixo);
+- ✅ **O fechamento do dia, partes 4 e 5** (decisao 189, 22/10): onde mais
+  errei (com os motivos e o "Refazer os erros do dia") e o que vem amanha;
+- ⚪ **O resto do fechamento** (proposta de 22/10, aprovada): o cabecalho "🌙
+  Fechamento do dia", os quatro numeros grandes, a barra por materia, a meta
+  numa linha com o "Fechar o dia" e o estudo extra num link; e o cartao
+  subindo para o topo quando o dia acaba;
 - ✅ **A fila de revisao parada** (decisao 188, 22/10): o R+7 e o R+30
   revisam o que o dia de origem tocou, e os prazos contam do dia do estudo;
   a fila foi de 54 para 39;

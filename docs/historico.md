@@ -2538,3 +2538,12 @@ revisao, e nao do estudo: o R+7 feito no 7o dia marcava um prazo para o 14o,
 que o plano nao tem. Agora o R+7 e o R+30 revisam o que o dia de origem tocou
 na materia, e os prazos contam do dia do estudo (decisao 188): a fila foi de
 54 para 39. O que sobra e erro por acertar e R+7 que nunca foi marcado.
+
+## O fechamento do dia (22/10)
+
+O "Como foi o dia" so dizia o total. Com a proposta aprovada, as duas partes
+que mudam o estudo vieram primeiro: onde mais errei - os 3 temas do dia, os
+motivos e um botao que refaz no radar os erros daquele dia que continuam
+errados - e o que vem amanha, com o aviso quando o tema que eu mais errei
+volta no dia seguinte (em 19/10: Pronomes, e no dia 20 o Pronomes 2). O resto
+da proposta e visual e fica para depois (decisao 189).

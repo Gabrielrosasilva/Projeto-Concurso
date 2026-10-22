@@ -180,6 +180,9 @@ from radar.servico import complementar  # noqa: F401 - usado pela CLI
 # A Etapa 6B: a ficha de estudo de cada tema do cronograma, e a prioridade.
 # `servico.fichas.ficha("art-5o-caput-e-incisos-i-a-xvi")`.
 from radar.servico import fichas        # noqa: F401 - usado pela web e CLI
+# O fechamento do dia da tela Hoje (decisao 189): onde mais errei e amanha.
+# `servico.fechamento.do_dia(...)`.
+from radar.servico import fechamento    # noqa: F401 - usado pela web
 from radar.servico.avisos import (      # noqa: F401 - a fachada
     JANELA_DE_NOVIDADE_EM_DIAS,
     LIMITE_DE_AVISOS,

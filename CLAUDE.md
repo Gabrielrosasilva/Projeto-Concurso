@@ -497,6 +497,11 @@ plano revisam os nos que o dia de origem tocou na materia (o estudado, o
 anotado com no e o respondido no radar), e nao so a materia; e os prazos do
 1-7-30 contam do dia do estudo (D+1, D+7, D+30), como o plano. A fila foi de
 54 para 39; o resto e erro por acertar e R+7 nunca marcado (pendencia O).
+**O fechamento do dia (22/10, decisao 189, a seu pedido):** o "Como foi o dia"
+diz onde mais errei - os 3 temas, o radar pelo no e o anotado pela faixa,
+nunca somados, com os motivos por origem e o "Refazer os erros do dia" - e o
+que vem amanha, com o aviso quando o tema errado volta
+(`servico/fechamento.py`). O resto da proposta (o visual) esta na pendencia O.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

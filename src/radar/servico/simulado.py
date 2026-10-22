@@ -44,6 +44,7 @@ from radar.servico.metricas import (     # noqa: F401 - reexportados
     placar,
     resumo_do_simulado,
 )
+from radar.servico.metricas import janela_do_dia
 from radar.servico.metricas import ultimas_respostas_reais as _ultimas_respostas_reais
 
 log = logging.getLogger(__name__)
@@ -704,17 +705,29 @@ def revisao(simulado_id: int) -> list[ItemDeRevisao]:
 
 # --- os meus erros, e a minha evolucao (home, 25/09/2026) -------------------
 #
-def questoes_erradas() -> list[int]:
+def questoes_erradas(do_dia: date | None = None) -> list[int]:
     """As questoes reais que eu errei na ULTIMA vez que respondi.
 
     A ultima vez, e nao "alguma vez": questao que eu errei e depois acertei
     ja foi revisada. E anulada fica de fora - a banca desfez a pergunta, e
     revisar uma questao sem resposta certa nao ensina nada.
+
+    `do_dia` fica so com as que eu errei naquele dia (o "Refazer os erros de
+    hoje" do fechamento, decisao 189) - e que continuam erradas.
     """
     criar_tabelas()
     with sessao() as s:
         ultimas = _ultimas_respostas_reais(s)
         erradas = [qid for qid, r in ultimas.items() if r.acertou is False]
+        if do_dia is not None and erradas:
+            comeco, termino = janela_do_dia(do_dia)
+            do_dia_ids = set(s.scalars(
+                select(RespostaDeSimulado.questao_id)
+                .where(RespostaDeSimulado.gerada.is_(False))
+                .where(RespostaDeSimulado.acertou.is_(False))
+                .where(RespostaDeSimulado.respondida_em >= comeco)
+                .where(RespostaDeSimulado.respondida_em < termino)))
+            erradas = [qid for qid in erradas if qid in do_dia_ids]
         if not erradas:
             return []
         validas = set(s.scalars(
@@ -725,18 +738,24 @@ def questoes_erradas() -> list[int]:
     return [qid for qid in erradas if qid in validas]
 
 
-def criar_simulado_de_erros(quantidade: int = QUANTIDADE_PADRAO) -> Simulado | None:
-    """Uma rodada so com o que eu errei. None quando nao ha erro para revisar."""
+def criar_simulado_de_erros(quantidade: int | None = QUANTIDADE_PADRAO,
+                            do_dia: date | None = None) -> Simulado | None:
+    """Uma rodada so com o que eu errei. None quando nao ha erro para revisar.
+
+    `do_dia`: so os erros daquele dia; `quantidade` None traz todos."""
     import random
 
-    ids = questoes_erradas()
+    ids = questoes_erradas(do_dia=do_dia)
     if not ids:
         return None
     random.shuffle(ids)
     ids = ids[:quantidade]
 
+    filtros = {"quantidade": len(ids), "erros": True}
+    if do_dia is not None:
+        filtros["do_dia"] = do_dia.isoformat()
     with sessao() as s:
-        simulado = Simulado(filtros={"quantidade": len(ids), "erros": True})
+        simulado = Simulado(filtros=filtros)
         s.add(simulado)
         s.flush()
         for ordem, questao_id in enumerate(ids, start=1):

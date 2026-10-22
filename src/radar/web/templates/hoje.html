@@ -391,6 +391,20 @@
     .progresso-do-dia.completo{border-color:var(--cor-verde)}
     .etiqueta-completo{padding:.05rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-forte);
       background:var(--cor-verde-fundo);color:var(--cor-verde);white-space:nowrap}
+    /* O fechamento do dia (decisao 189): onde mais errei e amanha. */
+    .fecha-sub{margin:var(--esp-4) 0 var(--esp-2);font-size:var(--tam-xs);letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-suave)}
+    .errei{margin:0 0 var(--esp-2);padding-left:1.2rem;font-size:var(--tam-sm)}
+    .errei li{margin-bottom:var(--esp-1)}
+    .errei-n{color:var(--cor-vermelho);font-weight:var(--peso-forte)}
+    .motivos-linha{margin:0 0 var(--esp-2);display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-1) var(--esp-2);font-size:var(--tam-xs)}
+    .motivos-linha .motivo-sem{opacity:.75}
+    .refazer-erros{margin:var(--esp-2) 0 0}
+    .fecha-amanha{margin:var(--esp-4) 0;padding:var(--esp-3) var(--esp-4);border:1px solid var(--cor-borda);
+      border-left:4px solid var(--cor-acao);border-radius:var(--raio);font-size:var(--tam-sm)}
+    .fecha-amanha .amanha-topo{margin:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--esp-1) var(--esp-3)}
+    .fecha-amanha .amanha-topo b{font-size:var(--tam-md)}
+    .fecha-amanha ul{margin:var(--esp-2) 0;padding-left:1.2rem}
+    .fecha-amanha li{margin-bottom:var(--esp-1)}
     /* O cartao "Revisar hoje" (decisao 187). */
     .revisar-hoje{margin:0 0 var(--esp-3);padding:var(--esp-3) var(--esp-4)}
     .revisar-titulo{margin:0 0 var(--esp-2);font-size:var(--tam-md)}
@@ -1843,6 +1857,50 @@
             <span aria-hidden="true">📓</span> anotar os erros</a>
         </p>
       {% endif %}
+    {% endif %}
+
+    {# O fechamento do dia (decisao 189): onde mais errei e o que vem amanha.
+       A conta e do `servico.fechamento`, que so agrupa o que o metricas ja
+       contou; o radar e o anotado ficam em linhas proprias, nunca somados, e
+       os motivos por origem (decisao 174). #}
+    {% set fc = fechamento %}
+    {% if fc and (fc.errei or fc.motivos) %}
+      <div class="fecha-errei">
+        <h3 class="fecha-sub">Onde mais errei</h3>
+        {% if fc.errei %}
+          <ol class="errei">
+            {% for e in fc.errei %}
+              <li>{{ e.nome }} <span class="errei-n">{{ e.erros }} {{ 'erro' if e.erros == 1 else 'erros' }}</span>
+                <span class="ds-suave">· {{ 'no radar' if e.origem == 'radar' else 'anotado' }}</span></li>
+            {% endfor %}
+          </ol>
+        {% endif %}
+        {% for m in fc.motivos %}
+          <p class="motivos-linha"><span class="ds-suave">{{ m.origem }}:</span>
+            {% for rotulo, n in m.motivos %}<span class="chip">{{ rotulo }} {{ n }}</span> {% endfor %}
+            {%- if m.sem_motivo %}<span class="chip motivo-sem">sem motivo {{ m.sem_motivo }}</span>{% endif %}</p>
+        {% endfor %}
+        {% if fc.para_refazer %}
+          <form method="post" action="/hoje/refazer-erros" class="refazer-erros">
+            <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+            <button class="ds-botao ds-botao--pequeno" type="submit">↻ Refazer {{ 'o erro' if fc.para_refazer == 1 else 'os ' ~ fc.para_refazer ~ ' erros' }} {{ 'de hoje' if t.e_hoje else 'do dia' }} no radar</button>
+          </form>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if fc and fc.amanha %}
+      {% set a = fc.amanha %}
+      <div class="fecha-amanha">
+        <p class="amanha-topo"><b>{{ a.titulo }}</b>
+          <span class="ds-suave">{{ a.questoes }} questões{% if a.inicio %} · começa {{ hm(a.inicio) }}{% endif %}</span></p>
+        <ul>
+          {% if a.novos %}<li>📘 {{ 'Tema novo' if a.novos|length == 1 else 'Temas novos' }}: {% for n in a.novos %}<b>{{ n }}</b>{{ ' · ' if not loop.last }}{% endfor %}</li>{% endif %}
+          {% if a.revisoes %}<li>🔁 {{ a.revisoes|length }} {{ 'revisão' if a.revisoes|length == 1 else 'revisões' }}: {{ a.revisoes|join(' · ') }}</li>{% endif %}
+          {% if a.medem %}<li>📝 {{ a.medem|join(' · ') }}</li>{% endif %}
+          {% if a.continua %}<li class="amanha-aviso">⚠️ <b>{{ a.continua[0] }}</b> foi onde você mais errou {{ 'hoje' if t.e_hoje else 'neste dia' }}; {{ 'amanhã' if a.titulo.startswith('Amanhã') else 'no próximo dia' }} tem <b>{{ a.continua[1] }}</b>, do mesmo assunto.</li>{% endif %}
+        </ul>
+        <a class="ds-link-acao" href="/hoje?data={{ a.data.isoformat() }}">ver o dia &rarr;</a>
+      </div>
     {% endif %}
 
     {% if erro %}<p class="erro" role="alert">{{ erro }}</p>{% endif %}

@@ -6736,3 +6736,26 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      e em 26/10, e os R+7 que nunca foram marcados no radar (21 faixas de
      revisao de 05/10 a 21/10, sem circulo nem "fiz"). O radar nao sabe se
      eles foram feitos: marcado o circulo do dia, a fila anda na hora.
+189. **o fechamento do dia diz onde mais errei e o que vem amanha** (pedido de
+     22/10, as partes 4 e 5 da proposta do fechamento; as outras sao visuais e
+     ficam para depois). O cartao "Como foi o dia" so tinha o total.
+     - **onde mais errei** (`servico/fechamento.py`): os 3 temas com mais erros
+       de questao real no dia. O radar conta pelo no da questao (sem
+       classificacao, pela materia "sem tema"); o anotado, pelo `conteudo` ou
+       pelo tema da faixa. As duas origens ficam em linhas proprias, e o
+       mesmo tema nos dois aparece duas vezes - nunca somado. O treino de IA
+       fica de fora. Embaixo, os motivos por origem, do
+       `metricas.motivos_dos_erros` (decisao 174), com o "sem motivo";
+     - **refazer os erros do dia** (`POST /hoje/refazer-erros`): as questoes
+       reais que eu errei NAQUELE dia, no radar, e que continuam erradas
+       (`simulado.questoes_erradas(do_dia=...)`), todas, numa rodada com
+       `erros` (conta como revisao, decisao 79) e `do_dia`;
+     - **amanha**: o proximo dia do plano (depois do sabado, "Proximo dia"),
+       com o numero de questoes, a hora do comeco, os temas novos, as
+       revisoes e o simulado, e o aviso quando o tema em que eu mais errei e
+       do mesmo assunto de uma faixa de amanha - pelo mesmo `onde_na_arvore`
+       que a faixa mostra; e so um aviso, nao conta nada.
+     Aparece hoje e nos dias passados, antes da meta. Nada muda em acerto,
+     volume ou meta. No dado de 19/10: Pronomes 5 erros no radar, Coacao e
+     excludentes 5 anotados, Crase 2; 12 para refazer; e o aviso de que o
+     Pronomes 2 de 20/10 e do mesmo assunto.

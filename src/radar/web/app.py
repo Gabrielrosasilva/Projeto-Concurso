@@ -1432,6 +1432,9 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # dia de hoje - a fila e de hoje, e montar custa meio segundo.
             "revisar_hoje": (servico.estudo.revisar_hoje(plano=tela.plano, hoje=tela.data)
                              if tela.e_hoje and tela.plano else None),
+            # O fechamento do dia (decisao 189): onde mais errei e amanha.
+            "fechamento": (servico.fechamento.do_dia(tela.data, tela.plano)
+                           if tela.blocos and tela.plano and not tela.futuro else None),
         },
     )
 
@@ -1792,6 +1795,20 @@ def revisao_de_hoje():
     novo = servico.espacada.criar_simulado_de_revisao()
     if novo is None:
         return RedirectResponse("/", status_code=303)
+    return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
+
+
+@app.post("/hoje/refazer-erros")
+def refazer_os_erros_do_dia(data: str = Form(...)):
+    """[Refazer os erros de hoje] do fechamento (decisao 189): as questoes
+    reais que eu errei no dia, no radar, e que continuam erradas."""
+    try:
+        quando = date.fromisoformat(data)
+    except ValueError:
+        return RedirectResponse("/hoje", status_code=303)
+    novo = servico.criar_simulado_de_erros(quantidade=None, do_dia=quando)
+    if novo is None:
+        return RedirectResponse(f"/hoje?data={quando.isoformat()}#como-foi", status_code=303)
     return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
 
 
