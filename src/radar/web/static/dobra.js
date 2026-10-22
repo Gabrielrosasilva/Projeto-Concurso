@@ -22,6 +22,11 @@
    que e onde a tela volta depois de eu anotar uma faixa), o bloco daquela
    faixa e ABERTO e nao e recolhido - recolher justo o que eu acabei de anotar
    seria esconder a resposta do meu proprio clique.
+
+   E outra (decisao 181): o bloco COMPLETO (`data-completo`, todas as faixas
+   que contam feitas) nasce fechado pelo servidor, e aqui nada o reabre - nem
+   a lembranca, nem a ancora. Abrir ou fechar um bloco completo tambem nao e
+   guardado: e de hoje, e nao uma preferencia minha para amanha.
    ========================================================================== */
 (function () {
   "use strict";
@@ -72,8 +77,11 @@
 
   Array.prototype.forEach.call(blocos, function (bloco) {
     var nome = bloco.getAttribute("data-bloco");
+    var completo = bloco.hasAttribute("data-completo");
 
-    if (nome === daAncora) {
+    if (completo) {
+      // Fica como o servidor mandou: fechado.
+    } else if (nome === daAncora) {
       // A faixa que eu acabei de anotar esta aqui dentro: deixa aberto e
       // guarda isso, para a proxima abertura concordar com o que eu vejo.
       bloco.open = true;
@@ -84,6 +92,9 @@
     }
 
     bloco.addEventListener("toggle", function () {
+      if (completo) {
+        return;
+      }
       var agora = lido();
       agora[nome] = bloco.open;
       gravar(agora);

@@ -380,6 +380,23 @@
     .faixa .faixa-mais{margin-top:var(--esp-3);border-top:1px dashed var(--cor-borda);padding-top:var(--esp-2)}
     .faixa .faixa-mais > summary{font-size:var(--tam-sm)}
     .faixa .faixa-mais[open] > summary{margin-bottom:var(--esp-2)}
+    /* A barra do topo e a proxima faixa (decisao 181). */
+    .progresso-do-dia{margin:0 0 var(--esp-3);padding:var(--esp-3) var(--esp-4)}
+    .progresso-numeros{margin:0;font-size:var(--tam-sm)}
+    .progresso-numeros b{font-variant-numeric:tabular-nums}
+    .progresso-porcento{float:right;margin-left:var(--esp-3);font-weight:var(--peso-forte);font-variant-numeric:tabular-nums;color:var(--cor-verde)}
+    .progresso-do-dia progress{display:block;width:100%;height:.6rem;margin:var(--esp-2) 0 0;border:0;border-radius:var(--raio-pill);
+      background:var(--cor-superficie-2);overflow:hidden;appearance:none;-webkit-appearance:none}
+    .progresso-do-dia progress::-webkit-progress-bar{background:var(--cor-superficie-2);border-radius:var(--raio-pill)}
+    .progresso-do-dia progress::-webkit-progress-value{background:var(--cor-verde);border-radius:var(--raio-pill)}
+    .progresso-do-dia progress::-moz-progress-bar{background:var(--cor-verde);border-radius:var(--raio-pill)}
+    .proxima-faixa{margin:var(--esp-3) 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-2) var(--esp-3);font-size:var(--tam-md)}
+    .proxima-rotulo{font-size:var(--tam-xs);font-weight:var(--peso-forte);letter-spacing:.08em;text-transform:uppercase;color:var(--cor-acao)}
+    .proxima-hora{font-family:var(--fonte-numero);font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    .proxima-titulo{font-weight:var(--peso-forte);flex:1 1 16rem;min-width:0}
+    .progresso-do-dia.completo{border-color:var(--cor-verde)}
+    .etiqueta-completo{padding:.05rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-forte);
+      background:var(--cor-verde-fundo);color:var(--cor-verde);white-space:nowrap}
     /* A ajuda unica, antes dos blocos. */
     .ajuda-da-faixa{margin:0 0 var(--esp-3);font-size:var(--tam-sm)}
     .ajuda-da-faixa > summary{cursor:pointer;color:var(--cor-acao);font-weight:var(--peso-medio)}
@@ -898,6 +915,35 @@
     <p class="aviso-mede ds-pequeno ds-suave">🩺 Hoje mede ({{ t.faixas_que_medem | join(' · ') }}): sem Plano B. Se o dia apertar, faça só estas.</p>
   {% endif %}
 
+  {# ============================ o progresso e a proxima =============== #}
+  {# Decisao 181: quanto do dia ja foi, e o que fazer agora. Os numeros sao
+     do servico (`cronograma.progresso_do_dia`): a barra anda a cada circulo,
+     e a proxima e a primeira faixa que conta e ainda nao esta feita, na ordem
+     do dia - nao a do relogio: a que ficou para tras vem primeiro. #}
+  {% set p = t.progresso %}
+  {% if p and p.total and not t.futuro %}
+    <section class="ds-cartao progresso-do-dia{{ ' completo' if p.completo }}" aria-label="O progresso do dia">
+      <p class="progresso-numeros">
+        <b>{{ p.feitas }} de {{ p.total }}</b> {{ 'faixa' if p.total == 1 else 'faixas' }}
+        · <b>{{ p.questoes_feitas }}</b> de {{ p.questoes_do_plano }} questões
+        {%- if p.minutos_do_plano %} · <b>{{ duracao_legivel(p.minutos_feitos) }}</b> de {{ duracao_legivel(p.minutos_do_plano) }}{% endif %}
+        <span class="progresso-porcento">{{ p.porcentagem }}%</span>
+      </p>
+      <progress max="{{ p.total }}" value="{{ p.feitas }}" aria-label="Faixas feitas: {{ p.feitas }} de {{ p.total }}">{{ p.porcentagem }}%</progress>
+      {% if p.proxima %}
+        {% set pb_, pi_, pf_ = p.proxima %}
+        <p class="proxima-faixa">
+          <span class="proxima-rotulo">▶ Próxima</span>
+          {% if pf_.inicio %}<span class="proxima-hora">{{ hm(pf_.inicio) }}–{{ hm(pf_.fim) }}</span>{% endif %}
+          <span class="proxima-titulo"><span aria-hidden="true">{{ ICONE_DO_TIPO[pf_.tipo] }}</span> {{ pf_.titulo }}{% if pf_.questoes %} <span class="ds-suave">· {{ pf_.questoes }} questões</span>{% endif %}</span>
+          <a class="ds-botao ds-botao--pequeno" href="#faixa-{{ pb_ }}-{{ pi_ }}">Ir para a faixa ↓</a>
+        </p>
+      {% elif p.completo %}
+        <p class="proxima-faixa">✅ <b>Tudo feito{{ ' hoje' if t.e_hoje }}.</b> <a href="#como-foi">Marque como foi o dia ↓</a></p>
+      {% endif %}
+    </section>
+  {% endif %}
+
   {# ============================ os tres blocos ======================== #}
   {#
      Cada bloco DOBRA: um clique no SINAL do canto direito do cabecalho, em
@@ -935,13 +981,16 @@
   {% endif %}
   {% for b in t.blocos if b.faixas %}
     {% set tem_anki_desligado = b.faixas | selectattr('desligada') | list %}
-    {% set nasce_aberto = b.chave != 'pos22' %}
+    {# Completo (todas as faixas que contam feitas), o bloco nasce fechado
+       (decisao 181); o `dobra.js` nao o reabre. #}
+    {% set nasce_aberto = b.chave != 'pos22' and not b.completo %}
     <section class="ds-cartao bloco-dia bloco-{{ b.chave }}" aria-labelledby="bloco-{{ b.chave }}">
-      <details class="bloco-dobra" data-bloco="{{ b.chave }}"{{ ' open' if nasce_aberto }}>
+      <details class="bloco-dobra" data-bloco="{{ b.chave }}"{{ ' data-completo' if b.completo }}{{ ' open' if nasce_aberto }}>
       <summary class="ds-cartao__cabeca" title="Recolher ou expandir este bloco">
         <div class="nome-do-bloco">
           <h2 class="ds-cartao__titulo" id="bloco-{{ b.chave }}">{{ b.nome }}</h2>
           {% if b.chave == 'pos22' %}<span class="etiqueta-sobreaviso">🌙 sobreaviso · pode interromper</span>{% endif %}
+          {% if b.completo %}<span class="etiqueta-completo">✓ completo</span>{% endif %}
           {# So com o bloco fechado: aberto, a propria faixa ja diz isso. #}
           {% if tem_anki_desligado %}<span class="anki-dobrado">{{ FRASE_DO_ANKI_DESATIVADO }}</span>{% endif %}
         </div>
@@ -1219,7 +1268,7 @@
                 {# Treinar no radar, num clique (decisao 180): a FEPESE, as outras
                    bancas e a IA lado a lado, cada uma com quantas tem. O numero
                    e o sugerido; escolher outro, e o nivel da IA, fica no "mais". #}
-                {% set ia_no_estoque = (gf.nos | sum(attribute='geradas')) if gf and not gf.sem_no else 0 %}
+                {% set ia_no_estoque = geradas_no_estoque(gf) %}
                 {% if fp or ob or gf %}
                   <div class="treinar-rapido">
                     <span class="rotulo">Treinar no radar:</span>

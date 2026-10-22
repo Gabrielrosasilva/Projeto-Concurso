@@ -885,6 +885,15 @@ def _faixa_de_treino(faixa, plano) -> bool:
             and bool(faixa.materia) and not plano.e_mista(faixa.materia))
 
 
+def no_estoque(da_faixa) -> int:
+    """Quantas geradas ha nos nos da faixa (`fichas.GeradasDaFaixa`): o "IA ·
+    N" do botao rapido da faixa (decisao 180). A soma mora aqui - template
+    nenhum soma -, e a faixa sem no tem zero."""
+    if da_faixa is None or da_faixa.sem_no:
+        return 0
+    return sum(n.geradas for n in da_faixa.nos)
+
+
 def das_faixas(blocos, plano=None) -> dict:
     """{(bloco, indice): fichas.GeradasDaFaixa} das faixas de treino do dia:
     o tema, o no, quantas geradas ha nele e os passos para gerar o que falta."""

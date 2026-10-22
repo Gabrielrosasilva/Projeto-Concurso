@@ -2500,3 +2500,11 @@ o "fiz") e um "mais" fechado com o resto - a arvore, o caiu inteiro, a ficha
 e o resumo das de questao, o treino com nivel, os passos de pedir a IA, o
 anotar erro e o "como foi". As regras repetidas viraram um "ⓘ" so (decisao
 180). Nada saiu da tela: esta um clique abaixo.
+
+## A barra do dia e a proxima faixa (22/10)
+
+O topo da Hoje passou a dizer quanto do dia ja foi - "4 de 9 faixas · 29 de
+49 questoes · 1h45 de 3h40", com uma barra que anda a cada circulo - e qual e
+a proxima faixa por fazer, com o botao que leva ate ela. Tudo feito, o cartao
+fica verde e manda marcar como foi o dia; e o bloco com todas as faixas
+feitas nasce fechado, com "✓ completo" (decisao 181).

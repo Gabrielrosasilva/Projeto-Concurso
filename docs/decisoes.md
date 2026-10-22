@@ -6507,3 +6507,31 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      Nada saiu da tela: o que nao esta a vista esta um clique abaixo, com o
      mesmo texto e o mesmo formulario de antes. O "abrir os erros da semana"
      do sabado continua a vista: e a acao da faixa.
+
+## A barra do dia e a proxima faixa (22/10/2026)
+
+181. **o topo da tela Hoje diz quanto do dia ja foi e qual e a proxima
+     faixa, e o bloco completo nasce fechado** (pedido de 22/10; nao mexe em
+     conta nenhuma). As regras:
+     - **a barra** (`cronograma.progresso_do_dia`): "4 de 9 faixas · 29 de 49
+       questoes · 1h45 de 3h40" e a porcentagem das faixas. As faixas sao as
+       que contam - a regra virou `faixas_que_contam`, a mesma da sugestao da
+       meta, para "4 de 9" ser o mesmo numero nos dois lugares. As questoes
+       feitas sao o total do dia do `metricas` (o "Total do dia" de baixo); os
+       minutos feitos, so os das faixas marcadas, contra os de todas as
+       faixas que contam - o estudo extra fica fora, porque a barra mede o
+       plano. No Plano B, sem os minutos (o tempo dele e o que eu escolhi);
+       em dia futuro, sem a barra;
+     - **a proxima** e a primeira faixa que conta e nao esta feita, na ordem
+       do dia, e nao a do relogio: a que ficou para tras vem primeiro. Com o
+       horario, o titulo, as questoes e "Ir para a faixa"; tudo feito, "Tudo
+       feito - marque como foi o dia". O cartao "Agora" da lateral continua,
+       com o relogio;
+     - **o bloco completo** (todas as faixas que contam feitas) nasce fechado,
+       com "✓ completo" no cabecalho. O `dobra.js` nao o reabre (nem a
+       lembranca, nem a ancora) e nao guarda o abrir e fechar dele; e marcar a
+       ultima faixa do bloco volta para o cabecalho (`#bloco-...`,
+       `cronograma.bloco_completo`), e nao para a faixa, que o reabriria.
+     De quebra, a soma do "IA · N" do botao rapido da 180 saiu do template
+     para `servico.geradas.no_estoque`: o teste de que template nenhum soma
+     pegou.

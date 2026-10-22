@@ -457,6 +457,10 @@ linha (com o "caiu" curto, `CaiuNoAlvo.etiqueta`), o que fazer agora (com
 "Treinar no radar: FEPESE · Outras bancas · IA", um clique cada) e um "mais"
 fechado com o resto; as regras que se repetiam viraram um "ⓘ" so. Nada saiu
 da tela.
+**A barra do dia e a proxima faixa (22/10, decisao 181, a seu pedido):** o
+topo da Hoje tem "4 de 9 faixas · 29 de 49 questoes · 1h45 de 3h40" com a
+barra (`cronograma.progresso_do_dia`, a mesma regra de faixa da sugestao) e a
+proxima faixa por fazer, na ordem do dia; o bloco completo nasce fechado.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

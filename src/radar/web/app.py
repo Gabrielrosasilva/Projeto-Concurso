@@ -161,6 +161,8 @@ def com_destaques(texto, questao, campo: str) -> Markup:
 
 
 templates.env.filters["destacado"] = com_destaques
+# O "IA · N" do botao rapido da faixa (decisao 180): a soma e do servico.
+templates.env.globals["geradas_no_estoque"] = servico.geradas.no_estoque
 # Os minimos de resposta, para a tela dizer "2 de 20" com o mesmo numero que
 # faz a conta - e nao com um numero escrito no template. Os dois saem do
 # config/amostra.yml (Etapa 4): um lugar so para as telas e para as contas.
@@ -1493,8 +1495,17 @@ def hoje_faixa(
     # Bloco e posicao ja passaram pelo servico: o endereco so leva o que e valido.
     cor = request.query_params.get(PARAMETRO_DA_COR)
     destino = (f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
-               + f"#faixa-{bloco}-{posicao}")
+               + _ancora_da_faixa(quando, bloco, posicao))
     return RedirectResponse(destino, status_code=303)
+
+
+def _ancora_da_faixa(quando: date, bloco: str, posicao: int) -> str:
+    """Onde a tela volta depois de marcar: a propria faixa - ou, se ela
+    completou o bloco, o cabecalho dele, que agora nasce fechado (decisao
+    181). Voltar para a faixa abriria o bloco de novo."""
+    if servico.cronograma.bloco_completo(quando, bloco):
+        return f"#bloco-{bloco}"
+    return f"#faixa-{bloco}-{posicao}"
 
 
 @app.post("/hoje/faixa/questoes")
@@ -1537,7 +1548,7 @@ def hoje_faixa_questoes(
 
     cor = request.query_params.get(PARAMETRO_DA_COR)
     destino = (f"/hoje?data={quando.isoformat()}" + (f"&cor={cor}" if cor else "")
-               + f"#faixa-{bloco}-{posicao}")
+               + _ancora_da_faixa(quando, bloco, posicao))
     return RedirectResponse(destino, status_code=303)
 
 

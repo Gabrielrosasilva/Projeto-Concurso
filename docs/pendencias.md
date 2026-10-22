@@ -842,9 +842,10 @@ O que falta vai nesta ordem, uma etapa por conversa.
 - ✅ **A faixa enxuta** (decisao 180, 22/10): a linha, o que fazer agora
   (com "Treinar no radar: FEPESE · Outras bancas · IA") e o "mais"; as
   regras repetidas num "ⓘ" so;
+- ✅ **A barra do dia e a proxima faixa** (decisao 181, 22/10), com o bloco
+  completo nascendo fechado;
 - ⚪ **Depende de voce: as outras melhorias da aba Hoje** (proposta de 20/10,
-  por ordem de impacto), uma etapa por vez quando quiser: a barra de progresso do dia e a proxima faixa no topo, com o bloco
-  inteiro feito dobrando sozinho; no celular, o plano antes da lateral (hoje
+  por ordem de impacto), uma etapa por vez quando quiser: no celular, o plano antes da lateral (hoje
   a lateral empurra as faixas uns 1.800 px para baixo); um cartao "Revisar
   hoje" com os erros e as revisoes do dia; e o fechamento do dia (acerto por
   materia, onde mais errei, o que vem amanha);

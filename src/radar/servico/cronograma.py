@@ -589,6 +589,14 @@ class Sugestao:
     questoes: int               # soma das questoes das faixas marcadas
 
 
+def faixas_que_contam(dia, bloco: str) -> list[tuple[str, int]]:
+    """As posicoes do bloco que contam no dia: nem pausa, nem opcional (o
+    bonus), nem a desligada. A mesma regra para a sugestao da meta e para a
+    barra do topo - "4 de 9 faixas" nos dois lugares."""
+    return [(bloco, i) for i, f in enumerate(getattr(dia, bloco))
+            if f.tipo != "pausa" and not f.opcional and not f.desligada]
+
+
 def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
     """A regra, em ordem:
 
@@ -601,8 +609,7 @@ def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
     O numero e o do dia montado, ou seja, o do nivel efetivo.
     """
     def contam(bloco):
-        return [(bloco, i) for i, f in enumerate(getattr(dia, bloco))
-                if f.tipo != "pausa" and not f.opcional and not f.desligada]
+        return faixas_que_contam(dia, bloco)
 
     def faixa(posicao):
         bloco, indice = posicao
@@ -626,6 +633,75 @@ def sugerir_meta(dia, feitas: set[tuple[str, int]]) -> Sugestao:
     elif alguma_de_questoes:
         sugestao.meta = "minima"
     return sugestao
+
+
+# --- a barra do topo ---------------------------------------------------------
+
+@dataclass
+class Progresso:
+    """A barra do topo da tela Hoje (decisao 181): as faixas que contam,
+    feitas e do plano; as questoes e os minutos, feitos e do plano; e a
+    proxima faixa por fazer, na ordem do dia.
+
+    As questoes feitas sao o total do dia do `metricas` (o mesmo "Total do
+    dia" de baixo); os minutos feitos, so os das faixas marcadas - o estudo
+    extra fica de fora, porque a barra mede o plano.
+    """
+    feitas: int
+    total: int
+    questoes_feitas: int
+    questoes_do_plano: int
+    minutos_feitos: int
+    #: None no Plano B: o tempo dele e o que eu escolhi, e nao o do plano.
+    minutos_do_plano: int | None
+    #: (bloco, indice, faixa) da primeira faixa que conta e nao esta feita.
+    proxima: tuple | None = None
+
+    @property
+    def porcentagem(self) -> int:
+        return round(100 * self.feitas / self.total) if self.total else 0
+
+    @property
+    def completo(self) -> bool:
+        return bool(self.total) and self.feitas == self.total
+
+
+def progresso_do_dia(dia, feitas: set, conta, *, com_minutos: bool = True) -> Progresso:
+    """O progresso do dia montado, com os checks de `feitas` e a `conta` do
+    `metricas` (None: nada feito)."""
+    posicoes = [p for bloco in plano_de_estudo.TODOS_OS_BLOCOS
+                for p in faixas_que_contam(dia, bloco)]
+
+    def faixa(posicao):
+        return getattr(dia, posicao[0])[posicao[1]]
+
+    proxima = next(((b, i, faixa((b, i))) for b, i in posicoes if (b, i) not in feitas), None)
+    return Progresso(
+        feitas=sum(1 for p in posicoes if p in feitas),
+        total=len(posicoes),
+        questoes_feitas=conta.total.questoes if conta else 0,
+        questoes_do_plano=dia.total_questoes,
+        minutos_feitos=conta.faixas.minutos if conta else 0,
+        minutos_do_plano=(sum(faixa(p).duracao or 0 for p in posicoes)
+                          if com_minutos else None),
+        proxima=proxima,
+    )
+
+
+def bloco_completo(data: date, bloco: str, *, plano=None) -> bool:
+    """Todas as faixas que contam no bloco estao feitas? E o que faz a tela,
+    depois de marcar a ultima, voltar para o cabecalho do bloco - que nasce
+    fechado (decisao 181) - e nao para a faixa, que o reabriria."""
+    plano = plano or plano_de_estudo.carregar()
+    estado = estado_do_dia(data)
+    if estado is not None and estado.plano_b:
+        return False
+    dia, _nivel = _montado(plano, data, _metas(plano))
+    if dia is None or bloco not in plano_de_estudo.BLOCOS:
+        return False
+    feitas = faixas_feitas(dia, estado)
+    contam = faixas_que_contam(dia, bloco)
+    return bool(contam) and all(p in feitas for p in contam)
 
 
 # --- o Plano B ---------------------------------------------------------------
@@ -711,6 +787,8 @@ class BlocoNaTela:
     inicio: time | None = None
     fim: time | None = None
     questoes: int = 0
+    #: Todas as faixas que contam estao feitas: o bloco nasce fechado (decisao 181).
+    completo: bool = False
 
 
 @dataclass
@@ -763,6 +841,8 @@ class TelaDoDia:
     # + radar + treino de IA), da fonte unica.
     extras: list = field(default_factory=list)
     totais: object = None
+    # A barra do topo e a proxima faixa (decisao 181).
+    progresso: object = None
     # O Plano B ativo (30 ou 60 minutos), e as opcoes que o botao oferece.
     plano_b: int | None = None
     opcoes_do_plano_b: list[int] = field(default_factory=list)
@@ -1061,13 +1141,24 @@ def tela_do_dia(data: date | None = None, caminho=None) -> TelaDoDia:
         tela.sugestao.meta = "minima"
         tela.extras = estudo_extra.do_dia(data)
         tela.totais = _conta_do_dia(data, plano)
+        tela.progresso = progresso_do_dia(do_plano_b, tela.feitas, tela.totais,
+                                          com_minutos=False)
+        _marcar_os_completos(tela, do_plano_b)
         return tela
     tela.feitas = faixas_feitas(dia, estado)
     tela.valores = valores_das_faixas(dia, estado)
     tela.sugestao = sugerir_meta(dia, tela.feitas)
     tela.extras = estudo_extra.do_dia(data)
     tela.totais = _conta_do_dia(data, plano)
+    tela.progresso = progresso_do_dia(dia, tela.feitas, tela.totais)
+    _marcar_os_completos(tela, dia)
     return tela
+
+
+def _marcar_os_completos(tela, dia) -> None:
+    for bloco in tela.blocos:
+        contam = faixas_que_contam(dia, bloco.chave)
+        bloco.completo = bool(contam) and all(p in tela.feitas for p in contam)
 
 
 def _conta_do_dia(data: date, plano):
