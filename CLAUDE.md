@@ -472,6 +472,10 @@ Decreto 678/1992, UNICEF, CNJ); `ResumoEnxuto.sem_letra` e o
 repete numa tela e feita uma vez por abertura, e o arquivo de config so e
 interpretado de novo quando muda (`radar/cache.py`): a Hoje de ~6,8 s para
 ~3,4 s, o Estudar de ~7 s para ~1,7 s. Nada muda na tela.
+**O radar no PC e no celular juntos (22/10, decisao 184):** o `radar subir` e a
+tarefa do logon escutam na rede; o celular abre no Wi-Fi de casa, com o
+firewall liberando so a rede privada (os dois passos de administrador sao
+seus).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

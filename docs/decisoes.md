@@ -6608,3 +6608,21 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      outra, e sairam iguais byte a byte (so o "~R$" da tela de gerar varia,
      com ou sem). A parte 3 (o Resumo sob demanda, mais uns 0,5 a 1 s na
      Hoje) ficou para depois.
+
+## O radar no PC e no celular ao mesmo tempo (22/10/2026)
+
+184. **o servidor em segundo plano escuta na rede, e o firewall libera so a
+     rede privada** (pedido de 22/10: "tem que estar up juntos, nao quero ter
+     que escolher"; muda o que estava escrito no `automacao.py`: "o radar
+     subir nao tem --rede, o servidor do logon fica so neste PC"). O `radar
+     subir` e a tarefa "Radar - web" do logon sobem o `radar web --host
+     0.0.0.0`: o PC continua em http://localhost:8000, e o celular no Wi-Fi
+     de casa abre http://<IP do PC>:8000/hoje, que o `radar subir` escreve.
+     Sem senha, como antes: quem segura o acesso de fora e o firewall do
+     Windows, com uma regra so para o perfil PRIVADO - num Wi-Fi publico a
+     porta continua fechada. O iPhone nao abria em 22/10 por isso: o Wi-Fi de
+     casa estava como rede publica, e nao havia regra para a porta 8000.
+     Os dois passos sao seus, como administrador (o radar nao muda o
+     firewall): marcar o Wi-Fi de casa como rede privada, e criar a regra
+     `New-NetFirewallRule -DisplayName "Radar (porta 8000)" -Direction
+     Inbound -Protocol TCP -LocalPort 8000 -Action Allow -Profile Private`.

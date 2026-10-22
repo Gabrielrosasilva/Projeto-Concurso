@@ -205,7 +205,9 @@ def test_subir_chama_o_radar_web_sem_janela_na_porta_pedida(pasta_de_dados, monk
     comando = guardado["comando"]
     assert comando[1:5] == ["-m", "radar.cli", "web", "--porta"]
     assert comando[5] == "8000"
-    assert "127.0.0.1" in comando
+    # Decisao 184: o servidor em segundo plano escuta na rede, para o PC e o
+    # celular ao mesmo tempo; o firewall libera so a rede privada.
+    assert comando[comando.index("--host") + 1] == "0.0.0.0"
     # A saida vai para arquivo: sem janela, erro sem log e erro invisivel.
     assert automacao.caminho_do_log_da_web().exists()
 

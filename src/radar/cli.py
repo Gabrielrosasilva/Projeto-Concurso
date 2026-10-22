@@ -2338,6 +2338,10 @@ def subir(
             f"[green]No ar[/] em [bold cyan]{servidor.endereco}[/] "
             f"(processo {servidor.pid}), sem janela."
         )
+        # Decisao 184: o mesmo servidor atende o celular no Wi-Fi de casa.
+        ip = ip_local()
+        if ip:
+            console.print(f"No celular (mesmo Wi-Fi): [bold cyan]http://{ip}:{porta}/hoje[/]")
         console.print("[dim]Para desligar: [bold]radar parar[/][/]")
 
     if abrir:

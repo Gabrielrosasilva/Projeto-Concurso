@@ -35,11 +35,15 @@ from xml.sax.saxutils import escape as escapar_xml
 from radar import config
 from radar.util import fuso_local, porta_ocupada
 
-# A porta de sempre e o endereco de sempre. O `radar subir` nao tem --rede: o
-# servidor que sobe sozinho no logon fica so neste PC. Para o celular eu abro
-# o `radar web --rede` na mao, e sabendo o que estou fazendo.
+# A porta de sempre e o endereco deste PC. O servidor em segundo plano (o
+# `radar subir` e a tarefa do logon) escuta na REDE (decisao 184, pedido de
+# 22/10: o PC e o celular ao mesmo tempo, sem escolher). Quem segura o acesso
+# de fora e o firewall do Windows, liberado so em rede PRIVADA: em casa o
+# celular abre; num Wi-Fi publico, nao. O HOST_PADRAO continua sendo o
+# endereco que este PC usa para falar com o proprio servidor.
 PORTA_PADRAO = 8000
 HOST_PADRAO = "127.0.0.1"
+HOST_DA_REDE = "0.0.0.0"  # noqa: S104 - o firewall libera so a rede privada
 
 # Como as tarefas se chamam no Agendador. Com o travessao porque e assim que eu
 # vou achar as duas juntas, uma embaixo da outra, na lista do Agendador de
@@ -337,7 +341,7 @@ def subir(porta: int = PORTA_PADRAO) -> Servidor:
         processo = subprocess.Popen(
             [
                 str(python_sem_janela()), "-m", "radar.cli", "web",
-                "--porta", str(porta), "--host", HOST_PADRAO,
+                "--porta", str(porta), "--host", HOST_DA_REDE,
             ],
             cwd=str(config.RAIZ),
             stdin=subprocess.DEVNULL,

@@ -845,6 +845,15 @@ O que falta vai nesta ordem, uma etapa por conversa.
   emprego de pronome), umas 50 provas novas dariam umas 20 questoes deste
   tema, e as dos outros junto.
 
+### O radar no celular (decisao 184, 22/10)
+
+- ✅ **Feito**: o servidor em segundo plano escuta na rede (PC e celular juntos);
+- ⚪ **Depende de voce, como administrador**: marcar o Wi-Fi de casa como
+  rede privada (Configuracoes > Rede e Internet > Wi-Fi > a rede > Tipo de
+  perfil de rede: Privada) e criar a regra do firewall so para a rede
+  privada: `New-NetFirewallRule -DisplayName "Radar (porta 8000)" -Direction
+  Inbound -Protocol TCP -LocalPort 8000 -Action Allow -Profile Private`.
+
 ### A velocidade das telas (decisao 183, 22/10)
 
 - ✅ **Feito**: as partes 1 e 2 (as contas de texto, os arquivos de config e
