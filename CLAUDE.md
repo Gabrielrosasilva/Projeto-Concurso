@@ -461,6 +461,13 @@ da tela.
 topo da Hoje tem "4 de 9 faixas · 29 de 49 questoes · 1h45 de 3h40" com a
 barra (`cronograma.progresso_do_dia`, a mesma regra de faixa da sugestao) e a
 proxima faixa por fazer, na ordem do dia; o bloco completo nasce fechado.
+**A letra da lei em todo bloco do resumo (22/10, decisao 182, a seu pedido;
+muda a 161):** 59 blocos de artigo em 18 temas apareciam so com o "🗣 Traduz
+pra mim" (o resumo citava o artigo so junto com outro, ou nem citava). Cada um
+ganhou a frase da letra na parte "artigos", do texto vigente oficial (Camara,
+Decreto 678/1992, UNICEF, CNJ); `ResumoEnxuto.sem_letra` e o
+`--verificar-resumos` avisam o que voltar a ficar sem ela, e um teste le o
+`data/fichas.json` real. O "na real" do art. 67 da Convencao foi corrigido.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

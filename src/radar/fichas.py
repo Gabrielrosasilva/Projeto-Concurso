@@ -558,6 +558,13 @@ class ResumoEnxuto:
     def traduzido(self) -> bool:
         return any(b.traducao for b in self.blocos) or bool(self.nao_confunda)
 
+    @property
+    def sem_letra(self) -> list[str]:
+        """Os artigos que aparecem so com o "Traduz pra mim": nenhuma frase do
+        resumo cita so ele, e o bloco fica sem a letra da lei (decisao 182). O
+        `--verificar-resumos` avisa cada um."""
+        return [b.rotulo for b in self.blocos if b.traducao and not b.frases]
+
 
 def _na_tela(frase: dict, termos, vistos: set) -> FraseNaTela:
     """A frase com o texto cortado nos termos do glossario: so o texto, nunca

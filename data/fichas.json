@@ -1383,6 +1383,18 @@
             "fontes": [
               "CF, art. 8º, VIII"
             ]
+          },
+          {
+            "texto": "Art. 10: é assegurada a participação dos trabalhadores e empregadores nos colegiados dos órgãos públicos em que seus interesses profissionais ou previdenciários sejam objeto de discussão e deliberação.",
+            "fontes": [
+              "CF, art. 10"
+            ]
+          },
+          {
+            "texto": "Art. 11: nas empresas de mais de duzentos empregados, é assegurada a eleição de um representante destes com a finalidade exclusiva de promover-lhes o entendimento direto com os empregadores.",
+            "fontes": [
+              "CF, art. 11"
+            ]
           }
         ],
         "como_cobra": [
@@ -1466,7 +1478,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
     },
@@ -2226,6 +2238,32 @@
             "fontes": [
               "CP, art. 10"
             ]
+          },
+          {
+            "texto": "Art. 1º: não há crime sem lei anterior que o defina. Não há pena sem prévia cominação legal.",
+            "fontes": [
+              "CP, art. 1º"
+            ]
+          },
+          {
+            "texto": "Art. 4º: considera-se praticado o crime no momento da ação ou omissão, ainda que outro seja o momento do resultado.",
+            "fontes": [
+              "CP, art. 4º"
+            ]
+          },
+          {
+            "texto": "Art. 5º, caput e §§ 1º e 2º: aplica-se a lei brasileira, sem prejuízo de convenções, tratados e regras de direito internacional, ao crime cometido no território nacional; são extensão do território nacional as embarcações e aeronaves brasileiras, de natureza pública ou a serviço do governo brasileiro, onde quer que se encontrem, e as brasileiras, mercantes ou de propriedade privada, no espaço aéreo correspondente ou em alto-mar; também se aplica aos crimes a bordo de aeronaves ou embarcações estrangeiras de propriedade privada, aquelas em pouso no território nacional ou em vôo no espaço aéreo correspondente, e estas em porto ou mar territorial do Brasil.",
+            "fontes": [
+              "CP, art. 5º",
+              "CP, art. 5º, § 1º",
+              "CP, art. 5º, § 2º"
+            ]
+          },
+          {
+            "texto": "Art. 6º: considera-se praticado o crime no lugar em que ocorreu a ação ou omissão, no todo ou em parte, bem como onde se produziu ou deveria produzir-se o resultado.",
+            "fontes": [
+              "CP, art. 6º"
+            ]
           }
         ],
         "como_cobra": [
@@ -2287,7 +2325,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": null
     },
@@ -3147,6 +3185,43 @@
             "fontes": [
               "CP, art. 327, § 2º"
             ]
+          },
+          {
+            "texto": "Art. 313: apropriar-se de dinheiro ou qualquer utilidade que, no exercício do cargo, recebeu por erro de outrem; reclusão de 1 a 4 anos, e multa.",
+            "fontes": [
+              "CP, art. 313"
+            ]
+          },
+          {
+            "texto": "Art. 316, caput e § 1º: exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão dela, vantagem indevida; reclusão de 2 a 12 anos, e multa. Excesso de exação: o funcionário exige tributo ou contribuição social que sabe ou deveria saber indevido, ou, quando devido, emprega na cobrança meio vexatório ou gravoso, que a lei não autoriza; reclusão de 3 a 8 anos, e multa.",
+            "fontes": [
+              "CP, art. 316",
+              "CP, art. 316, § 1º"
+            ]
+          },
+          {
+            "texto": "Art. 321 e parágrafo único: patrocinar, direta ou indiretamente, interesse privado perante a administração pública, valendo-se da qualidade de funcionário; detenção de 1 a 3 meses, ou multa. Se o interesse é ilegítimo: detenção de 3 meses a 1 ano, além da multa.",
+            "fontes": [
+              "CP, art. 321",
+              "CP, art. 321, parágrafo único"
+            ]
+          },
+          {
+            "texto": "Art. 323, caput e §§ 1º e 2º: abandonar cargo público, fora dos casos permitidos em lei; detenção de 15 dias a 1 mês, ou multa. Se do fato resulta prejuízo público: detenção de 3 meses a 1 ano, e multa. Se o fato ocorre em lugar compreendido na faixa de fronteira: detenção de 1 a 3 anos, e multa.",
+            "fontes": [
+              "CP, art. 323",
+              "CP, art. 323, § 1º",
+              "CP, art. 323, § 2º"
+            ]
+          },
+          {
+            "texto": "Art. 325, caput e §§ 1º e 2º: revelar fato de que tem ciência em razão do cargo e que deva permanecer em segredo, ou facilitar-lhe a revelação; detenção de 6 meses a 2 anos, ou multa, se o fato não constitui crime mais grave. Nas mesmas penas incorre quem permite ou facilita, mediante atribuição, fornecimento e empréstimo de senha ou qualquer outra forma, o acesso de pessoas não autorizadas a sistemas de informações ou banco de dados da Administração Pública, ou se utiliza, indevidamente, do acesso restrito. Se da ação ou omissão resulta dano à Administração Pública ou a outrem: reclusão de 2 a 6 anos, e multa.",
+            "fontes": [
+              "CP, art. 325",
+              "CP, art. 325, § 1º",
+              "CP, art. 325, § 1º, I",
+              "CP, art. 325, § 2º"
+            ]
           }
         ],
         "como_cobra": [
@@ -3205,7 +3280,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
     },
@@ -4950,6 +5025,18 @@
             "fontes": [
               "Declaração de Viena (1993), § 5"
             ]
+          },
+          {
+            "texto": "DUDH, art. 2º: todo ser humano tem capacidade para gozar os direitos e as liberdades estabelecidos nesta Declaração, sem distinção de qualquer espécie, seja de raça, cor, sexo, língua, religião, opinião política ou de outra natureza, origem nacional ou social, riqueza, nascimento, ou qualquer outra condição (2.1); não será também feita nenhuma distinção fundada na condição política, jurídica ou internacional do país ou território a que pertença uma pessoa, quer se trate de um território independente, sob tutela, sem governo próprio, quer sujeito a qualquer outra limitação de soberania (2.2).",
+            "fontes": [
+              "DUDH, art. 2º"
+            ]
+          },
+          {
+            "texto": "DUDH, art. 3º: todo ser humano tem direito à vida, à liberdade e à segurança pessoal.",
+            "fontes": [
+              "DUDH, art. 3º"
+            ]
           }
         ],
         "como_cobra": [
@@ -5011,7 +5098,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": null
     },
@@ -5301,6 +5388,24 @@
               "Convenção Americana, art. 7.5",
               "2019-q36 (gabarito E)"
             ]
+          },
+          {
+            "texto": "Art. 1º, III: a República Federativa do Brasil, formada pela união indissolúvel dos Estados e Municípios e do Distrito Federal, constitui-se em Estado Democrático de Direito e tem como fundamentos, entre outros, a dignidade da pessoa humana.",
+            "fontes": [
+              "CF, art. 1º, III"
+            ]
+          },
+          {
+            "texto": "Art. 4º, II: a República Federativa do Brasil rege-se nas suas relações internacionais por princípios, entre eles a prevalência dos direitos humanos.",
+            "fontes": [
+              "CF, art. 4º, II"
+            ]
+          },
+          {
+            "texto": "Art. 60, § 4º, IV: não será objeto de deliberação a proposta de emenda tendente a abolir os direitos e garantias individuais.",
+            "fontes": [
+              "CF, art. 60, § 4º, IV"
+            ]
           }
         ],
         "como_cobra": [
@@ -5397,7 +5502,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
     },
@@ -5753,6 +5858,19 @@
               "Regras de Mandela, regra 16",
               "Regras de Mandela, regra 22.2"
             ]
+          },
+          {
+            "texto": "Regra 16 (CNJ): devem ser fornecidas instalações adequadas para banho, a fim de que todo preso possa tomar banho, e assim possa ser exigido, na temperatura apropriada ao clima, com a frequência necessária para a higiene geral de acordo com a estação do ano e a região geográfica, mas pelo menos uma vez por semana em clima temperado.",
+            "fontes": [
+              "Regras de Mandela, regra 16"
+            ]
+          },
+          {
+            "texto": "Regra 22 (CNJ): todo preso deve receber da administração prisional, em horários regulares, alimento com valor nutricional adequado à sua saúde e resistência, de qualidade, bem preparada e bem servida (22.1); todo preso deve ter acesso a água potável sempre que necessitar (22.2).",
+            "fontes": [
+              "Regras de Mandela, regra 22",
+              "Regras de Mandela, regra 22.2"
+            ]
           }
         ],
         "como_cobra": [
@@ -5814,7 +5932,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
     },
@@ -6336,6 +6454,31 @@
             "fontes": [
               "Regras de Mandela, regra 81"
             ]
+          },
+          {
+            "texto": "Regra 44 (CNJ): o confinamento solitário refere-se ao confinamento do preso por 22 horas ou mais, por dia, sem contato humano significativo; o confinamento solitário prolongado refere-se ao confinamento solitário por mais de 15 dias consecutivos.",
+            "fontes": [
+              "Regras de Mandela, regra 44"
+            ]
+          },
+          {
+            "texto": "Regra 48 (CNJ): quando autorizada a utilização de instrumentos restritivos, eles serão utilizados apenas quando outras formas menos severas de controle não forem efetivas para enfrentar os riscos representados pelo movimento sem a restrição; o método de restrição será o menos invasivo necessário, e razoável para controlar a movimentação do preso, baseado no nível e natureza do risco apresentado; e os instrumentos de restrição devem ser utilizados apenas durante o período exigido e retirados, assim que possível, depois que o risco que motivou a restrição não esteja mais presente (48.1); os instrumentos de restrição não devem ser utilizados em mulheres em trabalho de parto, nem durante e imediatamente após o parto (48.2).",
+            "fontes": [
+              "Regras de Mandela, regra 48",
+              "Regras de Mandela, regra 48.2"
+            ]
+          },
+          {
+            "texto": "Regra 74 (CNJ): a administração prisional deve promover seleção cuidadosa de funcionários de todos os níveis, uma vez que a administração adequada da unidade prisional depende da integridade, humanidade, capacidade profissional e adequação para o trabalho de seus funcionários (74.1); deve, constantemente, suscitar e manter no espírito dos funcionários e da opinião pública a convicção de que este trabalho é um serviço social de grande importância (74.2); os funcionários devem ser indicados para trabalho em período integral como agentes prisionais profissionais e a condição de servidor público, com estabilidade no emprego, sujeito apenas à boa conduta, eficiência e aptidão física; o salário deve ser suficiente para atrair e reter homens e mulheres compatíveis com o cargo, e os benefícios e condições de emprego devem ser condizentes com a natureza exigente do trabalho (74.3).",
+            "fontes": [
+              "Regras de Mandela, regra 74"
+            ]
+          },
+          {
+            "texto": "Regra 116 (CNJ): um prisioneiro não julgado deve ter a oportunidade de trabalhar, mas não será obrigado a fazê-lo; caso opte por trabalhar, será remunerado pelos seus serviços.",
+            "fontes": [
+              "Regras de Mandela, regra 116"
+            ]
           }
         ],
         "como_cobra": [
@@ -6398,7 +6541,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
     },
@@ -6989,6 +7132,53 @@
               "Convenção Americana, arts. 34 e 37",
               "Convenção Americana, arts. 52 e 54"
             ]
+          },
+          {
+            "texto": "Convenção, art. 1º: os Estados-Partes comprometem-se a respeitar os direitos e liberdades nela reconhecidos e a garantir seu livre e pleno exercício a toda pessoa que esteja sujeita à sua jurisdição, sem discriminação alguma por motivo de raça, cor, sexo, idioma, religião, opiniões políticas ou de qualquer outra natureza, origem nacional ou social, posição econômica, nascimento ou qualquer outra condição social (1.1); para os efeitos desta Convenção, pessoa é todo ser humano (1.2).",
+            "fontes": [
+              "Convenção Americana, art. 1º"
+            ]
+          },
+          {
+            "texto": "Convenção, art. 5º: toda pessoa tem o direito de que se respeite sua integridade física, psíquica e moral (5.1); ninguém deve ser submetido a torturas, nem a penas ou tratos cruéis, desumanos ou degradantes, e toda pessoa privada da liberdade deve ser tratada com o respeito devido à dignidade inerente ao ser humano (5.2); a pena não pode passar da pessoa do delinqüente (5.3); os processados devem ficar separados dos condenados, salvo em circunstâncias excepcionais, e ser submetidos a tratamento adequado à sua condição de pessoas não condenadas (5.4); os menores, quando puderem ser processados, devem ser separados dos adultos e conduzidos a tribunal especializado, com a maior rapidez possível, para seu tratamento (5.5); as penas privativas da liberdade devem ter por finalidade essencial a reforma e a readaptação social dos condenados (5.6).",
+            "fontes": [
+              "Convenção Americana, art. 5.2",
+              "Convenção Americana, art. 5.5",
+              "Convenção Americana, art. 5.6",
+              "Convenção Americana, art. 5º"
+            ]
+          },
+          {
+            "texto": "Convenção, art. 7º: ninguém pode ser submetido a detenção ou encarceramento arbitrários (7.3); toda pessoa detida ou retida deve ser informada das razões da sua detenção e notificada, sem demora, da acusação ou acusações formuladas contra ela (7.4); toda pessoa detida ou retida deve ser conduzida, sem demora, à presença de um juiz ou outra autoridade autorizada pela lei a exercer funções judiciais e tem direito a ser julgada dentro de um prazo razoável ou a ser posta em liberdade, sem prejuízo de que prossiga o processo, e sua liberdade pode ser condicionada a garantias que assegurem o seu comparecimento em juízo (7.5); ninguém deve ser detido por dívida, princípio que não limita os mandados de autoridade judiciária competente expedidos em virtude de inadimplemento de obrigação alimentar (7.7).",
+            "fontes": [
+              "Convenção Americana, art. 7.5",
+              "Convenção Americana, art. 7.7",
+              "Convenção Americana, art. 7º"
+            ]
+          },
+          {
+            "texto": "Convenção, art. 44: qualquer pessoa ou grupo de pessoas, ou entidade não governamental legalmente reconhecida em um ou mais Estados-Membros da Organização, pode apresentar à Comissão petições que contenham denúncias ou queixas de violação desta Convenção por um Estado-Parte.",
+            "fontes": [
+              "Convenção Americana, art. 44"
+            ]
+          },
+          {
+            "texto": "Convenção, art. 46: para que uma petição ou comunicação seja admitida pela Comissão, será necessário que hajam sido interpostos e esgotados os recursos da jurisdição interna, de acordo com os princípios de direito internacional geralmente reconhecidos; que seja apresentada dentro do prazo de seis meses, a partir da data em que o presumido prejudicado em seus direitos tenha sido notificado da decisão definitiva; e que a matéria da petição ou comunicação não esteja pendente de outro processo de solução internacional (46.1, alíneas a, b e c); as exigências das alíneas a e b não se aplicam quando não existir, na legislação interna do Estado, o devido processo legal para a proteção do direito que se alegue violado, quando não se houver permitido ao presumido prejudicado o acesso aos recursos da jurisdição interna ou ele houver sido impedido de esgotá-los, ou quando houver demora injustificada na decisão sobre esses recursos (46.2).",
+            "fontes": [
+              "Convenção Americana, art. 46"
+            ]
+          },
+          {
+            "texto": "Convenção, art. 61: somente os Estados-Partes e a Comissão têm direito de submeter caso à decisão da Corte (61.1); para que a Corte possa conhecer de qualquer caso, é necessário que sejam esgotados os processos previstos nos artigos 48 a 50 (61.2).",
+            "fontes": [
+              "Convenção Americana, art. 61"
+            ]
+          },
+          {
+            "texto": "Convenção, art. 67: a sentença da Corte será definitiva e inapelável; em caso de divergência sobre o sentido ou alcance da sentença, a Corte interpretá-la-á, a pedido de qualquer das partes, desde que o pedido seja apresentado dentro de noventa dias a partir da data da notificação da sentença.",
+            "fontes": [
+              "Convenção Americana, art. 67"
+            ]
           }
         ],
         "como_cobra": [
@@ -7082,7 +7272,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": null
     },
@@ -7295,7 +7485,7 @@
         {
           "artigo": "Convenção Americana, art. 67",
           "na_real": {
-            "texto": "A decisão da Corte é definitiva e não tem recurso. Se houver dúvida sobre o que ela quis dizer, a Corte explica, a pedido de uma das partes, em até 90 dias da notificação.",
+            "texto": "A decisão da Corte é definitiva e não tem recurso. Se houver dúvida sobre o que ela quis dizer, qualquer das partes pode pedir que a Corte a explique, desde que peça em até 90 dias da notificação.",
             "fontes": [
               "Convenção Americana, art. 67"
             ]
@@ -7373,7 +7563,7 @@
           ]
         }
       ],
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 12/10/2026; o \"na real\" do art. 67 corrigido em 22/10/2026 (claude-opus-5-5): os 90 dias são do pedido, pelo Decreto 678/1992",
       "criado_em": "2026-10-13T00:29:49.071230+00:00",
       "conferido_em": null,
       "artigos_do_resumo": [
@@ -8117,6 +8307,25 @@
             "fontes": [
               "LEP, art. 27"
             ]
+          },
+          {
+            "texto": "Art. 15: a assistência jurídica é destinada aos presos e aos internados sem recursos financeiros para constituir advogado.",
+            "fontes": [
+              "LEP, art. 15"
+            ]
+          },
+          {
+            "texto": "Art. 18: o ensino de primeiro grau será obrigatório, integrando-se no sistema escolar da unidade federativa.",
+            "fontes": [
+              "LEP, art. 18"
+            ]
+          },
+          {
+            "texto": "Art. 19 e parágrafo único: o ensino profissional será ministrado em nível de iniciação ou de aperfeiçoamento técnico; a mulher condenada terá ensino profissional adequado à sua condição.",
+            "fontes": [
+              "LEP, art. 19",
+              "LEP, art. 19, parágrafo único"
+            ]
           }
         ],
         "como_cobra": [
@@ -8183,7 +8392,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
     },
@@ -9595,6 +9804,60 @@
             "fontes": [
               "LEP, art. 86, §§ 3º a 5º"
             ]
+          },
+          {
+            "texto": "Art. 83, caput e §§ 2º a 5º: o estabelecimento penal, conforme a sua natureza, deverá contar em suas dependências com áreas e serviços destinados a dar assistência, educação, trabalho, recreação e prática esportiva; os destinados a mulheres serão dotados de berçário, onde as condenadas possam cuidar de seus filhos, inclusive amamentá-los, no mínimo, até 6 meses de idade (§ 2º), e deverão possuir, exclusivamente, agentes do sexo feminino na segurança de suas dependências internas (§ 3º); serão instaladas salas de aulas destinadas a cursos do ensino básico e profissionalizante (§ 4º), e haverá instalação destinada à Defensoria Pública (§ 5º).",
+            "fontes": [
+              "LEP, art. 83",
+              "LEP, art. 83, § 2º",
+              "LEP, art. 83, § 3º",
+              "LEP, art. 83, § 4º",
+              "LEP, art. 83, § 5º"
+            ]
+          },
+          {
+            "texto": "Art. 87 e parágrafo único: a Penitenciária destina-se ao condenado à pena de reclusão, em regime fechado; a União Federal, os Estados, o Distrito Federal e os Territórios poderão construir Penitenciárias destinadas, exclusivamente, aos presos provisórios e condenados que estejam em regime fechado, sujeitos ao regime disciplinar diferenciado.",
+            "fontes": [
+              "LEP, art. 87",
+              "LEP, art. 87, parágrafo único"
+            ]
+          },
+          {
+            "texto": "Art. 88 e parágrafo único: o condenado será alojado em cela individual que conterá dormitório, aparelho sanitário e lavatório; são requisitos básicos da unidade celular a salubridade do ambiente, pela concorrência dos fatores de aeração, insolação e condicionamento térmico adequado à existência humana, e a área mínima de 6 metros quadrados.",
+            "fontes": [
+              "LEP, art. 88",
+              "LEP, art. 88, parágrafo único"
+            ]
+          },
+          {
+            "texto": "Art. 89: além dos requisitos referidos no art. 88, a penitenciária de mulheres será dotada de seção para gestante e parturiente e de creche para abrigar crianças maiores de 6 meses e menores de 7 anos, com a finalidade de assistir a criança desamparada cuja responsável estiver presa.",
+            "fontes": [
+              "LEP, art. 89"
+            ]
+          },
+          {
+            "texto": "Art. 91: a Colônia Agrícola, Industrial ou similar destina-se ao cumprimento da pena em regime semiaberto.",
+            "fontes": [
+              "LEP, art. 91"
+            ]
+          },
+          {
+            "texto": "Art. 93: a Casa do Albergado destina-se ao cumprimento de pena privativa de liberdade, em regime aberto, e da pena de limitação de fim de semana.",
+            "fontes": [
+              "LEP, art. 93"
+            ]
+          },
+          {
+            "texto": "Art. 99: o Hospital de Custódia e Tratamento Psiquiátrico destina-se aos inimputáveis e semi-imputáveis referidos no art. 26 e seu parágrafo único do Código Penal.",
+            "fontes": [
+              "LEP, art. 99"
+            ]
+          },
+          {
+            "texto": "Art. 102: a Cadeia Pública destina-se ao recolhimento de presos provisórios.",
+            "fontes": [
+              "LEP, art. 102"
+            ]
           }
         ],
         "como_cobra": [
@@ -9646,7 +9909,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
     },
@@ -10318,6 +10581,18 @@
             "fontes": [
               "LEP, art. 119-A"
             ]
+          },
+          {
+            "texto": "Art. 105: transitando em julgado a sentença que aplicar pena privativa de liberdade, se o réu estiver ou vier a ser preso, o juiz ordenará a expedição de guia de recolhimento para a execução.",
+            "fontes": [
+              "LEP, art. 105"
+            ]
+          },
+          {
+            "texto": "Art. 110: o juiz, na sentença, estabelecerá o regime no qual o condenado iniciará o cumprimento da pena privativa de liberdade, observado o disposto no art. 33 e seus parágrafos do Código Penal.",
+            "fontes": [
+              "LEP, art. 110"
+            ]
           }
         ],
         "como_cobra": [
@@ -10374,7 +10649,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
     },
@@ -10843,6 +11118,25 @@
               "LEP, art. 164",
               "LEP, art. 168, I"
             ]
+          },
+          {
+            "texto": "Art. 131: o livramento condicional poderá ser concedido pelo Juiz da execução, presentes os requisitos do art. 83, incisos e parágrafo único, do Código Penal, ouvidos o Ministério Público e o Conselho Penitenciário.",
+            "fontes": [
+              "LEP, art. 131"
+            ]
+          },
+          {
+            "texto": "Art. 146-D: a monitoração eletrônica poderá ser revogada quando se tornar desnecessária ou inadequada (I), ou se o acusado ou condenado violar os deveres a que estiver sujeito durante a sua vigência ou cometer falta grave (II).",
+            "fontes": [
+              "LEP, art. 146-D",
+              "LEP, art. 146-D, I"
+            ]
+          },
+          {
+            "texto": "Art. 156: o juiz poderá suspender, pelo período de 2 a 4 anos, a execução da pena privativa de liberdade não superior a 2 anos, na forma prevista nos arts. 77 a 82 do Código Penal.",
+            "fontes": [
+              "LEP, art. 156"
+            ]
           }
         ],
         "como_cobra": [
@@ -10905,7 +11199,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
     },
@@ -11400,6 +11694,36 @@
             "fontes": [
               "LEP, arts. 198, 199 e 202"
             ]
+          },
+          {
+            "texto": "Art. 171: transitada em julgado a sentença que aplicar medida de segurança, será ordenada a expedição de guia para a execução.",
+            "fontes": [
+              "LEP, art. 171"
+            ]
+          },
+          {
+            "texto": "Art. 176: em qualquer tempo, ainda no decorrer do prazo mínimo de duração da medida de segurança, poderá o juiz da execução, diante de requerimento fundamentado do Ministério Público ou do interessado, seu procurador ou defensor, ordenar o exame para que se verifique a cessação da periculosidade.",
+            "fontes": [
+              "LEP, art. 176"
+            ]
+          },
+          {
+            "texto": "Art. 183: quando, no curso da execução da pena privativa de liberdade, sobrevier doença mental ou perturbação da saúde mental, o Juiz, de ofício, a requerimento do Ministério Público, da Defensoria Pública ou da autoridade administrativa, poderá determinar a substituição da pena por medida de segurança.",
+            "fontes": [
+              "LEP, art. 183"
+            ]
+          },
+          {
+            "texto": "Art. 185: haverá excesso ou desvio de execução sempre que algum ato for praticado além dos limites fixados na sentença, em normas legais ou regulamentares.",
+            "fontes": [
+              "LEP, art. 185"
+            ]
+          },
+          {
+            "texto": "Art. 197: das decisões proferidas pelo juiz caberá recurso de agravo, sem efeito suspensivo.",
+            "fontes": [
+              "LEP, art. 197"
+            ]
           }
         ],
         "como_cobra": [
@@ -11463,7 +11787,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:43.180893+00:00",
       "conferido_em": null
     },
@@ -11937,6 +12261,18 @@
             "fontes": [
               "LEP, art. 9º-A, § 8º"
             ]
+          },
+          {
+            "texto": "Art. 5º: os condenados serão classificados, segundo os seus antecedentes e personalidade, para orientar a individualização da execução penal.",
+            "fontes": [
+              "LEP, art. 5º"
+            ]
+          },
+          {
+            "texto": "Art. 6º: a classificação será feita por Comissão Técnica de Classificação que elaborará o programa individualizador da pena privativa de liberdade adequada ao condenado ou preso provisório.",
+            "fontes": [
+              "LEP, art. 6º"
+            ]
           }
         ],
         "como_cobra": [
@@ -11986,7 +12322,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:51:08.529846+00:00",
       "conferido_em": null
     },
@@ -12488,6 +12824,33 @@
             "fontes": [
               "LEP, arts. 80 e 81"
             ]
+          },
+          {
+            "texto": "Art. 63 e parágrafo único: o Conselho Nacional de Política Criminal e Penitenciária será integrado por 13 membros designados através de ato do Ministério da Justiça, dentre professores e profissionais da área do Direito Penal, Processual Penal, Penitenciário e ciências correlatas, bem como por representantes da comunidade e dos Ministérios da área social; o mandato dos membros terá duração de 2 anos, renovado um terço em cada ano.",
+            "fontes": [
+              "LEP, art. 63",
+              "LEP, art. 63, parágrafo único"
+            ]
+          },
+          {
+            "texto": "Art. 65: a execução penal competirá ao juiz indicado na lei local de organização judiciária e, na sua ausência, ao da sentença.",
+            "fontes": [
+              "LEP, art. 65"
+            ]
+          },
+          {
+            "texto": "Art. 69, caput e §§ 1º e 2º: o Conselho Penitenciário é órgão consultivo e fiscalizador da execução da pena; é integrado por membros nomeados pelo Governador do Estado, do Distrito Federal e dos Territórios, dentre professores e profissionais da área do Direito Penal, Processual Penal, Penitenciário e ciências correlatas, bem como por representantes da comunidade, e a legislação federal e estadual regulará o seu funcionamento (§ 1º); o mandato dos membros terá a duração de 4 anos (§ 2º).",
+            "fontes": [
+              "LEP, art. 69",
+              "LEP, art. 69, § 1º",
+              "LEP, art. 69, § 2º"
+            ]
+          },
+          {
+            "texto": "Art. 81: incumbe ao Conselho da Comunidade visitar, pelo menos mensalmente, os estabelecimentos penais existentes na Comarca; entrevistar presos; apresentar relatórios mensais ao juiz da execução e ao Conselho Penitenciário; e diligenciar a obtenção de recursos materiais e humanos para melhor assistência ao preso ou internado, em harmonia com a direção do estabelecimento.",
+            "fontes": [
+              "LEP, art. 81"
+            ]
           }
         ],
         "como_cobra": [
@@ -12561,7 +12924,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:52:41.715702+00:00",
       "conferido_em": null
     },
@@ -13076,6 +13439,12 @@
               "LEP, art. 128",
               "LEP, art. 130"
             ]
+          },
+          {
+            "texto": "Art. 128: o tempo remido será computado como pena cumprida, para todos os efeitos.",
+            "fontes": [
+              "LEP, art. 128"
+            ]
           }
         ],
         "como_cobra": [
@@ -13133,7 +13502,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:53:35.246256+00:00",
       "conferido_em": null
     },
@@ -13552,6 +13921,12 @@
             "fontes": [
               "LEP, art. 56, parágrafo único"
             ]
+          },
+          {
+            "texto": "Art. 55: as recompensas têm em vista o bom comportamento reconhecido em favor do condenado, de sua colaboração com a disciplina e de sua dedicação ao trabalho.",
+            "fontes": [
+              "LEP, art. 55"
+            ]
           }
         ],
         "como_cobra": [
@@ -13610,7 +13985,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:52:53.181001+00:00",
       "conferido_em": "2026-10-16"
     },
@@ -14040,6 +14415,12 @@
             "fontes": [
               "LEP, art. 37"
             ]
+          },
+          {
+            "texto": "Art. 200: o condenado por crime político não está obrigado ao trabalho.",
+            "fontes": [
+              "LEP, art. 200"
+            ]
           }
         ],
         "como_cobra": [
@@ -14082,7 +14463,7 @@
           }
         ]
       },
-      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026",
+      "modelo": "Claude Code (claude-opus-5-5), importado manualmente, em 05/10/2026; a letra dos artigos sem linha propria completada em 22/10/2026 (claude-opus-5-5), pelo texto oficial",
       "criado_em": "2026-10-05T21:34:43.296905+00:00",
       "conferido_em": "2026-10-07"
     },

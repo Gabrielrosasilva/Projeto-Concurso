@@ -6535,3 +6535,45 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      De quebra, a soma do "IA · N" do botao rapido da 180 saiu do template
      para `servico.geradas.no_estoque`: o teste de que template nenhum soma
      pegou.
+
+## A letra da lei em todo bloco do resumo (pedido de 22/10/2026)
+
+182. **todo artigo com traducao mostra a letra da lei no bloco dele; o bloco so
+     com o "🗣 Traduz pra mim" deixou de valer** (pedido de 22/10, estudando
+     "Na Constituicao e o status dos tratados": "nao aparece o art 1 e 4, so
+     aparece o traduz pra mim; o artigo seco da lei nao esta aparecendo";
+     muda a 161 nesse ponto). A causa nao era a tela: o bloco de cada artigo
+     e feito das frases do resumo que citam SO aquele artigo, e o da
+     traducao. Quando o resumo so citava o artigo junto com outro ("CF, art.
+     1º, III" e "CF, art. 4º, II" na mesma frase; "Regras 16 e 22.2";
+     "Convencao, arts. 44 e 46") ou nem o citava, a frase ia para "O que eu
+     preciso dominar", e o bloco ficava so com o numero e a traducao - o que a
+     161 aceitava de proposito. Em 22/10 eram **59 blocos em 18 temas** (de
+     200). As regras:
+     - **a letra completada**: uma frase por artigo na parte "artigos" do
+       resumo, com a fonte so dele, no estilo das que ja havia ("Art. 1º, III:
+       ..."), copiada do texto vigente oficial e conferida palavra por
+       palavra: CF, CP e LEP na compilacao da Camara (a da LEP atualizada ate
+       a Lei 15.410/2026), Convencao Americana no Decreto 678/1992 (Camara),
+       DUDH na UNICEF Brasil e Regras de Mandela na edicao do CNJ (2016), com
+       "(CNJ)" na frase. 59 frases (3 da CF no tema do dia, 2 da CF, 9 do CP,
+       30 da LEP, 7 da Convencao, 2 da DUDH, 6 de Mandela). A frase de dois
+       artigos continua onde estava. A procedencia vai no `modelo` do resumo
+       ("a letra dos artigos sem linha propria completada em 22/10/2026
+       (claude-opus-5-5), pelo texto oficial"); nenhum dos resumos tocados
+       estava conferido;
+     - **a trava**: `ResumoEnxuto.sem_letra` (radar/fichas.py) lista o artigo
+       que aparece so com a traducao, e o `radar fichas --verificar-resumos`
+       avisa cada um ("aparece so com a traducao: falta a letra da lei no
+       resumo"). Um teste le o `data/fichas.json` de verdade e quebra se um
+       artigo traduzido ficar sem a letra - a traducao nova de um artigo pede
+       a letra dele no resumo antes;
+     - **de quebra**, o "na real" do art. 67 da Convencao (Sistemas de
+       protecao) dizia que a Corte explica a sentenca "em ate 90 dias"; os 90
+       dias sao do pedido de interpretacao (Decreto 678/1992). Corrigido, com
+       a nota no `modelo` da traducao. As outras traducoes lidas contra a
+       letra nao tinham erro, so omissoes (o § 1º do art. 316 do CP, os §§ 4º
+       e 5º do art. 83 da LEP, a renovacao de um terco do art. 63), que agora
+       a letra do bloco cobre.
+     O verificador continua com 10 avisos antigos, de outra natureza:
+     resumos de Portugues que citam questoes hoje classificadas em outro tema.

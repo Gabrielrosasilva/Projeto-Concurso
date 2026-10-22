@@ -574,6 +574,14 @@ def verificar_resumos(ctx: fichas.Contexto | None = None) -> list[tuple[str, str
         visiveis = traducao.visiveis(escrita.traducao, escrita.resumo, tema)
         if not visiveis:
             continue
+        # A letra da lei (decisao 182): o artigo traduzido que nenhuma frase do
+        # resumo cita sozinho aparece so com o "Traduz pra mim", sem o artigo.
+        enxuto = fichas.resumo_enxuto((escrita.resumo or {}).get("partes"), escrita.materia,
+                                      {"itens": visiveis})
+        for rotulo in enxuto.sem_letra:
+            problemas.append((escrita.tema, f"{rotulo} aparece só com a tradução: falta a "
+                                            f"letra da lei no resumo (uma frase dos artigos "
+                                            f"que cite só ele)"))
         try:
             traducao.conferir_traducao(
                 {"itens": visiveis, "nao_confunda": escrita.traducao.get("nao_confunda")},

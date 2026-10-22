@@ -272,3 +272,65 @@ def test_o_artigo_com_bloco_proprio_no_resumo_e_do_tema(banco_temporario):
     # O pedido diz os artigos do tema sem repetir o que a faixa ja cobre.
     lote = manual.pedido_de_traducoes(tema=TEMA, refazer=True)
     assert "CP, arts. 14 a 21; CP, art. 22" in lote["pedidos"][0]["pedido"]
+
+
+# --- a letra da lei em todo bloco (decisao 182) ---------------------------------------
+
+def _art_15_so_junto_do_14():
+    """O resumo em que nenhuma frase cita o art. 15 sozinho: a do "dominar"
+    vira uma que cita os arts. 14 e 15 juntos - o caso dos arts. 1º e 4º da CF
+    em "Na Constituicao e o status dos tratados", que o usuario achou em 22/10."""
+    partes = copy.deepcopy(RESUMO["partes"])
+    partes["dominar"] = [f for f in partes["dominar"] if f["fontes"] != ["CP, art. 15"]]
+    partes["dominar"].append({"texto": "Tentativa (art. 14) e desistência voluntária "
+                                       "(art. 15) não se confundem.",
+                              "fontes": ["CP, art. 14", "CP, art. 15"]})
+    return partes
+
+
+def test_o_bloco_so_com_a_traducao_e_o_que_esta_sem_a_letra():
+    assert fichas.resumo_enxuto(RESUMO["partes"], PENAL, BOA).sem_letra == []
+    enxuto = fichas.resumo_enxuto(_art_15_so_junto_do_14(), PENAL, BOA)
+    (bloco,) = [b for b in enxuto.blocos if b.rotulo == "CP, art. 15"]
+    assert bloco.traducao and not bloco.frases
+    assert enxuto.sem_letra == ["CP, art. 15"]
+    # O artigo sem traducao e sem frase nem ganha bloco: nao ha o que avisar.
+    assert fichas.resumo_enxuto(_art_15_so_junto_do_14(), PENAL, None).sem_letra == []
+
+
+def test_o_verificador_avisa_o_artigo_que_aparece_so_com_a_traducao(banco_temporario):
+    escrita = _ficha(_art_15_so_junto_do_14())
+    resultado = servico_fichas.importar_traducoes(
+        _pedido(escrita), [{"id": "t1", "traducao": BOA}], "m")
+    assert resultado["gravadas"] == 1, resultado["recusas"]
+
+    problemas = [p for _, p in servico_fichas.verificar_resumos() if "letra da lei" in p]
+    assert problemas == ["CP, art. 15 aparece só com a tradução: falta a letra da lei no "
+                         "resumo (uma frase dos artigos que cite só ele)"]
+
+    (gravada,) = servico_fichas.carregar()
+    gravada.resumo["partes"]["artigos"].append(
+        {"texto": "Art. 15: o agente que, voluntariamente, desiste de prosseguir na execução "
+                  "ou impede que o resultado se produza, só responde pelos atos já praticados.",
+         "fontes": ["CP, art. 15"]})
+    servico_fichas.gravar([gravada])
+    assert not [p for _, p in servico_fichas.verificar_resumos() if "letra da lei" in p]
+
+
+def test_no_arquivo_real_nenhum_artigo_fica_so_com_a_traducao():
+    """O data/fichas.json de verdade (decisao 182): em 22/10 havia 59 blocos
+    so com o "Traduz pra mim", sem a letra da lei; todos ganharam a letra, e
+    o artigo traduzido que vier depois sem ela quebra aqui."""
+    from radar import leis
+
+    real = Path(__file__).parent.parent / "data" / "fichas.json"
+    sem_letra = []
+    for escrita in servico_fichas.carregar(real):
+        if not escrita.traducao or not leis.exige_artigo(escrita.materia):
+            continue
+        visiveis = traducao.visiveis(escrita.traducao, escrita.resumo,
+                                     servico_fichas.artigos_do_tema(escrita))
+        enxuto = fichas.resumo_enxuto((escrita.resumo or {}).get("partes"), escrita.materia,
+                                      {"itens": visiveis})
+        sem_letra += [f"{escrita.tema}: {rotulo}" for rotulo in enxuto.sem_letra]
+    assert sem_letra == []

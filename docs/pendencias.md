@@ -631,6 +631,17 @@ resumo e do tema (decisao 161). O que falta:
 
 ### Depende de voce
 
+- ✅ **A letra da lei em todo bloco** (decisao 182, 22/10): os 59 blocos que
+  apareciam so com o "🗣 Traduz pra mim" ganharam a letra do artigo, tirada do
+  texto oficial, e o `radar fichas --verificar-resumos` avisa o artigo que
+  voltar a ficar sem ela. As 59 frases sao 🟣 e entram na conferencia dos
+  resumos, como as outras;
+- ⚪ **Os 10 avisos antigos do `--verificar-resumos`**: resumos de Portugues
+  (Acentuacao, Crase 1, Interpretacao 2, Ortografia, Pronomes 1 e 2, Revisao
+  ativa 1 a 3, Termos integrantes 2) que citam questoes hoje classificadas em
+  outro tema, ou um padrao sem a questao que o mostra. Refazer o resumo do
+  tema (`radar fichas --pedido --resumos --tema "<tema>" --refazer`) quando
+  voce pedir;
 - 🔴 **Conferir as 30 traducoes** (Hoje > Fichas > "Ficha completa", no
   "🗣 Traduz pra mim" de cada artigo, e o botao **"✓ Conferi a traducao"**).
   A conferida nao e mais sobrescrita pela importacao. Aos poucos, a do tema
