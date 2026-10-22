@@ -7,7 +7,7 @@ confere justamente que ele NAO aparece em acerto medido nenhum.
 Nenhum teste vai a internet nem toca o banco de verdade: todos rodam no
 `banco_temporario`, que aponta o radar para um SQLite descartavel.
 """
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 import pytest
 from fastapi.testclient import TestClient
@@ -16,6 +16,7 @@ from sqlalchemy import select
 from radar import acervo, servico
 from radar.db import sessao
 from radar.models import ErroAnotado
+from radar.util import fuso_local
 from radar.web.app import app
 
 HOJE = date(2026, 10, 20)      # uma terca-feira da semana 4 do Ciclo 1
@@ -528,19 +529,26 @@ def test_o_sabado_abre_os_erros_da_semana(cliente):
     assert "/erros?semana=2026-10-24" in texto
 
 
-def test_o_cartao_da_lateral_some_com_zero(cliente, monkeypatch):
-    monkeypatch.setattr(servico.cronograma, "hoje_local", lambda: HOJE)
+def _hoje_e(dia, monkeypatch):
+    agora = datetime(dia.year, dia.month, dia.day, 12, 0, tzinfo=fuso_local())
+    monkeypatch.setattr(servico.cronograma, "agora_local", lambda: agora)
+    monkeypatch.setattr(servico.cronograma, "hoje_local", lambda: dia)
+
+
+def test_o_caderno_no_revisar_hoje_some_com_zero(cliente, monkeypatch):
+    # Desde a decisao 187 o numero mora no cartao "Revisar hoje", no topo, que
+    # so aparece no dia de hoje: o relogio da tela para em HOJE.
+    _hoje_e(HOJE, monkeypatch)
     assert "erros para rever hoje" not in cliente.get("/hoje?data=2026-10-20").text
 
     _anotar(hoje=HOJE - timedelta(days=5))
     _anotar(hoje=HOJE - timedelta(days=5), materia="Direito Penal")
     texto = cliente.get("/hoje?data=2026-10-20").text
-    assert '<p class="erros-n">2</p>' in texto
-    assert "erros para rever hoje" in texto
+    assert '<b class="erros-n">2</b> erros para rever hoje' in texto
 
 
-def test_o_cartao_da_lateral_fala_no_singular(cliente, monkeypatch):
-    monkeypatch.setattr(servico.cronograma, "hoje_local", lambda: HOJE)
+def test_o_caderno_no_revisar_hoje_fala_no_singular(cliente, monkeypatch):
+    _hoje_e(HOJE, monkeypatch)
     _anotar(hoje=HOJE - timedelta(days=5))
     assert "erro para rever hoje" in cliente.get("/hoje?data=2026-10-20").text
 

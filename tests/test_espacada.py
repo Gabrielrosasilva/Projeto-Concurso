@@ -107,6 +107,119 @@ def test_no_vencido_sem_questao_no_acervo_nao_vira_rodada_vazia(plano):
     assert espacada.criar_simulado_de_revisao(HOJE, plano=plano) is None
 
 
+# --- o cartao "Revisar hoje" da tela Hoje (decisao 187) ----------------------
+
+def test_o_cartao_conta_as_pontas_e_mostra_os_mais_atrasados(plano):
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _responder(2, False, HOJE - timedelta(days=1), materia="Língua Portuguesa",
+               classificar_em="Língua Portuguesa")
+
+    cartao = estudo.revisar_hoje(plano=plano, hoje=HOJE, mostrar=1)
+
+    assert cartao.vencidos == 2 and cartao.na_rodada == 2
+    (primeiro,) = cartao.primeiros
+    # O atraso conta do dia da tela, nao do relogio: 1a pratica na segunda,
+    # o R+1 venceu na terca, e a tela e de sabado.
+    assert (primeiro.caminho, primeiro.desde, primeiro.atraso) == (
+        NO_TEMPO, SEG + timedelta(days=1), 4)
+
+
+def test_a_rodada_do_cartao_traz_uma_por_tema_ate_o_limite(plano):
+    _responder(1, False, SEG, classificar_em=NO_TEMPO)
+    _no_acervo(2, NO_TEMPO)
+    _responder(3, False, HOJE - timedelta(days=1), materia="Língua Portuguesa",
+               classificar_em="Língua Portuguesa")
+
+    rodada = espacada.criar_simulado_de_revisao(HOJE, plano=plano, limite=1, por_tema=1)
+
+    with sessao() as s:
+        errada = s.scalars(select(QuestaoDeProva.id).where(QuestaoDeProva.numero == 1)).one()
+    assert _questoes_da_rodada(rodada) == [errada]
+    assert [r["no"] for r in rodada.filtros["revisao"]] == [NO_TEMPO]
+
+
+def test_o_tema_sem_questao_cede_o_lugar_ao_seguinte(plano):
+    """O mais atrasado venceu so pelo prazo e o acervo nao tem questao dele."""
+    diario.marcar_faixa(SEG, "manha", 0, "Aplicação da lei penal",
+                        plano=plano, hoje=HOJE)
+    _responder(1, False, HOJE - timedelta(days=1), materia="Língua Portuguesa",
+               classificar_em="Língua Portuguesa")
+
+    rodada = espacada.criar_simulado_de_revisao(HOJE, plano=plano, limite=1, por_tema=1)
+
+    assert [r["no"] for r in rodada.filtros["revisao"]] == ["Língua Portuguesa"]
+    assert len(_questoes_da_rodada(rodada)) == 1
+
+
+def _cartao(vencidos=2):
+    return estudo.RevisarHoje(
+        vencidos=vencidos, na_rodada=min(vencidos, espacada.TEMAS_DO_CARTAO),
+        primeiros=[estudo.TemaParaRevisar(
+            nome="Abolitio criminis", caminho="Direito Penal > Abolitio criminis",
+            desde=date(2026, 9, 29), atraso=23, porque="prazo vencido")])
+
+
+def _relogio(monkeypatch):
+    """A tela Hoje acha que hoje e 20/10, meio-dia: nada depende do dia real."""
+    from radar.util import fuso_local
+
+    agora = datetime(2026, 10, 20, 12, 0, tzinfo=fuso_local())
+    monkeypatch.setattr(diario, "agora_local", lambda: agora)
+    monkeypatch.setattr(diario, "hoje_local", lambda: agora.date())
+
+
+def test_a_tela_hoje_mostra_o_cartao_so_no_dia_de_hoje(banco_temporario, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    _relogio(monkeypatch)
+    monkeypatch.setattr(estudo, "revisar_hoje", lambda plano=None, hoje=None: _cartao())
+    cliente = TestClient(app)
+
+    texto = cliente.get("/hoje?data=2026-10-20").text
+    assert "🔁 Revisar hoje" in texto
+    assert "Abolitio criminis" in texto and "vencido desde 29/09 (23 dias)" in texto
+    assert 'action="/hoje/revisar"' in texto and "(2 questões)" in texto
+    # O cartao vem logo abaixo da barra do dia, antes das faixas.
+    assert texto.index("🔁 Revisar hoje") < texto.index('id="faixa-manha-0"')
+
+    assert "🔁 Revisar hoje" not in cliente.get("/hoje?data=2026-10-19").text
+
+
+def test_o_cartao_some_com_a_fila_vazia_e_o_caderno_em_dia(banco_temporario, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    _relogio(monkeypatch)
+    monkeypatch.setattr(estudo, "revisar_hoje", lambda plano=None, hoje=None: _cartao(0))
+
+    assert "🔁 Revisar hoje" not in TestClient(app).get("/hoje?data=2026-10-20").text
+
+
+@pytest.mark.parametrize("rodada, destino", [
+    (SimpleNamespace(id=9), "/simulado/9"),
+    (None, "/hoje"),
+])
+def test_o_botao_do_cartao_abre_dez_temas_uma_de_cada(banco_temporario, monkeypatch,
+                                                     rodada, destino):
+    from fastapi.testclient import TestClient
+
+    from radar.web.app import app
+
+    pedido = {}
+
+    def criar(**kw):
+        pedido.update(kw)
+        return rodada
+
+    monkeypatch.setattr(espacada, "criar_simulado_de_revisao", criar)
+    resposta = TestClient(app).post("/hoje/revisar", follow_redirects=False)
+    assert resposta.headers["location"] == destino
+    assert pedido == {"limite": 10, "por_tema": 1}
+
+
 # --- o fator de tempo -------------------------------------------------------
 
 def test_fator_de_tempo():

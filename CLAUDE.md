@@ -486,6 +486,12 @@ ao estoque como nunca feitas; a que mede e o Simulado da semana vao ate o fim.
 Os botoes "Treinar no radar" trazem o que falta da faixa
 (`cronograma.pedidas_das_faixas`, a conta do `fechar_pelo_radar`), e o numero
 do botao e o que o clique traz.
+**O cartao "Revisar hoje" (22/10, decisao 187, a seu pedido):** no topo da
+Hoje, abaixo da barra e so no dia de hoje, a fila do 1-7-30
+(`estudo.revisar_hoje`: os vencidos, os 3 mais atrasados, "ver todos") e o
+caderno de erros, que saiu da lateral; o "Revisar agora no radar" traz uma
+questao por tema, os 10 mais atrasados primeiro (`POST /hoje/revisar`). A
+conta da fila nao mudou.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

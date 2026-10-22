@@ -2518,3 +2518,12 @@ de materia normalizado 88 mil vezes, o cronograma.yml lido 9 vezes. Agora a
 conta e feita uma vez por abertura, e o arquivo so e lido de novo quando muda
 (decisao 183): a Hoje caiu para ~3,4 s e o Estudar de 7 s para 1,7 s, com as
 telas iguais byte a byte.
+
+## O cartao "Revisar hoje" (22/10)
+
+A fila do 1-7-30 so aparecia na home e no Meu desempenho, e ninguem olhava:
+em 22/10 eram 54 temas vencidos, o mais antigo desde 29/09. A Hoje ganhou um
+cartao logo abaixo da barra do dia com quantos estao vencidos, os 3 mais
+atrasados, o caderno de erros (que saiu da lateral) e um botao que abre uma
+questao por tema, os 10 mais atrasados primeiro - uma rodada que cabe numa
+pausa e faz a fila andar um pouco a cada dia (decisao 187).

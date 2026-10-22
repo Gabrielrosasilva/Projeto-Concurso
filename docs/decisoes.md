@@ -6690,3 +6690,23 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      rodada de 5 com 1 respondida encerrou com "1 de 5" no resultado e a conta
      de 1. No dado de 22/10 a Fixacao da manha ja estava feita (6 no radar e o
      "fiz 2"), e o botao dela traz de novo o numero da faixa.
+187. **o cartao "Revisar hoje" no topo da tela Hoje, com uma rodada de 10**
+     (pedido de 22/10; o lugar e o tamanho escolhidos por voce). A fila do
+     1-7-30 so aparecia na home e no Meu desempenho, e ficou para tras: 54
+     temas vencidos, o mais antigo desde 29/09.
+     - **onde**: logo abaixo da barra do dia (decisao 181), antes das faixas, e
+       so no dia de hoje - a fila e a de hoje, e monta-la custa meio segundo;
+     - **o que diz** (`estudo.revisar_hoje`): quantos temas estao vencidos (as
+       pontas, a mesma fila da home, decisao 128), os 3 mais atrasados com o
+       "vencido desde" e os dias contados do dia da tela, o "ver todos" para o
+       Meu desempenho e o caderno de erros vencido hoje. O caderno saiu da
+       lateral e virou a ultima linha do cartao. Sem nada vencido e sem erro
+       para rever, o cartao some;
+     - **o botao** (`POST /hoje/revisar`): uma questao por tema, os 10 mais
+       atrasados primeiro (`espacada.TEMAS_DO_CARTAO` e `POR_TEMA_DO_CARTAO`),
+       comecando pela que eu errei; o tema sem questao nova no acervo e pulado
+       e o seguinte entra no lugar. Cabe numa pausa, e a fila anda um pouco a
+       cada dia. O botao da home continua com a fila inteira, 3 por tema.
+     Nada muda na conta: a fila, o 1-7-30 e o que conta como revisao (decisao
+     79) sao os mesmos. No dado de 22/10: 54 vencidos (Abolitio criminis desde
+     29/09, Regras de acentuacao e Paronimos desde 30/09), 5 erros do caderno.

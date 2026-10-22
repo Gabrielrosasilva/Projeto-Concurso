@@ -519,6 +519,51 @@ def pontas(fila: list[ParaRevisar]) -> list[ParaRevisar]:
             if not any(c.startswith(r.caminho + arvore.SEPARADOR) for c in caminhos)]
 
 
+@dataclass
+class TemaParaRevisar:
+    """Uma linha do cartao "Revisar hoje": o tema e desde quando esta vencido."""
+
+    nome: str
+    caminho: str
+    desde: date | None
+    #: Dias de atraso contados do dia da tela, e nao do relogio.
+    atraso: int
+    porque: str
+
+
+@dataclass
+class RevisarHoje:
+    """O cartao "Revisar hoje" da tela Hoje (decisao 187)."""
+
+    #: Quantos temas estao na fila (as pontas: a mesma conta da home).
+    vencidos: int
+    #: Os primeiros da fila, os mais atrasados, para a tela mostrar.
+    primeiros: list[TemaParaRevisar]
+    #: Quantos temas o botao traz de uma vez.
+    na_rodada: int
+
+
+def revisar_hoje(plano=None, hoje: date | None = None,
+                 mostrar: int = 3) -> RevisarHoje:
+    """A fila de revisao contada para o topo da tela Hoje.
+
+    E a mesma fila da home e do Meu desempenho (decisao 128), so as pontas;
+    o cartao mostra as primeiras e o botao abre a rodada dos
+    `espacada.TEMAS_DO_CARTAO` mais atrasados.
+    """
+    hoje = hoje or date.today()
+    fila = pontas(para_revisar(plano=plano, hoje=hoje))
+    primeiros = [
+        TemaParaRevisar(
+            nome=r.nome, caminho=r.caminho, desde=r.vence_em,
+            atraso=0 if r.vence_em is None else max(0, (hoje - r.vence_em).days),
+            porque=r.porque)
+        for r in fila[:mostrar]
+    ]
+    return RevisarHoje(vencidos=len(fila), primeiros=primeiros,
+                       na_rodada=min(len(fila), espacada.TEMAS_DO_CARTAO))
+
+
 def proxima_revisao(plano=None, hoje: date | None = None,
                     recorte: str = por_conteudo.CICLO,
                     todas: dict | None = None) -> ParaRevisar | None:

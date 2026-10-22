@@ -1428,6 +1428,10 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # TelaDoDia, porque o caderno ja le o cronograma - e o contrario
             # tambem faria um importar o outro.
             "erros_para_rever": servico.erros.quantos_para_rever(),
+            # O cartao "Revisar hoje" (decisao 187): a fila do 1-7-30, so no
+            # dia de hoje - a fila e de hoje, e montar custa meio segundo.
+            "revisar_hoje": (servico.estudo.revisar_hoje(plano=tela.plano, hoje=tela.data)
+                             if tela.e_hoje and tela.plano else None),
         },
     )
 
@@ -1788,6 +1792,18 @@ def revisao_de_hoje():
     novo = servico.espacada.criar_simulado_de_revisao()
     if novo is None:
         return RedirectResponse("/", status_code=303)
+    return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
+
+
+@app.post("/hoje/revisar")
+def revisar_pelo_cartao():
+    """[Revisar agora no radar] do cartao da tela Hoje (decisao 187): uma
+    questao por tema, os mais atrasados da fila primeiro."""
+    novo = servico.espacada.criar_simulado_de_revisao(
+        limite=servico.espacada.TEMAS_DO_CARTAO,
+        por_tema=servico.espacada.POR_TEMA_DO_CARTAO)
+    if novo is None:
+        return RedirectResponse("/hoje", status_code=303)
     return RedirectResponse(f"/simulado/{novo.id}", status_code=303)
 
 

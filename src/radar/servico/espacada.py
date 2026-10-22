@@ -36,9 +36,21 @@ INTERVALOS = (1, 7, 30)
 # conteudo sem transformar a revisao num simulado inteiro.
 POR_ASSUNTO = 3
 
+# A rodada do cartao "Revisar hoje" da tela Hoje (decisao 187): uma questao
+# por tema, os mais atrasados primeiro. Cabe numa pausa, e a fila anda um
+# pouco a cada dia em vez de virar um simulado de 54 questoes.
+TEMAS_DO_CARTAO = 10
+POR_TEMA_DO_CARTAO = 1
 
-def criar_simulado_de_revisao(hoje: date | None = None, plano=None) -> Simulado | None:
+
+def criar_simulado_de_revisao(hoje: date | None = None, plano=None,
+                              limite: int | None = None,
+                              por_tema: int = POR_ASSUNTO) -> Simulado | None:
     """A rodada das revisoes de hoje. None quando a fila esta vazia.
+
+    `limite` para nos primeiros N temas da fila que tem questao para trazer
+    (o tema sem questao nova e pulado, e o seguinte entra no lugar); sem ele,
+    vem a fila inteira, como no botao da home.
 
     Por ponta da fila (o no mais fundo; a materia e o assunto acima dele
     seriam a mesma revisao), primeiro as questoes que eu errei nele; se
@@ -64,9 +76,12 @@ def criar_simulado_de_revisao(hoje: date | None = None, plano=None) -> Simulado 
             .where(RespostaDeSimulado.gerada.is_(False))
         ))
         ids: list[int] = []
+        entraram = []
         for r in vencidos:
-            do_no = list(r.erradas[-POR_ASSUNTO:])
-            if len(do_no) < POR_ASSUNTO:
+            if limite is not None and len(entraram) >= limite:
+                break
+            do_no = list(r.erradas[-por_tema:])
+            if len(do_no) < por_tema:
                 materia = arvore.partes(r.caminho)[0]
                 candidatas = list(s.scalars(
                     select(QuestaoDeProva)
@@ -76,7 +91,7 @@ def criar_simulado_de_revisao(hoje: date | None = None, plano=None) -> Simulado 
                 ))
                 random.shuffle(candidatas)
                 for q in candidatas:
-                    if len(do_no) >= POR_ASSUNTO:
+                    if len(do_no) >= por_tema:
                         break
                     if q.id in respondidas or q.id in do_no or q.id in ids:
                         continue
@@ -85,7 +100,10 @@ def criar_simulado_de_revisao(hoje: date | None = None, plano=None) -> Simulado 
                             r.caminho + arvore.SEPARADOR):
                         continue
                     do_no.append(q.id)
-            ids.extend(i for i in do_no if i not in ids)
+            novas = [i for i in do_no if i not in ids]
+            if novas:
+                entraram.append(r)
+            ids.extend(novas)
         if not ids:
             # O no venceu so pelo prazo e o acervo nao tem questao nova dele:
             # uma rodada vazia nao revisa nada.
@@ -95,7 +113,7 @@ def criar_simulado_de_revisao(hoje: date | None = None, plano=None) -> Simulado 
             "quantidade": len(ids),
             "revisao": [
                 {"no": r.caminho, "etapa": r.etapa, "motivos": list(r.motivos)}
-                for r in vencidos
+                for r in (vencidos if limite is None else entraram)
             ],
         })
         s.add(simulado)

@@ -197,12 +197,6 @@
       font:inherit;font-size:var(--tam-sm)}
     .acoes-extra{display:flex;gap:var(--esp-3);align-items:center;flex-wrap:wrap}
 
-    /* --- o caderno de erros (na lateral) --- */
-    .erros-hoje p{margin:0}
-    .erros-hoje .erros-n{font-size:var(--tam-2xl);font-weight:var(--peso-forte);
-      line-height:1.05;font-variant-numeric:tabular-nums;color:var(--cor-aviso)}
-    .erros-hoje p:last-child{margin-top:var(--esp-2);font-size:var(--tam-sm)}
-
     /* --- o mapa do ano (na lateral) --- */
     .mapa summary{cursor:pointer;list-style:none}
     .mapa summary::-webkit-details-marker{display:none}
@@ -397,6 +391,16 @@
     .progresso-do-dia.completo{border-color:var(--cor-verde)}
     .etiqueta-completo{padding:.05rem .6rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-forte);
       background:var(--cor-verde-fundo);color:var(--cor-verde);white-space:nowrap}
+    /* O cartao "Revisar hoje" (decisao 187). */
+    .revisar-hoje{margin:0 0 var(--esp-3);padding:var(--esp-3) var(--esp-4)}
+    .revisar-titulo{margin:0 0 var(--esp-2);font-size:var(--tam-md)}
+    .revisar-linha{margin:0;font-size:var(--tam-sm)}
+    .revisar-lista{margin:var(--esp-1) 0 var(--esp-2);padding-left:1.2rem;font-size:var(--tam-sm)}
+    .revisar-nome{font-weight:var(--peso-forte)}
+    .revisar-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-2) var(--esp-4)}
+    .revisar-acoes form{margin:0}
+    .revisar-caderno{margin-top:var(--esp-3);padding-top:var(--esp-2);border-top:1px dashed var(--cor-borda)}
+    .revisar-hoje > .revisar-titulo + .revisar-caderno{margin-top:0;padding-top:0;border-top:0}
     /* A ajuda unica, antes dos blocos. */
     .ajuda-da-faixa{margin:0 0 var(--esp-3);font-size:var(--tam-sm)}
     .ajuda-da-faixa > summary{cursor:pointer;color:var(--cor-acao);font-weight:var(--peso-medio)}
@@ -768,17 +772,6 @@
       <p><a class="ds-link-acao" href="/analises/materias">minhas matérias &rarr;</a></p>
     </section>
 
-    {# O caderno de erros. Some com zero de proposito: cartao que vive na tela
-       dizendo "0" deixa de ser aviso e vira enfeite. #}
-    {% if erros_para_rever %}
-    <section class="ds-cartao erros-hoje">
-      <h2 class="lateral-titulo">📓 Caderno de erros</h2>
-      <p class="erros-n">{{ erros_para_rever }}</p>
-      <p class="ds-suave">{{ 'erro para rever hoje' if erros_para_rever == 1 else 'erros para rever hoje' }}</p>
-      <p><a class="ds-link-acao" href="/erros">abrir o caderno &rarr;</a></p>
-    </section>
-    {% endif %}
-
     {# O mapa do ano. Num <details> aberto: no computador ele fica do jeito
        que esta, e no celular, onde a lateral cai por cima do dia, um toque no
        titulo recolhe a lista inteira. Sem JavaScript, como o resto da tela. #}
@@ -940,6 +933,39 @@
         </p>
       {% elif p.completo %}
         <p class="proxima-faixa">✅ <b>Tudo feito{{ ' hoje' if t.e_hoje }}.</b> <a href="#como-foi">Marque como foi o dia ↓</a></p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  {# ============================ revisar hoje ========================== #}
+  {# Decisao 187: a fila do 1-7-30 e o caderno de erros, no topo, so no dia de
+     hoje. A conta e do servico (`estudo.revisar_hoje`, as pontas da mesma
+     fila da home); o botao abre uma questao por tema, os mais atrasados
+     primeiro. Some com zero de proposito: cartao que vive dizendo "0" deixa
+     de ser aviso e vira enfeite. #}
+  {% set rh = revisar_hoje %}
+  {% if rh and (rh.vencidos or erros_para_rever) %}
+    <section class="ds-cartao revisar-hoje" aria-label="Revisar hoje">
+      <h2 class="revisar-titulo">🔁 Revisar hoje</h2>
+      {% if rh.vencidos %}
+        <p class="revisar-linha">Revisão 1-7-30: <b>{{ rh.vencidos }} {{ 'tema vencido' if rh.vencidos == 1 else 'temas vencidos' }}</b>{% if rh.vencidos > rh.primeiros|length %} — os mais atrasados:{% else %}:{% endif %}</p>
+        <ul class="revisar-lista">
+          {% for r in rh.primeiros %}
+            <li><span class="revisar-nome">{{ r.nome }}</span>
+              {%- if r.desde %} <span class="ds-suave">· vencido desde {{ r.desde.strftime('%d/%m') }}{% if r.atraso %} ({{ r.atraso }} {{ 'dia' if r.atraso == 1 else 'dias' }}){% endif %}</span>
+              {%- else %} <span class="ds-suave">· {{ r.porque }}</span>{% endif %}</li>
+          {% endfor %}
+        </ul>
+        <div class="revisar-acoes">
+          <form method="post" action="/hoje/revisar">
+            <button class="ds-botao ds-botao--pequeno" type="submit">▶ Revisar agora no radar ({{ rh.na_rodada }} {{ 'questão' if rh.na_rodada == 1 else 'questões' }})</button>
+          </form>
+          <a class="ds-link-acao" href="/analises/desempenho">ver todos ({{ rh.vencidos }}) &rarr;</a>
+        </div>
+      {% endif %}
+      {% if erros_para_rever %}
+        <p class="revisar-linha revisar-caderno">📓 Caderno de erros: <b class="erros-n">{{ erros_para_rever }}</b> {{ 'erro para rever hoje' if erros_para_rever == 1 else 'erros para rever hoje' }}
+          <a class="ds-link-acao" href="/erros">rever os erros &rarr;</a></p>
       {% endif %}
     </section>
   {% endif %}

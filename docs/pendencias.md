@@ -879,11 +879,17 @@ O que falta vai nesta ordem, uma etapa por conversa.
   regras repetidas num "ⓘ" so;
 - ✅ **A barra do dia e a proxima faixa** (decisao 181, 22/10), com o bloco
   completo nascendo fechado;
+- ✅ **O cartao "Revisar hoje"** (decisao 187, 22/10): no topo, abaixo da
+  barra, a fila do 1-7-30 e o caderno de erros, com a rodada de 10 (uma por
+  tema, os mais atrasados primeiro);
 - ⚪ **Depende de voce: as outras melhorias da aba Hoje** (proposta de 20/10,
   por ordem de impacto), uma etapa por vez quando quiser: no celular, o plano antes da lateral (hoje
-  a lateral empurra as faixas uns 1.800 px para baixo); um cartao "Revisar
-  hoje" com os erros e as revisoes do dia; e o fechamento do dia (acerto por
-  materia, onde mais errei, o que vem amanha);
+  a lateral empurra as faixas uns 1.800 px para baixo); e o fechamento do dia
+  (acerto por materia, onde mais errei, o que vem amanha);
+- ⚪ **A investigar: a fila de revisao parada desde 29/09** (achado de 22/10):
+  54 temas vencidos. A revisao feita no Qconcursos so anda o 1-7-30 quando a
+  faixa tem o no (decisao 81); vale olhar se as R+7 anotadas estao movendo a
+  fila;
 - ⚪ **A sugestao explica a diferenca** (proposta de 19/10, nao pedida
   ainda): quando ela nao bate com a meta marcada, dizer quais faixas faltam.
 
