@@ -886,10 +886,12 @@ O que falta vai nesta ordem, uma etapa por conversa.
   por ordem de impacto), uma etapa por vez quando quiser: no celular, o plano antes da lateral (hoje
   a lateral empurra as faixas uns 1.800 px para baixo); e o fechamento do dia
   (acerto por materia, onde mais errei, o que vem amanha);
-- ⚪ **A investigar: a fila de revisao parada desde 29/09** (achado de 22/10):
-  54 temas vencidos. A revisao feita no Qconcursos so anda o 1-7-30 quando a
-  faixa tem o no (decisao 81); vale olhar se as R+7 anotadas estao movendo a
-  fila;
+- ✅ **A fila de revisao parada** (decisao 188, 22/10): o R+7 e o R+30
+  revisam o que o dia de origem tocou, e os prazos contam do dia do estudo;
+  a fila foi de 54 para 39;
+- ⚪ **Depende de voce: os 21 R+7 e Extras nunca marcados** (05/10 a 21/10:
+  05, 08, 09, 12, 14, 15, 17, 20 e 21/10). Se foram feitos, marque o circulo
+  de cada um no dia (o "dia anterior" da Hoje) e o tema sai da fila;
 - ⚪ **A sugestao explica a diferenca** (proposta de 19/10, nao pedida
   ainda): quando ela nao bate com a meta marcada, dizer quais faixas faltam.
 

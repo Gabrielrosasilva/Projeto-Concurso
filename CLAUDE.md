@@ -492,6 +492,11 @@ Hoje, abaixo da barra e so no dia de hoje, a fila do 1-7-30
 caderno de erros, que saiu da lateral; o "Revisar agora no radar" traz uma
 questao por tema, os 10 mais atrasados primeiro (`POST /hoje/revisar`). A
 conta da fila nao mudou.
+**A fila de revisao que nao andava (22/10, decisao 188):** o R+7 e o R+30 do
+plano revisam os nos que o dia de origem tocou na materia (o estudado, o
+anotado com no e o respondido no radar), e nao so a materia; e os prazos do
+1-7-30 contam do dia do estudo (D+1, D+7, D+30), como o plano. A fila foi de
+54 para 39; o resto e erro por acertar e R+7 nunca marcado (pendencia O).
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

@@ -235,7 +235,12 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
     inicio = plano.inicio
     fim = min(plano.fim, hoje) if plano.fim else hoje
     por_semana: dict[str, dict[int, list]] = {}
+    # O que cada dia tocou em cada materia, e os R+7 e R+30 que voltam a um
+    # dia: a volta revisa o que aquele dia tocou (decisao 188).
+    tocados: dict[tuple[date, str], set[str]] = {}
+    voltas: list = []
     for linha in metricas.lancamentos(inicio, fim, plano):
+        cobertos: set[str] = set()
         if linha.origem == metricas.RADAR:
             onde = de_quem.get(linha.chave) if linha.chave else None
         else:
@@ -249,6 +254,11 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
                 for caminho in {a for no in cobertos for a in _ancestrais(no)} - {onde}:
                     if caminho in situacao:
                         _situacao_e_datas(situacao[caminho], linha)
+            if onde and _volta_a_um_dia(linha):
+                voltas.append((linha, onde, cobertos))
+        if onde and not linha.revisao:
+            for no in cobertos | {onde}:
+                tocados.setdefault((linha.data, arvore.partes(no)[0]), set()).add(no)
         if not onde:
             continue
         semana = _semana_de(plano, linha.data)
@@ -268,6 +278,25 @@ def situacoes(recorte: str = por_conteudo.SEMPRE, plano=None,
                 continue
             atual.minutos += linha.minutos
             _situacao_e_datas(atual, linha)
+
+    # --- o R+7 e o R+30 revisam o que o dia de origem tocou ----------------
+    # A faixa de revisao quase nunca diz o no: o titulo e o tema, e o no dele
+    # so chega pela ficha CONFERIDA (decisao 81). Sem isto, o R+7 feito ia so
+    # para a materia, e o tema estudado ficava vencido para sempre (a fila de
+    # 22/10). O dia de origem diz o que eu estudei e pratiquei naquela
+    # materia - dado meu, e nao o vinculo da IA.
+    for linha, onde, cobertos in voltas:
+        origem = date.fromisoformat(str(linha.faixa.origem))
+        do_dia = tocados.get((origem, arvore.partes(onde)[0]), set())
+        if linha.conteudo:
+            # O plano disse o no: a volta fica dentro dele.
+            do_dia = {no for no in do_dia
+                      if no == linha.conteudo
+                      or no.startswith(linha.conteudo + arvore.SEPARADOR)}
+        ja = {a for no in cobertos | {onde} for a in _ancestrais(no)}
+        for caminho in {a for no in do_dia for a in _ancestrais(no)} - ja:
+            if caminho in situacao:
+                _situacao_e_datas(situacao[caminho], linha)
 
     # --- as respostas do radar --------------------------------------------
     # TODA resposta, e nao so a ultima de cada questao: a questao refeita nao
@@ -315,6 +344,12 @@ def _situacao_e_datas(atual: Situacao, linha) -> None:
         atual.estudado = True
         atual.primeiro_estudo = _mais_velha(atual.primeiro_estudo, linha.data)
         atual.ultimo_estudo = _mais_nova(atual.ultimo_estudo, linha.data)
+
+
+def _volta_a_um_dia(linha) -> bool:
+    """A linha e um R+7 ou R+30 do plano, que diz o dia que esta voltando?"""
+    return (linha.origem == metricas.FAIXA and linha.revisao
+            and bool(getattr(linha.faixa, "origem", None)))
 
 
 def _e_estudo(linha) -> bool:
@@ -427,20 +462,29 @@ def _etapa_e_vencimento(desde: date, revisoes_feitas: list[date],
                         hoje: date) -> tuple[int, date | None]:
     """A etapa do 1-7-30 e quando ela vence, contando de `desde`.
 
-    Revisar NA data do vencimento ou depois passa para a proxima etapa; antes
-    e treino, nao revisao. Revisao feita e o acerto no radar, ou a revisao
-    marcada fora dele (decisao 82). Feita a de 30 dias, o prazo acabou e o
-    vencimento e None: sem isso o no voltava para a fila por prazo para
-    sempre (decisao 128).
+    Os tres prazos contam do dia do estudo - D+1, D+7 e D+30 -, como o R+7 e
+    o R+30 do plano (decisao 188). Antes cada prazo contava da revisao
+    anterior, e o R+7 feito no dia jogava a etapa seguinte para D+14, que o
+    plano nao tem: o tema ficava vencido ate o R+30.
+
+    Revisar NA data do vencimento ou depois passa de etapa; antes e treino,
+    nao revisao. A revisao atrasada vale pela etapa mais adiantada que ja
+    venceu: o R+7 feito sem o R+1 leva direto ao R+30. Revisao feita e o
+    acerto no radar, ou a revisao marcada fora dele (decisao 82). Feita a de
+    30 dias, o prazo acabou e o vencimento e None: sem isso o no voltava para
+    a fila por prazo para sempre (decisao 128).
     """
-    etapa, vence = 1, desde + timedelta(days=INTERVALOS[0])
+    vencimentos = [desde + timedelta(days=dias) for dias in INTERVALOS]
+    etapa = 1
     for dia in sorted(revisoes_feitas):
-        if dia >= vence:
-            if etapa == len(INTERVALOS):
-                return etapa, None
+        if dia < vencimentos[etapa - 1]:
+            continue
+        while etapa < len(INTERVALOS) and dia >= vencimentos[etapa]:
             etapa += 1
-            vence = dia + timedelta(days=INTERVALOS[etapa - 1])
-    return etapa, vence
+        if etapa == len(INTERVALOS):
+            return etapa, None
+        etapa += 1
+    return etapa, vencimentos[etapa - 1]
 
 
 def para_revisar(plano=None, hoje: date | None = None,

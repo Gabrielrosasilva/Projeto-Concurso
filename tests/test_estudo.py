@@ -427,10 +427,24 @@ def test_acertar_na_data_do_vencimento_empurra_o_prazo(plano):
 def test_feita_a_revisao_de_30_dias_o_prazo_acaba():
     """Decisao 128: sem isto o no voltava por prazo para sempre, porque a
     etapa 3 nunca andava e o vencimento ficava no passado."""
-    sete, trinta = date(2026, 10, 6), date(2026, 11, 5)
+    # Os prazos contam do estudo de 28/09 (decisao 188): 29/09, 05/10, 28/10.
+    sete, trinta = date(2026, 10, 5), date(2026, 10, 28)
 
     assert estudo._etapa_e_vencimento(SEG, [TER, sete], HOJE) == (3, trinta)
     assert estudo._etapa_e_vencimento(SEG, [TER, sete, trinta], HOJE) == (3, None)
+
+
+def test_os_prazos_contam_do_dia_do_estudo_como_o_plano():
+    """Decisao 188: o R+7 feito no 7o dia leva ao R+30 contado do estudo, e
+    nao a um prazo de 7 dias depois dele, que o plano nao tem."""
+    sete, trinta = date(2026, 10, 5), date(2026, 10, 28)
+
+    # So o R+7 (sem o R+1): vale pela etapa mais adiantada que ja venceu.
+    assert estudo._etapa_e_vencimento(SEG, [sete], HOJE) == (3, trinta)
+    # O R+1 no dia seguinte: a proxima e a de 7 dias do estudo, e nao do R+1.
+    assert estudo._etapa_e_vencimento(SEG, [TER], HOJE) == (2, sete)
+    # Antes do vencimento e treino: o mesmo dia do estudo nao conta.
+    assert estudo._etapa_e_vencimento(SEG, [SEG], HOJE) == (1, TER)
 
 
 def test_a_ponta_da_fila_e_o_no_sem_descendente_nela(plano):
@@ -451,10 +465,10 @@ def test_a_proxima_revisao_e_o_prazo_mais_perto_ainda_nao_vencido(plano):
 
     proxima = estudo.proxima_revisao(plano=plano, hoje=HOJE)
 
-    # A de 7 dias, contada do acerto de 29/09; entre os tres nos no mesmo
-    # dia, o mais fundo.
+    # A de 7 dias, contada da pratica de 28/09 (decisao 188); entre os tres
+    # nos no mesmo dia, o mais fundo.
     assert (proxima.caminho, proxima.vence_em, proxima.etapa) == (
-        NO_TEMPO, date(2026, 10, 6), 2)
+        NO_TEMPO, date(2026, 10, 5), 2)
 
 
 def test_sem_nada_estudado_nao_ha_proxima_revisao(plano):
@@ -523,6 +537,45 @@ def plano_com_nos(arvore, tmp_path):
     arquivo = tmp_path / "cronograma_com_nos.yml"
     arquivo.write_text(yaml.safe_dump(dados, allow_unicode=True), encoding="utf-8")
     return cronograma.carregar(arquivo)
+
+
+@pytest.fixture
+def plano_com_volta(arvore, tmp_path):
+    """O cronograma mini com o R+7 de 29/09 voltando ao dia 28/09, de Direito
+    Penal, sem `conteudo` nem `nos`: como quase todo R+7 do plano real."""
+    servico_conteudos.exportar()
+    dados = yaml.safe_load(MINI.read_text(encoding="utf-8"))
+    dados["dias"][1]["noite"][0].update(origem="2026-09-28", materia=PENAL)
+    arquivo = tmp_path / "cronograma_com_volta.yml"
+    arquivo.write_text(yaml.safe_dump(dados, allow_unicode=True), encoding="utf-8")
+    return cronograma.carregar(arquivo)
+
+
+def test_o_r7_revisa_o_que_o_dia_de_origem_tocou_na_materia(plano_com_volta):
+    """Decisao 188: o R+7 sem no chega aos nos que eu pratiquei no dia que ele
+    revisa, na materia dele - e nao so a materia inteira."""
+    _responder(1, True, SEG, classificar_em=NO_TEMPO)           # Penal em 28/09
+    _responder(2, True, SEG, materia=PORTUGUES, classificar_em=PORTUGUES)
+    assert NO_TEMPO in _na_fila(plano_com_volta)
+
+    _anotar(plano_com_volta, "noite", 0, 10, 8, data=TER)       # o R+7, em 29/09
+
+    fila = _na_fila(plano_com_volta)
+    todas = estudo.situacoes(plano=plano_com_volta, hoje=HOJE)
+    assert NO_TEMPO not in fila and APLICACAO not in fila
+    assert todas[NO_TEMPO].revisoes_fora_do_radar == [TER]
+    # O Portugues do mesmo dia nao era a materia do R+7: continua vencido.
+    assert PORTUGUES in fila
+
+
+def test_o_r7_nao_revisa_o_que_o_dia_de_origem_nao_tocou(plano_com_volta):
+    """O no praticado em outro dia nao e o que o R+7 de 28/09 revisa."""
+    _responder(1, True, TER, classificar_em=NO_TEMPO)           # em 29/09
+    _anotar(plano_com_volta, "noite", 0, 10, 8, data=TER)
+
+    todas = estudo.situacoes(plano=plano_com_volta, hoje=HOJE)
+
+    assert todas[NO_TEMPO].revisoes_fora_do_radar == []
 
 
 def _ficha(**mudar) -> fichas.FichaEscrita:

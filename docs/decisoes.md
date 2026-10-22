@@ -6710,3 +6710,29 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      Nada muda na conta: a fila, o 1-7-30 e o que conta como revisao (decisao
      79) sao os mesmos. No dado de 22/10: 54 vencidos (Abolitio criminis desde
      29/09, Regras de acentuacao e Paronimos desde 30/09), 5 erros do caderno.
+188. **o R+7 e o R+30 revisam o que o dia de origem tocou, e os prazos do
+     1-7-30 contam do dia do estudo** (pedido de 22/10: "a fila esta parada").
+     Em 22/10 a fila tinha 54 temas vencidos, 42 deles parados na etapa de 1
+     dia desde o estudo. Duas causas, as duas consertadas:
+     - **o R+7 feito nao chegava ao tema.** A faixa de revisao quase nunca diz
+       o no (das 28 ate 21/10, so 1 tinha `conteudo`), e o tema so chegava
+       pela ficha CONFERIDA (decisao 81; 8 de 65): o resto ia para a materia
+       inteira. Agora a faixa de revisao com `origem` (o R+7, o R+30 e o
+       "Extra" do plano) revisa os nos que o dia de origem tocou na materia
+       dela - o que eu estudei, anotei com no e respondi no radar, menos o que
+       ja era revisao (`estudo.situacoes`). E dado meu, e nao o vinculo da
+       IA: a regra da 81 continua. Com `conteudo`, a volta fica dentro dele.
+       So a data da revisao muda: acerto, volume e desempenho nao;
+     - **o prazo seguinte contava da revisao, e nao do estudo.** O R+7 feito
+       no 7o dia jogava a etapa de 30 para D+14, que o plano nao tem: o tema
+       ficava vencido de D+14 ate o R+30. Agora os tres prazos contam do dia
+       do estudo - D+1, D+7, D+30 -, como o R+7 e o R+30 do plano, e a
+       revisao atrasada vale pela etapa mais adiantada que ja venceu (o R+7
+       sem o R+1 leva direto ao R+30). Muda o calculo da decisao 82, que nao
+       dizia de onde o prazo contava; o resto dela continua (antes do
+       vencimento e treino; feita a de 30, o prazo acaba, decisao 128).
+     No dado de 22/10 a fila foi de 54 para 39 pontas: 14 so pelo erro (saem
+     quando eu acerto a questao) e 25 pelo prazo - os temas de 19/10, cujo R+7
+     e em 26/10, e os R+7 que nunca foram marcados no radar (21 faixas de
+     revisao de 05/10 a 21/10, sem circulo nem "fiz"). O radar nao sabe se
+     eles foram feitos: marcado o circulo do dia, a fila anda na hora.

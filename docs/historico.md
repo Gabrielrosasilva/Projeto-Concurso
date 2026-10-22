@@ -2527,3 +2527,14 @@ cartao logo abaixo da barra do dia com quantos estao vencidos, os 3 mais
 atrasados, o caderno de erros (que saiu da lateral) e um botao que abre uma
 questao por tema, os 10 mais atrasados primeiro - uma rodada que cabe numa
 pausa e faz a fila andar um pouco a cada dia (decisao 187).
+
+## A fila de revisao que nao andava (22/10)
+
+O cartao novo mostrou 54 temas vencidos, o mais antigo desde 29/09. Havia
+duas causas. O R+7 feito no Qconcursos nao chegava ao tema: a faixa de
+revisao quase nunca diz o no, e o tema so chegava pela ficha conferida (8 de
+65) - o resto ia para a materia inteira. E o prazo seguinte contava da
+revisao, e nao do estudo: o R+7 feito no 7o dia marcava um prazo para o 14o,
+que o plano nao tem. Agora o R+7 e o R+30 revisam o que o dia de origem tocou
+na materia, e os prazos contam do dia do estudo (decisao 188): a fila foi de
+54 para 39. O que sobra e erro por acertar e R+7 que nunca foi marcado.
