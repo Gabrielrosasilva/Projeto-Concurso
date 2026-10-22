@@ -40,6 +40,7 @@ from dataclasses import dataclass, field
 
 from sqlalchemy import select
 
+from radar import cache
 from radar import conteudos as arvore
 from radar.db import criar_tabelas, sessao
 from radar.models import Classificacao, QuestaoDeProva, RespostaDeSimulado, Simulado
@@ -104,6 +105,20 @@ def estoque(nos: list[str]) -> list[Candidata]:
     nos = [n for n in nos if n]
     if not nos:
         return []
+    saida, vistas = [], set()
+    for candidata in _todas_que_servem():
+        if not _dentro(candidata.conteudo, nos) or candidata.mesma in vistas:
+            continue
+        vistas.add(candidata.mesma)
+        saida.append(candidata)
+    return saida
+
+
+@cache.por_requisicao
+def _todas_que_servem() -> list[Candidata]:
+    """Toda questao de outra banca classificada, que serve, na ordem do id. A
+    leitura e uma por abertura de tela (pedido de 22/10): a Hoje a fazia uma
+    vez por faixa; cada faixa so filtra pelos nos dela."""
     criar_tabelas()
     with sessao() as s:
         principais = {c.chave: c.conteudo for c in s.scalars(
@@ -112,19 +127,14 @@ def estoque(nos: list[str]) -> list[Candidata]:
         questoes = list(s.scalars(
             select(QuestaoDeProva).where(QuestaoDeProva.evidencia == evidencia.FORA)
             .order_by(QuestaoDeProva.id)))
-
-    saida, vistas = [], set()
+    saida = []
     for q in questoes:
         chave = chave_de(q)
         conteudo = principais.get(chave)
-        if not conteudo or not _dentro(conteudo, nos) or not serve(q):
+        if not conteudo or not serve(q):
             continue
-        mesma = mesma_questao(q)
-        if mesma in vistas:
-            continue
-        vistas.add(mesma)
         saida.append(Candidata(id=q.id, chave=chave, conteudo=conteudo,
-                               banca=q.banca or "sem banca", mesma=mesma))
+                               banca=q.banca or "sem banca", mesma=mesma_questao(q)))
     return saida
 
 

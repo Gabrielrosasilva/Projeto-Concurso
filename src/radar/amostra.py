@@ -40,7 +40,7 @@ from pathlib import Path
 
 import yaml
 
-from radar import config
+from radar import cache, config
 
 # Os niveis da arvore de conteudos, do mais largo ao mais fundo. O mesmo
 # vocabulario do `radar.conteudos`, para o estado de um no sair do nivel dele
@@ -128,6 +128,12 @@ def carregar(caminho: Path | None = None) -> Minimos:
     arquivo = caminho or (config.diretorio_config() / "amostra.yml")
     if not Path(arquivo).exists():
         return PADRAO
+    # Lido de novo so quando o arquivo muda (pedido de 22/10): a tela Hoje o
+    # lia 15 vezes. Minimos e congelado: o guardado nao muda na mao de ninguem.
+    return cache.do_arquivo(arquivo, lambda: _ler(arquivo), nome="amostra")
+
+
+def _ler(arquivo) -> Minimos:
     dados = yaml.safe_load(Path(arquivo).read_text(encoding="utf-8")) or {}
     secao = dados.get("desempenho") or {}
 

@@ -37,6 +37,7 @@ from datetime import date
 
 from sqlalchemy import select
 
+from radar import cache
 from radar import conteudos as arvore
 from radar import incidencia
 from radar import prioridade as regra_da_prioridade
@@ -249,6 +250,8 @@ def dividir(materia: str, total: int, assuntos: list[AssuntoNaComposicao],
 
 # --- o que vem do banco ----------------------------------------------------------
 
+# Uma vez por abertura de tela (pedido de 22/10): a Hoje o montava 3 vezes.
+@cache.por_requisicao
 def _estoque(materias: list[str] | None = None) -> dict[str, list[Candidata]]:
     """{caminho do assunto: [questoes reais classificadas ali]}, alvo primeiro.
 
@@ -527,6 +530,7 @@ def compor(materias: list[str], total: int, *, pesos: dict[str, int] | None = No
 
 # --- as questoes da rodada --------------------------------------------------------
 
+@cache.por_requisicao
 def _respondidas() -> set[str]:
     from radar.servico.simulado import _impressoes_ja_respondidas
 

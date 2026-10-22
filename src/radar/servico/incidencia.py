@@ -2,6 +2,7 @@
 `radar.incidencia`, que e puro; aqui so se junta o que ele precisa."""
 from sqlalchemy import select
 
+from radar import cache
 from radar import conteudos as arvore
 from radar import incidencia
 from radar.db import criar_tabelas, sessao
@@ -30,6 +31,9 @@ def _materia_do_caderno(caminhos: list[str], taxonomia):
     return achar
 
 
+# Uma vez por abertura de tela (pedido de 22/10): a ficha, a faixa e a
+# composicao pediam as mesmas ocorrencias, cada uma de novo.
+@cache.por_requisicao
 def ocorrencias() -> list[incidencia.Ocorrencia]:
     """Uma por questao do ALVO, com a classificacao principal dela.
 
@@ -94,6 +98,7 @@ def mapa(materia: str | None = None) -> list[incidencia.MapaDaMateria]:
     return mapas
 
 
+@cache.por_requisicao
 def ocorrencias_complementares() -> list[incidencia.Ocorrencia]:
     """Uma por questao das provas ACEITAS no acervo complementar (Etapa 3B).
 

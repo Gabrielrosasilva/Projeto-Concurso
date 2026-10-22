@@ -2508,3 +2508,13 @@ O topo da Hoje passou a dizer quanto do dia ja foi - "4 de 9 faixas · 29 de
 a proxima faixa por fazer, com o botao que leva ate ela. Tudo feito, o cartao
 fica verde e manda marcar como foi o dia; e o bloco com todas as faixas
 feitas nasce fechado, com "✓ completo" (decisao 181).
+
+## As telas mais rapidas (22/10)
+
+Voce sentia o radar muito lento, e era: a Hoje levava quase 7 s, e cada
+circulo recarregava os 7. O perfil mostrou contas repetidas com o mesmo
+resultado - o estoque de questoes montado 3 vezes por abertura, o mesmo nome
+de materia normalizado 88 mil vezes, o cronograma.yml lido 9 vezes. Agora a
+conta e feita uma vez por abertura, e o arquivo so e lido de novo quando muda
+(decisao 183): a Hoje caiu para ~3,4 s e o Estudar de 7 s para 1,7 s, com as
+telas iguais byte a byte.

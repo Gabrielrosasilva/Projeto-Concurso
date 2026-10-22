@@ -4,7 +4,7 @@ Editar o YAML basta: nenhum municipio fica escrito no codigo. O arquivo e
 lido uma vez e guardado em memoria.
 """
 import unicodedata
-from functools import cache
+from functools import cache, lru_cache
 
 import yaml
 
@@ -29,10 +29,15 @@ NOME_DO_ANEL = {
 }
 
 
+@lru_cache(maxsize=65536)
 def normalizar(nome: str) -> str:
     """Tira acento, caixa e espaco sobrando, para comparar nome de municipio.
 
     "Florianopolis", "Florianópolis" e "FLORIANOPOLIS" viram a mesma coisa.
+
+    Guardada (pedido de 22/10): o Estudar normalizava o mesmo nome de materia
+    88 mil vezes por abertura, e o Acompanhando o mesmo titulo 99 mil. A
+    saida so depende da entrada; o limite de 65 mil textos segura a memoria.
     """
     sem_acento = unicodedata.normalize("NFKD", nome or "")
     sem_acento = "".join(c for c in sem_acento if not unicodedata.combining(c))

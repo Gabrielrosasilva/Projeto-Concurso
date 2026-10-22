@@ -9,6 +9,7 @@ quanto dura (ou quantas questoes tem), e o horario sai da soma a partir do
 inicio do bloco. Assim, quando a rampa troca 15 questoes por 20, tudo o que
 vem depois anda junto, sem ninguem reescrever horario a mao.
 """
+import copy
 import json
 import math
 from dataclasses import dataclass, field, replace
@@ -17,7 +18,7 @@ from pathlib import Path
 
 import yaml
 
-from radar import config
+from radar import cache, config
 from radar.conteudos import SEPARADOR
 from radar.origem import AUTOMATICO
 
@@ -693,8 +694,19 @@ LEITOR_DO_YAML = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
 
 
 def carregar(caminho: Path | None = None) -> Plano:
-    """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma."""
-    arquivo = caminho or (config.diretorio_config() / "cronograma.yml")
+    """Le o cronograma e confere. Erro de conteudo vira ErroNoCronograma.
+
+    O do config e lido de novo so quando o arquivo muda (pedido de 22/10): a
+    tela Inicio o lia 9 vezes por abertura. Quem recebe ganha uma copia - o
+    plano e um objeto que se pode alterar, e o guardado nao pode mudar."""
+    if caminho is None:
+        arquivo = config.diretorio_config() / "cronograma.yml"
+        return copy.deepcopy(cache.do_arquivo(arquivo, lambda: _ler(arquivo),
+                                              nome="cronograma"))
+    return _ler(caminho)
+
+
+def _ler(arquivo: Path) -> Plano:
     dados = yaml.load(Path(arquivo).read_text(encoding="utf-8"),
                       Loader=LEITOR_DO_YAML) or {}
 

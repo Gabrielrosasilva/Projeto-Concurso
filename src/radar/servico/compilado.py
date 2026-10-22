@@ -22,6 +22,7 @@ As regras, na ordem em que valem:
 import random
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
+from functools import lru_cache
 
 from radar import foco
 from radar.db import criar_tabelas, sessao
@@ -40,10 +41,14 @@ TAMANHOS = (40, 50, 100)
 PARECIDO_O_BASTANTE = 0.85
 
 
+@lru_cache(maxsize=4096)
 def _chave(nome: str | None) -> str:
     return "".join(c for c in normalizar(nome or "") if c.isalpha())
 
 
+# Guardada: sao poucos nomes de materia, comparados dezenas de milhares de
+# vezes por tela (o Estudar fazia 88 mil comparacoes por abertura).
+@lru_cache(maxsize=16384)
 def mesma_materia(do_edital: str, da_questao: str | None) -> bool:
     a, b = _chave(do_edital), _chave(da_questao)
     if not a or not b:

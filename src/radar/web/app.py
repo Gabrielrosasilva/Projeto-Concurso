@@ -21,6 +21,7 @@ from radar import foco as foco_do_alvo
 from radar import auditoria
 from radar import automacao
 from radar import config
+from radar import cache
 from radar import conteudos as arvore_de_conteudos
 from radar import cronograma
 from radar import destaques
@@ -98,6 +99,17 @@ ETAPAS = [
     ("encerrado", "encerrado"),
 ]
 templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
+
+
+@app.middleware("http")
+async def uma_conta_por_abertura(request: Request, call_next):
+    """Dentro de uma abertura de tela (GET), a mesma conta pesada e feita uma
+    vez so (`radar.cache`, pedido de 22/10). O POST grava, e por isso roda sem
+    nada guardado: a conta depois dele ve o que ele gravou."""
+    if request.method not in ("GET", "HEAD"):
+        return await call_next(request)
+    with cache.requisicao():
+        return await call_next(request)
 
 # O design system (design.css) e servido como arquivo, e nao colado em cada
 # pagina: um lugar so para a cor e o espaco, e o navegador guarda em cache.

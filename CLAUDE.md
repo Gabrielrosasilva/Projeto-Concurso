@@ -468,6 +468,10 @@ ganhou a frase da letra na parte "artigos", do texto vigente oficial (Camara,
 Decreto 678/1992, UNICEF, CNJ); `ResumoEnxuto.sem_letra` e o
 `--verificar-resumos` avisam o que voltar a ficar sem ela, e um teste le o
 `data/fichas.json` real. O "na real" do art. 67 da Convencao foi corrigido.
+**A velocidade das telas (22/10, decisao 183, a seu pedido):** a conta que se
+repete numa tela e feita uma vez por abertura, e o arquivo de config so e
+interpretado de novo quando muda (`radar/cache.py`): a Hoje de ~6,8 s para
+~3,4 s, o Estudar de ~7 s para ~1,7 s. Nada muda na tela.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).
@@ -534,7 +538,10 @@ do `servico/simulado_da_semana.py` (decisao 170): faixa com `treino`, que o
 do lote** sai do `servico/conferencia_do_lote.py` (decisao 173): o lote e a
 lista de chaves do `data/lotes_de_classificacao.json`, e a conferencia nunca
 mostra a letra da questao que eu nao respondi no radar nem a guardada para uma
-rodada que mede. **O sublinhado e o negrito da questao** saem do `radar/destaques.py`
+rodada que mede. **Conta pesada repetida numa tela** usa o `radar/cache.py` (decisao 183):
+`por_requisicao` (so dentro de um GET) e `do_arquivo` (pelo conteudo do
+arquivo); quem usa devolve dado que ninguem altera depois.
+**O sublinhado e o negrito da questao** saem do `radar/destaques.py`
 (decisao 178), gravados em `questoes.destaques` fora da chave; a tela so
 desenha pelo filtro `destacado`. **O motivo do erro** sai do `erros.motivo_do_erro` (decisao
 174), e a conta dos motivos do `metricas.motivos_dos_erros`: o caderno com

@@ -6577,3 +6577,34 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
        a letra do bloco cobre.
      O verificador continua com 10 avisos antigos, de outra natureza:
      resumos de Portugues que citam questoes hoje classificadas em outro tema.
+
+## A velocidade das telas (22/10/2026)
+
+183. **a conta que se repete numa tela e feita uma vez so, e o arquivo de
+     configuracao so e interpretado de novo quando muda** (pedido de 22/10: "sinto
+     ele muito lento"; partes 1 e 2 da proposta, aprovadas; nao muda nada na
+     tela). A Hoje levava ~6,8 s, o Estudar e o Simulado ~7 s, o Acompanhando
+     ~4,4 s: o estoque de questoes montado 3 vezes por abertura, as questoes
+     de outras bancas lidas uma vez por faixa, o mesmo nome de materia
+     normalizado 88 mil vezes, o cronograma.yml lido 9 vezes. As regras
+     (`radar/cache.py`):
+     - **as funcoes puras de texto guardam o resultado**: `regioes.normalizar`
+       (ate 65 mil textos), `compilado._chave` e `compilado.mesma_materia`;
+     - **`do_arquivo`**: o cronograma.yml, o amostra.yml e o qconcursos.yml
+       so sao interpretados de novo quando o CONTEUDO muda (o arquivo e lido e
+       comparado; o caro e o YAML). O plano sai como copia a cada pedido - e
+       um objeto que se altera -, os minimos e os links, como estao (nao
+       mudam na mao de ninguem);
+     - **`por_requisicao`**: dentro de uma abertura de tela (GET, pelo
+       middleware do `web/app.py`), o estoque de questoes, as respondidas, as
+       ocorrencias do alvo e do complementar e as questoes de outras bancas
+       (`outras_bancas._todas_que_servem`, filtradas depois por faixa) sao
+       feitos uma vez. O POST grava e roda sem nada guardado; fora de uma
+       requisicao (terminal, robo, testes de servico), nada e guardado.
+     Medido no banco real, com o processo aquecido: a Hoje de ~6,8 s para
+     ~3,4 s (inclusive a cada circulo), o Estudar e o Simulado de ~7 s para
+     ~1,7 s, o Acompanhando de ~4,4 s para ~1,4 s, o Inicio de ~2,5 s para
+     ~1,8 s. As telas foram geradas com e sem o cache, uma logo depois da
+     outra, e sairam iguais byte a byte (so o "~R$" da tela de gerar varia,
+     com ou sem). A parte 3 (o Resumo sob demanda, mais uns 0,5 a 1 s na
+     Hoje) ficou para depois.

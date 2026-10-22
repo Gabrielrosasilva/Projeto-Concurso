@@ -845,6 +845,13 @@ O que falta vai nesta ordem, uma etapa por conversa.
   emprego de pronome), umas 50 provas novas dariam umas 20 questoes deste
   tema, e as dos outros junto.
 
+### A velocidade das telas (decisao 183, 22/10)
+
+- ✅ **Feito**: as partes 1 e 2 (as contas de texto, os arquivos de config e
+  uma leitura por abertura): a Hoje de ~6,8 s para ~3,4 s;
+- ⚪ **Depende de voce: a parte 3**, o Resumo sob demanda (a janela so e
+  montada no clique, numa pagina propria): mais uns 0,5 a 1 s na Hoje.
+
 ### O circulo em toda faixa (decisao 179, 20/10)
 
 - ✅ **Feito**: o circulo em toda faixa (a de questoes, sem numero, conta como

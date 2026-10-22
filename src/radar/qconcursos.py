@@ -16,7 +16,7 @@ from urllib.parse import urlencode
 
 import yaml
 
-from radar import config
+from radar import cache, config
 from radar.fichas import chave_do_tema, tema_da_faixa
 
 ENDERECO = "https://www.qconcursos.com/questoes-de-concursos/questoes"
@@ -56,6 +56,12 @@ def carregar(caminho: Path | None = None) -> dict[str, LinkDoTema]:
     arquivo = Path(caminho or (config.diretorio_config() / "qconcursos.yml"))
     if not arquivo.exists():
         return {}
+    # Lido de novo so quando o arquivo muda: a tela Hoje o lia uma vez por
+    # faixa. A copia do dicionario protege o guardado de quem o alterar.
+    return dict(cache.do_arquivo(arquivo, lambda: _ler(arquivo), nome="qconcursos"))
+
+
+def _ler(arquivo: Path) -> dict[str, LinkDoTema]:
     dados = yaml.safe_load(arquivo.read_text(encoding="utf-8")) or {}
     banca = int(dados["banca"])
     links = {}
