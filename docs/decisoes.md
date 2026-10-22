@@ -6626,3 +6626,25 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      firewall): marcar o Wi-Fi de casa como rede privada, e criar a regra
      `New-NetFirewallRule -DisplayName "Radar (porta 8000)" -Direction
      Inbound -Protocol TCP -LocalPort 8000 -Action Allow -Profile Private`.
+
+## Usuario e senha para entrar pelo celular (22/10/2026)
+
+185. **pela rede, o radar pede usuario e senha; neste PC, abre direto** (pedido
+     de 22/10, depois da 184: qualquer pessoa no Wi-Fi abria). O
+     `radar/web/acesso.py` e um embrulho ASGI em volta do app, ligado pelo
+     `radar web` (e por isso pelo `radar subir` e pela tarefa do logon):
+     - **neste PC** (o pedido que chega de 127.0.0.1), nada muda;
+     - **pela rede**, a janela de usuario e senha do proprio navegador (HTTP
+       Basic), que o iPhone guarda no chaveiro; **sem senha definida, fica
+       fechado** (403), com a pagina dizendo para rodar `radar senha` no PC;
+     - **a senha nunca e guardada**: `radar senha` escreve no `.env` (fora do
+       git) o usuario e o RESUMO dela (PBKDF2-SHA256, 200 mil iteracoes, com
+       sal). O `.env` e lido de novo quando muda: trocar vale na hora, sem
+       reiniciar. Cada navegador e conferido uma vez e lembrado - o resumo e
+       lento de proposito, e o navegador manda a senha em toda requisicao;
+     - **o limite**: a conexao no Wi-Fi e HTTP, sem cadeado - a senha atravessa
+       a rede so codificada. Ela segura quem esta no Wi-Fi sem saber a senha,
+       e nao quem le o trafego da rede.
+     O app em si nao sabe de senha: os testes que o usam direto continuam sem
+     ela. Conferido de verdade: pelo localhost 200, pelo IP da rede 403 sem
+     senha definida.

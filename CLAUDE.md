@@ -476,6 +476,9 @@ interpretado de novo quando muda (`radar/cache.py`): a Hoje de ~6,8 s para
 tarefa do logon escutam na rede; o celular abre no Wi-Fi de casa, com o
 firewall liberando so a rede privada (os dois passos de administrador sao
 seus).
+**Usuario e senha pelo celular (22/10, decisao 185):** pela rede o radar pede
+usuario e senha (`radar senha` define; o `.env` guarda so o resumo); neste PC
+abre direto. Sem senha definida, a rede fica fechada.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

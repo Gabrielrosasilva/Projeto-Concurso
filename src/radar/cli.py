@@ -2269,7 +2269,7 @@ def web(
                 "Aberto na rede, mas não achei o IP deste PC. Rode [bold]ipconfig[/] "
                 f"e use o \"Endereço IPv4\" do Wi-Fi: http://<esse IP>:{porta}/hoje"
             )
-        console.print("[dim]Sem senha: qualquer pessoa no seu Wi-Fi consegue abrir.[/]")
+        console.print(f"[dim]{_frase_da_senha()}[/]")
     console.print("Ctrl+C para parar.\n")
 
     # O modo recarregar fica DESLIGADO por padrao de proposito. Ele faz o
@@ -2277,12 +2277,63 @@ def web(
     # Windows quando o caminho da pasta tem espaco no nome - que e exatamente
     # o caso aqui ("C:\Projeto concurso claude\..."). Sem ele, o servidor e
     # um processo so e simplesmente funciona.
+    # O app vai atras da senha (decisao 185): quem vem pela rede entra com
+    # usuario e senha; este PC, direto.
     if recarregar:
-        uvicorn.run("radar.web.app:app", host=host, port=porta, reload=True)
+        uvicorn.run("radar.web.acesso:protegido", host=host, port=porta, reload=True,
+                    factory=True)
     else:
-        from radar.web.app import app as aplicacao_web
+        from radar.web import acesso
 
-        uvicorn.run(aplicacao_web, host=host, port=porta)
+        uvicorn.run(acesso.protegido(), host=host, port=porta)
+
+
+def _frase_da_senha() -> str:
+    from radar.web import acesso
+
+    if acesso.credenciais():
+        return "Pela rede, o navegador pede o usuário e a senha do radar."
+    return ("Pela rede está FECHADO até você definir a senha: rode "
+            "radar senha. Neste PC abre direto.")
+
+
+@app.command()
+def senha(
+    apagar: bool = typer.Option(
+        False, "--apagar", help="Tira a senha: o acesso pela rede volta a ficar fechado"),
+) -> None:
+    """Define o usuario e a senha para entrar pelo celular (decisao 185).
+
+    Neste PC o radar abre direto; pela rede, o navegador pede os dois. A senha
+    nao e guardada: o .env (fora do git) fica com o usuario e o resumo dela.
+    Vale na hora, sem reiniciar o servidor.
+    """
+    from dotenv import set_key, unset_key
+
+    from radar.web import acesso
+
+    arquivo = acesso.caminho_do_env()
+    if apagar:
+        if arquivo.exists():
+            unset_key(str(arquivo), acesso.USUARIO)
+            unset_key(str(arquivo), acesso.RESUMO)
+        console.print("[green]Senha apagada.[/] O acesso pela rede está fechado; "
+                      "neste PC continua abrindo direto.")
+        return
+    atual = acesso.credenciais()
+    usuario = typer.prompt("Usuário", default=atual[0] if atual else None).strip()
+    if not usuario:
+        console.print("[red]O usuário não pode ficar vazio.[/]")
+        raise typer.Exit(code=1)
+    nova = typer.prompt("Senha", hide_input=True, confirmation_prompt="Repita a senha")
+    if len(nova) < 6:
+        console.print("[red]Senha curta demais:[/] use pelo menos 6 caracteres.")
+        raise typer.Exit(code=1)
+    arquivo.touch(exist_ok=True)
+    set_key(str(arquivo), acesso.USUARIO, usuario, quote_mode="always")
+    set_key(str(arquivo), acesso.RESUMO, acesso.resumir(nova), quote_mode="always")
+    console.print(f"[green]Pronto.[/] Pelo celular, entre com o usuário [bold]{escape(usuario)}[/] "
+                  f"e a senha que você digitou. Vale já, sem reiniciar o radar.")
 
 
 # --- tudo automatico (etapa D1) ---------------------------------------------

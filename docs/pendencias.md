@@ -845,6 +845,14 @@ O que falta vai nesta ordem, uma etapa por conversa.
   emprego de pronome), umas 50 provas novas dariam umas 20 questoes deste
   tema, e as dos outros junto.
 
+### Usuario e senha pelo celular (decisao 185, 22/10)
+
+- ✅ **Feito**: pela rede pede usuario e senha; neste PC abre direto;
+- ⚪ **Depende de voce**: rodar `radar senha` no PC (o usuario e a senha), e
+  reiniciar o servidor uma vez (`radar parar` e `radar subir`); sem isso, o
+  celular fica fechado;
+- ⚪ **Depois**: a tela no celular (voce achou ruim; "vamos depois").
+
 ### O radar no celular (decisao 184, 22/10)
 
 - ✅ **Feito**: o servidor em segundo plano escuta na rede (PC e celular juntos);
