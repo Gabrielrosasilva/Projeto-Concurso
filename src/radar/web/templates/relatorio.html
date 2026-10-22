@@ -81,6 +81,11 @@
       <span class="valor {{ 'bom' if porcento >= 60 else 'ruim' }}">{{ '%.0f'|format(porcento) }}%</span>
       <span>{{ resumo.acertos }} de {{ resumo.total }} questões desta rodada</span>
     </div>
+    {% set encerrada = (simulado.filtros or {}).get('encerrada') %}
+    {% if encerrada %}
+      {# O "Encerrar aqui" (decisao 185): a conta e so das respondidas. #}
+      <p class="ds-pequeno" style="margin-bottom:0">Você encerrou a rodada com {{ encerrada.respondidas }} de {{ encerrada.de }} questões: a conta é das que respondeu, e as outras voltaram ao estoque - vêm primeiro no próximo clique.</p>
+    {% endif %}
     {% if resumo.chutes %}
       {# Ao lado do acerto, e nao dentro: o acerto continua o mesmo (decisao
          142). A frase diz as duas contas inteiras - "3 no chute, 2 acertadas"

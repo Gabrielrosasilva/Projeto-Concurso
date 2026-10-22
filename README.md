@@ -994,6 +994,20 @@ E a preparacao do Historico: nao muda acerto, erro nem volume. A conta fica em
 FEPESE, outra banca, gerada e fora do radar, nunca somadas), com o **erro bobo**
 (li errado + confundi, `servico/erros.py`).
 
+## Treinar no radar: o que falta da faixa e o "Encerrar aqui"
+
+Os botoes **Treinar no radar** de cada faixa de questoes (FEPESE · N, Outras
+bancas · N, IA · N) trazem **o que falta da faixa**: o numero dela menos o que
+voce ja respondeu no radar por ela (reais e de IA). A faixa de 8 com 6 feitas
+traz 2; a faixa ja feita volta ao numero dela, para treinar mais. O numero do
+botao e o que o clique traz, e quantas o tema tem no radar fica na dica.
+
+Em toda rodada de treino, depois da primeira resposta, o **Encerrar aqui** (no
+canto de baixo da questao) fecha a rodada: as respondidas ja estao salvas e
+contam, a conta passa a ser so delas ("1 de 2"), e as que faltaram voltam ao
+estoque - o proximo clique as traz primeiro. A rodada que mede (diagnostico,
+simulado no radar, R+7 dos diagnosticos) e o Simulado da semana vao ate o fim.
+
 ## Os comandos
 
 ```bash

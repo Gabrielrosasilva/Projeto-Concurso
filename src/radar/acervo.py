@@ -744,6 +744,10 @@ def importar_simulados(caminho: Path | None = None) -> tuple[int, int]:
                     .where(RespostaDeSimulado.gerada == gerada)
                 )
                 if minha is None:
+                    # A rodada encerrada no meio (decisao 185) nao ganha de
+                    # volta a questao sem resposta que saiu dela.
+                    if simulado.finalizado_em is not None and not r.get("escolhida"):
+                        continue
                     minha = RespostaDeSimulado(
                         simulado_id=simulado.id, questao_id=questao_id,
                         gerada=gerada, ordem=r.get("ordem"),

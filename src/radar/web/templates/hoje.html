@@ -1266,9 +1266,13 @@
                 {% endif %}
 
                 {# Treinar no radar, num clique (decisao 180): a FEPESE, as outras
-                   bancas e a IA lado a lado, cada uma com quantas tem. O numero
-                   e o sugerido; escolher outro, e o nivel da IA, fica no "mais". #}
+                   bancas e a IA lado a lado. O numero do botao e o que o clique
+                   traz - o que falta da faixa (decisao 185) -, e quantas o tema
+                   tem fica na dica; escolher outro, e o nivel da IA, fica no "mais". #}
                 {% set ia_no_estoque = geradas_no_estoque(gf) %}
+                {% set pd = pedidas_das_faixas.get((b.chave, indice_da_faixa_aqui)) if pedidas_das_faixas else none %}
+                {% set so_falta = ' · o que falta da faixa' if pd and pd.so_o_que_falta else '' %}
+                {% set ia_traz = [ia_no_estoque, (pd.quantas if pd else gf.questoes) or ia_no_estoque, 30] | min if gf else 0 %}
                 {% if fp or ob or gf %}
                   <div class="treinar-rapido">
                     <span class="rotulo">Treinar no radar:</span>
@@ -1281,7 +1285,7 @@
                         <input type="hidden" name="titulo" value="{{ f.titulo }}">
                         <input type="hidden" name="quantidade" value="{{ fp.sugeridas }}">
                         <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
-                                title="{{ fp.sugeridas }} questões reais da FEPESE deste tema">FEPESE · {{ fp.disponiveis }}</button>
+                                title="Traz {{ fp.sugeridas }} questões reais da FEPESE{{ so_falta }} · {{ fp.disponiveis }} deste tema no radar">FEPESE · {{ fp.sugeridas }}</button>
                       </form>
                     {% elif fp %}
                       <span class="botao-vazio" title="{{ 'Guardadas para a rodada que mede' if fp.reservadas else 'O radar ainda não tem questão da FEPESE deste tema' }}">FEPESE · 0</span>
@@ -1295,7 +1299,7 @@
                         <input type="hidden" name="titulo" value="{{ f.titulo }}">
                         <input type="hidden" name="quantidade" value="{{ ob.sugeridas }}">
                         <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
-                                title="{{ ob.sugeridas }} questões reais de outras bancas ({{ ob.bancas | join(', ') }})">Outras bancas · {{ ob.no_acervo }}</button>
+                                title="Traz {{ ob.sugeridas }} questões reais de outras bancas{{ so_falta }} · {{ ob.no_acervo }} deste tema no radar ({{ ob.bancas | join(', ') }})">Outras bancas · {{ ob.sugeridas }}</button>
                       </form>
                     {% elif ob %}
                       <span class="botao-vazio" title="Ainda não há questão de outra banca deste tema no radar">Outras bancas · 0</span>
@@ -1308,9 +1312,9 @@
                           <input type="hidden" name="bloco" value="{{ b.chave }}">
                           <input type="hidden" name="indice" value="{{ indice_da_faixa_aqui }}">
                           <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                          <input type="hidden" name="quantidade" value="{{ [ia_no_estoque, gf.questoes or ia_no_estoque, 30] | min }}">
+                          <input type="hidden" name="quantidade" value="{{ ia_traz }}">
                           <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
-                                  title="Questões escritas pela IA: só treinam, nível misturado">{{ selo('ia', curto=True) }} IA · {{ ia_no_estoque }}</button>
+                                  title="Traz {{ ia_traz }} questões escritas pela IA{{ so_falta }}: só treinam, nível misturado · {{ ia_no_estoque }} deste tema no estoque">{{ selo('ia', curto=True) }} IA · {{ ia_traz }}</button>
                         </form>
                       {% else %}
                         <span class="botao-vazio" title="Não há questão gerada deste tema: os 3 passos para pedir estão no “mais”">{{ selo('ia', curto=True) }} IA · 0</span>

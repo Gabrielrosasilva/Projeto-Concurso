@@ -418,3 +418,15 @@ def test_o_pedido_filtra_pela_banca(acervo):
     lote = manual.pedido_de_classificacao(None, "fora", genericos=True, banca="cebraspe")
     assert len(lote["pedidos"]) == 1
     assert lote["pedidos"][0]["materia"].startswith("Cebraspe")
+
+
+def test_com_o_que_falta_da_faixa_a_rodada_traz_so_isso(acervo):
+    """Decisao 185: a faixa de 6 que ja tem 4 respostas no radar traz 2, e o
+    tema continua com as 3 dele no radar; sem o `pedidas`, o numero da faixa."""
+    from radar.servico.cronograma import PedidasDaFaixa
+
+    com = SimpleNamespace(sem_no=False, questoes=6, nos=(SimpleNamespace(no=INTERPRETACAO),))
+    resumo = outras_bancas.das_faixas({("manha", 0): com},
+                                      {("manha", 0): PedidasDaFaixa(2, so_o_que_falta=True)})
+    assert (resumo[("manha", 0)].sugeridas, resumo[("manha", 0)].no_acervo) == (2, 3)
+    assert outras_bancas.das_faixas({("manha", 0): com})[("manha", 0)].sugeridas == 3

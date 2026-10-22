@@ -479,6 +479,13 @@ seus).
 **Usuario e senha pelo celular (22/10, decisao 185):** pela rede o radar pede
 usuario e senha (`radar senha` define; o `.env` guarda so o resumo); neste PC
 abre direto. Sem senha definida, a rede fica fechada.
+**O "Encerrar aqui" e o que falta da faixa (22/10, decisao 186, a seu
+pedido):** toda rodada de treino se encerra no meio, depois da primeira
+resposta (`simulado.encerrar`): as respondidas ficam e contam, as outras voltam
+ao estoque como nunca feitas; a que mede e o Simulado da semana vao ate o fim.
+Os botoes "Treinar no radar" trazem o que falta da faixa
+(`cronograma.pedidas_das_faixas`, a conta do `fechar_pelo_radar`), e o numero
+do botao e o que o clique traz.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

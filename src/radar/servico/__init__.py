@@ -92,6 +92,8 @@ from radar.servico.simulado import (    # noqa: F401 - a fachada
     descartar_simulado,
     descartar_todos,
     descartar_vazios,
+    EncerrarRecusado,
+    encerrar,
     simulados_vazios,
     listar_simulados,
     marcar_motivo,

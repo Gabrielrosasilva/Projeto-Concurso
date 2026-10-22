@@ -495,6 +495,49 @@ def marcar_motivo(simulado_id: int, questao_id: int, motivo: str) -> RespostaDeS
         return resposta
 
 
+class EncerrarRecusado(ValueError):
+    """A rodada nao pode ser encerrada no meio (decisao 185)."""
+
+
+def encerrar(simulado_id: int) -> int:
+    """O "Encerrar aqui" da rodada de treino (decisao 185). Devolve quantas
+    ficaram, as respondidas.
+
+    Cada resposta ja foi gravada na hora em que eu respondi: encerrar so fecha
+    a rodada. As questoes sem resposta saem dela e voltam ao estoque como
+    nunca feitas - o proximo clique as traz primeiro -, e o resultado passa a
+    ser o das respondidas ("2 questoes, 1 acerto"). Recusa a rodada que mede e
+    o Simulado da semana (`corrige_na_hora` falso: encerrar no meio mudaria o
+    que elas medem) e a rodada sem nenhuma resposta (essa se descarta)."""
+    criar_tabelas()
+    with sessao() as s:
+        simulado = s.get(Simulado, simulado_id)
+        if simulado is None:
+            raise EncerrarRecusado("Essa rodada não existe mais.")
+        if not corrige_na_hora(simulado):
+            raise EncerrarRecusado(
+                "Esta rodada mede (ou é o Simulado da semana): ela vai até o fim.")
+        respostas = list(s.scalars(select(RespostaDeSimulado)
+                                   .where(RespostaDeSimulado.simulado_id == simulado_id)))
+        feitas = [r for r in respostas if r.escolhida is not None]
+        if not feitas:
+            raise EncerrarRecusado("Responda ao menos uma questão; sem nenhuma, descarte a rodada.")
+        for resposta in respostas:
+            if resposta.escolhida is None:
+                s.delete(resposta)
+        if len(feitas) < len(respostas):
+            # Dict novo: o SQLAlchemy so percebe a coluna JSON trocada.
+            simulado.filtros = {**(simulado.filtros or {}),
+                                "encerrada": {"respondidas": len(feitas), "de": len(respostas)}}
+        simulado.finalizado_em = simulado.finalizado_em or agora()
+    # O backup no mesmo passo: senao o proximo importar traria de volta as
+    # questoes que sairam (o arquivo so completa a rodada que o banco tem).
+    from radar import acervo
+
+    acervo.exportar_simulados()
+    return len(feitas)
+
+
 def questao_respondida(
     simulado_id: int, questao_id: int,
 ) -> tuple[RespostaDeSimulado, QuestaoDeProva | QuestaoGerada] | None:

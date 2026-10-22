@@ -6648,3 +6648,45 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      O app em si nao sabe de senha: os testes que o usam direto continuam sem
      ela. Conferido de verdade: pelo localhost 200, pelo IP da rede 403 sem
      senha definida.
+
+## O "Encerrar aqui" e o que falta da faixa (pedido de 22/10/2026)
+
+186. **a rodada de treino se encerra no meio, e os botoes da faixa trazem o que
+     falta dela** (pedido de 22/10, aprovado "recomendado"; nao mexe em conta
+     nenhuma). Na Fixacao de "Na Constituicao e o status dos tratados", de 8
+     questoes, so havia 6 da FEPESE, e o botao de outras bancas trazia 8 - o
+     numero da faixa inteira -, quando faltavam 2; e nao havia como parar uma
+     rodada no meio e ver o resultado do que foi feito. A resposta ja era
+     gravada uma a uma (a rodada pela metade ja contava no acerto, no "Fiz
+     hoje" e no 1-7-30, e fechava a faixa - decisao 179): faltava fechar a
+     rodada e trazer o numero certo. As regras:
+     - **o "Encerrar aqui"** (`simulado.encerrar`, `POST /simulado/{id}/encerrar`):
+       em toda rodada que corrige na hora - os tres botoes da faixa, as
+       revisoes, o Portugues no radar, o simulado avulso, o compilado e o
+       "Responder no radar" da conferencia -, depois da primeira resposta, no
+       canto de baixo da questao, sem confirmacao (nada se perde). As
+       respondidas ficam; as sem resposta saem da rodada e voltam ao estoque
+       como nunca feitas (o proximo clique as traz primeiro), e nao como uma
+       rodada pausada; a rodada fica finalizada, com `filtros.encerrada`
+       ("respondidas" de "de"), e o resultado e o das respondidas ("1 de 2",
+       50%). O backup vai no mesmo passo, e o importar nao devolve a rodada
+       encerrada a questao sem resposta que saiu dela;
+     - **a rodada que mede e o Simulado da semana vao ate o fim**
+       (`corrige_na_hora` falso: diagnostico, simulado no radar, R+7 dos
+       diagnosticos e o Simulado da semana): encerrar no meio mudaria o que
+       elas medem, e o servico recusa. A sem nenhuma resposta tambem (essa se
+       descarta);
+     - **o que falta da faixa** (`cronograma.pedidas_das_faixas`): o numero da
+       faixa menos o que ja respondi no radar por ela, reais e de IA - a conta
+       do `fechar_pelo_radar` -, no minimo 1; a faixa feita (por mim ou pelo
+       radar) volta ao numero dela, para treinar mais. Os tres botoes usam
+       esse numero (a FEPESE e as outras bancas pelo `das_faixas`, a IA na
+       mesma conta), sem passar do estoque;
+     - **o numero do botao e o que o clique traz** ("Outras bancas · 2"); quantas
+       o tema tem no radar vai para a dica ("Traz 2 ... · o que falta da faixa ·
+       8 deste tema no radar"). Antes o botao mostrava o estoque e trazia o
+       numero da faixa.
+     Conferido numa copia do banco (o `data/radar.db` com o mesmo hash): a
+     rodada de 5 com 1 respondida encerrou com "1 de 5" no resultado e a conta
+     de 1. No dado de 22/10 a Fixacao da manha ja estava feita (6 no radar e o
+     "fiz 2"), e o botao dela traz de novo o numero da faixa.

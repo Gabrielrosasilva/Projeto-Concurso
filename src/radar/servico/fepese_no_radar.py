@@ -113,10 +113,12 @@ def da_faixa(nos: list[str], reserva: composicao.Reserva, *,
 
 
 def das_faixas(geradas_das_faixas: dict, data: date, reserva: composicao.Reserva | None = None,
-               fora: set | None = None) -> dict:
+               fora: set | None = None, pedidas: dict | None = None) -> dict:
     """{(bloco, indice): FepeseDaFaixa} das faixas de treino do dia, pelos nos
     que a faixa ja diz. `fora` sao as chaves (bloco, indice) que ja tem o bloco
-    da decisao 107 (a de Portugues no Qconcursos)."""
+    da decisao 107 (a de Portugues no Qconcursos). `pedidas` e o
+    `cronograma.pedidas_das_faixas`: a rodada traz o que falta da faixa
+    (decisao 185); sem ele, o numero dela."""
     com_nos = {chave: gf for chave, gf in (geradas_das_faixas or {}).items()
                if not gf.sem_no and gf.nos and chave not in (fora or set())}
     if not com_nos:
@@ -124,7 +126,10 @@ def das_faixas(geradas_das_faixas: dict, data: date, reserva: composicao.Reserva
     reserva = reserva if reserva is not None else composicao.reserva_das_que_medem(data)
     estoque = composicao.estoque_real()
     respondidas = composicao.ja_respondidas()
-    return {chave: da_faixa([n.no for n in gf.nos], reserva, questoes_da_faixa=gf.questoes,
+    pedidas = pedidas or {}
+    return {chave: da_faixa([n.no for n in gf.nos], reserva,
+                            questoes_da_faixa=(pedidas[chave].quantas if chave in pedidas
+                                               else gf.questoes),
                             estoque=estoque, respondidas=respondidas)
             for chave, gf in com_nos.items()}
 

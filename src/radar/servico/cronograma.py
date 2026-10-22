@@ -446,6 +446,38 @@ def fechar_pelo_radar(data: date, bloco: str, indice: int, titulo: str, *,
     return _gravar_check(data, bloco, indice, titulo, check)
 
 
+@dataclass(frozen=True)
+class PedidasDaFaixa:
+    """Quantas questoes os botoes "Treinar no radar" de uma faixa trazem."""
+
+    quantas: int
+    #: True quando e so o que falta: a faixa ja tem resposta no radar.
+    so_o_que_falta: bool = False
+
+
+def pedidas_das_faixas(blocos, feitas: set, no_radar: dict) -> dict:
+    """{(bloco, indice): PedidasDaFaixa} das faixas de questoes do dia (decisao 185).
+
+    O botao traz o que falta da faixa: o numero dela menos o que ja respondi no
+    radar por ela, reais e de IA - a mesma conta do `fechar_pelo_radar`, que a
+    fecha quando chega la -, no minimo 1. A faixa feita (por mim ou pelo radar)
+    volta ao numero dela, para treinar mais. `no_radar` e o
+    `metricas.no_radar_por_faixa` do dia, pela chave (bloco, indice, titulo)."""
+    pedidas = {}
+    for bloco in blocos:
+        for indice, faixa in enumerate(bloco.faixas):
+            if not plano_de_estudo.tem_acerto(faixa) or not faixa.questoes:
+                continue
+            feitas_no_radar = getattr(no_radar.get((bloco.chave, indice, faixa.titulo)),
+                                      "questoes", 0)
+            if (bloco.chave, indice) in feitas or not feitas_no_radar:
+                pedidas[(bloco.chave, indice)] = PedidasDaFaixa(faixa.questoes)
+            else:
+                pedidas[(bloco.chave, indice)] = PedidasDaFaixa(
+                    max(faixa.questoes - feitas_no_radar, 1), so_o_que_falta=True)
+    return pedidas
+
+
 def fechar_pelo_radar_no_dia(data: date, *, plano=None, hoje: date | None = None) -> int:
     """Todas as faixas do dia que o radar ja cobriu. Devolve quantas fechou."""
     from radar.servico import metricas

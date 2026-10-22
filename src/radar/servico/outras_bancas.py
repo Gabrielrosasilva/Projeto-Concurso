@@ -203,15 +203,20 @@ def da_faixa(nos: list[str], questoes_da_faixa: int | None = None,
         questoes_da_faixa=questoes_da_faixa)
 
 
-def das_faixas(geradas_das_faixas: dict) -> dict:
+def das_faixas(geradas_das_faixas: dict, pedidas: dict | None = None) -> dict:
     """{(bloco, indice): OutrasBancasDaFaixa} das faixas de treino do dia,
-    pelos nos que a faixa ja diz (os das geradas, `fichas.onde_na_arvore`)."""
+    pelos nos que a faixa ja diz (os das geradas, `fichas.onde_na_arvore`).
+    `pedidas` e o `cronograma.pedidas_das_faixas`: a rodada traz o que falta
+    da faixa (decisao 185); sem ele, o numero dela."""
     com_nos = {chave: gf for chave, gf in (geradas_das_faixas or {}).items()
                if not gf.sem_no and gf.nos}
     if not com_nos:
         return {}
     feitas_antes = respondidas()
-    return {chave: da_faixa([n.no for n in gf.nos], gf.questoes, feitas_antes)
+    pedidas = pedidas or {}
+    return {chave: da_faixa([n.no for n in gf.nos],
+                            pedidas[chave].quantas if chave in pedidas else gf.questoes,
+                            feitas_antes)
             for chave, gf in com_nos.items()}
 
 

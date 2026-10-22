@@ -971,6 +971,17 @@ def _macetes_por_questao() -> dict[str, list]:
     return por_questao
 
 
+@app.post("/simulado/{simulado_id}/encerrar")
+def simulado_encerrar(simulado_id: int):
+    """O "Encerrar aqui" da rodada de treino (decisao 185): as respondidas
+    ficam, as outras voltam ao estoque, e a tela vai para o resultado delas."""
+    try:
+        servico.encerrar(simulado_id)
+    except servico.EncerrarRecusado as recusa:
+        return HTMLResponse(f"<p>Não encerrei: {escape(str(recusa))}</p>", status_code=400)
+    return RedirectResponse(f"/simulado/{simulado_id}", status_code=303)
+
+
 @app.post("/simulado/{simulado_id}/motivo")
 def simulado_motivo(
     simulado_id: int,
@@ -1342,6 +1353,13 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
                if tela.blocos and tela.plano else None)
     no_radar = (servico.faixa_no_radar.das_faixas(tela.blocos, tela.data, reserva)
                 if tela.blocos else {})
+    # O que ja foi respondido no radar por cada faixa, contado uma vez: avisa na
+    # faixa e diz quanto falta nela - os botoes "Treinar no radar" trazem so o
+    # que falta (decisao 185).
+    respondidas_no_radar = (servico.metricas.no_radar_por_faixa(tela.data)
+                            if tela.blocos else {})
+    pedidas = servico.cronograma.pedidas_das_faixas(tela.blocos, tela.feitas,
+                                                    respondidas_no_radar)
     return templates.TemplateResponse(
         request=request,
         name="hoje.html",
@@ -1377,18 +1395,20 @@ def _pagina_de_hoje(request: Request, data: str | None, erro: str | None = None,
             # O "Gerar questao real" das outras materias (decisao 167): as reais
             # da FEPESE do tema, sem as reservadas para a rodada que mede.
             "fepese_das_faixas": (servico.fepese_no_radar.das_faixas(
-                geradas_das_faixas, tela.data, reserva, fora=set(no_radar))
+                geradas_das_faixas, tela.data, reserva, fora=set(no_radar), pedidas=pedidas)
                 if reserva is not None else {}),
             # As geradas de cada faixa de treino (R6): o no, quantas ha e os
             # passos para gerar o que falta.
             "geradas_das_faixas": geradas_das_faixas,
             # As questoes reais de outras bancas dos mesmos nos (decisao 166):
             # so a faixa cujo tema tem alguma ganha a linha.
-            "outras_bancas_das_faixas": servico.outras_bancas.das_faixas(geradas_das_faixas),
+            "outras_bancas_das_faixas": servico.outras_bancas.das_faixas(
+                geradas_das_faixas, pedidas),
             # O que ja foi respondido no radar em rodada aberta pela faixa:
             # conta sozinho no "Fiz hoje", e a faixa avisa para nao anotar de novo.
-            "respondidas_no_radar": (servico.metricas.no_radar_por_faixa(tela.data)
-                                     if tela.blocos else {}),
+            "respondidas_no_radar": respondidas_no_radar,
+            # Quantas o botao de IA traz: o que falta da faixa (decisao 185).
+            "pedidas_das_faixas": pedidas,
             # O treino de IA de cada tema, de qualquer dia (decisao 138): o
             # sinal de treino, num numero a parte do acerto.
             "treino_ia_das_faixas": {

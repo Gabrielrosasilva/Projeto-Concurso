@@ -86,6 +86,8 @@
       margin-top:var(--esp-3)}
     .motivo-do-erro form{display:inline}
     .motivo-do-erro__rotulo{font-weight:var(--peso-forte);margin-right:var(--esp-1)}
+    /* O botao de encerrar a rodada de treino (decisao 185): no canto de baixo. */
+    .encerrar{display:flex;justify-content:flex-end;margin-top:var(--esp-4)}
   </style>
 </head>
 <body class="ds">
@@ -288,6 +290,16 @@
       {% endif %}
     </p>
   </article>
+
+  {# O "Encerrar aqui" (decisao 185): so na rodada de treino, depois da
+     primeira resposta e com questao ainda por fazer. As respondidas ja estao
+     salvas; as outras voltam ao estoque. A rodada que mede vai ate o fim. #}
+  {% if na_hora and resumo.respondidas and (ainda_falta if corrigida else true) %}
+    <form class="encerrar" method="post" action="/simulado/{{ simulado.id }}/encerrar">
+      <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
+              title="As que você respondeu já estão salvas; as que faltam voltam ao estoque e vêm primeiro no próximo clique">Encerrar aqui · salva {{ resumo.respondidas }}</button>
+    </form>
+  {% endif %}
 </main>
 </body>
 </html>
