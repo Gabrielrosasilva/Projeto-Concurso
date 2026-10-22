@@ -452,6 +452,11 @@ questoes ganhou o circulo - sem numero, conta na meta e no tempo
 com o resultado, e a faixa que o radar cobriu fecha sozinha
 (`cronograma.fechar_pelo_radar`, depois de cada resposta). O 19/10 ficou Ideal,
 9 de 9. As outras melhorias da aba Hoje estao propostas na pendencia O.
+**A faixa enxuta (22/10, decisao 180, a seu pedido):** a faixa da Hoje tem a
+linha (com o "caiu" curto, `CaiuNoAlvo.etiqueta`), o que fazer agora (com
+"Treinar no radar: FEPESE · Outras bancas · IA", um clique cada) e um "mais"
+fechado com o resto; as regras que se repetiam viraram um "ⓘ" so. Nada saiu
+da tela.
 **Proximo:** os sabados que medem (17/10 e 07/11) e o Ciclo 2;
 depois de 07/11, o redesenho das telas e a nuvem
 ([roteiro_nuvem](docs/roteiro_nuvem.md), decisao 126).

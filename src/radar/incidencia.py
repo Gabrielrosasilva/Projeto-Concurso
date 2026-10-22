@@ -662,6 +662,22 @@ class CaiuNoAlvo:
         return "A matéria não estava nas provas do alvo analisadas."
 
     @property
+    def etiqueta(self) -> str | None:
+        """A frase curta da linha da faixa (decisao 180): "caiu 2× (2013,
+        2019)" ou "não caiu (2013, 2019)". A frase inteira, com a amostra e as
+        notas, continua na `frase` - a faixa a mostra no "mais". None sem
+        contagem: ai nao ha o que resumir."""
+        if self.sem_contagem:
+            return None
+        com = [str(p.ano) for p in self.provas if p.total]
+        if com:
+            return f"caiu {self.questoes}× ({', '.join(com)})"
+        tinham = [str(p.ano) for p in self.provas if p.tinha_a_materia]
+        if tinham:
+            return f"não caiu ({', '.join(tinham)})"
+        return "matéria fora das provas do alvo"
+
+    @property
     def notas(self) -> list[str]:
         """O que a frase precisa ter ao lado para ser honesta."""
         saida = []

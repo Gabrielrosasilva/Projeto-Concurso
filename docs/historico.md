@@ -2490,3 +2490,13 @@ responder a ultima questao (decisao 179). Junto veio a analise da aba Hoje:
 a faixa de 10 minutos ocupava uma tela, a mesma explicacao se repetia em 9
 faixas, e o celular mostrava a lateral antes do plano - as melhorias estao
 propostas, uma etapa por vez.
+
+## A faixa enxuta (22/10)
+
+A Fixacao de 4 questoes ocupava quase uma tela, e a mesma explicacao se
+repetia em 9 faixas. A faixa passou a ter tres camadas: a linha (com o "caiu"
+curto), o que fazer agora (o Qconcursos, os tres botoes "Treinar no radar" e
+o "fiz") e um "mais" fechado com o resto - a arvore, o caiu inteiro, a ficha
+e o resumo das de questao, o treino com nivel, os passos de pedir a IA, o
+anotar erro e o "como foi". As regras repetidas viraram um "ⓘ" so (decisao
+180). Nada saiu da tela: esta um clique abaixo.

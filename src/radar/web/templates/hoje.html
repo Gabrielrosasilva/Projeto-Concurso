@@ -293,7 +293,8 @@
     .faixa .materia{padding:.05rem .5rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
       border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto-suave)}
     .faixa .titulo{margin:var(--esp-1) 0 0;font-size:var(--tam-md);font-weight:var(--peso-forte);line-height:var(--linha-titulo)}
-    .faixa .qtd{margin:var(--esp-1) 0 0;font-size:var(--tam-lg);font-weight:var(--peso-forte);font-variant-numeric:tabular-nums;color:var(--cor-tipo)}
+    .faixa .chip-qtd{color:var(--cor-tipo);border-color:var(--cor-tipo);font-weight:var(--peso-forte)}
+    .faixa .chip-caiu{white-space:nowrap}
     .faixa .chips{display:flex;gap:var(--esp-1);flex-wrap:wrap;margin-top:var(--esp-2)}
     .chip{padding:.05rem .5rem;border-radius:var(--raio-pill);font-size:var(--tam-xs);font-weight:var(--peso-medio);
       background:var(--cor-superficie);border:1px solid var(--cor-borda);color:var(--cor-texto-suave);white-space:nowrap}
@@ -358,6 +359,32 @@
     /* O resultado nao e riscado com o titulo: e o que eu quero ler. O risco
        do pai nao desce para o inline-block. */
     .faixa.feita .titulo .resultado{display:inline-block}
+    /* A faixa enxuta (decisao 180). O detalhe da faixa de estudo em tres
+       linhas, e o clique mostra o resto; sem JavaScript. */
+    .faixa .detalhe-dobra{margin-top:var(--esp-2)}
+    .faixa .detalhe-dobra > summary{list-style:none;color:inherit;font-weight:inherit}
+    .faixa .detalhe-dobra > summary::-webkit-details-marker{display:none}
+    .faixa .detalhe-dobra:not([open]) .detalhe{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .faixa .detalhe-dobra:not([open]) > summary::after{content:"ver tudo ▾";display:block;margin-top:var(--esp-1);font-size:var(--tam-xs);
+      color:var(--cor-acao);font-weight:var(--peso-medio)}
+    /* Os avisos da faixa (o do Qconcursos, o do radar) em letra menor: sao
+       nota, e nao a acao. */
+    .faixa .regra{font-size:var(--tam-sm);color:var(--cor-texto-suave)}
+    /* Treinar no radar: os tres botoes numa linha so. */
+    .treinar-rapido{display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-2);margin-top:var(--esp-3)}
+    .treinar-rapido form{margin:0}
+    .treinar-rapido .rotulo{font-size:var(--tam-sm);font-weight:var(--peso-medio);color:var(--cor-texto-suave)}
+    .botao-vazio{padding:var(--esp-1) var(--esp-3);border-radius:var(--raio-sm);border:1px dashed var(--cor-borda);
+      font-size:var(--tam-sm);color:var(--cor-texto-suave);cursor:help}
+    /* O "mais": fechado, discreto, no fim da faixa. */
+    .faixa .faixa-mais{margin-top:var(--esp-3);border-top:1px dashed var(--cor-borda);padding-top:var(--esp-2)}
+    .faixa .faixa-mais > summary{font-size:var(--tam-sm)}
+    .faixa .faixa-mais[open] > summary{margin-bottom:var(--esp-2)}
+    /* A ajuda unica, antes dos blocos. */
+    .ajuda-da-faixa{margin:0 0 var(--esp-3);font-size:var(--tam-sm)}
+    .ajuda-da-faixa > summary{cursor:pointer;color:var(--cor-acao);font-weight:var(--peso-medio)}
+    .ajuda-da-faixa ul{margin:var(--esp-2) 0 0;padding-left:var(--esp-5);color:var(--cor-texto)}
+    .ajuda-da-faixa li{margin-bottom:var(--esp-1)}
 
     /* --- o Plano B --- */
     /* O botao abre a escolha do tempo num <details>: sem JavaScript. */
@@ -893,6 +920,19 @@
      cabecalho a frase de que o ANKI esta temporariamente desativado.
 
   #}
+  {# A ajuda da faixa (decisao 180): as regras que se repetiam em cada faixa
+     de questoes, escritas uma vez so. #}
+  {% if t.blocos %}
+    <details class="ajuda-da-faixa">
+      <summary>ⓘ Como funcionam os botões da faixa</summary>
+      <ul>
+        <li><b>O círculo</b> marca a faixa como feita, e ela fecha numa linha; clicar na linha abre de novo. Na faixa de questões o número é opcional: sem ele, a faixa conta na meta e no tempo, e nenhuma questão. A faixa que o radar cobriu inteira fecha sozinha.</li>
+        <li><b>Treinar no radar</b>: as questões reais da FEPESE e de outras bancas medem o seu acerto no tema, com a origem ao lado; as de outra banca nunca entram no que a FEPESE cobra. As de {{ selo('ia', curto=True) }} IA só treinam: o acerto delas é um segundo número, nunca somado ao da faixa. Escolher a quantidade, o assunto e o nível fica no “mais”.</li>
+        <li><b>O que você faz no radar conta sozinho</b> no total do dia, no desempenho e na revisão 1-7-30: no “fiz X, acertei Y” anote só as do Qconcursos; se fez tudo no radar, é só o círculo.</li>
+        <li><b>No Qconcursos</b> (também medem): o botão abre o filtro pronto do tema, com os assuntos do próprio site.</li>
+      </ul>
+    </details>
+  {% endif %}
   {% for b in t.blocos if b.faixas %}
     {% set tem_anki_desligado = b.faixas | selectattr('desligada') | list %}
     {% set nasce_aberto = b.chave != 'pos22' %}
@@ -953,15 +993,41 @@
               <div class="corpo">{{ ICONE_DO_TIPO.pausa }} Pausa · {{ f.duracao }} min{% if f.detalhe %} · {{ f.detalhe }}{% endif %}</div>
             {% else %}
               <div class="corpo">
-                {# A faixa dobra na propria linha (decisao 179): feita, ela nasce
-                   fechada - so o tipo, o titulo e o resultado -, e clicar na
-                   linha abre de novo para corrigir. Sem JavaScript. #}
-                {% set nr = respondidas_no_radar.get((b.chave, loop.index0, f.titulo)) if respondidas_no_radar else none %}
+                {# A faixa enxuta (decisao 180): a linha (tipo, materia, quantas,
+                   o "caiu" curto, o titulo e o resultado); o que fazer agora; e
+                   o resto num "mais" fechado. As explicacoes que se repetiam em
+                   cada faixa moram na ajuda unica, no comeco do dia. #}
+                {% set nr_resp = respondidas_no_radar.get((b.chave, loop.index0, f.titulo)) if respondidas_no_radar else none %}
+                {% set no_plano_b = b.chave == 'plano_b' %}
+                {% set de_questoes = TEM_ACERTO(f) %}
+                {% set onde = arvore_das_faixas.get((b.chave, loop.index0)) if arvore_das_faixas else none %}
+                {% set caiu = caiu_das_faixas.get((b.chave, loop.index0)) if caiu_das_faixas else none %}
+                {% set lq = qconcursos_da_faixa(f) %}
+                {% set ficha = fichas_das_faixas.get((b.chave, loop.index0)) if fichas_das_faixas else none %}
+                {% set res = resumos.da_faixa(b.chave, loop.index0) if resumos else [] %}
+                {% set fp = fepese_das_faixas.get((b.chave, loop.index0)) if fepese_das_faixas else none %}
+                {% set ob = outras_bancas_das_faixas.get((b.chave, loop.index0)) if outras_bancas_das_faixas else none %}
+                {% set gf = geradas_das_faixas.get((b.chave, loop.index0)) if geradas_das_faixas else none %}
+                {% set indice_da_faixa_aqui = loop.index0 %}
+                {# A ficha e o resumo: a vista na faixa de estudo, no "mais" na de
+                   questoes (escolha de 20/10). #}
+                {% set ficha_e_resumo %}
+                  {% if ficha %}<a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if cor %}&amp;cor={{ cor }}{% endif %}"><span aria-hidden="true">📋</span> Ficha de estudo</a>{% endif %}
+                  {% if res %}{{ resumo_ui.botao(res, b.chave, indice_da_faixa_aqui, b.chave == 'noite') }}{% endif %}
+                {% endset %}
                 <details class="faixa-dobra"{{ ' open' if not feita }}>
                 <summary class="faixa-linha" title="{{ 'Abrir a faixa' if feita else 'Recolher a faixa' }}">
                 <div class="topo">
                   <span class="tipo"><span aria-hidden="true">{{ ICONE_DO_TIPO[f.tipo] }}</span> {{ f.rotulo or TIPO_LEGIVEL[f.tipo] }}</span>
                   {% if f.materia %}<span class="materia">{{ f.materia }}</span>{% endif %}
+                  {% if f.questoes %}<span class="chip chip-qtd">{{ f.questoes }} questões</span>{% endif %}
+                  {% if no_plano_b and f.duracao %}<span class="chip">⏱ {{ f.duracao }} min</span>{% endif %}
+                  {% if f.onde %}<span class="chip">{{ ONDE_LEGIVEL.get(f.onde, f.onde) }}</span>{% endif %}
+                  {% if f.cronometrado %}<span class="chip">⏱ cronometrado</span>{% endif %}
+                  {% if f.opcional %}<span class="chip">{{ 'se sobrar tempo' if no_plano_b else 'opcional · fora do total' }}</span>{% endif %}
+                  {% if f.baralho %}<span class="chip">🃏 {{ f.baralho }}</span>{% endif %}
+                  {% if f.origem %}<span class="chip">volta do dia {{ f.origem | dia_mes }}</span>{% endif %}
+                  {% if caiu and caiu.etiqueta %}<span class="chip chip-caiu" title="{{ caiu.frase }}">{{ selo('acervo', curto=True) }} {{ caiu.etiqueta }}</span>{% endif %}
                 </div>
                 <p class="titulo">{{ f.titulo }}
                   {% if anotado and anotado.questoes %}
@@ -969,50 +1035,14 @@
                       de {{ anotado.questoes }}{% if anotado.porcentagem is not none %} ·
                       {{ anotado.porcentagem }}%{% endif %}</span>
                   {% elif anotado and anotado.no_radar %}
-                    <span class="resultado">feita no radar{% if nr and nr.questoes %} · {{ nr.questoes }} {{ 'questão' if nr.questoes == 1 else 'questões' }}{% endif %}</span>
+                    <span class="resultado">feita no radar{% if nr_resp and nr_resp.questoes %} · {{ nr_resp.questoes }} {{ 'questão' if nr_resp.questoes == 1 else 'questões' }}{% endif %}</span>
                   {% elif anotado and anotado.sem_numero %}
                     <span class="resultado">feita · sem número</span>
                   {% endif %}
                 </p>
                 </summary>
-                {% if f.questoes %}<p class="qtd">{{ f.questoes }} questões</p>{% endif %}
 
-                {% set no_plano_b = b.chave == 'plano_b' %}
-                {% if f.onde or f.cronometrado or f.opcional or f.baralho or (no_plano_b and f.duracao) %}
-                  <div class="chips">
-                    {% if no_plano_b and f.duracao %}<span class="chip">⏱ {{ f.duracao }} min</span>{% endif %}
-                    {% if f.onde %}<span class="chip">{{ ONDE_LEGIVEL.get(f.onde, f.onde) }}</span>{% endif %}
-                    {% if f.cronometrado %}<span class="chip">⏱ cronometrado</span>{% endif %}
-                    {% if f.opcional %}<span class="chip">{{ 'se sobrar tempo' if no_plano_b else 'opcional · fora do total' }}</span>{% endif %}
-                    {% if f.baralho %}<span class="chip">🃏 {{ f.baralho }}</span>{% endif %}
-                  </div>
-                {% endif %}
-
-                {# Onde a faixa esta na arvore (decisao 71): o assunto, o
-                   subassunto - ou que a arvore nao tem - e o elemento. Pela
-                   ficha (escrita por IA) ou pelos nos do plano; nenhum no e
-                   criado (escolha 5B). #}
-                {% set onde = arvore_das_faixas.get((b.chave, loop.index0)) if arvore_das_faixas else none %}
-                {% if onde %}
-                  <div class="na-arvore">
-                    {% for a in onde.assuntos %}
-                      <p>{% if loop.first %}{{ selo(onde.origem, curto=True) }} {% endif %}Assunto: <b>{{ a.nome }}</b> · Subassunto: {% if a.subassuntos %}{{ a.subassuntos | join('; ') }}{% elif a.inteiro %}<span class="sub">o assunto inteiro</span>{% else %}<span class="sub">não há subassunto na árvore para este tema</span>{% endif %}{% if a.elementos %} · {{ a.elementos | join('; ') }}{% endif %}</p>
-                    {% endfor %}
-                    {% if onde.elemento %}<p>Elemento: {{ onde.elemento }}{% if onde.tipo_elemento %} <span class="sub">({{ onde.tipo_elemento }})</span>{% endif %}</p>{% endif %}
-                    {% if onde.sem_no %}<p class="sub">A ficha não aponta nó da árvore: o assunto é o que ela escreveu.</p>{% endif %}
-                  </div>
-                {% endif %}
-                {# Caiu ou nao caiu (R1): a mesma conta da ficha, prova a prova. #}
-                {% set caiu = caiu_das_faixas.get((b.chave, loop.index0)) if caiu_das_faixas else none %}
-                {% if caiu %}
-                  <p class="caiu-na-faixa">{{ selo('acervo', curto=True) }} {{ caiu.frase }}{% if not caiu.sem_contagem %} <span class="sub">({{ caiu.por_prova }})</span>{% endif %}
-                    {# As notas que a ficha mostra - pendentes, base de uma
-                       prova so - na propria faixa (P10). #}
-                    {% for n in caiu.notas %}<br><span class="sub">⚠ {{ n }}</span>{% endfor %}</p>
-                {% endif %}
-
-                {% if f.origem %}<p class="detalhe ds-suave">volta do dia {{ f.origem | dia_mes }}</p>{% endif %}
-
+                {# --- o que fazer agora --- #}
                 {% if f.artigos %}
                   <ul class="artigos">
                     {% for a in f.artigos %}<li><b>{{ a.artigos }}</b> — {{ a.porque }}</li>{% endfor %}
@@ -1020,37 +1050,22 @@
                 {% endif %}
                 {% if f.aviso %}<p class="aviso-essencial">⚠️ {{ f.aviso }}</p>{% endif %}
 
-                {% if f.detalhe %}
-                  {% if f.tipo in DETALHE_ABERTO or no_plano_b %}
-                    <p class="detalhe">{{ f.detalhe }}</p>
-                  {% else %}
-                    <details><summary>ver detalhe</summary><p class="detalhe">{{ f.detalhe }}</p></details>
-                  {% endif %}
+                {# O detalhe da faixa de estudo e o que estudar: a vista, em tres
+                   linhas, e o clique abre o resto. O das outras vai para o "mais". #}
+                {% if f.detalhe and (f.tipo in DETALHE_ABERTO or no_plano_b) %}
+                  <details class="detalhe-dobra"><summary><p class="detalhe">{{ f.detalhe }}</p></summary></details>
                 {% endif %}
-
-                {# O link do Qconcursos do tema (decisao 140): o filtro pronto,
-                   com os assuntos do proprio site. Sem link, o filtro escrito
-                   do plano, como era. #}
-                {% set lq = qconcursos_da_faixa(f) %}
-                {% if lq %}
-                  <p class="links"><a class="botao-anotar" href="{{ lq.url }}" target="_blank" rel="noopener"><span aria-hidden="true">🔎</span> Abrir no Qconcursos</a></p>
-                  <p class="filtro">FEPESE, sem anuladas nem desatualizadas · {{ lq.nomes | join('; ') }}</p>
-                  {% if lq.aviso %}<p class="regra">{{ lq.aviso }}</p>{% endif %}
-                {% elif f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
-                {% if f.link %}<p class="links"><a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a></p>{% endif %}
-
-                {# A ficha de estudo do tema (Etapa 6B): o que ler, como pesquisar,
-                   como a FEPESE cobrou, quantas questoes, por que agora. A mesma
-                   ficha em toda faixa do tema, reconhecida pelo titulo. #}
-                {% set ficha = fichas_das_faixas.get((b.chave, loop.index0)) if fichas_das_faixas else none %}
-                {% if ficha %}
-                  <p class="links"><a class="botao-anotar botao-ficha" href="/fichas/{{ ficha.id }}?data={{ t.data.isoformat() }}{% if cor %}&amp;cor={{ cor }}{% endif %}">
-                    <span aria-hidden="true">📋</span> Ficha de estudo</a></p>
+                {% set acoes_a_vista = f.link or lq or (not de_questoes and (ficha or res)) %}
+                {% if acoes_a_vista %}
+                  <p class="links">
+                    {% if f.link %}<a class="botao-lei" href="{{ f.link }}" target="_blank" rel="noopener"><span aria-hidden="true">⚖️</span> {{ rotulo_da_lei(f.link) }}</a>{% endif %}
+                    {% if not de_questoes %}{{ ficha_e_resumo }}{% endif %}
+                    {# O link do Qconcursos do tema (decisao 140): o filtro pronto,
+                       com os assuntos do proprio site; os nomes ficam no "mais". #}
+                    {% if lq %}<a class="botao-anotar" href="{{ lq.url }}" target="_blank" rel="noopener" title="FEPESE, sem anuladas nem desatualizadas · {{ lq.nomes | join('; ') }}"><span aria-hidden="true">🔎</span> Abrir no Qconcursos</a>{% endif %}
+                  </p>
                 {% endif %}
-                {# O resumo do tema (R2): toda faixa ligada a materia, menos a
-                   pausa; a de varios temas abre a lista. Janela so com CSS. #}
-                {% set res = resumos.da_faixa(b.chave, loop.index0) if resumos else [] %}
-                {% if res %}<p class="links">{{ resumo_ui.botao(res, b.chave, loop.index0, b.chave == 'noite') }}</p>{% endif %}
+                {% if lq and lq.aviso %}<p class="regra">{{ lq.aviso }}</p>{% elif not lq and f.filtro %}<p class="filtro">Filtro: {{ f.filtro }}</p>{% endif %}
 
                 {# A faixa que MEDE (diagnostico e simulado no radar): so
                    questao real da FEPESE, na composicao da decisao 67, e o
@@ -1198,137 +1213,58 @@
                     {% else %}
                       <p class="sub">O radar não tem questão da FEPESE classificada neste tema: tudo no Qconcursos.</p>
                     {% endif %}
-                    {% if nr.do_radar %}<p class="regra">As do radar contam sozinhas no seu desempenho e na revisão 1-7-30: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>{% endif %}
                   </div>
                 {% endif %}
 
-                {# As questoes reais de outras bancas do tema (decisao 166):
-                   medem o meu acerto no no, com a origem ao lado, e nunca o
-                   que a FEPESE cobra. A conta e do servico; aqui so se desenha. #}
-                {# As questoes reais da FEPESE do tema, em toda materia (decisao
-                   167): o "Gerar questao real". A faixa de Portugues no
-                   Qconcursos tem o bloco dela, acima. O que a rodada que mede
-                   ainda vai usar fica guardado, e a faixa diz para quando. #}
-                {% set fp = fepese_das_faixas.get((b.chave, loop.index0)) if fepese_das_faixas else none %}
-                {% if fp %}
-                  {% set indice_da_fepese = loop.index0 %}
-                  {% set para_quando = fp.dias_da_reserva | map('dia_mes') | join(' e ') %}
-                  <div class="composicao fepese-no-radar">
-                    {% if fp.disponiveis %}
-                      <p>{{ selo('prova', curto=True) }} <b>{{ fp.disponiveis }} {{ 'questão real' if fp.disponiveis == 1 else 'questões reais' }} da FEPESE</b> deste tema no radar{% if fp.do_alvo %} ({{ fp.do_alvo }} das provas do cargo){% endif %}{% if fp.feitas %}; você já fez {{ fp.feitas }}{% endif %}.{% if fp.reservadas %} Outras {{ fp.reservadas }} ficam guardadas para a rodada que mede de {{ para_quando }}.{% endif %}</p>
-                      <form class="treinar-no-radar real" method="post" action="/fepese/treinar">
+                {# Treinar no radar, num clique (decisao 180): a FEPESE, as outras
+                   bancas e a IA lado a lado, cada uma com quantas tem. O numero
+                   e o sugerido; escolher outro, e o nivel da IA, fica no "mais". #}
+                {% set ia_no_estoque = (gf.nos | sum(attribute='geradas')) if gf and not gf.sem_no else 0 %}
+                {% if fp or ob or gf %}
+                  <div class="treinar-rapido">
+                    <span class="rotulo">Treinar no radar:</span>
+                    {% if fp and fp.disponiveis %}
+                      <form method="post" action="/fepese/treinar">
                         {% for no in fp.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
                         <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                         <input type="hidden" name="bloco" value="{{ b.chave }}">
-                        <input type="hidden" name="indice" value="{{ indice_da_fepese }}">
+                        <input type="hidden" name="indice" value="{{ indice_da_faixa_aqui }}">
                         <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                        <label><input type="number" name="quantidade" min="1" max="30" value="{{ fp.sugeridas }}" aria-label="Quantas questões reais da FEPESE"> questões</label>
-                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar questão real</button>
+                        <input type="hidden" name="quantidade" value="{{ fp.sugeridas }}">
+                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
+                                title="{{ fp.sugeridas }} questões reais da FEPESE deste tema">FEPESE · {{ fp.disponiveis }}</button>
                       </form>
-                    {% elif fp.reservadas %}
-                      <p class="sub">{{ selo('prova', curto=True) }} As {{ fp.reservadas }} {{ 'questão' if fp.reservadas == 1 else 'questões' }} da FEPESE deste tema ficam guardadas para a rodada que mede de {{ para_quando }}: o treino não as usa.</p>
-                    {% else %}
-                      <p class="sub">{{ selo('prova', curto=True) }} O radar ainda não tem questão da FEPESE classificada neste tema.</p>
+                    {% elif fp %}
+                      <span class="botao-vazio" title="{{ 'Guardadas para a rodada que mede' if fp.reservadas else 'O radar ainda não tem questão da FEPESE deste tema' }}">FEPESE · 0</span>
                     {% endif %}
-                  </div>
-                {% endif %}
-
-                {% set ob = outras_bancas_das_faixas.get((b.chave, loop.index0)) if outras_bancas_das_faixas else none %}
-                {% if ob %}
-                  {% set indice_de_outras = loop.index0 %}
-                  <div class="composicao outras-bancas">
-                    {% if ob.no_acervo %}
-                      <p>{{ selo('prova', curto=True) }} <b>{{ ob.no_acervo }} {{ 'questão real' if ob.no_acervo == 1 else 'questões reais' }} de outras bancas</b> deste tema no radar ({{ ob.bancas | join(', ') }}){% if ob.feitas %}; você já fez {{ ob.feitas }}{% endif %}.</p>
-                      <form class="treinar-no-radar real" method="post" action="/outras-bancas/treinar">
+                    {% if ob and ob.no_acervo %}
+                      <form method="post" action="/outras-bancas/treinar">
                         {% for no in ob.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
                         <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                         <input type="hidden" name="bloco" value="{{ b.chave }}">
-                        <input type="hidden" name="indice" value="{{ indice_de_outras }}">
+                        <input type="hidden" name="indice" value="{{ indice_da_faixa_aqui }}">
                         <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                        <label><input type="number" name="quantidade" min="1" max="30" value="{{ ob.sugeridas }}" aria-label="Quantas questões de outras bancas"> questões</label>
-                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar questões outras bancas</button>
+                        <input type="hidden" name="quantidade" value="{{ ob.sugeridas }}">
+                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
+                                title="{{ ob.sugeridas }} questões reais de outras bancas ({{ ob.bancas | join(', ') }})">Outras bancas · {{ ob.no_acervo }}</button>
                       </form>
-                    {% else %}
-                      <p class="sub">{{ selo('prova', curto=True) }} Ainda não há questão de outra banca deste tema no radar.</p>
+                    {% elif ob %}
+                      <span class="botao-vazio" title="Ainda não há questão de outra banca deste tema no radar">Outras bancas · 0</span>
                     {% endif %}
-                  </div>
-                {% endif %}
-                {% if fp or ob %}
-                  <p class="regra">As questões reais (da FEPESE e de outras bancas) medem o seu acerto neste tema, com a origem ao lado; as de outra banca nunca entram no que a FEPESE cobra. As do radar contam sozinhas: no "fiz X, acertei Y" desta faixa, anote só as do Qconcursos.</p>
-                {% endif %}
-
-                {# As geradas da faixa (R6): primeiro as reais no Qconcursos, que
-                   medem; depois, se eu quiser, as geradas do radar, que so
-                   treinam. A contagem e o comando vem do servico; aqui so se
-                   desenha. Nada de --valendo nem do botao da API. #}
-                {% set gf = geradas_das_faixas.get((b.chave, loop.index0)) if geradas_das_faixas else none %}
-                {% if gf %}
-                  <div class="composicao geradas-da-faixa">
-                    <p>Você estudou: <b>{{ gf.tema }}</b>; na árvore:
-                      {% if gf.sem_no %}<b>sem nó na árvore</b>{% else %}{% for n in gf.nos %}<b>{{ n.no }}</b>{% if not loop.last %}; {% endif %}{% endfor %}{% endif %}</p>
-                    <p><b>No Qconcursos</b> (também medem):
-                      {% if lq %}pelo botão “Abrir no Qconcursos” acima{% elif gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
-                    <p><b>Gerar treino</b> {{ selo('ia', curto=True) }}: as questões escritas pela IA só treinam; o acerto delas é um segundo número, nunca somado ao da faixa.</p>
-                    {# O sinal de que eu treino o tema (decisao 138): toda
-                       resposta a gerada dos nos dele, de qualquer dia. A conta
-                       e do metricas; nunca entra no acerto do tema. #}
-                    {% set ti = treino_ia_das_faixas.get((b.chave, loop.index0)) if treino_ia_das_faixas else none %}
-                    {# Pela 1a vez em cada gerada (decisao 152): a frase e do metricas. #}
-                    {% if ti and not ti.vazio %}
-                      <p class="sub">{{ selo('ia', curto=True) }} {{ ti.frase_da_faixa() }}.</p>
-                    {% endif %}
-                    {% if gf.sem_no %}
-                      <p class="sub">Não há como gerar questão deste tema: a árvore não tem nó para ele (pendência).</p>
-                    {% else %}
-                      {# O indice da faixa antes do for de dentro: la, `loop` e o dos nos. #}
-                      {% set indice_da_faixa = loop.index0 %}
-                      {% for n in gf.nos %}
-                        {% if n.geradas %}
-                          <form class="treinar-no-radar" method="post" action="/geradas/treinar">
-                            <input type="hidden" name="conteudo" value="{{ n.no }}">
-                            {# A rodada guarda a faixa: e assim que a faixa sabe
-                               avisar que estas ja contam no "Fiz hoje". #}
-                            <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
-                            <input type="hidden" name="bloco" value="{{ b.chave }}">
-                            <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
-                            <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                            <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
-                            <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}{% if n.feitas %}, você já fez {{ n.feitas }}{% endif %}</span>
-                            <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
-                            <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar treino</button>
-                          </form>
-                          {# O estoque que eu ja vi (decisao 142): o sorteio poe as
-                             nunca feitas na frente, e com metade ou todas feitas a
-                             faixa avisa e os 3 passos aparecem logo abaixo. #}
-                          {% if n.aviso %}<p class="estoque-de-geradas estoque-{{ n.aviso }}">{{ '🔁' if n.aviso == 'todas' else '⏳' }} {{ n.frase_do_aviso }}{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}</p>{% endif %}
-                        {% else %}
-                          <p class="sub">Não há questão gerada deste assunto ainda{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}.</p>
-                        {% endif %}
-                      {% endfor %}
-                      {# O geral: todos os nos da faixa misturados, sem eu saber
-                         de qual vem a proxima. So com 2 nos ou mais com gerada:
-                         com um so, seria o botao de cima. #}
-                      {% if gf.geral %}
-                        <form class="treinar-no-radar" method="post" action="/geradas/treinar">
-                          {% for no in gf.nos_com_geradas %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                    {% if gf and not gf.sem_no %}
+                      {% if ia_no_estoque %}
+                        <form method="post" action="/geradas/treinar">
+                          {% for n in gf.nos if n.geradas %}<input type="hidden" name="conteudos" value="{{ n.no }}">{% endfor %}
                           <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
                           <input type="hidden" name="bloco" value="{{ b.chave }}">
-                          <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
+                          <input type="hidden" name="indice" value="{{ indice_da_faixa_aqui }}">
                           <input type="hidden" name="titulo" value="{{ f.titulo }}">
-                          <label>Geral, tudo misturado:
-                            <input type="number" name="quantidade" min="1" max="30" value="{{ gf.geral }}" aria-label="Quantas questões no treino geral"> questões</label>
-                          <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
-                          <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar treino geral</button>
+                          <input type="hidden" name="quantidade" value="{{ [ia_no_estoque, gf.questoes or ia_no_estoque, 30] | min }}">
+                          <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno"
+                                  title="Questões escritas pela IA: só treinam, nível misturado">{{ selo('ia', curto=True) }} IA · {{ ia_no_estoque }}</button>
                         </form>
-                      {% endif %}
-                      {% if gf.precisa_gerar %}
-                        <ol class="passos-de-gerar">
-                          <li>No terminal:{% for n in gf.nos if n.comando %}<br><code>{{ n.comando }}</code>{% endfor %}</li>
-                          <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
-                          <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
-                        </ol>
-                        <p class="regra">{{ TROQUE_O_NIVEL }}</p>
-                        <p class="regra">{{ AVISO_DO_PEDIDO }}{% if gf.nos | selectattr('comando') | list | length > 1 %} Aqui são vários nós: um pedido de cada vez, cada um com os 3 passos.{% endif %}</p>
+                      {% else %}
+                        <span class="botao-vazio" title="Não há questão gerada deste tema: os 3 passos para pedir estão no “mais”">{{ selo('ia', curto=True) }} IA · 0</span>
                       {% endif %}
                     {% endif %}
                   </div>
@@ -1417,20 +1353,7 @@
                   </div>
                 {% endif %}
 
-                {# Anotar o erro daqui mesmo, com a data, a materia e o
-                   assunto ja preenchidos, e voltando para esta faixa. So nas
-                   faixas em que eu respondo questao: e nelas que se erra. #}
-                {% if f.tipo in TIPOS_QUE_ANOTAM %}
-                  {# A volta e montada com "&" cru, e nao pelo link_do_dia: o
-                     macro escreve "&amp;" (certo no HTML), e essa volta vai
-                     ser codificada de novo pelo urlencode - o "&amp;" viraria
-                     um parametro chamado "amp;tema". #}
-                  {% set aqui = '/hoje?data=' ~ t.data.isoformat() ~ ('&cor=' ~ cor if cor else '') ~ '#faixa-' ~ b.chave ~ '-' ~ loop.index0 %}
-                  <p class="links">
-                    <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, f.materia, f.titulo, aqui, (nos_do_erro or {}).get((b.chave, loop.index0), []), t.plano) }}">
-                      <span aria-hidden="true">📓</span> Anotar erro</a>
-                  </p>
-                {% elif f.tipo == 'revisao_semanal' %}
+                {% if f.tipo == 'revisao_semanal' %}
                   {# O sabado revisa a semana: daqui eu abro os erros dela. #}
                   <p class="links">
                     <a class="botao-anotar" href="/erros?semana={{ t.data.isoformat() }}&amp;situacao=todos">
@@ -1516,6 +1439,177 @@
                   {% endif %}
                 {% endif %}
 
+
+                {# --- o "mais": o resto, um clique abaixo --- #}
+                {% set nf_ = notas_das_faixas.get((b.chave, indice_da_faixa_aqui, f.titulo)) if notas_das_faixas else none %}
+                <details class="faixa-mais">
+                  <summary>mais{% if nf_ %} · 📝 com nota{% endif %}</summary>
+                  {% if f.detalhe and not (f.tipo in DETALHE_ABERTO or no_plano_b) %}
+                    <details><summary>ver detalhe</summary><p class="detalhe">{{ f.detalhe }}</p></details>
+                  {% endif %}
+                  {% if de_questoes and (ficha or res) %}<p class="links">{{ ficha_e_resumo }}</p>{% endif %}
+                {# Onde a faixa esta na arvore (decisao 71): o assunto, o
+                   subassunto - ou que a arvore nao tem - e o elemento. Pela
+                   ficha (escrita por IA) ou pelos nos do plano; nenhum no e
+                   criado (escolha 5B). #}
+                {% if onde %}
+                  <div class="na-arvore">
+                    {% for a in onde.assuntos %}
+                      <p>{% if loop.first %}{{ selo(onde.origem, curto=True) }} {% endif %}Assunto: <b>{{ a.nome }}</b> · Subassunto: {% if a.subassuntos %}{{ a.subassuntos | join('; ') }}{% elif a.inteiro %}<span class="sub">o assunto inteiro</span>{% else %}<span class="sub">não há subassunto na árvore para este tema</span>{% endif %}{% if a.elementos %} · {{ a.elementos | join('; ') }}{% endif %}</p>
+                    {% endfor %}
+                    {% if onde.elemento %}<p>Elemento: {{ onde.elemento }}{% if onde.tipo_elemento %} <span class="sub">({{ onde.tipo_elemento }})</span>{% endif %}</p>{% endif %}
+                    {% if onde.sem_no %}<p class="sub">A ficha não aponta nó da árvore: o assunto é o que ela escreveu.</p>{% endif %}
+                  </div>
+                {% endif %}
+                {# Caiu ou nao caiu (R1): a mesma conta da ficha, prova a prova. #}
+                {% if caiu %}
+                  <p class="caiu-na-faixa">{{ selo('acervo', curto=True) }} {{ caiu.frase }}{% if not caiu.sem_contagem %} <span class="sub">({{ caiu.por_prova }})</span>{% endif %}
+                    {# As notas que a ficha mostra - pendentes, base de uma
+                       prova so - na propria faixa (P10). #}
+                    {% for n in caiu.notas %}<br><span class="sub">⚠ {{ n }}</span>{% endfor %}</p>
+                {% endif %}
+
+                  {% if lq %}<p class="filtro">No Qconcursos: FEPESE, sem anuladas nem desatualizadas · {{ lq.nomes | join('; ') }}</p>{% endif %}
+                {# As questoes reais de outras bancas do tema (decisao 166):
+                   medem o meu acerto no no, com a origem ao lado, e nunca o
+                   que a FEPESE cobra. A conta e do servico; aqui so se desenha. #}
+                {# As questoes reais da FEPESE do tema, em toda materia (decisao
+                   167): o "Gerar questao real". A faixa de Portugues no
+                   Qconcursos tem o bloco dela, acima. O que a rodada que mede
+                   ainda vai usar fica guardado, e a faixa diz para quando. #}
+                {% if fp %}
+                  {% set indice_da_fepese = loop.index0 %}
+                  {% set para_quando = fp.dias_da_reserva | map('dia_mes') | join(' e ') %}
+                  <div class="composicao fepese-no-radar">
+                    {% if fp.disponiveis %}
+                      <p>{{ selo('prova', curto=True) }} <b>{{ fp.disponiveis }} {{ 'questão real' if fp.disponiveis == 1 else 'questões reais' }} da FEPESE</b> deste tema no radar{% if fp.do_alvo %} ({{ fp.do_alvo }} das provas do cargo){% endif %}{% if fp.feitas %}; você já fez {{ fp.feitas }}{% endif %}.{% if fp.reservadas %} Outras {{ fp.reservadas }} ficam guardadas para a rodada que mede de {{ para_quando }}.{% endif %}</p>
+                      <form class="treinar-no-radar real" method="post" action="/fepese/treinar">
+                        {% for no in fp.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ indice_da_fepese }}">
+                        <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                        <label><input type="number" name="quantidade" min="1" max="30" value="{{ fp.sugeridas }}" aria-label="Quantas questões reais da FEPESE"> questões</label>
+                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar questão real</button>
+                      </form>
+                    {% elif fp.reservadas %}
+                      <p class="sub">{{ selo('prova', curto=True) }} As {{ fp.reservadas }} {{ 'questão' if fp.reservadas == 1 else 'questões' }} da FEPESE deste tema ficam guardadas para a rodada que mede de {{ para_quando }}: o treino não as usa.</p>
+                    {% else %}
+                      <p class="sub">{{ selo('prova', curto=True) }} O radar ainda não tem questão da FEPESE classificada neste tema.</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if ob %}
+                  {% set indice_de_outras = loop.index0 %}
+                  <div class="composicao outras-bancas">
+                    {% if ob.no_acervo %}
+                      <p>{{ selo('prova', curto=True) }} <b>{{ ob.no_acervo }} {{ 'questão real' if ob.no_acervo == 1 else 'questões reais' }} de outras bancas</b> deste tema no radar ({{ ob.bancas | join(', ') }}){% if ob.feitas %}; você já fez {{ ob.feitas }}{% endif %}.</p>
+                      <form class="treinar-no-radar real" method="post" action="/outras-bancas/treinar">
+                        {% for no in ob.nos %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                        <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                        <input type="hidden" name="bloco" value="{{ b.chave }}">
+                        <input type="hidden" name="indice" value="{{ indice_de_outras }}">
+                        <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                        <label><input type="number" name="quantidade" min="1" max="30" value="{{ ob.sugeridas }}" aria-label="Quantas questões de outras bancas"> questões</label>
+                        <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar questões outras bancas</button>
+                      </form>
+                    {% else %}
+                      <p class="sub">{{ selo('prova', curto=True) }} Ainda não há questão de outra banca deste tema no radar.</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {# As geradas da faixa (R6): primeiro as reais no Qconcursos, que
+                   medem; depois, se eu quiser, as geradas do radar, que so
+                   treinam. A contagem e o comando vem do servico; aqui so se
+                   desenha. Nada de --valendo nem do botao da API. #}
+                {% if gf %}
+                  <div class="composicao geradas-da-faixa">
+                    <p>Você estudou: <b>{{ gf.tema }}</b>; na árvore:
+                      {% if gf.sem_no %}<b>sem nó na árvore</b>{% else %}{% for n in gf.nos %}<b>{{ n.no }}</b>{% if not loop.last %}; {% endif %}{% endfor %}{% endif %}</p>
+                    <p><b>No Qconcursos</b> (também medem):
+                      {% if lq %}pelo botão “Abrir no Qconcursos” acima{% elif gf.filtro %}{{ gf.filtro }}{% else %}procure pelo nome do tema: “{{ gf.tema }}”{% endif %}</p>
+                    <p><b>Gerar treino</b> {{ selo('ia', curto=True) }}: as questões escritas pela IA só treinam; o acerto delas é um segundo número, nunca somado ao da faixa.</p>
+                    {# O sinal de que eu treino o tema (decisao 138): toda
+                       resposta a gerada dos nos dele, de qualquer dia. A conta
+                       e do metricas; nunca entra no acerto do tema. #}
+                    {% set ti = treino_ia_das_faixas.get((b.chave, loop.index0)) if treino_ia_das_faixas else none %}
+                    {# Pela 1a vez em cada gerada (decisao 152): a frase e do metricas. #}
+                    {% if ti and not ti.vazio %}
+                      <p class="sub">{{ selo('ia', curto=True) }} {{ ti.frase_da_faixa() }}.</p>
+                    {% endif %}
+                    {% if gf.sem_no %}
+                      <p class="sub">Não há como gerar questão deste tema: a árvore não tem nó para ele (pendência).</p>
+                    {% else %}
+                      {# O indice da faixa antes do for de dentro: la, `loop` e o dos nos. #}
+                      {% set indice_da_faixa = loop.index0 %}
+                      {% for n in gf.nos %}
+                        {% if n.geradas %}
+                          <form class="treinar-no-radar" method="post" action="/geradas/treinar">
+                            <input type="hidden" name="conteudo" value="{{ n.no }}">
+                            {# A rodada guarda a faixa: e assim que a faixa sabe
+                               avisar que estas ja contam no "Fiz hoje". #}
+                            <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                            <input type="hidden" name="bloco" value="{{ b.chave }}">
+                            <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
+                            <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                            <input type="hidden" name="quantidade" value="{{ [n.geradas, gf.questoes, 30] | min }}">
+                            <span>{{ n.geradas }} {{ 'questão gerada' if n.geradas == 1 else 'questões geradas' }} deste assunto{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}{% if n.feitas %}, você já fez {{ n.feitas }}{% endif %}</span>
+                            <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
+                            <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar treino</button>
+                          </form>
+                          {# O estoque que eu ja vi (decisao 142): o sorteio poe as
+                             nunca feitas na frente, e com metade ou todas feitas a
+                             faixa avisa e os 3 passos aparecem logo abaixo. #}
+                          {% if n.aviso %}<p class="estoque-de-geradas estoque-{{ n.aviso }}">{{ '🔁' if n.aviso == 'todas' else '⏳' }} {{ n.frase_do_aviso }}{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}</p>{% endif %}
+                        {% else %}
+                          <p class="sub">Não há questão gerada deste assunto ainda{% if gf.nos | length > 1 %} ({{ n.nome }}){% endif %}.</p>
+                        {% endif %}
+                      {% endfor %}
+                      {# O geral: todos os nos da faixa misturados, sem eu saber
+                         de qual vem a proxima. So com 2 nos ou mais com gerada:
+                         com um so, seria o botao de cima. #}
+                      {% if gf.geral %}
+                        <form class="treinar-no-radar" method="post" action="/geradas/treinar">
+                          {% for no in gf.nos_com_geradas %}<input type="hidden" name="conteudos" value="{{ no }}">{% endfor %}
+                          <input type="hidden" name="data" value="{{ t.data.isoformat() }}">
+                          <input type="hidden" name="bloco" value="{{ b.chave }}">
+                          <input type="hidden" name="indice" value="{{ indice_da_faixa }}">
+                          <input type="hidden" name="titulo" value="{{ f.titulo }}">
+                          <label>Geral, tudo misturado:
+                            <input type="number" name="quantidade" min="1" max="30" value="{{ gf.geral }}" aria-label="Quantas questões no treino geral"> questões</label>
+                          <label class="ds-campo nivel-do-treino"><select name="nivel" aria-label="Nível">{% for chave, rotulo in OPCOES_DE_NIVEL %}<option value="{{ chave }}">{{ rotulo }}</option>{% endfor %}</select></label>
+                          <button type="submit" class="ds-botao ds-botao--secundario ds-botao--pequeno">Gerar treino geral</button>
+                        </form>
+                      {% endif %}
+                      {% if gf.precisa_gerar %}
+                        <ol class="passos-de-gerar">
+                          <li>No terminal:{% for n in gf.nos if n.comando %}<br><code>{{ n.comando }}</code>{% endfor %}</li>
+                          <li>No Claude Code do VS Code: <code>"{{ PASSO_NO_CLAUDE_CODE }}"</code></li>
+                          <li>No terminal: <code>{{ COMANDO_DE_IMPORTAR }}</code></li>
+                        </ol>
+                        <p class="regra">{{ TROQUE_O_NIVEL }}</p>
+                        <p class="regra">{{ AVISO_DO_PEDIDO }}{% if gf.nos | selectattr('comando') | list | length > 1 %} Aqui são vários nós: um pedido de cada vez, cada um com os 3 passos.{% endif %}</p>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {# Anotar o erro daqui mesmo, com a data, a materia e o
+                   assunto ja preenchidos, e voltando para esta faixa. So nas
+                   faixas em que eu respondo questao: e nelas que se erra. #}
+                {% if f.tipo in TIPOS_QUE_ANOTAM %}
+                  {# A volta e montada com "&" cru, e nao pelo link_do_dia: o
+                     macro escreve "&amp;" (certo no HTML), e essa volta vai
+                     ser codificada de novo pelo urlencode - o "&amp;" viraria
+                     um parametro chamado "amp;tema". #}
+                  {% set aqui = '/hoje?data=' ~ t.data.isoformat() ~ ('&cor=' ~ cor if cor else '') ~ '#faixa-' ~ b.chave ~ '-' ~ loop.index0 %}
+                  <p class="links">
+                    <a class="botao-anotar" href="{{ link_de_anotar_erro(t.data, f.materia, f.titulo, aqui, (nos_do_erro or {}).get((b.chave, loop.index0), []), t.plano) }}">
+                      <span aria-hidden="true">📓</span> Anotar erro</a>
+                  </p>
+                {% endif %}
                 {# O "como foi" (decisao 142): a nota, quantas chutei fora do
                    radar e se entendi. Separado do check: escrevo antes ou
                    depois de marcar, e desmarcar nao apaga. E o que o Ciclo 2
@@ -1571,6 +1665,7 @@
                     </form>
                   </details>
                 {% endif %}
+                </details>
                 </details>
               </div>
               {# O circulo: so hoje ou dia passado - o futuro ainda nao foi feito.

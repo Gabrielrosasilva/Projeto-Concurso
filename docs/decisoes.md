@@ -6475,3 +6475,35 @@ duas da SEAP-BA (q30 e q77). Estoque de lei no treino: 424.
      marcada como o circulo marcaria, porque voce disse que fez o dia
      inteiro: a sugestao passou a "Ideal (9 de 9)", a mesma meta que voce
      marcou, e o tempo do dia de 2h10 para 3h40.
+
+## A faixa enxuta (22/10/2026)
+
+180. **a faixa da tela Hoje tem tres camadas: a linha, o que fazer agora e o
+     "mais"** (pedido de 20/10, com as tres escolhas recomendadas; nao mexe em
+     conta nenhuma). Uma Fixacao de 4 questoes ocupava quase uma tela: a
+     arvore, o "caiu", o Qconcursos com o filtro, a ficha, o resumo, dois
+     botoes de gerar, tres paragrafos de regra (iguais em 9 faixas), os 3
+     comandos de terminal, o anotar erro, o "fiz" e o "como foi". Agora:
+     - **a linha** (o `<summary>` da dobra da 179): o tipo, a materia, as
+       questoes do plano, onde fazer, "volta do dia", e o "caiu" curto - a
+       etiqueta "caiu 2× (2013, 2019)" ou "nao caiu (2013, 2019)"
+       (`incidencia.CaiuNoAlvo.etiqueta`), com a frase inteira no `title` e no
+       "mais"; depois o titulo e o resultado;
+     - **o que fazer agora**: os artigos e o aviso; o detalhe da faixa de
+       estudo em tres linhas, com "ver tudo"; a lei, o "Abrir no Qconcursos"
+       (os assuntos do filtro no `title`) e o aviso dele; na faixa de estudo,
+       a ficha e o resumo; as composicoes das faixas que medem, do sabado e do
+       Portugues no radar, como eram; **"Treinar no radar: FEPESE · N, Outras
+       bancas · N, IA · N"**, um clique cada, com o numero sugerido (o vazio
+       aparece tracejado, com o porque no `title`); e o "fiz X, acertei Y";
+     - **o "mais"** (fechado): o detalhe das faixas de questao, a ficha e o
+       resumo delas (escolha de 20/10), a arvore, o "caiu" inteiro, os assuntos
+       do filtro do Qconcursos, o treino com quantidade, assunto e nivel, os 3
+       passos de pedir questoes a IA, o anotar erro e o "como foi" (o "mais"
+       diz "com nota" quando ha);
+     - **as regras que se repetiam** ("as reais medem...", "as do radar contam
+       sozinhas...", "a IA so treina...") viraram um "ⓘ Como funcionam os
+       botoes da faixa", uma vez so, antes dos blocos.
+     Nada saiu da tela: o que nao esta a vista esta um clique abaixo, com o
+     mesmo texto e o mesmo formulario de antes. O "abrir os erros da semana"
+     do sabado continua a vista: e a acao da faixa.

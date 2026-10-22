@@ -398,6 +398,8 @@ def test_caiu_nas_duas_provas_e_cheio_e_a_anulada_fica_fora():
     assert k.frase == "Caiu em 2013 e 2019: 2 questões · 2 provas."
     assert k.por_prova == "2013: 1 · 2019: 1"
     assert any("anulada(s) 2013-q60" in n for n in k.notas)
+    # A frase curta da linha da faixa (decisao 180).
+    assert k.etiqueta == "caiu 2× (2013, 2019)"
 
 
 def test_a_pendente_com_o_artigo_do_tema_caiu_e_vai_a_parte():
@@ -427,6 +429,7 @@ def test_nao_caiu_nas_duas_provas_e_basico():
                                        dentro=_dentro(f"{PENAL} > Infração penal"),
                                        tem_no=True, faixa=faixa)
     assert com_base.frase == "Não apareceu nas provas de 2013 e 2019 analisadas."
+    assert k.etiqueta == "não caiu (2013, 2019)"
 
 
 def test_materia_de_uma_prova_so_nao_rebaixa_e_diz_a_frase_padrao():
@@ -438,6 +441,7 @@ def test_materia_de_uma_prova_so_nao_rebaixa_e_diz_a_frase_padrao():
     assert k.por_prova == "2013: — · 2019: 0"
     assert k.frase == "Não apareceu na prova de 2019, a única que cobrava a matéria."
     assert any(incidencia.FRASE_SEM_EVIDENCIA in n for n in k.notas)
+    assert k.etiqueta == "não caiu (2019)"
 
 
 def test_sem_no_conta_pelo_artigo_so_da_mesma_materia_e_da_mesma_lei():
