@@ -863,7 +863,7 @@
     "plano_b": null
   },
   {
-    "atualizado_em": "2026-10-19T22:59:08.330248+00:00",
+    "atualizado_em": "2026-10-20T17:42:14.923126+00:00",
     "data": "2026-10-19",
     "faixas_feitas": [
       {
@@ -909,6 +909,70 @@
         "minutos": 30,
         "questoes": null,
         "titulo": "Correção"
+      },
+      {
+        "acertos": null,
+        "assunto": "Fixação: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)",
+        "automatica": true,
+        "bloco": "manha",
+        "consulta": true,
+        "indice": 1,
+        "materia": "Direito Penal",
+        "minutos": 20,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "Fixação: Coação, obediência e excludentes de ilicitude (arts. 22 a 25)"
+      },
+      {
+        "acertos": null,
+        "assunto": "R+7: Tentativa, dolo, culpa e erro (arts. 14 a 21)",
+        "automatica": true,
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direito Penal",
+        "minutos": 20,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "R+7: Tentativa, dolo, culpa e erro (arts. 14 a 21)"
+      },
+      {
+        "acertos": null,
+        "assunto": "R+7: Crase 1: regra geral e casos obrigatórios",
+        "automatica": true,
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "R+7: Crase 1: regra geral e casos obrigatórios"
+      },
+      {
+        "acertos": null,
+        "assunto": "Pronomes 1: emprego",
+        "automatica": true,
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 25,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "Pronomes 1: emprego"
+      },
+      {
+        "acertos": null,
+        "assunto": "Fixação: Pronomes 1: emprego",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 15,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "Fixação: Pronomes 1: emprego"
       }
     ],
     "notas_das_faixas": [
