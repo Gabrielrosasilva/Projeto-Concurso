@@ -40,12 +40,26 @@ def test_sem_rede_continua_so_neste_pc(subiu):
 
 
 def test_com_rede_escuta_em_todas_as_placas_e_mostra_o_endereco(subiu, monkeypatch):
+    from radar.web import acesso
+
+    # Sem senha definida (decisao 185): a rede fica fechada, e a saida diz
+    # como abrir. O .env desta maquina nao entra no teste.
+    monkeypatch.setattr(acesso, "credenciais", lambda caminho=None: None)
     monkeypatch.setattr(cli, "ip_local", lambda: "192.168.0.10")
     saida = _rodar("--rede", "--porta", "8123")
     assert saida.exit_code == 0, saida.output
     assert subiu == [{"host": "0.0.0.0", "port": 8123}]
     assert "Abra no celular (mesmo Wi-Fi): http://192.168.0.10:8123/hoje" in saida.output
-    assert "Sem senha" in saida.output
+    assert "radar senha" in saida.output
+
+
+def test_com_a_senha_definida_a_saida_diz_que_o_navegador_pede(subiu, monkeypatch):
+    from radar.web import acesso
+
+    monkeypatch.setattr(acesso, "credenciais", lambda caminho=None: ("eu", "resumo"))
+    monkeypatch.setattr(cli, "ip_local", lambda: "192.168.0.10")
+    saida = _rodar("--rede")
+    assert "pede o usuário e a senha" in saida.output
 
 
 def test_sem_achar_o_ip_manda_rodar_ipconfig(subiu, monkeypatch):
