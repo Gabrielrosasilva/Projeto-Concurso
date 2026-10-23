@@ -1001,5 +1001,117 @@
       }
     ],
     "plano_b": null
+  },
+  {
+    "atualizado_em": "2026-10-22T23:55:29.041597+00:00",
+    "data": "2026-10-22",
+    "faixas_feitas": [
+      {
+        "acertos": null,
+        "assunto": "Na Constituição e o status dos tratados",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direitos Humanos",
+        "minutos": 40,
+        "questoes": null,
+        "titulo": "Na Constituição e o status dos tratados"
+      },
+      {
+        "acertos": 2,
+        "assunto": "Fixação: Na Constituição e o status dos tratados",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Direitos Humanos",
+        "minutos": 20,
+        "questoes": 2,
+        "titulo": "Fixação: Na Constituição e o status dos tratados"
+      },
+      {
+        "acertos": null,
+        "assunto": "Fixação: Interpretação 4: inferência e sentido das palavras",
+        "automatica": true,
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 15,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "Fixação: Interpretação 4: inferência e sentido das palavras"
+      },
+      {
+        "acertos": null,
+        "assunto": "Interpretação 4: inferência e sentido das palavras",
+        "bloco": "manha",
+        "consulta": false,
+        "indice": 3,
+        "materia": "Língua Portuguesa",
+        "minutos": 20,
+        "questoes": null,
+        "titulo": "Interpretação 4: inferência e sentido das palavras"
+      },
+      {
+        "acertos": null,
+        "assunto": "R+7: Sistemas de proteção e responsabilidade do Estado",
+        "automatica": true,
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 0,
+        "materia": "Direitos Humanos",
+        "minutos": 20,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "R+7: Sistemas de proteção e responsabilidade do Estado"
+      },
+      {
+        "acertos": null,
+        "assunto": "R+7: Interpretação 3: coesão e referência",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 1,
+        "materia": "Língua Portuguesa",
+        "minutos": 10,
+        "questoes": 2,
+        "titulo": "R+7: Interpretação 3: coesão e referência"
+      },
+      {
+        "acertos": null,
+        "assunto": "Aprendizagem: Na Constituição e o status dos tratados",
+        "automatica": true,
+        "bloco": "noite",
+        "consulta": true,
+        "indice": 2,
+        "materia": "Direitos Humanos",
+        "minutos": 40,
+        "no_radar": true,
+        "questoes": 0,
+        "titulo": "Aprendizagem: Na Constituição e o status dos tratados"
+      },
+      {
+        "acertos": 1,
+        "assunto": "Interpretação de texto (cronometrada)",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 4,
+        "materia": "Língua Portuguesa",
+        "minutos": 25,
+        "questoes": 1,
+        "titulo": "Interpretação de texto (cronometrada)"
+      },
+      {
+        "acertos": null,
+        "assunto": "Correção",
+        "bloco": "noite",
+        "consulta": false,
+        "indice": 5,
+        "materia": null,
+        "minutos": 30,
+        "questoes": null,
+        "titulo": "Correção"
+      }
+    ],
+    "plano_b": null
   }
 ]

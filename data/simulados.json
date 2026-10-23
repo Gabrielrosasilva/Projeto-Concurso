@@ -3029,5 +3029,1015 @@
         "respondida_em": "2026-10-19T22:55:55.129520+00:00"
       }
     ]
+  },
+  {
+    "criado_em": "2026-10-22T14:38:01.568507+00:00",
+    "filtros": {
+      "da_banca": 2,
+      "da_faixa": {
+        "bloco": "manha",
+        "data": "2026-10-22",
+        "indice": 1,
+        "titulo": "Fixação: Na Constituição e o status dos tratados"
+      },
+      "nos": [
+        "Direitos Humanos > Direitos humanos na Constituição Federal",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Audiência de custódia"
+      ],
+      "proprias": 4,
+      "quantidade": 6,
+      "rodada": "fepese_no_radar"
+    },
+    "finalizado_em": "2026-10-22T14:44:12.896444+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "18c4e543d2a344d62da3629d106698a1",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 24,
+        "ordem": 1,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T14:38:11.001940+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "b8e2179d48d0b9887d348466e0a48c18",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 39,
+        "ordem": 2,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T14:38:35.248089+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "3328f50481c123dd9b294cbf745e1f73",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 28,
+        "ordem": 3,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T14:40:42.485574+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "ed2359fa4dc5a3d22d655345a5540538",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 30,
+        "ordem": 4,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T14:41:07.465475+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "331450ba62520178e748a898993d4b9c",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 28,
+        "ordem": 5,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T14:43:08.845607+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "c2a05e7850568bbe2c610035b80b1c7a",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 31,
+        "ordem": 6,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T14:44:12.890259+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T14:56:54.809914+00:00",
+    "filtros": {
+      "da_banca": 6,
+      "do_plano": 6,
+      "faixa": {
+        "bloco": "manha",
+        "data": "2026-10-22",
+        "indice": 4,
+        "titulo": "Fixação: Interpretação 4: inferência e sentido das palavras"
+      },
+      "nos": [
+        "Língua Portuguesa > Compreensão e interpretação de texto (s) > Significação das palavras: sinonímia, antonímia, denotação e conotação",
+        "Língua Portuguesa > Compreensão e interpretação de texto (s) > Inferência, pressupostos e subentendidos"
+      ],
+      "proprias": 0,
+      "quantidade": 6,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-22T15:07:51.794464+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "d1f89fb3203b4b3c51ec1c1ebe93e0ee",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 9,
+        "ordem": 1,
+        "prova_url": "https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=F1.pdf",
+        "respondida_em": "2026-10-22T15:02:17.928855+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "41bac045f79ce727bae3f8e69eabef78",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 2,
+        "prova_url": "https://2024mafra.fepese.org.br/?go=download&path=2&inline=1&arquivo=S02.pdf",
+        "respondida_em": "2026-10-22T15:03:57.372057+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "dea6e02d9aeda9af82138e8e9fc1c519",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 4,
+        "ordem": 3,
+        "prova_url": "http://camarabalneario.fepese.org.br/?go=download&path=2&arquivo=S3.pdf",
+        "respondida_em": "2026-10-22T15:04:52.401673+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "a6b2a8bb8f81d69dd436a3d4961d54c7",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 1,
+        "ordem": 4,
+        "prova_url": "https://2023gmsj.fepese.org.br/?go=download&path=2&inline=1&arquivo=GM.pdf",
+        "respondida_em": "2026-10-22T15:05:58.524166+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "e37b1fbab6db75fb2444f3f45167d94b",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 4,
+        "ordem": 5,
+        "prova_url": "https://2024bcseletivoadm.fepese.org.br/?go=download&path=2&inline=1&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T15:06:53.580349+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "b6412fb7df67bea41f2833d601ad9c77",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 3,
+        "ordem": 6,
+        "prova_url": "https://2024sas-sj.fepese.org.br/?go=download&path=2&inline=1&arquivo=M1.pdf",
+        "respondida_em": "2026-10-22T15:07:51.789557+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T15:30:54.271576+00:00",
+    "filtros": {
+      "bancas": [
+        "Cebraspe",
+        "FGV"
+      ],
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 0,
+        "titulo": "R+7: Sistemas de proteção e responsabilidade do Estado"
+      },
+      "nos": [
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Sistema interamericano de proteção",
+        "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos",
+        "Direitos Humanos > Teoria geral dos direitos humanos > Sistema global e sistemas regionais de proteção",
+        "Direitos Humanos > Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José)",
+        "Direitos Humanos > Direitos humanos e responsabilidade do Estado"
+      ],
+      "quantidade": 3,
+      "rodada": "outras_bancas"
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "chave": "57bcc9d101ce7d8f9d85ffa212307e05",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 77,
+        "ordem": 1,
+        "prova_url": "https://conhecimento.fgv.br/sites/default/files/concursos/agente-penitenciariocnm-tipo-1.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "a93ab75ec62fefaf694739a43db1bc74",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 80,
+        "ordem": 2,
+        "prova_url": "https://conhecimento.fgv.br/sites/default/files/concursos/agente-penitenciariocnm-tipo-1.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "1c6fe5290b546e64132f421ed7970e10",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 69,
+        "ordem": 3,
+        "prova_url": "https://cdn.cebraspe.org.br/concursos/PC_RJ_21_DELEGADO/arquivos/662_PCRJ_001_01.PDF",
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T21:23:07.998496+00:00",
+    "filtros": {
+      "da_banca": 6,
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 0,
+        "titulo": "R+7: Sistemas de proteção e responsabilidade do Estado"
+      },
+      "nos": [
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Sistema interamericano de proteção",
+        "Direitos Humanos > Teoria geral dos direitos humanos > Corte Interamericana de Direitos Humanos",
+        "Direitos Humanos > Teoria geral dos direitos humanos > Sistema global e sistemas regionais de proteção",
+        "Direitos Humanos > Teoria geral dos direitos humanos > Convenção Americana sobre Direitos Humanos (Pacto de San José)",
+        "Direitos Humanos > Direitos humanos e responsabilidade do Estado"
+      ],
+      "proprias": 1,
+      "quantidade": 7,
+      "rodada": "fepese_no_radar"
+    },
+    "finalizado_em": "2026-10-22T21:28:28.882649+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "2aa5257b3e2738dd5b7f1b67119e1939",
+        "chutou": true,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 25,
+        "ordem": 1,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T21:23:43.398509+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "8997494b6d5dff51330fe94e710c4468",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 22,
+        "ordem": 2,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T21:24:32.683859+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "fe3563849292cb13d609bea9693156ea",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 23,
+        "ordem": 3,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T21:25:10.402491+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "f2d76f7598e546697ac4b1923ca620b0",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 23,
+        "ordem": 4,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T21:25:24.414550+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "8a02b3c6fe8ea38583743584e292305d",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 24,
+        "ordem": 5,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T21:27:23.666067+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "f7f72608e03d402408646b7330d55745",
+        "chutou": true,
+        "escolhida": "b",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 29,
+        "ordem": 6,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T21:27:50.549574+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "673cf99c117ba52e9a08f25694cedfa7",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 28,
+        "ordem": 7,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T21:28:28.880126+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T21:31:31.424536+00:00",
+    "filtros": {
+      "da_banca": 2,
+      "do_plano": 3,
+      "encerrada": {
+        "de": 3,
+        "respondidas": 1
+      },
+      "faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 1,
+        "titulo": "R+7: Interpretação 3: coesão e referência"
+      },
+      "nos": [
+        "Língua Portuguesa > Compreensão e interpretação de texto (s) > Relações de sentido e conectivos"
+      ],
+      "proprias": 1,
+      "quantidade": 3,
+      "rodada": "faixa_no_radar"
+    },
+    "finalizado_em": "2026-10-22T21:35:18.251172+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "7a24388068b82fef41236996ffa1857e",
+        "chutou": true,
+        "escolhida": "d",
+        "gerada": false,
+        "motivo": "chutei",
+        "numero": 5,
+        "ordem": 1,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T21:34:13.882397+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T23:18:06.270929+00:00",
+    "filtros": {
+      "da_banca": 2,
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 2,
+        "titulo": "Aprendizagem: Na Constituição e o status dos tratados"
+      },
+      "nos": [
+        "Direitos Humanos > Direitos humanos na Constituição Federal",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Audiência de custódia"
+      ],
+      "proprias": 4,
+      "quantidade": 6,
+      "rodada": "fepese_no_radar"
+    },
+    "finalizado_em": "2026-10-22T23:26:50.873532+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "c2a05e7850568bbe2c610035b80b1c7a",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 31,
+        "ordem": 1,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T23:18:29.912218+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "18c4e543d2a344d62da3629d106698a1",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 24,
+        "ordem": 2,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T23:19:55.465601+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "ed2359fa4dc5a3d22d655345a5540538",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 30,
+        "ordem": 3,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T23:25:39.989371+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "3328f50481c123dd9b294cbf745e1f73",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 28,
+        "ordem": 4,
+        "prova_url": "https://2016secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": "2026-10-22T23:25:48.814799+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "b8e2179d48d0b9887d348466e0a48c18",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 39,
+        "ordem": 5,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T23:26:36.861974+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "331450ba62520178e748a898993d4b9c",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 28,
+        "ordem": 6,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T23:26:50.866474+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T23:27:04.566089+00:00",
+    "filtros": {
+      "bancas": [
+        "Access",
+        "Cebraspe",
+        "FGV",
+        "NC-UFPR"
+      ],
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 2,
+        "titulo": "Aprendizagem: Na Constituição e o status dos tratados"
+      },
+      "nos": [
+        "Direitos Humanos > Direitos humanos na Constituição Federal",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Audiência de custódia"
+      ],
+      "quantidade": 8,
+      "rodada": "outras_bancas"
+    },
+    "finalizado_em": "2026-10-22T23:43:02.457278+00:00",
+    "respostas": [
+      {
+        "acertou": false,
+        "chave": "7eed3526b7652f510679fa6f987d820b",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 78,
+        "ordem": 1,
+        "prova_url": "https://conhecimento.fgv.br/sites/default/files/concursos/agente-penitenciariocnm-tipo-1.pdf",
+        "respondida_em": "2026-10-22T23:27:46.949716+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "93f600ca0e9acf5b4857e023405b11e2",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 68,
+        "ordem": 2,
+        "prova_url": "https://cdn.cebraspe.org.br/concursos/CBM_RO_22/arquivos/734_CBM_RO_OFICIAL_001_01.PDF",
+        "respondida_em": "2026-10-22T23:29:12.884977+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "4e023dc6d76f59e2156101e7bdca87bb",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 31,
+        "ordem": 3,
+        "prova_url": "https://conhecimento.fgv.br/sites/default/files/concursos/agente-penitenciariocnm-tipo-1.pdf",
+        "respondida_em": "2026-10-22T23:33:19.842524+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "3a7356af2b51d98948c9e5d8b3dff3e5",
+        "chutou": false,
+        "escolhida": "e",
+        "gerada": false,
+        "numero": 37,
+        "ordem": 4,
+        "prova_url": "https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf",
+        "respondida_em": "2026-10-22T23:35:12.578514+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "32a3d1b8459e2b2d2202d49024a5a9eb",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 6,
+        "ordem": 5,
+        "prova_url": "https://cdn.cebraspe.org.br/concursos/PM_RO_22/arquivos/731_SESDEC_PM_RO_001_01.PDF",
+        "respondida_em": "2026-10-22T23:38:15.124866+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "0517da9cf45c6aba2d7258e00d007ab1",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "motivo": "confundi",
+        "numero": 26,
+        "ordem": 6,
+        "prova_url": "https://conhecimento.fgv.br/sites/default/files/concursos/agente-penitenciariocnm-tipo-1.pdf",
+        "respondida_em": "2026-10-22T23:40:59.195270+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "992631820e847ca7424dd9a3f4a6ede0",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 40,
+        "ordem": 7,
+        "prova_url": "https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf",
+        "respondida_em": "2026-10-22T23:42:37.661557+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "198e891fa8bd817f6800638c7df657a1",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 42,
+        "ordem": 8,
+        "prova_url": "https://anexos.cdn.selecao.net.br/uploads/422/concursos/86/anexos/VU4tyBV8101pc0EVKa1UGC33pI9MA9Z7ohHfCktQ.pdf",
+        "respondida_em": "2026-10-22T23:43:02.453258+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T23:43:21.356683+00:00",
+    "filtros": {
+      "da_banca": 0,
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 2,
+        "titulo": "Aprendizagem: Na Constituição e o status dos tratados"
+      },
+      "nos": [
+        "Direitos Humanos > Direitos humanos na Constituição Federal",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Incorporação e hierarquia dos tratados",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Hierarquia da norma internacional incorporada",
+        "Direitos Humanos > A Constituição brasileira e os tratados internacionais de direitos humanos > Audiência de custódia"
+      ],
+      "proprias": 1,
+      "quantidade": 1,
+      "rodada": "fepese_no_radar"
+    },
+    "finalizado_em": "2026-10-22T23:44:02.270918+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "b8e2179d48d0b9887d348466e0a48c18",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "numero": 39,
+        "ordem": 1,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": "2026-10-22T23:44:02.269061+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T23:45:09.439561+00:00",
+    "filtros": {
+      "bancas": [
+        "IESES"
+      ],
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 4,
+        "titulo": "Interpretação de texto (cronometrada)"
+      },
+      "encerrada": {
+        "de": 10,
+        "respondidas": 6
+      },
+      "nos": [
+        "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+      ],
+      "quantidade": 10,
+      "rodada": "outras_bancas"
+    },
+    "finalizado_em": "2026-10-22T23:54:23.602281+00:00",
+    "respostas": [
+      {
+        "acertou": true,
+        "chave": "7908b73be3012f1e1263cbe6148d43ba",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 4,
+        "ordem": 1,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/4011.pdf",
+        "respondida_em": "2026-10-22T23:45:44.321616+00:00"
+      },
+      {
+        "acertou": false,
+        "chave": "932a027a09590fc80425ba279f373025",
+        "chutou": false,
+        "escolhida": "d",
+        "gerada": false,
+        "motivo": "nao_sabia",
+        "numero": 3,
+        "ordem": 2,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/2018.pdf",
+        "respondida_em": "2026-10-22T23:46:31.138752+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "971316377f224e26a44eab299d288e13",
+        "chutou": true,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 2,
+        "ordem": 3,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/3010.pdf",
+        "respondida_em": "2026-10-22T23:49:05.073087+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "21b60f59998259b89d84df05bbafddba",
+        "chutou": false,
+        "escolhida": "b",
+        "gerada": false,
+        "numero": 2,
+        "ordem": 4,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/4011.pdf",
+        "respondida_em": "2026-10-22T23:50:50.370192+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "2ab8f7296103d75b7d7e69f19b760afd",
+        "chutou": false,
+        "escolhida": "c",
+        "gerada": false,
+        "numero": 1,
+        "ordem": 5,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/2018.pdf",
+        "respondida_em": "2026-10-22T23:53:21.252025+00:00"
+      },
+      {
+        "acertou": true,
+        "chave": "00b44dc6accebe13bfbd1b00b57a031e",
+        "chutou": false,
+        "escolhida": "a",
+        "gerada": false,
+        "numero": 1,
+        "ordem": 6,
+        "prova_url": "https://iesesconcursos.nyc3.cdn.digitaloceanspaces.com/2024/biguacu_018_2024/provas/3010.pdf",
+        "respondida_em": "2026-10-22T23:54:14.677300+00:00"
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T23:56:10.248480+00:00",
+    "filtros": {
+      "conteudo": null,
+      "conteudos": [
+        "Língua Portuguesa > Compreensão e interpretação de texto (s)"
+      ],
+      "da_faixa": {
+        "bloco": "noite",
+        "data": "2026-10-22",
+        "indice": 4,
+        "titulo": "Interpretação de texto (cronometrada)"
+      },
+      "geradas": true,
+      "materia": null,
+      "nivel": "misturada",
+      "quantidade": 10
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "e1e6cf24b1fedb1c07923ebff9669ff6",
+        "ordem": 1,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "e9c7836397f46474b9cedbb93c49438e",
+        "ordem": 2,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "8a1ae7eeb2992bf007a54fd37db97fbf",
+        "ordem": 3,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "25c6797c0afe35c4e6d31d4c4cd960dd",
+        "ordem": 4,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "01d4f03a57c3bf296c1a5df420edd74a",
+        "ordem": 5,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "c4e72890dee0eb46a4f03fa0da85e48d",
+        "ordem": 6,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "648a672cea3cbbee1c948f4c782f5dcf",
+        "ordem": 7,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "6f4e5300a467ec2bdb63e2851ebe330f",
+        "ordem": 8,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "1e04165984fb45a279e5e78ca4451e52",
+        "ordem": 9,
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "escolhida": null,
+        "gerada": true,
+        "impressao": "9a2ea9cc46e7bb1a5f2a8c8cde3cf9d3",
+        "ordem": 10,
+        "respondida_em": null
+      }
+    ]
+  },
+  {
+    "criado_em": "2026-10-22T23:56:36.089901+00:00",
+    "filtros": {
+      "quantidade": 10,
+      "revisao": [
+        {
+          "etapa": 1,
+          "motivos": [
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Direito Penal > Infração penal: elementos, espécies"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Assistência ao preso e ao egresso > LEP, art. 26"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "erro recente",
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Direitos do preso > LEP, art. 41"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 64"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "erro recente",
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Lei de Execução Penal > Lei de Execução Penal (Lei nº 7.210 de 11 de julho de 1984) > Órgãos da execução penal > LEP, art. 75"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "erro recente",
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Língua Portuguesa > Concordância nominal e verbal > Concordância do verbo haver impessoal"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Devido processo legal"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Direitos do preso"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Direito Constitucional > Direitos e garantias fundamentais: direitos e garantias individuais e coletivos > Remédios constitucionais"
+        },
+        {
+          "etapa": 1,
+          "motivos": [
+            "erro recente",
+            "prazo de revisão vencido (1 dia(s))"
+          ],
+          "no": "Língua Portuguesa > Emprego de tempos e modos verbais > Correlação modo-temporal"
+        }
+      ]
+    },
+    "finalizado_em": null,
+    "respostas": [
+      {
+        "acertou": null,
+        "chave": "1b2e7481b42667e6c98eab2e436bbf9e",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 78,
+        "ordem": 1,
+        "prova_url": "https://servicos.nc.ufpr.br/documentos/pcpr2020/prova/definitivo/301A.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "ebd66734191ba3267809e88cea390621",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 55,
+        "ordem": 2,
+        "prova_url": "https://selecon.org.br/wp-content/uploads/2022/01/Prova-A-AGENTE-DE-SEGURANCA-PENITENCIARIO_-POLICIAL-PENAL.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "3a1aea489f51ec6a59df8bcd949a66ed",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 87,
+        "ordem": 3,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "d37428375962f46a8b57bdfc26a2465d",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 37,
+        "ordem": 4,
+        "prova_url": "https://selecon.org.br/wp-content/uploads/2022/01/Prova-A-AGENTE-DE-SEGURANCA-PENITENCIARIO_-POLICIAL-PENAL.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "2321633d3c77e80c69509d91d93cfa0f",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 88,
+        "ordem": 5,
+        "prova_url": "https://sap.fepese.org.br/?go=download&path=2&inline=1&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "ed1ec9c55e7ad34edeb781a92cc29836",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 8,
+        "ordem": 6,
+        "prova_url": "https://2024emergencialpalhoca.fepese.org.br/?go=download&path=2&inline=1&arquivo=S01.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "c11cc995f32335b4a26fe2525d8edad2",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 25,
+        "ordem": 7,
+        "prova_url": "https://selecon.org.br/wp-content/uploads/2022/01/Prova-A-AGENTE-DE-SEGURANCA-PENITENCIARIO_-POLICIAL-PENAL.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "ab0ebfc35467c5338736d4049763f664",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 40,
+        "ordem": 8,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AP.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "22c42b6e820452815f4424b2587f43c4",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 34,
+        "ordem": 9,
+        "prova_url": "http://secjustica.fepese.org.br/?go=download&path=2&arquivo=AS.pdf",
+        "respondida_em": null
+      },
+      {
+        "acertou": null,
+        "chave": "af714da4d191ba9c36a20104e21427f4",
+        "escolhida": null,
+        "gerada": false,
+        "numero": 13,
+        "ordem": 10,
+        "prova_url": "https://substitutos2024.fepese.org.br/?go=download&path=2&inline=1&arquivo=AE.pdf",
+        "respondida_em": null
+      }
+    ]
   }
 ]
