@@ -2134,7 +2134,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.619829+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.824433+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.959587+00:00",
@@ -2145,7 +2145,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4800
     },
@@ -2166,7 +2166,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CONCURSO PÚBLICO PREFEITURA MUNICIPAL DE CRUZETA – RN EDITAL Nº 02/2026",
     "uf": "RN",
@@ -2175,7 +2175,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.620170+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.825064+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.961057+00:00",
@@ -2186,7 +2186,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4799
     },
@@ -2207,7 +2207,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CONCURSO PÚBLICO PREFEITURA MUNICIPAL DE CRUZETA – RN EDITAL Nº 03/2026",
     "uf": "RN",
@@ -2257,7 +2257,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.619138+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.823138+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.956771+00:00",
@@ -2268,7 +2268,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4877
     },
@@ -2289,7 +2289,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CONCURSO PÚBLICO PREFEITURA MUNICIPAL DE NÍSIA FLORESTA – RN EDITAL Nº 02/2026",
     "uf": "RN",
@@ -2339,7 +2339,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.620465+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.825628+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.962696+00:00",
@@ -2350,7 +2350,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4796
     },
@@ -2371,7 +2371,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CONCURSO PÚBLICO PREFEITURA MUNICIPAL DE CRUZETA – RN EDITAL Nº 01/2026",
     "uf": "RN",
@@ -2380,7 +2380,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.619512+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.823787+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.958474+00:00",
@@ -2391,7 +2391,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4870
     },
@@ -2412,7 +2412,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CONCURSO PÚBLICO PREFEITURA MUNICIPAL DE NÍSIA FLORESTA/RN CÂMARA MUNICIPAL DE NÍSIA FLORESTA/RN EDITAL Nº 01/2026",
     "uf": "RN",
@@ -2421,7 +2421,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.618773+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.822461+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.955707+00:00",
@@ -2432,7 +2432,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4871
     },
@@ -2453,7 +2453,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CONCURSO PÚBLICO PARA CARGOS DE NÍVEL MÉDIO E SUPERIOR DE ESCOLARIDADE – AC EDITAL Nº 01/2026 CÂMARA MUNICIPAL DE RIO BRANCO",
     "uf": "AC",
@@ -2462,7 +2462,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.617713+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.820707+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.952440+00:00",
@@ -2473,7 +2473,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4886
     },
@@ -2494,7 +2494,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CÂMARA MUNICIPAL DE RIO BRANCO/AC – CONCURSO PÚBLICO PARA O CARGO DE PROCURADOR – EDITAL Nº 02/2026, DE 16 DE SETEMBRO DE 2026",
     "uf": "AC",
@@ -2503,7 +2503,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-23T16:00:37.618372+00:00",
+    "atualizado_em": "2026-10-27T14:38:30.821757+00:00",
     "avisado_em": null,
     "banca": "IDIB",
     "coletado_em": "2026-10-11T18:11:25.954283+00:00",
@@ -2514,7 +2514,7 @@
     "extra": {
       "categorias": [
         26,
-        32
+        61
       ],
       "post_id": 4885
     },
@@ -2535,7 +2535,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - CÂMARA MUNICIPAL DE RIO BRANCO/AC – CONCURSO PÚBLICO PARA O CARGO DE NÍVEL MÉDIO DE AGENTE LEGISLATIVO – POLÍCIA LEGISLATIVA – EDITAL Nº 03/2026, DE 16 DE SETEMBRO DE 2026",
     "uf": "AC",
@@ -10974,6 +10974,84 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.826286+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.826285+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Ceará"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Quixadá (CE): prova aplicada fora de SC.",
+    "municipio": "Quixadá",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T13:19:28+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Quixadá, no estado do Ceará, fará contratações de maneira imediata.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Quixadá (CE) abre mais 1.400 vagas em edital de seletivo",
+    "uf": "CE",
+    "url": "https://concursosnobrasil.com/concursos/ce/2026/10/27/prefeitura-de-quixada-ce-abre-mais-1-400-vagas-em-edital-de-seletivo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.827787+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.827786+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Ceará"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de CE sem município no título; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T12:07:40+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Processo seletivo CRO CE (Conselho Regional de Odontologia do Ceará) tem oportunidade para lotação em Juazeiro do Norte.",
+    "salario": 7200.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Processo seletivo CRO CE abre vaga com salário de R$ 7,2 mil",
+    "uf": "CE",
+    "url": "https://concursosnobrasil.com/concursos/ce/2026/10/27/processo-seletivo-cro-ce-abre-vaga-com-salario-de-r-72-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.567091+00:00",
     "avisado_em": "2026-09-18T03:04:50.258773+00:00",
     "banca": null,
@@ -12454,6 +12532,45 @@
     "titulo": "Concurso DPDF oferta mais de 700 vagas com iniciais de R$ 11 mil",
     "uf": "DF",
     "url": "https://concursosnobrasil.com/concursos/df/2026/10/26/concurso-dpdf-oferta-mais-de-700-vagas-com-iniciais-de-r-11-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.835979+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.835978+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Distrito Federal"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de DF sem município no título; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-26T18:28:55+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Seleção do IGESDF oferece oportunidades para profissionais de níveis técnico e superior, com seleção por meio de provas escritas.",
+    "salario": 13300.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "IGESDF (DF) divulga novos editais de seletivo com vencimentos de até R$ 13,3 mil",
+    "uf": "DF",
+    "url": "https://concursosnobrasil.com/concursos/df/2026/10/26/igesdf-df-divulga-novos-editais-de-seletivo-com-vencimentos-de-ate-r-133-mil/"
   },
   {
     "alvo": null,
@@ -34729,6 +34846,123 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.823128+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.823125+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Laranjal (MG): prova aplicada fora de SC.",
+    "municipio": "Laranjal",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T14:29:04+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Câmara de Laranjal, no estado de Minas Gerais, abre vagas destinadas a profissionais de níveis médio e superior.",
+    "salario": 5200.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de Laranjal (MG) oferta iniciais de até R$ 5,2 mil",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/10/27/concurso-camara-de-laranjal-mg-oferta-iniciais-de-ate-r-52-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.827044+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.827043+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Cláudio (MG): prova aplicada fora de SC.",
+    "municipio": "Cláudio",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T12:39:02+00:00",
+    "relevancia": "remoto",
+    "resumo": "Seleção recebe inscrições gratuitas de profissionais de níveis fundamental e superior. A avaliação será por meio da análise de títulos.",
+    "salario": 4700.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Cláudio (MG) remunera até R$ 4,7 mil em seletivo na Educação",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/10/27/prefeitura-de-claudio-mg-remunera-ate-r-47-mil-em-seletivo-na-educacao/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.825463+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.825461+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Buritis (MG): prova aplicada fora de SC.",
+    "municipio": "Buritis",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T14:21:34+00:00",
+    "relevancia": "remoto",
+    "resumo": "Seleção da Prefeitura de Buritis recebe inscrições gratuitas para níveis fundamental e superior na área da Saúde.",
+    "salario": 6100.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Processo seletivo Prefeitura de Buritis (MG) divulga remuneração de até R$ 6,1 mil",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/10/27/processo-seletivo-prefeitura-de-buritis-mg-divulga-remuneracao-de-ate-r-61-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.573146+00:00",
     "avisado_em": "2026-09-18T03:04:50.258981+00:00",
     "banca": null,
@@ -40653,6 +40887,45 @@
     "titulo": "Seletivo de Pontes e Lacerda (MT) tem 47 vagas e iniciais de até R$ 11.308",
     "uf": "MT",
     "url": "https://concursosnobrasil.com/concursos/mt/2026/10/24/seletivo-de-pontes-e-lacerda-mt-tem-47-vagas-e-iniciais-de-ate-r-11-308/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.833888+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.833887+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Mato Grosso"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Cuiabá (MT): prova aplicada fora de SC.",
+    "municipio": "Cuiabá",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T00:07:18+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Câmara de Cuiabá está oferecendo salários de até R$ 11,6 mil e benefícios de R$ 2,5 mil. Inscrições pelo Instituto Selecon.",
+    "salario": 11600.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de Cuiabá (MT) abre 26 vagas com salário até R$ 11,6 mil",
+    "uf": "MT",
+    "url": "https://concursosnobrasil.com/concursos/mt/2026/10/26/concurso-camara-de-cuiaba-mt-abre-26-vagas-com-salario-ate-r-116-mil/"
   },
   {
     "alvo": null,
@@ -70929,6 +71202,123 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.832507+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.832506+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Nova Pádua (RS): prova aplicada fora de SC.",
+    "municipio": "Nova Pádua",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T10:33:30+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Prefeitura de Nova Pádua, no estado do Rio Grande do Sul, tem oportunidades de diferentes níveis de escolaridade.",
+    "salario": 10800.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Prefeitura de Nova Pádua (RS) paga até R$ 10,8 mil",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/10/27/concurso-prefeitura-de-nova-padua-rs-paga-ate-r-108-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.831817+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.831816+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Mostardas (RS): prova aplicada fora de SC.",
+    "municipio": "Mostardas",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T10:39:43+00:00",
+    "relevancia": "remoto",
+    "resumo": "Seleção municipal recebe inscrições presenciais para oportunidades que contemplam diferentes níveis de escolaridade.",
+    "salario": 7000.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Mostardas (RS) abre seletivo com ganhos de até R$ 7 mil",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/10/27/prefeitura-de-mostardas-rs-abre-seletivo-com-ganhos-de-ate-r-7-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.828558+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.828557+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Santo Antônio da Patrulha (RS): prova aplicada fora de SC.",
+    "municipio": "Santo Antônio da Patrulha",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T11:46:01+00:00",
+    "relevancia": "remoto",
+    "resumo": "Seleção de Santo Antônio da Patrulha oferece salários de até R$ 2.367,20 e classificação por análise curricular.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Santo Antônio da Patrulha (RS) abre seleção na área educacional",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/10/27/prefeitura-de-santo-antonio-da-patrulha-rs-abre-selecao-na-area-educacional/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.575499+00:00",
     "avisado_em": "2026-09-18T03:04:50.259107+00:00",
     "banca": null,
@@ -87156,6 +87546,45 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.836682+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.836681+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Santa Catarina"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Rio do Sul fica em SC mas fora dos anéis de config/regioes.yml.",
+    "municipio": "Rio do Sul",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-26T18:27:02+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo em Rio do Sul abre cadastro de reserva para pedagogos e professores, contando com a organizadora Acesse Concursos.",
+    "salario": 6000.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Rio do Sul (SC) abre vagas na Educação com salário de R$ 6 mil",
+    "uf": "SC",
+    "url": "https://concursosnobrasil.com/concursos/sc/2026/10/26/prefeitura-de-rio-do-sul-sc-abre-vagas-na-educacao-com-salario-de-r-6-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-10-26T15:18:48.473502+00:00",
     "avisado_em": null,
     "banca": null,
@@ -87191,6 +87620,45 @@
     "titulo": "Processo seletivo Prefeitura de Schroeder (SC) abre vaga na área da Saúde",
     "uf": "SC",
     "url": "https://concursosnobrasil.com/concursos/sc/2026/10/26/processo-seletivo-prefeitura-de-schroeder-sc-abre-vaga-na-area-da-saude/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.831011+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.831010+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Santa Catarina"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Rio das Antas fica em SC mas fora dos anéis de config/regioes.yml.",
+    "municipio": "Rio das Antas",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T10:58:29+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Rio das Antas, no estado de Santa Catarina, tem oportunidade para profissional com nível superior.",
+    "salario": 6100.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Rio das Antas (SC) oferta iniciais de R$ 6,1 mil em seletivo",
+    "uf": "SC",
+    "url": "https://concursosnobrasil.com/concursos/sc/2026/10/27/prefeitura-de-rio-das-antas-sc-oferta-iniciais-de-r-61-mil-em-seletivo/"
   },
   {
     "alvo": null,
@@ -105529,6 +105997,45 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.834600+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.834598+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de João Ramalho (SP): prova aplicada fora de SC.",
+    "municipio": "João Ramalho",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-26T23:43:18+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Câmara de João Ramalho oferece duas vagas de nível médio, com salário de R$ 4.813,83 e vale-alimentação de R$ 1 mil.",
+    "salario": 4800.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de João Ramalho (SP) oferece salários de R$ 4,8 mil",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/10/26/concurso-camara-de-joao-ramalho-sp-oferece-salarios-de-r-48-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-10-26T17:44:33.731280+00:00",
     "avisado_em": null,
     "banca": null,
@@ -105724,6 +106231,45 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.835264+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.835263+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Suzano (SP): prova aplicada fora de SC.",
+    "municipio": "Suzano",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-26T18:41:25+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Prefeitura de Suzano, no estado de São Paulo, abre vagas de níveis fundamental, médio e superior.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Prefeitura de Suzano (SP) abre 73 vagas em novo edital",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/10/26/concurso-prefeitura-de-suzano-sp-abre-73-vagas-em-novo-edital/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-10-26T17:44:33.745105+00:00",
     "avisado_em": null,
     "banca": null,
@@ -105759,6 +106305,45 @@
     "titulo": "FUNCABES abre seleção com 33 vagas e cadastro reserva em Taubaté (SP)",
     "uf": "SP",
     "url": "https://concursosnobrasil.com/concursos/sp/2026/10/26/funcabes-abre-selecao-com-33-vagas-e-cadastro-reserva-em-taubate-sp/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-27T14:37:26.833173+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-27T14:37:26.833172+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de SP sem município no título; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-27T09:57:55+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Concurso Prefeitura de Mairiporã, no estado de São Paulo, abre vagas destinadas a profissionais da Educação.",
+    "salario": 4600.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Mairiporã (SP) oferta salários de até R$ 4,6 mil em Prefeitura",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/10/27/concurso-mairipora-sp-oferta-salarios-de-ate-r-46-mil-em-prefeitura/"
   },
   {
     "alvo": null,
@@ -130714,7 +131299,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-26T17:44:34.461849+00:00",
+    "atualizado_em": "2026-10-27T14:37:27.560646+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.328658+00:00",
@@ -130790,7 +131375,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-26T17:44:34.454149+00:00",
+    "atualizado_em": "2026-10-27T14:37:27.555223+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.318618+00:00",
@@ -131029,7 +131614,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-26T17:44:34.462493+00:00",
+    "atualizado_em": "2026-10-27T14:37:27.561055+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.330411+00:00",
@@ -132379,7 +132964,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-17T12:18:31.921863+00:00",
+    "atualizado_em": "2026-10-27T14:38:24.849796+00:00",
     "avisado_em": "2026-10-11T17:49:01.906325+00:00",
     "banca": "Instituto AOCP",
     "coletado_em": "2026-10-11T17:49:01.845236+00:00",
@@ -132388,12 +132973,12 @@
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
-      "andamento": "Edital de Abertura n° 001/2026 - Inscrições prorrogadas até 26/10/2026.",
+      "andamento": "Edital de Abertura n° 001/2026.",
       "edital": "seadap2026",
       "inscricoes_ate": "2026-10-26 16:00:59",
       "inscricoes_de": "2026-09-14 09:00:00",
       "numero_edital": "001/2026",
-      "status_aocp": "SUBSCRIBE"
+      "status_aocp": "IN_PROGRESS"
     },
     "fonte": "aocp",
     "idade_maxima": null,
@@ -132412,7 +132997,7 @@
     "resumo": "O Concurso Público destina-se exclusivamente à formação de Cadastro de Reserva (CR) para o provimento de 4.210 (quatro mil, duzentos e dez) vagas do Grupo Saúde da Secretaria de Estado da Saúde (SESA/AP)",
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "concurso",
     "titulo": "2026 - SECRETARIA DE ESTADO DA ADMINISTRAÇÃO DO ESTADO DO AMAPÁ - AP - Edital de Abertura n° 001/2026",
     "uf": "AP",
@@ -132959,7 +133544,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-26T17:44:34.457826+00:00",
+    "atualizado_em": "2026-10-27T14:37:27.558077+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.323277+00:00",
@@ -133835,7 +134420,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-26T17:44:34.463736+00:00",
+    "atualizado_em": "2026-10-27T14:37:27.561909+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.332889+00:00",
@@ -133873,7 +134458,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-26T17:44:34.458499+00:00",
+    "atualizado_em": "2026-10-27T14:37:27.558520+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.324151+00:00",
