@@ -737,6 +737,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=370",
+    "data": "2026-10-29T15:20:16.469219+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=370",
+    "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/artigo/as-10-racas-de-cachorro-mais-bravas-e-temidas_mundo/",
     "data": "2026-10-24T12:44:58.325377+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
@@ -1253,6 +1261,22 @@
     "data": "2026-10-28T15:13:08.791485+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/es/2026/10/28/concurso-idaf-es-abre-14-vagas-com-vencimentos-de-ate-r-84-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/es/2026/10/29/prefeitura-de-afonso-claudio-es-divulga-dois-editais-na-area-da-educacao/",
+    "data": "2026-10-29T15:19:09.452159+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/es/2026/10/29/prefeitura-de-afonso-claudio-es-divulga-dois-editais-na-area-da-educacao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/es/2026/10/29/prefeitura-de-alfredo-chaves-es-remunera-ate-r-34-mil-em-processo-seletivo/",
+    "data": "2026-10-29T15:19:09.453001+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/es/2026/10/29/prefeitura-de-alfredo-chaves-es-remunera-ate-r-34-mil-em-processo-seletivo/",
     "tipo": "apareceu"
   },
   {
@@ -1833,6 +1857,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/29/prefeitura-de-sao-jose-da-lapa-mg-oferta-iniciais-de-ate-r-36-mil-em-seletivo/",
+    "data": "2026-10-29T15:19:09.453725+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/29/prefeitura-de-sao-jose-da-lapa-mg-oferta-iniciais-de-ate-r-36-mil-em-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/mg/2026/10/29/prefeitura-de-varginha-mg-anuncia-seletivo-de-nivel-fundamental/",
+    "data": "2026-10-29T15:19:09.459348+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/mg/2026/10/29/prefeitura-de-varginha-mg-anuncia-seletivo-de-nivel-fundamental/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/ms/2026/09/25/ms-prefeitura-de-coxim-promove-edital-com-vaga-de-nivel-fundamental/",
     "data": "2026-09-26T13:29:04.530844+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -2037,6 +2077,14 @@
     "data": "2026-10-26T17:44:33.740197+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/pa/2026/10/26/concurso-camara-de-portel-pa-abre-27-vagas-com-salarios-de-ate-r-47-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pa/2026/10/29/prefeitura-de-trairao-pa-abre-selecao-para-brigadistas-com-salarios-de-ate-r-37-mil/",
+    "data": "2026-10-29T15:19:09.454527+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pa/2026/10/29/prefeitura-de-trairao-pa-abre-selecao-para-brigadistas-com-salarios-de-ate-r-37-mil/",
     "tipo": "apareceu"
   },
   {
@@ -2377,6 +2425,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pr/2026/10/29/pr-prefeitura-de-balsa-nova-anuncia-novas-vagas-para-educadores/",
+    "data": "2026-10-29T15:19:09.455324+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pr/2026/10/29/pr-prefeitura-de-balsa-nova-anuncia-novas-vagas-para-educadores/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/rj/2026/09/24/concurso-prefeitura-de-sao-goncalo-rj-anuncia-a-abertura-de-mais-de-600-vagas/",
     "data": "2026-09-24T13:53:44.708132+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -2461,6 +2517,14 @@
     "data": "2026-10-28T15:13:08.790744+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rj/2026/10/28/rj-riosaude-abre-novo-edital-com-vagas-de-niveis-medio-e-tecnico/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rj/2026/10/29/processo-seletivo-sms-rj-abre-62-vagas-para-medicos-com-ganhos-de-ate-r-85-mil/",
+    "data": "2026-10-29T15:19:09.458661+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rj/2026/10/29/processo-seletivo-sms-rj-abre-62-vagas-para-medicos-com-ganhos-de-ate-r-85-mil/",
     "tipo": "apareceu"
   },
   {
@@ -3109,6 +3173,38 @@
     "data": "2026-10-28T17:29:10.473735+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rs/2026/10/28/processo-seletivo-prefeitura-de-victor-graeff-rs-abre-vaga-para-auxiliar/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/29/concurso-prefeitura-de-sao-jose-do-inhacora-rs-abre-22-vagas-de-ate-r-9-mil/",
+    "data": "2026-10-29T15:19:09.457873+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/29/concurso-prefeitura-de-sao-jose-do-inhacora-rs-abre-22-vagas-de-ate-r-9-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/29/concurso-teutonia-rs-disponibiliza-vagas-com-salarios-de-ate-r-138-mil/",
+    "data": "2026-10-29T15:19:09.449810+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/29/concurso-teutonia-rs-disponibiliza-vagas-com-salarios-de-ate-r-138-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/29/prefeitura-de-sao-jose-do-inhacora-rs-lanca-seletivo-para-ace-e-acs/",
+    "data": "2026-10-29T15:19:09.456031+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/29/prefeitura-de-sao-jose-do-inhacora-rs-lanca-seletivo-para-ace-e-acs/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/10/29/prefeitura-de-torres-rs-abre-seletivos-sem-provas-escritas/",
+    "data": "2026-10-29T15:19:09.460752+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/10/29/prefeitura-de-torres-rs-abre-seletivos-sem-provas-escritas/",
     "tipo": "apareceu"
   },
   {
@@ -4129,6 +4225,30 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/29/imas-sc-anuncia-oportunidades-para-aprendizes-em-novo-seletivo/",
+    "data": "2026-10-29T15:19:09.457078+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/29/imas-sc-anuncia-oportunidades-para-aprendizes-em-novo-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/29/prefeitura-de-cerro-negro-sc-abre-20-vagas-em-edital-de-seletivo/",
+    "data": "2026-10-29T15:19:09.462871+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/29/prefeitura-de-cerro-negro-sc-abre-20-vagas-em-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/10/29/ses-sc-preve-vagas-de-ate-r-10-mil-em-dois-editais-de-seletivo/",
+    "data": "2026-10-29T15:19:09.460085+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/10/29/ses-sc-preve-vagas-de-ate-r-10-mil-em-dois-editais-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/09/22/etec-de-jau-sp-publica-edital-de-seletivo-para-auxiliar-de-docente/",
     "data": "2026-09-23T00:34:33.177306+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -4845,6 +4965,14 @@
     "data": "2026-10-28T15:13:08.778534+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/sp/2026/10/28/prefeitura-de-sarapui-sp-paga-ate-r-59-mil-em-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/10/29/sp-pirapora-do-bom-jesus-esta-com-edital-de-seletivo-aberto/",
+    "data": "2026-10-29T15:19:09.446378+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/10/29/sp-pirapora-do-bom-jesus-esta-com-edital-de-seletivo-aberto/",
     "tipo": "apareceu"
   },
   {
