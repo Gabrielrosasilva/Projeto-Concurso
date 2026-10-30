@@ -3667,7 +3667,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.266545+00:00",
+    "atualizado_em": "2026-10-30T17:15:56.680693+00:00",
     "avisado_em": null,
     "banca": null,
     "coletado_em": "2026-10-30T15:07:02.266542+00:00",
@@ -16709,6 +16709,45 @@
     "titulo": "Prefeitura de Alfredo Chaves (ES) remunera até R$ 3,4 mil em processo seletivo",
     "uf": "ES",
     "url": "https://concursosnobrasil.com/concursos/es/2026/10/29/prefeitura-de-alfredo-chaves-es-remunera-ate-r-34-mil-em-processo-seletivo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-30T17:15:56.678902+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-30T17:15:56.678901+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Espírito Santo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Marechal Floriano (ES): prova aplicada fora de SC.",
+    "municipio": "Marechal Floriano",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-30T15:58:08+00:00",
+    "relevancia": "remoto",
+    "resumo": "Seleção da Prefeitura de Marechal Floriano reúne oportunidades na área da saúde para diferentes níveis de escolaridade.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Marechal Floriano (ES) abre seletivo com 100 vagas",
+    "uf": "ES",
+    "url": "https://concursosnobrasil.com/concursos/es/2026/10/30/prefeitura-de-marechal-floriano-es-abre-seletivo-com-100-vagas/"
   },
   {
     "alvo": null,
@@ -41749,6 +41788,45 @@
     "titulo": "Concurso Prefeitura de Novo São Joaquim (MT) abre 266 vagas em edital",
     "uf": "MT",
     "url": "https://concursosnobrasil.com/concursos/mt/2026/10/28/concurso-prefeitura-de-novo-sao-joaquim-mt-abre-266-vagas-em-edital/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-30T17:15:56.676364+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-30T17:15:56.676362+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Mato Grosso"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Santa Rita do Trivelato (MT): prova aplicada fora de SC.",
+    "municipio": "Santa Rita do Trivelato",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-30T16:54:29+00:00",
+    "relevancia": "remoto",
+    "resumo": "Prefeitura de Santa Rita do Trivelato, em Mato Grosso, abre seleção, com jornadas de 30 ou 40 horas semanais.",
+    "salario": 21800.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Santa Rita do Trivelato (MT) remunera até R$ 21,8 mil em seletivo",
+    "uf": "MT",
+    "url": "https://concursosnobrasil.com/concursos/mt/2026/10/30/prefeitura-de-santa-rita-do-trivelato-mt-remunera-ate-r-218-mil-em-seletivo/"
   },
   {
     "alvo": null,
@@ -72805,6 +72883,45 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-10-30T17:15:56.680093+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-30T17:15:56.680092+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Soledade (RS): prova aplicada fora de SC.",
+    "municipio": "Soledade",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-30T15:18:40+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Câmara de Soledade tem oportunidades de níveis médio e superior para atuação em setor administrativo.",
+    "salario": 4300.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de Soledade (RS) prevê salários de até R$ 4,3 mil",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/10/30/concurso-camara-de-soledade-rs-preve-salarios-de-ate-r-43-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-10-30T15:07:02.270368+00:00",
     "avisado_em": null,
     "banca": null,
@@ -89691,6 +89808,45 @@
     "titulo": "Concurso CRO SE oferece 83 vagas para níveis médio e superior",
     "uf": "SE",
     "url": "https://concursosnobrasil.com/concursos/se/2026/09/18/concurso-cro-se-oferece-83-vagas-para-niveis-medio-e-superior/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-30T17:15:56.679502+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-30T17:15:56.679501+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Sergipe"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Itabaiana (SE): prova aplicada fora de SC.",
+    "municipio": "Itabaiana",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-30T15:31:03+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Itabaiana, no estado de Sergipe, abre vagas de diferentes níveis de escolaridade.",
+    "salario": 4500.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Itabaiana (SE) abre 38 vagas de até R$ 4,5 mil em seletivo",
+    "uf": "SE",
+    "url": "https://concursosnobrasil.com/concursos/se/2026/10/30/prefeitura-de-itabaiana-se-abre-38-vagas-de-ate-r-45-mil-em-seletivo/"
   },
   {
     "alvo": null,
@@ -108610,6 +108766,45 @@
     "titulo": "SP: Pirapora do Bom Jesus está com edital de seletivo aberto",
     "uf": "SP",
     "url": "https://concursosnobrasil.com/concursos/sp/2026/10/29/sp-pirapora-do-bom-jesus-esta-com-edital-de-seletivo-aberto/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-30T17:15:56.678232+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-30T17:15:56.678232+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Pirapozinho (SP): prova aplicada fora de SC.",
+    "municipio": "Pirapozinho",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-30T16:51:49+00:00",
+    "relevancia": "remoto",
+    "resumo": "Seleção de Pirapozinho, São Paulo, oferece vagas para profissionais de todos os níveis de escolaridade, com remunerações de até R$ 6,4 mil.",
+    "salario": 6400.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Concurso Prefeitura de Pirapozinho (SP) tem cargos com salário até R$ 6,4 mil",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/10/30/concurso-prefeitura-de-pirapozinho-sp-tem-cargos-com-salario-ate-r-64-mil/"
   },
   {
     "alvo": null,
@@ -133643,7 +133838,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.964318+00:00",
+    "atualizado_em": "2026-10-30T17:15:57.482041+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.328658+00:00",
@@ -133719,7 +133914,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.959764+00:00",
+    "atualizado_em": "2026-10-30T17:15:57.478209+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.318618+00:00",
@@ -133958,7 +134153,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.964649+00:00",
+    "atualizado_em": "2026-10-30T17:15:57.482384+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.330411+00:00",
@@ -135888,7 +136083,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.962182+00:00",
+    "atualizado_em": "2026-10-30T17:15:57.479848+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.323277+00:00",
@@ -136764,7 +136959,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.965298+00:00",
+    "atualizado_em": "2026-10-30T17:15:57.483071+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.332889+00:00",
@@ -136802,7 +136997,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-30T15:07:02.962573+00:00",
+    "atualizado_em": "2026-10-30T17:15:57.480223+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.324151+00:00",
