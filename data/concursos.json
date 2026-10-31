@@ -3667,7 +3667,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:10.070313+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.362750+00:00",
     "avisado_em": null,
     "banca": null,
     "coletado_em": "2026-10-31T14:37:10.070311+00:00",
@@ -3743,6 +3743,46 @@
     "titulo": "Consulta do Bolsa Família de novembro pode ser feita pelo CPF",
     "uf": null,
     "url": "https://concursosnobrasil.com/beneficios-sociais/2026/10/30/consulta-do-bolsa-familia-de-novembro-pode-ser-feita-pelo-cpf/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-10-31T16:25:09.354261+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-10-31T16:25:09.354256+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Benefícios Sociais",
+        "Notícia"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Não parece concurso: o título não fala em vaga, edital nem inscrição.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-10-31T15:42:16+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Os valores foram reajustados pelo Governo Federal e entraram em vigor no mês de outubro. A nova parcela de novembro será paga a partir do dia 16/11.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "desconhecida",
+    "tipo": "noticia",
+    "titulo": "Bolsa Família de novembro: piso e adicionais são divulgados pelo Governo",
+    "uf": null,
+    "url": "https://concursosnobrasil.com/beneficios-sociais/2026/10/31/bolsa-familia-de-novembro-piso-e-adicionais-sao-divulgados-pelo-governo/"
   },
   {
     "alvo": null,
@@ -134231,7 +134271,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:11.191295+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.977368+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.328658+00:00",
@@ -134307,7 +134347,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:11.183415+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.970655+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.318618+00:00",
@@ -134546,7 +134586,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:11.191942+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.978013+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.330411+00:00",
@@ -136476,7 +136516,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:11.187212+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.973321+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.323277+00:00",
@@ -137352,7 +137392,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:11.193217+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.979249+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.332889+00:00",
@@ -137390,7 +137430,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-31T14:37:11.187903+00:00",
+    "atualizado_em": "2026-10-31T16:25:09.973991+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.324151+00:00",
