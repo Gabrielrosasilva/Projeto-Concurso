@@ -3868,7 +3868,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:55.431739+00:00",
+    "atualizado_em": "2026-11-03T18:44:09.455722+00:00",
     "avisado_em": null,
     "banca": null,
     "coletado_em": "2026-11-03T16:21:55.431738+00:00",
@@ -3908,7 +3908,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:55.426213+00:00",
+    "atualizado_em": "2026-11-03T18:44:09.451474+00:00",
     "avisado_em": null,
     "banca": null,
     "coletado_em": "2026-11-03T16:21:55.426212+00:00",
@@ -17186,6 +17186,45 @@
     "titulo": "Concurso Câmara de Piúma (ES) oferece salário de até R$ 9.018",
     "uf": "ES",
     "url": "https://concursosnobrasil.com/concursos/es/2026/11/03/concurso-camara-de-piuma-es-oferece-salario-de-ate-r-9-018/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-03T18:44:09.448002+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-03T18:44:09.448001+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Espírito Santo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Santa Maria de Jetibá (ES): prova aplicada fora de SC.",
+    "municipio": "Santa Maria de Jetibá",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-03T16:48:23+00:00",
+    "relevancia": "remoto",
+    "resumo": "Prefeitura de Santa Maria de Jetibá abre seleção para professores e profissionais de apoio à educação, com inscrições gratuitas pela internet.",
+    "salario": 4700.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Santa Maria de Jetibá (ES) promove seletivos com ganhos de até R$ 4,7 mil",
+    "uf": "ES",
+    "url": "https://concursosnobrasil.com/concursos/es/2026/11/03/prefeitura-de-santa-maria-de-jetiba-es-promove-seletivos-com-ganhos-de-ate-r-47-mil/"
   },
   {
     "alvo": null,
@@ -38525,6 +38564,45 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-11-03T18:44:09.448747+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-03T18:44:09.448746+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Mato Grosso do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Sonora (MS): prova aplicada fora de SC.",
+    "municipio": "Sonora",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-03T16:47:19+00:00",
+    "relevancia": "remoto",
+    "resumo": "Prefeitura de Sonora, Mato Grosso do Sul, abre 41 vagas e ainda forma cadastro em processo seletivo para o setor de magistério municipal.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Sonora (MS) abre seletivo para contratar 41 professores",
+    "uf": "MS",
+    "url": "https://concursosnobrasil.com/concursos/ms/2026/11/03/prefeitura-de-sonora-ms-abre-seletivo-para-contratar-41-professores/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.575507+00:00",
     "avisado_em": "2026-09-18T03:04:50.259133+00:00",
     "banca": null,
@@ -47143,6 +47221,45 @@
     "titulo": "Prefeitura de São João do Piauí (PI) abre 80 vagas em processo seletivo",
     "uf": "PI",
     "url": "https://concursosnobrasil.com/concursos/pi/2026/10/30/prefeitura-de-sao-joao-do-piaui-pi-abre-70-vagas-em-processo-seletivo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-03T18:44:09.445389+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-03T18:44:09.445386+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Piauí"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Dom Inocêncio (PI): prova aplicada fora de SC.",
+    "municipio": "Dom Inocêncio",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-03T17:58:57+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Câmara de Dom Inocêncio, no Piauí, abre seis vagas para servidores administrativos e técnicos do seu quadro efetivo.",
+    "salario": 6000.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de Dom Inocêncio (PI) oferece salário de até R$ 6 mil",
+    "uf": "PI",
+    "url": "https://concursosnobrasil.com/concursos/pi/2026/11/03/concurso-camara-de-dom-inocencio-pi-oferece-salario-de-ate-r-6-mil/"
   },
   {
     "alvo": null,
@@ -135099,7 +135216,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:56.717911+00:00",
+    "atualizado_em": "2026-11-03T18:44:11.325887+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.328658+00:00",
@@ -135175,7 +135292,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:56.712067+00:00",
+    "atualizado_em": "2026-11-03T18:44:11.322126+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.318618+00:00",
@@ -135414,7 +135531,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:56.718352+00:00",
+    "atualizado_em": "2026-11-03T18:44:11.326238+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.330411+00:00",
@@ -137344,7 +137461,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:56.714954+00:00",
+    "atualizado_em": "2026-11-03T18:44:11.323717+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.323277+00:00",
@@ -138220,7 +138337,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:56.719257+00:00",
+    "atualizado_em": "2026-11-03T18:44:11.326901+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.332889+00:00",
@@ -138258,7 +138375,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-03T16:21:56.715461+00:00",
+    "atualizado_em": "2026-11-03T18:44:11.324093+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.324151+00:00",
