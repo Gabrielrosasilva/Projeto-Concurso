@@ -4148,6 +4148,86 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.018148+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.018147+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Benefícios Sociais",
+        "Notícia"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Não parece concurso: o título não fala em vaga, edital nem inscrição.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T12:28:59+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Ambos os pagamentos foram antecipados em virtude do fenômeno El Niño. O piso e os adicionais do programa não foram alterados, bem como as regras de elegibilidade.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "desconhecida",
+    "tipo": "noticia",
+    "titulo": "Bolsa Família terá calendário antecipado em novembro e dezembro",
+    "uf": null,
+    "url": "https://concursosnobrasil.com/beneficios-sociais/2026/11/06/bolsa-familia-tera-calendario-antecipado-em-novembro-e-dezembro/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.010916+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.010915+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Benefícios Sociais",
+        "Notícia"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Não parece concurso: o título não fala em vaga, edital nem inscrição.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T13:55:07+00:00",
+    "relevancia": "indefinida",
+    "resumo": "O novo valor do piso do INSS acompanha o reajuste do salário mínimo nacional. O projeto de Lei Orçamentária já trouxe uma estimativa do que poderá mudar em 2027.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "desconhecida",
+    "tipo": "noticia",
+    "titulo": "Piso dos benefícios do INSS em 2027 já tem valor previsto pelo Governo",
+    "uf": null,
+    "url": "https://concursosnobrasil.com/beneficios-sociais/2026/11/06/piso-dos-beneficios-do-inss-em-2027-ja-tem-valor-previsto-pelo-governo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-10-31T14:37:10.062952+00:00",
     "avisado_em": null,
     "banca": null,
@@ -4188,7 +4268,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T16:32:34.628412+00:00",
+    "atualizado_em": "2026-11-06T16:02:26.011641+00:00",
     "avisado_em": null,
     "banca": null,
     "coletado_em": "2026-11-05T16:32:34.628411+00:00",
@@ -4241,7 +4321,7 @@
     "municipio_confirmado": false,
     "notas": null,
     "orgao": null,
-    "publicado_em": "2026-11-05T13:27:33+00:00",
+    "publicado_em": "2026-11-06T13:27:33+00:00",
     "relevancia": "indefinida",
     "resumo": "Concurso IBGE (Fundação Instituto Brasileiro de Geografia e Estatística) é publicado visando a contratação de profissionais para todo o território brasileiro.",
     "salario": null,
@@ -17694,6 +17774,84 @@
     "titulo": "Prefeitura de Aracruz (ES) oferece até 60 vagas para Guarda-Vidas",
     "uf": "ES",
     "url": "https://concursosnobrasil.com/concursos/es/2026/11/05/prefeitura-de-aracruz-es-oferece-ate-60-vagas-para-guarda-vidas/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.013264+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.013263+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Espírito Santo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Aracruz (ES): prova aplicada fora de SC.",
+    "municipio": "Aracruz",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T13:24:16+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Câmara de Aracruz, no estado do Espírito Santo, abre vagas de níveis médio e superior.",
+    "salario": 6600.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Câmara de Aracruz (ES) paga até R$ 6,6 mil em edital",
+    "uf": "ES",
+    "url": "https://concursosnobrasil.com/concursos/es/2026/11/06/concurso-camara-de-aracruz-es-paga-ate-r-66-mil-em-edital/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.014034+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.014033+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Espírito Santo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Colatina (ES): prova aplicada fora de SC.",
+    "municipio": "Colatina",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T12:58:24+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Colatina, no estado do Espírito Santo, oferta oportunidades de níveis fundamental, médio, médio/técnico e superior.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Colatina (ES) abre 78 vagas em novo edital de seletivo",
+    "uf": "ES",
+    "url": "https://concursosnobrasil.com/concursos/es/2026/11/06/prefeitura-de-colatina-es-abre-78-vagas-em-novo-edital-de-seletivo/"
   },
   {
     "alvo": null,
@@ -36927,6 +37085,162 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.005358+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.005356+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de MG sem município no título; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T15:45:40+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Processo seletivo Prefeitura de Leopoldina tem vagas de níveis fundamental, técnico e superior na área da Saúde.",
+    "salario": 10000.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "MG: Prefeitura de Leopoldina oferece pagamentos de até R$ 10 mil em seletivo",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/11/06/mg-prefeitura-de-leopoldina-oferece-pagamentos-de-ate-r-10-mil-em-seletivo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.009195+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.009194+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Água Boa (MG): prova aplicada fora de SC.",
+    "municipio": "Água Boa",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T14:20:08+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Prefeitura de Água Boa, no estado de Minas Gerais, fará contratações pelo regime jurídico estatutário.",
+    "salario": 13900.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Prefeitura de Água Boa (MG) abre 91 vagas de até R$ 13,9 mil em concurso",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/11/06/prefeitura-de-agua-boa-mg-abre-91-vagas-de-ate-r-139-mil-em-concurso/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.006135+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.006133+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Estiva (MG): prova aplicada fora de SC.",
+    "municipio": "Estiva",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T15:37:30+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Estiva, no estado de Minas Gerais, oferta oportunidades de nível fundamental.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Estiva (MG) abre vagas em novo edital de seletivo",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/11/06/prefeitura-de-estiva-mg-abre-vagas-em-novo-edital-de-seletivo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.002691+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.002689+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Minas Gerais"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Ouro Fino (MG): prova aplicada fora de SC.",
+    "municipio": "Ouro Fino",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T15:47:33+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Ouro Fino, Minas Gerais, abre uma vaga na função de Assistente Social, com jornada de 24 horas semanais.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Ouro Fino (MG) abre seleção para Assistente Social",
+    "uf": "MG",
+    "url": "https://concursosnobrasil.com/concursos/mg/2026/11/06/prefeitura-de-ouro-fino-mg-abre-selecao-para-assistente-social/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.573146+00:00",
     "avisado_em": "2026-09-18T03:04:50.258981+00:00",
     "banca": null,
@@ -43124,6 +43438,45 @@
     "titulo": "Cáceres (MT) abre 30 vagas + cadastro com salário até R$ 7,2 mil",
     "uf": "MT",
     "url": "https://concursosnobrasil.com/concursos/mt/2026/11/04/caceres-mt-abre-30-vagas-cadastro-com-salario-ate-r-72-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.009986+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.009985+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Mato Grosso"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Mirassol d’Oeste (MT): prova aplicada fora de SC.",
+    "municipio": "Mirassol d’Oeste",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T13:56:11+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Mirassol d'Oeste prevê salários de até R$ 27,6 mil mensais. A seleção pode aplicar até duas etapas avaliativas, dependendo do cargo.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Mirassol d’Oeste (MT) tem 205 vagas abertas em novo edital",
+    "uf": "MT",
+    "url": "https://concursosnobrasil.com/concursos/mt/2026/11/06/prefeitura-de-mirassol-doeste-mt-tem-mais-de-205-vagas-abertas-em-novo-edital/"
   },
   {
     "alvo": null,
@@ -56858,6 +57211,45 @@
     "titulo": "SMS RJ abre edital com mais de 60 vagas e salários de até R$ 8 mil",
     "uf": "RJ",
     "url": "https://concursosnobrasil.com/concursos/rj/2026/10/30/sms-rj-abre-edital-com-mais-de-60-vagas-e-salarios-de-ate-r-8-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.008475+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.008474+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio de Janeiro"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de RJ sem município no título; depende de ler o edital.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T14:20:47+00:00",
+    "relevancia": "indefinida",
+    "resumo": "Seleção do RioSaúde contempla profissionais com experiência em Centro Cirúrgico e Central de Material e Esterilização.",
+    "salario": 5200.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "RioSaúde (RJ) abre 15 vagas para Enfermeiros com ganhos de até R$ 5,2 mil",
+    "uf": "RJ",
+    "url": "https://concursosnobrasil.com/concursos/rj/2026/11/06/riosaude-rj-abre-15-vagas-para-enfermeiros-com-ganhos-de-ate-r-52-mil/"
   },
   {
     "alvo": null,
@@ -74765,6 +75157,45 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.007706+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.007705+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Rio Grande do Sul"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Trindade do Sul (RS): prova aplicada fora de SC.",
+    "municipio": "Trindade do Sul",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T15:00:10+00:00",
+    "relevancia": "remoto",
+    "resumo": "No estado do Rio Grande do Sul, o processo seletivo Prefeitura de Trindade do Sul selecionará Médicos para contratação temporária.",
+    "salario": 16500.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Trindade do Sul (RS) oferta iniciais de até R$ 16,5 mil em seletivo",
+    "uf": "RS",
+    "url": "https://concursosnobrasil.com/concursos/rs/2026/11/06/prefeitura-de-trindade-do-sul-rs-oferta-iniciais-de-ate-r-165-mil-em-seletivo/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.575499+00:00",
     "avisado_em": "2026-09-18T03:04:50.259107+00:00",
     "banca": null,
@@ -91807,6 +92238,45 @@
     "titulo": "SC: FAHECE divulga dois novos editais com vagas em Florianópolis",
     "uf": "SC",
     "url": "https://concursosnobrasil.com/concursos/sc/2026/11/05/sc-fahece-divulga-dois-novos-editais-com-vagas-em-florianopolis/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.016616+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.016615+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "Santa Catarina"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Iraceminha fica em SC mas fora dos anéis de config/regioes.yml.",
+    "municipio": "Iraceminha",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T12:58:19+00:00",
+    "relevancia": "remoto",
+    "resumo": "Processo seletivo Prefeitura de Iraceminha visa contratação de pessoal para suprir demandas temporárias.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Iraceminha (SC) divulga oportunidades na Educação",
+    "uf": "SC",
+    "url": "https://concursosnobrasil.com/concursos/sc/2026/11/06/prefeitura-de-iraceminha-sc-divulga-oportunidades-na-educacao/"
   },
   {
     "alvo": null,
@@ -111432,6 +111902,85 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.006870+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.006869+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo",
+        "Previstos"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Campinas (SP): prova aplicada fora de SC.",
+    "municipio": "Campinas",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T15:08:39+00:00",
+    "relevancia": "remoto",
+    "resumo": "Concurso Prefeitura de Campinas está prestes a ter seu edital publicado e deve oferecer vagas para níveis fundamental, médio, técnico e superior.",
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "concurso",
+    "titulo": "Concurso Prefeitura de Campinas (SP) vai abrir mais de 480 vagas",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/11/06/concurso-prefeitura-de-campinas-sp-vai-abrir-mais-de-480-vagas/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:26.017410+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:26.017408+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "categorias": [
+        "São Paulo"
+      ]
+    },
+    "fonte": "concursosnobrasil",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Órgão de Barra do Turvo (SP): prova aplicada fora de SC.",
+    "municipio": "Barra do Turvo",
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-06T12:38:13+00:00",
+    "relevancia": "remoto",
+    "resumo": "Prefeitura de Barra do Turvo recebe inscrições gratuitas por e-mail para candidato com graduação em Direito.",
+    "salario": 3600.0,
+    "salario_manual": false,
+    "situacao": "edital_publicado",
+    "tipo": "seletivo",
+    "titulo": "Prefeitura de Barra do Turvo (SP) abre seleção com salário de R$ 3,6 mil",
+    "uf": "SP",
+    "url": "https://concursosnobrasil.com/concursos/sp/2026/11/06/prefeitura-de-barra-do-turvo-sp-abre-selecao-com-salario-de-r-36-mil/"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
     "atualizado_em": "2026-09-24T04:11:44.565633+00:00",
     "avisado_em": "2026-09-18T03:04:50.258666+00:00",
     "banca": null,
@@ -113565,7 +114114,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.053430+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.443588+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.251241+00:00",
@@ -113606,7 +114155,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.053934+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.444418+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.252590+00:00",
@@ -114344,7 +114893,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.051509+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.440734+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.245070+00:00",
@@ -114385,7 +114934,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.048506+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.436187+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.234877+00:00",
@@ -114426,7 +114975,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.051223+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.440294+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.244418+00:00",
@@ -114467,7 +115016,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.047755+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.435020+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.232352+00:00",
@@ -116927,7 +117476,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.032945+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.412670+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.180502+00:00",
@@ -116968,7 +117517,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.032685+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.412208+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.179727+00:00",
@@ -117009,7 +117558,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.037003+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.418696+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.195945+00:00",
@@ -117050,7 +117599,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.035201+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.415979+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.187801+00:00",
@@ -117091,7 +117640,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.036745+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.418281+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.195072+00:00",
@@ -117173,7 +117722,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.031875+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.410934+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.176220+00:00",
@@ -118690,7 +119239,7 @@
   {
     "alvo": "principal",
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.003277+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.366661+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.061132+00:00",
@@ -119848,7 +120397,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.008488+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.374764+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.078467+00:00",
@@ -120463,7 +121012,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.011216+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.379129+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.087598+00:00",
@@ -120545,7 +121094,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.009133+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.375820+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.080455+00:00",
@@ -120996,7 +121545,7 @@
   {
     "alvo": "principal",
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.999817+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.361260+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.051696+00:00",
@@ -121253,7 +121802,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.003599+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.367183+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.061891+00:00",
@@ -121622,7 +122171,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.993788+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.352017+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.033534+00:00",
@@ -122770,7 +123319,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.989355+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.345229+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.021849+00:00",
@@ -123057,7 +123606,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.991434+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.348491+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.027317+00:00",
@@ -123098,7 +123647,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.985160+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.338867+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.009837+00:00",
@@ -123139,7 +123688,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.989061+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.344778+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.021229+00:00",
@@ -123795,7 +124344,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.065511+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.461608+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.288246+00:00",
@@ -123836,7 +124385,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.064972+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.460771+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.286528+00:00",
@@ -123877,7 +124426,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.060864+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.454622+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.275046+00:00",
@@ -123918,7 +124467,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.065248+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.461216+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.287509+00:00",
@@ -124205,7 +124754,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.063124+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.457983+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.280859+00:00",
@@ -124369,7 +124918,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.061853+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.456097+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.277290+00:00",
@@ -124410,7 +124959,7 @@
   {
     "alvo": "principal",
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.983502+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.336410+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.005149+00:00",
@@ -124912,7 +125461,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.979851+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.331131+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.995176+00:00",
@@ -124953,7 +125502,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.980381+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.331940+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.996549+00:00",
@@ -124994,7 +125543,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.979569+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.330701+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.994566+00:00",
@@ -125035,7 +125584,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.980114+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.331555+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.995912+00:00",
@@ -125199,7 +125748,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.983110+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.335818+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:06.003932+00:00",
@@ -125240,7 +125789,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.981136+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.333042+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.998480+00:00",
@@ -125486,7 +126035,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.974169+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.322506+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.978478+00:00",
@@ -125896,7 +126445,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.972699+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.320280+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.974642+00:00",
@@ -125937,7 +126486,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.972970+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.320698+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.975286+00:00",
@@ -125978,7 +126527,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.972401+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.319846+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.973868+00:00",
@@ -126019,7 +126568,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.973686+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.321782+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.977248+00:00",
@@ -126265,7 +126814,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.977909+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.328178+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.989566+00:00",
@@ -126306,7 +126855,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.977384+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.327405+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.987570+00:00",
@@ -126347,7 +126896,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.975169+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.324080+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.981133+00:00",
@@ -126511,7 +127060,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.974447+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.322909+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.979096+00:00",
@@ -126552,7 +127101,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.977119+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.326984+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.986621+00:00",
@@ -127044,7 +127593,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.961404+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.303677+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.940805+00:00",
@@ -127085,7 +127634,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.961105+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.303238+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.940152+00:00",
@@ -127126,7 +127675,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.963912+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.307326+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.949246+00:00",
@@ -127167,7 +127716,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.964195+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.307788+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.950197+00:00",
@@ -127208,7 +127757,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.966456+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.311212+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.956627+00:00",
@@ -127249,7 +127798,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.960814+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.302831+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.939177+00:00",
@@ -127290,7 +127839,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.960520+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.302415+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.938508+00:00",
@@ -127331,7 +127880,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.964980+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.308958+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.953004+00:00",
@@ -127536,7 +128085,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.967853+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.313242+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.961044+00:00",
@@ -127577,7 +128126,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.967297+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.312464+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.959785+00:00",
@@ -127618,7 +128167,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.965857+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.310293+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.954995+00:00",
@@ -127864,7 +128413,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.965570+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.309847+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.954377+00:00",
@@ -127905,7 +128454,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.966731+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.311629+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.957793+00:00",
@@ -127946,7 +128495,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.967569+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.312841+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.960430+00:00",
@@ -127987,7 +128536,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.969802+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.316094+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.966487+00:00",
@@ -128479,7 +129028,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.957575+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.298176+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.931339+00:00",
@@ -128520,7 +129069,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.957003+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.297380+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.930067+00:00",
@@ -128571,7 +129120,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.957276+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.297773+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.930692+00:00",
@@ -128612,7 +129161,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.953761+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.292661+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.921197+00:00",
@@ -128870,7 +129419,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.958147+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.299007+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.932736+00:00",
@@ -128911,7 +129460,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.959713+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.301276+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.936696+00:00",
@@ -128952,7 +129501,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.956471+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.296617+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.928815+00:00",
@@ -129005,7 +129554,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.954822+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.294237+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.924859+00:00",
@@ -129059,7 +129608,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.960212+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.302004+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.937893+00:00",
@@ -129182,7 +129731,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.957857+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.298600+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.931951+00:00",
@@ -129305,7 +129854,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.948100+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.284032+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.908094+00:00",
@@ -129356,7 +129905,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.947798+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.283637+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.907017+00:00",
@@ -129409,7 +129958,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.953480+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.292236+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.920445+00:00",
@@ -129461,7 +130010,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.953178+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.291802+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.919815+00:00",
@@ -129719,7 +130268,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.949549+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.286167+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.911423+00:00",
@@ -129773,7 +130322,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.950697+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.287868+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.913884+00:00",
@@ -129867,7 +130416,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.947511+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.283182+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.905257+00:00",
@@ -129920,7 +130469,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.948595+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.284734+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.909556+00:00",
@@ -129972,7 +130521,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.950061+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.286958+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.912573+00:00",
@@ -130025,7 +130574,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.951553+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.289282+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.915736+00:00",
@@ -130078,7 +130627,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.951803+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.289719+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.916367+00:00",
@@ -130172,7 +130721,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.950996+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.288425+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.914505+00:00",
@@ -130225,7 +130774,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.951281+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.288889+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.915124+00:00",
@@ -130441,7 +130990,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.943639+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.277482+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.893728+00:00",
@@ -130902,7 +131451,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.944799+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.279204+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.897617+00:00",
@@ -131201,7 +131750,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.946584+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.281835+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.902738+00:00",
@@ -131254,7 +131803,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.939993+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.272184+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.882277+00:00",
@@ -131307,7 +131856,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.940272+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.272603+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.882885+00:00",
@@ -131565,7 +132114,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.944525+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.278792+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.897003+00:00",
@@ -131617,7 +132166,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.945070+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.279623+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.898247+00:00",
@@ -131752,7 +132301,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.936424+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.267152+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.871577+00:00",
@@ -131805,7 +132354,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.934089+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.263578+00:00",
     "avisado_em": "2026-09-18T04:13:57.909849+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.865394+00:00",
@@ -132474,7 +133023,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.939082+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.270898+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.879677+00:00",
@@ -132525,7 +133074,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.938803+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.270500+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.878796+00:00",
@@ -132577,7 +133126,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.937805+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.269065+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.875647+00:00",
@@ -132629,7 +133178,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.937519+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.268686+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.874921+00:00",
@@ -132681,7 +133230,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.937210+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.268261+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.874208+00:00",
@@ -132816,7 +133365,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.934560+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.264536+00:00",
     "avisado_em": "2026-09-18T04:13:57.909886+00:00",
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.866602+00:00",
@@ -132911,7 +133460,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.934916+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.265027+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.867275+00:00",
@@ -133251,7 +133800,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:13.970799+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.317539+00:00",
     "avisado_em": null,
     "banca": "FEPESE",
     "coletado_em": "2026-09-18T04:12:05.968934+00:00",
@@ -136864,7 +137413,49 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.497497+00:00",
+    "atualizado_em": "2026-11-06T16:02:48.016076+00:00",
+    "avisado_em": null,
+    "banca": null,
+    "coletado_em": "2026-11-06T16:02:48.016074+00:00",
+    "data_prova": null,
+    "detalhado_em": null,
+    "elegibilidade": "a_confirmar",
+    "escolaridade": null,
+    "extra": {
+      "assunto": "EDITAL DE CONCURSO",
+      "ato": "retificacao",
+      "categoria": "Polícia Militar",
+      "cd_materia": 1240775,
+      "edicao": "22874",
+      "texto_integral": "https://portal.doe.sea.sc.gov.br/repositorio/2026/20261105/Materias/1240775/1240775_final.html"
+    },
+    "fonte": "doe_sc",
+    "idade_maxima": null,
+    "inscricoes_ate": null,
+    "inscricoes_de": null,
+    "interesse": null,
+    "motivo_alvo": null,
+    "motivo_elegibilidade": null,
+    "motivo_relevancia": "Concurso de SC, mas não identifiquei o município no título.",
+    "municipio": null,
+    "municipio_confirmado": false,
+    "notas": null,
+    "orgao": null,
+    "publicado_em": "2026-11-05T03:00:00+00:00",
+    "relevancia": "indefinida",
+    "resumo": null,
+    "salario": null,
+    "salario_manual": false,
+    "situacao": "desconhecida",
+    "tipo": "concurso",
+    "titulo": "2026 - EDITAL DE CONCURSOS PÙBLICO nº 002/CCP/2026 - Torna público o resumo do Edital de Concurso Público nº 002/CCP/2026 – CFP, retificado em 23 e 27 de outubro de 2026, com destaque para as alterações…",
+    "uf": "SC",
+    "url": "https://portal.doe.sea.sc.gov.br/#/portal/edicao/4707/materia/1240775"
+  },
+  {
+    "alvo": null,
+    "alvo_prioritario": false,
+    "atualizado_em": "2026-11-06T16:02:38.711230+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.328658+00:00",
@@ -136940,7 +137531,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.494153+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.706424+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.318618+00:00",
@@ -137179,7 +137770,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.497793+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.711660+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.330411+00:00",
@@ -138151,7 +138742,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-11T17:49:01.908452+00:00",
+    "atualizado_em": "2026-11-06T16:03:37.459358+00:00",
     "avisado_em": "2026-10-11T17:49:01.906347+00:00",
     "banca": "Instituto AOCP",
     "coletado_em": "2026-10-11T17:49:01.866596+00:00",
@@ -138160,7 +138751,7 @@
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
-      "andamento": "Edital de Abertura n° 001/2026. Divulgado o Edital de Convocação para a Prova Prática e a lista de candidatos habilitados para a correção da Prova Discursiva.",
+      "andamento": "Edital de Abertura n° 001/2026. Divulgado o Edital de Resultado da Prova Prática - Pós-Recursos.",
       "edital": "cesama2026",
       "inscricoes_ate": "2026-07-10 14:00:00",
       "inscricoes_de": "2026-06-10 09:00:00",
@@ -138193,7 +138784,7 @@
   {
     "alvo": "secundario",
     "alvo_prioritario": false,
-    "atualizado_em": "2026-10-19T15:44:32.907343+00:00",
+    "atualizado_em": "2026-11-06T16:03:37.447552+00:00",
     "avisado_em": "2026-10-11T17:49:01.906334+00:00",
     "banca": "Instituto AOCP",
     "coletado_em": "2026-10-11T17:49:01.852680+00:00",
@@ -138202,7 +138793,7 @@
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
-      "andamento": "Edital de Abertura nº 01/2026 – Divulgado o Edital de Abertura. Período para solicitação de isenção da taxa de inscrição. INSCRIÇÕES ABERTAS.",
+      "andamento": "Edital de Abertura nº 01/2026 – Divulgado o Edital de deferimento das solicitações de isenções da taxa de inscrição pós-recurso. INSCRIÇÕES ABERTAS.",
       "edital": "cbmrj2026",
       "inscricoes_ate": "2026-11-09 16:00:59",
       "inscricoes_de": "2026-10-19 09:00:00",
@@ -138823,7 +139414,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T16:33:47.017029+00:00",
+    "atualizado_em": "2026-11-06T16:03:37.453013+00:00",
     "avisado_em": "2026-10-11T17:49:01.906332+00:00",
     "banca": "Instituto AOCP",
     "coletado_em": "2026-10-11T17:49:01.851376+00:00",
@@ -138832,12 +139423,12 @@
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
-      "andamento": "Agente Administrativo - Processo Seletivo Simplificado Prefeitura de Curitiba – Divulgado o Edital de deferimento das solicitações de isenção da taxa de inscrição pós-recursos. Hoje, 05/11/2026, é o último dia para realização de inscrição.",
+      "andamento": "Agente Administrativo - Processo Seletivo Simplificado Prefeitura de Curitiba – Divulgado o Edital de deferimento das solicitações de isenção da taxa de inscrição pós-recursos. Hoje, 06/11/2026, é o último dia para pagamento da taxa de inscrição.",
       "edital": "agenteadm26",
       "inscricoes_ate": "2026-11-05 23:59:59",
       "inscricoes_de": "2026-10-19 09:00:00",
       "numero_edital": null,
-      "status_aocp": "SUBSCRIBE"
+      "status_aocp": "IN_PROGRESS"
     },
     "fonte": "aocp",
     "idade_maxima": null,
@@ -138856,7 +139447,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "seletivo",
     "titulo": "2026 - PREFEITURA MUNICIPAL DE CURITIBA - Agente Administrativo - Processo Seletivo Simplificado Prefeitura de Curitiba",
     "uf": null,
@@ -138865,7 +139456,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T16:33:47.016490+00:00",
+    "atualizado_em": "2026-11-06T16:03:37.452382+00:00",
     "avisado_em": "2026-10-11T17:49:01.906331+00:00",
     "banca": "Instituto AOCP",
     "coletado_em": "2026-10-11T17:49:01.850278+00:00",
@@ -138874,12 +139465,12 @@
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
-      "andamento": "Engenheiro Civil - Processo Seletivo Simplificado Prefeitura de Curitiba – Divulgado o Edital de deferimento das solicitações de isenção da taxa de inscrição pós-recursos. Hoje, 05/11/2026, é o último dia para realização de inscrição.",
+      "andamento": "Engenheiro Civil - Processo Seletivo Simplificado Prefeitura de Curitiba – Divulgado o Edital de deferimento das solicitações de isenção da taxa de inscrição pós-recursos. Hoje, 06/11/2026, é o último dia para pagamento da taxa de inscrição.",
       "edital": "engciv26",
       "inscricoes_ate": "2026-11-05 23:59:59",
       "inscricoes_de": "2026-10-19 09:00:00",
       "numero_edital": null,
-      "status_aocp": "SUBSCRIBE"
+      "status_aocp": "IN_PROGRESS"
     },
     "fonte": "aocp",
     "idade_maxima": null,
@@ -138898,7 +139489,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "seletivo",
     "titulo": "2026 - PREFEITURA MUNICIPAL DE CURITIBA - Engenheiro Civil - Processo Seletivo Simplificado Prefeitura de Curitiba",
     "uf": null,
@@ -138907,7 +139498,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T16:33:47.015470+00:00",
+    "atualizado_em": "2026-11-06T16:03:37.451213+00:00",
     "avisado_em": "2026-10-11T17:49:01.906329+00:00",
     "banca": "Instituto AOCP",
     "coletado_em": "2026-10-11T17:49:01.848441+00:00",
@@ -138916,12 +139507,12 @@
     "elegibilidade": "a_confirmar",
     "escolaridade": null,
     "extra": {
-      "andamento": "Contador - Processo Seletivo Simplificado Prefeitura de Curitiba – Divulgado o Edital de deferimento das solicitações de isenção da taxa de inscrição pós-recursos. Hoje, 05/11/2026, é o último dia para realização de inscrição.",
+      "andamento": "Contador - Processo Seletivo Simplificado Prefeitura de Curitiba – Divulgado o Edital de deferimento das solicitações de isenção da taxa de inscrição pós-recursos. Hoje, 06/11/2026, é o último dia para pagamento da taxa de inscrição.",
       "edital": "contad26",
       "inscricoes_ate": "2026-11-05 23:59:59",
       "inscricoes_de": "2026-10-19 09:00:00",
       "numero_edital": null,
-      "status_aocp": "SUBSCRIBE"
+      "status_aocp": "IN_PROGRESS"
     },
     "fonte": "aocp",
     "idade_maxima": null,
@@ -138940,7 +139531,7 @@
     "resumo": null,
     "salario": null,
     "salario_manual": false,
-    "situacao": "inscricoes_abertas",
+    "situacao": "edital_publicado",
     "tipo": "seletivo",
     "titulo": "2026 - PREFEITURA MUNICIPAL DE CURITIBA - Contador - Processo Seletivo Simplificado Prefeitura de Curitiba",
     "uf": null,
@@ -139151,7 +139742,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.495512+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.708377+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.323277+00:00",
@@ -140027,7 +140618,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.498426+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.712540+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.332889+00:00",
@@ -140065,7 +140656,7 @@
   {
     "alvo": null,
     "alvo_prioritario": false,
-    "atualizado_em": "2026-11-05T19:03:14.495845+00:00",
+    "atualizado_em": "2026-11-06T16:02:38.708855+00:00",
     "avisado_em": null,
     "banca": "IESES",
     "coletado_em": "2026-09-18T20:03:44.324151+00:00",
