@@ -1833,6 +1833,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/es/2026/11/16/seletivo-da-prefeitura-de-rio-bananal-es-tem-mensais-de-ate-r-5-879/",
+    "data": "2026-11-16T21:19:00.398395+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/es/2026/11/16/seletivo-da-prefeitura-de-rio-bananal-es-tem-mensais-de-ate-r-5-879/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/go/2026/09/24/concurso-prefeitura-de-uirapuru-go-abre-84-vagas-em-edital/",
     "data": "2026-09-24T13:53:44.699276+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -5737,6 +5745,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/11/16/edital-prefeitura-de-pouso-redondo-sc-oferece-remuneracao-de-ate-r-21-091/",
+    "data": "2026-11-16T21:19:00.394091+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/11/16/edital-prefeitura-de-pouso-redondo-sc-oferece-remuneracao-de-ate-r-21-091/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/11/16/prefeitura-de-herval-doeste-sc-abre-vagas-em-seletivo-da-educacao/",
     "data": "2026-11-16T18:35:46.370305+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -6965,6 +6981,14 @@
     "data": "2026-11-12T16:52:28.837789+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/educacao/2026/11/12/pe-de-meia-de-dezembro-calendario-valor-e-como-consultar/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/educacao/2026/11/16/quando-sera-pago-o-incentivo-enem-do-pe-de-meia-no-valor-de-r-200/",
+    "data": "2026-11-16T21:19:00.397642+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como prevista",
+    "link": "https://concursosnobrasil.com/educacao/2026/11/16/quando-sera-pago-o-incentivo-enem-do-pe-de-meia-no-valor-de-r-200/",
     "tipo": "apareceu"
   },
   {
@@ -8238,6 +8262,14 @@
     "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
     "link": "https://www.institutoaocp.org.br/concursos/proseleta-3",
     "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://www.institutoaocp.org.br/concursos/proseleta-3",
+    "data": "2026-11-16T21:20:12.717158+00:00",
+    "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
+    "link": "https://www.institutoaocp.org.br/concursos/proseleta-3",
+    "tipo": "edital_publicado"
   },
   {
     "avisado_em": null,
