@@ -3017,6 +3017,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pa/2026/11/17/prefeitura-de-trairao-pa-divulga-801-vagas-com-salarios-de-ate-r-42-mil/",
+    "data": "2026-11-17T20:06:03.394120+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pa/2026/11/17/prefeitura-de-trairao-pa-divulga-801-vagas-com-salarios-de-ate-r-42-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/pb/2026/10/02/prefeitura-de-agua-branca-pb-abre-concurso-com-salario-ate-r-34-mil/",
     "data": "2026-10-03T14:09:52.261667+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -5841,6 +5849,22 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/11/17/casa-lar-pequeno-principe-sc-faz-seletiva-com-salario-de-r-49-mil/",
+    "data": "2026-11-17T20:06:03.395568+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/11/17/casa-lar-pequeno-principe-sc-faz-seletiva-com-salario-de-r-49-mil/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/11/17/prefeitura-de-sao-joaquim-sc-faz-chamada-com-salario-de-ate-r-5-130/",
+    "data": "2026-11-17T20:06:03.387195+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/11/17/prefeitura-de-sao-joaquim-sc-faz-chamada-com-salario-de-ate-r-5-130/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/se/2026/10/30/prefeitura-de-itabaiana-se-abre-38-vagas-de-ate-r-45-mil-em-seletivo/",
     "data": "2026-10-30T17:15:56.679362+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -7318,6 +7342,22 @@
     "descricao": "Situacao: inscricoes_abertas -> edital_publicado",
     "link": "https://fepese.org.br/concurso/2026-concurso-publico-auxiliar-educaocao-especial-sao-jose/",
     "tipo": "edital_publicado"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-aguas-de-chapeco-2/",
+    "data": "2026-11-17T20:06:16.394925+00:00",
+    "descricao": "Entrou no radar pela fonte fepese, como inscricoes_abertas",
+    "link": "https://fepese.org.br/concurso/2026-prefeitura-municipal-aguas-de-chapeco-2/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://fepese.org.br/concurso/2026-prefeitura-municipal-aguas-de-chapeco/",
+    "data": "2026-11-17T20:06:16.396187+00:00",
+    "descricao": "Entrou no radar pela fonte fepese, como inscricoes_abertas",
+    "link": "https://fepese.org.br/concurso/2026-prefeitura-municipal-aguas-de-chapeco/",
+    "tipo": "apareceu"
   },
   {
     "avisado_em": null,
