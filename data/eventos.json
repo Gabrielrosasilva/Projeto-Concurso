@@ -561,6 +561,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=364",
+    "data": "2026-11-27T18:19:13.009466+00:00",
+    "descricao": "Situacao: edital_publicado -> inscricoes_abertas",
+    "link": "https://concurso.idib.org.br/Concurso.aspx?ID=364",
+    "tipo": "inscricoes_abertas"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concurso.idib.org.br/Concurso.aspx?ID=365",
     "data": "2026-10-11T18:11:25.962427+00:00",
     "descricao": "Entrou no radar pela fonte idib, como inscricoes_abertas",
@@ -1309,6 +1317,22 @@
     "data": "2026-11-26T18:31:00.148014+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
     "link": "https://concursosnobrasil.com/beneficios-sociais/2026/11/26/bolsa-familia-de-dezembro-veja-quando-o-dinheiro-estara-disponivel-no-caixa-tem/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/beneficios-sociais/2026/11/27/auxilio-doenca-tera-novo-valor-em-2027-veja-a-previsao/",
+    "data": "2026-11-27T18:17:50.820046+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
+    "link": "https://concursosnobrasil.com/beneficios-sociais/2026/11/27/auxilio-doenca-tera-novo-valor-em-2027-veja-a-previsao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/beneficios-sociais/2026/11/27/bpc-de-dezembro-veja-quando-comeca-o-pagamento-da-ultima-parcela-do-ano/",
+    "data": "2026-11-27T18:17:50.827530+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como desconhecida",
+    "link": "https://concursosnobrasil.com/beneficios-sociais/2026/11/27/bpc-de-dezembro-veja-quando-comeca-o-pagamento-da-ultima-parcela-do-ano/",
     "tipo": "apareceu"
   },
   {
@@ -2253,6 +2277,14 @@
     "data": "2026-11-25T18:45:01.358536+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/go/2026/11/25/prefeitura-de-britania-go-oferece-28-vagas-em-nova-selecao/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/go/2026/11/27/prefeitura-de-vila-boa-go-abre-processo-seletivo-na-saude/",
+    "data": "2026-11-27T18:17:50.825251+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/go/2026/11/27/prefeitura-de-vila-boa-go-abre-processo-seletivo-na-saude/",
     "tipo": "apareceu"
   },
   {
@@ -3225,6 +3257,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/ms/2026/11/27/prefeitura-de-alcinopolis-ms-abre-39-vagas-em-editais/",
+    "data": "2026-11-27T18:17:50.828045+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/ms/2026/11/27/prefeitura-de-alcinopolis-ms-abre-39-vagas-em-editais/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/mt/2026/09/22/concurso-prefeitura-de-comodoro-mt-abre-novas-vagas-e-tem-mensais-ate-r/",
     "data": "2026-09-23T00:34:33.164813+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -4061,6 +4101,14 @@
     "data": "2026-11-26T18:31:00.142669+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/pr/2026/11/26/prefeitura-de-rondon-no-parana-anuncia-novo-processo-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/pr/2026/11/27/prefeitura-de-candoi-pr-oferece-51-vagas-em-processo-seletivo/",
+    "data": "2026-11-27T18:17:50.822820+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/pr/2026/11/27/prefeitura-de-candoi-pr-oferece-51-vagas-em-processo-seletivo/",
     "tipo": "apareceu"
   },
   {
@@ -5197,6 +5245,38 @@
     "data": "2026-11-26T18:31:00.148824+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
     "link": "https://concursosnobrasil.com/concursos/rs/2026/11/26/processo-seletivo-prefeitura-de-carazinho-rs-edital-e-inscricoes/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/11/27/fms-de-sao-leopoldo-rs-divulga-processo-seletivo-com-23-vagas/",
+    "data": "2026-11-27T18:17:50.826983+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/11/27/fms-de-sao-leopoldo-rs-divulga-processo-seletivo-com-23-vagas/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/11/27/prefeitura-de-boa-vista-do-sul-rs-abre-edital-de-seletivo/",
+    "data": "2026-11-27T18:17:50.829098+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/11/27/prefeitura-de-boa-vista-do-sul-rs-abre-edital-de-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/11/27/prefeitura-de-flores-da-cunha-rs-abre-vagas-em-processo-seletivo/",
+    "data": "2026-11-27T18:17:50.824582+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/11/27/prefeitura-de-flores-da-cunha-rs-abre-vagas-em-processo-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/rs/2026/11/27/prefeitura-de-maquine-rs-realiza-processo-seletivo/",
+    "data": "2026-11-27T18:17:50.828586+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/rs/2026/11/27/prefeitura-de-maquine-rs-realiza-processo-seletivo/",
     "tipo": "apareceu"
   },
   {
@@ -6641,6 +6721,14 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sc/2026/11/27/prefeitura-de-matos-costa-sc-abre-44-vagas-em-processo-seletivo/",
+    "data": "2026-11-27T18:17:50.830879+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sc/2026/11/27/prefeitura-de-matos-costa-sc-abre-44-vagas-em-processo-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/se/2026/10/30/prefeitura-de-itabaiana-se-abre-38-vagas-de-ate-r-45-mil-em-seletivo/",
     "data": "2026-10-30T17:15:56.679362+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -7913,6 +8001,38 @@
   },
   {
     "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/11/27/concurso-fundhas-em-sao-paulo-anuncia-edital-com-20-vagas/",
+    "data": "2026-11-27T18:17:50.829591+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/11/27/concurso-fundhas-em-sao-paulo-anuncia-edital-com-20-vagas/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/11/27/concurso-prefeitura-de-taiacu-sp-edital-publicado/",
+    "data": "2026-11-27T18:17:50.825829+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/11/27/concurso-prefeitura-de-taiacu-sp-edital-publicado/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/11/27/prefeitura-de-guariba-em-sao-paulo-lanca-processo-seletivo/",
+    "data": "2026-11-27T18:17:50.826451+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/11/27/prefeitura-de-guariba-em-sao-paulo-lanca-processo-seletivo/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/concursos/sp/2026/11/27/prefeitura-de-guarulhos-em-sp-divulga-dois-editais-de-estagio/",
+    "data": "2026-11-27T18:17:50.831424+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/concursos/sp/2026/11/27/prefeitura-de-guarulhos-em-sp-divulga-dois-editais-de-estagio/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
     "concurso_url": "https://concursosnobrasil.com/concursos/to/2026/10/09/cref-24-to-abre-seletivo-com-vagas-para-niveis-medio-e-superior-em-palmas/",
     "data": "2026-10-09T15:06:22.618959+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
@@ -8333,6 +8453,14 @@
     "data": "2026-11-26T20:36:42.440414+00:00",
     "descricao": "Entrou no radar pela fonte concursosnobrasil, como prevista",
     "link": "https://concursosnobrasil.com/noticia/2026/11/26/abono-salarial-pis-pasep-tera-reajuste-em-2027-veja-os-valores-previstos/",
+    "tipo": "apareceu"
+  },
+  {
+    "avisado_em": null,
+    "concurso_url": "https://concursosnobrasil.com/noticia/2026/11/27/parte-do-brasil-tera-feriado-no-dia-8-de-dezembro-veja-onde/",
+    "data": "2026-11-27T18:17:50.830122+00:00",
+    "descricao": "Entrou no radar pela fonte concursosnobrasil, como edital_publicado",
+    "link": "https://concursosnobrasil.com/noticia/2026/11/27/parte-do-brasil-tera-feriado-no-dia-8-de-dezembro-veja-onde/",
     "tipo": "apareceu"
   },
   {
